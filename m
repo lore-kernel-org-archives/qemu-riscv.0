@@ -4,105 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 052BAC53219
-	for <qemu-riscv@archiver.kernel.org>; Mon, 27 Jul 2026 09:07:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4706C531D0
+	for <qemu-riscv@archiver.kernel.org>; Mon, 27 Jul 2026 15:58:00 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1woHIM-0003aT-FO; Mon, 27 Jul 2026 05:06:46 -0400
+	id 1woNhx-0003I1-Tt; Mon, 27 Jul 2026 11:57:40 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
- id 1woHI4-0003YU-5X
- for qemu-riscv@nongnu.org; Mon, 27 Jul 2026 05:06:33 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ (Exim 4.90_1) (envelope-from <dingtao0430@163.com>)
+ id 1woNhq-0003Gb-CV; Mon, 27 Jul 2026 11:57:30 -0400
+Received: from m16.mail.163.com ([117.135.210.5])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
- id 1woHI1-0008RH-Un
- for qemu-riscv@nongnu.org; Mon, 27 Jul 2026 05:06:27 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1785143183;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=6juDJB9SuJ8viw5hTV/fyWyN9im+TVrsr9lb3ZKqVHQ=;
- b=YGqKe9Sp6J2DjL9lGHcEL1XfZqTIeTNEkhRSdFHVUsmW034YPoc6jLc5hAhM/+6uVGdMfV
- EJWAwEkxS+qlUDEAocvn1k3tkC4tGaGr/57sagoFsjtYFNUZ3ejQqoCUmO9fAODVJ8W9kq
- lcnOYyAbofiDmsifQhtlzlS3zZfEIb8=
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-624-EIozfsLLPxiWJrxrAFcGUw-1; Mon, 27 Jul 2026 05:06:22 -0400
-X-MC-Unique: EIozfsLLPxiWJrxrAFcGUw-1
-X-Mimecast-MFC-AGG-ID: EIozfsLLPxiWJrxrAFcGUw_1785143181
-Received: by mail-wr1-f72.google.com with SMTP id
- ffacd0b85a97d-47f8398ed9fso2060232f8f.0
- for <qemu-riscv@nongnu.org>; Mon, 27 Jul 2026 02:06:21 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785143181; x=1785747981;
- h=content-transfer-encoding:content-type:mime-version:references
- :in-reply-to:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=FYAQR87+IF7SU2JF8iWU2NworjIcqWl+5FKENXWQeZE=;
- b=Iw4Kq8Do0I7MDx5IbSTa+2jG2sKowZpKukIkgALGYPijtudip3+7ThJwUkVnmtqdbq
- G5G09a/R+B3rorS22zzE/kB/8HgunUEynVYowEm/vIwtzmVRGeDK2vNcwp3q+wWDR7sv
- OEnUD5qXlAczZNswe5QVCeM34DhT9IGl7AhdjL1+2WWg5qYtxJT2gQBkEx5g878nJhwd
- ubjaIvYsMF20sSxYEu6tnifQdzt77Bkve0aAn9BQbOPbocFifDExM9OTtE9pYq4exe5u
- BJ5Qk1VKW5rz2/3mRpCDT4wWsgaQcI4DsEQaYTKIQP+nYzrIeWtxObXSwtuF7Hv2T8ZM
- 3D/A==
-X-Forwarded-Encrypted: i=1;
- AHgh+RrjpvKjIdXwwDwB5/Z0FeJ15UhmO0qWJHkHfe5ijclZ/0uIw699+xqG42GxXH1YIeY5aJxwTE4AYRqs@nongnu.org
-X-Gm-Message-State: AOJu0YyfqgjlSoG927RUWwTxWfPsjM0ID9EaA6tO9IWjzEmqJG9kICzf
- uEyQs1aAT/VcUtpJnrNdeeJw10Bq1NmqjVgrdKBA32sb4svkQCNCRuzEMLnkhJNcfZV8HxzBpv5
- 4x9OlHlnjwBoq7kKHPgJgQo7p+eNxtCi5gd5isnBxfKWB61i2WdpMOypg
-X-Gm-Gg: AR+sD113HbCqbH/IBCFbtlfMd4xgTdUoi035sO0Jf5eWGwnsikw63Ra86jqpangLdXl
- nvYNl9kHOVGl7X4IVYKomP7Q2sffzdRufv7x6MRQX/RO2vzPjNXCXl5fMyqYV1w5lCrR1pjKshU
- oPTDridxRiwAc3H7rpGvde68n81JbdWRz1+rR5to0WMgqhW6LQTAkFWIJhR5A6vq1OgKDgwkGGC
- nLKvghsFtN+dLmwquel+dbqUW4tUjV6fqoi3LZRAs+xNmtRFU6OL42KW7Em6NZzcRqIlUNzcMRS
- Tys43l4V+Ge8OrA3fws72K1vtD+rQiMQVoDZmeRZUHWz5iNBfr+P9AUeTNXR
-X-Received: by 2002:a05:6000:2681:b0:47d:f01e:83cf with SMTP id
- ffacd0b85a97d-47f9febea2dmr8819724f8f.58.1785143180731; 
- Mon, 27 Jul 2026 02:06:20 -0700 (PDT)
-X-Received: by 2002:a05:6000:2681:b0:47d:f01e:83cf with SMTP id
- ffacd0b85a97d-47f9febea2dmr8819676f8f.58.1785143180237; 
- Mon, 27 Jul 2026 02:06:20 -0700 (PDT)
-Received: from imammedo ([213.175.37.14]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47f85c6dc25sm46202931f8f.33.2026.07.27.02.06.15
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Jul 2026 02:06:18 -0700 (PDT)
-Date: Mon, 27 Jul 2026 11:06:15 +0200
-From: Igor Mammedov <imammedo@redhat.com>
-To: Chen Pei <cp0613@linux.alibaba.com>
-Cc: jic23@kernel.org, pbonzini@redhat.com, palmer@dabbelt.com,
+ (Exim 4.90_1) (envelope-from <dingtao0430@163.com>)
+ id 1woNhm-0006LR-T0; Mon, 27 Jul 2026 11:57:30 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+ s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=zY
+ 7E7E19l8gZKfs7dEt/TTZQ7d9Ks5NskwbKsi7QjsI=; b=kCO8xQGlLVF9s6FVzD
+ 2nATocM1+zkVOSeZ2xVSIg7Lr+8t04c8fRK3o7Dlvj6LoS2Wjk3KTSlSaHm/IT5v
+ a6aOq9FC+xHMdssHBTe8MmKEMS+MVt6AvCbJTMpjpO0Y2qImldBqMg01pksyDzNe
+ 8hEL/tpbTK9dl2qqfTzK+LSfQ=
+Received: from dt-VM.localdomain (unknown [])
+ by gzga-smtp-mtada-g0-0 (Coremail) with SMTP id
+ _____wC3HpHQf2dqJpF_Kw--.27173S2; 
+ Mon, 27 Jul 2026 23:57:04 +0800 (CST)
+From: Tao Ding <dingtao0430@163.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, pbonzini@redhat.com, palmer@dabbelt.com,
  alistair.francis@wdc.com, liwei1518@gmail.com,
  daniel.barboza@oss.qualcomm.com, zhiwei_liu@linux.alibaba.com,
- chao.liu.zevorn@gmail.com, sunilvl@ventanamicro.com, dave.jiang@intel.com,
- alison.schofield@intel.com, mst@redhat.com, guoren@kernel.org,
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org, linux-cxl@vger.kernel.org
-Subject: Re: [PATCH v2 3/4] hw/riscv/virt,gpex: Provide 32-bit MMIO window
- for CXL host bridges
-Message-ID: <20260727110615.3e523125@imammedo>
-In-Reply-To: <20260618093827.3507-4-cp0613@linux.alibaba.com>
-References: <20260618093827.3507-1-cp0613@linux.alibaba.com>
- <20260618093827.3507-4-cp0613@linux.alibaba.com>
-X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-redhat-linux-gnu)
+ chao.liu@processmission.com, farosas@suse.de, lvivier@redhat.com,
+ pierrick.bouvier@oss.qualcomm.com, caojunze424@gmail.com,
+ Tao Ding <dingtao0430@163.com>
+Subject: [PATCH v2 0/7] K230: add gsdma and decomp_gzip
+Date: Mon, 27 Jul 2026 23:56:55 +0800
+Message-ID: <20260727155702.36484-1-dingtao0430@163.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: efb1KCb_FZrfywPFWXMvA71YRdR3uVWSjt1e4tmAZu0_1785143181
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=imammedo@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -36
-X-Spam_score: -3.7
-X-Spam_bar: ---
-X-Spam_report: (-3.7 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-1.58,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID: _____wC3HpHQf2dqJpF_Kw--.27173S2
+X-Coremail-Antispam: 1Uf129KBjvJXoWxAr15Jw1DJF4rJF48tFWxtFb_yoW5GFyxp3
+ sxCrnYkr4I9r1fJrW3Gr47tryFvayrGr15GrnrW345ZrW3tF45tFs2qa4FyrW3Jw4qg34x
+ uF1vkr1fur17ZaUanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x0pimsjUUUUUU=
+X-Originating-IP: [119.4.23.14]
+X-CM-SenderInfo: pglqw3tdrqkjqq6rljoofrz/xtbC-hCIxmpnf9APhgAA3L
+Received-SPF: pass client-ip=117.135.210.5; envelope-from=dingtao0430@163.com;
+ helo=m16.mail.163.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -118,221 +75,84 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, 18 Jun 2026 17:38:25 +0800
-Chen Pei <cp0613@linux.alibaba.com> wrote:
+Hi all,
 
-> CXL component register BAR (BAR0 on CXL Root Port and Type3 device)
-> and the CXL device register BAR (BAR2 on Type3 device) are declared
-> as 64-bit non-prefetchable memory.  Per the PCI-to-PCI Bridge
-> Architecture Specification Rev 1.2 (PCI-SIG, 2003):
->=20
->   - =C2=A73.2.5.8 (Memory Base/Limit): the non-prefetchable window covers
->     only 32-bit addresses (AD[31:20]); the Type 1 header defines no
->     upper-32-bit extension for it.
->   - =C2=A73.2.5.9 (Prefetchable Memory Base/Limit): the bottom 4 bits
->     encode 64-bit support (01h), but this applies exclusively to the
->     *prefetchable* window.
->   - =C2=A73.2.5.10 (Prefetchable Base/Limit Upper 32 Bits): optional
->     registers for AD[63:32] of the prefetchable range only.
->=20
-> The architecture therefore allows a 64-bit window only when it is also
-> prefetchable; there is no 64-bit non-prefetchable form.  PCIe inherits
-> this Type 1 header layout unchanged.  Linux thus places 64-bit
-> non-prefetchable BARs in the 32-bit non-prefetchable bridge window,
-> which requires the bridge to own enough address space below 4 GiB.
->=20
-> On RISC-V virt the 32-bit PCIe MMIO range (1 GiB at 0x40000000) is
-> currently consumed entirely by PCI0, so CXL host bridges (ACPI0016)
-> have no non-prefetchable window and Linux fails to assign these BARs.
-> Marking the BARs prefetchable would work around it, but the CXL
-> component registers have read/write side effects and are not
-> prefetchable per the PCIe specification.
->=20
-> Reserve the top 256 MiB of the 32-bit MMIO window exclusively for
-> CXL host bridges:
-> - Shrink PCI0's mmio32 window by 256 MiB in virt.c so that UEFI's
->   PciHostBridgeDxe and the ACPI _CRS for PCI0 never claim that range
-> - Store the reserved range in a new gpex_cfg.cxl_mmio32 field
-> - In gpex-acpi.c, emit the cxl_mmio32 range as the Memory resource
->   in the CXL host bridge _CRS instead of re-using build_crs() (which
->   returns an empty set when UEFI has not assigned resources yet)
-> - Reduce the FDT 'ranges' for PCI0 by the same 256 MiB so that UEFI
->   firmware driven by device-tree also respects the reservation
->=20
-> Signed-off-by: Chen Pei <cp0613@linux.alibaba.com>
-> ---
->  hw/pci-host/gpex-acpi.c    | 36 +++++++++++++++++++++--
->  hw/riscv/virt.c            | 58 +++++++++++++++++++++++++++++++-------
->  include/hw/pci-host/gpex.h |  1 +
->  3 files changed, 83 insertions(+), 12 deletions(-)
->=20
-> diff --git a/hw/pci-host/gpex-acpi.c b/hw/pci-host/gpex-acpi.c
-> index d9820f9b41..d8b943b665 100644
-> --- a/hw/pci-host/gpex-acpi.c
-> +++ b/hw/pci-host/gpex-acpi.c
-> @@ -158,9 +158,41 @@ void acpi_dsdt_add_gpex(Aml *scope, struct GPEXConfi=
-g *cfg)
->               * Resources defined for PXBs are composed of the following =
-parts:
->               * 1. The resources the pci-bridge/pcie-root-port need.
->               * 2. The resources the devices behind pxb need.
-> +             *
-> +             * For CXL host bridges on platforms where UEFI (driven by
-> +             * FDT 'ranges') does not assign PCI resources for the CXL
-> +             * root bridge before ACPI table construction, build_crs()
+This patch series adds GSDMA and Decomp_gzip to the K230 board.
+Enable k230 to use k230_unzip to decompress files during the u-boot phase.
 
-I kind of dislike (basically riscv specific hack) in generic code.
-well, correct way to tackle this is
- 1: fix UEFI to perform required initialization.
+This series includes the following features:
 
-> +             * would return an empty resource set.  When the platform
-> +             * has reserved a dedicated MMIO window for CXL host bridges
-> +             * (cfg->cxl_mmio32), emit that window as a static _CRS
-> +             * instead.  The platform is responsible for shrinking PCI0'=
-s
-> +             * mmio32 window so the two do not overlap.
+*patch1: add K230 gsdma which supports sdma, gdma is temporarily not supported
+*patch2: add gsdma to K230 board
+*patch3: add K230 gsdma qtest
+*patch4: add K230 decomp_gzip which decompress data work with sdma
+*patch5: add decomp_gzip to K230 board
+*patch6: add K230 decomp_gzip qtest
+*patch7: add a noc-stub region in K230 board
 
-if you have to put a hack into QEMU, make it work with current build_crs()
-and localize 'proper simulated initialization' in riscv codebase
-(i.e. do not spread it to common codebase). But before doing it see (#1 not=
-e).
+patchv1 is posted in:
+https://lore.kernel.org/qemu-devel/20260721161335.73872-1-dingtao0430@163.com/
 
->               */
-> -            crs =3D build_crs(PCI_HOST_BRIDGE(BUS(bus)->parent), &crs_ra=
-nge_set,
-> -                            cfg->pio.base, 0, 0, 0);
-> +            if (is_cxl && cfg->cxl_mmio32.size) {
-> +                uint64_t cxl_base =3D cfg->cxl_mmio32.base;
-> +                uint64_t cxl_size =3D cfg->cxl_mmio32.size;
-> +
-> +                crs =3D aml_resource_template();
-> +
-> +                /* 32-bit MMIO range for CXL devices */
-> +                aml_append(crs,
-> +                    aml_dword_memory(AML_POS_DECODE, AML_MIN_FIXED,
-> +                                     AML_MAX_FIXED, AML_NON_CACHEABLE,
-> +                                     AML_READ_WRITE, 0,
-> +                                     cxl_base,
-> +                                     cxl_base + cxl_size - 1,
-> +                                     0, cxl_size));
-> +
-> +                /* Bus number range */
-> +                aml_append(crs,
-> +                    aml_word_bus_number(AML_MIN_FIXED, AML_MAX_FIXED,
-> +                                       AML_POS_DECODE, 0,
-> +                                       bus_num, bus_num + 15,
-> +                                       0, 16));
-> +            } else {
-> +                crs =3D build_crs(PCI_HOST_BRIDGE(BUS(bus)->parent),
-> +                                &crs_range_set, cfg->pio.base, 0, 0, 0);
-> +            }
->              aml_append(dev, aml_name_decl("_CRS", crs));
-> =20
->              if (is_cxl) {
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index 84b91b4322..9c1a001553 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -113,6 +113,9 @@ static const MemMapEntry virt_memmap[] =3D {
->  /* PCIe high mmio for RV64, size is fixed but base depends on top of RAM=
- */
->  #define VIRT64_HIGH_PCIE_MMIO_SIZE  (16 * GiB)
-> =20
-> +/* 32-bit MMIO range carved out of VIRT_PCIE_MMIO for CXL host bridges *=
-/
-> +#define VIRT_CXL_MMIO32_SIZE        (256 * MiB)
-> +
->  static MemMapEntry virt_high_pcie_memmap;
-> =20
->  #define VIRT_FLASH_SECTOR_SIZE (256 * KiB)
-> @@ -890,15 +893,28 @@ static void create_fdt_pcie(RISCVVirtState *s,
->      }
->      qemu_fdt_setprop_sized_cells(ms->fdt, name, "reg", 2,
->          s->memmap[VIRT_PCIE_ECAM].base, 2, s->memmap[VIRT_PCIE_ECAM].siz=
-e);
-> -    qemu_fdt_setprop_sized_cells(ms->fdt, name, "ranges",
-> -        1, FDT_PCI_RANGE_IOPORT, 2, 0,
-> -        2, s->memmap[VIRT_PCIE_PIO].base, 2, s->memmap[VIRT_PCIE_PIO].si=
-ze,
-> -        1, FDT_PCI_RANGE_MMIO,
-> -        2, s->memmap[VIRT_PCIE_MMIO].base,
-> -        2, s->memmap[VIRT_PCIE_MMIO].base, 2, s->memmap[VIRT_PCIE_MMIO].=
-size,
-> -        1, FDT_PCI_RANGE_MMIO_64BIT,
-> -        2, virt_high_pcie_memmap.base,
-> -        2, virt_high_pcie_memmap.base, 2, virt_high_pcie_memmap.size);
-> +    {
-> +        /*
-> +         * When CXL is enabled, reserve the last 256 MiB of the 32-bit
-> +         * MMIO window for CXL host bridges and exclude it from the main
-> +         * PCIe host bridge's FDT 'ranges' so UEFI's PciHostBridgeDxe
-> +         * does not allocate that range to PCI0.  The CXL host bridge
-> +         * _CRS declares this range independently.
-> +         */
-> +        hwaddr mmio32_size =3D s->memmap[VIRT_PCIE_MMIO].size;
-> +        if (s->cxl_devices_state.is_enabled) {
-> +            mmio32_size -=3D VIRT_CXL_MMIO32_SIZE;
-> +        }
-> +        qemu_fdt_setprop_sized_cells(ms->fdt, name, "ranges",
-> +            1, FDT_PCI_RANGE_IOPORT, 2, 0,
-> +            2, s->memmap[VIRT_PCIE_PIO].base, 2, s->memmap[VIRT_PCIE_PIO=
-].size,
-> +            1, FDT_PCI_RANGE_MMIO,
-> +            2, s->memmap[VIRT_PCIE_MMIO].base,
-> +            2, s->memmap[VIRT_PCIE_MMIO].base, 2, mmio32_size,
-> +            1, FDT_PCI_RANGE_MMIO_64BIT,
-> +            2, virt_high_pcie_memmap.base,
-> +            2, virt_high_pcie_memmap.base, 2, virt_high_pcie_memmap.size=
-);
-> +    }
-> =20
->      if (virt_is_iommu_sys_enabled(s)) {
->          qemu_fdt_setprop_cells(ms->fdt, name, "iommu-map",
-> @@ -1728,7 +1744,29 @@ static void virt_machine_init(MachineState *machin=
-e)
->              qdev_get_gpio_in(virtio_irqchip, VIRTIO_IRQ + i));
->      }
-> =20
-> -    gpex_pcie_init(system_memory, pcie_irqchip, s);
-> +    DeviceState *pcie_dev =3D gpex_pcie_init(system_memory, pcie_irqchip=
-, s);
-> +
-> +    /*
-> +     * If CXL is enabled, reserve the last 256 MiB of the 32-bit MMIO
-> +     * window for CXL host bridges so the bridge non-prefetchable window
-> +     * can hold CXL device BARs (component registers and similar 64-bit
-> +     * non-prefetchable BARs that need a < 4 GiB address).
-> +     *
-> +     * - Shrink PCI0's mmio32 advertised in the ACPI _CRS by the same
-> +     *   256 MiB so the two ranges do not overlap (the FDT 'ranges'
-> +     *   shrink happens in create_fdt_pcie()).
-> +     * - Store the reserved range in cxl_mmio32 so gpex-acpi.c can emit
-> +     *   a correct _CRS for the CXL host bridge (ACPI0016).
-> +     */
-> +    if (s->cxl_devices_state.is_enabled) {
-> +        GPEXHost *gpex =3D GPEX_HOST(pcie_dev);
-> +        gpex->gpex_cfg.cxl_mmio32.size =3D VIRT_CXL_MMIO32_SIZE;
-> +        gpex->gpex_cfg.cxl_mmio32.base =3D
-> +            s->memmap[VIRT_PCIE_MMIO].base +
-> +            s->memmap[VIRT_PCIE_MMIO].size - VIRT_CXL_MMIO32_SIZE;
-> +        /* Shrink PCI0's advertised 32-bit MMIO window to exclude CXL ra=
-nge */
-> +        gpex->gpex_cfg.mmio32.size -=3D VIRT_CXL_MMIO32_SIZE;
-> +    }
-> =20
->      create_platform_bus(s, mmio_irqchip);
-> =20
-> diff --git a/include/hw/pci-host/gpex.h b/include/hw/pci-host/gpex.h
-> index 1da9c85bce..d38fbbacd6 100644
-> --- a/include/hw/pci-host/gpex.h
-> +++ b/include/hw/pci-host/gpex.h
-> @@ -43,6 +43,7 @@ struct GPEXConfig {
->      MemMapEntry mmio32;
->      MemMapEntry mmio64;
->      MemMapEntry pio;
-> +    MemMapEntry cxl_mmio32;
->      int         irq;
->      PCIBus      *bus;
->      bool        pci_native_hotplug;
+Changes in v2:
+*patch1: 
+  add endian conversion
+  replace reset method
+  update MAINTAINERS
+  fixed the bug not clear enable register after dma finish
+  fixed the bug in 2d-mode and src_fixed scr_addr should not increment
+*patchv2:
+  update K230 rst
+*patch3:
+  update MAINTAINERS
+*patch4:
+  replace reset method
+  check dynamic huffman format in compressed data
+  fixed the bug of read a write only bit in DECOMP_START register
+  update MAINTAINERS
+  update K230 rst
+*patch6:
+  compressed data is re generated using dynamic Huffman method,
+  with added annotations and explanations
+  update MAINTAINERS
+
+Tao Ding (7):
+  hw/dma: add K230 gsdma
+  hw/riscv: k230: add gsdma in K230 board
+  tests/qtest: add test for K230 gsdma
+  hw/misc: add K230 decomp gzip
+  hw/riscv: k230: add decomp gzip in K230 board
+  tests/qtest: add test for K230 decomp gzip
+  hw/riscv: k230: add a noc stub region in K230 board
+
+ MAINTAINERS                         |   6 +
+ docs/system/riscv/k230.rst          |   2 +
+ hw/dma/Kconfig                      |   3 +
+ hw/dma/k230_gsdma.c                 | 562 ++++++++++++++++++++++++++++
+ hw/dma/meson.build                  |   1 +
+ hw/dma/trace-events                 |   6 +
+ hw/misc/Kconfig                     |   3 +
+ hw/misc/k230_decomp_gzip.c          | 508 +++++++++++++++++++++++++
+ hw/misc/meson.build                 |   1 +
+ hw/misc/trace-events                |   4 +
+ hw/riscv/Kconfig                    |   2 +
+ hw/riscv/k230.c                     |  38 +-
+ include/hw/dma/k230_gsdma.h         | 130 +++++++
+ include/hw/misc/k230_decomp_gzip.h  |  92 +++++
+ include/hw/riscv/k230.h             |   5 +
+ tests/qtest/k230-decomp-gzip-test.c | 200 ++++++++++
+ tests/qtest/k230-gsdma-test.c       | 201 ++++++++++
+ tests/qtest/meson.build             |   2 +-
+ 18 files changed, 1758 insertions(+), 8 deletions(-)
+ create mode 100644 hw/dma/k230_gsdma.c
+ create mode 100644 hw/misc/k230_decomp_gzip.c
+ create mode 100644 include/hw/dma/k230_gsdma.h
+ create mode 100644 include/hw/misc/k230_decomp_gzip.h
+ create mode 100644 tests/qtest/k230-decomp-gzip-test.c
+ create mode 100644 tests/qtest/k230-gsdma-test.c
+
+
+base-commit: 300438ffbb8d9430cac2fcc15cba6f482b2c0587
+-- 
+2.43.0
 
 
