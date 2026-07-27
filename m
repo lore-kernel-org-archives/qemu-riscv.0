@@ -4,30 +4,30 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0EADFC531C9
-	for <qemu-riscv@archiver.kernel.org>; Mon, 27 Jul 2026 15:58:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17D0BC531C9
+	for <qemu-riscv@archiver.kernel.org>; Mon, 27 Jul 2026 16:02:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1woNhq-0003Ga-FA; Mon, 27 Jul 2026 11:57:30 -0400
+	id 1woNma-0005sq-MB; Mon, 27 Jul 2026 12:02:24 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dingtao0430@163.com>)
- id 1woNhp-0003GL-1h; Mon, 27 Jul 2026 11:57:29 -0400
-Received: from m16.mail.163.com ([220.197.31.4])
+ id 1woNlf-0005Nd-Km; Mon, 27 Jul 2026 12:01:40 -0400
+Received: from m16.mail.163.com ([117.135.210.5])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dingtao0430@163.com>)
- id 1woNhm-0006LU-EX; Mon, 27 Jul 2026 11:57:28 -0400
+ id 1woNlY-0006pb-5U; Mon, 27 Jul 2026 12:01:23 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
- s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=2F
- XGlexUjp3rmMW8yjmTyo1Xxm+AZE4UUZylNvp3/dU=; b=lBJXKNyICDVzf2RM1E
- zN3WVcD1wVylnqUkUTjY5wVrUHRM4nGc2U2wENaxwgajuad3yBM+rRX2SbVg016P
- vnUgRF6oX5CEYwgtk75dVcOeqToqO3aaRClhMqVM7iwjTVvZT3ply9KeiKqQZFdl
- kPd1qazCLNrATond+zVLyk/Ps=
+ s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=rk
+ xilSbIb7k0r60CgyCr//gdT8F9V6YtUS+o+8zYRqM=; b=RnL5KNaGGpsJdgTIW4
+ j5HymtSql8+7/2FLWqwOeUoCufZFb6OxR8igod0E0byt4fW02/JajsKQgxfaAaa6
+ vUYYYaGN37y9DZkdnkSoJfQSfCi3KdPDRbArfDqSMWe2Nxd8lvHUaO55wTFOku11
+ 3rP6NAu4Eztf6KY7yYtuAWB+8=
 Received: from dt-VM.localdomain (unknown [])
  by gzga-smtp-mtada-g0-0 (Coremail) with SMTP id
- _____wC3HpHQf2dqJpF_Kw--.27173S9; 
- Mon, 27 Jul 2026 23:57:08 +0800 (CST)
+ _____wC3HpHQf2dqJpF_Kw--.27173S7; 
+ Mon, 27 Jul 2026 23:57:07 +0800 (CST)
 From: Tao Ding <dingtao0430@163.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, pbonzini@redhat.com, palmer@dabbelt.com,
@@ -36,22 +36,22 @@ Cc: qemu-riscv@nongnu.org, pbonzini@redhat.com, palmer@dabbelt.com,
  chao.liu@processmission.com, farosas@suse.de, lvivier@redhat.com,
  pierrick.bouvier@oss.qualcomm.com, caojunze424@gmail.com,
  Tao Ding <dingtao0430@163.com>
-Subject: [PATCH v2 7/7] hw/riscv: k230: add a noc stub region in K230 board
-Date: Mon, 27 Jul 2026 23:57:02 +0800
-Message-ID: <20260727155702.36484-8-dingtao0430@163.com>
+Subject: [PATCH v2 5/7] hw/riscv: k230: add decomp gzip in K230 board
+Date: Mon, 27 Jul 2026 23:57:00 +0800
+Message-ID: <20260727155702.36484-6-dingtao0430@163.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260727155702.36484-1-dingtao0430@163.com>
 References: <20260727155702.36484-1-dingtao0430@163.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: _____wC3HpHQf2dqJpF_Kw--.27173S9
-X-Coremail-Antispam: 1Uf129KBjvdXoWruF4xAFWrCr13Ar48Zry5Arb_yoWfWrX_Cr
- y8uwn7WFW8CFWSkFZ8ua1rZrs09397X3y8tr42qrn5W3W7Z34DGFZ7trWDWr4UZayjkF93
- ZFsruFZxtr1xKjkaLaAFLSUrUUUUjb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
- 9fnUUvcSsGvfC2KfnxnUUI43ZEXa7sRZCzutUUUUU==
+X-CM-TRANSID: _____wC3HpHQf2dqJpF_Kw--.27173S7
+X-Coremail-Antispam: 1Uf129KBjvJXoWxCFWfAr15CrWUXFyrWr4kJFb_yoW5uFW3pF
+ sxWr4qyrWxWFyfA3Wftrs7Gryjg3ykKF9xJw1Sv34rKrW7ArZ8tFsIya1Svr18JFWDAa45
+ uFy0ya1S9w17XaUanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x0pELvtLUUUUU=
 X-Originating-IP: [119.4.23.14]
-X-CM-SenderInfo: pglqw3tdrqkjqq6rljoofrz/xtbC-hSJx2pnf9QPxgAA3L
-Received-SPF: pass client-ip=220.197.31.4; envelope-from=dingtao0430@163.com;
+X-CM-SenderInfo: pglqw3tdrqkjqq6rljoofrz/xtbC-ROIxmpnf9MLzQAA3H
+Received-SPF: pass client-ip=117.135.210.5; envelope-from=dingtao0430@163.com;
  helo=m16.mail.163.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
@@ -59,8 +59,9 @@ X-Spam_bar: -
 X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -76,29 +77,94 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The NOC address was accessed in the k230_unzip driver, but it is currently not in k230.
-This commit uses create_unimplemented_device to preset the region.
+This commit replaces the unimplemented part of Decomp_gzip in K230.
+Connect to the handshake interface of GSDMA.
 
 Signed-off-by: Tao Ding <dingtao0430@163.com>
 Reviewed-by: Junze Cao <caojunze424@gmail.com>
 ---
- hw/riscv/k230.c | 3 +++
- 1 file changed, 3 insertions(+)
+ hw/riscv/Kconfig        |  1 +
+ hw/riscv/k230.c         | 23 +++++++++++++++++++----
+ include/hw/riscv/k230.h |  2 ++
+ 3 files changed, 22 insertions(+), 4 deletions(-)
 
+diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
+index d28ac06043..d06ac26648 100644
+--- a/hw/riscv/Kconfig
++++ b/hw/riscv/Kconfig
+@@ -163,3 +163,4 @@ config K230
+     select UNIMP
+     select K230_WDT
+     select K230_GSDMA
++    select K230_DECOMP_GZIP
 diff --git a/hw/riscv/k230.c b/hw/riscv/k230.c
-index 7fd1ec4c25..ff834d6724 100644
+index c80bd65694..7fd1ec4c25 100644
 --- a/hw/riscv/k230.c
 +++ b/hw/riscv/k230.c
-@@ -234,6 +234,9 @@ static void k230_soc_realize(DeviceState *dev, Error **errp)
-                               qdev_get_gpio_in(DEVICE(&s->decomp_gzip), i));
-     }
+@@ -111,6 +111,8 @@ static void k230_soc_init(Object *obj)
+     object_initialize_child(obj, "k230-wdt0", &s->wdt[0], TYPE_K230_WDT);
+     object_initialize_child(obj, "k230-wdt1", &s->wdt[1], TYPE_K230_WDT);
+     object_initialize_child(obj, "k230-gsdma", &s->gsdma, TYPE_K230_GSDMA);
++    object_initialize_child(obj, "k230-decomp-gzip", &s->decomp_gzip,
++                            TYPE_K230_DECOMP_GZIP);
  
-+    /* Noc stub, the k230 decomp_gzip driver in uboot will access this region */
-+    create_unimplemented_device("noc-stub", 0x91302000, 0x1000);
+     qdev_prop_set_uint32(DEVICE(cpu0), "hartid-base", 0);
+     qdev_prop_set_string(DEVICE(cpu0), "cpu-type", TYPE_RISCV_CPU_THEAD_C908);
+@@ -215,6 +217,23 @@ static void k230_soc_realize(DeviceState *dev, Error **errp)
+     sysbus_connect_irq(SYS_BUS_DEVICE(&s->gsdma), 0,
+                        qdev_get_gpio_in(DEVICE(s->c908_plic), K230_GSDMA_IRQ));
+ 
++    /* Decomp gzip */
++    qdev_prop_set_uint64(DEVICE(&s->decomp_gzip), "sram-base",
++                         memmap[K230_DEV_SRAM].base);
++    if (!sysbus_realize(SYS_BUS_DEVICE(&s->decomp_gzip), errp)) {
++        return;
++    }
++    sysbus_mmio_map(SYS_BUS_DEVICE(&s->decomp_gzip), 0,
++                    memmap[K230_DEV_DECOMP_GZIP].base);
++    for (int i = 0; i < K230_DECOMP_GZIP_NUM_GPIOS_OUT; i++) {
++        qdev_connect_gpio_out(DEVICE(&s->decomp_gzip), i,
++                              qdev_get_gpio_in(DEVICE(&s->gsdma), i));
++    }
++    for (int i = 0; i < K230_DECOMP_GZIP_NUM_GPIOS_IN; i++) {
++        qdev_connect_gpio_out(DEVICE(&s->gsdma), i,
++                              qdev_get_gpio_in(DEVICE(&s->decomp_gzip), i));
++    }
 +
      /* unimplemented devices */
      create_unimplemented_device("kpu.l2-cache",
                                  memmap[K230_DEV_KPU_L2_CACHE].base,
+@@ -233,10 +252,6 @@ static void k230_soc_realize(DeviceState *dev, Error **errp)
+     create_unimplemented_device("dma", memmap[K230_DEV_DMA].base,
+                                 memmap[K230_DEV_DMA].size);
+ 
+-    create_unimplemented_device("decomp-gzip",
+-                                memmap[K230_DEV_DECOMP_GZIP].base,
+-                                memmap[K230_DEV_DECOMP_GZIP].size);
+-
+     create_unimplemented_device("2d-engine.non-ai",
+                                 memmap[K230_DEV_NON_AI_2D].base,
+                                 memmap[K230_DEV_NON_AI_2D].size);
+diff --git a/include/hw/riscv/k230.h b/include/hw/riscv/k230.h
+index 156a386edc..a12d36965a 100644
+--- a/include/hw/riscv/k230.h
++++ b/include/hw/riscv/k230.h
+@@ -19,6 +19,7 @@
+ #include "hw/riscv/riscv_hart.h"
+ #include "hw/watchdog/k230_wdt.h"
+ #include "hw/dma/k230_gsdma.h"
++#include "hw/misc/k230_decomp_gzip.h"
+ 
+ #define C908_CPU_HARTID   (0)
+ 
+@@ -35,6 +36,7 @@ typedef struct K230SoCState {
+ 
+     K230WdtState wdt[2];
+     K230GSDMAState gsdma;
++    K230DecompGzipState decomp_gzip;
+     MemoryRegion sram;
+     MemoryRegion bootrom;
+ 
 -- 
 2.43.0
 
