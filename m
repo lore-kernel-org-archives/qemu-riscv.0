@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E854C53209
-	for <qemu-riscv@archiver.kernel.org>; Mon, 27 Jul 2026 05:38:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1CF8C531FC
+	for <qemu-riscv@archiver.kernel.org>; Mon, 27 Jul 2026 06:02:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1woE2f-0002Xr-K4; Mon, 27 Jul 2026 01:38:21 -0400
+	id 1woEPU-0002hg-0P; Mon, 27 Jul 2026 02:01:56 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <chao.liu@processmission.com>)
- id 1woE2b-0002Ux-0Z; Mon, 27 Jul 2026 01:38:17 -0400
-Received: from mail-japanwestazlp170120003.outbound.protection.outlook.com
- ([2a01:111:f403:c406::3] helo=OS8PR02CU002.outbound.protection.outlook.com)
+ id 1woEPK-0002eU-MZ; Mon, 27 Jul 2026 02:01:46 -0400
+Received: from mail-koreacentralazlp170130006.outbound.protection.outlook.com
+ ([2a01:111:f403:c40f::6] helo=SEYPR02CU001.outbound.protection.outlook.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <chao.liu@processmission.com>)
- id 1woE2Z-0003OP-0m; Mon, 27 Jul 2026 01:38:16 -0400
+ id 1woEPI-0005mB-32; Mon, 27 Jul 2026 02:01:46 -0400
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=YtAN3hbNwBl+q2oIbow+J4dVnJpQXcdqilj8Yg8UiPwBhnBqqe4HETI6JS8gDJ0BJ/aNA9Dtpds0T5hM6jrt1C+tP2il914bSTW7BTfdrXULA6mqM6DoRSx21giu70d5pxcupWELb+38lQUwWgyHxUs4YKCMu4+jOvBBW6yU+iw/cfIBeHQ0SVXiI3HsjDh39x0seizOePnDc8Sqv9J5zrB+IFmpM+xw9nKrkSPfCuHy1xuhJLJw4qi1bF794gXrYeVFBpJN4mXFfctLagXUujfKbLBUBVN+QiV40COnKptb7OKuVbcIa6g0zJXtS2+MMTbgBavblCjXl0BlNigrCw==
+ b=oHuiLwBeZL+UbnATypv8BV3hHS0GYBXioyQkennjFDLZuY/WZum/30lhu+EgBEwkoDTYuPyq9dpLfCc5+BE5d3rnw+hlKfBqJFj1t5bCWYO/SxqpdFMgc5ODQYSVMNE2yvMNbOkKYVRoWvwfV3GIZzEBRgi2R9uhy4CQ3Qa9sKD/tb5gE7ZqtskJC5dNTZcNh2QnvkjwYpodWKZ8U0hp6Yw9tt+6H1fOl2YWiHosMd8LmPb6ovAJdaGxcYPW6P3LBOsh4FSmf3Y/Wqz8n7bOKeFQRWY61hJJBfGNiYJlM5U3jmF4Yw6nKLXmDgsveGsisv9VqP+sF6Xec0ZztsUAGg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=j7GEG1OSInmN53smv47eA4murVyHPh29HmUMYnz7Iqc=;
- b=YENh2w+Nr+T7cHFW60IzGJMUmZv50xGFHf+QkOvdWbEIWMGPhed2KlVwnrHeFlCSmh0vSJX2X5VQDnGUmJimV9pQbooZAu5ccKus33tRmBEenAYDwVZ6UJzS00uN+Yw60OzQaAR4Wj17ZT7urifSNZfMPesgYto8MCxRxwUJu/v1t1kCWRs2YN+QBA42iciLB/VKuBeKhuoHdbNB3X0gy0L1kFyiwtKxUTIuDj1fv1u2iD1Jg2UaBM6iZGFqvV6brMJwoB4A86XX/FIzibCTPMmTSJmN43pYK2McxzlWDP0P6HTTKbpUSXoEaMx56fsAPhHLA3NqS2Xewbe//aJTuA==
+ bh=1T2vuFyvPEd24++VZJM1pvRA70hLzReM4eRQup4XyFE=;
+ b=nEgq1k3/CRxhBykp2X6+poanyC1zwff4VV/xGBOWOJWQfHM3mqLQxr/VYL+HN0rcRIJa8yWzCxKrtPNq/NilFLFSiXmi7YNbYKefOX42hp7L4pyMoDyK1kFC1/3R1HA3JhMZcsTgf+etjv5FvRpMyNFJt9qFg2xxw23dwwi7jVze91KS1Z494RlKtz+GeErBQOCWE3Wd2B8zGLy+jbFlRKgBD4tuP0DgT29wUNzoibXlQKFYozau6RSnDvFiCeCgCvMVNUQAXfsqyr8dq4lZkCWMR+Mrnk1FtvBi8Oa9WikEk2iZJcJGHohQIpnX4MOyh3/pZNu4/rEQkNb1aCSU9A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=processmission.com; dmarc=pass action=none
  header.from=processmission.com; dkim=pass header.d=processmission.com;
@@ -33,102 +33,96 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=processmission.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=j7GEG1OSInmN53smv47eA4murVyHPh29HmUMYnz7Iqc=;
- b=G5QI88WwlooKSFr8C7k5FVw2zN78Q0wpXwpqsoZFAtxrnwSUJ3fb7/LFit2OgNLdlmONvOl1MwC2hUsXVGDfoDggpI/FDf8naLQgYVIesrGbiHkpb/QZiMHLXmJqbdnu54PVRBWFwuAW1t8zpqApf8r/9KmapZT6pL8fiKMaaTXBC60IAd+o0niodEvVTLXMwHJKqhQZ5olxlWyVMOmoNcoYaFCMXSzeePKr0f4NsHj2dc9k6fo8QkK2Eze/xWrt9SqziewTPrGRcYcGEVW+i5IbnFNSQw2jGGU8UwIs5XUdaVCpa/zdtYkeLkJ8GuRzdztLKwWCj7EO1sEQEaaXiQ==
+ bh=1T2vuFyvPEd24++VZJM1pvRA70hLzReM4eRQup4XyFE=;
+ b=N/s7dfhye8OXAApRbykWOBwhlu+89r+HeCpjoEGbcAqGHBFwydKS3TRE3GZzmNWnMjXqUUq6aijU3eDiGAR2vOk18Mh5w+thBOMH6QIeyKZPD7tgJSTgM5lR/riBxtexOe2Cye911sXlGqXK46XRp1aAvJDU5qrfB3NOEsxMDMLDVhYG9YmmF4CC5RLL8q83HrsD9kHHU4y3IDRgtT/IkXfOu+LSbAQOJ6laq8qFaP9Nkzb6tUB2a7tQNOwui67UhE7QFJ3oSuJZ1xGXDSYJAHFO1j/GJoIvRBtgk8yi70OVcEHFCq6IGlc1cCkv91GKZ0alzDpuYkyGvHmfZZDidg==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=processmission.com;
 Received: from TYNPR02MB9351.apcprd02.prod.outlook.com (2603:1096:405:3d0::15)
- by SG2PR02MB6022.apcprd02.prod.outlook.com (2603:1096:4:1dc::12) with
+ by SI2PR02MB5683.apcprd02.prod.outlook.com (2603:1096:4:1ae::14) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.245.13; Mon, 27 Jul
- 2026 05:38:09 +0000
+ 2026 06:01:36 +0000
 Received: from TYNPR02MB9351.apcprd02.prod.outlook.com
  ([fe80::e5f3:5fb7:3d29:5934]) by TYNPR02MB9351.apcprd02.prod.outlook.com
  ([fe80::e5f3:5fb7:3d29:5934%4]) with mapi id 15.21.0245.012; Mon, 27 Jul 2026
- 05:38:09 +0000
-Date: Mon, 27 Jul 2026 13:38:04 +0800
+ 06:01:35 +0000
+Date: Mon, 27 Jul 2026 14:01:31 +0800
 From: Chao Liu <chao.liu@processmission.com>
-To: Bin Meng <bin.meng@processmission.com>
-Cc: QEMU <qemu-devel@nongnu.org>, 
- Alistair Francis <alistair.francis@wdc.com>, Conor Dooley <conor@kernel.org>, 
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Sebastian Huber <sebastian.huber@embedded-brains.de>, 
- Weiwei Li <liwei1518@gmail.com>, qemu-riscv@nongnu.org
-Subject: Re: [PATCH 25/26] tests/functional/riscv64: Add Icicle Kit firmware
- boot test
-Message-ID: <ambuq9S0x3ipH1zO@ChaodeMacBook-Pro.local>
-References: <20260723151853.2143177-1-bin.meng@processmission.com>
- <20260723151853.2143177-26-bin.meng@processmission.com>
+To: Zephyr Li <fritchleybohrer@gmail.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, palmer@dabbelt.com, 
+ alistair.francis@wdc.com, liwei1518@gmail.com, daniel.barboza@oss.qualcomm.com,
+ zhiwei_liu@linux.alibaba.com
+Subject: Re: [PATCH] target/riscv: preserve vl on element-zero fault
+Message-ID: <ambzIcXtYqMpeLZj@ChaodeMacBook-Pro.local>
+References: <20260724030145.14778-1-fritchleybohrer@gmail.com>
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260723151853.2143177-26-bin.meng@processmission.com>
-X-ClientProxiedBy: PH7PR02CA0005.namprd02.prod.outlook.com
- (2603:10b6:510:33d::22) To TYNPR02MB9351.apcprd02.prod.outlook.com
+In-Reply-To: <20260724030145.14778-1-fritchleybohrer@gmail.com>
+X-ClientProxiedBy: BY3PR05CA0002.namprd05.prod.outlook.com
+ (2603:10b6:a03:254::7) To TYNPR02MB9351.apcprd02.prod.outlook.com
  (2603:1096:405:3d0::15)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: TYNPR02MB9351:EE_|SG2PR02MB6022:EE_
-X-MS-Office365-Filtering-Correlation-Id: d3856e71-4a6d-4f17-0bdf-08deeba13e24
+X-MS-TrafficTypeDiagnostic: TYNPR02MB9351:EE_|SI2PR02MB5683:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4b0b98a8-e2a4-481b-b613-08deeba4840c
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|34096008|376014|366016|23010399003|1800799024|6133799003|18002099003|22082099003|56012099006|4143699003|5023799004|10067099003;
-X-Microsoft-Antispam-Message-Info: CuQ1vj70te0Pk3GMzmAoXdOSPA4hWvplRgg49AJ4Sk1Eg3pgHTGcLhs4NBZYsLfaEbtoKdLHvYdLSccmJGLcCRZLK9MQC0PnGhuQZX5B4jNxiDGqqsSZy0M7v4vE9F5n8glWT5jbaUZohUil1TNZ/cCEQqv4O08o8o1Mg3Y6srUA/JinNZFMVXld1PL8n0jXHJQ+CA0mMcZ0HsxgYV4Br8TfXwlvBgo8w2JdRwdqX/Hbh+ECxLtk1NA6dGe8hrRB7y3sf6ZNI8I8o2XggrAwBSq0yFZZoUYDmQCXBzMJkfJn7+MCy6KAIzSMLz9asMH4U7q9dj6f7tojmgC+cDH1iUIohnUchSHqS4gXHKZ8fy5kimJUdmQ9Yt+eJ6MSIdyrruEwsnQIMUmrGV+IXj1IMQAaWIjsVovUaVUNhoYg0431TtdjX2uGLGyj5EJ9Yb+n0daOfD3RkIsBNvvNQGbhmNMrO717lCssojjmksJRJzMkGewHAboG+YmHIu3yYwh8TzHHZoN7XZlOAydd7WFj9qCsmif3uzA5X/s+VWsrA8gg/c+J5eqjf4uXCn1J8yc878I2P65QOJMyH4vAruNEDXiwPEiA9z6tDSgYVuK3HkK+saJos80P0VMnk5iKSkSjMWyAV8+P6gB3zktKwouXGMaLwhLaOkGoUIl405/DG1M=
+ ARA:13230040|1800799024|23010399003|34096008|366016|376014|10067099003|56012099006|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info: 0TFdxalxXmIu5dYbDxsa6FV1eDGQ6GM5S7AgttaQ8KdoYiBJIqgjoEwGK+0JQV0LIsn2KU6l4sStb434Pd6YIqcm6CjhFAbTRuRxQS0bYHmRbd9Mu33ZSzpUf2Uv5EPvC6vaJuX48heZhBG06Cw67zJlL8jNd0n59k9nDRdUL+7cQxykrXw81ELgC8lxX+sNCl7EPgTBhq/FUsYZ9GDPyDsHtxSwPtxkDXqyBlFZtRvSgNYYFKbXIVk4M4Ou0+Pm01FJg+B3upg5oXUHU+8Csn7U5+PYm6Kk/G49+tjrv3lLLB+rxt3Reb/wxLTDFAVGvBjXoXIrgUdhCluDEK8O7x9o6xBmNp24Rzfg1P7zUeyi3kvjrXMZ80k8F5+ycbxDsR17EP3zEe8X1kkHF4RnLHUCmzM7E2GKkF3Exhl011/W42Z0dcDemTp28tRj3pBTYAG/xBTY7dfMWPQyHGZs3+/LA/BhsPl0dep5obZRvzY+mIFoKACu8IVHLQSaBlwZyEuaAomi3yzfWKiI7CZPb9JVUllmvoyKYRERveLo4Tix10F4vkh4VtkSmAlPfECylNM8SJSkd0pwY+79L77L1p5l2QRwqJO5J/kGbozZNkg=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:TYNPR02MB9351.apcprd02.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(34096008)(376014)(366016)(23010399003)(1800799024)(6133799003)(18002099003)(22082099003)(56012099006)(4143699003)(5023799004)(10067099003);
+ SFS:(13230040)(1800799024)(23010399003)(34096008)(366016)(376014)(10067099003)(56012099006)(22082099003)(18002099003);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?q+5gTfQ/XNi7VNdTyhI1n4b39vet+qfN9VR7f+y7FPfr9yILhbMoLgI08O7E?=
- =?us-ascii?Q?Pwq69l+nJcjkAG6F0MF7l2hbj/6chfLB49tRvsGn8gNT4SVQ46iCGmC9stNr?=
- =?us-ascii?Q?rRxwfiz+fSDdgwDMW1e1pkETr76exMymLTGMCxR5J993r54Y4uoETzx1utbo?=
- =?us-ascii?Q?WHd2TzksLNZUWvYrIpe/WppbJrvHmXA0sXKXw0lhcDdR0Qk0Y28Vy7BSeC9n?=
- =?us-ascii?Q?MifilrVPjsg5/QePiq5VUTFuNJJ5Rfp5Dezo9l99ZiiHpPqGxoLJ4jmFKh2r?=
- =?us-ascii?Q?lABFIvoXndn3fGSqK6VFKj8T+wrHe31PBWHqnWmQ9WER1bDc8n/JQWF5aCSF?=
- =?us-ascii?Q?F/TS9HO1iLRI8xY9R45LFlUlfJocD4Ls9sc/sBAM9dDR92yhU98ji6H0T0mo?=
- =?us-ascii?Q?olgTVQjlaQz0bquZ60ihG+vJX91DlOHqMZJD6uCb5Sbf/dcbcz3BqFiMe7lv?=
- =?us-ascii?Q?PgMns5DbXji5U9VnVJJi/mMHPURgQi+3FDvGKAFgpgGKMzTmKKCib54frh0j?=
- =?us-ascii?Q?eVHqaYwa7NmiL0waFaZg4I9JAVHpMOe8zrhHOMW8ENHWRRF3wvJTpZrGa4hQ?=
- =?us-ascii?Q?90hDk4c64VJQnJlJk+dqUjqeoO25y5d9qgcdww7mWaPL//34ziELNr49TxKi?=
- =?us-ascii?Q?Pd1PP/vQzuwPKU5hVV5YeEmTUlEGB6OcVN8BBTd7V0wRIVIh2oxtNs6Kr8/j?=
- =?us-ascii?Q?I+XzttyrgT7DcYGQ2eHcnjVFiZbCGs6CbSEeoS93CjmtOiiywHxdi9A2WWth?=
- =?us-ascii?Q?XDGzW3ipLRiHsaSkOTus9Ww1g8vmudKfgkxKI08oXLBJqAN0rb3uAMnzXJKm?=
- =?us-ascii?Q?4M8bpLKelQnwrok0uN8tU+NMZUGhq0cKp0W/Vp4Y9Be8eW9YC2asKguaoqxF?=
- =?us-ascii?Q?GAYn88rgn/4vA+00zD9bnc8Pv3gSCrx4BtUtGPf70oZ82WhAu4x233iUUCiw?=
- =?us-ascii?Q?JBLYXuL75CX61qIf9M+Zf6QKz/1QR6suyvUoREGbEDtupmHJihFaEmEe24br?=
- =?us-ascii?Q?60dOON2c/omG1cuppObGR1juP4D/XPJAcQI1yUVgwmpXWsWtJo9/J3+/0sTQ?=
- =?us-ascii?Q?J1XJit592bEag1sUZMxdwBX2ladQlkMjE/Mh/ngHX2eeQAQBx99UTnm39zok?=
- =?us-ascii?Q?20iBNkZY9nmyqZj+UmvLizqSRNE7N4jdR4GGX0nwCbLX4bJE7uUGlrDCCc8O?=
- =?us-ascii?Q?G6vOiteEtTKY285stAvxdOqISQnHqxaGO2/rpBXwxMbU9cUBR0+2k/bHUSl/?=
- =?us-ascii?Q?jO+27ZUNhXIN19WbDScYEy4/Vs0IGEnPN4aa7Ovbu7lIihMoAAdIibob1wCO?=
- =?us-ascii?Q?ULYD7RN9Q8tFdHECCehnnHQmeDfTdef3oVJcFuZYIy9mK2yabDaUIrQHychm?=
- =?us-ascii?Q?/bxo5vgxg16dvRRSlKEtHqvH3j1CdgxFn2DhJWXevV2xoy5OMBgUHIa80RZP?=
- =?us-ascii?Q?ASLBkRD51U/IDxoeQKOW7TEBHyCx8Cxof4JtTHSEPp9/Mt11FmssCmx0U33t?=
- =?us-ascii?Q?3tjktvEpOjxHWOQsc08rWf3Q92qfcCithKVNqB2zxxrUL2mJB4lDwvI6X/hG?=
- =?us-ascii?Q?Zs1BUQYtwNaAisuKwn4sMPxGxzBnujHAmhUiHqVro/TuaCjlI8movWCETiN/?=
- =?us-ascii?Q?ciOnPiCTcBRCZJ9z4ybIns/XBFeYtDs5RHoN/Eu7DCvCnkha+HW8TdV20P0E?=
- =?us-ascii?Q?8U0Wzim0H55ruzV+LcFsvwYIZLFSdjWQSgK5ATQ3ROFkGGZ17HGk6z8n3KSF?=
- =?us-ascii?Q?KYskfhEDJVEvpd9GIUvCjbFRhteMCI4=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?iEaS0QHSjehkEb7vG5K3O9RgZnlql5p4ziTt+cNoGvmv0Rr5n9dkDWfZUbeK?=
+ =?us-ascii?Q?8Puj/BQCGv5x7u+Lj0/20FsJGry2MrJRRLTJGs9Ksw7/Uol7/1sYorOWG8wR?=
+ =?us-ascii?Q?d7Ps6LK/o/8lOIExjDD0FwXghPE1mFzFEbH8Qt7PLw/7FssYa3dmM7b/M/mO?=
+ =?us-ascii?Q?QNLhCvf6L40+jedWN85FQE7gPchxeZgirCRXVQK17oAPOuGKhF0w3/0aEOCF?=
+ =?us-ascii?Q?ZJTCtRUu8VTr6Zrmjq00CRgv0IdzMP8tVTjIIkGHRXsstj0vGaIf+hOcOIY+?=
+ =?us-ascii?Q?YMMvLxG6VGHRknttWUJ+BPg/c/3iqH9iKEh02HQ4GC4axjef5YH7BeKkxdwi?=
+ =?us-ascii?Q?UMTg3Eks+EDf2f1q09YWAMkNlj1kK7X64fJvBOw8KCMsppS5xqcEXEcgnsyl?=
+ =?us-ascii?Q?GHqOz8Oo/EauZfEOG9A+MfwbkWgalrZkEPO3ZProiZA8nGL5GOjSAPRVKf7K?=
+ =?us-ascii?Q?nne/68d8ws+peK4NkPRxcR9QaIOaA6j+zjEvuZCi7HL0Lcgt1VSEzkaSAsNL?=
+ =?us-ascii?Q?4lrlM/DAmyCKg88PMn2k2Re/QzYTXedIkooFAk7X3XKGU8KmfiEwTGPH76Ul?=
+ =?us-ascii?Q?8DLLD4Q5QMls3+6mfxSkGo+ulRGjY+UjY7ErS5TYNanVHAeato0CpnqQNA4A?=
+ =?us-ascii?Q?Rm8bXoY8Dr11p3zjRZEuhtYAlhvGh0c1ulkGrRmuZC+5U1CWk0lkrkJB56NG?=
+ =?us-ascii?Q?IUuunMHhKCox/liXPzQUhbQ7K1GF2MstzYq1PdiS+Fu2ZD1WBbC84IH7NBHY?=
+ =?us-ascii?Q?k9OOz8bCeVYsIO9/qgp1VDvUW82Amqc9NhLmtXnmoyO9CpvUsQJrKpUmBI6q?=
+ =?us-ascii?Q?RkcuHpQAEruacxPzLRAeMtNQfvQ4areF8pP94O8MzThjrhblc+RxxmK9ujTw?=
+ =?us-ascii?Q?hiR/FErVMWtFPnTTc87pK3iiYn79dPmPbMa8iPI2oMceRfVxjRzDA8z7nQEI?=
+ =?us-ascii?Q?0iPu2/e7uIc4jPhsXMHhP0KUKWuRVEniyqby0hk3S9rpfObPFd9ruEdVBPOP?=
+ =?us-ascii?Q?sSHc1sfgBsOR9ehu7z9oCBhX/rRfKvsIv11TSDuh1aB0VrHZfYDKXfQxm5lP?=
+ =?us-ascii?Q?DRiShh/n3uN5pA7+wk8YxomEDI6In0HADQdWkBze2U1FXNrWO6cQDDGlvhj1?=
+ =?us-ascii?Q?nqiM33bX9td+nmv+EKzImnpc7HqkaJCllCryXKpG51Nc4wiQ0P3SdofXEfRB?=
+ =?us-ascii?Q?pxcjXXfnWsglJifJQh167uzrR1D4u7J9vJhK2pTutFt161rhspvsqCrZKs6D?=
+ =?us-ascii?Q?q1ph5eURta7dS5moj1AJYTH7GXkvvxL/oeYHOfCSpWAhekaW7HDsO4EU060W?=
+ =?us-ascii?Q?RIHOlFXWAUd2lH5+XCRB+wljp953CHTF+4uBasa6TnGHzFzgu5J4CEQVDjKd?=
+ =?us-ascii?Q?W6kig8lbdfOLFEwjiaBsFTCmRadN3ddfhpXvljugmz0SrzqnA6c4w4B5Pqnj?=
+ =?us-ascii?Q?luT+ABS/cknqqdRc0HALeVSzFpbamGnWS3mtXEplhyG9a7shN3/LygNnDsJg?=
+ =?us-ascii?Q?QOOygOF/cUD6GNkqPobl7aITUbnS8x0CuLT9ZS1uHLaXKYm/dCQPMeg+adIV?=
+ =?us-ascii?Q?9YR6sKcgiSL/+dFeKlo55bTHiT4u63R4tE2Kg8P7Qh8T8LQ0x2iIjnVL//7f?=
+ =?us-ascii?Q?IO51BOND+FSUoVPVUrjeQblNFAARsibg/LCRwlGWSGjZz6Rnjs4nWwqoMW4O?=
+ =?us-ascii?Q?T5PLVvnb8kURayClsjLgtSx+F9qKxGwK5dFKeBUbdh8Sd2Cogjt0NmjX7FEq?=
+ =?us-ascii?Q?uk5y2YCDvyjMC7nYbbMIgWQ8HxZclHg=3D?=
 X-OriginatorOrg: processmission.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d3856e71-4a6d-4f17-0bdf-08deeba13e24
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4b0b98a8-e2a4-481b-b613-08deeba4840c
 X-MS-Exchange-CrossTenant-AuthSource: TYNPR02MB9351.apcprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Jul 2026 05:38:09.8508 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Jul 2026 06:01:35.7364 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: e0544bf7-9765-4630-ab69-0b266dc2169c
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: fyimJ+Mv64ax0IPRzIlxju2IhWsSGWE1WVkJsLXag9FsvewZs/PcmV/t5/2i56Mbshmhney0dGKAJNUufps7jvJ5ewqvMJx2q8xdm49vAWo=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SG2PR02MB6022
-Received-SPF: pass client-ip=2a01:111:f403:c406::3;
+X-MS-Exchange-CrossTenant-UserPrincipalName: GAwWO4uP6vv+wbXN4jzbWsYaASN+1wSFTm3EY76N5Qf4T4iWJCL+WnZLEItnPdifyyeY4bxaJDfsYKn4/xVCRmeF2FvmmxVyYFlyJxgKKAk=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SI2PR02MB5683
+Received-SPF: pass client-ip=2a01:111:f403:c40f::6;
  envelope-from=chao.liu@processmission.com;
- helo=OS8PR02CU002.outbound.protection.outlook.com
+ helo=SEYPR02CU001.outbound.protection.outlook.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_PASS=-0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -145,125 +139,177 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Jul 23, 2026 at 11:18:52PM +0800, Bin Meng wrote:
-> Add functional coverage using prebuilt HSS and SD card images.
+On Fri, Jul 24, 2026 at 11:01:45AM +0800, Zephyr Li wrote:
+> A unit-stride fault-only-first load must leave vl unchanged when element zero raises a synchronous exception. Keep the shortened value in a local bound until all loads complete, and only then update the architectural vl.
 > 
-> Boot HSS and U-Boot with five harts and 2 GiB of RAM. Connect
-> the test console to MMUART1 and let U-Boot start Linux.
-> 
-> The complete boot exercises the SDHCI controller in the DMA modes
-> used at each stage. HSS uses Version 4 64-bit SDMA to load U-Boot.
-> U-Boot uses ADMA2-64 to read the boot script and the large FIT
-> image. Linux then selects 64-bit ADMA for SD card and rootfs I/O.
-> 
-> Check the machine identity, kernel ADMA initialization, root
-> filesystem mount, and login prompt.
-> 
-> Signed-off-by: Bin Meng <bin.meng@processmission.com>
+> Add a bare-metal RVV regression test which faults vle32ff.v on element zero and checks that vl remains unchanged in the trap handler.
+Please wrap the commit message at 76 columns or fewer.
+
+see:
+https://www.qemu.org/docs/master/devel/submitting-a-patch.html#write-a-meaningful-commit-message
+
+
 Reviewed-by: Chao Liu <chao.liu@processmission.com>
 
 Thanks,
 Chao
-
+> 
+> Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/3544
+> Signed-off-by: Zephyr Li <fritchleybohrer@gmail.com>
 > ---
+>  target/riscv/tcg/vector_helper.c          | 23 ++++++----
+>  tests/tcg/riscv64/Makefile.softmmu-target |  5 ++
+>  tests/tcg/riscv64/test-vle32ff.S          | 56 +++++++++++++++++++++++
+>  3 files changed, 75 insertions(+), 9 deletions(-)
+>  create mode 100644 tests/tcg/riscv64/test-vle32ff.S
 > 
->  MAINTAINERS                                   |  1 +
->  tests/functional/riscv64/meson.build          |  2 +
->  .../riscv64/test_microchip_icicle_kit.py      | 52 +++++++++++++++++++
->  3 files changed, 55 insertions(+)
->  create mode 100644 tests/functional/riscv64/test_microchip_icicle_kit.py
-> 
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 4bcc59f1cf..800a2f31cd 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -1780,6 +1780,7 @@ F: include/hw/misc/mchp_pfsoc_ioscb.h
->  F: include/hw/misc/mchp_pfsoc_l2cc.h
->  F: include/hw/misc/mchp_pfsoc_sysreg.h
->  F: include/hw/rtc/mchp_pfsoc_rtc.h
-> +F: tests/functional/riscv64/test_microchip_icicle_kit.py
->  F: tests/qtest/mchp_pfsoc_l2cc_test.c
->  F: tests/qtest/mchp_pfsoc_rtc_test.c
+> diff --git a/target/riscv/tcg/vector_helper.c b/target/riscv/tcg/vector_helper.c
+> index e321ca2616..5a310822b7 100644
+> --- a/target/riscv/tcg/vector_helper.c
+> +++ b/target/riscv/tcg/vector_helper.c
+> @@ -686,7 +686,7 @@ vext_ldff(void *vd, void *v0, target_ulong base, CPURISCVState *env,
+>            uint32_t desc, vext_ldst_elem_fn_tlb *ldst_tlb,
+>            vext_ldst_elem_fn_host *ldst_host, uint32_t log2_esz, uintptr_t ra)
+>  {
+> -    uint32_t i, k, vl = 0;
+> +    uint32_t i, k, vl = 0, load_vl;
+>      uint32_t nf = vext_nf(desc);
+>      uint32_t vm = vext_vm(desc);
+>      uint32_t max_elems = vext_max_elems(desc, log2_esz);
+> @@ -752,22 +752,24 @@ vext_ldff(void *vd, void *v0, target_ulong base, CPURISCVState *env,
+>          }
+>      }
+>  ProbeSuccess:
+> -    /* load bytes from guest memory */
+> -    if (vl != 0) {
+> -        env->vl = vl;
+> -    }
+> +    /*
+> +     * Keep a shortened vl local until all loads complete. In particular,
+> +     * an exception from element zero must leave the architectural vl alone.
+> +     */
+> +    load_vl = vl ? vl : env->vl;
 >  
-> diff --git a/tests/functional/riscv64/meson.build b/tests/functional/riscv64/meson.build
-> index d1a3e6c2bf..cbf61d9535 100644
-> --- a/tests/functional/riscv64/meson.build
-> +++ b/tests/functional/riscv64/meson.build
-> @@ -3,6 +3,7 @@
->  test_riscv64_timeouts = {
->    'boston' : 120,
->    'k230' : 120,
-> +  'microchip_icicle_kit' : 180,
->    'tuxrun' : 120,
->  }
+> -    if (env->vstart < env->vl) {
+> +    if (env->vstart < load_vl) {
+>          if (vm) {
+>              /* Load/store elements in the first page */
+>              if (likely(elems)) {
+> +                elems = MIN(elems, load_vl - env->vstart);
+>                  vext_page_ldst_us(env, vd, addr, elems, nf, max_elems,
+>                                    log2_esz, true, mmu_index, ldst_tlb,
+>                                    ldst_host, ra);
+>              }
 >  
-> @@ -15,6 +16,7 @@ tests_riscv64_system_thorough = [
->    'endianness',
->    'boston',
->    'k230',
-> +  'microchip_icicle_kit',
->    'sifive_u',
->    'tt_atlantis',
->    'tuxrun',
-> diff --git a/tests/functional/riscv64/test_microchip_icicle_kit.py b/tests/functional/riscv64/test_microchip_icicle_kit.py
+>              /* Load/store elements in the second page */
+> -            if (unlikely(env->vstart < env->vl)) {
+> +            if (unlikely(env->vstart < load_vl)) {
+>                  /* Cross page element */
+>                  if (unlikely(page_split % msize)) {
+>                      for (k = 0; k < nf; k++) {
+> @@ -780,7 +782,7 @@ ProbeSuccess:
+>  
+>                  addr = base + ((env->vstart * nf) << log2_esz);
+>                  /* Get number of elements of second page */
+> -                elems = env->vl - env->vstart;
+> +                elems = load_vl - env->vstart;
+>  
+>                  /* Load/store elements in the second page */
+>                  vext_page_ldst_us(env, vd, addr, elems, nf, max_elems,
+> @@ -788,7 +790,7 @@ ProbeSuccess:
+>                                    ldst_host, ra);
+>              }
+>          } else {
+> -            for (i = env->vstart; i < env->vl; i++) {
+> +            for (i = env->vstart; i < load_vl; i++) {
+>                  k = 0;
+>                  while (k < nf) {
+>                      if (!vext_elem_mask(v0, i)) {
+> @@ -806,6 +808,9 @@ ProbeSuccess:
+>              }
+>          }
+>      }
+> +    if (vl != 0) {
+> +        env->vl = vl;
+> +    }
+>      env->vstart = 0;
+>  
+>      vext_set_tail_elems_1s(env->vl, vd, desc, nf, esz, max_elems);
+> diff --git a/tests/tcg/riscv64/Makefile.softmmu-target b/tests/tcg/riscv64/Makefile.softmmu-target
+> index 82be8a2c91..7ae225bd73 100644
+> --- a/tests/tcg/riscv64/Makefile.softmmu-target
+> +++ b/tests/tcg/riscv64/Makefile.softmmu-target
+> @@ -41,5 +41,10 @@ comma:= ,
+>  run-test-crc32: test-crc32
+>  	$(call run-test, $<, $(QEMU) -cpu rv64$(comma)xlrbr=true $(QEMU_OPTS)$<)
+>  
+> +EXTRA_RUNS += run-test-vle32ff
+> +run-test-vle32ff: test-vle32ff
+> +	$(call run-test, $<, $(QEMU) -cpu rv64$(comma)v=true $(QEMU_OPTS)$<)
+> +test-vle32ff: CFLAGS += -march=rv64gcv
+> +
+>  # We don't currently support the multiarch system tests
+>  undefine MULTIARCH_TESTS
+> diff --git a/tests/tcg/riscv64/test-vle32ff.S b/tests/tcg/riscv64/test-vle32ff.S
 > new file mode 100644
-> index 0000000000..a75803fb84
+> index 0000000000..4c687bf1e4
 > --- /dev/null
-> +++ b/tests/functional/riscv64/test_microchip_icicle_kit.py
-> @@ -0,0 +1,52 @@
-> +#!/usr/bin/env python3
-> +#
-> +# Functional test that boots HSS, U-Boot, and Linux on an Icicle Kit.
-> +#
-> +# Copyright (c) 2026 Process Mission
-> +#
-> +# Author:
-> +#   Bin Meng <bin.meng@processmission.com>
-> +#
-> +# SPDX-License-Identifier: GPL-2.0-or-later
+> +++ b/tests/tcg/riscv64/test-vle32ff.S
+> @@ -0,0 +1,56 @@
+> +/*
+> + * Verify that a fault-only-first load keeps vl unchanged when element zero
+> + * raises a synchronous exception.
+> + *
+> + * SPDX-License-Identifier: GPL-2.0-or-later
+> + */
 > +
-> +from qemu_test import Asset, LinuxKernelTest
+> +	.option norvc
 > +
+> +	.text
+> +	.globl _start
+> +_start:
+> +	lla	t0, trap
+> +	csrw	mtvec, t0
 > +
-> +class MicrochipIcicleKitMachine(LinuxKernelTest):
+> +	li	t1, 4
+> +	vsetvli	t2, t1, e32, m1, ta, ma
+> +	li	t0, 1
+> +	vle32ff.v	v1, (t0)
 > +
-> +    ASSET_IMAGES = Asset(
-> +        ('https://github.com/processmission/qemu-machine-images/releases/'
-> +         'download/v1.0.0/'
-> +         'riscv64-microchip-icicle-kit-v1.0.0.tar.zst'),
-> +        '8a8a831f5a1715503abf88386fca81c8e5edb303bff0265118f6ac35a725d27f')
+> +	/* Element zero did not trap. */
+> +	li	a0, 1
+> +	j	_exit
 > +
-> +    def test_microchip_icicle_kit_boot(self):
-> +        self.require_accelerator('tcg')
-> +        self.set_machine('microchip-icicle-kit')
+> +trap:
+> +	csrr	t0, mcause
+> +	li	t1, 5		/* Load access fault. */
+> +	bne	t0, t1, trap_fail
 > +
-> +        archive_path = self.uncompress(
-> +            self.ASSET_IMAGES, target='microchip_icicle_kit_images.tar')
-> +        self.archive_extract(archive_path, format='tar')
-> +        firmware_path = self.scratch_file('images', 'hss.bin')
-> +        sdcard_path = self.scratch_file('images', 'sdcard.img')
+> +	csrr	t0, vl
+> +	li	t1, 4
+> +	bne	t0, t1, trap_fail
 > +
-> +        self.vm.set_console(console_index=1)
-> +        self.vm.add_args(
-> +            '-smp', '5',
-> +            '-m', '2G',
-> +            '-bios', firmware_path,
-> +            '-drive', f'if=sd,file={sdcard_path},format=raw,snapshot=on',
-> +            '-no-reboot')
-> +        self.vm.launch()
+> +	li	a0, 0
+> +	j	_exit
 > +
-> +        self.wait_for_console_pattern('U-Boot ')
-> +        self.wait_for_console_pattern('Starting kernel ...')
-> +        self.wait_for_console_pattern(
-> +            'Machine model: Microchip PolarFire-SoC Icicle Kit')
-> +        self.wait_for_console_pattern('using ADMA 64-bit')
-> +        self.wait_for_console_pattern('VFS: Mounted root')
-> +        self.wait_for_console_pattern('mpfs_icicle login:')
+> +trap_fail:
+> +	li	a0, 1
 > +
+> +_exit:
+> +	lla	a1, semiargs
+> +	li	t0, 0x20026	/* ADP_Stopped_ApplicationExit */
+> +	sd	t0, 0(a1)
+> +	sd	a0, 8(a1)
+> +	li	a0, 0x20	/* TARGET_SYS_EXIT_EXTENDED */
 > +
-> +if __name__ == '__main__':
-> +    LinuxKernelTest.main()
-> -- 
-> 2.34.1
-> 
+> +	.balign	16
+> +	slli	zero, zero, 0x1f
+> +	ebreak
+> +	srai	zero, zero, 0x7
+> +	j	.
+> +
+> +	.data
+> +	.balign	8
+> +semiargs:
+> +	.space	16
 
