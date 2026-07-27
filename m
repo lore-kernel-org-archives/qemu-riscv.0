@@ -4,89 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64B4DC53219
-	for <qemu-riscv@archiver.kernel.org>; Mon, 27 Jul 2026 08:42:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 052BAC53219
+	for <qemu-riscv@archiver.kernel.org>; Mon, 27 Jul 2026 09:07:30 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1woGuz-0002KQ-Ok; Mon, 27 Jul 2026 04:42:37 -0400
+	id 1woHIM-0003aT-FO; Mon, 27 Jul 2026 05:06:46 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <fritchleybohrer@gmail.com>)
- id 1woGuy-0002K1-Q8
- for qemu-riscv@nongnu.org; Mon, 27 Jul 2026 04:42:36 -0400
-Received: from mail-pj2-x00.google.com ([2607:f8b0:4864:39::])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <fritchleybohrer@gmail.com>)
- id 1woGuw-0005df-U2
- for qemu-riscv@nongnu.org; Mon, 27 Jul 2026 04:42:36 -0400
-Received: by mail-pj2-x00.google.com with SMTP id
- d9443c01a7336-2cc6bb7476dso3818075ad.0
- for <qemu-riscv@nongnu.org>; Mon, 27 Jul 2026 01:42:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1785141753; x=1785746553; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=7JHbtJerH3/rQGbPisECyh5JnAIvKEhV7En67m13MGo=;
- b=nWRlwCpNtpAhRZyNG6YJwiUdEuKcw4Iih20w6gNowzkr3hIXG7FOh1L2QvJ2wuI/55
- QPJ6baJQFWjydRQbnHw9MVFR7tcE4Ou3O42vDRbuK5qW7SfvVzPwNshR1xPRZXDTnm0q
- hiQYl6M9yqeBtjtv2p73vd/TwbxUP8XS6kfVePKbTJJCzTA7kIQ1hZinb9f18jLZj1sb
- wU7Ecd9OGOaL4XeoZpfkT3WyVv/gZ8wHmXZHJKaPwWqXVIqbQ/p7aKR68mKA2l1+qcgm
- kqN/SQf8oY/8vsA6Q1IAHyMAYp0YNRQ4kVh07hnrpbnIGdgeWKb5+j+UqpZCmw4g2hEy
- hlhg==
+ (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
+ id 1woHI4-0003YU-5X
+ for qemu-riscv@nongnu.org; Mon, 27 Jul 2026 05:06:33 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
+ id 1woHI1-0008RH-Un
+ for qemu-riscv@nongnu.org; Mon, 27 Jul 2026 05:06:27 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1785143183;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=6juDJB9SuJ8viw5hTV/fyWyN9im+TVrsr9lb3ZKqVHQ=;
+ b=YGqKe9Sp6J2DjL9lGHcEL1XfZqTIeTNEkhRSdFHVUsmW034YPoc6jLc5hAhM/+6uVGdMfV
+ EJWAwEkxS+qlUDEAocvn1k3tkC4tGaGr/57sagoFsjtYFNUZ3ejQqoCUmO9fAODVJ8W9kq
+ lcnOYyAbofiDmsifQhtlzlS3zZfEIb8=
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+ [209.85.221.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-624-EIozfsLLPxiWJrxrAFcGUw-1; Mon, 27 Jul 2026 05:06:22 -0400
+X-MC-Unique: EIozfsLLPxiWJrxrAFcGUw-1
+X-Mimecast-MFC-AGG-ID: EIozfsLLPxiWJrxrAFcGUw_1785143181
+Received: by mail-wr1-f72.google.com with SMTP id
+ ffacd0b85a97d-47f8398ed9fso2060232f8f.0
+ for <qemu-riscv@nongnu.org>; Mon, 27 Jul 2026 02:06:21 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785141753; x=1785746553;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=7JHbtJerH3/rQGbPisECyh5JnAIvKEhV7En67m13MGo=;
- b=rZ0K3lv87jHt7Eo3zXOkfOetrU+XkiiI7kxKzuYeX8Yp9mFwBEhXP0McMmyQHGmnM0
- 20KFNE1AuZOwubCNN4h758gjvHiDZMs/ACA2RAipLx7N/AcobtfbzVD5GOavaZDwMG4t
- Dq5AmLYKhxwRFOA7VrXdm5xmjbF7PErAEbmnfl+e0FkdMii73ilCYBcNCYDVBZ/QQoEY
- XiBXGGQ9cxmHwZLRRIoZgTKQHAKRJQcMu3yEaN+Vs/gj2HAFmsgoZVEDaAzgFKokMP5d
- tJ19QuZgB4Mf2DtJUVCdv7oqmHwxD0JR5dkCdGEQk34lKim/4elsG4dz84OfAlek6AuS
- wDVQ==
-X-Gm-Message-State: AOJu0YwTAGP3EzTs7HNkGTtuczaOKmsUM6VY0AG4L/q3nmZLoD4P+bTb
- 2R+hpH+0TJ4oM7SWSFBvHk0NHTVOjMeICtzu+oyY1nNAhfLVSHojsqW7
-X-Gm-Gg: AR+sD12drEAhfOSjxSd5lxqwkXtwv2B0HSeVDrzG46VHegKVXi/g9EWCS9ybHqnRu8N
- FI07CosBIxzD1CdmyJuz4MgmPkPGP6/q7DEyvKnfTlXrKpOaEbPk0oWvccsB1drvs23OLLfw7Eh
- hBnx2zYwjqkOJ12cNXK2Qm3Tqs5zzni5zEJFOoZ236dVkEACHTf8CVQq9n0DWQclJBJPHBaCYsi
- Ii6fqY3s9tvTEzlp8ij3s21jXqqo4U6AsGScvRECoDupTDopSE3usMdEpircErMNV6cEgsVoFN3
- h5Px+oEZuwZtKp5p5lUxVfrovJ/t30Hq1nMnHJS5vqu22WeMGVIrbNATpCXKaaAzrHWLtcll4vK
- oemiSsz1aUyMMV7pRLYFISL6eMDAoWD/BsSh/QbHYsfYBRDRXAoMo2NOYXeXZo+oYReOipKZcJz
- RrQidzxMsD/1eq6aW6FJPZYyeOuBkGRJE=
-X-Received: by 2002:a17:902:e803:b0:2bf:13af:b077 with SMTP id
- d9443c01a7336-2cfdf3f056amr64493725ad.14.1785141752522; 
- Mon, 27 Jul 2026 01:42:32 -0700 (PDT)
-Received: from Dell-WorkStation.localdomain ([139.59.245.192])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2cfde59bc68sm30767175ad.2.2026.07.27.01.42.27
+ d=1e100.net; s=20251104; t=1785143181; x=1785747981;
+ h=content-transfer-encoding:content-type:mime-version:references
+ :in-reply-to:message-id:subject:cc:to:from:date:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=FYAQR87+IF7SU2JF8iWU2NworjIcqWl+5FKENXWQeZE=;
+ b=Iw4Kq8Do0I7MDx5IbSTa+2jG2sKowZpKukIkgALGYPijtudip3+7ThJwUkVnmtqdbq
+ G5G09a/R+B3rorS22zzE/kB/8HgunUEynVYowEm/vIwtzmVRGeDK2vNcwp3q+wWDR7sv
+ OEnUD5qXlAczZNswe5QVCeM34DhT9IGl7AhdjL1+2WWg5qYtxJT2gQBkEx5g878nJhwd
+ ubjaIvYsMF20sSxYEu6tnifQdzt77Bkve0aAn9BQbOPbocFifDExM9OTtE9pYq4exe5u
+ BJ5Qk1VKW5rz2/3mRpCDT4wWsgaQcI4DsEQaYTKIQP+nYzrIeWtxObXSwtuF7Hv2T8ZM
+ 3D/A==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RrjpvKjIdXwwDwB5/Z0FeJ15UhmO0qWJHkHfe5ijclZ/0uIw699+xqG42GxXH1YIeY5aJxwTE4AYRqs@nongnu.org
+X-Gm-Message-State: AOJu0YyfqgjlSoG927RUWwTxWfPsjM0ID9EaA6tO9IWjzEmqJG9kICzf
+ uEyQs1aAT/VcUtpJnrNdeeJw10Bq1NmqjVgrdKBA32sb4svkQCNCRuzEMLnkhJNcfZV8HxzBpv5
+ 4x9OlHlnjwBoq7kKHPgJgQo7p+eNxtCi5gd5isnBxfKWB61i2WdpMOypg
+X-Gm-Gg: AR+sD113HbCqbH/IBCFbtlfMd4xgTdUoi035sO0Jf5eWGwnsikw63Ra86jqpangLdXl
+ nvYNl9kHOVGl7X4IVYKomP7Q2sffzdRufv7x6MRQX/RO2vzPjNXCXl5fMyqYV1w5lCrR1pjKshU
+ oPTDridxRiwAc3H7rpGvde68n81JbdWRz1+rR5to0WMgqhW6LQTAkFWIJhR5A6vq1OgKDgwkGGC
+ nLKvghsFtN+dLmwquel+dbqUW4tUjV6fqoi3LZRAs+xNmtRFU6OL42KW7Em6NZzcRqIlUNzcMRS
+ Tys43l4V+Ge8OrA3fws72K1vtD+rQiMQVoDZmeRZUHWz5iNBfr+P9AUeTNXR
+X-Received: by 2002:a05:6000:2681:b0:47d:f01e:83cf with SMTP id
+ ffacd0b85a97d-47f9febea2dmr8819724f8f.58.1785143180731; 
+ Mon, 27 Jul 2026 02:06:20 -0700 (PDT)
+X-Received: by 2002:a05:6000:2681:b0:47d:f01e:83cf with SMTP id
+ ffacd0b85a97d-47f9febea2dmr8819676f8f.58.1785143180237; 
+ Mon, 27 Jul 2026 02:06:20 -0700 (PDT)
+Received: from imammedo ([213.175.37.14]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-47f85c6dc25sm46202931f8f.33.2026.07.27.02.06.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Jul 2026 01:42:31 -0700 (PDT)
-From: Zephyr Li <fritchleybohrer@gmail.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, chao.liu@processmission.com, palmer@dabbelt.com,
+ Mon, 27 Jul 2026 02:06:18 -0700 (PDT)
+Date: Mon, 27 Jul 2026 11:06:15 +0200
+From: Igor Mammedov <imammedo@redhat.com>
+To: Chen Pei <cp0613@linux.alibaba.com>
+Cc: jic23@kernel.org, pbonzini@redhat.com, palmer@dabbelt.com,
  alistair.francis@wdc.com, liwei1518@gmail.com,
  daniel.barboza@oss.qualcomm.com, zhiwei_liu@linux.alibaba.com,
- Zephyr Li <fritchleybohrer@gmail.com>
-Subject: [PATCH v2] target/riscv: preserve vl on element-zero fault
-Date: Mon, 27 Jul 2026 16:42:03 +0800
-Message-ID: <20260727084203.881580-1-fritchleybohrer@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260724030145.14778-1-fritchleybohrer@gmail.com>
-References: <20260724030145.14778-1-fritchleybohrer@gmail.com>
+ chao.liu.zevorn@gmail.com, sunilvl@ventanamicro.com, dave.jiang@intel.com,
+ alison.schofield@intel.com, mst@redhat.com, guoren@kernel.org,
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org, linux-cxl@vger.kernel.org
+Subject: Re: [PATCH v2 3/4] hw/riscv/virt,gpex: Provide 32-bit MMIO window
+ for CXL host bridges
+Message-ID: <20260727110615.3e523125@imammedo>
+In-Reply-To: <20260618093827.3507-4-cp0613@linux.alibaba.com>
+References: <20260618093827.3507-1-cp0613@linux.alibaba.com>
+ <20260618093827.3507-4-cp0613@linux.alibaba.com>
+X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:39::;
- envelope-from=fritchleybohrer@gmail.com; helo=mail-pj2-x00.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: efb1KCb_FZrfywPFWXMvA71YRdR3uVWSjt1e4tmAZu0_1785143181
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=imammedo@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -36
+X-Spam_score: -3.7
+X-Spam_bar: ---
+X-Spam_report: (-3.7 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-1.58,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -102,177 +118,221 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-A unit-stride fault-only-first load must leave vl unchanged when element
-zero raises a synchronous exception. Keep the shortened value in a local
-bound until all loads complete, and only then update the architectural vl.
+On Thu, 18 Jun 2026 17:38:25 +0800
+Chen Pei <cp0613@linux.alibaba.com> wrote:
 
-Add a bare-metal RVV regression test which faults vle32ff.v on element zero
-and checks that vl remains unchanged in the trap handler.
+> CXL component register BAR (BAR0 on CXL Root Port and Type3 device)
+> and the CXL device register BAR (BAR2 on Type3 device) are declared
+> as 64-bit non-prefetchable memory.  Per the PCI-to-PCI Bridge
+> Architecture Specification Rev 1.2 (PCI-SIG, 2003):
+>=20
+>   - =C2=A73.2.5.8 (Memory Base/Limit): the non-prefetchable window covers
+>     only 32-bit addresses (AD[31:20]); the Type 1 header defines no
+>     upper-32-bit extension for it.
+>   - =C2=A73.2.5.9 (Prefetchable Memory Base/Limit): the bottom 4 bits
+>     encode 64-bit support (01h), but this applies exclusively to the
+>     *prefetchable* window.
+>   - =C2=A73.2.5.10 (Prefetchable Base/Limit Upper 32 Bits): optional
+>     registers for AD[63:32] of the prefetchable range only.
+>=20
+> The architecture therefore allows a 64-bit window only when it is also
+> prefetchable; there is no 64-bit non-prefetchable form.  PCIe inherits
+> this Type 1 header layout unchanged.  Linux thus places 64-bit
+> non-prefetchable BARs in the 32-bit non-prefetchable bridge window,
+> which requires the bridge to own enough address space below 4 GiB.
+>=20
+> On RISC-V virt the 32-bit PCIe MMIO range (1 GiB at 0x40000000) is
+> currently consumed entirely by PCI0, so CXL host bridges (ACPI0016)
+> have no non-prefetchable window and Linux fails to assign these BARs.
+> Marking the BARs prefetchable would work around it, but the CXL
+> component registers have read/write side effects and are not
+> prefetchable per the PCIe specification.
+>=20
+> Reserve the top 256 MiB of the 32-bit MMIO window exclusively for
+> CXL host bridges:
+> - Shrink PCI0's mmio32 window by 256 MiB in virt.c so that UEFI's
+>   PciHostBridgeDxe and the ACPI _CRS for PCI0 never claim that range
+> - Store the reserved range in a new gpex_cfg.cxl_mmio32 field
+> - In gpex-acpi.c, emit the cxl_mmio32 range as the Memory resource
+>   in the CXL host bridge _CRS instead of re-using build_crs() (which
+>   returns an empty set when UEFI has not assigned resources yet)
+> - Reduce the FDT 'ranges' for PCI0 by the same 256 MiB so that UEFI
+>   firmware driven by device-tree also respects the reservation
+>=20
+> Signed-off-by: Chen Pei <cp0613@linux.alibaba.com>
+> ---
+>  hw/pci-host/gpex-acpi.c    | 36 +++++++++++++++++++++--
+>  hw/riscv/virt.c            | 58 +++++++++++++++++++++++++++++++-------
+>  include/hw/pci-host/gpex.h |  1 +
+>  3 files changed, 83 insertions(+), 12 deletions(-)
+>=20
+> diff --git a/hw/pci-host/gpex-acpi.c b/hw/pci-host/gpex-acpi.c
+> index d9820f9b41..d8b943b665 100644
+> --- a/hw/pci-host/gpex-acpi.c
+> +++ b/hw/pci-host/gpex-acpi.c
+> @@ -158,9 +158,41 @@ void acpi_dsdt_add_gpex(Aml *scope, struct GPEXConfi=
+g *cfg)
+>               * Resources defined for PXBs are composed of the following =
+parts:
+>               * 1. The resources the pci-bridge/pcie-root-port need.
+>               * 2. The resources the devices behind pxb need.
+> +             *
+> +             * For CXL host bridges on platforms where UEFI (driven by
+> +             * FDT 'ranges') does not assign PCI resources for the CXL
+> +             * root bridge before ACPI table construction, build_crs()
 
-Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/3544
-Reviewed-by: Chao Liu <chao.liu@processmission.com>
-Signed-off-by: Zephyr Li <fritchleybohrer@gmail.com>
----
-Changes in v2:
-- Fix commit message formatting.
-- Enable vector state in the bare-metal test.
-- Use an aligned unmapped address and compare against the vsetvli result.
-- Express the mstatus.VS setting as a field shift.
+I kind of dislike (basically riscv specific hack) in generic code.
+well, correct way to tackle this is
+ 1: fix UEFI to perform required initialization.
 
- target/riscv/tcg/vector_helper.c          | 23 +++++----
- tests/tcg/riscv64/Makefile.softmmu-target |  5 ++
- tests/tcg/riscv64/test-vle32ff.S          | 57 +++++++++++++++++++++++
- 3 files changed, 76 insertions(+), 9 deletions(-)
- create mode 100644 tests/tcg/riscv64/test-vle32ff.S
+> +             * would return an empty resource set.  When the platform
+> +             * has reserved a dedicated MMIO window for CXL host bridges
+> +             * (cfg->cxl_mmio32), emit that window as a static _CRS
+> +             * instead.  The platform is responsible for shrinking PCI0'=
+s
+> +             * mmio32 window so the two do not overlap.
 
-diff --git a/target/riscv/tcg/vector_helper.c b/target/riscv/tcg/vector_helper.c
-index e321ca2616..5a310822b7 100644
---- a/target/riscv/tcg/vector_helper.c
-+++ b/target/riscv/tcg/vector_helper.c
-@@ -686,7 +686,7 @@ vext_ldff(void *vd, void *v0, target_ulong base, CPURISCVState *env,
-           uint32_t desc, vext_ldst_elem_fn_tlb *ldst_tlb,
-           vext_ldst_elem_fn_host *ldst_host, uint32_t log2_esz, uintptr_t ra)
- {
--    uint32_t i, k, vl = 0;
-+    uint32_t i, k, vl = 0, load_vl;
-     uint32_t nf = vext_nf(desc);
-     uint32_t vm = vext_vm(desc);
-     uint32_t max_elems = vext_max_elems(desc, log2_esz);
-@@ -752,22 +752,24 @@ vext_ldff(void *vd, void *v0, target_ulong base, CPURISCVState *env,
-         }
-     }
- ProbeSuccess:
--    /* load bytes from guest memory */
--    if (vl != 0) {
--        env->vl = vl;
--    }
-+    /*
-+     * Keep a shortened vl local until all loads complete. In particular,
-+     * an exception from element zero must leave the architectural vl alone.
-+     */
-+    load_vl = vl ? vl : env->vl;
- 
--    if (env->vstart < env->vl) {
-+    if (env->vstart < load_vl) {
-         if (vm) {
-             /* Load/store elements in the first page */
-             if (likely(elems)) {
-+                elems = MIN(elems, load_vl - env->vstart);
-                 vext_page_ldst_us(env, vd, addr, elems, nf, max_elems,
-                                   log2_esz, true, mmu_index, ldst_tlb,
-                                   ldst_host, ra);
-             }
- 
-             /* Load/store elements in the second page */
--            if (unlikely(env->vstart < env->vl)) {
-+            if (unlikely(env->vstart < load_vl)) {
-                 /* Cross page element */
-                 if (unlikely(page_split % msize)) {
-                     for (k = 0; k < nf; k++) {
-@@ -780,7 +782,7 @@ ProbeSuccess:
- 
-                 addr = base + ((env->vstart * nf) << log2_esz);
-                 /* Get number of elements of second page */
--                elems = env->vl - env->vstart;
-+                elems = load_vl - env->vstart;
- 
-                 /* Load/store elements in the second page */
-                 vext_page_ldst_us(env, vd, addr, elems, nf, max_elems,
-@@ -788,7 +790,7 @@ ProbeSuccess:
-                                   ldst_host, ra);
-             }
-         } else {
--            for (i = env->vstart; i < env->vl; i++) {
-+            for (i = env->vstart; i < load_vl; i++) {
-                 k = 0;
-                 while (k < nf) {
-                     if (!vext_elem_mask(v0, i)) {
-@@ -806,6 +808,9 @@ ProbeSuccess:
-             }
-         }
-     }
-+    if (vl != 0) {
-+        env->vl = vl;
-+    }
-     env->vstart = 0;
- 
-     vext_set_tail_elems_1s(env->vl, vd, desc, nf, esz, max_elems);
-diff --git a/tests/tcg/riscv64/Makefile.softmmu-target b/tests/tcg/riscv64/Makefile.softmmu-target
-index 82be8a2c91..7ae225bd73 100644
---- a/tests/tcg/riscv64/Makefile.softmmu-target
-+++ b/tests/tcg/riscv64/Makefile.softmmu-target
-@@ -41,5 +41,10 @@ comma:= ,
- run-test-crc32: test-crc32
- 	$(call run-test, $<, $(QEMU) -cpu rv64$(comma)xlrbr=true $(QEMU_OPTS)$<)
- 
-+EXTRA_RUNS += run-test-vle32ff
-+run-test-vle32ff: test-vle32ff
-+	$(call run-test, $<, $(QEMU) -cpu rv64$(comma)v=true $(QEMU_OPTS)$<)
-+test-vle32ff: CFLAGS += -march=rv64gcv
-+
- # We don't currently support the multiarch system tests
- undefine MULTIARCH_TESTS
-diff --git a/tests/tcg/riscv64/test-vle32ff.S b/tests/tcg/riscv64/test-vle32ff.S
-new file mode 100644
-index 0000000000..f510960c05
---- /dev/null
-+++ b/tests/tcg/riscv64/test-vle32ff.S
-@@ -0,0 +1,57 @@
-+/*
-+ * Verify that a fault-only-first load keeps vl unchanged when element zero
-+ * raises a synchronous exception.
-+ *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ */
-+
-+	.option norvc
-+
-+	.text
-+	.globl _start
-+_start:
-+	lla	t0, trap
-+	csrw	mtvec, t0
-+
-+	li	t0, (1 << 9)	/* Set mstatus.VS to Initial. */
-+	csrs	mstatus, t0
-+	li	t1, 4
-+	vsetvli	t2, t1, e32, m1, ta, ma
-+	li	t0, 0x18000000	/* Unmapped gap in the virt memory map. */
-+	vle32ff.v	v1, (t0)
-+
-+	/* Element zero did not trap. */
-+	li	a0, 1
-+	j	_exit
-+
-+trap:
-+	csrr	t0, mcause
-+	li	t1, 5		/* Load access fault. */
-+	bne	t0, t1, trap_fail
-+
-+	csrr	t0, vl
-+	bne	t0, t2, trap_fail
-+
-+	li	a0, 0
-+	j	_exit
-+
-+trap_fail:
-+	li	a0, 1
-+
-+_exit:
-+	lla	a1, semiargs
-+	li	t0, 0x20026	/* ADP_Stopped_ApplicationExit */
-+	sd	t0, 0(a1)
-+	sd	a0, 8(a1)
-+	li	a0, 0x20	/* TARGET_SYS_EXIT_EXTENDED */
-+
-+	.balign	16
-+	slli	zero, zero, 0x1f
-+	ebreak
-+	srai	zero, zero, 0x7
-+	j	.
-+
-+	.data
-+	.balign	8
-+semiargs:
-+	.space	16
+if you have to put a hack into QEMU, make it work with current build_crs()
+and localize 'proper simulated initialization' in riscv codebase
+(i.e. do not spread it to common codebase). But before doing it see (#1 not=
+e).
+
+>               */
+> -            crs =3D build_crs(PCI_HOST_BRIDGE(BUS(bus)->parent), &crs_ra=
+nge_set,
+> -                            cfg->pio.base, 0, 0, 0);
+> +            if (is_cxl && cfg->cxl_mmio32.size) {
+> +                uint64_t cxl_base =3D cfg->cxl_mmio32.base;
+> +                uint64_t cxl_size =3D cfg->cxl_mmio32.size;
+> +
+> +                crs =3D aml_resource_template();
+> +
+> +                /* 32-bit MMIO range for CXL devices */
+> +                aml_append(crs,
+> +                    aml_dword_memory(AML_POS_DECODE, AML_MIN_FIXED,
+> +                                     AML_MAX_FIXED, AML_NON_CACHEABLE,
+> +                                     AML_READ_WRITE, 0,
+> +                                     cxl_base,
+> +                                     cxl_base + cxl_size - 1,
+> +                                     0, cxl_size));
+> +
+> +                /* Bus number range */
+> +                aml_append(crs,
+> +                    aml_word_bus_number(AML_MIN_FIXED, AML_MAX_FIXED,
+> +                                       AML_POS_DECODE, 0,
+> +                                       bus_num, bus_num + 15,
+> +                                       0, 16));
+> +            } else {
+> +                crs =3D build_crs(PCI_HOST_BRIDGE(BUS(bus)->parent),
+> +                                &crs_range_set, cfg->pio.base, 0, 0, 0);
+> +            }
+>              aml_append(dev, aml_name_decl("_CRS", crs));
+> =20
+>              if (is_cxl) {
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index 84b91b4322..9c1a001553 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -113,6 +113,9 @@ static const MemMapEntry virt_memmap[] =3D {
+>  /* PCIe high mmio for RV64, size is fixed but base depends on top of RAM=
+ */
+>  #define VIRT64_HIGH_PCIE_MMIO_SIZE  (16 * GiB)
+> =20
+> +/* 32-bit MMIO range carved out of VIRT_PCIE_MMIO for CXL host bridges *=
+/
+> +#define VIRT_CXL_MMIO32_SIZE        (256 * MiB)
+> +
+>  static MemMapEntry virt_high_pcie_memmap;
+> =20
+>  #define VIRT_FLASH_SECTOR_SIZE (256 * KiB)
+> @@ -890,15 +893,28 @@ static void create_fdt_pcie(RISCVVirtState *s,
+>      }
+>      qemu_fdt_setprop_sized_cells(ms->fdt, name, "reg", 2,
+>          s->memmap[VIRT_PCIE_ECAM].base, 2, s->memmap[VIRT_PCIE_ECAM].siz=
+e);
+> -    qemu_fdt_setprop_sized_cells(ms->fdt, name, "ranges",
+> -        1, FDT_PCI_RANGE_IOPORT, 2, 0,
+> -        2, s->memmap[VIRT_PCIE_PIO].base, 2, s->memmap[VIRT_PCIE_PIO].si=
+ze,
+> -        1, FDT_PCI_RANGE_MMIO,
+> -        2, s->memmap[VIRT_PCIE_MMIO].base,
+> -        2, s->memmap[VIRT_PCIE_MMIO].base, 2, s->memmap[VIRT_PCIE_MMIO].=
+size,
+> -        1, FDT_PCI_RANGE_MMIO_64BIT,
+> -        2, virt_high_pcie_memmap.base,
+> -        2, virt_high_pcie_memmap.base, 2, virt_high_pcie_memmap.size);
+> +    {
+> +        /*
+> +         * When CXL is enabled, reserve the last 256 MiB of the 32-bit
+> +         * MMIO window for CXL host bridges and exclude it from the main
+> +         * PCIe host bridge's FDT 'ranges' so UEFI's PciHostBridgeDxe
+> +         * does not allocate that range to PCI0.  The CXL host bridge
+> +         * _CRS declares this range independently.
+> +         */
+> +        hwaddr mmio32_size =3D s->memmap[VIRT_PCIE_MMIO].size;
+> +        if (s->cxl_devices_state.is_enabled) {
+> +            mmio32_size -=3D VIRT_CXL_MMIO32_SIZE;
+> +        }
+> +        qemu_fdt_setprop_sized_cells(ms->fdt, name, "ranges",
+> +            1, FDT_PCI_RANGE_IOPORT, 2, 0,
+> +            2, s->memmap[VIRT_PCIE_PIO].base, 2, s->memmap[VIRT_PCIE_PIO=
+].size,
+> +            1, FDT_PCI_RANGE_MMIO,
+> +            2, s->memmap[VIRT_PCIE_MMIO].base,
+> +            2, s->memmap[VIRT_PCIE_MMIO].base, 2, mmio32_size,
+> +            1, FDT_PCI_RANGE_MMIO_64BIT,
+> +            2, virt_high_pcie_memmap.base,
+> +            2, virt_high_pcie_memmap.base, 2, virt_high_pcie_memmap.size=
+);
+> +    }
+> =20
+>      if (virt_is_iommu_sys_enabled(s)) {
+>          qemu_fdt_setprop_cells(ms->fdt, name, "iommu-map",
+> @@ -1728,7 +1744,29 @@ static void virt_machine_init(MachineState *machin=
+e)
+>              qdev_get_gpio_in(virtio_irqchip, VIRTIO_IRQ + i));
+>      }
+> =20
+> -    gpex_pcie_init(system_memory, pcie_irqchip, s);
+> +    DeviceState *pcie_dev =3D gpex_pcie_init(system_memory, pcie_irqchip=
+, s);
+> +
+> +    /*
+> +     * If CXL is enabled, reserve the last 256 MiB of the 32-bit MMIO
+> +     * window for CXL host bridges so the bridge non-prefetchable window
+> +     * can hold CXL device BARs (component registers and similar 64-bit
+> +     * non-prefetchable BARs that need a < 4 GiB address).
+> +     *
+> +     * - Shrink PCI0's mmio32 advertised in the ACPI _CRS by the same
+> +     *   256 MiB so the two ranges do not overlap (the FDT 'ranges'
+> +     *   shrink happens in create_fdt_pcie()).
+> +     * - Store the reserved range in cxl_mmio32 so gpex-acpi.c can emit
+> +     *   a correct _CRS for the CXL host bridge (ACPI0016).
+> +     */
+> +    if (s->cxl_devices_state.is_enabled) {
+> +        GPEXHost *gpex =3D GPEX_HOST(pcie_dev);
+> +        gpex->gpex_cfg.cxl_mmio32.size =3D VIRT_CXL_MMIO32_SIZE;
+> +        gpex->gpex_cfg.cxl_mmio32.base =3D
+> +            s->memmap[VIRT_PCIE_MMIO].base +
+> +            s->memmap[VIRT_PCIE_MMIO].size - VIRT_CXL_MMIO32_SIZE;
+> +        /* Shrink PCI0's advertised 32-bit MMIO window to exclude CXL ra=
+nge */
+> +        gpex->gpex_cfg.mmio32.size -=3D VIRT_CXL_MMIO32_SIZE;
+> +    }
+> =20
+>      create_platform_bus(s, mmio_irqchip);
+> =20
+> diff --git a/include/hw/pci-host/gpex.h b/include/hw/pci-host/gpex.h
+> index 1da9c85bce..d38fbbacd6 100644
+> --- a/include/hw/pci-host/gpex.h
+> +++ b/include/hw/pci-host/gpex.h
+> @@ -43,6 +43,7 @@ struct GPEXConfig {
+>      MemMapEntry mmio32;
+>      MemMapEntry mmio64;
+>      MemMapEntry pio;
+> +    MemMapEntry cxl_mmio32;
+>      int         irq;
+>      PCIBus      *bus;
+>      bool        pci_native_hotplug;
+
 
