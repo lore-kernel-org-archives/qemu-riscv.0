@@ -4,30 +4,30 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17D0BC531C9
-	for <qemu-riscv@archiver.kernel.org>; Mon, 27 Jul 2026 16:02:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7A96C531D0
+	for <qemu-riscv@archiver.kernel.org>; Mon, 27 Jul 2026 16:03:47 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1woNma-0005sq-MB; Mon, 27 Jul 2026 12:02:24 -0400
+	id 1woNmc-00061Z-Mw; Mon, 27 Jul 2026 12:02:26 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dingtao0430@163.com>)
- id 1woNlf-0005Nd-Km; Mon, 27 Jul 2026 12:01:40 -0400
-Received: from m16.mail.163.com ([117.135.210.5])
+ id 1woNm7-0005Zs-5g; Mon, 27 Jul 2026 12:01:55 -0400
+Received: from m16.mail.163.com ([220.197.31.3])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dingtao0430@163.com>)
- id 1woNlY-0006pb-5U; Mon, 27 Jul 2026 12:01:23 -0400
+ id 1woNm3-0006su-M5; Mon, 27 Jul 2026 12:01:54 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
- s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=rk
- xilSbIb7k0r60CgyCr//gdT8F9V6YtUS+o+8zYRqM=; b=RnL5KNaGGpsJdgTIW4
- j5HymtSql8+7/2FLWqwOeUoCufZFb6OxR8igod0E0byt4fW02/JajsKQgxfaAaa6
- vUYYYaGN37y9DZkdnkSoJfQSfCi3KdPDRbArfDqSMWe2Nxd8lvHUaO55wTFOku11
- 3rP6NAu4Eztf6KY7yYtuAWB+8=
+ s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=Sm
+ 1N8ymI42HBWVI0bgf0KQkavBARsHa2ANmH89bOEvM=; b=hZh9w78HWC3Wj/BQzU
+ GAv0WnFDqFRUC70rKQjocg1bQP8oGndAaXLbGLSfqJx5K47TaOGX4HQ/QNpvQY0q
+ MMxB8RgpnfnWA5kjwbK5m0zYvUNNuegiiZN2y/sC/PhMWMJzswE/JdX9DLaafeFL
+ GL7faEW3TvzAsiFxsfIXYUxYc=
 Received: from dt-VM.localdomain (unknown [])
  by gzga-smtp-mtada-g0-0 (Coremail) with SMTP id
- _____wC3HpHQf2dqJpF_Kw--.27173S7; 
- Mon, 27 Jul 2026 23:57:07 +0800 (CST)
+ _____wC3HpHQf2dqJpF_Kw--.27173S8; 
+ Mon, 27 Jul 2026 23:57:08 +0800 (CST)
 From: Tao Ding <dingtao0430@163.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, pbonzini@redhat.com, palmer@dabbelt.com,
@@ -36,22 +36,22 @@ Cc: qemu-riscv@nongnu.org, pbonzini@redhat.com, palmer@dabbelt.com,
  chao.liu@processmission.com, farosas@suse.de, lvivier@redhat.com,
  pierrick.bouvier@oss.qualcomm.com, caojunze424@gmail.com,
  Tao Ding <dingtao0430@163.com>
-Subject: [PATCH v2 5/7] hw/riscv: k230: add decomp gzip in K230 board
-Date: Mon, 27 Jul 2026 23:57:00 +0800
-Message-ID: <20260727155702.36484-6-dingtao0430@163.com>
+Subject: [PATCH v2 6/7] tests/qtest: add test for K230 decomp gzip
+Date: Mon, 27 Jul 2026 23:57:01 +0800
+Message-ID: <20260727155702.36484-7-dingtao0430@163.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260727155702.36484-1-dingtao0430@163.com>
 References: <20260727155702.36484-1-dingtao0430@163.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: _____wC3HpHQf2dqJpF_Kw--.27173S7
-X-Coremail-Antispam: 1Uf129KBjvJXoWxCFWfAr15CrWUXFyrWr4kJFb_yoW5uFW3pF
- sxWr4qyrWxWFyfA3Wftrs7Gryjg3ykKF9xJw1Sv34rKrW7ArZ8tFsIya1Svr18JFWDAa45
- uFy0ya1S9w17XaUanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x0pELvtLUUUUU=
+X-CM-TRANSID: _____wC3HpHQf2dqJpF_Kw--.27173S8
+X-Coremail-Antispam: 1Uf129KBjvJXoWxKry5Zr13Zw15ZFy3Zw4xZwb_yoWDJr43p3
+ 45Gw1Yvr10qF1ftanrXF1vkF1rWrZ3G348C3yjgry09r4kJryktF13t3y8Xwn5GrWkZF4F
+ 93s5tFn09F1xXaDanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x0pRyGQhUUUUU=
 X-Originating-IP: [119.4.23.14]
-X-CM-SenderInfo: pglqw3tdrqkjqq6rljoofrz/xtbC-ROIxmpnf9MLzQAA3H
-Received-SPF: pass client-ip=117.135.210.5; envelope-from=dingtao0430@163.com;
+X-CM-SenderInfo: pglqw3tdrqkjqq6rljoofrz/xtbC4RSJx2pnf9Q2QQAA3q
+Received-SPF: pass client-ip=220.197.31.3; envelope-from=dingtao0430@163.com;
  helo=m16.mail.163.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
@@ -77,93 +77,258 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This commit replaces the unimplemented part of Decomp_gzip in K230.
-Connect to the handshake interface of GSDMA.
+This commit adds test cases for Decomp_gzip.
+A compressed data segment has been pre-set, configure GSDMA and decomp_gzip.
+Compare the decompressed data with the original data
+
+Update MAINTAINERS for this test.
+
+Run this qtest:
+    $ mkdir build && cd build && ../configure --target-list="riscv64-softmmu"
+    $ QTEST_QEMU_BINARY=./qemu-system-riscv64   tests/qtest/k230-decomp-gzip-test
 
 Signed-off-by: Tao Ding <dingtao0430@163.com>
-Reviewed-by: Junze Cao <caojunze424@gmail.com>
 ---
- hw/riscv/Kconfig        |  1 +
- hw/riscv/k230.c         | 23 +++++++++++++++++++----
- include/hw/riscv/k230.h |  2 ++
- 3 files changed, 22 insertions(+), 4 deletions(-)
+In patchv1, the reviewer pointed out issues with the data. 
+This is a bug and decomp_gzip only supports dynamic Huffman format.
+In this commit, reused the dynamic Huffman method to generate compressed data.
 
-diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-index d28ac06043..d06ac26648 100644
---- a/hw/riscv/Kconfig
-+++ b/hw/riscv/Kconfig
-@@ -163,3 +163,4 @@ config K230
-     select UNIMP
-     select K230_WDT
-     select K230_GSDMA
-+    select K230_DECOMP_GZIP
-diff --git a/hw/riscv/k230.c b/hw/riscv/k230.c
-index c80bd65694..7fd1ec4c25 100644
---- a/hw/riscv/k230.c
-+++ b/hw/riscv/k230.c
-@@ -111,6 +111,8 @@ static void k230_soc_init(Object *obj)
-     object_initialize_child(obj, "k230-wdt0", &s->wdt[0], TYPE_K230_WDT);
-     object_initialize_child(obj, "k230-wdt1", &s->wdt[1], TYPE_K230_WDT);
-     object_initialize_child(obj, "k230-gsdma", &s->gsdma, TYPE_K230_GSDMA);
-+    object_initialize_child(obj, "k230-decomp-gzip", &s->decomp_gzip,
-+                            TYPE_K230_DECOMP_GZIP);
+ MAINTAINERS                         |   1 +
+ tests/qtest/k230-decomp-gzip-test.c | 200 ++++++++++++++++++++++++++++
+ tests/qtest/meson.build             |   2 +-
+ 3 files changed, 202 insertions(+), 1 deletion(-)
+ create mode 100644 tests/qtest/k230-decomp-gzip-test.c
+
+diff --git a/MAINTAINERS b/MAINTAINERS
+index c260199142..dcfcc51144 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -1838,6 +1838,7 @@ F: include/hw/misc/k230_decomp_gzip.h
+ F: tests/functional/riscv64/test_k230.py
+ F: tests/qtest/k230-wdt-test.c
+ F: tests/qtest/k230-gsdma-test.c
++F: tests/qtest/k230-decomp-gzip-test.c
  
-     qdev_prop_set_uint32(DEVICE(cpu0), "hartid-base", 0);
-     qdev_prop_set_string(DEVICE(cpu0), "cpu-type", TYPE_RISCV_CPU_THEAD_C908);
-@@ -215,6 +217,23 @@ static void k230_soc_realize(DeviceState *dev, Error **errp)
-     sysbus_connect_irq(SYS_BUS_DEVICE(&s->gsdma), 0,
-                        qdev_get_gpio_in(DEVICE(s->c908_plic), K230_GSDMA_IRQ));
- 
-+    /* Decomp gzip */
-+    qdev_prop_set_uint64(DEVICE(&s->decomp_gzip), "sram-base",
-+                         memmap[K230_DEV_SRAM].base);
-+    if (!sysbus_realize(SYS_BUS_DEVICE(&s->decomp_gzip), errp)) {
-+        return;
-+    }
-+    sysbus_mmio_map(SYS_BUS_DEVICE(&s->decomp_gzip), 0,
-+                    memmap[K230_DEV_DECOMP_GZIP].base);
-+    for (int i = 0; i < K230_DECOMP_GZIP_NUM_GPIOS_OUT; i++) {
-+        qdev_connect_gpio_out(DEVICE(&s->decomp_gzip), i,
-+                              qdev_get_gpio_in(DEVICE(&s->gsdma), i));
-+    }
-+    for (int i = 0; i < K230_DECOMP_GZIP_NUM_GPIOS_IN; i++) {
-+        qdev_connect_gpio_out(DEVICE(&s->gsdma), i,
-+                              qdev_get_gpio_in(DEVICE(&s->decomp_gzip), i));
-+    }
+ RX Machines
+ -----------
+diff --git a/tests/qtest/k230-decomp-gzip-test.c b/tests/qtest/k230-decomp-gzip-test.c
+new file mode 100644
+index 0000000000..e80113fd28
+--- /dev/null
++++ b/tests/qtest/k230-decomp-gzip-test.c
+@@ -0,0 +1,200 @@
++/*
++ * QTest testcase for K230 GZIP decompression engine
++ *
++ * Copyright (c) 2026 Tao Ding <dingtao0430@163.com>
++ *
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ */
 +
-     /* unimplemented devices */
-     create_unimplemented_device("kpu.l2-cache",
-                                 memmap[K230_DEV_KPU_L2_CACHE].base,
-@@ -233,10 +252,6 @@ static void k230_soc_realize(DeviceState *dev, Error **errp)
-     create_unimplemented_device("dma", memmap[K230_DEV_DMA].base,
-                                 memmap[K230_DEV_DMA].size);
- 
--    create_unimplemented_device("decomp-gzip",
--                                memmap[K230_DEV_DECOMP_GZIP].base,
--                                memmap[K230_DEV_DECOMP_GZIP].size);
--
-     create_unimplemented_device("2d-engine.non-ai",
-                                 memmap[K230_DEV_NON_AI_2D].base,
-                                 memmap[K230_DEV_NON_AI_2D].size);
-diff --git a/include/hw/riscv/k230.h b/include/hw/riscv/k230.h
-index 156a386edc..a12d36965a 100644
---- a/include/hw/riscv/k230.h
-+++ b/include/hw/riscv/k230.h
-@@ -19,6 +19,7 @@
- #include "hw/riscv/riscv_hart.h"
- #include "hw/watchdog/k230_wdt.h"
- #include "hw/dma/k230_gsdma.h"
++#include "qemu/osdep.h"
++#include "qemu/bitops.h"
++#include "libqtest.h"
++#include "hw/dma/k230_gsdma.h"
 +#include "hw/misc/k230_decomp_gzip.h"
++
++#define K230_DECOMP_GZIP_BASE 0x80808000
++#define K230_GSDMA_BASE       0x80800000
++#define K230_SRAM_BASE        0x80200000
++#define TEST_LLT_ADDR0        0x01000000
++#define TEST_LLT_ADDR1        0x01000040
++#define TEST_SRC_ADDR         0x01100000
++#define TEST_DST_ADDR         0x01200000
++
++#define TEST_PAYLOAD_LEN          (sizeof(test_payload) - 1)
++
++static inline uint64_t gzip_reg(hwaddr off)
++{
++    return K230_DECOMP_GZIP_BASE + off;
++}
++
++static inline uint64_t gsdma_reg(hwaddr off)
++{
++    return K230_GSDMA_BASE + off;
++}
++
++static inline uint64_t gsdma_ch_reg(unsigned int ch, hwaddr off)
++{
++    return K230_GSDMA_BASE + K230_GSDMA_CH_BASE +
++           ch * K230_GSDMA_CH_STRIDE + off;
++}
++
++static inline hwaddr k230_sram_addr(hwaddr off)
++{
++    return K230_SRAM_BASE + off;
++}
++
++static inline hwaddr k230_sram_input_addr(unsigned int slot)
++{
++    return k230_sram_addr(K230_DECOMP_GZIP_SRAM_IN_BASE +
++                          slot * K230_DECOMP_GZIP_BLOCK_SIZE);
++}
++
++/*
++ * test_gzip_data was generated by compressing test_payload in gzip format
++ * using Dynamic Huffman coding. The compression method byte in the gzip
++ * header was then changed from the standard value 0x08 to the K230-specific
++ * value 0x09.
++ */
++static const uint8_t test_gzip_data[] = {
++    0x1f, 0x8b, 0x09, 0x00, 0x00, 0x00, 0x00, 0x00,
++    0x04, 0x03, 0x05, 0xc1, 0xb1, 0x0d, 0x00, 0x20,
++    0x08, 0x04, 0xc0, 0x9e, 0x29, 0x7e, 0x04, 0x23,
++    0x63, 0x38, 0x85, 0x05, 0x21, 0x14, 0x10, 0x23,
++    0x5f, 0x39, 0xbd, 0x77, 0x6b, 0xea, 0x80, 0xbf,
++    0x38, 0x68, 0x5e, 0xdb, 0x19, 0xe5, 0xa0, 0x35,
++    0x65, 0x4d, 0x1d, 0xf0, 0x17, 0x07, 0xcd, 0x6b,
++    0x3b, 0xa3, 0x1c, 0xb4, 0xa6, 0xac, 0xa9, 0x03,
++    0xfe, 0xe2, 0xa0, 0x79, 0x6d, 0x67, 0x94, 0x83,
++    0xd6, 0x94, 0x35, 0x75, 0xc0, 0x5f, 0x1c, 0x34,
++    0xaf, 0xed, 0x8c, 0x72, 0xd0, 0x9a, 0xb2, 0xa6,
++    0x0e, 0xf8, 0x8b, 0x83, 0xe6, 0xb5, 0x9d, 0x51,
++    0x0e, 0x5a, 0x53, 0xd6, 0xd4, 0x01, 0x7f, 0x71,
++    0xd0, 0xbc, 0xb6, 0x33, 0xca, 0x41, 0x6b, 0xca,
++    0x9a, 0x3a, 0xe0, 0x2f, 0x0e, 0x9a, 0xd7, 0x76,
++    0x46, 0x39, 0x68, 0x4d, 0x59, 0x53, 0x07, 0xfc,
++    0xc5, 0x41, 0xf3, 0xda, 0xce, 0x28, 0x07, 0xad,
++    0x29, 0x1f, 0xdb, 0x9d, 0xbc, 0xdd, 0xc8, 0x00,
++    0x00, 0x00,
++};
++
++static const uint8_t test_payload[] =
++    "K230 gzip streaming test\n"
++    "K230 gzip streaming test\n"
++    "K230 gzip streaming test\n"
++    "K230 gzip streaming test\n"
++    "K230 gzip streaming test\n"
++    "K230 gzip streaming test\n"
++    "K230 gzip streaming test\n"
++    "K230 gzip streaming test\n";
++
++static void write_sdma_llt_node(QTestState *qts, hwaddr addr, uint32_t src,
++                                uint32_t dst, uint32_t len, uint32_t next)
++{
++    qtest_writel(qts, addr + offsetof(K230GSDMALLT, cfg), 0);
++    qtest_writel(qts, addr + offsetof(K230GSDMALLT, src_addr), src);
++    qtest_writel(qts, addr + offsetof(K230GSDMALLT, line_size), len);
++    qtest_writel(qts, addr + offsetof(K230GSDMALLT, line_cfg), 0x1);
++    qtest_writel(qts, addr + offsetof(K230GSDMALLT, dst_addr), dst);
++    qtest_writel(qts, addr + offsetof(K230GSDMALLT, next_llt_addr), next);
++}
++
++static void test_reset_and_rw(void)
++{
++    QTestState *qts = qtest_init("-machine k230");
++
++    g_assert_cmphex(qtest_readl(qts, gzip_reg(K230_DECOMP_GZIP_DECOMP_START)),
++                    ==, 0);
++    g_assert_cmphex(qtest_readl(qts, gzip_reg(K230_DECOMP_GZIP_GZIP_SRC_SIZE)),
++                    ==, 0);
++    g_assert_cmphex(qtest_readl(qts, gzip_reg(K230_DECOMP_GZIP_GZIP_OUT_SIZE)),
++                    ==, 0);
++    g_assert_cmphex(qtest_readl(qts, gzip_reg(K230_DECOMP_GZIP_DECOMP_STAT)),
++                    ==, 0);
++
++    qtest_writel(qts, gzip_reg(K230_DECOMP_GZIP_DECOMP_START),
++                 K230_DECOMP_GZIP_START);
++
++    qtest_writel(qts, gzip_reg(K230_DECOMP_GZIP_GZIP_SRC_SIZE), 0xffffffff);
++    g_assert_cmphex(qtest_readl(qts, gzip_reg(K230_DECOMP_GZIP_GZIP_SRC_SIZE)),
++                    ==, 0xffffffff);
++
++    qtest_writel(qts, gzip_reg(K230_DECOMP_GZIP_GZIP_OUT_SIZE), 0x12345678);
++    g_assert_cmphex(qtest_readl(qts, gzip_reg(K230_DECOMP_GZIP_GZIP_OUT_SIZE)),
++                    ==, 0x12345678);
++
++    qtest_quit(qts);
++}
++
++static void test_gsdma_handshake_flow(void)
++{
++    QTestState *qts = qtest_init("-machine k230");
++    uint32_t stat;
++    uint8_t output[TEST_PAYLOAD_LEN];
++
++    qtest_memwrite(qts, TEST_SRC_ADDR, test_gzip_data, sizeof(test_gzip_data));
++    write_sdma_llt_node(qts, TEST_LLT_ADDR0, TEST_SRC_ADDR,
++                        k230_sram_input_addr(0),
++                        sizeof(test_gzip_data), 0);
++    write_sdma_llt_node(qts, TEST_LLT_ADDR1,
++                        k230_sram_addr(K230_DECOMP_GZIP_SRAM_OUT_BASE),
++                        TEST_DST_ADDR, TEST_PAYLOAD_LEN, 0);
++
++    qtest_writel(qts, gsdma_reg(K230_GSDMA_DMA_CH_EN), BIT(0) | BIT(1));
++    qtest_writel(qts, gsdma_ch_reg(0, K230_GSDMA_CH_CFG),
++                 K230_GSDMA_CH0_CFG_DECOMP_CTRL_EN);
++    qtest_writel(qts, gsdma_ch_reg(1, K230_GSDMA_CH_CFG), 0);
++    qtest_writel(qts, gsdma_ch_reg(0, K230_GSDMA_CH_LLT_SADDR), TEST_LLT_ADDR0);
++    qtest_writel(qts, gsdma_ch_reg(1, K230_GSDMA_CH_LLT_SADDR), TEST_LLT_ADDR1);
++    qtest_writel(qts, gsdma_ch_reg(0, K230_GSDMA_CH_CTL), K230_GSDMA_CTL_START);
++    qtest_writel(qts, gsdma_ch_reg(1, K230_GSDMA_CH_CTL), K230_GSDMA_CTL_START);
++
++    g_assert_cmphex(qtest_readl(qts, gsdma_reg(K230_GSDMA_DMA_CH_EN)),
++                    ==, BIT(0) | BIT(1));
++    g_assert_cmphex(qtest_readl(qts, gsdma_ch_reg(0, K230_GSDMA_CH_CFG)) &
++                    K230_GSDMA_CH0_CFG_DECOMP_CTRL_EN,
++                    ==, K230_GSDMA_CH0_CFG_DECOMP_CTRL_EN);
++    g_assert_cmphex(qtest_readl(qts, gsdma_ch_reg(0, K230_GSDMA_CH_LLT_SADDR)),
++                    ==, TEST_LLT_ADDR0);
++    g_assert_cmphex(qtest_readl(qts, gsdma_ch_reg(1, K230_GSDMA_CH_LLT_SADDR)),
++                    ==, TEST_LLT_ADDR1);
++
++    qtest_writel(qts, gzip_reg(K230_DECOMP_GZIP_GZIP_SRC_SIZE),
++                 K230_DECOMP_GZIP_CTRL_EN | sizeof(test_gzip_data));
++    qtest_writel(qts, gzip_reg(K230_DECOMP_GZIP_GZIP_OUT_SIZE),
++                 TEST_PAYLOAD_LEN);
++    qtest_writel(qts, gzip_reg(K230_DECOMP_GZIP_DECOMP_START),
++                 K230_DECOMP_GZIP_START);
++
++    stat = qtest_readl(qts, gzip_reg(K230_DECOMP_GZIP_DECOMP_STAT));
++    g_assert_cmphex(stat & K230_DECOMP_GZIP_STAT_CRC_OK, ==,
++                    K230_DECOMP_GZIP_STAT_CRC_OK);
++
++    g_assert_cmphex(qtest_readl(qts,
++                                gsdma_ch_reg(0, K230_GSDMA_CH_CURRENT_LLT)),
++                    ==, TEST_LLT_ADDR0);
++    g_assert_cmphex(qtest_readl(qts,
++                                gsdma_ch_reg(1, K230_GSDMA_CH_CURRENT_LLT)),
++                    ==, TEST_LLT_ADDR1);
++
++    stat = qtest_readl(qts, gsdma_reg(K230_GSDMA_DMA_INT_STAT));
++    g_assert_cmphex(stat & K230_GSDMA_SDMA_DONE_INT(0), ==,
++                    K230_GSDMA_SDMA_DONE_INT(0));
++    g_assert_cmphex(stat & K230_GSDMA_SDMA_DONE_INT(1), ==,
++                    K230_GSDMA_SDMA_DONE_INT(1));
++
++    qtest_memread(qts, TEST_DST_ADDR, output, sizeof(output));
++    g_assert_cmpmem(output, sizeof(output), test_payload, TEST_PAYLOAD_LEN);
++
++    qtest_quit(qts);
++}
++
++int main(int argc, char **argv)
++{
++    g_test_init(&argc, &argv, NULL);
++
++    qtest_add_func("/k230-decomp-gzip/reset-and-rw", test_reset_and_rw);
++    qtest_add_func("/k230-decomp-gzip/gsdma-handshake-flow",
++                   test_gsdma_handshake_flow);
++
++    return g_test_run();
++}
+diff --git a/tests/qtest/meson.build b/tests/qtest/meson.build
+index 1b13a777c9..7da12421af 100644
+--- a/tests/qtest/meson.build
++++ b/tests/qtest/meson.build
+@@ -297,7 +297,7 @@ qtests_riscv64 = ['riscv-csr-test'] + \
+   (config_all_devices.has_key('CONFIG_IOMMU_TESTDEV') and
+    config_all_devices.has_key('CONFIG_RISCV_IOMMU') ?
+    ['iommu-riscv-test'] : []) + \
+-  (config_all_devices.has_key('CONFIG_K230') ? ['k230-wdt-test', 'k230-gsdma-test'] : [])
++  (config_all_devices.has_key('CONFIG_K230') ? ['k230-wdt-test', 'k230-gsdma-test', 'k230-decomp-gzip-test'] : [])
  
- #define C908_CPU_HARTID   (0)
- 
-@@ -35,6 +36,7 @@ typedef struct K230SoCState {
- 
-     K230WdtState wdt[2];
-     K230GSDMAState gsdma;
-+    K230DecompGzipState decomp_gzip;
-     MemoryRegion sram;
-     MemoryRegion bootrom;
+ qtests_hexagon = ['boot-serial-test']
  
 -- 
 2.43.0
