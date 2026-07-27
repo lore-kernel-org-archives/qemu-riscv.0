@@ -4,104 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97C4DC531F9
-	for <qemu-riscv@archiver.kernel.org>; Mon, 27 Jul 2026 02:28:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBF50C531F9
+	for <qemu-riscv@archiver.kernel.org>; Mon, 27 Jul 2026 02:29:12 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1woB52-0006k6-OW; Sun, 26 Jul 2026 22:28:36 -0400
+	id 1woB4w-0006eu-6b; Sun, 26 Jul 2026 22:28:30 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <flavien.solt97@gmail.com>)
- id 1woB4y-0006j1-6Q
- for qemu-riscv@nongnu.org; Sun, 26 Jul 2026 22:28:32 -0400
-Received: from mail-qv1-xf2b.google.com ([2607:f8b0:4864:20::f2b])
+ id 1woB4q-0006eK-Sp
+ for qemu-riscv@nongnu.org; Sun, 26 Jul 2026 22:28:24 -0400
+Received: from mail-qk1-x72b.google.com ([2607:f8b0:4864:20::72b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <flavien.solt97@gmail.com>)
- id 1woB4w-0001FE-En
- for qemu-riscv@nongnu.org; Sun, 26 Jul 2026 22:28:31 -0400
-Received: by mail-qv1-xf2b.google.com with SMTP id
- 6a1803df08f44-8f0d6853360so18334476d6.0
- for <qemu-riscv@nongnu.org>; Sun, 26 Jul 2026 19:28:30 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1785119309; cv=none;
+ id 1woB4p-0001EH-EE
+ for qemu-riscv@nongnu.org; Sun, 26 Jul 2026 22:28:24 -0400
+Received: by mail-qk1-x72b.google.com with SMTP id
+ af79cd13be357-92e57a753f9so192725985a.2
+ for <qemu-riscv@nongnu.org>; Sun, 26 Jul 2026 19:28:23 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1785119302; cv=none;
  d=google.com; s=arc-20260327;
- b=nPtQrew9EBRVO0gPHSo4fRlOvEKx5/oYnO/YCNZ+X7S4dH+hk46uX/LgTb6DRoaQqL
- 4tIfCLiHCRT7p6+YaaH0vIXBwnd/5qbsEslrKJ5ReYQ5vnLtWUS6c6789OK0Z+IQP65c
- oIstON5XbbhnfVDwPRGq5VTYRer9+r0Om9eU20yia0cHwKYxwYaznwHg9si5uSAur9yx
- m1xpcSYaO6yVvbetUky/fPVRfDOqVCAJ9WSo0pYq21SmzjqrF3Yh7b4rGOnwrf0/upzw
- b/iiuY47KCXwaUNIkbcQVZTciwLOr81NH++q8jKC8mARA4QH6c2E0TQQPXomnYS1YpDo
- vi9w==
+ b=Yd07+We7cugIQVaqlyBBjAhijUGf4V5OtjlC7xiv8NGk48R988gQVbb3sKeqjFTVZ/
+ +fJrVQ9yc8Ba/bEOYHpmPBJLuZKUv+vzGzLJ0s0+EcFwwE+VL9755agIZ/V2g8l0Dqf0
+ f/q5/1oxoRP1Ix0mUvCdikmlAdGA2tKnKzoPy/pEIiNj7KiuzPiEqM3Z294w7rcJychq
+ UneAuR4WVP3WzNIZA2HY79zWUsp3bNzfInIy4wR90TI+KNyge3Ds1TkiZ27BBR50z5Yh
+ y2KUkrqisc7uJ7+OssKquKa7w+HlN59pdyTb3e/EtStfIqbZaVNyv/OM5OuWsJc/KUYT
+ aO9Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:references:in-reply-to:from
  :mime-version:dkim-signature;
- bh=pCWjQx4w+GCh74OHw0vbTxUBJc1a3hAacXuGwjmTCTM=;
- fh=QaT6lRC5y6lD/gWdSAGuafbdbUY/EiCC08Uj3KsmyVY=;
- b=MHDk1P+WgoAHoEIOs6LdZGzfGMov1y9arbwDf4aCWsJ5eSIcz0WYjIcV6p0rWVqvE2
- /44cNOqafiaN7UdssMYShnZ8mgMYxyvfHw05kCLHjcJPVz/BgmByhM33DIboXtZbfFMr
- jw+hCzzz9lIaWLmA2xUK1rSJPH6y+z3eKM7Is2mmkWJ8CKQwUKmHpRto5hFtxXSRPsC8
- VcVFpce2Xg27nQ68gqesnPbzpakWA/Z0hOf70sI/2BxBNvjlsCb4Vj+lZnYDtl4F2oUu
- B7ZriO4a5KgIzlb45thMQNM9WD2ooUH+57mGVd8CUFiBMWOJW/soljVV0baVXLOfHzDm
- 4nqQ==; darn=nongnu.org
+ bh=YdjUz8yik0MeA92jNBhv3Nw6JCVgFI8IwVl9CAMpWCw=;
+ fh=uyabCLEm0uqzMNAsIYkyVrHZAOjrXY7bH/yG4RoUZKQ=;
+ b=XdhmhlftzVKlAwBBNlcG4X9LPTESrRdZAnl2ufNqxUVxOKLRQWzoTZNPtiQvkJRrd4
+ BgwF7wHRcsaqH65UEobNBPfFrNOba99MVy2i9gAHWJb5RbxBHsjTjfP6VHl4z4RdBAX7
+ Qb08AfrCcP/zyd5UhodgERJzqulcRoiRnZhps0Kn9dj3BAT7KUO1HYH02nSIL52iTrXB
+ h5eHvSCOejOdqb+5pd29hNhHpPCUkxLKbjAJaarwtvQP9QFf0wYs3QyaPZDPpKHk/tjt
+ CISM9hZb4fpm+qbOnJ6/GPw5C6XLspD9/MUE6qbF1V/8puxXtlp2pmuWisGDBdu21aRG
+ 7WUQ==; darn=nongnu.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1785119309; x=1785724109; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1785119302; x=1785724102; darn=nongnu.org;
  h=content-type:cc:to:subject:message-id:date:references:in-reply-to
  :from:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=pCWjQx4w+GCh74OHw0vbTxUBJc1a3hAacXuGwjmTCTM=;
- b=FkNItFfJuIbmDSNtomv+nnzK8RmNlkmOrWFYhzHPKBCi//TncF79fYNldmM/8hHg0j
- q+/OiGeJEUSvy81StCZfwoGWrwra1MDQGpVWoJIqllYe8eqs1WcaFvCYXtGuFmy19bJL
- NXzyz1m7/oWvUuJVTWefm3w1mEkHHjDzR1DkoXIAuBqEwAqqHWDDINfplMex+eWmGMuT
- tGj06n7YuHe7THw2S4ipBVhL9+C8uSm0pdY3oLQOucKuoeOih0zfT7K9OryfEPVimt0w
- M9tMxHKiLUubGomeKKwqEFkIUZdOx4VlsFlAQ/aSJEIie1qCQ5v0BFMO/I3D3cKQ10PH
- RX5Q==
+ :content-type; bh=YdjUz8yik0MeA92jNBhv3Nw6JCVgFI8IwVl9CAMpWCw=;
+ b=kR9dXconlDklXhfPRn99VrHn+37eZef/x80EeSIKFBiaxV9Rvb5EWC3vknUKIxoeot
+ Xx3KiKm+TwufsfAtKR72MYJvM7rgENuA+JvSFl405auxY1zoSjSUZ4MNXhc/xrIVL5Zy
+ UzR7h7aTDfe0GF6CEyYi+jJ3foXmtF/OUeVxfMF4y8VR50ZQQ15VqdTeVQqy/iGfjYSq
+ G4PCCzWCmHHDitTklc7iW7Jrs0vf6e91eGJulXfKTP2eYhocC8y3orSpTSriNNimFXgz
+ 6513aFvx1DkllU+MZVACg/xET5zfPLAMYty+6HAlIH6cEZ6OVXJhzRYgNaqbRRDsDOzQ
+ oYDA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785119309; x=1785724109;
+ d=1e100.net; s=20251104; t=1785119302; x=1785724102;
  h=content-type:cc:to:subject:message-id:date:references:in-reply-to
  :from:mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=pCWjQx4w+GCh74OHw0vbTxUBJc1a3hAacXuGwjmTCTM=;
- b=qKBr7RihYrUY3ogwv4twhlgsVbkUL4nlufjFHfgOOEjARcpqpn1bXDENyD9/8k8abf
- o3fH0D8hwBoSDgrWmzo19C8Uy4eap0AhniMo2S+txcw8APHaoho/0FsY4PJXBYcI2/vY
- g9YkrDDZqNujbWVV3lN45yEz1xOZ3Ty/V8OORVzN+P3pKemO9fI1YW55Wm/OGyZMXoef
- kvS3fYqby1B92ak/n1rvHlHrzV56iA58mFAPHF0h4Uf1N+8JefNcF3wCveKaBMlqARyS
- 1yLDzbMovwa6O7+TKXSTP+hBW1XRMDSrrwQI5uKGoniqosMvv/Ay2kK1LKuxVn/XImBI
- y0rQ==
-X-Gm-Message-State: AOJu0Yz6skv9cK6G4VthzOXPeSn8jymqLII1Eae811eATQ2RITK+CMHp
- L9x2tkqholyfKqUdSM5LAOyY3sG56XuDaUVWwc7KkEmOJrdOWeXHZPsRn40pU5Srr2WaSf4YfTw
- 5SxriIwuX3L+lnP+GdAhzwLxUCI1hFmc=
-X-Gm-Gg: AR+sD11GofnWXg/cvReWBpn+PQlfWmcQJ0Pvm2QD8xYkvHV9mr0HvVHvRvGQlseXNQ3
- yIF4dxcJXmkveY7Odo/xWO3IuVnIC8qigh6/LZZMMb4lssLhPsddX8TWNXOUlH9SQSLvO1Wo9NR
- pfPOtl+3X7161I2rUjayXKa1W8DxQoGUsA53orjegpkeO5bCnqVCrmu5ZrWAgol5goJdtw5bm1J
- 8+4ZFdnftgYwRkBR72bqrnovKzAVfyiVC5W2epYRPouHEIAJJFMlpCGph7NuwGb7eI50WywrDPM
- la1GrcN/jf8iPZJi
-X-Received: by 2002:a05:620a:2702:b0:915:e670:4021 with SMTP id
- af79cd13be357-932df674b87mr630241285a.45.1785119309459; Sun, 26 Jul 2026
- 19:28:29 -0700 (PDT)
+ bh=YdjUz8yik0MeA92jNBhv3Nw6JCVgFI8IwVl9CAMpWCw=;
+ b=KjTVOCP2cyg3ELNtytQ95zm1HSeK4KlS44VS/FaPdseCxkp578STndPSlPiaI44imq
+ w2H6gbfsUr9wCTY8EuB4jspcYCKD8XI3iRRnzb6xHKe+3KtCpE7WJtJLs/9gGVxqv4Lz
+ xozeTIEqZFj0DbSP5DvJMBHCwPO+DbtoCvKts8+wXSGL91SgfJkdaqtfm8NgI3A7NRLi
+ nJ3LmYsvHGxjST6OfUBCtHWwk7p8mfvVOpAOylZHUijRr4rWjyJmkINKz2V2aq3S8i8T
+ MhKHfbjNm713EFYK9MLnMbGOkxemP4x7WypD8YZY7f5lAs/rvmb/59O1IEtF6xVH+nwu
+ N+0w==
+X-Gm-Message-State: AOJu0YzWVvBPvSlk7fisJJCUEV/qn0TLZZYcdh7MYc2J/Do/c/vQd33K
+ mfVRuC84h1EoOnhD/dO3el+m2SOYzMsqvLfTHp05hKkj/ZzbqCcxbqX0Sk/i0iS1dSfqtVkiZyq
+ NVTBOhRbKjoDhKbBOQBeHfXxX/9DzeeM=
+X-Gm-Gg: AR+sD12HeJFgCY41idVkMf8JhTDXmRvhHxxKcOdEIjKbfkxzKylmGA257fPsnXPAo+9
+ dWn+7Z0SiNhoE2Gq52GnmkKm7r0/lxIuIAU68CsTEAjVSY5BBluJJ7CU8wXSF7mqBGVr7MwbHxj
+ 0ZK47B3veKzwD1rVB2EFFCVTC0QGjIjyB3538hSTiWC5OLtnhXAj4AgY/5GiIaEi18qaDO/YMJc
+ /djLR3JDGtfPh5SMu+sqYrMxgdJL/s06sW+KzuFoyGfkE2tASPeFt6NFN5ssFZ/MiMARItanzMC
+ rsQKaGdDJDLEpKgu
+X-Received: by 2002:a05:620a:608e:b0:92e:675e:8eef with SMTP id
+ af79cd13be357-932df5c4974mr702949685a.15.1785119302517; Sun, 26 Jul 2026
+ 19:28:22 -0700 (PDT)
 Received: from 77377267392 named unknown by gmailapi.google.com with HTTPREST; 
- Sun, 26 Jul 2026 19:28:28 -0700
+ Sun, 26 Jul 2026 19:28:21 -0700
 Received: from 77377267392 named unknown by gmailapi.google.com with HTTPREST; 
- Sun, 26 Jul 2026 19:27:49 -0700
+ Sun, 26 Jul 2026 19:27:48 -0700
 MIME-Version: 1.0
 From: flavien.solt97@gmail.com
 In-Reply-To: <CANVUYGvOyZdCwXOtDkS7bXY3Z2HGK1b6QWKttCVUjhnpH65g5A@mail.gmail.com>
 References: <CANVUYGvOyZdCwXOtDkS7bXY3Z2HGK1b6QWKttCVUjhnpH65g5A@mail.gmail.com>
-Date: Sun, 26 Jul 2026 19:28:27 -0700
-X-Gm-Features: AUfX_myA_9jgBJBZxGX_lRGMecf5ODMY1MrrSUNqkYVNZCF3gw2Rvjzd0UNMh2s
-Message-ID: <CANVUYGsmXiKSQdb_BjCVPo1dvmF0K5-B63iQpszqqYLhZsc_Zg@mail.gmail.com>
-Subject: [PATCH v3 3/3] tests/qtest: add RISC-V IOMMU MRIF notice tests
+Date: Sun, 26 Jul 2026 19:28:21 -0700
+X-Gm-Features: AUfX_mza1SR7s82RBsNpv5HCAVKryuqxdGxcsv0bkATEczjuOFrF6lJgDbUbVIM
+Message-ID: <CANVUYGvtuMbxE6TCkO98G1rCadb0psdn8HQM+6T8v0KE+QVr5g@mail.gmail.com>
+Subject: [PATCH v3 2/3] hw/riscv/riscv-iommu.c: always send MRIF notice MSI
 To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, Andrew Jones <andrew.jones@oss.qualcomm.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Weiwei Li <liwei1518@gmail.com>, 
+Cc: qemu-riscv@nongnu.org, qemu-stable@nongnu.org, 
+ Andrew Jones <andrew.jones@oss.qualcomm.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, Weiwei Li <liwei1518@gmail.com>, 
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Chao Liu <chao.liu@processmission.com>, Fabiano Rosas <farosas@suse.de>, 
- Laurent Vivier <lvivier@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>
+ Chao Liu <chao.liu@processmission.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::f2b;
- envelope-from=flavien.solt97@gmail.com; helo=mail-qv1-xf2b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::72b;
+ envelope-from=flavien.solt97@gmail.com; helo=mail-qk1-x72b.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -125,157 +124,56 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From a13bfa64b84ac70c9e257253616ce650fc3e794b Mon Sep 17 00:00:00 2001
+From 42f759d7e7f4eca064638622d52aa38be11b956b Mon Sep 17 00:00:00 2001
 From: Flavien Solt <flavien.solt97@gmail.com>
-Date: Sun, 26 Jul 2026 17:54:04 +0800
-Subject: [PATCH v3 3/3] tests/qtest: add RISC-V IOMMU MRIF notice tests
+Date: Sun, 26 Jul 2026 17:52:03 +0800
+Subject: [PATCH v3 2/3] hw/riscv/riscv-iommu.c: always send MRIF notice MSI
 
-Exercise MRIF-mode MSI writes through iommu-testdev with the destination
-interrupt-enable bit both clear and set. Each case requires the pending
-bit to be stored plus the configured notice ID to reach guest memory.
+The AIA specification requires an IOMMU to send the configured notice
+MSI after storing an MSI to an MRIF, even when the corresponding
+interrupt-enable bit is clear.
 
-The enable-clear case regresses the notice suppression fixed by the
-previous patch. The enable-set case provides a control for the existing
-path.
+riscv_iommu_msi_write() currently reads the MRIF interrupt-enable
+doubleword and suppresses the notice MSI when the matching bit is zero.
+This makes notice delivery depend on a bit that AIA requires the IOMMU
+to ignore.
 
+Remove the enable-word read and send the notice MSI unconditionally
+after updating the MRIF pending bit.
+
+Fixes: 0c54acb8243d ("hw/riscv: add RISC-V IOMMU base emulation")
+Cc: qemu-stable@nongnu.org
+Reviewed-by: Andrew Jones <andrew.jones@oss.qualcomm.com>
 Signed-off-by: Flavien Solt <flavien.solt97@gmail.com>
 ---
- tests/qtest/iommu-riscv-test.c | 102 +++++++++++++++++++++++++++++++++
- 1 file changed, 102 insertions(+)
+ hw/riscv/riscv-iommu.c | 13 -------------
+ 1 file changed, 13 deletions(-)
 
-diff --git a/tests/qtest/iommu-riscv-test.c b/tests/qtest/iommu-riscv-test.c
-index 2638024..85f79ea 100644
---- a/tests/qtest/iommu-riscv-test.c
-+++ b/tests/qtest/iommu-riscv-test.c
-@@ -14,6 +14,7 @@
- #include "hw/pci/pci_regs.h"
- #include "hw/misc/iommu-testdev.h"
- #include "hw/riscv/riscv-iommu-bits.h"
-+#include "libqos/qos-iommu-testdev.h"
- #include "libqos/qos-riscv-iommu.h"
- #include "libqos/riscv-iommu.h"
+diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
+index f6865d1..2bbac30 100644
+--- a/hw/riscv/riscv-iommu.c
++++ b/hw/riscv/riscv-iommu.c
+@@ -788,19 +788,6 @@ static MemTxResult
+riscv_iommu_msi_write(RISCVIOMMUState *s,
+         goto err;
+     }
 
-@@ -26,6 +27,13 @@
- #define RISCV_BUS_MMIO_LIMIT       0x80000000
- #define RISCV_ECAM_ALLOC_PTR       0x30000000
-
-+#define RISCV_MRIF_MSI_IOVA        0x00000000fee00000ull
-+#define RISCV_MRIF_MSI_PT_GPA      (QRIOMMU_SPACE_OFFS + 0x00030000ull)
-+#define RISCV_MRIF_BASE_GPA        (QRIOMMU_SPACE_OFFS + 0x00031000ull)
-+#define RISCV_MRIF_NOTICE_GPA      (QRIOMMU_SPACE_OFFS + 0x00032000ull)
-+#define RISCV_MRIF_INTID           5u
-+#define RISCV_MRIF_NOTICE_ID       0x12du
-+
- typedef struct RiscvIommuTestState {
-     QTestState *qts;
-     QGenericPCIBus gbus;
-@@ -264,6 +272,96 @@ static void test_riscv_iommu_nested(void)
-     run_riscv_iommu_translation(&cfg);
- }
-
-+static void riscv_iommu_setup_mrif_context(RiscvIommuTestState *state)
-+{
-+    uint64_t dc_addr;
-+    uint64_t msiptp;
-+    uint64_t pte0;
-+    uint64_t pte1;
-+
-+    qtest_memset(state->qts, QRIOMMU_SPACE_OFFS + QRIOMMU_DDT_BASE, 0,
-+                 0x1000);
-+    qtest_memset(state->qts, RISCV_MRIF_MSI_PT_GPA, 0, 0x1000);
-+    qtest_memset(state->qts, RISCV_MRIF_BASE_GPA, 0, 0x1000);
-+    qtest_memset(state->qts, RISCV_MRIF_NOTICE_GPA, 0, 4);
-+
-+    dc_addr = QRIOMMU_SPACE_OFFS + QRIOMMU_DDT_BASE +
-+              state->testdev->devfn * sizeof(struct riscv_iommu_dc);
-+
-+    msiptp = (RISCV_MRIF_MSI_PT_GPA >> 12) |
-+             ((uint64_t)RISCV_IOMMU_DC_MSIPTP_MODE_FLAT << 60);
-+
-+    qtest_writeq(state->qts, dc_addr + 0, RISCV_IOMMU_DC_TC_V);
-+    qtest_writeq(state->qts, dc_addr + 8, 0);
-+    qtest_writeq(state->qts, dc_addr + 16, 0);
-+    qtest_writeq(state->qts, dc_addr + 24, 0);
-+    qtest_writeq(state->qts, dc_addr + 32, msiptp);
-+    qtest_writeq(state->qts, dc_addr + 40, 0);
-+    qtest_writeq(state->qts, dc_addr + 48, RISCV_MRIF_MSI_IOVA >> 12);
-+    qtest_writeq(state->qts, dc_addr + 56, 0);
-+
-+    pte0 = RISCV_IOMMU_MSI_PTE_V |
-+           ((uint64_t)RISCV_IOMMU_MSI_PTE_M_MRIF << 1) |
-+           ((RISCV_MRIF_BASE_GPA >> 9) << 7);
-+    pte1 = ((RISCV_MRIF_NOTICE_GPA >> 12) << 10) | RISCV_MRIF_NOTICE_ID;
-+
-+    qtest_writeq(state->qts, RISCV_MRIF_MSI_PT_GPA, pte0);
-+    qtest_writeq(state->qts, RISCV_MRIF_MSI_PT_GPA + 8, pte1);
-+
-+    qriommu_program_regs(state->qts, state->iommu_base);
-+}
-+
-+static void run_riscv_iommu_mrif_notice(bool enable_bit)
-+{
-+    RiscvIommuTestState state = { 0 };
-+    uint64_t pending;
-+    uint64_t enabled;
-+    uint32_t notice;
-+    uint32_t dma_result;
-+
-+    if (!riscv_iommu_test_setup(&state)) {
-+        return;
-+    }
-+
-+    riscv_iommu_check(state.qts, state.iommu_base, QRIOMMU_TM_BARE);
-+    riscv_iommu_setup_mrif_context(&state);
-+
-+    enabled = enable_bit ? (1ull << RISCV_MRIF_INTID) : 0;
-+    qtest_writeq(state.qts, RISCV_MRIF_BASE_GPA + 8, enabled);
-+    qpci_io_writel(state.testdev, state.testdev_bar, ITD_REG_DMA_WRITE_VAL,
-+                   RISCV_MRIF_INTID);
-+
-+    dma_result = qos_iommu_testdev_trigger_dma(
-+        state.testdev, state.testdev_bar, RISCV_MRIF_MSI_IOVA,
-+        RISCV_MRIF_NOTICE_GPA, DMA_LEN, qriommu_build_dma_attrs());
-+
-+    pending = qtest_readq(state.qts, RISCV_MRIF_BASE_GPA);
-+    notice = qtest_readl(state.qts, RISCV_MRIF_NOTICE_GPA);
-+
-+    g_test_message("MRIF notice: enable=%u pending=0x%" PRIx64
-+                   " notice=0x%x", enable_bit, pending, notice);
-+
-+    /*
-+     * Interrupt remapping consumes the original DMA write; the generic
-+     * test device cannot read it back from the supplied physical address.
-+     */
-+    g_assert_cmpuint(dma_result, ==, ITD_DMA_ERR_MISMATCH);
-+    g_assert_cmpuint(pending & (1ull << RISCV_MRIF_INTID), !=, 0);
-+    g_assert_cmpuint(notice, ==, RISCV_MRIF_NOTICE_ID);
-+
-+    riscv_iommu_test_teardown(&state);
-+}
-+
-+static void test_riscv_iommu_mrif_notice_enable_clear(void)
-+{
-+    run_riscv_iommu_mrif_notice(false);
-+}
-+
-+static void test_riscv_iommu_mrif_notice_enable_set(void)
-+{
-+    run_riscv_iommu_mrif_notice(true);
-+}
-+
- int main(int argc, char **argv)
- {
-     g_test_init(&argc, &argv, NULL);
-@@ -275,5 +373,9 @@ int main(int argc, char **argv)
-                    test_riscv_iommu_g_stage_only);
-     qtest_add_func("/iommu-testdev/translation/ns-nested",
-                    test_riscv_iommu_nested);
-+    qtest_add_func("/iommu-testdev/mrif-notice/enable-clear",
-+                   test_riscv_iommu_mrif_notice_enable_clear);
-+    qtest_add_func("/iommu-testdev/mrif-notice/enable-set",
-+                   test_riscv_iommu_mrif_notice_enable_set);
-     return g_test_run();
- }
+-    /* Get MRIF enable bits */
+-    addr = addr + sizeof(intn);
+-    res = dma_memory_read(s->target_as, addr, &intn, sizeof(intn), attrs);
+-    if (res != MEMTX_OK) {
+-        cause = RISCV_IOMMU_FQ_CAUSE_MSI_LOAD_FAULT;
+-        goto err;
+-    }
+-
+-    if (!(intn & data)) {
+-        /* notification disabled, MRIF update completed. */
+-        return MEMTX_OK;
+-    }
+-
+     /* Send notification message */
+     addr = PPN_PHYS(get_field(pte[1], RISCV_IOMMU_MSI_MRIF_NPPN));
+     n190 = get_field(pte[1], RISCV_IOMMU_MSI_MRIF_NID) |
 -- 
 2.54.0
 
