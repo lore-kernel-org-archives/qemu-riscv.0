@@ -4,88 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9C40C54F51
-	for <qemu-riscv@archiver.kernel.org>; Wed, 29 Jul 2026 08:44:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E761DC54F51
+	for <qemu-riscv@archiver.kernel.org>; Wed, 29 Jul 2026 09:02:12 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1woztS-0003WS-5d; Wed, 29 Jul 2026 04:44:02 -0400
+	id 1wp0Ar-0001U9-Uz; Wed, 29 Jul 2026 05:02:01 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <chao.liu.zevorn@gmail.com>)
- id 1woztN-0003S6-Ld
- for qemu-riscv@nongnu.org; Wed, 29 Jul 2026 04:43:57 -0400
-Received: from mail-pz2-x01.google.com ([2607:f8b0:4864:3b::1])
+ id 1wp0Ap-0001S4-R9
+ for qemu-riscv@nongnu.org; Wed, 29 Jul 2026 05:02:00 -0400
+Received: from mail-pj2-x07.google.com ([2607:f8b0:4864:39::7])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <chao.liu.zevorn@gmail.com>)
- id 1woztL-00008Y-Cx
- for qemu-riscv@nongnu.org; Wed, 29 Jul 2026 04:43:57 -0400
-Received: by mail-pz2-x01.google.com with SMTP id
- 41be03b00d2f7-c9fe62e0da3so199098a12.1
- for <qemu-riscv@nongnu.org>; Wed, 29 Jul 2026 01:43:54 -0700 (PDT)
+ id 1wp0Al-0003Kp-Pv
+ for qemu-riscv@nongnu.org; Wed, 29 Jul 2026 05:01:59 -0400
+Received: by mail-pj2-x07.google.com with SMTP id
+ 98e67ed59e1d1-38dcd98e5easo389092a91.0
+ for <qemu-riscv@nongnu.org>; Wed, 29 Jul 2026 02:01:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1785314633; x=1785919433; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1785315712; x=1785920512; darn=nongnu.org;
  h=in-reply-to:content-disposition:content-type:mime-version
  :references:message-id:subject:cc:to:from:date:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=Vvg68bKxrL5Ce5l0Fzz15atPeSR6nFwUSrrYBxvR6Cc=;
- b=ENZiYbHOHB1si4g5whoMRVU1BCSNVqgrXY2KaXjFvoy0kWDBKy+htkZIMxTtdYaC+i
- DlPkjRVI8ttSSVHycxeVY5qWSst41Hs+wgOfXevAqgDLSLYDpy9CD8G1i1chYyNIqt69
- IGyoHaTOp02mVtlT2sCH6Tw5yXeucBJqCpDi3mO8Fy2/pWgBl/nQOS9dJic0VyrbMzSD
- oI+Ou7GaQf/XpysrTeU/p+CO1P2OH8ySt2WklHnP99Z5rtLKIXdV1HzyAOiTOBRQduLG
- 8qiz2+4s72+AmXk9gHBcmjUjS5399RjIq36iOzg/4VXokjl72kkVlzP9T0YAXGQOjf6u
- xixA==
+ bh=nTAeHOSmsuRrdO8gNOhcZ+RPd3QZGnbOiszmjQPTYrI=;
+ b=DQVFGdjiWYh729rGXlK270rRlrHjPTICue6xiHtCzTOMJQHLNYsbVqC+RQnnPwLdtw
+ 69+B0847dyYVHzZ1LMTUrXyq9bd7S8Gw5P5KapTDxqhZPvvHY2SEEFT9lVs/ROLgmllI
+ TWnfdchU+jR2jjP5nEoNNueVrOtDmlA4z/8jvuP5Blg9J847Bv5SEJ/LLBrR00APvvlp
+ aU+D6ylTJpIMq7S8A7/uI2uRNJiyCEPw573SuEJJGTqHT6XB9xl1EMKMUy3zVcmrSI3S
+ NGsXOblwp6BhC7xvuPPqJxwKpzXLjIkMxh+empE2YkxbvMdLy1C4AybzvdNALU8tgdca
+ 3T5A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785314633; x=1785919433;
+ d=1e100.net; s=20251104; t=1785315712; x=1785920512;
  h=in-reply-to:content-disposition:content-type:mime-version
  :references:message-id:subject:cc:to:from:date:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=Vvg68bKxrL5Ce5l0Fzz15atPeSR6nFwUSrrYBxvR6Cc=;
- b=aVvyUGqWaH0m6V+MODRIb6RkNjU2DcP2wfbBR4llAO1ehbLHaahDIxe5Rc4lTrNITS
- 2MsMva00k24fuIQ5gNNf5efLCg5Y0GlydaCOGxR9Wp88vA6Nt35R+JmgSqdjgxN2dZ76
- x63iI6cXUz8brlj0JvDF2z22vDxOnLuUVVpB8XNGyM8tu5I3GyxGDdkk0Ge2OPE296hP
- xKCntJszSITE8oc8DFraHnA/L8+PMfd8JyjSocngtN50FAFEaM8HGQUkJy3qpf00+nLA
- 0t6EW+sk1SkpEi7YvfPmLjCKZnWDOFdn7SfQiP1A/n52uRMNWavv9E7A0mUbicI6Aluw
- lexw==
+ bh=nTAeHOSmsuRrdO8gNOhcZ+RPd3QZGnbOiszmjQPTYrI=;
+ b=q407mPp3gA0ukzCCNdaBYDZkIbs6bCshMfwJ7v3pvlertkJv4jpP/jhk+3oEUh+9YQ
+ ukz0FkhF2txXWPSDvGU7sB7A7V3DKuVH4kktupPK6M4W6YpnnAaJWvPrKg8QSVSY7Mnt
+ 5YmErwgPLz2h/qjY60qBYcJE3lwXqvRXV5b4tBUzXCv3O1OvYAPq3uvV4Yros3yf/3jV
+ 2iP4fbdu0NXlDfSEAkfVtW8VoAD0SAuqp10C5o7V8htPfQ8m+Y1YFkNqiUjH5Pl8C35G
+ Dd8cdrgBE0AEtvxZzYfcPtsAajxvgSEGaleOlq1JnSypW408FurUbSBiQcDdJzGMYw5A
+ KAQg==
 X-Forwarded-Encrypted: i=1;
- AHgh+Rrhi5GeFyIibqdUsx1lBRUi52KEV7C6nJFpv7g81bQohaHh7Xzx/UOT9AbuAXBe9VmijuvbCgiDYvhg@nongnu.org
-X-Gm-Message-State: AOJu0YxZyGh3cqMM64oh9v1h47meCd4I2wgVWgO4LTgqBGUYbd9JEIip
- G5c6r9hN3OGM7lz0fXTM884ocJ5GdJ265X5SpBvAlhmyhHU9290ApCPO
-X-Gm-Gg: AR+sD10AcJGZC2L5qLOcBOxckVpuYeIaf/5HzINoqLv7SMFHZSWh5S6DibEiSxpzzBp
- arL/p33GYeDzTZpN87M5s3vpSC7FgFc0aoyJ6hzgDfDS1nKpP801mjp/QMm69LoKgXJxTvM5W1W
- CWdbN6HTbgCvtrY51pExAMMKZBpTVYvgDJTUL8nLBUGwbhX830pyjvhM+LQMSiweGtTD5BwQbDQ
- t3MWpfZcSVPRtWI8kiSEKOYQdjgUvdDWlr5n9SzXahuy1D0tkrdT9crpQ5ieus+y0MO4CU2PYGc
- 3I3xtIhFxGTCr7ZFNXqr4W9U01UBDDvmDK3KxxUuqf1Bc7SEAaVXVtHd42zzjtcE7zgZQn+Iadx
- kmLodRp39ib09Acm3eW4YOcK72SCGQVVQUjzLJipKdmjr5utwyY8pczDC3+CgTb9cxZXevftWHQ
- BtMKHrdB3GXx/8bur5ln3vWE6Y1Rpc7CJPMH0hp0b77h99wBmCwrS7VoRI62tTSSwZSUnbPGXlw
- ixS8X2RYLGf0WzuWi7MSHqQBAo=
-X-Received: by 2002:a05:6a21:7308:b0:3c3:8651:b302 with SMTP id
- adf61e73a8af0-3c8ab0e5996mr6885251637.28.1785314633056; 
- Wed, 29 Jul 2026 01:43:53 -0700 (PDT)
+ AHgh+RpWb9xLQoTYLVB4e6VXMmJbpSgpLbUmhevOWkjNtBBmF3NXbLSkWCHYKDthKIOF/Lc4GL5Am8myAN6J@nongnu.org
+X-Gm-Message-State: AOJu0Yx8X6w0did25CpRa6h9tjkxaC7DWWZJu2cyjqMvwyNkJzvttFBU
+ Iygb60G2l2SO0DkrYTcj2qNZ1i0CsFi/WUiMZmhbnKbhJXlkFERw5gfq
+X-Gm-Gg: AR+sD10dpd8ObHAtC8YzeQ4sF20kxIxN9eHyBS3uE3CmBPrDv+YwjK/U3SatNAqlQVI
+ HfvenlQ2j24q/X7a030dZx07n9CVEuxi7Cn225SALqPfgEtwunCa8yqTlJ23ch4iE5qzVw7ZreM
+ 80vC7PmhHHBJC+XjjAiPCwo2kBlxzoQVpqM4dBWfx+kKeOPFNf2p8CnnKSjmTgNfpU9CtG2xm8D
+ huYU2ZokNU2c1EJFtos1mhZ7uwgBjZx8kIgNbRazxcS0sG8YJBCSjiVwr2w88AEKOQ9lTNYPMha
+ HehS9HYvQAcgish4o2g3mhklvgUV1PCurDoGqpPV/Mf4CNkyn6C+knJtsQlzLhXzrjPgINH30wg
+ ALDVakOxECaEw4wtPDAL4Gi6CKPg+Pw9RN9AXBYupEwxSsxZTNn7DZwAY4iGAjENZmV1jbckYfE
+ 0NjYyv6IPWEJGkOWKTUq2AQyD5LwmVK/4oeCE3eGlSpcc9Lgw1Iv7wkAgzyAxN56J3pmxmefilH
+ PNbv/2PiFPGsiELj+fBDniKQ3S+WSg6gLJ6Zg==
+X-Received: by 2002:a17:90b:1e4c:b0:38e:9e9e:ec57 with SMTP id
+ 98e67ed59e1d1-38f6a588a24mr3929308a91.43.1785315712267; 
+ Wed, 29 Jul 2026 02:01:52 -0700 (PDT)
 Received: from localhost ([179.255.148.148]) by smtp.gmail.com with ESMTPSA id
- a92af1059eb24-13e7271f0ddsm7067198c88.11.2026.07.29.01.43.51
+ 5a478bee46e88-31504dd42a9sm9104945eec.30.2026.07.29.02.01.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 29 Jul 2026 01:43:52 -0700 (PDT)
-Date: Wed, 29 Jul 2026 16:43:49 +0800
+ Wed, 29 Jul 2026 02:01:51 -0700 (PDT)
+Date: Wed, 29 Jul 2026 17:01:48 +0800
 From: Chao Liu <chao.liu.zevorn@gmail.com>
 To: Molly Chen <xiaoou@iscas.ac.cn>
 Cc: palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com, 
  daniel.barboza@oss.qualcomm.com, zhiwei_liu@linux.alibaba.com, 
  Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org, 
- Yin Zhang <zhangyin2018@iscas.ac.cn>, Dajun Huang <djhuang_1@std.uestc.edu.cn>,
- Zhiyuan Yang <zhiyuan.plct@isrc.iscas.ac.cn>
-Subject: Re: [PATCH v2 01/18] target/riscv: Add packed SIMD extension state
-Message-ID: <amm9KeayDq7M0tC1@ChaodeMacBook-Pro.local>
+ qemu-devel@nongnu.org
+Subject: Re: [PATCH v2 02/18] target/riscv: Add packed SIMD helper framework
+Message-ID: <amm9gBzFKzKq0whI@ChaodeMacBook-Pro.local>
 References: <cover.1784280142.git.xiaoou@iscas.ac.cn>
- <8b602c084875d5d5517958ffa3a25651c0bb41c1.1784280142.git.xiaoou@iscas.ac.cn>
+ <e3775ec9235fa974e9a318edf1836cdaab197e27.1784280142.git.xiaoou@iscas.ac.cn>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <8b602c084875d5d5517958ffa3a25651c0bb41c1.1784280142.git.xiaoou@iscas.ac.cn>
-Received-SPF: pass client-ip=2607:f8b0:4864:3b::1;
- envelope-from=chao.liu.zevorn@gmail.com; helo=mail-pz2-x01.google.com
+In-Reply-To: <e3775ec9235fa974e9a318edf1836cdaab197e27.1784280142.git.xiaoou@iscas.ac.cn>
+Received-SPF: pass client-ip=2607:f8b0:4864:39::7;
+ envelope-from=chao.liu.zevorn@gmail.com; helo=mail-pj2-x07.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -108,306 +106,285 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Jul 17, 2026 at 10:06:54AM +0800, Molly Chen wrote:
-> Model vxsat with separate Vector/Zve and P-only control paths.  When
-> Zve* is present, vxsat follows mstatus.VS/vsstatus.VS; when P is
-> implemented without Zve*, stateen0.VXSAT controls access instead.
-> 
-> Record the P-only stateen result in TB flags so cached translations
-> preserve both instruction legality and the illegal-vs-virtual exception
-> class.
-> 
-> Co-authored-by: Yin Zhang <zhangyin2018@iscas.ac.cn>
-> Co-authored-by: Dajun Huang <djhuang_1@std.uestc.edu.cn>
-> Co-authored-by: Zhiyuan Yang <zhiyuan.plct@isrc.iscas.ac.cn>
-> 
+On Fri, Jul 17, 2026 at 10:06:55AM +0800, Molly Chen wrote:
 > Signed-off-by: Molly Chen <xiaoou@iscas.ac.cn>
-Reviewed-by: Chao Liu <chao.liu@processmission.com>
+> ---
+>  target/riscv/tcg/meson.build    |    3 +-
+>  target/riscv/tcg/psimd_helper.c | 1656 +++++++++++++++++++++++++++++++
+>  2 files changed, 1658 insertions(+), 1 deletion(-)
+>  create mode 100644 target/riscv/tcg/psimd_helper.c
+> 
+> diff --git a/target/riscv/tcg/meson.build b/target/riscv/tcg/meson.build
+> index a05ab642f41..cc438d7c0d2 100644
+> --- a/target/riscv/tcg/meson.build
+> +++ b/target/riscv/tcg/meson.build
+> @@ -15,7 +15,8 @@ riscv_ss.add(files(
+>    'vcrypto_helper.c',
+>    'vector_helper.c',
+>    'vector_internals.c',
+> -  'zce_helper.c'))
+> +  'zce_helper.c',
+> +  'psimd_helper.c'))
+>  
+>  
+>  riscv_system_ss.add(files(
+> diff --git a/target/riscv/tcg/psimd_helper.c b/target/riscv/tcg/psimd_helper.c
+> new file mode 100644
+> index 00000000000..2948bbb2a86
+> --- /dev/null
+> +++ b/target/riscv/tcg/psimd_helper.c
+> @@ -0,0 +1,1656 @@
+> +/* SPDX-License-Identifier: GPL-2.0-or-later */
+> +/* RISC-V Packed SIMD Extension Helpers for QEMU. */
+> +/* Copyright (C) 2026 ISRC ISCAS. */
+> +
+> +#include "qemu/osdep.h"
+> +#include "cpu.h"
+> +#include "qemu/host-utils.h"
+> +#include "exec/helper-proto.h"
+> +#include "fpu/softfloat.h"
+> +#include "internals.h"
+> +
+> +
+> +/* Helper macros */
+> +
+> +/* Element count calculations */
+> +#define ELEMS_B(target) (sizeof(target) * 8 / 8)    /* byte elements count */
+> +#define ELEMS_H(target) (sizeof(target) * 8 / 16)
+> +#define ELEMS_W(target) (sizeof(target) * 8 / 32)   /* word elements count */
+> +#define ELEMS_D(target) (sizeof(target) * 8 / 64)
+> +
+> +/* Element extraction macros - unsigned to avoid sign extension */
+> +#define EXTRACT8(val, idx)  (((val) >> ((idx) * 8)) & 0xFF)
+> +#define EXTRACT16(val, idx) (((val) >> ((idx) * 16)) & 0xFFFF)
+> +#define EXTRACT32(val, idx) (((val) >> ((idx) * 32)) & 0xFFFFFFFF)
+> +#define EXTRACT64(val, idx) (((val) >> ((idx) * 64)) & 0xFFFFFFFFFFFFFFFFULL)
+> +
+QEMU has the generator bit-operation helper macros. I believe you don't need to
+define them again, so you can just follow this header file path.
+
+path: include/qemu/bitops.h
+
+```
+  extract8(value, start, length)
+  extract16(value, start, length)
+  extract32(value, start, length)
+  extract64(value, start, length)
+
+  sextract32(value, start, length)
+  sextract64(value, start, length)
+```
+
+So we can redefine these helper macros like this:
+
+```
+  #define EXTRACT_B(val, idx) extract64((val), (idx) * 8, 8)
+  #define EXTRACT_H(val, idx) extract64((val), (idx) * 16, 16)
+  #define EXTRACT_W(val, idx) extract64((val), (idx) * 32, 32)
+  #define EXTRACT_D(val, idx) extract64((val), (idx) * 64, 64)
+```
+
+> +/* Element insertion macros */
+> +#define INSERT8(val, res, idx) \
+> +    ((val) | ((target_ulong)(uint8_t)(res) << ((idx) * 8)))
+> +#define INSERT16(val, res, idx) \
+> +    ((val) | ((target_ulong)(uint16_t)(res) << ((idx) * 16)))
+> +#define INSERT32(val, res, idx) \
+> +    ((val) | ((target_ulong)(uint32_t)(res) << ((idx) * 32)))
+> +#define INSERT32_64(val, res, idx) \
+> +    ((val) | ((uint64_t)(uint32_t)(res) << ((idx) * 32)))
+> +#define INSERT64(val, res, idx) \
+> +    ((val) | ((uint64_t)(res) << ((idx) * 64)))
+> +
+> +/* Saturation constants */
+> +static const int8_t   SAT_MAX_B = 127;
+> +static const int8_t   SAT_MIN_B = -128;
+> +static const int16_t  SAT_MAX_H = 32767;
+> +static const int16_t  SAT_MIN_H = -32768;
+> +static const int32_t  SAT_MAX_W = 2147483647;
+> +static const int32_t  SAT_MIN_W = -2147483648LL;
+> +static const uint8_t  USAT_MAX_B = 255;
+> +static const uint16_t USAT_MAX_H = 65535;
+> +static const uint32_t USAT_MAX_W = 4294967295U;
+> +
+> +
+> +/* Saturation helper functions */
+> +
+> +/**
+> + * Signed saturation for 8-bit elements
+> + * Returns saturated value and sets *sat if saturation occurred
+> + */
+This helper function has some comments that explain what it does.
+I believe we don't need these explanations if the function name is
+already clear.
+
+The other helper functions below are similar. I think we only need
+to add comments when it's necessary to explain the reasoning behind
+why we're doing something.
+
+d> +static inline int8_t signed_saturate_b(int32_t val, int *sat)
+> +{
+> +    if (val > SAT_MAX_B) {
+> +        *sat = 1;
+> +        return SAT_MAX_B;
+> +    }
+> +    if (val < SAT_MIN_B) {
+> +        *sat = 1;
+> +        return SAT_MIN_B;
+> +    }
+> +    return (int8_t)val;
+> +}
+> +
+> +/**
+> + * Signed saturation for 16-bit elements
+> + */
+> +static inline int16_t signed_saturate_h(int32_t val, int *sat)
+> +{
+> +    if (val > SAT_MAX_H) {
+> +        *sat = 1;
+> +        return SAT_MAX_H;
+> +    }
+> +    if (val < SAT_MIN_H) {
+> +        *sat = 1;
+> +        return SAT_MIN_H;
+> +    }
+> +    return (int16_t)val;
+> +}
+> +
+> +/**
+> + * Signed saturation for 32-bit elements
+> + */
+> +static inline int32_t signed_saturate_w(int64_t val, int *sat)
+> +{
+> +    if (val > SAT_MAX_W) {
+> +        *sat = 1;
+> +        return SAT_MAX_W;
+> +    }
+> +    if (val < SAT_MIN_W) {
+> +        *sat = 1;
+> +        return SAT_MIN_W;
+> +    }
+> +    return (int32_t)val;
+> +}
+> +
+> +/**
+> + * Unsigned saturation for 8-bit elements
+> + */
+> +static inline uint8_t unsigned_saturate_b(uint32_t val, int *sat)
+> +{
+> +    if (val > USAT_MAX_B) {
+> +        *sat = 1;
+> +        return USAT_MAX_B;
+> +    }
+> +    return (uint8_t)val;
+> +}
+> +
+> +/**
+> + * Unsigned saturation for 16-bit elements
+> + */
+> +static inline uint16_t unsigned_saturate_h(uint32_t val, int *sat)
+> +{
+> +    if (val > USAT_MAX_H) {
+> +        *sat = 1;
+> +        return USAT_MAX_H;
+> +    }
+> +    return (uint16_t)val;
+> +}
+> +
+> +/**
+> + * Unsigned saturation for 32-bit elements
+> + */
+> +static inline uint32_t unsigned_saturate_w(uint64_t val, int *sat)
+> +{
+> +    if (val > USAT_MAX_W) {
+> +        *sat = 1;
+> +        return USAT_MAX_W;
+> +    }
+> +    return (uint32_t)val;
+> +}
+> +
+> +static inline target_ulong psimd_abdsumu_b(target_ulong rs1,
+> +                                           target_ulong rs2,
+> +                                           target_ulong sum)
+> +{
+> +    int elems = ELEMS_B(rs1);
+> +
+> +    for (int i = 0; i < elems; i++) {
+> +        uint8_t e1 = EXTRACT8(rs1, i);
+> +        uint8_t e2 = EXTRACT8(rs2, i);
+> +        uint8_t diff = (e1 > e2) ? (e1 - e2) : (e2 - e1);
+> +        sum += diff;
+> +    }
+> +
+> +    return sum;
+> +}
+> +
+> +#define PSIMD_DO_ADD(N, M) ((N) + (M))
+> +#define PSIMD_DO_SUB(N, M) ((N) - (M))
+> +#define PSIMD_DO_ABD(N, M) ((N) >= (M) ? (N) - (M) : (M) - (N))
+> +#define PSIMD_DO_EQ_MASK(N, M) ((N) == (M) ? -1 : 0)
+> +#define PSIMD_DO_LT_MASK(N, M) ((N) < (M) ? -1 : 0)
+> +#define PSIMD_DO_MIN(N, M) ((N) < (M) ? (N) : (M))
+> +#define PSIMD_DO_MAX(N, M) ((N) > (M) ? (N) : (M))
+> +#define PSIMD_DO_SLL(N, M) ((N) << (M))
+> +#define PSIMD_DO_SRL(N, M) ((N) >> (M))
+> +#define PSIMD_DO_SRA(N, M) ((N) >> (M))
+> +
+
+[...]
+
+> +
+> +#define GEN_PSIMD_SCALAR_ABS(NAME, RTYPE, STYPE, UTYPE)                   \
+> +RTYPE HELPER(NAME)(CPURISCVState *env, RTYPE rs1)                         \
+> +{                                                                         \
+> +    STYPE value = (STYPE)rs1;                                            \
+> +    UTYPE result = (UTYPE)value;                                         \
+> +                                                                          \
+> +    if (value < 0) {                                                      \
+> +        result = (UTYPE)0 - result;                                      \
+> +    }                                                                     \
+> +    return (RTYPE)(STYPE)result;                                         \
+> +}
+The '\' for the column widths aren't aligned here. It would
+look much better if we could align them consistently throughout.
+
+[...]
+
+> +uint64_t HELPER(NAME)(CPURISCVState *env, uint64_t rs1, uint64_t rs2)     \
+> +{                                                                         \
+> +    int64_t a = (int64_t)rs1;                                            \
+> +    int8_t shamt = (int8_t)(rs2 & 0xff);                                 \
+> +                                                                          \
+> +    if (shamt >= 0) {                                                     \
+> +        return (uint64_t)(a << shamt);                                    \
+> +    }                                                                     \
+> +                                                                          \
+> +    int right = -shamt;                                                   \
+> +    if (right >= 64) {                                                    \
+> +        return (a < 0) ? (uint64_t)-1 : 0;                               \
+> +    }                                                                     \
+> +    return (uint64_t)RIGHT_OP(a, right);                                  \
+> +}
+There are similar alignment issues here.
+
+> +
+> +#define PSIMD_DO_SRL64(A, B) (((B) >= 64) ? 0 : ((A) >> (B)))
+> +#define PSIMD_DO_RNDSRL64(A, B)                                          \
+> +    (((B) > 64) ? 0 : ((((A) >> ((B) - 1)) + 1) >> 1))
+> +
+> +#define GEN_PSIMD_VAR_SRL64(NAME, RIGHT_OP)                               \
+> +uint64_t HELPER(NAME)(CPURISCVState *env, uint64_t rs1, uint64_t rs2)     \
+> +{                                                                         \
+> +    int8_t shamt = (int8_t)(rs2 & 0xff);                                 \
+> +                                                                          \
+> +    if (shamt < 0) {                                                      \
+> +        return RIGHT_OP(rs1, -shamt);                                     \
+> +    }                                                                     \
+> +    return (shamt >= 64) ? 0 : (rs1 << shamt);                           \
+> +}
+> +
+Same here.You can check again for the patches.
 
 Thanks,
 Chao
-
-> ---
->  target/riscv/cpu.c         |  5 ++--
->  target/riscv/cpu.h         |  8 +++++++
->  target/riscv/cpu_bits.h    |  2 ++
->  target/riscv/machine.c     | 19 +++++++++++++++
->  target/riscv/tcg/csr.c     | 39 +++++++++++++++++++++++++++++--
->  target/riscv/tcg/tcg-cpu.c | 48 ++++++++++++++++++++++++++++++++++++++
->  6 files changed, 117 insertions(+), 4 deletions(-)
-> 
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 5a82e6563bf..c9e6c83a491 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -46,7 +46,7 @@
->  /* RISC-V CPU definitions */
->  static const char riscv_single_letter_exts[] = "IEMAFDQCBPVH";
->  const uint32_t misa_bits[] = {RVI, RVE, RVM, RVA, RVF, RVD, RVV,
-> -                              RVC, RVS, RVU, RVH, RVG, RVB, 0};
-> +                              RVC, RVS, RVU, RVH, RVG, RVB, RVP, 0};
->  #define RISCV_CPU_MVENDORID 0
->  #define RISCV_CPU_MIMPID 0
->  /*
-> @@ -1489,7 +1489,8 @@ static const MISAExtInfo misa_ext_info_arr[] = {
->      MISA_EXT_INFO(RVH, "h", "Hypervisor"),
->      MISA_EXT_INFO(RVV, "v", "Vector operations"),
->      MISA_EXT_INFO(RVG, "g", "General purpose (IMAFD_Zicsr_Zifencei)"),
-> -    MISA_EXT_INFO(RVB, "b", "Bit manipulation (Zba_Zbb_Zbs)")
-> +    MISA_EXT_INFO(RVB, "b", "Bit manipulation (Zba_Zbb_Zbs)"),
-> +    MISA_EXT_INFO(RVP, "x-p", "Packed-SIMD instructions")
->  };
->  
->  static void riscv_cpu_validate_misa_mxl(RISCVCPUClass *mcc)
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index c9dfa7daff2..75cfb16d846 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -70,6 +70,7 @@ typedef struct CPUArchState CPURISCVState;
->  #define RVG RV('G')
->  #define RVB RV('B')
->  #define RVX RV('X')
-> +#define RVP RV('P')
->  
->  extern const uint32_t misa_bits[];
->  const char *riscv_get_misa_ext_name(uint32_t bit);
-> @@ -742,6 +743,13 @@ FIELD(TB_FLAGS, PM_SIGNEXTEND, 31, 1)
->  FIELD(EXT_TB_FLAGS, MISA_EXT, 0, 32)
->  FIELD(EXT_TB_FLAGS, ALTFMT, 32, 1)
->  FIELD(EXT_TB_FLAGS, BIG_ENDIAN, 33, 1)
-> +FIELD(EXT_TB_FLAGS, P_VXSAT_EXCP, 34, 2)
-> +
-> +enum {
-> +    P_VXSAT_EXCP_NONE,
-> +    P_VXSAT_EXCP_ILLEGAL,
-> +    P_VXSAT_EXCP_VIRTUAL,
-> +};
->  
->  #ifdef TARGET_RISCV32
->  #define riscv_cpu_mxl(env)  ((void)(env), MXL_RV32)
-> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> index 3f146a43fe4..fa7bf60f4fc 100644
-> --- a/target/riscv/cpu_bits.h
-> +++ b/target/riscv/cpu_bits.h
-> @@ -355,6 +355,8 @@
->  #define SMSTATEEN0_CS       (1ULL << 0)
->  #define SMSTATEEN0_FCSR     (1ULL << 1)
->  #define SMSTATEEN0_JVT      (1ULL << 2)
-> +/* Packed-SIMD draft: enable access to vxsat when misa.V = 0. */
-> +#define SMSTATEEN0_VXSAT    (1ULL << 3)
->  #define SMSTATEEN0_CTR      (1ULL << 54)
->  #define SMSTATEEN0_P1P13    (1ULL << 56)
->  #define SMSTATEEN0_HSCONTXT (1ULL << 57)
-> diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-> index 0ab613a2980..a9cd7e4c1cc 100644
-> --- a/target/riscv/machine.c
-> +++ b/target/riscv/machine.c
-> @@ -158,6 +158,24 @@ static const VMStateDescription vmstate_vector = {
->      }
->  };
->  
-> +static bool p_vxsat_needed(void *opaque)
-> +{
-> +    RISCVCPU *cpu = opaque;
-> +
-> +    return riscv_has_ext(&cpu->env, RVP) && !cpu->cfg.ext_zve32x;
-> +}
-> +
-> +static const VMStateDescription vmstate_p_vxsat = {
-> +    .name = "cpu/p-vxsat",
-> +    .version_id = 1,
-> +    .minimum_version_id = 1,
-> +    .needed = p_vxsat_needed,
-> +    .fields = (const VMStateField[]) {
-> +        VMSTATE_UINT8(env.vxsat, RISCVCPU),
-> +        VMSTATE_END_OF_LIST()
-> +    }
-> +};
-> +
->  static bool pointermasking_needed(void *opaque)
->  {
->      return false;
-> @@ -518,6 +536,7 @@ const VMStateDescription vmstate_riscv_cpu = {
->          &vmstate_pmp,
->          &vmstate_hyper,
->          &vmstate_vector,
-> +        &vmstate_p_vxsat,
->          &vmstate_pointermasking,
->          &vmstate_rv128,
->  #ifdef CONFIG_KVM
-> diff --git a/target/riscv/tcg/csr.c b/target/riscv/tcg/csr.c
-> index 36f2004bc56..e809997f52e 100644
-> --- a/target/riscv/tcg/csr.c
-> +++ b/target/riscv/tcg/csr.c
-> @@ -109,6 +109,24 @@ static RISCVException vs(CPURISCVState *env, int csrno)
->      return RISCV_EXCP_ILLEGAL_INST;
->  }
->  
-> +/* vxsat is also architectural state when P is implemented without Zve*. */
-> +static RISCVException vxsat(CPURISCVState *env, int csrno)
-> +{
-> +    if (riscv_cpu_cfg(env)->ext_zve32x) {
-> +        return vs(env, csrno);
-> +    }
-> +
-> +    if (riscv_has_ext(env, RVP)) {
-> +#if !defined(CONFIG_USER_ONLY)
-> +        return smstateen_acc_ok(env, 0, SMSTATEEN0_VXSAT);
-> +#else
-> +        return RISCV_EXCP_NONE;
-> +#endif
-> +    }
-> +
-> +    return RISCV_EXCP_ILLEGAL_INST;
-> +}
-> +
->  static RISCVException ctr(CPURISCVState *env, int csrno)
->  {
->  #if !defined(CONFIG_USER_ONLY)
-> @@ -1013,7 +1031,12 @@ static RISCVException write_vxsat(CPURISCVState *env, int csrno,
->                                    target_ulong val, uintptr_t ra)
->  {
->  #if !defined(CONFIG_USER_ONLY)
-> -    env->mstatus |= MSTATUS_VS;
-> +    if (riscv_cpu_cfg(env)->ext_zve32x) {
-> +        env->mstatus |= MSTATUS_VS;
-> +        if (env->virt_enabled) {
-> +            env->mstatus_hs |= MSTATUS_VS;
-> +        }
-> +    }
->  #endif
->      env->vxsat = val & BIT(0);
->      return RISCV_EXCP_NONE;
-> @@ -3494,6 +3517,10 @@ static RISCVException write_mstateen0(CPURISCVState *env, int csrno,
->                                        target_ulong new_val, uintptr_t ra)
->  {
->      uint64_t wr_mask = SMSTATEEN_STATEEN | SMSTATEEN0_HSENVCFG;
-> +
-> +    if (riscv_has_ext(env, RVP) && !riscv_cpu_cfg(env)->ext_zve32x) {
-> +        wr_mask |= SMSTATEEN0_VXSAT;
-> +    }
->      if (!riscv_has_ext(env, RVF)) {
->          wr_mask |= SMSTATEEN0_FCSR;
->      }
-> @@ -3617,6 +3644,10 @@ static RISCVException write_hstateen0(CPURISCVState *env, int csrno,
->  {
->      uint64_t wr_mask = SMSTATEEN_STATEEN | SMSTATEEN0_HSENVCFG;
->  
-> +    if (riscv_has_ext(env, RVP) && !riscv_cpu_cfg(env)->ext_zve32x) {
-> +        wr_mask |= SMSTATEEN0_VXSAT;
-> +    }
-> +
->      if (!riscv_has_ext(env, RVF)) {
->          wr_mask |= SMSTATEEN0_FCSR;
->      }
-> @@ -3746,6 +3777,10 @@ static RISCVException write_sstateen0(CPURISCVState *env, int csrno,
->  {
->      uint64_t wr_mask = 0;
->  
-> +    if (riscv_has_ext(env, RVP) && !riscv_cpu_cfg(env)->ext_zve32x) {
-> +        wr_mask |= SMSTATEEN0_VXSAT;
-> +    }
-> +
->      if (!riscv_has_ext(env, RVF)) {
->          wr_mask |= SMSTATEEN0_FCSR;
->      }
-> @@ -5916,7 +5951,7 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
->      [CSR_FCSR]     = { "fcsr",     fs,     read_fcsr,    write_fcsr   },
->      /* Vector CSRs */
->      [CSR_VSTART]   = { "vstart",   vs,     read_vstart,  write_vstart },
-> -    [CSR_VXSAT]    = { "vxsat",    vs,     read_vxsat,   write_vxsat  },
-> +    [CSR_VXSAT]    = { "vxsat",    vxsat,  read_vxsat,   write_vxsat  },
->      [CSR_VXRM]     = { "vxrm",     vs,     read_vxrm,    write_vxrm   },
->      [CSR_VCSR]     = { "vcsr",     vs,     read_vcsr,    write_vcsr   },
->      [CSR_VL]       = { "vl",       vs,     read_vl                    },
-> diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-> index 4af5cd9c731..1665583accf 100644
-> --- a/target/riscv/tcg/tcg-cpu.c
-> +++ b/target/riscv/tcg/tcg-cpu.c
-> @@ -160,6 +160,8 @@ static TCGTBCPUState riscv_get_tb_cpu_state(CPUState *cs)
->      fs = EXT_STATUS_DIRTY;
->      vs = EXT_STATUS_DIRTY;
->  #else
-> +    RISCVException p_vxsat_excp;
-> +
->      flags = FIELD_DP32(flags, TB_FLAGS, PRIV, env->priv);
->  
->      flags |= riscv_env_mmu_index(env, 0);
-> @@ -182,6 +184,23 @@ static TCGTBCPUState riscv_get_tb_cpu_state(CPUState *cs)
->               ? EXT_STATUS_DIRTY : EXT_STATUS_DISABLED;
->      }
->  
-> +    /*
-> +     * Without Zve*, all P instructions in the OP-32 and OP-IMM-32
-> +     * spaces are controlled by stateen0.VXSAT.  Preserve the exception
-> +     * class in the TB flags so translated code can distinguish an illegal
-> +     * instruction from a virtual-instruction exception.
-> +     */
-> +    p_vxsat_excp = smstateen_acc_ok(env, 0, SMSTATEEN0_VXSAT);
-> +    if (riscv_has_ext(env, RVP) && !riscv_cpu_cfg(env)->ext_zve32x) {
-> +        if (p_vxsat_excp == RISCV_EXCP_VIRT_INSTRUCTION_FAULT) {
-> +            ext_flags = FIELD_DP64(ext_flags, EXT_TB_FLAGS, P_VXSAT_EXCP,
-> +                                   P_VXSAT_EXCP_VIRTUAL);
-> +        } else if (p_vxsat_excp != RISCV_EXCP_NONE) {
-> +            ext_flags = FIELD_DP64(ext_flags, EXT_TB_FLAGS, P_VXSAT_EXCP,
-> +                                   P_VXSAT_EXCP_ILLEGAL);
-> +        }
-> +    }
-> +
->      if (cpu->cfg.debug && !icount_enabled()) {
->          flags = FIELD_DP32(flags, TB_FLAGS, ITRIGGER, env->itrigger_enabled);
->      }
-> @@ -530,6 +549,28 @@ static void riscv_cpu_validate_b(RISCVCPU *cpu)
->      }
->  }
->  
-> +static void riscv_cpu_validate_p(RISCVCPU *cpu, Error **errp)
-> +{
-> +    CPURISCVState *env = &cpu->env;
-> +
-> +    if (!riscv_has_ext(env, RVP)) {
-> +        return;
-> +    }
-> +
-> +    if (riscv_cpu_mxl(env) != MXL_RV32 &&
-> +        riscv_cpu_mxl(env) != MXL_RV64) {
-> +        error_setg(errp, "P extension requires RV32 or RV64");
-> +        return;
-> +    }
-> +
-> +    if (!(cpu->cfg.ext_zmmul && cpu->cfg.ext_zba && cpu->cfg.ext_zbb &&
-> +          cpu->cfg.ext_zbkb)) {
-> +        error_setg(errp, "P extension requires zmmul, zba, zbb and zbkb "
-> +                         "extensions");
-> +        return;
-> +    }
-> +}
-> +
->  /*
->   * Check consistency between chosen extensions while setting
->   * cpu->cfg accordingly.
-> @@ -612,6 +653,12 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
->          return;
->      }
->  
-> +    riscv_cpu_validate_p(cpu, &local_err);
-> +    if (local_err != NULL) {
-> +        error_propagate(errp, local_err);
-> +        return;
-> +    }
-> +
->      riscv_cpu_validate_v(env, &cpu->cfg, &local_err);
->      if (local_err != NULL) {
->          error_propagate(errp, local_err);
-> @@ -1414,6 +1461,7 @@ static const RISCVCPUMisaExtConfig misa_ext_cfgs[] = {
->      MISA_CFG(RVV, false),
->      MISA_CFG(RVG, false),
->      MISA_CFG(RVB, false),
-> +    MISA_CFG(RVP, false),
->  };
->  
->  /*
-> -- 
-> 2.34.1
-> 
 
