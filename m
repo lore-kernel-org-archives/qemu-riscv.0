@@ -4,97 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E761DC54F51
-	for <qemu-riscv@archiver.kernel.org>; Wed, 29 Jul 2026 09:02:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD254C54F51
+	for <qemu-riscv@archiver.kernel.org>; Wed, 29 Jul 2026 09:15:36 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wp0Ar-0001U9-Uz; Wed, 29 Jul 2026 05:02:01 -0400
+	id 1wp0MJ-0003jg-LR; Wed, 29 Jul 2026 05:13:51 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <chao.liu.zevorn@gmail.com>)
- id 1wp0Ap-0001S4-R9
- for qemu-riscv@nongnu.org; Wed, 29 Jul 2026 05:02:00 -0400
-Received: from mail-pj2-x07.google.com ([2607:f8b0:4864:39::7])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <chao.liu.zevorn@gmail.com>)
- id 1wp0Al-0003Kp-Pv
- for qemu-riscv@nongnu.org; Wed, 29 Jul 2026 05:01:59 -0400
-Received: by mail-pj2-x07.google.com with SMTP id
- 98e67ed59e1d1-38dcd98e5easo389092a91.0
- for <qemu-riscv@nongnu.org>; Wed, 29 Jul 2026 02:01:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1785315712; x=1785920512; darn=nongnu.org;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=nTAeHOSmsuRrdO8gNOhcZ+RPd3QZGnbOiszmjQPTYrI=;
- b=DQVFGdjiWYh729rGXlK270rRlrHjPTICue6xiHtCzTOMJQHLNYsbVqC+RQnnPwLdtw
- 69+B0847dyYVHzZ1LMTUrXyq9bd7S8Gw5P5KapTDxqhZPvvHY2SEEFT9lVs/ROLgmllI
- TWnfdchU+jR2jjP5nEoNNueVrOtDmlA4z/8jvuP5Blg9J847Bv5SEJ/LLBrR00APvvlp
- aU+D6ylTJpIMq7S8A7/uI2uRNJiyCEPw573SuEJJGTqHT6XB9xl1EMKMUy3zVcmrSI3S
- NGsXOblwp6BhC7xvuPPqJxwKpzXLjIkMxh+empE2YkxbvMdLy1C4AybzvdNALU8tgdca
- 3T5A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785315712; x=1785920512;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=nTAeHOSmsuRrdO8gNOhcZ+RPd3QZGnbOiszmjQPTYrI=;
- b=q407mPp3gA0ukzCCNdaBYDZkIbs6bCshMfwJ7v3pvlertkJv4jpP/jhk+3oEUh+9YQ
- ukz0FkhF2txXWPSDvGU7sB7A7V3DKuVH4kktupPK6M4W6YpnnAaJWvPrKg8QSVSY7Mnt
- 5YmErwgPLz2h/qjY60qBYcJE3lwXqvRXV5b4tBUzXCv3O1OvYAPq3uvV4Yros3yf/3jV
- 2iP4fbdu0NXlDfSEAkfVtW8VoAD0SAuqp10C5o7V8htPfQ8m+Y1YFkNqiUjH5Pl8C35G
- Dd8cdrgBE0AEtvxZzYfcPtsAajxvgSEGaleOlq1JnSypW408FurUbSBiQcDdJzGMYw5A
- KAQg==
-X-Forwarded-Encrypted: i=1;
- AHgh+RpWb9xLQoTYLVB4e6VXMmJbpSgpLbUmhevOWkjNtBBmF3NXbLSkWCHYKDthKIOF/Lc4GL5Am8myAN6J@nongnu.org
-X-Gm-Message-State: AOJu0Yx8X6w0did25CpRa6h9tjkxaC7DWWZJu2cyjqMvwyNkJzvttFBU
- Iygb60G2l2SO0DkrYTcj2qNZ1i0CsFi/WUiMZmhbnKbhJXlkFERw5gfq
-X-Gm-Gg: AR+sD10dpd8ObHAtC8YzeQ4sF20kxIxN9eHyBS3uE3CmBPrDv+YwjK/U3SatNAqlQVI
- HfvenlQ2j24q/X7a030dZx07n9CVEuxi7Cn225SALqPfgEtwunCa8yqTlJ23ch4iE5qzVw7ZreM
- 80vC7PmhHHBJC+XjjAiPCwo2kBlxzoQVpqM4dBWfx+kKeOPFNf2p8CnnKSjmTgNfpU9CtG2xm8D
- huYU2ZokNU2c1EJFtos1mhZ7uwgBjZx8kIgNbRazxcS0sG8YJBCSjiVwr2w88AEKOQ9lTNYPMha
- HehS9HYvQAcgish4o2g3mhklvgUV1PCurDoGqpPV/Mf4CNkyn6C+knJtsQlzLhXzrjPgINH30wg
- ALDVakOxECaEw4wtPDAL4Gi6CKPg+Pw9RN9AXBYupEwxSsxZTNn7DZwAY4iGAjENZmV1jbckYfE
- 0NjYyv6IPWEJGkOWKTUq2AQyD5LwmVK/4oeCE3eGlSpcc9Lgw1Iv7wkAgzyAxN56J3pmxmefilH
- PNbv/2PiFPGsiELj+fBDniKQ3S+WSg6gLJ6Zg==
-X-Received: by 2002:a17:90b:1e4c:b0:38e:9e9e:ec57 with SMTP id
- 98e67ed59e1d1-38f6a588a24mr3929308a91.43.1785315712267; 
- Wed, 29 Jul 2026 02:01:52 -0700 (PDT)
-Received: from localhost ([179.255.148.148]) by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-31504dd42a9sm9104945eec.30.2026.07.29.02.01.50
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 29 Jul 2026 02:01:51 -0700 (PDT)
-Date: Wed, 29 Jul 2026 17:01:48 +0800
-From: Chao Liu <chao.liu.zevorn@gmail.com>
-To: Molly Chen <xiaoou@iscas.ac.cn>
-Cc: palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com, 
- daniel.barboza@oss.qualcomm.com, zhiwei_liu@linux.alibaba.com, 
- Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-Subject: Re: [PATCH v2 02/18] target/riscv: Add packed SIMD helper framework
-Message-ID: <amm9gBzFKzKq0whI@ChaodeMacBook-Pro.local>
-References: <cover.1784280142.git.xiaoou@iscas.ac.cn>
- <e3775ec9235fa974e9a318edf1836cdaab197e27.1784280142.git.xiaoou@iscas.ac.cn>
+ (Exim 4.90_1) (envelope-from <vsementsov@yandex-team.ru>)
+ id 1wp0MH-0003hv-K2; Wed, 29 Jul 2026 05:13:49 -0400
+Received: from forwardcorp1a.mail.yandex.net ([178.154.239.72])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <vsementsov@yandex-team.ru>)
+ id 1wp0MF-0004v0-7I; Wed, 29 Jul 2026 05:13:49 -0400
+Received: from mail-nwsmtp-smtp-corp-main-83.vla.yp-c.yandex.net
+ (mail-nwsmtp-smtp-corp-main-83.vla.yp-c.yandex.net
+ [IPv6:2a02:6b8:c2d:3530:0:640:eca4:0])
+ by forwardcorp1a.mail.yandex.net (postfix) with ESMTPS id A0155C0A25;
+ Wed, 29 Jul 2026 12:13:43 +0300 (MSK)
+Received: from i115954770.yandex-team.ru (unknown [2a02:6bf:8080:484::1:24])
+ by mail-nwsmtp-smtp-corp-main-83.vla.yp-c.yandex.net (smtpcorp) with ESMTPSA
+ id bDa8GXKW9mI0-uhFnnf01; Wed, 29 Jul 2026 12:13:42 +0300
+Precedence: bulk
+X-Yandex-Fwd: 1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yandex-team.ru;
+ s=default; t=1785316422;
+ bh=CPeeLqJxqKF0PJ+VeCy5iEY5SVA2hqQkETeHHoPveXg=;
+ h=Cc:Message-ID:References:Date:In-Reply-To:Subject:To:From;
+ b=MNA+ptt2hcrLfSu3VKZuHq1pHRnoO4GkMV2eS1Q/MuFiuRNwwTxIPZhplVZVg3XiF
+ yRMRQSk8IIYZuQY5Tc4sk5NnYqDK3vGvvhJ31s9CnQDkCbATZWzJf65KhiXQE1NKzt
+ p+qaQ+Dfvz55J5DEaMsCBBXdaWehA5f7P5gS3uNY=
+Authentication-Results: mail-nwsmtp-smtp-corp-main-83.vla.yp-c.yandex.net;
+ dkim=pass header.i=@yandex-team.ru
+From: Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>
+To: jasowang@redhat.com,
+	mst@redhat.com
+Cc: armbru@redhat.com, peterx@redhat.com, farosas@suse.de,
+ raphael.s.norwitz@gmail.com, bchaney@akamai.com, vsementsov@yandex-team.ru,
+ qemu-devel@nongnu.org, berrange@redhat.com, pbonzini@redhat.com,
+ yc-core@yandex-team.ru, mark.caveayland@nutanix.com,
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+ Sergio Lopez <slp@redhat.com>, Zhao Liu <zhao1.liu@intel.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Anthony PERARD <anthony@xenproject.org>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Bernhard Beschow <shentey@gmail.com>, Conor Dooley <conor@kernel.org>,
+ Sebastian Huber <sebastian.huber@embedded-brains.de>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Jason Wang <jasowangio@gmail.com>,
+ Eric Blake <eblake@redhat.com>,
+ devel@lists.libvirt.org (open list:Incompatible changes),
+ xen-devel@lists.xenproject.org (open list:X86 Xen CPUs),
+ qemu-ppc@nongnu.org (open list:e500),
+ qemu-riscv@nongnu.org (open list:Microchip PolarFi...)
+Subject: [PATCH v20 03/15] net/tap: deprecate "no" as special value for
+ script/downscript
+Date: Wed, 29 Jul 2026 12:12:41 +0300
+Message-ID: <20260729091334.1863155-4-vsementsov@yandex-team.ru>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260729091334.1863155-1-vsementsov@yandex-team.ru>
+References: <20260729091334.1863155-1-vsementsov@yandex-team.ru>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <e3775ec9235fa974e9a318edf1836cdaab197e27.1784280142.git.xiaoou@iscas.ac.cn>
-Received-SPF: pass client-ip=2607:f8b0:4864:39::7;
- envelope-from=chao.liu.zevorn@gmail.com; helo=mail-pj2-x07.google.com
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=178.154.239.72;
+ envelope-from=vsementsov@yandex-team.ru; helo=forwardcorp1a.mail.yandex.net
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_MSPIKE_H2=0.001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
-Precedence: list
 List-Id: <qemu-riscv.nongnu.org>
 List-Unsubscribe: <https://lists.nongnu.org/mailman/options/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=unsubscribe>
@@ -106,285 +91,265 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Jul 17, 2026 at 10:06:55AM +0800, Molly Chen wrote:
-> Signed-off-by: Molly Chen <xiaoou@iscas.ac.cn>
-> ---
->  target/riscv/tcg/meson.build    |    3 +-
->  target/riscv/tcg/psimd_helper.c | 1656 +++++++++++++++++++++++++++++++
->  2 files changed, 1658 insertions(+), 1 deletion(-)
->  create mode 100644 target/riscv/tcg/psimd_helper.c
-> 
-> diff --git a/target/riscv/tcg/meson.build b/target/riscv/tcg/meson.build
-> index a05ab642f41..cc438d7c0d2 100644
-> --- a/target/riscv/tcg/meson.build
-> +++ b/target/riscv/tcg/meson.build
-> @@ -15,7 +15,8 @@ riscv_ss.add(files(
->    'vcrypto_helper.c',
->    'vector_helper.c',
->    'vector_internals.c',
-> -  'zce_helper.c'))
-> +  'zce_helper.c',
-> +  'psimd_helper.c'))
->  
->  
->  riscv_system_ss.add(files(
-> diff --git a/target/riscv/tcg/psimd_helper.c b/target/riscv/tcg/psimd_helper.c
-> new file mode 100644
-> index 00000000000..2948bbb2a86
-> --- /dev/null
-> +++ b/target/riscv/tcg/psimd_helper.c
-> @@ -0,0 +1,1656 @@
-> +/* SPDX-License-Identifier: GPL-2.0-or-later */
-> +/* RISC-V Packed SIMD Extension Helpers for QEMU. */
-> +/* Copyright (C) 2026 ISRC ISCAS. */
-> +
-> +#include "qemu/osdep.h"
-> +#include "cpu.h"
-> +#include "qemu/host-utils.h"
-> +#include "exec/helper-proto.h"
-> +#include "fpu/softfloat.h"
-> +#include "internals.h"
-> +
-> +
-> +/* Helper macros */
-> +
-> +/* Element count calculations */
-> +#define ELEMS_B(target) (sizeof(target) * 8 / 8)    /* byte elements count */
-> +#define ELEMS_H(target) (sizeof(target) * 8 / 16)
-> +#define ELEMS_W(target) (sizeof(target) * 8 / 32)   /* word elements count */
-> +#define ELEMS_D(target) (sizeof(target) * 8 / 64)
-> +
-> +/* Element extraction macros - unsigned to avoid sign extension */
-> +#define EXTRACT8(val, idx)  (((val) >> ((idx) * 8)) & 0xFF)
-> +#define EXTRACT16(val, idx) (((val) >> ((idx) * 16)) & 0xFFFF)
-> +#define EXTRACT32(val, idx) (((val) >> ((idx) * 32)) & 0xFFFFFFFF)
-> +#define EXTRACT64(val, idx) (((val) >> ((idx) * 64)) & 0xFFFFFFFFFFFFFFFFULL)
-> +
-QEMU has the generator bit-operation helper macros. I believe you don't need to
-define them again, so you can just follow this header file path.
+The interface is ambiguous, as "no" is valid file name. So,
+using "no" as a special value to disable script is deprecated.
+Use an empty string ("script=" / "downscript=") instead.
 
-path: include/qemu/bitops.h
+In a future version, "no" will be treated as a plain file name, just
+like any other non-empty value.
 
-```
-  extract8(value, start, length)
-  extract16(value, start, length)
-  extract32(value, start, length)
-  extract64(value, start, length)
+Document the deprecation in docs/about/deprecated.rst, qapi/net.json,
+and qemu-options.hx. Update other docs to use empty string instead of
+"no". Add a warning.
 
-  sextract32(value, start, length)
-  sextract64(value, start, length)
-```
+Signed-off-by: Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>
+Reviewed-by: Ben Chaney <bchaney@akamai.com>
+Reviewed-by: Markus Armbruster <armbru@redhat.com>
+---
+ docs/about/deprecated.rst                  | 18 ++++++++++++++++++
+ docs/system/i386/microvm.rst               |  4 ++--
+ docs/system/i386/xenpvh.rst                |  2 +-
+ docs/system/ppc/ppce500.rst                |  4 ++--
+ docs/system/riscv/microchip-icicle-kit.rst |  2 +-
+ docs/system/riscv/sifive_u.rst             |  2 +-
+ net/tap.c                                  | 17 +++++++++++------
+ qapi/net.json                              | 14 ++++++++++----
+ qemu-options.hx                            |  8 ++++++--
+ 9 files changed, 52 insertions(+), 19 deletions(-)
 
-So we can redefine these helper macros like this:
+diff --git a/docs/about/deprecated.rst b/docs/about/deprecated.rst
+index 0c656a968fc..c4929317e3a 100644
+--- a/docs/about/deprecated.rst
++++ b/docs/about/deprecated.rst
+@@ -71,6 +71,15 @@ flexible enough. The monitor objects have been converted to QOM, so
+ ``-mon mode=control`` is replaced by ``-object monitor-qmp``. The
+ short convenience options are not deprecated, only ``-mon``.
+ 
++``script=no`` and ``downscript=no`` for ``-netdev tap`` (since 11.2)
++'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
++
++The special value ``"no"`` for the ``script`` and ``downscript``
++parameters of ``-netdev tap`` disables script execution.  This special
++treatment of ``"no"`` is deprecated.  Use an empty string (``script=``
++or ``downscript=``) to disable script execution instead.  In a future
++version, ``"no"`` will be treated as a plain file name.
++
+ QEMU Machine Protocol (QMP) commands
+ ------------------------------------
+ 
+@@ -164,6 +173,15 @@ Use ``job-finalize`` instead.
+ 
+ Use ``query-accelerators`` instead.
+ 
++``"no"`` as value of ``script``/``downscript`` for tap in ``netdev_add`` (since 11.2)
++'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
++
++The special value ``"no"`` for the ``script`` and ``downscript``
++parameters of ``netdev_add`` with ``type=tap`` disables script
++execution.  This special treatment of ``"no"`` is deprecated.  Use an
++empty string instead.  In a future version, ``"no"`` will be treated as
++a plain file name.
++
+ Human Machine Protocol (HMP) commands
+ -------------------------------------
+ 
+diff --git a/docs/system/i386/microvm.rst b/docs/system/i386/microvm.rst
+index 1675e37d3e7..077ea15751e 100644
+--- a/docs/system/i386/microvm.rst
++++ b/docs/system/i386/microvm.rst
+@@ -79,7 +79,7 @@ legacy ``ISA serial`` device as console::
+      -serial stdio \
+      -drive id=test,file=test.img,format=raw,if=none \
+      -device virtio-blk-device,drive=test \
+-     -netdev tap,id=tap0,script=no,downscript=no \
++     -netdev tap,id=tap0,script=,downscript= \
+      -device virtio-net-device,netdev=tap0
+ 
+ While the example above works, you might be interested in reducing the
+@@ -103,7 +103,7 @@ disabled::
+      -device virtconsole,chardev=virtiocon0 \
+      -drive id=test,file=test.img,format=raw,if=none \
+      -device virtio-blk-device,drive=test \
+-     -netdev tap,id=tap0,script=no,downscript=no \
++     -netdev tap,id=tap0,script=,downscript= \
+      -device virtio-net-device,netdev=tap0
+ 
+ 
+diff --git a/docs/system/i386/xenpvh.rst b/docs/system/i386/xenpvh.rst
+index 904778e3f5c..862f38830b1 100644
+--- a/docs/system/i386/xenpvh.rst
++++ b/docs/system/i386/xenpvh.rst
+@@ -42,7 +42,7 @@ case you need to construct one manually:
+       -vnc none                                       \
+       -display none                                   \
+       -device virtio-net-pci,id=nic0,netdev=net0,mac=00:16:3e:5c:81:78 \
+-      -netdev type=tap,id=net0,ifname=vif3.0-emu,br=xenbr0,script=no,downscript=no \
++      -netdev type=tap,id=net0,ifname=vif3.0-emu,br=xenbr0,script=,downscript= \
+       -smp 4,maxcpus=4                                \
+       -nographic                                      \
+       -machine xenpvh,ram-low-base=0,ram-low-size=2147483648,ram-high-base=4294967296,ram-high-size=2147483648,pci-ecam-base=824633720832,pci-ecam-size=268435456,pci-mmio-base=4026531840,pci-mmio-size=33554432,pci-mmio-high-base=824902156288,pci-mmio-high-size=68719476736 \
+diff --git a/docs/system/ppc/ppce500.rst b/docs/system/ppc/ppce500.rst
+index c9fe0915dc5..ec5aaf14fd9 100644
+--- a/docs/system/ppc/ppce500.rst
++++ b/docs/system/ppc/ppce500.rst
+@@ -158,14 +158,14 @@ interface at PCI address 0.1.0, but we can switch that to an e1000 NIC by:
+   $ qemu-system-ppc64 -M ppce500 -smp 4 -m 2G \
+                       -display none -serial stdio \
+                       -bios u-boot \
+-                      -nic tap,ifname=tap0,script=no,downscript=no,model=e1000
++                      -nic tap,ifname=tap0,script=,downscript=,model=e1000
+ 
+ The QEMU ``ppce500`` machine can also dynamically instantiate an eTSEC device
+ if “-device eTSEC” is given to QEMU:
+ 
+ .. code-block:: bash
+ 
+-  -netdev tap,ifname=tap0,script=no,downscript=no,id=net0 -device eTSEC,netdev=net0
++  -netdev tap,ifname=tap0,script=,downscript=,id=net0 -device eTSEC,netdev=net0
+ 
+ Root file system on flash drive
+ -------------------------------
+diff --git a/docs/system/riscv/microchip-icicle-kit.rst b/docs/system/riscv/microchip-icicle-kit.rst
+index 9809e94b84b..7fdb96601ad 100644
+--- a/docs/system/riscv/microchip-icicle-kit.rst
++++ b/docs/system/riscv/microchip-icicle-kit.rst
+@@ -84,7 +84,7 @@ Then we can boot the machine by:
+   $ qemu-system-riscv64 -M microchip-icicle-kit -smp 5 -m 2G \
+       -sd path/to/sdcard.img \
+       -nic user,model=cadence_gem \
+-      -nic tap,ifname=tap,model=cadence_gem,script=no \
++      -nic tap,ifname=tap,model=cadence_gem,script= \
+       -display none -serial stdio \
+       -kernel path/to/u-boot/build/dir/u-boot.bin \
+       -dtb path/to/u-boot/build/dir/u-boot.dtb
+diff --git a/docs/system/riscv/sifive_u.rst b/docs/system/riscv/sifive_u.rst
+index 8f55ae8e313..0e4dcf3e70c 100644
+--- a/docs/system/riscv/sifive_u.rst
++++ b/docs/system/riscv/sifive_u.rst
+@@ -199,7 +199,7 @@ To boot the VxWorks kernel in QEMU with the ``sifive_u`` machine, use:
+ 
+   $ qemu-system-riscv64 -M sifive_u -smp 5 -m 2G \
+       -display none -serial stdio \
+-      -nic tap,ifname=tap0,script=no,downscript=no \
++      -nic tap,ifname=tap0,script=,downscript= \
+       -kernel /path/to/vxWorks \
+       -append "gem(0,0)host:vxWorks h=192.168.200.1 e=192.168.200.2:ffffff00 u=target pw=vxTarget f=0x01"
+ 
+diff --git a/net/tap.c b/net/tap.c
+index 2076f5b7802..f4051e8d4b1 100644
+--- a/net/tap.c
++++ b/net/tap.c
+@@ -92,7 +92,8 @@ static void launch_script(const char *setup_script, const char *ifname,
+ static void tap_send(void *opaque);
+ static void tap_writable(void *opaque);
+ 
+-static bool tap_is_explicit_no_script(const char *script_arg_value)
++static bool tap_is_explicit_no_script(const char *script_arg_name,
++                                      const char *script_arg_value)
+ {
+     if (!script_arg_value) {
+         return false;
+@@ -103,16 +104,19 @@ static bool tap_is_explicit_no_script(const char *script_arg_value)
+     }
+ 
+     if (strcmp(script_arg_value, "no") == 0) {
++        warn_report("'%s=no' is deprecated; use '%s=' instead",
++                    script_arg_name, script_arg_name);
+         return true;
+     }
+ 
+     return false;
+ }
+ 
+-static char *tap_parse_script(const char *script_arg_value,
++static char *tap_parse_script(const char *script_arg_name,
++                              const char *script_arg_value,
+                               const char *default_path)
+ {
+-    if (tap_is_explicit_no_script(script_arg_value)) {
++    if (tap_is_explicit_no_script(script_arg_name, script_arg_value)) {
+         return NULL;
+     }
+ 
+@@ -741,7 +745,7 @@ static bool net_init_tap_one(const NetdevTapOptions *tap, NetClientState *peer,
+         qemu_set_info_str(&s->nc, "helper=%s", tap->helper);
+     } else {
+         qemu_set_info_str(&s->nc, "ifname=%s,script=%s,downscript=%s", ifname,
+-                          script ?: "no", downscript ?: "no");
++                          script ?: "", downscript ?: "");
+ 
+         if (downscript) {
+             snprintf(s->down_script, sizeof(s->down_script), "%s", downscript);
+@@ -947,9 +951,10 @@ int net_init_tap(const Netdev *netdev, const char *name,
+         }
+     } else {
+         g_autofree char *script =
+-            tap_parse_script(tap->script, DEFAULT_NETWORK_SCRIPT);
++            tap_parse_script("script", tap->script, DEFAULT_NETWORK_SCRIPT);
+         g_autofree char *downscript =
+-            tap_parse_script(tap->downscript, DEFAULT_NETWORK_DOWN_SCRIPT);
++            tap_parse_script("downscript", tap->downscript,
++                             DEFAULT_NETWORK_DOWN_SCRIPT);
+ 
+         if (tap->ifname) {
+             pstrcpy(ifname, sizeof ifname, tap->ifname);
+diff --git a/qapi/net.json b/qapi/net.json
+index 8f0915c4d86..acb8594c952 100644
+--- a/qapi/net.json
++++ b/qapi/net.json
+@@ -399,15 +399,21 @@
+ # @fds: multiple file descriptors of already opened multiqueue capable
+ #     tap
+ #
+-# @script: script to initialize the interface.  An empty string or
+-#     "no" disables script execution.  Defaults to
++# @script: script to initialize the interface.  An empty string
++#     disables script execution.  Defaults to
+ #     ``<sysconfdir>/qemu-ifup``, where ``<sysconfdir>`` is the
+ #     system configuration directory at build time (typically /etc).
++#     Using "no" to disable script execution is deprecated (since
++#     11.2); use an empty string instead.  In a future version, "no"
++#     will be treated as a plain file name.
+ #
+-# @downscript: script to shut down the interface.  An empty string or
+-#     "no" disables script execution.  Defaults to
++# @downscript: script to shut down the interface.  An empty string
++#     disables script execution.  Defaults to
+ #     ``<sysconfdir>/qemu-ifdown``, where ``<sysconfdir>`` is the
+ #     system configuration directory at build time (typically /etc).
++#     Using "no" to disable script execution is deprecated (since
++#     11.2); use an empty string instead.  In a future version, "no"
++#     will be treated as a plain file name.
+ #
+ # @br: bridge name (since 2.8)
+ #
+diff --git a/qemu-options.hx b/qemu-options.hx
+index 200949655ea..1efdb8e9860 100644
+--- a/qemu-options.hx
++++ b/qemu-options.hx
+@@ -3014,7 +3014,8 @@ DEF("netdev", HAS_ARG, QEMU_OPTION_netdev,
+     "                use network scripts 'file' (default=" DEFAULT_NETWORK_SCRIPT ")\n"
+     "                to configure it and 'dfile' (default=" DEFAULT_NETWORK_DOWN_SCRIPT ")\n"
+     "                to deconfigure it\n"
+-    "                use '[down]script=no' or '[down]script=' to disable script execution\n"
++    "                use '[down]script=' to disable script execution\n"
++    "                ('[down]script=no' is deprecated and will be treated as a file name in future)\n"
+     "                use network helper 'helper' (default=" DEFAULT_BRIDGE_HELPER ") to\n"
+     "                configure it\n"
+     "                use 'fd=h' to connect to an already opened TAP interface\n"
+@@ -3553,7 +3554,10 @@ SRST
+     ``<sysconfdir>/qemu-ifup`` and the default network deconfigure script is
+     ``<sysconfdir>/qemu-ifdown``, where ``<sysconfdir>`` is the system
+     configuration directory at build time (typically ``/etc``).
+-    Use ``[down]script=no`` or ``[down]script=`` to disable script execution.
++    Use ``[down]script=`` to disable script execution.
++    Using ``[down]script=no`` is deprecated; it disables script
++    execution now, but in a future version it will be treated as a
++    plain file name.
+ 
+     If running QEMU as an unprivileged user, use the network helper
+     to configure the TAP interface and attach it to the bridge.
+-- 
+2.43.0
 
-```
-  #define EXTRACT_B(val, idx) extract64((val), (idx) * 8, 8)
-  #define EXTRACT_H(val, idx) extract64((val), (idx) * 16, 16)
-  #define EXTRACT_W(val, idx) extract64((val), (idx) * 32, 32)
-  #define EXTRACT_D(val, idx) extract64((val), (idx) * 64, 64)
-```
-
-> +/* Element insertion macros */
-> +#define INSERT8(val, res, idx) \
-> +    ((val) | ((target_ulong)(uint8_t)(res) << ((idx) * 8)))
-> +#define INSERT16(val, res, idx) \
-> +    ((val) | ((target_ulong)(uint16_t)(res) << ((idx) * 16)))
-> +#define INSERT32(val, res, idx) \
-> +    ((val) | ((target_ulong)(uint32_t)(res) << ((idx) * 32)))
-> +#define INSERT32_64(val, res, idx) \
-> +    ((val) | ((uint64_t)(uint32_t)(res) << ((idx) * 32)))
-> +#define INSERT64(val, res, idx) \
-> +    ((val) | ((uint64_t)(res) << ((idx) * 64)))
-> +
-> +/* Saturation constants */
-> +static const int8_t   SAT_MAX_B = 127;
-> +static const int8_t   SAT_MIN_B = -128;
-> +static const int16_t  SAT_MAX_H = 32767;
-> +static const int16_t  SAT_MIN_H = -32768;
-> +static const int32_t  SAT_MAX_W = 2147483647;
-> +static const int32_t  SAT_MIN_W = -2147483648LL;
-> +static const uint8_t  USAT_MAX_B = 255;
-> +static const uint16_t USAT_MAX_H = 65535;
-> +static const uint32_t USAT_MAX_W = 4294967295U;
-> +
-> +
-> +/* Saturation helper functions */
-> +
-> +/**
-> + * Signed saturation for 8-bit elements
-> + * Returns saturated value and sets *sat if saturation occurred
-> + */
-This helper function has some comments that explain what it does.
-I believe we don't need these explanations if the function name is
-already clear.
-
-The other helper functions below are similar. I think we only need
-to add comments when it's necessary to explain the reasoning behind
-why we're doing something.
-
-d> +static inline int8_t signed_saturate_b(int32_t val, int *sat)
-> +{
-> +    if (val > SAT_MAX_B) {
-> +        *sat = 1;
-> +        return SAT_MAX_B;
-> +    }
-> +    if (val < SAT_MIN_B) {
-> +        *sat = 1;
-> +        return SAT_MIN_B;
-> +    }
-> +    return (int8_t)val;
-> +}
-> +
-> +/**
-> + * Signed saturation for 16-bit elements
-> + */
-> +static inline int16_t signed_saturate_h(int32_t val, int *sat)
-> +{
-> +    if (val > SAT_MAX_H) {
-> +        *sat = 1;
-> +        return SAT_MAX_H;
-> +    }
-> +    if (val < SAT_MIN_H) {
-> +        *sat = 1;
-> +        return SAT_MIN_H;
-> +    }
-> +    return (int16_t)val;
-> +}
-> +
-> +/**
-> + * Signed saturation for 32-bit elements
-> + */
-> +static inline int32_t signed_saturate_w(int64_t val, int *sat)
-> +{
-> +    if (val > SAT_MAX_W) {
-> +        *sat = 1;
-> +        return SAT_MAX_W;
-> +    }
-> +    if (val < SAT_MIN_W) {
-> +        *sat = 1;
-> +        return SAT_MIN_W;
-> +    }
-> +    return (int32_t)val;
-> +}
-> +
-> +/**
-> + * Unsigned saturation for 8-bit elements
-> + */
-> +static inline uint8_t unsigned_saturate_b(uint32_t val, int *sat)
-> +{
-> +    if (val > USAT_MAX_B) {
-> +        *sat = 1;
-> +        return USAT_MAX_B;
-> +    }
-> +    return (uint8_t)val;
-> +}
-> +
-> +/**
-> + * Unsigned saturation for 16-bit elements
-> + */
-> +static inline uint16_t unsigned_saturate_h(uint32_t val, int *sat)
-> +{
-> +    if (val > USAT_MAX_H) {
-> +        *sat = 1;
-> +        return USAT_MAX_H;
-> +    }
-> +    return (uint16_t)val;
-> +}
-> +
-> +/**
-> + * Unsigned saturation for 32-bit elements
-> + */
-> +static inline uint32_t unsigned_saturate_w(uint64_t val, int *sat)
-> +{
-> +    if (val > USAT_MAX_W) {
-> +        *sat = 1;
-> +        return USAT_MAX_W;
-> +    }
-> +    return (uint32_t)val;
-> +}
-> +
-> +static inline target_ulong psimd_abdsumu_b(target_ulong rs1,
-> +                                           target_ulong rs2,
-> +                                           target_ulong sum)
-> +{
-> +    int elems = ELEMS_B(rs1);
-> +
-> +    for (int i = 0; i < elems; i++) {
-> +        uint8_t e1 = EXTRACT8(rs1, i);
-> +        uint8_t e2 = EXTRACT8(rs2, i);
-> +        uint8_t diff = (e1 > e2) ? (e1 - e2) : (e2 - e1);
-> +        sum += diff;
-> +    }
-> +
-> +    return sum;
-> +}
-> +
-> +#define PSIMD_DO_ADD(N, M) ((N) + (M))
-> +#define PSIMD_DO_SUB(N, M) ((N) - (M))
-> +#define PSIMD_DO_ABD(N, M) ((N) >= (M) ? (N) - (M) : (M) - (N))
-> +#define PSIMD_DO_EQ_MASK(N, M) ((N) == (M) ? -1 : 0)
-> +#define PSIMD_DO_LT_MASK(N, M) ((N) < (M) ? -1 : 0)
-> +#define PSIMD_DO_MIN(N, M) ((N) < (M) ? (N) : (M))
-> +#define PSIMD_DO_MAX(N, M) ((N) > (M) ? (N) : (M))
-> +#define PSIMD_DO_SLL(N, M) ((N) << (M))
-> +#define PSIMD_DO_SRL(N, M) ((N) >> (M))
-> +#define PSIMD_DO_SRA(N, M) ((N) >> (M))
-> +
-
-[...]
-
-> +
-> +#define GEN_PSIMD_SCALAR_ABS(NAME, RTYPE, STYPE, UTYPE)                   \
-> +RTYPE HELPER(NAME)(CPURISCVState *env, RTYPE rs1)                         \
-> +{                                                                         \
-> +    STYPE value = (STYPE)rs1;                                            \
-> +    UTYPE result = (UTYPE)value;                                         \
-> +                                                                          \
-> +    if (value < 0) {                                                      \
-> +        result = (UTYPE)0 - result;                                      \
-> +    }                                                                     \
-> +    return (RTYPE)(STYPE)result;                                         \
-> +}
-The '\' for the column widths aren't aligned here. It would
-look much better if we could align them consistently throughout.
-
-[...]
-
-> +uint64_t HELPER(NAME)(CPURISCVState *env, uint64_t rs1, uint64_t rs2)     \
-> +{                                                                         \
-> +    int64_t a = (int64_t)rs1;                                            \
-> +    int8_t shamt = (int8_t)(rs2 & 0xff);                                 \
-> +                                                                          \
-> +    if (shamt >= 0) {                                                     \
-> +        return (uint64_t)(a << shamt);                                    \
-> +    }                                                                     \
-> +                                                                          \
-> +    int right = -shamt;                                                   \
-> +    if (right >= 64) {                                                    \
-> +        return (a < 0) ? (uint64_t)-1 : 0;                               \
-> +    }                                                                     \
-> +    return (uint64_t)RIGHT_OP(a, right);                                  \
-> +}
-There are similar alignment issues here.
-
-> +
-> +#define PSIMD_DO_SRL64(A, B) (((B) >= 64) ? 0 : ((A) >> (B)))
-> +#define PSIMD_DO_RNDSRL64(A, B)                                          \
-> +    (((B) > 64) ? 0 : ((((A) >> ((B) - 1)) + 1) >> 1))
-> +
-> +#define GEN_PSIMD_VAR_SRL64(NAME, RIGHT_OP)                               \
-> +uint64_t HELPER(NAME)(CPURISCVState *env, uint64_t rs1, uint64_t rs2)     \
-> +{                                                                         \
-> +    int8_t shamt = (int8_t)(rs2 & 0xff);                                 \
-> +                                                                          \
-> +    if (shamt < 0) {                                                      \
-> +        return RIGHT_OP(rs1, -shamt);                                     \
-> +    }                                                                     \
-> +    return (shamt >= 64) ? 0 : (rs1 << shamt);                           \
-> +}
-> +
-Same here.You can check again for the patches.
-
-Thanks,
-Chao
 
