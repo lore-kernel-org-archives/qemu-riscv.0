@@ -4,70 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28BA2C53200
-	for <qemu-riscv@archiver.kernel.org>; Wed, 29 Jul 2026 08:40:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 442EEC54F51
+	for <qemu-riscv@archiver.kernel.org>; Wed, 29 Jul 2026 08:43:31 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wozpk-0002Co-Ih; Wed, 29 Jul 2026 04:40:12 -0400
+	id 1wozso-00039y-5X; Wed, 29 Jul 2026 04:43:22 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1wozpi-00028l-IE; Wed, 29 Jul 2026 04:40:10 -0400
-Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1wozpg-0008GB-Pz; Wed, 29 Jul 2026 04:40:10 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=univ-grenoble-alpes.fr; s=2020; t=1785314404;
- bh=ocPHFdXbLcL1yFdnlCp9sUPravLu4RnRJk/UejhcPFQ=;
- h=From:To:Cc:Subject:Date:From;
- b=Oz7+EXofO/YV593jxrrVPg++VYr1ho9h90JP7oyI82iuClBBoTTnR3xJmy0IhT35I
- AS7Irs4nSEQAxee29FEyt2HKodicGSiJWSDwaRxZ2ujjm4tjWQ+MSgBWieCWY/JyGN
- Q34J2AYvV+OctZQ2uifweLJDzttrJbG6uIzkBekYR2NHzx8E9xPGkR8zLUF0/nooW0
- PpsSLIN//52t8E3DB6v0te/+wH5SATx3z/cz0gJlWPlDOHrAnZZ+i78ml1SeOrj/7X
- 2r8Y85unin3gAUtKNVZAN76hvVNm7cUPfBqzj5K0ldCMooxVeQaDmcejf72c3y4YDW
- 2EB4+TLpsIC/Q==
-Received: from mailhub-2.u-ga.fr (mailhub-2.u-ga.fr [129.88.178.102])
- by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id 252FD40222;
- Wed, 29 Jul 2026 10:40:04 +0200 (CEST)
-Received: from smtps.univ-grenoble-alpes.fr (smtps3.u-ga.fr [195.83.24.62])
- by mailhub-2.u-ga.fr (Postfix) with ESMTP id 20956FF855;
- Wed, 29 Jul 2026 10:40:04 +0200 (CEST)
-Received: from naga.tima.u-ga.fr (naga.tima.u-ga.fr [147.171.132.150])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- (Authenticated sender: petrotf@univ-grenoble-alpes.fr)
- by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id C0FC9400EE;
- Wed, 29 Jul 2026 10:40:03 +0200 (CEST)
-From: frederic.petrot@univ-grenoble-alpes.fr
-To: daniel.barboza@oss.qualcomm.com, palmer@dabbelt.com,
- alistair.francis@wdc.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
+ (Exim 4.90_1) (envelope-from <chao.liu.zevorn@gmail.com>)
+ id 1wozsm-000391-2U
+ for qemu-riscv@nongnu.org; Wed, 29 Jul 2026 04:43:20 -0400
+Received: from mail-pj2-x0b.google.com ([2607:f8b0:4864:39::b])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <chao.liu.zevorn@gmail.com>)
+ id 1wozsk-000061-6E
+ for qemu-riscv@nongnu.org; Wed, 29 Jul 2026 04:43:19 -0400
+Received: by mail-pj2-x0b.google.com with SMTP id
+ 98e67ed59e1d1-38de693676dso429819a91.0
+ for <qemu-riscv@nongnu.org>; Wed, 29 Jul 2026 01:43:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1785314596; x=1785919396; darn=nongnu.org;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=a11+Cc8dmhp1fC2pGOY46Z24KBM2/GScbvitZXzd2iA=;
+ b=XIHvfzpNNzBOiLd2fX85stZe4CSSemtzoeH0O3P0XGrE8ETbCUEHIe46nd5V5+Y0TI
+ 612797MTkQazdAdbdJknmKgRA6aS29IGbCSIoCD6G4BiAEmZtNncA2O91qdSUJ/kRA3h
+ gBBZCPKcFB5pw+cquIFMElSBVz4CdStUYRY4nrYHJSghy5GLJDPabkoqrcvObiahr/5/
+ ICs3jPQqqdohcKvvdsCWxrbQc4glsbfQYf3j2pq2f2is4CSgPRHkOHdzuURKTVxJKXch
+ wwXqlVQYGPurSWFcN56ty+Il+iEXm8W+uE8NSaOtfn0zU2IKDPNq/fjMzLTz5FzsJcjk
+ dLBw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1785314596; x=1785919396;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=a11+Cc8dmhp1fC2pGOY46Z24KBM2/GScbvitZXzd2iA=;
+ b=S+SjpDwHDHXFOQCvLFfQnMN0VMhK2A6jQksZaY4dy5lGEuRbmrRq866s9apNUlWsdD
+ Z3vh9342wx7vDpOzMLVHAh4ojxCxmdOBha1rZ12N2ugirG/9ulOghrocJ4h1O2WeK56h
+ 13xaoRPLG+WK4QlIQy1wn2rnGk+s4tjJvLD+PaAuZPpJGv+BpWg+IF64XWxXmyJ5diNW
+ ySa4nVjabDhPTSBwp3u0OhylEx3hgXydgxi7IWHWrGZZVU+wXdL8Dd1dEpOE03HpEmS+
+ l852AGsJRbApDUa68uHbaFlFtkwP6bj92AkUyjf6y1fkVFTEGP0w8Iz8Xj+dsp7xGa+x
+ GDgA==
+X-Forwarded-Encrypted: i=1;
+ AHgh+Rp1WdbBKnINRYjK341yygPlGyMhaqx32wD8s2KsJqsjK8jp/xWmFjeQDKV3ICL4/DYDRxlKPhXdqb6W@nongnu.org
+X-Gm-Message-State: AOJu0YyVLiiQqP20m7/y074h6XSRUIURwv/xxw3Wx2Dk/NOtIhm3CUPJ
+ QK23Sl93XSAUCODc8cSDjHwklcGtbI/+Jn0Uydqm80ZK07/DTNMoOG3h
+X-Gm-Gg: AR+sD11CxqlvgnEj726/PpuPiH4VmKb7FDnK0fJpgnwoKdL1c3vB3z6YXZ3vzLPwTYS
+ G74x0/3f9dSCXfi2Eac4NL+GeyU73hA0Fay7nxTIWjLHTqfw5gKurs8exF4gCG1p7M4UZwrJIhD
+ uBH9qiuWWzJmG1WgNLenstGZMa2uKHMr52Xl8Tos5aAN6IA8v/3F0BxYtSWGJ6ZPmvwwEQ31dHO
+ lIPRor+ZujUloS3SYmmX3bxLWM8HIEr624O5vBRm6N+uBkb3FIz0kzRl9SpjUMA4hYgX8rjwrwg
+ 5nuw9ZVvovND1/9SEhRSUWdN0IRd2GdDa99dtM/GLutLyN4lfm6YxEtawOEfJcN6AJxlSb+Aq2a
+ 0Ok/U6FAy2Dhs3fMIRV3dcdzIIatMHnEXIRJRdq2sR3PoybR5g2ABnhKgcr5EftTOPd+aXzZwc8
+ iKuf224nW6WVteH+37OvBZpJ218rTA6KTHAZP33tSDd8/BqJIjafQJa/YtTUHCv1bc/00Q6Dcah
+ sFXtYuH2K0WHWeSHIzINrJZyM0=
+X-Received: by 2002:a17:90b:5868:b0:38e:a74:dfe4 with SMTP id
+ 98e67ed59e1d1-38f6a422e0fmr6344902a91.25.1785314595929; 
+ Wed, 29 Jul 2026 01:43:15 -0700 (PDT)
+Received: from localhost ([179.255.148.148]) by smtp.gmail.com with ESMTPSA id
+ 5a478bee46e88-31504b1246dsm6884142eec.2.2026.07.29.01.43.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 29 Jul 2026 01:43:15 -0700 (PDT)
+Date: Wed, 29 Jul 2026 16:43:11 +0800
+From: Chao Liu <chao.liu.zevorn@gmail.com>
+To: Molly Chen <xiaoou@iscas.ac.cn>
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com, 
+ daniel.barboza@oss.qualcomm.com, zhiwei_liu@linux.alibaba.com,
  qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Cc: =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20P=C3=A9trot?=
- <frederic.petrot@univ-grenoble-alpes.fr>
-Subject: [PATCH 1/2] target/riscv: Fix sstatus update in rv128
-Date: Wed, 29 Jul 2026 10:39:40 +0200
-Message-ID: <20260729083941.103646-1-frederic.petrot@univ-grenoble-alpes.fr>
-X-Mailer: git-send-email 2.43.0
+Subject: Re: [PATCH v2 00/18] target/riscv: Add support for RISC-V P
+Message-ID: <amm8EfJjG7VdgS8C@ChaodeMacBook-Pro.local>
+References: <cover.1784280142.git.xiaoou@iscas.ac.cn>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Greylist: Whitelist-UGA SMTP Authentifie (petrotf@univ-grenoble-alpes.fr)
- via submission-587 ACL (41)
-Received-SPF: pass client-ip=152.77.200.56;
- envelope-from=frederic.petrot@univ-grenoble-alpes.fr;
- helo=zm-mta-out-3.u-ga.fr
-X-Spam_score_int: -43
-X-Spam_score: -4.4
-X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001,
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <cover.1784280142.git.xiaoou@iscas.ac.cn>
+Received-SPF: pass client-ip=2607:f8b0:4864:39::b;
+ envelope-from=chao.liu.zevorn@gmail.com; helo=mail-pj2-x0b.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -84,43 +104,120 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
+Hi Molly,
 
-The sstatus register assignment was performed before the write
-mask was fully constructed, leading to an incomplete update of
-sstatus fields on the experimental rv128 target.
+On Fri, Jul 17, 2026 at 10:06:53AM +0800, Molly Chen wrote:
+> This series adds support for the RISC-V Packed SIMD (P) extension.
+> 
+> The P extension defines packed-SIMD fixed-point operations intended
+> for DSP-style workloads such as multimedia and signal processing.
+> These instructions operate on packed subword elements within
+> general-purpose registers (GPRs).
+> 
+> The implementation follows the current development draft of the
+> specification (v0.20):
+> 
+>   https://github.com/riscv/riscv-p-spec/
+>   or
+>   https://www.jhauser.us/RISCV/ext-P/
+> 
+> Compared with v1, this version reduces implementation boilerplate by
+> defining and reusing helper macros for common patterns in
+> trans_rvp.c.inc and psimd_helper.c. It also consolidates the P
+> extension prerequisite validation in riscv_cpu_validate_p().
+> 
+> The Zbkb dependency has been removed to align the implementation with
+> the current specification. This version also implements the
+> specification-defined control of vxsat, which was missing from v1.
+> 
+> All instructions have been functionally tested using the following
+> test suite:
+> 
+>   https://github.com/mollybuild/qemu-riscv-test-uart
+I believe we need to add some TCG test cases for the patches if
+the latest compiler supports the P extension, we can add some cases
+similar to your repo.
 
-Move the sstatus write after the mask completion so the full
-write mask is applied correctly.
 
-Signed-off-by: Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
----
- target/riscv/tcg/csr.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Thanks,
+Chao
 
-diff --git a/target/riscv/tcg/csr.c b/target/riscv/tcg/csr.c
-index 36f2004bc5..d834b77714 100644
---- a/target/riscv/tcg/csr.c
-+++ b/target/riscv/tcg/csr.c
-@@ -3984,7 +3984,7 @@ static RISCVException read_sstatus_i128(CPURISCVState *env, int csrno,
-                                         Int128 *val)
- {
-     uint64_t mask = sstatus_v1_10_mask;
--    uint64_t sstatus = env->mstatus & mask;
-+    uint64_t sstatus;
-     if (env->xl != MXL_RV32 || env->debugger) {
-         mask |= SSTATUS64_UXL;
-     }
-@@ -3995,7 +3995,7 @@ static RISCVException read_sstatus_i128(CPURISCVState *env, int csrno,
-     if (env_archcpu(env)->cfg.ext_zicfilp) {
-         mask |= SSTATUS_SPELP;
-     }
--
-+    sstatus = env->mstatus & mask;
-     *val = int128_make128(sstatus, add_status_sd(MXL_RV128, sstatus));
-     return RISCV_EXCP_NONE;
- }
--- 
-2.43.0
-
+> 
+> The implementation focuses on functional correctness and ISA
+> coverage. Performance optimizations were not considered at this
+> stage.
+> 
+> Feedback on the implementation details would be highly appreciated.
+> 
+> Tested with:
+> 
+>   - ninja -C build test
+>   - make -C build check-qtest-riscv32
+>   - make -C build check-qtest-riscv64
+>   - Functional tests for all P extension instructions using
+>     qemu-riscv-test-uart
+> 
+> No regressions or test failures were observed.
+> 
+> ---
+> Changes in v2:
+> 
+>   - Refactored trans_rvp.c.inc and psimd_helper.c by defining and
+>     reusing helper macros for common implementation patterns, reducing
+>     boilerplate and overall code size.
+>   - Moved the P extension prerequisite checks into
+>     riscv_cpu_validate_p().
+>   - Removed the Zbkb dependency to align with the current
+>     specification.
+>   - Added the specification-defined vxsat control mechanism, which was
+>     missing from v1.
+> 
+> v1:
+>   https://lists.nongnu.org/archive/html/qemu-riscv/2026-04/msg00301.html
+> 
+> Molly Chen (18):
+>   target/riscv: Add packed SIMD extension state
+>   target/riscv: Add packed SIMD helper framework
+>   target/riscv: Add packed SIMD arithmetic instructions
+>   target/riscv: Add packed SIMD averaging and rounding instructions
+>   target/riscv: Add packed SIMD absolute, difference, compare and mask
+>     instructions
+>   target/riscv: Add packed SIMD shift instructions
+>   target/riscv: Add packed SIMD exchange instructions
+>   target/riscv: Add packed SIMD horizontal reduction instructions
+>   target/riscv: Add packed SIMD pack, merge and count-leading
+>     instructions
+>   target/riscv: Add packed SIMD multiplication instructions
+>   target/riscv: Add packed SIMD multiply-accumulate instructions
+>   target/riscv: Add packed SIMD Q-format multiplication instructions
+>   target/riscv: Add packed SIMD Q-format MAC instructions
+>   target/riscv: Add packed SIMD two-way MAC instructions
+>   target/riscv: Add packed SIMD four-way MAC instructions
+>   target/riscv: Add packed SIMD load-replicate instructions
+>   target/riscv: Add packed SIMD RV32 only instructions
+>   target/riscv: Remove Zbkb dependency from P extension to align with
+>     the spec
+> 
+>  target/riscv/cpu.c                          |    5 +-
+>  target/riscv/cpu.h                          |    8 +
+>  target/riscv/cpu_bits.h                     |    2 +
+>  target/riscv/helper.h                       |  529 ++++
+>  target/riscv/insn32.decode                  |  829 +++++
+>  target/riscv/machine.c                      |   19 +
+>  target/riscv/tcg/csr.c                      |   39 +-
+>  target/riscv/tcg/insn_trans/trans_rvb.c.inc |    4 +-
+>  target/riscv/tcg/insn_trans/trans_rvp.c.inc | 1389 ++++++++
+>  target/riscv/tcg/meson.build                |    3 +-
+>  target/riscv/tcg/psimd_helper.c             | 3165 +++++++++++++++++++
+>  target/riscv/tcg/tcg-cpu.c                  |   46 +
+>  target/riscv/tcg/translate.c                |    6 +
+>  13 files changed, 6038 insertions(+), 6 deletions(-)
+>  create mode 100644 target/riscv/tcg/insn_trans/trans_rvp.c.inc
+>  create mode 100644 target/riscv/tcg/psimd_helper.c
+> 
+> 
+> base-commit: 8fb307591625731060d399aca42373c02c7cb040
+> -- 
+> 2.34.1
+> 
 
