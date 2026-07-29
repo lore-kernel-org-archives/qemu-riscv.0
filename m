@@ -4,102 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3575C53200
-	for <qemu-riscv@archiver.kernel.org>; Wed, 29 Jul 2026 17:14:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD779C53200
+	for <qemu-riscv@archiver.kernel.org>; Wed, 29 Jul 2026 17:55:15 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wp7qo-0006G0-Kq; Wed, 29 Jul 2026 13:13:50 -0400
+	id 1wp8UT-00005v-Gw; Wed, 29 Jul 2026 13:54:49 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <asrinivasan@tenstorrent.com>)
- id 1wp672-0007mC-QM
- for qemu-riscv@nongnu.org; Wed, 29 Jul 2026 11:22:28 -0400
-Received: from mail-oa1-x2d.google.com ([2001:4860:4864:20::2d])
+ (Exim 4.90_1) (envelope-from <caojunze424@gmail.com>)
+ id 1wp8UR-000053-Er
+ for qemu-riscv@nongnu.org; Wed, 29 Jul 2026 13:54:47 -0400
+Received: from mail-pf1-x42d.google.com ([2607:f8b0:4864:20::42d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <asrinivasan@tenstorrent.com>)
- id 1wp66y-0006px-I1
- for qemu-riscv@nongnu.org; Wed, 29 Jul 2026 11:22:28 -0400
-Received: by mail-oa1-x2d.google.com with SMTP id
- 586e51a60fabf-456d267da8cso468994fac.2
- for <qemu-riscv@nongnu.org>; Wed, 29 Jul 2026 08:22:24 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <caojunze424@gmail.com>)
+ id 1wp8UP-0007mJ-TV
+ for qemu-riscv@nongnu.org; Wed, 29 Jul 2026 13:54:47 -0400
+Received: by mail-pf1-x42d.google.com with SMTP id
+ d2e1a72fcca58-84eb072307dso71524b3a.2
+ for <qemu-riscv@nongnu.org>; Wed, 29 Jul 2026 10:54:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=tenstorrent.com; s=google; t=1785338543; x=1785943343; darn=nongnu.org;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=YIpPW+jQ9fhEwD83itkXvHNnk6rkY7mxSSg5uCIzBWk=;
- b=b61/UGjhDo71/zhcriQaEHofM6kAL0SJ/L+CD05Uh2NplAybIi3VANWxf6JuPGCQ/v
- qPvhM07n7M1sPp1QZihTtjFPVjJI09XXZRbthiUltbw32T2bJ5K0Gc//fIZoKLX/LS16
- zmykHsqxeMiulcBXfNDiCyzKy1GTta/Hu8SZqHqLkWRNqMG3QU5ebEW9ePgAw1rkoEgA
- Aa8oI92smLK4L04mIzWgLiQFCP3Osc8FSNh3HDMzhUtB/ji99eke2l+jRwg7yzmYjbRI
- 89RGKVtmWbx3a+XTs4GUcX93Pm0RTl4XemHLcqN9VUWRrgQVjK2xTCiReXpLRo4J/thp
- Ux7g==
+ d=gmail.com; s=20251104; t=1785347684; x=1785952484; darn=nongnu.org;
+ h=message-id:date:references:in-reply-to:cc:to:from:subject
+ :content-transfer-encoding:content-type:mime-version:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=St0sbWVUOO25NzxE5LrZ2jH6fvu64X2fWRJfs5ToJAU=;
+ b=QmkfEjYYJ2grc5H896z1TB4/pjwRbVCCM8WPzViK1mFwtXpFR/S3tsY61LknxkSVKM
+ RsxXbm+m3WRnYKT6ItfE69BNU++wUctLTHw63JpJ2ZCiI5BXTOYN0MI1D4QDACZR9lAT
+ NA3rOOh6XGWcLM1saEOci3jvS3T7kHazzfRvu7fvmAo5jGl6RkIHBiW52k9lOSrhPajQ
+ OAXl1JqZWffoh2jezx10e/lstN0wPIsJfz/JQ58pF7v6K8Qy0h0IRjsr+QwsYDFcdMtV
+ VKUMHyGt97SfPz5YIkZJxc4pU4GCo05KFzFH2wDVcSmSBC5r1PELPdy308qJdiYdd/QF
+ NbhQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785338543; x=1785943343;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:x-gm-gg
+ d=1e100.net; s=20251104; t=1785347684; x=1785952484;
+ h=message-id:date:references:in-reply-to:cc:to:from:subject
+ :content-transfer-encoding:content-type:mime-version:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=YIpPW+jQ9fhEwD83itkXvHNnk6rkY7mxSSg5uCIzBWk=;
- b=hDm9tB6/ncBRu+6UnpPREnY6ZQYOXMbIjbbdFwSAgBjQlXE8AHLzUn81v3xltXD0De
- AomGJWMfCV41vQZgdV6mx9M95k7QpQFkQAjhH3GCutv52UK7gZ5/dAWvXGPWIsAHkt7j
- ioeiKMFxshfnHS+/rcFts1q6UezQV5o1oFfeOSyH9SbbhhNNNBgjPHiPK+LgYDGsDqtN
- NDY/c09iyjXh4Zh9avK0pSFdb6AAVIpH3wCyd4mGMeRJWB6NCozgppJnQ9RBKdBbnKSJ
- iCbBmmnRRMr+yrtYLGS/ux4L7HsMgc0itAUioDXP7mxGm1vhnUSXCVuqemZItWNMBLAI
- RSUg==
+ bh=St0sbWVUOO25NzxE5LrZ2jH6fvu64X2fWRJfs5ToJAU=;
+ b=ZJd3ljA06hlGtOU0osV5CkRAaWWXEFGr50LL+bDcaohaYOM0aR3ML9ChCTS13jsWu/
+ cB5OBHY6Y10T4nHRLAl/ZbcXrnGjb49f8YPg18Iuox3aZ4gHKTuwUeyxYn4h+WwMum/k
+ v3rgIBbVz/wt1WRN6DinkGhZ9MymPE5h2G4j+VODqVhVgheMbP9zlKRU/v0+KNEXv35w
+ oPjb6fPLndqtZWO16x7H7ioHGE8BdDse9qF70a7J9UuQp+cMKCFlF5fk42aYUpgzeRWO
+ 6OiTi26RdSJF+6mEW+l1DdW+9zOg/90NcVBqq9+GC5wXg2opMCxhzGQVf1mNxSJaPzbO
+ Xfhw==
 X-Forwarded-Encrypted: i=1;
- AHgh+RrcbfQ/GUfK3Dk9b6AXrQXdMGW7953WyECgMRHJ4qGYyR5Lc/1sf2+Ff4eV93FgZkPOAB4zCebT2yOF@nongnu.org
-X-Gm-Message-State: AOJu0YyH4zJIlLXsMN7f3l6XrXqL3LFMWpl5QfLKdmzVzb5RWxuaHi4X
- xEUFdPxX+EBf9xs3WPQ7z/Uisbg9HgmGo6TFJbqmoWvTSeC6G2yXMAPPDppdJ2Ch+/c=
-X-Gm-Gg: AR+sD11AWzIpOUbrHl4nvXTBW/ZSaJhmlI85wBtc6UeesqMX5V13afJHqebBmTAqfAr
- SuAOUNDJcXAce8qd274/CMphWnUM+c2KnaGQwhqq/KnkeNf1w9y9X13KqUELcP4WkVBu5hbqYQK
- 2vfUbM7VujVKJ8z5l82vgLKpdzI/HRRXHTMOrnCziVEr/BPCBpX/Z2/KBZPrDgYDsUcM/ZkyjSI
- y6Fosk3PxGDhlAHEEhLI5zXc1NU1hF3bAIQdBFl0YDA/RoS+sD/tJz222Xj+bUdL68v3+Jgd/h+
- cAV8mBAXchjYUSNOi5sjmdfkxOAGiWZWvAjK9IBf8Ns8lRoBMUdZ4FkUmg8+gAQQUeA5KWE39Wz
- biM+hv4RiPzwKK47poJKJTlLNdK2hO5PW/CWLRgQCpgN4aV3WNz+3/MaRC+XJazK4WAj28VnTHG
- /Y5mltskIYgCFpvSfXXdfDamoKDNKYM7RxmRbP7ZsMFwPpN5hiSGqV6hfjP0UPMnZNbQt1diMsT
- /maHR4iqagVkYQvGRfk0jMQtUnT9pMF2CF3Hg==
-X-Received: by 2002:a05:6871:5220:b0:448:9e35:c3fe with SMTP id
- 586e51a60fabf-4586cc34955mr3990219fac.11.1785338543098; 
- Wed, 29 Jul 2026 08:22:23 -0700 (PDT)
-Received: from [10.200.56.99] ([12.55.13.134])
+ AHgh+RrnfISViYqVsUOR11IP/OBPOvWV0oUzjNQvaihjz8VcKDGh63bWqTa13tb4grSsubLJBhyou9uoUPFj@nongnu.org
+X-Gm-Message-State: AOJu0Yx14C1YiGAsGfbcNJkILfMyGmDBgHW8pclfmQLl1iN+f2yEdBiW
+ szGecFXZjNPY3K4H2+xnQ5nkr5w2q4sQtyNR3LirJBg9Xk7l2UufEgnh
+X-Gm-Gg: AR+sD12nN4pZWwR/Tg2q3C7fR1c7aBIQW6XRKdI3fy5sfXuhxyx2dhmKrZ5xuxakVyz
+ rgr9K1mII/KI0tR4HTKKu4MoNeWcW/e2vgLcNZ8QogTo03Csjh6mcued9TSvbwlt9dVH8dLcchJ
+ PWYBUF7yDKofGPZGJo1soG3W74QhcmvuzggvwTYe5PAieLt3J597vA7ZkUdGDErbzKH8Al/DzNe
+ qLf6/yDGMaYs30eNWlgmvS7y6ejjdjn84SJCcyySaySwyU5LOBzrTw9VNZNdIThKRz48eKQQXr3
+ hczBJCpHC8hxfEP3OGGe4u28zdOuIazM5uHogzR0JstHWfJXhx7ougZxHEyx2wADAPlpxq9QYvN
+ x9lK6bXkyLjJkJI26wl3Uwfw093r7mvUt3iGsO4hOrVGICo/B9xFnJeraBPIF3RQVPg6SZaZpdG
+ h5hPHo7rId/ivuFaa2wqJNqq6Yt8hQUVHwaPIfuVHaHlCyLSrDJMdEHaxaxKyjl1yR9twfw60le
+ 3jT3Nk1NHT83wY5rA==
+X-Received: by 2002:a17:90b:2f8d:b0:381:28e0:6248 with SMTP id
+ 98e67ed59e1d1-38f6a257aa7mr7756612a91.1.1785347683993; 
+ Wed, 29 Jul 2026 10:54:43 -0700 (PDT)
+Received: from DESKTOP-7HME356.localdomain ([38.34.7.236])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-458867fb651sm2476451fac.11.2026.07.29.08.22.22
+ 5a478bee46e88-31504d2ec2asm14067698eec.21.2026.07.29.10.54.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 29 Jul 2026 08:22:22 -0700 (PDT)
-From: Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
-Date: Wed, 29 Jul 2026 10:21:34 -0500
-Subject: [PATCH 1/2] hw/misc: Add Tenstorrent Atlantis PRCM model
+ Wed, 29 Jul 2026 10:54:43 -0700 (PDT)
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260729-atlantis_prcm-v1-1-502882933e51@oss.tenstorrent.com>
-References: <20260729-atlantis_prcm-v1-0-502882933e51@oss.tenstorrent.com>
-In-Reply-To: <20260729-atlantis_prcm-v1-0-502882933e51@oss.tenstorrent.com>
-To: qemu-devel@nongnu.org
-Cc: Joel Stanley <joel@jms.id.au>, Nicholas Piggin <npiggin@gmail.com>, 
- Michael Ellerman <mpe@kernel.org>, 
- Portia Stephens <portias@oss.tenstorrent.com>, qemu-riscv@nongnu.org, 
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, 
- Weiwei Li <liwei1518@gmail.com>, 
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Chao Liu <chao.liu@processmission.com>, 
- Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
-X-Mailer: b4 0.15.1
-Received-SPF: pass client-ip=2001:4860:4864:20::2d;
- envelope-from=asrinivasan@tenstorrent.com; helo=mail-oa1-x2d.google.com
-X-Spam_score_int: -19
-X-Spam_score: -2.0
-X-Spam_bar: --
-X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_NONE=-0.0001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Subject: Re: [PATCH] hw/timer: add k230 dwapb timer
+From: Junze Cao <caojunze424@gmail.com>
+To: raoyi <rao232328@gmail.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, pbonzini@redhat.com, 
+ palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com, 
+ daniel.barboza@oss.qualcomm.com, zhiwei_liu@linux.alibaba.com, 
+ chao.liu@processmission.com, farosas@suse.de, lvivier@redhat.com, 
+ caojunze424@gmail.com
+In-Reply-To: <20260726142703.37637-1-rao232328@gmail.com>
+References: <20260726142703.37637-1-rao232328@gmail.com>
+Date: Thu, 30 Jul 2026 01:54:35 +0800
+Message-Id: <178534767556.3353.6907171394775089230.b4-review@b4>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1785347679; l=910;
+ i=caojunze424@gmail.com; s=junze-gmail; h=from:subject:message-id;
+ bh=yAB3p4cdEs5MBTKXrHrGI7OoYufnBipiRpDH33OzWpk=;
+ b=TJv22RC97kA7J9RIyXp1ISxAE9PBRhZ7MXHpjrFc+ikgx3Le8yMycWRA8BvZEs+089rGXnTIM
+ fE+8G9AwPPDAhs89TSGeaLCiEAvubg2662Nw9Xme+Sh3ehoM41J5561
+X-Developer-Key: i=caojunze424@gmail.com; a=ed25519;
+ pk=lnFIWNw+6CoDrHFIKUJKdgrRbvgAbQGcEFiVsIigOJ8=
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42d;
+ envelope-from=caojunze424@gmail.com; helo=mail-pf1-x42d.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Wed, 29 Jul 2026 13:13:47 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -114,560 +116,26 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This device present in Tenstorrent Atlantis has registers that control
-clocks, reset and other misc functionality in the SoC. This commit adds
-models for the RCPU, HSIO, PCIE, MM and 2 DDR PRCMs.
+On Sun, 26 Jul 2026 22:26:39 +0800, raoyi <rao232328@gmail.com> wrote:
+> Add DesignWare APB timer peripheral for K230 machine.
+> The timer uses the Clock framework for frequency input,
+> preparing for future CMU integration.
+> 
+> Signed-off-by: raoyi <rao232328@gmail.com>
 
-Co-developed-by: Portia Stephens <portias@oss.tenstorrent.com>
-Signed-off-by: Portia Stephens <portias@oss.tenstorrent.com>
-Signed-off-by: Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
----
- MAINTAINERS                        |   2 +
- hw/misc/meson.build                |   1 +
- hw/misc/trace-events               |   4 +
- hw/misc/tt_atlantis_prcm.c         | 436 +++++++++++++++++++++++++++++++++++++
- include/hw/misc/tt_atlantis_prcm.h |  51 +++++
- 5 files changed, 494 insertions(+)
+Thank you very much for your contribution.
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index e25df9493c..49c1a5ad76 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1802,7 +1802,9 @@ R: Portia Stephens <portias@oss.tenstorrent.com>
- L: qemu-riscv@nongnu.org
- S: Supported
- F: docs/system/riscv/tt_*.rst
-+F: hw/misc/tt_*.c
- F: hw/riscv/tt_*.c
-+F: include/hw/misc/tt_*.h
- F: include/hw/riscv/tt_*.h
- F: tests/functional/riscv64/test_tt_*.py
- 
-diff --git a/hw/misc/meson.build b/hw/misc/meson.build
-index 23265f6035..26627013f3 100644
---- a/hw/misc/meson.build
-+++ b/hw/misc/meson.build
-@@ -36,6 +36,7 @@ system_ss.add(when: 'CONFIG_SIFIVE_E_PRCI', if_true: files('sifive_e_prci.c'))
- system_ss.add(when: 'CONFIG_SIFIVE_E_AON', if_true: files('sifive_e_aon.c'))
- system_ss.add(when: 'CONFIG_SIFIVE_U_OTP', if_true: files('sifive_u_otp.c'))
- system_ss.add(when: 'CONFIG_SIFIVE_U_PRCI', if_true: files('sifive_u_prci.c'))
-+system_ss.add(when: 'CONFIG_TENSTORRENT', if_true: files('tt_atlantis_prcm.c'))
- 
- subdir('macio')
- 
-diff --git a/hw/misc/trace-events b/hw/misc/trace-events
-index c9a868b3ef..9359a4e66d 100644
---- a/hw/misc/trace-events
-+++ b/hw/misc/trace-events
-@@ -442,3 +442,7 @@ iommu_testdev_dma_read(uint64_t gva, uint32_t len) "gva=0x%" PRIx64 " len=%u"
- iommu_testdev_dma_verify(uint32_t expected, uint32_t actual) "expected=0x%x actual=0x%x"
- iommu_testdev_dma_result(uint32_t result) "DMA completed result=0x%x"
- iommu_testdev_dma_armed(bool armed) "armed=%d"
-+
-+# tt_atlantis_prcm.c
-+tt_atlantis_prcm_read(uint32_t domain, uint64_t offset, uint64_t data) "domain 0x%02x offset 0x%" PRIx64 " data 0x%" PRIx64
-+tt_atlantis_prcm_write(uint32_t domain, uint64_t offset, uint64_t data) "domain 0x%02x offset 0x%" PRIx64 " data 0x%" PRIx64
-diff --git a/hw/misc/tt_atlantis_prcm.c b/hw/misc/tt_atlantis_prcm.c
-new file mode 100644
-index 0000000000..d341e1a8c3
---- /dev/null
-+++ b/hw/misc/tt_atlantis_prcm.c
-@@ -0,0 +1,436 @@
-+/*
-+ * PRCM (Clock and Reset Controller) in Tenstorrent Atlantis SoC
-+ *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ *
-+ * Copyright 2026 Tenstorrent
-+ */
-+
-+#include "qemu/osdep.h"
-+#include "qemu/bitops.h"
-+#include "qapi/error.h"
-+#include "qemu/log.h"
-+#include "hw/misc/tt_atlantis_prcm.h"
-+#include "hw/core/qdev-properties.h"
-+#include "hw/core/registerfields.h"
-+#include "hw/core/irq.h"
-+#include "trace.h"
-+
-+#define TO_REG(offset) ((offset) >> 2)
-+
-+#define PLL_LOCK_BIT        31
-+#define PLL_FBDIV_LSB       14
-+#define PLL_POSTDIV2_LSB    11
-+#define PLL_POSTDIV1_LSB    8
-+#define PLL_REFDIV_LSB      2
-+#define PLL_BYPASS_BIT      1
-+
-+#define PLL_RESET_VAL(BYPASS, REFDIV, POSTDIV1, POSTDIV2, FBDIV, LOCK)         \
-+  ((LOCK << PLL_LOCK_BIT) | (FBDIV << PLL_FBDIV_LSB) |                         \
-+   (POSTDIV2 << PLL_POSTDIV2_LSB) | (POSTDIV1 << PLL_POSTDIV1_LSB) |           \
-+   (REFDIV << PLL_REFDIV_LSB) | (BYPASS << PLL_BYPASS_BIT))
-+
-+#define RCPU_PLL_RCPU_CFG   TO_REG(0)
-+#define RCPU_PLL_NOCC_CFG   TO_REG(0x4)
-+#define RCPU_NOCC_CLK_CFG   TO_REG(0x8)
-+#define RCPU_RCPU_DIV_CFG   TO_REG(0xc)
-+#define RCPU_RCPU_BLK_CG    TO_REG(0x14)
-+#define RCPU_LSIO_BLK_CG    TO_REG(0x18)
-+#define RCPU_RCPU_BLK_RST   TO_REG(0x1c)
-+#define RCPU_LSIO_BLK_RST   TO_REG(0x20)
-+#define RCPU_PLL_RCPU_EN    TO_REG(0x11c)
-+#define RCPU_PLL_NOCC_EN    TO_REG(0x120)
-+#define RCPU_PLL_MM_EN      TO_REG(0x0124)
-+#define RCPU_PLL1_MM_EN     TO_REG(0x0128)
-+#define RCPU_PLL_HSIO_EN    TO_REG(0x12c)
-+#define RCPU_PLL_PCIE_EN    TO_REG(0x138)
-+#define RCPU_PLL_I2S_EN     TO_REG(0x13C)
-+#define RCPU_PLL_MM_CFG     TO_REG(0x19c)
-+#define RCPU_PLL_HSIO_CFG   TO_REG(0x1a0)
-+#define RCPU_PLL_PCIE_CFG   TO_REG(0x1ac)
-+#define RCPU_BOOT_MODE_CFG  TO_REG(0x1b0)
-+#define RCPU_PLL_I2S_CFG    TO_REG(0x1f4)
-+#define RCPU_I2S_DIV_CFG    TO_REG(0x1f8)
-+#define RCPU_BUS_CFG        TO_REG(0x1fc)
-+#define RCPU_PLL1_MM_CFG    TO_REG(0x2a4)
-+
-+#define HSIO_HSIO_DIV_CFG       TO_REG(0x0)
-+#define HSIO_HSIO_DIV_CFG1      TO_REG(0x4)
-+#define HSIO_HSIO_BLK_CG        TO_REG(0x8)
-+#define HSIO_HSIO_BLK_RST       TO_REG(0xc)
-+#define HSIO_HSIO_GMAC_DIV_CFG  TO_REG(0x10)
-+
-+#define PCIE_SUBS_RST_CTL   TO_REG(0x0)
-+#define PCIE_SUBS_CG_CTL    TO_REG(0x4)
-+#define PCIE_SUBS_CK_CTL    TO_REG(0x8)
-+
-+#define MM_MM_CLK_GATE_CFG  TO_REG(0x8)
-+#define MM_MM_CLK_DIV_CFG   TO_REG(0xC)
-+#define MM_MM_CLK_SEL_CFG   TO_REG(0x10)
-+#define MM_MM_RSTN          TO_REG(0x14)
-+#define MM_MM_CLK_DIV_CFG1  TO_REG(0x130)
-+
-+#define DDRC_STAT           TO_REG(0x10014)
-+#define DDRC_DFISTAT        TO_REG(0x10514)
-+#define DDRC_SWSTAT         TO_REG(0x10c84)
-+
-+#define PLL_EN              BIT(0)
-+#define RCPU_PLL_BUS_CG_EN  BIT(7)
-+#define HSIO_PLL_BUS_CG_EN  BIT(3)
-+#define PCIE_PLL_BUS_CG_EN  BIT(1)
-+#define NOCC_PLL_BUS_CG_EN  BIT(0)
-+
-+#define RCPU_BOOT_MODE_UART      (0x0 << 4)
-+#define RCPU_BOOT_MODE_NOR       (0x1 << 4)
-+#define RCPU_BOOT_MODE_SD        (0x2 << 4)
-+
-+#define RCPU_DOMAIN_SIZE   0x10000
-+#define HSIO_DOMAIN_SIZE   0x510
-+#define PCIE_DOMAIN_SIZE   0x100
-+#define MM_DOMAIN_SIZE     0x1000
-+#define DDRC0_DOMAIN_SIZE  0x101000
-+#define DDRC1_DOMAIN_SIZE  0x101000
-+
-+static uint64_t tt_atlantis_prcm_read(void *opaque, hwaddr offset,
-+                                               unsigned size) {
-+    TTAtlantisPRCMState *s = TT_ATLANTIS_PRCM(opaque);
-+    TTAtlantisPRCMClass *c = TT_ATLANTIS_PRCM_GET_CLASS(s);
-+    uint32_t data;
-+
-+    if (offset >= c->regs_size) {
-+        qemu_log_mask(LOG_GUEST_ERROR,
-+                      "%s: Out-of-bounds read at offset 0x%" HWADDR_PRIx "\n",
-+                      __func__, offset);
-+        return 0;
-+    }
-+    data = s->regs[TO_REG(offset)];
-+
-+    trace_tt_atlantis_prcm_read(c->domain, offset, data);
-+    return data;
-+}
-+
-+static void tt_atlantis_prcm_write(void *opaque, hwaddr offset,
-+                                            uint64_t data, unsigned size) {
-+    TTAtlantisPRCMState *s = TT_ATLANTIS_PRCM(opaque);
-+    TTAtlantisPRCMClass *c = TT_ATLANTIS_PRCM_GET_CLASS(s);
-+
-+    trace_tt_atlantis_prcm_write(c->domain, offset, data);
-+
-+    if (offset >= c->regs_size) {
-+        qemu_log_mask(LOG_GUEST_ERROR,
-+                      "%s: Out-of-bounds write at offset 0x%" HWADDR_PRIx "\n",
-+                      __func__, offset);
-+        return;
-+    }
-+
-+    switch (TO_REG(offset)) {
-+    default:
-+        s->regs[TO_REG(offset)] = data;
-+        break;
-+    }
-+}
-+
-+static void tt_atlantis_prcm_rcpu_write(void *opaque, hwaddr offset,
-+                                            uint64_t data, unsigned size) {
-+    TTAtlantisPRCMState *s = TT_ATLANTIS_PRCM(opaque);
-+
-+    tt_atlantis_prcm_write(opaque, offset, data, size);
-+
-+    bool pll_en_written = false;
-+    uint32_t pll_reg_offset;
-+    switch TO_REG(offset)
-+    {
-+        case RCPU_PLL_RCPU_EN:
-+            pll_en_written = true;
-+            pll_reg_offset = RCPU_PLL_RCPU_CFG;
-+            break;
-+        case RCPU_PLL_NOCC_EN:
-+            pll_en_written = true;
-+            pll_reg_offset = RCPU_PLL_NOCC_CFG;
-+            break;
-+        case RCPU_PLL_HSIO_EN:
-+            pll_en_written = true;
-+            pll_reg_offset = RCPU_PLL_HSIO_CFG;
-+            break;
-+        case RCPU_PLL_PCIE_EN:
-+            pll_en_written = true;
-+            pll_reg_offset = RCPU_PLL_PCIE_CFG;
-+            break;
-+        case RCPU_PLL_MM_EN:
-+            pll_en_written = true;
-+            pll_reg_offset = RCPU_PLL_MM_CFG;
-+            break;
-+        case RCPU_PLL1_MM_EN:
-+            pll_en_written = true;
-+            pll_reg_offset = RCPU_PLL1_MM_CFG;
-+            break;
-+        case RCPU_PLL_I2S_EN:
-+            pll_en_written = true;
-+            pll_reg_offset = RCPU_PLL_I2S_CFG;
-+            break;
-+    }
-+    if (pll_en_written) {
-+        if (data & PLL_EN) {
-+            s->regs[pll_reg_offset] |= BIT(PLL_LOCK_BIT);
-+        } else {
-+            s->regs[pll_reg_offset] &= ~BIT(PLL_LOCK_BIT);
-+        }
-+    }
-+}
-+
-+static const MemoryRegionOps tt_atlantis_prcm_ops = {
-+    .read = tt_atlantis_prcm_read,
-+    .write = tt_atlantis_prcm_write,
-+    .endianness = DEVICE_LITTLE_ENDIAN,
-+    .valid.min_access_size = 4,
-+    .valid.max_access_size = 4,
-+};
-+
-+static const MemoryRegionOps tt_atlantis_prcm_rcpu_ops = {
-+    .read = tt_atlantis_prcm_read,
-+    .write = tt_atlantis_prcm_rcpu_write,
-+    .endianness = DEVICE_LITTLE_ENDIAN,
-+    .valid.min_access_size = 4,
-+    .valid.max_access_size = 4,
-+};
-+
-+static void tt_atlantis_prcm_realize(DeviceState *dev, Error **errp)
-+{
-+    TTAtlantisPRCMState *s = TT_ATLANTIS_PRCM(dev);
-+    SysBusDevice *sbd = SYS_BUS_DEVICE(dev);
-+    TTAtlantisPRCMClass *c = TT_ATLANTIS_PRCM_GET_CLASS(s);
-+
-+    if (c->domain >= PRCM_DOMAIN_COUNT) {
-+        error_setg(errp,
-+                   "domain %d is larger than max number of possible domains %d",
-+                   c->domain, PRCM_DOMAIN_COUNT);
-+        return;
-+    }
-+    s->regs = g_new0(uint32_t, TO_REG(c->regs_size));
-+
-+    memory_region_init_io(&s->mmio, OBJECT(s), c->ops, s,
-+                          TYPE_TT_ATLANTIS_PRCM, c->regs_size);
-+    sysbus_init_mmio(sbd, &s->mmio);
-+}
-+
-+static void tt_atlantis_prcm_reset(DeviceState *dev)
-+{
-+    TTAtlantisPRCMState *s = TT_ATLANTIS_PRCM(dev);
-+    TTAtlantisPRCMClass *c = TT_ATLANTIS_PRCM_GET_CLASS(s);
-+
-+    memset(s->regs, 0, c->regs_size);
-+}
-+
-+static void tt_atlantis_prcm_rcpu_reset(DeviceState *dev)
-+{
-+    TTAtlantisPRCMState *s = TT_ATLANTIS_PRCM(dev);
-+    tt_atlantis_prcm_reset(dev);
-+
-+    s->regs[RCPU_PLL_RCPU_CFG] = PLL_RESET_VAL(1, 0, 4, 0, 100, 1);
-+    s->regs[RCPU_PLL_NOCC_CFG] = PLL_RESET_VAL(0, 2, 2, 2, 267, 1);
-+    s->regs[RCPU_NOCC_CLK_CFG] = (0x25f31 << 1) | BIT(0);
-+    s->regs[RCPU_RCPU_DIV_CFG] = (0xb8c2 << 1);
-+    s->regs[RCPU_RCPU_BLK_CG] = 0;
-+    s->regs[RCPU_LSIO_BLK_CG] = 0;
-+    s->regs[RCPU_RCPU_BLK_RST] = 0xffffffff;
-+    s->regs[RCPU_LSIO_BLK_RST] = 0xffffffff;
-+    s->regs[RCPU_PLL_RCPU_EN] = PLL_EN;
-+    s->regs[RCPU_PLL_NOCC_EN] = PLL_EN;
-+    s->regs[RCPU_PLL_HSIO_EN] = 0;
-+    s->regs[RCPU_PLL_MM_EN] = 0;
-+    s->regs[RCPU_PLL1_MM_EN] = 0;
-+    s->regs[RCPU_PLL_I2S_EN] = 0;
-+    s->regs[RCPU_PLL_PCIE_EN] = 0;
-+    s->regs[RCPU_PLL_HSIO_CFG] = PLL_RESET_VAL(0, 1, 2, 1, 50, 0);
-+    s->regs[RCPU_PLL_PCIE_CFG] = PLL_RESET_VAL(0, 2, 3, 1, 250, 0);
-+    s->regs[RCPU_BOOT_MODE_CFG] = RCPU_BOOT_MODE_SD;
-+    s->regs[RCPU_PLL_MM_CFG] = PLL_RESET_VAL(0, 1, 2, 1, 50, 1);
-+    s->regs[RCPU_PLL1_MM_CFG] = PLL_RESET_VAL(0, 1, 2, 1, 50, 1);
-+    s->regs[RCPU_PLL_I2S_CFG] = PLL_RESET_VAL(0, 1, 6, 6, 33, 0);
-+    s->regs[RCPU_I2S_DIV_CFG] = 0xde69ad31;
-+    s->regs[RCPU_BUS_CFG] = NOCC_PLL_BUS_CG_EN | HSIO_PLL_BUS_CG_EN;
-+}
-+
-+static void tt_atlantis_prcm_ddrc_reset(DeviceState *dev)
-+{
-+    TTAtlantisPRCMState *s = TT_ATLANTIS_PRCM(dev);
-+    tt_atlantis_prcm_reset(dev);
-+
-+    s->regs[DDRC_STAT] = 0x1;
-+    s->regs[DDRC_DFISTAT] = 0x1;
-+    s->regs[DDRC_SWSTAT] = 0x1;
-+}
-+
-+static void tt_atlantis_prcm_hsio_reset(DeviceState *dev)
-+{
-+    TTAtlantisPRCMState *s = TT_ATLANTIS_PRCM(dev);
-+    tt_atlantis_prcm_reset(dev);
-+
-+    s->regs[HSIO_HSIO_DIV_CFG] = 0x20821731;
-+    s->regs[HSIO_HSIO_DIV_CFG1] = 0x8;
-+    s->regs[HSIO_HSIO_BLK_CG] = 0;
-+    s->regs[HSIO_HSIO_BLK_RST] = 0;
-+    s->regs[HSIO_HSIO_GMAC_DIV_CFG] = 0;
-+}
-+
-+static void tt_atlantis_prcm_pcie_reset(DeviceState *dev)
-+{
-+    TTAtlantisPRCMState *s = TT_ATLANTIS_PRCM(dev);
-+    tt_atlantis_prcm_reset(dev);
-+
-+    s->regs[PCIE_SUBS_RST_CTL] = 0;
-+    s->regs[PCIE_SUBS_CG_CTL] = 0;
-+    s->regs[PCIE_SUBS_CK_CTL] = 0x44908;
-+}
-+
-+static void tt_atlantis_prcm_mm_reset(DeviceState *dev)
-+{
-+    TTAtlantisPRCMState *s = TT_ATLANTIS_PRCM(dev);
-+    tt_atlantis_prcm_reset(dev);
-+
-+    s->regs[MM_MM_CLK_GATE_CFG] = 0;
-+    s->regs[MM_MM_CLK_DIV_CFG] = 0xddc8312;
-+    s->regs[MM_MM_CLK_SEL_CFG] = 0;
-+    s->regs[MM_MM_RSTN] = 0;
-+    s->regs[MM_MM_CLK_DIV_CFG1] = 0x333;
-+}
-+
-+static void tt_atlantis_prcm_unrealize(DeviceState *dev)
-+{
-+    TTAtlantisPRCMState *s = TT_ATLANTIS_PRCM(dev);
-+
-+    g_free(s->regs);
-+}
-+
-+static void tt_atlantis_prcm_class_init(ObjectClass *klass,
-+                                                 const void *data) {
-+    DeviceClass *dc = DEVICE_CLASS(klass);
-+    TTAtlantisPRCMClass *c = TT_ATLANTIS_PRCM_CLASS(klass);
-+
-+    dc->realize = tt_atlantis_prcm_realize;
-+    dc->unrealize = tt_atlantis_prcm_unrealize;
-+    device_class_set_legacy_reset(dc, tt_atlantis_prcm_reset);
-+    dc->desc = "Tenstorrent Atlantis PRCM Controller";
-+    c->ops = &tt_atlantis_prcm_ops;
-+}
-+
-+static void tt_atlantis_prcm_rcpu_class_init(ObjectClass *klass,
-+                                                 const void *data) {
-+    DeviceClass *dc = DEVICE_CLASS(klass);
-+    TTAtlantisPRCMClass *c = TT_ATLANTIS_PRCM_CLASS(klass);
-+
-+    dc->realize = tt_atlantis_prcm_realize;
-+    device_class_set_legacy_reset(dc, tt_atlantis_prcm_rcpu_reset);
-+    dc->desc = "Tenstorrent Atlantis RCPU PRCM Controller";
-+    c->domain = PRCM_DOMAIN_RCPU;
-+    c->regs_size = RCPU_DOMAIN_SIZE;
-+    c->ops = &tt_atlantis_prcm_rcpu_ops;
-+}
-+
-+static void tt_atlantis_prcm_hsio_class_init(ObjectClass *klass,
-+                                                 const void *data) {
-+    DeviceClass *dc = DEVICE_CLASS(klass);
-+    TTAtlantisPRCMClass *c = TT_ATLANTIS_PRCM_CLASS(klass);
-+
-+    dc->realize = tt_atlantis_prcm_realize;
-+    device_class_set_legacy_reset(dc, tt_atlantis_prcm_hsio_reset);
-+    dc->desc = "Tenstorrent Atlantis HSIO PRCM Controller";
-+    c->domain = PRCM_DOMAIN_HSIO;
-+    c->regs_size = HSIO_DOMAIN_SIZE;
-+    c->ops = &tt_atlantis_prcm_ops;
-+}
-+
-+static void tt_atlantis_prcm_pcie_class_init(ObjectClass *klass,
-+                                                 const void *data) {
-+    DeviceClass *dc = DEVICE_CLASS(klass);
-+    TTAtlantisPRCMClass *c = TT_ATLANTIS_PRCM_CLASS(klass);
-+
-+    dc->realize = tt_atlantis_prcm_realize;
-+    device_class_set_legacy_reset(dc, tt_atlantis_prcm_pcie_reset);
-+    dc->desc = "Tenstorrent Atlantis PCIE PRCM Controller";
-+    c->domain = PRCM_DOMAIN_PCIE;
-+    c->regs_size = PCIE_DOMAIN_SIZE;
-+    c->ops = &tt_atlantis_prcm_ops;
-+}
-+
-+static void tt_atlantis_prcm_mm_class_init(ObjectClass *klass,
-+                                                 const void *data) {
-+    DeviceClass *dc = DEVICE_CLASS(klass);
-+    TTAtlantisPRCMClass *c = TT_ATLANTIS_PRCM_CLASS(klass);
-+
-+    dc->realize = tt_atlantis_prcm_realize;
-+    device_class_set_legacy_reset(dc, tt_atlantis_prcm_mm_reset);
-+    dc->desc = "Tenstorrent Atlantis MM PRCM Controller";
-+    c->domain = PRCM_DOMAIN_MM;
-+    c->regs_size = MM_DOMAIN_SIZE;
-+    c->ops = &tt_atlantis_prcm_ops;
-+}
-+
-+static void tt_atlantis_prcm_ddrc0_class_init(ObjectClass *klass,
-+                                                 const void *data) {
-+    DeviceClass *dc = DEVICE_CLASS(klass);
-+    TTAtlantisPRCMClass *c = TT_ATLANTIS_PRCM_CLASS(klass);
-+
-+    dc->realize = tt_atlantis_prcm_realize;
-+    device_class_set_legacy_reset(dc, tt_atlantis_prcm_ddrc_reset);
-+    dc->desc = "Tenstorrent Atlantis DDR Memory Controller 0 PRCM";
-+    c->domain = PRCM_DOMAIN_DDRC0;
-+    c->regs_size = DDRC0_DOMAIN_SIZE;
-+    c->ops = &tt_atlantis_prcm_ops;
-+}
-+
-+static void tt_atlantis_prcm_ddrc1_class_init(ObjectClass *klass,
-+                                                 const void *data) {
-+    DeviceClass *dc = DEVICE_CLASS(klass);
-+    TTAtlantisPRCMClass *c = TT_ATLANTIS_PRCM_CLASS(klass);
-+
-+    dc->realize = tt_atlantis_prcm_realize;
-+    device_class_set_legacy_reset(dc, tt_atlantis_prcm_ddrc_reset);
-+    dc->desc = "Tenstorrent Atlantis DDR Memory Controller 1 PRCM";
-+    c->domain = PRCM_DOMAIN_DDRC1;
-+    c->regs_size = DDRC1_DOMAIN_SIZE;
-+    c->ops = &tt_atlantis_prcm_ops;
-+}
-+
-+static const TypeInfo tt_atlantis_prcm_types[] = {
-+    {
-+        .name = TYPE_TT_ATLANTIS_PRCM,
-+        .parent = TYPE_SYS_BUS_DEVICE,
-+        .instance_size = sizeof(TTAtlantisPRCMState),
-+        .class_init = tt_atlantis_prcm_class_init,
-+        .class_size = sizeof(TTAtlantisPRCMClass),
-+        .abstract = true,
-+    },
-+    {
-+        .name = TYPE_TT_ATLANTIS_PRCM_RCPU,
-+        .parent = TYPE_TT_ATLANTIS_PRCM,
-+        .class_init = tt_atlantis_prcm_rcpu_class_init,
-+    },
-+    {
-+        .name = TYPE_TT_ATLANTIS_PRCM_HSIO,
-+        .parent = TYPE_TT_ATLANTIS_PRCM,
-+        .class_init = tt_atlantis_prcm_hsio_class_init,
-+    },
-+    {
-+        .name = TYPE_TT_ATLANTIS_PRCM_PCIE,
-+        .parent = TYPE_TT_ATLANTIS_PRCM,
-+        .class_init = tt_atlantis_prcm_pcie_class_init,
-+    },
-+    {
-+        .name = TYPE_TT_ATLANTIS_PRCM_MM,
-+        .parent = TYPE_TT_ATLANTIS_PRCM,
-+        .class_init = tt_atlantis_prcm_mm_class_init,
-+    },
-+    {
-+        .name = TYPE_TT_ATLANTIS_PRCM_DDRC0,
-+        .parent = TYPE_TT_ATLANTIS_PRCM,
-+        .class_init = tt_atlantis_prcm_ddrc0_class_init,
-+    },
-+    {
-+        .name = TYPE_TT_ATLANTIS_PRCM_DDRC1,
-+        .parent = TYPE_TT_ATLANTIS_PRCM,
-+        .class_init = tt_atlantis_prcm_ddrc1_class_init,
-+    },
-+};
-+
-+DEFINE_TYPES(tt_atlantis_prcm_types);
-diff --git a/include/hw/misc/tt_atlantis_prcm.h b/include/hw/misc/tt_atlantis_prcm.h
-new file mode 100644
-index 0000000000..acb8a9b38b
---- /dev/null
-+++ b/include/hw/misc/tt_atlantis_prcm.h
-@@ -0,0 +1,51 @@
-+/*
-+ * Clock, Reset, Pinctrl PRCM in Tenstorrent Atlantis SoC
-+ *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ *
-+ * Copyright 2026 Tenstorrent
-+ */
-+
-+#ifndef TT_ATLANTIS_PRCM_H
-+#define TT_ATLANTIS_PRCM_H
-+
-+#include "hw/core/sysbus.h"
-+
-+#define TYPE_TT_ATLANTIS_PRCM "tt.atlantis.prcm"
-+#define TYPE_TT_ATLANTIS_PRCM_RCPU "tt.atlantis.prcm.rcpu"
-+#define TYPE_TT_ATLANTIS_PRCM_HSIO "tt.atlantis.prcm.hsio"
-+#define TYPE_TT_ATLANTIS_PRCM_PCIE "tt.atlantis.prcm.pcie"
-+#define TYPE_TT_ATLANTIS_PRCM_MM "tt.atlantis.prcm.mm"
-+#define TYPE_TT_ATLANTIS_PRCM_DDRC0 "tt.atlantis.prcm.ddrc0"
-+#define TYPE_TT_ATLANTIS_PRCM_DDRC1 "tt.atlantis.prcm.ddrc1"
-+OBJECT_DECLARE_TYPE(TTAtlantisPRCMState, TTAtlantisPRCMClass,
-+                           TT_ATLANTIS_PRCM);
-+
-+
-+enum {
-+    PRCM_DOMAIN_RCPU = 0,
-+    PRCM_DOMAIN_HSIO = 1,
-+    PRCM_DOMAIN_PCIE = 2,
-+    PRCM_DOMAIN_MM = 3,
-+    PRCM_DOMAIN_DDRC0 = 4,
-+    PRCM_DOMAIN_DDRC1 = 5,
-+    PRCM_DOMAIN_COUNT = 6
-+};
-+
-+struct TTAtlantisPRCMState {
-+    SysBusDevice parent;
-+
-+    MemoryRegion mmio;
-+
-+    uint32_t *regs;
-+};
-+
-+struct TTAtlantisPRCMClass {
-+    SysBusDeviceClass parent_class;
-+
-+    uint32_t domain;
-+    uint32_t regs_size;
-+    const MemoryRegionOps *ops;
-+};
-+
-+#endif
+I recommend splitting this patch into three separate patches.The plan consists of three patches:
+We want to keep the coding style as consistent as possible with the previous patch.
+
+1. The implementation of the K230 DesignWare APB (DWAPB) timer model (k230_dwapb_timer.c).
+2. The integration of peripheral models into the K230 board.
+3. Testing and documentation.
+
+Additionally, this patch has a conflict with the current master branch. Please do a rebase when the maintainer asks for the merge.
+There's no need to do it right now.
 
 -- 
-2.43.0
+Junze Cao <caojunze424@gmail.com>
 
 
