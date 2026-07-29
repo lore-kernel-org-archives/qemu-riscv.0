@@ -4,97 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D326AC54F52
-	for <qemu-riscv@archiver.kernel.org>; Wed, 29 Jul 2026 11:56:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B618AC54F51
+	for <qemu-riscv@archiver.kernel.org>; Wed, 29 Jul 2026 12:37:30 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wp2rs-0006DG-VO; Wed, 29 Jul 2026 07:54:37 -0400
+	id 1wp3X4-0003YA-7B; Wed, 29 Jul 2026 08:37:10 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <xinxie908@gmail.com>)
- id 1wp20j-00017y-5U
- for qemu-riscv@nongnu.org; Wed, 29 Jul 2026 06:59:41 -0400
-Received: from mail-pj2-x01.google.com ([2607:f8b0:4864:39::1])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <xinxie908@gmail.com>)
- id 1wp20f-0004Do-TP
- for qemu-riscv@nongnu.org; Wed, 29 Jul 2026 06:59:40 -0400
-Received: by mail-pj2-x01.google.com with SMTP id
- d9443c01a7336-2ce7ac92dfcso7097095ad.1
- for <qemu-riscv@nongnu.org>; Wed, 29 Jul 2026 03:59:37 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <cp0613@linux.alibaba.com>)
+ id 1wp3Wp-0003XW-U7; Wed, 29 Jul 2026 08:36:56 -0400
+Received: from [115.124.30.98] (helo=out30-98.freemail.mail.aliyun.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <cp0613@linux.alibaba.com>)
+ id 1wp3Wk-0007K1-2c; Wed, 29 Jul 2026 08:36:55 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1785322776; x=1785927576; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=AA4kbnvcGIDYoqgEXcU+45vYtoc2rnZEFSQgdt/3/7Y=;
- b=RN/48wKRE2tgeu7wPFWccrzjq+imzseK4jqr3pt5lk2mMFxt+1WUF56h3HaeWYvHQS
- nzm+tSzmCzxVocibgupNqW1oFBXf9CufPqFiQMJ/28xsczoSNRJcMhffZgmN1QZskfyu
- m/8Facpgg6e37ZabJoyHD0za932Ugln4WtaexZ63oleDJ0TM+0pMCNlqrBiGPKG3cF4/
- ExRTsBX/sl/mZuX5zl22ajogIf8ZkywGeUF0Yjub3kqOwqEa/fLFcggre83voP6ztcw+
- 4WokBAPxKNZPT892qOKbEnmO9cpNu5K3nm4zI2pVCmxhV5scium5gJq5oww5vfC89sJq
- moFg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785322776; x=1785927576;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=AA4kbnvcGIDYoqgEXcU+45vYtoc2rnZEFSQgdt/3/7Y=;
- b=KC91ACmU20EMYIz6uJ8jpNtgzMN6VK97LrRei47u+X4hxZ+MC8fGZGow50FAHk5Xjy
- bNsSm6XtSE2WlLP64wE/5PiaFg8t/sCfuKNhfxuqK/obAzvBtTz02EE6LBcaw0m+zOPF
- up7bwIwrCCZPES3WIDst6M7kTchzfgRO4R50MrOcZ2y5Wd46jvfaO/qT7Cep3QRJMdot
- G78qmWBQnv5tuzPsk+g0PRKqxZQxmc32BWB0sPVR4OXpqPqhjEy99DtteZbvBXLpUDJW
- YSklzBQO7ND5Gr2qoiOoZWJebNLeWD1+MT7vr3MLhN9ujlx2E0lqIX1rvbpn/C4jlojf
- iC8w==
-X-Gm-Message-State: AOJu0YzcWeUO5hR5dBZOROWGHDp55DeSWKQWKofUYF6kuhN+iAaH5zSD
- pYlhvRhR+dJRPSfztWSN1f1YYGlQxwR4djiCO2x8f8+daTtZSINaohkO
-X-Gm-Gg: AR+sD12quszjSFg9oIjU+7X6+UmNGSar1yDQTnbEFmryMTAJBspgkaMZ6wk7X+E/VP6
- RagYpqqzxc+qvNWSy+OcM7XC+rnz65B4fC/gSyalYDe2oH8+Xl3XWoLn12+TOWEftSnbXofTTCO
- JEpp0L5yztsB/MPlEqSJaEKJLvijTuHyhKlPvG7goUzJMGuBPNs3xz44wsNKTj/iwAauz62Ztdw
- rtklIKL2BftZDX4K0Y0axaUX89dYLt5VIn8hZ8Jprvyv7KVdacdot6eOWyNz+lu6Yywpa9ilx7P
- f739R2FT/clb+H6vqTM0U2G8RAJ9gstySeW69IMi5hEuuxZRliQspzaCgd6mI9HapaSoB/svG8Z
- yDAFsz4Tyk6Nv6L87jw5TwZDtf8G/TNNCSSEIzLEjmQBHXKeLKOPqqBBrNryXHqzeYttBPeOhAt
- sA3KDVYe8THXOmEuNHYKDJwgek3DVnm/S+k8m2pP7BwJOOLj+5bQVehvW0icnoWSpBeTvjDz40W
- Dmvj9wyTw==
-X-Received: by 2002:a17:903:166e:b0:2ce:fa3a:45f7 with SMTP id
- d9443c01a7336-2d015d1eb47mr65436735ad.16.1785322776228; 
- Wed, 29 Jul 2026 03:59:36 -0700 (PDT)
-Received: from LAPTOP-LOCIFOSI.localdomain ([123.127.39.254])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2d022bfa240sm9627135ad.65.2026.07.29.03.59.32
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 29 Jul 2026 03:59:35 -0700 (PDT)
-From: Xin Xie <xinxie908@gmail.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, Chao Liu <chao.liu@processmission.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Fabiano Rosas <farosas@suse.de>, Laurent Vivier <lvivier@redhat.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Paolo Bonzini <pbonzini@redhat.com>,
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
- Weiwei Li <liwei1518@gmail.com>, Xin Xie <xinxie908@gmail.com>
-Subject: [PATCH v1 2/3] hw/riscv: enable SDHCI controllers on K230
-Date: Wed, 29 Jul 2026 18:59:02 +0800
-Message-ID: <20260729105904.272939-3-xinxie908@gmail.com>
+ d=linux.alibaba.com; s=default;
+ t=1785328579; h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
+ bh=jKlcdBnFuHgRxrT49QtoTVmYgMs7rTqDYQgsQRVgtko=;
+ b=yrC8hcqvn3Nkg8nYirUUimLRMMKsFZV4+b9yVySNwpADg1vvo/7f0/113yUkfXToMXYbkqe2RdxErCRmTVvliAeuvpH0TUdf5hdrt88VwTFD83YASn/JlIdAMuBXhQ2iv5nw0ibF0dFHgxuYJOjcB7CZzbKupFRTmmPN+b7jTYg=
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R871e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033037033178;
+ MF=cp0613@linux.alibaba.com; NM=1; PH=DS; RN=17; SR=0;
+ TI=SMTPD_---0X82AQ0a_1785328573; 
+Received: from DESKTOP-S9E58SO.localdomain(mailfrom:cp0613@linux.alibaba.com
+ fp:SMTPD_---0X82AQ0a_1785328573 cluster:ay36) by smtp.aliyun-inc.com;
+ Wed, 29 Jul 2026 20:36:17 +0800
+From: Chen Pei <cp0613@linux.alibaba.com>
+To: Igor Mammedov <imammedo@redhat.com>
+Cc: jic23@kernel.org, pbonzini@redhat.com, palmer@dabbelt.com,
+ alistair.francis@wdc.com, liwei1518@gmail.com,
+ daniel.barboza@oss.qualcomm.com, zhiwei_liu@linux.alibaba.com,
+ chao.liu.zevorn@gmail.com, sunilvl@ventanamicro.com, dave.jiang@intel.com,
+ alison.schofield@intel.com, mst@redhat.com, guoren@kernel.org,
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org, linux-cxl@vger.kernel.org
+Subject: Re: [PATCH v2 3/4] hw/riscv/virt,
+ gpex: Provide 32-bit MMIO window for CXL host bridges
+Date: Wed, 29 Jul 2026 20:36:10 +0800
+Message-ID: <20260729122505.200000-1-cp0613@linux.alibaba.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260729105904.272939-1-xinxie908@gmail.com>
-References: <20260729105904.272939-1-xinxie908@gmail.com>
+In-Reply-To: <20260727110615.3e523125@imammedo>
+References: <20260618093827.3507-1-cp0613@linux.alibaba.com>
+ <20260618093827.3507-4-cp0613@linux.alibaba.com>
+ <20260727110615.3e523125@imammedo>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:39::1;
- envelope-from=xinxie908@gmail.com; helo=mail-pj2-x01.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.98 (deferred)
+Received-SPF: pass client-ip=115.124.30.98;
+ envelope-from=cp0613@linux.alibaba.com; helo=out30-98.freemail.mail.aliyun.com
+X-Spam_score_int: -166
+X-Spam_score: -16.7
+X-Spam_bar: ----------------
+X-Spam_report: (-16.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
+ RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793, SPF_PASS=-0.001,
+ T_SPF_HELO_TEMPERROR=0.01, UNPARSEABLE_RELAY=0.001, USER_IN_DEF_DKIM_WL=-7.5,
+ USER_IN_DEF_SPF_WL=-7.5 autolearn=no autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Wed, 29 Jul 2026 07:54:34 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -109,152 +76,78 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Replace the two unimplemented K230 SD controller regions with K230 SDHCI
-devices.  Map them at 0x91580000 and 0x91581000 and connect their
-interrupts to PLIC inputs 142 and 144 respectively.
+Hi Igor,
 
-Create an SD card on each controller when a corresponding
--drive if=sd,index=N backend is provided.
+Thanks for the review.
 
-Update the K230 machine documentation to list the controllers as
-supported and remove the instructions that disabled the SDHCI device
-tree nodes before booting Linux.
+On Mon, 27 Jul 2026 11:06:15 +0200
+Igor Mammedov <imammedo@redhat.com> wrote:
 
-Signed-off-by: Xin Xie <xinxie908@gmail.com>
----
- docs/system/riscv/k230.rst |  6 ++----
- hw/riscv/Kconfig           |  1 +
- hw/riscv/k230.c            | 34 ++++++++++++++++++++++++++++++----
- include/hw/riscv/k230.h    |  4 ++++
- 4 files changed, 37 insertions(+), 8 deletions(-)
+> I kind of dislike (basically riscv specific hack) in generic code.
+> well, correct way to tackle this is
+>  1: fix UEFI to perform required initialization.
 
-diff --git a/docs/system/riscv/k230.rst b/docs/system/riscv/k230.rst
-index cea8202e55..6e8286a0df 100644
---- a/docs/system/riscv/k230.rst
-+++ b/docs/system/riscv/k230.rst
-@@ -20,6 +20,7 @@ The ``k230`` machine supports the following devices:
- * Platform-Level Interrupt Controller (PLIC)
- * 2 K230 Watchdog Timer
- * 5 UART
-+* 2 SDHCI controllers
- 
- Boot options
- ------------
-@@ -100,14 +101,11 @@ Press Enter to stop autoboot. At the U-Boot prompt, run these commands:
-    K230# fdt resize 8192
-    K230# fdt set /chosen linux,initrd-start <0x0 0xa100000>
-    K230# fdt set /chosen linux,initrd-end <0x0 ${INITRD_END}>
--   K230# fdt set /soc/sdhci0@91580000 status disabled
--   K230# fdt set /soc/sdhci1@91581000 status disabled
-    K230# bootm 0xc100000 - 0xa000000
- 
- Use ``setenv`` so ``bootm`` writes the kernel command line into
- ``/chosen/bootargs``. The ``fdt`` commands select the loaded DTB, add space for
--edits, describe the initrd range in ``/chosen``, and disable SDHCI nodes because
--this machine does not emulate those controllers yet. Replace ``${INITRD_END}``
-+edits, and describe the initrd range in ``/chosen``. Replace ``${INITRD_END}``
- with the host-calculated value above when typing the command. ``cma=0`` avoids
- the SDK kernel reserving too much of the little-core memory window for initramfs
- boot.
-diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-index de37c08cae..e4a0616c16 100644
---- a/hw/riscv/Kconfig
-+++ b/hw/riscv/Kconfig
-@@ -162,3 +162,4 @@ config K230
-     select SERIAL_MM
-     select UNIMP
-     select K230_WDT
-+    select K230_SDHCI
-diff --git a/hw/riscv/k230.c b/hw/riscv/k230.c
-index 656f28190c..7ea69084ae 100644
---- a/hw/riscv/k230.c
-+++ b/hw/riscv/k230.c
-@@ -110,6 +110,8 @@ static void k230_soc_init(Object *obj)
-     object_initialize_child(obj, "c908-cpu", cpu0, TYPE_RISCV_HART_ARRAY);
-     object_initialize_child(obj, "k230-wdt0", &s->wdt[0], TYPE_K230_WDT);
-     object_initialize_child(obj, "k230-wdt1", &s->wdt[1], TYPE_K230_WDT);
-+    object_initialize_child(obj, "sdhci0", &s->sdhci[0], TYPE_K230_SDHCI);
-+    object_initialize_child(obj, "sdhci1", &s->sdhci[1], TYPE_K230_SDHCI);
- 
-     qdev_prop_set_uint32(DEVICE(cpu0), "hartid-base", 0);
-     qdev_prop_set_string(DEVICE(cpu0), "cpu-type", TYPE_RISCV_CPU_THEAD_C908);
-@@ -343,11 +345,21 @@ static void k230_soc_realize(DeviceState *dev, Error **errp)
-     create_unimplemented_device("usb1", memmap[K230_DEV_USB1].base,
-                                 memmap[K230_DEV_USB1].size);
- 
--    create_unimplemented_device("sd0", memmap[K230_DEV_SD0].base,
--                                memmap[K230_DEV_SD0].size);
-+    for (int i = 0; i < 2; i++) {
-+        if (!sysbus_realize(SYS_BUS_DEVICE(&s->sdhci[i]), errp)) {
-+            return;
-+        }
-+    }
-+
-+    sysbus_mmio_map(SYS_BUS_DEVICE(&s->sdhci[0]), 0,
-+                    memmap[K230_DEV_SD0].base);
-+    sysbus_connect_irq(SYS_BUS_DEVICE(&s->sdhci[0]), 0,
-+                       qdev_get_gpio_in(s->c908_plic, K230_SD0_IRQ));
- 
--    create_unimplemented_device("sd1", memmap[K230_DEV_SD1].base,
--                                memmap[K230_DEV_SD1].size);
-+    sysbus_mmio_map(SYS_BUS_DEVICE(&s->sdhci[1]), 0,
-+                    memmap[K230_DEV_SD1].base);
-+    sysbus_connect_irq(SYS_BUS_DEVICE(&s->sdhci[1]), 0,
-+                       qdev_get_gpio_in(s->c908_plic, K230_SD1_IRQ));
- 
-     create_unimplemented_device("qspi0", memmap[K230_DEV_QSPI0].base,
-                                 memmap[K230_DEV_QSPI0].size);
-@@ -490,6 +502,20 @@ static void k230_machine_init(MachineState *machine)
-                             TYPE_RISCV_K230_SOC);
-     qdev_realize(DEVICE(&s->soc), NULL, &error_fatal);
- 
-+    for (int i = 0; i < 2; i++) {
-+        DriveInfo *dinfo = drive_get(IF_SD, 0, i);
-+        DeviceState *card;
-+
-+        if (!dinfo) {
-+            continue;
-+        }
-+
-+        card = qdev_new(TYPE_SD_CARD);
-+        qdev_prop_set_drive_err(card, "drive", blk_by_legacy_dinfo(dinfo),
-+                                &error_fatal);
-+        qdev_realize_and_unref(card, s->soc.sdhci[i].bus, &error_fatal);
-+    }
-+
-     /* Data Memory */
-     memory_region_add_subregion(sys_mem, memmap[K230_DEV_DDRC].base,
-                                 machine->ram);
-diff --git a/include/hw/riscv/k230.h b/include/hw/riscv/k230.h
-index 592e1c26bf..8e73366e56 100644
---- a/include/hw/riscv/k230.h
-+++ b/include/hw/riscv/k230.h
-@@ -18,6 +18,7 @@
- #include "hw/core/boards.h"
- #include "hw/riscv/riscv_hart.h"
- #include "hw/watchdog/k230_wdt.h"
-+#include "hw/sd/k230_sdhci.h"
- 
- #define C908_CPU_HARTID   (0)
- 
-@@ -33,6 +34,7 @@ typedef struct K230SoCState {
-     RISCVHartArrayState c908_cpu; /* Small core */
- 
-     K230WdtState wdt[2];
-+    K230SDHCIState sdhci[2];
-     MemoryRegion sram;
-     MemoryRegion bootrom;
- 
-@@ -129,6 +131,8 @@ enum {
-     K230_UART4_IRQ  = 20,
-     K230_WDT0_IRQ   = 107,
-     K230_WDT1_IRQ   = 108,
-+    K230_SD0_IRQ    = 142,
-+    K230_SD1_IRQ    = 144,
- };
- 
- #define K230_UART_COUNT 5
--- 
-2.43.0
+I agree this is not a clean solution, and I acknowledge the concern
+about putting riscv-specific behavior into the shared gpex code.
 
+I did try the "fix UEFI" direction first. With the current EDK2
+(edk2-stable202602, the same FdtPciHostBridgeLib/PciBusDxe used by
+both aarch64 and riscv virt), I booted a riscv virt machine with
+pxb-cxl and dumped the ECAM config space after the firmware finished
+enumeration:
+
+  - pxb-cxl (1b36:000b) on bus 0: class 0x0600 (host bridge),
+    header type 0, memory/prefetchable window registers all zero;
+  - cxl-rp on bus 12: memory window base > limit (empty, reset value);
+  - cxl-type3 on bus 13: entire config space reads 0xffffffff,
+    i.e. the firmware never enumerated behind the CXL host bridge.
+
+The root cause is that PciBusDxe only recurses into devices for which
+IS_PCI_BRIDGE() is true (header layout 1), while pxb-cxl presents
+header type 0 and class 0x0600, so the firmware neither assigns it a
+secondary bus number nor any MMIO window. FdtPciHostBridgeLib likewise
+only consumes the single "pci-host-ecam-generic" node describing PCI0
+and has no knowledge of the expander bridge. As a result build_crs()
+genuinely returns an empty set on riscv today - this is not a timing
+artifact.
+
+> if you have to put a hack into QEMU, make it work with current build_crs()
+> and localize 'proper simulated initialization' in riscv codebase
+> (i.e. do not spread it to common codebase). But before doing it see (#1 not=
+e).
+
+Understood. Since #1 (a UEFI that performs the initialization) is not
+available on riscv at the moment, the static window is currently the
+only path that makes CXL host bridge _CRS usable here.
+
+For what it is worth, this is consistent with how CXL is being handled
+on the ARM side. The sbsa-ref enablement (Yuquan Wang, RFC up to v7,
+"hw/arm/sbsa-ref: Support CXL Host Bridge & CFMW" [1], plus the
+matching edk2-platforms RFC [2]) deliberately carves out exclusive
+static MMIO32/MMIO64 and bus-number ranges for the CXL host bridge and
+builds static ACPI tables, explicitly noting that it "doesn't need to
+communicate CXL contents via DT to edk2". Jonathan Cameron's arm/virt
+approach instead relies on EDK2 performing the enumeration and QEMU
+reading the result back via build_crs(), but that depends on a recent
+EDK2 with expander-bridge support that we do not have on riscv yet;
+his earlier DT-binding RFC for expander bridges [3] also notes that on
+the DT path QEMU has to allocate the windows itself.
+
+[1] https://lore.kernel.org/all/20250807111037.241118-1-wangyuquan1236@phytium.com.cn/
+[2] https://op-lists.linaro.org/archives/list/asa-dev@op-lists.linaro.org/thread/EPPN4R6KLGKYLWPOZUBWJG5HCXAAO3SQ/
+[3] https://lore.kernel.org/all/20230421165037.2506-1-Jonathan.Cameron@huawei.com/
+
+Given that, my tentative plan for v3 is to keep the static-window
+approach for now but address your objection by localizing it: drop the
+cxl_mmio32 field and the is_cxl branch from the common gpex code, and
+instead simulate the initialization in riscv virt code so that the
+existing build_crs() path produces the correct _CRS (i.e. have riscv
+pre-populate the bridge window registers / range set the way a
+firmware would), keeping the common codebase untouched.
+
+Before I rework it that way, I would appreciate any suggestions you
+may have on this approach.
+
+Thanks,
+Pei
 
