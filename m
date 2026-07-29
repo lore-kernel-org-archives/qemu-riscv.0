@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DF01C53200
-	for <qemu-riscv@archiver.kernel.org>; Wed, 29 Jul 2026 11:56:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2378FC54F51
+	for <qemu-riscv@archiver.kernel.org>; Wed, 29 Jul 2026 11:56:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wp2ru-0006Dd-8Z; Wed, 29 Jul 2026 07:54:38 -0400
+	id 1wp2rs-0006DA-TE; Wed, 29 Jul 2026 07:54:36 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <xinxie908@gmail.com>)
- id 1wp20o-00019s-5h
- for qemu-riscv@nongnu.org; Wed, 29 Jul 2026 06:59:47 -0400
-Received: from mail-pj2-x00.google.com ([2607:f8b0:4864:39::])
+ id 1wp20f-000175-82
+ for qemu-riscv@nongnu.org; Wed, 29 Jul 2026 06:59:38 -0400
+Received: from mail-pj2-x0a.google.com ([2607:f8b0:4864:39::a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <xinxie908@gmail.com>)
- id 1wp20j-0004Ec-Ot
- for qemu-riscv@nongnu.org; Wed, 29 Jul 2026 06:59:43 -0400
-Received: by mail-pj2-x00.google.com with SMTP id
- d9443c01a7336-2cc7a345f51so6685925ad.0
- for <qemu-riscv@nongnu.org>; Wed, 29 Jul 2026 03:59:41 -0700 (PDT)
+ id 1wp20b-0004D8-N3
+ for qemu-riscv@nongnu.org; Wed, 29 Jul 2026 06:59:37 -0400
+Received: by mail-pj2-x0a.google.com with SMTP id
+ d9443c01a7336-2cf5e516e67so4614625ad.1
+ for <qemu-riscv@nongnu.org>; Wed, 29 Jul 2026 03:59:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1785322780; x=1785927580; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1785322772; x=1785927572; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=nCnQwREZ46dN0HG8gxHxD1hzR7ICebA42h1seeieyfA=;
- b=qtH8/WtqL4PDwMlXHW3gc2bcpViR/g/0Gcwkzmunlwvo1QxRBQgNjrbZ6Y7tGCnkuv
- o0zNWGfYCs3GXzOoknY6Cag4pf/f3YGhQR/jlsnufT2gQfsCBfT/CCgdkqNcc1ByFzCX
- 3JwaZsAn8m/D+F02EEkgO7W/fQsK/kQl44QwycFo8te2AvxXmIcO4WrZIuS9WuKbuzlw
- vAokqduynREEcDk+ZhIN4BSEBlrqQILrfaLkKenb77dU7eLhPWuVh8NMI/94xn26/jk1
- fBGt5jsbP3FFxbJDfqgZta4Bs9nAqryokJp71pdFPyBTbcDxFFl5jf52ZgoeHH9jduY8
- 8UnQ==
+ bh=gQ5aFS2k3+LUcEAitcHN9BjMTSfVp18rofu2I0RU+Cw=;
+ b=fatFcBc/AasBu5t9zv4X3KfMG9QzjQMMSeRBI/g5NkG2B9InjPDqPDXX8Nhracg0eH
+ b6a+Shzv9aFlNSQXNHawPmg1TUnNDO/6mddXgEbDZb5WQMdynt80a4UXNnF871LDqSY0
+ 3usPb6pckTJe2iqohLpEa4X8+CXPQp43LuHDVag1l42Lb28Gv1syMyTb3KF8oxrMucg9
+ 61blWiEsgP6JIXC12SrhV2Jy1P87ljdO+fBt7grTSEldkjIkvInnKb3rkDD57rjVTJ17
+ DAhD8G7Wb/do0V3p5Yu7yqHxR7U3ClZpeh4JlevfFyZJw8MdGCwflGXITKivpJUIZ+pZ
+ kSZg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785322780; x=1785927580;
+ d=1e100.net; s=20251104; t=1785322772; x=1785927572;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=nCnQwREZ46dN0HG8gxHxD1hzR7ICebA42h1seeieyfA=;
- b=DwIepVakxlB0MOXYc8XTq5IHZukCwh6HWXuv7IAvYUzN+ueQZH4aNMiAqaIBFEQ34E
- XGbtE3NxmIVqMc1iKZ3ixzOJLEt5ziuQ/JXJF8aJozxtxz18T3GxfNA4r009OfWglmNE
- 1FufAyKeMs3J9590j6GoFWMVkfuPDib8nqdiGafp3rtpCEAJ6n3mRxvcsuP1BK+YZkyg
- RUDk9qn5OOb+Y5cwlnrIgV1GX9K2T/Yr828mEdmFaIULF7QPnyRYSKmU1RmJeVPK2P5p
- Y65Gi+CxC7UTFbVYESFBu0EYTW1YenCTaIHLEeN0QQgOA8Y1csxpPWcoIAjwP4Hrf8gb
- HTAg==
-X-Gm-Message-State: AOJu0Yzl5mTRwI1GZu9TzOtr1GzoKukQbdhlUFGLyqrAoSbJGp8+F+Ac
- H25hc19EteY0YCQHUx8+zcSm+rebGuIVwgy03ZTzQRlnJ/dH1P9FnLTh
-X-Gm-Gg: AR+sD107HcWVtzeEAaKKr8OrJ5+sRf0sElv2TifuiuniP7v5VDL1oO9vGAsHM+1a8qp
- cT5IRd2z66uuUcBM+eFsIH+QecDw42D+HviIZxWLgStFjhTqEKGgAnDIsVT5mC0bqs5TbNtwiHS
- Kv9tD84HvpbEgFwa/9GUacnRllKxryKAY3ratsPBFTBdcruc1xEG012Swf/dMx4kwp36bTyjbnZ
- EPYSJ3I2hBvPMud420krhD1xlCSsocdVtUiVqsEC++hWjbbdXVtGyqWAiIh41sJXob9aRYERill
- 8xUPq/AYpOcJtGfD7ukW3xZJp+y+BT21QeacYi91P4rEsUSMYQlhx5eOYiw2zfsUluMKPwD2yXr
- cYJ7MJCJW4s6xxcqCHkR763BDzZJTaozPew+dqWJ2zKIfL4ObC0xJV5iCayC4JuxRofi7OUYnrO
- ytFlbXG2IiERakb2vgl9RW4WN4TiaqN+jcAxW3ITwtEHqw1L2YiZ8RMQuAzbsZaFMcpysQbsHXM
- gh4MgrAdXOSlvVJQLbe
-X-Received: by 2002:a17:902:ce05:b0:2ce:9c48:22d3 with SMTP id
- d9443c01a7336-2d015c3e0bbmr77503815ad.11.1785322780446; 
- Wed, 29 Jul 2026 03:59:40 -0700 (PDT)
+ bh=gQ5aFS2k3+LUcEAitcHN9BjMTSfVp18rofu2I0RU+Cw=;
+ b=qJlxfNAKooG0CDVf4nqmq4vOY+lD+6+w+MGr1/bcb50iSG0tNVs3GO9DwHh+HQi+5i
+ 8SfLlNecFNtAikNWb7ZDEbGAzERo20gr57HIdYnHvkTSWSxb6CL3IkNT/TG031NH+ItN
+ FZs7GBAJF0ti47kwS0XwoWXfRYo6uaizF5tpm9UOgP8n86TwNlwRfRok5x3XoFTVHSl5
+ LYN6XAy72Ywggmw0pLa1rFYK+w8dkiTzaFv3efI/wXxNNpJThe8cEolILaEPmMPjpW4y
+ 0n47wZkX+3n/e9z18ZSCOmfrUwWgrJ48mu53rxLDBs8D1htknjL69WEXUhVMlP0n6L3x
+ KaEQ==
+X-Gm-Message-State: AOJu0YzE3r4c/6R36KXDfkjWWgvjwOPWaiPAR3jfXLQOBLN90EHc4Xaj
+ cPj8F62vfG9Ywpr6qV/auWBZhF59wtbJ/ceK0mz5IbTfs1zqFid9uPVy
+X-Gm-Gg: AR+sD13g52O6gorZldBD488g2eJnB86BzvpJgEB2Gwrx2eSvTaiRLMKHwBwsvWwfab9
+ b0/Xvdwh568hGLwQFEB9CuURQECwqpZZGZ6ufxYiuus4A/N3hW3hlgsTTDNafzv5EM/k8m5ZeKY
+ nbXDQoEe+m3aGNoWyCkS/ic4CiG8WVbopDbMhpNwwIz8FWh0kllzdMl0F/qTjSZUZ+xpHd0x9kW
+ PSKtNj4PEc1nuitwaViNE5vL1VVZ4xroKA5ht5AFQdL6lBZ9p/+i/zfhA9hgHkFf9jGPESzU0Ng
+ m0AuEmMPN2JCYM8Tek3CiQm7SHZSxcFw4oHs+wqWqKmxKpVjlCO0Xw7hDeLm7+qfc40QtbyVTyB
+ oMBNENspWV3vo4aDRG0vyfVtQHzGTO8kqtNFDtPtW30QE/z347LCoCtB0cPrbdViTzcGQZzZkl1
+ kPBW7s0K9fc8KRjNLRrv8Kk3Jy3xGbexhkU80VjuCfhL48/xUmXV/QW/coe+saWpcE0gfUv2Amk
+ t7snaLd9A==
+X-Received: by 2002:a17:903:3583:b0:2c9:c991:3bf0 with SMTP id
+ d9443c01a7336-2d015b148d4mr68977195ad.8.1785322772229; 
+ Wed, 29 Jul 2026 03:59:32 -0700 (PDT)
 Received: from LAPTOP-LOCIFOSI.localdomain ([123.127.39.254])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2d022bfa240sm9627135ad.65.2026.07.29.03.59.36
+ d9443c01a7336-2d022bfa240sm9627135ad.65.2026.07.29.03.59.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 29 Jul 2026 03:59:39 -0700 (PDT)
+ Wed, 29 Jul 2026 03:59:31 -0700 (PDT)
 From: Xin Xie <xinxie908@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, Chao Liu <chao.liu@processmission.com>,
@@ -75,16 +75,16 @@ Cc: qemu-riscv@nongnu.org, Chao Liu <chao.liu@processmission.com>,
  Palmer Dabbelt <palmer@dabbelt.com>, Paolo Bonzini <pbonzini@redhat.com>,
  Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
  Weiwei Li <liwei1518@gmail.com>, Xin Xie <xinxie908@gmail.com>
-Subject: [PATCH v1 3/3] tests/qtest: add K230 SDHCI tests
-Date: Wed, 29 Jul 2026 18:59:03 +0800
-Message-ID: <20260729105904.272939-4-xinxie908@gmail.com>
+Subject: [PATCH v1 1/3] hw/sd: add Kendryte K230 SDHCI controller
+Date: Wed, 29 Jul 2026 18:59:01 +0800
+Message-ID: <20260729105904.272939-2-xinxie908@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260729105904.272939-1-xinxie908@gmail.com>
 References: <20260729105904.272939-1-xinxie908@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:39::;
- envelope-from=xinxie908@gmail.com; helo=mail-pj2-x00.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:39::a;
+ envelope-from=xinxie908@gmail.com; helo=mail-pj2-x0a.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -94,7 +94,7 @@ X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Wed, 29 Jul 2026 07:54:35 -0400
+X-Mailman-Approved-At: Wed, 29 Jul 2026 07:54:33 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -109,42 +109,65 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Add qtests covering the K230-specific SDHCI register layout, capability
-masking, preset values, extension pointers, PHY power status and
-per-controller vendor register storage.
+Add a minimal K230 SDHCI model based on the generic SDHCI model. Reuse
+the generic commands and data paths while providing the extended register
+layout and documented reset values.
 
-Verify card detection and interrupt delivery through the K230 PLIC.
-Exercise basic PIO reads and writes with an attached SD card image and
-check that written data reaches the backing file.
+K230 SDHCI controller contains the standard SDHCI register block followed
+by preset, extension pointer, PHY and vendor-specific registers. This model
+implements the preset and extension pointer registers as read-only, retain
+writes to most PHY and vendor-specific registers, and keep PHY_PWRGOOD
+asserted so that the K230 SDK reset sequence can complete.
+
+The SDHCI version is set to 3 due to the absence of ADMA3 support in the
+generic model.
 
 Signed-off-by: Xin Xie <xinxie908@gmail.com>
 ---
- MAINTAINERS                   |   1 +
- tests/qtest/k230-sdhci-test.c | 214 ++++++++++++++++++++++++++++++++++
- tests/qtest/meson.build       |   5 +-
- 3 files changed, 219 insertions(+), 1 deletion(-)
- create mode 100644 tests/qtest/k230-sdhci-test.c
+ MAINTAINERS                |   2 +
+ hw/sd/Kconfig              |   4 +
+ hw/sd/k230_sdhci.c         | 311 +++++++++++++++++++++++++++++++++++++
+ hw/sd/meson.build          |   1 +
+ include/hw/sd/k230_sdhci.h |  82 ++++++++++
+ 5 files changed, 400 insertions(+)
+ create mode 100644 hw/sd/k230_sdhci.c
+ create mode 100644 include/hw/sd/k230_sdhci.h
 
 diff --git a/MAINTAINERS b/MAINTAINERS
-index 06285352c4..99c4c3294b 100644
+index 6171cc7494..06285352c4 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -1831,6 +1831,7 @@ F: include/hw/riscv/k230.h
+@@ -1826,8 +1826,10 @@ S: Maintained
+ F: docs/system/riscv/k230.rst
+ F: hw/riscv/k230.c
+ F: hw/watchdog/k230_wdt.c
++F: hw/sd/k230_sdhci.c
+ F: include/hw/riscv/k230.h
  F: include/hw/watchdog/k230_wdt.h
- F: include/hw/sd/k230_sdhci.h
++F: include/hw/sd/k230_sdhci.h
  F: tests/qtest/k230-wdt-test.c
-+F: tests/qtest/k230-sdhci-test.c
  
  RX Machines
- -----------
-diff --git a/tests/qtest/k230-sdhci-test.c b/tests/qtest/k230-sdhci-test.c
+diff --git a/hw/sd/Kconfig b/hw/sd/Kconfig
+index 633b9afec9..e9a5d63b4d 100644
+--- a/hw/sd/Kconfig
++++ b/hw/sd/Kconfig
+@@ -23,3 +23,7 @@ config SDHCI_PCI
+ config CADENCE_SDHCI
+     bool
+     select SDHCI
++
++config K230_SDHCI
++    bool
++    select SDHCI
+diff --git a/hw/sd/k230_sdhci.c b/hw/sd/k230_sdhci.c
 new file mode 100644
-index 0000000000..5eedb130c3
+index 0000000000..34c972a2f7
 --- /dev/null
-+++ b/tests/qtest/k230-sdhci-test.c
-@@ -0,0 +1,214 @@
++++ b/hw/sd/k230_sdhci.c
+@@ -0,0 +1,311 @@
 +/*
-+ * QTest testcase for the Kendryte K230 SDHCI controllers
++ * Kendryte K230 SDHCI controller
 + *
 + * Copyright (c) 2026 Xin Xie <xinxie908@gmail.com>
 + *
@@ -152,227 +175,405 @@ index 0000000000..5eedb130c3
 + */
 +
 +#include "qemu/osdep.h"
-+#include "qemu/timer.h"
-+#include "qemu/units.h"
-+#include "libqtest.h"
-+#include "libqos/sdhci-cmd.h"
++#include "qemu/log.h"
 +#include "hw/sd/k230_sdhci.h"
 +#include "hw/sd/sdhci-internal.h"
++#include "migration/vmstate.h"
 +
-+#define K230_SD0_BASE          0x91580000
-+#define K230_SD1_BASE          0x91581000
-+#define K230_PLIC_PENDING      0xf00001000ULL
-+#define K230_SD1_IRQ           144
++/*
++ * The TRM describes an SDHCI v4.20 DWC MSHC, including the v4 block-count
++ * mode, ADMA3, and extension-area registers.  QEMU's generic controller
++ * supports up to v3 and does not implement those v4 transfer semantics.
++ */
++#define K230_SDHCI_SPEC_VERSION 3
 +
-+#define K230_SD_TEST_IMAGE_SIZE (2 * MiB)
-+#define K230_SD_TEST_BLOCK_SIZE 512
++/*
++ * K230's Capabilities registers describe more functionality than the generic
++ * QEMU SDHCI data path currently implements.  Do not expose the following TRM
++ * capabilities to the guest:
++ *
++ * - ASYNC_INT requires an SDIO card-interrupt input and asynchronous interrupt
++ *   signalling while the SD clock is stopped.  SDBus has no such input.
++ * - TIMER_RETUNING and RETUNING_MODE require a re-tuning timer and generation
++ *   of a re-tuning request.  The generic controller only completes an initial
++ *   command-based tuning operation; it never schedules periodic re-tuning.
++ * - ADMA3 requires the SDHCI v4.20 ADMA3 descriptor and command semantics,
++ *   whereas the generic controller implements SDMA and ADMA2 only.
++ */
++#define K230_SDHCI_CAPABILITIES_UNSUPPORTED \
++    (R_SDHC_CAPAB_ASYNC_INT_MASK | \
++     R_SDHC_CAPAB_TIMER_RETUNING_MASK | \
++     R_SDHC_CAPAB_RETUNING_MODE_MASK | \
++     R_SDHC_CAPAB_ADMA3_MASK)
++#define K230_SDHCI_CAPAREG_IMPLEMENTED \
++    (K230_SDHCI_CAPAREG_RESET & ~K230_SDHCI_CAPABILITIES_UNSUPPORTED)
 +
-+static void test_registers(void)
++#define K230_LO8(value)     ((value) & 0xff)
++#define K230_HI8(value)     (((value) >> 8) & 0xff)
++
++static const uint8_t k230_sdhci_preset_reset[K230_SDHCI_PRESET_SIZE] = {
++    [K230_SDHCI_PRESET_INIT - K230_SDHCI_PRESET_BASE] =
++        K230_LO8(K230_SDHCI_PRESET_INIT_RESET),
++    [K230_SDHCI_PRESET_INIT - K230_SDHCI_PRESET_BASE + 1] =
++        K230_HI8(K230_SDHCI_PRESET_INIT_RESET),
++    [K230_SDHCI_PRESET_DEFAULT_SPEED - K230_SDHCI_PRESET_BASE] =
++        K230_LO8(K230_SDHCI_PRESET_DEFAULT_SPEED_RESET),
++    [K230_SDHCI_PRESET_DEFAULT_SPEED - K230_SDHCI_PRESET_BASE + 1] =
++        K230_HI8(K230_SDHCI_PRESET_DEFAULT_SPEED_RESET),
++    [K230_SDHCI_PRESET_HIGH_SPEED - K230_SDHCI_PRESET_BASE] =
++        K230_LO8(K230_SDHCI_PRESET_HIGH_SPEED_RESET),
++    [K230_SDHCI_PRESET_HIGH_SPEED - K230_SDHCI_PRESET_BASE + 1] =
++        K230_HI8(K230_SDHCI_PRESET_HIGH_SPEED_RESET),
++    [K230_SDHCI_PRESET_SDR12 - K230_SDHCI_PRESET_BASE] =
++        K230_LO8(K230_SDHCI_PRESET_SDR12_RESET),
++    [K230_SDHCI_PRESET_SDR12 - K230_SDHCI_PRESET_BASE + 1] =
++        K230_HI8(K230_SDHCI_PRESET_SDR12_RESET),
++    [K230_SDHCI_PRESET_SDR25 - K230_SDHCI_PRESET_BASE] =
++        K230_LO8(K230_SDHCI_PRESET_SDR25_RESET),
++    [K230_SDHCI_PRESET_SDR25 - K230_SDHCI_PRESET_BASE + 1] =
++        K230_HI8(K230_SDHCI_PRESET_SDR25_RESET),
++    [K230_SDHCI_PRESET_SDR50 - K230_SDHCI_PRESET_BASE] =
++        K230_LO8(K230_SDHCI_PRESET_SDR50_RESET),
++    [K230_SDHCI_PRESET_SDR50 - K230_SDHCI_PRESET_BASE + 1] =
++        K230_HI8(K230_SDHCI_PRESET_SDR50_RESET),
++    [K230_SDHCI_PRESET_SDR104 - K230_SDHCI_PRESET_BASE] =
++        K230_LO8(K230_SDHCI_PRESET_SDR104_RESET),
++    [K230_SDHCI_PRESET_SDR104 - K230_SDHCI_PRESET_BASE + 1] =
++        K230_HI8(K230_SDHCI_PRESET_SDR104_RESET),
++    [K230_SDHCI_PRESET_DDR50 - K230_SDHCI_PRESET_BASE] =
++        K230_LO8(K230_SDHCI_PRESET_DDR50_RESET),
++    [K230_SDHCI_PRESET_DDR50 - K230_SDHCI_PRESET_BASE + 1] =
++        K230_HI8(K230_SDHCI_PRESET_DDR50_RESET),
++};
++
++static uint64_t k230_sdhci_preset_read(void *opaque, hwaddr addr,
++                                      unsigned int size)
 +{
-+    QTestState *qts = qtest_init("-machine k230");
-+    uint64_t capabilities;
-+    uint64_t expected = K230_SDHCI_CAPAREG_RESET;
-+
-+    /* Only capabilities unsupported by the QEMU model are removed. */
-+    expected = FIELD_DP64(expected, SDHC_CAPAB, ASYNC_INT, 0);
-+    expected = FIELD_DP64(expected, SDHC_CAPAB, TIMER_RETUNING, 0);
-+    expected = FIELD_DP64(expected, SDHC_CAPAB, RETUNING_MODE, 0);
-+    expected = FIELD_DP64(expected, SDHC_CAPAB, ADMA3, 0);
-+    capabilities = qtest_readq(qts, K230_SD0_BASE + SDHC_CAPAB);
-+    g_assert_cmphex(capabilities, ==, expected);
-+
-+    /* Preset Value registers use the TRM reset values and are read-only. */
-+    g_assert(qtest_readw(qts, K230_SD0_BASE + K230_SDHCI_PRESET_INIT) ==
-+             K230_SDHCI_PRESET_INIT_RESET);
-+    g_assert(qtest_readw(qts, K230_SD0_BASE +
-+                         K230_SDHCI_PRESET_DEFAULT_SPEED) ==
-+             K230_SDHCI_PRESET_DEFAULT_SPEED_RESET);
-+    g_assert(qtest_readw(qts, K230_SD0_BASE +
-+                         K230_SDHCI_PRESET_HIGH_SPEED) ==
-+             K230_SDHCI_PRESET_HIGH_SPEED_RESET);
-+    g_assert(qtest_readw(qts, K230_SD0_BASE + K230_SDHCI_PRESET_SDR12) ==
-+             K230_SDHCI_PRESET_SDR12_RESET);
-+    g_assert(qtest_readw(qts, K230_SD0_BASE + K230_SDHCI_PRESET_SDR25) ==
-+             K230_SDHCI_PRESET_SDR25_RESET);
-+    g_assert(qtest_readw(qts, K230_SD0_BASE + K230_SDHCI_PRESET_SDR50) ==
-+             K230_SDHCI_PRESET_SDR50_RESET);
-+    g_assert(qtest_readw(qts, K230_SD0_BASE + K230_SDHCI_PRESET_SDR104) ==
-+             K230_SDHCI_PRESET_SDR104_RESET);
-+    g_assert(qtest_readw(qts, K230_SD0_BASE + K230_SDHCI_PRESET_DDR50) ==
-+             K230_SDHCI_PRESET_DDR50_RESET);
-+
-+    qtest_writew(qts, K230_SD0_BASE + K230_SDHCI_PRESET_SDR50, 0xffff);
-+    g_assert(qtest_readw(qts, K230_SD0_BASE + K230_SDHCI_PRESET_SDR50) ==
-+             K230_SDHCI_PRESET_SDR50_RESET);
-+
-+    /* Extension-area pointers use their documented read-only reset values. */
-+    g_assert(qtest_readw(qts, K230_SD0_BASE + K230_SDHCI_P_UHS2_SETTINGS) ==
-+             K230_SDHCI_P_UHS2_SETTINGS_RESET);
-+    g_assert(qtest_readw(qts, K230_SD0_BASE + K230_SDHCI_P_UHS2_HOST_CAPAB) ==
-+             K230_SDHCI_P_UHS2_HOST_CAPAB_RESET);
-+    g_assert(qtest_readw(qts, K230_SD0_BASE + K230_SDHCI_P_UHS2_TEST) ==
-+             K230_SDHCI_P_UHS2_TEST_RESET);
-+    g_assert(qtest_readw(qts, K230_SD0_BASE + K230_SDHCI_P_EMBEDDED_CNTRL) ==
-+             K230_SDHCI_P_EMBEDDED_CNTRL_RESET);
-+    g_assert(qtest_readw(qts, K230_SD0_BASE + K230_SDHCI_P_VENDOR_AREA1) ==
-+             K230_SDHCI_P_VENDOR_AREA1_RESET);
-+    g_assert(qtest_readw(qts, K230_SD0_BASE + K230_SDHCI_P_VENDOR_AREA2) ==
-+             K230_SDHCI_P_VENDOR_AREA2_RESET);
-+
-+    qtest_writew(qts, K230_SD0_BASE + K230_SDHCI_P_VENDOR_AREA1, 0xffff);
-+    g_assert(qtest_readw(qts, K230_SD0_BASE + K230_SDHCI_P_VENDOR_AREA1) ==
-+             K230_SDHCI_P_VENDOR_AREA1_RESET);
-+
-+    /* The virtual PHY is always ready and software cannot clear PWRGOOD. */
-+    g_assert((qtest_readl(qts, K230_SD0_BASE + K230_SDHCI_PHY_CNFG) &
-+              K230_SDHCI_PHY_CNFG_PWRGOOD) == K230_SDHCI_PHY_CNFG_PWRGOOD);
-+    qtest_writel(qts, K230_SD0_BASE + K230_SDHCI_PHY_CNFG, 0);
-+    g_assert(qtest_readl(qts, K230_SD0_BASE + K230_SDHCI_PHY_CNFG) ==
-+             K230_SDHCI_PHY_CNFG_PWRGOOD);
-+
-+    /* Vendor storage is writable and private to each controller instance. */
-+    qtest_writel(qts, K230_SD0_BASE + K230_SDHCI_P_VENDOR_AREA1_RESET,
-+                 0x89abcdef);
-+    g_assert(qtest_readl(qts, K230_SD0_BASE +
-+                         K230_SDHCI_P_VENDOR_AREA1_RESET) ==
-+             0x89abcdef);
-+    g_assert(qtest_readl(qts, K230_SD1_BASE +
-+                         K230_SDHCI_P_VENDOR_AREA1_RESET) == 0);
-+
-+    qtest_quit(qts);
++    return ldn_le_p(&k230_sdhci_preset_reset[addr], size);
 +}
 +
-+static void test_card_detect(void)
++static void k230_sdhci_preset_write(void *opaque, hwaddr addr, uint64_t value,
++                                   unsigned int size)
 +{
-+    g_autofree char *path = NULL;
-+    int fd = g_file_open_tmp("k230-sd-XXXXXX.img", &path, NULL);
-+    QTestState *qts;
-+
-+    g_assert(fd >= 0);
-+    g_assert(ftruncate(fd, K230_SD_TEST_IMAGE_SIZE) == 0);
-+    close(fd);
-+
-+    qts = qtest_initf("-machine k230 "
-+                      "-drive if=sd,index=1,format=raw,file=%s", path);
-+
-+    /* Card insertion becomes visible after the generic insertion delay. */
-+    qtest_clock_step(qts, NANOSECONDS_PER_SECOND);
-+    g_assert((qtest_readl(qts, K230_SD1_BASE + SDHC_PRNSTS) &
-+              SDHC_CARD_PRESENT) == SDHC_CARD_PRESENT);
-+    g_assert((qtest_readl(qts, K230_SD0_BASE + SDHC_PRNSTS) &
-+              SDHC_CARD_PRESENT) == 0);
-+
-+    /* Route a command-complete event through SDHCI to the K230 PLIC. */
-+    qtest_writew(qts, K230_SD1_BASE + SDHC_NORINTSTSEN,
-+                 SDHC_NISEN_CMDCMP);
-+    qtest_writew(qts, K230_SD1_BASE + SDHC_NORINTSIGEN,
-+                 SDHC_NISEN_CMDCMP);
-+    g_assert((qtest_readw(qts, K230_SD1_BASE + SDHC_NORINTSTSEN) &
-+              SDHC_NISEN_CMDCMP) != 0);
-+    g_assert((qtest_readw(qts, K230_SD1_BASE + SDHC_NORINTSIGEN) &
-+              SDHC_NISEN_CMDCMP) != 0);
-+    qtest_writew(qts, K230_SD1_BASE + SDHC_CLKCON,
-+                 SDHC_CLOCK_INT_EN | SDHC_CLOCK_SDCLK_EN);
-+    qtest_writew(qts, K230_SD1_BASE + SDHC_CMDREG,
-+                 SDHC_APP_CMD | SDHC_CMD_RESPONSE);
-+    g_assert((qtest_readw(qts, K230_SD1_BASE + SDHC_NORINTSTS) &
-+              SDHC_NIS_CMDCMP) != 0);
-+    g_assert((qtest_readl(qts, K230_PLIC_PENDING +
-+                          K230_SD1_IRQ / 32 * sizeof(uint32_t)) &
-+              BIT(K230_SD1_IRQ % 32)) != 0);
-+
-+    qtest_quit(qts);
-+    unlink(path);
++    qemu_log_mask(LOG_GUEST_ERROR,
++                  "K230 SDHCI: write to read-only Preset Value register "
++                  "0x%03" HWADDR_PRIx "\n",
++                  K230_SDHCI_PRESET_BASE + addr);
 +}
 +
-+static void k230_sdhci_select_card(QTestState *qts)
++static const MemoryRegionOps k230_sdhci_preset_ops = {
++    .read = k230_sdhci_preset_read,
++    .write = k230_sdhci_preset_write,
++    .endianness = DEVICE_LITTLE_ENDIAN,
++    .valid = {
++        .min_access_size = 1,
++        .max_access_size = 4,
++        .unaligned = false,
++    },
++};
++
++static const uint8_t k230_sdhci_pointer_reset[K230_SDHCI_POINTER_SIZE] = {
++    [K230_SDHCI_P_UHS2_SETTINGS - K230_SDHCI_POINTER_BASE] =
++        K230_LO8(K230_SDHCI_P_UHS2_SETTINGS_RESET),
++    [K230_SDHCI_P_UHS2_SETTINGS - K230_SDHCI_POINTER_BASE + 1] =
++        K230_HI8(K230_SDHCI_P_UHS2_SETTINGS_RESET),
++    [K230_SDHCI_P_UHS2_HOST_CAPAB - K230_SDHCI_POINTER_BASE] =
++        K230_LO8(K230_SDHCI_P_UHS2_HOST_CAPAB_RESET),
++    [K230_SDHCI_P_UHS2_HOST_CAPAB - K230_SDHCI_POINTER_BASE + 1] =
++        K230_HI8(K230_SDHCI_P_UHS2_HOST_CAPAB_RESET),
++    [K230_SDHCI_P_UHS2_TEST - K230_SDHCI_POINTER_BASE] =
++        K230_LO8(K230_SDHCI_P_UHS2_TEST_RESET),
++    [K230_SDHCI_P_UHS2_TEST - K230_SDHCI_POINTER_BASE + 1] =
++        K230_HI8(K230_SDHCI_P_UHS2_TEST_RESET),
++    [K230_SDHCI_P_EMBEDDED_CNTRL - K230_SDHCI_POINTER_BASE] =
++        K230_LO8(K230_SDHCI_P_EMBEDDED_CNTRL_RESET),
++    [K230_SDHCI_P_EMBEDDED_CNTRL - K230_SDHCI_POINTER_BASE + 1] =
++        K230_HI8(K230_SDHCI_P_EMBEDDED_CNTRL_RESET),
++    [K230_SDHCI_P_VENDOR_AREA1 - K230_SDHCI_POINTER_BASE] =
++        K230_LO8(K230_SDHCI_P_VENDOR_AREA1_RESET),
++    [K230_SDHCI_P_VENDOR_AREA1 - K230_SDHCI_POINTER_BASE + 1] =
++        K230_HI8(K230_SDHCI_P_VENDOR_AREA1_RESET),
++    [K230_SDHCI_P_VENDOR_AREA2 - K230_SDHCI_POINTER_BASE] =
++        K230_LO8(K230_SDHCI_P_VENDOR_AREA2_RESET),
++    [K230_SDHCI_P_VENDOR_AREA2 - K230_SDHCI_POINTER_BASE + 1] =
++        K230_HI8(K230_SDHCI_P_VENDOR_AREA2_RESET),
++};
++
++static uint64_t k230_sdhci_pointer_read(void *opaque, hwaddr addr,
++                                       unsigned int size)
 +{
-+    uint16_t rca;
-+
-+    /* Reset the controller and enable its internal and SD clocks. */
-+    qtest_writeb(qts, K230_SD1_BASE + SDHC_SWRST, SDHC_RESET_ALL);
-+    qtest_writew(qts, K230_SD1_BASE + SDHC_CLKCON,
-+                 SDHC_CLOCK_INT_EN | SDHC_CLOCK_INT_STABLE |
-+                 SDHC_CLOCK_SDCLK_EN);
-+
-+    /* Run the SD identification sequence and select the assigned RCA. */
-+    sdhci_cmd_regs(qts, K230_SD1_BASE, 0, 0, 0, 0, SDHC_APP_CMD);
-+    sdhci_cmd_regs(qts, K230_SD1_BASE, 0, 0, 0x41200000, 0, 41 << 8);
-+    sdhci_cmd_regs(qts, K230_SD1_BASE, 0, 0, 0, 0, SDHC_ALL_SEND_CID);
-+    sdhci_cmd_regs(qts, K230_SD1_BASE, 0, 0, 0, 0,
-+                   SDHC_SEND_RELATIVE_ADDR | SDHC_CMD_RESPONSE);
-+    rca = qtest_readl(qts, K230_SD1_BASE + SDHC_RSPREG0) >> 16;
-+    sdhci_cmd_regs(qts, K230_SD1_BASE, 0, 0, rca << 16, 0,
-+                   SDHC_SELECT_DESELECT_CARD);
++    return ldn_le_p(&k230_sdhci_pointer_reset[addr], size);
 +}
 +
-+static void test_card_io(void)
++static void k230_sdhci_pointer_write(void *opaque, hwaddr addr, uint64_t value,
++                                    unsigned int size)
 +{
-+    static const char read_data[] = "K230 SDHCI read";
-+    static const char write_data[] = "K230 SDHCI write";
-+    g_autofree char *path = NULL;
-+    char buffer[K230_SD_TEST_BLOCK_SIZE];
-+    int fd = g_file_open_tmp("k230-sd-XXXXXX.img", &path, NULL);
-+    QTestState *qts;
-+
-+    /* Seed block zero so the controller read can be checked independently. */
-+    g_assert(fd >= 0);
-+    g_assert(ftruncate(fd, K230_SD_TEST_IMAGE_SIZE) == 0);
-+    g_assert(pwrite(fd, read_data, sizeof(read_data), 0) == sizeof(read_data));
-+    close(fd);
-+
-+    qts = qtest_initf("-machine k230 "
-+                      "-drive if=sd,index=1,format=raw,auto-read-only=off,"
-+                      "file=%s", path);
-+    k230_sdhci_select_card(qts);
-+
-+    /* Read block zero through the SDHCI PIO data port. */
-+    memset(buffer, 0, sizeof(buffer));
-+    g_assert(sdhci_read_cmd(qts, K230_SD1_BASE, buffer,
-+                            sizeof(read_data)) == sizeof(read_data));
-+    g_assert(memcmp(buffer, read_data, sizeof(read_data)) == 0);
-+
-+    /* Write through SDHCI, then verify the data reached the backing image. */
-+    sdhci_write_cmd(qts, K230_SD1_BASE, write_data, sizeof(write_data),
-+                    K230_SD_TEST_BLOCK_SIZE);
-+    qtest_quit(qts);
-+
-+    fd = open(path, O_RDONLY);
-+    g_assert(fd >= 0);
-+    memset(buffer, 0, sizeof(buffer));
-+    g_assert(pread(fd, buffer, sizeof(write_data), 0) == sizeof(write_data));
-+    close(fd);
-+    g_assert(memcmp(buffer, write_data, sizeof(write_data)) == 0);
-+
-+    unlink(path);
++    qemu_log_mask(LOG_GUEST_ERROR,
++                  "K230 SDHCI: write to read-only pointer register "
++                  "0x%03" HWADDR_PRIx "\n",
++                  K230_SDHCI_POINTER_BASE + addr);
 +}
 +
-+int main(int argc, char *argv[])
++static const MemoryRegionOps k230_sdhci_pointer_ops = {
++    .read = k230_sdhci_pointer_read,
++    .write = k230_sdhci_pointer_write,
++    .endianness = DEVICE_LITTLE_ENDIAN,
++    .valid = {
++        .min_access_size = 1,
++        .max_access_size = 4,
++        .unaligned = false,
++    },
++};
++
++/*
++ * K230 uses the standard SDHCI register set at offset zero, followed by
++ * UHS-II, DWC MSHC PHY, Embedded Control, and vendor-specific blocks. Most
++ * side effects of analogue PHY behaviors not simulated.
++ *
++ * PHY_PWRGOOD is the sole synthesized status bit.  Real hardware asserts it
++ * after PHY power and reset sequencing; the SDK driver polls it during every
++ * full controller reset.  A virtual PHY has no settling interval or failure
++ * condition, so the bit is permanently asserted and cannot be cleared by a
++ * guest write.
++ */
++static uint64_t k230_sdhci_fallback_read(void *opaque, hwaddr addr,
++                                        unsigned int size)
 +{
-+    g_test_init(&argc, &argv, NULL);
++    K230SDHCIState *s = opaque;
++    uint64_t value = ldn_le_p(&s->fallback_regs[addr], size);
 +
-+    qtest_add_func("/k230-sdhci/registers", test_registers);
-+    qtest_add_func("/k230-sdhci/card-detect", test_card_detect);
-+    qtest_add_func("/k230-sdhci/card-io", test_card_io);
++    if (ranges_overlap(addr, size, K230_SDHCI_PHY_CNFG,
++                       sizeof(uint32_t)) && addr <= K230_SDHCI_PHY_CNFG) {
++        unsigned int shift = (K230_SDHCI_PHY_CNFG - addr) * 8;
 +
-+    return g_test_run();
++        value |= (uint64_t)K230_SDHCI_PHY_CNFG_PWRGOOD << shift;
++    }
++
++    return value;
 +}
-diff --git a/tests/qtest/meson.build b/tests/qtest/meson.build
-index 56ff860e21..0600b1e807 100644
---- a/tests/qtest/meson.build
-+++ b/tests/qtest/meson.build
-@@ -297,7 +297,10 @@ qtests_riscv64 = ['riscv-csr-test'] + \
-   (config_all_devices.has_key('CONFIG_IOMMU_TESTDEV') and
-    config_all_devices.has_key('CONFIG_RISCV_IOMMU') ?
-    ['iommu-riscv-test'] : []) + \
--  (config_all_devices.has_key('CONFIG_K230') ? ['k230-wdt-test'] : [])
-+  (config_all_devices.has_key('CONFIG_K230') ? [
-+    'k230-wdt-test',
-+    'k230-sdhci-test',
-+  ] : [])
- 
- qtests_hexagon = ['boot-serial-test']
- 
++
++static void k230_sdhci_fallback_write(void *opaque, hwaddr addr,
++                                     uint64_t value, unsigned int size)
++{
++    K230SDHCIState *s = opaque;
++
++    stn_le_p(&s->fallback_regs[addr], size, value);
++
++    /* PWRGOOD reflects PHY state and is not software writable. */
++    s->fallback_regs[K230_SDHCI_PHY_CNFG] |=
++        K230_SDHCI_PHY_CNFG_PWRGOOD;
++}
++
++static const MemoryRegionOps k230_sdhci_fallback_ops = {
++    .read = k230_sdhci_fallback_read,
++    .write = k230_sdhci_fallback_write,
++    .endianness = DEVICE_LITTLE_ENDIAN,
++    .valid = {
++        .min_access_size = 1,
++        .max_access_size = 4,
++        .unaligned = false,
++    },
++};
++
++static void k230_sdhci_reset(DeviceState *dev)
++{
++    K230SDHCIState *s = K230_SDHCI(dev);
++
++    memset(s->fallback_regs, 0, sizeof(s->fallback_regs));
++    s->fallback_regs[K230_SDHCI_PHY_CNFG] =
++        K230_SDHCI_PHY_CNFG_PWRGOOD;
++    device_cold_reset(DEVICE(&s->sdhci));
++}
++
++static void k230_sdhci_realize(DeviceState *dev, Error **errp)
++{
++    K230SDHCIState *s = K230_SDHCI(dev);
++    SysBusDevice *sbd = SYS_BUS_DEVICE(dev);
++    SysBusDevice *sdhci_sbd = SYS_BUS_DEVICE(&s->sdhci);
++
++    memory_region_init(&s->container, OBJECT(s), "k230.sdhci-container",
++                       K230_SDHCI_REG_SIZE);
++    sysbus_init_mmio(sbd, &s->container);
++
++    memory_region_init_io(&s->iomem_fallback, OBJECT(s),
++                          &k230_sdhci_fallback_ops, s,
++                          "k230.sdhci-fallback",
++                          K230_SDHCI_REG_SIZE);
++    memory_region_add_subregion(&s->container, 0, &s->iomem_fallback);
++
++    if (!sysbus_realize(sdhci_sbd, errp)) {
++        return;
++    }
++    memory_region_add_subregion_overlap(
++        &s->container, 0, sysbus_mmio_get_region(sdhci_sbd, 0), 1);
++
++    memory_region_init_io(&s->iomem_preset, OBJECT(s),
++                          &k230_sdhci_preset_ops, s,
++                          "k230.sdhci-preset", K230_SDHCI_PRESET_SIZE);
++    memory_region_add_subregion_overlap(&s->container,
++                                        K230_SDHCI_PRESET_BASE,
++                                        &s->iomem_preset, 2);
++
++    memory_region_init_io(&s->iomem_pointer, OBJECT(s),
++                          &k230_sdhci_pointer_ops, s,
++                          "k230.sdhci-pointers", K230_SDHCI_POINTER_SIZE);
++    memory_region_add_subregion_overlap(&s->container,
++                                        K230_SDHCI_POINTER_BASE,
++                                        &s->iomem_pointer, 2);
++
++    sysbus_pass_irq(sbd, sdhci_sbd);
++    s->bus = qdev_get_child_bus(DEVICE(sdhci_sbd), "sd-bus");
++}
++
++static const VMStateDescription vmstate_k230_sdhci = {
++    .name = TYPE_K230_SDHCI,
++    .version_id = 1,
++    .minimum_version_id = 1,
++    .fields = (const VMStateField[]) {
++        VMSTATE_UINT8_ARRAY(fallback_regs, K230SDHCIState,
++                            K230_SDHCI_REG_SIZE),
++        VMSTATE_END_OF_LIST()
++    },
++};
++
++static void k230_sdhci_instance_init(Object *obj)
++{
++    K230SDHCIState *s = K230_SDHCI(obj);
++
++    object_initialize_child(obj, "generic-sdhci", &s->sdhci,
++                            TYPE_SYSBUS_SDHCI);
++
++    object_property_set_uint(OBJECT(&s->sdhci), "sd-spec-version",
++                             K230_SDHCI_SPEC_VERSION,
++                             &error_abort);
++    object_property_set_uint(OBJECT(&s->sdhci), "capareg",
++                             K230_SDHCI_CAPAREG_IMPLEMENTED,
++                             &error_abort);
++    object_property_set_uint(OBJECT(&s->sdhci), "uhs", UHS_I, &error_abort);
++}
++
++static void k230_sdhci_class_init(ObjectClass *klass, const void *data)
++{
++    DeviceClass *dc = DEVICE_CLASS(klass);
++
++    dc->desc = "Kendryte K230 SDHCI Controller";
++    dc->realize = k230_sdhci_realize;
++    device_class_set_legacy_reset(dc, k230_sdhci_reset);
++    dc->vmsd = &vmstate_k230_sdhci;
++    set_bit(DEVICE_CATEGORY_STORAGE, dc->categories);
++}
++
++static const TypeInfo k230_sdhci_type_info = {
++    .name = TYPE_K230_SDHCI,
++    .parent = TYPE_SYS_BUS_DEVICE,
++    .instance_size = sizeof(K230SDHCIState),
++    .instance_init = k230_sdhci_instance_init,
++    .class_init = k230_sdhci_class_init,
++};
++
++static void k230_sdhci_register_types(void)
++{
++    type_register_static(&k230_sdhci_type_info);
++}
++
++type_init(k230_sdhci_register_types)
+diff --git a/hw/sd/meson.build b/hw/sd/meson.build
+index b43d45bc56..a109635233 100644
+--- a/hw/sd/meson.build
++++ b/hw/sd/meson.build
+@@ -10,3 +10,4 @@ system_ss.add(when: 'CONFIG_ASPEED_SOC', if_true: files('aspeed_sdhci.c'))
+ system_ss.add(when: 'CONFIG_ALLWINNER_H3', if_true: files('allwinner-sdhost.c'))
+ system_ss.add(when: 'CONFIG_NPCM7XX', if_true: files('npcm7xx_sdhci.c'))
+ system_ss.add(when: 'CONFIG_CADENCE_SDHCI', if_true: files('cadence_sdhci.c'))
++system_ss.add(when: 'CONFIG_K230_SDHCI', if_true: files('k230_sdhci.c'))
+diff --git a/include/hw/sd/k230_sdhci.h b/include/hw/sd/k230_sdhci.h
+new file mode 100644
+index 0000000000..a8389f1de4
+--- /dev/null
++++ b/include/hw/sd/k230_sdhci.h
+@@ -0,0 +1,82 @@
++/*
++ * Kendryte K230 SDHCI controller
++ *
++ * Copyright (c) 2026 Xin Xie <xinxie908@gmail.com>
++ *
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ */
++
++#ifndef HW_SD_K230_SDHCI_H
++#define HW_SD_K230_SDHCI_H
++
++#include "qemu/bitops.h"
++#include "hw/sd/sdhci.h"
++#include "qom/object.h"
++
++#define TYPE_K230_SDHCI "k230.sdhci"
++OBJECT_DECLARE_SIMPLE_TYPE(K230SDHCIState, K230_SDHCI)
++
++#define K230_SDHCI_REG_SIZE             0x1000
++
++/* K230 TRM reset values for Capabilities Registers 1 and 2. */
++#define K230_SDHCI_CAPABILITIES1_RESET  0x256ec881ULL
++#define K230_SDHCI_CAPABILITIES2_RESET  0x0800a177ULL
++#define K230_SDHCI_CAPAREG_RESET \
++    ((K230_SDHCI_CAPABILITIES2_RESET << 32) \
++    | K230_SDHCI_CAPABILITIES1_RESET)
++
++/* SDHCI Preset Value registers. */
++#define K230_SDHCI_PRESET_BASE           0x060
++#define K230_SDHCI_PRESET_SIZE           0x010
++#define K230_SDHCI_PRESET_INIT           0x060
++#define K230_SDHCI_PRESET_DEFAULT_SPEED  0x062
++#define K230_SDHCI_PRESET_HIGH_SPEED     0x064
++#define K230_SDHCI_PRESET_SDR12          0x066
++#define K230_SDHCI_PRESET_SDR25          0x068
++#define K230_SDHCI_PRESET_SDR50          0x06a
++#define K230_SDHCI_PRESET_SDR104         0x06c
++#define K230_SDHCI_PRESET_DDR50          0x06e
++#define K230_SDHCI_PRESET_INIT_RESET          0x00fa
++#define K230_SDHCI_PRESET_DEFAULT_SPEED_RESET 0x0004
++#define K230_SDHCI_PRESET_HIGH_SPEED_RESET    0x0002
++#define K230_SDHCI_PRESET_SDR12_RESET         0x0004
++#define K230_SDHCI_PRESET_SDR25_RESET         0x0002
++#define K230_SDHCI_PRESET_SDR50_RESET         0x0001
++#define K230_SDHCI_PRESET_SDR104_RESET        0x0000
++#define K230_SDHCI_PRESET_DDR50_RESET         0x0002
++
++/* SDHCI v4 extension-area pointer registers. */
++#define K230_SDHCI_POINTER_BASE         0x0e0
++#define K230_SDHCI_POINTER_SIZE         0x00c
++#define K230_SDHCI_P_UHS2_SETTINGS      0x0e0
++#define K230_SDHCI_P_UHS2_HOST_CAPAB    0x0e2
++#define K230_SDHCI_P_UHS2_TEST          0x0e4
++#define K230_SDHCI_P_EMBEDDED_CNTRL     0x0e6
++#define K230_SDHCI_P_VENDOR_AREA1       0x0e8
++#define K230_SDHCI_P_VENDOR_AREA2       0x0ea
++#define K230_SDHCI_P_UHS2_SETTINGS_RESET    0x0000
++#define K230_SDHCI_P_UHS2_HOST_CAPAB_RESET  0x0f58
++#define K230_SDHCI_P_UHS2_TEST_RESET        0x0f68
++#define K230_SDHCI_P_EMBEDDED_CNTRL_RESET   0x0f6c
++#define K230_SDHCI_P_VENDOR_AREA1_RESET     0x0500
++#define K230_SDHCI_P_VENDOR_AREA2_RESET     0x0384
++
++/* DWC MSHC PHY register block. */
++#define K230_SDHCI_PHY_CNFG             0x300
++#define K230_SDHCI_PHY_CNFG_RSTN        BIT(0)
++#define K230_SDHCI_PHY_CNFG_PWRGOOD     BIT(1)
++
++struct K230SDHCIState {
++    SysBusDevice parent_obj;
++
++    MemoryRegion container;
++    MemoryRegion iomem_fallback;
++    MemoryRegion iomem_preset;
++    MemoryRegion iomem_pointer;
++    BusState *bus;
++    uint8_t fallback_regs[K230_SDHCI_REG_SIZE];
++
++    SDHCIState sdhci;
++};
++
++#endif
 -- 
 2.43.0
 
