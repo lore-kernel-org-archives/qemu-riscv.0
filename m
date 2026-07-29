@@ -4,86 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7184C54F4C
-	for <qemu-riscv@archiver.kernel.org>; Tue, 28 Jul 2026 04:11:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18233C53219
+	for <qemu-riscv@archiver.kernel.org>; Wed, 29 Jul 2026 03:22:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1woZ9j-0003Wn-Uj; Tue, 28 Jul 2026 00:11:03 -0400
+	id 1wousP-0005sP-C3; Tue, 28 Jul 2026 23:22:37 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dubdublan1987@gmail.com>)
- id 1woZ9R-0003VI-Iv
- for qemu-riscv@nongnu.org; Tue, 28 Jul 2026 00:10:45 -0400
-Received: from mail-pl1-x633.google.com ([2607:f8b0:4864:20::633])
+ (Exim 4.90_1) (envelope-from <fritchleybohrer@gmail.com>)
+ id 1wousK-0005r4-Cv
+ for qemu-riscv@nongnu.org; Tue, 28 Jul 2026 23:22:33 -0400
+Received: from mail-pj2-x03.google.com ([2607:f8b0:4864:39::3])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dubdublan1987@gmail.com>)
- id 1woZ9P-0003hf-E0
- for qemu-riscv@nongnu.org; Tue, 28 Jul 2026 00:10:44 -0400
-Received: by mail-pl1-x633.google.com with SMTP id
- d9443c01a7336-2cf6d65d8a7so50268665ad.0
- for <qemu-riscv@nongnu.org>; Mon, 27 Jul 2026 21:10:39 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <fritchleybohrer@gmail.com>)
+ id 1wousI-0002fU-D1
+ for qemu-riscv@nongnu.org; Tue, 28 Jul 2026 23:22:32 -0400
+Received: by mail-pj2-x03.google.com with SMTP id
+ 98e67ed59e1d1-381072761d4so274928a91.0
+ for <qemu-riscv@nongnu.org>; Tue, 28 Jul 2026 20:22:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1785211839; x=1785816639; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=1ZNFzEPH0Jg7uKKvrJCqD8ThwFjBxj0u025SyTmCZm4=;
- b=dFT03hKwXjQDHfReYtK8ug0jKWAAkKS1w0ZWBMwoYoLz++qj9y5s02x2aykBkCJ0cq
- oaJ3xxWxIDvbQAwtdPnn0NPdzFF0bcBfqFmeHZEib2ZVXUq+w2k2Xs4HIHSGTH14mdoz
- HOah+1POp2loY7AFt4oMwWtjqBBFlL+xPwGXgIOzDDWyIcU9werKZf7yB+ZfPjyE1mHA
- hJPx8mcQJ7Ih2PRtGGpvpGq4YVZMJ3MPlNnNwXsw2Mib7hP3r4LWDFBHmWjgMQ5sdjmy
- DMaqLN+NITo3J3KuFxdezhyFvubR54wWBQyeFHMGK66RK/ymFOPkXAoxfLClMrBz7ton
- GyDA==
+ d=gmail.com; s=20251104; t=1785295348; x=1785900148; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=XYrZqz8WLEVINKi0z5jjSklUBUy+R/RHV21+vI9FKlY=;
+ b=AgXNrphOGzvWfw3U/45x04l7uAGYtWllzwKFR0ZkF3YhMjkrZs5kWI1mMxtiYHpWBS
+ a7YjxnnhDK9UxfPeHoLSHdBmGPuuuhWkGTo7nDD/2lsHR30BPUYR+/PtD3cLFyMIul9e
+ kGQbasuc4jvyxHWpK74luIDCfWgD48cnaCADo4uXIPNalnH070TwKhDGU7d/nYqJPkvu
+ hrR7jl1FS2dpAscpm2caJQyJUMcIR6jd8vKkd/vT1LJ3pGTSKPRD5DSJvbpEKmG+qTlg
+ EdwZrrvYpAZCVjxsTS8qTpGx6L9isq4s3ApbASPYhziOIQaAZ5lck0ns0sCxflPXWt/+
+ 0qvA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785211839; x=1785816639;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=1ZNFzEPH0Jg7uKKvrJCqD8ThwFjBxj0u025SyTmCZm4=;
- b=Z8xF0x4M/PAiABwXECaHDKn4OjtFcQ6cqJvH5eE0XvkHAisr6w08ex9msCEGUIiXNh
- QpQerOqdWiF2x76OAFMAa1VQy5LRUYi2iBK4fETUU0tp17HGbkK//MwCdDl/0kUPDaBA
- 4NLs5PmsPYkiYo0lF0HlyBQqXMth9y0ksCy48RvSrR+wbgqkqrCYu9ANyttpmVy9FWgd
- HWMxLq+EpWX96Gr7zfSR72dgrnMKjFI5nEjOfoLRbM0wOjdoflE7gPeWuL2IaON3pIK2
- b/lapycU9IrdZGtvISwyzUHFRD71KBZfapfTZXeom8zdfjgiZ+uqsfAjkX5lvwMVMRT8
- ML0g==
-X-Gm-Message-State: AOJu0YwbKkmVPlczY1J+/RLOaUvVu7M0YVraA8rsowEoNZLR/26hGoa4
- EiXWW3WD8Z7h6HyOo0jYnUz6ZtefP7/2Ke+mTt3vi0BS6O/+fxtGdjik
-X-Gm-Gg: AR+sD135fyhDX0FjBzUJqrfq9le1YXDzvtUcIqCcqJqVzFy2+q8QSqI115RdvXFFwnx
- bzl+UISYkVsxTOz4mwXY3Sb7o1K7NZHzP/fZc/JzXX3ZDOCYlK99aOU2A1LfqPnHfG2Ydf066HB
- algkviGmcClifujIo1hRQkC8059rfH403WeycoiffuT2V3Eo0k63jshnOnjmT4WHxCHaZYWyqDh
- Vp/zrcb3ZNMag+AaMwnAtmZLWyOP/Ghst9JeEjxcmKaHCIoRD92RqDl8Xb0BOUO3/cShyVOxbQZ
- 0GGgXYMuPtZTVDzd9BZ8VesmST9T3okqtNsqUD0kYIVWtYJ+hdBwPJ2kBpJNjwYxHfzAUi1WpbM
- rv/2ga17bP4/KfQOXHD5RTgyVMZlkFFVEjXMj5KDjCD4RqEfn0pqWbZRurx0Q3EuAL7W5su1qo1
- tkYinw+zPTFevLUW5chDBYJLORHi++og==
-X-Received: by 2002:a17:902:fd87:b0:2c9:e9c4:82c1 with SMTP id
- d9443c01a7336-2d015f02158mr8104815ad.26.1785211838668; 
- Mon, 27 Jul 2026 21:10:38 -0700 (PDT)
-Received: from localhost.localdomain.localdomain ([27.115.61.146])
+ d=1e100.net; s=20251104; t=1785295348; x=1785900148;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=XYrZqz8WLEVINKi0z5jjSklUBUy+R/RHV21+vI9FKlY=;
+ b=HiBC/fS5C8Hi8mLkwrm11u633UaCKNg4WmDKRGLCfEivRFxGYsd5Azv7jpS4s0vDf5
+ ih/PQIj7HaFh1/qCgWbnwERrx95lFsflObUbTsOw0mrBtIGTeACv53L3Cp1Xl2Yajvse
+ krQ+RRxfj38m21HbDBTdAjsHj7WZsDxIQRmBto9KnZ7EugML0Q3YvDDn+f2WLsE0MsZP
+ /amDMdVmaCPgPpNRIZyh75pFzsX8XryQV/9yNIU2YPCpxbKLMrAxdHBgOWfj178ghzVT
+ /Rg78VB20k8gX504n4EweEx65KUZVhuKyfbs3uDm8izE/EM74AUWjnAWFE7D9DwwJfG8
+ QBuA==
+X-Gm-Message-State: AOJu0YwQpSEPI1YQDTZuAHNIeBfd374Dh9AGxRRBDgfD2ehja7Nkmak3
+ IjBiBdGj/yOQzjMvoPkzsNqTjrditZy4eTFx/k7Y5YnEUSVJzMQE0EMD
+X-Gm-Gg: AR+sD13Uk6SfS7K0ht4rD5u75AgDUIRQ6XWFvAukqmozqWHCD4ahlDoswkyow6CUVB3
+ Yv3ZiO+yXCTDb8jGrLzqL4u8dI9oktCOgwJs6HqZpSwzaKTAc7PZxQra5Sas8AQA1nqf2E59hss
+ krcwS8bnx0Lod5K9Fe6Yq9zroW9kvBLrqVHT9zCeR4oOSC5+uQq3aih4rbzFw4k2/kobdO/Wfnn
+ HSv4tEZ74ZTXuDy5/qDpyGRCCSII+Nsde7ehwFnRFOkdVyxSEXqkACsEjuR2l+eipYhcmA6Ed8N
+ +50uYSSIV16pKqLmRHC4EMJD9D5jcz8MNzReB8Yf1kFewhKv+VQEVIyvA3TTzhKcnYAqDfYbk9D
+ 6adi2dJIO1zOVz0/XnbsBKH6TgenqOdc2XmVaGt6cH2dWhlfcGfHnrAdISYVwEiIYioj1ilm8qQ
+ 3k+aVvFPUY/AJAI9V7iw+0GLN3UNmXslqK6eqNsUCxJHVFgwkQ2pZhbPr3tvtwvlVJCYwd1S5e/
+ m8hJULO/Y7AxMeM5A==
+X-Received: by 2002:a17:90b:5868:b0:380:7688:fbe9 with SMTP id
+ 98e67ed59e1d1-38f6a422b1amr5346842a91.8.1785295347948; 
+ Tue, 28 Jul 2026 20:22:27 -0700 (PDT)
+Received: from Dell-WorkStation.localdomain ([103.190.179.65])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2cfde80ee56sm44378785ad.76.2026.07.27.21.10.36
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Mon, 27 Jul 2026 21:10:38 -0700 (PDT)
-From: lanxiaoyun <dubdublan1987@gmail.com>
+ a92af1059eb24-13e72643a12sm6126723c88.5.2026.07.28.20.22.22
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 28 Jul 2026 20:22:27 -0700 (PDT)
+From: Zephyr Li <fritchleybohrer@gmail.com>
 To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, Alistair.Francis@wdc.com, palmer@dabbelt.com,
- lanxiaoyun1 <dubdublan1987@gmail.com>
-Subject: [PATCH v2 1/1] hw/intc: resample level IRQ on PLIC completion
-Date: Tue, 28 Jul 2026 12:09:22 +0800
-Message-ID: <37c3604b0cf28f07f006aa40e7c20a5b12e34184.1785210445.git.dubdublan1987@gmail.com>
+Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
+ liwei1518@gmail.com, daniel.barboza@oss.qualcomm.com,
+ zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
+ Zephyr Li <fritchleybohrer@gmail.com>
+Subject: [PATCH] target/riscv: do not count ECALL in minstret
+Date: Wed, 29 Jul 2026 11:22:02 +0800
+Message-ID: <20260729032202.1415046-1-fritchleybohrer@gmail.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <cover.1785210445.git.dubdublan1987@gmail.com>
-References: <cover.1785210445.git.dubdublan1987@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::633;
- envelope-from=dubdublan1987@gmail.com; helo=mail-pl1-x633.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+Received-SPF: pass client-ip=2607:f8b0:4864:39::3;
+ envelope-from=fritchleybohrer@gmail.com; helo=mail-pj2-x03.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
@@ -101,71 +100,212 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: lanxiaoyun1 <dubdublan1987@gmail.com>
+With icount enabled, helper_raise_exception() leaves ECALL in
+icount_get_raw() because it exits without restoring the current TB
+state. This makes minstret count an instruction that does not retire.
 
-When an interrupt completion message is received, if the interrupt is
-level-triggered and still asserted, forward a new interrupt request to
-the PLIC core.
+Adjust only the fixed minstret baseline so that mcycle accounting
+remains unchanged.
 
-This updates the SiFive PLIC IRQ handling so completion rechecks the
-current source level and reasserts pending state when the input remains
-high, matching the RISC-V PLIC specification.
+Add an RV64 softmmu regression test for the issue.
 
-Signed-off-by: lanxiaoyun1 <dubdublan1987@gmail.com>
+Resolves: https://gitlab.com/qemu-project/qemu/-/issues/4087
+Signed-off-by: Zephyr Li <fritchleybohrer@gmail.com>
 ---
- hw/intc/sifive_plic.c         | 5 ++++-
- include/hw/intc/sifive_plic.h | 1 +
- 2 files changed, 5 insertions(+), 1 deletion(-)
+ target/riscv/tcg/op_helper.c              |  6 +++
+ target/riscv/tcg/pmu.c                    | 44 +++++++++++++-----
+ target/riscv/tcg/pmu.h                    |  1 +
+ tests/tcg/riscv64/Makefile.softmmu-target |  4 ++
+ tests/tcg/riscv64/test-minstret-ecall.S   | 55 +++++++++++++++++++++++
+ 5 files changed, 98 insertions(+), 12 deletions(-)
+ create mode 100644 tests/tcg/riscv64/test-minstret-ecall.S
 
-diff --git a/hw/intc/sifive_plic.c b/hw/intc/sifive_plic.c
-index 9c84ff06a9..3927684bcf 100644
---- a/hw/intc/sifive_plic.c
-+++ b/hw/intc/sifive_plic.c
-@@ -246,6 +246,7 @@ static void sifive_plic_write(void *opaque, hwaddr addr, uint64_t value,
-         } else if (contextid == 4) {
-             if (value < plic->num_sources) {
-                 sifive_plic_set_claimed(plic, value, false);
-+                sifive_plic_set_pending(plic, value, !!plic->source[value]);
-                 sifive_plic_update(plic);
-             }
-         } else {
-@@ -276,6 +277,7 @@ static void sifive_plic_reset(DeviceState *dev)
-     int i;
+diff --git a/target/riscv/tcg/op_helper.c b/target/riscv/tcg/op_helper.c
+index ba3c7da375..acdccd1a97 100644
+--- a/target/riscv/tcg/op_helper.c
++++ b/target/riscv/tcg/op_helper.c
+@@ -21,6 +21,9 @@
+ #include "qemu/osdep.h"
+ #include "cpu.h"
+ #include "target/riscv/tcg/csr.h"
++#ifndef CONFIG_USER_ONLY
++#include "pmu.h"
++#endif
+ #include "internals.h"
+ #include "exec/cputlb.h"
+ #include "accel/tcg/cpu-ldst.h"
+@@ -47,6 +50,9 @@ G_NORETURN void riscv_raise_exception(CPURISCVState *env,
  
-     memset(s->source_priority, 0, sizeof(uint32_t) * s->num_sources);
-+    memset(s->source, 0, sizeof(uint32_t) * s->num_sources);
-     memset(s->target_priority, 0, sizeof(uint32_t) * s->num_addrs);
-     memset(s->pending, 0, sizeof(uint32_t) * s->bitfield_words);
-     memset(s->claimed, 0, sizeof(uint32_t) * s->bitfield_words);
-@@ -353,7 +355,7 @@ static void parse_hart_config(SiFivePLICState *plic)
- static void sifive_plic_irq_request(void *opaque, int irq, int level)
+ void helper_raise_exception(CPURISCVState *env, uint32_t exception)
  {
-     SiFivePLICState *s = opaque;
--
-+    s->source[irq] = !!level;
-     if (level > 0) {
-         sifive_plic_set_pending(s, irq, true);
-         sifive_plic_update(s);
-@@ -379,6 +381,7 @@ static void sifive_plic_realize(DeviceState *dev, Error **errp)
-     s->bitfield_words = (s->num_sources + 31) >> 5;
-     s->num_enables = s->bitfield_words * s->num_addrs;
-     s->source_priority = g_new0(uint32_t, s->num_sources);
-+    s->source = g_new0(uint32_t, s->num_sources);
-     s->target_priority = g_new(uint32_t, s->num_addrs);
-     s->pending = g_new0(uint32_t, s->bitfield_words);
-     s->claimed = g_new0(uint32_t, s->bitfield_words);
-diff --git a/include/hw/intc/sifive_plic.h b/include/hw/intc/sifive_plic.h
-index 32973dbf28..627a418ba1 100644
---- a/include/hw/intc/sifive_plic.h
-+++ b/include/hw/intc/sifive_plic.h
-@@ -54,6 +54,7 @@ struct SiFivePLICState {
-     uint32_t num_enables;
-     PLICAddr *addr_config;
-     uint32_t *source_priority;
-+    uint32_t *source;
-     uint32_t *target_priority;
-     uint32_t *pending;
-     uint32_t *claimed;
++#ifndef CONFIG_USER_ONLY
++    riscv_pmu_decr_instret(env);
++#endif
+     riscv_raise_exception(env, exception, 0);
+ }
+ 
+diff --git a/target/riscv/tcg/pmu.c b/target/riscv/tcg/pmu.c
+index 38ad2737e1..1a4658319b 100644
+--- a/target/riscv/tcg/pmu.c
++++ b/target/riscv/tcg/pmu.c
+@@ -49,6 +49,21 @@ static bool riscv_pmu_counter_enabled(RISCVCPU *cpu, uint32_t ctr_idx)
+     }
+ }
+ 
++static bool riscv_pmu_counter_filtered(CPURISCVState *env, uint64_t cfg)
++{
++    bool virt_on = env->virt_enabled;
++
++    return (env->priv == PRV_M && (cfg & MHPMEVENT_BIT_MINH)) ||
++           (env->priv == PRV_S && virt_on &&
++            (cfg & MHPMEVENT_BIT_VSINH)) ||
++           (env->priv == PRV_U && virt_on &&
++            (cfg & MHPMEVENT_BIT_VUINH)) ||
++           (env->priv == PRV_S && !virt_on &&
++            (cfg & MHPMEVENT_BIT_SINH)) ||
++           (env->priv == PRV_U && !virt_on &&
++            (cfg & MHPMEVENT_BIT_UINH));
++}
++
+ /*
+  * Information needed to update counters:
+  *  new_priv, new_virt: To correctly save starting snapshot for the newly
+@@ -147,12 +162,27 @@ void riscv_pmu_update_fixed_ctrs(CPURISCVState *env,
+     riscv_pmu_icount_update_priv(env, newpriv, new_virt);
+ }
+ 
++void riscv_pmu_decr_instret(CPURISCVState *env)
++{
++    if (!icount_enabled() ||
++        (env->mcountinhibit & COUNTEREN_IR) ||
++        riscv_pmu_counter_filtered(env, env->minstretcfg)) {
++        return;
++    }
++
++    /*
++     * minstret is derived from icount, which includes the current
++     * instruction.  Move the baseline forward to exclude an instruction
++     * that raises an exception and therefore does not retire.
++     */
++    env->pmu_ctrs[2].mhpmcounter_prev++;
++}
++
+ int riscv_pmu_incr_ctr(RISCVCPU *cpu, enum riscv_pmu_event_idx event_idx)
+ {
+     uint32_t ctr_idx;
+     CPURISCVState *env = &cpu->env;
+     uint64_t max_val = UINT64_MAX;
+-    bool virt_on = env->virt_enabled;
+     PMUCTRState *counter;
+     gpointer value;
+ 
+@@ -170,17 +200,7 @@ int riscv_pmu_incr_ctr(RISCVCPU *cpu, enum riscv_pmu_event_idx event_idx)
+         return -1;
+     }
+ 
+-    /* Privilege mode filtering */
+-    if ((env->priv == PRV_M &&
+-        (env->mhpmevent_val[ctr_idx] & MHPMEVENT_BIT_MINH)) ||
+-        (env->priv == PRV_S && virt_on &&
+-        (env->mhpmevent_val[ctr_idx] & MHPMEVENT_BIT_VSINH)) ||
+-        (env->priv == PRV_U && virt_on &&
+-        (env->mhpmevent_val[ctr_idx] & MHPMEVENT_BIT_VUINH)) ||
+-        (env->priv == PRV_S && !virt_on &&
+-        (env->mhpmevent_val[ctr_idx] & MHPMEVENT_BIT_SINH)) ||
+-        (env->priv == PRV_U && !virt_on &&
+-        (env->mhpmevent_val[ctr_idx] & MHPMEVENT_BIT_UINH))) {
++    if (riscv_pmu_counter_filtered(env, env->mhpmevent_val[ctr_idx])) {
+         return 0;
+     }
+ 
+diff --git a/target/riscv/tcg/pmu.h b/target/riscv/tcg/pmu.h
+index b4f1e469a2..2429c01b77 100644
+--- a/target/riscv/tcg/pmu.h
++++ b/target/riscv/tcg/pmu.h
+@@ -36,6 +36,7 @@ int riscv_pmu_setup_timer(CPURISCVState *env, uint64_t value,
+                           uint32_t ctr_idx);
+ void riscv_pmu_update_fixed_ctrs(CPURISCVState *env, privilege_mode_t newpriv,
+                                  bool new_virt);
++void riscv_pmu_decr_instret(CPURISCVState *env);
+ RISCVException riscv_pmu_read_ctr(CPURISCVState *env, target_ulong *val,
+                                   bool upper_half, uint32_t ctr_idx);
+ 
+diff --git a/tests/tcg/riscv64/Makefile.softmmu-target b/tests/tcg/riscv64/Makefile.softmmu-target
+index 82be8a2c91..42038ce3b4 100644
+--- a/tests/tcg/riscv64/Makefile.softmmu-target
++++ b/tests/tcg/riscv64/Makefile.softmmu-target
+@@ -24,6 +24,10 @@ EXTRA_RUNS += run-test-mepc-masking
+ run-test-mepc-masking: test-mepc-masking
+ 	$(call run-test, $<, $(QEMU) $(QEMU_OPTS)$<)
+ 
++EXTRA_RUNS += run-test-minstret-ecall
++run-test-minstret-ecall: test-minstret-ecall
++	$(call run-test, $<, $(QEMU) -icount shift=1 $(QEMU_OPTS)$<)
++
+ EXTRA_RUNS += run-plugin-doubletrap
+ run-plugin-doubletrap: doubletrap
+ 	$(call run-test, $<, \
+diff --git a/tests/tcg/riscv64/test-minstret-ecall.S b/tests/tcg/riscv64/test-minstret-ecall.S
+new file mode 100644
+index 0000000000..ab268f7f22
+--- /dev/null
++++ b/tests/tcg/riscv64/test-minstret-ecall.S
+@@ -0,0 +1,55 @@
++/* SPDX-License-Identifier: GPL-2.0-or-later */
++
++	.option	norvc
++
++	.text
++	.global	_start
++_start:
++	lla	t0, trap
++	csrw	mtvec, t0
++
++	/*
++	 * The first CSR read retires after obtaining s0.  The ecall does not
++	 * retire, so the trap handler must observe a difference of one.
++	 */
++	csrr	s0, minstret
++	ecall
++	sub	t0, s1, s0
++	li	t1, 1
++	bne	t0, t1, fail
++
++	li	a0, 0
++	j	_exit
++
++trap:
++	csrr	s1, minstret
++	csrr	t0, mcause
++	li	t1, 11		/* Environment call from M-mode */
++	bne	t0, t1, fail
++
++	csrr	t0, mepc
++	addi	t0, t0, 4
++	csrw	mepc, t0
++	mret
++
++fail:
++	li	a0, 1
++
++_exit:
++	lla	a1, semiargs
++	li	t0, 0x20026	/* ADP_Stopped_ApplicationExit */
++	sd	t0, 0(a1)
++	sd	a0, 8(a1)
++	li	a0, 0x20	/* TARGET_SYS_EXIT_EXTENDED */
++
++	/* Semihosting call sequence */
++	.balign	16
++	slli	zero, zero, 0x1f
++	ebreak
++	srai	zero, zero, 0x7
++	j	.
++
++	.data
++	.balign	16
++semiargs:
++	.space	16
 -- 
 2.43.0
 
