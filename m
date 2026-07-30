@@ -4,65 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F0CDC55165
-	for <qemu-riscv@archiver.kernel.org>; Thu, 30 Jul 2026 13:37:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D3F8C55167
+	for <qemu-riscv@archiver.kernel.org>; Thu, 30 Jul 2026 13:37:58 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wpQxE-0006Gp-Aq; Thu, 30 Jul 2026 09:37:46 -0400
+	id 1wpQxP-0006YX-9w; Thu, 30 Jul 2026 09:37:55 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <rao232328@gmail.com>)
- id 1wpQx0-0006D2-V9
- for qemu-riscv@nongnu.org; Thu, 30 Jul 2026 09:37:31 -0400
-Received: from mail-pl1-x632.google.com ([2607:f8b0:4864:20::632])
+ id 1wpQxD-0006K2-Ui
+ for qemu-riscv@nongnu.org; Thu, 30 Jul 2026 09:37:47 -0400
+Received: from mail-pl1-x62f.google.com ([2607:f8b0:4864:20::62f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <rao232328@gmail.com>)
- id 1wpQwz-0005wr-9M
- for qemu-riscv@nongnu.org; Thu, 30 Jul 2026 09:37:30 -0400
-Received: by mail-pl1-x632.google.com with SMTP id
- d9443c01a7336-2d004f135b1so28851045ad.3
- for <qemu-riscv@nongnu.org>; Thu, 30 Jul 2026 06:37:27 -0700 (PDT)
+ id 1wpQxC-0005ya-6d
+ for qemu-riscv@nongnu.org; Thu, 30 Jul 2026 09:37:43 -0400
+Received: by mail-pl1-x62f.google.com with SMTP id
+ d9443c01a7336-2cc7ef7ec27so27608415ad.1
+ for <qemu-riscv@nongnu.org>; Thu, 30 Jul 2026 06:37:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1785418646; x=1786023446; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=WRMY2E9FxrNj1re4bnuTp0tUVJ08lXuNTXOMzGgnK3g=;
- b=p+GghPFevxIiYpe4cnbZoV2iKy+BLPXL3zcTwLsQY2v1dkjxdeCSJo+7C25DQUI/v4
- fpLOM/GI6F2gWoxpd/2bN68A7gbhEGjlA0F3j2Tn1nBwMFA3kwm1YJdUaSWqu21NVs51
- roBFi4WoyaPxBZup2eWs2GXR5XZlNKYMKWK2ucsGBiePGwEnCHeGs6YZPNNGulr04Jql
- eSb+qYh7VIf9aeE4KlUmMOtueOF0UIwcIYQPxDgLffV15L17VqqcXO5knn8x/5DJjSLx
- jWNa9BvwOdv2HxO6Y2Cv86LHmszNaKfVI9kN5qBsJqFMqA14ymagEUrkYobD3agBe8jm
- BQqw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785418646; x=1786023446;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20251104; t=1785418660; x=1786023460; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=WRMY2E9FxrNj1re4bnuTp0tUVJ08lXuNTXOMzGgnK3g=;
- b=lQSmr4YThji5C8W3fVmLm1LSw2IK823CYh56uqlZDRYUWgi/0SaK2HvZS/x/X8X6Pe
- /EOLaiFc+jUMXfo39QTp4wcb6muy7BrTiitwpeqIV2+6Yp/oHeCztiDm6Sra6UlUV8QI
- FeEzQ2N68Tpkm44qk1BUV/x/Epv+oY61GmbqXGxMHxKZ8RZx83+Zp7dkwn5WHQzmiVTO
- vA3Y+aT1gsOTnJwsOzY2lRBLQd4CigLlZhQF+UaPLjv5bBGgBJtRiDj8SD2MajsJp2W9
- k6Tj16xYE/syaLk/3iGLAhh8MZavH0LSc4T8W8x0lhEr+SH0jSaH112udoFDMZPjP2rd
- NAvQ==
-X-Gm-Message-State: AOJu0YxqCQegx4Hi2ibziQrRToU0ntAvog5pzVUI/DGmvIrrOZ6ic/0X
- dM8oV9cBtjrhfJzs2TORFTm5NtTyqzpZbmgBxff6htERVFTumtT9jiU7
-X-Gm-Gg: AR+sD12vKBtTUoouSW7QvpatTq2jNp/gWRPyZVaitL1Mn7AiNiBADJlyGuvWwCkAHpD
- 9Rq5NutR9PYQGg/5SkosyRoLsFcmpfAyED5fGQ3Y/xGqU8lTsAyY5peKGGUowBaBxNX9Pwhhf5M
- bOZ4evbupP+7+4CHjHhE3kobFBxFbxQBHD7FcFjhsuS6C0Cz1bF88ZFgzB5c6UEeZpYwJNeIZpa
- 49LMB2SMr29/aaIi+jGPv6h6j6Y35ImSSsItZg4973eraFBVn+OlSSkI0ZE6raE4b2L0b0zi5qL
- gKTw/ZGnOr7miw2f9FbmN+/QT2o5VsNb3b4TsLC5xvnmsRySodM3OvxTem0hqRQY9vLHp7/3QPc
- Ghide2MmRaHENyYPotZ3o6Ofnd9UIS/1R3AzP1s7S+IQoObnqdYiOb/MC4hw9jyVe5Kt+AmA094
- iUIUHcwQL68TwdcWBVIKXzG+YnlyjE5v0uLGn2aCeAQC42CELLGXEe/nptf1iScnPyv9xyWAc=
-X-Received: by 2002:a17:903:384d:b0:2cf:4339:aaa with SMTP id
- d9443c01a7336-2d03dcc6f61mr4232185ad.12.1785418646233; 
- Thu, 30 Jul 2026 06:37:26 -0700 (PDT)
+ bh=hGVPXsOP9uyqFKFA6uavYqfpocB6qSsHNa9L6NkdoEU=;
+ b=LTniMEPAs19xuC8J/iq0ErJdby9MIkIGjCgQUacYlXSDWqbaI2wAo+GkaPomtCJ7+L
+ 4axtSaOzb/RQ7KoWQha3jq/5w9pOz5pKvznyuxyyZEV9SQFWkgfKOl5p9csAOrqs57XI
+ tN/WxbNlv1KKr1XXfChLOUxKoZ9KLmj5CgbpMk9PMp1tSeRnrGyEvIb2SSPHJ15PLQri
+ uaJArH3S/Le+Ud9eFQRTnHbbhc6kyykomBiGxdZQhEQ+qxhy0KchdoYvnmoJiXQgN29j
+ jnDbRS9/d4/H+2nh4SrWQqbFlqMK5IqDgcZig+GQ+XiuEh/OHOUvyJpq7KQsfiNodOb3
+ f4sA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1785418660; x=1786023460;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=hGVPXsOP9uyqFKFA6uavYqfpocB6qSsHNa9L6NkdoEU=;
+ b=FNduUEqpTT45ekREFU48Jqs9qyE4HW82pgxeRaYkGJL/4ESUEDheZiGAXytKyWfXkA
+ 8uudskKss/akPXQR66CYLCYrRUY4uGALf0USygHpysdUnxIooOFY/7ffuc3cvc7L5avy
+ Eoy5rAzbQFZ/WYoLqoQeokMCiovK1zMHDX/S/sQ/mYg5Hdtn/ofqqkIH5zNaOR7pgKK4
+ 8AlAIptEsBC6Gi6IcW97adaVszblYO4/F2quecfkFxQpgANxN9Kn1NTsrpqUjCRXnm8t
+ qhOAh4QGYwxs2BBkhDHRzNllV9lt4NYYiWsp4iM1UIWYFJhdde2Ohl3sXcrc4J7tFXx3
+ MErA==
+X-Gm-Message-State: AOJu0YzSxfizcZy7wAB4Kx8bBD3nX7pjsnTm2VPeD796h2T2aIM97jQ4
+ 5C/y3KF44AKLwVaQzAtcS64GUEc7OI7aAKI3afjqjDx/QHLbDxbn3rtW
+X-Gm-Gg: AR+sD12OWLFAkoV9f6GlQKrqsZgnayfo4g2Ye5fbr9YbwVkJpVhgQOqRauhRtUdEXc2
+ HUdIIt5pTBbhxqqPTZxFe2fvANscMnrYlHMQP+B12YaYGUJM3Ipz9LSqPAZycyWI8Kb/9dxaSnE
+ P9QAtxirWy4fakUX+Q3zinX8pPrWJazv5ZnpO7jtY8gDKKzL5GFH1/7BnnU/umjEQOTPDP+7VH0
+ DNtJ/i/CHqpqBMAZx74bzNcyWZv8B02tYtv0brV4Dpocvs/qvIKd+cQzmgMR1yjYTcfxx7FsSYy
+ g/ER3OB9nC3Mdv48lFIjN45t358uu//+rrUFi29TGfNuJqAUCoeEINYUQISJUebX5OmUXecfhDv
+ CGAh94TVaAtyFHogyR4R6tV8r0JWtKjRmHzyoWkmIgEncpCflrmyUFQe8zxI7xatQP+apzaiSZZ
+ QtjrubSMIEldfw2tOzlT4uHeuQUAKq+COnanhXSNZAjNGAvOcGS8pqY60Xi6o+Hf3tfhruss0=
+X-Received: by 2002:a17:903:2444:b0:2cf:82e6:a5 with SMTP id
+ d9443c01a7336-2d035bb12e3mr24469355ad.13.1785418659834; 
+ Thu, 30 Jul 2026 06:37:39 -0700 (PDT)
 Received: from DESKTOP-DFGP8OG.lan ([120.230.138.58])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2d022bf845asm26757745ad.60.2026.07.30.06.37.19
+ d9443c01a7336-2d022bf845asm26757745ad.60.2026.07.30.06.37.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 30 Jul 2026 06:37:25 -0700 (PDT)
+ Thu, 30 Jul 2026 06:37:39 -0700 (PDT)
 From: raoyi <rao232328@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, pbonzini@redhat.com, palmer@dabbelt.com,
@@ -70,14 +71,16 @@ Cc: qemu-riscv@nongnu.org, pbonzini@redhat.com, palmer@dabbelt.com,
  daniel.barboza@oss.qualcomm.com, zhiwei_liu@linux.alibaba.com,
  chao.liu@processmission.com, farosas@suse.de, lvivier@redhat.com,
  caojunze424@gmail.com, raoyi <rao232328@gmail.com>
-Subject: [PATCH v2 0/3] hw/timer: add k230 dwapb timer
-Date: Thu, 30 Jul 2026 21:37:08 +0800
-Message-ID: <20260730133713.3253-1-rao232328@gmail.com>
+Subject: [PATCH v2 2/3] hw/riscv: integrate k230 dwapb timer into k230 board
+Date: Thu, 30 Jul 2026 21:37:10 +0800
+Message-ID: <20260730133713.3253-3-rao232328@gmail.com>
 X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260730133713.3253-1-rao232328@gmail.com>
+References: <20260730133713.3253-1-rao232328@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::632;
- envelope-from=rao232328@gmail.com; helo=mail-pl1-x632.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62f;
+ envelope-from=rao232328@gmail.com; helo=mail-pl1-x62f.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -101,38 +104,114 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Add DesignWare APB timer peripheral for K230 machine.
-The timer uses the Clock framework for frequency input,
-preparing for future CMU integration.
+Wire up the K230 DW APB timer to the K230 SoC,
+including PLIC IRQ connections and memory mapping.
+Remove the previous unimplemented timer stub.
 
-Changes since v1:
-- Split into 3 patches: model, board integration, tests
-- Remove goto pattern from read/write handlers
-- Fix include order, add explicit bitops.h include
-- Add QOM <private>/<public> markers in struct
-- Fix copyright headers
+Signed-off-by: raoyi <rao232328@gmail.com>
+---
+ hw/riscv/Kconfig        |  1 +
+ hw/riscv/k230.c         | 23 ++++++++++++++++++++---
+ include/hw/riscv/k230.h |  8 ++++++++
+ 3 files changed, 29 insertions(+), 3 deletions(-)
 
-raoyi (3):
-  hw/timer: add k230 dwapb timer model
-  hw/riscv: integrate k230 dwapb timer into k230 board
-  tests/qtest: add k230 dwapb timer test
-
- MAINTAINERS                         |   3 +
- hw/riscv/Kconfig                    |   1 +
- hw/riscv/k230.c                     |  23 +-
- hw/timer/Kconfig                    |   4 +
- hw/timer/k230_dwapb_timer.c         | 317 ++++++++++++++++++++++++++++
- hw/timer/meson.build                |   1 +
- hw/timer/trace-events               |   9 +
- include/hw/riscv/k230.h             |   8 +
- include/hw/timer/k230_dwapb_timer.h |  72 +++++++
- tests/qtest/k230-dwapb-timer-test.c | 227 ++++++++++++++++++++
- tests/qtest/meson.build             |   2 +-
- 11 files changed, 663 insertions(+), 4 deletions(-)
- create mode 100644 hw/timer/k230_dwapb_timer.c
- create mode 100644 include/hw/timer/k230_dwapb_timer.h
- create mode 100644 tests/qtest/k230-dwapb-timer-test.c
-
+diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
+index de37c08cae..c86968f759 100644
+--- a/hw/riscv/Kconfig
++++ b/hw/riscv/Kconfig
+@@ -162,3 +162,4 @@ config K230
+     select SERIAL_MM
+     select UNIMP
+     select K230_WDT
++    select K230_TIMER
+diff --git a/hw/riscv/k230.c b/hw/riscv/k230.c
+index 656f28190c..214fb3525e 100644
+--- a/hw/riscv/k230.c
++++ b/hw/riscv/k230.c
+@@ -24,6 +24,8 @@
+ #include "target/riscv/cpu.h"
+ #include "hw/core/loader.h"
+ #include "hw/core/sysbus.h"
++#include "hw/core/clock.h"
++#include "hw/core/qdev-clock.h"
+ #include "hw/riscv/k230.h"
+ #include "hw/riscv/boot.h"
+ #include "hw/riscv/machines-qom.h"
+@@ -110,6 +112,12 @@ static void k230_soc_init(Object *obj)
+     object_initialize_child(obj, "c908-cpu", cpu0, TYPE_RISCV_HART_ARRAY);
+     object_initialize_child(obj, "k230-wdt0", &s->wdt[0], TYPE_K230_WDT);
+     object_initialize_child(obj, "k230-wdt1", &s->wdt[1], TYPE_K230_WDT);
++    object_initialize_child(obj, "k230-dwapb-timer", &s->timer,
++                            TYPE_K230_TIMER);
++
++    Clock *timer_clk = clock_new(OBJECT(s), "timer-clk");
++    clock_set_hz(timer_clk, K230_APBTMR_DEFAULT_FREQ);
++    qdev_connect_clock_in(DEVICE(&s->timer), "pclk", timer_clk);
+ 
+     qdev_prop_set_uint32(DEVICE(cpu0), "hartid-base", 0);
+     qdev_prop_set_string(DEVICE(cpu0), "cpu-type", TYPE_RISCV_CPU_THEAD_C908);
+@@ -191,6 +199,18 @@ static void k230_soc_realize(DeviceState *dev, Error **errp)
+         k230_create_uart(sys_mem, DEVICE(s->c908_plic), i);
+     }
+ 
++    /* Timer */
++    if (!sysbus_realize(SYS_BUS_DEVICE(&s->timer), errp)) {
++        return;
++    }
++    sysbus_mmio_map(SYS_BUS_DEVICE(&s->timer), 0, memmap[K230_DEV_TIMER].base);
++
++    for (int i = 0; i < K230_APBTMR_NUM_TIMERS; i++) {
++        sysbus_connect_irq(SYS_BUS_DEVICE(&s->timer), i,
++                           qdev_get_gpio_in(DEVICE(s->c908_plic),
++                                            K230_TIMER0_IRQ + i));
++    }
++
+     /* Watchdog */
+     for (int i = 0; i < 2; i++) {
+         if (!sysbus_realize(SYS_BUS_DEVICE(&s->wdt[i]), errp)) {
+@@ -283,9 +303,6 @@ static void k230_soc_realize(DeviceState *dev, Error **errp)
+     create_unimplemented_device("iomux", memmap[K230_DEV_IOMUX].base,
+                                 memmap[K230_DEV_IOMUX].size);
+ 
+-    create_unimplemented_device("timer", memmap[K230_DEV_TIMER].base,
+-                                memmap[K230_DEV_TIMER].size);
+-
+     create_unimplemented_device("wdt0", memmap[K230_DEV_WDT0].base,
+                                 memmap[K230_DEV_WDT0].size);
+ 
+diff --git a/include/hw/riscv/k230.h b/include/hw/riscv/k230.h
+index 592e1c26bf..3de3b7e765 100644
+--- a/include/hw/riscv/k230.h
++++ b/include/hw/riscv/k230.h
+@@ -18,6 +18,7 @@
+ #include "hw/core/boards.h"
+ #include "hw/riscv/riscv_hart.h"
+ #include "hw/watchdog/k230_wdt.h"
++#include "hw/timer/k230_dwapb_timer.h"
+ 
+ #define C908_CPU_HARTID   (0)
+ 
+@@ -33,6 +34,7 @@ typedef struct K230SoCState {
+     RISCVHartArrayState c908_cpu; /* Small core */
+ 
+     K230WdtState wdt[2];
++    K230TimerState timer;
+     MemoryRegion sram;
+     MemoryRegion bootrom;
+ 
+@@ -127,6 +129,12 @@ enum {
+     K230_UART2_IRQ  = 18,
+     K230_UART3_IRQ  = 19,
+     K230_UART4_IRQ  = 20,
++    K230_TIMER0_IRQ = 101,
++    K230_TIMER1_IRQ = 102,
++    K230_TIMER2_IRQ = 103,
++    K230_TIMER3_IRQ = 104,
++    K230_TIMER4_IRQ = 105,
++    K230_TIMER5_IRQ = 106,
+     K230_WDT0_IRQ   = 107,
+     K230_WDT1_IRQ   = 108,
+ };
 -- 
 2.53.0
 
