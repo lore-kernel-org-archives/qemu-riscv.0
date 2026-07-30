@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D3F8C55167
-	for <qemu-riscv@archiver.kernel.org>; Thu, 30 Jul 2026 13:37:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0AA3DC55160
+	for <qemu-riscv@archiver.kernel.org>; Thu, 30 Jul 2026 13:38:22 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wpQxP-0006YX-9w; Thu, 30 Jul 2026 09:37:55 -0400
+	id 1wpQxO-0006TJ-Eo; Thu, 30 Jul 2026 09:37:54 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <rao232328@gmail.com>)
- id 1wpQxD-0006K2-Ui
- for qemu-riscv@nongnu.org; Thu, 30 Jul 2026 09:37:47 -0400
-Received: from mail-pl1-x62f.google.com ([2607:f8b0:4864:20::62f])
+ id 1wpQx7-0006Gt-Nk
+ for qemu-riscv@nongnu.org; Thu, 30 Jul 2026 09:37:39 -0400
+Received: from mail-pl1-x62b.google.com ([2607:f8b0:4864:20::62b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <rao232328@gmail.com>)
- id 1wpQxC-0005ya-6d
- for qemu-riscv@nongnu.org; Thu, 30 Jul 2026 09:37:43 -0400
-Received: by mail-pl1-x62f.google.com with SMTP id
- d9443c01a7336-2cc7ef7ec27so27608415ad.1
- for <qemu-riscv@nongnu.org>; Thu, 30 Jul 2026 06:37:41 -0700 (PDT)
+ id 1wpQx4-0005y4-T8
+ for qemu-riscv@nongnu.org; Thu, 30 Jul 2026 09:37:37 -0400
+Received: by mail-pl1-x62b.google.com with SMTP id
+ d9443c01a7336-2cc7ef7ec27so27606845ad.1
+ for <qemu-riscv@nongnu.org>; Thu, 30 Jul 2026 06:37:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1785418660; x=1786023460; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1785418653; x=1786023453; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=hGVPXsOP9uyqFKFA6uavYqfpocB6qSsHNa9L6NkdoEU=;
- b=LTniMEPAs19xuC8J/iq0ErJdby9MIkIGjCgQUacYlXSDWqbaI2wAo+GkaPomtCJ7+L
- 4axtSaOzb/RQ7KoWQha3jq/5w9pOz5pKvznyuxyyZEV9SQFWkgfKOl5p9csAOrqs57XI
- tN/WxbNlv1KKr1XXfChLOUxKoZ9KLmj5CgbpMk9PMp1tSeRnrGyEvIb2SSPHJ15PLQri
- uaJArH3S/Le+Ud9eFQRTnHbbhc6kyykomBiGxdZQhEQ+qxhy0KchdoYvnmoJiXQgN29j
- jnDbRS9/d4/H+2nh4SrWQqbFlqMK5IqDgcZig+GQ+XiuEh/OHOUvyJpq7KQsfiNodOb3
- f4sA==
+ bh=VXeXaSmB/86trqyinsTj9cvA0T4G9xJkeVkYlBDivtA=;
+ b=lTjk+BheNYIVGtq6Kc4Bd7iIyvfpi4Vbs/P+a6Vehhq2xcpKchdbhvtJrxdiN0QukO
+ KSOK6/Xw1kplaPHrUHs6dTn7K8VT+fe7YIql0csq+V8hA3e2KlnwRlisxwl2NjKJRUd+
+ RcbHGR/+lW2G32uMpk9qrQkfiT4cC+q27KwjH5U0WvIRCUqgqkpEnTsIqjVZlgKM5yzr
+ 8onale5i0XQQugguJ6lPMZ7luJNHKefkFTiB8eYglOHBAuV+7YqPGU/+hwPYYIdYsHjw
+ 3JEz2ekc49vdEk1zi/wgeI43FIBSzS/X+iBwAOY3/WuWCK9aPt9fPxplBo/1Gsr4FgPC
+ UAOQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785418660; x=1786023460;
+ d=1e100.net; s=20251104; t=1785418653; x=1786023453;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=hGVPXsOP9uyqFKFA6uavYqfpocB6qSsHNa9L6NkdoEU=;
- b=FNduUEqpTT45ekREFU48Jqs9qyE4HW82pgxeRaYkGJL/4ESUEDheZiGAXytKyWfXkA
- 8uudskKss/akPXQR66CYLCYrRUY4uGALf0USygHpysdUnxIooOFY/7ffuc3cvc7L5avy
- Eoy5rAzbQFZ/WYoLqoQeokMCiovK1zMHDX/S/sQ/mYg5Hdtn/ofqqkIH5zNaOR7pgKK4
- 8AlAIptEsBC6Gi6IcW97adaVszblYO4/F2quecfkFxQpgANxN9Kn1NTsrpqUjCRXnm8t
- qhOAh4QGYwxs2BBkhDHRzNllV9lt4NYYiWsp4iM1UIWYFJhdde2Ohl3sXcrc4J7tFXx3
- MErA==
-X-Gm-Message-State: AOJu0YzSxfizcZy7wAB4Kx8bBD3nX7pjsnTm2VPeD796h2T2aIM97jQ4
- 5C/y3KF44AKLwVaQzAtcS64GUEc7OI7aAKI3afjqjDx/QHLbDxbn3rtW
-X-Gm-Gg: AR+sD12OWLFAkoV9f6GlQKrqsZgnayfo4g2Ye5fbr9YbwVkJpVhgQOqRauhRtUdEXc2
- HUdIIt5pTBbhxqqPTZxFe2fvANscMnrYlHMQP+B12YaYGUJM3Ipz9LSqPAZycyWI8Kb/9dxaSnE
- P9QAtxirWy4fakUX+Q3zinX8pPrWJazv5ZnpO7jtY8gDKKzL5GFH1/7BnnU/umjEQOTPDP+7VH0
- DNtJ/i/CHqpqBMAZx74bzNcyWZv8B02tYtv0brV4Dpocvs/qvIKd+cQzmgMR1yjYTcfxx7FsSYy
- g/ER3OB9nC3Mdv48lFIjN45t358uu//+rrUFi29TGfNuJqAUCoeEINYUQISJUebX5OmUXecfhDv
- CGAh94TVaAtyFHogyR4R6tV8r0JWtKjRmHzyoWkmIgEncpCflrmyUFQe8zxI7xatQP+apzaiSZZ
- QtjrubSMIEldfw2tOzlT4uHeuQUAKq+COnanhXSNZAjNGAvOcGS8pqY60Xi6o+Hf3tfhruss0=
-X-Received: by 2002:a17:903:2444:b0:2cf:82e6:a5 with SMTP id
- d9443c01a7336-2d035bb12e3mr24469355ad.13.1785418659834; 
- Thu, 30 Jul 2026 06:37:39 -0700 (PDT)
+ bh=VXeXaSmB/86trqyinsTj9cvA0T4G9xJkeVkYlBDivtA=;
+ b=FKySCJeF5Cxrw8vE67yw0qHvN/Y8VKxO510W0OPKJANwuq/T6YIAwuUvNvhDqBtfvc
+ s8qkPAqJjlIgzjvKAbcluvUnK+USDIFdMpWOY9LgIFK41ALXc07d0auhEGUqpJ3fUvYr
+ qFPXxcv+L30uhp1ONqzymbI2nGwCVFi89+P8dI6LwjpIhoJzP2k1/nVlgxgGJWsSrcfW
+ GKLRazITAqmDFhJqD8HT4DD1h60kaoDg1SxXHcl+OK5T3ZaXc0TbwFS2yLGEUwesE68v
+ SDOhkqO8n8P9uU7sauEtq4nDioSU49ZNPGTdE19M9zzkHKJ/3lk+kHfr12PhnO62Zvc4
+ CnnQ==
+X-Gm-Message-State: AOJu0YwzE2sU8p+chPTm46e3JW+lOyODrU6JbxmGbt1kpHgQ84Ha2RX9
+ u4G9zdzJcK/F2xfkTif+o65lWNXZKKlFpBB+nn4Lo9n3YPkedV64uj4l
+X-Gm-Gg: AR+sD10DABVD7htni6omaiKMlBK2rzF1Vn5W/Mf2CH7nrz2gkHK+mT/p5vcTidv1xJm
+ d6gR0+ZHRkJQrDCFw5whF8hxEmGFTkDko9YN+DHQDC30yP4AOL8+fRJLMbhSkiMBKwspBkXJT8i
+ LnP7EIQ5HXQTVBfnsSOkM4sGC8tFK2nV81z/SM70bHIaADVEDebFy9K0JMS6hpR9Xi0Fq2/9/XO
+ nzv21FAvA+rXiB8bAwiEie11ZG/8XPDFC9Jbb59J+UiPpjm0Nd7LSsFh6RSmXvl74MUXFv+5nKI
+ ETkkGAdUh+wBFye6HPrUe0ZUanuszkHiHUYr3bnQoxFvQjQRyBVP4E23d6KPwxAd2E/S0cvcw0G
+ AZedraeHRzMcXYtSic/3yMWV5IYsF4oL/l66W28I7yAGiJF3o8UNVaLrfeE0VaxYYmz/YqCwTa3
+ E/ArCvIYCEhNi77kitmGXtOZDtgh//D8aRd9zwQ4D3dLtw9gq6rzhYKmqY2FEkF44hqdQt1sE=
+X-Received: by 2002:a17:902:cf4b:b0:2ca:e0ff:e696 with SMTP id
+ d9443c01a7336-2d035b80aedmr27463865ad.9.1785418653146; 
+ Thu, 30 Jul 2026 06:37:33 -0700 (PDT)
 Received: from DESKTOP-DFGP8OG.lan ([120.230.138.58])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2d022bf845asm26757745ad.60.2026.07.30.06.37.33
+ d9443c01a7336-2d022bf845asm26757745ad.60.2026.07.30.06.37.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 30 Jul 2026 06:37:39 -0700 (PDT)
+ Thu, 30 Jul 2026 06:37:32 -0700 (PDT)
 From: raoyi <rao232328@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, pbonzini@redhat.com, palmer@dabbelt.com,
@@ -71,16 +71,16 @@ Cc: qemu-riscv@nongnu.org, pbonzini@redhat.com, palmer@dabbelt.com,
  daniel.barboza@oss.qualcomm.com, zhiwei_liu@linux.alibaba.com,
  chao.liu@processmission.com, farosas@suse.de, lvivier@redhat.com,
  caojunze424@gmail.com, raoyi <rao232328@gmail.com>
-Subject: [PATCH v2 2/3] hw/riscv: integrate k230 dwapb timer into k230 board
-Date: Thu, 30 Jul 2026 21:37:10 +0800
-Message-ID: <20260730133713.3253-3-rao232328@gmail.com>
+Subject: [PATCH v2 1/3] hw/timer: add k230 dwapb timer model
+Date: Thu, 30 Jul 2026 21:37:09 +0800
+Message-ID: <20260730133713.3253-2-rao232328@gmail.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260730133713.3253-1-rao232328@gmail.com>
 References: <20260730133713.3253-1-rao232328@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62f;
- envelope-from=rao232328@gmail.com; helo=mail-pl1-x62f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62b;
+ envelope-from=rao232328@gmail.com; helo=mail-pl1-x62b.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -88,7 +88,7 @@ X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -104,114 +104,462 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Wire up the K230 DW APB timer to the K230 SoC,
-including PLIC IRQ connections and memory mapping.
-Remove the previous unimplemented timer stub.
+Add DesignWare APB timer model for K230 machine.
+The timer uses the Clock framework for frequency input,
+preparing for future CMU integration.
 
 Signed-off-by: raoyi <rao232328@gmail.com>
 ---
- hw/riscv/Kconfig        |  1 +
- hw/riscv/k230.c         | 23 ++++++++++++++++++++---
- include/hw/riscv/k230.h |  8 ++++++++
- 3 files changed, 29 insertions(+), 3 deletions(-)
+ hw/timer/Kconfig                    |   4 +
+ hw/timer/k230_dwapb_timer.c         | 317 ++++++++++++++++++++++++++++
+ hw/timer/meson.build                |   1 +
+ hw/timer/trace-events               |   9 +
+ include/hw/timer/k230_dwapb_timer.h |  72 +++++++
+ 5 files changed, 403 insertions(+)
+ create mode 100644 hw/timer/k230_dwapb_timer.c
+ create mode 100644 include/hw/timer/k230_dwapb_timer.h
 
-diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-index de37c08cae..c86968f759 100644
---- a/hw/riscv/Kconfig
-+++ b/hw/riscv/Kconfig
-@@ -162,3 +162,4 @@ config K230
-     select SERIAL_MM
-     select UNIMP
-     select K230_WDT
-+    select K230_TIMER
-diff --git a/hw/riscv/k230.c b/hw/riscv/k230.c
-index 656f28190c..214fb3525e 100644
---- a/hw/riscv/k230.c
-+++ b/hw/riscv/k230.c
-@@ -24,6 +24,8 @@
- #include "target/riscv/cpu.h"
- #include "hw/core/loader.h"
- #include "hw/core/sysbus.h"
-+#include "hw/core/clock.h"
-+#include "hw/core/qdev-clock.h"
- #include "hw/riscv/k230.h"
- #include "hw/riscv/boot.h"
- #include "hw/riscv/machines-qom.h"
-@@ -110,6 +112,12 @@ static void k230_soc_init(Object *obj)
-     object_initialize_child(obj, "c908-cpu", cpu0, TYPE_RISCV_HART_ARRAY);
-     object_initialize_child(obj, "k230-wdt0", &s->wdt[0], TYPE_K230_WDT);
-     object_initialize_child(obj, "k230-wdt1", &s->wdt[1], TYPE_K230_WDT);
-+    object_initialize_child(obj, "k230-dwapb-timer", &s->timer,
-+                            TYPE_K230_TIMER);
+diff --git a/hw/timer/Kconfig b/hw/timer/Kconfig
+index b3d823ce2c..9d1f20f5cd 100644
+--- a/hw/timer/Kconfig
++++ b/hw/timer/Kconfig
+@@ -65,3 +65,7 @@ config STELLARIS_GPTM
+ 
+ config AVR_TIMER16
+     bool
 +
-+    Clock *timer_clk = clock_new(OBJECT(s), "timer-clk");
-+    clock_set_hz(timer_clk, K230_APBTMR_DEFAULT_FREQ);
-+    qdev_connect_clock_in(DEVICE(&s->timer), "pclk", timer_clk);
- 
-     qdev_prop_set_uint32(DEVICE(cpu0), "hartid-base", 0);
-     qdev_prop_set_string(DEVICE(cpu0), "cpu-type", TYPE_RISCV_CPU_THEAD_C908);
-@@ -191,6 +199,18 @@ static void k230_soc_realize(DeviceState *dev, Error **errp)
-         k230_create_uart(sys_mem, DEVICE(s->c908_plic), i);
-     }
- 
-+    /* Timer */
-+    if (!sysbus_realize(SYS_BUS_DEVICE(&s->timer), errp)) {
++config K230_TIMER
++    bool
++    select PTIMER
+diff --git a/hw/timer/k230_dwapb_timer.c b/hw/timer/k230_dwapb_timer.c
+new file mode 100644
+index 0000000000..623f84cafd
+--- /dev/null
++++ b/hw/timer/k230_dwapb_timer.c
+@@ -0,0 +1,317 @@
++/*
++ * K230 DW APB timer
++ *
++ * Copyright (c) 2026 raoyi <rao232328@gmail.com>
++ *
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ *
++ * K230 Technical Reference Manual V0.3.1 (2024-11-18):
++ * https://github.com/revyos/external-docs/blob/master/K230/en-us/K230_Technical_Reference_Manual_V0.3.1_20241118.pdf
++ */
++
++#include "qemu/osdep.h"
++#include "qemu/bitops.h"
++#include "qemu/module.h"
++#include "qapi/error.h"
++#include "migration/vmstate.h"
++#include "hw/core/sysbus.h"
++#include "hw/core/ptimer.h"
++#include "hw/core/qdev-clock.h"
++#include "hw/timer/k230_dwapb_timer.h"
++#include "trace.h"
++
++static void k230_timer_clk_update(void *opaque, ClockEvent event)
++{
++    K230TimerState *s = K230_TIMER(opaque);
++    for (int i = 0; i < K230_APBTMR_NUM_TIMERS; i++) {
++        if (!s->timers[i].ptimer) {
++            continue;
++        }
++        ptimer_transaction_begin(s->timers[i].ptimer);
++        ptimer_set_period_from_clock(s->timers[i].ptimer, s->pclk, 1);
++        ptimer_transaction_commit(s->timers[i].ptimer);
++    }
++}
++
++static void k230_timer_enable(K230Timer *t)
++{
++    ptimer_transaction_begin(t->ptimer);
++    ptimer_set_limit(t->ptimer, t->load ? t->load : 1, 1);
++    ptimer_run(t->ptimer, 1);
++    ptimer_transaction_commit(t->ptimer);
++
++    trace_k230_timer_enable(t->id, t->load);
++}
++
++static void k230_timer_disable(K230Timer *t)
++{
++    ptimer_transaction_begin(t->ptimer);
++    ptimer_stop(t->ptimer);
++    ptimer_transaction_commit(t->ptimer);
++
++    t->int_status = 0;
++    qemu_set_irq(t->irq, 0);
++
++    trace_k230_timer_disable(t->id);
++}
++
++static void k230_timer_tick(void *opaque)
++{
++    K230Timer *t = opaque;
++    uint32_t reload;
++
++    trace_k230_timer_tick(t->id);
++
++    t->int_status = 1;
++
++    if (!(t->control & K230_APBTMR_CONTROL_INT)) {
++        qemu_set_irq(t->irq, 1);
++        trace_k230_timer_interrupt(t->id);
++    }
++
++    if (t->control & K230_APBTMR_CONTROL_MODE_PERIODIC) {
++        reload = t->load ? t->load : 1;
++    } else {
++        reload = UINT32_MAX;
++    }
++
++    ptimer_set_limit(t->ptimer, reload, 1);
++    ptimer_run(t->ptimer, 1);
++}
++
++static uint64_t k230_timer_read(void *opaque, hwaddr addr, unsigned int size)
++{
++    K230TimerState *s = K230_TIMER(opaque);
++    uint32_t value = 0;
++
++    addr &= 0xfff;
++
++    if (addr < K230_APBTMRS_INT_STATUS) {
++        int idx = addr / K230_APBTMR_STRIDE;
++        int reg = addr % K230_APBTMR_STRIDE;
++
++        if (idx < K230_APBTMR_NUM_TIMERS) {
++            switch (reg) {
++            case K230_APBTMR_N_LOAD_COUNT:
++                value = s->timers[idx].load;
++                break;
++            case K230_APBTMR_N_CURRENT_VALUE:
++                if (s->timers[idx].control & K230_APBTMR_CONTROL_ENABLE) {
++                    value = ptimer_get_count(s->timers[idx].ptimer);
++                } else {
++                    value = 0;
++                }
++                break;
++            case K230_APBTMR_N_CONTROL:
++                value = s->timers[idx].control;
++                break;
++            case K230_APBTMR_N_EOI:
++                s->timers[idx].int_status = 0;
++                qemu_set_irq(s->timers[idx].irq, 0);
++                trace_k230_timer_irq_clear(s->timers[idx].id);
++                value = 0;
++                break;
++            case K230_APBTMR_N_INT_STATUS:
++                if (s->timers[idx].control & K230_APBTMR_CONTROL_INT) {
++                    value = 0;
++                } else {
++                    value = s->timers[idx].int_status;
++                }
++                break;
++            }
++        }
++    } else if (addr >= K230_APBTMR_N_LOAD2 &&
++               addr < K230_APBTMR_N_LOAD2 +
++                      K230_APBTMR_NUM_TIMERS * K230_APBTMR_LOAD2_STRIDE) {
++        int idx = (addr - K230_APBTMR_N_LOAD2) / K230_APBTMR_LOAD2_STRIDE;
++        value = s->timers[idx].load2;
++    } else {
++        switch (addr) {
++        case K230_APBTMRS_INT_STATUS:
++            for (int i = 0; i < K230_APBTMR_NUM_TIMERS; i++) {
++                if (!(s->timers[i].control & K230_APBTMR_CONTROL_INT)) {
++                    value |= s->timers[i].int_status << i;
++                }
++            }
++            break;
++        case K230_APBTMRS_EOI:
++            for (int i = 0; i < K230_APBTMR_NUM_TIMERS; i++) {
++                s->timers[i].int_status = 0;
++                qemu_set_irq(s->timers[i].irq, 0);
++            }
++            value = 0;
++            break;
++        case K230_APBTMRS_RAW_INT_STATUS:
++            for (int i = 0; i < K230_APBTMR_NUM_TIMERS; i++) {
++                value |= s->timers[i].int_status << i;
++            }
++            break;
++        case K230_APBTMRS_COMP_VERSION:
++            value = K230_APBTMR_COMP_VERSION_VAL;
++            break;
++        }
++    }
++
++    trace_k230_timer_read(addr, value);
++    return value;
++}
++
++static void k230_timer_write(void *opaque, hwaddr addr,
++                             uint64_t value, unsigned int size)
++{
++    K230TimerState *s = K230_TIMER(opaque);
++
++    addr &= 0xfff;
++
++    if (addr < K230_APBTMRS_INT_STATUS) {
++        int idx = addr / K230_APBTMR_STRIDE;
++        int reg = addr % K230_APBTMR_STRIDE;
++
++        if (idx < K230_APBTMR_NUM_TIMERS) {
++            switch (reg) {
++            case K230_APBTMR_N_LOAD_COUNT:
++                s->timers[idx].load = value;
++                break;
++            case K230_APBTMR_N_CONTROL: {
++                uint32_t old_ctrl = s->timers[idx].control;
++                s->timers[idx].control = value & K230_APBTMR_CONTROL_RW_MASK;
++                if ((value ^ old_ctrl) & K230_APBTMR_CONTROL_ENABLE) {
++                    if (value & K230_APBTMR_CONTROL_ENABLE) {
++                        k230_timer_enable(&s->timers[idx]);
++                    } else {
++                        k230_timer_disable(&s->timers[idx]);
++                    }
++                }
++                if ((value ^ old_ctrl) & K230_APBTMR_CONTROL_INT) {
++                    if (value & K230_APBTMR_CONTROL_INT) {
++                        qemu_set_irq(s->timers[idx].irq, 0);
++                    } else if (s->timers[idx].int_status) {
++                        qemu_set_irq(s->timers[idx].irq, 1);
++                    }
++                }
++                break;
++            }
++            default:
++                break;
++            }
++        }
++    } else if (addr >= K230_APBTMR_N_LOAD2 &&
++               addr < K230_APBTMR_N_LOAD2 +
++                      K230_APBTMR_NUM_TIMERS * K230_APBTMR_LOAD2_STRIDE) {
++        int idx = (addr - K230_APBTMR_N_LOAD2) / K230_APBTMR_LOAD2_STRIDE;
++        s->timers[idx].load2 = value;
++    }
++
++    trace_k230_timer_write(addr, value);
++}
++
++static const MemoryRegionOps k230_timer_ops = {
++    .read  = k230_timer_read,
++    .write = k230_timer_write,
++    .endianness = DEVICE_LITTLE_ENDIAN,
++    .impl = {
++        .min_access_size = 4,
++        .max_access_size = 4,
++    },
++};
++
++static void k230_timer_realize(DeviceState *dev, Error **errp)
++{
++    K230TimerState *s = K230_TIMER(dev);
++    SysBusDevice *sbd = SYS_BUS_DEVICE(dev);
++
++    if (!clock_has_source(s->pclk)) {
++        error_setg(errp, "K230 DW APB timer: pclk clock must be connected");
 +        return;
 +    }
-+    sysbus_mmio_map(SYS_BUS_DEVICE(&s->timer), 0, memmap[K230_DEV_TIMER].base);
 +
 +    for (int i = 0; i < K230_APBTMR_NUM_TIMERS; i++) {
-+        sysbus_connect_irq(SYS_BUS_DEVICE(&s->timer), i,
-+                           qdev_get_gpio_in(DEVICE(s->c908_plic),
-+                                            K230_TIMER0_IRQ + i));
++        s->timers[i].id = i;
++        s->timers[i].ptimer = ptimer_init(k230_timer_tick, &s->timers[i],
++            PTIMER_POLICY_NO_IMMEDIATE_TRIGGER |
++            PTIMER_POLICY_NO_IMMEDIATE_RELOAD |
++            PTIMER_POLICY_NO_COUNTER_ROUND_DOWN);
++        ptimer_transaction_begin(s->timers[i].ptimer);
++        ptimer_set_limit(s->timers[i].ptimer, UINT32_MAX, 1);
++        ptimer_transaction_commit(s->timers[i].ptimer);
++        sysbus_init_irq(sbd, &s->timers[i].irq);
 +    }
 +
-     /* Watchdog */
-     for (int i = 0; i < 2; i++) {
-         if (!sysbus_realize(SYS_BUS_DEVICE(&s->wdt[i]), errp)) {
-@@ -283,9 +303,6 @@ static void k230_soc_realize(DeviceState *dev, Error **errp)
-     create_unimplemented_device("iomux", memmap[K230_DEV_IOMUX].base,
-                                 memmap[K230_DEV_IOMUX].size);
++    k230_timer_clk_update(s, ClockUpdate);
++
++    memory_region_init_io(&s->mmio, OBJECT(dev), &k230_timer_ops,
++                          s, TYPE_K230_TIMER, K230_APBTMR_MMIO_SIZE);
++    sysbus_init_mmio(sbd, &s->mmio);
++}
++
++static void k230_timer_reset(DeviceState *dev)
++{
++    K230TimerState *s = K230_TIMER(dev);
++
++    for (int i = 0; i < K230_APBTMR_NUM_TIMERS; i++) {
++        K230Timer *t = &s->timers[i];
++
++        ptimer_transaction_begin(t->ptimer);
++        ptimer_stop(t->ptimer);
++        ptimer_transaction_commit(t->ptimer);
++
++        t->load = 0;
++        t->load2 = 0;
++        t->control = 0;
++        t->int_status = 0;
++        qemu_set_irq(t->irq, 0);
++    }
++}
++
++static const VMStateDescription vmstate_k230_timer_channel = {
++    .name = "k230-dwapb-timer-channel",
++    .fields = (const VMStateField[]) {
++        VMSTATE_PTIMER(ptimer, K230Timer),
++        VMSTATE_UINT32(load, K230Timer),
++        VMSTATE_UINT32(load2, K230Timer),
++        VMSTATE_UINT32(control, K230Timer),
++        VMSTATE_UINT32(int_status, K230Timer),
++        VMSTATE_END_OF_LIST()
++    }
++};
++
++static const VMStateDescription vmstate_k230_timer = {
++    .name = "k230-dwapb-timer",
++    .fields = (const VMStateField[]) {
++        VMSTATE_CLOCK(pclk, K230TimerState),
++        VMSTATE_STRUCT_ARRAY(timers, K230TimerState,
++                             K230_APBTMR_NUM_TIMERS, 0,
++                             vmstate_k230_timer_channel, K230Timer),
++        VMSTATE_END_OF_LIST()
++    }
++};
++
++static void k230_timer_init(Object *obj)
++{
++    K230TimerState *s = K230_TIMER(obj);
++    s->pclk = qdev_init_clock_in(DEVICE(obj), "pclk", k230_timer_clk_update,
++                                 s, ClockUpdate);
++}
++
++static void k230_timer_class_init(ObjectClass *klass, const void *data)
++{
++    DeviceClass *dc = DEVICE_CLASS(klass);
++    dc->realize = k230_timer_realize;
++    dc->vmsd = &vmstate_k230_timer;
++    dc->desc = "K230 DW APB timer";
++    device_class_set_legacy_reset(dc, k230_timer_reset);
++}
++
++static const TypeInfo k230_timer_info = {
++    .name          = TYPE_K230_TIMER,
++    .parent        = TYPE_SYS_BUS_DEVICE,
++    .instance_size = sizeof(K230TimerState),
++    .instance_init = k230_timer_init,
++    .class_init    = k230_timer_class_init,
++};
++
++static void k230_timer_register_type(void)
++{
++    type_register_static(&k230_timer_info);
++}
++type_init(k230_timer_register_type)
+diff --git a/hw/timer/meson.build b/hw/timer/meson.build
+index 201b5d8316..d0a834e127 100644
+--- a/hw/timer/meson.build
++++ b/hw/timer/meson.build
+@@ -34,3 +34,4 @@ specific_ss.add(when: 'CONFIG_IBEX', if_true: files('ibex_timer.c'))
+ system_ss.add(when: 'CONFIG_SIFIVE_PWM', if_true: files('sifive_pwm.c'))
  
--    create_unimplemented_device("timer", memmap[K230_DEV_TIMER].base,
--                                memmap[K230_DEV_TIMER].size);
--
-     create_unimplemented_device("wdt0", memmap[K230_DEV_WDT0].base,
-                                 memmap[K230_DEV_WDT0].size);
+ system_ss.add(when: 'CONFIG_AVR_TIMER16', if_true: files('avr_timer16.c'))
++system_ss.add(when: 'CONFIG_K230_TIMER', if_true: files('k230_dwapb_timer.c'))
+diff --git a/hw/timer/trace-events b/hw/timer/trace-events
+index 634ba1da27..89c619bc87 100644
+--- a/hw/timer/trace-events
++++ b/hw/timer/trace-events
+@@ -1,5 +1,14 @@
+ # See docs/devel/tracing.rst for syntax documentation.
  
-diff --git a/include/hw/riscv/k230.h b/include/hw/riscv/k230.h
-index 592e1c26bf..3de3b7e765 100644
---- a/include/hw/riscv/k230.h
-+++ b/include/hw/riscv/k230.h
-@@ -18,6 +18,7 @@
- #include "hw/core/boards.h"
- #include "hw/riscv/riscv_hart.h"
- #include "hw/watchdog/k230_wdt.h"
-+#include "hw/timer/k230_dwapb_timer.h"
- 
- #define C908_CPU_HARTID   (0)
- 
-@@ -33,6 +34,7 @@ typedef struct K230SoCState {
-     RISCVHartArrayState c908_cpu; /* Small core */
- 
-     K230WdtState wdt[2];
-+    K230TimerState timer;
-     MemoryRegion sram;
-     MemoryRegion bootrom;
- 
-@@ -127,6 +129,12 @@ enum {
-     K230_UART2_IRQ  = 18,
-     K230_UART3_IRQ  = 19,
-     K230_UART4_IRQ  = 20,
-+    K230_TIMER0_IRQ = 101,
-+    K230_TIMER1_IRQ = 102,
-+    K230_TIMER2_IRQ = 103,
-+    K230_TIMER3_IRQ = 104,
-+    K230_TIMER4_IRQ = 105,
-+    K230_TIMER5_IRQ = 106,
-     K230_WDT0_IRQ   = 107,
-     K230_WDT1_IRQ   = 108,
- };
++# k230_dwapb_timer.c
++k230_timer_read(uint64_t addr, uint32_t val) "K230 timer read: [0x%" PRIx64 "] -> 0x%" PRIx32
++k230_timer_write(uint64_t addr, uint64_t val) "K230 timer write: [0x%" PRIx64 "] <- 0x%" PRIx64
++k230_timer_tick(int idx) "K230 timer %d tick"
++k230_timer_interrupt(int idx) "K230 timer %d IRQ asserted"
++k230_timer_irq_clear(int idx) "K230 timer %d IRQ cleared"
++k230_timer_enable(int idx, uint32_t load) "K230 timer %d enabled load=0x%" PRIx32
++k230_timer_disable(int idx) "K230 timer %d disabled"
++
+ # slavio_timer.c
+ slavio_timer_get_out(uint64_t limit, uint32_t counthigh, uint32_t count) "limit 0x%"PRIx64" count 0x%x0x%08x"
+ slavio_timer_irq(uint32_t counthigh, uint32_t count) "callback: count 0x%x0x%08x"
+diff --git a/include/hw/timer/k230_dwapb_timer.h b/include/hw/timer/k230_dwapb_timer.h
+new file mode 100644
+index 0000000000..3aba178dfa
+--- /dev/null
++++ b/include/hw/timer/k230_dwapb_timer.h
+@@ -0,0 +1,72 @@
++/*
++ * K230 DW APB timer
++ *
++ * Copyright (c) 2026 raoyi <rao232328@gmail.com>
++ *
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ *
++ * K230 Technical Reference Manual V0.3.1 (2024-11-18):
++ * https://github.com/revyos/external-docs/blob/master/K230/en-us/K230_Technical_Reference_Manual_V0.3.1_20241118.pdf
++ */
++
++#ifndef K230_DWAPB_TIMER_H
++#define K230_DWAPB_TIMER_H
++
++#include "qemu/bitops.h"
++#include "hw/core/sysbus.h"
++#include "hw/core/irq.h"
++#include "hw/core/clock.h"
++#include "qom/object.h"
++
++#define TYPE_K230_TIMER "riscv.k230.timer"
++OBJECT_DECLARE_SIMPLE_TYPE(K230TimerState, K230_TIMER)
++
++#define K230_APBTMR_MMIO_SIZE    0x800
++#define K230_APBTMR_NUM_TIMERS   6
++#define K230_APBTMR_STRIDE       0x14
++#define K230_APBTMR_DEFAULT_FREQ 6250000
++#define K230_APBTMR_COMP_VERSION_VAL 0x3231312A
++#define K230_APBTMR_LOAD2_STRIDE  0x04
++
++/* Per-timer register offsets */
++#define K230_APBTMR_N_LOAD_COUNT    0x00
++#define K230_APBTMR_N_CURRENT_VALUE 0x04
++#define K230_APBTMR_N_CONTROL       0x08
++#define K230_APBTMR_N_EOI           0x0c
++#define K230_APBTMR_N_INT_STATUS    0x10
++/* Global register offsets */
++#define K230_APBTMRS_INT_STATUS        0xa0
++#define K230_APBTMRS_EOI               0xa4
++#define K230_APBTMRS_RAW_INT_STATUS    0xa8
++#define K230_APBTMRS_COMP_VERSION      0xac
++/* PWM LoadCount2 registers */
++#define K230_APBTMR_N_LOAD2       0xb0
++
++/* Control register bits */
++#define K230_APBTMR_CONTROL_ENABLE        BIT(0)
++#define K230_APBTMR_CONTROL_MODE_PERIODIC BIT(1)
++#define K230_APBTMR_CONTROL_INT           BIT(2)
++#define K230_APBTMR_CONTROL_PWM           BIT(3)
++#define K230_APBTMR_CONTROL_RW_MASK     0xf
++
++typedef struct K230Timer {
++    struct ptimer_state *ptimer;
++    qemu_irq irq;
++    int id;
++    uint32_t load;
++    uint32_t load2;
++    uint32_t control;
++    uint32_t int_status;
++} K230Timer;
++
++struct K230TimerState {
++    /* <private> */
++    SysBusDevice parent_obj;
++
++    /*< public >*/
++    MemoryRegion mmio;
++    K230Timer timers[K230_APBTMR_NUM_TIMERS];
++    Clock *pclk;
++};
++
++#endif
 -- 
 2.53.0
 
