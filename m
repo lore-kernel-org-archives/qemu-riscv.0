@@ -4,40 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A283BC5516D
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E4A9C55167
 	for <qemu-riscv@archiver.kernel.org>; Fri, 31 Jul 2026 06:00:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wpgFa-0002en-DU; Fri, 31 Jul 2026 01:57:42 -0400
+	id 1wpgFn-0002kt-AU; Fri, 31 Jul 2026 01:57:55 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <blduan@linux.alibaba.com>)
- id 1wpeM5-0005rD-T3; Thu, 30 Jul 2026 23:56:18 -0400
+ id 1wpeM5-0005rF-Uj; Thu, 30 Jul 2026 23:56:18 -0400
 Received: from [115.124.30.110] (helo=out30-110.freemail.mail.aliyun.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <blduan@linux.alibaba.com>)
- id 1wpeM0-0002Hx-Dm; Thu, 30 Jul 2026 23:56:17 -0400
+ id 1wpeM0-0002HY-AD; Thu, 30 Jul 2026 23:56:17 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linux.alibaba.com; s=default;
- t=1785470160; h=From:To:Subject:Date:Message-Id:MIME-Version;
- bh=15tpbU1mysjnRBqCkIU57nhoO42MnKRFA/va3zirTrU=;
- b=VSmTtRMZvWR9SdOeFy5R0kDUZFi64Kkk3gbRKjnmVWmDlm5aXmbwzn2Jsn4xTNJ7boVb0cr3E5OTr6KGxH479L7cl0dvQ+kTOCGPi1I9jMzXGWPhaIQFDVVJgSast0g38EFZpJ4k3MwM6dTbrjxN0JiTThqxHwRxv3PrFK+8SaI=
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R131e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033045133197;
+ t=1785470153; h=From:To:Subject:Date:Message-Id:MIME-Version;
+ bh=lOIM/Cc14RzT2Ss1jXc7sxt3HuykJrKEV9sxrNWyD+s=;
+ b=WNyZtZbRp0w85tD9OLoAi0SN76GaNn7vm9qYi+Vt/JjonCVYXUxuNlxoC1oelRmz+O9V0ukiOSnGXkK+amZtVQHcmDFCJ5hMNnMdWF5ZVgIVWaICzYCixQb3qBSQy9ATsiClGYyjEbqoZNQbwl9ALL7KUmgg/mM9H4sMlgIqVuw=
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R121e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033037026112;
  MF=blduan@linux.alibaba.com; NM=1; PH=DS; RN=7; SR=0;
- TI=SMTPD_---0X86jwRu_1785469848; 
+ TI=SMTPD_---0X86jwNG_1785469833; 
 Received: from ea134-sw16.eng.xrvm.cn(mailfrom:blduan@linux.alibaba.com
- fp:SMTPD_---0X86jwRu_1785469848 cluster:ay36) by smtp.aliyun-inc.com;
- Fri, 31 Jul 2026 11:50:49 +0800
+ fp:SMTPD_---0X86jwNG_1785469833 cluster:ay36) by smtp.aliyun-inc.com;
+ Fri, 31 Jul 2026 11:50:37 +0800
 From: Baolong Duan <blduan@linux.alibaba.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair23@gmail.com, dbarboza@ventanamicro.com,
  cxx194832@alibaba-inc.com, zengxiangyi.zxy@alibaba-inc.com,
  Baolong Duan <blduan@linux.alibaba.com>
-Subject: [RFC PATCH v1 04/17] accel/kvm: add kvm_gpa_to_userspace_addr()
-Date: Fri, 31 Jul 2026 11:49:58 +0800
-Message-Id: <20260731035011.4178103-5-blduan@linux.alibaba.com>
+Subject: [RFC PATCH v1 01/17] docs/system/riscv/virt: document the cove-vm
+ machine option
+Date: Fri, 31 Jul 2026 11:49:55 +0800
+Message-Id: <20260731035011.4178103-2-blduan@linux.alibaba.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260731035011.4178103-1-blduan@linux.alibaba.com>
 References: <20260731035011.4178103-1-blduan@linux.alibaba.com>
@@ -56,7 +57,7 @@ X-Spam_report: (-16.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001, USER_IN_DEF_DKIM_WL=-7.5,
  USER_IN_DEF_SPF_WL=-7.5 autolearn=no autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Fri, 31 Jul 2026 01:57:01 -0400
+X-Mailman-Approved-At: Fri, 31 Jul 2026 01:56:54 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,79 +72,69 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Translate a guest physical address into the host userspace address
-backing it by walking the memory slots of the accelerator.
+Describe the cove-vm option of the virt machine and how a CoVE TEE VM
+(TVM) differs from a regular KVM guest: its memory and vCPU state are
+owned by the TEE Security Manager (TSM), the guest images are measured
+before it starts, interrupts are delivered as MSIs only, there is no
+virtio-mmio transport and vhost cannot be used.
 
-The RISC-V CoVE code needs this to tell the TSM which host memory holds
-the guest images that have to be measured.
+The option itself is added by the following patches.
 
 Signed-off-by: Baolong Duan <blduan@linux.alibaba.com>
 ---
- accel/kvm/kvm-all.c  | 21 +++++++++++++++++++++
- include/system/kvm.h | 18 ++++++++++++++++++
- 2 files changed, 39 insertions(+)
+ docs/system/riscv/virt.rst | 39 ++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 39 insertions(+)
 
-diff --git a/accel/kvm/kvm-all.c b/accel/kvm/kvm-all.c
-index 83cbd120a8..005abb1c54 100644
---- a/accel/kvm/kvm-all.c
-+++ b/accel/kvm/kvm-all.c
-@@ -366,6 +366,27 @@ int kvm_physical_memory_addr_from_host(KVMState *s, void *ram,
-     return ret;
- }
+diff --git a/docs/system/riscv/virt.rst b/docs/system/riscv/virt.rst
+index 60850970ce..d053dbc300 100644
+--- a/docs/system/riscv/virt.rst
++++ b/docs/system/riscv/virt.rst
+@@ -146,6 +146,45 @@ The following machine-specific options are supported:
  
-+void *kvm_gpa_to_userspace_addr(KVMState *s, hwaddr gpa)
-+{
-+    KVMMemoryListener *kml = &s->memory_listener;
-+    void *result = NULL;
-+    int i;
-+    KVMSlot *mem;
-+
-+    kvm_slots_lock();
-+    for (i = 0; i < kml->nr_slots_allocated; i++) {
-+        mem = &kml->slots[i];
-+        if (gpa >= mem->start_addr &&
-+            gpa < mem->start_addr + mem->memory_size) {
-+            result = mem->ram + (gpa - mem->start_addr);
-+            break;
-+        }
-+    }
-+    kvm_slots_unlock();
-+
-+    return result;
-+}
-+
- static int kvm_set_user_memory_region(KVMMemoryListener *kml, KVMSlot *slot, bool new)
- {
-     KVMState *s = kvm_state;
-diff --git a/include/system/kvm.h b/include/system/kvm.h
-index 714b8c7b01..67a0b9f7ac 100644
---- a/include/system/kvm.h
-+++ b/include/system/kvm.h
-@@ -454,6 +454,24 @@ void kvm_set_sigmask_len(KVMState *s, unsigned int sigmask_len);
- int kvm_physical_memory_addr_from_host(KVMState *s, void *ram_addr,
-                                        hwaddr *phys_addr);
+   Enables the riscv-iommu-sys platform device. Defaults to 'off'.
  
-+/**
-+ * kvm_gpa_to_userspace_addr:
-+ * @s: #KVMState
-+ * @gpa: guest physical address
-+ *
-+ * Returns the host userspace address @gpa is backed by, or NULL if @gpa is
-+ * not covered by any memory slot.
-+ */
-+#ifdef CONFIG_KVM
-+void *kvm_gpa_to_userspace_addr(KVMState *s, hwaddr gpa);
-+#else
-+static inline void *kvm_gpa_to_userspace_addr(KVMState *s, hwaddr gpa)
-+{
-+    /* Without KVM there are no memory slots to look up. */
-+    return NULL;
-+}
-+#endif
++- cove-vm=[on|off]
 +
- #endif /* COMPILING_PER_TARGET */
++  When this option is "on" the guest is created as a RISC-V CoVE
++  (Confidential VM Extension) TEE VM, or TVM. Defaults to "off". See
++  `Running a confidential VM`_ below.
++
++Running a confidential VM
++-------------------------
++
++With "cove-vm=on" the ``virt`` machine creates a TEE VM (TVM) instead of a
++regular KVM guest. The memory and the vCPU state of a TVM are owned by the
++TEE Security Manager (TSM) running in M-mode and are not accessible to the
++host, which changes the machine in a few ways:
++
++- the kernel, the initrd and the device tree are added to the initial
++  measurement of the guest before it starts, so that the guest can be
++  attested later on;
++
++- interrupts are delivered as MSIs only. An IMSIC is therefore mandatory and
++  "aia=aplic-imsic" is selected automatically when no AIA mode is requested.
++  The APLIC is emulated by QEMU because KVM does not implement one for a TVM;
++
++- no virtio-mmio transport is created. Devices have to be attached to the
++  PCIe host bridge, and they always negotiate VIRTIO_F_ACCESS_PLATFORM so
++  that DMA is bounced through memory the guest shares explicitly;
++
++- vhost cannot be used, as the kernel datapath has no access to guest memory.
++
++This requires a host with CoVE support, both in the firmware and in KVM, and
++it only works with ``-accel kvm``. An example command line is:
++
++.. code-block:: bash
++
++  $ qemu-system-riscv64 -M virt,cove-vm=on -accel kvm \
++      -m 256M -smp 1 -nographic \
++      -kernel Image -append "console=ttyS0 root=/dev/vda" \
++      -drive file=rootfs.ext4,format=raw,id=hd0,if=none \
++      -device virtio-blk-pci,drive=hd0,disable-legacy=on
++
+ Running Linux kernel
+ --------------------
  
- bool kvm_arch_supports_vmfd_change(void);
 -- 
 2.34.1
 
