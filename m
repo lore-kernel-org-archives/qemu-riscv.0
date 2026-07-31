@@ -4,50 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8C89C54F54
-	for <qemu-riscv@archiver.kernel.org>; Fri, 31 Jul 2026 05:59:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F1C4C55167
+	for <qemu-riscv@archiver.kernel.org>; Fri, 31 Jul 2026 05:59:29 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wpgFZ-0002ct-L9; Fri, 31 Jul 2026 01:57:41 -0400
+	id 1wpgFY-0002bX-6Y; Fri, 31 Jul 2026 01:57:40 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <blduan@linux.alibaba.com>)
- id 1wpeM7-0005tf-3M; Thu, 30 Jul 2026 23:56:19 -0400
-Received: from [115.124.30.118] (helo=out30-118.freemail.mail.aliyun.com)
+ id 1wpeM8-0005u8-TL; Thu, 30 Jul 2026 23:56:20 -0400
+Received: from [115.124.30.130] (helo=out30-130.freemail.mail.aliyun.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <blduan@linux.alibaba.com>)
- id 1wpeM0-0002IC-7N; Thu, 30 Jul 2026 23:56:18 -0400
+ id 1wpeM0-0002Hz-7n; Thu, 30 Jul 2026 23:56:20 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linux.alibaba.com; s=default;
- t=1785470163; h=From:To:Subject:Date:Message-Id:MIME-Version;
- bh=/IMVwNB06KOv98G3TbtOzyWq7d49eCbIfTpVOyNYHPw=;
- b=ryCmZ6O1WKiGXa21BR+DK0MlMzIBQOYM0rw7CxgfPyu68yx9hZ9JXj82GvNEiufy0FnmWnSnLOVmoVH4hTVW+g3zSps00Zn1oW3QuzRS4lz7lK3nZxkpAGEzcN0+OqWwTNyBIT5tP6ASRkDOgGW3ldHcehUnKO/3muZ4wQBjNW0=
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R361e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033045098064;
+ t=1785470160; h=From:To:Subject:Date:Message-Id:MIME-Version;
+ bh=ZI+3bdJq7tVDDsPgbwtKOM++Fn1hHx+vxSYYlZlVEQg=;
+ b=cFnjnZXyEq5OFc/dPDHWkkAZFWoxgOYbgLDYxFBWuuLfqvJJLHNPjcOwY2Yq5peCRqnzgoBte4K1fASIZp7EfZNmNwsc/yUfDAbNFGZxWPEYHro+ZjtLjPrh/K5Ldhhgsvn9K65Su+L0kRUWmdXkhdmsUlU5n27zPdIERaS+qUU=
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R131e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033032089153;
  MF=blduan@linux.alibaba.com; NM=1; PH=DS; RN=7; SR=0;
- TI=SMTPD_---0X86jwSr_1785469851; 
+ TI=SMTPD_---0X86jwRP_1785469846; 
 Received: from ea134-sw16.eng.xrvm.cn(mailfrom:blduan@linux.alibaba.com
- fp:SMTPD_---0X86jwSr_1785469851 cluster:ay36) by smtp.aliyun-inc.com;
- Fri, 31 Jul 2026 11:50:52 +0800
+ fp:SMTPD_---0X86jwRP_1785469846 cluster:ay36) by smtp.aliyun-inc.com;
+ Fri, 31 Jul 2026 11:50:48 +0800
 From: Baolong Duan <blduan@linux.alibaba.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair23@gmail.com, dbarboza@ventanamicro.com,
  cxx194832@alibaba-inc.com, zengxiangyi.zxy@alibaba-inc.com,
  Baolong Duan <blduan@linux.alibaba.com>
-Subject: [RFC PATCH v1 06/17] hw/riscv/virt: measure the device tree of a CoVE
- guest
-Date: Fri, 31 Jul 2026 11:50:00 +0800
-Message-Id: <20260731035011.4178103-7-blduan@linux.alibaba.com>
+Subject: [RFC PATCH v1 03/17] target/riscv/kvm: create and measure a CoVE TEE
+ VM
+Date: Fri, 31 Jul 2026 11:49:57 +0800
+Message-Id: <20260731035011.4178103-4-blduan@linux.alibaba.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260731035011.4178103-1-blduan@linux.alibaba.com>
 References: <20260731035011.4178103-1-blduan@linux.alibaba.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.118 (deferred)
-Received-SPF: pass client-ip=115.124.30.118;
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.130 (deferred)
+Received-SPF: pass client-ip=115.124.30.130;
  envelope-from=blduan@linux.alibaba.com;
- helo=out30-118.freemail.mail.aliyun.com
+ helo=out30-130.freemail.mail.aliyun.com
 X-Spam_score_int: -166
 X-Spam_score: -16.7
 X-Spam_bar: ----------------
@@ -72,45 +72,121 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The device tree is the last piece of guest state that has to be part of
-the initial measurement of a TEE VM.  The ROM blob holding it is only
-written to guest memory when the machine is reset, which is too late, so
-copy it into RAM and measure it right after its address is known.
+Ask KVM for a TEE VM (TVM) instead of a regular guest when the machine
+runs in CoVE mode, and add kvm_riscv_cove_measure_region() to add a
+memory region to the initial measurement of that TVM.
+
+The measurement is what allows a CoVE guest to be attested later on, so
+failing to add a region to it is fatal.
+
+The KVM ABI this relies on is not part of an upstream Linux release yet, so
+KVM_VM_TYPE_RISCV_COVE and KVM_RISCV_COVE_MEASURE_REGION are defined here
+rather than imported into linux-headers/.  They have to be replaced by a
+regular scripts/update-linux-headers.sh run once the kernel side has been
+merged.
 
 Signed-off-by: Baolong Duan <blduan@linux.alibaba.com>
 ---
- hw/riscv/virt.c | 18 ++++++++++++++++++
- 1 file changed, 18 insertions(+)
+ target/riscv/kvm/kvm-cpu.c   | 46 ++++++++++++++++++++++++++++++++++++
+ target/riscv/kvm/kvm_riscv.h | 10 ++++++++
+ 2 files changed, 56 insertions(+)
 
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index a76587d362..c15d8859ce 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -1277,6 +1277,24 @@ static void virt_machine_done(Notifier *notifier, void *data)
-                                            machine, &boot_info);
-     riscv_load_fdt(fdt_load_addr, machine->fdt);
+diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
+index 495cb42dc8..67c99d68ce 100644
+--- a/target/riscv/kvm/kvm-cpu.c
++++ b/target/riscv/kvm/kvm-cpu.c
+@@ -48,10 +48,27 @@
+ #include "migration/misc.h"
+ #include "system/runstate.h"
+ #include "hw/riscv/numa.h"
++#include "hw/riscv/cove.h"
  
-+    /*
-+     * The device tree is part of the initial measurement of a TVM. The ROM
-+     * blobs holding it are not written to guest memory before the machine is
-+     * reset, so copy it into RAM now to be able to measure it.
-+     */
-+    if (s->cove_vm) {
-+        void *ram_base = memory_region_get_ram_ptr(machine->ram);
-+        hwaddr fdt_offset = fdt_load_addr - s->memmap[VIRT_DRAM].base;
-+        void *fdt_host;
+ #define PR_RISCV_V_SET_CONTROL            69
+ #define PR_RISCV_V_VSTATE_CTRL_ON          2
+ 
++/*
++ * CoVE KVM ABI.  These definitions are not part of an upstream Linux release
++ * yet, so they cannot be imported into linux-headers/ and are kept here until
++ * the kernel side has been merged.
++ */
++#define KVM_VM_TYPE_RISCV_COVE          (1UL << 9)
 +
-+        memcpy((char *)ram_base + fdt_offset, machine->fdt, s->fdt_size);
++struct kvm_riscv_cove_measure_region {
++    uint64_t user_addr;
++    uint64_t gpa;
++    uint64_t size;
++};
 +
-+        fdt_host = kvm_gpa_to_userspace_addr(kvm_state, fdt_load_addr);
-+        kvm_riscv_cove_measure_region((uint64_t)(uintptr_t)fdt_host,
-+                                      fdt_load_addr,
-+                                      ROUND_UP(s->fdt_size, 4 * KiB));
++#define KVM_RISCV_COVE_MEASURE_REGION \
++    _IOR(KVMIO, 0xb5, struct kvm_riscv_cove_measure_region)
++
+ void riscv_kvm_aplic_request(void *opaque, int irq, int level)
+ {
+     kvm_set_irq(kvm_state, irq, !!level);
+@@ -1549,6 +1566,9 @@ int kvm_arch_add_msi_route_post(struct kvm_irq_routing_entry *route,
+ 
+ int kvm_arch_get_default_type(MachineState *ms)
+ {
++    if (riscv_cove_vm_active()) {
++        return KVM_VM_TYPE_RISCV_COVE;
++    }
+     return 0;
+ }
+ 
+@@ -1829,6 +1849,32 @@ void kvm_arch_accel_class_init(ObjectClass *oc)
+                                     "auto");
+ }
+ 
++/*
++ * Add the contents of a memory region to the initial measurement of the TVM.
++ * Nothing is measured for a guest that is not confidential.
++ */
++void kvm_riscv_cove_measure_region(uint64_t user_addr, uint64_t gpa,
++                                   uint64_t size)
++{
++    struct kvm_riscv_cove_measure_region mr;
++    int ret;
++
++    if (!riscv_cove_vm_active()) {
++        return;
 +    }
 +
-     /* load the reset vector */
-     riscv_setup_rom_reset_vec(machine, &s->soc[0], start_addr,
-                               s->memmap[VIRT_MROM].base,
++    mr.user_addr = user_addr;
++    mr.gpa = gpa;
++    mr.size = size;
++
++    ret = kvm_vm_ioctl(kvm_state, KVM_RISCV_COVE_MEASURE_REGION, &mr);
++    if (ret < 0) {
++        error_report("Unable to measure CoVE region at 0x%" PRIx64 ": %s",
++                     gpa, strerror(-ret));
++        exit(EXIT_FAILURE);
++    }
++}
++
+ void kvm_riscv_aia_create(MachineState *machine, uint64_t group_shift,
+                           uint64_t aia_irq_num, uint64_t aia_msi_num,
+                           uint64_t aplic_base, uint64_t imsic_base,
+diff --git a/target/riscv/kvm/kvm_riscv.h b/target/riscv/kvm/kvm_riscv.h
+index b2bcd1041f..cd45f1266b 100644
+--- a/target/riscv/kvm/kvm_riscv.h
++++ b/target/riscv/kvm/kvm_riscv.h
+@@ -23,6 +23,16 @@
+ 
+ void kvm_riscv_reset_vcpu(RISCVCPU *cpu);
+ void kvm_riscv_set_irq(RISCVCPU *cpu, int irq, int level);
++#ifdef CONFIG_KVM
++void kvm_riscv_cove_measure_region(uint64_t user_addr, uint64_t gpa,
++                                   uint64_t size);
++#else
++static inline void kvm_riscv_cove_measure_region(uint64_t user_addr,
++                                                 uint64_t gpa, uint64_t size)
++{
++    /* A CoVE guest cannot be created without KVM, nothing to measure. */
++}
++#endif
+ void kvm_riscv_aia_create(MachineState *machine, uint64_t group_shift,
+                           uint64_t aia_irq_num, uint64_t aia_msi_num,
+                           uint64_t aplic_base, uint64_t imsic_base,
 -- 
 2.34.1
 
