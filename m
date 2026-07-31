@@ -4,47 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5C88C55167
-	for <qemu-riscv@archiver.kernel.org>; Fri, 31 Jul 2026 05:58:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4E90C55167
+	for <qemu-riscv@archiver.kernel.org>; Fri, 31 Jul 2026 05:58:27 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wpgFk-0002ib-Sm; Fri, 31 Jul 2026 01:57:52 -0400
+	id 1wpgFk-0002iS-4x; Fri, 31 Jul 2026 01:57:52 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <blduan@linux.alibaba.com>)
- id 1wpeM5-0005qq-69; Thu, 30 Jul 2026 23:56:17 -0400
-Received: from [115.124.30.98] (helo=out30-98.freemail.mail.aliyun.com)
+ id 1wpeM7-0005u1-Oe; Thu, 30 Jul 2026 23:56:19 -0400
+Received: from [115.124.30.99] (helo=out30-99.freemail.mail.aliyun.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <blduan@linux.alibaba.com>)
- id 1wpeM0-0002Hb-Cx; Thu, 30 Jul 2026 23:56:16 -0400
+ id 1wpeM0-0002IR-ED; Thu, 30 Jul 2026 23:56:19 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linux.alibaba.com; s=default;
- t=1785470153; h=From:To:Subject:Date:Message-Id:MIME-Version;
- bh=iCbluQ1czlbmeT5UGG/tEPF6mhjIdObmQgw83HWv/Ps=;
- b=qlEGEXxaCVOqvqDho3xIWBUxsAcJLfkVY+yCiXZDlP6HLnhaq7tpFO8UjWSfPe5+Vt6HliRFJ1MMaWGvObF7C531X1ubg71BoCoUkP/baKnKMwLxZQJBceSjZVSEnV+O2zecuG8cm1BbBEFTHqSnDf8HdAS2Jl6n6oeTu1Hnm+Y=
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R181e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033037026112;
+ t=1785470165; h=From:To:Subject:Date:Message-Id:MIME-Version;
+ bh=dPDYKHG01bvX3ps8+/geGQfs9dBDTNN+rHrp9+MeVIA=;
+ b=v8HvEqPna0eE6v/N5DVEfzdNvXhSBdz+EvSiQUtkiBomiNmoVWRAPTccZQTBm6hpaRlcRCCQYrQej9SAvFdqpl6Rjgd8LmxEyMiU548jsePHpYLa4z3SUlb8xge/Ofa4AfrP9n6kBdyYXEaJ4Ou0sNKg+O81kjm14TMiBeWzszY=
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R311e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033037033178;
  MF=blduan@linux.alibaba.com; NM=1; PH=DS; RN=7; SR=0;
- TI=SMTPD_---0X86jwN0_1785469832; 
+ TI=SMTPD_---0X86jwT7_1785469852; 
 Received: from ea134-sw16.eng.xrvm.cn(mailfrom:blduan@linux.alibaba.com
- fp:SMTPD_---0X86jwN0_1785469832 cluster:ay36) by smtp.aliyun-inc.com;
- Fri, 31 Jul 2026 11:50:33 +0800
+ fp:SMTPD_---0X86jwT7_1785469852 cluster:ay36) by smtp.aliyun-inc.com;
+ Fri, 31 Jul 2026 11:50:53 +0800
 From: Baolong Duan <blduan@linux.alibaba.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair23@gmail.com, dbarboza@ventanamicro.com,
  cxx194832@alibaba-inc.com, zengxiangyi.zxy@alibaba-inc.com,
  Baolong Duan <blduan@linux.alibaba.com>
-Subject: [RFC PATCH v1 00/17] target/riscv: Add KVM CoVE confidential VM
- support
-Date: Fri, 31 Jul 2026 11:49:54 +0800
-Message-Id: <20260731035011.4178103-1-blduan@linux.alibaba.com>
+Subject: [RFC PATCH v1 07/17] hw/riscv: adapt the device tree of a CoVE guest
+Date: Fri, 31 Jul 2026 11:50:01 +0800
+Message-Id: <20260731035011.4178103-8-blduan@linux.alibaba.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20260731035011.4178103-1-blduan@linux.alibaba.com>
+References: <20260731035011.4178103-1-blduan@linux.alibaba.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.98 (deferred)
-Received-SPF: pass client-ip=115.124.30.98;
- envelope-from=blduan@linux.alibaba.com; helo=out30-98.freemail.mail.aliyun.com
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.99 (deferred)
+Received-SPF: pass client-ip=115.124.30.99;
+ envelope-from=blduan@linux.alibaba.com; helo=out30-99.freemail.mail.aliyun.com
 X-Spam_score_int: -166
 X-Spam_score: -16.7
 X-Spam_bar: ----------------
@@ -54,7 +55,7 @@ X-Spam_report: (-16.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001, USER_IN_DEF_DKIM_WL=-7.5,
  USER_IN_DEF_SPF_WL=-7.5 autolearn=no autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Fri, 31 Jul 2026 01:56:56 -0400
+X-Mailman-Approved-At: Fri, 31 Jul 2026 01:57:14 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,86 +70,144 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This series adds RISC-V CoVE (Confidential VM Extension) support to the
-virt machine when running with KVM acceleration.
+A CoVE guest has neither wired interrupts nor a virtio-mmio transport,
+and the TSM does not expose Zicboz to it, so drop the corresponding
+device tree properties and nodes.
 
-CoVE is the RISC-V equivalent of AMD SEV / Intel TDX, defined by the
-RISC-V AP-TEE specification [1].  A CoVE guest is a TEE VM (TVM) whose
-memory and vCPU state are owned by the TEE Security Manager (TSM),
-making them inaccessible to the host.
+The kernel command line has to be added here as well: a CoVE guest does
+not use the generic riscv_load_kernel() path that normally does it, and
+the command line has to be in the device tree before it is measured.
 
-The series adds a "cove-vm" machine property to the virt board and adapts
-the boot flow, interrupt routing, memory registration and device model to
-the constraints of a confidential guest:
+Signed-off-by: Baolong Duan <blduan@linux.alibaba.com>
+---
+ hw/riscv/fdt-common.c |  4 ++-
+ hw/riscv/virt.c       | 62 +++++++++++++++++++++++++++++++------------
+ 2 files changed, 48 insertions(+), 18 deletions(-)
 
-  - kernel, initrd and device tree are measured before the guest starts
-  - interrupts are MSI-only (IMSIC mandatory, APLIC emulated by QEMU)
-  - virtio uses modern PCI transport with VIRTIO_F_ACCESS_PLATFORM
-  - vhost is disabled (host kernel has no access to guest memory)
-  - vCPU threads are pinned (TSM binds vCPUs to harts)
-
-The KVM interface used here (KVM_VM_TYPE_RISCV_COVE and
-KVM_RISCV_COVE_MEASURE_REGION) is not yet part of an upstream Linux
-release.  The definitions are kept locally and will be replaced by a
-linux-headers update once the kernel side has been merged.
-
-Patches 15 and 17 contain known workarounds and explicitly ask for design
-guidance:
-
-  - Patch 15 pins vCPU threads and adds a yield after KVM_RUN to avoid
-    host RCU stalls.  Thread placement should be left to the user or
-    management layer.
-
-  - Patch 17 converts system_reset into a shutdown because a TVM cannot be
-    recreated.  The proper approach may be to implement
-    ConfidentialGuestSupport and use the existing can_rebuild_state()
-    machinery.
-
-Tested with QEMU TCG emulating a CoVE-capable Xuantie C930 platform.
-
-[1] https://github.com/riscv-non-isa/riscv-ap-tee
-
-Baolong Duan (17):
-  docs/system/riscv/virt: document the cove-vm machine option
-  hw/riscv/virt: add the cove-vm machine property
-  target/riscv/kvm: create and measure a CoVE TEE VM
-  accel/kvm: add kvm_gpa_to_userspace_addr()
-  hw/riscv/boot: load and measure the images of a CoVE guest
-  hw/riscv/virt: measure the device tree of a CoVE guest
-  hw/riscv: adapt the device tree of a CoVE guest
-  hw/riscv/virt: use MSIs only for a CoVE guest
-  hw/intc/riscv_aplic: emulate the APLIC for a CoVE guest
-  target/riscv/kvm: skip unsupported KVM requests for a CoVE guest
-  hw/virtio: force modern virtio for a CoVE guest
-  hw/net/virtio-net: do not use vhost for a CoVE guest
-  accel/kvm: only register the DRAM slot of a CoVE guest
-  accel/kvm: skip MSI route updates for a CoVE guest
-  accel/kvm: pin the vCPU threads of a CoVE guest
-  accel/kvm: terminate on a system event of a CoVE guest
-  hw/core/machine-qmp-cmds: shut down a CoVE guest on reset
-
- MAINTAINERS                  |   6 ++
- accel/kvm/kvm-accel-ops.c    |  16 +++++
- accel/kvm/kvm-all.c          |  60 +++++++++++++++++
- docs/system/riscv/virt.rst   |  39 +++++++++++
- hw/core/machine-qmp-cmds.c   |  10 +++
- hw/core/machine.c            |  18 +++++
- hw/intc/riscv_aplic.c        |   9 +++
- hw/net/virtio-net.c          |   9 +++
- hw/riscv/boot.c              |  91 +++++++++++++++++++++++++
- hw/riscv/fdt-common.c        |   4 +-
- hw/riscv/trace-events        |   4 ++
- hw/riscv/virt.c              | 125 +++++++++++++++++++++++++++++------
- hw/virtio/virtio-bus.c       |  12 ++++
- hw/virtio/virtio-pci.c       |   9 ++-
- include/hw/riscv/cove.h      |  24 +++++++
- include/hw/riscv/virt.h      |   1 +
- include/system/kvm.h         |  18 +++++
- target/riscv/kvm/kvm-cpu.c   |  67 ++++++++++++++++++-
- target/riscv/kvm/kvm_riscv.h |  10 +++
- 19 files changed, 508 insertions(+), 24 deletions(-)
- create mode 100644 include/hw/riscv/cove.h
-
+diff --git a/hw/riscv/fdt-common.c b/hw/riscv/fdt-common.c
+index aa143a618b..c065724be4 100644
+--- a/hw/riscv/fdt-common.c
++++ b/hw/riscv/fdt-common.c
+@@ -11,6 +11,7 @@
+ #include "qemu/error-report.h"
+ #include "system/device_tree.h"
+ #include "hw/core/boards.h"
++#include "hw/riscv/cove.h"
+ #include "hw/riscv/fdt-common.h"
+ #include "target/riscv/cpu_bits.h"
+ 
+@@ -132,7 +133,8 @@ create_fdt_socket_cpu_internal(void *fdt, char *clust_name, RISCVCPU *cpu_ptr,
+                                   cpu_ptr->cfg.cbom_blocksize);
+         }
+ 
+-        if (cpu_ptr->cfg.ext_zicboz) {
++        /* The TSM does not expose Zicboz to a CoVE guest. */
++        if (cpu_ptr->cfg.ext_zicboz && !riscv_cove_vm_active()) {
+             qemu_fdt_setprop_cell(fdt, cpu_name, "riscv,cboz-block-size",
+                                   cpu_ptr->cfg.cboz_blocksize);
+         }
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index c15d8859ce..777859baa2 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -225,12 +225,15 @@ static void create_pcie_irq_map(RISCVVirtState *s, void *fdt, char *nodename,
+         }
+     }
+ 
+-    qemu_fdt_setprop(fdt, nodename, "interrupt-map", full_irq_map,
+-                     PCI_NUM_PINS * PCI_NUM_PINS *
+-                     irq_map_stride * sizeof(uint32_t));
+-
+-    qemu_fdt_setprop_cells(fdt, nodename, "interrupt-map-mask",
+-                           0x1800, 0, 0, 0x7);
++    /* A CoVE guest only supports MSIs, so it has no interrupt map. */
++    if (!s->cove_vm) {
++        qemu_fdt_setprop(fdt, nodename, "interrupt-map", full_irq_map,
++                         PCI_NUM_PINS * PCI_NUM_PINS *
++                         irq_map_stride * sizeof(uint32_t));
++
++        qemu_fdt_setprop_cells(fdt, nodename, "interrupt-map-mask",
++                               0x1800, 0, 0, 0x7);
++    }
+ }
+ 
+ static void create_fdt_socket_aclint(RISCVVirtState *s,
+@@ -697,6 +700,14 @@ static void create_fdt_virtio(RISCVVirtState *s, uint32_t irq_virtio_phandle)
+     MachineState *ms = MACHINE(s);
+     hwaddr virtio_base = s->memmap[VIRT_VIRTIO].base;
+ 
++    /*
++     * A CoVE guest has no virtio-mmio transport, its virtio devices are
++     * attached to the PCIe host bridge instead.
++     */
++    if (s->cove_vm) {
++        return;
++    }
++
+     for (i = 0; i < VIRTIO_COUNT; i++) {
+         g_autofree char *name = NULL;
+         uint64_t size = s->memmap[VIRT_VIRTIO].size;
+@@ -819,11 +830,15 @@ static void create_fdt_uart(RISCVVirtState *s,
+                                  2, s->memmap[VIRT_UART0].base,
+                                  2, s->memmap[VIRT_UART0].size);
+     qemu_fdt_setprop_cell(ms->fdt, name, "clock-frequency", 3686400);
+-    qemu_fdt_setprop_cell(ms->fdt, name, "interrupt-parent", irq_mmio_phandle);
+-    if (s->aia_type == VIRT_AIA_TYPE_NONE) {
+-        qemu_fdt_setprop_cell(ms->fdt, name, "interrupts", UART0_IRQ);
+-    } else {
+-        qemu_fdt_setprop_cells(ms->fdt, name, "interrupts", UART0_IRQ, 0x4);
++    /* A CoVE guest has no wired interrupts, the UART is polled. */
++    if (!s->cove_vm) {
++        qemu_fdt_setprop_cell(ms->fdt, name, "interrupt-parent",
++                              irq_mmio_phandle);
++        if (s->aia_type == VIRT_AIA_TYPE_NONE) {
++            qemu_fdt_setprop_cell(ms->fdt, name, "interrupts", UART0_IRQ);
++        } else {
++            qemu_fdt_setprop_cells(ms->fdt, name, "interrupts", UART0_IRQ, 0x4);
++        }
+     }
+ 
+     qemu_fdt_setprop_string(ms->fdt, "/chosen", "stdout-path", name);
+@@ -844,12 +859,15 @@ static void create_fdt_rtc(RISCVVirtState *s,
+     qemu_fdt_setprop_sized_cells(ms->fdt, name, "reg",
+                                  2, s->memmap[VIRT_RTC].base,
+                                  2, s->memmap[VIRT_RTC].size);
+-    qemu_fdt_setprop_cell(ms->fdt, name, "interrupt-parent",
+-        irq_mmio_phandle);
+-    if (s->aia_type == VIRT_AIA_TYPE_NONE) {
+-        qemu_fdt_setprop_cell(ms->fdt, name, "interrupts", RTC_IRQ);
+-    } else {
+-        qemu_fdt_setprop_cells(ms->fdt, name, "interrupts", RTC_IRQ, 0x4);
++    /* A CoVE guest has no wired interrupts, the RTC is polled. */
++    if (!s->cove_vm) {
++        qemu_fdt_setprop_cell(ms->fdt, name, "interrupt-parent",
++            irq_mmio_phandle);
++        if (s->aia_type == VIRT_AIA_TYPE_NONE) {
++            qemu_fdt_setprop_cell(ms->fdt, name, "interrupts", RTC_IRQ);
++        } else {
++            qemu_fdt_setprop_cells(ms->fdt, name, "interrupts", RTC_IRQ, 0x4);
++        }
+     }
+ }
+ 
+@@ -1021,6 +1039,16 @@ static void create_fdt(RISCVVirtState *s)
+ 
+     qemu_fdt_add_subnode(ms->fdt, "/chosen");
+ 
++    /*
++     * The kernel command line of a CoVE guest has to be part of the device
++     * tree before it is measured, so it cannot be added by the generic
++     * riscv_load_kernel() path.
++     */
++    if (s->cove_vm && ms->kernel_cmdline && *ms->kernel_cmdline) {
++        qemu_fdt_setprop_string(ms->fdt, "/chosen", "bootargs",
++                                ms->kernel_cmdline);
++    }
++
+     /* Pass seed to RNG */
+     qemu_guest_getrandom_nofail(rng_seed, sizeof(rng_seed));
+     qemu_fdt_setprop(ms->fdt, "/chosen", "rng-seed",
 -- 
 2.34.1
+
 
