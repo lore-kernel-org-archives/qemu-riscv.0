@@ -4,93 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5687DC5516D
-	for <qemu-riscv@archiver.kernel.org>; Thu, 30 Jul 2026 18:20:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91A03C55167
+	for <qemu-riscv@archiver.kernel.org>; Fri, 31 Jul 2026 05:57:48 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wpVMX-0003uT-16; Thu, 30 Jul 2026 14:20:09 -0400
+	id 1wpgFU-0002IY-Pt; Fri, 31 Jul 2026 01:57:37 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ahshehab24@gmail.com>)
- id 1wpVMV-0003u0-FJ
- for qemu-riscv@nongnu.org; Thu, 30 Jul 2026 14:20:07 -0400
-Received: from mail-wm1-x32e.google.com ([2a00:1450:4864:20::32e])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ahshehab24@gmail.com>)
- id 1wpVMS-0000Sj-GG
- for qemu-riscv@nongnu.org; Thu, 30 Jul 2026 14:20:07 -0400
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-49558ce01afso443695e9.1
- for <qemu-riscv@nongnu.org>; Thu, 30 Jul 2026 11:20:03 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <blduan@linux.alibaba.com>)
+ id 1wpeM8-0005u6-RZ; Thu, 30 Jul 2026 23:56:20 -0400
+Received: from [115.124.30.112] (helo=out30-112.freemail.mail.aliyun.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <blduan@linux.alibaba.com>)
+ id 1wpeM5-0002JG-PZ; Thu, 30 Jul 2026 23:56:20 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1785435602; x=1786040402; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=ZXZbQkwGxp+BHj+7kwSHsDy70ht4F/3kkqUFKGYMUBg=;
- b=U72OCXyf67t7JfRV8AbRkJXYlsdykn0zqpftJVV2BHcSWMChPtYJZ+ZtIRyuSuK1Pu
- j5c3TD06fadxvDCjlW+AsbTzC9VF5A2U8zMmrJ45crKuRWjgnhW7xTdLBltqgr2JZj7y
- udnt5Hpthc6I5vfEGPt2tvvfOLhcfb8KaW2DdeqEWgQUSd5cOfLoaUQjwejB5BkC+Net
- 83JC5lRkKpd/V7UHzQYQeHyY5nAW/u5EonwbHzk2Pj8nD/Yf8xUvfa9EF929WDHHNBjp
- dmK0u+Xsxb4auAregukvkwnShSE39EmsZqOw0ICsExfnA2/7dloXyH6J17rA/Gbr6LGP
- hIIQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785435602; x=1786040402;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=ZXZbQkwGxp+BHj+7kwSHsDy70ht4F/3kkqUFKGYMUBg=;
- b=Ukw5IqDtbgK/FBaB4Bqgsk7eI+5N3e68gyjsZ5rf2XFZqEbdt25Fq+XF8zISd3FwSa
- luzIS6iG0GUmXFnm7TfT0jXpBNuw7D3l2mFbSQduiCDO5iCjuz4qiMMOBHUoB5e1eqJr
- fjefDFZO/WOxaDQkdN4peQbtA77X7MsGs2z2wRFfGAqULLqS/8zQHImmdzQjfM8dp6sd
- 8jbHYt67GhiAbZTEbeDPRwdtYWD1Kgs0k6lEmxc1nf0WTWjZf4Yp6Sf/7lsfhohAarRv
- eKgrDzqy73WQqIXjIHCb+9JCqtlXCva+EAENlYYd7B5Ie4b13u11JNmY6BS1qnoiGbMy
- rSxg==
-X-Gm-Message-State: AOJu0Yx7KIfhxXpovL6wpv2WCqWyigv+GrmhRG9ZdEMj+wdJwjGasTQW
- OnKIoJAjXIcv+15JM1BbfdyKiL4t2EKBb/kK1i9mCyC0MnYNRn4WmcZe
-X-Gm-Gg: AR+sD13GWDEXmO2f5HYjenSyE6B6VWf1u1uJWR24LJN14Nmzegipn86TXsB82o21Yhf
- tFfXsesaobuo2fAFnLMIdjP8RzVgQjK1OCvOlJ9UAeeEGExd/9JB2evm0yQWAXThmyw2OaProOs
- pVxxBzo8iGI8OrTQ5h2FDQzOCf3Rj1qjmBPkW7t8IC3TWrkeVeX2mibOwlLZ4PgMC/2LSvba7SO
- NsBvua6G1lb8WSUYPLZRkvcAPNUuckJepuIXj9fnoyhbnHTLTeN2stDInx5thAwt1as1ipKMfd7
- A01UIxvEGvb/iZFFJj9pmxQIcn3KC9UiWChfpLdi9Pe5w3yxYPHCOwhM81WHiV2d/25Wc0WKWZr
- oSaSUhiitnte3lopNR1Hv8Jx81XOp657PRU7NDPImrCTIr+u+o49V3NatdV/u44aUa6QxnhO0/b
- l4w5qmw98CZH338axvMy/5AblJ1oo0UfTM77dX4xeiGhHiiny2PpfTujQdqlK1NZiiS3C9b+2ht
- 7sESc8YsOo=
-X-Received: by 2002:a05:600c:8484:b0:492:45a0:dcef with SMTP id
- 5b1f17b1804b1-49804c154d7mr23109405e9.5.1785435602219; 
- Thu, 30 Jul 2026 11:20:02 -0700 (PDT)
-Received: from 5520-BMRXQ93.eg.si-vision.com ([102.186.12.84])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4980562b4c7sm4387355e9.0.2026.07.30.11.20.00
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 30 Jul 2026 11:20:01 -0700 (PDT)
-From: A-Shehab <ahshehab24@gmail.com>
+ d=linux.alibaba.com; s=default;
+ t=1785470173; h=From:To:Subject:Date:Message-Id:MIME-Version;
+ bh=q8r2wtLQFHdzEHI/kxOb7YyAqow/IMbUFtZQEKGwFVE=;
+ b=Ol8nH/n3vN4nI4VMz42JT2Mv99MqfVCLSwyDX3L/xtZXAZZ9agD/L6pAgwTaVVo+trVS0HZP6c081rHPHdQjzMnWehMXTXpTBU8FdNvBA8eUYgGX1Q3KD79b7rdStPDDO8LL/LahmnO2WtOWYbPgcvA6hXUZPWYlW45jjKDZkrU=
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R121e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033045098064;
+ MF=blduan@linux.alibaba.com; NM=1; PH=DS; RN=7; SR=0;
+ TI=SMTPD_---0X86jwW8_1785469861; 
+Received: from ea134-sw16.eng.xrvm.cn(mailfrom:blduan@linux.alibaba.com
+ fp:SMTPD_---0X86jwW8_1785469861 cluster:ay36) by smtp.aliyun-inc.com;
+ Fri, 31 Jul 2026 11:51:02 +0800
+From: Baolong Duan <blduan@linux.alibaba.com>
 To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, Max Chou <max.chou@sifive.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu@processmission.com>, A-Shehab <ahshehab24@gmail.com>
-Subject: [PATCH] target/riscv: Fix PC sync in trans_sspopchk for CFI exception
- handling
-Date: Thu, 30 Jul 2026 21:18:52 +0300
-Message-ID: <20260730181852.1622-1-ahshehab24@gmail.com>
-X-Mailer: git-send-email 2.53.0
+Cc: qemu-riscv@nongnu.org, alistair23@gmail.com, dbarboza@ventanamicro.com,
+ cxx194832@alibaba-inc.com, zengxiangyi.zxy@alibaba-inc.com,
+ Baolong Duan <blduan@linux.alibaba.com>
+Subject: [RFC PATCH v1 14/17] accel/kvm: skip MSI route updates for a CoVE
+ guest
+Date: Fri, 31 Jul 2026 11:50:08 +0800
+Message-Id: <20260731035011.4178103-15-blduan@linux.alibaba.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20260731035011.4178103-1-blduan@linux.alibaba.com>
+References: <20260731035011.4178103-1-blduan@linux.alibaba.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32e;
- envelope-from=ahshehab24@gmail.com; helo=mail-wm1-x32e.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.112 (deferred)
+Received-SPF: pass client-ip=115.124.30.112;
+ envelope-from=blduan@linux.alibaba.com;
+ helo=out30-112.freemail.mail.aliyun.com
+X-Spam_score_int: -166
+X-Spam_score: -16.7
+X-Spam_bar: ----------------
+X-Spam_report: (-16.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
+ RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001, USER_IN_DEF_DKIM_WL=-7.5,
+ USER_IN_DEF_SPF_WL=-7.5 autolearn=no autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Fri, 31 Jul 2026 01:57:07 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -105,68 +72,37 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Max Chou <max.chou@sifive.com>
+A CoVE guest has no in-kernel APLIC, so there is no MSI route for KVM to
+update and KVM_SET_GSI_ROUTING fails.
 
-Move gen_update_pc call before conditional logic to ensure consistent
-PC state regardless of execution path.
+This is a workaround: the accelerator should rather be told that GSI
+routing is unavailable than have CoVE special cased here.
 
-Previously, the host instructions generated to update the cpu_pc were
-only executed in the failure path when shadow stack validation failed.
-This created inconsistent PC synchronization.
-
-This inconsistency caused issues in CF_PCREL mode where subsequent
-instructions calculated wrong relative offsets from stale pc_save
-values, and could lead to incorrect exception return addresses.
-
-This fix ensures PC is always synchronized before any helper that
-might raise an exception, maintaining consistent translator state
-across all execution paths.
-
-Resolves: https://gitlab.com/qemu-project/qemu/-/issues/4118
-Signed-off-by: Max Chou <max.chou@sifive.com>
-[ahshehab: rebased on current master; file moved to
- target/riscv/tcg/insn_trans/ and the ssp load is now 64-bit wide]
-Tested-by: A-Shehab <ahshehab24@gmail.com>
-Signed-off-by: A-Shehab <ahshehab24@gmail.com>
+Signed-off-by: Baolong Duan <blduan@linux.alibaba.com>
 ---
-This is a repost of Max Chou's patch from 2025-11-05 [1], which did not
-receive any review. Rebased onto current master: the file moved to
-target/riscv/tcg/insn_trans/ and the ssp load is now a 64-bit load, so
-the original patch no longer applies.
+ accel/kvm/kvm-all.c | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-I opened a GitLab issue (#4118) with a minimal, self-contained bare-metal
-reproducer for this bug. It runs an sspopchk that matches the shadow stack
-(the common case) followed by an auipc in the same translation block; on
-current master the auipc returns an address 4 bytes too low (exit 42) and
-with this patch it is correct (exit 0). The reproducer is included in the
-issue.
-
-[1] https://lore.kernel.org/qemu-devel/20251105134331.2865581-1-max.chou@sifive.com/
-
- target/riscv/tcg/insn_trans/trans_rvzicfiss.c.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/target/riscv/tcg/insn_trans/trans_rvzicfiss.c.inc b/target/riscv/tcg/insn_trans/trans_rvzicfiss.c.inc
-index a813232887..d47a9f9c7d 100644
---- a/target/riscv/tcg/insn_trans/trans_rvzicfiss.c.inc
-+++ b/target/riscv/tcg/insn_trans/trans_rvzicfiss.c.inc
-@@ -32,6 +32,7 @@ static bool trans_sspopchk(DisasContext *ctx, arg_sspopchk *a)
-     TCGLabel *skip = gen_new_label();
-     uint32_t tmp = (get_xl(ctx) == MXL_RV64) ? 8 : 4;
-     TCGv data = tcg_temp_new();
-+    gen_update_pc(ctx, 0);
-     TCGv_i64 wide_addr = tcg_temp_new_i64();
-     tcg_gen_ld_i64(wide_addr, tcg_env, offsetof(CPURISCVState, ssp));
-     tcg_gen_trunc_i64_tl(addr, wide_addr);
-@@ -42,7 +43,6 @@ static bool trans_sspopchk(DisasContext *ctx, arg_sspopchk *a)
-     tcg_gen_brcond_tl(TCG_COND_EQ, data, rs1, skip);
-     tcg_gen_st8_i32(tcg_constant_i32(RISCV_EXCP_SW_CHECK_BCFI_TVAL),
-                     tcg_env, offsetof(CPURISCVState, sw_check_code));
--    gen_update_pc(ctx, 0);
-     gen_helper_raise_exception(tcg_env,
-                   tcg_constant_i32(RISCV_EXCP_SW_CHECK));
-     gen_set_label(skip);
+diff --git a/accel/kvm/kvm-all.c b/accel/kvm/kvm-all.c
+index 2753bf8b8b..aaaa88bd2b 100644
+--- a/accel/kvm/kvm-all.c
++++ b/accel/kvm/kvm-all.c
+@@ -2448,6 +2448,14 @@ int kvm_irqchip_update_msi_route(KVMState *s, int virq, MSIMessage msg,
+ {
+     struct kvm_irq_routing_entry kroute = {};
+ 
++    /*
++     * A CoVE guest has no in-kernel APLIC, so there is no MSI route for KVM
++     * to update.
++     */
++    if (riscv_cove_vm_active()) {
++        return 0;
++    }
++
+     if (kvm_gsi_direct_mapping()) {
+         return 0;
+     }
 -- 
-2.53.0
+2.34.1
 
 
