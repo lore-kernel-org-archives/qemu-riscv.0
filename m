@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52161C55172
-	for <qemu-riscv@archiver.kernel.org>; Sat,  1 Aug 2026 19:31:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04C13C55177
+	for <qemu-riscv@archiver.kernel.org>; Sat,  1 Aug 2026 19:31:40 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wqFPi-0002sv-Gw; Sat, 01 Aug 2026 15:30:30 -0400
+	id 1wqFPp-0002uM-8T; Sat, 01 Aug 2026 15:30:37 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <flamboyant.h.01@gmail.com>)
- id 1wqFPg-0002sO-FB
- for qemu-riscv@nongnu.org; Sat, 01 Aug 2026 15:30:28 -0400
-Received: from mail-pj1-x1034.google.com ([2607:f8b0:4864:20::1034])
+ id 1wqFPm-0002ts-U5
+ for qemu-riscv@nongnu.org; Sat, 01 Aug 2026 15:30:35 -0400
+Received: from mail-pj1-x1035.google.com ([2607:f8b0:4864:20::1035])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <flamboyant.h.01@gmail.com>)
- id 1wqFPe-0002I7-96
- for qemu-riscv@nongnu.org; Sat, 01 Aug 2026 15:30:28 -0400
-Received: by mail-pj1-x1034.google.com with SMTP id
- 98e67ed59e1d1-384930ca5e2so1882692a91.3
- for <qemu-riscv@nongnu.org>; Sat, 01 Aug 2026 12:30:25 -0700 (PDT)
+ id 1wqFPj-0002Ia-LL
+ for qemu-riscv@nongnu.org; Sat, 01 Aug 2026 15:30:34 -0400
+Received: by mail-pj1-x1035.google.com with SMTP id
+ 98e67ed59e1d1-3810c5d691bso1876862a91.1
+ for <qemu-riscv@nongnu.org>; Sat, 01 Aug 2026 12:30:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1785612625; x=1786217425; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1785612630; x=1786217430; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=rictVP0n1BHRIjGHJIrYt/EJeZRqsVqeFgYRbXHONws=;
- b=bFMF0mS4ghSkvXat1MTYTWL1JikSgMPbtm7SIGRGO7rQm6iw6ad9ZyI8RH7ilzkg2m
- AtyDcTVIJUlnS73iV7v4Ma+dt1HI0QsANaixaQYSbUPh3Vx98LVfsFnP4YMYIn2fsxh+
- LtYW+ACgFoCC6AI2hrK3CVsIVPtRySHD/Z9/A7fLv8kDUdbfNSBSnWCZBf8Lx9fpwELj
- z/tDxVvdvurxG0IJrLbPaqwELQ4Q2ITba/ZyxVBDa5FG1IN0s94r4p6qabzKNYOfBOeZ
- n/OIPdZ6MV/BR0deqpEfC0tP25WaDq/uijnZYaVdseUb8eTt/wStjN4uRKoDo8fXBdLi
- QC9w==
+ bh=6uYe5cvZN/4TkFYhyZc1NlhPmRAYtJ/eQoSiPr3av+M=;
+ b=s8GKbo8JxF3ISjrwHjcz0Hy2JgoBw3yhZUr5+4BkACC32YNYDRqPufDTIJx6/E7Ixf
+ IlAEWmpADyMIPlFTu8IWlVF/amSh/0blANmEupldjLqmtvXg6iYpXx9BsE3GQ3zZyugA
+ SVRPuLc5lEozhDSom+HmsHPUZ0bGknmU5dJI+UnCvtptH3YiLZ6TTA0A3dEi4GHRi0oA
+ ryNXeI72+R1ypLNqreG0UPhQxUqT3ZHBjJnVzYcgvDzF0KWo+JvpP1uwN68peuOBj/4P
+ u0Ac/M0eaDSKFbDduPshwKDFMsBvO9anipuavSogJEXXx/X95FyDx8AuUfM0unEJ3Tsj
+ FWhw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785612625; x=1786217425;
+ d=1e100.net; s=20251104; t=1785612630; x=1786217430;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=rictVP0n1BHRIjGHJIrYt/EJeZRqsVqeFgYRbXHONws=;
- b=QLuKL7Z2ztu6NLo/Isnpd5BgQZRdgJR4YxF0dt+VDooOboag77Q/f2c0m5Tzb+hBSC
- IsZnvZaX0sC3ycdwgkqpS6oBL3dLL44e3oVTzv0Oq2wQLupif6tcybUCQIFGzyuIyOab
- 9SZzz/1/ldh1h7upx0CnE/w09hpd9yduTIbMtumqmKRoHMDFfv8eJcfy7TpJdrp60To9
- CPHU0/CZvg5pQmu2hObcHrXqKI2NRNSlOKmc95Ix8U5w0wEI3xhfWxfXaDcP9ZCNKEjq
- TFdcCCIgU/g04EMCcBElp90/oH5/4ZODdnGChBtP9yI9vw/b+JWSSZiZT8xiSXdGbcQ9
- YHtg==
-X-Gm-Message-State: AOJu0YwmwM1ozFX+haogHZdfONFP+z2pMaYH6jhI6k9gKkJuBvLlK0Zf
- zkKLrwFg7O+iRRlYXFZy0gl9r78Izdjm87ujDhRe4Lgn67bmN/Nmbuc3
-X-Gm-Gg: AR+sD12QwkFZcWsDoL3r3yJfna3KzeDB/cd4PLwI06rq7+YcDZNnMA3F/Amz4hvfvI0
- WUuP5TCsDHLxu0Rd3ZWr0hz9ELb3F07vZdF/xOLZUzs03LcU/jaeex1QZQPZuL7CPNXD+7QxplJ
- PxTJN2PAVUZg8RhMU1LdrQmGbzuE2ami73cZ0s5afkPZa+ivBCwWvRhWcRbEFx54WNkwJ4u2X/z
- 4b61UHUW8V0D5NJhgztFY7BmUr7NR/Ev+r9fOSpuSSvcWOwIzpZ0s2BBiiWvaNLfR43fZ9xU91O
- faTn68Z4WiKUyWtdLKNl2xUrLJyIydF8icwU3IkFVB/6DtQU+DaRNUS4xmkZX3/wREov8nbVP8I
- XdZyG2J3iX6z1XZ9z49RZb+cfQ+1dW6MoQzZ0Dt6Y96oM96AKj4j+mndG3KmwFOvoxa3fVppIWo
- mxTC7TVzDXEboJWKhWioEHI2fLat7OYWoJpPcyPnfU7DtuXZOcp39hrkiNV6zcU84NeA7b0oSDa
- fW2/b08m24aS4riSDR/
-X-Received: by 2002:a17:90b:3851:b0:38e:dc4:3f64 with SMTP id
- 98e67ed59e1d1-38fbc52da42mr3876668a91.38.1785612624855; 
- Sat, 01 Aug 2026 12:30:24 -0700 (PDT)
+ bh=6uYe5cvZN/4TkFYhyZc1NlhPmRAYtJ/eQoSiPr3av+M=;
+ b=YFT/Z55DrarhHrSB1Pt2OzoX0e56DFwTlQ7Y4ouEt2peUZFyn0KhqelAw78FLn20Il
+ ehD8I7sIRWOY03n+MajrKVa+wYkBrvMZXeNsTs9ywI/B0s4rGd5VJFuQaBbiibqAE9sk
+ y7XgpLAzXR+Izj+t5UsY7ZCnV+x/1xkSLDv9IW2YAWwwZVK1SURdxbx5cy2wVlOlFR+o
+ qeIS7hwCIazq39P0X7Xy+UGZBPbcB65i+RF0z/70jvtRmfdFbUadiEOYwefW0GDmALFC
+ zFhaW+mo6BzUdJjNP2GLDBf7sPLkdMvQ/YPyBVeC4INSmNjxVhOT+lCrVN7s23sCONc6
+ TWLA==
+X-Gm-Message-State: AOJu0Yx4VpTU3MRV0uRZ7h3Ki+iMORwlUzwDcKQLuC2bTIUWabs4MvEz
+ HSdU6li7w959DesHilcGHwKdSEB//yFJTxcbGu7dwkFc3TfWKFDXDW9n
+X-Gm-Gg: AR+sD13uilO8YmKy9TIY3Oqitu2V1oppFKwollTQuoGEGMX7A6L5ncS6rhmdc60vGoa
+ qCiL9TOYqDUNdHLG85jiGqBxDctLqal5yVsH6qN9UU5khfMKz7F2TdcJOfkRsLsGK+WzXujqetW
+ j+tbmu4ckcSlgk8/aQGHUXrm8dTRFf6qNVn45PNzFsMng9/W30OjHNrmq3h4RKILrQXg/juvJai
+ 0TFq48U8LSm2lanDLt0YDGa3M2y005hTwZJf7CGVP6c8L1lFq8T7vGbm7ms+9jZcK+wQsUNqLZ0
+ EQuKb4DZxTdqbyQp1nRF5SObnYBj5aVk1V7HX9p6x8rg+YUDYUPG7ZT/cUyXRRabV3cD0EnAe1k
+ pzuMny9LoW5fZQMiH4Y7TrGWdb3fMUMH0KaSAeMseTatcDChuWM4VpPIjsrpvf/08f4xUyHoP4O
+ HzQtgmPqKvRPOl6sncrTdwpuEx96TZ2CBvkOFkX8t62ONiAnMNoIjTkjAE3tUyEx3MR0IR4a2lF
+ oaiMC+URA==
+X-Received: by 2002:a17:90b:4b45:b0:36d:9e0b:3801 with SMTP id
+ 98e67ed59e1d1-38fbc40905dmr4275738a91.8.1785612629986; 
+ Sat, 01 Aug 2026 12:30:29 -0700 (PDT)
 Received: from localhost.localdomain ([111.198.227.173])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-38fb2bac654sm2148766a91.10.2026.08.01.12.30.20
+ 98e67ed59e1d1-38fb2bac654sm2148766a91.10.2026.08.01.12.30.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 01 Aug 2026 12:30:24 -0700 (PDT)
+ Sat, 01 Aug 2026 12:30:28 -0700 (PDT)
 From: Kangjie Huang <flamboyant.h.01@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, Bin Meng <bmeng.cn@gmail.com>,
@@ -78,16 +78,16 @@ Cc: qemu-riscv@nongnu.org, Bin Meng <bmeng.cn@gmail.com>,
  Paolo Bonzini <pbonzini@redhat.com>, Fabiano Rosas <farosas@suse.de>,
  Laurent Vivier <lvivier@redhat.com>,
  Kangjie Huang <flamboyant.h.01@gmail.com>
-Subject: [PATCH v2 2/5] hw/ssi: Add DesignWare SSI standard interrupt support
-Date: Sun,  2 Aug 2026 03:28:45 +0800
-Message-ID: <20260801192848.30606-3-flamboyant.h.01@gmail.com>
+Subject: [PATCH v2 3/5] hw/riscv/k230: Instantiate DesignWare SSI controllers
+Date: Sun,  2 Aug 2026 03:28:46 +0800
+Message-ID: <20260801192848.30606-4-flamboyant.h.01@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260801192848.30606-1-flamboyant.h.01@gmail.com>
 References: <20260801192848.30606-1-flamboyant.h.01@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1034;
- envelope-from=flamboyant.h.01@gmail.com; helo=mail-pj1-x1034.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1035;
+ envelope-from=flamboyant.h.01@gmail.com; helo=mail-pj1-x1035.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -111,377 +111,701 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Implement raw and masked SSI interrupt status, threshold interrupts, and
-the documented read-clear registers.
+Instantiate the three DesignWare SSI profiles used by K230 and map their
+controller MMIO regions at the documented addresses.
 
-TXE and RXF are derived from FIFO levels. TXO, RXO, and RXU are latched
-causes. Expose the nine physical interrupt outputs used by the K230 SSI
-integration.
+Configure the QSPI0, QSPI1, and SPI-OPI instances with their chip-select,
+FIFO-depth, and interrupt-mask reset profiles.
 
-TXU, DONE, and AXIE depend on transfer engines outside the Standard PIO
-scope and remain deasserted in this model.
+Add K230 SSI qtests for Standard PIO transfers, register masks, FIFO
+behaviour, interrupt state, unsupported-register semantics, and reset
+profiles. K230 is used as the hardware carrier for the generic controller
+tests; PLIC routing is added by the next patch.
 
 Signed-off-by: Kangjie Huang <flamboyant.h.01@gmail.com>
 ---
- hw/ssi/dw_ssi.c         | 129 +++++++++++++++++++++++++++++++++++++++-
- include/hw/ssi/dw_ssi.h |  18 +++++-
- 2 files changed, 145 insertions(+), 2 deletions(-)
+ docs/system/riscv/k230.rst     |   1 +
+ hw/riscv/Kconfig               |   1 +
+ hw/riscv/k230.c                |  79 ++++--
+ include/hw/riscv/k230.h        |   2 +
+ tests/qtest/k230-dw-ssi-test.c | 469 +++++++++++++++++++++++++++++++++
+ tests/qtest/meson.build        |   4 +-
+ 6 files changed, 540 insertions(+), 16 deletions(-)
+ create mode 100644 tests/qtest/k230-dw-ssi-test.c
 
-diff --git a/hw/ssi/dw_ssi.c b/hw/ssi/dw_ssi.c
-index f9f0e23730..57bca1687b 100644
---- a/hw/ssi/dw_ssi.c
-+++ b/hw/ssi/dw_ssi.c
-@@ -6,7 +6,7 @@
-  * SPDX-License-Identifier: GPL-2.0-or-later
-  *
-  * Emulates the DesignWare SSI controller in Standard SPI mode,
-- * covering the PIO/FIFO data path and chip selects.
-+ * covering the PIO/FIFO data path, interrupt outputs and chip selects.
-  */
+diff --git a/docs/system/riscv/k230.rst b/docs/system/riscv/k230.rst
+index cea8202e55..7a49cac95b 100644
+--- a/docs/system/riscv/k230.rst
++++ b/docs/system/riscv/k230.rst
+@@ -20,6 +20,7 @@ The ``k230`` machine supports the following devices:
+ * Platform-Level Interrupt Controller (PLIC)
+ * 2 K230 Watchdog Timer
+ * 5 UART
++* 3 K230 SSI controllers for SPI only
  
- #include "qemu/osdep.h"
-@@ -26,6 +26,9 @@
- #define DW_SSI_IDR_RESET               0xa1b2c3d5
- #define DW_SSI_VERSION                 0x3130332a
- #define DW_SSI_PIO_TX_BATCH            64
-+#define DW_SSI_IRQ_VALID_MASK          0x000009bf
-+#define DW_SSI_IMPLEMENTED_LATCHED_IRQ_MASK \
-+    (R_RISR_TXOIR_MASK | R_RISR_RXOIR_MASK | R_RISR_RXUIR_MASK)
+ Boot options
+ ------------
+diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
+index de37c08cae..60a260691c 100644
+--- a/hw/riscv/Kconfig
++++ b/hw/riscv/Kconfig
+@@ -162,3 +162,4 @@ config K230
+     select SERIAL_MM
+     select UNIMP
+     select K230_WDT
++    select DW_SSI
+diff --git a/hw/riscv/k230.c b/hw/riscv/k230.c
+index 656f28190c..4c321002cd 100644
+--- a/hw/riscv/k230.c
++++ b/hw/riscv/k230.c
+@@ -21,7 +21,9 @@
+ #include "system/device_tree.h"
+ #include "system/system.h"
+ #include "system/memory.h"
++#include "system/blockdev.h"
+ #include "target/riscv/cpu.h"
++#include "hw/block/flash.h"
+ #include "hw/core/loader.h"
+ #include "hw/core/sysbus.h"
+ #include "hw/riscv/k230.h"
+@@ -102,6 +104,40 @@ static const MemMapEntry memmap[] = {
+     [K230_DEV_CLINT] =        { 0xF04000000, 0x00400000 },
+ };
  
- enum {
-     DW_SSI_TMOD_TR,
-@@ -217,6 +220,22 @@ REG32(XIP_WRITE_CTRL, 0x148)
- #define DW_SSI_RX_SAMPLE_DELAY_WRITABLE_MASK \
-     (R_RX_SAMPLE_DELAY_RSD_MASK | R_RX_SAMPLE_DELAY_SE_MASK)
- 
-+/*
-+ * TXU, DONE and AXIE depend on transfer engines outside Standard PIO.
-+ * Their physical outputs are exposed but remain deasserted in this model.
-+ */
-+static const uint32_t dw_ssi_irq_status_mask[DW_SSI_IRQ_COUNT] = {
-+    [DW_SSI_IRQ_TXE] = R_RISR_TXEIR_MASK,
-+    [DW_SSI_IRQ_TXO] = R_RISR_TXOIR_MASK,
-+    [DW_SSI_IRQ_RXF] = R_RISR_RXFIR_MASK,
-+    [DW_SSI_IRQ_RXO] = R_RISR_RXOIR_MASK,
-+    [DW_SSI_IRQ_TXU] = R_RISR_TXUIR_MASK,
-+    [DW_SSI_IRQ_RXU] = R_RISR_RXUIR_MASK,
-+    [DW_SSI_IRQ_MST] = R_RISR_MSTIR_MASK,
-+    [DW_SSI_IRQ_DONE] = R_RISR_DONER_MASK,
-+    [DW_SSI_IRQ_AXIE] = R_RISR_AXIER_MASK,
++typedef struct K230DwSsiProfile {
++    uint32_t num_cs;
++    uint32_t fifo_depth;
++    uint32_t imr_reset;
++} K230DwSsiProfile;
++
++static const K230DwSsiProfile k230_dw_ssi_profiles[] = {
++    [0] = { /* QSPI0, SDK spi1 */
++        .num_cs = 5,
++        .fifo_depth = 256,
++        .imr_reset = 0x0000001f,
++    },
++    [1] = { /* QSPI1, SDK spi2 */
++        .num_cs = 5,
++        .fifo_depth = 256,
++        .imr_reset = 0x0000001f,
++    },
++    [2] = { /* SPI-OPI/FMC, SDK spi0 */
++        .num_cs = 1,
++        .fifo_depth = 256,
++        .imr_reset = 0x0000003f,
++    },
 +};
 +
- static bool dw_ssi_validate_config(DwSsiState *s, Error **errp)
++static void k230_configure_dw_ssi(DwSsiState *ssi,
++                                  const K230DwSsiProfile *profile)
++{
++    DeviceState *dev = DEVICE(ssi);
++
++    qdev_prop_set_uint32(dev, "num-cs", profile->num_cs);
++    qdev_prop_set_uint32(dev, "fifo-depth", profile->fifo_depth);
++    qdev_prop_set_uint32(dev, "imr-reset", profile->imr_reset);
++}
++
+ static void k230_soc_init(Object *obj)
  {
-     DeviceState *dev = DEVICE(s);
-@@ -253,6 +272,45 @@ static void dw_ssi_write_masked(DwSsiState *s, unsigned int reg,
-     s->regs[reg] = (s->regs[reg] & ~mask) | (value & mask);
+     K230SoCState *s = RISCV_K230_SOC(obj);
+@@ -110,6 +146,12 @@ static void k230_soc_init(Object *obj)
+     object_initialize_child(obj, "c908-cpu", cpu0, TYPE_RISCV_HART_ARRAY);
+     object_initialize_child(obj, "k230-wdt0", &s->wdt[0], TYPE_K230_WDT);
+     object_initialize_child(obj, "k230-wdt1", &s->wdt[1], TYPE_K230_WDT);
++    object_initialize_child(obj, "k230-qspi0", &s->dw_ssi[0],
++                            TYPE_DW_SSI);
++    object_initialize_child(obj, "k230-qspi1", &s->dw_ssi[1],
++                            TYPE_DW_SSI);
++    object_initialize_child(obj, "k230-spi-opi", &s->dw_ssi[2],
++                            TYPE_DW_SSI);
+ 
+     qdev_prop_set_uint32(DEVICE(cpu0), "hartid-base", 0);
+     qdev_prop_set_string(DEVICE(cpu0), "cpu-type", TYPE_RISCV_CPU_THEAD_C908);
+@@ -198,6 +240,13 @@ static void k230_soc_realize(DeviceState *dev, Error **errp)
+         }
+     }
+ 
++    for (int i = 0; i < ARRAY_SIZE(s->dw_ssi); i++) {
++        k230_configure_dw_ssi(&s->dw_ssi[i], &k230_dw_ssi_profiles[i]);
++        if (!sysbus_realize(SYS_BUS_DEVICE(&s->dw_ssi[i]), errp)) {
++            return;
++        }
++    }
++
+     sysbus_mmio_map(SYS_BUS_DEVICE(&s->wdt[0]), 0, memmap[K230_DEV_WDT0].base);
+     sysbus_connect_irq(SYS_BUS_DEVICE(&s->wdt[0]), 0,
+                        qdev_get_gpio_in(DEVICE(s->c908_plic), K230_WDT0_IRQ));
+@@ -206,6 +255,20 @@ static void k230_soc_realize(DeviceState *dev, Error **errp)
+     sysbus_connect_irq(SYS_BUS_DEVICE(&s->wdt[1]), 0,
+                        qdev_get_gpio_in(DEVICE(s->c908_plic), K230_WDT1_IRQ));
+ 
++    sysbus_mmio_map(SYS_BUS_DEVICE(&s->dw_ssi[0]), 0,
++                    memmap[K230_DEV_QSPI0].base);
++    sysbus_mmio_map(SYS_BUS_DEVICE(&s->dw_ssi[1]), 0,
++                    memmap[K230_DEV_QSPI1].base);
++    sysbus_mmio_map(SYS_BUS_DEVICE(&s->dw_ssi[2]), 0,
++                    memmap[K230_DEV_SPI].base);
++
++    create_unimplemented_device("spi-flash-xip",
++                                memmap[K230_DEV_FLASH].base,
++                                memmap[K230_DEV_FLASH].size);
++
++    create_unimplemented_device("hi_sys", memmap[K230_DEV_HI_SYS_CFG].base,
++                                memmap[K230_DEV_HI_SYS_CFG].size);
++
+     /* unimplemented devices */
+     create_unimplemented_device("kpu.l2-cache",
+                                 memmap[K230_DEV_KPU_L2_CACHE].base,
+@@ -349,23 +412,8 @@ static void k230_soc_realize(DeviceState *dev, Error **errp)
+     create_unimplemented_device("sd1", memmap[K230_DEV_SD1].base,
+                                 memmap[K230_DEV_SD1].size);
+ 
+-    create_unimplemented_device("qspi0", memmap[K230_DEV_QSPI0].base,
+-                                memmap[K230_DEV_QSPI0].size);
+-
+-    create_unimplemented_device("qspi1", memmap[K230_DEV_QSPI1].base,
+-                                memmap[K230_DEV_QSPI1].size);
+-
+-    create_unimplemented_device("spi", memmap[K230_DEV_SPI].base,
+-                                memmap[K230_DEV_SPI].size);
+-
+-    create_unimplemented_device("hi_sys_cfg", memmap[K230_DEV_HI_SYS_CFG].base,
+-                                memmap[K230_DEV_HI_SYS_CFG].size);
+-
+     create_unimplemented_device("ddrc_cfg", memmap[K230_DEV_DDRC_CFG].base,
+                                 memmap[K230_DEV_DDRC_CFG].size);
+-
+-    create_unimplemented_device("flash", memmap[K230_DEV_FLASH].base,
+-                                memmap[K230_DEV_FLASH].size);
  }
  
-+static uint32_t dw_ssi_irq_raw_status(DwSsiState *s)
-+{
-+    uint32_t status = s->irq_latched;
-+    uint32_t tx_used = fifo32_num_used(&s->tx_fifo);
-+    uint32_t rx_used = fifo32_num_used(&s->rx_fifo);
-+    uint32_t tx_threshold =
-+        FIELD_EX32(s->regs[R_TXFTLR], TXFTLR, TFT);
-+    uint32_t rx_threshold =
-+        FIELD_EX32(s->regs[R_RXFTLR], RXFTLR, RFT);
+ static void k230_soc_class_init(ObjectClass *oc, const void *data)
+@@ -511,6 +559,7 @@ static void k230_machine_class_init(ObjectClass *oc, const void *data)
+     mc->default_cpus = 1;
+     mc->default_ram_id = "riscv.K230.ram"; /* DDR */
+     mc->default_ram_size = memmap[K230_DEV_DDRC].size;
 +
-+    if (tx_used <= tx_threshold) {
-+        status |= R_RISR_TXEIR_MASK;
-+    }
-+    if (rx_used > rx_threshold) {
-+        status |= R_RISR_RXFIR_MASK;
-+    }
-+    return status & DW_SSI_IRQ_VALID_MASK;
+ }
+ 
+ static const TypeInfo k230_machine_typeinfo = {
+diff --git a/include/hw/riscv/k230.h b/include/hw/riscv/k230.h
+index 592e1c26bf..99996a93b1 100644
+--- a/include/hw/riscv/k230.h
++++ b/include/hw/riscv/k230.h
+@@ -17,6 +17,7 @@
+ 
+ #include "hw/core/boards.h"
+ #include "hw/riscv/riscv_hart.h"
++#include "hw/ssi/dw_ssi.h"
+ #include "hw/watchdog/k230_wdt.h"
+ 
+ #define C908_CPU_HARTID   (0)
+@@ -33,6 +34,7 @@ typedef struct K230SoCState {
+     RISCVHartArrayState c908_cpu; /* Small core */
+ 
+     K230WdtState wdt[2];
++    DwSsiState dw_ssi[3];
+     MemoryRegion sram;
+     MemoryRegion bootrom;
+ 
+diff --git a/tests/qtest/k230-dw-ssi-test.c b/tests/qtest/k230-dw-ssi-test.c
+new file mode 100644
+index 0000000000..6361c2b5ee
+--- /dev/null
++++ b/tests/qtest/k230-dw-ssi-test.c
+@@ -0,0 +1,469 @@
++/*
++ * QTest for the Kendryte K230 DesignWare SSI
++ *
++ * Copyright (c) 2026 Kangjie Huang <flamboyant.h.01@gmail.com>
++ *
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ */
++
++#include "qemu/osdep.h"
++#include "libqtest.h"
++#include "qemu/bitops.h"
++#include "qemu/units.h"
++
++#define K230_SPI0_BASE          0x91584000ULL
++#define K230_SPI1_BASE          0x91582000ULL
++#define K230_SPI2_BASE          0x91583000ULL
++#define K230_SSI_CTRLR0          0x000
++#define K230_SSI_CTRLR1          0x004
++#define K230_SSI_SSIENR          0x008
++#define K230_SSI_SER             0x010
++#define K230_SSI_BAUDR           0x014
++#define K230_SSI_TXFTLR          0x018
++#define K230_SSI_TXFLR           0x020
++#define K230_SSI_RXFLR           0x024
++#define K230_SSI_SR              0x028
++#define K230_SSI_IMR             0x02c
++#define K230_SSI_ISR             0x030
++#define K230_SSI_RISR            0x034
++#define K230_SSI_RXUICR          0x040
++#define K230_SSI_IDR             0x058
++#define K230_SSI_VERSION_ID      0x05c
++#define K230_SSI_DR0             0x060
++#define K230_SSI_SPI_CTRLR0      0x0f4
++
++#define K230_SSI_CTRLR0_RESET           0x00004007U
++#define K230_SSI_IDR_RESET              0xa1b2c3d5U
++#define K230_SSI_VERSION_RESET          0x3130332aU
++
++#define K230_SSI_CTRLR0_WRITABLE_MASK   0x000f7f1fU
++#define K230_SSI_BAUDR_WRITABLE_MASK    0x0000fffeU
++
++#define K230_SSI_CTRLR0_DFS_MASK        0x1fU
++#define K230_SSI_CTRLR0_TMOD_SHIFT      10
++#define K230_SSI_CTRLR0_SRL             BIT(13)
++#define K230_SSI_TXFTLR_TXFTHR_SHIFT     16
++#define K230_SSI_TMOD_TR                0
++#define K230_SSI_TMOD_TO                1
++#define K230_SSI_TMOD_RO                2
++#define K230_SSI_TMOD_EEPROM_READ       3
++
++#define K230_SSI_SR_BUSY                BIT(0)
++#define K230_SSI_SR_TFNF                BIT(1)
++#define K230_SSI_SR_TFE                 BIT(2)
++#define K230_SSI_SR_RFNE                BIT(3)
++
++#define K230_SSI_INT_TXE                BIT(0)
++#define K230_SSI_INT_TXO                BIT(1)
++#define K230_SSI_INT_RXO                BIT(3)
++#define K230_SSI_INT_RXU                BIT(2)
++
++#define K230_SSI_RXFTLR                 0x01c
++#define K230_SSI_RXOICR                 0x03c
++#define K230_SSI_TXEICR                 0x038
++#define K230_SSI_ICR                    0x048
++#define K230_SSI_DMACR                  0x04c
++#define K230_SSI_XIP_MODE_BITS          0x0fc
++
++#define K230_SSI_FIFO_DEPTH             256
++
++typedef struct K230SsiInstance {
++    uint64_t base;
++    uint32_t num_cs;
++    uint32_t imr_reset;
++} K230SsiInstance;
++
++static const K230SsiInstance k230_ssi_instances[3] = {
++    {
++        .base = K230_SPI0_BASE,
++        .num_cs = 1,
++        .imr_reset = 0x0000003fU,
++    }, {
++        .base = K230_SPI1_BASE,
++        .num_cs = 5,
++        .imr_reset = 0x0000001fU,
++    }, {
++        .base = K230_SPI2_BASE,
++        .num_cs = 5,
++        .imr_reset = 0x0000001fU,
++    },
++};
++
++static QTestState *k230_ssi_start(void)
++{
++    return qtest_init("-machine k230");
 +}
 +
-+static void dw_ssi_update_irq(DwSsiState *s)
++static uint32_t k230_ssi_readl(QTestState *qts, uint64_t base,
++                               uint32_t offset)
 +{
-+    uint32_t status = dw_ssi_irq_raw_status(s) &
-+                      s->regs[R_IMR] & DW_SSI_IRQ_VALID_MASK;
-+
-+    for (int i = 0; i < DW_SSI_IRQ_COUNT; i++) {
-+        qemu_set_irq(s->irqs[i], !!(status & dw_ssi_irq_status_mask[i]));
-+    }
++    return qtest_readl(qts, base + offset);
 +}
 +
-+static uint32_t dw_ssi_irq_read_clear(DwSsiState *s,
-+                                            uint32_t clear_mask)
++static void k230_ssi_writel(QTestState *qts, uint64_t base,
++                            uint32_t offset, uint32_t value)
 +{
-+    uint32_t active = s->irq_latched & clear_mask;
-+
-+    s->irq_latched &= ~clear_mask;
-+    dw_ssi_update_irq(s);
-+    return !!active;
++    qtest_writel(qts, base + offset, value);
 +}
 +
- static uint32_t dw_ssi_frame_masked(DwSsiState *s)
- {
-     unsigned int bits = FIELD_EX32(s->regs[R_CTRLR0], CTRLR0, DFS) + 1;
-@@ -321,6 +379,7 @@ static void dw_ssi_abort_transfer(DwSsiState *s)
-     fifo32_reset(&s->rx_fifo);
-     s->phase = DW_SSI_PHASE_IDLE;
-     s->remaining_frames = 0;
-+    dw_ssi_update_irq(s);
- }
- 
- static uint32_t dw_ssi_status(DwSsiState *s)
-@@ -348,6 +407,8 @@ static void dw_ssi_push_tx(DwSsiState *s, uint32_t tx)
-     }
- 
-     if (fifo32_is_full(&s->tx_fifo)) {
-+        s->irq_latched |= R_RISR_TXOIR_MASK;
-+        dw_ssi_update_irq(s);
-         return;
-     }
- 
-@@ -356,6 +417,7 @@ static void dw_ssi_push_tx(DwSsiState *s, uint32_t tx)
-     if (s->phase != DW_SSI_PHASE_STANDARD_TX_ONLY) {
-         dw_ssi_run_transfer(s);
-     }
-+    dw_ssi_update_irq(s);
- }
- 
- static uint32_t dw_ssi_send_frame(DwSsiState *s,
-@@ -415,6 +477,7 @@ static void dw_ssi_run_transfer(DwSsiState *s)
-             if (!fifo32_is_full(&s->rx_fifo)) {
-                 fifo32_push(&s->rx_fifo, rx);
-             } else {
-+                s->irq_latched |= R_RISR_RXOIR_MASK;
-                 qemu_log_mask(LOG_GUEST_ERROR,
-                               "%s: RX FIFO full, dropping frame\n",
-                               DEVICE(s)->canonical_path);
-@@ -602,9 +665,11 @@ static uint64_t dw_ssi_read(void *opaque, hwaddr addr, unsigned int size)
-             value = fifo32_pop(&s->rx_fifo) & dw_ssi_frame_masked(s);
-         } else {
-             value = 0;
-+            s->irq_latched |= R_RISR_RXUIR_MASK;
-         }
- 
-         dw_ssi_run_transfer(s);
-+        dw_ssi_update_irq(s);
-         return value;
-     }
- 
-@@ -634,6 +699,7 @@ static uint64_t dw_ssi_read(void *opaque, hwaddr addr, unsigned int size)
-         value = fifo32_num_used(&s->tx_fifo);
-         if (s->phase == DW_SSI_PHASE_STANDARD_TX_ONLY) {
-             dw_ssi_run_transfer(s);
-+            dw_ssi_update_irq(s);
-         }
-         break;
-     case A_RXFLR:
-@@ -643,8 +709,35 @@ static uint64_t dw_ssi_read(void *opaque, hwaddr addr, unsigned int size)
-         value = dw_ssi_status(s);
-         if (s->phase == DW_SSI_PHASE_STANDARD_TX_ONLY) {
-             dw_ssi_run_transfer(s);
-+            dw_ssi_update_irq(s);
-         }
-         break;
-+    case A_ISR:
-+        value = dw_ssi_irq_raw_status(s) & s->regs[R_IMR] &
-+                DW_SSI_IRQ_VALID_MASK;
-+        break;
-+    case A_RISR:
-+        value = dw_ssi_irq_raw_status(s);
-+        break;
-+    case A_TXEICR:
-+        value = dw_ssi_irq_read_clear(
-+            s, R_RISR_TXOIR_MASK | R_RISR_TXUIR_MASK);
-+        break;
-+    case A_RXOICR:
-+        value = dw_ssi_irq_read_clear(s, R_RISR_RXOIR_MASK);
-+        break;
-+    case A_RXUICR:
-+        value = dw_ssi_irq_read_clear(s, R_RISR_RXUIR_MASK);
-+        break;
-+    case A_MSTICR:
-+        value = dw_ssi_irq_read_clear(s, R_RISR_MSTIR_MASK);
-+        break;
-+    case A_ICR:
-+        value = dw_ssi_irq_read_clear(
-+            s, R_RISR_TXOIR_MASK | R_RISR_RXUIR_MASK |
-+               R_RISR_RXOIR_MASK | R_RISR_MSTIR_MASK);
-+        break;
-+
-     default:
-         if (addr >= DW_SSI_REGS_SIZE || (addr & 0x3) != 0) {
-             qemu_log_mask(LOG_GUEST_ERROR,
-@@ -707,6 +800,7 @@ static void dw_ssi_write(void *opaque, hwaddr addr,
- 
-         dw_ssi_update_cs(s);
-         dw_ssi_run_transfer(s);
-+        dw_ssi_update_irq(s);
-         break;
-     }
-     case A_MWCR:
-@@ -730,6 +824,7 @@ static void dw_ssi_write(void *opaque, hwaddr addr,
- 
-         dw_ssi_update_cs(s);
-         dw_ssi_run_transfer(s);
-+        dw_ssi_update_irq(s);
-         break;
-     }
-     case A_BAUDR:
-@@ -749,6 +844,7 @@ static void dw_ssi_write(void *opaque, hwaddr addr,
-         dw_ssi_write_masked(s, R_TXFTLR, value,
-                                  DW_SSI_TXFTLR_WRITABLE_MASK);
-         dw_ssi_run_transfer(s);
-+        dw_ssi_update_irq(s);
-         break;
-     case A_RXFTLR:
-         if (!dw_ssi_fifo_threshold_valid(
-@@ -760,6 +856,7 @@ static void dw_ssi_write(void *opaque, hwaddr addr,
-         }
-         dw_ssi_write_masked(s, R_RXFTLR, value,
-                                  DW_SSI_RXFTLR_WRITABLE_MASK);
-+        dw_ssi_update_irq(s);
-         break;
-     case A_TXFLR:
-     case A_RXFLR:
-@@ -768,6 +865,16 @@ static void dw_ssi_write(void *opaque, hwaddr addr,
-     case A_IMR:
-         dw_ssi_write_masked(s, R_IMR, value,
-                                  DW_SSI_IMR_WRITABLE_MASK);
-+        dw_ssi_update_irq(s);
-+        break;
-+    case A_ISR:
-+    case A_RISR:
-+        break;
-+    case A_TXEICR:
-+    case A_RXOICR:
-+    case A_RXUICR:
-+    case A_MSTICR:
-+    case A_ICR:
-         break;
-     case A_IDR:
-     case A_SSIC_VERSION_ID:
-@@ -807,12 +914,15 @@ static void dw_ssi_enter_reset(Object *obj, ResetType type)
-     fifo32_reset(&s->rx_fifo);
-     s->phase = DW_SSI_PHASE_IDLE;
-     s->remaining_frames = 0;
-+    s->irq_latched = 0;
- 
-     s->regs[R_CTRLR0] = DW_SSI_CTRLR0_RESET;
-     s->regs[R_SR] = DW_SSI_SR_RESET;
-     s->regs[R_IMR] = s->cfg.imr_reset & DW_SSI_IMR_WRITABLE_MASK;
-     s->regs[R_IDR] = DW_SSI_IDR_RESET;
-     s->regs[R_SSIC_VERSION_ID] = DW_SSI_VERSION;
-+
-+    dw_ssi_update_irq(s);
- }
- 
- static void dw_ssi_hold_reset(Object *obj, ResetType type)
-@@ -827,6 +937,13 @@ static void dw_ssi_hold_reset(Object *obj, ResetType type)
-     }
- }
- 
-+static void dw_ssi_exit_reset(Object *obj, ResetType type)
++static void k230_ssi_disable(QTestState *qts, uint64_t base)
 +{
-+    DwSsiState *s = DW_SSI(obj);
-+
-+    dw_ssi_update_irq(s);
++    k230_ssi_writel(qts, base, K230_SSI_SSIENR, 0);
 +}
 +
- static int dw_ssi_post_load(void *opaque, int version_id)
- {
-     DwSsiState *s = opaque;
-@@ -835,6 +952,9 @@ static int dw_ssi_post_load(void *opaque, int version_id)
-     if (s->active_cs < -1 || s->active_cs >= (int)s->cfg.num_cs) {
-         return -EINVAL;
-     }
-+    if (s->irq_latched & ~DW_SSI_IMPLEMENTED_LATCHED_IRQ_MASK) {
-+        return -EINVAL;
-+    }
-     if (s->phase > DW_SSI_PHASE_STANDARD_TR) {
-         return -EINVAL;
-     }
-@@ -859,6 +979,7 @@ static int dw_ssi_post_load(void *opaque, int version_id)
-         qemu_irq_lower(s->cs_lines[s->active_cs]);
-     }
- 
-+    dw_ssi_update_irq(s);
-     return 0;
- }
- 
-@@ -874,6 +995,7 @@ static const VMStateDescription vmstate_dw_ssi = {
-         VMSTATE_UINT32_ARRAY(regs, DwSsiState, DW_SSI_NUM_REGS),
-         VMSTATE_FIFO32(tx_fifo, DwSsiState),
-         VMSTATE_FIFO32(rx_fifo, DwSsiState),
-+        VMSTATE_UINT32(irq_latched, DwSsiState),
-         VMSTATE_UINT32(phase, DwSsiState),
-         VMSTATE_UINT32(remaining_frames, DwSsiState),
-         VMSTATE_INT32(active_cs, DwSsiState),
-@@ -893,6 +1015,10 @@ static void dw_ssi_init(Object *obj)
-                           TYPE_DW_SSI, DW_SSI_MMIO_SIZE);
-     sysbus_init_mmio(sbd, &s->mmio);
- 
-+    for (int i = 0; i < DW_SSI_IRQ_COUNT; i++) {
-+        sysbus_init_irq(sbd, &s->irqs[i]);
++static void k230_ssi_configure(QTestState *qts, uint64_t base,
++                               uint32_t tmod, uint32_t dfs_bits,
++                               uint32_t ndf)
++{
++    uint32_t ctrlr0;
++
++    g_assert_cmpuint(dfs_bits, >=, 4);
++    g_assert_cmpuint(dfs_bits, <=, 32);
++    g_assert_cmpuint(tmod, <=, K230_SSI_TMOD_EEPROM_READ);
++
++    k230_ssi_disable(qts, base);
++    ctrlr0 = (dfs_bits - 1) & K230_SSI_CTRLR0_DFS_MASK;
++    ctrlr0 |= tmod << K230_SSI_CTRLR0_TMOD_SHIFT;
++    k230_ssi_writel(qts, base, K230_SSI_CTRLR0, ctrlr0);
++    k230_ssi_writel(qts, base, K230_SSI_CTRLR1, ndf);
++    k230_ssi_writel(qts, base, K230_SSI_BAUDR, 2);
++}
++
++static void k230_ssi_enable_cs(QTestState *qts, uint64_t base, uint32_t ser)
++{
++    k230_ssi_writel(qts, base, K230_SSI_SER, ser);
++    k230_ssi_writel(qts, base, K230_SSI_SSIENR, 1);
++}
++
++static void k230_ssi_write_frame(QTestState *qts, uint64_t base,
++                                 uint32_t value)
++{
++    k230_ssi_writel(qts, base, K230_SSI_DR0, value);
++}
++
++static uint32_t k230_ssi_read_frame(QTestState *qts, uint64_t base)
++{
++    return k230_ssi_readl(qts, base, K230_SSI_DR0);
++}
++
++static void k230_ssi_wait_mask(QTestState *qts, uint64_t base,
++                               uint32_t offset, uint32_t mask,
++                               uint32_t expected)
++{
++    for (int i = 0; i < 1000; i++) {
++        uint32_t value = k230_ssi_readl(qts, base, offset);
++
++        if ((value & mask) == expected) {
++            return;
++        }
++        qtest_clock_step(qts, 1000);
 +    }
 +
-     s->active_cs = -1;
- }
- 
-@@ -937,6 +1063,7 @@ static void dw_ssi_class_init(ObjectClass *klass, const void *data)
-     device_class_set_props(dc, dw_ssi_properties);
-     rc->phases.enter = dw_ssi_enter_reset;
-     rc->phases.hold = dw_ssi_hold_reset;
-+    rc->phases.exit = dw_ssi_exit_reset;
- }
- 
- static const TypeInfo dw_ssi_info = {
-diff --git a/include/hw/ssi/dw_ssi.h b/include/hw/ssi/dw_ssi.h
-index a74e906ef8..4d4e1fa4c8 100644
---- a/include/hw/ssi/dw_ssi.h
-+++ b/include/hw/ssi/dw_ssi.h
-@@ -6,7 +6,7 @@
-  * SPDX-License-Identifier: GPL-2.0-or-later
-  *
-  * Emulates the DesignWare SSI controller in Standard SPI mode,
-- * covering the PIO/FIFO data path and chip selects.
-+ * covering the PIO/FIFO data path, interrupt outputs and chip selects.
-  */
- 
- #ifndef HW_SSI_DW_SSI_H
-@@ -25,6 +25,20 @@ OBJECT_DECLARE_SIMPLE_TYPE(DwSsiState, DW_SSI)
- #define DW_SSI_NUM_REGS \
-     (DW_SSI_REGS_SIZE / sizeof(uint32_t))
- 
-+/* SSI GPIO output ordering differs from RISR/ISR bit ordering. */
-+typedef enum DwSsiIrq {
-+    DW_SSI_IRQ_TXE,
-+    DW_SSI_IRQ_TXO,
-+    DW_SSI_IRQ_RXF,
-+    DW_SSI_IRQ_RXO,
-+    DW_SSI_IRQ_TXU,
-+    DW_SSI_IRQ_RXU,
-+    DW_SSI_IRQ_MST,
-+    DW_SSI_IRQ_DONE,
-+    DW_SSI_IRQ_AXIE,
-+    DW_SSI_IRQ_COUNT,
-+} DwSsiIrq;
++    g_assert_cmphex(k230_ssi_readl(qts, base, offset) & mask,
++                    ==, expected);
++}
 +
- typedef enum DwSsiPhase {
-     DW_SSI_PHASE_IDLE,
-     DW_SSI_PHASE_STANDARD_TX_ONLY,
-@@ -47,6 +61,7 @@ struct DwSsiState {
-     SSIBus *spi;
++static void configure_loopback(QTestState *qts, uint32_t tmod,
++                               uint32_t ndf)
++{
++    uint32_t ctrlr0;
++
++    k230_ssi_configure(qts, K230_SPI1_BASE, tmod, 8, ndf);
++    ctrlr0 = k230_ssi_readl(qts, K230_SPI1_BASE, K230_SSI_CTRLR0);
++    k230_ssi_writel(qts, K230_SPI1_BASE, K230_SSI_CTRLR0,
++                    ctrlr0 | K230_SSI_CTRLR0_SRL);
++}
++
++static void test_register_contract(void)
++{
++    QTestState *qts = k230_ssi_start();
++
++    for (int i = 0; i < ARRAY_SIZE(k230_ssi_instances); i++) {
++        const K230SsiInstance *inst = &k230_ssi_instances[i];
++
++        g_assert_cmphex(k230_ssi_readl(qts, inst->base, K230_SSI_CTRLR0),
++                        ==, K230_SSI_CTRLR0_RESET);
++        g_assert_cmphex(k230_ssi_readl(qts, inst->base, K230_SSI_SSIENR),
++                        ==, 0);
++        g_assert_cmphex(k230_ssi_readl(qts, inst->base,
++                                      K230_SSI_SPI_CTRLR0),
++                        ==, 0);
++        g_assert_cmphex(k230_ssi_readl(qts, inst->base, K230_SSI_IMR),
++                        ==, inst->imr_reset);
++        k230_ssi_writel(qts, inst->base, K230_SSI_SER, UINT32_MAX);
++        g_assert_cmphex(k230_ssi_readl(qts, inst->base, K230_SSI_SER),
++                        ==, MAKE_64BIT_MASK(0, inst->num_cs));
++    }
++
++    g_assert_cmphex(k230_ssi_readl(qts, K230_SPI0_BASE, K230_SSI_IDR),
++                    ==, K230_SSI_IDR_RESET);
++    g_assert_cmphex(k230_ssi_readl(qts, K230_SPI0_BASE,
++                                  K230_SSI_VERSION_ID),
++                    ==, K230_SSI_VERSION_RESET);
++    k230_ssi_writel(qts, K230_SPI1_BASE, K230_SSI_CTRLR0, UINT32_MAX);
++    g_assert_cmphex(k230_ssi_readl(qts, K230_SPI1_BASE, K230_SSI_CTRLR0),
++                    ==, K230_SSI_CTRLR0_WRITABLE_MASK);
++    /* SSTE is R/W per TRM; the frame-boundary toggle is not modelled. */
++    k230_ssi_writel(qts, K230_SPI1_BASE, K230_SSI_CTRLR0,
++                    K230_SSI_CTRLR0_RESET & ~BIT(14));
++    g_assert_cmphex(k230_ssi_readl(qts, K230_SPI1_BASE, K230_SSI_CTRLR0) &
++                    BIT(14), ==, 0);
++    k230_ssi_writel(qts, K230_SPI1_BASE, K230_SSI_BAUDR, UINT32_MAX);
++    g_assert_cmphex(k230_ssi_readl(qts, K230_SPI1_BASE, K230_SSI_BAUDR),
++                    ==, K230_SSI_BAUDR_WRITABLE_MASK);
++
++    qtest_system_reset(qts);
++    g_assert_cmphex(k230_ssi_readl(qts, K230_SPI0_BASE, K230_SSI_CTRLR0),
++                    ==, K230_SSI_CTRLR0_RESET);
++    qtest_quit(qts);
++}
++
++static void test_pio_data_path(void)
++{
++    QTestState *qts = k230_ssi_start();
++    uint32_t status;
++
++    configure_loopback(qts, K230_SSI_TMOD_TR, 0);
++    k230_ssi_enable_cs(qts, K230_SPI1_BASE, BIT(0));
++    k230_ssi_write_frame(qts, K230_SPI1_BASE, 0xa5);
++    k230_ssi_wait_mask(qts, K230_SPI1_BASE, K230_SSI_SR,
++                       K230_SSI_SR_RFNE, K230_SSI_SR_RFNE);
++    g_assert_cmphex(k230_ssi_read_frame(qts, K230_SPI1_BASE), ==, 0xa5);
++
++    configure_loopback(qts, K230_SSI_TMOD_RO, 3);
++    k230_ssi_enable_cs(qts, K230_SPI1_BASE, BIT(0));
++    k230_ssi_write_frame(qts, K230_SPI1_BASE, 0);
++    k230_ssi_wait_mask(qts, K230_SPI1_BASE, K230_SSI_RXFLR,
++                       UINT32_MAX, 4);
++    for (int i = 0; i < 4; i++) {
++        g_assert_cmphex(k230_ssi_read_frame(qts, K230_SPI1_BASE), ==, 0);
++    }
++
++    k230_ssi_disable(qts, K230_SPI1_BASE);
++    status = k230_ssi_readl(qts, K230_SPI1_BASE, K230_SSI_SR);
++    g_assert_cmpuint(k230_ssi_readl(qts, K230_SPI1_BASE, K230_SSI_RXFLR),
++                     ==, 0);
++    g_assert_cmphex(status & (K230_SSI_SR_BUSY | K230_SSI_SR_TFNF |
++                              K230_SSI_SR_TFE | K230_SSI_SR_RFNE),
++                    ==, K230_SSI_SR_TFNF | K230_SSI_SR_TFE);
++    qtest_quit(qts);
++}
++
++static void test_interrupt_controller(void)
++{
++    QTestState *qts = k230_ssi_start();
++
++    k230_ssi_configure(qts, K230_SPI1_BASE, K230_SSI_TMOD_TR, 8, 0);
++    k230_ssi_writel(qts, K230_SPI1_BASE, K230_SSI_TXFTLR, 0);
++    k230_ssi_writel(qts, K230_SPI1_BASE, K230_SSI_IMR, 0);
++    k230_ssi_writel(qts, K230_SPI1_BASE, K230_SSI_SSIENR, 1);
++    g_assert_cmphex(k230_ssi_readl(qts, K230_SPI1_BASE, K230_SSI_RISR) &
++                    K230_SSI_INT_TXE, ==, K230_SSI_INT_TXE);
++    g_assert_cmphex(k230_ssi_readl(qts, K230_SPI1_BASE, K230_SSI_ISR) &
++                    K230_SSI_INT_TXE, ==, 0);
++    k230_ssi_writel(qts, K230_SPI1_BASE, K230_SSI_IMR,
++                    K230_SSI_INT_TXE);
++    g_assert_cmphex(k230_ssi_readl(qts, K230_SPI1_BASE, K230_SSI_ISR) &
++                    K230_SSI_INT_TXE, ==, K230_SSI_INT_TXE);
++
++    k230_ssi_writel(qts, K230_SPI1_BASE, K230_SSI_IMR,
++                    K230_SSI_INT_RXU);
++    (void)k230_ssi_read_frame(qts, K230_SPI1_BASE);
++    g_assert_cmphex(k230_ssi_readl(qts, K230_SPI1_BASE, K230_SSI_RISR) &
++                    K230_SSI_INT_RXU, ==, K230_SSI_INT_RXU);
++    g_assert_cmphex(k230_ssi_readl(qts, K230_SPI1_BASE, K230_SSI_ISR) &
++                    K230_SSI_INT_RXU, ==, K230_SSI_INT_RXU);
++    g_assert_cmphex(k230_ssi_readl(qts, K230_SPI1_BASE, K230_SSI_RXUICR),
++                    ==, 1);
++    g_assert_cmphex(k230_ssi_readl(qts, K230_SPI1_BASE, K230_SSI_RISR) &
++                    K230_SSI_INT_RXU, ==, 0);
++    qtest_quit(qts);
++}
++
++
++static void test_tx_only_mode(void)
++{
++    QTestState *qts = k230_ssi_start();
++
++    configure_loopback(qts, K230_SSI_TMOD_TO, 0);
++    k230_ssi_enable_cs(qts, K230_SPI1_BASE, BIT(0));
++    k230_ssi_write_frame(qts, K230_SPI1_BASE, 0x55);
++    g_assert_cmphex(k230_ssi_readl(qts, K230_SPI1_BASE, K230_SSI_SR) &
++                    K230_SSI_SR_TFE, ==, K230_SSI_SR_TFE);
++    g_assert_cmphex(k230_ssi_readl(qts, K230_SPI1_BASE, K230_SSI_TXFLR),
++                    ==, 0);
++    qtest_quit(qts);
++}
++
++static void test_eeprom_read_contract(void)
++{
++    QTestState *qts = k230_ssi_start();
++
++    configure_loopback(qts, K230_SSI_TMOD_EEPROM_READ, 3);
++    k230_ssi_enable_cs(qts, K230_SPI1_BASE, BIT(0));
++    k230_ssi_write_frame(qts, K230_SPI1_BASE, 0x03);
++    k230_ssi_wait_mask(qts, K230_SPI1_BASE, K230_SSI_RXFLR,
++                       UINT32_MAX, 4);
++    for (int i = 0; i < 4; i++) {
++        g_assert_cmphex(k230_ssi_read_frame(qts, K230_SPI1_BASE), ==, 0);
++    }
++
++    configure_loopback(qts, K230_SSI_TMOD_EEPROM_READ, 0);
++    k230_ssi_enable_cs(qts, K230_SPI1_BASE, BIT(0));
++    k230_ssi_write_frame(qts, K230_SPI1_BASE, 0x03);
++    k230_ssi_wait_mask(qts, K230_SPI1_BASE, K230_SSI_RXFLR,
++                       UINT32_MAX, 1);
++    g_assert_cmphex(k230_ssi_read_frame(qts, K230_SPI1_BASE), ==, 0);
++    qtest_quit(qts);
++}
++
++static void test_rx_fifo_overflow(void)
++{
++    QTestState *qts = k230_ssi_start();
++
++    configure_loopback(qts, K230_SSI_TMOD_TR, 0);
++    k230_ssi_enable_cs(qts, K230_SPI1_BASE, BIT(0));
++    for (int i = 0; i < K230_SSI_FIFO_DEPTH + 1; i++) {
++        k230_ssi_write_frame(qts, K230_SPI1_BASE, 0xa5);
++    }
++    g_assert_cmphex(k230_ssi_readl(qts, K230_SPI1_BASE, K230_SSI_RISR) &
++                    K230_SSI_INT_RXO, ==, K230_SSI_INT_RXO);
++    g_assert_cmphex(k230_ssi_readl(qts, K230_SPI1_BASE,
++                                  K230_SSI_RXOICR), ==, 1);
++    g_assert_cmphex(k230_ssi_readl(qts, K230_SPI1_BASE, K230_SSI_RISR) &
++                    K230_SSI_INT_RXO, ==, 0);
++    qtest_quit(qts);
++}
++
++static void test_txfthr_start_gate(void)
++{
++    QTestState *qts = k230_ssi_start();
++
++    /* TXFTHR=4: transfer starts only once 5+ frames are queued. */
++    k230_ssi_configure(qts, K230_SPI1_BASE, K230_SSI_TMOD_TR, 8, 0);
++    k230_ssi_writel(qts, K230_SPI1_BASE, K230_SSI_TXFTLR, 4 << 16);
++    k230_ssi_enable_cs(qts, K230_SPI1_BASE, BIT(0));
++
++    k230_ssi_write_frame(qts, K230_SPI1_BASE, 0x11);
++    g_assert_cmphex(k230_ssi_readl(qts, K230_SPI1_BASE, K230_SSI_TXFLR),
++                    ==, 1);
++    g_assert_cmphex(k230_ssi_readl(qts, K230_SPI1_BASE, K230_SSI_RXFLR),
++                    ==, 0);
++
++    for (int i = 0; i < 4; i++) {
++        k230_ssi_write_frame(qts, K230_SPI1_BASE, 0x22 + i);
++    }
++    g_assert_cmphex(k230_ssi_readl(qts, K230_SPI1_BASE, K230_SSI_TXFLR),
++                    ==, 0);
++    g_assert_cmphex(k230_ssi_readl(qts, K230_SPI1_BASE, K230_SSI_RXFLR),
++                    ==, 5);
++    qtest_quit(qts);
++}
++
++static void test_baudr_zero(void)
++{
++    QTestState *qts = k230_ssi_start();
++
++    /* SCKDV=0 disables sclk_out: queued frames must not be shifted out. */
++    k230_ssi_configure(qts, K230_SPI1_BASE, K230_SSI_TMOD_TR, 8, 0);
++    k230_ssi_writel(qts, K230_SPI1_BASE, K230_SSI_BAUDR, 0);
++    k230_ssi_enable_cs(qts, K230_SPI1_BASE, BIT(0));
++
++    k230_ssi_write_frame(qts, K230_SPI1_BASE, 0xa5);
++    g_assert_cmphex(k230_ssi_readl(qts, K230_SPI1_BASE, K230_SSI_TXFLR),
++                    ==, 1);
++    g_assert_cmphex(k230_ssi_readl(qts, K230_SPI1_BASE, K230_SSI_RXFLR),
++                    ==, 0);
++    qtest_quit(qts);
++}
++
++static void test_ser_terminates_ro(void)
++{
++    QTestState *qts = k230_ssi_start();
++
++    /*
++     * RO transfer with NDF larger than the RX FIFO: after the FIFO
++     * fills, SER=0 must terminate the pending transaction.  Re-selecting
++     * the slave must not resume receiving the stale remaining frames
++     * without a new dummy word.
++     */
++    k230_ssi_configure(qts, K230_SPI1_BASE, K230_SSI_TMOD_RO, 8, 0xffff);
++    k230_ssi_enable_cs(qts, K230_SPI1_BASE, BIT(0));
++    k230_ssi_write_frame(qts, K230_SPI1_BASE, 0);
++    k230_ssi_wait_mask(qts, K230_SPI1_BASE, K230_SSI_RXFLR,
++                       UINT32_MAX, K230_SSI_FIFO_DEPTH);
++
++    k230_ssi_writel(qts, K230_SPI1_BASE, K230_SSI_SER, 0);
++    (void)k230_ssi_read_frame(qts, K230_SPI1_BASE);
++    g_assert_cmphex(k230_ssi_readl(qts, K230_SPI1_BASE, K230_SSI_RXFLR),
++                    ==, K230_SSI_FIFO_DEPTH - 1);
++
++    k230_ssi_writel(qts, K230_SPI1_BASE, K230_SSI_SER, BIT(0));
++    g_assert_cmphex(k230_ssi_readl(qts, K230_SPI1_BASE, K230_SSI_RXFLR),
++                    ==, K230_SSI_FIFO_DEPTH - 1);
++
++    /* A direct BIT(0) -> BIT(1) switch must also terminate the tx. */
++    k230_ssi_writel(qts, K230_SPI1_BASE, K230_SSI_SER, BIT(1));
++    g_assert_cmphex(k230_ssi_readl(qts, K230_SPI1_BASE, K230_SSI_RXFLR),
++                    ==, K230_SSI_FIFO_DEPTH - 1);
++    qtest_quit(qts);
++}
++
++static void test_icr_total_clear(void)
++{
++    QTestState *qts = k230_ssi_start();
++
++    configure_loopback(qts, K230_SSI_TMOD_TR, 0);
++    k230_ssi_enable_cs(qts, K230_SPI1_BASE, BIT(0));
++    (void)k230_ssi_read_frame(qts, K230_SPI1_BASE); /* latch RXU */
++    for (int i = 0; i < K230_SSI_FIFO_DEPTH + 1; i++) {
++        k230_ssi_write_frame(qts, K230_SPI1_BASE, 0xa5);
++    }
++    g_assert_cmphex(k230_ssi_readl(qts, K230_SPI1_BASE, K230_SSI_RISR) &
++                    K230_SSI_INT_RXU, ==, K230_SSI_INT_RXU);
++    g_assert_cmphex(k230_ssi_readl(qts, K230_SPI1_BASE,
++                                  K230_SSI_ICR), ==, 1);
++    g_assert_cmphex(k230_ssi_readl(qts, K230_SPI1_BASE, K230_SSI_RISR) &
++                    K230_SSI_INT_RXU, ==, 0);
++    g_assert_cmphex(k230_ssi_readl(qts, K230_SPI1_BASE, K230_SSI_RISR) &
++                    K230_SSI_INT_RXO, ==, 0);
++    qtest_quit(qts);
++}
++
++static void test_unsupported_registers(void)
++{
++    QTestState *qts = k230_ssi_start();
++    static const uint32_t unsupported[] = {
++        K230_SSI_DMACR, K230_SSI_XIP_MODE_BITS, K230_SSI_SPI_CTRLR0,
++    };
++
++    for (size_t i = 0; i < ARRAY_SIZE(unsupported); i++) {
++        uint32_t off = unsupported[i];
++
++        g_assert_cmphex(k230_ssi_readl(qts, K230_SPI1_BASE, off), ==, 0);
++        k230_ssi_writel(qts, K230_SPI1_BASE, off, UINT32_MAX);
++        g_assert_cmphex(k230_ssi_readl(qts, K230_SPI1_BASE, off), ==, 0);
++    }
++    qtest_quit(qts);
++}
++
++int main(int argc, char **argv)
++{
++    g_test_init(&argc, &argv, NULL);
++
++    qtest_add_func("/k230-dw-ssi/register-contract", test_register_contract);
++    qtest_add_func("/k230-dw-ssi/pio-data-path", test_pio_data_path);
++    qtest_add_func("/k230-dw-ssi/interrupt-controller",
++                   test_interrupt_controller);
++    qtest_add_func("/k230-dw-ssi/tx-only-mode", test_tx_only_mode);
++    qtest_add_func("/k230-dw-ssi/eeprom-read-contract",
++                   test_eeprom_read_contract);
++    qtest_add_func("/k230-dw-ssi/rx-fifo-overflow", test_rx_fifo_overflow);
++    qtest_add_func("/k230-dw-ssi/txfthr-start-gate", test_txfthr_start_gate);
++    qtest_add_func("/k230-dw-ssi/baudr-zero", test_baudr_zero);
++    qtest_add_func("/k230-dw-ssi/ser-terminates-ro", test_ser_terminates_ro);
++    qtest_add_func("/k230-dw-ssi/icr-total-clear", test_icr_total_clear);
++    qtest_add_func("/k230-dw-ssi/unsupported-registers",
++                   test_unsupported_registers);
++    return g_test_run();
++}
+diff --git a/tests/qtest/meson.build b/tests/qtest/meson.build
+index 56ff860e21..f5bcc7bece 100644
+--- a/tests/qtest/meson.build
++++ b/tests/qtest/meson.build
+@@ -297,7 +297,8 @@ qtests_riscv64 = ['riscv-csr-test'] + \
+   (config_all_devices.has_key('CONFIG_IOMMU_TESTDEV') and
+    config_all_devices.has_key('CONFIG_RISCV_IOMMU') ?
+    ['iommu-riscv-test'] : []) + \
+-  (config_all_devices.has_key('CONFIG_K230') ? ['k230-wdt-test'] : [])
++  (config_all_devices.has_key('CONFIG_K230') ?
++   ['k230-wdt-test', 'k230-dw-ssi-test'] : [])
  
-     qemu_irq *cs_lines;
-+    qemu_irq irqs[DW_SSI_IRQ_COUNT];
+ qtests_hexagon = ['boot-serial-test']
  
-     Fifo32 tx_fifo;
-     Fifo32 rx_fifo;
-@@ -54,6 +69,7 @@ struct DwSsiState {
- 
-     DwSsiConfig cfg;
- 
-+    uint32_t irq_latched;
-     uint32_t phase;
-     uint32_t remaining_frames;
- 
+@@ -400,6 +401,7 @@ qtests = {
+                        [gio],
+   'erst-test': files('erst-test.c'),
+   'ivshmem-test': [rt, '../../contrib/ivshmem-server/ivshmem-server.c'],
++  'k230-dw-ssi-test': files('k230-dw-ssi-test.c'),
+   'migration-test': test_migration_files + migration_tls_files + migration_colo_files,
+   'pxe-test': files('boot-sector.c'),
+   'pnv-xive2-test': files('pnv-xive2-common.c', 'pnv-xive2-flush-sync.c',
 -- 
 2.43.0
 
