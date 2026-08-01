@@ -4,66 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B054CC55172
-	for <qemu-riscv@archiver.kernel.org>; Sat,  1 Aug 2026 19:31:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74B05C55172
+	for <qemu-riscv@archiver.kernel.org>; Sat,  1 Aug 2026 19:31:13 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wqFPL-0002j7-BH; Sat, 01 Aug 2026 15:30:07 -0400
+	id 1wqFPq-0002vU-Ji; Sat, 01 Aug 2026 15:30:38 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <flamboyant.h.01@gmail.com>)
- id 1wqFPJ-0002iA-Ck
- for qemu-riscv@nongnu.org; Sat, 01 Aug 2026 15:30:05 -0400
-Received: from mail-pj1-x1035.google.com ([2607:f8b0:4864:20::1035])
+ id 1wqFPp-0002uj-MH
+ for qemu-riscv@nongnu.org; Sat, 01 Aug 2026 15:30:37 -0400
+Received: from mail-pj1-x1033.google.com ([2607:f8b0:4864:20::1033])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <flamboyant.h.01@gmail.com>)
- id 1wqFPH-0002Ew-Bz
- for qemu-riscv@nongnu.org; Sat, 01 Aug 2026 15:30:05 -0400
-Received: by mail-pj1-x1035.google.com with SMTP id
- 98e67ed59e1d1-38511175ad3so1475341a91.2
- for <qemu-riscv@nongnu.org>; Sat, 01 Aug 2026 12:30:02 -0700 (PDT)
+ id 1wqFPn-0002Iu-QH
+ for qemu-riscv@nongnu.org; Sat, 01 Aug 2026 15:30:37 -0400
+Received: by mail-pj1-x1033.google.com with SMTP id
+ 98e67ed59e1d1-38f620399a0so1732365a91.2
+ for <qemu-riscv@nongnu.org>; Sat, 01 Aug 2026 12:30:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1785612601; x=1786217401; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=Pby37PpeiSHslJQ+0ggvR8fN47WjAojT6mCnegk4S+0=;
- b=SZY6ILqNg2lGSZR/z6p7M9YRe/ClIfCnWWi5ZRUspK/ov8Tm2yEwkTjajO3X/UmVdq
- zMdmV9eRBfJ3iJVIh2XUxhcODcRwoGbFseftwLBKLojDtHT/4rEXKCn1PM0MT0aOgj/q
- l8Xsdg/KX9s8ubCyz4spoWFMejSft+jWtIy9fLM4IytrnPZ4SpVLZ6m5KWFXuZBH4Pmt
- Bf79WiOTVAPzGgxmMZnE9epFfNIPbLFJLQllWQXh0sgH0qA9ovv64jHzQCnz4yU7v46O
- f/tkTOp9rgMeB5jwF4ryAtTJT52JcZwUt/63tWfWpGrhTDuWCMgoMK4XISJ9+t97Wy+T
- mEFg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785612601; x=1786217401;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20251104; t=1785612634; x=1786217434; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=Pby37PpeiSHslJQ+0ggvR8fN47WjAojT6mCnegk4S+0=;
- b=AJpuWizuITEcc3JG40bv7ADSWiHkRZwxojpQTZp6O6I1JRfqxny4f4Qn76elM1lfvc
- DFwXvXpuDpybzqOtVvxbs7ZgAM5+KO5dKFwvZn2RoBhWytYJmoAxzJkeQlFTKd7/bZK0
- HRUL8+8sKUUFzXSZKti9Wf771pm+eNVkoz6uKrpzLyKh9cxLddq/xJMqSISmMXfMCfQH
- sEHF7DgE5UdheLDX47yQwSUjqtdBu36G/kM1RMeP7LU9vPwugk0DwddK/Di0tnNRpFqL
- wCKK4UzyyqH3TNBDo8APFLO8MjObjgBkXBwgXxzI8V3riIkvd/Vff6kd4Gvk8IQdHuu8
- dUtw==
-X-Gm-Message-State: AOJu0Yx13lXKEPl3ab3b6bfaVnd+6bdBsD5MLTtIW8VksJdzocZtTWTG
- i/2JdI2Y9lIl53fJJaEacr6oHhtiYj27yMMLjklK3s7F6G7XzszWZmn6
-X-Gm-Gg: AR+sD13Zw7fmoR0pWJmt3M9NiGNWeY3DbJ/K2+58Gcs86KE/12W9/YNDCREg0hQ7Pm+
- H0ySdr1ZtQMcMneIVIDdU6uUVkDPAUnYTbs9XlAMRVTpmzfCgdOlHjCWSjKoY0/6EDFwNVZn6pJ
- Zat670DbgycJ76NZRXIl9aflmMdBj/n0J5WJ93Hy7S1COT5ejYIWi9JUvJHrKSgstS4BsUxP+Gz
- 3PppTJwE0tZPlVLkaRwMgbdlCZ7vj69RgfZG1V3mGHWZtKbhXLAsDCYOQwipPfk1bIZEnMRpUAY
- rm/Oshseh2ZhRGE5NyAcQDGxpdFhaOBLhuUkAH68wgBS0jnVo7gFNUI9VXOrUlyXErXoJIhD+Ky
- iXk8yVW7PkHzHD4e14uX+ALEhivLUEgcE7+hygWYVnI+CgUxnbR/TqT03hF7ZIYNRO9LWAd7SV/
- 5QFOEJm1DYe7DEtiOdfWYId99eFOtAiStu1VE0DTJdYpuNHpaBCemw3AKA9KhKCum2MngxJQvFw
- FQFqVsvxA==
-X-Received: by 2002:a17:90a:e704:b0:38d:3ca9:434 with SMTP id
- 98e67ed59e1d1-38fbc5344a9mr3830867a91.28.1785612601014; 
- Sat, 01 Aug 2026 12:30:01 -0700 (PDT)
+ bh=Tjg9FT4duWt9gr9ZOut+ObsOGQFgQaiIiqjZb9R3imc=;
+ b=Gh46x4owLfvDeS/mvfuTCOTUS19eLCol3B/+iq4ymimAJ2Q8nOsNlVqdozInUpOHnY
+ H5Xt1X9/4vyOVsBAz2bcBuFDYC5o92fF63etoKLezzjMeufu7SGNPfSZISqH40EAo9DG
+ p8p1Z7rjj0Wi73zTjM+uwwYenUrpY17fBuQY6sRFwiYCSFjQ6ZftElSULoW9PdegEpxx
+ VZHez3gUfY3UdnBml6fCWgGNCIo+f3zUTDbkFSlKNCV0Uj/OeL8E4veN8DWFrTgUiw3F
+ bTWPfaWYU3xv+UujCq5Sh/sNBfgAfqGuaiopP5rLC6+dwaySK6iFJIg1ZqQbVxi0CXBt
+ HUtA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1785612634; x=1786217434;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=Tjg9FT4duWt9gr9ZOut+ObsOGQFgQaiIiqjZb9R3imc=;
+ b=UIA3GpBLILUAuwm6a5DTExLQIrreXmAn4pFTYD6fE/mIH0jMtDITi539qsd0BlfC/A
+ 2VlZOKZLuMI32LAnX4KDsTPImxMFipZCYJz9/Pod5yXyjIcxsVdEOvof97/NnhAgV+yA
+ +u7HPlL/8X3mhCWlFgpigevf26ZVpZZruNLAzJkeUllteCsfGB6Dqjvn+uun2Y5Nb2vr
+ iFKWtqynNixPo633vitm1oZ5SBRMZsT1xOoW2AmIjBzspwPId/l0CvYJZeVgasK/ek9L
+ WEnxj+1ZoyIdXe4tGCE6NvCoV+Npg2acaJBGXjPnA59Us6dt2WTApIS2BfF0l2xhGMsM
+ NKHw==
+X-Gm-Message-State: AOJu0Yw3Y6ZHJzjLWap5PJeDShbvAbOG6kaHFennp9lk23TkkJ6+XKaA
+ F+uoeJGgAAtGT3/eRP6cAFJDbkQrCyujlUgjnEl+UxT+l8f6U4vcLexf
+X-Gm-Gg: AR+sD125DPrCrbHe2yerMwtWJmDeBGjmYFj/GJyWu5CoZGKAjqED15eKlxrtu2xngTY
+ Tsk5s8isyx1TFOPR+M0ZOJghIAXAu8FKXyzcvxKLdtm/GeS2HDvaQ7X+lxuEFPubWSxhUOvWwLo
+ 0AX/r6ISens7lhq3+MiG+J+UhBUnbB57YOTWY268BuMXpQcJ8pKr9gcQqS01Ji3uq4QD14mfKpZ
+ F/kTh5Pb1GzzOU/UwyYtTfz4EaHV9Sa8oFRmoqzFaOHXNDX6oV/5hsFgEwCxq9QBWhxY/4jI8NA
+ jlTJPk6XV1jzdZd4sXnveDyjj1g9DQfgr4XDWW9i0wFeF8nq9fim/n1Q4jjFLqakCbzxZCa3anj
+ sWYDyfuxYx/LswWJ+jZN8ArZpYGzS5trx4zcTv+OtoQlPSrFeymz7BLYvtIlsRyNIfiu8WgTt7N
+ RwcP5Ooj0fhuVMw54cuA+p8DyxtgbUvilwIuzgWcCkjaCSESBllwSCL/6SeN89M9T9EAgeEJble
+ yDVVeElew==
+X-Received: by 2002:a17:90b:5867:b0:381:96a2:14d7 with SMTP id
+ 98e67ed59e1d1-38fbc4ae4e7mr4158839a91.22.1785612634273; 
+ Sat, 01 Aug 2026 12:30:34 -0700 (PDT)
 Received: from localhost.localdomain ([111.198.227.173])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-38fb2bac654sm2148766a91.10.2026.08.01.12.29.56
+ 98e67ed59e1d1-38fb2bac654sm2148766a91.10.2026.08.01.12.30.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 01 Aug 2026 12:30:00 -0700 (PDT)
+ Sat, 01 Aug 2026 12:30:33 -0700 (PDT)
 From: Kangjie Huang <flamboyant.h.01@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, Bin Meng <bmeng.cn@gmail.com>,
@@ -77,15 +78,16 @@ Cc: qemu-riscv@nongnu.org, Bin Meng <bmeng.cn@gmail.com>,
  Paolo Bonzini <pbonzini@redhat.com>, Fabiano Rosas <farosas@suse.de>,
  Laurent Vivier <lvivier@redhat.com>,
  Kangjie Huang <flamboyant.h.01@gmail.com>
-Subject: [PATCH v2 0/5] hw/ssi: Add DesignWare SSI standard PIO support for
- K230
-Date: Sun,  2 Aug 2026 03:28:43 +0800
-Message-ID: <20260801192848.30606-1-flamboyant.h.01@gmail.com>
+Subject: [PATCH v2 4/5] hw/riscv/k230: Route SSI interrupts to the PLIC
+Date: Sun,  2 Aug 2026 03:28:47 +0800
+Message-ID: <20260801192848.30606-5-flamboyant.h.01@gmail.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260801192848.30606-1-flamboyant.h.01@gmail.com>
+References: <20260801192848.30606-1-flamboyant.h.01@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1035;
- envelope-from=flamboyant.h.01@gmail.com; helo=mail-pj1-x1035.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1033;
+ envelope-from=flamboyant.h.01@gmail.com; helo=mail-pj1-x1033.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -93,7 +95,7 @@ X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -109,88 +111,205 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hello,
+Connect the nine interrupt outputs of each K230 SSI controller to the
+documented PLIC source range.
 
-This series adds a reusable Synopsys DesignWare SSI controller model and
-uses it to model the three SSI instances on the Kendryte K230 machine.
+The TXU, DONE, and AXIE lines are wired to preserve the physical K230
+interrupt topology, but remain inactive until their transfer engines are
+modeled.
 
-This series supersedes the previous K230-specific SSI series:
+Extend qtests to cover TXE routing for all instances and RXU routing and
+instance isolation.
 
-  https://lore.kernel.org/qemu-devel/cover.1785064312.git.flamboyant.h.01@gmail.com/
+Signed-off-by: Kangjie Huang <flamboyant.h.01@gmail.com>
+---
+ hw/riscv/k230.c                | 36 +++++++++++++++++++++++++++
+ include/hw/riscv/k230.h        |  3 +++
+ tests/qtest/k230-dw-ssi-test.c | 45 ++++++++++++++++++++++++++++++++++
+ 3 files changed, 84 insertions(+)
 
-Following review of v1, the controller has been split into a reusable
-DesignWare SSI model and a K230 integration layer. The controller no longer
-depends on K230 types, addresses, or HI_SYS state. K230-specific instance
-profiles, MMIO mapping, PLIC routing, and flash attachment now live in the
-K230 machine code.
-
-The v1 implementation combined DesignWare SSI behaviour and K230-specific
-SoC integration in one device. That made the reuse boundary unclear for
-other SoCs using the same IP. This revision makes that boundary explicit:
-the generic model implements the documented controller behaviour, while the
-K230 machine supplies only its instance configuration and SoC connections.
-
-The implemented controller scope is deliberately limited to Standard
-single-line SPI PIO: configurable chip selects and FIFO depth, four TMOD
-modes, FIFO and status handling, Standard interrupt state, and migration
-state for the implemented data path. Enhanced SPI, internal DMA/IDMA, and
-XIP transactions are deferred to follow-up series.
-
-K230 has nine SSI interrupt source lines per instance. This series wires all
-nine lines to preserve the documented PLIC topology. TXU, DONE, and AXIE
-remain deasserted because their transfer engines are outside the Standard
-PIO scope modeled here.
-
-The final patch adds an optional M25P80-compatible SPI NOR flash on logical
-spi0 CS0. It supports and tests Standard 1-1-1 accesses only; the enhanced
-SPI and IDMA boot paths are outside the scope of this series.
-
-Changes since v1:
-
-* Replace the K230-specific controller type with a reusable DesignWare SSI
-  model configured through num-cs, fifo-depth, and imr-reset properties.
-* Keep K230 instance profiles, MMIO mapping, PLIC routing, and flash
-  attachment in the K230 machine code.
-* Limit this revision to Standard PIO, FIFO, interrupt, and 1-1-1 SPI NOR
-  support; defer enhanced SPI, internal DMA/IDMA, and XIP to follow-up
-  series.
-
-Testing on the current V2 development tree:
-
-* riscv64-softmmu build succeeds.
-* K230 SSI qtest: 14/14 pass, covering register/reset contracts, Standard
-  PIO TMOD modes, FIFO behaviour, interrupt state, PLIC routing, Standard
-  1-1-1 flash identification and fixed-address reads, and
-  unsupported-register semantics.
-* U-Boot Standard SPI payload boot: U-Boot loads OpenSBI, Linux, initramfs,
-  and the DTB from a W25Q256 flash and reaches a Linux initramfs shell.
-  Standard sf probe, erase, write, readback, and compare also pass.
-* Linux 5.10.4 Standard SPI PIO: dw_spi_mmio and spi-nor probe successfully;
-  the MTD test partition completes erase, write, readback, and byte-wise
-  comparison (K230_MTD_TEST_PASS mode=standard).
-
-Kangjie Huang (5):
-  hw/ssi: Add Synopsys DesignWare SSI standard PIO controller
-  hw/ssi: Add DesignWare SSI standard interrupt support
-  hw/riscv/k230: Instantiate DesignWare SSI controllers
-  hw/riscv/k230: Route SSI interrupts to the PLIC
-  hw/riscv/k230: Attach a standard SPI NOR flash
-
- docs/system/riscv/k230.rst     |    2 +
- hw/riscv/Kconfig               |    2 +
- hw/riscv/k230.c                |  178 +++++-
- hw/ssi/Kconfig                 |    4 +
- hw/ssi/dw_ssi.c                | 1083 ++++++++++++++++++++++++++++++++
- hw/ssi/meson.build             |    1 +
- include/hw/riscv/k230.h        |    7 +
- include/hw/ssi/dw_ssi.h        |   78 +++
- tests/qtest/k230-dw-ssi-test.c |  569 +++++++++++++++++
- tests/qtest/meson.build        |    4 +-
- 10 files changed, 1912 insertions(+), 16 deletions(-)
- create mode 100644 hw/ssi/dw_ssi.c
- create mode 100644 include/hw/ssi/dw_ssi.h
- create mode 100644 tests/qtest/k230-dw-ssi-test.c
-
+diff --git a/hw/riscv/k230.c b/hw/riscv/k230.c
+index 4c321002cd..d856864839 100644
+--- a/hw/riscv/k230.c
++++ b/hw/riscv/k230.c
+@@ -104,6 +104,21 @@ static const MemMapEntry memmap[] = {
+     [K230_DEV_CLINT] =        { 0xF04000000, 0x00400000 },
+ };
+ 
++typedef struct K230SsiRoute {
++    unsigned int ssi_index;
++    unsigned int irq_base;
++} K230SsiRoute;
++
++/*
++ * SDK numbering follows the address map: spi0 is the SPI-OPI instance,
++ * while spi1 and spi2 are QSPI0 and QSPI1.
++ */
++static const K230SsiRoute k230_ssi_routes[] = {
++    { .ssi_index = 2, .irq_base = K230_SPI0_IRQ_BASE },
++    { .ssi_index = 0, .irq_base = K230_SPI1_IRQ_BASE },
++    { .ssi_index = 1, .irq_base = K230_SPI2_IRQ_BASE },
++};
++
+ typedef struct K230DwSsiProfile {
+     uint32_t num_cs;
+     uint32_t fifo_depth;
+@@ -193,6 +208,25 @@ static void k230_create_uart(MemoryRegion *sys_mem, DeviceState *plic,
+                    399193, serial_hd(index), DEVICE_LITTLE_ENDIAN);
+ }
+ 
++static void k230_connect_ssi_irqs(K230SoCState *s)
++{
++    for (size_t route_idx = 0;
++         route_idx < ARRAY_SIZE(k230_ssi_routes); route_idx++) {
++        const K230SsiRoute *route = &k230_ssi_routes[route_idx];
++        SysBusDevice *ssi;
++
++        g_assert(route->ssi_index < ARRAY_SIZE(s->dw_ssi));
++        g_assert(route->irq_base + DW_SSI_IRQ_COUNT <=
++                 K230_PLIC_NUM_SOURCES);
++
++        ssi = SYS_BUS_DEVICE(&s->dw_ssi[route->ssi_index]);
++        for (unsigned int i = 0; i < DW_SSI_IRQ_COUNT; i++) {
++            sysbus_connect_irq(ssi, i,
++                qdev_get_gpio_in(DEVICE(s->c908_plic), route->irq_base + i));
++        }
++    }
++}
++
+ static void k230_soc_realize(DeviceState *dev, Error **errp)
+ {
+     K230SoCState *s = RISCV_K230_SOC(dev);
+@@ -247,6 +281,8 @@ static void k230_soc_realize(DeviceState *dev, Error **errp)
+         }
+     }
+ 
++    k230_connect_ssi_irqs(s);
++
+     sysbus_mmio_map(SYS_BUS_DEVICE(&s->wdt[0]), 0, memmap[K230_DEV_WDT0].base);
+     sysbus_connect_irq(SYS_BUS_DEVICE(&s->wdt[0]), 0,
+                        qdev_get_gpio_in(DEVICE(s->c908_plic), K230_WDT0_IRQ));
+diff --git a/include/hw/riscv/k230.h b/include/hw/riscv/k230.h
+index 99996a93b1..275b6b62c3 100644
+--- a/include/hw/riscv/k230.h
++++ b/include/hw/riscv/k230.h
+@@ -131,6 +131,9 @@ enum {
+     K230_UART4_IRQ  = 20,
+     K230_WDT0_IRQ   = 107,
+     K230_WDT1_IRQ   = 108,
++    K230_SPI0_IRQ_BASE = 146,
++    K230_SPI1_IRQ_BASE = 155,
++    K230_SPI2_IRQ_BASE = 164,
+ };
+ 
+ #define K230_UART_COUNT 5
+diff --git a/tests/qtest/k230-dw-ssi-test.c b/tests/qtest/k230-dw-ssi-test.c
+index 6361c2b5ee..7252302c0e 100644
+--- a/tests/qtest/k230-dw-ssi-test.c
++++ b/tests/qtest/k230-dw-ssi-test.c
+@@ -14,6 +14,8 @@
+ #define K230_SPI0_BASE          0x91584000ULL
+ #define K230_SPI1_BASE          0x91582000ULL
+ #define K230_SPI2_BASE          0x91583000ULL
++#define K230_PLIC_BASE          0xf00000000ULL
++#define K230_PLIC_PENDING_BASE  0x1000
+ #define K230_SSI_CTRLR0          0x000
+ #define K230_SSI_CTRLR1          0x004
+ #define K230_SSI_SSIENR          0x008
+@@ -57,6 +59,8 @@
+ #define K230_SSI_INT_TXO                BIT(1)
+ #define K230_SSI_INT_RXO                BIT(3)
+ #define K230_SSI_INT_RXU                BIT(2)
++#define K230_SSI_IRQ_TXE                0
++#define K230_SSI_IRQ_RXU                5
+ 
+ #define K230_SSI_RXFTLR                 0x01c
+ #define K230_SSI_RXOICR                 0x03c
+@@ -71,6 +75,7 @@ typedef struct K230SsiInstance {
+     uint64_t base;
+     uint32_t num_cs;
+     uint32_t imr_reset;
++    uint32_t first_irq;
+ } K230SsiInstance;
+ 
+ static const K230SsiInstance k230_ssi_instances[3] = {
+@@ -78,14 +83,17 @@ static const K230SsiInstance k230_ssi_instances[3] = {
+         .base = K230_SPI0_BASE,
+         .num_cs = 1,
+         .imr_reset = 0x0000003fU,
++        .first_irq = 146,
+     }, {
+         .base = K230_SPI1_BASE,
+         .num_cs = 5,
+         .imr_reset = 0x0000001fU,
++        .first_irq = 155,
+     }, {
+         .base = K230_SPI2_BASE,
+         .num_cs = 5,
+         .imr_reset = 0x0000001fU,
++        .first_irq = 164,
+     },
+ };
+ 
+@@ -106,6 +114,14 @@ static void k230_ssi_writel(QTestState *qts, uint64_t base,
+     qtest_writel(qts, base + offset, value);
+ }
+ 
++static bool k230_ssi_plic_pending(QTestState *qts, uint32_t irq)
++{
++    uint64_t addr = K230_PLIC_BASE + K230_PLIC_PENDING_BASE +
++                    (irq / 32) * sizeof(uint32_t);
++
++    return qtest_readl(qts, addr) & BIT(irq % 32);
++}
++
+ static void k230_ssi_disable(QTestState *qts, uint64_t base)
+ {
+     k230_ssi_writel(qts, base, K230_SSI_SSIENR, 0);
+@@ -281,6 +297,34 @@ static void test_interrupt_controller(void)
+ }
+ 
+ 
++static void test_plic_routing(void)
++{
++    QTestState *qts = k230_ssi_start();
++    const K230SsiInstance *target = &k230_ssi_instances[1];
++
++    for (int i = 0; i < ARRAY_SIZE(k230_ssi_instances); i++) {
++        const K230SsiInstance *inst = &k230_ssi_instances[i];
++
++        g_assert_true(k230_ssi_plic_pending(qts,
++                                           inst->first_irq +
++                                           K230_SSI_IRQ_TXE));
++        k230_ssi_writel(qts, inst->base, K230_SSI_IMR, 0);
++    }
++
++    k230_ssi_writel(qts, target->base, K230_SSI_IMR, K230_SSI_INT_RXU);
++    (void)k230_ssi_read_frame(qts, target->base);
++    g_assert_true(k230_ssi_plic_pending(qts,
++                                       target->first_irq +
++                                       K230_SSI_IRQ_RXU));
++    for (int i = 0; i < ARRAY_SIZE(k230_ssi_instances); i++) {
++        if (&k230_ssi_instances[i] != target) {
++            g_assert_false(k230_ssi_plic_pending(
++                qts, k230_ssi_instances[i].first_irq + K230_SSI_IRQ_RXU));
++        }
++    }
++    qtest_quit(qts);
++}
++
+ static void test_tx_only_mode(void)
+ {
+     QTestState *qts = k230_ssi_start();
+@@ -455,6 +499,7 @@ int main(int argc, char **argv)
+     qtest_add_func("/k230-dw-ssi/pio-data-path", test_pio_data_path);
+     qtest_add_func("/k230-dw-ssi/interrupt-controller",
+                    test_interrupt_controller);
++    qtest_add_func("/k230-dw-ssi/plic-routing", test_plic_routing);
+     qtest_add_func("/k230-dw-ssi/tx-only-mode", test_tx_only_mode);
+     qtest_add_func("/k230-dw-ssi/eeprom-read-contract",
+                    test_eeprom_read_contract);
 -- 
 2.43.0
+
 
