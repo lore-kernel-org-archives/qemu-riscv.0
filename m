@@ -4,39 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E4B2C55162
-	for <qemu-riscv@archiver.kernel.org>; Sun,  2 Aug 2026 12:19:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0978AC55171
+	for <qemu-riscv@archiver.kernel.org>; Sun,  2 Aug 2026 12:19:08 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wqV9Y-0007va-78; Sun, 02 Aug 2026 08:18:52 -0400
+	id 1wqV9h-0007z5-2y; Sun, 02 Aug 2026 08:19:01 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <nendensu@ispras.ru>)
- id 1wqJdk-0006R0-Po; Sat, 01 Aug 2026 20:01:16 -0400
+ id 1wqJdl-0006RU-VL; Sat, 01 Aug 2026 20:01:18 -0400
 Received: from mail.ispras.ru ([83.149.199.84])
  by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <nendensu@ispras.ru>)
- id 1wqJdi-0006vS-QL; Sat, 01 Aug 2026 20:01:16 -0400
+ id 1wqJdi-0006vU-QP; Sat, 01 Aug 2026 20:01:17 -0400
 Received: from DESKTOP-J3VFOUN.localdomain (unknown [62.217.189.53])
- by mail.ispras.ru (Postfix) with ESMTPSA id 9CE0A406E9A8;
- Sun,  2 Aug 2026 00:01:08 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mail.ispras.ru 9CE0A406E9A8
+ by mail.ispras.ru (Postfix) with ESMTPSA id E682E406E9AC;
+ Sun,  2 Aug 2026 00:01:09 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mail.ispras.ru E682E406E9AC
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ispras.ru;
- s=default; t=1785628868;
- bh=3nBDBDXqD+EJ2nTkI6GvI5wX9Ib/awAH1T4ShSJPPe4=;
- h=From:To:Cc:Subject:Date:From;
- b=JAS9Y06ktcCIKzpXU/YpfpMfzXC6Y6++kfnWJIsbqpM4DxW3Voa8bFkk91Qckcl+Z
- CSdhfgd5a9xT/B7UW64JVfLIdZPN+dFPgknesc6oNpc+s8TF2k5FwnYK87bOvMd4hw
- YTYoh4hcGz8j2zqPHc1+KrgwVBzjjA2zZefhIALk=
+ s=default; t=1785628870;
+ bh=vunbb94ED8cx/ncK3P5gD8vDOmHoWA8kRt9ImI/RdEo=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=MVfLocwxbNP0GBFjr4fbeADlB96/dC90mOmIUnaIlvAhv72Z7aiV+9MUDkZLoHgFf
+ cDYpKJjw23oAERnARLPnUFLadxwKniMNrNhU9a3x58bVvuXWutx+Wlbu6flHbwLWE8
+ 1eBOuvqV0l6xLB4s8inanfccnwQv4SCf3M0RnRMw=
 From: Ivan Efremov <nendensu@ispras.ru>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, palmer@dabbelt.com,
  farosas@suse.de, lvivier@redhat.com, Ivan Efremov <nendensu@ispras.ru>
-Subject: [PATCH 0/2] target/riscv: Fix seed CSR sign extension
-Date: Sun,  2 Aug 2026 03:00:46 +0300
-Message-ID: <20260802000048.691333-1-nendensu@ispras.ru>
+Subject: [PATCH 1/2] target/riscv: Fix seed CSR sign extension
+Date: Sun,  2 Aug 2026 03:00:47 +0300
+Message-ID: <20260802000048.691333-2-nendensu@ispras.ru>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260802000048.691333-1-nendensu@ispras.ru>
+References: <20260802000048.691333-1-nendensu@ispras.ru>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=83.149.199.84; envelope-from=nendensu@ispras.ru;
@@ -48,7 +50,7 @@ X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Sun, 02 Aug 2026 08:18:19 -0400
+X-Mailman-Approved-At: Sun, 02 Aug 2026 08:18:33 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,24 +65,41 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The seed CSR value on RV64 was sign extended while converting to target_ulong.
+The SEED_OPST_* macros expanded to int expressions. When
+bit 31 was present, converting a CSR seed value to target_ulong
+on RV64 sign extended the value and incorrectly set the upper 32 bits.
 
-The first patch makes SEED_OPST_* unsigned.
-The second patch adds qtest to check that upper 32 bits are zero.
+Make the SEED_OPST_* constants unsigned so that CSR values are
+zero extended on RV64.
 
-Tests ran:
-- riscv-csr-test
-- make check: 324 passed, 11 skipped
-- RISC-V Zkr-00 architectural test
+Fixes: 77442380ecbe ("target/riscv: rvk: add CSR support for Zkr")
+Resolves: https://gitlab.com/qemu-project/qemu/-/issues/4121
+Signed-off-by: Ivan Efremov <nendensu@ispras.ru>
+---
+ target/riscv/cpu_bits.h | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
 
-Ivan Efremov (2):
-  target/riscv: Fix seed CSR sign extension
-  tests/qtest: Add seed CSR zero extension test
-
- target/riscv/cpu_bits.h      | 10 +++++-----
- tests/qtest/riscv-csr-test.c | 26 ++++++++++++++++++++++++++
- 2 files changed, 31 insertions(+), 5 deletions(-)
-
+diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+index 3f146a43fe..c01050ce2b 100644
+--- a/target/riscv/cpu_bits.h
++++ b/target/riscv/cpu_bits.h
+@@ -1086,11 +1086,11 @@ typedef enum CTRType {
+     (HVICTL_VTI | HVICTL_IID | HVICTL_IPRIOM | HVICTL_IPRIO)
+ 
+ /* seed CSR bits */
+-#define SEED_OPST                        (0b11 << 30)
+-#define SEED_OPST_BIST                   (0b00 << 30)
+-#define SEED_OPST_WAIT                   (0b01 << 30)
+-#define SEED_OPST_ES16                   (0b10 << 30)
+-#define SEED_OPST_DEAD                   (0b11 << 30)
++#define SEED_OPST                        (0b11U << 30)
++#define SEED_OPST_BIST                   (0b00U << 30)
++#define SEED_OPST_WAIT                   (0b01U << 30)
++#define SEED_OPST_ES16                   (0b10U << 30)
++#define SEED_OPST_DEAD                   (0b11U << 30)
+ /* PMU related bits */
+ #define MIE_LCOFIE                         (1 << IRQ_PMU_OVF)
+ 
 -- 
 2.43.0
 
