@@ -4,75 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B506C55182
-	for <qemu-riscv@archiver.kernel.org>; Mon,  3 Aug 2026 22:17:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96410C55184
+	for <qemu-riscv@archiver.kernel.org>; Tue,  4 Aug 2026 18:39:47 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wr0yS-0000eE-KQ; Mon, 03 Aug 2026 18:17:34 -0400
+	id 1wrK2u-0000Fr-3P; Tue, 04 Aug 2026 14:39:24 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <guochun.wang@foxmail.com>)
- id 1wquiM-0001zb-El
- for qemu-riscv@nongnu.org; Mon, 03 Aug 2026 11:36:30 -0400
-Received: from xmbghk7.mail.qq.com ([43.163.128.49])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <guochun.wang@foxmail.com>)
- id 1wquiI-0005IT-7x
- for qemu-riscv@nongnu.org; Mon, 03 Aug 2026 11:36:29 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foxmail.com;
- s=s201512; t=1785771381;
- bh=8BVzs/IT6pVQ73xUL2jI08jtpjaUmlmJAohvK5vWoWk=;
- h=From:To:Cc:Subject:Date;
- b=f5PVQcbtnkY7/5o0FooZfebHB3NDml7/fIQzN8hDiiakolpbK5v9RQDD5YWRi7R6U
- 0bbKyMw5U3l7SvO6cFKJwVMjYUNb1mdLen7k+GszX6wbw2H1WsqC6rNxrCcJ7Nls8y
- wUbmM3XHES9yYxxeKk9l4uMEixoo5HAOptgiAiJU=
-Received: from DESKTOP-8MIQOKD.localdomain ([117.13.168.66])
- by newxmesmtplogicsvrsza53-0.qq.com (NewEsmtp) with SMTP
- id 72397CE1; Mon, 03 Aug 2026 23:28:35 +0800
-X-QQ-mid: xmsmtpt1785770915txxdcygnp
-Message-ID: <tencent_B90E44EAD06F6676AF9B572898242037BB0A@qq.com>
-X-QQ-XMAILINFO: MR06con9IFZDhRyiZ6G5z/7aaDNJMBgV97bLjzI92pdJ5Y250OKN2I1NNwDzI8
- XHU/vRhg0bCGACTw3e2JN+dL5DnwYNmkezXCCtEvKb5U9CPZSSXJGPIHITU/+pb7diciN+vHBv4A
- 3Huk+Bhc7HRZgNB1wjKRowTHfpKB9jVc85ac+iAMHDuhmtO2Ie5kwzIHFrzCIbo0Dccl8wOUBqD1
- E+nvtBjvWWzFSuX798a1BWznQXOcMsdW2j0XGcI92+gpLDIovBub3/L2xSj8z5rIYyx95plXV6MQ
- T7O2B1nRU9Rab8irlVxKtUsHNn8LLwpO/syeUM/enuwH1G7YrzFh3FJK3lsmG5gQOeucDCmbZyMK
- fTL1OyHBQ3fpjqeTzNEwKDb6NA7O7MG+61Kk+hufd5thywhzjhhiiiysrOk4flBqZI4OmPjrUtx3
- g6CKxkxh2zPoOjKt61MYNh7C1niE8BHTyoPugx5y0nVgrkXzUjOGpjexm34ebvGalh6Ix2p4Eivh
- 71rG5MGwQRyxnsSvRN+QkPHrv3cdG4QjG5wLX1SWBgmEjc7Tg5H4yOJRqsaCqVCPjvozza6aYeDK
- 2p8cRx0eE/drfIG14wie57AaE13wJdnhaRj76Ksv4xOIvRZHIVotmLfMV2afqtg3e8DGbzt7xRQ1
- 31RlLND8jIceVpTbWle6I2v3N+0weJIwN/Vw9EEQ23mn5IW97gvYNLXGDQ13MG1IczMd4kJyuati
- NLY1VdxfBuMMp/Y/2qzaW6aZoDjmRoHG6IuKbQ08z8cPI9Mu+cgl5Ait28Et2akzosVzgRY8jnbK
- QVbeo2sUxCnGvPHBzSvK1rpxTsI87Kp0mIo5HWTRC/Dccfy8PQ3PAOKYUZeTMyYvjAECbymXp2ba
- Zb92YXjEZmqyTxEvwazJbI4sWa8NI7LwpbrM7+NIdf2/shU1xragDHftGfu/NhGfMPZwiSkaULuv
- x/OBLU5cwxAKtcw20FvQf9OmxH3U3Q2iYesSoGJ8gXYbfbtz9IQOtLBFiBc9FuCMucCQjXJ5rndA
- adtdpX0ES27keZUaKltb62jvmulcGfF+kkTKdNE4BVzNTPzbRTjxVOkOH+zVFwR1JD6g5BrwOG2C
- JBahnFeuE87s5nS/U=
-X-QQ-XMRINFO: Mp0Kj//9VHAxzExpfF+O8yhSrljjwrznVg==
-From: guochun.wang@foxmail.com
-To: qemu-devel@nongnu.org
-Cc: chao.liu@processmission.com, palmer@dabbelt.com, alistair.francis@wdc.com,
- liwei1518@gmail.com, daniel.barboza@oss.qualcomm.com,
- zhiwei_liu@linux.alibaba.com, pbonzini@redhat.com, farosas@suse.de,
- lvivier@redhat.com, qemu-riscv@nongnu.org,
- guochun wang <guochun.wang@foxmail.com>
-Subject: [PATCH 0/2] Add K230 SoC GPIO controller support
-Date: Mon,  3 Aug 2026 23:28:30 +0800
-X-OQ-MSGID: <20260803152832.222022-1-guochun.wang@foxmail.com>
-X-Mailer: git-send-email 2.43.0
+ (Exim 4.90_1) (envelope-from <asrinivasan@tenstorrent.com>)
+ id 1wrK2n-0000FF-08
+ for qemu-riscv@nongnu.org; Tue, 04 Aug 2026 14:39:18 -0400
+Received: from mail-ot1-x32d.google.com ([2607:f8b0:4864:20::32d])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <asrinivasan@tenstorrent.com>)
+ id 1wrK2k-0006FM-2j
+ for qemu-riscv@nongnu.org; Tue, 04 Aug 2026 14:39:15 -0400
+Received: by mail-ot1-x32d.google.com with SMTP id
+ 46e09a7af769-7ee4399c3abso161345a34.2
+ for <qemu-riscv@nongnu.org>; Tue, 04 Aug 2026 11:39:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=tenstorrent.com; s=google; t=1785868750; x=1786473550; darn=nongnu.org;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=9S1Or6J5d6w+G6TdMrXTpjfNSzXm21vs6J6CZKNQiMw=;
+ b=H6SEKn12cgbdVoloW393JnLOQWWZTmueVlyvaiZoTDBCiS6PNtBCXdahhjyUM/XROb
+ 3fwFxWKnTuBtH6tnK6G9YiURAkQXJdFNNwrzbq8nrZKqiGqHkul12K8PVk4wZ5mTvBXJ
+ OhWv0Os9w6Qkw/TLdM7+s/vORDDCJmZwxy5VRJZAGvGCgA+LXzKBCgC6uHJ2TUDNXVNQ
+ jPtwJsezl3l+miQ68X0shUKOg1dXRFMooSrkGrvy6U9k9lmeXWQZJ0soS1XrCNpq4num
+ q6qd+2ijkgCzqlg4vzNhskH7t4ZFiXhzOiW5kPaTcVlecHyUFoDCTClmPuEMzr9nbLPX
+ xU8w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1785868750; x=1786473550;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=9S1Or6J5d6w+G6TdMrXTpjfNSzXm21vs6J6CZKNQiMw=;
+ b=Umdm0OdCg/iD5N1puD6eTbDzHbZyWiyn4Hr5aS5Xpw9FhQAD8kBH35vL+XVsFCMmny
+ fgBVIsn5sQUIfraiwjuyk4ctfrGoba5S6GBxCt0zSz83rPKP+1FSvCGI2L8N06X1gXgp
+ ZhPhwKSBZJmNBJbAJ50mf1M7mEO3yR4p3od/w6H4sMuObOkwWinVX50f0g1EeC6cif4R
+ bSt82BBaTfJ/zkuqa8bkq4etD7Uu/59TLSiI0V/B8lj0k9qz5l8pDljKYXPksG7lNElt
+ 56Dxpxv0wtqsoSvHjB/FWSiyBlDoj79JcWFHPTJ0yaylUMhSIfxU81wWQzbppV8ZHsrU
+ iNQw==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RpNuKHOwxU6YMAQImU6kvO/f+dNIfH1m/eEymnNGJf4Gmsaido4MLX8xtmVGT7l7Y8juxwr+wOqcuvY@nongnu.org
+X-Gm-Message-State: AOJu0YzSucrF9YoWAQ1E1nsNor0R+c8+f7hHhP7wWYB+n8fukuTMO8tr
+ lDw2Ix7z6cOWe9NqBJv9F5A9ov26MfMe+VPDgtEkZag2YuAXxI/fsvwBYSrCC5RuKcM=
+X-Gm-Gg: AR+sD10rdl+IghjgSypL5RPAWlKnJX55URoVIWShVYqdGKyJ8ySjNxCqFitDk5nVPrb
+ yWnESfJI3lRR29gb5PIeQSFgmhuHE4jzvUClRQ51PdwrpWkyZ64Py0+U/6VpSEHqf6mf/pJZKfs
+ HVgTuylilnr1jUEUC1hBGLgPLnQ4d7Rj7BHzVL/SCw70uLpoxF36Orl+snnrYlhHkyFyzCJnySH
+ 7KYF6eNAC9kovneQj4h9RQJR5Oh09Shp9L0hD1ZqxUjVz+8hXbQOnTdtKHu2JkLskNW+C8Hc19X
+ 78rMFrvUEHxu10tf76vqEbZnBNw9jtgCV2rZkIicfAv0Wo6kg3148hgZs2z87mGuQFhr//Pv5J1
+ bjEOBhrr2T2xkcfBPUc2X4Iq9RusxAYIobyPqCZOA4i8UxDOI08wgNvZ+7ZtssH5im6Cjf/UwME
+ b1Np6ML6qMt/KvQT7fVeaShpwecwX1f74mnAmCjM3RNo9+r71dwcuIaKB0fnr+M9loyj0Xd/LYA
+ j7+ZGqRX0IX3FXS/sSANs4raevC
+X-Received: by 2002:a05:6830:6d25:b0:7e9:e8ae:7049 with SMTP id
+ 46e09a7af769-7f1e5d2f8b8mr813867a34.7.1785868750170; 
+ Tue, 04 Aug 2026 11:39:10 -0700 (PDT)
+Received: from toolbox ([12.55.13.134]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7f1df33da38sm1432132a34.7.2026.08.04.11.39.08
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 04 Aug 2026 11:39:09 -0700 (PDT)
+Date: Tue, 4 Aug 2026 13:38:47 -0500
+From: Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
+To: Kangjie Huang <flamboyant.h.01@gmail.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ Bin Meng <bmeng.cn@gmail.com>, Chao Liu <chao.liu@processmission.com>, 
+ Alistair Francis <alistair.francis@wdc.com>,
+ Alistair Francis <alistair@alistair23.me>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, 
+ Fabiano Rosas <farosas@suse.de>, Laurent Vivier <lvivier@redhat.com>
+Subject: Re: [PATCH v2 1/5] hw/ssi: Add Synopsys DesignWare SSI standard PIO
+ controller
+Message-ID: <itp7xmctqnac4c7kytqyrrs3xbfnbjprem6ezlltc6b5ncdpdn@6pypq3e7lbog>
+References: <20260801192848.30606-1-flamboyant.h.01@gmail.com>
+ <20260801192848.30606-2-flamboyant.h.01@gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=43.163.128.49;
- envelope-from=guochun.wang@foxmail.com; helo=xmbghk7.mail.qq.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260801192848.30606-2-flamboyant.h.01@gmail.com>
+Received-SPF: pass client-ip=2607:f8b0:4864:20::32d;
+ envelope-from=asrinivasan@tenstorrent.com; helo=mail-ot1-x32d.google.com
+X-Spam_score_int: -19
+X-Spam_score: -2.0
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_NONE=-0.0001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Mon, 03 Aug 2026 18:17:24 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -87,62 +112,110 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: guochun wang <guochun.wang@foxmail.com>
+On Sun, Aug 02, 2026 at 03:28:44AM +0800, Kangjie Huang wrote:
+> Add a reusable SysBus model for the Synopsys DesignWare SSI controller.
+> 
+> Implement the Standard SPI register subset, configurable chip-select and
+> FIFO resources, the four Standard PIO transfer modes, reset handling,
+> chip-select GPIOs, and RAZ/WI handling for unsupported enhanced, DMA,
+> and XIP registers.
+> 
+> Add num-cs, fifo-depth, and imr-reset properties. Save only Standard PIO
+> state in VMState and reject migration between devices with different
+> resource profiles.
+> 
+> The controller is not instantiated by this patch.
+> 
+> Signed-off-by: Kangjie Huang <flamboyant.h.01@gmail.com>
 
-The Kendryte K230 SoC contains two APB GPIO controllers derived from
-the Synopsys DesignWare APB GPIO (the Linux gpio-k230 driver is itself
-based on gpio-dwapb.c, and shares the same register layout), with a
-Canaan-specific compatible ("canaan,k230-apb-gpio") and hardlock
-integration. This series implements the device model, wires it into
-the K230 SoC, and adds qtest coverage.
+<snip>
 
-Patch 1 implements the controller model following the K230 Technical
-Reference Manual v0.3.1: software control mode (DR/DDR/CTL), external
-port multiplexing, per-pin IRQ output, edge and level interrupt
-detection, EOI/mask/gating logic, DDR/CTL mode switching with pending
-interrupt preservation, and three-phase Resettable API support with
-VMState migration. It also instantiates the two controllers (gpio0 at
-0x9140B000, gpio1 at 0x9140C000) in the K230 SoC, replacing the
-previous unimplemented-device placeholders, and wires each controller's
-32 per-pin IRQ lines to the PLIC (sources 32..63 and 64..95).
+> ---
+>  hw/ssi/Kconfig          |   4 +
+>  hw/ssi/dw_ssi.c         | 956 ++++++++++++++++++++++++++++++++++++++++
+>  hw/ssi/meson.build      |   1 +
+>  include/hw/ssi/dw_ssi.h |  62 +++
+>  4 files changed, 1023 insertions(+)
+>  create mode 100644 hw/ssi/dw_ssi.c
+>  create mode 100644 include/hw/ssi/dw_ssi.h
+> 
+> diff --git a/hw/ssi/Kconfig b/hw/ssi/Kconfig
+> index 1bd56463c1..c48cd2ff6d 100644
+> --- a/hw/ssi/Kconfig
+> +++ b/hw/ssi/Kconfig
+> @@ -6,6 +6,10 @@ config SIFIVE_SPI
+>      bool
+>      select SSI
+>  
+> +config DW_SSI
+> +    bool
+> +    select SSI
+> +
+>  config SSI
+>      bool
+>  
+> diff --git a/hw/ssi/dw_ssi.c b/hw/ssi/dw_ssi.c
+> new file mode 100644
+> index 0000000000..f9f0e23730
+> --- /dev/null
+> +++ b/hw/ssi/dw_ssi.c
+> @@ -0,0 +1,956 @@
+> +/*
+> + * Synopsys DesignWare SSI
+> + *
+> + * Copyright (c) 2026 Kangjie Huang <flamboyant.h.01@gmail.com>
+> + *
+> + * SPDX-License-Identifier: GPL-2.0-or-later
+> + *
+> + * Emulates the DesignWare SSI controller in Standard SPI mode,
+> + * covering the PIO/FIFO data path and chip selects.
+> + */
+> +
+> +#include "qemu/osdep.h"
+> +#include "hw/core/registerfields.h"
+> +#include "hw/core/qdev-properties.h"
+> +#include "hw/core/irq.h"
+> +#include "hw/ssi/dw_ssi.h"
+> +#include "migration/vmstate.h"
+> +#include "qapi/error.h"
+> +#include "qemu/bitops.h"
+> +#include "qemu/log.h"
+> +#include "qemu/module.h"
+> +
+> +/* DWC SSI 1.03 derivative (TRM v0.3.1 section 12.3). */
+> +#define DW_SSI_CTRLR0_RESET            0x00004007
+> +#define DW_SSI_SR_RESET                0x00000006
+> +#define DW_SSI_IDR_RESET               0xa1b2c3d5
+> +#define DW_SSI_VERSION                 0x3130332a
+> +#define DW_SSI_PIO_TX_BATCH            64
+> +
+> +enum {
+> +    DW_SSI_TMOD_TR,
+> +    DW_SSI_TMOD_TO,
+> +    DW_SSI_TMOD_RO,
+> +    DW_SSI_TMOD_EEPROM_READ,
+> +};
+> +
+> +REG32(CTRLR0, 0x000)
+> +    FIELD(CTRLR0, DFS, 0, 5)
+> +    FIELD(CTRLR0, FRF, 6, 2)
+> +    FIELD(CTRLR0, SCPH, 8, 1)
+> +    FIELD(CTRLR0, SCPOL, 9, 1)
+> +    FIELD(CTRLR0, TMOD, 10, 2)
 
-Patch 2 adds 16 qtest cases covering reset values, edge and level
-interrupts (rising/falling/both-edge, active-high/active-low), EOI
-clearing, INTEN gating and INTMASK masking, mode-switching behaviour,
-PLIC claim/complete flow, and the second controller instance.
+There are 2 variants of designware spi, one is called dw-apb-ssi and
+another is called dwc-ssi. If you look at their u-boot drivers, you can
+see that they differ in the location of the TMOD bits in the CTRLR0.
+dw-apb-ssi has it at bits 8 and 9, while dwc-ssi has it at 10/11.
+This implementation is for the dwc-ssi version (which is the newer one).
 
-Hardware control mode, debounce logic, the combined interrupt output,
-and clock-domain synchronization are intentionally not modelled; they
-have no observable effect under QEMU and are documented in the patch 1
-commit message.
+Would it be possible to have the naming be consistent (DWC_SSI,
+dwc_ssi.c) everywhere? There are some places throught the series where
+the file names/Kconfig symbols/function names are named dw_ssi.
 
-The series has been tested against the Linux gpio-k230 driver and the
-existing K230 qtest suite.
+One could argue that this model could retain the generic designware spi
+name and support both versions, but I don't think that's necessary.
 
-Cc: Chao Liu <chao.liu@processmission.com>
-Cc: Alistair Francis <alistair.francis@wdc.com>
-Cc: qemu-riscv@nongnu.org
-
-guochun wang (2):
-  hw/gpio: add K230 GPIO controller model
-  tests/qtest: add K230 GPIO controller test
-
- MAINTAINERS                  |   3 +
- hw/gpio/Kconfig              |   3 +
- hw/gpio/k230_gpio.c          | 362 ++++++++++++++++++++++++++++++
- hw/gpio/meson.build          |   1 +
- hw/riscv/Kconfig             |   1 +
- hw/riscv/k230.c              |  27 ++-
- include/hw/gpio/k230_gpio.h  |  73 +++++
- include/hw/riscv/k230.h      |   5 +
- tests/qtest/k230-gpio-test.c | 521 +++++++++++++++++++++++++++++++++++
- tests/qtest/meson.build      |   2 +-
- 10 files changed, 991 insertions(+), 7 deletions(-)
- create mode 100644 hw/gpio/k230_gpio.c
- create mode 100644 include/hw/gpio/k230_gpio.h
- create mode 100644 tests/qtest/k230-gpio-test.c
-
--- 
-2.43.0
-
+Regards
+Anirudh Srinivasan
 
