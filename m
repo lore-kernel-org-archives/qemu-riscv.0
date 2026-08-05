@@ -4,128 +4,134 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F15F8C55ABA
-	for <qemu-riscv@archiver.kernel.org>; Wed,  5 Aug 2026 18:27:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5950EC55174
+	for <qemu-riscv@archiver.kernel.org>; Wed,  5 Aug 2026 18:37:13 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wrgJR-00008H-EK; Wed, 05 Aug 2026 14:25:59 -0400
+	id 1wrgTz-0003WE-8u; Wed, 05 Aug 2026 14:36:51 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wrgJA-00005i-4U
- for qemu-riscv@nongnu.org; Wed, 05 Aug 2026 14:25:40 -0400
+ id 1wrgTr-0003SE-Et
+ for qemu-riscv@nongnu.org; Wed, 05 Aug 2026 14:36:44 -0400
 Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wrgJ0-0007gN-B0
- for qemu-riscv@nongnu.org; Wed, 05 Aug 2026 14:25:34 -0400
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+ id 1wrgTp-0000tW-8E
+ for qemu-riscv@nongnu.org; Wed, 05 Aug 2026 14:36:43 -0400
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 675HSOea3673620
- for <qemu-riscv@nongnu.org>; Wed, 5 Aug 2026 18:25:28 GMT
+ 675HRkXo2912413
+ for <qemu-riscv@nongnu.org>; Wed, 5 Aug 2026 18:36:39 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=AWC3jvrWcnN
- mnr5H6oLP/K98MOvHsWoX9ZmIMuKsGLc=; b=b+YOsILjabdM+1Tsrd61FhW21Dw
- 0WSbI00nogBhzjKLLCCvFE1b1C1cJ9rAzyM5SJxXFwg5ELuJe+uZ2LnXQIi4sHgo
- DKBOqGZRwGXv7ZNLm/nJq4toQ1nLoFphZQoopqKc4z7BuyvDK8qulcrHkVS7jzy9
- WhXzFp1W2bBpjcsSEd2alAZ3DFbBBGvn8ZRmOtG6MOd/tB9LDeeSOkw3ASMBwyOf
- kzT/0epObw/wfgdBRyDsF+OceE9GyvROZT0lCKUVQTOGjH5ujHzuqo/DgT5kZVBA
- URL+qswsM7ZKfHOy+Gz6XSZx9m2xTqbNNeHf13mC1rk4gpYa7wQEbKKB+KA==
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ 5E6SEJqat8P5HlEeauanx/rR2wYOwxNp1YTFE4Deahk=; b=Vtd5VuJzThB3bJVA
+ Gb4NAETwhI1m8JqS+WK0x2svgardMi8Clph27/2RqiX2VrbNqtChG83SF7gzSPVj
+ wdrsa4OOs8F7VGU1VI9ji+SfHOjKsN96paJPul3Yi4QNDrIC4aoY90bfpPW+ZMj5
+ eD4i/vWLJMXN06kfhaiUnRs3PWm8VDj+v0FEhFKqjDR3A0DarkPrboUTz23vxHhj
+ 4Y/zMESToNiDKlc1DH9IMS5PLJESHsIzgkD6eliSSNwozB90/O0HPzioO6ntZJUi
+ vq4l4/sbkOfaj8F2vKbIQ0DyTWFWlQLbuipm1xuBgwxe6xcnhIeWSBNVXQKFDX/3
+ jT+05g==
 Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com
  [209.85.222.200])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fv3w6a2jc-1
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fv9f58anp-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Wed, 05 Aug 2026 18:25:28 +0000 (GMT)
+ for <qemu-riscv@nongnu.org>; Wed, 05 Aug 2026 18:36:39 +0000 (GMT)
 Received: by mail-qk1-f200.google.com with SMTP id
- af79cd13be357-92e52306621so125342285a.1
- for <qemu-riscv@nongnu.org>; Wed, 05 Aug 2026 11:25:28 -0700 (PDT)
+ af79cd13be357-92e5fc4c7e9so138256285a.3
+ for <qemu-riscv@nongnu.org>; Wed, 05 Aug 2026 11:36:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1785954327; x=1786559127; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=AWC3jvrWcnNmnr5H6oLP/K98MOvHsWoX9ZmIMuKsGLc=;
- b=Sjz2KGEJLWG2e8YW76/709sPhOmV/Yhp4NG75DQuMq/z78kcIyL/dSiSB9yf2cl1FG
- hXzjxQPvjSNj3/h404T3J+5YK97B7nVqw/nkEQD5s5Xgg9TX66eMeNVYmg6rf9YHXEDQ
- wJxQrB96SnoIIw9cQ6NWKvkpkGOx90cr0I4hor8FmAjXTbXfSjeDpjYSGiou1SfALiOe
- LMvMD7dkewaKXk+CkIs+4chpxtfjDd8DKVoZ7Xa4MWFZ9MIaQv4ew5vg96sTInXsBpao
- HL/yNje1n98MRiDljTBYzniJ8QtRiCLyvfW9d03t3IaTCdxSYxcVzW5C03pOEaKBNwmh
- xeOw==
+ d=oss.qualcomm.com; s=google; t=1785954998; x=1786559798; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=5E6SEJqat8P5HlEeauanx/rR2wYOwxNp1YTFE4Deahk=;
+ b=Mm0wGwEwChqN0+DccAsX36dZL31wqGk0Q0V39ahvuKZIhkQea5WM0I0hwj2q2yp+2k
+ qX6MQOkzB5fr6l64oIMs3x+p2BQN1rZAUdw/zuBUy63D7o3+2noBL4E2lPx4/FS5NNZd
+ B6UFpsQuow9XBcceFnhVtUQ42mNehVqi/z+ra7R83ZFnqXMvgDRchbKMYFy5b2f/vQym
+ ASx+3jV+I/j4+ecf0KxcO0tICPmuNP9qL3qhe8QY/1Vf61K+5nH4ha94rm1WfPh1vWGu
+ XbtU5Xo7UyXOXIbzphixXbs0IHev+gVMT34xut9fCKvj8h03aujd46v0GsyMoFDWP8se
+ /b0w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785954327; x=1786559127;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=AWC3jvrWcnNmnr5H6oLP/K98MOvHsWoX9ZmIMuKsGLc=;
- b=rMJ+MhAvNv9OJTzyuRZO7wcHk63uN8YgTrAyfaeZFsdnAWk3huCEwwFsr3ndFDR5H2
- Wx6EMh8ItRCggzbJqQdwhxWgUct/9HUtNLEJ4RoB42rxB2z0Ln8ktmn3jK2QvNK57XVJ
- XAtsOIB8NNNN+C4vi2GCs91ViKdJqd0Y6Bj8gucOdBqySrzBQBqG40QT4JSDAxuj3gWs
- VXc8l/3y7EL8FCUaIO0D8xCIupcBOWvCIx4+gqJUCrDws6yeZS7Cyfihzcu6GVPMP9+3
- 0Rz6T2dBFMBPzE1SqYXCUenTYOiu52AlWp2vFWOZGbmN6dT4Ziq8GDlhgSgMJFFxFdXd
- D7yA==
-X-Gm-Message-State: AOJu0YxXbgc3kd6V67BrSlekRzTDbW8VLDVhBAtsd7TF3yv1dwOeMsYO
- 7MehTE2wUm8K5u2KH/TrAEEAaQRtpwMIDNqVMERYJFZFgDIcmaNUBIa5oxhosWTvrz6xUfik/3j
- hBMSKKut1+gL2GiwJXoR9Tqd8GoDXVXHVcQT+BfuUpBZhtNPir9YDvfFZYg==
-X-Gm-Gg: AR+sD12wqq507T/85UjBX079tBr7up16TSCTGjkHSP3C5nPwWfvzPKGoNqiWYv89nTY
- 3Wzt2cscFb6o35+6mJ+Vos6oqbgfsSkn0zU8rSyFdEgzo2MVCIrcnwxiMTRZOfIF4iJI3x7lXs5
- xlyWQ0gwe2cqzns7DlwJdVMZVnSpACVCilyl/G+b5t/5lcJO2IuY9xNCZUjXR+5I/L87Sqab3ld
- vqI8nioU1l1AD+tprNMzmNquI16rEW5QZRMWG5HcFR3u17V3C/FrFW7+5A+egX99WOG4V0JRI5i
- nBukLugyh4ZOodLy6qm4SauPIzAipSau7H7wiFYH/1UGPGQ61KXlLkODX2c2beWwwWrQcZUddMW
- n13mEmLnXm3QdLsX14mgL5ON+LLtwUvyD3U3Nkw==
-X-Received: by 2002:a05:620a:a2dc:20b0:92e:8aed:4785 with SMTP id
- af79cd13be357-936490e7a4bmr661848085a.25.1785954327060; 
- Wed, 05 Aug 2026 11:25:27 -0700 (PDT)
-X-Received: by 2002:a05:620a:a2dc:20b0:92e:8aed:4785 with SMTP id
- af79cd13be357-936490e7a4bmr661843685a.25.1785954326455; 
- Wed, 05 Aug 2026 11:25:26 -0700 (PDT)
-Received: from QCOM-UWl2o8bcGT.qualcomm.com ([187.11.154.152])
+ d=1e100.net; s=20251104; t=1785954998; x=1786559798;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=5E6SEJqat8P5HlEeauanx/rR2wYOwxNp1YTFE4Deahk=;
+ b=eRC3oEW9b7thSYFKvE5TSMAd78zFjNrX9pDoYk4yigoTQqJuVeuxwE2D7c2jsSrYHQ
+ zptwAzgplo5uQAGEpnTzfUWSZweFOZEKfY2mAa5z7CSbphxhS6z/f+KK+7qBZcDietjH
+ QB1z33JnXpp8p23Ss6EqQ3cB7r47NM7zG+TjEjzhAFULuIoeyk+5BYoPK1FTPp3Lv+my
+ Zh41m3qUVMoeJ/6lzFiVNHCwjrtxryB/IHrT5HJemfN5hm1uefysFDiso8LsWYcIN4Tf
+ +8UdoFQFxfOX6eNcQp2PcHNKqk6H/UbdfHwNCv5CmoBVTgCstxaS9vU5dQEJSX+T6fjh
+ G3ew==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RpLTY8/SpAWHlIlyhzooc0b97pL8UeaGnTLV+vAacylnIU5SniH5zAX7kb5WC787N1HwUe/BWJsq+9H@nongnu.org
+X-Gm-Message-State: AOJu0YzDEh0sTjvJ+z2FWujy/xwdYLtGeZAZj+mIlMt/GVKv0no8U+ck
+ jyWMhvrU+EaSj9kph4VapphHHGRVmpjTJ/AywLAUDbh37dJNphAznFJY2U0em6qTLkgUZc55SUK
+ V0U8T1TG3rMGztoL6eh/B+3S84BuDts7TI4A+9S4uWl0rFGTHakCP3sZ+gw==
+X-Gm-Gg: AR+sD12v86qnKy51XqPRXGpmsbDwv0G5zgfT9esKTQFvMi6B3SphAxfcsbX58AQSy9z
+ EGYno7t5A8krwVA0iC7MG7nrr5zqgS9YT1MnoqfT0U3VsimJwxPvhFm6A4Kc9/COfQ9ggXxiolU
+ 2a572512x81HqOyUOsqMM8PjVfY80TqVhGUNi5zDG9is/wd15iUHa/zNRTDLT8Asiwk4CEJ9HTJ
+ PYHrdCPgwKB8KZDABTdR6ZVQxkU/RPH8Rp/fN0LoiCpcf7KnnteXyOGT4vbaY91h1BgnGClkqpB
+ 1KN42UpzcMga/WbW1CIYiWvDA+tL5mKLnheGFssz/q43qY4rO6qsjK6CiftrZc+MlviXpJfHmB+
+ BilcMAzbga/O2WVsvSBePLUcJLM4KfZL3L/+z
+X-Received: by 2002:a05:620a:148f:b0:932:dd83:c54 with SMTP id
+ af79cd13be357-936492d8bafmr718174785a.42.1785954997856; 
+ Wed, 05 Aug 2026 11:36:37 -0700 (PDT)
+X-Received: by 2002:a05:620a:148f:b0:932:dd83:c54 with SMTP id
+ af79cd13be357-936492d8bafmr718167985a.42.1785954997142; 
+ Wed, 05 Aug 2026 11:36:37 -0700 (PDT)
+Received: from [192.168.68.104] ([187.11.154.152])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-9364a3fc901sm209387885a.6.2026.08.05.11.25.24
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 05 Aug 2026 11:25:25 -0700 (PDT)
-From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
-Subject: [PATCH 5/5] docs/specs: add RISC-V CPU Debug support info
-Date: Wed,  5 Aug 2026 15:25:06 -0300
-Message-ID: <20260805182506.2943757-6-daniel.barboza@oss.qualcomm.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260805182506.2943757-1-daniel.barboza@oss.qualcomm.com>
-References: <20260805182506.2943757-1-daniel.barboza@oss.qualcomm.com>
+ af79cd13be357-9364a58d356sm210879385a.41.2026.08.05.11.36.34
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 05 Aug 2026 11:36:36 -0700 (PDT)
+Message-ID: <946b40dd-a2b9-4d10-97f0-8dad261e0570@oss.qualcomm.com>
+Date: Wed, 5 Aug 2026 15:36:32 -0300
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: QyJf7GsPnYNlg2g_nSIE40Qf0Mv0-fqa
-X-Proofpoint-ORIG-GUID: QyJf7GsPnYNlg2g_nSIE40Qf0Mv0-fqa
-X-Authority-Analysis: v=2.4 cv=a48AM0SF c=1 sm=1 tr=0 ts=6a738018 cx=c_pps
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 00/18] target/riscv: Add support for RISC-V P
+To: Chao Liu <chao.liu.zevorn@gmail.com>, Molly Chen <xiaoou@iscas.ac.cn>
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+References: <cover.1784280142.git.xiaoou@iscas.ac.cn>
+ <amnHq8A14gOpHcg0@ChaodeMacBook-Pro.local>
+From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Content-Language: en-US
+In-Reply-To: <amnHq8A14gOpHcg0@ChaodeMacBook-Pro.local>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-GUID: tADP8RjlD8_ywePdW5r04ywSQMpsqsJZ
+X-Proofpoint-ORIG-GUID: tADP8RjlD8_ywePdW5r04ywSQMpsqsJZ
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODA1MDE1MyBTYWx0ZWRfX8di7ynmANpwV
+ lHe5DT9KQL+elG/xCMbpaYfynxzNT9iNg0rQCckFg/An5iAaoqJ88QaCsW05LGM0XrySBJj9y+h
+ uBrGs5kBWdw1epaIaUlUpIZtJTaQI3Q=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODA1MDE1MyBTYWx0ZWRfX4Dqw7bGauE5M
+ As5jL+OSdKAIyHSnYsj2cJbRoNsNHlffQWGnbUxMSn7Nx0LaYUy9nBU9C/aDU1Lf+/A0xHgjlln
+ 3mxOQZ9/NmlN/OajTCfa2CYWADNn1NOopvGPy4XY0iwbcWO1a66/mA/QtNYQpZKYqJ8aeyl27Og
+ Yf5WIchOIrXLgIb9DnYYNXz3/GIz5GHmadEcJDwng3tta/ruzB9EWcEjyxSEzGcmFbd7MgtwYhv
+ BxviGOy/JNm71wZp8guS9aMj2SYC7Jjziun4ay1A+zHzUfENunsZOyYPaokRDEP/EdM1bhSR8/H
+ bPSkRLzNlAWcRdUi1YnC9bDo31h3tfF13X+gew6FXf2WPWJrVGHRZbOGiTP47ltgZW3hnnN3Wcz
+ t/JhaJY0icTQ6r/+KrIdVsbw8NlA3b50385K90wHkSkgzupvEt+xWba7TQRm+Ef8vwFfeKJ3495
+ bxbLwF+e0tjDQx6HAEQ==
+X-Authority-Analysis: v=2.4 cv=d4bFDxjE c=1 sm=1 tr=0 ts=6a7382b7 cx=c_pps
  a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=iMfxv9gflPUPBcmW7/Gq5Q==:17
- a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22 a=HwFc7jivAAAA:8
- a=EUspDBNiAAAA:8 a=hLHZJHzLvL1iQ8yadmQA:9 a=PEH46H7Ffwr30OY-TuGO:22
- a=kr7TZk85JJIQSqC0cl8G:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODA1MDE1MSBTYWx0ZWRfXxLrdRXpQV8hO
- e9dX/dl3kuMQi8QqgRt7j+OZrka0l+o+NIc++ZYhS0g612JwniqRleSTdQzsbVHhLk+rxsQtBTc
- m3POMAmtdynUByoEfjPiIhpxowgMrfE=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODA1MDE1MSBTYWx0ZWRfX47vAt2S4MvWF
- g9C4f3tnJHIBRVrT+zaqTonpg+Oh3tCC+u4a/T8YK41CAY5ukJKr89sd5A5fY1HXTU8jUkcA4Pk
- Yyf1znaH1bsuHHgeH0L4ItdujH7wvGZub62fDtXA10xpFY34Huw7U2Hz9+MlbBQ/lc11cxpZ790
- jl7rYQvRrTTGogS6mJzdR6ljJSZPXpyxhgYQbS5mJRrGvcXBEs8Jn0PAIV4va7/COKFcuATwE5r
- fDLTbwo6jUzwWTGf4TLjydztkC7wFMYRJq7Yr8xU31pGKCXkUh8pBcnR5w9k2t/Fx4g1c1A1VcG
- CSlcDXh77ObURv4Knap69cYC0oVgrk1gzUPA2Un6zWUB8/9jr+XoUaxLXG+wRp/wQcm1UDfTP8x
- GpR1s4HMMZjxXoDbueeozOh5pcxxyYA4v7qxNgl/i/8iYHrph4rmk0jGVZkI3qpBwq0LpIuZS60
- YAPjuVCnkgSOUWWD9ww==
+ a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
+ a=NEAV23lmAAAA:8 a=HIoIN3QyAAAA:8 a=69wJf7TsAAAA:8 a=zl2dgruvT0JfJdoN-sEA:9
+ a=QEXdDO2ut3YA:10 a=PEH46H7Ffwr30OY-TuGO:22 a=MbFZXBXkOCLWhBDvYpC8:22
+ a=Fg1AiH1G6rFz08G2ETeA:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-05_05,2026-08-05_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 clxscore=1015 suspectscore=0 spamscore=0 phishscore=0
- adultscore=0 malwarescore=0 lowpriorityscore=0 priorityscore=1501 bulkscore=0
+ malwarescore=0 spamscore=0 lowpriorityscore=0 phishscore=0 bulkscore=0
+ suspectscore=0 clxscore=1015 impostorscore=0 adultscore=0 priorityscore=1501
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608050151
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608050153
 Received-SPF: pass client-ip=205.220.168.131;
  envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
 X-Spam_score_int: -27
@@ -150,102 +156,141 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Add documentation regarding how QEMU handles Debug versions 0.13 and
-1.0.
 
-Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
----
- docs/specs/index.rst       |  1 +
- docs/specs/riscv-debug.rst | 68 ++++++++++++++++++++++++++++++++++++++
- 2 files changed, 69 insertions(+)
- create mode 100644 docs/specs/riscv-debug.rst
 
-diff --git a/docs/specs/index.rst b/docs/specs/index.rst
-index b7909a108a..181773515d 100644
---- a/docs/specs/index.rst
-+++ b/docs/specs/index.rst
-@@ -38,5 +38,6 @@ guest hardware that is specific to QEMU.
-    rocker
-    riscv-iommu
-    riscv-aia
-+   riscv-debug
-    aspeed-intc
-    iommu-testdev
-diff --git a/docs/specs/riscv-debug.rst b/docs/specs/riscv-debug.rst
-new file mode 100644
-index 0000000000..e6dcad7d38
---- /dev/null
-+++ b/docs/specs/riscv-debug.rst
-@@ -0,0 +1,68 @@
-+.. SPDX-License-Identifier: GPL-2.0-or-later
-+
-+.. _riscv-debug:
-+
-+RISC-V Debug support for RISC-V CPUs
-+====================================
-+
-+Up until QEMU version 11.1 RISC-V CPUs historically supports Debug version
-+0.13 via a "debug" flag that is enabled by default in the default rv64
-+CPU.
-+
-+Starting on QEMU 11.2, RISC-V CPUs supports also Debug version 1.0, enabled
-+via the "sdtrig" flag like a regular extension.  The default setting for rv64
-+is still Debug 0.13 (debug = on, sdtrig = off),
-+
-+The "sdtrig" flag precedes "debug", i.e. if both are enabled the CPU will
-+implement Debug 1.0.  In short:
-+
-+.. list-table:: "debug" and "sdtrig" flags and enabled Debug version
-+   :widths: 25 25 25
-+   :header-rows: 1
-+
-+   * - debug
-+     - sdtrig
-+     - Enabled Debug version
-+   * - on
-+     - off
-+     - 0.13
-+   * - on
-+     - on
-+     - 1.0
-+   * - off
-+     - on
-+     - 1.0
-+   * - off
-+     - off
-+     - All Debug versions disabled
-+
-+
-+Debug 0.13 to 1.0 code/design changes
-+-------------------------------------
-+
-+The effort done in QEMU version 11.2 to support Debug versions 0.13 and
-+1.0 together was based in section 1.2.1.2 "Incompatible Changes from 0.13
-+to 1.0" from the ratified `1.0 spec`_.  Here's how the proposed changes in
-+that section were implemented in QEMU 11.2:
-+
-+Changes that aren't applicable due to either being SBI related or not present/supported in QEMU:
-+    * "Make haltsum0 optional if there is only one hart."
-+    * "System bus autoincrement only happens if an access actually takes place (sbdata0)."
-+    * "Require debugger to poll dmactive after lowering it."
-+
-+Already implemented in the legacy Debug 0.13 base code:
-+    * "When a selected trigger is disabled, tdata2 and tdata3 can be written with any value supported by any of the types this trigger supports."
-+    * "tcontrol fields only apply to breakpoint traps, not any trap."
-+
-+All "hitN" fields are hardwired 0 thus no changes made:
-+    * "If version is greater than 0, then hit0 (previously called mcontrol6.hit) now contains 0 when a trigger fires more than one instruction after the instruction that matched. (This information is now reflected in hit1.)"
-+
-+QEMU doesn't support encoding sizes greater than 64 bit so no change made:
-+    * "If version is greater than 0, then the encodings of size for sizes greater than 64 bit have changed."
-+
-+Changes made in the 0.13 codebase to support Debug 1.0:
-+    * "Add pending to icount."
-+    * "If version is greater than 0, then bit 20 of mcontrol6 is no longer used for timing information. (Previously the bit was called mcontrol6.timing.)"
-+
-+
-+.. _1.0 spec: https://docs.riscv.org/reference/debug/v1.0/_attachments/riscv-debug-specification.pdf
--- 
-2.43.0
+On 7/29/2026 6:32 AM, Chao Liu wrote:
+> On Fri, Jul 17, 2026 at 10:06:53AM +0800, Molly Chen wrote:
+>> This series adds support for the RISC-V Packed SIMD (P) extension.
+>>
+>> The P extension defines packed-SIMD fixed-point operations intended
+>> for DSP-style workloads such as multimedia and signal processing.
+>> These instructions operate on packed subword elements within
+>> general-purpose registers (GPRs).
+>>
+>> The implementation follows the current development draft of the
+>> specification (v0.20):
+>>
+>>    https://github.com/riscv/riscv-p-spec/
+>>    or
+>>    https://www.jhauser.us/RISCV/ext-P/
+>>
+>> Compared with v1, this version reduces implementation boilerplate by
+>> defining and reusing helper macros for common patterns in
+>> trans_rvp.c.inc and psimd_helper.c. It also consolidates the P
+>> extension prerequisite validation in riscv_cpu_validate_p().
+>>
+>> The Zbkb dependency has been removed to align the implementation with
+>> the current specification. This version also implements the
+>> specification-defined control of vxsat, which was missing from v1.
+>>
+>> All instructions have been functionally tested using the following
+>> test suite:
+>>
+>>    https://github.com/mollybuild/qemu-riscv-test-uart
+>>
+>> The implementation focuses on functional correctness and ISA
+>> coverage. Performance optimizations were not considered at this
+>> stage.
+>>
+>> Feedback on the implementation details would be highly appreciated.
+>>
+>> Tested with:
+>>
+>>    - ninja -C build test
+>>    - make -C build check-qtest-riscv32
+>>    - make -C build check-qtest-riscv64
+>>    - Functional tests for all P extension instructions using
+>>      qemu-riscv-test-uart
+>>
+>> No regressions or test failures were observed.
+>>
+>> ---
+>> Changes in v2:
+>>
+>>    - Refactored trans_rvp.c.inc and psimd_helper.c by defining and
+>>      reusing helper macros for common implementation patterns, reducing
+>>      boilerplate and overall code size.
+>>    - Moved the P extension prerequisite checks into
+>>      riscv_cpu_validate_p().
+>>    - Removed the Zbkb dependency to align with the current
+>>      specification.
+>>    - Added the specification-defined vxsat control mechanism, which was
+>>      missing from v1.
+>>
+> This patch set is a significant improvement over v1. I think there are still
+> a few common issues we can address together:
+
+v2 is a huge improvement indeed.  v1 had 11k lines, v2 cut those by half due to
+the smart use of helpers.
+
+> 
+> 1. The line break characters '\' in the helper macros we defined need to be space-aligned.
+> 2. Every patch is currently missing a commit body.
+> 
+> I think these changes are quite necessary.
+
+Yeah, having a commit message allows us to make fewer guesses when reviewing code.
+E.g. the usage of __int128t__ macros and the choice of some rounding formulas.  We
+can make review  assumptions and hope all is fine, but it's not ideal.
+
+And, as Chao mentioned in his other reply, having test cases will be helpful to
+assert that everything being added here is sane.  In particular with the amount
+of lines we're adding here.
+
+
+Cheers,
+Daniel
+
+> 
+> Thanks,
+> Chao
+>> v1:
+>>    https://lists.nongnu.org/archive/html/qemu-riscv/2026-04/msg00301.html
+>>
+>> Molly Chen (18):
+>>    target/riscv: Add packed SIMD extension state
+>>    target/riscv: Add packed SIMD helper framework
+>>    target/riscv: Add packed SIMD arithmetic instructions
+>>    target/riscv: Add packed SIMD averaging and rounding instructions
+>>    target/riscv: Add packed SIMD absolute, difference, compare and mask
+>>      instructions
+>>    target/riscv: Add packed SIMD shift instructions
+>>    target/riscv: Add packed SIMD exchange instructions
+>>    target/riscv: Add packed SIMD horizontal reduction instructions
+>>    target/riscv: Add packed SIMD pack, merge and count-leading
+>>      instructions
+>>    target/riscv: Add packed SIMD multiplication instructions
+>>    target/riscv: Add packed SIMD multiply-accumulate instructions
+>>    target/riscv: Add packed SIMD Q-format multiplication instructions
+>>    target/riscv: Add packed SIMD Q-format MAC instructions
+>>    target/riscv: Add packed SIMD two-way MAC instructions
+>>    target/riscv: Add packed SIMD four-way MAC instructions
+>>    target/riscv: Add packed SIMD load-replicate instructions
+>>    target/riscv: Add packed SIMD RV32 only instructions
+>>    target/riscv: Remove Zbkb dependency from P extension to align with
+>>      the spec
+>>
+>>   target/riscv/cpu.c                          |    5 +-
+>>   target/riscv/cpu.h                          |    8 +
+>>   target/riscv/cpu_bits.h                     |    2 +
+>>   target/riscv/helper.h                       |  529 ++++
+>>   target/riscv/insn32.decode                  |  829 +++++
+>>   target/riscv/machine.c                      |   19 +
+>>   target/riscv/tcg/csr.c                      |   39 +-
+>>   target/riscv/tcg/insn_trans/trans_rvb.c.inc |    4 +-
+>>   target/riscv/tcg/insn_trans/trans_rvp.c.inc | 1389 ++++++++
+>>   target/riscv/tcg/meson.build                |    3 +-
+>>   target/riscv/tcg/psimd_helper.c             | 3165 +++++++++++++++++++
+>>   target/riscv/tcg/tcg-cpu.c                  |   46 +
+>>   target/riscv/tcg/translate.c                |    6 +
+>>   13 files changed, 6038 insertions(+), 6 deletions(-)
+>>   create mode 100644 target/riscv/tcg/insn_trans/trans_rvp.c.inc
+>>   create mode 100644 target/riscv/tcg/psimd_helper.c
+>>
+>>
+>> base-commit: 8fb307591625731060d399aca42373c02c7cb040
+>> -- 
+>> 2.34.1
+>>
 
 
