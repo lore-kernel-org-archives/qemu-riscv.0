@@ -4,94 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB5D4C55ABF
-	for <qemu-riscv@archiver.kernel.org>; Thu,  6 Aug 2026 11:36:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4137DC55ABF
+	for <qemu-riscv@archiver.kernel.org>; Thu,  6 Aug 2026 11:48:31 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wrwOj-0004WZ-Ev; Thu, 06 Aug 2026 07:36:29 -0400
+	id 1wrwaG-00070w-6P; Thu, 06 Aug 2026 07:48:24 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wrwOb-0004VR-OC
- for qemu-riscv@nongnu.org; Thu, 06 Aug 2026 07:36:23 -0400
-Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
+ id 1wrwa1-00070B-4Y
+ for qemu-riscv@nongnu.org; Thu, 06 Aug 2026 07:48:09 -0400
+Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wrwOY-00063x-Aq
- for qemu-riscv@nongnu.org; Thu, 06 Aug 2026 07:36:20 -0400
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+ id 1wrwZy-0007Z4-6t
+ for qemu-riscv@nongnu.org; Thu, 06 Aug 2026 07:48:08 -0400
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6769ni5W1625877
- for <qemu-riscv@nongnu.org>; Thu, 6 Aug 2026 11:36:17 GMT
+ 6769nljv1871437
+ for <qemu-riscv@nongnu.org>; Thu, 6 Aug 2026 11:48:04 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- pIKbBduoXm6gWnew9dkF96g81OjwlUftXNbqQaJOh/U=; b=YCVW4cjcesCLnR36
- jrvCRBGzxiu0fsqrv4NQtUcoOU2fcrTeBI0TBVEo2oBHhbXh9D699AlgZ4TIy5No
- PnWwepYAbMz8ibZqhi3BTRA/wBg7VgM0+OXzv4XCr1zS5unyc7I77NDPNTtYQcdI
- XL8LRdJP0I9cjQY/SmVZQxaxHlpTFYHz4r2x6IQ4bJCfRCArdVL+y3WgU/rsZ69n
- uEMuOZv2rTsSUGq0t4ZzgrNCOfQn3p/wprGGrbeIWisZwnMmHrvHNi087Dr7y2IX
- IMLL20tbODgWnKQjft78E4qGoTd4lW1rqj5/l1YIs+Q87uo6OjRpv8UliJ9f7DVe
- u8unhg==
-Received: from mail-qv1-f69.google.com (mail-qv1-f69.google.com
- [209.85.219.69])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fvntnh32e-1
+ auw5R7EpDYvD8tu3qHU0yZk6hRkssmFAjOr64hu9ygE=; b=ms1eaDkTTMQe20i7
+ hFFKheexMLYrnnSU554LFPaJEzuXROFoUJe8dESHHARYOFlrybGBqL8eQp3KFdRj
+ cTzC0NI+Uly96uPJdmTnrNzrRJTgHqz3w+Sz9Yvc1aCax812+WHeaVIckps9GAjq
+ 9jiMtdgy7G3RqrXXUwyfJzGHFtRdn+wtfG3DALWlU7QXdoS4Dw3/Akd/I9QYjuMc
+ Z7EToZor0c9UjT3CSwoG5bSqARdTyw0FOTqZrA8RFKT70+gBw6XPIrIpuOxVcQgr
+ Sx8Gzr3t9n2G34qpZDCjqN690C+9WG2JqL676BLREdo2+gZqQ1NeHcukFFZLJsfv
+ A3UbPQ==
+Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com
+ [209.85.222.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fvjud1wms-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Thu, 06 Aug 2026 11:36:16 +0000 (GMT)
-Received: by mail-qv1-f69.google.com with SMTP id
- 6a1803df08f44-8fc6b670b4bso19367366d6.1
- for <qemu-riscv@nongnu.org>; Thu, 06 Aug 2026 04:36:16 -0700 (PDT)
+ for <qemu-riscv@nongnu.org>; Thu, 06 Aug 2026 11:48:04 +0000 (GMT)
+Received: by mail-qk1-f199.google.com with SMTP id
+ af79cd13be357-9308eafb465so362101985a.2
+ for <qemu-riscv@nongnu.org>; Thu, 06 Aug 2026 04:48:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1786016175; x=1786620975; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1786016884; x=1786621684; darn=nongnu.org;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=pIKbBduoXm6gWnew9dkF96g81OjwlUftXNbqQaJOh/U=;
- b=AiKm45IGc1YRtf6ROpHgo/mhxfF79HWc8AMMiDty9pw8CPXebQcf67bwvTur9uM8M/
- ClBPJ++m27xZeXMuPoZpK/M5HXjGoPEIsnEtkAFTUG8bZg1FdhJw/sjPJJi+5U3iDP5K
- /XA2KodLSHmX8zqWCxI0O+TH/AEVbHVv+0UD+p2QQMMXoKFXcwts7etqKCM0pfEO+bgC
- CZn5nlRCUodmpDFL5/PFs+g0V75tSS9sWWdPBJ77qsrb0apVKKiLbnstX9DPbQnlxTJx
- jvXcgQcw/s3dRmWjLdrLNVZkUmtvVnKX/oWahqI22swGMDcJrx//BHeLvTzF+6apDv7b
- RA7A==
+ bh=auw5R7EpDYvD8tu3qHU0yZk6hRkssmFAjOr64hu9ygE=;
+ b=Ytdty3JiZZurvRgJEtbUreoKNpxie9XGmrL4mQKIEjM1WYkLQXC1z8O/E1JIsGF33u
+ eITB9PbPqfndDxuH917BylhJftLegfAAae4uq30X+kFW281KuWf8HP5U1zeKwaxJzdyS
+ FzluF4t2JxoSFwpBt/mnOlotQkhIpL/4KmTTIFlK4G53KzQDvqXfOT4lDms8poPotExr
+ 7ud9nFa3ZusIu+A8R+WS+VUXecTy+jEwf5F5DqQbJrsfA1qr5Y9dbmwmcSTahaJ3dTW6
+ wRAcGltv7SoiTZ9bjYHXwVjil6ok9W5zTHzTDUZpsQDsc7JBmL/1wiTCbzRGqylL83vu
+ VuJQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786016175; x=1786620975;
+ d=1e100.net; s=20251104; t=1786016884; x=1786621684;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=pIKbBduoXm6gWnew9dkF96g81OjwlUftXNbqQaJOh/U=;
- b=FS54ay1wm/HFPGZ1el60+l3yOe+QrfyRfIljz1dJrix5S7jNFIILBObDNKXG12EKnL
- 7CLYl/e9QBd2eetZbdGF+j8H+BxiVJO9rkXs8gcyqNV78yRrMNMVJ2EPRwpCiUkPRUkH
- jxg9ZJ/pVcXHo7tCqTQqrWavubHQaHkrbhRtlJeIMi9O0SkVosrxFhUOrP0vRq7Vxh7h
- VMkSSao4OhXESReZ3BlpPUtP4D+CVymcIEWGkTPTsHLjhr4VOUYQRV7vvk8YBf7wcIaf
- fNG9HqdqezNOhF6uMdiyZS1BpW1rI7hRUDwlfCnQzF7JJYSBHhzW8lg4sTLPgr/6za/a
- B2zw==
-X-Gm-Message-State: AOJu0YwHEvexuQe3UuWbLbJKqOY612BTn/4v50qJE3qWcXWsjss3B1Px
- hWrl3M6lPQiyJmyZNWj9fPwEEqo7ORs9/KhqITR07y3LNYwQ4ahLh34SMc3iK8qj+MxSDaaH1XK
- iVY/ciVJJ2G6WonKGQ1JHDvuXBGJ5KB6vRC3CzcFoyFQUPaR0TiQK6HxDxA==
-X-Gm-Gg: AR+sD13lKxHd+u/AVTHswaur53yey0WzAADq0UiSktbrvpu5WnATYvoX3VQV+ZlPeCz
- D6cDqCNNEiYLMOUmY8lB+U1FlUUKNrA3moLpoAR/xZvMXVKnwPDuhV65G50R9RvO99hRU/63dkG
- Gv8MxqdmRQXeEy/msNljFh+vLNdCtBZrj9otufT1ytWR36X6xNAskWvKoipENxBmKvTLjWvqAzx
- Phk7M+3whTvi0MvyNXqeLUZaGBf68RM6AiyIU6ZubJ7tWBi0m/87T6EN0XuDoMTyClpvY2BQgC1
- OiLx+aFmSCdnR2fW/WWBbeu/OMj0dGom4+QfnskM1PPER4Z3TiLNLSGFVr1/61c2OMCYjHuNU18
- oGhq/9yoZMFDJ7bJQACCeVmDjVaB/Fadi/RgW
-X-Received: by 2002:a05:6214:5b88:b0:8e8:7de7:ec20 with SMTP id
- 6a1803df08f44-9088105dc42mr183448706d6.4.1786016174721; 
- Thu, 06 Aug 2026 04:36:14 -0700 (PDT)
-X-Received: by 2002:a05:6214:5b88:b0:8e8:7de7:ec20 with SMTP id
- 6a1803df08f44-9088105dc42mr183447806d6.4.1786016174144; 
- Thu, 06 Aug 2026 04:36:14 -0700 (PDT)
+ bh=auw5R7EpDYvD8tu3qHU0yZk6hRkssmFAjOr64hu9ygE=;
+ b=l1/qPe2NQSfDsIdTq39i0DxjA/J7B72Uf8cXMZXvetWzAoxYx8wMFEk4JPaQEryGMR
+ XUvtT1Zz+vD4073QS3ywTuo6TxHMDL2TLzMYEGnXh+ZgkCxdE7rn5kIg1f+ANDWKjLAv
+ ynJlVvkf32U1b16ln4qqNrpEDtQotmCjuI6QDSV5SRUwQo11tCsb9wVwkqOQVEO+jvbe
+ SdHSHGaDO0lJbF1T6WbHGW+NhNyOuzJ5hTxkHdqwqWIXWsQd/gq6oamhWLaDWz+6jb0n
+ yyFkg9/GUHy5Bh7wyOLBbcGEnVM848yOaP7ZDlLsf93lijh1Bkx+tRaH1pC9YhZbaJ+K
+ 0z7A==
+X-Gm-Message-State: AOJu0YyoznS29vsuTcJGEU3JEzQ8X6nwY49I+BY899ApKZYTFkiMlbb0
+ 66Ol3elDhjodR0wHn270ned7rkjX+iiRSY06fV7mmgTE+h+CTQu89gzJU4rzq1hQPDKoWcjiIqH
+ HGK7CeKYw3xdTS12xhvn+6zDQrfdlp8esiNfeNGJPno3EMzuhpClDMDq3jA==
+X-Gm-Gg: AR+sD11ckNUrRecjMoxoWwudJd4Yy/qF75kckIvvKgKnLaWGd5zjxlmLjIjy+or2eRr
+ 52lG+xaAJWTyEujzVQ0cHdZ1nEuWeO/p/ZWFUyxpZPGI5xn2NmfR+LHbNliqyvRCRT8bvSBhAIu
+ 13UJla8Y5UFasDJqoah4HK+Idto9owLKoRwsLD9EkObhSB5z7z+NvtL3xc0vbalamQARRAercBU
+ gb7pvJkkO38UM40tAvPnt4sSgcxLA+MGh0DLnUtTEmFb2PKD5xmGHStk7bnB1amNLWJgL6m0yuV
+ nXl5GB7pPJ3z/0KYgUv3Hag6TIY/HEakrD6KrYluL8mC9WSz2so6nvaJ0xH4Ipv22BUghLg/3zq
+ y24EMjxpX0jPqpJSNP+GyUBkCOBskt+UaDETd
+X-Received: by 2002:a05:620a:a1cb:20b0:92e:45e4:c6e with SMTP id
+ af79cd13be357-93649153fccmr1224552385a.22.1786016883578; 
+ Thu, 06 Aug 2026 04:48:03 -0700 (PDT)
+X-Received: by 2002:a05:620a:a1cb:20b0:92e:45e4:c6e with SMTP id
+ af79cd13be357-93649153fccmr1224546985a.22.1786016883081; 
+ Thu, 06 Aug 2026 04:48:03 -0700 (PDT)
 Received: from [192.168.15.12] ([177.196.135.131])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-9087ff9d6e9sm49178796d6.7.2026.08.06.04.36.09
+ af79cd13be357-9364a4260c8sm387347085a.11.2026.08.06.04.47.59
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 06 Aug 2026 04:36:12 -0700 (PDT)
-Message-ID: <197c1e99-ba1e-47bf-aa93-ecb893ae6534@oss.qualcomm.com>
-Date: Thu, 6 Aug 2026 08:36:08 -0300
+ Thu, 06 Aug 2026 04:48:02 -0700 (PDT)
+Message-ID: <083ce420-ca09-4968-b284-e161ba781561@oss.qualcomm.com>
+Date: Thu, 6 Aug 2026 08:47:58 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 3/7] tests/qtest: add test for K230 gsdma
+Subject: Re: [PATCH v2 4/7] hw/misc: add K230 decomp gzip
 To: Tao Ding <dingtao0430@163.com>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, pbonzini@redhat.com, palmer@dabbelt.com,
  alistair.francis@wdc.com, liwei1518@gmail.com,
@@ -99,48 +99,48 @@ Cc: qemu-riscv@nongnu.org, pbonzini@redhat.com, palmer@dabbelt.com,
  farosas@suse.de, lvivier@redhat.com, pierrick.bouvier@oss.qualcomm.com,
  caojunze424@gmail.com
 References: <20260727155702.36484-1-dingtao0430@163.com>
- <20260727155702.36484-4-dingtao0430@163.com>
+ <20260727155702.36484-5-dingtao0430@163.com>
 From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Content-Language: en-US
-In-Reply-To: <20260727155702.36484-4-dingtao0430@163.com>
+In-Reply-To: <20260727155702.36484-5-dingtao0430@163.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODA2MDA5MSBTYWx0ZWRfX2n7raaTKjq/p
- Yev0Ci6Mg5T3k/YZMnpMZ9hbLZnKJAWdTNz4ge1MIHaiB9NkYWDdEgVsgXFoJO7LHWI0dbWio0g
- X49iUVWksuMgkCJtEXVOs1zFoqPXYLcyKcV8NgsRBPikanf6WNyrsAO03mfQl8CoUc3KBKxUhn6
- arsdMDDxj33uYV7aXtOjTPagy/ec9HKbMjopZK5GVUr4ALCanTQTbreky2BOh7qu6ouFUk67jDk
- KZtUEUI3D1E3+IlNkxdMmgjxTTMCiQbYuufZ8rB4NlmIebgxgNo7mT6atn4M1Z1LCwpbnt467d7
- D+RRIYgRCy3EaMRjG38hYqvYfNe47GXNyH5L1dBMbZfjOBGiC085fv7QusD/EItCUJZtrfNZ44D
- ivNaAWqeF5VRYdomzwym5mUK6wza/+T6YTArEoWHO8MiJY1qdybf172VsNWhefLssONiwvUkbMJ
- fVLjUymUqkKl2dd1MdQ==
-X-Proofpoint-ORIG-GUID: 7zCBPl2Plw0oZMDWflWYNDQOLP1wW3o8
-X-Proofpoint-GUID: 7zCBPl2Plw0oZMDWflWYNDQOLP1wW3o8
-X-Authority-Analysis: v=2.4 cv=LpKiDHdc c=1 sm=1 tr=0 ts=6a7471b0 cx=c_pps
- a=wEM5vcRIz55oU/E2lInRtA==:117 a=TqADvzrrTdHTq19dv/zLaQ==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODA2MDA5MyBTYWx0ZWRfX5UwmZSFD5jCR
+ OeC37k2LeHWpagTeszf+TJecVoOQfQcLzktjt08WAlwakC1qERqV58ewBDTHPP8O7F6VSh3cQ52
+ u28zG3SfueOwYkU4d65gZh+onzKVt3O4Xfp4oVD9w5iTg3hCNrN7T9CHWQREqL8XtURB2Dk+Tk2
+ FDDQAKtibHWNUmfyaE+ewDqmabONdPhx73/BL1MQ9u+H96URh13+YtIC/yMSlE97hKVqPuFjcrJ
+ p31ogDQponqn/+gJhEgDHfyNIas0bUiEiCPcjaItu/cHnu7knwGc5foXr9ucA3YiS6n0RDi0EUQ
+ fIESRN3H7pKUz4+s+oM49dWCphaerFM4Y19iiNEmuj116csUiN81poyv5QCZr1AdzU32pl+uPd3
+ 7VmknByG5XVIEGy7GYgxZ8mWOObSRsiY5Zg6b6117wka+Kcx5srbjdnJJJjmW4Q56mMnXUh4eMb
+ SsXbJbUTxuQ0ic2/o3A==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODA2MDA5MyBTYWx0ZWRfX+R9pTx94l3D0
+ ec7klm99rKhhX92RjDCCJIu1+E6v9X4C1FVALbdehwsaFgt/QTbi2cXVVNQ/LdtMn9wzPXnLhD+
+ s9ITqdRIfVbmufB7Jggm4RUnU4vzMHk=
+X-Proofpoint-GUID: O_4ADH4pqEJOVJEeEbOlpgR4aWswH2ZN
+X-Proofpoint-ORIG-GUID: O_4ADH4pqEJOVJEeEbOlpgR4aWswH2ZN
+X-Authority-Analysis: v=2.4 cv=DeInbPtW c=1 sm=1 tr=0 ts=6a747474 cx=c_pps
+ a=HLyN3IcIa5EE8TELMZ618Q==:117 a=TqADvzrrTdHTq19dv/zLaQ==:17
  a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
- a=Byx-y9mGAAAA:8 a=EUspDBNiAAAA:8 a=pPI8FLIT4_VpT0bWqI8A:9 a=QEXdDO2ut3YA:10
- a=OIgjcC2v60KrkQgK7BGD:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODA2MDA5MSBTYWx0ZWRfX3xhV9xX3nZAN
- sCDs3uY6uwFwOy644KmlNB21II3kKvg0yWxDbSh1OXlSYgiQ3txQJQ5xUkFsnZakIWp5LXI1Wp1
- lisLyD3EbYXy0WNI/AvH1yGWqYjw5hA=
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
+ a=Rull5dLDAAAA:8 a=Byx-y9mGAAAA:8 a=NYnJYY1RAfWgCtwSQyIA:9 a=QEXdDO2ut3YA:10
+ a=bTQJ7kPSJx9SKPbeHEYW:22 a=WpjELI0oDsu8BIz5_MMC:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-05_06,2026-08-05_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 lowpriorityscore=0 adultscore=0 bulkscore=0 spamscore=0
- phishscore=0 priorityscore=1501 malwarescore=0 impostorscore=0 suspectscore=0
+ malwarescore=0 phishscore=0 bulkscore=0 priorityscore=1501 adultscore=0
+ spamscore=0 lowpriorityscore=0 suspectscore=0 impostorscore=0 clxscore=1015
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608060091
-Received-SPF: pass client-ip=205.220.168.131;
- envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608060093
+Received-SPF: pass client-ip=205.220.180.131;
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
 X-Spam_score_int: -27
 X-Spam_score: -2.8
 X-Spam_bar: --
 X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -156,261 +156,421 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-
+Hi,
 
 On 7/27/2026 12:56 PM, Tao Ding wrote:
-> This commit adds test cases for GSDMA.
-> Imitate the behavior of the driver, set LLT and sdma registers.
-> After the data transmission is completed, check the destination address data.
+> Decompression accelerator is mainly used to implement hardware GZIP decompression function.
+> According to the k230 SDK, this hardware will be used during the uboot phase to decompress
+> compressed files.
 > 
-> Update MAINTAINERS for this test.
+> Decomp_gzip does not have the ability to access the system bus.
+> Therefore, SDMA is required for data transmission. A typical scenario is SDMA moving compressed
+> data from DDR to SRAM, and Decomp_gzip reading data from SRAM. After decompression, decomp_gzip
+> writes the data back to SRAM, and SDMA moves the data from SRAM to DDR.
 > 
-> Run this qtest:
->      $ mkdir build && cd build && ../configure --target-list="riscv64-softmmu"
->      $ QTEST_QEMU_BINARY=./qemu-system-riscv64   tests/qtest/k230-gsdma-test
+> According to "K230 Technical Reference Manual v0.3.1" section 15.
+> https://download.kendryte.com/developer/k230/HDK/K230%E7%A1%AC%E4%BB%B6%E6%96%87%E6%A1%A3/K230_Technical_Reference_Manual_V0.3.1_20241118.pdf
 > 
 > Signed-off-by: Tao Ding <dingtao0430@163.com>
 > ---
 
-Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+LGTM.  Minor comment down below:
 
->   MAINTAINERS                   |   1 +
->   tests/qtest/k230-gsdma-test.c | 201 ++++++++++++++++++++++++++++++++++
->   tests/qtest/meson.build       |   2 +-
->   3 files changed, 203 insertions(+), 1 deletion(-)
->   create mode 100644 tests/qtest/k230-gsdma-test.c
+> In patchv1, the reviewer identified some bugs, which have been fixed.
+> bugs:
+>      Decomp gzip only support Dynamic Huffman format
+>      Bit 0 in 0x0 register is write only
+> enhance:
+>      ues new reset interface
 > 
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 49c8013d5f..9c546596e7 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -1835,6 +1835,7 @@ F: include/hw/watchdog/k230_wdt.h
->   F: include/hw/dma/k230_gsdma.h
->   F: tests/functional/riscv64/test_k230.py
->   F: tests/qtest/k230-wdt-test.c
-> +F: tests/qtest/k230-gsdma-test.c
+>   MAINTAINERS                        |   2 +
+>   docs/system/riscv/k230.rst         |   1 +
+>   hw/misc/Kconfig                    |   3 +
+>   hw/misc/k230_decomp_gzip.c         | 508 +++++++++++++++++++++++++++++
+>   hw/misc/meson.build                |   1 +
+>   hw/misc/trace-events               |   4 +
+>   include/hw/misc/k230_decomp_gzip.h |  92 ++++++
+>   7 files changed, 611 insertions(+)
+>   create mode 100644 hw/misc/k230_decomp_gzip.c
+>   create mode 100644 include/hw/misc/k230_decomp_gzip.h
+> 
+
+
+[...]
+
+
+> +
+> +static void k230_decomp_gzip_handle_ack(void *opaque, int n, int level)
+> +{
+> +    K230DecompGzipState *s = opaque;
+> +
+> +    if (!level || !s->active) {
+> +        return;
+> +    }
+> +
+> +    switch (n) {
+> +    case K230_DECOMP_GZIP_GPIO_DMA_WRITE_ACK:
+> +    {
+> +        uint32_t input_size = s->gzip_src_size & K230_DECOMP_GZIP_DMA_IN_MASK;
+> +        uint32_t chunk = MIN(K230_DECOMP_GZIP_BLOCK_SIZE,
+> +                             input_size - s->total_requested);
+> +
+> +        if (!k230_decomp_gzip_load_input(s, k230_decomp_gzip_input_addr(s),
+> +                                         chunk)) {
+> +            k230_decomp_gzip_finish(s, false);
+> +            return;
+> +        }
+> +        s->total_requested += chunk;
+> +        s->input.slot = (s->input.slot + 1) % K230_DECOMP_GZIP_INPUT_SLOTS;
+> +        break;
+> +    }
+> +    case K230_DECOMP_GZIP_GPIO_DMA_READ_ACK:
+> +        if (s->output.current_offset == 0) {
+> +            k230_decomp_gzip_finish(s, false);
+> +            return;
+> +        }
+> +        s->output.slot = (s->output.slot + 1) % K230_DECOMP_GZIP_OUTPUT_SLOTS;
+> +        s->output.current_offset = 0;
+> +        break;
+> +    default:
+> +        return;
+
+For all other read/write callbacks I see qemu_log_mask() calls to notice when something
+unexpected happens, which is a good practice.
+
+Shouldn't you do the same here?   Seems like you're silently ignoring a foreign interrupt.
+Might as well do a qemu_log_mask() here too.
+
+
+Thanks,
+Daniel
+
+> +    }
+> +
+> +    k230_decomp_gzip_kick(s);
+> +}
+
+
+
+> +
+> +static void k230_decomp_gzip_start(K230DecompGzipState *s)
+> +{
+> +    uint32_t input_size = s->gzip_src_size & K230_DECOMP_GZIP_DMA_IN_MASK;
+> +
+> +    k230_decomp_gzip_reset_stream(s);
+> +    s->decomp_stat &= ~K230_DECOMP_GZIP_STAT_CRC_OK;
+> +    s->total_requested = 0;
+> +    s->total_produced = 0;
+> +    s->stream_end = false;
+> +    memset(&s->input, 0, sizeof(s->input));
+> +    memset(&s->output, 0, sizeof(s->output));
+> +
+> +    if (!(s->gzip_src_size & K230_DECOMP_GZIP_CTRL_EN) ||
+> +        input_size == 0 || s->gzip_out_size == 0) {
+> +        k230_decomp_gzip_finish(s, false);
+> +        return;
+> +    }
+> +
+> +    s->active = true;
+> +    k230_decomp_gzip_update_ctrl_en(s);
+> +    k230_decomp_gzip_kick(s);
+> +}
+> +
+> +static uint64_t k230_decomp_gzip_read(void *opaque, hwaddr offset,
+> +                                      unsigned size)
+> +{
+> +    K230DecompGzipState *s = opaque;
+> +    uint64_t value = 0;
+> +
+> +    switch (offset) {
+> +    case K230_DECOMP_GZIP_DECOMP_START:
+> +        value = s->decomp_start & ~K230_DECOMP_GZIP_START; /* start bit is write only */
+> +        break;
+> +    case K230_DECOMP_GZIP_GZIP_SRC_SIZE:
+> +        value = s->gzip_src_size;
+> +        break;
+> +    case K230_DECOMP_GZIP_GZIP_OUT_SIZE:
+> +        value = s->gzip_out_size;
+> +        break;
+> +    case K230_DECOMP_GZIP_DECOMP_STAT:
+> +        value = s->decomp_stat;
+> +        break;
+> +    default:
+> +        qemu_log_mask(LOG_GUEST_ERROR,
+> +                      "%s: bad read offset 0x%" HWADDR_PRIx "\n",
+> +                      TYPE_K230_DECOMP_GZIP, offset);
+> +        break;
+> +    }
+> +
+> +    trace_k230_decomp_gzip_read(offset, size, value);
+> +    return value;
+> +}
+> +
+> +static void k230_decomp_gzip_write(void *opaque, hwaddr offset,
+> +                                   uint64_t value, unsigned size)
+> +{
+> +    K230DecompGzipState *s = opaque;
+> +
+> +    trace_k230_decomp_gzip_write(offset, size, value);
+> +
+> +    switch (offset) {
+> +    case K230_DECOMP_GZIP_DECOMP_START:
+> +        s->decomp_start = value;
+> +        if (value & K230_DECOMP_GZIP_START) {
+> +            k230_decomp_gzip_start(s);
+> +        }
+> +        break;
+> +    case K230_DECOMP_GZIP_GZIP_SRC_SIZE:
+> +        s->gzip_src_size = value;
+> +        k230_decomp_gzip_update_ctrl_en(s);
+> +        break;
+> +    case K230_DECOMP_GZIP_GZIP_OUT_SIZE:
+> +        s->gzip_out_size = value;
+> +        break;
+> +    case K230_DECOMP_GZIP_DECOMP_STAT:
+> +        break;
+> +    default:
+> +        qemu_log_mask(LOG_GUEST_ERROR,
+> +                      "%s: bad write offset 0x%" HWADDR_PRIx "\n",
+> +                      TYPE_K230_DECOMP_GZIP, offset);
+> +        break;
+> +    }
+> +}
+> +
+> +static const MemoryRegionOps k230_decomp_gzip_ops = {
+> +    .read = k230_decomp_gzip_read,
+> +    .write = k230_decomp_gzip_write,
+> +    .endianness = DEVICE_LITTLE_ENDIAN,
+> +    .valid.min_access_size = 4,
+> +    .valid.max_access_size = 4,
+> +    .impl.min_access_size = 4,
+> +    .impl.max_access_size = 4,
+> +};
+> +
+> +static const VMStateDescription vmstate_k230_decomp_gzip_slot = {
+> +    .name = "k230.decomp-gzip.slot",
+> +    .version_id = 1,
+> +    .minimum_version_id = 1,
+> +    .fields = (const VMStateField[]) {
+> +        VMSTATE_UINT32(slot, K230DecompGzipSlotState),
+> +        VMSTATE_UINT32(current_offset, K230DecompGzipSlotState),
+> +        VMSTATE_END_OF_LIST()
+> +    }
+> +};
+> +
+> +static const VMStateDescription vmstate_k230_decomp_gzip = {
+> +    .name = "k230.decomp-gzip",
+> +    .version_id = 1,
+> +    .minimum_version_id = 1,
+> +    .fields = (const VMStateField[]) {
+> +        VMSTATE_UINT32(decomp_start, K230DecompGzipState),
+> +        VMSTATE_UINT32(gzip_src_size, K230DecompGzipState),
+> +        VMSTATE_UINT32(gzip_out_size, K230DecompGzipState),
+> +        VMSTATE_UINT32(decomp_stat, K230DecompGzipState),
+> +        VMSTATE_STRUCT(input, K230DecompGzipState, 1,
+> +                       vmstate_k230_decomp_gzip_slot,
+> +                       K230DecompGzipSlotState),
+> +        VMSTATE_STRUCT(output, K230DecompGzipState, 1,
+> +                       vmstate_k230_decomp_gzip_slot,
+> +                       K230DecompGzipSlotState),
+> +        VMSTATE_UINT32(total_requested, K230DecompGzipState),
+> +        VMSTATE_UINT32(total_produced, K230DecompGzipState),
+> +        VMSTATE_BOOL(active, K230DecompGzipState),
+> +        VMSTATE_BOOL(in_kick, K230DecompGzipState),
+> +        VMSTATE_BOOL(zstream_inited, K230DecompGzipState),
+> +        VMSTATE_BOOL(stream_end, K230DecompGzipState),
+> +        VMSTATE_UINT8_ARRAY(input_buf, K230DecompGzipState,
+> +                            K230_DECOMP_GZIP_BLOCK_SIZE),
+> +        VMSTATE_UINT8_ARRAY(output_buf, K230DecompGzipState,
+> +                            K230_DECOMP_GZIP_BLOCK_SIZE),
+> +        VMSTATE_END_OF_LIST()
+> +    }
+> +};
+> +
+> +static void k230_decomp_gzip_reset_hold(Object *obj, ResetType type)
+> +{
+> +    K230DecompGzipState *s = K230_DECOMP_GZIP(obj);
+> +
+> +    k230_decomp_gzip_reset_stream(s);
+> +    memset(&s->zs, 0, sizeof(s->zs));
+> +    s->decomp_start = 0;
+> +    s->gzip_src_size = 0;
+> +    s->gzip_out_size = 0;
+> +    s->decomp_stat = 0;
+> +    memset(&s->input, 0, sizeof(s->input));
+> +    memset(&s->output, 0, sizeof(s->output));
+> +    s->total_requested = 0;
+> +    s->total_produced = 0;
+> +    s->active = false;
+> +    s->in_kick = false;
+> +    s->stream_end = false;
+> +}
+> +
+> +static void k230_decomp_gzip_realize(DeviceState *dev, Error **errp)
+> +{
+> +    K230DecompGzipState *s = K230_DECOMP_GZIP(dev);
+> +    SysBusDevice *sbd = SYS_BUS_DEVICE(dev);
+> +
+> +    memory_region_init_io(&s->iomem, OBJECT(dev), &k230_decomp_gzip_ops, s,
+> +                          TYPE_K230_DECOMP_GZIP,
+> +                          K230_DECOMP_GZIP_MMIO_SIZE);
+> +    sysbus_init_mmio(sbd, &s->iomem);
+> +    qdev_init_gpio_in(dev, k230_decomp_gzip_handle_ack,
+> +                      K230_DECOMP_GZIP_NUM_GPIOS_IN);
+> +    qdev_init_gpio_out(dev, s->signal_out,
+> +                       K230_DECOMP_GZIP_NUM_GPIOS_OUT);
+> +}
+> +
+> +static const Property k230_decomp_gzip_properties[] = {
+> +    DEFINE_PROP_UINT64("sram-base", K230DecompGzipState, sram_base, 0),
+> +};
+> +
+> +static void k230_decomp_gzip_class_init(ObjectClass *oc, const void *data)
+> +{
+> +    DeviceClass *dc = DEVICE_CLASS(oc);
+> +    ResettableClass *rc = RESETTABLE_CLASS(oc);
+> +
+> +    dc->realize = k230_decomp_gzip_realize;
+> +    rc->phases.hold = k230_decomp_gzip_reset_hold;
+> +    device_class_set_props(dc, k230_decomp_gzip_properties);
+> +    dc->vmsd = &vmstate_k230_decomp_gzip;
+> +    dc->desc = "Kendryte K230 GZIP decompression engine";
+> +}
+> +
+> +static const TypeInfo k230_decomp_gzip_info = {
+> +    .name = TYPE_K230_DECOMP_GZIP,
+> +    .parent = TYPE_SYS_BUS_DEVICE,
+> +    .instance_size = sizeof(K230DecompGzipState),
+> +    .class_init = k230_decomp_gzip_class_init,
+> +};
+> +
+> +static void k230_decomp_gzip_register_types(void)
+> +{
+> +    type_register_static(&k230_decomp_gzip_info);
+> +}
+> +
+> +type_init(k230_decomp_gzip_register_types)
+> diff --git a/hw/misc/meson.build b/hw/misc/meson.build
+> index 23265f6035..6f6bf3c85c 100644
+> --- a/hw/misc/meson.build
+> +++ b/hw/misc/meson.build
+> @@ -36,6 +36,7 @@ system_ss.add(when: 'CONFIG_SIFIVE_E_PRCI', if_true: files('sifive_e_prci.c'))
+>   system_ss.add(when: 'CONFIG_SIFIVE_E_AON', if_true: files('sifive_e_aon.c'))
+>   system_ss.add(when: 'CONFIG_SIFIVE_U_OTP', if_true: files('sifive_u_otp.c'))
+>   system_ss.add(when: 'CONFIG_SIFIVE_U_PRCI', if_true: files('sifive_u_prci.c'))
+> +system_ss.add(when: 'CONFIG_K230_DECOMP_GZIP', if_true: files('k230_decomp_gzip.c'))
 >   
->   RX Machines
->   -----------
-> diff --git a/tests/qtest/k230-gsdma-test.c b/tests/qtest/k230-gsdma-test.c
+>   subdir('macio')
+>   
+> diff --git a/hw/misc/trace-events b/hw/misc/trace-events
+> index c9a868b3ef..16db4ba0cc 100644
+> --- a/hw/misc/trace-events
+> +++ b/hw/misc/trace-events
+> @@ -442,3 +442,7 @@ iommu_testdev_dma_read(uint64_t gva, uint32_t len) "gva=0x%" PRIx64 " len=%u"
+>   iommu_testdev_dma_verify(uint32_t expected, uint32_t actual) "expected=0x%x actual=0x%x"
+>   iommu_testdev_dma_result(uint32_t result) "DMA completed result=0x%x"
+>   iommu_testdev_dma_armed(bool armed) "armed=%d"
+> +
+> +# k230_decomp_gzip.c
+> +k230_decomp_gzip_read(uint64_t offset, unsigned int size, uint64_t value) "K230 DECOMP GZIP read: [0x%"PRIx64"] size %u -> 0x%"PRIx64
+> +k230_decomp_gzip_write(uint64_t offset, unsigned int size, uint64_t value) "K230 DECOMP GZIP write: [0x%"PRIx64"] size %u <- 0x%"PRIx64
+> diff --git a/include/hw/misc/k230_decomp_gzip.h b/include/hw/misc/k230_decomp_gzip.h
 > new file mode 100644
-> index 0000000000..44d4248739
+> index 0000000000..9911af0095
 > --- /dev/null
-> +++ b/tests/qtest/k230-gsdma-test.c
-> @@ -0,0 +1,201 @@
+> +++ b/include/hw/misc/k230_decomp_gzip.h
+> @@ -0,0 +1,92 @@
 > +/*
-> + * QTest testcase for K230 GSDMA
+> + * K230 Decompress Engine
 > + *
 > + * Copyright (c) 2026 Tao Ding <dingtao0430@163.com>
 > + *
 > + * SPDX-License-Identifier: GPL-2.0-or-later
 > + */
 > +
-> +#include "qemu/osdep.h"
-> +#include "qemu/bitops.h"
-> +#include "exec/hwaddr.h"
-> +#include "hw/dma/k230_gsdma.h"
-> +#include "libqtest.h"
+> +#ifndef HW_MISC_K230_DECOMP_GZIP_H
+> +#define HW_MISC_K230_DECOMP_GZIP_H
 > +
-> +#define K230_GSDMA_BASE              0x80800000
-> +#define TEST_LLT_ADDR0               0x10000
-> +#define TEST_LLT_ADDR1               0x10040
-> +#define TEST_LLT_ADDR2               0x10080
+> +#include <zlib.h>
+> +#include "hw/core/sysbus.h"
 > +
-> +#define TEST_SRC_ADDR0               0x20000
-> +#define TEST_SRC_ADDR1               0x22000
-> +#define TEST_SRC_ADDR2               0x23000
-> +#define TEST_DST_ADDR0               0x30000
-> +#define TEST_DST_ADDR1               0x32000
-> +#define TEST_DST_ADDR2               0x33000
+> +#define TYPE_K230_DECOMP_GZIP "riscv.k230.decomp-gzip"
+> +OBJECT_DECLARE_SIMPLE_TYPE(K230DecompGzipState, K230_DECOMP_GZIP)
 > +
-> +static inline uint64_t gsdma_reg(hwaddr off)
-> +{
-> +    return K230_GSDMA_BASE + off;
-> +}
+> +/* K230 DECOMP GZIP ACK input */
+> +enum {
+> +    K230_DECOMP_GZIP_GPIO_DMA_WRITE_ACK,
+> +    K230_DECOMP_GZIP_GPIO_DMA_READ_ACK,
+> +    K230_DECOMP_GZIP_NUM_GPIOS_IN,
+> +};
 > +
-> +static inline uint64_t gsdma_ch_reg(unsigned int ch, hwaddr off)
-> +{
-> +    return K230_GSDMA_BASE + K230_GSDMA_CH_BASE +
-> +           ch * K230_GSDMA_CH_STRIDE + off;
-> +}
+> +/* K230 DECOMP GZIP REQ output */
+> +enum {
+> +    K230_DECOMP_GZIP_GPIO_DECOMP_CTRL_EN,
+> +    K230_DECOMP_GZIP_GPIO_DMA_WRITE_REQ,
+> +    K230_DECOMP_GZIP_GPIO_DMA_READ_REQ,
+> +    K230_DECOMP_GZIP_NUM_GPIOS_OUT,
+> +};
 > +
-> +static void write_sdma_llt_node_full(QTestState *qts, hwaddr addr,
-> +                                     uint32_t cfg, hwaddr src,
-> +                                     uint32_t size, hwaddr dst,
-> +                                     hwaddr next)
-> +{
-> +    qtest_writel(qts, addr + offsetof(K230GSDMALLT, cfg), cfg);
-> +    qtest_writel(qts, addr + offsetof(K230GSDMALLT, src_addr), src);
-> +    qtest_writel(qts, addr + offsetof(K230GSDMALLT, line_size), size);
-> +    qtest_writel(qts, addr + offsetof(K230GSDMALLT, line_cfg), 0x1);
-> +    qtest_writel(qts, addr + offsetof(K230GSDMALLT, dst_addr), dst);
-> +    qtest_writel(qts, addr + offsetof(K230GSDMALLT, next_llt_addr), next);
-> +}
+> +#define K230_DECOMP_GZIP_MMIO_SIZE       0x4000
 > +
-> +static void write_sdma_llt_node(QTestState *qts, hwaddr addr, uint32_t cfg,
-> +                                uint32_t next)
-> +{
-> +    write_sdma_llt_node_full(qts, addr, cfg, 0x11110000, 0x200,
-> +                             0x22220000, next);
-> +}
+> +/* K230 DECOMP GZIP Registers map */
+> +/* Start decompression controller */
+> +#define K230_DECOMP_GZIP_DECOMP_START    0x00
+> +/* Source data length register */
+> +#define K230_DECOMP_GZIP_GZIP_SRC_SIZE   0x04
+> +/* Output data length register */
+> +#define K230_DECOMP_GZIP_GZIP_OUT_SIZE   0x08
+> +/* Decompress status register */
+> +#define K230_DECOMP_GZIP_DECOMP_STAT     0x0c
 > +
-> +static void fill_pattern(uint8_t *buf, size_t size, uint8_t seed)
-> +{
-> +    for (size_t i = 0; i < size; i++) {
-> +        buf[i] = seed + i * 37;
-> +    }
-> +}
+> +/* Start decompression controller */
+> +#define K230_DECOMP_GZIP_START           (1U << 0)
 > +
-> +static void test_global_registers(void)
-> +{
-> +    QTestState *qts = qtest_init("-machine k230");
+> +#define K230_DECOMP_GZIP_CTRL_EN         (1U << 31)
+> +#define K230_DECOMP_GZIP_DMA_IN_MASK     0x7fffffffU
 > +
-> +    g_assert_cmphex(qtest_readl(qts, gsdma_reg(K230_GSDMA_DMA_CFG)), ==,
-> +                    K230_GSDMA_DMA_CFG_RESET);
+> +#define K230_DECOMP_GZIP_STAT_CRC_OK     (1U << 10)
+> +#define K230_DECOMP_GZIP_STAT_STATE_MASK 0xfU
 > +
-> +    qtest_writel(qts, gsdma_reg(K230_GSDMA_DMA_CH_EN), 0xff);
-> +    g_assert_cmphex(qtest_readl(qts, gsdma_reg(K230_GSDMA_DMA_CH_EN)), ==,
-> +                    K230_GSDMA_DMA_CH_EN_MASK);
+> +#define K230_DECOMP_GZIP_BLOCK_SIZE      0x00020000
+> +#define K230_DECOMP_GZIP_SRAM_IN_BASE    0x80000
+> +#define K230_DECOMP_GZIP_SRAM_OUT_BASE   0
 > +
-> +    qtest_writel(qts, gsdma_reg(K230_GSDMA_DMA_INT_MASK), 0x12345);
-> +    g_assert_cmphex(qtest_readl(qts, gsdma_reg(K230_GSDMA_DMA_INT_MASK)), ==,
-> +                    0x12345);
+> +typedef struct K230DecompGzipSlotState {
+> +    uint32_t slot;  /* Slot index */
+> +    /*
+> +     * Data offset in current slot.
+> +     * First valid data in input buffer. Last valid data in output buffer.
+> +     */
+> +    uint32_t current_offset;
+> +} K230DecompGzipSlotState;
 > +
-> +    qtest_writel(qts, gsdma_reg(K230_GSDMA_DMA_CFG), 0xa5a5a5a5);
-> +    g_assert_cmphex(qtest_readl(qts, gsdma_reg(K230_GSDMA_DMA_CFG)), ==,
-> +                    0xa5a5a5a5);
+> +struct K230DecompGzipState {
+> +    SysBusDevice parent_obj;
 > +
-> +    qtest_writel(qts, gsdma_reg(K230_GSDMA_DMA_WEIGHT), 0xff55aa55);
-> +    g_assert_cmphex(qtest_readl(qts, gsdma_reg(K230_GSDMA_DMA_WEIGHT)), ==,
-> +                    0x55aa55);
+> +    MemoryRegion iomem;
+> +    hwaddr sram_base;
+> +    qemu_irq signal_out[K230_DECOMP_GZIP_NUM_GPIOS_OUT];
+> +    uint32_t decomp_start;
+> +    uint32_t gzip_src_size;
+> +    uint32_t gzip_out_size;
+> +    uint32_t decomp_stat;
+> +    K230DecompGzipSlotState input;  /* decomp gzip ring input */
+> +    K230DecompGzipSlotState output; /* decomp gzip ring output */
+> +    uint32_t total_requested;
+> +    uint32_t total_produced;
+> +    bool active;
+> +    bool in_kick;
+> +    bool zstream_inited;
+> +    bool stream_end;
+> +    /* Read from ring input. */
+> +    uint8_t input_buf[K230_DECOMP_GZIP_BLOCK_SIZE];
+> +    /* Write to ring output. */
+> +    uint8_t output_buf[K230_DECOMP_GZIP_BLOCK_SIZE];
+> +    z_stream zs;
+> +};
 > +
-> +    qtest_quit(qts);
-> +}
-> +
-> +static void test_sdma_pause_resume(void)
-> +{
-> +    uint32_t int_stat;
-> +    QTestState *qts = qtest_init("-machine k230");
-> +
-> +    write_sdma_llt_node(qts, TEST_LLT_ADDR0, K230_GSDMA_LLT_PAUSE,
-> +                        TEST_LLT_ADDR1);
-> +    write_sdma_llt_node(qts, TEST_LLT_ADDR1, K230_GSDMA_LLT_NODE_INTR, 0);
-> +
-> +    qtest_writel(qts, gsdma_reg(K230_GSDMA_DMA_CH_EN), BIT(0));
-> +    qtest_writel(qts, gsdma_ch_reg(0, K230_GSDMA_CH_LLT_SADDR), TEST_LLT_ADDR0);
-> +    qtest_writel(qts, gsdma_ch_reg(0, K230_GSDMA_CH_CTL), K230_GSDMA_CTL_START);
-> +
-> +    g_assert_cmphex(qtest_readl(qts, gsdma_ch_reg(0, K230_GSDMA_CH_STATUS)), ==,
-> +                    K230_GSDMA_SDMA_STATUS_PAUSE);
-> +    g_assert_cmphex(qtest_readl(qts, gsdma_ch_reg(0, K230_GSDMA_CH_CURRENT_LLT)),
-> +                    ==, TEST_LLT_ADDR0);
-> +
-> +    int_stat = qtest_readl(qts, gsdma_reg(K230_GSDMA_DMA_INT_STAT));
-> +    g_assert_cmphex(int_stat & K230_GSDMA_SDMA_PAUSE_INT(0), ==,
-> +                    K230_GSDMA_SDMA_PAUSE_INT(0));
-> +    g_assert_cmphex(int_stat & K230_GSDMA_SDMA_DONE_INT(0), ==, 0);
-> +
-> +    qtest_writel(qts, gsdma_reg(K230_GSDMA_DMA_INT_STAT), int_stat);
-> +    qtest_writel(qts, gsdma_ch_reg(0, K230_GSDMA_CH_CTL), K230_GSDMA_CTL_RESUME);
-> +
-> +    g_assert_cmphex(qtest_readl(qts, gsdma_ch_reg(0, K230_GSDMA_CH_STATUS)), ==,
-> +                    0);
-> +    g_assert_cmphex(qtest_readl(qts, gsdma_ch_reg(0, K230_GSDMA_CH_CURRENT_LLT)),
-> +                    ==, TEST_LLT_ADDR1);
-> +
-> +    int_stat = qtest_readl(qts, gsdma_reg(K230_GSDMA_DMA_INT_STAT));
-> +    g_assert_cmphex(int_stat & K230_GSDMA_SDMA_DONE_INT(0), ==,
-> +                    K230_GSDMA_SDMA_DONE_INT(0));
-> +    g_assert_cmphex(int_stat & K230_GSDMA_SDMA_ITEM_INT(0), ==,
-> +                    K230_GSDMA_SDMA_ITEM_INT(0));
-> +
-> +    qtest_quit(qts);
-> +}
-> +
-> +static void test_sdma_three_llt_copy(void)
-> +{
-> +    uint8_t src0[0x1000];
-> +    uint8_t src1[1];
-> +    uint8_t src2[511];
-> +    uint8_t dst0[sizeof(src0)];
-> +    uint8_t dst1[sizeof(src1)];
-> +    uint8_t dst2[sizeof(src2)];
-> +    uint32_t int_stat;
-> +    QTestState *qts = qtest_init("-machine k230");
-> +
-> +    fill_pattern(src0, sizeof(src0), 0x10);
-> +    fill_pattern(src1, sizeof(src1), 0x31);
-> +    fill_pattern(src2, sizeof(src2), 0x52);
-> +    memset(dst0, 0xa5, sizeof(dst0));
-> +    memset(dst1, 0xa5, sizeof(dst1));
-> +    memset(dst2, 0xa5, sizeof(dst2));
-> +
-> +    qtest_memwrite(qts, TEST_SRC_ADDR0, src0, sizeof(src0));
-> +    qtest_memwrite(qts, TEST_SRC_ADDR1, src1, sizeof(src1));
-> +    qtest_memwrite(qts, TEST_SRC_ADDR2, src2, sizeof(src2));
-> +    qtest_memwrite(qts, TEST_DST_ADDR0, dst0, sizeof(dst0));
-> +    qtest_memwrite(qts, TEST_DST_ADDR1, dst1, sizeof(dst1));
-> +    qtest_memwrite(qts, TEST_DST_ADDR2, dst2, sizeof(dst2));
-> +
-> +    write_sdma_llt_node_full(qts, TEST_LLT_ADDR0, 0, TEST_SRC_ADDR0,
-> +                             sizeof(src0), TEST_DST_ADDR0, TEST_LLT_ADDR1);
-> +    write_sdma_llt_node_full(qts, TEST_LLT_ADDR1, 0, TEST_SRC_ADDR1,
-> +                             sizeof(src1), TEST_DST_ADDR1, TEST_LLT_ADDR2);
-> +    write_sdma_llt_node_full(qts, TEST_LLT_ADDR2, 0, TEST_SRC_ADDR2,
-> +                             sizeof(src2), TEST_DST_ADDR2, 0);
-> +
-> +    qtest_writel(qts, gsdma_reg(K230_GSDMA_DMA_CH_EN), BIT(0));
-> +    qtest_writel(qts, gsdma_ch_reg(0, K230_GSDMA_CH_LLT_SADDR), TEST_LLT_ADDR0);
-> +    qtest_writel(qts, gsdma_ch_reg(0, K230_GSDMA_CH_CTL), K230_GSDMA_CTL_START);
-> +
-> +    g_assert_cmphex(qtest_readl(qts, gsdma_ch_reg(0, K230_GSDMA_CH_STATUS)), ==,
-> +                    0);
-> +    g_assert_cmphex(qtest_readl(qts, gsdma_ch_reg(0, K230_GSDMA_CH_CURRENT_LLT)),
-> +                    ==, TEST_LLT_ADDR2);
-> +
-> +    int_stat = qtest_readl(qts, gsdma_reg(K230_GSDMA_DMA_INT_STAT));
-> +    g_assert_cmphex(int_stat & K230_GSDMA_SDMA_DONE_INT(0), ==,
-> +                    K230_GSDMA_SDMA_DONE_INT(0));
-> +    g_assert_cmphex(int_stat & K230_GSDMA_SDMA_PAUSE_INT(0), ==, 0);
-> +
-> +    memset(dst0, 0, sizeof(dst0));
-> +    memset(dst1, 0, sizeof(dst1));
-> +    memset(dst2, 0, sizeof(dst2));
-> +    qtest_memread(qts, TEST_DST_ADDR0, dst0, sizeof(dst0));
-> +    qtest_memread(qts, TEST_DST_ADDR1, dst1, sizeof(dst1));
-> +    qtest_memread(qts, TEST_DST_ADDR2, dst2, sizeof(dst2));
-> +
-> +    g_assert_cmpmem(dst0, sizeof(dst0), src0, sizeof(src0));
-> +    g_assert_cmpmem(dst1, sizeof(dst1), src1, sizeof(src1));
-> +    g_assert_cmpmem(dst2, sizeof(dst2), src2, sizeof(src2));
-> +
-> +    qtest_quit(qts);
-> +}
-> +
-> +int main(int argc, char **argv)
-> +{
-> +    g_test_init(&argc, &argv, NULL);
-> +
-> +    qtest_add_func("/k230-gsdma/global-registers", test_global_registers);
-> +    qtest_add_func("/k230-gsdma/sdma-pause-resume", test_sdma_pause_resume);
-> +    qtest_add_func("/k230-gsdma/sdma-three-llt-copy",
-> +                   test_sdma_three_llt_copy);
-> +
-> +    return g_test_run();
-> +}
-> diff --git a/tests/qtest/meson.build b/tests/qtest/meson.build
-> index 56ff860e21..1b13a777c9 100644
-> --- a/tests/qtest/meson.build
-> +++ b/tests/qtest/meson.build
-> @@ -297,7 +297,7 @@ qtests_riscv64 = ['riscv-csr-test'] + \
->     (config_all_devices.has_key('CONFIG_IOMMU_TESTDEV') and
->      config_all_devices.has_key('CONFIG_RISCV_IOMMU') ?
->      ['iommu-riscv-test'] : []) + \
-> -  (config_all_devices.has_key('CONFIG_K230') ? ['k230-wdt-test'] : [])
-> +  (config_all_devices.has_key('CONFIG_K230') ? ['k230-wdt-test', 'k230-gsdma-test'] : [])
->   
->   qtests_hexagon = ['boot-serial-test']
->   
+> +#endif
 
 
