@@ -4,94 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FBA8C56208
-	for <qemu-riscv@archiver.kernel.org>; Thu,  6 Aug 2026 11:35:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 641DBC56208
+	for <qemu-riscv@archiver.kernel.org>; Thu,  6 Aug 2026 11:35:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wrwN7-0003M4-A4; Thu, 06 Aug 2026 07:34:49 -0400
+	id 1wrwNK-0003NZ-9P; Thu, 06 Aug 2026 07:35:02 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wrwMn-0003IH-Bu
- for qemu-riscv@nongnu.org; Thu, 06 Aug 2026 07:34:30 -0400
+ id 1wrwNE-0003Me-Ig
+ for qemu-riscv@nongnu.org; Thu, 06 Aug 2026 07:34:57 -0400
 Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wrwMi-0005kj-TR
- for qemu-riscv@nongnu.org; Thu, 06 Aug 2026 07:34:27 -0400
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+ id 1wrwNC-0005mN-Fv
+ for qemu-riscv@nongnu.org; Thu, 06 Aug 2026 07:34:56 -0400
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6769nnGE1626093
- for <qemu-riscv@nongnu.org>; Thu, 6 Aug 2026 11:34:22 GMT
+ 6769ngfk865644
+ for <qemu-riscv@nongnu.org>; Thu, 6 Aug 2026 11:34:53 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- Y9oQa62LzGjHsQY0vlJNfBgfZk3ZSOrHFg3e897f7DU=; b=eeu0HA9+yH0Mf9mZ
- meFj0CxtBzam/Ex1tmoF000FFYqwooDV5FHgnLOozb7H5fPEKjziVkos8hBeOQmk
- uI+SY9KF0xKA9Jo+8y5e8NrsGJ7PvH9j2yQv2bQQ21EC5nOHrkJZfgMZ3K3QOEq9
- EFury5tT4++3r0bY8IjolIuqFKLTjkJuGU+gD138c+8O8Rr3pJbDoQZncSvIgr2N
- Lrm3G9KhnQ/T6RAetKQpKAJtS/Bk/6KxfkPoDvthqz5oFq0bAY7/qhQ2331qS+rk
- ITRa67CBb+KcavuE7TAFBDfkFfVOWsToMAaYsZVwFQjZOWRDPnZ0BbQo1Nt8p6ov
- x05m7Q==
-Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com
- [209.85.222.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fvntnh2tf-1
+ bc9SAqb86Ob7BUq9ZJNQMRp45giNLFQ44njRcImFGg4=; b=jLIo6eEkaifnZLZg
+ wiB2X6OT/e4hTREQUaQdTNzp9uYZOUZdYWTX42inu1fKSJ8uHMHN/LjAVKzhX0iB
+ pPPNj1/wojHEZIsHmSR1s35/p9dYAqIch6Riex9076g4twPrNxy7dQZRznnD8XAq
+ Z3rNwFiynfTvc3/XvAUJ7RemG/3wv7gPc58tCxP2Ft9obxXN5c6sVT5JfDHbMlSK
+ m2nFXWrNG41NJCws+IQPiWHuZCM+XOGacyvfMU3LX7aoufVasDaUxfoSYbQS3/+b
+ sUgQIo60JKGSfDXX9I/3pMgJ/eJ571OqMkaIQgdJ6aOTJlSdXKzfA/f82OK84hyU
+ HbZ8ug==
+Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com
+ [209.85.160.198])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fv9f5c0e4-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Thu, 06 Aug 2026 11:34:22 +0000 (GMT)
-Received: by mail-qk1-f197.google.com with SMTP id
- af79cd13be357-92e9a2b95b5so342776085a.2
- for <qemu-riscv@nongnu.org>; Thu, 06 Aug 2026 04:34:21 -0700 (PDT)
+ for <qemu-riscv@nongnu.org>; Thu, 06 Aug 2026 11:34:53 +0000 (GMT)
+Received: by mail-qt1-f198.google.com with SMTP id
+ d75a77b69052e-51bfe3fa93bso22175201cf.2
+ for <qemu-riscv@nongnu.org>; Thu, 06 Aug 2026 04:34:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1786016061; x=1786620861; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1786016092; x=1786620892; darn=nongnu.org;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=Y9oQa62LzGjHsQY0vlJNfBgfZk3ZSOrHFg3e897f7DU=;
- b=HfEGUBCe9b/9cWXdpmZxUUNhAIdyx6PQwMLQhFaey65Zpjrnxa6nakIt1o1Km5j2Aj
- HbmhEcHvs4m2nIH7KRnG6dS9Hku7K52jvGyM+8a+cOvdji9oBAlq6qNgOjewU3f3SkgS
- EGP9uK+t0SLBDRbdDw4JOZRHTyed8QiCMUmgEVOefL1DJARoTgxDCEFgmhGleNJQUWGU
- A052dXTLrIqvlS1HnhsTVExGBnT2zLJc0wUTb4FI9PcRE3SlOp0Sjilj16SLJkV97vrD
- YNofBIPDgnnNioBtcPRjHyc5tuxTNxOd4kG0+/BPZ7YxNQ3YPXD+qPEJ3Ap9U7ubJtWx
- NAbw==
+ bh=bc9SAqb86Ob7BUq9ZJNQMRp45giNLFQ44njRcImFGg4=;
+ b=KEBIMSyIHkT8ozXRndX/PaAmO6uZT801YpJbqKh32xgC1IPpzeUSXiBLGfa0okwcqt
+ 92s75MhIX1Qv78Nbk4GJuzB9kRI4RGjcIa1308SVnzjbU6qkZ8JxXsTBghL8aAGu95uV
+ +opvajmpHBZuNWj4YgVZpPhN/yuFA7vVfH5JMHKkdJYmrzc/zFWMGsGvmTDvtFut9RzN
+ ThGXen9hx1Gwt+SN7ajtY+9cMCLk02IqzZVbTtxrRxS3wRhSm1lgcHrQ8Y4Esjd6AiQ7
+ bFnikUYlFl5Cinm3xoIQ2LQQqe/6OgLso8QUxGUy/IepCr3ilGopwFVVIIZrZ/T6VqiV
+ iBWw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786016061; x=1786620861;
+ d=1e100.net; s=20251104; t=1786016092; x=1786620892;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=Y9oQa62LzGjHsQY0vlJNfBgfZk3ZSOrHFg3e897f7DU=;
- b=Y32oxaYRakNmAKToKT/g74oE33a7UB5EpPN6WOh+jpkGYHVbmCHydmoIgtyVHGq3cW
- 6i4e/FlVgR2tYiAV08tZVwAdWgbiChAinnb2EcpGfJv2HU9YFQ6rtg6WXcgupVUe9is+
- l3to8PlEtwxyHqw0xK/0/quBcql0o+AyjFr9pGYmBxar5mufEiyxRkuCPBJukNmjfErW
- aEOdvbDqIK3avj6psbBp/AFuORIGhuTXMO96ZijtbXUEgHjuwQGgCKPuDaX4LPfbrVxE
- scDgJlfN9wF9a5kjYkFaGTanzFZbzaMABfYRgdLbZL2y9Y7HUiMYLYOfh8XVZZghKMNR
- f8Zg==
-X-Gm-Message-State: AOJu0YzUweCpfaxemV/MoBAxDuhnXTQFPh54hL1sl3GQ+mHZlvTLRQre
- l8+3p0JlxjIToEekgVLixqvV4DZPJavc2sNY25TrTfe+vEAuB5QRUXm7kUg6ZWlHZ8tiMmQbu+c
- WGtluU6YkIWj0xtmfELduDBHcIXmV3N3lre0yt0cfOE/INCOg500vXRr88A==
-X-Gm-Gg: AR+sD10qVjmDIxWm1lVHma0A2jbvZrv/LBnNnHiPph4Mjw10nxX5Y2s7wzEa5q0A27K
- kIpcC9zMSwAFFkMPx2SFrbbpQoaGCHS7uX2FD64tNPhz53A3OKLcKPwWDxtXBU2wOx/bI7XJ0nK
- TACnx2fwWSFp9Gwi6VOZWFrV5fIH+rkJrKvQenkY+d75ieE9RYNmhAlDxJcunFPH6fXdT8CIwK9
- iSzKBxiGSYMFLkvmZcO9bYUN9VeDUdMKsxCamDqLbSbK7pX6xmtFMr3db5OpZjre/Ajp52rGzZC
- Mmil0C61xLjPaYC6IgSaUEVB5y879VwJxqb/DTsomI7scpXY1mUaDshryGKVKdDIUHWtEPBbWw7
- AX/zYX17wqspFXFLZ8IClalW5p+whQxp8yG0i
-X-Received: by 2002:a05:620a:1722:b0:931:5e6c:9bfa with SMTP id
- af79cd13be357-936664012afmr67112785a.9.1786016060897; 
- Thu, 06 Aug 2026 04:34:20 -0700 (PDT)
-X-Received: by 2002:a05:620a:1722:b0:931:5e6c:9bfa with SMTP id
- af79cd13be357-936664012afmr67105785a.9.1786016060326; 
- Thu, 06 Aug 2026 04:34:20 -0700 (PDT)
+ bh=bc9SAqb86Ob7BUq9ZJNQMRp45giNLFQ44njRcImFGg4=;
+ b=Px1tvB2sJSB8LRujgvPEXbe3p5sVQM1/tQaomcbW2FjNPE5QrtyQ+0L2Y9yljpIX5H
+ scYgEDdL/R2nrzlzgkyN5AHULyx2F1SqAKg6hb5Nh7lQF+yqD4zyDI7cCBqteWeC3wl4
+ w49q4vvYiChoEY8aGtWoKXfXC4Iy1YtI4E8/PwJaKrfcPkztxonfrbqRe2oIHXknoEBc
+ 7ETyDBiS8uctwRx5ftj5ddbivivtb5wuFNp1biBhruHuHnhNtpCvAXJ0vIGeoJxskUyj
+ 4rMZ0yMCVu2oyS128fDg0mW8gpaTnKw3t/OCRxxCJ0gMdpqptS+Yd5nvjvEdDdOMjLuv
+ DD2Q==
+X-Gm-Message-State: AOJu0Yw3mURBZVGDnrAsAP6Fh3rTr7lYi8aAklaqCAj12zikqZjw+/WN
+ H6JlN1cOM0OySQHznjhwZPY8ouG7hLArgPOIL8WFJLOHm02vEjVik/1A1a29jBKVKnpp1+Lk2pU
+ k+zOmx2E+n3h10w8bN7g0BG9Hl1bj3j50DmL2rePuTJEd9D5hCgp+7FlMFg==
+X-Gm-Gg: AR+sD10HkNIkQ0thyLp+SHuP4mCZSlf/uuBEqGx4UehxQumge2LmehvNpjl8IF714Jf
+ elX94up0834ZJLpPBCY4r1uKquVhrQa2GXta1er7f01LHnb7RhZsG/IwYmxd26Pe+kcx3Augq3y
+ 0xvxxsDinL//AJW7o2p0DXOePEjbWMXTdxHHQzTedBR8Fjujmk+Y31vvO5uxmbCmd+uHnhlCMCw
+ zw7XojhL5QxSuspwEBL9GeF8woFi73LfSXaintdtAX3u6939ONnzPmParvWv7lb2vs3unecZNcU
+ 4qLUujsIB1B3ZOxH/VfpP94hKAo3XkPgB5dY0vFBqcOnYZXmqN3WFg6JYJklF3OLpeY3rktwUe7
+ o8kgohTYmBAZTqjJeejz4qiQyg8s3Y4dixzey
+X-Received: by 2002:a05:622a:509:b0:517:78c7:d93a with SMTP id
+ d75a77b69052e-52ce602ce1fmr137060761cf.16.1786016092135; 
+ Thu, 06 Aug 2026 04:34:52 -0700 (PDT)
+X-Received: by 2002:a05:622a:509:b0:517:78c7:d93a with SMTP id
+ d75a77b69052e-52ce602ce1fmr137060211cf.16.1786016091681; 
+ Thu, 06 Aug 2026 04:34:51 -0700 (PDT)
 Received: from [192.168.15.12] ([177.196.135.131])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-9364a42aff9sm381338185a.14.2026.08.06.04.34.16
+ d75a77b69052e-52ce87a9c3fsm36895181cf.5.2026.08.06.04.34.47
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 06 Aug 2026 04:34:19 -0700 (PDT)
-Message-ID: <aa74fe46-22e4-47b9-8427-83f6d63ddc8c@oss.qualcomm.com>
-Date: Thu, 6 Aug 2026 08:34:15 -0300
+ Thu, 06 Aug 2026 04:34:51 -0700 (PDT)
+Message-ID: <9d592f16-8cf3-4e0c-a238-d745d5139691@oss.qualcomm.com>
+Date: Thu, 6 Aug 2026 08:34:46 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/7] hw/dma: add K230 gsdma
+Subject: Re: [PATCH v2 2/7] hw/riscv: k230: add gsdma in K230 board
 To: Tao Ding <dingtao0430@163.com>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, pbonzini@redhat.com, palmer@dabbelt.com,
  alistair.francis@wdc.com, liwei1518@gmail.com,
@@ -99,37 +99,37 @@ Cc: qemu-riscv@nongnu.org, pbonzini@redhat.com, palmer@dabbelt.com,
  farosas@suse.de, lvivier@redhat.com, pierrick.bouvier@oss.qualcomm.com,
  caojunze424@gmail.com
 References: <20260727155702.36484-1-dingtao0430@163.com>
- <20260727155702.36484-2-dingtao0430@163.com>
+ <20260727155702.36484-3-dingtao0430@163.com>
 From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Content-Language: en-US
-In-Reply-To: <20260727155702.36484-2-dingtao0430@163.com>
+In-Reply-To: <20260727155702.36484-3-dingtao0430@163.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODA2MDA5MSBTYWx0ZWRfX5ZTE5mw1nb8q
- o6wCNxSOXcGR2azy4Z0D4WMkwHJFkpi1VM+5MAWWDGTlb9wkgZgWi/uSQm9oo1ayFi/0SJ8qwFv
- cez/sokdaI2SjYayDwrK+651epw4n3HFrMUdO2HrHyG0DV/8I4HvMVgyhDX7G5AY5xkW4WqUzx5
- rGCgTum/M/ECfhrULd/brCBjLdKeaBE6LGazf4YG1IIJcOPvtLM+vgp2BN7fxY3uKnQF2MZXsu5
- 1AzihvN2Sv0xzSeh72k0UsYMuRfs7hmDk/tdB/ugqbdjoiymBul2lvJi2CBFZ/ZaKJaLwfU9k5s
- +g7kRD78EOhrXNO/oZR9jXyuddFHGUQMpgcYIGlhYPkKQmhqzzIz264DnHASyCaRCWy08b+rizj
- 277UnzX5vKF2gC7febIiUM5813p0t6PE1ISntgM6KxHzkGUDSVGfDUyRAA4I3gh2aTasvWZQGUe
- 3GIsXTZ+pQHPUH14kcQ==
-X-Proofpoint-ORIG-GUID: zXD_dl5CkLT8L_eitv8pcZDxZHdtr9O-
-X-Proofpoint-GUID: zXD_dl5CkLT8L_eitv8pcZDxZHdtr9O-
-X-Authority-Analysis: v=2.4 cv=LpKiDHdc c=1 sm=1 tr=0 ts=6a74713e cx=c_pps
- a=50t2pK5VMbmlHzFWWp8p/g==:117 a=TqADvzrrTdHTq19dv/zLaQ==:17
+X-Proofpoint-GUID: 7VCzRDrCfX7lwm4kwUWwmr9xobmiIcPQ
+X-Proofpoint-ORIG-GUID: 7VCzRDrCfX7lwm4kwUWwmr9xobmiIcPQ
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODA2MDA5MSBTYWx0ZWRfX139oVjBscFbk
+ 5R5q/mKPEH0gSCt+3q1r1e3QMUppGR69SISmbBxAdsulBvnSiBI52a5X2ojHdbXGAyrYmsLHugt
+ rr2Y6n5ejl0tC2aF8UWEWbo9OJcQuyM=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODA2MDA5MSBTYWx0ZWRfX0xVrHhTQFaz6
+ 9GT3zbJ8rZt7gxBvlvFMR/PBrjUY1bbqf2EKWN0U1qYp1t7a6A4q8FINfA7kwMfppxibrs3jjr+
+ Y39ruLZzdNPOgMpqRc27lwMiju1zGcW3CuuaJYMvT9wBW0tDc+MtRwh7yEkuCv/ccO2xv1GbjpD
+ nYczaS4GIlUMICv+QuKCcvj4FfJDn5Bzdb+v8AGr+TSJQGdBk4UbMkVsL2TTSMqnPARRdr5TA1n
+ cVrT131D7+cPiqxNrMmBqNtjYrlOVrSYiT6czVOXhYEUKoqavHNVz+5Ldyq2y2Auopk20su8uj1
+ 5L4YI1GMf7LZ6y7RRwjfp6SfYx4aUqdzJaT//IbDsPBUdtcLtPllhoEfAyvCa212sIHh4fsCG1o
+ zVXFhoZtx1edDN98xeeCHy770YkGYaxZfJ83BuaxG08BIi8GaAneITBIYogMcb7hbJ8yvJ/em9e
+ 20C9fr7HwdwNXUNxlYA==
+X-Authority-Analysis: v=2.4 cv=d4bFDxjE c=1 sm=1 tr=0 ts=6a74715d cx=c_pps
+ a=mPf7EqFMSY9/WdsSgAYMbA==:117 a=TqADvzrrTdHTq19dv/zLaQ==:17
  a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
- a=Rull5dLDAAAA:8 a=Byx-y9mGAAAA:8 a=Rw_h2NQzXipV68KcJwQA:9 a=QEXdDO2ut3YA:10
- a=IoWCM6iH3mJn3m4BftBB:22 a=WpjELI0oDsu8BIz5_MMC:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODA2MDA5MSBTYWx0ZWRfXyHin0en5eq6E
- w1a8G+A4NnV44RuhE0jmK+I+969L/xBmmBJoeC/tPzNSfnzlauTY2J5tMKmHGW184XCXTHc+oUL
- MNTIlkqSQC3h+pKG7u0OR96ellA1mgY=
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
+ a=Byx-y9mGAAAA:8 a=pGLkceISAAAA:8 a=EUspDBNiAAAA:8 a=fSw-O1yPuj2pjOr4s8MA:9
+ a=QEXdDO2ut3YA:10 a=dawVfQjAaf238kedN5IG:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-05_06,2026-08-05_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 lowpriorityscore=0 adultscore=0 bulkscore=0 spamscore=0
- phishscore=0 priorityscore=1501 malwarescore=0 impostorscore=0 suspectscore=0
+ malwarescore=0 spamscore=0 lowpriorityscore=0 phishscore=0 bulkscore=0
+ suspectscore=0 clxscore=1015 impostorscore=0 adultscore=0 priorityscore=1501
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608060091
 Received-SPF: pass client-ip=205.220.168.131;
@@ -156,498 +156,110 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hello,
 
 
 On 7/27/2026 12:56 PM, Tao Ding wrote:
-> K230 GSDMA includes SDMA (System Direct Memory Access) and GDMA (Graphic Direct Memory Access).
-> In this patch, add SDMA for k230 board. The following features have not been implemented:
-> 1. axi protocol related
-> 2. channel arbitration
-> 3. lower power mode
+> This commit replaces the unimplemented part of GSDMA in K230. And connect the interrupt to plic.
 > 
-> SDMA supports transfer data between memory, in which case SDMA is the controller.
-> It also supports transfer data to decomp_gzip and caching it through SRAM.
-> In this case, decomp_gzip is the controller, which controls SDMA through handshake signals.
-> 
-> According to "K230 Technical Reference Manual v0.3.1" section 2.5.2.
-> https://download.kendryte.com/developer/k230/HDK/K230%E7%A1%AC%E4%BB%B6%E6%96%87%E6%A1%A3/K230_Technical_Reference_Manual_V0.3.1_20241118.pdf
-> 
-> This commit includes:
-> - K230 SDMA (System Direct Memory Access) model (k230_gsdma.c, k230_gsdma.h)
-> - GSDMA trace log (trace-events)
-> - Kconfig and meson.build
-> - update MAINTAINERS
+> Update K230.rst.
 > 
 > Signed-off-by: Tao Ding <dingtao0430@163.com>
+> Reviewed-by: Junze Cao <caojunze424@gmail.com>
 > ---
 
-LGTM.  One small detail:
+Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 
-> In patchv1, the reviewer identified some missing features and bugs, which have been fixed.
-> bug:
->      src_addr should not increment in 2d-mode and src_fixed
-> feature:
->      data endian conversion
-> enhance:
->      use new reset interface
+>   docs/system/riscv/k230.rst |  1 +
+>   hw/riscv/Kconfig           |  1 +
+>   hw/riscv/k230.c            | 12 +++++++++---
+>   include/hw/riscv/k230.h    |  3 +++
+>   4 files changed, 14 insertions(+), 3 deletions(-)
 > 
->   MAINTAINERS                 |   2 +
->   hw/dma/Kconfig              |   3 +
->   hw/dma/k230_gsdma.c         | 562 ++++++++++++++++++++++++++++++++++++
->   hw/dma/meson.build          |   1 +
->   hw/dma/trace-events         |   6 +
->   include/hw/dma/k230_gsdma.h | 130 +++++++++
->   6 files changed, 704 insertions(+)
->   create mode 100644 hw/dma/k230_gsdma.c
->   create mode 100644 include/hw/dma/k230_gsdma.h
-> 
-
-
-[...]
-
-
-> +static uint64_t k230_gsdma_read(void *opaque, hwaddr addr, unsigned int size)
-> +{
-> +    K230GSDMAState *s = K230_GSDMA(opaque);
-> +    unsigned int ch;
-> +    hwaddr ch_off;
-> +    uint64_t ret = 0;
-> +
-> +    switch (addr) {
-> +    case K230_GSDMA_DMA_CH_EN:
-> +        ret = s->dma_ch_en;
-> +        break;
-> +    case K230_GSDMA_DMA_INT_MASK:
-> +        ret = s->dma_int_mask;
-> +        break;
-> +    case K230_GSDMA_DMA_INT_STAT:
-> +        ret = s->dma_int_stat;
-> +        break;
-> +    case K230_GSDMA_DMA_CFG:
-> +        ret = s->dma_cfg;
-> +        break;
-> +    case K230_GSDMA_GDMA_CTRL:
-> +    case K230_GSDMA_GDMA_LLI_BASE:
-> +    case K230_GSDMA_GDMA_CURRENT_LLT:
-> +    case K230_GSDMA_GDMA_CH_CNT0 ... K230_GSDMA_GDMA_CH_CNT_LAST:
-> +        break;
-> +    case K230_GSDMA_DMA_WEIGHT:
-> +        ret = s->dma_weight;
-> +        break;
-> +    default:
-> +        break;
-> +    }
-> +
-> +    ch = (addr - K230_GSDMA_CH_BASE) / K230_GSDMA_CH_STRIDE;
-> +    ch_off = (addr - K230_GSDMA_CH_BASE) % K230_GSDMA_CH_STRIDE;
-> +    if (ch < K230_GSDMA_NUM_SDMA_CHANNELS) {
-> +        switch (ch_off) {
-> +        case K230_GSDMA_CH_CTL:
-> +            break;
-> +        case K230_GSDMA_CH_STATUS:
-> +            ret = s->channels[ch].status;
-> +            break;
-> +        case K230_GSDMA_CH_CFG:
-> +            ret = s->channels[ch].cfg;
-> +            break;
-> +        case K230_GSDMA_CH_USR_DATA:
-> +            ret = s->channels[ch].usr_data;
-> +            break;
-> +        case K230_GSDMA_CH_LLT_SADDR:
-> +            ret = s->channels[ch].llt_saddr;
-> +            break;
-> +        case K230_GSDMA_CH_CURRENT_LLT:
-> +            ret = s->channels[ch].current_llt;
-> +            break;
-> +        default:
-> +            break;
-> +        }
-> +    }
-> +
-> +    trace_k230_gsdma_read(addr, size, ret);
-> +    return ret;
-> +}
-> +
-> +static void k230_gsdma_write_gdma(K230GSDMAState *s, hwaddr addr, uint32_t value)
-> +{
-> +    switch (addr) {
-> +    case K230_GSDMA_GDMA_CTRL:
-> +    case K230_GSDMA_GDMA_LLI_BASE:
-> +    case K230_GSDMA_GDMA_CURRENT_LLT:
-> +    case K230_GSDMA_GDMA_CH_CNT0 ... K230_GSDMA_GDMA_CH_CNT_LAST:
-> +        return;
-> +    default:
-> +        return;
-> +    }
-> +}
-
-I'm note sure what's the intent of this function.  It's not being filled with
-logic in the other patches either so it's basically a no-op.
-
-I suggest removing it entirely.  And, in k230_gsdma_write():
-
-+    if (addr < K230_GSDMA_CH_BASE) {
-+        k230_gsdma_write_gdma(s, addr, v);
-+        return;
-+    }
-
-
-Just do the "return".
-
-
-Thanks,
-Daniel
-
-
-
-> +
-> +static void k230_gsdma_write_channel(K230GSDMAState *s, unsigned int ch,
-> +                                     hwaddr ch_off, uint32_t value)
-> +{
-> +    K230GSDMAChannel *c = &s->channels[ch];
-> +    bool handshake_mode = ch < 2 && k230_gsdma_decomp_enabled(s);
-> +
-> +    switch (ch_off) {
-> +    case K230_GSDMA_CH_CTL:
-> +        c->ctl = value;
-> +        if ((value & K230_GSDMA_CTL_STOP) != 0) {
-> +            c->started = false;
-> +            k230_gsdma_sdma_set_idle(c);
-> +            break;
-> +        }
-> +        if ((value & K230_GSDMA_CTL_RESUME) != 0 &&
-> +            (c->status & K230_GSDMA_SDMA_STATUS_PAUSE) && c->next_llt != 0) {
-> +            k230_gsdma_run_sdma(s, ch, c->next_llt);
-> +            break;
-> +        }
-> +        if (handshake_mode && (value & K230_GSDMA_CTL_START) != 0) {
-> +            c->started = true;
-> +            c->status &= ~(K230_GSDMA_SDMA_STATUS_BUSY |
-> +                           K230_GSDMA_SDMA_STATUS_PAUSE);
-> +            c->current_llt = 0;
-> +            c->next_llt = 0;
-> +            break;
-> +        }
-> +        if ((value & K230_GSDMA_CTL_START) != 0 &&
-> +            (s->dma_ch_en & BIT(ch)) && c->llt_saddr != 0) {
-> +            c->started = true;
-> +            k230_gsdma_run_sdma(s, ch, c->llt_saddr);
-> +        }
-> +        break;
-> +    case K230_GSDMA_CH_CFG:
-> +        c->cfg = value;
-> +        break;
-> +    case K230_GSDMA_CH_USR_DATA:
-> +        c->usr_data = value;
-> +        break;
-> +    case K230_GSDMA_CH_LLT_SADDR:
-> +        c->llt_saddr = value;
-> +        break;
-> +    case K230_GSDMA_CH_CURRENT_LLT:
-> +        break;
-> +    default:
-> +        break;
-> +    }
-> +}
-> +
-> +static void k230_gsdma_write(void *opaque, hwaddr addr,
-> +                             uint64_t value, unsigned int size)
-> +{
-> +    K230GSDMAState *s = K230_GSDMA(opaque);
-> +    unsigned int ch;
-> +    hwaddr ch_off;
-> +    uint32_t v = value;
-> +
-> +    trace_k230_gsdma_write(addr, size, value);
-> +
-> +    switch (addr) {
-> +    case K230_GSDMA_DMA_CH_EN:
-> +        s->dma_ch_en = v & K230_GSDMA_DMA_CH_EN_MASK;
-> +        return;
-> +    case K230_GSDMA_DMA_INT_MASK:
-> +        s->dma_int_mask = v;
-> +        k230_gsdma_update_irq(s);
-> +        return;
-> +    case K230_GSDMA_DMA_INT_STAT:
-> +        s->dma_int_stat &= ~v;
-> +        k230_gsdma_update_irq(s);
-> +        return;
-> +    case K230_GSDMA_DMA_CFG:
-> +        s->dma_cfg = v;
-> +        return;
-> +    case K230_GSDMA_DMA_WEIGHT:
-> +        s->dma_weight = v & 0x00ffffff;
-> +        return;
-> +    default:
-> +        break;
-> +    }
-> +
-> +    if (addr < K230_GSDMA_CH_BASE) {
-> +        k230_gsdma_write_gdma(s, addr, v);
-> +        return;
-> +    }
-> +
-> +    ch = (addr - K230_GSDMA_CH_BASE) / K230_GSDMA_CH_STRIDE;
-> +    ch_off = (addr - K230_GSDMA_CH_BASE) % K230_GSDMA_CH_STRIDE;
-> +    if (ch >= K230_GSDMA_NUM_SDMA_CHANNELS) {
-> +        return;
-> +    }
-> +
-> +    k230_gsdma_write_channel(s, ch, ch_off, v);
-> +}
-> +
-> +static void k230_gsdma_handle_signal(void *opaque, int n, int level)
-> +{
-> +    K230GSDMAState *s = opaque;
-> +    K230GSDMAChannel *c;
-> +    hwaddr addr;
-> +    unsigned int ch;
-> +
-> +    if (!level || n == K230_GSDMA_GPIO_DECOMP_CTRL_EN) {
-> +        return;
-> +    }
-> +
-> +    ch = n - 1;
-> +
-> +    c = &s->channels[ch];
-> +    if (!k230_gsdma_decomp_enabled(s) || !(s->dma_ch_en & BIT(ch)) || !c->started) {
-> +        return;
-> +    }
-> +
-> +    if (c->current_llt == 0) {
-> +        addr = c->llt_saddr;
-> +    } else {
-> +        addr = c->next_llt;
-> +    }
-> +    if (!addr) {
-> +        return;
-> +    }
-> +
-> +    k230_gsdma_step_sdma(s, ch, addr);
-> +    qemu_set_irq(s->handshake_out[n - 1], 1);
-> +    qemu_set_irq(s->handshake_out[n - 1], 0);
-> +}
-> +
-> +static const MemoryRegionOps k230_gsdma_ops = {
-> +    .read = k230_gsdma_read,
-> +    .write = k230_gsdma_write,
-> +    .endianness = DEVICE_LITTLE_ENDIAN,
-> +    .impl.min_access_size = 4,
-> +    .impl.max_access_size = 4,
-> +    .valid.min_access_size = 4,
-> +    .valid.max_access_size = 4,
-> +};
-> +
-> +static void k230_gsdma_reset_hold(Object *obj, ResetType type)
-> +{
-> +    K230GSDMAState *s = K230_GSDMA(obj);
-> +
-> +    memset(s->channels, 0, sizeof(s->channels));
-> +    s->dma_ch_en = 0;
-> +    s->dma_int_mask = 0;
-> +    s->dma_int_stat = 0;
-> +    s->dma_cfg = K230_GSDMA_DMA_CFG_RESET;
-> +    s->dma_weight = 0;
-> +}
-> +
-> +static void k230_gsdma_realize(DeviceState *dev, Error **errp)
-> +{
-> +    K230GSDMAState *s = K230_GSDMA(dev);
-> +    SysBusDevice *sbd = SYS_BUS_DEVICE(dev);
-> +
-> +    memory_region_init_io(&s->iomem, OBJECT(dev), &k230_gsdma_ops, s,
-> +                          TYPE_K230_GSDMA, K230_GSDMA_MMIO_SIZE);
-> +    sysbus_init_mmio(sbd, &s->iomem);
-> +    sysbus_init_irq(sbd, &s->irq);
-> +    qdev_init_gpio_in(DEVICE(dev), k230_gsdma_handle_signal,
-> +                      K230_GSDMA_NUM_GPIOS_IN);
-> +    qdev_init_gpio_out(DEVICE(dev), s->handshake_out,
-> +                       K230_GSDMA_NUM_GPIOS_OUT);
-> +}
-> +
-> +static void k230_gsdma_class_init(ObjectClass *klass, const void *data)
-> +{
-> +    DeviceClass *dc = DEVICE_CLASS(klass);
-> +    ResettableClass *rc = RESETTABLE_CLASS(klass);
-> +
-> +    dc->realize = k230_gsdma_realize;
-> +    rc->phases.hold = k230_gsdma_reset_hold;
-> +    dc->vmsd = &vmstate_k230_gsdma;
-> +    dc->desc = "Kendryte K230 GSDMA";
-> +}
-> +
-> +static const TypeInfo k230_gsdma_info = {
-> +    .name = TYPE_K230_GSDMA,
-> +    .parent = TYPE_SYS_BUS_DEVICE,
-> +    .instance_size = sizeof(K230GSDMAState),
-> +    .class_init = k230_gsdma_class_init,
-> +};
-> +
-> +static void k230_gsdma_register_types(void)
-> +{
-> +    type_register_static(&k230_gsdma_info);
-> +}
-> +
-> +type_init(k230_gsdma_register_types)
-> diff --git a/hw/dma/meson.build b/hw/dma/meson.build
-> index cc7810beb8..45db5e7357 100644
-> --- a/hw/dma/meson.build
-> +++ b/hw/dma/meson.build
-> @@ -12,3 +12,4 @@ system_ss.add(when: 'CONFIG_OMAP', if_true: files('omap_dma.c', 'soc_dma.c'))
->   system_ss.add(when: 'CONFIG_RASPI', if_true: files('bcm2835_dma.c'))
->   system_ss.add(when: 'CONFIG_SIFIVE_PDMA', if_true: files('sifive_pdma.c'))
->   system_ss.add(when: 'CONFIG_XLNX_CSU_DMA', if_true: files('xlnx_csu_dma.c'))
-> +system_ss.add(when: 'CONFIG_K230_GSDMA', if_true: files('k230_gsdma.c'))
-> diff --git a/hw/dma/trace-events b/hw/dma/trace-events
-> index 4c09790f9a..a494755b5a 100644
-> --- a/hw/dma/trace-events
-> +++ b/hw/dma/trace-events
-> @@ -47,3 +47,9 @@ pl330_iomem_read(uint32_t addr, uint32_t data) "addr: 0x%08"PRIx32" data: 0x%08"
+> diff --git a/docs/system/riscv/k230.rst b/docs/system/riscv/k230.rst
+> index cea8202e55..a426a1d776 100644
+> --- a/docs/system/riscv/k230.rst
+> +++ b/docs/system/riscv/k230.rst
+> @@ -20,6 +20,7 @@ The ``k230`` machine supports the following devices:
+>   * Platform-Level Interrupt Controller (PLIC)
+>   * 2 K230 Watchdog Timer
+>   * 5 UART
+> +* System Direct Memory Access (SDMA)
 >   
->   # xilinx_axidma.c
->   xilinx_axidma_loading_desc_fail(uint32_t res) "error:%u"
+>   Boot options
+>   ------------
+> diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
+> index de37c08cae..d28ac06043 100644
+> --- a/hw/riscv/Kconfig
+> +++ b/hw/riscv/Kconfig
+> @@ -162,3 +162,4 @@ config K230
+>       select SERIAL_MM
+>       select UNIMP
+>       select K230_WDT
+> +    select K230_GSDMA
+> diff --git a/hw/riscv/k230.c b/hw/riscv/k230.c
+> index 656f28190c..c80bd65694 100644
+> --- a/hw/riscv/k230.c
+> +++ b/hw/riscv/k230.c
+> @@ -110,6 +110,7 @@ static void k230_soc_init(Object *obj)
+>       object_initialize_child(obj, "c908-cpu", cpu0, TYPE_RISCV_HART_ARRAY);
+>       object_initialize_child(obj, "k230-wdt0", &s->wdt[0], TYPE_K230_WDT);
+>       object_initialize_child(obj, "k230-wdt1", &s->wdt[1], TYPE_K230_WDT);
+> +    object_initialize_child(obj, "k230-gsdma", &s->gsdma, TYPE_K230_GSDMA);
+>   
+>       qdev_prop_set_uint32(DEVICE(cpu0), "hartid-base", 0);
+>       qdev_prop_set_string(DEVICE(cpu0), "cpu-type", TYPE_RISCV_CPU_THEAD_C908);
+> @@ -206,6 +207,14 @@ static void k230_soc_realize(DeviceState *dev, Error **errp)
+>       sysbus_connect_irq(SYS_BUS_DEVICE(&s->wdt[1]), 0,
+>                          qdev_get_gpio_in(DEVICE(s->c908_plic), K230_WDT1_IRQ));
+>   
+> +    /* Gsdma */
+> +    if (!sysbus_realize(SYS_BUS_DEVICE(&s->gsdma), errp)) {
+> +        return;
+> +    }
+> +    sysbus_mmio_map(SYS_BUS_DEVICE(&s->gsdma), 0, memmap[K230_DEV_GSDMA].base);
+> +    sysbus_connect_irq(SYS_BUS_DEVICE(&s->gsdma), 0,
+> +                       qdev_get_gpio_in(DEVICE(s->c908_plic), K230_GSDMA_IRQ));
 > +
-> +# k230_gsdma.c
-> +k230_gsdma_read(uint64_t addr, unsigned int size, uint64_t data) "K230 GSDMA read: [0x%"PRIx64"] size %u -> 0x%"PRIx64
-> +k230_gsdma_write(uint64_t addr, unsigned int size, uint64_t data) "K230 GSDMA write: [0x%"PRIx64"] size %u <- 0x%"PRIx64
-> +k230_gsdma_read_sdma_llt(uint64_t addr, uint32_t cfg, uint32_t src_addr, uint32_t line_size, uint32_t line_cfg, uint32_t dst_addr, uint32_t next_llt_addr) "K230 GSDMA read SDMA LLT: addr=0x%"PRIx64" cfg=0x%"PRIx32" src=0x%"PRIx32" line_size=0x%"PRIx32" line_cfg=0x%"PRIx32" dst=0x%"PRIx32" next=0x%"PRIx32
-> +k230_gsdma_read_sdma_llt_failed(uint64_t addr) "K230 GSDMA read SDMA LLT failed: addr=0x%"PRIx64
-> diff --git a/include/hw/dma/k230_gsdma.h b/include/hw/dma/k230_gsdma.h
-> new file mode 100644
-> index 0000000000..629cce29f8
-> --- /dev/null
-> +++ b/include/hw/dma/k230_gsdma.h
-> @@ -0,0 +1,130 @@
-> +/*
-> + * K230 GSDMA
-> + *
-> + * Copyright (c) 2026 Tao Ding <dingtao0430@163.com>
-> + *
-> + * SPDX-License-Identifier: GPL-2.0-or-later
-> + */
-> +
-> +#ifndef HW_DMA_K230_GSDMA_H
-> +#define HW_DMA_K230_GSDMA_H
-> +
-> +#include "hw/core/sysbus.h"
-> +
-> +#define TYPE_K230_GSDMA "riscv.k230.gsdma"
-> +OBJECT_DECLARE_SIMPLE_TYPE(K230GSDMAState, K230_GSDMA)
-> +
-> +#define K230_GSDMA_MMIO_SIZE          0x4000
-> +#define K230_GSDMA_NUM_SDMA_CHANNELS  4
-> +
-> +#define K230_GSDMA_CH_STRIDE          0x30
-> +#define K230_GSDMA_CH_BASE            0x50
-> +
-> +/* K230 SDMA request input */
-> +enum {
-> +    K230_GSDMA_GPIO_DECOMP_CTRL_EN,
-> +    K230_GSDMA_GPIO_DMA_WRITE_REQ,
-> +    K230_GSDMA_GPIO_DMA_READ_REQ,
-> +    K230_GSDMA_NUM_GPIOS_IN,
-> +};
-> +
-> +/* K230 SDMA ACK output */
-> +enum {
-> +    K230_GSDMA_GPIO_DMA_WRITE_ACK,
-> +    K230_GSDMA_GPIO_DMA_READ_ACK,
-> +    K230_GSDMA_NUM_GPIOS_OUT,
-> +};
-> +
-> +/* K230 GSDMA Registers Map */
-> +#define K230_GSDMA_DMA_CH_EN          0x00
-> +#define K230_GSDMA_DMA_INT_MASK       0x04
-> +#define K230_GSDMA_DMA_INT_STAT       0x08
-> +#define K230_GSDMA_DMA_CFG            0x0c
-> +#define K230_GSDMA_GDMA_CTRL          0x10
-> +#define K230_GSDMA_GDMA_LLI_BASE      0x14
-> +#define K230_GSDMA_GDMA_CH_CNT0       0x18
-> +#define K230_GSDMA_GDMA_CH_CNT_LAST   0x34
-> +#define K230_GSDMA_GDMA_CURRENT_LLT   0x38
-> +#define K230_GSDMA_DMA_WEIGHT         0x48
-> +
-> +/* K230 GSDMA SDMA Channel Register Map */
-> +#define K230_GSDMA_CH_CTL             0x00
-> +#define K230_GSDMA_CH_STATUS          0x04
-> +#define K230_GSDMA_CH_CFG             0x08
-> +#define K230_GSDMA_CH_USR_DATA        0x0c
-> +#define K230_GSDMA_CH_LLT_SADDR       0x10
-> +#define K230_GSDMA_CH_CURRENT_LLT     0x14
-> +
-> +/* K230 SDMA Control bit */
-> +#define K230_GSDMA_CTL_START          BIT(0)
-> +#define K230_GSDMA_CTL_STOP           BIT(1)
-> +#define K230_GSDMA_CTL_RESUME         BIT(2)
-> +
-> +/* K230 SDMA States bit */
-> +#define K230_GSDMA_SDMA_STATUS_BUSY   BIT(0)
-> +#define K230_GSDMA_SDMA_STATUS_PAUSE  BIT(1)
-> +
-> +/* K230 SDMA Interrupt bit */
-> +#define K230_GSDMA_SDMA_DONE_INT(ch)  BIT(ch)
-> +#define K230_GSDMA_SDMA_ITEM_INT(ch)  BIT((ch) + 4)
-> +#define K230_GSDMA_SDMA_PAUSE_INT(ch) BIT((ch) + 8)
-> +
-> +
-> +#define K230_GSDMA_DMA_CH_EN_MASK     MAKE_64BIT_MASK(0, 5)
-> +#define K230_GSDMA_DMA_CFG_RESET      0x000007ff
-> +
-> +/* K230 SDMA Linked List bit */
-> +#define K230_GSDMA_LLT_2D_MODE        BIT(28)
-> +#define K230_GSDMA_LLT_PAUSE          BIT(29)
-> +#define K230_GSDMA_LLT_NODE_INTR      BIT(30)
-> +#define K230_GSDMA_GDMA_LLT_GCH_SHIFT 16
-> +#define K230_GSDMA_GDMA_LLT_GCH_MASK  0x7
-> +#define K230_GSDMA_CH_CFG_DAT_MODE    BIT(0)
-> +#define K230_GSDMA_CH_CFG_USR_DATA_SIZE_SHIFT 1
-> +#define K230_GSDMA_CH_CFG_USR_DATA_SIZE_MASK  0x3
-> +#define K230_GSDMA_CH_CFG_DAT_ENDIAN_SHIFT 4
-> +#define K230_GSDMA_CH_CFG_DAT_ENDIAN_MASK  0x3
-> +#define K230_GSDMA_CH_CFG_SRC_FIXED   BIT(8)
-> +#define K230_GSDMA_CH_CFG_DST_FIXED   BIT(9)
-> +#define K230_GSDMA_CH0_CFG_DECOMP_CTRL_EN BIT(10)
-> +
-> +/* K230 SDMA channel state */
-> +typedef struct K230GSDMAChannel {
-> +    uint32_t ctl;
-> +    uint32_t status;
-> +    uint32_t cfg;
-> +    uint32_t usr_data;
-> +    uint32_t llt_saddr;
-> +    uint32_t current_llt;
-> +    uint32_t next_llt;
-> +    bool started;
-> +} K230GSDMAChannel;
-> +
-> +/* K230 SDMA Linked List */
-> +typedef struct K230GSDMALLT {
-> +    uint32_t cfg;
-> +    uint32_t src_addr;
-> +    uint32_t line_size;
-> +    uint32_t line_cfg;
-> +    uint32_t dst_addr;
-> +    uint32_t next_llt_addr;
-> +} K230GSDMALLT;
-> +
-> +/* K230 GSDMA state */
-> +struct K230GSDMAState {
-> +    SysBusDevice parent_obj;
-> +
-> +    MemoryRegion iomem;
-> +    qemu_irq irq;
-> +    qemu_irq handshake_out[K230_GSDMA_NUM_GPIOS_OUT];
-> +
-> +    uint32_t dma_ch_en;
-> +    uint32_t dma_int_mask;
-> +    uint32_t dma_int_stat;
-> +    uint32_t dma_cfg;
-> +    uint32_t dma_weight;
-> +
-> +    K230GSDMAChannel channels[K230_GSDMA_NUM_SDMA_CHANNELS];
-> +};
-> +
-> +#endif
+>       /* unimplemented devices */
+>       create_unimplemented_device("kpu.l2-cache",
+>                                   memmap[K230_DEV_KPU_L2_CACHE].base,
+> @@ -221,9 +230,6 @@ static void k230_soc_realize(DeviceState *dev, Error **errp)
+>                                   memmap[K230_DEV_AI_2D_ENGINE].base,
+>                                   memmap[K230_DEV_AI_2D_ENGINE].size);
+>   
+> -    create_unimplemented_device("gsdma", memmap[K230_DEV_GSDMA].base,
+> -                                memmap[K230_DEV_GSDMA].size);
+> -
+>       create_unimplemented_device("dma", memmap[K230_DEV_DMA].base,
+>                                   memmap[K230_DEV_DMA].size);
+>   
+> diff --git a/include/hw/riscv/k230.h b/include/hw/riscv/k230.h
+> index 592e1c26bf..156a386edc 100644
+> --- a/include/hw/riscv/k230.h
+> +++ b/include/hw/riscv/k230.h
+> @@ -18,6 +18,7 @@
+>   #include "hw/core/boards.h"
+>   #include "hw/riscv/riscv_hart.h"
+>   #include "hw/watchdog/k230_wdt.h"
+> +#include "hw/dma/k230_gsdma.h"
+>   
+>   #define C908_CPU_HARTID   (0)
+>   
+> @@ -33,6 +34,7 @@ typedef struct K230SoCState {
+>       RISCVHartArrayState c908_cpu; /* Small core */
+>   
+>       K230WdtState wdt[2];
+> +    K230GSDMAState gsdma;
+>       MemoryRegion sram;
+>       MemoryRegion bootrom;
+>   
+> @@ -129,6 +131,7 @@ enum {
+>       K230_UART4_IRQ  = 20,
+>       K230_WDT0_IRQ   = 107,
+>       K230_WDT1_IRQ   = 108,
+> +    K230_GSDMA_IRQ  = 140,
+>   };
+>   
+>   #define K230_UART_COUNT 5
 
 
