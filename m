@@ -4,135 +4,136 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBC93C5AC7A
-	for <qemu-riscv@archiver.kernel.org>; Fri,  7 Aug 2026 11:05:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DA7BC5AC7C
+	for <qemu-riscv@archiver.kernel.org>; Fri,  7 Aug 2026 11:45:11 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wsINj-0001Cr-Ai; Fri, 07 Aug 2026 07:04:55 -0400
+	id 1wsJ0H-0000RT-PX; Fri, 07 Aug 2026 07:44:45 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wsINh-0001CO-Kx
- for qemu-riscv@nongnu.org; Fri, 07 Aug 2026 07:04:53 -0400
+ id 1wsJ0G-0000RB-Ej
+ for qemu-riscv@nongnu.org; Fri, 07 Aug 2026 07:44:44 -0400
 Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wsINf-00067i-Gw
- for qemu-riscv@nongnu.org; Fri, 07 Aug 2026 07:04:53 -0400
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+ id 1wsJ0C-0004id-VF
+ for qemu-riscv@nongnu.org; Fri, 07 Aug 2026 07:44:44 -0400
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6777iQ1R3533333
- for <qemu-riscv@nongnu.org>; Fri, 7 Aug 2026 11:04:49 GMT
+ 6779WD3M564721
+ for <qemu-riscv@nongnu.org>; Fri, 7 Aug 2026 11:44:39 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- HnwgKbBW3JF2Vo+MkABsFuBwZTQx16q+MAGpnqX1guM=; b=JjoITSMQKi+zPpjl
- 37uTorb3B5uijxy0qcm2rlUFL2RSjdDSBbaBFLOPROdViRQ0WHrvF6cmtfM0wfaK
- yYsD3BMkMLA7h3FQXx2KgeAqVBymsHEnC/4Nceyi3AtEcxaJz7iF9jKUU3NzgAl8
- 7b2kRaSG5urbqZQyv810ux6A26py2RfHQj4ua3lAFFjjunb/37RWsulaiS/OINgW
- 7jhWyYp7pOkKoqBQjJv4FwffzYYekfFxkdi8uohkl3857xolSEdgzLBgXNGi7nNo
- H8/sarfMVjtaGQX1Ng12w4jaiDXHEzbRTMnQVHlLZUx3SlMiuNgBMWMf4Ru7l3Ic
- BaMiRg==
-Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com
- [209.85.222.199])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fvy6fup8m-1
+ 7BJlS16x5+i1zGlwTbpz658TRHx5Fe9UoAcRBShlFGM=; b=g4L8uqypPtKlEnIy
+ JUP376XIEPYSsrKPhrqDHVQ01XaJRegCg46JLoN3vU6rhegdMdb/tlVtknRgwAEo
+ aqe/atANDOHauXH94r/BItn/VupDvLhRRvIl7nHTP/+iCLdSTjnY9DmaODnlKUG8
+ mMXDNsYCoTn4J9WnPJZxvqtRbtsRK0KYTuecOpT6nOhZW0W4vc+k1F/Ly93fzQkg
+ HnOoyw4asd4b+5q7om95wrvq/3RYqpCMekuwLhPLmZCgvZmSq3zdbD9DGuEFgaM2
+ 0iMVyTSkfAkPPY8T3Oj1dDBqziJ9+5AZvPzQ4EFU+WMmK40rNKY1bhlhqQ/96m0u
+ 2yNkwQ==
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com
+ [209.85.222.197])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fwctp8ebs-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Fri, 07 Aug 2026 11:04:49 +0000 (GMT)
-Received: by mail-qk1-f199.google.com with SMTP id
- af79cd13be357-934963b2bc0so323114485a.3
- for <qemu-riscv@nongnu.org>; Fri, 07 Aug 2026 04:04:49 -0700 (PDT)
+ for <qemu-riscv@nongnu.org>; Fri, 07 Aug 2026 11:44:38 +0000 (GMT)
+Received: by mail-qk1-f197.google.com with SMTP id
+ af79cd13be357-9349c5af52bso577581185a.0
+ for <qemu-riscv@nongnu.org>; Fri, 07 Aug 2026 04:44:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1786100689; x=1786705489; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1786103078; x=1786707878; darn=nongnu.org;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=HnwgKbBW3JF2Vo+MkABsFuBwZTQx16q+MAGpnqX1guM=;
- b=DWOBFoi2QvqYITohAkheJ33gI1jKNlRc7gm7k8RzMJaE7ERFWr0ISC4p+3PIocdwiY
- D2LlCovYlQAs5kp6Avzd53Y7djGoegUAQhoiqrJ01Uejn9HI5pXZc6LJcgp1oYtH+B82
- Uc5ejyXH463VGN/eaXGnBlMTXVExcZq8WytwY6YNwW+Kjl+ykzMiVNHrt9itOi/8Qr/H
- 9zdTEa2HUGJ+Otd7Yi/Msk7akgbjtE3eEy7iWNucAVX5WOfN9gmnApgou/I7QUcl7jHt
- UrDezprj+tSkC3pPBqLZ3SpkF2HbgZbyc00ozBjmU3TmwJxyohfuRwJJ6frVo5VL5dx7
- oXng==
+ bh=7BJlS16x5+i1zGlwTbpz658TRHx5Fe9UoAcRBShlFGM=;
+ b=F4iPCZuPNQIQJNmLx99am2wEqvQQsK2aGeusw82x3gq0eormItUavb4IU2zwRSP+z5
+ +ZRq25VNYqn/2WmOOc8406JE8FTDcZ8mHshPnP6RzDPIZDWxBymGNXGRzgMU94igCndg
+ 0Y8UoLTcwctMab09onlIUXrLqtIjZlh0ZQqhWRBqSjrxVoUeHbjWAzGOOoTIKkMx0aVa
+ st5+iuKVOBLQs+ACNYyqjROzhldzJG61IQ6FJUxY1u1PKXpwymKRBqKKGMNPZoWtbtjq
+ 6O5HhAmkQIQq3mPAQSQh2rvEYGlGUsio5BzV4hKt8kM4Xnaamb3ifZcqIlWCnaMKF5or
+ IHUQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786100689; x=1786705489;
+ d=1e100.net; s=20251104; t=1786103078; x=1786707878;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=HnwgKbBW3JF2Vo+MkABsFuBwZTQx16q+MAGpnqX1guM=;
- b=dDEcNzR5TiD6P8hf2mEaFC66UOA5EJCWJlKIPlTkupCsT8XN9+X1RYhIMgt5tA5o6t
- +YHmcmqRz7biuV310Tk/frmWLCKknK7NBEVjQm3BHbJBcgHYiwwIH3JjiW2itLmkzdKl
- wrNIz8n9mCEeuD2J8BUrWXPfRoM3QvEaehpBMNTcaAlCCwNiEAJ59JhlYJxffZ/ayz/M
- gxJtn3odMyaGWnjoffds7Q2D/YvS+LV/HdjWuQikM2rhj1lUcESqH/o/2isoe262V26V
- NfgX/eSlTnHZLA179yjEL3l6ZdnTc2TFuCurnL9LwGu5znaeEMb/GNc/ZtuRaUuvcnna
- ZF3w==
-X-Gm-Message-State: AOJu0YwjYx4oEyojuLNkPRM3+Kmk/09Vpil4t9QjHjdOByCmIHa2xU2t
- 0b1JGFvQ5AJJ6iDyvGzUwih2IfmVgSHTMzRJZsJ0ylJREwnOKvTqZgu/CU9ZUCjytegLZSPtxjg
- 4F6MtcR8+BQrHvMbLMgsTa8hjqHrvI5cQO6LO6HxlEj6JL0CzA5x6eV6MiQ==
-X-Gm-Gg: AR+sD11Psyap+S/Ktu9eFbz9/5cCF4hBfSp+9/UOc0RMqb2/FmgY6G955jpy51u+eyh
- Ce0vsqwc+e4j5yVEmkabjFaczBDElo5pSiB5x1/FnNvghkS18Iv4jA5RPRCJA/Hup8WRlfpezuk
- BKIuGnxZ+TLr7vrdZCsIqe6bPqH+MDJfT4qyATvgn11MmtRxmoygktQwTHMEjIs0jqmUJZ8Ur5I
- 6+cDHQeval8xal9VFFqbg8x3ELDyIusRSVor9ftjPqkazIrDSLKsccwGJdNLe1J23i6457RdsGW
- aZaUtKJrLucP7YqW6zfSZSoLnEGYQetz4tp8ZMC+CyqNg8Xxk6nsH/i1W5QQEycs/N056Ga2iT8
- IWCxNdhvo00zO7jjH/mALGeGEes3m0Z/uP4Th
-X-Received: by 2002:a05:620a:a918:b0:92e:c93a:65e2 with SMTP id
- af79cd13be357-936492aee28mr1976262485a.39.1786100689026; 
- Fri, 07 Aug 2026 04:04:49 -0700 (PDT)
-X-Received: by 2002:a05:620a:a918:b0:92e:c93a:65e2 with SMTP id
- af79cd13be357-936492aee28mr1976257585a.39.1786100688615; 
- Fri, 07 Aug 2026 04:04:48 -0700 (PDT)
+ bh=7BJlS16x5+i1zGlwTbpz658TRHx5Fe9UoAcRBShlFGM=;
+ b=Tu4e3g06jpbj7jVeXm/xpr6Yxb2PbUPzcmkABknt3nwxhFodRB18AeIdkt8wX9TInO
+ um3A8S2ujIindP8RnpIYktizNl+nxUkoY2FvvRugXGcMPhd92+1Z35zIsDhR0Dwsew15
+ mUrzrsZK6uzeGo6geSyu0APtf3EW/U2w0c3PjI3mcSPYh251IdueT57bAzcLaTd+TlsF
+ eShzwNDxfyVsKApY+hXW75pFv7Plv1N2WFPbajOsTtEioyfNtnCGUKr8mzQnIhZOTxZz
+ 6fgW2+9jeGBXC/6mKjcKaew8t8rqKove+ADw5T+SDKRP4sy5kLu6UALMKg3Gi0pDbZrm
+ viYQ==
+X-Forwarded-Encrypted: i=1;
+ AHgh+Rol2pc7iIGCC6tMuDOF/lQk8X1CjSpAHydHF4c9xn/Sez72ipcXKp7g3lDAA7wvV6AEiOwEoo/8Rpiu@nongnu.org
+X-Gm-Message-State: AOJu0YxTSsBrLNu+t5lKBYRWNBlHyABo2b42kx9xg5caefzLjr2lW2eL
+ q+Ms4d5jRztIMTVED3mPh+ulxqmFXDAZPs8mD4AxoinASz5NTMSzivnYf41ajyB93ON6dIUoi0s
+ okXZnSNR+g7nAjA4LKa1Kp3zmRoAg4EJ/73UFvG45BGCP6ZYH9l0LUTAZtg==
+X-Gm-Gg: AR+sD11l9BnQy2ewxMk9RElg2v9ZgiM0aOOBX27VYFR60Gl0sM8DlM2nu4M78VZiayp
+ YRzePTJDsPVwO0TlR35eZPVLaj+DaPfkkM24dFkIAMzWB6gilLxCtxIzp4aIPJSQCf/l1/z9Blk
+ MuUcHLMDVIXhpCV6/IrkLbC5r5NFV8Mj6irucHguPyULWvR8t7bFqXjYp4CmOXGGvzHoe9zb9aU
+ 1oAqeXkZ8FqwKP+C650iGw8hFGV0KUfGOrgZGCC8Wg9R+kCXRruC25I0b4fk+zuvtoWVurIrd8R
+ Fubinfkv9+pHG7jp4wLk9BvMBXhHhyrKnJafT1pI0ZaumowI74cRpSFbmiuxHnBa4RjyLxCkGyl
+ gyylKekuZ8oX0rys3yYMetFQ8EjzaV+bGRXw6
+X-Received: by 2002:a05:620a:a494:b0:930:f735:1377 with SMTP id
+ af79cd13be357-93649097cf0mr2112543185a.19.1786103078102; 
+ Fri, 07 Aug 2026 04:44:38 -0700 (PDT)
+X-Received: by 2002:a05:620a:a494:b0:930:f735:1377 with SMTP id
+ af79cd13be357-93649097cf0mr2112534585a.19.1786103077484; 
+ Fri, 07 Aug 2026 04:44:37 -0700 (PDT)
 Received: from [192.168.68.104] ([187.11.154.152])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-9366e261918sm121192485a.34.2026.08.07.04.04.46
+ af79cd13be357-9366e2c211csm128588685a.47.2026.08.07.04.44.34
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 07 Aug 2026 04:04:47 -0700 (PDT)
-Message-ID: <896d54b5-a373-428e-8256-9003b2697744@oss.qualcomm.com>
-Date: Fri, 7 Aug 2026 08:04:44 -0300
+ Fri, 07 Aug 2026 04:44:36 -0700 (PDT)
+Message-ID: <8217d3c4-cd7a-41ea-a244-44ef0f459ba8@oss.qualcomm.com>
+Date: Fri, 7 Aug 2026 08:44:33 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] target/riscv: Fix PC sync in trans_sspopchk for CFI
- exception handling
-To: A-Shehab <ahshehab24@gmail.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, Max Chou <max.chou@sifive.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
- <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu@processmission.com>
-References: <20260730181852.1622-1-ahshehab24@gmail.com>
+Subject: Re: [PATCH v2 1/2] hw/gpio: add K230 GPIO controller model
+To: guochun.wang@foxmail.com, qemu-devel@nongnu.org
+Cc: chao.liu@processmission.com, palmer@dabbelt.com, alistair.francis@wdc.com, 
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, pbonzini@redhat.com,
+ farosas@suse.de, lvivier@redhat.com, qemu-riscv@nongnu.org
+References: <20260805151455.99076-1-guochun.wang@foxmail.com>
+ <tencent_7080159426F5C824AE07916CF4FF9944EB08@qq.com>
 From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Content-Language: en-US
-In-Reply-To: <20260730181852.1622-1-ahshehab24@gmail.com>
+In-Reply-To: <tencent_7080159426F5C824AE07916CF4FF9944EB08@qq.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODA3MDA4NSBTYWx0ZWRfXzSnz+NqfV/BF
- xy47U6kjsG8AMgfJYUMAID7rzevScHod1q6DoAl815KgBtn+sinGiHiAwDO/03puswcdypCLYAv
- JJkRspQhp61drpFYWh8hcNThUQuZZTRWLYfPhURTkjFyq+PcfRIGM/OutFmbfZc6v1GEbUQUNLb
- +0TIZm/QfnQvqFvPAh5jnZuTmjRkFptV6fk2y2yhaNbjz9owY2QsDy71DG5yRR2MuXQrdlEbq0v
- tifNp1vRzIvoQO2hHmZa13tQIeoSifvX2F7E/FeJaAIBRPmJABnBNrRzQBMQYyGgjq3TptJplHK
- sH1H74/ReXyV9R2YCKZLzO38jH+96pAFdzFWOk65IkI5y6FGTa1jvw9SXxMqLjn/t/J6Sw00xE5
- qxy/ZwFQYxPy25/TeVi+akIyuiejMlDelpHzL1N/EpAr24lUABeE/CtnMfJNywiW6lVh9fO9mko
- 8QGUhlvo0h52kgl6O/g==
-X-Authority-Analysis: v=2.4 cv=DvhmPm/+ c=1 sm=1 tr=0 ts=6a75bbd1 cx=c_pps
- a=HLyN3IcIa5EE8TELMZ618Q==:117 a=iMfxv9gflPUPBcmW7/Gq5Q==:17
+X-Authority-Analysis: v=2.4 cv=Fp01OWrq c=1 sm=1 tr=0 ts=6a75c526 cx=c_pps
+ a=50t2pK5VMbmlHzFWWp8p/g==:117 a=iMfxv9gflPUPBcmW7/Gq5Q==:17
  a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=p0WdMEafAAAA:8 a=VwQbUJbxAAAA:8 a=pFyQfRViAAAA:8 a=pGLkceISAAAA:8
- a=EUspDBNiAAAA:8 a=UFTaeZGCLHsyUKFxc-IA:9 a=QEXdDO2ut3YA:10
- a=bTQJ7kPSJx9SKPbeHEYW:22 a=oJz5jJLG1JtSoe7EL652:22
-X-Proofpoint-ORIG-GUID: LBNveEO1WbI5VKOoNz0bdp9es5UAFg6_
-X-Proofpoint-GUID: LBNveEO1WbI5VKOoNz0bdp9es5UAFg6_
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODA3MDA4NSBTYWx0ZWRfX6qYH6yFCHnS7
- jwgRjf/TNY6ZQTL9CGaCmyNB9xMrnXk9MJgzGdsmbv2jM1EHTN3hRD9gau1q/uJw2SwcfJiZ7C+
- x8WjWi7p0f57/5pn25s8o45pvtbX4UQ=
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
+ a=e57ZSKXAAAAA:20 a=bDN84i_9AAAA:8 a=FRSEYCzRAAAA:8 a=69wJf7TsAAAA:8
+ a=pGLkceISAAAA:8 a=-lSXbi9S4Krr9TSAB1gA:9 a=QEXdDO2ut3YA:10
+ a=IoWCM6iH3mJn3m4BftBB:22 a=J2PsDwZO0S0EpbpLmD-j:22 a=H4N_Y-AU75W7NKDNhZlT:22
+ a=Fg1AiH1G6rFz08G2ETeA:22 a=bA3UWDv6hWIuX7UZL3qL:22
+X-Proofpoint-GUID: ytMLVzrOelQcY12Tl1EoyT0wkRVQltgp
+X-Proofpoint-ORIG-GUID: ytMLVzrOelQcY12Tl1EoyT0wkRVQltgp
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODA3MDA5MCBTYWx0ZWRfX5C9KWFeIiglW
+ XOJYSckDaHYukTPLrupCyo6Q+p+QUHnK5YLuhYacNnS7BMqWLU5tl7tNvhTG3+n6Bcwv9/GA+Lw
+ X1DO4Dwi/UddaAy+y3BOaJpBZjAq77LqslwbJPfwOgfcFElYrpSLbowKwZO2dMAhNqjgG21mBhy
+ vzM4Xa0oZVY03MDDp1K+oArj9R8Yd/ZmDdb6LpSeW1HepbeHkTd+098RgDG+kJkasdf0D6WgoTg
+ PWXHkF+p0lxsaB2/4+UhWb33BGV/2at3CVkT9uN7UJNmPXjQrA+smP7LNGq2mDiLh4DXZmjWrSx
+ La3+k9EzgCCscJHjSvDn0QxFKA0oU2l1tGCLOkbe1ZUAAkbfCrykG8utDl/VdIEk2w6G7qz+FF5
+ UWQ6eF7mP6Z7aMsykP0KVEHEX2/vv8h7Pa+MxfFd3cwl+sWy2jV55V6Ogit0IwdDvIqBAJmm8zb
+ CpMAOmNbE8llEXDNpig==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODA3MDA5MCBTYWx0ZWRfXzivehAEWUyml
+ K+vbxZiUILhT8ms4PvEdGz5pk2KcULTt4mTxO4ES8ToNLVUfohxx6vzlzq7JtgFctO32FZdt/mE
+ bzIKgrSoXl+xieVXZPhf/24f0CrHkSg=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-07_01,2026-08-06_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 bulkscore=0 clxscore=1015 spamscore=0 malwarescore=0
- suspectscore=0 adultscore=0 impostorscore=0 lowpriorityscore=0 phishscore=0
+ phishscore=0 priorityscore=1501 spamscore=0 clxscore=1015 adultscore=0
+ impostorscore=0 suspectscore=0 malwarescore=0 lowpriorityscore=0 bulkscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608070085
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608070090
 Received-SPF: pass client-ip=205.220.180.131;
  envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
 X-Spam_score_int: -27
@@ -157,72 +158,722 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+Hello,
 
-
-On 7/30/2026 3:18 PM, A-Shehab wrote:
-> From: Max Chou <max.chou@sifive.com>
+On 8/5/2026 12:14 PM, guochun.wang@foxmail.com wrote:
+> From: guochun wang <guochun.wang@foxmail.com>
 > 
-> Move gen_update_pc call before conditional logic to ensure consistent
-> PC state regardless of execution path.
+> Implement a K230 SoC APB GPIO controller model for QEMU, derived from
+> the Synopsys DesignWare APB GPIO (the Linux gpio-k230 driver is based
+> on gpio-dwapb.c and shares the same register layout), with a
+> Canaan-specific compatible ("canaan,k230-apb-gpio") and hardlock
+> integration. The model is capable of running the Linux gpio-k230 driver
+> and driving external input/output lines. Behaviour follows the K230
+> Technical Reference Manual v0.3.1.
 > 
-> Previously, the host instructions generated to update the cpu_pc were
-> only executed in the failure path when shadow stack validation failed.
-> This created inconsistent PC synchronization.
+> Implemented:
+>    - Port A registers: SWPORTA_DR/DDR/CTL, EXT_PORTA, INTEN, INTMASK,
+>      INTTYPE_LEVEL, INT_POLARITY, INTSTATUS, RAW_INTSTATUS, DEBOUNCE,
+>      LS_SYNC, INT_BOTHEDGE, PORTA_EOI, ID_CODE, VER_ID_CODE,
+>      CONFIG_REG1/2
+>    - Software control mode: DR drives output pad, DDR selects direction,
+>      EXT_PORTA multiplexes external input vs. DR by DDR
+>    - Per-pin IRQ output lines (single interrupt scheme), 32 per group
+>    - Edge detection: rising / falling / both-edge via INT_BOTHEDGE
+>    - Level-sensitive interrupts: active-high / active-low
+>    - PORTA_EOI clears edge interrupts only; level interrupts cleared by
+>      source removal or INTMASK
+>    - INTMASK masking and INTEN gating
+>    - DDR/CTL mode switching: no new interrupts while output/hardware mode,
+>      pending interrupts preserved; on switch back to input/software mode,
+>      level interrupts re-evaluated against current ext level, edge left
+>      untouched, per TRM v0.3.1
+>    - Three-phase Resettable API (enter/hold); VMState migration
 > 
-> This inconsistency caused issues in CF_PCREL mode where subsequent
-> instructions calculated wrong relative offsets from stale pc_save
-> values, and could lead to incorrect exception return addresses.
+> Not implemented (no observable effect under QEMU):
+>    - Hardware control mode (aux_porta_out/en/in signals, single-ctl params)
+>    - Debounce logic (dbclk, glitch filtering, both-edge debounce timing)
+>    - Combined interrupt output (gpio_intr_flag OR of all lines)
+>    - Clock-domain synchronization (pclk_intr, ls_sync metastability
+>      registers, gpio_intrclk_en output)
+>    - Config-time parameters GPIO_PA_SYNC_EXT_DATA / GPIO_PA_SYNC_INTERRUPTS
+>      / GPIO_INT_BOTH_EDGE / GPIO_PORTX_SINGLE_CTL
 > 
-> This fix ensures PC is always synchronized before any helper that
-> might raise an exception, maintaining consistent translator state
-> across all execution paths.
+> Two controllers are instantiated in the K230 SoC (gpio0 at 0x9140B000,
+> gpio1 at 0x9140C000), replacing the previous unimplemented-device
+> placeholders. Each controller exposes 32 per-pin IRQ lines connected
+> to the PLIC:
+>    - GPIO0: PLIC sources 32..63
+>    - GPIO1: PLIC sources 64..95
 > 
-> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/4118
-> Signed-off-by: Max Chou <max.chou@sifive.com>
-> [ahshehab: rebased on current master; file moved to
->   target/riscv/tcg/insn_trans/ and the ssp load is now 64-bit wide]
-> Tested-by: A-Shehab <ahshehab24@gmail.com>
-> Signed-off-by: A-Shehab <ahshehab24@gmail.com>
+> Signed-off-by: guochun wang <guochun.wang@foxmail.com>
 > ---
 
-Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+LGTM.  Some comments below:
 
-> This is a repost of Max Chou's patch from 2025-11-05 [1], which did not
-> receive any review. Rebased onto current master: the file moved to
-> target/riscv/tcg/insn_trans/ and the ssp load is now a 64-bit load, so
-> the original patch no longer applies.
+>   MAINTAINERS                 |   2 +
+>   hw/gpio/Kconfig             |   3 +
+>   hw/gpio/k230_gpio.c         | 362 ++++++++++++++++++++++++++++++++++++
+>   hw/gpio/meson.build         |   1 +
+>   hw/riscv/Kconfig            |   1 +
+>   hw/riscv/k230.c             |  27 ++-
+>   include/hw/gpio/k230_gpio.h |  73 ++++++++
+>   include/hw/riscv/k230.h     |   5 +
+>   8 files changed, 468 insertions(+), 6 deletions(-)
+>   create mode 100644 hw/gpio/k230_gpio.c
+>   create mode 100644 include/hw/gpio/k230_gpio.h
 > 
-> I opened a GitLab issue (#4118) with a minimal, self-contained bare-metal
-> reproducer for this bug. It runs an sspopchk that matches the shadow stack
-> (the common case) followed by an auipc in the same translation block; on
-> current master the auipc returns an address 4 bytes too low (exit 42) and
-> with this patch it is correct (exit 0). The reproducer is included in the
-> issue.
-> 
-> [1] https://lore.kernel.org/qemu-devel/20251105134331.2865581-1-max.chou@sifive.com/
-> 
->   target/riscv/tcg/insn_trans/trans_rvzicfiss.c.inc | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/target/riscv/tcg/insn_trans/trans_rvzicfiss.c.inc b/target/riscv/tcg/insn_trans/trans_rvzicfiss.c.inc
-> index a813232887..d47a9f9c7d 100644
-> --- a/target/riscv/tcg/insn_trans/trans_rvzicfiss.c.inc
-> +++ b/target/riscv/tcg/insn_trans/trans_rvzicfiss.c.inc
-> @@ -32,6 +32,7 @@ static bool trans_sspopchk(DisasContext *ctx, arg_sspopchk *a)
->       TCGLabel *skip = gen_new_label();
->       uint32_t tmp = (get_xl(ctx) == MXL_RV64) ? 8 : 4;
->       TCGv data = tcg_temp_new();
-> +    gen_update_pc(ctx, 0);
->       TCGv_i64 wide_addr = tcg_temp_new_i64();
->       tcg_gen_ld_i64(wide_addr, tcg_env, offsetof(CPURISCVState, ssp));
->       tcg_gen_trunc_i64_tl(addr, wide_addr);
-> @@ -42,7 +43,6 @@ static bool trans_sspopchk(DisasContext *ctx, arg_sspopchk *a)
->       tcg_gen_brcond_tl(TCG_COND_EQ, data, rs1, skip);
->       tcg_gen_st8_i32(tcg_constant_i32(RISCV_EXCP_SW_CHECK_BCFI_TVAL),
->                       tcg_env, offsetof(CPURISCVState, sw_check_code));
-> -    gen_update_pc(ctx, 0);
->       gen_helper_raise_exception(tcg_env,
->                     tcg_constant_i32(RISCV_EXCP_SW_CHECK));
->       gen_set_label(skip);
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 902db77218..4301d29f7e 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -1827,8 +1827,10 @@ M: Chao Liu <chao.liu@processmission.com>
+>   L: qemu-riscv@nongnu.org
+>   S: Maintained
+>   F: docs/system/riscv/k230.rst
+> +F: hw/gpio/k230_gpio.c
+>   F: hw/riscv/k230.c
+>   F: hw/watchdog/k230_wdt.c
+> +F: include/hw/gpio/k230_gpio.h
+>   F: include/hw/riscv/k230.h
+>   F: include/hw/watchdog/k230_wdt.h
+>   F: tests/functional/riscv64/test_k230.py
+> diff --git a/hw/gpio/Kconfig b/hw/gpio/Kconfig
+> index a209294c20..2d37a8bb6f 100644
+> --- a/hw/gpio/Kconfig
+> +++ b/hw/gpio/Kconfig
+> @@ -16,6 +16,9 @@ config SIFIVE_GPIO
+>   config STM32L4X5_GPIO
+>       bool
+>   
+> +config K230_GPIO
+> +    bool
+> +
+>   config PCA9552
+>       bool
+>       depends on I2C
+> diff --git a/hw/gpio/k230_gpio.c b/hw/gpio/k230_gpio.c
+> new file mode 100644
+> index 0000000000..a589d94712
+> --- /dev/null
+> +++ b/hw/gpio/k230_gpio.c
+> @@ -0,0 +1,362 @@
+> +/*
+> + * QEMU K230 GPIO Controller
+> + *
+> + * Copyright (c) 2025 Wang Guochun <wdasn99@gmail.com>
+> + *
+> + * SPDX-License-Identifier: GPL-2.0-or-later
+> + *
+> + * K230 Technical Reference Manual V0.3.1 (2024-11-18), section 12.5 GPIO
+> + * https://github.com/revyos/external-docs/blob/master/K230/en-us/K230_Technical_Reference_Manual_V0.3.1_20241118.pdf
+> + */
+> +
+> +#include "hw/gpio/k230_gpio.h"
+> +#include "hw/core/irq.h"
+> +#include "migration/vmstate.h"
+> +#include "qemu/log.h"
+> +#include "qemu/module.h"
+> +
+> +static void k230_gpio_update_int(K230GPIOState *s)
+> +{
+> +    uint32_t masked_status = s->raw_intstatus & ~s->intmask & s->inten;
+> +    for (int i = 0; i < K230_GPIO_PINS_PER_GROUP; i++) {
+> +        if (s->irq[i]) {
+> +            qemu_set_irq(s->irq[i], extract32(masked_status, i, 1));
+> +        }
+> +    }
+> +}
+> +
+> +static void k230_gpio_set_int_line(K230GPIOState *s, int line, int level)
+> +{
+> +    if (line >= K230_GPIO_PINS_PER_GROUP) {
+> +        return;
+> +    }
+> +
+> +    uint32_t prev_level = extract32(s->ext_porta, line, 1);
+> +    uint32_t curr_level = level;
+> +
+> +    s->ext_porta = deposit32(s->ext_porta, line, 1, curr_level);
+> +
+> +    if (extract32(s->swporta_ddr, line, 1)) {
+> +        return;
+> +    }
+> +
+> +    if (extract32(s->swporta_ctl, line, 1)) {
+> +        return;
+> +    }
+> +
+> +    uint32_t pol = extract32(s->int_polarity, line, 1);
+> +    uint32_t both = extract32(s->int_bothedge, line, 1);
+> +    uint32_t is_level = !extract32(s->inttype_level, line, 1);
+> +
+> +    if (both) {
+> +        if (prev_level != curr_level) {
+> +            s->raw_intstatus |= (1U << line);
+> +        }
+> +    } else if (is_level) {
+> +        if (curr_level == pol) {
+> +            s->raw_intstatus |= (1U << line);
+> +        } else {
+> +            s->raw_intstatus &= ~(1U << line);
+> +        }
+> +    } else {
+> +        if (prev_level != curr_level && curr_level == pol) {
+> +            s->raw_intstatus |= (1U << line);
+> +        }
+> +    }
+> +}
+> +
+> +static void k230_gpio_set(void *opaque, int line, int level)
+> +{
+> +    K230GPIOState *s = K230_GPIO(opaque);
+> +
+> +    k230_gpio_set_int_line(s, line, level);
+> +    k230_gpio_update_int(s);
+> +}
+> +
+> +static void k230_gpio_set_all_output_lines(K230GPIOState *s)
+> +{
+> +    int i;
+> +
+> +    for (i = 0; i < K230_GPIO_PINS_PER_GROUP; i++) {
+> +        if (extract32(s->swporta_ddr, i, 1) && s->output[i]) {
+> +            qemu_set_irq(s->output[i], extract32(s->swporta_dr, i, 1));
+> +        }
+> +    }
+> +}
+> +
+> +static uint64_t k230_gpio_read(void *opaque, hwaddr offset, unsigned size)
+> +{
+> +    K230GPIOState *s = K230_GPIO(opaque);
+> +
+> +    switch (offset) {
+> +    case K230_GPIO_SWPORTA_DR:
+> +        return s->swporta_dr;
+> +    case K230_GPIO_SWPORTA_DDR:
+> +        return s->swporta_ddr;
+> +    case K230_GPIO_SWPORTA_CTL:
+> +        return s->swporta_ctl;
+> +    case K230_GPIO_INTEN:
+> +        return s->inten;
+> +    case K230_GPIO_INTMASK:
+> +        return s->intmask;
+> +    case K230_GPIO_INTTYPE_LEVEL:
+> +        return s->inttype_level;
+> +    case K230_GPIO_INT_POLARITY:
+> +        return s->int_polarity;
+> +    case K230_GPIO_INTSTATUS:
+> +        return s->raw_intstatus & ~s->intmask;
+> +    case K230_GPIO_RAW_INTSTATUS:
+> +        return s->raw_intstatus;
+> +    case K230_GPIO_DEBOUNCE:
+> +        return s->debounce;
+> +    case K230_GPIO_EXT_PORTA:
+> +        return (s->ext_porta & ~s->swporta_ddr) |
+> +               (s->swporta_dr & s->swporta_ddr);
+> +    case K230_GPIO_LS_SYNC:
+> +        return s->ls_sync;
+> +    case K230_GPIO_ID_CODE:
+> +        return s->id_code;
+> +    case K230_GPIO_INT_BOTHEDGE:
+> +        return s->int_bothedge;
+> +    case K230_GPIO_VER_ID_CODE:
+> +        return s->ver_id_code;
+> +    case K230_GPIO_CONFIG_REG2:
+> +        return s->config_reg2;
+> +    case K230_GPIO_CONFIG_REG1:
+> +        return s->config_reg1;
+> +    case K230_GPIO_PORTA_EOI:
+> +        return 0;
+> +    default:
+> +        qemu_log_mask(LOG_GUEST_ERROR, "[%s]%s: Bad register at offset 0x%"
+> +                      HWADDR_PRIx "\n", TYPE_K230_GPIO, __func__, offset);
+> +        return 0;
+> +    }
+> +}
+> +
+> +static void k230_gpio_write(void *opaque, hwaddr offset, uint64_t value,
+> +                            unsigned size)
+> +{
+> +    K230GPIOState *s = K230_GPIO(opaque);
+> +
+> +    switch (offset) {
+> +    case K230_GPIO_SWPORTA_DR:
+> +        s->swporta_dr = value;
+> +        k230_gpio_set_all_output_lines(s);
+> +        break;
+> +    case K230_GPIO_SWPORTA_DDR: {
+> +        uint32_t prev_ddr = s->swporta_ddr;
+> +        s->swporta_ddr = value;
+> +        k230_gpio_set_all_output_lines(s);
+> +        for (int i = 0; i < K230_GPIO_PINS_PER_GROUP; i++) {
+> +            /* Skip pins whose direction did not change */
+> +            if (extract32(prev_ddr, i, 1) == extract32(s->swporta_ddr, i, 1)) {
+> +                continue;
+> +            }
+> +            /*
+> +             * When switching back to input mode (and still in software
+> +             * control), re-evaluate level-sensitive interrupts. Edge
+> +             * interrupts are left untouched, matching the manual TRM v0.3.1.
+> +             */
+> +            if (!extract32(s->swporta_ddr, i, 1) &&
+> +                !extract32(s->swporta_ctl, i, 1)) {
+> +                uint32_t is_level = !extract32(s->inttype_level, i, 1);
+> +                if (is_level) {
+> +                    uint32_t curr_level = extract32(s->ext_porta, i, 1);
+> +                    uint32_t pol = extract32(s->int_polarity, i, 1);
+> +                    if (curr_level == pol) {
+> +                        s->raw_intstatus |= (1U << i);
+> +                    } else {
+> +                        s->raw_intstatus &= ~(1U << i);
+> +                    }
+> +                }
+> +            }
+
+
+This is a cosmetic/style suggestion so feel free to ignore it.
+
+I like what you did in the 'skip pins' code above with the early 'continue'. IMO
+you should do the same here since you're only doing things after 3 conditions
+are met.  I.e. this:
+
+
+ > +            if (!extract32(s->swporta_ddr, i, 1) &&
+ > +                !extract32(s->swporta_ctl, i, 1)) {
+ > +                uint32_t is_level = !extract32(s->inttype_level, i, 1);
+ > +                if (is_level) {
+ > +                    uint32_t curr_level = extract32(s->ext_porta, i, 1);
+ > +                    uint32_t pol = extract32(s->int_polarity, i, 1);
+ > +                    if (curr_level == pol) {
+ > +                        s->raw_intstatus |= (1U << i);
+ > +                    } else {
+ > +                        s->raw_intstatus &= ~(1U << i);
+ > +                    }
+ > +                }
+ > +            }
+
+Can be written as:
+
+               if (extract32(s->swporta_ddr, i, 1)
+                   || extract32(s->swporta_ctl, i, 1)
+                   || extract32(s->inttype_level, i, 1))
+                  continue;
+
+               /* At this point is_level is true */
+               uint32_t curr_level = extract32(s->ext_porta, i, 1);
+               uint32_t pol = extract32(s->int_polarity, i, 1);
+               if (curr_level == pol) {
+                   s->raw_intstatus |= (1U << i);
+               } else {
+                   s->raw_intstatus &= ~(1U << i);
+               }
+
+This will spare us 2 identation levels and, at least to me, is a bit clearer.
+
+
+  In case you agree I believe you'll have to declare 'curr_level' and 'pol' at
+k230_gpio_write() start to avoid creating variables in the middle of a block
+too.
+
+Again, just a cosmetic suggestion.
+
+
+> +        }
+> +        k230_gpio_update_int(s);
+> +        break;
+> +    }
+> +    case K230_GPIO_SWPORTA_CTL: {
+> +        uint32_t prev_ctl = s->swporta_ctl;
+> +        s->swporta_ctl = value;
+> +        for (int i = 0; i < K230_GPIO_PINS_PER_GROUP; i++) {
+> +            /* Skip pins whose control mode did not change */
+> +            if (extract32(prev_ctl, i, 1) == extract32(s->swporta_ctl, i, 1)) {
+> +                continue;
+> +            }
+> +            /*
+> +             * When switching back from hardware to software control (and DDR
+> +             * is input), re-evaluate level-sensitive interrupts. Edge
+> +             * interrupts are left untouched, matching the manual TRM v0.3.1.
+> +             */
+> +            if (!extract32(s->swporta_ddr, i, 1) &&
+> +                !extract32(s->swporta_ctl, i, 1)) {
+> +                uint32_t is_level = !extract32(s->inttype_level, i, 1);
+> +                if (is_level) {
+> +                    uint32_t curr_level = extract32(s->ext_porta, i, 1);
+> +                    uint32_t pol = extract32(s->int_polarity, i, 1);
+> +                    if (curr_level == pol) {
+> +                        s->raw_intstatus |= (1U << i);
+> +                    } else {
+> +                        s->raw_intstatus &= ~(1U << i);
+> +                    }
+> +                }
+> +            }
+
+Likewise.
+
+> +        }
+> +        k230_gpio_update_int(s);
+> +        break;
+> +    }
+> +    case K230_GPIO_INTEN:
+> +        s->inten = value;
+> +        k230_gpio_update_int(s);
+> +        break;
+> +    case K230_GPIO_INTMASK:
+> +        s->intmask = value;
+> +        k230_gpio_update_int(s);
+> +        break;
+> +    case K230_GPIO_INTTYPE_LEVEL:
+> +        s->inttype_level = value;
+> +        break;
+> +    case K230_GPIO_INT_POLARITY:
+> +        s->int_polarity = value;
+> +        break;
+> +    case K230_GPIO_DEBOUNCE:
+> +        s->debounce = value;
+> +        break;
+> +    case K230_GPIO_PORTA_EOI:
+> +        for (int i = 0; i < K230_GPIO_PINS_PER_GROUP; i++) {
+> +            if (extract32(value, i, 1) && extract32(s->inttype_level, i, 1)) {
+> +                s->raw_intstatus = deposit32(s->raw_intstatus, i, 1, 0);
+> +            }
+> +        }
+> +        k230_gpio_update_int(s);
+> +        break;
+> +    case K230_GPIO_LS_SYNC:
+> +        s->ls_sync = value;
+> +        break;
+> +    case K230_GPIO_ID_CODE:
+> +        break;
+> +    case K230_GPIO_INT_BOTHEDGE:
+> +        s->int_bothedge = value;
+> +        break;
+> +    case K230_GPIO_VER_ID_CODE:
+> +        break;
+> +    case K230_GPIO_CONFIG_REG2:
+> +        break;
+> +    case K230_GPIO_CONFIG_REG1:
+> +        break;
+> +    case K230_GPIO_INTSTATUS:
+> +        break;
+> +    case K230_GPIO_RAW_INTSTATUS:
+> +        break;
+> +    case K230_GPIO_EXT_PORTA:
+> +        break;
+> +    default:
+> +        qemu_log_mask(LOG_GUEST_ERROR, "[%s]%s: Bad register at offset 0x%"
+> +                      HWADDR_PRIx "\n", TYPE_K230_GPIO, __func__, offset);
+> +        break;
+> +    }
+> +}
+> +
+> +static const MemoryRegionOps k230_gpio_ops = {
+> +    .read = k230_gpio_read,
+> +    .write = k230_gpio_write,
+> +    .valid.min_access_size = 4,
+> +    .valid.max_access_size = 4,
+> +    .endianness = DEVICE_LITTLE_ENDIAN,
+> +};
+> +
+> +static const VMStateDescription vmstate_k230_gpio = {
+> +    .name = TYPE_K230_GPIO,
+> +    .version_id = 1,
+> +    .minimum_version_id = 1,
+> +    .fields = (const VMStateField[]) {
+> +        VMSTATE_UINT32(swporta_dr, K230GPIOState),
+> +        VMSTATE_UINT32(swporta_ddr, K230GPIOState),
+> +        VMSTATE_UINT32(swporta_ctl, K230GPIOState),
+> +        VMSTATE_UINT32(inten, K230GPIOState),
+> +        VMSTATE_UINT32(intmask, K230GPIOState),
+> +        VMSTATE_UINT32(inttype_level, K230GPIOState),
+> +        VMSTATE_UINT32(int_polarity, K230GPIOState),
+> +        VMSTATE_UINT32(intstatus, K230GPIOState),
+
+It seems to me that you're not using/writing s->intstatus througout the
+code.  IIUC you're using 'raw_intstatus' for everything, and when intstatus
+is required you use raw_intstatus and intmask to derive it.  E.g.:
+
+ > +    case K230_GPIO_INTSTATUS:
+ > +        return s->raw_intstatus & ~s->intmask;
+
+
+I believe we're better off by removing s->intstatus entirely.  The logic
+doesn't use it and we'll spare a field in the migration stream.
+
+One more thing:
+
+
+> +        VMSTATE_UINT32(raw_intstatus, K230GPIOState),
+> +        VMSTATE_UINT32(debounce, K230GPIOState),
+> +        VMSTATE_UINT32(ext_porta, K230GPIOState),
+> +        VMSTATE_UINT32(ls_sync, K230GPIOState),
+> +        VMSTATE_UINT32(int_bothedge, K230GPIOState),
+> +        VMSTATE_END_OF_LIST()
+> +    }
+> +};
+> +
+> +static void k230_gpio_enter_reset(Object *obj, ResetType type)
+> +{
+> +    K230GPIOState *s = K230_GPIO(obj);
+> +
+> +    s->swporta_dr = 0;
+> +    s->swporta_ddr = 0;
+> +    s->swporta_ctl = 0;
+> +    s->inten = 0;
+> +    s->intmask = 0;
+> +    s->inttype_level = 0;
+> +    s->int_polarity = 0;
+> +    s->intstatus = 0;
+> +    s->raw_intstatus = 0;
+> +    s->debounce = 0;
+> +    s->porta_eoi = 0;
+> +    s->ext_porta = 0;
+> +    s->ls_sync = 0;
+> +    s->id_code = 0;
+> +    s->int_bothedge = 0;
+> +    s->ver_id_code = 0;
+> +    s->config_reg2 = 0;
+> +    s->config_reg1 = 0;
+> +}
+> +
+> +static void k230_gpio_hold_reset(Object *obj, ResetType type)
+> +{
+> +    K230GPIOState *s = K230_GPIO(obj);
+> +
+> +    k230_gpio_update_int(s);
+> +}
+> +
+> +static void k230_gpio_realize(DeviceState *dev, Error **errp)
+> +{
+> +    K230GPIOState *s = K230_GPIO(dev);
+> +    SysBusDevice *sbd = SYS_BUS_DEVICE(dev);
+> +    int i;
+> +
+> +    memory_region_init_io(&s->iomem, OBJECT(s), &k230_gpio_ops, s,
+> +                          TYPE_K230_GPIO, K230_GPIO_MEM_SIZE);
+> +    sysbus_init_mmio(sbd, &s->iomem);
+> +
+> +    qdev_init_gpio_in(DEVICE(s), k230_gpio_set, K230_GPIO_PINS_PER_GROUP);
+> +    qdev_init_gpio_out(DEVICE(s), s->output, K230_GPIO_PINS_PER_GROUP);
+> +
+> +    for (i = 0; i < K230_GPIO_PINS_PER_GROUP; i++) {
+> +        sysbus_init_irq(sbd, &s->irq[i]);
+> +    }
+> +}
+> +
+> +static void k230_gpio_class_init(ObjectClass *klass, const void *data)
+> +{
+> +    DeviceClass *dc = DEVICE_CLASS(klass);
+> +    ResettableClass *rc = RESETTABLE_CLASS(klass);
+> +
+> +    dc->realize = k230_gpio_realize;
+> +    rc->phases.enter = k230_gpio_enter_reset;
+> +    rc->phases.hold = k230_gpio_hold_reset;
+> +    dc->vmsd = &vmstate_k230_gpio;
+> +    dc->desc = "K230 GPIO controller";
+> +}
+> +
+> +static const TypeInfo k230_gpio_info = {
+> +    .name = TYPE_K230_GPIO,
+> +    .parent = TYPE_SYS_BUS_DEVICE,
+> +    .instance_size = sizeof(K230GPIOState),
+> +    .class_init = k230_gpio_class_init,
+> +};
+> +
+> +static void k230_gpio_register_types(void)
+> +{
+> +    type_register_static(&k230_gpio_info);
+> +}
+> +
+> +type_init(k230_gpio_register_types)
+> diff --git a/hw/gpio/meson.build b/hw/gpio/meson.build
+> index 6a67ee958f..94b5d9e2fa 100644
+> --- a/hw/gpio/meson.build
+> +++ b/hw/gpio/meson.build
+> @@ -19,3 +19,4 @@ system_ss.add(when: 'CONFIG_ASPEED_SOC', if_true: files('aspeed_gpio.c'))
+>   system_ss.add(when: 'CONFIG_ASPEED_SOC', if_true: files('aspeed_sgpio.c'))
+>   system_ss.add(when: 'CONFIG_SIFIVE_GPIO', if_true: files('sifive_gpio.c'))
+>   system_ss.add(when: 'CONFIG_PCF8574', if_true: files('pcf8574.c'))
+> +system_ss.add(when: 'CONFIG_K230_GPIO', if_true: files('k230_gpio.c'))
+> diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
+> index de37c08cae..410877425c 100644
+> --- a/hw/riscv/Kconfig
+> +++ b/hw/riscv/Kconfig
+> @@ -162,3 +162,4 @@ config K230
+>       select SERIAL_MM
+>       select UNIMP
+>       select K230_WDT
+> +    select K230_GPIO
+> diff --git a/hw/riscv/k230.c b/hw/riscv/k230.c
+> index 656f28190c..62967a67d0 100644
+> --- a/hw/riscv/k230.c
+> +++ b/hw/riscv/k230.c
+> @@ -110,6 +110,8 @@ static void k230_soc_init(Object *obj)
+>       object_initialize_child(obj, "c908-cpu", cpu0, TYPE_RISCV_HART_ARRAY);
+>       object_initialize_child(obj, "k230-wdt0", &s->wdt[0], TYPE_K230_WDT);
+>       object_initialize_child(obj, "k230-wdt1", &s->wdt[1], TYPE_K230_WDT);
+> +    object_initialize_child(obj, "k230-gpio0", &s->gpio[0], TYPE_K230_GPIO);
+> +    object_initialize_child(obj, "k230-gpio1", &s->gpio[1], TYPE_K230_GPIO);
+>   
+>       qdev_prop_set_uint32(DEVICE(cpu0), "hartid-base", 0);
+>       qdev_prop_set_string(DEVICE(cpu0), "cpu-type", TYPE_RISCV_CPU_THEAD_C908);
+> @@ -206,6 +208,25 @@ static void k230_soc_realize(DeviceState *dev, Error **errp)
+>       sysbus_connect_irq(SYS_BUS_DEVICE(&s->wdt[1]), 0,
+>                          qdev_get_gpio_in(DEVICE(s->c908_plic), K230_WDT1_IRQ));
+>   
+> +    /* GPIO */
+> +    sysbus_realize(SYS_BUS_DEVICE(&s->gpio[0]), &error_fatal);
+> +    sysbus_mmio_map(SYS_BUS_DEVICE(&s->gpio[0]), 0,
+> +                    memmap[K230_DEV_GPIO0].base);
+> +    for (int i = 0; i < K230_GPIO_PINS_PER_GROUP; i++) {
+> +        sysbus_connect_irq(SYS_BUS_DEVICE(&s->gpio[0]), i,
+> +                           qdev_get_gpio_in(DEVICE(s->c908_plic),
+> +                                            K230_GPIO0_IRQ_BASE + i));
+> +    }
+> +
+> +    sysbus_realize(SYS_BUS_DEVICE(&s->gpio[1]), &error_fatal);
+> +    sysbus_mmio_map(SYS_BUS_DEVICE(&s->gpio[1]), 0,
+> +                    memmap[K230_DEV_GPIO1].base);
+> +    for (int i = 0; i < K230_GPIO_PINS_PER_GROUP; i++) {
+> +        sysbus_connect_irq(SYS_BUS_DEVICE(&s->gpio[1]), i,
+> +                           qdev_get_gpio_in(DEVICE(s->c908_plic),
+> +                                            K230_GPIO1_IRQ_BASE + i));
+> +    }
+> +
+>       /* unimplemented devices */
+>       create_unimplemented_device("kpu.l2-cache",
+>                                   memmap[K230_DEV_KPU_L2_CACHE].base,
+> @@ -322,12 +343,6 @@ static void k230_soc_realize(DeviceState *dev, Error **errp)
+>       create_unimplemented_device("pwm", memmap[K230_DEV_PWM].base,
+>                                   memmap[K230_DEV_PWM].size);
+>   
+> -    create_unimplemented_device("gpio0", memmap[K230_DEV_GPIO0].base,
+> -                                memmap[K230_DEV_GPIO0].size);
+> -
+> -    create_unimplemented_device("gpio1", memmap[K230_DEV_GPIO1].base,
+> -                                memmap[K230_DEV_GPIO1].size);
+> -
+>       create_unimplemented_device("adc", memmap[K230_DEV_ADC].base,
+>                                   memmap[K230_DEV_ADC].size);
+>   
+> diff --git a/include/hw/gpio/k230_gpio.h b/include/hw/gpio/k230_gpio.h
+> new file mode 100644
+> index 0000000000..2e52bbf760
+> --- /dev/null
+> +++ b/include/hw/gpio/k230_gpio.h
+> @@ -0,0 +1,73 @@
+> +/*
+> + * QEMU K230 GPIO Controller
+> + *
+> + * Copyright (c) 2025 Wang Guochun <wdasn99@gmail.com>
+> + *
+> + * SPDX-License-Identifier: GPL-2.0-or-later
+> + *
+> + * K230 Technical Reference Manual V0.3.1 (2024-11-18), section 12.5 GPIO
+> + * https://github.com/revyos/external-docs/blob/master/K230/en-us/K230_Technical_Reference_Manual_V0.3.1_20241118.pdf
+> + */
+> +
+> +#ifndef HW_K230_GPIO_H
+> +#define HW_K230_GPIO_H
+> +
+> +#include "qemu/osdep.h"
+
+Please do not add osdep.h in header files.  Move it to k230_gpio.c.
+
+
+Thanks,
+Daniel
+
+> +#include "hw/core/sysbus.h"
+> +#include "qom/object.h"
+> +
+> +#define TYPE_K230_GPIO "k230.gpio"
+> +OBJECT_DECLARE_SIMPLE_TYPE(K230GPIOState, K230_GPIO)
+> +
+> +#define K230_GPIO_MEM_SIZE 0x1000
+> +
+> +#define K230_GPIO_SWPORTA_DR      0x00
+> +#define K230_GPIO_SWPORTA_DDR     0x04
+> +#define K230_GPIO_SWPORTA_CTL     0x08
+> +#define K230_GPIO_INTEN           0x30
+> +#define K230_GPIO_INTMASK         0x34
+> +#define K230_GPIO_INTTYPE_LEVEL   0x38
+> +#define K230_GPIO_INT_POLARITY    0x3c
+> +#define K230_GPIO_INTSTATUS       0x40
+> +#define K230_GPIO_RAW_INTSTATUS   0x44
+> +#define K230_GPIO_DEBOUNCE        0x48
+> +#define K230_GPIO_PORTA_EOI       0x4c
+> +#define K230_GPIO_EXT_PORTA       0x50
+> +#define K230_GPIO_LS_SYNC         0x60
+> +#define K230_GPIO_ID_CODE         0x64
+> +#define K230_GPIO_INT_BOTHEDGE    0x68
+> +#define K230_GPIO_VER_ID_CODE     0x6c
+> +#define K230_GPIO_CONFIG_REG2     0x70
+> +#define K230_GPIO_CONFIG_REG1     0x74
+> +
+> +#define K230_GPIO_PINS_PER_GROUP 32
+> +
+> +struct K230GPIOState {
+> +    SysBusDevice parent_obj;
+> +
+> +    MemoryRegion iomem;
+> +
+> +    uint32_t swporta_dr;
+> +    uint32_t swporta_ddr;
+> +    uint32_t swporta_ctl;
+> +    uint32_t inten;
+> +    uint32_t intmask;
+> +    uint32_t inttype_level;
+> +    uint32_t int_polarity;
+> +    uint32_t intstatus;
+> +    uint32_t raw_intstatus;
+> +    uint32_t debounce;
+> +    uint32_t porta_eoi;
+> +    uint32_t ext_porta;
+> +    uint32_t ls_sync;
+> +    uint32_t id_code;
+> +    uint32_t int_bothedge;
+> +    uint32_t ver_id_code;
+> +    uint32_t config_reg2;
+> +    uint32_t config_reg1;
+> +
+> +    qemu_irq irq[K230_GPIO_PINS_PER_GROUP];
+> +    qemu_irq output[K230_GPIO_PINS_PER_GROUP];
+> +};
+> +
+> +#endif
+> diff --git a/include/hw/riscv/k230.h b/include/hw/riscv/k230.h
+> index 592e1c26bf..5fccea7fd5 100644
+> --- a/include/hw/riscv/k230.h
+> +++ b/include/hw/riscv/k230.h
+> @@ -18,6 +18,7 @@
+>   #include "hw/core/boards.h"
+>   #include "hw/riscv/riscv_hart.h"
+>   #include "hw/watchdog/k230_wdt.h"
+> +#include "hw/gpio/k230_gpio.h"
+>   
+>   #define C908_CPU_HARTID   (0)
+>   
+> @@ -33,6 +34,7 @@ typedef struct K230SoCState {
+>       RISCVHartArrayState c908_cpu; /* Small core */
+>   
+>       K230WdtState wdt[2];
+> +    K230GPIOState gpio[2];
+>       MemoryRegion sram;
+>       MemoryRegion bootrom;
+>   
+> @@ -127,8 +129,11 @@ enum {
+>       K230_UART2_IRQ  = 18,
+>       K230_UART3_IRQ  = 19,
+>       K230_UART4_IRQ  = 20,
+> +    K230_GPIO0_IRQ_BASE  = 32,
+> +    K230_GPIO1_IRQ_BASE  = 64,
+>       K230_WDT0_IRQ   = 107,
+>       K230_WDT1_IRQ   = 108,
+> +
+>   };
+>   
+>   #define K230_UART_COUNT 5
 
 
