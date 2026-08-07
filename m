@@ -4,78 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4728EC5AC7C
-	for <qemu-riscv@archiver.kernel.org>; Fri,  7 Aug 2026 10:23:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EF78C5AC7C
+	for <qemu-riscv@archiver.kernel.org>; Fri,  7 Aug 2026 10:24:07 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wsHir-0002dQ-AK; Fri, 07 Aug 2026 06:22:41 -0400
+	id 1wsHil-0002bk-6x; Fri, 07 Aug 2026 06:22:35 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <caojunze424@gmail.com>)
- id 1wsHiq-0002cw-7n
- for qemu-riscv@nongnu.org; Fri, 07 Aug 2026 06:22:40 -0400
-Received: from mail-pl1-x62f.google.com ([2607:f8b0:4864:20::62f])
+ id 1wsHij-0002bA-7J
+ for qemu-riscv@nongnu.org; Fri, 07 Aug 2026 06:22:33 -0400
+Received: from mail-pl1-x632.google.com ([2607:f8b0:4864:20::632])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <caojunze424@gmail.com>)
- id 1wsHio-0006hR-JH
- for qemu-riscv@nongnu.org; Fri, 07 Aug 2026 06:22:39 -0400
-Received: by mail-pl1-x62f.google.com with SMTP id
- d9443c01a7336-2cecdc24b1cso3768425ad.1
- for <qemu-riscv@nongnu.org>; Fri, 07 Aug 2026 03:22:38 -0700 (PDT)
+ id 1wsHih-0006gU-Ki
+ for qemu-riscv@nongnu.org; Fri, 07 Aug 2026 06:22:32 -0400
+Received: by mail-pl1-x632.google.com with SMTP id
+ d9443c01a7336-2cecc8a3dbfso2770855ad.0
+ for <qemu-riscv@nongnu.org>; Fri, 07 Aug 2026 03:22:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1786098157; x=1786702957; darn=nongnu.org;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=ZN5jp+bb/UoI7I0sY1cKfqGk82YmhPmpHjZV2tsLJIo=;
- b=lHRSMWHXLXqweDchvE5Zp4AzZWPrU0MawCEksb5ndUdEsCAcKxvTitc/5gcOvsmUxx
- /8duZaVPQNqO5cRM3GVBZsQqkP/lIYGkR8G7TL4yGz1B/kmiwkyyGECku8dg3ps6vveZ
- 8VkC8XYmrzVtpis04A6Dd+OHfWUk0NghevLJ0pb39IyDVlwnz91jPSxeE+VymlPqNNB1
- vBE8rP4MRuMPHvQX2FNedxantCtXTlrHJG7ZBQc3M+UZFL8tzr3Ry4DLn3lFQCyMXuLm
- tqvGpyhYlUC2kxhIWvxG7zDU5itFRteRYc4f3TZHaOe96xhnyobMvyCRR863st8BNIdi
- HQCg==
+ d=gmail.com; s=20251104; t=1786098150; x=1786702950; darn=nongnu.org;
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=4gF9EWQbicqWmKG+8e9s/SkbCgwQHR0L+IypKFkFoXE=;
+ b=OGmLiR0eCnBw0eheRdoaiGbLNWbjnJGFaxPMy749ialK+TNFJ+GPDvdFGAbZtRvM2N
+ gJBe2R0xcq4xcSwHlaz2o+uPSIwxWcblP47Hi07scccoKfL3nGNTxpX3ngZG5ZyHLMzb
+ 9AmXjdNqIlw27oypw3zgd9hgK60WS2DrZrc1C/cnmqZ5k9mpR6KpqSALE0Vi/woQ4mOj
+ 2qA0aIphTlvnoi/HGkzGdQH3zxeajTrBprNK6lwTUp7RAbhCKusXAvg04ZDKM7rn2kP1
+ ShYIudvRVdixH4QYHMOlhXIb3CCSa7zi13kYzzis+bYeeESzqAR7kFii//B8IMfuNnm0
+ X3Ow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786098157; x=1786702957;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=ZN5jp+bb/UoI7I0sY1cKfqGk82YmhPmpHjZV2tsLJIo=;
- b=koX9rX7lRR5DwGp053QyOVXCK2qInAjFBqUORC7gk79c0GPeiUJCHYNEFNtK+wq1ru
- 4umg5dwHN2ThypKnUiqgscExTGp5b0t9mKJe/cZKCNNmTlSqWqYgrX93jaStF9fWPM8l
- ES/EkjcwGJlQY2d1KU+b+m8DGETv6fwejXiy1S6KkwhAILijwhuQqtz+7s9svxAtJIAf
- EzvlCStDzXVjnb4xCxZz5hJeTqUynl/Z+//HERmzHX8g8AxrWdgcoZbE3N+2jmj9cKxy
- GA46B4j/9oj2tKiBlIxtbC/le/QCpSlCfim4v6wAbp75p0GTb8lsvZWuRaevby6+RZwp
- Fa6A==
+ d=1e100.net; s=20251104; t=1786098150; x=1786702950;
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=4gF9EWQbicqWmKG+8e9s/SkbCgwQHR0L+IypKFkFoXE=;
+ b=rscTllS3Bt0XOjgQlRoO5HY3rKg2UUib/6bxqhHaGUv/HrYyXAJqEY8I8Ifuq9GNIi
+ 8oqxNOCFe50haH2knKri+QVKJvI5/z6FsZ21y/iNjKVxn9AWDpIytEvTZekXyDNsUCBZ
+ dW/rOutTX9Z0HyQcfCzefgkduvFbTYoiGoNXQZWMiqOpCnmXon1QqJOoMVySzjwpbr5h
+ 0aCIgM6DDRjdYuHdPU4sRTEQFWhn1gE0D6AdiEUfDbfPhgHVjFvf3HSBUuiGpnUjJzfE
+ vduyYnombtNQQucG37TOZQQKDQWPfQFG9WMX5zx37vb4e6rW8Dpl0BznoZiPhHgJyfiF
+ A+5g==
 X-Forwarded-Encrypted: i=1;
- AHgh+Rqea6SyIltUO1qqfRfgJtvV04CLs6pV286xAm/Yvpr5iAK9FdfGjpNVEqwNYXKSJVwNLXdcqS4EU6da@nongnu.org
-X-Gm-Message-State: AOJu0Yz2S4OFxcq1kdoMSdYU8Y+qEscQ1+vZy5uf4cCEuNbDtKlbbOKh
- C9sie2p/zv+16OxmfeMHXP6zk1Lrj0mzHGUbSZc0GxowCyEOIaRRyqQP
-X-Gm-Gg: AR+sD11eEyXcDjBDgv9P/KSDnCswJiS5IdHbFToRm3SXRI/H6Ssa7/iMr89psktpKPe
- 0InWRws4DL6+a+maTio9JnzlRDOdWXkZrVbtdDHB/HcLgXTo2mc6CGqxTtc0nqp1l1ZlilRKwPb
- +pGWYD7+dfxpN00k6pOOuIqw0VF/hSdEVRyFWopAk+4QInt21uYzltEi3zff+zc7ENMd1jMZJIE
- V8gjJ+48yrCD0j3ba1dy5JBVzYArlIdwtNNcep/raoJMIHOtDsMH5oZev6UGod1lUQSZHMUvFel
- m4HTbbdWErXpq4p1Gxg05/nmx5RcEMpVAP+HA8acwceQhZ1M0IRmY3py1TrmA7u1tSk+EPxT/9u
- wEgFFqRI7mEgDJ5NWTi588fryEcmX0wDkZ3Vk6iPhBVEGHOkdlHYSdqjTTqr3Gh+NDeS/CGkwkW
- ti/aLFrlQid7JmKn5ru4g6yoJKJCgThBmiw7C5HEeT8SxuOaJrGHZtcFv+VQ==
-X-Received: by 2002:a17:903:1b2b:b0:2ca:ecf6:9115 with SMTP id
- d9443c01a7336-2d0caa9bb8bmr183156455ad.2.1786098157187; 
- Fri, 07 Aug 2026 03:22:37 -0700 (PDT)
+ AHgh+RrGV7fWekr35biSlr0PqH/HFB+h+Io9l2VbyVJZtGXl5zxeTdQQrVTWrbL4NzxE2U4PQOJsC824PZ7Q@nongnu.org
+X-Gm-Message-State: AOJu0YwLfsk8NO16qHuh5LyibcIHoQ2f2vBIJ4iSbi0RD5VoNZts/qZB
+ 34yhPfSC0hinfc0S7vT2yAifr1tD2croVNBoJ0lfiPWYCQyf90eabntK
+X-Gm-Gg: AR+sD13BuoBChAEtomgTSegrkB05GMCUCLGAMyTCKD4IJdDcCePZaQjACT6tXYWWnX4
+ HPPm/ZvhrHNp/m0s/HfvYKzN+/22LHYztHi9sbqF2NNRcEjp0hXgnpfEe/4DffSxWmi7kq35vri
+ o5ZQbdNIm0og7Nqx0gL0zrmotNJRW5icCT3s2gRGkhSSN9VxYjQRCD1py+3IphgvyuK7beiUYMq
+ WUZHI1rhqriMFHmNSx+x/VuXuEksi1wq/pxvqSj8oew26fLQXZ1MZ1AXyxB3B0i+0U4qBBKKMIe
+ LzVw/G56mfuCp0fhGnkJludwiC2xwnHlNKfu0kcWT30b+DTBFZa+Tl17zJ/PxrV+ODMEj/C2Rfb
+ Hnuc115NEugewqLH/MRxWokDKs4WYticC1JU4L60vHOzfi3ZTfzDq96uzVwrL537UBeg2FnwEg/
+ Mp7s5NoSDLu09kUsGCvkMYUvuTvuM6exxBEeYzIBoi5jBODKOTHsUTs+o6UQ==
+X-Received: by 2002:a17:903:19cf:b0:2cc:f4d4:29a0 with SMTP id
+ d9443c01a7336-2d0cab0db0dmr196361105ad.3.1786098149692; 
+ Fri, 07 Aug 2026 03:22:29 -0700 (PDT)
 Received: from [127.0.0.1] ([38.34.7.236]) by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-315be86d3fcsm6158337eec.4.2026.08.07.03.22.33
+ 5a478bee46e88-315be86d3fcsm6158337eec.4.2026.08.07.03.22.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 07 Aug 2026 03:22:36 -0700 (PDT)
+ Fri, 07 Aug 2026 03:22:29 -0700 (PDT)
 From: Junze Cao <caojunze424@gmail.com>
-Date: Fri, 07 Aug 2026 18:21:17 +0800
-Subject: [PATCH v2 2/3] hw/riscv: Connect K230 DDR controller and PHY
- models
+Subject: [PATCH v2 0/3] riscv: Add K230 DDR controller and PHY models
+Date: Fri, 07 Aug 2026 18:21:15 +0800
+Message-Id: <20260807-k230-ddr-v2-v2-0-c531308ae819@gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260807-k230-ddr-v2-v2-2-c531308ae819@gmail.com>
-References: <20260807-k230-ddr-v2-v2-0-c531308ae819@gmail.com>
-In-Reply-To: <20260807-k230-ddr-v2-v2-0-c531308ae819@gmail.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/3WOQQ6CMBREr0K6tqT9bSi68h6GRSkfKAo1LRCVc
+ HcpLlyxfMnMm1lIQG8xkEuyEI+zDdYNG8ApIabVQ4PUVhsTYJCxnCl6B8FoVXk6A61zJlSZaQN
+ Cka3x9Fjb1267FT8OU9mhGaMiJmrvejq2HvXfqnjGBUgQ6VlwCYoCNdp10/BBCfLa9No+UuP62
+ G9tGJ1/73dnHncOHPzAUazr+gVATnIQ9QAAAA==
+X-Change-ID: 20260807-k230-ddr-v2-f8037b6ac237
 To: qemu-devel@nongnu.org
 Cc: Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org, 
  Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, 
@@ -87,8 +88,8 @@ Cc: Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org,
  Laurent Vivier <lvivier@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>, 
  Junze Cao <caojunze424@gmail.com>
 X-Mailer: b4 0.15.2
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62f;
- envelope-from=caojunze424@gmail.com; helo=mail-pl1-x62f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::632;
+ envelope-from=caojunze424@gmail.com; helo=mail-pl1-x632.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -112,124 +113,56 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Replace the unimplemented K230 DDR configuration region with the DDRC
-model and map the PHY model at 0x9a000000.
+The K230 SDK U-Boot SPL initializes DRAM by programming the DDRC CFG
+and DDR PHY MMIO regions. The k230 machine currently exposes the DDR
+configuration region as unimplemented and does not provide the PHY, so
+the SPL cannot complete the training and DFI handshakes.
 
-Connect the controller to the PHY so DFI status reflects PHY training and
-initialization state.
+Add minimal models for the register behavior exercised by the SDK SPL.
+The controller model provides reset values, register access policy, DFI
+and software-update handshakes, and the Init-to-Normal transition. The
+PHY model provides CSR ownership, the training mailbox, and DFI
+completion. Wire both devices into the k230 machine and document the
+resulting SPL support.
 
-Suggested-by: Chao Liu <chao.liu@processmission.com>
-Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Signed-off-by: Junze Cao <caojunze424@gmail.com>
+These device models allow firmware to complete the DDR initialization
+sequence.
+
+Changes in v2:
+
+* Add LOG_UNIMP messages for unimplemented DDR PHY register accesses,
+  including reads returning zero and ignored writes.
+
+Testing performed:
+
+* scripts/checkpatch.pl --branch upstream/master..HEAD
+* meson test -C build --print-errorlogs
+  qemu:qtest-riscv64/k230-ddr-test (6 subtests passed)
+* Booted the K230 SDK U-Boot SPL through DDR initialization to its SPI
+  boot path
+
 ---
- docs/system/riscv/k230.rst |  4 ++++
- hw/riscv/k230.c            | 19 ++++++++++++++++---
- include/hw/riscv/k230.h    |  4 ++++
- 3 files changed, 24 insertions(+), 3 deletions(-)
+Junze Cao (3):
+      hw/misc: Add K230 DDR controller and PHY models
+      hw/riscv: Connect K230 DDR controller and PHY models
+      tests/qtest: Add K230 DDR controller tests
 
-diff --git a/docs/system/riscv/k230.rst b/docs/system/riscv/k230.rst
-index cea8202e55..06a819fbdb 100644
---- a/docs/system/riscv/k230.rst
-+++ b/docs/system/riscv/k230.rst
-@@ -20,12 +20,16 @@ The ``k230`` machine supports the following devices:
- * Platform-Level Interrupt Controller (PLIC)
- * 2 K230 Watchdog Timer
- * 5 UART
-+* K230 DDRC CFG and DDR PHY
- 
- Boot options
- ------------
- The ``k230`` machine supports K230 SDK boot through M-mode U-Boot, which then
- starts OpenSBI/Linux with ``bootm``. It also supports direct Linux boot.
- 
-+The DDRC CFG and DDR PHY models allow the K230 SDK U-Boot SPL to complete DDR
-+initialization before loading the next boot stage.
-+
- K230 SDK Linux kernels use T-HEAD C9xx private MAEE page table attributes. QEMU
- does not implement MAEE in the generic RISC-V MMU, so such kernels need to be
- built with standard RISC-V PTE bits before they can boot under QEMU.
-diff --git a/hw/riscv/k230.c b/hw/riscv/k230.c
-index 656f28190c..627150b463 100644
---- a/hw/riscv/k230.c
-+++ b/hw/riscv/k230.c
-@@ -97,6 +97,7 @@ static const MemMapEntry memmap[] = {
-     [K230_DEV_SPI] =          { 0x91584000,  0x00001000 },
-     [K230_DEV_HI_SYS_CFG] =   { 0x91585000,  0x00000400 },
-     [K230_DEV_DDRC_CFG] =     { 0x98000000,  0x02000000 },
-+    [K230_DEV_DDR_PHY] =      { 0x9A000000,  0x00400000 },
-     [K230_DEV_FLASH] =        { 0xC0000000,  0x08000000 },
-     [K230_DEV_PLIC] =         { 0xF00000000, 0x00400000 },
-     [K230_DEV_CLINT] =        { 0xF04000000, 0x00400000 },
-@@ -108,6 +109,11 @@ static void k230_soc_init(Object *obj)
-     RISCVHartArrayState *cpu0 = &s->c908_cpu;
- 
-     object_initialize_child(obj, "c908-cpu", cpu0, TYPE_RISCV_HART_ARRAY);
-+    object_initialize_child(obj, "ddr-cfg", &s->ddr_cfg,
-+                            TYPE_K230_DDR_CFG);
-+    object_initialize_child(obj, "ddr-phy", &s->ddr_phy,
-+                            TYPE_K230_DDR_PHY);
-+    s->ddr_cfg.phy = &s->ddr_phy;
-     object_initialize_child(obj, "k230-wdt0", &s->wdt[0], TYPE_K230_WDT);
-     object_initialize_child(obj, "k230-wdt1", &s->wdt[1], TYPE_K230_WDT);
- 
-@@ -158,6 +164,16 @@ static void k230_soc_realize(DeviceState *dev, Error **errp)
-     int c908_cpus;
- 
-     sysbus_realize(SYS_BUS_DEVICE(&s->c908_cpu), &error_fatal);
-+    if (!sysbus_realize(SYS_BUS_DEVICE(&s->ddr_cfg), errp)) {
-+        return;
-+    }
-+    if (!sysbus_realize(SYS_BUS_DEVICE(&s->ddr_phy), errp)) {
-+        return;
-+    }
-+    sysbus_mmio_map(SYS_BUS_DEVICE(&s->ddr_cfg), 0,
-+                    memmap[K230_DEV_DDRC_CFG].base);
-+    sysbus_mmio_map(SYS_BUS_DEVICE(&s->ddr_phy), 0,
-+                    memmap[K230_DEV_DDR_PHY].base);
- 
-     c908_cpus = s->c908_cpu.num_harts;
- 
-@@ -361,9 +377,6 @@ static void k230_soc_realize(DeviceState *dev, Error **errp)
-     create_unimplemented_device("hi_sys_cfg", memmap[K230_DEV_HI_SYS_CFG].base,
-                                 memmap[K230_DEV_HI_SYS_CFG].size);
- 
--    create_unimplemented_device("ddrc_cfg", memmap[K230_DEV_DDRC_CFG].base,
--                                memmap[K230_DEV_DDRC_CFG].size);
--
-     create_unimplemented_device("flash", memmap[K230_DEV_FLASH].base,
-                                 memmap[K230_DEV_FLASH].size);
- }
-diff --git a/include/hw/riscv/k230.h b/include/hw/riscv/k230.h
-index 592e1c26bf..80ca16338c 100644
---- a/include/hw/riscv/k230.h
-+++ b/include/hw/riscv/k230.h
-@@ -16,6 +16,7 @@
- #define HW_K230_H
- 
- #include "hw/core/boards.h"
-+#include "hw/misc/k230_ddr.h"
- #include "hw/riscv/riscv_hart.h"
- #include "hw/watchdog/k230_wdt.h"
- 
-@@ -32,6 +33,8 @@ typedef struct K230SoCState {
-     /*< public >*/
-     RISCVHartArrayState c908_cpu; /* Small core */
- 
-+    K230DDRCfgState ddr_cfg;
-+    K230DDRPhyState ddr_phy;
-     K230WdtState wdt[2];
-     MemoryRegion sram;
-     MemoryRegion bootrom;
-@@ -112,6 +115,7 @@ enum {
-     K230_DEV_SPI,
-     K230_DEV_HI_SYS_CFG,
-     K230_DEV_DDRC_CFG,
-+    K230_DEV_DDR_PHY,
-     K230_DEV_FLASH,
-     K230_DEV_PLIC,
-     K230_DEV_CLINT,
+ MAINTAINERS                 |   3 +
+ docs/system/riscv/k230.rst  |   4 +
+ hw/misc/k230_ddr.c          | 556 ++++++++++++++++++++++++++++++++++++++++++++
+ hw/misc/meson.build         |   1 +
+ hw/riscv/k230.c             |  19 +-
+ include/hw/misc/k230_ddr.h  |  59 +++++
+ include/hw/riscv/k230.h     |   4 +
+ tests/qtest/k230-ddr-test.c | 226 ++++++++++++++++++
+ tests/qtest/meson.build     |   3 +-
+ 9 files changed, 871 insertions(+), 4 deletions(-)
+---
+base-commit: 3e3ccab106f879b1512f8e0d51a827dd4de30e22
+change-id: 20260807-k230-ddr-v2-f8037b6ac237
 
--- 
-2.53.0
+Best regards,
+--  
+Junze Cao <caojunze424@gmail.com>
 
 
