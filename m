@@ -4,145 +4,149 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19C14C5AC7A
-	for <qemu-riscv@archiver.kernel.org>; Fri,  7 Aug 2026 16:06:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7165C2A09B
+	for <qemu-riscv@archiver.kernel.org>; Fri,  7 Aug 2026 16:39:17 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wsN4u-0003fe-7S; Fri, 07 Aug 2026 12:05:48 -0400
+	id 1wsNaj-0008Uh-33; Fri, 07 Aug 2026 12:38:41 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wsN4q-0003f6-4b
- for qemu-riscv@nongnu.org; Fri, 07 Aug 2026 12:05:44 -0400
-Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
+ id 1wsNah-0008Tw-31
+ for qemu-riscv@nongnu.org; Fri, 07 Aug 2026 12:38:39 -0400
+Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wsN4n-0005ph-8N
- for qemu-riscv@nongnu.org; Fri, 07 Aug 2026 12:05:43 -0400
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+ id 1wsNad-0003LC-0v
+ for qemu-riscv@nongnu.org; Fri, 07 Aug 2026 12:38:38 -0400
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 677FRfGM1380084
- for <qemu-riscv@nongnu.org>; Fri, 7 Aug 2026 16:05:39 GMT
+ 677GOQPg1150092
+ for <qemu-riscv@nongnu.org>; Fri, 7 Aug 2026 16:38:33 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- JwqB1OQKRDTpbu9VyKee9S6iACZPzIqQrWFG3/hkZxo=; b=e3zMV9VnQ6wQ/fhQ
- ttlx+8k6PyTodn/QiJRIub05Vri3t5ZfwFTxlxfP57KdNMnc4EImahKjN7EeJk+o
- UALOvZHqIB7rftSuVPIItcw5XOwwfOQUbBkMBt9xh96fvaB/vm3G1XhHlY8v8/j+
- TP/thzdlm9KpXuRPYo/DsrIgUkF+XTED3TGoXvxUb8/dDAYQISOT9Huos86iyC3N
- ppkYasMe0fNGYcgN1Sw7JurW9pgE4fYvMqs5oD0ex0wB9tld09+oKdNJ9fDliL9N
- AIT9cKr1TP8B1cq6UJjKLS74KDGCWdh97nJ8KDdR78+yhqp+2zyVPpl2n6a6TxEf
- l8mQ8w==
-Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com
- [209.85.222.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fvy6fvvkj-1
+ XhllTo5eVG5gssAvkXDaWZBQ2pW6MN+JAXSoSpHbUwY=; b=Uxulf54rUIeyxHMy
+ 9pAcbB9V3qAArSYH2wjzZTz/IyDQyshtkUMVC9AId09uSm8FWHYcChneeykBRO/s
+ f/ehn5VSmUtYQBrDMiN9Qb37MYiS4dFx+9bhlRKJtne/zaUTLoY1WYPl+MhDRuWh
+ rMlb/NJl7KD+GauS9jj7StIJzJUtPCx//kZinOG8DL4rXIfX7UzB4yzqlRKiTs2U
+ c65KgJndKt9lcN5SBiMqc4KbkaIWm88LvxBEDo/dA0p0+bBknrsf6i7ERMd4Fwvz
+ YnQQTFu5rFXTG+GvQw7KuX0vIMmPJ+hDJX3Q9igv0g+DTsLcrh5G1q3GeBAWUr8U
+ jy0rDQ==
+Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com
+ [209.85.160.200])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fwhk3gecn-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Fri, 07 Aug 2026 16:05:39 +0000 (GMT)
-Received: by mail-qk1-f197.google.com with SMTP id
- af79cd13be357-92e5fc4c7e9so377932685a.3
- for <qemu-riscv@nongnu.org>; Fri, 07 Aug 2026 09:05:39 -0700 (PDT)
+ for <qemu-riscv@nongnu.org>; Fri, 07 Aug 2026 16:38:32 +0000 (GMT)
+Received: by mail-qt1-f200.google.com with SMTP id
+ d75a77b69052e-51c0f0a0760so60616401cf.2
+ for <qemu-riscv@nongnu.org>; Fri, 07 Aug 2026 09:38:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1786118739; x=1786723539; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1786120712; x=1786725512; darn=nongnu.org;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=JwqB1OQKRDTpbu9VyKee9S6iACZPzIqQrWFG3/hkZxo=;
- b=bfXiy2MCB4pKT8b4Cruq97gahQeGY3HvTYAT2sfCGeX/oox+ZgM1yEunQItqlWtyf4
- kF70k/KmPCBKHOqFgVXuF3pedThUVls+1dOrpKiDpZvtBBWqxkbtFvxcfiFKqLG+hYP7
- UMxSxBlhBHP6Un7vl/fbUF4ebBlVR1Qz2gSgDFlC3Mmw6bD1BukpJrmP3yIQBnBi8H1K
- fmVTGK0ofZcUrVEP52k+XhZSAW3vR+6mB0WBD1gaZJA6HP2bvHGsI8L6wppFGEGbHcEZ
- 1x7cFWDBoKjQ9j2gbhhOV9eXEz8OtlWIXdpukFZ+ky6PjvFbaiZSRwY0ZUDQXD3hhtUU
- 2lzg==
+ bh=XhllTo5eVG5gssAvkXDaWZBQ2pW6MN+JAXSoSpHbUwY=;
+ b=XUMLwGuD6P8qF0/cAVbyDHbB9kAcYpkNvnojSa8jIv7X5cxvtcDVMN9fEDk+LZCR1D
+ v1Sfp7tSbVLkVc8JtNJRGoIMKl3Z3ubZh+4mzk7SvW0z72EJKvp+DbkPPg0GZoXX/gxX
+ oS8+YVleEsuNNOpz4HcBwkDagu2x7du8UfdX3P52bT88XoiQlOqIFCd8pSVqZ+FlpmXh
+ bRCVElA/vFmFnE1tbjrA1yGRwj/M/k+X3lV1O6izMiUuOX35kaRWQvBzPaUG32a7YDmc
+ PlwoLMCI/iiJN3k2u1mTvFuoQFk2vifCBMFDcU1kAdiqr21FuTAYEGj7bI2R1LVn7ahB
+ ZilA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786118739; x=1786723539;
+ d=1e100.net; s=20251104; t=1786120712; x=1786725512;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=JwqB1OQKRDTpbu9VyKee9S6iACZPzIqQrWFG3/hkZxo=;
- b=jn6WbMlAsoOGHV50jNG7NP3dJdlCUfpIb5TgcIEQG39TEr7et7KHq30sfez+yh3DjF
- TqXlUwwRDJMSWldC8jXhELnc080K5gasJ+l2omWl/3rkMTLIp/C4ivur3HGi4x+WJCEC
- B/Q/wE9gUJ7Bk7PP1WaD4ZevP1NnU5fmR2YfSLC5UAzBTFrPkdHqLC7L5fdfmkisz2/a
- pbGw1hkuTbQfiLyfzgpy+2zr3wLrefFawc18tZoJ4yBOTr9f738W1lAOqKLqyndM9vlA
- Cl4ImMnjZfjzU/Kikc5iO8Y60je4KmOYA9Sv+aj2CFVKro6C1neaRDfXMB3osm3yrCgq
- xDEQ==
+ bh=XhllTo5eVG5gssAvkXDaWZBQ2pW6MN+JAXSoSpHbUwY=;
+ b=RW0byci6UL5wJsWmMkzcca9uWjVVshumB7/vsSOyJ/8BAE0BQcle9qY8Co022v53lL
+ s+Tva0QOhAcud/i5i8zscXMx8i1VhmTJMvbJ4tGMNibZl8AJUzjCbfgmac4Qow28QQbE
+ uwUR1YrgIINdhd4o2HtYrRqIcjCKlVteYH0hq+TK5onagm7hgzSssH0aKY0WKBn6x/C2
+ YAL88SIeM0kAQpW9aAUHoUl3eQd7ID6kRAwyiwKmdrqwHrPvToB5A+bTN8w4E6IR+akN
+ z9bgwwU2Y0991vvjI1qiDuaKAQHXV8rOhf8CG94g/QKUf4IrBxv/zkd8WEzIj2Xtopli
+ 29Sw==
 X-Forwarded-Encrypted: i=1;
- AHgh+RqDtxaOMT5qd5Lpx1qTOEagG9Qh7Svfu1k+6nf499Znc3yjDDVkfeKOcwPVd8qk++wE992I0R/Pmfdp@nongnu.org
-X-Gm-Message-State: AOJu0Yz2X54T68X009NLYyd7hiY5euLmomlC8dsyArwA2eyB98o2cr9o
- D1jcx3hRpyqWJ2+3YI9ZoRXBHfgTHzfWHcxAgy7cpj/+K0I4XfCWOzk54/Tjz7ma+IapdZZ9sBg
- vcfX6lhawTP0pr08y6r15sjshI1pbsWZ1Ta0QiiBK4z7qF1EoRZHXd2odHQ==
-X-Gm-Gg: AR+sD12U2CL3o77gqy2Km0LNQNVuYlwtUjo7ZrxZ3xJ/1NClIBdzpHJsyYLh3dCrP/N
- 88QildVAdD7kuFLr+4ysLgPU+gDj9ip4cTmRPL8LaT0CzAti8UnUsbOLiQhcCdImfWP6pDLFEmx
- +W/jRJ69LzSTeKk2u4HOsYAN5MKnib0D9RBGvFmhxPgqiI0pBTZDqBWVkWaowkt7IRP32odQpse
- DdmCETDODmYsJEyR4EabEJlqVhBxV6XHD/HjoRNsbtfFNQB3otl0kjTjoSc6KFwA0xGJt+PT6PO
- 9Jx+OMdVUda9A4/KIrhNJKh4Afqj89ycs9mhLjrmVW9I2tIpX1NBJxZdUmdCmXNfiwylXKi8Ksr
- lP4cPZsOTFv6eU0gFcJ9xl+uyy1XNNfm9AZPj
-X-Received: by 2002:a05:620a:4544:b0:923:45bb:a95c with SMTP id
- af79cd13be357-93671b4b9efmr459518285a.10.1786118738273; 
- Fri, 07 Aug 2026 09:05:38 -0700 (PDT)
-X-Received: by 2002:a05:620a:4544:b0:923:45bb:a95c with SMTP id
- af79cd13be357-93671b4b9efmr459495585a.10.1786118737302; 
- Fri, 07 Aug 2026 09:05:37 -0700 (PDT)
+ AHgh+RrdOoEE4KgTF4fNzqJSD4Jh9g5YLL1bRAi0WTu9QU1cczP8xvE+y8YWorDA4TpBsVGb66scHho132xR@nongnu.org
+X-Gm-Message-State: AOJu0YxUlx7S2027HHdNdL9LWnRZGgOo1ACuBMmAxJ/KaGRl1Pv71mFT
+ wwq2/NFkB2oa9LBFmPE+NDm3NkioWXUaDsKni0rR0dUKJCjMiPaxvhAexI6JMGgwdvgrMpKp31m
+ 2ghCrZ6aDnqVXPVFdlx31P6BE+4Pba0YhAdCFtb1PSOoOXr4xci0Dae+ZgA==
+X-Gm-Gg: AR+sD13G7kpJ9za6Rql1AF/RUw0wbTZbi1NOf8wu8FX6gBgE8vk0rl1rL+b4N9uw92G
+ Rv6BlBhCq1TI+tSHAaRA+GVxw0uXRbiFzLDGiZTNM9qMduhRwzqVdHxtrkf/MDtM9dxvJK8d6mp
+ XpUVIVmnoe12VmPb3FLHs32XgaJDUHqyHgs3PwU1TCC23+8GfoD+Ap2LSJHChCFSEUZTRRhcCfe
+ fU2dcNL1GievYKKxD5iWO6u3d3nFC3oVS7CFMGdchQAjDW/0qGaPeG8z6oD1OOf7aKH3EAw+Na0
+ hbOzaSTWBlSYhQxrDokAmDpX47gCT7AyEocViXURVK4ovePGsebdKU+vob/RCGtIazKeRL4LEZV
+ 63T0oB/NaaZ9+KImUSY9aQtjGdcImaULE3yPS
+X-Received: by 2002:ac8:7d53:0:b0:51b:ec6c:766c with SMTP id
+ d75a77b69052e-52d2095c02cmr24374701cf.12.1786120710755; 
+ Fri, 07 Aug 2026 09:38:30 -0700 (PDT)
+X-Received: by 2002:ac8:7d53:0:b0:51b:ec6c:766c with SMTP id
+ d75a77b69052e-52d2095c02cmr24373341cf.12.1786120709785; 
+ Fri, 07 Aug 2026 09:38:29 -0700 (PDT)
 Received: from [192.168.68.104] ([187.11.154.152])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-9366e274b3asm177806985a.37.2026.08.07.09.05.33
+ af79cd13be357-9366e229853sm184542485a.28.2026.08.07.09.38.25
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 07 Aug 2026 09:05:35 -0700 (PDT)
-Message-ID: <a42ba62f-a154-4204-8331-5795b092f323@oss.qualcomm.com>
-Date: Fri, 7 Aug 2026 13:05:31 -0300
+ Fri, 07 Aug 2026 09:38:28 -0700 (PDT)
+Message-ID: <624013ed-dec5-44d2-ac9c-69408cbc8350@oss.qualcomm.com>
+Date: Fri, 7 Aug 2026 13:38:24 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 8/8] tests/tcg/riscv64: Add test for Zicclsm
-To: frank.chang@sifive.com, qemu-devel@nongnu.org
-Cc: Alistair Francis <Alistair.Francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Weiwei Li <liwei1518@gmail.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu@processmission.com>,
- "open list:SiFive Machines" <qemu-riscv@nongnu.org>
-References: <20260805164345.698208-1-frank.chang@sifive.com>
- <20260805164345.698208-9-frank.chang@sifive.com>
+Subject: Re: [PATCH 1/5] hw/i2c: add K230 I2C controller model
+To: Wang Zhongyu <wzy15515798875@gmail.com>,
+ Chao Liu <chao.liu@processmission.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+ Fabiano Rosas <farosas@suse.de>, Laurent Vivier <lvivier@redhat.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
+ <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+References: <20260807152830.6833-1-wzy15515798875@gmail.com>
+ <20260807152830.6833-2-wzy15515798875@gmail.com>
 From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Content-Language: en-US
-In-Reply-To: <20260805164345.698208-9-frank.chang@sifive.com>
+In-Reply-To: <20260807152830.6833-2-wzy15515798875@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODA3MDEyNSBTYWx0ZWRfX7j2uy3TvxaIP
- QlOFEFSv+0NQsk+/DLY2OeolCY3sdplzQtlSQLCJ88tVb0UmN7qRZdMmN6VoDx2l36DX8mpciVY
- JFVImHLsBYUioK3SGmQBEIu4Waqjr9Ql7Qyj2Vw4aBbo8oQM3+s44Lz8SXYVUnUTlzEN2qJ43MK
- ERGJL3grwifD1ocO6jisiZ/kmzaYRP99fWvmyFpebDd9llT7pUYg9lENOFB0b4sUzVVKQ2do4KC
- ekuXL873z2JbQV/sAylecxnK5X+UL7W1gvGtGprrJA9y30aS9wHdLL6Tkke07UY7fADzkRKRFhE
- 8zPfrVfKnrG9hjiS6p5eWBj0HwZsEs6QymLMrA4nnS08HbctjViSnicL8KJMqT5PofP9YVouNXn
- Kfbq+83SIc+3BkUEGZROtU5eV4xNXrYe8I6FfLyqDIzfg9TXwzknNhzrHncMC7zarI9drduvB5+
- 17jQ3XYQYfWwr6P/xMg==
-X-Authority-Analysis: v=2.4 cv=DvhmPm/+ c=1 sm=1 tr=0 ts=6a760253 cx=c_pps
- a=50t2pK5VMbmlHzFWWp8p/g==:117 a=iMfxv9gflPUPBcmW7/Gq5Q==:17
+X-Authority-Analysis: v=2.4 cv=RKaD2Yi+ c=1 sm=1 tr=0 ts=6a760a09 cx=c_pps
+ a=JbAStetqSzwMeJznSMzCyw==:117 a=iMfxv9gflPUPBcmW7/Gq5Q==:17
  a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=pFyQfRViAAAA:8 a=EUspDBNiAAAA:8 a=wphcKlZXvOT3FjGOpQoA:9 a=QEXdDO2ut3YA:10
- a=IoWCM6iH3mJn3m4BftBB:22 a=oJz5jJLG1JtSoe7EL652:22
-X-Proofpoint-ORIG-GUID: VJpmR_J5RqfmroRpLnbX_gJQSnGsvQBx
-X-Proofpoint-GUID: VJpmR_J5RqfmroRpLnbX_gJQSnGsvQBx
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODA3MDEyNSBTYWx0ZWRfX4NEvgvlBXVgv
- Pjyrz4n6MV6qmkVsqUKSEnH0lgJ5yYGHcXhLE2LSuKhQ16+9E4k72uDm2xjSViYNzu7ARYHA40+
- 81aF466OAtuZSjei/Exfm/oqUT6GNio=
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
+ a=pGLkceISAAAA:8 a=FRSEYCzRAAAA:8 a=69wJf7TsAAAA:8 a=EUspDBNiAAAA:8
+ a=HyxvHQLRcehc5FA-VfIA:9 a=QEXdDO2ut3YA:10 a=uxP6HrT_eTzRwkO_Te1X:22
+ a=H4N_Y-AU75W7NKDNhZlT:22 a=Fg1AiH1G6rFz08G2ETeA:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODA3MDEzMCBTYWx0ZWRfXxK+TC0i4Y168
+ HKHfZbRsHkHRePKuucEavr/ofavb9q92EqJLxNBMtpIwhZTaE+5gZVRfmG8UkaX5fUfx6OGSG6Z
+ bS/x3d6giKpn4V17Fv1COxmzV1Co+aA=
+X-Proofpoint-ORIG-GUID: E9z1MTjzcf05EjWyI3YCneI1a9JQDHpw
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODA3MDEzMCBTYWx0ZWRfX7avUyct4XuMP
+ 2pidXwMAin/LeiWNXQBgy6JZjtrYph1JXxD3ZDa2n+im2nw8kxkZBQKsDLL1iHRn/g/PuKAetbg
+ r+QRwbL6XOBeJQocApVS1uDjvI84SB7MsRz0IPOF3a8ABIcn3MAcbF0kLu17YJsUVZapGvl+jxK
+ NFT/roZ4fH4dj7ehb66k1DVVUQDZ3rprbxAvzsPSWv0ewt7gwGvATI23cosZbZ9erpF3DNtiF0X
+ GNzw6pFl3EhBAcNiSiLAXu4PpxIit3JfNEfJzhoBwNLL1eAz1d1BsyNDdUU9Y5cjAIdOKk9gKrR
+ BLhUkN7nAmpU7MaNnkbkt3RstSKzxB1zByTSkHrHLmhXx4P2vHFJZvgsq1EFhjhxiReWM0p0amG
+ ojG+v1+s2j40P1EeWRudTb7atMXpqjVFLRarKgiStohnNflah9HpVPWBHChy03szyTqEqWmIQxe
+ UG1yZn8da7j1gxTVH6A==
+X-Proofpoint-GUID: E9z1MTjzcf05EjWyI3YCneI1a9JQDHpw
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-07_02,2026-08-07_01,2025-10-01_01
+ definitions=2026-08-07_03,2026-08-07_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 bulkscore=0 clxscore=1015 spamscore=0 malwarescore=0
- suspectscore=0 adultscore=0 impostorscore=0 lowpriorityscore=0 phishscore=0
+ lowpriorityscore=0 malwarescore=0 suspectscore=0 phishscore=0 impostorscore=0
+ adultscore=0 spamscore=0 clxscore=1015 priorityscore=1501 bulkscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608070125
-Received-SPF: pass client-ip=205.220.180.131;
- envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608070130
+Received-SPF: pass client-ip=205.220.168.131;
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
 X-Spam_score_int: -27
 X-Spam_score: -2.8
 X-Spam_bar: --
 X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -158,443 +162,1244 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+Hello,
 
-
-On 8/5/2026 1:43 PM, frank.chang@sifive.com wrote:
-> From: Frank Chang <frank.chang@sifive.com>
+On 8/7/2026 12:28 PM, Wang Zhongyu wrote:
+> Add a model of the I2C controller used by the Kendryte K230 SoC.
 > 
-> Cover scalar, floating-point, vector, and segmented misaligned accesses
-> with Zicclsm enabled and disabled. Clean up both generated test
-> binaries.
+> The model supports master-mode 7-bit transfers, TX and RX FIFOs,
+> interrupt status and masking, repeated START and STOP handling,
+> General Call writes, reset, and migration state.
 > 
-> To build and run the tests:
+> DMA, 10-bit addressing, bus clear, Device ID transactions, and raw
+> START BYTE transmission are not implemented.
 > 
->      make -C build/tests/tcg/riscv64-softmmu \
->          CC=riscv64-unknown-elf-gcc LD=riscv64-unknown-elf-ld \
->          test-zicclsm test-zicclsm-off
-> 
->      make -C build/tests/tcg/riscv64-softmmu \
->          run-test-zicclsm run-test-zicclsm-off
-> 
-> To clean the generated binaries and objects:
-> 
->      make -C build/tests/tcg/riscv64-softmmu clean
-> 
-> Signed-off-by: Frank Chang <frank.chang@sifive.com>
+> Signed-off-by: Wang Zhongyu <wzy15515798875@gmail.com>
 > ---
 
-Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+LGTM.  Some comments below:
 
->   tests/tcg/riscv64/Makefile.softmmu-target |  22 ++
->   tests/tcg/riscv64/test-zicclsm.S          | 368 ++++++++++++++++++++++
->   2 files changed, 390 insertions(+)
->   create mode 100644 tests/tcg/riscv64/test-zicclsm.S
+>   MAINTAINERS               |    2 +
+>   hw/i2c/Kconfig            |    4 +
+>   hw/i2c/k230_i2c.c         | 1083 +++++++++++++++++++++++++++++++++++++
+>   hw/i2c/meson.build        |    1 +
+>   include/hw/i2c/k230_i2c.h |   72 +++
+>   5 files changed, 1162 insertions(+)
+>   create mode 100644 hw/i2c/k230_i2c.c
+>   create mode 100644 include/hw/i2c/k230_i2c.h
 > 
-> diff --git a/tests/tcg/riscv64/Makefile.softmmu-target b/tests/tcg/riscv64/Makefile.softmmu-target
-> index 82be8a2c915..908fd008e4c 100644
-> --- a/tests/tcg/riscv64/Makefile.softmmu-target
-> +++ b/tests/tcg/riscv64/Makefile.softmmu-target
-> @@ -41,5 +41,27 @@ comma:= ,
->   run-test-crc32: test-crc32
->   	$(call run-test, $<, $(QEMU) -cpu rv64$(comma)xlrbr=true $(QEMU_OPTS)$<)
->   
-> +# Zicclsm: misaligned load/store support. Assemble one source twice: the
-> +# default build expects every misaligned access to succeed (zicclsm=true),
-> +# the -DZICCLSM_DISABLED build expects every one to trap (zicclsm=false).
-> +ZICCLSM_MARCH = -march=rv64gcv_zfh
-> +CLEANFILES += test-zicclsm test-zicclsm-off
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 902db77218..ac61054dd1 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -1827,8 +1827,10 @@ M: Chao Liu <chao.liu@processmission.com>
+>   L: qemu-riscv@nongnu.org
+>   S: Maintained
+>   F: docs/system/riscv/k230.rst
+> +F: hw/i2c/k230_i2c.c
+>   F: hw/riscv/k230.c
+>   F: hw/watchdog/k230_wdt.c
+> +F: include/hw/i2c/k230_i2c.h
+>   F: include/hw/riscv/k230.h
+>   F: include/hw/watchdog/k230_wdt.h
+>   F: tests/functional/riscv64/test_k230.py
+> diff --git a/hw/i2c/Kconfig b/hw/i2c/Kconfig
+> index 0766130b59..f2a2ea6169 100644
+> --- a/hw/i2c/Kconfig
+> +++ b/hw/i2c/Kconfig
+> @@ -54,3 +54,7 @@ config PMBUS
+>   config BCM2835_I2C
+>       bool
+>       select I2C
 > +
-> +test-zicclsm: test-zicclsm.S $(LINK_SCRIPT)
-> +	$(CC) $(CFLAGS) $(ZICCLSM_MARCH) $< -Wa,--noexecstack -c -o test-zicclsm.o
-> +	$(LD) $(LDFLAGS) test-zicclsm.o -o $@
-> +
-> +test-zicclsm-off: test-zicclsm.S $(LINK_SCRIPT)
-> +	$(CC) $(CFLAGS) $(ZICCLSM_MARCH) -DZICCLSM_DISABLED $< -Wa,--noexecstack -c -o test-zicclsm-off.o
-> +	$(LD) $(LDFLAGS) test-zicclsm-off.o -o $@
-> +
-> +EXTRA_RUNS += run-test-zicclsm
-> +run-test-zicclsm: test-zicclsm
-> +	$(call run-test, $<, $(QEMU) -cpu rv64$(comma)v=true$(comma)zfh=true$(comma)zicclsm=true $(QEMU_OPTS)$<)
-> +
-> +EXTRA_RUNS += run-test-zicclsm-off
-> +run-test-zicclsm-off: test-zicclsm-off
-> +	$(call run-test, $<, $(QEMU) -cpu rv64$(comma)v=true$(comma)zfh=true$(comma)zicclsm=false $(QEMU_OPTS)$<)
-> +
->   # We don't currently support the multiarch system tests
->   undefine MULTIARCH_TESTS
-> diff --git a/tests/tcg/riscv64/test-zicclsm.S b/tests/tcg/riscv64/test-zicclsm.S
+> +config K230_I2C
+> +    bool
+> +    select I2C
+> diff --git a/hw/i2c/k230_i2c.c b/hw/i2c/k230_i2c.c
 > new file mode 100644
-> index 00000000000..a2f217c0d1e
+> index 0000000000..cc328736a4
 > --- /dev/null
-> +++ b/tests/tcg/riscv64/test-zicclsm.S
-> @@ -0,0 +1,368 @@
+> +++ b/hw/i2c/k230_i2c.c
+> @@ -0,0 +1,1083 @@
 > +/*
-> + * Test the Zicclsm extension (misaligned load/store support).
+> + * K230 DesignWare I2C controller
 > + *
-> + * This single source is assembled twice:
-> + *   - test-zicclsm      : run on a CPU with zicclsm=true. Every misaligned
-> + *                         scalar integer, floating-point and vector
-> + *                         load/store must complete WITHOUT raising a trap.
-> + *   - test-zicclsm-off  : built with -DZICCLSM_DISABLED and run on a CPU with
-> + *                         zicclsm=false. Every misaligned access must raise a
-> + *                         misaligned load/store exception, with the correct
-> + *                         mcause and mtval.
-> + *
-> + * Zicclsm governs all regular scalar loads/stores (integer and F/D/Zfh
-> + * floating-point) as well as vector element loads/stores.  Floating-point
-> + * loads/stores (flh/flw/fld, fsh/fsw/fsd) are therefore exercised here.
-> + *
-> + * Atomic (A/Zacas/...) accesses are intentionally excluded: they always
-> + * require natural alignment regardless of Zicclsm.  Likewise cm.push/cm.pop
-> + * (Zcmp) are excluded, as they are not regular loads/stores.
-> + *
-> + * Register conventions (persist across the whole test; the trap handler only
-> + * clobbers t0-t4):
-> + *   s1 = expected mcause for the pending misaligned access
-> + *   s2 = expected mtval (the misaligned address)
-> + *   s3 = trap counter (incremented by the handler)
-> + *   s4 = base address of the aligned data buffer
-> + *   s5 = snapshot of s3 taken before an access, used to check the delta
+> + * Copyright (c) 2026 Wang Zhongyu <wzy15515798875@gmail.com>
 > + *
 > + * SPDX-License-Identifier: GPL-2.0-or-later
 > + */
+> +#include "qemu/osdep.h"
+> +#include "hw/i2c/i2c.h"
+> +#include "hw/i2c/k230_i2c.h"
+> +#include "migration/vmstate.h"
+> +#include "qemu/log.h"
+> +#include "qemu/module.h"
+> +#include "qemu/bitops.h"
+> +#include "hw/core/irq.h"
+> +#include "qemu/fifo8.h"
+> +#include "qemu/fifo32.h"
 > +
-> +	.option	norelax
-> +	.option	norvc
+> +#define K230_I2C_MMIO_SIZE               0x1000
 > +
-> +/* RISC-V exception causes (see target/riscv/cpu_bits.h). */
-> +#define CAUSE_LOAD_MISALIGNED	0x4
-> +#define CAUSE_STORE_MISALIGNED	0x6
+> +#define K230_IC_CON                      0x00
+> +#define K230_IC_TAR                      0x04
+> +#define K230_IC_SAR                      0x08
+> +#define K230_IC_HS_MADDR                 0x0c
+> +#define K230_IC_DATA_CMD                 0x10
+> +#define K230_IC_SS_SCL_HCNT              0x14
+> +#define K230_IC_SS_SCL_LCNT              0x18
+> +#define K230_IC_FS_SCL_HCNT              0x1c
+> +#define K230_IC_FS_SCL_LCNT              0x20
+> +#define K230_IC_HS_SCL_HCNT              0x24
+> +#define K230_IC_HS_SCL_LCNT              0x28
+> +#define K230_IC_INTR_STAT                0x2c
+> +#define K230_IC_INTR_MASK                0x30
+> +#define K230_IC_RAW_INTR_STAT            0x34
+> +#define K230_IC_RX_TL                    0x38
+> +#define K230_IC_TX_TL                    0x3c
+> +#define K230_IC_CLR_INTR                 0x40
+> +#define K230_IC_CLR_RX_UNDER             0x44
+> +#define K230_IC_CLR_RX_OVER              0x48
+> +#define K230_IC_CLR_TX_OVER              0x4c
+> +#define K230_IC_CLR_RD_REQ               0x50
+> +#define K230_IC_CLR_TX_ABRT              0x54
+> +#define K230_IC_CLR_RX_DONE              0x58
+> +#define K230_IC_CLR_ACTIVITY             0x5c
+> +#define K230_IC_CLR_STOP_DET             0x60
+> +#define K230_IC_CLR_START_DET            0x64
+> +#define K230_IC_CLR_GEN_CALL             0x68
+> +#define K230_IC_ENABLE                   0x6c
+> +#define K230_IC_STATUS                   0x70
+> +#define K230_IC_TXFLR                    0x74
+> +#define K230_IC_RXFLR                    0x78
+> +/* 0x7C reserved */
+> +#define K230_IC_TX_ABRT_SOURCE           0x80
+> +#define K230_IC_SLV_DATA_NACK_ONLY       0x84
+> +#define K230_IC_DMA_CR                   0x88
+> +#define K230_IC_DMA_TDLR                 0x8c
+> +#define K230_IC_DMA_RDLR                 0x90
+> +#define K230_IC_SDA_SETUP                0x94
+> +#define K230_IC_ACK_GENERAL_CALL         0x98
+> +#define K230_IC_ENABLE_STATUS            0x9c
+> +#define K230_IC_COMP_PARAM_1             0xf4
+> +#define K230_IC_COMP_VERSION             0xf8
+> +#define K230_IC_COMP_TYPE                0xfc
+> +/*
+> + * Optional bus-clear support is outside the scope of the initial model.
+> + * Unimplemented register offsets read as zero and ignore writes.
+> + */
+> +
+> +/* IC_CON bit definitions */
+> +#define IC_CON_MASTER_MODE              BIT(0)
+> +#define IC_CON_SPEED                    (0x3U << 1)
+> +#define IC_CON_10BITADDR_SLAVE          BIT(3)
+> +#define IC_CON_10BITADDR_MASTER         BIT(4)
+> +#define IC_CON_RESTART_EN               BIT(5)
+> +#define IC_CON_SLAVE_DISABLE            BIT(6)
+> +#define IC_CON_VALID_MASK                        \
+> +                (IC_CON_MASTER_MODE      |       \
+> +                 IC_CON_SPEED            |       \
+> +                 IC_CON_10BITADDR_SLAVE  |       \
+> +                 IC_CON_10BITADDR_MASTER |       \
+> +                 IC_CON_RESTART_EN       |       \
+> +                 IC_CON_SLAVE_DISABLE)
+> +
+> +/* IC_TAR bit definitions */
+> +#define IC_TAR                          (0x3ffU)
+> +#define IC_TAR_GC_OR_START              BIT(10)
+> +#define IC_TAR_SPECIAL                  BIT(11)
+> +/*
+> + * This implementation selects the master addressing mode through
+> + * IC_CON[4]. IC_TAR[12] is not modeled as writable.
+> + */
+> +#define IC_TAR_VALID_MASK                       \
+> +                (IC_TAR                 |       \
+> +                 IC_TAR_GC_OR_START     |       \
+> +                 IC_TAR_SPECIAL)
+> +
+> +/* IC_SAR bit definitions */
+> +#define IC_SAR                          (0x3ffU)
+> +#define IC_SAR_VALID_MASK               IC_SAR
+> +
+> +/* IC_HS_MADDR bit definitions */
+> +#define IC_HS_MAR                       (0x7U)
+> +#define IC_HS_MAR_VALID_MASK            IC_HS_MAR
+> +
+> +/* IC_DATA_CMD bit definitions */
+> +#define IC_DAT                          (0xffU)
+> +#define IC_CMD                          BIT(8)
+> +#define IC_STOP                         BIT(9)
+> +#define IC_RESTART                      BIT(10)
+> +#define IC_DATA_CMD_VALID_MASK         (IC_DAT | IC_CMD | IC_STOP | IC_RESTART)
 > +
 > +/*
-> + * EXPECT sets up the expectation for the access that immediately follows and
-> + * snapshots the trap counter.
-> + *   \cause = expected mcause if the access traps
-> + *   \off   = byte offset from the buffer base; also the expected mtval
+> + * The SCL count registers are retained for software compatibility.
+> + * QEMU's I2C bus API does not model cycle-accurate bus timing, so these
+> + * values do not change the duration of a transfer.
 > + */
-> +	.macro	EXPECT cause, off
-> +	li	s1, \cause
-> +	addi	s2, s4, \off
-> +	mv	s5, s3
-> +	.endm
+> +#define IC_SS_SCL_HCNT_VALID_MASK                  (0xffffU)
+> +#define IC_SS_SCL_LCNT_VALID_MASK                  (0xffffU)
+> +#define IC_FS_SCL_HCNT_VALID_MASK                  (0xffffU)
+> +#define IC_FS_SCL_LCNT_VALID_MASK                  (0xffffU)
+> +#define IC_HS_SCL_HCNT_VALID_MASK                  (0xffffU)
+> +#define IC_HS_SCL_LCNT_VALID_MASK                  (0xffffU)
+> +
+> +/* IC_INTR bit definitions */
+> +#define IC_INTR_RX_UNDER         BIT(0)
+> +#define IC_INTR_RX_OVER          BIT(1)
+> +#define IC_INTR_RX_FULL          BIT(2)
+> +#define IC_INTR_TX_OVER          BIT(3)
+> +#define IC_INTR_TX_EMPTY         BIT(4)
+> +#define IC_INTR_RD_REQ           BIT(5)
+> +#define IC_INTR_TX_ABRT          BIT(6)
+> +#define IC_INTR_RX_DONE          BIT(7)
+> +#define IC_INTR_ACTIVITY         BIT(8)
+> +#define IC_INTR_STOP_DET         BIT(9)
+> +#define IC_INTR_START_DET        BIT(10)
+> +#define IC_INTR_GEN_CALL         BIT(11)
+> +#define IC_INTR_VALID_MASK       (0xfffU)
+> +#define IC_INTR_SW_CLEAR_MASK                                 \
+> +                    (IC_INTR_RX_UNDER | IC_INTR_RX_OVER   |   \
+> +                     IC_INTR_TX_OVER  | IC_INTR_RD_REQ    |   \
+> +                     IC_INTR_TX_ABRT  | IC_INTR_RX_DONE   |   \
+> +                     IC_INTR_STOP_DET | IC_INTR_START_DET |   \
+> +                     IC_INTR_GEN_CALL | IC_INTR_ACTIVITY)
+> +
+> +/* IC_RX_TL and IC_TX_TL bit definitions */
+> +#define IC_RX_TL                (0xffU)
+> +#define IC_TX_TL                (0xffU)
+> +
+> +/* CLR Reg bit definitions */
+> +#define IC_CLR_INTR                 BIT(0)
+> +#define IC_CLR_RX_UNDER             BIT(0)
+> +#define IC_CLR_RX_OVER              BIT(0)
+> +#define IC_CLR_TX_OVER              BIT(0)
+> +#define IC_CLR_RD_REQ               BIT(0)
+> +#define IC_CLR_TX_ABRT              BIT(0)
+> +#define IC_CLR_RX_DONE              BIT(0)
+> +#define IC_CLR_ACTIVITY             BIT(0)
+> +#define IC_CLR_STOP_DET             BIT(0)
+> +#define IC_CLR_START_DET            BIT(0)
+> +#define IC_CLR_GEN_CALL             BIT(0)
+> +
+> +/* IC_ENABLE bit definitions */
+> +#define IC_ENABLE                   BIT(0)
+> +
+> +/* IC_STATUS bit definitions */
+> +#define IC_ACTIVITY                 BIT(0)
+> +#define IC_TFNF                     BIT(1)
+> +#define IC_TFE                      BIT(2)
+> +#define IC_RFNE                     BIT(3)
+> +#define IC_RFF                      BIT(4)
+> +#define IC_MST_ACTIVITY             BIT(5)
+> +#define IC_SLV_ACTIVITY             BIT(6)
+> +#define IC_STATUS_VALID_MASK              \
+> +                (IC_ACTIVITY      |       \
+> +                 IC_TFNF          |       \
+> +                 IC_TFE           |       \
+> +                 IC_RFNE          |       \
+> +                 IC_RFF           |       \
+> +                 IC_MST_ACTIVITY  |       \
+> +                 IC_SLV_ACTIVITY)
+> +
+> +/* FIFO level register bit definitions */
+> +#define IC_TXFLR                       (0x3fU)
+> +#define IC_RXFLR                       (0x7fU)
+> +
+> +/* IC_TX_ABRT_SOURCE bit definitions */
+> +#define IC_ABRT_7B_ADDR_NOACK          BIT(0)
+> +#define IC_ABRT_10ADDR1_NOACK          BIT(1)
+> +#define IC_ABRT_10ADDR2_NOACK          BIT(2)
+> +#define IC_ABRT_TXDATA_NOACK           BIT(3)
+> +#define IC_ABRT_GCALL_NOACK            BIT(4)
+> +#define IC_ABRT_GCALL_READ             BIT(5)
+> +#define IC_ABRT_HS_ACKDET              BIT(6)
+> +#define IC_ABRT_SBYTE_ACKDET           BIT(7)
+> +#define IC_ABRT_HS_NORSTRT             BIT(8)
+> +#define IC_ABRT_SBYTE_NORSTRT          BIT(9)
+> +#define IC_ABRT_10B_RD_NORSTRT         BIT(10)
+> +#define IC_ABRT_MASTER_DIS             BIT(11)
+> +#define IC_ARB_LOST                    BIT(12)
+> +#define IC_ABRT_SLVFLUSH_TXFIFO        BIT(13)
+> +#define IC_ABRT_SLV_ARBLOST            BIT(14)
+> +#define IC_ABRT_SLVRD_INTX             BIT(15)
+> +#define IC_ABRT_VALID_MASK             0xffffU
+> +
+> +/* IC_SLV_DATA_NACK_ONLY bit definitions */
+> +#define IC_SLV_NACK                    BIT(0)
 > +
 > +/*
-> + * CHECK validates the outcome of the preceding access.
-> + *   - When Zicclsm is disabled, exactly one trap must have fired.
-> + *   - When Zicclsm is enabled, no trap must have fired.
+> + * DMA support is not modeled by this implementation. DMA register writes
+> + * are ignored, the registers remain at their reset values, and
+> + * IC_COMP_PARAM_1 reports HAS_DMA as clear.
 > + */
-> +	.macro	CHECK
-> +#ifdef ZICCLSM_DISABLED
-> +	addi	s5, s5, 1
-> +	bne	s3, s5, fail
-> +#else
-> +	bne	s3, s5, fail
-> +#endif
-> +	.endm
+> +#define IC_SDA_SETUP                  (0xffU)
+> +#define IC_ACK_GEN_CALL               BIT(0)
 > +
-> +/* In the enabled case, also verify the value returned by scalar loads. */
-> +	.macro	CHECK_VALUE value
-> +#ifndef ZICCLSM_DISABLED
-> +	li	t0, \value
-> +	bne	a2, t0, fail
-> +#endif
-> +	.endm
+> +/* IC_ENABLE_STATUS bit definitions */
+> +#define IC_EN                         BIT(0)
+> +#define SLV_DISABLED_WHILE_BUSY       BIT(1)
+> +#define SLV_RX_DATA_LOST              BIT(2)
 > +
-> +/* Verify bytes written by an enabled scalar store. */
-> +	.macro	CHECK_BYTE off, value
-> +#ifndef ZICCLSM_DISABLED
-> +	lbu	t0, \off(s4)
-> +	li	t1, \value
-> +	bne	t0, t1, fail
-> +#endif
-> +	.endm
+> +/* IC_COMP_PARAM_1 bit definitions */
+> +#define IC_COMP_PARAM_APB_DATA_WIDTH        (0x3U)
+> +#define IC_COMP_PARAM_MAX_SPEED_MODE        (0x3U << 2)
+> +#define IC_COMP_PARAM_HC_COUNT_VALUES       BIT(4)
+> +#define IC_COMP_PARAM_INTR_IO               BIT(5)
+> +#define IC_COMP_PARAM_HAS_DMA               BIT(6)
+> +#define IC_COMP_PARAM_ADD_ENCODED_PARAMS    BIT(7)
+> +#define IC_COMP_PARAM_RX_BUFFER_DEPTH       (0xffU << 8)
+> +#define IC_COMP_PARAM_TX_BUFFER_DEPTH       (0xffU << 16)
 > +
-> +	.text
-> +	.global	_start
-> +_start:
-> +	/* Install the trap handler. */
-> +	lla	t0, trap
-> +	csrw	mtvec, t0
+> +#define K230_IC_COMP_PARAM_1_VALUE                            \
+> +         (2U                                                | \
+> +         (3U << 2)                                          | \
+> +         IC_COMP_PARAM_INTR_IO                              | \
+> +         IC_COMP_PARAM_ADD_ENCODED_PARAMS                   | \
+> +         ((K230_I2C_RX_FIFO_SIZE - 1U) << 8)                | \
+> +         ((K230_I2C_TX_FIFO_SIZE - 1U) << 16))
 > +
-> +	/* Enable the FP (FS) and Vector (VS) unit state so F/D/V instructions
-> +	 * do not trap as illegal. 0x6600 = FS[14:13]=11 | VS[10:9]=11. */
-> +	li	t0, 0x6600
-> +	csrs	mstatus, t0
+> +static void k230_i2c_update_irq(K230I2CState *s)
+> +{
+> +    uint32_t intr;
+> +    intr = s->ic_raw_intr_stat & s->ic_intr_mask & IC_INTR_VALID_MASK;
+> +    qemu_set_irq(s->irq, intr != 0);
+> +}
 > +
-> +	/* Initialise persistent state. */
-> +	li	s3, 0			/* trap counter */
-> +	lla	s4, buf			/* aligned buffer base */
+> +static uint64_t k230_i2c_clear_intr(K230I2CState *s, uint32_t mask)
+> +{
+> +    s->ic_raw_intr_stat &= ~mask;
+> +    k230_i2c_update_irq(s);
 > +
-> +	/*
-> +	 * ---- Scalar integer loads ----
-> +	 * lh/lhu need 2-byte alignment; lw/lwu 4-byte; ld 8-byte.
-> +	 */
-> +	EXPECT	CAUSE_LOAD_MISALIGNED, 1
-> +	lh	a2, 1(s4)
-> +	CHECK
-> +	CHECK_VALUE 0x2211
-> +	EXPECT	CAUSE_LOAD_MISALIGNED, 1
-> +	lhu	a2, 1(s4)
-> +	CHECK
-> +	CHECK_VALUE 0x2211
+> +    return 0;
+> +}
 > +
-> +	EXPECT	CAUSE_LOAD_MISALIGNED, 1
-> +	lw	a2, 1(s4)
-> +	CHECK
-> +	CHECK_VALUE 0x44332211
-> +	EXPECT	CAUSE_LOAD_MISALIGNED, 3
-> +	lw	a2, 3(s4)
-> +	CHECK
-> +	CHECK_VALUE 0x66554433
-> +	EXPECT	CAUSE_LOAD_MISALIGNED, 1
-> +	lwu	a2, 1(s4)
-> +	CHECK
-> +	CHECK_VALUE 0x44332211
+> +static bool k230_i2c_is_activity(K230I2CState *s)
+
+Nit: I think you want this to be named either k230_i2c_is_active()
+or k230_i2c_has_activity().  Both works fine.
+
+
+Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+
+
+
+> +{
+> +    return (s->transfer_state != K230_I2C_STATE_IDLE);
+> +}
 > +
-> +	EXPECT	CAUSE_LOAD_MISALIGNED, 1
-> +	ld	a2, 1(s4)
-> +	CHECK
-> +	CHECK_VALUE 0x8877665544332211
-> +	EXPECT	CAUSE_LOAD_MISALIGNED, 3
-> +	ld	a2, 3(s4)
-> +	CHECK
-> +	CHECK_VALUE 0xaa99887766554433
-> +	EXPECT	CAUSE_LOAD_MISALIGNED, 7
-> +	ld	a2, 7(s4)
-> +	CHECK
-> +	CHECK_VALUE 0xeeddccbbaa998877
+> +static uint32_t k230_i2c_get_status(K230I2CState *s)
+> +{
+> +    uint32_t status = 0;
 > +
-> +	/*
-> +	 * ---- Scalar integer stores ----
-> +	 */
-> +	li	t6, 0x1122334455667788
-> +	EXPECT	CAUSE_STORE_MISALIGNED, 1
-> +	sh	t6, 1(s4)
-> +	CHECK
-> +	CHECK_BYTE 1, 0x88
-> +	CHECK_BYTE 2, 0x77
+> +    if (k230_i2c_is_activity(s)) {
+> +        status |= IC_ACTIVITY;
+> +        status |= IC_MST_ACTIVITY;
+> +    }
 > +
-> +	EXPECT	CAUSE_STORE_MISALIGNED, 1
-> +	sw	t6, 1(s4)
-> +	CHECK
-> +	CHECK_BYTE 1, 0x88
-> +	CHECK_BYTE 2, 0x77
-> +	CHECK_BYTE 3, 0x66
-> +	CHECK_BYTE 4, 0x55
-> +	EXPECT	CAUSE_STORE_MISALIGNED, 3
-> +	sw	t6, 3(s4)
-> +	CHECK
-> +	CHECK_BYTE 3, 0x88
-> +	CHECK_BYTE 4, 0x77
-> +	CHECK_BYTE 5, 0x66
-> +	CHECK_BYTE 6, 0x55
+> +    if (!fifo32_is_full(&s->tx_fifo)) {
+> +        status |= IC_TFNF;
+> +    }
 > +
-> +	EXPECT	CAUSE_STORE_MISALIGNED, 1
-> +	sd	t6, 1(s4)
-> +	CHECK
-> +	CHECK_BYTE 1, 0x88
-> +	CHECK_BYTE 2, 0x77
-> +	CHECK_BYTE 3, 0x66
-> +	CHECK_BYTE 4, 0x55
-> +	CHECK_BYTE 5, 0x44
-> +	CHECK_BYTE 6, 0x33
-> +	CHECK_BYTE 7, 0x22
-> +	CHECK_BYTE 8, 0x11
-> +	EXPECT	CAUSE_STORE_MISALIGNED, 7
-> +	sd	t6, 7(s4)
-> +	CHECK
-> +	CHECK_BYTE 7, 0x88
-> +	CHECK_BYTE 8, 0x77
-> +	CHECK_BYTE 9, 0x66
-> +	CHECK_BYTE 10, 0x55
-> +	CHECK_BYTE 11, 0x44
-> +	CHECK_BYTE 12, 0x33
-> +	CHECK_BYTE 13, 0x22
-> +	CHECK_BYTE 14, 0x11
+> +    if (fifo32_is_empty(&s->tx_fifo)) {
+> +        status |= IC_TFE;
+> +    }
 > +
-> +	/*
-> +	 * ---- Floating-point loads ----
-> +	 * flh needs 2-byte alignment; flw 4-byte; fld 8-byte.  Their alignment
-> +	 * is governed by Zicclsm just like the scalar integer forms.
-> +	 */
-> +	EXPECT	CAUSE_LOAD_MISALIGNED, 1
-> +	flh	fa0, 1(s4)
-> +	CHECK
+> +    if (!fifo8_is_empty(&s->rx_fifo)) {
+> +        status |= IC_RFNE;
+> +    }
 > +
-> +	EXPECT	CAUSE_LOAD_MISALIGNED, 1
-> +	flw	fa0, 1(s4)
-> +	CHECK
-> +	EXPECT	CAUSE_LOAD_MISALIGNED, 3
-> +	flw	fa0, 3(s4)
-> +	CHECK
+> +    if (fifo8_is_full(&s->rx_fifo)) {
+> +        status |= IC_RFF;
+> +    }
+> +    return status;
+> +}
 > +
-> +	EXPECT	CAUSE_LOAD_MISALIGNED, 1
-> +	fld	fa0, 1(s4)
-> +	CHECK
-> +	EXPECT	CAUSE_LOAD_MISALIGNED, 7
-> +	fld	fa0, 7(s4)
-> +	CHECK
+> +static bool k230_i2c_clear_tx_abrt_bit9(K230I2CState *s)
+> +{
+> +    return (s->ic_con & IC_CON_RESTART_EN) ||
+> +           !(s->ic_tar & IC_TAR_SPECIAL) ||
+> +           !(s->ic_tar & IC_TAR_GC_OR_START);
+> +}
 > +
-> +	/*
-> +	 * ---- Floating-point stores ----
-> +	 */
-> +	EXPECT	CAUSE_STORE_MISALIGNED, 1
-> +	fsh	fa0, 1(s4)
-> +	CHECK
+> +static void k230_i2c_update_fifo_intr(K230I2CState *s)
+> +{
+> +    uint32_t rx_level = fifo8_num_used(&s->rx_fifo);
+> +    uint32_t tx_level = fifo32_num_used(&s->tx_fifo);
 > +
-> +	EXPECT	CAUSE_STORE_MISALIGNED, 1
-> +	fsw	fa0, 1(s4)
-> +	CHECK
-> +	EXPECT	CAUSE_STORE_MISALIGNED, 3
-> +	fsw	fa0, 3(s4)
-> +	CHECK
+> +    if (!(s->ic_enable & IC_ENABLE)) {
+> +        s->ic_raw_intr_stat &= ~(IC_INTR_RX_FULL | IC_INTR_TX_EMPTY);
+> +        return;
+> +    }
 > +
-> +	EXPECT	CAUSE_STORE_MISALIGNED, 1
-> +	fsd	fa0, 1(s4)
-> +	CHECK
-> +	EXPECT	CAUSE_STORE_MISALIGNED, 7
-> +	fsd	fa0, 7(s4)
-> +	CHECK
+> +    if (rx_level > s->ic_rx_tl) {
+> +        s->ic_raw_intr_stat |= IC_INTR_RX_FULL;
+> +    } else {
+> +        s->ic_raw_intr_stat &= ~IC_INTR_RX_FULL;
+> +    }
 > +
-> +	/*
-> +	 * ---- Vector unit-stride loads / stores ----
-> +	 * A base address that is not aligned to the element size (SEW) is
-> +	 * misaligned for the first element access.
-> +	 */
-> +	vsetvli	t1, x0, e16, m1, ta, ma
-> +	EXPECT	CAUSE_LOAD_MISALIGNED, 1
-> +	addi	a0, s4, 1
-> +	vle16.v	v0, (a0)
-> +	CHECK
-> +	EXPECT	CAUSE_STORE_MISALIGNED, 1
-> +	addi	a0, s4, 1
-> +	vse16.v	v0, (a0)
-> +	CHECK
+> +    if (!(s->ic_raw_intr_stat & IC_INTR_TX_ABRT) &&
+> +        tx_level <= s->ic_tx_tl) {
+> +        s->ic_raw_intr_stat |= IC_INTR_TX_EMPTY;
+> +    } else {
+> +        s->ic_raw_intr_stat &= ~IC_INTR_TX_EMPTY;
+> +    }
+> +}
 > +
-> +	vsetvli	t1, x0, e32, m1, ta, ma
-> +	EXPECT	CAUSE_LOAD_MISALIGNED, 1
-> +	addi	a0, s4, 1
-> +	vle32.v	v0, (a0)
-> +	CHECK
-> +	EXPECT	CAUSE_STORE_MISALIGNED, 3
-> +	addi	a0, s4, 3
-> +	vse32.v	v0, (a0)
-> +	CHECK
+> +static uint64_t k230_i2c_clear_tx_abrt(K230I2CState *s)
+> +{
+> +    bool clr_bit9 = k230_i2c_clear_tx_abrt_bit9(s);
+> +    bool had_bit9 = !!(s->ic_tx_abrt_source & IC_ABRT_SBYTE_NORSTRT);
 > +
-> +	vsetvli	t1, x0, e64, m1, ta, ma
-> +	EXPECT	CAUSE_LOAD_MISALIGNED, 1
-> +	addi	a0, s4, 1
-> +	vle64.v	v0, (a0)
-> +	CHECK
-> +	EXPECT	CAUSE_STORE_MISALIGNED, 7
-> +	addi	a0, s4, 7
-> +	vse64.v	v0, (a0)
-> +	CHECK
+> +    s->ic_raw_intr_stat &= ~IC_INTR_TX_ABRT;
+> +    s->ic_tx_abrt_source = 0;
+> +    if (!clr_bit9 && had_bit9) {
+> +        s->ic_tx_abrt_source |= IC_ABRT_SBYTE_NORSTRT;
+> +        s->ic_raw_intr_stat |= IC_INTR_TX_ABRT;
+> +    }
+> +    k230_i2c_update_fifo_intr(s);
+> +    k230_i2c_update_irq(s);
+> +    return 0;
+> +}
 > +
-> +	/*
-> +	 * ---- Vector strided loads / stores ----
-> +	 */
-> +	vsetvli	t1, x0, e32, m1, ta, ma
-> +	li	a1, 8			/* stride in bytes */
-> +	EXPECT	CAUSE_LOAD_MISALIGNED, 1
-> +	addi	a0, s4, 1
-> +	vlse32.v	v0, (a0), a1
-> +	CHECK
-> +	EXPECT	CAUSE_STORE_MISALIGNED, 1
-> +	addi	a0, s4, 1
-> +	vsse32.v	v0, (a0), a1
-> +	CHECK
+> +static uint64_t k230_i2c_clear_all_intr(K230I2CState *s)
+> +{
+> +    bool active = k230_i2c_is_activity(s);
+> +    s->ic_raw_intr_stat &= ~IC_INTR_SW_CLEAR_MASK;
+> +    if (active) {
+> +        s->ic_raw_intr_stat |= IC_INTR_ACTIVITY;
+> +    }
+> +    return k230_i2c_clear_tx_abrt(s);
+> +}
 > +
-> +	/* ---- Vector indexed loads / stores ---- */
-> +	/*
-> +	 * Zero indices keep the first element at the deliberately misaligned base.
-> +	 */
-> +	vmv.v.i	v1, 0
-> +	EXPECT	CAUSE_LOAD_MISALIGNED, 1
-> +	addi	a0, s4, 1
-> +	vluxei32.v	v0, (a0), v1
-> +	CHECK
-> +	EXPECT	CAUSE_STORE_MISALIGNED, 1
-> +	addi	a0, s4, 1
-> +	vsuxei32.v	v0, (a0), v1
-> +	CHECK
+> +static uint64_t k230_i2c_read_data_cmd(K230I2CState *s)
+> +{
+> +    uint8_t data;
 > +
-> +	/* ---- Vector segmented loads / stores ---- */
-> +	EXPECT	CAUSE_LOAD_MISALIGNED, 1
-> +	addi	a0, s4, 1
-> +	vlseg2e32.v	v0, (a0)
-> +	CHECK
-> +	EXPECT	CAUSE_STORE_MISALIGNED, 1
-> +	addi	a0, s4, 1
-> +	vsseg2e32.v	v0, (a0)
-> +	CHECK
+> +    if (fifo8_is_empty(&s->rx_fifo)) {
+> +        s->ic_raw_intr_stat |= IC_INTR_RX_UNDER;
+> +        k230_i2c_update_irq(s);
+> +        return 0;
+> +    }
 > +
-> +	/*
-> +	 * ---- Vector whole-register load ----
-> +	 * Only the whole-register *load* forms carry an element width
-> +	 * (vl1re32.v => EEW=32), so only they enforce alignment when Zicclsm is
-> +	 * off.  The whole-register store form (vs1r.v) is defined as EEW=8
-> +	 * (byte granular) and therefore never faults on misalignment, so it is
-> +	 * not exercised here.
-> +	 */
-> +	EXPECT	CAUSE_LOAD_MISALIGNED, 1
-> +	addi	a0, s4, 1
-> +	vl1re32.v	v1, (a0)
-> +	CHECK
+> +    data = fifo8_pop(&s->rx_fifo);
+> +    if (fifo8_num_used(&s->rx_fifo) >= s->ic_rx_tl + 1) {
+> +        s->ic_raw_intr_stat |= IC_INTR_RX_FULL;
+> +    } else {
+> +        s->ic_raw_intr_stat &= ~IC_INTR_RX_FULL;
+> +    }
 > +
-> +	/* Success. */
-> +	li	a0, 0
-> +	j	_exit
+> +    k230_i2c_update_irq(s);
+> +    return data;
+> +}
 > +
-> +	/*
-> +	 * Trap handler: validate mcause and mtval against the expectation, bump
-> +	 * the trap counter, then skip past the faulting instruction.  The
-> +	 * instruction length is decoded from its low two bits (0b11 => 4 bytes,
-> +	 * otherwise a 2-byte compressed instruction).
-> +	 */
-> +	.balign	4
-> +trap:
-> +	csrr	t0, mcause
-> +	bne	t0, s1, fail
-> +	csrr	t1, mtval
-> +	bne	t1, s2, fail
-> +	addi	s3, s3, 1
+> +static void k230_i2c_write_enable(K230I2CState *s, uint32_t value)
+> +{
+> +    bool enable_flag = !!(value & IC_ENABLE);
 > +
-> +	csrr	t0, mepc
-> +	lhu	t2, 0(t0)
-> +	andi	t3, t2, 3
-> +	li	t4, 3
-> +	bne	t3, t4, 1f
-> +	addi	t0, t0, 4		/* 32-bit instruction */
-> +	j	2f
-> +1:
-> +	addi	t0, t0, 2		/* 16-bit compressed instruction */
-> +2:
-> +	csrw	mepc, t0
-> +	mret
+> +    if (enable_flag) {
+> +        s->ic_enable = enable_flag;
+> +        s->ic_enable_status = enable_flag;
 > +
-> +fail:
-> +	li	a0, 1
-> +_exit:
-> +	lla	a1, semiargs
-> +	li	t0, 0x20026		/* ADP_Stopped_ApplicationExit */
-> +	sd	t0, 0(a1)
-> +	sd	a0, 8(a1)
-> +	li	a0, 0x20		/* TARGET_SYS_EXIT_EXTENDED */
-> +	.balign	16
-> +	slli	zero, zero, 0x1f
-> +	ebreak
-> +	srai	zero, zero, 0x7
-> +	j	.
+> +        k230_i2c_update_fifo_intr(s);
+> +        k230_i2c_update_irq(s);
+> +        return;
+> +    }
 > +
-> +	.data
-> +	.balign	16
-> +semiargs:
-> +	.space	16
-> +	.balign	64
-> +buf:
-> +	.byte	0x00, 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77
-> +	.byte	0x88, 0x99, 0xaa, 0xbb, 0xcc, 0xdd, 0xee, 0xff
-> +	.space	240
+> +    if (s->transfer_state == K230_I2C_STATE_RECEIVING) {
+> +        i2c_nack(s->bus);
+> +    }
+> +
+> +    if (k230_i2c_is_activity(s)) {
+> +        i2c_end_transfer(s->bus);
+> +    }
+> +
+> +    fifo8_reset(&s->rx_fifo);
+> +    fifo32_reset(&s->tx_fifo);
+> +
+> +    s->transfer_state = K230_I2C_STATE_IDLE;
+> +    s->ic_enable_status = 0;
+> +    s->ic_enable = 0;
+> +    s->ic_raw_intr_stat &= ~(IC_INTR_TX_EMPTY |
+> +                             IC_INTR_RX_FULL  |
+> +                             IC_INTR_ACTIVITY);
+> +    k230_i2c_update_irq(s);
+> +}
+> +
+> +static void k230_i2c_abort(K230I2CState *s, uint32_t source)
+> +{
+> +    s->ic_tx_abrt_source |= source & IC_ABRT_VALID_MASK;
+> +    s->ic_raw_intr_stat  |= IC_INTR_TX_ABRT;
+> +
+> +    if (k230_i2c_is_activity(s)) {
+> +        i2c_end_transfer(s->bus);
+> +    }
+> +
+> +    fifo32_reset(&s->tx_fifo);
+> +    fifo8_reset(&s->rx_fifo);
+> +
+> +    s->transfer_state = K230_I2C_STATE_IDLE;
+> +
+> +    s->ic_raw_intr_stat &= ~(IC_INTR_TX_EMPTY | IC_INTR_RX_FULL);
+> +
+> +    k230_i2c_update_irq(s);
+> +}
+> +
+> +static bool k230_i2c_start_address_phase(K230I2CState *s, bool is_read)
+> +{
+> +    uint8_t address;
+> +    uint32_t noack_source;
+> +    bool initial_start;
+> +    bool special;
+> +    bool general_call;
+> +    bool start_byte;
+> +
+> +    initial_start = (s->transfer_state == K230_I2C_STATE_IDLE);
+> +
+> +    if (!(s->ic_con & IC_CON_MASTER_MODE)) {
+> +        k230_i2c_abort(s, IC_ABRT_MASTER_DIS);
+> +        return false;
+> +    }
+> +
+> +    /*
+> +     * This implementation handles 7-bit master transfers only. Requests for
+> +     * 10-bit master mode are aborted rather than treated as 7-bit transfers.
+> +     */
+> +    if (s->ic_con & IC_CON_10BITADDR_MASTER) {
+> +        qemu_log_mask(LOG_UNIMP,
+> +                       "k230-i2c: 10-bit master addressing "
+> +                           "is not implemented\n");
+> +        k230_i2c_abort(s, 0);
+> +        return false;
+> +    }
+> +
+> +    special = !!(s->ic_tar & IC_TAR_SPECIAL);
+> +
+> +    general_call = (special && !(s->ic_tar & IC_TAR_GC_OR_START));
+> +
+> +    start_byte = (special && !!(s->ic_tar & IC_TAR_GC_OR_START));
+> +
+> +    /*
+> +     * QEMU's I2C bus API cannot emit the raw START byte before the target
+> +     * address. Preserve the DW_apb_i2c RESTART_EN requirement, then fall
+> +     * back to the normal target-address phase.
+> +     */
+> +    if (initial_start && start_byte && !(s->ic_con & IC_CON_RESTART_EN)) {
+> +        k230_i2c_abort(s, IC_ABRT_SBYTE_NORSTRT);
+> +        return false;
+> +    }
+> +
+> +    if (general_call) {
+> +        if (is_read) {
+> +            k230_i2c_abort(s, IC_ABRT_GCALL_READ);
+> +            return false;
+> +        }
+> +        address = 0;
+> +        noack_source = IC_ABRT_GCALL_NOACK;
+> +    } else {
+> +        address = s->ic_tar & 0x7fU;
+> +        noack_source = IC_ABRT_7B_ADDR_NOACK;
+> +    }
+> +
+> +    s->ic_raw_intr_stat |= IC_INTR_START_DET | IC_INTR_ACTIVITY;
+> +
+> +    if (i2c_start_transfer(s->bus, address, is_read)) {
+> +        k230_i2c_abort(s, noack_source);
+> +        return false;
+> +    }
+> +
+> +    s->transfer_state = is_read ? K230_I2C_STATE_RECEIVING :
+> +                                  K230_I2C_STATE_SENDING;
+> +
+> +    return true;
+> +}
+> +
+> +/*
+> + * DATA_CMD writes are executed synchronously. The TX FIFO acts as a
+> + * transient command staging buffer, while the RX FIFO retains received
+> + * data for guest reads and FIFO-level interrupt handling.
+> + */
+> +static void k230_i2c_write_data_cmd(K230I2CState *s, uint32_t value)
+> +{
+> +    uint32_t command;
+> +    uint32_t tx_entry;
+> +    uint8_t data;
+> +    bool is_read;
+> +    bool restart;
+> +    bool stop;
+> +    bool direction_changed;
+> +    bool need_restart;
+> +    int ret;
+> +
+> +    if (!(s->ic_enable & IC_ENABLE)) {
+> +        return;
+> +    }
+> +
+> +    if (s->ic_raw_intr_stat & IC_INTR_TX_ABRT) {
+> +        return;
+> +    }
+> +
+> +    if (fifo32_is_full(&s->tx_fifo)) {
+> +        s->ic_raw_intr_stat |= IC_INTR_TX_OVER;
+> +        k230_i2c_update_irq(s);
+> +        return;
+> +    }
+> +
+> +    command = value & IC_DATA_CMD_VALID_MASK;
+> +
+> +    fifo32_push(&s->tx_fifo, command);
+> +
+> +    tx_entry = fifo32_pop(&s->tx_fifo);
+> +
+> +    data = tx_entry & IC_DAT;
+> +    is_read = !!(tx_entry & IC_CMD);
+> +    restart = !!(tx_entry & IC_RESTART);
+> +    stop = !!(tx_entry & IC_STOP);
+> +
+> +    direction_changed =
+> +        (s->transfer_state == K230_I2C_STATE_SENDING && is_read) ||
+> +        (s->transfer_state == K230_I2C_STATE_RECEIVING && !is_read);
+> +
+> +    need_restart = restart || direction_changed;
+> +
+> +    switch (s->transfer_state) {
+> +    case K230_I2C_STATE_IDLE:
+> +        if (!k230_i2c_start_address_phase(s, is_read)) {
+> +            return;
+> +        }
+> +        break;
+> +    case K230_I2C_STATE_SENDING:
+> +    case K230_I2C_STATE_RECEIVING:
+> +        if (need_restart) {
+> +            if (!(s->ic_con & IC_CON_RESTART_EN)) {
+> +                qemu_log_mask(LOG_GUEST_ERROR,
+> +                              "k230-i2c: restart requested while "
+> +                                  "IC_RESTART_EN is disabled\n");
+> +                k230_i2c_abort(s, 0);
+> +                return;
+> +            }
+> +
+> +            if (s->transfer_state == K230_I2C_STATE_RECEIVING) {
+> +                i2c_nack(s->bus);
+> +            }
+> +
+> +            if (!k230_i2c_start_address_phase(s, is_read)) {
+> +                return;
+> +            }
+> +        }
+> +        break;
+> +    default:
+> +        g_assert_not_reached();
+> +    }
+> +
+> +    if (is_read) {
+> +        data = i2c_recv(s->bus);
+> +        if (fifo8_is_full(&s->rx_fifo)) {
+> +            s->ic_raw_intr_stat |= IC_INTR_RX_OVER;
+> +        } else {
+> +            fifo8_push(&s->rx_fifo, data);
+> +        }
+> +    } else {
+> +        ret = i2c_send(s->bus, data);
+> +        if (ret) {
+> +            k230_i2c_abort(s, IC_ABRT_TXDATA_NOACK);
+> +            return;
+> +        }
+> +    }
+> +
+> +    if (stop) {
+> +        if (is_read) {
+> +            i2c_nack(s->bus);
+> +        }
+> +
+> +        i2c_end_transfer(s->bus);
+> +
+> +        s->transfer_state = K230_I2C_STATE_IDLE;
+> +        s->ic_raw_intr_stat |= IC_INTR_STOP_DET;
+> +    }
+> +
+> +    k230_i2c_update_fifo_intr(s);
+> +    k230_i2c_update_irq(s);
+> +}
+> +
+> +static uint64_t k230_i2c_read(void *opaque, hwaddr offset, unsigned size)
+> +{
+> +    K230I2CState *s = K230_I2C(opaque);
+> +    uint64_t activity_flag;
+> +    switch (offset) {
+> +    case K230_IC_CON:
+> +        return s->ic_con;
+> +    case K230_IC_TAR:
+> +        return s->ic_tar;
+> +    case K230_IC_SAR:
+> +        return s->ic_sar;
+> +    case K230_IC_HS_MADDR:
+> +        return s->ic_hs_maddr;
+> +    case K230_IC_DATA_CMD:
+> +        return k230_i2c_read_data_cmd(s);
+> +    case K230_IC_SS_SCL_HCNT:
+> +        return s->ic_ss_scl_hcnt;
+> +    case K230_IC_SS_SCL_LCNT:
+> +        return s->ic_ss_scl_lcnt;
+> +    case K230_IC_FS_SCL_HCNT:
+> +        return s->ic_fs_scl_hcnt;
+> +    case K230_IC_FS_SCL_LCNT:
+> +        return s->ic_fs_scl_lcnt;
+> +    case K230_IC_HS_SCL_HCNT:
+> +        return s->ic_hs_scl_hcnt;
+> +    case K230_IC_HS_SCL_LCNT:
+> +        return s->ic_hs_scl_lcnt;
+> +    case K230_IC_INTR_STAT:
+> +        return s->ic_raw_intr_stat & s->ic_intr_mask;
+> +    case K230_IC_INTR_MASK:
+> +        return s->ic_intr_mask;
+> +    case K230_IC_RAW_INTR_STAT:
+> +        return s->ic_raw_intr_stat;
+> +    case K230_IC_RX_TL:
+> +        return s->ic_rx_tl;
+> +    case K230_IC_TX_TL:
+> +        return s->ic_tx_tl;
+> +    case K230_IC_CLR_INTR:
+> +        return k230_i2c_clear_all_intr(s);
+> +    case K230_IC_CLR_RX_UNDER:
+> +        return k230_i2c_clear_intr(s, IC_INTR_RX_UNDER);
+> +    case K230_IC_CLR_RX_OVER:
+> +        return k230_i2c_clear_intr(s, IC_INTR_RX_OVER);
+> +    case K230_IC_CLR_TX_OVER:
+> +        return k230_i2c_clear_intr(s, IC_INTR_TX_OVER);
+> +    case K230_IC_CLR_RD_REQ:
+> +        return k230_i2c_clear_intr(s, IC_INTR_RD_REQ);
+> +    case K230_IC_CLR_TX_ABRT:
+> +        return k230_i2c_clear_tx_abrt(s);
+> +    case K230_IC_CLR_RX_DONE:
+> +        return k230_i2c_clear_intr(s, IC_INTR_RX_DONE);
+> +    case K230_IC_CLR_ACTIVITY:
+> +        activity_flag = !!(s->ic_raw_intr_stat & IC_INTR_ACTIVITY);
+> +        if (!k230_i2c_is_activity(s)) {
+> +            k230_i2c_clear_intr(s, IC_INTR_ACTIVITY);
+> +        }
+> +        return activity_flag;
+> +    case K230_IC_CLR_STOP_DET:
+> +        return k230_i2c_clear_intr(s, IC_INTR_STOP_DET);
+> +    case K230_IC_CLR_START_DET:
+> +        return k230_i2c_clear_intr(s, IC_INTR_START_DET);
+> +    case K230_IC_CLR_GEN_CALL:
+> +        return k230_i2c_clear_intr(s, IC_INTR_GEN_CALL);
+> +    case K230_IC_ENABLE:
+> +        return s->ic_enable;
+> +    case K230_IC_STATUS:
+> +        return k230_i2c_get_status(s);
+> +    case K230_IC_TXFLR:
+> +        return fifo32_num_used(&s->tx_fifo);
+> +    case K230_IC_RXFLR:
+> +        return fifo8_num_used(&s->rx_fifo);
+> +    case K230_IC_TX_ABRT_SOURCE:
+> +        return s->ic_tx_abrt_source;
+> +    case K230_IC_SLV_DATA_NACK_ONLY:
+> +        return s->ic_slv_data_nack_only;
+> +    case K230_IC_DMA_CR:
+> +        return s->ic_dma_cr;
+> +    case K230_IC_DMA_TDLR:
+> +        return s->ic_dma_tdlr;
+> +    case K230_IC_DMA_RDLR:
+> +        return s->ic_dma_rdlr;
+> +    case K230_IC_SDA_SETUP:
+> +        return s->ic_sda_setup;
+> +    case K230_IC_ACK_GENERAL_CALL:
+> +        return s->ic_ack_general_call;
+> +    case K230_IC_ENABLE_STATUS:
+> +        return s->ic_enable_status;
+> +    case K230_IC_COMP_PARAM_1:
+> +        return K230_IC_COMP_PARAM_1_VALUE;
+> +    case K230_IC_COMP_VERSION:
+> +        return 0x3132302aU;
+> +    case K230_IC_COMP_TYPE:
+> +        return 0x44570140U;
+> +    default:
+> +        return 0;
+> +    }
+> +}
+> +
+> +static void k230_i2c_write(void *opaque, hwaddr offset,
+> +                           uint64_t value, unsigned size)
+> +{
+> +    K230I2CState *s = K230_I2C(opaque);
+> +    uint32_t val = value;
+> +
+> +    switch (offset) {
+> +    case K230_IC_CON: {
+> +        if (s->ic_enable & IC_ENABLE) {
+> +            break;
+> +        }
+> +        s->ic_con = val & IC_CON_VALID_MASK;
+> +
+> +        if (!((s->ic_con & IC_CON_SPEED) >> 1)) {
+> +            s->ic_con |= IC_CON_SPEED;
+> +        }
+> +        s->ic_con |= IC_CON_SLAVE_DISABLE;
+> +        break;
+> +    }
+> +    case K230_IC_TAR: {
+> +        if (s->ic_enable & IC_ENABLE) {
+> +            break;
+> +        }
+> +        s->ic_tar = val & IC_TAR_VALID_MASK;
+> +        break;
+> +    }
+> +    case K230_IC_SAR: {
+> +        if (s->ic_enable & IC_ENABLE) {
+> +            break;
+> +        }
+> +        s->ic_sar = val & IC_SAR_VALID_MASK;
+> +        break;
+> +    }
+> +    case K230_IC_HS_MADDR: {
+> +        if (s->ic_enable & IC_ENABLE) {
+> +            break;
+> +        }
+> +        s->ic_hs_maddr = val & IC_HS_MAR_VALID_MASK;
+> +        break;
+> +    }
+> +    case K230_IC_DATA_CMD: {
+> +        k230_i2c_write_data_cmd(s, val);
+> +        break;
+> +    }
+> +    case K230_IC_SS_SCL_HCNT: {
+> +        uint16_t count;
+> +
+> +        if (s->ic_enable & IC_ENABLE) {
+> +            break;
+> +        }
+> +
+> +        count = val & IC_SS_SCL_HCNT_VALID_MASK;
+> +
+> +        if (count < 6) {
+> +            count = 6;
+> +        } else if (count > 65525) {
+> +            qemu_log_mask(LOG_GUEST_ERROR,
+> +                    "k230-i2c: invalid IC_SS_SCL_HCNT value %u\n",
+> +                        (unsigned int)count);
+> +            break;
+> +        }
+> +
+> +        s->ic_ss_scl_hcnt = count;
+> +
+> +        break;
+> +    }
+> +    case K230_IC_SS_SCL_LCNT: {
+> +        uint16_t count;
+> +
+> +        if (s->ic_enable & IC_ENABLE) {
+> +            break;
+> +        }
+> +
+> +        count = val & IC_SS_SCL_LCNT_VALID_MASK;
+> +
+> +        if (count < 8) {
+> +            count = 8;
+> +        }
+> +
+> +        s->ic_ss_scl_lcnt = count;
+> +
+> +        break;
+> +    }
+> +    case K230_IC_FS_SCL_HCNT: {
+> +        uint16_t count;
+> +
+> +        if (s->ic_enable & IC_ENABLE) {
+> +            break;
+> +        }
+> +
+> +        count = val & IC_FS_SCL_HCNT_VALID_MASK;
+> +
+> +        if (count < 6) {
+> +            count = 6;
+> +        }
+> +
+> +        s->ic_fs_scl_hcnt = count;
+> +
+> +        break;
+> +    }
+> +    case K230_IC_FS_SCL_LCNT: {
+> +        uint16_t count;
+> +
+> +        if (s->ic_enable & IC_ENABLE) {
+> +            break;
+> +        }
+> +
+> +        count = val & IC_FS_SCL_LCNT_VALID_MASK;
+> +
+> +        if (count < 8) {
+> +            count = 8;
+> +        }
+> +
+> +        s->ic_fs_scl_lcnt = count;
+> +
+> +        break;
+> +    }
+> +    case K230_IC_HS_SCL_HCNT: {
+> +        uint16_t count;
+> +
+> +        if (s->ic_enable & IC_ENABLE) {
+> +            break;
+> +        }
+> +
+> +        count = val & IC_HS_SCL_HCNT_VALID_MASK;
+> +
+> +        if (count < 6) {
+> +            count = 6;
+> +        }
+> +
+> +        s->ic_hs_scl_hcnt = count;
+> +
+> +        break;
+> +    }
+> +    case K230_IC_HS_SCL_LCNT: {
+> +        uint16_t count;
+> +
+> +        if (s->ic_enable & IC_ENABLE) {
+> +            break;
+> +        }
+> +
+> +        count = val & IC_HS_SCL_LCNT_VALID_MASK;
+> +
+> +        if (count < 8) {
+> +            count = 8;
+> +        }
+> +
+> +        s->ic_hs_scl_lcnt = count;
+> +
+> +        break;
+> +    }
+> +    case K230_IC_INTR_MASK: {
+> +        s->ic_intr_mask = val & IC_INTR_VALID_MASK;
+> +
+> +        k230_i2c_update_irq(s);
+> +        break;
+> +    }
+> +    case K230_IC_RX_TL: {
+> +        uint8_t threshold;
+> +
+> +        threshold = val & IC_RX_TL;
+> +        if (threshold > K230_I2C_RX_FIFO_SIZE - 1) {
+> +            threshold = K230_I2C_RX_FIFO_SIZE - 1;
+> +        }
+> +        s->ic_rx_tl = threshold;
+> +
+> +        k230_i2c_update_fifo_intr(s);
+> +        k230_i2c_update_irq(s);
+> +
+> +        break;
+> +    }
+> +    case K230_IC_TX_TL: {
+> +        uint8_t threshold;
+> +
+> +        threshold = val & IC_TX_TL;
+> +        if (threshold > K230_I2C_TX_FIFO_SIZE) {
+> +            threshold = K230_I2C_TX_FIFO_SIZE;
+> +        }
+> +        s->ic_tx_tl = threshold;
+> +
+> +        k230_i2c_update_fifo_intr(s);
+> +        k230_i2c_update_irq(s);
+> +
+> +        break;
+> +    }
+> +    case K230_IC_ENABLE: {
+> +        k230_i2c_write_enable(s, val);
+> +        break;
+> +    }
+> +    case K230_IC_TX_ABRT_SOURCE: {
+> +        s->ic_tx_abrt_source = val & IC_ABRT_VALID_MASK;
+> +        break;
+> +    }
+> +    case K230_IC_SLV_DATA_NACK_ONLY: {
+> +        /* Slave mode is not supported. */
+> +        break;
+> +    }
+> +    case K230_IC_DMA_CR: {
+> +        break;
+> +    }
+> +    case K230_IC_DMA_TDLR: {
+> +        break;
+> +    }
+> +    case K230_IC_DMA_RDLR: {
+> +        break;
+> +    }
+> +    case K230_IC_SDA_SETUP: {
+> +        s->ic_sda_setup = val & IC_SDA_SETUP;
+> +        break;
+> +    }
+> +    case K230_IC_ACK_GENERAL_CALL: {
+> +        s->ic_ack_general_call = val & IC_ACK_GEN_CALL;
+> +        break;
+> +    }
+> +    default:
+> +        return;
+> +    }
+> +}
+> +
+> +static void k230_i2c_reset(Object *obj, ResetType type)
+> +{
+> +    K230I2CState *s = K230_I2C(obj);
+> +
+> +    if (s->transfer_state == K230_I2C_STATE_RECEIVING) {
+> +        i2c_nack(s->bus);
+> +    }
+> +
+> +    if (k230_i2c_is_activity(s)) {
+> +        i2c_end_transfer(s->bus);
+> +    }
+> +
+> +    fifo8_reset(&s->rx_fifo);
+> +    fifo32_reset(&s->tx_fifo);
+> +
+> +    s->transfer_state = K230_I2C_STATE_IDLE;
+> +
+> +    s->ic_con = 0x7f;
+> +    s->ic_tar = 0x055;
+> +    s->ic_sar = 0x055;
+> +    s->ic_hs_maddr = 0x1;
+> +
+> +    s->ic_ss_scl_hcnt = 0x0190;
+> +    s->ic_ss_scl_lcnt = 0x01d6;
+> +    s->ic_fs_scl_hcnt = 0x003c;
+> +    s->ic_fs_scl_lcnt = 0x0082;
+> +    s->ic_hs_scl_hcnt = 0x0006;
+> +    s->ic_hs_scl_lcnt = 0x0010;
+> +
+> +    s->ic_intr_mask = 0x8ff;
+> +    s->ic_raw_intr_stat = 0;
+> +
+> +    s->ic_rx_tl = 0;
+> +    s->ic_tx_tl = 0;
+> +
+> +    s->ic_enable = 0;
+> +    s->ic_enable_status = 0;
+> +
+> +    s->ic_tx_abrt_source = 0;
+> +    s->ic_slv_data_nack_only = 0;
+> +
+> +    s->ic_dma_cr = 0;
+> +    s->ic_dma_tdlr = 0;
+> +    s->ic_dma_rdlr = 0;
+> +
+> +    s->ic_sda_setup = 0x64;
+> +    s->ic_ack_general_call = 0x1;
+> +
+> +    qemu_set_irq(s->irq, 0);
+> +}
+> +
+> +static const MemoryRegionOps k230_i2c_ops = {
+> +    .read = k230_i2c_read,
+> +    .write = k230_i2c_write,
+> +    .endianness = DEVICE_LITTLE_ENDIAN,
+> +    .valid = {
+> +        .min_access_size = 4,
+> +        .max_access_size = 4,
+> +    },
+> +    .impl = {
+> +        .min_access_size = 4,
+> +        .max_access_size = 4,
+> +    },
+> +};
+> +
+> +static void k230_i2c_init(Object *obj)
+> +{
+> +    K230I2CState *s = K230_I2C(obj);
+> +    SysBusDevice *sbd = SYS_BUS_DEVICE(obj);
+> +
+> +    fifo8_create(&s->rx_fifo, K230_I2C_RX_FIFO_SIZE);
+> +    fifo32_create(&s->tx_fifo, K230_I2C_TX_FIFO_SIZE);
+> +
+> +    s->bus = i2c_init_bus(DEVICE(obj), "i2c");
+> +
+> +    memory_region_init_io(&s->iomem, obj,
+> +                          &k230_i2c_ops, s,
+> +                          TYPE_K230_I2C, K230_I2C_MMIO_SIZE);
+> +
+> +    sysbus_init_mmio(sbd, &s->iomem);
+> +    sysbus_init_irq(sbd, &s->irq);
+> +}
+> +
+> +static void k230_i2c_finalize(Object *obj)
+> +{
+> +    K230I2CState *s = K230_I2C(obj);
+> +
+> +    fifo8_destroy(&s->rx_fifo);
+> +    fifo32_destroy(&s->tx_fifo);
+> +}
+> +
+> +static int k230_i2c_post_load(void *opaque, int version_id)
+> +{
+> +    K230I2CState *s = opaque;
+> +
+> +    if (s->transfer_state > K230_I2C_STATE_RECEIVING) {
+> +        return -EINVAL;
+> +    }
+> +
+> +    k230_i2c_update_fifo_intr(s);
+> +    k230_i2c_update_irq(s);
+> +
+> +    return 0;
+> +}
+> +
+> +static const VMStateDescription vmstate_k230_i2c = {
+> +    .name = TYPE_K230_I2C,
+> +    .version_id = 1,
+> +    .minimum_version_id = 1,
+> +    .post_load = k230_i2c_post_load,
+> +    .fields = (const VMStateField[]) {
+> +        VMSTATE_UINT32(ic_con, K230I2CState),
+> +        VMSTATE_UINT32(ic_tar, K230I2CState),
+> +        VMSTATE_UINT32(ic_sar, K230I2CState),
+> +        VMSTATE_UINT32(ic_hs_maddr, K230I2CState),
+> +
+> +        VMSTATE_UINT32(ic_ss_scl_hcnt, K230I2CState),
+> +        VMSTATE_UINT32(ic_ss_scl_lcnt, K230I2CState),
+> +        VMSTATE_UINT32(ic_fs_scl_hcnt, K230I2CState),
+> +        VMSTATE_UINT32(ic_fs_scl_lcnt, K230I2CState),
+> +        VMSTATE_UINT32(ic_hs_scl_hcnt, K230I2CState),
+> +        VMSTATE_UINT32(ic_hs_scl_lcnt, K230I2CState),
+> +
+> +        VMSTATE_UINT32(ic_intr_mask, K230I2CState),
+> +        VMSTATE_UINT32(ic_raw_intr_stat, K230I2CState),
+> +
+> +        VMSTATE_UINT32(ic_rx_tl, K230I2CState),
+> +        VMSTATE_UINT32(ic_tx_tl, K230I2CState),
+> +
+> +        VMSTATE_UINT32(ic_enable, K230I2CState),
+> +        VMSTATE_UINT32(ic_tx_abrt_source, K230I2CState),
+> +
+> +        VMSTATE_UINT32(ic_sda_setup, K230I2CState),
+> +        VMSTATE_UINT32(ic_slv_data_nack_only, K230I2CState),
+> +
+> +        VMSTATE_UINT32(ic_dma_cr, K230I2CState),
+> +        VMSTATE_UINT32(ic_dma_tdlr, K230I2CState),
+> +        VMSTATE_UINT32(ic_dma_rdlr, K230I2CState),
+> +        VMSTATE_UINT32(ic_ack_general_call, K230I2CState),
+> +        VMSTATE_UINT32(ic_enable_status, K230I2CState),
+> +
+> +        VMSTATE_FIFO8(rx_fifo, K230I2CState),
+> +        VMSTATE_FIFO32(tx_fifo, K230I2CState),
+> +
+> +        VMSTATE_UINT32(transfer_state, K230I2CState),
+> +
+> +        VMSTATE_END_OF_LIST()
+> +    },
+> +};
+> +
+> +static void k230_i2c_class_init(ObjectClass *klass, const void *data)
+> +{
+> +    DeviceClass *dc = DEVICE_CLASS(klass);
+> +    ResettableClass *rc = RESETTABLE_CLASS(klass);
+> +
+> +    dc->vmsd = &vmstate_k230_i2c;
+> +    rc->phases.hold = k230_i2c_reset;
+> +}
+> +
+> +static const TypeInfo k230_i2c_info = {
+> +    .name = TYPE_K230_I2C,
+> +    .parent = TYPE_SYS_BUS_DEVICE,
+> +    .instance_size = sizeof(K230I2CState),
+> +    .instance_init = k230_i2c_init,
+> +    .instance_finalize = k230_i2c_finalize,
+> +    .class_init = k230_i2c_class_init,
+> +};
+> +
+> +static void k230_i2c_register_types(void)
+> +{
+> +    type_register_static(&k230_i2c_info);
+> +}
+> +
+> +type_init(k230_i2c_register_types)
+> diff --git a/hw/i2c/meson.build b/hw/i2c/meson.build
+> index 88aea35662..10da237dd9 100644
+> --- a/hw/i2c/meson.build
+> +++ b/hw/i2c/meson.build
+> @@ -19,4 +19,5 @@ i2c_ss.add(when: 'CONFIG_PPC4XX', if_true: files('ppc4xx_i2c.c'))
+>   i2c_ss.add(when: 'CONFIG_PCA954X', if_true: files('i2c_mux_pca954x.c'))
+>   i2c_ss.add(when: 'CONFIG_PMBUS', if_true: files('pmbus_device.c'))
+>   i2c_ss.add(when: 'CONFIG_BCM2835_I2C', if_true: files('bcm2835_i2c.c'))
+> +i2c_ss.add(when: 'CONFIG_K230_I2C', if_true: files('k230_i2c.c'))
+>   system_ss.add_all(when: 'CONFIG_I2C', if_true: i2c_ss)
+> diff --git a/include/hw/i2c/k230_i2c.h b/include/hw/i2c/k230_i2c.h
+> new file mode 100644
+> index 0000000000..94a4128f46
+> --- /dev/null
+> +++ b/include/hw/i2c/k230_i2c.h
+> @@ -0,0 +1,72 @@
+> +/*
+> + * K230 DesignWare I2C controller
+> + *
+> + * Copyright (c) 2026 Wang Zhongyu <wzy15515798875@gmail.com>
+> + *
+> + * SPDX-License-Identifier: GPL-2.0-or-later
+> + */
+> +#ifndef HW_I2C_K230_I2C_H
+> +#define HW_I2C_K230_I2C_H
+> +
+> +#include <stdint.h>
+> +
+> +#include "hw/core/sysbus.h"
+> +#include "hw/i2c/i2c.h"
+> +#include "qemu/fifo32.h"
+> +#include "qemu/fifo8.h"
+> +
+> +#define K230_I2C_RX_FIFO_SIZE 64
+> +#define K230_I2C_TX_FIFO_SIZE 32
+> +
+> +#define TYPE_K230_I2C "k230-i2c"
+> +OBJECT_DECLARE_SIMPLE_TYPE(K230I2CState, K230_I2C)
+> +
+> +typedef enum K230I2CTransferState {
+> +    K230_I2C_STATE_IDLE,
+> +    K230_I2C_STATE_SENDING,
+> +    K230_I2C_STATE_RECEIVING,
+> +} K230I2CTransferState;
+> +
+> +struct K230I2CState {
+> +    SysBusDevice parent_obj;
+> +
+> +    MemoryRegion iomem;
+> +
+> +    I2CBus *bus;
+> +    qemu_irq irq;
+> +
+> +    /* K230 I2C register list */
+> +    uint32_t ic_con;
+> +    uint32_t ic_tar;
+> +    uint32_t ic_sar;
+> +    uint32_t ic_hs_maddr;
+> +    uint32_t ic_ss_scl_hcnt;
+> +    uint32_t ic_ss_scl_lcnt;
+> +    uint32_t ic_fs_scl_hcnt;
+> +    uint32_t ic_fs_scl_lcnt;
+> +    uint32_t ic_hs_scl_hcnt;
+> +    uint32_t ic_hs_scl_lcnt;
+> +
+> +    uint32_t ic_intr_mask;
+> +    uint32_t ic_raw_intr_stat;
+> +
+> +    uint32_t ic_rx_tl;
+> +    uint32_t ic_tx_tl;
+> +
+> +    uint32_t ic_enable;
+> +
+> +    uint32_t ic_tx_abrt_source;
+> +    uint32_t ic_sda_setup;
+> +    uint32_t ic_slv_data_nack_only;
+> +    uint32_t ic_dma_cr;
+> +    uint32_t ic_dma_tdlr;
+> +    uint32_t ic_dma_rdlr;
+> +    uint32_t ic_ack_general_call;
+> +    uint32_t ic_enable_status;
+> +
+> +    Fifo8 rx_fifo;
+> +    Fifo32 tx_fifo;
+> +    uint32_t transfer_state;
+> +};
+> +
+> +#endif /* HW_I2C_K230_I2C_H */
 
 
