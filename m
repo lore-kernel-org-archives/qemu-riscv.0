@@ -4,94 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52F59C5AC7C
-	for <qemu-riscv@archiver.kernel.org>; Fri,  7 Aug 2026 10:59:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62E65C5AC7A
+	for <qemu-riscv@archiver.kernel.org>; Fri,  7 Aug 2026 10:59:18 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wsIHn-0007Sf-7i; Fri, 07 Aug 2026 06:58:47 -0400
+	id 1wsII3-0007V8-Gj; Fri, 07 Aug 2026 06:59:03 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wsIHl-0007SO-Ci
- for qemu-riscv@nongnu.org; Fri, 07 Aug 2026 06:58:45 -0400
-Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
+ id 1wsII2-0007UI-5l
+ for qemu-riscv@nongnu.org; Fri, 07 Aug 2026 06:59:02 -0400
+Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wsIHj-0005LL-1k
- for qemu-riscv@nongnu.org; Fri, 07 Aug 2026 06:58:45 -0400
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+ id 1wsII0-0005MD-22
+ for qemu-riscv@nongnu.org; Fri, 07 Aug 2026 06:59:01 -0400
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6776CCsp3576262
- for <qemu-riscv@nongnu.org>; Fri, 7 Aug 2026 10:58:41 GMT
+ 6779WCre564654
+ for <qemu-riscv@nongnu.org>; Fri, 7 Aug 2026 10:58:59 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- LKeFH7l4roclCRQb+hSYR6sn6kOTyn2aH2mp59hOcYc=; b=Sqd0YNEeRkLBVN6n
- nNlsc01Q/D/DKLhMLGTFwsCyxGhGRuWrodyuvfdleLY55WHOLQ9+MrJjuP6XWxdw
- 9RB7Oet6bPXWxHE2NwAN9cmVS9J6yhDlTzx3iwr66NmiOs0LJnSoH9KQ/YSUkbda
- VJQmMO6YkKVWZ4RHJXesGbS+W30SZZlheFM+TmGrR79gQRUXKFrGPZ2K1ndq3YJF
- qQrfS1XVo7E3u7WmUgD/LqhbbSdRzO34b4H7OIut+Z/azJJf3EM5UFeSq03iGiTO
- YlMhSEIBFe+nSevdtZdN94vdnopv1Y8eAmx0F1UOOJZtznWr8ytWJexDaCWgUw4R
- 5tVy4w==
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com
- [209.85.222.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fw9vu1149-1
+ Q5JGj+RFeNMQA3Y0dMKVB34VT6Ay76sI1yXCt6aZFQA=; b=JGicZj2Pg+gqAabS
+ xsWcGThsozLB9khqYalvIbN0iTJGG/sAtJuETPRbO9cwWIUSsZHzWYlXDKx+crQC
+ mE7o3DQSpnhdHxZhAHOzBrktUd94TttugZneoU7+nOtL1nzUYBCYpRChcSlnUc8R
+ MY75OMMnpqMWL7AGVKvdgLhnrpULzs787TXqo/kLH4yfsDkxerazyYBU+gvuZGKB
+ gr/fiVrsPPcguvcGvbcd0dPSuA+xG6o3ppSZWnLVGnvenI0hpZ3aZSDEhtQVtHKI
+ qrS4mSyyZpM9fVqIR8hEWObs2eOFSeQ1/zxmKsRXrhEo66Ppvz7BpAq5Cf9U3Ywj
+ 5ZsZ7A==
+Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com
+ [209.85.160.197])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fwctp89fs-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Fri, 07 Aug 2026 10:58:41 +0000 (GMT)
-Received: by mail-qk1-f198.google.com with SMTP id
- af79cd13be357-930f5da3467so322021085a.2
- for <qemu-riscv@nongnu.org>; Fri, 07 Aug 2026 03:58:40 -0700 (PDT)
+ for <qemu-riscv@nongnu.org>; Fri, 07 Aug 2026 10:58:58 +0000 (GMT)
+Received: by mail-qt1-f197.google.com with SMTP id
+ d75a77b69052e-51c1a9764f0so33341141cf.1
+ for <qemu-riscv@nongnu.org>; Fri, 07 Aug 2026 03:58:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1786100320; x=1786705120; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1786100338; x=1786705138; darn=nongnu.org;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=LKeFH7l4roclCRQb+hSYR6sn6kOTyn2aH2mp59hOcYc=;
- b=OFu8hqmV5sMQBLD63uAQTYmT5i4fGwHdNQnWYC7rGz8ImLUFzwEWUZuwYpTE4bJijB
- I+x0EYkBc/0bXEvO9g/suguTWUGHT6KadjP+EJ3cHFdw8ZUBg57In1FpBLI8+7pCPakn
- VbOstBZVfm5gNfqXlUEwV7p+kYeES9fQxGxjRVzv28h5D7GK8tnT9FgBU9zIrGJ2t8/8
- Xy5bKl25i1IkNNd32Vldla7aWeK3crIenmn0nzzqTNOEJ8HdO5D3YSuIblSWaLFiNOdP
- i6oOwZA7YoSgWM6xKANnAFz/XZ8MmOnL0Rbgwj2p4ux/BIfMRpDiEgysjn0skWtSoksb
- 8EeA==
+ bh=Q5JGj+RFeNMQA3Y0dMKVB34VT6Ay76sI1yXCt6aZFQA=;
+ b=EmA44FuhlbJYdyU/3nUz9WRxV065JwboXthX7Z5EldYwbqekHcW+zza4N4AXbHt4Kr
+ ecEfcUIKF7IYBH0aLNwdoMScEpEDPwAZ4jGP+EW5deQK2B81jYDekkzb8mwjYjbAobB3
+ cIr4DJntKwvXnm1AgAD/KqCiBIZ80aMI6u1ywjk8H5PcQWouXdfbLTvc46AUKeSN9jOj
+ sUaWxrkGxGpKxYPnj923dHQUK0ikA+tXeLVRyGk323x+cJ5YNMjtdXzv9JQoMDq4NwHu
+ tx7fciLJca4YpeROwYLvEuiWkvIgg4UgidlU5H60RZTvjcF8HlHPHTUyZwT7PTSdemox
+ XR3w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786100320; x=1786705120;
+ d=1e100.net; s=20251104; t=1786100338; x=1786705138;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=LKeFH7l4roclCRQb+hSYR6sn6kOTyn2aH2mp59hOcYc=;
- b=GMmLO+V3KDh3wft8FYRolldsQKvn/A2iFUDD5pBv2sEd2dR+zQXbKZT5C9mpC0tjW+
- pZrolPOM0ta92IjMrafLlayMAgFvZSEyNb2gj6t7RYx5cg5iBEw7yZC5A/htQDpEOk87
- J+v9vD2N/hHKvlFjie2vZL4noS4h4ArHQd+8UzaD73lu3XGAcZmYv1i12Ekxze2qXi7P
- 012MnKwIPao9D2BBccBJyReAzFLWEZ01aILDntMpYZgklGZS3yKKgQ/qcK1717/eYChD
- 8KLpYNkzohvnoWVRjfg/dvjdUpO5Cj2zQTemXAhLzAHHd1h4K2SBz4+IUio/lBANbFiJ
- 5Skw==
-X-Gm-Message-State: AOJu0Yz6BrY0lIs6yWH7NweS8CxFrUja6y5/ESiAz7ZrbDG2Okzd8G8w
- sqrs5iRYCWOPYEBHw6BAQ5abx7iOZTc4kz2WbK+8dryuQjALCrf7kK4CURjkJB+zS9+/uZ3lASP
- PN3WAdvXOQXDD1id/yUDNCdIIqTTFVXxrYaJeEAUZje9faaOstC0hjqiUaw==
-X-Gm-Gg: AR+sD10v76k4O6FXsX1ojk9XpbqtrQYeyBppJUy7OYA6+wwLk811+SV1QReJ6r7ZDvi
- /fhlZRzfbzqyP/s9f8wqn/TEXzOM378SBAN1ay+d1AFWeoVy7bfAPUMMjQyNYZRKa/4wd7oMJaT
- eHuE6tz/HSrP8oeIiFopiVVhnxmlUn9Wg5n3+/FevMXk/Ru2d6tR6Z8ffl91VTDX6rlMGRhNlI/
- UWNfAuUd6CwaXRlSgTQMGfGkK4Ffwc3lJg8mNaz7ruRJZyO+z30+kKXzYmzQBmABrOs/so1ug5w
- 3dPnjDrxx4AQjEYKMrwQBzg8r56HJFscPWMQ6uYGOSAcmU/3y4ifx0EW1ROhnhYg8p8IoL82obe
- 5dC+GInerAvQEBdhpUvGbxLNlCngow7maYBGw
-X-Received: by 2002:a05:620a:a408:20b0:92e:57ae:3a53 with SMTP id
- af79cd13be357-9364909fbdfmr1795646685a.9.1786100320067; 
- Fri, 07 Aug 2026 03:58:40 -0700 (PDT)
-X-Received: by 2002:a05:620a:a408:20b0:92e:57ae:3a53 with SMTP id
- af79cd13be357-9364909fbdfmr1795641985a.9.1786100319326; 
- Fri, 07 Aug 2026 03:58:39 -0700 (PDT)
+ bh=Q5JGj+RFeNMQA3Y0dMKVB34VT6Ay76sI1yXCt6aZFQA=;
+ b=ioCXiycTKZUPeCBUEUnhlEeJ3R0SS1HUpJ+p14rr2ee17mU/xIkUajnURD6oSjWCQO
+ 6fdtdvnZQzSp3otHANjbpPQ354ECe2kEOStWmNpQluyrVli/nl1LrVl1zzTMs8em3P3d
+ UHAln4D37PRPUWY94zPWRHK3buUChzJ1ADT6wC5J0uJ0rDIvr+C+b0uFUtf5uS5znk6f
+ /CcrOTk+rWPnvfLYKeeLf90rqd04sme4AdNR1airPeFuF2vpWGA5m/rwlq5PlNP/OFUI
+ 6DpFg5Rt7ROXvC4xpJQphLPtTOphGL0bmR06k7szpNl2r62HZwPk2e+81PTzW9qmo8c5
+ H7Hw==
+X-Gm-Message-State: AOJu0Ywp1B/yX9wEahSLVz3Kgztn/xhKKGYmK02ip7ytkSwFYxGrH46q
+ +dv0nAqJit/GeDU2iVgLcE2XAmqNz9QyFlvoLKpx6Acqb1eS4YI7Tf3RhZvCida3c7AJGbN5JVs
+ QNUc1lJBdATUvtSrS8tbWmnYznXry8XczazX4jnfPNIvR2IpGREmm67dDfg==
+X-Gm-Gg: AR+sD11CTVZ5GFmIMPZAaxTbenSc6s79Gm5kiQUgiqENXHrG5Bs1MfFXzalI9NtHUQu
+ 6pdvpqb7YIC4ruO8R3K/7pNr1SVSgZrU8UfmzwPn3DpOdjhdJQYz37VYWV12tQ1fK18z7nl/uSX
+ aFSQ38myBmQlZi4J5gfvFB9qqzRuaSP5v/Tw8IUzAeXGBiWncQrkNEkG4bzsFYp9XQW+ADJvEE0
+ OgCEn1ZZ/HiLjfKgEhCFSITrCNb0tVe2EVB6ToUDa7jr7J7yRM/dCeuN3dYVx2YnVn98Omd911g
+ KHnSgb5V4+zs+JzRj97KYydsXV+r84JyLBuq6nyxyplPV3TyiHrNHt0JHpj6hg3p1pT5Zc99uHe
+ +LD3NN9GkrZ+5tp8B/WJToFw+MF3TSIbSw0pX
+X-Received: by 2002:a05:622a:1e12:b0:516:dda7:51e0 with SMTP id
+ d75a77b69052e-52ce5ff11acmr232472301cf.17.1786100338039; 
+ Fri, 07 Aug 2026 03:58:58 -0700 (PDT)
+X-Received: by 2002:a05:622a:1e12:b0:516:dda7:51e0 with SMTP id
+ d75a77b69052e-52ce5ff11acmr232471991cf.17.1786100337543; 
+ Fri, 07 Aug 2026 03:58:57 -0700 (PDT)
 Received: from [192.168.68.104] ([187.11.154.152])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-9366e22c446sm120555785a.30.2026.08.07.03.58.36
+ d75a77b69052e-52d1637f4a1sm9546241cf.9.2026.08.07.03.58.54
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 07 Aug 2026 03:58:38 -0700 (PDT)
-Message-ID: <4d207ce9-3f27-478a-a102-000ee257f691@oss.qualcomm.com>
-Date: Fri, 7 Aug 2026 07:58:35 -0300
+ Fri, 07 Aug 2026 03:58:57 -0700 (PDT)
+Message-ID: <e2863b2a-83e2-4a9f-937e-e2f122a5f190@oss.qualcomm.com>
+Date: Fri, 7 Aug 2026 07:58:53 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 2/3] hw/riscv: enable SDHCI controllers on K230
+Subject: Re: [PATCH v1 3/3] tests/qtest: add K230 SDHCI tests
 To: Xin Xie <xinxie908@gmail.com>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, Chao Liu <chao.liu@processmission.com>,
  Alistair Francis <alistair.francis@wdc.com>, Fabiano Rosas
@@ -101,41 +101,41 @@ Cc: qemu-riscv@nongnu.org, Chao Liu <chao.liu@processmission.com>,
  Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
  Weiwei Li <liwei1518@gmail.com>
 References: <20260729105904.272939-1-xinxie908@gmail.com>
- <20260729105904.272939-3-xinxie908@gmail.com>
+ <20260729105904.272939-4-xinxie908@gmail.com>
 From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Content-Language: en-US
-In-Reply-To: <20260729105904.272939-3-xinxie908@gmail.com>
+In-Reply-To: <20260729105904.272939-4-xinxie908@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-ORIG-GUID: 05wp3QnCJBRrotaIXfOs9w4gh6b6NrU6
-X-Authority-Analysis: v=2.4 cv=SYbHsPRu c=1 sm=1 tr=0 ts=6a75ba61 cx=c_pps
- a=qKBjSQ1v91RyAK45QCPf5w==:117 a=iMfxv9gflPUPBcmW7/Gq5Q==:17
+X-Authority-Analysis: v=2.4 cv=Fp01OWrq c=1 sm=1 tr=0 ts=6a75ba72 cx=c_pps
+ a=EVbN6Ke/fEF3bsl7X48z0g==:117 a=iMfxv9gflPUPBcmW7/Gq5Q==:17
  a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=pGLkceISAAAA:8 a=8sA-0N0JoZ-HhiopEfAA:9 a=QEXdDO2ut3YA:10
- a=NFOGd7dJGGMPyQGDc5-O:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODA3MDA4NCBTYWx0ZWRfX6CixRBi5u7Wn
- TstRP2G+ZruTK7vLtUbfuJPoYWvh21qjK6Zgx7HDYhGifV5HRuvpEZcmh7MDEKmqeKuIIqyOgoQ
- 8ph/j4Sq6xzh098G615b8jz8aEr9DSU=
-X-Proofpoint-GUID: 05wp3QnCJBRrotaIXfOs9w4gh6b6NrU6
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODA3MDA4NCBTYWx0ZWRfX4vCdlM+VoQBS
- SkyDVOhoicmf2xBfqe7JTjYc1cmlNqhs5g3GD3jEJPtakl5obOjYO+wQG0Senr+z44lPFN5NeWT
- qBTjTDGUVSVkzdcJ3lZ+HwXKvPKacUjWpnVw7urg+nirkyJcyQrXJSVvRqIprZ8Zc7zxxycmSHU
- HVI7qYquEmttpXp/j7TVe+JA4m0Q5u//2gKRuHwUulThPKPpS2oFG2WSf9ppL6dFrHtUg/l4QTv
- pHSm4k3OF06ijmGmQrEKPKaheEqlSEdCmzSlc85D/H1u4acnCNUVbQbXjXjZgIlS7RUwvprgFGT
- +PsFIFZsI/kwa8d8dXGSj5maXqPuk9Pda0hU+r6v5L6cPqjCW81VxODUIPWMYI7kiKBdR6zkx21
- ZWlxf18mx1Ptg7WpKukOzcX/r3oHiWLpaaaeje8uuCM312J0whZDzr0bN5mYNN+UE1d9ln0nZso
- fM0mSMQ7aVJFdWPqQiA==
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
+ a=pGLkceISAAAA:8 a=EUspDBNiAAAA:8 a=5XHA67EirIWxhrRuoN8A:9 a=QEXdDO2ut3YA:10
+ a=a_PwQJl-kcHnX1M80qC6:22
+X-Proofpoint-GUID: WsmfOtNqztEgzJ4oyqt4-hOpYgMnUuw8
+X-Proofpoint-ORIG-GUID: WsmfOtNqztEgzJ4oyqt4-hOpYgMnUuw8
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODA3MDA4NCBTYWx0ZWRfX6rbeippoKJOG
+ eWXUOxUbc2dBqz9DhWqVibQ1Wphxd76kIzhHmAfRufph23op7Hwj8eGK/8sQpDpq8+tGQQrFqrF
+ M1qJAmeNsJYcrolh0Sh2jThyYKnRd6oNhUsjuudSzUf40EnXix0EbZ03ZSZB06Up3SlAJ+cjsWx
+ xw7HF8RmHnmBnI93+Mmvp4tEeeR5X0wGK1pe7u+nMhZ6JRMPmtfxYefAhoGE0nmG4DF38iT1kEt
+ XG1lGV0gEVnlgmxAg+7+5ktjZetkz7p8oJw/P0sy9aPAUt2D7U4o9lodumAsDjQJVKLaFxK+aa7
+ 8B6kZRZoTvNQ2wqyozXelej7Ih3x3El5xYhVYlho6ooayFYedxCTWo9jMGunhofiLBMJf1IGX7Y
+ X38VYXMP6QYYlON1wp0C+IqiBH3FLaiwjo/c9SFFiUerV8CFruDMh8Plb025Zgwj4vMLhUbnnBM
+ wG+rvF5Icoaag8YHh/Q==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODA3MDA4NCBTYWx0ZWRfX06bHV2Ek5/UR
+ 9t8QK4POZaOJ/Onis3W+fY6I7hrqtvuIWZZ51fZQOI3K2JpDKr1eQu49UImveGbMMelk21gddFc
+ 0V64VBLOhQSll/keU5rrfTlIFozBW10=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-07_01,2026-08-06_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 clxscore=1015 phishscore=0 lowpriorityscore=0 spamscore=0
- impostorscore=0 suspectscore=0 priorityscore=1501 malwarescore=0 bulkscore=0
+ phishscore=0 priorityscore=1501 spamscore=0 clxscore=1015 adultscore=0
+ impostorscore=0 suspectscore=0 malwarescore=0 lowpriorityscore=0 bulkscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608070084
-Received-SPF: pass client-ip=205.220.168.131;
- envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
+Received-SPF: pass client-ip=205.220.180.131;
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
 X-Spam_score_int: -27
 X-Spam_score: -2.8
 X-Spam_bar: --
@@ -161,160 +161,272 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 On 7/29/2026 7:59 AM, Xin Xie wrote:
-> Replace the two unimplemented K230 SD controller regions with K230 SDHCI
-> devices.  Map them at 0x91580000 and 0x91581000 and connect their
-> interrupts to PLIC inputs 142 and 144 respectively.
+> Add qtests covering the K230-specific SDHCI register layout, capability
+> masking, preset values, extension pointers, PHY power status and
+> per-controller vendor register storage.
 > 
-> Create an SD card on each controller when a corresponding
-> -drive if=sd,index=N backend is provided.
-> 
-> Update the K230 machine documentation to list the controllers as
-> supported and remove the instructions that disabled the SDHCI device
-> tree nodes before booting Linux.
+> Verify card detection and interrupt delivery through the K230 PLIC.
+> Exercise basic PIO reads and writes with an attached SD card image and
+> check that written data reaches the backing file.
 > 
 > Signed-off-by: Xin Xie <xinxie908@gmail.com>
 > ---
->   docs/system/riscv/k230.rst |  6 ++----
->   hw/riscv/Kconfig           |  1 +
->   hw/riscv/k230.c            | 34 ++++++++++++++++++++++++++++++----
->   include/hw/riscv/k230.h    |  4 ++++
->   4 files changed, 37 insertions(+), 8 deletions(-)
+
+Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+
+>   MAINTAINERS                   |   1 +
+>   tests/qtest/k230-sdhci-test.c | 214 ++++++++++++++++++++++++++++++++++
+>   tests/qtest/meson.build       |   5 +-
+>   3 files changed, 219 insertions(+), 1 deletion(-)
+>   create mode 100644 tests/qtest/k230-sdhci-test.c
 > 
-> diff --git a/docs/system/riscv/k230.rst b/docs/system/riscv/k230.rst
-> index cea8202e55..6e8286a0df 100644
-> --- a/docs/system/riscv/k230.rst
-> +++ b/docs/system/riscv/k230.rst
-> @@ -20,6 +20,7 @@ The ``k230`` machine supports the following devices:
->   * Platform-Level Interrupt Controller (PLIC)
->   * 2 K230 Watchdog Timer
->   * 5 UART
-> +* 2 SDHCI controllers
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 06285352c4..99c4c3294b 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -1831,6 +1831,7 @@ F: include/hw/riscv/k230.h
+>   F: include/hw/watchdog/k230_wdt.h
+>   F: include/hw/sd/k230_sdhci.h
+>   F: tests/qtest/k230-wdt-test.c
+> +F: tests/qtest/k230-sdhci-test.c
 >   
->   Boot options
->   ------------
-> @@ -100,14 +101,11 @@ Press Enter to stop autoboot. At the U-Boot prompt, run these commands:
->      K230# fdt resize 8192
->      K230# fdt set /chosen linux,initrd-start <0x0 0xa100000>
->      K230# fdt set /chosen linux,initrd-end <0x0 ${INITRD_END}>
-> -   K230# fdt set /soc/sdhci0@91580000 status disabled
-> -   K230# fdt set /soc/sdhci1@91581000 status disabled
->      K230# bootm 0xc100000 - 0xa000000
->   
->   Use ``setenv`` so ``bootm`` writes the kernel command line into
->   ``/chosen/bootargs``. The ``fdt`` commands select the loaded DTB, add space for
-> -edits, describe the initrd range in ``/chosen``, and disable SDHCI nodes because
-> -this machine does not emulate those controllers yet. Replace ``${INITRD_END}``
-> +edits, and describe the initrd range in ``/chosen``. Replace ``${INITRD_END}``
->   with the host-calculated value above when typing the command. ``cma=0`` avoids
->   the SDK kernel reserving too much of the little-core memory window for initramfs
->   boot.
-> diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-> index de37c08cae..e4a0616c16 100644
-> --- a/hw/riscv/Kconfig
-> +++ b/hw/riscv/Kconfig
-> @@ -162,3 +162,4 @@ config K230
->       select SERIAL_MM
->       select UNIMP
->       select K230_WDT
-> +    select K230_SDHCI
-> diff --git a/hw/riscv/k230.c b/hw/riscv/k230.c
-> index 656f28190c..7ea69084ae 100644
-> --- a/hw/riscv/k230.c
-> +++ b/hw/riscv/k230.c
-> @@ -110,6 +110,8 @@ static void k230_soc_init(Object *obj)
->       object_initialize_child(obj, "c908-cpu", cpu0, TYPE_RISCV_HART_ARRAY);
->       object_initialize_child(obj, "k230-wdt0", &s->wdt[0], TYPE_K230_WDT);
->       object_initialize_child(obj, "k230-wdt1", &s->wdt[1], TYPE_K230_WDT);
-> +    object_initialize_child(obj, "sdhci0", &s->sdhci[0], TYPE_K230_SDHCI);
-> +    object_initialize_child(obj, "sdhci1", &s->sdhci[1], TYPE_K230_SDHCI);
->   
->       qdev_prop_set_uint32(DEVICE(cpu0), "hartid-base", 0);
->       qdev_prop_set_string(DEVICE(cpu0), "cpu-type", TYPE_RISCV_CPU_THEAD_C908);
-> @@ -343,11 +345,21 @@ static void k230_soc_realize(DeviceState *dev, Error **errp)
->       create_unimplemented_device("usb1", memmap[K230_DEV_USB1].base,
->                                   memmap[K230_DEV_USB1].size);
->   
-> -    create_unimplemented_device("sd0", memmap[K230_DEV_SD0].base,
-> -                                memmap[K230_DEV_SD0].size);
-> +    for (int i = 0; i < 2; i++) {
-> +        if (!sysbus_realize(SYS_BUS_DEVICE(&s->sdhci[i]), errp)) {
-> +            return;
-> +        }
-> +    }
+>   RX Machines
+>   -----------
+> diff --git a/tests/qtest/k230-sdhci-test.c b/tests/qtest/k230-sdhci-test.c
+> new file mode 100644
+> index 0000000000..5eedb130c3
+> --- /dev/null
+> +++ b/tests/qtest/k230-sdhci-test.c
+> @@ -0,0 +1,214 @@
+> +/*
+> + * QTest testcase for the Kendryte K230 SDHCI controllers
+> + *
+> + * Copyright (c) 2026 Xin Xie <xinxie908@gmail.com>
+> + *
+> + * SPDX-License-Identifier: GPL-2.0-or-later
+> + */
 > +
-> +    sysbus_mmio_map(SYS_BUS_DEVICE(&s->sdhci[0]), 0,
-> +                    memmap[K230_DEV_SD0].base);
-> +    sysbus_connect_irq(SYS_BUS_DEVICE(&s->sdhci[0]), 0,
-> +                       qdev_get_gpio_in(s->c908_plic, K230_SD0_IRQ));
->   
-> -    create_unimplemented_device("sd1", memmap[K230_DEV_SD1].base,
-> -                                memmap[K230_DEV_SD1].size);
-> +    sysbus_mmio_map(SYS_BUS_DEVICE(&s->sdhci[1]), 0,
-> +                    memmap[K230_DEV_SD1].base);
-> +    sysbus_connect_irq(SYS_BUS_DEVICE(&s->sdhci[1]), 0,
-> +                       qdev_get_gpio_in(s->c908_plic, K230_SD1_IRQ));
->   
->       create_unimplemented_device("qspi0", memmap[K230_DEV_QSPI0].base,
->                                   memmap[K230_DEV_QSPI0].size);
-> @@ -490,6 +502,20 @@ static void k230_machine_init(MachineState *machine)
->                               TYPE_RISCV_K230_SOC);
->       qdev_realize(DEVICE(&s->soc), NULL, &error_fatal);
->   
-> +    for (int i = 0; i < 2; i++) {
-> +        DriveInfo *dinfo = drive_get(IF_SD, 0, i);
-> +        DeviceState *card;
-> +
-> +        if (!dinfo) {
-> +            continue;
-> +        }
-> +
-> +        card = qdev_new(TYPE_SD_CARD);
-> +        qdev_prop_set_drive_err(card, "drive", blk_by_legacy_dinfo(dinfo),
-> +                                &error_fatal);
-> +        qdev_realize_and_unref(card, s->soc.sdhci[i].bus, &error_fatal);
-> +    }
-
-I think this should be done in k230_soc_realize() together with the realize()
-step of the other parts of the soc.
-
-
-LGTM otherwise.  Thanks,
-
-Daniel
-
-
-> +
->       /* Data Memory */
->       memory_region_add_subregion(sys_mem, memmap[K230_DEV_DDRC].base,
->                                   machine->ram);
-> diff --git a/include/hw/riscv/k230.h b/include/hw/riscv/k230.h
-> index 592e1c26bf..8e73366e56 100644
-> --- a/include/hw/riscv/k230.h
-> +++ b/include/hw/riscv/k230.h
-> @@ -18,6 +18,7 @@
->   #include "hw/core/boards.h"
->   #include "hw/riscv/riscv_hart.h"
->   #include "hw/watchdog/k230_wdt.h"
+> +#include "qemu/osdep.h"
+> +#include "qemu/timer.h"
+> +#include "qemu/units.h"
+> +#include "libqtest.h"
+> +#include "libqos/sdhci-cmd.h"
 > +#include "hw/sd/k230_sdhci.h"
+> +#include "hw/sd/sdhci-internal.h"
+> +
+> +#define K230_SD0_BASE          0x91580000
+> +#define K230_SD1_BASE          0x91581000
+> +#define K230_PLIC_PENDING      0xf00001000ULL
+> +#define K230_SD1_IRQ           144
+> +
+> +#define K230_SD_TEST_IMAGE_SIZE (2 * MiB)
+> +#define K230_SD_TEST_BLOCK_SIZE 512
+> +
+> +static void test_registers(void)
+> +{
+> +    QTestState *qts = qtest_init("-machine k230");
+> +    uint64_t capabilities;
+> +    uint64_t expected = K230_SDHCI_CAPAREG_RESET;
+> +
+> +    /* Only capabilities unsupported by the QEMU model are removed. */
+> +    expected = FIELD_DP64(expected, SDHC_CAPAB, ASYNC_INT, 0);
+> +    expected = FIELD_DP64(expected, SDHC_CAPAB, TIMER_RETUNING, 0);
+> +    expected = FIELD_DP64(expected, SDHC_CAPAB, RETUNING_MODE, 0);
+> +    expected = FIELD_DP64(expected, SDHC_CAPAB, ADMA3, 0);
+> +    capabilities = qtest_readq(qts, K230_SD0_BASE + SDHC_CAPAB);
+> +    g_assert_cmphex(capabilities, ==, expected);
+> +
+> +    /* Preset Value registers use the TRM reset values and are read-only. */
+> +    g_assert(qtest_readw(qts, K230_SD0_BASE + K230_SDHCI_PRESET_INIT) ==
+> +             K230_SDHCI_PRESET_INIT_RESET);
+> +    g_assert(qtest_readw(qts, K230_SD0_BASE +
+> +                         K230_SDHCI_PRESET_DEFAULT_SPEED) ==
+> +             K230_SDHCI_PRESET_DEFAULT_SPEED_RESET);
+> +    g_assert(qtest_readw(qts, K230_SD0_BASE +
+> +                         K230_SDHCI_PRESET_HIGH_SPEED) ==
+> +             K230_SDHCI_PRESET_HIGH_SPEED_RESET);
+> +    g_assert(qtest_readw(qts, K230_SD0_BASE + K230_SDHCI_PRESET_SDR12) ==
+> +             K230_SDHCI_PRESET_SDR12_RESET);
+> +    g_assert(qtest_readw(qts, K230_SD0_BASE + K230_SDHCI_PRESET_SDR25) ==
+> +             K230_SDHCI_PRESET_SDR25_RESET);
+> +    g_assert(qtest_readw(qts, K230_SD0_BASE + K230_SDHCI_PRESET_SDR50) ==
+> +             K230_SDHCI_PRESET_SDR50_RESET);
+> +    g_assert(qtest_readw(qts, K230_SD0_BASE + K230_SDHCI_PRESET_SDR104) ==
+> +             K230_SDHCI_PRESET_SDR104_RESET);
+> +    g_assert(qtest_readw(qts, K230_SD0_BASE + K230_SDHCI_PRESET_DDR50) ==
+> +             K230_SDHCI_PRESET_DDR50_RESET);
+> +
+> +    qtest_writew(qts, K230_SD0_BASE + K230_SDHCI_PRESET_SDR50, 0xffff);
+> +    g_assert(qtest_readw(qts, K230_SD0_BASE + K230_SDHCI_PRESET_SDR50) ==
+> +             K230_SDHCI_PRESET_SDR50_RESET);
+> +
+> +    /* Extension-area pointers use their documented read-only reset values. */
+> +    g_assert(qtest_readw(qts, K230_SD0_BASE + K230_SDHCI_P_UHS2_SETTINGS) ==
+> +             K230_SDHCI_P_UHS2_SETTINGS_RESET);
+> +    g_assert(qtest_readw(qts, K230_SD0_BASE + K230_SDHCI_P_UHS2_HOST_CAPAB) ==
+> +             K230_SDHCI_P_UHS2_HOST_CAPAB_RESET);
+> +    g_assert(qtest_readw(qts, K230_SD0_BASE + K230_SDHCI_P_UHS2_TEST) ==
+> +             K230_SDHCI_P_UHS2_TEST_RESET);
+> +    g_assert(qtest_readw(qts, K230_SD0_BASE + K230_SDHCI_P_EMBEDDED_CNTRL) ==
+> +             K230_SDHCI_P_EMBEDDED_CNTRL_RESET);
+> +    g_assert(qtest_readw(qts, K230_SD0_BASE + K230_SDHCI_P_VENDOR_AREA1) ==
+> +             K230_SDHCI_P_VENDOR_AREA1_RESET);
+> +    g_assert(qtest_readw(qts, K230_SD0_BASE + K230_SDHCI_P_VENDOR_AREA2) ==
+> +             K230_SDHCI_P_VENDOR_AREA2_RESET);
+> +
+> +    qtest_writew(qts, K230_SD0_BASE + K230_SDHCI_P_VENDOR_AREA1, 0xffff);
+> +    g_assert(qtest_readw(qts, K230_SD0_BASE + K230_SDHCI_P_VENDOR_AREA1) ==
+> +             K230_SDHCI_P_VENDOR_AREA1_RESET);
+> +
+> +    /* The virtual PHY is always ready and software cannot clear PWRGOOD. */
+> +    g_assert((qtest_readl(qts, K230_SD0_BASE + K230_SDHCI_PHY_CNFG) &
+> +              K230_SDHCI_PHY_CNFG_PWRGOOD) == K230_SDHCI_PHY_CNFG_PWRGOOD);
+> +    qtest_writel(qts, K230_SD0_BASE + K230_SDHCI_PHY_CNFG, 0);
+> +    g_assert(qtest_readl(qts, K230_SD0_BASE + K230_SDHCI_PHY_CNFG) ==
+> +             K230_SDHCI_PHY_CNFG_PWRGOOD);
+> +
+> +    /* Vendor storage is writable and private to each controller instance. */
+> +    qtest_writel(qts, K230_SD0_BASE + K230_SDHCI_P_VENDOR_AREA1_RESET,
+> +                 0x89abcdef);
+> +    g_assert(qtest_readl(qts, K230_SD0_BASE +
+> +                         K230_SDHCI_P_VENDOR_AREA1_RESET) ==
+> +             0x89abcdef);
+> +    g_assert(qtest_readl(qts, K230_SD1_BASE +
+> +                         K230_SDHCI_P_VENDOR_AREA1_RESET) == 0);
+> +
+> +    qtest_quit(qts);
+> +}
+> +
+> +static void test_card_detect(void)
+> +{
+> +    g_autofree char *path = NULL;
+> +    int fd = g_file_open_tmp("k230-sd-XXXXXX.img", &path, NULL);
+> +    QTestState *qts;
+> +
+> +    g_assert(fd >= 0);
+> +    g_assert(ftruncate(fd, K230_SD_TEST_IMAGE_SIZE) == 0);
+> +    close(fd);
+> +
+> +    qts = qtest_initf("-machine k230 "
+> +                      "-drive if=sd,index=1,format=raw,file=%s", path);
+> +
+> +    /* Card insertion becomes visible after the generic insertion delay. */
+> +    qtest_clock_step(qts, NANOSECONDS_PER_SECOND);
+> +    g_assert((qtest_readl(qts, K230_SD1_BASE + SDHC_PRNSTS) &
+> +              SDHC_CARD_PRESENT) == SDHC_CARD_PRESENT);
+> +    g_assert((qtest_readl(qts, K230_SD0_BASE + SDHC_PRNSTS) &
+> +              SDHC_CARD_PRESENT) == 0);
+> +
+> +    /* Route a command-complete event through SDHCI to the K230 PLIC. */
+> +    qtest_writew(qts, K230_SD1_BASE + SDHC_NORINTSTSEN,
+> +                 SDHC_NISEN_CMDCMP);
+> +    qtest_writew(qts, K230_SD1_BASE + SDHC_NORINTSIGEN,
+> +                 SDHC_NISEN_CMDCMP);
+> +    g_assert((qtest_readw(qts, K230_SD1_BASE + SDHC_NORINTSTSEN) &
+> +              SDHC_NISEN_CMDCMP) != 0);
+> +    g_assert((qtest_readw(qts, K230_SD1_BASE + SDHC_NORINTSIGEN) &
+> +              SDHC_NISEN_CMDCMP) != 0);
+> +    qtest_writew(qts, K230_SD1_BASE + SDHC_CLKCON,
+> +                 SDHC_CLOCK_INT_EN | SDHC_CLOCK_SDCLK_EN);
+> +    qtest_writew(qts, K230_SD1_BASE + SDHC_CMDREG,
+> +                 SDHC_APP_CMD | SDHC_CMD_RESPONSE);
+> +    g_assert((qtest_readw(qts, K230_SD1_BASE + SDHC_NORINTSTS) &
+> +              SDHC_NIS_CMDCMP) != 0);
+> +    g_assert((qtest_readl(qts, K230_PLIC_PENDING +
+> +                          K230_SD1_IRQ / 32 * sizeof(uint32_t)) &
+> +              BIT(K230_SD1_IRQ % 32)) != 0);
+> +
+> +    qtest_quit(qts);
+> +    unlink(path);
+> +}
+> +
+> +static void k230_sdhci_select_card(QTestState *qts)
+> +{
+> +    uint16_t rca;
+> +
+> +    /* Reset the controller and enable its internal and SD clocks. */
+> +    qtest_writeb(qts, K230_SD1_BASE + SDHC_SWRST, SDHC_RESET_ALL);
+> +    qtest_writew(qts, K230_SD1_BASE + SDHC_CLKCON,
+> +                 SDHC_CLOCK_INT_EN | SDHC_CLOCK_INT_STABLE |
+> +                 SDHC_CLOCK_SDCLK_EN);
+> +
+> +    /* Run the SD identification sequence and select the assigned RCA. */
+> +    sdhci_cmd_regs(qts, K230_SD1_BASE, 0, 0, 0, 0, SDHC_APP_CMD);
+> +    sdhci_cmd_regs(qts, K230_SD1_BASE, 0, 0, 0x41200000, 0, 41 << 8);
+> +    sdhci_cmd_regs(qts, K230_SD1_BASE, 0, 0, 0, 0, SDHC_ALL_SEND_CID);
+> +    sdhci_cmd_regs(qts, K230_SD1_BASE, 0, 0, 0, 0,
+> +                   SDHC_SEND_RELATIVE_ADDR | SDHC_CMD_RESPONSE);
+> +    rca = qtest_readl(qts, K230_SD1_BASE + SDHC_RSPREG0) >> 16;
+> +    sdhci_cmd_regs(qts, K230_SD1_BASE, 0, 0, rca << 16, 0,
+> +                   SDHC_SELECT_DESELECT_CARD);
+> +}
+> +
+> +static void test_card_io(void)
+> +{
+> +    static const char read_data[] = "K230 SDHCI read";
+> +    static const char write_data[] = "K230 SDHCI write";
+> +    g_autofree char *path = NULL;
+> +    char buffer[K230_SD_TEST_BLOCK_SIZE];
+> +    int fd = g_file_open_tmp("k230-sd-XXXXXX.img", &path, NULL);
+> +    QTestState *qts;
+> +
+> +    /* Seed block zero so the controller read can be checked independently. */
+> +    g_assert(fd >= 0);
+> +    g_assert(ftruncate(fd, K230_SD_TEST_IMAGE_SIZE) == 0);
+> +    g_assert(pwrite(fd, read_data, sizeof(read_data), 0) == sizeof(read_data));
+> +    close(fd);
+> +
+> +    qts = qtest_initf("-machine k230 "
+> +                      "-drive if=sd,index=1,format=raw,auto-read-only=off,"
+> +                      "file=%s", path);
+> +    k230_sdhci_select_card(qts);
+> +
+> +    /* Read block zero through the SDHCI PIO data port. */
+> +    memset(buffer, 0, sizeof(buffer));
+> +    g_assert(sdhci_read_cmd(qts, K230_SD1_BASE, buffer,
+> +                            sizeof(read_data)) == sizeof(read_data));
+> +    g_assert(memcmp(buffer, read_data, sizeof(read_data)) == 0);
+> +
+> +    /* Write through SDHCI, then verify the data reached the backing image. */
+> +    sdhci_write_cmd(qts, K230_SD1_BASE, write_data, sizeof(write_data),
+> +                    K230_SD_TEST_BLOCK_SIZE);
+> +    qtest_quit(qts);
+> +
+> +    fd = open(path, O_RDONLY);
+> +    g_assert(fd >= 0);
+> +    memset(buffer, 0, sizeof(buffer));
+> +    g_assert(pread(fd, buffer, sizeof(write_data), 0) == sizeof(write_data));
+> +    close(fd);
+> +    g_assert(memcmp(buffer, write_data, sizeof(write_data)) == 0);
+> +
+> +    unlink(path);
+> +}
+> +
+> +int main(int argc, char *argv[])
+> +{
+> +    g_test_init(&argc, &argv, NULL);
+> +
+> +    qtest_add_func("/k230-sdhci/registers", test_registers);
+> +    qtest_add_func("/k230-sdhci/card-detect", test_card_detect);
+> +    qtest_add_func("/k230-sdhci/card-io", test_card_io);
+> +
+> +    return g_test_run();
+> +}
+> diff --git a/tests/qtest/meson.build b/tests/qtest/meson.build
+> index 56ff860e21..0600b1e807 100644
+> --- a/tests/qtest/meson.build
+> +++ b/tests/qtest/meson.build
+> @@ -297,7 +297,10 @@ qtests_riscv64 = ['riscv-csr-test'] + \
+>     (config_all_devices.has_key('CONFIG_IOMMU_TESTDEV') and
+>      config_all_devices.has_key('CONFIG_RISCV_IOMMU') ?
+>      ['iommu-riscv-test'] : []) + \
+> -  (config_all_devices.has_key('CONFIG_K230') ? ['k230-wdt-test'] : [])
+> +  (config_all_devices.has_key('CONFIG_K230') ? [
+> +    'k230-wdt-test',
+> +    'k230-sdhci-test',
+> +  ] : [])
 >   
->   #define C908_CPU_HARTID   (0)
+>   qtests_hexagon = ['boot-serial-test']
 >   
-> @@ -33,6 +34,7 @@ typedef struct K230SoCState {
->       RISCVHartArrayState c908_cpu; /* Small core */
->   
->       K230WdtState wdt[2];
-> +    K230SDHCIState sdhci[2];
->       MemoryRegion sram;
->       MemoryRegion bootrom;
->   
-> @@ -129,6 +131,8 @@ enum {
->       K230_UART4_IRQ  = 20,
->       K230_WDT0_IRQ   = 107,
->       K230_WDT1_IRQ   = 108,
-> +    K230_SD0_IRQ    = 142,
-> +    K230_SD1_IRQ    = 144,
->   };
->   
->   #define K230_UART_COUNT 5
 
 
