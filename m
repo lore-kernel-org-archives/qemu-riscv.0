@@ -4,136 +4,135 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62E65C5AC7A
-	for <qemu-riscv@archiver.kernel.org>; Fri,  7 Aug 2026 10:59:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBC93C5AC7A
+	for <qemu-riscv@archiver.kernel.org>; Fri,  7 Aug 2026 11:05:09 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wsII3-0007V8-Gj; Fri, 07 Aug 2026 06:59:03 -0400
+	id 1wsINj-0001Cr-Ai; Fri, 07 Aug 2026 07:04:55 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wsII2-0007UI-5l
- for qemu-riscv@nongnu.org; Fri, 07 Aug 2026 06:59:02 -0400
+ id 1wsINh-0001CO-Kx
+ for qemu-riscv@nongnu.org; Fri, 07 Aug 2026 07:04:53 -0400
 Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wsII0-0005MD-22
- for qemu-riscv@nongnu.org; Fri, 07 Aug 2026 06:59:01 -0400
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+ id 1wsINf-00067i-Gw
+ for qemu-riscv@nongnu.org; Fri, 07 Aug 2026 07:04:53 -0400
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6779WCre564654
- for <qemu-riscv@nongnu.org>; Fri, 7 Aug 2026 10:58:59 GMT
+ 6777iQ1R3533333
+ for <qemu-riscv@nongnu.org>; Fri, 7 Aug 2026 11:04:49 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- Q5JGj+RFeNMQA3Y0dMKVB34VT6Ay76sI1yXCt6aZFQA=; b=JGicZj2Pg+gqAabS
- xsWcGThsozLB9khqYalvIbN0iTJGG/sAtJuETPRbO9cwWIUSsZHzWYlXDKx+crQC
- mE7o3DQSpnhdHxZhAHOzBrktUd94TttugZneoU7+nOtL1nzUYBCYpRChcSlnUc8R
- MY75OMMnpqMWL7AGVKvdgLhnrpULzs787TXqo/kLH4yfsDkxerazyYBU+gvuZGKB
- gr/fiVrsPPcguvcGvbcd0dPSuA+xG6o3ppSZWnLVGnvenI0hpZ3aZSDEhtQVtHKI
- qrS4mSyyZpM9fVqIR8hEWObs2eOFSeQ1/zxmKsRXrhEo66Ppvz7BpAq5Cf9U3Ywj
- 5ZsZ7A==
-Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com
- [209.85.160.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fwctp89fs-1
+ HnwgKbBW3JF2Vo+MkABsFuBwZTQx16q+MAGpnqX1guM=; b=JjoITSMQKi+zPpjl
+ 37uTorb3B5uijxy0qcm2rlUFL2RSjdDSBbaBFLOPROdViRQ0WHrvF6cmtfM0wfaK
+ yYsD3BMkMLA7h3FQXx2KgeAqVBymsHEnC/4Nceyi3AtEcxaJz7iF9jKUU3NzgAl8
+ 7b2kRaSG5urbqZQyv810ux6A26py2RfHQj4ua3lAFFjjunb/37RWsulaiS/OINgW
+ 7jhWyYp7pOkKoqBQjJv4FwffzYYekfFxkdi8uohkl3857xolSEdgzLBgXNGi7nNo
+ H8/sarfMVjtaGQX1Ng12w4jaiDXHEzbRTMnQVHlLZUx3SlMiuNgBMWMf4Ru7l3Ic
+ BaMiRg==
+Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com
+ [209.85.222.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fvy6fup8m-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Fri, 07 Aug 2026 10:58:58 +0000 (GMT)
-Received: by mail-qt1-f197.google.com with SMTP id
- d75a77b69052e-51c1a9764f0so33341141cf.1
- for <qemu-riscv@nongnu.org>; Fri, 07 Aug 2026 03:58:58 -0700 (PDT)
+ for <qemu-riscv@nongnu.org>; Fri, 07 Aug 2026 11:04:49 +0000 (GMT)
+Received: by mail-qk1-f199.google.com with SMTP id
+ af79cd13be357-934963b2bc0so323114485a.3
+ for <qemu-riscv@nongnu.org>; Fri, 07 Aug 2026 04:04:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1786100338; x=1786705138; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1786100689; x=1786705489; darn=nongnu.org;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=Q5JGj+RFeNMQA3Y0dMKVB34VT6Ay76sI1yXCt6aZFQA=;
- b=EmA44FuhlbJYdyU/3nUz9WRxV065JwboXthX7Z5EldYwbqekHcW+zza4N4AXbHt4Kr
- ecEfcUIKF7IYBH0aLNwdoMScEpEDPwAZ4jGP+EW5deQK2B81jYDekkzb8mwjYjbAobB3
- cIr4DJntKwvXnm1AgAD/KqCiBIZ80aMI6u1ywjk8H5PcQWouXdfbLTvc46AUKeSN9jOj
- sUaWxrkGxGpKxYPnj923dHQUK0ikA+tXeLVRyGk323x+cJ5YNMjtdXzv9JQoMDq4NwHu
- tx7fciLJca4YpeROwYLvEuiWkvIgg4UgidlU5H60RZTvjcF8HlHPHTUyZwT7PTSdemox
- XR3w==
+ bh=HnwgKbBW3JF2Vo+MkABsFuBwZTQx16q+MAGpnqX1guM=;
+ b=DWOBFoi2QvqYITohAkheJ33gI1jKNlRc7gm7k8RzMJaE7ERFWr0ISC4p+3PIocdwiY
+ D2LlCovYlQAs5kp6Avzd53Y7djGoegUAQhoiqrJ01Uejn9HI5pXZc6LJcgp1oYtH+B82
+ Uc5ejyXH463VGN/eaXGnBlMTXVExcZq8WytwY6YNwW+Kjl+ykzMiVNHrt9itOi/8Qr/H
+ 9zdTEa2HUGJ+Otd7Yi/Msk7akgbjtE3eEy7iWNucAVX5WOfN9gmnApgou/I7QUcl7jHt
+ UrDezprj+tSkC3pPBqLZ3SpkF2HbgZbyc00ozBjmU3TmwJxyohfuRwJJ6frVo5VL5dx7
+ oXng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786100338; x=1786705138;
+ d=1e100.net; s=20251104; t=1786100689; x=1786705489;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=Q5JGj+RFeNMQA3Y0dMKVB34VT6Ay76sI1yXCt6aZFQA=;
- b=ioCXiycTKZUPeCBUEUnhlEeJ3R0SS1HUpJ+p14rr2ee17mU/xIkUajnURD6oSjWCQO
- 6fdtdvnZQzSp3otHANjbpPQ354ECe2kEOStWmNpQluyrVli/nl1LrVl1zzTMs8em3P3d
- UHAln4D37PRPUWY94zPWRHK3buUChzJ1ADT6wC5J0uJ0rDIvr+C+b0uFUtf5uS5znk6f
- /CcrOTk+rWPnvfLYKeeLf90rqd04sme4AdNR1airPeFuF2vpWGA5m/rwlq5PlNP/OFUI
- 6DpFg5Rt7ROXvC4xpJQphLPtTOphGL0bmR06k7szpNl2r62HZwPk2e+81PTzW9qmo8c5
- H7Hw==
-X-Gm-Message-State: AOJu0Ywp1B/yX9wEahSLVz3Kgztn/xhKKGYmK02ip7ytkSwFYxGrH46q
- +dv0nAqJit/GeDU2iVgLcE2XAmqNz9QyFlvoLKpx6Acqb1eS4YI7Tf3RhZvCida3c7AJGbN5JVs
- QNUc1lJBdATUvtSrS8tbWmnYznXry8XczazX4jnfPNIvR2IpGREmm67dDfg==
-X-Gm-Gg: AR+sD11CTVZ5GFmIMPZAaxTbenSc6s79Gm5kiQUgiqENXHrG5Bs1MfFXzalI9NtHUQu
- 6pdvpqb7YIC4ruO8R3K/7pNr1SVSgZrU8UfmzwPn3DpOdjhdJQYz37VYWV12tQ1fK18z7nl/uSX
- aFSQ38myBmQlZi4J5gfvFB9qqzRuaSP5v/Tw8IUzAeXGBiWncQrkNEkG4bzsFYp9XQW+ADJvEE0
- OgCEn1ZZ/HiLjfKgEhCFSITrCNb0tVe2EVB6ToUDa7jr7J7yRM/dCeuN3dYVx2YnVn98Omd911g
- KHnSgb5V4+zs+JzRj97KYydsXV+r84JyLBuq6nyxyplPV3TyiHrNHt0JHpj6hg3p1pT5Zc99uHe
- +LD3NN9GkrZ+5tp8B/WJToFw+MF3TSIbSw0pX
-X-Received: by 2002:a05:622a:1e12:b0:516:dda7:51e0 with SMTP id
- d75a77b69052e-52ce5ff11acmr232472301cf.17.1786100338039; 
- Fri, 07 Aug 2026 03:58:58 -0700 (PDT)
-X-Received: by 2002:a05:622a:1e12:b0:516:dda7:51e0 with SMTP id
- d75a77b69052e-52ce5ff11acmr232471991cf.17.1786100337543; 
- Fri, 07 Aug 2026 03:58:57 -0700 (PDT)
+ bh=HnwgKbBW3JF2Vo+MkABsFuBwZTQx16q+MAGpnqX1guM=;
+ b=dDEcNzR5TiD6P8hf2mEaFC66UOA5EJCWJlKIPlTkupCsT8XN9+X1RYhIMgt5tA5o6t
+ +YHmcmqRz7biuV310Tk/frmWLCKknK7NBEVjQm3BHbJBcgHYiwwIH3JjiW2itLmkzdKl
+ wrNIz8n9mCEeuD2J8BUrWXPfRoM3QvEaehpBMNTcaAlCCwNiEAJ59JhlYJxffZ/ayz/M
+ gxJtn3odMyaGWnjoffds7Q2D/YvS+LV/HdjWuQikM2rhj1lUcESqH/o/2isoe262V26V
+ NfgX/eSlTnHZLA179yjEL3l6ZdnTc2TFuCurnL9LwGu5znaeEMb/GNc/ZtuRaUuvcnna
+ ZF3w==
+X-Gm-Message-State: AOJu0YwjYx4oEyojuLNkPRM3+Kmk/09Vpil4t9QjHjdOByCmIHa2xU2t
+ 0b1JGFvQ5AJJ6iDyvGzUwih2IfmVgSHTMzRJZsJ0ylJREwnOKvTqZgu/CU9ZUCjytegLZSPtxjg
+ 4F6MtcR8+BQrHvMbLMgsTa8hjqHrvI5cQO6LO6HxlEj6JL0CzA5x6eV6MiQ==
+X-Gm-Gg: AR+sD11Psyap+S/Ktu9eFbz9/5cCF4hBfSp+9/UOc0RMqb2/FmgY6G955jpy51u+eyh
+ Ce0vsqwc+e4j5yVEmkabjFaczBDElo5pSiB5x1/FnNvghkS18Iv4jA5RPRCJA/Hup8WRlfpezuk
+ BKIuGnxZ+TLr7vrdZCsIqe6bPqH+MDJfT4qyATvgn11MmtRxmoygktQwTHMEjIs0jqmUJZ8Ur5I
+ 6+cDHQeval8xal9VFFqbg8x3ELDyIusRSVor9ftjPqkazIrDSLKsccwGJdNLe1J23i6457RdsGW
+ aZaUtKJrLucP7YqW6zfSZSoLnEGYQetz4tp8ZMC+CyqNg8Xxk6nsH/i1W5QQEycs/N056Ga2iT8
+ IWCxNdhvo00zO7jjH/mALGeGEes3m0Z/uP4Th
+X-Received: by 2002:a05:620a:a918:b0:92e:c93a:65e2 with SMTP id
+ af79cd13be357-936492aee28mr1976262485a.39.1786100689026; 
+ Fri, 07 Aug 2026 04:04:49 -0700 (PDT)
+X-Received: by 2002:a05:620a:a918:b0:92e:c93a:65e2 with SMTP id
+ af79cd13be357-936492aee28mr1976257585a.39.1786100688615; 
+ Fri, 07 Aug 2026 04:04:48 -0700 (PDT)
 Received: from [192.168.68.104] ([187.11.154.152])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-52d1637f4a1sm9546241cf.9.2026.08.07.03.58.54
+ af79cd13be357-9366e261918sm121192485a.34.2026.08.07.04.04.46
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 07 Aug 2026 03:58:57 -0700 (PDT)
-Message-ID: <e2863b2a-83e2-4a9f-937e-e2f122a5f190@oss.qualcomm.com>
-Date: Fri, 7 Aug 2026 07:58:53 -0300
+ Fri, 07 Aug 2026 04:04:47 -0700 (PDT)
+Message-ID: <896d54b5-a373-428e-8256-9003b2697744@oss.qualcomm.com>
+Date: Fri, 7 Aug 2026 08:04:44 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 3/3] tests/qtest: add K230 SDHCI tests
-To: Xin Xie <xinxie908@gmail.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, Chao Liu <chao.liu@processmission.com>,
- Alistair Francis <alistair.francis@wdc.com>, Fabiano Rosas
- <farosas@suse.de>, Laurent Vivier <lvivier@redhat.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Paolo Bonzini <pbonzini@redhat.com>,
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
- Weiwei Li <liwei1518@gmail.com>
-References: <20260729105904.272939-1-xinxie908@gmail.com>
- <20260729105904.272939-4-xinxie908@gmail.com>
+Subject: Re: [PATCH] target/riscv: Fix PC sync in trans_sspopchk for CFI
+ exception handling
+To: A-Shehab <ahshehab24@gmail.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, Max Chou <max.chou@sifive.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
+ <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Chao Liu <chao.liu@processmission.com>
+References: <20260730181852.1622-1-ahshehab24@gmail.com>
 From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Content-Language: en-US
-In-Reply-To: <20260729105904.272939-4-xinxie908@gmail.com>
+In-Reply-To: <20260730181852.1622-1-ahshehab24@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Authority-Analysis: v=2.4 cv=Fp01OWrq c=1 sm=1 tr=0 ts=6a75ba72 cx=c_pps
- a=EVbN6Ke/fEF3bsl7X48z0g==:117 a=iMfxv9gflPUPBcmW7/Gq5Q==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODA3MDA4NSBTYWx0ZWRfXzSnz+NqfV/BF
+ xy47U6kjsG8AMgfJYUMAID7rzevScHod1q6DoAl815KgBtn+sinGiHiAwDO/03puswcdypCLYAv
+ JJkRspQhp61drpFYWh8hcNThUQuZZTRWLYfPhURTkjFyq+PcfRIGM/OutFmbfZc6v1GEbUQUNLb
+ +0TIZm/QfnQvqFvPAh5jnZuTmjRkFptV6fk2y2yhaNbjz9owY2QsDy71DG5yRR2MuXQrdlEbq0v
+ tifNp1vRzIvoQO2hHmZa13tQIeoSifvX2F7E/FeJaAIBRPmJABnBNrRzQBMQYyGgjq3TptJplHK
+ sH1H74/ReXyV9R2YCKZLzO38jH+96pAFdzFWOk65IkI5y6FGTa1jvw9SXxMqLjn/t/J6Sw00xE5
+ qxy/ZwFQYxPy25/TeVi+akIyuiejMlDelpHzL1N/EpAr24lUABeE/CtnMfJNywiW6lVh9fO9mko
+ 8QGUhlvo0h52kgl6O/g==
+X-Authority-Analysis: v=2.4 cv=DvhmPm/+ c=1 sm=1 tr=0 ts=6a75bbd1 cx=c_pps
+ a=HLyN3IcIa5EE8TELMZ618Q==:117 a=iMfxv9gflPUPBcmW7/Gq5Q==:17
  a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
- a=pGLkceISAAAA:8 a=EUspDBNiAAAA:8 a=5XHA67EirIWxhrRuoN8A:9 a=QEXdDO2ut3YA:10
- a=a_PwQJl-kcHnX1M80qC6:22
-X-Proofpoint-GUID: WsmfOtNqztEgzJ4oyqt4-hOpYgMnUuw8
-X-Proofpoint-ORIG-GUID: WsmfOtNqztEgzJ4oyqt4-hOpYgMnUuw8
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODA3MDA4NCBTYWx0ZWRfX6rbeippoKJOG
- eWXUOxUbc2dBqz9DhWqVibQ1Wphxd76kIzhHmAfRufph23op7Hwj8eGK/8sQpDpq8+tGQQrFqrF
- M1qJAmeNsJYcrolh0Sh2jThyYKnRd6oNhUsjuudSzUf40EnXix0EbZ03ZSZB06Up3SlAJ+cjsWx
- xw7HF8RmHnmBnI93+Mmvp4tEeeR5X0wGK1pe7u+nMhZ6JRMPmtfxYefAhoGE0nmG4DF38iT1kEt
- XG1lGV0gEVnlgmxAg+7+5ktjZetkz7p8oJw/P0sy9aPAUt2D7U4o9lodumAsDjQJVKLaFxK+aa7
- 8B6kZRZoTvNQ2wqyozXelej7Ih3x3El5xYhVYlho6ooayFYedxCTWo9jMGunhofiLBMJf1IGX7Y
- X38VYXMP6QYYlON1wp0C+IqiBH3FLaiwjo/c9SFFiUerV8CFruDMh8Plb025Zgwj4vMLhUbnnBM
- wG+rvF5Icoaag8YHh/Q==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODA3MDA4NCBTYWx0ZWRfX06bHV2Ek5/UR
- 9t8QK4POZaOJ/Onis3W+fY6I7hrqtvuIWZZ51fZQOI3K2JpDKr1eQu49UImveGbMMelk21gddFc
- 0V64VBLOhQSll/keU5rrfTlIFozBW10=
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
+ a=p0WdMEafAAAA:8 a=VwQbUJbxAAAA:8 a=pFyQfRViAAAA:8 a=pGLkceISAAAA:8
+ a=EUspDBNiAAAA:8 a=UFTaeZGCLHsyUKFxc-IA:9 a=QEXdDO2ut3YA:10
+ a=bTQJ7kPSJx9SKPbeHEYW:22 a=oJz5jJLG1JtSoe7EL652:22
+X-Proofpoint-ORIG-GUID: LBNveEO1WbI5VKOoNz0bdp9es5UAFg6_
+X-Proofpoint-GUID: LBNveEO1WbI5VKOoNz0bdp9es5UAFg6_
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODA3MDA4NSBTYWx0ZWRfX6qYH6yFCHnS7
+ jwgRjf/TNY6ZQTL9CGaCmyNB9xMrnXk9MJgzGdsmbv2jM1EHTN3hRD9gau1q/uJw2SwcfJiZ7C+
+ x8WjWi7p0f57/5pn25s8o45pvtbX4UQ=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-07_01,2026-08-06_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 priorityscore=1501 spamscore=0 clxscore=1015 adultscore=0
- impostorscore=0 suspectscore=0 malwarescore=0 lowpriorityscore=0 bulkscore=0
+ priorityscore=1501 bulkscore=0 clxscore=1015 spamscore=0 malwarescore=0
+ suspectscore=0 adultscore=0 impostorscore=0 lowpriorityscore=0 phishscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608070084
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608070085
 Received-SPF: pass client-ip=205.220.180.131;
  envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
 X-Spam_score_int: -27
@@ -160,273 +159,70 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 
-On 7/29/2026 7:59 AM, Xin Xie wrote:
-> Add qtests covering the K230-specific SDHCI register layout, capability
-> masking, preset values, extension pointers, PHY power status and
-> per-controller vendor register storage.
+On 7/30/2026 3:18 PM, A-Shehab wrote:
+> From: Max Chou <max.chou@sifive.com>
 > 
-> Verify card detection and interrupt delivery through the K230 PLIC.
-> Exercise basic PIO reads and writes with an attached SD card image and
-> check that written data reaches the backing file.
+> Move gen_update_pc call before conditional logic to ensure consistent
+> PC state regardless of execution path.
 > 
-> Signed-off-by: Xin Xie <xinxie908@gmail.com>
+> Previously, the host instructions generated to update the cpu_pc were
+> only executed in the failure path when shadow stack validation failed.
+> This created inconsistent PC synchronization.
+> 
+> This inconsistency caused issues in CF_PCREL mode where subsequent
+> instructions calculated wrong relative offsets from stale pc_save
+> values, and could lead to incorrect exception return addresses.
+> 
+> This fix ensures PC is always synchronized before any helper that
+> might raise an exception, maintaining consistent translator state
+> across all execution paths.
+> 
+> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/4118
+> Signed-off-by: Max Chou <max.chou@sifive.com>
+> [ahshehab: rebased on current master; file moved to
+>   target/riscv/tcg/insn_trans/ and the ssp load is now 64-bit wide]
+> Tested-by: A-Shehab <ahshehab24@gmail.com>
+> Signed-off-by: A-Shehab <ahshehab24@gmail.com>
 > ---
 
 Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 
->   MAINTAINERS                   |   1 +
->   tests/qtest/k230-sdhci-test.c | 214 ++++++++++++++++++++++++++++++++++
->   tests/qtest/meson.build       |   5 +-
->   3 files changed, 219 insertions(+), 1 deletion(-)
->   create mode 100644 tests/qtest/k230-sdhci-test.c
+> This is a repost of Max Chou's patch from 2025-11-05 [1], which did not
+> receive any review. Rebased onto current master: the file moved to
+> target/riscv/tcg/insn_trans/ and the ssp load is now a 64-bit load, so
+> the original patch no longer applies.
 > 
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 06285352c4..99c4c3294b 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -1831,6 +1831,7 @@ F: include/hw/riscv/k230.h
->   F: include/hw/watchdog/k230_wdt.h
->   F: include/hw/sd/k230_sdhci.h
->   F: tests/qtest/k230-wdt-test.c
-> +F: tests/qtest/k230-sdhci-test.c
->   
->   RX Machines
->   -----------
-> diff --git a/tests/qtest/k230-sdhci-test.c b/tests/qtest/k230-sdhci-test.c
-> new file mode 100644
-> index 0000000000..5eedb130c3
-> --- /dev/null
-> +++ b/tests/qtest/k230-sdhci-test.c
-> @@ -0,0 +1,214 @@
-> +/*
-> + * QTest testcase for the Kendryte K230 SDHCI controllers
-> + *
-> + * Copyright (c) 2026 Xin Xie <xinxie908@gmail.com>
-> + *
-> + * SPDX-License-Identifier: GPL-2.0-or-later
-> + */
-> +
-> +#include "qemu/osdep.h"
-> +#include "qemu/timer.h"
-> +#include "qemu/units.h"
-> +#include "libqtest.h"
-> +#include "libqos/sdhci-cmd.h"
-> +#include "hw/sd/k230_sdhci.h"
-> +#include "hw/sd/sdhci-internal.h"
-> +
-> +#define K230_SD0_BASE          0x91580000
-> +#define K230_SD1_BASE          0x91581000
-> +#define K230_PLIC_PENDING      0xf00001000ULL
-> +#define K230_SD1_IRQ           144
-> +
-> +#define K230_SD_TEST_IMAGE_SIZE (2 * MiB)
-> +#define K230_SD_TEST_BLOCK_SIZE 512
-> +
-> +static void test_registers(void)
-> +{
-> +    QTestState *qts = qtest_init("-machine k230");
-> +    uint64_t capabilities;
-> +    uint64_t expected = K230_SDHCI_CAPAREG_RESET;
-> +
-> +    /* Only capabilities unsupported by the QEMU model are removed. */
-> +    expected = FIELD_DP64(expected, SDHC_CAPAB, ASYNC_INT, 0);
-> +    expected = FIELD_DP64(expected, SDHC_CAPAB, TIMER_RETUNING, 0);
-> +    expected = FIELD_DP64(expected, SDHC_CAPAB, RETUNING_MODE, 0);
-> +    expected = FIELD_DP64(expected, SDHC_CAPAB, ADMA3, 0);
-> +    capabilities = qtest_readq(qts, K230_SD0_BASE + SDHC_CAPAB);
-> +    g_assert_cmphex(capabilities, ==, expected);
-> +
-> +    /* Preset Value registers use the TRM reset values and are read-only. */
-> +    g_assert(qtest_readw(qts, K230_SD0_BASE + K230_SDHCI_PRESET_INIT) ==
-> +             K230_SDHCI_PRESET_INIT_RESET);
-> +    g_assert(qtest_readw(qts, K230_SD0_BASE +
-> +                         K230_SDHCI_PRESET_DEFAULT_SPEED) ==
-> +             K230_SDHCI_PRESET_DEFAULT_SPEED_RESET);
-> +    g_assert(qtest_readw(qts, K230_SD0_BASE +
-> +                         K230_SDHCI_PRESET_HIGH_SPEED) ==
-> +             K230_SDHCI_PRESET_HIGH_SPEED_RESET);
-> +    g_assert(qtest_readw(qts, K230_SD0_BASE + K230_SDHCI_PRESET_SDR12) ==
-> +             K230_SDHCI_PRESET_SDR12_RESET);
-> +    g_assert(qtest_readw(qts, K230_SD0_BASE + K230_SDHCI_PRESET_SDR25) ==
-> +             K230_SDHCI_PRESET_SDR25_RESET);
-> +    g_assert(qtest_readw(qts, K230_SD0_BASE + K230_SDHCI_PRESET_SDR50) ==
-> +             K230_SDHCI_PRESET_SDR50_RESET);
-> +    g_assert(qtest_readw(qts, K230_SD0_BASE + K230_SDHCI_PRESET_SDR104) ==
-> +             K230_SDHCI_PRESET_SDR104_RESET);
-> +    g_assert(qtest_readw(qts, K230_SD0_BASE + K230_SDHCI_PRESET_DDR50) ==
-> +             K230_SDHCI_PRESET_DDR50_RESET);
-> +
-> +    qtest_writew(qts, K230_SD0_BASE + K230_SDHCI_PRESET_SDR50, 0xffff);
-> +    g_assert(qtest_readw(qts, K230_SD0_BASE + K230_SDHCI_PRESET_SDR50) ==
-> +             K230_SDHCI_PRESET_SDR50_RESET);
-> +
-> +    /* Extension-area pointers use their documented read-only reset values. */
-> +    g_assert(qtest_readw(qts, K230_SD0_BASE + K230_SDHCI_P_UHS2_SETTINGS) ==
-> +             K230_SDHCI_P_UHS2_SETTINGS_RESET);
-> +    g_assert(qtest_readw(qts, K230_SD0_BASE + K230_SDHCI_P_UHS2_HOST_CAPAB) ==
-> +             K230_SDHCI_P_UHS2_HOST_CAPAB_RESET);
-> +    g_assert(qtest_readw(qts, K230_SD0_BASE + K230_SDHCI_P_UHS2_TEST) ==
-> +             K230_SDHCI_P_UHS2_TEST_RESET);
-> +    g_assert(qtest_readw(qts, K230_SD0_BASE + K230_SDHCI_P_EMBEDDED_CNTRL) ==
-> +             K230_SDHCI_P_EMBEDDED_CNTRL_RESET);
-> +    g_assert(qtest_readw(qts, K230_SD0_BASE + K230_SDHCI_P_VENDOR_AREA1) ==
-> +             K230_SDHCI_P_VENDOR_AREA1_RESET);
-> +    g_assert(qtest_readw(qts, K230_SD0_BASE + K230_SDHCI_P_VENDOR_AREA2) ==
-> +             K230_SDHCI_P_VENDOR_AREA2_RESET);
-> +
-> +    qtest_writew(qts, K230_SD0_BASE + K230_SDHCI_P_VENDOR_AREA1, 0xffff);
-> +    g_assert(qtest_readw(qts, K230_SD0_BASE + K230_SDHCI_P_VENDOR_AREA1) ==
-> +             K230_SDHCI_P_VENDOR_AREA1_RESET);
-> +
-> +    /* The virtual PHY is always ready and software cannot clear PWRGOOD. */
-> +    g_assert((qtest_readl(qts, K230_SD0_BASE + K230_SDHCI_PHY_CNFG) &
-> +              K230_SDHCI_PHY_CNFG_PWRGOOD) == K230_SDHCI_PHY_CNFG_PWRGOOD);
-> +    qtest_writel(qts, K230_SD0_BASE + K230_SDHCI_PHY_CNFG, 0);
-> +    g_assert(qtest_readl(qts, K230_SD0_BASE + K230_SDHCI_PHY_CNFG) ==
-> +             K230_SDHCI_PHY_CNFG_PWRGOOD);
-> +
-> +    /* Vendor storage is writable and private to each controller instance. */
-> +    qtest_writel(qts, K230_SD0_BASE + K230_SDHCI_P_VENDOR_AREA1_RESET,
-> +                 0x89abcdef);
-> +    g_assert(qtest_readl(qts, K230_SD0_BASE +
-> +                         K230_SDHCI_P_VENDOR_AREA1_RESET) ==
-> +             0x89abcdef);
-> +    g_assert(qtest_readl(qts, K230_SD1_BASE +
-> +                         K230_SDHCI_P_VENDOR_AREA1_RESET) == 0);
-> +
-> +    qtest_quit(qts);
-> +}
-> +
-> +static void test_card_detect(void)
-> +{
-> +    g_autofree char *path = NULL;
-> +    int fd = g_file_open_tmp("k230-sd-XXXXXX.img", &path, NULL);
-> +    QTestState *qts;
-> +
-> +    g_assert(fd >= 0);
-> +    g_assert(ftruncate(fd, K230_SD_TEST_IMAGE_SIZE) == 0);
-> +    close(fd);
-> +
-> +    qts = qtest_initf("-machine k230 "
-> +                      "-drive if=sd,index=1,format=raw,file=%s", path);
-> +
-> +    /* Card insertion becomes visible after the generic insertion delay. */
-> +    qtest_clock_step(qts, NANOSECONDS_PER_SECOND);
-> +    g_assert((qtest_readl(qts, K230_SD1_BASE + SDHC_PRNSTS) &
-> +              SDHC_CARD_PRESENT) == SDHC_CARD_PRESENT);
-> +    g_assert((qtest_readl(qts, K230_SD0_BASE + SDHC_PRNSTS) &
-> +              SDHC_CARD_PRESENT) == 0);
-> +
-> +    /* Route a command-complete event through SDHCI to the K230 PLIC. */
-> +    qtest_writew(qts, K230_SD1_BASE + SDHC_NORINTSTSEN,
-> +                 SDHC_NISEN_CMDCMP);
-> +    qtest_writew(qts, K230_SD1_BASE + SDHC_NORINTSIGEN,
-> +                 SDHC_NISEN_CMDCMP);
-> +    g_assert((qtest_readw(qts, K230_SD1_BASE + SDHC_NORINTSTSEN) &
-> +              SDHC_NISEN_CMDCMP) != 0);
-> +    g_assert((qtest_readw(qts, K230_SD1_BASE + SDHC_NORINTSIGEN) &
-> +              SDHC_NISEN_CMDCMP) != 0);
-> +    qtest_writew(qts, K230_SD1_BASE + SDHC_CLKCON,
-> +                 SDHC_CLOCK_INT_EN | SDHC_CLOCK_SDCLK_EN);
-> +    qtest_writew(qts, K230_SD1_BASE + SDHC_CMDREG,
-> +                 SDHC_APP_CMD | SDHC_CMD_RESPONSE);
-> +    g_assert((qtest_readw(qts, K230_SD1_BASE + SDHC_NORINTSTS) &
-> +              SDHC_NIS_CMDCMP) != 0);
-> +    g_assert((qtest_readl(qts, K230_PLIC_PENDING +
-> +                          K230_SD1_IRQ / 32 * sizeof(uint32_t)) &
-> +              BIT(K230_SD1_IRQ % 32)) != 0);
-> +
-> +    qtest_quit(qts);
-> +    unlink(path);
-> +}
-> +
-> +static void k230_sdhci_select_card(QTestState *qts)
-> +{
-> +    uint16_t rca;
-> +
-> +    /* Reset the controller and enable its internal and SD clocks. */
-> +    qtest_writeb(qts, K230_SD1_BASE + SDHC_SWRST, SDHC_RESET_ALL);
-> +    qtest_writew(qts, K230_SD1_BASE + SDHC_CLKCON,
-> +                 SDHC_CLOCK_INT_EN | SDHC_CLOCK_INT_STABLE |
-> +                 SDHC_CLOCK_SDCLK_EN);
-> +
-> +    /* Run the SD identification sequence and select the assigned RCA. */
-> +    sdhci_cmd_regs(qts, K230_SD1_BASE, 0, 0, 0, 0, SDHC_APP_CMD);
-> +    sdhci_cmd_regs(qts, K230_SD1_BASE, 0, 0, 0x41200000, 0, 41 << 8);
-> +    sdhci_cmd_regs(qts, K230_SD1_BASE, 0, 0, 0, 0, SDHC_ALL_SEND_CID);
-> +    sdhci_cmd_regs(qts, K230_SD1_BASE, 0, 0, 0, 0,
-> +                   SDHC_SEND_RELATIVE_ADDR | SDHC_CMD_RESPONSE);
-> +    rca = qtest_readl(qts, K230_SD1_BASE + SDHC_RSPREG0) >> 16;
-> +    sdhci_cmd_regs(qts, K230_SD1_BASE, 0, 0, rca << 16, 0,
-> +                   SDHC_SELECT_DESELECT_CARD);
-> +}
-> +
-> +static void test_card_io(void)
-> +{
-> +    static const char read_data[] = "K230 SDHCI read";
-> +    static const char write_data[] = "K230 SDHCI write";
-> +    g_autofree char *path = NULL;
-> +    char buffer[K230_SD_TEST_BLOCK_SIZE];
-> +    int fd = g_file_open_tmp("k230-sd-XXXXXX.img", &path, NULL);
-> +    QTestState *qts;
-> +
-> +    /* Seed block zero so the controller read can be checked independently. */
-> +    g_assert(fd >= 0);
-> +    g_assert(ftruncate(fd, K230_SD_TEST_IMAGE_SIZE) == 0);
-> +    g_assert(pwrite(fd, read_data, sizeof(read_data), 0) == sizeof(read_data));
-> +    close(fd);
-> +
-> +    qts = qtest_initf("-machine k230 "
-> +                      "-drive if=sd,index=1,format=raw,auto-read-only=off,"
-> +                      "file=%s", path);
-> +    k230_sdhci_select_card(qts);
-> +
-> +    /* Read block zero through the SDHCI PIO data port. */
-> +    memset(buffer, 0, sizeof(buffer));
-> +    g_assert(sdhci_read_cmd(qts, K230_SD1_BASE, buffer,
-> +                            sizeof(read_data)) == sizeof(read_data));
-> +    g_assert(memcmp(buffer, read_data, sizeof(read_data)) == 0);
-> +
-> +    /* Write through SDHCI, then verify the data reached the backing image. */
-> +    sdhci_write_cmd(qts, K230_SD1_BASE, write_data, sizeof(write_data),
-> +                    K230_SD_TEST_BLOCK_SIZE);
-> +    qtest_quit(qts);
-> +
-> +    fd = open(path, O_RDONLY);
-> +    g_assert(fd >= 0);
-> +    memset(buffer, 0, sizeof(buffer));
-> +    g_assert(pread(fd, buffer, sizeof(write_data), 0) == sizeof(write_data));
-> +    close(fd);
-> +    g_assert(memcmp(buffer, write_data, sizeof(write_data)) == 0);
-> +
-> +    unlink(path);
-> +}
-> +
-> +int main(int argc, char *argv[])
-> +{
-> +    g_test_init(&argc, &argv, NULL);
-> +
-> +    qtest_add_func("/k230-sdhci/registers", test_registers);
-> +    qtest_add_func("/k230-sdhci/card-detect", test_card_detect);
-> +    qtest_add_func("/k230-sdhci/card-io", test_card_io);
-> +
-> +    return g_test_run();
-> +}
-> diff --git a/tests/qtest/meson.build b/tests/qtest/meson.build
-> index 56ff860e21..0600b1e807 100644
-> --- a/tests/qtest/meson.build
-> +++ b/tests/qtest/meson.build
-> @@ -297,7 +297,10 @@ qtests_riscv64 = ['riscv-csr-test'] + \
->     (config_all_devices.has_key('CONFIG_IOMMU_TESTDEV') and
->      config_all_devices.has_key('CONFIG_RISCV_IOMMU') ?
->      ['iommu-riscv-test'] : []) + \
-> -  (config_all_devices.has_key('CONFIG_K230') ? ['k230-wdt-test'] : [])
-> +  (config_all_devices.has_key('CONFIG_K230') ? [
-> +    'k230-wdt-test',
-> +    'k230-sdhci-test',
-> +  ] : [])
->   
->   qtests_hexagon = ['boot-serial-test']
->   
+> I opened a GitLab issue (#4118) with a minimal, self-contained bare-metal
+> reproducer for this bug. It runs an sspopchk that matches the shadow stack
+> (the common case) followed by an auipc in the same translation block; on
+> current master the auipc returns an address 4 bytes too low (exit 42) and
+> with this patch it is correct (exit 0). The reproducer is included in the
+> issue.
+> 
+> [1] https://lore.kernel.org/qemu-devel/20251105134331.2865581-1-max.chou@sifive.com/
+> 
+>   target/riscv/tcg/insn_trans/trans_rvzicfiss.c.inc | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/target/riscv/tcg/insn_trans/trans_rvzicfiss.c.inc b/target/riscv/tcg/insn_trans/trans_rvzicfiss.c.inc
+> index a813232887..d47a9f9c7d 100644
+> --- a/target/riscv/tcg/insn_trans/trans_rvzicfiss.c.inc
+> +++ b/target/riscv/tcg/insn_trans/trans_rvzicfiss.c.inc
+> @@ -32,6 +32,7 @@ static bool trans_sspopchk(DisasContext *ctx, arg_sspopchk *a)
+>       TCGLabel *skip = gen_new_label();
+>       uint32_t tmp = (get_xl(ctx) == MXL_RV64) ? 8 : 4;
+>       TCGv data = tcg_temp_new();
+> +    gen_update_pc(ctx, 0);
+>       TCGv_i64 wide_addr = tcg_temp_new_i64();
+>       tcg_gen_ld_i64(wide_addr, tcg_env, offsetof(CPURISCVState, ssp));
+>       tcg_gen_trunc_i64_tl(addr, wide_addr);
+> @@ -42,7 +43,6 @@ static bool trans_sspopchk(DisasContext *ctx, arg_sspopchk *a)
+>       tcg_gen_brcond_tl(TCG_COND_EQ, data, rs1, skip);
+>       tcg_gen_st8_i32(tcg_constant_i32(RISCV_EXCP_SW_CHECK_BCFI_TVAL),
+>                       tcg_env, offsetof(CPURISCVState, sw_check_code));
+> -    gen_update_pc(ctx, 0);
+>       gen_helper_raise_exception(tcg_env,
+>                     tcg_constant_i32(RISCV_EXCP_SW_CHECK));
+>       gen_set_label(skip);
 
 
