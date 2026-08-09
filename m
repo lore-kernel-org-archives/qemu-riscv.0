@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14FF1C5AD4E
-	for <qemu-riscv@archiver.kernel.org>; Sun,  9 Aug 2026 22:43:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84682C5AD5A
+	for <qemu-riscv@archiver.kernel.org>; Sun,  9 Aug 2026 22:43:11 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wtC85-00016M-EA; Sun, 09 Aug 2026 18:36:29 -0400
+	id 1wtCBI-0005x7-T5; Sun, 09 Aug 2026 18:39:48 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wtC84-00015I-9o
- for qemu-riscv@nongnu.org; Sun, 09 Aug 2026 18:36:28 -0400
-Received: from mail-pg1-x535.google.com ([2607:f8b0:4864:20::535])
+ id 1wtCBG-0005vT-Sl
+ for qemu-riscv@nongnu.org; Sun, 09 Aug 2026 18:39:46 -0400
+Received: from mail-pl1-x632.google.com ([2607:f8b0:4864:20::632])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wtC82-0007TK-P6
- for qemu-riscv@nongnu.org; Sun, 09 Aug 2026 18:36:28 -0400
-Received: by mail-pg1-x535.google.com with SMTP id
- 41be03b00d2f7-ca12086c06eso929442a12.0
- for <qemu-riscv@nongnu.org>; Sun, 09 Aug 2026 15:36:26 -0700 (PDT)
+ id 1wtCBF-00084k-88
+ for qemu-riscv@nongnu.org; Sun, 09 Aug 2026 18:39:46 -0400
+Received: by mail-pl1-x632.google.com with SMTP id
+ d9443c01a7336-2cacf197759so22714675ad.2
+ for <qemu-riscv@nongnu.org>; Sun, 09 Aug 2026 15:39:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1786314985; x=1786919785; darn=nongnu.org;
+ d=linaro.org; s=google; t=1786315184; x=1786919984; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=EJLPAArjo+b4mZX0YUBGxbAKFsWVbs3HKJdLpQDgENw=;
- b=A8OnpKz8GCw+GxVBF1KFFAn7DkIrpqgCU9Hwk1r994LPvgFe2yge8jgS48Y/vVnNqj
- Hb69yRMeucfO+lATjrGYHLoRXHdfzV2mflbMyn3xEVD862KLyWxVOKfZ8Bwksuywu45l
- vNJqJrbeuhNcsRMM+UkmXmfgdLs/UPG1DhK+IgPMEyOJWlVvW9eMJxPtbStUo+qY1W1I
- dwepP/4rwiDS114l0GDYXHIKAop4Pk90otHRYus6snQPXEYvz1Mr7EWz753KsU9BSSXA
- YkkTn7rrzOZaKvjw7ZQjqbQ7+sbz/X0mO3K0rRwD/3CdDU5jxoalLYut1zfavPR/BKEy
- ZozA==
+ bh=0lRDNSDUDQZKTjH9ncofcENwlBstnuafbn8Teum35fE=;
+ b=D+bQk6HYbx0iEc6MXp08aWl0/TjbyfP93CaIU8wdTHRdbZ+hJTjNUcHE9h1QTNfGRs
+ ipXXSmb4RMeQgTcB+XttUPLhxHm0io20WB51skZAGKdbGbtgbQLqDMhKUhZmQkRczXcm
+ 6opbfCva6joKzqEy55Bjh6SK/KZx75KquDaC/KGhBDDtPerDverGMCm9unN0Qbwa/nD/
+ ljTgC9jgp8i7Z3QPL6G18Qzt11soC5no5euznXn+ga+GwXNOfFmyNUwrvADWfDYRjcpJ
+ 8frkP5WmNyVc4qEEoy5k0XBOMX6ixeHQ6l0kZFwZuO/EoiCY2UifaHc6HaMBaRjpwBsx
+ E2oQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786314985; x=1786919785;
+ d=1e100.net; s=20251104; t=1786315184; x=1786919984;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=EJLPAArjo+b4mZX0YUBGxbAKFsWVbs3HKJdLpQDgENw=;
- b=QzpFWleyPKkGMsCn/gnbKLd+M6JOjByAi8/kvyfF2PR70D9YM9ePyA3UX62TybN7hT
- XOsB6AtD4xMsOp3nYMJzcKL0UJ2TxYSVYeTqtXYxGMmW3HUxLcpshoVmWPPf5HZKGJiP
- eOzaqtKsla7Q9i3BPtoKC2nS33m2dgkGgmXmGg46LB5uFlQm4YPRkdqUPMwL0+ZnZtxe
- w131NkSwqXpBtQ/36zey33GpMIM9pIKus5sugH/dboLDFGpm5KaKF2yeVhpmjrI8VqHK
- Y3L1uZfmYzIUterN4dsMwafqcOgCaQY/GPzE9ifi//kkrB3gvbFz4eh/67pLjozkdgK3
- +ZIg==
-X-Gm-Message-State: AOJu0YyOGlNo7rLD19o27dM+s2QkFplH+UpEUMDCSH84bOkaecL62uus
- QH72GQf7pxwRtRIwSE/McmpIL1nIg70U4psEmeL7JzYBJ04uL/yY+N5cXrBPPDj9wgNdIBhS2kq
- BLO0h
-X-Gm-Gg: AR+sD10m6sRFy4ZCEF9RZDq96RyFs7c+GUG304dKLlDO6ozJ4YRdGfJEI1Hcj/8hIav
- bYmWCFpUBE0eXsTw28aswBWs/76woc6oiKQcMMETAKoO8v9CrEGfTOJifCOVkB0s1oNNmvCaba+
- 0psbNXvz8zYwesSws7AMLDeUuvQ+BzIVEbfV6focLwpHOCqowPYkbv/vMFWGwjUqm5EepCVat5N
- vZNXhywRWCqHhGQ1cGZTLFbQfPYYFncf4qdIFzJ0YifDwwZDw3Zvu9Ro2miyaDiMgARzDTBDE0R
- OfX069N3/i4Evz10DUBwsg+2NXgjUdy1r5yiSCbswBvbZlqwerI5REKhO7U7qgiatTWTkN64F/V
- A0FXAyQaQo6zgy46zy7oXck3M/na/PjzbtKai9YWEZyhTGeB/9UVJLiq8OvvzI8NIkGjlrXAIXA
- mt7as+vtRLbQ2qIaBmpIgJmnjkbjiOV1FNDTAmtR4iKvc0K0O4/nroHYfaftz01NEGEk6EiR/dh
- 3lbLlc8vasIuxHvXfBY
-X-Received: by 2002:a05:6a21:9104:b0:3c3:9a7f:7307 with SMTP id
- adf61e73a8af0-3cbce8e599amr16121758637.24.1786314985300; 
- Sun, 09 Aug 2026 15:36:25 -0700 (PDT)
+ bh=0lRDNSDUDQZKTjH9ncofcENwlBstnuafbn8Teum35fE=;
+ b=bAc4wleizY0ZXQXEA1thgF+mNXBJenMc18fECq0squZP6TyesYi7DAeZZiTpKIzCAC
+ HJ3j+1AXFPpNqaXPDvZ0kz/m3ZZ/itKtMCTXirltSP1wfLbBovopspNwJR+PakDvGBnc
+ PPcRJ937RPbpYQuRF5G0IvM/1fDZTTMvLtIAtVetRDegVclKaGdz88zTMvaH0/vWppBm
+ lYCrdz8UWgi7mWvpuzNvkIRVAOlFOUWyMCyXC+p6/czvDEtwUoqE5CGTvtI2nOPS94qm
+ PbahWeghFYvtN1o5oA7EsSAxSrI/Vy6SPVaw0SriDZheJxkCfgqRc5qa/kGOl2a8l402
+ HScA==
+X-Gm-Message-State: AOJu0YwMhkJZRj+d+DWnf0ohrj9OnCFEnUthX55Zyac/bzqQ1/EG+wNB
+ cm/8DGCt4HzpbT0oyyMNuRF79CLJrTpfI8VkH+7I5YuIZOVPUskRBUafNVx7n4qgbGqT7lp1Cen
+ NhAWC
+X-Gm-Gg: AR+sD12Q3si8lmNyV6UCmxYYjjegmHp2CsPu6wL1FDUMyzct6JTTgVcHL4kUtnuOl89
+ Gu2YolH/yulzcseWe2M3GU0rPyY4FLXulhLUpby1BImL6Aupet1zUdTTt45wcUv8XYpCtg16MLZ
+ 75zDJM2jfs71DzvetzNpltDEVuEqg30LJMNOj7ufUtLTuOV232Pd7zjVTPXBowiYKdYBU36vbUj
+ 7gyguO3+57a+s9NVYaQJ9R/FoU/3PTjq9gkvL5UuuyF6lcCVptvGIrLutfZuGDAa0EXTvp0Tmm9
+ NwsfGHE0RQVAkaYxcPwrzUbFoyNLLXbvtz6cX5nFv2Wda7Gl5eJPWGO0T7bIAyomSnR8rcJQnn0
+ VzstXT1taUGI0hlv18idcEG53hlbM70+nTTbY8HhFXIkqSPzYeN/J/TvAHjJhTSjYgJ37MqXnTl
+ C7GnJf2LlRlTdddCp68hIHZMwew1FTbyMiVajSSNIvkYnl11GhM3YQBcI7ECPY7kh+b2oz3pM1W
+ 63JdWwkIIZigsQTLfSO
+X-Received: by 2002:a17:90b:2788:b0:38e:64b0:8bce with SMTP id
+ 98e67ed59e1d1-39262309a8bmr20357489a91.20.1786315183785; 
+ Sun, 09 Aug 2026 15:39:43 -0700 (PDT)
 Received: from stoup.. (174-21-93-59.tukw.qwest.net. [174.21.93.59])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-cbe8f19ace6sm2998102a12.2.2026.08.09.15.36.24
+ 98e67ed59e1d1-390b1573defsm4264430a91.1.2026.08.09.15.39.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 09 Aug 2026 15:36:24 -0700 (PDT)
+ Sun, 09 Aug 2026 15:39:43 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org
-Subject: [PATCH 31/56] disas/riscv: Allow decode_inst_lift_pseudo to loop
-Date: Sun,  9 Aug 2026 15:35:20 -0700
-Message-ID: <20260809223545.730664-32-richard.henderson@linaro.org>
+Subject: [PATCH 48/56] disas/riscv: Move rv_op_illegal to riscv.c
+Date: Sun,  9 Aug 2026 15:35:37 -0700
+Message-ID: <20260809223545.730664-49-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260809223545.730664-1-richard.henderson@linaro.org>
 References: <20260809223545.730664-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::535;
- envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x535.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::632;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x632.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -101,31 +101,42 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Allow pseudo expansion to proceed in multiple steps.
-Assert that we don't have simple loops.
+illegal is no longer used in other files.
 
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- disas/riscv.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ disas/riscv.h | 4 ----
+ disas/riscv.c | 2 +-
+ 2 files changed, 1 insertion(+), 5 deletions(-)
 
+diff --git a/disas/riscv.h b/disas/riscv.h
+index 241dd47d7f..5ac8c41616 100644
+--- a/disas/riscv.h
++++ b/disas/riscv.h
+@@ -200,10 +200,6 @@ typedef struct {
+     uint8_t   rlist;
+ } rv_decode;
+ 
+-enum {
+-    rv_op_illegal = 0
+-};
+-
+ /* instruction formats */
+ 
+ #define rv_fmt_none                   "O\t"
 diff --git a/disas/riscv.c b/disas/riscv.c
-index fe503b6cae..b8e5b124a5 100644
+index 4141741d79..f0b3bc6be7 100644
 --- a/disas/riscv.c
 +++ b/disas/riscv.c
-@@ -5259,9 +5259,9 @@ static const rv_opcode_data *decode_inst_lift_pseudo(rv_decode *dec,
-     if (comp_data) {
-         while (comp_data->constraints) {
-             if (check_constraints(dec, comp_data->constraints)) {
--                dec->op = comp_data->op;
--                op = &dec->opcode_data[dec->op];
--                break;
-+                const rv_opcode_data *new_op = &dec->opcode_data[comp_data->op];
-+                assert(new_op != op);
-+                return decode_inst_lift_pseudo(dec, new_op);
-             }
-             comp_data++;
-         }
+@@ -29,7 +29,7 @@
+ #include "disas/riscv-xlrbr.h"
+ 
+ typedef enum {
+-    /* 0 is reserved for rv_op_illegal. */
++    rv_op_illegal = 0,
+     rv_op_lui = 1,
+     rv_op_auipc = 2,
+     rv_op_jal = 3,
 -- 
 2.43.0
 
