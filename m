@@ -4,87 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9599C5AD5A
-	for <qemu-riscv@archiver.kernel.org>; Sun,  9 Aug 2026 22:36:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4C83C5AD5A
+	for <qemu-riscv@archiver.kernel.org>; Sun,  9 Aug 2026 22:37:01 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wtC8B-0001IU-Ca; Sun, 09 Aug 2026 18:36:35 -0400
+	id 1wtC7a-0000gp-3V; Sun, 09 Aug 2026 18:35:58 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wtC8A-0001H2-1l
- for qemu-riscv@nongnu.org; Sun, 09 Aug 2026 18:36:34 -0400
-Received: from mail-pg1-x533.google.com ([2607:f8b0:4864:20::533])
+ id 1wtC7Y-0000g4-HR
+ for qemu-riscv@nongnu.org; Sun, 09 Aug 2026 18:35:56 -0400
+Received: from mail-pf1-x42f.google.com ([2607:f8b0:4864:20::42f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wtC88-0007Ve-EL
- for qemu-riscv@nongnu.org; Sun, 09 Aug 2026 18:36:33 -0400
-Received: by mail-pg1-x533.google.com with SMTP id
- 41be03b00d2f7-cbb7926836eso705919a12.3
- for <qemu-riscv@nongnu.org>; Sun, 09 Aug 2026 15:36:32 -0700 (PDT)
+ id 1wtC7V-0007HN-Pf
+ for qemu-riscv@nongnu.org; Sun, 09 Aug 2026 18:35:56 -0400
+Received: by mail-pf1-x42f.google.com with SMTP id
+ d2e1a72fcca58-84862b0d5aeso1151337b3a.2
+ for <qemu-riscv@nongnu.org>; Sun, 09 Aug 2026 15:35:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1786314991; x=1786919791; darn=nongnu.org;
+ d=linaro.org; s=google; t=1786314952; x=1786919752; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=1B1clRZ2sxLvuLYBilMUBWv+75W8rJPRUtukNd1MOmM=;
- b=K5/RsD3BWTdc/FPXPi6qxtO3s/4a2R9RZBoPqOm9xhs4IhUMKSKDVirCLPnzQbdNE1
- BB7uGm7dWmFp9Z37HYEVXwsyJzYqbPoO3uWQLbCcrgpkrqFU0/ZtJ+s5qT6qpxk2YJqc
- eVPMYK2sf9GAqZcd5509ro0O7J4rAb5HzgjlbOWBtoUYYyDdt1AZK7A4VX+wecxZVjY3
- xlr7mqAQZRbDYScVSxNJzHbqRiyGX/uO/ASB7v/E9Qc8SN+3LSd2oozEdGmtedkLvvxj
- yCYp0Fiz60h4PNPJzzIX/nn1j+0XAgszaaEKK+22MHaDXXt8P9Y84Mr6exLrI36dMSOb
- opKA==
+ bh=t/Qxcz2btKv/Jlv8Q59q1Tcr9ftaoSWR1K6PGxnzQFs=;
+ b=FrpagPtZyPAmIYCzK3OsaQn9WgiPuSqrKNJ0lk5S3LmV0y+V6E5pKrupV84SAuV0xP
+ ewTnK7V8N/T1STx7kPqHztIluVVthMR48Av1ZGs1NMlMQmnxGsHgnnNHl/3KEINFkVXz
+ t4bK1+EiPtLmVGvG4JZ5CqvyCapiS34T1ubgNuVyW+c1eNUSJ8j0sPlmOkI6kwkTV7cQ
+ d10zS3LjUzEzByXO97sOVw1vQfx8aRnSIexQrFCjdjElWr5SKpAjGPat8gCKWKv2EcpR
+ gkkB1CIIqObPS1d4SR/XZxzxb/ug8/piJROJhMb7hLS8m6Onmo5kcX3FDARyaQENzavc
+ vG5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786314991; x=1786919791;
+ d=1e100.net; s=20251104; t=1786314952; x=1786919752;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=1B1clRZ2sxLvuLYBilMUBWv+75W8rJPRUtukNd1MOmM=;
- b=QhTwkcN27Vs2rYLWQcK8BwKuwrHRzs6pCAWy+mU2Nuusm5FaW8x/kAhHbVdgX6fdpa
- p3jdESWe4Sg5rvgtxcx7Bpgj5zJ+bPGdt2ukfl21X4X+ntKevdbsaXbQbTsuiqsJiaKM
- qmZjxexAmc0eszilrJPNW/NlbR7k0kw5fWwqdq66WEdv1UnrGBn2pSkgWlzSYQE+9spf
- UTd5TdaHYoqqJ0UWOAoP5mEU4l+C25ccO+tdBvLon3I8NTM5AMpA7+VzSRDhPwsYM3ZK
- kYvaqyUGHwwvFZyd1ANkGccC+bGOR5DcepGnaobdCL1KuZgwvzDM1khmuFMWVdIx0sif
- RQDA==
-X-Gm-Message-State: AOJu0YxKR38tYYE7nGNCvOQ+l7vP//kDsxDYdGpQD/EUdST0vZvrYPCK
- BmX78xj/Y/FmWHwLA2inqCyZ98lCqfDtdP8j1ZQmNxKI7eKW7h6aVFoHlwTh8ebhzAE=
-X-Gm-Gg: AR+sD1188f8M0Sw/DceKfsOTUdpQwjXO20SEKGvh3tz8bR9CcpK3NhYeHXCCgPsWDnV
- 3+F4BK6KnpfhQiPctDG0LatBObsa69jT7sHURDW8YRuEPZbMriOFAzuSVQO+u4zxqAkjr/ZJvpC
- hFP+3TPpWHhNIARoSb9ckq5O/J0n6a19OJEzd4bU+zGZ4d2p++l1GdkCE4oZH//zDCoKOYekszw
- DGzmvVwgeIHd/sA8EGlbX8hn7X4ni7QXtZqIIN/WCJ427lEj7SNL8y8k66loOxdCGkophw9mVGi
- 6XhKamXwz9w2IOSOGgGpG8TiVveTQSjRZ6yhvfBHms2r411QxG+7BtN65d5GyeTUVimACU7i56B
- JkkHd4wfK+ASxm0B4jyciMukwfeeTNQN6QvpbREOb0a/hEQFPJvAE6rBTROD+r1Skq6YCUVo87p
- PtStXimlbJ7ssgBSPI8h54cLDFF7HIh3315w6ZLQyP4qTnW6DPPXCeore3fXE3gRyKP5+oCdl7E
- 8KQLKyY+s5FpnOMJiKp
-X-Received: by 2002:a05:6a00:3305:b0:845:eb88:3d74 with SMTP id
- d2e1a72fcca58-84f2e06b682mr45239468b3a.29.1786314991010; 
- Sun, 09 Aug 2026 15:36:31 -0700 (PDT)
+ bh=t/Qxcz2btKv/Jlv8Q59q1Tcr9ftaoSWR1K6PGxnzQFs=;
+ b=X4z81xyf6Ayk9zbyYg258fXGZ4C53QIqi1lWee3MrrKt7MmFdS57EJn0RKY3IM/aw9
+ 27QxvESUnpPPDBzOXgHCDg4/Dx9bAPaD7LDnN4Hiqtck8qTrC8YKvolUgeKeOrlMOVZj
+ lWIVx2JJk2q/PkLBg/C+a/bJxrOL7NZPddwySinNNOJq+yTvY5jCSn0+aac0GzA73UVw
+ JjiEEeelM4w/UuuE90sCe2pYbp00jXZd9NSp9ujGPZASj+j9JgPawxR4tD9tBLVMxWal
+ IM3x2cVDxAMcJeYtKgK0tvUZqzxkQujZ8R8ilWsUxeSiieeWtA8Zb9GbIkX0+O5Oi0KD
+ 0yzA==
+X-Gm-Message-State: AOJu0YyfUBQCdRW8BTBexHI9WXS+tkL9iU3eHjeNi72acFyZhpvlb2ZE
+ Wx/Zsp/K17kwh+CMNrZNl/JhoT8uT4q5UHhfwQ6pAwUuu4/GIZju3ZRg82FAk5olGBM=
+X-Gm-Gg: AR+sD12MHqAHuetfS0qBpYg4is9doswBV+pNE9Mw5o8IWiLwZk8UwWEy+/VTrdk0axR
+ spaKdLiCHK6mlhLCpIg0uo8oZfArA364dN1qKtqWmGJkhXhTHBTS9oyPgKUz5l39OBqyqS4OLwy
+ ZxxYs22gcHsTZNgmrubP860o9U5zl+qGbOEYYlr3cYY7c52sSjhFp39685HliqV8kdJdAiSqXKk
+ V9YoAfxOWkVwEhzbyrVZK40ZmsZITsOUlMBrraIasp5eIZt/Mt6Fr5TWjqpnMh/6yu9div90fC2
+ gg/PCQvy1i4gNXUMlD8tNRwTRu78nRwja7NOmhTeloUnaSNCBH6dg9vapzbSUyNrcftVFiaDLEq
+ IKV7VAl+cRtWkvZ/OuAhbnRLE3AT0tSt7TW43UmLXlmzkk2g13ybNLR3cWr5xQC7olZCbapiQJ2
+ H+eTp+MIRQt3vVKwii4VoWrnrXZRI4TlWMdx7Gb61qhVp80mG3DKBA1SDjt7LIB+Yjqnf1FdTXI
+ G6B6FGtfQOdNysdCDRS
+X-Received: by 2002:a05:6a00:2d0b:b0:848:4d1a:9554 with SMTP id
+ d2e1a72fcca58-84f2e0ed972mr39534878b3a.38.1786314951828; 
+ Sun, 09 Aug 2026 15:35:51 -0700 (PDT)
 Received: from stoup.. (174-21-93-59.tukw.qwest.net. [174.21.93.59])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-cbe8f19ace6sm2998102a12.2.2026.08.09.15.36.30
+ 41be03b00d2f7-cbe8f19ace6sm2998102a12.2.2026.08.09.15.35.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 09 Aug 2026 15:36:30 -0700 (PDT)
+ Sun, 09 Aug 2026 15:35:50 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org
-Subject: [PATCH 36/56] disas/riscv: Chain "nop" pseudo off "mv" pseudo
-Date: Sun,  9 Aug 2026 15:35:25 -0700
-Message-ID: <20260809223545.730664-37-richard.henderson@linaro.org>
+Cc: qemu-riscv@nongnu.org, TANG Tiancheng <lyndra@linux.alibaba.com>,
+ LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+Subject: [PATCH 04/56] disas/riscv: Decode unsigned vector immediates as
+ unsigned
+Date: Sun,  9 Aug 2026 15:34:53 -0700
+Message-ID: <20260809223545.730664-5-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260809223545.730664-1-richard.henderson@linaro.org>
 References: <20260809223545.730664-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::533;
- envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x533.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42f;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x42f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -100,52 +102,164 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-"mv" has already checked a condition that applies to "nop".
+From: TANG Tiancheng <lyndra@linux.alibaba.com>
 
-Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+rv_codec_v_i decodes all .vi operands with operand_vimm(), which
+sign-extends bits 19:15. That matches spec operands named imm, but not the
+.vi forms whose operand is uimm; uimm=31 is decoded as -1 and printed by
+the shared 6-bit 'u' formatter as 63.
+
+Add rv_codec_v_i_u/operand_vuimm() for the 5-bit uimm forms: vsll.vi,
+vsrl.vi, vsra.vi, vnsrl.wi, vnsra.wi, vssrl.vi, vssra.vi, vnclipu.wi,
+vnclip.wi, vslideup.vi, vslidedown.vi, vrgather.vi, vaeskf1.vi,
+vaeskf2.vi, vsm3c.vi, vsm4k.vi and vwsll.vi. The remaining rv_codec_v_i
+entries are the signed imm forms.
+
+Fixes: 07f4964d1785 ("disas/riscv.c: rvv: Add disas support for vector instructions")
+Fixes: 9d92f56d4a44 ("disas/riscv: Add support for vector crypto extensions")
+Signed-off-by: TANG Tiancheng <lyndra@linux.alibaba.com>
+Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+Message-Id: <20260703-b4-disas-xthead-fix-riscv-next-v4-4-84c566330bc7@linux.alibaba.com>
 ---
- disas/riscv.c | 10 +++++++---
- 1 file changed, 7 insertions(+), 3 deletions(-)
+ disas/riscv.h |  1 +
+ disas/riscv.c | 45 ++++++++++++++++++++++++++++-----------------
+ 2 files changed, 29 insertions(+), 17 deletions(-)
 
+diff --git a/disas/riscv.h b/disas/riscv.h
+index 379e642ec8..91ada8b531 100644
+--- a/disas/riscv.h
++++ b/disas/riscv.h
+@@ -149,6 +149,7 @@ typedef enum {
+     rv_codec_v_r,
+     rv_codec_v_ldst,
+     rv_codec_v_i,
++    rv_codec_v_i_u,
+     rv_codec_vsetvli,
+     rv_codec_vsetivli,
+     rv_codec_vror_vi,
 diff --git a/disas/riscv.c b/disas/riscv.c
-index 2fec135b5f..37f6440831 100644
+index 967739bdbb..82b962dc71 100644
 --- a/disas/riscv.c
 +++ b/disas/riscv.c
-@@ -1035,7 +1035,7 @@ static const rvc_constraint rvcc_jal_ra[] = { rvc_rd_eq_ra, rvc_end };
- static const rvc_constraint rvcc_jalr_ra[] = { rvc_rd_eq_ra, rvc_imm_eq_zero,
-                                                rvc_end };
- static const rvc_constraint rvcc_nop[] = { rvc_rd_eq_x0, rvc_rs1_eq_x0,
--                                           rvc_imm_eq_zero, rvc_end };
-+                                           rvc_end };
- static const rvc_constraint rvcc_mv[] = { rvc_imm_eq_zero, rvc_end };
- static const rvc_constraint rvcc_not[] = { rvc_imm_eq_n1, rvc_end };
- static const rvc_constraint rvcc_neg[] = { rvc_rs1_eq_x0, rvc_end };
-@@ -1108,11 +1108,15 @@ static const rv_comp_data rvcp_bge[] = {
- };
+@@ -1803,19 +1803,19 @@ const rv_opcode_data rvi_opcode_data[] = {
+     { "vxor.vi", rv_codec_v_i, rv_fmt_vd_vs2_imm_vm, NULL, 0, 0, 0 },
+     { "vsll.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, 0, 0, 0 },
+     { "vsll.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, 0, 0, 0 },
+-    { "vsll.vi", rv_codec_v_i, rv_fmt_vd_vs2_uimm_vm, NULL, 0, 0, 0 },
++    { "vsll.vi", rv_codec_v_i_u, rv_fmt_vd_vs2_uimm_vm, NULL, 0, 0, 0 },
+     { "vsrl.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, 0, 0, 0 },
+     { "vsrl.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, 0, 0, 0 },
+-    { "vsrl.vi", rv_codec_v_i, rv_fmt_vd_vs2_uimm_vm, NULL, 0, 0, 0 },
++    { "vsrl.vi", rv_codec_v_i_u, rv_fmt_vd_vs2_uimm_vm, NULL, 0, 0, 0 },
+     { "vsra.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, 0, 0, 0 },
+     { "vsra.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, 0, 0, 0 },
+-    { "vsra.vi", rv_codec_v_i, rv_fmt_vd_vs2_uimm_vm, NULL, 0, 0, 0 },
++    { "vsra.vi", rv_codec_v_i_u, rv_fmt_vd_vs2_uimm_vm, NULL, 0, 0, 0 },
+     { "vnsrl.wv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, 0, 0, 0 },
+     { "vnsrl.wx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, 0, 0, 0 },
+-    { "vnsrl.wi", rv_codec_v_i, rv_fmt_vd_vs2_uimm_vm, NULL, 0, 0, 0 },
++    { "vnsrl.wi", rv_codec_v_i_u, rv_fmt_vd_vs2_uimm_vm, NULL, 0, 0, 0 },
+     { "vnsra.wv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, 0, 0, 0 },
+     { "vnsra.wx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, 0, 0, 0 },
+-    { "vnsra.wi", rv_codec_v_i, rv_fmt_vd_vs2_uimm_vm, NULL, 0, 0, 0 },
++    { "vnsra.wi", rv_codec_v_i_u, rv_fmt_vd_vs2_uimm_vm, NULL, 0, 0, 0 },
+     { "vmseq.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, 0, 0, 0 },
+     { "vmseq.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, 0, 0, 0 },
+     { "vmseq.vi", rv_codec_v_i, rv_fmt_vd_vs2_imm_vm, NULL, 0, 0, 0 },
+@@ -1909,16 +1909,16 @@ const rv_opcode_data rvi_opcode_data[] = {
+     { "vsmul.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, 0, 0, 0 },
+     { "vssrl.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, 0, 0, 0 },
+     { "vssrl.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, 0, 0, 0 },
+-    { "vssrl.vi", rv_codec_v_i, rv_fmt_vd_vs2_uimm_vm, NULL, 0, 0, 0 },
++    { "vssrl.vi", rv_codec_v_i_u, rv_fmt_vd_vs2_uimm_vm, NULL, 0, 0, 0 },
+     { "vssra.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, 0, 0, 0 },
+     { "vssra.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, 0, 0, 0 },
+-    { "vssra.vi", rv_codec_v_i, rv_fmt_vd_vs2_uimm_vm, NULL, 0, 0, 0 },
++    { "vssra.vi", rv_codec_v_i_u, rv_fmt_vd_vs2_uimm_vm, NULL, 0, 0, 0 },
+     { "vnclipu.wv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, 0, 0, 0 },
+     { "vnclipu.wx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, 0, 0, 0 },
+-    { "vnclipu.wi", rv_codec_v_i, rv_fmt_vd_vs2_uimm_vm, NULL, 0, 0, 0 },
++    { "vnclipu.wi", rv_codec_v_i_u, rv_fmt_vd_vs2_uimm_vm, NULL, 0, 0, 0 },
+     { "vnclip.wv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, 0, 0, 0 },
+     { "vnclip.wx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, 0, 0, 0 },
+-    { "vnclip.wi", rv_codec_v_i, rv_fmt_vd_vs2_uimm_vm, NULL, 0, 0, 0 },
++    { "vnclip.wi", rv_codec_v_i_u, rv_fmt_vd_vs2_uimm_vm, NULL, 0, 0, 0 },
+     { "vfadd.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, 0, 0, 0 },
+     { "vfadd.vf", rv_codec_v_r, rv_fmt_vd_vs2_fs1_vm, NULL, 0, 0, 0 },
+     { "vfsub.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, 0, 0, 0 },
+@@ -2048,15 +2048,15 @@ const rv_opcode_data rvi_opcode_data[] = {
+     { "vfmv.f.s", rv_codec_v_r, rv_fmt_fd_vs2, NULL, 0, 0, 0 },
+     { "vfmv.s.f", rv_codec_v_r, rv_fmt_vd_fs1, NULL, 0, 0, 0 },
+     { "vslideup.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, 0, 0, 0 },
+-    { "vslideup.vi", rv_codec_v_i, rv_fmt_vd_vs2_uimm_vm, NULL, 0, 0, 0 },
++    { "vslideup.vi", rv_codec_v_i_u, rv_fmt_vd_vs2_uimm_vm, NULL, 0, 0, 0 },
+     { "vslide1up.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, 0, 0, 0 },
+     { "vslidedown.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, 0, 0, 0 },
+-    { "vslidedown.vi", rv_codec_v_i, rv_fmt_vd_vs2_uimm_vm, NULL, 0, 0, 0 },
++    { "vslidedown.vi", rv_codec_v_i_u, rv_fmt_vd_vs2_uimm_vm, NULL, 0, 0, 0 },
+     { "vslide1down.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, 0, 0, 0 },
+     { "vrgather.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, 0, 0, 0 },
+     { "vrgatherei16.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, 0, 0, 0 },
+     { "vrgather.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, 0, 0, 0 },
+-    { "vrgather.vi", rv_codec_v_i, rv_fmt_vd_vs2_uimm_vm, NULL, 0, 0, 0 },
++    { "vrgather.vi", rv_codec_v_i_u, rv_fmt_vd_vs2_uimm_vm, NULL, 0, 0, 0 },
+     { "vcompress.vm", rv_codec_v_r, rv_fmt_vd_vs2_vs1, NULL, 0, 0, 0 },
+     { "vmv1r.v", rv_codec_v_r, rv_fmt_vd_vs2, NULL, 0, 0, 0 },
+     { "vmv2r.v", rv_codec_v_r, rv_fmt_vd_vs2, NULL, 0, 0, 0 },
+@@ -2144,8 +2144,8 @@ const rv_opcode_data rvi_opcode_data[] = {
+     { "vaesef.vs", rv_codec_v_r, rv_fmt_vd_vs2, NULL, 0, 0, 0 },
+     { "vaesem.vv", rv_codec_v_r, rv_fmt_vd_vs2, NULL, 0, 0, 0 },
+     { "vaesem.vs", rv_codec_v_r, rv_fmt_vd_vs2, NULL, 0, 0, 0 },
+-    { "vaeskf1.vi", rv_codec_v_i, rv_fmt_vd_vs2_uimm, NULL, 0, 0, 0 },
+-    { "vaeskf2.vi", rv_codec_v_i, rv_fmt_vd_vs2_uimm, NULL, 0, 0, 0 },
++    { "vaeskf1.vi", rv_codec_v_i_u, rv_fmt_vd_vs2_uimm, NULL, 0, 0, 0 },
++    { "vaeskf2.vi", rv_codec_v_i_u, rv_fmt_vd_vs2_uimm, NULL, 0, 0, 0 },
+     { "vaesz.vs", rv_codec_v_r, rv_fmt_vd_vs2, NULL, 0, 0, 0 },
+     { "vandn.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, 0, 0, 0 },
+     { "vandn.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, 0, 0, 0 },
+@@ -2169,14 +2169,14 @@ const rv_opcode_data rvi_opcode_data[] = {
+     { "vsha2ch.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1, NULL, 0, 0, 0 },
+     { "vsha2cl.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1, NULL, 0, 0, 0 },
+     { "vsha2ms.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1, NULL, 0, 0, 0 },
+-    { "vsm3c.vi", rv_codec_v_i, rv_fmt_vd_vs2_uimm, NULL, 0, 0, 0 },
++    { "vsm3c.vi", rv_codec_v_i_u, rv_fmt_vd_vs2_uimm, NULL, 0, 0, 0 },
+     { "vsm3me.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1, NULL, 0, 0, 0 },
+-    { "vsm4k.vi", rv_codec_v_i, rv_fmt_vd_vs2_uimm, NULL, 0, 0, 0 },
++    { "vsm4k.vi", rv_codec_v_i_u, rv_fmt_vd_vs2_uimm, NULL, 0, 0, 0 },
+     { "vsm4r.vv", rv_codec_v_r, rv_fmt_vd_vs2, NULL, 0, 0, 0 },
+     { "vsm4r.vs", rv_codec_v_r, rv_fmt_vd_vs2, NULL, 0, 0, 0 },
+     { "vwsll.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, 0, 0, 0 },
+     { "vwsll.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, 0, 0, 0 },
+-    { "vwsll.vi", rv_codec_v_i, rv_fmt_vd_vs2_uimm_vm, NULL, 0, 0, 0 },
++    { "vwsll.vi", rv_codec_v_i_u, rv_fmt_vd_vs2_uimm_vm, NULL, 0, 0, 0 },
+     { "amocas.w", rv_codec_r_a, rv_fmt_aqrl_rd_rs2_rs1, NULL, 0, 0, 0 },
+     { "amocas.d", rv_codec_r_a, rv_fmt_aqrl_rd_rs2_rs1, NULL, 0, 0, 0 },
+     { "amocas.q", rv_codec_r_a, rv_fmt_aqrl_rd_rs2_rs1, NULL, 0, 0, 0 },
+@@ -4492,6 +4492,11 @@ static int32_t operand_vimm(rv_inst inst)
+     return (int64_t)(inst << 44) >> 59;
+ }
  
- static const rv_comp_data rvcp_addi[] = {
--    { rv_op_nop, rvcc_nop },
-     { rv_op_mv, rvcc_mv },
-     { },
- };
- 
-+static const rv_comp_data rvcp_mv[] = {
-+    { rv_op_nop, rvcc_nop },
-+    { },
-+};
++static uint32_t operand_vuimm(rv_inst inst)
++{
++    return extract32(inst, 15, 5);
++}
 +
- static const rv_comp_data rvcp_sltiu[] = {
-     { rv_op_seqz, rvcc_seqz },
-     { },
-@@ -1869,7 +1873,7 @@ static const rv_opcode_data rvi_opcode_data[] = {
-     { "c.lqsp", rv_codec_ci_lqsp, NULL, DECOMP(rv_op_lq) },
-     { "c.sqsp", rv_codec_css_sqsp, NULL, DECOMP(rv_op_sq) },
-     { "nop", rv_codec_i, rv_fmt_none },
--    { "mv", rv_codec_i, rv_fmt_rd_rs1 },
-+    { "mv", rv_codec_i, rv_fmt_rd_rs1, rvcp_mv },
-     { "not", rv_codec_i, rv_fmt_rd_rs1 },
-     { "neg", rv_codec_r, rv_fmt_rd_rs2 },
-     { "negw", rv_codec_r, rv_fmt_rd_rs2 },
+ static uint32_t operand_vzimm11(rv_inst inst)
+ {
+     return (inst << 33) >> 53;
+@@ -4895,6 +4900,12 @@ static void decode_inst_operands(rv_decode *dec, rv_isa isa)
+         dec->imm = operand_vimm(inst);
+         dec->vm = operand_vm(inst);
+         break;
++    case rv_codec_v_i_u:
++        dec->rd = operand_rd(inst);
++        dec->rs2 = operand_rs2(inst);
++        dec->imm = operand_vuimm(inst);
++        dec->vm = operand_vm(inst);
++        break;
+     case rv_codec_vror_vi:
+         dec->rd = operand_rd(inst);
+         dec->rs2 = operand_rs2(inst);
 -- 
 2.43.0
 
