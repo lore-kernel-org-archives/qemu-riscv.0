@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66B2BC5AD4E
-	for <qemu-riscv@archiver.kernel.org>; Sun,  9 Aug 2026 22:45:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6AA80C5AD7B
+	for <qemu-riscv@archiver.kernel.org>; Sun,  9 Aug 2026 22:45:03 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wtC7k-0000oG-NH; Sun, 09 Aug 2026 18:36:08 -0400
+	id 1wtCBK-0005xo-4k; Sun, 09 Aug 2026 18:39:50 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wtC7j-0000nI-D2
- for qemu-riscv@nongnu.org; Sun, 09 Aug 2026 18:36:07 -0400
-Received: from mail-pg1-x533.google.com ([2607:f8b0:4864:20::533])
+ id 1wtCBI-0005wq-M6
+ for qemu-riscv@nongnu.org; Sun, 09 Aug 2026 18:39:48 -0400
+Received: from mail-pj1-x102b.google.com ([2607:f8b0:4864:20::102b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wtC7h-0007LR-OP
- for qemu-riscv@nongnu.org; Sun, 09 Aug 2026 18:36:07 -0400
-Received: by mail-pg1-x533.google.com with SMTP id
- 41be03b00d2f7-cb5b8572b70so1314602a12.2
- for <qemu-riscv@nongnu.org>; Sun, 09 Aug 2026 15:36:05 -0700 (PDT)
+ id 1wtCBG-00085Y-RF
+ for qemu-riscv@nongnu.org; Sun, 09 Aug 2026 18:39:48 -0400
+Received: by mail-pj1-x102b.google.com with SMTP id
+ 98e67ed59e1d1-382ef647e20so1263167a91.1
+ for <qemu-riscv@nongnu.org>; Sun, 09 Aug 2026 15:39:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1786314964; x=1786919764; darn=nongnu.org;
+ d=linaro.org; s=google; t=1786315185; x=1786919985; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=3xN9uF24PxcjCHBEneq1+0Tduc7DpGTZFeyk6b0loig=;
- b=DJueIR4O1NmSmZa5qs7P7DHtp+7eA/5AlokZKCJlz5ZlVZ8nUYCnE0Pzes3BcfC06J
- 0xj1BCyhtjj1Ll8G4xVVL88cxwRrXzkjFDq4+OQAkb19C0Sfz0Swk86NtiPBPqCzlTY6
- 3QtG04iGVvR7sAREpRRQAn6wYnkW4xb5XRPBXaUZUVNIWG20ow73qvFX3vutD0Q6fwGb
- 7GPyg3tvv8YmHyIvW+1hpW75AK62RFo93F4DhJbimNQ24DDxJylUfY9wcYnofUOQxI+u
- g12Cz8oc2wA/kztHyfEAcwAg9PQePvZdK4CJClstVxPaUJUNWe9G77PilsvZAIoeNB4r
- /QLQ==
+ bh=XZk94/hutZsJsFOXvZC1U6d3u/tHUT3CS8c9j5uIMOA=;
+ b=oyUZw0wgbRvdwAed4jtCsGBIvoUTEV0Tn9IFkn6434Ao27E3O5v2Lhn0iWfpXiz4HP
+ P7cQW4j+ZJSRX/w9kTdUnQm+nFoeNt4rBo6HnqwrJQ6cK8i4SxConZhE3SJxm14BfuR8
+ GjEZ+ajLDGGcCwW9VrKaxClzARp+++Cb5s2KHkb9pkvtTCefDA/o5dJhgFsw4D7nQH3B
+ jJJ7TvC9fboAwnpmlYUYcqj3tMBbmHVxjCtbb5+aPstrsyIN1Mxk9nJMuy1UJ7X8FbxB
+ G/HGr8xBAit/e+raFI7HTtfeW3zRUISsXxi8+VCLADWEswLN2eX8EVf0hOlJAIXTtf2K
+ ZEIQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786314964; x=1786919764;
+ d=1e100.net; s=20251104; t=1786315185; x=1786919985;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=3xN9uF24PxcjCHBEneq1+0Tduc7DpGTZFeyk6b0loig=;
- b=WaDmwTh5TQwl2T3FNS1nb9GAotnec07N6bIgO+IbeKwik8tn7cWU1+ZPjJwJZ66o36
- KRIsMFF0jbf0IOnikFqSYQ/BnwoVPiKS8NFYQ8BP8iWbaTqSVWxwKSzSSsHHQaxE+5jj
- CFChaL1Wy89NxxVblAjvM2w5FX2sahO3jjwihmGVQQJcKQM5vwkslmaXFTOQOh66F1Nu
- HSsZtCTEDsHA0maPLTf9C0hbR+yzFkvS7hIbNqiUHxNuPfx+H7L2hdMd5DV76I7TjK6K
- Zt7ZuOdY45UaxZB+VA3zWaOWK0Vjl9RB92s8qytwdsN+hW5IEBZsZNfY9cv49UrXCCIv
- 0UqA==
-X-Gm-Message-State: AOJu0YyfELuCQFdtimg7A6B93uDkzsHl2zfBaXRHDxUbxRLGGf44YYAJ
- IqV6XCDdGROkLNZBj4rbFAfPeR8+ETvE2uABA6J11TcqOBG0fc3ZI0nk3Rpt4sIGzZeqBVpq8MH
- v9WeC
-X-Gm-Gg: AR+sD13Sl9EEtNHEPLp44G8R45NpkKHBR7HdKcuR7f33UipmbDiBDVCxNHSxUSEvjnV
- 1XY7zl9v87/KJX1Z13Wh1QXmt9iSOV7oX2bKEX6/xqlc57Exe7SDjMHcitbT/dXb7ebwIVkFpOk
- 5NBOTgJvERfKJ+oJpKYOqurL5CK7BUbpbJgFxvPC9HQLPRWAXHtbZ6c44eSHfT1nAC6EDsZtVMt
- 3+VnR6xslrC3JeghMkkZUP498RKEKoVWXgeLYnW3jgGSguG+zd2VYF+fZtjuVnTuXR4I5KvK+ka
- mtq3h7OcscANN3dhvxPHXRDr+Ext94Jv2wP46GNyVuGm7/rc9MCvoxh5UBPT6LjUvP27ro4lNDf
- y0nvU7txWi2rpjwVdFmm7yFm4vsWnz6wX7w/1H6gHwoxYV0+7fL6bxnhySv4hSMs27erlJ2UGkA
- SU6R3Y0pyColhnItsyFlbn+1x3Wit71nQdL+JUGo/zQIMMJ4RAc9vRNDmxHg1YLip3uzodEUGXM
- AZh9FjH9LmuBhaAv6Fx/eGWLBOzNsM=
-X-Received: by 2002:a05:6a00:a116:b0:846:bc60:5bf7 with SMTP id
- d2e1a72fcca58-84f2dfcf7f5mr42979532b3a.6.1786314964295; 
- Sun, 09 Aug 2026 15:36:04 -0700 (PDT)
+ bh=XZk94/hutZsJsFOXvZC1U6d3u/tHUT3CS8c9j5uIMOA=;
+ b=R6Msk9oM0zHkqmTrG0+fBgBe4bKLPunKikN5aLHngTuggeKrlThMO9KtrbLpUquOFG
+ oQk6JhkDnMHa0FsXHhEaRSOgWYgHS2l3vvKpfVt1Cx9XH/OAEr/6RYoG4RpS7aeqUl9o
+ o4M0QoIla7dTFXoXQu59SRjfblaCBY2QlMihI4hc7XCk0VxRUaqmzUGo1PLFI337/0l6
+ JrhGQ2/m9bEFGMTzvHue7K2Tkr/jFpoeg0Vwxf+iQSuxWzqG1C7EFddPnCwxwE0fhDaA
+ RVsNihaEHVeejihqq9leWwYDtB5R6RSV6g+hm7o5aJ+jleZPmeTuT/khhM8WIblMEJrj
+ +bag==
+X-Gm-Message-State: AOJu0YzbTUpnMIiL0Ixfazr4TgLVd/1jRAnf7AMyZ/rwdobkghcNyCXQ
+ TYX5BlgqtmQOn5G2PY2xGcrtlU+JyaXnLlnxlekhIHzXQjlrYaZ+92OGY/aj7G3D/Xl8LlWkcdp
+ IqgYP
+X-Gm-Gg: AR+sD12PtDRW24yHMjy2NE0G19UJ+r43bX5gl8ocxaSaBt/vcarHjvAxSiVZrJGCp5/
+ 4ivEw9s1PUT/pPLLh2Fc7IIu5kmx1QarF3LR1LrCT1WP4UpQcD06uVcOLdVvwWsyzuIvkn0uU6/
+ 0i/oGKKb7exo0OcacFRGuFyquorRQTRufhkrMseUE0Ss2GOEXtxVEw5Yukn1jieGA4C3pncCdOl
+ KZrgq8hN8+LuQPNzfgIvJ72Qz5eYiWZrupmRAA5NlcbmfKoJ1H4SZbglWdP9kejPERwV9AZvyNH
+ ix2SAW37wOzMkDGjoU1ty9fSz+nG+XjGVgLxKDS7NtFjdcyMXHwHgatT9w/jjQ9T4LPckN581bH
+ uJKOTsHSA71MGvvD9VJTdE3Tos5r68AjUSm0bKAR22XxkiMPhkwJV7CLYyfZdq8EOEE2NPOiSy9
+ 9Cnf/XMQchex6zMKI1/PnaKfhyP8bx5gYLIWOX8B/6/bJVoFA4e1jsmfJeNOdd+Zol2dKtMIcl5
+ X9tDw8uP9W/WQ+GYR01
+X-Received: by 2002:a17:90b:4b81:b0:38e:7f1b:efa with SMTP id
+ 98e67ed59e1d1-3903c582798mr37987768a91.11.1786315185362; 
+ Sun, 09 Aug 2026 15:39:45 -0700 (PDT)
 Received: from stoup.. (174-21-93-59.tukw.qwest.net. [174.21.93.59])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-cbe8f19ace6sm2998102a12.2.2026.08.09.15.36.03
+ 98e67ed59e1d1-390b1573defsm4264430a91.1.2026.08.09.15.39.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 09 Aug 2026 15:36:03 -0700 (PDT)
+ Sun, 09 Aug 2026 15:39:44 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org
-Subject: [PATCH 13/56] disas/riscv: Tidy disasm_inst main loop
-Date: Sun,  9 Aug 2026 15:35:02 -0700
-Message-ID: <20260809223545.730664-14-richard.henderson@linaro.org>
+Subject: [PATCH 50/56] disas/riscv: Merge all mop.r.n to one pattern
+Date: Sun,  9 Aug 2026 15:35:39 -0700
+Message-ID: <20260809223545.730664-51-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260809223545.730664-1-richard.henderson@linaro.org>
 References: <20260809223545.730664-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::533;
- envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x533.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102b;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x102b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -101,91 +101,127 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Unroll first iteration, so that always_true_p is not used,
-Drop some local variables and use 'decoders' directly.
+Avoid performing arithmetic on rv_op_mop_r_0.
+Treat the 'n' as an immediate.
+Create a codec and format to match.
 
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- disas/riscv.c | 63 +++++++++++++++++++++++++--------------------------
- 1 file changed, 31 insertions(+), 32 deletions(-)
+ disas/riscv.h        |  2 ++
+ disas/riscv.c        | 15 ++++++++++++++-
+ disas/riscv-op.c.inc | 33 +--------------------------------
+ 3 files changed, 17 insertions(+), 33 deletions(-)
 
+diff --git a/disas/riscv.h b/disas/riscv.h
+index 5ac8c41616..b47a7f0150 100644
+--- a/disas/riscv.h
++++ b/disas/riscv.h
+@@ -160,6 +160,7 @@ typedef enum {
+     rv_codec_fli,
+     rv_codec_lp,
+     rv_codec_cmop_ss,
++    rv_codec_mop_r,
+ } rv_codec;
+ 
+ /* structures */
+@@ -284,5 +285,6 @@ typedef struct {
+ #define rv_fmt_rd_rs1_immh_imml_addr  "O\t0,(1),i,j"
+ #define rv_fmt_rd2_imm                "O\t0,2,(1),i"
+ #define rv_fmt_fli                    "O\t3,h"
++#define rv_fmt_mop_r                  "O.i\t0,1"
+ 
+ #endif /* DISAS_RISCV_H */
 diff --git a/disas/riscv.c b/disas/riscv.c
-index 70ea41f125..9880b8de20 100644
+index 9dad56b486..450a5c8142 100644
 --- a/disas/riscv.c
 +++ b/disas/riscv.c
-@@ -5419,41 +5419,40 @@ static GString *disasm_inst(rv_isa isa, uint64_t pc, rv_inst inst,
-         .inst = inst,
-         .cfg = cfg,
-     };
--
--    static const struct {
--        bool (*guard_func)(const RISCVCPUConfig *);
--        const rv_opcode_data *opcode_data;
--        void (*decode_func)(rv_decode *, rv_isa);
--    } decoders[] = {
--        { always_true_p, rvi_opcode_data, decode_inst_opcode },
--        { has_xtheadba_p, xthead_opcode_data, decode_xtheadba },
--        { has_xtheadbb_p, xthead_opcode_data, decode_xtheadbb },
--        { has_xtheadbs_p, xthead_opcode_data, decode_xtheadbs },
--        { has_xtheadcmo_p, xthead_opcode_data, decode_xtheadcmo },
--        { has_xtheadcondmov_p, xthead_opcode_data, decode_xtheadcondmov },
--        { has_xtheadfmemidx_p, xthead_opcode_data, decode_xtheadfmemidx },
--        { has_xtheadfmv_p, xthead_opcode_data, decode_xtheadfmv },
--        { has_xtheadmac_p, xthead_opcode_data, decode_xtheadmac },
--        { has_xtheadmemidx_p, xthead_opcode_data, decode_xtheadmemidx },
--        { has_xtheadmempair_p, xthead_opcode_data, decode_xtheadmempair },
--        { has_xtheadsync_p, xthead_opcode_data, decode_xtheadsync },
--        { has_XVentanaCondOps_p, ventana_opcode_data, decode_xventanacondops },
--        { has_xlrbr_p, rv_xlrbr_opcode_data, decode_xlrbr },
--    };
--
-     const rv_opcode_data *op;
+@@ -643,6 +643,13 @@ static uint32_t operand_lpl(rv_inst inst)
+     return extract32(inst, 12, 20);
+ }
  
--    for (size_t i = 0; i < ARRAY_SIZE(decoders); i++) {
--        bool (*guard_func)(const RISCVCPUConfig *) = decoders[i].guard_func;
--        const rv_opcode_data *opcode_data = decoders[i].opcode_data;
--        void (*decode_func)(rv_decode *, rv_isa) = decoders[i].decode_func;
-+    dec.opcode_data = rvi_opcode_data;
-+    decode_inst_opcode(&dec, isa);
- 
--        /* always_true_p don't dereference cfg */
--        if (((i == 0) || cfg) && guard_func(cfg)) {
--            dec.opcode_data = opcode_data;
--            decode_func(&dec, isa);
--            if (dec.op != rv_op_illegal)
--                break;
-+    if (dec.op == rv_op_illegal && cfg) {
-+        static const struct {
-+            bool (*guard_func)(const RISCVCPUConfig *);
-+            const rv_opcode_data *opcode_data;
-+            void (*decode_func)(rv_decode *, rv_isa);
-+        } decoders[] = {
-+            { has_xtheadba_p, xthead_opcode_data, decode_xtheadba },
-+            { has_xtheadbb_p, xthead_opcode_data, decode_xtheadbb },
-+            { has_xtheadbs_p, xthead_opcode_data, decode_xtheadbs },
-+            { has_xtheadcmo_p, xthead_opcode_data, decode_xtheadcmo },
-+            { has_xtheadcondmov_p, xthead_opcode_data, decode_xtheadcondmov },
-+            { has_xtheadfmemidx_p, xthead_opcode_data, decode_xtheadfmemidx },
-+            { has_xtheadfmv_p, xthead_opcode_data, decode_xtheadfmv },
-+            { has_xtheadmac_p, xthead_opcode_data, decode_xtheadmac },
-+            { has_xtheadmemidx_p, xthead_opcode_data, decode_xtheadmemidx },
-+            { has_xtheadmempair_p, xthead_opcode_data, decode_xtheadmempair },
-+            { has_xtheadsync_p, xthead_opcode_data, decode_xtheadsync },
-+            { has_XVentanaCondOps_p, ventana_opcode_data, decode_xventanacondops },
-+            { has_xlrbr_p, rv_xlrbr_opcode_data, decode_xlrbr },
-+        };
++static uint32_t operand_mop_r_imm(rv_inst inst)
++{
++    return (extract32(inst, 30, 1) << 4) |
++           (extract32(inst, 26, 2) << 2) |
++           extract32(inst, 20, 2);
++}
 +
-+        for (size_t i = 0; i < ARRAY_SIZE(decoders); i++) {
-+            if (decoders[i].guard_func(cfg)) {
-+                dec.opcode_data = decoders[i].opcode_data;
-+                decoders[i].decode_func(&dec, isa);
-+                if (dec.op != rv_op_illegal) {
-+                    break;
-+                }
-+            }
-         }
-     }
+ /* instruction metadata */
  
+ static const rv_opcode_data rvi_opcode_data[] = {
+@@ -2546,7 +2553,7 @@ static const rv_opcode_data *decode_inst_opcode(rv_decode *dec, rv_isa isa)
+                                                        2, 2,
+                                                        extract32(inst, 26, 2)),
+                                              4, 1, extract32(inst, 30, 1));
+-                        op = rv_op_mop_r_0 + imm_mop5;
++                        op = rv_op_mop_r;
+                         /* if zicfiss enabled and mop5 is shadow stack */
+                         if (dec->cfg->ext_zicfiss &&
+                             ((imm_mop5 & 0b11100) == 0b11100)) {
+@@ -3049,6 +3056,11 @@ static void decode_inst_operands(rv_decode *dec, rv_isa isa,
+         dec->rs1 = dec->rs2 = operand_crs1(inst);
+         dec->imm = 0;
+         break;
++    case rv_codec_mop_r:
++        dec->rd = operand_rd(inst);
++        dec->rs1 = operand_rs1(inst);
++        dec->imm = operand_mop_r_imm(inst);
++        break;
+     default:
+         g_assert_not_reached();
+     }
+@@ -3134,6 +3146,7 @@ static GString *format_inst(size_t tab, rv_decode *dec,
+             g_string_append(buf, op->name);
+             break;
+         case '(':
++        case '.':
+         case ',':
+         case ')':
+         case '-':
+diff --git a/disas/riscv-op.c.inc b/disas/riscv-op.c.inc
+index 3fe934688e..222d249a70 100644
+--- a/disas/riscv-op.c.inc
++++ b/disas/riscv-op.c.inc
+@@ -873,38 +873,7 @@ OP(vwsll_vi, "vwsll.vi", rv_codec_v_i_u, rv_fmt_vd_vs2_uimm_vm)
+ OP(amocas_w, "amocas.w", rv_codec_r_a, rv_fmt_aqrl_rd_rs2_rs1)
+ OP(amocas_d, "amocas.d", rv_codec_r_a, rv_fmt_aqrl_rd_rs2_rs1)
+ OP(amocas_q, "amocas.q", rv_codec_r_a, rv_fmt_aqrl_rd_rs2_rs1)
+-OP(mop_r_0, "mop.r.0", rv_codec_r, rv_fmt_rd_rs1)
+-OP(mop_r_1, "mop.r.1", rv_codec_r, rv_fmt_rd_rs1)
+-OP(mop_r_2, "mop.r.2", rv_codec_r, rv_fmt_rd_rs1)
+-OP(mop_r_3, "mop.r.3", rv_codec_r, rv_fmt_rd_rs1)
+-OP(mop_r_4, "mop.r.4", rv_codec_r, rv_fmt_rd_rs1)
+-OP(mop_r_5, "mop.r.5", rv_codec_r, rv_fmt_rd_rs1)
+-OP(mop_r_6, "mop.r.6", rv_codec_r, rv_fmt_rd_rs1)
+-OP(mop_r_7, "mop.r.7", rv_codec_r, rv_fmt_rd_rs1)
+-OP(mop_r_8, "mop.r.8", rv_codec_r, rv_fmt_rd_rs1)
+-OP(mop_r_9, "mop.r.9", rv_codec_r, rv_fmt_rd_rs1)
+-OP(mop_r_10, "mop.r.10", rv_codec_r, rv_fmt_rd_rs1)
+-OP(mop_r_11, "mop.r.11", rv_codec_r, rv_fmt_rd_rs1)
+-OP(mop_r_12, "mop.r.12", rv_codec_r, rv_fmt_rd_rs1)
+-OP(mop_r_13, "mop.r.13", rv_codec_r, rv_fmt_rd_rs1)
+-OP(mop_r_14, "mop.r.14", rv_codec_r, rv_fmt_rd_rs1)
+-OP(mop_r_15, "mop.r.15", rv_codec_r, rv_fmt_rd_rs1)
+-OP(mop_r_16, "mop.r.16", rv_codec_r, rv_fmt_rd_rs1)
+-OP(mop_r_17, "mop.r.17", rv_codec_r, rv_fmt_rd_rs1)
+-OP(mop_r_18, "mop.r.18", rv_codec_r, rv_fmt_rd_rs1)
+-OP(mop_r_19, "mop.r.19", rv_codec_r, rv_fmt_rd_rs1)
+-OP(mop_r_20, "mop.r.20", rv_codec_r, rv_fmt_rd_rs1)
+-OP(mop_r_21, "mop.r.21", rv_codec_r, rv_fmt_rd_rs1)
+-OP(mop_r_22, "mop.r.22", rv_codec_r, rv_fmt_rd_rs1)
+-OP(mop_r_23, "mop.r.23", rv_codec_r, rv_fmt_rd_rs1)
+-OP(mop_r_24, "mop.r.24", rv_codec_r, rv_fmt_rd_rs1)
+-OP(mop_r_25, "mop.r.25", rv_codec_r, rv_fmt_rd_rs1)
+-OP(mop_r_26, "mop.r.26", rv_codec_r, rv_fmt_rd_rs1)
+-OP(mop_r_27, "mop.r.27", rv_codec_r, rv_fmt_rd_rs1)
+-OP(mop_r_28, "mop.r.28", rv_codec_r, rv_fmt_rd_rs1)
+-OP(mop_r_29, "mop.r.29", rv_codec_r, rv_fmt_rd_rs1)
+-OP(mop_r_30, "mop.r.30", rv_codec_r, rv_fmt_rd_rs1)
+-OP(mop_r_31, "mop.r.31", rv_codec_r, rv_fmt_rd_rs1)
++OP(mop_r, "mop.r", rv_codec_mop_r, rv_fmt_mop_r)
+ OP(mop_rr_0, "mop.rr.0", rv_codec_r, rv_fmt_rd_rs1_rs2)
+ OP(mop_rr_1, "mop.rr.1", rv_codec_r, rv_fmt_rd_rs1_rs2)
+ OP(mop_rr_2, "mop.rr.2", rv_codec_r, rv_fmt_rd_rs1_rs2)
 -- 
 2.43.0
 
