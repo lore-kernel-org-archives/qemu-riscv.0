@@ -4,81 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCD3DC5AD7B
-	for <qemu-riscv@archiver.kernel.org>; Sun,  9 Aug 2026 22:41:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4E40C5AD4E
+	for <qemu-riscv@archiver.kernel.org>; Sun,  9 Aug 2026 22:42:01 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wtC7W-0000fC-RJ; Sun, 09 Aug 2026 18:35:54 -0400
+	id 1wtCBB-0005po-6d; Sun, 09 Aug 2026 18:39:41 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wtC7V-0000eR-M1
- for qemu-riscv@nongnu.org; Sun, 09 Aug 2026 18:35:53 -0400
-Received: from mail-pf1-x42d.google.com ([2607:f8b0:4864:20::42d])
+ id 1wtCB9-0005pe-VM
+ for qemu-riscv@nongnu.org; Sun, 09 Aug 2026 18:39:39 -0400
+Received: from mail-pj1-x102a.google.com ([2607:f8b0:4864:20::102a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wtC7T-0007Gm-RV
- for qemu-riscv@nongnu.org; Sun, 09 Aug 2026 18:35:53 -0400
-Received: by mail-pf1-x42d.google.com with SMTP id
- d2e1a72fcca58-84a652535dcso645256b3a.3
- for <qemu-riscv@nongnu.org>; Sun, 09 Aug 2026 15:35:51 -0700 (PDT)
+ id 1wtCB7-00081m-NG
+ for qemu-riscv@nongnu.org; Sun, 09 Aug 2026 18:39:39 -0400
+Received: by mail-pj1-x102a.google.com with SMTP id
+ 98e67ed59e1d1-38e347638adso1331001a91.0
+ for <qemu-riscv@nongnu.org>; Sun, 09 Aug 2026 15:39:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1786314950; x=1786919750; darn=nongnu.org;
+ d=linaro.org; s=google; t=1786315176; x=1786919976; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=N8nB778mxKXBFIQx5c1AJr7lK8xWaRtXPXn1L5JIuWU=;
- b=N7WLcGXKDcgYSQaX1QZ5n7LSk4FD7DGzyhLQWPhuAVdxUBcWQ6bAGwDFSAQjSKkyPd
- c15eUbFGz7/WawCKHJsRYusflOAvV/Kqyb2ytupvIVAB5thl7Vhw9BVMGxDl2Vtj53tv
- HqMqM9NWGJEruci1p7dZzhqZ4+t2AfxDaor+cdspARo920G4BwT4qiQ+0OYzCIN8ZGVp
- 1iHzYc2oZDiUVyLSijxZ0cIrV946v/VsFgFCrf9VoaPHDZ0l/MGCKh5iL17ZgAgHuJlp
- 5cPTd+Phq/GYBjmAeJa8G77zEv4PkjqAzsdrhRppSqT2pKw4akxAzFeDsS6JBy0uEzQD
- Xcmw==
+ bh=wrVOzQEoLp3rMXSEpQrDmR8U9V+/O+1y66nnFrsT6yo=;
+ b=ZrZffgM7rpxt/KBC/Ktfv8Hm6q0hcTUpCd1zaqb5hb7Ceo6k5863PCogMa7eg1uvAG
+ Gs8aL9lJPEl64QwvZpPlBTxuWp1twp97WaDtaC4U4SX2H2TZIxP3oB6lpF44CvwgA+Rk
+ U7GAj0iRQ0JejN/g83dcw+Lw+fOZPrwXzUdFpDcc04d+I3irzWJ5764wbjecNROfhiGP
+ gx3CWEsjymjkNKTYkkeJNzVXj6BgpgOdCCFVoKDuqm1/HDsHvto/BcAzDCmDgKqNnGpj
+ qoIS8GmF0uUtyCRWKXDgoWXbvzUCJ/x2cR7VUc2eQaG0yIyZidFA+LeFs9Jz7qkQ3xoW
+ y1XQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786314950; x=1786919750;
+ d=1e100.net; s=20251104; t=1786315176; x=1786919976;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=N8nB778mxKXBFIQx5c1AJr7lK8xWaRtXPXn1L5JIuWU=;
- b=l/mtT+lX67ZX4SGP/ZfLjryzy89ewl0csVimUXnvHEhSvgNIypIpn1HWtUoZBwf0E9
- Dm52jfFDu57VUFWbG3g93TiK1YKQnsBtH52HAR9i9Sv1+INXhhA3CnVnabD5yV07QyKq
- Z6+OKR0nsT3PaDC9QfshzsokjyNFcwSmcix+7A6JsRzZ9h+tVMASiEyxswniKWsU8l1p
- Uu1sajbZGoDn1AdsVy4DEt5o0bVImwHKYLQawgkrGjIWVaJwiDKnuSzk3jiGNJR9UYSB
- tGLMbiWM3YDY326Tk2oIL+SfOwI0uORN7Nexef8CsoQdGZ1v7Md5NOHEEc//CJJtRVvJ
- Iebw==
-X-Gm-Message-State: AOJu0YwGnm6tmtg/R0ufFptsZYByT4CsxP2+ZR8xwW3gXNmiKn6R+GBw
- B3v6rYTnJ0Cw/7uCoFdZJI9XihHRKRJj/LVkJQoFvN3DmuhD2JhPt8zebPnUu34gL6g=
-X-Gm-Gg: AR+sD10RmMs1Vicf/RI+LvOfVrHxQlX5kwcRG6KKfPLGckav/+7CAGYjW76/Gc8icgb
- btgdhbDgeTdXtBDh2Zdyz6VAWHN+xT3+JAUnvjLPmRBkmTSluruBHtAkNYDXWnrgDIWS+H8p/As
- 5ao65Z5YkM+Q9jj59PerbYBUBSlm/XEF654lVOMIZfteLsRBB4zjASX9Ip4re901eOqaLEzTJto
- yTMCgFNz4VNnlQNfeqQ4cbeFMrT6+cZIhnOG9z3YMIKFxuPCuHTKD2Vp2/jhwbkv2kNmVmL6Kht
- vKRbcPguSYjztLOF+qGdkSgDt51my2csi8IDW2iSfJ2C0e7n68/B1zn7YWbQckKpOMEGtQEtb2l
- FVcxVXqNKnrke4O/a+JkiwRlsiJ7ILCp9JBuKlSIpv0tbwBy25USzhwzLKUkaCFPX5+KtLO+Uco
- CMR5JvHriQVsb9Nmnh3VuBEyxMtW44OY7E0qleBgDdQwokw2inmtYzsSDwi0bsSxZBfpn9LDZii
- s6x5h+i7qWcQTp7r3Dq
-X-Received: by 2002:a05:6a00:398b:b0:842:5da3:9b89 with SMTP id
- d2e1a72fcca58-84f697a6761mr15500918b3a.38.1786314950456; 
- Sun, 09 Aug 2026 15:35:50 -0700 (PDT)
+ bh=wrVOzQEoLp3rMXSEpQrDmR8U9V+/O+1y66nnFrsT6yo=;
+ b=fh25czbESvJNvAt0JNqAKX9jMIx6GIo7RwLV8iaJzPayAmk96N5zlujjEAR5H/699J
+ FkYfsseap6gslvml9WYfLc5hdHMaBYqXyZafub0sxquz1fRHvDQb42rSAux3xc5gT0BM
+ s7wNF7CBJPMOYt1jubeuTaUZEn0CkoCTKECbtJeDTf2bDpHAspxAtXC8xW0L+G+QeHSy
+ E3HGh4MQ8Lr1nLf5rWscN4aMeAT0AkSCSPhn4xSiwbQf7ZcBQ2vC9mcaS9bOnJbz7363
+ m1GRTOEDj+R+FR+HFjqra7EvF+wmzEvjmePOgf8uhG5sbCd3m/4uNTpgzJ/61Prk+SzX
+ HLDQ==
+X-Gm-Message-State: AOJu0Yzm5GyQuV9610zmyon61k/24BiCLKgfUtNAd0qbaH5G7JBDTYO9
+ AErdf+CMI1alPuMsGvSNtKzgjz9mxHng7FI8PzFVPNaTyVOOg1+ZbYN82O83RZzGc9I=
+X-Gm-Gg: AR+sD12c2C5h3PKcBMd7vycHHhTMuJBIurDZywxNIuK6AqlcBDWSh2ITaINPFjp6MXK
+ +1PhOaOO90IPfKkLNFHTDQsCaG3oWzQT791HkxfceLtYsZ8uCQeFox7qa0y41wiI1/muFyWyBXy
+ wD1tgosy3o4lI3guu0YFntrKXAvvmd9BdmrNGp8gwbEyVZ48MECgDyutVkjI6jh55fVPEsKid2a
+ 0G7UWUCvdoFOanzcLlp7AikDvPif9Jcdpm0ha6JqyNhIMOtbPv1zyA2iJfJ8g9soS0B8DNp+03m
+ fGj4/ZteG0OopW9S3VQc2Vmi6OWA6WuX2DhPQWK19cGlHcQ+kSvGga1wbl7pECJSCCBbRJNSnry
+ 3aWXSD6aDXhXveZ5ycC5yTrZM5Z1ySEGW21PeFddnMxKhub/mDADYF3LISWpaLaHphx4/lWeXKc
+ R7dl9rBuAlrs4bsOi912hZxZwagiDZnxIqDLiHIo7hPdnHKxX4IHwvFBz85IzJKqnLra6Nlklhy
+ KTLEtOPDpI5vigXhaq5
+X-Received: by 2002:a17:90b:2249:b0:36b:bec8:94c5 with SMTP id
+ 98e67ed59e1d1-3928242ffc4mr14190384a91.10.1786315175840; 
+ Sun, 09 Aug 2026 15:39:35 -0700 (PDT)
 Received: from stoup.. (174-21-93-59.tukw.qwest.net. [174.21.93.59])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-cbe8f19ace6sm2998102a12.2.2026.08.09.15.35.49
+ 98e67ed59e1d1-390b1573defsm4264430a91.1.2026.08.09.15.39.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 09 Aug 2026 15:35:50 -0700 (PDT)
+ Sun, 09 Aug 2026 15:39:35 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, TANG Tiancheng <lyndra@linux.alibaba.com>,
- LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-Subject: [PATCH 03/56] disas/riscv: Use signed type for vector immediates
-Date: Sun,  9 Aug 2026 15:34:52 -0700
-Message-ID: <20260809223545.730664-4-richard.henderson@linaro.org>
+Cc: qemu-riscv@nongnu.org
+Subject: [PATCH 40/56] disas/riscv: Return rv_opcode_data pointer from decoders
+Date: Sun,  9 Aug 2026 15:35:29 -0700
+Message-ID: <20260809223545.730664-41-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260809223545.730664-1-richard.henderson@linaro.org>
 References: <20260809223545.730664-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42d;
- envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x42d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102a;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x102a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -101,34 +100,360 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: TANG Tiancheng <lyndra@linux.alibaba.com>
+Rather than putting array + index into rv_decode,
+return the pointer to the object directly.
 
-operand_vimm() sign-extends the 5-bit vector immediate field in bits
-19:15, but returns uint32_t. This sends negative immediates through an
-unsigned type before they are assigned to rv_decode.imm.
-
-Return int32_t to match the signed value extracted by the helper.
-
-Signed-off-by: TANG Tiancheng <lyndra@linux.alibaba.com>
-Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-Message-Id: <20260703-b4-disas-xthead-fix-riscv-next-v4-3-84c566330bc7@linux.alibaba.com>
+Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- disas/riscv.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ disas/riscv-xlrbr.h    |  2 +-
+ disas/riscv-xthead.h   | 22 ++++++++---------
+ disas/riscv-xventana.h |  2 +-
+ disas/riscv.h          |  2 --
+ disas/riscv-xlrbr.c    |  5 ++--
+ disas/riscv-xthead.c   | 55 +++++++++++++++++-------------------------
+ disas/riscv-xventana.c |  5 ++--
+ disas/riscv.c          | 23 +++++++-----------
+ 8 files changed, 48 insertions(+), 68 deletions(-)
 
-diff --git a/disas/riscv.c b/disas/riscv.c
-index fdf75a12ef..967739bdbb 100644
---- a/disas/riscv.c
-+++ b/disas/riscv.c
-@@ -4487,7 +4487,7 @@ static uint32_t operand_cimmq(rv_inst inst)
-         ((inst << 57) >> 62) << 6;
+diff --git a/disas/riscv-xlrbr.h b/disas/riscv-xlrbr.h
+index ebf3d4c133..da14f1b340 100644
+--- a/disas/riscv-xlrbr.h
++++ b/disas/riscv-xlrbr.h
+@@ -12,6 +12,6 @@
+ 
+ #include "disas/riscv.h"
+ 
+-void decode_xlrbr(rv_decode *, rv_isa);
++const rv_opcode_data *decode_xlrbr(rv_decode *, rv_isa);
+ 
+ #endif /* DISAS_RISCV_XLRBR_H */
+diff --git a/disas/riscv-xthead.h b/disas/riscv-xthead.h
+index 0c65c8e0af..f2160be8a4 100644
+--- a/disas/riscv-xthead.h
++++ b/disas/riscv-xthead.h
+@@ -11,16 +11,16 @@
+ 
+ #include "disas/riscv.h"
+ 
+-void decode_xtheadba(rv_decode *, rv_isa);
+-void decode_xtheadbb(rv_decode *, rv_isa);
+-void decode_xtheadbs(rv_decode *, rv_isa);
+-void decode_xtheadcmo(rv_decode *, rv_isa);
+-void decode_xtheadcondmov(rv_decode *, rv_isa);
+-void decode_xtheadfmemidx(rv_decode *, rv_isa);
+-void decode_xtheadfmv(rv_decode *, rv_isa);
+-void decode_xtheadmac(rv_decode *, rv_isa);
+-void decode_xtheadmemidx(rv_decode *, rv_isa);
+-void decode_xtheadmempair(rv_decode *, rv_isa);
+-void decode_xtheadsync(rv_decode *, rv_isa);
++const rv_opcode_data *decode_xtheadba(rv_decode *, rv_isa);
++const rv_opcode_data *decode_xtheadbb(rv_decode *, rv_isa);
++const rv_opcode_data *decode_xtheadbs(rv_decode *, rv_isa);
++const rv_opcode_data *decode_xtheadcmo(rv_decode *, rv_isa);
++const rv_opcode_data *decode_xtheadcondmov(rv_decode *, rv_isa);
++const rv_opcode_data *decode_xtheadfmemidx(rv_decode *, rv_isa);
++const rv_opcode_data *decode_xtheadfmv(rv_decode *, rv_isa);
++const rv_opcode_data *decode_xtheadmac(rv_decode *, rv_isa);
++const rv_opcode_data *decode_xtheadmemidx(rv_decode *, rv_isa);
++const rv_opcode_data *decode_xtheadmempair(rv_decode *, rv_isa);
++const rv_opcode_data *decode_xtheadsync(rv_decode *, rv_isa);
+ 
+ #endif /* DISAS_RISCV_XTHEAD_H */
+diff --git a/disas/riscv-xventana.h b/disas/riscv-xventana.h
+index 1006c3be00..d28e84c7e4 100644
+--- a/disas/riscv-xventana.h
++++ b/disas/riscv-xventana.h
+@@ -11,6 +11,6 @@
+ 
+ #include "disas/riscv.h"
+ 
+-void decode_xventanacondops(rv_decode*, rv_isa);
++const rv_opcode_data *decode_xventanacondops(rv_decode*, rv_isa);
+ 
+ #endif /* DISAS_RISCV_XVENTANA_H */
+diff --git a/disas/riscv.h b/disas/riscv.h
+index ab62c0db94..241dd47d7f 100644
+--- a/disas/riscv.h
++++ b/disas/riscv.h
+@@ -182,10 +182,8 @@ typedef struct {
+     const RISCVCPUConfig *cfg;
+     uint64_t  pc;
+     uint64_t  inst;
+-    const rv_opcode_data *opcode_data;
+     int32_t   imm;
+     int32_t   imm1;
+-    uint16_t  op;
+     uint8_t   rd;
+     uint8_t   rs1;
+     uint8_t   rs2;
+diff --git a/disas/riscv-xlrbr.c b/disas/riscv-xlrbr.c
+index d0092e9edd..b12916c9da 100644
+--- a/disas/riscv-xlrbr.c
++++ b/disas/riscv-xlrbr.c
+@@ -36,7 +36,7 @@ static const rv_opcode_data xlrbr_opcode_data[] = {
+     { "crc32c.d", rv_codec_r, rv_fmt_rd_rs1 },
+ };
+ 
+-void decode_xlrbr(rv_decode *dec, rv_isa isa)
++const rv_opcode_data *decode_xlrbr(rv_decode *dec, rv_isa isa)
+ {
+     rv_inst inst = dec->inst;
+     rv_opcode op = rv_op_illegal;
+@@ -76,6 +76,5 @@ void decode_xlrbr(rv_decode *dec, rv_isa isa)
+         break;
+     }
+ 
+-    dec->opcode_data = xlrbr_opcode_data;
+-    dec->op = op;
++    return op == rv_op_illegal ? NULL : &xlrbr_opcode_data[op];
+ }
+diff --git a/disas/riscv-xthead.c b/disas/riscv-xthead.c
+index 757d6ff39f..428a6380e9 100644
+--- a/disas/riscv-xthead.c
++++ b/disas/riscv-xthead.c
+@@ -246,7 +246,7 @@ static const rv_opcode_data xthead_opcode_data[] = {
+     { "th.sync.s", rv_codec_none, rv_fmt_none },
+ };
+ 
+-void decode_xtheadba(rv_decode *dec, rv_isa isa)
++const rv_opcode_data *decode_xtheadba(rv_decode *dec, rv_isa isa)
+ {
+     rv_inst inst = dec->inst;
+     rv_opcode op = rv_op_illegal;
+@@ -272,11 +272,10 @@ void decode_xtheadba(rv_decode *dec, rv_isa isa)
+         break;
+     }
+ 
+-    dec->opcode_data = xthead_opcode_data;
+-    dec->op = op;
++    return op == rv_op_illegal ? NULL : &xthead_opcode_data[op];
  }
  
--static uint32_t operand_vimm(rv_inst inst)
-+static int32_t operand_vimm(rv_inst inst)
+-void decode_xtheadbb(rv_decode *dec, rv_isa isa)
++const rv_opcode_data *decode_xtheadbb(rv_decode *dec, rv_isa isa)
  {
-     return (int64_t)(inst << 44) >> 59;
+     rv_inst inst = dec->inst;
+     rv_opcode op = rv_op_illegal;
+@@ -331,11 +330,10 @@ void decode_xtheadbb(rv_decode *dec, rv_isa isa)
+         break;
+     }
+ 
+-    dec->opcode_data = xthead_opcode_data;
+-    dec->op = op;
++    return op == rv_op_illegal ? NULL : &xthead_opcode_data[op];
  }
+ 
+-void decode_xtheadbs(rv_decode *dec, rv_isa isa)
++const rv_opcode_data *decode_xtheadbs(rv_decode *dec, rv_isa isa)
+ {
+     rv_inst inst = dec->inst;
+     rv_opcode op = rv_op_illegal;
+@@ -358,11 +356,10 @@ void decode_xtheadbs(rv_decode *dec, rv_isa isa)
+         break;
+     }
+ 
+-    dec->opcode_data = xthead_opcode_data;
+-    dec->op = op;
++    return op == rv_op_illegal ? NULL : &xthead_opcode_data[op];
+ }
+ 
+-void decode_xtheadcmo(rv_decode *dec, rv_isa isa)
++const rv_opcode_data *decode_xtheadcmo(rv_decode *dec, rv_isa isa)
+ {
+     rv_inst inst = dec->inst;
+     rv_opcode op = rv_op_illegal;
+@@ -437,11 +434,10 @@ void decode_xtheadcmo(rv_decode *dec, rv_isa isa)
+         break;
+     }
+ 
+-    dec->opcode_data = xthead_opcode_data;
+-    dec->op = op;
++    return op == rv_op_illegal ? NULL : &xthead_opcode_data[op];
+ }
+ 
+-void decode_xtheadcondmov(rv_decode *dec, rv_isa isa)
++const rv_opcode_data *decode_xtheadcondmov(rv_decode *dec, rv_isa isa)
+ {
+     rv_inst inst = dec->inst;
+     rv_opcode op = rv_op_illegal;
+@@ -465,11 +461,10 @@ void decode_xtheadcondmov(rv_decode *dec, rv_isa isa)
+         break;
+     }
+ 
+-    dec->opcode_data = xthead_opcode_data;
+-    dec->op = op;
++    return op == rv_op_illegal ? NULL : &xthead_opcode_data[op];
+ }
+ 
+-void decode_xtheadfmemidx(rv_decode *dec, rv_isa isa)
++const rv_opcode_data *decode_xtheadfmemidx(rv_decode *dec, rv_isa isa)
+ {
+     rv_inst inst = dec->inst;
+     rv_opcode op = rv_op_illegal;
+@@ -503,11 +498,10 @@ void decode_xtheadfmemidx(rv_decode *dec, rv_isa isa)
+         break;
+     }
+ 
+-    dec->opcode_data = xthead_opcode_data;
+-    dec->op = op;
++    return op == rv_op_illegal ? NULL : &xthead_opcode_data[op];
+ }
+ 
+-void decode_xtheadfmv(rv_decode *dec, rv_isa isa)
++const rv_opcode_data *decode_xtheadfmv(rv_decode *dec, rv_isa isa)
+ {
+     rv_inst inst = dec->inst;
+     rv_opcode op = rv_op_illegal;
+@@ -539,11 +533,10 @@ void decode_xtheadfmv(rv_decode *dec, rv_isa isa)
+         break;
+     }
+ 
+-    dec->opcode_data = xthead_opcode_data;
+-    dec->op = op;
++    return op == rv_op_illegal ? NULL : &xthead_opcode_data[op];
+ }
+ 
+-void decode_xtheadmac(rv_decode *dec, rv_isa isa)
++const rv_opcode_data *decode_xtheadmac(rv_decode *dec, rv_isa isa)
+ {
+     rv_inst inst = dec->inst;
+     rv_opcode op = rv_op_illegal;
+@@ -571,11 +564,10 @@ void decode_xtheadmac(rv_decode *dec, rv_isa isa)
+         break;
+     }
+ 
+-    dec->opcode_data = xthead_opcode_data;
+-    dec->op = op;
++    return op == rv_op_illegal ? NULL : &xthead_opcode_data[op];
+ }
+ 
+-void decode_xtheadmemidx(rv_decode *dec, rv_isa isa)
++const rv_opcode_data *decode_xtheadmemidx(rv_decode *dec, rv_isa isa)
+ {
+     rv_inst inst = dec->inst;
+     rv_opcode op = rv_op_illegal;
+@@ -646,11 +638,10 @@ void decode_xtheadmemidx(rv_decode *dec, rv_isa isa)
+         break;
+     }
+ 
+-    dec->opcode_data = xthead_opcode_data;
+-    dec->op = op;
++    return op == rv_op_illegal ? NULL : &xthead_opcode_data[op];
+ }
+ 
+-void decode_xtheadmempair(rv_decode *dec, rv_isa isa)
++const rv_opcode_data *decode_xtheadmempair(rv_decode *dec, rv_isa isa)
+ {
+     rv_inst inst = dec->inst;
+     rv_opcode op = rv_op_illegal;
+@@ -681,11 +672,10 @@ void decode_xtheadmempair(rv_decode *dec, rv_isa isa)
+         break;
+     }
+ 
+-    dec->opcode_data = xthead_opcode_data;
+-    dec->op = op;
++    return op == rv_op_illegal ? NULL : &xthead_opcode_data[op];
+ }
+ 
+-void decode_xtheadsync(rv_decode *dec, rv_isa isa)
++const rv_opcode_data *decode_xtheadsync(rv_decode *dec, rv_isa isa)
+ {
+     rv_inst inst = dec->inst;
+     rv_opcode op = rv_op_illegal;
+@@ -716,6 +706,5 @@ void decode_xtheadsync(rv_decode *dec, rv_isa isa)
+         break;
+     }
+ 
+-    dec->opcode_data = xthead_opcode_data;
+-    dec->op = op;
++    return op == rv_op_illegal ? NULL : &xthead_opcode_data[op];
+ }
+diff --git a/disas/riscv-xventana.c b/disas/riscv-xventana.c
+index 4fb9a29d0b..a4e59312d0 100644
+--- a/disas/riscv-xventana.c
++++ b/disas/riscv-xventana.c
+@@ -20,7 +20,7 @@ static const rv_opcode_data ventana_opcode_data[] = {
+     { "vt.maskcn", rv_codec_r, rv_fmt_rd_rs1_rs2 },
+ };
+ 
+-void decode_xventanacondops(rv_decode *dec, rv_isa isa)
++const rv_opcode_data *decode_xventanacondops(rv_decode *dec, rv_isa isa)
+ {
+     rv_inst inst = dec->inst;
+     rv_opcode op = rv_op_illegal;
+@@ -38,6 +38,5 @@ void decode_xventanacondops(rv_decode *dec, rv_isa isa)
+         break;
+     }
+ 
+-    dec->opcode_data = ventana_opcode_data;
+-    dec->op = op;
++    return op == rv_op_illegal ? NULL : &ventana_opcode_data[op];
+ }
+diff --git a/disas/riscv.c b/disas/riscv.c
+index 171c60238f..c4b8ee7d07 100644
+--- a/disas/riscv.c
++++ b/disas/riscv.c
+@@ -2846,7 +2846,7 @@ static const char *csr_name(int csrno)
+ 
+ /* decode opcode */
+ 
+-static void decode_inst_opcode(rv_decode *dec, rv_isa isa)
++static const rv_opcode_data *decode_inst_opcode(rv_decode *dec, rv_isa isa)
+ {
+     rv_inst inst = dec->inst;
+     rv_opcode op = rv_op_illegal;
+@@ -4541,8 +4541,7 @@ static void decode_inst_opcode(rv_decode *dec, rv_isa isa)
+         break;
+     }
+ 
+-    dec->opcode_data = rvi_opcode_data;
+-    dec->op = op;
++    return op == rv_op_illegal ? NULL : &rvi_opcode_data[op];
+ }
+ 
+ /* decode operands */
+@@ -5291,14 +5290,12 @@ static GString *disasm_inst(rv_isa isa, uint64_t pc, rv_inst inst,
+         .inst = inst,
+         .cfg = cfg,
+     };
+-    const rv_opcode_data *op;
++    const rv_opcode_data *op = decode_inst_opcode(&dec, isa);
+ 
+-    decode_inst_opcode(&dec, isa);
+-
+-    if (dec.op == rv_op_illegal && cfg) {
++    if (!op && cfg) {
+         static const struct {
+             bool (*guard_func)(const RISCVCPUConfig *);
+-            void (*decode_func)(rv_decode *, rv_isa);
++            const rv_opcode_data *(*decode_func)(rv_decode *, rv_isa);
+         } decoders[] = {
+             { has_xtheadba_p, decode_xtheadba },
+             { has_xtheadbb_p, decode_xtheadbb },
+@@ -5317,19 +5314,17 @@ static GString *disasm_inst(rv_isa isa, uint64_t pc, rv_inst inst,
+ 
+         for (size_t i = 0; i < ARRAY_SIZE(decoders); i++) {
+             if (decoders[i].guard_func(cfg)) {
+-                decoders[i].decode_func(&dec, isa);
+-                if (dec.op != rv_op_illegal) {
++                op = decoders[i].decode_func(&dec, isa);
++                if (op) {
+                     break;
+                 }
+             }
+         }
+     }
+-
+-    if (dec.op == rv_op_illegal) {
+-        dec.opcode_data = rvi_opcode_data;
++    if (!op) {
++        op = &rvi_opcode_data[rv_op_illegal];
+     }
+ 
+-    op = &dec.opcode_data[dec.op];
+     decode_inst_operands(&dec, isa, op);
+     op = decode_inst_lift_pseudo(&dec, op);
+     return format_inst(24, &dec, op);
 -- 
 2.43.0
 
