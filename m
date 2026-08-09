@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DAB2C5AC67
-	for <qemu-riscv@archiver.kernel.org>; Sun,  9 Aug 2026 01:34:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36029C5AD56
+	for <qemu-riscv@archiver.kernel.org>; Sun,  9 Aug 2026 01:34:34 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wssQF-0000Ma-Hc; Sat, 08 Aug 2026 21:33:55 -0400
+	id 1wssQD-0000Jq-Am; Sat, 08 Aug 2026 21:33:53 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wssQD-0000KU-S8
- for qemu-riscv@nongnu.org; Sat, 08 Aug 2026 21:33:53 -0400
-Received: from mail-pj1-x1035.google.com ([2607:f8b0:4864:20::1035])
+ id 1wssQB-0000Hi-Ew
+ for qemu-riscv@nongnu.org; Sat, 08 Aug 2026 21:33:51 -0400
+Received: from mail-pj1-x1032.google.com ([2607:f8b0:4864:20::1032])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wssQC-0002L7-4Q
- for qemu-riscv@nongnu.org; Sat, 08 Aug 2026 21:33:53 -0400
-Received: by mail-pj1-x1035.google.com with SMTP id
- 98e67ed59e1d1-38125cebfdaso947063a91.1
- for <qemu-riscv@nongnu.org>; Sat, 08 Aug 2026 18:33:51 -0700 (PDT)
+ id 1wssQ9-0002Ii-11
+ for qemu-riscv@nongnu.org; Sat, 08 Aug 2026 21:33:51 -0400
+Received: by mail-pj1-x1032.google.com with SMTP id
+ 98e67ed59e1d1-383b4a3755fso802158a91.3
+ for <qemu-riscv@nongnu.org>; Sat, 08 Aug 2026 18:33:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1786239231; x=1786844031; darn=nongnu.org;
+ d=linaro.org; s=google; t=1786239227; x=1786844027; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=9CMjhGAouHGBJW/4hNYHsxuO6VLA75iUJaQ3M13HdXA=;
- b=U3k809V8Njf08omCmoxMBcqnLkWemSDPXVBR7GMj9Q3RahLCRLGVSIN+x7tGg4G8TP
- XQYdjNgP3rpZ5WFzfWdIymNLdb3cnNorrZxnlURvEZOXDATS3zEBv4FZAv4NmlOYQJku
- 19U8XlANC5ubgVz5OUSXyYQEp0qvoljgEWnmX5AzbLQv3PJ38F50MBWoVCkZTxYyKLyP
- l8gB5xMZtCx4S4s4Pm7+wme8gp+ttnDQ3glmetYpQYW5oDwx/gprw0W1GtlpYgfMO9wQ
- WNHEAydJWaViQcmVy2t6Yzuswly0spLdBZbv0GXpvPOl/OwakukUG+uLgfpIA0ubUW5P
- aBVQ==
+ bh=24nbi+Yp05sHv97Lvb7bmm3DBsKexstLCmuszK87+YI=;
+ b=O3BzhbMvpJ/kTAvazx6tY7+5FsnqVAO9Wx6Xn+WVbYM/y69qMP4AgEp7dtu7OgwxOl
+ WeaJx1ZA/94erz13Hobuzby1T96v+EiLJwkSBZ9E+K99+mN329B43hgJjijGv9Y0guX+
+ v6ITxZPHpc1cUqJKGG5EEecBHXlffYX2YgaLRHGeQlmxD3e8COZWqFLcgVFgK3d3y5ZY
+ o4DY3HE80sTEXMIHtMnLjDvpltG8oj3WSygrnTNNySWjvWWXo23pVQijr90A/Mw+MoYW
+ vw9e3a9hm+XT8Y8yyJD1OtBJQcNR1njj3QrjtzDSmQaMfL6eIg5JosldEQs3ZpUV3Qvb
+ 0DGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786239231; x=1786844031;
+ d=1e100.net; s=20251104; t=1786239227; x=1786844027;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=9CMjhGAouHGBJW/4hNYHsxuO6VLA75iUJaQ3M13HdXA=;
- b=es0vBYMnbxNhilbqRK2gV1wfQi3P/DYuPDNV7pUjcYhHaeJ15vrqR8NRfjqnuKcxID
- 1PzXjjoeb5bDzU3IhbU8k1+o1M0QQYTnTssoGgugQZJVjJsDr/NQMVoN6YUwlLAeFaug
- yeeib0IAhEgq7lDLHelbJ3xAgQMd5cl17VIFm3VbPcm54BRZkjCot/Ga/dzByZnjZz72
- cLEyPDnXQl3A6wfaAAAQaCYLzen0nmJ0urbQ6LlsgXZMfQs7YKUy43qEBsa5Nqaq1t9W
- 62Rgf9l1HO5KBI1B/IguQHv2AKNGVc2H/zD8dvVxLVJMEhe2nxJKJ3fyyDy5T9rm5W3u
- OYMw==
+ bh=24nbi+Yp05sHv97Lvb7bmm3DBsKexstLCmuszK87+YI=;
+ b=cAFIXi4HSAh7miA65SZXYwHfJ08++w8TlSCeqz5LU2ethtaG4LhXUgewdKJ0nw/6ta
+ iQdw6ZJ9nPj8ci5WEk5nmA62o0BjQp1hdVnWOWsCMRb+cgt/ZdnTPMmiyLLehjtXtU/r
+ 148eS97jtFzYC6e8R6tM6qIl3V/Nw1fcvCfvNl6WAxy+dngVedoO5T5TlVKzuaqOf+tF
+ FQaXTxiH8qMf2OwiJU4xgWSoD4ZZaePKRVS6G8CB3Etr5HpzMyEuog2OIcRRicVA6nkN
+ wBgIuAOObfmqDrdjt2glsKJH1fPay92WIlNuZMCDfdCinRCIfVSpeUi1nIuGiZlxUwbE
+ hMSA==
 X-Forwarded-Encrypted: i=1;
- AHgh+RqE85Mbn3iiQCdpxDasq2X82oC090teqeNnlpOqdhCZAd8V0jESYuWPFMuYTxymdODcCB5rm9s/Le/v@nongnu.org
-X-Gm-Message-State: AOJu0YyUm4oZ34W8Mt/7piR709UGBlqODkTLxkfYj3zjTVwcqjYpxIWV
- szJdovQCC+8g01Weg1voym9FDHIZJkr/nAUON0dgyraYyHbIcq/rvtgywgwO7t5tFzE=
-X-Gm-Gg: AR+sD11YT81lL8jo1AxFyTji0TsE/7lVxjW5kB0GjyWi17AF+HHtZTWlNzlPMfm9kfr
- ccBgl1cL0pQcvRRNqHMt14oEfyiRChKv9fH2Df3w8WL0PlKly/Ey6q5O8NGZ9vJ0bT6NaIgDSH3
- 2mb9mBgdauCVXVgxVIt5gvuDoR4TCVdIge2a8zVhGzWY1nWBXB15HYFcWptdpUnpnIjnK/mOpwB
- dRCMcNweWCfvQW6R4gMAaIN8aXS1UGJWnypoAbWPcjDyzaEffvFtcqZEWxc20ynQiFSPx7CCjOZ
- v0cFb93QKhLV1gTa6/dsxyA3vXHlFetTe23Xpejh7W0zfS0ewakW4colCOdo62ymoQmp+kkmP0e
- 119xlJdwAPctlNa2iAPU5/ILbu3rfr6Nfj20QyyRMV4AqPAncrlCCqX4ZNPFeKtEL5DnrB4/PT0
- 7dG1gTBBCpvs9D6ZuH27ey/JIcPn7UEO4g3lavmqVUhch/jlJfOpSWOq6ZlMhdK6/g14iAyfRcd
- Uli06S8DzSh8uyPHp/y
-X-Received: by 2002:a17:90a:d445:b0:381:20b:a9ee with SMTP id
- 98e67ed59e1d1-3926213f22emr14128526a91.14.1786239230705; 
- Sat, 08 Aug 2026 18:33:50 -0700 (PDT)
+ AHgh+RpYxmetAnHnVHaeKfXBIstMxGRn94gnWyU618s7p5tWxW1PyVE4o+KWlNGfNsAffQ3FS6JOTGE+hv2d@nongnu.org
+X-Gm-Message-State: AOJu0YykNHgsXW3Fanf0sJinzF3eJ0KxfTAFwIkh75p0g1YRnOM8+2Lg
+ DXJpPeu/IXR9RyEGDWBwoYx6R+9NS/+M6d+q36jHOzYw69BOIRkZ+NAp45gA+8nrMvQ=
+X-Gm-Gg: AR+sD12B3IW/y1OExFanCVUvmRsv5PYX6HQoTUAmec9avpG1L05+S+aqDCjkev1aZKZ
+ ckaTJ8JCgbmm82QNVgIJcrMl/2MUhQj1yldnbu3YF8BAUE/YOnIKhg6dTLsE/NXx40HmnHdlyOa
+ t3Fs0IuL1qL6VWoWjWrDltwxx9S0I1uzR4dEQvTbZD3SNaTCqTaN3VlvsqkAMCaE0zGUcGlLm7a
+ KitMQPbmUKzU48BGTh2la1S/u5plxBk+oaAa0riPojNK7XSPaVuQP+ZauWQ+Y1g1Qowi82lX98j
+ dcWBVqUp1Ryo6u22/EIbdsLGLPl2JNTtvemhw9W5GLylMtd4oVcQpaBCbQJjrjUpgBJYQB8Cokg
+ 2NEBgfGRQiRX6qnie8a27krCq3ARbJvFi4hhFflC+x0wDzMbU6Ju+R7cjIZcMgymZX68GNedRpN
+ 3xTlDIAQoEg/2SQdVMlv57Eg2hsnE4nu2OR13vB1nQe4vcCqoO6Rmk1eBNdfc0T69PQ3DE706AH
+ YqKhwJg0iu0o/HEd7VR
+X-Received: by 2002:a17:90b:2dc7:b0:380:fead:448d with SMTP id
+ 98e67ed59e1d1-392620e6e25mr16119106a91.13.1786239227423; 
+ Sat, 08 Aug 2026 18:33:47 -0700 (PDT)
 Received: from stoup.. (174-21-93-59.tukw.qwest.net. [174.21.93.59])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-39085de8ddcsm10067927a91.6.2026.08.08.18.33.49
+ 98e67ed59e1d1-39085de8ddcsm10067927a91.6.2026.08.08.18.33.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 08 Aug 2026 18:33:50 -0700 (PDT)
+ Sat, 08 Aug 2026 18:33:46 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: 17746591750@163.com, laurent@vivier.eu, philmd@mailo.com,
  qemu-riscv@nongnu.org, qemu-s390x@nongnu.org
-Subject: [PATCH 5/9] target/tricore: Enable disassembly via capstone
-Date: Sat,  8 Aug 2026 18:33:39 -0700
-Message-ID: <20260809013343.664966-6-richard.henderson@linaro.org>
+Subject: [PATCH 2/9] disas/capstone: Allow for cap_insn_unit > length
+Date: Sat,  8 Aug 2026 18:33:36 -0700
+Message-ID: <20260809013343.664966-3-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260809013343.664966-1-richard.henderson@linaro.org>
 References: <20260809013343.664966-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1035;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1035.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1032;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1032.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -103,88 +103,47 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+cap_insn_unit is designed for targets like arm thumb2
+and s390x where 4 and 6-byte insns are displayed in
+2-byte chunks.
+
+For riscv, we prefer 4-byte insns to display as one
+4-byte unit, rather than 2x 2-byte units.  So we will
+want to set cap_insn_unit to 4, but allow for insns
+that are smaller than 4.  Emit padding to match.
+
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- include/disas/capstone.h | 11 +++++++++++
- target/tricore/cpu.c     | 31 +++++++++++++++++++++++++++++++
- 2 files changed, 42 insertions(+)
+ disas/capstone.c | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
 
-diff --git a/include/disas/capstone.h b/include/disas/capstone.h
-index 788f90771a..db1abe7f70 100644
---- a/include/disas/capstone.h
-+++ b/include/disas/capstone.h
-@@ -78,4 +78,15 @@
- #define CS_MODE_SH4A             0
- #endif
- 
-+#if CS_API_MAJOR < 5
-+#define CS_ARCH_TRICORE         -1
-+#define CS_MODE_TRICORE_110      0
-+#define CS_MODE_TRICORE_120      0
-+#define CS_MODE_TRICORE_130      0
-+#define CS_MODE_TRICORE_131      0
-+#define CS_MODE_TRICORE_160      0
-+#define CS_MODE_TRICORE_161      0
-+#define CS_MODE_TRICORE_162      0
-+#endif
-+
- #endif /* QEMU_CAPSTONE_H */
-diff --git a/target/tricore/cpu.c b/target/tricore/cpu.c
-index 472c24ae32..c3c9b7ef02 100644
---- a/target/tricore/cpu.c
-+++ b/target/tricore/cpu.c
-@@ -24,6 +24,7 @@
- #include "qemu/error-report.h"
- #include "tcg/debug-assert.h"
- #include "accel/tcg/cpu-ops.h"
-+#include "disas/capstone.h"
- 
- static inline void set_feature(CPUTriCoreState *env, int feature)
+diff --git a/disas/capstone.c b/disas/capstone.c
+index fe3efb0d3c..8fb8d0724c 100644
+--- a/disas/capstone.c
++++ b/disas/capstone.c
+@@ -107,8 +107,9 @@ static void cap_dump_insn_units(disassemble_info *info, cs_insn *insn,
  {
-@@ -35,6 +36,35 @@ static const gchar *tricore_gdb_arch_name(CPUState *cs)
-     return "tricore";
+     fprintf_function print = info->fprintf_func;
+     FILE *stream = info->stream;
++    int unit = MIN(info->cap_insn_unit, n - i);
+ 
+-    switch (info->cap_insn_unit) {
++    switch (unit) {
+     case 4:
+         if (info->endian == BFD_ENDIAN_BIG) {
+             for (; i < n; i += 4) {
+@@ -140,6 +141,11 @@ static void cap_dump_insn_units(disassemble_info *info, cs_insn *insn,
+         }
+         break;
+     }
++
++    if (unit < info->cap_insn_unit) {
++        int width = (info->cap_insn_unit - unit) * 2;
++        print(stream, "%*s", width, "");
++    }
  }
  
-+static void tricore_disas_set_info(const CPUState *cpu, disassemble_info *info)
-+{
-+    CPUTriCoreState *env = cpu_env((CPUState *)cpu);
-+
-+    info->endian = BFD_ENDIAN_LITTLE;
-+    info->cap_arch = CS_ARCH_TRICORE;
-+    info->cap_insn_unit = 4;
-+    info->cap_insn_split = 4;
-+
-+    /*
-+     * Possible capstone bug: the isa levels are not additive.
-+     * Work around by settiing only one.
-+     * Note that TriCore 1.3.0 is the earliest we support.
-+     */
-+    if (tricore_has_feature(env, TRICORE_FEATURE_162)) {
-+        info->cap_mode = CS_MODE_TRICORE_162;
-+    } else if (tricore_has_feature(env, TRICORE_FEATURE_161)) {
-+        info->cap_mode = CS_MODE_TRICORE_161;
-+    } else if (tricore_has_feature(env, TRICORE_FEATURE_16)) {
-+        info->cap_mode = CS_MODE_TRICORE_160;
-+    } else if (tricore_has_feature(env, TRICORE_FEATURE_131)) {
-+        info->cap_mode = CS_MODE_TRICORE_131;
-+    } else if (tricore_has_feature(env, TRICORE_FEATURE_13)) {
-+        info->cap_mode = CS_MODE_TRICORE_130;
-+    } else {
-+        g_assert_not_reached();
-+    }
-+}
-+
- static void tricore_cpu_set_pc(CPUState *cs, vaddr value)
- {
-     cpu_env(cs)->PC = value & ~1;
-@@ -214,6 +244,7 @@ static void tricore_cpu_class_init(ObjectClass *c, const void *data)
-     cc->gdb_write_register = tricore_cpu_gdb_write_register;
-     cc->gdb_num_core_regs = 44;
-     cc->gdb_arch_name = tricore_gdb_arch_name;
-+    cc->disas_set_info = tricore_disas_set_info;
- 
-     cc->dump_state = tricore_cpu_dump_state;
-     cc->set_pc = tricore_cpu_set_pc;
+ static void cap_dump_insn(disassemble_info *info, cs_insn *insn)
 -- 
 2.43.0
 
