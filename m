@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACC56C5AD2C
-	for <qemu-riscv@archiver.kernel.org>; Sun,  9 Aug 2026 01:36:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47835C5AD2C
+	for <qemu-riscv@archiver.kernel.org>; Sun,  9 Aug 2026 01:36:14 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wssQI-0000QB-Mt; Sat, 08 Aug 2026 21:33:58 -0400
+	id 1wssQL-0000Sw-EJ; Sat, 08 Aug 2026 21:34:01 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wssQH-0000PD-Rs
- for qemu-riscv@nongnu.org; Sat, 08 Aug 2026 21:33:57 -0400
-Received: from mail-pj1-x102d.google.com ([2607:f8b0:4864:20::102d])
+ id 1wssQJ-0000QU-Et
+ for qemu-riscv@nongnu.org; Sat, 08 Aug 2026 21:33:59 -0400
+Received: from mail-pj1-x1030.google.com ([2607:f8b0:4864:20::1030])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wssQE-0002Nd-Vd
- for qemu-riscv@nongnu.org; Sat, 08 Aug 2026 21:33:57 -0400
-Received: by mail-pj1-x102d.google.com with SMTP id
- 98e67ed59e1d1-38125cebfdaso947093a91.1
- for <qemu-riscv@nongnu.org>; Sat, 08 Aug 2026 18:33:54 -0700 (PDT)
+ id 1wssQG-0002OG-Jo
+ for qemu-riscv@nongnu.org; Sat, 08 Aug 2026 21:33:59 -0400
+Received: by mail-pj1-x1030.google.com with SMTP id
+ 98e67ed59e1d1-3900e39d935so704241a91.0
+ for <qemu-riscv@nongnu.org>; Sat, 08 Aug 2026 18:33:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1786239233; x=1786844033; darn=nongnu.org;
+ d=linaro.org; s=google; t=1786239235; x=1786844035; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=GU/L2JcroJNHA+KY28DNLnCmO+j8k/C0lmalv2aUq0M=;
- b=DT2l6yERyOrTZ/+fGv+Iy2ylNBIMJaSNtK0ssXIxGQnog2i5klal0JClkItTj5XNz/
- SMYr3ZNIwaIyBauOJ+9bCgbKxOW4aP84lCcCCcngo62r9/JpmqV6LQmKkeXU/sokI6JL
- NB1Amt7/mQhfHWcRw8pm1HEk5twftWy+FX3NjgpY3xRxuH542BHBzVCzflqki6J96KWE
- Cu8X9Z8/5urZOJy4HGGozKPZ733s/NXQdp0Ik1V3R1Ngv+28r3Z4aYYiuJbYwNn3f4TC
- qjO/sAWyyn/Oi6FNTE55/F6eHHa8IZZMpssUvy0LTorJCOkEvYshEYwshDhASnxMvIIa
- bUsA==
+ bh=vP07yqpkjRyDv/S/nnmckw5rlPZxwQxqznXafIp0aFM=;
+ b=q9rMHV8EwNicDKSG9UiV0GMEho+kIbWgyDrnWyivBMwKoK6EtHq44Gf0XWK9Ve9K+D
+ SaHC4+EfNA+bT4EntoYu7rqgKOSAjMG1Yo2HHjDR53V6ex4HvPFTC9fcTs1a4sTx/1Ly
+ JJPQveI/r+j1em6edgFBfcVQHP2xxrvqMdVhKeZ93j8d3wUORMmmHaeYUXuFjGqwge1M
+ nLSRfW+FPFbivLCI/k0NTBkx4+5XYZz7/wqZxGXk2WyqxGdiEJPm3CzIJ4orPEkvFl/7
+ LK7Wi31gaT5kbFoWSRlLmZKYYN4gxeD7OAkaWXMBUic+rV4MZ6JSFBaYqLaq0l71yUfc
+ RiGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786239233; x=1786844033;
+ d=1e100.net; s=20251104; t=1786239235; x=1786844035;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=GU/L2JcroJNHA+KY28DNLnCmO+j8k/C0lmalv2aUq0M=;
- b=Fm8o6MFn8mrhC3vCMmTJHVJqbjFs2cKAb5fPf/abChrm7nb4MhM8hfxvow7nbyyIG3
- FjVeyWbQI23QQMMFegto1tOWKcq/0rbYHqGNLbcjOkw04OLgXh0ZtmcWQysdvPXy7KH9
- 8y/L4GFJ+hZMycDZjRdMsaueH8u1l5QBov0lAyeZjLMJ+5xUbhZh36Z6I+PpNye6iMBr
- cOSSxUqDPDnC24cjmOHqCbOn8RwTTZVJAujczdQ7PQR3/r8yohnp+TYjSzx7Bd89Waqm
- ka9ilFCxiyRbOE8n/iJXwmnh/MjDJ9k7itYRwmXDrJWpDDb/IQC+LstijL2zknQq9Po2
- jDcg==
+ bh=vP07yqpkjRyDv/S/nnmckw5rlPZxwQxqznXafIp0aFM=;
+ b=IpoQHCKfcd4HFyn28CxJWimo85t+bYCT1hxA0cmWmJ9g0aZ/yx1O3RKRsHhnYGBjoW
+ b9o4sNQXQAJikmdxsUFur1GTgwbY6/jmW6pUFTFbzRTWJAIAhnQ3CP0AMPai3aqtVwhw
+ jzRoNzIu2QqOJc0zQEpIzoOaOxG4S3FHk4zAJb6T+hkMNBDk4UdpIZlcSdRDBCTi7gxO
+ ZKuen+68ChrzP1KCclwXb4xnBmvduVYysN0Tu6LhYBIISBl50h6sbSjLjZeswHzLIKyb
+ zF8VOqpermmNDohEPs0W5ZSheBUyEiO4mPqLitgShuBmFpHhg9hSzCQg1Kr0+Lrc3X4m
+ gJSw==
 X-Forwarded-Encrypted: i=1;
- AHgh+Rrrr0ivKKQf8f9q5iJ65hD2N3Had9HX0U2aa8d7IaXyAb6wdf1SI1l3YtHoPqbvYaXZw4WMV70/f5M2@nongnu.org
-X-Gm-Message-State: AOJu0Yz6vTAqVLslmEL3wDLBLbEiuFF5EYV2QrOdhshmk0OBlZhcu3qp
- qgzE9juXT3dRGf/lA3qyc6m3wyqXvA23mpYmWdAmuNFQWQ9yaZ/NMsY+wUssgKYw6lM=
-X-Gm-Gg: AR+sD10o20qlnY7ip2bzZOe8/XQfbqK5gsKBOdH3qaey1RNLobVyAVrtSMWKlqcXQiE
- 75tcYqHMqQHo0/hCsPuLC35fLeYSnLFuP3U9ruC5IBzRMckkAzH7SrUktB+ioDrypPQmS6nyAyV
- ACole7fcBqZKDOD82qG00rpj7g/UrtJQRtxmiZg1sw3GzPxxrI1gF4x3xsYGvk16Q99sxym3qq4
- RNlNEG30QoaETgkIfOp6zUd4Jw4yarVonfKzsJ031LIG5EDWKGTaiK7xpxxowvGoTAwa+AQ38rb
- y/vYw3dutgjRWIWR7iYU4oV+WPmUod88uF5koLJsHGl+eIpoweVjd3lVJNraY8OMruKCshZNB6K
- iDSMtljoMLCbhwzKDix3S9mnG4bjE0lrm55/R6WpH7kab8g3OKLnRZV4mkOGjILhvriHVDtUr5P
- G7QT+3dlVGYyfaEjnpsTajKRhSzlGRrHnD73/wp3hBxuLXU1jHZhkV77RlUhp7e9IQmIF3Flu4q
- F0eRwdE/DZn558colf7
-X-Received: by 2002:a17:90b:3b45:b0:38e:4f41:83df with SMTP id
- 98e67ed59e1d1-392621444f0mr13898722a91.15.1786239233399; 
- Sat, 08 Aug 2026 18:33:53 -0700 (PDT)
+ AHgh+Rqqj5FyAXYTfDBfuopOrIxZAG/FwRQEFrFSqKbrf8udP0qT0X8qN7162dxDAHcng8z69PbIxVcKwW/Y@nongnu.org
+X-Gm-Message-State: AOJu0Ywp5orluYvHvttekm6f4z/lRkBeZOTwuJhVr/xU5+qreqW+iZH4
+ hG94PX+ZpU2y2fO7QmjBkqN2dTB8eC4PjwxPGVIhmzsjDXz/hJ3duixm2Bb4cFn4sKg=
+X-Gm-Gg: AR+sD10Au8mfLmGujft3+maEQ1/B14BQyj6DM/HJeYfcdqwCcKR5z6weQ42oLY5iWs1
+ tFKedVBIacYdfWS//toUDwAEBym5UtQQ9wF8Wrs28hMrPTwDWvXZkqisBr37O2iDaXOgFVxkQuw
+ 2pAX3aGbGGem6IdYRxo4ZqsAwKI4orjHaqKxkn3M8sb4ysLnWaZwWrQomrJOUn9cQvYhvhSsLuQ
+ 7hR21dcugus6/U/25p5TLCOJIY/dGDwBS1+YlvCSH2ef0xJBAez+L54X9BNGd1sV7w1nJqOS77J
+ gwR4TMWETC43FxPb63hkEZHR3MJQXoXY8HoDHj0OP+iVu1KgFZWIDUhgeLhCP5mRVNKMJFOxNih
+ F3flwsgWkwYpkS1VCHgRmQRIf7K4RGcMZLS287TmYArAvCvi/geBRhUMmeSTzQLV0++Ssb7rKW8
+ TzeSL4nP30rimNzSNv6/9MTZs9LFEdesSXhSKBSXOP5fwIZVPhQk/7D8NOZSPd7LFaz+Uszu3+K
+ NLx+/knGowWN32Ymbau
+X-Received: by 2002:a17:90b:28cf:b0:381:1c96:829b with SMTP id
+ 98e67ed59e1d1-3903c53496dmr38916550a91.3.1786239235124; 
+ Sat, 08 Aug 2026 18:33:55 -0700 (PDT)
 Received: from stoup.. (174-21-93-59.tukw.qwest.net. [174.21.93.59])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-39085de8ddcsm10067927a91.6.2026.08.08.18.33.51
+ 98e67ed59e1d1-39085de8ddcsm10067927a91.6.2026.08.08.18.33.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 08 Aug 2026 18:33:52 -0700 (PDT)
+ Sat, 08 Aug 2026 18:33:54 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: 17746591750@163.com, laurent@vivier.eu, philmd@mailo.com,
  qemu-riscv@nongnu.org, qemu-s390x@nongnu.org
-Subject: [PATCH 7/9] target/s390x: Update capstone disassembly to v6
-Date: Sat,  8 Aug 2026 18:33:41 -0700
-Message-ID: <20260809013343.664966-8-richard.henderson@linaro.org>
+Subject: [PATCH 8/9] target/m68k: Enable disassembly via capstone
+Date: Sat,  8 Aug 2026 18:33:42 -0700
+Message-ID: <20260809013343.664966-9-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260809013343.664966-1-richard.henderson@linaro.org>
 References: <20260809013343.664966-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102d;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x102d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1030;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1030.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -103,82 +103,143 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-In particular, this enables many more vector insns.
-
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- include/disas/capstone.h | 11 +++++++++--
- disas/capstone.c         |  2 +-
- target/s390x/cpu.c       |  4 +++-
- 3 files changed, 13 insertions(+), 4 deletions(-)
+ include/disas/capstone.h | 20 +++++++++++++
+ target/m68k/cpu.c        | 65 +++++++++++++++++++++++++++++++++++++++-
+ 2 files changed, 84 insertions(+), 1 deletion(-)
 
 diff --git a/include/disas/capstone.h b/include/disas/capstone.h
-index a922f7627f..87f8f6181f 100644
+index 87f8f6181f..3d6f90d816 100644
 --- a/include/disas/capstone.h
 +++ b/include/disas/capstone.h
-@@ -4,7 +4,6 @@
- #ifdef CONFIG_CAPSTONE
+@@ -14,6 +14,7 @@
  
- #define CAPSTONE_AARCH64_COMPAT_HEADER
--#define CAPSTONE_SYSTEMZ_COMPAT_HEADER
- #include <capstone.h>
- 
- #else
-@@ -19,7 +18,6 @@
+ #define CS_ARCH_ARM     -1
+ #define CS_ARCH_ARM64   -1
++#define CS_ARCH_M68K    -1
+ #define CS_ARCH_MIPS    -1
  #define CS_ARCH_X86     -1
  #define CS_ARCH_PPC     -1
- #define CS_ARCH_SPARC   -1
--#define CS_ARCH_SYSZ    -1
- 
- #define CS_MODE_LITTLE_ENDIAN    0
- #define CS_MODE_BIG_ENDIAN       0
-@@ -84,6 +82,15 @@
- #define CS_MODE_SH4A             0
+@@ -28,6 +29,12 @@
+ #define CS_MODE_THUMB            0
+ #define CS_MODE_MCLASS           0
+ #define CS_MODE_V8               0
++#define CS_MODE_M68K_000         0
++#define CS_MODE_M68K_010         0
++#define CS_MODE_M68K_020         0
++#define CS_MODE_M68K_030         0
++#define CS_MODE_M68K_040         0
++#define CS_MODE_M68K_060         0
+ #define CS_MODE_MICRO            0
+ #define CS_MODE_MIPS3            0
+ #define CS_MODE_MIPS32R6         0
+@@ -44,6 +51,19 @@
+ #define CS_MODE_LOONGARCH64      0
  #endif
  
-+#if CS_API_MAJOR == 0
-+#define CS_ARCH_SYSTEMZ         -1
-+#elif CS_API_MAJOR < 6
-+#define CS_ARCH_SYSTEMZ          CS_ARCH_SYSZ
-+#endif
 +#if CS_API_MAJOR < 6
-+#define CS_MODE_SYSTEMZ_ARCH14   0
++#define CS_MODE_M68K_CF_ISA_A    0
++#define CS_MODE_M68K_CF_ISA_A_PLUS 0
++#define CS_MODE_M68K_CF_ISA_B    0
++#define CS_MODE_M68K_CF_ISA_C    0
++#define CS_MODE_M68K_CF_USP      0
++#define CS_MODE_M68K_CF_DIV      0
++#define CS_MODE_M68K_CF_MAC      0
++#define CS_MODE_M68K_CF_EMAC     0
++#define CS_MODE_M68K_CF_EMAC_B   0
++#define CS_MODE_M68K_CF_FPU      0
 +#endif
 +
  #if CS_API_MAJOR < 5
- #define CS_ARCH_TRICORE         -1
- #define CS_MODE_TRICORE_110      0
-diff --git a/disas/capstone.c b/disas/capstone.c
-index 78062339d0..a5bd91890b 100644
---- a/disas/capstone.c
-+++ b/disas/capstone.c
-@@ -95,7 +95,7 @@ static cs_err cap_disas_start(disassemble_info *info, csh *handle)
-                   (uintptr_t)&cap_skipdata_riscv);
-         break;
+ #define CS_ARCH_RISCV           -1
+ #define CS_MODE_RISCV32          0
+diff --git a/target/m68k/cpu.c b/target/m68k/cpu.c
+index 9ad3057d91..6acf23b29b 100644
+--- a/target/m68k/cpu.c
++++ b/target/m68k/cpu.c
+@@ -22,7 +22,7 @@
+ #include "accel/tcg/cpu-ops.h"
+ #include "fpu/softfloat.h"
+ #include "qapi/error.h"
+-
++#include "disas/capstone.h"
+ #ifndef CONFIG_USER_ONLY
+ #include "migration/vmstate.h"
+ #include "monitor/hmp.h"
+@@ -182,9 +182,72 @@ static void m68k_cpu_reset_hold(Object *obj, ResetType type)
  
--    case CS_ARCH_SYSZ:
-+    case CS_ARCH_SYSTEMZ:
-         cs_option(*handle, CS_OPT_SKIPDATA_SETUP,
-                   (uintptr_t)&cap_skipdata_s390x);
-         break;
-diff --git a/target/s390x/cpu.c b/target/s390x/cpu.c
-index c074e12ba2..e81cf16ac3 100644
---- a/target/s390x/cpu.c
-+++ b/target/s390x/cpu.c
-@@ -225,10 +225,12 @@ static void s390_cpu_reset_hold(Object *obj, ResetType type)
- static void s390_cpu_disas_set_info(const CPUState *cpu, disassemble_info *info)
+ static void m68k_cpu_disas_set_info(const CPUState *cs, disassemble_info *info)
  {
-     info->mach = bfd_mach_s390_64;
--    info->cap_arch = CS_ARCH_SYSZ;
-+    info->cap_arch = CS_ARCH_SYSTEMZ;
++    CPUM68KState *env = cpu_env((CPUState *)cs);
++    int cap_mode = 0;
++
+     info->print_insn = print_insn_m68k;
      info->endian = BFD_ENDIAN_BIG;
-     info->cap_insn_unit = 2;
-     info->cap_insn_split = 6;
-+    /* Disassemble everything, even if the cpu would trap on the insn. */
-+    info->cap_mode = CS_MODE_SYSTEMZ_ARCH14;
+     info->mach = 0;
++
++    /* m68k support in capstone prior to v6 is unusably bad */
++    if (CS_API_MAJOR < 6) {
++        return;
++    }
++
++    info->cap_arch = CS_ARCH_M68K;
++    info->cap_insn_unit = 2;
++
++    if (m68k_feature(env, M68K_FEATURE_M68K)) {
++        /*
++         * m68k insns may have up to 11 words, and 5 words are common.
++         * Choosing 12 bytes splits after 6 words and disassembly
++         * uses no more than 2 lines.
++         */
++        info->cap_insn_split = 12;
++        if (m68k_feature(env, M68K_FEATURE_M68060)) {
++            cap_mode = CS_MODE_M68K_060;
++        } else if (m68k_feature(env, M68K_FEATURE_M68040)) {
++            cap_mode = CS_MODE_M68K_040;
++        } else if (m68k_feature(env, M68K_FEATURE_M68030)) {
++            cap_mode = CS_MODE_M68K_030;
++        } else if (m68k_feature(env, M68K_FEATURE_M68020)) {
++            cap_mode = CS_MODE_M68K_020;
++        } else if (m68k_feature(env, M68K_FEATURE_M68010)) {
++            cap_mode = CS_MODE_M68K_010;
++        } else {
++            cap_mode = CS_MODE_M68K_000;
++        }
++    } else {
++        /* ColdFire insns may have up to 3 words. */
++        info->cap_insn_split = 6;
++        if (m68k_feature(env, M68K_FEATURE_CF_ISA_A)) {
++            cap_mode |= CS_MODE_M68K_CF_ISA_A;
++            cap_mode |= CS_MODE_M68K_CF_DIV;
++        }
++        if (m68k_feature(env, M68K_FEATURE_CF_ISA_B)) {
++            cap_mode |= CS_MODE_M68K_CF_ISA_B;
++        }
++        if (m68k_feature(env, M68K_FEATURE_CF_ISA_APLUSC)) {
++            cap_mode |= CS_MODE_M68K_CF_ISA_A_PLUS;
++            cap_mode |= CS_MODE_M68K_CF_ISA_C;
++        }
++        if (m68k_feature(env, M68K_FEATURE_USP)) {
++            cap_mode |= CS_MODE_M68K_CF_USP;
++        }
++        if (m68k_feature(env, M68K_FEATURE_CF_FPU)) {
++            cap_mode |= CS_MODE_M68K_CF_FPU;
++        }
++        if (m68k_feature(env, M68K_FEATURE_CF_MAC)) {
++            cap_mode |= CS_MODE_M68K_CF_MAC;
++        }
++        if (m68k_feature(env, M68K_FEATURE_CF_EMAC)) {
++            cap_mode |= CS_MODE_M68K_CF_EMAC;
++        }
++        if (m68k_feature(env, M68K_FEATURE_CF_EMAC_B)) {
++            cap_mode |= CS_MODE_M68K_CF_EMAC_B;
++        }
++    }
++    info->cap_mode = cap_mode;
  }
  
- static void s390_cpu_realizefn(DeviceState *dev, Error **errp)
+ /* CPU models */
 -- 
 2.43.0
 
