@@ -4,91 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47835C5AD2C
-	for <qemu-riscv@archiver.kernel.org>; Sun,  9 Aug 2026 01:36:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1255EC5AD4E
+	for <qemu-riscv@archiver.kernel.org>; Sun,  9 Aug 2026 11:47:29 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wssQL-0000Sw-EJ; Sat, 08 Aug 2026 21:34:01 -0400
+	id 1wt1yg-0002yp-BD; Sun, 09 Aug 2026 07:46:06 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wssQJ-0000QU-Et
- for qemu-riscv@nongnu.org; Sat, 08 Aug 2026 21:33:59 -0400
-Received: from mail-pj1-x1030.google.com ([2607:f8b0:4864:20::1030])
+ (Exim 4.90_1) (envelope-from <0860734llx@gmail.com>)
+ id 1wswuL-00082t-HV
+ for qemu-riscv@nongnu.org; Sun, 09 Aug 2026 02:21:17 -0400
+Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wssQG-0002OG-Jo
- for qemu-riscv@nongnu.org; Sat, 08 Aug 2026 21:33:59 -0400
-Received: by mail-pj1-x1030.google.com with SMTP id
- 98e67ed59e1d1-3900e39d935so704241a91.0
- for <qemu-riscv@nongnu.org>; Sat, 08 Aug 2026 18:33:56 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <0860734llx@gmail.com>)
+ id 1wswuJ-0005u7-TG
+ for qemu-riscv@nongnu.org; Sun, 09 Aug 2026 02:21:17 -0400
+Received: by mail-pl1-x634.google.com with SMTP id
+ d9443c01a7336-2d01663d816so6352165ad.1
+ for <qemu-riscv@nongnu.org>; Sat, 08 Aug 2026 23:21:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1786239235; x=1786844035; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=vP07yqpkjRyDv/S/nnmckw5rlPZxwQxqznXafIp0aFM=;
- b=q9rMHV8EwNicDKSG9UiV0GMEho+kIbWgyDrnWyivBMwKoK6EtHq44Gf0XWK9Ve9K+D
- SaHC4+EfNA+bT4EntoYu7rqgKOSAjMG1Yo2HHjDR53V6ex4HvPFTC9fcTs1a4sTx/1Ly
- JJPQveI/r+j1em6edgFBfcVQHP2xxrvqMdVhKeZ93j8d3wUORMmmHaeYUXuFjGqwge1M
- nLSRfW+FPFbivLCI/k0NTBkx4+5XYZz7/wqZxGXk2WyqxGdiEJPm3CzIJ4orPEkvFl/7
- LK7Wi31gaT5kbFoWSRlLmZKYYN4gxeD7OAkaWXMBUic+rV4MZ6JSFBaYqLaq0l71yUfc
- RiGw==
+ d=gmail.com; s=20251104; t=1786256474; x=1786861274; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:mime-version:references
+ :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=/D6HjVKa4QQ4IcscIfUtE4RoMhIMfrZSlP4SYUTz+h4=;
+ b=QN4kc31HTpuFAEKifULoD/+RYdkjkmiOOWv3h1sByKmpbBAHJ79g43HVD6jpWANCxi
+ 2nm/lC/+Ntovv/eBhEwZbQ1OvOGiEIFGNfWvf3z65OdSgpbSwmAGAWcpuDDoRktJQsA9
+ RMMkmYnejoCObbamyiIfWpBEiNdplbhMpPT77Pv11tq3zE/DTIIIfm1sKLQaQe4KXkwm
+ GRZbJs1UIT4D0bhpC8OBP6fhlfv3PysHbhUQcUZSCN1WJX2foyaYdNfwBSlgHwDxeik3
+ lovVwTFbj7b19BVp5NYgbRvEtfuHSbOfNzhIxZ1X8h14dYUWTZEoOJGtFa2IqfSzCXKY
+ Tydw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786239235; x=1786844035;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=vP07yqpkjRyDv/S/nnmckw5rlPZxwQxqznXafIp0aFM=;
- b=IpoQHCKfcd4HFyn28CxJWimo85t+bYCT1hxA0cmWmJ9g0aZ/yx1O3RKRsHhnYGBjoW
- b9o4sNQXQAJikmdxsUFur1GTgwbY6/jmW6pUFTFbzRTWJAIAhnQ3CP0AMPai3aqtVwhw
- jzRoNzIu2QqOJc0zQEpIzoOaOxG4S3FHk4zAJb6T+hkMNBDk4UdpIZlcSdRDBCTi7gxO
- ZKuen+68ChrzP1KCclwXb4xnBmvduVYysN0Tu6LhYBIISBl50h6sbSjLjZeswHzLIKyb
- zF8VOqpermmNDohEPs0W5ZSheBUyEiO4mPqLitgShuBmFpHhg9hSzCQg1Kr0+Lrc3X4m
- gJSw==
-X-Forwarded-Encrypted: i=1;
- AHgh+Rqqj5FyAXYTfDBfuopOrIxZAG/FwRQEFrFSqKbrf8udP0qT0X8qN7162dxDAHcng8z69PbIxVcKwW/Y@nongnu.org
-X-Gm-Message-State: AOJu0Ywp5orluYvHvttekm6f4z/lRkBeZOTwuJhVr/xU5+qreqW+iZH4
- hG94PX+ZpU2y2fO7QmjBkqN2dTB8eC4PjwxPGVIhmzsjDXz/hJ3duixm2Bb4cFn4sKg=
-X-Gm-Gg: AR+sD10Au8mfLmGujft3+maEQ1/B14BQyj6DM/HJeYfcdqwCcKR5z6weQ42oLY5iWs1
- tFKedVBIacYdfWS//toUDwAEBym5UtQQ9wF8Wrs28hMrPTwDWvXZkqisBr37O2iDaXOgFVxkQuw
- 2pAX3aGbGGem6IdYRxo4ZqsAwKI4orjHaqKxkn3M8sb4ysLnWaZwWrQomrJOUn9cQvYhvhSsLuQ
- 7hR21dcugus6/U/25p5TLCOJIY/dGDwBS1+YlvCSH2ef0xJBAez+L54X9BNGd1sV7w1nJqOS77J
- gwR4TMWETC43FxPb63hkEZHR3MJQXoXY8HoDHj0OP+iVu1KgFZWIDUhgeLhCP5mRVNKMJFOxNih
- F3flwsgWkwYpkS1VCHgRmQRIf7K4RGcMZLS287TmYArAvCvi/geBRhUMmeSTzQLV0++Ssb7rKW8
- TzeSL4nP30rimNzSNv6/9MTZs9LFEdesSXhSKBSXOP5fwIZVPhQk/7D8NOZSPd7LFaz+Uszu3+K
- NLx+/knGowWN32Ymbau
-X-Received: by 2002:a17:90b:28cf:b0:381:1c96:829b with SMTP id
- 98e67ed59e1d1-3903c53496dmr38916550a91.3.1786239235124; 
- Sat, 08 Aug 2026 18:33:55 -0700 (PDT)
-Received: from stoup.. (174-21-93-59.tukw.qwest.net. [174.21.93.59])
+ d=1e100.net; s=20251104; t=1786256474; x=1786861274;
+ h=content-transfer-encoding:content-type:mime-version:references
+ :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=/D6HjVKa4QQ4IcscIfUtE4RoMhIMfrZSlP4SYUTz+h4=;
+ b=jN68uohyjki/OKKRm/zu/1mxjCQfc3xPgAu283kKlv7B7jnM4eH72fGuoWJZqmcIkH
+ DY+leqjgrKynOg2X2uAg4idLDHM9NEAtj7v3JOqc8WwCjOOSYzIIpG0bQiYzSYcE5bvJ
+ 8rp6a1ZjPtyxG+GsAdopq6jwdCWBKvOVuWvQ8fSgHyXEo2XJXsEw0RqNZI2JaybQaeHH
+ G87RsT3kNRh2qE11nZnR21x22JjUh1+11uqLUy+W2zaHCbhvzQARXeEnDDHCPzr2Lxuo
+ 8jDnVlUpNpYzDyxazi6GKa3pQrFCt2+gfQ8eOH/Zht99iJ6bd1deCAn2hmhnCe0e+3zD
+ Rh4w==
+X-Gm-Message-State: AOJu0Yzs9m2MgPxq7Kb62NvDFyf9CIaw3kF+Tw7WeNHyCs10fosPwfgl
+ +h6QmNbkoqPkHILYEnv/XTJVcczVY5lbFrNLiiU4BQZ2MRaxJUTvJ44I
+X-Gm-Gg: AR+sD12THVGhfCCyDPdoPxtr3yBjNYr78D5TSOoQpb5hAmxwD15ZpMgdCT1HJzo8YuM
+ NuDjitf+kvPJnxgygpGOJIsfU9Km4hIoSqCKDeROZ9A3lQpNXk9sRNQnQ1TZ84GrrB6xDBnbyHB
+ sIKXusURKEusXd7DJt/XP6DTyrNdCXVrzmgKTYvpRIyhI6C/mHcp4woJoOw9T2r4OO1XjsygM70
+ Tql0CK8rEP/yDG1wyQKh7SAOJK+rnNhTAiNZ9YEe8sLf1rLoP25Kk1gJ6C3cxnQ8xEMV8R2oxmV
+ jIfWmHUVwhHoxuY9cm7ERwmklUkiKVJcpfC8bUjYOfAERAt07nRZ1CrzbafWG4IyBbqzQO4G89s
+ ux26pAPmMatsgdPafLu5/Cvb/wIZBF87ETDifVQVDlSviNguekHcwvHSLQNGjqfs4GiBzqY8Niu
+ 8aT8Y1talQZsmzu3zL/NS8n8TcRQ1J+rGcmvUBDVbS5IBIOfowDGnzIGMxs23YXJZimgtjv/Hh1
+ vH+7NHta2c5Db3Nvz4SwfL5DaTzi5XE
+X-Received: by 2002:a17:903:1aa6:b0:2c8:f34c:82c0 with SMTP id
+ d9443c01a7336-2d106a18e41mr259197365ad.2.1786256474572; 
+ Sat, 08 Aug 2026 23:21:14 -0700 (PDT)
+Received: from localhost.localdomain ([159.75.12.57])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-39085de8ddcsm10067927a91.6.2026.08.08.18.33.53
+ d9443c01a7336-2d14ccac6d7sm21805265ad.6.2026.08.08.23.21.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 08 Aug 2026 18:33:54 -0700 (PDT)
-From: Richard Henderson <richard.henderson@linaro.org>
+ Sat, 08 Aug 2026 23:21:14 -0700 (PDT)
+From: Simon Law <0860734llx@gmail.com>
 To: qemu-devel@nongnu.org
-Cc: 17746591750@163.com, laurent@vivier.eu, philmd@mailo.com,
- qemu-riscv@nongnu.org, qemu-s390x@nongnu.org
-Subject: [PATCH 8/9] target/m68k: Enable disassembly via capstone
-Date: Sat,  8 Aug 2026 18:33:42 -0700
-Message-ID: <20260809013343.664966-9-richard.henderson@linaro.org>
+Cc: qemu-riscv@nongnu.org, chao.liu@processmission.com, palmer@dabbelt.com,
+ alistair.francis@wdc.com, liwei1518@gmail.com,
+ daniel.barboza@oss.qualcomm.com, zhiwei_liu@linux.alibaba.com,
+ pierrick.bouvier@oss.qualcomm.com
+Subject: [PATCH 4/4] docs/system/riscv: document K230 CMU support
+Date: Sun,  9 Aug 2026 14:20:44 +0800
+Message-ID: <20260809-feat-k230-cmu-v1-4-8792982c446c@gmail.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260809013343.664966-1-richard.henderson@linaro.org>
-References: <20260809013343.664966-1-richard.henderson@linaro.org>
+In-Reply-To: <20260809-feat-k230-cmu-v1-0-8792982c446c@gmail.com>
+References: <20260809-feat-k230-cmu-v1-0-8792982c446c@gmail.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1030;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1030.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Received-SPF: pass client-ip=2607:f8b0:4864:20::634;
+ envelope-from=0860734llx@gmail.com; helo=mail-pl1-x634.google.com
+X-Spam_score_int: -13
+X-Spam_score: -1.4
+X-Spam_bar: -
+X-Spam_report: (-1.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ FROM_STARTS_WITH_NUMS=0.738, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Sun, 09 Aug 2026 07:46:01 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -103,144 +106,48 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+Signed-off-by: Simon Law <0860734llx@gmail.com>
 ---
- include/disas/capstone.h | 20 +++++++++++++
- target/m68k/cpu.c        | 65 +++++++++++++++++++++++++++++++++++++++-
- 2 files changed, 84 insertions(+), 1 deletion(-)
+ docs/system/riscv/k230.rst | 22 ++++++++++++++++++++++
+ 1 file changed, 22 insertions(+)
 
-diff --git a/include/disas/capstone.h b/include/disas/capstone.h
-index 87f8f6181f..3d6f90d816 100644
---- a/include/disas/capstone.h
-+++ b/include/disas/capstone.h
-@@ -14,6 +14,7 @@
+diff --git a/docs/system/riscv/k230.rst b/docs/system/riscv/k230.rst
+index cea8202e55..dd50b0bd2e 100644
+--- a/docs/system/riscv/k230.rst
++++ b/docs/system/riscv/k230.rst
+@@ -18,9 +18,31 @@ The ``k230`` machine supports the following devices:
+ * 1 c908 cores (little core)
+ * Core Local Interruptor (CLINT)
+ * Platform-Level Interrupt Controller (PLIC)
++* Clock Management Unit (CMU)
+ * 2 K230 Watchdog Timer
+ * 5 UART
  
- #define CS_ARCH_ARM     -1
- #define CS_ARCH_ARM64   -1
-+#define CS_ARCH_M68K    -1
- #define CS_ARCH_MIPS    -1
- #define CS_ARCH_X86     -1
- #define CS_ARCH_PPC     -1
-@@ -28,6 +29,12 @@
- #define CS_MODE_THUMB            0
- #define CS_MODE_MCLASS           0
- #define CS_MODE_V8               0
-+#define CS_MODE_M68K_000         0
-+#define CS_MODE_M68K_010         0
-+#define CS_MODE_M68K_020         0
-+#define CS_MODE_M68K_030         0
-+#define CS_MODE_M68K_040         0
-+#define CS_MODE_M68K_060         0
- #define CS_MODE_MICRO            0
- #define CS_MODE_MIPS3            0
- #define CS_MODE_MIPS32R6         0
-@@ -44,6 +51,19 @@
- #define CS_MODE_LOONGARCH64      0
- #endif
- 
-+#if CS_API_MAJOR < 6
-+#define CS_MODE_M68K_CF_ISA_A    0
-+#define CS_MODE_M68K_CF_ISA_A_PLUS 0
-+#define CS_MODE_M68K_CF_ISA_B    0
-+#define CS_MODE_M68K_CF_ISA_C    0
-+#define CS_MODE_M68K_CF_USP      0
-+#define CS_MODE_M68K_CF_DIV      0
-+#define CS_MODE_M68K_CF_MAC      0
-+#define CS_MODE_M68K_CF_EMAC     0
-+#define CS_MODE_M68K_CF_EMAC_B   0
-+#define CS_MODE_M68K_CF_FPU      0
-+#endif
++Clock Management Unit
++---------------------
 +
- #if CS_API_MAJOR < 5
- #define CS_ARCH_RISCV           -1
- #define CS_MODE_RISCV32          0
-diff --git a/target/m68k/cpu.c b/target/m68k/cpu.c
-index 9ad3057d91..6acf23b29b 100644
---- a/target/m68k/cpu.c
-+++ b/target/m68k/cpu.c
-@@ -22,7 +22,7 @@
- #include "accel/tcg/cpu-ops.h"
- #include "fpu/softfloat.h"
- #include "qapi/error.h"
--
-+#include "disas/capstone.h"
- #ifndef CONFIG_USER_ONLY
- #include "migration/vmstate.h"
- #include "monitor/hmp.h"
-@@ -182,9 +182,72 @@ static void m68k_cpu_reset_hold(Object *obj, ResetType type)
- 
- static void m68k_cpu_disas_set_info(const CPUState *cs, disassemble_info *info)
- {
-+    CPUM68KState *env = cpu_env((CPUState *)cs);
-+    int cap_mode = 0;
++The CMU model provides the register interface used by the K230 SDK U-Boot and
++the upstream Linux K230 clock driver. It implements the four PLL register
++blocks at ``0x91102000`` through ``0x9110203f`` and the defined sysclk
++registers in the ``0x91100000`` window, including the software-visible
++``SPI2AXI_CLK_DIV`` register at offset ``0x108``.
 +
-     info->print_insn = print_insn_m68k;
-     info->endian = BFD_ENDIAN_BIG;
-     info->mach = 0;
++The model implements reset values, writable and reserved bits, PLL control
++write-enable semantics, and write-one-to-trigger update operations. PLL lock
++and init completion are deterministic and immediate so that Linux clock probe
++does not depend on virtual time.
 +
-+    /* m68k support in capstone prior to v6 is unusably bad */
-+    if (CS_API_MAJOR < 6) {
-+        return;
-+    }
++The CMU does not propagate clock frequencies to QEMU devices or alter CPU
++execution speed. Peripheral reset, power control, and a guest-initiated K230
++system-reset backend are separate hardware blocks and are not modeled by the
++CMU. Consequently, a guest reboot requires the future K230 reset subsystem
++and matching OpenSBI reboot backend; QMP ``system_reset`` resets the CMU along
++with the rest of the machine.
 +
-+    info->cap_arch = CS_ARCH_M68K;
-+    info->cap_insn_unit = 2;
-+
-+    if (m68k_feature(env, M68K_FEATURE_M68K)) {
-+        /*
-+         * m68k insns may have up to 11 words, and 5 words are common.
-+         * Choosing 12 bytes splits after 6 words and disassembly
-+         * uses no more than 2 lines.
-+         */
-+        info->cap_insn_split = 12;
-+        if (m68k_feature(env, M68K_FEATURE_M68060)) {
-+            cap_mode = CS_MODE_M68K_060;
-+        } else if (m68k_feature(env, M68K_FEATURE_M68040)) {
-+            cap_mode = CS_MODE_M68K_040;
-+        } else if (m68k_feature(env, M68K_FEATURE_M68030)) {
-+            cap_mode = CS_MODE_M68K_030;
-+        } else if (m68k_feature(env, M68K_FEATURE_M68020)) {
-+            cap_mode = CS_MODE_M68K_020;
-+        } else if (m68k_feature(env, M68K_FEATURE_M68010)) {
-+            cap_mode = CS_MODE_M68K_010;
-+        } else {
-+            cap_mode = CS_MODE_M68K_000;
-+        }
-+    } else {
-+        /* ColdFire insns may have up to 3 words. */
-+        info->cap_insn_split = 6;
-+        if (m68k_feature(env, M68K_FEATURE_CF_ISA_A)) {
-+            cap_mode |= CS_MODE_M68K_CF_ISA_A;
-+            cap_mode |= CS_MODE_M68K_CF_DIV;
-+        }
-+        if (m68k_feature(env, M68K_FEATURE_CF_ISA_B)) {
-+            cap_mode |= CS_MODE_M68K_CF_ISA_B;
-+        }
-+        if (m68k_feature(env, M68K_FEATURE_CF_ISA_APLUSC)) {
-+            cap_mode |= CS_MODE_M68K_CF_ISA_A_PLUS;
-+            cap_mode |= CS_MODE_M68K_CF_ISA_C;
-+        }
-+        if (m68k_feature(env, M68K_FEATURE_USP)) {
-+            cap_mode |= CS_MODE_M68K_CF_USP;
-+        }
-+        if (m68k_feature(env, M68K_FEATURE_CF_FPU)) {
-+            cap_mode |= CS_MODE_M68K_CF_FPU;
-+        }
-+        if (m68k_feature(env, M68K_FEATURE_CF_MAC)) {
-+            cap_mode |= CS_MODE_M68K_CF_MAC;
-+        }
-+        if (m68k_feature(env, M68K_FEATURE_CF_EMAC)) {
-+            cap_mode |= CS_MODE_M68K_CF_EMAC;
-+        }
-+        if (m68k_feature(env, M68K_FEATURE_CF_EMAC_B)) {
-+            cap_mode |= CS_MODE_M68K_CF_EMAC_B;
-+        }
-+    }
-+    info->cap_mode = cap_mode;
- }
- 
- /* CPU models */
+ Boot options
+ ------------
+ The ``k230`` machine supports K230 SDK boot through M-mode U-Boot, which then
+
 -- 
 2.43.0
-
 
