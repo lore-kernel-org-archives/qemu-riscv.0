@@ -4,85 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22302C5AC80
-	for <qemu-riscv@archiver.kernel.org>; Sun,  9 Aug 2026 11:47:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 150DCC5AC80
+	for <qemu-riscv@archiver.kernel.org>; Sun,  9 Aug 2026 11:47:54 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wt1ys-00030x-El; Sun, 09 Aug 2026 07:46:18 -0400
+	id 1wt1yq-000308-A7; Sun, 09 Aug 2026 07:46:16 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <0860734llx@gmail.com>)
- id 1wswuI-00082E-FE
- for qemu-riscv@nongnu.org; Sun, 09 Aug 2026 02:21:14 -0400
-Received: from mail-pl1-x62d.google.com ([2607:f8b0:4864:20::62d])
+ id 1wswu9-00080S-Sm
+ for qemu-riscv@nongnu.org; Sun, 09 Aug 2026 02:21:05 -0400
+Received: from mail-pl1-x62e.google.com ([2607:f8b0:4864:20::62e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <0860734llx@gmail.com>)
- id 1wswuG-0005tc-92
- for qemu-riscv@nongnu.org; Sun, 09 Aug 2026 02:21:14 -0400
-Received: by mail-pl1-x62d.google.com with SMTP id
- d9443c01a7336-2cc7e86e7aeso8674075ad.2
- for <qemu-riscv@nongnu.org>; Sat, 08 Aug 2026 23:21:11 -0700 (PDT)
+ id 1wswu8-0005sQ-8A
+ for qemu-riscv@nongnu.org; Sun, 09 Aug 2026 02:21:05 -0400
+Received: by mail-pl1-x62e.google.com with SMTP id
+ d9443c01a7336-2ceaf8a1265so13555975ad.2
+ for <qemu-riscv@nongnu.org>; Sat, 08 Aug 2026 23:21:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1786256471; x=1786861271; darn=nongnu.org;
- h=content-transfer-encoding:content-type:mime-version:references
- :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=mPLt43svN/sH5zFPYA5PV2Pc+RgROQjcqhcSTzwdakc=;
- b=b8irZXqUxCLnsk/iNwijiRJZGd8ukNw7p4l7/0bibPmD8NMXiFsTPHjya5LFaayNnU
- LW+X7d/9ULfw1jAegxKho3Fl/VIhl3IBq9iQptPgh7pC2o2wiHYF6KGOG2e4bwyVtbNE
- cKNqosMphKEGWkj7eM6DSLf8OtjZUDjIhk8Awm18QWYZAj+iwNdycWYS0o79vrN90nvb
- CeqR3gSU49tpKtLISW7cNsheElsHWRFfY+80yVa+pAPd0wNd3A8CWpKfgnaxBc05BKlZ
- pivHftT/Dp9OXcqRW+SKaFsJqZLhnYcJXGsH4BkzQGr2wSn2XbrmdzbfcJXdY1vwK+PO
- JEIQ==
+ d=gmail.com; s=20251104; t=1786256459; x=1786861259; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:mime-version:message-id:date
+ :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=xYDxUzufOV0PG6l3Lj3peaKR66dPAO7VhKJbyoGdL/0=;
+ b=Q7N1DACBAGv9hbQPTGPRF1nkVGGyt2HOwU7YVXHBMMDhPykTk4hhzSmBN4IBe+4/kN
+ Uo2L/9/Lznr2+qMSbTsBGDLVMWaABKh7CSJb65cEopkEPTj3YyPCHMQEqBlwatooyY/3
+ ROO+aopLzvpOlnOR8SoG4jWvwRjqjOn0kGfySqycQ0OoxzmXU1HMujw+jSeQMzXb/XTA
+ QdBVTv1g5XwjKmtKQIMqCafpCT1mmSsi7XyM2xSidXvQGL2Ru5sNhurAzojh5Q3ZGYzA
+ s9etg/x/F0tzYS/JnozMxLZShn2aSd3068fA71RZ/dAZkOk3Gtcs2GCU2Y2NBPCa370X
+ MHzg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786256471; x=1786861271;
- h=content-transfer-encoding:content-type:mime-version:references
- :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=mPLt43svN/sH5zFPYA5PV2Pc+RgROQjcqhcSTzwdakc=;
- b=q0Awm+r4ls4Ihjc+dpOZN42COHhjQF+X0CKa+aBKMUWHVwK+SiAc2bJpXXuDsvLRI6
- oUuJp/9GCCNY5UFb4XY8Z9e6DvJAAQVFXvmYNarH0X1ly6PyH3orWOZcGP8fyrjR2j6l
- bTb89gH7+d4PIbpQ8vW8x7+hPsPY4UDQJdEfyF36bIFFZhbFGH1VT5+6ktcIQ7K4EPT7
- 9PVSpjl/joJO5jQb2PGsXMkGRusSQuJXSteG+j7Hdl2uYwpVXND9Mkeok2uj+s2Hawm4
- LC6bed+f/O6l/mK9iEOXIk/MGVpkOAq7JXrPGQwJxJBpBKH/JP/a+GphEme/3JF6/ojL
- amyQ==
-X-Gm-Message-State: AOJu0YyQADnrjYNdiPnlstCtAY9k3Wqtz6v3CiGb3CuLkSR+ibc7hZwp
- +r9BuNhjdUjEFY7nDbkUII8J/gaRFLNR8p+BImqtzK+GpEwoD9nH+X9H
-X-Gm-Gg: AR+sD11EAIUBOTO6TGs5ccfNfV/ngKYRNEDdJ9QrU66iuOcma2XKKHh4dz9N0aCDjm8
- nhfwuk1arNfO9WpkLcEwERPPp8qg728ZcOPCX+ICd4LnzfyJU+QqJGmO1uueFQ18Jy8hvTjNNrS
- Mc50Ik9cN6ZvlRRah2yq1bUBQNoanq5IjPm/Xjd7BT6Q8TXCLGJXqPpoKqDVa6bGeXXPhDLZGTK
- suIOS3/OWFHk4Lefsl2jBJ0fN+cNkX0FXuAArnkEL+izaHuJUVJUhTqLgTMGeci5yO7a6CDDHYO
- VVxaycPT6fFL9vQQ99pI+QZuGNNzteMufrR1yF0Fw6Ro+QFw332e+uPLVq5bir8SDDeoEhGnOGF
- M2cgFC96HYxEjLfpkY+8aAFY6AHT8YvceCj72pIURFUByeBXgaO0faOjiE+vx57Nr7EHntD2crK
- AAs9X3XWStlskuOx37QT3FWurdXpTCRxpsSJBn5EclL8GDETiiqc0WUP85yvloy9OT/dZilrm1P
- ioS5rbnKURUCO0cVTE7MA==
-X-Received: by 2002:a17:902:e54f:b0:2ca:eea:eb5c with SMTP id
- d9443c01a7336-2d106e37776mr222815445ad.18.1786256470826; 
- Sat, 08 Aug 2026 23:21:10 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1786256459; x=1786861259;
+ h=content-transfer-encoding:content-type:mime-version:message-id:date
+ :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=xYDxUzufOV0PG6l3Lj3peaKR66dPAO7VhKJbyoGdL/0=;
+ b=HGVCLXlDC4Ek5J+3uhAyo6S3WoQ3TS3Ecgf2LruBtqWqFhnIcURJHqa3UC/XJy311q
+ EX1ZsnAm10g+S6pRdaW6NpOh9nNQUV54eRsn0/nO6s3SzMtgNIuW/CZKr3vC5Hp6Qb5T
+ RfpWUrCGGSvE7S12HGDNCVhwdEkDRcVtdLRelaIwHrle+gVL9QhP+IJm2OCG8BWNHB2k
+ Zi40SO82TRR4L0N9gwevSfKyjk8XbNZ0+vTniASwAcBDCOC/cVBOkxMfd59iXn1rTxk6
+ afnIIAOx2s+oNf77ow7KGISkXCglDyaetu+TkZ2/a5h/Jgw8ncpwM3hOE6oW/rhX1ZXl
+ tFHg==
+X-Gm-Message-State: AOJu0Yy6fiCw06zNxROKzW7CG2bT7yRYoPislyhVA2LWB6h3cFgwyErs
+ LjsFY7lLoduhZ+TLPvRcDjs5vy4Z/kkDVUUobZ3eH+d1NPrPpf/gmYRn
+X-Gm-Gg: AR+sD10PUN2Y2hpJbKVw0JGjMWplnlQIp+QnkAVoTpd4t/ds3Fjsrn7mHI9uP66fiwE
+ g7l5/z05BClTdsSQhr5vihZNtZQ3XopLU/vfqOigfIo7D91zX3aysDTmXgdkY4sEkDChACktw1C
+ rS9smzF53ceZejoZb3uXkrlVdNzsNjhWqYVlK4o+MyCA7k/7AZzBWyXGW3s0juIWmb4ptC5XxMP
+ kgX+aUX0m56IKFmPg5O/RFHwhU66+nPeOe6RRUycAByd9ydIBJe7WaxldMSgGTEMGYJZAvITAPL
+ xekfBC3RthzmWK4JcdobZgpb8jYidV7Rn9yGQ33cCBfZwhMHCN2B6oN2wVG98M04XP7S94reSZU
+ LgsNCosVPWTha+wFiSOEMBz027FmK0Se3L4eJldtsJlIGFLhZGIUgvm4T3+Yw0dmS9GPGbXw8Qo
+ hc9vfJyZt4b90VD/j1+bqR5Br/U9r17zRl1u85LgiIcb6XCWpq9tc9DdWLftnDBRekdw+SDouog
+ quuTON8mbk/IdQM+WDAKfFhcGaH9Uuu/w==
+X-Received: by 2002:a17:902:e84b:b0:2c9:b396:1a55 with SMTP id
+ d9443c01a7336-2d0ca76a3bamr369185835ad.12.1786256459458; 
+ Sat, 08 Aug 2026 23:20:59 -0700 (PDT)
 Received: from localhost.localdomain ([159.75.12.57])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2d14ccac6d7sm21805265ad.6.2026.08.08.23.21.07
+ d9443c01a7336-2d14ccac6d7sm21805265ad.6.2026.08.08.23.20.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 08 Aug 2026 23:21:10 -0700 (PDT)
+ Sat, 08 Aug 2026 23:20:58 -0700 (PDT)
 From: Simon Law <0860734llx@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, chao.liu@processmission.com, palmer@dabbelt.com,
  alistair.francis@wdc.com, liwei1518@gmail.com,
  daniel.barboza@oss.qualcomm.com, zhiwei_liu@linux.alibaba.com,
  pierrick.bouvier@oss.qualcomm.com
-Subject: [PATCH 3/4] tests/qtest: add K230 CMU coverage
-Date: Sun,  9 Aug 2026 14:20:43 +0800
-Message-ID: <20260809-feat-k230-cmu-v1-3-8792982c446c@gmail.com>
+Subject: [PATCH 0/4] Kendryte K230 CMU register model
+Date: Sun,  9 Aug 2026 14:20:40 +0800
+Message-ID: <20260809-feat-k230-cmu-v1-0-8792982c446c@gmail.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260809-feat-k230-cmu-v1-0-8792982c446c@gmail.com>
-References: <20260809-feat-k230-cmu-v1-0-8792982c446c@gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62d;
- envelope-from=0860734llx@gmail.com; helo=mail-pl1-x62d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62e;
+ envelope-from=0860734llx@gmail.com; helo=mail-pl1-x62e.google.com
 X-Spam_score_int: -13
 X-Spam_score: -1.4
 X-Spam_bar: -
@@ -91,7 +87,7 @@ X-Spam_report: (-1.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  FROM_STARTS_WITH_NUMS=0.738, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Sun, 09 Aug 2026 07:46:01 -0400
+X-Mailman-Approved-At: Sun, 09 Aug 2026 07:45:59 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -106,343 +102,73 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+The Kendryte K230 machine currently lacks the Clock Management Unit (CMU)
+  register interface required by the K230 SDK U-Boot and the Linux K230 clock
+  driver. As a result, software probing the PLL and sysclk providers cannot
+  observe the expected reset values or register update semantics.
+
+  This series adds a minimal, deterministic K230 CMU model.
+
+  The model covers:
+
+  - four PLL register blocks at 0x91102000..0x9110203f;
+  - the defined sysclk registers in the 0x91100000 window;
+  - the software-visible SPI2AXI_CLK_DIV register at sysclk offset 0x108;
+  - reset values and writable/reserved/read-only masks;
+  - PLL control write-enable semantics;
+  - write-one-to-trigger update behavior;
+  - deterministic PLL lock and initialization status;
+  - VMState for stable PLL and sysclk register state;
+  - qtest coverage for reset, masks, write-enable, W1T, status, sysclk
+    updates, unknown offsets, and system reset;
+  - K230 machine wiring and user-facing documentation.
+
+  The model intentionally does not propagate clock frequencies to QEMU devices or
+  change CPU execution speed. Peripheral reset, power control, and the
+  guest-initiated K230 reboot backend remain outside the scope of this series.
+  Those functions require separate reset/power models and a matching OpenSBI
+  backend.
+
+  The implementation is based only on the existing K230 machine and does not
+  depend on unmerged RMU, Timer, SPI, or SDHCI device series.
+
+  Testing:
+  - QTEST_QEMU_BINARY=/workspace/qemu/build/qemu-system-riscv64
+    /workspace/qemu/build/tests/qtest/k230-cmu-test
+    (10/10 subtests passed)
+  - QTEST_QEMU_BINARY=/workspace/qemu/build/qemu-system-riscv64
+    /workspace/qemu/build/tests/qtest/k230-wdt-test
+    (7/7 subtests passed)
+  - K230 direct Linux boot and K230 U-Boot boot
+  - Linux K230 clock probe and clk_summary validation
+  - CMU source/destination migration smoke
+
 Signed-off-by: Simon Law <0860734llx@gmail.com>
 ---
- tests/qtest/k230-cmu-test.c | 310 ++++++++++++++++++++++++++++++++++++++++++++
+Simon Law (4):
+      hw/misc: model K230 CMU registers
+      hw/riscv: connect the K230 CMU
+      tests/qtest: add K230 CMU coverage
+      docs/system/riscv: document K230 CMU support
+
+ MAINTAINERS                 |   4 +
+ docs/system/riscv/k230.rst  |  22 ++
+ hw/misc/Kconfig             |   3 +
+ hw/misc/k230_cmu.c          | 881 ++++++++++++++++++++++++++++++++++++++++++++
+ hw/misc/meson.build         |   1 +
+ hw/misc/trace-events        |   9 +
+ hw/riscv/Kconfig            |   1 +
+ hw/riscv/k230.c             |  14 +-
+ include/hw/misc/k230_cmu.h  |  58 +++
+ include/hw/riscv/k230.h     |   2 +
+ tests/qtest/k230-cmu-test.c | 310 ++++++++++++++++
  tests/qtest/meson.build     |   3 +-
- 2 files changed, 312 insertions(+), 1 deletion(-)
+ 12 files changed, 1302 insertions(+), 6 deletions(-)
+---
+base-commit: f893c46c3931b3684d235d221bf8b7844ddbf1d7
+change-id: 20260809-feat-k230-cmu-9b62e6dd23f3
 
-diff --git a/tests/qtest/k230-cmu-test.c b/tests/qtest/k230-cmu-test.c
-new file mode 100644
-index 0000000000..2be6400cd8
---- /dev/null
-+++ b/tests/qtest/k230-cmu-test.c
-@@ -0,0 +1,310 @@
-+/*
-+ * QTest testcase for Kendryte K230 Clock Management Unit
-+ *
-+ * Copyright (c) 2026 Simon Law <0860734llx@gmail.com>
-+ *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ *
-+ * K230 Technical Reference Manual V0.3.1 (2024-11-18), CMU chapter.
-+ *
-+ * The reset and mask oracle in this file is intentionally independent from
-+ * hw/misc/k230_cmu.c, so a descriptor-table error cannot mask itself.
-+ */
-+
-+#include "qemu/osdep.h"
-+#include "qemu/bitops.h"
-+#include "libqtest.h"
-+
-+#define K230_PLL_BASE       0x91102000
-+#define K230_SYSCLK_BASE    0x91100000
-+#define K230_PLL_COUNT      4
-+#define K230_PLL_STRIDE     0x10
-+
-+#define PLL_CFG0            0x0
-+#define PLL_CFG1            0x4
-+#define PLL_CTL             0x8
-+#define PLL_STAT            0xc
-+
-+#define PLL_CFG0_RW_MASK    0x0f3f1fff
-+#define PLL_CFG1_RW_MASK    0x000f0fff
-+#define PLL_CTL_RW_MASK     0x00000ff4
-+
-+typedef struct K230SysclkOracle {
-+    uint32_t offset;
-+    uint32_t reset;
-+    uint32_t rw_mask;
-+    uint32_t w1t_mask;
-+} K230SysclkOracle;
-+
-+static const uint32_t pll_reset[K230_PLL_COUNT][4] = {
-+    { 0x0102018f, 0x000200c7, 0x00000034, 0x00000021 },
-+    { 0x00000062, 0x00020031, 0x00000034, 0x00000021 },
-+    { 0x00070378, 0x000201bb, 0x00000034, 0x00000021 },
-+    { 0x0102018f, 0x000200c7, 0x00000074, 0x00000021 },
-+};
-+
-+static const K230SysclkOracle sysclk_oracle[] = {
-+    { 0x000, 0x0000e65f, 0x0003ffdf, BIT(31) },
-+    { 0x004, 0x0009900d, 0x000f803f, BIT(31) },
-+    { 0x008, 0x0000043d, 0x0000043d, BIT(31) },
-+    { 0x00c, 0x00000c7f, 0x00007fff, BIT(31) },
-+    { 0x010, 0x00000001, 0x00000001, 0 },
-+    { 0x018, 0x7f7fffff, 0x7fffffff, 0 },
-+    { 0x01c, 0x000b9248, 0x000fffff, BIT(31) },
-+    { 0x020, 0x00039048, 0x0007fff8, BIT(31) },
-+    { 0x024, 0xffffffff, 0xffffffff, 0 },
-+    { 0x028, 0x000000ff, 0x000000ff, 0 },
-+    { 0x02c, 0x1b6d9249, 0x3fffffff, BIT(31) },
-+    { 0x030, 0x01dda0c3, 0x7fffffff, BIT(31) },
-+    { 0x034, 0x01b9f424, 0x7fffffff, BIT(31) },
-+    { 0x038, 0x006e7d09, 0x07ffffff, BIT(31) },
-+    { 0x03c, 0x006e7d09, 0x07ffffff, BIT(31) },
-+    { 0x040, 0x0000f424, 0x0001ffff, 0 },
-+    { 0x044, 0x000001b9, 0x0000ffff, BIT(31) },
-+    { 0x050, 0x003ffffe, 0x003ffffe, 0 },
-+    { 0x054, 0x0003ffff, 0x0003ffff, BIT(31) },
-+    { 0x058, 0x1efabef9, 0x7ffffff8, BIT(31) },
-+    { 0x05c, 0x000c7ffd, 0x001c7ffd, BIT(31) },
-+    { 0x060, 0x000043fd, 0x0003ffff, BIT(31) },
-+    { 0x064, 0x000fffff, 0x000fffff, 0 },
-+    { 0x068, 0x00820835, 0x3fffffff, BIT(31) },
-+    { 0x06c, 0x003a74ef, 0x00ffffff, BIT(31) },
-+    { 0x070, 0x000001ff, 0x000003ff, BIT(31) },
-+    { 0x074, 0x00001fff, 0x00001fff, 0 },
-+    { 0x078, 0x0000a83b, 0x00ffffff, BIT(31) },
-+    { 0x080, 0x000002f3, 0x00003fff, BIT(31) },
-+    { 0x100, 0x00000039, 0x0000007f, BIT(31) },
-+    { 0x104, 0x00000009, 0x0000001f, BIT(31) },
-+    /* TRM summary stops at 0x104; SDK/Linux ABI requires SPI2AXI at 0x108. */
-+    { 0x108, 0x00000007, 0x0000000f, BIT(31) },
-+};
-+
-+static QTestState *k230_cmu_start(void)
-+{
-+    return qtest_init("-machine k230");
-+}
-+
-+static uint32_t pll_addr(unsigned index, uint32_t offset)
-+{
-+    g_assert_cmpuint(index, <, K230_PLL_COUNT);
-+    return K230_PLL_BASE + index * K230_PLL_STRIDE + offset;
-+}
-+
-+static uint32_t merge_rw(uint32_t old_value, uint32_t value, uint32_t mask)
-+{
-+    return (old_value & ~mask) | (value & mask);
-+}
-+
-+static void assert_pll_reset(QTestState *qts)
-+{
-+    static const uint32_t offsets[] = { PLL_CFG0, PLL_CFG1, PLL_CTL, PLL_STAT };
-+
-+    for (unsigned pll = 0; pll < K230_PLL_COUNT; pll++) {
-+        for (unsigned reg = 0; reg < G_N_ELEMENTS(offsets); reg++) {
-+            g_assert_cmphex(qtest_readl(qts, pll_addr(pll, offsets[reg])), ==,
-+                            pll_reset[pll][reg]);
-+        }
-+    }
-+}
-+
-+static void assert_sysclk_reset(QTestState *qts)
-+{
-+    for (unsigned i = 0; i < G_N_ELEMENTS(sysclk_oracle); i++) {
-+        const K230SysclkOracle *reg = &sysclk_oracle[i];
-+
-+        g_assert_cmphex(qtest_readl(qts, K230_SYSCLK_BASE + reg->offset), ==,
-+                        reg->reset);
-+    }
-+}
-+
-+static void test_reset_pll(void)
-+{
-+    QTestState *qts = k230_cmu_start();
-+
-+    assert_pll_reset(qts);
-+    qtest_quit(qts);
-+}
-+
-+static void test_reset_sysclk(void)
-+{
-+    QTestState *qts = k230_cmu_start();
-+
-+    assert_sysclk_reset(qts);
-+    qtest_quit(qts);
-+}
-+
-+static void test_pll_cfg_masks(void)
-+{
-+    static const uint32_t offsets[] = { PLL_CFG0, PLL_CFG1 };
-+    static const uint32_t masks[] = { PLL_CFG0_RW_MASK, PLL_CFG1_RW_MASK };
-+    QTestState *qts = k230_cmu_start();
-+
-+    for (unsigned pll = 0; pll < K230_PLL_COUNT; pll++) {
-+        for (unsigned reg = 0; reg < G_N_ELEMENTS(offsets); reg++) {
-+            uint32_t addr = pll_addr(pll, offsets[reg]);
-+            uint32_t reset = pll_reset[pll][reg];
-+
-+            qtest_writel(qts, addr, 0);
-+            g_assert_cmphex(qtest_readl(qts, addr), ==,
-+                            merge_rw(reset, 0, masks[reg]));
-+            qtest_writel(qts, addr, UINT32_MAX);
-+            g_assert_cmphex(qtest_readl(qts, addr), ==,
-+                            merge_rw(merge_rw(reset, 0, masks[reg]),
-+                                     UINT32_MAX, masks[reg]));
-+
-+            qtest_system_reset(qts);
-+            qtest_writel(qts, addr, BIT(ctz32(masks[reg])));
-+            g_assert_cmphex(qtest_readl(qts, addr), ==,
-+                            merge_rw(reset, BIT(ctz32(masks[reg])),
-+                                     masks[reg]));
-+
-+            qtest_system_reset(qts);
-+            qtest_writel(qts, addr, reset | BIT(ctz32(~masks[reg])));
-+            g_assert_cmphex(qtest_readl(qts, addr), ==, reset);
-+        }
-+    }
-+
-+    qtest_quit(qts);
-+}
-+
-+static void test_pll_ctl_write_enable(void)
-+{
-+    QTestState *qts = k230_cmu_start();
-+    uint32_t addr = pll_addr(0, PLL_CTL);
-+
-+    qtest_writel(qts, addr, 0);
-+    g_assert_cmphex(qtest_readl(qts, addr), ==, pll_reset[0][2]);
-+
-+    qtest_writel(qts, addr, BIT(16 + 2));
-+    g_assert_cmphex(qtest_readl(qts, addr), ==,
-+                    pll_reset[0][2] & ~BIT(2));
-+
-+    qtest_writel(qts, addr, BIT(2) | BIT(16 + 2) | BIT(16 + 4));
-+    g_assert_cmphex(qtest_readl(qts, addr), ==,
-+                    merge_rw(pll_reset[0][2] & ~BIT(2),
-+                             BIT(2), BIT(2) | BIT(4)));
-+
-+    qtest_writel(qts, addr, UINT32_MAX);
-+    g_assert_cmphex(qtest_readl(qts, addr), ==, PLL_CTL_RW_MASK);
-+    qtest_quit(qts);
-+}
-+
-+static void test_pll_status(void)
-+{
-+    QTestState *qts = k230_cmu_start();
-+    uint32_t ctl = pll_addr(0, PLL_CTL);
-+    uint32_t stat = pll_addr(0, PLL_STAT);
-+
-+    qtest_writel(qts, stat, 0);
-+    g_assert_cmphex(qtest_readl(qts, stat), ==, 0x00000021);
-+
-+    qtest_writel(qts, ctl, BIT(0) | BIT(16));
-+    g_assert_cmphex(qtest_readl(qts, stat), ==, 0);
-+
-+    qtest_writel(qts, ctl, BIT(1) | BIT(17));
-+    g_assert_cmphex(qtest_readl(qts, stat), ==, 0x00000021);
-+
-+    qtest_writel(qts, ctl, BIT(0) | BIT(1) | BIT(16) | BIT(17));
-+    g_assert_cmphex(qtest_readl(qts, stat), ==, 0x00000021);
-+    qtest_quit(qts);
-+}
-+
-+static void test_sysclk_masks(void)
-+{
-+    QTestState *qts = k230_cmu_start();
-+
-+    for (unsigned i = 0; i < G_N_ELEMENTS(sysclk_oracle); i++) {
-+        const K230SysclkOracle *reg = &sysclk_oracle[i];
-+        uint32_t addr = K230_SYSCLK_BASE + reg->offset;
-+        uint32_t after_zero = merge_rw(reg->reset, 0, reg->rw_mask);
-+
-+        qtest_writel(qts, addr, 0);
-+        g_assert_cmphex(qtest_readl(qts, addr), ==, after_zero);
-+        qtest_writel(qts, addr, UINT32_MAX);
-+        g_assert_cmphex(qtest_readl(qts, addr), ==,
-+                        merge_rw(after_zero, UINT32_MAX, reg->rw_mask));
-+    }
-+
-+    qtest_quit(qts);
-+}
-+
-+static void test_sysclk_update(void)
-+{
-+    QTestState *qts = k230_cmu_start();
-+
-+    for (unsigned i = 0; i < G_N_ELEMENTS(sysclk_oracle); i++) {
-+        const K230SysclkOracle *reg = &sysclk_oracle[i];
-+        uint32_t addr;
-+
-+        if (!reg->w1t_mask) {
-+            continue;
-+        }
-+
-+        addr = K230_SYSCLK_BASE + reg->offset;
-+        qtest_writel(qts, addr, reg->reset | reg->w1t_mask);
-+        g_assert_cmphex(qtest_readl(qts, addr), ==, reg->reset);
-+    }
-+
-+    qtest_quit(qts);
-+}
-+
-+static void test_spi2axi(void)
-+{
-+    QTestState *qts = k230_cmu_start();
-+    uint32_t addr = K230_SYSCLK_BASE + 0x108;
-+
-+    g_assert_cmphex(qtest_readl(qts, addr), ==, 0x00000007);
-+    qtest_writel(qts, addr, 0x00000001);
-+    g_assert_cmphex(qtest_readl(qts, addr), ==, 0x00000001);
-+    qtest_writel(qts, addr, 0x8000000f);
-+    g_assert_cmphex(qtest_readl(qts, addr), ==, 0x0000000f);
-+    qtest_quit(qts);
-+}
-+
-+static void test_unknown_offsets(void)
-+{
-+    QTestState *qts = k230_cmu_start();
-+    /* The 0x40 PLL window has no undefined aligned 32-bit word. */
-+    uint32_t addr = K230_SYSCLK_BASE + 0x014;
-+
-+    g_assert_cmphex(qtest_readl(qts, addr), ==, 0);
-+    qtest_writel(qts, addr, UINT32_MAX);
-+    g_assert_cmphex(qtest_readl(qts, addr), ==, 0);
-+    qtest_quit(qts);
-+}
-+
-+static void test_system_reset(void)
-+{
-+    QTestState *qts = k230_cmu_start();
-+
-+    qtest_writel(qts, pll_addr(0, PLL_CFG0), 0);
-+    qtest_writel(qts, pll_addr(1, PLL_CFG1), 0);
-+    qtest_writel(qts, pll_addr(2, PLL_CTL), BIT(16 + 2));
-+    qtest_writel(qts, pll_addr(3, PLL_CTL), BIT(0) | BIT(16));
-+    qtest_writel(qts, K230_SYSCLK_BASE + 0x000, 0);
-+    qtest_writel(qts, K230_SYSCLK_BASE + 0x050, 0);
-+    qtest_writel(qts, K230_SYSCLK_BASE + 0x108, 0);
-+
-+    qtest_system_reset(qts);
-+    assert_pll_reset(qts);
-+    assert_sysclk_reset(qts);
-+    qtest_quit(qts);
-+}
-+
-+int main(int argc, char *argv[])
-+{
-+    g_test_init(&argc, &argv, NULL);
-+
-+    qtest_add_func("/k230-cmu/reset/pll", test_reset_pll);
-+    qtest_add_func("/k230-cmu/reset/sysclk", test_reset_sysclk);
-+    qtest_add_func("/k230-cmu/pll/cfg-masks", test_pll_cfg_masks);
-+    qtest_add_func("/k230-cmu/pll/ctl-write-enable", test_pll_ctl_write_enable);
-+    qtest_add_func("/k230-cmu/pll/status", test_pll_status);
-+    qtest_add_func("/k230-cmu/sysclk/masks", test_sysclk_masks);
-+    qtest_add_func("/k230-cmu/sysclk/update", test_sysclk_update);
-+    qtest_add_func("/k230-cmu/sysclk/spi2axi", test_spi2axi);
-+    qtest_add_func("/k230-cmu/unknown-offsets", test_unknown_offsets);
-+    qtest_add_func("/k230-cmu/system-reset", test_system_reset);
-+
-+    return g_test_run();
-+}
-diff --git a/tests/qtest/meson.build b/tests/qtest/meson.build
-index 56ff860e21..9f5c46e0bf 100644
---- a/tests/qtest/meson.build
-+++ b/tests/qtest/meson.build
-@@ -297,7 +297,8 @@ qtests_riscv64 = ['riscv-csr-test'] + \
-   (config_all_devices.has_key('CONFIG_IOMMU_TESTDEV') and
-    config_all_devices.has_key('CONFIG_RISCV_IOMMU') ?
-    ['iommu-riscv-test'] : []) + \
--  (config_all_devices.has_key('CONFIG_K230') ? ['k230-wdt-test'] : [])
-+  (config_all_devices.has_key('CONFIG_K230') ?
-+   ['k230-cmu-test', 'k230-wdt-test'] : [])
- 
- qtests_hexagon = ['boot-serial-test']
- 
-
+Best regards,
 -- 
-2.43.0
+Simon Law <0860734llx@gmail.com>
 
