@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EAEBC5AD4E
-	for <qemu-riscv@archiver.kernel.org>; Sun,  9 Aug 2026 22:40:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3265C5AD4E
+	for <qemu-riscv@archiver.kernel.org>; Sun,  9 Aug 2026 22:41:02 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wtC7c-0000iH-7C; Sun, 09 Aug 2026 18:36:00 -0400
+	id 1wtC7v-0000vk-S4; Sun, 09 Aug 2026 18:36:19 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wtC7a-0000gs-AA
- for qemu-riscv@nongnu.org; Sun, 09 Aug 2026 18:35:58 -0400
-Received: from mail-pf1-x42f.google.com ([2607:f8b0:4864:20::42f])
+ id 1wtC7t-0000u2-3Z
+ for qemu-riscv@nongnu.org; Sun, 09 Aug 2026 18:36:17 -0400
+Received: from mail-pl1-x62f.google.com ([2607:f8b0:4864:20::62f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wtC7X-0007Hq-Lv
- for qemu-riscv@nongnu.org; Sun, 09 Aug 2026 18:35:58 -0400
-Received: by mail-pf1-x42f.google.com with SMTP id
- d2e1a72fcca58-8487214ad2bso1682056b3a.1
- for <qemu-riscv@nongnu.org>; Sun, 09 Aug 2026 15:35:55 -0700 (PDT)
+ id 1wtC7r-0007PC-Ou
+ for qemu-riscv@nongnu.org; Sun, 09 Aug 2026 18:36:16 -0400
+Received: by mail-pl1-x62f.google.com with SMTP id
+ d9443c01a7336-2cacb8416a1so11665975ad.1
+ for <qemu-riscv@nongnu.org>; Sun, 09 Aug 2026 15:36:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1786314954; x=1786919754; darn=nongnu.org;
+ d=linaro.org; s=google; t=1786314974; x=1786919774; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=0mC50S6yIIwsC5xKG82e1/tHDZvDIpdT0oKSFQ7hroc=;
- b=YTZmIHPhMCayvOYwfhPqGdLUw/lQbYmoKhlu1KFmQj3Ew3Pm8Lay4jeeE0fQY3CtYC
- 08bEt+jmw3dyLR1qu8SoQSK3462slzT3PR5A6av2z1hlelEpDdhi8EXQ49Xh4hcH0jhk
- 4zONQxoBIgTZtZbq+7PtYHgqwzGjYejCDZeWVCRotlnoxIEWzLs7Vg0xfcBjLedGPrE0
- 8r0LMgMMurW29QNeVCJ6lZtjGII2LvmnnmbyWtQqfVUVv9uzcCnRAWMP2UCi7R6+WXba
- GFrSyhWGOY3l9sCLT1AcD/nCl02YeNQk+Y78BILGEiDJchOS+OpiwUwUXrzgMtl0HMd8
- LpPw==
+ bh=fdfz9CxjwIJrxebC/Gth0XWSxLeLNjiGdSLqVo06CHY=;
+ b=G5kceu1dCtmeZTvxj5UU5+Ie7abFZkDKAfUjWKzRrJrUtwNXPR3pQWa8hBJAKlJ0ll
+ jI5PdxrVHay4e7FoffLFV6bHmRf826cc1Uw04G1LKtE4BXMUMFWqdSQ02s3r628zuCuK
+ wmpoXFfMR6kEJz2b+DNUuDWXJYSXl4w/pZYFYNhMP2VSUlz0ryyYTMOH4leUSb/glBNm
+ 803tRV9q97E4Pjbq8PskqVnrJUqNZkvhcGFx9yz1O3bJSj4UXinqcKdauz+J+TGD/XpR
+ TfmhdJ7LKM6eKDLggVlPdCIdEa9zVBS2mxjVfLgS0yXtFoqY2yIpflzjt8b+p/Shhdrt
+ Uw4Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786314954; x=1786919754;
+ d=1e100.net; s=20251104; t=1786314974; x=1786919774;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=0mC50S6yIIwsC5xKG82e1/tHDZvDIpdT0oKSFQ7hroc=;
- b=FHb7Um/1pDh/2eAVvBV1Rfl/jd23lIVeEcJm/U4+zLwWMUr9p56sY/ZfpvhYIHbfvc
- wAms/QxGn4dYS2oXNCnHw3YW+ez7VdfVtwXVRtgSh2dTSHSRbt10GpFLSFkYDboprcyy
- nTN2mKhtgwZUNIxrfYkwx5SxAUBgnWxk5pl6mhzaARg54HL0p7+meOuxMDSg4D0ySGTO
- 31NMRMeALymOCgetMRs3Tvlkzz7N4fw9VLvLJKYYl2/H4leqpOomzHjlwyKFvH/MbR5I
- LIgsKu2mTLy7smbJA6DU4H6p2/2XVAoJSrDa6pmNvQD2int4+JYwCUcAxCe0ykjv9Ich
- UBvw==
-X-Gm-Message-State: AOJu0YzFg7zy0lyOtWS7itPhov8j3dVUuf52KdhjtLCKsgsBBF3XWF+W
- Cw4tdt+nCHOO2/DC0l4X2YnjhcD6zqUiJ3ya4d3n/i2iXJPaWJkqmss0uhqtbVvszAk=
-X-Gm-Gg: AR+sD110CgWiN4VwdJsg03qJ+bNkMJZEaPlix2AVP//nxHMMKhlF8RqYjEo1wHLjJuB
- v+zXUh4KdJwKE/+8awvmR+HIbDI1UCHNv+lkV17s7RUtCUce7XdORL6tPqHLf/oLWrfzRKd2fm7
- AWs6xm9fLytsKeDSx0qVU1YbcQS5BH3XzXQCpsNdEWcMhhEHI03L0gzvG+lQkwJClMfHss01Fj3
- btCAosEX8p/5bUdsRjAJObU4m5yxot7BCt9WASYfUEyKaX53KkVxiTaW5GrIkdkGobHrYcMX7qL
- kOo7Ymh8DAcqoDo6agsd9iK5SBwaxDot9TVZISH6nXtgM275q+oxPw5oLqGv2nLyU7eKlzBQLqj
- 4oUXub8Pn3HAhkiHgPEAWd+Ug/uW8ThhId8PI4VJ26C69BWWBphst4+3ICJ5vfPh4zhYepnexDT
- F3I+22j0yB6tvLbIPcfj7PBqOhflIenasXC/8tP6Ex1hexBlRMobJKNAu8+kemKFdnWRXccY+qb
- w8p4HKLrfL8cE56K3jg
-X-Received: by 2002:a05:6a00:1da0:b0:848:77b2:20a with SMTP id
- d2e1a72fcca58-84f5e1530d9mr22484714b3a.39.1786314953593; 
- Sun, 09 Aug 2026 15:35:53 -0700 (PDT)
+ bh=fdfz9CxjwIJrxebC/Gth0XWSxLeLNjiGdSLqVo06CHY=;
+ b=RNLvhUvke8GskQTskqPMHNhic46WlLs/u3TAOPzd7yuRGY/mRp1Z+9HU9zhg8fvSOE
+ m5bMr0SCQftjL7QBT92vElsxpCxlU9G6MUDCLiQ3lUxEQgFStEQ13qfzFAaUwmvg5EAI
+ O0cRmqmtc6OMJA/Zjy6IiOv6WFBdOHU3l4TU83XrphNqj9aMbzWWI23g4wDRX/YnmKQc
+ wFzZThn75iFmfP8/3t7XQBJ8vnjEJTtsLgVsLv1BghzBGm8kd34INru3892qStVusGW6
+ Ai/yXPN9kV/9g5lqZ/Bq5lqsIQBRKqiQH3Ge1xwt0s9ITYW6Breu/aBKYoZiQZ+1YH/n
+ K/KQ==
+X-Gm-Message-State: AOJu0YwaXv+yoJgaZXCyILWsAkdhC6RCRjGcCKfCY0vtIjZumdaSGXsy
+ fTDUKGueWrKbrGXWNu5Cd9XnvY6dhZ1uxJNH+M1ryzMpA0rCHornaOjPmtlA1I+4KU7n2HtcTLu
+ PtfM/
+X-Gm-Gg: AR+sD10nKkP4FswEOP3B/IyqjmFX56qnD4+X9AS7cSNW+noWMpkbppqwwmigbdaq2bX
+ g+drTn9pTumTtj4ckEGKjWLiATcl910DJ5D911iN/Jci24qyUMCwo5p0+CisrbfIzH2l0mZ4jwx
+ Urkw5ovk1GxvSKevS5G4lMgIMSWUsgkw+z36Md/D25Um2uHedbvzP3wb2lnukmHsZqXgzMQNLs6
+ hIXNBuRUQPLKsVcTueaaXM59P8I7eBinrnJDMVuTQv621cMZbhHAVM5SFLQs+3iaZ0XDx/QqIGA
+ Nx+on1ZLswzyWKMRSfmWMl9N6vFphRqA9V4QGQ0XAibpc252pzXuiTUVCrcSnTDYP2Vb7jDCwoj
+ JENi++vWyH0rdlZwxYKjztkKBNt9Ik1HnVnF28q7DWPwmIi6e9+cXHI+9miBLaaE2fygPp7LaCh
+ sOIbILfV2cGArsjZcmYyW74kVh/EWDBqlP8VCmINy4JEZ4YtY6hajblD4iCJRxRmKb/nrJWEWZO
+ WP2PQTPtzNQ8E8xR6hB
+X-Received: by 2002:a05:6a20:4324:b0:3bf:6ac8:8d29 with SMTP id
+ adf61e73a8af0-3cbce8d863fmr14680162637.21.1786314974303; 
+ Sun, 09 Aug 2026 15:36:14 -0700 (PDT)
 Received: from stoup.. (174-21-93-59.tukw.qwest.net. [174.21.93.59])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-cbe8f19ace6sm2998102a12.2.2026.08.09.15.35.52
+ 41be03b00d2f7-cbe8f19ace6sm2998102a12.2.2026.08.09.15.36.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 09 Aug 2026 15:35:52 -0700 (PDT)
+ Sun, 09 Aug 2026 15:36:13 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, TANG Tiancheng <lyndra@linux.alibaba.com>,
- LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-Subject: [PATCH 05/56] disas/riscv: Use extract helpers for operand fields
-Date: Sun,  9 Aug 2026 15:34:54 -0700
-Message-ID: <20260809223545.730664-6-richard.henderson@linaro.org>
+Cc: qemu-riscv@nongnu.org
+Subject: [PATCH 22/56] disas/riscv: Handle c.slli imm != 0 during decode
+Date: Sun,  9 Aug 2026 15:35:11 -0700
+Message-ID: <20260809223545.730664-23-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260809223545.730664-1-richard.henderson@linaro.org>
 References: <20260809223545.730664-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42f;
- envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x42f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62f;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -101,511 +101,35 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: TANG Tiancheng <lyndra@linux.alibaba.com>
-
-Replace shift-based operand extraction with extract32() and sextract32().
-For signed immediates, use sextract32() on the field that carries the sign
-bit and combine it with the remaining extract32() fields.
-
-The RISC-V disassembler currently follows target/riscv/internals.h:
-insn_len() and decodes only 16-bit or 32-bit instruction lengths, so the
-converted fields are all in the low 32 bits of rv_inst.
-
-Suggested-by: Richard Henderson <richard.henderson@linaro.org>
-Signed-off-by: TANG Tiancheng <lyndra@linux.alibaba.com>
-Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-Message-Id: <20260703-b4-disas-xthead-fix-riscv-next-v4-5-84c566330bc7@linux.alibaba.com>
+Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- disas/riscv.c | 214 +++++++++++++++++++++++++-------------------------
- 1 file changed, 107 insertions(+), 107 deletions(-)
+ disas/riscv.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
 diff --git a/disas/riscv.c b/disas/riscv.c
-index 82b962dc71..2ba0a6a73a 100644
+index a8fbefb9bd..77347b557d 100644
 --- a/disas/riscv.c
 +++ b/disas/riscv.c
-@@ -4202,82 +4202,82 @@ static void decode_inst_opcode(rv_decode *dec, rv_isa isa)
- 
- static uint32_t operand_rd(rv_inst inst)
- {
--    return (inst << 52) >> 59;
-+    return extract32(inst, 7, 5);
- }
- 
- static uint32_t operand_rs1(rv_inst inst)
- {
--    return (inst << 44) >> 59;
-+    return extract32(inst, 15, 5);
- }
- 
- static uint32_t operand_rs2(rv_inst inst)
- {
--    return (inst << 39) >> 59;
-+    return extract32(inst, 20, 5);
- }
- 
- static uint32_t operand_rs3(rv_inst inst)
- {
--    return (inst << 32) >> 59;
-+    return extract32(inst, 27, 5);
- }
- 
- static uint32_t operand_aq(rv_inst inst)
- {
--    return (inst << 37) >> 63;
-+    return extract32(inst, 26, 1);
- }
- 
- static uint32_t operand_rl(rv_inst inst)
- {
--    return (inst << 38) >> 63;
-+    return extract32(inst, 25, 1);
- }
- 
- static uint32_t operand_pred(rv_inst inst)
- {
--    return (inst << 36) >> 60;
-+    return extract32(inst, 24, 4);
- }
- 
- static uint32_t operand_succ(rv_inst inst)
- {
--    return (inst << 40) >> 60;
-+    return extract32(inst, 20, 4);
- }
- 
- static uint32_t operand_rm(rv_inst inst)
- {
--    return (inst << 49) >> 61;
-+    return extract32(inst, 12, 3);
- }
- 
- static uint32_t operand_shamt5(rv_inst inst)
- {
--    return (inst << 39) >> 59;
-+    return extract32(inst, 20, 5);
- }
- 
- static uint32_t operand_shamt6(rv_inst inst)
- {
--    return (inst << 38) >> 58;
-+    return extract32(inst, 20, 6);
- }
- 
- static uint32_t operand_shamt7(rv_inst inst)
- {
--    return (inst << 37) >> 57;
-+    return extract32(inst, 20, 7);
- }
- 
- static uint32_t operand_crdq(rv_inst inst)
- {
--    return (inst << 59) >> 61;
-+    return extract32(inst, 2, 3);
- }
- 
- static uint32_t operand_crs1q(rv_inst inst)
- {
--    return (inst << 54) >> 61;
-+    return extract32(inst, 7, 3);
- }
- 
- static uint32_t operand_crs1rdq(rv_inst inst)
- {
--    return (inst << 54) >> 61;
-+    return extract32(inst, 7, 3);
- }
- 
- static uint32_t operand_crs2q(rv_inst inst)
- {
--    return (inst << 59) >> 61;
-+    return extract32(inst, 2, 3);
- }
- 
- static uint32_t calculate_xreg(uint32_t sreg)
-@@ -4287,80 +4287,80 @@ static uint32_t calculate_xreg(uint32_t sreg)
- 
- static uint32_t operand_sreg1(rv_inst inst)
- {
--    return calculate_xreg((inst << 54) >> 61);
-+    return calculate_xreg(extract32(inst, 7, 3));
- }
- 
- static uint32_t operand_sreg2(rv_inst inst)
- {
--    return calculate_xreg((inst << 59) >> 61);
-+    return calculate_xreg(extract32(inst, 2, 3));
- }
- 
- static uint32_t operand_crd(rv_inst inst)
- {
--    return (inst << 52) >> 59;
-+    return extract32(inst, 7, 5);
- }
- 
- static uint32_t operand_crs1(rv_inst inst)
- {
--    return (inst << 52) >> 59;
-+    return extract32(inst, 7, 5);
- }
- 
- static uint32_t operand_crs1rd(rv_inst inst)
- {
--    return (inst << 52) >> 59;
-+    return extract32(inst, 7, 5);
- }
- 
- static uint32_t operand_crs2(rv_inst inst)
- {
--    return (inst << 57) >> 59;
-+    return extract32(inst, 2, 5);
- }
- 
- static uint32_t operand_cimmsh5(rv_inst inst)
- {
--    return (inst << 57) >> 59;
-+    return extract32(inst, 2, 5);
- }
- 
- static uint32_t operand_csr12(rv_inst inst)
- {
--    return (inst << 32) >> 52;
-+    return extract32(inst, 20, 12);
- }
- 
- static int32_t operand_imm12(rv_inst inst)
- {
--    return ((int64_t)inst << 32) >> 52;
-+    return sextract32(inst, 20, 12);
- }
- 
- static int32_t operand_imm20(rv_inst inst)
- {
--    return (((int64_t)inst << 32) >> 44) << 12;
-+    return sextract32(inst, 12, 20) << 12;
- }
- 
- static int32_t operand_jimm20(rv_inst inst)
- {
--    return (((int64_t)inst << 32) >> 63) << 20 |
--        ((inst << 33) >> 54) << 1 |
--        ((inst << 43) >> 63) << 11 |
--        ((inst << 44) >> 56) << 12;
-+    return sextract32(inst, 31, 1) << 20 |
-+        extract32(inst, 21, 10) << 1 |
-+        extract32(inst, 20, 1) << 11 |
-+        extract32(inst, 12, 8) << 12;
- }
- 
- static int32_t operand_simm12(rv_inst inst)
- {
--    return (((int64_t)inst << 32) >> 57) << 5 |
--        (inst << 52) >> 59;
-+    return sextract32(inst, 25, 7) << 5 |
-+        extract32(inst, 7, 5);
- }
- 
- static int32_t operand_sbimm12(rv_inst inst)
- {
--    return (((int64_t)inst << 32) >> 63) << 12 |
--        ((inst << 33) >> 58) << 5 |
--        ((inst << 52) >> 60) << 1 |
--        ((inst << 56) >> 63) << 11;
-+    return sextract32(inst, 31, 1) << 12 |
-+        extract32(inst, 25, 6) << 5 |
-+        extract32(inst, 8, 4) << 1 |
-+        extract32(inst, 7, 1) << 11;
- }
- 
- static uint32_t operand_cimmshl6(rv_inst inst, rv_isa isa)
- {
--    int imm = ((inst << 51) >> 63) << 5 |
--        (inst << 57) >> 59;
-+    int imm = extract32(inst, 12, 1) << 5 |
-+        extract32(inst, 2, 5);
-     if (isa == rv128) {
-         imm = imm ? imm : 64;
-     }
-@@ -4369,8 +4369,8 @@ static uint32_t operand_cimmshl6(rv_inst inst, rv_isa isa)
- 
- static uint32_t operand_cimmshr6(rv_inst inst, rv_isa isa)
- {
--    int imm = ((inst << 51) >> 63) << 5 |
--        (inst << 57) >> 59;
-+    int imm = extract32(inst, 12, 1) << 5 |
-+        extract32(inst, 2, 5);
-     if (isa == rv128) {
-         imm = imm | (imm & 32) << 1;
-         imm = imm ? imm : 64;
-@@ -4380,116 +4380,116 @@ static uint32_t operand_cimmshr6(rv_inst inst, rv_isa isa)
- 
- static int32_t operand_cimmi(rv_inst inst)
- {
--    return (((int64_t)inst << 51) >> 63) << 5 |
--        (inst << 57) >> 59;
-+    return sextract32(inst, 12, 1) << 5 |
-+        extract32(inst, 2, 5);
- }
- 
- static int32_t operand_cimmui(rv_inst inst)
- {
--    return (((int64_t)inst << 51) >> 63) << 17 |
--        ((inst << 57) >> 59) << 12;
-+    return sextract32(inst, 12, 1) << 17 |
-+        extract32(inst, 2, 5) << 12;
- }
- 
- static uint32_t operand_cimmlwsp(rv_inst inst)
- {
--    return ((inst << 51) >> 63) << 5 |
--        ((inst << 57) >> 61) << 2 |
--        ((inst << 60) >> 62) << 6;
-+    return extract32(inst, 12, 1) << 5 |
-+        extract32(inst, 4, 3) << 2 |
-+        extract32(inst, 2, 2) << 6;
- }
- 
- static uint32_t operand_cimmldsp(rv_inst inst)
- {
--    return ((inst << 51) >> 63) << 5 |
--        ((inst << 57) >> 62) << 3 |
--        ((inst << 59) >> 61) << 6;
-+    return extract32(inst, 12, 1) << 5 |
-+        extract32(inst, 5, 2) << 3 |
-+        extract32(inst, 2, 3) << 6;
- }
- 
- static uint32_t operand_cimmlqsp(rv_inst inst)
- {
--    return ((inst << 51) >> 63) << 5 |
--        ((inst << 57) >> 63) << 4 |
--        ((inst << 58) >> 60) << 6;
-+    return extract32(inst, 12, 1) << 5 |
-+        extract32(inst, 6, 1) << 4 |
-+        extract32(inst, 2, 4) << 6;
- }
- 
- static int32_t operand_cimm16sp(rv_inst inst)
- {
--    return (((int64_t)inst << 51) >> 63) << 9 |
--        ((inst << 57) >> 63) << 4 |
--        ((inst << 58) >> 63) << 6 |
--        ((inst << 59) >> 62) << 7 |
--        ((inst << 61) >> 63) << 5;
-+    return sextract32(inst, 12, 1) << 9 |
-+        extract32(inst, 6, 1) << 4 |
-+        extract32(inst, 5, 1) << 6 |
-+        extract32(inst, 3, 2) << 7 |
-+        extract32(inst, 2, 1) << 5;
- }
- 
- static int32_t operand_cimmj(rv_inst inst)
- {
--    return (((int64_t)inst << 51) >> 63) << 11 |
--        ((inst << 52) >> 63) << 4 |
--        ((inst << 53) >> 62) << 8 |
--        ((inst << 55) >> 63) << 10 |
--        ((inst << 56) >> 63) << 6 |
--        ((inst << 57) >> 63) << 7 |
--        ((inst << 58) >> 61) << 1 |
--        ((inst << 61) >> 63) << 5;
-+    return sextract32(inst, 12, 1) << 11 |
-+        extract32(inst, 11, 1) << 4 |
-+        extract32(inst, 9, 2) << 8 |
-+        extract32(inst, 8, 1) << 10 |
-+        extract32(inst, 7, 1) << 6 |
-+        extract32(inst, 6, 1) << 7 |
-+        extract32(inst, 3, 3) << 1 |
-+        extract32(inst, 2, 1) << 5;
- }
- 
- static int32_t operand_cimmb(rv_inst inst)
- {
--    return (((int64_t)inst << 51) >> 63) << 8 |
--        ((inst << 52) >> 62) << 3 |
--        ((inst << 57) >> 62) << 6 |
--        ((inst << 59) >> 62) << 1 |
--        ((inst << 61) >> 63) << 5;
-+    return sextract32(inst, 12, 1) << 8 |
-+        extract32(inst, 10, 2) << 3 |
-+        extract32(inst, 5, 2) << 6 |
-+        extract32(inst, 3, 2) << 1 |
-+        extract32(inst, 2, 1) << 5;
- }
- 
- static uint32_t operand_cimmswsp(rv_inst inst)
- {
--    return ((inst << 51) >> 60) << 2 |
--        ((inst << 55) >> 62) << 6;
-+    return extract32(inst, 9, 4) << 2 |
-+        extract32(inst, 7, 2) << 6;
- }
- 
- static uint32_t operand_cimmsdsp(rv_inst inst)
- {
--    return ((inst << 51) >> 61) << 3 |
--        ((inst << 54) >> 61) << 6;
-+    return extract32(inst, 10, 3) << 3 |
-+        extract32(inst, 7, 3) << 6;
- }
- 
- static uint32_t operand_cimmsqsp(rv_inst inst)
- {
--    return ((inst << 51) >> 62) << 4 |
--        ((inst << 53) >> 60) << 6;
-+    return extract32(inst, 11, 2) << 4 |
-+        extract32(inst, 7, 4) << 6;
- }
- 
- static uint32_t operand_cimm4spn(rv_inst inst)
- {
--    return ((inst << 51) >> 62) << 4 |
--        ((inst << 53) >> 60) << 6 |
--        ((inst << 57) >> 63) << 2 |
--        ((inst << 58) >> 63) << 3;
-+    return extract32(inst, 11, 2) << 4 |
-+        extract32(inst, 7, 4) << 6 |
-+        extract32(inst, 6, 1) << 2 |
-+        extract32(inst, 5, 1) << 3;
- }
- 
- static uint32_t operand_cimmw(rv_inst inst)
- {
--    return ((inst << 51) >> 61) << 3 |
--        ((inst << 57) >> 63) << 2 |
--        ((inst << 58) >> 63) << 6;
-+    return extract32(inst, 10, 3) << 3 |
-+        extract32(inst, 6, 1) << 2 |
-+        extract32(inst, 5, 1) << 6;
- }
- 
- static uint32_t operand_cimmd(rv_inst inst)
- {
--    return ((inst << 51) >> 61) << 3 |
--        ((inst << 57) >> 62) << 6;
-+    return extract32(inst, 10, 3) << 3 |
-+        extract32(inst, 5, 2) << 6;
- }
- 
- static uint32_t operand_cimmq(rv_inst inst)
- {
--    return ((inst << 51) >> 62) << 4 |
--        ((inst << 53) >> 63) << 8 |
--        ((inst << 57) >> 62) << 6;
-+    return extract32(inst, 11, 2) << 4 |
-+        extract32(inst, 10, 1) << 8 |
-+        extract32(inst, 5, 2) << 6;
- }
- 
- static int32_t operand_vimm(rv_inst inst)
- {
--    return (int64_t)(inst << 44) >> 59;
-+    return sextract32(inst, 15, 5);
- }
- 
- static uint32_t operand_vuimm(rv_inst inst)
-@@ -4499,54 +4499,54 @@ static uint32_t operand_vuimm(rv_inst inst)
- 
- static uint32_t operand_vzimm11(rv_inst inst)
- {
--    return (inst << 33) >> 53;
-+    return extract32(inst, 20, 11);
- }
- 
- static uint32_t operand_vzimm10(rv_inst inst)
- {
--    return (inst << 34) >> 54;
-+    return extract32(inst, 20, 10);
- }
- 
- static uint32_t operand_vzimm6(rv_inst inst)
- {
--    return ((inst << 37) >> 63) << 5 |
--        ((inst << 44) >> 59);
-+    return extract32(inst, 26, 1) << 5 |
-+        extract32(inst, 15, 5);
- }
- 
- static uint32_t operand_bs(rv_inst inst)
- {
--    return (inst << 32) >> 62;
-+    return extract32(inst, 30, 2);
- }
- 
- static uint32_t operand_rnum(rv_inst inst)
- {
--    return (inst << 40) >> 60;
-+    return extract32(inst, 20, 4);
- }
- 
- static uint32_t operand_vm(rv_inst inst)
- {
--    return (inst << 38) >> 63;
-+    return extract32(inst, 25, 1);
- }
- 
- static uint32_t operand_uimm_c_lb(rv_inst inst)
- {
--    return (((inst << 58) >> 63) << 1) |
--        ((inst << 57) >> 63);
-+    return extract32(inst, 5, 1) << 1 |
-+        extract32(inst, 6, 1);
- }
- 
- static uint32_t operand_uimm_c_lh(rv_inst inst)
- {
--    return (((inst << 58) >> 63) << 1);
-+    return extract32(inst, 5, 1) << 1;
- }
- 
- static uint32_t operand_zcmp_spimm(rv_inst inst)
- {
--    return ((inst << 60) >> 62) << 4;
-+    return extract32(inst, 2, 2) << 4;
- }
- 
- static uint32_t operand_zcmp_rlist(rv_inst inst)
- {
--    return ((inst << 56) >> 60);
-+    return extract32(inst, 4, 4);
- }
- 
- static uint32_t operand_imm6(rv_inst inst)
-@@ -4556,17 +4556,17 @@ static uint32_t operand_imm6(rv_inst inst)
- 
- static uint32_t operand_imm2(rv_inst inst)
- {
--    return (inst << 37) >> 62;
-+    return extract32(inst, 25, 2);
- }
- 
- static uint32_t operand_immh(rv_inst inst)
- {
--    return (inst << 32) >> 58;
-+    return extract32(inst, 26, 6);
- }
- 
- static uint32_t operand_imml(rv_inst inst)
- {
--    return (inst << 38) >> 58;
-+    return extract32(inst, 20, 6);
- }
- 
- static uint32_t calculate_stack_adj(rv_isa isa, uint32_t rlist, uint32_t spimm)
-@@ -4585,12 +4585,12 @@ static uint32_t operand_zcmp_stack_adj(rv_inst inst, rv_isa isa)
- 
- static uint32_t operand_tbl_index(rv_inst inst)
- {
--    return ((inst << 54) >> 56);
-+    return extract32(inst, 2, 8);
- }
- 
- static uint32_t operand_lpl(rv_inst inst)
- {
--    return inst >> 12;
-+    return extract32(inst, 12, 20);
- }
- 
- /* decode operands */
+@@ -1930,7 +1930,7 @@ static const rv_opcode_data rvi_opcode_data[] = {
+     { "c.bnez", rv_codec_cb, rv_fmt_rs1_rs2_offset, NULL, rv_op_bne, rv_op_bne,
+       rv_op_bne },
+     { "c.slli", rv_codec_ci_sh6, rv_fmt_rd_rs1_imm, NULL, rv_op_slli,
+-      rv_op_slli, rv_op_slli, rvcd_imm_nz },
++      rv_op_slli, rv_op_slli },
+     { "c.fldsp", rv_codec_ci_ldsp, rv_fmt_frd_offset_rs1, NULL, rv_op_fld,
+       rv_op_fld, rv_op_fld },
+     { "c.lwsp", rv_codec_ci_lwsp, rv_fmt_rd_offset_rs1, NULL, rv_op_lw,
+@@ -3085,7 +3085,9 @@ static void decode_inst_opcode(rv_decode *dec, rv_isa isa)
+     case 2:
+         switch ((inst >> 13) & 0b111) {
+         case 0:
+-            op = rv_op_c_slli;
++            if (isa != rv32 || (inst & 0x1000) == 0) {
++                op = rv_op_c_slli; /* or unspecified HINT */
++            }
+             break;
+         case 1:
+             if (isa == rv128) {
 -- 
 2.43.0
 
