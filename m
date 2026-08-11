@@ -4,65 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87E1BC5B56A
-	for <qemu-riscv@archiver.kernel.org>; Tue, 11 Aug 2026 12:00:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A8B2C5B56A
+	for <qemu-riscv@archiver.kernel.org>; Tue, 11 Aug 2026 14:22:40 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wtl9w-00028O-7x; Tue, 11 Aug 2026 08:00:44 -0400
+	id 1wtnN0-0006Po-N2; Tue, 11 Aug 2026 10:22:22 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <17746591750@163.com>)
- id 1wthBO-0006gR-Nx; Tue, 11 Aug 2026 03:45:59 -0400
-Received: from m16.mail.163.com ([220.197.31.3])
+ (Exim 4.90_1) (envelope-from <mlmgr@proulx.com>) id 1wtltb-00034E-UA
+ for qemu-riscv@nongnu.org; Tue, 11 Aug 2026 08:47:56 -0400
+Received: from havoc.proulx.com ([198.99.81.74])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <17746591750@163.com>)
- id 1wthBK-0000Ln-Kq; Tue, 11 Aug 2026 03:45:57 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
- s=s110527; h=Subject:To:From:Message-ID:Date:MIME-Version:
- Content-Type; bh=Z8rwcxwN7wQC0Pgz/GxqK5M4nF905d7dJUdmyfDu0TI=;
- b=D2MAhjFTNSIdbVa220NFtvakV94pxD2lUm7BDsgCnu5VXnibBX7jAumWDeBWSf
- IicAkguRxV0CHaYIdNE8tIQ8maJQ14hPYyXrljQZHNrTBn4AnOT1xD8ILJkFDY/t
- Gns1QsWaW1E/DZ18+V7dmhvGYyt4c30qA56e47wqWr+74=
-Received: from [10.2.10.30] (unknown [])
- by gzga-smtp-mtada-g1-3 (Coremail) with SMTP id _____wDXtukS0npqq8c8NA--.113S2;
- Tue, 11 Aug 2026 15:41:11 +0800 (CST)
-Subject: Re: [PATCH 6/9] target/loongarch: Enable disassembly via capstone
-To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
-Cc: laurent@vivier.eu, philmd@mailo.com, qemu-riscv@nongnu.org,
- qemu-s390x@nongnu.org
-References: <20260809013343.664966-1-richard.henderson@linaro.org>
- <20260809013343.664966-7-richard.henderson@linaro.org>
-From: Song Gao <17746591750@163.com>
-Message-ID: <8209e377-df22-8412-1b23-12fa853f0a59@163.com>
-Date: Tue, 11 Aug 2026 15:41:06 +0800
-User-Agent: Mozilla/5.0 (X11; Linux loongarch64; rv:68.0) Gecko/20100101
- Thunderbird/68.7.0
+ (Exim 4.90_1) (envelope-from <mlmgr@proulx.com>) id 1wtltW-0002Vd-K3
+ for qemu-riscv@nongnu.org; Tue, 11 Aug 2026 08:47:54 -0400
+Received: by havoc.proulx.com (Postfix, from userid 1027)
+ id 259598B6; Tue, 11 Aug 2026 06:47:47 -0600 (MDT)
+Resent-From: Mailing List Manager <mlmgr@proulx.com>
+Resent-Date: Tue, 11 Aug 2026 06:47:46 -0600
+Resent-Message-ID: <ansZ8gaJ93WO5UXf@havoc.proulx.com>
+Resent-To: qemu-riscv@nongnu.org
+Received: from eggs.gnu.org ([2001:470:142:3::10])
+ by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <liliang2057@phytium.com.cn>)
+ id 1wtcxh-0001gS-2T; Mon, 10 Aug 2026 23:15:33 -0400
+Received: from zg8tmtyylji0my4xnjqumte4.icoremail.net ([162.243.164.118])
+ by eggs.gnu.org with esmtp (Exim 4.90_1)
+ (envelope-from <liliang2057@phytium.com.cn>)
+ id 1wtcxe-0005WG-27; Mon, 10 Aug 2026 23:15:32 -0400
+Received: from prodtpl.icoremail.net (unknown [10.12.1.20])
+ by hzbj-icmmx-6 (Coremail) with UTF8SMTP id AQAAfwAHD7fEk3pqunvdAA--.60634S2; 
+ Tue, 11 Aug 2026 11:15:16 +0800 (CST)
+Received: from phytium.com.cn (unknown [218.76.62.144])
+ by mail (Coremail) with SMTP id AQAAf8DwfHTAk3pqUTgiAA--.58848S3;
+ Tue, 11 Aug 2026 11:15:13 +0800 (CST)
+From: Liang Li <liliang2057@phytium.com.cn>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, richard.henderson@linaro.org, pbonzini@redhat.com,
+ palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com,
+ daniel.barboza@oss.qualcomm.com, zhiwei_liu@linux.alibaba.com,
+ chao.liu@processmission.com, tangtao1634@phytium.com.cn,
+ Liang Li <liliang2057@phytium.com.cn>
+Subject: [RFC PATCH 0/1] RISC-V vector fault-only-first vl truncation under
+ plugin memory callbacks
+Date: Tue, 11 Aug 2026 11:14:54 +0800
+Message-ID: <20260811031455.1330838-1-liliang2057@phytium.com.cn>
+X-Mailer: git-send-email 2.51.1
 MIME-Version: 1.0
-In-Reply-To: <20260809013343.664966-7-richard.henderson@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Content-Language: en-US
-X-CM-TRANSID: _____wDXtukS0npqq8c8NA--.113S2
-X-Coremail-Antispam: 1Uf129KBjvJXoW7WFWDJw4kJr4xKF4kWw1DGFg_yoW8AF4kpr
- yDCFyfG3y8tr9xGas5ua4a9Fn8Xa1xGr1avFW7uayvyFsI9F4jqw4vk39IvFn8J3y8Ww1I
- 9rn3uw1UZF48J3DanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x0zRgyCZUUUUU=
-X-Originating-IP: [114.242.206.180]
-X-CM-SenderInfo: jprxlkywvzilivq6il2tof0z/xtbC8hnz-Gp60hmzrwAA3j
-Received-SPF: pass client-ip=220.197.31.3; envelope-from=17746591750@163.com;
- helo=m16.mail.163.com
-X-Spam_score_int: -37
-X-Spam_score: -3.8
-X-Spam_bar: ---
-X-Spam_report: (-3.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001, FROM_LOCAL_DIGITS=0.001,
- FROM_LOCAL_HEX=0.006, NICE_REPLY_A=-1.998, RCVD_IN_DNSWL_NONE=-0.0001,
- RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-CM-TRANSID: AQAAf8DwfHTAk3pqUTgiAA--.58848S3
+X-CM-SenderInfo: 5oloxttqjsikux6sx5pwlxzhxfrphubq/1tbiAQAEAGp6JskBaQACsQ
+Authentication-Results: hzbj-icmmx-6; spf=neutral smtp.mail=liliang205
+ 7@phytium.com.cn;
+X-Coremail-Antispam: 1Uk129KBjvJXoWxWw4kGF1xXFyfGr1DKrWxZwb_yoW5CryxpF
+ Z2k3y3K34kXr93X34fAa17Xw1rtw4rGa1UCas7Jr1xZrW5ZrnFv3yxKw4jkFy5Gr1rA34a
+ vFZ0vFy7uF1UAaDanT9S1TB71UUUUUJqnTZGkaVYY2UrUUUUj1kv1TuYvTs0mT0YCTnIWj
+ DUYxn0WfASr-VFAU7a7-sFnT9fnUUIcSsGvfJ3UbIYCTnIWIevJa73UjIFyTuYvj4RJUUU
+ UUUUU
+Received-SPF: pass client-ip=162.243.164.118;
+ envelope-from=liliang2057@phytium.com.cn;
+ helo=zg8tmtyylji0my4xnjqumte4.icoremail.net
 X-Spam_action: no action
-X-Mailman-Approved-At: Tue, 11 Aug 2026 08:00:38 -0400
+X-Listhelper-Id: 20260810211655-30408
+X-Bogosity: Spam, tests=bogofilter, spamicity=1.000000, version=1.2.5
+X-CRM114-Status: SPAM  ( -43.76  )
+Received-SPF: pass client-ip=198.99.81.74; envelope-from=mlmgr@proulx.com;
+ helo=havoc.proulx.com
+X-Spam_score_int: -14
+X-Spam_score: -1.5
+X-Spam_bar: -
+X-Spam_report: (-1.5 / 5.0 requ) BAYES_00=-1.9,
+ HEADER_FROM_DIFFERENT_DOMAINS=0.25, HK_RANDOM_ENVFROM=0.188,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
+X-Spam_action: no action
+X-Mailman-Approved-At: Tue, 11 Aug 2026 10:22:21 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -77,61 +93,68 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+Hi,
 
-在 2026/8/9 上午9:33, Richard Henderson 写道:
-> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
-> ---
->   include/disas/capstone.h | 6 ++++++
->   target/loongarch/cpu.c   | 8 ++++++++
->   2 files changed, 14 insertions(+)
-Reviewed-by:  Song Gao <17746591750@163.com>
+This is an RFC for a RISC-V vector fault-only-first interaction with plugin
+memory callbacks. I'd like feedback on whether this is considered a bug and
+whether the fix is at the right layer before I invest in tests/etc.
 
-Thanks.
-Song Gao
-> diff --git a/include/disas/capstone.h b/include/disas/capstone.h
-> index db1abe7f70..a922f7627f 100644
-> --- a/include/disas/capstone.h
-> +++ b/include/disas/capstone.h
-> @@ -40,6 +40,12 @@
->   
->   #endif /* CONFIG_CAPSTONE */
->   
-> +#if CS_API_MAJOR < 6
-> +#define CS_ARCH_LOONGARCH       -1
-> +#define CS_MODE_LOONGARCH32      0
-> +#define CS_MODE_LOONGARCH64      0
-> +#endif
-> +
->   #if CS_API_MAJOR < 5
->   #define CS_ARCH_RISCV           -1
->   #define CS_MODE_RISCV32          0
-> diff --git a/target/loongarch/cpu.c b/target/loongarch/cpu.c
-> index fb03424ffa..7007622630 100644
-> --- a/target/loongarch/cpu.c
-> +++ b/target/loongarch/cpu.c
-> @@ -29,6 +29,7 @@
->   #include <linux/kvm.h>
->   #endif
->   #include "tcg/tcg_loongarch.h"
-> +#include "disas/capstone.h"
->   
->   const char * const regnames[32] = {
->       "r0", "r1", "r2", "r3", "r4", "r5", "r6", "r7",
-> @@ -694,8 +695,15 @@ static void loongarch_cpu_reset_hold(Object *obj, ResetType type)
->   static void loongarch_cpu_disas_set_info(const CPUState *cs,
->                                            disassemble_info *info)
->   {
-> +    CPULoongArchState *env = cpu_env((CPUState *)cs);
-> +
->       info->endian = BFD_ENDIAN_LITTLE;
->       info->print_insn = print_insn_loongarch;
-> +
-> +    info->cap_arch = CS_ARCH_LOONGARCH;
-> +    info->cap_insn_unit = 4;
-> +    info->cap_insn_split = 4;
-> +    info->cap_mode = is_la64(env) ? CS_MODE_LOONGARCH64 : CS_MODE_LOONGARCH32;
->   }
->   
->   static void loongarch_cpu_realizefn(DeviceState *dev, Error **errp)
+The fault-only-first load (vle*ff, e.g. vle8ff.v) decides vl by probing each
+element and truncating at the first fault. That probe goes through
+probe_access_flags(), which -- when a plugin registers a vcpu_mem callback --
+returns a non-zero "not plain RAM" flag for ordinary RAM: TLB_MMIO via
+force_mmio in system mode (commit 6d03226b42), or TLB_FORCE_SLOW in user mode.
+
+For a normal load these flags only select the fast/slow path and the data is
+still read correctly. But vext_ldff() treats any flag other than TLB_WATCHPOINT
+as "this element faults", so the first non-first element is reported faulting
+and vl is truncated to 1. The loaded data stays correct, but a vectorized
+strlen/scan degenerates from N bytes/iter to 1 byte/iter, inflating the
+dynamic instruction count whenever a memory-observing plugin is attached.
+
+We hit this in practice while generating SimPoint BBVs for SPECcpu2017
+500.perlbench_r under a memory-observing plugin: the instruction stream
+diverged from the plugin-disabled baseline at perl_parse's vectorized strlen.
+
+Patch 1 routes vext_ldff()'s probes through probe_access_full_mmu()
+(check_mem_cbs=false), leaving the plain-load path unchanged so plugin
+observation of real loads/stores is preserved. A user-mode counterpart of
+probe_access_full_mmu() is added (it previously only existed in system mode).
+
+Reproduced on master (v11.1.0-rc3) with a minimal memory-callback plugin and
+a vle8ff strlen guest: enabling the plugin inflates the vle8ff execution
+count ~16x without the fix, and has no effect with it. Reproducer (plugin +
+guest sources, ~100 lines total) available on request or in a follow-up.
+
+Questions:
+
+  1. Is the vl truncation under a memory-observing plugin a bug, or is
+     reflecting force_mmio/TLB_FORCE_SLOW into the FOF probe intentional?
+  2. Is probe_access_full_mmu() at the FOF call sites the preferred layer,
+     or should probe_access_flags() itself not fold plugin-induced force-slow
+     into its returned flags?
+  3. I noticed target/i386/tcg/access.c already works around the same
+     force-slow (the "No haddr means probe_access wants to force slow path"
+     comment). Would a more general fix at the probe_access_flags() layer be
+     preferred so each target doesn't paper over it independently?
+
+Patch is compile-tested on riscv64 system and user modes; full functional
+testing and a proper tests/tcg case will follow once the approach is agreed.
+
+Thanks,
+Liang Li
+
+Liang Li (1):
+  target/riscv: fix vector fault-only-first vl truncation under plugin
+    memory callbacks
+
+ accel/tcg/user-exec.c            | 35 ++++++++++++++++++++++----
+ include/accel/tcg/probe.h        |  8 ++++--
+ target/riscv/tcg/vector_helper.c | 42 ++++++++++++++++++++++++--------
+ 3 files changed, 68 insertions(+), 17 deletions(-)
+
+--
+2.51.1
+
 
 
