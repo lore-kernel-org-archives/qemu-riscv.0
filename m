@@ -4,144 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67CA6C5AC67
-	for <qemu-riscv@archiver.kernel.org>; Tue, 11 Aug 2026 07:11:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F13CCC5B574
+	for <qemu-riscv@archiver.kernel.org>; Tue, 11 Aug 2026 07:54:54 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wtge0-0002FU-2H; Tue, 11 Aug 2026 03:11:28 -0400
+	id 1wthJy-00086p-Ur; Tue, 11 Aug 2026 03:54:50 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1wtgdx-0002Ex-QM
- for qemu-riscv@nongnu.org; Tue, 11 Aug 2026 03:11:25 -0400
-Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1wtgdw-0002vV-Bv
- for qemu-riscv@nongnu.org; Tue, 11 Aug 2026 03:11:25 -0400
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 67B78DUI3010200
- for <qemu-riscv@nongnu.org>; Tue, 11 Aug 2026 07:11:23 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- 9Kq3rY0wPs/eDjEbAn7SxZ7jvcIO0oV1bnQVGLvAn5o=; b=Ig8Vnu5g5UVAVZ9/
- DxMEI7pONe3OsJA6dMhqB3fUG6KGefP63A7+/pcK/N+xQ/t6eF5nMEnTx/0Vuycr
- vfgZFxqmlueBwN6BnWCFK3iz7B8rriCJsgNemteB/935dlHGMAxYKTm974MWuvXV
- XcXpnfjMLZZyCJls6CGhaN55+KgKaeksUywuVA9IbiDTwUuiA8wITFM8P/K5vS3M
- mnDraxJkGH85i0zZCGR4y1zWbadvzfjNJWe7We0kSE/jWpxG+IS6dVmC4FdDVfxG
- PITP7RUBRsmRS3rxqXga75FN9pUywcSSuDykUjDhm3/UI/89JeXSUzNOEbuRIKii
- zcdSkQ==
-Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com
- [209.85.160.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fyjjtjtyh-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Tue, 11 Aug 2026 07:11:23 +0000 (GMT)
-Received: by mail-qt1-f198.google.com with SMTP id
- d75a77b69052e-51c1c7f135bso44895921cf.0
- for <qemu-riscv@nongnu.org>; Tue, 11 Aug 2026 00:11:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1786432282; x=1787037082; darn=nongnu.org;
- h=content-transfer-encoding:content-type:in-reply-to:from:references
- :cc:to:content-language:subject:user-agent:mime-version:date
- :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=9Kq3rY0wPs/eDjEbAn7SxZ7jvcIO0oV1bnQVGLvAn5o=;
- b=GmF4CLh5g2bILN3/AbBu4i/AOmE8hy4S74YWNyWOIXcpP0lPMArXuasLixqqUKS3qi
- qGn4GOgdqzCyHT6OHpEPmhN6r2ObU4zty63FgJ4Kv1bGP2wBjO2zJjbQB2PzHOXvPj14
- detfzJrX4QlygCoylLq+Y03dJvDdm75+HrSA2PNUIqEESr6WLKNBfaME9FEnB+jFZyV2
- vZ9d0lan4T71hz3vorlXEq3MjYTAuk9q3xMVKvXlrflqmj4gRVNEWJRc8XxQ1X7vZ5nc
- 8ZPjHtmrGdWljt7eUoUnFB6LnKy4MmWNiruWd7VBzTga4g0COoRLNbze+I200IUd97hh
- AuSg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786432282; x=1787037082;
- h=content-transfer-encoding:content-type:in-reply-to:from:references
- :cc:to:content-language:subject:user-agent:mime-version:date
- :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=9Kq3rY0wPs/eDjEbAn7SxZ7jvcIO0oV1bnQVGLvAn5o=;
- b=RyiJGghvCANhQz5dYZCYIw2qdjXqfuVAhLsYNp+4L4WhuclUQqwncEEN0Ut/cKJVS9
- tOUZjs4nHUicll1rYhEiRMZrgXObfDGgrMgZRUctSDhUFS18+QmhAR7ZsN3BeWKt7I6n
- p/ISPJBZgD2G+V5oukuOvZcX7g0GqBkZf6Ez7ggvWc0DRmqUy0VnNEd5s5XMKunMWCm3
- j0Q+YQP6eetL3brzZK6F8C+iQ7wW/PQ9puA5SzAGTeQlfsiDwjI+Ja5eXbF3/LUYlZHo
- +J/eD3kDNXXgXibxXfh+Y2Nji9sdBd7OFueDGsEOUZU7wS68ZXqdvY4BbYIK8IrvsNDA
- GP3Q==
-X-Gm-Message-State: AOJu0Yzv1BLyk46TGYvlT6aAD3id2Z+uVg6rMGZhxTRbVCMyS3KOUOuC
- NEQSYzp87LOxw/JqXgNxZ4v/JuGYG4qBeARlU/1CNrKUCO5AeNPO9fjFxopDfXdYUmk5RTej8fW
- 42s/eeNlFw1YdfH0goiIaM9Cf57Pyh+6s1kY5DGjDT7xtfDKuw3ZjsA3yqQ==
-X-Gm-Gg: AR+sD10ObEX6YUyf7S9prGY4l5XwAGOiDdKF/Nivku00lpeWU9duNltHdottrf3E8QY
- JLgsLOB2eEocxmbEYMi0OmJHXt/b1zr9S4GWkaUXOfiTM0QFxf+B+YRFF8n7YPxQr1rfD63RxYL
- jsOuCz3BkA3ZkXtGlIQfBDhMGX8M7am5copyMIn54lMjgbDz9w2J/G6IODOoGqEfc+42JwIVEv8
- fQqAunlN37vZDOQ+bbZiecSKSaYAjmtnUlZUcaAOKpMUQ2eEq5jlBgjs7wi/cc+/yG/YlC5EQLn
- /KzIKlTv91VSd9ZE8cSiIWs+HSHgldA3GXWHTuF+twtdc5lFcbQ4qRdoD5MSZGtGSu0zwOzUo4S
- u3B9Sx0neduDnPUkOCmfTI9VDltDM9ViPlMURO5RK
-X-Received: by 2002:a05:622a:409:b0:51c:2230:7efb with SMTP id
- d75a77b69052e-52d585bdcc3mr9621491cf.23.1786432282611; 
- Tue, 11 Aug 2026 00:11:22 -0700 (PDT)
-X-Received: by 2002:a05:622a:409:b0:51c:2230:7efb with SMTP id
- d75a77b69052e-52d585bdcc3mr9621071cf.23.1786432282190; 
- Tue, 11 Aug 2026 00:11:22 -0700 (PDT)
-Received: from [192.168.69.229] (pmd666.hd.free.fr. [88.187.86.199])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-499788a5be9sm28901605e9.4.2026.08.11.00.11.20
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 11 Aug 2026 00:11:21 -0700 (PDT)
-Message-ID: <08804c65-680c-4ca5-8e94-b416ed58d74a@oss.qualcomm.com>
-Date: Tue, 11 Aug 2026 09:11:20 +0200
+ (Exim 4.90_1) (envelope-from <xiaoou@iscas.ac.cn>)
+ id 1wthJv-000869-UX; Tue, 11 Aug 2026 03:54:47 -0400
+Received: from smtp21.cstnet.cn ([159.226.251.21] helo=cstnet.cn)
+ by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
+ (Exim 4.90_1) (envelope-from <xiaoou@iscas.ac.cn>)
+ id 1wthJs-0001v6-24; Tue, 11 Aug 2026 03:54:47 -0400
+Received: from [10.213.18.251] (unknown [36.110.52.2])
+ by APP-01 (Coremail) with SMTP id qwCowAB3TPA51Xpq4qbrBA--.44664S3;
+ Tue, 11 Aug 2026 15:54:33 +0800 (CST)
+Content-Type: multipart/alternative;
+ boundary="------------xdSDnJiNy0lJNpbkrVjkFeSb"
+Message-ID: <738d4121-1841-4b08-adab-94d4fbfec0fa@iscas.ac.cn>
+Date: Tue, 11 Aug 2026 15:54:32 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 2/3] hw/riscv: add DesignWare APB timer to K230 board
-Content-Language: en-US
-To: raoyi <rao232328@gmail.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, pbonzini@redhat.com, palmer@dabbelt.com,
- alistair.francis@wdc.com, liwei1518@gmail.com,
- daniel.barboza@oss.qualcomm.com, zhiwei_liu@linux.alibaba.com,
- chao.liu@processmission.com, farosas@suse.de, lvivier@redhat.com,
- caojunze424@gmail.com, bmeng.cn@gmail.com
-References: <20260811064612.16517-1-rao232328@gmail.com>
- <20260811064612.16517-3-rao232328@gmail.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
-In-Reply-To: <20260811064612.16517-3-rao232328@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODExMDA1OCBTYWx0ZWRfXyYJGK2m/gPZE
- fkJo5c1AYXzswwxv62X8UrxwMhtHT6VYf4fL+XdJ4twQWwJKltAGx8KV8lhQZfME42ChVrrVfC/
- hmLHNYenngQQMzK7UI4qfvcWcSUFImwkg42bx5vAU2MB3hk9EF0sFHfPXTKF3iOLyGK9jN3O66U
- +Vu9ut5Mx5zQOGsDkaBhVzpBHwjNrivtNsNJyTSJGP0Bz2q/U2/xbMcbmgC7HGWWtKKE8KQ5QgI
- GbP+L+wGwZI2bRbKXRqGQKFaLpVRrhdrpCYbeiUo4XNf6KweR4fudxAvnL+55uigVskb5CiqAH2
- +76ghEV/Gh4rXUUZ/CrgrrGX9NTS/t81qA5aYlC0YHMh8pmtJITnMKHAyJ2MyD5vROjo0FCBiYj
- 3S/Lpy0gOrClsDv5NXs1EdYl5qbNrSH98FPdjOOjy3OktkieOpeoSDvbt2MOIjvuek+T2K+ZibH
- 1VvV9Dog5juYM6Jh9KA==
-X-Proofpoint-ORIG-GUID: yng22j8oY2qriF3Btw7NPs8PZF-4MARY
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODExMDA1OCBTYWx0ZWRfX9yTd0hgi9Gop
- 4FS93Y9j30KGurpaw0nOuKap++R4B0AxCp2pNgTYj13mvnTqaawa0/NJZaHo7JqgslCkGG3XEpg
- lpQGK2D1ka4VV3B/boo54OeW0Je56r4=
-X-Proofpoint-GUID: yng22j8oY2qriF3Btw7NPs8PZF-4MARY
-X-Authority-Analysis: v=2.4 cv=JsHBas4C c=1 sm=1 tr=0 ts=6a7acb1b cx=c_pps
- a=mPf7EqFMSY9/WdsSgAYMbA==:117 a=4s3hRJSeHn4rkQlkrse1kQ==:17
- a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=M51BFTxLslgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=pGLkceISAAAA:8 a=EUspDBNiAAAA:8 a=ntWQesBoEHepiUpLgy4A:9 a=3ZKOabzyN94A:10
- a=QEXdDO2ut3YA:10 a=dawVfQjAaf238kedN5IG:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-10_06,2026-08-10_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 clxscore=1015 adultscore=0 spamscore=0 suspectscore=0
- priorityscore=1501 malwarescore=0 phishscore=0 impostorscore=0
- lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2608110058
-Received-SPF: pass client-ip=205.220.180.131;
- envelope-from=philmd@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
+Subject: Re: [PATCH v2 00/18] target/riscv: Add support for RISC-V P
+To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Chao Liu <chao.liu.zevorn@gmail.com>, nutty.liu@hotmail.com
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+References: <cover.1784280142.git.xiaoou@iscas.ac.cn>
+ <amnHq8A14gOpHcg0@ChaodeMacBook-Pro.local>
+ <946b40dd-a2b9-4d10-97f0-8dad261e0570@oss.qualcomm.com>
+From: MOLLY CHEN <xiaoou@iscas.ac.cn>
+In-Reply-To: <946b40dd-a2b9-4d10-97f0-8dad261e0570@oss.qualcomm.com>
+X-CM-TRANSID: qwCowAB3TPA51Xpq4qbrBA--.44664S3
+X-Coremail-Antispam: 1UD129KBjvJXoW3WF45ZryfGryDCF1rAF4ktFb_yoWxWF47pr
+ 4rG3yYyryUJryxGw1xJw4DJry5GF4rGw45JwnrX3W8ta13tF4aqFnFvw4j9FnrJF48Gw1j
+ 9F1qyr1UZF4UZFJanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUkFb7Iv0xC_Kw4lb4IE77IF4wAFF20E14v26r4j6ryUM7CY07I2
+ 0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rw
+ A2F7IY1VAKz4vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xII
+ jxv20xvEc7CjxVAFwI0_Cr0_Gr1UM28EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwV
+ C2z280aVCY1x0267AKxVW0oVCq3wAS0I0E0xvYzxvE52x082IY62kv0487McIj6xIIjxv2
+ 0xvE14v26r126r1DMcIj6I8E87Iv67AKxVW8Jr0_Cr1UMcvjeVCFs4IE7xkEbVWUJVW8Jw
+ ACjcxG0xvEwIxGrwCjr7xvwVCIw2I0I7xG6c02F41lc7CjxVAaw2AFwI0_Jw0_GFyl42xK
+ 82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUGVWUWw
+ C20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48J
+ MIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r1j6r4UMI
+ IF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E
+ 87Iv6xkF7I0E14v26r1j6r4UYxBIdaVFxhVjvjDU0xZFpf9x07b1AwsUUUUU=
+X-Originating-IP: [36.110.52.2]
+X-CM-SenderInfo: 50ld003x6l2u1dvotugofq/
+Received-SPF: pass client-ip=159.226.251.21; envelope-from=xiaoou@iscas.ac.cn;
+ helo=cstnet.cn
+X-Spam_score_int: -25
+X-Spam_score: -2.6
 X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.6 / 5.0 requ) BAYES_00=-1.9, HK_RANDOM_ENVFROM=0.581,
+ HK_RANDOM_FROM=0.999, HTML_MESSAGE=0.001, RCVD_IN_DNSWL_MED=-2.3,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -157,37 +78,491 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 11/8/26 08:46, raoyi wrote:
-> Wire up the DesignWare APB timer to the K230 SoC with
-> num-timers=6 and a 6.25 MHz clock. Connect timer IRQs
-> to the PLIC. Remove the previous unimplemented timer stub.
-> 
-> Signed-off-by: raoyi <rao232328@gmail.com>
-> ---
->   hw/riscv/Kconfig        |  1 +
->   hw/riscv/k230.c         | 32 +++++++++++++++++++++++++++++---
->   include/hw/riscv/k230.h | 12 ++++++++++++
->   3 files changed, 42 insertions(+), 3 deletions(-)
+This is a multi-part message in MIME format.
+--------------xdSDnJiNy0lJNpbkrVjkFeSb
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
+Thanks Daniel，Chao and Nutty for the review.
 
-> diff --git a/include/hw/riscv/k230.h b/include/hw/riscv/k230.h
-> index 592e1c26bf..0f872554c8 100644
-> --- a/include/hw/riscv/k230.h
-> +++ b/include/hw/riscv/k230.h
-> @@ -18,9 +18,14 @@
->   #include "hw/core/boards.h"
->   #include "hw/riscv/riscv_hart.h"
->   #include "hw/watchdog/k230_wdt.h"
-> +#include "hw/timer/dw-apb-timer.h"
->   
->   #define C908_CPU_HARTID   (0)
->   
-> +#define K230_TIMER_NUM_CHANNELS 6
-> +#define K230_TIMER_DEFAULT_FREQ 6250000
-> +#define K230_TIMER_COMP_VERSION 0x3231312A
+I’ll address these issues in v3 by:
 
-Keep these definitions private to hw/riscv/k230.c, otherwise:
+  * adding a descriptive commit body to each patch and comments
+    for functions that need further explanation;
+  * aligning the continuation backslashes in the helper macros;
+  * reusing the existing |EXTRACT*|definitions in patch 02/18 instead of
+    introducing duplicate definitions; and
+  * investigating the addition of P-extension test cases to the QEMU TCG
+    test suite, depending on the available toolchain support.
 
-Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
+I’ll also document these changes in the v3 cover letter.
+
+Best regards,
+Molly
+
+在 2026/8/6 2:36, Daniel Henrique Barboza 写道:
+>
+>
+> On 7/29/2026 6:32 AM, Chao Liu wrote:
+>> On Fri, Jul 17, 2026 at 10:06:53AM +0800, Molly Chen wrote:
+>>> This series adds support for the RISC-V Packed SIMD (P) extension.
+>>>
+>>> The P extension defines packed-SIMD fixed-point operations intended
+>>> for DSP-style workloads such as multimedia and signal processing.
+>>> These instructions operate on packed subword elements within
+>>> general-purpose registers (GPRs).
+>>>
+>>> The implementation follows the current development draft of the
+>>> specification (v0.20):
+>>>
+>>> https://github.com/riscv/riscv-p-spec/
+>>>    or
+>>> https://www.jhauser.us/RISCV/ext-P/
+>>>
+>>> Compared with v1, this version reduces implementation boilerplate by
+>>> defining and reusing helper macros for common patterns in
+>>> trans_rvp.c.inc and psimd_helper.c. It also consolidates the P
+>>> extension prerequisite validation in riscv_cpu_validate_p().
+>>>
+>>> The Zbkb dependency has been removed to align the implementation with
+>>> the current specification. This version also implements the
+>>> specification-defined control of vxsat, which was missing from v1.
+>>>
+>>> All instructions have been functionally tested using the following
+>>> test suite:
+>>>
+>>> https://github.com/mollybuild/qemu-riscv-test-uart
+>>>
+>>> The implementation focuses on functional correctness and ISA
+>>> coverage. Performance optimizations were not considered at this
+>>> stage.
+>>>
+>>> Feedback on the implementation details would be highly appreciated.
+>>>
+>>> Tested with:
+>>>
+>>>    - ninja -C build test
+>>>    - make -C build check-qtest-riscv32
+>>>    - make -C build check-qtest-riscv64
+>>>    - Functional tests for all P extension instructions using
+>>>      qemu-riscv-test-uart
+>>>
+>>> No regressions or test failures were observed.
+>>>
+>>> ---
+>>> Changes in v2:
+>>>
+>>>    - Refactored trans_rvp.c.inc and psimd_helper.c by defining and
+>>>      reusing helper macros for common implementation patterns, reducing
+>>>      boilerplate and overall code size.
+>>>    - Moved the P extension prerequisite checks into
+>>>      riscv_cpu_validate_p().
+>>>    - Removed the Zbkb dependency to align with the current
+>>>      specification.
+>>>    - Added the specification-defined vxsat control mechanism, which was
+>>>      missing from v1.
+>>>
+>> This patch set is a significant improvement over v1. I think there 
+>> are still
+>> a few common issues we can address together:
+>
+> v2 is a huge improvement indeed.  v1 had 11k lines, v2 cut those by 
+> half due to
+> the smart use of helpers.
+>
+>>
+>> 1. The line break characters '\' in the helper macros we defined need 
+>> to be space-aligned.
+>> 2. Every patch is currently missing a commit body.
+>>
+>> I think these changes are quite necessary.
+>
+> Yeah, having a commit message allows us to make fewer guesses when 
+> reviewing code.
+> E.g. the usage of __int128t__ macros and the choice of some rounding 
+> formulas.  We
+> can make review  assumptions and hope all is fine, but it's not ideal.
+>
+> And, as Chao mentioned in his other reply, having test cases will be 
+> helpful to
+> assert that everything being added here is sane.  In particular with 
+> the amount
+> of lines we're adding here.
+>
+>
+> Cheers,
+> Daniel
+>
+>>
+>> Thanks,
+>> Chao
+>>> v1:
+>>> https://lists.nongnu.org/archive/html/qemu-riscv/2026-04/msg00301.html
+>>>
+>>> Molly Chen (18):
+>>>    target/riscv: Add packed SIMD extension state
+>>>    target/riscv: Add packed SIMD helper framework
+>>>    target/riscv: Add packed SIMD arithmetic instructions
+>>>    target/riscv: Add packed SIMD averaging and rounding instructions
+>>>    target/riscv: Add packed SIMD absolute, difference, compare and mask
+>>>      instructions
+>>>    target/riscv: Add packed SIMD shift instructions
+>>>    target/riscv: Add packed SIMD exchange instructions
+>>>    target/riscv: Add packed SIMD horizontal reduction instructions
+>>>    target/riscv: Add packed SIMD pack, merge and count-leading
+>>>      instructions
+>>>    target/riscv: Add packed SIMD multiplication instructions
+>>>    target/riscv: Add packed SIMD multiply-accumulate instructions
+>>>    target/riscv: Add packed SIMD Q-format multiplication instructions
+>>>    target/riscv: Add packed SIMD Q-format MAC instructions
+>>>    target/riscv: Add packed SIMD two-way MAC instructions
+>>>    target/riscv: Add packed SIMD four-way MAC instructions
+>>>    target/riscv: Add packed SIMD load-replicate instructions
+>>>    target/riscv: Add packed SIMD RV32 only instructions
+>>>    target/riscv: Remove Zbkb dependency from P extension to align with
+>>>      the spec
+>>>
+>>>   target/riscv/cpu.c                          |    5 +-
+>>>   target/riscv/cpu.h                          |    8 +
+>>>   target/riscv/cpu_bits.h                     |    2 +
+>>>   target/riscv/helper.h                       |  529 ++++
+>>>   target/riscv/insn32.decode                  |  829 +++++
+>>>   target/riscv/machine.c                      |   19 +
+>>>   target/riscv/tcg/csr.c                      |   39 +-
+>>>   target/riscv/tcg/insn_trans/trans_rvb.c.inc |    4 +-
+>>>   target/riscv/tcg/insn_trans/trans_rvp.c.inc | 1389 ++++++++
+>>>   target/riscv/tcg/meson.build                |    3 +-
+>>>   target/riscv/tcg/psimd_helper.c             | 3165 
+>>> +++++++++++++++++++
+>>>   target/riscv/tcg/tcg-cpu.c                  |   46 +
+>>>   target/riscv/tcg/translate.c                |    6 +
+>>>   13 files changed, 6038 insertions(+), 6 deletions(-)
+>>>   create mode 100644 target/riscv/tcg/insn_trans/trans_rvp.c.inc
+>>>   create mode 100644 target/riscv/tcg/psimd_helper.c
+>>>
+>>>
+>>> base-commit: 8fb307591625731060d399aca42373c02c7cb040
+>>> -- 
+>>> 2.34.1
+>>>
+--------------xdSDnJiNy0lJNpbkrVjkFeSb
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <p class="isSelectedEnd"><font face="Arial"><span>Thanks Daniel，</span><span>Chao
+          and Nutty</span><span> for the review.</span></font></p>
+    <p class="isSelectedEnd"><font face="Arial"><span>I’ll address these
+          issues in v3 by:</span></font></p>
+    <ul data-spread="false">
+      <li><font face="Arial"><span>adding a descriptive commit body to
+            each patch and comments for functions that need further
+            explanation;</span></font></li>
+      <li><font face="Arial"><span>aligning the continuation backslashes
+            in the helper macros;</span></font></li>
+      <li><font face="Arial"><span>reusing the existing </span><code
+            dir="ltr"><span>EXTRACT*</span></code><span> definitions in
+            patch 02/18 instead of introducing duplicate definitions;
+            and</span></font></li>
+      <li><font face="Arial"><span>investigating the addition of
+            P-extension test cases to the QEMU TCG test suite, depending
+            on the available toolchain support.</span></font></li>
+    </ul>
+    <p class="isSelectedEnd"><font face="Arial"><span>I’ll also document
+          these changes in the v3 cover letter.</span></font></p>
+    <p><font face="Arial"><span>Best regards,</span><br>
+        <span>Molly</span></font></p>
+    <div class="moz-cite-prefix">在 2026/8/6 2:36, Daniel Henrique
+      Barboza 写道:<br>
+    </div>
+    <blockquote type="cite"
+      cite="mid:946b40dd-a2b9-4d10-97f0-8dad261e0570@oss.qualcomm.com">
+      <br>
+      <br>
+      On 7/29/2026 6:32 AM, Chao Liu wrote:
+      <br>
+      <blockquote type="cite">On Fri, Jul 17, 2026 at 10:06:53AM +0800,
+        Molly Chen wrote:
+        <br>
+        <blockquote type="cite">This series adds support for the RISC-V
+          Packed SIMD (P) extension.
+          <br>
+          <br>
+          The P extension defines packed-SIMD fixed-point operations
+          intended
+          <br>
+          for DSP-style workloads such as multimedia and signal
+          processing.
+          <br>
+          These instructions operate on packed subword elements within
+          <br>
+          general-purpose registers (GPRs).
+          <br>
+          <br>
+          The implementation follows the current development draft of
+          the
+          <br>
+          specification (v0.20):
+          <br>
+          <br>
+             <a class="moz-txt-link-freetext" href="https://github.com/riscv/riscv-p-spec/">https://github.com/riscv/riscv-p-spec/</a>
+          <br>
+             or
+          <br>
+             <a class="moz-txt-link-freetext" href="https://www.jhauser.us/RISCV/ext-P/">https://www.jhauser.us/RISCV/ext-P/</a>
+          <br>
+          <br>
+          Compared with v1, this version reduces implementation
+          boilerplate by
+          <br>
+          defining and reusing helper macros for common patterns in
+          <br>
+          trans_rvp.c.inc and psimd_helper.c. It also consolidates the P
+          <br>
+          extension prerequisite validation in riscv_cpu_validate_p().
+          <br>
+          <br>
+          The Zbkb dependency has been removed to align the
+          implementation with
+          <br>
+          the current specification. This version also implements the
+          <br>
+          specification-defined control of vxsat, which was missing from
+          v1.
+          <br>
+          <br>
+          All instructions have been functionally tested using the
+          following
+          <br>
+          test suite:
+          <br>
+          <br>
+             <a class="moz-txt-link-freetext" href="https://github.com/mollybuild/qemu-riscv-test-uart">https://github.com/mollybuild/qemu-riscv-test-uart</a>
+          <br>
+          <br>
+          The implementation focuses on functional correctness and ISA
+          <br>
+          coverage. Performance optimizations were not considered at
+          this
+          <br>
+          stage.
+          <br>
+          <br>
+          Feedback on the implementation details would be highly
+          appreciated.
+          <br>
+          <br>
+          Tested with:
+          <br>
+          <br>
+             - ninja -C build test
+          <br>
+             - make -C build check-qtest-riscv32
+          <br>
+             - make -C build check-qtest-riscv64
+          <br>
+             - Functional tests for all P extension instructions using
+          <br>
+               qemu-riscv-test-uart
+          <br>
+          <br>
+          No regressions or test failures were observed.
+          <br>
+          <br>
+          ---
+          <br>
+          Changes in v2:
+          <br>
+          <br>
+             - Refactored trans_rvp.c.inc and psimd_helper.c by defining
+          and
+          <br>
+               reusing helper macros for common implementation patterns,
+          reducing
+          <br>
+               boilerplate and overall code size.
+          <br>
+             - Moved the P extension prerequisite checks into
+          <br>
+               riscv_cpu_validate_p().
+          <br>
+             - Removed the Zbkb dependency to align with the current
+          <br>
+               specification.
+          <br>
+             - Added the specification-defined vxsat control mechanism,
+          which was
+          <br>
+               missing from v1.
+          <br>
+          <br>
+        </blockquote>
+        This patch set is a significant improvement over v1. I think
+        there are still
+        <br>
+        a few common issues we can address together:
+        <br>
+      </blockquote>
+      <br>
+      v2 is a huge improvement indeed.  v1 had 11k lines, v2 cut those
+      by half due to
+      <br>
+      the smart use of helpers.
+      <br>
+      <br>
+      <blockquote type="cite">
+        <br>
+        1. The line break characters '\' in the helper macros we defined
+        need to be space-aligned.
+        <br>
+        2. Every patch is currently missing a commit body.
+        <br>
+        <br>
+        I think these changes are quite necessary.
+        <br>
+      </blockquote>
+      <br>
+      Yeah, having a commit message allows us to make fewer guesses when
+      reviewing code.
+      <br>
+      E.g. the usage of __int128t__ macros and the choice of some
+      rounding formulas.  We
+      <br>
+      can make review  assumptions and hope all is fine, but it's not
+      ideal.
+      <br>
+      <br>
+      And, as Chao mentioned in his other reply, having test cases will
+      be helpful to
+      <br>
+      assert that everything being added here is sane.  In particular
+      with the amount
+      <br>
+      of lines we're adding here.
+      <br>
+      <br>
+      <br>
+      Cheers,
+      <br>
+      Daniel
+      <br>
+      <br>
+      <blockquote type="cite">
+        <br>
+        Thanks,
+        <br>
+        Chao
+        <br>
+        <blockquote type="cite">v1:
+          <br>
+            
+          <a class="moz-txt-link-freetext" href="https://lists.nongnu.org/archive/html/qemu-riscv/2026-04/msg00301.html">https://lists.nongnu.org/archive/html/qemu-riscv/2026-04/msg00301.html</a>
+          <br>
+          <br>
+          Molly Chen (18):
+          <br>
+             target/riscv: Add packed SIMD extension state
+          <br>
+             target/riscv: Add packed SIMD helper framework
+          <br>
+             target/riscv: Add packed SIMD arithmetic instructions
+          <br>
+             target/riscv: Add packed SIMD averaging and rounding
+          instructions
+          <br>
+             target/riscv: Add packed SIMD absolute, difference, compare
+          and mask
+          <br>
+               instructions
+          <br>
+             target/riscv: Add packed SIMD shift instructions
+          <br>
+             target/riscv: Add packed SIMD exchange instructions
+          <br>
+             target/riscv: Add packed SIMD horizontal reduction
+          instructions
+          <br>
+             target/riscv: Add packed SIMD pack, merge and count-leading
+          <br>
+               instructions
+          <br>
+             target/riscv: Add packed SIMD multiplication instructions
+          <br>
+             target/riscv: Add packed SIMD multiply-accumulate
+          instructions
+          <br>
+             target/riscv: Add packed SIMD Q-format multiplication
+          instructions
+          <br>
+             target/riscv: Add packed SIMD Q-format MAC instructions
+          <br>
+             target/riscv: Add packed SIMD two-way MAC instructions
+          <br>
+             target/riscv: Add packed SIMD four-way MAC instructions
+          <br>
+             target/riscv: Add packed SIMD load-replicate instructions
+          <br>
+             target/riscv: Add packed SIMD RV32 only instructions
+          <br>
+             target/riscv: Remove Zbkb dependency from P extension to
+          align with
+          <br>
+               the spec
+          <br>
+          <br>
+            target/riscv/cpu.c                          |    5 +-
+          <br>
+            target/riscv/cpu.h                          |    8 +
+          <br>
+            target/riscv/cpu_bits.h                     |    2 +
+          <br>
+            target/riscv/helper.h                       |  529 ++++
+          <br>
+            target/riscv/insn32.decode                  |  829 +++++
+          <br>
+            target/riscv/machine.c                      |   19 +
+          <br>
+            target/riscv/tcg/csr.c                      |   39 +-
+          <br>
+            target/riscv/tcg/insn_trans/trans_rvb.c.inc |    4 +-
+          <br>
+            target/riscv/tcg/insn_trans/trans_rvp.c.inc | 1389 ++++++++
+          <br>
+            target/riscv/tcg/meson.build                |    3 +-
+          <br>
+            target/riscv/tcg/psimd_helper.c             | 3165
+          +++++++++++++++++++
+          <br>
+            target/riscv/tcg/tcg-cpu.c                  |   46 +
+          <br>
+            target/riscv/tcg/translate.c                |    6 +
+          <br>
+            13 files changed, 6038 insertions(+), 6 deletions(-)
+          <br>
+            create mode 100644
+          target/riscv/tcg/insn_trans/trans_rvp.c.inc
+          <br>
+            create mode 100644 target/riscv/tcg/psimd_helper.c
+          <br>
+          <br>
+          <br>
+          base-commit: 8fb307591625731060d399aca42373c02c7cb040
+          <br>
+          -- <br>
+          2.34.1
+          <br>
+          <br>
+        </blockquote>
+      </blockquote>
+    </blockquote>
+  </body>
+</html>
+
+--------------xdSDnJiNy0lJNpbkrVjkFeSb--
 
 
