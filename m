@@ -4,96 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B4B7C5AC67
-	for <qemu-riscv@archiver.kernel.org>; Tue, 11 Aug 2026 09:17:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87E1BC5B56A
+	for <qemu-riscv@archiver.kernel.org>; Tue, 11 Aug 2026 12:00:51 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wtibA-00016G-9d; Tue, 11 Aug 2026 05:16:40 -0400
+	id 1wtl9w-00028O-7x; Tue, 11 Aug 2026 08:00:44 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <caojunze424@gmail.com>)
- id 1wtib8-00015g-7F
- for qemu-riscv@nongnu.org; Tue, 11 Aug 2026 05:16:38 -0400
-Received: from mail-pj1-x1033.google.com ([2607:f8b0:4864:20::1033])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <caojunze424@gmail.com>)
- id 1wtib6-0004SB-JL
- for qemu-riscv@nongnu.org; Tue, 11 Aug 2026 05:16:37 -0400
-Received: by mail-pj1-x1033.google.com with SMTP id
- 98e67ed59e1d1-38ecc48b3deso513567a91.0
- for <qemu-riscv@nongnu.org>; Tue, 11 Aug 2026 02:16:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1786439795; x=1787044595; darn=nongnu.org;
- h=message-id:date:references:in-reply-to:cc:to:from:subject
- :content-transfer-encoding:content-type:mime-version:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=ZfnsgyLH4PQ/qK2TwhvO60jxZORJRM1+PUVK8kwg46U=;
- b=pSA9ewKvEkiTvHaxGpvMIPbZMEmT/HNOm9gWX2LUc7h/41jMzxaTKnVQBb6RLsThqJ
- AQ3oyEQJ3UdCFB7qZ5plrPRvEeLGs6gYiESLV3lCiZQF5kU0CV6B/kiknDTTrxq2HDFc
- J+/Qg6gVKzUzh7oPKJGgNNWArVLNCkP8Ihg/pgHEceLfLZi3EdioLPtsSDpHdtCt22HS
- AEaBOG+HOf/dNIFRl+XUBBJBQVGqxeuFZPCZQ5XhZnwPQPE1s8xHW+ieRiXTXK1V5rCF
- 9YakrVeSGHUKdmDWXqV9wWojj2ZSAZdVNQdUdrUuzeyWSW9hjwgb+qPAl6RIII16elDW
- qpzQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786439795; x=1787044595;
- h=message-id:date:references:in-reply-to:cc:to:from:subject
- :content-transfer-encoding:content-type:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=ZfnsgyLH4PQ/qK2TwhvO60jxZORJRM1+PUVK8kwg46U=;
- b=c2qimNrAllyge2UPXfdf+uBPOHgkVoie5ynoHm6rQNVMEAgGg9hWxO5cw295Jf91z9
- 4UKxnLYWBIMycFPKeVg5nYo1I6HWrbyxoSGclWdcGfIjRpSl87BAGdyNh9joMHRfeVxX
- aCp56vuAOr9nDzh+ShQpVgr5DLe1ydNENZmWt1NkI0INntcZONFb3bTTmUIlUmfM5fZ5
- LRiAFD8aOVMMJr56g/rrT/eaUjHTwFyOtYnyxV00HhTtwb4OfY4mhKKReQD3W1nnl3fs
- uUIt9WhrfOAZ3zp5+mSn2o5PyHxXrxNklLS+y8f+65SePmF4iWk7OCxg6bVvbAv+EM6r
- Ze1g==
-X-Forwarded-Encrypted: i=1;
- AHgh+Rodlo2LpdDA9K2Q9yf2qgIvnxeDB1DKUqtQRHH6TLqPqeEAm5yNNC4aJnzumGwhUZ4L4IZ8gMMQxRAc@nongnu.org
-X-Gm-Message-State: AOJu0YxZBA2pwk8BC+Iw/zRMwk23Y9K8NotuP7uVTLAk3hKnOHL5lfVT
- uzCyjq/o9l7Ra+KqzZvM0cOE/3HscC/3XpqOeGXl6Gm3C6H/idEuCCeU
-X-Gm-Gg: AR+sD10PwbXUpfHfr/6yCLzHDSMQn7BizMGlm+fyvmYJbAX39ejByl2F9t+U2TpAbTu
- 70AJ32h5BsxX9ag8yiVY9f7X8n+gEpRp+INYrBu5Ns4+LD2x+bjgzEf5a717laPcTBOkaaGuAIH
- SZb+hAhCoWptWpOzbmkssOrjUT1nt+p5hCIfZmvPLygcb++YyqZrdrP4t/jejn7bXGbDMoFoxa4
- MsP9rlkLgLuT8SIhhyfwwUYaM5GtP7Wy37cFcpNbmA1c1i3dBRcziOQAtwnPiCGlC+MeM+3pxS3
- 6Iyjlnt8KP6w7VivnpU/tkOwthsoZ/NCFMd+JvExa7c4mYnEUzKvKpQrFe6NPTzEjNlABBQavv5
- Uzb4q8VO6t2TMJYLUMFo0hc2/wBzQzbaQZO2EXcMTaijkkU2YcIDGJDEi7E/DzZlVoiCXcatWSU
- M47xH+F3S1PwbyWeE5no9toXabJZIif/J4pm5E1FlcNS5K+amprracIN8dzSXXHFy+u9vQ0uHee
- bGGwU6p
-X-Received: by 2002:a17:90a:ec87:b0:381:2788:a437 with SMTP id
- 98e67ed59e1d1-392ec4d2710mr1343223a91.1.1786439794667; 
- Tue, 11 Aug 2026 02:16:34 -0700 (PDT)
-Received: from [127.0.0.1] ([38.34.7.236]) by smtp.gmail.com with ESMTPSA id
- a92af1059eb24-1412042d1dfsm3214257c88.9.2026.08.11.02.16.30
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Aug 2026 02:16:33 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <17746591750@163.com>)
+ id 1wthBO-0006gR-Nx; Tue, 11 Aug 2026 03:45:59 -0400
+Received: from m16.mail.163.com ([220.197.31.3])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <17746591750@163.com>)
+ id 1wthBK-0000Ln-Kq; Tue, 11 Aug 2026 03:45:57 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+ s=s110527; h=Subject:To:From:Message-ID:Date:MIME-Version:
+ Content-Type; bh=Z8rwcxwN7wQC0Pgz/GxqK5M4nF905d7dJUdmyfDu0TI=;
+ b=D2MAhjFTNSIdbVa220NFtvakV94pxD2lUm7BDsgCnu5VXnibBX7jAumWDeBWSf
+ IicAkguRxV0CHaYIdNE8tIQ8maJQ14hPYyXrljQZHNrTBn4AnOT1xD8ILJkFDY/t
+ Gns1QsWaW1E/DZ18+V7dmhvGYyt4c30qA56e47wqWr+74=
+Received: from [10.2.10.30] (unknown [])
+ by gzga-smtp-mtada-g1-3 (Coremail) with SMTP id _____wDXtukS0npqq8c8NA--.113S2;
+ Tue, 11 Aug 2026 15:41:11 +0800 (CST)
+Subject: Re: [PATCH 6/9] target/loongarch: Enable disassembly via capstone
+To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
+Cc: laurent@vivier.eu, philmd@mailo.com, qemu-riscv@nongnu.org,
+ qemu-s390x@nongnu.org
+References: <20260809013343.664966-1-richard.henderson@linaro.org>
+ <20260809013343.664966-7-richard.henderson@linaro.org>
+From: Song Gao <17746591750@163.com>
+Message-ID: <8209e377-df22-8412-1b23-12fa853f0a59@163.com>
+Date: Tue, 11 Aug 2026 15:41:06 +0800
+User-Agent: Mozilla/5.0 (X11; Linux loongarch64; rv:68.0) Gecko/20100101
+ Thunderbird/68.7.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH v3 0/7] K230: add gsdma and decomp_gzip
-From: Junze Cao <caojunze424@gmail.com>
-To: Tao Ding <dingtao0430@163.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, pbonzini@redhat.com, 
- palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com, 
- daniel.barboza@oss.qualcomm.com, zhiwei_liu@linux.alibaba.com, 
- chao.liu@processmission.com, farosas@suse.de, lvivier@redhat.com, 
- pierrick.bouvier@oss.qualcomm.com, caojunze424@gmail.com
-In-Reply-To: <20260808062227.66961-1-dingtao0430@163.com>
-References: <20260808062227.66961-1-dingtao0430@163.com>
-Date: Tue, 11 Aug 2026 17:16:25 +0800
-Message-Id: <178643978570.1229420.7326743782506484256.b4-review@b4>
-X-Mailer: b4 0.15.2
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1033;
- envelope-from=caojunze424@gmail.com; helo=mail-pj1-x1033.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+In-Reply-To: <20260809013343.664966-7-richard.henderson@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
+X-CM-TRANSID: _____wDXtukS0npqq8c8NA--.113S2
+X-Coremail-Antispam: 1Uf129KBjvJXoW7WFWDJw4kJr4xKF4kWw1DGFg_yoW8AF4kpr
+ yDCFyfG3y8tr9xGas5ua4a9Fn8Xa1xGr1avFW7uayvyFsI9F4jqw4vk39IvFn8J3y8Ww1I
+ 9rn3uw1UZF48J3DanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x0zRgyCZUUUUU=
+X-Originating-IP: [114.242.206.180]
+X-CM-SenderInfo: jprxlkywvzilivq6il2tof0z/xtbC8hnz-Gp60hmzrwAA3j
+Received-SPF: pass client-ip=220.197.31.3; envelope-from=17746591750@163.com;
+ helo=m16.mail.163.com
+X-Spam_score_int: -37
+X-Spam_score: -3.8
+X-Spam_bar: ---
+X-Spam_report: (-3.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001, FROM_LOCAL_DIGITS=0.001,
+ FROM_LOCAL_HEX=0.006, NICE_REPLY_A=-1.998, RCVD_IN_DNSWL_NONE=-0.0001,
+ RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Tue, 11 Aug 2026 08:00:38 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -108,21 +77,61 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Sat, 08 Aug 2026 14:22:20 +0800, Tao Ding <dingtao0430@163.com> wrote:
-> [...]
->  create mode 100644 tests/qtest/k230-decomp-gzip-test.c
->  create mode 100644 tests/qtest/k230-gsdma-test.c
-> 
-> base-commit: 300438ffbb8d9430cac2fcc15cba6f482b2c0587
-> --
-> 2.43.0
 
-Thank you very much for your contribution.
+在 2026/8/9 上午9:33, Richard Henderson 写道:
+> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+> ---
+>   include/disas/capstone.h | 6 ++++++
+>   target/loongarch/cpu.c   | 8 ++++++++
+>   2 files changed, 14 insertions(+)
+Reviewed-by:  Song Gao <17746591750@163.com>
 
-I think there's nothing wrong with the code.
+Thanks.
+Song Gao
+> diff --git a/include/disas/capstone.h b/include/disas/capstone.h
+> index db1abe7f70..a922f7627f 100644
+> --- a/include/disas/capstone.h
+> +++ b/include/disas/capstone.h
+> @@ -40,6 +40,12 @@
+>   
+>   #endif /* CONFIG_CAPSTONE */
+>   
+> +#if CS_API_MAJOR < 6
+> +#define CS_ARCH_LOONGARCH       -1
+> +#define CS_MODE_LOONGARCH32      0
+> +#define CS_MODE_LOONGARCH64      0
+> +#endif
+> +
+>   #if CS_API_MAJOR < 5
+>   #define CS_ARCH_RISCV           -1
+>   #define CS_MODE_RISCV32          0
+> diff --git a/target/loongarch/cpu.c b/target/loongarch/cpu.c
+> index fb03424ffa..7007622630 100644
+> --- a/target/loongarch/cpu.c
+> +++ b/target/loongarch/cpu.c
+> @@ -29,6 +29,7 @@
+>   #include <linux/kvm.h>
+>   #endif
+>   #include "tcg/tcg_loongarch.h"
+> +#include "disas/capstone.h"
+>   
+>   const char * const regnames[32] = {
+>       "r0", "r1", "r2", "r3", "r4", "r5", "r6", "r7",
+> @@ -694,8 +695,15 @@ static void loongarch_cpu_reset_hold(Object *obj, ResetType type)
+>   static void loongarch_cpu_disas_set_info(const CPUState *cs,
+>                                            disassemble_info *info)
+>   {
+> +    CPULoongArchState *env = cpu_env((CPUState *)cs);
+> +
+>       info->endian = BFD_ENDIAN_LITTLE;
+>       info->print_insn = print_insn_loongarch;
+> +
+> +    info->cap_arch = CS_ARCH_LOONGARCH;
+> +    info->cap_insn_unit = 4;
+> +    info->cap_insn_split = 4;
+> +    info->cap_mode = is_la64(env) ? CS_MODE_LOONGARCH64 : CS_MODE_LOONGARCH32;
+>   }
+>   
+>   static void loongarch_cpu_realizefn(DeviceState *dev, Error **errp)
 
-Reviewed-by: Junze Cao <caojunze424@gmail.com>
-
--- 
-Junze Cao <caojunze424@gmail.com>
 
