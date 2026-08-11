@@ -4,86 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44F97C5AC67
-	for <qemu-riscv@archiver.kernel.org>; Tue, 11 Aug 2026 20:14:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89799C5B56A
+	for <qemu-riscv@archiver.kernel.org>; Tue, 11 Aug 2026 20:15:17 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wtsrV-0004Hn-Qx; Tue, 11 Aug 2026 16:14:13 -0400
+	id 1wtssF-00062k-2K; Tue, 11 Aug 2026 16:14:59 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair@alistair23.me>)
- id 1wtsrM-0004Df-PT; Tue, 11 Aug 2026 16:14:09 -0400
-Received: from fout-a7-smtp.messagingengine.com ([103.168.172.150])
+ id 1wtssC-00061v-Va; Tue, 11 Aug 2026 16:14:57 -0400
+Received: from fhigh-a6-smtp.messagingengine.com ([103.168.172.157])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair@alistair23.me>)
- id 1wtsrL-0002yS-9I; Tue, 11 Aug 2026 16:14:04 -0400
-Received: from phl-compute-02.internal (phl-compute-02.internal [10.202.2.42])
- by mailfout.phl.internal (Postfix) with ESMTP id 817B9EC01CE;
- Tue, 11 Aug 2026 16:14:00 -0400 (EDT)
+ id 1wtssB-00034U-In; Tue, 11 Aug 2026 16:14:56 -0400
+Received: from phl-compute-01.internal (phl-compute-01.internal [10.202.2.41])
+ by mailfhigh.phl.internal (Postfix) with ESMTP id BDFE0140010C;
+ Tue, 11 Aug 2026 16:14:54 -0400 (EDT)
 Received: from phl-frontend-03 ([10.202.2.162])
- by phl-compute-02.internal (MEProxy); Tue, 11 Aug 2026 16:14:00 -0400
+ by phl-compute-01.internal (MEProxy); Tue, 11 Aug 2026 16:14:54 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alistair23.me;
  h=cc:cc:content-transfer-encoding:content-type:content-type
  :date:date:from:from:in-reply-to:in-reply-to:message-id
  :mime-version:references:reply-to:subject:subject:to:to; s=fm3;
- t=1786479240; x=1786565640; bh=46QVBeWBEM3IQEHApv4Bcn9UA5knMgnq
- PVWR3zKR1zs=; b=RMCQl6CQ/3Zo/bK/5v/5MbVT9PpSOou0R0+U/xQLxGwIAX7S
- jyM/od3F4McxCfNi+A32eMEda9Pl0+XRDWkoYe76XbM2nEcaeFDyIyM2OdzmwdoJ
- ykZ+kGCvuhZXga/8jr2bChQub21/UhWxhjjghMAMFeinrvOUyhYFkz9lPPPMErwT
- HJ1f4jJTWKf/I8H3m3gsop78wn3aU6SX8aBqvz2eisPxI+xHRVriL0ANY4KZGfK6
- SQ7iiIgbJxqlB8E7IMVqIyHl4RUPZeh1uvmqa8jRuxTerqloZySyhGXjRII+cnaX
- 0xbyp2aMQw8Ib0kZ4jIiz/Up4CjRFyBT7F2TBQ==
+ t=1786479294; x=1786565694; bh=BKJGtSgH1ZLQxOWjd04NukmNoq05iY7s
+ Kif4wzlHA80=; b=iQ/W6RL/xnmIxnN5Rz7oOa2XZkj0OkYu/XLoAg5uNpcutPnY
+ THV2K2tJRvTP0/+TLsn+ddSIkxWXDmhWQp2OfFH9mV1Szo1NdozOw2cNez4n0PZa
+ aXfSNUfPbH2VFFx6a9A3CZONK7Vx5ipWG4S5j4MfX7qPPclhAEoG/4wHDlCteiFD
+ k065UqbtadaVpecONs7oENxE0aUO330+2+RDbJ0mTNjU2R0ejUikqRWAlCpxzzcu
+ T/XLROgUjODu0Fl+Z6eWTD3xAUi8L3HMy0ZS0IMRS6KB14/c+u5zqxuF8EsiANRK
+ CKCVKQfSOJQms4ipRDJjf6PA08ICdcYnIrzAAg==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-transfer-encoding
  :content-type:content-type:date:date:feedback-id:feedback-id
  :from:from:in-reply-to:in-reply-to:message-id:mime-version
  :references:reply-to:subject:subject:to:to:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1786479240; x=
- 1786565640; bh=46QVBeWBEM3IQEHApv4Bcn9UA5knMgnqPVWR3zKR1zs=; b=I
- ZHgWoAJANBDKR/yu35nXJK873bPaCVK53mkCplOOhynTTiG67MFbl7bNibdBBLR1
- XoRpA1bVSRc8A93q+KVlOpfL9aWooYiUZ+uBzQgfcHD25a+zAElG9g9nf4r/UoUR
- GebW4GSLH62IYA2rmeVvySvpqWf/UDYYQNWAZMOU78K6RnU0p/r2ZbtlXcH+wXMn
- p9u+z6Z5syyWn6P0ZBfncGlq5XVZKDl51Q+7TG7oSqrtX5iYCZEcHqbQeT/7INKJ
- Q9QdvghJPWL95CmSN1BFRmnDshdQxZQNpzMn9Zm/6Ei+kIr+pmaUvV3J/s06kGR5
- dzKDtBLb0LmrmWO7Fw40Q==
-X-ME-Sender: <xms:iIJ7au4s_ii_4iIyzyAeVNCevc-Lzot0jTffHAV6GvzlGERWtz-ykQ>
- <xme:iIJ7asPglj1V3W8MBJIqGkk2-64TvsaWwul_EBlnJOlVFidCYWMr4jlB77bGK0kJf
- dtJ1CIwgHSTdhuVDUabLW9YRmc1_mRQ70Pcl2Oow9WTBIO31iqU6w>
-X-ME-Received: <xmr:iIJ7asmXhfAR56dXYaHixRY7_sjoBZrNzd7aMl7wKPi1Kxb44-2VchWJKdTFzqCInukMYg>
-X-ME-Proxy-Cause: dmFkZTFmzoB37enw+G5Jj89yBAskoL3QjmCbpuwf6axCPPT5+/BgeDXBwVDcGfdR7neByN
- VqgTWbmquFFH4mFQ93nDU+4RNa4bqy9l5zjDCB/GjqXdgjBNJ/kKAttKQUeziRzpQKqBhB
- nKJGn6wu9yop5EHgwiwiOEYGfQkGJokUWJwwipPqf/2FOKcM/WnIBH2Fle0yc7amE+7nxR
- ObUvQTqmG8iBhOpxkuLEzQgeqeex1NYE2A1EPdrqg7OPX95076lbURDAC22PCgqkeB8ixy
- Bd9IbZ1WCk670GXLkwiU9Rutal124mabZ6C8kAdVKJKNIEMMjUM8oZmBVI7uw0kUY7vlLZ
- Nc1AJZjNI9sO6oRvJhM6NAo4LsyapQsoIqYiis4ZEnfsd8w4VVUcATI0FLvYIrljUos7rD
- AGyZGRDSBtuE7s5zYvsi8bAVMAjGejU0a7yy+7vUYGXICmG5WZ1gilpFH3qnt39Sn6b1u7
- Zwd1NhJR0MtU7pouFqvNh8tAI81KXexBQ4Zmcoyerxc533lJQfxnemIpJ492K2mVp+T0wj
- L1dpFkrul83G+FOaD5ZSsuT6jtVAmKwfQeQMbnzsbjAOLIgzsVfp6Zwdh9tKHMozweEw2G
- eQR0xQi5/Aj9ucILw5ysLbDeYrUoSwGXiOuy69Sv3x+Npv8g6oNyEm0xLjBA
-X-ME-Proxy: <xmx:iIJ7ajQuXlwle1oiZxN29DSAions3XFrch294PH-O_xcK6MqvUaktA>
- <xmx:iIJ7aoBsCtZiwRuN_J9toAFScsorlUnREl8TYChzX6Az8DplDCr4Ag>
- <xmx:iIJ7aiS2tW6Yd4BbpvRJmKbVIoPu9wiKw48VoJZdgX_cqnh2QHiavw>
- <xmx:iIJ7aupglPA9ewcdGUMdmtfl4YzQsk7L70OyklZAOCDZY9AGlGWl9w>
- <xmx:iIJ7arvJ0nRHJmTt97a__8AIxboF3D5inQrWtYpStOeZoAoUC09WzlRN>
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1786479294; x=
+ 1786565694; bh=BKJGtSgH1ZLQxOWjd04NukmNoq05iY7sKif4wzlHA80=; b=E
+ +Lh9KGxPk0yLffxTwGMps7SC7TDE0n73ZYtD7SuKeFxIHnvWED4kDHg3UlouDkM1
+ Pa/bAB6oc1amhnyqaczOCNypzyrFQq3U6XHnVIuE+StFBcbWa28RsqKm9UWG6TIr
+ +55upg6wa12xVAwUiS68aaCj2l+E7+DanRaO9zM7yMrnB1stEcID91ZqsdPV87lk
+ lt5B5LyH0CcK/Ui6fU5gGlfmIU0Gheg5uAlPHxAK2r8hON5bLcH0Ni3IOJU4CXYL
+ 4uPrBHXPzUrDU/NKlhuX6NLyxPkxyhCYUAb8F0oFSpaikDy3iMnh4rK8h6Bl5P88
+ IYSx1PSHfAOAgLd+VfDoQ==
+X-ME-Sender: <xms:voJ7amWKo7izJXhsKTln-yl3AMHkDVPzYgjrfHF0h4Idy9kuhan5Jg>
+ <xme:voJ7am6WrFTQ3g_mjkOQ7E4gnJjPzX0IeR779O-R3DPkgX-bAv-800PmpJ1JtC0Zl
+ Da2f72pQjgVFw0dbymmPU13FN6jS-rQB-297eTUbJ9zI8Y_17_gPJ4>
+X-ME-Received: <xmr:voJ7apiTnwkqgr4bGW3lSXR8_iANsGej7suAA507u-llThXW4QPgxblWLhBEzHfvwpfXyg>
+X-ME-Proxy-Cause: dmFkZTFZta5UxaGGIApcvgv1y3lZRIpz4NgU/tMknmwewHM6JYvuiT0ElGm9QBqsKK6eUT
+ nlfSLf6+mmR0AhSio7FaZo5kY6yN518M5Zid9rBvLaQP3GZUNZjRMT6a7bPYfnEu2UHdpR
+ zMEuLEUWm2Wkd1HKVvTyvHmfHOtKUVUgk0K1uLDD4DBou7g3/pHMmihgbLYK7KRKSmgjYQ
+ pucba7K+FYGk+Jdoq2FNlIK21c3IasXlrfhwGeKv2INKABZTiTZ6kJ3e/391CDVrUoGzoW
+ LhXvpLsSltsIHNIVY8mul5KVY8cCmFBnfuI3z1T33dBq/FfSs3WvKvhaY6s5jrVmX5JZdk
+ eenLH1H7KJ/Fn+NPjj36esNG22cL6TO3S6zgfy0tUCmNG8VdHj0GPwKISdMzHEpCZl7cKy
+ xZniMNaBwQlqiy+RdZv64uiYRW+4BpS0udyPCPzUBA/pE5zcX2Roc/Ro6xQjhOrReGigpc
+ djNL0Gpky2+Ome4OOX9G+xrFE6iL1FmIN0uctTX0y4s5wPSkHQ+f5EaqD0Ymm/CHrxBkxs
+ GS2nceWdyA7o7ZiHCcGScsKMBTiYlFjOlSbsOzRwFVatcNSxKj1vHX84Nt4iglRs0FcU6z
+ f9ZRm797yijvqwE3ozpkadAFz8V3K+EbyTDZXHVF1sV0YLe/n1JrnYihPcqQ
+X-ME-Proxy: <xmx:voJ7aldffgnpM7c4nixC7qMp1wBoPlcQ9ntgi-29aMZOz24awAB8lg>
+ <xmx:voJ7amfKKB-1VIvT8Kpbbd1b_p5k5WUqBInnk-FSDUnIQ2NKgSZELw>
+ <xmx:voJ7an879btcA5II0i_jvXtH1DigJhG2UyQ6rG3D0GimVHw38hc-VQ>
+ <xmx:voJ7aqnqU8BAg0U-dsfuZVXe0X-f1ZeF0S_BG5L9zD-6nWLbvM349A>
+ <xmx:voJ7ag4Vcl9CrUHeJxZYkLfU3SImNfZWl6XJJB9ohusnumeDYJNKkRKL>
 Feedback-ID: ifd214418:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Tue,
- 11 Aug 2026 16:14:00 -0400 (EDT)
-Message-ID: <54fd125ddfbf7b720738b3cf6ab6c9df476586ba.camel@alistair23.me>
-Subject: Re: [PATCH 19/56] disas/riscv: Simplify c.addi
+ 11 Aug 2026 16:14:54 -0400 (EDT)
+Message-ID: <cc45daab1c272162f1ae088c837f3629426b4cba.camel@alistair23.me>
+Subject: Re: [PATCH 20/56] disas/riscv: Handle c.lui imm != 0 during decode
 From: Alistair <alistair@alistair23.me>
 To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org
-Date: Wed, 12 Aug 2026 06:14:00 +1000
-In-Reply-To: <20260809223545.730664-20-richard.henderson@linaro.org>
+Date: Wed, 12 Aug 2026 06:14:54 +1000
+In-Reply-To: <20260809223545.730664-21-richard.henderson@linaro.org>
 References: <20260809223545.730664-1-richard.henderson@linaro.org>
- <20260809223545.730664-20-richard.henderson@linaro.org>
+ <20260809223545.730664-21-richard.henderson@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: base64
 User-Agent: Evolution 3.60.2 (by Flathub.org) 
 MIME-Version: 1.0
-Received-SPF: pass client-ip=103.168.172.150;
- envelope-from=alistair@alistair23.me; helo=fout-a7-smtp.messagingengine.com
+Received-SPF: pass client-ip=103.168.172.157;
+ envelope-from=alistair@alistair23.me; helo=fhigh-a6-smtp.messagingengine.com
 X-Spam_score_int: -27
 X-Spam_score: -2.8
 X-Spam_bar: --
@@ -106,84 +106,39 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Sun, 2026-08-09 at 15:35 -0700, Richard Henderson wrote:
-> While c.addi with imm =3D=3D 0 and rd =3D=3D 0 is c.nop,
-> other c.addi with imm =3D=3D 0 and rd !=3D 0 are not illegal,
-> but are reserved as HINTs.=C2=A0 Go ahead and disassemble as
-> c.addi rather than falling back to invalid.
->=20
-> Further, there's no reason to differentiate c.nop, since we have
-> =C2=A0 c.addi -> addi -> nop
-> vs
-> =C2=A0 c.nop -> addi -> nop
-> via decompress and pseudo translation steps.
->=20
-> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+T24gU3VuLCAyMDI2LTA4LTA5IGF0IDE1OjM1IC0wNzAwLCBSaWNoYXJkIEhlbmRlcnNvbiB3cm90
+ZToKPiBTaWduZWQtb2ZmLWJ5OiBSaWNoYXJkIEhlbmRlcnNvbiA8cmljaGFyZC5oZW5kZXJzb25A
+bGluYXJvLm9yZz4KClJldmlld2VkLWJ5OiBBbGlzdGFpciBGcmFuY2lzIDxhbGlzdGFpci5mcmFu
+Y2lzQHdkYy5jb20+CgpBbGlzdGFpcgoKPiAtLS0KPiDCoGRpc2FzL3Jpc2N2LmMgfCAxMiArKysr
+KysrLS0tLS0KPiDCoDEgZmlsZSBjaGFuZ2VkLCA3IGluc2VydGlvbnMoKyksIDUgZGVsZXRpb25z
+KC0pCj4gCj4gZGlmZiAtLWdpdCBhL2Rpc2FzL3Jpc2N2LmMgYi9kaXNhcy9yaXNjdi5jCj4gaW5k
+ZXggNzk3OGZmYjM3OC4uZDZmYmIzYmNhNiAxMDA2NDQKPiAtLS0gYS9kaXNhcy9yaXNjdi5jCj4g
+KysrIGIvZGlzYXMvcmlzY3YuYwo+IEBAIC0xOTAyLDkgKzE5MDIsOSBAQCBzdGF0aWMgY29uc3Qg
+cnZfb3Bjb2RlX2RhdGEgcnZpX29wY29kZV9kYXRhW10gPQo+IHsKPiDCoMKgwqDCoCB7ICJjLmxp
+IiwgcnZfY29kZWNfY2lfbGksIHJ2X2ZtdF9yZF9yczFfaW1tLCBOVUxMLCBydl9vcF9hZGRpLAo+
+IHJ2X29wX2FkZGksCj4gwqDCoMKgwqDCoMKgIHJ2X29wX2FkZGkgfSwKPiDCoMKgwqDCoCB7ICJj
+LmFkZGkxNnNwIiwgcnZfY29kZWNfY2lfMTZzcCwgcnZfZm10X3JkX3JzMV9pbW0sIE5VTEwsCj4g
+cnZfb3BfYWRkaSwKPiAtwqDCoMKgwqDCoCBydl9vcF9hZGRpLCBydl9vcF9hZGRpLCBydmNkX2lt
+bV9ueiB9LAo+ICvCoMKgwqDCoMKgIHJ2X29wX2FkZGksIHJ2X29wX2FkZGkgfSwKPiDCoMKgwqDC
+oCB7ICJjLmx1aSIsIHJ2X2NvZGVjX2NpX2x1aSwgcnZfZm10X3JkX3VpbW0sIE5VTEwsIHJ2X29w
+X2x1aSwKPiBydl9vcF9sdWksCj4gLcKgwqDCoMKgwqAgcnZfb3BfbHVpLCBydmNkX2ltbV9ueiB9
+LAo+ICvCoMKgwqDCoMKgIHJ2X29wX2x1aSB9LAo+IMKgwqDCoMKgIHsgImMuc3JsaSIsIHJ2X2Nv
+ZGVjX2NiX3NoNiwgcnZfZm10X3JkX3JzMV9pbW0sIE5VTEwsCj4gcnZfb3Bfc3JsaSwKPiDCoMKg
+wqDCoMKgwqAgcnZfb3Bfc3JsaSwgcnZfb3Bfc3JsaSwgcnZjZF9pbW1fbnogfSwKPiDCoMKgwqDC
+oCB7ICJjLnNyYWkiLCBydl9jb2RlY19jYl9zaDYsIHJ2X2ZtdF9yZF9yczFfaW1tLCBOVUxMLAo+
+IHJ2X29wX3NyYWksCj4gQEAgLTMwMzIsOSArMzAzMiwxMSBAQCBzdGF0aWMgdm9pZCBkZWNvZGVf
+aW5zdF9vcGNvZGUocnZfZGVjb2RlICpkZWMsCj4gcnZfaXNhIGlzYSkKPiDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGJyZWFrOwo+IMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgIH0KPiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfQo+IC3CoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgIHN3aXRjaCAoKGluc3QgPj4gNykgJiAwYjExMTExKSB7Cj4gLcKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqAgY2FzZSAyOiBvcCA9IHJ2X29wX2NfYWRkaTE2c3A7IGJyZWFrOwo+IC3C
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgIGRlZmF1bHQ6IG9wID0gcnZfb3BfY19sdWk7IGJyZWFrOwo+
+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGlmIChpbnN0ICYgKCgxIDw8IDEyKSB8ICgweDFmIDw8
+IDIpKSkgewo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgc3dpdGNoICgoaW5zdCA+
+PiA3KSAmIDBiMTExMTEpIHsKPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGNhc2Ug
+Mjogb3AgPSBydl9vcF9jX2FkZGkxNnNwOyBicmVhazsKPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgIGRlZmF1bHQ6IG9wID0gcnZfb3BfY19sdWk7IGJyZWFrOwo+ICvCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqAgfQo+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB9Cj4gwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgIGJyZWFrOwo+IMKgwqDCoMKgwqDCoMKgwqAgY2FzZSA0Ogo=
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-
-Alistair
-
-> ---
-> =C2=A0disas/riscv.c | 11 +++--------
-> =C2=A01 file changed, 3 insertions(+), 8 deletions(-)
->=20
-> diff --git a/disas/riscv.c b/disas/riscv.c
-> index 8a957e6a1e..7978ffb378 100644
-> --- a/disas/riscv.c
-> +++ b/disas/riscv.c
-> @@ -263,7 +263,6 @@ typedef enum {
-> =C2=A0=C2=A0=C2=A0=C2=A0 rv_op_c_fsd =3D 231,
-> =C2=A0=C2=A0=C2=A0=C2=A0 rv_op_c_sw =3D 232,
-> =C2=A0=C2=A0=C2=A0=C2=A0 rv_op_c_fsw =3D 233,
-> -=C2=A0=C2=A0=C2=A0 rv_op_c_nop =3D 234,
-> =C2=A0=C2=A0=C2=A0=C2=A0 rv_op_c_addi =3D 235,
-> =C2=A0=C2=A0=C2=A0=C2=A0 rv_op_c_jal =3D 236,
-> =C2=A0=C2=A0=C2=A0=C2=A0 rv_op_c_li =3D 237,
-> @@ -1896,10 +1895,9 @@ static const rv_opcode_data rvi_opcode_data[]
-> =3D {
-> =C2=A0=C2=A0=C2=A0=C2=A0 { "c.sw", rv_codec_cs_sw, rv_fmt_rs2_offset_rs1,=
- NULL, rv_op_sw,
-> rv_op_sw,
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 rv_op_sw },
-> =C2=A0=C2=A0=C2=A0=C2=A0 { "c.fsw", rv_codec_cs_sw, rv_fmt_frs2_offset_rs=
-1, NULL,
-> rv_op_fsw, 0, 0 },
-> -=C2=A0=C2=A0=C2=A0 { "c.nop", rv_codec_ci_none, rv_fmt_none, NULL, rv_op=
-_addi,
-> rv_op_addi,
-> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 rv_op_addi },
-> +=C2=A0=C2=A0=C2=A0 { },
-> =C2=A0=C2=A0=C2=A0=C2=A0 { "c.addi", rv_codec_ci, rv_fmt_rd_rs1_imm, NULL=
-, rv_op_addi,
-> rv_op_addi,
-> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 rv_op_addi, rvcd_imm_nz },
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 rv_op_addi },
-> =C2=A0=C2=A0=C2=A0=C2=A0 { "c.jal", rv_codec_cj_jal, rv_fmt_rd_offset, NU=
-LL, rv_op_jal,
-> 0, 0 },
-> =C2=A0=C2=A0=C2=A0=C2=A0 { "c.li", rv_codec_ci_li, rv_fmt_rd_rs1_imm, NUL=
-L, rv_op_addi,
-> rv_op_addi,
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 rv_op_addi },
-> @@ -3010,10 +3008,7 @@ static void decode_inst_opcode(rv_decode *dec,
-> rv_isa isa)
-> =C2=A0=C2=A0=C2=A0=C2=A0 case 1:
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 switch ((inst >> 13) & 0=
-b111) {
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 case 0:
-> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 switc=
-h ((inst >> 2) & 0b11111111111) {
-> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 case =
-0: op =3D rv_op_c_nop; break;
-> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 defau=
-lt: op =3D rv_op_c_addi; break;
-> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 op =
-=3D rv_op_c_addi; /* or unspecified HINT */
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =
-break;
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 case 1:
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =
-if (isa =3D=3D rv32) {
 
