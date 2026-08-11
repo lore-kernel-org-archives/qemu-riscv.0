@@ -4,84 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12F42C5AC67
-	for <qemu-riscv@archiver.kernel.org>; Tue, 11 Aug 2026 18:55:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21E3FC5B56A
+	for <qemu-riscv@archiver.kernel.org>; Tue, 11 Aug 2026 19:12:33 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wtrdK-00080m-8f; Tue, 11 Aug 2026 14:55:30 -0400
+	id 1wtrtX-0001at-AR; Tue, 11 Aug 2026 15:12:15 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair@alistair23.me>)
- id 1wtrdD-0007uh-3p; Tue, 11 Aug 2026 14:55:23 -0400
+ id 1wtrtV-0001aA-8S; Tue, 11 Aug 2026 15:12:13 -0400
 Received: from fhigh-a5-smtp.messagingengine.com ([103.168.172.156])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair@alistair23.me>)
- id 1wtrd5-0006w0-PJ; Tue, 11 Aug 2026 14:55:22 -0400
-Received: from phl-compute-04.internal (phl-compute-04.internal [10.202.2.44])
- by mailfhigh.phl.internal (Postfix) with ESMTP id 5DCF31400074;
- Tue, 11 Aug 2026 14:55:13 -0400 (EDT)
-Received: from phl-frontend-04 ([10.202.2.163])
- by phl-compute-04.internal (MEProxy); Tue, 11 Aug 2026 14:55:13 -0400
+ id 1wtrtT-0001P0-I4; Tue, 11 Aug 2026 15:12:13 -0400
+Received: from phl-compute-12.internal (phl-compute-12.internal [10.202.2.52])
+ by mailfhigh.phl.internal (Postfix) with ESMTP id 474B71400141;
+ Tue, 11 Aug 2026 15:12:10 -0400 (EDT)
+Received: from phl-frontend-03 ([10.202.2.162])
+ by phl-compute-12.internal (MEProxy); Tue, 11 Aug 2026 15:12:10 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alistair23.me;
  h=cc:cc:content-transfer-encoding:content-type:content-type
  :date:date:from:from:in-reply-to:in-reply-to:message-id
  :mime-version:references:reply-to:subject:subject:to:to; s=fm3;
- t=1786474513; x=1786560913; bh=vhQoxLGt+oLkyO8rEIasdHXzQ/bCWntt
- L41he0TzBm0=; b=WCCbO9zf5zKMJsTzztnzkPX8eCZXmrefsYRHoUxkeS4Ebr2N
- HkNR45dYIgaUhA641CwtY91iPIvD7C/YATFATrZH+4S/FajyRWql2NjZT8hHbWDl
- /J5epC5mTubVz5cEM0PLiCAHuScTVjJmi7Y4DoIdXedT4LD+qLUByWFvstOZGczi
- 5NkfDJr8IhOaC11Xt6RNOlIsd7Ayz6dbePAb9EnPmAqFoR+ekegqD5QZtQlpG+jt
- y3gT5kgd4+wH/b9QL/3OFm3+QnWA8k1FRPB7ItVq/NInsdrLVtasAWGbVC1s2WZE
- 9sOa/nMdfC1kH6qGUFdjtZpArOQbBTlQ9KKSlQ==
+ t=1786475530; x=1786561930; bh=T5AyB0ah59LGJZdySV6J4dpGz0cOZmaR
+ LEGnRgE3Gxk=; b=MyOYaAOrBbr7I7MVVYq3YT/feY3fSwvek4WXdWnc0/alLeFX
+ VsqCSn+RWCd4zHtEa+TsilBJ1mPGhd1qtEtKx/aXMTjqodf9/3uRIUpznyKdJIsi
+ 2FYen+WBJefhj3128K3I5c1SIk1ggTdPIkaZ2JXQxIG0AkLLlCVvGV37w0MvK4lH
+ TLdY0xP6QkirJ7UHlbecobzDK/NNbdM9+o0g6sjsEKfQnSgVYguj8IQk1iPXySpE
+ x/UWZfa9oLmBM+wEikoqIqgq7+uufBqGNkX0FA08AqMnNFE4EmTQAtAGic7DaIF+
+ JL2+wgBWwpTwVQzciWJhQQsCXX5l7PDt6cWlQA==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-transfer-encoding
  :content-type:content-type:date:date:feedback-id:feedback-id
  :from:from:in-reply-to:in-reply-to:message-id:mime-version
  :references:reply-to:subject:subject:to:to:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1786474513; x=
- 1786560913; bh=vhQoxLGt+oLkyO8rEIasdHXzQ/bCWnttL41he0TzBm0=; b=Y
- bNh26c6eA//iX8JyDDnvEhFTtGHpvw/diFRpxBwy9RZJ4vESp/TWGwGAhV7kNGsD
- SfpOlqBeS20YA+Nlp3oOLc/3QGoXch8cIpxpBdWDINSMMFcT9Lh08nX+Jye/GnIa
- h7rcsKj1YnFPi02r23NaJYbs3N64wXVwqYbfKY1n76BgO4mqjmshbWx0YcX7QsFE
- W2tz55jpDKGgJGKaKGYXk04+6EgHqhHeTSHeR0hXfjiX3yVVmwVq7h4JRxp9g5oK
- kaYyMlUhC7iuUZbd822/i67H2teWT1yN0a6GxQpv7VbtskJryJGMsW6vuw3rb6sR
- 2z+oDPG2MsN7mzy+6VZ/Q==
-X-ME-Sender: <xms:EHB7ak1OGmuridH21VoUpT4wrgVbp0cEPWtwJDdIk3d4iTnEgCIF3Q>
- <xme:EHB7aq9XbSges8aUFo1o7o2j0jDUP-_IIOBVuUk_y7jvDu6gV_Z35LT8BhuWEtkUE
- hBcuzwCUOCPhkbSUrqgFJ2DwfhfsHjja7MY1ynecY8May20jm1YdMg>
-X-ME-Received: <xmr:EHB7ap6qdNqje-ruiuJwuLOM0hE8lYhb2Tl0nDXj6Rjv5hh4IPYqYDyAf-3U1d-8guc58g>
-X-ME-Proxy-Cause: dmFkZTF7rlekoM20D+hW9PlrTtvLQon6Nu0GfMOx8d4Soz6WfdbAYxDMB5N6kxMQZtk8xK
- 5+LrkOYEdk0NEctTsC6fSqSssv1X9sxH+HvdHrdZ1CXVjc+Xkhn6xEgEDOzvO606q0P9AI
- NhhwCqPXAXinwQmBngHbmxQr3uKf3eWWdme6Ypeh5ljpp91Zj7fpe0EOVXSTEeZ3gHI7U9
- 3HUxSkBMCIxUZrJ4XrCvlMGEPfEDr2Tq1Z+51mLLMY3cZrLuFY6w6KA2XM/vtsTVegC7M/
- ZlSgTzhbiMDGxPDseWaojK0c+wjBm2g4Oo07tpxatFPaBYHJJSUVBggUwjXNEviwHTswA0
- /TdzGZpe4AgEAqzTnx9ge3YbY1QK43otE96NC9y5/vRfEwdJP8InPvy4cVdeycPKQFwCmG
- H1l7MRkuyClTiEpi2IanpYKcL9pLNiq7OXyhTFWfpQ/1MXnAIft1+uhk54pQeJ8MtkdR8Z
- ys1EAgBgurTGspwp8yxylIAL8RHUwLmxp6W9zmhp5cOZbCbkX4f/23iPqohjKtMQ5dxEXN
- eVlu8QBJqXX4dd1Udw3U5bnpdwzQWZ1owo2PiUl4JTWHY2yRMTm/78ZV2WAou8U1uxMBEE
- +Tu9EXD9u8FKGWD1LUcytf2MrGPo3NqOAVco8EiOqWHrOj0tSbx9L57IYYJQ
-X-ME-Proxy: <xmx:EHB7aisE0N_vOUkZGSmVCfrMyq-BW_mtz95Vm0GQoRwVz8NICmvG7g>
- <xmx:EHB7ar2hRRnEL15Xe3HsqWpK5lwycS8ZtXrJOkMiDs73_vg2wdgwFw>
- <xmx:EHB7arro34SEAyem8JwqgOkUdykIxEJSu1lQ-uWH6Cm4V6VW5sJn-A>
- <xmx:EHB7arLJb9z9GOprE7o81NL4VfViaJ_ptaQuo81xHER0csvFQu-Myw>
- <xmx:EXB7alid77D-YRWFhZRTzQKE7bBV_cFU-YtVIOpdXRsMcv7qtf16btgh>
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1786475530; x=
+ 1786561930; bh=T5AyB0ah59LGJZdySV6J4dpGz0cOZmaRLEGnRgE3Gxk=; b=A
+ x4BDiRuvblEhFwC9oMFfIGq6U18HzL20ey0HurNPdI7i1vxO7KJWf+sr2AtR8PVQ
+ vnnSvmfVk6wV62QkDwzEzCXYCCjPznFEpCp76fIWBiLsbnc4HcGQAjPYmPcFtR0o
+ ac17yVaLJpnhPDls1c2IR7rzMgtiZsyv1O9m09WvwosPH9PxMm4VwqZqXcugTH5R
+ PricdzYcn3I1n4OqMVjBi9fg7A/b19ss8EtZET4u647H98BGUrr6TyHi4RzDHmsT
+ 7y29+9hyb2M0sR+CNO08pEtXUP01y3l+7ePncbfDUuov4945Gd+MgCRt3/O1uGEU
+ b+F3NISqiQiUkG43w1iwg==
+X-ME-Sender: <xms:CHR7ahF_5cmexVme2zYcHc0K7v2gtPpAz3L1Z5miy1jnfW0aXjdwIw>
+ <xme:CHR7as3_-W3tGvHiGJzIC4_ZbpYTEMHuG-fG74qQGqlsuqrJ6JrrNPGHIVugILYRU
+ lxHsgWxSXIk4fxNhrFVJJiPzubm5yrTWcpWyaTF1-d9XSxVIAfJalk>
+X-ME-Received: <xmr:CHR7ahIjKp-1ee_KmdLUok_j0D6RN9MNk9ZCIkmD-J1u5u22Yji3kg4rJfEzvryzAxb8HA>
+X-ME-Proxy-Cause: dmFkZTFxT514kitKIdGOhXPEiLUJyDOYCZHOcJCRAOs4iYG0U2+eCRfL4rAqpKWp8tzCCR
+ q4/lWng/GUxRzf9jB8M/gjcbSNH7eBBgrAogeCEgch6IlePQaIL0umnHG/4whnLqGUmuy5
+ 1XdTh9EINXUFcqBkSrcRd4KWJy/1VXgYkKm79H+kfjltKRZGpszgKqB3IkB6CgkqF8tCy2
+ jsy1lIEvkV1EEPh9/pUxL/otB0LPqMrUwAmiwxGR2Ra692PFMY1lFEqTjfz5RAU50SIG8D
+ xmiQGo+9OVLBswG+iD05AtJTyIG+c7MwK1B/aqlQzng5u8kS9bH1KGD3FbmzwO26hvsVRw
+ Z6366wPlbzggFQCN3X45CYElNf1Vlib0mxY05nQMxvEb0OVm5KH6VWOVJJdIoiUGlVgf/S
+ gWPWCp/7O4C2pYXn1ThdjQLYHNp9VG2QtFHnXwOv+Audx1AObL3Ja1IdCnV8xekts3LRE2
+ 5mFup66EdGobShrC+DljQDvO1YCa07ADu3pGZxE9WdI7LPdzTrN6+T59GMonHo1sdWdtmi
+ e1QaQr53+V9sVPpliFAtVZxmx8e5UMzy4u+z23MuzrgXG495AW0G0kfAEX6SpzIJK/WegO
+ p79F75RnrSkL/R1xR2DKptMJjWbUkFsIbGZPAV+gXEPhsUihC8d3HMZnvNVw
+X-ME-Proxy: <xmx:CHR7ap1mtZ7fsiNK7S8H56tA4pjF6-UUd-becIp38EsViE3STmr48A>
+ <xmx:CHR7atmhF8aqF6UlhmUWk1KD3dVF8vLBC_LrfVyqNC3Df6hqa_pbqA>
+ <xmx:CHR7asjSSpMZdS08nspuWDTHk16cDgGL-ezXdBecNr20nAgLJ18uQg>
+ <xmx:CHR7asS8Enihx_FpQd53OepPzLiXmVohCmTEaZrZ28_6AiK9EHfvEg>
+ <xmx:CnR7avhSoGd271d7eZKBUXgAZcfC6TSHiHZwVW0GpxRP8ah0ziLNJ8nD>
 Feedback-ID: ifd214418:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Tue,
- 11 Aug 2026 14:55:12 -0400 (EDT)
-Message-ID: <0f8b9bb9579fbfba978d3ae5854b15dc3a0a4f50.camel@alistair23.me>
-Subject: Re: [PATCH v2] target/riscv: Fix memory leak in
- riscv_trigger_unrealize()
+ 11 Aug 2026 15:12:08 -0400 (EDT)
+Message-ID: <972c0983cab48890a0b089a5ccc9ba0c2b04bc32.camel@alistair23.me>
+Subject: Re: [PATCH v3 0/3] riscv: Add K230 DW 8250-compatible UART
 From: Alistair <alistair@alistair23.me>
-To: Zeng Chi <zeng_chi911@163.com>, philmd@oss.qualcomm.com, 
- alistair.francis@wdc.com, chao.liu@processmission.com, 
- daniel.barboza@oss.qualcomm.com, liwei1518@gmail.com, palmer@dabbelt.com, 
- zhiwei_liu@linux.alibaba.com
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, zengchi@kylinos.cn
-Date: Wed, 12 Aug 2026 04:55:11 +1000
-In-Reply-To: <20260724063927.3360599-1-zeng_chi911@163.com>
-References: <9882f9e7-5c05-4a76-95f0-eb8ae8366f62@oss.qualcomm.com>
- <20260724063927.3360599-1-zeng_chi911@163.com>
+To: WX Chen <wxchen0913@gmail.com>, qemu-devel@nongnu.org
+Cc: Paolo Bonzini <pbonzini@redhat.com>, =?ISO-8859-1?Q?Marc-Andr=E9?=
+ Lureau	 <marcandre.lureau@redhat.com>, Chao Liu
+ <chao.liu.zevorn@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>, Alistair
+ Francis <alistair.francis@wdc.com>, Weiwei Li	 <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,  Liu Zhiwei
+ <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org, Fabiano Rosas
+ <farosas@suse.de>,  Laurent Vivier <lvivier@redhat.com>
+Date: Wed, 12 Aug 2026 05:12:07 +1000
+In-Reply-To: <20260808-feat-k230-uart-v3-v3-0-d73b31f0034b@gmail.com>
+References: <20260808-feat-k230-uart-v3-v3-0-d73b31f0034b@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 User-Agent: Evolution 3.60.2 (by Flathub.org) 
@@ -110,24 +111,32 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, 2026-07-24 at 14:39 +0800, Zeng Chi wrote:
-> From: Zeng Chi <zengchi@kylinos.cn>
+On Sat, 2026-08-08 at 10:32 +0800, WX Chen wrote:
+> This series adds a QEMU model for the K230 SoC DesignWare 8250-
+> compatible
+> UART controller, wires it into the K230 SoC, and adds qtest coverage.
 >=20
-> In riscv_trigger_unrealize(), the per-trigger QEMUTimer objects are
-> created in riscv_trigger_realize() using timer_new_ns().=C2=A0 However,
-> unrealize only calls timer_del() to cancel them, but never frees the
-> timer objects themselves. This results in a memory leak every time a
-> CPU instance is unrealized (e.g., during hot-unplug or machine
-> teardown).
+> The implementation supports the registers and features required by
+> the
+> Linux 8250_dw driver, providing an interactive shell over the serial
+> port.
 >=20
-> Fix it by replacing timer_del() with timer_free(), which internally
-> cancels the timer and frees its memory.=C2=A0 The separate timer_del()
-> call
-> is no longer needed.
+> Signed-off-by: WX Chen <wxchen0913@gmail.com>
+> ---
+> Changes in v3:
+> - Removed all hardwired preprocessor #if conditionals from the logic
+> - Added a helper for the receiver line status interrupt check
+> - Encapsulated CPR and UCV register values in header macros
+> - Replaced g_usleep() with qtest_clock_step() in the qtest
+> - Link to v2:
+> https://lore.kernel.org/qemu-devel/20260725-feat-k230-uart-v2-v2-0-d5fe82=
+c47c28@gmail.com
 >=20
-> Fixes: 820552a92e32 ("target/riscv: dynamic alloc of debug trigger
-> arrays")
-> Signed-off-by: Zeng Chi <zengchi@kylinos.cn>
+> ---
+> WX Chen (3):
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 hw/char: add K230 DW 8250-compatible UART
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 hw/riscv: k230: connect DW 8250 UART
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 tests/qtest: add K230 UART test
 
 Thanks!
 
@@ -135,24 +144,26 @@ Applied to riscv-to-apply.next
 
 Alistair
 
-> ---
-> =C2=A0target/riscv/tcg/debug.c | 2 +-
-> =C2=A01 file changed, 1 insertion(+), 1 deletion(-)
 >=20
-> diff --git a/target/riscv/tcg/debug.c b/target/riscv/tcg/debug.c
-> index 3c0fe70101..5ab29f6945 100644
-> --- a/target/riscv/tcg/debug.c
-> +++ b/target/riscv/tcg/debug.c
-> @@ -1080,7 +1080,7 @@ void riscv_trigger_unrealize(CPURISCVState
-> *env)
-> =C2=A0=C2=A0=C2=A0=C2=A0 g_free(env->cpu_watchpoint);
-> =C2=A0
-> =C2=A0=C2=A0=C2=A0=C2=A0 for (int i =3D 0; i < env->num_triggers; i++) {
-> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 timer_del(env->itrigger_timer=
-[i]);
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 timer_free(env->itrigger_time=
-r[i]);
-> =C2=A0=C2=A0=C2=A0=C2=A0 }
-> =C2=A0=C2=A0=C2=A0=C2=A0 g_free(env->itrigger_timer);
-> =C2=A0}
+> =C2=A0hw/char/Kconfig=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0=C2=A0 3 +
+> =C2=A0hw/char/k230_uart.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0 | 816
+> +++++++++++++++++++++++++++++++++++++++++++
+> =C2=A0hw/char/meson.build=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0 |=C2=A0=C2=A0 1 +
+> =C2=A0hw/riscv/k230.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0 33 +-
+> =C2=A0include/hw/char/k230_uart.h=C2=A0 | 198 +++++++++++
+> =C2=A0include/hw/riscv/k230.h=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0=C2=A0=
+ 6 +-
+> =C2=A0tests/qtest/k230-uart-test.c | 514 +++++++++++++++++++++++++++
+> =C2=A0tests/qtest/meson.build=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0=C2=A0=
+ 2 +-
+> =C2=A08 files changed, 1559 insertions(+), 14 deletions(-)
+> ---
+> base-commit: 30e8a06b64aa58a3990ba39cb5d09531e7d265e0
+> change-id: 20260808-feat-k230-uart-v3-0ff3651d70ef
+>=20
+> Best regards,
 
