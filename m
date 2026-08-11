@@ -4,73 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E452C5AC67
-	for <qemu-riscv@archiver.kernel.org>; Tue, 11 Aug 2026 05:07:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BB37C5B569
+	for <qemu-riscv@archiver.kernel.org>; Tue, 11 Aug 2026 06:47:09 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wtega-0004gA-Gm; Tue, 11 Aug 2026 01:06:00 -0400
+	id 1wtgG7-000148-Bh; Tue, 11 Aug 2026 02:46:47 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <wangyang25@otcaix.iscas.ac.cn>)
- id 1wtbEj-0007jy-EO; Mon, 10 Aug 2026 21:25:01 -0400
-Received: from smtp21.cstnet.cn ([159.226.251.21] helo=cstnet.cn)
- by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <wangyang25@otcaix.iscas.ac.cn>)
- id 1wtbEf-0007YJ-AC; Mon, 10 Aug 2026 21:25:01 -0400
-Received: from DESKTOP-7FLBREN (unknown [124.16.137.194])
- by APP-01 (Coremail) with SMTP id qwCowABXLfHjeXpqxxPZBA--.17429S9;
- Tue, 11 Aug 2026 09:24:52 +0800 (CST)
-Message-ID: <22f977d13e90468683000679197a0384@wangyang25.otcaix.iscas.ac.cn>
-In-Reply-To: SENT
- 0001-linux-user-riscv-honor-zicntr-false-for-base-counter.patch   Subject:
- [PATCH 1/7] linux-user/riscv: honor zicntr=false for base counter CSRs  
- Message-ID:
- <f73caf0640c1446db5c566f1bb005966@wangyang25.otcaix.iscas.ac.cn>
- <f73caf0640c1446db5c566f1bb005966@wangyang25.otcaix.iscas.ac.cn>
-References: SENT
- 0001-linux-user-riscv-honor-zicntr-false-for-base-counter.patch   Subject:
- [PATCH 1/7] linux-user/riscv: honor zicntr=false for base counter CSRs  
- Message-ID:
- <f73caf0640c1446db5c566f1bb005966@wangyang25.otcaix.iscas.ac.cn>
- <f73caf0640c1446db5c566f1bb005966@wangyang25.otcaix.iscas.ac.cn>
-MIME-Version: 1.0
-From: "wangyang" <wangyang25@otcaix.iscas.ac.cn>
+ (Exim 4.90_1) (envelope-from <rao232328@gmail.com>)
+ id 1wtgG5-0000uP-8t
+ for qemu-riscv@nongnu.org; Tue, 11 Aug 2026 02:46:45 -0400
+Received: from mail-pl1-x62d.google.com ([2607:f8b0:4864:20::62d])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <rao232328@gmail.com>)
+ id 1wtgG3-0005Kg-P4
+ for qemu-riscv@nongnu.org; Tue, 11 Aug 2026 02:46:45 -0400
+Received: by mail-pl1-x62d.google.com with SMTP id
+ d9443c01a7336-2cc97653887so29489925ad.1
+ for <qemu-riscv@nongnu.org>; Mon, 10 Aug 2026 23:46:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1786430802; x=1787035602; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=FBwNOMc/SAl281CjXepHyn4BKE9Is/xBSKKyC3DkFWU=;
+ b=G7sZLV+fpMcZA2flY1okR3+7N2L7a28ulYjQkZ+feDZMTHiHrEea3kQ9cn0DwwZf3p
+ 8FAud2KIelOeBiJikcNCITrTDSAE1x6s15gHn0KwnaAH4oJaIz5lmphtaAKef8zxYfVv
+ SGrkOaPyPGkXdZjn/qWCMQrqEKveHfOeFIRm+BJmYopUBFv0TjcnWHPCk0RjDcwOBtND
+ zOqFMgHc58wSfuS66RAZjJ6ebLvETxvIcBi93S+oALEq3tmgSK/0MomrklfYkPyipw0r
+ FHlsA7G8WHtBUJNjLws+6xCZ8cFZ9iIMsjQcRI+k13Wz9779v2vxUjBfZRDuW5Jyiapb
+ X5CQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1786430802; x=1787035602;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=FBwNOMc/SAl281CjXepHyn4BKE9Is/xBSKKyC3DkFWU=;
+ b=JOQnCSxu7QDmiXg+eOBL6ekDjVcK21J01sbs9YaobFK/fjNg/ql3bVC+SWbw89gITI
+ jAkam3VEAX8DVj5qpXyJ2a6GqSJze4ETG9NBo3BzqhOZXmo2LP5WwStBM+tTfqDLkfvI
+ K7G2Lx0/xbYP4QLkW0fNhMdm56CHaEFLxfER2N58YzbINBvO89h/3zif/HqI2rbZNVo9
+ a7L/N7EwyCsQ6hioWDdaibhCveb5yT4xJgl9oUubxSY+FuPneXlexFN7k4HtBzO8EdG5
+ /bx0xmVoVspKGGJAZE72GCWlqQM4UB5N9a525UAFlgsZqx6On+XNY9yKzwyLlJ6GlacK
+ VLKA==
+X-Gm-Message-State: AOJu0Yx3GBKDiHSid2A0xg8/W90Nc6ICk2esSP5oS9PTlKbpj0wRHNt9
+ 9xM6TWCOgDMSMO08gRDd3aUvsFr5ltmebHguQV6likK50NAF0ZhTT/l9
+X-Gm-Gg: AR+sD13aNoIdCWDWYAxxAb43GtB3NPFszjVN10h2jBgYsGO+YW/YGBtJWkoUfPouPan
+ zI3uWsiQFbLT4QE795azqOdzJ8/GpmJMrA4ENPXhd3ZkkA44nP5N+A1vQNJQ70G6HKuAzEomEmo
+ OSR3wNcDHiHW9PdZ6DpGvLmoqKmos1RCe7ea2RpyCFTlLVZdgDiJRSYwYe9zMWBLSbaKb7U4CZy
+ CqQk1PTYmEj4/nQ6VJd+hhSPlLz4+8K+5J0VFkB7bVe0pGTcKA8cfEVh9KexDSCdjOegddmf/KT
+ QsQzJ+2e4hq4g5j0DDfOcZ6RWaFb9Kl2mnF4b8BZzRmnC/V0Mr/MiYUVmiF3FhMz9H0ByEIq4/K
+ WuFWiExYIFEpVPciGJOcZnDTi1GZlCrpc1CjrGW5IHZfeZlhrZDJs7CW2z3dZCmbZOWrlNLMwK1
+ AwdvmtaiSLYz2YVmuP8GCYaCfLecVorXEs8DKGKyChU6I6E09A3acDCkvsnQN0RCI3FlInqvro
+X-Received: by 2002:a17:902:da8c:b0:2ca:f8ef:33e4 with SMTP id
+ d9443c01a7336-2d3178f4d33mr11782915ad.17.1786430801760; 
+ Mon, 10 Aug 2026 23:46:41 -0700 (PDT)
+Received: from DESKTOP-DFGP8OG.lan ([120.235.190.222])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2d315f3ffd5sm2591015ad.30.2026.08.10.23.46.37
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 10 Aug 2026 23:46:40 -0700 (PDT)
+From: raoyi <rao232328@gmail.com>
 To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com
-Date: 11 Aug 2026 09:24:52 +0800
-Subject: [PATCH 7/7] target/riscv: allow whole-register moves with vill set
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: base64
-X-CM-TRANSID: qwCowABXLfHjeXpqxxPZBA--.17429S9
-X-Coremail-Antispam: 1UD129KBjvJXoW7tF18KFyUAF1DKr1UXw4DXFb_yoW8Ar13pa
- 1kCrW2kryrWa4xZayFqr47XFyxWF4Fgr48Can2qwn5XFWUGrZ2yF4F93y7KFy8JFWF9r1j
- 9FWvya13uayjka7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUQ2b7Iv0xC_Kw4lb4IE77IF4wAFF20E14v26rWj6s0DM7CY07I2
- 0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI
- 8067AKxVWUAVCq3wA2048vs2IY020Ec7CjxVAFwI0_Xr0E3s1l8cAvFVAK0II2c7xJM28C
- jxkF64kEwVA0rcxSw2x7M28EF7xvwVC0I7IYx2IY67AKxVW8JVW5JwA2z4x0Y4vE2Ix0cI
- 8IcVCY1x0267AKxVW8JVWxJwA2z4x0Y4vEx4A2jsIE14v26r4j6F4UM28EF7xvwVC2z280
- aVCY1x0267AKxVW8JVW8Jr1lnxkEFVAIw20F6cxK64vIFxWle2I262IYc4CY6c8Ij28IcV
- AaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2Ix0cI8IcVAFwI0_JF0_Jw1lYx0E
- x4A2jsIE14v26r4j6F4UMcvjeVCFs4IE7xkEbVWUJVW8JwACjcxG0xvEwIxGrwACY4xI67
- k04243AVAKzVAKj4xxMxkIecxEwVAFwVWkMxAIw28IcxkI7VAKI48JMxC20s026xCaFVCj
- c4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4
- CE17CEb7AF67AKxVWUAVWUtwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r4j6ryU
- MIIF0xvE2Ix0cI8IcVCY1x0267AKxVW8JVWxJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF
- 4lIxAIcVC2z280aVAFwI0_Gr0_Cr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8Jr1l6VAC
- Y4xI67k04243AbIYCTnIWIevJa73UjIFyTuYvjxUgE19UUUUU
-X-Originating-IP: [124.16.137.194]
-X-CM-SenderInfo: 5zdqw5xdqjjk46rwut1l0ox2xfdvhtffof0/
-Received-SPF: pass client-ip=159.226.251.21;
- envelope-from=wangyang25@otcaix.iscas.ac.cn; helo=cstnet.cn
-X-Spam_score_int: -41
-X-Spam_score: -4.2
-X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Cc: qemu-riscv@nongnu.org, pbonzini@redhat.com, palmer@dabbelt.com,
+ alistair.francis@wdc.com, liwei1518@gmail.com,
+ daniel.barboza@oss.qualcomm.com, zhiwei_liu@linux.alibaba.com,
+ chao.liu@processmission.com, farosas@suse.de, lvivier@redhat.com,
+ caojunze424@gmail.com, bmeng.cn@gmail.com, raoyi <rao232328@gmail.com>
+Subject: [PATCH v3 0/3] hw/timer: add DesignWare APB timer
+Date: Tue, 11 Aug 2026 14:46:07 +0800
+Message-ID: <20260811064612.16517-1-rao232328@gmail.com>
+X-Mailer: git-send-email 2.53.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62d;
+ envelope-from=rao232328@gmail.com; helo=mail-pl1-x62d.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Tue, 11 Aug 2026 01:05:57 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -85,44 +101,43 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-V2hvbGUtcmVnaXN0ZXIgdmVjdG9yIG1vdmVzIGRvIG5vdCBkZXBlbmQgb24gdnR5cGUu
-ICBUaGUgVi0xLjANCnNwZWNpZmljYXRpb24gZXhwbGljaXRseSBleGNsdWRlcyB3aG9s
-ZS1yZWdpc3RlciBsb2Fkcywgc3RvcmVzIGFuZCBtb3Zlcw0KZnJvbSB0aGUgdnR5cGUg
-ZGVwZW5kZW5jeSwgYW5kIFNlY3Rpb24gMTYuNiBkZWZpbmVzIHZtdjxucj5yLnYgYXMg
-YSBjb3B5DQpvZiB0aGUgd2hvbGUgcmVnaXN0ZXIgZ3JvdXAgd2l0aG91dCBuZWVkaW5n
-IHRvIGtub3cgb3IgY2hhbmdlIHZsIG9yDQp2dHlwZS4gIEdFTl9WTVZfV0hPTEVfVFJB
-TlMgY3VycmVudGx5IHJlamVjdHMgdm12MXIvMnIvNHIvOHIgd2hlbg0KdnR5cGUudmls
-bCBpcyBzZXQsIHdoaWxlIHdob2xlLXJlZ2lzdGVyIGxvYWRzIGFuZCBzdG9yZXMgYWxy
-ZWFkeSBleGVjdXRlLg0KRHJvcCB0aGUgdmV4dF9jaGVja19pc2FfaWxsKCkgZ2F0ZSBm
-cm9tIHRoZSBtb3ZlIHRyYW5zbGF0b3I7IHRoZSBSVlYNCmV4dGVuc2lvbiBjaGVjaywg
-cmVnaXN0ZXItZ3JvdXAgYWxpZ25tZW50IGNoZWNrcyBhbmQgdnN0YXJ0IGhhbmRsaW5n
-IGFyZQ0KdW5jaGFuZ2VkLg0KDQpSZXNvbHZlczogaHR0cHM6Ly9naXRsYWIuY29tL3Fl
-bXUtcHJvamVjdC9xZW11Ly0vd29ya19pdGVtcy80MTU0DQpTaWduZWQtb2ZmLWJ5OiB3
-YW5neWFuZyA8d2FuZ3lhbmcyNUBvdGNhaXguaXNjYXMuYWMuY24+DQotLS0NCiB0YXJn
-ZXQvcmlzY3YvdGNnL2luc25fdHJhbnMvdHJhbnNfcnZ2LmMuaW5jIHwgNCArLS0tDQog
-MSBmaWxlIGNoYW5nZWQsIDEgaW5zZXJ0aW9uKCspLCAzIGRlbGV0aW9ucygtKQ0KDQpk
-aWZmIC0tZ2l0IGEvdGFyZ2V0L3Jpc2N2L3RjZy9pbnNuX3RyYW5zL3RyYW5zX3J2di5j
-LmluYyBiL3RhcmdldC9yaXNjdi90Y2cvaW5zbl90cmFucy90cmFuc19ydnYuYy5pbmMN
-CmluZGV4IGZhMWVlODBiYzU5Li4zMmI1NDA4OTQ0OCAxMDA2NDQNCi0tLSBhL3Rhcmdl
-dC9yaXNjdi90Y2cvaW5zbl90cmFucy90cmFuc19ydnYuYy5pbmMNCisrKyBiL3Rhcmdl
-dC9yaXNjdi90Y2cvaW5zbl90cmFucy90cmFuc19ydnYuYy5pbmMNCkBAIC0zOTY4LDE0
-ICszOTY4LDEyIEBAIHN0YXRpYyBib29sIHRyYW5zX3Zjb21wcmVzc192bShEaXNhc0Nv
-bnRleHQgKnMsIGFyZ19yICphKQ0KIH0NCiANCiAvKg0KLSAqIFdob2xlIFZlY3RvciBS
-ZWdpc3RlciBNb3ZlIEluc3RydWN0aW9ucyBkZXBlbmQgb24gdnR5cGUgcmVnaXN0ZXIo
-dnNldykuDQotICogVGh1cywgd2UgbmVlZCB0byBjaGVjayB2aWxsIGJpdC4gKFNlY3Rp
-b24gMTYuNikNCisgKiBXaG9sZSBWZWN0b3IgUmVnaXN0ZXIgTW92ZSBJbnN0cnVjdGlv
-bnMgZG8gbm90IGRlcGVuZCBvbiB2dHlwZS4NCiAgKi8NCiAjZGVmaW5lIEdFTl9WTVZf
-V0hPTEVfVFJBTlMoTkFNRSwgTEVOKSAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-XA0KIHN0YXRpYyBib29sIHRyYW5zXyMjTkFNRShEaXNhc0NvbnRleHQgKnMsIGFyZ18j
-I05BTUUgKiBhKSAgICAgICAgICAgICAgIFwNCiB7ICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBc
-DQogICAgIGlmIChyZXF1aXJlX3J2dihzKSAmJiAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgXA0KLSAgICAgICAgdmV4dF9jaGVja19pc2Ff
-aWxsKHMpICYmICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFwN
-CiAgICAgICAgIFFFTVVfSVNfQUxJR05FRChhLT5yZCwgTEVOKSAmJiAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICBcDQogICAgICAgICBRRU1VX0lTX0FMSUdORUQo
-YS0+cnMyLCBMRU4pKSB7ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXA0K
-ICAgICAgICAgdWludDMyX3QgbWF4c3ogPSBzLT5jZmdfcHRyLT52bGVuYiAqIExFTjsg
-ICAgICAgICAgICAgICAgICAgICAgIFwNCi0tIA0KMi40My4wDQo=
+Add a generic DesignWare APB timer device model, and wire it
+up for the K230 machine with num-timers=6 and a 6.25 MHz clock.
+
+Changes since v2:
+- Per Bin Meng's review, refactored from K230-specific device
+  to a generic DesignWare APB Timer model with num-timers property
+- K230 board sets num-timers=6 and clock frequency accordingly
+
+Changes since v1:
+- Split into 3 patches: model, board integration, tests
+- Remove goto pattern from read/write handlers
+- Fix include order, add explicit bitops.h include
+- Add QOM <private>/<public> markers in struct
+- Fix copyright headers
+
+raoyi (3):
+  hw/timer: add DesignWare APB timer model
+  hw/riscv: add DesignWare APB timer to K230 board
+  tests/qtest: add k230 dwapb timer test
+
+ MAINTAINERS                         |   3 +
+ hw/riscv/Kconfig                    |   1 +
+ hw/riscv/k230.c                     |  32 +++-
+ hw/timer/Kconfig                    |   4 +
+ hw/timer/dw-apb-timer.c             | 341 ++++++++++++++++++++++++++++
+ hw/timer/meson.build                |   1 +
+ hw/timer/trace-events               |   8 +
+ include/hw/riscv/k230.h             |  12 ++
+ include/hw/timer/dw-apb-timer.h     |  65 +++++
+ tests/qtest/k230-dwapb-timer-test.c | 261 +++++++++++++++++++++
+ tests/qtest/meson.build             |   4 +-
+ 11 files changed, 728 insertions(+), 4 deletions(-)
+ create mode 100644 hw/timer/dw-apb-timer.c
+ create mode 100644 include/hw/timer/dw-apb-timer.h
+ create mode 100644 tests/qtest/k230-dwapb-timer-test.c
+
+-- 
+2.53.0
 
 
