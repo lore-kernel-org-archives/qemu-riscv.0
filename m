@@ -4,132 +4,132 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 182CAC5B56A
-	for <qemu-riscv@archiver.kernel.org>; Tue, 11 Aug 2026 18:36:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 956ACC5B56A
+	for <qemu-riscv@archiver.kernel.org>; Tue, 11 Aug 2026 18:37:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wtrJo-0007uE-B6; Tue, 11 Aug 2026 14:35:20 -0400
+	id 1wtrJy-0008Qp-IZ; Tue, 11 Aug 2026 14:35:30 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1wtrJc-0007V1-5i
- for qemu-riscv@nongnu.org; Tue, 11 Aug 2026 14:35:11 -0400
+ id 1wtrJx-0008MV-CG
+ for qemu-riscv@nongnu.org; Tue, 11 Aug 2026 14:35:29 -0400
 Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1wtrJW-0002Yo-AQ
- for qemu-riscv@nongnu.org; Tue, 11 Aug 2026 14:35:07 -0400
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+ id 1wtrJt-0002pT-Gz
+ for qemu-riscv@nongnu.org; Tue, 11 Aug 2026 14:35:28 -0400
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 67BGO1sY1164874
- for <qemu-riscv@nongnu.org>; Tue, 11 Aug 2026 18:34:51 GMT
+ 67BGP4WU4123539
+ for <qemu-riscv@nongnu.org>; Tue, 11 Aug 2026 18:35:13 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- 5h3eobnHT1X8C7Hj3fqDLl59b1w5d8j9Pcc2IV1gHOo=; b=BAItJ/rkJoC3tO2Z
- RQ4sLUo2IKcJ/WricJz/XlLXB6gHPJ5DmKBgt0/wstMbNYFg0scuUMpPc4Xee/hu
- oQFVBnHmoT3/EaUiB8LM8ir25GnS6DrbJBjAPFWmZ7Go3RdtiCGyG7I8GAKXi8Y0
- ZyNj/WaLcGZg+6Ogs90awsL5d2BStxuwK1rSJUGya9sqaiGfRjkz7fksbNMCseIF
- NRiqAovN+vHab9/YkAs11ZiEO13DO/o1FtKa/X2xGxHx2TrhH5rCSMt3zAGd5/0s
- vtPhvlndsNu24yzY5OHr44LgtaWh0Y1Yc5hOBSoEVVUI4tArz4O43x5pU15foEHM
- q5t8hA==
+ 5cKNYN1YVV/K1jHg9iJCW7yGQ3ybLzpVvQJS3M//mQs=; b=Lql9sAjZZP6bEaBy
+ jmWk3rsV8wV7KJWNWxp3H4c+7+MVeD/Fn0H5xpOyk/HNHk7IDwxEST/2ah/xrW+8
+ kdyPnyB5DfKyagCYVRlY2lhzhqvnEoajGz+4a4SXLNbToZuUKY3B0fjbXVMsTyQW
+ se5K3aHXUuwZlcUnA0KXiBWQNRO0Cb5i0Iya06xrJtQSkGlBOEz9fYsOcg7sP0VJ
+ yqmLBQsQOIBLBAkr6OkqdevuZ0oOd1QIt5clfz1G72GaRPM8o58zdR5J/jqgI8sJ
+ VGv1FSmcmBINDPSh3DS2ExnXXTbQ4dcm7EUBkYkk947dCrJeDSb+c9E3vZkHuPPK
+ PT0vVw==
 Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com
  [209.85.160.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g01q123yd-1
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fyxwettf4-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Tue, 11 Aug 2026 18:34:51 +0000 (GMT)
+ for <qemu-riscv@nongnu.org>; Tue, 11 Aug 2026 18:35:13 +0000 (GMT)
 Received: by mail-qt1-f198.google.com with SMTP id
- d75a77b69052e-51c21c01cf3so3303091cf.2
- for <qemu-riscv@nongnu.org>; Tue, 11 Aug 2026 11:34:51 -0700 (PDT)
+ d75a77b69052e-51c1d137a68so3990311cf.3
+ for <qemu-riscv@nongnu.org>; Tue, 11 Aug 2026 11:35:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1786473291; x=1787078091; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1786473313; x=1787078113; darn=nongnu.org;
  h=content-transfer-encoding:content-type:mime-version:references
  :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=5h3eobnHT1X8C7Hj3fqDLl59b1w5d8j9Pcc2IV1gHOo=;
- b=YFv5qe23TMJkRa4/0MzPNttyHDkmiP7XrzBL+wj+ILfDxxirsQyhqbjnY/7tQe492X
- swd8jSlfxcnZLcUyRwuDoGkgXZBTFiAk6XS27yVV9oD5H6z7qcrHE1MoumuZ3WSjhvH/
- pNFWaZHUfFse48zKDhf46698Mw6hCS1WBwNAYuMELaNRz+UdOW6Uya0kkCxGAo9uqFMP
- gR2QnrlNLE8fWKFxeq3ekApQa09WhA0lr5dRAuwHqmM/nz5/Wen0k5cZwRczCU1kvlcB
- bnxCxmDO8Y48NQ7+faVs1rFkX2pn563ZLWhA/jUtNzH3lsBI1/p1ZNZg/LOzKqsR199Z
- 3qFQ==
+ bh=5cKNYN1YVV/K1jHg9iJCW7yGQ3ybLzpVvQJS3M//mQs=;
+ b=GBg6eMW5+cnzeLQngIuo2dDd6Z0O6X4gQ5YCP+ihRXo5ZA+mYBKAAcLchPl8tPt+WQ
+ hNasqEycMnfvDau28Rniw9Pzpl6vMaK0tlMzaKQwabQ4JI7OGstwOLXokKH8dqjDu34Y
+ sxYH2OKNz58y5WUs5r6a/1fcN+ZL84PvIlQG7T2OUgHDMM2DBYdsFxZ7YTiPMVJIy+XJ
+ +BPSmyQPMzb/cpr3VfrDSOqc74EIs6+fM5xMKXNwnj6s8E3/5h2+QBl4KRvuwEIkRqTx
+ xHkY+AVQl0RrryInYUEyetwpEwFZ1X7TRMxtLri+ZT4hZruI4ny9dtMwALudoEY2xApa
+ aXEQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786473291; x=1787078091;
+ d=1e100.net; s=20251104; t=1786473313; x=1787078113;
  h=content-transfer-encoding:content-type:mime-version:references
  :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=5h3eobnHT1X8C7Hj3fqDLl59b1w5d8j9Pcc2IV1gHOo=;
- b=Ss5hQ0wgdZcMvZG6DpAEX6AqPqsrpA4iHA9l/s98xSbxG674E2frZbMstCzuBwOa2N
- TH6o6veEX7BjZKy6xcCaUMU8kQ2Qy67qaeH+o7Y4eBHDWly86Tn/cz6JMtB0jIgmBJnV
- +PgdKruSFDOS151kxuwr1WAccUH6StT+WrkZ1fI+UxBOmQ6u7JHoshv3YOaHk5I8WHwN
- jQEidgGz0Dbqs3uFlV1Wgf/emdBpOYwm7aLEk40nMALDmQdvea5hsZEvkz8xGMcQKd49
- 4Ywf9yQeZHrrjRVxefM9aa3/zb5rL7sw3ctY0Iv3BoNrVqcj5cHoQX2cofKF6kB2yzZc
- iCtw==
+ bh=5cKNYN1YVV/K1jHg9iJCW7yGQ3ybLzpVvQJS3M//mQs=;
+ b=Zv+010N3H5icAhlKVWTpY/u27/I0liFbu1Hchuc8cYPldTRpYbU1hfP6hx+QHEh9aB
+ tt05MX9BYqtYJHFJUpHsufz4kVFC7dAJOeM8jUzj3jbcJvZUmWbOy674VL4r9DhtxJid
+ 7T1ve3mo+WyDH/bIWFpWGnMdv5rVwxjt2RV9+uVVjXZDPEBGuvCR9e3UZfUoAGEAwmHc
+ yb7HHs89R9RV7rtj0JOba3+gXLlcVjR2DdO+DrAvshBpcXe4XbjxcAosXcvAOpA915Vf
+ gIN0nSHJewDFHGkn2X/4L+zKc8aAdtouzIUc2B8apra9VmppQharPOV1iu5Ld7+W4cYl
+ JE7Q==
 X-Forwarded-Encrypted: i=1;
- AHgh+Roy7Z/KFAhbqFQTwZtUb6nq4loWBe3y4Nll3CPYo7EK11A9N3Jf+bX5/TsiEJ1QVxeG5hC6M12qIUkX@nongnu.org
-X-Gm-Message-State: AOJu0Yy9Vj62W2/nePqxkXI45yQ6f4xXycVn9/YMY3rw0VJV0xgtGQ9x
- UAzRYHY1VgN6zIEPwCG8+lFsnFloIS/g80NPCYcqvtzllja1oJ6+eqeWoohez3oLz0uW42mdKPb
- t+OjyEwNLbM0o4FyKcRKNwKQ9C4hXcH7bbKjvSXFVZ9FpK6k6untcn8saew==
-X-Gm-Gg: AR+sD12JJgglzsUhCaaHOltDFuXKsNNXMkRjZJIx5oHzRnbnp7PulRh8O5wIFpi9QfF
- fUjL77PXXDkd6wr9v/+rrV+56mQ+5FfC9Qwd06mjd1Ijse7okGAQWXBl2H0ZNIzJiXbnpvxUg6+
- lIbriSO2MZ/Z3iMuxH91/3CCT1GPI9+R0LjLXEH5FK+55RFjD649/wnOv9hZWCPmdrdLvMABBAw
- bxO5ADbSABtpaMDDeGQsEyVM0cm3t3hjQiadpq0zH3zb+8/euQIz0wafc86S9OkudDTtHgO03Pi
- EfN1UEE+Bg1+qy/M4G5pvYiiFsYQcFHC9RRPfxmpiJNqUZ2Z8+JPUElCVoRCer5jshjPOJLFICf
- 2bXWR4k24CytvCTdOnqqMsECS7MwWak8coaqVmL5aFg==
-X-Received: by 2002:a05:622a:579a:b0:51c:ace:de6a with SMTP id
- d75a77b69052e-52d5852c5efmr57869951cf.18.1786473290442; 
- Tue, 11 Aug 2026 11:34:50 -0700 (PDT)
-X-Received: by 2002:a05:622a:579a:b0:51c:ace:de6a with SMTP id
- d75a77b69052e-52d5852c5efmr57869311cf.18.1786473289936; 
- Tue, 11 Aug 2026 11:34:49 -0700 (PDT)
+ AHgh+RrArfP/Gx8cYD3k1oMBjFsFlbvCdB8g4DcWq53we3OtFwcmKhGFoa+lH9mbhk9as3IBt6+XiMU1IjKv@nongnu.org
+X-Gm-Message-State: AOJu0YzVeUc9Kzeyubo6x4m/PMtPuHGZmohVZPtki6/+fXyaK8wNQH+3
+ gQ7tclVRdiAlash4SmLiziiewMWtsfpRBMnFruEyiywazDKmdao4IaSacUNrHzdkiKbwA1ri790
+ 4VIScG+F42b4QaLmOpq7ZjuOChdyF2Rsot0GqSrRj/BKs4XwoWqrriS9I9A==
+X-Gm-Gg: AR+sD12v6+L2Y4J3VgTImxgwk4qMFXLfcbNx7URvpllHuzcXxvm5vtgdCHs6guAKdny
+ AE91Nl94okOaTqAiUgD1ISqlX8h/CNdKIKIoGAx6fb8eldfLn5KJnTpMTgkW5HDNBdBKfDVhpah
+ Fj6VjE62MY5oSyqfo5WALExnZF8ZA2jlYJfltUJIJszaKMYAfJ0RC2CPrELg9oU6IuJdziMLT5x
+ amrwl/cQBywdWQN6TxNiHd/J2Ya0SkHceNxDhCTQlWLFEbBfea0ThmR3o7cAhsrSpWNHjkN3wVN
+ Naf92HCccUC/5yMoEqSNVat062uEtHXWc+/Pz3bKs+uP9Xt4FgvwsvNGrJfBH+E6JQ3Rs+i7YE/
+ W8/CpBWlKg/IX6nEHvAVqITv83yQ7sDWHP2VcSTZlHQ==
+X-Received: by 2002:ac8:58ca:0:b0:50d:3e1e:7998 with SMTP id
+ d75a77b69052e-52d586946b4mr43853121cf.37.1786473312889; 
+ Tue, 11 Aug 2026 11:35:12 -0700 (PDT)
+X-Received: by 2002:ac8:58ca:0:b0:50d:3e1e:7998 with SMTP id
+ d75a77b69052e-52d586946b4mr43852861cf.37.1786473312462; 
+ Tue, 11 Aug 2026 11:35:12 -0700 (PDT)
 Received: from localhost.localdomain (pmd666.hd.free.fr. [88.187.86.199])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48150c08982sm346738f8f.14.2026.08.11.11.34.48
+ 5b1f17b1804b1-4997ad79e5csm3958745e9.3.2026.08.11.11.35.10
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 11 Aug 2026 11:34:48 -0700 (PDT)
+ Tue, 11 Aug 2026 11:35:11 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>, qemu-ppc@nongnu.org,
  Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
  qemu-arm@nongnu.org, qemu-s390x@nongnu.org, kvm@vger.kernel.org,
  qemu-riscv@nongnu.org
-Subject: [PATCH 5/8] hw/cpu: Rename cpu_exec_realizefn() ->
- cpu_common_realize()
-Date: Tue, 11 Aug 2026 20:34:07 +0200
-Message-ID: <20260811183410.22428-6-philmd@oss.qualcomm.com>
+Subject: [PATCH 8/8] hw/cpu: Move system-specific cpu_exec_realize() to
+ cpu-system.c
+Date: Tue, 11 Aug 2026 20:34:10 +0200
+Message-ID: <20260811183410.22428-9-philmd@oss.qualcomm.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260811183410.22428-1-philmd@oss.qualcomm.com>
 References: <20260811183410.22428-1-philmd@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: YIsdfE928ZXUkUwVk-y5szeu98XhMCkV
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODExMDE1NSBTYWx0ZWRfXzbh5pvMWlxhU
- vGk/GYcesFYxUSuLdHYlISCcGh++0H0ogIVJTuM9Ygwq1Af6/b0wYGWs1Zvv8CziWIKjxhUeU5I
- +4pbvXQzM1PH/HT3cR62HFcsGB/LkTeDPs939snzuCkw+RAQN5UrbJU08Vb3/KS1+sMuScdkdNA
- CGIiuC08D3ff/911DKBTYxU5iHSrAyjsOSMnG3Two9myL+L2u/7MqpS2TXx2tfvYc0yRGWMQsLq
- G6JYZZYs4TCyL1etpeKNwKgiTckniZa1wGzaeJTJkUsLpXwi3soodbmVici4vz7Tnxa9NV93dJ0
- 0usSjrq3kMX2+iREWHy1jbjXNhh42mwCnGyLlk4lGArCIE9lf2ZUNCMzBXc5wqrgpvUP4jJP9cV
- JKJJcuSGQo5sE9Ww1Wbsg3m1kM7V4WzGyXB1kadAdOzAv0M8TUoSnpeJsTmyZnZSP6EtFCNxCIS
- 17LOS9XgVG/O1GNV5gQ==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODExMDE1NSBTYWx0ZWRfX6dSZu8ISEEGI
- xkZExL4blxBPe4aiyVdjziCKDBRxImImajjBXzEed6JOP24CKjoNTvcRVK851XpjAnHK6GgtdkF
- vv1DP97AJzCA51OrvhVdguuiSNFKHkw=
-X-Proofpoint-ORIG-GUID: YIsdfE928ZXUkUwVk-y5szeu98XhMCkV
-X-Authority-Analysis: v=2.4 cv=brt8wkai c=1 sm=1 tr=0 ts=6a7b6b4b cx=c_pps
+X-Proofpoint-GUID: OX0dD85it5pPkHSpod9tBgvkPXF11uG8
+X-Authority-Analysis: v=2.4 cv=K8QS2SWI c=1 sm=1 tr=0 ts=6a7b6b61 cx=c_pps
  a=mPf7EqFMSY9/WdsSgAYMbA==:117 a=4s3hRJSeHn4rkQlkrse1kQ==:17
  a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=M51BFTxLslgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=KKAkSRfTAAAA:8 a=EUspDBNiAAAA:8 a=V_ZmIUVNQuF7PYEw5wMA:9 a=3ZKOabzyN94A:10
- a=QEXdDO2ut3YA:10 a=dawVfQjAaf238kedN5IG:22 a=cvBusfyB2V15izCimMoJ:22
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
+ a=EUspDBNiAAAA:8 a=pilchTG5AImVgDdFcq4A:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=dawVfQjAaf238kedN5IG:22
+X-Proofpoint-ORIG-GUID: OX0dD85it5pPkHSpod9tBgvkPXF11uG8
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODExMDE1NSBTYWx0ZWRfX6dzZeh7CHSZC
+ bJtUb97GXOdUAJI0Cq2Imvlxgl9qzSvpkdBRWtUQm4jVbUTv/7jwLEIeD+xPPF9/Mqx27BWHk8M
+ /nP1VgBA1Tam/nAj9i+80X/kH1II2/0=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODExMDE1NSBTYWx0ZWRfX1v0WOnM/VaNw
+ EdrK9MtblRfi9DfX5v+YQZ9AWdRut1iDrWt6vAuxhGo9IBxed6ig3bsO4fvy1ZN3dRxFC31epNn
+ BFaRWStUH+yfSi62xgGQH/VghTiR0vKAXrv/djS55BS7Zz1T8W68HPHy5gYPUiSran+UgvlIHCG
+ IR6IL8pY9P/zSPf9I8k2oRQbPhGAF2HIKagwr/K+1ZcjnUFluZAZ2BmUc78tfbOgxVu1eQomfZ1
+ fSw67vGkMhPhBLGiuk3IhdZH3qglCNJeW+XSGhyTrPLhkWj+rVrPaMfWokcH3322Eus2Wpu5pjX
+ lgwTv1/kler3q1aTWhPBGfT5tQo6FH+PnhwPXTAVZk8LMnZ4dvTecn2Lhge8PsPckOCrms8BNLt
+ GOLkkya5Htv576uc5H6HcCR+DhNY0pqpaCNqrQwc1LH1BE0H0c113KARERW8fYBLAslylYm72zb
+ zLG+IC0bZ3fo8jkSiVg==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-11_04,2026-08-10_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 malwarescore=0 adultscore=0 clxscore=1015 suspectscore=0
- impostorscore=0 spamscore=0 lowpriorityscore=0 priorityscore=1501 bulkscore=0
+ suspectscore=0 malwarescore=0 spamscore=0 priorityscore=1501 bulkscore=0
+ clxscore=1015 phishscore=0 impostorscore=0 adultscore=0 lowpriorityscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608110155
 Received-SPF: pass client-ip=205.220.180.131;
@@ -156,390 +156,137 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Philippe Mathieu-Daudé <philmd@linaro.org>
+Current cpu_exec_realize() body only contains system-mode
+related code. Move that method out of cpu-common.c to
+cpu-system.c, removing the system / machine mentions in
+this common file. Add an empty stub for user-mode.
 
-Keep cpu_common_*() pattern for publicly exposed common methods
-used by target code. Use cpu_exec_*() pattern for internal ones,
-mostly to distinct between system / user mode.
-
-Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 Signed-off-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
 ---
- include/hw/core/cpu.h      |  3 ++-
- hw/core/cpu-common.c       |  2 +-
- target/alpha/cpu.c         |  2 +-
- target/arm/cpu.c           |  2 +-
- target/avr/cpu.c           |  2 +-
- target/hexagon/cpu.c       |  2 +-
- target/hppa/cpu.c          |  2 +-
- target/i386/cpu.c          | 10 +++++-----
- target/i386/kvm/kvm-cpu.c  |  2 +-
- target/loongarch/cpu.c     |  2 +-
- target/m68k/cpu.c          |  2 +-
- target/microblaze/cpu.c    |  2 +-
- target/mips/cpu.c          |  2 +-
- target/or1k/cpu.c          |  2 +-
- target/ppc/cpu_init.c      |  2 +-
- target/riscv/cpu.c         |  2 +-
- target/riscv/kvm/kvm-cpu.c |  2 +-
- target/riscv/tcg/tcg-cpu.c |  2 +-
- target/rx/cpu.c            |  2 +-
- target/s390x/cpu.c         |  2 +-
- target/sh4/cpu.c           |  2 +-
- target/sparc/cpu.c         |  2 +-
- target/tricore/cpu.c       |  2 +-
- target/xtensa/cpu.c        |  2 +-
- 24 files changed, 29 insertions(+), 28 deletions(-)
+ hw/core/cpu-internal.h |  1 +
+ hw/core/cpu-common.c   | 24 ------------------------
+ hw/core/cpu-system.c   | 26 ++++++++++++++++++++++++++
+ hw/core/cpu-user.c     |  5 +++++
+ 4 files changed, 32 insertions(+), 24 deletions(-)
 
-diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
-index 6490fb070f2..7b7cf330cde 100644
---- a/include/hw/core/cpu.h
-+++ b/include/hw/core/cpu.h
-@@ -1178,7 +1178,8 @@ G_NORETURN void cpu_abort(CPUState *cpu, const char *fmt, ...)
-  */
- void qemu_process_cpu_events(CPUState *cpu);
+diff --git a/hw/core/cpu-internal.h b/hw/core/cpu-internal.h
+index ae6a31bca2d..44715b44329 100644
+--- a/hw/core/cpu-internal.h
++++ b/hw/core/cpu-internal.h
+@@ -15,6 +15,7 @@ void cpu_class_init_props(DeviceClass *dc);
+ void cpu_exec_class_post_init(CPUClass *cc);
  
--bool cpu_exec_realizefn(CPUState *cpu, Error **errp);
-+/** cpu_common_realize: CPU DeviceRealize common handler */
-+bool cpu_common_realize(CPUState *cpu, Error **errp);
- void cpu_exec_unrealizefn(CPUState *cpu);
- void cpu_exec_reset_hold(CPUState *cpu);
+ void cpu_exec_init(CPUState *cpu);
++void cpu_exec_realize(CPUState *cpu, Error **errp);
  
+ void cpu_vmstate_register(CPUState *cpu);
+ void cpu_vmstate_unregister(CPUState *cpu);
 diff --git a/hw/core/cpu-common.c b/hw/core/cpu-common.c
-index 33e349d4402..732e32fade2 100644
+index cd7c8763cf5..4f4c87f33a0 100644
 --- a/hw/core/cpu-common.c
 +++ b/hw/core/cpu-common.c
-@@ -230,7 +230,7 @@ const char *parse_cpu_option(const char *cpu_option)
-     return cpu_type;
+@@ -33,7 +33,6 @@
+ #include "exec/log.h"
+ #include "exec/gdbstub.h"
+ #include "system/tcg.h"
+-#include "hw/core/boards.h"
+ #include "hw/core/qdev-properties.h"
+ #include "trace.h"
+ #ifdef CONFIG_PLUGIN
+@@ -246,29 +245,6 @@ bool cpu_common_realize(CPUState *cpu, Error **errp)
+     return true;
  }
  
--bool cpu_exec_realizefn(CPUState *cpu, Error **errp)
-+bool cpu_common_realize(CPUState *cpu, Error **errp)
+-static void cpu_exec_realize(CPUState *cpu, Error **errp)
+-{
+-    Object *machine = qdev_get_machine();
+-
+-    /* qdev_get_machine() can return something that's not TYPE_MACHINE
+-     * if this is one of the user-only emulators; in that case there's
+-     * no need to check the ignore_memory_transaction_failures board flag.
+-     */
+-    if (object_dynamic_cast(machine, TYPE_MACHINE)) {
+-        MachineClass *mc = MACHINE_GET_CLASS(machine);
+-
+-        if (mc) {
+-            cpu->ignore_memory_transaction_failures =
+-                mc->ignore_memory_transaction_failures;
+-        }
+-    }
+-
+-    if (DEVICE(cpu)->hotplugged) {
+-        cpu_synchronize_post_init(cpu);
+-        cpu_resume(cpu);
+-    }
+-}
+-
+ static void cpu_common_realizefn(DeviceState *dev, Error **errp)
  {
-     if (!accel_cpu_common_realize(cpu, errp)) {
-         return false;
-diff --git a/target/alpha/cpu.c b/target/alpha/cpu.c
-index 0c35067b202..12e86021663 100644
---- a/target/alpha/cpu.c
-+++ b/target/alpha/cpu.c
-@@ -117,7 +117,7 @@ static void alpha_cpu_realizefn(DeviceState *dev, Error **errp)
-     cs->tcg_cflags |= CF_PCREL;
- #endif
+     cpu_exec_realize(CPU(dev), errp);
+diff --git a/hw/core/cpu-system.c b/hw/core/cpu-system.c
+index 8a9f2fcea84..feadfb5af00 100644
+--- a/hw/core/cpu-system.c
++++ b/hw/core/cpu-system.c
+@@ -25,10 +25,12 @@
+ #include "exec/target_page.h"
+ #include "system/memory.h"
+ #include "qemu/target-info.h"
++#include "hw/core/boards.h"
+ #include "hw/core/qdev.h"
+ #include "hw/core/qdev-properties.h"
+ #include "hw/core/sysemu-cpu-ops.h"
+ #include "migration/vmstate.h"
++#include "system/hw_accel.h"
+ #include "system/tcg.h"
+ #include "cpu-internal.h"
  
--    cpu_exec_realizefn(cs, &local_err);
-+    cpu_common_realize(cs, &local_err);
-     if (local_err != NULL) {
-         error_propagate(errp, local_err);
-         return;
-diff --git a/target/arm/cpu.c b/target/arm/cpu.c
-index 787e4dc7ab2..77aa78f00e2 100644
---- a/target/arm/cpu.c
-+++ b/target/arm/cpu.c
-@@ -1891,7 +1891,7 @@ static void arm_cpu_realizefn(DeviceState *dev, Error **errp)
-     }
- #endif
+@@ -221,6 +223,30 @@ static int cpu_common_pre_load(void *opaque)
+     return 0;
+ }
  
--    cpu_exec_realizefn(cs, &local_err);
-+    cpu_common_realize(cs, &local_err);
-     if (local_err != NULL) {
-         error_propagate(errp, local_err);
-         return;
-diff --git a/target/avr/cpu.c b/target/avr/cpu.c
-index 35912192126..f8409f32ab9 100644
---- a/target/avr/cpu.c
-+++ b/target/avr/cpu.c
-@@ -131,7 +131,7 @@ static void avr_cpu_realizefn(DeviceState *dev, Error **errp)
-     AVRCPUClass *mcc = AVR_CPU_GET_CLASS(dev);
-     Error *local_err = NULL;
++void cpu_exec_realize(CPUState *cpu, Error **errp)
++{
++    Object *machine = qdev_get_machine();
++
++    /* qdev_get_machine() can return something that's not TYPE_MACHINE
++     * if this is one of the user-only emulators; in that case there's
++     * no need to check the ignore_memory_transaction_failures board flag.
++     */
++    if (object_dynamic_cast(machine, TYPE_MACHINE)) {
++        MachineClass *mc = MACHINE_GET_CLASS(machine);
++
++        if (mc) {
++            cpu->ignore_memory_transaction_failures =
++                mc->ignore_memory_transaction_failures;
++        }
++    }
++
++    if (DEVICE(cpu)->hotplugged) {
++        cpu_synchronize_post_init(cpu);
++        cpu_resume(cpu);
++    }
++
++}
++
+ static bool cpu_common_exception_index_needed(void *opaque)
+ {
+     CPUState *cpu = opaque;
+diff --git a/hw/core/cpu-user.c b/hw/core/cpu-user.c
+index c2cb00a85d3..1e38c88f9bd 100644
+--- a/hw/core/cpu-user.c
++++ b/hw/core/cpu-user.c
+@@ -38,6 +38,11 @@ void cpu_exec_init(CPUState *cpu)
+     /* nothing to do */
+ }
  
--    cpu_exec_realizefn(cs, &local_err);
-+    cpu_common_realize(cs, &local_err);
-     if (local_err != NULL) {
-         error_propagate(errp, local_err);
-         return;
-diff --git a/target/hexagon/cpu.c b/target/hexagon/cpu.c
-index 12d27ce1381..8e3b900e8d9 100644
---- a/target/hexagon/cpu.c
-+++ b/target/hexagon/cpu.c
-@@ -450,7 +450,7 @@ static void hexagon_cpu_realize(DeviceState *dev, Error **errp)
-     HexagonCPUClass *mcc = HEXAGON_CPU_GET_CLASS(dev);
-     Error *local_err = NULL;
- 
--    cpu_exec_realizefn(cs, &local_err);
-+    cpu_common_realize(cs, &local_err);
-     if (local_err != NULL) {
-         error_propagate(errp, local_err);
-         return;
-diff --git a/target/hppa/cpu.c b/target/hppa/cpu.c
-index a68152f9682..07b49e51326 100644
---- a/target/hppa/cpu.c
-+++ b/target/hppa/cpu.c
-@@ -181,7 +181,7 @@ static void hppa_cpu_realizefn(DeviceState *dev, Error **errp)
-     HPPACPUClass *acc = HPPA_CPU_GET_CLASS(dev);
-     Error *local_err = NULL;
- 
--    cpu_exec_realizefn(cs, &local_err);
-+    cpu_common_realize(cs, &local_err);
-     if (local_err != NULL) {
-         error_propagate(errp, local_err);
-         return;
-diff --git a/target/i386/cpu.c b/target/i386/cpu.c
-index 5805d33ab92..9b2aa178062 100644
---- a/target/i386/cpu.c
-+++ b/target/i386/cpu.c
-@@ -10164,7 +10164,7 @@ static void x86_cpu_realizefn(DeviceState *dev, Error **errp)
-      * These may be set by the accel-specific code,
-      * and the results are subsequently checked / assumed in this function.
-      */
--    cpu_exec_realizefn(cs, &local_err);
-+    cpu_common_realize(cs, &local_err);
-     if (local_err != NULL) {
-         error_propagate(errp, local_err);
-         return;
-@@ -10179,7 +10179,7 @@ static void x86_cpu_realizefn(DeviceState *dev, Error **errp)
-     if (cpu->guest_phys_bits == -1) {
-         /*
-          * If it was not set by the user, or by the accelerator via
--         * cpu_exec_realizefn, clear.
-+         * cpu_common_realize, clear.
-          */
-         cpu->guest_phys_bits = 0;
-     }
-@@ -10188,7 +10188,7 @@ static void x86_cpu_realizefn(DeviceState *dev, Error **errp)
-         /*
-          * The default is the same as KVM's. Note that this check
-          * needs to happen after the evenual setting of ucode_rev in
--         * accel-specific code in cpu_exec_realizefn.
-+         * accel-specific code in cpu_common_realize.
-          */
-         if (IS_AMD_CPU(env)) {
-             cpu->ucode_rev = 0x01000065;
-@@ -10201,7 +10201,7 @@ static void x86_cpu_realizefn(DeviceState *dev, Error **errp)
-      * mwait extended info: needed for Core compatibility
-      * We always wake on interrupt even if host does not have the capability.
-      *
--     * requires the accel-specific code in cpu_exec_realizefn to
-+     * requires the accel-specific code in cpu_common_realize to
-      * have already acquired the CPUID data into cpu->mwait.
-      */
-     cpu->mwait.ecx |= CPUID_MWAIT_EMX | CPUID_MWAIT_IBE;
-@@ -10230,7 +10230,7 @@ static void x86_cpu_realizefn(DeviceState *dev, Error **errp)
-      * Note that this code assumes features expansion has already been done
-      * (as it checks for CPUID_EXT2_LM), and also assumes that potential
-      * phys_bits adjustments to match the host have been already done in
--     * accel-specific code in cpu_exec_realizefn.
-+     * accel-specific code in cpu_common_realize.
-      */
-     if (env->features[FEAT_8000_0001_EDX] & CPUID_EXT2_LM) {
-         if (cpu->phys_bits && cpu->phys_bits < 32) {
-diff --git a/target/i386/kvm/kvm-cpu.c b/target/i386/kvm/kvm-cpu.c
-index e164cef2036..da8d77ade06 100644
---- a/target/i386/kvm/kvm-cpu.c
-+++ b/target/i386/kvm/kvm-cpu.c
-@@ -57,7 +57,7 @@ static bool kvm_cpu_realizefn(CPUState *cs, Error **errp)
-      *
-      * x86_cpu_realizefn():
-      *   x86_cpu_expand_features()
--     *   cpu_exec_realizefn():
-+     *   cpu_common_realize():
-      *      accel_cpu_common_realize()
-      *        kvm_cpu_realizefn()
-      *          host_cpu_realizefn()
-diff --git a/target/loongarch/cpu.c b/target/loongarch/cpu.c
-index fb03424ffa8..cb07f15110f 100644
---- a/target/loongarch/cpu.c
-+++ b/target/loongarch/cpu.c
-@@ -704,7 +704,7 @@ static void loongarch_cpu_realizefn(DeviceState *dev, Error **errp)
-     LoongArchCPUClass *lacc = LOONGARCH_CPU_GET_CLASS(dev);
-     Error *local_err = NULL;
- 
--    cpu_exec_realizefn(cs, &local_err);
-+    cpu_common_realize(cs, &local_err);
-     if (local_err != NULL) {
-         error_propagate(errp, local_err);
-         return;
-diff --git a/target/m68k/cpu.c b/target/m68k/cpu.c
-index 9ad3057d91c..ce2707dee5a 100644
---- a/target/m68k/cpu.c
-+++ b/target/m68k/cpu.c
-@@ -389,7 +389,7 @@ static void m68k_cpu_realizefn(DeviceState *dev, Error **errp)
- 
-     register_m68k_insns(&cpu->env);
- 
--    cpu_exec_realizefn(cs, &local_err);
-+    cpu_common_realize(cs, &local_err);
-     if (local_err != NULL) {
-         error_propagate(errp, local_err);
-         return;
-diff --git a/target/microblaze/cpu.c b/target/microblaze/cpu.c
-index a97c92a7b68..389a5124b12 100644
---- a/target/microblaze/cpu.c
-+++ b/target/microblaze/cpu.c
-@@ -251,7 +251,7 @@ static void mb_cpu_realizefn(DeviceState *dev, Error **errp)
-     int i = 0;
-     Error *local_err = NULL;
- 
--    cpu_exec_realizefn(cs, &local_err);
-+    cpu_common_realize(cs, &local_err);
-     if (local_err != NULL) {
-         error_propagate(errp, local_err);
-         return;
-diff --git a/target/mips/cpu.c b/target/mips/cpu.c
-index d72044aef61..669c7d99bb7 100644
---- a/target/mips/cpu.c
-+++ b/target/mips/cpu.c
-@@ -544,7 +544,7 @@ static void mips_cpu_realizefn(DeviceState *dev, Error **errp)
-     }
-     mips_cp0_period_set(cpu);
- 
--    cpu_exec_realizefn(cs, &local_err);
-+    cpu_common_realize(cs, &local_err);
-     if (local_err != NULL) {
-         error_propagate(errp, local_err);
-         return;
-diff --git a/target/or1k/cpu.c b/target/or1k/cpu.c
-index ea29b2e01fa..66c00c0930c 100644
---- a/target/or1k/cpu.c
-+++ b/target/or1k/cpu.c
-@@ -170,7 +170,7 @@ static void openrisc_cpu_realizefn(DeviceState *dev, Error **errp)
-     OpenRISCCPUClass *occ = OPENRISC_CPU_GET_CLASS(dev);
-     Error *local_err = NULL;
- 
--    cpu_exec_realizefn(cs, &local_err);
-+    cpu_common_realize(cs, &local_err);
-     if (local_err != NULL) {
-         error_propagate(errp, local_err);
-         return;
-diff --git a/target/ppc/cpu_init.c b/target/ppc/cpu_init.c
-index f404c7e549d..b07e9c3ff9c 100644
---- a/target/ppc/cpu_init.c
-+++ b/target/ppc/cpu_init.c
-@@ -6921,7 +6921,7 @@ static void ppc_cpu_realize(DeviceState *dev, Error **errp)
-     PowerPCCPUClass *pcc = POWERPC_CPU_GET_CLASS(cpu);
-     Error *local_err = NULL;
- 
--    cpu_exec_realizefn(cs, &local_err);
-+    cpu_common_realize(cs, &local_err);
-     if (local_err != NULL) {
-         error_propagate(errp, local_err);
-         return;
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 5a82e6563bf..23b5023dd37 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -1226,7 +1226,7 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
-     RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(dev);
-     Error *local_err = NULL;
- 
--    cpu_exec_realizefn(cs, &local_err);
-+    cpu_common_realize(cs, &local_err);
-     if (local_err != NULL) {
-         error_propagate(errp, local_err);
-         return;
-diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-index 495cb42dc89..97069bf597a 100644
---- a/target/riscv/kvm/kvm-cpu.c
-+++ b/target/riscv/kvm/kvm-cpu.c
-@@ -2006,7 +2006,7 @@ static void kvm_cpu_instance_init(CPUState *cs)
-  * We'll get here via the following path:
-  *
-  * riscv_cpu_realize()
-- *   -> cpu_exec_realizefn()
-+ *   -> cpu_common_realize()
-  *      -> kvm_cpu_realize() (via accel_cpu_common_realize())
-  */
- static bool kvm_cpu_realize(CPUState *cs, Error **errp)
-diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-index 4af5cd9c731..9e3cc87f8a3 100644
---- a/target/riscv/tcg/tcg-cpu.c
-+++ b/target/riscv/tcg/tcg-cpu.c
-@@ -1304,7 +1304,7 @@ static void riscv_cpu_set_profile(RISCVCPU *cpu,
-  * We'll get here via the following path:
-  *
-  * riscv_cpu_realize()
-- *   -> cpu_exec_realizefn()
-+ *   -> cpu_common_realize()
-  *      -> tcg_cpu_realize() (via accel_cpu_common_realize())
-  */
- static bool riscv_tcg_cpu_realize(CPUState *cs, Error **errp)
-diff --git a/target/rx/cpu.c b/target/rx/cpu.c
-index 20b188c24cd..9b8473d71cf 100644
---- a/target/rx/cpu.c
-+++ b/target/rx/cpu.c
-@@ -147,7 +147,7 @@ static void rx_cpu_realize(DeviceState *dev, Error **errp)
-     RXCPUClass *rcc = RX_CPU_GET_CLASS(dev);
-     Error *local_err = NULL;
- 
--    cpu_exec_realizefn(cs, &local_err);
-+    cpu_common_realize(cs, &local_err);
-     if (local_err != NULL) {
-         error_propagate(errp, local_err);
-         return;
-diff --git a/target/s390x/cpu.c b/target/s390x/cpu.c
-index c074e12ba2d..641ea96c8ea 100644
---- a/target/s390x/cpu.c
-+++ b/target/s390x/cpu.c
-@@ -249,7 +249,7 @@ static void s390_cpu_realizefn(DeviceState *dev, Error **errp)
-     }
- #endif
- 
--    cpu_exec_realizefn(cs, &err);
-+    cpu_common_realize(cs, &err);
-     if (err != NULL) {
-         goto out;
-     }
-diff --git a/target/sh4/cpu.c b/target/sh4/cpu.c
-index 763424695c6..ad2ec28c1b7 100644
---- a/target/sh4/cpu.c
-+++ b/target/sh4/cpu.c
-@@ -250,7 +250,7 @@ static void superh_cpu_realizefn(DeviceState *dev, Error **errp)
-     SuperHCPUClass *scc = SUPERH_CPU_GET_CLASS(dev);
-     Error *local_err = NULL;
- 
--    cpu_exec_realizefn(cs, &local_err);
-+    cpu_common_realize(cs, &local_err);
-     if (local_err != NULL) {
-         error_propagate(errp, local_err);
-         return;
-diff --git a/target/sparc/cpu.c b/target/sparc/cpu.c
-index 13ebb122a38..1bc14b586bb 100644
---- a/target/sparc/cpu.c
-+++ b/target/sparc/cpu.c
-@@ -892,7 +892,7 @@ static void sparc_cpu_realizefn(DeviceState *dev, Error **errp)
-     /* Default NaN value: sign bit clear, all frac bits set */
-     set_float_default_nan_pattern(0b01111111, &env->fp_status);
- 
--    cpu_exec_realizefn(cs, &local_err);
-+    cpu_common_realize(cs, &local_err);
-     if (local_err != NULL) {
-         error_propagate(errp, local_err);
-         return;
-diff --git a/target/tricore/cpu.c b/target/tricore/cpu.c
-index 472c24ae32d..96e2817dee7 100644
---- a/target/tricore/cpu.c
-+++ b/target/tricore/cpu.c
-@@ -99,7 +99,7 @@ static void tricore_cpu_realizefn(DeviceState *dev, Error **errp)
-     CPUTriCoreState *env = &cpu->env;
-     Error *local_err = NULL;
- 
--    cpu_exec_realizefn(cs, &local_err);
-+    cpu_common_realize(cs, &local_err);
-     if (local_err != NULL) {
-         error_propagate(errp, local_err);
-         return;
-diff --git a/target/xtensa/cpu.c b/target/xtensa/cpu.c
-index 2015a4e3d0d..7c25b9ab707 100644
---- a/target/xtensa/cpu.c
-+++ b/target/xtensa/cpu.c
-@@ -257,7 +257,7 @@ static void xtensa_cpu_realizefn(DeviceState *dev, Error **errp)
-     xtensa_irq_init(&XTENSA_CPU(dev)->env);
- #endif
- 
--    cpu_exec_realizefn(cs, &local_err);
-+    cpu_common_realize(cs, &local_err);
-     if (local_err != NULL) {
-         error_propagate(errp, local_err);
-         return;
++void cpu_exec_realize(CPUState *cpu, Error **errp)
++{
++    /* nothing to do */
++}
++
+ void cpu_vmstate_register(CPUState *cpu)
+ {
+     assert(qdev_get_vmsd(DEVICE(cpu)) == NULL ||
 -- 
 2.53.0
 
