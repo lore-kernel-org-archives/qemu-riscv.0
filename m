@@ -4,88 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 992CFC5AD7B
-	for <qemu-riscv@archiver.kernel.org>; Tue, 11 Aug 2026 02:56:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A611EC5AD55
+	for <qemu-riscv@archiver.kernel.org>; Tue, 11 Aug 2026 05:06:07 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wtcfL-0001Gx-Tf; Mon, 10 Aug 2026 22:56:35 -0400
+	id 1wtegb-0004gF-K5; Tue, 11 Aug 2026 01:06:01 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <fritchleybohrer@gmail.com>)
- id 1wtcfH-0001Fj-5M
- for qemu-riscv@nongnu.org; Mon, 10 Aug 2026 22:56:31 -0400
-Received: from mail-pj2-x01.google.com ([2607:f8b0:4864:39::1])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <fritchleybohrer@gmail.com>)
- id 1wtcfF-00010a-9A
- for qemu-riscv@nongnu.org; Mon, 10 Aug 2026 22:56:30 -0400
-Received: by mail-pj2-x01.google.com with SMTP id
- 98e67ed59e1d1-380feaa05dcso174036a91.0
- for <qemu-riscv@nongnu.org>; Mon, 10 Aug 2026 19:56:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1786416986; x=1787021786; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=w3g0iNUt0PqnUC5RDZ96oHSdoMsOfnoVQFlo2FOzFug=;
- b=NIaM5H8gpZpJfyu5D4m2nCPJ0r04VX3sB9uk9Cnz1sRsVe3ywtz2KrFN4qXAiYRRg5
- PREu9v2/7C7OLmmwE7x017UF8j250RwQ+FIIYt/lI6+MPqr9JdYqUMdS1eFeQOHFY9tI
- zwoD477B3IXxqi57flltMzv+ekTRPzsTwprb5ZUac8a5F8Lqh19eKR0EegaiCLJexu5R
- cYryOPg7GwKQjKDtunRBD6ClUs0EJCAx639lWwDxlaoudrD0zHou+szuVIeNI8T2kTv9
- wTIndA7yrpYskvJgvf7qg5EIAHv+1wndHiMsXRSbl4UezapvaORe11zKI+HJxWMXE6cE
- OVVQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786416986; x=1787021786;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=w3g0iNUt0PqnUC5RDZ96oHSdoMsOfnoVQFlo2FOzFug=;
- b=eJ7e0l35fqcvTRu6xUCc5WCJ/+fhxqFHlWGrhsnV6vQka8Z8LXTnWTYLGbKxgsgH6/
- k+Vq758xwdjDloCr1E0T5ijYWPWa6h9QwXD9w0lekUq9JoQNrMeF/AEEPPfOHHluRb1i
- vZr9yzyAoYqFGlEbEcJA8uP5q9ZBdnmnThuGBqrp5mMU76v+CKannm0625BQlf4P2xCn
- fzdwbmkDuZVpYK7qMA5d9JhYZDRLdJW0Yu9mgC+zM8n5h+MBlMaTOgah8LoDXn/y5oAm
- 98NlZKPXheTlM9w0PxjgBJMu/+kMZYcdABCe2iqbUvyU51gVN8rrYODaa3ZSUBIMBcq2
- Nprw==
-X-Gm-Message-State: AOJu0YzPYRGCsBb4F7x51RbVHz0dVGM8Z+bMIPgA+/fjsGrBs0M31585
- VDQiUzZQZULzY5kpYpR1loJHJkzEy8qfAlNVKRAf7ZYRPskHXTQb1rhl
-X-Gm-Gg: AR+sD12DaYExCBoEQ/rwDa6BpOZImMrGwHazUeVTUI2Ds+Am+LDrhoFrM4DpGxQfWeI
- 265IBA1LDWNKR9aXMJscaB/nt9rZMFNzg57LNITZp9s7msoZ3xnwsvsXcQCvKyHP0zVr9DwHLhm
- O8ESvdq/kaz9PtFCU8iaablHSV6BwGRT91FlfcEryLwjmBiH89pXySB+aWyEm1pbyX5hwhKSauX
- 9zDTSsaCWdidcv1sdb48/2CQvFrFMINKWav1NAAPGJc/XlNLf1GpUqQcEjeOQkgUzcZvAPH7hHI
- SKyK1m+pc+mxHW0lge9/7LF3pT8cXwKuzNkjFhtuLNvbnjUuYKCc++OwWefF+lC6tJBI68JWcUC
- vBrlCs3XfJ80DKSY1L/mP0ElbqVwCC2flWhh7B4qlE4sEGPDVWxguUyNh/zP0lC8wvTrhmF+VDt
- v11vhC+lRcTHJwlh2RZ5IcWCNsDPx7GCMm0yrLkKSbhuglSu2blT9ZeFK4OuETME6Dz+JQOcpQJ
- k9by5/Kn8+kjQyv
-X-Received: by 2002:a17:90b:1c03:b0:37c:6910:5758 with SMTP id
- 98e67ed59e1d1-392ec3958bemr128194a91.1.1786416985996; 
- Mon, 10 Aug 2026 19:56:25 -0700 (PDT)
-Received: from Dell-WorkStation.localdomain ([123.150.5.13])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-392d4051b98sm1636237a91.1.2026.08.10.19.56.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 10 Aug 2026 19:56:25 -0700 (PDT)
-From: Zephyr Li <fritchleybohrer@gmail.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
- liwei1518@gmail.com, daniel.barboza@oss.qualcomm.com,
- zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
- Zephyr Li <fritchleybohrer@gmail.com>
-Subject: [PATCH v3] target/riscv: preserve vl on element-zero fault
-Date: Tue, 11 Aug 2026 10:55:15 +0800
-Message-ID: <20260811025516.337888-1-fritchleybohrer@gmail.com>
-X-Mailer: git-send-email 2.43.0
+ (Exim 4.90_1) (envelope-from <wangyang25@otcaix.iscas.ac.cn>)
+ id 1wtbEj-0007kS-TO; Mon, 10 Aug 2026 21:25:01 -0400
+Received: from smtp21.cstnet.cn ([159.226.251.21] helo=cstnet.cn)
+ by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
+ (Exim 4.90_1) (envelope-from <wangyang25@otcaix.iscas.ac.cn>)
+ id 1wtbEg-0007YY-Ix; Mon, 10 Aug 2026 21:25:01 -0400
+Received: from DESKTOP-7FLBREN (unknown [124.16.137.194])
+ by APP-01 (Coremail) with SMTP id qwCowABXLfHjeXpqxxPZBA--.17429S8;
+ Tue, 11 Aug 2026 09:24:51 +0800 (CST)
+Message-ID: <557b211d0437473ca5e72f37f9def4d9@wangyang25.otcaix.iscas.ac.cn>
+In-Reply-To: SENT
+ 0001-linux-user-riscv-honor-zicntr-false-for-base-counter.patch   Subject:
+ [PATCH 1/7] linux-user/riscv: honor zicntr=false for base counter CSRs  
+ Message-ID:
+ <f73caf0640c1446db5c566f1bb005966@wangyang25.otcaix.iscas.ac.cn>
+ <f73caf0640c1446db5c566f1bb005966@wangyang25.otcaix.iscas.ac.cn>
+References: SENT
+ 0001-linux-user-riscv-honor-zicntr-false-for-base-counter.patch   Subject:
+ [PATCH 1/7] linux-user/riscv: honor zicntr=false for base counter CSRs  
+ Message-ID:
+ <f73caf0640c1446db5c566f1bb005966@wangyang25.otcaix.iscas.ac.cn>
+ <f73caf0640c1446db5c566f1bb005966@wangyang25.otcaix.iscas.ac.cn>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:39::1;
- envelope-from=fritchleybohrer@gmail.com; helo=mail-pj2-x01.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+From: "wangyang" <wangyang25@otcaix.iscas.ac.cn>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com
+Date: 11 Aug 2026 09:24:52 +0800
+Subject: [PATCH 6/7] target/riscv: rvv: accept v1.0-legal overlap in
+ widening accumulate instructions
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: base64
+X-CM-TRANSID: qwCowABXLfHjeXpqxxPZBA--.17429S8
+X-Coremail-Antispam: 1UD129KBjvJXoWxWr4kAry5ZF1rZr17JF15XFb_yoW7JFWxp3
+ yrK3yrWrnrKFyrJan5tr4DCr1vqr1rKFWfG3WFv3Z5JayrJrs8Ga4jkw4Fyr18AFZ5Jr1a
+ kFyUAw4rCFW7Ka7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUQ2b7Iv0xC_Kw4lb4IE77IF4wAFF20E14v26rWj6s0DM7CY07I2
+ 0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI
+ 8067AKxVWUAVCq3wA2048vs2IY020Ec7CjxVAFwI0_Gr0_Xr1l8cAvFVAK0II2c7xJM28C
+ jxkF64kEwVA0rcxSw2x7M28EF7xvwVC0I7IYx2IY67AKxVW8JVW5JwA2z4x0Y4vE2Ix0cI
+ 8IcVCY1x0267AKxVW8JVWxJwA2z4x0Y4vEx4A2jsIE14v26r4j6F4UM28EF7xvwVC2z280
+ aVCY1x0267AKxVW8JVW8Jr1lnxkEFVAIw20F6cxK64vIFxWle2I262IYc4CY6c8Ij28IcV
+ AaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2Ix0cI8IcVAFwI0_JF0_Jw1lYx0E
+ x4A2jsIE14v26r4j6F4UMcvjeVCFs4IE7xkEbVWUJVW8JwACjcxG0xvEwIxGrwACY4xI67
+ k04243AVAKzVAKj4xxMxkIecxEwVAFwVWkMxAIw28IcxkI7VAKI48JMxC20s026xCaFVCj
+ c4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4
+ CE17CEb7AF67AKxVWUAVWUtwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r4j6ryU
+ MIIF0xvE2Ix0cI8IcVCY1x0267AKxVW8JVWxJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF
+ 4lIxAIcVC2z280aVAFwI0_Gr0_Cr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8Jr1l6VAC
+ Y4xI67k04243AbIYCTnIWIevJa73UjIFyTuYvjxUk6wZDUUUU
+X-Originating-IP: [124.16.137.194]
+X-CM-SenderInfo: 5zdqw5xdqjjk46rwut1l0ox2xfdvhtffof0/
+Received-SPF: pass client-ip=159.226.251.21;
+ envelope-from=wangyang25@otcaix.iscas.ac.cn; helo=cstnet.cn
+X-Spam_score_int: -41
+X-Spam_score: -4.2
+X-Spam_bar: ----
+X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Tue, 11 Aug 2026 01:05:57 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -100,182 +86,105 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-A unit-stride fault-only-first load must leave vl unchanged when element
-zero raises a synchronous exception. Keep the shortened value in a local
-bound until all loads complete, and only then update the architectural vl.
+Q29tbWl0IDFmMDkwYTIyICgidGFyZ2V0L3Jpc2N2OiBydnY6IEFwcGx5IHZleHRfY2hl
+Y2tfaW5wdXRfZWV3IHRvIHZlY3Rvcg0KbmFycm93L3dpZGVuIGluc3RydWN0aW9ucyIp
+IGFkZGVkIHZleHRfY2hlY2tfaW5wdXRfZWV3KCkgY2FsbHMgdGhhdCB0cmVhdA0KdGhl
+IGRlc3RpbmF0aW9uIHJlZ2lzdGVyIGdyb3VwIG9mIHdpZGVuaW5nIG11bHRpcGx5LWFj
+Y3VtdWxhdGUNCmluc3RydWN0aW9ucyAodndtYWNjKi52di8udngsIHZmd21hY2MqLnZ2
+Ly52ZiwgdmZ3bWFjY2JmMTYpIGFzIGFuIGlucHV0DQpyZWFkIHdpdGggRUVXPTIqU0VX
+LCBhbmQgcmVqZWN0IGFueSBvdmVybGFwIHdpdGggdGhlIFNFVy13aWRlIHNvdXJjZXMu
+DQoNClRoYXQgaW1wbGVtZW50cyB0aGUgInNhbWUgdmVjdG9yIHJlZ2lzdGVyIHJlYWQg
+d2l0aCB0d28gZGlmZmVyZW50IEVFV3MgaXMNCnJlc2VydmVkIiBydWxlIGFkZGVkIGlu
+IHRoZSBWLWV4dGVuc2lvbiAxLjEgZHJhZnQuICBUaGUgcmF0aWZpZWQgVi0xLjANCnNw
+ZWNpZmljYXRpb24gKFNlY3Rpb24gNS4yKSBpbnN0ZWFkIGFsbG93cyBhIHdpZGVuaW5n
+IGRlc3RpbmF0aW9uIGdyb3VwDQp0byBvdmVybGFwIGEgc291cmNlIHdoZW4gdGhlIHNv
+dXJjZSBpcyB0aGUgaGlnaGVzdC1udW1iZXJlZCBwYXJ0IG9mIHRoZQ0KZGVzdGluYXRp
+b24gZ3JvdXAuICBGb3IgZXhhbXBsZSwgd2l0aCBTRVc9OC9MTVVMPTEsIHZ3bWFjY3Uu
+dnYgdjIsIHYxLCB2Mw0KKGRlc3RpbmF0aW9uIGdyb3VwIHt2Mix2M30sIHNvdXJjZSB2
+czI9djMpIGlzIGxlZ2FsIHVuZGVyIFYtMS4wIGJ1dA0KcmFpc2VzIGFuIGlsbGVnYWwt
+aW5zdHJ1Y3Rpb24gZXhjZXB0aW9uIGluIFFFTVUuDQoNClFFTVUgb25seSBzdXBwb3J0
+cyB2ZXh0X3NwZWM9djEuMCwgc28gbGVnYWwgVi0xLjAgcHJvZ3JhbXMgbXVzdCBydW4u
+ICBUaGUNCmdlbnVpbmVseSByZXNlcnZlZCBvdmVybGFwIGNhc2VzIGFyZSBhbHJlYWR5
+IHJlamVjdGVkIGJ5DQpyZXF1aXJlX25vb3ZlcigpL3JlcXVpcmVfYWxpZ24oKSBpbiB2
+ZXh0X2NoZWNrX2RzcygpL3ZleHRfY2hlY2tfZHMoKSwgc28NCmRyb3BwaW5nIHRoZSBl
+eHRyYSBpbnB1dC1FRVcgY2hlY2tzIG9ubHkgdW4tcmVqZWN0cyBlbmNvZGluZ3MgdGhh
+dCBWLTEuMA0KZXhwbGljaXRseSBhbGxvd3MuICBSZWFsIFYtMS4wIGhhcmR3YXJlIChT
+cGFjZW1pVCBYNjAsIExpbnV4IDYuNi42MykNCmV4ZWN1dGVzIHRoZXNlIGVuY29kaW5n
+cy4NCg0KUmVzb2x2ZXM6IGh0dHBzOi8vZ2l0bGFiLmNvbS9xZW11LXByb2plY3QvcWVt
+dS8tL3dvcmtfaXRlbXMvNDE1Mw0KU2lnbmVkLW9mZi1ieTogd2FuZ3lhbmcgPHdhbmd5
+YW5nMjVAb3RjYWl4LmlzY2FzLmFjLmNuPg0KLS0tDQogdGFyZ2V0L3Jpc2N2L3RjZy9p
+bnNuX3RyYW5zL3RyYW5zX3J2YmYxNi5jLmluYyB8ICA5ICsrLS0tLS0tLQ0KIHRhcmdl
+dC9yaXNjdi90Y2cvaW5zbl90cmFucy90cmFuc19ydnYuYy5pbmMgICAgfCAxNCArKysr
+LS0tLS0tLS0tLQ0KIDIgZmlsZXMgY2hhbmdlZCwgNiBpbnNlcnRpb25zKCspLCAxNyBk
+ZWxldGlvbnMoLSkNCg0KZGlmZiAtLWdpdCBhL3RhcmdldC9yaXNjdi90Y2cvaW5zbl90
+cmFucy90cmFuc19ydmJmMTYuYy5pbmMgYi90YXJnZXQvcmlzY3YvdGNnL2luc25fdHJh
+bnMvdHJhbnNfcnZiZjE2LmMuaW5jDQppbmRleCAwNjZkYzM2NGM1Yi4uMGE5Y2QxZWMz
+MTUgMTAwNjQ0DQotLS0gYS90YXJnZXQvcmlzY3YvdGNnL2luc25fdHJhbnMvdHJhbnNf
+cnZiZjE2LmMuaW5jDQorKysgYi90YXJnZXQvcmlzY3YvdGNnL2luc25fdHJhbnMvdHJh
+bnNfcnZiZjE2LmMuaW5jDQpAQCAtMTE5LDExICsxMTksOCBAQCBzdGF0aWMgYm9vbCB0
+cmFuc192ZndtYWNjYmYxNl92dihEaXNhc0NvbnRleHQgKmN0eCwgYXJnX3Zmd21hY2Ni
+ZjE2X3Z2ICphKQ0KICAgICBSRVFVSVJFX0ZQVTsNCiAgICAgUkVRVUlSRV9aVkZCRldN
+QShjdHgpOw0KIA0KLSAgICB1aW50OF90IHNldyA9IGN0eC0+c2V3Ow0KICAgICBpZiAo
+cmVxdWlyZV9ydnYoY3R4KSAmJiB2ZXh0X2NoZWNrX2lzYV9pbGwoY3R4KSAmJiAoY3R4
+LT5zZXcgPT0gTU9fMTYpICYmDQotICAgICAgICB2ZXh0X2NoZWNrX2RzcyhjdHgsIGEt
+PnJkLCBhLT5yczEsIGEtPnJzMiwgYS0+dm0pICYmDQotICAgICAgICB2ZXh0X2NoZWNr
+X2lucHV0X2VldyhjdHgsIGEtPnJkLCBzZXcgKyAxLCBhLT5yczEsIHNldywgYS0+dm0p
+ICYmDQotICAgICAgICB2ZXh0X2NoZWNrX2lucHV0X2VldyhjdHgsIGEtPnJkLCBzZXcg
+KyAxLCBhLT5yczIsIHNldywgYS0+dm0pKSB7DQorICAgICAgICB2ZXh0X2NoZWNrX2Rz
+cyhjdHgsIGEtPnJkLCBhLT5yczEsIGEtPnJzMiwgYS0+dm0pKSB7DQogICAgICAgICB1
+aW50MzJfdCBkYXRhID0gMDsNCiANCiAgICAgICAgIGdlbl9zZXRfcm1fY2hrZnJtKGN0
+eCwgUklTQ1ZfRlJNX0RZTik7DQpAQCAtMTQ5LDEwICsxNDYsOCBAQCBzdGF0aWMgYm9v
+bCB0cmFuc192ZndtYWNjYmYxNl92ZihEaXNhc0NvbnRleHQgKmN0eCwgYXJnX3Zmd21h
+Y2NiZjE2X3ZmICphKQ0KICAgICBSRVFVSVJFX0ZQVTsNCiAgICAgUkVRVUlSRV9aVkZC
+RldNQShjdHgpOw0KIA0KLSAgICB1aW50OF90IHNldyA9IGN0eC0+c2V3Ow0KICAgICBp
+ZiAocmVxdWlyZV9ydnYoY3R4KSAmJiAoY3R4LT5zZXcgPT0gTU9fMTYpICYmIHZleHRf
+Y2hlY2tfaXNhX2lsbChjdHgpICYmDQotICAgICAgICB2ZXh0X2NoZWNrX2RzKGN0eCwg
+YS0+cmQsIGEtPnJzMiwgYS0+dm0pICYmDQotICAgICAgICB2ZXh0X2NoZWNrX2lucHV0
+X2VldyhjdHgsIGEtPnJkLCBzZXcgKyAxLCBhLT5yczIsIHNldywgYS0+dm0pKSB7DQor
+ICAgICAgICB2ZXh0X2NoZWNrX2RzKGN0eCwgYS0+cmQsIGEtPnJzMiwgYS0+dm0pKSB7
+DQogICAgICAgICB1aW50MzJfdCBkYXRhID0gMDsNCiANCiAgICAgICAgIGdlbl9zZXRf
+cm0oY3R4LCBSSVNDVl9GUk1fRFlOKTsNCmRpZmYgLS1naXQgYS90YXJnZXQvcmlzY3Yv
+dGNnL2luc25fdHJhbnMvdHJhbnNfcnZ2LmMuaW5jIGIvdGFyZ2V0L3Jpc2N2L3RjZy9p
+bnNuX3RyYW5zL3RyYW5zX3J2di5jLmluYw0KaW5kZXggOWI5YTc1MWU1OGUuLmZhMWVl
+ODBiYzU5IDEwMDY0NA0KLS0tIGEvdGFyZ2V0L3Jpc2N2L3RjZy9pbnNuX3RyYW5zL3Ry
+YW5zX3J2di5jLmluYw0KKysrIGIvdGFyZ2V0L3Jpc2N2L3RjZy9pbnNuX3RyYW5zL3Ry
+YW5zX3J2di5jLmluYw0KQEAgLTE1OTgsOSArMTU5OCw3IEBAIHN0YXRpYyBib29sIG9w
+aXZ2X292ZXJ3cml0ZV93aWRlbl9jaGVjayhEaXNhc0NvbnRleHQgKnMsIGFyZ19ybXJy
+ICphKQ0KIHsNCiAgICAgcmV0dXJuIHJlcXVpcmVfcnZ2KHMpICYmDQogICAgICAgICAg
+ICB2ZXh0X2NoZWNrX2lzYV9pbGwocykgJiYNCi0gICAgICAgICAgIHZleHRfY2hlY2tf
+ZHNzKHMsIGEtPnJkLCBhLT5yczEsIGEtPnJzMiwgYS0+dm0pICYmDQotICAgICAgICAg
+ICB2ZXh0X2NoZWNrX2lucHV0X2VldyhzLCBhLT5yZCwgcy0+c2V3ICsgMSwgYS0+cnMx
+LCBzLT5zZXcsIGEtPnZtKSAmJg0KLSAgICAgICAgICAgdmV4dF9jaGVja19pbnB1dF9l
+ZXcocywgYS0+cmQsIHMtPnNldyArIDEsIGEtPnJzMiwgcy0+c2V3LCBhLT52bSk7DQor
+ICAgICAgICAgICB2ZXh0X2NoZWNrX2RzcyhzLCBhLT5yZCwgYS0+cnMxLCBhLT5yczIs
+IGEtPnZtKTsNCiB9DQogDQogc3RhdGljIGJvb2wgZG9fb3BpdnZfd2lkZW4oRGlzYXND
+b250ZXh0ICpzLCBhcmdfcm1yciAqYSwNCkBAIC0xNjU0LDggKzE2NTIsNyBAQCBzdGF0
+aWMgYm9vbCBvcGl2eF9vdmVyd3JpdGVfd2lkZW5fY2hlY2soRGlzYXNDb250ZXh0ICpz
+LCBhcmdfcm1yciAqYSkNCiB7DQogICAgIHJldHVybiByZXF1aXJlX3J2dihzKSAmJg0K
+ICAgICAgICAgICAgdmV4dF9jaGVja19pc2FfaWxsKHMpICYmDQotICAgICAgICAgICB2
+ZXh0X2NoZWNrX2RzKHMsIGEtPnJkLCBhLT5yczIsIGEtPnZtKSAmJg0KLSAgICAgICAg
+ICAgdmV4dF9jaGVja19pbnB1dF9lZXcocywgYS0+cmQsIHMtPnNldyArIDEsIGEtPnJz
+Miwgcy0+c2V3LCBhLT52bSk7DQorICAgICAgICAgICB2ZXh0X2NoZWNrX2RzKHMsIGEt
+PnJkLCBhLT5yczIsIGEtPnZtKTsNCiB9DQogDQogI2RlZmluZSBHRU5fT1BJVlhfV0lE
+RU5fVFJBTlMoTkFNRSwgQ0hFQ0spIFwNCkBAIC0yNTU0LDkgKzI1NTEsNyBAQCBzdGF0
+aWMgYm9vbCBvcGZ2dl93aWRlbl9jaGVjayhEaXNhc0NvbnRleHQgKnMsIGFyZ19ybXJy
+ICphLA0KIHN0YXRpYyBib29sIG9wZnZ2X292ZXJ3cml0ZV93aWRlbl9jaGVjayhEaXNh
+c0NvbnRleHQgKnMsIGFyZ19ybXJyICphLA0KICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICBpbnQ4X3QgdmFsaWRfYmZhX3ZzZXcpDQogew0KLSAgICBy
+ZXR1cm4gb3BmdnZfd2lkZW5fY2hlY2socywgYSwgdmFsaWRfYmZhX3ZzZXcpICYmDQot
+ICAgICAgICAgICB2ZXh0X2NoZWNrX2lucHV0X2VldyhzLCBhLT5yZCwgcy0+c2V3ICsg
+MSwgYS0+cnMxLCBzLT5zZXcsIGEtPnZtKSAmJg0KLSAgICAgICAgICAgdmV4dF9jaGVj
+a19pbnB1dF9lZXcocywgYS0+cmQsIHMtPnNldyArIDEsIGEtPnJzMiwgcy0+c2V3LCBh
+LT52bSk7DQorICAgIHJldHVybiBvcGZ2dl93aWRlbl9jaGVjayhzLCBhLCB2YWxpZF9i
+ZmFfdnNldyk7DQogfQ0KIA0KIC8qIE9QRlZWIHdpdGggV0lERU4gKi8NCkBAIC0yNjMx
+LDggKzI2MjYsNyBAQCBzdGF0aWMgYm9vbCBvcGZ2Zl93aWRlbl9jaGVjayhEaXNhc0Nv
+bnRleHQgKnMsIGFyZ19ybXJyICphLA0KIHN0YXRpYyBib29sIG9wZnZmX292ZXJ3cml0
+ZV93aWRlbl9jaGVjayhEaXNhc0NvbnRleHQgKnMsIGFyZ19ybXJyICphLA0KICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBpbnQ4X3QgdmFsaWRfYmZh
+X3ZzZXcpDQogew0KLSAgICByZXR1cm4gb3BmdmZfd2lkZW5fY2hlY2socywgYSwgdmFs
+aWRfYmZhX3ZzZXcpICYmDQotICAgICAgICAgICB2ZXh0X2NoZWNrX2lucHV0X2Vldyhz
+LCBhLT5yZCwgcy0+c2V3ICsgMSwgYS0+cnMyLCBzLT5zZXcsIGEtPnZtKTsNCisgICAg
+cmV0dXJuIG9wZnZmX3dpZGVuX2NoZWNrKHMsIGEsIHZhbGlkX2JmYV92c2V3KTsNCiB9
+DQogDQogLyogT1BGVkYgd2l0aCBXSURFTiAqLw0KLS0gDQoyLjQzLjANCg==
 
-Add a bare-metal RVV regression test which faults vle32ff.v on element zero
-and checks that vl remains unchanged in the trap handler.
-
-Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/3544
-Signed-off-by: Zephyr Li <fritchleybohrer@gmail.com>
----
-Changes in v3:
-- Rebase onto current master.
-- Regenerate the patch to fix the malformed v2 submission.
-
-Changes in v2:
-- Fix commit message formatting.
-- Enable vector state in the bare-metal test.
-- Use an aligned unmapped address and compare against the vsetvli result.
-- Express the mstatus.VS setting as a field shift.
-
- target/riscv/tcg/vector_helper.c          | 23 +++++----
- tests/tcg/riscv64/Makefile.softmmu-target |  5 ++
- tests/tcg/riscv64/test-vle32ff.S          | 57 +++++++++++++++++++++++
- 3 files changed, 76 insertions(+), 9 deletions(-)
- create mode 100644 tests/tcg/riscv64/test-vle32ff.S
-
-diff --git a/target/riscv/tcg/vector_helper.c b/target/riscv/tcg/vector_helper.c
-index e321ca2616..5a310822b7 100644
---- a/target/riscv/tcg/vector_helper.c
-+++ b/target/riscv/tcg/vector_helper.c
-@@ -686,7 +686,7 @@ vext_ldff(void *vd, void *v0, target_ulong base, CPURISCVState *env,
-           uint32_t desc, vext_ldst_elem_fn_tlb *ldst_tlb,
-           vext_ldst_elem_fn_host *ldst_host, uint32_t log2_esz, uintptr_t ra)
- {
--    uint32_t i, k, vl = 0;
-+    uint32_t i, k, vl = 0, load_vl;
-     uint32_t nf = vext_nf(desc);
-     uint32_t vm = vext_vm(desc);
-     uint32_t max_elems = vext_max_elems(desc, log2_esz);
-@@ -752,22 +752,24 @@ vext_ldff(void *vd, void *v0, target_ulong base, CPURISCVState *env,
-         }
-     }
- ProbeSuccess:
--    /* load bytes from guest memory */
--    if (vl != 0) {
--        env->vl = vl;
--    }
-+    /*
-+     * Keep a shortened vl local until all loads complete. In particular,
-+     * an exception from element zero must leave the architectural vl alone.
-+     */
-+    load_vl = vl ? vl : env->vl;
- 
--    if (env->vstart < env->vl) {
-+    if (env->vstart < load_vl) {
-         if (vm) {
-             /* Load/store elements in the first page */
-             if (likely(elems)) {
-+                elems = MIN(elems, load_vl - env->vstart);
-                 vext_page_ldst_us(env, vd, addr, elems, nf, max_elems,
-                                   log2_esz, true, mmu_index, ldst_tlb,
-                                   ldst_host, ra);
-             }
- 
-             /* Load/store elements in the second page */
--            if (unlikely(env->vstart < env->vl)) {
-+            if (unlikely(env->vstart < load_vl)) {
-                 /* Cross page element */
-                 if (unlikely(page_split % msize)) {
-                     for (k = 0; k < nf; k++) {
-@@ -780,7 +782,7 @@ ProbeSuccess:
- 
-                 addr = base + ((env->vstart * nf) << log2_esz);
-                 /* Get number of elements of second page */
--                elems = env->vl - env->vstart;
-+                elems = load_vl - env->vstart;
- 
-                 /* Load/store elements in the second page */
-                 vext_page_ldst_us(env, vd, addr, elems, nf, max_elems,
-@@ -788,7 +790,7 @@ ProbeSuccess:
-                                   ldst_host, ra);
-             }
-         } else {
--            for (i = env->vstart; i < env->vl; i++) {
-+            for (i = env->vstart; i < load_vl; i++) {
-                 k = 0;
-                 while (k < nf) {
-                     if (!vext_elem_mask(v0, i)) {
-@@ -806,6 +808,9 @@ ProbeSuccess:
-             }
-         }
-     }
-+    if (vl != 0) {
-+        env->vl = vl;
-+    }
-     env->vstart = 0;
- 
-     vext_set_tail_elems_1s(env->vl, vd, desc, nf, esz, max_elems);
-diff --git a/tests/tcg/riscv64/Makefile.softmmu-target b/tests/tcg/riscv64/Makefile.softmmu-target
-index 82be8a2c91..7ae225bd73 100644
---- a/tests/tcg/riscv64/Makefile.softmmu-target
-+++ b/tests/tcg/riscv64/Makefile.softmmu-target
-@@ -41,5 +41,10 @@ comma:= ,
- run-test-crc32: test-crc32
- 	$(call run-test, $<, $(QEMU) -cpu rv64$(comma)xlrbr=true $(QEMU_OPTS)$<)
- 
-+EXTRA_RUNS += run-test-vle32ff
-+run-test-vle32ff: test-vle32ff
-+	$(call run-test, $<, $(QEMU) -cpu rv64$(comma)v=true $(QEMU_OPTS)$<)
-+test-vle32ff: CFLAGS += -march=rv64gcv
-+
- # We don't currently support the multiarch system tests
- undefine MULTIARCH_TESTS
-diff --git a/tests/tcg/riscv64/test-vle32ff.S b/tests/tcg/riscv64/test-vle32ff.S
-new file mode 100644
-index 0000000000..f510960c05
---- /dev/null
-+++ b/tests/tcg/riscv64/test-vle32ff.S
-@@ -0,0 +1,57 @@
-+/*
-+ * Verify that a fault-only-first load keeps vl unchanged when element zero
-+ * raises a synchronous exception.
-+ *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ */
-+
-+	.option norvc
-+
-+	.text
-+	.globl _start
-+_start:
-+	lla	t0, trap
-+	csrw	mtvec, t0
-+
-+	li	t0, (1 << 9)	/* Set mstatus.VS to Initial. */
-+	csrs	mstatus, t0
-+	li	t1, 4
-+	vsetvli	t2, t1, e32, m1, ta, ma
-+	li	t0, 0x18000000	/* Unmapped gap in the virt memory map. */
-+	vle32ff.v	v1, (t0)
-+
-+	/* Element zero did not trap. */
-+	li	a0, 1
-+	j	_exit
-+
-+trap:
-+	csrr	t0, mcause
-+	li	t1, 5		/* Load access fault. */
-+	bne	t0, t1, trap_fail
-+
-+	csrr	t0, vl
-+	bne	t0, t2, trap_fail
-+
-+	li	a0, 0
-+	j	_exit
-+
-+trap_fail:
-+	li	a0, 1
-+
-+_exit:
-+	lla	a1, semiargs
-+	li	t0, 0x20026	/* ADP_Stopped_ApplicationExit */
-+	sd	t0, 0(a1)
-+	sd	a0, 8(a1)
-+	li	a0, 0x20	/* TARGET_SYS_EXIT_EXTENDED */
-+
-+	.balign	16
-+	slli	zero, zero, 0x1f
-+	ebreak
-+	srai	zero, zero, 0x7
-+	j	.
-+
-+	.data
-+	.balign	8
-+semiargs:
-+	.space	16
--- 
-2.43.0
 
