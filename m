@@ -4,40 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A8B2C5B56A
-	for <qemu-riscv@archiver.kernel.org>; Tue, 11 Aug 2026 14:22:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7F97C5B56A
+	for <qemu-riscv@archiver.kernel.org>; Tue, 11 Aug 2026 14:22:45 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wtnN0-0006Po-N2; Tue, 11 Aug 2026 10:22:22 -0400
+	id 1wtnN0-0006Q0-Q0; Tue, 11 Aug 2026 10:22:23 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mlmgr@proulx.com>) id 1wtltb-00034E-UA
- for qemu-riscv@nongnu.org; Tue, 11 Aug 2026 08:47:56 -0400
+ (Exim 4.90_1) (envelope-from <mlmgr@proulx.com>) id 1wtltt-00035m-2m
+ for qemu-riscv@nongnu.org; Tue, 11 Aug 2026 08:48:13 -0400
 Received: from havoc.proulx.com ([198.99.81.74])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mlmgr@proulx.com>) id 1wtltW-0002Vd-K3
- for qemu-riscv@nongnu.org; Tue, 11 Aug 2026 08:47:54 -0400
+ (Exim 4.90_1) (envelope-from <mlmgr@proulx.com>) id 1wtltr-0002g6-6e
+ for qemu-riscv@nongnu.org; Tue, 11 Aug 2026 08:48:12 -0400
 Received: by havoc.proulx.com (Postfix, from userid 1027)
- id 259598B6; Tue, 11 Aug 2026 06:47:47 -0600 (MDT)
+ id 3A10472E; Tue, 11 Aug 2026 06:48:10 -0600 (MDT)
 Resent-From: Mailing List Manager <mlmgr@proulx.com>
-Resent-Date: Tue, 11 Aug 2026 06:47:46 -0600
-Resent-Message-ID: <ansZ8gaJ93WO5UXf@havoc.proulx.com>
+Resent-Date: Tue, 11 Aug 2026 06:48:10 -0600
+Resent-Message-ID: <ansaCsI5tbcvXyGB@havoc.proulx.com>
 Resent-To: qemu-riscv@nongnu.org
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liliang2057@phytium.com.cn>)
- id 1wtcxh-0001gS-2T; Mon, 10 Aug 2026 23:15:33 -0400
+ id 1wtjx1-0005MM-Fi; Tue, 11 Aug 2026 06:43:19 -0400
 Received: from zg8tmtyylji0my4xnjqumte4.icoremail.net ([162.243.164.118])
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liliang2057@phytium.com.cn>)
- id 1wtcxe-0005WG-27; Mon, 10 Aug 2026 23:15:32 -0400
+ id 1wtjwz-0007Y5-5e; Tue, 11 Aug 2026 06:43:19 -0400
 Received: from prodtpl.icoremail.net (unknown [10.12.1.20])
- by hzbj-icmmx-6 (Coremail) with UTF8SMTP id AQAAfwAHD7fEk3pqunvdAA--.60634S2; 
- Tue, 11 Aug 2026 11:15:16 +0800 (CST)
+ by hzbj-icmmx-6 (Coremail) with UTF8SMTP id AQAAfwB3fMS9_HpqDAbfAA--.750S2;
+ Tue, 11 Aug 2026 18:43:09 +0800 (CST)
 Received: from phytium.com.cn (unknown [218.76.62.144])
- by mail (Coremail) with SMTP id AQAAf8DwfHTAk3pqUTgiAA--.58848S3;
- Tue, 11 Aug 2026 11:15:13 +0800 (CST)
+ by mail (Coremail) with SMTP id AQAAf8DwwXO5_HpqqmUiAA--.55911S3;
+ Tue, 11 Aug 2026 18:43:06 +0800 (CST)
 From: Liang Li <liliang2057@phytium.com.cn>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, richard.henderson@linaro.org, pbonzini@redhat.com,
@@ -47,27 +47,27 @@ Cc: qemu-riscv@nongnu.org, richard.henderson@linaro.org, pbonzini@redhat.com,
  Liang Li <liliang2057@phytium.com.cn>
 Subject: [RFC PATCH 0/1] RISC-V vector fault-only-first vl truncation under
  plugin memory callbacks
-Date: Tue, 11 Aug 2026 11:14:54 +0800
-Message-ID: <20260811031455.1330838-1-liliang2057@phytium.com.cn>
+Date: Tue, 11 Aug 2026 18:43:00 +0800
+Message-ID: <20260811104301.1377245-1-liliang2057@phytium.com.cn>
 X-Mailer: git-send-email 2.51.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: AQAAf8DwfHTAk3pqUTgiAA--.58848S3
-X-CM-SenderInfo: 5oloxttqjsikux6sx5pwlxzhxfrphubq/1tbiAQAEAGp6JskBaQACsQ
+X-CM-TRANSID: AQAAf8DwwXO5_HpqqmUiAA--.55911S3
+X-CM-SenderInfo: 5oloxttqjsikux6sx5pwlxzhxfrphubq/1tbiAQAEAGp6JskBdQANsD
 Authentication-Results: hzbj-icmmx-6; spf=neutral smtp.mail=liliang205
  7@phytium.com.cn;
-X-Coremail-Antispam: 1Uk129KBjvJXoWxWw4kGF1xXFyfGr1DKrWxZwb_yoW5CryxpF
- Z2k3y3K34kXr93X34fAa17Xw1rtw4rGa1UCas7Jr1xZrW5ZrnFv3yxKw4jkFy5Gr1rA34a
- vFZ0vFy7uF1UAaDanT9S1TB71UUUUUJqnTZGkaVYY2UrUUUUj1kv1TuYvTs0mT0YCTnIWj
+X-Coremail-Antispam: 1Uk129KBjvJXoWxKF1rKr4UZFWftr1rXryDGFg_yoWxCF1UpF
+ 1kCry3trWktr97u3WfAw12kw13trs7Wa1UG34xGr18Aan8Jr1qq397K340yFy5Gr4rZ3W2
+ 9rW3Xa4Uua17AaUanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUj1kv1TuYvTs0mT0YCTnIWj
  DUYxn0WfASr-VFAU7a7-sFnT9fnUUIcSsGvfJ3UbIYCTnIWIevJa73UjIFyTuYvj4RJUUU
  UUUUU
 Received-SPF: pass client-ip=162.243.164.118;
  envelope-from=liliang2057@phytium.com.cn;
  helo=zg8tmtyylji0my4xnjqumte4.icoremail.net
 X-Spam_action: no action
-X-Listhelper-Id: 20260810211655-30408
+X-Listhelper-Id: 20260811044413-13762
 X-Bogosity: Spam, tests=bogofilter, spamicity=1.000000, version=1.2.5
-X-CRM114-Status: SPAM  ( -43.76  )
+X-CRM114-Status: SPAM  ( -42.50  )
 Received-SPF: pass client-ip=198.99.81.74; envelope-from=mlmgr@proulx.com;
  helo=havoc.proulx.com
 X-Spam_score_int: -14
@@ -121,10 +121,10 @@ Patch 1 routes vext_ldff()'s probes through probe_access_full_mmu()
 observation of real loads/stores is preserved. A user-mode counterpart of
 probe_access_full_mmu() is added (it previously only existed in system mode).
 
-Reproduced on master (v11.1.0-rc3) with a minimal memory-callback plugin and
-a vle8ff strlen guest: enabling the plugin inflates the vle8ff execution
-count ~16x without the fix, and has no effect with it. Reproducer (plugin +
-guest sources, ~100 lines total) available on request or in a follow-up.
+Reproduced on master (v11.1.0-rc3) in riscv64-linux-user. With the minimal
+reproducer below: enabling the plugin inflates the vle8ff execution count
+from 32M to 512M (~16x) and total insns from ~234M to ~3594M; with this
+patch applied, both counts are identical to the no-plugin baseline (32M).
 
 Questions:
 
@@ -138,8 +138,134 @@ Questions:
      comment). Would a more general fix at the probe_access_flags() layer be
      preferred so each target doesn't paper over it independently?
 
-Patch is compile-tested on riscv64 system and user modes; full functional
-testing and a proper tests/tcg case will follow once the approach is agreed.
+Patch is compile-tested on riscv64 system and user modes. A proper tests/tcg
+case will follow once the approach is agreed.
+
+Reproducer (two files, linux-user)
+==================================
+
+Below are two self-contained files verified against this tree. Build the
+plugin with gcc, the guest with a riscv64 cross-gcc (needs rv64gcv), then
+run with qemu-riscv64 built from this tree.
+
+--- vle8ff_repro.c (plugin) ---
+/*
+ * Registers a vcpu_mem callback (the trigger) and counts vle8ff executions.
+ * Load with ,nocb for the baseline, ,memcb=true to enable the callback.
+ */
+#include <inttypes.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <qemu-plugin.h>
+
+QEMU_PLUGIN_EXPORT int qemu_plugin_version = QEMU_PLUGIN_VERSION;
+
+static bool memcb_enable = false;
+static uint64_t vle8ff_count = 0;
+static uint64_t total_insn = 0;
+
+static inline bool is_vle8ff(uint32_t insn)
+{
+    return (insn & 0x0007FFFF) == 0x00070087;
+}
+
+static void vcpu_mem(unsigned int cpu_index, qemu_plugin_meminfo_t info,
+                     uint64_t vaddr, void *udata)
+{
+    /* empty: registering this callback is what triggers force_mmio */
+}
+
+static void vcpu_insn_exec(unsigned int cpu_index, void *udata)
+{
+    uint32_t insn = (uintptr_t)udata;
+    total_insn++;
+    if (is_vle8ff(insn)) {
+        vle8ff_count++;
+    }
+}
+
+static void vcpu_tb_trans(struct qemu_plugin_tb *tb, void *udata)
+{
+    size_t n = qemu_plugin_tb_n_insns(tb);
+    for (size_t i = 0; i < n; i++) {
+        struct qemu_plugin_insn *insn = qemu_plugin_tb_get_insn(tb, i);
+        uint32_t code = 0;
+        qemu_plugin_insn_data(insn, &code, sizeof(code));
+        qemu_plugin_register_vcpu_insn_exec_cb(insn, vcpu_insn_exec,
+                                               QEMU_PLUGIN_CB_NO_REGS,
+                                               (void *)(uintptr_t)code);
+        if (memcb_enable) {
+            qemu_plugin_register_vcpu_mem_cb(insn, vcpu_mem,
+                                             QEMU_PLUGIN_CB_NO_REGS,
+                                             QEMU_PLUGIN_MEM_RW, NULL);
+        }
+    }
+}
+
+static void plugin_exit(void *p)
+{
+    fprintf(stderr, "memcb=%d total_insn=%" PRIu64 " vle8ff=%" PRIu64 "\n",
+            memcb_enable, total_insn, vle8ff_count);
+}
+
+QEMU_PLUGIN_EXPORT int qemu_plugin_install(qemu_plugin_id_t id,
+                                           const qemu_info_t *info,
+                                           int argc, char **argv)
+{
+    for (int i = 0; i < argc; i++) {
+        if (strstr(argv[i], "memcb") && !strstr(argv[i], "off")) memcb_enable = true;
+        else if (strstr(argv[i], "nocb")) memcb_enable = false;
+    }
+    qemu_plugin_register_vcpu_tb_trans_cb(id, vcpu_tb_trans, NULL);
+    qemu_plugin_register_atexit_cb(id, plugin_exit, NULL);
+    return 0;
+}
+
+--- vle8ff_asm.c (guest) ---
+#include <string.h>
+#include <stdint.h>
+volatile uint64_t sink;
+
+static size_t my_strlen(const char *s) {
+    register long a4 asm("a4") = (long)s;
+    register long a2 asm("a2");
+    for (;;) {
+        long vl;
+        asm volatile(".option push\n.option arch,+v\n"
+                     "vsetvli %0, zero, e8, m1, ta, ma\n"
+                     "vle8ff.v v1, (%1)\n"
+                     "vmseq.vi v1, v1, 0\n"
+                     "csrr %0, vl\n"
+                     "vfirst.m %2, v1\n"
+                     ".option pop\n"
+                     : "=r"(vl), "+r"(a4), "=r"(a2) :: "v1","memory");
+        if (a2 < 0) { a4 += vl; continue; }
+        return (size_t)(a4 - (long)s) + a2;
+    }
+}
+
+int main(void) {
+    char buf[256];
+    memset(buf, 'A', 255); buf[255] = 0;
+    for (int i = 0; i < 2000000; i++) sink = my_strlen(buf);
+    return (int)(sink & 1);
+}
+
+--- Build and run ---
+# plugin (host gcc, needs glib)
+gcc -shared -fPIC -O2 -I include/plugins \
+    $(pkg-config --cflags glib-2.0) -o vle8ff_repro.so vle8ff_repro.c
+# guest (riscv64 cross-gcc, needs V extension)
+riscv64-unknown-linux-gnu-gcc -O2 -march=rv64gcv -mabi=lp64d -static \
+    vle8ff_asm.c -o vle8ff_asm
+# baseline vs with-callback
+qemu-riscv64 -plugin vle8ff_repro.so,nocb     vle8ff_asm
+qemu-riscv64 -plugin vle8ff_repro.so,memcb=on vle8ff_asm
+
+On unpatched master the memcb=on run reports ~16x more vle8ff executions
+than nocb; with this patch both runs report the same count.
 
 Thanks,
 Liang Li
