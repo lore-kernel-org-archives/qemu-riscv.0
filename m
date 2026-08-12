@@ -4,120 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 012BFC5CFDB
-	for <qemu-riscv@archiver.kernel.org>; Wed, 12 Aug 2026 12:35:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1AFB7C5B56A
+	for <qemu-riscv@archiver.kernel.org>; Wed, 12 Aug 2026 12:47:47 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wu8Am-0008N5-1m; Wed, 12 Aug 2026 08:35:08 -0400
+	id 1wu8MY-0005b5-6M; Wed, 12 Aug 2026 08:47:18 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1wu8Aj-0008GF-Rs
- for qemu-riscv@nongnu.org; Wed, 12 Aug 2026 08:35:05 -0400
-Received: from mail-yw1-x112f.google.com ([2607:f8b0:4864:20::112f])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1wu8Ah-0004no-6b
- for qemu-riscv@nongnu.org; Wed, 12 Aug 2026 08:35:05 -0400
-Received: by mail-yw1-x112f.google.com with SMTP id
- 00721157ae682-82011c59e66so14328467b3.0
- for <qemu-riscv@nongnu.org>; Wed, 12 Aug 2026 05:35:02 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1786538102; cv=none;
- d=google.com; s=arc-20260327;
- b=osq2AuXoMJEir5aOykV06elOlNOuWFfWY3wke+etDGoAION8fRw8lcgWaycJrRDWnV
- xYTs+BOw7C8aoksj9QapT++bzkKJDXQxQP4EkX0ZusPleTqAGHh9fBdYLr6tN36Wk3x+
- 2vwPPWnaKaF0gtUjVqWQvshbwjqufZHVllRpqwmo6iCMa7UnevRMnH9Cm5cybpV4DMY/
- L3T1lnvu+CTFTr/T9Xml8kGDg6d25uQfDtJaA5KxVrrrPeFSvFjugfwofXr0bEWYj0d7
- 9iK6HxQ9QF4o9GESX8g3dK4yEnvRtV1m/D2IU78Kc00rTXnvYzyTVRoFG2+3whQUxx5r
- qU6g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=ilnmWIgivWLzbRZEb6hNTrn/OAgof699jqHIBj8E7io=;
- fh=mM/Y24fS0beNcaTb703h3IIBYizm0S+9Du5xFSid6Zw=;
- b=kdU76inbdhJ2rmSblTecJkxC+Vr7slO1Y/YQY+1shMXmrsjDackVsDUD+MfyAYmH75
- M7+j1ruWe3IlLDChoi+DgenveLN7t/AnkZ5xxZm9l5FTJcNr8M7FLZ0OqgR7vjucI00P
- s2kqW6x4swLTJGrUQsRWlsULuvTHrp32lsswE3meGEP1woc/ROqQwyUWhNNFjoqxACgQ
- ArM10740FuRMl533OlyoLuV/wkeyWK6AAF4ivu7jfCJEr+/6DAdjvYgmUzlcudfC4m2G
- s8lKJq1LtZuhEl7cPLHkVVWnwZZRcpZ+cwi1V0rxr3eIPLsQ+7kedx608Yu6n9HnDHls
- fvog==; darn=nongnu.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1786538102; x=1787142902; darn=nongnu.org;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=ilnmWIgivWLzbRZEb6hNTrn/OAgof699jqHIBj8E7io=;
- b=TcfACfbZuR1VqH0dlL/+qnlfcuCfV7lBuwKxe9gjAP21LmMDlJKgYF+EDIilg3pSV7
- 8TRAKb3DThYXxBwAQdo5RfrbUwige1T/jZIk/iGskVYQmj2eGgbYEg9/n3vadY2JJGsw
- ZQ3axQ4RjnRtMnx7fne228/hMZJ6VReqXP3sqEVrriqsz8YMrU76zjJCWm1NjlcxeUyp
- TK9jHp5ZmS2hPWWsuaXvDiZFU1ZTyF4vErdlz/cSS9lSgL1gvylS2dxIgVuURF0p+rvW
- niPE26AglC1iUfyZltko66Mrj8ryQfjSNKhxXo9J2k2pUJ1mtLdTepQ70tjg5Jh0qhY1
- 6q4Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786538102; x=1787142902;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=ilnmWIgivWLzbRZEb6hNTrn/OAgof699jqHIBj8E7io=;
- b=OWkXLshL63MpHGuaYN4PdCoyc7Nvj5Qf9bu1mLYRZ9OYgkiSKLrdWhBIhnO/euYA52
- ZnG1jcr26h5GHIlmANQHtyi0ciaEywrmPMyJXCTv5ovmWMc+EK7C19rlz4PVnjH9xL/I
- SsHOOh/2S9zkW6YVhiisZI0GyWt3toXgdC0bckX9OX+foGZFx8+j1nNNoPGoM3EIYT2q
- p7GpIUxep4YgbH0Eje//xm2vO4F4/ADQBlf+mksvynoAo9kDzbucwvwihw2P9TGCJkNz
- S9Uj7R7zy5sSrBh0D3JB1hMy+csjjyy2GJc8mivdHpHZeB/oxTWU7DsfrRaqFnQOyfOW
- bWlA==
-X-Forwarded-Encrypted: i=1;
- AHgh+RoJ+4sBbpBI26r64EtnPbmApb2k7bSZlD65WKgaWbPUEsBs9PZ0FfhMucAVFcV1xMl+Cq081/Oa4i0H@nongnu.org
-X-Gm-Message-State: AOJu0YzzjYd6XKzzDDJVxcu1Et/CNNveJ9Knw4o5U/6juGNemBH+VPE+
- xUoQsTolY0oAqEnI4DqRXAeBRyK7aoCbrLWFe98FYWAiwj2ucp2UOwvg89HkH3BAopFqkxCoxtb
- FbdzTBrmB7FTDKlyomCPUuG1zo14NlfY=
-X-Gm-Gg: AR+sD11ZtojJoULUehECzjBgAL0VKhLEDzjMQX6ucn0o+QnuCIWzY1wumHlD/Grd6Mh
- HD2knbjzjOOzZACMUsLNbocEuz7o1jHOWS02R9Wv372z7LBqOT7FoVbW7LpiJwYe0rcrvJz56ti
- dDjXsJzYZZUAdzJ6VVyFiallc3xBusNlojk0TsZ8eri0wqtWMRgWc09hnfjFf4hZS2+P0nEJXcV
- 9mjdlGW9dRrkaABzYADf7EJoleIY8stEQCEZcIyLzY4MEu4aMbOXHhrdWKu6QbcaAWbXKAsVOmm
- UkLnuEmEViapg9WUUtGDnMK7dg3bSyn+PG6kEb2vJ3apAQ==
-X-Received: by 2002:a05:690c:c677:b0:814:47f2:1ff with SMTP id
- 00721157ae682-83109640302mr19236817b3.27.1786538101798; Wed, 12 Aug 2026
- 05:35:01 -0700 (PDT)
-MIME-Version: 1.0
-References: <20260723151853.2143177-1-bin.meng@processmission.com>
-In-Reply-To: <20260723151853.2143177-1-bin.meng@processmission.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Wed, 12 Aug 2026 20:34:50 +0800
-X-Gm-Features: AUfX_myKMVmA-5yyBHrhxFU4lK-2tMn4mcgUZi-E9i46v6AgpDMR0EX9mh11wAg
-Message-ID: <CAEUhbmU4myFTEA9NeGVcBpkW+195=N8YBX=gj+sScZUOfhWSBg@mail.gmail.com>
-Subject: Re: [PATCH 00/26] hw/riscv: Restore Microchip PolarFire SoC Icicle
- Kit firmware boot
-To: Bin Meng <bin.meng@processmission.com>
-Cc: QEMU <qemu-devel@nongnu.org>, Alistair Francis <alistair.francis@wdc.com>, 
- Alistair Francis <alistair@alistair23.me>,
- Chao Liu <chao.liu@processmission.com>, Conor Dooley <conor@kernel.org>, 
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, Fabiano Rosas <farosas@suse.de>,
- Laurent Vivier <lvivier@redhat.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Markus Armbruster <armbru@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
- Paolo Bonzini <pbonzini@redhat.com>, Peter Maydell <peter.maydell@linaro.org>, 
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@mailo.com>, 
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@oss.qualcomm.com>, 
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, 
- Sebastian Huber <sebastian.huber@embedded-brains.de>,
- Thomas Huth <th.huth@posteo.eu>, 
- Weiwei Li <liwei1518@gmail.com>, qemu-arm@nongnu.org, qemu-block@nongnu.org, 
- qemu-riscv@nongnu.org
+ (Exim 4.90_1) (envelope-from <alistair@alistair23.me>)
+ id 1wu8MW-0005at-W0; Wed, 12 Aug 2026 08:47:17 -0400
+Received: from fhigh-a3-smtp.messagingengine.com ([103.168.172.154])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <alistair@alistair23.me>)
+ id 1wu8MU-0008HB-K8; Wed, 12 Aug 2026 08:47:16 -0400
+Received: from phl-compute-11.internal (phl-compute-11.internal [10.202.2.51])
+ by mailfhigh.phl.internal (Postfix) with ESMTP id 085ED14000C2;
+ Wed, 12 Aug 2026 08:47:13 -0400 (EDT)
+Received: from phl-frontend-03 ([10.202.2.162])
+ by phl-compute-11.internal (MEProxy); Wed, 12 Aug 2026 08:47:13 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alistair23.me;
+ h=cc:cc:content-transfer-encoding:content-type:content-type
+ :date:date:from:from:in-reply-to:in-reply-to:message-id
+ :mime-version:references:reply-to:subject:subject:to:to; s=fm3;
+ t=1786538833; x=1786625233; bh=WS3GH/WlpppxTgb+PnyLr2dWD+WM6284
+ IzR9frNEhF0=; b=LM2teBBViLRa+RP58mtAaE+UfMc2vspWscJ1vZE+t7FDptk8
+ 7fbRXedNd7i1qtAh//aXIIAJode6oI4evCF8EhdoPGsWqolnFfNfglOHmN9jH19y
+ ILT2O28sWhFQWgMz37mdGXuCvnj41BSzKzaKZeF1qGy7Ca0U7e+VKAKAMhJTZ8p4
+ PbvFv+mhC0gUchVVOF1MBs+/+/i/RbYOPp4iKFwyyEg3WR6dt21GhChoE98xAHMb
+ i2Pr2a7kLMhagn7kYZ9C1xQFowcSyOXu6zzCFX+Zv1fblvclkv9GDL514J/wT4Gn
+ J8Wi2JDu89Sn0ESCSJkEWpU3GGZaBTebSEfBBA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-transfer-encoding
+ :content-type:content-type:date:date:feedback-id:feedback-id
+ :from:from:in-reply-to:in-reply-to:message-id:mime-version
+ :references:reply-to:subject:subject:to:to:x-me-proxy
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1786538833; x=
+ 1786625233; bh=WS3GH/WlpppxTgb+PnyLr2dWD+WM6284IzR9frNEhF0=; b=j
+ QKF7ApIvaf8FXyJEdtwkF45p/qy5IbBEh27slNSAe2K5+SnB6RSXme8V+5e5+ox1
+ pzeKJuw4u+wvbEVOFCheNfRcj6/ygtl+BM4o/DksuPzftSPQt9jldGwYm9mOA9Gt
+ olCKmXK35O86lJoE6EgXmv53a7HWi0LF2Lfcqh2BWGNTx4DVcWewC219S4rLeOMl
+ ytT/EqTaqfAzMaeiDquX5ejOZ8LeGcQT6qVbrSsQbMnmKhfEhcCXX0/Yk3RpFEYL
+ TQOnbdWz4n9T166855z+E4L5zQyB9wzkt3L3I2RbrFV/xl84tixrifME8Xik92fe
+ xW7M4s6xZ3F1G3DprdjvA==
+X-ME-Sender: <xms:UGt8aiUeAiZULfqe54LRYe-D3R8at59TkZ2Iv7lCxlDq48nLwSLGGw>
+ <xme:UGt8ai7_r5Nyn-6VeUfzn6JqpEouUtjx8-FqWRVUc5V2vRldXvPWhY056k8aKl_2M
+ 5o1E6idp1cyiE07wH6y3teQi0WNtEcD54l2Wvfswfj6_fcqTwx18Q>
+X-ME-Received: <xmr:UGt8alitL_-uemFoCO8VrAKIhiHiomw-uzZ6PGeNRLSgfHYeDEEoltZOoc2-GP0siYc2PA>
+X-ME-Proxy-Cause: dmFkZTEKNC1XWpXKgbcrIIcGvGvMtroCzhMnCfh6zfBsURB7R7VX9EPMY4jYzbojoVl0Xo
+ mYAsnG4H4rw7nE30ideLJWEcti7Uj38kwimPMGRddBl+zFI9orYZ+Jg0eSl5eRokNk8y76
+ oV0b4HeZv+uJgkv4FsiMyviXxJKQvnLcwek/iCuOVwTLw8PHDJ5P5wxUoVmpYfCZa68GLJ
+ syUHElSZpk8x2ht7eC6njuvPyrkzuI8xixrZV22EGkK6qXszU71IRIy9OqxE91MUA7lxcI
+ M6hiTgPiQmDwc4QiHsE9NzzpNYPgI9vsiSr7XPxQQtkoftyUR1XQlxqcRNeLcYJLQIg0R6
+ OCxvjI3asbGAHsrnIQQ1W+6NbMsw+9C0N6+TSjOsk2BEwouqswapkoB9/YeyH8SVziy5GS
+ xXaF7SoaLlTZn3gRHS6HBoyiUoB+VxlL2Uf2ytzSnujxwu6CntMzd7iyP5OfClO+ilxPGc
+ 5+ctiZNpdJmyX/f06n1TKzhV+l0Fpx2WMmCrgaDbVACq7qpkYoxTYZe5eLozzjBtbk7MjF
+ 0wJUXVlazaM7Jf6HkIxlv0GNF8J/XDvXTvbp/Rh+f+O0bjhdbw664ltLhBRYlWpfn9gPxs
+ BjcFY2lDHo5MYgGTdTlvPpzed8QhAQjvDzOoo2poe0oEsrKTALGYdO3pCnrQ
+X-ME-Proxy: <xmx:UGt8ahfW-0vgnTfthIouns08iqe7fjX2eYms9OMlWMrsoPe0lq7aig>
+ <xmx:UGt8aifaRCCzlHUXjfGQ-Qn_qVIfPtaWVDUOtue4uORXJhf4WLLAXA>
+ <xmx:UGt8aj9wDnCvp7Tm2_Ys_3A8QEyyO5Ol6M1ANMUbQl3vMFNtNGNb4A>
+ <xmx:UGt8amngczWIzTm0ZCKW4zIvFGzEqs_qKLquMMOmG1pgAhAleI5VNw>
+ <xmx:UWt8as73mAByuPvXNRuc2RlQeGIPc1DoIPt42qpBwrl1CKcHF46fo5TO>
+Feedback-ID: ifd214418:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
+ 12 Aug 2026 08:47:12 -0400 (EDT)
+Message-ID: <12959a5aca4118263c0e494317c7057a750fbfc1.camel@alistair23.me>
+Subject: Re: [PATCH 39/56] disas/riscv: Store op pointer in rv_comp_data
+From: Alistair <alistair@alistair23.me>
+To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org
+Date: Wed, 12 Aug 2026 22:47:12 +1000
+In-Reply-To: <20260809223545.730664-40-richard.henderson@linaro.org>
+References: <20260809223545.730664-1-richard.henderson@linaro.org>
+ <20260809223545.730664-40-richard.henderson@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::112f;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yw1-x112f.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+User-Agent: Evolution 3.60.2 (by Flathub.org) 
+MIME-Version: 1.0
+Received-SPF: pass client-ip=103.168.172.154;
+ envelope-from=alistair@alistair23.me; helo=fhigh-a3-smtp.messagingengine.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -133,78 +106,249 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Jul 24, 2026 at 10:03=E2=80=AFAM Bin Meng <bin.meng@processmission.=
-com> wrote:
->
->
-> The microchip-icicle-kit machine was originally validated with an older
-> Hart Software Services (HSS) firmware stack. HSS v2024.06 cannot boot
-> through U-Boot to Linux because several firmware-visible parts of the
-> PolarFire SoC are missing or incomplete.
->
-> The first failure occurs before the UART is initialized because the L2
-> zero window is not mapped. HSS then needs additional L2 cache controller
-> and DDR training behavior. Later boot stages exercise system services,
-> the RTC, SDHC version 4 DMA, and high-capacity SD card block sizing,
-> along with the complete DDR aliases. The existing models ither reject
-> these accesses or expose behavior that does not match the hardware
-> specifications.
->
-> This series restores the complete firmware boot flow. With these changes,
-> QEMU boots the HSS v2024.06 eNVM image, loads its U-Boot payload from an
-> SD card, and reaches the Buildroot 2026.05 Linux login prompt.
->
-> The changes are organized around the firmware boot sequence:
->
-> * Correct the L2-LIM size, map the L2 zero window, and provide the DMC
->   status transitions required by HSS DDR initialization.
-> * Model the documented L2CC Config, WayEnable, and WayMask registers,
->   and resize L2-LIM as cache ways are enabled.
-> * Complete SDHCI version 4 support used by the Cadence controller,
->   including Host Control 2, SDMA system addressing, 64-bit ADMA2
->   descriptors, and SDMA boundary continuation.
-> * Run ADMA from a bounded timer-driven engine instead of performing work
->   from command or unrelated MMIO accesses.  This keeps DMA progress
->   independent of guest register traffic and avoids consuming a polling
->   deadline inside the command write.
-> * Keep SDHC and SDXC memory transfers at their fixed 512-byte block
->   size, and advertise the Cadence controller's 64-bit system bus
->   support.
-> * Add the PolarFire SoC serial-number system service and RTC, and honor
->   the system-service notification control bit.
-> * Correct the DDR aliases and fix the board topology at its physical
->   configuration of 2 GiB of RAM and five harts.
-> * Document direct and HSS boot, add focused qtests and a full firmware
->   functional test, and restore the machine's Supported maintainer
->   status.
->
-> This series assumes that the following generic SDHCI prerequisite series
-> has already been applied:
->
-> - Message ID <20260715160731.29969-2-dingtao0430@163.com>
->
-> Testing performed:
->
-> * Built qemu-system-riscv64 and the documentation.
-> * Passed various newly added qtests.
-> * Booted HSS v2024.06, U-Boot, and Buildroot 2026.05 Linux to the login
->   prompt using the functional-test image.
->
-> The functional test downloads this versioned image archive:
->
-> https://github.com/processmission/qemu-machine-images/releases/download/
-> v1.0.0/riscv64-microchip-icicle-kit-v1.0.0.tar.zst
->
-> When restoring the HSS boot support, 3 potential bugs were identified in
-> the upstream HSS source codes that either blocks the DDR training from
-> succeed or traps in a multi-core race at the very beginning or after
-> a succesfully DDR training but stuck at OpenSBI/U-Boot hand-off. There
-> are already bug reports filed aginst various upstream projects.
->
->
+On Sun, 2026-08-09 at 15:35 -0700, Richard Henderson wrote:
+> Store a pointer instead of an array index.
+>=20
+> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 
-I see the RISC-V parts have been reviewed. How about other patches?
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-REgards,
-Bin
+Alistair
+
+> ---
+> =C2=A0disas/riscv.h |=C2=A0 8 +++---
+> =C2=A0disas/riscv.c | 69 ++++++++++++++++++++++++++----------------------=
+-
+> --
+> =C2=A02 files changed, 40 insertions(+), 37 deletions(-)
+>=20
+> diff --git a/disas/riscv.h b/disas/riscv.h
+> index ea7141d3b5..ab62c0db94 100644
+> --- a/disas/riscv.h
+> +++ b/disas/riscv.h
+> @@ -164,17 +164,19 @@ typedef enum {
+> =C2=A0
+> =C2=A0/* structures */
+> =C2=A0
+> +typedef struct rv_opcode_data rv_opcode_data;
+> +
+> =C2=A0typedef struct {
+> -=C2=A0=C2=A0=C2=A0 int op;
+> +=C2=A0=C2=A0=C2=A0 const rv_opcode_data *op;
+> =C2=A0=C2=A0=C2=A0=C2=A0 const rvc_constraint *constraints;
+> =C2=A0} rv_comp_data;
+> =C2=A0
+> -typedef struct {
+> +struct rv_opcode_data {
+> =C2=A0=C2=A0=C2=A0=C2=A0 const char *name;
+> =C2=A0=C2=A0=C2=A0=C2=A0 rv_codec codec;
+> =C2=A0=C2=A0=C2=A0=C2=A0 const char *format;
+> =C2=A0=C2=A0=C2=A0=C2=A0 const rv_comp_data *pseudo;
+> -} rv_opcode_data;
+> +};
+> =C2=A0
+> =C2=A0typedef struct {
+> =C2=A0=C2=A0=C2=A0=C2=A0 const RISCVCPUConfig *cfg;
+> diff --git a/disas/riscv.c b/disas/riscv.c
+> index 9a528803e8..171c60238f 100644
+> --- a/disas/riscv.c
+> +++ b/disas/riscv.c
+> @@ -1068,138 +1068,140 @@ static const rvc_constraint rvcc_true[] =3D {
+> rvc_end };
+> =C2=A0
+> =C2=A0/* pseudo-instruction metadata */
+> =C2=A0
+> +static const rv_opcode_data rvi_opcode_data[];
+> +
+> =C2=A0static const rv_comp_data rvcp_jal[] =3D {
+> -=C2=A0=C2=A0=C2=A0 { rv_op_j, rvcc_j },
+> -=C2=A0=C2=A0=C2=A0 { rv_op_jal_ra, rvcc_jal_ra },
+> +=C2=A0=C2=A0=C2=A0 { &rvi_opcode_data[rv_op_j], rvcc_j },
+> +=C2=A0=C2=A0=C2=A0 { &rvi_opcode_data[rv_op_jal_ra], rvcc_jal_ra },
+> =C2=A0=C2=A0=C2=A0=C2=A0 { },
+> =C2=A0};
+> =C2=A0
+> =C2=A0static const rv_comp_data rvcp_jalr[] =3D {
+> -=C2=A0=C2=A0=C2=A0 { rv_op_jr, rvcc_jr },
+> -=C2=A0=C2=A0=C2=A0 { rv_op_jalr_ra, rvcc_jalr_ra },
+> +=C2=A0=C2=A0=C2=A0 { &rvi_opcode_data[rv_op_jr], rvcc_jr },
+> +=C2=A0=C2=A0=C2=A0 { &rvi_opcode_data[rv_op_jalr_ra], rvcc_jalr_ra },
+> =C2=A0=C2=A0=C2=A0=C2=A0 { },
+> =C2=A0};
+> =C2=A0
+> =C2=A0static const rv_comp_data rvcp_jr[] =3D {
+> -=C2=A0=C2=A0=C2=A0 { rv_op_ret, rvcc_ret },
+> +=C2=A0=C2=A0=C2=A0 { &rvi_opcode_data[rv_op_ret], rvcc_ret },
+> =C2=A0=C2=A0=C2=A0=C2=A0 { },
+> =C2=A0};
+> =C2=A0
+> =C2=A0static const rv_comp_data rvcp_beq[] =3D {
+> -=C2=A0=C2=A0=C2=A0 { rv_op_beqz, rvcc_beqz },
+> +=C2=A0=C2=A0=C2=A0 { &rvi_opcode_data[rv_op_beqz], rvcc_beqz },
+> =C2=A0=C2=A0=C2=A0=C2=A0 { },
+> =C2=A0};
+> =C2=A0
+> =C2=A0static const rv_comp_data rvcp_bne[] =3D {
+> -=C2=A0=C2=A0=C2=A0 { rv_op_bnez, rvcc_bnez },
+> +=C2=A0=C2=A0=C2=A0 { &rvi_opcode_data[rv_op_bnez], rvcc_bnez },
+> =C2=A0=C2=A0=C2=A0=C2=A0 { },
+> =C2=A0};
+> =C2=A0
+> =C2=A0static const rv_comp_data rvcp_blt[] =3D {
+> -=C2=A0=C2=A0=C2=A0 { rv_op_bltz, rvcc_bltz },
+> -=C2=A0=C2=A0=C2=A0 { rv_op_bgtz, rvcc_bgtz },
+> +=C2=A0=C2=A0=C2=A0 { &rvi_opcode_data[rv_op_bltz], rvcc_bltz },
+> +=C2=A0=C2=A0=C2=A0 { &rvi_opcode_data[rv_op_bgtz], rvcc_bgtz },
+> =C2=A0=C2=A0=C2=A0=C2=A0 { },
+> =C2=A0};
+> =C2=A0
+> =C2=A0static const rv_comp_data rvcp_bge[] =3D {
+> -=C2=A0=C2=A0=C2=A0 { rv_op_blez, rvcc_blez },
+> -=C2=A0=C2=A0=C2=A0 { rv_op_bgez, rvcc_bgez },
+> +=C2=A0=C2=A0=C2=A0 { &rvi_opcode_data[rv_op_blez], rvcc_blez },
+> +=C2=A0=C2=A0=C2=A0 { &rvi_opcode_data[rv_op_bgez], rvcc_bgez },
+> =C2=A0=C2=A0=C2=A0=C2=A0 { },
+> =C2=A0};
+> =C2=A0
+> =C2=A0static const rv_comp_data rvcp_addi[] =3D {
+> -=C2=A0=C2=A0=C2=A0 { rv_op_mv, rvcc_mv },
+> +=C2=A0=C2=A0=C2=A0 { &rvi_opcode_data[rv_op_mv], rvcc_mv },
+> =C2=A0=C2=A0=C2=A0=C2=A0 { },
+> =C2=A0};
+> =C2=A0
+> =C2=A0static const rv_comp_data rvcp_mv[] =3D {
+> -=C2=A0=C2=A0=C2=A0 { rv_op_nop, rvcc_nop },
+> +=C2=A0=C2=A0=C2=A0 { &rvi_opcode_data[rv_op_nop], rvcc_nop },
+> =C2=A0=C2=A0=C2=A0=C2=A0 { },
+> =C2=A0};
+> =C2=A0
+> =C2=A0static const rv_comp_data rvcp_sltiu[] =3D {
+> -=C2=A0=C2=A0=C2=A0 { rv_op_seqz, rvcc_seqz },
+> +=C2=A0=C2=A0=C2=A0 { &rvi_opcode_data[rv_op_seqz], rvcc_seqz },
+> =C2=A0=C2=A0=C2=A0=C2=A0 { },
+> =C2=A0};
+> =C2=A0
+> =C2=A0static const rv_comp_data rvcp_xori[] =3D {
+> -=C2=A0=C2=A0=C2=A0 { rv_op_not, rvcc_not },
+> +=C2=A0=C2=A0=C2=A0 { &rvi_opcode_data[rv_op_not], rvcc_not },
+> =C2=A0=C2=A0=C2=A0=C2=A0 { },
+> =C2=A0};
+> =C2=A0
+> =C2=A0static const rv_comp_data rvcp_sub[] =3D {
+> -=C2=A0=C2=A0=C2=A0 { rv_op_neg, rvcc_neg },
+> +=C2=A0=C2=A0=C2=A0 { &rvi_opcode_data[rv_op_neg], rvcc_neg },
+> =C2=A0=C2=A0=C2=A0=C2=A0 { },
+> =C2=A0};
+> =C2=A0
+> =C2=A0static const rv_comp_data rvcp_slt[] =3D {
+> -=C2=A0=C2=A0=C2=A0 { rv_op_sltz, rvcc_sltz },
+> -=C2=A0=C2=A0=C2=A0 { rv_op_sgtz, rvcc_sgtz },
+> +=C2=A0=C2=A0=C2=A0 { &rvi_opcode_data[rv_op_sltz], rvcc_sltz },
+> +=C2=A0=C2=A0=C2=A0 { &rvi_opcode_data[rv_op_sgtz], rvcc_sgtz },
+> =C2=A0=C2=A0=C2=A0=C2=A0 { },
+> =C2=A0};
+> =C2=A0
+> =C2=A0static const rv_comp_data rvcp_sltu[] =3D {
+> -=C2=A0=C2=A0=C2=A0 { rv_op_snez, rvcc_snez },
+> +=C2=A0=C2=A0=C2=A0 { &rvi_opcode_data[rv_op_snez], rvcc_snez },
+> =C2=A0=C2=A0=C2=A0=C2=A0 { },
+> =C2=A0};
+> =C2=A0
+> =C2=A0static const rv_comp_data rvcp_addiw[] =3D {
+> -=C2=A0=C2=A0=C2=A0 { rv_op_sext_w, rvcc_sext_w },
+> +=C2=A0=C2=A0=C2=A0 { &rvi_opcode_data[rv_op_sext_w], rvcc_sext_w },
+> =C2=A0=C2=A0=C2=A0=C2=A0 { },
+> =C2=A0};
+> =C2=A0
+> =C2=A0static const rv_comp_data rvcp_subw[] =3D {
+> -=C2=A0=C2=A0=C2=A0 { rv_op_negw, rvcc_negw },
+> +=C2=A0=C2=A0=C2=A0 { &rvi_opcode_data[rv_op_negw], rvcc_negw },
+> =C2=A0=C2=A0=C2=A0=C2=A0 { },
+> =C2=A0};
+> =C2=A0
+> =C2=A0static const rv_comp_data rvcp_fsgnj_s[] =3D {
+> -=C2=A0=C2=A0=C2=A0 { rv_op_fmv_s, rvcc_fmv_s },
+> +=C2=A0=C2=A0=C2=A0 { &rvi_opcode_data[rv_op_fmv_s], rvcc_fmv_s },
+> =C2=A0=C2=A0=C2=A0=C2=A0 { },
+> =C2=A0};
+> =C2=A0
+> =C2=A0static const rv_comp_data rvcp_fsgnjn_s[] =3D {
+> -=C2=A0=C2=A0=C2=A0 { rv_op_fneg_s, rvcc_fneg_s },
+> +=C2=A0=C2=A0=C2=A0 { &rvi_opcode_data[rv_op_fneg_s], rvcc_fneg_s },
+> =C2=A0=C2=A0=C2=A0=C2=A0 { },
+> =C2=A0};
+> =C2=A0
+> =C2=A0static const rv_comp_data rvcp_fsgnjx_s[] =3D {
+> -=C2=A0=C2=A0=C2=A0 { rv_op_fabs_s, rvcc_fabs_s },
+> +=C2=A0=C2=A0=C2=A0 { &rvi_opcode_data[rv_op_fabs_s], rvcc_fabs_s },
+> =C2=A0=C2=A0=C2=A0=C2=A0 { },
+> =C2=A0};
+> =C2=A0
+> =C2=A0static const rv_comp_data rvcp_fsgnj_d[] =3D {
+> -=C2=A0=C2=A0=C2=A0 { rv_op_fmv_d, rvcc_fmv_d },
+> +=C2=A0=C2=A0=C2=A0 { &rvi_opcode_data[rv_op_fmv_d], rvcc_fmv_d },
+> =C2=A0=C2=A0=C2=A0=C2=A0 { },
+> =C2=A0};
+> =C2=A0
+> =C2=A0static const rv_comp_data rvcp_fsgnjn_d[] =3D {
+> -=C2=A0=C2=A0=C2=A0 { rv_op_fneg_d, rvcc_fneg_d },
+> +=C2=A0=C2=A0=C2=A0 { &rvi_opcode_data[rv_op_fneg_d], rvcc_fneg_d },
+> =C2=A0=C2=A0=C2=A0=C2=A0 { },
+> =C2=A0};
+> =C2=A0
+> =C2=A0static const rv_comp_data rvcp_fsgnjx_d[] =3D {
+> -=C2=A0=C2=A0=C2=A0 { rv_op_fabs_d, rvcc_fabs_d },
+> +=C2=A0=C2=A0=C2=A0 { &rvi_opcode_data[rv_op_fabs_d], rvcc_fabs_d },
+> =C2=A0=C2=A0=C2=A0=C2=A0 { },
+> =C2=A0};
+> =C2=A0
+> =C2=A0static const rv_comp_data rvcp_fsgnj_q[] =3D {
+> -=C2=A0=C2=A0=C2=A0 { rv_op_fmv_q, rvcc_fmv_q },
+> +=C2=A0=C2=A0=C2=A0 { &rvi_opcode_data[rv_op_fmv_q], rvcc_fmv_q },
+> =C2=A0=C2=A0=C2=A0=C2=A0 { },
+> =C2=A0};
+> =C2=A0
+> =C2=A0static const rv_comp_data rvcp_fsgnjn_q[] =3D {
+> -=C2=A0=C2=A0=C2=A0 { rv_op_fneg_q, rvcc_fneg_q },
+> +=C2=A0=C2=A0=C2=A0 { &rvi_opcode_data[rv_op_fneg_q], rvcc_fneg_q },
+> =C2=A0=C2=A0=C2=A0=C2=A0 { },
+> =C2=A0};
+> =C2=A0
+> =C2=A0static const rv_comp_data rvcp_fsgnjx_q[] =3D {
+> -=C2=A0=C2=A0=C2=A0 { rv_op_fabs_q, rvcc_fabs_q },
+> +=C2=A0=C2=A0=C2=A0 { &rvi_opcode_data[rv_op_fabs_q], rvcc_fabs_q },
+> =C2=A0=C2=A0=C2=A0=C2=A0 { },
+> =C2=A0};
+> =C2=A0
+> =C2=A0/* Convert compressed insns into normal insns via pseudo expansion.
+> */
+> -#define DECOMP(X) (static const rv_comp_data[1]){ { X, rvcc_true } }
+> +#define DECOMP(X) (static const rv_comp_data[1]){ {
+> &rvi_opcode_data[X], rvcc_true } }
+> =C2=A0
+> =C2=A0/* operand extractors */
+> =C2=A0
+> @@ -5270,9 +5272,8 @@ static const rv_opcode_data
+> *decode_inst_lift_pseudo(rv_decode *dec,
+> =C2=A0=C2=A0=C2=A0=C2=A0 if (comp_data) {
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 while (comp_data->constr=
+aints) {
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =
+if (check_constraints(dec, comp_data->constraints)) {
+> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0 const rv_opcode_data *new_op =3D &dec-
+> >opcode_data[comp_data->op];
+> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0 assert(new_op !=3D op);
+> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0 return decode_inst_lift_pseudo(dec, new_op);
+> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0 assert(op !=3D comp_data->op);
+> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0 return decode_inst_lift_pseudo(dec, comp_data->op);
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =
+}
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =
+comp_data++;
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }
 
