@@ -4,87 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0E3BC5B56A
-	for <qemu-riscv@archiver.kernel.org>; Wed, 12 Aug 2026 14:02:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CEE8C5B572
+	for <qemu-riscv@archiver.kernel.org>; Wed, 12 Aug 2026 14:17:26 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wu9XS-0007vT-Lw; Wed, 12 Aug 2026 10:02:38 -0400
+	id 1wu9lN-0000mj-PN; Wed, 12 Aug 2026 10:17:01 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair@alistair23.me>)
- id 1wu9XE-0007tW-Rs; Wed, 12 Aug 2026 10:02:26 -0400
+ id 1wu9kv-0000iE-0Y; Wed, 12 Aug 2026 10:16:33 -0400
 Received: from fout-a8-smtp.messagingengine.com ([103.168.172.151])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair@alistair23.me>)
- id 1wu9XB-0002Nu-GB; Wed, 12 Aug 2026 10:02:24 -0400
-Received: from phl-compute-09.internal (phl-compute-09.internal [10.202.2.49])
- by mailfout.phl.internal (Postfix) with ESMTP id 13E9CEC006D;
- Wed, 12 Aug 2026 10:02:17 -0400 (EDT)
+ id 1wu9kr-0005Mx-Bx; Wed, 12 Aug 2026 10:16:32 -0400
+Received: from phl-compute-08.internal (phl-compute-08.internal [10.202.2.48])
+ by mailfout.phl.internal (Postfix) with ESMTP id E7952EC0019;
+ Wed, 12 Aug 2026 10:16:27 -0400 (EDT)
 Received: from phl-frontend-04 ([10.202.2.163])
- by phl-compute-09.internal (MEProxy); Wed, 12 Aug 2026 10:02:17 -0400
+ by phl-compute-08.internal (MEProxy); Wed, 12 Aug 2026 10:16:27 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alistair23.me;
  h=cc:cc:content-transfer-encoding:content-type:content-type
  :date:date:from:from:in-reply-to:in-reply-to:message-id
  :mime-version:references:reply-to:subject:subject:to:to; s=fm3;
- t=1786543337; x=1786629737; bh=ey8Tm/l1CibtSG95Qt+jqOA5SO2w7prG
- nsd+/homs3w=; b=jrW7gadDUXQLBTAZq5QHFr2UptHgLkZBusna0+5+4lXWzGqI
- D2sbI/bVDxd/SRpT0c3bRmVjw6FXEC0lE5vhnxGjtIuC9Wil1uikTH4sVm6ME1xh
- /ZP+yYo6i8NPb0m90+LUwnULlFLL96mmxrbgQaO/ve2hGDSbCnMOqK1OK/CW+lZM
- 8jTWFkhpsVL9SdkerQWGb1eBg+KVlpDrrNzI079p96WxOrAZHObmZq5+PTwXGKFS
- 6lEgnFe83cqlIbT+VWYEkT1wnq4ms1HpukINyO/e1meBjzFqm6HxJhtdTUdrH+rC
- b+KZ+R6jCIhC7m9TUsRig4A2lQelXRPr2YCI1Q==
+ t=1786544187; x=1786630587; bh=kaqxLHYM0GSVkW1m3tek8QKIOCRJtZH9
+ r+jffXUnD1A=; b=MvwZv+KBLqGUlmxKV9beusHOnVTWLivmGXOGLbS7LcjWItP9
+ T4wZdk22FJXTJOgVj1fkvGipfDptxqI5eLLeIkgtMQA04i7eVusqI6gRiE/85ssO
+ oDk/MYj6jE1hBm0INOx7eb6+/JkCRCXO+kfu3oQOQ1y1Y0cmpB6fVWlQ+wlWNRaT
+ 4TaImtnSPf9ksMNsbfJQrj6ZYuCFHzBBUTEHpYKQ8ddxvDyG3uPDIngf6gVvSOa6
+ R3985fHc50y29FEzv3x4zT+GQBbHKST5XoVqJ61kUVbHhd/WoewstFVyVzglmgMY
+ MfclLTx2FOB6Ivx4uLJyPugO7wY998JYS1Q8bA==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-transfer-encoding
  :content-type:content-type:date:date:feedback-id:feedback-id
  :from:from:in-reply-to:in-reply-to:message-id:mime-version
  :references:reply-to:subject:subject:to:to:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1786543337; x=
- 1786629737; bh=ey8Tm/l1CibtSG95Qt+jqOA5SO2w7prGnsd+/homs3w=; b=b
- NiKirjBIcidhCEFZSO8NCM5YAs+Q93spEw7HFgtisanGi2Pvy5m5+r+zuGpeHYjq
- yVpWArVmLz6v9rilZXBSNTmPLJEsA/Kqd7MaS1QNxfi+bvr9ZzAU/bQFV3UwDUdC
- j3Hhxq4szW3O7OV8atuJGNS11T5cUwSzDjJPH1yLz1bQ/l3lmls9+Zu4ryjT4Ztw
- 9AT9ejgQWEArsrIRsT5J3fxbLEek0jQm4dMjmnkjky1/9fi9ZhKMMnp5HGCuGEis
- pLYlbQwfWrxWenyI76W6UMb0+iSyVlkwHYPSUn8RNXg2gm4XHrPSNhBt8CQ3mPsk
- ECdpEdCJtWZ4+WuRUq8Ug==
-X-ME-Sender: <xms:53x8arMH7CUJlXquDB-N57eiC5eNpI2hHVr21py7ZheYYZZQ7kB1Lw>
- <xme:53x8akdX9GYTmNZ1cYWiLFZMcCv5gRIDuSt18TPXZtktCNpoz6NAeU0BDCyRvT1va
- 5XCqfAyH3s_m6r8StPdTN7Xqg0ddNOsXR69YAKuxL8JD2psrU3eLMs>
-X-ME-Received: <xmr:53x8ahEP49mOKeO-zAFBgdBSbwYW-acg2VvD5dJqZWNltL3mi8fo4D_o6iwVp1cuuYL4Qw>
-X-ME-Proxy-Cause: dmFkZTFsqhFi5OHec8z4spF7YXvJhFsBrzm4DkJqlUBsxeTjyi3hSG0iar8WL5yG+aNnH3
- sjBRmuZbtTHoYoorUR3qlR+DX/fmI/y6y/IHksk37Gm4mX1uDphkDJhqUSb6zDGUrn6W6D
- bkT5lmEW0Iu3AloMVxH9R0KDVlvK5JWiJkDKGJpfS2lggKHWf9Rs9Ir0weaG4FCywmSw7p
- zucGI+T3qSU3nbQa/zTAVWIYX10hQ8RCkfYO+B3QLnb7ys/Ws7WdsDpJLmWBI2Mm+5MSwo
- +/2eJXkcdumFZaYha73AnfJGbeieGmgKKpAIsawyu7z1meKHIjbfbYkc+xHw9XN8zqbgMc
- AKlR1Z6zy72bQqTtIk/MiIxcXdr5QsPMNqhw0OmGNuwfLgpHi2uI7kIdY1z/aItgYEKNZb
- ujuStOrZp8hQVu8kq3DKrGYULw1oFEXvx5nEhKmxck1tRPxXC2iRGyYz9laG03tZd1JtVJ
- 8wMMySPG1IhDbHkdneMtbelqV709TOR3u07SFX7pPYu3Zo3C0rCcsHSlqM0lIDKcTQMn6z
- 2uN2KCg4CZXW24yWOXR+apzIeEiNSV4+nen/f68CWhS0eTb7WTvqznyk6vq/t7PG9hGfZ3
- J20YWXlDFijQ1ejFOr7ImpNAuX5ywPWAIrnaKrouZilKCR530S2wEvAbKn0g
-X-ME-Proxy: <xmx:53x8avv7SDjKYbiUydCZeC8G9JMaSLo4Yyh1_nMpxTgmekVeCe2hbA>
- <xmx:53x8aroJ2k5ef0LQAJAf61aQqKQPGZIcAt6xY_JyctVg1_GZ3JqyTA>
- <xmx:53x8amm-Q_fKmUomyUMXkI0jROHpv8XZIz-pCgYfRq1tkX2upBAUuQ>
- <xmx:53x8aohuY5pq50if25ndO9K1AgTvTGz6D358lWHjvKHdAJMSOiRc2w>
- <xmx:6Xx8asdCZcZrjbXcz9YQ0xFOD-ftfVDKKzP8RQkkgKHQlYjh5-k3o3my>
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1786544187; x=
+ 1786630587; bh=kaqxLHYM0GSVkW1m3tek8QKIOCRJtZH9r+jffXUnD1A=; b=E
+ 3T4lHIkd76QlFF7RHuMXOMOsG9pZgQxWozUF1/MaL61pomZdesL5Xkc88tQqii8H
+ AWlynMGNA/LzGg8qmUeoeF8h2J9vOtn/yf7RcC3Jj/FI+VpHXoNKcL8W2zRCme37
+ hATtyo12lrWz4WQcE77fxsLzObhUZyQFMz9vG+nDBDJd1tr+Jy60st2TyeUqvbzs
+ /6giMVtHp9BKPQibl2aDV6ZsuGEpR3sMKc0yRxcXg22bOCKuKwvpdqOHPBLs9m0B
+ 1XX/dXWvNBP18OG7JYf3BekMUsj6X1aXwjtjDxTR+30UrPZBljz8ZrwhAvdhjnZi
+ ZAbLMVyzn9JptmBE8jwxg==
+X-ME-Sender: <xms:O4B8aroI8IRBaaOwmuzfRAiqi6tcuZzWzUkG3ClQWkFe7SEhUdr8ag>
+ <xme:O4B8aqmID6ddrRknXPMzTdRBoqz8iCfJVaWw7Gn8bOIcO13oBb6YVr4Knd6hSEgNo
+ HIJVLKolquAcpfLcChzRc-DWgvZ4a6xX_Js3PEvv9tWvV_GgOOUdg>
+X-ME-Received: <xmr:O4B8asc1sSFIgrvwg-RyPII396gJQo98PRdnYEkeqU5TF2qO9fznWjp2_62WRILc28el1g>
+X-ME-Proxy-Cause: dmFkZTGeQovrfaj3HhfP/EkzWDbpNgWLVrfjyAwVEkzsPGVkLNqHzf0ACGpy+JCwI5bysl
+ uvmdVmkFoa6xMUHSn8bDZAiomMvSlUr62iRYKPkWPMWvezhhnjartIy0uIFKfFsJJnyjpY
+ 6RcLVYsJQssR4u/HUgYfQtmFIyrKEchE0pkPX3RQgLDsRLwjOLX8W1e5VC8ur4mc04+XQl
+ HyQiRcsZN/pi7yioALD53GiO6au9UboJkpSoP1mgXw3682mXyV8Vlhchh/6CPy22yDo0CK
+ sslr7evbFxOG1e9NuLsDPFjW3BhI4e3xxfhTmtGFhiCB7pTawyJiKyI6QdvZq3vXgt9HgP
+ Ac66ghWMcreLFDH6fdVGn0d5IXxO5OU6J249aZpHSzCfYwglDfhKz1lIb8zXz4lIsXak67
+ NZf9Hba4J+P5/K+o39ad6BI165lO8G7NyJ0vDViuWVlVFIB/IiqWDtmUm4vwSh1mULWRLa
+ 7iRihQS3eXgVCa3tzcAULuEKSUy91u3/ByVB3ArgGnDygVwXSbHXpQA+EfagA0j39TQ4m1
+ 66vosTvajfZvCI1WDaFdSRcT0TI6yAncQePQtdPA8A7F/83et9gegPpaa7bnMmIp+HEAuU
+ NF2fvJQ9EpzuhTsaI1e/eRfgXgL9COoIavE2zHgFT5F7xTsNTL9eS0A98OlA
+X-ME-Proxy: <xmx:O4B8aupl2sV4SuMnIQWmVDh9B4JhCB8DqDxh3e75XVR-Xzum-tZTFA>
+ <xmx:O4B8auOcTB7h4Mu1TINn4EGtLr-fK8JuIpG4mySMgtouW-vOLPbnnQ>
+ <xmx:O4B8apiloq5ovGiujsF4wmZxpoWWice9OSgOxBr5bsc1lQCLqmKrOg>
+ <xmx:O4B8aptKzWfgPc7uLLZznMMRFAt47Ms8_TMnQqwHlOVKefJv9MAxuA>
+ <xmx:O4B8aorBJ6bl_UaUDt_bIwtrbNqB2RcZw7yGvjwDbAy_-iEqQmRJgShv>
 Feedback-ID: ifd214418:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
- 12 Aug 2026 10:02:14 -0400 (EDT)
-Message-ID: <41fb7dd23c94be376cf6f03fb54f66443c5e905d.camel@alistair23.me>
-Subject: Re: [PATCH v4 0/3] riscv-iommu: always send MRIF notice MSI
+ 12 Aug 2026 10:16:26 -0400 (EDT)
+Message-ID: <7d898286ea347c17d8ed62b9c29249b9b43b4ce8.camel@alistair23.me>
+Subject: Re: [PATCH v2] target/riscv: do not count ECALL in minstret
 From: Alistair <alistair@alistair23.me>
-To: Flavien Solt <flavien.solt97@gmail.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, Andrew Jones <andrew.jones@oss.qualcomm.com>, Tao
- Tang <tangtao1634@phytium.com.cn>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis	 <alistair.francis@wdc.com>, Weiwei Li
- <liwei1518@gmail.com>, Daniel Henrique Barboza
- <daniel.barboza@oss.qualcomm.com>, Liu Zhiwei
- <zhiwei_liu@linux.alibaba.com>, Chao Liu	 <chao.liu@processmission.com>,
- Fabiano Rosas <farosas@suse.de>, Laurent Vivier	 <lvivier@redhat.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Nutty Liu	 <nutty.liu@hotmail.com>,
- qemu-stable@nongnu.org
-Date: Thu, 13 Aug 2026 00:02:14 +1000
-In-Reply-To: <20260727-qemu-mrif-v4-v4-0-73e0890ad395@gmail.com>
-References: <20260727-qemu-mrif-v4-v4-0-73e0890ad395@gmail.com>
+To: Zephyr Li <fritchleybohrer@gmail.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com, 
+ liwei1518@gmail.com, daniel.barboza@oss.qualcomm.com, 
+ zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com
+Date: Thu, 13 Aug 2026 00:16:26 +1000
+In-Reply-To: <20260730032122.2564190-1-fritchleybohrer@gmail.com>
+References: <20260730032122.2564190-1-fritchleybohrer@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 User-Agent: Evolution 3.60.2 (by Flathub.org) 
@@ -113,75 +107,280 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, 2026-07-27 at 15:22 +0800, Flavien Solt wrote:
-> The AIA specification requires an IOMMU to send the configured notice
-> MSI after storing an MSI to an MRIF even when the destination
-> interrupt
-> is disabled. QEMU currently reads the MRIF interrupt-enable word and
-> returns without sending the notice when the matching bit is clear.
+On Thu, 2026-07-30 at 11:21 +0800, Zephyr Li wrote:
+> With icount enabled, helper_raise_exception() leaves ECALL in
+> icount_get_raw() because it exits without restoring the current TB
+> state. This makes minstret count an instruction that does not retire.
 >=20
-> Patch 1 lets iommu-testdev select an MSI payload and supplies its PCI
-> requester ID. Patch 2 removes the invalid enable-bit gate. Patch 3
-> checks
-> both enable states through qemu-system-riscv64.
+> Adjust only the fixed minstret baseline so that mcycle accounting
+> remains unchanged.
 >=20
-> The complete RISC-V IOMMU qtest suite passes:
+> Add an RV64 softmmu regression test for the issue.
 >=20
-> =C2=A0 MRIF notice: enable=3D0 pending=3D0x20 notice=3D0x12d
-> =C2=A0 MRIF notice: enable=3D1 pending=3D0x20 notice=3D0x12d
-> =C2=A0 6/6 tests passed
->=20
-> V3 used MIME transfer encoding to protect the patch body, but lore
-> still
-> received five hard-wrapped hunk headers. This revision resends
-> unchanged
-> code through b4 and carries the review tags received on v1 and v3.
->=20
-> Changes in v4:
-> =C2=A0 - Resend through b4 after the v3 lore copy remained line-wrapped.
-> =C2=A0 - Restore Daniel Henrique Barboza's Reviewed-by tag on patch 2.
-> =C2=A0 - Add review and test tags from Nutty Liu and Chao Liu.
->=20
-> Changes in v3:
-> =C2=A0 - Attempt to protect the patch body with MIME transfer encoding.
-> =C2=A0 - Add Tao Tang's Reviewed-by tag to patch 1.
->=20
-> Changes in v2:
-> =C2=A0 - Wrap the fix commit message.
-> =C2=A0 - Keep the existing notification comment.
-> =C2=A0 - Add deterministic IE-clear and IE-set qtests.
->=20
-> Signed-off-by: Flavien Solt <flavien.solt97@gmail.com>
-> ---
-> Flavien Solt (3):
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 hw/misc/iommu-testdev: support PCI MSI tes=
-t writes
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 hw/riscv/riscv-iommu.c: always send MRIF n=
-otice MSI
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 tests/qtest: add RISC-V IOMMU MRIF notice =
-tests
+> Fixes: 4fe8ae09062d ("target/riscv: Combine mhpmcounter and
+> mhpmcounterh")
+> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/4087
+> Signed-off-by: Zephyr Li <fritchleybohrer@gmail.com>
+> Reviewed-by: Daniel Henrique Barboza
+> <daniel.barboza@oss.qualcomm.com>
 
-Thanks!
-
-Applied to riscv-to-apply.next
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
->=20
-> =C2=A0hw/misc/iommu-testdev.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0 |=C2=A0 14 +++++-
-> =C2=A0hw/riscv/riscv-iommu.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0 |=C2=A0 13 -----
-> =C2=A0include/hw/misc/iommu-testdev.h |=C2=A0=C2=A0 1 +
-> =C2=A0tests/qtest/iommu-riscv-test.c=C2=A0 | 102
-> ++++++++++++++++++++++++++++++++++++++++
-> =C2=A04 files changed, 115 insertions(+), 15 deletions(-)
 > ---
-> base-commit: 499039798cdad7d86b787fec0eaf1da4151c0f05
-> change-id: 20260727-qemu-mrif-v4-c8e3c3a48b9c
+> Changes in v2:
+> - Add the Fixes tag suggested by Daniel.
 >=20
-> Best regards,
-> --=C2=A0=20
-> Flavien Solt <flavien.solt97@gmail.com>
+> ---
+> =C2=A0target/riscv/tcg/op_helper.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0 6 +++
+> =C2=A0target/riscv/tcg/pmu.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | 44 =
++++++++++++++-----
+> =C2=A0target/riscv/tcg/pmu.h=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=
+=A0 1 +
+> =C2=A0tests/tcg/riscv64/Makefile.softmmu-target |=C2=A0 4 ++
+> =C2=A0tests/tcg/riscv64/test-minstret-ecall.S=C2=A0=C2=A0 | 55
+> +++++++++++++++++++++++
+> =C2=A05 files changed, 98 insertions(+), 12 deletions(-)
+> =C2=A0create mode 100644 tests/tcg/riscv64/test-minstret-ecall.S
 >=20
+> diff --git a/target/riscv/tcg/op_helper.c
+> b/target/riscv/tcg/op_helper.c
+> index ba3c7da375..acdccd1a97 100644
+> --- a/target/riscv/tcg/op_helper.c
+> +++ b/target/riscv/tcg/op_helper.c
+> @@ -21,6 +21,9 @@
+> =C2=A0#include "qemu/osdep.h"
+> =C2=A0#include "cpu.h"
+> =C2=A0#include "target/riscv/tcg/csr.h"
+> +#ifndef CONFIG_USER_ONLY
+> +#include "pmu.h"
+> +#endif
+> =C2=A0#include "internals.h"
+> =C2=A0#include "exec/cputlb.h"
+> =C2=A0#include "accel/tcg/cpu-ldst.h"
+> @@ -47,6 +50,9 @@ G_NORETURN void riscv_raise_exception(CPURISCVState
+> *env,
+> =C2=A0
+> =C2=A0void helper_raise_exception(CPURISCVState *env, uint32_t exception)
+> =C2=A0{
+> +#ifndef CONFIG_USER_ONLY
+> +=C2=A0=C2=A0=C2=A0 riscv_pmu_decr_instret(env);
+> +#endif
+> =C2=A0=C2=A0=C2=A0=C2=A0 riscv_raise_exception(env, exception, 0);
+> =C2=A0}
+> =C2=A0
+> diff --git a/target/riscv/tcg/pmu.c b/target/riscv/tcg/pmu.c
+> index 38ad2737e1..1a4658319b 100644
+> --- a/target/riscv/tcg/pmu.c
+> +++ b/target/riscv/tcg/pmu.c
+> @@ -49,6 +49,21 @@ static bool riscv_pmu_counter_enabled(RISCVCPU
+> *cpu, uint32_t ctr_idx)
+> =C2=A0=C2=A0=C2=A0=C2=A0 }
+> =C2=A0}
+> =C2=A0
+> +static bool riscv_pmu_counter_filtered(CPURISCVState *env, uint64_t
+> cfg)
+> +{
+> +=C2=A0=C2=A0=C2=A0 bool virt_on =3D env->virt_enabled;
+> +
+> +=C2=A0=C2=A0=C2=A0 return (env->priv =3D=3D PRV_M && (cfg & MHPMEVENT_BI=
+T_MINH)) ||
+> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (env->priv =
+=3D=3D PRV_S && virt_on &&
+> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (cfg =
+& MHPMEVENT_BIT_VSINH)) ||
+> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (env->priv =
+=3D=3D PRV_U && virt_on &&
+> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (cfg =
+& MHPMEVENT_BIT_VUINH)) ||
+> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (env->priv =
+=3D=3D PRV_S && !virt_on &&
+> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (cfg =
+& MHPMEVENT_BIT_SINH)) ||
+> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (env->priv =
+=3D=3D PRV_U && !virt_on &&
+> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (cfg =
+& MHPMEVENT_BIT_UINH));
+> +}
+> +
+> =C2=A0/*
+> =C2=A0 * Information needed to update counters:
+> =C2=A0 *=C2=A0 new_priv, new_virt: To correctly save starting snapshot fo=
+r the
+> newly
+> @@ -147,12 +162,27 @@ void riscv_pmu_update_fixed_ctrs(CPURISCVState
+> *env,
+> =C2=A0=C2=A0=C2=A0=C2=A0 riscv_pmu_icount_update_priv(env, newpriv, new_v=
+irt);
+> =C2=A0}
+> =C2=A0
+> +void riscv_pmu_decr_instret(CPURISCVState *env)
+> +{
+> +=C2=A0=C2=A0=C2=A0 if (!icount_enabled() ||
+> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (env->mcountinhibit & COUNTER=
+EN_IR) ||
+> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 riscv_pmu_counter_filtered(en=
+v, env->minstretcfg)) {
+> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return;
+> +=C2=A0=C2=A0=C2=A0 }
+> +
+> +=C2=A0=C2=A0=C2=A0 /*
+> +=C2=A0=C2=A0=C2=A0=C2=A0 * minstret is derived from icount, which includ=
+es the current
+> +=C2=A0=C2=A0=C2=A0=C2=A0 * instruction.=C2=A0 Move the baseline forward =
+to exclude an
+> instruction
+> +=C2=A0=C2=A0=C2=A0=C2=A0 * that raises an exception and therefore does n=
+ot retire.
+> +=C2=A0=C2=A0=C2=A0=C2=A0 */
+> +=C2=A0=C2=A0=C2=A0 env->pmu_ctrs[2].mhpmcounter_prev++;
+> +}
+> +
+> =C2=A0int riscv_pmu_incr_ctr(RISCVCPU *cpu, enum riscv_pmu_event_idx
+> event_idx)
+> =C2=A0{
+> =C2=A0=C2=A0=C2=A0=C2=A0 uint32_t ctr_idx;
+> =C2=A0=C2=A0=C2=A0=C2=A0 CPURISCVState *env =3D &cpu->env;
+> =C2=A0=C2=A0=C2=A0=C2=A0 uint64_t max_val =3D UINT64_MAX;
+> -=C2=A0=C2=A0=C2=A0 bool virt_on =3D env->virt_enabled;
+> =C2=A0=C2=A0=C2=A0=C2=A0 PMUCTRState *counter;
+> =C2=A0=C2=A0=C2=A0=C2=A0 gpointer value;
+> =C2=A0
+> @@ -170,17 +200,7 @@ int riscv_pmu_incr_ctr(RISCVCPU *cpu, enum
+> riscv_pmu_event_idx event_idx)
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return -1;
+> =C2=A0=C2=A0=C2=A0=C2=A0 }
+> =C2=A0
+> -=C2=A0=C2=A0=C2=A0 /* Privilege mode filtering */
+> -=C2=A0=C2=A0=C2=A0 if ((env->priv =3D=3D PRV_M &&
+> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (env->mhpmevent_val[ctr_idx] =
+& MHPMEVENT_BIT_MINH)) ||
+> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (env->priv =3D=3D PRV_S && vi=
+rt_on &&
+> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (env->mhpmevent_val[ctr_idx] =
+& MHPMEVENT_BIT_VSINH)) ||
+> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (env->priv =3D=3D PRV_U && vi=
+rt_on &&
+> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (env->mhpmevent_val[ctr_idx] =
+& MHPMEVENT_BIT_VUINH)) ||
+> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (env->priv =3D=3D PRV_S && !v=
+irt_on &&
+> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (env->mhpmevent_val[ctr_idx] =
+& MHPMEVENT_BIT_SINH)) ||
+> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (env->priv =3D=3D PRV_U && !v=
+irt_on &&
+> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (env->mhpmevent_val[ctr_idx] =
+& MHPMEVENT_BIT_UINH))) {
+> +=C2=A0=C2=A0=C2=A0 if (riscv_pmu_counter_filtered(env, env-
+> >mhpmevent_val[ctr_idx])) {
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return 0;
+> =C2=A0=C2=A0=C2=A0=C2=A0 }
+> =C2=A0
+> diff --git a/target/riscv/tcg/pmu.h b/target/riscv/tcg/pmu.h
+> index b4f1e469a2..2429c01b77 100644
+> --- a/target/riscv/tcg/pmu.h
+> +++ b/target/riscv/tcg/pmu.h
+> @@ -36,6 +36,7 @@ int riscv_pmu_setup_timer(CPURISCVState *env,
+> uint64_t value,
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0 uint32_t ctr_idx);
+> =C2=A0void riscv_pmu_update_fixed_ctrs(CPURISCVState *env,
+> privilege_mode_t newpriv,
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 bool new_virt);
+> +void riscv_pmu_decr_instret(CPURISCVState *env);
+> =C2=A0RISCVException riscv_pmu_read_ctr(CPURISCVState *env, target_ulong
+> *val,
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 bool upper_half, =
+uint32_t
+> ctr_idx);
+> =C2=A0
+> diff --git a/tests/tcg/riscv64/Makefile.softmmu-target
+> b/tests/tcg/riscv64/Makefile.softmmu-target
+> index 82be8a2c91..42038ce3b4 100644
+> --- a/tests/tcg/riscv64/Makefile.softmmu-target
+> +++ b/tests/tcg/riscv64/Makefile.softmmu-target
+> @@ -24,6 +24,10 @@ EXTRA_RUNS +=3D run-test-mepc-masking
+> =C2=A0run-test-mepc-masking: test-mepc-masking
+> =C2=A0	$(call run-test, $<, $(QEMU) $(QEMU_OPTS)$<)
+> =C2=A0
+> +EXTRA_RUNS +=3D run-test-minstret-ecall
+> +run-test-minstret-ecall: test-minstret-ecall
+> +	$(call run-test, $<, $(QEMU) -icount shift=3D1 $(QEMU_OPTS)$<)
+> +
+> =C2=A0EXTRA_RUNS +=3D run-plugin-doubletrap
+> =C2=A0run-plugin-doubletrap: doubletrap
+> =C2=A0	$(call run-test, $<, \
+> diff --git a/tests/tcg/riscv64/test-minstret-ecall.S
+> b/tests/tcg/riscv64/test-minstret-ecall.S
+> new file mode 100644
+> index 0000000000..ab268f7f22
+> --- /dev/null
+> +++ b/tests/tcg/riscv64/test-minstret-ecall.S
+> @@ -0,0 +1,55 @@
+> +/* SPDX-License-Identifier: GPL-2.0-or-later */
+> +
+> +	.option	norvc
+> +
+> +	.text
+> +	.global	_start
+> +_start:
+> +	lla	t0, trap
+> +	csrw	mtvec, t0
+> +
+> +	/*
+> +	 * The first CSR read retires after obtaining s0.=C2=A0 The ecall
+> does not
+> +	 * retire, so the trap handler must observe a difference of
+> one.
+> +	 */
+> +	csrr	s0, minstret
+> +	ecall
+> +	sub	t0, s1, s0
+> +	li	t1, 1
+> +	bne	t0, t1, fail
+> +
+> +	li	a0, 0
+> +	j	_exit
+> +
+> +trap:
+> +	csrr	s1, minstret
+> +	csrr	t0, mcause
+> +	li	t1, 11		/* Environment call from M-mode */
+> +	bne	t0, t1, fail
+> +
+> +	csrr	t0, mepc
+> +	addi	t0, t0, 4
+> +	csrw	mepc, t0
+> +	mret
+> +
+> +fail:
+> +	li	a0, 1
+> +
+> +_exit:
+> +	lla	a1, semiargs
+> +	li	t0, 0x20026	/* ADP_Stopped_ApplicationExit */
+> +	sd	t0, 0(a1)
+> +	sd	a0, 8(a1)
+> +	li	a0, 0x20	/* TARGET_SYS_EXIT_EXTENDED */
+> +
+> +	/* Semihosting call sequence */
+> +	.balign	16
+> +	slli	zero, zero, 0x1f
+> +	ebreak
+> +	srai	zero, zero, 0x7
+> +	j	.
+> +
+> +	.data
+> +	.balign	16
+> +semiargs:
+> +	.space	16
 
