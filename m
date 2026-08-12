@@ -4,142 +4,134 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F269C5AD5A
-	for <qemu-riscv@archiver.kernel.org>; Wed, 12 Aug 2026 10:35:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9D2DC5AD5A
+	for <qemu-riscv@archiver.kernel.org>; Wed, 12 Aug 2026 10:36:10 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wu6It-0008Pg-Fu; Wed, 12 Aug 2026 06:35:23 -0400
+	id 1wu6Ie-0008Ig-Sn; Wed, 12 Aug 2026 06:35:08 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <subrahmanya.lingappa@oss.qualcomm.com>)
- id 1wu6In-0008Ot-Po
- for qemu-riscv@nongnu.org; Wed, 12 Aug 2026 06:35:19 -0400
-Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
+ id 1wu6Id-0008G7-16
+ for qemu-riscv@nongnu.org; Wed, 12 Aug 2026 06:35:07 -0400
+Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <subrahmanya.lingappa@oss.qualcomm.com>)
- id 1wu6Il-0003X7-OV
- for qemu-riscv@nongnu.org; Wed, 12 Aug 2026 06:35:17 -0400
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+ id 1wu6Ia-0003L1-RA
+ for qemu-riscv@nongnu.org; Wed, 12 Aug 2026 06:35:06 -0400
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 67C9uH8i3168860
- for <qemu-riscv@nongnu.org>; Wed, 12 Aug 2026 10:35:14 GMT
+ 67C9ftra3436403
+ for <qemu-riscv@nongnu.org>; Wed, 12 Aug 2026 10:35:02 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=82l3PjnXb0G
- ZlmKaawQ08Xl5HnrTAdtiJbEN8JRS2d0=; b=P1Y2lR8AMCe7T4y76wGtzEs5qCY
- ECUDpTfD5Ca9AP5aOwY1ZmGHPbxmRZLlpvqvXTcWfr74+c2kG9GjFPPCqS4Ry2EV
- NLHPVO00vVpT/J/S033+A2gThFjH5ReyEJyoU/FKWAqjMsw3rhyeJfxCv6lig22k
- iZHISwpLzcM7RoKulwu01Y1w7N7BvOkl7eAkoJI7wQOZKkDn9jyr2Kz637c5spMT
- uHH5c2bq5WBCF+ueXmZOS4ZUlDwt6W1HeoiJm2sclImc1n+SUK7Gf2hn7hjU8oXa
- 3KuuichIhDVyJQhA3gLapPw91Zj8Utd+lATvO0snKXPrRYSWWmYVZPuWLqA==
-Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com
- [209.85.214.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g0pmyr4s5-1
+ cc:content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=qcppdkim1; bh=ByghFd610DNkMeXBzOqs4T
+ qZpw1jlEBOonSgJoZMS/s=; b=hBUoqo9kbOSu0MHjKw66tzJ50/Vkts91fW5kJA
+ niaiOPnD0EwI/36Q9AptHc62mCbYrLgk46sCVZ6S4DX0yH9eEi9GAyKAPw7IWwXO
+ GX3l9hztH9gdCFn9zrbrLyabJOSDs4Fl7b2712h6us9mozVEkWvmRUwtN5kBKTBD
+ iasfeDb6aCrhKcaIQORv2gIp+Qs6M2unS76CbL5ABf7fqW6D3bcDUEugMfr7NJjf
+ /mN1yMvyPMnPx4NqI3bh7jLt5phTNbMYuWrLRUd48jpV69OgRts8MyD35uwHCwRs
+ xTyU84wPEh7kDM5PYsm4azaVFf+2TqOdXZqPoPWX/YOpqGzQ==
+Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com
+ [209.85.216.72])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g0hj2sdgt-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Wed, 12 Aug 2026 10:35:13 +0000 (GMT)
-Received: by mail-pl1-f197.google.com with SMTP id
- d9443c01a7336-2ced1ed870fso2014435ad.2
- for <qemu-riscv@nongnu.org>; Wed, 12 Aug 2026 03:35:13 -0700 (PDT)
+ for <qemu-riscv@nongnu.org>; Wed, 12 Aug 2026 10:35:02 +0000 (GMT)
+Received: by mail-pj1-f72.google.com with SMTP id
+ 98e67ed59e1d1-38e8d1600b3so235605a91.1
+ for <qemu-riscv@nongnu.org>; Wed, 12 Aug 2026 03:35:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1786530913; x=1787135713; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=82l3PjnXb0GZlmKaawQ08Xl5HnrTAdtiJbEN8JRS2d0=;
- b=Zp3EZoC4TP/QG//73g+bpLbV0HST88EPyDrYvbBaM8T4RVWvJNwO6TtIJnirggkA7B
- b5N5++j8m5QxxY03jWuqp4i5yFdu6G5d+lZTWXcy0Odw5HT/aL5PG+1LinaKe0lL16G7
- lROY3o7rqYHw7wFjwc4fJcSvdbxxvyP5Ihk0k/oqCNLWeHdWumbu77WQgug/P5y8tohK
- FRfwi0/zlx3J0RnxJGpjl3qKwJt+ilISRVNEAH9XeD39xpTg6u+ZNBIK2KhSt4TjxyDL
- nrtqL3yEvpxhCFRNNk6UWpAZM0uHpw1Hh/jxwVNZXNV5XN3C4jgZuEicUNSMxWR5SxEQ
- RjbQ==
+ d=oss.qualcomm.com; s=google; t=1786530901; x=1787135701; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:mime-version:message-id:date
+ :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=ByghFd610DNkMeXBzOqs4TqZpw1jlEBOonSgJoZMS/s=;
+ b=QoBAFvFABQGqPETu6MKoBegLZtCBRFqMk96qKwvolVWqseO6X1iGk7dqGdy0LwG4Kc
+ iG4+krk/tJl3PGY0As+5fd57ycWRyjGB5uI5SNJuPlWFU1PDNNk/dConTL8XYq+I4JhL
+ 5XSO1bAJlJBU8R7+/Z8AoWzs8YWC/CCBnGjJFqtbUmHMTw2+pM/Jwn73/JHIlIdAtVFZ
+ A21MZllGW2KvGoIcvcUF2rVUI+kW8x/LyIO5XV4uY6G3pBlgmaoQUfHpr6oNQjuvrK2Z
+ /XTriJAD/hKamzZ8/u3YP/T8T8zRPBuwixcbH+t+PGVWGjBhh8f7P5I3BMXkp5e2wHvn
+ cV+A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786530913; x=1787135713;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=82l3PjnXb0GZlmKaawQ08Xl5HnrTAdtiJbEN8JRS2d0=;
- b=hNp4JgEGzN8sOcIJyhAZ+NtYtywjV13EkNoQVjHKQSQL++cm87dQJH7zisBiO8Xy3V
- RRAMWIPuTXnX4kVfm+8Fne+V1A863ye6CuRj+AXoVhlXlQ5yAbaA0w+mU2qNFxaxuWHA
- EXna3jQqj/UUwMRhR9Kw/LyESMP9ooiYWXfYbdfOWiLJw6m0/2D3Tkpry/i/ZpX1zrdz
- QLE3WCpUpht10BbQvMK2wysSrR3Tsp8lvIAR/SvF3XmR1so8BI+5BoVXDxMXl+NK+oZU
- KXqYtF/VOuTCnN50LWAbFCTBAV5H21bTPhhLI463E+er6F7hvwRJIOVmBsH4zaip4c0U
- 3XFg==
-X-Gm-Message-State: AOJu0YyCcW8TdrdTEZkTPbxOR7+Y4tODBezK61uY/TG6jCXTyPqyOKk+
- 9r6ZxDthiu51mKqSEShwi/4gMGkicUcIdLnvzf0ufgYxAubquthOhqIAKoB5uft4FiY2CrTOBV4
- +CI1ZTmAQG9N+WhzaxFUQeCRH4O3iSRxV1Genqkt0lHrA36iag6Qo5K6Es4xolBv5Ew==
-X-Gm-Gg: AR+sD10voXzZjCBBQCm6EgLT55B2cMotHUTuzMPVzu9WtnKAdi937gDZAtj7YqTY1C/
- e5wQH03PDy3/D+EbobLQMgzB4uX5Tq93lrBF933JEoEPuRAFw5DBZie2tf2BVJuu1o7qkID6fZm
- sEJU6LS8WMKzzT6ynoCMASZnO+X04BXdw/LzsMMqIGseb23OaZLfwgLHiGZixWw9LkOslQXDade
- vkc3sG5XtR/j2aCr2Wsk6sVNMBB2UFc6eglKh8nk7Fvm9Qmj2YuzD99IOjZkB4Hp/EZ02d+/fUG
- fqYtQlUpVqUC8rLIkiS6iYupNogU0fHXrXfCweVDvLchRLESXMfkT9n6ArPwtbB4obH6C7Dpox3
- NJDHj3E+71vorpDl10UnkAeoP8I/VkbX1jLgGf07BnObXZQrCROQcPvLsCiWPNDha5Yd7sh0E1y
- qkE2by139eJcFRjILJibx9czjC7+1OzNA=
-X-Received: by 2002:a17:903:292:b0:2cc:f4d4:29a0 with SMTP id
- d9443c01a7336-2d3456c187amr37311545ad.3.1786530913181; 
- Wed, 12 Aug 2026 03:35:13 -0700 (PDT)
-X-Received: by 2002:a17:903:292:b0:2cc:f4d4:29a0 with SMTP id
- d9443c01a7336-2d3456c187amr37311215ad.3.1786530912738; 
- Wed, 12 Aug 2026 03:35:12 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1786530901; x=1787135701;
+ h=content-transfer-encoding:content-type:mime-version:message-id:date
+ :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=ByghFd610DNkMeXBzOqs4TqZpw1jlEBOonSgJoZMS/s=;
+ b=bCQpCE5RjE07kXdujVI6JWvX3pSqMCXBl+s2GbsYYy8lAYGbdDnHqmIA0lCAotoPHG
+ 6owRZBIySVGbQvDDxT6uT+8rGY5JsS9uprnykBR/sUO3tt7zd2Q2EuJWt8s5rTADJ6tS
+ 2sF5Yxi66smc0dSwdjG2gasexGp0GGbRzcPjWhzkAWPizSxgdVWxBKLgqLfbrc7Llf+b
+ KGB9QKfHlrYUr7WZpAHGKcj8WnGcv1bpLMEedeK/wDa3eQANMDczG9XaDa68xPnKeFQ2
+ apTc0QD8MzYsyP8xJEvbJTUpD3YF1lL6Zc6g0Bwlfx4X+w7sZZM7jmi5sSq0hFGeOd33
+ G6mg==
+X-Gm-Message-State: AOJu0YxBkiRQcXv51sD8yCwnzPWeipH1wwBx10gqZNdaKCVQC2VypqHR
+ G241gG8hAf643+Zka1GHY9JljXz85Way1LLIioSA4ASsyyRa5Jogf8nbUagmpZW0ADyPhr76gtV
+ 6t/ZNHajgHAzLeGrfnaGjHYLzDk7GX2pQXnT4bPmXCw1Dlm/c8oPkFIcn8CaKGaTJ8w==
+X-Gm-Gg: AR+sD13UBAGokaf38o4eYykhGCTiycJz5DcUBTxR/oGLoCF7NAZYCkSQUzIp8Eevkxg
+ osp7798c4H4jlaw2RWNtemMc/4elFaRRNWW9KxBTzuwqz75NnZLHZp21lPf7YQSKFzOmuC1Y4PF
+ G3ExlbMvJ1Xr1XaawqCWWDY8Ic6YqKE84thIIumGj545cqM6fDv6445R18akH/qysTj0pNVRTDD
+ Bu46IRdN/lTnLC+aeeW097dLjEFtcUuiueoZzxYn7xI3MM2M5k63bWBlsOab2TUtJsj31bj1tTf
+ 3CitSrBxUtAQ62karN3FRJXIL38Sl+HE66ofV2eY0uJ5s3RA/yS5ZQcDXL0IePkODJQroZDYTth
+ fe1IWGvXAUzsXD9MkVouAWeBk5JctheRimwm9+TjokKiGj01EbdfxrFdjiF89H+p3WsoZTzXk0t
+ qvhhgyE4oUY1xPVhcbsDRarnh7jvZWOd0=
+X-Received: by 2002:a17:90b:4d87:b0:36d:b30b:14ed with SMTP id
+ 98e67ed59e1d1-393013da3c4mr2792147a91.2.1786530901174; 
+ Wed, 12 Aug 2026 03:35:01 -0700 (PDT)
+X-Received: by 2002:a17:90b:4d87:b0:36d:b30b:14ed with SMTP id
+ 98e67ed59e1d1-393013da3c4mr2792119a91.2.1786530900548; 
+ Wed, 12 Aug 2026 03:35:00 -0700 (PDT)
 Received: from hu-slingapp-blr.qualcomm.com
  (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-31d6aec3947sm6910326eec.17.2026.08.12.03.35.09
+ 5a478bee46e88-31d6aec3947sm6910326eec.17.2026.08.12.03.34.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 12 Aug 2026 03:35:12 -0700 (PDT)
+ Wed, 12 Aug 2026 03:35:00 -0700 (PDT)
 From: Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcomm.com>
 To: qemu-riscv@nongnu.org
-Cc: Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcomm.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu.zevorn@gmail.com>,
- qemu-devel@nongnu.org (open list:All patches CC here)
-Subject: [PATCH v7 03/10] hw/riscv: add RPMI FDT helpers
-Date: Wed, 12 Aug 2026 16:04:37 +0530
-Message-ID: <20260812103445.3451960-4-subrahmanya.lingappa@oss.qualcomm.com>
+Cc: Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcomm.com>
+Subject: [PATCH v7 00/10] riscv: add initial RPMI virt support
+Date: Wed, 12 Aug 2026 16:04:34 +0530
+Message-ID: <20260812103445.3451960-1-subrahmanya.lingappa@oss.qualcomm.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260812103445.3451960-1-subrahmanya.lingappa@oss.qualcomm.com>
-References: <20260812103445.3451960-1-subrahmanya.lingappa@oss.qualcomm.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODEyMDA4NCBTYWx0ZWRfX+YMBpAyJBJKb
- U9pjXDTur74FF4iPVcenlAJS3yEgqao8/7INNYyIFhCBNZ85Dr/lWSB5c3V+gepZYJUnuj1qNlm
- Q9nyhLHMGusFbBZGChmskxmD8kZzQII=
-X-Proofpoint-ORIG-GUID: Od_FO_09IDTT_WYkNP8_IYF79AtSFGJW
-X-Authority-Analysis: v=2.4 cv=C/fZDwP+ c=1 sm=1 tr=0 ts=6a7c4c61 cx=c_pps
- a=cmESyDAEBpBGqyK7t0alAg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22 a=EUspDBNiAAAA:8
- a=jHWy4UxqgUe44QwoGJQA:9 a=1OuFwYUASf3TG4hYMiVC:22
-X-Proofpoint-GUID: Od_FO_09IDTT_WYkNP8_IYF79AtSFGJW
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODEyMDA4NCBTYWx0ZWRfXxF+cQW2/ape/
- ZHVPgbvgQYRUicZcPbo2Uk+NXMtZ1DTudeGMTAPFzzbjixIa0el3OYwLc7FR+i1bMfyUQdBmfFm
- frBmjHOIrU0rKeGnPGVtgFdNzfZtn0LaP9jIBNaqoOpu7fObyJxw8YVtewpr+X30NL1sCiAubtQ
- //M/DlzZWmmXsMXqvL9qLyKKBhaZsEGTRobdGI1cRMlLYr7IffsbVaUWGUGhc0iJxymZed10i+D
- 2oxUtOMg73AqngdQxO6lusWdTn916ALLYvvJmhSPnSZelWA/Ovia3jgl/wZHjXl4tDau2aVG52K
- 7BjfaClgN2S3eGA7HMJHwKb0HVmTJhJec+leTM07V0FcFwaAkDz6h3uWwkP/z2s0waCR1NXuPCR
- 1Y/G+zH2R7YI35AN1eV0n1YbdmneWzQ9MCVhQYssRnrHjk5koXQ9OGEaiH/gCpWtGpKO0hvzFty
- m5Qh/Qj7jnNMOhWDqiQ==
+X-Authority-Analysis: v=2.4 cv=a8EAM0SF c=1 sm=1 tr=0 ts=6a7c4c56 cx=c_pps
+ a=RP+M6JBNLl+fLTcSJhASfg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
+ a=9ONo2BjGoRSARuvHahcA:9 a=QEXdDO2ut3YA:10 a=iS9zxrgQBfv6-_F4QbHw:22
+X-Proofpoint-ORIG-GUID: R8en1mC5BrS4nw1ezJ6rgZsf4nvevh1m
+X-Proofpoint-GUID: R8en1mC5BrS4nw1ezJ6rgZsf4nvevh1m
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODEyMDA4NCBTYWx0ZWRfX/DJEJ/L75OzC
+ Syzz0E5PC88gz8thHW6g8CbyxrPyNriD2h9JJa0doq8ESfgXQJthXjHAy5EP3XE8ZanLpXEpmZ/
+ USTJA+nnsySGMSVHCOswqzzoBSekxvE=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODEyMDA4NCBTYWx0ZWRfXwp2e+yC90rrw
+ KfgrLlXA9eIpHT75zAWzVP2RQrqrEE8uyy+Ro/dIUY+jJHpJVTVfbqKdER+pdN9f9r9MjzCTp1y
+ ghdk54CG5wkJmIDWrmymxJ4JWti2pe4pkS1O9MiDjrGGGfXsMIjn45WOSjuddAx/KLcaetARKGr
+ WVb/Wn0jDNjENfY1fGmdfj8qADJv3Pe5sdCN4vsYdWSzyjLeM7KsRNN8mv+BN9Hx4HWEGZ+s/da
+ IYqzgOE2cyd9sBUvpYJOTnl7TA4jNo9yR30IKvawQPP0pVJtHgmkHNl3r6jpuXbqBZdqvBFBBPp
+ QMAvGz5xkGvBeJt0lXC04mxjT1iZ2Ab+avuUzaY/BFZ/P2vsddgWbATtaHZ5lUjKiEOAbLIquT2
+ Y7cdZO+Jed0KLALDWWCNQlBm47x5zOCB1FinWlXWc2yJ4NddZBRu6qXdutbYJGu+o9cht5f9t2j
+ waHdlPO5GNVLy5/tHdA==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-12_03,2026-08-10_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 clxscore=1015 phishscore=0 spamscore=0 malwarescore=0
- adultscore=0 suspectscore=0 lowpriorityscore=0 priorityscore=1501 bulkscore=0
+ priorityscore=1501 phishscore=0 suspectscore=0 lowpriorityscore=0 bulkscore=0
+ impostorscore=0 adultscore=0 spamscore=0 malwarescore=0 clxscore=1015
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608120084
-Received-SPF: pass client-ip=205.220.168.131;
+Received-SPF: pass client-ip=205.220.180.131;
  envelope-from=subrahmanya.lingappa@oss.qualcomm.com;
- helo=mx0a-0031df01.pphosted.com
+ helo=mx0b-0031df01.pphosted.com
 X-Spam_score_int: -27
 X-Spam_score: -2.8
 X-Spam_bar: --
 X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -155,181 +147,72 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Add helper routines for describing RPMI shared-memory mailbox transports
-and service child nodes in the RISC-V virt device tree.
+This series adds initial librpmi-backed RPMI support for the RISC-V virt
+machine. It covers the optional librpmi build dependency, the RPMI
+transport and Base service, virt FDT wiring, opt-in machine support,
+System Reset, HSM, System Suspend, documentation, qtests and a Linux
+guest smoke test.
 
-The helpers keep RPMI node construction in one place so the virt machine
-can add service groups without open-coding compatible strings, channel
-IDs, interrupts, and shared-memory references at each call site.
+Changes since v6:
+- When RPMI is enabled, advertise reboot and shutdown through the RPMI
+  system reset service instead of the syscon reset nodes.
+- Extend the functional guest smoke test to check the RPMI reboot and
+  shutdown devices reported by firmware and exercise the reboot path.
 
-Signed-off-by: Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcomm.com>
-Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
----
- hw/riscv/meson.build        |   1 +
- hw/riscv/rpmi-fdt.c         | 103 ++++++++++++++++++++++++++++++++++++
- include/hw/riscv/rpmi-fdt.h |  30 +++++++++++
- 3 files changed, 134 insertions(+)
+Subrahmanya Lingappa (10):
+  build: add optional librpmi dependency
+  hw/misc: add RISC-V RPMI transport and Base support
+  hw/riscv: add RPMI FDT helpers
+  hw/riscv/virt: add opt-in RPMI base support
+  riscv: add RPMI system reset service
+  riscv: add RPMI HSM service
+  riscv: add RPMI system suspend service
+  docs/system/riscv: document initial virt RPMI support
+  tests/qtest: cover initial RISC-V RPMI services
+  tests/functional: add initial RPMI virt guest smoke
+
+ Kconfig.host                               |   3 +
+ MAINTAINERS                                |   3 +
+ docs/system/riscv/virt.rst                 |  65 ++
+ hw/misc/Kconfig                            |   4 +
+ hw/misc/meson.build                        |   6 +
+ hw/misc/riscv_rpmi-stub.c                  |  16 +
+ hw/misc/riscv_rpmi.c                       | 558 +++++++++++++++++
+ hw/misc/riscv_rpmi_hsm.c                   | 287 +++++++++
+ hw/misc/riscv_rpmi_internal.h              |  42 ++
+ hw/misc/riscv_rpmi_sysreset.c              | 206 +++++++
+ hw/misc/riscv_rpmi_syssusp.c               | 191 ++++++
+ hw/riscv/Kconfig                           |   1 +
+ hw/riscv/meson.build                       |   3 +
+ hw/riscv/rpmi-fdt-stub.c                   |  37 ++
+ hw/riscv/rpmi-fdt.c                        | 103 ++++
+ hw/riscv/virt.c                            | 179 +++++-
+ include/hw/misc/riscv_rpmi.h               | 114 ++++
+ include/hw/riscv/rpmi-fdt.h                |  41 ++
+ include/hw/riscv/virt.h                    |   3 +
+ meson.build                                |  14 +
+ meson_options.txt                          |   2 +
+ scripts/meson-buildoptions.sh              |   3 +
+ tests/functional/riscv64/meson.build       |   2 +
+ tests/functional/riscv64/test_rpmi_virt.py | 184 ++++++
+ tests/qtest/meson.build                    |   2 +
+ tests/qtest/riscv-rpmi-test.c              | 684 +++++++++++++++++++++
+ 26 files changed, 2751 insertions(+), 2 deletions(-)
+ create mode 100644 hw/misc/riscv_rpmi-stub.c
+ create mode 100644 hw/misc/riscv_rpmi.c
+ create mode 100644 hw/misc/riscv_rpmi_hsm.c
+ create mode 100644 hw/misc/riscv_rpmi_internal.h
+ create mode 100644 hw/misc/riscv_rpmi_sysreset.c
+ create mode 100644 hw/misc/riscv_rpmi_syssusp.c
+ create mode 100644 hw/riscv/rpmi-fdt-stub.c
  create mode 100644 hw/riscv/rpmi-fdt.c
+ create mode 100644 include/hw/misc/riscv_rpmi.h
  create mode 100644 include/hw/riscv/rpmi-fdt.h
+ create mode 100644 tests/functional/riscv64/test_rpmi_virt.py
+ create mode 100644 tests/qtest/riscv-rpmi-test.c
 
-diff --git a/hw/riscv/meson.build b/hw/riscv/meson.build
-index b70a054579..ae69426eb1 100644
---- a/hw/riscv/meson.build
-+++ b/hw/riscv/meson.build
-@@ -3,6 +3,7 @@ riscv_ss.add(files('boot.c'))
- riscv_ss.add(files('fdt-common.c'))
- riscv_ss.add(when: 'CONFIG_RISCV_NUMA', if_true: files('numa.c'))
- riscv_ss.add(files('riscv_hart.c'))
-+riscv_ss.add(when: 'CONFIG_RISCV_RPMI', if_true: files('rpmi-fdt.c'))
- riscv_ss.add(when: 'CONFIG_OPENTITAN', if_true: files('opentitan.c'))
- riscv_ss.add(when: 'CONFIG_RISCV_VIRT', if_true: files('virt.c'))
- riscv_ss.add(when: 'CONFIG_SHAKTI_C', if_true: files('shakti_c.c'))
-diff --git a/hw/riscv/rpmi-fdt.c b/hw/riscv/rpmi-fdt.c
-new file mode 100644
-index 0000000000..439c91c894
---- /dev/null
-+++ b/hw/riscv/rpmi-fdt.c
-@@ -0,0 +1,103 @@
-+/*
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ *
-+ * RISC-V RPMI device-tree helpers
-+ *
-+ * Copyright (c) 2026 Qualcomm Technologies, Inc.
-+ * Author:
-+ *  Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcomm.com>
-+ */
-+
-+#include "qemu/osdep.h"
-+#include "qemu/bswap.h"
-+#include "hw/riscv/rpmi-fdt.h"
-+#include "hw/misc/riscv_rpmi.h"
-+#include "system/device_tree.h"
-+
-+void riscv_rpmi_fdt_add_mbox(void *fdt,
-+                             const RiscvRpmiFdtMboxConfig *cfg,
-+                             uint32_t *phandle,
-+                             uint32_t *mbox_handle)
-+{
-+    g_autofree char *name = NULL;
-+    hwaddr a2p_req_base, p2a_ack_base, p2a_req_base, a2p_ack_base;
-+    static const char * const regnames_all[RPMI_ALL_NUM_REGS] = {
-+        "a2p-req", "p2a-ack", "p2a-req", "a2p-ack", "a2p-doorbell"
-+    };
-+    static const char * const regnames_a2p[RPMI_A2P_NUM_REGS] = {
-+        "a2p-req", "p2a-ack", "a2p-doorbell"
-+    };
-+
-+    a2p_req_base = cfg->shmem_base;
-+    p2a_ack_base = a2p_req_base + cfg->a2p_req_size;
-+    p2a_req_base = p2a_ack_base + cfg->a2p_req_size;
-+    a2p_ack_base = p2a_req_base + cfg->p2a_req_size;
-+
-+    *mbox_handle = (*phandle)++;
-+    name = g_strdup_printf("/soc/mailbox@%" HWADDR_PRIx, cfg->shmem_base);
-+    qemu_fdt_add_subnode(fdt, name);
-+    qemu_fdt_setprop_string(fdt, name, "compatible", "riscv,rpmi-shmem-mbox");
-+    qemu_fdt_setprop_cell(fdt, name, "riscv,slot-size", RPMI_QUEUE_SLOT_SIZE);
-+    qemu_fdt_setprop_cell(fdt, name, "#mbox-cells", 1);
-+
-+    if (cfg->p2a_req_size) {
-+        qemu_fdt_setprop_string_array(fdt, name, "reg-names",
-+                                      (char **)&regnames_all,
-+                                      ARRAY_SIZE(regnames_all));
-+        qemu_fdt_setprop_cells(fdt, name, "reg",
-+            (uint32_t)(a2p_req_base >> 32), (uint32_t)a2p_req_base,
-+            0x0, cfg->a2p_req_size,
-+            (uint32_t)(p2a_ack_base >> 32), (uint32_t)p2a_ack_base,
-+            0x0, cfg->a2p_req_size,
-+            (uint32_t)(p2a_req_base >> 32), (uint32_t)p2a_req_base,
-+            0x0, cfg->p2a_req_size,
-+            (uint32_t)(a2p_ack_base >> 32), (uint32_t)a2p_ack_base,
-+            0x0, cfg->p2a_req_size,
-+            (uint32_t)(cfg->doorbell_base >> 32), (uint32_t)cfg->doorbell_base,
-+            0x0, cfg->doorbell_size);
-+    } else {
-+        qemu_fdt_setprop_string_array(fdt, name, "reg-names",
-+                                      (char **)&regnames_a2p,
-+                                      ARRAY_SIZE(regnames_a2p));
-+        qemu_fdt_setprop_cells(fdt, name, "reg",
-+            (uint32_t)(a2p_req_base >> 32), (uint32_t)a2p_req_base,
-+            0x0, cfg->a2p_req_size,
-+            (uint32_t)(p2a_ack_base >> 32), (uint32_t)p2a_ack_base,
-+            0x0, cfg->a2p_req_size,
-+            (uint32_t)(cfg->doorbell_base >> 32), (uint32_t)cfg->doorbell_base,
-+            0x0, cfg->doorbell_size);
-+    }
-+
-+    qemu_fdt_setprop_cells(fdt, name, "phandle", *mbox_handle);
-+}
-+
-+void riscv_rpmi_fdt_add_service(void *fdt, hwaddr shmem_base,
-+                                const char *node_name,
-+                                const char *compatible,
-+                                uint32_t mbox_handle,
-+                                uint32_t service_group,
-+                                bool has_mpxy_channel,
-+                                uint32_t mpxy_channel)
-+{
-+    g_autofree char *name = g_strdup_printf("/soc/mailbox@%" HWADDR_PRIx "/%s",
-+                                            shmem_base, node_name);
-+
-+    qemu_fdt_add_subnode(fdt, name);
-+    qemu_fdt_setprop_string(fdt, name, "compatible", compatible);
-+    qemu_fdt_setprop_cells(fdt, name, "mboxes", mbox_handle, service_group);
-+    if (has_mpxy_channel) {
-+        qemu_fdt_setprop_cell(fdt, name, "riscv,sbi-mpxy-channel-id",
-+                              mpxy_channel);
-+    }
-+}
-+
-+void riscv_rpmi_fdt_add_service_node(void *fdt, hwaddr shmem_base,
-+                                     const RiscvRpmiServiceConfig *service,
-+                                     uint32_t mbox_handle)
-+{
-+    riscv_rpmi_fdt_add_service(fdt, shmem_base, service->node_name,
-+                               service->compatible, mbox_handle,
-+                               service->service_group,
-+                               service->has_mpxy_channel,
-+                               service->mpxy_channel);
-+}
-diff --git a/include/hw/riscv/rpmi-fdt.h b/include/hw/riscv/rpmi-fdt.h
-new file mode 100644
-index 0000000000..b157bda1d1
---- /dev/null
-+++ b/include/hw/riscv/rpmi-fdt.h
-@@ -0,0 +1,30 @@
-+/*
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ *
-+ * RISC-V RPMI device-tree helpers
-+ *
-+ * Copyright (c) 2026 Qualcomm Technologies, Inc.
-+ * Author:
-+ *  Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcomm.com>
-+ */
-+
-+#ifndef HW_RISCV_RPMI_FDT_H
-+#define HW_RISCV_RPMI_FDT_H
-+
-+#include "exec/hwaddr.h"
-+#include "hw/misc/riscv_rpmi.h"
-+
-+typedef struct RiscvRpmiFdtMboxConfig {
-+    hwaddr shmem_base;
-+    hwaddr doorbell_base;
-+    uint32_t a2p_req_size;
-+    uint32_t p2a_req_size;
-+    uint32_t doorbell_size;
-+} RiscvRpmiFdtMboxConfig;
-+
-+void riscv_rpmi_fdt_add_mbox(void *fdt,
-+                             const RiscvRpmiFdtMboxConfig *cfg,
-+                             uint32_t *phandle,
-+                             uint32_t *mbox_handle);
-+
-+#endif
+
+base-commit: 9eb08992b1df4a3dfcf442b1239678095e50471b
 -- 
 2.43.0
-
 
