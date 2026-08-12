@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28CA2C5B572
-	for <qemu-riscv@archiver.kernel.org>; Wed, 12 Aug 2026 15:19:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0874FC5B572
+	for <qemu-riscv@archiver.kernel.org>; Wed, 12 Aug 2026 15:22:38 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wuAj9-000747-N2; Wed, 12 Aug 2026 11:18:47 -0400
+	id 1wuAmq-0005cy-PA; Wed, 12 Aug 2026 11:22:36 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair@alistair23.me>)
- id 1wuAiv-0006hP-LT; Wed, 12 Aug 2026 11:18:35 -0400
-Received: from fout-a8-smtp.messagingengine.com ([103.168.172.151])
+ id 1wuAmo-0005Mn-FB; Wed, 12 Aug 2026 11:22:34 -0400
+Received: from fhigh-a1-smtp.messagingengine.com ([103.168.172.152])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair@alistair23.me>)
- id 1wuAit-0007hB-Oy; Wed, 12 Aug 2026 11:18:33 -0400
-Received: from phl-compute-11.internal (phl-compute-11.internal [10.202.2.51])
- by mailfout.phl.internal (Postfix) with ESMTP id A9CF3EC01F2;
- Wed, 12 Aug 2026 11:18:30 -0400 (EDT)
+ id 1wuAmm-0000h4-Mr; Wed, 12 Aug 2026 11:22:34 -0400
+Received: from phl-compute-02.internal (phl-compute-02.internal [10.202.2.42])
+ by mailfhigh.phl.internal (Postfix) with ESMTP id A22C2140009E;
+ Wed, 12 Aug 2026 11:22:31 -0400 (EDT)
 Received: from phl-frontend-03 ([10.202.2.162])
- by phl-compute-11.internal (MEProxy); Wed, 12 Aug 2026 11:18:30 -0400
+ by phl-compute-02.internal (MEProxy); Wed, 12 Aug 2026 11:22:31 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alistair23.me;
  h=cc:cc:content-transfer-encoding:content-type:content-type
  :date:date:from:from:in-reply-to:in-reply-to:message-id
  :mime-version:references:reply-to:subject:subject:to:to; s=fm3;
- t=1786547910; x=1786634310; bh=oJwEXy3fbEcrYkPilZkWijtFdlvNkbQD
- o533dlgFzl0=; b=LpVNychX19GZULLXXRL+zmJmy+GyqfWuv7CHsfd5QVgDMpBC
- ovQicO/r/vi98tT4qhdbUyfbj9mNn/xid2ZHW4a5n6Pa3WzxjetH6I9B0LM1xO1v
- 5KUFHY83K6JDRUlVjALSoe0CeQKKaF1NllaIPRpnySe9YIlgcJwE8ebEfdCl4RPq
- njgpkDTf1X1aBsMVd3V6/gBfaFnsBrtLO9G48HHQLRhYei+2USiPXQ+U9N+jU1vh
- yNTi/aVSNDVln7GOJYkhSGMdyHBC5MgnWetOXCfRMJbWvrDuDng1r063WTHmS1c0
- +bwyWou7typIDjBstTBvM/hx6ORPtw1Y1SipvQ==
+ t=1786548151; x=1786634551; bh=4Bzmqiuir6MD+dTA0dffWmeCuZieHTH5
+ e1B0uFmpwtQ=; b=kwMGPXTApe+kp+hajfASgLilWA1Yo2RywzQyFkiRpyIXnWZN
+ YCfOFKPhkbEVSOHFk6gbLeBdmHwtiLCj2xRQoxQP5EBqK99y0Ptbffm8VrRtRnwj
+ S4Kvit0chy+9MeNH8XbUZfEGJh/ohYWoVv1q/QDhng1RerdjXWeh+XTd7Xyu4UAD
+ iwtwQfIYK+eUyguLlAiTrfr5oRC3Bd8w3r7EkWRbCri4Vp3BaVIuo8m7l8wbiFwu
+ BINnjwUvhvaHL4m6k5n34AWimdtzSNI0iy3DkpffHFXD6P9uiUb7dOvj+gNHiJ4R
+ 4TgULeI3o4ncYulnRcc0Oe83DnpClpZRWgCSlA==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-transfer-encoding
  :content-type:content-type:date:date:feedback-id:feedback-id
  :from:from:in-reply-to:in-reply-to:message-id:mime-version
  :references:reply-to:subject:subject:to:to:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1786547910; x=
- 1786634310; bh=oJwEXy3fbEcrYkPilZkWijtFdlvNkbQDo533dlgFzl0=; b=B
- do9WO+2iXZm3wJE72D7n0KK8b0nSUHkSaD6s83NN2hRMwtk71uFPQRD/SbX10PMW
- Z4+56WKW09Yg6vhsr4pleKMe8NSwfrxgmypiINVel6Aj4owytOsrasBfMMyI/Clp
- mHk94WHIaubHTk7c50TNS/O9y77qJGuUEwTIxjJ68gShc6/svqf04HukM6bgSP41
- ywDcTc5+Ng4eEGjtkVEuiUNbx/bUeTCBmw5nBWMQ6N5CmoNwMVcEaOpYaWgFAzDR
- 9n/Kco2yVuDKxsjOI1KZ8roKhpoox3mGwrk/gwMmaOTBwJ9GKjcfLy9A7jMnswIF
- zcBRi/a66+QI851idQhIw==
-X-ME-Sender: <xms:xY58anTdVXjIATXy0mMEZC_QtWZE0Ak1z4cwJHVGAWOoZmxiX4Io0g>
- <xme:xY58auz5d_km4l5imlvAF_gB1uQgl8yVRyEsS8-0QevAVB6-FVCZ-NFXcD1rgmRDY
- GAsL_Osb7EO2N0hr6IPJgAP3B3r59OU8XXhtgv_Y2DTbcejLUKEHgU>
-X-ME-Received: <xmr:xY58anra76PbAHTjq5AZpLUK7SCsmNEdxE3WfG--h1YN0KzhCE9UFs5AaorAesi6Oxcdmg>
-X-ME-Proxy-Cause: dmFkZTEo8X8ob/iPc7sRjBu8nuzFvJKrct9hp5bW6vDLbMOQ1dkiBg5WwUWTPh5eAZYfWw
- u4CognJeHyRkb24z7rocDSF8f81o5Ka4a9WZ/fQglmGtowfVbbrFYE7pCi4imRSXf8HWY/
- TrGRwgPf0dgt60pm6s0IxqjAxR543RJtZlr6v0VHAtGp7Kag+hK9DePAsjBu4mdnOf8ibh
- pwrTS0+jk3+9KkmP+VaHqIOs8WW9PjsZi/NDQy2pjqIRPTUf+lwU1rKUY27OJSkSYXyq0O
- dlJ0pMCQvHwSMgZahC8cDzryAIhAq6fHChOJtbuar13EITzu7JaBrpF4y+54751VVIgNPp
- bvSNWL6ExtMy3VsRCGVOSp0BRIxxQGwO82L+qnxFgcXR8IRArP2HC6m9DfQ0EG737i8a/C
- tj0URwOuhA3OYJMrwozeF1JT91Hw1weUdryjhitiSIpiYflbSZPN5rmTLXzbvfsDWgJOmo
- pRXrVY3PT56MmY9+d+4DsYKjM29CLsmo4A74wCeOCFjQHnaYQ85NIw0LGzwNZr09OXkmwn
- 0BAzcEJ2KFDo7TezRByC8lmfY688pT1kRix0pOh7dNKz4FXoOkktQLuI5T3RZ3BDFUWgAx
- k1M35IXJUc4vVTHoY605UVchOaHWmNM1PrevQLzGZEmIMPTJRPhlbM680TJw
-X-ME-Proxy: <xmx:xY58ap2yU0IY7yeRjfsVHhhHt4uizl5T3ACYmxk8oEZ-hOfLoYMPVw>
- <xmx:xo58avzcUsg31JrfCB4O0dmvTDMWIMwbxTCgRU_iMBPlfdbtMzvh2g>
- <xmx:xo58algFm2B9Usz6akmSiSsQgon86mkomKmHzGPdAB3AcDRrwYSwAw>
- <xmx:xo58aiqaPJ1luz7XtGu94YDsFURlxr-DKUlKG121eedqZ0gdUBH6hg>
- <xmx:xo58avu5AmkTf2s7vlGfeyHqzzvEqCWVA0fyFvmtntoW8f4W1rKBymXz>
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1786548151; x=
+ 1786634551; bh=4Bzmqiuir6MD+dTA0dffWmeCuZieHTH5e1B0uFmpwtQ=; b=G
+ 3hyBs+Lc2YK4QSbZ4TQTE4l+hAHUv8lzV21A8fxznSDFuItMOvQ6ViSfgDuBrLBb
+ qpUjPQAd7OOcHamczmh4ezoNW3REY7VMgVrXVyIDgLJr5CQXvzlk2U/aNDH1DH29
+ 4br3DY903cSYddcmnk/f4Ha4PnVKfC9uxrwLkNYmBRg74iA5davGDwP+iWcQRts9
+ TmVS+CqWlzOxsGp5ag8NabyxhT/xOQacsLXoNHswjmx16CY19gc5AQIaeKkHYP1e
+ oKxBKId342PMEkaR0sq/aKbCBKdc/QZuafe/Fpm3J/TGZvP/s331zNqi7vIiEQz9
+ 1NU93bXOXSsj2wLEwOzQQ==
+X-ME-Sender: <xms:t498akFRXfEUWN317p9KURLSXA9KHLJ41QLAHaVadwM4o9YtZ2t47w>
+ <xme:t498ajV2qrqpFBDqFstNo9WAL7TAdV7fpzXVtKmUCug0NAtFYsCsrRWnJAtunzGIx
+ Yvz089NNPMTKkFKrpvEh64BEVZ0xDi_hUyLnxgWggx9FkrGWTZ3kILc>
+X-ME-Received: <xmr:t498ao9bZCPxOcJEsy55EgcSyBrA8jJUAo94BKnjJSWQ4WJKT90t7-7W-5ieB93qoBdAVA>
+X-ME-Proxy-Cause: dmFkZTG2ARt8DRO3A3fBFm7Vip4QpR/nUXZGWfXmvvPLO0uIsyPIQWERkRADqw426BTU5e
+ NJI6GyhZuywkD7c8MecpBZ4Lc6Ceu2UlxEYqNHoKxQ/Bu5ozVgojZP51F/rC9REh3PbUkf
+ mJJMRMrcxXcEAfoMYiF03Z5Otu1DsXMFERmGowuPNgR0ByIW3gbILTYsC9Bi3k2lNqyl1f
+ CVP1HWJef3WFvhhYADNCwRR5pzoh2BtTjlU3MEr5GlpQlBWpZiRtpeczz2/b4T9OFvfsyV
+ 8Xy1W9xzv0Lxy4YcVAkcJEh687JMomZIv8v4aIgJH8VSShTmAWGoR0cBB40sl4JY0pbYCm
+ NeZy2/4lvlWMppRvR6aTAaElSUYuMTqCyDlg62U62xPlTUK1zr12uiL6U0uHMRBEpqKpzn
+ bywCpPoOUpC+7DdpMdmp/d0ysADnrQTzYqVclJGWBpso/iIutTYFqp96UUzJbla1TFKFlq
+ drNSgtlEsKvxNGdfQELpdr1tqkS9l/PSUKQz7PSoY4E3olkIuSVwvpglnVvLrbIlNJpgaE
+ jmXBZGxpf5QNcbyhDaeYNnWEWOpVJYT38dqjV9WHv4hPRm4cdcNUiLGoR/Cd2Z0NK0KYS+
+ D2rpRngCVHIfuarfvsaR7KWq4fb33WrEX5WYJmVZd+S8sK5DqsyE3kqPKU9Q
+X-ME-Proxy: <xmx:t498ao6GQ2jdko81CnPKQLbEDS5-txdcW0SVfjzvycmHFwzNap4DAA>
+ <xmx:t498apmgBsgT7G2qa_7STXkSC3q9KTwUv89wMX3iQyxeBa22Ko4vjA>
+ <xmx:t498ajFdoDy55UX-wzdRqdvRyaiCl_CK-t7lawzDgh15RMpE92M2lg>
+ <xmx:t498ao_3e0IOEzbEwp10On1gd0HfhR5l_SDKygIzy8gw2S4TimTErg>
+ <xmx:t498aiCeethr-pTNHzb0Ge433bDWTY9zThDM9IDIL5d_dWLWvebyDBI6>
 Feedback-ID: ifd214418:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
- 12 Aug 2026 11:18:29 -0400 (EDT)
-Message-ID: <7312e5f5d1f763aa1accb2764878827d6a10db4a.camel@alistair23.me>
+ 12 Aug 2026 11:22:30 -0400 (EDT)
+Message-ID: <8d6c58acb0c436e837b97f602cb06b80933a0b31.camel@alistair23.me>
 Subject: Re: [PATCH v4 0/5] disas/riscv: Fix immediate decoding and extraction
 From: Alistair <alistair@alistair23.me>
 To: TANG Tiancheng <lyndra@linux.alibaba.com>, qemu-devel@nongnu.org
@@ -79,15 +79,15 @@ Cc: Christoph Muellner <christoph.muellner@vrull.eu>, LIU Zhiwei
  <daniel.barboza@oss.qualcomm.com>, Richard Henderson
  <richard.henderson@linaro.org>, qemu-riscv@nongnu.org, Alex
  =?ISO-8859-1?Q?Benn=E9e?=	 <alex.bennee@linaro.org>
-Date: Thu, 13 Aug 2026 01:18:13 +1000
 In-Reply-To: <20260703-b4-disas-xthead-fix-riscv-next-v4-0-84c566330bc7@linux.alibaba.com>
 References: <20260703-b4-disas-xthead-fix-riscv-next-v4-0-84c566330bc7@linux.alibaba.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.60.2 (by Flathub.org) 
 MIME-Version: 1.0
-Received-SPF: pass client-ip=103.168.172.151;
- envelope-from=alistair@alistair23.me; helo=fout-a8-smtp.messagingengine.com
+Date: Thu, 13 Aug 2026 01:21:24 +1000
+User-Agent: Evolution 3.60.2 (by Flathub.org) 
+Received-SPF: pass client-ip=103.168.172.152;
+ envelope-from=alistair@alistair23.me; helo=fhigh-a1-smtp.messagingengine.com
 X-Spam_score_int: -27
 X-Spam_score: -2.8
 X-Spam_bar: --
@@ -211,7 +211,9 @@ ates as unsigned
 > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 disas/riscv: Use extract helpers for opera=
 nd fields
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
