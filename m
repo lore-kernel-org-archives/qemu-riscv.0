@@ -4,91 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62B32C5B572
-	for <qemu-riscv@archiver.kernel.org>; Wed, 12 Aug 2026 15:15:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28CA2C5B572
+	for <qemu-riscv@archiver.kernel.org>; Wed, 12 Aug 2026 15:19:13 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wuAeL-0003qr-V0; Wed, 12 Aug 2026 11:13:51 -0400
+	id 1wuAj9-000747-N2; Wed, 12 Aug 2026 11:18:47 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1wuAe8-0003Pk-2L
- for qemu-riscv@nongnu.org; Wed, 12 Aug 2026 11:13:36 -0400
-Received: from mail-pf1-x430.google.com ([2607:f8b0:4864:20::430])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1wuAe6-0006Z5-8D
- for qemu-riscv@nongnu.org; Wed, 12 Aug 2026 11:13:35 -0400
-Received: by mail-pf1-x430.google.com with SMTP id
- d2e1a72fcca58-84e84a6c4bfso1151119b3a.1
- for <qemu-riscv@nongnu.org>; Wed, 12 Aug 2026 08:13:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1786547612; x=1787152412; darn=nongnu.org;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=WZgfMBS2gc4uR2iYOICvH1C3kGfwanSdyD0m1/rVEZk=;
- b=DgDz2412Nvdg/ou2DP8HnChrr+BEm4gtaqDAV7kLbCKqhQwVuSPmmzA9MJiYa354K+
- C+R9XC2jBKzu2+GbYZAK37FngKYLccLVV/q7Yxyvbv3ah+8gcuO25laEvOOA0iqTG1Yh
- UIPltRPif6bTR1fuPxpZa21qfExqLDyQCWx+CoGN0e34gwiAtCouL+2hdX/NScwAxIMN
- ZKAAy2/zeYWAwurQ12aXfmIF/q2ad1EB3jTj91QTaGDX2ETr3mXAT65B/Soe+8QYiQR6
- ILH7x1xTUgzTu7wNlACH0hVxnGMUG6Cb/9FEnTiimle5O+koBZP//hp+F6MfIzV/FgMQ
- QPCg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786547612; x=1787152412;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=WZgfMBS2gc4uR2iYOICvH1C3kGfwanSdyD0m1/rVEZk=;
- b=CdD0pnpq1CTKV27hJtLRea0Tyh8t3hStRX/aLCCAfMp/FLoRudhXusYwr01UmwdA0S
- 6DEaPHgKsYRzbtvjGw2DhxuNBr1PxDISoMBhR1XdGNX7ibZ3ytLwG98BzFeLxwNNnrvO
- sQ48yW46RkDSqDpAtfhnifodeWjIg+LC6FnSOsTDqpgh/Xb2JzAm6kfUcxujuJcEKD3A
- XfPElPawKnjh+Og3SNvjnNOBUs7ZEZrBOy9p6Q4RfRJICUzSU97flhnR+kVySwh44zfI
- JbarEukHhBsBny3WyF+FCSHwTAwhmf+TDGX4jxsUaSWTc2sYUuw10mMfvYQFrLD+VzvP
- 1SBA==
-X-Forwarded-Encrypted: i=1;
- AHgh+RrI1krZY23mftm6L1VRQJC2c62GZB78A/VoYr3Au7m2IZ/lz36pNd5DczNeg+6+qUzghmPzg0wTnAYc@nongnu.org
-X-Gm-Message-State: AOJu0Yz0qek6WyL1tEwkAZ3ig89W1gc6iCEZ6cj1GZOJnuoA6CVQ9/Xc
- xtFALMFYIRhvPet0a459rZiTD/8asz1hgS59ytHQo54nbr8FfFsTBlhY1WeY5cYJX2wNU26kRyB
- mVFledyg=
-X-Gm-Gg: AR+sD12Uegk11SBtaaqUFj+2KWnPZM7uD3uPF0hla18m22M5NSZj1XTyw/rlK4g6d0J
- 5Gw2leWYyHXEj+O4Tihv6VeR0fkKXu3QbnrsH7uiGil2NvAmpKdL5hCPL4IyynRl6phP3Caa1Zd
- tb7+Amd8bC+3TzOZKXePtdKjJ+DhqWnOzSG1HaBax0009XxxCE9v7OcEnMPSNf6Qh5HSLzeGEHj
- TQgHDpvCZ5r6OtCYvK5PBxfR7j/EoF/NzcioT8RdLo4rQbu8g7lg/NYgTe7eJlA/M2zQMN9MrbD
- YhpBYZ3EA2c6/elmDbBSAkn7PaiiNGleqrPSKM/LN19AbeKm8ZHfXedcUIDwe24Q4Ae6T7kF4x+
- bU7rDhMGtU9q2uFie7YTz4IYh9oNDbFYvd/1DCl0olqVCNATGvWrVJ5k11KvZWeGGmN0SJA/ga3
- pEjNviP6mW715l04fPQ3fwbEnm5Zr801eG+KXOFuzuyyxg8wc771+asij4KbusiV4nIo3jDfOzD
- HQVJ3tpJMUynMStQlv9qVP7cENaTecLZI8=
-X-Received: by 2002:a05:6a00:987:b0:845:3033:6cbb with SMTP id
- d2e1a72fcca58-84fafae81e3mr8762256b3a.11.1786547612164; 
- Wed, 12 Aug 2026 08:13:32 -0700 (PDT)
-Received: from sifive.com ([136.226.240.165]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-84fb1f71ee5sm1197674b3a.57.2026.08.12.08.13.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 12 Aug 2026 08:13:31 -0700 (PDT)
-Date: Wed, 12 Aug 2026 23:13:27 +0800
-From: Max Chou <max.chou@sifive.com>
-To: Zephyr Li <fritchleybohrer@gmail.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, palmer@dabbelt.com, 
- alistair.francis@wdc.com, liwei1518@gmail.com, daniel.barboza@oss.qualcomm.com,
- zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com
-Subject: Re: [PATCH v3] target/riscv: preserve vl on element-zero fault
-Message-ID: <anyNHaPM7jwM-a1w@sifive.com>
-References: <20260811025516.337888-1-fritchleybohrer@gmail.com>
+ (Exim 4.90_1) (envelope-from <alistair@alistair23.me>)
+ id 1wuAiv-0006hP-LT; Wed, 12 Aug 2026 11:18:35 -0400
+Received: from fout-a8-smtp.messagingengine.com ([103.168.172.151])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <alistair@alistair23.me>)
+ id 1wuAit-0007hB-Oy; Wed, 12 Aug 2026 11:18:33 -0400
+Received: from phl-compute-11.internal (phl-compute-11.internal [10.202.2.51])
+ by mailfout.phl.internal (Postfix) with ESMTP id A9CF3EC01F2;
+ Wed, 12 Aug 2026 11:18:30 -0400 (EDT)
+Received: from phl-frontend-03 ([10.202.2.162])
+ by phl-compute-11.internal (MEProxy); Wed, 12 Aug 2026 11:18:30 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alistair23.me;
+ h=cc:cc:content-transfer-encoding:content-type:content-type
+ :date:date:from:from:in-reply-to:in-reply-to:message-id
+ :mime-version:references:reply-to:subject:subject:to:to; s=fm3;
+ t=1786547910; x=1786634310; bh=oJwEXy3fbEcrYkPilZkWijtFdlvNkbQD
+ o533dlgFzl0=; b=LpVNychX19GZULLXXRL+zmJmy+GyqfWuv7CHsfd5QVgDMpBC
+ ovQicO/r/vi98tT4qhdbUyfbj9mNn/xid2ZHW4a5n6Pa3WzxjetH6I9B0LM1xO1v
+ 5KUFHY83K6JDRUlVjALSoe0CeQKKaF1NllaIPRpnySe9YIlgcJwE8ebEfdCl4RPq
+ njgpkDTf1X1aBsMVd3V6/gBfaFnsBrtLO9G48HHQLRhYei+2USiPXQ+U9N+jU1vh
+ yNTi/aVSNDVln7GOJYkhSGMdyHBC5MgnWetOXCfRMJbWvrDuDng1r063WTHmS1c0
+ +bwyWou7typIDjBstTBvM/hx6ORPtw1Y1SipvQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-transfer-encoding
+ :content-type:content-type:date:date:feedback-id:feedback-id
+ :from:from:in-reply-to:in-reply-to:message-id:mime-version
+ :references:reply-to:subject:subject:to:to:x-me-proxy
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1786547910; x=
+ 1786634310; bh=oJwEXy3fbEcrYkPilZkWijtFdlvNkbQDo533dlgFzl0=; b=B
+ do9WO+2iXZm3wJE72D7n0KK8b0nSUHkSaD6s83NN2hRMwtk71uFPQRD/SbX10PMW
+ Z4+56WKW09Yg6vhsr4pleKMe8NSwfrxgmypiINVel6Aj4owytOsrasBfMMyI/Clp
+ mHk94WHIaubHTk7c50TNS/O9y77qJGuUEwTIxjJ68gShc6/svqf04HukM6bgSP41
+ ywDcTc5+Ng4eEGjtkVEuiUNbx/bUeTCBmw5nBWMQ6N5CmoNwMVcEaOpYaWgFAzDR
+ 9n/Kco2yVuDKxsjOI1KZ8roKhpoox3mGwrk/gwMmaOTBwJ9GKjcfLy9A7jMnswIF
+ zcBRi/a66+QI851idQhIw==
+X-ME-Sender: <xms:xY58anTdVXjIATXy0mMEZC_QtWZE0Ak1z4cwJHVGAWOoZmxiX4Io0g>
+ <xme:xY58auz5d_km4l5imlvAF_gB1uQgl8yVRyEsS8-0QevAVB6-FVCZ-NFXcD1rgmRDY
+ GAsL_Osb7EO2N0hr6IPJgAP3B3r59OU8XXhtgv_Y2DTbcejLUKEHgU>
+X-ME-Received: <xmr:xY58anra76PbAHTjq5AZpLUK7SCsmNEdxE3WfG--h1YN0KzhCE9UFs5AaorAesi6Oxcdmg>
+X-ME-Proxy-Cause: dmFkZTEo8X8ob/iPc7sRjBu8nuzFvJKrct9hp5bW6vDLbMOQ1dkiBg5WwUWTPh5eAZYfWw
+ u4CognJeHyRkb24z7rocDSF8f81o5Ka4a9WZ/fQglmGtowfVbbrFYE7pCi4imRSXf8HWY/
+ TrGRwgPf0dgt60pm6s0IxqjAxR543RJtZlr6v0VHAtGp7Kag+hK9DePAsjBu4mdnOf8ibh
+ pwrTS0+jk3+9KkmP+VaHqIOs8WW9PjsZi/NDQy2pjqIRPTUf+lwU1rKUY27OJSkSYXyq0O
+ dlJ0pMCQvHwSMgZahC8cDzryAIhAq6fHChOJtbuar13EITzu7JaBrpF4y+54751VVIgNPp
+ bvSNWL6ExtMy3VsRCGVOSp0BRIxxQGwO82L+qnxFgcXR8IRArP2HC6m9DfQ0EG737i8a/C
+ tj0URwOuhA3OYJMrwozeF1JT91Hw1weUdryjhitiSIpiYflbSZPN5rmTLXzbvfsDWgJOmo
+ pRXrVY3PT56MmY9+d+4DsYKjM29CLsmo4A74wCeOCFjQHnaYQ85NIw0LGzwNZr09OXkmwn
+ 0BAzcEJ2KFDo7TezRByC8lmfY688pT1kRix0pOh7dNKz4FXoOkktQLuI5T3RZ3BDFUWgAx
+ k1M35IXJUc4vVTHoY605UVchOaHWmNM1PrevQLzGZEmIMPTJRPhlbM680TJw
+X-ME-Proxy: <xmx:xY58ap2yU0IY7yeRjfsVHhhHt4uizl5T3ACYmxk8oEZ-hOfLoYMPVw>
+ <xmx:xo58avzcUsg31JrfCB4O0dmvTDMWIMwbxTCgRU_iMBPlfdbtMzvh2g>
+ <xmx:xo58algFm2B9Usz6akmSiSsQgon86mkomKmHzGPdAB3AcDRrwYSwAw>
+ <xmx:xo58aiqaPJ1luz7XtGu94YDsFURlxr-DKUlKG121eedqZ0gdUBH6hg>
+ <xmx:xo58avu5AmkTf2s7vlGfeyHqzzvEqCWVA0fyFvmtntoW8f4W1rKBymXz>
+Feedback-ID: ifd214418:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
+ 12 Aug 2026 11:18:29 -0400 (EDT)
+Message-ID: <7312e5f5d1f763aa1accb2764878827d6a10db4a.camel@alistair23.me>
+Subject: Re: [PATCH v4 0/5] disas/riscv: Fix immediate decoding and extraction
+From: Alistair <alistair@alistair23.me>
+To: TANG Tiancheng <lyndra@linux.alibaba.com>, qemu-devel@nongnu.org
+Cc: Christoph Muellner <christoph.muellner@vrull.eu>, LIU Zhiwei	
+ <zhiwei_liu@linux.alibaba.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>, Daniel Henrique Barboza
+ <daniel.barboza@oss.qualcomm.com>, Richard Henderson
+ <richard.henderson@linaro.org>, qemu-riscv@nongnu.org, Alex
+ =?ISO-8859-1?Q?Benn=E9e?=	 <alex.bennee@linaro.org>
+Date: Thu, 13 Aug 2026 01:18:13 +1000
+In-Reply-To: <20260703-b4-disas-xthead-fix-riscv-next-v4-0-84c566330bc7@linux.alibaba.com>
+References: <20260703-b4-disas-xthead-fix-riscv-next-v4-0-84c566330bc7@linux.alibaba.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.60.2 (by Flathub.org) 
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20260811025516.337888-1-fritchleybohrer@gmail.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::430;
- envelope-from=max.chou@sifive.com; helo=mail-pf1-x430.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+Received-SPF: pass client-ip=103.168.172.151;
+ envelope-from=alistair@alistair23.me; helo=fout-a8-smtp.messagingengine.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_PASS=-0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -105,38 +110,122 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 2026-08-11 10:55, Zephyr Li wrote:
-> A unit-stride fault-only-first load must leave vl unchanged when element
-> zero raises a synchronous exception. Keep the shortened value in a local
-> bound until all loads complete, and only then update the architectural vl.
-> 
+On Fri, 2026-07-03 at 13:03 +0800, TANG Tiancheng wrote:
+> Fix two XThead immediate decoding issues in the RISC-V disassembler,
+> fix
+> vector immediate signedness handling, and make operand extraction
+> more
+> explicit.
+>=20
+> The first patch aligns th.srri decoding with
+> target/riscv/xthead.decode:
+> th_srri uses bits 31:26 as 000100 and bit 25 as shamt[5], while the
+> disassembler switches on bits 31:25.
+>=20
+> The second patch extracts the full 6-bit immediate field for
+> rv_codec_r2_imm6, which fixes the immediate printed for th.srri and
+> th.tst.
+>=20
+> The third patch makes operand_vimm() return int32_t, matching the
+> signed
+> 5-bit vector immediate value it extracts.
+>=20
+> The fourth patch decodes unsigned 5-bit vector immediates with a
+> separate
+> codec, matching the target translator paths that zero-extend or
+> truncate
+> those fields.
+>=20
+> The fifth patch follows Richard's review suggestion by converting
+> operand
+> helper bit extraction to extract32() or sextract32(). Signed
+> immediates use
+> sextract32() on the sign-bearing field and combine it with the
+> remaining
+> extract32() fields.
+>=20
+> This series is based on Alistair's riscv-to-apply.next branch:
+> 64ce9ac18757 ("hw/riscv/riscv-iommu.c: always fault with SADE=3D0 and
+> A=3D0")
+>=20
+> Testing:
+> - Applied and tested on top of Alistair's riscv-to-apply.next branch.
+> - Verified with an external test branch that adds unit coverage:
+> =C2=A0 https://github.com/LLyndra/qemu.git=C2=A0b4-disas-riscv-v2-tests
+>=20
+> =C2=A0 The added tests cover XThead th.srri/th.tst immediate decoding,
+> =C2=A0 signed vector immediates, unsigned vector immediate operands, and
+> =C2=A0 signed base ISA I-immediate extraction.
+> - Commands run:
+> =C2=A0=C2=A0=C2=A0 ./configure --target-list=3Driscv64-softmmu --disable-=
+docs \
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 --prefix=3D/tmp/qemu-riscv-dis=
+as-test --cross-prefix=3D
+> =C2=A0=C2=A0=C2=A0 ninja -C build tests/unit/test-riscv-disas
+> =C2=A0=C2=A0=C2=A0 build/tests/unit/test-riscv-disas --tap -k
+> - Result:
+> =C2=A0=C2=A0=C2=A0 test-riscv-disas passed: 37/37 TAP tests ok.
+>=20
+> ---
+> Changes in v4:
+> - Rebased on current Alistair's riscv-to-apply.next branch.
+> - Folded Alex's extract32() suggestion into the 6-bit immediate
+> =C2=A0 fix patch, so it directly uses extract32(inst, 20, 6).
+> - Link to v3:
+> https://lore.kernel.org/qemu-devel/20260701-b4-disas-xthead-fix-riscv-nex=
+t-v3-0-fc4f5f1b6c15@linux.alibaba.com
+>=20
+> Changes in v3:
+> - Updated the extract-helper cleanup patch to use sextract32() on the
+> =C2=A0 sign-bearing field directly, as suggested by Richard.
+> - Link to v2:
+> https://lore.kernel.org/qemu-devel/20260701-b4-disas-xthead-fix-riscv-nex=
+t-v2-0-e6e4ff5a7847@linux.alibaba.com
+>=20
+> Changes in v2:
+> - Collected Reviewed-by tags from Daniel.
+> - Kept the 6-bit immediate fix as a minimal correctness change.
+> - Added a patch making the signed vector immediate helper return a
+> signed
+> =C2=A0 type.
+> - Added a patch decoding unsigned vector immediates separately from
+> signed
+> =C2=A0 vector immediates.
+> - Added a cleanup patch using extract32()/sextract32() for
+> replaceable
+> =C2=A0 operand helper field extraction, including split immediates, as
+> =C2=A0 suggested by Richard.
+> - Link to v1:
+> https://lore.kernel.org/qemu-devel/20260626-b4-disas-xthead-fix-riscv-nex=
+t-v1-0-74228a3c1b21@linux.alibaba.com
+>=20
+> ---
+> TANG Tiancheng (5):
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 disas/riscv: Fix th.srri decoding
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 disas/riscv: Fix 6-bit immediate extractio=
+n
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 disas/riscv: Use signed type for vector im=
+mediates
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 disas/riscv: Decode unsigned vector immedi=
+ates as unsigned
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 disas/riscv: Use extract helpers for opera=
+nd fields
 
-The failing case is a corner case. When the element-0 faulting probe in
-vext_ldff() faults, it longjmps out of the helper, ProbeSuccess is never
-reached and env->vl is never touched -- that path was already correct.
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-The broken path is element 0 in a mapped MMIO page: probe_access()
-succeeds there, but QEMU cannot know a device transaction will fail
-without issuing it that broken the assumption of the pre probe_access()
-checking.
+Alistair
 
-> --- /dev/null
-> +++ b/tests/tcg/riscv64/test-vle32ff.S
-...
-> +     vsetvli t2, t1, e32, m1, ta, ma
-> +     li      t0, 0x18000000  /* Unmapped gap in the virt memory map.
-> */
-
-Actually it is not unmapped -- it is mapped as unassigned MMIO, and that
-is exactly why the bug reproduces: an unmapped address would make the
-element-0 probe fault and the test would pass even with the bug present.
-
-
-I think the fixed vext_ldff implementation is valid according to the
-RISC-V specification, considering the VL reduction rule and the
-non-idempotent constraint. Only the test case wording and the root
-cause explanation may need to be updated.
-
-As for the patch:
-Reviewed-by: Max Chou <max.chou@sifive.com>
+>=20
+> =C2=A0disas/riscv-xthead.c |=C2=A0=C2=A0 6 +-
+> =C2=A0disas/riscv.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | 263 +++++=
+++++++++++++++++++++++--------------
+> ----------
+> =C2=A0disas/riscv.h=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0=C2=
+=A0 1 +
+> =C2=A03 files changed, 142 insertions(+), 128 deletions(-)
+> ---
+> base-commit: 64ce9ac18757d79f3b5b337f7bcbdd0dabef3ce1
+> change-id: 20260623-b4-disas-xthead-fix-riscv-next-c6af6a09d2dc
+>=20
+> Best regards,
 
