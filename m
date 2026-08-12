@@ -4,89 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE01DC5CFDB
-	for <qemu-riscv@archiver.kernel.org>; Wed, 12 Aug 2026 22:34:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79B0EC5AD5A
+	for <qemu-riscv@archiver.kernel.org>; Wed, 12 Aug 2026 22:34:21 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wuHUe-0007QP-7J; Wed, 12 Aug 2026 18:32:16 -0400
+	id 1wuHUM-0007CM-0V; Wed, 12 Aug 2026 18:31:58 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wuHUc-0007Nf-0P
- for qemu-riscv@nongnu.org; Wed, 12 Aug 2026 18:32:14 -0400
-Received: from mail-pl1-x62c.google.com ([2607:f8b0:4864:20::62c])
+ id 1wuHUK-0007BT-TT
+ for qemu-riscv@nongnu.org; Wed, 12 Aug 2026 18:31:56 -0400
+Received: from mail-pl1-x62f.google.com ([2607:f8b0:4864:20::62f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wuHUX-00012K-J6
- for qemu-riscv@nongnu.org; Wed, 12 Aug 2026 18:32:13 -0400
-Received: by mail-pl1-x62c.google.com with SMTP id
- d9443c01a7336-2cfff5f88dbso18790235ad.3
- for <qemu-riscv@nongnu.org>; Wed, 12 Aug 2026 15:32:09 -0700 (PDT)
+ id 1wuHUJ-0000wk-5L
+ for qemu-riscv@nongnu.org; Wed, 12 Aug 2026 18:31:56 -0400
+Received: by mail-pl1-x62f.google.com with SMTP id
+ d9443c01a7336-2d032846c95so17500855ad.1
+ for <qemu-riscv@nongnu.org>; Wed, 12 Aug 2026 15:31:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1786573928; x=1787178728; darn=nongnu.org;
+ d=linaro.org; s=google; t=1786573914; x=1787178714; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=2Bx5O1ZI1QVZYD6dmG1bvsgZHVfVQdv6GanJptb3UeQ=;
- b=OM0XmJlGOOtlTZDTDZcJ/vDouccKX+qMg5WKGgSMRHCR5MsXuP3+4YrIOQ0zH4W4So
- IQVVyCRZbO/TY5XnUduIiPIBl8L72vs5vu5eR+xw7IMd7v5lQkyeilEfAjlI8RbrXXJB
- OLTOVLjihgCP4HbRYJQoxGSKEwg8KVNqSfYmGIgn2IqUy4B2FsGHApkw6uIgZjK0IfWl
- GIe/RE6LVmOfKKW7ul0DYgx7HmkVqc/VbQauKq4BEqYVZo5AfT3ezOk31ONOs/OSU4fn
- cGiouT9h1WywUkVaDbFNwyUPuwqAyNAoXcvvfo0AhDL3pkXP7jnO18gaGPVzjbKQznPg
- mLvg==
+ bh=3PV8Wn7z7mUJ54Ax/xp0gpg9WRpfYZRwPm1ejIDJl5Y=;
+ b=eKIaBQqF751x6Ev1ZIfEb75/oB4e19GX+vKuGmz24+wA5/62Ru9w5KwiN6qfIGllEz
+ 0huEf9AORr0lX3K87HMOwq9Bx/e3qn2wamXkUm10xd+oRlOkvjfCszfZRs6yUZqNwE5T
+ EU3bnl1ztQFYW/3aHQas3cSPi0EyT8weKRPuvIoiarePqlrJb1iZ1h32++35rQuFbht9
+ aglN9QXWRB5FIWVGn5oqglhYpr9pBYAy/vTZoQTwvEabShIROTZxetp3EsoadhZIey1Z
+ B9lCMYhUT899VRIxTdn2J3tV6T1xGTht0coD0NYnPMsKFeAO6ir1oH2bvl8v6+TVU77k
+ PaOw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786573928; x=1787178728;
+ d=1e100.net; s=20251104; t=1786573914; x=1787178714;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=2Bx5O1ZI1QVZYD6dmG1bvsgZHVfVQdv6GanJptb3UeQ=;
- b=WRMb2hk3U/0wJ6pEIt2/h9lbBCpBTuj9hKPy4VWg5H9ecdFgO12yjHRgJ+lPaSPbKI
- 3ptk6hGN5490aByjpMQXrlJ5wTuOlwAeYgAshxgF5motdus15qf8aYdYq2lrypR4OMXa
- eb2ZOGW2UojMKZuInJLMgqC4Z4FyZxvXJJDeMCVjbCfDtbxcUTfQ5/44X1Myab6aUx8n
- hiLnCqqAqPdVgPnZnDo1WDH8T2T1bE7pK2IMJhXTFoYy0bZe44ooxghfPHtAnmT+88Hq
- c+7LBN/uT6Yn3A5ehmSr1QK2aZoW7OLUFAiD/ce2ETT/wmAwfXV2dEHb+qAJyY16BpaU
- SGXA==
-X-Gm-Message-State: AOJu0YxPz3686Ev6NJfNBeGg/aeBFUwYGJYZ8ZmLzPOsHTJcCCjIU8Sg
- y3MJqNdNxmL89IUZJqu8Pacv76e2coSGlOtQ8xG2fX7nBZ0r+PnBFEDUDvCkRzPcrhFyahImjPR
- i+S7o
-X-Gm-Gg: AR+sD13blW9SgGW5APZ7PSdM7WoNxaFUU9APMw9oS4Vkdsf235XeEtOzsQQ1F51B+SK
- ODk5j+d3FwsaYga3bCZxFaJMwqctIDabznWLusBZEvG0mBNfb8mKLh1hyXlRqrgv8rnEgmqxMtD
- SCtcWXurcfEomguc/SeaiPehxTpRD+vYrTmF9NgsvoFAvvAP7ycMrTzAoRVrIAdGEsQm2VmYydX
- Xb/KDbDrxsBP2DAs9EsSYvEe5KBvBREM2s6/rqLDgbOBjKGh2VnFzGkJsxPP0SE1rmcbqzl98gO
- rBaUnuNt38lO42vH3yT1XYU+JHos39NkdMltErTX09D46O64HlILjuu2FUMUKaWY7kugL7W3HSK
- mzMcBwFEvBaue0dBC5Oe6B6hQiF/n1HGXAMEn/xxa5qSdELPpxcOCD8mgqpZnF9kexV96JUxYJ4
- QtNczldkW019y1G+WhNBbqZKuyVqGuSwgiopfkjFS1IZxOnIldCTv2T1QqKY3RshBrXGI+Cpc1m
- fknaDr04L3LOV1KsiQw
-X-Received: by 2002:a05:6a20:c793:b0:3bf:9aa9:b2a4 with SMTP id
- adf61e73a8af0-3cc552de9dfmr2218383637.20.1786573928088; 
- Wed, 12 Aug 2026 15:32:08 -0700 (PDT)
+ bh=3PV8Wn7z7mUJ54Ax/xp0gpg9WRpfYZRwPm1ejIDJl5Y=;
+ b=XULRw9TTjqpILNORdXIG1M3NOeDQyTf4bxJg1oQi3UHiyT9+0eu44lDSEASKusRlS1
+ bYRwvlUJkK2QDW7ORT31Y4Qu4yx65FUlN4Y3cK3eLaS0euXSQiawOjGgJWzBxXF1HDAZ
+ tRytxSsUlXH+HmUEE2miyFEFYOMuyjIgCuRqppPS8LoySftx1aTyo3bKk5Daq86k6NWB
+ ursDPUDDlAyjyoUhVvSmf5bzZlyFoOT9JSnhlt5Z59UcLtsuV0/805ssQBMXKileEatd
+ vnojrSsPaeTGk+1hn66g8D+yg8D57XBTe0CUZJ2dS7b2TyWfI6d5tPwueP4J9Z5vEkVK
+ 1QDg==
+X-Gm-Message-State: AOJu0YzMkGrHIAgHvHTln8e4IhDDdj/4o/+T5dLb/nqTGER7l4VuNB/Z
+ OEBWBztFxQp6f1LX+xpN4pRQGykjPmNawYYq2ayjJl9OkBvVLrGjQE3NPuTzYNuPZUg=
+X-Gm-Gg: AR+sD12BKmSqLUxXF1p2CfQanVgaVyQ5WHTQCEAzLR8gpisdhbWuzZxJkOhoGp385NV
+ KJR1W3EGGORm2/5ktpFaruJ3hrEFW5X63Z3wXEA0BPB8X9CslOwp6xZhh7UnLeuI4BoY/Di18km
+ HTSURlksJxhsG68/iZSrup9JMA3ONwfCSvKmmtsrMmnKfDz5czcyn+ydw1Lgl6fnnESoW2n9xLs
+ JEY7bYpl5RY3A/rM0YiaESN9SAvD55wlgK6xdHKIoVfAVXYcd9wUlswXIy9KlV0atRIPSEmW141
+ gupwZAaCyY+1jgJ7lnLvMsX6OeO7v23Ke3YSkIoLLVFJmrB4czX5VD4CVfgJ73LYJTtJRvPKsHQ
+ IwlQyHmpcXLWog6A9tg/KVCdwCEH33rxFFugXUbH+Dm/1nlJnx1GY/ec60JaR03bwz5CwMMbgAD
+ uPSsVYQceeKArncqOMrocUIBd9mVyaL87vTTyk7Duav8qjj7OId0+t2XskL8evSTmePJejUBBnb
+ /u8iuzebeYzS2Sf4Vdi
+X-Received: by 2002:a05:6a20:6f03:b0:3cc:2c74:a0 with SMTP id
+ adf61e73a8af0-3cc552de9bcmr1931348637.21.1786573913532; 
+ Wed, 12 Aug 2026 15:31:53 -0700 (PDT)
 Received: from stoup.. (174-21-93-59.tukw.qwest.net. [174.21.93.59])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-cbef721cb0bsm212031a12.26.2026.08.12.15.32.07
+ 41be03b00d2f7-cbef721cb0bsm212031a12.26.2026.08.12.15.31.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 12 Aug 2026 15:32:07 -0700 (PDT)
+ Wed, 12 Aug 2026 15:31:52 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, Alistair.Francis@wdc.com,
  Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH v2 23/52] disas/riscv: Handle aliases of csrrs during decode
-Date: Wed, 12 Aug 2026 15:31:13 -0700
-Message-ID: <20260812223142.349142-24-richard.henderson@linaro.org>
+Subject: [PATCH v2 08/52] disas/riscv: Tidy disasm_inst main loop
+Date: Wed, 12 Aug 2026 15:30:58 -0700
+Message-ID: <20260812223142.349142-9-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260812223142.349142-1-richard.henderson@linaro.org>
 References: <20260812223142.349142-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62c;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62f;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -102,155 +101,92 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+Unroll first iteration, so that always_true_p is not used,
+Drop some local variables and use 'decoders' directly.
+
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- disas/riscv.h |  7 -----
- disas/riscv.c | 85 +++++++++++----------------------------------------
- 2 files changed, 17 insertions(+), 75 deletions(-)
+ disas/riscv.c | 63 +++++++++++++++++++++++++--------------------------
+ 1 file changed, 31 insertions(+), 32 deletions(-)
 
-diff --git a/disas/riscv.h b/disas/riscv.h
-index 900363c603..d8c5acd969 100644
---- a/disas/riscv.h
-+++ b/disas/riscv.h
-@@ -86,13 +86,6 @@ typedef enum {
-     rvc_imm_eq_p1,
-     rvc_csr_eq_0x001,
-     rvc_csr_eq_0x002,
--    rvc_csr_eq_0x003,
--    rvc_csr_eq_0xc00,
--    rvc_csr_eq_0xc01,
--    rvc_csr_eq_0xc02,
--    rvc_csr_eq_0xc80,
--    rvc_csr_eq_0xc81,
--    rvc_csr_eq_0xc82,
- } rvc_constraint;
- 
- typedef enum {
 diff --git a/disas/riscv.c b/disas/riscv.c
-index e464b8b075..9ec79baf4d 100644
+index 70ea41f125..9880b8de20 100644
 --- a/disas/riscv.c
 +++ b/disas/riscv.c
-@@ -1063,24 +1063,6 @@ static const rvc_constraint rvcc_ret[] = { rvc_rd_eq_x0, rvc_rs1_eq_ra,
-                                            rvc_end };
- static const rvc_constraint rvcc_jr[] = { rvc_rd_eq_x0, rvc_imm_eq_zero,
-                                           rvc_end };
--static const rvc_constraint rvcc_rdcycle[] = { rvc_rs1_eq_x0, rvc_csr_eq_0xc00,
--                                               rvc_end };
--static const rvc_constraint rvcc_rdtime[] = { rvc_rs1_eq_x0, rvc_csr_eq_0xc01,
--                                              rvc_end };
--static const rvc_constraint rvcc_rdinstret[] = { rvc_rs1_eq_x0,
--                                                 rvc_csr_eq_0xc02, rvc_end };
--static const rvc_constraint rvcc_rdcycleh[] = { rvc_rs1_eq_x0,
--                                                rvc_csr_eq_0xc80, rvc_end };
--static const rvc_constraint rvcc_rdtimeh[] = { rvc_rs1_eq_x0, rvc_csr_eq_0xc81,
--                                               rvc_end };
--static const rvc_constraint rvcc_rdinstreth[] = { rvc_rs1_eq_x0,
--                                                  rvc_csr_eq_0xc82, rvc_end };
--static const rvc_constraint rvcc_frcsr[] = { rvc_rs1_eq_x0, rvc_csr_eq_0x003,
--                                             rvc_end };
--static const rvc_constraint rvcc_frrm[] = { rvc_rs1_eq_x0, rvc_csr_eq_0x002,
--                                            rvc_end };
--static const rvc_constraint rvcc_frflags[] = { rvc_rs1_eq_x0, rvc_csr_eq_0x001,
--                                               rvc_end };
- static const rvc_constraint rvcc_fsrmi[] = { rvc_csr_eq_0x002, rvc_end };
- static const rvc_constraint rvcc_fsflagsi[] = { rvc_csr_eq_0x001, rvc_end };
- 
-@@ -1163,19 +1145,6 @@ static const rv_comp_data rvcp_subw[] = {
-     { rv_op_illegal, NULL }
- };
- 
--static const rv_comp_data rvcp_csrrs[] = {
--    { rv_op_rdcycle, rvcc_rdcycle },
--    { rv_op_rdtime, rvcc_rdtime },
--    { rv_op_rdinstret, rvcc_rdinstret },
--    { rv_op_rdcycleh, rvcc_rdcycleh },
--    { rv_op_rdtimeh, rvcc_rdtimeh },
--    { rv_op_rdinstreth, rvcc_rdinstreth },
--    { rv_op_frcsr, rvcc_frcsr },
--    { rv_op_frrm, rvcc_frrm },
--    { rv_op_frflags, rvcc_frflags },
--    { rv_op_illegal, NULL }
--};
+@@ -5419,41 +5419,40 @@ static GString *disasm_inst(rv_isa isa, uint64_t pc, rv_inst inst,
+         .inst = inst,
+         .cfg = cfg,
+     };
 -
- static const rv_comp_data rvcp_csrrwi[] = {
-     { rv_op_fsrmi, rvcc_fsrmi },
-     { rv_op_fsflagsi, rvcc_fsflagsi },
-@@ -1751,7 +1720,7 @@ static const rv_opcode_data rvi_opcode_data[] = {
-     { "sfence.vma", rv_codec_r, rv_fmt_rs1_rs2 },
-     { "wfi", rv_codec_none, rv_fmt_none },
-     { "csrrw", rv_codec_i_csr, rv_fmt_rd_csr_rs1 },
--    { "csrrs", rv_codec_i_csr, rv_fmt_rd_csr_rs1, rvcp_csrrs },
-+    { "csrrs", rv_codec_i_csr, rv_fmt_rd_csr_rs1 },
-     { "csrrc", rv_codec_i_csr, rv_fmt_rd_csr_rs1 },
-     { "csrrwi", rv_codec_i_csr, rv_fmt_rd_csr_zimm, rvcp_csrrwi },
-     { "csrrsi", rv_codec_i_csr, rv_fmt_rd_csr_zimm },
-@@ -4440,7 +4409,22 @@ static void decode_inst_opcode(rv_decode *dec, rv_isa isa)
-                 default: op = rv_op_csrrw; break;
-                 }
-                 break;
--            case 2: op = rv_op_csrrs; break;
-+            case 2:
-+                op = rv_op_csrrs;
-+                if (operand_rs1(inst) == 0) {
-+                    switch (operand_csr12(inst)) {
-+                    case 0x001: op = rv_op_frflags; break;
-+                    case 0x002: op = rv_op_frrm; break;
-+                    case 0x003: op = rv_op_frcsr; break;
-+                    case 0xc00: op = rv_op_rdcycle; break;
-+                    case 0xc01: op = rv_op_rdtime; break;
-+                    case 0xc02: op = rv_op_rdinstret; break;
-+                    case 0xc80: op = rv_op_rdcycleh; break;
-+                    case 0xc81: op = rv_op_rdtimeh; break;
-+                    case 0xc82: op = rv_op_rdinstreth; break;
-+                    }
+-    static const struct {
+-        bool (*guard_func)(const RISCVCPUConfig *);
+-        const rv_opcode_data *opcode_data;
+-        void (*decode_func)(rv_decode *, rv_isa);
+-    } decoders[] = {
+-        { always_true_p, rvi_opcode_data, decode_inst_opcode },
+-        { has_xtheadba_p, xthead_opcode_data, decode_xtheadba },
+-        { has_xtheadbb_p, xthead_opcode_data, decode_xtheadbb },
+-        { has_xtheadbs_p, xthead_opcode_data, decode_xtheadbs },
+-        { has_xtheadcmo_p, xthead_opcode_data, decode_xtheadcmo },
+-        { has_xtheadcondmov_p, xthead_opcode_data, decode_xtheadcondmov },
+-        { has_xtheadfmemidx_p, xthead_opcode_data, decode_xtheadfmemidx },
+-        { has_xtheadfmv_p, xthead_opcode_data, decode_xtheadfmv },
+-        { has_xtheadmac_p, xthead_opcode_data, decode_xtheadmac },
+-        { has_xtheadmemidx_p, xthead_opcode_data, decode_xtheadmemidx },
+-        { has_xtheadmempair_p, xthead_opcode_data, decode_xtheadmempair },
+-        { has_xtheadsync_p, xthead_opcode_data, decode_xtheadsync },
+-        { has_XVentanaCondOps_p, ventana_opcode_data, decode_xventanacondops },
+-        { has_xlrbr_p, rv_xlrbr_opcode_data, decode_xlrbr },
+-    };
+-
+     const rv_opcode_data *op;
+ 
+-    for (size_t i = 0; i < ARRAY_SIZE(decoders); i++) {
+-        bool (*guard_func)(const RISCVCPUConfig *) = decoders[i].guard_func;
+-        const rv_opcode_data *opcode_data = decoders[i].opcode_data;
+-        void (*decode_func)(rv_decode *, rv_isa) = decoders[i].decode_func;
++    dec.opcode_data = rvi_opcode_data;
++    decode_inst_opcode(&dec, isa);
+ 
+-        /* always_true_p don't dereference cfg */
+-        if (((i == 0) || cfg) && guard_func(cfg)) {
+-            dec.opcode_data = opcode_data;
+-            decode_func(&dec, isa);
+-            if (dec.op != rv_op_illegal)
+-                break;
++    if (dec.op == rv_op_illegal && cfg) {
++        static const struct {
++            bool (*guard_func)(const RISCVCPUConfig *);
++            const rv_opcode_data *opcode_data;
++            void (*decode_func)(rv_decode *, rv_isa);
++        } decoders[] = {
++            { has_xtheadba_p, xthead_opcode_data, decode_xtheadba },
++            { has_xtheadbb_p, xthead_opcode_data, decode_xtheadbb },
++            { has_xtheadbs_p, xthead_opcode_data, decode_xtheadbs },
++            { has_xtheadcmo_p, xthead_opcode_data, decode_xtheadcmo },
++            { has_xtheadcondmov_p, xthead_opcode_data, decode_xtheadcondmov },
++            { has_xtheadfmemidx_p, xthead_opcode_data, decode_xtheadfmemidx },
++            { has_xtheadfmv_p, xthead_opcode_data, decode_xtheadfmv },
++            { has_xtheadmac_p, xthead_opcode_data, decode_xtheadmac },
++            { has_xtheadmemidx_p, xthead_opcode_data, decode_xtheadmemidx },
++            { has_xtheadmempair_p, xthead_opcode_data, decode_xtheadmempair },
++            { has_xtheadsync_p, xthead_opcode_data, decode_xtheadsync },
++            { has_XVentanaCondOps_p, ventana_opcode_data, decode_xventanacondops },
++            { has_xlrbr_p, rv_xlrbr_opcode_data, decode_xlrbr },
++        };
++
++        for (size_t i = 0; i < ARRAY_SIZE(decoders); i++) {
++            if (decoders[i].guard_func(cfg)) {
++                dec.opcode_data = decoders[i].opcode_data;
++                decoders[i].decode_func(&dec, isa);
++                if (dec.op != rv_op_illegal) {
++                    break;
 +                }
-+                break;
-             case 3: op = rv_op_csrrc; break;
-             case 4:
-                 if (dec->cfg && dec->cfg->ext_zimop) {
-@@ -5017,41 +5001,6 @@ static bool check_constraints(rv_decode *dec, const rvc_constraint *c)
-                 return false;
-             }
-             break;
--        case rvc_csr_eq_0x003:
--            if (!(imm == 0x003)) {
--                return false;
--            }
--            break;
--        case rvc_csr_eq_0xc00:
--            if (!(imm == 0xc00)) {
--                return false;
--            }
--            break;
--        case rvc_csr_eq_0xc01:
--            if (!(imm == 0xc01)) {
--                return false;
--            }
--            break;
--        case rvc_csr_eq_0xc02:
--            if (!(imm == 0xc02)) {
--                return false;
--            }
--            break;
--        case rvc_csr_eq_0xc80:
--            if (!(imm == 0xc80)) {
--                return false;
--            }
--            break;
--        case rvc_csr_eq_0xc81:
--            if (!(imm == 0xc81)) {
--                return false;
--            }
--            break;
--        case rvc_csr_eq_0xc82:
--            if (!(imm == 0xc82)) {
--                return false;
--            }
--            break;
-         default: break;
++            }
          }
-         c++;
+     }
+ 
 -- 
 2.43.0
 
