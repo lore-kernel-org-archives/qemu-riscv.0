@@ -4,81 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E334C5CFEB
-	for <qemu-riscv@archiver.kernel.org>; Thu, 13 Aug 2026 13:38:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2544EC5CFEB
+	for <qemu-riscv@archiver.kernel.org>; Thu, 13 Aug 2026 13:58:35 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wuVcU-0005m1-0N; Thu, 13 Aug 2026 09:37:18 -0400
+	id 1wuVwc-0002wy-5w; Thu, 13 Aug 2026 09:58:06 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <rao232328@gmail.com>)
- id 1wuVcS-0005lh-Pf
- for qemu-riscv@nongnu.org; Thu, 13 Aug 2026 09:37:16 -0400
-Received: from mail-pf1-x432.google.com ([2607:f8b0:4864:20::432])
+ (Exim 4.90_1) (envelope-from <flamboyant.h.01@gmail.com>)
+ id 1wuVwY-0002wH-En
+ for qemu-riscv@nongnu.org; Thu, 13 Aug 2026 09:58:02 -0400
+Received: from mail-pl1-x633.google.com ([2607:f8b0:4864:20::633])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <rao232328@gmail.com>)
- id 1wuVcR-0005UC-5Q
- for qemu-riscv@nongnu.org; Thu, 13 Aug 2026 09:37:16 -0400
-Received: by mail-pf1-x432.google.com with SMTP id
- d2e1a72fcca58-84830c774a0so2535735b3a.1
- for <qemu-riscv@nongnu.org>; Thu, 13 Aug 2026 06:37:14 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <flamboyant.h.01@gmail.com>)
+ id 1wuVwW-000203-VE
+ for qemu-riscv@nongnu.org; Thu, 13 Aug 2026 09:58:02 -0400
+Received: by mail-pl1-x633.google.com with SMTP id
+ d9443c01a7336-2cca0c5799eso25412495ad.0
+ for <qemu-riscv@nongnu.org>; Thu, 13 Aug 2026 06:58:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1786628233; x=1787233033; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1786629479; x=1787234279; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=LU3c7K+OtZGXFKKaiBRdDohYIWB+X8AIhAfaEwL+dZI=;
- b=njpn2kOz44zHWjH13TY8NLtWb/kA6tuQenPHf9UFGjWmHOWQSLHrfPHnm2BxxkKiQ6
- t5mVdxmbOR3YDypT/7qc/qr+UBZFPclbXuk6xLyEyEI+ov4MWS0XpL4hFocY0P5qa8y/
- hoy8ECgume08rxXPx9g6V/FYyRbyZwNAT1yI9pYGsigQ1ZhEfcW3qqV/5VoaUkUBaViJ
- TNZ8lbEOKBd8qZkrvI7f/Ma0lTz9TPzPvtGj7gEtZzjS14xmBN+f4IPv4pRnwlHz37Nl
- 6EsjJZ8YULQ9OfoPY0qO1NBSXOBb/APD0OvVFlF7+I4Q4FEWkXp4TPWKIUdLUJfqRSYf
- LNpg==
+ bh=ortSojCF4MD4GaSWJ2LixTOkSzJRkp5zenv//2r71a0=;
+ b=MqkVZNEaEHlsx1E8jWJCc7yKCjy9Ybmoha2FHrzluJsomDBzv6vf1ldQnJ+1/G/oh0
+ BKFDo4J5+I85kDvtKLDm2D75/AEYfUDPsooTNpxfFxJzl+qNzF3hOKxeTyiqqtebrgWO
+ 1z3XOHVCl3/4jVaDq5X3kZQWH1ktLNo6R4ym72asCC+7Fvbot6L3Wx6/rPBmMiQz/y0g
+ Qfr+qAsfuT2wCZPO26fFUMHqurfJ/hJeFXTXHHPo0vRhREayiFg9LJdJieUThPutI26F
+ OlbFWU+jU2vVZ5TBUn9Sp+HrqcacAjCN3cNn0r8JztwUw1NdZKdlDLLbbJ50dEIVbbW2
+ QW9Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786628233; x=1787233033;
+ d=1e100.net; s=20251104; t=1786629479; x=1787234279;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=LU3c7K+OtZGXFKKaiBRdDohYIWB+X8AIhAfaEwL+dZI=;
- b=BeKHGCc2pGaz/FK8/x0IP+yiFt/LPYt2htUp5wuB5LuqsUhP24nj8vsz9fuHkGPp1J
- 0C8nNrICSqtuKRT8FJjjYaphalGqMc9qNIHyMx11EDYyhwENzPA9nW80v+mLukDU2ky+
- UiTSWiZ5BsOVUU67WXWnEs58FOBkAxsmXgtqIFYr+ISnc0LEOgg8Vl6l/3migMXRPfEd
- A+Tuiqwc7YN1lPndmm0qJ2TnuGOGkPJ6qazTmi04cWjOnXhN5f79smay3NIFUJ5tjWnj
- VAu8TpmsOY0I7EtGqoDBDbUPidKSnbpJMSpg5FVQMFkkvdShSdM0l6YPQUwNk7NThSp+
- M6kw==
-X-Gm-Message-State: AOJu0Yx4KTzNVAehp0vGGjCleGX6+dpnXZMcfU6lmSNWRV8UhnFud8Lf
- rL+3zCEIY+Y34po8qtGXqdQeUARyuuDIvgQe3mfCoK99SPuK+TatHf+o
-X-Gm-Gg: AR+sD10+u1oWoUm5h4Cfjf4qF5qJ+5MS3/06Yvdvvtb+fsGyt9Wj9FAfmJaN9NdDHID
- jcOfUTZJLDY1reQeqlvWzKkfyzwPYFlbdef/QKi9Pjcgww4iToKy8ia4fu9aC8fcvhlQ5A5QyRS
- 3zTM/z5tS8JUaZHwUyVQSul34SN6Av2t4FT+pe4Oxz9iCloClsHJzH6gnrAk6YNg69A935gnScJ
- wqLogYZrgWBnERJjWJo2hyKJ/TAYlPSc36878bKGb8GWYlEKhhQQufFGXFLM/DcPbARnyxhQwJk
- KxNehMHbh/gVLaGph+wZBsr2xGpo3mp9C/pAgYke2FgdjZ7pd55OBBKN9jAVgSnZndqWT/rmtcs
- /Aq3cTg77gBh/Z1eXlrv56RQiR2lNkPpi/MyvZIkYEktuS3ihCGiynnAgf1BGZDebO3qVMN768k
- ULk9A7ex+3vS2xoyuBf1Vz9R9msokpTkKMxfqhZ+zz5kMg/3wcNlWvyxLWy3J7
-X-Received: by 2002:a05:6a00:4fc7:b0:848:32f5:4999 with SMTP id
- d2e1a72fcca58-84fc7563b85mr5443498b3a.30.1786628232939; 
- Thu, 13 Aug 2026 06:37:12 -0700 (PDT)
-Received: from DESKTOP-DFGP8OG ([2409:8a55:ad2:6951::258])
+ bh=ortSojCF4MD4GaSWJ2LixTOkSzJRkp5zenv//2r71a0=;
+ b=HojHVFIg2sPdtI2XJ1DxlpdA/mfsRHn/FTCvgc2zux5G5osL48S1zZM8Qjja9D/2uq
+ dIpavJ/cKrG2hEHOA8H7Iadb7DYyK/HoVid2VFnLZYrxCwnmThAgPJd/A/cnaLnjdrsV
+ wiI/63iAqSAOOLCev/5i6b/cWk2q+3+H3Wjshcb15hy4zvqVs+iL37rLOmLqR6S6vZXD
+ S5Jwgvfcz7fau4pvubA9V5rmzjVi/u0TiB6HIs40hA98O6F20lmYssZYCcZP6exVMruy
+ LXYGdhE3+hA5VlFXb0nZQfjyzMBrTRy7QptKEqCiNv1CHse/Xw4d0Ii9Zm/HOSwxaKjw
+ vf0w==
+X-Gm-Message-State: AOJu0YxHxI9bhdtRxFyurQzR7aBRajfk+yhBbj8wXaeEcrcFqh5uEJVx
+ 0Qp6+z6eAkXyw+LM7Tfx1T/0sOGRGux9Sit6y3Sfhmbvc+ugF752d6J1
+X-Gm-Gg: AR+sD10CwKM1Pth8tq2gENwcA6y9wJnnzUwGlfu8OeRvhogiGkpzmJLzqEB9ZDGpnFQ
+ G5qVBxbKdFhusaTzt9R0bl4WhjffV7Vr/t/DOVPvwsC/N93Ad7ftz+5c7d/d1FHA7RU6/NihgQ2
+ jdApBt4HSSo089gIKYNEhQj/I06tV5IevlmefacB5LAEAzKp6tyii6Q07NM3GuL/AMAM0CjDUyy
+ ZxNj5Xnarcvzp8xT4vqOARKeQEPQ3sfGfcmRl/78LNoW7OGXVkQXEZlfOBb8kACfMwhfiIX373z
+ J0MiyZABLSBil2+tLbd0+ebWGxKE8QzaFA5hEOSLNPLhM4/RFx4WGVMRPRE7S5oq4nwCcXTJSK7
+ 0i0pXwCCcjC+wVVXOrIy1uyUtKc+LEkaZSwRLq5dpZYG40V6mMfIRl3W2rEpQoUhTt69U9W0Fyd
+ bPJy2TuwP/UIsun8uMPiV0w1xAkTUtOHFHkYP4eGF46WYGDGiAu3g4s5jW7d70nxTRsIzFNGTpt
+ RKTMIqiFg==
+X-Received: by 2002:a17:903:2987:b0:2c9:e846:a57e with SMTP id
+ d9443c01a7336-2d37d1c4a58mr73337325ad.0.1786629478749; 
+ Thu, 13 Aug 2026 06:57:58 -0700 (PDT)
+Received: from localhost.localdomain ([111.198.227.173])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-cbef6849625sm1078901a12.1.2026.08.13.06.37.08
+ d9443c01a7336-2d37c486531sm10024395ad.57.2026.08.13.06.57.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 13 Aug 2026 06:37:12 -0700 (PDT)
-From: raoyi <rao232328@gmail.com>
+ Thu, 13 Aug 2026 06:57:58 -0700 (PDT)
+From: Kangjie Huang <flamboyant.h.01@gmail.com>
 To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, palmer@dabbelt.com,
- liwei1518@gmail.com, daniel.barboza@oss.qualcomm.com,
- zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
- bmeng.cn@gmail.com, philmd@oss.qualcomm.com, pbonzini@redhat.com,
- lvivier@redhat.com, farosas@suse.de, caojunze424@gmail.com,
- raoyi <rao232328@gmail.com>
-Subject: [PATCH v4 0/3] hw/timer: add DesignWare APB timer
-Date: Thu, 13 Aug 2026 21:36:40 +0800
-Message-ID: <20260813133643.20380-1-rao232328@gmail.com>
-X-Mailer: git-send-email 2.53.0
+Cc: qemu-riscv@nongnu.org, Chao Liu <chao.liu@processmission.com>,
+ Junze Cao <caojunze424@gmail.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Fabiano Rosas <farosas@suse.de>,
+ Laurent Vivier <lvivier@redhat.com>,
+ Kangjie Huang <flamboyant.h.01@gmail.com>
+Subject: [PATCH v3 0/3] hw/riscv/k230: add IOMUX register block model
+Date: Thu, 13 Aug 2026 21:57:14 +0800
+Message-ID: <20260813135717.2758-1-flamboyant.h.01@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::432;
- envelope-from=rao232328@gmail.com; helo=mail-pf1-x432.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::633;
+ envelope-from=flamboyant.h.01@gmail.com; helo=mail-pl1-x633.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -102,45 +107,75 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Add a generic DesignWare APB timer device model, and wire it
-up for the K230 machine with num-timers=6 and a 6.25 MHz clock.
+Add a SysBus model for the 64 K230 Function IO configuration registers
+documented by the K230 Technical Reference Manual. The model retains the
+writable configuration fields needed by the SDK U-Boot and Linux
+read-modify-write paths.
 
-Changes since v3 (address review comments from Philippe Mathieu-Daude):
-- Drop Clock framework mention from the commit message
-- Cover the device in MAINTAINERS (device files in patch 1/3,
-  test file in patch 3/3)
-- Move trace calls to function entry
-- Drop the addr mask; the MMIO region stays at 0x100 (the IP
-  register implementation range; the SoC aperture is board-level)
-- Hard-code comp-version (0x3231312A, "211*", IP component version)
-- Use the Resettable API (phases.hold) instead of legacy reset
-- Add unrealize to free per-channel ptimers
-- Keep register offsets and bit definitions in the C file
-- Drop private/public comments in the header
-- Move K230 timer macros into k230.c
+The series adds the device model, wires it into the K230 SoC at
+0x91105000, and adds qtest coverage.
 
-raoyi (3):
-  hw/timer: add DesignWare APB timer model
-  hw/riscv: add DesignWare APB timer to K230 board
-  tests/qtest: add k230 dwapb timer test
+Changes in v3:
+- Migrated the model from the deprecated device_class_set_legacy_reset()
+  to the Resettable interface.
+- Added a comment to the model stating that bit 31 (DI) is read-only and
+  reads as zero, since the model does not simulate external pin input
+  (TRM V0.3.1, section 12.9.2.2).
+- Added MAINTAINERS entries for the model and the qtest.
+- Defined an independent K230_IOMUX_EXPECTED_WRITABLE_MASK (0x00003fff)
+  in the test instead of reusing the implementation mask, with a comment
+  explaining the bit layout.
 
- MAINTAINERS                         |   3 +
- hw/riscv/Kconfig                    |   1 +
- hw/riscv/k230.c                     |  33 ++-
- hw/timer/Kconfig                    |   4 +
- hw/timer/dw-apb-timer.c             | 376 ++++++++++++++++++++++++++++
- hw/timer/meson.build                |   1 +
- hw/timer/trace-events               |   8 +
- include/hw/riscv/k230.h             |   8 +
- include/hw/timer/dw-apb-timer.h     |  40 +++
- tests/qtest/k230-dwapb-timer-test.c | 274 ++++++++++++++++++++
- tests/qtest/meson.build             |   4 +-
- 11 files changed, 748 insertions(+), 4 deletions(-)
- create mode 100644 hw/timer/dw-apb-timer.c
- create mode 100644 include/hw/timer/dw-apb-timer.h
- create mode 100644 tests/qtest/k230-dwapb-timer-test.c
+Changes in v2:
+- Split the device model, SoC wiring, and qtest coverage into separate
+  patches.
+- Removed redundant MMIO bounds, access-size, and alignment checks.
+- Limited register storage to the 64 documented Function IO registers.
+- Applied the documented 0x00003fff writable mask.
+- Treated offsets 0x100 through 0x7ff as reserved.
+- Added tests for write masking, read-modify-write accesses, IO63,
+  reserved offsets, and system reset.
 
+Tested with:
+- qtest-riscv64/k230-iomux-test
+- U-Boot and Linux boot tests with no unimplemented-device warnings
+  for the IOMUX region
+
+Thanks to Alistair Francis and Chao Liu for the v1 review comments that
+shaped the v2 series structure and the register semantics.
+
+Reviewed-by: Junze Cao <caojunze424@gmail.com>
+
+v2:
+https://lore.kernel.org/qemu-devel/cover.1784022244.git.flamboyant.h.01@gmail.com/
+
+v1:
+https://lore.kernel.org/qemu-devel/20260710041845.67170-1-flamboyant.h.01@gmail.com/
+
+Kangjie Huang (3):
+  hw/misc/k230_iomux: add Kendryte K230 IOMUX model
+  hw/riscv/k230: wire up the IOMUX device
+  tests/qtest: add test for K230 IOMUX
+
+ MAINTAINERS                   |   3 +
+ docs/system/riscv/k230.rst    |   1 +
+ hw/misc/Kconfig               |   3 +
+ hw/misc/k230_iomux.c          | 125 ++++++++++++++++++++++++++
+ hw/misc/meson.build           |   1 +
+ hw/misc/trace-events          |   4 +
+ hw/riscv/Kconfig              |   1 +
+ hw/riscv/k230.c               |  11 ++-
+ include/hw/misc/k230_iomux.h  |  43 +++++++++
+ include/hw/riscv/k230.h       |   2 +
+ tests/qtest/k230-iomux-test.c | 160 ++++++++++++++++++++++++++++++++++
+ tests/qtest/meson.build       |   5 +-
+ 12 files changed, 355 insertions(+), 4 deletions(-)
+ create mode 100644 hw/misc/k230_iomux.c
+ create mode 100644 include/hw/misc/k230_iomux.h
+ create mode 100644 tests/qtest/k230-iomux-test.c
+
+
+base-commit: d49f87606ac1a6e15701b26c1b16c5d7e948ffcb
 -- 
-2.53.0
-
+2.43.0
 
