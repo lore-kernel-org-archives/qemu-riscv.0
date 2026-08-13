@@ -4,124 +4,116 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7DC05C5AC67
-	for <qemu-riscv@archiver.kernel.org>; Thu, 13 Aug 2026 05:44:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE711C5CFDB
+	for <qemu-riscv@archiver.kernel.org>; Thu, 13 Aug 2026 07:51:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wuOER-0004mA-Vx; Thu, 13 Aug 2026 01:44:00 -0400
+	id 1wuQE6-0008EV-8K; Thu, 13 Aug 2026 03:51:46 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <chao.liu@processmission.com>)
- id 1wuOEP-0004lQ-A1; Thu, 13 Aug 2026 01:43:57 -0400
-Received: from mail-japanwestazlp170120003.outbound.protection.outlook.com
- ([2a01:111:f403:c406::3] helo=OS8PR02CU002.outbound.protection.outlook.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <chao.liu@processmission.com>)
- id 1wuOEN-0007lX-CP; Thu, 13 Aug 2026 01:43:56 -0400
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=GVST7gDFRz9AqdX58LVkW9UMbKtelJyp9jNze0VmOIAG8oYehaDfNEqOoIj+5B+NCsASSxwpir2EFKBmUe5MmFvtBzGnSlBtXZyjB4inuBcPVX64s5hpPI8s1YZ60DKMAdSC0PryX1sTID7cHiiABgiyMZ6/h4bY5OT+LMcURwApEKct/Js+9ST/ZOo+xxXX1mIpKYzx5toLrAwXlYBR4PfR9hXHzZsAae9lvSMkbzAysOkjMVyXlxr3Gos2iJLopVVYz3chdVvcbeVl3hXYWoHYnsw0QpGRlofOMg9vKrgB07bRJdDV4xvr8a91soJ1FgAkts4AKFeYlXn9vYyKpw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=BgYiS3gv31KSZF7XBQK1Hec54cRdcH8Qp+8tT8TXZt0=;
- b=pkhSi/q3xqj6tSWm5Y67sYKAkYrgdDuErJjuayleJzyNEOp9fVuQUrlpD9y2uYX8uU5WsaA9DReXQQsx0cHmWoKN/Mi/hBzxY3nlacMnon9ZhGvItnaOu3x8o0StRfnSZs5UCXRv9NaD/TZ1Qw7Rjq8qEAtEpfmMhd+a/qfT1sioeuvpbFnI3W5RI+cMw8sHylqHMTtpe8nfULfMt7ZoxzBzVeLavNhtb7/+g3IEn4q8E1UsmpQrzwP52CS6Rm138o0lpQPsYeCMQhxn3i7lkPsj3AZHV4dZ+7jM/uO0FisYKbdB7c2U5dBsLAQKk6ouAuErAzhVNXPh7el7tx4NDA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=processmission.com; dmarc=pass action=none
- header.from=processmission.com; dkim=pass header.d=processmission.com;
- arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=processmission.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=BgYiS3gv31KSZF7XBQK1Hec54cRdcH8Qp+8tT8TXZt0=;
- b=X4SIA2QTIiXrVd680v3fTQ0WyqajqBHcf9ei1RKfVlOxfzdRmvHnmhYt6tMHBhYlOSoOHikkISqjgnnS5GpeyBHt3qy5ERw6IEy5Luphk+aIGCs7XD+7G7lE2elKsq/HO9bab8gVmcMlef3LBNJAOOCrzQYB/f9R6fCDSf8zFzvOQw3j0puiTbyszDaasN2ItZOGo39fw7SQBBGq8tx8ObrtjUUx9JN/0QjMSxv9jpXCniCjj6OvqMLqBmRkoKCUQn/TrLcqbUrCoJalHsPsCX42+/eO8XPp/AbXypOzScy4e653Yq67OXQZZjCo9VI4JSQxSSCaTe8u24JW+qN6Fg==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=processmission.com;
-Received: from TYNPR02MB9351.apcprd02.prod.outlook.com (2603:1096:405:3d0::15)
- by TYZPR02MB7061.apcprd02.prod.outlook.com (2603:1096:405:2c::5) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.315.14; Thu, 13 Aug
- 2026 05:43:47 +0000
-Received: from TYNPR02MB9351.apcprd02.prod.outlook.com
- ([fe80::e5f3:5fb7:3d29:5934]) by TYNPR02MB9351.apcprd02.prod.outlook.com
- ([fe80::e5f3:5fb7:3d29:5934%4]) with mapi id 15.21.0315.011; Thu, 13 Aug 2026
- 05:43:46 +0000
-From: Chao Liu <chao.liu@processmission.com>
-To: alistair.francis@wdc.com, Chao Liu <chao.liu@processmission.com>,
- Fabiano Rosas <farosas@suse.de>, Laurent Vivier <lvivier@redhat.com>
-Cc: bin.meng@processmission.com, Paolo Bonzini <pbonzini@redhat.com>,
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Subject: [PATCH] tests/qtest: remove trace output from k230 watchdog test
-Date: Thu, 13 Aug 2026 13:43:29 +0800
-Message-ID: <20260813054329.35425-1-chao.liu@processmission.com>
-X-Mailer: git-send-email 2.54.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: JH0PR01CA0173.apcprd01.prod.exchangelabs.com
- (2603:1096:990:75::17) To TYNPR02MB9351.apcprd02.prod.outlook.com
- (2603:1096:405:3d0::15)
+ (Exim 4.90_1) (envelope-from <flamboyant.h.01@gmail.com>)
+ id 1wuQDt-0007vO-5F
+ for qemu-riscv@nongnu.org; Thu, 13 Aug 2026 03:51:34 -0400
+Received: from mail-yw1-x112e.google.com ([2607:f8b0:4864:20::112e])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <flamboyant.h.01@gmail.com>)
+ id 1wuQDr-0005vk-Mk
+ for qemu-riscv@nongnu.org; Thu, 13 Aug 2026 03:51:32 -0400
+Received: by mail-yw1-x112e.google.com with SMTP id
+ 00721157ae682-81ed000b507so18607387b3.0
+ for <qemu-riscv@nongnu.org>; Thu, 13 Aug 2026 00:51:30 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1786607490; cv=none;
+ d=google.com; s=arc-20260327;
+ b=R8tmN/8S3rIJ++2+UkR/ezK1mroIZlrFpx6qpVMsJol3DGWJ/o09YllFgEmZ4Ybqjh
+ AEGwutUhOyUCo8t2o+Oac/sOGF8YF5/ajIvEHHtdP4/vZYpT5SgIj/iPC2bM2EWvw8/b
+ uJzYTuiCjmj14o7XMpI/Gk0b2T2z/s98Thz4mWMXbUtg2MA1DVLyYZlo2DlNOiFeR3Qy
+ G8ygBLuimfvzlq7mjy/l6FM5jAgmfcaHr1G+WJZvRvfGlzGf8eGx71jfTX7SytQ2PL5j
+ 26kPhe4iey+7qy1R8ZjXfIR5a7QRodPQ08ZtxSuvoBM3nnXKzN7iHfpiYASNwax3Royv
+ 2PDA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=zLY6XVyEJwjjdlR9796icQpjJYNCoOvvo7uxpuoaiRU=;
+ fh=QiSCzHveV+LVS9ft+nF9RXoGS98uJwZ43CgH4dhZklU=;
+ b=hQOLg89UEYQXODXJxEUpeJzf1ya9PXyM6sqJrBUoZc6uZ3zr2ybeuuyx6TuWgd2ins
+ rfr7kesGiPf/CzfYajqE/TO40Lw7xhyPnimzahP+PaVIzOHiBkVj26SN11UR4LzS57zS
+ /eXLRJlpdUGMu4LbWjgEMthtD9pxKgyf1+1PHZZ8oEZNlL/0jOvfmg2d/JZoqLHULFOg
+ iU98h1auCQbbHe0JhG4SGwZouL1NpHhTR/NpqflCDlTXHxKhdb6QuTjOiNnj66cFLoe1
+ LN3M2ffjnXg/RinT/egofrMg+hRx8DmWaGysec44HZlvg43JWpE4ZsmMvdK1OpAXV38Q
+ 4b8Q==; darn=nongnu.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1786607490; x=1787212290; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=zLY6XVyEJwjjdlR9796icQpjJYNCoOvvo7uxpuoaiRU=;
+ b=kUTfvxejVNDXfNCl0YZnpr/zwEPapM1tpr1nAvXoqOFZHBqHMrD53tRzQlBaoHkZvn
+ X+kLGrESC9Q6cZ6MducxYeU+q+W8eDGQJVOwb5AgXA/h4aPrgQy0VfiOY682HB/crVyR
+ grzDVvz5Wkn5hH3HxnPQjylLO6sSA1Ja4pJ3WfkW5M8MAZ0ncOQxIoFsuagK5J6D+3Ka
+ 5VJpEBR5+LGoLcCqINDrRwSkRniIZL/sxMW5+wo4KHtjh6jzGTCeQxbZxf1ANZnpRwtL
+ LypBpNpL1Jwajs24hlPBZPIc/TDdhM0wT07yfKBckPpHo8pNMSEm6PAA8GNSPsI3axNm
+ H2sw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1786607490; x=1787212290;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=zLY6XVyEJwjjdlR9796icQpjJYNCoOvvo7uxpuoaiRU=;
+ b=VCV2eyTDpp0hpqx3fb2GqQNM9J+EjU/pd0kFmVyR8VrkQy6jqek/iZrFSeBPYWoAuN
+ 40Kf+BcftR8WBxeDhBZr27/kQ/Pyu7GDR2pMDyO2JT7+wGaKX42D92TnGG8vTu56Z2dH
+ 65JmE/TwoYU/vgC6GuKAYYMRXMCxvkLJEUnNKpq1hckGyQuaCYVkH85XszY0SvESwmIS
+ 5vqsujyLjvUVLYAURC2hCcAKLLIarUD3+ad/lb3xWplwWsJshkCf5Rxh30GeTclYGtjD
+ bBBu8RV9jVj7wm5GNJtapcUY6TZAu4aYYzxSHv5TgwIBWye0amATOdedJyEnwD09YnoL
+ pp5A==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RogjByFgHyj4EbZAo+9Co/bjy65CIfcP8iLYo0hxzPGhTgaWUeCodwJ/2XkfNBeN8SqEkjowtVJA2Bp@nongnu.org
+X-Gm-Message-State: AOJu0YyXFnNZ6X6hk1/aAc9qaG1GulmFaGLUy5G0HJDfUdWhc0L/PH3o
+ 54yGbGBPl9hnDLXh8Gi1GoJS7jwDgqmvCAtqNr55D8ZM7uSxR/KxnZgoPRDQU0XpF7KSuV75iR7
+ S5XYUtB8KSpv+Mu2M5GAZjpa+6/PZZE4=
+X-Gm-Gg: AR+sD1168J4J4Ds1ij4N02tf46IkGKTGpSzIeC4ANNJlrg+8UBRAGq9ZDa+4lH4RRLT
+ SDn84GRiR5WjOziikCwpPrt5fpgqikEchW6cJKRUh9KoE2FNjfgeAZvAr/jxUt3Rb404kqRVC5u
+ 4v39R/uVb4+m3f9RwFGPu0z7pg+4VIlIv+E9TUxyKzC8iYWUD27V62r8sSY6vTUg8IJg2JU2MJW
+ lRsF8eReOW9lOWE4jqgt47L8ErtpGMtdrsGkv76IY+nJ4xCcq7hUa7LnpZU5KdLGYUbc6KyfpIQ
+ MqZzD7W178nBSmaprQX9c9AHB4p0TWk14T74lQ0i6Nz7dNroEtpc
+X-Received: by 2002:a05:690c:31a:b0:81e:c436:c530 with SMTP id
+ 00721157ae682-834723c8b1dmr23257777b3.14.1786607489888; Thu, 13 Aug 2026
+ 00:51:29 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: TYNPR02MB9351:EE_|TYZPR02MB7061:EE_
-X-MS-Office365-Filtering-Correlation-Id: 25388dbb-a92d-4923-1459-08def8fdd7ed
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|366016|1800799024|23010399003|18002099003|18092099006|56012099006|3023799007|10067099003;
-X-Microsoft-Antispam-Message-Info: padZau33+GrIvDHWN91ZEGhnq15DjDo5/97rvs+GUME8KeOhaMSeyKyUYFHgFjAkGhX9RQYX6vjox3K/Y+7BeS4n0dvaEx10EKhpmgAfU7vTZkAtPcukh+whnM3ALvUa4o9qgRXwZ3eeorPa3wKe13y74TgfvFPap0BqhOvswZDl62jND5oKJXoFHhGAFvAOMB1dQ97bZi68BxsFKaCOUPuaTIRW2d+26acTZ4KElkdfjWk4VLNNvzabdi/4r+mmY8FmD/x4sssftbujcq6Z4tK1moL82T4wQ9tuybFdi+RmY5XdFjL1DGvUBX6h15NHN8U5/3mt3NIzex55UM8V3Ui2fBeQQ37mIaFpgGa7d/uT9M2KLsozRE0PXtm2o285+qbbMaaybMMsCtaadWrE6G0x4tnfoV3GPpWT5E8TwRXmE9GnWXXVU2/Qj9Uw2RGXycsfHzIN53GpnZTXofdvvxfFmWHA4/f27TVSLSesAj6BO7vdbG7c9JiQ6POdq18rgN0rPL5JnF1A8JJhoky1xAhTbW5ioBefmQMEvPwZbB1T6IQ92omhluUMsfhegOYX/dSZKczk13ny8kpSK8XQlfdH4uROAXiqvZdqZx53fpSyvemPQXwBAOxB4Yh4MBFK1JqmM9EFbGZ5CPsDozFSwtP5XjQoOZ34xZMHL+LtR3E=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:TYNPR02MB9351.apcprd02.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(366016)(1800799024)(23010399003)(18002099003)(18092099006)(56012099006)(3023799007)(10067099003);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?PQFlolpQz5BOeOuYxDwU16YTZdB7NrIUK8g83nLFJjWf7bcoscXHYM2iv3Ec?=
- =?us-ascii?Q?TOR5l++a9INRRvUsfjLFo0C85t8s2+xhdFASPfPuFaDOub6h+QLz1RR1UpGi?=
- =?us-ascii?Q?n1gg7sPcjDquJlzCcVTBAYod2eyy0Y/bJ1u1H9MF5tyF5qcF0YBTr2YRKDDI?=
- =?us-ascii?Q?jM0OSx/eyLcbbMdZgiGdolQCZqAeGe+Nm36S4sNLueJmUtAgzu8y4qgq5C4t?=
- =?us-ascii?Q?YhLJHkBD9w7vAWci695KDQlQqOFkoZ1QWbu5vb5+du9FHbo4JCCfMsRqE13d?=
- =?us-ascii?Q?wSSETJzqt8FxPXv2gVHO0WEcLvlbXTem+0baSEZ+ABfTmM+uXzvLE+1rMDih?=
- =?us-ascii?Q?LDBkvVSHUQXB56JRXU53mcH2f35j+pYkbo0Y4g69V6b9eWCctglzTUbG7n6B?=
- =?us-ascii?Q?Y9jyOtCCIhnPiQ3g6y5hLjJ/xJ1Ov5ML6sDrxyz+iTzHXBdoZjYTr7cGCpBk?=
- =?us-ascii?Q?iIq3lyPkUmuDHSsBXkDk7tRHMnl9+yx1eH6notfowTi51bjGwxG5ToSTL/bp?=
- =?us-ascii?Q?1qZY112RKK1oYCtmLgp8RMMRtfLdMMYzPmMcVio+TGgWDW3cmZggtE7kLcyM?=
- =?us-ascii?Q?LF5WVwvBaKYCOMXGPit2HDOiXc8v9s8G1nfi5ABb5goxuZVE9h6AXzJhiolx?=
- =?us-ascii?Q?UB3Y/WKinROI+MRW145sNf4yZ76Lp2lnBX6SaGCqJGBQAkxpXoeLdDRZEOAc?=
- =?us-ascii?Q?spFBg9s++rVEb/iLS3eUyXk2yWLkJQYkbOVINJZFEpyKsqcL/OugM3McROTT?=
- =?us-ascii?Q?95ldISGDrUiLzbJBuI/nJBik3+0sP4V61G/nSIusQAKwiVghogpwYCYs7NLD?=
- =?us-ascii?Q?2T4A+TiQRmG6loSd+CcH0WHW9qWHFdOZz3Jx1xDtlnH7bV3UiANzpsZZeY9Y?=
- =?us-ascii?Q?KSal0BEeWA4HCDsvIsSuCcXp0SloAufiv4UlZgqlK0Te4qkWbS5Kai144tzE?=
- =?us-ascii?Q?kUfgxhaL2Bh+Ie2gHju7ayzbBYOoTeog6MedLJsoP9cnUYS+dICpK+hlYjch?=
- =?us-ascii?Q?Sfxz72Sg8WkIlaJYDlAt8znc0hkALOyHtAAjXoTJ/AFUehF5WnmypyQzyhcT?=
- =?us-ascii?Q?SO153x09YsMAl+OxjNE8j975QOzUusOkm2AmkdMwKHSyUj4N61lqxly6Tqhv?=
- =?us-ascii?Q?50va6/amj8/oA3EhVIcwPMLINAUn2bMyYnpdzZCMbyUiSkFq+JGm15H7q5cz?=
- =?us-ascii?Q?rMFUMphypla4ionPa6NLkO8sqrnZ3mNb5iAZp5IY/OXjYOmXlgj1qPEEtTXj?=
- =?us-ascii?Q?+fA3l8X8cnpxVeil03qMB6nszazk/5zXVzd9M5PJvYy/N3SBGCXdPg7B0yzM?=
- =?us-ascii?Q?/QJ+NEGAr7pnsBAwB7/zQzePMeAYHSnyf8O1vemw/gt/t2Z6ct1N3ivMT5uN?=
- =?us-ascii?Q?BFri5Y2r+JN5J8hDX1cJFBhoU6pF8cEG/jVIGj757MqjhVzwVk+MhXuxYzXP?=
- =?us-ascii?Q?2azL03k/mShTAAoPfgIAoYg3x+Tkf+pBuGYvKuh83xlg1/Leh6244TKWFiig?=
- =?us-ascii?Q?cJLS6tBn9rDCb2E017UoGL4+KCQuDH9T0theClkyzmQT9GJvuqd3uii6P9Af?=
- =?us-ascii?Q?aPR6QE4kp1Giu9VaPyxVOAHdBUEyhe4YSUCgJ3gaMX93I+hfdSmRqJ2nR6wY?=
- =?us-ascii?Q?rG0Dkyc8gxARJMF58F1thEQg31TXU5FXsu++/dEsWoGDnUETix6zeLxdowHn?=
- =?us-ascii?Q?cQeYQ+SsQVbagt5FBEf5/3vfBE81gekDtnt2FxV1mvFKgAVhHi0w6fhm5ras?=
- =?us-ascii?Q?cxv2jYG3agdJIvEd0IT5YUEhmuAwt2E=3D?=
-X-OriginatorOrg: processmission.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 25388dbb-a92d-4923-1459-08def8fdd7ed
-X-MS-Exchange-CrossTenant-AuthSource: TYNPR02MB9351.apcprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Aug 2026 05:43:46.7823 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: e0544bf7-9765-4630-ab69-0b266dc2169c
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 3xTf72+3m79V+9w1wyBhkIVMfGVXdrtfMadVEwK0Rd8FOwY1I3vDnU6JxxxBCMHZyDWugjCi+UuQSAFgHhqibS+sVDJU8EIHu5Au2rD/GnA=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYZPR02MB7061
-Received-SPF: pass client-ip=2a01:111:f403:c406::3;
- envelope-from=chao.liu@processmission.com;
- helo=OS8PR02CU002.outbound.protection.outlook.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
+References: <cover.1784022244.git.flamboyant.h.01@gmail.com>
+ <42d005d6e530e2cf2c7df8634e8b82c0f77d1702.1784022244.git.flamboyant.h.01@gmail.com>
+ <an0wcQahXAB6UCCB@ChaodeMacBook-Pro.local>
+In-Reply-To: <an0wcQahXAB6UCCB@ChaodeMacBook-Pro.local>
+From: Kangjie Huang <flamboyant.h.01@gmail.com>
+Date: Thu, 13 Aug 2026 15:51:17 +0800
+X-Gm-Features: AUfX_mzrdsTYQgtzlU-Ct7QniI_NzOG1UNbuZhVOcmE1BGbAfpF2y1yOWx5mPdk
+Message-ID: <CAAW0U4atycRToaPbd8tRo1KoNUe54zLdi_72oCFqYHv8E81=2w@mail.gmail.com>
+Subject: Re: [PATCH v2 1/3] hw/misc/k230_iomux: add Kendryte K230 IOMUX model
+To: Chao Liu <chao.liu@processmission.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ Alistair Francis <alistair.francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, 
+ Fabiano Rosas <farosas@suse.de>, Laurent Vivier <lvivier@redhat.com>, 
+ Alistair Francis <alistair@alistair23.me>, caojunze424@gmail.com, 
+ Kangjie Huang <flamboyant.h.01@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::112e;
+ envelope-from=flamboyant.h.01@gmail.com; helo=mail-yw1-x112e.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -138,33 +130,30 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The interrupt mode test does not depend on trace output, but passes a
-trace file to QEMU. This makes startup fail when QEMU is built without
-the log or simple trace backend, so qtest cannot connect.
+Hi
+Chao Liu <chao.liu@processmission.com> =E4=BA=8E2026=E5=B9=B48=E6=9C=8813=
+=E6=97=A5=E5=91=A8=E5=9B=9B 11:18=E5=86=99=E9=81=93=EF=BC=9A
+>
+> According to the K230 Manual, Section 12.9.2.2, IOMUX register bit 31 (DI=
+)
+> is a read-only field described as =E2=80=9CInput data from outside the Ch=
+ip to the PAD=E2=80=9D:
+>
+>   > bits: 31
+>   > Field Name: DI
+>   > Access: RO
+>   > Field Description: Input data from outside the Chip to the PAD
+>
+> We don't need to simulate external input here, but I suggest adding a
+> comment explaining that this is set to zero.
+>
+> I checked the K230 SDK and there are no dependencies on this part,
+> but from the standpoint of modeling completeness, it's worth noting.
+Hi Junze, Alistair, and Chao,
 
-Drop the unnecessary trace option.
+Thank you very much for the reviews. The suggestions are very helpful.
+I will address them in v3.
 
-Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/4126
-
-Signed-off-by: Chao Liu <chao.liu@processmission.com>
----
- tests/qtest/k230-wdt-test.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/tests/qtest/k230-wdt-test.c b/tests/qtest/k230-wdt-test.c
-index c8eaeaf1ae..b1131f42e3 100644
---- a/tests/qtest/k230-wdt-test.c
-+++ b/tests/qtest/k230-wdt-test.c
-@@ -76,7 +76,7 @@ static void test_counter_restart(void)
- 
- static void test_interrupt_mode(void)
- {
--    QTestState *qts = qtest_init("-machine k230 --trace k230_*,file=k230.log");
-+    QTestState *qts = qtest_init("-machine k230");
- 
-     /* Set interrupt mode and enable watchdog */
-     qtest_writel(qts, WDT_BASE + K230_WDT_CR,
--- 
-2.54.0
-
+Thanks,
+Kangjie
 
