@@ -4,66 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2544EC5CFEB
-	for <qemu-riscv@archiver.kernel.org>; Thu, 13 Aug 2026 13:58:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D4EAC5CFEB
+	for <qemu-riscv@archiver.kernel.org>; Thu, 13 Aug 2026 13:59:11 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wuVwc-0002wy-5w; Thu, 13 Aug 2026 09:58:06 -0400
+	id 1wuVwh-0002yX-EK; Thu, 13 Aug 2026 09:58:11 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <flamboyant.h.01@gmail.com>)
- id 1wuVwY-0002wH-En
- for qemu-riscv@nongnu.org; Thu, 13 Aug 2026 09:58:02 -0400
-Received: from mail-pl1-x633.google.com ([2607:f8b0:4864:20::633])
+ id 1wuVwf-0002y8-TC
+ for qemu-riscv@nongnu.org; Thu, 13 Aug 2026 09:58:09 -0400
+Received: from mail-pl1-x631.google.com ([2607:f8b0:4864:20::631])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <flamboyant.h.01@gmail.com>)
- id 1wuVwW-000203-VE
- for qemu-riscv@nongnu.org; Thu, 13 Aug 2026 09:58:02 -0400
-Received: by mail-pl1-x633.google.com with SMTP id
- d9443c01a7336-2cca0c5799eso25412495ad.0
- for <qemu-riscv@nongnu.org>; Thu, 13 Aug 2026 06:58:00 -0700 (PDT)
+ id 1wuVwe-00020v-5o
+ for qemu-riscv@nongnu.org; Thu, 13 Aug 2026 09:58:09 -0400
+Received: by mail-pl1-x631.google.com with SMTP id
+ d9443c01a7336-2cf50c6f235so30775515ad.0
+ for <qemu-riscv@nongnu.org>; Thu, 13 Aug 2026 06:58:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1786629479; x=1787234279; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=ortSojCF4MD4GaSWJ2LixTOkSzJRkp5zenv//2r71a0=;
- b=MqkVZNEaEHlsx1E8jWJCc7yKCjy9Ybmoha2FHrzluJsomDBzv6vf1ldQnJ+1/G/oh0
- BKFDo4J5+I85kDvtKLDm2D75/AEYfUDPsooTNpxfFxJzl+qNzF3hOKxeTyiqqtebrgWO
- 1z3XOHVCl3/4jVaDq5X3kZQWH1ktLNo6R4ym72asCC+7Fvbot6L3Wx6/rPBmMiQz/y0g
- Qfr+qAsfuT2wCZPO26fFUMHqurfJ/hJeFXTXHHPo0vRhREayiFg9LJdJieUThPutI26F
- OlbFWU+jU2vVZ5TBUn9Sp+HrqcacAjCN3cNn0r8JztwUw1NdZKdlDLLbbJ50dEIVbbW2
- QW9Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786629479; x=1787234279;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20251104; t=1786629487; x=1787234287; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=ortSojCF4MD4GaSWJ2LixTOkSzJRkp5zenv//2r71a0=;
- b=HojHVFIg2sPdtI2XJ1DxlpdA/mfsRHn/FTCvgc2zux5G5osL48S1zZM8Qjja9D/2uq
- dIpavJ/cKrG2hEHOA8H7Iadb7DYyK/HoVid2VFnLZYrxCwnmThAgPJd/A/cnaLnjdrsV
- wiI/63iAqSAOOLCev/5i6b/cWk2q+3+H3Wjshcb15hy4zvqVs+iL37rLOmLqR6S6vZXD
- S5Jwgvfcz7fau4pvubA9V5rmzjVi/u0TiB6HIs40hA98O6F20lmYssZYCcZP6exVMruy
- LXYGdhE3+hA5VlFXb0nZQfjyzMBrTRy7QptKEqCiNv1CHse/Xw4d0Ii9Zm/HOSwxaKjw
- vf0w==
-X-Gm-Message-State: AOJu0YxHxI9bhdtRxFyurQzR7aBRajfk+yhBbj8wXaeEcrcFqh5uEJVx
- 0Qp6+z6eAkXyw+LM7Tfx1T/0sOGRGux9Sit6y3Sfhmbvc+ugF752d6J1
-X-Gm-Gg: AR+sD10CwKM1Pth8tq2gENwcA6y9wJnnzUwGlfu8OeRvhogiGkpzmJLzqEB9ZDGpnFQ
- G5qVBxbKdFhusaTzt9R0bl4WhjffV7Vr/t/DOVPvwsC/N93Ad7ftz+5c7d/d1FHA7RU6/NihgQ2
- jdApBt4HSSo089gIKYNEhQj/I06tV5IevlmefacB5LAEAzKp6tyii6Q07NM3GuL/AMAM0CjDUyy
- ZxNj5Xnarcvzp8xT4vqOARKeQEPQ3sfGfcmRl/78LNoW7OGXVkQXEZlfOBb8kACfMwhfiIX373z
- J0MiyZABLSBil2+tLbd0+ebWGxKE8QzaFA5hEOSLNPLhM4/RFx4WGVMRPRE7S5oq4nwCcXTJSK7
- 0i0pXwCCcjC+wVVXOrIy1uyUtKc+LEkaZSwRLq5dpZYG40V6mMfIRl3W2rEpQoUhTt69U9W0Fyd
- bPJy2TuwP/UIsun8uMPiV0w1xAkTUtOHFHkYP4eGF46WYGDGiAu3g4s5jW7d70nxTRsIzFNGTpt
- RKTMIqiFg==
-X-Received: by 2002:a17:903:2987:b0:2c9:e846:a57e with SMTP id
- d9443c01a7336-2d37d1c4a58mr73337325ad.0.1786629478749; 
- Thu, 13 Aug 2026 06:57:58 -0700 (PDT)
+ bh=k5Phay0AGTCvZKUkw7glNgeUzFefh4pDgge7EAdtJaM=;
+ b=UYpKeTsml3LGnE1Vx/FzWBlsgceINJ7tnZDsj5hQECYyQQLFNKPMqnnX1ufBmTuv/6
+ 1O+LoG8geft4nl7FOTciDqMdKOaBLFir++fPL4fGFw4iSH3cRRnNo8OrPtz/LyB3BASS
+ bpYke3dDJJX12j/Rvq4xBCku/KLUkxfFELFMdP31TMi1GMTj+5SQdRr+Mk9Lkoiyy8dD
+ gLIn4599cATpHD9uIrn3yhKx6TWPaKscx8L+oek6++0MGuwgtCxeovR0t7IWGevEnNGw
+ pJHSzPF5sDcjVoHVxNsYklMc7aGL0kuZ0oqy4nLvRthXZRwBs9R8TaWzS7gdi5WEOR1K
+ HZ6w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1786629487; x=1787234287;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=k5Phay0AGTCvZKUkw7glNgeUzFefh4pDgge7EAdtJaM=;
+ b=kKs6BumdJxWgnhZKeUAG/8HLw4tXIFbfxmByMZUSo5wntwUWN+R6YfcYutwpfbURdZ
+ Hb9VEDDM9LTHaf1i9YLleAn512URuc3vIvIg555JqWjvnnPEXDE7peA3f2KkiKrFj9lC
+ vdYserq8S0NBwBQUHr0/jlhk2mA4NrU3nvfP3auVSVgVZOJaxBAg7VgAzdItWC/WC1Q+
+ ADC0P9WOV6YoAit4yzUc/fGKipdNOgYpswGTkeMhyuPe1t8jKRdGJ4t9yj07Rgc+5ZVA
+ hQg8OpwFpZ9ZiM2H2NgQSCXQDjUrglpGlKie77XKUtD8cTUvV2tniXH3MXXhxyPGLU3C
+ w3Ow==
+X-Gm-Message-State: AOJu0YxpBoehStdi44sEY6Z4i+RfxW6PotnyWdIqA1rnFYb/AhlQXbdo
+ WAvG9imMFL046Wd5c/CaIfhnnn5wlmARIchPLabd8zR4wr3exyOwIrmh
+X-Gm-Gg: AR+sD11YEsZyZlaVAm5PbPUNI08rU4HjphybXn5bagzgJTdYRt84wMmIn5dci1mzGkr
+ CMj8xMlPvrvVlsJbkNEFYnc959p4sh9aJUzh5sD5yatepbqWaGcoofmgBFXOz4IxvkCftY/C3Qj
+ mXqIu5bNcvIkSpDenG6jzp9KRYwJWgotQ6A8CraF+Y79A7EZInH/egJ5oL0IDIqYWh9CKMECO56
+ MkBNyjOg0jI0IaovUOBH/0DlOMvnRnXJLcxc3h6SJJvxyItbsDf+gvYX17pgiYi4VGovqByNpOe
+ wbiWj0BbVQLa7iXWJmmrw9pkfyyuJDPspCvkBYQW8/aM/8dzdea5ibd81i0uQhMQjy7DouYN2Ua
+ o330fMlEbV0/Je5gXDM3u0hqPU+LyJ/MZ6gfJff3HZv8FjpW2rzHKg1qvaStMAFG+Do95fwXcuX
+ LZHSXujXaxtTiL617/7o6Z2VyPbtuT6fvEBrt81jvBIdxaoKOtGp/Gzjh8kUJ1LgGf0iXSjrNIg
+ eoTGfJ2Yw==
+X-Received: by 2002:a17:903:1b04:b0:2d0:cc92:f7a3 with SMTP id
+ d9443c01a7336-2d37d5417fdmr75868095ad.2.1786629486648; 
+ Thu, 13 Aug 2026 06:58:06 -0700 (PDT)
 Received: from localhost.localdomain ([111.198.227.173])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2d37c486531sm10024395ad.57.2026.08.13.06.57.54
+ d9443c01a7336-2d37c486531sm10024395ad.57.2026.08.13.06.58.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 13 Aug 2026 06:57:58 -0700 (PDT)
+ Thu, 13 Aug 2026 06:58:06 -0700 (PDT)
 From: Kangjie Huang <flamboyant.h.01@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, Chao Liu <chao.liu@processmission.com>,
@@ -76,14 +77,16 @@ Cc: qemu-riscv@nongnu.org, Chao Liu <chao.liu@processmission.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Fabiano Rosas <farosas@suse.de>,
  Laurent Vivier <lvivier@redhat.com>,
  Kangjie Huang <flamboyant.h.01@gmail.com>
-Subject: [PATCH v3 0/3] hw/riscv/k230: add IOMUX register block model
-Date: Thu, 13 Aug 2026 21:57:14 +0800
-Message-ID: <20260813135717.2758-1-flamboyant.h.01@gmail.com>
+Subject: [PATCH v3 2/3] hw/riscv/k230: wire up the IOMUX device
+Date: Thu, 13 Aug 2026 21:57:16 +0800
+Message-ID: <20260813135717.2758-3-flamboyant.h.01@gmail.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260813135717.2758-1-flamboyant.h.01@gmail.com>
+References: <20260813135717.2758-1-flamboyant.h.01@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::633;
- envelope-from=flamboyant.h.01@gmail.com; helo=mail-pl1-x633.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::631;
+ envelope-from=flamboyant.h.01@gmail.com; helo=mail-pl1-x631.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -107,75 +110,108 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Add a SysBus model for the 64 K230 Function IO configuration registers
-documented by the K230 Technical Reference Manual. The model retains the
-writable configuration fields needed by the SDK U-Boot and Linux
-read-modify-write paths.
+Instantiate the K230 IOMUX device and map its MMIO region at
+0x91105000, replacing the unimplemented device covering the same SoC
+address window.
 
-The series adds the device model, wires it into the K230 SoC at
-0x91105000, and adds qtest coverage.
+Select the model from the K230 machine configuration and document the
+newly modeled device.
 
-Changes in v3:
-- Migrated the model from the deprecated device_class_set_legacy_reset()
-  to the Resettable interface.
-- Added a comment to the model stating that bit 31 (DI) is read-only and
-  reads as zero, since the model does not simulate external pin input
-  (TRM V0.3.1, section 12.9.2.2).
-- Added MAINTAINERS entries for the model and the qtest.
-- Defined an independent K230_IOMUX_EXPECTED_WRITABLE_MASK (0x00003fff)
-  in the test instead of reusing the implementation mask, with a comment
-  explaining the bit layout.
+Suggested-by: Chao Liu <chao.liu@processmission.com>
+Reviewed-by: Chao Liu <chao.liu@processmission.com>
+Signed-off-by: Kangjie Huang <flamboyant.h.01@gmail.com>
+---
+ docs/system/riscv/k230.rst |  1 +
+ hw/riscv/Kconfig           |  1 +
+ hw/riscv/k230.c            | 11 ++++++++---
+ include/hw/riscv/k230.h    |  2 ++
+ 4 files changed, 12 insertions(+), 3 deletions(-)
 
-Changes in v2:
-- Split the device model, SoC wiring, and qtest coverage into separate
-  patches.
-- Removed redundant MMIO bounds, access-size, and alignment checks.
-- Limited register storage to the 64 documented Function IO registers.
-- Applied the documented 0x00003fff writable mask.
-- Treated offsets 0x100 through 0x7ff as reserved.
-- Added tests for write masking, read-modify-write accesses, IO63,
-  reserved offsets, and system reset.
-
-Tested with:
-- qtest-riscv64/k230-iomux-test
-- U-Boot and Linux boot tests with no unimplemented-device warnings
-  for the IOMUX region
-
-Thanks to Alistair Francis and Chao Liu for the v1 review comments that
-shaped the v2 series structure and the register semantics.
-
-Reviewed-by: Junze Cao <caojunze424@gmail.com>
-
-v2:
-https://lore.kernel.org/qemu-devel/cover.1784022244.git.flamboyant.h.01@gmail.com/
-
-v1:
-https://lore.kernel.org/qemu-devel/20260710041845.67170-1-flamboyant.h.01@gmail.com/
-
-Kangjie Huang (3):
-  hw/misc/k230_iomux: add Kendryte K230 IOMUX model
-  hw/riscv/k230: wire up the IOMUX device
-  tests/qtest: add test for K230 IOMUX
-
- MAINTAINERS                   |   3 +
- docs/system/riscv/k230.rst    |   1 +
- hw/misc/Kconfig               |   3 +
- hw/misc/k230_iomux.c          | 125 ++++++++++++++++++++++++++
- hw/misc/meson.build           |   1 +
- hw/misc/trace-events          |   4 +
- hw/riscv/Kconfig              |   1 +
- hw/riscv/k230.c               |  11 ++-
- include/hw/misc/k230_iomux.h  |  43 +++++++++
- include/hw/riscv/k230.h       |   2 +
- tests/qtest/k230-iomux-test.c | 160 ++++++++++++++++++++++++++++++++++
- tests/qtest/meson.build       |   5 +-
- 12 files changed, 355 insertions(+), 4 deletions(-)
- create mode 100644 hw/misc/k230_iomux.c
- create mode 100644 include/hw/misc/k230_iomux.h
- create mode 100644 tests/qtest/k230-iomux-test.c
-
-
-base-commit: d49f87606ac1a6e15701b26c1b16c5d7e948ffcb
+diff --git a/docs/system/riscv/k230.rst b/docs/system/riscv/k230.rst
+index cea8202e55..b160c401fd 100644
+--- a/docs/system/riscv/k230.rst
++++ b/docs/system/riscv/k230.rst
+@@ -20,6 +20,7 @@ The ``k230`` machine supports the following devices:
+ * Platform-Level Interrupt Controller (PLIC)
+ * 2 K230 Watchdog Timer
+ * 5 UART
++* K230 IOMUX register block
+ 
+ Boot options
+ ------------
+diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
+index de37c08cae..4c9fc3e7ad 100644
+--- a/hw/riscv/Kconfig
++++ b/hw/riscv/Kconfig
+@@ -162,3 +162,4 @@ config K230
+     select SERIAL_MM
+     select UNIMP
+     select K230_WDT
++    select K230_IOMUX
+diff --git a/hw/riscv/k230.c b/hw/riscv/k230.c
+index 656f28190c..430c1646b5 100644
+--- a/hw/riscv/k230.c
++++ b/hw/riscv/k230.c
+@@ -110,6 +110,7 @@ static void k230_soc_init(Object *obj)
+     object_initialize_child(obj, "c908-cpu", cpu0, TYPE_RISCV_HART_ARRAY);
+     object_initialize_child(obj, "k230-wdt0", &s->wdt[0], TYPE_K230_WDT);
+     object_initialize_child(obj, "k230-wdt1", &s->wdt[1], TYPE_K230_WDT);
++    object_initialize_child(obj, "k230-iomux", &s->iomux, TYPE_K230_IOMUX);
+ 
+     qdev_prop_set_uint32(DEVICE(cpu0), "hartid-base", 0);
+     qdev_prop_set_string(DEVICE(cpu0), "cpu-type", TYPE_RISCV_CPU_THEAD_C908);
+@@ -198,6 +199,11 @@ static void k230_soc_realize(DeviceState *dev, Error **errp)
+         }
+     }
+ 
++    /* IOMUX */
++    if (!sysbus_realize(SYS_BUS_DEVICE(&s->iomux), errp)) {
++        return;
++    }
++
+     sysbus_mmio_map(SYS_BUS_DEVICE(&s->wdt[0]), 0, memmap[K230_DEV_WDT0].base);
+     sysbus_connect_irq(SYS_BUS_DEVICE(&s->wdt[0]), 0,
+                        qdev_get_gpio_in(DEVICE(s->c908_plic), K230_WDT0_IRQ));
+@@ -206,6 +212,8 @@ static void k230_soc_realize(DeviceState *dev, Error **errp)
+     sysbus_connect_irq(SYS_BUS_DEVICE(&s->wdt[1]), 0,
+                        qdev_get_gpio_in(DEVICE(s->c908_plic), K230_WDT1_IRQ));
+ 
++    sysbus_mmio_map(SYS_BUS_DEVICE(&s->iomux), 0, memmap[K230_DEV_IOMUX].base);
++
+     /* unimplemented devices */
+     create_unimplemented_device("kpu.l2-cache",
+                                 memmap[K230_DEV_KPU_L2_CACHE].base,
+@@ -280,9 +288,6 @@ static void k230_soc_realize(DeviceState *dev, Error **errp)
+     create_unimplemented_device("ipcm", memmap[K230_DEV_MAILBOX].base,
+                                 memmap[K230_DEV_MAILBOX].size);
+ 
+-    create_unimplemented_device("iomux", memmap[K230_DEV_IOMUX].base,
+-                                memmap[K230_DEV_IOMUX].size);
+-
+     create_unimplemented_device("timer", memmap[K230_DEV_TIMER].base,
+                                 memmap[K230_DEV_TIMER].size);
+ 
+diff --git a/include/hw/riscv/k230.h b/include/hw/riscv/k230.h
+index 592e1c26bf..223e76b420 100644
+--- a/include/hw/riscv/k230.h
++++ b/include/hw/riscv/k230.h
+@@ -18,6 +18,7 @@
+ #include "hw/core/boards.h"
+ #include "hw/riscv/riscv_hart.h"
+ #include "hw/watchdog/k230_wdt.h"
++#include "hw/misc/k230_iomux.h"
+ 
+ #define C908_CPU_HARTID   (0)
+ 
+@@ -33,6 +34,7 @@ typedef struct K230SoCState {
+     RISCVHartArrayState c908_cpu; /* Small core */
+ 
+     K230WdtState wdt[2];
++    K230IomuxState iomux;
+     MemoryRegion sram;
+     MemoryRegion bootrom;
+ 
 -- 
 2.43.0
+
 
