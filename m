@@ -4,91 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2A0CC5B572
-	for <qemu-riscv@archiver.kernel.org>; Thu, 13 Aug 2026 03:27:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9D63C5B572
+	for <qemu-riscv@archiver.kernel.org>; Thu, 13 Aug 2026 04:14:51 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wuM6B-0001zB-FM; Wed, 12 Aug 2026 23:27:19 -0400
+	id 1wuMpX-0000Q2-JN; Thu, 13 Aug 2026 00:14:11 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1wuM68-0001yp-Ou
- for qemu-riscv@nongnu.org; Wed, 12 Aug 2026 23:27:16 -0400
-Received: from mail-pg1-x529.google.com ([2607:f8b0:4864:20::529])
+ (Exim 4.90_1) (envelope-from <fritchleybohrer@gmail.com>)
+ id 1wuMpT-0000Pa-FT
+ for qemu-riscv@nongnu.org; Thu, 13 Aug 2026 00:14:08 -0400
+Received: from mail-pz2-x00.google.com ([2607:f8b0:4864:3b::])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1wuM66-0000Aj-9g
- for qemu-riscv@nongnu.org; Wed, 12 Aug 2026 23:27:16 -0400
-Received: by mail-pg1-x529.google.com with SMTP id
- 41be03b00d2f7-cbedda4c154so1068679a12.1
- for <qemu-riscv@nongnu.org>; Wed, 12 Aug 2026 20:27:13 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <fritchleybohrer@gmail.com>)
+ id 1wuMpQ-0000Rf-Ur
+ for qemu-riscv@nongnu.org; Thu, 13 Aug 2026 00:14:06 -0400
+Received: by mail-pz2-x00.google.com with SMTP id
+ 41be03b00d2f7-ca92f36c4acso523261a12.1
+ for <qemu-riscv@nongnu.org>; Wed, 12 Aug 2026 21:14:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1786591632; x=1787196432; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1786594441; x=1787199241; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:sender:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=xtMucBLIsypxqX0LKfF2YVgc26j6UtWYxPBlPYxAVu8=;
- b=fFprFauryXNhDUiUm1ywoS0hkJdCIOX2yoS9HbhS3Rap9KirzcvIn3SxBMlFk9XVsU
- QYmwpZkND4dNlUHDrqKv9t/qf3sJj+BDsFht5BBk8lF42xNBRZR9zY3ChmLdV84kTwGO
- SrT7sWpt4W3QWpJfxxrAbx8pkY1FtuecAWVIQjr0ZbhLnq8BC7tjZjUM550z3la9fjvl
- +U6uJkqozjH+iflIwrI6Dan7wGsvL7RWiCyTJY/e0SqI62ZMCjSbxr5HyOY+SA4LHJIu
- d5CdgJ86CKbgU/b14FY4n9apa6GsH7ayeJtlCqXav7YcSW6qrw2XPzGCKZmV05KYVhws
- rKmA==
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=3XrzIrA1JuucWpBjA8Dkb9lEhb/qMMWIJ3x1kaDWT+c=;
+ b=j25KtU4AAY/a1HhNtG+CVXbFZtxZzIQEhilhbfoKA/N5BdDRmolIcwy/JTedHb6rN0
+ fMvKQFf7zaepkbPpRYrqmqQjNutdI9o5fxzVeqPQzejs1XoDzIJaDrrVQ4P+VWTo3UUD
+ isJZjpfQ2qa/Z3qaN9aplm/yDzJFD6t7MrXAV3l9fTSyAKNap2bPKXOahaedqSwdME86
+ w6gXN6pjJICCAXZotyuj9otANAhHLZ7ifJdjzIMsxTDcUrVfOBBOxYtbvX1gh1nxwjky
+ t4Lhrn0VKp/aAXsi1YadyZCSDQEbCRj0/RFDNv3rr0hL3hH/OKqW8C7DCbBKJQ4Fim7q
+ 9hXg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786591632; x=1787196432;
+ d=1e100.net; s=20251104; t=1786594441; x=1787199241;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:sender:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=xtMucBLIsypxqX0LKfF2YVgc26j6UtWYxPBlPYxAVu8=;
- b=i45LMj014SZeZXBKDOsA3NlJ0Gemu2UX4xIYDhnb9ZgnmVQo+8SYV6W/+5v4AtOE3C
- DvX5uQR1OM65NJmOMNpgGq2tALJLWNyBOnshBgqfQou+E1m2mqjoYk0gzVCTiUPGYaMT
- 2hcmKVLadriBqaz9w0ysZ+H8/JwyjLz68yy4gPRL0C7GXhryVpOl21yhdPldyIP8u3BX
- 343TfghzWcqmDTeO+MEoEC9/IfF1F869wNZb6VZ/rSRj7Sbjhh1EVCZR/1Si1o95ZAJf
- qB3UBEDvPkxjGKZpoA6XqxDkqplX751N3xwEFAhPU3HwLai0GOjf6GY4ulMDFGfRzNzI
- jABA==
-X-Forwarded-Encrypted: i=1;
- AHgh+RqCYg43SVEFMN8QWFYBJoOHXPl1VMeaW54yZFJK2fKPUiH4Yi0oDdqEDR2BjnEzTD1b166BLqkw+H6Z@nongnu.org
-X-Gm-Message-State: AOJu0YyBI1S8wU/1IPuFgOOc6celudo3uI5bN6lhuUgTN57SAYQgoxik
- HOMn3QyU8sDYDEvevIMXLC4qfQknoGpLQvDxt3cnFnGkjFyzs6Gprq3D
-X-Gm-Gg: AR+sD123VeFG2tA+sX5E7yK1P5h4CITRuqyZ42rMf76hj19zV7+MdotqlNSgmkPIO0d
- lctxwzRESpv79PHz52GJct6uuKpZcT8bsnCATXKx4m80PZRExXbHWi+omOZrp+Zc4GN0NnIzAge
- tfnhrNCBxkd2tnmNPOdrHPUykGDN+IV+vtPFCMqA17M69OvtcMzSzMLVL7qj+3juTM/BwB+Kq1W
- axixiY05LnrCi/4Dk3biUwlInEEq7Vq2W2sEnD3+kfX88VBOOt890temGerv5x48sox25Bo03gX
- c68ZoZTdjNuuYehbTjx59EswS0NLVZVsvl/S57bLHSHyU/6h8Y2frexSVFKMv9sVCF7ZCbabWP1
- NgGjrueIr3XHQD0/lVIfVjzQtksz+7x04dNOMsFS7+ZfqhaRtocGUnR4wYUfJiUguiejSvV0fcY
- xsLqP+HrHl3x/1s8YxW6lPcQXwxeuVfBU7R0Z3NJOTnTECKDH5f8rDlml5Qe0/mPWgiSGSJdC2T
- NyAcFh4cuDu23Xuu7NgHOe15WcyH+E/9L5RQ8sN5wgqSJhPq/IaDoOWqZfoGtjTMVDE4YdDbl9/
- OtUwyUmMZ7ZVZtyor5/JYzuf03W480wkJtsLfgVubUOhta0L4BbRUbeJxwJgZ32XGA==
-X-Received: by 2002:a05:6a21:3204:b0:3b7:807b:3cd3 with SMTP id
- adf61e73a8af0-3cc55397c0bmr4079142637.23.1786591632218; 
- Wed, 12 Aug 2026 20:27:12 -0700 (PDT)
-Received: from donnager-debian.. (pa49-178-218-204.pa.nsw.optusnet.com.au.
- [49.178.218.204]) by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-31eb99e2556sm2708493eec.0.2026.08.12.20.27.07
+ bh=3XrzIrA1JuucWpBjA8Dkb9lEhb/qMMWIJ3x1kaDWT+c=;
+ b=LTAG7yOw6HE6OHOaMg87R6UCa6LABfxga3MTaECA2X3J08zzaeZkC+NiyVHtdcEQFN
+ gktTNyJ8/7YhIri/rwSpsiRbdD0gFrBjGX21rz6FJC0RlHJgeweDwF4M/LsaE4ApVjyk
+ pEls5mzwbscD7s4Le6YxUBgTfkSTzJoHNJIuLu5Dkd+SomweUL0xMOoddKLiJC0gup5J
+ 6zeyAUbkje/TvIsCqPaynXkMMjDgnt3CqLBEhL7Z3zhSDGFzK3NkGJsmPs0Ktr/QNTNs
+ 2qrCnWOqvFU7BYBEGlqp6vEb7fNoPMqsgzgOsN6CMx8CtoBnaIc6PdKafE6Lmmt77eLg
+ md2Q==
+X-Gm-Message-State: AOJu0YyPirZtW/jAWepsnmfjWZpAwOnmPrHhAFYEu8ABmijQb4hz63Mw
+ Ss+Ij47G1klr8SNM778FeP++dntCkzuTH3anq65O3FvRctN/n5+OVJRQ
+X-Gm-Gg: AR+sD10/+0b/+ItF2FRl1Hk9GHur+83KGxMQwxc7YK2QFroyabjUlGMlbCVpS6yIC/C
+ qIHZ81IvOoD7OghXXUQ+5dB4g2nMFBigletybT24AsVXWIXt23v7RjznttalZnAlnv9/fe3x87Z
+ +BCw+on5weyvNf1VoYcySv7nSVfKXbd9RYdUMEYAR/dxeTJ4YxPoQ6JxRNmZczi3Vwy/tcu+TFp
+ dxgPRY1+cjG5qgRV2JF5NTg0rCDTIx/aFTZHYUHEjKzk5dyDbOORhHynOY8yGMPDx2GdA3LAktm
+ k3UrEoavKXm38v9aqCK/R1QgWVzu4ElwMFwBWf/kduFd0sBpv9Do4F7q+h0lA7kMgcOVwRT8NEs
+ AH3vlcJqNDbB3rPl97xkC6peU7Z3U1yNa2nseFGTacJlhe339M3ugqRlikBA9L9KS11662ZCm97
+ 3+Q5RC8bmUnW8zqxEG+tVjiZ9uxYe7wpLh+5Lbt7nGFZSGnMM/hyuCp10YtIF72p2GcQnq6ykut
+ OcATv6GSHDTt7KW
+X-Received: by 2002:a05:6a00:331b:b0:84c:1cd2:142e with SMTP id
+ d2e1a72fcca58-84fc6e04488mr3122453b3a.23.1786594440970; 
+ Wed, 12 Aug 2026 21:14:00 -0700 (PDT)
+Received: from Dell-WorkStation.localdomain ([149.118.62.92])
+ by smtp.gmail.com with ESMTPSA id
+ 41be03b00d2f7-cbef5cc4c9dsm423483a12.0.2026.08.12.21.13.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 12 Aug 2026 20:27:11 -0700 (PDT)
-From: Joel Stanley <joel@jms.id.au>
-To: Alistair Francis <alistair.francis@wdc.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Cc: Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu@processmission.com>, Anton Johansson <anjo@rev.ng>,
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Subject: [PATCH] target/riscv: Restore register dump zero padding
-Date: Thu, 13 Aug 2026 12:54:14 +0930
-Message-ID: <20260813032421.54438-1-joel@jms.id.au>
-X-Mailer: git-send-email 2.47.3
+ Wed, 12 Aug 2026 21:14:00 -0700 (PDT)
+From: Zephyr Li <fritchleybohrer@gmail.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
+ liwei1518@gmail.com, daniel.barboza@oss.qualcomm.com,
+ zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
+ Zephyr Li <fritchleybohrer@gmail.com>
+Subject: [PATCH] target/riscv: reject FMV.X.W and FMV.W.X with Zfinx
+Date: Thu, 13 Aug 2026 12:13:03 +0800
+Message-ID: <20260813041304.7618-1-fritchleybohrer@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::529;
- envelope-from=joel.stan@gmail.com; helo=mail-pg1-x529.google.com
-X-Spam_score_int: -16
-X-Spam_score: -1.7
-X-Spam_bar: -
-X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.001,
- FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.249,
+Received-SPF: pass client-ip=2607:f8b0:4864:3b::;
+ envelope-from=fritchleybohrer@gmail.com; helo=mail-pz2-x00.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -104,116 +100,144 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The register values lost their leading zeroes when the underlying type
-was changed, resulting in mismatched padding and harder to read output.
+Zfinx excludes FMV.X.W and FMV.W.X, but QEMU currently accepts both
+instructions when Zfinx is enabled without the F extension.
 
-Print with a runtime field width based on MXL, so values are 16 hex
-digits on rv64 and 8 on rv32, matching the csr and fp dump. This avoids
-adding target_ulong back into the dump.
+Require the F extension for these instructions so they raise an illegal
+instruction exception on Zfinx-only CPUs.
 
-Fixes: c4e6bc63853c ("target/riscv: Fix size of gpr and gprh")
-Signed-off-by: Joel Stanley <joel@jms.id.au>
+Add TCG regression tests for both instructions.
+
+Resolves: https://gitlab.com/qemu-project/qemu/-/issues/4108
+Signed-off-by: Zephyr Li <fritchleybohrer@gmail.com>
 ---
-before:
+ target/riscv/tcg/insn_trans/trans_rvf.c.inc |  4 +--
+ tests/tcg/riscv64/Makefile.target           | 10 +++++++
+ tests/tcg/riscv64/test-zfinx-fmv-w-x.S      | 33 +++++++++++++++++++++
+ tests/tcg/riscv64/test-zfinx-fmv-x-w.S      | 33 +++++++++++++++++++++
+ 4 files changed, 78 insertions(+), 2 deletions(-)
+ create mode 100644 tests/tcg/riscv64/test-zfinx-fmv-w-x.S
+ create mode 100644 tests/tcg/riscv64/test-zfinx-fmv-x-w.S
 
- mvendorid     0000000000000000
- marchid       000000000000002a
- mimpid        0000000000000000
- mhartid       0000000000000000
- mconfigptr    0000000000000000
- x0/zero  0 x1/ra    ffffffff803f10f6 x2/sp    ff2000000000bc70 x3/gp    ffffffff805c94c0
- x4/tp    ff60000000c78000 x5/t0    ffffffff803f132c x6/t1    0 x7/t2    20646e65205b2d2d
- x8/s0    ff2000000000bc80 x9/s1    708 x10/a0   270f x11/a1   8
- x12/a2   0 x13/a3   120 x14/a4   14992a1 x15/a5   ffffffffffffffff
- x16/a6   fffff079 x17/a7   79 x18/s2   0 x19/s3   7d0
- x20/s4   ffffffff805ca228 x21/s5   31 x22/s6   ff60000000e15000 x23/s7   ffffffff804228c8
- x24/s8   0 x25/s9   ffffffff804e3e90 x26/s10  0 x27/s11  0
- x28/t3   ff60000000c60f00 x29/t4   ff60000000c60f00 x30/t5   ff60000000c60000 x31/t6   ff2000000000bc28
- fflags        0000000000000000
- frm           0000000000000000
- fcsr          0000000000000000
- f0/ft0   ffffffff00000000 f1/ft1   ffffffff00000000 f2/ft2   ffffffff00000000 f3/ft3   ffffffff00000000
- f4/ft4   ffffffff00000000 f5/ft5   ffffffff00000000 f6/ft6   ffffffff00000000 f7/ft7   ffffffff00000000
- f8/fs0   ffffffff00000000 f9/fs1   ffffffff00000000 f10/fa0  ffffffff00000000 f11/fa1  ffffffff00000000
- f12/fa2  ffffffff00000000 f13/fa3  ffffffff00000000 f14/fa4  ffffffff00000000 f15/fa5  ffffffff00000000
- f16/fa6  ffffffff00000000 f17/fa7  ffffffff00000000 f18/fs2  ffffffff00000000 f19/fs3  ffffffff00000000
- f20/fs4  ffffffff00000000 f21/fs5  ffffffff00000000 f22/fs6  ffffffff00000000 f23/fs7  ffffffff00000000
- f24/fs8  ffffffff00000000 f25/fs9  ffffffff00000000 f26/fs10 ffffffff00000000 f27/fs11 ffffffff00000000
- f28/ft8  ffffffff00000000 f29/ft9  ffffffff00000000 f30/ft10 ffffffff00000000 f31/ft11 ffffffff00000000
-
-after:
-
- mvendorid     0000000000000000
- marchid       000000000000002a
- mimpid        0000000000000000
- mhartid       0000000000000000
- mconfigptr    0000000000000000
- x0/zero  0000000000000000 x1/ra    ffffffff803f10f6 x2/sp    ff2000000000bc70 x3/gp    ffffffff805c94c0
- x4/tp    ff60000000c78000 x5/t0    ffffffff803f132c x6/t1    0000000000000000 x7/t2    20646e65205b2d2d
- x8/s0    ff2000000000bc80 x9/s1    0000000000000e10 x10/a0   000000000000270f x11/a1   0000000000000008
- x12/a2   0000000000000000 x13/a3   0000000000000120 x14/a4   0000000002575fd6 x15/a5   ffffffffffffffff
- x16/a6   00000000fffff079 x17/a7   0000000000000079 x18/s2   0000000000000001 x19/s3   0000000000000ed8
- x20/s4   ffffffff805ca228 x21/s5   0000000000000060 x22/s6   ff60000000e15000 x23/s7   ffffffff804228c8
- x24/s8   0000000000000000 x25/s9   ffffffff804e3e90 x26/s10  0000000000000000 x27/s11  0000000000000000
- x28/t3   ff60000000c60f00 x29/t4   ff60000000c60f00 x30/t5   ff60000000c60000 x31/t6   ff2000000000bc28
- fflags        0000000000000000
- frm           0000000000000000
- fcsr          0000000000000000
- f0/ft0   ffffffff00000000 f1/ft1   ffffffff00000000 f2/ft2   ffffffff00000000 f3/ft3   ffffffff00000000
- f4/ft4   ffffffff00000000 f5/ft5   ffffffff00000000 f6/ft6   ffffffff00000000 f7/ft7   ffffffff00000000
- f8/fs0   ffffffff00000000 f9/fs1   ffffffff00000000 f10/fa0  ffffffff00000000 f11/fa1  ffffffff00000000
- f12/fa2  ffffffff00000000 f13/fa3  ffffffff00000000 f14/fa4  ffffffff00000000 f15/fa5  ffffffff00000000
- f16/fa6  ffffffff00000000 f17/fa7  ffffffff00000000 f18/fs2  ffffffff00000000 f19/fs3  ffffffff00000000
- f20/fs4  ffffffff00000000 f21/fs5  ffffffff00000000 f22/fs6  ffffffff00000000 f23/fs7  ffffffff00000000
- f24/fs8  ffffffff00000000 f25/fs9  ffffffff00000000 f26/fs10 ffffffff00000000 f27/fs11 ffffffff00000000
- f28/ft8  ffffffff00000000 f29/ft9  ffffffff00000000 f30/ft10 ffffffff00000000 f31/ft11 ffffffff00000000
-
-I also wrote a patch to align the first column of register values, but
-that creates the dilemma between aligning the numbers vs keeping the
-spacing between the registers and their value within a row. Aside from
-avoiding bikeshedding, it wastes more columns for an already wide
-output, so opted not to 'fix' that.
-
-Signed-off-by: Joel Stanley <joel@jms.id.au>
----
- target/riscv/cpu.c | 9 ++++++---
- 1 file changed, 6 insertions(+), 3 deletions(-)
-
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 19b93f9c9794..c50dd5ee8771 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -650,6 +650,9 @@ static void riscv_cpu_dump_state(CPUState *cs, FILE *f, int flags)
+diff --git a/target/riscv/tcg/insn_trans/trans_rvf.c.inc b/target/riscv/tcg/insn_trans/trans_rvf.c.inc
+index e935523c93..70c66e9e25 100644
+--- a/target/riscv/tcg/insn_trans/trans_rvf.c.inc
++++ b/target/riscv/tcg/insn_trans/trans_rvf.c.inc
+@@ -428,7 +428,7 @@ static bool trans_fmv_x_w(DisasContext *ctx, arg_fmv_x_w *a)
  {
-     RISCVCPU *cpu = RISCV_CPU(cs);
-     CPURISCVState *env = &cpu->env;
-+    bool rv32 = riscv_cpu_is_32bit(cpu);
-+    int width = rv32 ? 8 : 16;
-+    uint64_t mask = rv32 ? UINT32_MAX : UINT64_MAX;
-     int i, j;
-     uint8_t *p;
+     /* NOTE: This was FMV.X.S in an earlier version of the ISA spec! */
+     REQUIRE_FPU;
+-    REQUIRE_ZFINX_OR_F(ctx);
++    REQUIRE_EXT(ctx, RVF);
  
-@@ -664,7 +667,7 @@ static void riscv_cpu_dump_state(CPUState *cs, FILE *f, int flags)
-         qemu_fprintf(f, " %-13s %d\n", "elp", env->elp);
-     }
- #endif
--    qemu_fprintf(f, " %-13s %" PRIx64 "\n", "pc", env->pc);
-+    qemu_fprintf(f, " %-13s %0*" PRIx64 "\n", "pc", width, env->pc & mask);
- #if defined(CONFIG_TCG) && !defined(CONFIG_USER_ONLY)
-     for (i = 0; i < ARRAY_SIZE(csr_ops); i++) {
-         int csrno = i;
-@@ -691,8 +694,8 @@ static void riscv_cpu_dump_state(CPUState *cs, FILE *f, int flags)
- #endif
+     TCGv dest = dest_gpr(ctx, a->rd);
+     TCGv_i64 src1 = get_fpr_hs(ctx, a->rs1);
+@@ -531,7 +531,7 @@ static bool trans_fmv_w_x(DisasContext *ctx, arg_fmv_w_x *a)
+ {
+     /* NOTE: This was FMV.S.X in an earlier version of the ISA spec! */
+     REQUIRE_FPU;
+-    REQUIRE_ZFINX_OR_F(ctx);
++    REQUIRE_EXT(ctx, RVF);
  
-     for (i = 0; i < 32; i++) {
--        qemu_fprintf(f, " %-8s %" PRIx64,
--                     riscv_int_regnames[i], env->gpr[i]);
-+        qemu_fprintf(f, " %-8s %0*" PRIx64,
-+                     riscv_int_regnames[i], width, env->gpr[i] & mask);
-         if ((i & 3) == 3) {
-             qemu_fprintf(f, "\n");
-         }
+     TCGv_i64 dest = dest_fpr(ctx, a->rd);
+     TCGv src = get_gpr(ctx, a->rs1, EXT_ZERO);
+diff --git a/tests/tcg/riscv64/Makefile.target b/tests/tcg/riscv64/Makefile.target
+index 4da5b9a3b3..23e1152a10 100644
+--- a/tests/tcg/riscv64/Makefile.target
++++ b/tests/tcg/riscv64/Makefile.target
+@@ -18,3 +18,13 @@ TESTS += test-fcvtmod
+ test-fcvtmod: CFLAGS += -march=rv64imafdc
+ test-fcvtmod: LDFLAGS += -static
+ run-test-fcvtmod: QEMU_OPTS += -cpu rv64,d=true,zfa=true
++
++TESTS += test-zfinx-fmv-x-w
++test-zfinx-fmv-x-w: LDFLAGS = -nostdlib -static
++run-test-zfinx-fmv-x-w: QEMU_OPTS += \
++	-cpu rv64,f=false,d=false,zfa=false,zfh=false,zfhmin=false,zfinx=true
++
++TESTS += test-zfinx-fmv-w-x
++test-zfinx-fmv-w-x: LDFLAGS = -nostdlib -static
++run-test-zfinx-fmv-w-x: QEMU_OPTS += \
++	-cpu rv64,f=false,d=false,zfa=false,zfh=false,zfhmin=false,zfinx=true
+diff --git a/tests/tcg/riscv64/test-zfinx-fmv-w-x.S b/tests/tcg/riscv64/test-zfinx-fmv-w-x.S
+new file mode 100644
+index 0000000000..73c5c2b2bf
+--- /dev/null
++++ b/tests/tcg/riscv64/test-zfinx-fmv-w-x.S
+@@ -0,0 +1,33 @@
++/* SPDX-License-Identifier: GPL-2.0-or-later */
++#include <asm/unistd.h>
++
++        .text
++        .globl  _start
++_start:
++        .option norvc
++
++        li      a0, 4
++        la      a1, sa
++        li      a2, 0
++        li      a3, 8
++        li      a7, __NR_rt_sigaction
++        scall
++
++        .word   0xf0030453
++
++        li      a0, 1
++        j       exit
++
++pass:
++        li      a0, 0
++
++exit:
++        li      a7, __NR_exit
++        scall
++
++        .data
++        .type   sa, @object
++        .size   sa, 32
++sa:
++        .dword  pass
++        .zero   24
+diff --git a/tests/tcg/riscv64/test-zfinx-fmv-x-w.S b/tests/tcg/riscv64/test-zfinx-fmv-x-w.S
+new file mode 100644
+index 0000000000..c4e853036f
+--- /dev/null
++++ b/tests/tcg/riscv64/test-zfinx-fmv-x-w.S
+@@ -0,0 +1,33 @@
++/* SPDX-License-Identifier: GPL-2.0-or-later */
++#include <asm/unistd.h>
++
++        .text
++        .globl  _start
++_start:
++        .option norvc
++
++        li      a0, 4
++        la      a1, sa
++        li      a2, 0
++        li      a3, 8
++        li      a7, __NR_rt_sigaction
++        scall
++
++        .word   0xe0030453
++
++        li      a0, 1
++        j       exit
++
++pass:
++        li      a0, 0
++
++exit:
++        li      a7, __NR_exit
++        scall
++
++        .data
++        .type   sa, @object
++        .size   sa, 32
++sa:
++        .dword  pass
++        .zero   24
 -- 
-2.47.3
+2.43.0
 
 
