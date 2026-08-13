@@ -4,66 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B463C5B572
-	for <qemu-riscv@archiver.kernel.org>; Thu, 13 Aug 2026 13:38:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E334C5CFEB
+	for <qemu-riscv@archiver.kernel.org>; Thu, 13 Aug 2026 13:38:20 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wuVcZ-0005om-0U; Thu, 13 Aug 2026 09:37:23 -0400
+	id 1wuVcU-0005m1-0N; Thu, 13 Aug 2026 09:37:18 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <rao232328@gmail.com>)
- id 1wuVcX-0005oR-Qg
- for qemu-riscv@nongnu.org; Thu, 13 Aug 2026 09:37:21 -0400
-Received: from mail-pf1-x433.google.com ([2607:f8b0:4864:20::433])
+ id 1wuVcS-0005lh-Pf
+ for qemu-riscv@nongnu.org; Thu, 13 Aug 2026 09:37:16 -0400
+Received: from mail-pf1-x432.google.com ([2607:f8b0:4864:20::432])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <rao232328@gmail.com>)
- id 1wuVcV-0005Uk-9B
- for qemu-riscv@nongnu.org; Thu, 13 Aug 2026 09:37:21 -0400
-Received: by mail-pf1-x433.google.com with SMTP id
- d2e1a72fcca58-8487b7b3fc8so2365881b3a.3
- for <qemu-riscv@nongnu.org>; Thu, 13 Aug 2026 06:37:18 -0700 (PDT)
+ id 1wuVcR-0005UC-5Q
+ for qemu-riscv@nongnu.org; Thu, 13 Aug 2026 09:37:16 -0400
+Received: by mail-pf1-x432.google.com with SMTP id
+ d2e1a72fcca58-84830c774a0so2535735b3a.1
+ for <qemu-riscv@nongnu.org>; Thu, 13 Aug 2026 06:37:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1786628238; x=1787233038; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=UOxWjh1VbJP+voQHQuYFBnTFHTsWZfsA6DkNnXcCLlk=;
- b=sP+GEpCsnC/YqQqRNEE4YvtSJldIvDn7aLkqLN+0Apwvs932DnR5WMG1biZQ0EDYbU
- FLL7nAKFQ/IgvHhkWbWJPm99SWXVDWDL7r/CcBpCCLOF3xmAyxjf/IRf5kopIaqhtJxz
- UghTD3nwYc353hhCtfp4qlDCVzvH5c1Sy/YXzdLhde6vf3ml0yERJkexqCymm0xjz/Op
- SqFTqgd2Bv76Gf/DXwYOf/45TnPTay740n+UcgfVM6RDLy9kAUCdDQtCjxEziiGUliLs
- Loi7ytPUJF9G+Si6zWorIxyust1Pa8qsmqaN+kVTqx+kMBXWHOpYY77Bnzdd/lpofWjV
- p/2Q==
+ d=gmail.com; s=20251104; t=1786628233; x=1787233033; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=LU3c7K+OtZGXFKKaiBRdDohYIWB+X8AIhAfaEwL+dZI=;
+ b=njpn2kOz44zHWjH13TY8NLtWb/kA6tuQenPHf9UFGjWmHOWQSLHrfPHnm2BxxkKiQ6
+ t5mVdxmbOR3YDypT/7qc/qr+UBZFPclbXuk6xLyEyEI+ov4MWS0XpL4hFocY0P5qa8y/
+ hoy8ECgume08rxXPx9g6V/FYyRbyZwNAT1yI9pYGsigQ1ZhEfcW3qqV/5VoaUkUBaViJ
+ TNZ8lbEOKBd8qZkrvI7f/Ma0lTz9TPzPvtGj7gEtZzjS14xmBN+f4IPv4pRnwlHz37Nl
+ 6EsjJZ8YULQ9OfoPY0qO1NBSXOBb/APD0OvVFlF7+I4Q4FEWkXp4TPWKIUdLUJfqRSYf
+ LNpg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786628238; x=1787233038;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=UOxWjh1VbJP+voQHQuYFBnTFHTsWZfsA6DkNnXcCLlk=;
- b=ICjYncGyr2Ia8gfm8dz6JysYlUZSWt20VruyrK6wEdKdsqpwqSp6FLNnVsbM/krXYM
- f9kMbqGPISsPKT1+6MuNV+KNrfZc19Vorr6SpkIqrshT3rLxqjwKjGQTLOvSYwNEmDgW
- DzbNygpPSarScxa8bz6HqCOZ2E006ZAEQTD+L1XEgSZGw/YH2qiWdsN5b2Gyuerrqt1i
- RcxPplAJdXcXHeaaI8bTrdq97iEVVurk4zy+XXZU6ZM9F/a5NEMsnS4X0x2nJk5ni9SG
- b+4mI5PDojKpyF9edGz/VANRQISThOP/dsh4Soc/Yh7s6HmHqLxPYs6GYu4hAlu7Sou7
- 0Byg==
-X-Gm-Message-State: AOJu0YxmoidDiOpuEam7QsHjC1I28cK4e+kmQ8HiBWiOT+ygWzJS6uOd
- 10rLyS1///Wetj5wpc0seRl97qSdVy5tNUiph4qXdI5K9PqeAx77b1Zl
-X-Gm-Gg: AR+sD10w2H9wdMf/V9LZEnO6+hLnzOHPIgbz/PQQ4hZy+GsPBaG5nM9674rq5+tdEt1
- XKFyIpjMmqfhkQiQtss6Y+a89o6hXl4bV7uls+56vYmoN2bhHtk1lSdWXpWq3krSTIgYef3ClWg
- GmxBOF+VSVXs++xNDQ0QmKXwDKVzbxlHz3667lQMj5NZpH1MJ4p4e+IUw4OE+OKLaho9gux3Qoc
- LaQTd43+dzgYOlNZ+dTDWqcjZ8R3NHIEmFBJNbGnGRSFtkIWXhG+iOc0MMMP2tjOVJKuefE24zH
- 0A0m2Bn5WFKQw77KqyNO1xsu5pg/u12xRCRrg0i4gWbULQhUWumgJicH48lkDusQFdv5wdzL1Bg
- GWVEFblQfxE0PXnqwbMO/kYz15GLs63+mSuhaMTNAWr8oV0xmZO6sB34X8ffYijZD9eu/HEx2FZ
- X6AmaX3D/e+WlXA0gO7BN1fJBRq0ELIIctYV1Mhm+NuAAAmUPSDmB7MPnYxD8=
-X-Received: by 2002:a05:6a21:a38d:b0:3c8:f98f:475b with SMTP id
- adf61e73a8af0-3cc5539ee7amr8292980637.19.1786628237713; 
- Thu, 13 Aug 2026 06:37:17 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1786628233; x=1787233033;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=LU3c7K+OtZGXFKKaiBRdDohYIWB+X8AIhAfaEwL+dZI=;
+ b=BeKHGCc2pGaz/FK8/x0IP+yiFt/LPYt2htUp5wuB5LuqsUhP24nj8vsz9fuHkGPp1J
+ 0C8nNrICSqtuKRT8FJjjYaphalGqMc9qNIHyMx11EDYyhwENzPA9nW80v+mLukDU2ky+
+ UiTSWiZ5BsOVUU67WXWnEs58FOBkAxsmXgtqIFYr+ISnc0LEOgg8Vl6l/3migMXRPfEd
+ A+Tuiqwc7YN1lPndmm0qJ2TnuGOGkPJ6qazTmi04cWjOnXhN5f79smay3NIFUJ5tjWnj
+ VAu8TpmsOY0I7EtGqoDBDbUPidKSnbpJMSpg5FVQMFkkvdShSdM0l6YPQUwNk7NThSp+
+ M6kw==
+X-Gm-Message-State: AOJu0Yx4KTzNVAehp0vGGjCleGX6+dpnXZMcfU6lmSNWRV8UhnFud8Lf
+ rL+3zCEIY+Y34po8qtGXqdQeUARyuuDIvgQe3mfCoK99SPuK+TatHf+o
+X-Gm-Gg: AR+sD10+u1oWoUm5h4Cfjf4qF5qJ+5MS3/06Yvdvvtb+fsGyt9Wj9FAfmJaN9NdDHID
+ jcOfUTZJLDY1reQeqlvWzKkfyzwPYFlbdef/QKi9Pjcgww4iToKy8ia4fu9aC8fcvhlQ5A5QyRS
+ 3zTM/z5tS8JUaZHwUyVQSul34SN6Av2t4FT+pe4Oxz9iCloClsHJzH6gnrAk6YNg69A935gnScJ
+ wqLogYZrgWBnERJjWJo2hyKJ/TAYlPSc36878bKGb8GWYlEKhhQQufFGXFLM/DcPbARnyxhQwJk
+ KxNehMHbh/gVLaGph+wZBsr2xGpo3mp9C/pAgYke2FgdjZ7pd55OBBKN9jAVgSnZndqWT/rmtcs
+ /Aq3cTg77gBh/Z1eXlrv56RQiR2lNkPpi/MyvZIkYEktuS3ihCGiynnAgf1BGZDebO3qVMN768k
+ ULk9A7ex+3vS2xoyuBf1Vz9R9msokpTkKMxfqhZ+zz5kMg/3wcNlWvyxLWy3J7
+X-Received: by 2002:a05:6a00:4fc7:b0:848:32f5:4999 with SMTP id
+ d2e1a72fcca58-84fc7563b85mr5443498b3a.30.1786628232939; 
+ Thu, 13 Aug 2026 06:37:12 -0700 (PDT)
 Received: from DESKTOP-DFGP8OG ([2409:8a55:ad2:6951::258])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-cbef6849625sm1078901a12.1.2026.08.13.06.37.13
+ 41be03b00d2f7-cbef6849625sm1078901a12.1.2026.08.13.06.37.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 13 Aug 2026 06:37:17 -0700 (PDT)
+ Thu, 13 Aug 2026 06:37:12 -0700 (PDT)
 From: raoyi <rao232328@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, palmer@dabbelt.com,
@@ -72,16 +71,14 @@ Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, palmer@dabbelt.com,
  bmeng.cn@gmail.com, philmd@oss.qualcomm.com, pbonzini@redhat.com,
  lvivier@redhat.com, farosas@suse.de, caojunze424@gmail.com,
  raoyi <rao232328@gmail.com>
-Subject: [PATCH v4 1/3] hw/timer: add DesignWare APB timer model
-Date: Thu, 13 Aug 2026 21:36:41 +0800
-Message-ID: <20260813133643.20380-2-rao232328@gmail.com>
+Subject: [PATCH v4 0/3] hw/timer: add DesignWare APB timer
+Date: Thu, 13 Aug 2026 21:36:40 +0800
+Message-ID: <20260813133643.20380-1-rao232328@gmail.com>
 X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260813133643.20380-1-rao232328@gmail.com>
-References: <20260813133643.20380-1-rao232328@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::433;
- envelope-from=rao232328@gmail.com; helo=mail-pf1-x433.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::432;
+ envelope-from=rao232328@gmail.com; helo=mail-pf1-x432.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -89,7 +86,7 @@ X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -105,505 +102,44 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Add generic DesignWare APB timer device model. The number
-of timer channels is configurable via the num-timers property.
+Add a generic DesignWare APB timer device model, and wire it
+up for the K230 machine with num-timers=6 and a 6.25 MHz clock.
 
-Add timer files to MAINTAINERS.
+Changes since v3 (address review comments from Philippe Mathieu-Daude):
+- Drop Clock framework mention from the commit message
+- Cover the device in MAINTAINERS (device files in patch 1/3,
+  test file in patch 3/3)
+- Move trace calls to function entry
+- Drop the addr mask; the MMIO region stays at 0x100 (the IP
+  register implementation range; the SoC aperture is board-level)
+- Hard-code comp-version (0x3231312A, "211*", IP component version)
+- Use the Resettable API (phases.hold) instead of legacy reset
+- Add unrealize to free per-channel ptimers
+- Keep register offsets and bit definitions in the C file
+- Drop private/public comments in the header
+- Move K230 timer macros into k230.c
 
-Signed-off-by: raoyi <rao232328@gmail.com>
----
- MAINTAINERS                     |   2 +
- hw/timer/Kconfig                |   4 +
- hw/timer/dw-apb-timer.c         | 376 ++++++++++++++++++++++++++++++++
- hw/timer/meson.build            |   1 +
- hw/timer/trace-events           |   8 +
- include/hw/timer/dw-apb-timer.h |  40 ++++
- 6 files changed, 431 insertions(+)
+raoyi (3):
+  hw/timer: add DesignWare APB timer model
+  hw/riscv: add DesignWare APB timer to K230 board
+  tests/qtest: add k230 dwapb timer test
+
+ MAINTAINERS                         |   3 +
+ hw/riscv/Kconfig                    |   1 +
+ hw/riscv/k230.c                     |  33 ++-
+ hw/timer/Kconfig                    |   4 +
+ hw/timer/dw-apb-timer.c             | 376 ++++++++++++++++++++++++++++
+ hw/timer/meson.build                |   1 +
+ hw/timer/trace-events               |   8 +
+ include/hw/riscv/k230.h             |   8 +
+ include/hw/timer/dw-apb-timer.h     |  40 +++
+ tests/qtest/k230-dwapb-timer-test.c | 274 ++++++++++++++++++++
+ tests/qtest/meson.build             |   4 +-
+ 11 files changed, 748 insertions(+), 4 deletions(-)
  create mode 100644 hw/timer/dw-apb-timer.c
  create mode 100644 include/hw/timer/dw-apb-timer.h
+ create mode 100644 tests/qtest/k230-dwapb-timer-test.c
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 6171cc7494..cf689433ff 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1826,8 +1826,10 @@ S: Maintained
- F: docs/system/riscv/k230.rst
- F: hw/riscv/k230.c
- F: hw/watchdog/k230_wdt.c
-+F: hw/timer/dw-apb-timer.c
- F: include/hw/riscv/k230.h
- F: include/hw/watchdog/k230_wdt.h
-+F: include/hw/timer/dw-apb-timer.h
- F: tests/qtest/k230-wdt-test.c
- 
- RX Machines
-diff --git a/hw/timer/Kconfig b/hw/timer/Kconfig
-index b3d823ce2c..b533cf1ba9 100644
---- a/hw/timer/Kconfig
-+++ b/hw/timer/Kconfig
-@@ -65,3 +65,7 @@ config STELLARIS_GPTM
- 
- config AVR_TIMER16
-     bool
-+
-+config DW_APB_TIMER
-+    bool
-+    select PTIMER
-diff --git a/hw/timer/dw-apb-timer.c b/hw/timer/dw-apb-timer.c
-new file mode 100644
-index 0000000000..0b994e1570
---- /dev/null
-+++ b/hw/timer/dw-apb-timer.c
-@@ -0,0 +1,376 @@
-+/*
-+ * Synopsys DesignWare APB timer
-+ *
-+ * Copyright (c) 2026 raoyi <rao232328@gmail.com>
-+ *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ */
-+
-+#include "qemu/osdep.h"
-+#include "qemu/bitops.h"
-+#include "qemu/module.h"
-+#include "qapi/error.h"
-+#include "migration/vmstate.h"
-+#include "hw/core/ptimer.h"
-+#include "hw/core/qdev-clock.h"
-+#include "hw/core/sysbus.h"
-+#include "hw/core/qdev-properties.h"
-+#include "hw/timer/dw-apb-timer.h"
-+#include "trace.h"
-+
-+#define DW_APB_TIMER_STRIDE       0x14
-+#define DW_APB_TIMER_MMIO_SIZE    0x100
-+
-+/* Per-timer register offsets */
-+#define DW_APB_TIMER_N_LOAD_COUNT    0x00
-+#define DW_APB_TIMER_N_CURRENT_VALUE 0x04
-+#define DW_APB_TIMER_N_CONTROL       0x08
-+#define DW_APB_TIMER_N_EOI           0x0c
-+#define DW_APB_TIMER_N_INT_STATUS    0x10
-+/* Global register offsets */
-+#define DW_APB_TIMER_INT_STATUS        0xa0
-+#define DW_APB_TIMER_EOI               0xa4
-+#define DW_APB_TIMER_RAW_INT_STATUS    0xa8
-+#define DW_APB_TIMER_COMP_VERSION      0xac
-+
-+/* Control register bits */
-+#define DW_APB_TIMER_CONTROL_ENABLE        BIT(0)
-+/* 1: periodic, 0: free running. */
-+#define DW_APB_TIMER_CONTROL_MODE_PERIODIC BIT(1)
-+#define DW_APB_TIMER_CONTROL_INT           BIT(2)
-+#define DW_APB_TIMER_CONTROL_RW_MASK       0x7
-+
-+/*
-+ * Component version of the DW_apb_timers IP, fixed in silicon.
-+ * Decodes as the ASCII string "211*" (2.11a series); the model reports
-+ * the version integrated in K230. Linux does not read this register.
-+ */
-+#define DW_APB_TIMER_COMP_VERSION_VAL 0x3231312A
-+
-+static void dw_apb_timer_update_irq(DWAPBTimerChannel *t)
-+{
-+    qemu_set_irq(t->irq, t->int_status &&
-+                 !(t->control & DW_APB_TIMER_CONTROL_INT));
-+}
-+
-+static void dw_apb_timer_clk_update(void *opaque, ClockEvent event)
-+{
-+    DWAPBTimerChannel *t = opaque;
-+
-+    if (!t->ptimer) {
-+        return;
-+    }
-+    ptimer_transaction_begin(t->ptimer);
-+    ptimer_set_period_from_clock(t->ptimer, t->clk, 1);
-+    ptimer_transaction_commit(t->ptimer);
-+}
-+
-+static void dw_apb_timer_enable(DWAPBTimerChannel *t)
-+{
-+    trace_dw_apb_timer_enable(t->id, t->load);
-+
-+    ptimer_transaction_begin(t->ptimer);
-+    ptimer_set_limit(t->ptimer, t->load ? t->load : 1, 1);
-+    ptimer_run(t->ptimer, 1);
-+    ptimer_transaction_commit(t->ptimer);
-+}
-+
-+static void dw_apb_timer_disable(DWAPBTimerChannel *t)
-+{
-+    trace_dw_apb_timer_disable(t->id);
-+
-+    ptimer_transaction_begin(t->ptimer);
-+    ptimer_stop(t->ptimer);
-+    ptimer_transaction_commit(t->ptimer);
-+
-+    t->int_status = 0;
-+    dw_apb_timer_update_irq(t);
-+}
-+
-+static void dw_apb_timer_tick(void *opaque)
-+{
-+    DWAPBTimerChannel *t = opaque;
-+    uint32_t reload;
-+
-+    trace_dw_apb_timer_tick(t->id);
-+
-+    t->int_status = 1;
-+    dw_apb_timer_update_irq(t);
-+
-+    if (t->control & DW_APB_TIMER_CONTROL_MODE_PERIODIC) {
-+        reload = t->load ? t->load : 1;
-+    } else {
-+        reload = UINT32_MAX;
-+    }
-+
-+    ptimer_set_limit(t->ptimer, reload, 1);
-+    ptimer_run(t->ptimer, 1);
-+}
-+
-+static uint64_t dw_apb_timer_read(void *opaque, hwaddr addr,
-+                                  unsigned int size)
-+{
-+    DWAPBTimerState *s = DW_APB_TIMER(opaque);
-+    uint32_t value = 0;
-+
-+    if (addr < DW_APB_TIMER_INT_STATUS) {
-+        unsigned int idx = addr / DW_APB_TIMER_STRIDE;
-+        hwaddr reg = addr % DW_APB_TIMER_STRIDE;
-+
-+        if (idx < s->num_timers) {
-+            DWAPBTimerChannel *t = &s->timers[idx];
-+
-+            switch (reg) {
-+            case DW_APB_TIMER_N_LOAD_COUNT:
-+                value = t->load;
-+                break;
-+            case DW_APB_TIMER_N_CURRENT_VALUE:
-+                if (t->control & DW_APB_TIMER_CONTROL_ENABLE) {
-+                    value = ptimer_get_count(t->ptimer);
-+                }
-+                break;
-+            case DW_APB_TIMER_N_CONTROL:
-+                value = t->control;
-+                break;
-+            case DW_APB_TIMER_N_EOI:
-+                t->int_status = 0;
-+                dw_apb_timer_update_irq(t);
-+                trace_dw_apb_timer_irq_clear(t->id);
-+                break;
-+            case DW_APB_TIMER_N_INT_STATUS:
-+                value = t->int_status &&
-+                        !(t->control & DW_APB_TIMER_CONTROL_INT);
-+                break;
-+            default:
-+                break;
-+            }
-+        }
-+    } else {
-+        switch (addr) {
-+        case DW_APB_TIMER_INT_STATUS:
-+            for (int i = 0; i < s->num_timers; i++) {
-+                DWAPBTimerChannel *t = &s->timers[i];
-+
-+                value |= (t->int_status &&
-+                          !(t->control & DW_APB_TIMER_CONTROL_INT)) << i;
-+            }
-+            break;
-+        case DW_APB_TIMER_EOI:
-+            for (int i = 0; i < s->num_timers; i++) {
-+                DWAPBTimerChannel *t = &s->timers[i];
-+
-+                t->int_status = 0;
-+                dw_apb_timer_update_irq(t);
-+            }
-+            break;
-+        case DW_APB_TIMER_RAW_INT_STATUS:
-+            for (int i = 0; i < s->num_timers; i++) {
-+                value |= s->timers[i].int_status << i;
-+            }
-+            break;
-+        case DW_APB_TIMER_COMP_VERSION:
-+            value = DW_APB_TIMER_COMP_VERSION_VAL;
-+            break;
-+        default:
-+            break;
-+        }
-+    }
-+
-+    trace_dw_apb_timer_read(addr, value);
-+    return value;
-+}
-+
-+static void dw_apb_timer_write(void *opaque, hwaddr addr,
-+                               uint64_t value, unsigned int size)
-+{
-+    DWAPBTimerState *s = DW_APB_TIMER(opaque);
-+
-+    if (addr < DW_APB_TIMER_INT_STATUS) {
-+        unsigned int idx = addr / DW_APB_TIMER_STRIDE;
-+        hwaddr reg = addr % DW_APB_TIMER_STRIDE;
-+
-+        if (idx < s->num_timers) {
-+            DWAPBTimerChannel *t = &s->timers[idx];
-+
-+            switch (reg) {
-+            case DW_APB_TIMER_N_LOAD_COUNT:
-+                t->load = value;
-+                break;
-+            case DW_APB_TIMER_N_CONTROL: {
-+                uint32_t old_control = t->control;
-+                uint32_t new_control = value & DW_APB_TIMER_CONTROL_RW_MASK;
-+
-+                t->control = new_control;
-+                if ((new_control ^ old_control) &
-+                    DW_APB_TIMER_CONTROL_ENABLE) {
-+                    if (new_control & DW_APB_TIMER_CONTROL_ENABLE) {
-+                        dw_apb_timer_enable(t);
-+                    } else {
-+                        dw_apb_timer_disable(t);
-+                    }
-+                }
-+                if ((new_control ^ old_control) &
-+                    DW_APB_TIMER_CONTROL_INT) {
-+                    dw_apb_timer_update_irq(t);
-+                }
-+                break;
-+            }
-+            default:
-+                break;
-+            }
-+        }
-+    }
-+
-+    trace_dw_apb_timer_write(addr, value);
-+}
-+
-+static const MemoryRegionOps dw_apb_timer_ops = {
-+    .read = dw_apb_timer_read,
-+    .write = dw_apb_timer_write,
-+    .endianness = DEVICE_LITTLE_ENDIAN,
-+    .impl = {
-+        .min_access_size = 4,
-+        .max_access_size = 4,
-+    },
-+};
-+
-+static void dw_apb_timer_reset_hold(Object *obj, ResetType type)
-+{
-+    DWAPBTimerState *s = DW_APB_TIMER(obj);
-+
-+    for (int i = 0; i < s->num_timers; i++) {
-+        DWAPBTimerChannel *t = &s->timers[i];
-+
-+        ptimer_transaction_begin(t->ptimer);
-+        ptimer_stop(t->ptimer);
-+        ptimer_transaction_commit(t->ptimer);
-+
-+        t->load = 0;
-+        t->control = 0;
-+        t->int_status = 0;
-+        dw_apb_timer_update_irq(t);
-+    }
-+}
-+
-+static const VMStateDescription vmstate_dw_apb_timer_channel = {
-+    .name = "dw-apb-timer-channel",
-+    .version_id = 1,
-+    .minimum_version_id = 1,
-+    .fields = (const VMStateField[]) {
-+        VMSTATE_PTIMER(ptimer, DWAPBTimerChannel),
-+        VMSTATE_CLOCK(clk, DWAPBTimerChannel),
-+        VMSTATE_UINT32(load, DWAPBTimerChannel),
-+        VMSTATE_UINT32(control, DWAPBTimerChannel),
-+        VMSTATE_UINT32(int_status, DWAPBTimerChannel),
-+        VMSTATE_END_OF_LIST()
-+    }
-+};
-+
-+static const VMStateDescription vmstate_dw_apb_timer = {
-+    .name = "dw-apb-timer",
-+    .fields = (const VMStateField[]) {
-+        VMSTATE_STRUCT_VARRAY_UINT32(timers, DWAPBTimerState,
-+                                     num_timers, 0,
-+                                     vmstate_dw_apb_timer_channel,
-+                                     DWAPBTimerChannel),
-+        VMSTATE_END_OF_LIST()
-+    }
-+};
-+
-+static const Property dw_apb_timer_properties[] = {
-+    DEFINE_PROP_UINT32("num-timers", DWAPBTimerState, num_timers, 1),
-+};
-+
-+static void dw_apb_timer_init(Object *obj)
-+{
-+    DWAPBTimerState *s = DW_APB_TIMER(obj);
-+
-+    for (int i = 0; i < DW_APB_TIMER_MAX_TIMERS; i++) {
-+        DWAPBTimerChannel *t = &s->timers[i];
-+        g_autofree char *name = g_strdup_printf("timer[%d]", i);
-+
-+        t->id = i;
-+        t->clk = qdev_init_clock_in(DEVICE(obj), name,
-+                                    dw_apb_timer_clk_update, t,
-+                                    ClockUpdate);
-+    }
-+}
-+
-+static void dw_apb_timer_realize(DeviceState *dev, Error **errp)
-+{
-+    DWAPBTimerState *s = DW_APB_TIMER(dev);
-+    SysBusDevice *sbd = SYS_BUS_DEVICE(dev);
-+
-+    if (s->num_timers == 0 || s->num_timers > DW_APB_TIMER_MAX_TIMERS) {
-+        error_setg(errp, "dw-apb-timer: num-timers must be between 1 and %u",
-+                   DW_APB_TIMER_MAX_TIMERS);
-+        return;
-+    }
-+
-+    for (int i = 0; i < s->num_timers; i++) {
-+        DWAPBTimerChannel *t = &s->timers[i];
-+
-+        if (!clock_has_source(t->clk)) {
-+            error_setg(errp, "dw-apb-timer: timer[%u] clock must be connected",
-+                       i);
-+            return;
-+        }
-+    }
-+
-+    for (int i = 0; i < s->num_timers; i++) {
-+        DWAPBTimerChannel *t = &s->timers[i];
-+
-+        t->ptimer = ptimer_init(dw_apb_timer_tick, t,
-+            PTIMER_POLICY_NO_IMMEDIATE_TRIGGER |
-+            PTIMER_POLICY_NO_IMMEDIATE_RELOAD |
-+            PTIMER_POLICY_NO_COUNTER_ROUND_DOWN);
-+        ptimer_transaction_begin(t->ptimer);
-+        ptimer_set_limit(t->ptimer, UINT32_MAX, 1);
-+        ptimer_transaction_commit(t->ptimer);
-+        sysbus_init_irq(sbd, &t->irq);
-+
-+        /* The source may have been connected before the ptimer existed. */
-+        dw_apb_timer_clk_update(t, ClockUpdate);
-+    }
-+
-+    memory_region_init_io(&s->mmio, OBJECT(dev), &dw_apb_timer_ops,
-+                          s, TYPE_DW_APB_TIMER, DW_APB_TIMER_MMIO_SIZE);
-+    sysbus_init_mmio(sbd, &s->mmio);
-+}
-+
-+static void dw_apb_timer_unrealize(DeviceState *dev)
-+{
-+    DWAPBTimerState *s = DW_APB_TIMER(dev);
-+
-+    for (int i = 0; i < s->num_timers; i++) {
-+        ptimer_free(s->timers[i].ptimer);
-+    }
-+}
-+
-+static void dw_apb_timer_class_init(ObjectClass *klass, const void *data)
-+{
-+    DeviceClass *dc = DEVICE_CLASS(klass);
-+    ResettableClass *rc = RESETTABLE_CLASS(klass);
-+
-+    dc->realize = dw_apb_timer_realize;
-+    dc->unrealize = dw_apb_timer_unrealize;
-+    dc->vmsd = &vmstate_dw_apb_timer;
-+    dc->desc = "Synopsys DesignWare APB timer";
-+    rc->phases.hold = dw_apb_timer_reset_hold;
-+    device_class_set_props(dc, dw_apb_timer_properties);
-+}
-+
-+static const TypeInfo dw_apb_timer_info = {
-+    .name          = TYPE_DW_APB_TIMER,
-+    .parent        = TYPE_SYS_BUS_DEVICE,
-+    .instance_size = sizeof(DWAPBTimerState),
-+    .instance_init = dw_apb_timer_init,
-+    .class_init    = dw_apb_timer_class_init,
-+};
-+
-+static void dw_apb_timer_register_type(void)
-+{
-+    type_register_static(&dw_apb_timer_info);
-+}
-+
-+type_init(dw_apb_timer_register_type)
-diff --git a/hw/timer/meson.build b/hw/timer/meson.build
-index 201b5d8316..fccc36540c 100644
---- a/hw/timer/meson.build
-+++ b/hw/timer/meson.build
-@@ -34,3 +34,4 @@ specific_ss.add(when: 'CONFIG_IBEX', if_true: files('ibex_timer.c'))
- system_ss.add(when: 'CONFIG_SIFIVE_PWM', if_true: files('sifive_pwm.c'))
- 
- system_ss.add(when: 'CONFIG_AVR_TIMER16', if_true: files('avr_timer16.c'))
-+system_ss.add(when: 'CONFIG_DW_APB_TIMER', if_true: files('dw-apb-timer.c'))
-diff --git a/hw/timer/trace-events b/hw/timer/trace-events
-index 634ba1da27..7f592a96c8 100644
---- a/hw/timer/trace-events
-+++ b/hw/timer/trace-events
-@@ -1,5 +1,13 @@
- # See docs/devel/tracing.rst for syntax documentation.
- 
-+# dw-apb-timer.c
-+dw_apb_timer_read(uint64_t addr, uint32_t val) "DW APB timer read: [0x%" PRIx64 "] -> 0x%" PRIx32
-+dw_apb_timer_write(uint64_t addr, uint64_t val) "DW APB timer write: [0x%" PRIx64 "] <- 0x%" PRIx64
-+dw_apb_timer_tick(int idx) "DW APB timer %d tick"
-+dw_apb_timer_irq_clear(int idx) "DW APB timer %d IRQ cleared"
-+dw_apb_timer_enable(int idx, uint32_t load) "DW APB timer %d enabled load=0x%" PRIx32
-+dw_apb_timer_disable(int idx) "DW APB timer %d disabled"
-+
- # slavio_timer.c
- slavio_timer_get_out(uint64_t limit, uint32_t counthigh, uint32_t count) "limit 0x%"PRIx64" count 0x%x0x%08x"
- slavio_timer_irq(uint32_t counthigh, uint32_t count) "callback: count 0x%x0x%08x"
-diff --git a/include/hw/timer/dw-apb-timer.h b/include/hw/timer/dw-apb-timer.h
-new file mode 100644
-index 0000000000..f6b83ae5ca
---- /dev/null
-+++ b/include/hw/timer/dw-apb-timer.h
-@@ -0,0 +1,40 @@
-+/*
-+ * Synopsys DesignWare APB timer
-+ *
-+ * Copyright (c) 2026 raoyi <rao232328@gmail.com>
-+ *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ */
-+
-+#ifndef DW_APB_TIMER_H
-+#define DW_APB_TIMER_H
-+
-+#include "hw/core/sysbus.h"
-+#include "hw/core/irq.h"
-+#include "hw/core/clock.h"
-+#include "qom/object.h"
-+
-+#define TYPE_DW_APB_TIMER "dw-apb-timer"
-+OBJECT_DECLARE_SIMPLE_TYPE(DWAPBTimerState, DW_APB_TIMER)
-+
-+#define DW_APB_TIMER_MAX_TIMERS   8
-+
-+typedef struct DWAPBTimerChannel {
-+    struct ptimer_state *ptimer;
-+    Clock *clk;
-+    qemu_irq irq;
-+    unsigned int id;
-+    uint32_t load;
-+    uint32_t control;
-+    uint32_t int_status;
-+} DWAPBTimerChannel;
-+
-+struct DWAPBTimerState {
-+    SysBusDevice parent_obj;
-+
-+    MemoryRegion mmio;
-+    uint32_t num_timers;
-+    DWAPBTimerChannel timers[DW_APB_TIMER_MAX_TIMERS];
-+};
-+
-+#endif
 -- 
 2.53.0
 
