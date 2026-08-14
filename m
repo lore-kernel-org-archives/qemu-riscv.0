@@ -4,110 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 715F5C5B572
-	for <qemu-riscv@archiver.kernel.org>; Fri, 14 Aug 2026 09:51:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33A75C5CFC1
+	for <qemu-riscv@archiver.kernel.org>; Fri, 14 Aug 2026 10:24:40 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wuoZW-0006OD-F4; Fri, 14 Aug 2026 05:51:30 -0400
+	id 1wup5J-0006ql-0c; Fri, 14 Aug 2026 06:24:21 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1wuoZE-0006Mr-Vs
- for qemu-riscv@nongnu.org; Fri, 14 Aug 2026 05:51:13 -0400
-Received: from mail-yw1-x112d.google.com ([2607:f8b0:4864:20::112d])
+ (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
+ id 1wup5H-0006oZ-Ab
+ for qemu-riscv@nongnu.org; Fri, 14 Aug 2026 06:24:19 -0400
+Received: from mail-pj1-x102b.google.com ([2607:f8b0:4864:20::102b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1wuoZB-0007CZ-NY
- for qemu-riscv@nongnu.org; Fri, 14 Aug 2026 05:51:11 -0400
-Received: by mail-yw1-x112d.google.com with SMTP id
- 00721157ae682-81ea0b7d137so6993757b3.2
- for <qemu-riscv@nongnu.org>; Fri, 14 Aug 2026 02:51:09 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1786701068; cv=none;
- d=google.com; s=arc-20260327;
- b=PAf67wZQeRlr3c1ZlJGa0PGzBXr3N9QzF9q9eOIEtKXOjPbKLaUjEn4+UM4UJRQDcy
- eVNm/wvzG1kWasXpG/tI/P0b5e1aIj+qbRrAhTbewtJeh1kfiMUM7VLGC6QwWv8T8QvR
- 1UnAoDCNdKB42hWDJ9U4Ssmh8Y+wjcnI94LPbnCzrWsVKSuZ3WxBPJon3dUNGhhkQjlp
- VzGeDm5Rq2IZmT04SwV4IdziIrrfNghO+daXHdDm7oMRyhrUY/U68miQyJGcq6T3/IpP
- w2aLAQqy81L+bzD0uLheteS00jKYEV0zLMK9VUXtyly4NixHwAVOrcNGrNPFr+LRwfzW
- SbYw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=K53K0n+MC9oHyiqtFswg6lvCOVt83JZMnk4OL2Jt2dE=;
- fh=g3qHXmDK4cdrsd46RewCTSvxFxlgJ2OgFt+Tpn8b1MQ=;
- b=JuoDgDtMLIJG3wgHNw4Lr4y5iYOK2n+EWniFcqxQa0u5BrN5ZnERZZJMvCRHxEa7kZ
- pno1q5g8gTtVTB8igIfckGrlsGtobTF9FHSOHVOcH9IdEUHo24jqyv5SKk0QBRBfkY+B
- 1Ytxo6g0DgMHUAFRueKWm4n5P/16mWVfHpxlXtvlUDK2cwx5hevAxd+ZhWdbzsmBbOfh
- Yv2LMKCo+IcRwDhfkTYyyhiCQE8MMvUiL6x7qWD9ekkV+GSF/BWifUhw5qKUYZy9+REZ
- aTiDyilutzZtrlPSRo6XU6SetoYNm4sp8qx63LN0DuXtt+To2KYX3DImJNQ2SMLUGgMh
- c8Zw==; darn=nongnu.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
+ id 1wup5F-0003Za-BJ
+ for qemu-riscv@nongnu.org; Fri, 14 Aug 2026 06:24:18 -0400
+Received: by mail-pj1-x102b.google.com with SMTP id
+ 98e67ed59e1d1-384930ca5e2so921347a91.3
+ for <qemu-riscv@nongnu.org>; Fri, 14 Aug 2026 03:24:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1786701068; x=1787305868; darn=nongnu.org;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ d=sifive.com; s=google; t=1786703055; x=1787307855; darn=nongnu.org;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=K53K0n+MC9oHyiqtFswg6lvCOVt83JZMnk4OL2Jt2dE=;
- b=fdNImuPT3NL5DMGMg/WxivJ9uzNUMl1QL8ZvWfgf2kYidcQZfqNjXEoizsAq23/LNa
- EGlNIG1MX5NuMxzuX3W25xZSLZlON1Th6OtnMwEd/faGt+eLTv9YXfRiHpSyZLdPfqCk
- wYbZ+f2w03VGAF8OqdJ5hnicMVs5LkUuM/y6z3vWnzaSF/iN7gMLn269QPHT01drQo5P
- mNBG8xzko3vOJhyhdf6BOkQ1qo5KaGaO0PtgC7xoTL1v7yyFa9b7iIDDeA2GeLn3VfES
- KgDEdF7tjlPxlfx8AJVReHIQ1RXKD5egF6jG/RBEsvAqVLR0gw1n0V0+R8ctUmS5GktK
- ZUKw==
+ bh=W3OKx8jnAFP/D/NKUHKpjVFXIZDJdsjTAwKwI6AXav8=;
+ b=TFy986CFCvAkdz00eEoHjUa9dqEElB9cG6zkSDrGVEna4LL5tjWszl7nk71Gl+lOI5
+ eS/0W8s5uNmbOjdxTBM0YSubOoAeo7DiCOl3bBXfmjxcJLl8hWTqYuwaQU459ele8rpc
+ /qY/DjQ4mkvPNv2S/XKRMqnSUV8tJToitUkI6//6yW/ZIT0xyIPGb+C1eDCcSjdeL0Bo
+ dJ30rrQwA722kpDn232ijQmwL88fpXgfsxynhOSTH0uP/QFl7BrEzIU3g7FUKBHv5jN5
+ oC53sOxyZUXK2D1LXvy+VK6At7oJr0YXpzA/Sc/fuLqe3vyDs9eWoC67C0r5wdWvYXT/
+ m8Yg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786701068; x=1787305868;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
+ d=1e100.net; s=20251104; t=1786703055; x=1787307855;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=K53K0n+MC9oHyiqtFswg6lvCOVt83JZMnk4OL2Jt2dE=;
- b=sUXZsXPbeiJHgXiAy6b7I/K6l2s/7xN7x3iGCUBRNv+CArIYvg+tZjpgop/OcBoOWt
- 33Qo5+GJeoqjjhf5j3ydW/sNzFbVRZiH1ub3tM/BfaVbvICgingBhh4sbFp3d84NgBIr
- 9aGGNKR+t0+bODrcLpbwk2UNRu4t7UZtR7GjP32JMtd3sCBBH+wXTNHEsmAuaN6X/Rjf
- oQhryX7Aun8fGb84rnHQaryjcQZtugh4sFKQOYsDUhnWBAKiBbC5yAd6BGKSM+d7X2Zo
- rNKrWblh+iYrmp6buQ+uTy0NfHHoHacTxuYGYrEUZMvfCYlYcqqcurGsflSv9Gbi45KR
- 1npA==
+ bh=W3OKx8jnAFP/D/NKUHKpjVFXIZDJdsjTAwKwI6AXav8=;
+ b=e7c8dLPpbTh2xtOvz8ksC+zE1vQl6aZo343hGaE5a6RPz4GZPQcZ5Ljs4k6KNHpFHQ
+ mphKQP9qAUjOrcOxZDvHgyD+IkN7+2o4W3C+eRgiS/frCrvbIVJ85BX5NQKdZiCtz6Kh
+ 8h+9PxHrRSIUAn8SeOG1i7PlvdtfyfDc7Zb1OEArsMmUBJp/H3I6+cVkA4zGVJTUZNca
+ U6Dr2Wryyy06DgZ8xgQGWwbfd/5aPtPcNdCFn/88u0AXRHFr/Q/DmZxe84ACe0inZzT8
+ n2ZjRh0zXiD//OJBMMiC4F5PvOf9Q44MqHi6kbSD/wt7sUnZ75mysn9l0Vz85KBHufQD
+ c4Qg==
 X-Forwarded-Encrypted: i=1;
- AHgh+RpMa2PHTe8HDKRIgGlAQThMQjYNz1AAKfbTFIyinfF/PvXfVbkeAOhqYhkF4UjUgFbFWXC5oq/Vebee@nongnu.org
-X-Gm-Message-State: AOJu0YyJL9BJGtjZJT+8XXuGEn0nIZy/SkXNfe115h4ekI3AQURUvsQm
- mi50UVAxroJH3IC2UfdnGVMP3ZQj6iUzKlwRtgMJvjPeNZGHkZaOyMGQY7xaFGEn0trlWBho5jJ
- 8CHu30U6EALJPuYxx5VQPluWVhEx7IhY=
-X-Gm-Gg: AR+sD125sZDD+ewm8TKPMPkddFr02Qdrx1TlzoyNdaxOW2gqc2baZalUKmK69l/Sl1m
- InXWPhDbbghun66jCC4Jmqpvh51zDfIIje7uKYF7GJV3oW4Tu560tbD5MAuPrnv5mmzrOGGX7Fk
- zZtT1WWPloiNGCqWyXSLdgg33sN/v3NZR4Y5h9K1shOCbG/+Tr7nV/IIMbP4B3/z0Hl5XdsFHJm
- zEvFJK9fZmeQlzc2SWquOocmFLRwf74rkh8k2aTBbQyMTEY+htvhELwZesdu/ARYIJM4he8MqkC
- qqAOUYwvSeWujr9X4lGEYD7LL1/L1crCJ2V19W/sKJ43
-X-Received: by 2002:a05:690c:28f:b0:81f:2825:de9 with SMTP id
- 00721157ae682-83710a8ddd4mr20029827b3.20.1786701067959; Fri, 14 Aug 2026
- 02:51:07 -0700 (PDT)
+ AHgh+RpkhtSktAqRYNmtqcscc4qSTZe+2OK7rhiooXkPwHRavcbzt3uaFa7aY3krljiTC/zhlgPmFJ5keFh1@nongnu.org
+X-Gm-Message-State: AOJu0YwBIOrBgqQdOq4mBPcowY/BglYl5UnxGaKK1VDayXhm52EXiIkZ
+ LAkv7+jwNqT4isAkzCOD9L4ipsG90S6guhd3PSI5jwcAsQo+Bi2jToraTB72Xn5DBJ8=
+X-Gm-Gg: AR+sD13JIMsTfiKAPOy+AUR4An1NYC1/xmN8D30tFZskFOFHQ4ORGAIxEFjTgIWLtx8
+ Azi//VNQgZX6STqSsSnroDKdLqYWAyzo6jk2X30J2I0XBb2Y8eQQGkgJOKIoqGufJvx+gIUFwSl
+ W6jN5g2v/k00KTgBU1bhnxQ3i6Qz2injZaY3yM5CyDllcLoLIh4M+BlRXEUPkiIORH3j9HZEjLU
+ ZSeQnKgrv1JtNXZHovGMww2ZSijl/8kxbn9MZIOtZl5EQVUUkY93ceWgVbJwa1nuXF4IkB2iCx0
+ rALENciVO04a6xgQt0S3QMIfepjJxTHwNkgTl4XbzBmdB8RefGPUzySqBBk8Op9/bf4+8vMiv7g
+ NQJJFQLG3Vx+XQy3//jLbdZAVFQAVcMBJ2GP9wr/ZnyVX0UqrFvSEv66PLTQoIzext5AZKh5NwS
+ vTlibo6ji61uaLuC1Uh4CfBim1xTTR92vdr/9MScC304YmQ90L0z90IiqmohXWNfwXXaqEqsFS9
+ xNUjhGvVvBc13vIPVgRHuuaUK8vHAtIxuk=
+X-Received: by 2002:a17:90a:e7c1:b0:36a:8240:2477 with SMTP id
+ 98e67ed59e1d1-3933ed1ba09mr4661848a91.19.1786703055410; 
+ Fri, 14 Aug 2026 03:24:15 -0700 (PDT)
+Received: from sifive.com ([136.226.240.165]) by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-394eb7539d3sm2183480a91.15.2026.08.14.03.24.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 14 Aug 2026 03:24:14 -0700 (PDT)
+Date: Fri, 14 Aug 2026 18:24:10 +0800
+From: Max Chou <max.chou@sifive.com>
+To: Joel Stanley <joel@jms.id.au>
+Cc: Alistair Francis <alistair.francis@wdc.com>, 
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Weiwei Li <liwei1518@gmail.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Chao Liu <chao.liu@processmission.com>, 
+ Anton Johansson <anjo@rev.ng>, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Subject: Re: [PATCH] target/riscv: Restore register dump zero padding
+Message-ID: <an7r7xkz0lppBISj@sifive.com>
+References: <20260813032421.54438-1-joel@jms.id.au>
 MIME-Version: 1.0
-References: <tencent_EF996EEB2215272639C89FAE1491CEF43908@qq.com>
- <be7afd5c-55dd-4af1-b828-9a2f401e3bfc@smtp-relay.sendinblue.com>
- <CAEUhbmWjR3cc4jkdBAqpXcmt9z3ExHWsPzCthX7d+G1wgqTbTQ@mail.gmail.com>
- <178669925995.92831.6332189576763663701.b4-reply@b4>
-In-Reply-To: <178669925995.92831.6332189576763663701.b4-reply@b4>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Fri, 14 Aug 2026 17:50:55 +0800
-X-Gm-Features: AUfX_mxI1lO2VyuGGM5L5pmJcNt9ZB4OoY9bwiWrJrPDyeWkfb3DMOKMqlYweOo
-Message-ID: <CAEUhbmXMKug9v2x9PaJTXiwnF+o0HqQsiY+PtCL6eYtGZ8_ViA@mail.gmail.com>
-Subject: Re: [PATCH v3 1/2] hw/gpio: add K230 GPIO controller model
-To: Junze Cao <caojunze424@gmail.com>
-Cc: guochun wang <guochun.wang@foxmail.com>, qemu-devel@nongnu.org, 
- chao.liu@processmission.com, pbonzini@redhat.com, farosas@suse.de, 
- lvivier@redhat.com, palmer@dabbelt.com, alistair.francis@wdc.com, 
- liwei1518@gmail.com, daniel.barboza@oss.qualcomm.com, 
- zhiwei_liu@linux.alibaba.com, qemu-riscv@nongnu.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::112d;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yw1-x112d.google.com
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20260813032421.54438-1-joel@jms.id.au>
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102b;
+ envelope-from=max.chou@sifive.com; helo=mail-pj1-x102b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -125,53 +107,84 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Junze,
+On 2026-08-13 12:54, Joel Stanley wrote:
+> The register values lost their leading zeroes when the underlying type
+> was changed, resulting in mismatched padding and harder to read output.
+> 
+> Print with a runtime field width based on MXL, so values are 16 hex
+> digits on rv64 and 8 on rv32, matching the csr and fp dump. This avoids
+> adding target_ulong back into the dump.
+> 
+> Fixes: c4e6bc63853c ("target/riscv: Fix size of gpr and gprh")
+> Signed-off-by: Joel Stanley <joel@jms.id.au>
+> ---
+> before:
+> 
+>  mvendorid     0000000000000000
+>  marchid       000000000000002a
+>  mimpid        0000000000000000
+>  mhartid       0000000000000000
+>  mconfigptr    0000000000000000
+>  x0/zero  0 x1/ra    ffffffff803f10f6 x2/sp    ff2000000000bc70 x3/gp    ffffffff805c94c0
+>  x4/tp    ff60000000c78000 x5/t0    ffffffff803f132c x6/t1    0 x7/t2    20646e65205b2d2d
+>  x8/s0    ff2000000000bc80 x9/s1    708 x10/a0   270f x11/a1   8
+>  x12/a2   0 x13/a3   120 x14/a4   14992a1 x15/a5   ffffffffffffffff
+>  x16/a6   fffff079 x17/a7   79 x18/s2   0 x19/s3   7d0
+>  x20/s4   ffffffff805ca228 x21/s5   31 x22/s6   ff60000000e15000 x23/s7   ffffffff804228c8
+>  x24/s8   0 x25/s9   ffffffff804e3e90 x26/s10  0 x27/s11  0
+>  x28/t3   ff60000000c60f00 x29/t4   ff60000000c60f00 x30/t5   ff60000000c60000 x31/t6   ff2000000000bc28
+>  fflags        0000000000000000
+>  frm           0000000000000000
+>  fcsr          0000000000000000
+>  f0/ft0   ffffffff00000000 f1/ft1   ffffffff00000000 f2/ft2   ffffffff00000000 f3/ft3   ffffffff00000000
+>  f4/ft4   ffffffff00000000 f5/ft5   ffffffff00000000 f6/ft6   ffffffff00000000 f7/ft7   ffffffff00000000
+>  f8/fs0   ffffffff00000000 f9/fs1   ffffffff00000000 f10/fa0  ffffffff00000000 f11/fa1  ffffffff00000000
+>  f12/fa2  ffffffff00000000 f13/fa3  ffffffff00000000 f14/fa4  ffffffff00000000 f15/fa5  ffffffff00000000
+>  f16/fa6  ffffffff00000000 f17/fa7  ffffffff00000000 f18/fs2  ffffffff00000000 f19/fs3  ffffffff00000000
+>  f20/fs4  ffffffff00000000 f21/fs5  ffffffff00000000 f22/fs6  ffffffff00000000 f23/fs7  ffffffff00000000
+>  f24/fs8  ffffffff00000000 f25/fs9  ffffffff00000000 f26/fs10 ffffffff00000000 f27/fs11 ffffffff00000000
+>  f28/ft8  ffffffff00000000 f29/ft9  ffffffff00000000 f30/ft10 ffffffff00000000 f31/ft11 ffffffff00000000
+> 
+> after:
+> 
+>  mvendorid     0000000000000000
+>  marchid       000000000000002a
+>  mimpid        0000000000000000
+>  mhartid       0000000000000000
+>  mconfigptr    0000000000000000
+>  x0/zero  0000000000000000 x1/ra    ffffffff803f10f6 x2/sp    ff2000000000bc70 x3/gp    ffffffff805c94c0
+>  x4/tp    ff60000000c78000 x5/t0    ffffffff803f132c x6/t1    0000000000000000 x7/t2    20646e65205b2d2d
+>  x8/s0    ff2000000000bc80 x9/s1    0000000000000e10 x10/a0   000000000000270f x11/a1   0000000000000008
+>  x12/a2   0000000000000000 x13/a3   0000000000000120 x14/a4   0000000002575fd6 x15/a5   ffffffffffffffff
+>  x16/a6   00000000fffff079 x17/a7   0000000000000079 x18/s2   0000000000000001 x19/s3   0000000000000ed8
+>  x20/s4   ffffffff805ca228 x21/s5   0000000000000060 x22/s6   ff60000000e15000 x23/s7   ffffffff804228c8
+>  x24/s8   0000000000000000 x25/s9   ffffffff804e3e90 x26/s10  0000000000000000 x27/s11  0000000000000000
+>  x28/t3   ff60000000c60f00 x29/t4   ff60000000c60f00 x30/t5   ff60000000c60000 x31/t6   ff2000000000bc28
+>  fflags        0000000000000000
+>  frm           0000000000000000
+>  fcsr          0000000000000000
+>  f0/ft0   ffffffff00000000 f1/ft1   ffffffff00000000 f2/ft2   ffffffff00000000 f3/ft3   ffffffff00000000
+>  f4/ft4   ffffffff00000000 f5/ft5   ffffffff00000000 f6/ft6   ffffffff00000000 f7/ft7   ffffffff00000000
+>  f8/fs0   ffffffff00000000 f9/fs1   ffffffff00000000 f10/fa0  ffffffff00000000 f11/fa1  ffffffff00000000
+>  f12/fa2  ffffffff00000000 f13/fa3  ffffffff00000000 f14/fa4  ffffffff00000000 f15/fa5  ffffffff00000000
+>  f16/fa6  ffffffff00000000 f17/fa7  ffffffff00000000 f18/fs2  ffffffff00000000 f19/fs3  ffffffff00000000
+>  f20/fs4  ffffffff00000000 f21/fs5  ffffffff00000000 f22/fs6  ffffffff00000000 f23/fs7  ffffffff00000000
+>  f24/fs8  ffffffff00000000 f25/fs9  ffffffff00000000 f26/fs10 ffffffff00000000 f27/fs11 ffffffff00000000
+>  f28/ft8  ffffffff00000000 f29/ft9  ffffffff00000000 f30/ft10 ffffffff00000000 f31/ft11 ffffffff00000000
+> 
+> I also wrote a patch to align the first column of register values, but
+> that creates the dilemma between aligning the numbers vs keeping the
+> spacing between the registers and their value within a row. Aside from
+> avoiding bikeshedding, it wastes more columns for an already wide
+> output, so opted not to 'fix' that.
+> 
+> Signed-off-by: Joel Stanley <joel@jms.id.au>
+> ---
+>  target/riscv/cpu.c | 9 ++++++---
+>  1 file changed, 6 insertions(+), 3 deletions(-)
 
-On Fri, Aug 14, 2026 at 5:21=E2=80=AFPM Junze Cao <caojunze424@gmail.com> w=
-rote:
->
-> On 2026-08-14 15:26:41+08:00, Bin Meng wrote:
-> > On Mon, Aug 10, 2026 at 4:02=E2=80=AFAM guochun wang <guochun.wang@foxm=
-ail.com> wrote:
-> >
-> > > Implement a K230 SoC APB GPIO controller model for QEMU, derived from
-> > > the Synopsys DesignWare APB GPIO (the Linux gpio-k230 driver is based
-> > > on gpio-dwapb.c and shares the same register layout), with a
-> > > Canaan-specific compatible ("canaan,k230-apb-gpio") and hardlock
-> > > integration. The model is capable of running the Linux gpio-k230 driv=
-er
-> > > and driving external input/output lines. Behaviour follows the K230
-> > > Technical Reference Manual v0.3.1.
-> >
-> > Please split the k230_gpio model into 2 separate models:
-> >
-> > - One is generic Synopsys DesignWare GPIO IP model
-> > - Optional Canann K230 specific wrapper glue model to the dw-gpio IP
-> > (if the generic Synopsys DesignWare GPIO IP model, or plus some unimp
-> > region, is good enough to make the software happy, no need to create
-> > this one)
->
-> Hi Bin Meng,
->
-> Thanks for the detailed review.
-> Regarding the suggestion to abstract this into a generic Synopsys DesignW=
-are APB GPIO model, I have a question: do you know of any other QEMU SoCs t=
-hat use this IP and would benefit from a shared model?
-> If there is no immediate second user, I wonder whether it might be premat=
-ure to generalize now, especially while we still need to complete the K230-=
-specific behavior.
->
+Reviewed-by: Max Chou <max.chou@sifive.com>
 
-There is no other immediate second user as far as I know. But Synopsys
-DesignWare IP is not like others, and it's commonly seen on many SoCs.
-
-For RISC-V, I can see Eswin EIC7700, Sophgo CV1800B (Milk-V Duo),
-Sophgo SG2042 / SG2044 and T-Head TH1520 (Lichee Pi 4A) all use the
-same Synopsys GPIO IP, and they are all good candidate of QEMU models
-in the future.
-
-What K230-specific behavior are you concerned about?
-
-Regards,
-Bin
+Thanks,
+rnax
 
