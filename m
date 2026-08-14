@@ -4,89 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57C0CC5B572
-	for <qemu-riscv@archiver.kernel.org>; Fri, 14 Aug 2026 19:35:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FB95C5B572
+	for <qemu-riscv@archiver.kernel.org>; Fri, 14 Aug 2026 20:00:54 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wuxgD-00012N-PY; Fri, 14 Aug 2026 15:35:01 -0400
+	id 1wuy51-0008NU-3W; Fri, 14 Aug 2026 16:00:41 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ilya.chichkov.dev@gmail.com>)
- id 1wusny-0005dU-Fe
- for qemu-riscv@nongnu.org; Fri, 14 Aug 2026 10:22:42 -0400
-Received: from mail-lf1-x12c.google.com ([2a00:1450:4864:20::12c])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ilya.chichkov.dev@gmail.com>)
- id 1wusnw-00073q-TB
- for qemu-riscv@nongnu.org; Fri, 14 Aug 2026 10:22:42 -0400
-Received: by mail-lf1-x12c.google.com with SMTP id
- 2adb3069b0e04-5aeb59d54b1so1086756e87.1
- for <qemu-riscv@nongnu.org>; Fri, 14 Aug 2026 07:22:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1786717359; x=1787322159; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=RRMfdgxEVVzbOl7prRPEfyfa94PseJB2tiTaRS3f1wM=;
- b=XlyXcwBQRXCtLVdV76nxnpLpYLA+ham6H/qDMNO/7Yp4M2vGc2byppfl2OKKToIFgL
- 21j09wBiPFeqFQamdPhDTzOfzFM6S97xyVK5tWVb3Ghn/gQuzFHPmDSkeuEYk0lNCrjn
- JdBjKvsYBaQWWeQIhg1mbcw8kLMlchQY4T6VZKqW2q4xhD72rpoqtX9Pb7PCQFOwoRD8
- oc7rHOWlMmEZ+3YqiZb+O4LBbGtefOqYblkriutnZlLsnRCURECj/xRq6AVNaPbia8l4
- p/jHTbSBznPRa27hv9dIRrISw1qgXw14rXiC3dxUvfxVBM20IawRarifRpHvrHYAfcWB
- 6itA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786717359; x=1787322159;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=RRMfdgxEVVzbOl7prRPEfyfa94PseJB2tiTaRS3f1wM=;
- b=pXEq/IaL4vRH99XCulPtuAm64fadGEspuSRjv5tOZ+o81NmgdM/iXSnOc3wbK/3jbE
- F911evdZH/VvVPRjf9giiouMjI8RwCE3408urQ9shHVqss3PQPjg0q7oyprWS+1/39w/
- oUCZOQhpznNwBmhfcVzNQnkFCQmSRrFL83XALab5Aij3X9dQPGcGP5DSSPQ7Pd9Lonfu
- rd5Rhdls7iGJTGkWMv4GXrfe/JbhHuB8NH8V8hYoqPL1yNXuBEbamiINgtIfSSnjAs3e
- 3BIJKtVOT1+Q744Eifn92EFOrAjuROEuU1vhmFVCjexTRLxbwFhJCq3uduGIy6AiEnbr
- /EkA==
-X-Forwarded-Encrypted: i=1;
- AHgh+RrUovK+mKH6OfJXEYRDFu/WGtnkZFUemIb9BAmROdBIhfvSyqjKVdbFDlqRYPlJ5Bee9Y6sCNtawl63@nongnu.org
-X-Gm-Message-State: AOJu0YyK83zKawrlg8Nxr4uwrxVgSzEpWb7PO1XRSgrDMdQLbvaVN/dG
- alRDa7W/OD3dgwcyRhH67t4bsYZU8xxxACSkudtbtYwn2Hhhi3ZxexOB
-X-Gm-Gg: AR+sD10qVAftGiMqxogTA3a8kBKPSdGFy20q9H4xBzEVItMQ+k3fhkb/G5XxXGbtB4n
- 7Qri4DIoKQpPzStjbvgo9uTLZRhTdJcJOpTbo/lvc1tmhD4vKQm8iZ91Pt08hmlyp6rhxGZkmw5
- LwACnxoJLDSixlc3a+higbwUMr2N6LcQqFj0WoTWwAKaFbQ3Q5bK1Nwvm5e4JzETIUzMRCJldvQ
- t+aREDcKkgTONfqk0EUwoRFuBmQmPL+UHwJhvKBbZh04u8XZZo0XcS5WJV1wzGDXJWSAKNJnnu8
- /aGX498GDayedipK6tzHD86y9VNFlW90PeBwo1vET0ksA+sEcDGRPUiLnieCg2k8g5/L48hPZ3l
- sIjZNqRcYPdXMPEfqiKIIckRrZrxixlrvt8/0FM8VHEDFYFl5AA1BT7YXS1ZlCcfa2mUnpxg6mk
- TfvqODQu7vHHVqPyPI4q+ENEaRv/aGr00tdja+Y8svGvoM0Yq+SKAy011fhtQ9fI6BjJkeBg==
-X-Received: by 2002:a05:6512:3da5:b0:5b4:5c5f:2ade with SMTP id
- 2adb3069b0e04-5b45c5f2cd1mr558340e87.53.1786717358300; 
- Fri, 14 Aug 2026 07:22:38 -0700 (PDT)
-Received: from gmail.com ([195.211.194.156]) by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-5b458beda99sm569721e87.41.2026.08.14.07.22.36
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Aug 2026 07:22:37 -0700 (PDT)
-From: Ilya Chichkov <ilya.chichkov.dev@gmail.com>
-To: qemu-devel@nongnu.org
-Cc: Richard Henderson <richard.henderson@linaro.org>,
- Paolo Bonzini <pbonzini@redhat.com>,
- Alistair Francis <alistair.francis@wdc.com>, qemu-riscv@nongnu.org,
- Ilya Chichkov <ilya.chichkov.dev@gmail.com>
-Subject: [PATCH] accel/tcg: Allow overlapping reads in record_save
-Date: Fri, 14 Aug 2026 17:21:59 +0300
-Message-ID: <20260814142159.3800744-1-ilya.chichkov.dev@gmail.com>
-X-Mailer: git-send-email 2.43.0
+ (Exim 4.90_1) (envelope-from <alistair@alistair23.me>)
+ id 1wuy4q-0008Jt-Ol
+ for qemu-riscv@nongnu.org; Fri, 14 Aug 2026 16:00:29 -0400
+Received: from fhigh-a2-smtp.messagingengine.com ([103.168.172.153])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <alistair@alistair23.me>)
+ id 1wuy4o-0005tM-MR
+ for qemu-riscv@nongnu.org; Fri, 14 Aug 2026 16:00:28 -0400
+Received: from phl-compute-04.internal (phl-compute-04.internal [10.202.2.44])
+ by mailfhigh.phl.internal (Postfix) with ESMTP id B1D9214000DB;
+ Fri, 14 Aug 2026 16:00:25 -0400 (EDT)
+Received: from phl-imap-06 ([10.202.2.83])
+ by phl-compute-04.internal (MEProxy); Fri, 14 Aug 2026 16:00:25 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alistair23.me;
+ h=cc:cc:content-transfer-encoding:content-type:content-type
+ :date:date:from:from:in-reply-to:in-reply-to:message-id
+ :mime-version:references:reply-to:subject:subject:to:to; s=fm3;
+ t=1786737625; x=1786824025; bh=yaC14BGXD4vQWkPG/M5T4oHI+wm/H9j8
+ ko/7a/ICsPs=; b=aFzOhzHOcGL5J2H6F4dl05Oyt8KWdFhME2vbdmalGacm/m6s
+ WZ7rtkqD0+hVQPwdsaEtHL2lgRrnkJm5WU52Wf4toGU2Z/hQ+GmbxWJVC58FhUF8
+ cMY0YD0g6ExLp1xVmLNBtr2h7YE/4PNDdVqkTXC4FZxX7kFy9Z0oQF3bXuIrVmco
+ ZtaagqzGah4Py0CdsjMeGX+4y3Z3AGdRdD4Gq45oJdwgc70+L3GAfn50E7YRo3B/
+ IFZfEtizIcAfaO0P2B87FxR8yXpFw414gFtUTqNbNtk8ceB2VcAiyf7TvEoqjyA0
+ fGmvv5TGrPjF/jjhKWcGg8BJ1kqO94k6ldZhIQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-transfer-encoding
+ :content-type:content-type:date:date:feedback-id:feedback-id
+ :from:from:in-reply-to:in-reply-to:message-id:mime-version
+ :references:reply-to:subject:subject:to:to:x-me-proxy
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1786737625; x=
+ 1786824025; bh=yaC14BGXD4vQWkPG/M5T4oHI+wm/H9j8ko/7a/ICsPs=; b=H
+ fQXUz+AQsR72Zt4P4vkqO04wqFZlu082xadctXr4fz/qUFlxEw5p/TDQvYBjS5OK
+ GjLUM9OAWcFxuJq20wzoemapD/CCufoNIcZgvwGOXl0TAUEG/Hr2T3RtGAr9ZY33
+ ANx+wLRBJFwsuAKKwgc8nSUjrbHYP0lj4kz4MLn9qi/bwal6Vem8BatSzcFoGQX5
+ 3tBKh7pSW8IaFG97s5zaPQq0nyZBWtnkh6TJ4k0oY3M5fgqepineJCTNhhs2IEO4
+ OD08W2gYfknUPxoHHFHU2Q0cdSqFhFlfG6B7U5C1xUxWVNlT11wYzXTxGI9Y44sU
+ l6vY9H2GsFnMN8gQ4iPgA==
+X-ME-Sender: <xms:2HN_auh_F3LaBgWzeCVllNQEptyHSUrYIFWlZfCChTXQet3OHWLLAA>
+ <xme:2HN_ap25WqZNmFS9X-xqsm0mfcHl0LV8Po9AnMmW82KLN_dZQuwwlNe32X8onJjlP
+ 5Za5-R1b4JsK_Ly-r9peiOleWAcIfZhBizRfPHxMPr0QdsgXEOkVA>
+X-ME-Proxy-Cause: dmFkZTGl5LfF/yVBchoiqABTAiXeCindbFiMofX3XS4fdkROMozYJ+P08vaKrd2B3lhkdH
+ B0ufIgsUweWjSMISxaFtrbx0Shgfun1qX7bIwW/EQVUn/fuIYMHsyjUPi2RURMZQ432VDH
+ LdbtkP5XOXTlUB+rJ840xX/y4gf/w2R/ekiTA6GtpGJZ5Wz4kb5eaH33xeLknRQuIHAhSh
+ tfnSl/MGLT/oPiwkKGb4uqryKbE3K4air/EEhB6u+INA4I37kyRwethX1C6CPn51PNbKwn
+ GrRx9JVEMR7RTeGnVlgU2KiUbfpUI6ALp1HdtfL7VhDipO9mKvxkQdYAxxqGe1tbHljTfj
+ gNcQiucPZ40JzRO0+W+yfYP6bGImaMsVVENhquqRDWJBYbxl822SOUQAZbpV9shk1I3EBn
+ DoqTKYcPQOLxB3RauT9UaFkfPmP1v4jVJMcFiNv4H++v0kMVj8exW8BpdPWDyJS6Z15nPr
+ HajZ/1jeh+C94t8wsRol8lRJiEFO566o/P2OC6Eqoyl+NYqjqbrmWtx2MLPb4MH9iEbz2k
+ F7B3999C8ldHZmcghQbkOyp3v3peUrTgh/YrO5mbnoKdKwt2ACKLb9SD2fyhHS8vaknqWr
+ 6hhVSOiSLIpea0cvWiJtZF3XFRwniCM9RdU2S/j5VAqYcXMd+2/4dOhAi32Q
+X-ME-Proxy: <xmx:2HN_aiCzg_UFdUi4AwzcWJYcyseumjo9fAGDL2TwpwjLi681YF-lpw>
+ <xmx:2HN_apHrTTUXOv6vBV-_XF2ta_Mie4DboaCmQaWxG1JCtGDmh94nOA>
+ <xmx:2HN_aqDLIw8y967yUnA-zAmM-C8knt1McNDDIYW3HTotdlZuxaG74Q>
+ <xmx:2HN_anl0JEOCxiU0KCaUGfsUmlGsQDRSKp4EreMadf-g-FG1xhZk-A>
+ <xmx:2XN_akfEw0phuYtk0-kNjHmSjk8b-Kdfk71_w5cHcGhHjnULIqLpgEKf>
+Feedback-ID: ifd214418:Fastmail
+Received: by mailuser.phl.internal (Postfix, from userid 501)
+ id 7B2AC240009B; Fri, 14 Aug 2026 16:00:24 -0400 (EDT)
+X-Mailer: MessagingEngine.com Webmail Interface
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::12c;
- envelope-from=ilya.chichkov.dev@gmail.com; helo=mail-lf1-x12c.google.com
-X-Spam_score_int: 12
-X-Spam_score: 1.2
-X-Spam_bar: +
-X-Spam_report: (1.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
- DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_SBL_CSS=3.335, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+X-ThreadId: AbA2t0igsNsw
+Date: Fri, 14 Aug 2026 16:00:04 -0400
+From: Alistair <alistair@alistair23.me>
+To: "Daniel Henrique Barboza" <daniel.barboza@oss.qualcomm.com>,
+ "Joel Stanley" <joel@jms.id.au>
+Cc: "Palmer Dabbelt" <palmer@dabbelt.com>, "Weiwei Li" <liwei1518@gmail.com>, 
+ "Liu Zhiwei" <zhiwei_liu@linux.alibaba.com>,
+ "Chao Liu" <chao.liu.zevorn@gmail.com>, qemu-riscv@nongnu.org,
+ "Max Chou" <max.chou@sifive.com>, "Michael Neuling" <mikey@neuling.org>
+Message-Id: <da7e0e41-50d0-4fbf-a733-567a563f2692@app.fastmail.com>
+In-Reply-To: <7c85ba9f-a9ef-4880-9905-61f6397c23b4@oss.qualcomm.com>
+References: <6315a319-19d9-4533-83ed-eaba9c0b29d5@app.fastmail.com>
+ <CACPK8Xe9JVggXzX9kku-zm7RYzM++fqcr=fx-MdkKiViHdiMYw@mail.gmail.com>
+ <ad259828-65b3-4c4a-bf3f-73cc195c19f5@alistair23.me>
+ <68917b26-32a2-49e6-94ea-1ca587948f23@app.fastmail.com>
+ <e282de71-5390-41d8-8a8d-6156aae01079@alistair23.me>
+ <7c85ba9f-a9ef-4880-9905-61f6397c23b4@oss.qualcomm.com>
+Subject: Re: Regular QEMU RISC-V Call
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=103.168.172.153;
+ envelope-from=alistair@alistair23.me; helo=fhigh-a2-smtp.messagingengine.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
+X-Spam_bar: --
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Fri, 14 Aug 2026 15:35:00 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -101,78 +116,139 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-record_save() assumed that a target reads the bytes of an insn as a
-strictly ascending sequence of adjacent chunks, and asserted that each
-read begins exactly where the previous one ended.
+On Wed, 22 Jul 2026, at 5:02 AM, Daniel Henrique Barboza wrote:
+> 
+> 
+> On 7/21/2026 3:37 PM, Alistair Francis wrote:
+> > On 17/6/26 09:18, Alistair wrote:
+> >> On Tue, 16 Jun 2026, at 8:35 PM, Alistair Francis wrote:
+> >>> On 16/6/26 16:07, Joel Stanley wrote:
+> >>>> On Thu, 11 Jun 2026 at 13:52, Alistair <alistair@alistair23.me> wrote:
+> >>>>> For the time, I'm picking Wednesday the 17th of June at 10AM AEST (UTC+10). Hopefully that works ok for everyone. If it doesn't let me know and we might be able to move it around.
+> >>>
+> >>> That means the meeting should start in a little less then 13 and a half
+> >>> hours! I'll send out a Teams invite tomorrow
+> > 
+> > Hey!
+> > 
+> > I realised that it's now been a month. I leave for holidays in a few days, am currently recovering from some sickness and don't have any agenda items. So let's skip this month and start again in August
+> 
+> In fact the meeting was yesterday according to the calendar invite Palmer sent
+> :D figured that ppl forgot about it and I dropped the call after 10 minutes.
+> 
+> If we're going to stick with Palmer's existing invite the next meeting will be
+> August 18th 10AM UTC+10.
 
-That assumption no longer holds for riscv.  Since f9eaa1542b
-("target/riscv: support atomic instruction fetch (Ziccif)"),
-decode_opc() loads a full aligned word whenever pc is 4-byte aligned,
-even when the insn turns out to be a 2-byte compressed one, so the
-record may already hold bytes past the end of the insn being
-translated.  When such a compressed insn sits at page offset 0xffc,
-pc_next becomes 0xffe, which is within MAX_INSN_LEN of the end of the
-page, and riscv_tr_translate_insn() probes the next insn to decide
-whether it would cross the page boundary.  That probe reads at offset
-2 while the record already covers [0,4), and the assert fires:
+My Teams meeting thing had the 17th of August.
 
-  qemu-system-riscv32: accel/tcg/translator.c:395: record_save:
-  Assertion `offset == db->record_start + db->record_len' failed.
+I only get back on the 17th, so let's do the Thursday the 17th at the same time.
 
-record_save() is only reached when the insn is fetched from MMIO, so
-this is visible on boards that execute code from a region created with
-memory_region_init_io(), such as an XIP flash window mapped over a
-serial flash controller.
+So 2 days later then Palmers event. Does that work?
 
-Both sides of the collision are correct: the wide fetch is required for
-Ziccif atomicity, and the probe is required for correct fault reporting
-at a page boundary, per 00c07344fa ("target/riscv: Make translator stop
-before the end of a page").  Unlike a86d3352ab ("target/riscv: do not
-use translator_ldl in opcode_at"), where a non-translation caller had
-no business using translator_ld*, the probe here is a genuine
-translation read whose bytes must be recorded.
+> 
+> As an agenda for next call I have a couple of topics:
+> 
+> - ongoing Debug related work.  Hopefully we'll have some Debug 0.13/1.0 patches
+> under review by that date;
 
-Relax the invariant instead.  Keep requiring that a read neither moves
-backwards nor leaves a gap, but let a read overlapping the recorded
-range extend it only by the bytes past its end.
+I see them. Hopefully by then I can review them.
 
-Fixes: f9eaa1542b ("target/riscv: support atomic instruction fetch (Ziccif)")
-Signed-off-by: Ilya Chichkov <ilya.chichkov.dev@gmail.com>
----
- accel/tcg/translator.c | 14 +++++++++++---
- 1 file changed, 11 insertions(+), 3 deletions(-)
+Alistair
 
-diff --git a/accel/tcg/translator.c b/accel/tcg/translator.c
-index cd7d079fe0..57daded60f 100644
---- a/accel/tcg/translator.c
-+++ b/accel/tcg/translator.c
-@@ -387,14 +387,22 @@ static void record_save(DisasContextBase *db, vaddr pc,
-      * Either the first or second page may be I/O.  If it is the second,
-      * then the first byte we need to record will be at a non-zero offset.
-      * In either case, we should not need to record but a single insn.
-+     *
-+     * A read may re-read bytes that are already recorded: a target may
-+     * fetch a whole aligned word to decode an insn (e.g. riscv Ziccif),
-+     * then probe the following insn, which lies within that same word.
-+     * Such a read extends the record only by the bytes past its end.
-      */
-     if (db->record_len == 0) {
-         db->record_start = offset;
-         db->record_len = size;
-     } else {
--        assert(offset == db->record_start + db->record_len);
--        assert(db->record_len + size <= sizeof(db->record));
--        db->record_len += size;
-+        int end = offset - db->record_start + size;
-+
-+        assert(offset >= db->record_start);
-+        assert(offset <= db->record_start + db->record_len);
-+        assert(end <= sizeof(db->record));
-+        db->record_len = MAX(db->record_len, end);
-     }
- 
-     memcpy(db->record + (offset - db->record_start), from, size);
--- 
-2.43.0
-
+> - there is a chance that common efforts led by ARM folks (single binary, multi accel ..)
+> will spill in the RISC-V tree.  I'll talk with Phil and Pierrick later this week and see
+> if there's something to do on our side.
+> 
+> 
+> Cheers,
+> Daniel
+> 
+> 
+> > 
+> > Alistair
+> > 
+> >>
+> >> Call in details are below. Starting in 40 minutes!
+> >>
+> >> ________________________________________________________________________________
+> >> Microsoft Teams meeting
+> >>
+> >> Join:
+> >> https://teams.microsoft.com/meet/275503449279724?p=C2D0EDrqxwFb5LuRnB
+> >>
+> >> Meeting ID:
+> >> 275 503 449 279 724
+> >>
+> >> Passcode:
+> >> kS9Vg23i
+> >>
+> >> ________________________________________
+> >> Need
+> >>   help? |
+> >> System reference
+> >> Dial in by phone
+> >>
+> >> +1
+> >>   408-627-4258,,498330396#
+> >> United States, San Jose
+> >> Find
+> >>   a local number
+> >> Phone conference ID:
+> >> 498 330 396#
+> >>
+> >> Join on a video conferencing device
+> >>
+> >> Tenant key:
+> >> wdc@m.webex.com
+> >>
+> >> Video ID:
+> >> 119 833 426 2
+> >>
+> >> More
+> >>   info
+> >> For organizers:
+> >> Meeting
+> >>   options |
+> >> Reset dial-in PIN
+> >>
+> >> ________________________________________________________________________________
+> >>
+> >>>
+> >>>>
+> >>>> I'll be on, hopefully in the right timezone this time around. 9:30 ACST.
+> >>>>
+> >>>>> If anyone has anything they want to discuss let me know. I can send an agenda and confirmed meeting time out in a few days.
+> >>>>
+> >>>> Two agenda items:
+> >>>>
+> >>>> * RISC-V Code Policy
+> >>>>
+> >>>> https://lore.kernel.org/qemu-riscv/057cb481-c6f3-489c-aad7-1bee152fc336@alistair23.me/
+> >>>>
+> >>>> Good idea writing down your expectations somewhere everyone can see.
+> >>>> Do you want to raise it as a topic and we can talk it through?
+> >>>
+> >>> Yep!
+> >>>
+> >>>>
+> >>>> * Machine model use cases
+> >>>>
+> >>>> I wanted to share my perspective on the system emulator machines, what
+> >>>> they are for, who they are for, and hear what others had to say.
+> >>>
+> >>> Sounds good as well
+> >>>
+> >>> Alistair
+> >>>
+> >>>>
+> >>>> See you on the call tomorrow.
+> >>>>
+> >>>> Cheers,
+> >>>>
+> >>>> Joel
+> >>>
+> >>>
+> > 
+> 
+> 
 
