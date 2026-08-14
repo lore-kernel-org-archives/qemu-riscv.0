@@ -4,79 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4118C5CFCF
-	for <qemu-riscv@archiver.kernel.org>; Fri, 14 Aug 2026 15:29:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCFCDC5CFC1
+	for <qemu-riscv@archiver.kernel.org>; Fri, 14 Aug 2026 15:51:26 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wutq7-0008WH-Qf; Fri, 14 Aug 2026 11:28:59 -0400
+	id 1wuuBT-0003SN-Lx; Fri, 14 Aug 2026 11:51:03 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair@alistair23.me>)
- id 1wutq6-0008VW-5z; Fri, 14 Aug 2026 11:28:58 -0400
+ id 1wuuBS-0003S4-DD; Fri, 14 Aug 2026 11:51:02 -0400
 Received: from fout-a2-smtp.messagingengine.com ([103.168.172.145])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair@alistair23.me>)
- id 1wutq4-0005Pg-2j; Fri, 14 Aug 2026 11:28:57 -0400
-Received: from phl-compute-12.internal (phl-compute-12.internal [10.202.2.52])
- by mailfout.phl.internal (Postfix) with ESMTP id 963F4EC013B;
- Fri, 14 Aug 2026 11:28:54 -0400 (EDT)
-Received: from phl-frontend-04 ([10.202.2.163])
- by phl-compute-12.internal (MEProxy); Fri, 14 Aug 2026 11:28:54 -0400
+ id 1wuuBQ-0004n7-BW; Fri, 14 Aug 2026 11:51:02 -0400
+Received: from phl-compute-02.internal (phl-compute-02.internal [10.202.2.42])
+ by mailfout.phl.internal (Postfix) with ESMTP id BBCEAEC019C;
+ Fri, 14 Aug 2026 11:50:58 -0400 (EDT)
+Received: from phl-frontend-03 ([10.202.2.162])
+ by phl-compute-02.internal (MEProxy); Fri, 14 Aug 2026 11:50:58 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alistair23.me;
  h=cc:cc:content-transfer-encoding:content-type:content-type
  :date:date:from:from:in-reply-to:in-reply-to:message-id
  :mime-version:references:reply-to:subject:subject:to:to; s=fm3;
- t=1786721334; x=1786807734; bh=k5txefdKVlBQTruGaTnr4/IznN2uBx9D
- txM/DOqgE0o=; b=GmYlaSG0eLg8lHwDUC9IhASf9S+tYK+NuoNrxcFaoh+eUmPr
- dvJLrwS5E3W0VUs24IOGv9sqLDJR63KlExA6h8fUOcim1iDKA5O0fcc8KnskVHhv
- oRixEzcxIok/r7MYI9/+Ppl5bFZNwT7jUauRrssQXlFS7/OBkeNHKWxaZCnmqgVQ
- UEsqilFufYmu/SPjFV9OSIE0AWgj07CcDEnIQgAsXY7RwBjeVWkvpJOdZap4VWhd
- K6qit1Uy/Frp4k6eF9JfOiWz3AggP6dtlvYG2R7EKEKUqD63n056y4vplRA2s6jI
- jsjr0ddcxvmkXusIuP7/G3VShmn9YS0GYBkP9A==
+ t=1786722658; x=1786809058; bh=HZZdXR4pgMzKpLWzK6qwwU8XPOaOufQG
+ q40+Nzb+hos=; b=bjOKkZS3M7UOmdlv4MGtomBVfrbThDhmXpdAYi8cY7Kmy/7V
+ DHFMKudga53zDcqepn/4SaEsG45622MKkhA/sqM2QnVi2PcOpy+UPbxq5IIyJJVO
+ Mc8RsT5f+1CUhRVojd5kzW/f4xM7e9FMD5W1Gv8dV47UKagyu4x60KtIdUumsa/l
+ UMpymVyMwWQFAopuMuTxwLHVvxqK8tks56mqVIforblvwlDML8uf/7Yb/bd7keaX
+ 063yHdapaKxWwk/wxrQKawkctFh7S24A0y9Y2BdfBUctkfnV8cMNRb70rbFFFD7a
+ 4YhdsvW0bWOlJKHeEOo9CFMoWEd1DHeUIzB2Cw==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-transfer-encoding
  :content-type:content-type:date:date:feedback-id:feedback-id
  :from:from:in-reply-to:in-reply-to:message-id:mime-version
  :references:reply-to:subject:subject:to:to:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1786721334; x=
- 1786807734; bh=k5txefdKVlBQTruGaTnr4/IznN2uBx9DtxM/DOqgE0o=; b=H
- 89nYy/Ovn5JGOhm+Y0pB0VKjB9Ba82bAaWWJE6EHHXIfeucMssG2QqYu4JNFDF4/
- GhfvF/3rQVGX3usM4oAjGH3jOzBA5+1hdJj2w27o466JSDcZcvsORsB6uoRA+zWr
- 5/E1SpYvweVL/QTHpTFQQKx287JCAQLVzLry4cUwaOKjH+00YK4wOG1YK8+qB2tP
- SlXEDFVfiEeGwL106YqTZ9/sUDy6nK42s4kxuPGv/fWVt26MpuBusxPwCnDQc6LY
- QZGjYqkc1+uBJwbw00GVHptBaQTuz6y4cXp8wdmi6IyvM19TgQF7KcAkg5nEqEh+
- vtoF1CVhPuTpUYuWCruzA==
-X-ME-Sender: <xms:NjR_atzmY0MN9SvqRMSzfKi9HSgz9c5m3R4bb1IsjHuEyrLSdiToTw>
- <xme:NjR_atZ0VBiYM5V1IX-wsldqDB0FI07wFiwktruNZvUkDYIPACQDONssMWg2-fq7W
- MMrJrzVWro3n-cEZMj-5x3UQDajEnbbvYYPJKh0Uw5jg0hMw1VMRx7G>
-X-ME-Received: <xmr:NjR_avQMCfQfpzGuXBYH2qm1lI9xjYYEet_TGPJFQIOz67KjCt21byjua471Ye_X6OA86g>
-X-ME-Proxy-Cause: dmFkZTFlcj0k83MDKof4hWght9wvWbkOEwpuDE0fkMrVuocNeArmHJvdtT3rMdqqS6m02n
- 7G9VwTmOi+iFCwtEEtGd5g+HURCZegAA3VRKonw6oNd9hCxrBsSdMb5WcJxoxnocI1jCs0
- LjVabEAzdNLrkARToj04UtE1/VO8+PN1epJRjYUcf3ArmuxMm5RJIT4Yt+xZbVBidK8PbN
- wwoA5U9URoTlQlh4RcNcswyv+srWLgMXTBQUhLL0uGD0WJmcf5qKks7Jma28s6ep1TiN8o
- gNaImo+biO3HSch2MzzB7c6Ah++9GMQjO7ZiFNRFf78KMv6sxke13FdjYxkStrg/08hDmz
- FHH2AYbXoHcDOr1MMoZJ8b5UcE2+kt7Dh2wInlBpKXQKjZrQUdfdQBMhXtO3YoTYC8xgvY
- KKINEzOsZSh49VWzaJecCc4qtKgN0ZKJWUUGlklCNHWxbSwzARkLkCR5M/7x5EFnw+m37o
- lu997ih6/t62mAWWFkgJGnKgXz/avw+MIC/MZ+07UihBcSpWJArejM097K2fhwFCqYeJ/N
- SnNPf6kVkac/DtqSKkcdhN3ZsXmj3JAzAr2Nh2H10C4KOBlGnMhvr4mBjg3QWKjGDD4vaF
- waeX67j7ac3tjsf9EajQpBLslWrSyrHBfO/Dmh2rmNZLTxGDtCkd0xAyVkCQ
-X-ME-Proxy: <xmx:NjR_anx8nPV_i1MxzAiM0rNNHovZFAySx9Zd_IesEgsGrIZNkU8YGg>
- <xmx:NjR_ap12suOpRHhduf-3-gINcqyxZX9g8sNKnKtTy1sQp7_7ZDD3Ew>
- <xmx:NjR_at6caaH0Ium77K0AxXCgBmN1QzrLJVVo-_NgtIhfeMqb8sOimA>
- <xmx:NjR_akV00GqbHHJXZ25f1RuRaG7c-vYliRF5sQUGJGugtF4EdJ1u2g>
- <xmx:NjR_aiak4Qk7B4DS-38mf9vtb0J_1os2oZ5vakhi7TcMUMO-P27TToXw>
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1786722658; x=
+ 1786809058; bh=HZZdXR4pgMzKpLWzK6qwwU8XPOaOufQGq40+Nzb+hos=; b=J
+ ZJ1r4jF/eVSxYQBMytFJt1cQ8UgMc7HDx669NrXwVxtXWAWnTgir3E2VbvSiNSaO
+ 1bszDev7DfgwRKmWAcBS3jCUQ7UXP8kh9RbRt5ToDzyARKs2VCRjlHW8HXZFv0yC
+ kdo/ZA9ODYTdkkrP2ixTZBY4qYRemjKtDauOqGTb0h80U1i8LQATTpsGVIA21IFS
+ kiFKQwt2DVJp74Tb5VCs7AvJuNRr5hXZUAB3K/a1FWDX962pwbUwh8rGDUzTfsKn
+ NkdDXaaY0Q7ke18/gq3rDk4Etke7wx5WSWozkz9Lpp/y/vV336knmdiCf6bb9e5Y
+ RDEWvHVKL4Ib+zzdvQgtg==
+X-ME-Sender: <xms:Yjl_apcT2ZlpmOkV3IXRnlx7WSBX2HOfMBweEAJ_N7m1yI49XwXiww>
+ <xme:Yjl_ahRhiNxPs-vOXiiMAa_3tIMOAAa_bm7pBUN7dH8mB8_Bo6W9WCGdwKM5EdH8c
+ -03XZQdrhilUvo6-EL9hJ77tId9sfcX91-9jKV23DZc5FTW2P3rwww>
+X-ME-Received: <xmr:Yjl_aiapk7dB7l9jcucnfzb1DFVLZYVeggKOhhiaB2iGbmWwHNo9I82HT-5fVrLbWCCpZQ>
+X-ME-Proxy-Cause: dmFkZTGu3eW0Z/5hbWCQZQFQyyykLEGLGSUhTjp8ZIY2edQjwBxOaYxzfJTxeIOnQ4+oJ+
+ U+s7XccINIyJ/HcMIQJebuaP5fxe5NyMyiTdcXL85zqOXzg5h7K7aCDdoZFjY/WZgkWgwQ
+ JKUiAT/mJ0N6KYfNfouOgfnzAv2kI3eqi9/yO6kfaaoqIuvjhmcijqNXzksaAh4tACrU+X
+ cuPVr0aRM48UX8cZ8I8lDHHydozGZPYSbNp3VEt9iG7mGikUCeyl47qJM61f9qwgtBy7It
+ Pq/hZoru/IL2ZqhBBgNLag5fb9EBYipdCV/OJENQN+eUCvp3NNhyB6MgOir6v6Ege3T8Zl
+ JtRrdufXBrzzXObO4l5kejBAnXutyWg6gh/4IOz0scKVb1rsx8FmrLceiIBh7oQWYEtAXO
+ xRRszLNkSsPQWAEoKsRGfPw1mAhqoGjXy2sJyIrGJtDiBE7+xScnQ8kTTGKLl0g0mtDN0k
+ XFWRaRpiueNTSfQCdi6kLcPNc0eMa8kpo2QA0Gs43SADmDy5Kyp1n46efTSEjtDiCLCP7n
+ G5xFuMd4pvwUqFeP/fcZ88+lShrJuEk1Bve01Kwp5r8EhHRvIBjTnNEqA7/GUcSfNwDwdP
+ vMWqOqNzsNN7Fld7+pXtwc+dPUVJSGcvC2zt0sLHnS3Rj1m/8Lc/skj2Jpvg
+X-ME-Proxy: <xmx:Yjl_akckSEWGk7GlX-UvswX0bFaPB00qoLzZH8HoB-hVoTaqAHrwXA>
+ <xmx:Yjl_ajL6T-di3HR9c7idHDKYzaypXvrAz2d8JIXxU9RyvWi4eUTKNw>
+ <xmx:Yjl_ahKR187htOLSwzpmK95KWTV3AozHwg7LoDr1ZGUx15NyOdBxxA>
+ <xmx:Yjl_aiV_9T50DadwUU5vsxbfxDa-eae3cqLfin1eQ1bypRLDEw3tWQ>
+ <xmx:Yjl_aiuoMIszbS4L702yO_yux4gIfgIzWonbxUL53FZ5pH2io_xIaXvr>
 Feedback-ID: ifd214418:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
- 14 Aug 2026 11:28:54 -0400 (EDT)
-Message-ID: <544d0aec6fc1edc1fd3d16f2f2adc659b9c57715.camel@alistair23.me>
-Subject: Re: [PATCH v2 00/52] disas/riscv: Reorganize the disassembler
+ 14 Aug 2026 11:50:57 -0400 (EDT)
+Message-ID: <d6664eb41fb32ff02503e5eb15fced34b52cc2c1.camel@alistair23.me>
+Subject: Re: [PATCH] tests/qtest: remove trace output from k230 watchdog test
 From: Alistair <alistair@alistair23.me>
-To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, Alistair.Francis@wdc.com
-Date: Sat, 15 Aug 2026 01:28:53 +1000
-In-Reply-To: <20260812223142.349142-1-richard.henderson@linaro.org>
-References: <20260812223142.349142-1-richard.henderson@linaro.org>
+To: Chao Liu <chao.liu@processmission.com>, alistair.francis@wdc.com, 
+ Fabiano Rosas <farosas@suse.de>, Laurent Vivier <lvivier@redhat.com>
+Cc: bin.meng@processmission.com, Paolo Bonzini <pbonzini@redhat.com>, 
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Date: Sat, 15 Aug 2026 01:50:57 +1000
+In-Reply-To: <20260813054329.35425-1-chao.liu@processmission.com>
+References: <20260813054329.35425-1-chao.liu@processmission.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 User-Agent: Evolution 3.60.2 (by Flathub.org) 
@@ -105,90 +107,17 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, 2026-08-12 at 15:30 -0700, Richard Henderson wrote:
-> One of my pet peeves is the non-automatic addition of indexes to
-> rv_op
-> which must match entries in rvi_opcode_data[].
+On Thu, 2026-08-13 at 13:43 +0800, Chao Liu wrote:
+> The interrupt mode test does not depend on trace output, but passes a
+> trace file to QEMU. This makes startup fail when QEMU is built
+> without
+> the log or simple trace backend, so qtest cannot connect.
 >=20
-> Reorganize the disassembler to pass around pointers to individual
-> opcodes
-> rather than pointer to table + index.=C2=A0 To do that, rewrite how pseud=
-o
-> ops
-> are processed, replacing indexes with pointers.=C2=A0 Merge the
-> decompression
-> of compressed opcodes into the pseudo ops mechanism.
+> Drop the unnecessary trace option.
 >=20
-> Fix quite a few bugs found in the process, mostly related to isa
-> level.
+> Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/4126
 >=20
-> Changes for v2:
-> =C2=A0 - Rebase on riscv-to-apply.next, which now contains Tiancheng's
-> fixes.
-> =C2=A0 - Adjust the DECOMP macro to make clang happy.
-> =C2=A0 - new patch: "disas/riscv: Skip post-processing of illegal insns"
->=20
-> The only unreviewed patch is the new one.
->=20
->=20
-> r~
->=20
->=20
-> Richard Henderson (52):
-> =C2=A0 disas/riscv: Move operand extractors earlier in file
-> =C2=A0 disas/riscv: Reduce rv_insn to uint32_t
-> =C2=A0 disas/riscv: Tidy dec initialization in disasm_inst
-> =C2=A0 disas/riscv: Pass rv_opcode_data pointer to decode_inst_operands
-> =C2=A0 disas/riscv: Pass rv_opcode_data pointer to/from
-> =C2=A0=C2=A0=C2=A0 decode_inst_decompress
-> =C2=A0 disas/riscv: Pass rv_opcode_data pointer to/from
-> =C2=A0=C2=A0=C2=A0 decode_inst_lift_pseudo
-> =C2=A0 disas/riscv: Pass rv_opcode_data pointer to format_inst
-> =C2=A0 disas/riscv: Tidy disasm_inst main loop
-> =C2=A0 disas/riscv: Set dec->opcode_data in decode function
-> =C2=A0 disas/riscv: Drop explicit zero of rv_opcode_data fields
-> =C2=A0 disas/riscv: Drop useless const in structures
-> =C2=A0 disas/riscv: Drop codec from rv_decode
-> =C2=A0 disas/riscv: Handle c.addi4spn imm !=3D 0 during decode
-> =C2=A0 disas/riscv: Simplify c.addi
-> =C2=A0 disas/riscv: Handle c.lui imm !=3D 0 during decode
-> =C2=A0 disas/riscv: Handle c.{srli,srai} imm during decode
-> =C2=A0 disas/riscv: Handle c.slli imm !=3D 0 during decode
-> =C2=A0 disas/riscv: Do not recognize c.{addw,subw} with rv32
-> =C2=A0 disas/riscv: Remove rvcd_imm_nz
-> =C2=A0 disas/riscv: Unify decomp_rv{32,64,128}
-> =C2=A0 disas/riscv: Drop always true branch pseudos
-> =C2=A0 disas/riscv: Handle aliases of csrrw during decode
-> =C2=A0 disas/riscv: Handle aliases of csrrs during decode
-> =C2=A0 disas/riscv: Handle aliases of csrrwi during decode
-> =C2=A0 disas/riscv: Break pseudo loop for jal and jalr
-> =C2=A0 disas/riscv: Allow decode_inst_lift_pseudo to loop
-> =C2=A0 disas/riscv: Handle decompression via decode_inst_lift_pseudo
-> =C2=A0 disas/riscv: Drop format from DECOMP insns
-> =C2=A0 disas/riscv: Tidy rv_comp_data terminators
-> =C2=A0 disas/riscv: Chain "ret" pseudo off "jr" pseudo
-> =C2=A0 disas/riscv: Chain "nop" pseudo off "mv" pseudo
-> =C2=A0 disas/riscv: Use rv_codec_illegal for pseudos
-> =C2=A0 disas/riscv: Simplify some insn decompressions
-> =C2=A0 disas/riscv: Store op pointer in rv_comp_data
-> =C2=A0 disas/riscv: Return rv_opcode_data pointer from decoders
-> =C2=A0 disas/riscv: Skip post-processing of illegal insns
-> =C2=A0 disas/riscv: Reject all of OP-32 and OP-IMM-32 for RV32
-> =C2=A0 disas/riscv: Fix rv32 encoding of zext.h
-> =C2=A0 disas/riscv: Fix isa decoding of rev8
-> =C2=A0 disas/riscv: Fix typo in th.lbib format
-> =C2=A0 disas/riscv: Split ventana_opcode_data
-> =C2=A0 disas/riscv: Split xlrbr_opcode_data
-> =C2=A0 disas/riscv: Split xthead_opcode_data
-> =C2=A0 disas/riscv: Move rv_op_illegal to riscv.c
-> =C2=A0 disas/riscv: Split out riscv-op.c.inc
-> =C2=A0 disas/riscv: Merge all mop.r.n to one pattern
-> =C2=A0 disas/riscv: Merge all mop.rr.n to one pattern
-> =C2=A0 disas/riscv: Merge all c.mop.n to one pattern
-> =C2=A0 disas/riscv: Tidy decode of c.mop.n
-> =C2=A0 disas/riscv: Tidy decode of mop.r.n and mop.rr.n
-> =C2=A0 disas/riscv: Split rvi_opcode_data
-> =C2=A0 disas/riscv: Sort riscv-op.c.inc
+> Signed-off-by: Chao Liu <chao.liu@processmission.com>
 
 Thanks!
 
@@ -196,34 +125,23 @@ Applied to riscv-to-apply.next
 
 Alistair
 
+> ---
+> =C2=A0tests/qtest/k230-wdt-test.c | 2 +-
+> =C2=A01 file changed, 1 insertion(+), 1 deletion(-)
 >=20
-> =C2=A0disas/riscv-xlrbr.h=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0 |=C2=A0=C2=A0=C2=A0 4 +-
-> =C2=A0disas/riscv-xthead.h=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0 |=C2=A0=C2=A0 24 +-
-> =C2=A0disas/riscv-xventana.h=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=
-=C2=A0=C2=A0=C2=A0 4 +-
-> =C2=A0disas/riscv.h=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0=C2=A0 46 +-
-> =C2=A0disas/riscv-xlrbr.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0 |=C2=A0=C2=A0 57 +-
-> =C2=A0disas/riscv-xthead.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0 |=C2=A0 503 +--
-> =C2=A0disas/riscv-xventana.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=
-=C2=A0=C2=A0 23 +-
-> =C2=A0disas/riscv.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | 6390 +++++++++++--------------=
-------
-> --
-> =C2=A0disas/riscv-op.c.inc=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0 |=C2=A0 913 +++++
-> =C2=A0disas/riscv-xlrbr-op.c.inc=C2=A0=C2=A0=C2=A0 |=C2=A0=C2=A0=C2=A0 8 =
-+
-> =C2=A0disas/riscv-xthead-op.c.inc=C2=A0=C2=A0 |=C2=A0 125 +
-> =C2=A0disas/riscv-xventana-op.c.inc |=C2=A0=C2=A0=C2=A0 2 +
-> =C2=A012 files changed, 3411 insertions(+), 4688 deletions(-)
-> =C2=A0create mode 100644 disas/riscv-op.c.inc
-> =C2=A0create mode 100644 disas/riscv-xlrbr-op.c.inc
-> =C2=A0create mode 100644 disas/riscv-xthead-op.c.inc
-> =C2=A0create mode 100644 disas/riscv-xventana-op.c.inc
+> diff --git a/tests/qtest/k230-wdt-test.c b/tests/qtest/k230-wdt-
+> test.c
+> index c8eaeaf1ae..b1131f42e3 100644
+> --- a/tests/qtest/k230-wdt-test.c
+> +++ b/tests/qtest/k230-wdt-test.c
+> @@ -76,7 +76,7 @@ static void test_counter_restart(void)
+> =C2=A0
+> =C2=A0static void test_interrupt_mode(void)
+> =C2=A0{
+> -=C2=A0=C2=A0=C2=A0 QTestState *qts =3D qtest_init("-machine k230 --trace
+> k230_*,file=3Dk230.log");
+> +=C2=A0=C2=A0=C2=A0 QTestState *qts =3D qtest_init("-machine k230");
+> =C2=A0
+> =C2=A0=C2=A0=C2=A0=C2=A0 /* Set interrupt mode and enable watchdog */
+> =C2=A0=C2=A0=C2=A0=C2=A0 qtest_writel(qts, WDT_BASE + K230_WDT_CR,
 
