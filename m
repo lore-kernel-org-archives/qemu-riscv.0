@@ -4,119 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E639C5CFCF
-	for <qemu-riscv@archiver.kernel.org>; Fri, 14 Aug 2026 15:51:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DD7FC5CFCF
+	for <qemu-riscv@archiver.kernel.org>; Fri, 14 Aug 2026 15:53:08 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wuuC0-0003c7-Mr; Fri, 14 Aug 2026 11:51:36 -0400
+	id 1wuuDH-0004Ya-HG; Fri, 14 Aug 2026 11:52:55 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <flamboyant.h.01@gmail.com>)
- id 1wuuBv-0003Yh-VM
- for qemu-riscv@nongnu.org; Fri, 14 Aug 2026 11:51:31 -0400
-Received: from mail-yx1-xb132.google.com ([2607:f8b0:4864:20::b132])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <flamboyant.h.01@gmail.com>)
- id 1wuuBu-0004zI-Kk
- for qemu-riscv@nongnu.org; Fri, 14 Aug 2026 11:51:31 -0400
-Received: by mail-yx1-xb132.google.com with SMTP id
- 956f58d0204a3-66825847b2cso1322180d50.3
- for <qemu-riscv@nongnu.org>; Fri, 14 Aug 2026 08:51:29 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1786722689; cv=none;
- d=google.com; s=arc-20260327;
- b=HgWfg3NB1ghN7JDCkA0zRbveRtPNYqfR5eHEqbKxsm1YfL3nNBcd2GFOloVPoV3FpA
- oj7bvfg3QnmdjGaHjmgT9y1h4OcjDfpXs/16yyLQP/OpHsG7XoWQfppkwVsxhDYk6+sL
- OK39y9kt1O6hwX40APQSxMmDmduHzAEBU5M+ZOheQyhMMpUTFG9g8De2mdOX4EGd8M7f
- lXFYykSlUv8BHoeswyYxH3Emi5IQL64f/Ot8WPDk5EkjWrhanx6PkhYgwDQjLnrWql5l
- sKQrMDJXlf80NrD7REzT7d4wueZdT08KZ3+y+u2AmJ3/0jUmJ+Xzjn/8mGzfafd6TM+2
- R/Xw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=dUhBMO8NC+eAqyDxPKMtSw8zgeFz//KtjkJmG3llBVA=;
- fh=Lt5AKVOjIwXAvlWLdckarz1KX/t6V8qltLl4xycnzfE=;
- b=Xy7o1qAsqOW4dXtOhsNmKhXR0yAmUiAhX37bWpCbPfmbMeWJqTKo5F9jm6Uh43n2h+
- had0Kx8GfX9xzUw/MQ2p/mIK1w7CR/Yfz3GAs9sC0ymwoZs7n7FrhkdiOOLhqQ2JsCA2
- N1OEq5379r0Jy3r32Bl87BUBY1tJ2h9OmVYm498sQg1E9kX5IrzsFbFhxtoNFT4vgnRU
- 9OUfDCfhsLsbeLK0L5nn/RX4nEvB9sc+zbBBCfWDwqRGzYgJhDdm0+939diEg0+kf3cg
- Y0XP6MRwOa9pHW9u8siutyuDcOrN0WHk+/locNJ3dnfTAWf/doKmBtw0njgs6+Vvkw/g
- jiSg==; darn=nongnu.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1786722689; x=1787327489; darn=nongnu.org;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=dUhBMO8NC+eAqyDxPKMtSw8zgeFz//KtjkJmG3llBVA=;
- b=CZ+qUZk3dlOIO8BFng8NWnmQcKYoau+iIlv52EN48Zbuex0uHVd4BPmIjUoivt1aZt
- o5CDajcYOlxzr5ncUE/O/EsyQrII9OR3ImAh+RBex4cPc0yTvkzkXhAKTioRGLkjzXHS
- zIz1Q8NpUIiI0o0A6jzWqymUcRUffx4FErodpzbx7G7phEnZIRGV9yLe4mz72f2HdpIO
- FEO6Jj79ga43TWMZzxX6Xbs6Rw0j7CbBFhvlt14rVcWMQm/s+EdkEL/adYR8a0cijPz8
- RsJhj3xo8GdJZ4FnVbDPUmjuOBp4TF301dQk4sPucaqiJFitkxk13m8sshncaOzaj+GN
- P+Vg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786722689; x=1787327489;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=dUhBMO8NC+eAqyDxPKMtSw8zgeFz//KtjkJmG3llBVA=;
- b=DvqYmp+qAN+rdPV9Kv3mrKShY/XoUzRu7zB86YeT4esA4Z/Cd0ihcBMkUggszKeNw2
- BFZD/e22/AO00SfDthQIVxqHLYF3xdR/LdMYvwfMLcZeyZdcYNMM15VRLYDkmkPkxusP
- EILm/sF1gt/fK0y+LdJELAWJrbHVs2ovQgCnkA2Z2UMLLsJh1cYXK/XtNl6vCtTxuX12
- PYkMWuCKXEwQWZZxgRb27aZ/Axxn2C+LJCfJFv3GwVwSPA4+Uho6j6xiaxDBykRpPnmY
- Fk5YQBAG8Od6ga4hFEBObA/FrIIT1bRToeyZVkenOKm3Is/EULvcBhtq2jG/zr2VO6Um
- WsOA==
-X-Forwarded-Encrypted: i=1;
- AHgh+RphNscE8rsi8N1zoShsozkCTuSw/XUOG2KMbFNSH09aCzoI2bwzsw6NZInWD2SX+f8zgBWjLDhtVEBg@nongnu.org
-X-Gm-Message-State: AOJu0Yz0LzeWUsx0lg8vf4B63nMU0VKlS32/OEAw8XJzRb7K1vNgjYP8
- bCi/HXneNj9tkno6KMb90i8h16T3tr7bh+pq1179Tzpkx7M7zE0k/PgiB9PrqcbLZZkJR3y/EvG
- G6XBhKPCxKfokP+WSt613bcVP+ITgDaI=
-X-Gm-Gg: AR+sD13kWq7znQdRoMslGWaeV1eOWMtxNPe3CJc/TDL6oFF+DSCbzpWelA/niomkQNo
- APBu+fgDlgkrvctkjhc4kQs2LnuzTUQ33nufQueGMYtk3YvnmPoQqceA14pQkcJ6XYK4bO9Bzps
- S4cXT8xOEAB0YMMwhpQznuDNgZRZC2IuT5obssMcfnsHuRbK1WhCM0pnaXvI5e56/W+SQFqdPGG
- qw57J67IGA2uN6jOItE82iU/mc43LQo4ftWKbNRwVI3waw6mpJOzzszmZbjxopGTr3mrhNHjxVy
- ELCEkzRI8gNpfVjDPXXiMxp3gEp8H5axnNf9Dv5Eypr2Cuhx
-X-Received: by 2002:a05:690e:418e:b0:66c:4937:d319 with SMTP id
- 956f58d0204a3-66c72d2ec6bmr3064484d50.46.1786722689144; Fri, 14 Aug 2026
- 08:51:29 -0700 (PDT)
-MIME-Version: 1.0
-References: <20260808182956.290561-1-flamboyant.h.01@gmail.com>
- <CAAW0U4azckLqyWEy=bGRH3Js8AOeW=rpN2+rgkhVStzC0Jv5mA@mail.gmail.com>
- <CAEUhbmU1LYzeQU39eOhd-S+WY6w7A--MOtmcG+cbTgeyCEMr9A@mail.gmail.com>
-In-Reply-To: <CAEUhbmU1LYzeQU39eOhd-S+WY6w7A--MOtmcG+cbTgeyCEMr9A@mail.gmail.com>
-From: Kangjie Huang <flamboyant.h.01@gmail.com>
-Date: Fri, 14 Aug 2026 23:51:18 +0800
-X-Gm-Features: AUfX_mx0PcnB9LQoUpT8QcXJ2mmymJCV2pvlJWfkLMmnQeWuTIfb3_ZGFGNKHOc
-Message-ID: <CAAW0U4bS=usrkxTruUS=-YEYJ=er2o3tKF4ridZ8ZFX-Qmyo4w@mail.gmail.com>
-Subject: Re: [PATCH v3 0/5] hw/riscv: Add K230 DWC SSI Standard PIO support
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
- Chao Liu <chao.liu@processmission.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Alistair Francis <alistair@alistair23.me>, Palmer Dabbelt <palmer@dabbelt.com>,
- Weiwei Li <liwei1518@gmail.com>, 
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
- Paolo Bonzini <pbonzini@redhat.com>, 
- Fabiano Rosas <farosas@suse.de>, Laurent Vivier <lvivier@redhat.com>, 
- Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>,
- Kangjie Huang <flamboyant.h.01@gmail.com>
+ (Exim 4.90_1) (envelope-from <alistair@alistair23.me>)
+ id 1wuuDG-0004Y4-64; Fri, 14 Aug 2026 11:52:54 -0400
+Received: from fout-a2-smtp.messagingengine.com ([103.168.172.145])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <alistair@alistair23.me>)
+ id 1wuuDE-0005cs-Cb; Fri, 14 Aug 2026 11:52:53 -0400
+Received: from phl-compute-02.internal (phl-compute-02.internal [10.202.2.42])
+ by mailfout.phl.internal (Postfix) with ESMTP id 639CCEC01E0;
+ Fri, 14 Aug 2026 11:52:51 -0400 (EDT)
+Received: from phl-frontend-03 ([10.202.2.162])
+ by phl-compute-02.internal (MEProxy); Fri, 14 Aug 2026 11:52:51 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alistair23.me;
+ h=cc:cc:content-transfer-encoding:content-type:content-type
+ :date:date:from:from:in-reply-to:in-reply-to:message-id
+ :mime-version:references:reply-to:subject:subject:to:to; s=fm3;
+ t=1786722771; x=1786809171; bh=0gD56VyifDOJoHCk30eX+LSVWg+cTMBD
+ QasUEj5XK5A=; b=wq4qrTbLB8m+Ou81SMiQaMMH/N3TS1MZYr9XxaX/nbXSRQHu
+ nGYx7ZmFMESgBCFC+43/zQRbqzopvZ+kVoUG4nTkrmpdBbYMLVNjj8vGUFq2t45U
+ OIRxjTFbljzCUQXtzR+GKKJLcYLvYS6qrOuAGZu1Nu75Z+BsAvl1JRtdrfEAztqM
+ Ydlp602vbiYmhSBqH8KHEFHUFeKH9hlIL3AfpDMVkYn5jSH0kptfneNxWJ+7+pt+
+ ZnzERbAwOA3XqxCWXLhCuO+k3qGAZrZfylq7EyF5gyfEDuhBRVUORecgdcl81K5b
+ XOS+5vs06seF1xqG2XCWBD2R0Pr1j5FrlKQMRw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-transfer-encoding
+ :content-type:content-type:date:date:feedback-id:feedback-id
+ :from:from:in-reply-to:in-reply-to:message-id:mime-version
+ :references:reply-to:subject:subject:to:to:x-me-proxy
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1786722771; x=
+ 1786809171; bh=0gD56VyifDOJoHCk30eX+LSVWg+cTMBDQasUEj5XK5A=; b=l
+ A+3eEf6FOQ/VPNO8SZTmAKOaIOWCGfeEMk12Rapr0dEhTHFrECA/oI+gJcb65nCx
+ x5JPfWIsmCN8vShdprcOA1BPegoUZ2c46GjPyBhzNUtmZrQjLL2loMJtiX/ewcrH
+ DoJMtoHEZXzn9ZZY1cY6zdwFFL/NmoH8srki1ak4slJDqqDIfphb3NO1clM+cDU0
+ lTklQazhCAib/AoAy5YDFrroIpYav4BCXa/dbljzRk7sgpKSpWewt/Mjxwf7SAon
+ Gz2CbpGg4ir24zZ4yUct63y7UD/CE7L/kLuUOFMrG2xMkoIpjKs+Jgv8w0YXeuXQ
+ PGqK9fMPLTMVl50WopsYg==
+X-ME-Sender: <xms:0jl_ahsf8kNBDgkrjnY6OmyYWwoHP8OxL_013NfkM8de-hVFqCFRqw>
+ <xme:0jl_agDgoEA0XxsOmuBeBCinADugu5Qtx3hQk5KNUG9fvAMH5uWRonH_P6MQYVIhx
+ aaIGCjB717qfqkVi98LgonCQGKDs-kS5Mr_EQtJ402-_C4nhmyJnVE>
+X-ME-Received: <xmr:0jl_auXnEKIqTarSv_YNvXMS9IH2m1iV_R2jTnWb30SkNaFThM7yXrusMYrvoN7Iqkc56g>
+X-ME-Proxy-Cause: dmFkZTGsvnB7JPB5A/m7+aqgf7QfMAC3iN5dMoLDySJ6UxxAkqDZnHTxEVTOUttVtFfPXU
+ +ch5OHok8XRoAOoboU/RePCsQlD4FikdbcdmbETEYvCGYuT3pBGDKr3wTJtRQO6fnx6NTk
+ TtKjVzcMZWg3uuiAqP1SXNZWLJw71H6MPQsbaIBoLR5iRxKhJA2kOdSxmQtNGFEzuanzZl
+ WCsx4wbkXYyuDra63+6p2py1jLSZtmz+aPL2OtSP3ga1d7OfcMWH0GE4+du0zjg/XL4hNi
+ 2CSb7e3vDc+wb90qXJF+slMbE/0qQezdUaHilsy6g+X+NW7wj2EhNblUXUsyf3qmzQxHsn
+ E5qMjZt/isSy7Bg7T13lWJhLxDsJNyM1dE5o2ArX2vYnRuC1NDZLDj58LzGNdaz3tvL8dr
+ OjThMFd4PLgXK7t4jVobObbXIpE9ubfqfM7YqGUKAXBs2YeupK5jqq1Tzmt5+qUC71/2Gk
+ dyh2jeJICPN5duZqvlmq/4s2ZKuIrTW4NVvbpq+kE64891G8iIkhqkevRQ3clJXJMYw99s
+ yG+304cA7WTVtDBJUz5c+kTJ4VIXTZCUxQuqQ/sr2C5CPqfPctAfxJD6R85BtUo9+aSt1p
+ zDbPT/p8RJdPBRwRVKAFSH2YO+K1Nu9XsGP9rlckGv06XrNPRuNQ9N4FhVZw
+X-ME-Proxy: <xmx:0jl_apG4LG50LMhN469fha-jyeYYR09wLyLOPEePItkJ0M7c9BWPTw>
+ <xmx:0jl_apP3hHDaKyE_s1EEB0MboFSJkXimQ5T6B4ygGPevTRLFESeCDQ>
+ <xmx:0jl_alXH9eVBjh8jMhYog6hjY18USl-V0DdAXga8PzRvguHscKw6qg>
+ <xmx:0jl_agx7FwMXt1haCVN7Fntndru3AhPhkE__PARhi1_q6GWuTbZMLQ>
+ <xmx:0zl_arfybNOc1UwvtEEsWv9DsVh6Cr2C_uPH1XyRIlZR4Xd89vPiGFBL>
+Feedback-ID: ifd214418:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
+ 14 Aug 2026 11:52:49 -0400 (EDT)
+Message-ID: <068899e5a13d1fc6fab8052736f143dae187dbdc.camel@alistair23.me>
+Subject: Re: [PATCH v3 0/3] riscv: Add K230 DW 8250-compatible UART
+From: Alistair <alistair@alistair23.me>
+To: Bin Meng <bmeng.cn@gmail.com>, Joel Stanley <joel@jms.id.au>
+Cc: WX Chen <wxchen0913@gmail.com>, Alistair Francis
+ <alistair.francis@wdc.com>,  Kuan-Wei Chiu <visitorckw@gmail.com>,
+ qemu-devel@nongnu.org, Paolo Bonzini <pbonzini@redhat.com>, 
+ =?ISO-8859-1?Q?Marc-Andr=E9?= Lureau	 <marcandre.lureau@redhat.com>, Chao
+ Liu <chao.liu.zevorn@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Weiwei Li <liwei1518@gmail.com>, Daniel Henrique Barboza	
+ <daniel.barboza@oss.qualcomm.com>, Liu Zhiwei
+ <zhiwei_liu@linux.alibaba.com>, 	qemu-riscv@nongnu.org, Fabiano Rosas
+ <farosas@suse.de>, Laurent Vivier	 <lvivier@redhat.com>
+Date: Sat, 15 Aug 2026 01:52:49 +1000
+In-Reply-To: <CAEUhbmWJzY4qZA6DvTKu3gbP=BEe_Byw6+cpiKEruvVCyL-jiw@mail.gmail.com>
+References: <20260808-feat-k230-uart-v3-v3-0-d73b31f0034b@gmail.com>
+ <CACPK8Xfgj+AUx0h_46f=qG_UEE_o7kTZ0=Buxr7+bdHDODHpgw@mail.gmail.com>
+ <CAEUhbmWJzY4qZA6DvTKu3gbP=BEe_Byw6+cpiKEruvVCyL-jiw@mail.gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b132;
- envelope-from=flamboyant.h.01@gmail.com; helo=mail-yx1-xb132.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+User-Agent: Evolution 3.60.2 (by Flathub.org) 
+MIME-Version: 1.0
+Received-SPF: pass client-ip=103.168.172.145;
+ envelope-from=alistair@alistair23.me; helo=fout-a2-smtp.messagingengine.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
+X-Spam_bar: --
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -132,24 +115,47 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Bin Meng <bmeng.cn@gmail.com> =E4=BA=8E2026=E5=B9=B48=E6=9C=8814=E6=97=A5=
-=E5=91=A8=E4=BA=94 17:25=E5=86=99=E9=81=93=EF=BC=9A
+On Fri, 2026-08-14 at 14:27 +0800, Bin Meng wrote:
+> On Thu, Aug 13, 2026 at 6:21=E2=80=AFPM Joel Stanley <joel@jms.id.au> wro=
+te:
+> >=20
+> > On Sat, 8 Aug 2026 at 12:02, WX Chen <wxchen0913@gmail.com> wrote:
+> > >=20
+> > > This series adds a QEMU model for the K230 SoC DesignWare 8250-
+> > > compatible
+> > > UART controller, wires it into the K230 SoC, and adds qtest
+> > > coverage.
+> > >=20
+> > > The implementation supports the registers and features required
+> > > by the
+> > > Linux 8250_dw driver, providing an interactive shell over the
+> > > serial port.
+> >=20
+> > This is a model for the same hardware as this patch:
+> >=20
+> > https://lore.kernel.org/qemu-riscv/20260616190147.1286316-2-visitorckw@=
+gmail.com/
+> >=20
+> > I'm not fussed which one we end up with in the tree, but it would
+> > be
+> > good to name it generically so other machines can use it.
+> >=20
+>=20
+> Agree.
+>=20
+> Hi Alistair,
+>=20
+> I suggest we drop the series from your riscv-to-apply.next tree and
+> ask WX Chen to respin another version.
 
->
-> For review comments raised during a normal process to the *existing*
-> patches, the Suggested-by is usually not needed.
->
-> This tag is mainly used for *new* patches inspired from the review
-> process / discussion thread.
->
-Hi Bin,
-I understand. Thank you very much for the explanation. I'll drop the
-wrong Suggested-by
-tags in the next revision and make sure not to add them again.
+Done!
 
-If you have time, could you take a look at the implementation? I'd
-appreciate any review comments.
+Alistair
 
-Regards,
-Kangjie
+>=20
+> The DesignWare series IP should be modeled separately instead of the
+> SoC version to allow other machines to re-use the same DW IP.
+>=20
+> Regards,
+> Bin
 
