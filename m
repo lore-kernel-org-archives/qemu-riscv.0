@@ -4,87 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B3EFC5B572
-	for <qemu-riscv@archiver.kernel.org>; Fri, 14 Aug 2026 09:03:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77778C5B572
+	for <qemu-riscv@archiver.kernel.org>; Fri, 14 Aug 2026 09:21:48 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wunoF-0003dh-T8; Fri, 14 Aug 2026 05:02:41 -0400
+	id 1wuo6b-0006eY-4Y; Fri, 14 Aug 2026 05:21:39 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <caojunze424@gmail.com>)
- id 1wunnt-0003ae-CS
- for qemu-riscv@nongnu.org; Fri, 14 Aug 2026 05:02:17 -0400
-Received: from mail-pl1-x62b.google.com ([2607:f8b0:4864:20::62b])
+ id 1wuo6C-0006a2-4F
+ for qemu-riscv@nongnu.org; Fri, 14 Aug 2026 05:21:12 -0400
+Received: from mail-pl1-x636.google.com ([2607:f8b0:4864:20::636])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <caojunze424@gmail.com>)
- id 1wunnq-000646-Uq
- for qemu-riscv@nongnu.org; Fri, 14 Aug 2026 05:02:17 -0400
-Received: by mail-pl1-x62b.google.com with SMTP id
- d9443c01a7336-2cf49dc28ccso981415ad.0
- for <qemu-riscv@nongnu.org>; Fri, 14 Aug 2026 02:02:14 -0700 (PDT)
+ id 1wuo68-0001D8-5u
+ for qemu-riscv@nongnu.org; Fri, 14 Aug 2026 05:21:11 -0400
+Received: by mail-pl1-x636.google.com with SMTP id
+ d9443c01a7336-2d319b84213so1516585ad.1
+ for <qemu-riscv@nongnu.org>; Fri, 14 Aug 2026 02:21:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1786698133; x=1787302933; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1786699266; x=1787304066; darn=nongnu.org;
  h=message-id:date:references:in-reply-to:cc:to:from:subject
  :content-transfer-encoding:content-type:mime-version:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=zv21Ju1CxGfIwhFMAr33pqkhYdvDIuy2N7Zcm3Fklc0=;
- b=ahuk9m7peycErULOnC5vJh2phtU1t2AW2wCj7ZGFvlx2NiWQ+wSosuYiC2HtWFLUdX
- irkBJt/RkEQCx/AhfBWNsA1Jef1RFgowdUptaiJBhTWCnOYJdAsHIDKtKPzntPSf7W9J
- eSxarpiK+s1/SMWUvNKmKg5HLHGag/z9wvTqLajaNeYt+Gy/VRjrp8Q8gw0d+cM7CLOn
- zQQU9El5UoUOsX1ASg3zKsgUVSp2jHTr+Pkka5xqSdDl0q49EgdaXzieYqNhXVqgUXgN
- TQTyZGuPtP4CU7iyMnJ9Rc2mzlIx/+E0Q7EQlN6nxA8lYPDX6I5jsA2A9mY0KMqyuL6I
- aYbA==
+ bh=Jk04pDwNI+XbQPIptlMVKxZ1+rUDm09s/pVnGWhN38M=;
+ b=Th22qsKa2168rGcuQFldErMhFtKRLaIpuQxQ95UxKrdlY9iNSqkBJor4Hiftn8mM/h
+ /7ihOzOmzL3snRUkIIfSajV6Ny7l3oTTylddNAhZ4IYO/F6AKuljXQbEANpoMfDBy71O
+ 2bAvX3E7J5JAsznTxCEQqw9kg2Z80Nj7jyEmUYuo2MaxhTu5xvHtYb+JwiejDNyvWJYM
+ J7dsshp4Rg18Ya/HyUs9DgNeMfGIH9HtV6VyBJfVy3OytMzb/UxPqr3vOsjRgDQQPuEa
+ oyHagoGcK2EWcBGE+jJihQEghTR2ITbOQHMLdVzhT/hCfUX8TgQjS7QXBfSmb3jPJdnj
+ YPGA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786698133; x=1787302933;
+ d=1e100.net; s=20251104; t=1786699266; x=1787304066;
  h=message-id:date:references:in-reply-to:cc:to:from:subject
  :content-transfer-encoding:content-type:mime-version:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=zv21Ju1CxGfIwhFMAr33pqkhYdvDIuy2N7Zcm3Fklc0=;
- b=A1KmdweedZ9y+e2pgfROGGa4p0HjD/+S6xdcG7i6CNqqfX2QZFWzSHT4c5MNjynUqn
- YjcJlsxh1phOmlFbZs44DB0TeWhgHQD1X98IY4cnxcjbpI0JzRXjIQzfDRCwwdAB1Cnj
- jTBJwphU5uCOZw4mcRtAVHc1xZVg8GtFOSuNIeCYAtPd8DomyTX5qeRaBiZcJlTkKe1G
- mFIOSrOwmeqIOWlNx0kXHON771N+2jHKNfOcUBs9su5pQ0/U2kaKPRm7zuffKSAGI540
- mxeVIlcENOk6e+ytySkhcwAwBzIf+17zXFaJOTM+HhUW0Tvup40k1LskT2veOzR5PG0a
- eYtw==
+ bh=Jk04pDwNI+XbQPIptlMVKxZ1+rUDm09s/pVnGWhN38M=;
+ b=nQj1OxStSSpCcONOrp9T9wrUP1eSiuC+RXvQa/9WHDDAwDmatZF2JtGasQum7ydKvj
+ SXx2mfVaZLU/CkERhmBpyN7K67PYQqba+IeI2w21oxCTu/y/Qzy3HkqJbrpxIDg5gL9E
+ aMeRMRGVBT8ymSbVhGaNNa8LGezK3mgDY1NrTknCIXyWwFZGHAXgjot95aL+ZT1Bm03o
+ 7QI4SWsh6pm3ynI+LIDSgwSLp5Wngjw1Pk1DQ3ej+OYZErtSf05cLB2oijzXmw6b/eDN
+ ju55p7TcdMilnBlnBnV54vfdI2bXfs66YdyHl6wWrr54sOCe9pvEYoXToBplGXNTfCvg
+ wRtw==
 X-Forwarded-Encrypted: i=1;
- AHgh+Ro0/doum+kH6ezXFFrkFgp7AvUt2hlXNTGAj8wNA/P/uXmUZmS1LcPZF341xyf4H35zpbmS1wiETMYP@nongnu.org
-X-Gm-Message-State: AOJu0Yw2xHKV3SgZAPfFp/N6kISnTYVvK/yVep7rqDcomCyWz1zWiA83
- e5pIL8lw6NFhPSVtjdNz7WLNIFNrKXwtAmofrrKOSgCkxw8vb05pl7kl
-X-Gm-Gg: AR+sD10mqcXW7dsOtNORPtNwkZ46E1P2kh4IxWAbJEe91UAhE55buUcCrWkgDJ3qJ8s
- Acjt2w5D44TK7SyJD9U7/aMKKfDrW1i6A2kZgCWJpEkbd3dL6a/8XzD0HZYYGADXBiCI6p4JPGn
- RE6cnudxUj53t+6sgVxumI6k1jD0rzyLqkiIOXq7SqBgcYL6hk8xpj+W0Jp7FCyCd1zgqWodeVj
- H2V3YVZLmiRsBgYXTb+1pn48dgpLejERFQgiKZucqcaDgTVzXU2iyJ+0SgDg5L4eCIRuDL26RtO
- KlJCtnmFEQpaaCl5cFl/pQ2b/cKfuFmvMU34JlK3jqQnqpR7FoD9XhTmxakjb5V7d/1lvW68gSB
- mepzql9U34Yd5ZFdkinqDcjLKYNMrzqTHP63XnQOLUKt5L/IdB3vX2Go5chC5dTn0/+IAoXwbU1
- q84th1PxiCPqW/UJBYZKqB1HkRBLMGSW90nUF8jR1igbx1bYPrUH4waa/uYCnaBW4fK7bT
-X-Received: by 2002:a17:902:f712:b0:2c4:397:dd7a with SMTP id
- d9443c01a7336-2d3b0e05b43mr35147095ad.4.1786698132705; 
- Fri, 14 Aug 2026 02:02:12 -0700 (PDT)
+ AHgh+RrzEcvvH9aojVvnfSPP9fp7cEG5yMbx/mGR/xrPHkTzqZJ2Wi+poWxAG8YbaM8O5q6/7nrfnl0o8+vJ@nongnu.org
+X-Gm-Message-State: AOJu0Yz9K0CWD6kcqOj8AJKKZCMaTG/8TEefaHkbbhviGuHs0r8qZKsp
+ ERkiujkjwyHnqBCJodWEWGRGfal0TmFU4mUi4yAJR3U4POYx58a7cWIY
+X-Gm-Gg: AR+sD11ZXYVUKQrTTNyX3SsG4L9DWOzKwxHqg2Xm166J43xR1XNP3Hfmy2hC/Co4MAC
+ 6G14EJKzMsWRNFLMirVBtslvlcDnGEi2IXSNnIGG4nyy4x7fU5lSbdnYqLJ3TzPZkPCyeIxx6D+
+ j7QiyOXWm7zYgMpIYW3F5oggylIYvIX7wj/sfgeW/vPmB8CBCqUtgc9m/dIKYJnTuT4tYMmew/x
+ H9k7J8PiL2gyQzPoTH/EjnZzZtJx0iSsAfjkezADYt9DO3nHWvECg/1jtmMa0InwxXkSq+l27O4
+ e3rg2L8TEH3PEimO3uN/4CKJJVYNPko4kUddjhu9OtFvsXKwKv4bpK764tgTEdssuzo3r+FGU2h
+ c0J9igsbXZp8BzbB3a9U48iKXGHW5KPZbf1jKcfZryUEFd5xZHKJ2Z6/S5BsA6Lr4MJJyfpb5b0
+ ZwkVYuJ+d6SK+JcjW954QtJgu4WsYEocmL+8KNF8I23hvlH9HTpDMWIQV2KSy9mGeIYHLN
+X-Received: by 2002:a17:902:f651:b0:2d0:2741:f31b with SMTP id
+ d9443c01a7336-2d3b0edea85mr38433165ad.4.1786699266285; 
+ Fri, 14 Aug 2026 02:21:06 -0700 (PDT)
 Received: from [127.0.0.1] ([38.34.7.236]) by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-320ea8f9d19sm2221124eec.27.2026.08.14.02.02.09
+ 5a478bee46e88-320d5bd9fd3sm2317005eec.4.2026.08.14.02.21.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Aug 2026 02:02:12 -0700 (PDT)
+ Fri, 14 Aug 2026 02:21:05 -0700 (PDT)
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 Subject: Re: [PATCH v3 1/2] hw/gpio: add K230 GPIO controller model
 From: Junze Cao <caojunze424@gmail.com>
-To: guochun wang <guochun.wang@foxmail.com>
-Cc: qemu-devel@nongnu.org, chao.liu@processmission.com, pbonzini@redhat.com, 
- farosas@suse.de, lvivier@redhat.com, palmer@dabbelt.com, 
- alistair.francis@wdc.com, liwei1518@gmail.com, 
- daniel.barboza@oss.qualcomm.com, zhiwei_liu@linux.alibaba.com, 
- qemu-riscv@nongnu.org
-In-Reply-To: <b6fb4f19-2b6f-42c6-9f32-0cc2748ebf53@smtp-relay.sendinblue.com>
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: guochun wang <guochun.wang@foxmail.com>, qemu-devel@nongnu.org, 
+ chao.liu@processmission.com, pbonzini@redhat.com, farosas@suse.de, 
+ lvivier@redhat.com, palmer@dabbelt.com, alistair.francis@wdc.com, 
+ liwei1518@gmail.com, daniel.barboza@oss.qualcomm.com, 
+ zhiwei_liu@linux.alibaba.com, qemu-riscv@nongnu.org
+In-Reply-To: <CAEUhbmWjR3cc4jkdBAqpXcmt9z3ExHWsPzCthX7d+G1wgqTbTQ@mail.gmail.com>
 References: <tencent_EF996EEB2215272639C89FAE1491CEF43908@qq.com>
- <b6fb4f19-2b6f-42c6-9f32-0cc2748ebf53@smtp-relay.sendinblue.com>
-Date: Fri, 14 Aug 2026 17:02:04 +0800
-Message-Id: <178669812484.92831.14526253997081053698.b4-review@b4>
+ <be7afd5c-55dd-4af1-b828-9a2f401e3bfc@smtp-relay.sendinblue.com>
+ <CAEUhbmWjR3cc4jkdBAqpXcmt9z3ExHWsPzCthX7d+G1wgqTbTQ@mail.gmail.com>
+Date: Fri, 14 Aug 2026 17:20:59 +0800
+Message-Id: <178669925995.92831.6332189576763663701.b4-reply@b4>
 X-Mailer: b4 0.15.2
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62b;
- envelope-from=caojunze424@gmail.com; helo=mail-pl1-x62b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::636;
+ envelope-from=caojunze424@gmail.com; helo=mail-pl1-x636.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -108,66 +109,31 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, 10 Aug 2026 04:00:38 +0800, guochun wang <guochun.wang@foxmail.com> wrote:
-> diff --git a/hw/gpio/k230_gpio.c b/hw/gpio/k230_gpio.c
-> new file mode 100644
-> index 0000000000..9d27f0bbfd
-> --- /dev/null
-> +++ b/hw/gpio/k230_gpio.c
-> @@ -0,0 +1,362 @@
-> [ ... skip 225 lines ... ]
-> +    case K230_GPIO_PORTA_EOI:
-> +        for (int i = 0; i < K230_GPIO_PINS_PER_GROUP; i++) {
-> +            if (extract32(value, i, 1) && extract32(s->inttype_level, i, 1)) {
-> +                s->raw_intstatus = deposit32(s->raw_intstatus, i, 1, 0);
-> +            }
-> +        }
+On 2026-08-14 15:26:41+08:00, Bin Meng wrote:
+> On Mon, Aug 10, 2026 at 4:02 AM guochun wang <guochun.wang@foxmail.com> wrote:
+> 
+> > Implement a K230 SoC APB GPIO controller model for QEMU, derived from
+> > the Synopsys DesignWare APB GPIO (the Linux gpio-k230 driver is based
+> > on gpio-dwapb.c and shares the same register layout), with a
+> > Canaan-specific compatible ("canaan,k230-apb-gpio") and hardlock
+> > integration. The model is capable of running the Linux gpio-k230 driver
+> > and driving external input/output lines. Behaviour follows the K230
+> > Technical Reference Manual v0.3.1.
+> 
+> Please split the k230_gpio model into 2 separate models:
+> 
+> - One is generic Synopsys DesignWare GPIO IP model
+> - Optional Canann K230 specific wrapper glue model to the dw-gpio IP
+> (if the generic Synopsys DesignWare GPIO IP model, or plus some unimp
+> region, is good enough to make the software happy, no need to create
+> this one)
 
-Hi Guochun
+Hi Bin Meng,
 
-Thanks for the patch. This is an addendum to Bin Meng's review, just for your reference.
-In the EOI path, the model only checks inttype_level[i] == 1 and does not check int_bothedge[i] == 1. 
-
-With INTTYPE_LEVEL = 0, INT_POLARITY = *, INT_BOTHEDGE = 1, and the line enabled in INTEN / not masked by INTMASK, 
-the interrupt status will be set on either edge but never cleared by EOI,
-so the IRQ line stays asserted.
-
-Could EOI clear when either inttype_level or int_bothedge is set? A qtest with INTTYPE_LEVEL=0 and INT_BOTHEDGE=1 would cover this path.
+Thanks for the detailed review.
+Regarding the suggestion to abstract this into a generic Synopsys DesignWare APB GPIO model, I have a question: do you know of any other QEMU SoCs that use this IP and would benefit from a shared model?
+If there is no immediate second user, I wonder whether it might be premature to generalize now, especially while we still need to complete the K230-specific behavior.
 
 Thanks,
-Junze
-
->
-> diff --git a/include/hw/gpio/k230_gpio.h b/include/hw/gpio/k230_gpio.h
-> new file mode 100644
-> index 0000000000..32005815d2
-> --- /dev/null
-> +++ b/include/hw/gpio/k230_gpio.h
-> @@ -0,0 +1,71 @@
-> [ ... skip 64 lines ... ]
-> +    uint32_t config_reg1;
-> +
-> +    qemu_irq irq[K230_GPIO_PINS_PER_GROUP];
-> +    qemu_irq output[K230_GPIO_PINS_PER_GROUP];
-> +};
-> +
-
-GPIO0 and GPIO1 are not symmetric in the real hardware: GPIO0 has only Port A, while GPIO1 has both Port A and Port B. Port A is 32 bits on both controllers, and Port B is 8 bits on GPIO1.
-The current model instantiates both controllers with the same 32-bit Port A only, so it cannot represent GPIO1's Port B / GPIO64-71.
-If the goal is to build a more generic Synopsys DesignWare APB GPIO model later, I'd suggest adding qdev properties such as porta_width and portb_width, and configuring them at instantiation:
-
-
-This is not strictly blocking the current SDK boot path, but it should be addressed if we want to support the full K230 GPIO range or keep the model reusable for other DW-style GPIOs.
-
-Thanks，
-Junze
-
-GPIO0: porta_width = 32, portb_width = 0
-GPIO1: porta_width = 32, portb_width = 8
-
-GPIO0: porta_width = 32, portb_width = 0
-GPIO1: porta_width = 32, portb_width = 8
-
--- 
-Junze Cao <caojunze424@gmail.com>
+Junze Cao
 
