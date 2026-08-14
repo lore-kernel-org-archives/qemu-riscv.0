@@ -4,99 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5C51C5CFC1
-	for <qemu-riscv@archiver.kernel.org>; Fri, 14 Aug 2026 11:37:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57908C5CFC1
+	for <qemu-riscv@archiver.kernel.org>; Fri, 14 Aug 2026 13:12:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wuqE7-0006bi-R6; Fri, 14 Aug 2026 07:37:31 -0400
+	id 1wuriG-0000My-VS; Fri, 14 Aug 2026 09:12:44 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <visitorckw@gmail.com>)
- id 1wuqE6-0006ai-CX
- for qemu-riscv@nongnu.org; Fri, 14 Aug 2026 07:37:30 -0400
-Received: from mail-pl1-x62e.google.com ([2607:f8b0:4864:20::62e])
+ (Exim 4.90_1) (envelope-from <314abh@gmail.com>) id 1wuriG-0000Mi-1R
+ for qemu-riscv@nongnu.org; Fri, 14 Aug 2026 09:12:44 -0400
+Received: from mail-pf1-x42b.google.com ([2607:f8b0:4864:20::42b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <visitorckw@gmail.com>)
- id 1wuqE4-0007Jo-O4
- for qemu-riscv@nongnu.org; Fri, 14 Aug 2026 07:37:30 -0400
-Received: by mail-pl1-x62e.google.com with SMTP id
- d9443c01a7336-2ce7d2adef4so15669995ad.3
- for <qemu-riscv@nongnu.org>; Fri, 14 Aug 2026 04:37:28 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <314abh@gmail.com>) id 1wuriE-0000nq-Hk
+ for qemu-riscv@nongnu.org; Fri, 14 Aug 2026 09:12:43 -0400
+Received: by mail-pf1-x42b.google.com with SMTP id
+ d2e1a72fcca58-84862b0d5f8so730216b3a.3
+ for <qemu-riscv@nongnu.org>; Fri, 14 Aug 2026 06:12:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1786707447; x=1787312247; darn=nongnu.org;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=8XDSjibgMTV3XWum35vrlTytl2FLR9rc+9sSmrpjMeQ=;
- b=RwWdlznPvB6QUGEdJZ1ssaHszAsk+gjrKH/HIk2ANPgJ0v86JpMeVr2PUK7JjxD+UX
- 48SM6FRiHb3NyVXGNPB+5Y90QmbtE9qkMwEputqYJYcaTL78sVJ52deoZ3zOkAhQNl4X
- 5vQL7XENsNxbJj2jAmGfWsVs1BjNz6MCwn/6qamo4W7uGKP8t3S1ocfotPNbdPBtCP5i
- 1HJZ67Migtw6+wNyucOLcVldYUhn1vl0hvUh1Fw6QRrQwrGRm2U8VtGCKFKynzHgl6dl
- CWmNmCgGwrqCmxjT+KZA/7PjDTgWUqQU4VOE5RFduhs0nN/Uj9gmJJWvldA1IQdDn+Kj
- m+Yg==
+ d=gmail.com; s=20251104; t=1786713161; x=1787317961; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:organization
+ :autocrypt:from:cc:content-language:references:to:subject:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=pVO0gQa3IhGHm2rsc/wKo5/kWzeV9v7mTlTjfwhKrHk=;
+ b=BBIRlDSJRcqc3oIZ2E3UvW55BQ3MFfWcml9VzqX7P1aL9rX6LHbuneXbxPV1sKidmU
+ S2NatZa7bW+nc+MQpaPrmLjilbxxdQ5b/+UyjRS63UwF7OY5L+NmS4zm2fzZRG4d2I7e
+ xuSJ3t2bOkJLO75s5gQSLmT5P7ks6wNn8UzsusO9H8ENw1fBotWDVVCFsKqObef7O1dl
+ PbJx3Pq3fEfF7DKfgrS4QbuoKMq5XERVJf6A4YsoEKipX91SnaW34TzO6t83PcuSDUbG
+ yERNZp+qnaNGreeyx96SqxHlaedtefa/0Kg07mZ2N89roTA/btdLJ1Gi9U60JK+2AYsP
+ 6eZQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786707447; x=1787312247;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=8XDSjibgMTV3XWum35vrlTytl2FLR9rc+9sSmrpjMeQ=;
- b=UONEJ9TM5p8hbaceATH+DK9RVrqheFCuN7Wa4Sjq+U/LguTFrd0G6hPmEndfYwECrd
- afi8G+NIHgp+a2DEUgkZVwpBPPz7ZoosBHsvjhoRBVLP3H+RnwavKT5RPovesRui9T8T
- xI5vgeqWTM6tOIIzE/yyG/Tqh9UlcKF04Gk6gQ62Q2KC2LT22yGHjgVtt6PXdb97Pw+u
- 5G4S2AV9igBhUPqZTzGpOm/YZLteDAHBMYBu6hxDUNpve89xoyrF+bE1ekMzz/m3mz14
- SezfWD+NcDeESCjKOEkrdJEvoD1k7077thBbHZO0vOTDC7G2TxvXaglluqh3pWlPQIlk
- kSSQ==
-X-Forwarded-Encrypted: i=1;
- AHgh+RqzoZdPW1nj29VfjYlKVKNcfAV14zfbwYZZNB+X6qrUhRGh/HDOdTILLaML/0u1nkY5rMJrnZcLcayo@nongnu.org
-X-Gm-Message-State: AOJu0YxDl2oCLHlFt0nK4vwqhf07Wa4HbH5UbZOPbgLn2b69IpDTxefJ
- oZykSX5WIG6fDpGS92N+85vx7T7M6PuTxooowajIVTP7ruVTfImV8hIa
-X-Gm-Gg: AR+sD10d+zcm7S5XMh8kEsc15LfogLj7B7fbQfBhXNJKDRUqEXdAxYM7J9ChiFBToM9
- n7AuILxGd7gDsBaDHRFoTUZYYetTCzuVS8e7ykv1gWMny8/blcQ3zZjYQSJbPgoIaMgQs3FDt9+
- aP3qE3cforLHejUJ9X3lQg7pMx6jIN7/OW0X9BRT7mBY/5yIpzNaDtT+uFxrXadqTMZXI0GgocI
- 2d+c4O3XS+jxd41EATaHnaYvaYuJ4UAjyM0FW2EPCBBiZSddVqbQGBqwtp+5wM9qVZ7XHxwFN3g
- oW9HTooNvyskwHchZaJhhAeuNFLOuuglnrvAkHp8GNjzptenEEcN8RxXa2yEAhjYcBjF9dHVOod
- w/wEG0SWqfI6C0FVFsmfRJ6Mz0U7BhdEOT6fYjl1CPfr0ejzTW5VfW0fYHymVZ9sDv+5ZCGrU3a
- S7PzPoeIVXg4VHk3pWTiG+L2t7ToJnr4AtVhAoz4u8Jjxg35GMr4BNeSoNtkiih2V6z2uR6i53w
- HISNYaK8x7Y/0Qkq5V8zIMiowYIRAWh
-X-Received: by 2002:a17:902:da83:b0:2ca:6d87:cda0 with SMTP id
- d9443c01a7336-2d3b08589ddmr43214855ad.6.1786707446926; 
- Fri, 14 Aug 2026 04:37:26 -0700 (PDT)
-Received: from google.com (114-137-1-217.emome-ip.hinet.net. [114.137.1.217])
+ d=1e100.net; s=20251104; t=1786713161; x=1787317961;
+ h=content-transfer-encoding:content-type:in-reply-to:organization
+ :autocrypt:from:cc:content-language:references:to:subject:user-agent
+ :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=pVO0gQa3IhGHm2rsc/wKo5/kWzeV9v7mTlTjfwhKrHk=;
+ b=SQ89cDwJo2ECaxbZeHTK4dIzjDPTIQVGJq0WrhMsKK/eP9kkKDSzM3hweZ7f/nOgWr
+ Ehriq8bsIex8KqV5YjH6F0EgqDE2JTVlgVLgDPfVgsu0JcB2ot/jbY9QpAd9ym9V2ZCe
+ 8OqB06HuK/kEinDOz1zgTH5Z9NSwc54XWOJ6Oa5lHNfVb/tq5NIaBPNvKOKC9Va8SkVG
+ 7y5mHi5ouHPkSHH8HYPUU0xGB/yj7MuMY2tRJomVjKVhVjoy+ijFxZDR0O0aucMzQK+/
+ 3pJhh2auhAOzUbFp1Nz1aB3T2uce4yzXS+kUWYWGrS0nO0ikDoliVJTrm43rZDMKY5Fb
+ mB3w==
+X-Gm-Message-State: AOJu0YyUerArBU6niweYV8de1DdoDrCNOZhBJ3rWLPzh1EO+X6oQ4Nrf
+ V3Po0TXjOqPpE6YpY3glMHl3orc4Ny+FETpGhAOK20f5HVyX2aPK0yNgmUSHDw==
+X-Gm-Gg: AR+sD1365h+hjtUiu5+d+uD6QNLluaHs2m1mihu/rL6I8EmBRSBWLi9G8KRrkI6Jiit
+ rpDdffNwq21YQjQh0Z7VYaMNO1CVw+cgyVMW9/ZnHsC7Gj5FCyPRjVXVq6k1tHNXnC+b2wc3ZhF
+ bCKKSA+w5zOwgmYISvsBYpPueBa3k2RBJVCog0ygYvTYt7wAkRuMQDLXGZZTVmbHFwmh+16zOHa
+ HzUeU6S+lCYLWLcE8UMonEBE3FULV3Dnk+cRVjDYz0mtnj9zhUp8O6QH99EbDsLbEegATnPT0Od
+ gFrH8o1+7miJkNc6jpu6tQUzcXZVlU7tCmfJIwM2JnX3OOGUPToLB12tEWYAyxhABC70yQNR60P
+ 4iA8QC1zGhJLBMGnZVmtVGr3rdKSPak0FGFobDHFxnKA82jxcHuTX/2cwj0a1/tdiqLWjTR35XP
+ T8VY4xC8doWFUdNnvcGcl1oEbltOYsAIkhybiyRRFjXTBNMiRVV8fjFYKwiZo2
+X-Received: by 2002:a05:6a21:e8c:b0:3c3:954d:279a with SMTP id
+ adf61e73a8af0-3cc71d8eafdmr6482572637.33.1786713160901; 
+ Fri, 14 Aug 2026 06:12:40 -0700 (PDT)
+Received: from [192.168.1.35] ([112.133.246.25])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2d3ae7a32bbsm8533725ad.26.2026.08.14.04.37.20
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Aug 2026 04:37:26 -0700 (PDT)
-Date: Fri, 14 Aug 2026 19:37:16 +0800
-From: Kuan-Wei Chiu <visitorckw@gmail.com>
-To: Joel Stanley <joel@jms.id.au>
-Cc: WX Chen <wxchen0913@gmail.com>,
- Alistair Francis <alistair.francis@wdc.com>, qemu-devel@nongnu.org,
- Paolo Bonzini <pbonzini@redhat.com>,
- =?iso-8859-1?Q?Marc-Andr=E9?= Lureau <marcandre.lureau@redhat.com>,
- Chao Liu <chao.liu.zevorn@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org,
- Fabiano Rosas <farosas@suse.de>, Laurent Vivier <lvivier@redhat.com>
-Subject: Re: [PATCH v3 0/3] riscv: Add K230 DW 8250-compatible UART
-Message-ID: <an797N3cUZj5EX0h@google.com>
-References: <20260808-feat-k230-uart-v3-v3-0-d73b31f0034b@gmail.com>
- <CACPK8Xfgj+AUx0h_46f=qG_UEE_o7kTZ0=Buxr7+bdHDODHpgw@mail.gmail.com>
+ 41be03b00d2f7-cc095a43327sm542621a12.28.2026.08.14.06.12.36
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 14 Aug 2026 06:12:40 -0700 (PDT)
+Message-ID: <c02148e5-9fb1-44fc-8652-e2f79b4730db@gmail.com>
+Date: Fri, 14 Aug 2026 18:42:34 +0530
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CACPK8Xfgj+AUx0h_46f=qG_UEE_o7kTZ0=Buxr7+bdHDODHpgw@mail.gmail.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62e;
- envelope-from=visitorckw@gmail.com; helo=mail-pl1-x62e.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] target/riscv: fix invalid sstc predicate in gdbstub
+To: qemu-riscv@nongnu.org
+References: <20260530053200.902591-1-314abh@gmail.com>
+Content-Language: en-US
+Cc: alistair.francis@wdc.com, palmer@dabbelt.com, liwei1518@gmail.com,
+ daniel.barboza@oss.qualcomm.com, zhiwei_liu@linux.alibaba.com,
+ chao.liu@processmission.com, qemu-devel@nongnu.org
+From: abh <314abh@gmail.com>
+Autocrypt: addr=314abh@gmail.com; keydata=
+ xjMEaaCh3xYJKwYBBAHaRw8BAQdAVM1RsDD2FeoNQaZK2QC/kzkYIIfu2q/KFJAYfDCpNIjN
+ FmFiaCA8MzE0YWJoQGdtYWlsLmNvbT7ClgQTFgoAPhYhBG9m91dTkOrKD5lID3UzAekWp6jS
+ BQJpoKHfAhsDBQkFo5qABQsJCAcCBhUKCQgLAgQWAgMBAh4BAheAAAoJEHUzAekWp6jSz6sB
+ AIyMERKwB5XgphDIZtbjD9g2FiJpQZqqPDhTeQOEZ/AaAP9YDNmDmxEYizl29eYioMxhA+37
+ xFTSw6WSY07BomlyDM44BGmgod8SCisGAQQBl1UBBQEBB0AzQxaqj7K6RZqXl4xOIleDubFp
+ TQsXvEMWiRnJobgjMwMBCAfCfgQYFgoAJhYhBG9m91dTkOrKD5lID3UzAekWp6jSBQJpoKHf
+ AhsMBQkFo5qAAAoJEHUzAekWp6jSrWoBAMgbTZK/HqjOv6Vqwl4uy02pZkeymtrbjARfNUJF
+ K/7DAQCooyWGaQ6m0RM3RC+fjSCVa8qyuppeq2wSa84UBhmXDg==
+Organization: The Public Safety Devil Hunters
+In-Reply-To: <20260530053200.902591-1-314abh@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42b;
+ envelope-from=314abh@gmail.com; helo=mail-pf1-x42b.google.com
+X-Spam_score_int: -13
+X-Spam_score: -1.4
+X-Spam_bar: -
+X-Spam_report: (-1.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ FROM_STARTS_WITH_NUMS=0.738, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -112,67 +113,41 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Aug 13, 2026 at 07:50:18PM +0930, Joel Stanley wrote:
-> On Sat, 8 Aug 2026 at 12:02, WX Chen <wxchen0913@gmail.com> wrote:
-> >
-> > This series adds a QEMU model for the K230 SoC DesignWare 8250-compatible
-> > UART controller, wires it into the K230 SoC, and adds qtest coverage.
-> >
-> > The implementation supports the registers and features required by the
-> > Linux 8250_dw driver, providing an interactive shell over the serial port.
+On 5/30/26 11:02 AM, Abhigyan Kumar wrote:
+> sstc function incorrectly checks for avaibility of env->rdtime_fn.
+> This causes it to fail each time it's called because rdtime_fn is setup
+> later in the procedure (when timer devices are created). This prevents
+> stimecmp's addition to gdb.
 > 
-> This is a model for the same hardware as this patch:
+> This change ensures only the riscv_cpu_cfg(env) check is done. rdtime_fn
+> will always be NULL otherwise and fail.
 > 
-> https://lore.kernel.org/qemu-riscv/20260616190147.1286316-2-visitorckw@gmail.com/
+> Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/3496
+> Signed-off-by: Abhigyan Kumar <314abh@gmail.com>
+> ---
+>   target/riscv/csr.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> I'm not fussed which one we end up with in the tree, but it would be
-> good to name it generically so other machines can use it.
-> 
-> 
-Ah, I've been a bit busy lately and totally forgot to send out the next
-version of the milk-v duo patchset. I will probably make the changes
-and send it out soon.
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index f5b0895fd..d72df945f 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -590,7 +590,7 @@ static RISCVException sstc(CPURISCVState *env, int csrno)
+>   {
+>       bool hmode_check = false;
+>   
+> -    if (!riscv_cpu_cfg(env)->ext_sstc || !env->rdtime_fn) {
+> +    if (!riscv_cpu_cfg(env)->ext_sstc) {
+>           return RISCV_EXCP_ILLEGAL_INST;
+>       }
+>   
 
-As for the dw 8250 uart part, I'm not sure if I should keep my uart
-patch in my series, or if I should wait for WX to respin his patchset
-and get it merged into the riscv tree, and then rebase my patchset on
-top of it?
+Greetings. It has been over two and a half months since I submitted this 
+patch. It's my humble request to know the status of the 
+review/acceptance for my patch. Please inform me about any required amends.
 
-Regards,
-Kuan-Wei
+Thank you for your patience and attention.
 
-> >
-> > Signed-off-by: WX Chen <wxchen0913@gmail.com>
-> > ---
-> > Changes in v3:
-> > - Removed all hardwired preprocessor #if conditionals from the logic
-> > - Added a helper for the receiver line status interrupt check
-> > - Encapsulated CPR and UCV register values in header macros
-> > - Replaced g_usleep() with qtest_clock_step() in the qtest
-> > - Link to v2: https://lore.kernel.org/qemu-devel/20260725-feat-k230-uart-v2-v2-0-d5fe82c47c28@gmail.com
-> >
-> > ---
-> > WX Chen (3):
-> >       hw/char: add K230 DW 8250-compatible UART
-> >       hw/riscv: k230: connect DW 8250 UART
-> >       tests/qtest: add K230 UART test
-> >
-> >  hw/char/Kconfig              |   3 +
-> >  hw/char/k230_uart.c          | 816 +++++++++++++++++++++++++++++++++++++++++++
-> >  hw/char/meson.build          |   1 +
-> >  hw/riscv/k230.c              |  33 +-
-> >  include/hw/char/k230_uart.h  | 198 +++++++++++
-> >  include/hw/riscv/k230.h      |   6 +-
-> >  tests/qtest/k230-uart-test.c | 514 +++++++++++++++++++++++++++
-> >  tests/qtest/meson.build      |   2 +-
-> >  8 files changed, 1559 insertions(+), 14 deletions(-)
-> > ---
-> > base-commit: 30e8a06b64aa58a3990ba39cb5d09531e7d265e0
-> > change-id: 20260808-feat-k230-uart-v3-0ff3651d70ef
-> >
-> > Best regards,
-> > --
-> > WX Chen <wxchen0913@gmail.com>
-> >
-> >
+-- 
+Abhigyan Kumar
 
