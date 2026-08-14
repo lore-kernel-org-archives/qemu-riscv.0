@@ -4,81 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DE8EC5CFC1
-	for <qemu-riscv@archiver.kernel.org>; Fri, 14 Aug 2026 15:21:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4118C5CFCF
+	for <qemu-riscv@archiver.kernel.org>; Fri, 14 Aug 2026 15:29:23 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wutih-00065T-Po; Fri, 14 Aug 2026 11:21:19 -0400
+	id 1wutq7-0008WH-Qf; Fri, 14 Aug 2026 11:28:59 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair@alistair23.me>)
- id 1wutif-00064h-Nf; Fri, 14 Aug 2026 11:21:17 -0400
+ id 1wutq6-0008VW-5z; Fri, 14 Aug 2026 11:28:58 -0400
 Received: from fout-a2-smtp.messagingengine.com ([103.168.172.145])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair@alistair23.me>)
- id 1wutie-0003dQ-8f; Fri, 14 Aug 2026 11:21:17 -0400
-Received: from phl-compute-04.internal (phl-compute-04.internal [10.202.2.44])
- by mailfout.phl.internal (Postfix) with ESMTP id 13D1EEC01E1;
- Fri, 14 Aug 2026 11:21:15 -0400 (EDT)
+ id 1wutq4-0005Pg-2j; Fri, 14 Aug 2026 11:28:57 -0400
+Received: from phl-compute-12.internal (phl-compute-12.internal [10.202.2.52])
+ by mailfout.phl.internal (Postfix) with ESMTP id 963F4EC013B;
+ Fri, 14 Aug 2026 11:28:54 -0400 (EDT)
 Received: from phl-frontend-04 ([10.202.2.163])
- by phl-compute-04.internal (MEProxy); Fri, 14 Aug 2026 11:21:15 -0400
+ by phl-compute-12.internal (MEProxy); Fri, 14 Aug 2026 11:28:54 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alistair23.me;
  h=cc:cc:content-transfer-encoding:content-type:content-type
  :date:date:from:from:in-reply-to:in-reply-to:message-id
  :mime-version:references:reply-to:subject:subject:to:to; s=fm3;
- t=1786720875; x=1786807275; bh=mBUiGSn0upWmKzONd+0BsNt+Rt5jbWeL
- yX8PSaP2pmo=; b=P0w3jSKnhwS3aYROX7b+ManqU8Far4ZxFGhBe3MVhXYeDfZ7
- eCpI1kVC0cFsyWYRysXZVUomROzPW1NEmcM7veBSuHY28+PYXL7iLWpBaBDA2J2A
- SF3kI3kxCIII2YIcTrXNvGur3+IXX+icmOlAwY+K1xpPyOJLvad+BPVumaX+kCR6
- tTBTdcXfl2GXfsSDNAL82kIVS21dsNOvXDzVYOuu9SMIJ/cICrBntYodUhUZPpKJ
- g7EvHHz6ngauioTEGfebbU0J+cShJVDFYFW59IqcMdIewdT9WWH7LP2jMDEGCAZe
- smD1Wwz4MP1fnp7oWQ7Agp/qPm114odel9OJ3w==
+ t=1786721334; x=1786807734; bh=k5txefdKVlBQTruGaTnr4/IznN2uBx9D
+ txM/DOqgE0o=; b=GmYlaSG0eLg8lHwDUC9IhASf9S+tYK+NuoNrxcFaoh+eUmPr
+ dvJLrwS5E3W0VUs24IOGv9sqLDJR63KlExA6h8fUOcim1iDKA5O0fcc8KnskVHhv
+ oRixEzcxIok/r7MYI9/+Ppl5bFZNwT7jUauRrssQXlFS7/OBkeNHKWxaZCnmqgVQ
+ UEsqilFufYmu/SPjFV9OSIE0AWgj07CcDEnIQgAsXY7RwBjeVWkvpJOdZap4VWhd
+ K6qit1Uy/Frp4k6eF9JfOiWz3AggP6dtlvYG2R7EKEKUqD63n056y4vplRA2s6jI
+ jsjr0ddcxvmkXusIuP7/G3VShmn9YS0GYBkP9A==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-transfer-encoding
  :content-type:content-type:date:date:feedback-id:feedback-id
  :from:from:in-reply-to:in-reply-to:message-id:mime-version
  :references:reply-to:subject:subject:to:to:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1786720875; x=
- 1786807275; bh=mBUiGSn0upWmKzONd+0BsNt+Rt5jbWeLyX8PSaP2pmo=; b=Y
- Mf0UvptVn0aJ1YJTSaxkO9AzHqL0k6SKdRNmzkfRqUbOrQPClRu6UBKtmFBLRUGD
- 3eAuxOPHwCB3Nzhy/Unr6S+En8aTh26IMIoAqQVT2NX+sCpOOEnwh8EpDL40sBDv
- jk8am9IM7g3dv9zNUfc/8Uo6l0I+8WQxe64fyIn/hAf6esA0MMpw9Mluy91M2Ox0
- GfG9xW3wiafwN7nufVV55IWpgnXQ5ovrcAc/ABCv2ZnLN5UA1yOtehxSO6Hh+cPy
- oXINY6Kx8O6qBH0PzJAu6HLYjDnetFP6jS0tJz3qC22gs1Tk5dmxNTT1WlA9ahRS
- RG400tRIYh99Nwd4rVQJw==
-X-ME-Sender: <xms:ajJ_ah2ILOFXa20WfUeAwtncYkwqlqAkn46KYa281DQFMqHpg9Qteg>
- <xme:ajJ_aoODjY2UuODtAT2csdBw_LN91UuTGE1jHS_gicpka2WYn3pxQr5ANV8UvCpIc
- zjkcB3t-E_B82YUu6a30DuUzs-I9bm1AYyDoii3aIpYRLoWRgVy>
-X-ME-Received: <xmr:ajJ_ap26_63sbdbEDGLz5nDYVMVOFAqiEQQIBpH7oo2JxlWOcvm8UIXunOxaiALqEwhhUA>
-X-ME-Proxy-Cause: dmFkZTGrlzGbxj4AdusKlxs6uD0gJ03aCLgpyapxcNs4iGe4MWqrMAC1exCHZsMzw5Gqck
- hlgSxQRqvrs6g9eggc2BBQrGRttimZ1jUP1JmWnGE8+2WRhk6Dj41fliXLxc056nlfaSLX
- b2m0km5XjDL2Vzu+OTWB9AFOlw1enZVRB7I85737kkEOC41Rm5tBH4ULitoaKDmrsXqLDm
- Sx8Dley5MBrvKa+SAuL2K67vmTFUTdwDhj+R/FMKpmw/4KnZWISQc15+HWmUNPWhiI6QkW
- 8iDNNiFlp23GomAPTAW9/Q8IJ064uM3akyQDGB6UKPHR2S7nrNoS3EnjGm2THe+7S9ucjl
- 19rEsi7rB79VqNUPgl6HJ2A7Zn7T76cVqFx15ysmlxjcZOrXfUB0b9Qd5VLfPLTZNrCcpH
- qJAmETpBjiM6C7kErMQCp55rLU+AXY7MnuoNPsCzKcTx3VjiLrhx0/uHlIKybC3P/mfT+R
- XGNk+G3RwJIqX1RZ/7c+oDhHQ06FBMkdfOLJnPD8CT99MwfUv5ZoPOzgFzADa5CiTFT9uK
- 1cdZgIh1m8VFYMRNupmI60TSLGeTeDzOPE6wj9M2SvV4lnZJQ0bHZKJ8bTqmkCxOwE4lzd
- e7ymSL/eiPl3JU1O5IU589A04Vdl8io9OUlzUtSk6z9YIDmOrpQqxA3TaxrQ
-X-ME-Proxy: <xmx:ajJ_anFDdmlT2GnAamZcT-w4b0D5KF6s9mcL6Ch1eAnnj_WQSmKL3g>
- <xmx:ajJ_au5KCMD8iuc_5YM7YVrnw42r5YTuNndtcg5B3LIbP1St6_i-jQ>
- <xmx:ajJ_alvJYYcRWN5_QSF3sYx1IaEP1IAYx_gZEHdeKVmDOLyL2Knm-g>
- <xmx:ajJ_an6zr7Zo__gFvMEvTgcJ8IpVRN3DFwP6h2rJ0UUni0bQ5RurPw>
- <xmx:azJ_asevK1NQFzRgp7SWaJ68Ru7ha3xzkqeRfyianCMq4tBeYGQaYQFR>
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1786721334; x=
+ 1786807734; bh=k5txefdKVlBQTruGaTnr4/IznN2uBx9DtxM/DOqgE0o=; b=H
+ 89nYy/Ovn5JGOhm+Y0pB0VKjB9Ba82bAaWWJE6EHHXIfeucMssG2QqYu4JNFDF4/
+ GhfvF/3rQVGX3usM4oAjGH3jOzBA5+1hdJj2w27o466JSDcZcvsORsB6uoRA+zWr
+ 5/E1SpYvweVL/QTHpTFQQKx287JCAQLVzLry4cUwaOKjH+00YK4wOG1YK8+qB2tP
+ SlXEDFVfiEeGwL106YqTZ9/sUDy6nK42s4kxuPGv/fWVt26MpuBusxPwCnDQc6LY
+ QZGjYqkc1+uBJwbw00GVHptBaQTuz6y4cXp8wdmi6IyvM19TgQF7KcAkg5nEqEh+
+ vtoF1CVhPuTpUYuWCruzA==
+X-ME-Sender: <xms:NjR_atzmY0MN9SvqRMSzfKi9HSgz9c5m3R4bb1IsjHuEyrLSdiToTw>
+ <xme:NjR_atZ0VBiYM5V1IX-wsldqDB0FI07wFiwktruNZvUkDYIPACQDONssMWg2-fq7W
+ MMrJrzVWro3n-cEZMj-5x3UQDajEnbbvYYPJKh0Uw5jg0hMw1VMRx7G>
+X-ME-Received: <xmr:NjR_avQMCfQfpzGuXBYH2qm1lI9xjYYEet_TGPJFQIOz67KjCt21byjua471Ye_X6OA86g>
+X-ME-Proxy-Cause: dmFkZTFlcj0k83MDKof4hWght9wvWbkOEwpuDE0fkMrVuocNeArmHJvdtT3rMdqqS6m02n
+ 7G9VwTmOi+iFCwtEEtGd5g+HURCZegAA3VRKonw6oNd9hCxrBsSdMb5WcJxoxnocI1jCs0
+ LjVabEAzdNLrkARToj04UtE1/VO8+PN1epJRjYUcf3ArmuxMm5RJIT4Yt+xZbVBidK8PbN
+ wwoA5U9URoTlQlh4RcNcswyv+srWLgMXTBQUhLL0uGD0WJmcf5qKks7Jma28s6ep1TiN8o
+ gNaImo+biO3HSch2MzzB7c6Ah++9GMQjO7ZiFNRFf78KMv6sxke13FdjYxkStrg/08hDmz
+ FHH2AYbXoHcDOr1MMoZJ8b5UcE2+kt7Dh2wInlBpKXQKjZrQUdfdQBMhXtO3YoTYC8xgvY
+ KKINEzOsZSh49VWzaJecCc4qtKgN0ZKJWUUGlklCNHWxbSwzARkLkCR5M/7x5EFnw+m37o
+ lu997ih6/t62mAWWFkgJGnKgXz/avw+MIC/MZ+07UihBcSpWJArejM097K2fhwFCqYeJ/N
+ SnNPf6kVkac/DtqSKkcdhN3ZsXmj3JAzAr2Nh2H10C4KOBlGnMhvr4mBjg3QWKjGDD4vaF
+ waeX67j7ac3tjsf9EajQpBLslWrSyrHBfO/Dmh2rmNZLTxGDtCkd0xAyVkCQ
+X-ME-Proxy: <xmx:NjR_anx8nPV_i1MxzAiM0rNNHovZFAySx9Zd_IesEgsGrIZNkU8YGg>
+ <xmx:NjR_ap12suOpRHhduf-3-gINcqyxZX9g8sNKnKtTy1sQp7_7ZDD3Ew>
+ <xmx:NjR_at6caaH0Ium77K0AxXCgBmN1QzrLJVVo-_NgtIhfeMqb8sOimA>
+ <xmx:NjR_akV00GqbHHJXZ25f1RuRaG7c-vYliRF5sQUGJGugtF4EdJ1u2g>
+ <xmx:NjR_aiak4Qk7B4DS-38mf9vtb0J_1os2oZ5vakhi7TcMUMO-P27TToXw>
 Feedback-ID: ifd214418:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
- 14 Aug 2026 11:21:14 -0400 (EDT)
-Message-ID: <aa75ae349c5c92d1f232dc85989f1ce563b216c8.camel@alistair23.me>
-Subject: Re: [PATCH v2 36/52] disas/riscv: Skip post-processing of illegal
- insns
+ 14 Aug 2026 11:28:54 -0400 (EDT)
+Message-ID: <544d0aec6fc1edc1fd3d16f2f2adc659b9c57715.camel@alistair23.me>
+Subject: Re: [PATCH v2 00/52] disas/riscv: Reorganize the disassembler
 From: Alistair <alistair@alistair23.me>
 To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, Alistair.Francis@wdc.com
-Date: Sat, 15 Aug 2026 01:21:14 +1000
-In-Reply-To: <20260812223142.349142-37-richard.henderson@linaro.org>
+Date: Sat, 15 Aug 2026 01:28:53 +1000
+In-Reply-To: <20260812223142.349142-1-richard.henderson@linaro.org>
 References: <20260812223142.349142-1-richard.henderson@linaro.org>
- <20260812223142.349142-37-richard.henderson@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 User-Agent: Evolution 3.60.2 (by Flathub.org) 
@@ -107,42 +105,125 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, 2026-08-12 at 15:31 -0700, Richard Henderson wrote:
-> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+On Wed, 2026-08-12 at 15:30 -0700, Richard Henderson wrote:
+> One of my pet peeves is the non-automatic addition of indexes to
+> rv_op
+> which must match entries in rvi_opcode_data[].
+>=20
+> Reorganize the disassembler to pass around pointers to individual
+> opcodes
+> rather than pointer to table + index.=C2=A0 To do that, rewrite how pseud=
+o
+> ops
+> are processed, replacing indexes with pointers.=C2=A0 Merge the
+> decompression
+> of compressed opcodes into the pseudo ops mechanism.
+>=20
+> Fix quite a few bugs found in the process, mostly related to isa
+> level.
+>=20
+> Changes for v2:
+> =C2=A0 - Rebase on riscv-to-apply.next, which now contains Tiancheng's
+> fixes.
+> =C2=A0 - Adjust the DECOMP macro to make clang happy.
+> =C2=A0 - new patch: "disas/riscv: Skip post-processing of illegal insns"
+>=20
+> The only unreviewed patch is the new one.
+>=20
+>=20
+> r~
+>=20
+>=20
+> Richard Henderson (52):
+> =C2=A0 disas/riscv: Move operand extractors earlier in file
+> =C2=A0 disas/riscv: Reduce rv_insn to uint32_t
+> =C2=A0 disas/riscv: Tidy dec initialization in disasm_inst
+> =C2=A0 disas/riscv: Pass rv_opcode_data pointer to decode_inst_operands
+> =C2=A0 disas/riscv: Pass rv_opcode_data pointer to/from
+> =C2=A0=C2=A0=C2=A0 decode_inst_decompress
+> =C2=A0 disas/riscv: Pass rv_opcode_data pointer to/from
+> =C2=A0=C2=A0=C2=A0 decode_inst_lift_pseudo
+> =C2=A0 disas/riscv: Pass rv_opcode_data pointer to format_inst
+> =C2=A0 disas/riscv: Tidy disasm_inst main loop
+> =C2=A0 disas/riscv: Set dec->opcode_data in decode function
+> =C2=A0 disas/riscv: Drop explicit zero of rv_opcode_data fields
+> =C2=A0 disas/riscv: Drop useless const in structures
+> =C2=A0 disas/riscv: Drop codec from rv_decode
+> =C2=A0 disas/riscv: Handle c.addi4spn imm !=3D 0 during decode
+> =C2=A0 disas/riscv: Simplify c.addi
+> =C2=A0 disas/riscv: Handle c.lui imm !=3D 0 during decode
+> =C2=A0 disas/riscv: Handle c.{srli,srai} imm during decode
+> =C2=A0 disas/riscv: Handle c.slli imm !=3D 0 during decode
+> =C2=A0 disas/riscv: Do not recognize c.{addw,subw} with rv32
+> =C2=A0 disas/riscv: Remove rvcd_imm_nz
+> =C2=A0 disas/riscv: Unify decomp_rv{32,64,128}
+> =C2=A0 disas/riscv: Drop always true branch pseudos
+> =C2=A0 disas/riscv: Handle aliases of csrrw during decode
+> =C2=A0 disas/riscv: Handle aliases of csrrs during decode
+> =C2=A0 disas/riscv: Handle aliases of csrrwi during decode
+> =C2=A0 disas/riscv: Break pseudo loop for jal and jalr
+> =C2=A0 disas/riscv: Allow decode_inst_lift_pseudo to loop
+> =C2=A0 disas/riscv: Handle decompression via decode_inst_lift_pseudo
+> =C2=A0 disas/riscv: Drop format from DECOMP insns
+> =C2=A0 disas/riscv: Tidy rv_comp_data terminators
+> =C2=A0 disas/riscv: Chain "ret" pseudo off "jr" pseudo
+> =C2=A0 disas/riscv: Chain "nop" pseudo off "mv" pseudo
+> =C2=A0 disas/riscv: Use rv_codec_illegal for pseudos
+> =C2=A0 disas/riscv: Simplify some insn decompressions
+> =C2=A0 disas/riscv: Store op pointer in rv_comp_data
+> =C2=A0 disas/riscv: Return rv_opcode_data pointer from decoders
+> =C2=A0 disas/riscv: Skip post-processing of illegal insns
+> =C2=A0 disas/riscv: Reject all of OP-32 and OP-IMM-32 for RV32
+> =C2=A0 disas/riscv: Fix rv32 encoding of zext.h
+> =C2=A0 disas/riscv: Fix isa decoding of rev8
+> =C2=A0 disas/riscv: Fix typo in th.lbib format
+> =C2=A0 disas/riscv: Split ventana_opcode_data
+> =C2=A0 disas/riscv: Split xlrbr_opcode_data
+> =C2=A0 disas/riscv: Split xthead_opcode_data
+> =C2=A0 disas/riscv: Move rv_op_illegal to riscv.c
+> =C2=A0 disas/riscv: Split out riscv-op.c.inc
+> =C2=A0 disas/riscv: Merge all mop.r.n to one pattern
+> =C2=A0 disas/riscv: Merge all mop.rr.n to one pattern
+> =C2=A0 disas/riscv: Merge all c.mop.n to one pattern
+> =C2=A0 disas/riscv: Tidy decode of c.mop.n
+> =C2=A0 disas/riscv: Tidy decode of mop.r.n and mop.rr.n
+> =C2=A0 disas/riscv: Split rvi_opcode_data
+> =C2=A0 disas/riscv: Sort riscv-op.c.inc
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
-> ---
-> =C2=A0disas/riscv.c | 8 +++++---
-> =C2=A01 file changed, 5 insertions(+), 3 deletions(-)
 >=20
-> diff --git a/disas/riscv.c b/disas/riscv.c
-> index bc86cb866a..75c2fa11e6 100644
-> --- a/disas/riscv.c
-> +++ b/disas/riscv.c
-> @@ -5321,12 +5321,14 @@ static GString *disasm_inst(rv_isa isa,
-> uint64_t pc, rv_inst inst,
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =
-}
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }
-> =C2=A0=C2=A0=C2=A0=C2=A0 }
-> -=C2=A0=C2=A0=C2=A0 if (!op) {
-> +
-> +=C2=A0=C2=A0=C2=A0 if (op) {
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 decode_inst_operands(&dec, is=
-a, op);
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 op =3D decode_inst_lift_pseud=
-o(&dec, op);
-> +=C2=A0=C2=A0=C2=A0 } else {
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 op =3D &rvi_opcode_data[=
-rv_op_illegal];
-> =C2=A0=C2=A0=C2=A0=C2=A0 }
-> =C2=A0
-> -=C2=A0=C2=A0=C2=A0 decode_inst_operands(&dec, isa, op);
-> -=C2=A0=C2=A0=C2=A0 op =3D decode_inst_lift_pseudo(&dec, op);
-> =C2=A0=C2=A0=C2=A0=C2=A0 return format_inst(24, &dec, op);
-> =C2=A0}
-> =C2=A0
+> =C2=A0disas/riscv-xlrbr.h=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0 |=C2=A0=C2=A0=C2=A0 4 +-
+> =C2=A0disas/riscv-xthead.h=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0 |=C2=A0=C2=A0 24 +-
+> =C2=A0disas/riscv-xventana.h=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=
+=C2=A0=C2=A0=C2=A0 4 +-
+> =C2=A0disas/riscv.h=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0=C2=A0 46 +-
+> =C2=A0disas/riscv-xlrbr.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0 |=C2=A0=C2=A0 57 +-
+> =C2=A0disas/riscv-xthead.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0 |=C2=A0 503 +--
+> =C2=A0disas/riscv-xventana.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=
+=C2=A0=C2=A0 23 +-
+> =C2=A0disas/riscv.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | 6390 +++++++++++--------------=
+------
+> --
+> =C2=A0disas/riscv-op.c.inc=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0 |=C2=A0 913 +++++
+> =C2=A0disas/riscv-xlrbr-op.c.inc=C2=A0=C2=A0=C2=A0 |=C2=A0=C2=A0=C2=A0 8 =
++
+> =C2=A0disas/riscv-xthead-op.c.inc=C2=A0=C2=A0 |=C2=A0 125 +
+> =C2=A0disas/riscv-xventana-op.c.inc |=C2=A0=C2=A0=C2=A0 2 +
+> =C2=A012 files changed, 3411 insertions(+), 4688 deletions(-)
+> =C2=A0create mode 100644 disas/riscv-op.c.inc
+> =C2=A0create mode 100644 disas/riscv-xlrbr-op.c.inc
+> =C2=A0create mode 100644 disas/riscv-xthead-op.c.inc
+> =C2=A0create mode 100644 disas/riscv-xventana-op.c.inc
 
