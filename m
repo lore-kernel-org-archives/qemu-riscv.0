@@ -4,108 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5607C5CFC1
-	for <qemu-riscv@archiver.kernel.org>; Fri, 14 Aug 2026 07:53:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C65D4C5CFC1
+	for <qemu-riscv@archiver.kernel.org>; Fri, 14 Aug 2026 08:23:03 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wumjE-000451-O2; Fri, 14 Aug 2026 03:53:24 -0400
+	id 1wunBR-0001pd-Ip; Fri, 14 Aug 2026 04:22:33 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1wumjC-00044E-Uh
- for qemu-riscv@nongnu.org; Fri, 14 Aug 2026 03:53:22 -0400
-Received: from mail-yw1-x1133.google.com ([2607:f8b0:4864:20::1133])
+ (Exim 4.90_1) (envelope-from <314abh@gmail.com>) id 1wunBM-0001oz-Vg
+ for qemu-riscv@nongnu.org; Fri, 14 Aug 2026 04:22:29 -0400
+Received: from mail-pj1-x1030.google.com ([2607:f8b0:4864:20::1030])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1wumjB-0002vF-9c
- for qemu-riscv@nongnu.org; Fri, 14 Aug 2026 03:53:22 -0400
-Received: by mail-yw1-x1133.google.com with SMTP id
- 00721157ae682-836c718715fso9379687b3.0
- for <qemu-riscv@nongnu.org>; Fri, 14 Aug 2026 00:53:20 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1786694000; cv=none;
- d=google.com; s=arc-20260327;
- b=aHIdAPIRpfBKhpXICkgJAHDjqcIa2uIV0QnpsAWXgEOO54VVOxS0x9hHJ/h6PgBp3W
- TuROpo3tXcGm3uIsA54YmFpzFoUNpI830yrnHAJ2vt03kqOqfppt+DJvQalEAS1Y3Ubq
- yMK4hypik5vYl7//63Lnyjmef+83pVGvgDEzYMotUWVfO5g+UCJTkmcWD7gclgizd9FR
- 0zUbdC2j8kdQNZHyQ5AulLma98MZhTutjmJC5W1PKPvFS2AUpJHgUyXMvB2gYqKFEAss
- bYQKMomaE3yGsvszR2z8P5QOXJrbdWOdfhdUHpUKXZAgpeV1Trr//72qz04pUYPw6V0Z
- zGBw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=zxpahKhomwIfxYd+z+Isjdq+GaKEevimYu07RsoY91A=;
- fh=tS1RBONG2Od3evjSXEdggdev4c8D3m8ZNpBMhnmqPRM=;
- b=YOuRQMgs2eodIvrSl42Z9PnMywivc6OHtpr2srIg7gtb9o3YQyxonOACIsbFteAni5
- O4LAJFUPHdoFiSTDGUm1fRbv9Eb8zeZXQ/kzAwTyIVJb89bteKQ569hg/nqAlGifMbeO
- WykQlqe4ZhCAK40tGmvejePghD4tsqwluHRLMTQQcnIVUPfOSBqYEv72qH4rEGxTP6Vh
- 9r6UXpBa+c2vx6xTQD+8PSdHeFXLCRGrl5P18ifCZTp4ZmvnS4a8OvBlaIri6Vj1/KbX
- InPf8V1o8ougpb+uJxxTV1PH/W7St/IEqyUnD/KVnFs1tx2ni0cTDnyMlTlUSpoN4t8x
- TqAA==; darn=nongnu.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ (Exim 4.90_1) (envelope-from <314abh@gmail.com>) id 1wunBL-0007c2-Gi
+ for qemu-riscv@nongnu.org; Fri, 14 Aug 2026 04:22:28 -0400
+Received: by mail-pj1-x1030.google.com with SMTP id
+ 98e67ed59e1d1-3900e39d935so701256a91.0
+ for <qemu-riscv@nongnu.org>; Fri, 14 Aug 2026 01:22:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1786694000; x=1787298800; darn=nongnu.org;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=zxpahKhomwIfxYd+z+Isjdq+GaKEevimYu07RsoY91A=;
- b=BH8cXsGFIRHthr6Z6uJjT9QEXPcswpE91MCY7ZQQ9/sAgzLfZcqqB0VlBKesfEQBX8
- 4tlWPGwGSkveSQ7YsVG1gXD0epa5jydqH06ZdRQVR5jRyv+DwyoGQ2YIWHtdSrFqtmzZ
- U+/YUY2OG4lYcdiVSHwh35JtG3TSsNkWRFuxaVaNjU22lbMDzDQmS2sDEC1Gpl+DpPni
- O1WFtHAz8L14Kf9ZmdIsxUUQjtXEneGaIjjTanJJvZyKK2bwpiYSxCQyZT2wwZoog3JQ
- XKjb3tJEbib3VDEYXdEuffDcKqP4T/Rk8a/DeKusPJA59XlqnXUAMUT1hYFQvYdXJwt7
- VmDg==
+ d=gmail.com; s=20251104; t=1786695745; x=1787300545; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=OzPTbr5W9I3uHTFntkfjo5xfeIQxbJCZBUMEDG07isQ=;
+ b=Po8qtgSiaJuvWGjxMICDUf2RnD2u8UfDrxmd9Zk6VAGWqaJ4ttqVd/b7nP3+aICVhc
+ rmTHYXvskv6p19DOGKavXRa2wX27zcx/CBJ9KQlDodXvIe2xt82Y1EgupZ8b89tdC2X5
+ 1OjCH/FHSorINfhc7vE++2/+g0b5ITkZU1Dx5NPAWZyXpY8fHt2IDOHKCT/Lh4nqYnTC
+ 3jg6iqGI/6nhvvTrcD54KPTtAFCXG0JSS8rjD8y/h9k+b/JarT2tYPe7JlzMbb8xDrl5
+ u18c4fTRartLQ/nej5Ky9UxjZU8qxCnAQzW9tEu1ga8jjsam9jhgaSdNM5i9HJu9g7nx
+ OhGQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786694000; x=1787298800;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=zxpahKhomwIfxYd+z+Isjdq+GaKEevimYu07RsoY91A=;
- b=kHQ5ucSQr5VTMqaweQUAAilzkRQamJdBOLka5WNKkGEKpyYs2uCzCWSwc/PUBi/T86
- unT+CqjSVPqqLOGomWPr6bhnB8G4oeZAKWW04Q/chTmU1RUIyqx7Rwu0UNyrbcfz3L/t
- A6yHj60gZGaeB7MmnPKXRQUnpePUZR6YEEDepmYC2Iw988exa6nPVsJ65wtCKBt2F9O4
- OxsqPUOhHKlz7vYyU1dqEa0hVDmUh2tpc66ricUxnzteoSWz7i3CTWq/oVmQRRhcm/b0
- 5IrWabMHtrUOuru8EgIZ/5WcMjVAYCwL/KTWSJnCcxwhkCpqYFilCGGHwGWupDdCrTMH
- mUAw==
-X-Forwarded-Encrypted: i=1;
- AHgh+RoeHZZczSdwePLZgacG0dwg1q5mmXJfrMEnpwXb2qVj6tOO8/oR+aXQu5RJrtjtZfFptVTzEy5hGm4g@nongnu.org
-X-Gm-Message-State: AOJu0YxTTk1SGTe7WkM/3OZ/2aY5GWsO9HWVaEITdOxSCotlbNJREoSL
- XWWoybN2TDIWZs+apwcXMVpAunHDp522ZETQLmJXU9NMDf9OyA979T/1Yx+7zfRUu1guEVEQjfJ
- JlJE8NB8xS27V3jCs9JzD27A5gEwAKQQ=
-X-Gm-Gg: AR+sD13AwnMAxrHJPUx7Ofp3THhCncmGf9sMV88Z5pN8y7+9giqQCAW6c3q5+7/7oZC
- XnOEfsgmOmaBnjShs5t5q6VOmyKe6LVhjibqkaiMjty050lCOseBwywhW9l0OvScbJmYF1nmVqa
- 0A4qD0Af57miDudL47IL4d2IRSSS267F8kOr5pfusbu0QFz6e82C9V6WszWE7L5kcDzSh8mITKP
- fCei+tYU+NmW5zCsayIBW6EA6pRQC16shuK/TOGWJxJqpS130zaO8MR+MUB/FgG9oYGCZTIH+Rj
- DeiVF4uZHwc9d/yUm+ldqgJ8BxbeySX7srdjfLdkH4TLjo5Z1/Wl/Lk=
-X-Received: by 2002:a05:690c:e647:b0:81c:e8ab:c4dd with SMTP id
- 00721157ae682-8371356e7d9mr9143937b3.33.1786693999934; Fri, 14 Aug 2026
- 00:53:19 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1786695745; x=1787300545;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=OzPTbr5W9I3uHTFntkfjo5xfeIQxbJCZBUMEDG07isQ=;
+ b=JWg/25iWt5aRuQAva03gH05DWjx28jBfGd8C5wj9qJhQPS/V//WT8quCA9kWXTz31Y
+ vuSkom4zUk+SWVqvhrapak8YSBLK7uROQnZ1K7IIL5xPvud2NVUFJbfZx1803jb4aYi1
+ QAi6pcYcAZmNLcAFxrnG8FZyjWcud9Bu9Z8QJIaHdkT0aBfueUBBjeZtIiZ1ZcKbXbtt
+ ok3lwstBpWj35/Oc+liPLBaoUIONKzP5hQKFmd1SoO3dljfblhZiLATbUL6XWU4ZnF3V
+ RfL2cRS908Dh5tUA3y7IraHvbXVHgz5vwBNZ23/b6RLyUNIRNmrgfYPqO/cIemotU0si
+ UpRA==
+X-Gm-Message-State: AOJu0YxmM7YXzh32JIM2SvWaPyqygWILGq/9iUsDwq2p4MGuRUDki5W3
+ 3uZJJlVFPorCt9DSVk+2GExo1F8CNIJ/pMYa9ThHt9u4R4Awt4QX501AzAQUuQ==
+X-Gm-Gg: AR+sD13dTDh+K6HhBWv5It7hg9QHU4BmkFE/jPYVBXh1sCoDuvQyrenfEUrFfuav6RA
+ 0K7RIYMjoj+ShX2jL8ftiT2iWXFJEWmAOdVlw7ROKPKtQgPUKrzKtVB4I5LnP8/R6DUGNVt5Ffr
+ ug2+R6zTdMXNcZJkXMhSwimCJIWQoXPPdthkFddxzwJxKxhbY0Rx910R+5de4evP7uuzwh86c4+
+ S9zs5gfcw/BKIzDSXt00UmMYma0z7cAP1Zp49HiaACOK3lqxu21okZaWT3XJ5UxdRQF0tV8W31E
+ QW6CvFl0zqYPQaMpI7nMcxTzAzLGfOjV5kDPDqpYmTvaxinHIubaTJL/yjKLdE8C1f83RguojXO
+ rbTMLXbHlvXCzmDhQPdADGzqX/epzdZHjXtn9KNFAnTvHAkunzMBs8XKh07niiHyOdet82Ln/Hw
+ PER7GOIJ0jBt/ASmKeN+Ej4+pcnXNPdeHnWsQ6TTzQBmMRHNDQqPs3ig7y
+X-Received: by 2002:a17:90b:58e5:b0:381:a766:efc9 with SMTP id
+ 98e67ed59e1d1-3933caf3a05mr4347580a91.7.1786695745458; 
+ Fri, 14 Aug 2026 01:22:25 -0700 (PDT)
+Received: from arch ([112.133.246.3]) by smtp.gmail.com with ESMTPSA id
+ 5a478bee46e88-320d60eb8eesm1829287eec.10.2026.08.14.01.22.21
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 14 Aug 2026 01:22:24 -0700 (PDT)
+From: Abhigyan Kumar <314abh@gmail.com>
+To: qemu-riscv@nongnu.org
+Cc: qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Chao Liu <chao.liu.zevorn@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Abhigyan Kumar <314abh@gmail.com>
+Subject: [PATCH] target/riscv: make cbo helpers [ms]envcfg gating in user-mode
+Date: Fri, 14 Aug 2026 13:52:17 +0530
+Message-ID: <20260814082217.278685-1-314abh@gmail.com>
+X-Mailer: git-send-email 2.55.0
 MIME-Version: 1.0
-References: <20260809-feat-k230-cmu-v1-0-8792982c446c@gmail.com>
-In-Reply-To: <20260809-feat-k230-cmu-v1-0-8792982c446c@gmail.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Fri, 14 Aug 2026 15:53:07 +0800
-X-Gm-Features: AUfX_mzOoBgisoPjZ1H_MalKfjaVwJYBDgd9mnJ091tnoIx-BAG_IuUCPE-wGDI
-Message-ID: <CAEUhbmVQid5yboTQzDTANT-zMEzLiJkom0qLfKRV-nP3nq5uaw@mail.gmail.com>
-Subject: Re: [PATCH 0/4] Kendryte K230 CMU register model
-To: Simon Law <0860734llx@gmail.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, chao.liu@processmission.com, 
- palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com, 
- daniel.barboza@oss.qualcomm.com, zhiwei_liu@linux.alibaba.com, 
- pierrick.bouvier@oss.qualcomm.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1133;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yw1-x1133.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1030;
+ envelope-from=314abh@gmail.com; helo=mail-pj1-x1030.google.com
+X-Spam_score_int: -13
+X-Spam_score: -1.4
+X-Spam_bar: -
+X-Spam_report: (-1.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ FROM_STARTS_WITH_NUMS=0.738, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -121,65 +98,33 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hello,
+Current implementation of check_zicbo_envcfg is wrapped in an if-else
+macro that eliminates the function during compilation for user-modde.
+But, the zicbo spec states that [ms]envcfg gating is to be used.
 
-On Sun, Aug 9, 2026 at 7:47=E2=80=AFPM Simon Law <0860734llx@gmail.com> wro=
-te:
->
-> The Kendryte K230 machine currently lacks the Clock Management Unit (CMU)
->   register interface required by the K230 SDK U-Boot and the Linux K230 c=
-lock
->   driver. As a result, software probing the PLL and sysclk providers cann=
-ot
->   observe the expected reset values or register update semantics.
->
->   This series adds a minimal, deterministic K230 CMU model.
->
->   The model covers:
->
->   - four PLL register blocks at 0x91102000..0x9110203f;
->   - the defined sysclk registers in the 0x91100000 window;
->   - the software-visible SPI2AXI_CLK_DIV register at sysclk offset 0x108;
->   - reset values and writable/reserved/read-only masks;
->   - PLL control write-enable semantics;
->   - write-one-to-trigger update behavior;
->   - deterministic PLL lock and initialization status;
->   - VMState for stable PLL and sysclk register state;
->   - qtest coverage for reset, masks, write-enable, W1T, status, sysclk
->     updates, unknown offsets, and system reset;
->   - K230 machine wiring and user-facing documentation.
->
->   The model intentionally does not propagate clock frequencies to QEMU de=
-vices or
->   change CPU execution speed. Peripheral reset, power control, and the
->   guest-initiated K230 reboot backend remain outside the scope of this se=
-ries.
->   Those functions require separate reset/power models and a matching Open=
-SBI
->   backend.
->
->   The implementation is based only on the existing K230 machine and does =
-not
->   depend on unmerged RMU, Timer, SPI, or SDHCI device series.
->
->   Testing:
->   - QTEST_QEMU_BINARY=3D/workspace/qemu/build/qemu-system-riscv64
->     /workspace/qemu/build/tests/qtest/k230-cmu-test
->     (10/10 subtests passed)
->   - QTEST_QEMU_BINARY=3D/workspace/qemu/build/qemu-system-riscv64
->     /workspace/qemu/build/tests/qtest/k230-wdt-test
->     (7/7 subtests passed)
->   - K230 direct Linux boot and K230 U-Boot boot
->   - Linux K230 clock probe and clk_summary validation
->   - CMU source/destination migration smoke
->
-> Signed-off-by: Simon Law <0860734llx@gmail.com>
+Fixes: https://gitlab.com/qemu-project/qemu/-/work_items/4107
+Signed-off-by: Abhigyan Kumar <314abh@gmail.com>
+---
+ target/riscv/tcg/op_helper.c | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-Is this clock modeling a must-have to make U-Boot or Linux boot on the
-QEMU k230 machine?
+diff --git a/target/riscv/tcg/op_helper.c b/target/riscv/tcg/op_helper.c
+index ba3c7da..bc899c4 100644
+--- a/target/riscv/tcg/op_helper.c
++++ b/target/riscv/tcg/op_helper.c
+@@ -160,6 +160,11 @@ static void check_zicbo_envcfg(CPURISCVState *env, target_ulong envbits,
+     if ((env->priv < PRV_S) && !get_field(env->senvcfg, envbits)) {
+         riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, ra);
+     }
++#else
++    if (!get_field(env->senvcfg, envbits) ||
++        !get_field(env->menvcfg, envbits)) {
++        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, ra);
++    }
+ #endif
+ }
+ 
+-- 
+2.55.0
 
-Is an unimplemented region enough to make the software happy?
-
-Regards,
-Bin
 
