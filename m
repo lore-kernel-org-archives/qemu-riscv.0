@@ -4,89 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77A38C5CFC1
-	for <qemu-riscv@archiver.kernel.org>; Fri, 14 Aug 2026 20:02:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E5C9C5CFC1
+	for <qemu-riscv@archiver.kernel.org>; Fri, 14 Aug 2026 20:03:33 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wuy6F-0000DZ-HY; Fri, 14 Aug 2026 16:01:55 -0400
+	id 1wuy7Y-0000c7-AE; Fri, 14 Aug 2026 16:03:16 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <palmer@dabbelt.com>)
- id 1wuy6E-0000Cs-CI
- for qemu-riscv@nongnu.org; Fri, 14 Aug 2026 16:01:54 -0400
-Received: from mail-pj1-x102c.google.com ([2607:f8b0:4864:20::102c])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <palmer@dabbelt.com>)
- id 1wuy6B-00068Z-Ex
- for qemu-riscv@nongnu.org; Fri, 14 Aug 2026 16:01:53 -0400
-Received: by mail-pj1-x102c.google.com with SMTP id
- 98e67ed59e1d1-38ea87caafeso1297494a91.3
- for <qemu-riscv@nongnu.org>; Fri, 14 Aug 2026 13:01:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=dabbelt-com.20251104.gappssmtp.com; s=20251104; t=1786737703; x=1787342503;
- darn=nongnu.org; 
- h=content-transfer-encoding:content-type:mime-version:message-id:to
- :from:cc:in-reply-to:subject:date:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=YrVtN9FHS76Esyh7eMWICwS5dx95gcrkhmNKAjrP5BA=;
- b=tdyKue6/M0MA+Dxfhp6o6jgl8PkJa7dzcoSxNuigbD5wOvwYPW5V33oMU3YcU0SHj/
- R2uuY6YFr/YPyIH1bTqHkjkldFqCUI0IrPT4lVjTtzLW1k8fjbTZxY46Z65NCPM2e3Ya
- Cbn8jJtixkF7W+iascN8RMIxmLsmka/Y3e09deLhNY4sJUn8Xh4Oe6WTpAViSDiIo5EX
- Ez4odpVlIfnkYj0akPfm+MtCTqMt8B+guoAKyxX9TkS4a1jrIyW3GgxhFKvyJDH1MaFG
- yQ687DQDXXroSdMx4DnKUp3t0a5pOqc0f0ETy8rpFfA9dbBSWUtF4cIjSnsHvpIXOJzd
- 402A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786737703; x=1787342503;
- h=content-transfer-encoding:content-type:mime-version:message-id:to
- :from:cc:in-reply-to:subject:date:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to:content-type;
- bh=YrVtN9FHS76Esyh7eMWICwS5dx95gcrkhmNKAjrP5BA=;
- b=AVGYQ8mY/Sa0XW9jGogwVP4W9znIhhYNO7MW3P0mPJ2PP0sR0dCjVDiEQ4OYddNB9H
- 4o5rLzHsnWBhEuzzn58fh3DqIw3r4JwGQjuSkj4r3y0FfYVHYTmWcPKSsFrRPZzr5YHF
- X6f8bbVULrxUQpe8f0DT168qqpE2KFhd53g6iDZv9xqN4GXmvXao6DZgBSG0KbTBNs/z
- +tA6OBseuHF4o3FBsBTYfHD/tQsC5BNVch8OVESxX2OBfotYW74nya7wVQYP51FwOS/6
- XLqeQSa13RmgR6VEcjkuUxmCorC/mXG/l0tyDqtsbNYg3ZHD1U6+Hwu15gtXIsAOj+MG
- /++Q==
-X-Forwarded-Encrypted: i=1;
- AHgh+Rru3axGTFkBx3CT2c6NeyWvqW0kIgKWevWGXJGOOyzk9oacpp2QkldUUtAo7A9iFLN8gEi/ZZm1g6A3@nongnu.org
-X-Gm-Message-State: AOJu0YysrDYMaMaCOmSerq9SFJe209L5QiND54qNL+XV8WCBNIcZ7Jdf
- 65w44zd/Uwo56nrgfcCXvixPsXz35PQ0m1zB2goCqmN2AVdtn+MaR8OvPJzEF/umeiI=
-X-Gm-Gg: AR+sD11ClvFxeaMAw4RI9r+W4KimyT1/lp4Spp/mrOKnigp61rOyAKYRrxU8PLGoscZ
- I+PbINYH8Zjs9+4aF606f/Nrx4bKHt2jxZQiWD+LwTnsH9yRn7QIjDEo/gOZQBLo3SAaNwnlpyW
- Q5yGps7NECj2jHzoSFMhABxFDgw3iuRVHTyFwZXu915op4MSuS0q6iEalETzg2mzjjwUaAq/5x6
- /aX1khmGDAblI4cXJGRn5+dltplb4uwxG1+7vyzpka3eZzC1r5TKO//1OA2zg6IkQx46wuRfpxr
- T0sRLz0S2pXQlEMkfFY6TJnDSLHnt25EUFWiHj+2DuySfUWds8ONUZDcm7Dcem5vFThPqelntBw
- e7CJxDW78ODElQRRy3k2ziWZW7JbYrUdIsOATbvV9vQVggSEWIy51MxSPmfOVdPkjiTq6sacLap
- RtHdocRxtiOc896FruNl+6sVLEn8xOC9NfRh+FiC3NAFF1ZlL/Ee7Y/DBInj99cnHjDVyzEtB+q
- w==
-X-Received: by 2002:a17:90b:5606:b0:381:25ce:bcc2 with SMTP id
- 98e67ed59e1d1-3933b78b698mr9740212a91.6.1786737703037; 
- Fri, 14 Aug 2026 13:01:43 -0700 (PDT)
-Received: from localhost ([192.184.165.199]) by smtp.gmail.com with ESMTPSA id
- a92af1059eb24-1413889bca5sm17312133c88.12.2026.08.14.13.01.42
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Aug 2026 13:01:42 -0700 (PDT)
-Date: Fri, 14 Aug 2026 13:01:42 -0700 (PDT)
-X-Google-Original-Date: Fri, 14 Aug 2026 13:01:41 PDT (-0700)
+ (Exim 4.90_1) (envelope-from <alistair@alistair23.me>)
+ id 1wuy7V-0000bK-Js
+ for qemu-riscv@nongnu.org; Fri, 14 Aug 2026 16:03:13 -0400
+Received: from fout-a1-smtp.messagingengine.com ([103.168.172.144])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <alistair@alistair23.me>)
+ id 1wuy7T-0006lm-S5
+ for qemu-riscv@nongnu.org; Fri, 14 Aug 2026 16:03:13 -0400
+Received: from phl-compute-04.internal (phl-compute-04.internal [10.202.2.44])
+ by mailfout.phl.internal (Postfix) with ESMTP id 255D5EC010B;
+ Fri, 14 Aug 2026 16:03:11 -0400 (EDT)
+Received: from phl-imap-06 ([10.202.2.83])
+ by phl-compute-04.internal (MEProxy); Fri, 14 Aug 2026 16:03:11 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alistair23.me;
+ h=cc:cc:content-transfer-encoding:content-type:content-type
+ :date:date:from:from:in-reply-to:in-reply-to:message-id
+ :mime-version:references:reply-to:subject:subject:to:to; s=fm3;
+ t=1786737791; x=1786824191; bh=nUPqNr7BU11Ln7crEF/23H1MlX8gVsEB
+ RVwroq5Whgo=; b=Q6xNiw79BdeIQxu4nJpY7nQumPJavTSWYiqLHHl5XO76WHFY
+ KbZx85NBBP0UcnxhE7RggHR18Dk/fK3jVyvzomNQ2EVKtM0Tbu88ICKFBD3vOMcc
+ RNGvgBKz8Q5w1pOpo2AC/Up/DuanpF76FsgMRWhhpBtPlPMSWlPDdjUUSSoi5jp3
+ zqve3MUWYWU1AhHiaj29AmwloDR+acE2VNJC1HGvR/hcoPkEnzysOnbSIhxfgVAz
+ 1fMiu3LyAOtgG/iRBzOv8oskuOYPpqRbXbwSKsskuUYl6+uXsFotCrE1vX8Y9DA4
+ CvhE0ls8Fycn3jM8SPsVTs/ZrKlHE0EKdEFE2Q==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-transfer-encoding
+ :content-type:content-type:date:date:feedback-id:feedback-id
+ :from:from:in-reply-to:in-reply-to:message-id:mime-version
+ :references:reply-to:subject:subject:to:to:x-me-proxy
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1786737791; x=
+ 1786824191; bh=nUPqNr7BU11Ln7crEF/23H1MlX8gVsEBRVwroq5Whgo=; b=e
+ lvPiWINnoYW4P0x+fAZH6aKOmI34yS0tTGgYb+ZnL3P65g1/Hxvb1yldy5D3/J7i
+ PM9v/zDbTCzTK9b9fDFk6CWnzTEMi0Q2v+HjjwWct3Xp8tPxYdw/ycVxMwzLYumy
+ eXRYr0tMDfYnxzxrLBKrfiU+BX9pZJH7SoS0V3ju1HegJJKZ97kka2KFFVCzkzbt
+ Npv224RR82wWwLdn9PU54L71wY//o1oAmKt6doNTp8vzcvHdAy0N/jofKpGVMwN1
+ hLDN2xeGWwerqnULhjyU76X1fX1kWiSQ0g9EdQeBJrACE0DSti8ErQV8efmrR0fq
+ K/Hau3mTWWQvpBYYHX3qg==
+X-ME-Sender: <xms:fnR_av5k1GJafQPrUZyhu0lPo2thlO21xArIVvZlGh2aRyVAeEEa3Q>
+ <xme:fnR_avsH4iDM2xoVSmi2y7vl0SWNv-R7m2Lo_hupmfRPWax97IapDN9beHeIqdxvg
+ CqqPGD0s_JsCka8b7h271HUy2OG3zu9uytKMgm7X2b8uMoPvwOITPs>
+X-ME-Proxy-Cause: dmFkZTGmAxBX9dLDma77Thvhf6vpsVwdvWCXzkIQ0BqPP/7N3OjxargjchjQtt2NXLQW8F
+ BoDqeg2pHwaxXMiTM0//zlQNbZP6aZO8qCRSeX4II2PRzf4wuyukGaoorQcj2zFix5A4Xg
+ X4AAflH0rPNZ9KG6uG7obgu2FFRMF6QebxhAp/hEuBd9M1+nrYSEszdYXgGbid3P3+g7s0
+ XJhMl7ZO6vAKYcWNuBt4eVpC+uFZjcTTo1d5r47aicMBDGN103xFhct5Y37N17Jmfj5n28
+ R0hifGGMPWiAb5zbom4vCjn0E2FgPhruHlPgUqFnU6K2DPgY7JpLmpdlG3yRjJK6Z9XHaJ
+ QagT0G7LSg5J/xvB9CuOb/2q6bN0mmj2exhFbonKbIuPNKZ+Jz+boiRObfZd08GaCWSd7j
+ 7yjQQtV/Ur84d/wkZ8sezTVFZnf462F5jpEY+DepifTB1/VPUdM6YeU2DjwEDTtPVijbDB
+ YbpdxGB38OcBepRbkDtDwSlYOxSP6CXjzc6FJYj1VqxgNCuH1HniKHTe7Gpq+XcJ6WShsr
+ RTOO4/YppaiYjJANTRo6zieQV8uJlu6cokbAhlnNuEtOhaFxMoJhk0p4HVJvEVCGHpv8qu
+ qQlE2Mb2uV9MzCl9oXad0SphEGeWw0FfwRzKtJe51Vu1eMIHbu6Y9Df1enxA
+X-ME-Proxy: <xmx:fnR_asYmHwl_udZBafudtk8EdViSpEsDTPwIF41TzyLhbYUMVOtm9w>
+ <xmx:fnR_aj9NbckTuRTMcwRZXHYACkXTUkEj0XENqJvLOJgfTGOyxXGtzQ>
+ <xmx:fnR_ara2qkIlFrSdOPlm7l7nS7XunoAkzluBtvSCZAyf2rS2JDQ_rg>
+ <xmx:fnR_atdQFDdD80QZOZLFTatNBoHogczEem5CsbKIHT_GXpV_Q7j72Q>
+ <xmx:f3R_au0uolcCLujnarD1AM6H0wgliLo3u-N-65v8CvgxMNFLUSGsHBkA>
+Feedback-ID: ifd214418:Fastmail
+Received: by mailuser.phl.internal (Postfix, from userid 501)
+ id D1E9F2400098; Fri, 14 Aug 2026 16:03:10 -0400 (EDT)
+X-Mailer: MessagingEngine.com Webmail Interface
+MIME-Version: 1.0
+X-ThreadId: AbA2t0igsNsw
+Date: Sat, 15 Aug 2026 06:02:50 +1000
+From: Alistair <alistair@alistair23.me>
+To: "Palmer Dabbelt" <palmer@dabbelt.com>
+Cc: "Daniel Henrique Barboza" <daniel.barboza@oss.qualcomm.com>,
+ "Joel Stanley" <joel@jms.id.au>, "Weiwei Li" <liwei1518@gmail.com>,
+ "Liu Zhiwei" <zhiwei_liu@linux.alibaba.com>,
+ "Chao Liu" <chao.liu.zevorn@gmail.com>, qemu-riscv@nongnu.org,
+ "Max Chou" <max.chou@sifive.com>, "Michael Neuling" <mikey@neuling.org>
+Message-Id: <36034205-c5ff-47a7-b7ce-210ef43b4371@app.fastmail.com>
+In-Reply-To: <mhng-CD4B9E6C-F77D-4A7D-9118-A21A9776D3FA@Palmers-Mini.rwc.dabbelt.com>
+References: <mhng-CD4B9E6C-F77D-4A7D-9118-A21A9776D3FA@Palmers-Mini.rwc.dabbelt.com>
 Subject: Re: Regular QEMU RISC-V Call
-In-Reply-To: <da7e0e41-50d0-4fbf-a733-567a563f2692@app.fastmail.com>
-CC: daniel.barboza@oss.qualcomm.com, joel@jms.id.au, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com, qemu-riscv@nongnu.org,
- max.chou@sifive.com, mikey@neuling.org
-From: Palmer Dabbelt <palmer@dabbelt.com>
-To: alistair@alistair23.me
-Message-ID: <mhng-CD4B9E6C-F77D-4A7D-9118-A21A9776D3FA@Palmers-Mini.rwc.dabbelt.com>
-Mime-Version: 1.0 (MHng)
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102c;
- envelope-from=palmer@dabbelt.com; helo=mail-pj1-x102c.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=103.168.172.144;
+ envelope-from=alistair@alistair23.me; helo=fout-a1-smtp.messagingengine.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
+X-Spam_bar: --
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H2=0.001, SPF_HELO_PASS=-0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -103,142 +111,147 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, 14 Aug 2026 13:00:04 PDT (-0700), alistair@alistair23.me wrote:
-> On Wed, 22 Jul 2026, at 5:02 AM, Daniel Henrique Barboza wrote:
->>
->>
->> On 7/21/2026 3:37 PM, Alistair Francis wrote:
->> > On 17/6/26 09:18, Alistair wrote:
->> >> On Tue, 16 Jun 2026, at 8:35 PM, Alistair Francis wrote:
->> >>> On 16/6/26 16:07, Joel Stanley wrote:
->> >>>> On Thu, 11 Jun 2026 at 13:52, Alistair <alistair@alistair23.me> wrote:
->> >>>>> For the time, I'm picking Wednesday the 17th of June at 10AM AEST (UTC+10). Hopefully that works ok for everyone. If it doesn't let me know and we might be able to move it around.
->> >>>
->> >>> That means the meeting should start in a little less then 13 and a half
->> >>> hours! I'll send out a Teams invite tomorrow
->> >
->> > Hey!
->> >
->> > I realised that it's now been a month. I leave for holidays in a few days, am currently recovering from some sickness and don't have any agenda items. So let's skip this month and start again in August
->>
->> In fact the meeting was yesterday according to the calendar invite Palmer sent
->> :D figured that ppl forgot about it and I dropped the call after 10 minutes.
->>
->> If we're going to stick with Palmer's existing invite the next meeting will be
->> August 18th 10AM UTC+10.
->
-> My Teams meeting thing had the 17th of August.
->
-> I only get back on the 17th, so let's do the Thursday the 17th at the same time.
+On Sat, 15 Aug 2026, at 6:01 AM, Palmer Dabbelt wrote:
+> On Fri, 14 Aug 2026 13:00:04 PDT (-0700), alistair@alistair23.me wrote:
+> > On Wed, 22 Jul 2026, at 5:02 AM, Daniel Henrique Barboza wrote:
+> >>
+> >>
+> >> On 7/21/2026 3:37 PM, Alistair Francis wrote:
+> >> > On 17/6/26 09:18, Alistair wrote:
+> >> >> On Tue, 16 Jun 2026, at 8:35 PM, Alistair Francis wrote:
+> >> >>> On 16/6/26 16:07, Joel Stanley wrote:
+> >> >>>> On Thu, 11 Jun 2026 at 13:52, Alistair <alistair@alistair23.me> wrote:
+> >> >>>>> For the time, I'm picking Wednesday the 17th of June at 10AM AEST (UTC+10). Hopefully that works ok for everyone. If it doesn't let me know and we might be able to move it around.
+> >> >>>
+> >> >>> That means the meeting should start in a little less then 13 and a half
+> >> >>> hours! I'll send out a Teams invite tomorrow
+> >> >
+> >> > Hey!
+> >> >
+> >> > I realised that it's now been a month. I leave for holidays in a few days, am currently recovering from some sickness and don't have any agenda items. So let's skip this month and start again in August
+> >>
+> >> In fact the meeting was yesterday according to the calendar invite Palmer sent
+> >> :D figured that ppl forgot about it and I dropped the call after 10 minutes.
+> >>
+> >> If we're going to stick with Palmer's existing invite the next meeting will be
+> >> August 18th 10AM UTC+10.
+> >
+> > My Teams meeting thing had the 17th of August.
+> >
+> > I only get back on the 17th, so let's do the Thursday the 17th at the same time.
+> 
+> I'm super lost now...
 
-I'm super lost now...
+Thursday the 20th of August I meant
 
-> So 2 days later then Palmers event. Does that work?
->
->>
->> As an agenda for next call I have a couple of topics:
->>
->> - ongoing Debug related work.  Hopefully we'll have some Debug 0.13/1.0 patches
->> under review by that date;
->
-> I see them. Hopefully by then I can review them.
->
-> Alistair
->
->> - there is a chance that common efforts led by ARM folks (single binary, multi accel ..)
->> will spill in the RISC-V tree.  I'll talk with Phil and Pierrick later this week and see
->> if there's something to do on our side.
->>
->>
->> Cheers,
->> Daniel
->>
->>
->> >
->> > Alistair
->> >
->> >>
->> >> Call in details are below. Starting in 40 minutes!
->> >>
->> >> ________________________________________________________________________________
->> >> Microsoft Teams meeting
->> >>
->> >> Join:
->> >> https://teams.microsoft.com/meet/275503449279724?p=C2D0EDrqxwFb5LuRnB
->> >>
->> >> Meeting ID:
->> >> 275 503 449 279 724
->> >>
->> >> Passcode:
->> >> kS9Vg23i
->> >>
->> >> ________________________________________
->> >> Need
->> >>   help? |
->> >> System reference
->> >> Dial in by phone
->> >>
->> >> +1
->> >>   408-627-4258,,498330396#
->> >> United States, San Jose
->> >> Find
->> >>   a local number
->> >> Phone conference ID:
->> >> 498 330 396#
->> >>
->> >> Join on a video conferencing device
->> >>
->> >> Tenant key:
->> >> wdc@m.webex.com
->> >>
->> >> Video ID:
->> >> 119 833 426 2
->> >>
->> >> More
->> >>   info
->> >> For organizers:
->> >> Meeting
->> >>   options |
->> >> Reset dial-in PIN
->> >>
->> >> ________________________________________________________________________________
->> >>
->> >>>
->> >>>>
->> >>>> I'll be on, hopefully in the right timezone this time around. 9:30 ACST.
->> >>>>
->> >>>>> If anyone has anything they want to discuss let me know. I can send an agenda and confirmed meeting time out in a few days.
->> >>>>
->> >>>> Two agenda items:
->> >>>>
->> >>>> * RISC-V Code Policy
->> >>>>
->> >>>> https://lore.kernel.org/qemu-riscv/057cb481-c6f3-489c-aad7-1bee152fc336@alistair23.me/
->> >>>>
->> >>>> Good idea writing down your expectations somewhere everyone can see.
->> >>>> Do you want to raise it as a topic and we can talk it through?
->> >>>
->> >>> Yep!
->> >>>
->> >>>>
->> >>>> * Machine model use cases
->> >>>>
->> >>>> I wanted to share my perspective on the system emulator machines, what
->> >>>> they are for, who they are for, and hear what others had to say.
->> >>>
->> >>> Sounds good as well
->> >>>
->> >>> Alistair
->> >>>
->> >>>>
->> >>>> See you on the call tomorrow.
->> >>>>
->> >>>> Cheers,
->> >>>>
->> >>>> Joel
->> >>>
->> >>>
->> >
->>
->>
+> 
+> > So 2 days later then Palmers event. Does that work?
+> >
+> >>
+> >> As an agenda for next call I have a couple of topics:
+> >>
+> >> - ongoing Debug related work.  Hopefully we'll have some Debug 0.13/1.0 patches
+> >> under review by that date;
+> >
+> > I see them. Hopefully by then I can review them.
+> >
+> > Alistair
+> >
+> >> - there is a chance that common efforts led by ARM folks (single binary, multi accel ..)
+> >> will spill in the RISC-V tree.  I'll talk with Phil and Pierrick later this week and see
+> >> if there's something to do on our side.
+> >>
+> >>
+> >> Cheers,
+> >> Daniel
+> >>
+> >>
+> >> >
+> >> > Alistair
+> >> >
+> >> >>
+> >> >> Call in details are below. Starting in 40 minutes!
+> >> >>
+> >> >> ________________________________________________________________________________
+> >> >> Microsoft Teams meeting
+> >> >>
+> >> >> Join:
+> >> >> https://teams.microsoft.com/meet/275503449279724?p=C2D0EDrqxwFb5LuRnB
+> >> >>
+> >> >> Meeting ID:
+> >> >> 275 503 449 279 724
+> >> >>
+> >> >> Passcode:
+> >> >> kS9Vg23i
+> >> >>
+> >> >> ________________________________________
+> >> >> Need
+> >> >>   help? |
+> >> >> System reference
+> >> >> Dial in by phone
+> >> >>
+> >> >> +1
+> >> >>   408-627-4258,,498330396#
+> >> >> United States, San Jose
+> >> >> Find
+> >> >>   a local number
+> >> >> Phone conference ID:
+> >> >> 498 330 396#
+> >> >>
+> >> >> Join on a video conferencing device
+> >> >>
+> >> >> Tenant key:
+> >> >> wdc@m.webex.com
+> >> >>
+> >> >> Video ID:
+> >> >> 119 833 426 2
+> >> >>
+> >> >> More
+> >> >>   info
+> >> >> For organizers:
+> >> >> Meeting
+> >> >>   options |
+> >> >> Reset dial-in PIN
+> >> >>
+> >> >> ________________________________________________________________________________
+> >> >>
+> >> >>>
+> >> >>>>
+> >> >>>> I'll be on, hopefully in the right timezone this time around. 9:30 ACST.
+> >> >>>>
+> >> >>>>> If anyone has anything they want to discuss let me know. I can send an agenda and confirmed meeting time out in a few days.
+> >> >>>>
+> >> >>>> Two agenda items:
+> >> >>>>
+> >> >>>> * RISC-V Code Policy
+> >> >>>>
+> >> >>>> https://lore.kernel.org/qemu-riscv/057cb481-c6f3-489c-aad7-1bee152fc336@alistair23.me/
+> >> >>>>
+> >> >>>> Good idea writing down your expectations somewhere everyone can see.
+> >> >>>> Do you want to raise it as a topic and we can talk it through?
+> >> >>>
+> >> >>> Yep!
+> >> >>>
+> >> >>>>
+> >> >>>> * Machine model use cases
+> >> >>>>
+> >> >>>> I wanted to share my perspective on the system emulator machines, what
+> >> >>>> they are for, who they are for, and hear what others had to say.
+> >> >>>
+> >> >>> Sounds good as well
+> >> >>>
+> >> >>> Alistair
+> >> >>>
+> >> >>>>
+> >> >>>> See you on the call tomorrow.
+> >> >>>>
+> >> >>>> Cheers,
+> >> >>>>
+> >> >>>> Joel
+> >> >>>
+> >> >>>
+> >> >
+> >>
+> >>
+> 
 
