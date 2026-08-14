@@ -4,97 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E312BC5B572
-	for <qemu-riscv@archiver.kernel.org>; Fri, 14 Aug 2026 10:39:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5C51C5CFC1
+	for <qemu-riscv@archiver.kernel.org>; Fri, 14 Aug 2026 11:37:36 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wupK0-0001Dq-EP; Fri, 14 Aug 2026 06:39:32 -0400
+	id 1wuqE7-0006bi-R6; Fri, 14 Aug 2026 07:37:31 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <caojunze424@gmail.com>)
- id 1wupJy-0001DY-Jc
- for qemu-riscv@nongnu.org; Fri, 14 Aug 2026 06:39:30 -0400
-Received: from mail-pj1-x102d.google.com ([2607:f8b0:4864:20::102d])
+ (Exim 4.90_1) (envelope-from <visitorckw@gmail.com>)
+ id 1wuqE6-0006ai-CX
+ for qemu-riscv@nongnu.org; Fri, 14 Aug 2026 07:37:30 -0400
+Received: from mail-pl1-x62e.google.com ([2607:f8b0:4864:20::62e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <caojunze424@gmail.com>)
- id 1wupJw-00055V-79
- for qemu-riscv@nongnu.org; Fri, 14 Aug 2026 06:39:30 -0400
-Received: by mail-pj1-x102d.google.com with SMTP id
- 98e67ed59e1d1-38eca09faa2so112550a91.3
- for <qemu-riscv@nongnu.org>; Fri, 14 Aug 2026 03:39:27 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <visitorckw@gmail.com>)
+ id 1wuqE4-0007Jo-O4
+ for qemu-riscv@nongnu.org; Fri, 14 Aug 2026 07:37:30 -0400
+Received: by mail-pl1-x62e.google.com with SMTP id
+ d9443c01a7336-2ce7d2adef4so15669995ad.3
+ for <qemu-riscv@nongnu.org>; Fri, 14 Aug 2026 04:37:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1786703966; x=1787308766; darn=nongnu.org;
- h=message-id:date:references:in-reply-to:cc:to:from:subject
- :content-transfer-encoding:content-type:mime-version:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=KkI20Wd6i+g6jIBnL48L4rzD5+qRhzeivRs8UHng65w=;
- b=EkDAvSJeJt/NLbed+nVujQp65yMAG0sfEXOR2xpeVYGmEUrrtWpwVxnhlG2LCvgem4
- VxFuONz1vo8ehHZ+qqs31EqYQLx5HJthrzVWhTdHM2FLGToqCYCeKY3y9EBJShVOeHkV
- vc46JiZan1qihL/3tB3wUGhM1hkXQCotkseOVnrQYx8NheVyKwrE7EZQYfkAVpNHrLTS
- gIniO7FFmIpFTJqzUXSM+axc6rcMegswG0i0f0AUIKwGIDhl0K+xDsaqehd1WJV2P9AX
- eX8Q1KbTM/3ZTARbteZFDWJjEA/QIoD/Nh1JilXaZtZ/+mZ2kCdgNLcQKt96fcSoj/R8
- t06Q==
+ d=gmail.com; s=20251104; t=1786707447; x=1787312247; darn=nongnu.org;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=8XDSjibgMTV3XWum35vrlTytl2FLR9rc+9sSmrpjMeQ=;
+ b=RwWdlznPvB6QUGEdJZ1ssaHszAsk+gjrKH/HIk2ANPgJ0v86JpMeVr2PUK7JjxD+UX
+ 48SM6FRiHb3NyVXGNPB+5Y90QmbtE9qkMwEputqYJYcaTL78sVJ52deoZ3zOkAhQNl4X
+ 5vQL7XENsNxbJj2jAmGfWsVs1BjNz6MCwn/6qamo4W7uGKP8t3S1ocfotPNbdPBtCP5i
+ 1HJZ67Migtw6+wNyucOLcVldYUhn1vl0hvUh1Fw6QRrQwrGRm2U8VtGCKFKynzHgl6dl
+ CWmNmCgGwrqCmxjT+KZA/7PjDTgWUqQU4VOE5RFduhs0nN/Uj9gmJJWvldA1IQdDn+Kj
+ m+Yg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786703966; x=1787308766;
- h=message-id:date:references:in-reply-to:cc:to:from:subject
- :content-transfer-encoding:content-type:mime-version:x-gm-gg
+ d=1e100.net; s=20251104; t=1786707447; x=1787312247;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=KkI20Wd6i+g6jIBnL48L4rzD5+qRhzeivRs8UHng65w=;
- b=O7w6b5L4kzsRNtwCKpMCsT3kDQSbjsSmLdG8j12e1YruHnHxcaeHkjuL3xe++OuX2K
- HozkcZtV1/uqEE3q/w9u/VMI+5zfD23T1BZSMMH+A4b7LNzGPcxoXIMfFcYyIgdLi2Lo
- COIskpDsPyR16I97AFHrtETkIWHp1Y3CqF5Y56dxgZs7WWvnu6PFQ/yDYj14+uDIh4SJ
- i3YEw251yp0NTWvF/NNZ9r/HvGiyXTOV/Mfi+i6z/13u5suJeLVS/16ifuBnlYFve6Uo
- OS/kgzgFA4w0O9bA9hvti8gchPMCiQHmVaf8U/yQJybxhhe4AJ098Oyc8wROcLFCCEh1
- TsYQ==
+ bh=8XDSjibgMTV3XWum35vrlTytl2FLR9rc+9sSmrpjMeQ=;
+ b=UONEJ9TM5p8hbaceATH+DK9RVrqheFCuN7Wa4Sjq+U/LguTFrd0G6hPmEndfYwECrd
+ afi8G+NIHgp+a2DEUgkZVwpBPPz7ZoosBHsvjhoRBVLP3H+RnwavKT5RPovesRui9T8T
+ xI5vgeqWTM6tOIIzE/yyG/Tqh9UlcKF04Gk6gQ62Q2KC2LT22yGHjgVtt6PXdb97Pw+u
+ 5G4S2AV9igBhUPqZTzGpOm/YZLteDAHBMYBu6hxDUNpve89xoyrF+bE1ekMzz/m3mz14
+ SezfWD+NcDeESCjKOEkrdJEvoD1k7077thBbHZO0vOTDC7G2TxvXaglluqh3pWlPQIlk
+ kSSQ==
 X-Forwarded-Encrypted: i=1;
- AHgh+RpidEkyVV1Ne5FpH/zzGabbOGCDUuToYEltsgr4r4xAGJpwmUYhgfWbXWw7kSaQLFdsXjXRiaJSIMMp@nongnu.org
-X-Gm-Message-State: AOJu0YygGoU+IsxLkk8Tv+Ulu2DWJoGjI2JDW/1LLxRnz0R29HpxDqZR
- qm2VOAVrV9nCTUR4E8vD2Om6POmwcZLTUrwPkvB7+5eHj1fOEXDsyE2X
-X-Gm-Gg: AR+sD11VNlO4fmvLxEZDDqyL+fvLBLTVicC0HCZS/N7YPWSH0VHm/CGA8F3LiY+r5nA
- oGl9RZUM+ZVwxloJgSbYSVUTT7ZDiTZtO3OrYvUIBMVAabLETO5tVCVQhkf8YHyS5ykX3G8cd7o
- /6x543amezHdtuDlo5YUoB0di8hUQNmxb3ezwrX5oj3gZ929b1SU0UKvjkULTz40cF1IelTIAyV
- 1YUXskkZqH7rBSWF6tugEZqCcvercGdzNHxIflIQTC2/w6WRjblgwwuxWxKtKRwsRkORXwh3tcp
- /7oPDXW+zTU/w0btOZnifBB5+NiRuC5hyqpdPO7R46JPh4RBVhTddMS0IMoHeJKs2pzcYL0vFYj
- mNclJUdOOmO0QAnxFIbLG/qx1jceMOalLboUeKc//6gprgNWItgGpEGIiOgO7YvYfOi05TQwBFc
- JOt3w6D1n69eanzhX01Ucj95GhFpwkn8D8GsvuoW9GuGd2pEsVV5w/6WV8GOI=
-X-Received: by 2002:a17:90b:1651:b0:38e:6a7c:abbc with SMTP id
- 98e67ed59e1d1-3933e6465ccmr3447163a91.3.1786703966448; 
- Fri, 14 Aug 2026 03:39:26 -0700 (PDT)
-Received: from [127.0.0.1] ([38.34.7.236]) by smtp.gmail.com with ESMTPSA id
- a92af1059eb24-1413887e3e7sm7833627c88.9.2026.08.14.03.39.22
+ AHgh+RqzoZdPW1nj29VfjYlKVKNcfAV14zfbwYZZNB+X6qrUhRGh/HDOdTILLaML/0u1nkY5rMJrnZcLcayo@nongnu.org
+X-Gm-Message-State: AOJu0YxDl2oCLHlFt0nK4vwqhf07Wa4HbH5UbZOPbgLn2b69IpDTxefJ
+ oZykSX5WIG6fDpGS92N+85vx7T7M6PuTxooowajIVTP7ruVTfImV8hIa
+X-Gm-Gg: AR+sD10d+zcm7S5XMh8kEsc15LfogLj7B7fbQfBhXNJKDRUqEXdAxYM7J9ChiFBToM9
+ n7AuILxGd7gDsBaDHRFoTUZYYetTCzuVS8e7ykv1gWMny8/blcQ3zZjYQSJbPgoIaMgQs3FDt9+
+ aP3qE3cforLHejUJ9X3lQg7pMx6jIN7/OW0X9BRT7mBY/5yIpzNaDtT+uFxrXadqTMZXI0GgocI
+ 2d+c4O3XS+jxd41EATaHnaYvaYuJ4UAjyM0FW2EPCBBiZSddVqbQGBqwtp+5wM9qVZ7XHxwFN3g
+ oW9HTooNvyskwHchZaJhhAeuNFLOuuglnrvAkHp8GNjzptenEEcN8RxXa2yEAhjYcBjF9dHVOod
+ w/wEG0SWqfI6C0FVFsmfRJ6Mz0U7BhdEOT6fYjl1CPfr0ejzTW5VfW0fYHymVZ9sDv+5ZCGrU3a
+ S7PzPoeIVXg4VHk3pWTiG+L2t7ToJnr4AtVhAoz4u8Jjxg35GMr4BNeSoNtkiih2V6z2uR6i53w
+ HISNYaK8x7Y/0Qkq5V8zIMiowYIRAWh
+X-Received: by 2002:a17:902:da83:b0:2ca:6d87:cda0 with SMTP id
+ d9443c01a7336-2d3b08589ddmr43214855ad.6.1786707446926; 
+ Fri, 14 Aug 2026 04:37:26 -0700 (PDT)
+Received: from google.com (114-137-1-217.emome-ip.hinet.net. [114.137.1.217])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2d3ae7a32bbsm8533725ad.26.2026.08.14.04.37.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Aug 2026 03:39:25 -0700 (PDT)
+ Fri, 14 Aug 2026 04:37:26 -0700 (PDT)
+Date: Fri, 14 Aug 2026 19:37:16 +0800
+From: Kuan-Wei Chiu <visitorckw@gmail.com>
+To: Joel Stanley <joel@jms.id.au>
+Cc: WX Chen <wxchen0913@gmail.com>,
+ Alistair Francis <alistair.francis@wdc.com>, qemu-devel@nongnu.org,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ =?iso-8859-1?Q?Marc-Andr=E9?= Lureau <marcandre.lureau@redhat.com>,
+ Chao Liu <chao.liu.zevorn@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org,
+ Fabiano Rosas <farosas@suse.de>, Laurent Vivier <lvivier@redhat.com>
+Subject: Re: [PATCH v3 0/3] riscv: Add K230 DW 8250-compatible UART
+Message-ID: <an797N3cUZj5EX0h@google.com>
+References: <20260808-feat-k230-uart-v3-v3-0-d73b31f0034b@gmail.com>
+ <CACPK8Xfgj+AUx0h_46f=qG_UEE_o7kTZ0=Buxr7+bdHDODHpgw@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Subject: Re: [PATCH v3 1/2] hw/gpio: add K230 GPIO controller model
-From: Junze Cao <caojunze424@gmail.com>
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Junze Cao <caojunze424@gmail.com>, 
- guochun wang <guochun.wang@foxmail.com>, qemu-devel@nongnu.org, 
- chao.liu@processmission.com, pbonzini@redhat.com, farosas@suse.de, 
- lvivier@redhat.com, palmer@dabbelt.com, alistair.francis@wdc.com, 
- liwei1518@gmail.com, daniel.barboza@oss.qualcomm.com, 
- zhiwei_liu@linux.alibaba.com, qemu-riscv@nongnu.org
-In-Reply-To: <CAEUhbmXMKug9v2x9PaJTXiwnF+o0HqQsiY+PtCL6eYtGZ8_ViA@mail.gmail.com>
-References: <tencent_EF996EEB2215272639C89FAE1491CEF43908@qq.com>
- <be7afd5c-55dd-4af1-b828-9a2f401e3bfc@smtp-relay.sendinblue.com>
- <CAEUhbmWjR3cc4jkdBAqpXcmt9z3ExHWsPzCthX7d+G1wgqTbTQ@mail.gmail.com>
- <178669925995.92831.6332189576763663701.b4-reply@b4>
- <CAEUhbmXMKug9v2x9PaJTXiwnF+o0HqQsiY+PtCL6eYtGZ8_ViA@mail.gmail.com>
-Date: Fri, 14 Aug 2026 18:39:19 +0800
-Message-Id: <178670395948.644010.10747276999132854035.b4-reply@b4>
-X-Mailer: b4 0.15.2
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102d;
- envelope-from=caojunze424@gmail.com; helo=mail-pj1-x102d.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CACPK8Xfgj+AUx0h_46f=qG_UEE_o7kTZ0=Buxr7+bdHDODHpgw@mail.gmail.com>
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62e;
+ envelope-from=visitorckw@gmail.com; helo=mail-pl1-x62e.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -112,42 +112,67 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 2026-08-14 17:50:55+08:00, Bin Meng wrote:
-> Hi Junze,
-> 
-> On Fri, Aug 14, 2026 at 5:21 PM Junze Cao <caojunze424@gmail.com> wrote:
-> 
-> > On 2026-08-14 15:26:41+08:00, Bin Meng wrote:
+On Thu, Aug 13, 2026 at 07:50:18PM +0930, Joel Stanley wrote:
+> On Sat, 8 Aug 2026 at 12:02, WX Chen <wxchen0913@gmail.com> wrote:
 > >
-> > Hi Bin Meng,
+> > This series adds a QEMU model for the K230 SoC DesignWare 8250-compatible
+> > UART controller, wires it into the K230 SoC, and adds qtest coverage.
 > >
-> > Thanks for the detailed review.
-> > Regarding the suggestion to abstract this into a generic Synopsys DesignWare APB GPIO model, I have a question: do you know of any other QEMU SoCs that use this IP and would benefit from a shared model?
-> > If there is no immediate second user, I wonder whether it might be premature to generalize now, especially while we still need to complete the K230-specific behavior.
+> > The implementation supports the registers and features required by the
+> > Linux 8250_dw driver, providing an interactive shell over the serial port.
 > 
-> There is no other immediate second user as far as I know. But Synopsys
-> DesignWare IP is not like others, and it's commonly seen on many SoCs.
+> This is a model for the same hardware as this patch:
 > 
-> For RISC-V, I can see Eswin EIC7700, Sophgo CV1800B (Milk-V Duo),
-> Sophgo SG2042 / SG2044 and T-Head TH1520 (Lichee Pi 4A) all use the
-> same Synopsys GPIO IP, and they are all good candidate of QEMU models
-> in the future.
+> https://lore.kernel.org/qemu-riscv/20260616190147.1286316-2-visitorckw@gmail.com/
 > 
-> What K230-specific behavior are you concerned about?
+> I'm not fussed which one we end up with in the tree, but it would be
+> good to name it generically so other machines can use it.
 > 
-> Regards,
-> Bin
+> 
+Ah, I've been a bit busy lately and totally forgot to send out the next
+version of the milk-v duo patchset. I will probably make the changes
+and send it out soon.
 
-Hi Bin,
+As for the dw 8250 uart part, I'm not sure if I should keep my uart
+patch in my series, or if I should wait for WX to respin his patchset
+and get it merged into the riscv tree, and then rebase my patchset on
+top of it?
 
-Thank you for the clarification and for pointing out the other potential users of this IP.
+Regards,
+Kuan-Wei
 
-After reconsidering the issue, I realize that my earlier concerns about K230-specific behavior were unfounded. 
-I agree that abstracting this into a generic Synopsys DesignWare APB GPIO model would be a worthwhile approach, and I support moving forward in that direction.
-
-Thank you again for your guidance.
-
-Best regards,
-Junze
-
+> >
+> > Signed-off-by: WX Chen <wxchen0913@gmail.com>
+> > ---
+> > Changes in v3:
+> > - Removed all hardwired preprocessor #if conditionals from the logic
+> > - Added a helper for the receiver line status interrupt check
+> > - Encapsulated CPR and UCV register values in header macros
+> > - Replaced g_usleep() with qtest_clock_step() in the qtest
+> > - Link to v2: https://lore.kernel.org/qemu-devel/20260725-feat-k230-uart-v2-v2-0-d5fe82c47c28@gmail.com
+> >
+> > ---
+> > WX Chen (3):
+> >       hw/char: add K230 DW 8250-compatible UART
+> >       hw/riscv: k230: connect DW 8250 UART
+> >       tests/qtest: add K230 UART test
+> >
+> >  hw/char/Kconfig              |   3 +
+> >  hw/char/k230_uart.c          | 816 +++++++++++++++++++++++++++++++++++++++++++
+> >  hw/char/meson.build          |   1 +
+> >  hw/riscv/k230.c              |  33 +-
+> >  include/hw/char/k230_uart.h  | 198 +++++++++++
+> >  include/hw/riscv/k230.h      |   6 +-
+> >  tests/qtest/k230-uart-test.c | 514 +++++++++++++++++++++++++++
+> >  tests/qtest/meson.build      |   2 +-
+> >  8 files changed, 1559 insertions(+), 14 deletions(-)
+> > ---
+> > base-commit: 30e8a06b64aa58a3990ba39cb5d09531e7d265e0
+> > change-id: 20260808-feat-k230-uart-v3-0ff3651d70ef
+> >
+> > Best regards,
+> > --
+> > WX Chen <wxchen0913@gmail.com>
+> >
+> >
 
