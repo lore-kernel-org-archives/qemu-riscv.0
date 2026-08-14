@@ -4,114 +4,148 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71C8EC5CFCF
-	for <qemu-riscv@archiver.kernel.org>; Fri, 14 Aug 2026 05:02:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C1A8C5CFCF
+	for <qemu-riscv@archiver.kernel.org>; Fri, 14 Aug 2026 05:45:29 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wuk3s-0005Ux-LV; Fri, 14 Aug 2026 01:02:32 -0400
+	id 1wukjG-0005bv-FY; Fri, 14 Aug 2026 01:45:20 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <flamboyant.h.01@gmail.com>)
- id 1wuk3n-0005Ti-HF
- for qemu-riscv@nongnu.org; Fri, 14 Aug 2026 01:02:28 -0400
-Received: from mail-yw1-x1132.google.com ([2607:f8b0:4864:20::1132])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <flamboyant.h.01@gmail.com>)
- id 1wuk3m-000730-1H
- for qemu-riscv@nongnu.org; Fri, 14 Aug 2026 01:02:27 -0400
-Received: by mail-yw1-x1132.google.com with SMTP id
- 00721157ae682-836ccf53ef9so5284477b3.1
- for <qemu-riscv@nongnu.org>; Thu, 13 Aug 2026 22:02:25 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1786683744; cv=none;
- d=google.com; s=arc-20260327;
- b=HQKg3Am+ejpe8NEVhZdbaWkBUVTAj4NEkicAnvUP5Xu6EwMTgmV34Tr6fQsGIXawoC
- 9niyr2IzD5Gx0qO+8RSGhXexXoC8A4mC6Vvn2prELmtfSHm0T7Nx0hsJoYJPgrxAjZ0V
- KEs3NTRrK+aVsKhIlPyJNDtohLRk8n4h265Z6/jK9mz4keCSLVlOK/46JXYfu+561EBq
- MKmI6WSrf5SlXrKJolYNaiKt9icq2xgHqj+yhAWeaaebSXqQ3K07Zb6sty88owj0mtsw
- c1tTFUf+iLfzG031gML0Stcn21psoiswaRta6V59VnUl7UW0zRnyJk0OxgnueMVhJoPX
- J8wA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=dNgofWQnLPkFtMt3ZXR0GlQHKpzwk0/r/K0KUvcZom0=;
- fh=hfWgyKtApfcVzP8A6JVezReLN8nzYooFbZFDD8TUi0c=;
- b=SFJxYmIWpfke99U6UMV9sO+AWhfi8jc2hAUrCZMFLWLgRq53PUDYOT4bVI8PlYSJHx
- 1BZtlORD/XimVPDVywMK+4OBeD7TrFGHdc+lFe3VNvUPyivUTL7flaR3l5jStqZNu/pD
- Ybpicf+Q9zZ4X1uH/4+BS5hiwn6/rp/rqZYKNybZvXZnfS6q/DBqyPsfpJoDSh5vL/o7
- 0oEdBXYvAHv2mvtKSoxEJHM9ZLLMP3o49ehyUInnhBWJzBcamwc6Dlt9MNgkLIY9CaR0
- SsSQc+8Qi3pqH9BwvJiZVvr959qqe3bq1zCFI3V9/FN8QYqrg6AOS76E8ICrRreKYk1C
- bAJg==; darn=nongnu.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
+ id 1wukj4-0005Rq-FM
+ for qemu-riscv@nongnu.org; Fri, 14 Aug 2026 01:45:07 -0400
+Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
+ id 1wukix-0003rs-97
+ for qemu-riscv@nongnu.org; Fri, 14 Aug 2026 01:45:04 -0400
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 67E4Qo3P594117
+ for <qemu-riscv@nongnu.org>; Fri, 14 Aug 2026 05:44:57 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ M56de8k84TxEmO0hrYouRRFTJOdOt7mdshtL1vdYdl0=; b=jpHupwety6lMHemA
+ +kjNJKYIrKha6vl4F19JSFNpcm3rVrF79Z/+IXtsZK811OEy7RfSHgDFtj20U8If
+ NnZWtrj5e5/P00zk/73X2dN7gQYuypuxHT3qJQhyTvpx6UDckVBsIF8KkuJlkj2A
+ 7NwtYM5D7eP2Js43pBDWgZM99in/zOFeNf/JGexnAqvm5ahpJZt8/F4xRqACHvMK
+ 7JhUqQiwA8wuTN52lsIXeeEvbv/KXrQCMBJLrXTuI0OdA0GKiz6hVA7vaBDLKgs/
+ sT1QHwPVfhLPgmYG0Vf2z+/oaaDNXilRyreWrsoMlyTO286f75CrWmx2MaLu0jCV
+ Q0+gJw==
+Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com
+ [209.85.160.197])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g1gy4tup8-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Fri, 14 Aug 2026 05:44:57 +0000 (GMT)
+Received: by mail-qt1-f197.google.com with SMTP id
+ d75a77b69052e-52d827597fbso11474991cf.0
+ for <qemu-riscv@nongnu.org>; Thu, 13 Aug 2026 22:44:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1786683744; x=1787288544; darn=nongnu.org;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=dNgofWQnLPkFtMt3ZXR0GlQHKpzwk0/r/K0KUvcZom0=;
- b=mjY/wssPD3mS2qIGkkn0IJMyWGv+DEiEecemz4VzwD58+V1UZiEPiD1mILphpAinpF
- nWd03b6vdV1MnnteVIY+/7g9bUexpbuA2z8fbMZlNLxy40SxPIjtI96sWpnsGB5zKn5/
- DbA97RF51vvwndOBYFBUsiQqoTFD8eIqb3MUDw8Q88ZjPXRs5WLsfNfpnuct5sUJgmpt
- Hjkk0vEgtP68YFwcrkWtSWnEp9crh3a6OqeQACmC/ZrunCtpAFDHyODL1LGClOMk0kq0
- tT2fqmXM91nUOdbZ5hEa40JE7U96mape7i51Tqe5EiWcpPQoqGvNjOKCOg0MQ1nCsQxC
- 3f4A==
+ d=oss.qualcomm.com; s=google; t=1786686296; x=1787291096; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:from:references
+ :cc:to:content-language:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=M56de8k84TxEmO0hrYouRRFTJOdOt7mdshtL1vdYdl0=;
+ b=FiHu6/zos0L5cOY3hHDNvDzLPtkuZM6ELbf82+ljqf3i4zCvxEYXEsqGSd41Z6NtWi
+ y13+Y/6WoxX9ISHk9fUacAbECjUG+HOPtXuh72kzj+h0Mgvg2oPfWxYyXe95+wf18zM1
+ /yghKf2vkWTtLVlKYT9B64O1ZDfiLmxTG+Y73/1B0HtHlX7qiJ9UObPABVhyX55gBSEO
+ pmJ8Pe95+hdViqgYKtunP8KUlwqQmK1z/9K4K8dyfE4cu10TaK9UkAySBFe+7yKKqRrn
+ He/5UskJ3kzBWFH6dbDQtfERolY8o2GlofJc+M5c33YN/oyIoEloBaYBcNhQW43w3Mux
+ JlXA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786683744; x=1787288544;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=dNgofWQnLPkFtMt3ZXR0GlQHKpzwk0/r/K0KUvcZom0=;
- b=P9zoC9/1RWgGzkcfRm1i5vP4bYtZBlAg1ITQvzhm9loWh5A3c+szW72fNMCIjqwEpX
- DTusEL7itWM0T9hw9eiLtngCK1/DCZz7+GmEpVelI+noh0RpuG1C25Smwn6czA9d+l4L
- S0QVhiVK9vj+UFe1DqJpXE5CSYkexeTT7RXvx4sv+yAxWQr7fWbtmnYmqBG5BrQ6ZYoA
- I2m6J64bAsbRpCrI7lLp8X1aUaKkgo+DrZEOltCgDSCFiQ4lU/lGCsdQflXh7k1oqzfm
- BC58do685nG86/DCxmJoTyVHvuCwbVAKQVtULiLSQ/STqvOuA8s2MyPT/rz4ovHXxqGy
- 3WMQ==
-X-Gm-Message-State: AOJu0Ywop/ojMi6itjFZi66129YERHFtjqLDOFtn6rBD9zqgIeJEsWmq
- 9Ec6zzqPmEQyDrg9fOxYNRzYJANP0Fjg7ibCd+iLqobVxglnG27F8FCzun/wfvj/rW9uYsogIM4
- DZn4L59wjMypxU335hqIH0ifx+NbCilM=
-X-Gm-Gg: AR+sD12/s2xK025OIm0FkV/FelYaOyzx/uBczLnMZxCyIu8Roc8zqnYd2JLBE6zFtRn
- WYHzR/mvZiYdZa9KmmlDTZyRipCPqAhh1gPoJDlBa1sHZQ7jgak1brfg/fi7ZdgjGoQuy4szl7V
- Csh+8vYRylY1zQQQVBOXAzX1oRIAEOyMNJSQyAv6Eyy4Qi07uM1fqaxMaITg8x6sSN6TEz/+ugT
- quSR0drDJhE1ZTdLDiJaSpfSFE9OZULg7jIzzcw7WupEIeR5glkPKXpXoAriPp88Wik8doCnj5t
- KB1bn7k7r5YtiIaMSpYpCy3DTYCR+KmCm2v97hRHEBL8QIUQZYKo4g==
-X-Received: by 2002:a05:690c:e68d:10b0:80c:ebd4:762 with SMTP id
- 00721157ae682-8370ce2c2femr9822057b3.7.1786683743651; Thu, 13 Aug 2026
- 22:02:23 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1786686296; x=1787291096;
+ h=content-transfer-encoding:content-type:in-reply-to:from:references
+ :cc:to:content-language:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=M56de8k84TxEmO0hrYouRRFTJOdOt7mdshtL1vdYdl0=;
+ b=tZq4ngxwZbEaHbzNTC9VImHzFl5LmllmZUNJe6+N5OqK2V6X++1spSl1aIu+3PZWMy
+ BTqDa5z4TCmWAhO1XopzxTIJzU1hMDxXo8T4LUK6J9Kt7DvOJPcDRzdMoWFCJX97Af8D
+ 0/D8s7DNBq22fnykX5MHmYpVIhjSPtQP/Nz7O1Fou7ERtADKCcewpOawQHeMmNIufViy
+ PQIshY2/z24jkxFaugHGW78vEMWx6JMxoAUn9c3/VnttHuuNrcIiRpMRrTuTq0MZQB2l
+ tZGsfxr5vGAPsKYWsp9EoFycpeRveoLIiKjXCfZi7IAw5tjAHwqguDHW9mq/zBa68MJE
+ xrbw==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RpxGucQ112GuFdh5MsAB31tmAeP4THJMJQN4qyewFPDZuTDMF/K3qqZOxIaxVNzV/qpQrFDTUzMHjJ/@nongnu.org
+X-Gm-Message-State: AOJu0YzIFGFjnDmkliwD265UTFpBo/y86qlJKXuhU0b9AkilAQrjDR5z
+ qJwP4xHPy+yd9t9SM/bZuxFV/pWLITfm+dvyfbI/SUlqrJg/FCF9zrcU0/3RNDZsQ7Hr5LkW2Io
+ 8iCFm9JYRM6uzC0cMOekShuL9IyQPkiBBPoXhU+oElv1OEfEq/ruOZsspEw==
+X-Gm-Gg: AR+sD13jaK4A3lv7U8AWE4rLyVVHVbnJCxyyk7HvFe0t1X9lzJ0W5czS14+WrnJ/sTL
+ ZciYvkRSMIm7WZk+YM7E8iPZ3R9AFooMQ2UhScG4Mp73qpdXe8qXbm0/EwGFvNVm+TE1uBd8GIv
+ ZxJ7pKGMGUc9PmrFSIJsSMOc9oFua6HUUeyF3fFjkS8+/BTf4ihTd7wPsh/MOChlWOFBPgZSPJV
+ jG2Q/tsE7jVzTLLSUVU0gtpzuNNXcJ32mhzfsa/lUkxjTntgCSVYW4jNQoRd+SZ1UWZTRpCCgz7
+ 8SOUq8Nahwa6iIgYKFUt9GynLL/27UngF1WnMN1y0oCUI0XZlxTV1VbgsDWx9/BuZmbFsUR4a7t
+ Jl3QShJGyyU1bVDVSqSFZZqZE6FG8TcH0pTk=
+X-Received: by 2002:ac8:6104:0:b0:528:3c2c:5c72 with SMTP id
+ d75a77b69052e-52d854a4a51mr44616501cf.32.1786686295711; 
+ Thu, 13 Aug 2026 22:44:55 -0700 (PDT)
+X-Received: by 2002:ac8:6104:0:b0:528:3c2c:5c72 with SMTP id
+ d75a77b69052e-52d854a4a51mr44616091cf.32.1786686295216; 
+ Thu, 13 Aug 2026 22:44:55 -0700 (PDT)
+Received: from [192.168.69.229] (pmd666.hd.free.fr. [88.187.86.199])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-49988b1d33asm22968415e9.10.2026.08.13.22.44.53
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 13 Aug 2026 22:44:54 -0700 (PDT)
+Message-ID: <7c5a0b1d-12db-4be2-b20c-9d132b027a76@oss.qualcomm.com>
+Date: Fri, 14 Aug 2026 07:44:53 +0200
 MIME-Version: 1.0
-References: <20260808182956.290561-1-flamboyant.h.01@gmail.com>
-In-Reply-To: <20260808182956.290561-1-flamboyant.h.01@gmail.com>
-From: Kangjie Huang <flamboyant.h.01@gmail.com>
-Date: Fri, 14 Aug 2026 13:02:09 +0800
-X-Gm-Features: AUfX_myBIojZkn2bltD2j2WChdyNcL_vfYBIdsklq8O1tGfhj9-ZGUGaxOv7uIo
-Message-ID: <CAAW0U4azckLqyWEy=bGRH3Js8AOeW=rpN2+rgkhVStzC0Jv5mA@mail.gmail.com>
-Subject: Re: [PATCH v3 0/5] hw/riscv: Add K230 DWC SSI Standard PIO support
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, Bin Meng <bmeng.cn@gmail.com>, 
- Chao Liu <chao.liu@processmission.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Alistair Francis <alistair@alistair23.me>, Palmer Dabbelt <palmer@dabbelt.com>,
- Weiwei Li <liwei1518@gmail.com>, 
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v8 01/10] build: add optional librpmi dependency
+Content-Language: en-US
+To: Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcomm.com>,
+ qemu-riscv@nongnu.org
+Cc: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
+ =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@mailo.com>,
  Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
- Paolo Bonzini <pbonzini@redhat.com>, 
- Fabiano Rosas <farosas@suse.de>, Laurent Vivier <lvivier@redhat.com>, 
- Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>,
- Kangjie Huang <flamboyant.h.01@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1132;
- envelope-from=flamboyant.h.01@gmail.com; helo=mail-yw1-x1132.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ "open list:All patches CC here" <qemu-devel@nongnu.org>
+References: <20260814045315.3416169-1-subrahmanya.lingappa@oss.qualcomm.com>
+ <20260814045315.3416169-2-subrahmanya.lingappa@oss.qualcomm.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
+In-Reply-To: <20260814045315.3416169-2-subrahmanya.lingappa@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-ORIG-GUID: _7G2FL2j9Wzt_tmCGF9N1D_Nm6dCRlbM
+X-Authority-Analysis: v=2.4 cv=ZYAt8MVA c=1 sm=1 tr=0 ts=6a7eab59 cx=c_pps
+ a=EVbN6Ke/fEF3bsl7X48z0g==:117 a=4s3hRJSeHn4rkQlkrse1kQ==:17
+ a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=M51BFTxLslgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
+ a=EUspDBNiAAAA:8 a=01anJWeQb-5wN4vR1WoA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=0lgtpPvCYYIA:10 a=a_PwQJl-kcHnX1M80qC6:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODE0MDA0MiBTYWx0ZWRfX/YZErEePzcBl
+ nB2poYzwAWnBPMv54JzAl1Slps1w8TMvFZoJJHJryjjrG2nnATGr+ITri9LTg3zRal3r1eULXv+
+ 9JCkJvMjq38Yy+StYQC8ZVIFd7j3b7g=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODE0MDA0MiBTYWx0ZWRfX/o8QpZcJ37rb
+ PqLy2PqtykCp2GGBm0tL+aU/XS3Na233W3X7RjEXve9gvWbk+BqSWoOxqAMTIr8+vKOdWxpjj4f
+ YepMzn/bSBqY881r3qOlBmQ1usxdKJSeG7PryVRxwBb08HQ02fCbuqyj3kOPZpfo2Niql46NsXS
+ h+DV4g9k+wl3mRoKs+G+QU8vAhn20tOHQ0kWbPfupXcdiPKeL00WcoWatYx19c0k1cBjXpC4kni
+ XcpjhKHpf6jSNJ3Xkma6fEK5QmC/s34OG63kd8J6jHJYPjstw4Z0Af6ySAWsy81TAz/eAMRxdJj
+ SOcBW2U/dJLLdnYSGgS3DMf+/sRQELiUT4kFGXUQS821jNH+7Of3uPe6bcM40CKjxTl79I56AFS
+ oL18C3S05WbEDOW30l+LZ/4b3FWewTm/llEIuJL9/uD6M53YdiicDHqnjdMrY3UZfAp2wtkO6+U
+ 6y1Oulj0s5NXkwqPjvA==
+X-Proofpoint-GUID: _7G2FL2j9Wzt_tmCGF9N1D_Nm6dCRlbM
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-14_02,2026-08-12_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ lowpriorityscore=0 malwarescore=0 spamscore=0 suspectscore=0 clxscore=1015
+ priorityscore=1501 impostorscore=0 bulkscore=0 phishscore=0 adultscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608140042
+Received-SPF: pass client-ip=205.220.180.131;
+ envelope-from=philmd@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
+X-Spam_bar: --
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -128,34 +162,28 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Kangjie Huang <flamboyant.h.01@gmail.com> =E4=BA=8E2026=E5=B9=B48=E6=9C=889=
-=E6=97=A5=E5=91=A8=E6=97=A5 02:30=E5=86=99=E9=81=93=EF=BC=9A
->
-> Testing:
->
-> * Built qemu-system-riscv64 and the K230 DWC SSI qtest target.
-> * Ran all 14 K230 DWC SSI qtests, including Standard PIO modes, register
->   contracts, interrupts and PLIC routing, and Standard SPI NOR reads.
-> * Standard 1-1-1 transfers were also exercised manually through the K230
->   SDK U-Boot and Linux SPI paths against the attached flash.
-> * git diff --check passed.
-> * checkpatch.pl reported no code errors; its MAINTAINERS coverage warning=
-s
->   are expected because this series does not modify MAINTAINERS.
->
-> Suggested-by: Bin Meng <bmeng.cn@gmail.com>
-> Suggested-by: Chao Liu <chao.liu@processmission.com>
-> Suggested-by: Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
+Hi,
 
-Hi Bin, Chao, and Anirudh,
+On 14/8/26 06:53, Subrahmanya Lingappa wrote:
+> Add a meson option and config probe for librpmi so RISC-V machines can
+> opt into RPMI support when the library is available. Keep the dependency
+> optional so default builds without librpmi continue to work.
+> 
+> Signed-off-by: Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcomm.com>
+> Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+> Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
+> ---
+>   Kconfig.host                  |  3 +++
+>   meson.build                   | 14 ++++++++++++++
+>   meson_options.txt             |  2 ++
+>   scripts/meson-buildoptions.sh |  3 +++
+>   4 files changed, 22 insertions(+)
 
-  Just to clarify, I added the Suggested-by tags in this patch based on the
- concrete suggestions during the v1v2 review. None of the tags was explicit=
-ly
- provided by you. Sorry for any confusion this may have caused.
+Could you provide a cover letter so we can understand the changes
+with the previous versions? It is hard to figure out why we are
+at v8 and what we have to review again.
 
-  Thanks again for your suggestions. Looking forward to your reviews!
+Thanks,
 
-  Best regards,
-  Kangjie
+Phil.
 
