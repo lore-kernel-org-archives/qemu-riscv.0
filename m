@@ -4,78 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4EFF0C5CFC1
-	for <qemu-riscv@archiver.kernel.org>; Sat, 15 Aug 2026 19:50:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8AEACC5AD5A
+	for <qemu-riscv@archiver.kernel.org>; Sat, 15 Aug 2026 19:50:26 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wvKKt-0007XL-N4; Sat, 15 Aug 2026 15:46:31 -0400
+	id 1wvKKq-0007Tr-RT; Sat, 15 Aug 2026 15:46:28 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wvKKs-0007VS-2E
- for qemu-riscv@nongnu.org; Sat, 15 Aug 2026 15:46:30 -0400
+ id 1wvKKV-0007Ht-FP
+ for qemu-riscv@nongnu.org; Sat, 15 Aug 2026 15:46:07 -0400
 Received: from mail-pl1-x62d.google.com ([2607:f8b0:4864:20::62d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wvKKq-0008P9-2T
- for qemu-riscv@nongnu.org; Sat, 15 Aug 2026 15:46:29 -0400
+ id 1wvKKT-0008Gz-NN
+ for qemu-riscv@nongnu.org; Sat, 15 Aug 2026 15:46:07 -0400
 Received: by mail-pl1-x62d.google.com with SMTP id
- d9443c01a7336-2cee9b74ee1so15725535ad.3
- for <qemu-riscv@nongnu.org>; Sat, 15 Aug 2026 12:46:27 -0700 (PDT)
+ d9443c01a7336-2cace91f112so24668915ad.0
+ for <qemu-riscv@nongnu.org>; Sat, 15 Aug 2026 12:46:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1786823187; x=1787427987; darn=nongnu.org;
+ d=linaro.org; s=google; t=1786823164; x=1787427964; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=mYRQeAvknjyLDklW5tIpZ3uNJGDTrB+oedKoB4JiGRA=;
- b=g4ikNXdDR0JKVj4CbFGfWDj/B452xlzD7lsM9v4qA5J+PwdQeR45TUEU2ArXTZuJRk
- ZpwHTRlWruD53c9NJNfs4kyI3CjpfFU6zHY8Zz7Z9BKGAGPqcASSN5WHOPY9gJ1aZws6
- ekDeyIxdHYlWuYGJozwDnlTQm52vxKxlLFkNByeDcXCThH2/qB2qq+oyPKnbPDgI8k3d
- SBY1QeB4oXN6xtsr9vCmyCNcKV6unqHWTtUB7egwreNzBW4HAxIKiolpl7aPE3hI6GvO
- h2nj4hZT1IOQvJNLOR9arFyAQqfO10jQ53hRChQ7aFIss/ZxstVOjfZlhxhRgyO4qbHY
- +R8w==
+ bh=PwrL7badJiVWs6ya4sCETcneM+ddqqSpHKgWHUOhTRE=;
+ b=PSwqPLDxMypoB/hSJyzI71RrJd13etBFNdC6V58tIhWu7lfCL5Aqk+gbp3UkdootTv
+ YE3wMU4MWToOjJ4lRhrO4DICsmSEAKMFfZezG4lna4HeKZcSz3VLljqlLKrV4JkDqsye
+ Xxj7Fp6+AOAuI1h62ieBOfZJMd9UZwZ4ZnO9B4x/vz1g3v/rj1/AR3v7HGwYxWH9IpqY
+ BHmxSNm0Jm7iNOoZM0WP0aEGZa2AMp/9qjNJVIWV1BnQE3oiDJ6nle6WalYvjVZJ3z/X
+ kNa3odS+sbtUxaSrEgEFyMgSpcAuRoNwJABL+vyKpzsWxrBmJPamSuBiXDDvkx6CkzWj
+ 2UKA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786823187; x=1787427987;
+ d=1e100.net; s=20251104; t=1786823164; x=1787427964;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=mYRQeAvknjyLDklW5tIpZ3uNJGDTrB+oedKoB4JiGRA=;
- b=Yj3wq5iL5A9H4ukpKYFDHKrH5aVW9gLxAWXhGgNRmqqmwz4sjWWaePavGR9jVsI++G
- tpgv0xdJTVAajwdfPubFEXsIQuoOTRWNX/KFZhXpkErPIZMyj8Tz1nq5MxXx7WSJ2dCs
- ZowS2RYAzC8Q+sD7vvT7LFr+dJcKOkarZsfaPHcIu6G/g/scgN2W7NGnsc1DDUZY+Zdf
- mrby4R6BSvP58jjMN+21RZtFfOWlr2oBhVKzCsKBOrZa4PTnPGNJZScmUfi3bk7aqdSi
- 81OOS/twbazzMdhTPnQgyEy3f2l6iiPnFjvu4OFpGRdYKVHvjUThs0xvUoC2Z7v1LtyW
- Uy5A==
+ bh=PwrL7badJiVWs6ya4sCETcneM+ddqqSpHKgWHUOhTRE=;
+ b=JxVTFLLTC2KtYR3ISaRT/wTAerZyMnz0ND2AndrXlep6DLml5mRGRfm1ykIvFl+9gY
+ fL9myo2ZfAmOwGqizUgVCeOIYF5VjQP11nPvcC4AQ4ka3Xg4+1PrKh93tESf1a57yH3i
+ Ar9MILmFEC7Cz/tTJT01suXtS/OHR7HJcN/FD5c4bWA7NUItqopih/D0MGwlFOGvrMns
+ 0xAjAui/Ep64jqz0qE2OkQXVoeS992Oe5rYE35FynMKtBzGSBzIoWLprTkudOi4UvvOw
+ 1ZEkNlQy9ZM+v/Pd6kqqbe3XFItjKtd8V8P3ALQTyZqpxEkyZYKdPIbhp96Yz5LhDdwv
+ pE+A==
 X-Forwarded-Encrypted: i=1;
- AHgh+RqwQM1pWALqc4nNAUOUvqR4XA2arg5QZzwVpFljVdd0+59Kne5mpzEn3mmng7RXPXO6zgNIj+5pVxjo@nongnu.org
-X-Gm-Message-State: AOJu0YzFBX3YsDgWSRIHKmijVTCkA90Rfzc2I5LmC3qFjIQ6uv3Kn34h
- BIuPiKjefwvrQ5Upiqa8D5DGjBfhuT/N+Flxzv2TZm1EdalSMaFVIeS6Vmu/93sz1KQ=
-X-Gm-Gg: AR+sD13usVmuISeT+Tm8ozznHN1g5ThyJ+Tnb2/TovXdFD6hkvcZdLUimhRraV7q2if
- QUPWcYhYL5aUULFujvp57azewnfhhsVrwyLdUgD1kZ7cAJf319CSkYUv+Hh0z9jTW1Cc8A0c37q
- smbGseD1l1PF1DmjTs2fyppe1UQ6j5sd7Bc9rzvtyu1tv9HOMQ8fLtC1qdFBOecbn98dkXFd2f2
- SoHjU4WZoKam/ejWgCLjmPVfDK6XtK1BTaQMgfjwAR7+5z1+9FEekWUoi8G/bhn1CL0lhL2WtAd
- n1Fea359In0fbhCfJIFKT3Cw/Eu0Dn5vQ+zsQpaxaQz0b/jnCoijWEzZKLXh2xG4M2v3OqPbIap
- EgoplN7hQFhitfaeQqrzPLmzf5n0HbrkTHy5mgs9Aoan/9lXV8WHz/NQMvyuVUsuYoK/FMrbH6p
- DqKx++Q4FEQahqkpb4ZMeciLgVnYVQ1EraFptsl3WzxcMf3yEtBKs6/y/Srrg+4v5ETiaQUqlgP
- pTmvL2szVGZfUbT0DX0
-X-Received: by 2002:a17:902:e78c:b0:2ca:e19c:986 with SMTP id
- d9443c01a7336-2d3b0cdbd75mr172887785ad.1.1786823186696; 
- Sat, 15 Aug 2026 12:46:26 -0700 (PDT)
+ AHgh+RqXqtZyu32qKLUr8i3GD3gjvB2KO3+FBwA/HRgozEBFxos6liCI9vn+Bd0qxjnIloW4dP+QRs+zQWZ9@nongnu.org
+X-Gm-Message-State: AOJu0YzocGexVkFeJ8r3R1PlHGBDRek0WFuLRcYBOkhCXxyrk01Gx5jQ
+ V3FL8OTO72L2RPaclJ63zt8y9dUrCfOZO/O8BlSyAdQsbD1UtkyFi/BYBe0z6AZfAsM=
+X-Gm-Gg: AR+sD10DNu5jrnd3ycKbCPKThPpeedFhZtRnfz4zGOUgUS7G+ch7B3AbsrL+jhGI6Ck
+ 92hkRFi5HC20gy9ZfiHBywi1MW3pSBDbp4PkwD12//LqKmaDEZ0qdyjwP7oXSyp/Hp4Z/n8n955
+ OhHGjATumF0trsn/aeXhZLg1ku4phC8tZzWWH6I+QZaQe30/xv7Bh3gUwbqlJP75c5XztK2aMFC
+ 00cIIQfO5rj/8S3sEFaG85MC3EinPXk9Pjuj5GZCUf9rX0bczxtvIvUgXA1s/3gGG1jXzT6N0rX
+ 5QeKFqNipLFukFF8Gj0DDX7gz/RMCk9QsRbdr2sRfibvL45456/33Hu04p3KwMNGy+GXjR+8o4P
+ 6aeQyUZvvy0uhqMoXNL6W29xOvjFn9Z0KXtmti1VDGDMRuR5cjSFAiHLyk1rZHbfgsMK2T8WLEm
+ cFBQ4R1+18Gz9cQztTZi40QvO10xjPlSUU+/VI2eRBtMgAQ0NG3t/w6v1IAg8V9GswWrR7LamQK
+ 6Ud3nxIbrRJs9QJotd3
+X-Received: by 2002:a17:903:1965:b0:2c0:e5ee:f55e with SMTP id
+ d9443c01a7336-2d3b0db9f3cmr161142175ad.7.1786823164184; 
+ Sat, 15 Aug 2026 12:46:04 -0700 (PDT)
 Received: from stoup.. (174-21-93-59.tukw.qwest.net. [174.21.93.59])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2d3ae753ebcsm21179465ad.5.2026.08.15.12.46.24
+ d9443c01a7336-2d3ae753ebcsm21179465ad.5.2026.08.15.12.46.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 15 Aug 2026 12:46:25 -0700 (PDT)
+ Sat, 15 Aug 2026 12:46:03 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: frank.chang@sifive.com,
 	max.chou@sifive.com,
 	qemu-riscv@nongnu.org
-Subject: [PATCH 23/23] target/riscv: Drop v0 argument from
- gen_helper_ldst_index
-Date: Sat, 15 Aug 2026 12:45:48 -0700
-Message-ID: <20260815194549.1377505-24-richard.henderson@linaro.org>
+Subject: [PATCH 05/23] target/riscv: Add evl argument to vext_ldst_elem_fn_host
+Date: Sat, 15 Aug 2026 12:45:30 -0700
+Message-ID: <20260815194549.1377505-6-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260815194549.1377505-1-richard.henderson@linaro.org>
 References: <20260815194549.1377505-1-richard.henderson@linaro.org>
@@ -89,7 +88,7 @@ X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -105,181 +104,159 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Since we're also passing env, v0 is always env->vreg.
+This merges vext_continuous_ldst_host into the ldst_host function.
+We can then handle the byte little-endian optimization at compile-time.
 
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/riscv/helper.h                       | 64 ++++++++++-----------
- target/riscv/tcg/vector_helper.c            | 15 ++---
- target/riscv/tcg/insn_trans/trans_rvv.c.inc | 17 ++----
- 3 files changed, 46 insertions(+), 50 deletions(-)
+ target/riscv/tcg/vector_helper.c | 83 +++++++++++++++-----------------
+ 1 file changed, 40 insertions(+), 43 deletions(-)
 
-diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-index 82a478962b..96fb2347df 100644
---- a/target/riscv/helper.h
-+++ b/target/riscv/helper.h
-@@ -188,38 +188,38 @@ DEF_HELPER_5(vsse8_v, void, ptr, tl, tl, env, i32)
- DEF_HELPER_5(vsse16_v, void, ptr, tl, tl, env, i32)
- DEF_HELPER_5(vsse32_v, void, ptr, tl, tl, env, i32)
- DEF_HELPER_5(vsse64_v, void, ptr, tl, tl, env, i32)
--DEF_HELPER_6(vlxei8_8_v, void, ptr, ptr, tl, ptr, env, i32)
--DEF_HELPER_6(vlxei8_16_v, void, ptr, ptr, tl, ptr, env, i32)
--DEF_HELPER_6(vlxei8_32_v, void, ptr, ptr, tl, ptr, env, i32)
--DEF_HELPER_6(vlxei8_64_v, void, ptr, ptr, tl, ptr, env, i32)
--DEF_HELPER_6(vlxei16_8_v, void, ptr, ptr, tl, ptr, env, i32)
--DEF_HELPER_6(vlxei16_16_v, void, ptr, ptr, tl, ptr, env, i32)
--DEF_HELPER_6(vlxei16_32_v, void, ptr, ptr, tl, ptr, env, i32)
--DEF_HELPER_6(vlxei16_64_v, void, ptr, ptr, tl, ptr, env, i32)
--DEF_HELPER_6(vlxei32_8_v, void, ptr, ptr, tl, ptr, env, i32)
--DEF_HELPER_6(vlxei32_16_v, void, ptr, ptr, tl, ptr, env, i32)
--DEF_HELPER_6(vlxei32_32_v, void, ptr, ptr, tl, ptr, env, i32)
--DEF_HELPER_6(vlxei32_64_v, void, ptr, ptr, tl, ptr, env, i32)
--DEF_HELPER_6(vlxei64_8_v, void, ptr, ptr, tl, ptr, env, i32)
--DEF_HELPER_6(vlxei64_16_v, void, ptr, ptr, tl, ptr, env, i32)
--DEF_HELPER_6(vlxei64_32_v, void, ptr, ptr, tl, ptr, env, i32)
--DEF_HELPER_6(vlxei64_64_v, void, ptr, ptr, tl, ptr, env, i32)
--DEF_HELPER_6(vsxei8_8_v, void, ptr, ptr, tl, ptr, env, i32)
--DEF_HELPER_6(vsxei8_16_v, void, ptr, ptr, tl, ptr, env, i32)
--DEF_HELPER_6(vsxei8_32_v, void, ptr, ptr, tl, ptr, env, i32)
--DEF_HELPER_6(vsxei8_64_v, void, ptr, ptr, tl, ptr, env, i32)
--DEF_HELPER_6(vsxei16_8_v, void, ptr, ptr, tl, ptr, env, i32)
--DEF_HELPER_6(vsxei16_16_v, void, ptr, ptr, tl, ptr, env, i32)
--DEF_HELPER_6(vsxei16_32_v, void, ptr, ptr, tl, ptr, env, i32)
--DEF_HELPER_6(vsxei16_64_v, void, ptr, ptr, tl, ptr, env, i32)
--DEF_HELPER_6(vsxei32_8_v, void, ptr, ptr, tl, ptr, env, i32)
--DEF_HELPER_6(vsxei32_16_v, void, ptr, ptr, tl, ptr, env, i32)
--DEF_HELPER_6(vsxei32_32_v, void, ptr, ptr, tl, ptr, env, i32)
--DEF_HELPER_6(vsxei32_64_v, void, ptr, ptr, tl, ptr, env, i32)
--DEF_HELPER_6(vsxei64_8_v, void, ptr, ptr, tl, ptr, env, i32)
--DEF_HELPER_6(vsxei64_16_v, void, ptr, ptr, tl, ptr, env, i32)
--DEF_HELPER_6(vsxei64_32_v, void, ptr, ptr, tl, ptr, env, i32)
--DEF_HELPER_6(vsxei64_64_v, void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_5(vlxei8_8_v, void, ptr, tl, ptr, env, i32)
-+DEF_HELPER_5(vlxei8_16_v, void, ptr, tl, ptr, env, i32)
-+DEF_HELPER_5(vlxei8_32_v, void, ptr, tl, ptr, env, i32)
-+DEF_HELPER_5(vlxei8_64_v, void, ptr, tl, ptr, env, i32)
-+DEF_HELPER_5(vlxei16_8_v, void, ptr, tl, ptr, env, i32)
-+DEF_HELPER_5(vlxei16_16_v, void, ptr, tl, ptr, env, i32)
-+DEF_HELPER_5(vlxei16_32_v, void, ptr, tl, ptr, env, i32)
-+DEF_HELPER_5(vlxei16_64_v, void, ptr, tl, ptr, env, i32)
-+DEF_HELPER_5(vlxei32_8_v, void, ptr, tl, ptr, env, i32)
-+DEF_HELPER_5(vlxei32_16_v, void, ptr, tl, ptr, env, i32)
-+DEF_HELPER_5(vlxei32_32_v, void, ptr, tl, ptr, env, i32)
-+DEF_HELPER_5(vlxei32_64_v, void, ptr, tl, ptr, env, i32)
-+DEF_HELPER_5(vlxei64_8_v, void, ptr, tl, ptr, env, i32)
-+DEF_HELPER_5(vlxei64_16_v, void, ptr, tl, ptr, env, i32)
-+DEF_HELPER_5(vlxei64_32_v, void, ptr, tl, ptr, env, i32)
-+DEF_HELPER_5(vlxei64_64_v, void, ptr, tl, ptr, env, i32)
-+DEF_HELPER_5(vsxei8_8_v, void, ptr, tl, ptr, env, i32)
-+DEF_HELPER_5(vsxei8_16_v, void, ptr, tl, ptr, env, i32)
-+DEF_HELPER_5(vsxei8_32_v, void, ptr, tl, ptr, env, i32)
-+DEF_HELPER_5(vsxei8_64_v, void, ptr, tl, ptr, env, i32)
-+DEF_HELPER_5(vsxei16_8_v, void, ptr, tl, ptr, env, i32)
-+DEF_HELPER_5(vsxei16_16_v, void, ptr, tl, ptr, env, i32)
-+DEF_HELPER_5(vsxei16_32_v, void, ptr, tl, ptr, env, i32)
-+DEF_HELPER_5(vsxei16_64_v, void, ptr, tl, ptr, env, i32)
-+DEF_HELPER_5(vsxei32_8_v, void, ptr, tl, ptr, env, i32)
-+DEF_HELPER_5(vsxei32_16_v, void, ptr, tl, ptr, env, i32)
-+DEF_HELPER_5(vsxei32_32_v, void, ptr, tl, ptr, env, i32)
-+DEF_HELPER_5(vsxei32_64_v, void, ptr, tl, ptr, env, i32)
-+DEF_HELPER_5(vsxei64_8_v, void, ptr, tl, ptr, env, i32)
-+DEF_HELPER_5(vsxei64_16_v, void, ptr, tl, ptr, env, i32)
-+DEF_HELPER_5(vsxei64_32_v, void, ptr, tl, ptr, env, i32)
-+DEF_HELPER_5(vsxei64_64_v, void, ptr, tl, ptr, env, i32)
- DEF_HELPER_4(vle8ff_v, void, ptr, tl, env, i32)
- DEF_HELPER_4(vle16ff_v, void, ptr, tl, env, i32)
- DEF_HELPER_4(vle32ff_v, void, ptr, tl, env, i32)
 diff --git a/target/riscv/tcg/vector_helper.c b/target/riscv/tcg/vector_helper.c
-index 354c0b0da5..b7b3805a6d 100644
+index 661f1ab2f6..3786a17231 100644
 --- a/target/riscv/tcg/vector_helper.c
 +++ b/target/riscv/tcg/vector_helper.c
-@@ -601,12 +601,13 @@ GEN_VEXT_GET_INDEX_ADDR(idx_w, uint32_t, H4)
- GEN_VEXT_GET_INDEX_ADDR(idx_d, uint64_t, H8)
+@@ -214,7 +214,8 @@ static inline MemOpIdx vext_make_memop_idx(CPURISCVState *env, size_t size)
+ /* elements operations for load and store */
+ typedef void vext_ldst_elem_fn_tlb(CPURISCVState *env, abi_ptr addr,
+                                    uint32_t idx, void *vd, uintptr_t retaddr);
+-typedef void vext_ldst_elem_fn_host(void *vd, uint32_t idx, void *host);
++typedef void vext_ldst_elem_fn_host(void *vd, void *host,
++                                    uint32_t idx, uint32_t evl);
  
- static void
--vext_ldst_index(void *vd, void *v0, target_ulong base,
-+vext_ldst_index(void *vd, target_ulong base,
-                 void *vs2, CPURISCVState *env, uint32_t desc,
-                 vext_get_index_addr get_index_addr,
-                 vext_ldst_elem_fn_tlb *ldst_elem,
-                 uint32_t log2_esz, uintptr_t ra)
- {
-+    void *v0 = env->vreg;
-     uint32_t nf = vext_nf(desc);
-     uint32_t vm = vext_vm(desc);
-     uint32_t max_elems = vext_max_elems(desc, log2_esz);
-@@ -638,10 +639,10 @@ vext_ldst_index(void *vd, void *v0, target_ulong base,
+ #define GEN_VEXT_TLB_LD_ELEM(NAME, ETYPE, H, LDSUF)         \
+ static inline QEMU_ALWAYS_INLINE                            \
+@@ -226,12 +227,15 @@ void NAME##_tlb(CPURISCVState *env, abi_ptr addr,           \
+     *cur = cpu_##LDSUF##_mmu(env, addr, oi, retaddr);       \
+ }                                                           \
+ 
+-#define GEN_VEXT_HOST_LD_ELEM(NAME, ETYPE, H, LDSUF)        \
+-static inline QEMU_ALWAYS_INLINE                            \
+-void NAME##_host(void *vd, uint32_t idx, void *host)        \
+-{                                                           \
+-    ETYPE *cur = ((ETYPE *)vd + H(idx));                    \
+-    *cur = (ETYPE)LDSUF##_p(host);                          \
++#define GEN_VEXT_HOST_LD_ELEM(NAME, ETYPE, H, LDSUF)                    \
++static inline QEMU_ALWAYS_INLINE                                        \
++void NAME##_host(void *vd, void *host, uint32_t idx, uint32_t evl)      \
++{                                                                       \
++    do {                                                                \
++        ETYPE *cur = (ETYPE *)vd + H(idx);                              \
++        *cur = LDSUF##_p(host);                                         \
++        host += sizeof(ETYPE);                                          \
++    } while (++idx < evl);                                              \
  }
  
- #define GEN_VEXT_LD_INDEX(NAME, ETYPE, INDEX_FN, LOAD_FN)               \
--QEMU_FLATTEN void HELPER(NAME)(void *vd, void *v0, target_ulong base,   \
--                               void *vs2, CPURISCVState *env, uint32_t desc) \
-+QEMU_FLATTEN void HELPER(NAME)(void *vd, target_ulong base, void *vs2,  \
-+                               CPURISCVState *env, uint32_t desc)       \
- {                                                                       \
--    vext_ldst_index(vd, v0, base, vs2, env, desc, INDEX_FN,             \
-+    vext_ldst_index(vd, base, vs2, env, desc, INDEX_FN,                 \
-                     LOAD_FN, ctzl(sizeof(ETYPE)), GETPC());             \
+ GEN_VEXT_TLB_LD_ELEM(lde_b, uint8_t,  H1, ldb)
+@@ -239,7 +243,16 @@ GEN_VEXT_TLB_LD_ELEM(lde_h, uint16_t, H2, ldw)
+ GEN_VEXT_TLB_LD_ELEM(lde_w, uint32_t, H4, ldl)
+ GEN_VEXT_TLB_LD_ELEM(lde_d, uint64_t, H8, ldq)
+ 
++#if HOST_BIG_ENDIAN
+ GEN_VEXT_HOST_LD_ELEM(lde_b, uint8_t,  H1, ldub)
++#else
++static inline QEMU_ALWAYS_INLINE
++void lde_b_host(void *vd, void *host, uint32_t idx, uint32_t evl)
++{
++    memcpy(vd + idx, host, evl - idx);
++}
++#endif
++
+ GEN_VEXT_HOST_LD_ELEM(lde_h, uint16_t, H2, lduw_le)
+ GEN_VEXT_HOST_LD_ELEM(lde_w, uint32_t, H4, ldl_le)
+ GEN_VEXT_HOST_LD_ELEM(lde_d, uint64_t, H8, ldq_le)
+@@ -254,12 +267,15 @@ void NAME##_tlb(CPURISCVState *env, abi_ptr addr,           \
+     cpu_##STSUF##_mmu(env, addr, data, oi, retaddr);        \
+ }                                                           \
+ 
+-#define GEN_VEXT_HOST_ST_ELEM(NAME, ETYPE, H, STSUF)        \
+-static inline QEMU_ALWAYS_INLINE                            \
+-void NAME##_host(void *vd, uint32_t idx, void *host)        \
+-{                                                           \
+-    ETYPE data = *((ETYPE *)vd + H(idx));                   \
+-    STSUF##_p(host, data);                                  \
++#define GEN_VEXT_HOST_ST_ELEM(NAME, ETYPE, H, STSUF)                    \
++static inline QEMU_ALWAYS_INLINE                                        \
++void NAME##_host(void *vd, void *host, uint32_t idx, uint32_t evl)      \
++{                                                                       \
++    do {                                                                \
++        ETYPE data = *((ETYPE *)vd + H(idx));                           \
++        STSUF##_p(host, data);                                          \
++        host += sizeof(ETYPE);                                          \
++    } while (++idx < evl);                                              \
  }
  
-@@ -663,10 +664,10 @@ GEN_VEXT_LD_INDEX(vlxei64_32_v, int32_t, idx_d, lde_w_tlb)
- GEN_VEXT_LD_INDEX(vlxei64_64_v, int64_t, idx_d, lde_d_tlb)
+ GEN_VEXT_TLB_ST_ELEM(ste_b, uint8_t,  H1, stb)
+@@ -267,7 +283,16 @@ GEN_VEXT_TLB_ST_ELEM(ste_h, uint16_t, H2, stw)
+ GEN_VEXT_TLB_ST_ELEM(ste_w, uint32_t, H4, stl)
+ GEN_VEXT_TLB_ST_ELEM(ste_d, uint64_t, H8, stq)
  
- #define GEN_VEXT_ST_INDEX(NAME, ETYPE, INDEX_FN, STORE_FN)              \
--QEMU_FLATTEN void HELPER(NAME)(void *vd, void *v0, target_ulong base,   \
--                               void *vs2, CPURISCVState *env, uint32_t desc) \
-+QEMU_FLATTEN void HELPER(NAME)(void *vd, target_ulong base, void *vs2,  \
-+                               CPURISCVState *env, uint32_t desc)       \
- {                                                                       \
--    vext_ldst_index(vd, v0, base, vs2, env, desc, INDEX_FN,             \
-+    vext_ldst_index(vd, base, vs2, env, desc, INDEX_FN,                 \
-                     STORE_FN, ctzl(sizeof(ETYPE)), GETPC());            \
++#if HOST_BIG_ENDIAN
+ GEN_VEXT_HOST_ST_ELEM(ste_b, uint8_t,  H1, stb)
++#else
++static inline QEMU_ALWAYS_INLINE
++void ste_b_host(void *vd, void *host, uint32_t idx, uint32_t evl)
++{
++    memcpy(host, vd + idx, evl - idx);
++}
++#endif
++
+ GEN_VEXT_HOST_ST_ELEM(ste_h, uint16_t, H2, stw_le)
+ GEN_VEXT_HOST_ST_ELEM(ste_w, uint32_t, H4, stl_le)
+ GEN_VEXT_HOST_ST_ELEM(ste_d, uint64_t, H8, stq_le)
+@@ -284,33 +309,6 @@ vext_continuous_ldst_tlb(CPURISCVState *env, vext_ldst_elem_fn_tlb *ldst_tlb,
+     }
  }
  
-diff --git a/target/riscv/tcg/insn_trans/trans_rvv.c.inc b/target/riscv/tcg/insn_trans/trans_rvv.c.inc
-index 5e352dbf41..4556c644cc 100644
---- a/target/riscv/tcg/insn_trans/trans_rvv.c.inc
-+++ b/target/riscv/tcg/insn_trans/trans_rvv.c.inc
-@@ -975,33 +975,28 @@ GEN_VEXT_TRANS(vsse64_v, MO_64, rnfvm, st_stride_op, st_stride_check)
- /*
-  *** index load and store
-  */
--typedef void gen_helper_ldst_index(TCGv_ptr, TCGv_ptr, TCGv,
--                                   TCGv_ptr, TCGv_env, TCGv_i32);
-+typedef void gen_helper_ldst_index(TCGv_ptr, TCGv, TCGv_ptr,
-+                                   TCGv_env, TCGv_i32);
- 
- static bool ldst_index_trans(uint32_t vd, uint32_t rs1, uint32_t vs2,
-                              uint32_t data, gen_helper_ldst_index *fn,
-                              DisasContext *s)
- {
--    TCGv_ptr dest, mask, index;
--    TCGv base;
-+    TCGv_ptr dest = tcg_temp_new_ptr();
-+    TCGv_ptr index = tcg_temp_new_ptr();
-+    TCGv base = get_gpr(s, rs1, EXT_NONE);
-     TCGv_i32 desc;
- 
--    dest = tcg_temp_new_ptr();
--    mask = tcg_temp_new_ptr();
--    index = tcg_temp_new_ptr();
--    base = get_gpr(s, rs1, EXT_NONE);
+-static inline QEMU_ALWAYS_INLINE void
+-vext_continuous_ldst_host(CPURISCVState *env, vext_ldst_elem_fn_host *ldst_host,
+-                        void *vd, uint32_t evl, uint32_t reg_start, void *host,
+-                        uint32_t esz, bool is_load)
+-{
+-    if (HOST_BIG_ENDIAN) {
+-        for (; reg_start < evl; reg_start++, host += esz) {
+-            ldst_host(vd, reg_start, host);
+-        }
+-    } else {
+-        if (esz == 1) {
+-            uint32_t byte_offset = reg_start * esz;
+-            uint32_t size = (evl - reg_start) * esz;
 -
-     data = vdata_add_memopidx(s, data);
-     desc = tcg_constant_i32(simd_desc(s->cfg_ptr->vlenb,
-                                       s->cfg_ptr->vlenb, data));
+-            if (is_load) {
+-                memcpy(vd + byte_offset, host, size);
+-            } else {
+-                memcpy(host, vd + byte_offset, size);
+-            }
+-        } else {
+-            for (; reg_start < evl; reg_start++, host += esz) {
+-                ldst_host(vd, reg_start, host);
+-            }
+-        }
+-    }
+-}
+-
+ static void vext_set_tail_elems_1s(uint32_t vl, void *vd, uint32_t nf,
+                                    uint32_t esz, uint32_t max_elems)
+ {
+@@ -334,7 +332,7 @@ static void vext_ldst_nf_host(void *vd, void *host, uint32_t i, uint32_t nf,
+                               vext_ldst_elem_fn_host *ldst_host)
+ {
+     for (uint32_t k = 0; k < nf; k++, host += esz) {
+-        ldst_host(vd, i + k * max_elems, host);
++        ldst_host(vd + k * max_elems, host, i, i + 1);
+     }
+ }
  
-     tcg_gen_addi_ptr(dest, tcg_env, vreg_ofs(s, vd));
-     tcg_gen_addi_ptr(index, tcg_env, vreg_ofs(s, vs2));
--    tcg_gen_addi_ptr(mask, tcg_env, vreg_ofs(s, 0));
- 
-     mark_vs_dirty(s);
- 
--    fn(dest, mask, base, index, tcg_env, desc);
-+    fn(dest, base, index, tcg_env, desc);
- 
-     finalize_rvv_inst(s);
-     return true;
+@@ -450,8 +448,7 @@ vext_page_ldst_us(CPURISCVState *env, void *vd, target_ulong addr,
+      */
+     if (flags == 0 && (riscv_cpu_cfg(env)->ext_zicclsm || !misaligned)) {
+         if (nf == 1) {
+-            vext_continuous_ldst_host(env, ldst_host, vd, evl, env->vstart,
+-                                      host, esz, is_load);
++            ldst_host(vd, host, env->vstart, evl);
+         } else {
+             for (uint32_t i = env->vstart; i < evl; ++i) {
+                 vext_ldst_nf_host(vd, host, i, nf, esz, max_elems, ldst_host);
 -- 
 2.43.0
 
