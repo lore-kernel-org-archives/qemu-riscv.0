@@ -4,92 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B144CC5AD5A
-	for <qemu-riscv@archiver.kernel.org>; Sat, 15 Aug 2026 19:50:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91B99C5AD5A
+	for <qemu-riscv@archiver.kernel.org>; Sat, 15 Aug 2026 19:51:01 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wvKKl-0007O8-Nt; Sat, 15 Aug 2026 15:46:23 -0400
+	id 1wvKKl-0007O9-PY; Sat, 15 Aug 2026 15:46:23 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wvKKX-0007Ir-Qu
- for qemu-riscv@nongnu.org; Sat, 15 Aug 2026 15:46:13 -0400
-Received: from mail-pl1-x630.google.com ([2607:f8b0:4864:20::630])
+ id 1wvKKf-0007JT-GF
+ for qemu-riscv@nongnu.org; Sat, 15 Aug 2026 15:46:21 -0400
+Received: from mail-pl1-x62d.google.com ([2607:f8b0:4864:20::62d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wvKKV-0008HJ-6d
- for qemu-riscv@nongnu.org; Sat, 15 Aug 2026 15:46:08 -0400
-Received: by mail-pl1-x630.google.com with SMTP id
- d9443c01a7336-2cf52d15d88so21001165ad.2
- for <qemu-riscv@nongnu.org>; Sat, 15 Aug 2026 12:46:05 -0700 (PDT)
+ id 1wvKKd-0008KG-ED
+ for qemu-riscv@nongnu.org; Sat, 15 Aug 2026 15:46:17 -0400
+Received: by mail-pl1-x62d.google.com with SMTP id
+ d9443c01a7336-2cf52d15d88so21001755ad.2
+ for <qemu-riscv@nongnu.org>; Sat, 15 Aug 2026 12:46:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1786823165; x=1787427965; darn=nongnu.org;
+ d=linaro.org; s=google; t=1786823174; x=1787427974; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=US7bLFAj81tqEBwMk45KMnHmQvxx6oAKzY8BWowRu2M=;
- b=KepZacLOtB4brD0XpMunciNYfhQJaDkIyXSD0tospxRtVcfscK1k8g2ZVjmvGG5iZn
- tBwhLsnypIYeur9UKmQKCSuSkjllZ7S6wYvui7t3+7PvJYMUIDw41/Hd06B20l9Eorwz
- TBnwBPzX1zQGgIMNQpnurYzz30ZoXbEZP29L0SQ2tVzCZIBt6qBoeQ73HbdlmjFhgw0k
- EI4I5ToBvZt8dclBjLkKB3dyXTyacof3pUiNa3UuAl6DgnqEiFwnh3hLheSp/NPdRwB6
- UMa61IsLXk7US1BEuC8Y9hKzO+uB4eavcGG3W9bjHhKdHgSyr+w2Kqj1t14GwOtmEqWY
- rYsQ==
+ bh=UhKBD+tRgxL1bjQJ7VX4BBXuneohxZ5oDU1L18T6RBU=;
+ b=Kvn7KsXjkbjjkN/BDjVxbahGsGf0aq1uGtUcH55tGoH80MqmJp/gZUKRVug8YUmcgE
+ 5GmoqihDdh5WYNpviPfRdL3ZjSBwbA9zaEBiTei19NPY1zWUoOXZvasfM6Zu/EQtPRVe
+ srHZ6TAOHFOyF/5KZqWJWYsdsRo4Aae+3z97lLN8kxu26kVCVjLCj3ySpmjV2N6dgXrd
+ RfF3i7LGaWSp/lKTF376q1Ad8aZCrDJkUpBnMFMD4eoaedeYk3B2NXCmMYr8zBhHEvKO
+ 8suBxf30dirh7g5GcpMOtpHVoQL2pLj2XWCbTC5q1jfdIsc3QG/NGURyy6ZvyfT2N1Iw
+ nNOw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786823165; x=1787427965;
+ d=1e100.net; s=20251104; t=1786823174; x=1787427974;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=US7bLFAj81tqEBwMk45KMnHmQvxx6oAKzY8BWowRu2M=;
- b=sspNTP6Hip6ta+iZEjdrdeLfrZKoli351JwDYkHR3ORo/HbqRMkID0zJLptKDsgUeI
- YwcYpR8F2TebR92wF8QhszcW+oWmMXpIEe7efVu9Z6jjkZRjGEnErTykHyHskQYujcs5
- OCxExO81Yhbo/2LVONrqgO/TX81FL1ScjV1+Itlr16kiJzupSLZeI9DkdDF35YT77Q18
- RdO5HYfPtsot6oR9RetXMuNpk4J9tQt0g2IrbKiTBjr4DUE+2pTKRdVxb0AHDzSYb007
- BXvDeAJ95KUp6SHCj/hx+fIIokRZ7pEqiYvyF/VumrjxR7FL6sHVYQiRxC+dTPhL/zU4
- +4Vw==
+ bh=UhKBD+tRgxL1bjQJ7VX4BBXuneohxZ5oDU1L18T6RBU=;
+ b=II3s7X/DHMAd+jDIw81+3BIpTnjHkmRJJArTOsIxi4cDlMDQOxIcf9Oi/1PGSpdSFw
+ 6CitZKJHi+UCzMLgQG1NUPPceMo7uLu+bXBi/IlzrYNp+wvnGoCu2rFfiZtWItPmE3xn
+ kGEaRWzgdlbKgtZtyqB55nP8hfnjajH/UmgFEeciryNLd+yoV+AxyCcxh3TfQn9NIaRr
+ /waNDiAFs8COegAsEirdtdWSOymfadxZJmqTB49GPSZVDbfmgwffwNoHbMdZVnfa7CH6
+ vAoAz39z9HK38XuP/tlWkIcC3D38KPw2Y7lnLCTUt+jfw+Ae440p13Dv/9nTFYZmz95Q
+ 1WZQ==
 X-Forwarded-Encrypted: i=1;
- AHgh+RpYeJ1abocXeDbBojLGUCF/3DP/04agsQKPylJkyf0HfiSu8CzUE1CPCAvN/zz2iwrvmOo8yXgyCM0D@nongnu.org
-X-Gm-Message-State: AOJu0Yw8cRCRfSn0FYdX61TTC9me9FcQ21W3i6SKFxsCR4uPac7ftb+n
- O4gdXis+wLEH1fxKfxB0bWKalpMRm+GzSDIzMxUM9yPVwNXF1n5aIO6ZVQIz7XJBNKU=
-X-Gm-Gg: AR+sD11TERXZL32QjuSPpWlwPZOG4VB8joYlNGD0sHyMJgPW+UcDRkBni7CMtpaiGzG
- ibGk2kjOzzMP3lcijXBY3PqxFGr1JjE6t/4LHducvHURgZWaxsNYUdOCJPTaOACx89JqJXGS3Up
- v2dK8yCrdRlyMDqZPMjdqYqSjlJAc7X0MpoueNEIxjMhagDVZhXv09ww9Tiu+WrgE+gRx5RvMGV
- 0sZR2xVPcFwzZzYq9RdCkNQ96ermTADS2qHdBa4WuKw+pbZM+C7iGS+khLxcRxFwqpq7hLqv1sK
- 7MQsqN6raTyfl2wl32kSgabCI2FxyYRlfP4djs+hwRgA0Hs2hQ2wSYdQ+ijgBh/CEfR+U1pdITv
- 1lOBg5hHt2o+6mNQtiPT24Ln2xL065kOm9MaU7W6O835EjtSMzfbYRFPxCcFS3hQE0/JSFuQqMa
- PRFGkVK4rjhDeLWqhkWi+2tBfRLy1fw6MD1NvT8GyXXGKYXqAlpbg8u3QuwPRFQ5CFhRcKOChE4
- aOTlI7wa5LtMGA1kfS/slaaHV1mR3Q=
-X-Received: by 2002:a17:902:fdab:b0:2c9:b8b7:5d1c with SMTP id
- d9443c01a7336-2d3b0d43f16mr170532915ad.16.1786823164851; 
- Sat, 15 Aug 2026 12:46:04 -0700 (PDT)
+ AHgh+Ro8czzvnT77BCapnuBtkLjoAAUp7IYU1W0Gnmh8tWo8hmIPplh649fuJc40e/JoWuUoQndjYtoPGGam@nongnu.org
+X-Gm-Message-State: AOJu0YzCuPVcHgMpF46bSFof3CHnETVHciM9G/mtxbvabZxAGiur/k6d
+ pnNYpYzUfdUoxFsdXnUDJYOozcDUoeJWEThM07TCzBIMMao/RyYE2uUdbabXhOYTd2M=
+X-Gm-Gg: AR+sD13539mE48H6+olsjze7XvH/xl/TmbWb7Gnf7gtyyQI57A9dkdAQCyeAiYnp5ut
+ SVzFiPyppWTzYfnolMpNNYdMXRD+ENNCZLVaTWl5AHWkN2g6or1o2hZKn0sKfKIOPxbBTXP2lBn
+ et9tntzPz5GWi+bgaXNyzHcgIPU5fFdvtsi3xMxjDTA5EanoK3VQU/3uWmYTKu0QoeslVg7/Fci
+ t+6LLOaxR5nSj0W13G/ChKxsr7xD57Dg6GF1TQXq/EyghZUPqjdXtWrkR9Wl4eDpD8OhL4SBnoL
+ s/FdTasDRzeAq0bAnCrAOgir+FuLr5ACEsM7xVa+KQLtz0wIxx42TcoW0QwXoKo48PG7B5KB9pj
+ oQ0JG6i1k4porJUQr32ZplLqfOHHr7ybPEXe5N/yzpD3VToF6GQ89ApmJNOCwfEI/dLJe8J03xT
+ ZhCXrSbckmnDx7pfotXmauqzn7yF+SlROMLh1KdR7aJv5IDaAsucBCFouakzpmZy67RIsU1j5fS
+ z45s3Q2nXRJT1d45/Uz
+X-Received: by 2002:a17:903:32cd:b0:2d3:a572:7d52 with SMTP id
+ d9443c01a7336-2d3b0d5c87dmr151528925ad.18.1786823173898; 
+ Sat, 15 Aug 2026 12:46:13 -0700 (PDT)
 Received: from stoup.. (174-21-93-59.tukw.qwest.net. [174.21.93.59])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2d3ae753ebcsm21179465ad.5.2026.08.15.12.46.04
+ d9443c01a7336-2d3ae753ebcsm21179465ad.5.2026.08.15.12.46.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 15 Aug 2026 12:46:04 -0700 (PDT)
+ Sat, 15 Aug 2026 12:46:12 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: frank.chang@sifive.com,
 	max.chou@sifive.com,
 	qemu-riscv@nongnu.org
-Subject: [PATCH 06/23] target/riscv: Drop is_load parameter from
- vext_continuous_ldst_tlb
-Date: Sat, 15 Aug 2026 12:45:31 -0700
-Message-ID: <20260815194549.1377505-7-richard.henderson@linaro.org>
+Subject: [PATCH 13/23] target/riscv: Use vext_ldst_us in vext_ldst_whole
+Date: Sat, 15 Aug 2026 12:45:38 -0700
+Message-ID: <20260815194549.1377505-14-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260815194549.1377505-1-richard.henderson@linaro.org>
 References: <20260815194549.1377505-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::630;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x630.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62d;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -105,52 +104,159 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This parameter is unused.
+This eliminates the last use of probe_pages.
 
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/riscv/tcg/vector_helper.c | 14 ++++++--------
- 1 file changed, 6 insertions(+), 8 deletions(-)
+ target/riscv/tcg/vector_helper.c | 120 +------------------------------
+ 1 file changed, 3 insertions(+), 117 deletions(-)
 
 diff --git a/target/riscv/tcg/vector_helper.c b/target/riscv/tcg/vector_helper.c
-index 3786a17231..a571982388 100644
+index abb1ebcb43..178ed32429 100644
 --- a/target/riscv/tcg/vector_helper.c
 +++ b/target/riscv/tcg/vector_helper.c
-@@ -299,9 +299,8 @@ GEN_VEXT_HOST_ST_ELEM(ste_d, uint64_t, H8, stq_le)
+@@ -149,50 +149,6 @@ static inline uint32_t vext_max_elems(uint32_t desc, uint32_t log2_esz)
+     return scale < 0 ? vlenb >> -scale : vlenb << scale;
+ }
  
- static inline QEMU_ALWAYS_INLINE void
- vext_continuous_ldst_tlb(CPURISCVState *env, vext_ldst_elem_fn_tlb *ldst_tlb,
--                       void *vd, uint32_t evl, target_ulong addr,
--                       uint32_t reg_start, uintptr_t ra, uint32_t esz,
--                       bool is_load)
-+                         void *vd, uint32_t evl, target_ulong addr,
-+                         uint32_t reg_start, uintptr_t ra, uint32_t esz)
- {
-     uint32_t i;
-     for (i = env->vstart; i < evl; env->vstart = ++i, addr += esz) {
-@@ -458,8 +457,8 @@ vext_page_ldst_us(CPURISCVState *env, void *vd, target_ulong addr,
-         env->vstart += elems;
-     } else {
-         if (nf == 1) {
--            vext_continuous_ldst_tlb(env, ldst_tlb, vd, evl, addr, env->vstart,
--                                   ra, esz, is_load);
-+            vext_continuous_ldst_tlb(env, ldst_tlb, vd, evl, addr,
-+                                     env->vstart, ra, esz);
-         } else {
-             for (uint32_t i = env->vstart; i < evl; env->vstart = ++i) {
-                 vext_ldst_nf_tlb(env, vd, addr, i, nf, esz,
-@@ -493,9 +492,8 @@ vext_ldst_us(void *vd, target_ulong base, CPURISCVState *env, uint32_t desc,
-      */
-     if (nf == 1 && (evl << log2_esz) <= 6) {
-         addr = base + (env->vstart << log2_esz);
--        vext_continuous_ldst_tlb(env, ldst_tlb, vd, evl, addr, env->vstart, ra,
--                                 esz, is_load);
+-/*
+- * This function checks watchpoint before real load operation.
+- *
+- * In system mode, the TLB API probe_access is enough for watchpoint check.
+- * In user mode, there is no watchpoint support now.
+- *
+- * It will trigger an exception if there is no mapping in TLB
+- * and page table walk can't fill the TLB entry. Then the guest
+- * software can return here after process the exception or never return.
+- *
+- * This function can also be used when direct access to probe_access_flags is
+- * needed in order to access the flags. If a pointer to a flags operand is
+- * provided the function will call probe_access_flags instead, use nonfault
+- * and update host and flags.
+- */
+-static void probe_pages(CPURISCVState *env, target_ulong addr, target_ulong len,
+-                        uintptr_t ra, MMUAccessType access_type, int mmu_index,
+-                        void **host, int *flags, bool nonfault)
+-{
+-    target_ulong pagelen = -(addr | TARGET_PAGE_MASK);
+-    target_ulong curlen = MIN(pagelen, len);
 -
-+        vext_continuous_ldst_tlb(env, ldst_tlb, vd, evl, addr,
-+                                 env->vstart, ra, esz);
-         env->vstart = 0;
-         if (vma) {
-             vext_set_tail_elems_1s(evl, vd, nf, esz, max_elems);
+-    if (flags != NULL) {
+-        *flags = probe_access_flags(env, adjust_addr(env, addr), curlen,
+-                                    access_type, mmu_index, nonfault, host, ra);
+-    } else {
+-        probe_access(env, adjust_addr(env, addr), curlen, access_type,
+-                     mmu_index, ra);
+-    }
+-
+-    if (len > curlen) {
+-        addr += curlen;
+-        curlen = len - curlen;
+-        if (flags != NULL) {
+-            *flags |= probe_access_flags(env, adjust_addr(env, addr), curlen,
+-                                         access_type, mmu_index, nonfault,
+-                                         host, ra);
+-        } else {
+-            probe_access(env, adjust_addr(env, addr), curlen, access_type,
+-                         mmu_index, ra);
+-        }
+-    }
+-}
+-
+ static inline void vext_set_elem_mask(void *v0, int index,
+                                       uint8_t value)
+ {
+@@ -436,33 +392,6 @@ vext_page_ldst_us_tlb(CPURISCVState *env, void *vd, target_ulong addr,
+     } while (i < evl);
+ }
+ 
+-static inline QEMU_ALWAYS_INLINE void
+-vext_page_ldst_us(CPURISCVState *env, void *vd, target_ulong addr,
+-                  uint32_t elems, uint32_t nf, uint32_t max_elems,
+-                  uint32_t log2_esz, bool is_load, int mmu_index,
+-                  vext_ldst_elem_fn_tlb *ldst_tlb,
+-                  vext_ldst_elem_fn_host *ldst_host, uintptr_t ra)
+-{
+-    void *host;
+-    int flags;
+-    uint32_t size = (elems * nf) << log2_esz;
+-    uint32_t i = env->vstart;
+-    MMUAccessType access_type = is_load ? MMU_DATA_LOAD : MMU_DATA_STORE;
+-
+-    /* Check page permission/pmp/watchpoint/etc. */
+-    probe_pages(env, addr, size, ra, access_type, mmu_index, &host, &flags,
+-                true);
+-
+-    if (flags == 0) {
+-        vext_page_ldst_us_host(vd, host, i, i + elems, nf,
+-                               log2_esz, max_elems, ldst_host);
+-        env->vstart += elems;
+-    } else {
+-        vext_page_ldst_us_tlb(env, vd, addr, i, i + elems, nf, log2_esz,
+-                              max_elems, ldst_tlb, mmu_index, ra);
+-    }
+-}
+-
+ static void vext_test_alignment(CPURISCVState *env, vaddr addr, uint32_t esz,
+                                 MMUAccessType access_type, int mmu_index,
+                                 uintptr_t ra)
+@@ -1026,53 +955,10 @@ vext_ldst_whole(void *vd, target_ulong base, CPURISCVState *env, uint32_t desc,
+                 vext_ldst_elem_fn_host *ldst_host, uint32_t log2_esz,
+                 uintptr_t ra, bool is_load)
+ {
+-    target_ulong page_split, elems, addr;
+-    uint32_t nf = vext_nf(desc);
+-    uint32_t vlenb = riscv_cpu_cfg(env)->vlenb;
+-    uint32_t max_elems = vlenb >> log2_esz;
+-    uint32_t evl = nf * max_elems;
+-    uint32_t esz = 1 << log2_esz;
+-    int mmu_index = riscv_env_mmu_index(env, false);
+-    MMUAccessType access_type = is_load ? MMU_DATA_LOAD : MMU_DATA_STORE;
++    uint32_t evl = (riscv_cpu_cfg(env)->vlenb * vext_nf(desc)) >> log2_esz;
+ 
+-    /* Calculate the page range of first page */
+-    addr = base + (env->vstart << log2_esz);
+-
+-    /* Recognize alignment fault before memory protection fault. */
+-    vext_test_alignment(env, addr, esz, access_type, mmu_index, ra);
+-
+-    page_split = -(addr | TARGET_PAGE_MASK);
+-    /* Get number of elements */
+-    elems = page_split / esz;
+-    if (unlikely(env->vstart + elems >= evl)) {
+-        elems = evl - env->vstart;
+-    }
+-
+-    /* Load/store elements in the first page */
+-    if (likely(elems)) {
+-        vext_page_ldst_us(env, vd, addr, elems, 1, max_elems, log2_esz,
+-                          is_load, mmu_index, ldst_tlb, ldst_host, ra);
+-    }
+-
+-    /* Load/store elements in the second page */
+-    if (unlikely(env->vstart < evl)) {
+-        /* Cross page element */
+-        if (unlikely(page_split % esz)) {
+-            addr = base + (env->vstart << log2_esz);
+-            ldst_tlb(env, adjust_addr(env, addr), env->vstart, vd, ra);
+-            env->vstart++;
+-        }
+-
+-        addr = base + (env->vstart << log2_esz);
+-        /* Get number of elements of second page */
+-        elems = evl - env->vstart;
+-
+-        /* Load/store elements in the second page */
+-        vext_page_ldst_us(env, vd, addr, elems, 1, max_elems, log2_esz,
+-                          is_load, mmu_index, ldst_tlb, ldst_host, ra);
+-    }
+-
+-    env->vstart = 0;
++    vext_ldst_us(vd, base, env, log2_esz, 1, evl, evl, false,
++                 ldst_tlb, ldst_host, ra, is_load);
+ }
+ 
+ #define GEN_VEXT_LD_WHOLE(NAME, ETYPE, LOAD_FN_TLB, LOAD_FN_HOST)   \
 -- 
 2.43.0
 
