@@ -4,77 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D035EC5DF67
-	for <qemu-riscv@archiver.kernel.org>; Sat, 15 Aug 2026 20:39:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCD6EC5DF6D
+	for <qemu-riscv@archiver.kernel.org>; Sat, 15 Aug 2026 20:39:43 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wvL8p-0008O0-3A; Sat, 15 Aug 2026 16:38:07 -0400
+	id 1wvL8f-0008Bf-SF; Sat, 15 Aug 2026 16:37:57 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wvL8n-0008M0-Nn
- for qemu-riscv@nongnu.org; Sat, 15 Aug 2026 16:38:05 -0400
+ id 1wvL8c-00088A-U7
+ for qemu-riscv@nongnu.org; Sat, 15 Aug 2026 16:37:55 -0400
 Received: from mail-pj1-x1030.google.com ([2607:f8b0:4864:20::1030])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wvL8d-0008R2-G0
- for qemu-riscv@nongnu.org; Sat, 15 Aug 2026 16:38:05 -0400
+ id 1wvL8R-0008DI-JK
+ for qemu-riscv@nongnu.org; Sat, 15 Aug 2026 16:37:46 -0400
 Received: by mail-pj1-x1030.google.com with SMTP id
- 98e67ed59e1d1-3856d6fbcb3so1782456a91.2
- for <qemu-riscv@nongnu.org>; Sat, 15 Aug 2026 13:37:55 -0700 (PDT)
+ 98e67ed59e1d1-383cb94f742so2543288a91.3
+ for <qemu-riscv@nongnu.org>; Sat, 15 Aug 2026 13:37:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1786826274; x=1787431074; darn=nongnu.org;
+ d=linaro.org; s=google; t=1786826262; x=1787431062; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=UiJE2cy3VM0yzojjkpva8OpyZQEIaPJNd78PgCz97dQ=;
- b=kjUHhpDoNom1aFKmas2yO7qMvwwIrqrTkqEkVxSe0mq6Bfm0J/4IEPW5V6gcCVix99
- ZK4BWcUdhrOGVH/6y0RspgHE1K78OETGPJzdZBlJINQTJ41zWrjRqRwWMUdyJLnob34O
- jAOsQhj3ND7g2d1TSgsC6CQmJvS/O/MJ27WNk+nxHH76MYgG8ETLb/qs35Hjfph6OkWn
- xP2rRLxZmEfoFGPTVffU9d3NcRUlpW3RKIUi52q8gXb4VeU3WLupP6RiYfsUMbx0RD71
- GStB2klTdf5O1cJg2QhnEJkYNe8eKf8Zer5aM4uPjHDOGBXMyUEBKSNagWeZH0Ilqyjf
- 3ZqQ==
+ bh=eV7TgD7exsKP95UC/n8h4naw41ahKSdAn16sZErXcgc=;
+ b=MsBjZnKfXGQHdkEkmRiw23ZWhmBl7AqT7AsajjdKMUz6VI34bdWik60T5h9g3MQPZE
+ E3+hokLUSKyBGeEA00c+j7elTwBYkFrlzF8m2TADmKIiVvGcweitQl8/FaPr3/itPe3V
+ ql8pwgTq1b/qgXLvsch14u8C26deb0ycip9QTtRXm2QK6ieDCsV/+0VER0W7zB8NShEg
+ gyNX4C12ulebu1w8NCA28MAoLFHCOxiFbcwNnHsuDQIr8O60bjJw8FOeEMGJ73/yGf2v
+ gwiIYQ84upWo8BNcW0m7BH5nWHmTz6jANTgCht837/iFA8ZtBUE+y6fP3fTU/3MkFJT5
+ XdyQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786826274; x=1787431074;
+ d=1e100.net; s=20251104; t=1786826262; x=1787431062;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=UiJE2cy3VM0yzojjkpva8OpyZQEIaPJNd78PgCz97dQ=;
- b=lUUi2Nwqyzl4jXVkmyS+CvqjEUXMRtzdJX3ecywTfkPsX/7DAptWrC+s33qRjCx7Yp
- RTvXYq4BjHZJTKUiYcJwpprO3atuezDaH2liu9UjbpX4kWURp8rF8dbz7eq2GOM3tQVD
- kMZLSm08u0G978gHxndNBRzqHdcrq9SivP1vwpD1W5SCN2NNOlni6QtDoNDHWJM5b6Fj
- 77wbk0JABg1lr391Zvczjrlfz9AkzLgk3dPGrnOE9BGE4IrUBNgjDbCHwaWuJkvH1l8r
- e6dykwhLzqLaFyXlLCyYKsbNqxtNxodvGpS6VGDs6S6ji8DviVqhxmWihpiohCKEp69B
- Bsvw==
+ bh=eV7TgD7exsKP95UC/n8h4naw41ahKSdAn16sZErXcgc=;
+ b=fgs88o8k7cuXzC5UquudPqpS93x6xlg1k5keXu8xaHd3mxmzT5AkoISakoR0K7U3T5
+ p0y1nHwXXOTpNuU0Z8A+YrEOGz/ALAWIXZ1jHLtD+HoH+9lGY5KZ5kIREeJhBwzxq6FU
+ YgWJysAb4V5Ohmi3wMPzDxSqYfs20XCaTmFD+iz3BXn1+kvuaP/P8xMM68jaYhOD/oy4
+ twt0ghJrO5IqmNV3V8B7sPCRNIIT3HFPsWEWVLkluFT1QZ60iUzxjzHjSW+5pOiPn70w
+ 9DQfwnWredPvjozecPRbFmpwbpg75e7kHStuwQ0YattGxJNbMG6C4gYXH0PWNgPZ2P1z
+ DF2A==
 X-Forwarded-Encrypted: i=1;
- AHgh+RqUJf6kJ5tuZDgHG10BzKZ4ktsoH/kxyPnjjeyjvPBhE6MFw/YxwltefdNYbBDv8ANSgXoBYwE17yTN@nongnu.org
-X-Gm-Message-State: AOJu0YxcWS6PCQhMJigbEGLaTwYcmCvL3faJ7VtPBgKyroqB9Zy1dZ8h
- zPwxvTyF/A9Bbqz1+CVXU8l+6ulwAiSmNe39SL3JzYFOcl8pgS9dG3nNwF89BB4ApMg=
-X-Gm-Gg: AR+sD13/AR4PGSG8NzKkWlEF/qrQCOZgsPqrJhAXSsBXfFuRsdP1KC6vNM8IMZ5GXxs
- Dq0AubL08bbjd5ByUAXsz6jbXQLfeHGFA/uPcy0C5mwF5WHSA2fIaWjwMYRd56wV1qquNd1vVwY
- FpGKnUpNdnlZLSM0d0aGHJN761eaenGFaQ41cjgFKiavGEMOCZVoQhUeb0PWNIusVxHwwXsHFtz
- lXpqJ7rXKZo44NY0VPUnzYnp2XeB1Vgh5ibyeIBJ/o+18y2xCrvsTjqpL3eA2tHmsnaQ2nEC52k
- DS7TX7d7mYA/VpMI7BZbaWHBdfbUdbsfqjtZmKFjUW7QbOFt/i2H1yfbHj+8IdPGJ6Psus+8Eh5
- WFbC7Aq14jhElKAKbzi+UltDGyJv7E8HF4OCP3k/5xFfuKAnFF8mop2JDMdZ+pT29nbR019ZJQ5
- D1TpP/Y5C9JoznWpACy0l6p61yykD01Jdnni12vN/qKZFTwbwuHDmjzHZnAjkeMi1SMm/v/VuHr
- UAmj1dB5NwADZ8/dbznEhYZ+ItP53Q=
-X-Received: by 2002:a17:90a:da8f:b0:380:21b7:e727 with SMTP id
- 98e67ed59e1d1-3933b95e327mr15644282a91.14.1786826273885; 
- Sat, 15 Aug 2026 13:37:53 -0700 (PDT)
+ AHgh+Ro66Z7Ilbf+a9WYQ+cRZG78D+kzbQe6u/Xx/ZY2be5bafw2qJ41rmB2CBW3vY02C19iBeiR/WInGncq@nongnu.org
+X-Gm-Message-State: AOJu0YyaMSE/rJ5Ac/RRVZ2iuSn6VLHSBmeNIL7wc7KsetCRqIHlXVMU
+ Xb7zovylMvtJKOWpHHx+vx0Ss/rHAYf+K2h4D2DeKwq4aPyKO5tLnvc8PtJPC/Pqhtz46/WJI0m
+ 7ojkG
+X-Gm-Gg: AR+sD11XnYsWYwJbf0BD4VC4XCyxwqDW+mYtgSEIjDi30gdBojdwqjPCXk7ACkW4QDE
+ dcwaW0mt3tpT4Y4Or0s2ONr18MoUML5ljq5liv/YhxxdqFhZqOpP4Z5Gji5xPLeESjBtd/d37bK
+ dIbe8nDcVbTQXhWDrkXDyPldn2h7lQ1yAz4WB/zMq+gOJpPExAfDW3tOSqwRErNGOWr5gFw2vku
+ 0o1lxOSU8aDkQ0+XMCdy44X6/+czkN7YniVVKWzY5eBLCPPuPAJ+SeX3N47nPd5HyWIB8bDiTbD
+ z0m/Gjgeq1KGXeY7OGrLnvC7/nXt4NxT6w06WFsY9YqWq+BNdwbj02vCz5cGkb+j67FFrri9dfB
+ duY5YjcfXQV0nsdv9GzOUYGEPfcfO5Qis3QemeDFEBjmGiKyYUzjvYyqfjQdahPKx6sHgrRFgJh
+ AJjs3f23/8XhpT/ylKkI+x5zH9qTJgMFM/yQEsmwW72PM2lEVO+Z4bXA2Kf/dqUgAxlpkELpy+0
+ uvJ7WnMhuYEiRoOatf6
+X-Received: by 2002:a17:90b:528f:b0:381:cef1:11ac with SMTP id
+ 98e67ed59e1d1-3933e5d202amr15857958a91.10.1786826261761; 
+ Sat, 15 Aug 2026 13:37:41 -0700 (PDT)
 Received: from stoup.. (174-21-93-59.tukw.qwest.net. [174.21.93.59])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-394ea97207fsm7066853a91.1.2026.08.15.13.37.53
+ 98e67ed59e1d1-394ea97207fsm7066853a91.1.2026.08.15.13.37.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 15 Aug 2026 13:37:53 -0700 (PDT)
+ Sat, 15 Aug 2026 13:37:41 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org,
 	qemu-riscv@nongnu.org
-Subject: [RFC PATCH 17/18] target/riscv: Pass first/last to
- get_physical_address_pmp
-Date: Sat, 15 Aug 2026 13:37:29 -0700
-Message-ID: <20260815203730.1468365-18-richard.henderson@linaro.org>
+Subject: [RFC PATCH 04/18] target/arm: Generalize probe argument to
+ allocation_tag_mem_internal
+Date: Sat, 15 Aug 2026 13:37:16 -0700
+Message-ID: <20260815203730.1468365-5-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260815203730.1468365-1-richard.henderson@linaro.org>
 References: <20260815203730.1468365-1-richard.henderson@linaro.org>
@@ -104,154 +105,285 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+We had a confusing relationship between 'probe' and 'ra == 0'.
+Make this explicit via an enumeration.
+
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/riscv/tcg/cpu_helper.c | 48 +++++++++++++++++++----------------
- 1 file changed, 26 insertions(+), 22 deletions(-)
+ target/arm/tcg/mte_helper.c | 130 ++++++++++++++++++++++--------------
+ 1 file changed, 80 insertions(+), 50 deletions(-)
 
-diff --git a/target/riscv/tcg/cpu_helper.c b/target/riscv/tcg/cpu_helper.c
-index 3318e82ea7..fb1250a4b8 100644
---- a/target/riscv/tcg/cpu_helper.c
-+++ b/target/riscv/tcg/cpu_helper.c
-@@ -899,12 +899,13 @@ void riscv_cpu_set_mode(CPURISCVState *env, privilege_mode_t newpriv,
-  *
-  * @env: CPURISCVState
-  * @prot: The returned protection attributes
-- * @addr: The physical address to be checked permission
-+ * @first, @last: The physical address range to be permission checked
-  * @access_type: The type of MMU access
-  * @mode: Indicates current privilege level.
-  */
--static int get_physical_address_pmp(CPURISCVState *env, int *prot, hwaddr addr,
--                                    int size, MMUAccessType access_type,
-+static int get_physical_address_pmp(CPURISCVState *env, int *prot,
-+                                    hwaddr first, hwaddr last,
-+                                    MMUAccessType access_type,
-                                     privilege_mode_t mode)
- {
-     pmp_priv_t pmp_priv;
-@@ -915,8 +916,8 @@ static int get_physical_address_pmp(CPURISCVState *env, int *prot, hwaddr addr,
-         return TRANSLATE_SUCCESS;
-     }
+diff --git a/target/arm/tcg/mte_helper.c b/target/arm/tcg/mte_helper.c
+index dd4c10ef4f..31bf58c937 100644
+--- a/target/arm/tcg/mte_helper.c
++++ b/target/arm/tcg/mte_helper.c
+@@ -87,28 +87,48 @@ typedef struct AllocationTagMem {
+     MemTxAttrs attrs;
+ } AllocationTagMem;
  
--    pmp_has_privs = pmp_hart_has_privs(env, addr, size, 1 << access_type,
--                                       &pmp_priv, mode);
-+    pmp_has_privs = pmp_hart_has_privs(env, first, last - first + 1,
-+                                       1 << access_type, &pmp_priv, mode);
-     if (!pmp_has_privs) {
-         *prot = 0;
-         return TRANSLATE_PMP_FAIL;
-@@ -1142,6 +1143,8 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
-     base = base_root;
-     for (i = 0; i < levels; i++, ptshift -= ptidxbits) {
-         target_ulong idx;
-+        int pmp_prot, pmp_ret;
++typedef enum {
++    /* Trap on missing pages, invalid tag access, or watchpoints. */
++    ATM_NORMAL,
++    /* Gracefully return no tag memory for invalid pages. */
++    ATM_PROBE_PAGES,
++    /*
++     * Basic page access has already been checked,
++     * so a missing tlb entry is some sort of bug.
++     * Assert the tlb entry is present, but gracefully fail if tag
++     * access is not permitted to the page.
++     */
++    ATM_ASSERT_PAGES,
++} AllocationTagMemKind;
 +
-         if (i == 0) {
-             idx = (addr >> (PGSHIFT + ptshift)) &
-                            ((1 << (ptidxbits + widened)) - 1);
-@@ -1174,10 +1177,9 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
-             pte_addr = base + idx * ptesize;
-         }
- 
--        int pmp_prot;
--        int pmp_ret = get_physical_address_pmp(env, &pmp_prot, pte_addr,
--                                               sxlen_bytes,
--                                               MMU_DATA_LOAD, PRV_S);
-+        pmp_ret = get_physical_address_pmp(env, &pmp_prot, pte_addr,
-+                                           pte_addr + sxlen_bytes - 1,
-+                                           MMU_DATA_LOAD, PRV_S);
-         if (pmp_ret != TRANSLATE_SUCCESS) {
-             return TRANSLATE_PMP_FAIL;
-         }
-@@ -1425,7 +1427,8 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
-         }
- 
-         pmp_ret = get_physical_address_pmp(env, &pmp_prot, pte_addr,
--                                           sxlen_bytes, MMU_DATA_STORE, PRV_S);
-+                                           pte_addr + sxlen_bytes - 1,
-+                                           MMU_DATA_STORE, PRV_S);
-         if (pmp_ret != TRANSLATE_SUCCESS) {
-             return TRANSLATE_PMP_FAIL;
-         }
-@@ -1655,8 +1658,6 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, vaddr first, vaddr last,
+ static AllocationTagMem
+ allocation_tag_mem_internal(CPUARMState *env, int ptr_mmu_idx,
+                             vaddr ptr, MMUAccessType ptr_access,
+                             int ptr_size, MMUAccessType tag_access,
+-                            bool probe, uintptr_t ra)
++                            uintptr_t ra, AllocationTagMemKind atm_kind)
  {
-     RISCVCPU *cpu = RISCV_CPU(cs);
-     CPURISCVState *env = &cpu->env;
--    int size = last - address + 1;
--    vaddr im_address;
-     hwaddr pa = 0;
-     int prot, prot2, prot_pmp;
-     bool pmp_pma_violation = false;
-@@ -1676,7 +1677,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, vaddr first, vaddr last,
-     pmu_tlb_fill_incr_ctr(cpu, access_type);
-     if (two_stage_lookup) {
-         /* Two stage lookup */
--        ret = get_physical_address(env, &pa, &prot, address,
-+        ret = get_physical_address(env, &pa, &prot, first,
-                                    &env->guest_phys_fault_addr, access_type,
-                                    mmu_idx, true, true, false, probe);
-         /*
-@@ -1692,11 +1693,11 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, vaddr first, vaddr last,
-         qemu_log_mask(CPU_LOG_MMU,
-                       "%s 1st-stage address=%" VADDR_PRIx " ret %d physical "
-                       HWADDR_FMT_plx " prot %d\n",
--                      __func__, address, ret, pa, prot);
-+                      __func__, first, ret, pa, prot);
+     AllocationTagMem ret = {
+         .flags = TLB_INVALID_MASK,
+         .attrs = MEMTXATTRS_UNSPECIFIED,
+     };
  
-         if (ret == TRANSLATE_SUCCESS) {
-             /* Second stage lookup */
--            im_address = pa;
-+            vaddr im_address = pa;
++    assert((atm_kind >= ATM_PROBE_PAGES) == (ra == 0));
++
+ #ifdef CONFIG_USER_ONLY
+     vaddr clean_ptr = useronly_clean_ptr(ptr);
+     int flags = page_get_flags(clean_ptr);
+     int req_flags = ptr_access == MMU_DATA_STORE ? PAGE_WRITE_ORG : PAGE_READ;
  
-             ret = get_physical_address(env, &pa, &prot2, im_address, NULL,
-                                        access_type, MMUIdx_U, false, true,
-@@ -1711,8 +1712,9 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, vaddr first, vaddr last,
-             prot &= prot2;
- 
-             if (ret == TRANSLATE_SUCCESS) {
--                ret = get_physical_address_pmp(env, &prot_pmp, pa,
--                                               size, access_type, mode);
-+                ret = get_physical_address_pmp(env, &prot_pmp,
-+                                               pa, pa + (last - first),
-+                                               access_type, mode);
-                 tlb_size = pmp_get_tlb_size(env, pa);
- 
-                 qemu_log_mask(CPU_LOG_MMU,
-@@ -1736,18 +1738,19 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, vaddr first, vaddr last,
+     if (unlikely(!(flags & req_flags))) {
+-        if (probe) {
++        switch (atm_kind) {
++        case ATM_PROBE_PAGES:
+             goto fini;
++        case ATM_NORMAL:
++            cpu_loop_exit_sigsegv(env_cpu(env), ptr, ptr_access,
++                                  !(flags & PAGE_VALID), ra);
++        default:
++            g_assert_not_reached();
          }
-     } else {
-         /* Single stage lookup */
--        ret = get_physical_address(env, &pa, &prot, address, NULL,
-+        ret = get_physical_address(env, &pa, &prot, first, NULL,
-                                    access_type, mmu_idx, true, false, false,
-                                    probe);
- 
-         qemu_log_mask(CPU_LOG_MMU,
-                       "%s address=%" VADDR_PRIx " ret %d physical "
-                       HWADDR_FMT_plx " prot %d\n",
--                      __func__, address, ret, pa, prot);
-+                      __func__, first, ret, pa, prot);
- 
-         if (ret == TRANSLATE_SUCCESS) {
--            ret = get_physical_address_pmp(env, &prot_pmp, pa,
--                                           size, access_type, mode);
-+            ret = get_physical_address_pmp(env, &prot_pmp,
-+                                           pa, pa + (last - first),
-+                                           access_type, mode);
-             tlb_size = pmp_get_tlb_size(env, pa);
- 
-             qemu_log_mask(CPU_LOG_MMU,
-@@ -1764,7 +1767,8 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, vaddr first, vaddr last,
+-        cpu_loop_exit_sigsegv(env_cpu(env), ptr, ptr_access,
+-                              !(flags & PAGE_VALID), ra);
      }
  
-     if (ret == TRANSLATE_SUCCESS) {
--        tlb_set_page(cs, address & ~(tlb_size - 1), pa & ~(tlb_size - 1),
-+        tlb_set_page(cs, address & ~(tlb_size - 1),
-+                     (pa + (address - first)) & ~(tlb_size - 1),
-                      prot, mmu_idx, tlb_size);
-         return true;
-     } else if (probe) {
+     /* Require both MAP_ANON and PROT_MTE for the page. */
+@@ -124,7 +144,6 @@ allocation_tag_mem_internal(CPUARMState *env, int ptr_mmu_idx,
+     ret.flags = 0;
+ #else
+     CPUTLBEntryFull *full;
+-    int in_page;
+     hwaddr ptr_paddr, tag_paddr, xlat;
+     MemoryRegion *mr;
+     ARMASIdx tag_asi;
+@@ -134,16 +153,12 @@ allocation_tag_mem_internal(CPUARMState *env, int ptr_mmu_idx,
+      * Probe the first byte of the virtual address.  This raises an
+      * exception for inaccessible pages, and resolves the virtual address
+      * into the softmmu tlb.
+-     *
+-     * When RA == 0, this is either a pure probe or a no-fault-expected probe.
+-     * Indicate to probe_access_flags no-fault, then either return NULL
+-     * for the pure probe, or assert that we received a valid page for the
+-     * no-fault-expected probe.
+      */
+     ret.flags = probe_access_full(env, ptr, 0, ptr_access, ptr_mmu_idx,
+-                                  ra == 0, &ret.ptr_mem, &full, ra);
++                                  atm_kind >= ATM_PROBE_PAGES,
++                                  &ret.ptr_mem, &full, ra);
+     if (unlikely(ret.flags & TLB_INVALID_MASK)) {
+-        assert(probe);
++        assert(atm_kind == ATM_PROBE_PAGES);
+         goto fini;
+     }
+     ret.attrs = full->attrs;
+@@ -154,12 +169,11 @@ allocation_tag_mem_internal(CPUARMState *env, int ptr_mmu_idx,
+ 
+     case 0xe0: /* NoTagAccess */
+         if (cpu_isar_feature(aa64_mteperm, env_archcpu(env))) {
+-            if (probe) {
++            if (atm_kind >= ATM_PROBE_PAGES) {
+                 ret.ptr_mem = NULL;
+                 ret.flags = TLB_INVALID_MASK;
+                 goto fini;
+             }
+-            assert(ra);
+             mte_perm_check_fail(env, ptr, ra, tag_access == MMU_DATA_STORE);
+         }
+         /* fall through */
+@@ -191,22 +205,21 @@ allocation_tag_mem_internal(CPUARMState *env, int ptr_mmu_idx,
+      * tag on the first page.
+      * Any page access exception has priority over tag check exception.
+      */
+-    in_page = -(ptr | TARGET_PAGE_MASK);
+-    if (unlikely(ptr_size > in_page)) {
+-        void *discard_mem;
+-        int flags2 = probe_access_full(env, ptr + in_page, 0, ptr_access,
+-                                       ptr_mmu_idx, ra == 0,
+-                                       &discard_mem, &full, ra);
++    if (atm_kind == ATM_NORMAL) {
++        int in_page = -(ptr | TARGET_PAGE_MASK);
++        if (unlikely(ptr_size > in_page)) {
++            void *discard_mem;
++            ret.flags |= probe_access_full(env, ptr + in_page, 0, ptr_access,
++                                           ptr_mmu_idx, false,
++                                           &discard_mem, &full, ra);
++        }
+ 
+-        assert(!(flags2 & TLB_INVALID_MASK));
+-        ret.flags |= flags2;
+-    }
+-
+-    /* Any debug exception has priority over a tag check exception. */
+-    if (!probe && unlikely(ret.flags & TLB_WATCHPOINT)) {
+-        int wp = ptr_access == MMU_DATA_LOAD ? BP_MEM_READ : BP_MEM_WRITE;
+-        assert(ra != 0);
+-        cpu_check_watchpoint(env_cpu(env), ptr, ptr_size, ret.attrs, wp, ra);
++        /* Any debug exception has priority over a tag check exception. */
++        if (unlikely(ret.flags & TLB_WATCHPOINT)) {
++            int wp = ptr_access == MMU_DATA_LOAD ? BP_MEM_READ : BP_MEM_WRITE;
++            cpu_check_watchpoint(env_cpu(env), ptr, ptr_size,
++                                 ret.attrs, wp, ra);
++        }
+     }
+ 
+     /* Convert to the physical address in tag space.  */
+@@ -267,8 +280,8 @@ static uint8_t *allocation_tag_mem(CPUARMState *env, int ptr_mmu_idx,
+                                    uintptr_t ra)
+ {
+     return allocation_tag_mem_internal(env, ptr_mmu_idx, ptr, ptr_access,
+-                                       ptr_size, tag_access, false, ra)
+-           .tag_mem;
++                                       ptr_size, tag_access,
++                                       ra, ATM_NORMAL).tag_mem;
+ }
+ 
+ uint8_t *allocation_tag_mem_probe(CPUARMState *env, int ptr_mmu_idx,
+@@ -276,8 +289,8 @@ uint8_t *allocation_tag_mem_probe(CPUARMState *env, int ptr_mmu_idx,
+                                   int ptr_size, MMUAccessType tag_access)
+ {
+     return allocation_tag_mem_internal(env, ptr_mmu_idx, ptr, ptr_access,
+-                                       ptr_size, tag_access, true, 0)
+-           .tag_mem;
++                                       ptr_size, tag_access,
++                                       0, ATM_PROBE_PAGES).tag_mem;
+ }
+ 
+ uint64_t HELPER(irg)(CPUARMState *env, uint64_t rn, uint64_t rm)
+@@ -881,6 +894,7 @@ static int checkNrev(uint8_t *mem, int odd, int cmp, int count)
+  * @desc: MTEDESC descriptor
+  * @ptr: virtual address of the base of the access
+  * @fault: return virtual address of the first check failure
++ * @kind: per allocation_tag_mem_internal
+  *
+  * Internal routine for both mte_probe and mte_check.
+  * Return zero on failure, filling in *fault.
+@@ -888,13 +902,14 @@ static int checkNrev(uint8_t *mem, int odd, int cmp, int count)
+  * Return positive on success with tbi enabled.
+  */
+ static int mte_probe_int(CPUARMState *env, uint32_t desc, uint64_t ptr,
+-                         uintptr_t ra, uint64_t *fault)
++                         uintptr_t ra, uint64_t *fault,
++                         AllocationTagMemKind atm_kind)
+ {
+     int mmu_idx, ptr_tag, bit55;
+     uint64_t ptr_last, prev_page, next_page;
+     uint64_t tag_first, tag_last;
+     uint32_t sizem1, tag_count, n, c;
+-    uint8_t *mem1, *mem2;
++    AllocationTagMem r1, r2;
+     MMUAccessType type;
+ 
+     bit55 = extract64(ptr, 55, 1);
+@@ -932,9 +947,14 @@ static int mte_probe_int(CPUARMState *env, uint32_t desc, uint64_t ptr,
+ 
+     if (likely(tag_last - prev_page < TARGET_PAGE_SIZE)) {
+         /* Memory access stays on one page. */
+-        mem1 = allocation_tag_mem(env, mmu_idx, ptr, type, sizem1 + 1,
+-                                  MMU_DATA_LOAD, ra);
+-        if (!mem1) {
++        r1 = allocation_tag_mem_internal(env, mmu_idx, ptr, type, sizem1 + 1,
++                                           MMU_DATA_LOAD, ra, atm_kind);
++        if (unlikely(r1.flags & TLB_INVALID_MASK)) {
++            /* Tag access disabled on an otherwise accessible page. */
++            assert(atm_kind == ATM_ASSERT_PAGES);
++            return 0;
++        }
++        if (r1.tag_mem == NULL) {
+             /*
+              * If mtx is enabled, then the access is MemTag_CanonicallyTagged,
+              * otherwise it is Untagged. See AArch64.S1DecodeMemAttrs and
+@@ -946,15 +966,22 @@ static int mte_probe_int(CPUARMState *env, uint32_t desc, uint64_t ptr,
+             return 1;
+         }
+         /* Perform all of the comparisons. */
+-        n = checkN(mem1, ptr & TAG_GRANULE, ptr_tag, tag_count);
++        n = checkN(r1.tag_mem, ptr & TAG_GRANULE, ptr_tag, tag_count);
+     } else {
+         /* Memory access crosses to next page. */
+-        mem1 = allocation_tag_mem(env, mmu_idx, ptr, type, next_page - ptr,
+-                                  MMU_DATA_LOAD, ra);
++        r1 = allocation_tag_mem_internal(env, mmu_idx, ptr, type,
++                                         next_page - ptr, MMU_DATA_LOAD,
++                                         ra, atm_kind);
+ 
+-        mem2 = allocation_tag_mem(env, mmu_idx, next_page, type,
+-                                  ptr_last - next_page + 1,
+-                                  MMU_DATA_LOAD, ra);
++        if (r1.flags & TLB_INVALID_MASK) {
++            /* Tag access disabled on an otherwise accessible page. */
++            assert(atm_kind == ATM_ASSERT_PAGES);
++            return 0;
++        }
++
++        r2 = allocation_tag_mem_internal(env, mmu_idx, next_page, type,
++                                         ptr_last - next_page + 1,
++                                         MMU_DATA_LOAD, ra, atm_kind);
+ 
+         /*
+          * Perform all of the comparisons.
+@@ -963,15 +990,18 @@ static int mte_probe_int(CPUARMState *env, uint32_t desc, uint64_t ptr,
+          * happen with or without mtx (canonical tagging) enabled.
+          */
+         n = c = (next_page - tag_first) / TAG_GRANULE;
+-        if (mem1) {
+-            n = checkN(mem1, ptr & TAG_GRANULE, ptr_tag, c);
++        if (r1.tag_mem) {
++            n = checkN(r1.tag_mem, ptr & TAG_GRANULE, ptr_tag, c);
+         } else if (mtx_check(desc, bit55) &&
+                    !tag_is_canonical(ptr_tag, bit55)) {
+             return 0;
+         }
+         if (n == c) {
+-            if (mem2) {
+-                n += checkN(mem2, 0, ptr_tag, tag_count - c);
++            if (r2.flags & TLB_INVALID_MASK) {
++                /* Tag access disabled on an otherwise accessible page. */
++                assert(atm_kind == ATM_ASSERT_PAGES);
++            } else if (r2.tag_mem) {
++                n += checkN(r2.tag_mem, 0, ptr_tag, tag_count - c);
+             } else if (!mtx_check(desc, bit55) ||
+                        tag_is_canonical(ptr_tag, bit55)) {
+                 return 1;
+@@ -997,7 +1027,7 @@ static int mte_probe_int(CPUARMState *env, uint32_t desc, uint64_t ptr,
+ uint64_t mte_check(CPUARMState *env, uint32_t desc, uint64_t ptr, uintptr_t ra)
+ {
+     uint64_t fault;
+-    int ret = mte_probe_int(env, desc, ptr, ra, &fault);
++    int ret = mte_probe_int(env, desc, ptr, ra, &fault, ATM_NORMAL);
+ 
+     if (unlikely(ret == 0)) {
+         mte_check_fail(env, desc, fault, ra);
+@@ -1039,7 +1069,7 @@ uint64_t HELPER(mte_check)(CPUARMState *env, uint32_t desc, uint64_t ptr)
+ bool mte_probe(CPUARMState *env, uint32_t desc, uint64_t ptr)
+ {
+     uint64_t fault;
+-    int ret = mte_probe_int(env, desc, ptr, 0, &fault);
++    int ret = mte_probe_int(env, desc, ptr, 0, &fault, ATM_ASSERT_PAGES);
+ 
+     return ret != 0;
+ }
 -- 
 2.43.0
 
