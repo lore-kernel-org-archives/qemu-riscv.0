@@ -4,85 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5B1FC5DF6D
-	for <qemu-riscv@archiver.kernel.org>; Sat, 15 Aug 2026 20:39:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D035EC5DF67
+	for <qemu-riscv@archiver.kernel.org>; Sat, 15 Aug 2026 20:39:32 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wvL8k-0008I4-OT; Sat, 15 Aug 2026 16:38:02 -0400
+	id 1wvL8p-0008O0-3A; Sat, 15 Aug 2026 16:38:07 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wvL8g-0008DE-Rt
- for qemu-riscv@nongnu.org; Sat, 15 Aug 2026 16:37:58 -0400
-Received: from mail-pj1-x1033.google.com ([2607:f8b0:4864:20::1033])
+ id 1wvL8n-0008M0-Nn
+ for qemu-riscv@nongnu.org; Sat, 15 Aug 2026 16:38:05 -0400
+Received: from mail-pj1-x1030.google.com ([2607:f8b0:4864:20::1030])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wvL8c-0008Il-GO
- for qemu-riscv@nongnu.org; Sat, 15 Aug 2026 16:37:58 -0400
-Received: by mail-pj1-x1033.google.com with SMTP id
- 98e67ed59e1d1-38ec1402b05so1702135a91.2
- for <qemu-riscv@nongnu.org>; Sat, 15 Aug 2026 13:37:48 -0700 (PDT)
+ id 1wvL8d-0008R2-G0
+ for qemu-riscv@nongnu.org; Sat, 15 Aug 2026 16:38:05 -0400
+Received: by mail-pj1-x1030.google.com with SMTP id
+ 98e67ed59e1d1-3856d6fbcb3so1782456a91.2
+ for <qemu-riscv@nongnu.org>; Sat, 15 Aug 2026 13:37:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1786826267; x=1787431067; darn=nongnu.org;
+ d=linaro.org; s=google; t=1786826274; x=1787431074; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=m/W0Rg3ZT8aB8ztQ7+mQ84An4E9x9bWgouBn0XbAmNY=;
- b=Iy9tdufDZg6QSGd72M++suN0Wbm1O55ClOnkdRIbnBebGUSPqt5klV+xyzpeu/CNo1
- bDfCRDUe6LZ/Xs6G5DrlZbee9NK9YmC60b/GfQgFaJAsiqCk5bDxQ0DQLotbOJn7HtJD
- FTOowb6zx+nqEmAaOIjuas+1PuZzRrKT8GXNeQ/nou7mLKY+Y1vHZLdEYycKe1ViotjG
- r+L7n5cuvLxmD6JhbbkPlh2OoGx9PPxX+dyg8ZBDrqpc/z2GPkiPg9lZJJ1sxSiK86Ct
- 3gMolW8Y0KQdGk9wzskv4JJ5O6KhrzsXyGFn5xFNP1YpEjHqe0Tn1m+ro+2ue8UfgdP6
- 8/Pw==
+ bh=UiJE2cy3VM0yzojjkpva8OpyZQEIaPJNd78PgCz97dQ=;
+ b=kjUHhpDoNom1aFKmas2yO7qMvwwIrqrTkqEkVxSe0mq6Bfm0J/4IEPW5V6gcCVix99
+ ZK4BWcUdhrOGVH/6y0RspgHE1K78OETGPJzdZBlJINQTJ41zWrjRqRwWMUdyJLnob34O
+ jAOsQhj3ND7g2d1TSgsC6CQmJvS/O/MJ27WNk+nxHH76MYgG8ETLb/qs35Hjfph6OkWn
+ xP2rRLxZmEfoFGPTVffU9d3NcRUlpW3RKIUi52q8gXb4VeU3WLupP6RiYfsUMbx0RD71
+ GStB2klTdf5O1cJg2QhnEJkYNe8eKf8Zer5aM4uPjHDOGBXMyUEBKSNagWeZH0Ilqyjf
+ 3ZqQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786826267; x=1787431067;
+ d=1e100.net; s=20251104; t=1786826274; x=1787431074;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=m/W0Rg3ZT8aB8ztQ7+mQ84An4E9x9bWgouBn0XbAmNY=;
- b=U54BTkt6vTj1BSq8c3eQw1xXs5T4dsDg1LGdjZ2f9d205NlrNslzIJu3cTT167mUJa
- +gW0xu6BDwwAl/Sj8+2b12qa3kA9QUYLTP4W7tGgBTuvAW0qH0twqUS83Ex7sIL/TGf/
- pxqD2tpZ3u8oycAwxKU/a2cVHcPxt60enKnindduEDQtub8SQTCGN6bSRqHsTmRTzljr
- FHH0zgs+iOwGpUEy7CMszWOOVWDAsnKBC+P/UbqiiVsx+2etxZNe/zApTY5SdI0FbB88
- T9YWcvH5dWfV2b37XOdUUsyXq6g79d8Irqqi2JfeHRkPPqG2foPdkwwiAMHVF6Jpj5O2
- /Z6A==
+ bh=UiJE2cy3VM0yzojjkpva8OpyZQEIaPJNd78PgCz97dQ=;
+ b=lUUi2Nwqyzl4jXVkmyS+CvqjEUXMRtzdJX3ecywTfkPsX/7DAptWrC+s33qRjCx7Yp
+ RTvXYq4BjHZJTKUiYcJwpprO3atuezDaH2liu9UjbpX4kWURp8rF8dbz7eq2GOM3tQVD
+ kMZLSm08u0G978gHxndNBRzqHdcrq9SivP1vwpD1W5SCN2NNOlni6QtDoNDHWJM5b6Fj
+ 77wbk0JABg1lr391Zvczjrlfz9AkzLgk3dPGrnOE9BGE4IrUBNgjDbCHwaWuJkvH1l8r
+ e6dykwhLzqLaFyXlLCyYKsbNqxtNxodvGpS6VGDs6S6ji8DviVqhxmWihpiohCKEp69B
+ Bsvw==
 X-Forwarded-Encrypted: i=1;
- AHgh+RptREAdwTFQGEh7/FLGoy4m5bHF1eTu5wjU3/5beGW0rv8zNB47vxu5M4cxF8iw+BM5cbPcOTJ9UpiD@nongnu.org
-X-Gm-Message-State: AOJu0Yxe5vw8UnXcP+vSPD3+4nZcDDUeB3WyPYIZOpgLsN3lEm5Cqa7B
- zeYNZ/uq+tEAOhIa1vNHjfYTOcjsOkFsB1Ocpaar1V2s/nZC1gAAQ0vjOt2yN5LPukQfUM7cWPI
- U0ckx
-X-Gm-Gg: AR+sD11LExKwWvba80ET5MdAnthTixvD8ki27IQYVuNRAmL5WmoSWxJc+V9C+/oY70d
- G5f1CV/ZvqKH79UOnc/6CvCbSrZZRa1rVoB3yQQaNEWhyqvJJQFn3VTQjHbj7G3+Zt5Dn890KJi
- +Fxiw00mj6LrlMVpHVdCulG/eNED0oTyF/wLw9fP1zLtgIrcEOYrNBLCDUpWfOvRHAvO/XHPOII
- NWRvTCeZ5f5XmWPgZsmQFmNzeAByh1d14jddrH++kO/wyycevG6oWsddbd3WlDci9rjpjlg0/+J
- IdzLiOKtjHvbvJJxsq7ilzj5X5eIxRRnoeexhMxYkDhA+MpUsPuCmFhIfHDxAKU7VGFb0VSc/bt
- iTE472Y41elKf78kBdHk848hAAuDzCvGzuQiSWx49WjxWzwXE7fTrBh4ub/uXKy6aY2HIVqa6R4
- kMAc0uFMnUk5Qz2FfSC4Fdz1ZUU4uy+k3f0uXok3/5atwbXNGwWsfZHKDve7zLacKJnm1+BPdp6
- MZyF+vhCCLHT9Bn6IaH
-X-Received: by 2002:a17:90b:37c6:b0:38e:2e86:ed02 with SMTP id
- 98e67ed59e1d1-3933b8f3573mr16229402a91.14.1786826267213; 
- Sat, 15 Aug 2026 13:37:47 -0700 (PDT)
+ AHgh+RqUJf6kJ5tuZDgHG10BzKZ4ktsoH/kxyPnjjeyjvPBhE6MFw/YxwltefdNYbBDv8ANSgXoBYwE17yTN@nongnu.org
+X-Gm-Message-State: AOJu0YxcWS6PCQhMJigbEGLaTwYcmCvL3faJ7VtPBgKyroqB9Zy1dZ8h
+ zPwxvTyF/A9Bbqz1+CVXU8l+6ulwAiSmNe39SL3JzYFOcl8pgS9dG3nNwF89BB4ApMg=
+X-Gm-Gg: AR+sD13/AR4PGSG8NzKkWlEF/qrQCOZgsPqrJhAXSsBXfFuRsdP1KC6vNM8IMZ5GXxs
+ Dq0AubL08bbjd5ByUAXsz6jbXQLfeHGFA/uPcy0C5mwF5WHSA2fIaWjwMYRd56wV1qquNd1vVwY
+ FpGKnUpNdnlZLSM0d0aGHJN761eaenGFaQ41cjgFKiavGEMOCZVoQhUeb0PWNIusVxHwwXsHFtz
+ lXpqJ7rXKZo44NY0VPUnzYnp2XeB1Vgh5ibyeIBJ/o+18y2xCrvsTjqpL3eA2tHmsnaQ2nEC52k
+ DS7TX7d7mYA/VpMI7BZbaWHBdfbUdbsfqjtZmKFjUW7QbOFt/i2H1yfbHj+8IdPGJ6Psus+8Eh5
+ WFbC7Aq14jhElKAKbzi+UltDGyJv7E8HF4OCP3k/5xFfuKAnFF8mop2JDMdZ+pT29nbR019ZJQ5
+ D1TpP/Y5C9JoznWpACy0l6p61yykD01Jdnni12vN/qKZFTwbwuHDmjzHZnAjkeMi1SMm/v/VuHr
+ UAmj1dB5NwADZ8/dbznEhYZ+ItP53Q=
+X-Received: by 2002:a17:90a:da8f:b0:380:21b7:e727 with SMTP id
+ 98e67ed59e1d1-3933b95e327mr15644282a91.14.1786826273885; 
+ Sat, 15 Aug 2026 13:37:53 -0700 (PDT)
 Received: from stoup.. (174-21-93-59.tukw.qwest.net. [174.21.93.59])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-394ea97207fsm7066853a91.1.2026.08.15.13.37.46
+ 98e67ed59e1d1-394ea97207fsm7066853a91.1.2026.08.15.13.37.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 15 Aug 2026 13:37:46 -0700 (PDT)
+ Sat, 15 Aug 2026 13:37:53 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org,
 	qemu-riscv@nongnu.org
-Subject: [RFC PATCH 10/18] accel/tcg: Replace size with first/last in
- probe_access_internal
-Date: Sat, 15 Aug 2026 13:37:22 -0700
-Message-ID: <20260815203730.1468365-11-richard.henderson@linaro.org>
+Subject: [RFC PATCH 17/18] target/riscv: Pass first/last to
+ get_physical_address_pmp
+Date: Sat, 15 Aug 2026 13:37:29 -0700
+Message-ID: <20260815203730.1468365-18-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260815203730.1468365-1-richard.henderson@linaro.org>
 References: <20260815203730.1468365-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1033;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1033.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1030;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1030.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -105,125 +104,154 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Propagate the API change down one step further within cputlb.c.
-
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- accel/tcg/cputlb.c | 37 ++++++++++++++++++++-----------------
- 1 file changed, 20 insertions(+), 17 deletions(-)
+ target/riscv/tcg/cpu_helper.c | 48 +++++++++++++++++++----------------
+ 1 file changed, 26 insertions(+), 22 deletions(-)
 
-diff --git a/accel/tcg/cputlb.c b/accel/tcg/cputlb.c
-index c2ea31a397..b8c23b2948 100644
---- a/accel/tcg/cputlb.c
-+++ b/accel/tcg/cputlb.c
-@@ -1358,8 +1358,8 @@ static void notdirty_write(CPUState *cpu, vaddr mem_vaddr, unsigned size,
-     }
- }
- 
--static int probe_access_internal(CPUState *cpu, vaddr addr,
--                                 int fault_size, MMUAccessType access_type,
-+static int probe_access_internal(CPUState *cpu, vaddr addr, vaddr first,
-+                                 vaddr last, MMUAccessType access_type,
-                                  int mmu_idx, bool nonfault,
-                                  void **phost, CPUTLBEntryFull **pfull,
-                                  uintptr_t retaddr, bool check_mem_cbs)
-@@ -1375,7 +1375,7 @@ static int probe_access_internal(CPUState *cpu, vaddr addr,
-     if (!tlb_hit_page(tlb_addr, page_addr)) {
-         if (!victim_tlb_hit(cpu, mmu_idx, index, access_type, page_addr)) {
-             if (!tlb_fill_align(cpu, addr, access_type, mmu_idx,
--                                0, fault_size, nonfault, retaddr)) {
-+                                0, last - addr + 1, nonfault, retaddr)) {
-                 /* Non-faulting page table read failed.  */
-                 *phost = NULL;
-                 *pfull = NULL;
-@@ -1423,7 +1423,7 @@ int probe_access_full(CPUArchState *env, vaddr addr, vaddr first, vaddr last,
-     assert(addr <= last);
-     assert(((first ^ last) & TARGET_PAGE_MASK) == 0);
- 
--    flags = probe_access_internal(env_cpu(env), addr, last - addr + 1,
-+    flags = probe_access_internal(env_cpu(env), addr, first, last,
-                                   access_type, mmu_idx, nonfault,
-                                   phost, pfull, retaddr, true);
- 
-@@ -1440,6 +1440,7 @@ int probe_access_full_mmu(CPUArchState *env, vaddr addr, int size,
-                           MMUAccessType access_type, int mmu_idx,
-                           void **phost, CPUTLBEntryFull **pfull)
+diff --git a/target/riscv/tcg/cpu_helper.c b/target/riscv/tcg/cpu_helper.c
+index 3318e82ea7..fb1250a4b8 100644
+--- a/target/riscv/tcg/cpu_helper.c
++++ b/target/riscv/tcg/cpu_helper.c
+@@ -899,12 +899,13 @@ void riscv_cpu_set_mode(CPURISCVState *env, privilege_mode_t newpriv,
+  *
+  * @env: CPURISCVState
+  * @prot: The returned protection attributes
+- * @addr: The physical address to be checked permission
++ * @first, @last: The physical address range to be permission checked
+  * @access_type: The type of MMU access
+  * @mode: Indicates current privilege level.
+  */
+-static int get_physical_address_pmp(CPURISCVState *env, int *prot, hwaddr addr,
+-                                    int size, MMUAccessType access_type,
++static int get_physical_address_pmp(CPURISCVState *env, int *prot,
++                                    hwaddr first, hwaddr last,
++                                    MMUAccessType access_type,
+                                     privilege_mode_t mode)
  {
-+    vaddr last = size ? addr + size - 1 : addr;
-     void *discard_phost;
-     CPUTLBEntryFull *discard_tlb;
- 
-@@ -1447,13 +1448,13 @@ int probe_access_full_mmu(CPUArchState *env, vaddr addr, int size,
-     phost = phost ? phost : &discard_phost;
-     pfull = pfull ? pfull : &discard_tlb;
- 
--    int flags = probe_access_internal(env_cpu(env), addr, size, access_type,
--                                      mmu_idx, true, phost, pfull, 0, false);
-+    int flags = probe_access_internal(env_cpu(env), addr, addr, last,
-+                                      access_type, mmu_idx, true, phost,
-+                                      pfull, 0, false);
- 
-     /* Handle clean RAM pages.  */
-     if (unlikely(flags & TLB_NOTDIRTY)) {
--        int dirtysize = size == 0 ? 1 : size;
--        notdirty_write(env_cpu(env), addr, dirtysize, *pfull, 0);
-+        notdirty_write(env_cpu(env), addr, last - addr + 1, *pfull, 0);
-         flags &= ~TLB_NOTDIRTY;
+     pmp_priv_t pmp_priv;
+@@ -915,8 +916,8 @@ static int get_physical_address_pmp(CPURISCVState *env, int *prot, hwaddr addr,
+         return TRANSLATE_SUCCESS;
      }
  
-@@ -1472,7 +1473,7 @@ int probe_access_flags(CPUArchState *env, vaddr addr, vaddr first, vaddr last,
-     assert(addr <= last);
-     assert(((first ^ last) & TARGET_PAGE_MASK) == 0);
+-    pmp_has_privs = pmp_hart_has_privs(env, addr, size, 1 << access_type,
+-                                       &pmp_priv, mode);
++    pmp_has_privs = pmp_hart_has_privs(env, first, last - first + 1,
++                                       1 << access_type, &pmp_priv, mode);
+     if (!pmp_has_privs) {
+         *prot = 0;
+         return TRANSLATE_PMP_FAIL;
+@@ -1142,6 +1143,8 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
+     base = base_root;
+     for (i = 0; i < levels; i++, ptshift -= ptidxbits) {
+         target_ulong idx;
++        int pmp_prot, pmp_ret;
++
+         if (i == 0) {
+             idx = (addr >> (PGSHIFT + ptshift)) &
+                            ((1 << (ptidxbits + widened)) - 1);
+@@ -1174,10 +1177,9 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
+             pte_addr = base + idx * ptesize;
+         }
  
--    flags = probe_access_internal(env_cpu(env), addr, last - addr + 1,
-+    flags = probe_access_internal(env_cpu(env), addr, first, last,
-                                   access_type, mmu_idx, nonfault,
-                                   phost ? phost : &discard_host,
-                                   &full, retaddr, true);
-@@ -1489,15 +1490,16 @@ int probe_access_flags(CPUArchState *env, vaddr addr, vaddr first, vaddr last,
- void *probe_access(CPUArchState *env, vaddr addr, int size,
-                    MMUAccessType access_type, int mmu_idx, uintptr_t retaddr)
+-        int pmp_prot;
+-        int pmp_ret = get_physical_address_pmp(env, &pmp_prot, pte_addr,
+-                                               sxlen_bytes,
+-                                               MMU_DATA_LOAD, PRV_S);
++        pmp_ret = get_physical_address_pmp(env, &pmp_prot, pte_addr,
++                                           pte_addr + sxlen_bytes - 1,
++                                           MMU_DATA_LOAD, PRV_S);
+         if (pmp_ret != TRANSLATE_SUCCESS) {
+             return TRANSLATE_PMP_FAIL;
+         }
+@@ -1425,7 +1427,8 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
+         }
+ 
+         pmp_ret = get_physical_address_pmp(env, &pmp_prot, pte_addr,
+-                                           sxlen_bytes, MMU_DATA_STORE, PRV_S);
++                                           pte_addr + sxlen_bytes - 1,
++                                           MMU_DATA_STORE, PRV_S);
+         if (pmp_ret != TRANSLATE_SUCCESS) {
+             return TRANSLATE_PMP_FAIL;
+         }
+@@ -1655,8 +1658,6 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, vaddr first, vaddr last,
  {
-+    vaddr last = size ? addr + size - 1 : addr;
-     CPUTLBEntryFull *full;
-     void *host;
-     int flags;
+     RISCVCPU *cpu = RISCV_CPU(cs);
+     CPURISCVState *env = &cpu->env;
+-    int size = last - address + 1;
+-    vaddr im_address;
+     hwaddr pa = 0;
+     int prot, prot2, prot_pmp;
+     bool pmp_pma_violation = false;
+@@ -1676,7 +1677,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, vaddr first, vaddr last,
+     pmu_tlb_fill_incr_ctr(cpu, access_type);
+     if (two_stage_lookup) {
+         /* Two stage lookup */
+-        ret = get_physical_address(env, &pa, &prot, address,
++        ret = get_physical_address(env, &pa, &prot, first,
+                                    &env->guest_phys_fault_addr, access_type,
+                                    mmu_idx, true, true, false, probe);
+         /*
+@@ -1692,11 +1693,11 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, vaddr first, vaddr last,
+         qemu_log_mask(CPU_LOG_MMU,
+                       "%s 1st-stage address=%" VADDR_PRIx " ret %d physical "
+                       HWADDR_FMT_plx " prot %d\n",
+-                      __func__, address, ret, pa, prot);
++                      __func__, first, ret, pa, prot);
  
--    g_assert(-(addr | TARGET_PAGE_MASK) >= size);
-+    assert(((addr ^ last) & TARGET_PAGE_MASK) == 0);
+         if (ret == TRANSLATE_SUCCESS) {
+             /* Second stage lookup */
+-            im_address = pa;
++            vaddr im_address = pa;
  
--    flags = probe_access_internal(env_cpu(env), addr, size, access_type,
--                                  mmu_idx, false, &host, &full, retaddr,
--                                  true);
-+    flags = probe_access_internal(env_cpu(env), addr, addr, last,
-+                                  access_type, mmu_idx, false,
-+                                  &host, &full, retaddr, true);
+             ret = get_physical_address(env, &pa, &prot2, im_address, NULL,
+                                        access_type, MMUIdx_U, false, true,
+@@ -1711,8 +1712,9 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, vaddr first, vaddr last,
+             prot &= prot2;
  
-     /* Per the interface, size == 0 merely faults the access. */
-     if (size == 0) {
-@@ -1529,7 +1531,7 @@ void *tlb_vaddr_to_host(CPUArchState *env, vaddr addr,
-     void *host;
-     int flags;
+             if (ret == TRANSLATE_SUCCESS) {
+-                ret = get_physical_address_pmp(env, &prot_pmp, pa,
+-                                               size, access_type, mode);
++                ret = get_physical_address_pmp(env, &prot_pmp,
++                                               pa, pa + (last - first),
++                                               access_type, mode);
+                 tlb_size = pmp_get_tlb_size(env, pa);
  
--    flags = probe_access_internal(env_cpu(env), addr, 0, access_type,
-+    flags = probe_access_internal(env_cpu(env), addr, addr, addr, access_type,
-                                   mmu_idx, true, &host, &full, 0, false);
+                 qemu_log_mask(CPU_LOG_MMU,
+@@ -1736,18 +1738,19 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, vaddr first, vaddr last,
+         }
+     } else {
+         /* Single stage lookup */
+-        ret = get_physical_address(env, &pa, &prot, address, NULL,
++        ret = get_physical_address(env, &pa, &prot, first, NULL,
+                                    access_type, mmu_idx, true, false, false,
+                                    probe);
  
-     /* No combination of flags are expected by the caller. */
-@@ -1552,9 +1554,10 @@ tb_page_addr_t get_page_addr_code_hostp(CPUArchState *env, vaddr addr,
-     CPUTLBEntryFull *full;
-     void *p;
+         qemu_log_mask(CPU_LOG_MMU,
+                       "%s address=%" VADDR_PRIx " ret %d physical "
+                       HWADDR_FMT_plx " prot %d\n",
+-                      __func__, address, ret, pa, prot);
++                      __func__, first, ret, pa, prot);
  
--    (void)probe_access_internal(env_cpu(env), addr, 1, MMU_INST_FETCH,
--                                cpu_mmu_index(env_cpu(env), true), false,
--                                hostp, &full, 0, false);
-+    (void)probe_access_internal(env_cpu(env), addr, addr, addr,
-+                                MMU_INST_FETCH,
-+                                cpu_mmu_index(env_cpu(env), true),
-+                                false, hostp, &full, 0, false);
+         if (ret == TRANSLATE_SUCCESS) {
+-            ret = get_physical_address_pmp(env, &prot_pmp, pa,
+-                                           size, access_type, mode);
++            ret = get_physical_address_pmp(env, &prot_pmp,
++                                           pa, pa + (last - first),
++                                           access_type, mode);
+             tlb_size = pmp_get_tlb_size(env, pa);
  
-     p = *hostp;
-     if (p == NULL) {
+             qemu_log_mask(CPU_LOG_MMU,
+@@ -1764,7 +1767,8 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, vaddr first, vaddr last,
+     }
+ 
+     if (ret == TRANSLATE_SUCCESS) {
+-        tlb_set_page(cs, address & ~(tlb_size - 1), pa & ~(tlb_size - 1),
++        tlb_set_page(cs, address & ~(tlb_size - 1),
++                     (pa + (address - first)) & ~(tlb_size - 1),
+                      prot, mmu_idx, tlb_size);
+         return true;
+     } else if (probe) {
 -- 
 2.43.0
 
