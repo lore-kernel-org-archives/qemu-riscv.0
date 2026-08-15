@@ -4,78 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6689FC5CFC1
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 634B2C5DF6A
 	for <qemu-riscv@archiver.kernel.org>; Sat, 15 Aug 2026 19:46:48 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wvKKV-0007Gz-KE; Sat, 15 Aug 2026 15:46:08 -0400
+	id 1wvKKj-0007Is-3g; Sat, 15 Aug 2026 15:46:21 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wvKKR-0007Ga-3M
- for qemu-riscv@nongnu.org; Sat, 15 Aug 2026 15:46:03 -0400
+ id 1wvKKS-0007Gp-GA
+ for qemu-riscv@nongnu.org; Sat, 15 Aug 2026 15:46:05 -0400
 Received: from mail-pl1-x62d.google.com ([2607:f8b0:4864:20::62d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wvKKP-0008FF-5d
- for qemu-riscv@nongnu.org; Sat, 15 Aug 2026 15:46:02 -0400
+ id 1wvKKP-0008FT-Rt
+ for qemu-riscv@nongnu.org; Sat, 15 Aug 2026 15:46:04 -0400
 Received: by mail-pl1-x62d.google.com with SMTP id
- d9443c01a7336-2caea3f742bso36589775ad.0
- for <qemu-riscv@nongnu.org>; Sat, 15 Aug 2026 12:46:00 -0700 (PDT)
+ d9443c01a7336-2ce87c7e3bbso26850855ad.1
+ for <qemu-riscv@nongnu.org>; Sat, 15 Aug 2026 12:46:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1786823159; x=1787427959; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=Oly/r6zZ3NchHQ6eEP7Qm9fTY6UmNBB0A0oONUbitF0=;
- b=IHKWJEMuSsbXNWvBY3N84AX1jnQ/E4/adCthYXXI1yULwk5gzRKr+9hDARmp/ThmXo
- XImylIiPfwDu08p2Tnk0UBtKte6UNpegcypGSQV92+EI49An48e+xU7JTFpubF65VsIZ
- zparso2E92QK61pOKnGHQPp0p9sy2PwZhJIuFREwLpTUtcskmjTdZgPvEZ53/vMdoHbX
- O1vTNvmQBaWOVFI/1j4EHh0kGqfmo+16K7VDTXuZgqyZuAj8Tj/Y9CJ5lHOk72v/tHO5
- +MZvvE+gU6T113tZQdVDJnXDhzSI8n5n7p8psr5K3iOyMTl/v1Da7Z14veb4jDGPafdv
- 6duw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786823159; x=1787427959;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=linaro.org; s=google; t=1786823160; x=1787427960; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=Oly/r6zZ3NchHQ6eEP7Qm9fTY6UmNBB0A0oONUbitF0=;
- b=H7Frg1R/j1c8OJpd9sBntYqMC6cdNR6x1rmt6JDJdeSBj1uQZEm+yeNUIePJvnilfT
- fDHGs33kH9SX+MHfGjYKzmA0558LqOqgHoibohAMr6eMfuPI434lk3JUa9ZojSJS0KkN
- MeZWjKeuplyA6P5I4yz+aQ8gqMZbBygQGTzM4evyN0OFwkmMO9MKdMu7uxcAgguKf1SG
- jizQdrAg4qL0lwBrVjlQ76FYL4WRoQs1LiFxGakBW843cWlj1WAIGDOzvUZlQZSRpmLH
- U6AvyuPaPu29HGZYvlpDndfOD/AJQiuVM2UypcX0QuJ8iYSpOZVHgn7SwgXqTxx1JvN7
- Py/w==
+ bh=FcNFOnOL8974glwABu+kV2mxfPSi3R5uRGeROQDc4EQ=;
+ b=ngVXFLKiuracZoCOGOGSLyBeH/M2RMz5k819RLU37JYetNRMe/UOEdmNxRTZ97eqlB
+ CWmPwxVQNlCIoJGly8xfKI1FBsi6t8qzSbBgMYqJ6t0pNAuOyuAT4cmJXufribmAUeUw
+ MdQXfHjxMYjgfKzsZJMnFLZKD1+XuVpkbxvAmHecHYJPDRaYtUYd6+wPpnt/14hI4FqL
+ XPvDgIOpVs/qqicB0Bo8sSsBcf+X4RfL8QbYXLcr1/QwGEjulZFez3WnTp1ozYKkGu/C
+ iCE2qkveMtK597AsNoE+AHqzD4F5F+Jwy4LlZAcpvbF+3kCmKJbNfZUv1sTPtdtLts3Y
+ 51kA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1786823160; x=1787427960;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=FcNFOnOL8974glwABu+kV2mxfPSi3R5uRGeROQDc4EQ=;
+ b=OLHVN5hK3rl/NVsTyzijZYTfuhMpx128yk/Vd3yt+Qap9DLkgSXms+btD3GtH8TVKL
+ VEfHQax2MmF4ebMSAOF/Qoo9iOiafzhJIFPaLJcJsoNnsfIlp3qEEFR1knzeSqp5TKbj
+ D4C59tB88sgfPTbnkkqWs6vV5nFN9Lj7RkWtD4DsEW791zcj+LFxagnepo7sqDqTyDtb
+ 2Q7h/aGbzC9FVHuLdQ4OO1iAgDyIfZQM7rL2bPk7D95MHTjg+yEjWVBGg+da7Q/G+Puv
+ BHcPfalXo1qs/aVCIx6RVcQF/qpuLPrpREwTDArpP3P5aqURBIuApQYc0VhBePyY0ga1
+ krUQ==
 X-Forwarded-Encrypted: i=1;
- AHgh+Rq58HUp6ldmaOSg+COwk7lu7DhC/qpFph9NpW1EY2l69/wXpFokgh6kLoWv55T+WU0yKmoN33YQCshb@nongnu.org
-X-Gm-Message-State: AOJu0Yyxu2bG0Ja1IFX3Jf7//VDEsgx0yoIlaOpFmUIuK/wNpe0SJn+6
- V3WH8+HZhOU75mUHqXeDC8uSeVat0J1/FYRmsZ6jW8QajDWmyfPHoh9lUnsMr/d4iqmbujbZlVq
- MZiWN
-X-Gm-Gg: AR+sD10MOsZzhYixMR45jwj4R6V+BgnCqFjv2N16XLJSs/dDvWDtuBklVeMroSkSHAU
- PrZpuhDpE7ZPKVyyBeVuxEo30PMuKs/xBZDgztwut2vf5fqg7rttOYbRifOJDOBUL1l/YP4vloD
- vv7IRkgoeinfUSQAVkfp6I8ecH95L3bHO259535J0aQBEqu0IptYkpJhqEjgk30MdMWLCweQAR3
- 7K7mOOKNK8a/fuB734HqV90J5UYjOZw3aJ98txj5F8Wiy3x/+YiTUTtVMuKAt5lS6ISf3AUI8xe
- wRPx0b6hgDpmde2XPUWW69Einb/nAjeTGuI3Da0SVBg3ZqjBEcO0M5CyoUIDeAXkq+NXApSFhbz
- HaQDD0TFRLf5cViM0GwBawOxO5BuCnTtIsg2rbZd1MWC9MJn91QfEoL+X0aDrGVaBnCP0quN6hM
- +N+TKkYRVjWQkvk6iznBQ7uAYg5fUYgRrQe3dxroIY3AULCIoc3zdnIahlDwJA+EVD9fxbsADGA
- mHBJFn6fRGQE30hNaln
-X-Received: by 2002:a17:902:e543:b0:2c9:b396:1a55 with SMTP id
- d9443c01a7336-2d3b0c4876emr149243425ad.12.1786823159009; 
- Sat, 15 Aug 2026 12:45:59 -0700 (PDT)
+ AHgh+RodVTUT2TXV6+snwmgbBdsNzSQMeFKpLYFgZUjG0e/SLvTFkWRMi9dATMOhjt4Grl7c4o8HjL0JD/Il@nongnu.org
+X-Gm-Message-State: AOJu0YyzBKsy0XP/p2OcstAoJGT4RYvNFpIb5rzQ2b68wvaPiMTbwBJR
+ CBZk+EcJPvDBnJYesO+F0OxvtGanUo3siggbXiFI1kgMUQfDldqeBzOxu6pAC/4dXJwM+zG0U/4
+ Ol53m
+X-Gm-Gg: AR+sD11BniNpEWcfyGdpfeoi/ojTfUd8BHfZI/JT3UpitjL/mcjbfRuv3x1Ia9rsU+w
+ f7M4XC2LWQkyQaI0oJcvujaWCeWI4m2JwTzKBYlbUM0Ot19XIHNPxXLZ9nUXkA2WEcV5OpOb1PB
+ PbMBiYdwAQojZvCDrn/rGm2kwl6r8MM10h4zqPs9qvNYYCfk6kEFihJXG6r/8f8sm8pE9BM/pPG
+ XZdpZ+SYs1cJcXc5FDUQ6CoR9ZOAKJtaZvz06tLJrLv2KnSfc/cFG/zwQxmjDdm9zyhaMU8bhmR
+ EWPkppOYzOEJe3DjUf28z0n2espv4s4+aXu7jpTwEXoUbDkJDfwoMQ0Pb0fXp4QJmbioOktLZ2N
+ 0hNBQ3K5UGxpqvR3bri6XUEX5dACfegXGVckCWSa/xVT53DwGUkf70vNY2PA8Iqa9oLPtdg1/F/
+ +TtGQ6UkcxezKD7LkRPuojNrA6msUVeXxE1oytPGYJxWwuNgekkgJn7mhJ2PJ6BOyP7wkiQXU3d
+ GgANBhYOg3V6B8n5sujaWAKdSzVqww=
+X-Received: by 2002:a17:902:c40a:b0:2c7:f4bd:91b5 with SMTP id
+ d9443c01a7336-2d3b04bba89mr151713965ad.0.1786823160413; 
+ Sat, 15 Aug 2026 12:46:00 -0700 (PDT)
 Received: from stoup.. (174-21-93-59.tukw.qwest.net. [174.21.93.59])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2d3ae753ebcsm21179465ad.5.2026.08.15.12.45.57
+ d9443c01a7336-2d3ae753ebcsm21179465ad.5.2026.08.15.12.45.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 15 Aug 2026 12:45:58 -0700 (PDT)
+ Sat, 15 Aug 2026 12:46:00 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: frank.chang@sifive.com,
 	max.chou@sifive.com,
 	qemu-riscv@nongnu.org
-Subject: [PATCH 00/23] target/riscv: Reorg vector load/store
-Date: Sat, 15 Aug 2026 12:45:25 -0700
-Message-ID: <20260815194549.1377505-1-richard.henderson@linaro.org>
+Subject: [PATCH 01/23] target/riscv: Split out vext_set_nf_elems_1s
+Date: Sat, 15 Aug 2026 12:45:26 -0700
+Message-ID: <20260815194549.1377505-2-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260815194549.1377505-1-richard.henderson@linaro.org>
+References: <20260815194549.1377505-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=2607:f8b0:4864:20::62d;
@@ -102,72 +105,151 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi all,
+Provide a helper that 1's element I for all NF vectors.
+For the callers, this performs the element mask test once
+instead of NF times.
 
-I'm working on a reorg of the probe_access set of functions and in
-the process I discovered probe_pages() within riscv vector_helper.c.
+Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+---
+ target/riscv/tcg/vector_helper.c | 69 ++++++++++++++++----------------
+ 1 file changed, 34 insertions(+), 35 deletions(-)
 
-The short story there is that probe_pages() is broken.  I had several
-attempts to fix it before tackling the wider problem: there are way
-too many probes going on, mostly from vext_ldff.  There was a real
-lack of using the result of one page probe to cover any other elements
-within the same page.
-
-So this is an attempt to reorganize things such that there's one
-probe per page as we step through vstart -> vl.  But since I touched
-so much code, of course I saw other bits that could use improvement.
-
-In particular, Frank, is the location of the alignment test you added,
-which is in riscv-to-apply.next but not yet mainline.  I *think* it
-is at the wrong place.  Also, it's unclear to me how/where it applies
-to the fault-on-first instructions. I've moved it first, before any
-page probing, as we would get along the tlb slow path.  I believe I
-won't trigger an alignment fault if all vector elements are masked.
-We can compute MemOpIdx per vector, not per element.
-
-Thanks for the system mode alignment test, btw.  :-)
-
-Anyway, thoughts?
-
-
-r~
-
-
-PS: Based-on riscv-to-apply.next, obvs.
-
-
-Richard Henderson (23):
-  target/riscv: Split out vext_set_nf_elems_1s
-  target/riscv: Hoist vma check out of vext_set_tail_elems_1s
-  target/riscv: Split out vext_ldst_nf_tlb
-  target/riscv: Split out vext_ldst_nf_host
-  target/riscv: Add evl argument to vext_ldst_elem_fn_host
-  target/riscv: Drop is_load parameter from vext_continuous_ldst_tlb
-  target/riscv: Remove vext_continuous_ldst_tlb
-  target/riscv: Move misalignment check out of vext_page_ldst_us
-  target/riscv: Split out vext_page_ldst_us_{host,tlb}
-  target/riscv: Rewrite vext_ldst_us
-  target/riscv: Rewrite vext_ldff
-  target/riscv: Split out vext_ldst_us_desc
-  target/riscv: Use vext_ldst_us in vext_ldst_whole
-  target/riscv: Mark VSTART_CHECK_EARLY_EXIT unlikely
-  target/riscv: Remove unused VDATA,WD
-  target/riscv: Add MEM_IDX, BSWAP, ALIGN to VDATA
-  target/riscv: Pass MemOpIdx to vext_ldst_us
-  target/riscv: Build MemOpIdx to vext_ldff
-  target/riscv: Pass MemOpIdx to vext_ldst_elem_fn_tlb
-  target/riscv: Use FLATTEN rather than ALWAYS_INLINE for vector ldst
-  target/riscv: Drop v0 argument from gen_helper_ldst_us
-  target/riscv: Drop v0 argument from gen_helper_ldst_stride
-  target/riscv: Drop v0 argument from gen_helper_ldst_index
-
- target/riscv/helper.h                       |  124 +--
- target/riscv/internals.h                    |    4 +-
- target/riscv/tcg/vector_internals.h         |    2 +-
- target/riscv/tcg/vector_helper.c            | 1010 ++++++++++---------
- target/riscv/tcg/insn_trans/trans_rvv.c.inc |   77 +-
- 5 files changed, 627 insertions(+), 590 deletions(-)
-
+diff --git a/target/riscv/tcg/vector_helper.c b/target/riscv/tcg/vector_helper.c
+index e28d8a3d9f..20a8f95efb 100644
+--- a/target/riscv/tcg/vector_helper.c
++++ b/target/riscv/tcg/vector_helper.c
+@@ -328,6 +328,15 @@ static void vext_set_tail_elems_1s(uint32_t vl, void *vd,
+     }
+ }
+ 
++static void vext_set_nf_elems_1s(void *vd, uint32_t i, uint32_t nf,
++                                 uint32_t esz, uint32_t max_elems)
++{
++    for (uint32_t k = 0; k < nf; ++k) {
++        vext_set_elems_1s(vd, true, (i + k * max_elems) * esz,
++                          (i + k * max_elems + 1) * esz);
++    }
++}
++
+ /*
+  * stride: access vector element from strided memory
+  */
+@@ -337,7 +346,6 @@ vext_ldst_stride(void *vd, void *v0, target_ulong base, target_ulong stride,
+                  vext_ldst_elem_fn_tlb *ldst_elem, uint32_t log2_esz,
+                  uintptr_t ra)
+ {
+-    uint32_t i, k;
+     uint32_t nf = vext_nf(desc);
+     uint32_t max_elems = vext_max_elems(desc, log2_esz);
+     uint32_t esz = 1 << log2_esz;
+@@ -345,23 +353,21 @@ vext_ldst_stride(void *vd, void *v0, target_ulong base, target_ulong stride,
+ 
+     VSTART_CHECK_EARLY_EXIT(env, env->vl);
+ 
+-    for (i = env->vstart; i < env->vl; env->vstart = ++i) {
+-        k = 0;
+-        while (k < nf) {
+-            if (!vm && !vext_elem_mask(v0, i)) {
+-                /* set masked-off elements to 1s */
+-                vext_set_elems_1s(vd, vma, (i + k * max_elems) * esz,
+-                                  (i + k * max_elems + 1) * esz);
+-                k++;
+-                continue;
++    for (uint32_t i = env->vstart; i < env->vl; env->vstart = ++i) {
++        if (!vm && !vext_elem_mask(v0, i)) {
++            if (vma) {
++                vext_set_nf_elems_1s(vd, i, nf, esz, max_elems);
+             }
++            continue;
++        }
++
++        for (uint32_t k = 0; k < nf; ++k) {
+             target_ulong addr = base + stride * i + (k << log2_esz);
+             ldst_elem(env, adjust_addr(env, addr), i + k * max_elems, vd, ra);
+-            k++;
+         }
+     }
+-    env->vstart = 0;
+ 
++    env->vstart = 0;
+     vext_set_tail_elems_1s(env->vl, vd, desc, nf, esz, max_elems);
+ }
+ 
+@@ -632,7 +638,6 @@ vext_ldst_index(void *vd, void *v0, target_ulong base,
+                 vext_ldst_elem_fn_tlb *ldst_elem,
+                 uint32_t log2_esz, uintptr_t ra)
+ {
+-    uint32_t i, k;
+     uint32_t nf = vext_nf(desc);
+     uint32_t vm = vext_vm(desc);
+     uint32_t max_elems = vext_max_elems(desc, log2_esz);
+@@ -641,24 +646,21 @@ vext_ldst_index(void *vd, void *v0, target_ulong base,
+ 
+     VSTART_CHECK_EARLY_EXIT(env, env->vl);
+ 
+-    /* load bytes from guest memory */
+-    for (i = env->vstart; i < env->vl; env->vstart = ++i) {
+-        k = 0;
+-        while (k < nf) {
+-            if (!vm && !vext_elem_mask(v0, i)) {
+-                /* set masked-off elements to 1s */
+-                vext_set_elems_1s(vd, vma, (i + k * max_elems) * esz,
+-                                  (i + k * max_elems + 1) * esz);
+-                k++;
+-                continue;
++    for (uint32_t i = env->vstart; i < env->vl; env->vstart = ++i) {
++        if (!vm && !vext_elem_mask(v0, i)) {
++            if (vma) {
++                vext_set_nf_elems_1s(vd, i, nf, esz, max_elems);
+             }
++            continue;
++        }
++
++        for (uint32_t k = 0; k < nf; ++k) {
+             abi_ptr addr = get_index_addr(base, i, vs2) + (k << log2_esz);
+             ldst_elem(env, adjust_addr(env, addr), i + k * max_elems, vd, ra);
+-            k++;
+         }
+     }
+-    env->vstart = 0;
+ 
++    env->vstart = 0;
+     vext_set_tail_elems_1s(env->vl, vd, desc, nf, esz, max_elems);
+ }
+ 
+@@ -824,25 +826,22 @@ ProbeSuccess:
+             }
+         } else {
+             for (i = env->vstart; i < env->vl; i++) {
+-                k = 0;
+-                while (k < nf) {
+-                    if (!vext_elem_mask(v0, i)) {
+-                        /* set masked-off elements to 1s */
+-                        vext_set_elems_1s(vd, vma, (i + k * max_elems) * esz,
+-                                          (i + k * max_elems + 1) * esz);
+-                        k++;
+-                        continue;
++                if (!vext_elem_mask(v0, i)) {
++                    if (vma) {
++                        vext_set_nf_elems_1s(vd, i, nf, esz, max_elems);
+                     }
++                    continue;
++                }
++                for (k = 0; k < nf; ++k) {
+                     addr = base + ((i * nf + k) << log2_esz);
+                     ldst_tlb(env, adjust_addr(env, addr), i + k * max_elems,
+                              vd, ra);
+-                    k++;
+                 }
+             }
+         }
+     }
+-    env->vstart = 0;
+ 
++    env->vstart = 0;
+     vext_set_tail_elems_1s(env->vl, vd, desc, nf, esz, max_elems);
+ }
+ 
 -- 
 2.43.0
 
