@@ -4,90 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F25BC5DF74
-	for <qemu-riscv@archiver.kernel.org>; Sat, 15 Aug 2026 20:40:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2E3DC5DF67
+	for <qemu-riscv@archiver.kernel.org>; Sat, 15 Aug 2026 20:40:39 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wvL8r-0008Qk-2c; Sat, 15 Aug 2026 16:38:09 -0400
+	id 1wvL8e-00089w-Jy; Sat, 15 Aug 2026 16:37:56 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wvL8p-0008O1-2g
- for qemu-riscv@nongnu.org; Sat, 15 Aug 2026 16:38:07 -0400
-Received: from mail-pj1-x102a.google.com ([2607:f8b0:4864:20::102a])
+ id 1wvL8c-000886-Sz
+ for qemu-riscv@nongnu.org; Sat, 15 Aug 2026 16:37:55 -0400
+Received: from mail-pj1-x102f.google.com ([2607:f8b0:4864:20::102f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wvL8f-0008St-3K
- for qemu-riscv@nongnu.org; Sat, 15 Aug 2026 16:38:06 -0400
-Received: by mail-pj1-x102a.google.com with SMTP id
- 98e67ed59e1d1-38f0f132f56so2732002a91.0
- for <qemu-riscv@nongnu.org>; Sat, 15 Aug 2026 13:37:56 -0700 (PDT)
+ id 1wvL8T-0008Fk-12
+ for qemu-riscv@nongnu.org; Sat, 15 Aug 2026 16:37:47 -0400
+Received: by mail-pj1-x102f.google.com with SMTP id
+ 98e67ed59e1d1-384930ca5e2so2384299a91.3
+ for <qemu-riscv@nongnu.org>; Sat, 15 Aug 2026 13:37:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1786826276; x=1787431076; darn=nongnu.org;
+ d=linaro.org; s=google; t=1786826264; x=1787431064; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=sNSRw7T5qMfkeTeB0OeailLl5LcE+oeHtK4hx8s+Ock=;
- b=htzb+QWS8V2oJANVr3KCprmNAOB8TJow+kaI+IMqKUGYZXZrWLtK1f4jTrxgZQf2UA
- oKTwCCLi/KXET1en3Hc+uaq4DeppFsf1ci/Wd6SCL02g+iRRzKNQiisEPV03+Q7RkDqE
- U1cbWgO0H1V+bNhqSWPekLH/mZMxrknNDeHicxEpajyPEbrVMfu7D4dGzCDs/fATD7Oi
- PYC+480trzHTg6MvcgwviIeawBvLZj4wdd0iTlPig0+3NP/is8Ts8aMrk43M2Wq4/Fxh
- qhaqnp0cHHmgslL6zlcwZxZ8hYnqnL7L94HrJR97g5hWAlPNevCLMQ7VkU+SEpFKfNwc
- EiBw==
+ bh=Xpi+58NLvsNGE5roXXmz2yeQ2sLTmSOVbtvh5q+nBos=;
+ b=jgoCNRYvKoHMjLVl8EppgSe84GSLFa/GaWoqDpsZwZClgDBCPZ8BeUANhq6wJkUyo1
+ qJ/7B9pJgUKOI0fzIlCYCaLJST85qbtE+Arf8MA1hzQmW3XPWu7+vFkMBkVwaxWkmX6D
+ qg8Zvu+PvjC0NNkAowvl5PwVDNMrLXVpZu8U8Mav1PiU804MHxcE1Vq5JmVEBqg3a9hw
+ g1IBJzwv1YHXjjRRWL7pjKRmNqNpEnByY/Y8swNwL2l21gyd61StJcF2E2aGvyCQ8Rjn
+ Y9JG0aZS0lNNue4yssU2ghgir0TpZ3wb8EZ2V08RKiRFxaQGeVMN0ytefb/GEZH67Ea+
+ Wlhw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786826276; x=1787431076;
+ d=1e100.net; s=20251104; t=1786826264; x=1787431064;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=sNSRw7T5qMfkeTeB0OeailLl5LcE+oeHtK4hx8s+Ock=;
- b=e6rdPNSynum5VmonM8fTcSzV2EVm9l4QxHXvuiZ5b+ymlAW0pNlec+vNSCscE799b8
- WhN5Kv6typoNBv20oRtGI9Gu08HQgULWW29ptLx4zEwpJNqOAL9ZmTq17AdHYxKF4tIP
- kF2h0aPBTJzFOEG7gGQdmLD1M7ByPz1loGrR5cz8F1c0JetDyLIQTrL+2vYAr8r6sRai
- oBR931INd5LXJ0o2Y9csIjT8cZ1F8C7g5NlcHDsAez0OCChp9EJYQ/pO27snE7O6Okok
- dT3/uWmz0x5w7WLKhbWWHEbtPcJno1ackuFzF706OK1MBhe0NIzEmdYiLaqrgLdFnaBQ
- A7HA==
+ bh=Xpi+58NLvsNGE5roXXmz2yeQ2sLTmSOVbtvh5q+nBos=;
+ b=CUPx4xpL2Af0S9nGxO3l+Wm9ixY7RAsg7/+GKRsGGC92IfTly4xL5Qfs70WJ+vxHLW
+ Q/BcPEgG0pZ0JmhoCL5T5R/sgBuvLx270cIwzHn4laVZ92McqH9o9yeFkGY1rly+BYum
+ /k/hnWwlAohjyJxK7rcwdjDA/D3nGOGUSkt5wF/SFS62pqUHAPUNIq+5DWZmTuBT/soM
+ 1xFnLMEnCGnC/uBqKqA1wkTKK+0jHhSZ6KNc06iC/xt3GGTjhoHPAq6aV5TZv1oUWbKB
+ IEKFQwvd7a1qkaR+3v4nhoAftP59cdJnOhb+Fe+6aZ8YRM0Ib0n+R1qoo/jiXXbdWyWj
+ Uwzg==
 X-Forwarded-Encrypted: i=1;
- AHgh+Ron6X5b1ncoFyFuB9zjm1L/s/7u1aLhUFxXxqZqvfpc1LiRCiXlXaEkl1rDA25RsrpfbhbzscpQzckd@nongnu.org
-X-Gm-Message-State: AOJu0Yxh/O0rNjeaEU7QtN0BLG2H7IpOm/MmYHZ//9vfCzEbGacZRWq2
- +ME4IMdlmlOcPlLB7MFzCa/y2QNRS0S2godkFClL3sFWg3WolFxiJEa7XC0ahvixkcI=
-X-Gm-Gg: AR+sD11epTkBFxn41EBio3VD+zxq+NVE115Dyy7H7qKPmGNpepjhlfM6+XTfFtSDtiw
- 7jR+hO0+SDs8s7T2s04h3ccly9duq7lSq3XI+uhQyTZbHucNO26Giwh1twB521Sskk8giENixhW
- kHc0TK2PeltsDm01gltbVCiedIMe0p9iwKGIEMMW7frJeqKNy6LHr37rEpSsdJ0H2g/LvwIb1uk
- xZDSt/A80VoU/rYaHUJKRkfJ6PoSzvjVuqqMUhSFLZzZy03cjrnr62703TtASIt1pRc33ASTWhX
- YzJ/8mKsQmeQiQ1m+1JaOYHksc1y1+hwW0rOs0gMcuKIx1hW/yBQDeeW3tIiWHsgGhAXlnFtag9
- qpIKUdcSeYqDADzlzXjU5FJDtsmp9bu0oyDHlk1lc/M5oXLfOtI6n/zu3tZR0aGdIJNQ9+YtqzV
- Lo02L3eSiD6+KJ4N3MaM2C2TtwexjPaJTucJOXgGGhB4LOW9Ll7dvyWHyv7OlmKt9UWan1IXB6t
- QucwvSplo0vVTtwSRF8
-X-Received: by 2002:a17:90b:37c3:b0:390:84db:888e with SMTP id
- 98e67ed59e1d1-3933afb4ba2mr11985428a91.7.1786826275580; 
- Sat, 15 Aug 2026 13:37:55 -0700 (PDT)
+ AHgh+RqS3sKhWeDZWdZ3TWiYwYaKAKRQ2i8a0hhAUIF2w+VKQYv46hCo9hKgoHWMlvzI9u2TQKw8YqVNB8oJ@nongnu.org
+X-Gm-Message-State: AOJu0YzRJQ6UbCCRaeQHvjwEYW7ysSrOwAvQ+En9+w7WUPm7rmNlm/Dj
+ WIC1rWuczZIUkbG3OHqFliG5HOHrrWaML1OX4gkE8vr8lVsu0xO7V3XWevn+v0LAaJA=
+X-Gm-Gg: AR+sD115o1MqXSd0diTT8opoUshs0YPDbHDPBbhbLWfMNFeasYArR5NGfGAHMBiiLz5
+ f0Ei+TJEq7+NyyxVgQHCaSf1toIVRkrdM/JBAfIysc1aro0IHRZg3igEM6DO4tiHOQM/4uqgs4J
+ fI0jTSd8eJgrI8F48m7R92jCF5YNgOFUDhFsKw66L07KIcX7P4s725Hc4dvQzsDk3QMiP+qjpm7
+ XA34xJLToPNyzX4fzBWd5QiuMKQ61hxVVMflQxiGsCimhi98P1o0hFlLs0nlceb/fnSVUGqVbHk
+ ZBRgf1jZLZWP0EKFsBbpnTnc2o5njdtakLTIqPLQZqqqoLjLMGNr4ZjpyEKy5BCBKvjDrvaSkCF
+ TgSrZQ2Th1Cu7m7L0IHCd7phY6OW1ZILNLdFGU0FexjJVU9Sxsu61w2R4ZYYQbzC0YwXIYdKy7X
+ a9zQrGVj8nMxKpB4bxcgydwTCcYCUsZvzxfmGUcXqIm0lgTD00GPbwDdeyRbOdd1VkPDUZlbJSj
+ HlaxIQHlV8h6j7e3MC4
+X-Received: by 2002:a17:90b:53cf:b0:381:1c96:829b with SMTP id
+ 98e67ed59e1d1-3933bd204d0mr16889988a91.3.1786826263584; 
+ Sat, 15 Aug 2026 13:37:43 -0700 (PDT)
 Received: from stoup.. (174-21-93-59.tukw.qwest.net. [174.21.93.59])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-394ea97207fsm7066853a91.1.2026.08.15.13.37.54
+ 98e67ed59e1d1-394ea97207fsm7066853a91.1.2026.08.15.13.37.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 15 Aug 2026 13:37:55 -0700 (PDT)
+ Sat, 15 Aug 2026 13:37:43 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org,
 	qemu-riscv@nongnu.org
-Subject: [RFC PATCH 18/18] target/riscv: Pass first/last to pmp_hart_has_privs
-Date: Sat, 15 Aug 2026 13:37:30 -0700
-Message-ID: <20260815203730.1468365-19-richard.henderson@linaro.org>
+Subject: [RFC PATCH 06/18] accel/tcg: Drop fault_size from user-only
+ probe_access_internal
+Date: Sat, 15 Aug 2026 13:37:18 -0700
+Message-ID: <20260815203730.1468365-7-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260815203730.1468365-1-richard.henderson@linaro.org>
 References: <20260815203730.1468365-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102a;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x102a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102f;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x102f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -103,96 +104,53 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This eliminates an ambiguity with size == 0 and also
-aligns with the underlying hw representation.
+This argument is unused.
 
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/riscv/tcg/pmp.h        |  5 ++---
- target/riscv/tcg/cpu_helper.c |  2 +-
- target/riscv/tcg/pmp.c        | 24 ++++--------------------
- 3 files changed, 7 insertions(+), 24 deletions(-)
+ accel/tcg/user-exec.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/target/riscv/tcg/pmp.h b/target/riscv/tcg/pmp.h
-index 4c95c2767a..eacb5b5349 100644
---- a/target/riscv/tcg/pmp.h
-+++ b/target/riscv/tcg/pmp.h
-@@ -70,9 +70,8 @@ typedef struct {
+diff --git a/accel/tcg/user-exec.c b/accel/tcg/user-exec.c
+index a35aca7889..3724e5d98e 100644
+--- a/accel/tcg/user-exec.c
++++ b/accel/tcg/user-exec.c
+@@ -749,7 +749,7 @@ int page_unprotect(CPUState *cpu, tb_page_addr_t address, uintptr_t pc)
+ }
  
- typedef struct CPUArchState CPURISCVState;
- 
--bool pmp_hart_has_privs(CPURISCVState *env, hwaddr addr,
--                        int size, pmp_priv_t privs,
--                        pmp_priv_t *allowed_privs,
-+bool pmp_hart_has_privs(CPURISCVState *env, hwaddr first, hwaddr last,
-+                        pmp_priv_t privs, pmp_priv_t *allowed_privs,
-                         privilege_mode_t mode);
- uint64_t pmp_get_tlb_size(CPURISCVState *env, hwaddr addr);
- void pmp_update_rule_addr(CPURISCVState *env, uint32_t pmp_index);
-diff --git a/target/riscv/tcg/cpu_helper.c b/target/riscv/tcg/cpu_helper.c
-index fb1250a4b8..7ef5ab5277 100644
---- a/target/riscv/tcg/cpu_helper.c
-+++ b/target/riscv/tcg/cpu_helper.c
-@@ -916,7 +916,7 @@ static int get_physical_address_pmp(CPURISCVState *env, int *prot,
-         return TRANSLATE_SUCCESS;
-     }
- 
--    pmp_has_privs = pmp_hart_has_privs(env, first, last - first + 1,
-+    pmp_has_privs = pmp_hart_has_privs(env, first, last,
-                                        1 << access_type, &pmp_priv, mode);
-     if (!pmp_has_privs) {
-         *prot = 0;
-diff --git a/target/riscv/tcg/pmp.c b/target/riscv/tcg/pmp.c
-index fc035c95cf..d3cbb2cb2e 100644
---- a/target/riscv/tcg/pmp.c
-+++ b/target/riscv/tcg/pmp.c
-@@ -372,12 +372,10 @@ static bool pmp_hart_has_privs_default(CPURISCVState *env, pmp_priv_t privs,
-  * pmpcfg but is not acted upon during access checks. Cache attributes
-  * have no functional impact in QEMU emulation.
-  */
--bool pmp_hart_has_privs(CPURISCVState *env, hwaddr addr,
--                        int size, pmp_priv_t privs,
--                        pmp_priv_t *allowed_privs,
-+bool pmp_hart_has_privs(CPURISCVState *env, hwaddr first, hwaddr last,
-+                        pmp_priv_t privs, pmp_priv_t *allowed_privs,
-                         privilege_mode_t mode)
+ static int probe_access_internal(CPUArchState *env, vaddr addr,
+-                                 int fault_size, MMUAccessType access_type,
++                                 MMUAccessType access_type,
+                                  bool nonfault, uintptr_t ra)
  {
--    int pmp_size = 0;
-     uint8_t pmp_regions = riscv_cpu_cfg(env)->pmp_regions;
+     int acc_flag;
+@@ -797,7 +797,7 @@ int probe_access_flags(CPUArchState *env, vaddr addr, int size,
+     int flags;
  
-     /* Short cut if no rules */
-@@ -385,20 +383,6 @@ bool pmp_hart_has_privs(CPURISCVState *env, hwaddr addr,
-         return pmp_hart_has_privs_default(env, privs, allowed_privs, mode);
-     }
+     g_assert(-(addr | TARGET_PAGE_MASK) >= size);
+-    flags = probe_access_internal(env, addr, size, access_type, nonfault, ra);
++    flags = probe_access_internal(env, addr, access_type, nonfault, ra);
+     *phost = (flags & TLB_INVALID_MASK) ? NULL : g2h_vaddr(env_cpu(env), addr);
+     return flags;
+ }
+@@ -808,7 +808,7 @@ void *probe_access(CPUArchState *env, vaddr addr, int size,
+     int flags;
  
--    if (size == 0) {
--        if (riscv_cpu_cfg(env)->mmu) {
--            /*
--             * If size is unknown (0), assume that all bytes
--             * from addr to the end of the page will be accessed.
--             */
--            pmp_size = -(addr | TARGET_PAGE_MASK);
--        } else {
--            pmp_size = 2 << riscv_cpu_mxl(env);
--        }
--    } else {
--        pmp_size = size;
--    }
--
-     /*
-      * 1.10 draft priv spec states there is an implicit order
-      * from low to high
-@@ -410,8 +394,8 @@ bool pmp_hart_has_privs(CPURISCVState *env, hwaddr addr,
-             continue;
-         }
+     g_assert(-(addr | TARGET_PAGE_MASK) >= size);
+-    flags = probe_access_internal(env, addr, size, access_type, false, ra);
++    flags = probe_access_internal(env, addr, access_type, false, ra);
+     g_assert((flags & ~TLB_FORCE_SLOW) == 0);
  
--        s = pmp_is_in_range(env, i, addr);
--        e = pmp_is_in_range(env, i, addr + pmp_size - 1);
-+        s = pmp_is_in_range(env, i, first);
-+        e = pmp_is_in_range(env, i, last);
+     return size ? g2h_vaddr(env_cpu(env), addr) : NULL;
+@@ -825,7 +825,7 @@ tb_page_addr_t get_page_addr_code_hostp(CPUArchState *env, vaddr addr,
+ {
+     int flags;
  
-         /* fully inside */
-         if (s && e) {
+-    flags = probe_access_internal(env, addr, 1, MMU_INST_FETCH, false, 0);
++    flags = probe_access_internal(env, addr, MMU_INST_FETCH, false, 0);
+     g_assert(flags == 0);
+ 
+     *hostp = g2h_untagged_vaddr(addr);
 -- 
 2.43.0
 
