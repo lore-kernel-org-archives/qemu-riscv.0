@@ -4,86 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F721C5CFC1
-	for <qemu-riscv@archiver.kernel.org>; Sat, 15 Aug 2026 20:37:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2785C5CFC1
+	for <qemu-riscv@archiver.kernel.org>; Sat, 15 Aug 2026 20:38:59 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wvL8S-00084F-Sf; Sat, 15 Aug 2026 16:37:44 -0400
+	id 1wvL8h-0008EU-KS; Sat, 15 Aug 2026 16:37:59 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wvL8Q-00082N-S2
- for qemu-riscv@nongnu.org; Sat, 15 Aug 2026 16:37:42 -0400
-Received: from mail-pj1-x102a.google.com ([2607:f8b0:4864:20::102a])
+ id 1wvL8f-0008As-DC
+ for qemu-riscv@nongnu.org; Sat, 15 Aug 2026 16:37:57 -0400
+Received: from mail-pj1-x1034.google.com ([2607:f8b0:4864:20::1034])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wvL8O-00089L-7a
- for qemu-riscv@nongnu.org; Sat, 15 Aug 2026 16:37:42 -0400
-Received: by mail-pj1-x102a.google.com with SMTP id
- 98e67ed59e1d1-383cb94f742so2543253a91.3
- for <qemu-riscv@nongnu.org>; Sat, 15 Aug 2026 13:37:39 -0700 (PDT)
+ id 1wvL8c-0008Ow-Fg
+ for qemu-riscv@nongnu.org; Sat, 15 Aug 2026 16:37:57 -0400
+Received: by mail-pj1-x1034.google.com with SMTP id
+ 98e67ed59e1d1-38fdeaed181so3131049a91.1
+ for <qemu-riscv@nongnu.org>; Sat, 15 Aug 2026 13:37:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1786826259; x=1787431059; darn=nongnu.org;
- h=content-transfer-encoding:content-type:mime-version:references
- :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=w1jzfyEMyV4tcuUtopZTnGQBq6RAW96WuYdkZI5EwcE=;
- b=X/psgE/TK2HwQwD+QqliCkEgVHXsLcRGC+83YBx//46XFnVZ3XAlpvVTXMSR0D1smV
- GmWV6O1bsmJlQFq9GYABWm+ydadjOonKn5FUChk/iGb/ghxz53+pFMKwNqz8fRL3xEzA
- V2XunyclDFKbNDAU7hW8gXnzfIa+vGwxViiZDItD+U7YAOXGMsAfdvTx69n6zRA+5hAu
- NwFZG0YQJIVmq9uQUd2273f2G2sSXNZbgu1gchPQOpBSzZ5NLoavd61/KqANogtOF849
- adBI7lEmK0qpf3vRsT3NGe404+hT9FCv8QpTFEjjpvxorjFi0xaEcamzxU0mcV9RXdCQ
- DTCA==
+ d=linaro.org; s=google; t=1786826273; x=1787431073; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=a/hlEFf1FqljA5oL9KqdkF9I8pya5mr0tI2C45YHawA=;
+ b=Iq/BfRjPDzwe1c+4zAyQA89TqLY2gDYeGniHnTTd350UU4xDUYQVD6RXYqb3H5uuH9
+ xL+gSDWnUr8bEOJgQXdFng5BsKbxjBmtxRr39T9bX3YzzW93zUpcOVsDITkjCe95tlt2
+ Sy2vbR6jL7xYMxHE2vin97mxksExdbIky9kZlPbvOkJzqduBzrr5wjIlM3WMDCj/rgQk
+ GpyJnNF5kpetOqSx4VpklKz2yj/L+/mSSHaZiJgl3HyVFHePT/rb+zgYcZnka17eMLed
+ xNxjtA24Uvx9AxcOtKLFdiVTVSaTqLRcfm0BauTcnMGe27D3F15ypqkHqM8aLBXbpLal
+ pZfQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786826259; x=1787431059;
- h=content-transfer-encoding:content-type:mime-version:references
- :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=w1jzfyEMyV4tcuUtopZTnGQBq6RAW96WuYdkZI5EwcE=;
- b=qop2UWBhpiiLDJbgW8wEFJj8bvHdnVrPA3kuxaAE7tZ7fKMxhm93R4tbTJM0AC3S1X
- T8TTH155rC3dI4Revq5nYfhXa4NNghnGc2KzvdGelcLaYqpia0NWXmZF1K125l3aZPsC
- 8D8PSgSJMNiyJol017+qYHRGVGmrzP95FYnxaQqRBySAR6ZF1C8K0Gj1Szqy4g1WvYJJ
- TBAD84IJrkOBmqN/nRpi3sbWTZgZq+FsvdsCgmqdx0hJspJ92U1Z0akOJy40VC9t7ysK
- JJsTmua8EKg78/r8Y4ZQcxbMHdouWtZwN+klmvE0En9B+6Q+vr3L7aD2dVxVVTnvfwuk
- HIEQ==
+ d=1e100.net; s=20251104; t=1786826273; x=1787431073;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=a/hlEFf1FqljA5oL9KqdkF9I8pya5mr0tI2C45YHawA=;
+ b=dm8s3nSqZ4c+gHxCSGMIymlG8snmrxiHjzZBEGOV5L/Vkh9NS7bYcDc7ONHvSM8YUj
+ Bxve8aamlrNoCi5lc40uTSrYXVzFNgQduRt3jdfAni0sVUg7RAUwUG9SO8cb9wMCJbMZ
+ /gI9Ys9IQDUvujFf+k5KirSUwxEx9JBCRhR2EWWAn7OZ1NlMu1cpMX0T4Tcjmwe8vjp5
+ 78/LoxC5SbViZ2ZozduZTKXf4hpMgOcw6vodobgEmX0LapiYaKKYd+T3VQ/NPND6ATtD
+ hpOegUiiG5l5a0+gS0qgtxquQ3cqjntkDu+pt6DbG5Q49NFNNLXThdpBO2RUUGqnl43t
+ am1A==
 X-Forwarded-Encrypted: i=1;
- AHgh+Rps2SaVclkqmKcuVdGgyvsftyz25cmbG3unOpByGO+S9FYRjwf41i3XM+P3KNQxV3iMgAyYRHft4Bj9@nongnu.org
-X-Gm-Message-State: AOJu0Yw6GsR2QikUIae/TSeB2XK3bRGAMETxyzLIQVv5XCvics+UZz1P
- /jjSwXw8kaSh1Sox30VlkBlaHRGKkZVhWcsPk+wI95oXpGD655suiNB6GrMpHtZaV9c=
-X-Gm-Gg: AR+sD13ah64HweUpN8HbnH9hRugVfgOY0Eq6AoUOLtU+vT9hplXd4zSDh7PqNTREYa3
- dbV3rVuaa8aak77XiUXYp9Tds3VxVO2s6Y1uPbxTz6irrFJsWeHxyEOG+LN8coOaQ3QxY4nMWzu
- IkIkkQaSJXZivtAPHHckUCS2ZFT+v4UQy9dwjs6qY+RbLJRATNbvi5EFkIsL7vlpwc2YJLxefkA
- OIcGZTdWkczgOYu84e2kouqzxpoR6J38oE/CJ2Zkz4zLVArpdC6ygbiGQ7rR9otW/go7UmsDhKk
- 2T0Snld+vFEaUeRtQtl/1OTThAmXlPJk8YeboQRMo1ViZRfHZg2x2MmUP/OPJqUxFnSv/cD6+Qi
- cvjkt2dnXNLIZmSyGA51Uou01nhRzOUzPeFSpBclEUR9ZLoa5EesQzGWRz7EOmysXC134DPGExC
- hCfiPG4KvvIuD0ANR/YpAMiKjPyZCAT9UlAVxPOBwg90CuFYX0w0RFeEY8XOjMDxc+omshA3FWp
- nBLek7VNvqofTH0wFzQzEJVcw==
-X-Received: by 2002:a17:90b:2f86:b0:37c:607b:2cd9 with SMTP id
- 98e67ed59e1d1-3933b84973fmr16022733a91.0.1786826258593; 
- Sat, 15 Aug 2026 13:37:38 -0700 (PDT)
+ AHgh+RrhyjJmAeCMLh28t7/y6oxn4HUrxJpX4NiPFo5RLUR2jwD3cvgDMfp5WJwR9m9ThQd20ViGUzuF+OUW@nongnu.org
+X-Gm-Message-State: AOJu0YwwI9fUJRVj9C50FCoMMVQUcCG2kGQgzDbNPOnFMtE7W3KSwOBz
+ GqHiX+bkdGlMtDE5+qzCyLPIsBHQAT17KXCG3tZU7Q3/jDsuUut0bIfaiOIuUvZ7frQ=
+X-Gm-Gg: AR+sD10Sor96dRIBLdqYvTgY8eHYVNQgcp49QvXf3gNv8ki1EEWhi/0xHB2xadAJdP6
+ wUjJ7bNPQyG5aRtLPHjT4VTSlr00qDb2O1INhMWq+I2W9sUSbTJ2Ir86UsMoHqBHMVXyr+CKO6Z
+ WVsAPCIlMOWGWcxGczL3JXPSt/AaOVanGuQi7QrXHAgMRkmSpp2SkLrD9MJDDmw/ZChidDPva89
+ dYV/svqFPeLP1IaaGwLn8qRbL8xWOkSsbv+h9w5sAq35BplCBMRLERKFl4bFJfV2asAcQMiWd46
+ eJcNyAdfpNzWRIJZV1d40PD6sa6CSNA+wNoLOQ/O1h2D3ABG8DoedQeZuayaMK4e7qossdNMkKa
+ JisF7b3D0Dely/GsYtRLzXsFRVfXJnTTZQCrAkPcEIm9EPotHH3Jl/O+nnD53L3Vf/CikXM71q7
+ yCwmPCRRtNJtyJwmSMIjmw5c1ltDJgzAsVAejZWie9snMEdPuJx3z7wkTC4PYQNzQTMBmpi34xT
+ vQewWWxUJIJkIdF/Ppr
+X-Received: by 2002:a17:90b:2587:b0:38e:8300:af51 with SMTP id
+ 98e67ed59e1d1-3933b84b0b5mr16355159a91.8.1786826272976; 
+ Sat, 15 Aug 2026 13:37:52 -0700 (PDT)
 Received: from stoup.. (174-21-93-59.tukw.qwest.net. [174.21.93.59])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-394ea97207fsm7066853a91.1.2026.08.15.13.37.37
+ 98e67ed59e1d1-394ea97207fsm7066853a91.1.2026.08.15.13.37.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 15 Aug 2026 13:37:37 -0700 (PDT)
+ Sat, 15 Aug 2026 13:37:52 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
-Cc: qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
-Subject: [RFC PATCH 01/18] target/arm: Imply probe from
- allocation_tag_mem_probe
-Date: Sat, 15 Aug 2026 13:37:13 -0700
-Message-ID: <20260815203730.1468365-2-richard.henderson@linaro.org>
+Cc: qemu-arm@nongnu.org,
+	qemu-riscv@nongnu.org
+Subject: [RFC PATCH 16/18] target/riscv: Recognize watchpoints with first/last
+Date: Sat, 15 Aug 2026 13:37:28 -0700
+Message-ID: <20260815203730.1468365-17-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260815203730.1468365-1-richard.henderson@linaro.org>
 References: <20260815203730.1468365-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102a;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x102a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1034;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1034.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -106,168 +103,26 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Rename current allocation_tag_mem_probe to
-allocation_tag_mem_internal, then create a new
-allocation_tag_mem_probe that lacks probe and ra arguments.
-Force those to true and 0 when passing off to _internal.
-
-Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/arm/tcg/mte_helper.h | 18 +++---------------
- target/arm/gdbstub64.c      | 10 +++++-----
- target/arm/tcg/mte_helper.c | 29 ++++++++++++++++++-----------
- 3 files changed, 26 insertions(+), 31 deletions(-)
+ target/riscv/tcg/cpu_helper.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/target/arm/tcg/mte_helper.h b/target/arm/tcg/mte_helper.h
-index 1f471fb69b..b23a5de193 100644
---- a/target/arm/tcg/mte_helper.h
-+++ b/target/arm/tcg/mte_helper.h
-@@ -19,8 +19,6 @@
-  * @ptr_access: the access to use for the virtual address
-  * @ptr_size: the number of bytes in the normal memory access
-  * @tag_access: the access to use for the tag memory
-- * @probe: true to merely probe, never taking an exception
-- * @ra: the return address for exception handling
-  *
-  * Our tag memory is formatted as a sequence of little-endian nibbles.
-  * That is, the byte at (addr >> (LOG2_TAG_GRANULE + 1)) contains two
-@@ -31,22 +29,12 @@
-  * a pointer to the corresponding tag byte.
-  *
-  * If there is no tag storage corresponding to @ptr, return NULL.
-- *
-- * If the page is inaccessible for @ptr_access, or has a watchpoint, there are
-- * three options:
-- * (1) probe = true, ra = 0 : pure probe -- we return NULL if the page is not
-- *     accessible, and do not take watchpoint traps. The calling code must
-- *     handle those cases in the right priority compared to MTE traps.
-- * (2) probe = false, ra = 0 : probe, no fault expected -- the caller guarantees
-- *     that the page is going to be accessible. We will take watchpoint traps.
-- * (3) probe = false, ra != 0 : non-probe -- we will take both memory access
-- *     traps and watchpoint traps.
-- * (probe = true, ra != 0 is invalid and will assert.)
-+ * If the page is inaccessible for @ptr_access, return NULL.
-+ * Do not take watcnpoint traps.
-  */
- uint8_t *allocation_tag_mem_probe(CPUARMState *env, int ptr_mmu_idx,
-                                   uint64_t ptr, MMUAccessType ptr_access,
--                                  int ptr_size, MMUAccessType tag_access,
--                                  bool probe, uintptr_t ra);
-+                                  int ptr_size, MMUAccessType tag_access);
+diff --git a/target/riscv/tcg/cpu_helper.c b/target/riscv/tcg/cpu_helper.c
+index 11f2654da1..3318e82ea7 100644
+--- a/target/riscv/tcg/cpu_helper.c
++++ b/target/riscv/tcg/cpu_helper.c
+@@ -1784,8 +1784,8 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, vaddr first, vaddr last,
+          * Otherwise we'll throw a debug exception and execution
+          * will continue elsewhere.
+          */
+-        cpu_check_watchpoint(cs, address, size, MEMTXATTRS_UNSPECIFIED,
+-                             wp_access, retaddr);
++        cpu_check_watchpoint(cs, first, last - first + 1,
++                             MEMTXATTRS_UNSPECIFIED, wp_access, retaddr);
  
- /**
-  * load_tag1 - Load 1 tag (nibble) from byte
-diff --git a/target/arm/gdbstub64.c b/target/arm/gdbstub64.c
-index 0c3e5b30bd..08900f6843 100644
---- a/target/arm/gdbstub64.c
-+++ b/target/arm/gdbstub64.c
-@@ -725,8 +725,8 @@ static void handle_q_memtag(GArray *params, void *user_ctx)
-     /* Find out the current translation regime for probe. */
-     mmu_index = cpu_mmu_index(env_cpu(env), false);
-     /* Note that tags are packed here (2 tags packed in one byte). */
--    tags = allocation_tag_mem_probe(env, mmu_index, addr, MMU_DATA_LOAD, 1,
--                                    MMU_DATA_LOAD, true, 0);
-+    tags = allocation_tag_mem_probe(env, mmu_index, addr, MMU_DATA_LOAD,
-+                                    1, MMU_DATA_LOAD);
-     if (!tags) {
-         /* Address is not in a tagged region. */
-         gdb_put_packet("E04");
-@@ -753,8 +753,8 @@ static void handle_q_isaddresstagged(GArray *params, void *user_ctx)
- 
-     /* Find out the current translation regime for probe. */
-     mmu_index = cpu_mmu_index(env_cpu(env), false);
--    tags = allocation_tag_mem_probe(env, mmu_index, addr, MMU_DATA_LOAD, 1,
--                                    MMU_DATA_LOAD, true, 0);
-+    tags = allocation_tag_mem_probe(env, mmu_index, addr, MMU_DATA_LOAD,
-+                                    1, MMU_DATA_LOAD);
-     reply = tags ? "01" : "00";
- 
-     gdb_put_packet(reply);
-@@ -800,7 +800,7 @@ static void handle_Q_memtag(GArray *params, void *user_ctx)
-     /* Find out the current translation regime for probe. */
-     mmu_index = cpu_mmu_index(env_cpu(env), false);
-     tags = allocation_tag_mem_probe(env, mmu_index, start_addr, MMU_DATA_STORE,
--                                    1, MMU_DATA_STORE, true, 0);
-+                                    1, MMU_DATA_STORE);
-     if (!tags) {
-         /* Address is not in a tagged region. */
-         gdb_put_packet("E04");
-diff --git a/target/arm/tcg/mte_helper.c b/target/arm/tcg/mte_helper.c
-index ad4ad5b4cc..a1d8618ddb 100644
---- a/target/arm/tcg/mte_helper.c
-+++ b/target/arm/tcg/mte_helper.c
-@@ -79,10 +79,11 @@ static void mte_perm_check_fail(CPUARMState *env, uint64_t dirty_ptr,
- }
- #endif
- 
--uint8_t *allocation_tag_mem_probe(CPUARMState *env, int ptr_mmu_idx,
--                                  uint64_t ptr, MMUAccessType ptr_access,
--                                  int ptr_size, MMUAccessType tag_access,
--                                  bool probe, uintptr_t ra)
-+static uint8_t *
-+allocation_tag_mem_internal(CPUARMState *env, int ptr_mmu_idx,
-+                            uint64_t ptr, MMUAccessType ptr_access,
-+                            int ptr_size, MMUAccessType tag_access,
-+                            bool probe, uintptr_t ra)
- {
- #ifdef CONFIG_USER_ONLY
-     const size_t page_data_size = TARGET_PAGE_SIZE >> (LOG2_TAG_GRANULE + 1);
-@@ -91,8 +92,6 @@ uint8_t *allocation_tag_mem_probe(CPUARMState *env, int ptr_mmu_idx,
-     uint8_t *tags;
-     uintptr_t index;
- 
--    assert(!(probe && ra));
--
-     if (!(flags & (ptr_access == MMU_DATA_STORE ? PAGE_WRITE_ORG : PAGE_READ))) {
-         if (probe) {
-             return NULL;
-@@ -249,8 +248,16 @@ static uint8_t *allocation_tag_mem(CPUARMState *env, int ptr_mmu_idx,
-                                    int ptr_size, MMUAccessType tag_access,
-                                    uintptr_t ra)
- {
--    return allocation_tag_mem_probe(env, ptr_mmu_idx, ptr, ptr_access,
--                                    ptr_size, tag_access, false, ra);
-+    return allocation_tag_mem_internal(env, ptr_mmu_idx, ptr, ptr_access,
-+                                       ptr_size, tag_access, false, ra);
-+}
-+
-+uint8_t *allocation_tag_mem_probe(CPUARMState *env, int ptr_mmu_idx,
-+                                  uint64_t ptr, MMUAccessType ptr_access,
-+                                  int ptr_size, MMUAccessType tag_access)
-+{
-+    return allocation_tag_mem_internal(env, ptr_mmu_idx, ptr, ptr_access,
-+                                       ptr_size, tag_access, true, 0);
- }
- 
- uint64_t HELPER(irg)(CPUARMState *env, uint64_t rn, uint64_t rm)
-@@ -1144,7 +1151,7 @@ uint64_t mte_mops_probe(CPUARMState *env, uint64_t ptr, uint64_t size,
-     /* True probe; this will never fault */
-     mem = allocation_tag_mem_probe(env, mmu_idx, ptr,
-                                    w ? MMU_DATA_STORE : MMU_DATA_LOAD,
--                                   size, MMU_DATA_LOAD, true, 0);
-+                                   size, MMU_DATA_LOAD);
-     if (!mem) {
-         return size;
-     }
-@@ -1202,7 +1209,7 @@ uint64_t mte_mops_probe_rev(CPUARMState *env, uint64_t ptr, uint64_t size,
-      */
-     mem = allocation_tag_mem_probe(env, mmu_idx, ptr,
-                                    w ? MMU_DATA_STORE : MMU_DATA_LOAD,
--                                   1, MMU_DATA_LOAD, true, 0);
-+                                   1, MMU_DATA_LOAD);
-     if (!mem) {
-         return size;
-     }
-@@ -1254,7 +1261,7 @@ void mte_mops_set_tags(CPUARMState *env, uint64_t ptr, uint64_t size,
-     mmu_idx = FIELD_EX32(desc, MTEDESC, MIDX);
-     /* True probe: this will never fault */
-     mem = allocation_tag_mem_probe(env, mmu_idx, ptr, MMU_DATA_STORE, size,
--                                   MMU_DATA_STORE, true, 0);
-+                                   MMU_DATA_STORE);
-     if (!mem) {
-         return;
-     }
+         raise_mmu_exception(env, address, access_type, pmp_pma_violation,
+                             first_stage_error, two_stage_lookup,
 -- 
 2.43.0
 
