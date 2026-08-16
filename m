@@ -4,94 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81DEDC5B572
-	for <qemu-riscv@archiver.kernel.org>; Sun, 16 Aug 2026 15:49:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22665C5DF6D
+	for <qemu-riscv@archiver.kernel.org>; Sun, 16 Aug 2026 15:55:44 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wvd7H-0002aF-RS; Sun, 16 Aug 2026 11:49:43 -0400
+	id 1wvdCb-0003Ob-4a; Sun, 16 Aug 2026 11:55:15 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1wvd7D-0002Zu-S0
- for qemu-riscv@nongnu.org; Sun, 16 Aug 2026 11:49:39 -0400
-Received: from mail-pl1-x62b.google.com ([2607:f8b0:4864:20::62b])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1wvdCY-0003O2-NT
+ for qemu-riscv@nongnu.org; Sun, 16 Aug 2026 11:55:10 -0400
+Received: from mail-pj1-x102c.google.com ([2607:f8b0:4864:20::102c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1wvd7B-0000Bd-Js
- for qemu-riscv@nongnu.org; Sun, 16 Aug 2026 11:49:39 -0400
-Received: by mail-pl1-x62b.google.com with SMTP id
- d9443c01a7336-2d58efc7356so1292175ad.1
- for <qemu-riscv@nongnu.org>; Sun, 16 Aug 2026 08:49:36 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1wvdCU-0000hL-Su
+ for qemu-riscv@nongnu.org; Sun, 16 Aug 2026 11:55:10 -0400
+Received: by mail-pj1-x102c.google.com with SMTP id
+ 98e67ed59e1d1-3856d6fbcb3so2069359a91.2
+ for <qemu-riscv@nongnu.org>; Sun, 16 Aug 2026 08:55:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1786895375; x=1787500175; darn=nongnu.org;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=3lc/YXYVyNQukkSpYFLMckwJnPwBfw9sW/bakKCVwuQ=;
- b=mFiDouEmYywLS0TjIpFmqZVU67jie45OlcsBWJrzdXzBGCYAiYLVROz0hJaz86ggXT
- tfbUe42EPQMoJnrR3bxyXnugm+y2/2Qx/4on6MHOefwmrXB92EkKbumSKP6fdmwDi9Fi
- w2eHBKO5bR8iKKB3qmdHW9s6pXhpLhA2/ri91eo3DoF0SGJvOew1maPP8X2rD1PN8vAi
- hiC/OORYqSqpjBjJ5nw9SQVRNnwmKMQzPbv63tVpbDyPN+lbp6m3dreKmWnk2MkK+IMc
- B2Sg3dsfW7L4vSWiPOnc6qKgk0zk/qA7SgeyKUsNpkllinCdNd3K1TMEcdL2q3xtfZxb
- e0gg==
+ d=linaro.org; s=google; t=1786895705; x=1787500505; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :references:cc:to:from:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=QM31yW9Pa+MOhK4T2zWe0zu624wcO9Fk+aZu+h243QY=;
+ b=CCifnnabgAwhWuJ0c0/pYXJDmh+AtHOQeWVtOaDXALCTlf3120iUcIxUOJsO/O2Ypu
+ dHxGijyKBLf+iAq04oN+MXv/1LjFOCo5AT4oA4HccC99KGWb7eWTTpgOl0+uPBjp1rUn
+ Hys5PiSEunEzognogOM0ttDGI4NESG/E5vkdBumT+5VL4JZy6u9bqE4aFZBCCspXuwSL
+ m9g12e5rGoChlf3uR4/i6B4Jhfm/spdaegDJnd6kBRIYFv2iB/4Yn+NkArpDgnEwafwu
+ RGhvYWclxBll+7wmyggeACr/2FI0p19RlUWBe0pSsMefbTUTZuojUZxbTz2Zze0LL1v/
+ NyAw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786895375; x=1787500175;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=3lc/YXYVyNQukkSpYFLMckwJnPwBfw9sW/bakKCVwuQ=;
- b=i9zAkL9/kHZGqsPa99M67noKCxHY7XjWQ8WGSrZF0ePW7gNNdg5u34IkRgQoXDQxVU
- MLz6ams1i7UZpg6nSG/y3ZIygq1zP7QnyAA6GNhmm1S7h0prFCJfG8wkpY95zzpN0cYm
- RII9p3JjoROUhzBy3FM6mCcqUdH8jwZNjD1q73SVanRtRyjGjblvHIPBtZYNuv1IYIHF
- V7T4ixo+kVQtcZONClU8Fdmy+wb6FzevqG3ktD//+M9XSJfSMcvumnoBWV6NC3aRwV0W
- Ck500bkC5MPqygVG4tI3NnZs192xbX10LOsrc311Fi+aXwOCDzsNXuYFaEzTohms7U5n
- ddfg==
+ d=1e100.net; s=20251104; t=1786895705; x=1787500505;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :references:cc:to:from:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=QM31yW9Pa+MOhK4T2zWe0zu624wcO9Fk+aZu+h243QY=;
+ b=swrItwBO38IOaPZ8DyaYG5v8kqETfQYtO4MoQQuv1DQPjXd1Q4botsSXF/WPBusI2m
+ eKhhs2YAta1gEc1c6u0qVE+I3EThuOpH33i1ZvSgcetK8WEY4bHNWYKSB8fitls//W4/
+ mWy58sF/0Z93yjac84SQrIzUKzuT8kFYwYE62awfmjRDG7Qf/0LJ6WgzEDj1KBGgHBq2
+ fAfFnmcI0Dec6MopYm4sbD+SQqBTP7Izy1E9HXCvMWSQqeMG4Xshhr6pXgpVUMQDwPVj
+ px2xOAWxQu0sFdMKi7yFs2zenn+6/dmeDh0XSuhoCRPRYRh+pbLxKIcA39kEMRVmn8jk
+ KlZA==
 X-Forwarded-Encrypted: i=1;
- AHgh+RpRNmXJZN9T663vWaNx4cigNMVFOC0j9DdK5ELpuLYSlcbyUNNhh4gn2ya0ppgwt6qd/D1lXQnKPac8@nongnu.org
-X-Gm-Message-State: AOJu0YxZ8R6++eYLs2JQnzaURCxzsG0zQZ4wzWMjdfslNmxMGASlKOhF
- WHwmLoTAIwFUcNQ7+SUXFLbYuVVVsmKSBB/5QpmbjDLo3iF3bpX7CkXWvYpsjf9aUMo=
-X-Gm-Gg: AR+sD12+x91H/tk04yebZWaZDjjOLtiPGO2Pr5O0M1LZbhI5ORInGNNwbOS0ZW8/ob4
- /fLBZshYHseOyZS5i/3KnFuzO5EIwnmyzM8R4H/NFEVTQuUZdf8zCIGIqEVXh8shb+n+tbbdOhq
- EFe12RjWDfntE/5P/pfQ/o2tr00uW8AqtQRURPUAsyxuHpsSlp97u/aX0b1YQ4fx5lfbLfNHzbI
- 9SVThjXtrJywemTliaZriedR17g0XI6yjFd5pCoLqY5cEEGQVkAIXNeCKDd8c/zPArJBV/bricI
- gfVDzFyXP7ZyxwcJE8o+lkPNbgcvKiKRP3lnVt4J53I9evdq04xKmjlpH1tu9uVQEe8ZM7tCKjo
- v07IAudSnqjZ8WtTOqz/aVLx/kIFI5pCDCMMpHB9BfOXLdTNYICqoA2dYa1qyl/XNpZPdzRdJAa
- 2aw3KNecM1AtP+CoTLiYoaeDt+syCUVQFQRPVhO9AErUCmDo0XzVYb1P9I5h35qubKCW6mftetB
- l/UkkyK5Eu6Seo1BiODiZYGnzRPeBIWnLY=
-X-Received: by 2002:a17:90b:17d2:b0:381:9028:5945 with SMTP id
- 98e67ed59e1d1-3933e60c1damr19032544a91.14.1786895374683; 
- Sun, 16 Aug 2026 08:49:34 -0700 (PDT)
-Received: from sifive.com ([136.226.240.165]) by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-39531e31b8fsm1832531a91.3.2026.08.16.08.49.31
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 16 Aug 2026 08:49:34 -0700 (PDT)
-Date: Sun, 16 Aug 2026 23:49:31 +0800
-From: Max Chou <max.chou@sifive.com>
-To: Molly Chen <xiaoou@iscas.ac.cn>
-Cc: palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com, 
- daniel.barboza@oss.qualcomm.com, zhiwei_liu@linux.alibaba.com,
- chao.liu.zevorn@gmail.com, 
- Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-Subject: Re: [PATCH v2 02/18] target/riscv: Add packed SIMD helper framework
-Message-ID: <aoHbEVwVvB9BMSpW@sifive.com>
-References: <cover.1784280142.git.xiaoou@iscas.ac.cn>
- <e3775ec9235fa974e9a318edf1836cdaab197e27.1784280142.git.xiaoou@iscas.ac.cn>
+ AHgh+Rrnk5eaW3xEkiSdA8H9tLHm6AW6SPDQ5kkVksc6e1E/yGIIwQTEuxtVi0+6c5xUfxBQF7MS9yQsQ71n@nongnu.org
+X-Gm-Message-State: AOJu0YxVBtQXLXClxL7yKFTu7/7+bZfoPuTBjjumWnNsZt90Cn6xre8Q
+ BTgUb54f7OirvJsVEhBcimq8o5S009lRGNWkFMIIeL5bBwjNB7ysGKx8/rKzNQ2MFjc=
+X-Gm-Gg: AR+sD10m/nZ22UyJEbIYXmrRhL0xW/bKD+5jdeCQUtqN31TOLE18ZlfXFbs287yn8IH
+ GMtUskfmcmoHmnIVujVOtuppPd3ri754cZ7U9hsFhauY+xEwfP9hfB8dF2XNitOVNA4SHRMGhDQ
+ 5edw4TBr+rXArI+CYtynNqMEcwfxq1GDhJXbKHZlCaraTQdEiJyn7hRu8EXw1QB/bd3qduMS53l
+ dDwpGv4x9/GCbMVVzBW4Evb5O5eBu22xRdH+bK/uA6YZoKfEOMgueBMAugHiz5sE/SbUga43pml
+ Cda3w79vGyvCbHVwnSfgWKT1uPgcNVW++ZW7ssmVzZSZCqN4aSWAttrKbtLuv/Ms4WNoATHJlPa
+ GudLlO6W2pZCny1CFkPD3S7fk/tHPn/H1XCr+cze5YOlfBx+2U6e11IQ+8XzlgYK5h3MPt8tl0A
+ jgHOgkkENkzLfu10UlnDrVbkf5ZpvlqDh6AkxmOkL3BA9EciKsCxw+fIzaBkZYlh5hdBSm+ucYb
+ 7THC12Zq6bhoUWtS9iDaqvsnYSr
+X-Received: by 2002:a17:90a:e7c8:b0:38d:adae:4866 with SMTP id
+ 98e67ed59e1d1-3933bd2066dmr18670798a91.21.1786895704984; 
+ Sun, 16 Aug 2026 08:55:04 -0700 (PDT)
+Received: from [192.168.0.4] (174-21-93-59.tukw.qwest.net. [174.21.93.59])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-39531e84118sm1983890a91.5.2026.08.16.08.55.04
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 16 Aug 2026 08:55:04 -0700 (PDT)
+Message-ID: <a7747708-b25c-4027-8960-5a36cef25a8b@linaro.org>
+Date: Sun, 16 Aug 2026 08:55:01 -0700
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <e3775ec9235fa974e9a318edf1836cdaab197e27.1784280142.git.xiaoou@iscas.ac.cn>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62b;
- envelope-from=max.chou@sifive.com; helo=mail-pl1-x62b.google.com
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 05/23] target/riscv: Add evl argument to
+ vext_ldst_elem_fn_host
+From: Richard Henderson <richard.henderson@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: frank.chang@sifive.com, max.chou@sifive.com, qemu-riscv@nongnu.org
+References: <20260815194549.1377505-1-richard.henderson@linaro.org>
+ <20260815194549.1377505-6-richard.henderson@linaro.org>
+Content-Language: en-US
+In-Reply-To: <20260815194549.1377505-6-richard.henderson@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102c;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x102c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -107,82 +107,167 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 2026-07-17 10:06, Molly Chen wrote:
-> Signed-off-by: Molly Chen <xiaoou@iscas.ac.cn>
-> ---
->  target/riscv/tcg/meson.build    |    3 +-
->  target/riscv/tcg/psimd_helper.c | 1656 +++++++++++++++++++++++++++++++
->  2 files changed, 1658 insertions(+), 1 deletion(-)
->  create mode 100644 target/riscv/tcg/psimd_helper.c
+On 8/15/26 12:45, Richard Henderson wrote:
+> This merges vext_continuous_ldst_host into the ldst_host function.
+> We can then handle the byte little-endian optimization at compile-time.
 > 
-...
->  riscv_system_ss.add(files(
-> diff --git a/target/riscv/tcg/psimd_helper.c b/target/riscv/tcg/psimd_helper.c
-> new file mode 100644
-> index 00000000000..2948bbb2a86
-> --- /dev/null
-> +++ b/target/riscv/tcg/psimd_helper.c
-...
-> +#define GEN_PSIMD_VAR_USHLR(NAME, RTYPE, ETYPE, WTYPE, EXTRACT, INSERT,   \
-> +                            ELEMS, BITS, SAT_FN)                          \
-> +RTYPE HELPER(NAME)(CPURISCVState *env, RTYPE rs1, RTYPE rs2)              \
-> +{                                                                         \
-> +    RTYPE rd = 0;                                                         \
-> +    int elems = ELEMS(rd);                                                \
-> +    int sat = 0;                                                          \
-> +    int8_t shamt = (int8_t)(rs2 & 0xff);                                  \
-> +                                                                          \
-> +    for (int i = 0; i < elems; i++) {                                     \
-> +        ETYPE e1 = (ETYPE)EXTRACT(rs1, i);                                \
-> +        ETYPE res;                                                        \
-> +                                                                          \
-> +        if (shamt >= 0) {                                                 \
-> +            WTYPE shifted = (shamt >= (BITS)) ?                           \
-> +                            ((WTYPE)e1 << (BITS)) :                       \
-> +                            ((WTYPE)e1 << shamt);                         \
-> +            res = SAT_FN(shifted, &sat);                                  \
-> +        } else {                                                          \
-> +            int right = -shamt;                                           \
-> +            if (right > (BITS)) {                                         \
-> +                res = 0;                                                  \
+> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+> ---
+>   target/riscv/tcg/vector_helper.c | 83 +++++++++++++++-----------------
+>   1 file changed, 40 insertions(+), 43 deletions(-)
 
-Here may has an issue that a rounding right shift past the element
-width does not degenerate to zero -- it saturates to the rounding of
-the element's MSB.
-
-According to the P ext isa spec:
-
-  "The SSHLR instruction performs an unsigned variable shift of `rs1`
-   using the signed shift amount in `rs2[7:0]`. Right shifts are
-   rounded, and left shifts saturate to the signed 32-bit range."
-
-    if sshamt < 0:
-        // arithmetic right shift with rounding
-        x  = zero_extend(64, s1) @ 0b0            // 65-bit
-        y  = (sshamt <= -32) ? x[64:32]
-                             : (x >> (0 - shamt)[4:0])[32:0]
-        X[rd] = (y + 1)[32:1]
-
-The operation Sail code shows that every right shift at or beyond
-the element width collapses to the same x[64:32], which is the
-element's MSB, and then still gets the (y + 1) >> 1 rounding.
-PSSHLR.HS and PSSHLR.WS have the identical construct at the 16- and
-32-bit boundaries.
-
-Maybe we could fix it liked:
-
-           } else {                                                          \
-               int right = MIN(-shamt, (BITS));                              \
-               WTYPE rounded = ((WTYPE)e1 >> (right - 1)) + 1;               \
-               res = (ETYPE)(rounded >> 1);                                  \
-           }                                                                 \
+In retrospect, this probably isn't a great idea.  The load side is fine, but the store 
+side suffers from atomicity issues.  I'll think of something else.
 
 
-rnax
+r~
 
-> +            } else {                                                      \
-> +                WTYPE rounded = ((WTYPE)e1 >> (right - 1)) + 1;           \
-> +                res = (ETYPE)(rounded >> 1);                              \
-> +            }                                                             \
-> +        }                                                                 \
+
+> 
+> diff --git a/target/riscv/tcg/vector_helper.c b/target/riscv/tcg/vector_helper.c
+> index 661f1ab2f6..3786a17231 100644
+> --- a/target/riscv/tcg/vector_helper.c
+> +++ b/target/riscv/tcg/vector_helper.c
+> @@ -214,7 +214,8 @@ static inline MemOpIdx vext_make_memop_idx(CPURISCVState *env, size_t size)
+>   /* elements operations for load and store */
+>   typedef void vext_ldst_elem_fn_tlb(CPURISCVState *env, abi_ptr addr,
+>                                      uint32_t idx, void *vd, uintptr_t retaddr);
+> -typedef void vext_ldst_elem_fn_host(void *vd, uint32_t idx, void *host);
+> +typedef void vext_ldst_elem_fn_host(void *vd, void *host,
+> +                                    uint32_t idx, uint32_t evl);
+>   
+>   #define GEN_VEXT_TLB_LD_ELEM(NAME, ETYPE, H, LDSUF)         \
+>   static inline QEMU_ALWAYS_INLINE                            \
+> @@ -226,12 +227,15 @@ void NAME##_tlb(CPURISCVState *env, abi_ptr addr,           \
+>       *cur = cpu_##LDSUF##_mmu(env, addr, oi, retaddr);       \
+>   }                                                           \
+>   
+> -#define GEN_VEXT_HOST_LD_ELEM(NAME, ETYPE, H, LDSUF)        \
+> -static inline QEMU_ALWAYS_INLINE                            \
+> -void NAME##_host(void *vd, uint32_t idx, void *host)        \
+> -{                                                           \
+> -    ETYPE *cur = ((ETYPE *)vd + H(idx));                    \
+> -    *cur = (ETYPE)LDSUF##_p(host);                          \
+> +#define GEN_VEXT_HOST_LD_ELEM(NAME, ETYPE, H, LDSUF)                    \
+> +static inline QEMU_ALWAYS_INLINE                                        \
+> +void NAME##_host(void *vd, void *host, uint32_t idx, uint32_t evl)      \
+> +{                                                                       \
+> +    do {                                                                \
+> +        ETYPE *cur = (ETYPE *)vd + H(idx);                              \
+> +        *cur = LDSUF##_p(host);                                         \
+> +        host += sizeof(ETYPE);                                          \
+> +    } while (++idx < evl);                                              \
+>   }
+>   
+>   GEN_VEXT_TLB_LD_ELEM(lde_b, uint8_t,  H1, ldb)
+> @@ -239,7 +243,16 @@ GEN_VEXT_TLB_LD_ELEM(lde_h, uint16_t, H2, ldw)
+>   GEN_VEXT_TLB_LD_ELEM(lde_w, uint32_t, H4, ldl)
+>   GEN_VEXT_TLB_LD_ELEM(lde_d, uint64_t, H8, ldq)
+>   
+> +#if HOST_BIG_ENDIAN
+>   GEN_VEXT_HOST_LD_ELEM(lde_b, uint8_t,  H1, ldub)
+> +#else
+> +static inline QEMU_ALWAYS_INLINE
+> +void lde_b_host(void *vd, void *host, uint32_t idx, uint32_t evl)
+> +{
+> +    memcpy(vd + idx, host, evl - idx);
+> +}
+> +#endif
+> +
+>   GEN_VEXT_HOST_LD_ELEM(lde_h, uint16_t, H2, lduw_le)
+>   GEN_VEXT_HOST_LD_ELEM(lde_w, uint32_t, H4, ldl_le)
+>   GEN_VEXT_HOST_LD_ELEM(lde_d, uint64_t, H8, ldq_le)
+> @@ -254,12 +267,15 @@ void NAME##_tlb(CPURISCVState *env, abi_ptr addr,           \
+>       cpu_##STSUF##_mmu(env, addr, data, oi, retaddr);        \
+>   }                                                           \
+>   
+> -#define GEN_VEXT_HOST_ST_ELEM(NAME, ETYPE, H, STSUF)        \
+> -static inline QEMU_ALWAYS_INLINE                            \
+> -void NAME##_host(void *vd, uint32_t idx, void *host)        \
+> -{                                                           \
+> -    ETYPE data = *((ETYPE *)vd + H(idx));                   \
+> -    STSUF##_p(host, data);                                  \
+> +#define GEN_VEXT_HOST_ST_ELEM(NAME, ETYPE, H, STSUF)                    \
+> +static inline QEMU_ALWAYS_INLINE                                        \
+> +void NAME##_host(void *vd, void *host, uint32_t idx, uint32_t evl)      \
+> +{                                                                       \
+> +    do {                                                                \
+> +        ETYPE data = *((ETYPE *)vd + H(idx));                           \
+> +        STSUF##_p(host, data);                                          \
+> +        host += sizeof(ETYPE);                                          \
+> +    } while (++idx < evl);                                              \
+>   }
+>   
+>   GEN_VEXT_TLB_ST_ELEM(ste_b, uint8_t,  H1, stb)
+> @@ -267,7 +283,16 @@ GEN_VEXT_TLB_ST_ELEM(ste_h, uint16_t, H2, stw)
+>   GEN_VEXT_TLB_ST_ELEM(ste_w, uint32_t, H4, stl)
+>   GEN_VEXT_TLB_ST_ELEM(ste_d, uint64_t, H8, stq)
+>   
+> +#if HOST_BIG_ENDIAN
+>   GEN_VEXT_HOST_ST_ELEM(ste_b, uint8_t,  H1, stb)
+> +#else
+> +static inline QEMU_ALWAYS_INLINE
+> +void ste_b_host(void *vd, void *host, uint32_t idx, uint32_t evl)
+> +{
+> +    memcpy(host, vd + idx, evl - idx);
+> +}
+> +#endif
+> +
+>   GEN_VEXT_HOST_ST_ELEM(ste_h, uint16_t, H2, stw_le)
+>   GEN_VEXT_HOST_ST_ELEM(ste_w, uint32_t, H4, stl_le)
+>   GEN_VEXT_HOST_ST_ELEM(ste_d, uint64_t, H8, stq_le)
+> @@ -284,33 +309,6 @@ vext_continuous_ldst_tlb(CPURISCVState *env, vext_ldst_elem_fn_tlb *ldst_tlb,
+>       }
+>   }
+>   
+> -static inline QEMU_ALWAYS_INLINE void
+> -vext_continuous_ldst_host(CPURISCVState *env, vext_ldst_elem_fn_host *ldst_host,
+> -                        void *vd, uint32_t evl, uint32_t reg_start, void *host,
+> -                        uint32_t esz, bool is_load)
+> -{
+> -    if (HOST_BIG_ENDIAN) {
+> -        for (; reg_start < evl; reg_start++, host += esz) {
+> -            ldst_host(vd, reg_start, host);
+> -        }
+> -    } else {
+> -        if (esz == 1) {
+> -            uint32_t byte_offset = reg_start * esz;
+> -            uint32_t size = (evl - reg_start) * esz;
+> -
+> -            if (is_load) {
+> -                memcpy(vd + byte_offset, host, size);
+> -            } else {
+> -                memcpy(host, vd + byte_offset, size);
+> -            }
+> -        } else {
+> -            for (; reg_start < evl; reg_start++, host += esz) {
+> -                ldst_host(vd, reg_start, host);
+> -            }
+> -        }
+> -    }
+> -}
+> -
+>   static void vext_set_tail_elems_1s(uint32_t vl, void *vd, uint32_t nf,
+>                                      uint32_t esz, uint32_t max_elems)
+>   {
+> @@ -334,7 +332,7 @@ static void vext_ldst_nf_host(void *vd, void *host, uint32_t i, uint32_t nf,
+>                                 vext_ldst_elem_fn_host *ldst_host)
+>   {
+>       for (uint32_t k = 0; k < nf; k++, host += esz) {
+> -        ldst_host(vd, i + k * max_elems, host);
+> +        ldst_host(vd + k * max_elems, host, i, i + 1);
+>       }
+>   }
+>   
+> @@ -450,8 +448,7 @@ vext_page_ldst_us(CPURISCVState *env, void *vd, target_ulong addr,
+>        */
+>       if (flags == 0 && (riscv_cpu_cfg(env)->ext_zicclsm || !misaligned)) {
+>           if (nf == 1) {
+> -            vext_continuous_ldst_host(env, ldst_host, vd, evl, env->vstart,
+> -                                      host, esz, is_load);
+> +            ldst_host(vd, host, env->vstart, evl);
+>           } else {
+>               for (uint32_t i = env->vstart; i < evl; ++i) {
+>                   vext_ldst_nf_host(vd, host, i, nf, esz, max_elems, ldst_host);
+
 
