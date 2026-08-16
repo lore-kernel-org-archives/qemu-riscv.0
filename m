@@ -4,95 +4,146 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E637C5DF6D
-	for <qemu-riscv@archiver.kernel.org>; Sun, 16 Aug 2026 16:32:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22067C5DF6D
+	for <qemu-riscv@archiver.kernel.org>; Sun, 16 Aug 2026 17:09:16 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wvdmn-0003aa-Hl; Sun, 16 Aug 2026 12:32:37 -0400
+	id 1wveM5-00023I-7J; Sun, 16 Aug 2026 13:09:05 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1wvdmm-0003aK-Aw
- for qemu-riscv@nongnu.org; Sun, 16 Aug 2026 12:32:36 -0400
-Received: from mail-pj1-x1031.google.com ([2607:f8b0:4864:20::1031])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1wvdmk-0005zj-DR
- for qemu-riscv@nongnu.org; Sun, 16 Aug 2026 12:32:35 -0400
-Received: by mail-pj1-x1031.google.com with SMTP id
- 98e67ed59e1d1-38ea87caafeso1970280a91.3
- for <qemu-riscv@nongnu.org>; Sun, 16 Aug 2026 09:32:34 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
+ id 1wveM0-00022s-Lj
+ for qemu-riscv@nongnu.org; Sun, 16 Aug 2026 13:09:01 -0400
+Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
+ id 1wveLz-0003pB-0D
+ for qemu-riscv@nongnu.org; Sun, 16 Aug 2026 13:09:00 -0400
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 67GDl0Ob3448764
+ for <qemu-riscv@nongnu.org>; Sun, 16 Aug 2026 17:08:56 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ P471K91sSjLLshmItQyYGmAoYtVybZk/mKncMzbt4Sc=; b=C4EOZBfrTjS5+E1y
+ +EMJ+gh20gvqwtWSOzpwu21AlS+ZtnF+gp06j75Z+l5kgYWTjmPFmK1rxbN/IsUa
+ fmVFuOGPSPI+fvXIyL2Z/23aDBDH66/7n2EGwbexE4cI4lu5zTrzzxySFelpM7ic
+ mpPTKdP0eXsGyHbaogXpOClx+R4RUINBrs1cY1GKXrXjWXmTk7XC/uEMeh9viRIG
+ pnoUdgqrgZ4mHKhz+XwZpCcsi4hdrscbdYLwUG81gn5hTSjtMVu10IjFKx/l7Bee
+ RWtN/u29pWg30Wn3oJuHdezpCrtrREVRSmgxL+uKywBiQbEGkS/lbfnnEZ/aZoTu
+ YZfJvg==
+Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com
+ [209.85.222.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g2ghk3wcs-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Sun, 16 Aug 2026 17:08:56 +0000 (GMT)
+Received: by mail-qk1-f199.google.com with SMTP id
+ af79cd13be357-934979ee9f1so329793685a.2
+ for <qemu-riscv@nongnu.org>; Sun, 16 Aug 2026 10:08:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1786897953; x=1787502753; darn=nongnu.org;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=jMFvOe0vkNMMUB827U3MP9hJbYJr+1uRJkuSiYxxd3o=;
- b=JEO9r+WLPjATBBcSMJI27TaKGr9SVkelinOpyim2xq8ZpMy9BoqMU60DCzdKeTACTA
- jv5R7ify6z+mAe7wPFp5NNolBJctjGjLkopM9p5TqqWvE9cxkqw8S+0o/EVDTAi/JFYo
- DJqDGt3iIJQQ/by3WOKCJteKcaUmOkVcWfAu4/Po/mmoxK0Xas3Y547sbHeD7c+ncJEo
- kRkjVfJdBfiZ9QFF9862S+qTj6AKnTiR4YKi0ZpC2+UkxrYTVoD4QkJXk4AtfrHBdhJX
- AtVKgz8atADpKm9R3Cri8MLekcEJQR+UZ+RZ+lI6ltcfC2fxmrp2p6yBLSJv1kt/i/8O
- OlYA==
+ d=oss.qualcomm.com; s=google; t=1786900134; x=1787504934; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=P471K91sSjLLshmItQyYGmAoYtVybZk/mKncMzbt4Sc=;
+ b=YfD2LharAJwQhzimbWRMNj8WeQKeqy4BNCrbfSiOMrQb078mwWftdCAbEWXYPVbsO1
+ vTj4DpJ0EkjGae/t21eQSdCD28a0Ev8WXQP0H6cGDTuuxG2x5peHrNXgAK0XOqsTyeJB
+ VUNsnNvhOj579P1hAKA7QRLxGKUTvPJg7QuKdtFjAJP5AaTVDOzTwVtfntLLeFUesCW1
+ sOdhk/qFFRzCY9EkZvBlfrhBjdRHT6UbJ9JKyV5x85YlzmWiBjvRV0xqScwF619IAKim
+ 0s8r22U+kGntayUPbdTlO9nE4J3Blo1qrlwsaCk0714/cVFSNxPiyTCQu454cJIX7VGF
+ w5ug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786897953; x=1787502753;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=jMFvOe0vkNMMUB827U3MP9hJbYJr+1uRJkuSiYxxd3o=;
- b=ZKs7du4/yEGJyhERaU3kZJn3aH67lHzt9kKYs/XRoFmtYs4b4lGxkxvFx+5UpQdYUm
- eqTAVYeJArNuYMoiZmFHiWlN9mYaevAt02hbA3NG8SsPEXJRRBALUJ523TAHruIKEpqZ
- PXpJE3bOjulnuTnjy0M3zVv2k6OZBDtBQAOe6SVxEySVUcMD+PxL5TyHKggXO4wS92JT
- MuWDCEO3bfImd9lKG74sagXZFdwCx5QlHELHum4ufbMOcgmmXDz39OxwsVLAlIII7ySL
- LDxV8oiuYIWd9uQcrBO9GREg9IQ84P2KpcUeXhrNQ2WoIXMywYvh0gkW9dAMzzvef10l
- TvvA==
+ d=1e100.net; s=20251104; t=1786900134; x=1787504934;
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=P471K91sSjLLshmItQyYGmAoYtVybZk/mKncMzbt4Sc=;
+ b=aim/8mgoP6C+QSdOPg/WlwvHmjJu4lwX/btn27v23BI9cVHek3t6NHU+HBa5irF33E
+ BG5mF/zyeXaz30dsw55dSP78v8sDlT0X1N9XqQ3HDtjp/oNhtnghf1vl6S+FftVOqH/+
+ WP0C8PE6E3fW9X2UWSUQbBKA82y+ZcfWtWr917omra3IV0dQddx7dVT+ZV3j8sn314uk
+ uerMalwSpM1jU2Ab/YBseY8s2FrWekCsTdfy5dpMZEtb45MzApEDQbs0I+JF5P/7Zq9Z
+ 4PbDiQpAvwa2ojBDJEew78yotYr8ntAV7BOWfoahdSlzop5Q0X0aEvZHuGdEzRlYroLj
+ 7tpQ==
 X-Forwarded-Encrypted: i=1;
- AHgh+RqOW7E9V+7Pzk6ZfSwWoIfxgd2TgK/xTb/mF+e7AB+zDygPZRvl4sEilfT19wzMjN69XwZgMSFnNam/@nongnu.org
-X-Gm-Message-State: AOJu0YzMtJxXtOxj8n5zvigtKRoM6F3AZJ2YjkjpWzEvm6Lhkun6AXA5
- 4ACNIu8jSEmn3YUMDZ0lpDlvChkkWPrmh+AjhaPJHEghvml5wFDzY/qw3r+NdvYKdW+Qna04xUe
- jOd9xhtI=
-X-Gm-Gg: AR+sD11ghlbcGlQigHzg4/QPX2gmAFxN+XRYquTAaBWyZqc+ZeVGA3pByg/3rcbITD4
- 5zYYJ1mr19b7Xj4HLhJlj5QjHMuK3TRG3t2ns6qw+18al+cfvX1KIJknCFIEnEWeirHRle7sxN8
- VFncaJGBuvjWM2/WIW9B5R+mVc9LYPr5mLgWrQn02hmu2VFSx0/JxEoCM+p4iSVQ38rVNA+KY+G
- kcP2wvVa/pDxRuRooA9kEv0d5xDfc/GVbKBfVK0fvTpXzLVxy/QHlUD2UfxmTIDSIy101Nub4Oo
- Kzz/bp0BRCYFL96UaHAKmhL5CkMRezTSCemoWOKTAPFLSyW5TaxXXmGbx3gREvofFulnpvUXM0R
- BsPlWy5IrL7LaybHLsarPQwbPmuMaupN/fWZLU3yn1ijhn6I1vwip56be+uA0ESsqmbb4WMYTsf
- wLVrc5oaqOwMDGPUv7SUpe/EzqcrcJ33eWDCktmPTjnAATWgny6tFrmF3IMTKLs5r2y11hNFmDw
- qo8QbfZAW/hz7fYrcpi9XEv58Jx9RX8Hcf6ZRSAN/3yDoc=
-X-Received: by 2002:a17:90b:3c02:b0:380:f389:447b with SMTP id
- 98e67ed59e1d1-3933b8938f9mr21172274a91.11.1786897952611; 
- Sun, 16 Aug 2026 09:32:32 -0700 (PDT)
-Received: from sifive.com ([136.226.240.165]) by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-39531e8418bsm1952661a91.7.2026.08.16.09.32.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 16 Aug 2026 09:32:32 -0700 (PDT)
-Date: Mon, 17 Aug 2026 00:32:28 +0800
-From: Max Chou <max.chou@sifive.com>
-To: Molly Chen <xiaoou@iscas.ac.cn>
-Cc: palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com, 
- daniel.barboza@oss.qualcomm.com, zhiwei_liu@linux.alibaba.com,
- chao.liu.zevorn@gmail.com, 
- Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-Subject: Re: [PATCH v2 03/18] target/riscv: Add packed SIMD arithmetic
- instructions
-Message-ID: <aoHkpCy_H-vhfcFY@sifive.com>
-References: <cover.1784280142.git.xiaoou@iscas.ac.cn>
- <3935baa46fdc44f7b68e2b740c7bedf8b7c0b974.1784280142.git.xiaoou@iscas.ac.cn>
+ AHgh+Rok8yDbd7CMlv5x0ybwuaiqUTwZloYMYVhk5U6Gq3964PPjbzXb7r7rF3nLL8ARp3nr7pAjzTL6W7B/@nongnu.org
+X-Gm-Message-State: AOJu0YzHbYQ2D1oTXb8TSXczDQcQ6qm+STna+vYaNvqC6siSOcKrWXi2
+ PsYBuCnoYc1dN7/h2KY8XtOdWqOny9epD732BCGhsYylEsuboMUHrlikHQ31Baj0wt6vqoLKv9X
+ 4RRtMbrYA1Sk+Eb8j2upDR09v9S3sJTEX4cM+SijI+xSPwdBiCNaj5LLVaw==
+X-Gm-Gg: AR+sD112ANpeG1L7HDQiNci3TS7VqezT9IBmz1QRN26hLoXWa1UM8rdHOFEcRZ6t1nG
+ PFK/lsJqFJA/+ZwRkGV47onVJmWzgdcRlcmtichmMZgJgLESkjHq2frP0E8adIhjqDA6ym1nPtT
+ 621ES5al/uBUjnWtdikgYhssRi3pkKAqrTYV0zge9Ron0OrrFfuaD+l9uTTjd1q0Dzrssmgeef5
+ +hqHK3x1//UEYAD/xosmllhGkhIxfx+k1Bh3AYnrzG4vB1+GBLeMq0m71SXpFLh+B5BX0MKBpJq
+ ovFIJZcbgXL/tI9AGThXJHpa/9FLn7FZWSLRrApeKcNmmstZZolEFkgDz2S7C9xYtm+RdJBbx/O
+ o4vepXar6SOM+KCTAsfJlIOA=
+X-Received: by 2002:a05:622a:c6:b0:51c:1e2f:1281 with SMTP id
+ d75a77b69052e-52d854f1871mr212658301cf.42.1786900134153; 
+ Sun, 16 Aug 2026 10:08:54 -0700 (PDT)
+X-Received: by 2002:a05:622a:c6:b0:51c:1e2f:1281 with SMTP id
+ d75a77b69052e-52d854f1871mr212657691cf.42.1786900133685; 
+ Sun, 16 Aug 2026 10:08:53 -0700 (PDT)
+Received: from [10.111.141.238] ([212.136.9.21])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4998780397dsm96599925e9.3.2026.08.16.10.08.50
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 16 Aug 2026 10:08:52 -0700 (PDT)
+Message-ID: <0f89046e-6889-42a4-a967-0bfaaab869db@oss.qualcomm.com>
+Date: Sun, 16 Aug 2026 19:08:49 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <3935baa46fdc44f7b68e2b740c7bedf8b7c0b974.1784280142.git.xiaoou@iscas.ac.cn>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1031;
- envelope-from=max.chou@sifive.com; helo=mail-pj1-x1031.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 1/1] target/riscv: Add Zihintpause support
+To: qemu-devel@nongnu.org, "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>
+Cc: Dao Lu <daolu@rivosinc.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Heiko Stuebner <heiko@sntech.de>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+ Anton Johansson <anjo@rev.ng>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+References: <20220725034728.2620750-1-daolu@rivosinc.com>
+ <20220725034728.2620750-2-daolu@rivosinc.com>
+Content-Language: en-US
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
+In-Reply-To: <20220725034728.2620750-2-daolu@rivosinc.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODE2MDEzOCBTYWx0ZWRfX7as2vaYeQJ2S
+ SUsQuqrPnhFlTv9pl8FjfT3x3N5auJgFooHcBVZ8cJnopsilLWRnFXrvo54prWUOqb3b98GCbv/
+ 4IvRyxaWAjR1nqPoXOTBSSMsQYFdxtQ=
+X-Proofpoint-GUID: i8KBiGtBYLb5Iz22x0V_oFehgNN7OY9R
+X-Authority-Analysis: v=2.4 cv=f+14wuyM c=1 sm=1 tr=0 ts=6a81eea8 cx=c_pps
+ a=HLyN3IcIa5EE8TELMZ618Q==:117 a=/bviTfK1dmy+WGcHzWQ0gg==:17
+ a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=M51BFTxLslgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
+ a=JF9118EUAAAA:8 a=h0uksLzaAAAA:8 a=mHwnvXAwzdtxKzu_xlgA:9 a=QEXdDO2ut3YA:10
+ a=bTQJ7kPSJx9SKPbeHEYW:22 a=xVlTc564ipvMDusKsbsT:22 a=MSi_79tMYmZZG2gvAgS0:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODE2MDEzOCBTYWx0ZWRfXw/PSn1D1EC2Q
+ Wli1CboYfOtc3uMRoOpc9DsIVy/uTR4zVWzoNP4pXhEOLuuEImTpe5QXb/s62zQILBT2r3oyBKe
+ 6dNQ1DNsrLWqzPjXaZGzXqqR1Dw/X0L5Es8gWG4DgaoArOC7yT6dvrnomebVph/64YPLKMtSr6k
+ FrJZpNbz7rttAGCRdnwPH/JCBOcg+aGaCydQXjVXlEKMrD5Jpk/LyWudrI29eG2nt0nvyWDoPnn
+ xRjS7XnE5yztqMYFb38xJw0Khng9//pBZFVPfJJM7W7CEM4OMt6BAmtA0cKzpQaDljU3HJmKbkx
+ ctWwSDnybnETChgzzeAIjEqZ1lUSp6o8lr/kmUl359LTpI+Np4HU2SO3gXLRMUavgA1CNxJKiiw
+ L4qaKvHf1tqAeEbSbdme00HN716PXbDPVc42tnNEhIhFPNg0EDQchc+B9tuxC7Z/un4JpljH+0M
+ MAOY4+TVEI9tqiyv4Zg==
+X-Proofpoint-ORIG-GUID: i8KBiGtBYLb5Iz22x0V_oFehgNN7OY9R
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-16_04,2026-08-12_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 spamscore=0 suspectscore=0 bulkscore=0 phishscore=0
+ malwarescore=0 impostorscore=0 lowpriorityscore=0 clxscore=1015 adultscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608160138
+Received-SPF: pass client-ip=205.220.180.131;
+ envelope-from=philmd@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -109,85 +160,71 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 2026-07-17 10:06, Molly Chen wrote:
-> Signed-off-by: Molly Chen <xiaoou@iscas.ac.cn>
+(now committed as 4696f0ab5c436ed53567ce6baec67c921d9b70ae)
+
+On 2022-07-25 5:47, Dao Lu wrote:
+> Added support for RISC-V PAUSE instruction from Zihintpause extension,
+> enabled by default.
+> 
+> Tested-by: Heiko Stuebner <heiko@sntech.de>
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+> Signed-off-by: Dao Lu <daolu@rivosinc.com>
 > ---
->  target/riscv/helper.h                       |  41 ++
->  target/riscv/insn32.decode                  |  63 +++
->  target/riscv/tcg/insn_trans/trans_rvp.c.inc | 547 ++++++++++++++++++++
->  target/riscv/tcg/psimd_helper.c             | 114 ++++
->  target/riscv/tcg/translate.c                |   4 +
->  5 files changed, 769 insertions(+)
->  create mode 100644 target/riscv/tcg/insn_trans/trans_rvp.c.inc
-...
-> diff --git a/target/riscv/tcg/insn_trans/trans_rvp.c.inc b/target/riscv/tcg/insn_trans/trans_rvp.c.inc
-> new file mode 100644
-> index 00000000000..056ccfb486e
-> --- /dev/null
-> +++ b/target/riscv/tcg/insn_trans/trans_rvp.c.inc
-...
-> +#if defined(TARGET_RISCV32)
-> +#define GEN_SIMD_TRANS_REG_PAIR_LANE_SCALAR_OP(INSN, HELPER, VXSAT)     \
-> +static bool trans_##INSN(DisasContext *ctx, arg_##INSN * a)    \
-> +{                                                              \
-> +    REQUIRE_32BIT(ctx);                                        \
-> +    REQUIRE_RVP(ctx);                                          \
-> +    if (VXSAT && !prepare_rvp_vxsat(ctx)) {                    \
-> +        return false;                                          \
-> +    }                                                          \
-> +    TCGv src1_0 = get_gpr(ctx, (a->rs1) * 2, EXT_NONE);        \
-> +    TCGv dest_0 = dest_gpr(ctx, (a->rd) * 2);                    \
-> +    TCGv src1_1 = get_gpr(ctx, (a->rs1) * 2 + 1, EXT_NONE);        \
-> +    TCGv dest_1 = dest_gpr(ctx, (a->rd) * 2 + 1);                  \
-> +    TCGv src2   = get_gpr(ctx, a->rs2, EXT_NONE);              \
-> +    gen_helper_##HELPER(dest_0, tcg_env, src1_0, src2);        \
-> +    gen_helper_##HELPER(dest_1, tcg_env, src1_1, src2);        \
-> +    gen_set_gpr(ctx, (a->rd) * 2, dest_0);                     \
-> +    gen_set_gpr(ctx, (a->rd) * 2 + 1, dest_1);                 \
-> +    return true;                                              \
+>   target/riscv/cpu.c                      |  2 ++
+>   target/riscv/cpu.h                      |  1 +
+>   target/riscv/insn32.decode              |  7 ++++++-
+>   target/riscv/insn_trans/trans_rvi.c.inc | 16 ++++++++++++++++
+>   4 files changed, 25 insertions(+), 1 deletion(-)
+
+
+> diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
+> index ca8e3d1ea1..c49dbec0eb 100644
+> --- a/target/riscv/insn_trans/trans_rvi.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvi.c.inc
+> @@ -792,6 +792,22 @@ static bool trans_srad(DisasContext *ctx, arg_srad *a)
+>       return gen_shift(ctx, a, EXT_SIGN, tcg_gen_sar_tl, NULL);
+>   }
+>   
+> +static bool trans_pause(DisasContext *ctx, arg_pause *a)
+> +{
+> +    if (!ctx->cfg_ptr->ext_zihintpause) {
+> +        return false;
+> +    }
+> +
+> +    /*
+> +     * PAUSE is a no-op in QEMU,
+> +     * end the TB and return to main loop
+> +     */
+> +    gen_set_pc_imm(ctx, ctx->pc_succ_insn);
+> +    tcg_gen_exit_tb(NULL, 0);
+
+Looking at this because I'm auditing the overall exception scheduling.
+
+This is a clever way to quickly return the inner vcpu dispatch loop,
+but doing so we can not reach the outter loop to yield to another vcpu,
+so I wonder if we shouldn't use EXCP_YIELD here. The problem has be
+unnoticed because most of us use MTTCG (the default) where EXCP_YIELD
+is irrelevant, but I expect this to be problematic on single threaded
+round robin TCG (although not reproduced). I noticed that when working
+on the hybrid accelerator project -- which is not merged yet -- where
+we use MTTCG and EXCP_YIELD is returned by hw accelerators. I'm happy
+using this simpler helper, but since this is a big logical change and
+I'm not familiar with RISCV I'm am not certain:
+
+   +void helper_pause(CPURISCVState *env)
+   +{
+   +    CPUState *cs = env_cpu(env);
+   +
+   +    cs->exception_index = EXCP_YIELD;
+   +    cpu_loop_exit(cs);
+   +}
+
+> +    ctx->base.is_jmp = DISAS_NORETURN;
+> +
+> +    return true;
 > +}
+>   
+>   static bool trans_fence(DisasContext *ctx, arg_fence *a)
+>   {
 
-There is a read-after-write hazard on src2 when the destination pair
-overlaps rs2.
-
-get_gpr(*, EXT_NONE) returns cpu_gpr[n] itself (EXT_NONE takes no
-snapshot). And dest_gpr(ctx, rd) also returns cpu_gpr[rd] itself.
-So if rd*2 == a->rs2 (or rd*2 + 1 == a->rs2), dest_0/dest_1 and src2
-are the same TCG global, and the first gen_helper call op writes it
-before the second call op reads it as its source.
-
-I suggest that we could fix it by snapshot rs2:
-
-       TCGv dest_1 = dest_gpr(ctx, (a->rd) * 2 + 1);              \
-  -    TCGv src2   = get_gpr(ctx, a->rs2, EXT_NONE);              \
-  +    TCGv src2 = tcg_temp_new();                                \
-  +    tcg_gen_mov_tl(src2, get_gpr(ctx, a->rs2, EXT_NONE));      \
-       gen_helper_##HELPER(dest_0, tcg_env, src1_0, src2);        \
-
-> +#if defined(TARGET_RISCV32)
-> +#define GEN_SIMD_TRANS_PN_OP(NAME, SRC2, VXSAT)            \
-> +static bool trans_##NAME(DisasContext *ctx, arg_##NAME * a) \
-> +{                                                           \
-> +    REQUIRE_32BIT(ctx);                                     \
-> +    REQUIRE_RVP(ctx);                                       \
-> +    if (VXSAT && !prepare_rvp_vxsat(ctx)) {                 \
-> +        return false;                                       \
-> +    }                                                       \
-> +    TCGv_i64 s1 = tcg_temp_new_i64();                       \
-> +    if (a->rs1 == 0) {                                      \
-> +        tcg_gen_mov_i64(s1, 0);                             \
-
-I think that we should use tcg_gen_movi_i64 here.
-
-rnax
-
-> +    } else {                                                \
-> +        get_pair_regs(ctx, s1, a->rs1 * 2);                 \
-> +    }                                                       \
-> +    TCGv src2 = SRC2;                                       \
-> +    TCGv dest = dest_gpr(ctx, a->rd);                       \
-> +    gen_helper_##NAME(dest, tcg_env, s1, src2);             \
-> +    gen_set_gpr(ctx, a->rd, dest);                          \
-> +    return true;                                            \
-> +}
 
