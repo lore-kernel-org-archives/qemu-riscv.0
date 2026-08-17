@@ -4,159 +4,166 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A40EBC5DF66
-	for <qemu-riscv@archiver.kernel.org>; Mon, 17 Aug 2026 11:08:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 028A3C5B572
+	for <qemu-riscv@archiver.kernel.org>; Mon, 17 Aug 2026 11:14:36 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wvvCQ-0003s1-6t; Mon, 17 Aug 2026 07:08:15 -0400
+	id 1wvvIN-0006mA-Ke; Mon, 17 Aug 2026 07:14:23 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <sunil.laxminarasimha@oss.qualcomm.com>)
- id 1wvvCJ-0003r6-P0
- for qemu-riscv@nongnu.org; Mon, 17 Aug 2026 07:08:08 -0400
-Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
+ (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
+ id 1wvvII-0006is-Af
+ for qemu-riscv@nongnu.org; Mon, 17 Aug 2026 07:14:19 -0400
+Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <sunil.laxminarasimha@oss.qualcomm.com>)
- id 1wvvCG-0000S7-70
- for qemu-riscv@nongnu.org; Mon, 17 Aug 2026 07:08:07 -0400
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+ (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
+ id 1wvvIG-0001XD-KQ
+ for qemu-riscv@nongnu.org; Mon, 17 Aug 2026 07:14:17 -0400
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 67H9dqMo2279071
- for <qemu-riscv@nongnu.org>; Mon, 17 Aug 2026 11:08:02 GMT
+ 67H9dkbU1466808
+ for <qemu-riscv@nongnu.org>; Mon, 17 Aug 2026 11:14:12 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:reply-to:subject:to; s=
- qcppdkim1; bh=uAYwelqc9WE4DTYSHPccu1xHrR40Vuq0x7i1iv0+dFE=; b=dL
- CXuvaSppsNcH/XOwrjUUmQZguLG0jhuj9Ouz00IWkkrkS709RsjLlegfACQ2LwJO
- EmfiDuWvNYPtQldrRw5gDguPegzgywyPM5EsEFNSbcc7HAGaDMTWn1Gw4N/0B67m
- kwOwuNZ1v+yn+uErbp9TlZ2SvCALiFXzZwr6e2MlS/1m+PTkJazlP2My6hNQnxBc
- lXcx2k9VC0t46VXtr6BvczGj1MlpdLGsWPXClwma4FbEp8EnK20rfpDdEqnEzYQE
- faT4HrQjPsiepRaMCb9jzt5ViP4CmPCBDHqk/bd6YdQW3yHhnmSS4W7F2gZQuMGw
- gS/PZA333h1dl5ps0iug==
-Received: from mail-yx1-f69.google.com (mail-yx1-f69.google.com
- [74.125.224.69])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g3y778h4c-1
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ 7YiE7383FwpyDp32goc1hPgbaLG4034Pzreh6sCEwOE=; b=X+4Lkc53wjZLtV0g
+ vx5cqPp8xvKYZvjDHK7O96G0NDY6d1JHdCRdAFnRxdD9uFFKO7hNuTM5TzczXYzV
+ U5i8SvoS8q/yjuCv0gWvn9fqhb4cz27elV4B1aNm+3tso5Vs2oaZbU6BKoFaS4jQ
+ a7gyO1WscZSvKmVuGFY4JY/iNG7pVNUDAwZ/PH9ZU8ECBTqn9pauy3NowxHwKI7U
+ 9tDp+eVRYI+q7hakkf3A8bdnqASrg4/6Z/9ZDRE7BxRZu1Mow9ISWtOQwuOMR3HR
+ ZuaoLe1xenlBcqtoBT4a1kQaB5sHHyxM2kJ9rviFp17BFbshAG4IiJs1EEvN36gC
+ ZYXjDg==
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com
+ [209.85.222.197])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g3xx7gkf2-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Mon, 17 Aug 2026 11:08:01 +0000 (GMT)
-Received: by mail-yx1-f69.google.com with SMTP id
- 956f58d0204a3-66c740bf518so4877381d50.1
- for <qemu-riscv@nongnu.org>; Mon, 17 Aug 2026 04:08:01 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1786964881; cv=none;
- d=google.com; s=arc-20260327;
- b=R1+VE45KVttt1ylhnxUaqhmAGlkOxV7NHafSTTjbM4SagfD9NgUY5CAyoYsFYWmxLD
- PYw07Fn9SICjvrTn4JnUvw83DNkQgwiARmtgbqI35V5UPekiSZb7fL8BKrKgcXjRxJZu
- ZAe8SNiC6WroRZYOGQV8vD+LW5ggcsg/lbdUCysVjCdqbRZKf3avxe0MzVX0d2N7XWlT
- tpgvEqq7/f1a9IC7PPzlaXe/hmE7WiN29fYnlqRPhoRivegazbikn/rzDDtSUzlUJtX/
- R+8dYb9whTpo23plhbxixdBPv8ceMGNoOE0FWB4as66BWEZA72nD6R6u7w1LFcbiGFq3
- CYcw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :reply-to:in-reply-to:references:mime-version:dkim-signature;
- bh=uAYwelqc9WE4DTYSHPccu1xHrR40Vuq0x7i1iv0+dFE=;
- fh=Jpaic1tN09ZqNenUhBGKcfM3UDhBL1RIwNpdiAt5KuI=;
- b=Gh49cHvvVs3/YuOA5LqGgTzUekw0CYIgnkE7xJ7q2Hn1HjuceNIVzOwlc/AO7TUmyG
- 3Ms+QROth3cVtgx0fjCmwl8VFbbRGmc92yqoxA1Cr1cxAPWODviEcwsMuZHDPolwqKyS
- zrAEPT1Xel0xlGZObjpYOYSvnyhNcX81gUPgrRvTN1zrRUesNN93vNxF7Fu6eiOgd/Gh
- 1eWI8laZbXg288H/3NzzKOFlK+Y/OY7zuP9dNnEHfEu6VFCgIW5TTT8ty8yLbic9aGvG
- UJvbzwiuf/hSaesXlo/A3dJr3LXRUNSPpY4XdLnlei4cGrcrFVyPoXe7tV+gQNjwFbjn
- tPPw==; darn=nongnu.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ for <qemu-riscv@nongnu.org>; Mon, 17 Aug 2026 11:14:12 +0000 (GMT)
+Received: by mail-qk1-f197.google.com with SMTP id
+ af79cd13be357-934963b2bc0so310511985a.3
+ for <qemu-riscv@nongnu.org>; Mon, 17 Aug 2026 04:14:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1786964881; x=1787569681; darn=nongnu.org;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:reply-to:in-reply-to:references:mime-version:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=uAYwelqc9WE4DTYSHPccu1xHrR40Vuq0x7i1iv0+dFE=;
- b=VwUnRhbSU/HNh8OmwgTIclQZa+aBVUxFLoyF1u/f9uUj+q41/qeYS9ceBuUoi2WFBj
- smr2us0o0bdjowoQRJwcjJPlTHQNVoG7h10NiJK5TN9/55BLEyn8K/7XErwi862VY0Qt
- 7q/+ExuQ8gThcYftz/101ERBlty8f2w3Sf5ktBxbeXzTUBQB2idVTRLE+haenJkQ7Te9
- WjBKv3gXSvWL8BWB2hwBO5EAxNuwd4wWBziEcoX8kbESago+KqVF6Gnb9ad53gtZIFCS
- jrN/J9ySEdHnZzNXgfNVStTT15uCF53UtwevBs0TB8HGKnreSts2q+w/dhyqSi9pu0c3
- 7ZkA==
+ d=oss.qualcomm.com; s=google; t=1786965252; x=1787570052; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=7YiE7383FwpyDp32goc1hPgbaLG4034Pzreh6sCEwOE=;
+ b=b508jgs4IhLC8OC+N35Q3B6nIiPKxfiFFB+nR62yPh+NcOcLazEFfTVOpHKlEzh1tZ
+ 5LeJu7pbXdJiOLwxA+DAnn2oVAFUnS8nq855YkGydXcPy1OX+li28Y5mJLKKHoDKg6S7
+ ui3znMdSlJkBpNPMvP+gpBmwRI874qxqZYm4ypTbZq/ngmbzvVGMCNwrQdwWJGGvHnqr
+ a/wdENHrP6lws8ddQ2TbnC0Eg3NAf63FY+W1yoOwk886YHymsTZY84By7GkuPbhC27wA
+ ord5e29aXez7Ul7LOflD4TDTKjD2Aeysib4HPh0DaafpMIS5RLmIEEteI/hcJYiP1y0v
+ zJJg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786964881; x=1787569681;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:reply-to:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=uAYwelqc9WE4DTYSHPccu1xHrR40Vuq0x7i1iv0+dFE=;
- b=BGSMBUPa8Ce6EL3+nO9GVk8LCk4cuyxutX2QzKp8EYRSbWsxpQvORgZsw4rxSltRmI
- KYiLvkHT5kFpBZgvzzTWMRs76CR0Tsu46CaUwUSUyi7pVsZ33e0E3UWVLNbriJVXcUI+
- nDZp00TWCZmMf5sijtTLlEJOm33KjHbfcbqOE8zmO6TV/HmCTsIydXAaS+DWT8+Lo4ZY
- v/qw3Z1xF9bGgUlIB7HJHdkzeF6idI7iRUpi5qwcoN5e1WoTBIC6X7sA6DRol8NiirJe
- 9TX76v4DoNnzhzwTcXrvFu1ZuW9c1EBmXhB/KK28EjZ5nOFWo0SDVoGa24hQDV15nkLi
- sQAw==
-X-Gm-Message-State: AOJu0YzXm1UK4O88AY0WuOqxqw02dSg0R5kLcMZMpYAQNtl9iOeEPwXS
- VVxC0oEaeJEVe7nHi7d2KNSjaJjE7MQyfz+MDuwExRPuy1D6y85u8t7olCsKMUyammjzGyw/8w5
- 7vCH99CuSxpW4+F+FwbNmjjqwv/pCSIJ8TC9KkE5OEV1/ZjRRhyk9f2abQMY/ng0uJ8T274rDGv
- fmoPC/4Cayv2IfueD8RcVmQAtdEHbCEB9e
-X-Gm-Gg: AR+sD12TPkT1hTfFf+zzcyqv9hbbkYoWcGEYea4uc8M5TFOtRJmd301xoHpsksWHbm7
- 24nsshCHpvcpXoO453UDvRUoy5KWRRc4SL+bjYbYBU933V6QC5zojVuD0ZdHr7tRlzMEWAQrGru
- QlqD9lJBYOlhTHY9ncaNUiJ7333Rx6C3XKrAHlS7yJF1DaV05JRQ/SUZn8Ww4=
-X-Received: by 2002:a05:690e:1914:b0:664:b1c2:88f with SMTP id
- 956f58d0204a3-66c72b1bd55mr7330041d50.1.1786964880932; 
- Mon, 17 Aug 2026 04:08:00 -0700 (PDT)
-X-Received: by 2002:a05:690e:1914:b0:664:b1c2:88f with SMTP id
- 956f58d0204a3-66c72b1bd55mr7329882d50.1.1786964875351; Mon, 17 Aug 2026
- 04:07:55 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1786965252; x=1787570052;
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=7YiE7383FwpyDp32goc1hPgbaLG4034Pzreh6sCEwOE=;
+ b=PZ5vK6y++uucKA5q8LG0pjUcWWWHrdaGW7FNicz9fE5l7d5A1F1jNPIbtSPd5Ni8r/
+ AwGuKC+KIVHEB5WUWV9wkd96dSWi+GteX4WQ36i6gHNuyErtLBvvYZ5CiLOW0k2oOBiu
+ igf32+UM9TZBaihr7YI7tXoYQIvKMLgX1dV12GhsooI3FIn2X0Gq0PKPnDjVhV43fXDb
+ xaheafhhKBHiQtdoTDJuxYLsfF47Y+RE+o3AhG/dr7s2IWO7yd5fsjyQ/xAuYmVlOrp8
+ Fygr7WxMvhS4sfH9Tut86lunu1XzDcyHSBT9m+WXrCe5w3EDCz8aQsyeCkppHGvfKUbB
+ 42RQ==
+X-Forwarded-Encrypted: i=1;
+ AHgh+Rp3k1iO6FhaZ7lfcAIEeuJGMBlg8DVYJmC/YvoH32oItYHanhyNGcYnh0/9fd5YKmNFAumNzLscDNo+@nongnu.org
+X-Gm-Message-State: AOJu0YzggPWIjrhATh64R9t6gpuNhk5RGN2rUaJrqlGXeOkFonJ6Srh5
+ PvW2TGIW3grkrzMEba0Uv+NmKhYRhCDiRDsNMkjZzsL9b2w5+Tww5T9UMAWqQ7iOrBeSfotQ2cn
+ vutqbnG5Mxwc81+Yhg19MeRAaeilQbAqvgvilYpU96HJyI4sp5d5+cEWVuw==
+X-Gm-Gg: AR+sD110/S5t9LOG1kMqIe+bgOC7l05XmcbS65RL4fQaV2gYDhxEGsuejsK6Dfv4M0B
+ tBIjuyf5m/pGcLWXBQdwCy7eUk6KrPE5b+B9cBxD8xcChRfYRkGjBWYiMhAkDCJK7OPVsPyzqhM
+ g9IMTuC3hSl9aINfliiGefnZCj3H+mWiUJz0EovguuwuqO1VMJ37ejKNJNA/z1lvUobVaaqU1EP
+ b8n4ULfhRNgMosQnFCXH+tGMjKgAkqzKjAsqUwJ7BcHfN+X5U9QfjjMI7M40eTwRazv4HGbdEb6
+ dF3+HF0vdd3TZ6RK43qUi7DXzrceE1SZcUpToRyNrbCJwKtrejov+g6HmRKgQ5a0fjRGjgib+6k
+ 07/vxBuFgcjSJaKxR5xLBHxg=
+X-Received: by 2002:a05:620a:1720:b0:936:b923:4832 with SMTP id
+ af79cd13be357-936d233d21dmr2470396285a.28.1786965251492; 
+ Mon, 17 Aug 2026 04:14:11 -0700 (PDT)
+X-Received: by 2002:a05:620a:1720:b0:936:b923:4832 with SMTP id
+ af79cd13be357-936d233d21dmr2470384285a.28.1786965250894; 
+ Mon, 17 Aug 2026 04:14:10 -0700 (PDT)
+Received: from [10.111.141.238] ([212.136.9.21])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-482a5a7c5e7sm3217366f8f.24.2026.08.17.04.14.06
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 17 Aug 2026 04:14:09 -0700 (PDT)
+Message-ID: <aa4bdaf5-6669-4ed7-90fb-4e766f160118@oss.qualcomm.com>
+Date: Mon, 17 Aug 2026 13:14:05 +0200
 MIME-Version: 1.0
-References: <20260814045315.3416169-1-subrahmanya.lingappa@oss.qualcomm.com>
- <20260814045315.3416169-10-subrahmanya.lingappa@oss.qualcomm.com>
-In-Reply-To: <20260814045315.3416169-10-subrahmanya.lingappa@oss.qualcomm.com>
-From: Sunil V L <sunilvl@oss.qualcomm.com>
-Date: Mon, 17 Aug 2026 16:37:42 +0530
-X-Gm-Features: AcwNN1U640xA61aoT2IHp9Bjr9XUtxWMIprbNWx8G-Iv6MxGc6HwcxYsw6E9myc
-Message-ID: <CAB19ukFGinPjP+w89tm=1+0s+fFYr7PsXED08+wa-LznVS=zhg@mail.gmail.com>
-Subject: Re: [PATCH v8 09/10] tests/qtest: cover initial RISC-V RPMI services
-To: Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcomm.com>
-Cc: qemu-riscv@nongnu.org,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Fabiano Rosas <farosas@suse.de>, Laurent Vivier <lvivier@redhat.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 13/35] target/avr: call plugin trap callbacks
+To: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ qemu-devel@nongnu.org, Julian Ganz <neither@nut.email>
+Cc: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Alexandre Iooss <erdnaxe@crans.org>,
+ Chinmay Rath <rathc@linux.ibm.com>, qemu-arm@nongnu.org,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Nicholas Piggin <npiggin@gmail.com>, Ilya Leoshkevich <iii@linux.ibm.com>,
+ David Hildenbrand <david@redhat.com>, qemu-ppc@nongnu.org,
+ Paolo Bonzini <pbonzini@redhat.com>, qemu-s390x@nongnu.org,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Helge Deller <deller@gmx.de>, Stafford Horne <shorne@gmail.com>,
+ Mahmoud Mandour <ma.mandourr@gmail.com>,
+ Artyom Tarasenko <atar4qemu@gmail.com>, Eduardo Habkost
+ <eduardo@habkost.net>, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu.zevorn@gmail.com>,
- "open list:All patches CC here" <qemu-devel@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODE3MDA4MyBTYWx0ZWRfXze7IshVQXx2C
- 1vy3LYgSo4d2UuFkPWZQ6O2sSEJypQlm2cgBCUz6Pnp48zpqS0CnimpkQ4Z9uTfrpRjOpqyFTMj
- rwYtoBusKlyxYjuwpedqd2wma2ie6wKr9Z8m59sWZov0l3266rAlj1AVGJ3e6fynkSOkeOCiZcg
- 5N7i36DaW/xZO0CPJasHUTrWZP7+RX9NLgKGWnTDB3Edr0/3uaAdlyT3rxQ+apWa4xWmNXyHbL6
- SPkBwn4c8TWhzan5UDAD+1SUvbWjiPMkVwuyE8yn3ibAkvHIj928XPZoXKtwJHK9E7gxMGhY7CI
- n8LqHwUT5SZRcTiHWd02DGvMORjKFFdJFx+ALtEkCW/hQn6dWx/cjFmKHrNzKT/nL7LntOgkzbS
- 7JK7tPNKGEaylVbFFcdnQy05BVYWgFte7b/zHI4MH1aSoIeuyePlcxx8GDoyUfNLC2jOv23JlrX
- smWaqNKcU9eOS0Ftfdg==
-X-Proofpoint-ORIG-GUID: UgSV38qMCqmHwLBQqojiwK5Nk26aTMla
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODE3MDA4MyBTYWx0ZWRfX9ex7ivQGsSbt
- 1EVg6f+rO4b5VTiHzHnl4HZo45AOjwdL2bFqIuYDqAzvwneULXguvv081CWv8U9Z1+KC85Xs6tI
- 03uf0T/tDultJhp6+aUZ7SXQMoml9qg=
-X-Proofpoint-GUID: UgSV38qMCqmHwLBQqojiwK5Nk26aTMla
-X-Authority-Analysis: v=2.4 cv=WNhPmHsR c=1 sm=1 tr=0 ts=6a82eb91 cx=c_pps
- a=J+5FMm3BkXb42VdG8aMU9w==:117 a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=3WHJM1ZQz_JShphwDgj5:22 a=EUspDBNiAAAA:8 a=Y6iMssVJfdQlGiBDL2gA:9
- a=QEXdDO2ut3YA:10 a=Epx66wHExT0cjJnnR-oj:22
+ Laurent Vivier <laurent@vivier.eu>, Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Yoshinori Sato <yoshinori.sato@nifty.com>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Aurelien Jarno <aurelien@aurel32.net>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Thomas Huth <thuth@redhat.com>, Max Filippov <jcmvbkbc@gmail.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Michael Rolnik <mrolnik@gmail.com>, Song Gao <gaosong@loongson.cn>,
+ qemu-riscv@nongnu.org, Aleksandar Rikalo <arikalo@gmail.com>,
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
+References: <20251027110344.2289945-1-alex.bennee@linaro.org>
+ <20251027110344.2289945-14-alex.bennee@linaro.org>
+Content-Language: en-US
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
+In-Reply-To: <20251027110344.2289945-14-alex.bennee@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODE3MDA4NCBTYWx0ZWRfX9uEAoiHy0O3D
+ Iax2vuAh3t26m9m8b5VxSvbtM9r2753WOaztQVdFqNk02bsl4fdE7HKIUpCjJx62USZlUoOchCP
+ 2Rdb2Y+TseRoNK2X6MzztLI7eaiezHo=
+X-Authority-Analysis: v=2.4 cv=TK91jVla c=1 sm=1 tr=0 ts=6a82ed04 cx=c_pps
+ a=50t2pK5VMbmlHzFWWp8p/g==:117 a=/bviTfK1dmy+WGcHzWQ0gg==:17
+ a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=M51BFTxLslgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
+ a=KKAkSRfTAAAA:8 a=fJfIHgLxyoL31M7WP3EA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=IoWCM6iH3mJn3m4BftBB:22 a=cvBusfyB2V15izCimMoJ:22
+X-Proofpoint-GUID: gURgKuM4_fgTqAb24ZlqrxvMPvvpYLiu
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODE3MDA4NCBTYWx0ZWRfXwwITf1FRc8PN
+ T1p0sXNkjRhYIPfzPkleW5OeLvn6ZTYEZ9kQHYypZ9B6PPVIX2jVA55UYXciGT4w4cUNQ/866TH
+ iW8xe21X6ZuXf4P+kiJMGjFnb2UDMJHMi+JUQvGdHozowp3WbifOe2rxDW8MuSEC1V5636u5caZ
+ 2ixNYMpEryIwUK7bzAeS8jGXo5aliPWWhG1hfiJpT9z/Jt9sNU35jTBnlDcjaLVL6xpscNTSzay
+ nPoaocnI5VN2zg2PNMNFpMgckBvOkZF9RySg+z6+GNNwF1mh0l5v3re0ElzX+ncxgqGvzvsFCKM
+ W/VO+0YnTC1w23EPvWgQBYWhAPZMqSmo6tkkynzKZxcZKiGY37z8LxKxTKugr9FD2OppJdv8KLx
+ cfxx5PEl2onsw0SONjoS+avNlowRFm7S6IpTRSvcsafRN9FgH8YYPbwzG6KK7Tak3SOzBGslWKj
+ bF4WLpBe15Dw1tIwFeA==
+X-Proofpoint-ORIG-GUID: gURgKuM4_fgTqAb24ZlqrxvMPvvpYLiu
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-16_06,2026-08-12_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 spamscore=0 phishscore=0 impostorscore=0 adultscore=0
- malwarescore=0 clxscore=1015 priorityscore=1501 bulkscore=0 suspectscore=0
+ malwarescore=0 phishscore=0 lowpriorityscore=0 spamscore=0 bulkscore=0
+ impostorscore=0 adultscore=0 suspectscore=0 clxscore=1015 priorityscore=1501
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608170083
-Received-SPF: pass client-ip=205.220.180.131;
- envelope-from=sunil.laxminarasimha@oss.qualcomm.com;
- helo=mx0b-0031df01.pphosted.com
-X-Spam_score_int: -14
-X-Spam_score: -1.5
-X-Spam_bar: -
-X-Spam_report: (-1.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608170084
+Received-SPF: pass client-ip=205.220.168.131;
+ envelope-from=philmd@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
+X-Spam_bar: --
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_BL_SPAMCOP_NET=1.347, RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -169,391 +176,86 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Reply-To: sunilvl@oss.qualcomm.com
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Aug 14, 2026 at 10:24=E2=80=AFAM Subrahmanya Lingappa
-<subrahmanya.lingappa@oss.qualcomm.com> wrote:
->
-> Add qtests for the RPMI transport plus Base, system reset, HSM, and
-> system suspend service groups.
->
-> Signed-off-by: Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcomm.co=
-m>
-> Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Hi Julian,
+
+On 2025-10-27 12:03, Alex Bennée wrote:
+> From: Julian Ganz <neither@nut.email>
+> 
+> We recently introduced API for registering callbacks for trap related
+> events as well as the corresponding hook functions. Due to differences
+> between architectures, the latter need to be called from target specific
+> code.
+> 
+> This change places the hook for AVR targets. That architecture appears
+> to only know interrupts.
+> 
+> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+> Signed-off-by: Julian Ganz <neither@nut.email>
+> Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+> Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 > ---
->  MAINTAINERS                   |   1 +
->  tests/qtest/meson.build       |   2 +
->  tests/qtest/riscv-rpmi-test.c | 684 ++++++++++++++++++++++++++++++++++
->  3 files changed, 687 insertions(+)
->  create mode 100644 tests/qtest/riscv-rpmi-test.c
->
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 8e91a31757..6dd71c5a82 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -361,6 +361,7 @@ F: hw/riscv/
->  F: hw/intc/riscv*
->  F: hw/misc/riscv_rpmi*
->  F: include/hw/misc/riscv_rpmi.h
-> +F: tests/qtest/riscv-rpmi-test.c
->  F: include/hw/char/riscv_htif.h
->  F: include/hw/riscv/
->  F: common-user/host/riscv*
-> diff --git a/tests/qtest/meson.build b/tests/qtest/meson.build
-> index 4897325d84..d54b79cbcf 100644
-> --- a/tests/qtest/meson.build
-> +++ b/tests/qtest/meson.build
-> @@ -290,6 +290,8 @@ qtests_riscv32 =3D \
->
->  qtests_riscv64 =3D ['riscv-csr-test'] + \
->    (unpack_edk2_blobs ? ['bios-tables-test'] : []) + \
-> +  (config_all_devices.has_key('CONFIG_RISCV_RPMI') ?
-> +   ['riscv-rpmi-test'] : []) + \
->    (config_all_devices.has_key('CONFIG_IOMMU_TESTDEV') and
->     config_all_devices.has_key('CONFIG_RISCV_IOMMU') ?
->     ['iommu-riscv-test'] : []) + \
-> diff --git a/tests/qtest/riscv-rpmi-test.c b/tests/qtest/riscv-rpmi-test.=
-c
-> new file mode 100644
-> index 0000000000..dab723b999
-> --- /dev/null
-> +++ b/tests/qtest/riscv-rpmi-test.c
-> @@ -0,0 +1,684 @@
-> +/*
-> + * SPDX-License-Identifier: GPL-2.0-or-later
-> + *
-> + * QTests for RISC-V RPMI devices.
-> + *
-> + * Copyright (c) 2026 Qualcomm Technologies, Inc.
-> + * Author:
-> + *  Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcomm.com>
-> + */
+>   target/avr/helper.c | 3 +++
+>   1 file changed, 3 insertions(+)
+> 
+> diff --git a/target/avr/helper.c b/target/avr/helper.c
+> index 4b29ab35263..365c8c60e19 100644
+> --- a/target/avr/helper.c
+> +++ b/target/avr/helper.c
+> @@ -28,6 +28,7 @@
+>   #include "exec/target_page.h"
+>   #include "accel/tcg/cpu-ldst.h"
+>   #include "exec/helper-proto.h"
+> +#include "qemu/plugin.h"
+>   
+>   bool avr_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
+>   {
+> @@ -102,6 +103,8 @@ void avr_cpu_do_interrupt(CPUState *cs)
+>       env->sregI = 0; /* clear Global Interrupt Flag */
+>   
+>       cs->exception_index = -1;
 > +
-> +#include "qemu/osdep.h"
-> +#include <glib/gstdio.h>
-> +#include "libqtest.h"
-> +#include "qobject/qdict.h"
-> +
-> +#define RPMI_SHMEM_BASE 0x10200000ULL
-> +#define RPMI_DOORBELL_BASE 0x10230000ULL
-> +#define RPMI_IMSIC_S_BASE 0x28000000ULL
-> +#define RPMI_CPPC_FASTCHAN_BASE 0x10240000ULL
-> +#define RPMI_CPPC_FASTCHAN_SIZE 0x4000
-> +#define RPMI_CPPC_FASTCHAN_FEEDBACK_OFFSET 0x2000
-> +#define RPMI_SLOT_SIZE 64
-> +
-> +#define RPMI_A2P_HEAD RPMI_SHMEM_BASE
-> +#define RPMI_A2P_TAIL (RPMI_SHMEM_BASE + RPMI_SLOT_SIZE)
-> +#define RPMI_A2P_SLOT0 (RPMI_SHMEM_BASE + 2 * RPMI_SLOT_SIZE)
-> +
-> +#define RPMI_SRVGRP_BASE 0x0001
-> +#define RPMI_SRVGRP_SYSTEM_MSI 0x0002
-> +#define RPMI_SRVGRP_SYSTEM_RESET 0x0003
-> +#define RPMI_SRVGRP_SYSTEM_SUSPEND 0x0004
-> +#define RPMI_SRVGRP_HSM 0x0005
-> +#define RPMI_SRVGRP_CPPC 0x0006
-> +#define RPMI_SRVGRP_CLOCK 0x0008
-> +#define RPMI_SRVGRP_MANAGEMENT_MODE 0x000b
-> +#define RPMI_SRVGRP_LOGGING 0x000e
-> +#define RPMI_BASE_SRV_GET_PLATFORM_INFO 0x05
-> +#define RPMI_BASE_SRV_PROBE_SERVICE_GROUP 0x06
-> +#define RPMI_SYSMSI_SRV_GET_ATTRIBUTES 0x02
-> +#define RPMI_SYSMSI_SRV_GET_MSI_ATTRIBUTES 0x03
-> +#define RPMI_SYSMSI_SRV_SET_MSI_STATE 0x04
-> +#define RPMI_SYSMSI_SRV_GET_MSI_STATE 0x05
-> +#define RPMI_SYSMSI_SRV_SET_MSI_TARGET 0x06
-> +#define RPMI_SYSMSI_SRV_GET_MSI_TARGET 0x07
-> +#define RPMI_SYSRST_SRV_GET_ATTRIBUTES 0x02
-> +#define RPMI_SYSRST_SRV_SYSTEM_RESET 0x03
-> +#define RPMI_HSM_SRV_GET_HART_STATUS 0x02
-> +#define RPMI_HSM_SRV_GET_HART_LIST 0x03
-> +#define RPMI_HSM_SRV_GET_SUSPEND_TYPES 0x04
-> +#define RPMI_HSM_SRV_GET_SUSPEND_INFO 0x05
-> +#define RPMI_HSM_SRV_HART_START 0x06
-> +#define RPMI_HSM_SRV_HART_STOP 0x07
-> +#define RPMI_HSM_SRV_HART_SUSPEND 0x08
-> +#define RPMI_SYSSUSP_SRV_GET_ATTRIBUTES 0x02
-> +#define RPMI_SYSSUSP_SRV_SYSTEM_SUSPEND 0x03
-> +#define RPMI_CPPC_SRV_PROBE_REG 0x02
->
-Please add only the required definitions. Not the future ones.
+> +    qemu_plugin_vcpu_interrupt_cb(cs, ret);
+>   }
+Expanding a bit ...
 
-> +#define RPMI_CPPC_SRV_READ_REG 0x03
-> +#define RPMI_CPPC_SRV_WRITE_REG 0x04
-> +#define RPMI_CPPC_SRV_GET_FAST_CHANNEL_REGION 0x05
-> +#define RPMI_CPPC_SRV_GET_FAST_CHANNEL_OFFSET 0x06
-> +#define RPMI_CPPC_SRV_GET_HART_LIST 0x07
-> +#define RPMI_CPPC_NOMINAL_PERF 0x01
-> +#define RPMI_CPPC_DESIRED_PERF 0x05
-> +#define RPMI_CPPC_COUNTER_WRAPAROUND_TIME 0x0a
-> +#define RPMI_CPPC_REFERENCE_PERF_COUNTER 0x0b
-> +#define RPMI_CPPC_DELIVERED_PERF_COUNTER 0x0c
-> +#define RPMI_CPPC_REG_LEN_64 64
-> +#define RPMI_CLK_SRV_GET_NUM_CLOCKS 0x02
-> +#define RPMI_CLK_SRV_GET_ATTRIBUTES 0x03
-> +#define RPMI_CLK_SRV_GET_SUPPORTED_RATES 0x04
-> +#define RPMI_CLK_SRV_SET_CONFIG 0x05
-> +#define RPMI_CLK_SRV_GET_CONFIG 0x06
-> +#define RPMI_CLK_SRV_SET_RATE 0x07
-> +#define RPMI_CLK_SRV_GET_RATE 0x08
-> +#define RPMI_MM_SRV_GET_ATTRIBUTES 0x02
-> +#define RPMI_MM_SRV_COMMUNICATE 0x03
-> +#define RPMI_LOGGING_SRV_SET_CONFIG 0x02
-> +#define RPMI_MSG_NORMAL_REQUEST 0x00
-> +#define RPMI_MSG_POSTED_REQUEST 0x01
-> +#define RPMI_MSG_ACKNOWLEDGEMENT 0x02
-> +#define RPMI_SYSRST_TYPE_SHUTDOWN 0x00
-> +#define RPMI_SYSRST_TYPE_COLD_REBOOT 0x01
-> +#define RPMI_SYSRST_TYPE_INVALID 0x03
-> +#define RPMI_SYSRST_ATTRS_FLAGS_RESETTYPE 1
-> +#define RPMI_SYS_MSI_SHUTDOWN_INDEX 0
-> +#define RPMI_SYS_MSI_REBOOT_INDEX 1
-> +#define RPMI_SYS_MSI_SUSPEND_INDEX 2
-> +#define RPMI_SYS_NUM_MSI 4
-> +#define RPMI_SYSMSI_MSI_STATE_ENABLE 1
-> +#define RPMI_SYSMSI_MSI_STATE_PENDING 2
-> +#define RPMI_TOKEN 0x55aa
-> +#define RPMI_ERR_NOTSUPP 0xfffffffeU
-> +#define RPMI_ERR_INVALID_PARAM 0xfffffffdU
-> +#define RPMI_ERR_INVALID_ADDR 0xfffffffbU
-> +#define RPMI_ERR_DENIED 0xfffffffcU
-> +#define RPMI_HSM_HART_STATE_STARTED 0x00
-> +#define RPMI_HSM_HART_STATE_STOPPED 0x01
-> +#define RPMI_HSM_HART_STATE_SUSPENDED 0x04
-> +#define VIRT_RPMI_CPPC_NOMINAL_PERF 30
-> +#define VIRT_RPMI_CLOCK_COUNT 6
-> +#define VIRT_RPMI_MM_VERSION 0x10000
-> +#define VIRT_RPMI_SHMEM_SIZE 0x20000
-> +#define RPMI_MM_INPUT_OFFSET 0x3000
-> +#define RPMI_MM_OUTPUT_OFFSET 0x3800
-> +#define RPMI_MM_BUFFER_SIZE 0x400
-> +#define RPMI_MM_INPUT_BASE (RPMI_SHMEM_BASE + RPMI_MM_INPUT_OFFSET)
-> +#define RPMI_MM_OUTPUT_BASE (RPMI_SHMEM_BASE + RPMI_MM_OUTPUT_OFFSET)
-> +#define MM_EFI_COMM_HEADER_SIZE 24
-> +#define EFI_VAR_COMM_HEADER_SIZE 16
-> +#define EFI_VAR_ACCESS_NAME_OFFSET 36
-> +#define EFI_VAR_NEXT_NAME_OFFSET 24
-> +#define EFI_VAR_FN_GET_VARIABLE 1
-> +#define EFI_VAR_FN_GET_NEXT_VARIABLE_NAME 2
-> +#define EFI_VAR_FN_SET_VARIABLE 3
-> +#define EFI_SUCCESS 0ULL
-> +#define EFI_INVALID_PARAMETER 0x8000000000000002ULL
-> +#define EFI_BUFFER_TOO_SMALL 0x8000000000000005ULL
-> +#define EFI_NOT_FOUND 0x800000000000000eULL
-> +#define EFI_VARIABLE_NON_VOLATILE 0x00000001
-> +#define EFI_VARIABLE_BOOTSERVICE_ACCESS 0x00000002
-> +#define EFI_VARIABLE_RUNTIME_ACCESS 0x00000004
-> +
-> +#define RPMI_P2A_ACK_BASE (RPMI_SHMEM_BASE + 16 * RPMI_SLOT_SIZE)
-> +#define RPMI_P2A_ACK_HEAD RPMI_P2A_ACK_BASE
-> +#define RPMI_P2A_ACK_TAIL (RPMI_P2A_ACK_BASE + RPMI_SLOT_SIZE)
-> +#define RPMI_P2A_ACK_SLOT0 (RPMI_P2A_ACK_BASE + 2 * RPMI_SLOT_SIZE)
-> +
-> +static uint64_t rpmi_response_base;
-> +
-> +static uint64_t rpmi_queue_slot(uint64_t queue_base, uint32_t index)
-> +{
-> +    return queue_base + (index + 2) * RPMI_SLOT_SIZE;
-> +}
-> +
-> +static void rpmi_send_request(QTestState *qts, uint16_t service_group,
-> +                              uint8_t service_id, uint8_t request_type,
-> +                              const uint32_t *data, size_t data_words)
-> +{
-> +    uint32_t tail =3D qtest_readl(qts, RPMI_A2P_TAIL);
-> +    uint64_t slot =3D rpmi_queue_slot(RPMI_SHMEM_BASE, tail);
-> +    size_t i;
-> +
-> +    qtest_writew(qts, slot, service_group);
-> +    qtest_writeb(qts, slot + 2, service_id);
-> +    qtest_writeb(qts, slot + 3, request_type);
-> +    qtest_writew(qts, slot + 4, data_words * sizeof(*data));
-> +    qtest_writew(qts, slot + 6, RPMI_TOKEN);
-> +
-> +    for (i =3D 0; i < data_words; i++) {
-> +        qtest_writel(qts, slot + 8 + i * sizeof(*data), data[i]);
-> +    }
-> +
-> +    g_test_message(
-> +        "RPMI_A2P_REQ shmem=3D0x%016" PRIx64 " doorbell=3D0x%016" PRIx64
-> +        " group=3D0x%04x service=3D0x%02x type=3D0x%02x data_len=3D%zu"
-> +        " token=3D0x%04x a2p_tail=3D%u slot=3D0x%016" PRIx64,
-> +        (uint64_t)RPMI_SHMEM_BASE, (uint64_t)RPMI_DOORBELL_BASE,
-> +        service_group, service_id, request_type, data_words * sizeof(*da=
-ta),
-> +        RPMI_TOKEN, tail, slot);
-> +
-> +    qtest_writel(qts, RPMI_A2P_TAIL, (tail + 1) % 16);
-> +    qtest_writel(qts, RPMI_DOORBELL_BASE, 1);
-> +}
-> +
-> +static uint32_t rpmi_response_word(QTestState *qts, unsigned int word)
-> +{
-> +    return qtest_readl(qts, rpmi_response_base + 8 + word * sizeof(uint3=
-2_t));
-> +}
-> +
-> +static void rpmi_expect_ack(QTestState *qts, uint16_t service_group,
-> +                            uint8_t service_id, uint16_t data_len)
-> +{
-> +    uint32_t head =3D qtest_readl(qts, RPMI_P2A_ACK_HEAD);
-> +    uint32_t tail =3D qtest_readl(qts, RPMI_P2A_ACK_TAIL);
-> +
-> +    g_assert_cmphex(tail, !=3D, head);
-> +    rpmi_response_base =3D rpmi_queue_slot(RPMI_P2A_ACK_BASE, head);
-> +    g_assert_cmphex(qtest_readw(qts, rpmi_response_base), =3D=3D, servic=
-e_group);
-> +    g_assert_cmphex(qtest_readb(qts, rpmi_response_base + 2), =3D=3D,
-> +                    service_id);
-> +    g_assert_cmphex(qtest_readb(qts, rpmi_response_base + 3), =3D=3D,
-> +                    RPMI_MSG_ACKNOWLEDGEMENT);
-> +    g_assert_cmphex(qtest_readw(qts, rpmi_response_base + 4), =3D=3D, da=
-ta_len);
-> +    g_assert_cmphex(qtest_readw(qts, rpmi_response_base + 6), =3D=3D,
-> +                    RPMI_TOKEN);
-> +    g_test_message(
-> +        "RPMI_P2A_ACK shmem=3D0x%016" PRIx64
-> +        " group=3D0x%04x service=3D0x%02x type=3D0x%02x data_len=3D%u"
-> +        " token=3D0x%04x p2a_head=3D%u slot=3D0x%016" PRIx64
-> +        " status=3D0x%08x",
-> +        (uint64_t)RPMI_SHMEM_BASE, service_group, service_id,
-> +        RPMI_MSG_ACKNOWLEDGEMENT, data_len, RPMI_TOKEN, head,
-> +        rpmi_response_base,
-> +        data_len >=3D sizeof(uint32_t) ? rpmi_response_word(qts, 0) : 0)=
-;
-> +    qtest_writel(qts, RPMI_P2A_ACK_HEAD, (head + 1) % 16);
-> +}
-> +
-> +static void rpmi_send_sysreset(QTestState *qts, uint32_t reset_type,
-> +                               uint8_t request_type)
-> +{
-> +    rpmi_send_request(qts, RPMI_SRVGRP_SYSTEM_RESET,
-> +                      RPMI_SYSRST_SRV_SYSTEM_RESET, request_type,
-> +                      &reset_type, 1);
-> +}
-> +
-> +static void rpmi_expect_qemu_failure(const char *extra_args,
-> +                                     const char *stderr_needle)
-> +{
-> +    g_autoptr(GError) error =3D NULL;
-> +    g_auto(GStrv) split_args =3D NULL;
-> +    g_autoptr(GPtrArray) argv =3D g_ptr_array_new();
-> +    g_autofree char *stderr_data =3D NULL;
-> +    gint wait_status;
-> +    gboolean spawned;
-> +
-> +    g_assert_true(g_shell_parse_argv(extra_args, NULL, &split_args, &err=
-or));
-> +    g_assert_no_error(error);
-> +
-> +    g_ptr_array_add(argv, (gpointer)qtest_qemu_binary(NULL));
-> +    for (char **arg =3D split_args; *arg; arg++) {
-> +        g_ptr_array_add(argv, *arg);
-> +    }
-> +    g_ptr_array_add(argv, NULL);
-> +
-> +    spawned =3D g_spawn_sync(NULL, (char **)argv->pdata, NULL,
-> +                           G_SPAWN_STDOUT_TO_DEV_NULL,
-> +                           NULL, NULL, NULL, &stderr_data,
-> +                           &wait_status, &error);
-> +    g_assert_true(spawned);
-> +    g_assert_no_error(error);
-> +    g_assert_false(g_spawn_check_exit_status(wait_status, NULL));
-> +    g_assert_nonnull(stderr_data);
-> +    g_assert_nonnull(strstr(stderr_data, stderr_needle));
-> +}
-> +
-> +static void test_rpmi_machine_realize_off(void)
-> +{
-> +    QTestState *qts;
-> +
-> +    qts =3D qtest_init("-machine virt,rpmi=3Doff");
-> +    qtest_quit(qts);
-> +}
-> +
-> +static void test_rpmi_machine_rejects_too_many_harts(void)
-> +{
-> +    rpmi_expect_qemu_failure(
-> +        "-machine virt,rpmi=3Don -smp 513 -display none -S",
-> +        "max CPUs supported by machine 'virt' is 512");
-> +}
-> +
-> +static void test_rpmi_base_platform_info(void)
-> +{
-> +    static const char expected[] =3D "QEMU RISC-V virt RPMI";
-> +    QTestState *qts;
-> +    size_t i;
-> +
-> +    qts =3D qtest_init("-machine virt,rpmi=3Don");
-> +    rpmi_send_request(qts, RPMI_SRVGRP_BASE,
-> +                      RPMI_BASE_SRV_GET_PLATFORM_INFO,
-> +                      RPMI_MSG_NORMAL_REQUEST, NULL, 0);
-> +
-> +    rpmi_expect_ack(qts, RPMI_SRVGRP_BASE,
-> +                    RPMI_BASE_SRV_GET_PLATFORM_INFO,
-> +                    2 * sizeof(uint32_t) + sizeof(expected));
-> +    g_assert_cmphex(rpmi_response_word(qts, 0), =3D=3D, 0);
-> +    g_assert_cmphex(rpmi_response_word(qts, 1), =3D=3D, sizeof(expected)=
-);
-> +    for (i =3D 0; i < sizeof(expected); i++) {
-> +        g_assert_cmphex(qtest_readb(qts, RPMI_P2A_ACK_SLOT0 + 16 + i), =
-=3D=3D,
-> +                        expected[i]);
-> +    }
-> +
-> +    qtest_quit(qts);
-> +}
-> +
-> +static void rpmi_probe_group(QTestState *qts, uint32_t service_group,
-> +                             bool present)
-> +{
-> +    rpmi_send_request(qts, RPMI_SRVGRP_BASE,
-> +                      RPMI_BASE_SRV_PROBE_SERVICE_GROUP,
-> +                      RPMI_MSG_NORMAL_REQUEST, &service_group, 1);
-> +
-> +    rpmi_expect_ack(qts, RPMI_SRVGRP_BASE,
-> +                    RPMI_BASE_SRV_PROBE_SERVICE_GROUP,
-> +                    2 * sizeof(uint32_t));
-> +    g_assert_cmphex(rpmi_response_word(qts, 0), =3D=3D, 0);
-> +    if (present) {
-> +        g_assert_cmphex(rpmi_response_word(qts, 1), !=3D, 0);
-> +    } else {
-> +        g_assert_cmphex(rpmi_response_word(qts, 1), =3D=3D, 0);
-> +    }
-> +}
-> +
-> +static void test_rpmi_base_probe_service_groups(void)
-> +{
-> +    QTestState *qts;
-> +
-> +    qts =3D qtest_init("-machine virt,rpmi=3Don,aia=3Daplic-imsic");
-> +    rpmi_probe_group(qts, RPMI_SRVGRP_BASE, true);
-> +    qtest_system_reset(qts);
-> +    rpmi_probe_group(qts, RPMI_SRVGRP_SYSTEM_RESET, true);
-> +    qtest_system_reset(qts);
-> +    rpmi_probe_group(qts, RPMI_SRVGRP_HSM, true);
-> +    qtest_system_reset(qts);
-> +    rpmi_probe_group(qts, RPMI_SRVGRP_SYSTEM_SUSPEND, true);
-> +    qtest_system_reset(qts);
->
-IMO, it is better to add these tests along with the commit which
-enabled the feature.
+  77 void avr_cpu_do_interrupt(CPUState *cs)
+  78 {
+  79     CPUAVRState *env = cpu_env(cs);
+  80
+  81     uint32_t ret = env->pc_w;
+  82     int vector = 0;
+  83     int size = avr_feature(env, AVR_FEATURE_JMP_CALL) ? 2 : 1;
+  84     int base = 0;
+  85
+  86     if (cs->exception_index == EXCP_RESET) {
+  87         vector = 0;
+  88     } else if (env->intsrc != 0) {
+  89         vector = ctz64(env->intsrc) + 1;
+  90     }
 
-> +    rpmi_probe_group(qts, RPMI_SRVGRP_CPPC, false);
-> +    qtest_system_reset(qts);
-> +    rpmi_probe_group(qts, RPMI_SRVGRP_SYSTEM_MSI, false);
-> +    qtest_system_reset(qts);
-> +    rpmi_probe_group(qts, RPMI_SRVGRP_CLOCK, false);
-> +    qtest_system_reset(qts);
-> +    rpmi_probe_group(qts, RPMI_SRVGRP_MANAGEMENT_MODE, false);
-> +    qtest_system_reset(qts);
-> +    rpmi_probe_group(qts, RPMI_SRVGRP_LOGGING, false);
-> +
->
-Please remove these unimplemented service groups from this commit.
+Unconditionally recording exception vector as interrupt seems wrong,
+shouldn't we call qemu_plugin_vcpu_exception_cb() in that case?
 
-Thanks,
-Sunil
+  91
+  92     if (avr_feature(env, AVR_FEATURE_3_BYTE_PC)) {
+  93         do_stb(env, env->sp--, ret, 0);
+  94         do_stb(env, env->sp--, ret >> 8, 0);
+  95         do_stb(env, env->sp--, ret >> 16, 0);
+  96     } else if (avr_feature(env, AVR_FEATURE_2_BYTE_PC)) {
+  97         do_stb(env, env->sp--, ret, 0);
+  98         do_stb(env, env->sp--, ret >> 8, 0);
+  99     } else {
+100         do_stb(env, env->sp--, ret, 0);
+101     }
+102
+103     env->pc_w = base + vector * size;
+104     env->sregI = 0; /* clear Global Interrupt Flag */
+105
+106     cs->exception_index = -1;
+107
+108     qemu_plugin_vcpu_interrupt_cb(cs, ret);
+109 }
 
