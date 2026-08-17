@@ -4,87 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA199C5DF7D
-	for <qemu-riscv@archiver.kernel.org>; Tue, 18 Aug 2026 12:47:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D2B6C5DF7E
+	for <qemu-riscv@archiver.kernel.org>; Tue, 18 Aug 2026 12:47:16 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wwJDb-0007xI-SH; Tue, 18 Aug 2026 08:47:04 -0400
+	id 1wwJDb-0007xJ-SH; Tue, 18 Aug 2026 08:47:04 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jjherne@linux.ibm.com>)
- id 1wwJ0v-0000o2-Jb; Tue, 18 Aug 2026 08:33:57 -0400
-Received: from mx0b-001b2d01.pphosted.com ([148.163.158.5])
+ id 1wwIyy-00080m-Gt; Tue, 18 Aug 2026 08:31:56 -0400
+Received: from mx0a-001b2d01.pphosted.com ([148.163.156.1])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jjherne@linux.ibm.com>)
- id 1wwJ0u-0006WZ-60; Tue, 18 Aug 2026 08:33:57 -0400
-Received: from pps.filterd (m0360072.ppops.net [127.0.0.1])
+ id 1wwIyw-00067X-Sx; Tue, 18 Aug 2026 08:31:56 -0400
+Received: from pps.filterd (m0353729.ppops.net [127.0.0.1])
  by mx0a-001b2d01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 67IAVemZ069954; Tue, 18 Aug 2026 12:31:36 GMT
+ 67IAVWms2355706; Tue, 18 Aug 2026 12:31:24 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
  :content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=pp1; bh=OVrVAH
- poCf/BmBSpErJpQ/RLzWgLb76r8JlqJTLkKus=; b=QkqSMCOG3VpgwNIYMnc00Y
- STZW6sRTh4bjLZD1yyzWsfpPpestmCZVeuwt/vNBiXHuG0H5zzJFooXoIL3Wp2M1
- hBNgHzI56cJmCj6syQ+JcwL5JZYPWQEfpkI4CSKRTjePP3AoUDkwTLlNYhwO11ks
- eKyYxBCuegurEiZhAVYwvjyDgXmE9gF5AKwmMF3KPGU9KGVaZrYbQ326TZLRRILZ
- 8eiLFvjWHh9QWAwF0DR3JBpCCDxC2esBFCblzcQhF5EbiiFE6T181MPyZs/wJLx4
- SOss8KhatLInh/QuxbFlSW9Cp+PSO+7ZFbPGHuNZwVAzz69sB1feu2VQhQuS79BQ
+ :message-id:mime-version:references:subject:to; s=pp1; bh=Xmv+01
+ hznGjZgAA1YW+EuV/P3ZvDSfWfrdCOOtSJBZ4=; b=rVkiRI0UssS4pX/POE+jK8
+ 75a8lE1wmYrHtad/g4RfPMSj185IknqxcVhJzxf8/e7UdpYLI9xdSCtiMh5hMLDv
+ nEtHq4rab62tklif7hvkK0yLOcEVqCngTcD4+MAy4NhHPW/39VqEopM6+XnxUsn/
+ ix+MvuIR1VobBAbg606U8tjXTQG6seghKPDOao7I2R5HMjHftQoSd0Wl7ugllG60
+ iPR8SkwI0TF/RnnYf5ip96M306kLjc+ZZCzfBTbBeFonyxK8pr11Ci21NtmZS4vT
+ pbb+0UxhSBXeSH3kH/ovYYDtW//fDIqpDlTFh5wme7HFcZNzJIIldRouAdiL8fEA
  ==
-Received: from ppma11.dal12v.mail.ibm.com
- (db.9e.1632.ip4.static.sl-reverse.com [50.22.158.219])
- by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4g2frt7m33-1
+Received: from ppma13.dal12v.mail.ibm.com
+ (dd.9e.1632.ip4.static.sl-reverse.com [50.22.158.221])
+ by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4g2fsqr3un-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 18 Aug 2026 12:31:35 +0000 (GMT)
-Received: from pps.filterd (ppma11.dal12v.mail.ibm.com [127.0.0.1])
- by ppma11.dal12v.mail.ibm.com (8.18.1.7/8.18.1.7) with ESMTP id 67ICQJ19022995;
- Tue, 18 Aug 2026 12:31:34 GMT
-Received: from smtprelay03.wdc07v.mail.ibm.com ([172.16.1.70])
- by ppma11.dal12v.mail.ibm.com (PPS) with ESMTPS id 4g354yaww7-1
+ Tue, 18 Aug 2026 12:31:24 +0000 (GMT)
+Received: from pps.filterd (ppma13.dal12v.mail.ibm.com [127.0.0.1])
+ by ppma13.dal12v.mail.ibm.com (8.18.1.7/8.18.1.7) with ESMTP id 67ICQKbY020416;
+ Tue, 18 Aug 2026 12:31:22 GMT
+Received: from smtprelay05.wdc07v.mail.ibm.com ([172.16.1.72])
+ by ppma13.dal12v.mail.ibm.com (PPS) with ESMTPS id 4g34ngay0k-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 18 Aug 2026 12:31:34 +0000 (GMT)
+ Tue, 18 Aug 2026 12:31:22 +0000 (GMT)
 Received: from smtpav02.wdc07v.mail.ibm.com (smtpav02.wdc07v.mail.ibm.com
  [10.39.53.229])
- by smtprelay03.wdc07v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
- 67ICUrpU20906588
+ by smtprelay05.wdc07v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
+ 67ICVLhB18678424
  (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 18 Aug 2026 12:30:53 GMT
+ Tue, 18 Aug 2026 12:31:21 GMT
 Received: from smtpav02.wdc07v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 6D5385805D;
- Tue, 18 Aug 2026 12:31:32 +0000 (GMT)
+ by IMSVA (Postfix) with ESMTP id 4FA1658059;
+ Tue, 18 Aug 2026 12:31:21 +0000 (GMT)
 Received: from smtpav02.wdc07v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id F19455805C;
- Tue, 18 Aug 2026 12:31:27 +0000 (GMT)
+ by IMSVA (Postfix) with ESMTP id 4AECB58058;
+ Tue, 18 Aug 2026 12:31:16 +0000 (GMT)
 Received: from [9.61.88.99] (unknown [9.61.88.99])
  by smtpav02.wdc07v.mail.ibm.com (Postfix) with ESMTP;
- Tue, 18 Aug 2026 12:31:27 +0000 (GMT)
-Message-ID: <3c4cc077-ffe4-44af-9bcb-1c0c0a7a0531@linux.ibm.com>
-Date: Mon, 17 Aug 2026 14:11:14 -0400
+ Tue, 18 Aug 2026 12:31:16 +0000 (GMT)
+Message-ID: <c03ecde4-100c-412e-91a7-e0b8eb7f6887@linux.ibm.com>
+Date: Mon, 17 Aug 2026 14:08:11 -0400
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 41/49] Guard HMP command implementations with CONFIG_HMP
-To: =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
- qemu-devel@nongnu.org
-Cc: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@mailo.com>,
- =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>,
- Markus Armbruster <armbru@redhat.com>,
+Subject: Re: [PATCH v3 31/49] monitor: change HMPCommand cmd to take MonitorHMP
+To: "Dr. David Alan Gilbert" <dave@treblig.org>,
+ =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
+Cc: qemu-devel@nongnu.org, =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?=
+ <philmd@mailo.com>, =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?=
+ <berrange@redhat.com>, Markus Armbruster <armbru@redhat.com>,
+ Gerd Hoffmann <kraxel@redhat.com>, "Gonglei (Arei)"
+ <arei.gonglei@huawei.com>,
+ zhenwei pi <zhenwei.pi@linux.dev>, Kevin Wolf <kwolf@redhat.com>,
+ Hanna Reitz <hreitz@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
+ Ani Sinha <anisinha@redhat.com>, David Woodhouse <dwmw2@infradead.org>,
+ Paul Durrant <paul@xen.org>, "Michael S. Tsirkin" <mst@redhat.com>,
  Richard Henderson <richard.henderson@linaro.org>,
- Paolo Bonzini <pbonzini@redhat.com>,
- David Woodhouse <dwmw2@infradead.org>, Paul Durrant <paul@xen.org>,
- "Michael S. Tsirkin" <mst@redhat.com>,
  Marcelo Tosatti <mtosatti@redhat.com>,
  Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Jiri Pirko <jiri@resnulli.us>, Jason Wang <jasowangio@gmail.com>,
  Halil Pasic <pasic@linux.ibm.com>,
  Christian Borntraeger <borntraeger@linux.ibm.com>,
- Eric Farman <farman@linux.ibm.com>,
- Matthew Rosato <mjrosato@linux.ibm.com>,
  Ilya Leoshkevich <iii@linux.ibm.com>, David Hildenbrand <david@kernel.org>,
- Cornelia Huck <cohuck@redhat.com>, Gerd Hoffmann <kraxel@redhat.com>,
+ Eric Farman <farman@linux.ibm.com>,
+ Matthew Rosato <mjrosato@linux.ibm.com>, Cornelia Huck <cohuck@redhat.com>,
+ Samuel Thibault <samuel.thibault@ens-lyon.org>,
  Hyman Huang <infra.ai.cloud@bitdeer.com>, Peter Xu <peterx@redhat.com>,
- Fabiano Rosas <farosas@suse.de>, "Dr. David Alan Gilbert"
- <dave@treblig.org>, Samuel Thibault <samuel.thibault@ens-lyon.org>,
- Jason Wang <jasowangio@gmail.com>, =?UTF-8?Q?Alex_Benn=C3=A9e?=
- <alex.bennee@linaro.org>,
+ Fabiano Rosas <farosas@suse.de>, =?UTF-8?Q?Alex_Benn=C3=A9e?=
+ <alex.bennee@linaro.org>, Stefan Berger <stefanb@linux.vnet.ibm.com>,
  Zhao Liu <zhao1.liu@intel.com>, Laurent Vivier <laurent@vivier.eu>,
  Nicholas Piggin <npiggin@gmail.com>,
  Chinmay Rath <rathc@linux.ibm.com>, Glenn Miles <milesg@linux.ibm.com>,
@@ -96,55 +98,58 @@ Cc: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@mailo.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Chao Liu <chao.liu@processmission.com>,
  Yoshinori Sato <yoshinori.sato@nifty.com>,
- Artyom Tarasenko <atar4qemu@gmail.com>,
- Max Filippov <jcmvbkbc@gmail.com>, kvm@vger.kernel.org,
- qemu-ppc@nongnu.org, qemu-s390x@nongnu.org, qemu-riscv@nongnu.org
+ Artyom Tarasenko <atar4qemu@gmail.com>, Max Filippov <jcmvbkbc@gmail.com>,
+ Stefan Hajnoczi <stefanha@redhat.com>, qemu-block@nongnu.org,
+ kvm@vger.kernel.org, qemu-ppc@nongnu.org, qemu-s390x@nongnu.org,
+ qemu-riscv@nongnu.org
 References: <20260816-qemu-no-hmp-v3-0-e53fc35bc550@redhat.com>
- <20260816-qemu-no-hmp-v3-41-e53fc35bc550@redhat.com>
+ <20260816-qemu-no-hmp-v3-31-e53fc35bc550@redhat.com>
+ <aoIw5i_T9xYZ32SV@gallifrey>
 Content-Language: en-US
 From: "Jason J. Herne" <jjherne@linux.ibm.com>
-In-Reply-To: <20260816-qemu-no-hmp-v3-41-e53fc35bc550@redhat.com>
+In-Reply-To: <aoIw5i_T9xYZ32SV@gallifrey>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-TM-AS-GCONF: 00
 X-Proofpoint-Reinject: loops=2 maxloops=12
-X-Authority-Analysis: v=2.4 cv=OfaoyBTY c=1 sm=1 tr=0 ts=6a8450a7 cx=c_pps
- a=aDMHemPKRhS1OARIsFnwRA==:117 a=aDMHemPKRhS1OARIsFnwRA==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODE4MDA5MiBTYWx0ZWRfX9kbmt3jT1THI
+ 1DTSxZz7PhXQulHeaLRj6pQ5taTy6aCctG7VUKiIvoC5sn8dWUveahtjlDHu8syAo5vZSmHIQRR
+ musqzEkKKA555RcPNESgvuzeLUMUwLpyfLCzWz9wJnnnSD9YCeSgXZSwC3AYr3jBMx4WiPKyfwn
+ sDVXwFwgDzri9YTYnaunez4Ft8QyIP1hZ/9O3OuCRHZBaz02hkMbPlTzNTsjs3H6+rdQ+hkp5Gw
+ FVEjqUVdITctVKIUswGWGiGDe32ZFT/bJ1yEMyxsHg5YD7pHfnoZxj6WF29WVryH5m3Txl92Z/k
+ MJDuLJDbYAvtwm2o0aVLNJSkVYPK4+UPQP49RxQjpaE7ssD5vrp7L5016oH34ZSyG0EkIQEXJWR
+ 0dbwBC3vbJ7qxglCS9RbUqQPjPPUB30z6CsHWSRGQViWLVpmzx8TXM+tdfV9tEEezXqfoTtM9KP
+ eUnX9imDoAwnIGqA3jg==
+X-Proofpoint-ORIG-GUID: wbG5QAZcn_8JPq7N2sJJMyuRn4dbOM1K
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODE4MDA5MiBTYWx0ZWRfX6yd4Ng0ah684
+ hqLLmDUefkN8j+1w/9O6OCVbU7QA3u9faIKbcpo3+Qmje54ej8TJpIXUnKfMQMlx96+3vc0VPu/
+ PrvKyJthYmuPmK07wdItco007ZnkeSU=
+X-Authority-Analysis: v=2.4 cv=DJe/JSNb c=1 sm=1 tr=0 ts=6a84509c cx=c_pps
+ a=AfN7/Ok6k8XGzOShvHwTGQ==:117 a=AfN7/Ok6k8XGzOShvHwTGQ==:17
  a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=RnoormkPH1_aCDwRdu11:22 a=RzCfie-kr_QcCd8fBx8p:22 a=20KFwNOVAAAA:8
- a=VnNF1IyMAAAA:8 a=6vjvu8HhQ4Mt8ipGFg0A:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODE4MDA5MiBTYWx0ZWRfX+VhBvebHoSgA
- bdcBt0hUMx2u3qzgtd1xVcohZkWYklfgUPDdgR7rZy7Ov9aplI0vfbF/yFds6jFpAV5jaXsD9r5
- vLFuPnnMgBhpt73IxxiWYe1P/1VypCk=
-X-Proofpoint-GUID: yTn3FZ6qFt7CciM6GCDlfTK-glHalj1s
-X-Proofpoint-ORIG-GUID: _zrDuqqnAULRzyly31YofOxyJFNp9p2i
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODE4MDA5MiBTYWx0ZWRfX//3f8rgbsedR
- eR4KjqWFae+GjlIG+s/6t5LB7iABK/UnLTK9tR9eEXE20dEZQTTjuB0Z+99eZR30uLMI+h8XSmQ
- kvaJxl3Pifo7SK5JWjLTmwpnpdQtRFayZLVlXrrOPAuE1HgZxS1/8QtCBqN6WZ54IsMo7SGyqUq
- 1Zt7+tdQ1ntHUm5PQsrP8ZjubIw2Y2vcQKDt3mGYU2Wkt5tDSbKJE2pvJLaqdcA52ZU5tQcSmpS
- Ykin8+uHFX4eIpOPiR4zlPtJ/fg4obtxU8wcEEdMPbUCW6KiBCfTcD8GYsFSkCG7Tk/K7SAU1po
- BxHkDT8u/UqmxAcZNucYkRlf0h71UANwH1sLFnJZjl2apo6S1F/o2GDOzIgzkc3L2nWPfirPpFS
- d2nPgqO7zuGoPx4XS6RU5ZCwSCA7/f2J5JrCGAySZeh3Dd7wAw6RIFCM2G1DN5H6xE/iqWBkIMf
- nrXzrOttlJ1NKrR2tnQ==
+ a=RnoormkPH1_aCDwRdu11:22 a=uAbxVGIbfxUO_5tXvNgY:22 a=20KFwNOVAAAA:8
+ a=3WJfbomfAAAA:8 a=VnNF1IyMAAAA:8 a=6ru9w_5K15hS-t3OnE4A:9 a=3ZKOabzyN94A:10
+ a=QEXdDO2ut3YA:10 a=1cNuO-ABBywtgFSQhe9S:22 a=JSVlQr4fib6YhFFKv7Hz:22
+X-Proofpoint-GUID: Qnuhu8KQPs9FZttUWEPShqesQoGH2wRC
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-18_01,2026-08-12_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 adultscore=0 clxscore=1015 lowpriorityscore=0 impostorscore=0
- malwarescore=0 bulkscore=0 phishscore=0 priorityscore=1501 spamscore=0
+ priorityscore=1501 impostorscore=0 spamscore=0 clxscore=1011 bulkscore=0
+ suspectscore=0 malwarescore=0 phishscore=0 adultscore=0 lowpriorityscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608180092
-Received-SPF: pass client-ip=148.163.158.5; envelope-from=jjherne@linux.ibm.com;
- helo=mx0b-001b2d01.pphosted.com
+Received-SPF: pass client-ip=148.163.156.1; envelope-from=jjherne@linux.ibm.com;
+ helo=mx0a-001b2d01.pphosted.com
 X-Spam_score_int: -15
 X-Spam_score: -1.6
 X-Spam_bar: -
 X-Spam_report: (-1.6 / 5.0 requ) BAYES_00=-1.9, DATE_IN_PAST_12_24=1.049,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_LOW=-0.7,
- RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
+ RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Tue, 18 Aug 2026 08:46:55 -0400
+X-Mailman-Approved-At: Tue, 18 Aug 2026 08:46:54 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -159,23 +164,24 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-
-
-On 8/16/26 3:13 PM, Marc-André Lureau wrote:
-> Add #ifdef CONFIG_HMP around all hmp_* function implementations and
-> their HMP-only helpers across subsystems.
+On 8/16/26 5:51 PM, Dr. David Alan Gilbert wrote:
+> * Marc-André Lureau (marcandre.lureau@redhat.com) wrote:
+>> HMP commands are specific to the HMP monitor, so make the cmd function
+>> pointer in HMPCommand take MonitorHMP * instead of Monitor *. This
+>> strengthens type safety and makes the HMP-specific nature of these
+>> handlers explicit.
+>>
+>> Handler functions are renamed to take MonitorHMP *hmp, with a local
+>> Monitor *mon = MONITOR(hmp) added where the body needs the base type.
+>> Following patches will drop it, since most functions are HMP specific.
+>>
+>> Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 > 
-> This covers monitor_register_hmp* callers, hmp_info_* handlers, and
-> HMP-only helper functions like slirp_lookup.
+> Reviewed-by: Dr. David Alan Gilbert <dave@treblig.org>
 > 
-> To link succesfully, use empty cmds tables in hmp-cmds.c (to be removed
-> once meson build-sys is updated with !hmp support later in the series)
-> 
-> Reviewed-by: Daniel P. Berrangé <berrange@redhat.com>
-> Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
-> ---
-> ...
->   hw/s390x/s390-skeys.c     | 2 ++
->   hw/s390x/s390-stattrib.c  | 4 ++++
+>> ---
+>> ...
+>>   hw/s390x/s390-skeys.c           |   5 +-
+>>   hw/s390x/s390-stattrib.c        |   6 +-
 Reviewed-by: Jason J. Herne <jjherne@linux.ibm.com>
 
