@@ -4,55 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFD91C5DF66
-	for <qemu-riscv@archiver.kernel.org>; Mon, 17 Aug 2026 15:51:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F457C5DF7A
+	for <qemu-riscv@archiver.kernel.org>; Mon, 17 Aug 2026 16:01:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wvzcH-0003Sv-6V; Mon, 17 Aug 2026 11:51:13 -0400
+	id 1wvzlz-0007Ma-39; Mon, 17 Aug 2026 12:01:15 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <pbonzini@redhat.com>)
- id 1wvzbw-0003Hd-JH
- for qemu-riscv@nongnu.org; Mon, 17 Aug 2026 11:50:55 -0400
+ id 1wvzl2-00074b-2d
+ for qemu-riscv@nongnu.org; Mon, 17 Aug 2026 12:00:23 -0400
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <pbonzini@redhat.com>)
- id 1wvzbu-0004IS-J4
- for qemu-riscv@nongnu.org; Mon, 17 Aug 2026 11:50:52 -0400
+ id 1wvzl0-00065H-IM
+ for qemu-riscv@nongnu.org; Mon, 17 Aug 2026 12:00:15 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1786981850;
+ s=mimecast20190719; t=1786982413;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=YUi+vsJATf+A7/V8EXxhSwEGQmC9FYlzdP9bHNlEwDo=;
- b=Ur2mNpEyuXyzi0aJEElf0+mK2x3O/82p5/cnyGZewCYpir+xSDNrJPGz6MIgWwPgLD3FWa
- cvIT2NN6Lk+qhtm20qeVEqIohI49L4FpKCO0PmM0hGoL8iilWAITsbAs7joZ7L42NIBe0J
- Vqn9wmhINQ0AH0CznM9ku/d0Lh3OfP8=
-Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
+ bh=ZNBa70HCry/p3vwQzl6rX4JuyCu0T1pkLpYj9wtLirA=;
+ b=OMIvytzN+l5BxOhQxWwVbMMbGY8x9BTp5rPDhocS6yNI8ukDUdZoWUAvbKvVEh4mYj8ZmL
+ psWPoV6VPiBiyq+YUkCy1zGgAB/QrX8I4IyZ63IjAgpfifdvDsMpmfaBQ+ZKBrwyA9Jncv
+ BsPMhledcAywBgDpYfVRZEWWwQZAs6g=
+Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-290-3LN6POFvOoC1tes9Ch60Uw-1; Mon,
- 17 Aug 2026 11:50:39 -0400
-X-MC-Unique: 3LN6POFvOoC1tes9Ch60Uw-1
-X-Mimecast-MFC-AGG-ID: 3LN6POFvOoC1tes9Ch60Uw_1786981837
-Received: from mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.17])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-278-OtzTCRPgMr2QHUMKyw4kuQ-1; Mon,
+ 17 Aug 2026 12:00:08 -0400
+X-MC-Unique: OtzTCRPgMr2QHUMKyw4kuQ-1
+X-Mimecast-MFC-AGG-ID: OtzTCRPgMr2QHUMKyw4kuQ_1786982406
+Received: from mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.93])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 60F8C1800867; Mon, 17 Aug 2026 15:50:36 +0000 (UTC)
+ by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 126F51800651; Mon, 17 Aug 2026 16:00:05 +0000 (UTC)
 Received: from [100.90.56.12] (headnet05.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.117])
- by mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 2513C1956042; Mon, 17 Aug 2026 15:50:31 +0000 (UTC)
-Message-ID: <0143f26e-eb64-4924-8e76-3b6ce66fe6db@redhat.com>
-Date: Mon, 17 Aug 2026 17:50:30 +0200
+ by mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id 692ED1800347; Mon, 17 Aug 2026 15:59:59 +0000 (UTC)
+Message-ID: <55cc8357-daeb-4315-9f3a-8be7a59c355b@redhat.com>
+Date: Mon, 17 Aug 2026 17:59:57 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 08/16] cpus: Slightly improve *run_on_cpu() docstrings
+Subject: Re: [PATCH 11/16] accel/kvm: Consistently return CPU halt state from
+ process_async_events
 To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
  qemu-devel@nongnu.org
 Cc: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
@@ -61,11 +62,12 @@ Cc: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
  <agraf@csgraf.de>, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
  kvm@vger.kernel.org, Richard Henderson <richard.henderson@linaro.org>,
  qemu-arm@nongnu.org, Magnus Kulke <magnuskulke@linux.microsoft.com>,
- Peter Maydell <peter.maydell@linaro.org>,
- =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@mailo.com>,
- Zhao Liu <zhao1.liu@intel.com>
+ Peter Maydell <peter.maydell@linaro.org>, Palmer Dabbelt
+ <palmer@dabbelt.com>, Alistair Francis <alistair.francis@wdc.com>,
+ Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Chao Liu <chao.liu@processmission.com>
 References: <20260813181640.6537-1-philmd@oss.qualcomm.com>
- <20260813181640.6537-9-philmd@oss.qualcomm.com>
+ <20260813181640.6537-12-philmd@oss.qualcomm.com>
 From: Paolo Bonzini <pbonzini@redhat.com>
 Autocrypt: addr=pbonzini@redhat.com; keydata=
  xsEhBFRCcBIBDqDGsz4K0zZun3jh+U6Z9wNGLKQ0kSFyjN38gMqU1SfP+TUNQepFHb/Gc0E2
@@ -102,9 +104,9 @@ Autocrypt: addr=pbonzini@redhat.com; keydata=
  JBrdmNZSQDz0iKmSrx8xkoXYfA3bgtFN8WJH2xgFL28XnqY4M6dLhJwV3z08tPSRqYFm4NMP
  dRsn0/7oymhneL8RthIvjDDQ5ktUjMe8LtHr70OZE/TT88qvEdhiIVUogHdo4qBrk41+gGQh
  b906Dudw5YhTJFU3nC6bbF2nrLlB4C/XSiH76ZvqzV0Z/cAMBo5NF/w=
-In-Reply-To: <20260813181640.6537-9-philmd@oss.qualcomm.com>
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.17
-X-Mimecast-MFC-PROC-ID: iknSC6wgNC0UUVIg9bA_LiQg4l5OY6CRAVA8BrlbPEY_1786981837
+In-Reply-To: <20260813181640.6537-12-philmd@oss.qualcomm.com>
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.93
+X-Mimecast-MFC-PROC-ID: 87eGHOYr_LFAFsNu53C7L0KbEO-NadJijTfEeAr1Ajo_1786982406
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8; format=flowed
@@ -134,79 +136,68 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 8/13/26 20:16, Philippe Mathieu-Daudé wrote:
-> Be a bit more precise mentioning BQL use and blocking calls.
+> When comparing the KVM implementations, RISCV and ARM differ
+> from S390x / PPC and LoongArch. The caller expects a non-zero
+> value to return pausing execution with the EXCP_HLT exception:
 > 
-> Signed-off-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
-> ---
->   include/hw/core/cpu.h | 36 ++++++++++++++++++++----------------
->   1 file changed, 20 insertions(+), 16 deletions(-)
-> 
-> diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
-> index 183ef9f4ef2..d610f87abd3 100644
-> --- a/include/hw/core/cpu.h
-> +++ b/include/hw/core/cpu.h
-> @@ -908,36 +908,40 @@ void do_run_on_cpu(CPUState *cpu, run_on_cpu_func func, run_on_cpu_data data,
->                      QemuMutex *mutex);
->   
->   /**
-> - * run_on_cpu:
-> + * run_on_cpu - Execute a function on a vCPU and wait for completion
->    * @cpu: The vCPU to run on.
->    * @func: The function to be executed.
->    * @data: Data to pass to the function.
->    *
-> - * Schedules the function @func for execution on the vCPU @cpu.
-> + * Schedules the function @func for execution on the vCPU @cpu and
-> + * block until it completes.
-> + *
-> + * Note: The caller must hold the BQL.
->    */
->   void run_on_cpu(CPUState *cpu, run_on_cpu_func func, run_on_cpu_data data);
->   
->   /**
-> - * async_run_on_cpu:
-> - * @cpu: The vCPU to run on.
-> - * @func: The function to be executed.
-> - * @data: Data to pass to the function.
-> - *
-> - * Schedules the function @func for execution on the vCPU @cpu asynchronously.
-> - */
-> -void async_run_on_cpu(CPUState *cpu, run_on_cpu_func func, run_on_cpu_data data);
-> -
-> -/**
-> - * async_safe_run_on_cpu:
-> + * async_run_on_cpu - Queue a function for execution on a vCPU
->    * @cpu: The vCPU to run on.
->    * @func: The function to be executed.
->    * @data: Data to pass to the function.
->    *
->    * Schedules the function @func for execution on the vCPU @cpu asynchronously,
-> - * while all other vCPUs are sleeping.
-> + * then return immediately without waiting.
->    *
-> - * Unlike run_on_cpu and async_run_on_cpu, the function is run outside the
-> - * BQL.
-> + * Note: The vCPU will hold the BQL when executing @func.
-> + */
-> +void async_run_on_cpu(CPUState *cpu, run_on_cpu_func func, run_on_cpu_data data);
-> +
-> +/**
-> + * async_safe_run_on_cpu - Queue a function to run with other vCPUs paused
-> + * @cpu: The vCPU to run on.
-> + * @func: The function to be executed.
-> + * @data: Data to pass to the function.
-> + *
-> + * Schedules the function @func for execution on the vCPU @cpu asynchronously.
-> + * Unlike async_run_on_cpu(), all other vCPUs are paused while @func executes,
-> + * ensuring @cpu has exclusive access to shared state.
+>    3427 int kvm_cpu_exec(CPUState *cpu)
+>    3428 {
+>    ...
+>    3434     if (kvm_arch_process_async_events(cpu)) {
+>    3435         return EXCP_HLT;
+>    3436     }
+>    3437
+>    3438     bql_unlock();
+>    3439     cpu_exec_start(cpu);
+>    3440
+>    3441     /* Inner vCPU loop */
+>    3442     do {
+>    ...
 
-Might as well mention that @func is run without the BQL taken and in 
-fact must not take it (see comment in process_queued_cpu_work()).
+Your patch is correct because, even if cpu_thread_is_idle() sees 
+cpu->halted == false, the flag could become true during 
+process_queued_cpu_work() because it releases the BQL.
+
+However, I think the better fix is to remove the return code, and check 
+cpu->halted in kvm_cpu_exec().
+
+Thanks,
 
 Paolo
 
->    */
->   void async_safe_run_on_cpu(CPUState *cpu, run_on_cpu_func func, run_on_cpu_data data);
+> Change ARM and RISC-V to return cs->halted for consistent behavior.
+> 
+> Signed-off-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
+> ---
+>   target/arm/kvm.c           | 2 +-
+>   target/riscv/kvm/kvm-cpu.c | 2 +-
+>   2 files changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/target/arm/kvm.c b/target/arm/kvm.c
+> index d40a6a98591..5caabfab63f 100644
+> --- a/target/arm/kvm.c
+> +++ b/target/arm/kvm.c
+> @@ -1575,7 +1575,7 @@ bool kvm_arch_stop_on_emulation_error(CPUState *cs)
 >   
+>   int kvm_arch_process_async_events(CPUState *cs)
+>   {
+> -    return 0;
+> +    return cs->halted;
+>   }
+>   
+>   /**
+> diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
+> index 97069bf597a..1a61cd5ef37 100644
+> --- a/target/riscv/kvm/kvm-cpu.c
+> +++ b/target/riscv/kvm/kvm-cpu.c
+> @@ -1568,7 +1568,7 @@ int kvm_arch_irqchip_create(KVMState *s)
+>   
+>   int kvm_arch_process_async_events(CPUState *cs)
+>   {
+> -    return 0;
+> +    return cs->halted;
+>   }
+>   
+>   void kvm_arch_pre_run(CPUState *cs, struct kvm_run *run)
 
 
