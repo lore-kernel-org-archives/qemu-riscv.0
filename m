@@ -4,103 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07AE3C5B572
-	for <qemu-riscv@archiver.kernel.org>; Mon, 17 Aug 2026 12:57:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92846C5B572
+	for <qemu-riscv@archiver.kernel.org>; Mon, 17 Aug 2026 12:59:16 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wvwtq-0001yy-9z; Mon, 17 Aug 2026 08:57:10 -0400
+	id 1wvwvm-0002lw-T6; Mon, 17 Aug 2026 08:59:10 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <wxchen0913@gmail.com>)
- id 1wvwto-0001yE-3p
- for qemu-riscv@nongnu.org; Mon, 17 Aug 2026 08:57:08 -0400
-Received: from mail-pf1-x433.google.com ([2607:f8b0:4864:20::433])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <wxchen0913@gmail.com>)
- id 1wvwtm-00066M-EA
- for qemu-riscv@nongnu.org; Mon, 17 Aug 2026 08:57:07 -0400
-Received: by mail-pf1-x433.google.com with SMTP id
- d2e1a72fcca58-848643382fcso3436286b3a.1
- for <qemu-riscv@nongnu.org>; Mon, 17 Aug 2026 05:57:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1786971424; x=1787576224; darn=nongnu.org;
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=VwhgCcZfQ10p7+mRK801X1VAVUGrzuWIcII2z0LM2Ho=;
- b=Gtc5aKogeb9Kcv7bTHZohNuR4L2w0CWFP22C6fZMuWcVEDzL9MvaZkEKQi3zAtV9Ms
- s5An5LTQGwr3Sa8cZjQiKYoQviMJlvAM1NuHY95jhxvQ0qsyQNZDt0UgKIdxLaCiakLc
- kVVy9lfKq7a4v/jX9A0tdn7ItLRt18qVY4v/80AKLHIxN1Mzlq1xl4ylj9Y0Msk2XD8l
- MDcnbuh/LQ9XqOLwtPa8l3dj2HJgxhDfEE/GUmFFUZnbFK/sslnvWlrZyB8q8I+sXnuR
- hEqFZvOvgcf3OZTv+EdF+baMXOMXHHGU4eMyISOGN855zUul/aeukfZje+gK5b/ScGUe
- UvVQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786971424; x=1787576224;
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=VwhgCcZfQ10p7+mRK801X1VAVUGrzuWIcII2z0LM2Ho=;
- b=sSQkyevnCJu2qVf7S0g38DjYb6NOrqbYgCgaFF88kxi4NBs/ZskS5k4mGyGtcSd+xQ
- gIniviKVyIzs4580i0JOajEvlcqWpK9WBmWVJQ3urp/dwjoEalzCgHIepOpVkhtq4edD
- By9s5vutORaux1YVEr+gY/mhgRJLXcwoXoYvpRQ0LsnekH1tqgF+n7V8QjSqfzbEmTwj
- xLW8fGslS6Hkb2XloC21OsLdr4Guo2E1oszO+p8yWlF+QxctkUmo0+tPZL1pwGvsBOA1
- PZFehMnd8wgcA/tI28mLyrnuCqyh20walTWwKMxfGWLoQFFFYI9ophcjmBVDPzVtPj0r
- n+ug==
-X-Forwarded-Encrypted: i=1;
- AHgh+Ro5G/6TPn1CSm7go29EBqF/CB6FeHdpgc9kevccM2FDc5zWgRs78kXsTTOFs3vFqyOnbMfGaEmbjQic@nongnu.org
-X-Gm-Message-State: AOJu0Yzh0xydEOB1RJNr8D7gQzglxfCEfzy4sAA6V2aUpCQP9ZK7TvlO
- SRLZZ/FHRr8KPEWBs8AtfRYagVTIA19S/AC2grgu4hbGJjIYOZwyMfRC
-X-Gm-Gg: AR+sD135s7sW1UVVEwUi0YPFkW5RJoIuSiFRisDxWkN+Q8QLAHzffpARf2l6JTI8ExH
- i5Z4uQ5FxzoyBpv2gNfsAvtc/w4EV1fMTkQpfPlvnw8GXsOs/ajN0NindOcynG5b4FLSyshR/CW
- 4xJt0hnloPWeixwEfBEkYvDfKlPBz3AxWIwcn8YJq7VNZoPoX5j3ukf2khGjoxrjoqpw6QF8n6O
- 2hFBsz2GY2I+gVvDjSsLimGmuaPX22rs2cnI8FJ5lGpEiXZy3EEyU2yQEtJEAzi6urTcET4ndzg
- WPT/OriON63WojSjZVIq9iRVbbB12zR5OhLjDkObtiGi95N6msw+42FAJSyzNhTRVL8BCGM3ln2
- y1WYtbSl+JCGqYHNDKY8aFbBhOtYD8JggDvKM9oLvaeklRT4pYmf3HTlHany8JxFBd9etSXBO2+
- Laie1eRtlw5uUJ1JGYQqx0ztuwg+S/Uu4lhuH/EBtrFve3PcwCf3BtqGIOOkzC0Uo=
-X-Received: by 2002:a05:6a00:ab8a:b0:851:804c:f4eb with SMTP id
- d2e1a72fcca58-851b87eae5dmr550593b3a.4.1786971424194; 
- Mon, 17 Aug 2026 05:57:04 -0700 (PDT)
-Received: from [192.168.0.111] ([14.19.46.155])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-851b6fc0158sm240039b3a.40.2026.08.17.05.56.59
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 17 Aug 2026 05:57:03 -0700 (PDT)
-Message-ID: <995765d3-4c5c-4988-ac2b-ad8c97187ad9@gmail.com>
-Date: Mon, 17 Aug 2026 20:56:57 +0800
+ (Exim 4.90_1) (envelope-from <liuxu@nucleisys.com>)
+ id 1wvsjx-0004dH-Fw; Mon, 17 Aug 2026 04:30:41 -0400
+Received: from smtpbguseast3.qq.com ([54.243.244.52])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <liuxu@nucleisys.com>)
+ id 1wvsjs-0004Cl-32; Mon, 17 Aug 2026 04:30:41 -0400
+X-QQ-mid: zesmtpsz4t1786955415tf300e903
+X-QQ-Originating-IP: I2ckG5cVQosX8OVWY2qWW921xCoRSUIQIxE6jfmyFaE=
+Received: from XL-L17C6SCQBD5V.corp.nucleisys. ( [58.19.1.122])
+ by bizesmtp.qq.com (ESMTP) with 
+ id ; Mon, 17 Aug 2026 16:30:08 +0800 (CST)
+X-QQ-SSF: 0000000000000000000000000000000
+X-QQ-GoodBg: 0
+X-BIZMAIL-ID: 8252797677432225739
+EX-QQ-RecipientCnt: 6
+From: Xu Liu <liuxu@nucleisys.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
+ Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Xu Liu <liuxu@nucleisys.com>
+Subject: [PATCH] target/riscv: Make Zcmt JVT loads endian-aware
+Date: Mon, 17 Aug 2026 16:30:05 +0800
+Message-ID: <02050B1BBB8815BE+20260817083005.2392-1-liuxu@nucleisys.com>
+X-Mailer: git-send-email 2.50.1.windows.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 1/3] hw/char: add K230 DW 8250-compatible UART
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
- qemu-devel@nongnu.org
-Cc: Paolo Bonzini <pbonzini@redhat.com>,
- =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
- Chao Liu <chao.liu.zevorn@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
- <liwei1518@gmail.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org,
- Fabiano Rosas <farosas@suse.de>, Laurent Vivier <lvivier@redhat.com>
-References: <20260808-feat-k230-uart-v3-v3-0-d73b31f0034b@gmail.com>
- <20260808-feat-k230-uart-v3-v3-1-d73b31f0034b@gmail.com>
- <0ccb0d65-b185-4700-af98-faa27a806aa4@oss.qualcomm.com>
-Content-Language: en-US
-From: WX Chen <wxchen0913@gmail.com>
-In-Reply-To: <0ccb0d65-b185-4700-af98-faa27a806aa4@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::433;
- envelope-from=wxchen0913@gmail.com; helo=mail-pf1-x433.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+X-QQ-SENDSIZE: 520
+Feedback-ID: zesmtpsz:nucleisys.com:qybglogicsvrgz:qybglogicsvrgz3a-1
+X-QQ-XMAILINFO: MBoHLcWngaPNSHYwq35vM7CYiPYCASAD3giYX4E6kwMTR9H7MNRzHSzD
+ qPT1KDmim3l0CMVvC8RHNf/1NGU/5iB9NsoKSTOfBdoYTUXq7QDAqdEnmx5WyN3K7ck1Xxl
+ eIzTC/032UjHj0m5oYnaoacNgapTjFdveySme5I5Oxq9v6E6J1NBS4uuz+uOJEQQSEp/vGI
+ rUwBrKq5dexu4FTMXBpVYNDqAS4WTZkOSuu2FNaMrzA59JmRPBorGDw/mdnWyNXbSWLY0oT
+ MF+4nQcqJseVs5ZGf7TMI9074v3rpPlTLDfYcirH2quBlR0j+K0Q3I0k6lM5cHoJyz6T9dU
+ JmrHMgzZhWROoQOhQ9OUdR+MR6z4KMqDjvQOYdprG5xMmTPn8qkeVodthXUugtYgDVUf2Ks
+ SXxnA+9Q06P2yIRYz4JnmszvKAvIy31HhG9CWId4HBb+7nRLexoFTR0UuOTSaf9U1s0lVw0
+ Q0ICEIVDLMd2UpLjwXrrlmBrrsRpk/ZDYBpzEmuJ5Nfph1jG6DdKuDpLf4eN1K4NVgyCCjW
+ 6QRtn7+SZEyEw+U4+L4B1FaTOsxcRnh9bnHdRyEYpRZ0UCvOutoKcrOluHxGfyjqeVKKg2V
+ ngbpcCydLu9JXpaCffD5RwpIphSLu6wIKuYP+BhJ7gzvFJCKXaOJeAggoJUMR5D84TPahI2
+ U39Tfk8HMVFGdsDrVGwm+SsFc+GJ10zgAyosF9YvwagLI/jbtvrXoe6/yhP0+EKxV7WTF9C
+ AvSc1CUqhJet5E4HJrOdPDdGa+3oo5w11okqZhwHBSulQQsR4YbqMiYtyWMsZCA81DeSxKJ
+ yKPiU2DUhM5Vcz/AWB6lFxW/asWg/rCyDWutzKi4dFiLe3Z4biTpc5pqgFrid/2BNNiv4dc
+ iwsh0LKvyocvIWqj/FJaczNhS82UV6lANTZOvlWg+GpJafxqVSaBwOO5kTnl9T9sd/5zpMO
+ RLJ4rfhO1k3LN+ndjAdcOFh5Cxhy7TW/3qOxmOyRtGny87i2MhZWHEE6hIN0eOmf7gFmFys
+ 00NXS+PfYehQNbEdPIT9zyDp/cEKY=
+X-QQ-XMRINFO: M/715EihBoGS47X28/vv4NpnfpeBLnr4Qg==
+X-QQ-RECHKSPAM: 0
+Received-SPF: pass client-ip=54.243.244.52; envelope-from=liuxu@nucleisys.com;
+ helo=smtpbguseast3.qq.com
+X-Spam_score_int: -28
+X-Spam_score: -2.9
+X-Spam_bar: --
+X-Spam_report: (-2.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
+ RCVD_IN_MSPIKE_H5=-1, RCVD_IN_MSPIKE_WL=-0.01, SPF_HELO_PASS=-0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Mon, 17 Aug 2026 08:59:06 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -115,53 +82,49 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+The Zcmt specification says JVT table entries follow the current data
+endianness. Support that behavior as described by the specification so
+big-endian guests can use JVT tables stored in big-endian form.
 
-On 8/15/26 21:57, Philippe Mathieu-Daudé wrote:
-> How much this diverges of the generic 8250 model we have?
->
-> In order to reduce maintenance burden with duplicated code, the
-> project preference is to use the inheritance pattern of oriented
-> bject programming, in particular with QOM APIs.
->
-> This model could inherit from our generic model with:
->
->   TypeInfo::parent = TYPE_SERIAL
->
-> then override its specific methods.
->
-> Could you have a look and justify the full rewrite? 
+Signed-off-by: Xu Liu <liuxu@nucleisys.com>
+---
+ target/riscv/tcg/zce_helper.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-Hi Phil,
-
-Thanks for the review.
-
-The rewrite was not meant as a replacement for the generic 8250. I
-was following the K230 TRM as closely as I could, and I did not
-realize the preferred approach was to reuse the in-tree 8250 via
-QOM rather than reimplement the 16550 core.
-
-I agree the duplication is not justified. I will respin this to
-inherit from / reuse the generic serial model as you suggested,
-and keep the DesignWare probe window that Linux 8250_dw needs
-(UCV/CPR/CTR/DLF/USR).
-
-One open question: the TRM (and CPR) advertise some DesignWare
-extras beyond a plain 16550 — for example a 32-byte FIFO, THRE
-mode, shadow registers, and USR busy-detect. The first version
-implemented several of these, which is why it grew into a full
-rewrite. For the respin, should I:
-
-   1) keep only the minimal probe window (CPR not advertising
-      features the generic model does not implement), or
-   2) plan follow-up work to model some of those DW extras?
-
-I am happy either way; I mainly want to know which level of
-fidelity is good.
-
-If the pending generic dw8250 lands first, I can also switch the
-K230 board over to that type instead of keeping a parallel model.
-
-Thanks,
-WX Chen
+diff --git a/target/riscv/tcg/zce_helper.c b/target/riscv/tcg/zce_helper.c
+index 15bf0a99c8a..c6ba4c1a476 100644
+--- a/target/riscv/tcg/zce_helper.c
++++ b/target/riscv/tcg/zce_helper.c
+@@ -18,12 +18,14 @@
+ 
+ #include "qemu/osdep.h"
+ #include "cpu.h"
++#include "internals.h"
+ #include "exec/helper-proto.h"
+ #include "accel/tcg/cpu-ldst.h"
+ 
+ target_ulong HELPER(cm_jalt)(CPURISCVState *env, uint32_t index)
+ {
+     unsigned mmu_index = cpu_mmu_index(env_cpu(env), true);
++    MemOp endian = mo_endian_env(env);
+     MemOpIdx oi;
+ 
+ #if !defined(CONFIG_USER_ONLY)
+@@ -45,11 +47,11 @@ target_ulong HELPER(cm_jalt)(CPURISCVState *env, uint32_t index)
+     }
+ 
+     if (xlen == 32) {
+-        oi = make_memop_idx(MO_LEUL, mmu_index);
++        oi = make_memop_idx(MO_UL | endian, mmu_index);
+         t0 = base + (index << 2);
+         target = cpu_ldl_code_mmu(env, t0, oi, 0);
+     } else {
+-        oi = make_memop_idx(MO_LEUQ, mmu_index);
++        oi = make_memop_idx(MO_UQ | endian, mmu_index);
+         t0 = base + (index << 3);
+         target = cpu_ldq_code_mmu(env, t0, oi, 0);
+     }
+-- 
+2.25.1
 
 
