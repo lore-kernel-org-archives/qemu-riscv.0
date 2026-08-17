@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCE3EC5DF66
-	for <qemu-riscv@archiver.kernel.org>; Mon, 17 Aug 2026 15:47:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFD91C5DF66
+	for <qemu-riscv@archiver.kernel.org>; Mon, 17 Aug 2026 15:51:20 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wvzYJ-0000s9-8l; Mon, 17 Aug 2026 11:47:07 -0400
+	id 1wvzcH-0003Sv-6V; Mon, 17 Aug 2026 11:51:13 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <pbonzini@redhat.com>)
- id 1wvzYF-0000pW-H5
- for qemu-riscv@nongnu.org; Mon, 17 Aug 2026 11:47:03 -0400
+ id 1wvzbw-0003Hd-JH
+ for qemu-riscv@nongnu.org; Mon, 17 Aug 2026 11:50:55 -0400
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <pbonzini@redhat.com>)
- id 1wvzYC-0003KW-55
- for qemu-riscv@nongnu.org; Mon, 17 Aug 2026 11:47:03 -0400
+ id 1wvzbu-0004IS-J4
+ for qemu-riscv@nongnu.org; Mon, 17 Aug 2026 11:50:52 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1786981618;
+ s=mimecast20190719; t=1786981850;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=exz9gw/AtBM0jMriS7l45Ge3nGpgznoBNpe3yJMia48=;
- b=iJT5QCkZEFheebUBtyFpLXLDUuwo+ClHB7Sxtj3JG/Iat87AfvRoEp5qFR89dSqmjbclpF
- SVhbRI8vwKDflOqae7afyBv5Gh5Xnw7d43yVQR23/ViWwF5hrJBJA9WnsUqOa7e/pYKonN
- 00B/h2RXgFi/s88znj9Oe9M2g3hFpCY=
-Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ bh=YUi+vsJATf+A7/V8EXxhSwEGQmC9FYlzdP9bHNlEwDo=;
+ b=Ur2mNpEyuXyzi0aJEElf0+mK2x3O/82p5/cnyGZewCYpir+xSDNrJPGz6MIgWwPgLD3FWa
+ cvIT2NN6Lk+qhtm20qeVEqIohI49L4FpKCO0PmM0hGoL8iilWAITsbAs7joZ7L42NIBe0J
+ Vqn9wmhINQ0AH0CznM9ku/d0Lh3OfP8=
+Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-368-TwKLkS5_MWCmTrIu3s537Q-1; Mon,
- 17 Aug 2026 11:46:54 -0400
-X-MC-Unique: TwKLkS5_MWCmTrIu3s537Q-1
-X-Mimecast-MFC-AGG-ID: TwKLkS5_MWCmTrIu3s537Q_1786981612
-Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-290-3LN6POFvOoC1tes9Ch60Uw-1; Mon,
+ 17 Aug 2026 11:50:39 -0400
+X-MC-Unique: 3LN6POFvOoC1tes9Ch60Uw-1
+X-Mimecast-MFC-AGG-ID: 3LN6POFvOoC1tes9Ch60Uw_1786981837
+Received: from mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.17])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 54A7119560BB; Mon, 17 Aug 2026 15:46:51 +0000 (UTC)
+ by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 60F8C1800867; Mon, 17 Aug 2026 15:50:36 +0000 (UTC)
 Received: from [100.90.56.12] (headnet05.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.117])
- by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id B99343000223; Mon, 17 Aug 2026 15:46:46 +0000 (UTC)
-Message-ID: <c7e16aa0-aebe-405a-8686-da002f054db8@redhat.com>
-Date: Mon, 17 Aug 2026 17:46:44 +0200
+ by mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id 2513C1956042; Mon, 17 Aug 2026 15:50:31 +0000 (UTC)
+Message-ID: <0143f26e-eb64-4924-8e76-3b6ce66fe6db@redhat.com>
+Date: Mon, 17 Aug 2026 17:50:30 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 06/16] cpus: Improve cpu_exit() docstring
+Subject: Re: [PATCH 08/16] cpus: Slightly improve *run_on_cpu() docstrings
 To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
  qemu-devel@nongnu.org
 Cc: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
@@ -65,7 +65,7 @@ Cc: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
  =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@mailo.com>,
  Zhao Liu <zhao1.liu@intel.com>
 References: <20260813181640.6537-1-philmd@oss.qualcomm.com>
- <20260813181640.6537-7-philmd@oss.qualcomm.com>
+ <20260813181640.6537-9-philmd@oss.qualcomm.com>
 From: Paolo Bonzini <pbonzini@redhat.com>
 Autocrypt: addr=pbonzini@redhat.com; keydata=
  xsEhBFRCcBIBDqDGsz4K0zZun3jh+U6Z9wNGLKQ0kSFyjN38gMqU1SfP+TUNQepFHb/Gc0E2
@@ -102,23 +102,22 @@ Autocrypt: addr=pbonzini@redhat.com; keydata=
  JBrdmNZSQDz0iKmSrx8xkoXYfA3bgtFN8WJH2xgFL28XnqY4M6dLhJwV3z08tPSRqYFm4NMP
  dRsn0/7oymhneL8RthIvjDDQ5ktUjMe8LtHr70OZE/TT88qvEdhiIVUogHdo4qBrk41+gGQh
  b906Dudw5YhTJFU3nC6bbF2nrLlB4C/XSiH76ZvqzV0Z/cAMBo5NF/w=
-In-Reply-To: <20260813181640.6537-7-philmd@oss.qualcomm.com>
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
-X-Mimecast-MFC-PROC-ID: QPiripqIVTJxfwXDJEBRxX1gU499KYBdQj_oZ_FApm0_1786981612
+In-Reply-To: <20260813181640.6537-9-philmd@oss.qualcomm.com>
+X-Scanned-By: MIMEDefang 3.0 on 10.30.177.17
+X-Mimecast-MFC-PROC-ID: iknSC6wgNC0UUVIg9bA_LiQg4l5OY6CRAVA8BrlbPEY_1786981837
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=170.10.133.124; envelope-from=pbonzini@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: 9
-X-Spam_score: 0.9
-X-Spam_bar: /
-X-Spam_report: (0.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.343,
+X-Spam_score_int: -23
+X-Spam_score: -2.4
+X-Spam_bar: --
+X-Spam_report: (-2.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.343,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
- RCVD_IN_SBL_CSS=3.335, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -135,34 +134,79 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 8/13/26 20:16, Philippe Mathieu-Daudé wrote:
-> Mention that what the vCPU exits is the execution loop :)
-> Mention some of the reasons for calling cpu_exit().
+> Be a bit more precise mentioning BQL use and blocking calls.
 > 
 > Signed-off-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
 > ---
->   include/hw/core/cpu.h | 7 ++++---
->   1 file changed, 4 insertions(+), 3 deletions(-)
+>   include/hw/core/cpu.h | 36 ++++++++++++++++++++----------------
+>   1 file changed, 20 insertions(+), 16 deletions(-)
 > 
 > diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
-> index f1ac492714e..7da81f3ee85 100644
+> index 183ef9f4ef2..d610f87abd3 100644
 > --- a/include/hw/core/cpu.h
 > +++ b/include/hw/core/cpu.h
-> @@ -1037,10 +1037,11 @@ static inline void cpu_set_pc(CPUState *cpu, vaddr addr)
->   void cpu_reset_interrupt(CPUState *cpu, int mask);
+> @@ -908,36 +908,40 @@ void do_run_on_cpu(CPUState *cpu, run_on_cpu_func func, run_on_cpu_data data,
+>                      QemuMutex *mutex);
 >   
 >   /**
-> - * cpu_exit:
-> - * @cpu: The CPU to exit.
-> + * cpu_exit - Request the CPU to exit its execution loop
-> + * @cpu: The CPU to interrupt.
+> - * run_on_cpu:
+> + * run_on_cpu - Execute a function on a vCPU and wait for completion
+>    * @cpu: The vCPU to run on.
+>    * @func: The function to be executed.
+>    * @data: Data to pass to the function.
 >    *
-> - * Requests the CPU @cpu to exit execution.
-> + * Request an immediate exit from the CPU execution loop to process
-> + * pending work such as interrupts, timers, or other async requests.
+> - * Schedules the function @func for execution on the vCPU @cpu.
+> + * Schedules the function @func for execution on the vCPU @cpu and
+> + * block until it completes.
+> + *
+> + * Note: The caller must hold the BQL.
+>    */
+>   void run_on_cpu(CPUState *cpu, run_on_cpu_func func, run_on_cpu_data data);
+>   
+>   /**
+> - * async_run_on_cpu:
+> - * @cpu: The vCPU to run on.
+> - * @func: The function to be executed.
+> - * @data: Data to pass to the function.
+> - *
+> - * Schedules the function @func for execution on the vCPU @cpu asynchronously.
+> - */
+> -void async_run_on_cpu(CPUState *cpu, run_on_cpu_func func, run_on_cpu_data data);
+> -
+> -/**
+> - * async_safe_run_on_cpu:
+> + * async_run_on_cpu - Queue a function for execution on a vCPU
+>    * @cpu: The vCPU to run on.
+>    * @func: The function to be executed.
+>    * @data: Data to pass to the function.
+>    *
+>    * Schedules the function @func for execution on the vCPU @cpu asynchronously,
+> - * while all other vCPUs are sleeping.
+> + * then return immediately without waiting.
+>    *
+> - * Unlike run_on_cpu and async_run_on_cpu, the function is run outside the
+> - * BQL.
+> + * Note: The vCPU will hold the BQL when executing @func.
+> + */
+> +void async_run_on_cpu(CPUState *cpu, run_on_cpu_func func, run_on_cpu_data data);
+> +
+> +/**
+> + * async_safe_run_on_cpu - Queue a function to run with other vCPUs paused
+> + * @cpu: The vCPU to run on.
+> + * @func: The function to be executed.
+> + * @data: Data to pass to the function.
+> + *
+> + * Schedules the function @func for execution on the vCPU @cpu asynchronously.
+> + * Unlike async_run_on_cpu(), all other vCPUs are paused while @func executes,
+> + * ensuring @cpu has exclusive access to shared state.
 
-More precise: to sleep or process asynchronous work items (see the 
-run_on_cpu() family of functions).
+Might as well mention that @func is run without the BQL taken and in 
+fact must not take it (see comment in process_queued_cpu_work()).
 
 Paolo
+
+>    */
+>   void async_safe_run_on_cpu(CPUState *cpu, run_on_cpu_func func, run_on_cpu_data data);
+>   
 
 
