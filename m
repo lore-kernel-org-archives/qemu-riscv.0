@@ -4,109 +4,164 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7BC7C5B572
-	for <qemu-riscv@archiver.kernel.org>; Mon, 17 Aug 2026 08:56:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17029C5B572
+	for <qemu-riscv@archiver.kernel.org>; Mon, 17 Aug 2026 10:13:33 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wvt8F-00013l-8y; Mon, 17 Aug 2026 04:55:47 -0400
+	id 1wvuLO-0006ZS-0D; Mon, 17 Aug 2026 06:13:26 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <0860734llx@gmail.com>)
- id 1wvt88-00013E-Iy
- for qemu-riscv@nongnu.org; Mon, 17 Aug 2026 04:55:41 -0400
-Received: from mail-pl1-x62b.google.com ([2607:f8b0:4864:20::62b])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <0860734llx@gmail.com>)
- id 1wvt86-0000Pm-VO
- for qemu-riscv@nongnu.org; Mon, 17 Aug 2026 04:55:40 -0400
-Received: by mail-pl1-x62b.google.com with SMTP id
- d9443c01a7336-2caea3f742bso53979915ad.0
- for <qemu-riscv@nongnu.org>; Mon, 17 Aug 2026 01:55:38 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1786956937; cv=none;
+ (Exim 4.90_1) (envelope-from <subrahmanya.lingappa@oss.qualcomm.com>)
+ id 1wvuLI-0006Yu-AJ
+ for qemu-riscv@nongnu.org; Mon, 17 Aug 2026 06:13:20 -0400
+Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <subrahmanya.lingappa@oss.qualcomm.com>)
+ id 1wvuLG-0004at-Ad
+ for qemu-riscv@nongnu.org; Mon, 17 Aug 2026 06:13:20 -0400
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 67H9dn1S1058608
+ for <qemu-riscv@nongnu.org>; Mon, 17 Aug 2026 10:13:14 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ qGLH8lZmQRn2gHViVJmyCdYIQSMzFwTKzZI1GtGJPbs=; b=nvBTKEgAFyxl/aeX
+ Vcn0tYVBgySjBoZWdbF1vSm30358MR8iObBqnSMHyC6RGeLLfDxLxjcDEoxENniW
+ E9T9cCNpEJbTUD2zzkuayV6SXpl7NHFit8pDBtzfLyyMwGgIZIh3/TJ5ieHZaWvN
+ QvynnntK7UR4YxUwIn6wmECO23zfdXn+wTc4K2YxYDVzLdecyWis2T0Qc63RHKWB
+ WidY0GJNOSSSreCI720sJtpyG85Fq+9zNkPb3drythSusqnnm0oY0GAEEFFW9vrJ
+ dnbj026kf+nM5dxu5RmSnE6aSogn4QSLuwOVcXSUJ6ljEbcqJEnnhC2aZz7A1V7U
+ knMrBA==
+Received: from mail-vk1-f199.google.com (mail-vk1-f199.google.com
+ [209.85.221.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g3x30gju1-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Mon, 17 Aug 2026 10:13:14 +0000 (GMT)
+Received: by mail-vk1-f199.google.com with SMTP id
+ 71dfb90a1353d-5c3f89239f1so31334e0c.3
+ for <qemu-riscv@nongnu.org>; Mon, 17 Aug 2026 03:13:14 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1786961593; cv=none;
  d=google.com; s=arc-20260327;
- b=J/6yjF8DQUOIkRzsxGtz3LrHemrivX4M+1KDRYINY+Pbj4ISQktLkXdcbjIq5vkkOz
- NyTMFIgyGbfGhwy9h1gwU1Ht7Ipg1cPqziysMzx34q3h19ZdUS5JSMOFUJ+5tCWhVM+M
- 97yE6ubBgJo4qdj79Gj28Tek8XzP4R3EisNX7PCo+TrR9pmhr44MgRGm3RqoF/X72lKZ
- nqh0YEbspLADBflb8Q1KoSLX+WJG98i6Cj42xjstcyiufuJ95GBOVWulMovHy+cTpimX
- eByIpetRuN9mAIAcxNJsLv9kj6843/MLUpG0DC7gCRek1nTTH+jtdJdF9re3rwtl37PH
- vjiQ==
+ b=JX8a+74SDaTflPehi9SJaj9ETfSai22nI0xeQD3eSpjyGbIShAMHPWhJFYYvt2xeRK
+ FP1zXbYl1KDuXWvgLmdjDV8tHniEzyjXWC3tAbFaxtMXkoe9JnQgLERPMbcK2w+HrUiz
+ /HdLmamsP4XqsNlTi72Yc6tnO7NZv5r9yPPpKbv93T1s3PJtCs3hyA3Pd490YbJWcjgV
+ U+KFx/kedGtiaLV5Yy4MsUWeHbKRgGv2HTf/FMmgMQ2Jks3j4+dtCQDXEMC1wp+KipbJ
+ +kaNWukn0KvblkFhTjrC4yEboKPGQOSzUzO9bwYSeL/8/0kTN6iCzJjMxVwjKW4KpKNX
+ Zdkg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=HsjnM4/zRylQ8X2Az69flzz59FcYSXgM2qgQK6wlzlA=;
- fh=E+iSYMknQZ6E+SNJByU8rKVKtR5LrXCdjFGeopLNZJM=;
- b=m0gRiBJUW+F2umbGt3ENQGdeSHFEMABgG8CVp5d1aFYO4CUOcPA7O+j5IA3AKzfgML
- ug2S5YUUgxMPq9hGbGYC26pNh9qYUHBrkTwq5WdYDN3fDEemH21+FYC3faYaOamdT3E4
- qgq8xMhGH7j5YzWcX4u4bXEJGcSR8XjwK6/w7rZwIlaSKgLihoNySVEHUqtUnIuRM+sX
- 8MYQMfOBHFWirAvR9fnw8V7awUgz6PsQC7NjY+6VCHQzkrtDH7hQkoDwNLS8kfH9/xRm
- ETrFgYgZOqogadI2physRDtNGH0rIWBktY3n8RLA5zlWT14YE9OPNG4wLJHZardfljJ1
- no5A==; darn=nongnu.org
+ bh=qGLH8lZmQRn2gHViVJmyCdYIQSMzFwTKzZI1GtGJPbs=;
+ fh=+jnJZRWdG55DF5qo9EVaIvQDN1LKFt2TLd1wdyE9BhM=;
+ b=Lm3JGTv8W/IIHjajYlrzqVtEE0NZaUNUu1HRRaw9h80sxecqC2cRRPXcMcKCSivFQW
+ wLhWO9ByAKy2mHI13cEGRoiV4hn4zMWQoqbcazJGu7cVQeiRHsdnnVQpfj9/x0THohHR
+ 0g44WMlWu6dBLq34Y3h7fOuYNA5fjUaEz2WErX6lAzAS4mZjtjK+fDvdczF9aWJL1ySi
+ p6DBU/loXiN9kiQIqJVq1W0rho+wb30D2SXRm44XrpLsfk7lSKTILEQvA6qzlRch3JpG
+ MBRpcN88pbFtBAoE1HsAh+q1RNcdB7M1CFgTWnmYXkNiQugx6GXFD8udc8N+4JyTUmTO
+ b0CQ==; darn=nongnu.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1786956937; x=1787561737; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1786961593; x=1787566393; darn=nongnu.org;
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=HsjnM4/zRylQ8X2Az69flzz59FcYSXgM2qgQK6wlzlA=;
- b=oTzZ3OawT3SW+KBeN46yGaPuXakZal/6htXw5S4GRDPNNX+gaZ6MDjArXW90YmZE2h
- CoD4gzkRE93Az2p/C7Rr9kKcopkZuhx7yT7V2wUHCPYiIOD+t6uvy0rwvbf/EjoorF7x
- SbS2PFRysv/iEyywnLAkJ5to6yeJRT7EP2D8rz1hc5pxhfRYmUCPEFofGC5lWB6DL697
- B+dLP+cSisdQHFarddWz1hOPAJZs+fGxpHwU3+jFmNus42BzHfPIRIe9y9Vo1zXnunOs
- hOmwPWETaaN0tDh9nkc4Fkj0qbS3v/IqO8Tw6BdxG6uy6GjTzlDeSRqco4GUhsSTwlmR
- Z8Nw==
+ bh=qGLH8lZmQRn2gHViVJmyCdYIQSMzFwTKzZI1GtGJPbs=;
+ b=YvwGCxyvfH6myzcBUwT/Nto9E+qHL7Pe5dWZINSbuVkolVYP4Am08ozdCsicuHxczv
+ bonDB+6D0pCCp8T8+kdJ5yVsZK6UFXfs1Jd8RrbyGig1fr9d8THgJfOrfV0epyNYdMZb
+ sFbpW0aZ5Gc0UJwEzErAKT93kX+OlV0xXyL3Y8YXReYbxz0ROuIQJv19JIqRaobnDl8D
+ b2vig+p7ve1oNW9GYKk3x7Hq1jkyqSOt8Q0yHmSd+nnc3jvsPbfpGWYIL3U2jZ4jHFuT
+ R+BX6rFA3wCCvVgZaBsJcGBH8vraQX6TgRvl5JgrGBeZBvgJdjIKH/6GSOpliSrSE3ek
+ 9Weg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1786956937; x=1787561737;
+ d=1e100.net; s=20251104; t=1786961593; x=1787566393;
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=HsjnM4/zRylQ8X2Az69flzz59FcYSXgM2qgQK6wlzlA=;
- b=arEvnnjAGHmTLWaNW02KZggKAn+YDg9DYcascJE3NPnKb9JudofrXQfW5GXjSvOIFO
- difgYvqeD3qg2QlaHLoVozm4+zQLPN9iucR7rQv31gael+ueqphSYE6zBNqkb+6BfMTz
- cvq95vH9t/ULEy7HuwN0RfPlZq2MswJOj1z2wh7cuUibUSOmPxF7ckcHTKcwoFUCrGRj
- qx6W6OoiIqPP1Pd0g4X3/mSwuIsUaEumLSVFUkvbYnUHrCzWAyJSBu+vVFcHXXVupgTs
- MPJu/wvWWLl4AtqMoSytybRKoYjjvTTZqcKkrA8pS2i8zvj7Q5/OVWImm79F+dNUS9aP
- rb8Q==
-X-Forwarded-Encrypted: i=1;
- AHgh+Rqn945lRX6ZZjJRsjxj6+lyi4TJKzkHenchwdRKC+VFWdqfL8LWY4eJ6Seooi9OJesZGqkcZPirmrRH@nongnu.org
-X-Gm-Message-State: AOJu0YyR5Sx8ER/OFynpV5Sk26zcQrWruqGcj5UGcwTnNAobmnC9ajDu
- WSoK9IPpoLhod3GD1ZO++tatUfdPW9JXsAXNUzJSA9oUbrUopXM32YHqao5Ifyb1TWC1LFuxn6E
- S97zDd9/XaiGL1CVUVddzOv1qCdBlUdk=
-X-Gm-Gg: AR+sD10pO9t9T1bH1kJYf/ZePIsg6utdA8LltwmPuQbs/MQZQ4GwF2rTls3BktYoHed
- RpiI0awzG5+OnYczWMcnU5m8gGJ/5KglvKsspckIASu7SnXa6rhagdBc1vVtTFZg4+TrXTaq3F4
- 7rTnqTCPYkGMRehiQfg5/QDefhCKhC67ld8It0pvVzERZPu11O8+RPAyd2/g+SHcCDAQDatcJVo
- 6cg7jyjVufHJYuoHT4bbzIoRHXRxEC0JZP8lXLoiur2sfQq8CL57GuzOYYvBfG9mz0HrNyekOhP
- e6Fj460Gt7wcfd4Z9ryvZ62DguWng8/OGNoX3rlbTEe5sg==
-X-Received: by 2002:a05:6a20:728c:b0:3cc:2c74:a0 with SMTP id
- adf61e73a8af0-3cc71d78433mr23489068637.21.1786956936942; Mon, 17 Aug 2026
- 01:55:36 -0700 (PDT)
+ bh=qGLH8lZmQRn2gHViVJmyCdYIQSMzFwTKzZI1GtGJPbs=;
+ b=Wh+Gb51745wnMPVg5FBveClrNCwcaDVOWLe2bKMNnehlt1iTO+vejUIg0hlV+Vmfca
+ eKTlBf1MfwMLcIT4Yo3ugO++PX/wG26s7AUx4S4vCRJ+n/svZa6087PiArV8OpCNDtpi
+ mQ2VgsIOSmWHkuUh1SvF34s2ozoXIGD4iWtqmsjj9gjiPCdMTz38ec0vFKZQoRIQy0am
+ zfX2CWOAVDXcCG2UFbZ9R/bsj05JLyvDcD3PYMp/rc9dwFUNK22yu8uU11RHAF4sTh3y
+ NMMkesL1qkGg2gmiGFjNRWN9xRj/OeXgdykBekh+kdy2hOdR9Pvp80ssSVZt4TZPsKuo
+ 4kUw==
+X-Gm-Message-State: AOJu0Yx9QQjHpcFmqbyd1X3bVaLFZCVS8LEEZH/6zsFmmH+zcCOZel4F
+ RVgX/7t5ZpH9NBTl3Mw3JMz4oPb+pqoZcaVwHc9rNe9T2LZXj7p4LrVQICu4hA+hwfJsmyFlWaf
+ 6mfpcfkFUXKYEQXbjeCN8dVtOq3JjUerTJwpsakTDgX7dyG+hCzqzHNdFLzhT+Tq1RfyP+W/Oob
+ S992M6oQLxKA3LiBhvurVur4f4phDO2NW+
+X-Gm-Gg: AR+sD13V6KZBblmNca3LyEJhuhtjGTMxqDTs9sbucHKvNUkxnyASnIyCFc4k8uTv4CM
+ 8sv4c13qlK/l13ZCp1yNhC+vWeoSPgnjnoWqF3uMZ0Mfv3OHgNf7GQY73YVG5P+StjPJr8lUA+v
+ vfvKpYq5Hoe38Aw6c+tpcNrw7X5M0E4mlHWzMqd1q9DbXtbjSygvnt2TBiVck=
+X-Received: by 2002:a05:6123:4d6:20b0:5c5:b3c1:1fc3 with SMTP id
+ 71dfb90a1353d-5c5b3c153e3mr469129e0c.0.1786961593534; 
+ Mon, 17 Aug 2026 03:13:13 -0700 (PDT)
+X-Received: by 2002:a05:6123:4d6:20b0:5c5:b3c1:1fc3 with SMTP id
+ 71dfb90a1353d-5c5b3c153e3mr469125e0c.0.1786961593175; Mon, 17 Aug 2026
+ 03:13:13 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260809-feat-k230-cmu-v1-0-8792982c446c@gmail.com>
- <CAEUhbmVQid5yboTQzDTANT-zMEzLiJkom0qLfKRV-nP3nq5uaw@mail.gmail.com>
-In-Reply-To: <CAEUhbmVQid5yboTQzDTANT-zMEzLiJkom0qLfKRV-nP3nq5uaw@mail.gmail.com>
-From: Niel Law <0860734llx@gmail.com>
-Date: Mon, 17 Aug 2026 16:55:24 +0800
-X-Gm-Features: AcwNN1VB8FpM0cK7uiZZQ45tQzkPmMO4MdvY01k4e5VvpHRBjTJ2cXB04c7fsso
-Message-ID: <CAPWGWA7eg75vptnzQTCVP5tN_DxTh4_01ZrCHa7eDMBdqrm5OQ@mail.gmail.com>
-Subject: Re: [PATCH 0/4] Kendryte K230 CMU register model
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, chao.liu@processmission.com, 
- palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com, 
- daniel.barboza@oss.qualcomm.com, zhiwei_liu@linux.alibaba.com, 
- pierrick.bouvier@oss.qualcomm.com
+References: <20260814045315.3416169-1-subrahmanya.lingappa@oss.qualcomm.com>
+ <20260814045315.3416169-2-subrahmanya.lingappa@oss.qualcomm.com>
+ <7c5a0b1d-12db-4be2-b20c-9d132b027a76@oss.qualcomm.com>
+ <CAPxK-6c5ucsJttV6WVTQSe=O3s+q-tL=-Mv42iJPUBftFAXFhA@mail.gmail.com>
+ <f54d8c2f-3d30-47f5-809a-ddb60c8df03d@oss.qualcomm.com>
+In-Reply-To: <f54d8c2f-3d30-47f5-809a-ddb60c8df03d@oss.qualcomm.com>
+From: Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcomm.com>
+Date: Mon, 17 Aug 2026 15:43:01 +0530
+X-Gm-Features: AcwNN1V_ACrCG3KTU64icogQ7wJKF8dYJ8w-vEpg73BIorjvG_FHr8pRW5SinbI
+Message-ID: <CAPxK-6d5YcqNSsjBkYrwxm-p5VT=nX5e3P=XjcwdZRZC7ePGhQ@mail.gmail.com>
+Subject: Re: [PATCH v8 01/10] build: add optional librpmi dependency
+To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@oss.qualcomm.com>
+Cc: qemu-riscv@nongnu.org,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>,
+ =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>,
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@mailo.com>,
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+ =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>,
+ "open list:All patches CC here" <qemu-devel@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62b;
- envelope-from=0860734llx@gmail.com; helo=mail-pl1-x62b.google.com
-X-Spam_score_int: -13
-X-Spam_score: -1.4
-X-Spam_bar: -
-X-Spam_report: (-1.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- FROM_STARTS_WITH_NUMS=0.738, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODE3MDA3NSBTYWx0ZWRfX8nME9I/hViQx
+ NGNI+48pWjDA7fNTWQdlqgA201LG/PEjv+P9ze+56LQ7pVrGQz+lnWf1pZeuYdnLV7W7AGv8d+4
+ L7bM1ZraLKfV+pYF5Eo/Qir/0x2bhz1tU2ylxmJEU2weOPeyXqNdSw+RG6urvXWGBvHJFpuGyYn
+ mMnF9JYpZry5ladSwbz+834/svovXj78H/nVUHIdecJVZ0zjzQ4hICzwvPXbpj9NE+tVsuBnjh/
+ XapzOjtsPaWiiQ3A1ZdR72Ci8+KKSjvfsiLd4ZrTQdxVWAFusGTCKuyxIUWq84FUm0x7GOmlW+k
+ kMdJEUIvoKifvbW02weegKJ6GPwQpFr7XBePhwCUklYoasHthmsnXNngUozfq04LwJ+IaoaaEs1
+ ZNSbYf2k42fWCviXQ1YSsfL7BMTabywx3I4Bx3qEKb0Xdct1dPxuRcmC4OJofvpWzMG2knyDqHA
+ AWXv4dxP1EL5fFkdrng==
+X-Proofpoint-GUID: -Kpd4mvRXNsmh_c04P7Wpp2IBUmpbsVx
+X-Proofpoint-ORIG-GUID: -Kpd4mvRXNsmh_c04P7Wpp2IBUmpbsVx
+X-Authority-Analysis: v=2.4 cv=Y9/IdBeN c=1 sm=1 tr=0 ts=6a82deba cx=c_pps
+ a=+D9SDfe9YZWTjADjLiQY5g==:117 a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10
+ a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
+ a=DJpcGTmdVt4CTyJn9g5Z:22 a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8
+ a=gC699ZJ_JV_s38HN3AEA:9 a=QEXdDO2ut3YA:10 a=vmgOmaN-Xu0dpDh8OwbV:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODE3MDA3NSBTYWx0ZWRfXwHKHdBE0+AnO
+ 6GUvPN10jujZDldNrYfU1oe6WJFf0bDytHh7ZRuTn7/GIt6CPFY0VgnviL5olfGAVySb6qGdWsQ
+ 7IBZftrA5qB3EHPhBoREA+rM1kK+DyQ=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-16_06,2026-08-12_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ lowpriorityscore=0 adultscore=0 priorityscore=1501 impostorscore=0
+ clxscore=1015 bulkscore=0 malwarescore=0 phishscore=0 spamscore=0
+ suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2608170075
+Received-SPF: pass client-ip=205.220.168.131;
+ envelope-from=subrahmanya.lingappa@oss.qualcomm.com;
+ helo=mx0a-0031df01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
+X-Spam_bar: --
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -122,104 +177,65 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi,
-Thanks for your reply.
-The clock model is not a must-have for the Linux build from the K230
-SDK. the vendor clock driver allows PLL unlock:
-[    0.093353] thermal_sys: Registered thermal governor 'step_wise'^M^M
-[    0.409760] [ERROR K230_CLK]:pll pll0 is unlock.^M^M
-[    0.414011] [ERROR K230_CLK]:pll pll1 is unlock.^M^M
-[    0.417540] [ERROR K230_CLK]:pll pll2 is unlock.^M^M
-[    0.421088] [ERROR K230_CLK]:pll pll3 is unlock.^M^M
-[    0.456215] k230-powerdomain 91103000.sysctl_power: powerdomain init ok^=
-M^M
+Philippe,
 
-But Linux mainline will boot fail, it poll STAT.bit0 of PLL forever.
-From drivers/clk/clk-k230.c:
-#define K230_PLL_LOCK_TIMEOUT 0
-static int k230_pll_prepare(struct clk_hw *hw)
-{
-        struct k230_pll *pll =3D hw_to_k230_pll(hw);
-        u32 reg;
+On Mon, Aug 17, 2026 at 9:31=E2=80=AFAM Philippe Mathieu-Daud=C3=A9
+<philmd@oss.qualcomm.com> wrote:
+>
+> On 14/8/26 20:34, Subrahmanya Lingappa wrote:
+> > Philippe,
+> >
+> > On Fri, Aug 14, 2026 at 11:14=E2=80=AFAM Philippe Mathieu-Daud=C3=A9
+> > <philmd@oss.qualcomm.com> wrote:
+> >>
+> >> Hi,
+> >>
+> >> On 14/8/26 06:53, Subrahmanya Lingappa wrote:
+> >>> Add a meson option and config probe for librpmi so RISC-V machines ca=
+n
+> >>> opt into RPMI support when the library is available. Keep the depende=
+ncy
+> >>> optional so default builds without librpmi continue to work.
+> >>>
+> >>> Signed-off-by: Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcom=
+m.com>
+> >>> Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com=
+>
+> >>> Reviewed-by: Philippe Mathieu-Daud=C3=A9 <philmd@oss.qualcomm.com>
+> >>> ---
+> >>>    Kconfig.host                  |  3 +++
+> >>>    meson.build                   | 14 ++++++++++++++
+> >>>    meson_options.txt             |  2 ++
+> >>>    scripts/meson-buildoptions.sh |  3 +++
+> >>>    4 files changed, 22 insertions(+)
+> >>
+> >> Could you provide a cover letter so we can understand the changes
+> >> with the previous versions? It is hard to figure out why we are
+> >> at v8 and what we have to review again.
+> >>
+> > I was incrementally fixing issues and sending out versions.
+> >
+> > This mail with subject line has the change logs from previous few
+> > versions, you might have missed;
+> >   as it was with all the previous versions' cover letters.
+> > "[PATCH v8 00/10] riscv: add initial RPMI virt support"
+>
+> Apparently neither the mailing list nor myself received it:
+> https://lore.kernel.org/qemu-devel/7c5a0b1d-12db-4be2-b20c-9d132b027a76@o=
+ss.qualcomm.com/
+>
+> But indeed it is on the riscv@ list...
+> https://lore.kernel.org/qemu-devel/20260814045315.3416169-1-subrahmanya.l=
+ingappa@oss.qualcomm.com/
+> >
+> > Please let me know if you'd like it to list change log from all the
+> > previous versions instead.
+>
+> You could have proactively done it directly, saving time to all
+> readers ;) Not needed anymore, I'll import it from riscv@, thanks.
 
-        /* wait for PLL lock until it reaches lock status */
-        return readl_poll_timeout(K230_PLLX_LOCK_ADDR(pll->reg, pll->id), r=
-eg,
-                                  reg & K230_PLL_LOCK_STATUS_MASK,
-                                  K230_PLL_LOCK_TIME_DELAY,
-K230_PLL_LOCK_TIMEOUT);
-}
+My bad, I'll keep that in mind for the following versions.
 
-Furthermore, SDHCI/USB PHY/SPI flash driver require valid clock
-config, else causes fatal error.
-
-Best regard,
-Simon
-
-On Fri, Aug 14, 2026 at 3:53=E2=80=AFPM Bin Meng <bmeng.cn@gmail.com> wrote=
-:
->
-> Hello,
->
-> On Sun, Aug 9, 2026 at 7:47=E2=80=AFPM Simon Law <0860734llx@gmail.com> w=
-rote:
-> >
-> > The Kendryte K230 machine currently lacks the Clock Management Unit (CM=
-U)
-> >   register interface required by the K230 SDK U-Boot and the Linux K230=
- clock
-> >   driver. As a result, software probing the PLL and sysclk providers ca=
-nnot
-> >   observe the expected reset values or register update semantics.
-> >
-> >   This series adds a minimal, deterministic K230 CMU model.
-> >
-> >   The model covers:
-> >
-> >   - four PLL register blocks at 0x91102000..0x9110203f;
-> >   - the defined sysclk registers in the 0x91100000 window;
-> >   - the software-visible SPI2AXI_CLK_DIV register at sysclk offset 0x10=
-8;
-> >   - reset values and writable/reserved/read-only masks;
-> >   - PLL control write-enable semantics;
-> >   - write-one-to-trigger update behavior;
-> >   - deterministic PLL lock and initialization status;
-> >   - VMState for stable PLL and sysclk register state;
-> >   - qtest coverage for reset, masks, write-enable, W1T, status, sysclk
-> >     updates, unknown offsets, and system reset;
-> >   - K230 machine wiring and user-facing documentation.
-> >
-> >   The model intentionally does not propagate clock frequencies to QEMU =
-devices or
-> >   change CPU execution speed. Peripheral reset, power control, and the
-> >   guest-initiated K230 reboot backend remain outside the scope of this =
-series.
-> >   Those functions require separate reset/power models and a matching Op=
-enSBI
-> >   backend.
-> >
-> >   The implementation is based only on the existing K230 machine and doe=
-s not
-> >   depend on unmerged RMU, Timer, SPI, or SDHCI device series.
-> >
-> >   Testing:
-> >   - QTEST_QEMU_BINARY=3D/workspace/qemu/build/qemu-system-riscv64
-> >     /workspace/qemu/build/tests/qtest/k230-cmu-test
-> >     (10/10 subtests passed)
-> >   - QTEST_QEMU_BINARY=3D/workspace/qemu/build/qemu-system-riscv64
-> >     /workspace/qemu/build/tests/qtest/k230-wdt-test
-> >     (7/7 subtests passed)
-> >   - K230 direct Linux boot and K230 U-Boot boot
-> >   - Linux K230 clock probe and clk_summary validation
-> >   - CMU source/destination migration smoke
-> >
-> > Signed-off-by: Simon Law <0860734llx@gmail.com>
->
-> Is this clock modeling a must-have to make U-Boot or Linux boot on the
-> QEMU k230 machine?
->
-> Is an unimplemented region enough to make the software happy?
->
-> Regards,
-> Bin
+Thanks,
+subbu
 
