@@ -4,109 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B65E9C5DF7E
-	for <qemu-riscv@archiver.kernel.org>; Tue, 18 Aug 2026 10:31:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 769B3C5DF80
+	for <qemu-riscv@archiver.kernel.org>; Tue, 18 Aug 2026 11:18:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wwH5b-0001UG-KM; Tue, 18 Aug 2026 06:30:39 -0400
+	id 1wwHpi-0001vf-PR; Tue, 18 Aug 2026 07:18:18 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <pbonzini@redhat.com>)
- id 1wwH5a-0001Tf-DP
- for qemu-riscv@nongnu.org; Tue, 18 Aug 2026 06:30:38 -0400
+ (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
+ id 1wwHpg-0001tR-RD
+ for qemu-riscv@nongnu.org; Tue, 18 Aug 2026 07:18:16 -0400
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <pbonzini@redhat.com>)
- id 1wwH5Z-0006f4-1U
- for qemu-riscv@nongnu.org; Tue, 18 Aug 2026 06:30:38 -0400
+ (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
+ id 1wwHpf-0005mc-B9
+ for qemu-riscv@nongnu.org; Tue, 18 Aug 2026 07:18:16 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1787049036;
+ s=mimecast20190719; t=1787051893;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=6FufrT6QF5LjGVnfECdhMWiAuksb5oHrBpr4wzMjdAs=;
- b=hdO+vOuD9e64LB7fNrj+Wr+xYRwIjtb4FBFniR7GPQfRQsL16kpGJRIgW18T6s2o6t41Uo
- ffoR/DaJ3xElmuEqqoCa3reI8BN+5mz91DEclB0OCitiOlCfCmn9mop1mNe/N4QR4+tgKF
- 6sY5hJcWN8RZw1H7gNepC8L3rCRna9s=
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-641-WAk8IgQzP3uqMKi9uA95kw-1; Tue, 18 Aug 2026 06:30:30 -0400
-X-MC-Unique: WAk8IgQzP3uqMKi9uA95kw-1
-X-Mimecast-MFC-AGG-ID: WAk8IgQzP3uqMKi9uA95kw_1787049029
-Received: by mail-wr1-f69.google.com with SMTP id
- ffacd0b85a97d-482a2d55c4eso1215409f8f.3
- for <qemu-riscv@nongnu.org>; Tue, 18 Aug 2026 03:30:29 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787049029; x=1787653829;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=6FufrT6QF5LjGVnfECdhMWiAuksb5oHrBpr4wzMjdAs=;
- b=YcfYdiCxZzI7HaPfy5okBjXdNYhXsiSgtdeeg92wkLO2zsLSlFf3sVlu414EP/jKX1
- zGqcM2RGm4poid653XcFbMr6ibec7HpIbqZHFsiI0qYaWmk7yl/WCnuum3WDzWgafPTw
- C6EcW600VVqXj3VPD71ukOJBIFKj5nedyIjzmseucwHuMTQbaHw4XSRdFM3ZMbtFZic9
- gJyfNkgCk7u30r91eTj4H1iKICRfOTFUqIK/KKOh7ayJnXSpDXpWwlChZd4To4wm8aGx
- 3N6oPAZZlrRmdng4EybeIZ9L6YZjZC5MScl1BFT1mOXvq0EZWmclDTc5u8uDjHZLjd3q
- VQBw==
-X-Forwarded-Encrypted: i=1;
- AHgh+RohQpHPnNvd7NVUCc+VH1w9UjNIJ9ikItTsx6pDg71FTLTuLY9/NtWK4m1BT4MC9JQEHK3ryPoGgJlS@nongnu.org
-X-Gm-Message-State: AOJu0Yz5+y+G8NMXG6TtBq8MMd15eeL3/TJGcAk+HgTboYIxhQOC5w8/
- Xes7WlDkPW1yueqrkuf63yIiSED8APiivilSNZoUT8VXuN5F/Bt1KOYAPwNt+9VgU9SAk9jI4/Y
- 9eZ8p5S4pMPq47GII4wzbVAVeWbk9Ya2f0TV3QEwh5MJ8mSWaziA3BHr8s0up/s/Yqkx5icbXAg
- IN3AswR60pWeGvIF8xd0BTCshWqhLKEB8=
-X-Gm-Gg: AR+sD12eAygifn6CA7BynkyK2QMMMYRabq9HbGzxC5X9MWCcTPyKVUiDgcg7gT7i9FV
- I2Utld7q5bZkgIUq7j7T1VJuxNO/L96GZBoA4sBegHvsou/Pe6ylrDRPBgOlw0cmnr9kQIBfc0l
- sz3VucZM0dAziPDx6znkxii9FDWEx7wmFADQc2hfPwt6hlRvfSrxpN6CugW24HEs6g3RAuCF1PT
- OZrCLg5AYU3u6lvDNrvtEP4Lb3PvsQ48+5MgjKKG2J4i/jIUsZ0CnjmHVo=
-X-Received: by 2002:a05:6000:2891:b0:482:a909:53d3 with SMTP id
- ffacd0b85a97d-482a90953f4mr11113070f8f.2.1787049028815; 
- Tue, 18 Aug 2026 03:30:28 -0700 (PDT)
-X-Received: by 2002:a05:6000:2891:b0:482:a909:53d3 with SMTP id
- ffacd0b85a97d-482a90953f4mr11112989f8f.2.1787049028385; Tue, 18 Aug 2026
- 03:30:28 -0700 (PDT)
+ bh=w1p0wsYe7wILmnAsGR4qYZN8ofy2xkguhRxrrZLXdfA=;
+ b=itGx5jBSB4Voso6CZ5RXAsc8zr7bPyh/T/mw/LD+GFAKfGazHJg4YcJRnF1E8t8xF8lvW3
+ TYzHH+xaQc1xeDds7LMh4yNjG/0px40aD45r1fDmg69z730rrFtOB24dTguO5EUMK7EGSp
+ K49ujwxyb+QSjQbZUKFL6Txe8vymnBE=
+Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-127-RQMl-zzHPIirTArsAxtdhA-1; Tue,
+ 18 Aug 2026 07:18:10 -0400
+X-MC-Unique: RQMl-zzHPIirTArsAxtdhA-1
+X-Mimecast-MFC-AGG-ID: RQMl-zzHPIirTArsAxtdhA_1787051888
+Received: from mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.93])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 611611955BC5; Tue, 18 Aug 2026 11:18:08 +0000 (UTC)
+Received: from localhost (headnet05.pony-001.prod.iad2.dc.redhat.com
+ [10.2.32.117])
+ by mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id 940371800347; Tue, 18 Aug 2026 11:18:04 +0000 (UTC)
+From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
+Date: Tue, 18 Aug 2026 15:10:48 +0400
+Subject: [PATCH v3 21/74] riscv/virt: convert OnOffAuto properties to
+ QAPI-aware registration
 MIME-Version: 1.0
-References: <20260813181640.6537-1-philmd@oss.qualcomm.com>
- <20260813181640.6537-12-philmd@oss.qualcomm.com>
- <55cc8357-daeb-4315-9f3a-8be7a59c355b@redhat.com>
- <3ec603ff-65bb-440b-8ed8-72ae4e6c5a41@oss.qualcomm.com>
-In-Reply-To: <3ec603ff-65bb-440b-8ed8-72ae4e6c5a41@oss.qualcomm.com>
-From: Paolo Bonzini <pbonzini@redhat.com>
-Date: Tue, 18 Aug 2026 12:30:16 +0200
-X-Gm-Features: AcwNN1U9FkNWmAq29kJzhpwyumQVJaYATOb2EskO-A53Cr-akB0nGwo0bt8h3t0
-Message-ID: <CABgObfaDAhrpnVqQaKgG6uxPQe1YDu77YOsUEx9nqrN=3M2cGw@mail.gmail.com>
-Subject: Re: [PATCH 11/16] accel/kvm: Consistently return CPU halt state from
- process_async_events
-To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@oss.qualcomm.com>
-Cc: qemu-devel@nongnu.org, Richard Henderson <richard.henderson@linaro.org>, 
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
+Message-Id: <20260818-qom-qapi-v3-21-24b8bbbe3d86@redhat.com>
+References: <20260818-qom-qapi-v3-0-24b8bbbe3d86@redhat.com>
+In-Reply-To: <20260818-qom-qapi-v3-0-24b8bbbe3d86@redhat.com>
+To: qemu-devel@nongnu.org
+Cc: Markus Armbruster <armbru@redhat.com>, 
+ Paolo Bonzini <pbonzini@redhat.com>, 
+ =?utf-8?q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
+ =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>, 
+ Michael Roth <michael.roth@amd.com>, 
  Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, 
- Mohamed Mediouni <mohamed@unpredictable.fr>, Alexander Graf <agraf@csgraf.de>,
- qemu-ppc@nongnu.org, 
- qemu-riscv@nongnu.org, kvm@vger.kernel.org, qemu-arm@nongnu.org, 
- Magnus Kulke <magnuskulke@linux.microsoft.com>,
- Peter Maydell <peter.maydell@linaro.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>,
+ =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@mailo.com>, 
  Alistair Francis <alistair.francis@wdc.com>, 
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Chao Liu <chao.liu@processmission.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: iyRDwcvXiJJbRJr2P7L0mdtd61sLZfGLI-pzonYdejs_1787049029
+ Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3984;
+ i=marcandre.lureau@redhat.com; h=from:subject:message-id;
+ bh=Mvmbn+YpXxLPFQ3gkFotdxJS6BhWegqsWmBOu8ZuxEc=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBqhD241ugGadiTWVsKPuYJyMR+D5sEhA/L1YZO7
+ 48fe9Xz5i6JAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCaoQ9uAAKCRDa6OEJdZac
+ 5X8GD/45sKv79Nk2Swc6iLiavySW+TwiLBWgPevmhGT4anAWpfHIWKjcjldirlK1xjeyGKi9ZK8
+ nOodKsBHqpZmdx9yLuFQJRjWqze5M8D9p04M4cFtxY7b9RH8JhNmcRok+9iw+b1ubGMi4NmOFF1
+ WHxfC5wQ21WbObyvURB24rEw/5ETVdCCNz72W2f90wfs1yqmbpekDRrVoz92LpCHRkhaOisXM7M
+ MMq5I+HT+bPYaK1NUkd7OxpyvSNvCqckEbkilsIw7+YtabxPGeD6KdnK9MGrK7EiNWn3GG3CxXf
+ EpFjNhVjo1/ZSFs9tUa29pGxsH3PRrmhvLppqC8hH353ypjGHoXmoqfT16jyJA3M4Fy6JmEMT79
+ m1vKFoqPlMBtyFZ6fNh2CsysfF/Saeu7XfPL932DaryzcAp61J4W9ZokoId0BNwYSOVpZZl2beS
+ G0L76IyCoLi0KCyfK8IARQVjZug6J8pyAPXs1bmiA8MV2e1iZc7mEyNcBBqWbObHoVd05nuR/EB
+ dEQ7RCCZ5p54JQWDXJRekKFw3PgSBKsnaUnOGZrJdu5NPWbO0gXbX+Nxs7g4i5eq4quAndNv8x8
+ YmDC4D/6Nd2PD6fG3F4AQP0ohuHshotwnpXOv9rYy9py6/e5Nf8ZsGuky2l9NVSTyZ5X6TH5XhD
+ 6iHb32Z5VRB1fFA==
+X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
+ fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.93
+X-Mimecast-MFC-PROC-ID: CfsWxYaTWLjLl5HGbw1NwQWnQAfHUAKdvk2ff0nZh0g_1787051888
 X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=pbonzini@redhat.com;
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=170.10.129.124;
+ envelope-from=marcandre.lureau@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -23
-X-Spam_score: -2.4
-X-Spam_bar: --
-X-Spam_report: (-2.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.343,
+X-Spam_score_int: 9
+X-Spam_score: 0.9
+X-Spam_bar: /
+X-Spam_report: (0.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.343,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=0.001, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=0.001, RCVD_IN_SBL_CSS=3.335,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -122,24 +118,114 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Aug 18, 2026 at 11:24=E2=80=AFAM Philippe Mathieu-Daud=C3=A9
-<philmd@oss.qualcomm.com> wrote:
-> > Your patch is correct because, even if cpu_thread_is_idle() sees cpu-
-> >  >halted =3D=3D false, the flag could become true during
-> > process_queued_cpu_work() because it releases the BQL.
-> >
-> > However, I think the better fix is to remove the return code, and check
-> > cpu->halted in kvm_cpu_exec().
->
-> Looking at it, even better would be to move *process_async_events()
-> from inner loop to outer loop for all accelerators. For HW accels it
-> seems quite trivial; for TCG I need to figure if it is safe to call
-> icount_prepare_for_run() with the BQL taken, due to the replay_mutex
-> uses -- here the win is cpu_handle_halt() ends restricted to system
-> and we can remove the odd EXCP_HLT handling in user emulation.
+Convert the acpi and iommu-sys OnOffAuto properties from manual
+visitor-based callbacks to property_add_qapi_enum().
 
-Makes sense, but probably it would be a series of its own. :)
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
+---
+ hw/riscv/virt.c | 52 +++++++++++++++++++++++-----------------------------
+ 1 file changed, 23 insertions(+), 29 deletions(-)
 
-Paolo
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index 51bac47a91d8..5ebce4a3efc9 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -56,7 +56,7 @@
+ #include "hw/pci-host/gpex.h"
+ #include "hw/display/ramfb.h"
+ #include "hw/acpi/aml-build.h"
+-#include "qapi/qapi-visit-common.h"
++#include "qapi/qapi-type-infos-common.h"
+ #include "hw/virtio/virtio-iommu.h"
+ #include "hw/uefi/var-service-api.h"
+ 
+@@ -1635,21 +1635,16 @@ bool virt_is_iommu_sys_enabled(RISCVVirtState *s)
+     return s->iommu_sys == ON_OFF_AUTO_ON;
+ }
+ 
+-static void virt_get_iommu_sys(Object *obj, Visitor *v, const char *name,
+-                               void *opaque, Error **errp)
++static int virt_get_iommu_sys(Object *obj, Error **errp)
+ {
+     RISCVVirtState *s = RISCV_VIRT_MACHINE(obj);
+-    OnOffAuto iommu_sys = s->iommu_sys;
+-
+-    visit_type_OnOffAuto(v, name, &iommu_sys, errp);
++    return s->iommu_sys;
+ }
+ 
+-static void virt_set_iommu_sys(Object *obj, Visitor *v, const char *name,
+-                               void *opaque, Error **errp)
++static void virt_set_iommu_sys(Object *obj, int value, Error **errp)
+ {
+     RISCVVirtState *s = RISCV_VIRT_MACHINE(obj);
+-
+-    visit_type_OnOffAuto(v, name, &s->iommu_sys, errp);
++    s->iommu_sys = value;
+ }
+ 
+ bool virt_is_acpi_enabled(RISCVVirtState *s)
+@@ -1657,21 +1652,16 @@ bool virt_is_acpi_enabled(RISCVVirtState *s)
+     return s->acpi != ON_OFF_AUTO_OFF;
+ }
+ 
+-static void virt_get_acpi(Object *obj, Visitor *v, const char *name,
+-                          void *opaque, Error **errp)
++static int virt_get_acpi(Object *obj, Error **errp)
+ {
+     RISCVVirtState *s = RISCV_VIRT_MACHINE(obj);
+-    OnOffAuto acpi = s->acpi;
+-
+-    visit_type_OnOffAuto(v, name, &acpi, errp);
++    return s->acpi;
+ }
+ 
+-static void virt_set_acpi(Object *obj, Visitor *v, const char *name,
+-                          void *opaque, Error **errp)
++static void virt_set_acpi(Object *obj, int value, Error **errp)
+ {
+     RISCVVirtState *s = RISCV_VIRT_MACHINE(obj);
+-
+-    visit_type_OnOffAuto(v, name, &s->acpi, errp);
++    s->acpi = value;
+ }
+ 
+ static HotplugHandler *virt_machine_get_hotplug_handler(MachineState *machine,
+@@ -1769,17 +1759,21 @@ static void virt_machine_class_init(ObjectClass *oc, const void *data)
+         object_class_property_set_description(oc, "aia-guests", str);
+     }
+ 
+-    object_class_property_add(oc, "acpi", "OnOffAuto",
+-                              virt_get_acpi, virt_set_acpi,
+-                              NULL, NULL);
+-    object_class_property_set_description(oc, "acpi",
+-                                          "Enable ACPI");
++    object_class_property_add_qapi_enum(oc, QAPI_ENUM_PROP(
++        .name = "acpi",
++        .description = "Enable ACPI",
++        .qapi_type = &OnOffAuto_type_info,
++        .get = virt_get_acpi,
++        .set = virt_set_acpi,
++    ));
+ 
+-    object_class_property_add(oc, "iommu-sys", "OnOffAuto",
+-                              virt_get_iommu_sys, virt_set_iommu_sys,
+-                              NULL, NULL);
+-    object_class_property_set_description(oc, "iommu-sys",
+-                                          "Enable IOMMU platform device");
++    object_class_property_add_qapi_enum(oc, QAPI_ENUM_PROP(
++        .name = "iommu-sys",
++        .description = "Enable IOMMU platform device",
++        .qapi_type = &OnOffAuto_type_info,
++        .get = virt_get_iommu_sys,
++        .set = virt_set_iommu_sys,
++    ));
+ }
+ 
+ static const TypeInfo virt_machine_typeinfo = {
+
+-- 
+2.55.0.543.g5ebe2ebe4ea8
 
 
