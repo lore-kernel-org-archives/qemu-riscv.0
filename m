@@ -4,99 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03561C5DF74
-	for <qemu-riscv@archiver.kernel.org>; Tue, 18 Aug 2026 13:37:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA7ECC5DF7E
+	for <qemu-riscv@archiver.kernel.org>; Tue, 18 Aug 2026 13:37:46 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wwJz7-00072K-Rd; Tue, 18 Aug 2026 09:36:10 -0400
+	id 1wwJye-0006i9-Lm; Tue, 18 Aug 2026 09:35:40 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <0860734llx@gmail.com>)
- id 1wwJyz-0006sO-EL
- for qemu-riscv@nongnu.org; Tue, 18 Aug 2026 09:36:01 -0400
-Received: from mail-pl1-x632.google.com ([2607:f8b0:4864:20::632])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <0860734llx@gmail.com>)
- id 1wwJyx-0000eV-Ln
- for qemu-riscv@nongnu.org; Tue, 18 Aug 2026 09:36:01 -0400
-Received: by mail-pl1-x632.google.com with SMTP id
- d9443c01a7336-2caed617615so60994365ad.3
- for <qemu-riscv@nongnu.org>; Tue, 18 Aug 2026 06:35:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1787060158; x=1787664958; darn=nongnu.org;
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=rnpSMHdKxpifgB7rbR0f3HT1pfTaEjaN1jkrKszzRJQ=;
- b=iu3Fge/3d3kvMsy319h7GTDeACNH9+afGDcc+DsA8mQnNlExoStPBmsdXEQ7/+NC4c
- x5W3BJ5VijBDC8lpNZ1oCh9vGkXbPtjexDK+Vf2FqC24TUhGErcJoxzgzlVUgMP/aP2R
- YfnvzGq6+hz5ZCqk/20HmT2CAXBRwzVgfmMRdUTQ9OltMvoUhoRoCwTArSOm0bgT3p0e
- eCyDqlhUHKh2f8PJTGnWV3avas3Pd3/Sp4GWGObmRdzo41JfsRjUvo3RBCLLCeebSYqU
- L+4v3NOcdLNmrBcDIvfqOJVx2SGcwxN2yFJRMNcC26mzyBvG/nCVOcQMqQoXAEksBL0H
- SzSQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787060158; x=1787664958;
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=rnpSMHdKxpifgB7rbR0f3HT1pfTaEjaN1jkrKszzRJQ=;
- b=nVjOoKoFEB+6mUzSJ/En75l0hGd1clH7mWXDKBgPPVX5jqZV+ppHq8EIGZiUD68KpV
- fHJmV1BUmWK8ZMNPCqEojiop6YcpJcc1sspIQqFs8XWN9jfsQe5w8GQriXbb5fAicdZB
- Qy5Yfdy0no88qX/nog4YfXXPz0D/L9ReoKzXGj6c+sRnUiNdkHw4eqpSjkD4wvb9mEtX
- 4YGUa/Dim4p/VdDAld8+RtBQlceO93diWMh/5YNbqGZWCY3Kqvnn6UcY1YzjziWV1j1C
- x5cvjrGWWpSPhq9oKMe/d5VmAlBG0NnI3enR7Ic+6XVdNV40or3L5iYpHI1aYAvTdMNq
- RGgA==
-X-Forwarded-Encrypted: i=1;
- AHgh+RorTvgCpOLGVEDK3qOT0KtJ3+e7VfVoWqHC4PSqs47QaKUOuQT/qbIK1AHY7zWS+bwh0xxNKgUl/gh/@nongnu.org
-X-Gm-Message-State: AOJu0YypTqimZJ2g8Y8GjOOBM9G9HtBzjOEbNXHtM3hDQLYyZvd6xDLl
- W5kIsrd9/7kCYDSxB/MDp8DYAD7dAcZrvUqdraUp2CwmqTv7wCE9DeF0O/j+IoTYzhYULQ==
-X-Gm-Gg: AR+sD11d+yGvY3uF4qbedS8sISO8OWJN2Xeu3YM/RCpiycGn1wvOrSSPkSBNfJt6KWr
- npymDKx1Pv7kBtSAf8HQVnF0BjghdPsKe+fcGYxfTqRcsc+DS1ZtZDJ703xFoai82gxBPJlrowW
- 4c7K+1q/VuIhmGKm7AbpkrfBkCfRU8y98l8/TitA5L05BQk9zFyZ0sRnuRBXHFWewRfBGBZytKb
- V7STIzZwajpCl5KuSjNyyc0o3IM8Jb1PuCdDwl15GqsYXjtBvLMZpBP+ot3zXdFO73CWBLyVb46
- 8YvDe+2U8xD4GTWdqvERy5yTiXUgS0ma+k2pWGlKQxGgRRQqhUKRO21hUCBKZSGbrirTvYYctyW
- 4ScYZLdNPBpXGpKBWtBoADHWXRWKc2vcctaiq2lKKFUqYodJRpaOf2aE1L+rsWD/GlZGJI2DLeV
- XItJENVnID4CQbF+a+p74V+rmcVQY9vfahHxVO5IOwgs6reSjFegRqtfwLpT266+UqTjK34QIQE
- DTAqStlMQsNCo5vHA==
-X-Received: by 2002:a17:903:4b50:b0:2c9:a5e9:c26e with SMTP id
- d9443c01a7336-2d3b0eec2e4mr420338295ad.13.1787060157672; 
- Tue, 18 Aug 2026 06:35:57 -0700 (PDT)
-Received: from [172.17.0.5] ([42.193.175.155])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2d5d014d965sm8066845ad.35.2026.08.18.06.35.53
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Aug 2026 06:35:57 -0700 (PDT)
-From: Simon Law <0860734llx@gmail.com>
-Subject: [PATCH v2 0/4] Kendryte K230 CMU register model
-Date: Tue, 18 Aug 2026 21:35:49 +0800
-Message-Id: <20260818-feat-k230-cmu-v2-0-57eadb98f40f@gmail.com>
+ (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
+ id 1wwJyc-0006b5-C9
+ for qemu-riscv@nongnu.org; Tue, 18 Aug 2026 09:35:38 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
+ id 1wwJya-0000bA-HL
+ for qemu-riscv@nongnu.org; Tue, 18 Aug 2026 09:35:38 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1787060135;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=KcP90JOveGYGun6oJJcYdEjRtcUXrnPo6AGQudaLO1U=;
+ b=f1qDixT3pMLBmVQy4D2LAWApjsDqY9wpcXKwOEOApYmP5+/9wEreAqlrNffTexz+UkxNt0
+ yw+1RphdeozL/qrr1rUcEg3fJlw7mOnL69A0itHfQdsNA+ESYvkyR5FgZqtnwTKgFtnCmQ
+ wfHs6HJKtwZiAN/aYONzNlEfRJS8xls=
+Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-601-tIn4V-VnP068aJ6RNWgw4g-1; Tue,
+ 18 Aug 2026 09:35:30 -0400
+X-MC-Unique: tIn4V-VnP068aJ6RNWgw4g-1
+X-Mimecast-MFC-AGG-ID: tIn4V-VnP068aJ6RNWgw4g_1787060127
+Received: from mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.95])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 830F81955DC1; Tue, 18 Aug 2026 13:35:26 +0000 (UTC)
+Received: from localhost (headnet04.pony-001.prod.iad2.dc.redhat.com
+ [10.2.32.116])
+ by mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id EEE8C434; Tue, 18 Aug 2026 13:35:21 +0000 (UTC)
+From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
+Date: Tue, 18 Aug 2026 17:29:30 +0400
+Subject: [PATCH v3 64/74] target/riscv: fix incorrect QAPI types and u8 casting
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIALVfhGoC/3XMQQ6CMBCF4auQWTumDKRSV97DsMB2ChMFTItEQ
- 3p3K3uX/0vet0HkIBzhXGwQeJUo85SDDgXYoZt6RnG5gRRp1SiDnrsF71QptOMLzU0Ta+eo8hX
- kzzOwl/fuXdvcg8RlDp+dX8vf+k9aS1TYnAyZhmxda3vpx04eRzuP0KaUvmvntWqqAAAA
-X-Change-ID: 20260809-feat-k230-cmu-9b62e6dd23f3
+Message-Id: <20260818-qom-qapi-v3-64-24b8bbbe3d86@redhat.com>
+References: <20260818-qom-qapi-v3-0-24b8bbbe3d86@redhat.com>
+In-Reply-To: <20260818-qom-qapi-v3-0-24b8bbbe3d86@redhat.com>
 To: qemu-devel@nongnu.org
-Cc: Paolo Bonzini <pbonzini@redhat.com>, 
- Chao Liu <chao.liu@processmission.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
+Cc: Markus Armbruster <armbru@redhat.com>, 
+ Paolo Bonzini <pbonzini@redhat.com>, 
+ =?utf-8?q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
+ =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>, 
+ Michael Roth <michael.roth@amd.com>, 
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, 
+ =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@mailo.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, 
  Alistair Francis <alistair.francis@wdc.com>, 
  Weiwei Li <liwei1518@gmail.com>, 
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org, 
- Fabiano Rosas <farosas@suse.de>, Laurent Vivier <lvivier@redhat.com>, 
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
-X-Mailer: b4 0.16.0
-Received-SPF: pass client-ip=2607:f8b0:4864:20::632;
- envelope-from=0860734llx@gmail.com; helo=mail-pl1-x632.google.com
-X-Spam_score_int: -13
-X-Spam_score: -1.4
-X-Spam_bar: -
-X-Spam_report: (-1.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- FROM_STARTS_WITH_NUMS=0.738, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1696;
+ i=marcandre.lureau@redhat.com; h=from:subject:message-id;
+ bh=dkobR/sb7kIFkme1f+t2YY0mapzjM2VuRmtv0YHZc4Y=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBqhF9z/mxKriTXxlI9hoyr4dTxPRQG0JUZ/m6Bw
+ ZJv3UUfkDSJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCaoRfcwAKCRDa6OEJdZac
+ 5ZnMD/9DQW3NVpCu5clFFJ9r5PcGwKr42soaSn59YFoF3vws+G3JokDff/3LC7JUxJxoChdQOsP
+ yyoWwZQ2ho37s85P/giLNrF/IGAqjh279Q5zPqdWBiuGGQZFysGCzbSUH4jq37T/uv8K9cW22uo
+ rBpl1H0/9DZd6CwZYhZgCZYkneuyul5cWLWeb6oVFk1r0uusHf+xOMGWlCI5wB1ZG190JqycZm0
+ iJkD0yoXsdL6nUhT/IWIr/J/QoN7I6kIR3o3mcbfz1Zvoy5+AJFys6YxdO9WJuq+4hnes23oV8H
+ CSqqrXEuht177ww4z3mv9gffOxEZpvQ+xUsn3lSvKax/GtxFoDazHgRTbYkU1xSu/Olda8AwIbF
+ CAciPJTwDb5WnS2FLHb6mBxz4wkzcNh+A9HEQpdXTHhFXp0GrnFVuSE1+3jiQZBhYtteYbt2nnM
+ yQY4xXA/6UDCqNpjcqrBykWcrF0EcDuC1mwvEm8ae1omf9aZIQ/zudUpNIyux92IZYBc3jVXwyG
+ V5au/H5oH5/I5Jiq8meMSIgrRlDyqTVVWwHQOrqIK7+cMkay6mAUX6ubkMtilUBRmAN7/Scacvq
+ 8qE57OTeH3rdV9sUo9fE0qcsgv9Y+4XAeOCazVItemHiIZHnTJMLgRfCbJUdj9/+yIfyAEi4qFy
+ wPtvb3H1lZt/Zzg==
+X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
+ fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
+X-Scanned-By: MIMEDefang 3.6 on 10.30.177.95
+X-Mimecast-MFC-PROC-ID: LpPf_f8ruQg0cmp1-gMfabPAoP5vkpl89RnpwM980Dg_1787060127
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=170.10.129.124;
+ envelope-from=marcandre.lureau@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: 9
+X-Spam_score: 0.9
+X-Spam_bar: /
+X-Spam_report: (0.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.343,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=0.001, RCVD_IN_SBL_CSS=3.335,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -112,74 +117,54 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The Kendryte K230 machine currently lacks the Clock Management Unit (CMU)
-register interface required by the K230 SDK U-Boot and the Linux K230 clock
-driver. As a result, software probing the PLL and sysclk providers cannot
-observe the expected reset values or register update semantics.
+"pmu_num" is u8, "pmu_mask" is u32, so is "pmp-granularity"
 
-This series adds a minimal, deterministic K230 CMU model.
-
-The model covers:
-
-- four PLL register blocks at 0x91102000..0x9110203f;
-- the defined sysclk registers in the 0x91100000 window;
-- the software-visible SPI2AXI_CLK_DIV register at sysclk offset 0x108;
-- reset values and writable/reserved/read-only masks;
-- PLL control write-enable semantics;
-- write-one-to-trigger update behavior;
-- deterministic PLL lock and initialization status;
-- VMState for stable PLL and sysclk register state;
-- qtest coverage for reset, masks, write-enable, W1T, status, sysclk
-updates, unknown offsets, and system reset;
-- K230 machine wiring and user-facing documentation.
-
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 ---
-Changes in v2:
-- Drop the extra K230 Machines maintainer entry (Chao Liu).
-- Consume descriptor w1t_mask on MMIO writes so W1T strobes self-clear
-  and are never retained.
-- Align wrapped questions fix (Chao Liu).
-- Link to v1: https://lore.kernel.org/qemu-devel/20260809-feat-k230-cmu-v1-0-8792982c446c@gmail.com
+ target/riscv/cpu.c | 9 +++++----
+ 1 file changed, 5 insertions(+), 4 deletions(-)
 
-To: qemu-devel@nongnu.org
-Cc: Paolo Bonzini <pbonzini@redhat.com>
-Cc: Chao Liu <chao.liu@processmission.com>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>
-Cc: Alistair Francis <alistair.francis@wdc.com>
-Cc: Weiwei Li <liwei1518@gmail.com>
-Cc: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Cc: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Cc: qemu-riscv@nongnu.org
-Cc: Fabiano Rosas <farosas@suse.de>
-Cc: Laurent Vivier <lvivier@redhat.com>
-Cc: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 6116d6da7685..0c0730f08026 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -1598,7 +1598,7 @@ static void prop_pmu_num_get(Object *obj, Visitor *v, const char *name,
+ }
+ 
+ static const PropertyInfo prop_pmu_num = {
+-    .type = "int8",
++    .type = "uint8",
+     .description = "pmu-num",
+     .get = prop_pmu_num_get,
+     .set = prop_pmu_num_set,
+@@ -1634,13 +1634,13 @@ static void prop_pmu_mask_set(Object *obj, Visitor *v, const char *name,
+ static void prop_pmu_mask_get(Object *obj, Visitor *v, const char *name,
+                              void *opaque, Error **errp)
+ {
+-    uint8_t pmu_mask = RISCV_CPU(obj)->cfg.pmu_mask;
++    uint32_t pmu_mask = RISCV_CPU(obj)->cfg.pmu_mask;
+ 
+-    visit_type_uint8(v, name, &pmu_mask, errp);
++    visit_type_uint32(v, name, &pmu_mask, errp);
+ }
+ 
+ static const PropertyInfo prop_pmu_mask = {
+-    .type = "int8",
++    .type = "uint32",
+     .description = "pmu-mask",
+     .get = prop_pmu_mask_get,
+     .set = prop_pmu_mask_set,
+@@ -1783,6 +1783,7 @@ static void prop_pmp_granularity_get(Object *obj, Visitor *v, const char *name,
+ }
+ 
+ static const PropertyInfo prop_pmp_granularity = {
++    .type = "uint32",
+     .description = "pmp-granularity",
+     .get = prop_pmp_granularity_get,
+     .set = prop_pmp_granularity_set,
 
----
-Simon Law (4):
-      hw/misc: model K230 CMU registers
-      hw/riscv: connect the K230 CMU
-      tests/qtest: add K230 CMU coverage
-      docs/system/riscv: document K230 CMU support
-
- MAINTAINERS                 |   3 +
- docs/system/riscv/k230.rst  |  22 ++
- hw/misc/Kconfig             |   3 +
- hw/misc/k230_cmu.c          | 903 ++++++++++++++++++++++++++++++++++++++++++++
- hw/misc/meson.build         |   1 +
- hw/misc/trace-events        |   9 +
- hw/riscv/Kconfig            |   1 +
- hw/riscv/k230.c             |  14 +-
- include/hw/misc/k230_cmu.h  |  58 +++
- include/hw/riscv/k230.h     |   2 +
- tests/qtest/k230-cmu-test.c | 312 +++++++++++++++
- tests/qtest/meson.build     |   3 +-
- 12 files changed, 1325 insertions(+), 6 deletions(-)
----
-base-commit: f893c46c3931b3684d235d221bf8b7844ddbf1d7
-change-id: 20260809-feat-k230-cmu-9b62e6dd23f3
-
-Best regards,
---  
-Simon Law <0860734llx@gmail.com>
+-- 
+2.55.0.543.g5ebe2ebe4ea8
 
 
