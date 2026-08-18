@@ -4,108 +4,114 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40E0BC5DF74
-	for <qemu-riscv@archiver.kernel.org>; Tue, 18 Aug 2026 13:40:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 598B8C5DF74
+	for <qemu-riscv@archiver.kernel.org>; Tue, 18 Aug 2026 13:56:44 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wwK0A-000899-KD; Tue, 18 Aug 2026 09:37:14 -0400
+	id 1wwKIl-00033G-Vo; Tue, 18 Aug 2026 09:56:28 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1wwJzv-0007ud-Ch
- for qemu-riscv@nongnu.org; Tue, 18 Aug 2026 09:37:01 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1wwJzs-0000lQ-Os
- for qemu-riscv@nongnu.org; Tue, 18 Aug 2026 09:36:59 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1787060215;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=zZa2wZhOBG8+2TMlvXOdLq9v5ancgW2V56AmVy49/Vs=;
- b=b1DanFaOSnyXK2JP5eXfgVuc18x1jJFfGm6ed+zy7BWP9hTK1q32Fn2w5tqbOZXfC45cLI
- fR4kdsxFJ6iVeBCyUKEPoGw9CEdFXgGuqm+sC0PuNG/hC4dIIUFvFjS56c0w3liKvMKgmQ
- 2KVY9A7b3wKtjLqdkVVzPMgJzTOV7HM=
-Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-637-ndM5C94eNQ6HQsNNknwCRg-1; Tue,
- 18 Aug 2026 09:36:45 -0400
-X-MC-Unique: ndM5C94eNQ6HQsNNknwCRg-1
-X-Mimecast-MFC-AGG-ID: ndM5C94eNQ6HQsNNknwCRg_1787060200
-Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 051A61800C32; Tue, 18 Aug 2026 13:36:40 +0000 (UTC)
-Received: from localhost (headnet04.pony-001.prod.iad2.dc.redhat.com
- [10.2.32.116])
- by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 474541800346; Tue, 18 Aug 2026 13:36:32 +0000 (UTC)
-From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-Date: Tue, 18 Aug 2026 17:29:34 +0400
-Subject: [PATCH v3 68/74] qdev: simplify DEFINE_PROP_ARRAY and remove
- generic array PropertyInfo
+ (Exim 4.90_1) (envelope-from <rao232328@gmail.com>)
+ id 1wwKIj-00031S-W7
+ for qemu-riscv@nongnu.org; Tue, 18 Aug 2026 09:56:26 -0400
+Received: from mail-pg1-x535.google.com ([2607:f8b0:4864:20::535])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <rao232328@gmail.com>)
+ id 1wwKIh-0004V0-HD
+ for qemu-riscv@nongnu.org; Tue, 18 Aug 2026 09:56:25 -0400
+Received: by mail-pg1-x535.google.com with SMTP id
+ 41be03b00d2f7-cbb8b54fcf8so4242604a12.0
+ for <qemu-riscv@nongnu.org>; Tue, 18 Aug 2026 06:56:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1787061382; x=1787666182; darn=nongnu.org;
+ h=mime-version:content-type:msip_labels:content-language
+ :accept-language:in-reply-to:references:message-id:date:thread-index
+ :thread-topic:subject:cc:to:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=UfoGH1lW6TcbX49Z23PlV8xiXT2uVHElnTqsyrdMhXI=;
+ b=S0Wsz1W7LE3bAgR6EwQGA+n4Z+VuW4yaevdadznvDgH3K9bqSnxLcwOJ3GHfTXeJtB
+ qWeVfGxx78EZG9tHlMQ9h6ho1aiWdiejjkc3sZRwAZENwtainj+vTnMt5JxMVmdctSnu
+ mqi+KcokJ/cuLY/v1ifEnffMDla2OMZAF5+BM/pwQa0kk5x/Y/dZQZQQvmQ4SwiW1xVv
+ rlz3i/ApQ65sSfQY4S+/LsK7u/B8aKBMyZ6eTRvCowpKsDzYk8a+BHlgjPbbnv3KgncZ
+ ty0CsJA9WF0QSqWA65TrdrSZ/fxOPUb++z63mRkhSeSq/9Dq858VS/Ba1sCy2ODFLhiE
+ 9ZxA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1787061382; x=1787666182;
+ h=mime-version:content-type:msip_labels:content-language
+ :accept-language:in-reply-to:references:message-id:date:thread-index
+ :thread-topic:subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to:content-type;
+ bh=UfoGH1lW6TcbX49Z23PlV8xiXT2uVHElnTqsyrdMhXI=;
+ b=nVUHJZWBjJ/NBhv1a88vCA2+EKXIINo4Iu/8SjkW9y+FZ0a3SMduEWHBUBD4abBIoy
+ hyfE1AYHFeKlJnbRaff3vEQqqo7pLkh/Yuk7bRYvYcRupxKy1ccxFPM8wIUNN3lL7c3R
+ S2mSSQoSmffnD4DWeYKSjPCmSUiFHqxTRGAij66bQSFaoRBhf+kFNjg4IyfL0ReUF80i
+ nFAGl08QjtqzIQWft2EtNODpmr0lOJ8WHsoEBV4A/aP0yXcQdrIENaVVrKY3jc+32AKc
+ jYc0CSxMrvqgxMJ4KB5VthmzjAY7eL4MO6L5+cmgJ2XOwuDTyj5SNRY/xVk/TG6lEQPZ
+ LBqQ==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RoBBggk7qeABtlUhfoW5tb8983ejyl1wUky/JdSDn6Rv5qt6aiE5BgtIxl45Tc9GdCm2iAGcOmx9/HB@nongnu.org
+X-Gm-Message-State: AOJu0Yw/vWG8rlakV1Dg2zbYou8S2RoPX97hS+QPnoPqEIQXzHPlmN5P
+ O9OTXWoEdWYELOU4PwdI1ngPU1DYPrqFllNd8yLlYSYfwwUShub/RgUb
+X-Gm-Gg: AR+sD13sIPRT7fbuiYYI6/9cmTVRRhECz4MLjSjXAJv9j2iThY6W/9g43/p9nM89Rfb
+ nOLUs73PIUcjCu4dmsKFBI5SFdupRujIpViqtll89KkIN93pEOaU8bbw8HD+ePeTNiOAB1+CwEv
+ YqO92Qaai26L2XiDXaM0cQ+qHR3OZwTsN9uOnzfoItTtqKjtgz/eXWVFQCauL3GHo/wHPlBfHxx
+ IA3sRhPQvWA7FA/5ncMkyBzpBBTEe87iQ4nA2gCKdvunZVZgLz/S+u88lKvTWkcr5MKq3fGEk8R
+ Mg5orxwMTPbVihF3imnPMRY5x8pvDAMVYIIVUJm8VNijWKDsGAoHqMtrUkcINt2AmuMsY2FJCVk
+ FIYMay+4uPi+3n22gpCUFZSrw8W2g/rd7YxijDnHAE6gSBs3vgd2rmIyCB0MaiJfcfZsjfmkYaP
+ g46Asn4KP09EKjvjV/JPKZwLj25RElkBZRk2w01RvaG8mZM04WsmINhdQUsfBdgyUF/GT/bngBq
+ T41PY/sRLjQiXMemYA+kxu1qNYBDPYYLFl7i2VUieZtZNTgzdMqDqvvHA==
+X-Received: by 2002:a05:6a20:4311:b0:3b3:26aa:5455 with SMTP id
+ adf61e73a8af0-3ccda9f9485mr10964140637.13.1787061381552; 
+ Tue, 18 Aug 2026 06:56:21 -0700 (PDT)
+Received: from SEYPR01MB5316.apcprd01.prod.exchangelabs.com
+ ([2603:1046:c07:c5a::5]) by smtp.gmail.com with ESMTPSA id
+ 41be03b00d2f7-cc13bf0118bsm2117552a12.2.2026.08.18.06.56.19
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 18 Aug 2026 06:56:21 -0700 (PDT)
+From: =?utf-8?B?6aW26L22?= <rao232328@gmail.com>
+To: Bin Meng <bmeng.cn@gmail.com>
+CC: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, "qemu-riscv@nongnu.org"
+ <qemu-riscv@nongnu.org>, "alistair.francis@wdc.com"
+ <alistair.francis@wdc.com>, "palmer@dabbelt.com" <palmer@dabbelt.com>,
+ "liwei1518@gmail.com" <liwei1518@gmail.com>,
+ "daniel.barboza@oss.qualcomm.com" <daniel.barboza@oss.qualcomm.com>,
+ "zhiwei_liu@linux.alibaba.com" <zhiwei_liu@linux.alibaba.com>,
+ "chao.liu@processmission.com" <chao.liu@processmission.com>,
+ "philmd@oss.qualcomm.com" <philmd@oss.qualcomm.com>, "pbonzini@redhat.com"
+ <pbonzini@redhat.com>, "lvivier@redhat.com" <lvivier@redhat.com>,
+ "farosas@suse.de" <farosas@suse.de>, "caojunze424@gmail.com"
+ <caojunze424@gmail.com>
+Subject: =?utf-8?B?5Zue5aSNOiBbUEFUQ0ggdjQgMi8zXSBody9yaXNjdjogYWRkIERlc2lnbldh?=
+ =?utf-8?Q?re_APB_timer_to_K230_board?=
+Thread-Topic: [PATCH v4 2/3] hw/riscv: add DesignWare APB timer to K230 board
+Thread-Index: AQHdKymQxgtbyh0lKUmzbSm4GMiic7adKe8AgAayNlo=
+X-MS-Exchange-MessageSentRepresentingType: 1
+Date: Tue, 18 Aug 2026 13:56:16 +0000
+Message-ID: <SEYPR01MB53165235FE9CCFDB1980D867F3A62@SEYPR01MB5316.apcprd01.prod.exchangelabs.com>
+References: <20260813133643.20380-1-rao232328@gmail.com>
+ <20260813133643.20380-3-rao232328@gmail.com>
+ <CAEUhbmV5biKom60BZf9QD+gTCJ67Dw+iW4sBoVWj8Oa+8q0mZg@mail.gmail.com>
+In-Reply-To: <CAEUhbmV5biKom60BZf9QD+gTCJ67Dw+iW4sBoVWj8Oa+8q0mZg@mail.gmail.com>
+Accept-Language: zh-CN, en-US
+Content-Language: zh-CN
+X-MS-Has-Attach: 
+X-MS-Exchange-Organization-SCL: -1
+X-MS-TNEF-Correlator: 
+X-MS-Exchange-Organization-RecordReviewCfmType: 0
+msip_labels: 
+Content-Type: multipart/alternative;
+ boundary="_000_SEYPR01MB53165235FE9CCFDB1980D867F3A62SEYPR01MB5316apcp_"
 MIME-Version: 1.0
-Message-Id: <20260818-qom-qapi-v3-68-24b8bbbe3d86@redhat.com>
-References: <20260818-qom-qapi-v3-0-24b8bbbe3d86@redhat.com>
-In-Reply-To: <20260818-qom-qapi-v3-0-24b8bbbe3d86@redhat.com>
-To: qemu-devel@nongnu.org
-Cc: Markus Armbruster <armbru@redhat.com>, 
- Paolo Bonzini <pbonzini@redhat.com>, 
- =?utf-8?q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
- =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>, 
- Michael Roth <michael.roth@amd.com>, 
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, 
- =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@mailo.com>, 
- Phil Dennis-Jordan <phil@philjordan.eu>, 
- Peter Maydell <peter.maydell@linaro.org>, 
- Yoshinori Sato <yoshinori.sato@nifty.com>, Jiri Pirko <jiri@resnulli.us>, 
- Jason Wang <jasowangio@gmail.com>, "Michael S. Tsirkin" <mst@redhat.com>, 
- Alistair Francis <alistair@alistair23.me>, 
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>, Weiwei Li <liwei1518@gmail.com>, 
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Chao Liu <chao.liu@processmission.com>, Eric Auger <eric.auger@redhat.com>, 
- qemu-arm@nongnu.org, qemu-riscv@nongnu.org
-X-Developer-Signature: v=1; a=openpgp-sha256; l=18792;
- i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=PyW5TRg7ZQG9TBHWp10W1XsKvOAHOQvWs33fU8g6Slo=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBqhF90WwkCHdSwdDjRfhx/vRH/pX2CN0gd7+K6G
- Ome7FteUQ6JAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCaoRfdAAKCRDa6OEJdZac
- 5WRhEACfJfiS5+ZFjMpf8lCH7eULpUtFqaf4CpQr9GSoTYQqm/tZxSsUT7eFncM+m/cNeHK5Twv
- zzchkx0e5OepECdbiqSqfNuJnNze+a2tLbCZL5c7GWEA3Cjo3bfLgozvlCXY6vGUVF/YzT0QLtM
- WrGtAcOt+zayhDALEFisXrtA3PuGEVaz8ArM5cRI+xT1IC/GRiAM4xw9KoSD2mQAYivjY6F8jGj
- rZKF81NJ08IEnEUXrViMY3WhHec11LaixinA3sBIzuLcOW/q9XH2EmyQKGQDe/o2HV12C9cx0j8
- kwmH+AOc9PuAq8Al4hdG0aCKMkxIs9eFSEKxi8uaJhxZNbYw4C0hgrocYUiEvpeLDtw7lq7FKNu
- FdWiNCqUYNN1CiSZqjxtTaURe4NrC8025Llxe8IpfT9fSafFeOrPG3t4mKHnBVjOb3tUi3lEpgE
- 6DZIoZ4iqxhWkatEb68wJLZY+zWyhVOWHZEIfjMs093fFlnX6h7oya1KUMPMN/G87HcKXUXhmN2
- rHVvJJwcvgoUPTup2MHapsPi+c6UOitPnQkqKNaPjQbfzntkVwgTMZ65kLKI5IyfsMcv8aiVz4e
- ciPrWBuUTZ0CD9MzkKuf0fR7m0WyegKPsh2cywyPPeRYVBxPCnSoMgjGpHEW9oi7bzJph1XVWY5
- qfbGjLd59bl59yQ==
-X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
- fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
-X-Mimecast-MFC-PROC-ID: eO7ETsTS9Dpbsaqw5_lGSwTCLa-4jOj3SXPfww0GvTk_1787060200
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.129.124;
- envelope-from=marcandre.lureau@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -23
-X-Spam_score: -2.4
-X-Spam_bar: --
-X-Spam_report: (-2.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.343,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=0.001, SPF_HELO_PASS=-0.001,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::535;
+ envelope-from=rao232328@gmail.com; helo=mail-pg1-x535.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001, HTML_MESSAGE=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -122,392 +128,330 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Change DEFINE_PROP_ARRAY, the macro now uses _arrayprop##_list to
-resolve the typed list PropertyInfo (introduced in the previous patch)
-instead of the generic qdev_prop_array.
+--_000_SEYPR01MB53165235FE9CCFDB1980D867F3A62SEYPR01MB5316apcp_
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-This means the element type and size information is carried by the
-PropertyInfo itself rather than duplicated at each callsite. Since
-the typed list PropertyInfos encode element_info and element_size,
-the .arrayinfo and .arrayfieldsize fields are no longer set by the
-macro (they will be removed from the Property struct in the next patch).
+VGhhbmtzIGZvciBwb2ludGluZyB0aGlzIG91dC4NCg0KWW91IGFyZSByaWdodC4gQWNjb3JkaW5n
+IHRvIHRoZSBUUk0sIHRpbWVyTl9jbGtfc2VsDQpyZXNldHMgdG8gMSBhbmQgc2VsZWN0cyB0aGUg
+NTAgTUh6IHRpbWVyTl9wdWxzZV9pbiBjbG9jay4NCkkgbWlzdGFrZW5seSBhcHBsaWVkIHRoZSAv
+OCBkaXZpZGVyIGFuZCB1c2VkIDYuMjUgTUh6Lg0KDQpJIHdpbGwgZml4IHRoZSB0aW1lciBjbG9j
+ayBmcmVxdWVuY3kgdG8gNTAgTUh6IGluIHY1Lg0KX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX18NCuWPkeS7tuS6ujogQmluIE1lbmcgPGJtZW5nLmNuQGdtYWlsLmNvbT4NCuWPkemAgeaX
+tumXtDogMjAyNuW5tDjmnIgxNOaXpSAxNTo0MA0K5pS25Lu25Lq6OiByYW95aSA8cmFvMjMyMzI4
+QGdtYWlsLmNvbT4NCuaKhOmAgTogcWVtdS1kZXZlbEBub25nbnUub3JnIDxxZW11LWRldmVsQG5v
+bmdudS5vcmc+OyBxZW11LXJpc2N2QG5vbmdudS5vcmcgPHFlbXUtcmlzY3ZAbm9uZ251Lm9yZz47
+IGFsaXN0YWlyLmZyYW5jaXNAd2RjLmNvbSA8YWxpc3RhaXIuZnJhbmNpc0B3ZGMuY29tPjsgcGFs
+bWVyQGRhYmJlbHQuY29tIDxwYWxtZXJAZGFiYmVsdC5jb20+OyBsaXdlaTE1MThAZ21haWwuY29t
+IDxsaXdlaTE1MThAZ21haWwuY29tPjsgZGFuaWVsLmJhcmJvemFAb3NzLnF1YWxjb21tLmNvbSA8
+ZGFuaWVsLmJhcmJvemFAb3NzLnF1YWxjb21tLmNvbT47IHpoaXdlaV9saXVAbGludXguYWxpYmFi
+YS5jb20gPHpoaXdlaV9saXVAbGludXguYWxpYmFiYS5jb20+OyBjaGFvLmxpdUBwcm9jZXNzbWlz
+c2lvbi5jb20gPGNoYW8ubGl1QHByb2Nlc3NtaXNzaW9uLmNvbT47IHBoaWxtZEBvc3MucXVhbGNv
+bW0uY29tIDxwaGlsbWRAb3NzLnF1YWxjb21tLmNvbT47IHBib256aW5pQHJlZGhhdC5jb20gPHBi
+b256aW5pQHJlZGhhdC5jb20+OyBsdml2aWVyQHJlZGhhdC5jb20gPGx2aXZpZXJAcmVkaGF0LmNv
+bT47IGZhcm9zYXNAc3VzZS5kZSA8ZmFyb3Nhc0BzdXNlLmRlPjsgY2FvanVuemU0MjRAZ21haWwu
+Y29tIDxjYW9qdW56ZTQyNEBnbWFpbC5jb20+DQrkuLvpopg6IFJlOiBbUEFUQ0ggdjQgMi8zXSBo
+dy9yaXNjdjogYWRkIERlc2lnbldhcmUgQVBCIHRpbWVyIHRvIEsyMzAgYm9hcmQNCg0KT24gVGh1
+LCBBdWcgMTMsIDIwMjYgYXQgOTozN+KAr1BNIHJhb3lpIDxyYW8yMzIzMjhAZ21haWwuY29tPiB3
+cm90ZToNCj4NCj4gV2lyZSB1cCB0aGUgRGVzaWduV2FyZSBBUEIgdGltZXIgdG8gdGhlIEsyMzAg
+U29DIHdpdGgNCj4gbnVtLXRpbWVycz02IGFuZCBhIDYuMjUgTUh6IGNsb2NrLiBDb25uZWN0IHRp
+bWVyIElSUXMNCj4gdG8gdGhlIFBMSUMuIFJlbW92ZSB0aGUgcHJldmlvdXMgdW5pbXBsZW1lbnRl
+ZCB0aW1lciBzdHViLg0KPg0KPiBTaWduZWQtb2ZmLWJ5OiByYW95aSA8cmFvMjMyMzI4QGdtYWls
+LmNvbT4NCj4gLS0tDQo+ICBody9yaXNjdi9LY29uZmlnICAgICAgICB8ICAxICsNCj4gIGh3L3Jp
+c2N2L2syMzAuYyAgICAgICAgIHwgMzMgKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrLS0t
+DQo+ICBpbmNsdWRlL2h3L3Jpc2N2L2syMzAuaCB8ICA4ICsrKysrKysrDQo+ICAzIGZpbGVzIGNo
+YW5nZWQsIDM5IGluc2VydGlvbnMoKyksIDMgZGVsZXRpb25zKC0pDQo+DQo+IGRpZmYgLS1naXQg
+YS9ody9yaXNjdi9LY29uZmlnIGIvaHcvcmlzY3YvS2NvbmZpZw0KPiBpbmRleCBkZTM3YzA4Y2Fl
+Li5jMmMwMWFmNmVlIDEwMDY0NA0KPiAtLS0gYS9ody9yaXNjdi9LY29uZmlnDQo+ICsrKyBiL2h3
+L3Jpc2N2L0tjb25maWcNCj4gQEAgLTE2MiwzICsxNjIsNCBAQCBjb25maWcgSzIzMA0KPiAgICAg
+IHNlbGVjdCBTRVJJQUxfTU0NCj4gICAgICBzZWxlY3QgVU5JTVANCj4gICAgICBzZWxlY3QgSzIz
+MF9XRFQNCj4gKyAgICBzZWxlY3QgRFdfQVBCX1RJTUVSDQo+IGRpZmYgLS1naXQgYS9ody9yaXNj
+di9rMjMwLmMgYi9ody9yaXNjdi9rMjMwLmMNCj4gaW5kZXggNjU2ZjI4MTkwYy4uNzhhMDU0OTJh
+ZCAxMDA2NDQNCj4gLS0tIGEvaHcvcmlzY3YvazIzMC5jDQo+ICsrKyBiL2h3L3Jpc2N2L2syMzAu
+Yw0KPiBAQCAtMjQsNiArMjQsOCBAQA0KPiAgI2luY2x1ZGUgInRhcmdldC9yaXNjdi9jcHUuaCIN
+Cj4gICNpbmNsdWRlICJody9jb3JlL2xvYWRlci5oIg0KPiAgI2luY2x1ZGUgImh3L2NvcmUvc3lz
+YnVzLmgiDQo+ICsjaW5jbHVkZSAiaHcvY29yZS9jbG9jay5oIg0KPiArI2luY2x1ZGUgImh3L2Nv
+cmUvcWRldi1jbG9jay5oIg0KPiAgI2luY2x1ZGUgImh3L3Jpc2N2L2syMzAuaCINCj4gICNpbmNs
+dWRlICJody9yaXNjdi9ib290LmgiDQo+ICAjaW5jbHVkZSAiaHcvcmlzY3YvbWFjaGluZXMtcW9t
+LmgiDQo+IEBAIC0zNyw2ICszOSw5IEBADQo+ICAjZGVmaW5lIEsyMzBfRElSRUNUX0tFUk5FTF9B
+RERSICAweDgyMDAwMDANCj4gICNkZWZpbmUgSzIzMF9ESVJFQ1RfRFRCX0FERFIgICAgIDB4YTAw
+MDAwMA0KPg0KPiArI2RlZmluZSBLMjMwX1RJTUVSX05VTV9DSEFOTkVMUyA2DQo+ICsjZGVmaW5l
+IEsyMzBfVElNRVJfREVGQVVMVF9GUkVRIDYyNTAwMDANCg0KVGhlIFRSTSBzYXlzIHRoZSB0aW1l
+ciBmcmVxdWVuY3kgaXMgNTBNSHouIFdoZXJlIGlzIHRoaXMgNjI1MDAwMCBjb21pbmcgZnJvbT8N
+Cg0KPiArDQo+ICBzdGF0aWMgY29uc3QgTWVtTWFwRW50cnkgbWVtbWFwW10gPSB7DQo+ICAgICAg
+W0syMzBfREVWX0REUkNdID0gICAgICAgICB7IDB4MDAwMDAwMDAsICAweDgwMDAwMDAwIH0sDQo+
+ICAgICAgW0syMzBfREVWX0tQVV9MMl9DQUNIRV0gPSB7IDB4ODAwMDAwMDAsICAweDAwMjAwMDAw
+IH0sDQo+IEBAIC0xMTAsNiArMTE1LDE5IEBAIHN0YXRpYyB2b2lkIGsyMzBfc29jX2luaXQoT2Jq
+ZWN0ICpvYmopDQo+ICAgICAgb2JqZWN0X2luaXRpYWxpemVfY2hpbGQob2JqLCAiYzkwOC1jcHUi
+LCBjcHUwLCBUWVBFX1JJU0NWX0hBUlRfQVJSQVkpOw0KPiAgICAgIG9iamVjdF9pbml0aWFsaXpl
+X2NoaWxkKG9iaiwgImsyMzAtd2R0MCIsICZzLT53ZHRbMF0sIFRZUEVfSzIzMF9XRFQpOw0KPiAg
+ICAgIG9iamVjdF9pbml0aWFsaXplX2NoaWxkKG9iaiwgImsyMzAtd2R0MSIsICZzLT53ZHRbMV0s
+IFRZUEVfSzIzMF9XRFQpOw0KPiArICAgIG9iamVjdF9pbml0aWFsaXplX2NoaWxkKG9iaiwgImR3
+LWFwYi10aW1lciIsICZzLT50aW1lciwNCj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICBU
+WVBFX0RXX0FQQl9USU1FUik7DQo+ICsNCj4gKyAgICBxZGV2X3Byb3Bfc2V0X3VpbnQzMihERVZJ
+Q0UoJnMtPnRpbWVyKSwgIm51bS10aW1lcnMiLA0KPiArICAgICAgICAgICAgICAgICAgICAgICAg
+IEsyMzBfVElNRVJfTlVNX0NIQU5ORUxTKTsNCj4gKw0KPiArICAgIENsb2NrICp0aW1lcl9jbGsg
+PSBjbG9ja19uZXcoT0JKRUNUKHMpLCAidGltZXItY2xrIik7DQo+ICsgICAgY2xvY2tfc2V0X2h6
+KHRpbWVyX2NsaywgSzIzMF9USU1FUl9ERUZBVUxUX0ZSRVEpOw0KPiArICAgIGZvciAoaW50IGkg
+PSAwOyBpIDwgSzIzMF9USU1FUl9OVU1fQ0hBTk5FTFM7IGkrKykgew0KPiArICAgICAgICBnX2F1
+dG9mcmVlIGNoYXIgKmNsb2NrX25hbWUgPSBnX3N0cmR1cF9wcmludGYoInRpbWVyWyVkXSIsIGkp
+Ow0KPiArDQo+ICsgICAgICAgIHFkZXZfY29ubmVjdF9jbG9ja19pbihERVZJQ0UoJnMtPnRpbWVy
+KSwgY2xvY2tfbmFtZSwgdGltZXJfY2xrKTsNCj4gKyAgICB9DQo+DQo+ICAgICAgcWRldl9wcm9w
+X3NldF91aW50MzIoREVWSUNFKGNwdTApLCAiaGFydGlkLWJhc2UiLCAwKTsNCj4gICAgICBxZGV2
+X3Byb3Bfc2V0X3N0cmluZyhERVZJQ0UoY3B1MCksICJjcHUtdHlwZSIsIFRZUEVfUklTQ1ZfQ1BV
+X1RIRUFEX0M5MDgpOw0KPiBAQCAtMTkxLDYgKzIwOSwxOCBAQCBzdGF0aWMgdm9pZCBrMjMwX3Nv
+Y19yZWFsaXplKERldmljZVN0YXRlICpkZXYsIEVycm9yICoqZXJycCkNCj4gICAgICAgICAgazIz
+MF9jcmVhdGVfdWFydChzeXNfbWVtLCBERVZJQ0Uocy0+YzkwOF9wbGljKSwgaSk7DQo+ICAgICAg
+fQ0KPg0KPiArICAgIC8qIFRpbWVyICovDQo+ICsgICAgaWYgKCFzeXNidXNfcmVhbGl6ZShTWVNf
+QlVTX0RFVklDRSgmcy0+dGltZXIpLCBlcnJwKSkgew0KPiArICAgICAgICByZXR1cm47DQo+ICsg
+ICAgfQ0KPiArICAgIHN5c2J1c19tbWlvX21hcChTWVNfQlVTX0RFVklDRSgmcy0+dGltZXIpLCAw
+LCBtZW1tYXBbSzIzMF9ERVZfVElNRVJdLmJhc2UpOw0KPiArDQo+ICsgICAgZm9yIChpbnQgaSA9
+IDA7IGkgPCBLMjMwX1RJTUVSX05VTV9DSEFOTkVMUzsgaSsrKSB7DQo+ICsgICAgICAgIHN5c2J1
+c19jb25uZWN0X2lycShTWVNfQlVTX0RFVklDRSgmcy0+dGltZXIpLCBpLA0KPiArICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgcWRldl9nZXRfZ3Bpb19pbihERVZJQ0Uocy0+YzkwOF9wbGljKSwN
+Cj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgSzIzMF9USU1F
+UjBfSVJRICsgaSkpOw0KPiArICAgIH0NCj4gKw0KPiAgICAgIC8qIFdhdGNoZG9nICovDQo+ICAg
+ICAgZm9yIChpbnQgaSA9IDA7IGkgPCAyOyBpKyspIHsNCj4gICAgICAgICAgaWYgKCFzeXNidXNf
+cmVhbGl6ZShTWVNfQlVTX0RFVklDRSgmcy0+d2R0W2ldKSwgZXJycCkpIHsNCj4gQEAgLTI4Myw5
+ICszMTMsNiBAQCBzdGF0aWMgdm9pZCBrMjMwX3NvY19yZWFsaXplKERldmljZVN0YXRlICpkZXYs
+IEVycm9yICoqZXJycCkNCj4gICAgICBjcmVhdGVfdW5pbXBsZW1lbnRlZF9kZXZpY2UoImlvbXV4
+IiwgbWVtbWFwW0syMzBfREVWX0lPTVVYXS5iYXNlLA0KPiAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICBtZW1tYXBbSzIzMF9ERVZfSU9NVVhdLnNpemUpOw0KPg0KPiAtICAgIGNyZWF0
+ZV91bmltcGxlbWVudGVkX2RldmljZSgidGltZXIiLCBtZW1tYXBbSzIzMF9ERVZfVElNRVJdLmJh
+c2UsDQo+IC0gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIG1lbW1hcFtLMjMwX0RFVl9U
+SU1FUl0uc2l6ZSk7DQo+IC0NCj4gICAgICBjcmVhdGVfdW5pbXBsZW1lbnRlZF9kZXZpY2UoIndk
+dDAiLCBtZW1tYXBbSzIzMF9ERVZfV0RUMF0uYmFzZSwNCj4gICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgbWVtbWFwW0syMzBfREVWX1dEVDBdLnNpemUpOw0KPg0KPiBkaWZmIC0tZ2l0
+IGEvaW5jbHVkZS9ody9yaXNjdi9rMjMwLmggYi9pbmNsdWRlL2h3L3Jpc2N2L2syMzAuaA0KPiBp
+bmRleCA1OTJlMWMyNmJmLi40MmEzNjY2NGViIDEwMDY0NA0KPiAtLS0gYS9pbmNsdWRlL2h3L3Jp
+c2N2L2syMzAuaA0KPiArKysgYi9pbmNsdWRlL2h3L3Jpc2N2L2syMzAuaA0KPiBAQCAtMTgsNiAr
+MTgsNyBAQA0KPiAgI2luY2x1ZGUgImh3L2NvcmUvYm9hcmRzLmgiDQo+ICAjaW5jbHVkZSAiaHcv
+cmlzY3YvcmlzY3ZfaGFydC5oIg0KPiAgI2luY2x1ZGUgImh3L3dhdGNoZG9nL2syMzBfd2R0Lmgi
+DQo+ICsjaW5jbHVkZSAiaHcvdGltZXIvZHctYXBiLXRpbWVyLmgiDQo+DQo+ICAjZGVmaW5lIEM5
+MDhfQ1BVX0hBUlRJRCAgICgwKQ0KPg0KPiBAQCAtMzMsNiArMzQsNyBAQCB0eXBlZGVmIHN0cnVj
+dCBLMjMwU29DU3RhdGUgew0KPiAgICAgIFJJU0NWSGFydEFycmF5U3RhdGUgYzkwOF9jcHU7IC8q
+IFNtYWxsIGNvcmUgKi8NCj4NCj4gICAgICBLMjMwV2R0U3RhdGUgd2R0WzJdOw0KPiArICAgIERX
+QVBCVGltZXJTdGF0ZSB0aW1lcjsNCj4gICAgICBNZW1vcnlSZWdpb24gc3JhbTsNCj4gICAgICBN
+ZW1vcnlSZWdpb24gYm9vdHJvbTsNCj4NCj4gQEAgLTEyNyw2ICsxMjksMTIgQEAgZW51bSB7DQo+
+ICAgICAgSzIzMF9VQVJUMl9JUlEgID0gMTgsDQo+ICAgICAgSzIzMF9VQVJUM19JUlEgID0gMTks
+DQo+ICAgICAgSzIzMF9VQVJUNF9JUlEgID0gMjAsDQo+ICsgICAgSzIzMF9USU1FUjBfSVJRID0g
+MTAxLA0KPiArICAgIEsyMzBfVElNRVIxX0lSUSA9IDEwMiwNCj4gKyAgICBLMjMwX1RJTUVSMl9J
+UlEgPSAxMDMsDQo+ICsgICAgSzIzMF9USU1FUjNfSVJRID0gMTA0LA0KPiArICAgIEsyMzBfVElN
+RVI0X0lSUSA9IDEwNSwNCj4gKyAgICBLMjMwX1RJTUVSNV9JUlEgPSAxMDYsDQo+ICAgICAgSzIz
+MF9XRFQwX0lSUSAgID0gMTA3LA0KPiAgICAgIEsyMzBfV0RUMV9JUlEgICA9IDEwOCwNCj4gIH07
+DQo+IC0tDQoNClJlZ2FyZHMsDQpCaW4NCg==
 
-Remove qdev_prop_array, which is now unused.
+--_000_SEYPR01MB53165235FE9CCFDB1980D867F3A62SEYPR01MB5316apcp_
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
----
- hw/core/qdev-properties.c         |  8 --------
- hw/display/apple-gfx-mmio.m       |  2 +-
- hw/display/apple-gfx-pci.m        |  2 +-
- hw/display/apple-gfx.h            |  1 +
- hw/display/apple-gfx.m            |  4 ++++
- hw/input/stellaris_gamepad.c      |  2 +-
- hw/intc/arm_gicv3_common.c        |  2 +-
- hw/intc/arm_gicv5_common.c        |  4 ++--
- hw/intc/rx_icu.c                  |  4 ++--
- hw/misc/arm_sysctl.c              |  4 ++--
- hw/misc/mps2-scc.c                |  2 +-
- hw/net/rocker/rocker.c            |  2 +-
- hw/net/virtio-net.c               |  2 +-
- hw/nvram/xlnx-efuse.c             |  2 +-
- hw/nvram/xlnx-versal-efuse-ctrl.c |  2 +-
- hw/riscv/riscv_hart.c             |  6 ++----
- hw/virtio/virtio-iommu-pci.c      |  2 +-
- include/hw/block/block.h          |  2 +-
- include/hw/core/qdev-properties.h | 27 ++++++++++-----------------
- tests/unit/test-qdev.c            |  2 +-
- 20 files changed, 35 insertions(+), 47 deletions(-)
+PGh0bWw+DQo8aGVhZD4NCjxtZXRhIGh0dHAtZXF1aXY9IkNvbnRlbnQtVHlwZSIgY29udGVudD0i
+dGV4dC9odG1sOyBjaGFyc2V0PXV0Zi04Ij4NCjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyIgc3R5bGU9
+ImRpc3BsYXk6bm9uZTsiPiBQIHttYXJnaW4tdG9wOjA7bWFyZ2luLWJvdHRvbTowO30gPC9zdHls
+ZT4NCjwvaGVhZD4NCjxib2R5IGRpcj0ibHRyIj4NCjxkaXYgY2xhc3M9ImVsZW1lbnRUb1Byb29m
+IiBzdHlsZT0iZm9udC1mYW1pbHk6IEFwdG9zLCBBcHRvc19FbWJlZGRlZEZvbnQsIEFwdG9zX01T
+Rm9udFNlcnZpY2UsIENhbGlicmksIEhlbHZldGljYSwgc2Fucy1zZXJpZjsgZm9udC1zaXplOiAx
+MnB0OyBjb2xvcjogcmdiKDAsIDAsIDApOyI+DQpUaGFua3MgZm9yIHBvaW50aW5nIHRoaXMgb3V0
+LjwvZGl2Pg0KPGRpdiBjbGFzcz0iZWxlbWVudFRvUHJvb2YiIHN0eWxlPSJmb250LWZhbWlseTog
+QXB0b3MsIEFwdG9zX0VtYmVkZGVkRm9udCwgQXB0b3NfTVNGb250U2VydmljZSwgQ2FsaWJyaSwg
+SGVsdmV0aWNhLCBzYW5zLXNlcmlmOyBmb250LXNpemU6IDEycHQ7IGNvbG9yOiByZ2IoMCwgMCwg
+MCk7Ij4NCjxicj4NCjwvZGl2Pg0KPGRpdiBjbGFzcz0iZWxlbWVudFRvUHJvb2YiIHN0eWxlPSJm
+b250LWZhbWlseTogQXB0b3MsIEFwdG9zX0VtYmVkZGVkRm9udCwgQXB0b3NfTVNGb250U2Vydmlj
+ZSwgQ2FsaWJyaSwgSGVsdmV0aWNhLCBzYW5zLXNlcmlmOyBmb250LXNpemU6IDEycHQ7IGNvbG9y
+OiByZ2IoMCwgMCwgMCk7Ij4NCllvdSBhcmUgcmlnaHQuIEFjY29yZGluZyB0byB0aGUgVFJNLCB0
+aW1lck5fY2xrX3NlbDwvZGl2Pg0KPGRpdiBjbGFzcz0iZWxlbWVudFRvUHJvb2YiIHN0eWxlPSJm
+b250LWZhbWlseTogQXB0b3MsIEFwdG9zX0VtYmVkZGVkRm9udCwgQXB0b3NfTVNGb250U2Vydmlj
+ZSwgQ2FsaWJyaSwgSGVsdmV0aWNhLCBzYW5zLXNlcmlmOyBmb250LXNpemU6IDEycHQ7IGNvbG9y
+OiByZ2IoMCwgMCwgMCk7Ij4NCnJlc2V0cyB0byAxIGFuZCBzZWxlY3RzIHRoZSA1MCBNSHogdGlt
+ZXJOX3B1bHNlX2luIGNsb2NrLjwvZGl2Pg0KPGRpdiBjbGFzcz0iZWxlbWVudFRvUHJvb2YiIHN0
+eWxlPSJmb250LWZhbWlseTogQXB0b3MsIEFwdG9zX0VtYmVkZGVkRm9udCwgQXB0b3NfTVNGb250
+U2VydmljZSwgQ2FsaWJyaSwgSGVsdmV0aWNhLCBzYW5zLXNlcmlmOyBmb250LXNpemU6IDEycHQ7
+IGNvbG9yOiByZ2IoMCwgMCwgMCk7Ij4NCkkgbWlzdGFrZW5seSBhcHBsaWVkIHRoZSAvOCBkaXZp
+ZGVyIGFuZCB1c2VkIDYuMjUgTUh6LjwvZGl2Pg0KPGRpdiBjbGFzcz0iZWxlbWVudFRvUHJvb2Yi
+IHN0eWxlPSJmb250LWZhbWlseTogQXB0b3MsIEFwdG9zX0VtYmVkZGVkRm9udCwgQXB0b3NfTVNG
+b250U2VydmljZSwgQ2FsaWJyaSwgSGVsdmV0aWNhLCBzYW5zLXNlcmlmOyBmb250LXNpemU6IDEy
+cHQ7IGNvbG9yOiByZ2IoMCwgMCwgMCk7Ij4NCjxicj4NCjwvZGl2Pg0KPGRpdiBzdHlsZT0iZm9u
+dC1mYW1pbHk6IEFwdG9zLCBBcHRvc19FbWJlZGRlZEZvbnQsIEFwdG9zX01TRm9udFNlcnZpY2Us
+IENhbGlicmksIEhlbHZldGljYSwgc2Fucy1zZXJpZjsgZm9udC1zaXplOiAxMnB0OyBjb2xvcjog
+cmdiKDAsIDAsIDApOyI+DQpJIHdpbGwgZml4IHRoZSB0aW1lciBjbG9jayBmcmVxdWVuY3kgdG8g
+NTAgTUh6IGluIHY1LjwvZGl2Pg0KPGRpdiBpZD0iYXBwZW5kb25zZW5kIj48L2Rpdj4NCjxociBz
+dHlsZT0iZGlzcGxheTppbmxpbmUtYmxvY2s7d2lkdGg6OTglIiB0YWJpbmRleD0iLTEiPg0KPGRp
+diBpZD0iZGl2UnBseUZ3ZE1zZyIgZGlyPSJsdHIiPjxmb250IGZhY2U9IkNhbGlicmksIHNhbnMt
+c2VyaWYiIHN0eWxlPSJmb250LXNpemU6MTFwdCIgY29sb3I9IiMwMDAwMDAiPjxiPuWPkeS7tuS6
+ujo8L2I+IEJpbiBNZW5nICZsdDtibWVuZy5jbkBnbWFpbC5jb20mZ3Q7PGJyPg0KPGI+5Y+R6YCB
+5pe26Ze0OjwvYj4gMjAyNuW5tDjmnIgxNOaXpSAxNTo0MDxicj4NCjxiPuaUtuS7tuS6ujo8L2I+
+IHJhb3lpICZsdDtyYW8yMzIzMjhAZ21haWwuY29tJmd0Ozxicj4NCjxiPuaKhOmAgTo8L2I+IHFl
+bXUtZGV2ZWxAbm9uZ251Lm9yZyAmbHQ7cWVtdS1kZXZlbEBub25nbnUub3JnJmd0OzsgcWVtdS1y
+aXNjdkBub25nbnUub3JnICZsdDtxZW11LXJpc2N2QG5vbmdudS5vcmcmZ3Q7OyBhbGlzdGFpci5m
+cmFuY2lzQHdkYy5jb20gJmx0O2FsaXN0YWlyLmZyYW5jaXNAd2RjLmNvbSZndDs7IHBhbG1lckBk
+YWJiZWx0LmNvbSAmbHQ7cGFsbWVyQGRhYmJlbHQuY29tJmd0OzsgbGl3ZWkxNTE4QGdtYWlsLmNv
+bSAmbHQ7bGl3ZWkxNTE4QGdtYWlsLmNvbSZndDs7IGRhbmllbC5iYXJib3phQG9zcy5xdWFsY29t
+bS5jb20NCiAmbHQ7ZGFuaWVsLmJhcmJvemFAb3NzLnF1YWxjb21tLmNvbSZndDs7IHpoaXdlaV9s
+aXVAbGludXguYWxpYmFiYS5jb20gJmx0O3poaXdlaV9saXVAbGludXguYWxpYmFiYS5jb20mZ3Q7
+OyBjaGFvLmxpdUBwcm9jZXNzbWlzc2lvbi5jb20gJmx0O2NoYW8ubGl1QHByb2Nlc3NtaXNzaW9u
+LmNvbSZndDs7IHBoaWxtZEBvc3MucXVhbGNvbW0uY29tICZsdDtwaGlsbWRAb3NzLnF1YWxjb21t
+LmNvbSZndDs7IHBib256aW5pQHJlZGhhdC5jb20gJmx0O3Bib256aW5pQHJlZGhhdC5jb20mZ3Q7
+OyBsdml2aWVyQHJlZGhhdC5jb20NCiAmbHQ7bHZpdmllckByZWRoYXQuY29tJmd0OzsgZmFyb3Nh
+c0BzdXNlLmRlICZsdDtmYXJvc2FzQHN1c2UuZGUmZ3Q7OyBjYW9qdW56ZTQyNEBnbWFpbC5jb20g
+Jmx0O2Nhb2p1bnplNDI0QGdtYWlsLmNvbSZndDs8YnI+DQo8Yj7kuLvpopg6PC9iPiBSZTogW1BB
+VENIIHY0IDIvM10gaHcvcmlzY3Y6IGFkZCBEZXNpZ25XYXJlIEFQQiB0aW1lciB0byBLMjMwIGJv
+YXJkPC9mb250Pg0KPGRpdj4mbmJzcDs8L2Rpdj4NCjwvZGl2Pg0KPGRpdiBjbGFzcz0iQm9keUZy
+YWdtZW50Ij48Zm9udCBzaXplPSIyIj48c3BhbiBzdHlsZT0iZm9udC1zaXplOjExcHQ7Ij4NCjxk
+aXYgY2xhc3M9IlBsYWluVGV4dCI+T24gVGh1LCBBdWcgMTMsIDIwMjYgYXQgOTozN+KAr1BNIHJh
+b3lpICZsdDtyYW8yMzIzMjhAZ21haWwuY29tJmd0OyB3cm90ZTo8YnI+DQomZ3Q7PGJyPg0KJmd0
+OyBXaXJlIHVwIHRoZSBEZXNpZ25XYXJlIEFQQiB0aW1lciB0byB0aGUgSzIzMCBTb0Mgd2l0aDxi
+cj4NCiZndDsgbnVtLXRpbWVycz02IGFuZCBhIDYuMjUgTUh6IGNsb2NrLiBDb25uZWN0IHRpbWVy
+IElSUXM8YnI+DQomZ3Q7IHRvIHRoZSBQTElDLiBSZW1vdmUgdGhlIHByZXZpb3VzIHVuaW1wbGVt
+ZW50ZWQgdGltZXIgc3R1Yi48YnI+DQomZ3Q7PGJyPg0KJmd0OyBTaWduZWQtb2ZmLWJ5OiByYW95
+aSAmbHQ7cmFvMjMyMzI4QGdtYWlsLmNvbSZndDs8YnI+DQomZ3Q7IC0tLTxicj4NCiZndDsmbmJz
+cDsgaHcvcmlzY3YvS2NvbmZpZyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZu
+YnNwOyB8Jm5ic3A7IDEgKzxicj4NCiZndDsmbmJzcDsgaHcvcmlzY3YvazIzMC5jJm5ic3A7Jm5i
+c3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7IHwgMzMgKysrKysrKysrKysr
+KysrKysrKysrKysrKysrKysrLS0tPGJyPg0KJmd0OyZuYnNwOyBpbmNsdWRlL2h3L3Jpc2N2L2sy
+MzAuaCB8Jm5ic3A7IDggKysrKysrKys8YnI+DQomZ3Q7Jm5ic3A7IDMgZmlsZXMgY2hhbmdlZCwg
+MzkgaW5zZXJ0aW9ucygrKSwgMyBkZWxldGlvbnMoLSk8YnI+DQomZ3Q7PGJyPg0KJmd0OyBkaWZm
+IC0tZ2l0IGEvaHcvcmlzY3YvS2NvbmZpZyBiL2h3L3Jpc2N2L0tjb25maWc8YnI+DQomZ3Q7IGlu
+ZGV4IGRlMzdjMDhjYWUuLmMyYzAxYWY2ZWUgMTAwNjQ0PGJyPg0KJmd0OyAtLS0gYS9ody9yaXNj
+di9LY29uZmlnPGJyPg0KJmd0OyArKysgYi9ody9yaXNjdi9LY29uZmlnPGJyPg0KJmd0OyBAQCAt
+MTYyLDMgKzE2Miw0IEBAIGNvbmZpZyBLMjMwPGJyPg0KJmd0OyZuYnNwOyZuYnNwOyZuYnNwOyZu
+YnNwOyZuYnNwOyBzZWxlY3QgU0VSSUFMX01NPGJyPg0KJmd0OyZuYnNwOyZuYnNwOyZuYnNwOyZu
+YnNwOyZuYnNwOyBzZWxlY3QgVU5JTVA8YnI+DQomZ3Q7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7
+Jm5ic3A7IHNlbGVjdCBLMjMwX1dEVDxicj4NCiZndDsgKyZuYnNwOyZuYnNwOyZuYnNwOyBzZWxl
+Y3QgRFdfQVBCX1RJTUVSPGJyPg0KJmd0OyBkaWZmIC0tZ2l0IGEvaHcvcmlzY3YvazIzMC5jIGIv
+aHcvcmlzY3YvazIzMC5jPGJyPg0KJmd0OyBpbmRleCA2NTZmMjgxOTBjLi43OGEwNTQ5MmFkIDEw
+MDY0NDxicj4NCiZndDsgLS0tIGEvaHcvcmlzY3YvazIzMC5jPGJyPg0KJmd0OyArKysgYi9ody9y
+aXNjdi9rMjMwLmM8YnI+DQomZ3Q7IEBAIC0yNCw2ICsyNCw4IEBAPGJyPg0KJmd0OyZuYnNwOyAj
+aW5jbHVkZSAmcXVvdDt0YXJnZXQvcmlzY3YvY3B1LmgmcXVvdDs8YnI+DQomZ3Q7Jm5ic3A7ICNp
+bmNsdWRlICZxdW90O2h3L2NvcmUvbG9hZGVyLmgmcXVvdDs8YnI+DQomZ3Q7Jm5ic3A7ICNpbmNs
+dWRlICZxdW90O2h3L2NvcmUvc3lzYnVzLmgmcXVvdDs8YnI+DQomZ3Q7ICsjaW5jbHVkZSAmcXVv
+dDtody9jb3JlL2Nsb2NrLmgmcXVvdDs8YnI+DQomZ3Q7ICsjaW5jbHVkZSAmcXVvdDtody9jb3Jl
+L3FkZXYtY2xvY2suaCZxdW90Ozxicj4NCiZndDsmbmJzcDsgI2luY2x1ZGUgJnF1b3Q7aHcvcmlz
+Y3YvazIzMC5oJnF1b3Q7PGJyPg0KJmd0OyZuYnNwOyAjaW5jbHVkZSAmcXVvdDtody9yaXNjdi9i
+b290LmgmcXVvdDs8YnI+DQomZ3Q7Jm5ic3A7ICNpbmNsdWRlICZxdW90O2h3L3Jpc2N2L21hY2hp
+bmVzLXFvbS5oJnF1b3Q7PGJyPg0KJmd0OyBAQCAtMzcsNiArMzksOSBAQDxicj4NCiZndDsmbmJz
+cDsgI2RlZmluZSBLMjMwX0RJUkVDVF9LRVJORUxfQUREUiZuYnNwOyAweDgyMDAwMDA8YnI+DQom
+Z3Q7Jm5ic3A7ICNkZWZpbmUgSzIzMF9ESVJFQ1RfRFRCX0FERFImbmJzcDsmbmJzcDsmbmJzcDsm
+bmJzcDsgMHhhMDAwMDAwPGJyPg0KJmd0Ozxicj4NCiZndDsgKyNkZWZpbmUgSzIzMF9USU1FUl9O
+VU1fQ0hBTk5FTFMgNjxicj4NCiZndDsgKyNkZWZpbmUgSzIzMF9USU1FUl9ERUZBVUxUX0ZSRVEg
+NjI1MDAwMDxicj4NCjxicj4NClRoZSBUUk0gc2F5cyB0aGUgdGltZXIgZnJlcXVlbmN5IGlzIDUw
+TUh6LiBXaGVyZSBpcyB0aGlzIDYyNTAwMDAgY29taW5nIGZyb20/PGJyPg0KPGJyPg0KJmd0OyAr
+PGJyPg0KJmd0OyZuYnNwOyBzdGF0aWMgY29uc3QgTWVtTWFwRW50cnkgbWVtbWFwW10gPSB7PGJy
+Pg0KJmd0OyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyBbSzIzMF9ERVZfRERSQ10gPSZu
+YnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyB7IDB4MDAwMDAw
+MDAsJm5ic3A7IDB4ODAwMDAwMDAgfSw8YnI+DQomZ3Q7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7
+Jm5ic3A7IFtLMjMwX0RFVl9LUFVfTDJfQ0FDSEVdID0geyAweDgwMDAwMDAwLCZuYnNwOyAweDAw
+MjAwMDAwIH0sPGJyPg0KJmd0OyBAQCAtMTEwLDYgKzExNSwxOSBAQCBzdGF0aWMgdm9pZCBrMjMw
+X3NvY19pbml0KE9iamVjdCAqb2JqKTxicj4NCiZndDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsm
+bmJzcDsgb2JqZWN0X2luaXRpYWxpemVfY2hpbGQob2JqLCAmcXVvdDtjOTA4LWNwdSZxdW90Oywg
+Y3B1MCwgVFlQRV9SSVNDVl9IQVJUX0FSUkFZKTs8YnI+DQomZ3Q7Jm5ic3A7Jm5ic3A7Jm5ic3A7
+Jm5ic3A7Jm5ic3A7IG9iamVjdF9pbml0aWFsaXplX2NoaWxkKG9iaiwgJnF1b3Q7azIzMC13ZHQw
+JnF1b3Q7LCAmYW1wO3MtJmd0O3dkdFswXSwgVFlQRV9LMjMwX1dEVCk7PGJyPg0KJmd0OyZuYnNw
+OyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyBvYmplY3RfaW5pdGlhbGl6ZV9jaGlsZChvYmosICZx
+dW90O2syMzAtd2R0MSZxdW90OywgJmFtcDtzLSZndDt3ZHRbMV0sIFRZUEVfSzIzMF9XRFQpOzxi
+cj4NCiZndDsgKyZuYnNwOyZuYnNwOyZuYnNwOyBvYmplY3RfaW5pdGlhbGl6ZV9jaGlsZChvYmos
+ICZxdW90O2R3LWFwYi10aW1lciZxdW90OywgJmFtcDtzLSZndDt0aW1lciw8YnI+DQomZ3Q7ICsm
+bmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJz
+cDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsm
+bmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsgVFlQRV9EV19B
+UEJfVElNRVIpOzxicj4NCiZndDsgKzxicj4NCiZndDsgKyZuYnNwOyZuYnNwOyZuYnNwOyBxZGV2
+X3Byb3Bfc2V0X3VpbnQzMihERVZJQ0UoJmFtcDtzLSZndDt0aW1lciksICZxdW90O251bS10aW1l
+cnMmcXVvdDssPGJyPg0KJmd0OyArJm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7
+Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5i
+c3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7IEsyMzBf
+VElNRVJfTlVNX0NIQU5ORUxTKTs8YnI+DQomZ3Q7ICs8YnI+DQomZ3Q7ICsmbmJzcDsmbmJzcDsm
+bmJzcDsgQ2xvY2sgKnRpbWVyX2NsayA9IGNsb2NrX25ldyhPQkpFQ1QocyksICZxdW90O3RpbWVy
+LWNsayZxdW90Oyk7PGJyPg0KJmd0OyArJm5ic3A7Jm5ic3A7Jm5ic3A7IGNsb2NrX3NldF9oeih0
+aW1lcl9jbGssIEsyMzBfVElNRVJfREVGQVVMVF9GUkVRKTs8YnI+DQomZ3Q7ICsmbmJzcDsmbmJz
+cDsmbmJzcDsgZm9yIChpbnQgaSA9IDA7IGkgJmx0OyBLMjMwX1RJTUVSX05VTV9DSEFOTkVMUzsg
+aSsrKSB7PGJyPg0KJmd0OyArJm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5i
+c3A7IGdfYXV0b2ZyZWUgY2hhciAqY2xvY2tfbmFtZSA9IGdfc3RyZHVwX3ByaW50ZigmcXVvdDt0
+aW1lclslZF0mcXVvdDssIGkpOzxicj4NCiZndDsgKzxicj4NCiZndDsgKyZuYnNwOyZuYnNwOyZu
+YnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyBxZGV2X2Nvbm5lY3RfY2xvY2tfaW4oREVWSUNF
+KCZhbXA7cy0mZ3Q7dGltZXIpLCBjbG9ja19uYW1lLCB0aW1lcl9jbGspOzxicj4NCiZndDsgKyZu
+YnNwOyZuYnNwOyZuYnNwOyB9PGJyPg0KJmd0Ozxicj4NCiZndDsmbmJzcDsmbmJzcDsmbmJzcDsm
+bmJzcDsmbmJzcDsgcWRldl9wcm9wX3NldF91aW50MzIoREVWSUNFKGNwdTApLCAmcXVvdDtoYXJ0
+aWQtYmFzZSZxdW90OywgMCk7PGJyPg0KJmd0OyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNw
+OyBxZGV2X3Byb3Bfc2V0X3N0cmluZyhERVZJQ0UoY3B1MCksICZxdW90O2NwdS10eXBlJnF1b3Q7
+LCBUWVBFX1JJU0NWX0NQVV9USEVBRF9DOTA4KTs8YnI+DQomZ3Q7IEBAIC0xOTEsNiArMjA5LDE4
+IEBAIHN0YXRpYyB2b2lkIGsyMzBfc29jX3JlYWxpemUoRGV2aWNlU3RhdGUgKmRldiwgRXJyb3Ig
+KiplcnJwKTxicj4NCiZndDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJz
+cDsmbmJzcDsmbmJzcDsgazIzMF9jcmVhdGVfdWFydChzeXNfbWVtLCBERVZJQ0Uocy0mZ3Q7Yzkw
+OF9wbGljKSwgaSk7PGJyPg0KJmd0OyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyB9PGJy
+Pg0KJmd0Ozxicj4NCiZndDsgKyZuYnNwOyZuYnNwOyZuYnNwOyAvKiBUaW1lciAqLzxicj4NCiZn
+dDsgKyZuYnNwOyZuYnNwOyZuYnNwOyBpZiAoIXN5c2J1c19yZWFsaXplKFNZU19CVVNfREVWSUNF
+KCZhbXA7cy0mZ3Q7dGltZXIpLCBlcnJwKSkgezxicj4NCiZndDsgKyZuYnNwOyZuYnNwOyZuYnNw
+OyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyByZXR1cm47PGJyPg0KJmd0OyArJm5ic3A7Jm5ic3A7
+Jm5ic3A7IH08YnI+DQomZ3Q7ICsmbmJzcDsmbmJzcDsmbmJzcDsgc3lzYnVzX21taW9fbWFwKFNZ
+U19CVVNfREVWSUNFKCZhbXA7cy0mZ3Q7dGltZXIpLCAwLCBtZW1tYXBbSzIzMF9ERVZfVElNRVJd
+LmJhc2UpOzxicj4NCiZndDsgKzxicj4NCiZndDsgKyZuYnNwOyZuYnNwOyZuYnNwOyBmb3IgKGlu
+dCBpID0gMDsgaSAmbHQ7IEsyMzBfVElNRVJfTlVNX0NIQU5ORUxTOyBpKyspIHs8YnI+DQomZ3Q7
+ICsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsgc3lzYnVzX2Nvbm5l
+Y3RfaXJxKFNZU19CVVNfREVWSUNFKCZhbXA7cy0mZ3Q7dGltZXIpLCBpLDxicj4NCiZndDsgKyZu
+YnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNw
+OyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZu
+YnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyBxZGV2X2dldF9ncGlvX2lu
+KERFVklDRShzLSZndDtjOTA4X3BsaWMpLDxicj4NCiZndDsgKyZuYnNwOyZuYnNwOyZuYnNwOyZu
+YnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNw
+OyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZu
+YnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNw
+OyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZu
+YnNwOyZuYnNwOyBLMjMwX1RJTUVSMF9JUlEgKyBpKSk7PGJyPg0KJmd0OyArJm5ic3A7Jm5ic3A7
+Jm5ic3A7IH08YnI+DQomZ3Q7ICs8YnI+DQomZ3Q7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5i
+c3A7IC8qIFdhdGNoZG9nICovPGJyPg0KJmd0OyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNw
+OyBmb3IgKGludCBpID0gMDsgaSAmbHQ7IDI7IGkrKykgezxicj4NCiZndDsmbmJzcDsmbmJzcDsm
+bmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsgaWYgKCFzeXNidXNfcmVh
+bGl6ZShTWVNfQlVTX0RFVklDRSgmYW1wO3MtJmd0O3dkdFtpXSksIGVycnApKSB7PGJyPg0KJmd0
+OyBAQCAtMjgzLDkgKzMxMyw2IEBAIHN0YXRpYyB2b2lkIGsyMzBfc29jX3JlYWxpemUoRGV2aWNl
+U3RhdGUgKmRldiwgRXJyb3IgKiplcnJwKTxicj4NCiZndDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJz
+cDsmbmJzcDsgY3JlYXRlX3VuaW1wbGVtZW50ZWRfZGV2aWNlKCZxdW90O2lvbXV4JnF1b3Q7LCBt
+ZW1tYXBbSzIzMF9ERVZfSU9NVVhdLmJhc2UsPGJyPg0KJmd0OyZuYnNwOyZuYnNwOyZuYnNwOyZu
+YnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNw
+OyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZu
+YnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNw
+OyZuYnNwOyBtZW1tYXBbSzIzMF9ERVZfSU9NVVhdLnNpemUpOzxicj4NCiZndDs8YnI+DQomZ3Q7
+IC0mbmJzcDsmbmJzcDsmbmJzcDsgY3JlYXRlX3VuaW1wbGVtZW50ZWRfZGV2aWNlKCZxdW90O3Rp
+bWVyJnF1b3Q7LCBtZW1tYXBbSzIzMF9ERVZfVElNRVJdLmJhc2UsPGJyPg0KJmd0OyAtJm5ic3A7
+Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5i
+c3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7
+Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5i
+c3A7Jm5ic3A7IG1lbW1hcFtLMjMwX0RFVl9USU1FUl0uc2l6ZSk7PGJyPg0KJmd0OyAtPGJyPg0K
+Jmd0OyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyBjcmVhdGVfdW5pbXBsZW1lbnRlZF9k
+ZXZpY2UoJnF1b3Q7d2R0MCZxdW90OywgbWVtbWFwW0syMzBfREVWX1dEVDBdLmJhc2UsPGJyPg0K
+Jmd0OyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNw
+OyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZu
+YnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNw
+OyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyBtZW1tYXBbSzIzMF9ERVZfV0RUMF0uc2l6
+ZSk7PGJyPg0KJmd0Ozxicj4NCiZndDsgZGlmZiAtLWdpdCBhL2luY2x1ZGUvaHcvcmlzY3YvazIz
+MC5oIGIvaW5jbHVkZS9ody9yaXNjdi9rMjMwLmg8YnI+DQomZ3Q7IGluZGV4IDU5MmUxYzI2YmYu
+LjQyYTM2NjY0ZWIgMTAwNjQ0PGJyPg0KJmd0OyAtLS0gYS9pbmNsdWRlL2h3L3Jpc2N2L2syMzAu
+aDxicj4NCiZndDsgKysrIGIvaW5jbHVkZS9ody9yaXNjdi9rMjMwLmg8YnI+DQomZ3Q7IEBAIC0x
+OCw2ICsxOCw3IEBAPGJyPg0KJmd0OyZuYnNwOyAjaW5jbHVkZSAmcXVvdDtody9jb3JlL2JvYXJk
+cy5oJnF1b3Q7PGJyPg0KJmd0OyZuYnNwOyAjaW5jbHVkZSAmcXVvdDtody9yaXNjdi9yaXNjdl9o
+YXJ0LmgmcXVvdDs8YnI+DQomZ3Q7Jm5ic3A7ICNpbmNsdWRlICZxdW90O2h3L3dhdGNoZG9nL2sy
+MzBfd2R0LmgmcXVvdDs8YnI+DQomZ3Q7ICsjaW5jbHVkZSAmcXVvdDtody90aW1lci9kdy1hcGIt
+dGltZXIuaCZxdW90Ozxicj4NCiZndDs8YnI+DQomZ3Q7Jm5ic3A7ICNkZWZpbmUgQzkwOF9DUFVf
+SEFSVElEJm5ic3A7Jm5ic3A7ICgwKTxicj4NCiZndDs8YnI+DQomZ3Q7IEBAIC0zMyw2ICszNCw3
+IEBAIHR5cGVkZWYgc3RydWN0IEsyMzBTb0NTdGF0ZSB7PGJyPg0KJmd0OyZuYnNwOyZuYnNwOyZu
+YnNwOyZuYnNwOyZuYnNwOyBSSVNDVkhhcnRBcnJheVN0YXRlIGM5MDhfY3B1OyAvKiBTbWFsbCBj
+b3JlICovPGJyPg0KJmd0Ozxicj4NCiZndDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsg
+SzIzMFdkdFN0YXRlIHdkdFsyXTs8YnI+DQomZ3Q7ICsmbmJzcDsmbmJzcDsmbmJzcDsgRFdBUEJU
+aW1lclN0YXRlIHRpbWVyOzxicj4NCiZndDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsg
+TWVtb3J5UmVnaW9uIHNyYW07PGJyPg0KJmd0OyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNw
+OyBNZW1vcnlSZWdpb24gYm9vdHJvbTs8YnI+DQomZ3Q7PGJyPg0KJmd0OyBAQCAtMTI3LDYgKzEy
+OSwxMiBAQCBlbnVtIHs8YnI+DQomZ3Q7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7IEsy
+MzBfVUFSVDJfSVJRJm5ic3A7ID0gMTgsPGJyPg0KJmd0OyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNw
+OyZuYnNwOyBLMjMwX1VBUlQzX0lSUSZuYnNwOyA9IDE5LDxicj4NCiZndDsmbmJzcDsmbmJzcDsm
+bmJzcDsmbmJzcDsmbmJzcDsgSzIzMF9VQVJUNF9JUlEmbmJzcDsgPSAyMCw8YnI+DQomZ3Q7ICsm
+bmJzcDsmbmJzcDsmbmJzcDsgSzIzMF9USU1FUjBfSVJRID0gMTAxLDxicj4NCiZndDsgKyZuYnNw
+OyZuYnNwOyZuYnNwOyBLMjMwX1RJTUVSMV9JUlEgPSAxMDIsPGJyPg0KJmd0OyArJm5ic3A7Jm5i
+c3A7Jm5ic3A7IEsyMzBfVElNRVIyX0lSUSA9IDEwMyw8YnI+DQomZ3Q7ICsmbmJzcDsmbmJzcDsm
+bmJzcDsgSzIzMF9USU1FUjNfSVJRID0gMTA0LDxicj4NCiZndDsgKyZuYnNwOyZuYnNwOyZuYnNw
+OyBLMjMwX1RJTUVSNF9JUlEgPSAxMDUsPGJyPg0KJmd0OyArJm5ic3A7Jm5ic3A7Jm5ic3A7IEsy
+MzBfVElNRVI1X0lSUSA9IDEwNiw8YnI+DQomZ3Q7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5i
+c3A7IEsyMzBfV0RUMF9JUlEmbmJzcDsmbmJzcDsgPSAxMDcsPGJyPg0KJmd0OyZuYnNwOyZuYnNw
+OyZuYnNwOyZuYnNwOyZuYnNwOyBLMjMwX1dEVDFfSVJRJm5ic3A7Jm5ic3A7ID0gMTA4LDxicj4N
+CiZndDsmbmJzcDsgfTs8YnI+DQomZ3Q7IC0tPGJyPg0KPGJyPg0KUmVnYXJkcyw8YnI+DQpCaW48
+YnI+DQo8L2Rpdj4NCjwvc3Bhbj48L2ZvbnQ+PC9kaXY+DQo8L2JvZHk+DQo8L2h0bWw+DQo=
 
-diff --git a/hw/core/qdev-properties.c b/hw/core/qdev-properties.c
-index a9ca8e4a03db..b5a9eb97e7dd 100644
---- a/hw/core/qdev-properties.c
-+++ b/hw/core/qdev-properties.c
-@@ -874,14 +874,6 @@ void default_prop_array(ObjectProperty *op, const Property *prop)
-     object_property_set_default_list(op);
- }
- 
--const PropertyInfo qdev_prop_array = {
--    .type = "list",
--    .get = get_prop_array,
--    .set = set_prop_array,
--    .release = release_prop_array,
--    .set_default_value = default_prop_array,
--};
--
- const PropertyInfo qdev_prop_uint8_list =
-     DEFINE_PROP_ARRAY_INFO(qdev_prop_uint8, uint8_t);
- const PropertyInfo qdev_prop_uint16_list =
-diff --git a/hw/display/apple-gfx-mmio.m b/hw/display/apple-gfx-mmio.m
-index 58beaadd1f10..dcd04617eb87 100644
---- a/hw/display/apple-gfx-mmio.m
-+++ b/hw/display/apple-gfx-mmio.m
-@@ -258,7 +258,7 @@ static void apple_gfx_mmio_reset(Object *obj, ResetType type)
- static const Property apple_gfx_mmio_properties[] = {
-     DEFINE_PROP_ARRAY("display-modes", AppleGFXMMIOState,
-                       common.num_display_modes, common.display_modes,
--                      qdev_prop_apple_gfx_display_mode, AppleGFXDisplayMode),
-+                      qdev_prop_apple_gfx_display_mode),
- };
- 
- static void apple_gfx_mmio_class_init(ObjectClass *klass, const void *data)
-diff --git a/hw/display/apple-gfx-pci.m b/hw/display/apple-gfx-pci.m
-index b0694f4cb855..74f79c8b157b 100644
---- a/hw/display/apple-gfx-pci.m
-+++ b/hw/display/apple-gfx-pci.m
-@@ -118,7 +118,7 @@ static void apple_gfx_pci_reset(Object *obj, ResetType type)
- static const Property apple_gfx_pci_properties[] = {
-     DEFINE_PROP_ARRAY("display-modes", AppleGFXPCIState,
-                       common.num_display_modes, common.display_modes,
--                      qdev_prop_apple_gfx_display_mode, AppleGFXDisplayMode),
-+                      qdev_prop_apple_gfx_display_mode),
- };
- 
- static void apple_gfx_pci_class_init(ObjectClass *klass, const void *data)
-diff --git a/hw/display/apple-gfx.h b/hw/display/apple-gfx.h
-index 3197bd853dab..b7eef7b9b14a 100644
---- a/hw/display/apple-gfx.h
-+++ b/hw/display/apple-gfx.h
-@@ -69,6 +69,7 @@ void *apple_gfx_host_ptr_for_gpa_range(uint64_t guest_physical,
-                                        MemoryRegion **mapping_in_region);
- 
- extern const PropertyInfo qdev_prop_apple_gfx_display_mode;
-+extern const PropertyInfo qdev_prop_apple_gfx_display_mode_list;
- 
- #endif
- 
-diff --git a/hw/display/apple-gfx.m b/hw/display/apple-gfx.m
-index 77c420b30006..592d692d793d 100644
---- a/hw/display/apple-gfx.m
-+++ b/hw/display/apple-gfx.m
-@@ -16,6 +16,7 @@
- #include "qemu/cutils.h"
- #include "qemu/log.h"
- #include "qapi/qapi-builtin-type-infos.h"
-+#include "hw/core/qdev-prop-internal.h"
- #include "qapi/visitor.h"
- #include "qapi/error.h"
- #include "qemu/aio-wait.h"
-@@ -879,3 +880,6 @@ static void apple_gfx_set_display_mode(Object *obj, Visitor *v,
-     .get   = apple_gfx_get_display_mode,
-     .set   = apple_gfx_set_display_mode,
- };
-+
-+const PropertyInfo qdev_prop_apple_gfx_display_mode_list =
-+    DEFINE_PROP_ARRAY_INFO(qdev_prop_apple_gfx_display_mode, AppleGFXDisplayMode);
-diff --git a/hw/input/stellaris_gamepad.c b/hw/input/stellaris_gamepad.c
-index 376d91abad70..20613f649977 100644
---- a/hw/input/stellaris_gamepad.c
-+++ b/hw/input/stellaris_gamepad.c
-@@ -80,7 +80,7 @@ static void stellaris_gamepad_reset_enter(Object *obj, ResetType type)
- 
- static const Property stellaris_gamepad_properties[] = {
-     DEFINE_PROP_ARRAY("keycodes", StellarisGamepad, num_buttons,
--                      keycodes, qdev_prop_uint32, uint32_t),
-+                      keycodes, qdev_prop_uint32),
- };
- 
- static void stellaris_gamepad_class_init(ObjectClass *klass, const void *data)
-diff --git a/hw/intc/arm_gicv3_common.c b/hw/intc/arm_gicv3_common.c
-index f7ba74e6d52a..1298b6b735e9 100644
---- a/hw/intc/arm_gicv3_common.c
-+++ b/hw/intc/arm_gicv3_common.c
-@@ -615,7 +615,7 @@ static const Property arm_gicv3_common_properties[] = {
-      */
-     DEFINE_PROP_BOOL("force-8-bit-prio", GICv3State, force_8bit_prio, 0),
-     DEFINE_PROP_ARRAY("redist-region-count", GICv3State, nb_redist_regions,
--                      redist_region_count, qdev_prop_uint32, uint32_t),
-+                      redist_region_count, qdev_prop_uint32),
-     DEFINE_PROP_LINK("sysmem", GICv3State, dma, TYPE_MEMORY_REGION,
-                      MemoryRegion *),
-     DEFINE_PROP_UINT32("first-cpu-index", GICv3State, first_cpu_idx, 0),
-diff --git a/hw/intc/arm_gicv5_common.c b/hw/intc/arm_gicv5_common.c
-index b155486af65e..61c8ae493021 100644
---- a/hw/intc/arm_gicv5_common.c
-+++ b/hw/intc/arm_gicv5_common.c
-@@ -191,9 +191,9 @@ static void gicv5_common_realize(DeviceState *dev, Error **errp)
- 
- static const Property arm_gicv5_common_properties[] = {
-     DEFINE_PROP_LINK_ARRAY("cpus", GICv5Common, num_cpus,
--                           cpus, TYPE_ARM_CPU, ARMCPU *),
-+                           cpus, TYPE_ARM_CPU),
-     DEFINE_PROP_ARRAY("cpu-iaffids", GICv5Common, num_cpu_iaffids,
--                      cpu_iaffids, qdev_prop_uint32, uint32_t),
-+                      cpu_iaffids, qdev_prop_uint32),
-     DEFINE_PROP_UINT32("irsid", GICv5Common, irsid, 0),
-     DEFINE_PROP_UINT32("spi-range", GICv5Common, spi_range, 0),
-     DEFINE_PROP_UINT32("spi-base", GICv5Common, spi_base, 0),
-diff --git a/hw/intc/rx_icu.c b/hw/intc/rx_icu.c
-index 992b069ae245..125a6dcb6804 100644
---- a/hw/intc/rx_icu.c
-+++ b/hw/intc/rx_icu.c
-@@ -356,9 +356,9 @@ static const VMStateDescription vmstate_rxicu = {
- 
- static const Property rxicu_properties[] = {
-     DEFINE_PROP_ARRAY("ipr-map", RXICUState, nr_irqs, map,
--                      qdev_prop_uint8, uint8_t),
-+                      qdev_prop_uint8),
-     DEFINE_PROP_ARRAY("trigger-level", RXICUState, nr_sense, init_sense,
--                      qdev_prop_uint8, uint8_t),
-+                      qdev_prop_uint8),
- };
- 
- static void rxicu_class_init(ObjectClass *klass, const void *data)
-diff --git a/hw/misc/arm_sysctl.c b/hw/misc/arm_sysctl.c
-index ebc95b9bb54c..1df85593a5cb 100644
---- a/hw/misc/arm_sysctl.c
-+++ b/hw/misc/arm_sysctl.c
-@@ -626,10 +626,10 @@ static const Property arm_sysctl_properties[] = {
-     DEFINE_PROP_UINT32("proc_id", arm_sysctl_state, proc_id, 0),
-     /* Daughterboard power supply voltages (as reported via SYS_CFG) */
-     DEFINE_PROP_ARRAY("db-voltage", arm_sysctl_state, db_num_vsensors,
--                      db_voltage, qdev_prop_uint32, uint32_t),
-+                      db_voltage, qdev_prop_uint32),
-     /* Daughterboard clock reset values (as reported via SYS_CFG) */
-     DEFINE_PROP_ARRAY("db-clock", arm_sysctl_state, db_num_clocks,
--                      db_clock_reset, qdev_prop_uint32, uint32_t),
-+                      db_clock_reset, qdev_prop_uint32),
- };
- 
- static void arm_sysctl_class_init(ObjectClass *klass, const void *data)
-diff --git a/hw/misc/mps2-scc.c b/hw/misc/mps2-scc.c
-index 554b504c7203..32f9e166feed 100644
---- a/hw/misc/mps2-scc.c
-+++ b/hw/misc/mps2-scc.c
-@@ -464,7 +464,7 @@ static const Property mps2_scc_properties[] = {
-      * motherboard configuration controller to suit the FPGA image.
-      */
-     DEFINE_PROP_ARRAY("oscclk", MPS2SCC, num_oscclk, oscclk_reset,
--                      qdev_prop_uint32, uint32_t),
-+                      qdev_prop_uint32),
- };
- 
- static void mps2_scc_class_init(ObjectClass *klass, const void *data)
-diff --git a/hw/net/rocker/rocker.c b/hw/net/rocker/rocker.c
-index 910dce901b67..afbc32e99d94 100644
---- a/hw/net/rocker/rocker.c
-+++ b/hw/net/rocker/rocker.c
-@@ -1466,7 +1466,7 @@ static const Property rocker_properties[] = {
-     DEFINE_PROP_UINT64("switch_id", Rocker,
-                        switch_id, 0),
-     DEFINE_PROP_ARRAY("ports", Rocker, fp_ports,
--                      fp_ports_peers, qdev_prop_netdev, NICPeers),
-+                      fp_ports_peers, qdev_prop_netdev),
- };
- 
- static const VMStateDescription rocker_vmsd = {
-diff --git a/hw/net/virtio-net.c b/hw/net/virtio-net.c
-index 814b99a43d20..a4e633e54392 100644
---- a/hw/net/virtio-net.c
-+++ b/hw/net/virtio-net.c
-@@ -4260,7 +4260,7 @@ static const Property virtio_net_properties[] = {
-     DEFINE_PROP_BIT64("hash", VirtIONet, host_features,
-                     VIRTIO_NET_F_HASH_REPORT, false),
-     DEFINE_PROP_ARRAY("ebpf-rss-fds", VirtIONet, nr_ebpf_rss_fds,
--                      ebpf_rss_fds, qdev_prop_string, char*),
-+                      ebpf_rss_fds, qdev_prop_string),
-     DEFINE_PROP_BIT64("guest_rsc_ext", VirtIONet, host_features,
-                     VIRTIO_NET_F_RSC_EXT, false),
-     DEFINE_PROP_UINT32("rsc_interval", VirtIONet, rsc_timeout,
-diff --git a/hw/nvram/xlnx-efuse.c b/hw/nvram/xlnx-efuse.c
-index b1c9ee4980a0..99c16ce76f15 100644
---- a/hw/nvram/xlnx-efuse.c
-+++ b/hw/nvram/xlnx-efuse.c
-@@ -266,7 +266,7 @@ static const Property efuse_properties[] = {
-     DEFINE_PROP_UINT32("efuse-size", XlnxEFuse, efuse_size, 64 * 32),
-     DEFINE_PROP_BOOL("init-factory-tbits", XlnxEFuse, init_tbits, true),
-     DEFINE_PROP_ARRAY("read-only", XlnxEFuse, ro_bits_cnt, ro_bits,
--                      qdev_prop_uint32, uint32_t),
-+                      qdev_prop_uint32),
- };
- 
- static void efuse_class_init(ObjectClass *klass, const void *data)
-diff --git a/hw/nvram/xlnx-versal-efuse-ctrl.c b/hw/nvram/xlnx-versal-efuse-ctrl.c
-index f5d5587cb657..101320b82fd9 100644
---- a/hw/nvram/xlnx-versal-efuse-ctrl.c
-+++ b/hw/nvram/xlnx-versal-efuse-ctrl.c
-@@ -740,7 +740,7 @@ static const Property efuse_ctrl_props[] = {
-                      TYPE_XLNX_EFUSE, XlnxEFuse *),
-     DEFINE_PROP_ARRAY("pg0-lock",
-                       XlnxVersalEFuseCtrl, extra_pg0_lock_n16,
--                      extra_pg0_lock_spec, qdev_prop_uint16, uint16_t),
-+                      extra_pg0_lock_spec, qdev_prop_uint16),
- };
- 
- static void efuse_ctrl_class_init(ObjectClass *klass, const void *data)
-diff --git a/hw/riscv/riscv_hart.c b/hw/riscv/riscv_hart.c
-index 747754be6158..a89c87c05623 100644
---- a/hw/riscv/riscv_hart.c
-+++ b/hw/riscv/riscv_hart.c
-@@ -48,11 +48,9 @@ static const Property riscv_harts_props[] = {
-      * defined by "rnmi-exception-vector".
-      */
-     DEFINE_PROP_ARRAY("rnmi-interrupt-vector", RISCVHartArrayState,
--                      num_rnmi_irqvec, rnmi_irqvec, qdev_prop_uint64,
--                      uint64_t),
-+                      num_rnmi_irqvec, rnmi_irqvec, qdev_prop_uint64),
-     DEFINE_PROP_ARRAY("rnmi-exception-vector", RISCVHartArrayState,
--                      num_rnmi_excpvec, rnmi_excpvec, qdev_prop_uint64,
--                      uint64_t),
-+                      num_rnmi_excpvec, rnmi_excpvec, qdev_prop_uint64),
- };
- 
- static void riscv_harts_cpu_reset(void *opaque)
-diff --git a/hw/virtio/virtio-iommu-pci.c b/hw/virtio/virtio-iommu-pci.c
-index 7b5ffddc1e97..1f3a07c5d119 100644
---- a/hw/virtio/virtio-iommu-pci.c
-+++ b/hw/virtio/virtio-iommu-pci.c
-@@ -38,7 +38,7 @@ static const Property virtio_iommu_pci_properties[] = {
-     DEFINE_PROP_UINT32("class", VirtIOPCIProxy, class_code, 0),
-     DEFINE_PROP_ARRAY("reserved-regions", VirtIOIOMMUPCI,
-                       vdev.nr_prop_resv_regions, vdev.prop_resv_regions,
--                      qdev_prop_reserved_region, ReservedRegion),
-+                      qdev_prop_reserved_region),
- };
- 
- static void virtio_iommu_pci_realize(VirtIOPCIProxy *vpci_dev, Error **errp)
-diff --git a/include/hw/block/block.h b/include/hw/block/block.h
-index df941df19f26..70bf03a8de73 100644
---- a/include/hw/block/block.h
-+++ b/include/hw/block/block.h
-@@ -83,7 +83,7 @@ static inline unsigned int get_physical_block_exp(BlockConf *conf)
-                             _conf.account_failed, ON_OFF_AUTO_AUTO),    \
-     DEFINE_PROP_ARRAY("stats-intervals", _state,                        \
-                      _conf.num_stats_intervals, _conf.stats_intervals,  \
--                     qdev_prop_uint32, uint32_t)
-+                     qdev_prop_uint32)
- 
- #define DEFINE_BLOCK_PROPERTIES(_state, _conf)                          \
-     DEFINE_PROP_DRIVE("drive", _state, _conf.blk),                      \
-diff --git a/include/hw/core/qdev-properties.h b/include/hw/core/qdev-properties.h
-index 0c067170079d..39f95ce7a3c6 100644
---- a/include/hw/core/qdev-properties.h
-+++ b/include/hw/core/qdev-properties.h
-@@ -76,7 +76,6 @@ extern const PropertyInfo qdev_prop_size;
- extern const PropertyInfo qdev_prop_string;
- extern const PropertyInfo qdev_prop_on_off_auto;
- extern const PropertyInfo qdev_prop_size32;
--extern const PropertyInfo qdev_prop_array;
- extern const PropertyInfo qdev_prop_uint8_list;
- extern const PropertyInfo qdev_prop_uint16_list;
- extern const PropertyInfo qdev_prop_uint32_list;
-@@ -148,15 +147,15 @@ extern const PropertyInfo qdev_prop_link_list;
-  * @_name: name of the array
-  * @_state: name of the device state structure type
-  * @_field: uint32_t field in @_state to hold the array length
-- * @_arrayfield: field in @_state (of type '@_arraytype *') which
-- *               will point to the array
-- * @_arrayprop: PropertyInfo defining what property the array elements have
-- * @_arraytype: C type of the array elements
-+ * @_arrayfield: field in @_state which will point to the array
-+ * @_arrayprop: PropertyInfo for the array elements (e.g. qdev_prop_uint32);
-+ *              a corresponding list PropertyInfo named @_arrayprop##_list
-+ *              must exist
-  *
-  * Define device properties for a variable-length array _name.  The array is
-  * represented as a list in the visitor interface.
-  *
-- * @_arraytype is required to be movable with memcpy().
-+ * The element type must be movable with memcpy().
-  *
-  * When the array property is set, the @_field member of the device
-  * struct is set to the array length, and @_arrayfield is set to point
-@@ -166,12 +165,10 @@ extern const PropertyInfo qdev_prop_link_list;
-  * @_arrayfield memory.
-  */
- #define DEFINE_PROP_ARRAY(_name, _state, _field,                        \
--                          _arrayfield, _arrayprop, _arraytype)          \
--    DEFINE_PROP(_name, _state, _field, qdev_prop_array, uint32_t,       \
-+                          _arrayfield, _arrayprop)                      \
-+    DEFINE_PROP(_name, _state, _field, _arrayprop##_list, uint32_t,     \
-                 .set_default = true,                                    \
-                 .defval.u = 0,                                          \
--                .arrayinfo = &(_arrayprop),                             \
--                .arrayfieldsize = sizeof(_arraytype),                   \
-                 .arrayoffset = offsetof(_state, _arrayfield))
- 
- #define DEFINE_PROP_LINK(_name, _state, _field, _type, _ptr_type)     \
-@@ -183,10 +180,8 @@ extern const PropertyInfo qdev_prop_link_list;
-  * @_name: name of the array
-  * @_state: name of the device state structure type
-  * @_field: uint32_t field in @_state to hold the array length
-- * @_arrayfield: field in @_state (of type '@_arraytype *') which
-- *               will point to the array
-+ * @_arrayfield: field in @_state which will point to the array
-  * @_linktype: QOM type name of the link type
-- * @_arraytype: C type of the array elements
-  *
-  * Define device properties for a variable-length array _name of links
-  * (i.e. this is the array version of DEFINE_PROP_LINK).
-@@ -195,12 +190,10 @@ extern const PropertyInfo qdev_prop_link_list;
-  * where each string is the QOM path of the object to be linked.
-  */
- #define DEFINE_PROP_LINK_ARRAY(_name, _state, _field, _arrayfield,      \
--                               _linktype, _arraytype)                   \
--    DEFINE_PROP(_name, _state, _field, qdev_prop_array, uint32_t,       \
-+                               _linktype)                               \
-+    DEFINE_PROP(_name, _state, _field, qdev_prop_link_list, uint32_t,   \
-                 .set_default = true,                                    \
-                 .defval.u = 0,                                          \
--                .arrayinfo = &qdev_prop_link,                           \
--                .arrayfieldsize = sizeof(_arraytype),                   \
-                 .arrayoffset = offsetof(_state, _arrayfield),           \
-                 .link_type = _linktype)
- 
-diff --git a/tests/unit/test-qdev.c b/tests/unit/test-qdev.c
-index 77c3eee71713..8cd004b1efab 100644
---- a/tests/unit/test-qdev.c
-+++ b/tests/unit/test-qdev.c
-@@ -23,7 +23,7 @@ static const Property my_dev_props[] = {
-     DEFINE_PROP_UINT32("u32", MyDev, prop_u32, 100),
-     DEFINE_PROP_STRING("string", MyDev, prop_string),
-     DEFINE_PROP_ARRAY("array-u32", MyDev, prop_array_u32_nb, prop_array_u32,
--                     qdev_prop_uint32, uint32_t),
-+                     qdev_prop_uint32),
- };
- 
- static void my_dev_class_init(ObjectClass *oc, const void *data)
-
--- 
-2.55.0.543.g5ebe2ebe4ea8
-
+--_000_SEYPR01MB53165235FE9CCFDB1980D867F3A62SEYPR01MB5316apcp_--
 
