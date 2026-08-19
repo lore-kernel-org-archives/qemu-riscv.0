@@ -4,128 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D67DC5DF86
-	for <qemu-riscv@archiver.kernel.org>; Wed, 19 Aug 2026 11:49:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41F2AC5DF81
+	for <qemu-riscv@archiver.kernel.org>; Wed, 19 Aug 2026 13:19:38 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wwemi-000814-1X; Wed, 19 Aug 2026 07:48:44 -0400
+	id 1wwgCQ-0005C7-3S; Wed, 19 Aug 2026 09:19:22 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <chao.liu@processmission.com>)
- id 1wwemg-00080l-Ng; Wed, 19 Aug 2026 07:48:42 -0400
-Received: from mail-japaneastazlp170130007.outbound.protection.outlook.com
- ([2a01:111:f403:c405::7] helo=TYDPR03CU002.outbound.protection.outlook.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <chao.liu@processmission.com>)
- id 1wweme-0002ni-Ng; Wed, 19 Aug 2026 07:48:42 -0400
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=XfGyJV4t+s64/be+9FUQU8ZD97T6lVx9Rhzf/tUDFXNGjp008Sdf7gia24osYojZ5Pb3F+/wMVx6hD3i3/AF5tqZRqfKaoW+h2ir0+gTOHuWuKFwHdpSv86uEV9UwKoI04To7p1FPAPLpkkWA3jikYcRxrVadPiAjcX3hYOAWc09hfSBv7F1muDnxnwuwj8vJwzM0bodNPKQ7m0lHJzyZbnyrxMymbXyCfIMeYsnl1MhwD51UEoC6sJAovJ/bdJI04HZyinCyZWE9qkYs75hfZv01+SmE+qzaC9vYkC2Ssfa4pdJ4cXVkbMdzbHS8LHo5I5LU++7ASK3fnYORbt4lQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=3AxvBzb4Yd45n4loFV33k8QHPg57js9cGOVw3jGOL8g=;
- b=v9Frvs2tv+0dcCKPJ8d841uwsOjZlpi/vXbsH9hyM5swERNAcjG0LSz3Fvjt5ECdEkM6vEOm+K2gn3xBuhEe5exR3zn7Wej4OlWtyVs6WXMtDSeuGe4vXApB+B/x0c9AtDH0+CMrxzZlcpyXsI7uRXjCz0+3unoIcTkXZm0HMUYcDjQ8mVKczsYn+EzlAeSZ/c7nuTDmGP1cmFdlXJoCegb3sd6SOfMWWQ67UKmnv2RTnGbiUq00AlnR7ntgChwqFn6uF5TyBe8O5E3ZeyseNBwdQ8xslUAMvYLx730J7UgCw89OieFXU9VkEjeQCikKMYzm8u18vsRM8vG31Dpc7Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=processmission.com; dmarc=pass action=none
- header.from=processmission.com; dkim=pass header.d=processmission.com;
- arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=processmission.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=3AxvBzb4Yd45n4loFV33k8QHPg57js9cGOVw3jGOL8g=;
- b=nCn0omUecQMipRLzFRNv8z5IFBSOtHMuxeMCa5Xf95ZIm7lK9MEquPJrYUaMxd473ZhG+ddN63OdALIXGpVSTxovKhrgZpIw6XG26z/Ly7Jrklu34WFcio23uY26pS561EAHBexosEqtafk1So8D6hFHsfJjW8CXWzwmPQW2/xGYScR6kh1uzn0/agpieQtj/YpgxHmvWRv6yWKBcD+O7lEyyStINVVOrTRzNnPV76iS8WLdEwkK5VhY34ZBdtucxdRR8Pwkus/p9cmumxGC15gm8wLFNtiSZgAJnMeuQ/sj6uoQxXWOYwPk8Ko3SdNiy+k6TTGZJkOh6AYJhyY0Ug==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=processmission.com;
-Received: from TYNPR02MB9351.apcprd02.prod.outlook.com (2603:1096:405:3d0::15)
- by JH0PR02MB6820.apcprd02.prod.outlook.com (2603:1096:990:4a::6) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.339.8; Wed, 19 Aug
- 2026 11:48:31 +0000
-Received: from TYNPR02MB9351.apcprd02.prod.outlook.com
- ([fe80::e5f3:5fb7:3d29:5934]) by TYNPR02MB9351.apcprd02.prod.outlook.com
- ([fe80::e5f3:5fb7:3d29:5934%4]) with mapi id 15.21.0315.016; Wed, 19 Aug 2026
- 11:48:30 +0000
-Date: Wed, 19 Aug 2026 19:48:25 +0800
-To: frederic.petrot@univ-grenoble-alpes.fr
-Cc: alistair.francis@wdc.com, daniel.barboza@oss.qualcomm.com, 
- palmer@dabbelt.com, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Subject: Re: [PATCH v2 1/2] target/riscv: Fix sstatus update in rv128
-Message-ID: <aoWYAIx74S25ZEmG@ChaodeMacBook-Pro.local>
-References: <20260819105655.33391-1-frederic.petrot@univ-grenoble-alpes.fr>
- <20260819105655.33391-2-frederic.petrot@univ-grenoble-alpes.fr>
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20260819105655.33391-2-frederic.petrot@univ-grenoble-alpes.fr>
-X-ClientProxiedBy: BY1P220CA0042.NAMP220.PROD.OUTLOOK.COM
- (2603:10b6:a03:59e::17) To TYNPR02MB9351.apcprd02.prod.outlook.com
- (2603:1096:405:3d0::15)
+ (Exim 4.90_1) (envelope-from <rao232328@gmail.com>)
+ id 1wwgCO-0005Bc-89
+ for qemu-riscv@nongnu.org; Wed, 19 Aug 2026 09:19:20 -0400
+Received: from mail-pj1-x102c.google.com ([2607:f8b0:4864:20::102c])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <rao232328@gmail.com>)
+ id 1wwgCM-0004rV-7W
+ for qemu-riscv@nongnu.org; Wed, 19 Aug 2026 09:19:19 -0400
+Received: by mail-pj1-x102c.google.com with SMTP id
+ 98e67ed59e1d1-3900e39d935so1081470a91.0
+ for <qemu-riscv@nongnu.org>; Wed, 19 Aug 2026 06:19:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1787145557; x=1787750357; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:mime-version:references
+ :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=ePfGipNK4v19XZb3CA7EOq8w7Q1IMhBnTuf0QhDiJOM=;
+ b=oOZn16O4PkWf9YfLCJQz0JGcq5+qLCxGko4SEKk3NdTp+96ezWMmuzjCMgYeSLwLxm
+ 7n1Spoxb6b/UXxIk7UlZfhWPj9SrfOe8+9isobDg6PMdHstvfkKGHVs2BFI/+9JBvrGU
+ FozNuFlYw1orKqV9exUw0HopQX1N1gUSlonGAstgNdoT9j17LOyJOjQ7g8pAeOnvsonY
+ pc6U85LZZEA5ZftjLEZX/3HbGBBqHXg103wIw+lXy3VaeBpNhZCDt2OZJ84BN9m/iVir
+ W5YGtf7vKQC77TSDM0sNbPdhrUEWbXm1QX25NXe3UU08WSWe1/yTomGhfg48DtgZQyye
+ tHrA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1787145557; x=1787750357;
+ h=content-transfer-encoding:content-type:mime-version:references
+ :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=ePfGipNK4v19XZb3CA7EOq8w7Q1IMhBnTuf0QhDiJOM=;
+ b=d2hw88GWkNp3bVjNtZxK+gVh98zdNk6VK/m2LJJIhhsa8dNPa6M9HUPC83kstTo7bk
+ aEZYl9v1i+Ad8X5tAb2C7YC/4av6ejsCBDWmURJM6wS5ivsW5QcVRwKCIC8K1MP6eFvD
+ /l2fSvceZGYHk56gfvRGFV2e2iJtb2ib+6LN//r//H9UzhvCzkJZVgQRhqrU5irmMlKL
+ ApJWffcOnnsCdYJaKGkapYYYNxwg0hwpFA++2Q1iqmlfY9lkKo1rnlZXMp/RE1rCATHY
+ 9IlacT5XYbYOfknmoDSyMiy29S8NJPWICxdOQ5x0h7peshoFJcgYo2YSi7c30D2SDn5Z
+ 9WCA==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RrnEFoE1cswTIRRbIetClBuWm2T6K4tpLVEiCcLi2EgszkHmx8o1Yn41QFypLeCbV65WlDfhAzGVRYE@nongnu.org
+X-Gm-Message-State: AFuF++nAlHlIX6rhKc3nr25+WydoqISfnutzf4qQ28L6mk+hrqHtMPpS
+ VrdKuMAaYufoEtrrHNgXwazIamwZpAplJYnGiRUJqNUAaKLep/tLe9jF
+X-Gm-Gg: AR+sD109B4prnNHM30ORSM3PJJAWOfTplsJD2MfOktH02a2XUegOWGpxEh/ZZrFnkMu
+ FzCudHw3Xpn/66DU3LmbqCpkbmiIsPGImHf56ML8cDQNK4rvWyXtVNiKhPUslyzwyI7nUUum/2u
+ tdWnJJXuwPI3kA8NNMWgaibD6pEbeL4bvSEG3WLXcINtJFvVsnuRl8m94T4Dm1Ix7oMETrBq46z
+ a9fPccbk309Txgk1OM7BGoYCx2fkBWCKBHUUBmw0TTL8YDF4YwRPT305q443nnmb4maNrOqtjYF
+ d3SA6GCwaezAIVCAa2DdCA/XH9sfaH9rAJbiOkRbXELlEZ/isALJoSCoc/du1JXSuAiy0zF5Avo
+ Jft74Olc+NDSGjtahSDmB+NVESpR6I3Hzgs8S0W5vrLQPZbSrYyexyiVJoWx3Q63PKFZYx8h6Cq
+ 1LFdKj+XDWeYJ4o+siudkeRzRYl+yBU0vzvrSdQWvSkrD9mZkKZY1URcjavMrbAAov3Aszg20TN
+ m1lHoaa
+X-Received: by 2002:a17:90b:4a8d:b0:38e:ad9d:1161 with SMTP id
+ 98e67ed59e1d1-39580553dfamr8976336a91.0.1787145556612; 
+ Wed, 19 Aug 2026 06:19:16 -0700 (PDT)
+Received: from DESKTOP-DFGP8OG.lan ([156.226.169.41])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-3957fb12145sm2734387a91.4.2026.08.19.06.19.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 19 Aug 2026 06:19:16 -0700 (PDT)
+From: raoyi <rao232328@gmail.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Chao Liu <chao.liu@processmission.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ caojunze424 <caojunze424@gmail.com>,
+ Bin Meng <bin.meng@processmission.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
+ raoyi <rao232328@gmail.com>
+Subject: [PATCH v5 2/3] hw/riscv: add DesignWare APB timer to K230 board
+Date: Wed, 19 Aug 2026 21:18:58 +0800
+Message-ID: <20260819131859.9583-3-rao232328@gmail.com>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260819131859.9583-1-rao232328@gmail.com>
+References: <20260819131859.9583-1-rao232328@gmail.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: TYNPR02MB9351:EE_|JH0PR02MB6820:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3e33198d-72da-43ce-00de-08defde7ca23
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|1800799024|23010399003|366016|56012099006|10067099003|4143699003|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info: IkUcnGvFH4UzmOenzvRuxDGVFY53Cd1sCH1LzWM99mOcXvOpwY8RzXWGzRSxx3zx+uQXY8vkvF7M2mnTf7BR6jjRbG51GMUIBeTpuIwMuNdYOorEcYbvmvNxfdrLI0n21qjjRtHpv6bj3igrusEIkawuF/zeqL1Q7Jx65xyzPeBCtUJhapyUUw4y1H7+s5ov71Zcp6CGvVyYACIeXwJeAr+D/BrzgfDGGW2gHAwajhFH05/cHOz+3Gh98DgFr3pj4nL/HcSGB/+C6/uPdmI/thvwU4AmUM7j84Uyy0nfOzFyV113aDGTMEKdLPBQ4xGz9O5G9Uv55dA9PeYQ+OcOXoMryloqGQzi7EMLSgngxIPE6BxLCYhumQv5K7jNfqTIZyfKJRt9UO/G6lhvq1Qgv7bVBHcN5ip7PYAvcWRBZqNTrSah2913hfBd/n16iq5nGhvZ++bqprZwr5QVgcLs3fhsG3MhFiGDPIzS+0PrNkWPEt6cbYTD9+P6nN7O+mlKzVOSnxTL4ZU0Fny/r0fgwJ0GwZN5O1D8WteKBjafqtcfoWzjq17D+m7NFEB38rqxI+zbkkDDw9OiwCxAsNsly1FaR9lnSOk+TxwTDlMBwv19uVCzZeZCho7GFCOHD0v3QEWnR+QV1zWgpFAg0TygJqOkalAJDW/47e/DMfTb6xM=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:TYNPR02MB9351.apcprd02.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(23010399003)(366016)(56012099006)(10067099003)(4143699003)(22082099003)(18002099003);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?iso-8859-1?Q?Q+r1bGjdyAbJxMKtRaqcNLp9ZzT0kbL3DgSvE+SUcxNFGeaiSHn8MxDjG1?=
- =?iso-8859-1?Q?lhUas8N1I/702UfwsAxB0NvwM47MHVbwDFR6hfEVWliHnZ2LP1HTE38sHe?=
- =?iso-8859-1?Q?e3RVQ9evQHHI4Sk5w66fLV9WJhAYZn3BSa5bFga2uBpe4ZaiMpwNoEOqST?=
- =?iso-8859-1?Q?xAVfrQJvhFES2fm2o5XD4OuPYkoijRJivlph+V2DopHC6UpBV6kp6TT3h3?=
- =?iso-8859-1?Q?PFbTkiJ5GFzcxO9C0OKsCiW12c8u4poXB3MvnsDBxe68KWDSROA3SUbzr7?=
- =?iso-8859-1?Q?wZ3QRoOCPrcMMSRd9ZetCrJ4ZYCHjc7prmwO6HMGpnjMfRcEE3yKoXnv4G?=
- =?iso-8859-1?Q?4epJk/FPI7GA1udnOgBZAnVLj4aBLGunxmtEy1k8e6eqMVUyulVfISb5T3?=
- =?iso-8859-1?Q?iAoLWyT+FudFCRHtLivJfiFaTGdj14/9W4gBCDFCQglb3T0cia5SkbWQvO?=
- =?iso-8859-1?Q?HrK6obztK7KCNlliryvxdmoZ9g4Mrzt9/tTrmVgiifqyFN8DyGLmxxhmQL?=
- =?iso-8859-1?Q?cndUp3+fYaWviafgBHFFIp9Slv27hOUjK2qtET1+DmQcqrfSiZ8xdOZ/pd?=
- =?iso-8859-1?Q?w7Ot1Ef94gKJVKPP5k7fO+wBf8wWcYc4LoYtG64RsbANk6dW+swmNPH8wX?=
- =?iso-8859-1?Q?0tJthKJ3t3abEFJWqa2VZ/li1ov/vqvyS7P3QpXR90BvBKG2/VibU7Wmmn?=
- =?iso-8859-1?Q?DUlISZlkQk4IculeliYlJdCniFJ9tt+3y0l6yhVk5HCQA+Y/xWMMlTdY0k?=
- =?iso-8859-1?Q?OWgo7w2WALJYHX+PTUjd5f2sxssXdK5w/NBMiXuQgsCbgsiFrX0B7YYO12?=
- =?iso-8859-1?Q?iYSCPzb11W4+vFtK1xpWtDcRkWOzymV+oPNXiWF6TiAsFleGB0fKRKQrRZ?=
- =?iso-8859-1?Q?9oKcYnQjFJgzSZ/3MkJS7kFpykNs7sAhnd9LZbgP6y7AqVz7c5/9NcfBk2?=
- =?iso-8859-1?Q?cbFXuZ3KaiQqzjhcRToHnpkEA4SuePqhxiAyn1yWLDZPxx0G9611XpAD4F?=
- =?iso-8859-1?Q?jBIo3qSCbXmbCoARXx8CfcLUXhcE3tyH4j5UI/j+aiuLB+d13RllmwO35W?=
- =?iso-8859-1?Q?yfiRxFboYXyYGVSLKoHFNdQG+LNdN3B0M8YxxbgndRDOZarRHUuZCQhzIW?=
- =?iso-8859-1?Q?w6g/FMgAf2xrRil/akdV3DpvO/cvSfwKrra7mBguwZptxhY/iz+8mtqvVa?=
- =?iso-8859-1?Q?KdZuV9qtB8DSPtcrvOZ2R0E/irn5m8BjksmB227uPXbfaVk9zyGbbB1B8I?=
- =?iso-8859-1?Q?KckbC7JqXdRmYeeTEGRANzcA3xw1RXYE2tp2kjyPAaO04t384c3tqhhZLq?=
- =?iso-8859-1?Q?FZzk7ulwJccEUw2AUtZHwDL4Zl1RrbpkVADa5cPm5/ee81FYQhqoRtRpNc?=
- =?iso-8859-1?Q?JA/NY3zynY/JU/ULsfqsLc3OoUuda1GoFyd/ctP3eA7auWfAEeIJ4uoh8r?=
- =?iso-8859-1?Q?CPpmbofrEvhKiE95LuKQVyRFykLSs7IVxUTXeBYHeOoMbQs/vlHxMzKff3?=
- =?iso-8859-1?Q?7UV2eyrpreCVxK2vFFMn4VYZGcMAdL9yEIwJYzDHCw6NQAxLGZBBQFN21D?=
- =?iso-8859-1?Q?9GapGBqa4WrHczN1IeHac7FC3HgT0meiqPYv4TcgMSv5b+2GVVEZmXSpUW?=
- =?iso-8859-1?Q?go+tTgyWCLaDJXPHqi4WF0+4b1uwKU7r72VAufi2qJqJ9hdCBSliWxE9r/?=
- =?iso-8859-1?Q?jxbGdzQ3ZF+jVeBq8y+v+U7Xat55qeiieTgs8Ot+12f8icvtpeIp3lq3wc?=
- =?iso-8859-1?Q?HjWQIDrGAzFlriQAbg/MlF3mNtjKU6ZzJymGm6Ce8xujfC23eS0TEJqwmR?=
- =?iso-8859-1?Q?S3NxQdyvYOj/a1GHwI5f8gsP1j4R5Eo=3D?=
-X-OriginatorOrg: processmission.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3e33198d-72da-43ce-00de-08defde7ca23
-X-MS-Exchange-CrossTenant-AuthSource: TYNPR02MB9351.apcprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Aug 2026 11:48:30.6166 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: e0544bf7-9765-4630-ab69-0b266dc2169c
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 1mTA0BdZCGHzp5SaRol9kDD5VLeHohqK+USNNSjiNON63YVTr7165czq2F/ePrSidWkvD0EjRSIoD26WQa6cvcAlMiqNFqrKIdS/V4KkcWg=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: JH0PR02MB6820
-Received-SPF: pass client-ip=2a01:111:f403:c405::7;
- envelope-from=chao.liu@processmission.com;
- helo=TYDPR03CU002.outbound.protection.outlook.com
-X-Spam_score_int: -16
-X-Spam_score: -1.7
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102c;
+ envelope-from=rao232328@gmail.com; helo=mail-pj1-x102c.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
 X-Spam_bar: -
-X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
- DKIM_SIGNED=0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -138,56 +111,136 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Reply-to:  Chao Liu <chao.liu@processmission.com>
-From:  Chao Liu via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Aug 19, 2026 at 12:56:54PM +0800, frederic.petrot@univ-grenoble-alpes.fr wrote:
-> From: Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
-> 
-> The sstatus register assignment was performed before the write
-> mask was fully constructed, leading to an incomplete update of
-> sstatus fields on the experimental rv128 target.
-> 
-> Move the sstatus write after the mask completion so the full
-> write mask is applied correctly.
-> 
-> Signed-off-by: Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
-> Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Chao Liu <chao.liu@processmission.com>
+Wire up the DesignWare APB timer to the K230 SoC with
+num-timers=6 and a 50 MHz clock. Connect timer IRQs
+to the PLIC. Remove the previous unimplemented timer stub.
 
-Thanks,
-Chao
+Signed-off-by: raoyi <rao232328@gmail.com>
+Reviewed-by: Philippe Mathieu-DaudÃ© <philmd@oss.qualcomm.com>
+---
+ hw/riscv/Kconfig        |  1 +
+ hw/riscv/k230.c         | 33 ++++++++++++++++++++++++++++++---
+ include/hw/riscv/k230.h |  8 ++++++++
+ 3 files changed, 39 insertions(+), 3 deletions(-)
 
-> ---
->  target/riscv/tcg/csr.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/target/riscv/tcg/csr.c b/target/riscv/tcg/csr.c
-> index ffd751caa5..9cc6297328 100644
-> --- a/target/riscv/tcg/csr.c
-> +++ b/target/riscv/tcg/csr.c
-> @@ -3998,7 +3998,7 @@ static RISCVException read_sstatus_i128(CPURISCVState *env, int csrno,
->                                          Int128 *val)
->  {
->      uint64_t mask = sstatus_v1_10_mask;
-> -    uint64_t sstatus = env->mstatus & mask;
-> +    uint64_t sstatus;
->      if (env->xl != MXL_RV32 || env->debugger) {
->          mask |= SSTATUS64_UXL;
->      }
-> @@ -4009,7 +4009,7 @@ static RISCVException read_sstatus_i128(CPURISCVState *env, int csrno,
->      if (env_archcpu(env)->cfg.ext_zicfilp) {
->          mask |= SSTATUS_SPELP;
->      }
-> -
-> +    sstatus = env->mstatus & mask;
->      *val = int128_make128(sstatus, add_status_sd(MXL_RV128, sstatus));
->      return RISCV_EXCP_NONE;
->  }
-> -- 
-> 2.43.0
-> 
+diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
+index de37c08cae..c2c01af6ee 100644
+--- a/hw/riscv/Kconfig
++++ b/hw/riscv/Kconfig
+@@ -162,3 +162,4 @@ config K230
+     select SERIAL_MM
+     select UNIMP
+     select K230_WDT
++    select DW_APB_TIMER
+diff --git a/hw/riscv/k230.c b/hw/riscv/k230.c
+index 656f28190c..2e641ffec4 100644
+--- a/hw/riscv/k230.c
++++ b/hw/riscv/k230.c
+@@ -24,6 +24,8 @@
+ #include "target/riscv/cpu.h"
+ #include "hw/core/loader.h"
+ #include "hw/core/sysbus.h"
++#include "hw/core/clock.h"
++#include "hw/core/qdev-clock.h"
+ #include "hw/riscv/k230.h"
+ #include "hw/riscv/boot.h"
+ #include "hw/riscv/machines-qom.h"
+@@ -37,6 +39,9 @@
+ #define K230_DIRECT_KERNEL_ADDR  0x8200000
+ #define K230_DIRECT_DTB_ADDR     0xa000000
+ 
++#define K230_TIMER_NUM_CHANNELS 6
++#define K230_TIMER_DEFAULT_FREQ 50000000
++
+ static const MemMapEntry memmap[] = {
+     [K230_DEV_DDRC] =         { 0x00000000,  0x80000000 },
+     [K230_DEV_KPU_L2_CACHE] = { 0x80000000,  0x00200000 },
+@@ -110,6 +115,19 @@ static void k230_soc_init(Object *obj)
+     object_initialize_child(obj, "c908-cpu", cpu0, TYPE_RISCV_HART_ARRAY);
+     object_initialize_child(obj, "k230-wdt0", &s->wdt[0], TYPE_K230_WDT);
+     object_initialize_child(obj, "k230-wdt1", &s->wdt[1], TYPE_K230_WDT);
++    object_initialize_child(obj, "dw-apb-timer", &s->timer,
++                            TYPE_DW_APB_TIMER);
++
++    qdev_prop_set_uint32(DEVICE(&s->timer), "num-timers",
++                         K230_TIMER_NUM_CHANNELS);
++
++    Clock *timer_clk = clock_new(OBJECT(s), "timer-clk");
++    clock_set_hz(timer_clk, K230_TIMER_DEFAULT_FREQ);
++    for (int i = 0; i < K230_TIMER_NUM_CHANNELS; i++) {
++        g_autofree char *clock_name = g_strdup_printf("timer[%d]", i);
++
++        qdev_connect_clock_in(DEVICE(&s->timer), clock_name, timer_clk);
++    }
+ 
+     qdev_prop_set_uint32(DEVICE(cpu0), "hartid-base", 0);
+     qdev_prop_set_string(DEVICE(cpu0), "cpu-type", TYPE_RISCV_CPU_THEAD_C908);
+@@ -191,6 +209,18 @@ static void k230_soc_realize(DeviceState *dev, Error **errp)
+         k230_create_uart(sys_mem, DEVICE(s->c908_plic), i);
+     }
+ 
++    /* Timer */
++    if (!sysbus_realize(SYS_BUS_DEVICE(&s->timer), errp)) {
++        return;
++    }
++    sysbus_mmio_map(SYS_BUS_DEVICE(&s->timer), 0, memmap[K230_DEV_TIMER].base);
++
++    for (int i = 0; i < K230_TIMER_NUM_CHANNELS; i++) {
++        sysbus_connect_irq(SYS_BUS_DEVICE(&s->timer), i,
++                           qdev_get_gpio_in(DEVICE(s->c908_plic),
++                                            K230_TIMER0_IRQ + i));
++    }
++
+     /* Watchdog */
+     for (int i = 0; i < 2; i++) {
+         if (!sysbus_realize(SYS_BUS_DEVICE(&s->wdt[i]), errp)) {
+@@ -283,9 +313,6 @@ static void k230_soc_realize(DeviceState *dev, Error **errp)
+     create_unimplemented_device("iomux", memmap[K230_DEV_IOMUX].base,
+                                 memmap[K230_DEV_IOMUX].size);
+ 
+-    create_unimplemented_device("timer", memmap[K230_DEV_TIMER].base,
+-                                memmap[K230_DEV_TIMER].size);
+-
+     create_unimplemented_device("wdt0", memmap[K230_DEV_WDT0].base,
+                                 memmap[K230_DEV_WDT0].size);
+ 
+diff --git a/include/hw/riscv/k230.h b/include/hw/riscv/k230.h
+index 592e1c26bf..42a36664eb 100644
+--- a/include/hw/riscv/k230.h
++++ b/include/hw/riscv/k230.h
+@@ -18,6 +18,7 @@
+ #include "hw/core/boards.h"
+ #include "hw/riscv/riscv_hart.h"
+ #include "hw/watchdog/k230_wdt.h"
++#include "hw/timer/dw-apb-timer.h"
+ 
+ #define C908_CPU_HARTID   (0)
+ 
+@@ -33,6 +34,7 @@ typedef struct K230SoCState {
+     RISCVHartArrayState c908_cpu; /* Small core */
+ 
+     K230WdtState wdt[2];
++    DWAPBTimerState timer;
+     MemoryRegion sram;
+     MemoryRegion bootrom;
+ 
+@@ -127,6 +129,12 @@ enum {
+     K230_UART2_IRQ  = 18,
+     K230_UART3_IRQ  = 19,
+     K230_UART4_IRQ  = 20,
++    K230_TIMER0_IRQ = 101,
++    K230_TIMER1_IRQ = 102,
++    K230_TIMER2_IRQ = 103,
++    K230_TIMER3_IRQ = 104,
++    K230_TIMER4_IRQ = 105,
++    K230_TIMER5_IRQ = 106,
+     K230_WDT0_IRQ   = 107,
+     K230_WDT1_IRQ   = 108,
+ };
+-- 
+2.53.0
+
 
