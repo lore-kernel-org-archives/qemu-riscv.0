@@ -4,150 +4,147 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 663A6C5B572
-	for <qemu-riscv@archiver.kernel.org>; Wed, 19 Aug 2026 04:47:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A28EC5DF6D
+	for <qemu-riscv@archiver.kernel.org>; Wed, 19 Aug 2026 04:48:26 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wwYCu-0005uw-Up; Wed, 19 Aug 2026 00:47:20 -0400
+	id 1wwYDh-0006LD-OQ; Wed, 19 Aug 2026 00:48:09 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <subrahmanya.lingappa@oss.qualcomm.com>)
- id 1wwYCt-0005uR-6W
- for qemu-riscv@nongnu.org; Wed, 19 Aug 2026 00:47:19 -0400
+ id 1wwYDg-0006L0-HL
+ for qemu-riscv@nongnu.org; Wed, 19 Aug 2026 00:48:08 -0400
 Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <subrahmanya.lingappa@oss.qualcomm.com>)
- id 1wwYCr-0003sh-Cx
- for qemu-riscv@nongnu.org; Wed, 19 Aug 2026 00:47:18 -0400
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+ id 1wwYDf-0003z7-2h
+ for qemu-riscv@nongnu.org; Wed, 19 Aug 2026 00:48:08 -0400
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 67J2lUwV3088014
- for <qemu-riscv@nongnu.org>; Wed, 19 Aug 2026 04:47:16 GMT
+ 67J2lXcN3507948
+ for <qemu-riscv@nongnu.org>; Wed, 19 Aug 2026 04:48:06 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- joxpXnm9S9eW96P7L0zcaqgsjWYNIV5xu0uAuzygQDE=; b=gDGwvBGq0TATfwpb
- XhsYgqUjqDUDHmvRYkzcfwkr1rP1rhr50IHHNoLCBekxBTGFcYNDWst9V51ESIlh
- wKI9wSnAWNzg2KHWZbW2uPbtNIm3PvjIayKcdebZNaKLFxQVXnLbVfVPM/ywQksa
- BFehlyerEzhXcKeCqFBZVcQsHPbkmjPs37taMyWsW3CMi2ut0xWNSk3WHuiD4M59
- pHQYpULMabq3iDXZanyV2uH/fy5XmmCVzM62gEb7iXUJrMfeWTYEqzS0mmlJ5G+a
- 93H0uzgIQwVNvtNHlCsphYeaOMLI2ubuQGcSeuletQs5MjkkNZRh1NQtidI052Cn
- 5rUZ4g==
-Received: from mail-ua1-f70.google.com (mail-ua1-f70.google.com
- [209.85.222.70])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g4yfn9auq-1
+ 64scJ1fc/xJBOSLi6cTYshkTo+LoalLzTKb8lxfzxRU=; b=bFOLYl7x7Wg8l+w3
+ NVEWsdEAIy8Yjuf+NKQB59F9Nep4h/G6ZLpx7vV9qbgNe7Ce0VBloQWf+Xt+1edT
+ XIhwMZ1PmJZQBAf2KpFMT/5b+LCYaPESBNH+B2KV8WuApShH3DTPI3Mpe6+mQPJN
+ NEaF15/oJ6tVFUDlv5yWkBT5IW6v4Po8J3eUtxWri8GW3gTCJrLR5VV+BqtVU8JZ
+ 8QBp3WDZOZfnvPzfw/akJjuhgqVLaL2Qq08keVBoLh21vFZTLkEIt1C2P41XJh8E
+ c7JbXKbNSWghP/XtIjKD227dxzv7A3azlyXi4ec+oK/AiOhDYBfYDcHaD+QIc566
+ tEaPjw==
+Received: from mail-vs1-f72.google.com (mail-vs1-f72.google.com
+ [209.85.217.72])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g4yfm9b9g-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Wed, 19 Aug 2026 04:47:16 +0000 (GMT)
-Received: by mail-ua1-f70.google.com with SMTP id
- a1e0cc1a2514c-97c4f47fa57so3096241.0
- for <qemu-riscv@nongnu.org>; Tue, 18 Aug 2026 21:47:16 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1787114835; cv=none;
+ for <qemu-riscv@nongnu.org>; Wed, 19 Aug 2026 04:48:05 +0000 (GMT)
+Received: by mail-vs1-f72.google.com with SMTP id
+ ada2fe7eead31-73761f92dd1so6661137.1
+ for <qemu-riscv@nongnu.org>; Tue, 18 Aug 2026 21:48:05 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1787114885; cv=none;
  d=google.com; s=arc-20260327;
- b=K4zl/LXxHm6d+20/8Bdrd/6KKdYNxo6msxIgm+I7kNGsGSa+kyZbw9hv+iSlUJOM1R
- apiV6ouAiZ+GZgOrpdAA0KzYP0q1/knKCy20veLrgco6VVuy9MKTI6f/TF7O7aTNfz/P
- 4kCFx+IzB7wvic35/yUYyLFMezZxQyyN7C5UaCYNN5pvQ2nCFVvDiZdigGG2E5D+uWLi
- hDd46JnOP4vjNwYoigDnqPJ/Vo08/y0A/D+tnqDKPs90MY251Jx8c0Qe94oatGrQ9Uwj
- 3oX8DUi9cFD8gcyltXKcyAE3GnC6z1KIZghpOreuIRSPGeyDUpClU408VQM2Kmh5A8b0
- 5afg==
+ b=ZXs8PvgUr0LhAzHI+xEvRvhmRbMPW/fOmqU9/HoiLuFcY8+s8Xmf39DIun1DdVBWd4
+ PKs4uw5mduSV/Qr+0n+iQ5cdcegyuHW/knAfmi3TKhI3EKoog+hBfWt8u4D+8kG1Jk8s
+ SSQkk6Kuve0jkWCd3WQhtMViR1JQ0I8HwHjSMdPSU40sDMA9AAF7VwNipw5qQ1UQACY7
+ +Muxzi9oE92ad8+vE2EB763ZDmiaqITVGqm/CUq4G0gLM2OAZl5lRVQGHbkBEwmbRUtZ
+ iaaDES+MxIvGQ6qEFp4QVseU6N6QCy+eRZGBwnNtaIRMUh6LPDAzD1uvn6vXnMZoB7Lc
+ EA4A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=joxpXnm9S9eW96P7L0zcaqgsjWYNIV5xu0uAuzygQDE=;
- fh=wtcmiZIpfrw9ba8BWxYY/YsVH0dT3oIwRAsF1Z/uv9M=;
- b=iKZlury6gUOG66CqhiY+mqILoM2L+sONh8uJqlKbSukYMvGbODRQSiEizmHGTqVNvF
- IPqPT8yHmGmDgsggZCvRR6pO6hwEQRv6Ub0+SpwKFr1Uxmr/4VcUy+FIYIjUSDbsMdw5
- v9vpYb+AeoaGP+2PyAKqKiC3Txfe4lZ3w1rPWxUde6LHZGx69rz0a5llZvyggQPqLDVD
- TnbwiY6QEp1f55KNhdjbsnCqHKOoC7/SxqAU4MTDEegUUbjxAzzLXgzLyEbnAO6dbLkK
- Opi1rkGSOtkR3963HpnmXLXRKObqswuyIdTTd7arZCXr6KGhYxls4adHxpnGXn+n3YMT
- NhCw==; darn=nongnu.org
+ bh=64scJ1fc/xJBOSLi6cTYshkTo+LoalLzTKb8lxfzxRU=;
+ fh=9ly/5zZ6pZywwxLbPaOabLbUGbpb2NvuUNVnRUNDAw4=;
+ b=nk6llLqm7RSmiAkECbsyxElLKgZSr4JEntxY1f9fHffOLnrVWzzJIHuUe79WBuJMvZ
+ +gLhwwoSi08qJekIU8y94vsmmJqIBHxWAtnZZ00naC5Bl+Ey/Ne+0ruvBeo2FU+tLxS/
+ x9F2x2A75vfrHYoDfUl5JrmDC1cHAjaogQmzMZKd9hNagOCIKpZn6C9Tzera9wJZlazr
+ Y7emD0mZQS8Zpc66+MgH4ToMuOPFXca3UMsAmt/nE7BUNfbySVoSU+SPQViftJMEvGDk
+ Y5D0OOjPWKswBKR3g40TqkUV/80+hvueLa/JzqGvWgABbGuT1Rw4snnPcAEy5ji7iqrz
+ 6uUw==; darn=nongnu.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1787114835; x=1787719635; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1787114885; x=1787719685; darn=nongnu.org;
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=joxpXnm9S9eW96P7L0zcaqgsjWYNIV5xu0uAuzygQDE=;
- b=kKg4EQAfX6kqr3aVG5EFS/ouIQJo7Ny79dwHuq2I657tscMuW9gQcBh7JELrYuhWYG
- mpEEYKLz/f84+FPX+ohADOAGNLFbxxZeIKBshA+cFqejQOkrn3oHqFBLpJ8Qz/N6PEdI
- 0JoOpG9bvw03v6lGKhGVUP5uXl3flKMwa1DKcvJR1nYfVea8mQ+ib0VpRFD4RGgPON1P
- 7ffY0v8Y8fgSzOCtz4ifNAvzy2trqiE2LoVi2xDV6RkjbLEi1jL9d1fJfrw9Lg8DTBCy
- RzLFxD0kXKQr1tRNGu9MOm/AmGYgJ2xHgrhicconib3k9VZpWB1PZnLCeMu5Ks8gLRua
- LjHg==
+ bh=64scJ1fc/xJBOSLi6cTYshkTo+LoalLzTKb8lxfzxRU=;
+ b=ROAJYV4Lx4svT9qW+U3CKBsCH1dCRRMIfvOlhjfyfbGA42sesBXAF5Hj673KUbog68
+ 6WuWeIw/lHmcvBCp9rQKIavuL9bTxsbpM0dYiYd9X1eLfL75z175jtLhGW3cOyIMo+Fq
+ 94AZyYjmRnHcN/7YrRHmpbZeORY9stqLxFK72Xo/YToIG40nR79T+vCNtz1UlqPOjcXw
+ fzaVJtwOTUluSpTlLmt4tSgzXCOcSmw0HxIV2BDFdEc4hyizuIX5q0lxSmZ0GJu8rZaV
+ +CKYLLXOxmOWWtv/BZ9M2g89fzNoxneX9iAyzKAkguCUd0p0FnBHVjIPrUKWYi9tzatW
+ SQlg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787114835; x=1787719635;
+ d=1e100.net; s=20251104; t=1787114885; x=1787719685;
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=joxpXnm9S9eW96P7L0zcaqgsjWYNIV5xu0uAuzygQDE=;
- b=RZ6RqMLej9a9ipNgm3JEjWbc+OZ3NtYt2/Eg/vUma0uSLuWNhPs1P1mso4kSb6v/Jb
- 18bBrW/k12dvbby8shr4G7ygu7m6tpkBV8AHeS9aCkzq9e+A//AECS7VYQl0LT+V+21Z
- pP1W42Yfevb7LjjiWpTaYh9pPxRnOBcrr0s0/8Q9QKuKd1QgDwZIQJmZiZz7ksR/hpi1
- 9o1ec1Ry7yR61wFzUPFBHWYXFz0RnvTMmMSUerI5TTToR2TLwxHsOdNJe8NzgzRdhbO+
- lbxxfWoPI3nxAkrz1ie+Ctusktp41OCDqzbRAa6eGbRPZ5RVNTijYYARhy7DEnQ1WHPd
- WknQ==
-X-Gm-Message-State: AOJu0Yxd+sYgXloXXae0RJ1mI1DCZKhuR8AIDDrmfzKMuBAoskF4e1LK
- ppqaW7KGEG0c7q1aK8LOcZ4arxukXf5iuYBjgQcEnRhJZ93i7+w6vXRcw8el3g5XPKT73vsImYa
- A35NLLgLPTRwX5axPHPUXcLZ1HEnlPMI8RPSNkU7gwL6ZPos9r+MXqYXAXzi9jIdz+ZkwLCrDwB
- 30VAuA9xRKSGim08hTbc/p/d9UN1d8PzX/
-X-Gm-Gg: AR+sD12RZwaBE/rIKT47tnMVaSXKLh5393rgGBnNAl97j/oaf3+jzeCY27qzLWFT5JG
- cHcMRbO8BnRUjbGN5AMrfi3y+ShqFuKF7WDIXPgpvzAnH6faqP5ICnsHDpor+q4yC8rtHG//IsR
- QIu0Hkwv/kR+BsA4DL0u+6XaAn2ZFjBw4k5Gl8zzpKJ9qzvuAcMBm2s8vpHWs=
-X-Received: by 2002:a05:6102:8024:b0:772:cccb:f7eb with SMTP id
- ada2fe7eead31-777fb1adaf4mr198063137.2.1787114835436; 
- Tue, 18 Aug 2026 21:47:15 -0700 (PDT)
-X-Received: by 2002:a05:6102:8024:b0:772:cccb:f7eb with SMTP id
- ada2fe7eead31-777fb1adaf4mr198038137.2.1787114834696; Tue, 18 Aug 2026
- 21:47:14 -0700 (PDT)
+ bh=64scJ1fc/xJBOSLi6cTYshkTo+LoalLzTKb8lxfzxRU=;
+ b=ktXQ9slNya/KslJt7SMBvHyulrYHrs5MGgSU1xbvW967vhCRkjlh6D0zwPqqfsmQ3n
+ BRx0TRLZGq9YD6DfVWsb8ZLb3yBv9bjuw76ifFJHdNAMdnkVNpRYBg/h3NSUT1tTQRko
+ FVkztTNq+9C3y5fPINOlh6fYZuttXbGB149WQopjcMExgDDlcaP5y242ZHoXir9VAOMB
+ evdCMh22Dp062xgjiw6JxTo7INjyd07nHfanZouIfeqRZ9JP5PIwB2M8/Oj5DxRO6YFC
+ M6frjVIXzCkAl4PDhN5aw3CiCbo26Y65hbh+4kW3qduIH8lq9+QP1bIlvNqTzd8LlmTY
+ 63kA==
+X-Gm-Message-State: AOJu0YwUeDxFzlchNKtgkUGtOZAix0JOmuCNJQ1XxEhzP8mYNUX324f3
+ mcLAKEcqBGsgO6XGt92TGZi+VUmL7HIx4AapFpqLbYMxcgooF6gmTdf3mOaTai+w/4g1+por7MI
+ bZMkoy6YiTGTNsbxZ80CF8y6PiGaAcICWhpzvWTKZfY7QzbmQi8QMycf2f6IstQJd4vvbL5akSj
+ P69i/W6gGn+xDosZNvz3ZoYB3inRLe6N8o
+X-Gm-Gg: AR+sD12iYw8q3CXt80fN7y6+NjLUf5X6QRKrsxNoTizoiy6sd50hm6PR9c5a7rIQyx7
+ 2+6krw3AasawEjBHyORxBCYkUA0RDdgm2Etm/WZ7RIBl2+TDXUOirvWmnDIrGUOkoQmPMOUYNt2
+ 4OVBA7g8Z7OjsjX1MjVYgVVPu66fs/1WKHfGt1xsoh5HhbtLx2Z8dMsCJvvx4=
+X-Received: by 2002:a05:6102:2c15:b0:74a:b1ee:e21b with SMTP id
+ ada2fe7eead31-777faba447cmr188605137.1.1787114880387; 
+ Tue, 18 Aug 2026 21:48:00 -0700 (PDT)
+X-Received: by 2002:a05:6102:2c15:b0:74a:b1ee:e21b with SMTP id
+ ada2fe7eead31-777faba447cmr188592137.1.1787114879990; Tue, 18 Aug 2026
+ 21:47:59 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260814045315.3416169-1-subrahmanya.lingappa@oss.qualcomm.com>
- <20260814045315.3416169-3-subrahmanya.lingappa@oss.qualcomm.com>
- <CAB19ukFjhg9HEbKKBH1+i8pkLnC4wEH3zGyXhHcTbBLdgFJgTQ@mail.gmail.com>
-In-Reply-To: <CAB19ukFjhg9HEbKKBH1+i8pkLnC4wEH3zGyXhHcTbBLdgFJgTQ@mail.gmail.com>
+ <20260814045315.3416169-5-subrahmanya.lingappa@oss.qualcomm.com>
+ <CAB19ukGHNA7KwDpgeucPoy0h2OThHGL7LqESDeY8f_moxPGyUQ@mail.gmail.com>
+In-Reply-To: <CAB19ukGHNA7KwDpgeucPoy0h2OThHGL7LqESDeY8f_moxPGyUQ@mail.gmail.com>
 From: Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcomm.com>
-Date: Wed, 19 Aug 2026 10:17:03 +0530
-X-Gm-Features: AcwNN1U7X0_dLmtsAo2der5Hg8cBSKkJZ8SecGLKWi0I2o1YGiOshPux14ssWwc
-Message-ID: <CAPxK-6doRDXNDTcfrCn0p-R_BG9zFZC+oYzEV9XNRg29x-Q7Ag@mail.gmail.com>
-Subject: Re: [PATCH v8 02/10] hw/misc: add RISC-V RPMI transport and Base
- support
+Date: Wed, 19 Aug 2026 10:17:49 +0530
+X-Gm-Features: AcwNN1WurUbtvHsXOe7_ghZyear-8vUGiyeWd-Uroi8UDPl2GPRI1P9LvazQZTw
+Message-ID: <CAPxK-6dwyzkCV8VUTD+dyMqKd0WeAPB6E4zh2w5dEGGFJudVrg@mail.gmail.com>
+Subject: Re: [PATCH v8 04/10] hw/riscv/virt: add opt-in RPMI base support
 To: sunilvl@oss.qualcomm.com
-Cc: qemu-riscv@nongnu.org, Paolo Bonzini <pbonzini@redhat.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
+Cc: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Weiwei Li <liwei1518@gmail.com>,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu.zevorn@gmail.com>,
+ Chao Liu <chao.liu.zevorn@gmail.com>, Paolo Bonzini <pbonzini@redhat.com>,
  "open list:All patches CC here" <qemu-devel@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Authority-Analysis: v=2.4 cv=QedWeMbv c=1 sm=1 tr=0 ts=6a853554 cx=c_pps
- a=R6oCqFB+Yf/t2GF8e0/dFg==:117 a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10
+X-Proofpoint-ORIG-GUID: 2DXK6VHMSCpCTn4zp0N9eEqT4Dj-LGcm
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODE5MDAzMyBTYWx0ZWRfX2heY0Y7nTwpB
+ SUMXJDYMtPVBXsJV9pUT0hObGd8sUoznB6wYDEYy14YtNNXeHFZbTVkEJe0+sW7MlXlXOfqkXqX
+ iJE2n7ArDu3GPAGHGCL0n5f+a+qHmC0=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODE5MDAzMyBTYWx0ZWRfX8hZJo4vIJyev
+ 8lKXraG+D/OF0yKCsKi647aEM+mPb1psIKUxfMXTRB/THY5G2DaDV1epA34+EEC+yhWjHby4UTY
+ HmcM5PS4aFaA3TewCe5s2RWMIRoopoQ3+RNDlN2Lq2yZWpF83R+VlnJTCPBV/hR4Kwa6YxKZYCi
+ wdzhjY+kY4YQ1oCJ10l6dgRvfbxaIDOGhR8cccGFSpSeLthOzYvOSWikdwR5vvz9eE41ix0ah3V
+ NJRqL/k0cfXLqOdinEtBCSHm4EExGaTS80erwI3ZKH7fPvEkpHhYpSlkI0k6xhhg4af0YvmuSgQ
+ fhuRacZ1nZPEY4D3CONCbxLZHTZTr3ENF9/l1VVfEiMK5F7sSzjnp90C0CyfqZWGrkyJocZ7815
+ KbsFO+di6MR4Pc/XwSbEQeArdVhrs5p4X6Xrq4wrvBVamL3e9TrbHwU7QDyYNg/HPcIx2uxlnq7
+ 0Pn8uBpVhrMSE6UsorQ==
+X-Authority-Analysis: v=2.4 cv=aNrAb79m c=1 sm=1 tr=0 ts=6a853586 cx=c_pps
+ a=DUEm7b3gzWu7BqY5nP7+9g==:117 a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10
  a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=rJkE3RaqiGZ5pbrm-msn:22 a=V1jnuoLLAAAA:20 a=NEAV23lmAAAA:8 a=EUspDBNiAAAA:8
- a=mJGyiu_LM0gBUnUUHQIA:9 a=QEXdDO2ut3YA:10 a=TD8TdBvy0hsOASGTdmB-:22
- a=bA3UWDv6hWIuX7UZL3qL:22
-X-Proofpoint-ORIG-GUID: Kg-z57lKwnvi4-7bUpYqXn0Kb2SbEnaX
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODE5MDAzMyBTYWx0ZWRfX+IpLVK0uAcAA
- 28BRmPCOZKqe2JYYUOHI0hEAEWdB2p2l6KBnhknj51CkwbtrkYNc5VBPHT1mON+/wvf22QnSSTi
- VHvJ6BvRJeFIdFkq2ltvP8xb5ZkVWSI=
-X-Proofpoint-GUID: Kg-z57lKwnvi4-7bUpYqXn0Kb2SbEnaX
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODE5MDAzMyBTYWx0ZWRfXxop39nVbGPH3
- 8hehvw044B57pnYFyghiubSUfMlxuBfoPvf8sp3DY7tmxi+ugmO6rbTTCaf3WVdxvHs8ql7/j7M
- fO1Oe8pI1cC9vrcDBAdVOdbllS3ZHx2AixiVMyRSVnJmbneL4TFll9QgGTQ2KLZRm1qEN2nnM5S
- GewwjXC7xJQV1ohWsGJTEuMJjy0iXptBt8uy3/G3HiZEXXfUb2N/ZRQYD5MhbDzUxWA/G4if9nL
- sVUS0vDd/lsUisuJYN+XXByOBrBd+nOhifEe9nkN8qa7sOiEh0MboD98f08WfPWrAO4PkaxV712
- Vf+s/d65MnZI3RhEPQO9DkmIDjfKh0EUZzcIwlwn6cp3yWS7WbjYT6yfLEtITZrYAlksV4BtWmF
- QmhR5rZ4LHbPol61rKaTp+ieByYdGC05pQBasvPK7whTQWsISlCWe7zEVdqpKq6K5J0zqRBomIG
- K8H9sP6NAck3zUSyvvA==
+ a=3WHJM1ZQz_JShphwDgj5:22 a=EUspDBNiAAAA:8 a=Ak59p1GQuooY577Z0c0A:9
+ a=QEXdDO2ut3YA:10 a=-aSRE8QhW-JAV6biHavz:22
+X-Proofpoint-GUID: 2DXK6VHMSCpCTn4zp0N9eEqT4Dj-LGcm
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-19_01,2026-08-18_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 phishscore=0 bulkscore=0 clxscore=1015 lowpriorityscore=0
- adultscore=0 malwarescore=0 impostorscore=0 priorityscore=1501 spamscore=0
+ spamscore=0 adultscore=0 lowpriorityscore=0 clxscore=1015 bulkscore=0
+ malwarescore=0 suspectscore=0 priorityscore=1501 phishscore=0 impostorscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608190033
 Received-SPF: pass client-ip=205.220.180.131;
@@ -177,138 +174,65 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 Sunil,
 
-On Mon, Aug 17, 2026 at 12:23=E2=80=AFPM Sunil V L <sunilvl@oss.qualcomm.co=
-m> wrote:
+On Mon, Aug 17, 2026 at 2:07=E2=80=AFPM Sunil V L <sunilvl@oss.qualcomm.com=
+> wrote:
 >
 > On Fri, Aug 14, 2026 at 10:25=E2=80=AFAM Subrahmanya Lingappa
 > <subrahmanya.lingappa@oss.qualcomm.com> wrote:
 > >
-> > RPMI (RISC-V Platform Management Interface) is the RISC-V non-ISA
-> > platform management specification. It defines a shared-memory transport=
-,
-> > message protocol, and service groups for platform management.
+> > Add the virt machine rpmi=3Don/off option and wire the initial RPMI Bas=
+e
+> > transport into machine realization.
 > >
-> > Add the QEMU transport backend and Base service plumbing for virt using
-> > librpmi.
-> >
-> > This implementation targets the RISC-V Platform Management Interface
-> > (RPMI) Specification v1.0 Ratified:
-> >
-> > https://github.com/riscv-non-isa/riscv-rpmi/releases/download/v1.0/risc=
-v-rpmi.pdf
-> >
-> > The librpmi backend is maintained at:
-> >
-> > https://github.com/riscv-software-src/librpmi
+> > The option remains disabled by default and requires TCG plus librpmi.
+> > Invalid accelerator/build combinations fail during machine
+> > initialization. When enabled, virt allocates the RPMI shared-memory
+> > transport, creates the RPMI device, configures Base service metadata,
+> > and emits the corresponding device-tree nodes for firmware discovery.
 > >
 > > Signed-off-by: Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcomm.=
 com>
 > > ---
-> >  MAINTAINERS                   |   2 +
-> >  hw/misc/Kconfig               |   4 +
-> >  hw/misc/meson.build           |   3 +
-> >  hw/misc/riscv_rpmi.c          | 477 ++++++++++++++++++++++++++++++++++
-> >  hw/misc/riscv_rpmi_internal.h |  24 ++
-> >  include/hw/misc/riscv_rpmi.h  |  90 +++++++
-> >  6 files changed, 600 insertions(+)
-> >  create mode 100644 hw/misc/riscv_rpmi.c
-> >  create mode 100644 hw/misc/riscv_rpmi_internal.h
-> >  create mode 100644 include/hw/misc/riscv_rpmi.h
+> >  hw/misc/meson.build       |  2 +-
+> >  hw/misc/riscv_rpmi-stub.c | 16 +++++++
+> >  hw/riscv/Kconfig          |  1 +
+> >  hw/riscv/meson.build      |  4 +-
+> >  hw/riscv/rpmi-fdt-stub.c  | 37 +++++++++++++++
+> >  hw/riscv/virt.c           | 96 +++++++++++++++++++++++++++++++++++++++
+> >  include/hw/riscv/virt.h   |  3 ++
+> >  7 files changed, 157 insertions(+), 2 deletions(-)
+> >  create mode 100644 hw/misc/riscv_rpmi-stub.c
+> >  create mode 100644 hw/riscv/rpmi-fdt-stub.c
 > >
-> > diff --git a/MAINTAINERS b/MAINTAINERS
-> > index 93df53d87f..8e91a31757 100644
-> > --- a/MAINTAINERS
-> > +++ b/MAINTAINERS
-> > @@ -359,6 +359,8 @@ F: target/riscv/
-> >  F: hw/char/riscv_htif.c
-> >  F: hw/riscv/
-> >  F: hw/intc/riscv*
-> > +F: hw/misc/riscv_rpmi*
-> > +F: include/hw/misc/riscv_rpmi.h
-> >  F: include/hw/char/riscv_htif.h
-> >  F: include/hw/riscv/
-> >  F: common-user/host/riscv*
-> > diff --git a/hw/misc/Kconfig b/hw/misc/Kconfig
-> > index 1543ee6653..998944c342 100644
-> > --- a/hw/misc/Kconfig
-> > +++ b/hw/misc/Kconfig
-> > @@ -258,3 +258,7 @@ config XLNX_ZYNQ_DDRC
-> >      bool
-> >
-> >  source macio/Kconfig
-> > +
-> > +config RISCV_RPMI
-> > +    bool
-> > +    depends on LIBRPMI
 > > diff --git a/hw/misc/meson.build b/hw/misc/meson.build
-> > index 23265f6035..e7c2ebe28f 100644
+> > index e7c2ebe28f..92c9cd6064 100644
 > > --- a/hw/misc/meson.build
 > > +++ b/hw/misc/meson.build
-> > @@ -168,3 +168,6 @@ system_ss.add(when: 'CONFIG_SBSA_REF', if_true: fil=
+> > @@ -170,4 +170,4 @@ system_ss.add(when: 'CONFIG_SBSA_REF', if_true: fil=
 es('sbsa_ec.c'))
-> >
-> >  # HPPA devices
 > >  system_ss.add(when: 'CONFIG_LASI', if_true: files('lasi.c'))
-> >
-> NIT: A blank line here would be better.
->
-> > +system_ss.add(when: 'CONFIG_RISCV_RPMI', if_true: [files(
-> > +  'riscv_rpmi.c',
-> > +), librpmi])
-> > diff --git a/hw/misc/riscv_rpmi.c b/hw/misc/riscv_rpmi.c
+> >  system_ss.add(when: 'CONFIG_RISCV_RPMI', if_true: [files(
+> >    'riscv_rpmi.c',
+> > -), librpmi])
+> > +), librpmi], if_false: files('riscv_rpmi-stub.c'))
+> > diff --git a/hw/misc/riscv_rpmi-stub.c b/hw/misc/riscv_rpmi-stub.c
 > > new file mode 100644
-> > index 0000000000..54a790fc7c
+> > index 0000000000..dc32b43227
 > > --- /dev/null
-> > +++ b/hw/misc/riscv_rpmi.c
-> > @@ -0,0 +1,477 @@
+> > +++ b/hw/misc/riscv_rpmi-stub.c
+> > @@ -0,0 +1,16 @@
 > > +/*
-> > + * SPDX-License-Identifier: GPL-2.0-or-later
-> > + *
-> > + * RISC-V RPMI transport device.
-> > + *
-> > + * Copyright (c) 2026 Qualcomm Technologies, Inc.
-> > + * Author:
-> > + *  Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcomm.com>
-> > + */
-> > +
-> > +#include "qemu/osdep.h"
-> > +#include "qapi/error.h"
-> > +#include "qemu/log.h"
-> > +#include "qemu/module.h"
-> > +#include "exec/cpu-common.h"
-> > +#include "hw/core/qdev-properties.h"
-> > +#include "hw/misc/riscv_rpmi.h"
-> > +#include "hw/misc/riscv_rpmi_internal.h"
-> > +#include "migration/vmstate.h"
-> > +#include "system/address-spaces.h"
-> > +#include "system/runstate.h"
-> > +#include "librpmi.h"
-> > +#include "librpmi_env.h"
-> > +
-> > +void *rpmi_env_zalloc(rpmi_size_t size)
-> > +{
-> > +    return g_malloc0(size);
-> > +}
-> > +
-> > +void rpmi_env_free(void *ptr)
-> > +{
-> > +    g_free(ptr);
-> > +}
-> > +
-> > +void rpmi_env_writel(rpmi_uint64_t addr, rpmi_uint32_t val)
-> > +{
-> > +    cpu_physical_memory_write(addr, &val, sizeof(val));
-> > +}
+> > + * RISC-V RPMI stubs.
 > >
-> These cpu_physical_memory_*() interfaces are renamed, right?
+> Shouldn't these changes which are outside of the virt, be in a separate p=
+atch?
 >
-
-  Thanks, fixed. I added the blank line in hw/misc/meson.build and replaced
-  the old cpu_physical_memory_*() calls with physical_memory_read/write()
-  in the latest version.
+  Agreed. I will move the generic RPMI stubs out of the virt machine patch:
+  riscv_rpmi-stub.c will be introduced with the RPMI misc/framework support=
+,
+  and rpmi-fdt-stub.c will be introduced with the RPMI FDT helper patch.
 
 Thanks,
-
 
 > Thanks,
 > Sunil
