@@ -4,68 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D87BFC5DF81
-	for <qemu-riscv@archiver.kernel.org>; Wed, 19 Aug 2026 13:19:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21E45C5DF86
+	for <qemu-riscv@archiver.kernel.org>; Wed, 19 Aug 2026 13:19:50 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wwgCU-0005Kv-0F; Wed, 19 Aug 2026 09:19:26 -0400
+	id 1wwgCI-0005A9-1l; Wed, 19 Aug 2026 09:19:14 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <rao232328@gmail.com>)
- id 1wwgCS-0005IG-LA
- for qemu-riscv@nongnu.org; Wed, 19 Aug 2026 09:19:24 -0400
-Received: from mail-pj1-x1036.google.com ([2607:f8b0:4864:20::1036])
+ id 1wwgCG-00059p-BL
+ for qemu-riscv@nongnu.org; Wed, 19 Aug 2026 09:19:12 -0400
+Received: from mail-pj1-x1033.google.com ([2607:f8b0:4864:20::1033])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <rao232328@gmail.com>)
- id 1wwgCQ-0004sA-DL
- for qemu-riscv@nongnu.org; Wed, 19 Aug 2026 09:19:24 -0400
-Received: by mail-pj1-x1036.google.com with SMTP id
- 98e67ed59e1d1-38de840f2f0so958913a91.0
- for <qemu-riscv@nongnu.org>; Wed, 19 Aug 2026 06:19:21 -0700 (PDT)
+ id 1wwgCE-0004qC-Kz
+ for qemu-riscv@nongnu.org; Wed, 19 Aug 2026 09:19:12 -0400
+Received: by mail-pj1-x1033.google.com with SMTP id
+ 98e67ed59e1d1-38125cebfdaso1666049a91.1
+ for <qemu-riscv@nongnu.org>; Wed, 19 Aug 2026 06:19:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1787145561; x=1787750361; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=5fSJnWphlhlECSW+wv6njLNgjR+jeMC/7N9v4OiIjw0=;
- b=V6ZPb3752T+LvNqqGK4MfhGU+sc8X6/phqHqqhIIEho+MdpG19Ic5WaRf2YWMH9OE9
- 9bSnJHjj6KgxgQHlydUvcANlTkMLZWc8wCEcAjBrUQDC1/vHfRuoREzVQvbESMyh33Lh
- TTEp7L+LVcJI6J0iVyPP3MbZvMibJi8LjNnrH64hHl04J28uJuif7zZTpu1ZbGZHsX4e
- d5dhJm7c3Nj7AiJ+baMO5Lli4sZmNv4Z0EwW8iqbm+5VebNK9uGzP7qFSgPEF7Tq6QfU
- 3IZr2ZJKJG1QMMw1QlRVCIP1ohWFsB+5QFn/i3YvLfJyanm3BJ6fd3CMxzHKudtEuurq
- Z9Qw==
+ d=gmail.com; s=20251104; t=1787145549; x=1787750349; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:mime-version:message-id:date
+ :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=iBbYixPr0Ux51WeoZy3YIxt8QwFzfvPD/E0ngL0ab2k=;
+ b=I92paEaeFC+oBYShgV37Xj5isLFUtE3ODiiZbkUShWq6XQMaPHVzRJ4srIN9O3mrHF
+ nZcd35Xy+ltLgw4JH0oxiyFilT6LEnCR7SS8sEE8ZV4ZykoZ3fGbiO4zcYqcLewLiEsU
+ gjRIgfDxJpA8XsC2D5dDSt8t/JxT2JpsdtNS0fdUXu1HruKEA2E0Au1LR474adjjTcWj
+ Wcx6fRWxGpoXGOoKrQy1f2Fb5QalkcsYelOcKM2JTVkmknW91ClRriLQP77N4Al9vEKF
+ 7xxAxXd0npoxXG6aQYCK/OZ56eS7HrpfR3Hn+IKOrDJeNRjwYEfBDnIr21PaoAhR1NJ8
+ UUqA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787145561; x=1787750361;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=5fSJnWphlhlECSW+wv6njLNgjR+jeMC/7N9v4OiIjw0=;
- b=NLXdPe9fg+VpL/GcVVWpF7+PQ3MP8BHrPxXBeRQqo+P4oh6ITjVz0+ckBDdP6Pvl+E
- wICJzqzVcAJ8bssN4kjkBJ8X4JCrisiVQj7c5cfhipPS/MIG31rUDPQHFXDVvfJBEHzr
- mCS8xZi6yKCkKX3J0QokuGQPAr0nkCgI3xqYam2wVhFdTRHdfyTybX/y05xLRRFUJbdu
- peR9b9cin2NxkFD4HybfuxKSV5ZO7HrCF1AJIhzUu3adkl7sp95UyKdZRT/WflJqhMEn
- Qo/oOSFg0hbXTiNypm/pklTRwIwBNaAkVs8prS7LN6KKvbKRxuqEy1Yhsd66TLRNXS4S
- l5CA==
+ d=1e100.net; s=20251104; t=1787145549; x=1787750349;
+ h=content-transfer-encoding:content-type:mime-version:message-id:date
+ :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=iBbYixPr0Ux51WeoZy3YIxt8QwFzfvPD/E0ngL0ab2k=;
+ b=jHi+zdz7qIChXY7xT3igOZ0NeGsKJSwiEUiT4ZDf1bHE9Jz0RezC+wBe8yR0zKDJhL
+ f7R2IH9x603cuKfZse86B/9FzpInkccLnmzVigP76ywH4EpAfRABwhWC3rHqWAq+1vJF
+ T5s7OnYDSP0CqZ3XaMCFGN3g0EDiZbiKb+MV+/2G8Ws/gDR1hw9PGDp7LeKVGPMPlAgn
+ 2bLyc1s6Pfo8tAUXxWnHK2iu8OZAbYjz7N9kDu1ddIde1UESJOWcgbCc/Rmu6Upl6NmK
+ 7P2HX53uNnA8MGlwE9qElu31XBOB4OrMLuaT1D+V/sEJUqVjq4vf+nRuG4njEQd3Xk3C
+ VD8A==
 X-Forwarded-Encrypted: i=1;
- AHgh+RofKszR9h0P+eapejECiE/BiqBJFSgYzqXfLxXZCwSD0QRV5skzAVit5+4wFmFhLstKWpUvu4na0gD6@nongnu.org
-X-Gm-Message-State: AFuF++lFs9c+pEbyOWoXip7AaBYlclu/DdBAsjTQtfq7kzLxzMk6KfQ9
- xw8oU90ezUWv4ssJ2CLWVRmbLD7QxHsxslVS0kysAXo62JSAocldCKs9
-X-Gm-Gg: AR+sD13Xd7pjv7mmbqa7ZvlApGv1QX2MU9XYoGWk6m8Bj/PuJ021dzB5wvYZzFxYLgV
- v4tLpLkhrmcYY3oETVWcbO1xj7yONbCde6ySfHgmx4etE5E4o4xV3dw8MnwoZQJtSHgmKX26ZHY
- 9dJ8y9WlGer77OKoY/U7rGlyYdu4SOWyM88SA2j0wbdh2l6hZm0OF+e8ioDkpNqlsui8SFUr+Vn
- kU7lL/McjN0Fw3cR+fpMFQp5E8Lxko2umdHW91V471Js0LbGOde6OQI4K7Jnq+L0NbG4+RjdQnx
- 3YXPx+qMHEB8DLthP/40ZiXKZrvCnQFbeQtMAhe1inVqDs2LN8/BBdLYAuHiMNZBuDCQ1Tfmvza
- lRiO2bGZVd8+/KhJ8tjNrvKzljNXamT0eGgnuVPd0RlCzFJMeB/3yN9bgm2+Nfxxul5Y5kx1Km8
- +hixi8wK16Etndx9g6J2Sg7IWMbFkXBeT9WvopMTScDBRycIIkdod4/nLnL/SQPnG7keZamA==
-X-Received: by 2002:a17:90b:2d05:b0:380:21b7:e727 with SMTP id
- 98e67ed59e1d1-39581470f03mr8829771a91.14.1787145560919; 
- Wed, 19 Aug 2026 06:19:20 -0700 (PDT)
+ AHgh+RrIb94EFskpAkhkBRSS3HRCJslpGxFmSWwO13fzjYS4IHrL90eH9eMd2FXIbixRUuM06rvgQVMHL8FF@nongnu.org
+X-Gm-Message-State: AFuF++nxJBIUFp0FDPIjzdgBlLM25gWZaeZAbB7zo1PYdVrGO2Bm5go/
+ oQtjNXnTLwl/2U9WePANCfBY1rPaInHgi98sgjqYBqYXFBGsgNN1NShe
+X-Gm-Gg: AR+sD12T3OvAabSkzxEZ4uHNoO/QT/KAlodd+byruk1wTBbJp092X63KVQoeMSLM8Ig
+ S3b+q63bakr1ILYuZbqu+Crn6uCYFUtEKB8Aib3STZxSqwPBdvZmr16Hrbtb0SrBbPc3Z+IVjI9
+ qZIc8BJK8j5cQwXLhs0gDSSYieVSTgVY0sV3Y0g99ETQdyb1BAkD092QPAR8mxApPIaJ2ZPw6Q6
+ nwvGXWVhCDzDa23Ilp9gVRWaO5zGYx4gwgriZe20fVV9dBrBSr9Ha/JdQO/Iha392b7LS9cJ3zf
+ ljSNwKsnc1aFslaWqkyysBdJCFIaGl55JaCFMLNp/trOtj90aJAs9E+EjCZujDt+KKFZMlr9fTe
+ qwpuPjpEsqNNbyugdaKGzzkQsvG1NLDNpB6Hl+S9tSEFiLA6f9XU5VI+7Qn62HhqP0x+vfeCw08
+ XWB3cjaJyGwpeOh2cVUoS3rhZ4kqvDeABbzj2KIPcAD3P5jtWovDBBZGMqu5sCnySEC/BkeA==
+X-Received: by 2002:a17:90b:5684:b0:395:5eec:b932 with SMTP id
+ 98e67ed59e1d1-39580f6b704mr9272133a91.11.1787145548898; 
+ Wed, 19 Aug 2026 06:19:08 -0700 (PDT)
 Received: from DESKTOP-DFGP8OG.lan ([156.226.169.41])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3957fb12145sm2734387a91.4.2026.08.19.06.19.16
+ 98e67ed59e1d1-3957fb12145sm2734387a91.4.2026.08.19.06.19.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 19 Aug 2026 06:19:20 -0700 (PDT)
+ Wed, 19 Aug 2026 06:19:08 -0700 (PDT)
 From: raoyi <rao232328@gmail.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -78,16 +77,15 @@ Cc: Chao Liu <chao.liu@processmission.com>,
  Bin Meng <bin.meng@processmission.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
  raoyi <rao232328@gmail.com>
-Subject: [PATCH v5 3/3] tests/qtest: add k230 dwapb timer test
-Date: Wed, 19 Aug 2026 21:18:59 +0800
-Message-ID: <20260819131859.9583-4-rao232328@gmail.com>
+Subject: [PATCH v5 0/3] hw/timer: add K230 DW APB timer support
+Date: Wed, 19 Aug 2026 21:18:56 +0800
+Message-ID: <20260819131859.9583-1-rao232328@gmail.com>
 X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260819131859.9583-1-rao232328@gmail.com>
-References: <20260819131859.9583-1-rao232328@gmail.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1036;
- envelope-from=rao232328@gmail.com; helo=mail-pj1-x1036.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1033;
+ envelope-from=rao232328@gmail.com; helo=mail-pj1-x1033.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -111,328 +109,45 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Add qtest coverage for K230 DW APB timer, including free-running,
-periodic, interrupt mask, disable behavior, current value, dynamic
-reload, and multi-channel scenarios.
+Add a DesignWare APB timer model to QEMU, wire it to the K230 board,
+and provide qtest coverage for the timer behavior.
 
-Add timer test file to MAINTAINERS.
+Changes in v5:
+- Rename DW_APB_TIMER_CONTROL_INT to
+  DW_APB_TIMER_CONTROL_INT_MASK.
+- Fix the K230 timer clock frequency from 6.25 MHz to 50 MHz.
+- Wrap the qtest commit message at about 70 characters per line.
+- Register both K230 qtests directly under CONFIG_K230.
 
-Signed-off-by: raoyi <rao232328@gmail.com>
-Reviewed-by: Bin Meng <bin.meng@processmission.com>
----
- MAINTAINERS                         |   1 +
- tests/qtest/k230-dwapb-timer-test.c | 274 ++++++++++++++++++++++++++++
+Testing:
+- QEMU build passed in the Debian container.
+- tests/qtest/k230-dwapb-timer-test: 8/8 passed.
+- Mainline Linux 7.2.0-rc3 booted successfully.
+- DW APB timer registered at 50 MHz; PLIC timer interrupt counts increased.
+
+raoyi (3):
+  hw/timer: add DesignWare APB timer model
+  hw/riscv: add DesignWare APB timer to K230 board
+  tests/qtest: add k230 dwapb timer test
+
+ MAINTAINERS                         |   3 +
+ hw/riscv/Kconfig                    |   1 +
+ hw/riscv/k230.c                     |  33 ++-
+ hw/timer/Kconfig                    |   4 +
+ hw/timer/dw-apb-timer.c             | 376 ++++++++++++++++++++++++++++
+ hw/timer/meson.build                |   1 +
+ hw/timer/trace-events               |   8 +
+ include/hw/riscv/k230.h             |   8 +
+ include/hw/timer/dw-apb-timer.h     |  40 +++
+ tests/qtest/k230-dwapb-timer-test.c | 274 ++++++++++++++++++++
  tests/qtest/meson.build             |   3 +-
- 3 files changed, 277 insertions(+), 1 deletion(-)
+ 11 files changed, 747 insertions(+), 4 deletions(-)
+ create mode 100644 hw/timer/dw-apb-timer.c
+ create mode 100644 include/hw/timer/dw-apb-timer.h
  create mode 100644 tests/qtest/k230-dwapb-timer-test.c
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index cf689433ff..82e5643a93 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1830,6 +1830,7 @@ F: hw/timer/dw-apb-timer.c
- F: include/hw/riscv/k230.h
- F: include/hw/watchdog/k230_wdt.h
- F: include/hw/timer/dw-apb-timer.h
-+F: tests/qtest/k230-dwapb-timer-test.c
- F: tests/qtest/k230-wdt-test.c
- 
- RX Machines
-diff --git a/tests/qtest/k230-dwapb-timer-test.c b/tests/qtest/k230-dwapb-timer-test.c
-new file mode 100644
-index 0000000000..01bf03a8b6
---- /dev/null
-+++ b/tests/qtest/k230-dwapb-timer-test.c
-@@ -0,0 +1,274 @@
-+/*
-+ * QTest testcase for the DesignWare APB timer through the K230 machine
-+ *
-+ * Copyright (c) 2026 raoyi <rao232328@gmail.com>
-+ *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ */
-+#include "qemu/osdep.h"
-+#include "qemu/timer.h"
-+#include "libqtest.h"
-+
-+#define TIMER_BASE 0x91105800
-+#define K230_TIMER_NUM_CHANNELS 6
-+#define K230_TIMER_DEFAULT_FREQ 50000000
-+
-+#define DW_APB_TIMER_STRIDE       0x14
-+#define DW_APB_TIMER_N_LOAD_COUNT     0x00
-+#define DW_APB_TIMER_N_CURRENT_VALUE  0x04
-+#define DW_APB_TIMER_N_CONTROL        0x08
-+#define DW_APB_TIMER_N_EOI            0x0c
-+#define DW_APB_TIMER_N_INT_STATUS     0x10
-+#define DW_APB_TIMER_INT_STATUS        0xa0
-+#define DW_APB_TIMER_EOI               0xa4
-+#define DW_APB_TIMER_RAW_INT_STATUS    0xa8
-+#define DW_APB_TIMER_CONTROL_ENABLE        BIT(0)
-+#define DW_APB_TIMER_CONTROL_MODE_PERIODIC BIT(1)
-+#define DW_APB_TIMER_CONTROL_INT_MASK      BIT(2)
-+
-+#define TIMER_REG(n, reg) (TIMER_BASE + (n) * DW_APB_TIMER_STRIDE + (reg))
-+#define TIMER_TICK_NS (NANOSECONDS_PER_SECOND / K230_TIMER_DEFAULT_FREQ)
-+
-+static void timer_load(QTestState *qts, int n, uint32_t value)
-+{
-+    qtest_writel(qts, TIMER_REG(n, DW_APB_TIMER_N_LOAD_COUNT), value);
-+}
-+
-+static void timer_enable(QTestState *qts, int n, uint32_t ctrl)
-+{
-+    qtest_writel(qts, TIMER_REG(n, DW_APB_TIMER_N_CONTROL), ctrl);
-+}
-+
-+static void timer_disable(QTestState *qts, int n)
-+{
-+    qtest_writel(qts, TIMER_REG(n, DW_APB_TIMER_N_CONTROL), 0);
-+}
-+
-+static uint32_t timer_get_and_clear_status(QTestState *qts, int n)
-+{
-+    uint32_t int_status = qtest_readl(qts,
-+                            TIMER_REG(n, DW_APB_TIMER_N_INT_STATUS));
-+
-+    if (int_status) {
-+        qtest_readl(qts, TIMER_REG(n, DW_APB_TIMER_N_EOI));
-+    }
-+
-+    return int_status;
-+}
-+
-+static void test_timer_free_running(void)
-+{
-+    QTestState *qts = qtest_init("-machine k230");
-+
-+    timer_load(qts, 0, 100);
-+    timer_enable(qts, 0, DW_APB_TIMER_CONTROL_ENABLE);
-+
-+    qtest_clock_step(qts, 101ULL * TIMER_TICK_NS + 1);
-+    g_assert_cmphex(timer_get_and_clear_status(qts, 0), ==, 1);
-+
-+    qtest_clock_step(qts, 10ULL * TIMER_TICK_NS);
-+    uint32_t cur = qtest_readl(qts,
-+                      TIMER_REG(0, DW_APB_TIMER_N_CURRENT_VALUE));
-+    g_assert_cmphex(cur, <, UINT32_MAX);
-+    g_assert_cmphex(cur, >, 0);
-+
-+    g_assert_cmphex(qtest_readl(qts,
-+                      TIMER_REG(0, DW_APB_TIMER_N_INT_STATUS)), ==, 0);
-+
-+    qtest_quit(qts);
-+}
-+
-+static void test_timer_periodic(void)
-+{
-+    QTestState *qts = qtest_init("-machine k230");
-+    int i;
-+
-+    timer_load(qts, 0, 100);
-+    timer_enable(qts, 0, DW_APB_TIMER_CONTROL_ENABLE |
-+                        DW_APB_TIMER_CONTROL_MODE_PERIODIC);
-+
-+    for (i = 0; i < 3; i++) {
-+        qtest_clock_step(qts, 101ULL * TIMER_TICK_NS + 1);
-+        g_assert_cmphex(timer_get_and_clear_status(qts, 0), ==, 1);
-+        uint32_t cur = qtest_readl(qts,
-+                          TIMER_REG(0, DW_APB_TIMER_N_CURRENT_VALUE));
-+        g_assert_cmphex(cur, <=, 100);
-+    }
-+
-+    qtest_quit(qts);
-+}
-+
-+static void test_timer_int_mask(void)
-+{
-+    QTestState *qts = qtest_init("-machine k230");
-+
-+    timer_load(qts, 0, 100);
-+    timer_enable(qts, 0, DW_APB_TIMER_CONTROL_ENABLE |
-+                        DW_APB_TIMER_CONTROL_MODE_PERIODIC |
-+                        DW_APB_TIMER_CONTROL_INT_MASK);
-+
-+    qtest_clock_step(qts, 101ULL * TIMER_TICK_NS + 1);
-+
-+    g_assert_cmphex(qtest_readl(qts,
-+                      TIMER_REG(0, DW_APB_TIMER_N_INT_STATUS)) & 1, ==, 0);
-+    g_assert_cmphex(qtest_readl(qts,
-+                      TIMER_BASE + DW_APB_TIMER_INT_STATUS), ==, 0);
-+    g_assert_cmphex(qtest_readl(qts,
-+                      TIMER_BASE + DW_APB_TIMER_RAW_INT_STATUS) & 1, ==, 1);
-+
-+    /* Unmasking a pending interrupt must assert it immediately. */
-+    timer_enable(qts, 0, DW_APB_TIMER_CONTROL_ENABLE |
-+                        DW_APB_TIMER_CONTROL_MODE_PERIODIC);
-+    g_assert_cmphex(qtest_readl(qts,
-+                      TIMER_REG(0, DW_APB_TIMER_N_INT_STATUS)), ==, 1);
-+    g_assert_cmphex(qtest_readl(qts,
-+                      TIMER_BASE + DW_APB_TIMER_INT_STATUS) & 1, ==, 1);
-+
-+    qtest_quit(qts);
-+}
-+
-+static void test_timer_disable_clears_irq(void)
-+{
-+    QTestState *qts = qtest_init("-machine k230");
-+
-+    timer_load(qts, 0, 100);
-+    timer_enable(qts, 0, DW_APB_TIMER_CONTROL_ENABLE |
-+                        DW_APB_TIMER_CONTROL_MODE_PERIODIC);
-+
-+    qtest_clock_step(qts, 101ULL * TIMER_TICK_NS + 1);
-+    g_assert_cmphex(qtest_readl(qts,
-+                      TIMER_REG(0, DW_APB_TIMER_N_INT_STATUS)) & 1, ==, 1);
-+
-+    timer_disable(qts, 0);
-+    g_assert_cmphex(qtest_readl(qts,
-+                      TIMER_REG(0, DW_APB_TIMER_N_INT_STATUS)) & 1, ==, 0);
-+
-+    qtest_quit(qts);
-+}
-+
-+static void test_timer_current_disabled(void)
-+{
-+    QTestState *qts = qtest_init("-machine k230");
-+
-+    /* TRM: "A '0' is always read back when the timer is not enabled" */
-+    g_assert_cmphex(qtest_readl(qts,
-+                      TIMER_REG(0, DW_APB_TIMER_N_CURRENT_VALUE)), ==, 0);
-+
-+    timer_load(qts, 0, 9999);
-+    g_assert_cmphex(qtest_readl(qts,
-+                      TIMER_REG(0, DW_APB_TIMER_N_CURRENT_VALUE)), ==, 0);
-+
-+    timer_enable(qts, 0, DW_APB_TIMER_CONTROL_ENABLE);
-+    qtest_clock_step(qts, 10ULL * TIMER_TICK_NS);
-+    uint32_t cur_enabled = qtest_readl(qts,
-+                              TIMER_REG(0, DW_APB_TIMER_N_CURRENT_VALUE));
-+    g_assert_cmphex(cur_enabled, >, 0);
-+    g_assert_cmphex(cur_enabled, <, UINT32_MAX);
-+
-+    timer_disable(qts, 0);
-+    g_assert_cmphex(qtest_readl(qts,
-+                      TIMER_REG(0, DW_APB_TIMER_N_CURRENT_VALUE)), ==, 0);
-+
-+    qtest_quit(qts);
-+}
-+
-+static void test_timer_dynamic_reload(void)
-+{
-+    QTestState *qts = qtest_init("-machine k230");
-+    uint32_t cur;
-+
-+    timer_load(qts, 0, 1000);
-+    timer_enable(qts, 0, DW_APB_TIMER_CONTROL_ENABLE |
-+                        DW_APB_TIMER_CONTROL_MODE_PERIODIC);
-+
-+    qtest_clock_step(qts, 100ULL * TIMER_TICK_NS);
-+
-+    timer_load(qts, 0, 200);
-+
-+    qtest_clock_step(qts, 901ULL * TIMER_TICK_NS + 1);
-+    g_assert_cmphex(timer_get_and_clear_status(qts, 0), ==, 1);
-+
-+    qtest_clock_step(qts, 100ULL * TIMER_TICK_NS);
-+    cur = qtest_readl(qts, TIMER_REG(0, DW_APB_TIMER_N_CURRENT_VALUE));
-+    g_assert_cmphex(cur, ==, 99);
-+
-+    qtest_quit(qts);
-+}
-+
-+static void test_timer_all_channels(void)
-+{
-+    QTestState *qts = qtest_init("-machine k230");
-+    int i;
-+
-+    for (i = 0; i < K230_TIMER_NUM_CHANNELS; i++) {
-+        timer_load(qts, i, 100 + i * 50);
-+        timer_enable(qts, i, DW_APB_TIMER_CONTROL_ENABLE |
-+                             DW_APB_TIMER_CONTROL_MODE_PERIODIC);
-+    }
-+
-+    /* Step past timer 0 expiry (load=100) - only timer 0 should fire */
-+    qtest_clock_step(qts, 101ULL * TIMER_TICK_NS + 1);
-+    uint32_t sts = qtest_readl(qts, TIMER_BASE + DW_APB_TIMER_INT_STATUS);
-+    g_assert_cmphex(sts & 1, ==, 1);
-+    g_assert_cmphex(sts & 0x3e, ==, 0);
-+
-+    /* Step to timer 1 expiry (another 50 ticks) */
-+    qtest_clock_step(qts, 50ULL * TIMER_TICK_NS + 1);
-+    sts = qtest_readl(qts, TIMER_BASE + DW_APB_TIMER_INT_STATUS);
-+    g_assert_cmphex(sts & 0x3, ==, 0x3);
-+    g_assert_cmphex(sts & 0x3c, ==, 0);
-+
-+    /* Step to expiry of all remaining timers (another 200 ticks) */
-+    qtest_clock_step(qts, 200ULL * TIMER_TICK_NS + 1);
-+    sts = qtest_readl(qts, TIMER_BASE + DW_APB_TIMER_INT_STATUS);
-+    g_assert_cmphex(sts, ==, 0x3f);
-+
-+    /* EOI_ALL clears all */
-+    qtest_readl(qts, TIMER_BASE + DW_APB_TIMER_EOI);
-+    sts = qtest_readl(qts, TIMER_BASE + DW_APB_TIMER_INT_STATUS);
-+    g_assert_cmphex(sts, ==, 0);
-+
-+    qtest_quit(qts);
-+}
-+
-+static void test_timer_reset(void)
-+{
-+    QTestState *qts = qtest_init("-machine k230");
-+
-+    timer_load(qts, 0, 100);
-+    timer_enable(qts, 0, DW_APB_TIMER_CONTROL_ENABLE |
-+                        DW_APB_TIMER_CONTROL_MODE_PERIODIC);
-+    qtest_clock_step(qts, 10ULL * TIMER_TICK_NS);
-+
-+    qtest_system_reset(qts);
-+
-+    g_assert_cmphex(qtest_readl(qts,
-+                      TIMER_REG(0, DW_APB_TIMER_N_LOAD_COUNT)), ==, 0);
-+    g_assert_cmphex(qtest_readl(qts,
-+                      TIMER_REG(0, DW_APB_TIMER_N_CONTROL)), ==, 0);
-+    g_assert_cmphex(qtest_readl(qts,
-+                      TIMER_REG(0, DW_APB_TIMER_N_CURRENT_VALUE)), ==, 0);
-+    g_assert_cmphex(qtest_readl(qts,
-+                      TIMER_BASE + DW_APB_TIMER_RAW_INT_STATUS), ==, 0);
-+
-+    qtest_quit(qts);
-+}
-+
-+int main(int argc, char *argv[])
-+{
-+    g_test_init(&argc, &argv, NULL);
-+
-+    qtest_add_func("/dw-apb-timer/free_running", test_timer_free_running);
-+    qtest_add_func("/dw-apb-timer/periodic", test_timer_periodic);
-+    qtest_add_func("/dw-apb-timer/int_mask", test_timer_int_mask);
-+    qtest_add_func("/dw-apb-timer/disable_clears_irq",
-+                   test_timer_disable_clears_irq);
-+    qtest_add_func("/dw-apb-timer/current_disabled",
-+                   test_timer_current_disabled);
-+    qtest_add_func("/dw-apb-timer/dynamic_reload",
-+                   test_timer_dynamic_reload);
-+    qtest_add_func("/dw-apb-timer/all_channels", test_timer_all_channels);
-+    qtest_add_func("/dw-apb-timer/reset", test_timer_reset);
-+
-+    return g_test_run();
-+}
-diff --git a/tests/qtest/meson.build b/tests/qtest/meson.build
-index 56ff860e21..bacd8719b4 100644
---- a/tests/qtest/meson.build
-+++ b/tests/qtest/meson.build
-@@ -297,7 +297,8 @@ qtests_riscv64 = ['riscv-csr-test'] + \
-   (config_all_devices.has_key('CONFIG_IOMMU_TESTDEV') and
-    config_all_devices.has_key('CONFIG_RISCV_IOMMU') ?
-    ['iommu-riscv-test'] : []) + \
--  (config_all_devices.has_key('CONFIG_K230') ? ['k230-wdt-test'] : [])
-+  (config_all_devices.has_key('CONFIG_K230') ?
-+   ['k230-wdt-test', 'k230-dwapb-timer-test'] : [])
- 
- qtests_hexagon = ['boot-serial-test']
- 
+
+base-commit: f893c46c3931b3684d235d221bf8b7844ddbf1d7
 -- 
 2.53.0
-
 
