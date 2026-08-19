@@ -4,57 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91B0DC5DF87
-	for <qemu-riscv@archiver.kernel.org>; Wed, 19 Aug 2026 10:57:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E7E7C5DF8B
+	for <qemu-riscv@archiver.kernel.org>; Wed, 19 Aug 2026 10:57:45 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wwdya-0004Ei-KW; Wed, 19 Aug 2026 06:56:56 -0400
+	id 1wwdya-0004FC-UR; Wed, 19 Aug 2026 06:56:56 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1wwdyZ-0004E6-3w; Wed, 19 Aug 2026 06:56:55 -0400
+ id 1wwdyY-0004Dq-ME; Wed, 19 Aug 2026 06:56:54 -0400
 Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1wwdyX-0006At-7c; Wed, 19 Aug 2026 06:56:54 -0400
+ id 1wwdyW-0006AT-T9; Wed, 19 Aug 2026 06:56:54 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=univ-grenoble-alpes.fr; s=2020; t=1787137010;
- bh=4BjLY7BDlefHvhOKTtEg8Dg2WIfdTVac0sQmGr/EkmU=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=29gCzqB7zIJk+8MeTeJzKbg7my6PU1dFOZX5SsGLiMuloHpuz1nelTGvqxDbK8gx9
- 9JrBdSTF/SukizR/PisgcPztmRtgCDdILFv+Yrn9UT0MO1v6la53zW72x+iKV9gU9l
- BKJkv8o0yqCgxqO/yBu8i0+SPHIz2sKB8IRoJ7iTdzX4SxZdGsaBazSn931u0capkp
- GfP+9ZIVhdENlbnRsHDfYeLlZELd5vTMgVUPbXDs8f9TJerJfTW6PESw5yaLf6sxbB
- Ocpmilh1axKqdFIKH454V/ob1emwN4qegBU2l310SWn/Tv5BDUcGrNHhx3kzwiZ8TF
- e+51fhmfTIA9Q==
-Received: from mailhub-2.u-ga.fr (mailhub-2.u-ga.fr [129.88.178.102])
- by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id B0D5840242;
- Wed, 19 Aug 2026 12:56:50 +0200 (CEST)
+ d=univ-grenoble-alpes.fr; s=2020; t=1787137009;
+ bh=+lN4VmpInArIALV3Y2qY6XtS5Y+yJsStzXqT7cIjt0k=;
+ h=From:To:Cc:Subject:Date:From;
+ b=RAKyJscMH4m3F3i+ZaxHvQea3T1+TORXLnJ27Sydv2i8nVqWFrVvcXpL5v+Uxjqpm
+ qfditJEf0VUyfTznJxv+qsdmnFt2IvOcAHblTwhwVV4UYcEdk/PgVPKVlQEHYyaPlj
+ po6WsDKBDOFHBfhqss7GCWZAuVjArma9nLfubcTGMxZxztdFAJrTcB/Wj6I8RHG3rU
+ qasm0WXkwMNvsWZqxmfk2FvsghNvXslE7qXXg8XyYgyp2QEll5OsxPGoojnoDg1SJG
+ udzXYZOpWobGl3L35c1lo1WBXTC9AZ2k5I6vrkOcVuBGE+h2vab9amO0d69oNsysb0
+ XhWKCwfXogV/g==
+Received: from mailhub-1.u-ga.fr (mailhub-1.u-ga.fr [129.88.178.98])
+ by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id 2576A40240;
+ Wed, 19 Aug 2026 12:56:49 +0200 (CEST)
 Received: from smtps.univ-grenoble-alpes.fr (smtps3.u-ga.fr [195.83.24.62])
- by mailhub-2.u-ga.fr (Postfix) with ESMTP id ACB26FF85F;
- Wed, 19 Aug 2026 12:56:50 +0200 (CEST)
+ by mailhub-1.u-ga.fr (Postfix) with ESMTP id 21C90FF859;
+ Wed, 19 Aug 2026 12:56:49 +0200 (CEST)
 Received: from naga.. (unknown [78.241.162.199])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
  (Authenticated sender: petrotf@univ-grenoble-alpes.fr)
- by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id 0D4C240120;
- Wed, 19 Aug 2026 12:56:49 +0200 (CEST)
+ by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id F110C40120;
+ Wed, 19 Aug 2026 12:56:47 +0200 (CEST)
 From: frederic.petrot@univ-grenoble-alpes.fr
 To: alistair.francis@wdc.com, daniel.barboza@oss.qualcomm.com,
  palmer@dabbelt.com, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com,
  chao.liu@processmission.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Cc: =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20P=C3=A9trot?=
  <frederic.petrot@univ-grenoble-alpes.fr>
-Subject: [PATCH v2 2/2] target/riscv: Allow UXL to be 3 in mstatus on rv128
-Date: Wed, 19 Aug 2026 12:56:55 +0200
-Message-ID: <20260819105655.33391-3-frederic.petrot@univ-grenoble-alpes.fr>
+Subject: [PATCH 0/2] target/riscv: Handle [ms]status updates for rv128
+Date: Wed, 19 Aug 2026 12:56:53 +0200
+Message-ID: <20260819105655.33391-1-frederic.petrot@univ-grenoble-alpes.fr>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260819105655.33391-1-frederic.petrot@univ-grenoble-alpes.fr>
-References: <20260819105655.33391-1-frederic.petrot@univ-grenoble-alpes.fr>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -87,36 +85,20 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
 
-Valid UXL field values for mstatus were restricted to fix a
-reported issue, but this inadvertently broke the experimental
-rv128 support where a value of 3 validly represents 128-bit
-execution.
+Correct sstatus update and allow support for rv128 in mstatus,
+provided the cpu is an rv128.
 
-Update the mstatus write logic to permit UXL=3 when running on
-an rv128 CPU.
+Changes compared to v1:
+- add cover letter
+- add the Reviewed-by tags
 
-Fixes: dcd028517749 ("target/riscv: Apply UXL WARL handling to vsstatus")
-Signed-off-by: Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
-Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
----
- target/riscv/tcg/csr.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Frédéric Pétrot (2):
+  target/riscv: Fix sstatus update in rv128
+  target/riscv: Allow UXL to be 3 in mstatus on rv128
 
-diff --git a/target/riscv/tcg/csr.c b/target/riscv/tcg/csr.c
-index 9cc6297328..4c8959a33d 100644
---- a/target/riscv/tcg/csr.c
-+++ b/target/riscv/tcg/csr.c
-@@ -2014,8 +2014,8 @@ static uint64_t riscv_write_uxl(CPURISCVState *env, uint64_t val,
-     RISCVMXL xl = riscv_cpu_mxl(env);
-     uint64_t uxl = get_field(val, field);
- 
--    if (uxl == MXL_RV128) {
--        uxl = xl == MXL_RV128 ? MXL_RV64 : xl;
-+    if (xl != MXL_RV128 && uxl == MXL_RV128) {
-+        uxl = xl;
-         val = set_field(val, field, uxl);
-     }
- 
+ target/riscv/tcg/csr.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
 -- 
 2.43.0
 
