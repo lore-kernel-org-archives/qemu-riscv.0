@@ -4,98 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97B2AC5DF87
-	for <qemu-riscv@archiver.kernel.org>; Thu, 20 Aug 2026 12:38:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B636C5DF87
+	for <qemu-riscv@archiver.kernel.org>; Thu, 20 Aug 2026 13:04:37 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wx21D-0006RO-L8; Thu, 20 Aug 2026 08:37:15 -0400
+	id 1wx2RT-00008I-P1; Thu, 20 Aug 2026 09:04:24 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1wx21C-0006Ol-Di
- for qemu-riscv@nongnu.org; Thu, 20 Aug 2026 08:37:14 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1wx21B-0006lv-0X
- for qemu-riscv@nongnu.org; Thu, 20 Aug 2026 08:37:14 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1787229432;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=pHfgwLFHYIsIWGzCZazqd0r9XHzvoPEgYeF9/YSPK5Y=;
- b=fBlvu0QtsGwB2kiZq1UxRboEbInwUwbzaDXqsBSJ+0pTaEqns3QjjNNEQQCFBuOmhYYgeX
- zvi1TgW4pIfNCJyv3W5omzGsBPwwjqKD1ukTRCQoU3+tz/yeKZRImsc/Py6imzDi5s6cBv
- CE5q7JQOmkZQ/QC2LzLC8tEm/6uRtHc=
-Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-368-YhHl9vEdO2e5-q4-l2qEKw-1; Thu,
- 20 Aug 2026 08:37:07 -0400
-X-MC-Unique: YhHl9vEdO2e5-q4-l2qEKw-1
-X-Mimecast-MFC-AGG-ID: YhHl9vEdO2e5-q4-l2qEKw_1787229424
-Received: from mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.12])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id C46F51956067; Thu, 20 Aug 2026 12:37:03 +0000 (UTC)
-Received: from localhost (headnet05.pony-001.prod.iad2.dc.redhat.com
- [10.2.32.117])
- by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 431521955F03; Thu, 20 Aug 2026 12:36:58 +0000 (UTC)
+ (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
+ id 1wx2RQ-0008Vt-Sf
+ for qemu-riscv@nongnu.org; Thu, 20 Aug 2026 09:04:21 -0400
+Received: from mail-pj1-x1035.google.com ([2607:f8b0:4864:20::1035])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
+ id 1wx2RP-0006lh-5t
+ for qemu-riscv@nongnu.org; Thu, 20 Aug 2026 09:04:20 -0400
+Received: by mail-pj1-x1035.google.com with SMTP id
+ 98e67ed59e1d1-383b4a3755fso2070072a91.3
+ for <qemu-riscv@nongnu.org>; Thu, 20 Aug 2026 06:04:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1787231058; x=1787835858; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:sender:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=jm+Bj84TUkcYq9nDwO2PM0NMiH+RaqV9l8SrAI3KExQ=;
+ b=e+ZoRz2dni3JINloGi+bIJziiT+5RrJd+jFPlC8YJ2CnKruioiH9r/78gkNbCyoXkz
+ QfQlFnJaBRT9dKxEwcW1sIaskl6fR/IfV7ZWMJTfhLq6mId32BleEg9UuLrNtrwyoK/D
+ pHbPqNwytH5BWgh3LHej4alRxiyLZVei46+IfmmuGNkCjJDCgrjLfdRfquv9xRgNnHM/
+ vfnGSNN5fEzoDj3hnxfT+QMkJQR3Irla24DiUWBjMyO++qmnYhgPga+74Q2Yt3hbsYhg
+ Yh5vjb1aFdFKtGnzOyvUOgv3ICE9K1V2hhmblutZm0hnwexm75crIgLLOG1zqylIrg1G
+ 24lg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1787231058; x=1787835858;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:sender:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=jm+Bj84TUkcYq9nDwO2PM0NMiH+RaqV9l8SrAI3KExQ=;
+ b=Omh0EQctZ4ol6icswwc8bUtRRHy/UqcgEdZAtChWeziyOM1awDLwxm+ajYWPE/QsGj
+ EsT2R4CyXt7EIrkJ7HCi+nl2alyeCBNw9RqBXXlsVKkBnKqdrUTULtlknPkqE4s9upTl
+ L8xc4E4gxOFCOwXrFLpoSq3tijvTc99tMRHeXpbXEQsusgDRSHqn/s9XEW5mYm5YUfiA
+ nsksbnx72mtjPlng32U6Hygo8PyPKMxib24cGGOe6DJikiyQxBm7cDXSaPFNeOjJOOHK
+ +X4rOch3AlB5npqQ2HFxogcXMX34pwlzO736zwCCc1fY3CxjYl496pfHHaWdwzANUE5w
+ 46rQ==
+X-Forwarded-Encrypted: i=1;
+ AHgh+Rp90Q0nNAharWvYYm+VtSbUvBDorzDt9gS+WJvezMQJZegxNSASYmajdNZlCQmP3DpmX+Fu6vbK9Db4@nongnu.org
+X-Gm-Message-State: AFuF++lCi8J7J6X3Pur9Jd4AqAWghlU+Bnb9Wi3hJhrmZTA5l2l6m4g5
+ Wo4irEIw/hNy51cPTl2XdFXhh7pEBCj5hqQ0wc3nZza4PF5No+SLaMiy
+X-Gm-Gg: AR+sD10w2/DmZZyAbO0t0bThWgp3wg6cRubiGMMhN3zBGbTY5gCyLMe3HU1CJZ9zHmj
+ YeK5K14PEw801v56XQPTQFa71qrVrbFC2HqCk/OcP1eOnkXIm8MZ6toPZWoA30rBPgHjifGSsKi
+ U7LlKQ7t3nTW4rjG+kG3Ai2I0QDfTLCelGMknwnXGb+nu0cHtpmVqDBExga/whFi1sPbMCkZv98
+ LN3W5+K41Mg84mEk1Ke+TzzvaEhE6wz8J733ycn/4eiDraAjOiE0sGb3EfnQHhHllBs1yN/4J6e
+ wr4+cCVh/BU/zSFq8mEiyFNBOmy6be5hsfhM6Lq9ZaTEk0PebpZ+71PzSm5qqDlXs1SICn0lxck
+ BldFgYQUZTH8n19XT4Adf4n3B5ft1Iho981ndAU4MKXs4s+s7YV6YbqJLxJA6CXx5Kqz0X1Oo9F
+ 5XIOC9Myrao/NIGZHbjViJkbMFN+1exJuZBnx+Rx1Tng+zvUIDAjhsdLoBYnxuI9LedmhWPZDOg
+ s+DLLeZEgQkVsKMjC8dsY4CDM2VzWdoqahoRdNmfORMynVZI1qbb29A4tAklQtYjZmh5iZ4ZoNr
+ EFpHjjl9fl0Wt8R32RQCTA==
+X-Received: by 2002:a17:90b:1e49:b0:38d:ef48:b04 with SMTP id
+ 98e67ed59e1d1-39580f6c037mr21406993a91.10.1787231057706; 
+ Thu, 20 Aug 2026 06:04:17 -0700 (PDT)
+Received: from donnager-debian.. ([180.150.112.50])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-3957faf6849sm6451915a91.10.2026.08.20.06.04.14
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 20 Aug 2026 06:04:16 -0700 (PDT)
+From: Joel Stanley <joel@jms.id.au>
+To: Alistair Francis <alistair.francis@wdc.com>,
+ Richard Henderson <richard.henderson@linaro.org>
+Cc: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+Subject: [PATCH 1/2] tests/tcg/riscv64: Vector load test
+Date: Thu, 20 Aug 2026 22:32:20 +0930
+Message-ID: <20260820130223.2762-2-joel@jms.id.au>
+X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20260820130223.2762-1-joel@jms.id.au>
+References: <20260820130223.2762-1-joel@jms.id.au>
 MIME-Version: 1.0
-Subject: Re: [PATCH 03/13] target/loongarch: Constify CPULoongArchState for
- various cpu_*() getters
-From: marcandre.lureau@redhat.com
-To: =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
-Cc: qemu-devel@nongnu.org, qemu-s390x@nongnu.org, 
- Paolo Bonzini <pbonzini@redhat.com>, 
- Peter Maydell <peter.maydell@linaro.org>, qemu-ppc@nongnu.org, 
- qemu-riscv@nongnu.org, Richard Henderson <richard.henderson@linaro.org>, 
- qemu-arm@nongnu.org, Song Gao <17746591750@163.com>, 
- Bibo Mao <maobibo@loongson.cn>, Xianglai Li <lixianglai@loongson.cn>
-In-Reply-To: <20260820104730.25462-4-philmd@oss.qualcomm.com>
-References: <20260820104730.25462-1-philmd@oss.qualcomm.com>
- <20260820104730.25462-4-philmd@oss.qualcomm.com>
-Date: Thu, 20 Aug 2026 16:36:07 +0400
-Message-Id: <178722936784.2678991.4872963525375256180.b4-review@b4>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=331;
- i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=rKxCgpAfixD1HqOmJPmDZGGAB99eLikzfSaSRqxa3aI=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBqhvS71rnR6WCxLwWg6hOOnLhUyMCL3ltOOfmCm
- zj2EERTxPSJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCaob0uwAKCRDa6OEJdZac
- 5ZdeEAC6teocZ947VPiKbjLaM4T1tz4HLt4OxW9TaegWxR3gw4Bjt/4jbuh3JvVtIR3FO1zFZw3
- Nlpn50KcKn+/PfusRZuzSuFekICIjFrluAFWcWspCj3Oa7sB3SwDe7mzrhQMvj1gS7CDR1/qk29
- ITj9AomPPktTOuzaAVmk47ZAm/ju09Hr9g2TcxN3ahW4BviHrVcSRtL+yBSlbaq2aynw/lfDlPa
- kjRW7y5CaNwxzX7NMeQVUYxGVuS4d9+JBp6zjzM3Fcr3SCAy1SHoveNv0i2iusR1qG6+H4h6IZ1
- qd6P0Co9+ug6rUvWZMere69ImhdIQe9HeHQL0U9TfwkQalcHQjqFz65sgMm5TxTTIzQ6DoP7l8H
- S7wErxkoKBiCpui3k50/TMs5UETLT0ndT5VKKTuuqenUYg9ZkoWe0OXMt807Tap/oTNy24ZjNCf
- +g6eLgrRLHUu0yXeOBU12bnvnWpLsP8Ui9h32dsMR+KAquTv2wZOKoH8Zxu/Vf2PIOvQwv0Ke5C
- Dy+FrgCp/PMLbl9xQh9SFackEfqjMNDmEkisODWVQFThjTFYI5kn96kdcXaG5QBK9Vlx9DBAc3P
- 3w8RQ9ERGykngypHK4hiHWFCqiN+1cp26nL0J/dGqh0WZumn88ApTBfMAKVvCafPwezUGijDVED
- gQ/nap7cTIvsZyA==
-X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
- fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.12
-X-Mimecast-MFC-PROC-ID: TWbhjnI2AWe0S3MY7xuj9dpKVm6ZosE2vHAVbwrL3mM_1787229424
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.133.124;
- envelope-from=marcandre.lureau@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: 9
-X-Spam_score: 0.9
-X-Spam_bar: /
-X-Spam_report: (0.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.346,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
- RCVD_IN_SBL_CSS=3.335, SPF_HELO_PASS=-0.001,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1035;
+ envelope-from=joel.stan@gmail.com; helo=mail-pj1-x1035.google.com
+X-Spam_score_int: -16
+X-Spam_score: -1.7
+X-Spam_bar: -
+X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.001,
+ FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.25,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -112,13 +109,178 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, 20 Aug 2026 12:47:19 +0200, Philippe Mathieu-Daudé <philmd@oss.qualcomm.com> wrote:
-> Add the const qualifier to CPULoongArchStatCPUMIPSStatee when
-> the argument is accessed without modification.
+A userspace program to perform vector loads and stores that cross page
+boundaries, and check the result.
 
-Reviewed-by: Marc-André Lureau <marcandre.lureau@redhat.com>
+Signed-off-by: Joel Stanley <joel@jms.id.au>
+---
+ tests/tcg/riscv64/Makefile.target |  13 +++
+ tests/tcg/riscv64/test-rvv-ldst.S | 131 ++++++++++++++++++++++++++++++
+ 2 files changed, 144 insertions(+)
+ create mode 100644 tests/tcg/riscv64/test-rvv-ldst.S
 
+diff --git a/tests/tcg/riscv64/Makefile.target b/tests/tcg/riscv64/Makefile.target
+index 4da5b9a3b322..68a5ec525598 100644
+--- a/tests/tcg/riscv64/Makefile.target
++++ b/tests/tcg/riscv64/Makefile.target
+@@ -13,6 +13,19 @@ run-test-noc: QEMU_OPTS += -cpu rv64,c=false
+ TESTS += test-aes
+ run-test-aes: QEMU_OPTS += -cpu rv64,zk=on
+ 
++# Vector load test
++TESTS += test-rvv-ldst
++test-rvv-ldst: CFLAGS += -march=rv64gcv
++test-rvv-ldst: LDFLAGS = -nostdlib -static
++run-test-rvv-ldst: QEMU_OPTS += -cpu max
++
++# Re-run the vector tests at each supported VLEN
++TEST_RVV_VLENS = 128 256 512 1024
++EXTRA_RUNS += $(patsubst %,run-test-rvv-ldst-vlen%,$(TEST_RVV_VLENS))
++run-test-rvv-ldst-vlen%: test-rvv-ldst
++	$(call run-test, $@, env QEMU=$(QEMU) $(QEMU) $(QEMU_OPTS) -cpu max$(COMMA)vlen=$* $<, \
++		test-rvv-ldst with vlen=$*)
++
+ # Test for fcvtmod
+ TESTS += test-fcvtmod
+ test-fcvtmod: CFLAGS += -march=rv64imafdc
+diff --git a/tests/tcg/riscv64/test-rvv-ldst.S b/tests/tcg/riscv64/test-rvv-ldst.S
+new file mode 100644
+index 000000000000..939b3f038b14
+--- /dev/null
++++ b/tests/tcg/riscv64/test-rvv-ldst.S
+@@ -0,0 +1,131 @@
++/*
++ * RISC-V vector load/store page crossing test
++ *
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ */
++
++    .section .rodata
++    // Page aligned so the within-page cases never cross a boundary
++    .set MAX_PAGE_SIZE, 65536
++    .balign MAX_PAGE_SIZE
++src_data:
++    .byte 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17
++    .byte 0x18, 0x19, 0x1A, 0x1B, 0x1C, 0x1D, 0x1E, 0x1F
++    .set NUM_BYTES, . - src_data
++
++    .balign MAX_PAGE_SIZE
++pageA_start:
++    // Fill the page, stopping 8 bytes short of the boundary
++    .fill MAX_PAGE_SIZE - 8, 1, 0xfa
++src_cross_data:
++    .byte 0x20, 0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x27
++pageB_start:
++    .byte 0x28, 0x29, 0x2A, 0x2B, 0x2C, 0x2D, 0x2E, 0x2F
++    .set NUM_CROSS_BYTES, . - src_cross_data
++
++    .section .bss
++    .balign MAX_PAGE_SIZE
++dst_data:
++    .space 16
++
++    .balign MAX_PAGE_SIZE
++    .space (MAX_PAGE_SIZE - 8)
++dst_cross_data:
++    .space 16
++
++.option norelax
++.option norvc
++
++    .text
++    .globl _start
++_start:
++    // Case 1: Load/store within a page. t3 is the exit code on failure
++    li      t3, 1
++    la      a0, src_data
++    li      a1, NUM_BYTES
++
++    // SEW=8, LMUL=1
++    vsetvli t0, a1, e8, m1, ta, ma
++
++    // Check the load will cover 16 bytes
++    bne     t0, a1, fail
++
++    // perform load
++    vle8.v  v1, (a0)
++
++    // Store vector content in memory
++    la      a2, dst_data
++    vse8.v  v1, (a2)
++
++    // Compare first half
++    ld      t1, 0(a0)
++    ld      t2, 0(a2)
++    bne     t1, t2, fail
++
++    // Compare second half
++    ld      t1, 8(a0)
++    ld      t2, 8(a2)
++    bne     t1, t2, fail
++
++    // Case 2: Load straddles a page boundary
++    li      t3, 2
++    la      a0, src_cross_data
++    li      a1, NUM_CROSS_BYTES
++
++    // SEW=8, LMUL=1
++    vsetvli t0, a1, e8, m1, ta, ma
++    bne     t0, a1, fail
++
++    // perform load
++    vle8.v  v1, (a0)
++
++    // Store vector content in memory
++    la      a2, dst_data
++    vse8.v  v1, (a2)
++
++    // Compare first half
++    ld      t1, 0(a0)
++    ld      t2, 0(a2)
++    bne     t1, t2, fail
++
++    // Compare second half
++    ld      t1, 8(a0)
++    ld      t2, 8(a2)
++    bne     t1, t2, fail
++
++    // Case 3: Store straddles a page boundary
++    li      t3, 3
++    la      a0, src_data
++    li      a1, NUM_BYTES
++
++    // SEW=8, LMUL=1
++    vsetvli t0, a1, e8, m1, ta, ma
++    bne     t0, a1, fail
++
++    // perform load
++    vle8.v  v1, (a0)
++
++    // Store vector content in memory
++    la      a2, dst_cross_data
++    vse8.v  v1, (a2)
++
++    // Compare first half
++    ld      t1, 0(a0)
++    ld      t2, 0(a2)
++    bne     t1, t2, fail
++
++    // Compare second half
++    ld      t1, 8(a0)
++    ld      t2, 8(a2)
++    bne     t1, t2, fail
++
++pass:
++    li      a0, 0
++    j       exit
++
++fail:
++    mv      a0, t3
++
++exit:
++    li      a7, 93        // sys_exit
++    ecall
 -- 
-Marc-André Lureau <marcandre.lureau@redhat.com>
+2.53.0
 
 
