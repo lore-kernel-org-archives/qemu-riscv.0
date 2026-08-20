@@ -4,89 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4064C5DF91
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17981C5DF88
 	for <qemu-riscv@archiver.kernel.org>; Thu, 20 Aug 2026 20:16:40 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wx9BC-00085J-5w; Thu, 20 Aug 2026 16:16:02 -0400
+	id 1wx9BJ-00009O-GV; Thu, 20 Aug 2026 16:16:09 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1wx9Ay-0007MN-PS
- for qemu-riscv@nongnu.org; Thu, 20 Aug 2026 16:15:49 -0400
+ id 1wx9BH-0008Tu-FT
+ for qemu-riscv@nongnu.org; Thu, 20 Aug 2026 16:16:07 -0400
 Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1wx9Aw-0002oe-BQ
- for qemu-riscv@nongnu.org; Thu, 20 Aug 2026 16:15:48 -0400
+ id 1wx9BE-0002zY-4h
+ for qemu-riscv@nongnu.org; Thu, 20 Aug 2026 16:16:07 -0400
 Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 67KK80ga3941513
- for <qemu-riscv@nongnu.org>; Thu, 20 Aug 2026 20:15:35 GMT
+ 67KK7oc43941373
+ for <qemu-riscv@nongnu.org>; Thu, 20 Aug 2026 20:15:52 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- jGYx+C/wjSqKEH0TVOmY80sKiqo+hAS2MJzZs3J9eSY=; b=fVqeLQcbgR64mBiU
- rbxu1H+foDgSYyQB/MpbuucvwF2pH3GWoBe8Ne4OOcBoA/i9VOwIKgZIvytro6Pu
- BjPirRj/lD0CLW4snIgOl81qo7UjOd0x40C5i5w3D24Zd98HQ/n+5bcdR4U/liTx
- GjV3OKXA3PgXxXMQD6Rxn6FHaU8tkdFZKtb+YBCSN5qWczHH1xyL3KnwvwlX+anu
- VSa1btppzvFRBCQKzsvNdHfi7NX80Z4SRBS7BGf/jGRXcxTY8Gnz+Mm6svds1+pd
- npR6CcFWRbD0mbosKBtzcaBdNDzfLWzFDej5A8UQg5tCdneP0kKdKaZ1LKoFHlT4
- myxkBA==
-Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com
- [209.85.160.199])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g5vh7ujnt-1
+ 26i3IaPZ18XqbWQYHKnxx6cxDLlxhS3q+ou9xT+imks=; b=fWLKLgGNFoiJyvJ+
+ ctEkGo+3VRgNn3TIo5x0nVMybsK+uwn7IxSza4SJato7FmYZp6tperhdDr0B1WRT
+ PRHO1OLhYKkatCdWi3vdVPlpH4BsmzM4d4uPEb4Y+I1sUpsSN20CGxJrX4DfM2tP
+ 8Z1rCGw3H4YYGvs/vZ/vB4krb3vb8mgSctuKGDhqhMyAelBdqOI4sXygxHLl+Ww4
+ zufk0yPJfoKOc5jDrEF3ZsAkWdYhlZQ/F/6BTAaGjrSAUsnuAHtUNP7RXlfoREZc
+ QbZX++AhOtvkIrSCQqBq389+T9Hsp12lGo/tVPJjEU5W8S3GzEySiCUsNjq2KlI4
+ 7XFGQQ==
+Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com
+ [209.85.160.198])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g5vh7ujpv-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Thu, 20 Aug 2026 20:15:34 +0000 (GMT)
-Received: by mail-qt1-f199.google.com with SMTP id
- d75a77b69052e-51c0e702df8so2800361cf.2
- for <qemu-riscv@nongnu.org>; Thu, 20 Aug 2026 13:15:34 -0700 (PDT)
+ for <qemu-riscv@nongnu.org>; Thu, 20 Aug 2026 20:15:52 +0000 (GMT)
+Received: by mail-qt1-f198.google.com with SMTP id
+ d75a77b69052e-51c1c7f135bso3970611cf.0
+ for <qemu-riscv@nongnu.org>; Thu, 20 Aug 2026 13:15:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1787256934; x=1787861734; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1787256951; x=1787861751; darn=nongnu.org;
  h=content-transfer-encoding:content-type:mime-version:references
  :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=jGYx+C/wjSqKEH0TVOmY80sKiqo+hAS2MJzZs3J9eSY=;
- b=TcUMD1aPhcZCWNVeq+DRrTchxtCNzAvaW+SO1M/hqm9dJ1tJV9AegrrXgEFC5Nx0Gm
- cfOXi3L0+RscgnYoo1hFk6C1cmdTJgRS7warluIDSJuUE/rbDZq5uv9oYHKcvQmB+KvC
- iwBxzNtC8uznqFCnwPKfyuBEmFMZZ1EcRw6ADjbDpEPNmlYNuuA5U/P3xx+IpsDOcLuu
- w0DvMBIZfpdFROLGRt5VAt1L3u021lT33ZH16RjBfhj0SpQXghq+8+qbY9u6Y/dKaHDT
- yU1DaDESxxipaqG6/T1Z5STsXzuQK7XxlWq7jxDBeEimTS9R4lXTA/Q8iSCv1Hi+h/mc
- WaCA==
+ bh=26i3IaPZ18XqbWQYHKnxx6cxDLlxhS3q+ou9xT+imks=;
+ b=golumtgn5j879q97eL9qTiBBQbuN3mO9QLrlgEbVtmGvhoWcushOJwB2yuzQUjwLKj
+ fsJy8yFlubKscrnhNEAWje67PSaKaChiTz0cSxIRFI5PxrhbxWGuhzSzz4MPAHdLoVeu
+ mRLIaQGT8X4wnmJKXEa/3hKOrBeD1MGlQ81HI0/yNQ2u96Je9CNlQXzqqhPvH9QnGxQR
+ eeTo8zTtVjbd/8Ws2nkiIXr/c6XqOMP4lYUWf92XzA/SIV3F60kBFG9aCy5wsmnAIAmw
+ AuY+8XyEUTax15/DPFeO+e+yEWaTtuL588BjSck2DlKU7KFgc3qaKMqkcWZvCzZy90Ar
+ tX5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787256934; x=1787861734;
+ d=1e100.net; s=20251104; t=1787256951; x=1787861751;
  h=content-transfer-encoding:content-type:mime-version:references
  :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=jGYx+C/wjSqKEH0TVOmY80sKiqo+hAS2MJzZs3J9eSY=;
- b=hrgm8hwlPp7cTba2/f59jUg/VMhxDeiUHciB/3dWrPG5e72dwr/I1iYQxORpI1S0nH
- V7QCUi402AtY97kJY7nMlW5lonX4tuDax7KhEPZWUr9kmpFOdgUEyCsFSRGSuq/wwjTk
- XzxqSknPh4IpCves0L0ooggXbjnrc12figuSjgXHlLPq6CZpV1aNkxAECQJeDRwX/zbE
- EGcYpInXzBBPRE6GYWsQ+FBpejwjNRgYvwfovOvQxIm70R5znGUZoF7mDD1ovHGvLiFI
- Jv9CVaDZNTyvWVsX1ATcZv2jMBs398OJD+l1Uqg2bNVS2VCdmySV5tjAvCY7LzJlgNS4
- 4fpQ==
-X-Gm-Message-State: AOJu0Yx0iaPV3APLQN1dW77DbV+yzYsNGbDBZXXEBPvGpK6e6vyUFnJl
- X5MFTAcOExrDaAEiBAXbtvKOajKh8BaOKUUVWnQDcmi5S5Q+j/V+VuPMyOGT8F9hNsrrKiC3/G0
- 414HZRyBu7U9ExW/RVs1Azg1k9yWdaGamdp6aPDyan4RRK2RKpCAZRT3/BPX9Kx+e6zo2
-X-Gm-Gg: AR+sD12UfkjO6JSss/imulOHYtBuVQDXN1P+CrlNoUN+8/29Eumkzzp/FxCQhxBROMf
- AwasghRRnK44vm6uheRVg/HQZ4MzvSGzjFu2UP8QryhirAtMSU+P8SUOzqioXMeLsyRyC07koCu
- o1HtBK1eNvUtO4NEnjy4bjpt9O6j8Maumd/K3reL1gcBfNLKSrASYl3nd2W4i3eTBWUoe1tyzAJ
- No/D3ax2dPgMkViNioIArfGwR2MlG/O0B0yWQbePhcuApcbpo1ScNyTuiuBbTNfbCGyvsMj5tdY
- R/boJ+sGGDaOlNligmG84YkwjcgZeuh0uTKkoiWfqQsxhmvTElu3kDiq4irjQHp47rWnY2nfVCv
- uoDoPOAhnsDGryfDcm2+xY1/z6dvtXMxodnN8AxwN5A==
-X-Received: by 2002:a05:622a:e18d:10b0:52d:f700:6dea with SMTP id
- d75a77b69052e-52df7007ae6mr3008161cf.42.1787256933752; 
- Thu, 20 Aug 2026 13:15:33 -0700 (PDT)
-X-Received: by 2002:a05:622a:e18d:10b0:52d:f700:6dea with SMTP id
- d75a77b69052e-52df7007ae6mr3007631cf.42.1787256933199; 
- Thu, 20 Aug 2026 13:15:33 -0700 (PDT)
+ bh=26i3IaPZ18XqbWQYHKnxx6cxDLlxhS3q+ou9xT+imks=;
+ b=LmmHhl2cfjyA2zn5e2yYrBetTjNBRy8/ooF0hJFcJOEHJXm4Wf/9N18GmTH2nHLa6s
+ inA8dpNI+gw4pFujq6NXoaoNuDIT97AGinNdlnEFkAmJsx3xjRAt1xQfXaV2TjK+7tnf
+ PCAeSiupdLMY3HyaebDKI/AMi/emo+HGQEsn7/NBuVoY+WPMUtQI/8l4OLJfRrnnmHro
+ IzMTWjROKwm3cpYbRbcBY66n5ODS7dp9+XTa8kVRt9btbrp9KypI97uU06pGmxnHZXaK
+ 4ksSHjJkOntvCOdZLeJcbvDiLkrbyA4qn+ByTQdDNzIm1E/roCuIlxWMUUIKzr6ZTqGJ
+ s+Qg==
+X-Gm-Message-State: AOJu0YzFQkhXjs++PIfzVNfrwrUoiBYSrkKlXMutCSbyDwUQC/MTy0YH
+ 7kDRn8bRTB0Y27TxtZlXzh7aMkLwFxnL67RSBBqUh7Dr8ZLMeVW+W2t1O+6ZoRRYNRMsOA+3ynN
+ Hby6Of7C1JCIkzGhKG8O73VTj9lLqc3cPai7pajdQrslJ9IXWMAm2hT74GA==
+X-Gm-Gg: AR+sD11M7ulvhrbWaxnzSxq/krITT2ceQr5H8md3EBUi6ax3Ijasa2ZkKUxpz6F3RJi
+ gC8dBZ6qkOusoGS7UmU20SLwokxWBrSC0q0igAPC8NEscQpV45NyD7k63k8TVkKAFp802UYKlxt
+ QCt0MdRoVZ+uJa//aVryzwpD0PBWyKnm1/hY0qAVvXylNuMQklENfZPUdCHLwR8SO8VjtsaVgf/
+ FEauNu/YX4sw4ev4USEZSOaGkxceBSFCs0coKm3xeh2QXFmNnRQDTygulyNuCTAGrFsaZIfMDqn
+ xUnFCuE9xQymCAJ+Vwq3lO4tT1pFH3Tih/7t1ZrGOSF7SU9w3Uw4ZLkNWk38vOehIViiFWxp4qJ
+ dCWJb5zpc6XfoctMhu9FzAiSwqymgOw9bDtSdH19Arg==
+X-Received: by 2002:a05:622a:2516:b0:51c:2685:2964 with SMTP id
+ d75a77b69052e-52df5a3491amr10589031cf.43.1787256950672; 
+ Thu, 20 Aug 2026 13:15:50 -0700 (PDT)
+X-Received: by 2002:a05:622a:2516:b0:51c:2685:2964 with SMTP id
+ d75a77b69052e-52df5a3491amr10588591cf.43.1787256950254; 
+ Thu, 20 Aug 2026 13:15:50 -0700 (PDT)
 Received: from localhost.localdomain (pmd666.hd.free.fr. [88.187.86.199])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-482b14b80a5sm15529861f8f.24.2026.08.20.13.15.31
+ ffacd0b85a97d-482b1441753sm16957417f8f.5.2026.08.20.13.15.47
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 20 Aug 2026 13:15:31 -0700 (PDT)
+ Thu, 20 Aug 2026 13:15:48 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, Peter Maydell <peter.maydell@linaro.org>,
@@ -94,36 +94,37 @@ Cc: qemu-riscv@nongnu.org, Peter Maydell <peter.maydell@linaro.org>,
  Richard Henderson <richard.henderson@linaro.org>, qemu-ppc@nongnu.org,
  Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, qemu-arm@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@mailo.com>,
  Laurent Vivier <laurent@vivier.eu>, Helge Deller <deller@gmx.de>
-Subject: [PATCH v2 12/15] linux-user: Uncast void pointer argument as Object
- in target_cpu_free()
-Date: Thu, 20 Aug 2026 22:13:52 +0200
-Message-ID: <20260820201356.29775-13-philmd@oss.qualcomm.com>
+Subject: [PATCH v2 14/15] linux-user: Replace env_cpu_const() by generic
+ env_cpu() equivalent
+Date: Thu, 20 Aug 2026 22:13:54 +0200
+Message-ID: <20260820201356.29775-15-philmd@oss.qualcomm.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260820201356.29775-1-philmd@oss.qualcomm.com>
 References: <20260820201356.29775-1-philmd@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODIwMDE1MiBTYWx0ZWRfX+AbwUQ9b/6jc
- 979UdPg7UUGxeSt44eoyPgrCOJs9SgcJ4UgvAqwcZyUeIWszWX+Cib/28MVN8qPgD4Fcj9rd41X
- ROWrsZyiKxtGo81N5oV3nV+noM2lH8+58hsaidKrNMndWNE/yyX0mecVAjW1N64QtKRI4nmYbLg
- UjIIziiCFo12SJ/hh1UwOPy5DCDoaZsDT1qu3fSW8T/+IJbT/i9H7eirpiCtionrtL7Zb+aWwi4
- 3CkeU8SVL+LkOKXQ0zcNrd5X1T/L/A8B/zUPcclkG2CO5TCyBI29iM6TQ6nteO4JcpagWCPvBPS
- VytT38TmrMYLN9Dy9pmiGrPY5kd19nij15hkygqVuMwCPuIL1EMlBUMIftT4+QuhI+/mBWd6pbq
- pkMy1yuLb0Awh76CkfETJGz9s5M/m27p1Dfo6Agv1pCs4EarqVqSzX3Ma7+BMAviJA6RYqX1YtV
- O6VJNKbTgKZgNJBjbvg==
-X-Proofpoint-ORIG-GUID: WDbs_qAAMNXpyTKlyZQ7nLDFr-wO02s4
-X-Authority-Analysis: v=2.4 cv=Y7fIdBeN c=1 sm=1 tr=0 ts=6a876066 cx=c_pps
- a=WeENfcodrlLV9YRTxbY/uA==:117 a=4s3hRJSeHn4rkQlkrse1kQ==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODIwMDE1MiBTYWx0ZWRfX55BnU0h9DBRV
+ aMeXpZHvhVTJTjy1LYPiIYV/2fbzGDhUaNSygQdLfb5gSc3HrwzYZW7OPysm35JR36EmWNyn1uR
+ 65HW0MSfupNIDV3PJROvNrT+EI/IMi2ZV8NogOOMDnPuiBinwPC3c6j3yADXbyYkgrbV41+NoxO
+ zN0tx45Ee2Lizo7koajNVN8Vyj9Ncb8BOBDcts+rGmKuhtQzaNM/WYO9bJo2tGEJkncPGqVQNoL
+ n/MM0/cYyQtrC7iAvYk77JuG+AJozSuz6X3jyZROadjHnU3xDJSicCGozIcyO+DJ59TzJI03ZnE
+ TFsBAI1JMlaad3UA6MDvJ7qMEKJyaxo5n+yA0Pv6rzyfGdNKYsT8yCuju746ehhUJJr2iIX7IRb
+ ZZ3MA1AkHhIZ+tR3hmTLaIfDpTZa/pubcjU8JDP1/2NCLZWj80onuU4Jm8irGcmaE+gkOY1iKvk
+ 5A1iGqzwPpGS52+Jx/A==
+X-Proofpoint-ORIG-GUID: nWnxyJF6q_IGECptmwnDzFSDDF80DZx2
+X-Authority-Analysis: v=2.4 cv=Y7fIdBeN c=1 sm=1 tr=0 ts=6a876078 cx=c_pps
+ a=mPf7EqFMSY9/WdsSgAYMbA==:117 a=4s3hRJSeHn4rkQlkrse1kQ==:17
  a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=M51BFTxLslgA:10 a=s4-Qcg_JpJYA:10
  a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
- a=EUspDBNiAAAA:8 a=2RGiIWwp3e7TAFkeQGYA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=kacYvNCVWA4VmyqE58fU:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODIwMDE1MiBTYWx0ZWRfX5KrpYkPevAmX
- 6skAELYtIJ+X9XjzGcB/6S/xDduB3y0UWNsplBacWjy2sey6Tu/ggVB0wNFkTr+iZBOlb+Uotww
- l0HrB9j29ehuF6nRoC/Z+eIrKWrDB7M=
-X-Proofpoint-GUID: WDbs_qAAMNXpyTKlyZQ7nLDFr-wO02s4
+ a=EUspDBNiAAAA:8 a=OXD_3DllCHOcwck3pM8A:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=dawVfQjAaf238kedN5IG:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODIwMDE1MiBTYWx0ZWRfX8rQUh7Qxj2av
+ cTo/gFlEZH1KnrLh+/jxWFM8tCO+HgvTyOd2Z0cayU8ArpZ8l5htwRfRYWL+S5wWv5nsHs4Txb4
+ 3Tlfk309gX/UVpmF/A8EFbtqU5/lvcM=
+X-Proofpoint-GUID: nWnxyJF6q_IGECptmwnDzFSDDF80DZx2
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-20_02,2026-08-20_02,2025-10-01_01
@@ -140,7 +141,7 @@ X-Spam_bar: --
 X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -156,41 +157,67 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-init_main_thread() is registered as Object::free() hook, thus
-take an Object* argument. Uncast the void pointer as such.
-
-While now cpu_env() accept any pointer type, next commit will
-restrict it to CPUState* type. QOM-cast the Object to CPU type,
-otherwise we will get:
-
-  ../linux-user/i386/cpu_loop.c: In function ‘target_cpu_free’:
-  include/hw/core/cpu.h:604:31: error: ‘_Generic’ selector of type ‘void’ is not compatible with any association
-../linux-user/x86_64/../i386/cpu_loop.c:331:19: note: in expansion of macro ‘cpu_env’
-  331 |     target_munmap(cpu_env(obj)->gdt.base,
-      |                   ^~~~~~~
+Use the generic env_cpu() macro introduced in the previous
+commit and remove the few env_cpu_const() uses.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
 ---
- linux-user/i386/cpu_loop.c | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ include/exec/cpu-common.h   | 1 -
+ linux-user/elfload.c        | 2 +-
+ linux-user/i386/elfload.c   | 2 +-
+ linux-user/x86_64/elfload.c | 2 +-
+ 4 files changed, 3 insertions(+), 4 deletions(-)
 
-diff --git a/linux-user/i386/cpu_loop.c b/linux-user/i386/cpu_loop.c
-index fe922fceb5a..a0790f3f352 100644
---- a/linux-user/i386/cpu_loop.c
-+++ b/linux-user/i386/cpu_loop.c
-@@ -326,9 +326,10 @@ void cpu_loop(CPUX86State *env)
-     }
- }
+diff --git a/include/exec/cpu-common.h b/include/exec/cpu-common.h
+index bffef677607..d67d008236f 100644
+--- a/include/exec/cpu-common.h
++++ b/include/exec/cpu-common.h
+@@ -102,6 +102,5 @@ static inline bool cpu_loop_exit_requested(const CPUState *cpu)
+                 (CPUState *)((void *)env - sizeof(CPUState)), \
+             const CPUArchState: \
+                 (const CPUState *)((const void *)env - sizeof(CPUState)))
+-#define env_cpu_const(cpu) env_cpu(cpu)
  
--static void target_cpu_free(void *obj)
-+static void target_cpu_free(void *ptr)
+ #endif /* CPU_COMMON_H */
+diff --git a/linux-user/elfload.c b/linux-user/elfload.c
+index 88508deac50..c4bdaa146a7 100644
+--- a/linux-user/elfload.c
++++ b/linux-user/elfload.c
+@@ -2128,7 +2128,7 @@ static int wmr_write_region(void *opaque, vaddr start,
+ #endif
+ static int elf_core_dump(int signr, const CPUArchState *env)
  {
--    target_munmap(cpu_env(obj)->gdt.base,
-+    Object *obj = ptr;
-+    target_munmap(cpu_env(CPU(obj))->gdt.base,
-                   sizeof(uint64_t) * TARGET_GDT_ENTRIES);
-     g_free(obj);
- }
+-    const CPUState *cpu = env_cpu_const(env);
++    const CPUState *cpu = env_cpu(env);
+     const TaskState *ts = (const TaskState *)get_task_state((CPUState *)cpu);
+     struct rlimit dumpsize;
+     CountAndSizeRegions css;
+diff --git a/linux-user/i386/elfload.c b/linux-user/i386/elfload.c
+index 26b12001a3e..2e10f38a412 100644
+--- a/linux-user/i386/elfload.c
++++ b/linux-user/i386/elfload.c
+@@ -38,7 +38,7 @@ void elf_core_copy_regs(target_elf_gregset_t *r, const CPUX86State *env)
+     r->pt.es = tswapal(env->segs[R_ES].selector & 0xffff);
+     r->pt.fs = tswapal(env->segs[R_FS].selector & 0xffff);
+     r->pt.gs = tswapal(env->segs[R_GS].selector & 0xffff);
+-    r->pt.orig_ax = tswapal(get_task_state(env_cpu_const(env))->orig_ax);
++    r->pt.orig_ax = tswapal(get_task_state(env_cpu(env))->orig_ax);
+     r->pt.ip = tswapal(env->eip);
+     r->pt.cs = tswapal(env->segs[R_CS].selector & 0xffff);
+     r->pt.flags = tswapal(env->eflags);
+diff --git a/linux-user/x86_64/elfload.c b/linux-user/x86_64/elfload.c
+index 49a6f6180e0..121a8167acc 100644
+--- a/linux-user/x86_64/elfload.c
++++ b/linux-user/x86_64/elfload.c
+@@ -59,7 +59,7 @@ void elf_core_copy_regs(target_elf_gregset_t *r, const CPUX86State *env)
+     r->pt.dx = tswapal(env->regs[R_EDX]);
+     r->pt.si = tswapal(env->regs[R_ESI]);
+     r->pt.di = tswapal(env->regs[R_EDI]);
+-    r->pt.orig_ax = tswapal(get_task_state(env_cpu_const(env))->orig_ax);
++    r->pt.orig_ax = tswapal(get_task_state(env_cpu(env))->orig_ax);
+     r->pt.ip = tswapal(env->eip);
+     r->pt.cs = tswapal(env->segs[R_CS].selector & 0xffff);
+     r->pt.flags = tswapal(env->eflags);
 -- 
 2.53.0
 
