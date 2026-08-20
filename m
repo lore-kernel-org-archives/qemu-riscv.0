@@ -4,138 +4,158 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F28D5C5DF86
-	for <qemu-riscv@archiver.kernel.org>; Thu, 20 Aug 2026 20:16:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37376C5DF8E
+	for <qemu-riscv@archiver.kernel.org>; Thu, 20 Aug 2026 20:16:46 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wx9BB-0007uN-2F; Thu, 20 Aug 2026 16:16:01 -0400
+	id 1wx9BU-0000Zo-3Z; Thu, 20 Aug 2026 16:16:20 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1wx9B8-0007jZ-Rd
- for qemu-riscv@nongnu.org; Thu, 20 Aug 2026 16:16:00 -0400
+ id 1wx9BS-0000Uj-7V
+ for qemu-riscv@nongnu.org; Thu, 20 Aug 2026 16:16:18 -0400
 Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1wx9B6-0002t3-NY
- for qemu-riscv@nongnu.org; Thu, 20 Aug 2026 16:15:58 -0400
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+ id 1wx9BO-00039F-B9
+ for qemu-riscv@nongnu.org; Thu, 20 Aug 2026 16:16:17 -0400
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 67KK7XX43491352
- for <qemu-riscv@nongnu.org>; Thu, 20 Aug 2026 20:15:43 GMT
+ 67KK7d3t4012752
+ for <qemu-riscv@nongnu.org>; Thu, 20 Aug 2026 20:16:03 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- Ab2jd4IOBsCwRWOGKRY93YvfazH7yBpjbYnktuG5p9Q=; b=b++J7aT3S0Df9dYD
- p28xpQuzf4Appl0AXMxuI5m16sKOUMPmzF5TObG6eAb8qLKBpqdJXUJTtKydq6PZ
- HAiH2iMj8UfqqKJ2C5eml0IeZ7tps2KukzxOzJJ3gKKfT8GeXkMhpekkyBX5R53l
- HNPbeenQxK34CEDAsYtf67PMz+T6XRKfEWmsHvogBCJ1T/sbT6iShBPecmRxmt23
- VExkMRM+iZ13Gn94dNK8b9LtJBRGbBtpzR6Zlexwkxjhd38PrPys9bJtTU9ttfaE
- ylIhBVJgxziKgIEaos/lvPGtmtyVsiX7BvbWFTKnGrAr802dddtSCCR35gq53ycc
- 851uDw==
-Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com
- [209.85.160.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g5ytcaqkp-1
+ 1U6iygIxAfvBnQx2biUKEFmmuR6Q3/g7yQC3HaajE30=; b=CUJNViZ0qVftx56f
+ qAY6/oIPEw02fZ7t7GmNdS3ZA1cfHQJApNDniKCH0BQrdVgiX9JEb60IyolKB4fW
+ nr4Hc+1O7FFN7dc07+nThibAOk7If2YId9cPemDCXr7V3GAAw3AYTZ08QZq/REXP
+ /rQAasP4WrC3e5+ydcYggOw7id1Ddv9hsEIHeOkz9U73OfShB+ReTJTzZYmtv36e
+ yMSeNK46eEp+kQYRDAQ5hBZ+4y65Bh1aNseTGSH9jXfMVbPjd4fuBqdTkIia4dYP
+ h04sp60Pd9URtW3tnSxUOP+5wQOQg9/1gDyuwanTDpy8eCCnJqWpx2ABSbByV8+6
+ 4+VJDA==
+Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com
+ [209.85.222.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g5x29k5qp-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Thu, 20 Aug 2026 20:15:43 +0000 (GMT)
-Received: by mail-qt1-f197.google.com with SMTP id
- d75a77b69052e-51c1a97644aso2473701cf.2
- for <qemu-riscv@nongnu.org>; Thu, 20 Aug 2026 13:15:43 -0700 (PDT)
+ for <qemu-riscv@nongnu.org>; Thu, 20 Aug 2026 20:16:02 +0000 (GMT)
+Received: by mail-qk1-f199.google.com with SMTP id
+ af79cd13be357-930b571432fso22181485a.0
+ for <qemu-riscv@nongnu.org>; Thu, 20 Aug 2026 13:16:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1787256942; x=1787861742; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1787256962; x=1787861762; darn=nongnu.org;
  h=content-transfer-encoding:content-type:mime-version:references
  :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=Ab2jd4IOBsCwRWOGKRY93YvfazH7yBpjbYnktuG5p9Q=;
- b=S9meIKabIN3CW5aPoMEt+/POnn1rCGQ7qEcGmWXz2u7FRaxUj6MP9dFX0SyT5VmIxx
- NzQiaHdVZIFS3IMaQvcUtSahXzB+iQFcmiuo4anYc8I9pHwZibnW2Z3QBFfcgx5hqqYO
- iT8yy+rX7S4sX3AYMvMoMWsnL+KBdt5S27+nOJuoS1x3eZO/YmmJCh+pGWvMbR6RThL1
- +CoKqAddETS/tsRTExwuEiEYt7B5NJ5mW6Ke/U/2wkXXzbe+f4rgH4uuyMyKJu5hJ38a
- GEoLP7pQ9wHMT04bxulBn1ywuZ2LZ3Y2wgJwOO+PjMhmF9SsvEP10rOyiThLtytPSjj3
- c6cg==
+ bh=1U6iygIxAfvBnQx2biUKEFmmuR6Q3/g7yQC3HaajE30=;
+ b=IMMehG+M8H2TAyCZvOyO+BILM7pivZiLt6NqU9Twde9tRmmwTrrFcjHQI/ueQDJ4nu
+ 4nILDFeW0Y/RgMr+oMIPODLbjO4WXd63JCJYGVgIvcn0+uAAs7MBTllKlZSeR2nhWr6F
+ qHOQkn+UVZdIywX5DrN13kQjujxCw2hsJLq9rg4kxj9Lb87E59mgCaPGbwwsZLjAN6Uj
+ vDAKi6zUfAJJWFbzVQiN7FHC174ooziyCz0GzCHH/tO1DbD6+uveg479J6lTmpoZoa7o
+ 0JLhvVh2LfrZfVyE+CejrrSJR4lA+iCq+PcNUChQo6JF5QKzNPGqwydgcCXwpNli+Dy/
+ pgGA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787256942; x=1787861742;
+ d=1e100.net; s=20251104; t=1787256962; x=1787861762;
  h=content-transfer-encoding:content-type:mime-version:references
  :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=Ab2jd4IOBsCwRWOGKRY93YvfazH7yBpjbYnktuG5p9Q=;
- b=YfzNrs1iIBMCSeQ3UIGG24OarFEOofXnP+VwqanKgGEdvFjvIflmqOFhJfD8jjKyqU
- oTzeoA/xXOrBpyqPnr7pXhGpSwFVVKXz48OEjL3g5G/JmNSQOUM8iAgrZ1Z0POu3MObg
- /a/I9jFFIRIilHCnxwfliheZMI12z2yzEqxdpRayBjYtw45pHBo+FQtCffyP7qeVvbHK
- hzwSyll3ehMx40lvCc+jKagNct391qfLCQm1dxVoi2xYkD48Y53cahJ7sJ9t5ejfnsmC
- KqJ+79itt80KVzERkdLisYHpaAXe6nuiOpEnXELhJDzdtvDE8n2ADLihRmJFjHa9vANj
- 7Pbw==
-X-Gm-Message-State: AOJu0YwLsy9x51/u5a+/bGrjMhCe6J3keUll2InGxCvgE8A9/7baaUcC
- FYOlcJ+4qNKIurrQy0ZR5tFm4Fs7irL5sZbD45MwCLDTB1wze6zuTwmYrd+0sajPJ+0B4Cb6ZcF
- droyRqf2qnRfPgtzBpXUZQwiAV+9FaIoOFI6Bj0WNjdee7YqSOC5vLyA98Q==
-X-Gm-Gg: AR+sD107CQXxZzqJFnpgGF2f6AcrrAWmmwwXuhSHBghR69ZhnUg9pQ3Vo0HVgxTYyc3
- sGkzvA8J4xLRH6B0+b+rCksHkB2WA8wAoc9onq5scqoLhfq92iyzROhFCEE+HKDdNmd7x3Var93
- aVX0q317qknqUvPsi+CiZPISAz6hdh66aymcWSlIapCFHKl6JCTZ12xnBOUJyGvUXJYXtPPrw+A
- Cnf2CtQws9jzMuCaMtY2rgjjeQjxkhp8QZ+BJF4B25GCGYs5auDPfvJMuKjf51qUwFI2MLIZU+r
- f2w4epHUEfFmJTbiIkkSmMzzTQSDNRSgRQd6cXK0aRtL9bAhmU9e86k9ITNHRUlT0fXDW5QB+8I
- jk7ECgm1VJXM/O3ErJchq1QU9CmkS7f8klw9zUbBLRw==
-X-Received: by 2002:ac8:58c6:0:b0:528:3ae6:14b1 with SMTP id
- d75a77b69052e-52df5c1d61amr9097741cf.43.1787256942243; 
- Thu, 20 Aug 2026 13:15:42 -0700 (PDT)
-X-Received: by 2002:ac8:58c6:0:b0:528:3ae6:14b1 with SMTP id
- d75a77b69052e-52df5c1d61amr9097081cf.43.1787256941665; 
- Thu, 20 Aug 2026 13:15:41 -0700 (PDT)
+ bh=1U6iygIxAfvBnQx2biUKEFmmuR6Q3/g7yQC3HaajE30=;
+ b=e8BZ1opSAurw38migix6cEiBhOVEDirCOMCac1Odbt+ZO6OwDFcdKX32QmQYqnXKNk
+ 9KQF7eCJpgyfScdZWgLQkR0OYESTAAo5D4GiQjdHBdit/ofNLagj0aY6IiDkaCyX/aOd
+ EtRHLDjM2ZXicpokN2BB7z/Oaz1AWYokclytlcDGy3RE421zWdiFA7/rfryUpxk+7Atb
+ ZFHiJGi8wSoNM7RHnSTBAysaT9w5PsDNP4dc9YsJwYK7GDNRcF7mOG+lFO5NHYCykfqQ
+ 2j5V3ihnj9Gpww3O7Ey7VC5Pdq7BPyf8k7Avv9pnWHaFoAyN4kqSjEVKraHl3lLCH1dC
+ tMew==
+X-Gm-Message-State: AOJu0Yy1BfIJcRHIRzu4T3K2U3Ao9CzVkrjnmbZTTI9R2iI+y6I5m2Au
+ GEGa0HJQqswm4m/EoykuxLIGWC5BcT2LEGTdrpnMclCIzL5ClLXBzZGQN12nD/pqdvwm5DX5bdN
+ 7iXAM1N/IzuOMRcRbpsYAIPNPjwPx97fsMW37vrdQFvlBsIy95QTBsxBtkQ==
+X-Gm-Gg: AR+sD12WUDwFLKGmInGnRO7x8f5u54akHUXudilGHoSq8ZseE1ZEktD41P5rBYl9t5+
+ DUUh2dzFyXoONrH12Zib5U46GKN2YNqPBQPHL+OePgjZPG5KN+Bj50R69ZoOOScSPyw8g8ojbvx
+ 8Dz3gILtkFQzVHOhG0M+QjpP7ZRtOdsZA5jiTzm8t5toFXgkey8US2S0fRSGDcKoR3L8+rXwBSt
+ 3hUpBo2uWG9Q2AKPNc0qr/CmpzQFnOYOZu7f40h4y3AO0KYT/rucOE7W0/UW+pUDkd0o7mucC2m
+ RjX71cCatOrQva4s/xJmPXKFAuGd3DVqoECN2z2KXbcu9vmagg3UAHjGr3/HeasFgiTNNslos1W
+ f1LgRLiqYW+hS408hvi0wd17a6wqkaDdjJgvosXP0NQ==
+X-Received: by 2002:a05:620a:438a:b0:933:ade:2daf with SMTP id
+ af79cd13be357-9372852ccf6mr998928685a.18.1787256960562; 
+ Thu, 20 Aug 2026 13:16:00 -0700 (PDT)
+X-Received: by 2002:a05:620a:438a:b0:933:ade:2daf with SMTP id
+ af79cd13be357-9372852ccf6mr998917185a.18.1787256959822; 
+ Thu, 20 Aug 2026 13:15:59 -0700 (PDT)
 Received: from localhost.localdomain (pmd666.hd.free.fr. [88.187.86.199])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-499b914baeesm3451845e9.10.2026.08.20.13.15.39
+ ffacd0b85a97d-482b14b7d23sm15615077f8f.22.2026.08.20.13.15.56
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 20 Aug 2026 13:15:40 -0700 (PDT)
+ Thu, 20 Aug 2026 13:15:58 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, Peter Maydell <peter.maydell@linaro.org>,
  Paolo Bonzini <pbonzini@redhat.com>, qemu-s390x@nongnu.org,
  Richard Henderson <richard.henderson@linaro.org>, qemu-ppc@nongnu.org,
  Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, qemu-arm@nongnu.org,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
- =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
+ Michael Rolnik <mrolnik@gmail.com>,
+ Brian Cain <brian.cain@oss.qualcomm.com>, Helge Deller <deller@gmx.de>,
+ Zhao Liu <zhao1.liu@intel.com>, Song Gao <17746591750@163.com>,
+ Bibo Mao <maobibo@loongson.cn>, Xianglai Li <lixianglai@loongson.cn>,
+ Laurent Vivier <laurent@vivier.eu>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@mailo.com>,
- Zhao Liu <zhao1.liu@intel.com>
-Subject: [PATCH v2 13/15] cpus: Add const-qualified CPU environment accessors
-Date: Thu, 20 Aug 2026 22:13:53 +0200
-Message-ID: <20260820201356.29775-14-philmd@oss.qualcomm.com>
+ Aurelien Jarno <aurelien@aurel32.net>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Aleksandar Rikalo <arikalo@gmail.com>,
+ Stafford Horne <shorne@gmail.com>, Nicholas Piggin <npiggin@gmail.com>,
+ Chinmay Rath <rathc@linux.ibm.com>, Glenn Miles <milesg@linux.ibm.com>,
+ Harsh Prateek Bora <harshpb@linux.ibm.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Chao Liu <chao.liu@processmission.com>,
+ Yoshinori Sato <yoshinori.sato@nifty.com>,
+ Ilya Leoshkevich <iii@linux.ibm.com>, David Hildenbrand <david@kernel.org>,
+ Cornelia Huck <cohuck@redhat.com>, Eric Farman <farman@linux.ibm.com>,
+ Matthew Rosato <mjrosato@linux.ibm.com>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Artyom Tarasenko <atar4qemu@gmail.com>, Max Filippov <jcmvbkbc@gmail.com>
+Subject: [PATCH v2 15/15] cpus: Constify @cpu in SysemuCPUOps::has_work()
+ handler
+Date: Thu, 20 Aug 2026 22:13:55 +0200
+Message-ID: <20260820201356.29775-16-philmd@oss.qualcomm.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260820201356.29775-1-philmd@oss.qualcomm.com>
 References: <20260820201356.29775-1-philmd@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=OqZ/DS/t c=1 sm=1 tr=0 ts=6a87606f cx=c_pps
- a=EVbN6Ke/fEF3bsl7X48z0g==:117 a=4s3hRJSeHn4rkQlkrse1kQ==:17
+X-Proofpoint-ORIG-GUID: wdSsVjXNq5IZWnTQov-l5KzFzgTnIOX9
+X-Authority-Analysis: v=2.4 cv=V8BNF+ni c=1 sm=1 tr=0 ts=6a876082 cx=c_pps
+ a=HLyN3IcIa5EE8TELMZ618Q==:117 a=4s3hRJSeHn4rkQlkrse1kQ==:17
  a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=M51BFTxLslgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=KKAkSRfTAAAA:8 a=EUspDBNiAAAA:8 a=20KFwNOVAAAA:8 a=x16qC-9I3E3lrIGWYX0A:9
- a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10 a=a_PwQJl-kcHnX1M80qC6:22
- a=cvBusfyB2V15izCimMoJ:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODIwMDE1MiBTYWx0ZWRfX7DMZAIha1cIL
- MDERnMzUXPWmaaVJLY1aiqjMFl/kknEzxssnowJKUk02dRwvmlfutpoXz0g42E1vTrj9Va2zmOa
- qbXJiM0Rbox1FosBkvSXZstTxLSSnID1ZxPxqfdO16x06sVHkL83qJeQDsTgBlju45xipnSRszu
- z6mNyqwW3WSwNLd2u7dyX5ohZb8VEekvrWHKmNna1f+a3xmkghGJI9aMLzmZnhw/azNHYRgqu6o
- Mm714O1+3vwhJlodW8Uuw+1ctUd1G4OIm8kneqRkkkbPf5OyZOFX+PxK9aGW3TycrN6KKBeqy+C
- HWyMFw+PIRXgMplxGObI5TIsTHls65TtWA3/Zh8FA0IWpgBgHRyBTSwNdYLQ9Lb+0FPRwR6+sPO
- 6TKqSopdpQGwWylzXY2BOv4LRVhZURwzJ7I7K88PP8bpOfZw84n4C7dvVRTxzHm7z7JLXMIUG3w
- mWzlUaaqMj8luHRKeKw==
-X-Proofpoint-ORIG-GUID: SfjSh3gpSjgPQ_7L5P4A7MgPZJhgVwYo
-X-Proofpoint-GUID: SfjSh3gpSjgPQ_7L5P4A7MgPZJhgVwYo
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODIwMDE1MiBTYWx0ZWRfX3NpwTpq2AJxx
- o9zsdb/mspovQKaLD/z7OK6CDATBWkviD2z65cASj6txA4Io51UWY7FANekebtR8HWAKiXo58Xb
- BPdpJWvJo/EQ9c1D8WXBG5Lec8mTtwc=
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
+ a=EUspDBNiAAAA:8 a=hf0YJCTCBZPsvBMCq-cA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=bTQJ7kPSJx9SKPbeHEYW:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODIwMDE1MiBTYWx0ZWRfXwtDjxlZTTwUK
+ qFh0L466fTDCFzVRHTe1JRGNLqMrjLMMRnrqMNQOJykLL1n8bHQsQ4m2xTMlvhM9UBqonZS1bQc
+ dM4rePtKLT6Ag5yUNj0LyahH7Rl71k6+facOzq86Ndf8ESJ9lhdb+Km6AWY4gvqmSi4YAn1GgFy
+ 682v7b4Mjx963twz5nxdHkd6LIuEgZXoQtLkS12owIRd7UfUyMCJ/jXFDS+kS10JrF2DYQcg7sn
+ nu8WU6s2B6IP9FJK1wjcStM87/raaDIbdduTIQTn5vOiyrbQq2g2FLSLQKwksGYQJCVWpPlW3gB
+ HuAUnrmikJixTpX24dLv2o26nF5Ua/DL1JMLgkiVZzogQ+uNZLhxtxrWkp/sSPw6CnBquyRBuyi
+ lwW0e3rVJKPXrZOh6/DpYrd+8FwJTG5QmXy7LV4UvAALOXOj9Ta7X+0BS2qji5Z+13VNBsOz2eo
+ 6PrD1G6IyndfaM1rwJw==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODIwMDE1MiBTYWx0ZWRfX8fF4ZIARAh2b
+ hkl849s+9tV3ngTm6HsxHmrRo6rWZqXW4ZGyBYXQHbscOq1Zoi5K+QnLrSJeJI+bc4N7WXQzGcO
+ D4DcdOLVnOmDvMTUYRmDogLed0R9o/M=
+X-Proofpoint-GUID: wdSsVjXNq5IZWnTQov-l5KzFzgTnIOX9
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-20_02,2026-08-20_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 spamscore=0 malwarescore=0 clxscore=1015 adultscore=0
- bulkscore=0 suspectscore=0 lowpriorityscore=0 priorityscore=1501
- impostorscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2608200152
+ priorityscore=1501 malwarescore=0 clxscore=1015 bulkscore=0 adultscore=0
+ lowpriorityscore=0 phishscore=0 spamscore=0 suspectscore=0 impostorscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608200152
 Received-SPF: pass client-ip=205.220.168.131;
  envelope-from=philmd@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
 X-Spam_score_int: -27
@@ -160,98 +180,322 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Philippe Mathieu-Daudé <philmd@linaro.org>
+All functions called by target has_work() handler take a const @cpu
+argument. We can now fulfill the comment added in commit c2804566f6
+("target/arm: do not clear halting reason in has_work helper"),
+qualifying the handler const to denote its idempotency.
 
-Use _Generic() controlling-expression to add the const-qualified
-variants of cpu_env(), env_cpu() and env_archcpu(). This allows to
-safely access CPU architecture state when it should not be modified.
-
-Alias env_cpu_const() which is still used.
-
-Suggested-by: Richard Henderson <richard.henderson@linaro.org>
-Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 Signed-off-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
-Reviewed-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 ---
- include/exec/cpu-common.h | 30 +++++++++++-------------------
- include/hw/core/cpu.h     | 17 ++++++++++++-----
- 2 files changed, 23 insertions(+), 24 deletions(-)
+ include/hw/core/sysemu-cpu-ops.h | 4 ++--
+ target/alpha/cpu.c               | 2 +-
+ target/arm/cpu.c                 | 4 ++--
+ target/avr/cpu.c                 | 3 ++-
+ target/hexagon/cpu.c             | 4 ++--
+ target/hppa/cpu.c                | 2 +-
+ target/i386/cpu.c                | 2 +-
+ target/loongarch/cpu.c           | 2 +-
+ target/m68k/cpu.c                | 2 +-
+ target/microblaze/cpu.c          | 2 +-
+ target/mips/cpu.c                | 4 ++--
+ target/or1k/cpu.c                | 2 +-
+ target/ppc/cpu_init.c            | 2 +-
+ target/riscv/cpu.c               | 2 +-
+ target/rx/cpu.c                  | 2 +-
+ target/s390x/cpu-system.c        | 4 ++--
+ target/sh4/cpu.c                 | 2 +-
+ target/sparc/cpu.c               | 2 +-
+ target/tricore/cpu.c             | 2 +-
+ target/xtensa/cpu.c              | 4 ++--
+ 20 files changed, 27 insertions(+), 26 deletions(-)
 
-diff --git a/include/exec/cpu-common.h b/include/exec/cpu-common.h
-index 6594f7fa1be..bffef677607 100644
---- a/include/exec/cpu-common.h
-+++ b/include/exec/cpu-common.h
-@@ -85,21 +85,11 @@ static inline bool cpu_loop_exit_requested(const CPUState *cpu)
-  *
-  * Return the ArchCPU associated with the environment.
+diff --git a/include/hw/core/sysemu-cpu-ops.h b/include/hw/core/sysemu-cpu-ops.h
+index 9a45596169a..095bdcd997a 100644
+--- a/include/hw/core/sysemu-cpu-ops.h
++++ b/include/hw/core/sysemu-cpu-ops.h
+@@ -19,10 +19,10 @@ typedef struct SysemuCPUOps {
+     /**
+      * @has_work: Callback for checking if there is work to do.
+      *
+-     * This function should be idempotent (i.e. not change state) as
++     * This function is idempotent (i.e. not change state) as
+      * it will likely be queried multiple times before a CPU resumes.
+      */
+-    bool (*has_work)(CPUState *cpu); /* MANDATORY NON-NULL */
++    bool (*has_work)(const CPUState *cpu); /* MANDATORY NON-NULL */
+     /**
+      * @get_memory_mapping: Callback for obtaining the memory mappings.
+      */
+diff --git a/target/alpha/cpu.c b/target/alpha/cpu.c
+index 7d1d036e1d3..21d4f8ac23b 100644
+--- a/target/alpha/cpu.c
++++ b/target/alpha/cpu.c
+@@ -77,7 +77,7 @@ static void alpha_restore_state_to_opc(CPUState *cs,
+ }
+ 
+ #ifndef CONFIG_USER_ONLY
+-static bool alpha_cpu_has_work(CPUState *cs)
++static bool alpha_cpu_has_work(const CPUState *cs)
+ {
+     /* Here we are checking to see if the CPU should wake up from HALT.
+        We will have gotten into this state only for WTINT from PALmode.  */
+diff --git a/target/arm/cpu.c b/target/arm/cpu.c
+index 9761bb173c1..ba66359d410 100644
+--- a/target/arm/cpu.c
++++ b/target/arm/cpu.c
+@@ -141,9 +141,9 @@ int arm_cpu_mmu_index(CPUState *cs, bool ifetch)
+  * CPU_INTERRUPT_*NMI anyway. So we might as well accept NMI here
+  * unconditionally.
   */
--static inline ArchCPU *env_archcpu(CPUArchState *env)
--{
--    return (void *)env - sizeof(CPUState);
--}
--
--/**
-- * env_cpu_const(env)
-- * @env: The architecture environment
-- *
-- * Return the CPUState associated with the environment.
-- */
--static inline const CPUState *env_cpu_const(const CPUArchState *env)
--{
--    return (void *)env - sizeof(CPUState);
--}
-+#define env_archcpu(env) _Generic(*(env), \
-+            CPUArchState: \
-+                (ArchCPU *)((void *)env - sizeof(CPUState)), \
-+            const CPUArchState: \
-+                (const ArchCPU *)((const void *)env - sizeof(CPUState)))
+-static bool arm_cpu_has_work(CPUState *cs)
++static bool arm_cpu_has_work(const CPUState *cs)
+ {
+-    ARMCPU *cpu = ARM_CPU(cs);
++    const ARMCPU *cpu = ARM_CPU(cs);
  
- /**
-  * env_cpu(env)
-@@ -107,9 +97,11 @@ static inline const CPUState *env_cpu_const(const CPUArchState *env)
-  *
-  * Return the CPUState associated with the environment.
-  */
--static inline CPUState *env_cpu(CPUArchState *env)
--{
--    return (CPUState *)env_cpu_const(env);
--}
-+#define env_cpu(env) _Generic(*(env), \
-+            CPUArchState: \
-+                (CPUState *)((void *)env - sizeof(CPUState)), \
-+            const CPUArchState: \
-+                (const CPUState *)((const void *)env - sizeof(CPUState)))
-+#define env_cpu_const(cpu) env_cpu(cpu)
+     /*
+      * Only another PSCI call can wake the CPU up in which case the
+diff --git a/target/avr/cpu.c b/target/avr/cpu.c
+index a01e6fa4751..a96bef46ff1 100644
+--- a/target/avr/cpu.c
++++ b/target/avr/cpu.c
+@@ -23,6 +23,7 @@
+ #include "qemu/qemu-print.h"
+ #include "exec/translation-block.h"
+ #include "system/address-spaces.h"
++#include "hw/core/cpu.h"
+ #include "cpu.h"
+ #include "disas/dis-asm.h"
+ #include "tcg/debug-assert.h"
+@@ -43,7 +44,7 @@ static vaddr avr_cpu_get_pc(CPUState *cs)
+     return cpu->env.pc_w * 2;
+ }
  
- #endif /* CPU_COMMON_H */
-diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
-index a16acf14370..372485a2e54 100644
---- a/include/hw/core/cpu.h
-+++ b/include/hw/core/cpu.h
-@@ -594,11 +594,18 @@ struct CPUState {
- QEMU_BUILD_BUG_ON(offsetof(CPUState, neg) !=
-                   sizeof(CPUState) - sizeof(CPUNegativeOffsetState));
+-static bool avr_cpu_has_work(CPUState *cs)
++static bool avr_cpu_has_work(const CPUState *cs)
+ {
+     return cpu_test_interrupt(cs, CPU_INTERRUPT_HARD | CPU_INTERRUPT_RESET)
+             && cpu_interrupts_enabled(cpu_env(cs));
+diff --git a/target/hexagon/cpu.c b/target/hexagon/cpu.c
+index 4cc6bd67c28..868aef0cde4 100644
+--- a/target/hexagon/cpu.c
++++ b/target/hexagon/cpu.c
+@@ -364,9 +364,9 @@ bool hexagon_thread_is_enabled(const CPUHexagonState *env)
+     return E_bit;
+ }
  
--static inline CPUArchState *cpu_env(CPUState *cpu)
--{
--    /* We validate that CPUArchState follows CPUState in cpu-target.c */
--    return (CPUArchState *)(cpu + 1);
--}
-+/**
-+ * cpu_env(cpu)
-+ * @cpu: The vCPU
-+ *
-+ * Return the CPUArchState associated with the CPU.
-+ */
-+#define cpu_env(cpu) _Generic(*(cpu), \
-+        /* We validate that CPUArchState follows CPUState in cpu-target.c */ \
-+        CPUState: \
-+            (CPUArchState *)(cpu + 1), \
-+        const CPUState: \
-+            (const CPUArchState *)(cpu + 1))
+-static bool hexagon_cpu_has_work(CPUState *cs)
++static bool hexagon_cpu_has_work(const CPUState *cs)
+ {
+-    CPUHexagonState *env = cpu_env(cs);
++    const CPUHexagonState *env = cpu_env(cs);
  
- #ifdef CONFIG_TCG
- /*
+     return hexagon_thread_is_enabled(env) &&
+         (cs->interrupt_request & (CPU_INTERRUPT_HARD | CPU_INTERRUPT_SWI
+diff --git a/target/hppa/cpu.c b/target/hppa/cpu.c
+index 7b1309a7c38..dbf58466c24 100644
+--- a/target/hppa/cpu.c
++++ b/target/hppa/cpu.c
+@@ -134,7 +134,7 @@ static void hppa_restore_state_to_opc(CPUState *cs,
+ }
+ 
+ #ifndef CONFIG_USER_ONLY
+-static bool hppa_cpu_has_work(CPUState *cs)
++static bool hppa_cpu_has_work(const CPUState *cs)
+ {
+     return cpu_test_interrupt(cs, CPU_INTERRUPT_HARD | CPU_INTERRUPT_NMI);
+ }
+diff --git a/target/i386/cpu.c b/target/i386/cpu.c
+index 1fc02cf94e6..0606ac16664 100644
+--- a/target/i386/cpu.c
++++ b/target/i386/cpu.c
+@@ -10638,7 +10638,7 @@ int x86_cpu_pending_interrupt(const CPUState *cs, int interrupt_request)
+     return 0;
+ }
+ 
+-static bool x86_cpu_has_work(CPUState *cs)
++static bool x86_cpu_has_work(const CPUState *cs)
+ {
+     return x86_cpu_pending_interrupt(cs, cs->interrupt_request) != 0;
+ }
+diff --git a/target/loongarch/cpu.c b/target/loongarch/cpu.c
+index b638ac25040..0ce18a89b63 100644
+--- a/target/loongarch/cpu.c
++++ b/target/loongarch/cpu.c
+@@ -96,7 +96,7 @@ bool cpu_loongarch_hw_interrupts_pending(const CPULoongArchState *env)
+ #endif
+ 
+ #ifndef CONFIG_USER_ONLY
+-static bool loongarch_cpu_has_work(CPUState *cs)
++static bool loongarch_cpu_has_work(const CPUState *cs)
+ {
+     bool has_work = false;
+ 
+diff --git a/target/m68k/cpu.c b/target/m68k/cpu.c
+index 523694d8fbf..da3681fab1f 100644
+--- a/target/m68k/cpu.c
++++ b/target/m68k/cpu.c
+@@ -76,7 +76,7 @@ static void m68k_restore_state_to_opc(CPUState *cs,
+ }
+ 
+ #ifndef CONFIG_USER_ONLY
+-static bool m68k_cpu_has_work(CPUState *cs)
++static bool m68k_cpu_has_work(const CPUState *cs)
+ {
+     return cpu_test_interrupt(cs, CPU_INTERRUPT_HARD);
+ }
+diff --git a/target/microblaze/cpu.c b/target/microblaze/cpu.c
+index 6013a8def8e..d1d2f0ec7e3 100644
+--- a/target/microblaze/cpu.c
++++ b/target/microblaze/cpu.c
+@@ -127,7 +127,7 @@ static void mb_restore_state_to_opc(CPUState *cs,
+ }
+ 
+ #ifndef CONFIG_USER_ONLY
+-static bool mb_cpu_has_work(CPUState *cs)
++static bool mb_cpu_has_work(const CPUState *cs)
+ {
+     return cpu_test_interrupt(cs, CPU_INTERRUPT_HARD | CPU_INTERRUPT_NMI);
+ }
+diff --git a/target/mips/cpu.c b/target/mips/cpu.c
+index c069aa1c0b7..0f39f8fe0a5 100644
+--- a/target/mips/cpu.c
++++ b/target/mips/cpu.c
+@@ -134,9 +134,9 @@ static vaddr mips_cpu_get_pc(CPUState *cs)
+ }
+ 
+ #if !defined(CONFIG_USER_ONLY)
+-static bool mips_cpu_has_work(CPUState *cs)
++static bool mips_cpu_has_work(const CPUState *cs)
+ {
+-    CPUMIPSState *env = cpu_env(cs);
++    const CPUMIPSState *env = cpu_env(cs);
+     bool has_work = false;
+ 
+     /*
+diff --git a/target/or1k/cpu.c b/target/or1k/cpu.c
+index 42d9351b6d7..10b13ae69cd 100644
+--- a/target/or1k/cpu.c
++++ b/target/or1k/cpu.c
+@@ -76,7 +76,7 @@ static void openrisc_restore_state_to_opc(CPUState *cs,
+ }
+ 
+ #ifndef CONFIG_USER_ONLY
+-static bool openrisc_cpu_has_work(CPUState *cs)
++static bool openrisc_cpu_has_work(const CPUState *cs)
+ {
+     return cpu_test_interrupt(cs, CPU_INTERRUPT_HARD | CPU_INTERRUPT_TIMER);
+ }
+diff --git a/target/ppc/cpu_init.c b/target/ppc/cpu_init.c
+index 85a91ff4bb6..fd63cd6ab09 100644
+--- a/target/ppc/cpu_init.c
++++ b/target/ppc/cpu_init.c
+@@ -7224,7 +7224,7 @@ static int ppc_cpu_mmu_index(CPUState *cs, bool ifetch)
+ #endif /* CONFIG_TCG */
+ 
+ #ifndef CONFIG_USER_ONLY
+-static bool ppc_cpu_has_work(CPUState *cs)
++static bool ppc_cpu_has_work(const CPUState *cs)
+ {
+     return cpu_test_interrupt(cs, CPU_INTERRUPT_HARD);
+ }
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 4abf20d057a..3560fbd445e 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -950,7 +950,7 @@ int riscv_cpu_vsirq_pending(const CPURISCVState *env)
+                                     (irqs | irqs_f_vs), env->hviprio);
+ }
+ 
+-static bool riscv_cpu_has_work(CPUState *cs)
++static bool riscv_cpu_has_work(const CPUState *cs)
+ {
+     CPURISCVState *env = cpu_env(cs);
+     /*
+diff --git a/target/rx/cpu.c b/target/rx/cpu.c
+index 69946928995..dfa09a85bce 100644
+--- a/target/rx/cpu.c
++++ b/target/rx/cpu.c
+@@ -73,7 +73,7 @@ static void rx_restore_state_to_opc(CPUState *cs,
+     cpu->env.pc = data[0];
+ }
+ 
+-static bool rx_cpu_has_work(CPUState *cs)
++static bool rx_cpu_has_work(const CPUState *cs)
+ {
+     return cpu_test_interrupt(cs, CPU_INTERRUPT_HARD | CPU_INTERRUPT_FIR);
+ }
+diff --git a/target/s390x/cpu-system.c b/target/s390x/cpu-system.c
+index 84faceb3338..3a0ff46e144 100644
+--- a/target/s390x/cpu-system.c
++++ b/target/s390x/cpu-system.c
+@@ -39,9 +39,9 @@
+ #include "system/tcg.h"
+ #include "hw/core/sysemu-cpu-ops.h"
+ 
+-static bool s390_cpu_has_work(CPUState *cs)
++static bool s390_cpu_has_work(const CPUState *cs)
+ {
+-    S390CPU *cpu = S390_CPU(cs);
++    const S390CPU *cpu = S390_CPU(cs);
+ 
+     /* STOPPED cpus can never wake up */
+     if (s390_cpu_get_state(cpu) != S390_CPU_STATE_LOAD &&
+diff --git a/target/sh4/cpu.c b/target/sh4/cpu.c
+index 55c73a1da35..b0ed356d0f7 100644
+--- a/target/sh4/cpu.c
++++ b/target/sh4/cpu.c
+@@ -107,7 +107,7 @@ static bool superh_io_recompile_replay_branch(CPUState *cs,
+     return false;
+ }
+ 
+-static bool superh_cpu_has_work(CPUState *cs)
++static bool superh_cpu_has_work(const CPUState *cs)
+ {
+     return cpu_test_interrupt(cs, CPU_INTERRUPT_HARD);
+ }
+diff --git a/target/sparc/cpu.c b/target/sparc/cpu.c
+index 2baa5036871..8dd9b0d5ee3 100644
+--- a/target/sparc/cpu.c
++++ b/target/sparc/cpu.c
+@@ -783,7 +783,7 @@ static void sparc_restore_state_to_opc(CPUState *cs,
+ }
+ 
+ #ifndef CONFIG_USER_ONLY
+-static bool sparc_cpu_has_work(CPUState *cs)
++static bool sparc_cpu_has_work(const CPUState *cs)
+ {
+     return cpu_test_interrupt(cs, CPU_INTERRUPT_HARD) &&
+            cpu_interrupts_enabled(cpu_env(cs));
+diff --git a/target/tricore/cpu.c b/target/tricore/cpu.c
+index 82b56c3cd56..357f3737053 100644
+--- a/target/tricore/cpu.c
++++ b/target/tricore/cpu.c
+@@ -111,7 +111,7 @@ static void tricore_cpu_reset_hold(Object *obj, ResetType type)
+     cpu_state_reset(cpu_env(cs));
+ }
+ 
+-static bool tricore_cpu_has_work(CPUState *cs)
++static bool tricore_cpu_has_work(const CPUState *cs)
+ {
+     /* Interrupts are not implemented */
+     return true;
+diff --git a/target/xtensa/cpu.c b/target/xtensa/cpu.c
+index 99c8bd4b5fb..1b299568776 100644
+--- a/target/xtensa/cpu.c
++++ b/target/xtensa/cpu.c
+@@ -140,9 +140,9 @@ static void xtensa_restore_state_to_opc(CPUState *cs,
+ }
+ 
+ #ifndef CONFIG_USER_ONLY
+-static bool xtensa_cpu_has_work(CPUState *cs)
++static bool xtensa_cpu_has_work(const CPUState *cs)
+ {
+-    CPUXtensaState *env = cpu_env(cs);
++    const CPUXtensaState *env = cpu_env(cs);
+ 
+     return !env->runstall && env->pending_irq_level;
+ }
 -- 
 2.53.0
 
