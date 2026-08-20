@@ -4,103 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2269C5DF87
-	for <qemu-riscv@archiver.kernel.org>; Thu, 20 Aug 2026 13:26:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F22AAC5DF81
+	for <qemu-riscv@archiver.kernel.org>; Thu, 20 Aug 2026 13:26:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wx2lh-0002Vy-M6; Thu, 20 Aug 2026 09:25:19 -0400
+	id 1wx2lp-0002iX-CS; Thu, 20 Aug 2026 09:25:25 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1wx2lX-0002F2-St
- for qemu-riscv@nongnu.org; Thu, 20 Aug 2026 09:25:09 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ id 1wx2lc-0002SV-H9
+ for qemu-riscv@nongnu.org; Thu, 20 Aug 2026 09:25:13 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1wx2lV-0003Zx-JP
- for qemu-riscv@nongnu.org; Thu, 20 Aug 2026 09:25:06 -0400
+ id 1wx2la-0003bd-P6
+ for qemu-riscv@nongnu.org; Thu, 20 Aug 2026 09:25:12 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1787232304;
+ s=mimecast20190719; t=1787232310;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=qkZztjaT0TmjXM0fRUtFSa+K+uc0EfXmkDvCsSGpsQw=;
- b=d3bpglIkq+hl67oxeO0nOOPpK+czUI/fx1xFpH79Z2wPFcPJV/9iWdTfoo6j8RchHWewxH
- EKGBHiAvXm3zYXZBBxivVDpzO4TBEqISXEafzyDHI2lufJ47+bSgqYkNm8H6UWaMufO2Qo
- mQH915l9BBqjhFhvft2qBuRsUQZC84A=
-Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ bh=mWFeEP63HN4AI5YBfU9OyWKSJMnm0V40fwuWQQZ3u64=;
+ b=blBj/T3CMxfsrli+wAYyG7ibkeE6G/zSxaPwJRy8oAdf4BDyGnfWcjCdZAwH1IHWt41oi4
+ hl/35iFlrapN2ImwWk4nQWYkep5ehY6asy2u8jyxUMnc5QxlelPDT4j5Ljhf3Km8EcPckL
+ mz21LcNTgCXRY2jEPThJ7NmMNNwjo1A=
+Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-150-APsPl1LvMTyNsSaFreatUg-1; Thu,
- 20 Aug 2026 09:24:51 -0400
-X-MC-Unique: APsPl1LvMTyNsSaFreatUg-1
-X-Mimecast-MFC-AGG-ID: APsPl1LvMTyNsSaFreatUg_1787232286
-Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-323-tg1NMOtiNNWgNobapOox6g-1; Thu,
+ 20 Aug 2026 09:25:04 -0400
+X-MC-Unique: tg1NMOtiNNWgNobapOox6g-1
+X-Mimecast-MFC-AGG-ID: tg1NMOtiNNWgNobapOox6g_1787232301
+Received: from mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.93])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id C98B9195605E; Thu, 20 Aug 2026 13:24:45 +0000 (UTC)
+ by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 5316D1801347; Thu, 20 Aug 2026 13:25:00 +0000 (UTC)
 Received: from localhost (headnet05.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.117])
- by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id EBCC43002D26; Thu, 20 Aug 2026 13:24:43 +0000 (UTC)
+ by mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id D3B54180049F; Thu, 20 Aug 2026 13:24:56 +0000 (UTC)
 MIME-Version: 1.0
-Subject: Re: [RFC PATCH 10/13] target/riscv: Constify CPURISCVState for
- various cpu_*() getters
+Subject: Re: [RFC PATCH 11/13] target/hexagon: Constify CPUHexagonState in
+ hexagon_thread_is_enabled()
 From: marcandre.lureau@redhat.com
 To: =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
 Cc: qemu-devel@nongnu.org, qemu-s390x@nongnu.org, 
  Paolo Bonzini <pbonzini@redhat.com>, 
  Peter Maydell <peter.maydell@linaro.org>, qemu-ppc@nongnu.org, 
  qemu-riscv@nongnu.org, Richard Henderson <richard.henderson@linaro.org>, 
- qemu-arm@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, 
- Weiwei Li <liwei1518@gmail.com>, 
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Chao Liu <chao.liu@processmission.com>
-In-Reply-To: <20260820104730.25462-11-philmd@oss.qualcomm.com>
+ qemu-arm@nongnu.org, Brian Cain <brian.cain@oss.qualcomm.com>, 
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
+In-Reply-To: <20260820104730.25462-12-philmd@oss.qualcomm.com>
 References: <20260820104730.25462-1-philmd@oss.qualcomm.com>
- <20260820104730.25462-11-philmd@oss.qualcomm.com>
+ <20260820104730.25462-12-philmd@oss.qualcomm.com>
 Date: Thu, 20 Aug 2026 17:22:15 +0400
-Message-Id: <178723213512.2730041.17815454845365274121.b4-review@b4>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=433;
+Message-Id: <178723213513.2730041.16593997297243047041.b4-review@b4>
+X-Developer-Signature: v=1; a=openpgp-sha256; l=341;
  i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=OwhSCjayvPIfggZT9HkiNmuv1VtyqamRYVaUVXLaakY=;
- b=kA0DAAoB2ujhCXWWnOUByyZiAGqG/+uhvSwlSmj0h1nl2tZLLmtnz0mfMQHSE7d4859igUscf
- YkCMwQAAQoAHRYhBIepvZM/h8YG0nb2Ldro4Ql1lpzlBQJqhv/rAAoJENro4Ql1lpzl9QQP/0wQ
- ymNTGNSTWkGjvKPsLk/Tcx1EI5kK/Bpy4O0O54iiqVEdGemOA0RIDESgpQ+mv+/f33Luj3wi2ED
- P8nh2ZDWSzisLeaqAWnRNy/K2M9gWt6mmKWFT2KXyq1XyOSJ8CokJ5srWMgEhd25DFoZgdqAbah
- ePcQK8mBypIarVME3qLYU/lhZTb2XrbLTZMk6cL/W7shJvneqdp+xuMqeuuEUJlspDLRxtowLr0
- KQXHWWuXM4Zb/q3aM1JrEUOYg/F0rdUAh5nRYA6bCuk7NcqnavW/Tx+V5lHy5W27qz3qWkMeCKS
- FHVOVh7YD1hzH5ckulfZ0qDeHY5YhYSsOyw8qD1S3bYa5b4keYHahMwXOX1k7Voj0bhaFyIOa2r
- O4w+tjtBIW+jn3l1Ie8JM7Hx36okOvD2FYZPsdK8fhFJ4L1DyEdRRdHMC1XO7jmSZVGViknwZn2
- TW8JaN1kB7sC8P/VJzHlYlerGm1wz7n0a5rdGXq0G0Lw2OeYBYGyU/aDdD6RUZuGuhpBNl83b1K
- WeBhvT9z5yZ9zCBBoTSg7zCtyYf1NruKBL4wjvO7yyzGZWO52Zx6Z+DT17IpnOJGhuLsxLg2szp
- /0fRdM5Hw+zH/gYU/Jg7/Yf1yad5fyUSzAEr6ZQqscnefaoXxCspgIpzQUKjSY/lol2VmSRUO4d
- +DctM
+ bh=DEVm86aXaBMsOiLkl2+gUrZtB9ujNUXDzajg5tLx1Ks=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBqhv/rJePzy2n/cZeXZ2+wmcu9t5ZneAQHcPO4/
+ GsEuLTo016JAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCaob/6wAKCRDa6OEJdZac
+ 5fHpD/4i5L1LgPrbb4E+5cCt8Mei29nTspEF0t3oxVamtRzVGLNXBcWYuMyw+6srquBs4jf+QH6
+ qBfE86fjLSxUe/o82EglnZhj9QUJxgLsjb35pQoAJAgMtx1JRmQQ1pRjfwsFMjNd+5qz9r6Fde7
+ 1Icb5ym35vDTazW2hq9AtexMTeupJi0Ju6/KGQS8r6+qQcFd+lPe+d00ALiP+z1wopovDPwF83L
+ UU4U2KyrdkbIq1g5/ul6TvVPQZF3K7tRAMNeRGEZNzJnXFs/Z3knMZ1CfBwYo8VYKWCvvXMTdVl
+ T5bfSsMp8ADIIc+TnXvVVMqUTYRNsqCQODoKnvvpcSz1SveIUawggH1jryqCMg1dBGVNk2KVkxk
+ PmPi9lzMH1yUQJgZ+pK5tud/dlWqSBxT+rvzimLs1iCiJeWUkHTF6gYB7mpIzt0TgS0I+40UVwn
+ kgPON+UHV4QUHrfnbdBDBichXv4KYQwLs3kXk79hBA74mjWeLfGtNhzmloKqI384GqzOI5vJgY5
+ SIeagfWeufoPjSObxLR/W71aSRfV4toNpl8KtycrMEP/SUnF3rh4aapjG9mXu4ZPE2f1rsrfXYk
+ u6tBQmU/7PPHdg1qP20QF0u2WUuKUfnXQMJQwbnO44GJADmNP4+7uFZrnrPvb3ImRhpOtz8Grps
+ WPRyC8w8RZZezVw==
 X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
  fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
-X-Mimecast-MFC-PROC-ID: VjCcyEUjB4fvOMGy9dDEQWl3a5vUoaCu6H1YtUDQpSc_1787232286
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.93
+X-Mimecast-MFC-PROC-ID: cYs2yLLn8kK5_mqm_szdyJxiwdE2GEBPaDihEJDPvZU_1787232301
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.133.124;
+Received-SPF: pass client-ip=170.10.129.124;
  envelope-from=marcandre.lureau@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: 9
-X-Spam_score: 0.9
-X-Spam_bar: /
-X-Spam_report: (0.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.346,
+X-Spam_score_int: -23
+X-Spam_score: -2.4
+X-Spam_bar: --
+X-Spam_report: (-2.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.346,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
- RCVD_IN_SBL_CSS=3.335, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=0.001, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -116,15 +111,9 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, 20 Aug 2026 12:47:26 +0200, Philippe Mathieu-Daudé <philmd@oss.qualcomm.com> wrote:
-> Add the const qualifier to CPURISCVState when the
-> argument is accessed without modification.
-> 
-> Note we have to use the recently introduced
-> env_archcpu_const() helper in riscv_cpu_cfg().
-> 
-> 
-> [...]
+On Thu, 20 Aug 2026 12:47:27 +0200, Philippe Mathieu-Daudé <philmd@oss.qualcomm.com> wrote:
+> Use the recently introduced env_archcpu_const() helper and
+> qualify @env as being const in hexagon_thread_is_enabled().
 
 Reviewed-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 
