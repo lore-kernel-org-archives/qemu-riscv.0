@@ -4,95 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DCB0C5DF87
-	for <qemu-riscv@archiver.kernel.org>; Thu, 20 Aug 2026 23:16:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9823FC5DF87
+	for <qemu-riscv@archiver.kernel.org>; Thu, 20 Aug 2026 23:17:43 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wxBz6-0003Xw-Vs; Thu, 20 Aug 2026 19:15:45 -0400
+	id 1wxC0T-00049B-Us; Thu, 20 Aug 2026 19:17:09 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wxBz6-0003XW-8l
- for qemu-riscv@nongnu.org; Thu, 20 Aug 2026 19:15:44 -0400
-Received: from mail-pf1-x436.google.com ([2607:f8b0:4864:20::436])
+ id 1wxC0S-00042K-0p
+ for qemu-riscv@nongnu.org; Thu, 20 Aug 2026 19:17:08 -0400
+Received: from mail-pl1-x62c.google.com ([2607:f8b0:4864:20::62c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wxBz3-0007VP-Ej
- for qemu-riscv@nongnu.org; Thu, 20 Aug 2026 19:15:44 -0400
-Received: by mail-pf1-x436.google.com with SMTP id
- d2e1a72fcca58-848761b5897so144316b3a.3
- for <qemu-riscv@nongnu.org>; Thu, 20 Aug 2026 16:15:40 -0700 (PDT)
+ id 1wxC0P-0007am-G6
+ for qemu-riscv@nongnu.org; Thu, 20 Aug 2026 19:17:07 -0400
+Received: by mail-pl1-x62c.google.com with SMTP id
+ d9443c01a7336-2d53197d8b5so4627045ad.3
+ for <qemu-riscv@nongnu.org>; Thu, 20 Aug 2026 16:17:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1787267739; x=1787872539; darn=nongnu.org;
+ d=linaro.org; s=google; t=1787267824; x=1787872624; darn=nongnu.org;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=lUw/tl68lr0AGsM4Oc3dKTj4tWdEtIV3qnHlengnk2o=;
- b=XKgS/hXsu9hRLXF06zgJAskDUlJCLjFtk7zsIUkM14Q2UbQ+KmcndFVAgCfrE9wQiO
- 8Oi/RLLTL0JjtIFXfOMFdhdSh8Ktqv5G42OhsHLPY7/HftptJXiQjtRCw42VoTzs6Wb9
- 4lPgfVKcPDWXC2QB2MNpplGiobkSA8HlNfPuz14xSzJGeewaa6tFYCvGS57SPNnU4ruw
- tXOleZ9sZcwPvUKxLooILowtHek+eX/EHIf+aQomfblFoWxp33/0okt0uMlXoRvAS3hx
- eqOzm+kB2KFXsTfAMVb5cuKH7rDyEIgtnIGzCnnJ9VzC8WsV//NEhIowPOEoy20A8yBK
- yTaA==
+ bh=K4PttROwzfD65LdoSoGFqNE1dKR3I+aL1/VrUtik2/o=;
+ b=MEKPQ7mSUnKWMoiedBof3HiyoSQKrMCuNMxU2LHTBRskUWXlgMrlmfQDC9dt+7LhtE
+ W/iYz9Ty3bdkXnlZDMXEv9nr9oD8wAIAMgvrD51b8zGs+lgzqTZksWPK1C+/afxPWl9m
+ uJCCZDXEzSG7btocu7GBCm0paD4XCpBPorqQCKrmkfgwxRfffQ+rCDHyEbabY3CA7cil
+ aldDSW7w4fW1f0+K5TqTciNiqLqKHukgM+vLCsQjLOuaLhDPJ3793DPKTv0+uDuDhAGB
+ 3TP1M+I+tXPH683VB002vJdBXDdhzPuzJKTtH2sCcwsbDInEibEdx0G9OYfXPiFOiQPt
+ Xcqg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787267739; x=1787872539;
+ d=1e100.net; s=20251104; t=1787267824; x=1787872624;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=lUw/tl68lr0AGsM4Oc3dKTj4tWdEtIV3qnHlengnk2o=;
- b=Six0W0DS6ORjzP95BwbospfEeTcXkRvFHRrtGQAfnZUhy8hdEqGsXB71WXHxb98rZU
- DjT/PsKXlxz9AzDebVEcwxonAJfnIWNSWeqg5sNNcTaChaCAHCKSJIeoUNqUF76QR9Es
- HAOix2Fkm5UvfvBKCy/kJAkifzcVMwntZSk1oxD0M4A83f2C0JFK+gMKvVpKW8iZCWK8
- 8kMU2Ska58KiVx35QzKMZ2MkXwAJpUb+bP1MdqguAnolV8D7xNwaUw3hOb5hV62Nwvlz
- cuWBDRCkmkQhKoRLZRhNFN7b/yVnJTtCsj0wNiNDs+dTAdczYDKg259MInr05r0VF9vB
- DM4w==
-X-Forwarded-Encrypted: i=1;
- AHgh+RqGq0IYmB+ZHNGElHTr+k/gy4Yicyiv8fGrQEJPJcscaDonLEOBxqBXwNZi/ma0hcVTyaSAY/DWqgEU@nongnu.org
-X-Gm-Message-State: AFuF++mKaUj59mbPpjrP+wdOcqNtg6ZBG0LG4NqX28mpDHe/5BJSQ2mm
- OMm1+5Fn60qwlDjWizLAxKI2xpB2eIK3i/zZSO9z0Mm9z2GKMRP7/lbMdzoyXFNdCKE=
-X-Gm-Gg: AR+sD10iPn2izPF/qIYkjAsxDWq4sGppOFbEBxFJp083WRSAAPBXaO5RR++p1Zn66Zg
- PkHvNu9ucmoEc5zkkHi4OrPfUAJAfGbvS8Q9es4vXD7bXNAwKG/jLtgcjRRbB+Df584UT/0HB9w
- WA6qLhl6/AhkhMQ6ZV239Yp8D0Mf0DVOrVeON4GCpSx+03HILE1f1fwbhge5eC0/RfLYMKVNSzY
- ZR2iRONoBCbygY+r3L6gnNVzQ2t4Dvh4B/MoIPVSquTDUQt+6cCd8Iwoeg2ccvd/ninsi7kemP/
- 8S2r+LCx7x1Lx0QxCdyLspHogQeYpkDyjy5ZwHYoA+kj3n0YYad9FvuxsIzoQM1OqLERaeudsnY
- XZJuq5oG02qCtgaKHL8IIzAjs8GbIch/FlfvYyHv0Pp6NQokh63OnTNqEvID8wk0L4U2hbx0C2s
- GJuWPFt576KKCe+5/VFqg5y90qTgOe3WGmH9GjXvWfnwyQ5cw/dLKpbBDdxy4O5tE1dVF4Oqpxj
- CJb
-X-Received: by 2002:a05:6a00:2ea1:b0:84c:5b65:ef86 with SMTP id
- d2e1a72fcca58-851fa060bf6mr2280857b3a.17.1787267739475; 
- Thu, 20 Aug 2026 16:15:39 -0700 (PDT)
+ bh=K4PttROwzfD65LdoSoGFqNE1dKR3I+aL1/VrUtik2/o=;
+ b=W8HLSTDecoMpzG/lBTimBeu//733s1T+pccE+wDKxLnn9B5+CgyS4UHAByOlE1GxzJ
+ 7WbDZYazmhchx6NekPV2NZrwaX07FRCWRjGpIP4Br6aMM5Yc+K/ValOruRjuZOK5HH3J
+ GzJs+eHHduowpmPl8GoJFmthVgJ2YGItM+ppHnW9LNobf+tJK+NW4FFO+Vy0IFgOopPe
+ QbtW86hJrrdegSd2OOpdkUjgw/RtseoO6lhj1dd93QaKU2juTpJt75mH+zqgaXm0YkdV
+ BDqvrJNu1NYqweLwhgXTQmZC448/0tDKnL+6us69cXt4X55svGpzwpXdj0rGlFQ5iC5i
+ yMQA==
+X-Gm-Message-State: AFuF++nL/FttibxbwgqXRU0YA5Xlzf6VVuccNbRI0CYBtB1gUsaZOyTC
+ /J4Wrcjyz2CDqRKPzdoXl32fic4qhSDamANgWMdyGGoMOCvNsnQVpy861XSsxdcCKb8=
+X-Gm-Gg: AR+sD11s5av0dDq1PacrINK2ukcfOu1WieWVZmwhTXAvVrMFnGg+tM/bQ117fy5csPK
+ KLmu/Q04qV/GDo2lfqoA3RKLtv37Jk1K71FGwGF1nTmXAAPqRaYRgVvgmfnj8m5rs4y9YQhDJEt
+ DcWXMk9aiCZgL1NlW/uqukmkRhtL8ADfoPnuGcMUzHlk9uO7PYMKpAtqOXcVPq3XMITz5Wx4EoJ
+ 67Q/2T0qLx8+/3d2hBZ9pPdsKXD/w63mPpmqeLPmx28FJc/M/0bJ9LvDSGyOGUv+D86PgTdvNtw
+ HzvkVdUPP4azevcnAS+wtvhksX1eWwfgMfwLD1PJqhY3xQqLdaCy3cv8aofQWaoEbjW59Mjq182
+ hkoJi2yKiEVjkeEYGm4CTJxhPkCiVxD2AKwNoimVR7+fw+Ex/vbkYCX1jthPxnAD6+BFAvyAy7r
+ KMFi28SEzb/aj/FAEyxus7AgqmW4mj1oHOo+lWaqHuMlEOIpXEdu3yyde8Y/SGB9a0likNOTuqy
+ QyQ
+X-Received: by 2002:a17:902:e784:b0:2cf:ba10:6d6 with SMTP id
+ d9443c01a7336-2d64af6f8dbmr43305195ad.4.1787267823862; 
+ Thu, 20 Aug 2026 16:17:03 -0700 (PDT)
 Received: from [172.20.6.151] ([108.174.179.84])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-851d365378esm2107761b3a.45.2026.08.20.16.15.38
+ d9443c01a7336-2d62e3d2f09sm12434385ad.78.2026.08.20.16.17.02
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 20 Aug 2026 16:15:38 -0700 (PDT)
-Message-ID: <89f4bf70-7ac9-4356-85e9-114d252c19b6@linaro.org>
-Date: Thu, 20 Aug 2026 16:15:35 -0700
+ Thu, 20 Aug 2026 16:17:03 -0700 (PDT)
+Message-ID: <25229622-88a8-4a54-9a45-45cc53aaa78d@linaro.org>
+Date: Thu, 20 Aug 2026 16:17:00 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH 09/13] cpus: Add const-qualified CPU environment
+Subject: Re: [PATCH v2 13/15] cpus: Add const-qualified CPU environment
  accessors
 To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
  qemu-devel@nongnu.org
-Cc: qemu-s390x@nongnu.org, Paolo Bonzini <pbonzini@redhat.com>,
- Peter Maydell <peter.maydell@linaro.org>, qemu-ppc@nongnu.org,
- qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
- =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@mailo.com>,
- Zhao Liu <zhao1.liu@intel.com>
-References: <20260820104730.25462-1-philmd@oss.qualcomm.com>
- <20260820104730.25462-10-philmd@oss.qualcomm.com>
- <0b70e3cc-e14f-4737-b265-c7d12898169a@linaro.org>
- <854739cc-1275-4324-aaea-576f0a504172@oss.qualcomm.com>
- <fb2425af-9f89-4413-a31e-1f22fd42d869@oss.qualcomm.com>
+Cc: qemu-riscv@nongnu.org, Peter Maydell <peter.maydell@linaro.org>,
+ Paolo Bonzini <pbonzini@redhat.com>, qemu-s390x@nongnu.org,
+ qemu-ppc@nongnu.org, Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+ qemu-arm@nongnu.org, =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?=
+ <philmd@linaro.org>, =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?=
+ <marcandre.lureau@redhat.com>, =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?=
+ <philmd@mailo.com>, Zhao Liu <zhao1.liu@intel.com>
+References: <20260820201356.29775-1-philmd@oss.qualcomm.com>
+ <20260820201356.29775-14-philmd@oss.qualcomm.com>
 From: Richard Henderson <richard.henderson@linaro.org>
 Content-Language: en-US
-In-Reply-To: <fb2425af-9f89-4413-a31e-1f22fd42d869@oss.qualcomm.com>
+In-Reply-To: <20260820201356.29775-14-philmd@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::436;
- envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x436.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62c;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -115,59 +112,23 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 8/20/26 09:50, Philippe Mathieu-Daudé wrote:
-> Actually simpler and even well readable:
+On 8/20/26 13:13, Philippe Mathieu-Daudé wrote:
+> From: Philippe Mathieu-Daudé<philmd@linaro.org>
 > 
-> -- >8 --
-> diff --git a/include/exec/cpu-common.h b/include/exec/cpu-common.h
-> index 6594f7fa1b..d67d008236 100644
-> --- a/include/exec/cpu-common.h
-> +++ b/include/exec/cpu-common.h
-> @@ -85,21 +85,11 @@ static inline bool cpu_loop_exit_requested(const CPUState *cpu)
->    *
->    * Return the ArchCPU associated with the environment.
->    */
-> -static inline ArchCPU *env_archcpu(CPUArchState *env)
-> -{
-> -    return (void *)env - sizeof(CPUState);
-> -}
-> -
-> -/**
-> - * env_cpu_const(env)
-> - * @env: The architecture environment
-> - *
-> - * Return the CPUState associated with the environment.
-> - */
-> -static inline const CPUState *env_cpu_const(const CPUArchState *env)
-> -{
-> -    return (void *)env - sizeof(CPUState);
-> -}
-> +#define env_archcpu(env) _Generic(*(env), \
-> +            CPUArchState: \
-> +                (ArchCPU *)((void *)env - sizeof(CPUState)), \
-> +            const CPUArchState: \
-> +                (const ArchCPU *)((const void *)env - sizeof(CPUState)))
+> Use _Generic() controlling-expression to add the const-qualified
+> variants of cpu_env(), env_cpu() and env_archcpu(). This allows to
+> safely access CPU architecture state when it should not be modified.
 > 
->   /**
->    * env_cpu(env)
-> @@ -107,9 +97,10 @@ static inline const CPUState *env_cpu_const(const CPUArchState *env)
->    *
->    * Return the CPUState associated with the environment.
->    */
-> -static inline CPUState *env_cpu(CPUArchState *env)
-> -{
-> -    return (CPUState *)env_cpu_const(env);
-> -}
-> +#define env_cpu(env) _Generic(*(env), \
-> +            CPUArchState: \
-> +                (CPUState *)((void *)env - sizeof(CPUState)), \
-> +            const CPUArchState: \
-> +                (const CPUState *)((const void *)env - sizeof(CPUState)))
+> Alias env_cpu_const() which is still used.
 > 
->   #endif /* CPU_COMMON_H */
+> Suggested-by: Richard Henderson<richard.henderson@linaro.org>
+> Signed-off-by: Philippe Mathieu-Daudé<philmd@linaro.org>
+> Signed-off-by: Philippe Mathieu-Daudé<philmd@oss.qualcomm.com>
+> Reviewed-by: Marc-André Lureau<marcandre.lureau@redhat.com>
 > ---
-
-Exactly what I had in mind, thanks.
+>   include/exec/cpu-common.h | 30 +++++++++++-------------------
+>   include/hw/core/cpu.h     | 17 ++++++++++++-----
+>   2 files changed, 23 insertions(+), 24 deletions(-)
 
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
