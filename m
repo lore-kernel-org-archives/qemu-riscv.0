@@ -4,103 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAFECC5DF81
-	for <qemu-riscv@archiver.kernel.org>; Thu, 20 Aug 2026 05:39:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37950C5DF89
+	for <qemu-riscv@archiver.kernel.org>; Thu, 20 Aug 2026 10:00:55 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wwvUI-00020h-Kj; Thu, 20 Aug 2026 01:38:52 -0400
+	id 1wwzZR-0005hT-Ew; Thu, 20 Aug 2026 06:00:25 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1wwvU4-00020E-Kb
- for qemu-riscv@nongnu.org; Thu, 20 Aug 2026 01:38:39 -0400
-Received: from mail-yx1-xb136.google.com ([2607:f8b0:4864:20::b136])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1wwvU0-0002UW-3W
- for qemu-riscv@nongnu.org; Thu, 20 Aug 2026 01:38:35 -0400
-Received: by mail-yx1-xb136.google.com with SMTP id
- 956f58d0204a3-66c9995ca60so1074888d50.1
- for <qemu-riscv@nongnu.org>; Wed, 19 Aug 2026 22:38:31 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1787204310; cv=none;
- d=google.com; s=arc-20260327;
- b=fYf8ZOP6gKi2+Hd6hnfYwcFdsojz1SJXdD3B/82y98soJmCREmxOd3CpDzLOoElRQv
- GCkD1hA4E7NwrCI7qJ0aqwPH6sRzFCYbWNPlHMBW7xzuJ/5Ou5lt9kz6YD8LRZG0lcqM
- ogCjEB+lXzLTipvLxLRLkJqIfcpuSeD+jDtD8PlLz9bb8LHMozveUp7kQm2nCXFpeY33
- sb44MSS/WTod8vD6ALPGnNrHCzanbTDXfZTGnrGkfluvk1tbKkPbYUPQHXhEjVgxdJH9
- Vw4tG9wRvWiQXcjD7geakFVeHBS1wMz3MHVagFA2xszYbnT9prKZqB1GIXc5s/CQWFrs
- t+sw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=8tAPdeXuFOSer+0GgMhti1jiYqc5de8tbD4UHaAkuUo=;
- fh=NieJglNghRCGdDYtBFv73Xtf+Ny/THm0L9d0Y4v76tg=;
- b=Dd85d0oAAhMzgdlN38VEJ7E3XOklSlFR+LScJa5h2YwwXj5DLrluQJouCzWDLzsxSU
- 5iNjPITki+3G2OMcNI4X/IZv35ByMlQBfgYfWdIhL0j0f6YbBCRlYr7ZQUg3WlekxDpW
- XF8rKFIF41NL4EJabTvImDSsILajWMUFUJRh8JAmYTjwnxA9Y0wpHRyGeD/XRYSpZnoy
- MIdYYpHTwuFh+mDqsY81IMf3W9wsUcGmyBdUyedCMhyZ+BqPN2uRcZexLppq9M1cO+rS
- Khtm4UQBpPO2BkAZGnJ3881q5AfCKiPOLjYYRm9drtCGUvopwMFb90P88YFG8XbDcCu8
- 5htA==; darn=nongnu.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=jms.id.au; s=google; t=1787204310; x=1787809110; darn=nongnu.org;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=8tAPdeXuFOSer+0GgMhti1jiYqc5de8tbD4UHaAkuUo=;
- b=DmNqyP8LBSW3KZA7y+7jBLa6tXoLEcB1vUnm8ZDM1tIUTlUozKGgDSWDvAJbwuwDO8
- lH5ypelE4sgE/wxwvg1kTR7sc64iNYsv1ALMaoK5OR4/FrotrZgEVbVuyKc8DWDA3/SY
- wq3O2w6tEyk7NG1Zrwb7uICW7lUL2Sp7bfkik=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787204310; x=1787809110;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=8tAPdeXuFOSer+0GgMhti1jiYqc5de8tbD4UHaAkuUo=;
- b=WHl06WEogF2IM3tOuOcgncibE6a+4+/XgVgnnn7cqx8fs0OETyleE0/cz1rZ9oRLSk
- ddhn8kvkfpEQt1+TMjItSoS63K9uCE+yxgvloEJfL+9Dc2WVcm4bnJPC0D4FsQI9hEuy
- XQ1LQL3pn5rkAxvjwf1HbdvHDDXqsG5UJH0/ZWXACjZcE7tA13v/CROLVI+Tyxksm1O/
- AIVVddYOPchGfeqKqC4M8WFyuByd7EtBK+mg38HIQaOSPmFYJSUF9ZtHqRY17aEmUxVP
- WUkv+fZ1koPbtHgtw+PZUU7uMpvYwstKc8LyHM30NlKraW+15NW4ahqwmxOT9YmqUK4Q
- uIlQ==
-X-Gm-Message-State: AFuF++l5TiVAsoOihrJCe/VYCQpxr1xf6JdEHFLqjxsjGxCRcm3Aiubh
- g3RrhYSVqI5KOqy7norxt/c+MPa/vTOW7VvZ5bAihhvvbyrrs8vwNutpgiP9d+3lrDjazMzbCWh
- Cz9x6dp6VKSrU2r6JbrcMnyRUj4febIY=
-X-Gm-Gg: AR+sD11TKyGsD33fAe8Q2KotT34M5lnbFxfVB6Y3UfMbDB6DMqFA11ybhq20HkPoU50
- MNPgA5Hh5ZM31fsv8770luzFYyrAIxVfucyAaaojlDCFnw195zJZEgivVZFQkd8+7VcYC63Hg8U
- Xq2XzINLjnoxt0cnneicpAYi5ZtCFTkiU/mgJdOMlzQwri1Bftv6I0PQ+eD1vPB6hvqsXnfklqH
- qOIKqGK8HnJqxTHJTN91VPkl5o2UL/nF5k2+ULSPKkwJslxC/1VeChdoUvpaI8ZfYvk+xvPWosA
- Idk4pwUUEFioTTDX6Q3aaj4x2lCvmKnlfNcy4B1qou1Syxy753mzbxteG1pgUbnuvY6No660FAz
- gC77oS7/3A0gfVA1AHVEDZYg553LcUdlhLxHKdIxSruIfhb3ZJpgnOwS6WudHokYbdffSjcZiDP
- pYkfV/b94hWHuzz7IFCMZQUn49Tg==
-X-Received: by 2002:a05:690e:4507:20b0:66b:28a9:5729 with SMTP id
- 956f58d0204a3-66cd68909d4mr1079939d50.8.1787204310251; Wed, 19 Aug 2026
- 22:38:30 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <xiaoou@iscas.ac.cn>)
+ id 1wwzZP-0005hG-E1; Thu, 20 Aug 2026 06:00:23 -0400
+Received: from smtp21.cstnet.cn ([159.226.251.21] helo=cstnet.cn)
+ by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
+ (Exim 4.90_1) (envelope-from <xiaoou@iscas.ac.cn>)
+ id 1wwzZK-0006Zk-Or; Thu, 20 Aug 2026 06:00:23 -0400
+Received: from [10.213.18.251] (unknown [36.110.52.2])
+ by APP-01 (Coremail) with SMTP id qwCowABXKu4m0IZqLK8hBg--.35485S3;
+ Thu, 20 Aug 2026 18:00:06 +0800 (CST)
+Content-Type: multipart/alternative;
+ boundary="------------VxBiBoWHxAm8TY48GO7wZgjL"
+Message-ID: <b6d54543-bf3a-4ee3-aad5-a9edbd7a8240@iscas.ac.cn>
+Date: Thu, 20 Aug 2026 18:00:06 +0800
 MIME-Version: 1.0
-References: <tencent_4EEBFC805F3E59863BEDC38094EF5A109206@qq.com>
-In-Reply-To: <tencent_4EEBFC805F3E59863BEDC38094EF5A109206@qq.com>
-From: Joel Stanley <joel@jms.id.au>
-Date: Thu, 20 Aug 2026 15:08:19 +0930
-X-Gm-Features: AcwNN1X7R3F2N1_8svoQgdgp7EIDnIe3SCNkCgp0YjzHIq1wWDKZ8dv6vARowkc
-Message-ID: <CACPK8XefKWYjBqZrhbgf62QaSGqdgGMFwVbB4uwoWz+4ZfhmkQ@mail.gmail.com>
-Subject: Re: [PATCH v3] riscv/virt: Add optional UART1
-To: Yanfeng Liu <yfliu2008@qq.com>, alistair.francis@wdc.com
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
- pierrick.bouvier@oss.qualcomm.com, sunilvl@ventanamicro.com, 
- palmer@dabbelt.com, liwei1518@gmail.com, daniel.barboza@oss.qualcomm.com, 
- zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b136;
- envelope-from=joel.stan@gmail.com; helo=mail-yx1-xb136.google.com
-X-Spam_score_int: -16
-X-Spam_score: -1.7
-X-Spam_bar: -
-X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.001,
- FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.25,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 06/18] target/riscv: Add packed SIMD shift instructions
+To: Max Chou <max.chou@sifive.com>
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com,
+ daniel.barboza@oss.qualcomm.com, zhiwei_liu@linux.alibaba.com,
+ chao.liu.zevorn@gmail.com, Chao Liu <chao.liu@processmission.com>,
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+References: <cover.1784280142.git.xiaoou@iscas.ac.cn>
+ <193352ab49c6febc51250ececb4c431ffa165be6.1784280142.git.xiaoou@iscas.ac.cn>
+ <aoXO5KIBKDQZSdd4@sifive.com>
+From: MOLLY CHEN <xiaoou@iscas.ac.cn>
+In-Reply-To: <aoXO5KIBKDQZSdd4@sifive.com>
+X-CM-TRANSID: qwCowABXKu4m0IZqLK8hBg--.35485S3
+X-Coremail-Antispam: 1UD129KBjvJXoWxGFWfGFWUJF4UJw1fJw1DZFb_yoW5AFWfpw
+ s3Kw13t397tFWfW3yfKF4UAa15Gr4rK3WYqwn7X34rZ398Xrs3ur1aqw4akF1UGFy8Jr1a
+ ga12yr45uFWxZaDanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUvab7Iv0xC_KF4lb4IE77IF4wAFF20E14v26r4j6ryUM7CY07I2
+ 0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rw
+ A2F7IY1VAKz4vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xII
+ jxv20xvEc7CjxVAFwI0_Gr0_Cr1l84ACjcxK6I8E87Iv67AKxVW0oVCq3wA2z4x0Y4vEx4
+ A2jsIEc7CjxVAFwI0_GcCE3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAv7VC0I7IYx2IY
+ 67AKxVWUtVWrXwAv7VC2z280aVAFwI0_Gr1j6F4UJwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7
+ xvr2IY64vIr41lFIxGxcIEc7CjxVA2Y2ka0xkIwI1l7480Y4vEI4kI2Ix0rVAqx4xJMxkF
+ 7I0En4kS14v26r1q6r43MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI
+ 8I3I0E5I8CrVAFwI0_JrI_JrWlx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AK
+ xVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI
+ 8IcVCY1x0267AKxVWUJVW8JwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280
+ aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVWUJVW8JbIYCTnIWIevJa73UjIFyT
+ uYvjxUz4SoDUUUU
+X-Originating-IP: [36.110.52.2]
+X-CM-SenderInfo: 50ld003x6l2u1dvotugofq/
+Received-SPF: pass client-ip=159.226.251.21; envelope-from=xiaoou@iscas.ac.cn;
+ helo=cstnet.cn
+X-Spam_score_int: -24
+X-Spam_score: -2.5
+X-Spam_bar: --
+X-Spam_report: (-2.5 / 5.0 requ) BAYES_00=-1.9, HK_RANDOM_ENVFROM=0.711,
+ HK_RANDOM_FROM=0.999, HTML_MESSAGE=0.001, RCVD_IN_DNSWL_MED=-2.3,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -116,28 +80,218 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Sat, 18 Jul 2026 at 11:46, Yanfeng Liu <yfliu2008@qq.com> wrote:
-> --- a/docs/system/riscv/virt.rst
-> +++ b/docs/system/riscv/virt.rst
-> @@ -16,7 +16,7 @@ The ``virt`` machine supports the following devices:
->  * Core Local Interruptor (CLINT)
->  * Platform-Level Interrupt Controller (PLIC)
->  * CFI parallel NOR flash memory
-> -* 1 NS16550 compatible UART
-> +* Either 1 or 2 NS16550 compatible UARTs
->  * 1 Google Goldfish RTC
->  * 1 SiFive Test device
->  * 8 virtio-mmio transport devices
-> @@ -27,6 +27,9 @@ The hypervisor extension has been enabled for the default CPU, so virtual
->  machines with hypervisor extension can simply be used without explicitly
->  declaring.
+This is a multi-part message in MIME format.
+--------------VxBiBoWHxAm8TY48GO7wZgjL
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+
+on 2026/8/20 0:10, Max Chou wrote:
+
+> On 2026-07-17 10:06, Molly Chen wrote:
+>> Signed-off-by: Molly Chen<xiaoou@iscas.ac.cn>
+>> ---
+>>   target/riscv/helper.h                       |  43 ++++++
+>>   target/riscv/insn32.decode                  |  57 ++++++++
+>>   target/riscv/tcg/insn_trans/trans_rvp.c.inc |  43 ++++++
+>>   target/riscv/tcg/psimd_helper.c             | 149 ++++++++++++++++++++
+>>   4 files changed, 292 insertions(+)
+> ...
+>> diff --git a/target/riscv/tcg/psimd_helper.c b/target/riscv/tcg/psimd_helper.c
+>> index 034afe5a054..8b106a336f5 100644
+>> --- a/target/riscv/tcg/psimd_helper.c
+>> +++ b/target/riscv/tcg/psimd_helper.c
+>> @@ -1903,3 +1903,152 @@ GEN_PSIMD_BINOP(mslt, uint32_t, int32_t, uint32_t,
+>>   GEN_PSIMD_BINOP(msltu, uint32_t, uint32_t, uint32_t,
+>>                   EXTRACT32, INSERT32, ELEMS_W, PSIMD_DO_LT_MASK)
+>>   
+>> +/* Shift operations (immediate and register) */
+>> +
+>> +GEN_PSIMD_SHIFTOP(pslli_b, target_ulong, uint8_t, uint8_t,
+>> +                  EXTRACT8, INSERT8, ELEMS_B, 0x07, PSIMD_DO_SLL)
+>> +GEN_PSIMD_SHIFTOP(psll_bs, target_ulong, uint8_t, uint8_t,
+>> +                  EXTRACT8, INSERT8, ELEMS_B, 0x07, PSIMD_DO_SLL)
+> The spec instead specifies a uniform 5-bit mask (shamt = X[rs2][4:0]),
+> regardless of element width.
+> So the SHMASK should be 0x1f for PSLL/PSRL/PSRA.[BS|HS] instructions.
 >
-> +The second UART only exists if a backend is configured explicitly (e.g.
-> +with a second `-serial` command line option).
+> ...
 
-This breaks the docs build. I think you want ``-serial``.
+|You are right. The byte and halfword shift forms should both use the 
+low 5 bits of rs2. I will change their SHMASK arguments to 0x1f in the 
+next revision.|
 
-Cheers,
+>> +
+>> +/**
+>> + * SSHAR - 32-bit scalar variable shift with rounding and saturation
+>> + */
+>> +uint32_t HELPER(sshar)(CPURISCVState *env, uint32_t rs1, uint32_t rs2)
+>> +{
+>> +    int32_t a = (int32_t)rs1;
+>> +    int8_t shamt = (int8_t)(rs2 & 0xFF);
+>> +    int sat = 0;
+>> +    int32_t res;
+>> +
+>> +    if (shamt >= 0) {
+>> +        int64_t shifted = (int64_t)a << shamt;
+>> +        res = signed_saturate_w(shifted, &sat);
+>> +    } else {
+>> +        int right = -shamt;
+>> +        if (right >= 32) {
+>> +            res = (a < 0) ? -1 : 0;
+> According to the p ext isa spec, SSHAR here extracts a sign-filled
+> 33-bit value and then applies RNU rounding. The result here should be
+> 0 for both positive and negative inputs.
 
-Joel
+Yes, I will fix it.
+
+>
+>> +        } else {
+>> +            int64_t rounded = ((a >> (right - 1)) + 1) >> 1;
+> Here may has undefined behavior for negative sources at in-range
+> amounts.
+
+|Right-shifting a negative signed integer is implementation-defined, 
+rather than undefined. QEMU already relies on the supported compilers 
+performing an arithmetic right shift in this case. However, the 
+expression does contain a real undefined-behavior case for a positive 
+source: when e1 is INT32_MAX and right is 1, the addition of one 
+overflows before the result is assigned to WTYPE. I will cast e1 to 
+WTYPE before the first shift so that the shift and rounding addition are 
+both evaluated in the wider type.|
+
+>
+> I think that we could extract the SSHAR implementation from
+> GEN_PSIMD_VAR_SSHAR and share it between here and
+> GEN_PSIMD_VAR_SSHAR.
+
+|Good suggestion. I will extract the common SSHAR operation into a 
+shared helper and use it for both implementations in the next revision.|
+||
+|Thanks for the review.|
+Molly
+
+--------------VxBiBoWHxAm8TY48GO7wZgjL
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <pre dir="ltr">
+on 2026/8/20 0:10, Max Chou wrote:</pre>
+    <blockquote type="cite" cite="mid:aoXO5KIBKDQZSdd4@sifive.com">
+      <pre wrap="" class="moz-quote-pre">On 2026-07-17 10:06, Molly Chen wrote:
+</pre>
+      <blockquote type="cite">
+        <pre wrap="" class="moz-quote-pre">Signed-off-by: Molly Chen <a class="moz-txt-link-rfc2396E" href="mailto:xiaoou@iscas.ac.cn">&lt;xiaoou@iscas.ac.cn&gt;</a>
+---
+ target/riscv/helper.h                       |  43 ++++++
+ target/riscv/insn32.decode                  |  57 ++++++++
+ target/riscv/tcg/insn_trans/trans_rvp.c.inc |  43 ++++++
+ target/riscv/tcg/psimd_helper.c             | 149 ++++++++++++++++++++
+ 4 files changed, 292 insertions(+)
+</pre>
+      </blockquote>
+      <pre wrap="" class="moz-quote-pre">...
+</pre>
+      <blockquote type="cite">
+        <pre wrap="" class="moz-quote-pre">diff --git a/target/riscv/tcg/psimd_helper.c b/target/riscv/tcg/psimd_helper.c
+index 034afe5a054..8b106a336f5 100644
+--- a/target/riscv/tcg/psimd_helper.c
++++ b/target/riscv/tcg/psimd_helper.c
+@@ -1903,3 +1903,152 @@ GEN_PSIMD_BINOP(mslt, uint32_t, int32_t, uint32_t,
+ GEN_PSIMD_BINOP(msltu, uint32_t, uint32_t, uint32_t,
+                 EXTRACT32, INSERT32, ELEMS_W, PSIMD_DO_LT_MASK)
+ 
++/* Shift operations (immediate and register) */
++
++GEN_PSIMD_SHIFTOP(pslli_b, target_ulong, uint8_t, uint8_t,
++                  EXTRACT8, INSERT8, ELEMS_B, 0x07, PSIMD_DO_SLL)
++GEN_PSIMD_SHIFTOP(psll_bs, target_ulong, uint8_t, uint8_t,
++                  EXTRACT8, INSERT8, ELEMS_B, 0x07, PSIMD_DO_SLL)
+</pre>
+      </blockquote>
+      <pre wrap="" class="moz-quote-pre">
+The spec instead specifies a uniform 5-bit mask (shamt = X[rs2][4:0]),
+regardless of element width.
+So the SHMASK should be 0x1f for PSLL/PSRL/PSRA.[BS|HS] instructions.
+
+...
+</pre>
+    </blockquote>
+    <pre dir="ltr"><code>You are right.  The byte and halfword shift forms should
+both use the low 5 bits of rs2.  I will change their SHMASK arguments to
+0x1f in the next revision.</code></pre>
+    <blockquote type="cite" cite="mid:aoXO5KIBKDQZSdd4@sifive.com">
+      <pre wrap="" class="moz-quote-pre">
+</pre>
+      <blockquote type="cite">
+        <pre wrap="" class="moz-quote-pre">+
++/**
++ * SSHAR - 32-bit scalar variable shift with rounding and saturation
++ */
++uint32_t HELPER(sshar)(CPURISCVState *env, uint32_t rs1, uint32_t rs2)
++{
++    int32_t a = (int32_t)rs1;
++    int8_t shamt = (int8_t)(rs2 &amp; 0xFF);
++    int sat = 0;
++    int32_t res;
++
++    if (shamt &gt;= 0) {
++        int64_t shifted = (int64_t)a &lt;&lt; shamt;
++        res = signed_saturate_w(shifted, &amp;sat);
++    } else {
++        int right = -shamt;
++        if (right &gt;= 32) {
++            res = (a &lt; 0) ? -1 : 0;
+</pre>
+      </blockquote>
+      <pre wrap="" class="moz-quote-pre">
+According to the p ext isa spec, SSHAR here extracts a sign-filled
+33-bit value and then applies RNU rounding. The result here should be
+0 for both positive and negative inputs.</pre>
+    </blockquote>
+    <pre>Yes, I will fix it.</pre>
+    <blockquote type="cite" cite="mid:aoXO5KIBKDQZSdd4@sifive.com">
+      <pre wrap="" class="moz-quote-pre">
+
+</pre>
+      <blockquote type="cite">
+        <pre wrap="" class="moz-quote-pre">+        } else {
++            int64_t rounded = ((a &gt;&gt; (right - 1)) + 1) &gt;&gt; 1;
+</pre>
+      </blockquote>
+      <pre wrap="" class="moz-quote-pre">
+Here may has undefined behavior for negative sources at in-range
+amounts.</pre>
+    </blockquote>
+    <pre dir="ltr"><code>Right-shifting a negative signed integer is implementation-defined,
+rather than undefined.  QEMU already relies on the supported compilers
+performing an arithmetic right shift in this case.
+
+However, the expression does contain a real undefined-behavior case for
+a positive source: when e1 is INT32_MAX and right is 1, the addition of
+one overflows before the result is assigned to WTYPE.  I will cast e1 to
+WTYPE before the first shift so that the shift and rounding addition are
+both evaluated in the wider type.</code></pre>
+    <blockquote type="cite" cite="mid:aoXO5KIBKDQZSdd4@sifive.com">
+      <pre wrap="" class="moz-quote-pre">
+
+I think that we could extract the SSHAR implementation from
+GEN_PSIMD_VAR_SSHAR and share it between here and
+GEN_PSIMD_VAR_SSHAR.</pre>
+    </blockquote>
+    <pre><code>Good suggestion.  I will extract the common SSHAR operation into a
+shared helper and use it for both implementations in the next revision.</code>
+<code></code>
+<code>Thanks for the review.</code>
+Molly</pre>
+  </body>
+</html>
+
+--------------VxBiBoWHxAm8TY48GO7wZgjL--
+
 
