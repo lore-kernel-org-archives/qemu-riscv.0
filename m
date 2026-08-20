@@ -4,71 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B636C5DF87
-	for <qemu-riscv@archiver.kernel.org>; Thu, 20 Aug 2026 13:04:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A15BCC5DF81
+	for <qemu-riscv@archiver.kernel.org>; Thu, 20 Aug 2026 13:04:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wx2RT-00008I-P1; Thu, 20 Aug 2026 09:04:24 -0400
+	id 1wx2RQ-0008VN-5l; Thu, 20 Aug 2026 09:04:20 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1wx2RQ-0008Vt-Sf
- for qemu-riscv@nongnu.org; Thu, 20 Aug 2026 09:04:21 -0400
-Received: from mail-pj1-x1035.google.com ([2607:f8b0:4864:20::1035])
+ id 1wx2RN-0008Ug-GT
+ for qemu-riscv@nongnu.org; Thu, 20 Aug 2026 09:04:18 -0400
+Received: from mail-pj1-x102f.google.com ([2607:f8b0:4864:20::102f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1wx2RP-0006lh-5t
- for qemu-riscv@nongnu.org; Thu, 20 Aug 2026 09:04:20 -0400
-Received: by mail-pj1-x1035.google.com with SMTP id
- 98e67ed59e1d1-383b4a3755fso2070072a91.3
- for <qemu-riscv@nongnu.org>; Thu, 20 Aug 2026 06:04:18 -0700 (PDT)
+ id 1wx2RL-0006kh-DX
+ for qemu-riscv@nongnu.org; Thu, 20 Aug 2026 09:04:17 -0400
+Received: by mail-pj1-x102f.google.com with SMTP id
+ 98e67ed59e1d1-381c51fde6bso2574927a91.2
+ for <qemu-riscv@nongnu.org>; Thu, 20 Aug 2026 06:04:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1787231058; x=1787835858; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:sender:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=jm+Bj84TUkcYq9nDwO2PM0NMiH+RaqV9l8SrAI3KExQ=;
- b=e+ZoRz2dni3JINloGi+bIJziiT+5RrJd+jFPlC8YJ2CnKruioiH9r/78gkNbCyoXkz
- QfQlFnJaBRT9dKxEwcW1sIaskl6fR/IfV7ZWMJTfhLq6mId32BleEg9UuLrNtrwyoK/D
- pHbPqNwytH5BWgh3LHej4alRxiyLZVei46+IfmmuGNkCjJDCgrjLfdRfquv9xRgNnHM/
- vfnGSNN5fEzoDj3hnxfT+QMkJQR3Irla24DiUWBjMyO++qmnYhgPga+74Q2Yt3hbsYhg
- Yh5vjb1aFdFKtGnzOyvUOgv3ICE9K1V2hhmblutZm0hnwexm75crIgLLOG1zqylIrg1G
- 24lg==
+ d=gmail.com; s=20251104; t=1787231054; x=1787835854; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:sender:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=pq/Xy8a92/t8aqkyQP4yLvUfAo1eSGhZVQ/Pjs1ehTs=;
+ b=Qs/yRRR5hWZqbB/5kxINY+E3BuSDGBOdn+g5zVxpNXgdUPdBLnWkEwK+X7hbUQb2y6
+ TGWgqYMTELxBL3wR3+Y5TbVflBykwlB1SSetyrOzk/VVmZC3qrxdFVT++z8PoEqskz+a
+ s+qM2ElA82tNB9pkaSECc6VTE5PZEod+6js4ZJpwJ8lnXocceQtKviMDSeD3nBYMiJNj
+ VmzzeCNZvANfH6rLL4xEa5T10Dvt1TA+mAKJABTQQmNtfBt8g0FtDFqNsN02945KrHZa
+ r+z97XDSeM3DgwTB5hX0KcpIf5IUxd0HsVw4FrQYKOnOFBX278KXGtUJfjMLf1qXRHpI
+ VOiQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787231058; x=1787835858;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:sender:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=jm+Bj84TUkcYq9nDwO2PM0NMiH+RaqV9l8SrAI3KExQ=;
- b=Omh0EQctZ4ol6icswwc8bUtRRHy/UqcgEdZAtChWeziyOM1awDLwxm+ajYWPE/QsGj
- EsT2R4CyXt7EIrkJ7HCi+nl2alyeCBNw9RqBXXlsVKkBnKqdrUTULtlknPkqE4s9upTl
- L8xc4E4gxOFCOwXrFLpoSq3tijvTc99tMRHeXpbXEQsusgDRSHqn/s9XEW5mYm5YUfiA
- nsksbnx72mtjPlng32U6Hygo8PyPKMxib24cGGOe6DJikiyQxBm7cDXSaPFNeOjJOOHK
- +X4rOch3AlB5npqQ2HFxogcXMX34pwlzO736zwCCc1fY3CxjYl496pfHHaWdwzANUE5w
- 46rQ==
+ d=1e100.net; s=20251104; t=1787231054; x=1787835854;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:sender:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=pq/Xy8a92/t8aqkyQP4yLvUfAo1eSGhZVQ/Pjs1ehTs=;
+ b=Oqs19g6X7i1PLFvFJGxuklZA/aL/4ngMb4nZEnhgPXLDI2uoBmnU6SCorsc1eN31Bv
+ 0JYcS1FGJSRXf+gFmf+PD0LUL5M+XsZQUpdrcBeggZgK9VcSL5L6plY0ahAWTZhEg8Rc
+ axMfFxlGGgSDDJZ8HVVBhlZ/gpmBxrHhZwVvcWzhYjMhU4uRv/hSh2Hs9qgwua5JyEwQ
+ pI79AMJp8A8F5FLmhifVkNGjKDczzCpy1AvZPCRsz4qb1Nr3C768K3HwvKlV0dsjzrka
+ mRdLFjGT1yCpFf/0hVckpyAEEq1meC1837DCFmEkhYD4N3z9vwNtMlGd8WlgN/H5V0v3
+ pQ/A==
 X-Forwarded-Encrypted: i=1;
- AHgh+Rp90Q0nNAharWvYYm+VtSbUvBDorzDt9gS+WJvezMQJZegxNSASYmajdNZlCQmP3DpmX+Fu6vbK9Db4@nongnu.org
-X-Gm-Message-State: AFuF++lCi8J7J6X3Pur9Jd4AqAWghlU+Bnb9Wi3hJhrmZTA5l2l6m4g5
- Wo4irEIw/hNy51cPTl2XdFXhh7pEBCj5hqQ0wc3nZza4PF5No+SLaMiy
-X-Gm-Gg: AR+sD10w2/DmZZyAbO0t0bThWgp3wg6cRubiGMMhN3zBGbTY5gCyLMe3HU1CJZ9zHmj
- YeK5K14PEw801v56XQPTQFa71qrVrbFC2HqCk/OcP1eOnkXIm8MZ6toPZWoA30rBPgHjifGSsKi
- U7LlKQ7t3nTW4rjG+kG3Ai2I0QDfTLCelGMknwnXGb+nu0cHtpmVqDBExga/whFi1sPbMCkZv98
- LN3W5+K41Mg84mEk1Ke+TzzvaEhE6wz8J733ycn/4eiDraAjOiE0sGb3EfnQHhHllBs1yN/4J6e
- wr4+cCVh/BU/zSFq8mEiyFNBOmy6be5hsfhM6Lq9ZaTEk0PebpZ+71PzSm5qqDlXs1SICn0lxck
- BldFgYQUZTH8n19XT4Adf4n3B5ft1Iho981ndAU4MKXs4s+s7YV6YbqJLxJA6CXx5Kqz0X1Oo9F
- 5XIOC9Myrao/NIGZHbjViJkbMFN+1exJuZBnx+Rx1Tng+zvUIDAjhsdLoBYnxuI9LedmhWPZDOg
- s+DLLeZEgQkVsKMjC8dsY4CDM2VzWdoqahoRdNmfORMynVZI1qbb29A4tAklQtYjZmh5iZ4ZoNr
- EFpHjjl9fl0Wt8R32RQCTA==
-X-Received: by 2002:a17:90b:1e49:b0:38d:ef48:b04 with SMTP id
- 98e67ed59e1d1-39580f6c037mr21406993a91.10.1787231057706; 
- Thu, 20 Aug 2026 06:04:17 -0700 (PDT)
+ AHgh+Rrh/IwZQnvAS0a+gk1n5OP3k3AOdFyQGAKq4jRtu8FAuFoCfy04HAhIkVI++/O63An/tg3X5JIyn9EF@nongnu.org
+X-Gm-Message-State: AFuF++nROgCNN7H9PL4k5VPRG31sSE3mttk/JeWzYTQ48yFTiHD3UYux
+ N715AToZdOaWZ1n3/nPqMzY2PMTNxDzjpMPQ97L2l5OyV2ytDB4HqHqQVLvHja/Z
+X-Gm-Gg: AR+sD10YVXebKbS230iXs6iwE1nkEHQk+RNkLss0qfz43mUfJlLho4Jjsafa1Awidmt
+ Ab3LSJzJH2ToyGMwjIIQ29fArMKX3ejGpCkVIksCYRE7Cio8MW+MuIhYLd2YztbpisroG8eggtL
+ GzPKc+oiY+gScH8ldbj6E5e2RkemUTBAeDwTQQhC0Ab0jgcDxbKBD16EWC3nzQsXm1HYo9hIbFY
+ cM9/e9+90v1Bfh9yNo9eG47Q7D1C3bIWFHEckEk2i2CdiygnIj452aU+T0czw5CWPP4xn1DVETf
+ 8uqMGElq6F3mqBAvBfbRxwuU30IZPSTrSFPmtJX1UNq1a+FpUTtg+Zkv6f8maeGVAB5Iml1T+RF
+ 3uUauFH5ZbHC3FhtvWlKaL+MjyEbyNUiaKQADROfLzb93TUQAq7NZ2iqF+xz5oCZMn+f8dC41+Y
+ kZYJ7Vd5E4ePOz5hVVzAZRijJYIC/sxgEpuOHoPq9M1wSV0OMX6BvxFN5Cbk2UnE4kUCU2ED2EM
+ NRpz/64sidZMgPFby3FROpDmsc8xnTDyQrqIN2SCHHhzJooAoKowM5+P6rmPWABIA5pQSLM84h/
+ F5xJP9EqqD9k+eo/G/B1vQ==
+X-Received: by 2002:a17:90b:4a05:b0:37f:c22a:c188 with SMTP id
+ 98e67ed59e1d1-39580a80a65mr23947640a91.4.1787231053611; 
+ Thu, 20 Aug 2026 06:04:13 -0700 (PDT)
 Received: from donnager-debian.. ([180.150.112.50])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3957faf6849sm6451915a91.10.2026.08.20.06.04.14
+ 98e67ed59e1d1-3957faf6849sm6451915a91.10.2026.08.20.06.04.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 20 Aug 2026 06:04:16 -0700 (PDT)
+ Thu, 20 Aug 2026 06:04:12 -0700 (PDT)
 From: Joel Stanley <joel@jms.id.au>
 To: Alistair Francis <alistair.francis@wdc.com>,
  Richard Henderson <richard.henderson@linaro.org>
@@ -76,16 +74,14 @@ Cc: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org
-Subject: [PATCH 1/2] tests/tcg/riscv64: Vector load test
-Date: Thu, 20 Aug 2026 22:32:20 +0930
-Message-ID: <20260820130223.2762-2-joel@jms.id.au>
+Subject: [PATCH 0/2] tests/tcg/riscv64: Add vector load and store tests
+Date: Thu, 20 Aug 2026 22:32:19 +0930
+Message-ID: <20260820130223.2762-1-joel@jms.id.au>
 X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20260820130223.2762-1-joel@jms.id.au>
-References: <20260820130223.2762-1-joel@jms.id.au>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1035;
- envelope-from=joel.stan@gmail.com; helo=mail-pj1-x1035.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102f;
+ envelope-from=joel.stan@gmail.com; helo=mail-pj1-x102f.google.com
 X-Spam_score_int: -16
 X-Spam_score: -1.7
 X-Spam_bar: -
@@ -109,177 +105,38 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-A userspace program to perform vector loads and stores that cross page
-boundaries, and check the result.
+Hi Richard, I was testing your riscv vector load/store series and
+noticed there were some regressions with page crossing loads and stores.
+We don't have any tests for that in the tree, so I wrote some.
 
-Signed-off-by: Joel Stanley <joel@jms.id.au>
----
- tests/tcg/riscv64/Makefile.target |  13 +++
- tests/tcg/riscv64/test-rvv-ldst.S | 131 ++++++++++++++++++++++++++++++
- 2 files changed, 144 insertions(+)
+The tests trigger assertions in linux-user for me:
+
+  $ make -C build/tests/tcg/riscv64-linux-user run-test-rvv-ldst
+  make: Entering directory 'build/tests/tcg/riscv64-linux-user'
+    TEST    test-rvv-ldst on riscv64
+  **
+  ERROR:../accel/tcg/user-exec.c:810:probe_access: assertion failed: (-(addr | TARGET_PAGE_MASK) >= size)
+  timeout: the monitored command dumped core
+  Aborted
+  make: *** [Makefile:223: run-test-rvv-ldst] Error 134
+  make: Leaving directory 'build/tests/tcg/riscv64-linux-user'
+
+I wrote the assembly one first before realising a C version would be
+easy enough to do too. I'm not sure about using memcmp to check (in case
+it's vectorised) so perhaps that's where the asm wins. I can tidy them
+up and send the preferred version if we decide to put it in the tree.
+
+Joel Stanley (2):
+  tests/tcg/riscv64: Vector load test
+  tests/tcg/riscv64: Add intrinsics version of test-rvv-ldst
+
+ tests/tcg/riscv64/test-rvv-ldst-intrinsics.c |  66 ++++++++++
+ tests/tcg/riscv64/Makefile.target            |  19 +++
+ tests/tcg/riscv64/test-rvv-ldst.S            | 131 +++++++++++++++++++
+ 3 files changed, 216 insertions(+)
+ create mode 100644 tests/tcg/riscv64/test-rvv-ldst-intrinsics.c
  create mode 100644 tests/tcg/riscv64/test-rvv-ldst.S
 
-diff --git a/tests/tcg/riscv64/Makefile.target b/tests/tcg/riscv64/Makefile.target
-index 4da5b9a3b322..68a5ec525598 100644
---- a/tests/tcg/riscv64/Makefile.target
-+++ b/tests/tcg/riscv64/Makefile.target
-@@ -13,6 +13,19 @@ run-test-noc: QEMU_OPTS += -cpu rv64,c=false
- TESTS += test-aes
- run-test-aes: QEMU_OPTS += -cpu rv64,zk=on
- 
-+# Vector load test
-+TESTS += test-rvv-ldst
-+test-rvv-ldst: CFLAGS += -march=rv64gcv
-+test-rvv-ldst: LDFLAGS = -nostdlib -static
-+run-test-rvv-ldst: QEMU_OPTS += -cpu max
-+
-+# Re-run the vector tests at each supported VLEN
-+TEST_RVV_VLENS = 128 256 512 1024
-+EXTRA_RUNS += $(patsubst %,run-test-rvv-ldst-vlen%,$(TEST_RVV_VLENS))
-+run-test-rvv-ldst-vlen%: test-rvv-ldst
-+	$(call run-test, $@, env QEMU=$(QEMU) $(QEMU) $(QEMU_OPTS) -cpu max$(COMMA)vlen=$* $<, \
-+		test-rvv-ldst with vlen=$*)
-+
- # Test for fcvtmod
- TESTS += test-fcvtmod
- test-fcvtmod: CFLAGS += -march=rv64imafdc
-diff --git a/tests/tcg/riscv64/test-rvv-ldst.S b/tests/tcg/riscv64/test-rvv-ldst.S
-new file mode 100644
-index 000000000000..939b3f038b14
---- /dev/null
-+++ b/tests/tcg/riscv64/test-rvv-ldst.S
-@@ -0,0 +1,131 @@
-+/*
-+ * RISC-V vector load/store page crossing test
-+ *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ */
-+
-+    .section .rodata
-+    // Page aligned so the within-page cases never cross a boundary
-+    .set MAX_PAGE_SIZE, 65536
-+    .balign MAX_PAGE_SIZE
-+src_data:
-+    .byte 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17
-+    .byte 0x18, 0x19, 0x1A, 0x1B, 0x1C, 0x1D, 0x1E, 0x1F
-+    .set NUM_BYTES, . - src_data
-+
-+    .balign MAX_PAGE_SIZE
-+pageA_start:
-+    // Fill the page, stopping 8 bytes short of the boundary
-+    .fill MAX_PAGE_SIZE - 8, 1, 0xfa
-+src_cross_data:
-+    .byte 0x20, 0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x27
-+pageB_start:
-+    .byte 0x28, 0x29, 0x2A, 0x2B, 0x2C, 0x2D, 0x2E, 0x2F
-+    .set NUM_CROSS_BYTES, . - src_cross_data
-+
-+    .section .bss
-+    .balign MAX_PAGE_SIZE
-+dst_data:
-+    .space 16
-+
-+    .balign MAX_PAGE_SIZE
-+    .space (MAX_PAGE_SIZE - 8)
-+dst_cross_data:
-+    .space 16
-+
-+.option norelax
-+.option norvc
-+
-+    .text
-+    .globl _start
-+_start:
-+    // Case 1: Load/store within a page. t3 is the exit code on failure
-+    li      t3, 1
-+    la      a0, src_data
-+    li      a1, NUM_BYTES
-+
-+    // SEW=8, LMUL=1
-+    vsetvli t0, a1, e8, m1, ta, ma
-+
-+    // Check the load will cover 16 bytes
-+    bne     t0, a1, fail
-+
-+    // perform load
-+    vle8.v  v1, (a0)
-+
-+    // Store vector content in memory
-+    la      a2, dst_data
-+    vse8.v  v1, (a2)
-+
-+    // Compare first half
-+    ld      t1, 0(a0)
-+    ld      t2, 0(a2)
-+    bne     t1, t2, fail
-+
-+    // Compare second half
-+    ld      t1, 8(a0)
-+    ld      t2, 8(a2)
-+    bne     t1, t2, fail
-+
-+    // Case 2: Load straddles a page boundary
-+    li      t3, 2
-+    la      a0, src_cross_data
-+    li      a1, NUM_CROSS_BYTES
-+
-+    // SEW=8, LMUL=1
-+    vsetvli t0, a1, e8, m1, ta, ma
-+    bne     t0, a1, fail
-+
-+    // perform load
-+    vle8.v  v1, (a0)
-+
-+    // Store vector content in memory
-+    la      a2, dst_data
-+    vse8.v  v1, (a2)
-+
-+    // Compare first half
-+    ld      t1, 0(a0)
-+    ld      t2, 0(a2)
-+    bne     t1, t2, fail
-+
-+    // Compare second half
-+    ld      t1, 8(a0)
-+    ld      t2, 8(a2)
-+    bne     t1, t2, fail
-+
-+    // Case 3: Store straddles a page boundary
-+    li      t3, 3
-+    la      a0, src_data
-+    li      a1, NUM_BYTES
-+
-+    // SEW=8, LMUL=1
-+    vsetvli t0, a1, e8, m1, ta, ma
-+    bne     t0, a1, fail
-+
-+    // perform load
-+    vle8.v  v1, (a0)
-+
-+    // Store vector content in memory
-+    la      a2, dst_cross_data
-+    vse8.v  v1, (a2)
-+
-+    // Compare first half
-+    ld      t1, 0(a0)
-+    ld      t2, 0(a2)
-+    bne     t1, t2, fail
-+
-+    // Compare second half
-+    ld      t1, 8(a0)
-+    ld      t2, 8(a2)
-+    bne     t1, t2, fail
-+
-+pass:
-+    li      a0, 0
-+    j       exit
-+
-+fail:
-+    mv      a0, t3
-+
-+exit:
-+    li      a7, 93        // sys_exit
-+    ecall
 -- 
 2.53.0
 
