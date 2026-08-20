@@ -4,89 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B426C5DF86
-	for <qemu-riscv@archiver.kernel.org>; Thu, 20 Aug 2026 20:16:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 006A5C5DF86
+	for <qemu-riscv@archiver.kernel.org>; Thu, 20 Aug 2026 20:16:20 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wx9Al-0006wN-F8; Thu, 20 Aug 2026 16:15:35 -0400
+	id 1wx9Ag-0006Wr-FM; Thu, 20 Aug 2026 16:15:30 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1wx9Aj-0006sA-MQ
- for qemu-riscv@nongnu.org; Thu, 20 Aug 2026 16:15:33 -0400
+ id 1wx9AV-0006CI-4F
+ for qemu-riscv@nongnu.org; Thu, 20 Aug 2026 16:15:21 -0400
 Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1wx9Ah-0002hi-Na
- for qemu-riscv@nongnu.org; Thu, 20 Aug 2026 16:15:33 -0400
+ id 1wx9AS-0002bE-KL
+ for qemu-riscv@nongnu.org; Thu, 20 Aug 2026 16:15:18 -0400
 Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 67KK7hZY4012826
- for <qemu-riscv@nongnu.org>; Thu, 20 Aug 2026 20:15:20 GMT
+ 67KK7YaD4012721
+ for <qemu-riscv@nongnu.org>; Thu, 20 Aug 2026 20:15:05 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- LWQwdDV2fkgFjhmKLwyo93xfsCf8ZqnI4jIB05mjxx8=; b=QrFNjvV7I+dnZhZv
- RmFAmX0DwQdNmBnjYk89UzgbUIhSr0AKChxNrYs+qw/wHOM/7/Qi07lZzelwLuBu
- GW4olpPXV/M9txB8mmIb97Uw4LsgCduNYk/Mfosll6Fig4wny5ZZtqSE47X+r9pS
- sjrz3TOR2MIFJjKr47AWO5FjLFyQPnhYjmmRHaRjN5AkXDMAEDqkU1rNHcr1I1Ie
- HpD7ztS9gN4On3nxndNyBCHiIo/9D1XOMqToaEbgMBzrhWOINKPQS+XwFTIqWc81
- kWLna5qVQOw2/VIFEDfC8bHKLfgF+sPSuzE4zbbNUj4PUVEkcAA3pbo40JOanEg6
- voIz5Q==
+ fvBIYCS8kU8+XY5bs75QoBPYP88ZzMJVKYNZ4wSfBZ8=; b=hY/rB6grrmx4wRar
+ B+Sby5VNJQNkBuZINlF4EO0c2AqLI4mozZbwmNKUUDJgdGxcd3zOXcvwu8B6qZzU
+ ldzMKhfnvuGWZGu13xbLlw24TWoDUdS0WsKL3+fw7PPohpJ0hM2vGNRTdJtmjHhn
+ J3exhm94935as1kee+TSN+/Dr80N3KgA7UVCHFBVcZXult4c+ohHcpFb7ni4NXrb
+ HVa3Xxxppxjs67BkU+/DR5cq8EifLIK4op0xODiYIGwCrXC6Jg/+BKoUP7q9mRgH
+ fs4Duu5A5MY9eEIgmmyOVIhC6KTmgg6Pez79vZOZsrDFsQuhhH+Pyr8YJ9m/GgKS
+ fu++Yg==
 Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com
  [209.85.160.199])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g5x29k5mu-1
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g5x29k5kt-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Thu, 20 Aug 2026 20:15:19 +0000 (GMT)
+ for <qemu-riscv@nongnu.org>; Thu, 20 Aug 2026 20:15:05 +0000 (GMT)
 Received: by mail-qt1-f199.google.com with SMTP id
- d75a77b69052e-51c1d137a68so3977031cf.3
- for <qemu-riscv@nongnu.org>; Thu, 20 Aug 2026 13:15:19 -0700 (PDT)
+ d75a77b69052e-51bfe3fa93bso2392651cf.2
+ for <qemu-riscv@nongnu.org>; Thu, 20 Aug 2026 13:15:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1787256919; x=1787861719; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1787256904; x=1787861704; darn=nongnu.org;
  h=content-transfer-encoding:content-type:mime-version:references
  :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=LWQwdDV2fkgFjhmKLwyo93xfsCf8ZqnI4jIB05mjxx8=;
- b=cVpC5psV9K8l7uWbJxJnGaLmwfrsfBef8zCq++TkGzPM4ciRNIF/tiaIg3p5tm3s0T
- i2EbLO1+nUDWOLm1edaCJKdnKC6WcGgqTN2q9ZvAJBr4YNThzEjmxhc/lfIgNBoanhTH
- WyqLkxlXu/3yv54/f/gztobngAFBmwysqi7x+amhi4s4x9mKJZfSqqtucdfLqQ+85T0d
- 1/+Titw4yrxCDpo5dDrcx3IpHL9xO/4BfmfQWFRoppnIkolotdpRZNTmsK/GIBe6aNcB
- 9VpZaezvFLvjmeXqQIvZwYD6CXPMM08gkBcfV5kNYopFj7A5IyMFqzBsL2EzphKjYyT3
- CCoA==
+ bh=fvBIYCS8kU8+XY5bs75QoBPYP88ZzMJVKYNZ4wSfBZ8=;
+ b=Z0ippduv0AcAaRKQpdA4JYN3d245meH2U4BqkGDqfLhJgpQ11yynlSUu62NjarprRc
+ S6fRQncuS+9KwdQpf26FeBzlt5e/kH926/yP3uWa7dYE1+JMllV1QTzUklgn2CX2ELpF
+ hsGYtbGgrq9lostMnKl/Rs+/UB+2cMzLPlaIyAgyzE6pYXYE4c1NgEGEl+kcYu/sixH9
+ bXIl1hr++DZcH5eyv5HB4xLGV2ZkIHPuMTLVrJ4kHmxcLQP2b6JlB7Ys1GQ0Ih25uSkf
+ CTYNvthwJPxlI+7JWgIBTPSg0NHuOG5pnozWEfr03JRpSUQUGb+ndNUeSJCFSUIROV0e
+ pEgA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787256919; x=1787861719;
+ d=1e100.net; s=20251104; t=1787256904; x=1787861704;
  h=content-transfer-encoding:content-type:mime-version:references
  :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=LWQwdDV2fkgFjhmKLwyo93xfsCf8ZqnI4jIB05mjxx8=;
- b=b0ChXGLO/xiViA6LuqiNSf3JucBH+2MK7B/uNeg5LTCtVPWlGitJf/UhYUz6BN1YAr
- XVM+ondOq24C1U3h7bgRKOwvZk1N1uePCuCklicPGGhM3fD1c72HJlDpRSGphxv1oovN
- 3QUclBnSOJVlZP/O/EtNPC5npwY4iJ3tKgBp9aR/Pjs3nQ5atMIHMiTKaD4NnYqpK/lZ
- zOLVtIfHpjMN/m25jiJEnHDkeTCBvEwB5zhmabdVCO0rORYQhxc5YGXoy3GpIxy9wRIa
- 981WgTTq3MfVD9twpAnxE5UWQt+Jb1s1SEaUPTdjMnpR9Wt8KW+K1QTlifShCRLlCpP/
- jTSQ==
-X-Gm-Message-State: AOJu0YyLgIf4Fe0wI0jADhCNETgdLP0JqQA0uhFJHpByV7Bf7hHrRTGg
- Lr2luMXVpq8Dr//FgLeEGzfjPtD4xf1XvA1ET1gGeC9NyMgk/VlrkSavJ8Gq54Jd88ueuVeMejF
- QNT/dmrD4CzYnd/8tYRJUVjuJFs5PLhFeNbuYO0+bSIP3kXV9AkyVFb3Yrw==
-X-Gm-Gg: AR+sD10SMDMEk3nlULqRhYLlot2s6O/+H4nKNLKUZFbp7RD2YlruonioB5uhMQzV5qR
- tNApIn8jLGWKlZU+BWHeSM09fi1Pn1JZ43juTuqC7ZqqvixxEXcRJBUilmufgLey5XabKZd/LfJ
- ZfuCyWqIL7P7frfCM7GIvePXAbqqT194ah7kLE55e0JYmPXI8KoTaQAKVN0is96cPozsWoICheY
- JmE+3/hzISqbor6DxPXovKP9RrZ0fQa/mPjOPkfF9Eq2PUXtXI0c78lxee66wRkIoeJERv8v+Mg
- lJfWa6HuKkdCsvqNr6VLT7MpMuQKm+2G0K/zWHiIN77zRlNv0cTzJKQBee8f0GkNZvJDQ5IzvHJ
- uPpXZVI2+ovFTABf7hvm/gPN0JNz27RJ3ss2JjiOfSQ==
-X-Received: by 2002:a05:622a:144c:b0:517:a7ff:935f with SMTP id
- d75a77b69052e-52df565f835mr9788911cf.9.1787256918718; 
- Thu, 20 Aug 2026 13:15:18 -0700 (PDT)
-X-Received: by 2002:a05:622a:144c:b0:517:a7ff:935f with SMTP id
- d75a77b69052e-52df565f835mr9788371cf.9.1787256918246; 
- Thu, 20 Aug 2026 13:15:18 -0700 (PDT)
+ bh=fvBIYCS8kU8+XY5bs75QoBPYP88ZzMJVKYNZ4wSfBZ8=;
+ b=rOZk36fn3ev3wLCsKZfZfO013prP59Zhg35hvQgFUbmR9pSlnaJq0VfM/hnJA4p1BZ
+ BDE2XAabb8rgg803QuBcv8EIQnc8aPjeYapyvBQsqo53F4jdpgWXpMlaiRlVaY2Ab7f4
+ qCjI2z8QafX8SIaM8XqV1E9XCvJJa1zTnlbzP1q+MPdwNQLWQ5auS0AQVMkmVBK/zqps
+ JrSn7nP9nATRRYTg3nRUw7+BXykKKCPZd6Tdhbh4x9xSRaWpph0OONFPo7jMfJEL4SIX
+ yQDgc8ZfH8khzsG1tyRYG2tdSLMX4x1ejGm94YgbNFlPp9EFM6ksIH1MVAGC2muBCYht
+ 2Y3w==
+X-Gm-Message-State: AOJu0YzB0tWSfQc0sUDyGsv9CCyiIzA58M005QDz8Rn2gV8qLFjXs65K
+ /Y7gzMlKE1Dpw4ZVmTA8C+SYyzdFOiEoOj8znAkPuMnjs3FajNBacc0d/J7w88CCsMbCEPq4ywY
+ lvSG+wHerhmW5mLA07RBHd6AH707Bpg1U+k68B2XmvVoc+ZPSQx6JaNYRlw==
+X-Gm-Gg: AR+sD11dMPHMn69wavocdaTRqNyhIpbd8V5En5qAB7G7jacF7CSTRSu/crTS5Nd3lZd
+ sCilAXW0v+yGkldHr1dvnwMGCbwrc1hJx/spMxfCCo0KaElbdNymjw/B82liDgnHfiM6Z8hYEM/
+ Uc00RQ+iH6KuLgyBmeIRHin5095x2EZA174EjjMqba7HXO9JztYjld5t0l8BUILdf8VVk04I2G8
+ Hlqc8dovxJXRkouqn8ZrQe6tL1WXItwwREKIIb2McaOPwWIyTR/Wf1MjGKat5uVKAaun0DXI3ZU
+ wrQlG5d+pSKoj4V4ZgqW6GKBDSeqVNghE6yqbXAv86KaF00OIcIncKzDwRR87fiUKA9psQQQ0mu
+ ODjQ9DOVHJECXg2np2WSDS1Ybmu1MDCg3ZW/gW8JeDQ==
+X-Received: by 2002:a05:622a:4cc7:b0:52d:8743:bc83 with SMTP id
+ d75a77b69052e-52df5a4041amr10547681cf.34.1787256903354; 
+ Thu, 20 Aug 2026 13:15:03 -0700 (PDT)
+X-Received: by 2002:a05:622a:4cc7:b0:52d:8743:bc83 with SMTP id
+ d75a77b69052e-52df5a4041amr10547121cf.34.1787256902918; 
+ Thu, 20 Aug 2026 13:15:02 -0700 (PDT)
 Received: from localhost.localdomain (pmd666.hd.free.fr. [88.187.86.199])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-482b14b8022sm12321331f8f.18.2026.08.20.13.15.16
+ 5b1f17b1804b1-499b98e765dsm108725e9.3.2026.08.20.13.15.00
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 20 Aug 2026 13:15:17 -0700 (PDT)
+ Thu, 20 Aug 2026 13:15:02 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, Peter Maydell <peter.maydell@linaro.org>,
@@ -94,42 +94,39 @@ Cc: qemu-riscv@nongnu.org, Peter Maydell <peter.maydell@linaro.org>,
  Richard Henderson <richard.henderson@linaro.org>, qemu-ppc@nongnu.org,
  Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, qemu-arm@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
+ Ilya Leoshkevich <iii@linux.ibm.com>,
  =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu@processmission.com>
-Subject: [PATCH v2 10/15] target/riscv: Constify CPURISCVState for various
- cpu_*() getters
-Date: Thu, 20 Aug 2026 22:13:50 +0200
-Message-ID: <20260820201356.29775-11-philmd@oss.qualcomm.com>
+ Eric Farman <farman@linux.ibm.com>, David Hildenbrand <david@kernel.org>,
+ Cornelia Huck <cohuck@redhat.com>, Matthew Rosato <mjrosato@linux.ibm.com>
+Subject: [PATCH v2 08/15] target/s390x: Constify S390CPU for cpu_has_*()
+ getters
+Date: Thu, 20 Aug 2026 22:13:48 +0200
+Message-ID: <20260820201356.29775-9-philmd@oss.qualcomm.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260820201356.29775-1-philmd@oss.qualcomm.com>
 References: <20260820201356.29775-1-philmd@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-ORIG-GUID: 4BdpqyO3TvmrLibU0UeyTPX7jJl8NkWe
-X-Authority-Analysis: v=2.4 cv=V8BNF+ni c=1 sm=1 tr=0 ts=6a876057 cx=c_pps
+X-Proofpoint-ORIG-GUID: oqjgyWWi9ebdr7GM8-WJ0KiThGa0nkBM
+X-Authority-Analysis: v=2.4 cv=V8BNF+ni c=1 sm=1 tr=0 ts=6a876049 cx=c_pps
  a=WeENfcodrlLV9YRTxbY/uA==:117 a=4s3hRJSeHn4rkQlkrse1kQ==:17
  a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=M51BFTxLslgA:10 a=s4-Qcg_JpJYA:10
  a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
- a=EUspDBNiAAAA:8 a=20KFwNOVAAAA:8 a=T9gU_B0lrst8XM-M1voA:9 a=3ZKOabzyN94A:10
- a=QEXdDO2ut3YA:10 a=kacYvNCVWA4VmyqE58fU:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODIwMDE1MiBTYWx0ZWRfX0O9sfNOu77jo
- rn2KYTxIJFfBr6+kVAXYqUfoRKyWO7mkzjCSHJSuubUmd8cmMlzznsSoj4AN5Xi4OrsfbQppRL7
- cjFAT4DGmY55jxvHhAwG+A3LOudI694bwIqUTp4dawln2TteZGFYdFrbT8/T7GgMdYQ0xi9c5Eb
- kj2lBki7//abBWIDsNZtYX+rwgDP3UWwrxuhj/xjqS1sTxsWwrVddaOnZgEEWUis7k4KIpqnyQo
- O6X6IoDmzyVRUFkYTejhBM/kkjXlFWDcltbRGr7XLjSJ2fgMT5JyQCsVhofaSlTfJkEWebr9Dig
- Nroskm6Tu08ACWYAeg4YwPSMmisBUePIfjR2mjO50l0APncSsbvnPqfKtJC2IgpBWYeTBufUnOK
- Vh7st1859DkmTQ6/lvkxzBQXbDrzAovKolYsv0xR2CiCeCkhZrMaXT2tIKN8ra5mg2aCkR5DcbF
- MtXE1zvnYvrJFjwgQ2g==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODIwMDE1MiBTYWx0ZWRfX6HbcOlhTmXpc
- EHGm6IOj+IWU6ynYA+SNjGVhvbMw7oCRb3HiGIEyWymkSMvem5t1pZVj9dMAdwVsbnfDFqxJe4E
- 3mWXMlz0sMxsNDY+A1s/fqorktmn6N4=
-X-Proofpoint-GUID: 4BdpqyO3TvmrLibU0UeyTPX7jJl8NkWe
+ a=EUspDBNiAAAA:8 a=VnNF1IyMAAAA:8 a=20KFwNOVAAAA:8 a=mU8mmpTTODwToQi1tsoA:9
+ a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10 a=kacYvNCVWA4VmyqE58fU:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODIwMDE1MiBTYWx0ZWRfX6loRpK8Wt8D1
+ nfg4WhEHaQi0MP01gJ2D2umqcGc+fFGMjCeLTwRarmSNiTGcEPg/6AtyeyCkFoH9oOsJvcHN4Ec
+ W/Exis5/H8pR7H269u0Q4OmHyRMkmwyvV9R/aQY6JV2/2oimO9EKZBOkPDu7k4yotZPwj032P9G
+ DpW+Y6LQ258z5ZxaXaRXgo8OGauuBVXSKYczvwFgSuR3zz7ODxOL6tavI6XnnhpOz3JrKMre9OC
+ bwT6maw8vAeqe9atYW6c5/V9UKX6okP55z/lgNaoGr9DiDTb4bXIkVdPo5rGmnkU2yKfrNN8M/u
+ So93aDEUmhOJXbAsPBUUS5ObYHVkKRHm1VEEGzcNsAoxzbd0amCVTLR9UsK2pg0GRm1sw7//lVV
+ hJuhhcJTlA+yZJIpp14vzV5uiKzrG2qI9syTGUvw4T1d8V4j2HBp8AwFEZutCEwOVVoqg/X1NOG
+ LQbZkaOnamH/zQxPsTw==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODIwMDE1MiBTYWx0ZWRfX3PZL2Xzb5Dxa
+ K1pSi1QGrKUIFPHWj64rCycRuDapKEgJhH9FkTlkqYES5BfNrq+bjN+nbpe6JyR+McyU4rMWOk5
+ AhmKKwG/V3oeQ/sS31V19euHe8inkGY=
+X-Proofpoint-GUID: oqjgyWWi9ebdr7GM8-WJ0KiThGa0nkBM
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-20_02,2026-08-20_02,2025-10-01_01
@@ -146,7 +143,7 @@ X-Spam_bar: --
 X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -162,167 +159,125 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Add the const qualifier to CPURISCVState when the
-argument is accessed without modification.
-Simplify directly using cpu_env() in riscv_cpu_has_work().
+Add the const qualifier to S390CPU when the argument
+is accessed without modification.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
+Reviewed-by: Ilya Leoshkevich <iii@linux.ibm.com>
 Reviewed-by: Marc-André Lureau <marcandre.lureau@redhat.com>
+Acked-by: Eric Farman <farman@linux.ibm.com>
 ---
- target/riscv/cpu.h | 27 ++++++++++++++-------------
- target/riscv/cpu.c | 13 ++++++-------
- 2 files changed, 20 insertions(+), 20 deletions(-)
+ target/s390x/cpu.h            |  2 +-
+ target/s390x/s390x-internal.h | 12 ++++++------
+ target/s390x/interrupt.c      | 22 +++++++++++-----------
+ 3 files changed, 18 insertions(+), 18 deletions(-)
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index bb4c8563554..c51e0d5f919 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -636,11 +636,11 @@ int riscv_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg);
- int riscv_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
- int riscv_cpu_hviprio_index2irq(int index, int *out_irq, int *out_rdzero);
- uint8_t riscv_cpu_default_priority(int irq);
--uint64_t riscv_cpu_all_pending(CPURISCVState *env);
--int riscv_cpu_mirq_pending(CPURISCVState *env);
--int riscv_cpu_sirq_pending(CPURISCVState *env);
--int riscv_cpu_vsirq_pending(CPURISCVState *env);
--int riscv_cpu_pending_to_irq(CPURISCVState *env,
-+uint64_t riscv_cpu_all_pending(const CPURISCVState *env);
-+int riscv_cpu_mirq_pending(const CPURISCVState *env);
-+int riscv_cpu_sirq_pending(const CPURISCVState *env);
-+int riscv_cpu_vsirq_pending(const CPURISCVState *env);
-+int riscv_cpu_pending_to_irq(const CPURISCVState *env,
-                              int extirq, unsigned int extirq_def_prio,
-                              uint64_t pending, const uint8_t *iprio);
- 
-@@ -746,20 +746,20 @@ FIELD(EXT_TB_FLAGS, BIG_ENDIAN, 33, 1)
- #ifdef TARGET_RISCV32
- #define riscv_cpu_mxl(env)  ((void)(env), MXL_RV32)
- #else
--static inline RISCVMXL riscv_cpu_mxl(CPURISCVState *env)
-+static inline RISCVMXL riscv_cpu_mxl(const CPURISCVState *env)
- {
-     return env->misa_mxl;
+diff --git a/target/s390x/cpu.h b/target/s390x/cpu.h
+index f55b79ef8ac..998bbb0d7ff 100644
+--- a/target/s390x/cpu.h
++++ b/target/s390x/cpu.h
+@@ -854,7 +854,7 @@ static inline unsigned int s390_cpu_set_state(uint8_t cpu_state, S390CPU *cpu)
+     return 0;
  }
- #endif
- #define riscv_cpu_mxl_bits(env) (1UL << (4 + riscv_cpu_mxl(env)))
- 
--static inline const RISCVCPUConfig *riscv_cpu_cfg(CPURISCVState *env)
-+static inline const RISCVCPUConfig *riscv_cpu_cfg(const CPURISCVState *env)
+ #endif /* CONFIG_USER_ONLY */
+-static inline uint8_t s390_cpu_get_state(S390CPU *cpu)
++static inline uint8_t s390_cpu_get_state(const S390CPU *cpu)
  {
-     return &env_archcpu(env)->cfg;
+     return cpu->env.cpu_state;
  }
- 
- #if !defined(CONFIG_USER_ONLY)
--static inline privilege_mode_t cpu_address_mode(CPURISCVState *env)
-+static inline privilege_mode_t cpu_address_mode(const CPURISCVState *env)
- {
-     privilege_mode_t mode = env->priv;
- 
-@@ -769,7 +769,8 @@ static inline privilege_mode_t cpu_address_mode(CPURISCVState *env)
-     return mode;
+diff --git a/target/s390x/s390x-internal.h b/target/s390x/s390x-internal.h
+index 50782fac3ce..ca4445e6474 100644
+--- a/target/s390x/s390x-internal.h
++++ b/target/s390x/s390x-internal.h
+@@ -333,12 +333,12 @@ void cpu_inject_clock_comparator(S390CPU *cpu);
+ void cpu_inject_cpu_timer(S390CPU *cpu);
+ void cpu_inject_emergency_signal(S390CPU *cpu, uint16_t src_cpu_addr);
+ int cpu_inject_external_call(S390CPU *cpu, uint16_t src_cpu_addr);
+-bool s390_cpu_has_io_int(S390CPU *cpu);
+-bool s390_cpu_has_ext_int(S390CPU *cpu);
+-bool s390_cpu_has_mcck_int(S390CPU *cpu);
+-bool s390_cpu_has_int(S390CPU *cpu);
+-bool s390_cpu_has_restart_int(S390CPU *cpu);
+-bool s390_cpu_has_stop_int(S390CPU *cpu);
++bool s390_cpu_has_io_int(const S390CPU *cpu);
++bool s390_cpu_has_ext_int(const S390CPU *cpu);
++bool s390_cpu_has_mcck_int(const S390CPU *cpu);
++bool s390_cpu_has_int(const S390CPU *cpu);
++bool s390_cpu_has_restart_int(const S390CPU *cpu);
++bool s390_cpu_has_stop_int(const S390CPU *cpu);
+ void cpu_inject_restart(S390CPU *cpu);
+ void cpu_inject_stop(S390CPU *cpu);
+ #endif /* CONFIG_USER_ONLY */
+diff --git a/target/s390x/interrupt.c b/target/s390x/interrupt.c
+index 1dca835c5d8..d7e3fd45e4b 100644
+--- a/target/s390x/interrupt.c
++++ b/target/s390x/interrupt.c
+@@ -139,10 +139,10 @@ void s390_crw_mchk(void)
+     fsc->inject_crw_mchk(fs);
  }
  
--static inline RISCVMXL cpu_get_xl(CPURISCVState *env, privilege_mode_t mode)
-+static inline RISCVMXL cpu_get_xl(const CPURISCVState *env,
-+                                  privilege_mode_t mode)
+-bool s390_cpu_has_mcck_int(S390CPU *cpu)
++bool s390_cpu_has_mcck_int(const S390CPU *cpu)
  {
-     RISCVMXL xl = env->misa_mxl;
-     /*
-@@ -797,7 +798,7 @@ static inline RISCVMXL cpu_get_xl(CPURISCVState *env, privilege_mode_t mode)
- #if defined(TARGET_RISCV32)
- #define cpu_recompute_xl(env)  ((void)(env), MXL_RV32)
- #else
--static inline RISCVMXL cpu_recompute_xl(CPURISCVState *env)
-+static inline RISCVMXL cpu_recompute_xl(const CPURISCVState *env)
- {
- #if !defined(CONFIG_USER_ONLY)
-     return cpu_get_xl(env, env->priv);
-@@ -810,7 +811,7 @@ static inline RISCVMXL cpu_recompute_xl(CPURISCVState *env)
- #if defined(TARGET_RISCV32)
- #define cpu_address_xl(env)  ((void)(env), MXL_RV32)
- #else
--static inline RISCVMXL cpu_address_xl(CPURISCVState *env)
-+static inline RISCVMXL cpu_address_xl(const CPURISCVState *env)
- {
- #ifdef CONFIG_USER_ONLY
-     return env->xl;
-@@ -822,7 +823,7 @@ static inline RISCVMXL cpu_address_xl(CPURISCVState *env)
- }
- #endif
+     QEMUS390FLICState *flic = s390_get_qemu_flic(s390_get_flic());
+-    CPUS390XState *env = &cpu->env;
++    const CPUS390XState *env = &cpu->env;
  
--static inline uint16_t riscv_cpu_xlen(CPURISCVState *env)
-+static inline uint16_t riscv_cpu_xlen(const CPURISCVState *env)
- {
-     return 16 << env->xl;
- }
-@@ -830,7 +831,7 @@ static inline uint16_t riscv_cpu_xlen(CPURISCVState *env)
- #ifdef TARGET_RISCV32
- #define riscv_cpu_sxl(env)  ((void)(env), MXL_RV32)
- #else
--static inline RISCVMXL riscv_cpu_sxl(CPURISCVState *env)
-+static inline RISCVMXL riscv_cpu_sxl(const CPURISCVState *env)
- {
- #ifdef CONFIG_USER_ONLY
-     return env->misa_mxl;
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 858fbf865fd..4abf20d057a 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -864,7 +864,7 @@ uint8_t riscv_cpu_default_priority(int irq)
-     return default_iprio[irq] ? default_iprio[irq] : IPRIO_MMAXIPRIO;
- };
- 
--int riscv_cpu_pending_to_irq(CPURISCVState *env,
-+int riscv_cpu_pending_to_irq(const CPURISCVState *env,
-                              int extirq, unsigned int extirq_def_prio,
-                              uint64_t pending, const uint8_t *iprio)
- {
-@@ -908,7 +908,7 @@ int riscv_cpu_pending_to_irq(CPURISCVState *env,
-  * using hvip bits 13:63 from HS-mode. Those are returned in
-  * riscv_cpu_sirq_pending() and riscv_cpu_vsirq_pending().
-  */
--uint64_t riscv_cpu_all_pending(CPURISCVState *env)
-+uint64_t riscv_cpu_all_pending(const CPURISCVState *env)
- {
-     uint32_t gein = get_field(env->hstatus, HSTATUS_VGEIN);
-     uint64_t vsgein = (env->hgeip & (1ULL << gein)) ? MIP_VSEIP : 0;
-@@ -917,7 +917,7 @@ uint64_t riscv_cpu_all_pending(CPURISCVState *env)
-     return (env->mip | vsgein | vstip) & env->mie;
+     if (!(env->psw.mask & PSW_MASK_MCHECK)) {
+         return false;
+@@ -157,10 +157,10 @@ bool s390_cpu_has_mcck_int(S390CPU *cpu)
+     return false;
  }
  
--int riscv_cpu_mirq_pending(CPURISCVState *env)
-+int riscv_cpu_mirq_pending(const CPURISCVState *env)
+-bool s390_cpu_has_ext_int(S390CPU *cpu)
++bool s390_cpu_has_ext_int(const S390CPU *cpu)
  {
-     uint64_t irqs = riscv_cpu_all_pending(env) & ~env->mideleg &
-                     ~(MIP_SGEIP | MIP_VSSIP | MIP_VSTIP | MIP_VSEIP);
-@@ -926,7 +926,7 @@ int riscv_cpu_mirq_pending(CPURISCVState *env)
-                                     irqs, env->miprio);
+     QEMUS390FLICState *flic = s390_get_qemu_flic(s390_get_flic());
+-    CPUS390XState *env = &cpu->env;
++    const CPUS390XState *env = &cpu->env;
+ 
+     if (!(env->psw.mask & PSW_MASK_EXT)) {
+         return false;
+@@ -199,10 +199,10 @@ bool s390_cpu_has_ext_int(S390CPU *cpu)
+     return false;
  }
  
--int riscv_cpu_sirq_pending(CPURISCVState *env)
-+int riscv_cpu_sirq_pending(const CPURISCVState *env)
+-bool s390_cpu_has_io_int(S390CPU *cpu)
++bool s390_cpu_has_io_int(const S390CPU *cpu)
  {
-     uint64_t irqs = riscv_cpu_all_pending(env) & env->mideleg & ~env->hideleg;
-     uint64_t irqs_f = env->mvip & env->mvien & ~env->mideleg & env->sie;
-@@ -935,7 +935,7 @@ int riscv_cpu_sirq_pending(CPURISCVState *env)
-                                     irqs | irqs_f, env->siprio);
+     QEMUS390FLICState *flic = s390_get_qemu_flic(s390_get_flic());
+-    CPUS390XState *env = &cpu->env;
++    const CPUS390XState *env = &cpu->env;
+ 
+     if (!(env->psw.mask & PSW_MASK_IO)) {
+         return false;
+@@ -211,21 +211,21 @@ bool s390_cpu_has_io_int(S390CPU *cpu)
+     return qemu_s390_flic_has_io(flic, env->cregs[6]);
  }
  
--int riscv_cpu_vsirq_pending(CPURISCVState *env)
-+int riscv_cpu_vsirq_pending(const CPURISCVState *env)
+-bool s390_cpu_has_restart_int(S390CPU *cpu)
++bool s390_cpu_has_restart_int(const S390CPU *cpu)
  {
-     uint64_t irqs = riscv_cpu_all_pending(env) & env->mideleg & env->hideleg;
-     uint64_t irqs_f_vs = env->hvip & env->hvien & ~env->hideleg & env->vsie;
-@@ -952,8 +952,7 @@ int riscv_cpu_vsirq_pending(CPURISCVState *env)
+-    CPUS390XState *env = &cpu->env;
++    const CPUS390XState *env = &cpu->env;
  
- static bool riscv_cpu_has_work(CPUState *cs)
+     return env->pending_int & INTERRUPT_RESTART;
+ }
+ 
+-bool s390_cpu_has_stop_int(S390CPU *cpu)
++bool s390_cpu_has_stop_int(const S390CPU *cpu)
  {
--    RISCVCPU *cpu = RISCV_CPU(cs);
--    CPURISCVState *env = &cpu->env;
-+    CPURISCVState *env = cpu_env(cs);
-     /*
-      * Definition of the WFI instruction requires it to ignore the privilege
-      * mode and delegation registers, but respect individual enables
+-    CPUS390XState *env = &cpu->env;
++    const CPUS390XState *env = &cpu->env;
+ 
+     return env->pending_int & INTERRUPT_STOP;
+ }
+ 
+-bool s390_cpu_has_int(S390CPU *cpu)
++bool s390_cpu_has_int(const S390CPU *cpu)
+ {
+     if (!tcg_enabled()) {
+         return false;
 -- 
 2.53.0
 
