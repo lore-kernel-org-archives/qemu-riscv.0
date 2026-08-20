@@ -4,100 +4,170 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67E57C5DF81
-	for <qemu-riscv@archiver.kernel.org>; Thu, 20 Aug 2026 02:25:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23286C5DF85
+	for <qemu-riscv@archiver.kernel.org>; Thu, 20 Aug 2026 04:44:03 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wwsSa-00072k-TB; Wed, 19 Aug 2026 22:24:52 -0400
+	id 1wwud7-0001Zu-ED; Thu, 20 Aug 2026 00:43:53 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <portias@tenstorrent.com>)
- id 1wwsSY-00072P-Rs
- for qemu-riscv@nongnu.org; Wed, 19 Aug 2026 22:24:50 -0400
-Received: from mail-pf1-x430.google.com ([2607:f8b0:4864:20::430])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <portias@tenstorrent.com>)
- id 1wwsSU-000745-Gn
- for qemu-riscv@nongnu.org; Wed, 19 Aug 2026 22:24:50 -0400
-Received: by mail-pf1-x430.google.com with SMTP id
- d2e1a72fcca58-84a6f026675so259510b3a.0
- for <qemu-riscv@nongnu.org>; Wed, 19 Aug 2026 19:24:45 -0700 (PDT)
+ (Exim 4.90_1)
+ (envelope-from <prvs=685c7dad1=Alistair.Francis@wdc.com>)
+ id 1wwud6-0001Zg-7V; Thu, 20 Aug 2026 00:43:52 -0400
+Received: from esa1.hgst.iphmx.com ([68.232.141.245])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1)
+ (envelope-from <prvs=685c7dad1=Alistair.Francis@wdc.com>)
+ id 1wwud4-00030Y-7U; Thu, 20 Aug 2026 00:43:51 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1787201030; x=1818737030;
+ h=from:to:subject:date:message-id:references:in-reply-to:
+ content-id:content-transfer-encoding:mime-version;
+ bh=PvMSJDmebMfZ+ktTp8SrBfoCU1Cars1NLjNr2yCEjU4=;
+ b=ZDALkTCOH0cfxv4+s9z7pLYgNuEy0a/BC8dVdGEwTteQTkLa429Vr2ab
+ RrsS8vI6bf6d87ZYpyoWIL4ClxWWuNLMx2kUrHV4bPBnBoi2SbBqxHvm6
+ rqBSjS3TzmNRucHpDRnl7wiHrOAzMuOe4h6I7H+DXeADgHm5jDZkkCenL
+ 0Hp99I4siY0KIOoGFLrzL2SCdtl+IcWhLKyGPj68sCzSJ+39GRKZM5qcu
+ /XApLWWoIkvC8O9n1mWzISXr9YAK5Gp4pOHRuhEe5GWe7XyIW1D4kx+hm
+ MmbTFwcWsZnNl3xiHXSwsjJiJBsDTWN0zyRip1lF8vRV9rzy713qL5pEX Q==;
+X-CSE-ConnectionGUID: RQRQkv6nQoayuXyG2YhyaA==
+X-CSE-MsgGUID: VhzxlcluTnyr9Xf4VcXBYA==
+X-IronPort-AV: E=Sophos;i="6.25,232,1779120000"; d="scan'208";a="153664156"
+Received: from mail-eastus2azon11010070.outbound.protection.outlook.com (HELO
+ BN1PR04CU002.outbound.protection.outlook.com) ([52.101.56.70])
+ by ob1.hgst.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
+ 20 Aug 2026 12:43:44 +0800
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Uahzqn6U4e97MTFaVfr/cTFwgLcCRGnJRKiYD6JXaxD3mre0SEnNuSTXmN+UwJzvNidXiYHk6PaQTydRJdByXEjBm8JM2HwbNd1FGHmjUQ7NKWsUfeDDGjXWm4c3+dbV79+w1bkraIRJbU6oFzUno35uV3SXKDKgxDN35g9EhTwcpIO4+wOhDIdqPwUbiPPWNWvNxAXaXoVkgFQ1ipLhNmNnFZ+tcSPUmE11d1ps9Q3xLxFhJ1/Tdwpo9v2Co1ZYGPukQf4SuyYAR24tLbVGQBqASvEcz+p8c209jP621ZH5h/YHZk+lcV5mvmJVzGMMoO9MmC4mp0NylmpVgQX1hQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=PvMSJDmebMfZ+ktTp8SrBfoCU1Cars1NLjNr2yCEjU4=;
+ b=dGdzs8q/uGHg0PTyoOxmNe6/aTrM50DMJ03/KKtJ16cBEE4bSQRLZk02VdUtLf6M0MUuAh6ffNAo7rhvS6roxK2RUHlLwr+qhFsqxacsqeXNdtC3xAi8Unh/6b8ktbovGcooibKGq2VaoT2L1WaWC8ZRZkrWrjTSc/3FJg3OKX2gu0Zjq7rl662J4GV5CiO5fNkZaH7iUFho0ksJcAPbZT3zqQDIp5+G1hAAj7ppiOi3//7Tuj32WsQVdIPknWbXQ6eAdzU8rtCF+7+iA36FRaW+Zp3Aomgkq6AIWFoO5QrUMWIQI6En7PwD6YZ8PKoXLgrEVSEU4R4ni8m7lAuBbA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
+ header.d=wdc.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=tenstorrent.com; s=google; t=1787192684; x=1787797484; darn=nongnu.org;
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=+i1L6sbGfKK3kd0q9IvbepIvmV01u1sxGf6xOGQUzug=;
- b=aT84Ynf1a09e2Te17PPEdyTkHk1trHBsiwmylQ6kVzTPAyCIgYtPqB5OyUrjqf65wY
- RZBwJF2T6jEbvNm0AvEi2jQSdH+cuRkxhP2S21ye+xFoFVGDHyI0aSxOhr/DZAHgSOZd
- Df/KunhdewhZCZiLBryCr1rhTWUN5zsJodVRa31NqvXgv6xzkPdkLMhJ3N4ZGWBwnqKi
- POEiPQAMmTowtvFhlMSy6eJwatHLBgwzgBJnxiE0/wVBCs5wUsMy+morfo0Q6Bpl0Lwf
- Sl5XKiAtiDHtSWTOtmRInN8BL5eFn6LgaNu5BlopJfoDTFjWHDVocFJEmZg224WDRKk8
- t0zg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787192684; x=1787797484;
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=+i1L6sbGfKK3kd0q9IvbepIvmV01u1sxGf6xOGQUzug=;
- b=L7Fx7WfsTkEdQnKkXNpK7xDF824MthCZ3lv7B8Qt4VmFYM0vEYLbQZODd5tBvpHdQf
- wD4U4l1zB2xPY9tvrd1IQRH+aA3PE4sv2GHd0y3VqRW8B+ywTxI2q7rRd8YuE3ZjQGPv
- DbFqSa1M/1AmI/nlPoGxidoAlW++7pOSS/Qun7bc9RRr+OxHM6YatN9dE6a0zVmyp6OU
- lOHE9/oB+CIsP5OT9FUsjF+7ogt1+z4kcgkmYotz7gOKluhUmvdFAmCwQh/kDsz6CP+B
- ybDWTiqvVvQ/q5DTZBginWOwZR1aNyXzCqHmRl1mGBZLrGMoDMWf8fFQ27QiJOw0JIjV
- IC5g==
-X-Gm-Message-State: AOJu0YymFfxh45ZvrDpoUAS1HuqmdaL91VC9zF82nVaUcGALbBD+2yAM
- s9ZsJbiF5Og4mW3YW1l3LlgRf/hdcgdMqC7IlMT0brO733Y7eWKVMdN1pdU0812LccA=
-X-Gm-Gg: AR+sD104zSYIjZBXdJA9UgbBmq/ZTNYluyNGxvqfct1B0k6rh01aukkJP/73UAPMolW
- 1aez3UW5CKeqNlO85XObhOF062sT9lD63bKy1rQ8khyfSSGUqdSCVdWPz51hZLxwLaVItONaGic
- A/cov2X0diyYwA6lCD1lyR/hPZX7zYW5jnJ08FDLpS6d8m134WFNOdKuFNkR4oQA0v0wYIUD3Y/
- qc+cDlRdp9EF00xd6FQoSrFqiiwG3ElttHvDh1Vc7YD7V3gD/kJx6Lz3+fqGgCspWS6yxOCxbCZ
- NQ5+p8ktVwSP6tlG6/E+QbCbkDljhUxKr8ebTVdXcJ2xBzB5aA4wm8ZZPcg8hB2VmX6HhRVivGD
- Sh5HttCCiWqeRR2mxOTL2AsraUVHqjhFCBXacLFimlzgBYTJJfILYYbohWPTW4ISvY8PJVrmYo1
- CGrrNHx8C5v2xe1A2WeC2xiJmw9aahzU0oNnlU9iKSEOgq8QxeADURpEghrsh+ZJRPBGVLOplG1
- qYVInZFOOhowB0s
-X-Received: by 2002:a05:6a20:94c8:b0:3bf:b84a:f3d8 with SMTP id
- adf61e73a8af0-3cd00b17c43mr7938495637.0.1787192684348; 
- Wed, 19 Aug 2026 19:24:44 -0700 (PDT)
-Received: from [172.16.1.33] ([159.196.41.205])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-851d3392a96sm1140321b3a.20.2026.08.19.19.24.37
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 19 Aug 2026 19:24:43 -0700 (PDT)
-Message-ID: <4ca1ea77-bd0a-4987-ba98-73245896f9a4@oss.tenstorrent.com>
-Date: Thu, 20 Aug 2026 12:24:36 +1000
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/5] hw/ssi: Add Synopsys DesignWare SSI standard PIO
- controller
-To: Kangjie Huang <flamboyant.h.01@gmail.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, Bin Meng <bmeng.cn@gmail.com>,
- Chao Liu <chao.liu@processmission.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Alistair Francis <alistair@alistair23.me>,
- Palmer Dabbelt <palmer@dabbelt.com>, Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Fabiano Rosas <farosas@suse.de>,
- Laurent Vivier <lvivier@redhat.com>
-References: <20260801192848.30606-1-flamboyant.h.01@gmail.com>
- <20260801192848.30606-2-flamboyant.h.01@gmail.com>
+ d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=PvMSJDmebMfZ+ktTp8SrBfoCU1Cars1NLjNr2yCEjU4=;
+ b=laJVwPD8vNej45MfLUTGoQCNXN4xBdYtej4gazrry4USKgOiZAFbe/EltHoAPV5n0xewIjYp+ugpXJrlx/n84W/AAYmIa4KKZl1NFh9D/9IixRD0J/Kef8qb7T9n56y1VNGQQjBmXB9gBKs/K8kiG6V36GVAo8w+naiOSqL3KIc=
+Received: from BY1PR04MB9561.namprd04.prod.outlook.com (2603:10b6:a03:5b6::11)
+ by CH8PR04MB993885.namprd04.prod.outlook.com (2603:10b6:610:2eb::5)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.339.10; Thu, 20 Aug
+ 2026 04:43:41 +0000
+Received: from BY1PR04MB9561.namprd04.prod.outlook.com
+ ([fe80::3869:e494:2fa8:9888]) by BY1PR04MB9561.namprd04.prod.outlook.com
+ ([fe80::3869:e494:2fa8:9888%5]) with mapi id 15.21.0339.007; Thu, 20 Aug 2026
+ 04:43:41 +0000
+From: Alistair Francis <Alistair.Francis@wdc.com>
+To: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
+ "daniel.barboza@oss.qualcomm.com" <daniel.barboza@oss.qualcomm.com>,
+ "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
+ "chao.liu@processmission.com" <chao.liu@processmission.com>,
+ "zhiwei_liu@linux.alibaba.com" <zhiwei_liu@linux.alibaba.com>,
+ "palmer@dabbelt.com" <palmer@dabbelt.com>, "liwei1518@gmail.com"
+ <liwei1518@gmail.com>, "frederic.petrot@univ-grenoble-alpes.fr"
+ <frederic.petrot@univ-grenoble-alpes.fr>
+Subject: Re: [PATCH 0/2] target/riscv: Handle [ms]status updates for rv128
+Thread-Topic: [PATCH 0/2] target/riscv: Handle [ms]status updates for rv128
+Thread-Index: AQHdL8l15AaC+gDBHkykvsTTbHllkLamXV4A
+Date: Thu, 20 Aug 2026 04:43:41 +0000
+Message-ID: <95a50349667ed9fbdea78af8a03f5f8d527b7833.camel@wdc.com>
+References: <20260819105655.33391-1-frederic.petrot@univ-grenoble-alpes.fr>
+In-Reply-To: <20260819105655.33391-1-frederic.petrot@univ-grenoble-alpes.fr>
+Accept-Language: en-US
 Content-Language: en-US
-From: Portia Stephens <portias@oss.tenstorrent.com>
-In-Reply-To: <20260801192848.30606-2-flamboyant.h.01@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::430;
- envelope-from=portias@tenstorrent.com; helo=mail-pf1-x430.google.com
-X-Spam_score_int: -19
-X-Spam_score: -2.0
-X-Spam_bar: --
-X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_NONE=-0.0001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+user-agent: Evolution 3.60.2 (by Flathub.org) 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=wdc.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: BY1PR04MB9561:EE_|CH8PR04MB993885:EE_
+x-ms-office365-filtering-correlation-id: b8ff26e9-9b07-499d-717a-08defe759c11
+wdcipoutbound: EOP-TRUE
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+ ARA:13230040|1800799024|366016|376014|19092799006|23010399003|10070799003|10067099003|11063799006|56012099006|18002099003|22082099003|38070700021;
+x-microsoft-antispam-message-info: B8JFZAvdKkLecXjrdBf1NhpjHeGc6sBGQ41ymed4cmexuuOc5rxjPIYBGiLiyIEe4+3RBTRdadBzjwp/9ZOL1xWkJBMV4+U2jixdErmgX3qLQR8nqJakOKhs6k0IBcgFgfzDGzH+9BERvH/KHBmRX+SyJj3vncjHI2N15emaGFZ1awvxnADY6tZjXBtPA/IQQskOk1rs3i5otoF5WXvjdCI1Jj+Fg7yPAqIqmzS1AEXttUfeD7qeYOyguvYbZ/9+v2zEzEc31lIhsCkBLUeFFNHrbSseW8/m6PSavD8GqNFpveXKL8PZFeVQ5EYVnXftYqbCDhURwgMp5GRDDYoeLUHPmdzbX0SR7rae7fmIu9i1TJAVPjTSconB2KvlwD37VOSXl7Mo8eM5FtaeIVYc17Jcr4EPgeum5T8+QaI/TcJ5hhN5RoRshpoLIaQnIEo6TVLwW6p0nZMhHDHQznvLjbwdycIynmPb58FmcrHeY/dhMrR1EsQ/1JySV7kYN4oa0+xhkTMszJi3MwCI6bThohN26euZP0VC8mzb00M4k54SAGrpwjzDLSJRkwofnJEBiBmoZAP1WqBvgwBJ2Alr5xa8W85V1Qxp/d3hoSBwbA4eaxP7boL6VdsXT7jls3R7RIobEX+3+uTjhumIdsvlok3/vxtaeU5bFo5iSZzxVXVD0Q9uHsfOP1RenR5YabJD7ruBNIyrpX/o9IjmtFzy01Ap881pKVLyFIpQafHAxAk=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:BY1PR04MB9561.namprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(376014)(19092799006)(23010399003)(10070799003)(10067099003)(11063799006)(56012099006)(18002099003)(22082099003)(38070700021);
+ DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 2
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?OXVnUldDZENmOForT09MUTFTYlNHWDE2QU9ybjg3R2o0enpQTXZJUlh1MWh4?=
+ =?utf-8?B?N3U2eTVkNm9KUG5nWlRLTTYreXd2aDlsb3ZtbEIvM05PMVJFRDZQam1Od2VW?=
+ =?utf-8?B?bkZLeitjM3c2Ujlpc2diWWsrY0ZBYzlWMXZmNTdFQnFNOFVENXBXSXd0LzVR?=
+ =?utf-8?B?NGk2Z0NYMTBPUTZuaVJ5Y3Z6ODFBeVZ0bEhUYUxOZlNMamVLQi9DYlNETXF1?=
+ =?utf-8?B?TGpRRnQ3akQzT2g5OW4rT3VFRWZYa1NVRVdCanNQbnpBYUFteDZJSjM2a3RH?=
+ =?utf-8?B?YUF6M3BmOHlvemRJK204Y0ZJOGhZUG9INlFBTnFRS2xJVEV4a1BuOVo3MG5F?=
+ =?utf-8?B?Ukx4V2RlZU1aL2hkK3pKZmRUbnlnUFJoaHZrT2dYczVrZldJYVljNThsYlBa?=
+ =?utf-8?B?TGZzRGdEVzdiTml5QWJrZ00zS0xGZ3NPVWFQTS91R0dtTGlVWUlSL3BibURH?=
+ =?utf-8?B?dVdzWTNBNnArSUVDUVdRaEZ5VXBPNmh0YWZDSm1ibE9GWDE3SVdBNGcyd29F?=
+ =?utf-8?B?MmFML09pelQ3aWo5bzd5NTB6aTBLeFR5eEczcVdjeDRKc3BlMGpUcUtkVlVw?=
+ =?utf-8?B?NHQrZTg2THU5dHhialo0bk1tSHdJTndGOWZpb0hHK3d2OTdsS3NDYTFRb1By?=
+ =?utf-8?B?T1hWUVVyWXFmWkVxa2lTcVlTZkRTVWVqZERWVGZLMC9UU2FaTWdSWCtReXBt?=
+ =?utf-8?B?V3BEbDU4UC9KRnJheCt0amdxQTBkTVN5S044ZndxMmFJaWJsNmtWaTdkVVBp?=
+ =?utf-8?B?Q3NTVkNCWk1DV0ZYOC94NXFBSnpGWndwMXBhRU41OFJ5bndJUmZZcCt1UFFv?=
+ =?utf-8?B?LzFnTmxCYW5nMCtUR2l6WHBzc1RLTmhuOXphcXpsY1BGMW5lZG0zUytxZjNv?=
+ =?utf-8?B?RjVVUGVRWXhoL1dIUW5VRjJHTEpBQW1rOEc5d3llQVJjQ3k5ZFN5YnZoNHFR?=
+ =?utf-8?B?bFVGVXB3ZTJsb0x0aGZWRG5wMXlHM0NJTnp2OWxRVXFrVGxzZWhjbHZ5eVdu?=
+ =?utf-8?B?TGw5L2FRbmhPTWNiTXZTQUIySWhsc2ZwcHJFVXVTa3VlRm9rTEhWNit0RWRZ?=
+ =?utf-8?B?UG02Y1lnUlZNbHZKRnZSYktTVWdtYzlEN1NGOEZEY0ZOTHRWZTdOMXUybDdP?=
+ =?utf-8?B?cjlwMzhOUkJrMDdNdDNyS1BWdHpHdjBvemlndTJXRjdBUU1YcjdqSTN6ZWJj?=
+ =?utf-8?B?aU5tcXg5YmczYWExZDFqSkZtbGFBLzBJcFgvVzNNOUVsN0ZmbkdnN3A0OXdu?=
+ =?utf-8?B?QndBMlNzUExVQ1JFNjVFbDl5Q0FPQTBMNlJ6WSsxSDJYSWtoKzQ1SnNMZ1c1?=
+ =?utf-8?B?emZNeE1DRmpOemRUaXNTWWlJZElYSmJ3aFNXQjk1bFg0eVRJSDhiMFRHWGZQ?=
+ =?utf-8?B?ZXhVVklEbDZwM0hIUXdvdGlEV0JOZStiYTQrbjQ4QllURFJXeUhyL2sxb1lO?=
+ =?utf-8?B?RE9FeWQvZm9nMDVtZGwyZUIxWktoeEhJandFUzhUS1c3alFVMThiQXQ2cWVZ?=
+ =?utf-8?B?ejduU0dNUkRDOGFCN0xsaDMwLzlRVW5nRGJDODJVU0ZvTEQxMzRXbGJOdGlK?=
+ =?utf-8?B?TmxhTkZpeDA5aHU5cGNnbXB1NG41U0twaXRZME1IU042YU9za1plemJZaG5Z?=
+ =?utf-8?B?Z293dEYvTzRzNWNmVjl1emFocFArN2dQa3Y3THY0KzFKWWdzNDE1TlJGQTZv?=
+ =?utf-8?B?ZDYvYjIvV2FpMExSbGRCNXg0bHBTMURyZlRaMHpONkNtSjZzWERxSzB1M0d0?=
+ =?utf-8?B?ZFhiZFVWOGplclBVcjdmeDQrS1lxWDhxbE5kOHRvVGZ6NmpaSlNZMG01cTNi?=
+ =?utf-8?B?WEF4cC82TG9RQXVLa2Y5QUxZRFRtU1ZVbVVpS0xrVFJlaXpOVFhMa0c2TzFU?=
+ =?utf-8?B?aGxlRC85bWNlcCtrUGEwaE8vQWlFOHRqcThoMVZnSFQ4alZmZG9WbGsrVnJi?=
+ =?utf-8?B?c2pGdzRaV0xMcVp5T1BDTGQyWGFnR2M3ZzN3UnNhWHdiQVg5dGtMelZmWjh4?=
+ =?utf-8?B?RUZadEhuc01UV1lSQXRmWkVneXBYRVVjV1h6bkdyS0R6RVZhOUF0a2U0SlpG?=
+ =?utf-8?B?Vk9ZRkYzdi83UlVJWXVPWmU4TTB2UDdyWjNsaGdEeGZmalN2NUVhL3FJc1gy?=
+ =?utf-8?B?QUkyZ1FPbmVXeUZJV1lFZFNhNDVDNk9pZTljUWFBeEYrUEQrcWU2eUxDcGRI?=
+ =?utf-8?B?TWM0dFU4b1BRZ3BYYk9wL0FKUlNwUGRCWXk2NTZYRWRMLzNrak5YeUk2dmtt?=
+ =?utf-8?B?WmdBQ2xXdUpRdWFaeEhpTExNdzBQRlJXNTVKby81ZG53c3JmT2VhMHZKWEtn?=
+ =?utf-8?B?QWE0UHduVGpRcDNiazAvMlN0U3RTZm5YdEtMZTdtREdRSzJqcG1tWXNzbVZG?=
+ =?utf-8?Q?JOfNstRtNun/ACz2qV5+s30byzSaD5Hhm6i6Mc2SVUlvP?=
+x-ms-exchange-antispam-messagedata-1: LFpCg99p8EmVW56sWR1hH6gzaMCzHgwCe8M=
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <2B0F2373CFB36745BC4D450CF903C02D@namprd04.prod.outlook.com>
+Content-Transfer-Encoding: base64
+MIME-Version: 1.0
+X-Exchange-RoutingPolicyChecked: dywFLd65PIn+E+Tt6FWGrODdUTR3TpbW2WBJQui+ALKj17UsFSo0fM05LMlEXri3ro2moq/BJBXxTGYuB1rhgwdg1sMkJH92vNBTIJZa5yDwpKBieU+AmbzwCU+ZELjDs0icT1stgZaknRaTLRWEdl42AZfjE6b9Iyq5bU6rdIxrGcqxeOU2dnaXEBkbBXnyuyXPF8WKfL5RTo6rTmphy+8aJZCjXEeH5tlWtXXkmgmPt8XFCiueemvjk6BQLHy2V8WzdWft2QIo3TW95qMl8NNIF5n8ghUN2+3Y5atYTeL2Vrym0g2dZrYgk7lzcdaeDEeuHAYMllzaYwFm67btHg==
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: Z7bQuBKrN0UmCYRvspSWh6TFHg6CNsIWQmcYnlakIOvnpnwfAl8fkZLzadFGrEtPSpQpDIySSdRdhfeUTqAiYNQ2pWOUyWVrW9hecIc4W7SrnXu8l/UH2Za2bD89cGph6MOwYk3vyJyLX9C0NHwujNHipxSLlLOsloGwM7KKJ/MS52+HIEicdPv+PRX+lXh7cFiJnxfy0p718F/EEX+zWb2BTg0IRX3irKf86ZuByoaYRq4sqWMp00RhFEFY8gPibrtmUb0Q8w4dzl+l9g+Usz1lSjnEzNQ0ul8r4iislE5m+o+hQo6pKIAxHqNu3WpnLcgj4lNW9kqRdTQurMooHI5EpR0tUspL31iKULk2U08io58DC5FQtkOJW9h3GMPPOIgt4RlF1lEU73L6ZPZbj2FPCMvIlWFZR1VXwTw09lSbxIe/PG+OfqdEbh7/HZVcUQDKU+3X4bobaEuP0AOCY7OBpDAUo15tknu6QAIO/32diIKwDT0Xa2H+pfpRbRk1T46frHoBINEg663pRcbbQn+m0ulvKZeMvL0Uw1modGV+BJcYVJDUdrqJ2Nh9QkrZloCxjMsmdoJLp2kQ9jXGO5RcLxNelVe5Ug4wpoepnpUR0f+ZJEDB2olbXTT60Lhv
+X-OriginatorOrg: wdc.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: BY1PR04MB9561.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: b8ff26e9-9b07-499d-717a-08defe759c11
+X-MS-Exchange-CrossTenant-originalarrivaltime: 20 Aug 2026 04:43:41.6069 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: O+TvccOgfw2qNWD9VCKOb6Yrnl1gnTJb+OLFFjRLg170l+2zRdeK7ByVov+ZrokV/bBNhmNhLyrEwCBgaCVj9opFLL3QnCxBfraYeRJCC0g=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH8PR04MB993885
+Received-SPF: pass client-ip=68.232.141.245;
+ envelope-from=prvs=685c7dad1=Alistair.Francis@wdc.com;
+ helo=esa1.hgst.iphmx.com
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -113,1095 +183,16 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 2/8/2026 5:28 AM, Kangjie Huang wrote:
-> Add a reusable SysBus model for the Synopsys DesignWare SSI controller.
-> 
-> Implement the Standard SPI register subset, configurable chip-select and
-> FIFO resources, the four Standard PIO transfer modes, reset handling,
-> chip-select GPIOs, and RAZ/WI handling for unsupported enhanced, DMA,
-> and XIP registers.
-> 
-> Add num-cs, fifo-depth, and imr-reset properties. Save only Standard PIO
-> state in VMState and reject migration between devices with different
-> resource profiles.
-> 
-> The controller is not instantiated by this patch.
-> 
-> Signed-off-by: Kangjie Huang <flamboyant.h.01@gmail.com>
-> ---
->   hw/ssi/Kconfig          |   4 +
->   hw/ssi/dw_ssi.c         | 956 ++++++++++++++++++++++++++++++++++++++++
->   hw/ssi/meson.build      |   1 +
->   include/hw/ssi/dw_ssi.h |  62 +++
->   4 files changed, 1023 insertions(+)
->   create mode 100644 hw/ssi/dw_ssi.c
->   create mode 100644 include/hw/ssi/dw_ssi.h
-> 
-> diff --git a/hw/ssi/Kconfig b/hw/ssi/Kconfig
-> index 1bd56463c1..c48cd2ff6d 100644
-> --- a/hw/ssi/Kconfig
-> +++ b/hw/ssi/Kconfig
-> @@ -6,6 +6,10 @@ config SIFIVE_SPI
->       bool
->       select SSI
->   
-> +config DW_SSI
-> +    bool
-> +    select SSI
-> +
->   config SSI
->       bool
->   
-> diff --git a/hw/ssi/dw_ssi.c b/hw/ssi/dw_ssi.c
-> new file mode 100644
-> index 0000000000..f9f0e23730
-> --- /dev/null
-> +++ b/hw/ssi/dw_ssi.c
-> @@ -0,0 +1,956 @@
-> +/*
-> + * Synopsys DesignWare SSI
-> + *
-> + * Copyright (c) 2026 Kangjie Huang <flamboyant.h.01@gmail.com>
-> + *
-> + * SPDX-License-Identifier: GPL-2.0-or-later
-> + *
-> + * Emulates the DesignWare SSI controller in Standard SPI mode,
-> + * covering the PIO/FIFO data path and chip selects.
-> + */
-> +
-> +#include "qemu/osdep.h"
-> +#include "hw/core/registerfields.h"
-> +#include "hw/core/qdev-properties.h"
-> +#include "hw/core/irq.h"
-> +#include "hw/ssi/dw_ssi.h"
-> +#include "migration/vmstate.h"
-> +#include "qapi/error.h"
-> +#include "qemu/bitops.h"
-> +#include "qemu/log.h"
-> +#include "qemu/module.h"
-> +
-> +/* DWC SSI 1.03 derivative (TRM v0.3.1 section 12.3). */
-> +#define DW_SSI_CTRLR0_RESET            0x00004007
-> +#define DW_SSI_SR_RESET                0x00000006
-> +#define DW_SSI_IDR_RESET               0xa1b2c3d5
-> +#define DW_SSI_VERSION                 0x3130332a
-> +#define DW_SSI_PIO_TX_BATCH            64
-> +
-> +enum {
-> +    DW_SSI_TMOD_TR,
-> +    DW_SSI_TMOD_TO,
-> +    DW_SSI_TMOD_RO,
-> +    DW_SSI_TMOD_EEPROM_READ,
-> +};
-> +
-> +REG32(CTRLR0, 0x000)
-> +    FIELD(CTRLR0, DFS, 0, 5)
-> +    FIELD(CTRLR0, FRF, 6, 2)
-> +    FIELD(CTRLR0, SCPH, 8, 1)
-> +    FIELD(CTRLR0, SCPOL, 9, 1)
-> +    FIELD(CTRLR0, TMOD, 10, 2)
-> +    FIELD(CTRLR0, SLV_OE, 12, 1)
-> +    FIELD(CTRLR0, SRL, 13, 1)
-> +    FIELD(CTRLR0, SSTE, 14, 1)
-> +    FIELD(CTRLR0, CFS, 16, 4)
-> +    FIELD(CTRLR0, SPI_FRF, 22, 2)
-> +    FIELD(CTRLR0, SPI_HYPERBUS_EN, 24, 1)
-> +    FIELD(CTRLR0, SPI_DWS_EN, 25, 1)
-> +REG32(CTRLR1, 0x004)
-> +    FIELD(CTRLR1, NDF, 0, 16)
-> +REG32(SSIENR, 0x008)
-> +    FIELD(SSIENR, SSIC_EN, 0, 1)
-> +REG32(MWCR, 0x00c)
-> +    FIELD(MWCR, MWMOD, 0, 1)
-> +    FIELD(MWCR, MDD, 1, 1)
-> +    FIELD(MWCR, MHS, 2, 1)
-> +REG32(SER, 0x010)
-> +REG32(BAUDR, 0x014)
-> +    FIELD(BAUDR, SCKDV, 1, 15)
-> +REG32(TXFTLR, 0x018)
-> +    FIELD(TXFTLR, TFT, 0, 8)
-> +    FIELD(TXFTLR, TXFTHR, 16, 11)
-> +REG32(RXFTLR, 0x01c)
-> +    FIELD(RXFTLR, RFT, 0, 8)
-> +REG32(TXFLR, 0x020)
-> +    FIELD(TXFLR, TXTFL, 0, 9)
-> +REG32(RXFLR, 0x024)
-> +    FIELD(RXFLR, RXTFL, 0, 9)
-> +REG32(SR, 0x028)
-> +    FIELD(SR, CMPLTD_DF, 15, 17)
-> +    FIELD(SR, DCOL, 6, 1)
-> +    FIELD(SR, TXE, 5, 1)
-> +    FIELD(SR, BUSY, 0, 1)
-> +    FIELD(SR, TFNF, 1, 1)
-> +    FIELD(SR, TFE, 2, 1)
-> +    FIELD(SR, RFNE, 3, 1)
-> +    FIELD(SR, RFF, 4, 1)
-> +REG32(IMR, 0x02c)
-> +    FIELD(IMR, DONEM, 11, 1)
-> +    FIELD(IMR, SPITEM, 10, 1)
-> +    FIELD(IMR, AXIEM, 8, 1)
-> +    FIELD(IMR, TXUIM, 7, 1)
-> +    FIELD(IMR, XRXOIM, 6, 1)
-> +    FIELD(IMR, MSTIM, 5, 1)
-> +    FIELD(IMR, RXOIM, 3, 1)
-> +    FIELD(IMR, RXUIM, 2, 1)
-> +    FIELD(IMR, TXOIM, 1, 1)
-> +    FIELD(IMR, TXEIM, 0, 1)
-> +    FIELD(IMR, RXFIM, 4, 1)
-> +REG32(ISR, 0x030)
-> +    FIELD(ISR, DONES, 11, 1)
-> +    FIELD(ISR, SPITES, 10, 1)
-> +    FIELD(ISR, AXIES, 8, 1)
-> +    FIELD(ISR, TXUIS, 7, 1)
-> +    FIELD(ISR, XRXOIS, 6, 1)
-> +    FIELD(ISR, MSTIS, 5, 1)
-> +    FIELD(ISR, RXOIS, 3, 1)
-> +    FIELD(ISR, RXUIS, 2, 1)
-> +    FIELD(ISR, TXOIS, 1, 1)
-> +    FIELD(ISR, TXEIS, 0, 1)
-> +    FIELD(ISR, RXFIS, 4, 1)
-> +REG32(RISR, 0x034)
-> +    FIELD(RISR, DONER, 11, 1)
-> +    FIELD(RISR, SPITER, 10, 1)
-> +    FIELD(RISR, AXIER, 8, 1)
-> +    FIELD(RISR, TXUIR, 7, 1)
-> +    FIELD(RISR, XRXOIR, 6, 1)
-> +    FIELD(RISR, MSTIR, 5, 1)
-> +    FIELD(RISR, RXOIR, 3, 1)
-> +    FIELD(RISR, RXUIR, 2, 1)
-> +    FIELD(RISR, TXOIR, 1, 1)
-> +    FIELD(RISR, TXEIR, 0, 1)
-> +    FIELD(RISR, RXFIR, 4, 1)
-> +REG32(TXEICR, 0x038)
-> +    FIELD(TXEICR, TXEICR, 0, 1)
-> +REG32(RXOICR, 0x03c)
-> +    FIELD(RXOICR, RXOICR, 0, 1)
-> +REG32(RXUICR, 0x040)
-> +    FIELD(RXUICR, RXUICR, 0, 1)
-> +REG32(MSTICR, 0x044)
-> +    FIELD(MSTICR, MSTICR, 0, 1)
-> +REG32(ICR, 0x048)
-> +    FIELD(ICR, ICR, 0, 1)
-> +REG32(DMACR, 0x04c)
-> +    FIELD(DMACR, RDMAE, 0, 1)
-> +    FIELD(DMACR, TDMAE, 1, 1)
-> +    FIELD(DMACR, IDMAE, 2, 1)
-> +    FIELD(DMACR, ATW, 3, 2)
-> +    FIELD(DMACR, AINC, 6, 1)
-> +    FIELD(DMACR, ACACHE, 8, 4)
-> +    FIELD(DMACR, APROT, 12, 3)
-> +    FIELD(DMACR, AID, 15, 4)
-> +REG32(AXIAWLEN, 0x050)
-> +    FIELD(AXIAWLEN, AWLEN, 8, 8)
-> +REG32(AXIARLEN, 0x054)
-> +    FIELD(AXIARLEN, ARLEN, 8, 8)
-> +REG32(IDR, 0x058)
-> +    FIELD(IDR, IDCODE, 0, 32)
-> +REG32(SSIC_VERSION_ID, 0x05c)
-> +    FIELD(SSIC_VERSION_ID, VERSION_ID, 0, 32)
-> +REG32(DR0, 0x060)
-> +REG32(DR_END, 0x0ec)
-> +REG32(RX_SAMPLE_DELAY, 0x0f0)
-> +    FIELD(RX_SAMPLE_DELAY, RSD, 0, 8)
-> +    FIELD(RX_SAMPLE_DELAY, SE, 16, 1)
-> +REG32(SPI_CTRLR0, 0x0f4)
-> +    FIELD(SPI_CTRLR0, CLK_STRETCH_EN, 30, 1)
-> +    FIELD(SPI_CTRLR0, XIP_PREFETCH_EN, 29, 1)
-> +    FIELD(SPI_CTRLR0, XIP_MBL, 26, 2)
-> +    FIELD(SPI_CTRLR0, SPI_RXDS_SIG_EN, 25, 1)
-> +    FIELD(SPI_CTRLR0, SPI_DM_EN, 24, 1)
-> +    FIELD(SPI_CTRLR0, SSIC_XIP_CONT_XFER_EN, 21, 1)
-> +    FIELD(SPI_CTRLR0, XIP_INST_EN, 20, 1)
-> +    FIELD(SPI_CTRLR0, XIP_DFS_HC, 19, 1)
-> +    FIELD(SPI_CTRLR0, SPI_RXDS_EN, 18, 1)
-> +    FIELD(SPI_CTRLR0, INST_DDR_EN, 17, 1)
-> +    FIELD(SPI_CTRLR0, SPI_DDR_EN, 16, 1)
-> +    FIELD(SPI_CTRLR0, WAIT_CYCLES, 11, 5)
-> +    FIELD(SPI_CTRLR0, INST_L, 8, 2)
-> +    FIELD(SPI_CTRLR0, XIP_MD_BIT_EN, 7, 1)
-> +    FIELD(SPI_CTRLR0, ADDR_L, 2, 4)
-> +    FIELD(SPI_CTRLR0, TRANS_TYPE, 0, 2)
-> +REG32(DDR_DRIVE_EDGE, 0x0f8)
-> +    FIELD(DDR_DRIVE_EDGE, TDE, 0, 8)
-> +REG32(XIP_MODE_BITS, 0x0fc)
-> +    FIELD(XIP_MODE_BITS, XIP_MD_BITS, 0, 16)
-> +REG32(XIP_INCR_INST, 0x100)
-> +    FIELD(XIP_INCR_INST, INCR_INST, 0, 16)
-> +REG32(XIP_WRAP_INST, 0x104)
-> +    FIELD(XIP_WRAP_INST, WRAP_INST, 0, 16)
-> +REG32(XIP_CTRL, 0x108)
-> +REG32(XIP_SER, 0x10c)
-> +REG32(XRXOICR, 0x110)
-> +REG32(XIP_CNT_TIME_OUT, 0x114)
-> +REG32(SPI_CTRLR1, 0x118)
-> +REG32(SPITECR, 0x11c)
-> +REG32(SPIDR, 0x120)
-> +    FIELD(SPIDR, SPI_INST, 0, 16)
-> +REG32(SPIAR, 0x124)
-> +    FIELD(SPIAR, SDAR, 0, 32)
-> +REG32(AXIAR0, 0x128)
-> +    FIELD(AXIAR0, AXIAR_0_31, 0, 32)
-> +REG32(AXIAR1, 0x12c)
-> +    FIELD(AXIAR1, AXIAR_32_63, 0, 32)
-> +REG32(AXIECR, 0x130)
-> +    FIELD(AXIECR, AXIECR, 0, 1)
-> +REG32(DONECR, 0x134)
-> +    FIELD(DONECR, DONECR, 0, 1)
-> +REG32(RSVD_138, 0x138)
-> +REG32(RSVD_13C, 0x13c)
-> +REG32(XIP_WRITE_INCR_INST, 0x140)
-> +REG32(XIP_WRITE_WRAP_INST, 0x144)
-> +REG32(XIP_WRITE_CTRL, 0x148)
-> +
-> +#define DW_SSI_CTRLR0_STANDARD_WRITABLE_MASK \
-> +    (R_CTRLR0_DFS_MASK | \
-> +     R_CTRLR0_SCPH_MASK | \
-> +     R_CTRLR0_SCPOL_MASK | \
-> +     R_CTRLR0_TMOD_MASK | \
-> +     R_CTRLR0_SLV_OE_MASK | \
-> +     R_CTRLR0_SRL_MASK | \
-> +     R_CTRLR0_SSTE_MASK | \
-> +     R_CTRLR0_CFS_MASK)
-> +
-> +#define DW_SSI_CTRLR1_WRITABLE_MASK R_CTRLR1_NDF_MASK
-> +#define DW_SSI_MWCR_WRITABLE_MASK \
-> +    (R_MWCR_MWMOD_MASK | R_MWCR_MDD_MASK)
-> +#define DW_SSI_BAUDR_WRITABLE_MASK R_BAUDR_SCKDV_MASK
-> +#define DW_SSI_TXFTLR_WRITABLE_MASK \
-> +    (R_TXFTLR_TFT_MASK | R_TXFTLR_TXFTHR_MASK)
-> +#define DW_SSI_RXFTLR_WRITABLE_MASK R_RXFTLR_RFT_MASK
-> +#define DW_SSI_IMR_WRITABLE_MASK \
-> +    (R_IMR_TXEIM_MASK | R_IMR_TXOIM_MASK | R_IMR_RXUIM_MASK | \
-> +     R_IMR_RXOIM_MASK | R_IMR_RXFIM_MASK | R_IMR_MSTIM_MASK | \
-> +     R_IMR_TXUIM_MASK)
-> +#define DW_SSI_RX_SAMPLE_DELAY_WRITABLE_MASK \
-> +    (R_RX_SAMPLE_DELAY_RSD_MASK | R_RX_SAMPLE_DELAY_SE_MASK)
-> +
-> +static bool dw_ssi_validate_config(DwSsiState *s, Error **errp)
-> +{
-> +    DeviceState *dev = DEVICE(s);
-> +
-> +    if (s->cfg.num_cs == 0 || s->cfg.num_cs > 8) {
-> +        error_setg(errp, "%s: num-cs must be in range 1..8",
-> +                   dev->canonical_path);
-> +        return false;
-> +    }
-> +
-> +    if (s->cfg.fifo_depth < 2 || s->cfg.fifo_depth > 256) {
-> +        error_setg(errp, "%s: fifo-depth must be in range 2..256",
-> +                   dev->canonical_path);
-> +        return false;
-> +    }
-> +
-> +    if (s->cfg.imr_reset & ~DW_SSI_IMR_WRITABLE_MASK) {
-> +        error_setg(errp, "%s: imr-reset contains unsupported bits",
-> +                   dev->canonical_path);
-> +        return false;
-> +    }
-> +
-> +    return true;
-> +}
-> +
-> +static bool dw_ssi_fifo_threshold_valid(const DwSsiState *s, uint32_t value)
-> +{
-> +    return value < s->cfg.fifo_depth;
-> +}
-> +
-> +static void dw_ssi_write_masked(DwSsiState *s, unsigned int reg,
-> +                                     uint32_t value, uint32_t mask)
-> +{
-> +    s->regs[reg] = (s->regs[reg] & ~mask) | (value & mask);
-> +}
-> +
-> +static uint32_t dw_ssi_frame_masked(DwSsiState *s)
-> +{
-> +    unsigned int bits = FIELD_EX32(s->regs[R_CTRLR0], CTRLR0, DFS) + 1;
-> +
-> +    return bits == 32 ? UINT32_MAX : MAKE_64BIT_MASK(0, bits);
-> +}
-> +
-> +static bool dw_ssi_is_enabled(const DwSsiState *s)
-> +{
-> +    return FIELD_EX32(s->regs[R_SSIENR], SSIENR, SSIC_EN);
-> +}
-> +
-> +static void dw_ssi_deselect(DwSsiState *s)
-> +{
-> +    if (s->active_cs < 0) {
-> +        return;
-> +    }
-> +
-> +    qemu_irq_raise(s->cs_lines[s->active_cs]);
-> +    s->active_cs = -1;
-> +}
-> +
-> +static void dw_ssi_select(DwSsiState *s, unsigned cs)
-> +{
-> +    if (cs >= s->cfg.num_cs) {
-> +        qemu_log_mask(LOG_GUEST_ERROR,
-> +                      "%s: invalid chip select %u\n",
-> +                      DEVICE(s)->canonical_path, cs);
-> +        dw_ssi_deselect(s);
-> +        return;
-> +    }
-> +
-> +    if (s->active_cs == cs) {
-> +        return;
-> +    }
-> +
-> +    dw_ssi_deselect(s);
-> +    qemu_irq_lower(s->cs_lines[cs]);
-> +    s->active_cs = cs;
-> +}
-> +
-> +static void dw_ssi_update_cs(DwSsiState *s)
-> +{
-> +    uint32_t ser = s->regs[R_SER];
-> +
-> +    if (!dw_ssi_is_enabled(s) || !ser) {
-> +        dw_ssi_deselect(s);
-> +        return;
-> +    }
-> +
-> +    if (ser & (ser - 1)) {
-> +        qemu_log_mask(LOG_GUEST_ERROR,
-> +                      "%s: multiple chip selects enabled: 0x%x\n",
-> +                      DEVICE(s)->canonical_path, ser);
-> +        dw_ssi_deselect(s);
-> +        return;
-> +    }
-> +
-> +    dw_ssi_select(s, ctz32(ser));
-> +}
-> +
-> +static void dw_ssi_abort_transfer(DwSsiState *s)
-> +{
-> +    dw_ssi_deselect(s);
-> +    fifo32_reset(&s->tx_fifo);
-> +    fifo32_reset(&s->rx_fifo);
-> +    s->phase = DW_SSI_PHASE_IDLE;
-> +    s->remaining_frames = 0;
-> +}
-> +
-> +static uint32_t dw_ssi_status(DwSsiState *s)
-> +{
-> +    uint32_t tx_used = fifo32_num_used(&s->tx_fifo);
-> +    uint32_t rx_used = fifo32_num_used(&s->rx_fifo);
-> +    uint32_t sr = 0;
-> +
-> +    sr = FIELD_DP32(sr, SR, BUSY, s->phase != DW_SSI_PHASE_IDLE);
-> +    sr = FIELD_DP32(sr, SR, TFNF, tx_used < s->cfg.fifo_depth);
-> +    sr = FIELD_DP32(sr, SR, TFE, tx_used == 0);
-> +    sr = FIELD_DP32(sr, SR, RFNE, rx_used != 0);
-> +    sr = FIELD_DP32(sr, SR, RFF,
-> +                    rx_used == s->cfg.fifo_depth);
-> +
-> +    return sr;
-> +}
-> +
-> +static void dw_ssi_run_transfer(DwSsiState *s);
-> +
-> +static void dw_ssi_push_tx(DwSsiState *s, uint32_t tx)
-> +{
-> +    if (!dw_ssi_is_enabled(s)) {
-> +        return;
-> +    }
-> +
-> +    if (fifo32_is_full(&s->tx_fifo)) {
-> +        return;
-> +    }
-> +
-> +    fifo32_push(&s->tx_fifo, tx);
-> +
-> +    if (s->phase != DW_SSI_PHASE_STANDARD_TX_ONLY) {
-> +        dw_ssi_run_transfer(s);
-> +    }
-> +}
-> +
-> +static uint32_t dw_ssi_send_frame(DwSsiState *s,
-> +                                        uint32_t tx)
-> +{
-> +    uint32_t mask = dw_ssi_frame_masked(s);
-> +    uint32_t rx;
-> +
-> +    tx &= mask;
-> +
-> +    if (FIELD_EX32(s->regs[R_CTRLR0], CTRLR0, SRL)) {
-> +        rx = tx;
-> +    } else {
-> +        rx = ssi_transfer(s->spi, tx);
-> +    }
-> +
-> +    return rx & mask;
-> +}
-> +
-> +static void dw_ssi_run_transfer(DwSsiState *s)
-> +{
-> +    uint32_t tmod;
-> +
-> +    if (!dw_ssi_is_enabled(s) || s->active_cs < 0) {
-> +        return;
-> +    }
-> +
-> +    /* SCKDV=0 disables sclk_out: no transfer can start. */
-> +    if (FIELD_EX32(s->regs[R_BAUDR], BAUDR, SCKDV) == 0) {
-> +        return;
-> +    }
-> +
-> +    /*
-> +     * TRM: the controller starts shifting only after the TX FIFO
-> +     * occupancy exceeds TXFTLR.TXFTHR.  Transfers already in flight
-> +     * are not interrupted when the FIFO temporarily drops below the
-> +     * level.
-> +     */
-> +    if (s->phase == DW_SSI_PHASE_IDLE &&
-> +        fifo32_num_used(&s->tx_fifo) <=
-> +            FIELD_EX32(s->regs[R_TXFTLR], TXFTLR, TXFTHR)) {
-> +        return;
-> +    }
-> +
-> +    tmod = FIELD_EX32(s->regs[R_CTRLR0], CTRLR0, TMOD);
-> +
-> +    switch (tmod) {
-> +    case DW_SSI_TMOD_TR:
-> +        if (s->phase == DW_SSI_PHASE_IDLE) {
-> +            s->phase = DW_SSI_PHASE_STANDARD_TR;
-> +        }
-> +
-> +        while (!fifo32_is_empty(&s->tx_fifo)) {
-> +            uint32_t tx = fifo32_pop(&s->tx_fifo);
-> +            uint32_t rx = dw_ssi_send_frame(s, tx);
-> +
-> +            if (!fifo32_is_full(&s->rx_fifo)) {
-> +                fifo32_push(&s->rx_fifo, rx);
-> +            } else {
-> +                qemu_log_mask(LOG_GUEST_ERROR,
-> +                              "%s: RX FIFO full, dropping frame\n",
-> +                              DEVICE(s)->canonical_path);
-> +                break;
-> +            }
-> +        }
-> +
-> +        if (fifo32_is_empty(&s->tx_fifo)) {
-> +            s->phase = DW_SSI_PHASE_IDLE;
-> +        }
-> +        break;
-> +    case DW_SSI_TMOD_TO: {
-> +        unsigned int frames = 0;
-> +
-> +        if (fifo32_is_empty(&s->tx_fifo)) {
-> +            s->phase = DW_SSI_PHASE_IDLE;
-> +            break;
-> +        }
-> +
-> +        s->phase = DW_SSI_PHASE_STANDARD_TX_ONLY;
-> +        while (!fifo32_is_empty(&s->tx_fifo) &&
-> +               frames < DW_SSI_PIO_TX_BATCH) {
-> +            uint32_t tx = fifo32_pop(&s->tx_fifo);
-> +
-> +            dw_ssi_send_frame(s, tx);
-> +            frames++;
-> +        }
-> +        if (fifo32_is_empty(&s->tx_fifo)) {
-> +            s->phase = DW_SSI_PHASE_IDLE;
-> +        }
-> +        break;
-> +    }
-> +    case DW_SSI_TMOD_RO:
-> +        switch (s->phase) {
-> +        case DW_SSI_PHASE_IDLE:
-> +            if (fifo32_is_empty(&s->tx_fifo)) {
-> +                break;
-> +            }
-> +            fifo32_pop(&s->tx_fifo);
-> +            s->phase = DW_SSI_PHASE_RX_ONLY;
-> +            s->remaining_frames = FIELD_EX32(s->regs[R_CTRLR1], CTRLR1,
-> +                                              NDF) + 1;
-> +            /* Fall through. */
-> +        case DW_SSI_PHASE_RX_ONLY:
-> +            while (!fifo32_is_full(&s->rx_fifo) &&
-> +                   s->remaining_frames > 0) {
-> +                uint32_t rx = dw_ssi_send_frame(s, 0x00);
-> +
-> +                fifo32_push(&s->rx_fifo, rx);
-> +                s->remaining_frames--;
-> +            }
-> +            if (s->remaining_frames == 0) {
-> +                s->phase = DW_SSI_PHASE_IDLE;
-> +            }
-> +            break;
-> +        }
-> +        break;
-> +    case DW_SSI_TMOD_EEPROM_READ:
-> +        switch (s->phase) {
-> +        case DW_SSI_PHASE_IDLE:
-> +            if (fifo32_is_empty(&s->tx_fifo)) {
-> +                break;
-> +            }
-> +            s->phase = DW_SSI_PHASE_EEPROM_COMMAND;
-> +            /* Fall through. */
-> +        case DW_SSI_PHASE_EEPROM_COMMAND:
-> +            if (fifo32_is_empty(&s->tx_fifo)) {
-> +                break;
-> +            }
-> +            while (!fifo32_is_empty(&s->tx_fifo)) {
-> +                uint32_t tx = fifo32_pop(&s->tx_fifo);
-> +
-> +                dw_ssi_send_frame(s, tx);
-> +            }
-> +            s->phase = DW_SSI_PHASE_EEPROM_DATA;
-> +            s->remaining_frames = FIELD_EX32(s->regs[R_CTRLR1], CTRLR1,
-> +                                              NDF) + 1;
-> +            /* Fall through. */
-> +        case DW_SSI_PHASE_EEPROM_DATA:
-> +            while (!fifo32_is_full(&s->rx_fifo) &&
-> +                   s->remaining_frames > 0) {
-> +                uint32_t rx = dw_ssi_send_frame(s, 0x00);
-> +
-> +                fifo32_push(&s->rx_fifo, rx);
-> +                s->remaining_frames--;
-> +            }
-> +            if (s->remaining_frames == 0) {
-> +                s->phase = DW_SSI_PHASE_IDLE;
-> +            }
-> +            break;
-> +        }
-> +        break;
-> +    default:
-> +        g_assert_not_reached();
-> +    }
-> +}
-> +
-> +static bool dw_ssi_is_dr(hwaddr addr)
-> +{
-> +    return addr >= A_DR0 && addr <= A_DR_END &&
-> +           (addr & 0x3) == 0;
-> +}
-> +
-> +static bool dw_ssi_is_unsupported_offset(hwaddr addr)
-> +{
-> +    switch (addr) {
-> +    /* Enhanced SPI extensions. */
-> +    case A_SPI_CTRLR0:
-> +    case A_DDR_DRIVE_EDGE:
-> +
-> +    /* XIP extensions. */
-> +    case A_XIP_MODE_BITS:
-> +    case A_XIP_INCR_INST:
-> +    case A_XIP_WRAP_INST:
-> +    case A_XIP_CTRL:
-> +    case A_XIP_SER:
-> +    case A_XRXOICR:
-> +    case A_XIP_CNT_TIME_OUT:
-> +    case A_SPI_CTRLR1:
-> +    case A_SPITECR:
-> +    case A_RSVD_138:
-> +    case A_RSVD_13C:
-> +    case A_XIP_WRITE_INCR_INST:
-> +    case A_XIP_WRITE_WRAP_INST:
-> +    case A_XIP_WRITE_CTRL:
-> +
-> +    /* Internal-AXI DMA/IDMA extensions. */
-> +    case A_DMACR:
-> +    case A_AXIAWLEN:
-> +    case A_AXIARLEN:
-> +    case A_SPIDR:
-> +    case A_SPIAR:
-> +    case A_AXIAR0:
-> +    case A_AXIAR1:
-> +    case A_AXIECR:
-> +    case A_DONECR:
-> +
-> +    /* SSI unsupported extensions. */
-> +    case A_RX_SAMPLE_DELAY:
-> +        return true;
-> +    default:
-> +        return false;
-> +    }
-> +}
-> +
-> +static bool dw_ssi_write_requires_disabled(hwaddr addr)
-> +{
-> +    switch (addr) {
-> +    case A_CTRLR0:
-> +    case A_CTRLR1:
-> +    case A_MWCR:
-> +    case A_BAUDR:
-> +        return true;
-> +    default:
-> +        return false;
-> +    }
-> +}
-> +
-> +static uint32_t dw_ssi_unsupported_read(DwSsiState *s,
-> +                                        hwaddr addr)
-> +{
-> +    qemu_log_mask(LOG_UNIMP,
-> +                  "%s: unsupported read at 0x%" HWADDR_PRIx "\n",
-> +                  DEVICE(s)->canonical_path, addr);
-> +    return 0;
-> +}
-> +
-> +static void dw_ssi_unsupported_write(DwSsiState *s,
-> +                                     hwaddr addr,
-> +                                     uint32_t value)
-> +{
-> +    qemu_log_mask(LOG_UNIMP,
-> +                  "%s: unsupported write at 0x%" HWADDR_PRIx
-> +                  " value 0x%08x\n",
-> +                  DEVICE(s)->canonical_path, addr, value);
-> +}
-> +
-> +static uint64_t dw_ssi_read(void *opaque, hwaddr addr, unsigned int size)
-> +{
-> +    DwSsiState *s = DW_SSI(opaque);
-> +    uint32_t value = 0;
-> +
-> +    if (dw_ssi_is_dr(addr)) {
-> +        if (!fifo32_is_empty(&s->rx_fifo)) {
-> +            value = fifo32_pop(&s->rx_fifo) & dw_ssi_frame_masked(s);
-> +        } else {
-> +            value = 0;
-> +        }
-> +
-> +        dw_ssi_run_transfer(s);
-> +        return value;
-> +    }
-> +
-> +    if (dw_ssi_is_unsupported_offset(addr)) {
-> +        value = dw_ssi_unsupported_read(s, addr);
-> +        return value;
-> +    }
-> +
-> +    switch (addr) {
-> +    case A_CTRLR0:
-> +    case A_CTRLR1:
-> +    case A_SSIENR:
-> +    case A_MWCR:
-> +    case A_BAUDR:
-> +    case A_TXFTLR:
-> +    case A_RXFTLR:
-> +    case A_IMR:
-> +    case A_IDR:
-> +    case A_SSIC_VERSION_ID:
-> +        value = s->regs[addr / sizeof(uint32_t)];
-> +        break;
-> +
-> +    case A_SER:
-> +        value = s->regs[R_SER] & MAKE_64BIT_MASK(0, s->cfg.num_cs);
-> +        break;
-> +    case A_TXFLR:
-> +        value = fifo32_num_used(&s->tx_fifo);
-> +        if (s->phase == DW_SSI_PHASE_STANDARD_TX_ONLY) {
-> +            dw_ssi_run_transfer(s);
-> +        }
-> +        break;
-> +    case A_RXFLR:
-> +        value = fifo32_num_used(&s->rx_fifo);
-> +        break;
-> +    case A_SR:
-> +        value = dw_ssi_status(s);
-> +        if (s->phase == DW_SSI_PHASE_STANDARD_TX_ONLY) {
-> +            dw_ssi_run_transfer(s);
-> +        }
-> +        break;
-> +    default:
-> +        if (addr >= DW_SSI_REGS_SIZE || (addr & 0x3) != 0) {
-> +            qemu_log_mask(LOG_GUEST_ERROR,
-> +                          "%s: bad read offset 0x%" HWADDR_PRIx "\n",
-> +                          DEVICE(s)->canonical_path, addr);
-> +        }
-> +        break;
-> +    }
-> +
-> +    return value;
-> +}
-> +
-> +static void dw_ssi_write(void *opaque, hwaddr addr,
-> +                              uint64_t value, unsigned int size)
-> +{
-> +    DwSsiState *s = DW_SSI(opaque);
-> +
-> +    if (dw_ssi_is_dr(addr)) {
-> +        dw_ssi_push_tx(s, value);
-> +        return;
-> +    }
-> +
-> +    if (dw_ssi_is_unsupported_offset(addr)) {
-> +        dw_ssi_unsupported_write(s, addr, value);
-> +        return;
-> +    }
-> +
-> +    if (dw_ssi_write_requires_disabled(addr) &&
-> +        dw_ssi_is_enabled(s)) {
-> +        qemu_log_mask(LOG_GUEST_ERROR,
-> +                      "%s: write to offset 0x%" HWADDR_PRIx
-> +                      " while SSI is enabled\n",
-> +                      DEVICE(s)->canonical_path, addr);
-> +        return;
-> +    }
-> +
-> +    switch (addr) {
-> +    case A_CTRLR0:
-> +        value &= ~R_CTRLR0_SPI_FRF_MASK;
-
-Why does the SPI_FRF field need to be explicity cleared? It will be 
-cleared in dw_ssi_write_masked since it is not contained in the 
-DW_SSI_CTRLR0_STANDARD_WRITABLE_MASK .
-
-Can you also print an unimplemented warning if a non-zero value is 
-written to the SPI_FRF field. Currently configuring the device to 
-enhanced mode is silently ignored.
-
-> +        dw_ssi_write_masked(s, R_CTRLR0, value,
-> +                                 DW_SSI_CTRLR0_STANDARD_WRITABLE_MASK);
-> +        break;
-> +    case A_CTRLR1:
-> +        dw_ssi_write_masked(s, R_CTRLR1, value,
-> +                                 DW_SSI_CTRLR1_WRITABLE_MASK);
-> +        break;
-> +    case A_SSIENR: {
-> +        bool old_enabled = dw_ssi_is_enabled(s);
-> +        bool new_enabled = value & R_SSIENR_SSIC_EN_MASK;
-> +
-> +        if (old_enabled == new_enabled) {
-> +            return;
-> +        }
-> +
-> +        s->regs[R_SSIENR] = FIELD_DP32(0, SSIENR, SSIC_EN, new_enabled);
-> +        if (!new_enabled) {
-> +            dw_ssi_abort_transfer(s);
-> +            return;
-> +        }
-> +
-> +        dw_ssi_update_cs(s);
-> +        dw_ssi_run_transfer(s);
-> +        break;
-> +    }
-> +    case A_MWCR:
-> +        dw_ssi_write_masked(s, R_MWCR, value,
-> +                                 DW_SSI_MWCR_WRITABLE_MASK);
-> +        break;
-> +    case A_SER: {
-> +        uint32_t old_ser = s->regs[R_SER];
-> +        uint32_t new_ser = value & MAKE_64BIT_MASK(0, s->cfg.num_cs);
-> +
-> +        /*
-> +         * Changing the selected slave terminates a pending transaction:
-> +         * the FIFOs are flushed only by clearing SSIENR (TRM), but a
-> +         * stale RO/EEPROM phase must not resume on the new chip select.
-> +         */
-> +        if (old_ser != new_ser && s->phase != DW_SSI_PHASE_IDLE) {
-> +            s->phase = DW_SSI_PHASE_IDLE;
-> +            s->remaining_frames = 0;
-> +        }
-> +        s->regs[R_SER] = new_ser;
-> +
-> +        dw_ssi_update_cs(s);
-> +        dw_ssi_run_transfer(s);
-> +        break;
-> +    }
-> +    case A_BAUDR:
-> +        dw_ssi_write_masked(s, R_BAUDR, value,
-> +                                 DW_SSI_BAUDR_WRITABLE_MASK);
-> +        break;
-> +    case A_TXFTLR:
-> +        if (!dw_ssi_fifo_threshold_valid(
-> +                s, FIELD_EX32(value, TXFTLR, TFT)) ||
-> +            !dw_ssi_fifo_threshold_valid(
-> +                s, FIELD_EX32(value, TXFTLR, TXFTHR))) {
-> +            qemu_log_mask(LOG_GUEST_ERROR,
-> +                          "%s: invalid txftlr value %x\n",
-> +                          DEVICE(s)->canonical_path, (unsigned int)value);
-> +            break;
-> +        }
-> +        dw_ssi_write_masked(s, R_TXFTLR, value,
-> +                                 DW_SSI_TXFTLR_WRITABLE_MASK);
-> +        dw_ssi_run_transfer(s);
-> +        break;
-> +    case A_RXFTLR:
-> +        if (!dw_ssi_fifo_threshold_valid(
-> +                s, FIELD_EX32(value, RXFTLR, RFT))) {
-> +            qemu_log_mask(LOG_GUEST_ERROR,
-> +                          "%s: invalid rxftlr value %x\n",
-> +                          DEVICE(s)->canonical_path, (unsigned int)value);
-> +            break;
-> +        }
-> +        dw_ssi_write_masked(s, R_RXFTLR, value,
-> +                                 DW_SSI_RXFTLR_WRITABLE_MASK);
-> +        break;
-> +    case A_TXFLR:
-> +    case A_RXFLR:
-> +    case A_SR:
-> +        break;
-> +    case A_IMR:
-> +        dw_ssi_write_masked(s, R_IMR, value,
-> +                                 DW_SSI_IMR_WRITABLE_MASK);
-> +        break;
-> +    case A_IDR:
-> +    case A_SSIC_VERSION_ID:
-> +        break;
-> +    default:
-> +        if (addr >= DW_SSI_REGS_SIZE || (addr & 0x3) != 0) {
-> +            qemu_log_mask(LOG_GUEST_ERROR,
-> +                          "%s: bad write offset 0x%" HWADDR_PRIx "\n",
-> +                          DEVICE(s)->canonical_path, addr);
-> +        }
-> +        break;
-> +    }
-> +}
-> +
-> +static const MemoryRegionOps dw_ssi_ops = {
-> +    .read = dw_ssi_read,
-> +    .write = dw_ssi_write,
-> +    .endianness = DEVICE_LITTLE_ENDIAN,
-> +    .impl = {
-> +        .min_access_size = 4,
-> +        .max_access_size = 4,
-> +        .unaligned = false,
-> +    },
-> +    .valid = {
-> +        .min_access_size = 4,
-> +        .max_access_size = 4,
-> +        .unaligned = false,
-> +    },
-> +};
-> +
-> +static void dw_ssi_enter_reset(Object *obj, ResetType type)
-> +{
-> +    DwSsiState *s = DW_SSI(obj);
-> +
-> +    memset(s->regs, 0, sizeof(s->regs));
-> +    fifo32_reset(&s->tx_fifo);
-> +    fifo32_reset(&s->rx_fifo);
-> +    s->phase = DW_SSI_PHASE_IDLE;
-> +    s->remaining_frames = 0;
-> +
-> +    s->regs[R_CTRLR0] = DW_SSI_CTRLR0_RESET;
-> +    s->regs[R_SR] = DW_SSI_SR_RESET;
-> +    s->regs[R_IMR] = s->cfg.imr_reset & DW_SSI_IMR_WRITABLE_MASK;
-> +    s->regs[R_IDR] = DW_SSI_IDR_RESET;
-> +    s->regs[R_SSIC_VERSION_ID] = DW_SSI_VERSION;
-> +}
-> +
-> +static void dw_ssi_hold_reset(Object *obj, ResetType type)
-> +{
-> +    DwSsiState *s = DW_SSI(obj);
-> +    s->active_cs = -1;
-> +
-> +    if (s->cs_lines) {
-> +        for (int i = 0; i < s->cfg.num_cs; i++) {
-> +            qemu_irq_raise(s->cs_lines[i]);
-> +        }
-> +    }
-> +}
-> +
-> +static int dw_ssi_post_load(void *opaque, int version_id)
-> +{
-> +    DwSsiState *s = opaque;
-> +    uint32_t ndf = FIELD_EX32(s->regs[R_CTRLR1], CTRLR1, NDF) + 1;
-> +
-> +    if (s->active_cs < -1 || s->active_cs >= (int)s->cfg.num_cs) {
-> +        return -EINVAL;
-> +    }
-> +    if (s->phase > DW_SSI_PHASE_STANDARD_TR) {
-> +        return -EINVAL;
-> +    }
-> +    if (s->phase == DW_SSI_PHASE_RX_ONLY ||
-> +        s->phase == DW_SSI_PHASE_EEPROM_DATA) {
-> +        if (s->remaining_frames == 0 || s->remaining_frames > ndf) {
-> +            return -EINVAL;
-> +        }
-> +    } else if (s->remaining_frames != 0) {
-> +        return -EINVAL;
-> +    }
-> +    if (s->active_cs >= 0 &&
-> +        (!dw_ssi_is_enabled(s) ||
-> +         s->regs[R_SER] != BIT(s->active_cs))) {
-> +        return -EINVAL;
-> +    }
-> +
-> +    for (int i = 0; i < s->cfg.num_cs; i++) {
-> +        qemu_irq_raise(s->cs_lines[i]);
-> +    }
-> +    if (s->active_cs >= 0) {
-> +        qemu_irq_lower(s->cs_lines[s->active_cs]);
-> +    }
-> +
-> +    return 0;
-> +}
-> +
-> +static const VMStateDescription vmstate_dw_ssi = {
-> +    .name = TYPE_DW_SSI,
-> +    .version_id = 1,
-> +    .minimum_version_id = 1,
-> +    .post_load = dw_ssi_post_load,
-> +    .fields = (const VMStateField[]) {
-> +        VMSTATE_UINT32_EQUAL(cfg.num_cs, DwSsiState),
-> +        VMSTATE_UINT32_EQUAL(cfg.fifo_depth, DwSsiState),
-> +        VMSTATE_UINT32_EQUAL(cfg.imr_reset, DwSsiState),
-> +        VMSTATE_UINT32_ARRAY(regs, DwSsiState, DW_SSI_NUM_REGS),
-> +        VMSTATE_FIFO32(tx_fifo, DwSsiState),
-> +        VMSTATE_FIFO32(rx_fifo, DwSsiState),
-> +        VMSTATE_UINT32(phase, DwSsiState),
-> +        VMSTATE_UINT32(remaining_frames, DwSsiState),
-> +        VMSTATE_INT32(active_cs, DwSsiState),
-> +        VMSTATE_END_OF_LIST()
-> +    },
-> +};
-> +
-> +static void dw_ssi_init(Object *obj)
-> +{
-> +    DwSsiState *s = DW_SSI(obj);
-> +    DeviceState *dev = DEVICE(obj);
-> +    SysBusDevice *sbd = SYS_BUS_DEVICE(obj);
-> +
-> +    s->spi = ssi_create_bus(dev, "spi");
-> +
-> +    memory_region_init_io(&s->mmio, obj, &dw_ssi_ops, s,
-> +                          TYPE_DW_SSI, DW_SSI_MMIO_SIZE);
-> +    sysbus_init_mmio(sbd, &s->mmio);
-> +
-> +    s->active_cs = -1;
-> +}
-> +
-> +static void dw_ssi_realize(DeviceState *dev, Error **errp)
-> +{
-> +    DwSsiState *s = DW_SSI(dev);
-> +
-> +    if (!dw_ssi_validate_config(s, errp)) {
-> +        return;
-> +    }
-> +
-> +    s->cs_lines = g_new0(qemu_irq, s->cfg.num_cs);
-> +    qdev_init_gpio_out_named(dev, s->cs_lines, "cs", s->cfg.num_cs);
-> +
-> +    fifo32_create(&s->tx_fifo, s->cfg.fifo_depth);
-> +    fifo32_create(&s->rx_fifo, s->cfg.fifo_depth);
-> +}
-> +
-> +static void dw_ssi_finalize(Object *obj)
-> +{
-> +    DwSsiState *s = DW_SSI(obj);
-> +
-> +    fifo32_destroy(&s->tx_fifo);
-> +    fifo32_destroy(&s->rx_fifo);
-> +    g_free(s->cs_lines);
-> +}
-> +
-> +static const Property dw_ssi_properties[] = {
-> +    DEFINE_PROP_UINT32("num-cs", DwSsiState, cfg.num_cs, 1),
-> +    DEFINE_PROP_UINT32("fifo-depth", DwSsiState, cfg.fifo_depth, 256),
-> +    DEFINE_PROP_UINT32("imr-reset", DwSsiState,
-> +                       cfg.imr_reset, 0x0000003f),
-> +};
-> +
-> +static void dw_ssi_class_init(ObjectClass *klass, const void *data)
-> +{
-> +    DeviceClass *dc = DEVICE_CLASS(klass);
-> +    ResettableClass *rc = RESETTABLE_CLASS(klass);
-> +
-> +    dc->realize = dw_ssi_realize;
-> +    dc->vmsd = &vmstate_dw_ssi;
-> +    device_class_set_props(dc, dw_ssi_properties);
-> +    rc->phases.enter = dw_ssi_enter_reset;
-> +    rc->phases.hold = dw_ssi_hold_reset;
-> +}
-> +
-> +static const TypeInfo dw_ssi_info = {
-> +    .name = TYPE_DW_SSI,
-> +    .parent = TYPE_SYS_BUS_DEVICE,
-> +    .instance_size = sizeof(DwSsiState),
-> +    .instance_init = dw_ssi_init,
-> +    .instance_finalize = dw_ssi_finalize,
-> +    .class_init = dw_ssi_class_init,
-> +};
-> +
-> +static void dw_ssi_register_types(void)
-> +{
-> +    type_register_static(&dw_ssi_info);
-> +}
-> +
-> +type_init(dw_ssi_register_types)
-> diff --git a/hw/ssi/meson.build b/hw/ssi/meson.build
-> index 6afb1ea200..447780846c 100644
-> --- a/hw/ssi/meson.build
-> +++ b/hw/ssi/meson.build
-> @@ -1,6 +1,7 @@
->   system_ss.add(when: 'CONFIG_ALLWINNER_A10_SPI', if_true: files('allwinner-a10-spi.c'))
->   system_ss.add(when: 'CONFIG_ASPEED_SOC', if_true: files('aspeed_smc.c'))
->   system_ss.add(when: 'CONFIG_MSF2', if_true: files('mss-spi.c'))
-> +system_ss.add(when: 'CONFIG_DW_SSI', if_true: files('dw_ssi.c'))
->   system_ss.add(when: 'CONFIG_NPCM7XX', if_true: files('npcm7xx_fiu.c', 'npcm_pspi.c'))
->   system_ss.add(when: 'CONFIG_PL022', if_true: files('pl022.c'))
->   system_ss.add(when: 'CONFIG_SIFIVE_SPI', if_true: files('sifive_spi.c'))
-> diff --git a/include/hw/ssi/dw_ssi.h b/include/hw/ssi/dw_ssi.h
-> new file mode 100644
-> index 0000000000..a74e906ef8
-> --- /dev/null
-> +++ b/include/hw/ssi/dw_ssi.h
-> @@ -0,0 +1,62 @@
-> +/*
-> + * Synopsys DesignWare SSI
-> + *
-> + * Copyright (c) 2026 Kangjie Huang <flamboyant.h.01@gmail.com>
-> + *
-> + * SPDX-License-Identifier: GPL-2.0-or-later
-> + *
-> + * Emulates the DesignWare SSI controller in Standard SPI mode,
-> + * covering the PIO/FIFO data path and chip selects.
-> + */
-> +
-> +#ifndef HW_SSI_DW_SSI_H
-> +#define HW_SSI_DW_SSI_H
-> +
-> +#include "hw/core/sysbus.h"
-> +#include "hw/ssi/ssi.h"
-> +#include "qemu/fifo32.h"
-> +#include "qom/object.h"
-> +
-> +#define TYPE_DW_SSI "designware-ssi"
-> +OBJECT_DECLARE_SIMPLE_TYPE(DwSsiState, DW_SSI)
-> +
-> +#define DW_SSI_MMIO_SIZE 0x1000
-> +#define DW_SSI_REGS_SIZE 0x14c
-> +#define DW_SSI_NUM_REGS \
-> +    (DW_SSI_REGS_SIZE / sizeof(uint32_t))
-> +
-> +typedef enum DwSsiPhase {
-> +    DW_SSI_PHASE_IDLE,
-> +    DW_SSI_PHASE_STANDARD_TX_ONLY,
-> +    DW_SSI_PHASE_RX_ONLY,
-> +    DW_SSI_PHASE_EEPROM_COMMAND,
-> +    DW_SSI_PHASE_EEPROM_DATA,
-> +    DW_SSI_PHASE_STANDARD_TR,
-> +} DwSsiPhase;
-> +
-> +typedef struct DwSsiConfig {
-> +    uint32_t num_cs;
-> +    uint32_t fifo_depth;
-> +    uint32_t imr_reset;
-> +} DwSsiConfig;
-> +
-> +struct DwSsiState {
-> +    SysBusDevice parent_obj;
-> +
-> +    MemoryRegion mmio;
-> +    SSIBus *spi;
-> +
-> +    qemu_irq *cs_lines;
-> +
-> +    Fifo32 tx_fifo;
-> +    Fifo32 rx_fifo;
-> +    uint32_t regs[DW_SSI_NUM_REGS];
-> +
-> +    DwSsiConfig cfg;
-> +
-> +    uint32_t phase;
-> +    uint32_t remaining_frames;
-> +
-> +    int active_cs;
-> +};
-> +#endif /* HW_SSI_DW_SSI_H */
-
+T24gV2VkLCAyMDI2LTA4LTE5IGF0IDEyOjU2ICswMjAwLA0KZnJlZGVyaWMucGV0cm90QHVuaXYt
+Z3Jlbm9ibGUtYWxwZXMuZnIgd3JvdGU6DQo+IEZyb206IEZyw6lkw6lyaWMgUMOpdHJvdCA8ZnJl
+ZGVyaWMucGV0cm90QHVuaXYtZ3Jlbm9ibGUtYWxwZXMuZnI+DQo+IA0KPiBDb3JyZWN0IHNzdGF0
+dXMgdXBkYXRlIGFuZCBhbGxvdyBzdXBwb3J0IGZvciBydjEyOCBpbiBtc3RhdHVzLA0KPiBwcm92
+aWRlZCB0aGUgY3B1IGlzIGFuIHJ2MTI4Lg0KPiANCj4gQ2hhbmdlcyBjb21wYXJlZCB0byB2MToN
+Cj4gLSBhZGQgY292ZXIgbGV0dGVyDQo+IC0gYWRkIHRoZSBSZXZpZXdlZC1ieSB0YWdzDQo+IA0K
+PiBGcsOpZMOpcmljIFDDqXRyb3QgKDIpOg0KPiDCoCB0YXJnZXQvcmlzY3Y6IEZpeCBzc3RhdHVz
+IHVwZGF0ZSBpbiBydjEyOA0KPiDCoCB0YXJnZXQvcmlzY3Y6IEFsbG93IFVYTCB0byBiZSAzIGlu
+IG1zdGF0dXMgb24gcnYxMjgNCg0KVGhhbmtzIQ0KDQpBcHBsaWVkIHRvIHJpc2N2LXRvLWFwcGx5
+Lm5leHQNCg0KQWxpc3RhaXINCg0KPiANCj4gwqB0YXJnZXQvcmlzY3YvdGNnL2Nzci5jIHwgOCAr
+KysrLS0tLQ0KPiDCoDEgZmlsZSBjaGFuZ2VkLCA0IGluc2VydGlvbnMoKyksIDQgZGVsZXRpb25z
+KC0pDQo=
 
