@@ -4,131 +4,136 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C12BC5DF81
-	for <qemu-riscv@archiver.kernel.org>; Thu, 20 Aug 2026 20:15:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D06CC5DF81
+	for <qemu-riscv@archiver.kernel.org>; Thu, 20 Aug 2026 20:15:41 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wx99a-0005QA-7k; Thu, 20 Aug 2026 16:14:22 -0400
+	id 1wx9Ae-0006HT-QL; Thu, 20 Aug 2026 16:15:28 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1wx99Y-0005Nn-Ip
- for qemu-riscv@nongnu.org; Thu, 20 Aug 2026 16:14:20 -0400
+ id 1wx9AR-00068Y-H5
+ for qemu-riscv@nongnu.org; Thu, 20 Aug 2026 16:15:15 -0400
 Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1wx99V-0001y9-V0
- for qemu-riscv@nongnu.org; Thu, 20 Aug 2026 16:14:20 -0400
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+ id 1wx9AN-0002M7-FU
+ for qemu-riscv@nongnu.org; Thu, 20 Aug 2026 16:15:14 -0400
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 67KK8S394032343
- for <qemu-riscv@nongnu.org>; Thu, 20 Aug 2026 20:14:08 GMT
+ 67KK7idv3243040
+ for <qemu-riscv@nongnu.org>; Thu, 20 Aug 2026 20:15:00 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- iDP7SSBBed9OilMDhZqOv3xXCrS8V81wrx791E5ihCQ=; b=LMlsqdZRVHLB0wQT
- Zce0HAPHEDYXSvHRmYBkCDR2i22PnNg0SFZTrVdkLfxBbXU7xfmYw6O8lZdYgR72
- LA8cQa028DeUjj+8ADOAEIL3/4QuzhshS8HLdcsXcr54hjSPRd4UY9qIA0P2K0gd
- gjY+4KrsO+vrnzK9mgdHdsP3A8PAO+pP4cNPTTobxqCkkgBkM+PCBS8hoa0AgSZj
- 1uOffPkwxnXW672aUy10M0bazcKfNn0XBLmA+g4vI06jSXfEW8q75uVXmvHfJbzq
- +wnmi+QrtccQDDsBALFLzTWBGWf06guPX3ByZ+ZzTA/gte5/v2zjNWjHJpYJJms4
- VFlvfg==
+ E4Asvl4uLwcbAodqEq9ruJYyCPOIEYw9M6JfsXTVRG0=; b=kscPNHkv/YnPK8RE
+ S4s9vj9eYf9FAT2+jcP8js2ETP4TlqthKsHJv4112H10Un/XfPrZQgWSz+6yukRB
+ jgMg+gaJ24SPB5/DdJxK+a31n0hktzCLGOPrTGFluQlQlLY1i1/R2qNGJiUukQQj
+ /UgZZgVlglZ8aYqfVdVK8lRbr5PwZuX/2PjyhJ1DfkPjemY3RxrsJYDHTE9OrGkP
+ 5rtYSeHUgSrBRXaLYwb1pxq63eNd7beL3BKrOttmJyhJSGOFT3HfoXwbIaA5VuQ3
+ 0YIG1+TAH8STLDwxkJOhKEIz7n8hAvvELfhjMWYDqhj6Z4PeK/sip1eVtl1vZBGe
+ N2q2/Q==
 Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com
  [209.85.160.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g5xbvb3ke-1
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g5x05u5ra-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Thu, 20 Aug 2026 20:14:08 +0000 (GMT)
+ for <qemu-riscv@nongnu.org>; Thu, 20 Aug 2026 20:15:00 +0000 (GMT)
 Received: by mail-qt1-f197.google.com with SMTP id
- d75a77b69052e-51c19493ac2so2142741cf.1
- for <qemu-riscv@nongnu.org>; Thu, 20 Aug 2026 13:14:08 -0700 (PDT)
+ d75a77b69052e-51c1d7886cdso4224081cf.1
+ for <qemu-riscv@nongnu.org>; Thu, 20 Aug 2026 13:15:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1787256848; x=1787861648; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1787256900; x=1787861700; darn=nongnu.org;
  h=content-transfer-encoding:content-type:mime-version:references
  :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=iDP7SSBBed9OilMDhZqOv3xXCrS8V81wrx791E5ihCQ=;
- b=Ckozgvq4NsaPcaqCyGoX6FFcfWgx08ybdbi7uQU9XcuLoeJmmc2XLbobrO0WSroEYQ
- yvutxVhI9Nc3cDV5BhQKjifi3ismGMHrxrW7e8jwWlcv8TvRZn4kmyVW32QjvNLfOY3n
- eVGcsjoqA8mrNCInVf61/fjDyagatT3loOgUgAE/oYjGZLWuGCA4VSGs7Hu4cPPLNm3E
- dweuPjesa0v5ULNtKIBInOlH5YcpBscmINWpGF044E+yj1ELgRNK5NzVoRtVRaJ+p3Qj
- 8cZGzL9Ils2M8Hoibp01cGEIgc4f+MQhBed8GnKDOh775m+d/2NfQitRmvVoWRl05YWx
- xIJg==
+ bh=E4Asvl4uLwcbAodqEq9ruJYyCPOIEYw9M6JfsXTVRG0=;
+ b=OZoLHba9Xn8JzWrN9p+bL1WG5HjVapaCu1pBsjmeWdC9WLNrIgcccsOUpSOoNOmjKf
+ hgw8pvmL9HzpoAAnk+P9QnC/KcEU3gD0Yzxe/vsVZs/9oTN5/6WRdueuu/EQqX1SAAs7
+ BgOuIA1PnnMeI54URTW8su9oClxOJIz6M5BeWMjbu6vYv2Y1RfXgtqkDIFb+liLS/pos
+ CmDtThSPzMjBXtdlIUSvmber5PcBsDevnOn+OXeSoDS0QhQ1FSUxWnnSO3mFxPPtx3z0
+ LDPlZkO+gkOtFJj1AAqLCWiSGNhJtuYl5ZA9NNY3VvLGbhLcNrU0SuuzXtmyab1jtyrh
+ i9Ug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787256848; x=1787861648;
+ d=1e100.net; s=20251104; t=1787256900; x=1787861700;
  h=content-transfer-encoding:content-type:mime-version:references
  :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=iDP7SSBBed9OilMDhZqOv3xXCrS8V81wrx791E5ihCQ=;
- b=KJN3BYHiNRGes+OR1DUpjmNriNBvaZ1TJzuB3g8denRyk+vbLUhdMdHaw2klIciR9o
- yHskQA7APWR1KhxVyG4TkeJlTaCEF6xnG/r9EVccJH6VJ6ItdmUauzJRVWCVjalZ0PfU
- L2fMXLoroFRnciPcXc82I2IY0lsE9P55rb6lDJuiR1kq0QuNDvJ4KzkiER4/6dKcmoDd
- i3Swp0R7vpsh0oqN6Ct8iI6ueXH047RoOWnPne+DECdE9qpdWCphfL+AjV7h9cu4daB0
- CukFQx7//HLI66OC6Dt1k4R8KUTNi7Pk5DZfjDyZH8DE04REmR7k3SrOBUgGqS6xQp/I
- 45dA==
-X-Gm-Message-State: AOJu0YwkXl0sPE0lf9ebpVFOr5Yy0AgyKYNOtqSdm8IEfPRxQWWSFJPl
- qTevsE1FogPnn6QB/E2Xd76POox9JVfdUJSvzRvXnvfW6BO84W5auPtWHbPzNsW7+QfClo4JnNK
- DyqnhQbqlM+Yg9Y16teWtFUKC59p+TVxvZe8ueOU7FXYtaCZh3PL0+qjEMA==
-X-Gm-Gg: AR+sD11Yxi9oGM7j+78ZCAsXmzGv6W5qtJ6u9MM6J9VUH6DjGEyy29wfxq1iKqgyApC
- HsW2sImqdmN5y6iGfU9eNVaI+Y855Ws2f62Y+mc73Z7u4izMupMzXhuhKTEXdzBQjcfKyZqx3tW
- MxaX7u0NeoNwiDRgeqgqFyBonpHRoHCB1AWXxtnK6wyjORXiLIDSamE7p8YkwUsSIBXXJe+Jhc0
- 6ynOb+ABEIRcAXWNuSLgleUBd84YUowy6yVuJnuIp3sMkd5+JqiZr2+lyUAofHVpwLuC/IGGN/M
- WP/i/w8OkuJggYwT4CW0siaIl11t3jhOLCKFI0YJ8MU8/viJM2Nyv0dTF4ddaeKNd2TUELS6QSi
- m/Hd+OaY6k4bhhca4RnOcMTyO+dhpkA7IQwqXAdBklw==
-X-Received: by 2002:ac8:6f14:0:b0:51c:b98a:2448 with SMTP id
- d75a77b69052e-52df56f9741mr10809501cf.9.1787256847852; 
- Thu, 20 Aug 2026 13:14:07 -0700 (PDT)
-X-Received: by 2002:ac8:6f14:0:b0:51c:b98a:2448 with SMTP id
- d75a77b69052e-52df56f9741mr10809231cf.9.1787256847450; 
- Thu, 20 Aug 2026 13:14:07 -0700 (PDT)
+ bh=E4Asvl4uLwcbAodqEq9ruJYyCPOIEYw9M6JfsXTVRG0=;
+ b=m+TcPZNAohQiqS9JglB778eNMpTdd5pXNCo4BKYJ5fwsnKb4XEKwteL4N8GhPtjEfu
+ Bi/8K1QWD9DaaZR2JhpXFqz/0J3z9ViRUiSedpH/5Kwf43XdhPtEy4o1lqezWMTYB/b7
+ sY9kQASBKYeqc/S6liIJ5Uk1FF1ChdGbhM6Mb4LJoJZMprwTRax4MMyupilqCIdByw4r
+ xnEKLwIybsztxuxM3q8Iey5yQTWp9hfbrvKp1Py441RphC1jguw6SL/aGHPdvQlfBi+v
+ EszdXnLRiVBWFUM/ZzBu+zZmzH76aYaKkwTeSYMmJE5zhRD62FUMAfdreU3XAwD+/cnM
+ Ctgw==
+X-Gm-Message-State: AOJu0YwYgII8ui/bWDvwu/0TOJjMQybAeWS1ZodVOpgfhaZShvfmGdk+
+ /2+Q+/MU5gr1MTXA/H6FDpjTTsud0YdgGxOluNO2NHREO/zzE2Qkq6h9BVEHxvDDFyxLNmspIYG
+ FH5Y7/Mef8UuKEsQNnQCtRTaFgpvrSz5FIL2RDYforRRJ7jULGB/xFv427A==
+X-Gm-Gg: AR+sD12voA5eYiyg/jwOJo7WYCRHfMI2Na8Y3SfFRzOxHVSYv7SkSG9JrSGjUzW8YzB
+ +bMPeLe5BW/k3ojSRAM9G0Maf7XKN4650FmJQrUFNOSd1FP64i9L2xeBFLUgyTCalnk/9hS+tZ5
+ hehX4aDdjcQJYM74yy5+CciNvM8yQNpQ1Ukbtdb5jQUllg/CEIvEYL0ZRe9lJ6xLXIJ4n7WYi+q
+ yMJhEYeKEug0Cgsjcwp5bIJ476eGPoj2U72DM4/9AtJ1ydo+8VVEwBrM7uxycgMQnYe65ErtEJK
+ F6V1pRKX9M6B7cTnFxscM04flb3T2ZMKJ4obFh75OersHry4QHl00M+csobVbEZ7ZQ7sG10NzTA
+ q1wJicn2Yvg3Y/bx27siy9pbeyxkwea66n4B93G/pRA==
+X-Received: by 2002:a05:622a:a1b:b0:52b:4f1a:5fde with SMTP id
+ d75a77b69052e-52df5864a38mr11140911cf.19.1787256899624; 
+ Thu, 20 Aug 2026 13:14:59 -0700 (PDT)
+X-Received: by 2002:a05:622a:a1b:b0:52b:4f1a:5fde with SMTP id
+ d75a77b69052e-52df5864a38mr11135411cf.19.1787256894914; 
+ Thu, 20 Aug 2026 13:14:54 -0700 (PDT)
 Received: from localhost.localdomain (pmd666.hd.free.fr. [88.187.86.199])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-482b14b8038sm13531554f8f.20.2026.08.20.13.14.05
+ 5b1f17b1804b1-499b90d3046sm4287185e9.1.2026.08.20.13.14.53
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 20 Aug 2026 13:14:06 -0700 (PDT)
+ Thu, 20 Aug 2026 13:14:54 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, Peter Maydell <peter.maydell@linaro.org>,
  Paolo Bonzini <pbonzini@redhat.com>, qemu-s390x@nongnu.org,
  Richard Henderson <richard.henderson@linaro.org>, qemu-ppc@nongnu.org,
  Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, qemu-arm@nongnu.org,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
-Subject: [PATCH v2 01/15] target/tricore: Document architectural interrupts as
- not implemented
-Date: Thu, 20 Aug 2026 22:13:41 +0200
-Message-ID: <20260820201356.29775-2-philmd@oss.qualcomm.com>
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
+ =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@mailo.com>,
+ Aurelien Jarno <aurelien@aurel32.net>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Aleksandar Rikalo <arikalo@gmail.com>
+Subject: [PATCH v2 07/15] target/mips: Constify CPUMIPSState for various
+ cpu_*() getters
+Date: Thu, 20 Aug 2026 22:13:47 +0200
+Message-ID: <20260820201356.29775-8-philmd@oss.qualcomm.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260820201356.29775-1-philmd@oss.qualcomm.com>
 References: <20260820201356.29775-1-philmd@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=AMKAkK6n c=1 sm=1 tr=0 ts=6a876010 cx=c_pps
+X-Proofpoint-ORIG-GUID: UC6VWhp7MdXo5yDui6p0CnUG2zrtm9f6
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODIwMDE1MiBTYWx0ZWRfX91roaficZTnl
+ ZWEBeiOhRctn19Qfk1AD4boNDbPrrwQgBDoaknFZIqSXBO7caKqfFXC1SPWSYmga5zO/oNFaAy1
+ QGrJXY26TAt+yieDIirckGGCS1YLyBV9R2oeLAoilIvB2vIB3EEYTJh0oVbzJZi3c//Y3w1flgk
+ Jtjqgvxi+NMBL4vwSyXsqcluiOvGwaP0JMMMrXX/XpTiEaVPvmI3xyEdoy5tdafQy2oGNSd15/a
+ /rabPnSTz9s9l/YAHW26Sunyp6oUujTkAPSmrVgbDnfk+IYaRe89iQJCAB6EaEFsRhbBJNWACV5
+ xXdTk0xKT2qfI045E/ISjqObw9Wan9a3FRdv0dqJa3Y6nmx2Ye1h6Q+6DVV3R521f6z/uu9oDN3
+ DmWTVbN6cv3N+gPqfiUkCkF2QBigVGd6EwGfQbXdZXhvkTchch+7fZgI0eorZeXe4Hm7+lLRXwY
+ UkU1OrB7Y3Dq4yDRrMA==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODIwMDE1MiBTYWx0ZWRfXxooGpp/BfWMv
+ NMU8frwH1ZeXG8ASUyIScn1T2YlcJrFZytIu2VWoJq8MhxC9zxw3S0pnnfBQghU9Q8tKX//61Fi
+ ohyknqPrcFacdK46XaMO+FFfizS3T3c=
+X-Authority-Analysis: v=2.4 cv=VfPH+lp9 c=1 sm=1 tr=0 ts=6a876044 cx=c_pps
  a=EVbN6Ke/fEF3bsl7X48z0g==:117 a=4s3hRJSeHn4rkQlkrse1kQ==:17
  a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=M51BFTxLslgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
- a=EUspDBNiAAAA:8 a=KKAkSRfTAAAA:8 a=Cu_OB6cER5A0ZMY7a4UA:9 a=3ZKOabzyN94A:10
- a=QEXdDO2ut3YA:10 a=a_PwQJl-kcHnX1M80qC6:22 a=cvBusfyB2V15izCimMoJ:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODIwMDE1MiBTYWx0ZWRfXyhqXWB27Mnr9
- Lvhv/QwXK9ni755MvHfUfooeA5AA/TegnQuaCDJKDaZShVvCYm1v7DuZKVay4m4fZDJu8/5OWNC
- 8FJKf2GQa7/9o2axCGxNDuE9eIT5M4UVvsAfc14mYBZbgxtgPzZPlcR2BjYcA0tNfpudyZpAtjJ
- 2sS9iEOWlNgSloQOCxLt8QzrllKT/8nsgmZM7U4fm+iy2jaOfOEZPj3UEyKA/6g15wh1hQg211j
- pU8ttoGxsCjbTpuReZbcsc8ql0CX1bFQxNXX7sv8guihbzC4F+cC6nYhfIC0f75o3OM34VfGgFQ
- J9ENDdnAQ42QS44IDvVyszLFP88QEu4jy1+Ptm9gfFim4oa/lYH/sVVmWItBz/zAhYUGnMBf63d
- /mTYX2r8NPVR2uPNcgvEKWlGXjs93iwtdO5P/7qRqPqlP4R/alvaSsgQzyx3iMe/m/PwvyiLUJc
- mjwqIC2WQ6uXTQ+u3Fw==
-X-Proofpoint-GUID: SGs9bKVqkvuk1voM7RddE1nuqJ7IhsWA
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODIwMDE1MiBTYWx0ZWRfXz1hOOL7f9D0v
- pdCeYJWjpT9fmck6AUcekG+j0aciT841d48pn/UYUmaKSUomzYEO3VPRr91v4LftxsfOxK1jJrN
- iZVc4+C5aT7HPyvbhpshcWcnpjvAgTw=
-X-Proofpoint-ORIG-GUID: SGs9bKVqkvuk1voM7RddE1nuqJ7IhsWA
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
+ a=EUspDBNiAAAA:8 a=20KFwNOVAAAA:8 a=OdUTIDwS7iTBxe5GiEQA:9 a=3ZKOabzyN94A:10
+ a=QEXdDO2ut3YA:10 a=a_PwQJl-kcHnX1M80qC6:22
+X-Proofpoint-GUID: UC6VWhp7MdXo5yDui6p0CnUG2zrtm9f6
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-20_02,2026-08-20_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 spamscore=0 phishscore=0 lowpriorityscore=0 bulkscore=0
- adultscore=0 suspectscore=0 malwarescore=0 impostorscore=0 clxscore=1015
+ spamscore=0 bulkscore=0 phishscore=0 lowpriorityscore=0 clxscore=1015
+ priorityscore=1501 suspectscore=0 malwarescore=0 impostorscore=0 adultscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608200152
 Received-SPF: pass client-ip=205.220.180.131;
@@ -155,32 +160,85 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-As mentioned in commit de680286b52 ("accel/tcg: Make
-cpu_exec_interrupt hook mandatory"):
-
- > Tricore doesn't currently implement the architectural
- > interrupt handling.
-
-Add a comment to help understanding why this SysemuCPUOps
-has_work() handler is simply always returning %true.
+Add the const qualifier to CPUMIPSState when
+the argument is accessed without modification.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Reviewed-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 ---
- target/tricore/cpu.c | 1 +
- 1 file changed, 1 insertion(+)
+ target/mips/cpu.h      |  6 +++---
+ target/mips/internal.h | 10 +++++-----
+ 2 files changed, 8 insertions(+), 8 deletions(-)
 
-diff --git a/target/tricore/cpu.c b/target/tricore/cpu.c
-index 6d448727005..82b56c3cd56 100644
---- a/target/tricore/cpu.c
-+++ b/target/tricore/cpu.c
-@@ -113,6 +113,7 @@ static void tricore_cpu_reset_hold(Object *obj, ResetType type)
- 
- static bool tricore_cpu_has_work(CPUState *cs)
- {
-+    /* Interrupts are not implemented */
-     return true;
+diff --git a/target/mips/cpu.h b/target/mips/cpu.h
+index 319147a948c..6404b342a5d 100644
+--- a/target/mips/cpu.h
++++ b/target/mips/cpu.h
+@@ -1372,19 +1372,19 @@ static inline bool ase_3d_available(const CPUMIPSState *env)
  }
+ 
+ /* Check presence of MSA implementation */
+-static inline bool ase_msa_available(CPUMIPSState *env)
++static inline bool ase_msa_available(const CPUMIPSState *env)
+ {
+     return env->CP0_Config3 & (1 << CP0C3_MSAP);
+ }
+ 
+ /* Check presence of Loongson CSR instructions */
+-static inline bool ase_lcsr_available(CPUMIPSState *env)
++static inline bool ase_lcsr_available(const CPUMIPSState *env)
+ {
+     return env->lcsr_cpucfg2 & (1 << CPUCFG2_LCSRP);
+ }
+ 
+ /* Check presence of multi-threading ASE implementation */
+-static inline bool ase_mt_available(CPUMIPSState *env)
++static inline bool ase_mt_available(const CPUMIPSState *env)
+ {
+     return env->CP0_Config3 & (1 << CP0C3_MT);
+ }
+diff --git a/target/mips/internal.h b/target/mips/internal.h
+index c5c286872eb..7dba22300b1 100644
+--- a/target/mips/internal.h
++++ b/target/mips/internal.h
+@@ -165,7 +165,7 @@ void cpu_mips_store_cause(CPUMIPSState *env, target_ulong val);
+ 
+ extern const VMStateDescription vmstate_mips_cpu;
+ 
+-static inline bool cpu_mips_hw_interrupts_enabled(CPUMIPSState *env)
++static inline bool cpu_mips_hw_interrupts_enabled(const CPUMIPSState *env)
+ {
+     return (env->CP0_Status & (1 << CP0St_IE)) &&
+         !(env->CP0_Status & (1 << CP0St_EXL)) &&
+@@ -180,7 +180,7 @@ static inline bool cpu_mips_hw_interrupts_enabled(CPUMIPSState *env)
+ }
+ 
+ /* Check if there is pending and not masked out interrupt */
+-static inline bool cpu_mips_hw_interrupts_pending(CPUMIPSState *env)
++static inline bool cpu_mips_hw_interrupts_pending(const CPUMIPSState *env)
+ {
+     int32_t pending;
+     int32_t status;
+@@ -247,9 +247,9 @@ static inline void restore_pamask(CPUMIPSState *env)
+     }
+ }
+ 
+-static inline int mips_vpe_active(CPUMIPSState *env)
++static inline int mips_vpe_active(const CPUMIPSState *env)
+ {
+-    MIPSCPU *cpu = env_archcpu(env);
++    const MIPSCPU *cpu = env_archcpu(env);
+     int active = 1;
+ 
+     /* Check that the VPE is enabled.  */
+@@ -281,7 +281,7 @@ static inline int mips_vpe_active(CPUMIPSState *env)
+     return active;
+ }
+ 
+-static inline int mips_vp_active(CPUMIPSState *env)
++static inline int mips_vp_active(const CPUMIPSState *env)
+ {
+     CPUState *cs;
  
 -- 
 2.53.0
