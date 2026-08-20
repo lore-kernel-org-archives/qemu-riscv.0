@@ -4,96 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 163FAC5DF87
-	for <qemu-riscv@archiver.kernel.org>; Thu, 20 Aug 2026 13:04:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F030C5DF87
+	for <qemu-riscv@archiver.kernel.org>; Thu, 20 Aug 2026 13:24:34 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wx2Rv-0000XA-M5; Thu, 20 Aug 2026 09:04:51 -0400
+	id 1wx2kt-0001Gt-4s; Thu, 20 Aug 2026 09:24:27 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1wx2RU-00009F-Ki
- for qemu-riscv@nongnu.org; Thu, 20 Aug 2026 09:04:25 -0400
-Received: from mail-pl1-x635.google.com ([2607:f8b0:4864:20::635])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1wx2RT-0006ml-1J
- for qemu-riscv@nongnu.org; Thu, 20 Aug 2026 09:04:24 -0400
-Received: by mail-pl1-x635.google.com with SMTP id
- d9443c01a7336-2cace91f112so21347975ad.0
- for <qemu-riscv@nongnu.org>; Thu, 20 Aug 2026 06:04:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1787231062; x=1787835862; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:sender:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=7yS/0giiUDXne7qukcztmfwnfi+ZSQS0WX/E61pcERI=;
- b=dYm81o4ziD1i/1cnFx4dBNyGdrdqYYZxu561FkgTjmwYL0nWZEdoP4SsifLjcxJSK5
- 7sFA3D61C1b1RMH52nNRbakj5SHQYRHLNkcMJXaSfozHtbXnXIcPtPIblEYg4vUpjbn+
- NEtPrb1VHkplb0OB6ASXVZhPPLpdx8Z6NTGmoOTp5a6v6N3b0ETIvwuViSeTHuyKwTl9
- lQ0rQGmdWJxUTW6YNMCUbyerHd5uoD1ujHtOoMU4312vgeqdWRT1eirr+Pvgt+nE0X+I
- LwRTpzXVcmp8d4kojlsUUNAJzLBvm7MKEusCKqZ6mafs3aqukCaQapiHrIA1mEyvJnuh
- QZUg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787231062; x=1787835862;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:sender:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=7yS/0giiUDXne7qukcztmfwnfi+ZSQS0WX/E61pcERI=;
- b=UkoQVOXyE11JwKZHYlEJxCWqlS0w+cRj/OzDLMfXZdR4uzkLupubLXhK/DKrvDjYZF
- ibgBD35XOYblB+IEGHB0zFffKvmNMoPp53/5xz7hJvaqaYS3JnFQmgL+cE+8HkMNML/R
- f0XXWPJF1+SJy34sp+iRA7EvMqe5Xnbh8UufW5vZMlRoJFlmMzQqGNssudyjk0HQRPTf
- 3W/qds+y+uN/Es+TyZdy6rVBAPTTkzWsTebX0kADiy9+/RfjOaYRv6jZgVs2nOma+Chv
- ie3VjcCYLD50MxbUDRn0Qf2OPHrCrPLZezs7C+Fr3YQ/Htcri7fC6oQytayoabfYIb2L
- NkMw==
-X-Forwarded-Encrypted: i=1;
- AHgh+RponyUsXPW41YTQ7cYX6iT4X30/hZAYf1xZrUXUd0ASNdnKnhjt/1DvVOqljZDLmQoFQxjMJpvzkG/X@nongnu.org
-X-Gm-Message-State: AFuF++mZswS+BsSPVbpSSrOFm9RuKbw9xLN+vN8GeLULWOsDWh8nxrXE
- Y7+7wbXSTK3aPAG5xsEpc6I+aoCDNQPq9OKg3OvGd2AN7y4S/oWT0Td3
-X-Gm-Gg: AR+sD1335LCLs6KJFfGZ7vBDovdHnAzGu7ZKfqWbp7ujC//BKuLPQJkA7CVSgXa2/SE
- JkGZ2Bp1Z7SsTbfIJnK6G9KPWCNCWo/kNiBpWNIuOqo+Rp5MBG90D0AmMN2Kqt01T8UzJ1igXdn
- CeafyP80kF69E0Gh36sHRtymx9Evnhix34EDukWtvgp8HguhHvxT6JtmnvsczvfQzludTymDtb3
- dn80CU09mPzlihAQ0A/Fh8N6ZnkF+TXCrLdNVUFcx2VBm2PUP2XhymDPTRgE8+dqpGQvWKqUPTn
- y6qph9Qh2wi196rD8G4C9H8bT7OJYzvnD+PIUW6rxO4kXiMei1iJtUcaUJwjpXD6EGwB2HPwpWP
- lxIjosKdv2bfip1aDE/V66he9xdP0RQ/A9MjqgErLCPzr8va6tzTodrnsGl9qmjFWPRG39SNMBy
- G0tqvD79s7NTg3MEP6DDcyofqeu0lrzBDPwoXW43Lq8ioGEfAShnD/qXrMADfmFCbRItyRjVAOb
- eY/JptPQq6ZzMC7DOxNACgRz8ZVnWX4fvev7GkZq9qeWE9H/7q3rptmtw9i5bdOL9LfeC5BJO+Z
- nZjy9Ls17C9QK3GWhfQL7g==
-X-Received: by 2002:a17:90b:390c:b0:381:cef1:11ac with SMTP id
- 98e67ed59e1d1-3958110c03emr19944382a91.10.1787231061400; 
- Thu, 20 Aug 2026 06:04:21 -0700 (PDT)
-Received: from donnager-debian.. ([180.150.112.50])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3957faf6849sm6451915a91.10.2026.08.20.06.04.18
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 20 Aug 2026 06:04:20 -0700 (PDT)
-From: Joel Stanley <joel@jms.id.au>
-To: Alistair Francis <alistair.francis@wdc.com>,
- Richard Henderson <richard.henderson@linaro.org>
-Cc: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-Subject: [PATCH 2/2] tests/tcg/riscv64: Add intrinsics version of test-rvv-ldst
-Date: Thu, 20 Aug 2026 22:32:21 +0930
-Message-ID: <20260820130223.2762-3-joel@jms.id.au>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20260820130223.2762-1-joel@jms.id.au>
-References: <20260820130223.2762-1-joel@jms.id.au>
+ (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
+ id 1wx2kf-0001FU-8R
+ for qemu-riscv@nongnu.org; Thu, 20 Aug 2026 09:24:16 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
+ id 1wx2kd-0003Oq-UF
+ for qemu-riscv@nongnu.org; Thu, 20 Aug 2026 09:24:13 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1787232251;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=xwhU3hwRKEsYC7dXNDP9npemFh0Xv0YnmJxgNr8zM8w=;
+ b=fYwlQI/DnNs7hlhjcJsVGQLFIeWJ3b/vP+/XfE+l8k/g/Pm1kx21dvl0IDcPyTElQAZzKy
+ qq8YVDtdnuI+/ReRvmXQX+JRgbEukHG2cEmT2HEPpPcZDIR2XeJVJtaY2Sbf36TlZAcnq9
+ 995z2DAOd7kOyWpMlRlvQ4IdYx2Qir8=
+Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-158-Nd9wSh0-M_-h471Hgzd8jQ-1; Thu,
+ 20 Aug 2026 09:24:07 -0400
+X-MC-Unique: Nd9wSh0-M_-h471Hgzd8jQ-1
+X-Mimecast-MFC-AGG-ID: Nd9wSh0-M_-h471Hgzd8jQ_1787232245
+Received: from mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.93])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 1B82918002F8; Thu, 20 Aug 2026 13:24:05 +0000 (UTC)
+Received: from localhost (headnet05.pony-001.prod.iad2.dc.redhat.com
+ [10.2.32.117])
+ by mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id 40F731800347; Thu, 20 Aug 2026 13:24:01 +0000 (UTC)
 MIME-Version: 1.0
+Subject: Re: [PATCH 06/13] target/riscv: Constify @iprio argument in
+ riscv_cpu_pending_to_irq()
+From: marcandre.lureau@redhat.com
+To: =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
+Cc: qemu-devel@nongnu.org, qemu-s390x@nongnu.org, 
+ Paolo Bonzini <pbonzini@redhat.com>, 
+ Peter Maydell <peter.maydell@linaro.org>, qemu-ppc@nongnu.org, 
+ qemu-riscv@nongnu.org, Richard Henderson <richard.henderson@linaro.org>, 
+ qemu-arm@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Chao Liu <chao.liu@processmission.com>
+In-Reply-To: <20260820104730.25462-7-philmd@oss.qualcomm.com>
+References: <20260820104730.25462-1-philmd@oss.qualcomm.com>
+ <20260820104730.25462-7-philmd@oss.qualcomm.com>
+Date: Thu, 20 Aug 2026 17:22:15 +0400
+Message-Id: <178723213508.2730041.1545018174811009894.b4-review@b4>
+X-Developer-Signature: v=1; a=openpgp-sha256; l=265;
+ i=marcandre.lureau@redhat.com; h=from:subject:message-id;
+ bh=VyK4xohe3OSCoM6Erb1+RAniVARLGfWHXpRLUdsSmbA=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBqhv/qhWfLkMgrioP10IQER+6XVwYE2/VZkSaBV
+ dqI+i6dn/OJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCaob/6gAKCRDa6OEJdZac
+ 5YAbEACEx3IYgrY/w5nuUf53cgSpjQuA3TqmyiogeaanL8XDmWQ3Y9kFYOa0t7tbbVanGRpIV/a
+ vHwHCEXrQJtJpbbMDRA7JfI9kBa4Hxb333kpne5gSr7KNemR+2GYvC6Vq+Dp7qP21u+UcJqHw1K
+ 5iB4/hlDd3EH2f7+VRS7Etoi4UINV1ioPmn9Stk6gUVsFVHss0Qmq+DFYJ/ihUgbgeQNAJGO167
+ qOamqC2/UtdcPbqXy+aBqI0DGhB5egxl6+aRohyrJnns2aoWfHgmsaen4+4D+xgaH12Ml6ScLL3
+ 7C65BhL8e9NhWBf1FeTQUNgOiQglU6pc4zDiK2O+QS7erFhBB8HOFBh6c9gjSWmu2TNkS6b9PnG
+ RUajydZihHE5lHimlYXfSHFtVtkGTQk469zt6Yft5f2kx1CGLZlYvUI3OAoprKY5ITGjNMNXFvg
+ t0ak3XHW3ydYqkkH5aw3Q4g8nrOmdEOQP0KtmlZmQboE4qnASiabRBuFVVAcZevpJrjTScrxsdR
+ RpMTajRhnvxLLb3p5m0lInAqnd2m7g84MV046XNC8T+UwjL49lka7U51AwWTLeMn+gaiGL7cXsi
+ bNKha+faFk6NbQZVJLaGPsXBO1bAQUlarGjFCg15fRrIo4giyR2FE8Wm2iY0EThdJ4L9dQQBU3Z
+ /tEcp5PJRgYxIuQ==
+X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
+ fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.93
+X-Mimecast-MFC-PROC-ID: yz7gRlwJQiN03-UwOKM1aSSUD6FSs-T6y4TgLIdjHC0_1787232245
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::635;
- envelope-from=joel.stan@gmail.com; helo=mail-pl1-x635.google.com
-X-Spam_score_int: -16
-X-Spam_score: -1.7
-X-Spam_bar: -
-X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.001,
- FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.25,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+Received-SPF: pass client-ip=170.10.133.124;
+ envelope-from=marcandre.lureau@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -23
+X-Spam_score: -2.4
+X-Spam_bar: --
+X-Spam_report: (-2.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.346,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -109,120 +115,12 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-A C userspace program to perform vector loads and stores that cross page
-boundaries, and check the result.
+On Thu, 20 Aug 2026 12:47:22 +0200, Philippe Mathieu-Daudé <philmd@oss.qualcomm.com> wrote:
+> @iprio[] is an array only accessed read-only.
 
-Signed-off-by: Joel Stanley <joel@jms.id.au>
----
- tests/tcg/riscv64/test-rvv-ldst-intrinsics.c | 66 ++++++++++++++++++++
- tests/tcg/riscv64/Makefile.target            | 12 +++-
- 2 files changed, 75 insertions(+), 3 deletions(-)
- create mode 100644 tests/tcg/riscv64/test-rvv-ldst-intrinsics.c
+Reviewed-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 
-diff --git a/tests/tcg/riscv64/test-rvv-ldst-intrinsics.c b/tests/tcg/riscv64/test-rvv-ldst-intrinsics.c
-new file mode 100644
-index 000000000000..3dbc8624700a
---- /dev/null
-+++ b/tests/tcg/riscv64/test-rvv-ldst-intrinsics.c
-@@ -0,0 +1,66 @@
-+/*
-+ * RISC-V vector load/store test, including accesses that cross a page
-+ * boundary. Intrinsics version of test-rvv-ldst.S.
-+ *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ */
-+
-+#include <riscv_vector.h>
-+#include <stdint.h>
-+#include <stdlib.h>
-+#include <string.h>
-+
-+#define MAX_PAGE_SIZE 65536
-+#define NUM_BYTES 16
-+
-+struct cross_page {
-+    uint8_t pad[MAX_PAGE_SIZE - NUM_BYTES / 2];
-+    uint8_t data[NUM_BYTES];
-+};
-+
-+/* Page aligned so the within-page cases never cross a boundary */
-+static const uint8_t src_data[NUM_BYTES]
-+    __attribute__((aligned(MAX_PAGE_SIZE))) = {
-+    0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17,
-+    0x18, 0x19, 0x1A, 0x1B, 0x1C, 0x1D, 0x1E, 0x1F,
-+};
-+
-+static const struct cross_page src_cross
-+    __attribute__((aligned(MAX_PAGE_SIZE))) = {
-+    .data = {
-+        0x20, 0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x27,
-+        0x28, 0x29, 0x2A, 0x2B, 0x2C, 0x2D, 0x2E, 0x2F,
-+    },
-+};
-+
-+static uint8_t dst_data[NUM_BYTES] __attribute__((aligned(MAX_PAGE_SIZE)));
-+static struct cross_page dst_cross __attribute__((aligned(MAX_PAGE_SIZE)));
-+
-+static void vec_copy(uint8_t *dst, const uint8_t *src, int code)
-+{
-+    size_t vl = __riscv_vsetvl_e8m1(NUM_BYTES);
-+    if (vl != NUM_BYTES) {
-+        exit(code);
-+    }
-+
-+    vuint8m1_t v = __riscv_vle8_v_u8m1(src, vl);
-+    __riscv_vse8_v_u8m1(dst, v, vl);
-+
-+    if (memcmp(dst, src, NUM_BYTES)) {
-+        exit(code);
-+    }
-+}
-+
-+int main(void)
-+{
-+    /* Case 1: load/store within a page */
-+    vec_copy(dst_data, src_data, 1);
-+
-+    /* Case 2: the load straddles a page boundary */
-+    vec_copy(dst_data, src_cross.data, 2);
-+
-+    /* Case 3: the store straddles a page boundary */
-+    vec_copy(dst_cross.data, src_data, 3);
-+
-+    return 0;
-+}
-diff --git a/tests/tcg/riscv64/Makefile.target b/tests/tcg/riscv64/Makefile.target
-index 68a5ec525598..3c6cd4937cad 100644
---- a/tests/tcg/riscv64/Makefile.target
-+++ b/tests/tcg/riscv64/Makefile.target
-@@ -14,10 +14,11 @@ TESTS += test-aes
- run-test-aes: QEMU_OPTS += -cpu rv64,zk=on
- 
- # Vector load test
--TESTS += test-rvv-ldst
--test-rvv-ldst: CFLAGS += -march=rv64gcv
-+TESTS += test-rvv-ldst test-rvv-ldst-intrinsics
-+test-rvv-ldst-intrinsics test-rvv-ldst: CFLAGS += -march=rv64gcv
- test-rvv-ldst: LDFLAGS = -nostdlib -static
--run-test-rvv-ldst: QEMU_OPTS += -cpu max
-+test-rvv-ldst-intrinsics: LDFLAGS = -static
-+run-test-rvv-ldst-intrinsics run-test-rvv-ldst: QEMU_OPTS += -cpu max
- 
- # Re-run the vector tests at each supported VLEN
- TEST_RVV_VLENS = 128 256 512 1024
-@@ -26,6 +27,11 @@ run-test-rvv-ldst-vlen%: test-rvv-ldst
- 	$(call run-test, $@, env QEMU=$(QEMU) $(QEMU) $(QEMU_OPTS) -cpu max$(COMMA)vlen=$* $<, \
- 		test-rvv-ldst with vlen=$*)
- 
-+EXTRA_RUNS += $(patsubst %,run-test-rvv-ldst-intrinsics-vlen%,$(TEST_RVV_VLENS))
-+run-test-rvv-ldst-intrinsics-vlen%: test-rvv-ldst-intrinsics
-+	$(call run-test, $@, env QEMU=$(QEMU) $(QEMU) $(QEMU_OPTS) -cpu max$(COMMA)vlen=$* $<, \
-+		test-rvv-ldst-intrinsics with vlen=$*)
-+
- # Test for fcvtmod
- TESTS += test-fcvtmod
- test-fcvtmod: CFLAGS += -march=rv64imafdc
 -- 
-2.53.0
+Marc-André Lureau <marcandre.lureau@redhat.com>
 
 
