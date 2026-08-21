@@ -4,96 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9A26C5DF94
-	for <qemu-riscv@archiver.kernel.org>; Fri, 21 Aug 2026 17:08:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC315C5DF97
+	for <qemu-riscv@archiver.kernel.org>; Fri, 21 Aug 2026 17:33:18 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wxSiN-0006Wp-OT; Fri, 21 Aug 2026 13:07:35 -0400
+	id 1wxT6r-0005U0-ID; Fri, 21 Aug 2026 13:32:53 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wxSiM-0006Vw-8G
- for qemu-riscv@nongnu.org; Fri, 21 Aug 2026 13:07:34 -0400
-Received: from mail-pf1-x436.google.com ([2607:f8b0:4864:20::436])
+ id 1wxT6o-0005TQ-9D
+ for qemu-riscv@nongnu.org; Fri, 21 Aug 2026 13:32:50 -0400
+Received: from mail-pg1-x52b.google.com ([2607:f8b0:4864:20::52b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wxSiK-000627-HL
- for qemu-riscv@nongnu.org; Fri, 21 Aug 2026 13:07:33 -0400
-Received: by mail-pf1-x436.google.com with SMTP id
- d2e1a72fcca58-8485b358552so448857b3a.2
- for <qemu-riscv@nongnu.org>; Fri, 21 Aug 2026 10:07:32 -0700 (PDT)
+ id 1wxT6m-0004PM-BQ
+ for qemu-riscv@nongnu.org; Fri, 21 Aug 2026 13:32:49 -0400
+Received: by mail-pg1-x52b.google.com with SMTP id
+ 41be03b00d2f7-cbedd5aece4so1696546a12.0
+ for <qemu-riscv@nongnu.org>; Fri, 21 Aug 2026 10:32:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1787332051; x=1787936851; darn=nongnu.org;
+ d=linaro.org; s=google; t=1787333565; x=1787938365; darn=nongnu.org;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=iwoY3fBtLl9fRUQCLLgjCX29uMCeiWJhu1A2Z6V/jpY=;
- b=mbW+cRXnbJGB61egv1/zXf9TTa5c4R7KAQoAvrfti9+nDWMFgfFaNUyZ3nL40+j2ZU
- UdrsPiFBUtwSZ88Fva7WneS+Tvrc6gwWwMulDEHdb+K19mEV6yHBE62OB6vo6KX76qGc
- KhfzVFpvZWm23b7JMsolaaG3T3pQsRj4EbzQMhYQE6SUAeeeCuSu616aHoASN5fxLEox
- N/Ks4Abelx9SUZmNxJfAUY8x50TTDfsJL1/0aJoFfeSV7p+NXQBtrc8OaDKGjQNA1pFo
- tcs2nn6vpWUGqpkSjAcmty0be1+HEddt/+vQlrlTroLjhLTBNByaco4UOZWHNbz2NyX2
- ze+Q==
+ bh=AziSiQyaswun75qWBZdrTtRtHkm/3fH7WtNiAoSsvxw=;
+ b=zKgOnhVh2FQJCJLUr0LkyWXUFe6TO+O5nKTczW3vod3FzqzuKbqnHpzNfN2hWa3qKY
+ XjOCs3kECsY+fxDcttM9/DvLGqfXBx/UIzstSfhCitg+veXEpIciVPTwf9/TKdVpocJW
+ tdIMpaiKheRrentkf5yqMyl0B8bVAM94xwSef+aTiI+eg0nQEi0Y6P+7divwH8YWIIlp
+ F/BJCGDbz5EV3Fz3ThsMKo5KYY5oKFbqwBRAR0UUWpcQBCgPtSwcIBdYKoDrSGbd7YTL
+ zGygzESoZqa0djpkI0Ugjl0Rqn52etREFn7Joh0xgY5kr6N8EBq3T/29cHg9npNxFFNb
+ LfYA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787332051; x=1787936851;
+ d=1e100.net; s=20251104; t=1787333565; x=1787938365;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=iwoY3fBtLl9fRUQCLLgjCX29uMCeiWJhu1A2Z6V/jpY=;
- b=IC7isto8UtTQ3zOmnCUqRR+/pSVCa7H14giDrBrWBDn914yIzQsAhogYhbSPMD0oap
- 0Rolx5QHmD54cOuZWY3MNgzaDT6N79+uGmUWSEvIxhXbZKG1TZIaf0oVkC1NIGh3EFFp
- NK0Z98oL+1GXITqadDmxglDnhz0UCrOuKChCYn+blv3ZjJKryRYNcZROBQvZATmbiZBE
- 62XWhAkHj6uC56Rf7EKNKmKAma5hh3LOHLGjsi3SAQnv6ZFvQwo2JCM3chbLG7R1z1re
- z5ONGFsz5l2VZyuISTOUvXxiBtbkIYprdIXvXjECvG+23IJ+DbIsC9wTgWP9sbCBwumj
- EQhg==
+ bh=AziSiQyaswun75qWBZdrTtRtHkm/3fH7WtNiAoSsvxw=;
+ b=XCWNYAbMXIIcrW7gGRy8bbKIaUJAFkKqyqmUQGiQ2t9fbj8uYrbOHchSoDooJZGGhc
+ RVLGB0xihLeBreAcleO/Hug7TPn6OVO8LhFVUwwFOSq0MMudvpaJzFmQaRRluZz3yDxg
+ n26fL26lWdN+eX8K7u/pw0AI7DKdd/3jqahWcveJbCs9sNcn0rcDoEp3bHhqLmMPsojt
+ PSY+2lIeLIBBOtJ3vtYruw/UPk4vLu17EPGsLOfdNpAx9hfizDV8JkYPer+dS1yhonRj
+ caqc7SDVqi6L5D2V+0xLFJbCRbPEgF/CaLmLUDbbc77WDSGe62W8cGaThkxyx1jkQXu9
+ JZ8A==
 X-Forwarded-Encrypted: i=1;
- AHgh+RrUaTlYNd72B9DXiMgzCuVRHWw4MhODDae9XY8W+FdpXVA/K/8j1wHpu21tgbnwm1536lZDAoQu07nU@nongnu.org
-X-Gm-Message-State: AFuF++mbx75rGYZTfrxYORkdaIbUrCvrYXGDRu6m5rD5Zyicl/JvTCA1
- cXGDebo7pTg6k0Vk1OP7a1G/AfejA9E8N84bzmIyCg9K2YmmB1vE5Io+pP7SFz48TTM=
-X-Gm-Gg: AR+sD127dhqsg1GnerpH/MeKdmJK5vTH2kU5rmUxvZnqJTDIH2o/9UhSSEMj0g68RH2
- xPahLXjUOlvoR3mmt57AD9+Cfp0Ynd7k6modjL2UyuKbBc01gYID3YmJ5FVwOlU6k7oW/e2OSv3
- rZqdjcrSouJrXWMegdBV2/2LAKmS9/X5jHG3+s9h/Ruofc/iQ6yK7Xx+tVCZ1/MXsbJgA/DPlgW
- 3+v2ZD2MYKC9ewEBrkiP79Kzb5hM6yvDswHfY7QhHKO8lNCTyN9l3WXlb/2c6gfLV1eklCjeqKO
- s2KQRtp98SgZL3lUyEo/Bt+nlEUebTK7UIW4haYYYaiEh5Rc2aP7QLIdmQVmG3migAwhCRO5cvv
- 6Qh1fJEWG+Q41PRK/0DtaWIxnVTQMbQLayJ7KDkhxZBnKIz0t7MLDedOBkH6VJOtciD7oFsdQta
- /U5OgxiDqCms5lZhnF4+D3awqXB1xkiVo6njRuGFgsA0eL+ErztbDa8BlrR+4wIvI8gVe3khBFZ
- h9N
-X-Received: by 2002:a05:6a00:4c98:b0:84f:dc19:b77d with SMTP id
- d2e1a72fcca58-851fa011e87mr14038569b3a.12.1787332050732; 
- Fri, 21 Aug 2026 10:07:30 -0700 (PDT)
+ AHgh+RrwvxYknlih27cjn1PIq3j2Pn0xlJuPSCO8c6N2Pgohzqol7pOzv52YlRAA0KQG7D2ZPQIixBRczCs2@nongnu.org
+X-Gm-Message-State: AFuF++krJnMZjPT+UzI28Ya3vdpucqpnTPgrtpUEg+mjApd5TKC4KOrG
+ hGAcJ8qlAh79gpcHGXki0zsSShJuc3W3UFasiyY6hkuExdQpgWTsv2PDdIboY2wtJac=
+X-Gm-Gg: AR+sD10jqB89zFd1vaPGzPDOJEClbfARHvHmGRyOTdMi0e0JcDxyeEU8nJaAYNubaFb
+ uFhXVmAWOpS8L/z4ZW2zVfhyS8AxISBFDdRJPHxKm3syGeS1EqFS4ZLQ6Kq7f4dRpkrDHw0qwlA
+ v7qTyYZ1SMD7I/2riAEz+aAlje813WJ7FbeqK7CCgOHSUNsh6apfVrruqlrZKIrpqg+HguWc3Hv
+ wpgKsnFsnYOmfktlOEixba6baopj1SDMe0JWQf+WO1gU4IQZzllkQY8Hzak+E3nMkM4DWUNsGST
+ XYxIXkTq2sWCQTTHLBpf/9BVwh8OVwxq4U6f8XPlyhbbrGGwhwuCjdr2HPqcN4sf4T1YzPo2cPJ
+ MqEhF+kQwEYp+GZKwcJr3tI3o3YGhfIBo7Ysnke2C1AARL8+y5qcTxgaDy+FGToKZWB3+FFCfUm
+ NE2ESyBo7xQSppti6TnfwC/bSb2pehfzI6wEwxFV9bseuYbovFk3QqnA1/A41htrYmDaAQzt5cv
+ ne/XLo6dA==
+X-Received: by 2002:a17:90b:1dd2:b0:385:3ab:fecb with SMTP id
+ 98e67ed59e1d1-395c4c98f17mr7683255a91.4.1787333565091; 
+ Fri, 21 Aug 2026 10:32:45 -0700 (PDT)
 Received: from [172.20.6.168] ([108.174.179.84])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-851d366eebfsm3124052b3a.52.2026.08.21.10.07.29
+ 98e67ed59e1d1-395c4b47ae8sm4014181a91.13.2026.08.21.10.32.43
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 21 Aug 2026 10:07:30 -0700 (PDT)
-Message-ID: <bde71c0c-ba94-4bd6-9ef9-e868fbd8562e@linaro.org>
-Date: Fri, 21 Aug 2026 10:07:27 -0700
+ Fri, 21 Aug 2026 10:32:44 -0700 (PDT)
+Message-ID: <bad5c8b3-668f-4893-974f-9dbca8dc6893@linaro.org>
+Date: Fri, 21 Aug 2026 10:32:42 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 02/15] cpus: Add const-qualified CPU environment
- accessors
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
- qemu-devel@nongnu.org, =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?=
- <marcandre.lureau@redhat.com>, Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Cc: Paolo Bonzini <pbonzini@redhat.com>, qemu-arm@nongnu.org,
- qemu-s390x@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
- =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@mailo.com>,
- Zhao Liu <zhao1.liu@intel.com>, =?UTF-8?Q?Alex_Benn=C3=A9e?=
- <alex.bennee@linaro.org>, Eric Blake <eblake@redhat.com>
-References: <20260821104950.32108-1-philmd@oss.qualcomm.com>
- <20260821104950.32108-3-philmd@oss.qualcomm.com>
- <3c9fe944-2b51-412c-bd30-26bf013cff46@oss.qualcomm.com>
- <22188776-edeb-44e6-b79d-0b877292221d@oss.qualcomm.com>
+Subject: Re: [PATCH v2] virtio: Add aligned ld/st accessors for vring
+To: Peter Maydell <peter.maydell@linaro.org>,
+ BillXiang <xiangwencheng@lanxincomputing.com>
+Cc: mst@redhat.com, pbonzini@redhat.com, peterx@redhat.com, philmd@mailo.com, 
+ qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+References: <20260821100856.1794011-1-xiangwencheng@lanxincomputing.com>
+ <CAFEAcA_kLpaz0UQi3Q315kLVqvDtxKh77kU2meN9G1_evfKBeQ@mail.gmail.com>
 From: Richard Henderson <richard.henderson@linaro.org>
 Content-Language: en-US
-In-Reply-To: <22188776-edeb-44e6-b79d-0b877292221d@oss.qualcomm.com>
+In-Reply-To: <CAFEAcA_kLpaz0UQi3Q315kLVqvDtxKh77kU2meN9G1_evfKBeQ@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::436;
- envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x436.google.com
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52b;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x52b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -116,32 +108,24 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 8/21/26 08:51, Philippe Mathieu-Daudé wrote:
-> No, this now fails distinctly on Ubuntu 24.04:
+On 8/21/26 03:25, Peter Maydell wrote:
+> I'm tempted to suggest some kind of "if pointer is aligned take
+> aligned path, otherwise take slow path" either here or actually
+> in lduw_le_p(), but maybe that's a bad idea. Richard ?
 > 
-> In file included from ../accel/tcg/tcg-runtime.c:26:
-> ../accel/tcg/tcg-runtime.c: In function ‘helper_exit_atomic’:
-> /home/runner/work/qemu/qemu/include/exec/cpu-common.h:100:31: error: expected expression 
-> before ‘typeof’
->    100 | #define env_cpu(env) _Generic(typeof(*env), \
->        |                               ^~~~~~
-> ../accel/tcg/tcg-runtime.c:135:26: note: in expansion of macro ‘env_cpu’
->    135 |     cpu_loop_exit_atomic(env_cpu(env), GETPC());
->        |                          ^~~~~~~
+> (I have a suspicion that other places than this one will assume
+> that an aligned ldl_he_p() is not going to tear.)
+I agree -- I expect most everything assumes ldl_he_p won't tear for aligned accesses.
 
-Yeah, this of course fails because _Generic wants an expression and typeof() is a type not 
-an expression.
+This kinda begs the question of what atomicity the caller expects.  It's not implausible 
+that an x86 path expects even unaligned accesses not crossing a cacheline to be atomic, 
+since that's been a thing since 1995.  I expect both IBM architectures similarly expect 
+atomicity by alignment, since that's been a thing for s390 since yonks and Power has the 
+same language.
 
-However, in this case less is more -- just don't dereference env:
-
-#define env_cpu(env) _Generic(env, \
-             CPUArchState *: \
-                 (CPUState *)((void *)(env) - sizeof(CPUState)), \
-             const CPUArchState *: \
-                 (const CPUState *)((const void *)(env) - sizeof(CPUState)))
-
-etc.  It's only top-level qualifiers that are stripped (so const int -> const), but 
-qualified pointers aren't top level (so const int * and int * do not match).
+We have a bunch of code in accel/tcg/ldst_atomicity.c.inc that can handle this, we'd just 
+need to provide it with the correct inputs.  And I assume we'd still like to inline the 
+single access on appropriate hosts.
 
 
 r~
