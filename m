@@ -4,53 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68D88C5DF88
-	for <qemu-riscv@archiver.kernel.org>; Fri, 21 Aug 2026 06:42:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12D25C5DF87
+	for <qemu-riscv@archiver.kernel.org>; Fri, 21 Aug 2026 08:21:07 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wxIwG-0001YK-Kj; Fri, 21 Aug 2026 02:41:17 -0400
+	id 1wxKUM-0005do-GN; Fri, 21 Aug 2026 04:20:34 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1wxIwE-0001XE-Pd; Fri, 21 Aug 2026 02:41:14 -0400
-Received: from [115.124.30.101] (helo=out30-101.freemail.mail.aliyun.com)
+ (Exim 4.90_1) (envelope-from <cp0613@linux.alibaba.com>)
+ id 1wxKUK-0005cA-C2; Fri, 21 Aug 2026 04:20:32 -0400
+Received: from [115.124.30.118] (helo=out30-118.freemail.mail.aliyun.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1wxIw8-000660-Ps; Fri, 21 Aug 2026 02:41:14 -0400
+ (Exim 4.90_1) (envelope-from <cp0613@linux.alibaba.com>)
+ id 1wxKUD-0002f6-L7; Fri, 21 Aug 2026 04:20:32 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linux.alibaba.com; s=default;
- t=1787294441; h=From:To:Subject:Date:Message-Id:MIME-Version;
- bh=3Sv77UAvL0ZdsbyH97t0JnaftxrQooorODzWX0jaZio=;
- b=mjS37iUYhzpCV9cRP+9HYaceiACWSg5SUBUxh5nQ89AiUfTf6XNlY76IQEyVLxDKfmyCxeKyagALt0lyQZPa1dmLetMeRXJxj/dFgDzFnR4luSeftjfw0EuzzpbtWR4OXutmfBHaoWjo0LzWHp3vqKoqKpebnjDPzyEy6LgJ/3w=
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R271e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam011083073210;
- MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=12; SR=0;
- TI=SMTPD_---0X9LMiS5_1787294439; 
-Received: from localhost.localdomain(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0X9LMiS5_1787294439 cluster:ay36) by smtp.aliyun-inc.com;
- Fri, 21 Aug 2026 14:40:40 +0800
-From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org,
-	qemu-arm@nongnu.org
-Cc: palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com,
- daniel.barboza@oss.qualcomm.com, chao.liu@processmission.com,
- zhiwei_liu@linux.alibaba.com, peter.maydell@linaro.org,
- richard.henderson@linaro.org,
- TANG TianCheng <tangtiancheng.ttc@alibaba-inc.com>
-Subject: [PATCH 1/3] target/riscv: Fix RCsc ordering of Zalasr store-release
-Date: Fri, 21 Aug 2026 14:40:30 +0800
-Message-Id: <20260821064032.49556-2-zhiwei_liu@linux.alibaba.com>
-X-Mailer: git-send-email 2.39.3 (Apple Git-146)
-In-Reply-To: <20260821064032.49556-1-zhiwei_liu@linux.alibaba.com>
-References: <20260821064032.49556-1-zhiwei_liu@linux.alibaba.com>
+ t=1787300403; h=From:To:Subject:Date:Message-ID:MIME-Version;
+ bh=7kYP1SmE4po1NHX60o1wn5jt4JN1ovNWLbqMRiHorT8=;
+ b=ZteR+t0/97UWbV235VFI3/awPGp18I6cAef4AcRapRBhPZRQfqB2SIao2EwhLgJz99DKXSMBsLHwg9qZDfu1beaa5qJ2Q+7npV+jwegrO+C67wmU4HQBpXfauGqSA6vCH5CtwIg3K/oF7IoqGpNHh5ZYpDO7qVWv+NFKjUO8MLE=
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R181e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033045098064;
+ MF=cp0613@linux.alibaba.com; NM=1; PH=DS; RN=19; SR=0;
+ TI=SMTPD_---0X9LmLtZ_1787300402; 
+Received: from DESKTOP-S9E58SO.localdomain(mailfrom:cp0613@linux.alibaba.com
+ fp:SMTPD_---0X9LmLtZ_1787300402 cluster:ay36) by smtp.aliyun-inc.com;
+ Fri, 21 Aug 2026 16:20:02 +0800
+From: Chen Pei <cp0613@linux.alibaba.com>
+To: palmer@dabbelt.com, alistair.francis@wdc.com, mst@redhat.com,
+ imammedo@redhat.com, sunilvl@ventanamicro.com, jic23@kernel.org
+Cc: pbonzini@redhat.com, liwei1518@gmail.com, daniel.barboza@oss.qualcomm.com,
+ zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
+ anisinha@redhat.com, dave.jiang@intel.com, alison.schofield@intel.com,
+ junjie.cao@intel.com, guoren@kernel.org, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org, linux-cxl@vger.kernel.org
+Subject: [PATCH 1/4] hw/riscv/virt: Add CXL support to the RISC-V virt machine
+Date: Fri, 21 Aug 2026 16:19:51 +0800
+Message-ID: <20260821081954.1171-2-cp0613@linux.alibaba.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260821081954.1171-1-cp0613@linux.alibaba.com>
+References: <20260821081954.1171-1-cp0613@linux.alibaba.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.101 (deferred)
-Received-SPF: pass client-ip=115.124.30.101;
- envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-101.freemail.mail.aliyun.com
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.118 (deferred)
+Received-SPF: pass client-ip=115.124.30.118;
+ envelope-from=cp0613@linux.alibaba.com;
+ helo=out30-118.freemail.mail.aliyun.com
 X-Spam_score_int: -166
 X-Spam_score: -16.7
 X-Spam_bar: ----------------
@@ -74,78 +73,192 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The Zalasr load-acquire instructions carry an acquire-RCsc annotation
-and the store-release instructions carry a release-RCsc annotation;
-the extension has no RCpc variant (Zalasr specification, chapter 2).
+Enable CXL support on the RISC-V virt machine following the same
+approach used by the ARM virt machine:
+- Add PXB and ACPI_CXL Kconfig selections
+- Add CXLState and PCIBus pointer to RISCVVirtState
+- Register CXL machine properties via cxl_machine_init()
+- Create CXL host register region above the PCIe high MMIO region
+- Call cxl_hook_up_pxb_registers() and cxl_fmws_link_targets() at
+  machine_done time
+- Map Fixed Memory Windows above the CXL host register region
+- Add ACPI0017 device in DSDT and build CEDT table in virt-acpi-build.c
 
-Per Rule 7 of the RVWMO preserved program order rules ("a and b both
-have RCsc annotations"), a Zalasr store-release must precede any
-subsequent RCsc memory operation of the same hart in the global
-memory order.  In particular "sw.rl X=1; lw.aq r1=Y" must be ordered,
-which is what forbids the [0,0] outcome of a Store Buffering litmus
-test that runs this pair on two harts.
-
-gen_store_release() only emits a barrier before the store, which
-orders the memory operations preceding the store before the store
-itself (Rule 6, release semantics).  Nothing prevents the store from
-being reordered with the memory operations that follow it, so under
-MTTCG the host CPU may execute the load-acquire that immediately
-follows a store-release before the store has left its store buffer:
-
-  * on an x86 host (TSO), store-load is the only reordering the
-    hardware may perform, and it is exactly the ordering that is
-    missing here;
-
-  * on an aarch64 host, no dmb follows the store either.
-
-The defect is easily observed with a bare-metal Store Buffering
-litmus test on a 4 vCPU guest: "sw.rl X=1; lw.aq r1=Y" on hart 0 and
-"sw.rl Y=1; lw.aq r2=X" on hart 1 produce the architecturally
-forbidden [0,0] result in 89881 out of 100000 iterations.
-
-Fix this by emitting a full barrier after the store as well, which
-mirrors the FENCE translation.  The TCG_MO_ST_LD bit included in
-TCG_MO_ALL makes the x86 backend emit a serializing lock-prefixed
-instruction after the store, draining the store buffer before any
-subsequent load executes, and the aarch64 backend emit dmb ish; the
-store therefore becomes globally visible before any subsequent memory
-operation of the same vCPU, and Rule 7 is satisfied.  This is
-stronger than Rule 7 strictly requires, since the barrier also orders
-the store with respect to subsequent non-RCsc operations, but this
-matches how QEMU already implements FENCE and keeps the fix simple.
-
-The load-acquire side needs no change: the barrier emitted after the
-load already orders it with all subsequent memory operations, which
-covers Rule 5 and the remaining Rule 7 combinations (load-load and
-load-store).
-
-Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-Co-authored-by: TANG TianCheng <tangtiancheng.ttc@alibaba-inc.com>
-Signed-off-by: TANG TianCheng <tangtiancheng.ttc@alibaba-inc.com>
+Signed-off-by: Chen Pei <cp0613@linux.alibaba.com>
 ---
- target/riscv/tcg/insn_trans/trans_rvzalasr.c.inc | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ hw/riscv/Kconfig           |  2 ++
+ hw/riscv/virt-acpi-build.c | 20 ++++++++++++++++++++
+ hw/riscv/virt.c            | 37 +++++++++++++++++++++++++++++++++++++
+ include/hw/riscv/virt.h    |  3 +++
+ 4 files changed, 62 insertions(+)
 
-diff --git a/target/riscv/tcg/insn_trans/trans_rvzalasr.c.inc b/target/riscv/tcg/insn_trans/trans_rvzalasr.c.inc
-index 79b0b2c63b..28d9b13c55 100644
---- a/target/riscv/tcg/insn_trans/trans_rvzalasr.c.inc
-+++ b/target/riscv/tcg/insn_trans/trans_rvzalasr.c.inc
-@@ -86,6 +86,14 @@ static bool gen_store_release(DisasContext *ctx, arg_sb_aqrl *a, MemOp memop)
-     tcg_gen_mb(TCG_MO_ALL | TCG_BAR_STRL | bar);
+diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
+index de37c08cae..0ba3cd9e15 100644
+--- a/hw/riscv/Kconfig
++++ b/hw/riscv/Kconfig
+@@ -66,8 +66,10 @@ config RISCV_VIRT
+     select VIRTIO_MMIO
+     select FW_CFG_DMA
+     select PLATFORM_BUS
++    select PXB
+     select ACPI
+     select ACPI_PCI
++    select ACPI_CXL
  
-     tcg_gen_qemu_st_tl(data, addr, ctx->mem_idx, memop);
+ config SHAKTI_C
+     bool
+diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
+index 59c454f4f9..3188cdc5bf 100644
+--- a/hw/riscv/virt-acpi-build.c
++++ b/hw/riscv/virt-acpi-build.c
+@@ -29,12 +29,16 @@
+ #include "hw/acpi/aml-build.h"
+ #include "hw/acpi/pci.h"
+ #include "hw/acpi/utils.h"
++#include "hw/acpi/cxl.h"
+ #include "hw/intc/riscv_aclint.h"
+ #include "hw/nvram/fw_cfg_acpi.h"
+ #include "hw/pci-host/gpex.h"
++#include "hw/pci/pci_bus.h"
+ #include "hw/riscv/virt.h"
+ #include "hw/riscv/numa.h"
+ #include "hw/virtio/virtio-acpi.h"
++#include "hw/cxl/cxl.h"
++#include "hw/cxl/cxl_host.h"
+ #include "kvm/kvm_riscv.h"
+ #include "migration/vmstate.h"
+ #include "qapi/error.h"
+@@ -514,6 +518,17 @@ static void build_dsdt(GArray *table_data,
+         acpi_dsdt_add_gpex_host(scope, PCIE_IRQ + s->num_sources * 2);
+     }
+ 
++    if (s->cxl_devices_state.is_enabled) {
++        Aml *cxl_dev = aml_device("CXLM");
++        aml_append(cxl_dev, aml_name_decl("_HID", aml_string("ACPI0017")));
++        Aml *method = aml_method("_STA", 0, AML_NOTSERIALIZED);
++        aml_append(method, aml_return(aml_int(0x0B)));
++        aml_append(cxl_dev, method);
++        build_cxl_dsm_method(cxl_dev);
 +
-+    /*
-+     * Zalasr annotations are always RCsc: per RVWMO Rule 7, the store
-+     * must also be ordered before any subsequent memory operation,
-+     * e.g. a load-acquire in a Store Buffering litmus test.  The
-+     * barrier above only orders previous memory ops before the store.
-+     */
-+    tcg_gen_mb(TCG_MO_ALL | TCG_BAR_SC);
-     return true;
++        aml_append(scope, cxl_dev);
++    }
++
+     aml_append(dsdt, scope);
+ 
+     /* copy AML table into ACPI tables blob and patch header there */
+@@ -921,6 +936,11 @@ static void virt_acpi_build(RISCVVirtState *s, AcpiBuildTables *tables)
+                    s->oem_table_id);
+     }
+ 
++    if (s->cxl_devices_state.is_enabled) {
++        cxl_build_cedt(table_offsets, tables_blob, tables->linker,
++                       s->oem_id, s->oem_table_id, &s->cxl_devices_state);
++    }
++
+     if (ms->numa_state->num_nodes > 0) {
+         acpi_add_table(table_offsets, tables_blob);
+         build_srat(tables_blob, tables->linker, s);
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index 51bac47a91..e08c76af4d 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -55,6 +55,8 @@
+ #include "hw/pci/pci.h"
+ #include "hw/pci-host/gpex.h"
+ #include "hw/display/ramfb.h"
++#include "hw/cxl/cxl.h"
++#include "hw/cxl/cxl_host.h"
+ #include "hw/acpi/aml-build.h"
+ #include "qapi/qapi-visit-common.h"
+ #include "hw/virtio/virtio-iommu.h"
+@@ -1101,9 +1103,33 @@ static inline DeviceState *gpex_pcie_init(MemoryRegion *sys_mem,
+     }
+ 
+     GPEX_HOST(dev)->gpex_cfg.bus = PCI_HOST_BRIDGE(dev)->bus;
++    s->pci_bus = PCI_HOST_BRIDGE(dev)->bus;
+     return dev;
  }
  
++static void cxl_host_state_init(RISCVVirtState *s)
++{
++    MemoryRegion *sysmem = get_system_memory();
++    MemoryRegion *mr = &s->cxl_devices_state.host_mr;
++    hwaddr base;
++
++    if (!s->cxl_devices_state.is_enabled) {
++        return;
++    }
++
++    base = virt_high_pcie_memmap.base + virt_high_pcie_memmap.size;
++    base = ROUND_UP(base, 64 * KiB);
++
++    memory_region_init(mr, OBJECT(s), "cxl_host_reg", 64 * KiB * 16);
++    memory_region_add_subregion(sysmem, base, mr);
++
++    /* Map the Fixed Memory Windows above the CXL host register region. */
++    base += memory_region_size(mr);
++    base = ROUND_UP(base, 256 * MiB);
++    cxl_fmws_set_memmap(base, UINT64_MAX);
++    cxl_fmws_update_mmio();
++}
++
+ static FWCfgState *create_fw_cfg(const MachineState *ms, hwaddr base)
+ {
+     FWCfgState *fw_cfg;
+@@ -1205,6 +1231,13 @@ static void virt_machine_done(Notifier *notifier, void *data)
+                                      machine_done);
+     MachineState *machine = MACHINE(s);
+     hwaddr start_addr = s->memmap[VIRT_DRAM].base;
++
++    cxl_hook_up_pxb_registers(s->pci_bus, &s->cxl_devices_state,
++                              &error_fatal);
++
++    if (s->cxl_devices_state.is_enabled) {
++        cxl_fmws_link_targets(&error_fatal);
++    }
+     hwaddr firmware_end_addr;
+     vaddr kernel_start_addr;
+     const char *firmware_name = riscv_default_firmware_name(&s->soc[0]);
+@@ -1451,6 +1484,8 @@ static void virt_machine_init(MachineState *machine)
+             ROUND_UP(virt_high_pcie_memmap.base, virt_high_pcie_memmap.size);
+     }
+ 
++    cxl_host_state_init(s);
++
+     /* register system main memory (actual RAM) */
+     memory_region_add_subregion(system_memory, s->memmap[VIRT_DRAM].base,
+                                 machine->ram);
+@@ -1558,6 +1593,8 @@ static void virt_machine_instance_init(Object *obj)
+     s->acpi = ON_OFF_AUTO_AUTO;
+     s->iommu_sys = ON_OFF_AUTO_AUTO;
+     s->num_sources = VIRT_IRQCHIP_NUM_SOURCES;
++
++    cxl_machine_init(obj, &s->cxl_devices_state);
+ }
+ 
+ static char *virt_get_aia_guests(Object *obj, Error **errp)
+diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
+index 36a2def410..4cf930ab9f 100644
+--- a/include/hw/riscv/virt.h
++++ b/include/hw/riscv/virt.h
+@@ -24,6 +24,7 @@
+ #include "hw/core/sysbus.h"
+ #include "hw/block/flash.h"
+ #include "hw/intc/riscv_imsic.h"
++#include "hw/cxl/cxl.h"
+ 
+ #define VIRT_CPUS_MAX_BITS             9
+ #define VIRT_CPUS_MAX                  (1 << VIRT_CPUS_MAX_BITS)
+@@ -65,6 +66,8 @@ struct RISCVVirtState {
+     OnOffAuto iommu_sys;
+     uint16_t pci_iommu_bdf;
+     uint16_t num_sources;
++    CXLState cxl_devices_state;
++    PCIBus *pci_bus;
+ };
+ 
+ enum {
 -- 
-2.43.0
+2.50.1
 
 
