@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBE47C5DF8C
-	for <qemu-riscv@archiver.kernel.org>; Fri, 21 Aug 2026 08:21:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA503C5DF87
+	for <qemu-riscv@archiver.kernel.org>; Fri, 21 Aug 2026 08:21:45 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wxKUM-0005dN-68; Fri, 21 Aug 2026 04:20:34 -0400
+	id 1wxKUL-0005dB-4C; Fri, 21 Aug 2026 04:20:33 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <cp0613@linux.alibaba.com>)
- id 1wxKUK-0005c5-99; Fri, 21 Aug 2026 04:20:32 -0400
-Received: from [115.124.30.124] (helo=out30-124.freemail.mail.aliyun.com)
+ id 1wxKUI-0005ay-Cd; Fri, 21 Aug 2026 04:20:30 -0400
+Received: from [115.124.30.119] (helo=out30-119.freemail.mail.aliyun.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <cp0613@linux.alibaba.com>)
- id 1wxKUE-0002dy-0Z; Fri, 21 Aug 2026 04:20:31 -0400
+ id 1wxKUD-0002fv-Gr; Fri, 21 Aug 2026 04:20:30 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linux.alibaba.com; s=default;
- t=1787300402; h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
- bh=JOHSi15pOqvQZ9pIgZNI4quDEW61C01YE1WLujwvVNE=;
- b=PxYdal5clEs8S7mRQfU+adyl5fgizAp1IxisTAemGMBCKT537o9vPrLfFJQl5rubOjlXxhKSVCOXKXJNbiLFcx9nM+sdgk8lY3cC1GnMOfCuevnRnTEcVEVe5XcaFu7F7ENBLP/ZiftAInYtHgowkEm2z1gJGmlJa1lddU2ovko=
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R231e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033045133197;
+ t=1787300405; h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
+ bh=/23PizEp50RcPDZT+s3J0RsUX/+EgorfQW0a0MUxPNo=;
+ b=cDGdWy8szQvOblSWVbDZw6fi+9olFbVs6blLcJIxoq9xw5yW5qXeiwvCtu5YLdXsBOxqy6BYtBRkiJWHZh7NmCRdYltCTV/vW27cuo62XvNy6zr8Eg3kQX19g1bAtYExMihBY4IWsMg+libWDChxa3mcPqhP1KrbV5HViD954n8=
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R171e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033037026112;
  MF=cp0613@linux.alibaba.com; NM=1; PH=DS; RN=19; SR=0;
- TI=SMTPD_---0X9LmLrc_1787300396; 
+ TI=SMTPD_---0X9LmLu9_1787300404; 
 Received: from DESKTOP-S9E58SO.localdomain(mailfrom:cp0613@linux.alibaba.com
- fp:SMTPD_---0X9LmLrc_1787300396 cluster:ay36) by smtp.aliyun-inc.com;
- Fri, 21 Aug 2026 16:20:01 +0800
+ fp:SMTPD_---0X9LmLu9_1787300404 cluster:ay36) by smtp.aliyun-inc.com;
+ Fri, 21 Aug 2026 16:20:04 +0800
 From: Chen Pei <cp0613@linux.alibaba.com>
 To: palmer@dabbelt.com, alistair.francis@wdc.com, mst@redhat.com,
  imammedo@redhat.com, sunilvl@ventanamicro.com, jic23@kernel.org
@@ -38,17 +38,20 @@ Cc: pbonzini@redhat.com, liwei1518@gmail.com, daniel.barboza@oss.qualcomm.com,
  anisinha@redhat.com, dave.jiang@intel.com, alison.schofield@intel.com,
  junjie.cao@intel.com, guoren@kernel.org, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org, linux-cxl@vger.kernel.org
-Subject: [PATCH 0/4] hw/riscv/virt: Add CXL support to the RISC-V virt machine
-Date: Fri, 21 Aug 2026 16:19:50 +0800
-Message-ID: <20260821081954.1171-1-cp0613@linux.alibaba.com>
+Subject: [PATCH 3/4] hw/riscv/virt: Provide a 32-bit MMIO window for CXL host
+ bridges
+Date: Fri, 21 Aug 2026 16:19:53 +0800
+Message-ID: <20260821081954.1171-4-cp0613@linux.alibaba.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260821081954.1171-1-cp0613@linux.alibaba.com>
+References: <20260821081954.1171-1-cp0613@linux.alibaba.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.124 (deferred)
-Received-SPF: pass client-ip=115.124.30.124;
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.119 (deferred)
+Received-SPF: pass client-ip=115.124.30.119;
  envelope-from=cp0613@linux.alibaba.com;
- helo=out30-124.freemail.mail.aliyun.com
+ helo=out30-119.freemail.mail.aliyun.com
 X-Spam_score_int: -166
 X-Spam_score: -16.7
 X-Spam_bar: ----------------
@@ -72,105 +75,270 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This series adds CXL support to the RISC-V virt machine, following the
-approach used by the ARM virt machine: CXL host bridges (pxb-cxl) are
-described as ACPI0016 devices, an ACPI0017 (CXLM) device is added to the
-DSDT, and a CEDT table is built.  A bios-tables test is added to pin down
-the generated ACPI tables.
+CXL component register BAR (BAR0 on CXL Root Port and Type3 device)
+and the CXL device register BAR (BAR2 on Type3 device) are declared
+as 64-bit non-prefetchable memory.  Per the PCI-to-PCI Bridge
+Architecture Specification Rev 1.2 (PCI-SIG, 2003):
 
-Prerequisite
-------------
-The v2 posting depended on Alireza Sanaee's v8 series [1] (the
-performant non-interleaved CFMW lookup path).  That series has since
-been merged upstream, so this version has no outstanding prerequisite
-and applies directly on current upstream master.
+  - §3.2.5.8 (Memory Base/Limit): the non-prefetchable window covers
+    only 32-bit addresses (AD[31:20]); the Type 1 header defines no
+    upper-32-bit extension for it.
+  - §3.2.5.9 (Prefetchable Memory Base/Limit): the bottom 4 bits
+    encode 64-bit support (01h), but this applies exclusively to the
+    *prefetchable* window.
+  - §3.2.5.10 (Prefetchable Base/Limit Upper 32 Bits): optional
+    registers for AD[63:32] of the prefetchable range only.
 
-Changes since v2
-----------------
-  - hw/riscv/virt: The MMIO-window patch no longer touches the common
-    gpex code (Igor).  The gpex_cfg.cxl_mmio32 field and the is_cxl
-    static _CRS branch are dropped; the ACPI0016 _CRS now comes from the
-    generic build_crs() path.  Since EDK2 does not enumerate the pxb-cxl
-    expander bridge, riscv simulates the firmware PCI initialization
-    (reserved window + depth-first bridge bus numbers) and re-applies it
-    via a reset handler.
-  - hw/riscv/virt: Drops the machine-global window/bus-range synthesis
-    that did not scale past one pxb-cxl (Junjie).  The series targets a
-    single CXL host bridge for now, documented in the commit message and
-    a TODO.
-  - hw/riscv/virt: CXL host register region and FMW setup folded into a
-    single cxl_host_state_init() helper; redundant braces removed in
-    create_fdt_pcie() (Daniel).
-  - hw/riscv/virt-acpi-build: the _DEP commit message documents the
-    kernel-compatibility behaviour (Alistair).
-  - Carried review tags: Sunil V L's Reviewed-by on the _DEP patch and
-    Alistair Francis's Acked-by on the test.
+The architecture therefore allows a 64-bit window only when it is also
+prefetchable; there is no 64-bit non-prefetchable form.  PCIe inherits
+this Type 1 header layout unchanged.  Linux thus places 64-bit
+non-prefetchable BARs in the 32-bit non-prefetchable bridge window,
+which requires the bridge to own enough address space below 4 GiB.
 
-Changes since v1
----------------
-  - hw/riscv/virt: PCIBus *bus renamed to PCIBus *pci_bus (Jonathan).
-  - hw/riscv/virt: Dropped outer if (s->pci_bus) guard around
-    cxl_hook_up_pxb_registers(); the function already handles a NULL
-    bus internally (Jonathan).
-  - hw/riscv/virt-acpi-build: All s->bus references updated to
-    s->pci_bus; iasl -d decompiled DSDT fragment added to commit
-    message.
-  - hw/riscv/virt,gpex: Commit message expanded with PCI-to-PCI Bridge
-    Spec §3.2.5.8/9/10 citations (Jonathan).
-  - Original patch 4 ("Map committed HDM decoder ranges as RAM for
-    direct DMA") dropped; superseded by Alireza Sanaee's v8 series [1],
-    which is now merged upstream and thus no longer a prerequisite.
-  - New patch 4: RISC-V ACPI bios-tables test for CXL, with golden AML
-    files generated and included.
+On RISC-V virt the 32-bit PCIe MMIO range (1 GiB at 0x40000000) is
+currently consumed entirely by PCI0, so CXL host bridges (ACPI0016)
+have no non-prefetchable window and Linux fails to assign these BARs.
 
-[1] https://lore.kernel.org/qemu-devel/20260318171918.146-1-alireza.sanaee@huawei.com/
+Reserve the top 256 MiB of the 32-bit MMIO window exclusively for CXL
+host bridges, keeping all of the logic in the riscv code:
 
-Test
-----
-Built riscv64-softmmu and ran the new bios-tables test together with the
-existing riscv64 ACPI tests; all pass.  Also booted an RVA22 kernel with
-pxb-cxl + cxl-rp + cxl-type3 + a CFMW: the root port and Type3 device
-enumerate (0000:0c:00.0 / 0000:0d:00.0) and 'cxl list' reports the
-memdev (4 GiB) and the CFMWS root decoder.
+- Reduce the FDT 'ranges' for PCI0 by 256 MiB so that device-tree
+  driven firmware does not hand that range to PCI0.
+- The CXL host bridge _CRS is produced by the generic build_crs()
+  path.  EDK2's PciBusDxe only recurses into PCI-to-PCI bridges, while
+  the pxb-cxl expander bridge presents as a class 0x0600 host bridge
+  with a type-0 header, so firmware never enumerates behind it and
+  leaves the CXL root port's window and bus-number registers unset;
+  build_crs() would therefore return an empty _CRS.  Simulate the
+  firmware PCI initialization in virt_cxl_init_bridge_windows(): assign
+  the reserved window to the root port's memory window, and allocate
+  primary/secondary/subordinate bus numbers depth-first.  build_crs()
+  then emits both the memory range and a correct bus-range resource
+  (without a bus range Linux only claims the host-bridge bus and cannot
+  enumerate the devices behind the root port), and the range is
+  excluded from PCI0's _CRS.  A reset handler re-applies the state, as
+  a PCI reset clears those registers.
 
-QEMU invocation (CXL-relevant options shown):
+This targets a single pxb-cxl (one CXL host bridge), which matches the
+bios-tables test added later in the series.  With more than one
+pxb-cxl the single reserved window would be claimed by every ACPI0016
+bridge, so it would need to be partitioned per bridge; that is left as
+future work (see the TODO in virt_cxl_init_bridge_windows()).
 
-    qemu-system-riscv64 \
-        -M virt,aia=aplic-imsic,acpi=on,cxl=on \
-        -cpu rv64 -smp 2 -m 4G,maxmem=8G,slots=8 \
-        -object memory-backend-ram,id=vmem0,share=on,size=4G \
-        -device pxb-cxl,bus_nr=12,bus=pcie.0,id=cxl.1 \
-        -device cxl-rp,port=0,bus=cxl.1,id=rp0,chassis=0,slot=2 \
-        -device cxl-type3,bus=rp0,volatile-memdev=vmem0,id=cxl-vmem0 \
-        -M cxl-fmw.0.targets.0=cxl.1,cxl-fmw.0.size=4G \
-        ...
+Verified by booting an RVA22 kernel: the CXL root port and Type3 device
+are enumerated (0000:0c:00.0 / 0000:0d:00.0) and 'cxl list' reports the
+memdev and the CFMWS root decoder.
 
-Verification (total system memory grows by 4 GiB after onlining):
+Signed-off-by: Chen Pei <cp0613@linux.alibaba.com>
+---
+ hw/riscv/virt.c | 154 +++++++++++++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 153 insertions(+), 1 deletion(-)
 
-    # cxl list
-    # cxl enable-memdev mem0
-    # cxl create-region -m -t ram -d decoder0.0 -w 1 mem0 -s 4G
-    # daxctl online-memory dax0.0
-    # free -h
-
-Chen Pei (4):
-  hw/riscv/virt: Add CXL support to the RISC-V virt machine
-  hw/riscv/virt-acpi-build: Add _DEP to ACPI0017 for CXL host bridge
-    dependency
-  hw/riscv/virt: Provide a 32-bit MMIO window for CXL host bridges
-  tests/qtest: Add RISC-V ACPI bios tables test for CXL
-
- hw/riscv/Kconfig                      |   2 +
- hw/riscv/virt-acpi-build.c            |  52 +++++++
- hw/riscv/virt.c                       | 191 +++++++++++++++++++++++++-
- include/hw/riscv/virt.h               |   3 +
- tests/data/acpi/riscv64/virt/CEDT.cxl | Bin 0 -> 108 bytes
- tests/data/acpi/riscv64/virt/DSDT.cxl | Bin 0 -> 6212 bytes
- tests/qtest/bios-tables-test.c        |  54 ++++++++
- 7 files changed, 301 insertions(+), 1 deletion(-)
- create mode 100644 tests/data/acpi/riscv64/virt/CEDT.cxl
- create mode 100644 tests/data/acpi/riscv64/virt/DSDT.cxl
-
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index e08c76af4d..af83603293 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -48,11 +48,13 @@
+ #include "chardev/char.h"
+ #include "system/device_tree.h"
+ #include "system/system.h"
++#include "system/reset.h"
+ #include "system/tcg.h"
+ #include "system/kvm.h"
+ #include "system/tpm.h"
+ #include "system/qtest.h"
+ #include "hw/pci/pci.h"
++#include "hw/pci/pci_bridge.h"
+ #include "hw/pci-host/gpex.h"
+ #include "hw/display/ramfb.h"
+ #include "hw/cxl/cxl.h"
+@@ -115,6 +117,9 @@ static const MemMapEntry virt_memmap[] = {
+ /* PCIe high mmio for RV64, size is fixed but base depends on top of RAM */
+ #define VIRT64_HIGH_PCIE_MMIO_SIZE  (16 * GiB)
+ 
++/* 32-bit MMIO range carved out of VIRT_PCIE_MMIO for CXL host bridges */
++#define VIRT_CXL_MMIO32_SIZE        (256 * MiB)
++
+ static MemMapEntry virt_high_pcie_memmap;
+ 
+ #define VIRT_FLASH_SECTOR_SIZE (256 * KiB)
+@@ -727,6 +732,18 @@ static void create_fdt_pcie(RISCVVirtState *s,
+ {
+     g_autofree char *name = NULL;
+     MachineState *ms = MACHINE(s);
++    /*
++     * When CXL is enabled, reserve the last 256 MiB of the 32-bit MMIO
++     * window for CXL host bridges and exclude it from the main PCIe host
++     * bridge's FDT 'ranges' so UEFI's PciHostBridgeDxe does not allocate
++     * that range to PCI0.  The CXL host bridge _CRS declares this range
++     * independently.
++     */
++    hwaddr mmio32_size = s->memmap[VIRT_PCIE_MMIO].size;
++
++    if (s->cxl_devices_state.is_enabled) {
++        mmio32_size -= VIRT_CXL_MMIO32_SIZE;
++    }
+ 
+     name = g_strdup_printf("/soc/pci@%"HWADDR_PRIx,
+                            s->memmap[VIRT_PCIE_ECAM].base);
+@@ -752,7 +769,7 @@ static void create_fdt_pcie(RISCVVirtState *s,
+         2, s->memmap[VIRT_PCIE_PIO].base, 2, s->memmap[VIRT_PCIE_PIO].size,
+         1, FDT_PCI_RANGE_MMIO,
+         2, s->memmap[VIRT_PCIE_MMIO].base,
+-        2, s->memmap[VIRT_PCIE_MMIO].base, 2, s->memmap[VIRT_PCIE_MMIO].size,
++        2, s->memmap[VIRT_PCIE_MMIO].base, 2, mmio32_size,
+         1, FDT_PCI_RANGE_MMIO_64BIT,
+         2, virt_high_pcie_memmap.base,
+         2, virt_high_pcie_memmap.base, 2, virt_high_pcie_memmap.size);
+@@ -1130,6 +1147,132 @@ static void cxl_host_state_init(RISCVVirtState *s)
+     cxl_fmws_update_mmio();
+ }
+ 
++/*
++ * Assign PCI bus numbers to the bridges under @bus in depth-first order,
++ * the way firmware does during enumeration.  QEMU leaves the secondary and
++ * subordinate bus registers at 0 until firmware programs them, so without
++ * this build_crs() would see an empty bus range for the CXL host bridge.
++ * @bus itself is numbered @bus_num.  Returns the highest bus number used.
++ */
++static int virt_cxl_assign_bus_numbers(PCIBus *bus, int bus_num)
++{
++    int max_bus = bus_num;
++    int next_bus = bus_num + 1;
++    int devfn;
++
++    for (devfn = 0; devfn < ARRAY_SIZE(bus->devices); devfn++) {
++        PCIDevice *dev = bus->devices[devfn];
++        PCIBus *sec_bus;
++        int subordinate;
++
++        if (!dev) {
++            continue;
++        }
++        if ((dev->config[PCI_HEADER_TYPE] &
++             ~PCI_HEADER_TYPE_MULTI_FUNCTION) != PCI_HEADER_TYPE_BRIDGE) {
++            continue;
++        }
++
++        sec_bus = pci_bridge_get_sec_bus(PCI_BRIDGE(dev));
++        subordinate = virt_cxl_assign_bus_numbers(sec_bus, next_bus);
++
++        pci_set_byte(dev->config + PCI_PRIMARY_BUS, bus_num);
++        pci_set_byte(dev->config + PCI_SECONDARY_BUS, next_bus);
++        pci_set_byte(dev->config + PCI_SUBORDINATE_BUS, subordinate);
++
++        if (subordinate > max_bus) {
++            max_bus = subordinate;
++        }
++        next_bus = subordinate + 1;
++    }
++
++    return max_bus;
++}
++
++/*
++ * Simulate the PCI resource initialization that firmware (UEFI) would
++ * normally perform for the CXL host bridge.
++ *
++ * EDK2's PciBusDxe only recurses into devices that look like PCI-to-PCI
++ * bridges, while the pxb-cxl expander bridge presents as a class 0x0600
++ * host bridge with a standard (type 0) header, so the firmware neither
++ * enumerates behind it nor assigns it a memory window or bus numbers.  As a
++ * result the generic build_crs() path would produce an empty _CRS for the
++ * CXL host bridge (ACPI0016).
++ *
++ * Program each CXL root port the way firmware would:
++ *  - assign the reserved 32-bit MMIO range (see create_fdt_pcie()) to its
++ *    memory window, so build_crs() emits that range in the host bridge _CRS
++ *    and excludes it from PCI0's _CRS;
++ *  - set the primary/secondary/subordinate bus numbers, so build_crs()
++ *    emits a correct bus-range resource.  Without a bus range Linux only
++ *    claims the single host-bridge bus and cannot enumerate the devices
++ *    behind the root port.
++ *
++ * TODO: this handles a single pxb-cxl with a single root port, which is
++ * the supported topology for now.  With multiple CXL host bridges or root
++ * ports the reserved window would need to be partitioned per bridge.
++ */
++static void virt_cxl_init_bridge_windows(RISCVVirtState *s)
++{
++    hwaddr cxl_mmio_base, cxl_mmio_limit;
++    PCIBus *bus;
++
++    if (!s->cxl_devices_state.is_enabled) {
++        return;
++    }
++
++    cxl_mmio_base = s->memmap[VIRT_PCIE_MMIO].base +
++                    s->memmap[VIRT_PCIE_MMIO].size - VIRT_CXL_MMIO32_SIZE;
++    cxl_mmio_limit = cxl_mmio_base + VIRT_CXL_MMIO32_SIZE - 1;
++
++    QLIST_FOREACH(bus, &s->pci_bus->child, sibling) {
++        int devfn;
++
++        if (!pci_bus_is_root(bus) || !pci_bus_is_cxl(bus)) {
++            continue;
++        }
++
++        /* Assign bus numbers for the whole CXL subtree (firmware would). */
++        virt_cxl_assign_bus_numbers(bus, pci_bus_num(bus));
++
++        /* Assign the reserved MMIO window to the root-port bridge. */
++        for (devfn = 0; devfn < ARRAY_SIZE(bus->devices); devfn++) {
++            PCIDevice *dev = bus->devices[devfn];
++            PCIBridge *br;
++
++            if (!dev) {
++                continue;
++            }
++            if ((dev->config[PCI_HEADER_TYPE] &
++                 ~PCI_HEADER_TYPE_MULTI_FUNCTION) != PCI_HEADER_TYPE_BRIDGE) {
++                continue;
++            }
++
++            br = PCI_BRIDGE(dev);
++
++            pci_set_word(dev->config + PCI_MEMORY_BASE,
++                         (cxl_mmio_base >> 16) & PCI_MEMORY_RANGE_MASK);
++            pci_set_word(dev->config + PCI_MEMORY_LIMIT,
++                         (cxl_mmio_limit >> 16) & PCI_MEMORY_RANGE_MASK);
++            pci_word_test_and_set_mask(dev->config + PCI_COMMAND,
++                                       PCI_COMMAND_MEMORY);
++            pci_bridge_update_mappings(br);
++            break;
++        }
++    }
++}
++
++/*
++ * A PCI reset clears the bridge window and bus-number registers programmed
++ * above, so re-apply them after every reset, the way firmware would during
++ * its PCI enumeration.
++ */
++static void virt_cxl_reset_bridge_windows(void *opaque)
++{
++    virt_cxl_init_bridge_windows(RISCV_VIRT_MACHINE(opaque));
++}
++
+ static FWCfgState *create_fw_cfg(const MachineState *ms, hwaddr base)
+ {
+     FWCfgState *fw_cfg;
+@@ -1238,6 +1381,15 @@ static void virt_machine_done(Notifier *notifier, void *data)
+     if (s->cxl_devices_state.is_enabled) {
+         cxl_fmws_link_targets(&error_fatal);
+     }
++
++    /*
++     * Assign the CXL bridge memory window (simulating firmware) so the
++     * ACPI _CRS built for the CXL host bridge is populated.  Do it here for
++     * the initial build, and register a reset handler so the window is
++     * re-applied after any PCI reset (which clears the bridge registers).
++     */
++    virt_cxl_init_bridge_windows(s);
++    qemu_register_reset(virt_cxl_reset_bridge_windows, s);
+     hwaddr firmware_end_addr;
+     vaddr kernel_start_addr;
+     const char *firmware_name = riscv_default_firmware_name(&s->soc[0]);
 -- 
 2.50.1
 
