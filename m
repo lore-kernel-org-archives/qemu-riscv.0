@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C68D2C5DF87
-	for <qemu-riscv@archiver.kernel.org>; Fri, 21 Aug 2026 06:42:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68D88C5DF88
+	for <qemu-riscv@archiver.kernel.org>; Fri, 21 Aug 2026 06:42:21 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wxIwF-0001Xb-Lz; Fri, 21 Aug 2026 02:41:15 -0400
+	id 1wxIwG-0001YK-Kj; Fri, 21 Aug 2026 02:41:17 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1wxIwC-0001VY-Ck; Fri, 21 Aug 2026 02:41:12 -0400
-Received: from [115.124.30.97] (helo=out30-97.freemail.mail.aliyun.com)
+ id 1wxIwE-0001XE-Pd; Fri, 21 Aug 2026 02:41:14 -0400
+Received: from [115.124.30.101] (helo=out30-101.freemail.mail.aliyun.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1wxIw8-00066A-VE; Fri, 21 Aug 2026 02:41:12 -0400
+ id 1wxIw8-000660-Ps; Fri, 21 Aug 2026 02:41:14 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linux.alibaba.com; s=default;
- t=1787294442; h=From:To:Subject:Date:Message-Id:MIME-Version;
- bh=DBulrXCYmN9obTHaPtKhQcdAYvfQQ3QKSWI0GMPC3C0=;
- b=grtLEvgbofEOsCzVSri4oZVJZnC7usgrQo7xx16zxAHP4IbLxiKIyPx3/Iyl8VFO7QCVvphW0g4fd9V9BCKd94DorXWuFYb3VvQFN3hMbHDr46KWsWG4dyFn8SpWYVqavpxmVAnbUGwpEiEgUbnnT1WkOrREy7z8hS09Bg8IYe4=
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R381e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033032089153;
- MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=11; SR=0;
- TI=SMTPD_---0X9LMiSs_1787294441; 
+ t=1787294441; h=From:To:Subject:Date:Message-Id:MIME-Version;
+ bh=3Sv77UAvL0ZdsbyH97t0JnaftxrQooorODzWX0jaZio=;
+ b=mjS37iUYhzpCV9cRP+9HYaceiACWSg5SUBUxh5nQ89AiUfTf6XNlY76IQEyVLxDKfmyCxeKyagALt0lyQZPa1dmLetMeRXJxj/dFgDzFnR4luSeftjfw0EuzzpbtWR4OXutmfBHaoWjo0LzWHp3vqKoqKpebnjDPzyEy6LgJ/3w=
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R271e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam011083073210;
+ MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=12; SR=0;
+ TI=SMTPD_---0X9LMiS5_1787294439; 
 Received: from localhost.localdomain(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0X9LMiSs_1787294441 cluster:ay36) by smtp.aliyun-inc.com;
- Fri, 21 Aug 2026 14:40:41 +0800
+ fp:SMTPD_---0X9LMiS5_1787294439 cluster:ay36) by smtp.aliyun-inc.com;
+ Fri, 21 Aug 2026 14:40:40 +0800
 From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org,
@@ -37,19 +37,20 @@ To: qemu-devel@nongnu.org,
 Cc: palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com,
  daniel.barboza@oss.qualcomm.com, chao.liu@processmission.com,
  zhiwei_liu@linux.alibaba.com, peter.maydell@linaro.org,
- richard.henderson@linaro.org
-Subject: [PATCH 3/3] target/arm: Fix barrier polarity of A32 LDA load-acquire
-Date: Fri, 21 Aug 2026 14:40:32 +0800
-Message-Id: <20260821064032.49556-4-zhiwei_liu@linux.alibaba.com>
+ richard.henderson@linaro.org,
+ TANG TianCheng <tangtiancheng.ttc@alibaba-inc.com>
+Subject: [PATCH 1/3] target/riscv: Fix RCsc ordering of Zalasr store-release
+Date: Fri, 21 Aug 2026 14:40:30 +0800
+Message-Id: <20260821064032.49556-2-zhiwei_liu@linux.alibaba.com>
 X-Mailer: git-send-email 2.39.3 (Apple Git-146)
 In-Reply-To: <20260821064032.49556-1-zhiwei_liu@linux.alibaba.com>
 References: <20260821064032.49556-1-zhiwei_liu@linux.alibaba.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.97 (deferred)
-Received-SPF: pass client-ip=115.124.30.97;
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.101 (deferred)
+Received-SPF: pass client-ip=115.124.30.101;
  envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-97.freemail.mail.aliyun.com
+ helo=out30-101.freemail.mail.aliyun.com
 X-Spam_score_int: -166
 X-Spam_score: -16.7
 X-Spam_bar: ----------------
@@ -73,40 +74,74 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The A32 and T32 load-acquire instructions LDA, LDAB and LDAH must be
-ordered before the memory accesses that follow them, so their
-translator has to emit a trailing barrier.  op_lda() emits that barrier
-with TCG_BAR_STRL instead of TCG_BAR_LDAQ, inverting the polarity:
-TCG_BAR_STRL annotates a leading barrier ("previous ops will not be
-delayed") and TCG_BAR_LDAQ a trailing one ("following ops will not come
-forward"), as documented in include/tcg/tcg-mo.h.
+The Zalasr load-acquire instructions carry an acquire-RCsc annotation
+and the store-release instructions carry a release-RCsc annotation;
+the extension has no RCpc variant (Zalasr specification, chapter 2).
 
-The x86 and aarch64 backends only look at the TCG_MO_* bits, which the
-wrong annotation does not affect, so the generated host code is
-unchanged on those hosts.  The annotation is still wrong: it violates
-the TCG barrier contract, it lets the optimizer's barrier merging in
-fold_mb() combine the barriers of an "LDA; STL" pair into a weaker one
-than the correctly annotated form (STRL|STRL stays STRL instead of
-LDAQ|STRL = SC), and it diverges from every other load-acquire
-translation in the target, which all use TCG_BAR_LDAQ.
+Per Rule 7 of the RVWMO preserved program order rules ("a and b both
+have RCsc annotations"), a Zalasr store-release must precede any
+subsequent RCsc memory operation of the same hart in the global
+memory order.  In particular "sw.rl X=1; lw.aq r1=Y" must be ordered,
+which is what forbids the [0,0] outcome of a Store Buffering litmus
+test that runs this pair on two harts.
 
-Fix the polarity.
+gen_store_release() only emits a barrier before the store, which
+orders the memory operations preceding the store before the store
+itself (Rule 6, release semantics).  Nothing prevents the store from
+being reordered with the memory operations that follow it, so under
+MTTCG the host CPU may execute the load-acquire that immediately
+follows a store-release before the store has left its store buffer:
+
+  * on an x86 host (TSO), store-load is the only reordering the
+    hardware may perform, and it is exactly the ordering that is
+    missing here;
+
+  * on an aarch64 host, no dmb follows the store either.
+
+The defect is easily observed with a bare-metal Store Buffering
+litmus test on a 4 vCPU guest: "sw.rl X=1; lw.aq r1=Y" on hart 0 and
+"sw.rl Y=1; lw.aq r2=X" on hart 1 produce the architecturally
+forbidden [0,0] result in 89881 out of 100000 iterations.
+
+Fix this by emitting a full barrier after the store as well, which
+mirrors the FENCE translation.  The TCG_MO_ST_LD bit included in
+TCG_MO_ALL makes the x86 backend emit a serializing lock-prefixed
+instruction after the store, draining the store buffer before any
+subsequent load executes, and the aarch64 backend emit dmb ish; the
+store therefore becomes globally visible before any subsequent memory
+operation of the same vCPU, and Rule 7 is satisfied.  This is
+stronger than Rule 7 strictly requires, since the barrier also orders
+the store with respect to subsequent non-RCsc operations, but this
+matches how QEMU already implements FENCE and keeps the fix simple.
+
+The load-acquire side needs no change: the barrier emitted after the
+load already orders it with all subsequent memory operations, which
+covers Rule 5 and the remaining Rule 7 combinations (load-load and
+load-store).
 
 Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+Co-authored-by: TANG TianCheng <tangtiancheng.ttc@alibaba-inc.com>
+Signed-off-by: TANG TianCheng <tangtiancheng.ttc@alibaba-inc.com>
 ---
- target/arm/tcg/translate.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ target/riscv/tcg/insn_trans/trans_rvzalasr.c.inc | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-diff --git a/target/arm/tcg/translate.c b/target/arm/tcg/translate.c
-index bddac41bf9..a81b8d3852 100644
---- a/target/arm/tcg/translate.c
-+++ b/target/arm/tcg/translate.c
-@@ -4421,7 +4421,7 @@ static bool op_lda(DisasContext *s, arg_LDA *a, MemOp mop)
-     disas_set_da_iss(s, mop, a->rt | ISSIsAcqRel);
+diff --git a/target/riscv/tcg/insn_trans/trans_rvzalasr.c.inc b/target/riscv/tcg/insn_trans/trans_rvzalasr.c.inc
+index 79b0b2c63b..28d9b13c55 100644
+--- a/target/riscv/tcg/insn_trans/trans_rvzalasr.c.inc
++++ b/target/riscv/tcg/insn_trans/trans_rvzalasr.c.inc
+@@ -86,6 +86,14 @@ static bool gen_store_release(DisasContext *ctx, arg_sb_aqrl *a, MemOp memop)
+     tcg_gen_mb(TCG_MO_ALL | TCG_BAR_STRL | bar);
  
-     store_reg(s, a->rt, tmp);
--    tcg_gen_mb(TCG_MO_ALL | TCG_BAR_STRL);
-+    tcg_gen_mb(TCG_MO_ALL | TCG_BAR_LDAQ);
+     tcg_gen_qemu_st_tl(data, addr, ctx->mem_idx, memop);
++
++    /*
++     * Zalasr annotations are always RCsc: per RVWMO Rule 7, the store
++     * must also be ordered before any subsequent memory operation,
++     * e.g. a load-acquire in a Store Buffering litmus test.  The
++     * barrier above only orders previous memory ops before the store.
++     */
++    tcg_gen_mb(TCG_MO_ALL | TCG_BAR_SC);
      return true;
  }
  
