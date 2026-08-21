@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12D25C5DF87
-	for <qemu-riscv@archiver.kernel.org>; Fri, 21 Aug 2026 08:21:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65F02C5DF87
+	for <qemu-riscv@archiver.kernel.org>; Fri, 21 Aug 2026 08:21:15 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wxKUM-0005do-GN; Fri, 21 Aug 2026 04:20:34 -0400
+	id 1wxKUL-0005dF-IF; Fri, 21 Aug 2026 04:20:33 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <cp0613@linux.alibaba.com>)
- id 1wxKUK-0005cA-C2; Fri, 21 Aug 2026 04:20:32 -0400
-Received: from [115.124.30.118] (helo=out30-118.freemail.mail.aliyun.com)
+ id 1wxKUI-0005bK-VJ; Fri, 21 Aug 2026 04:20:30 -0400
+Received: from [115.124.30.119] (helo=out30-119.freemail.mail.aliyun.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <cp0613@linux.alibaba.com>)
- id 1wxKUD-0002f6-L7; Fri, 21 Aug 2026 04:20:32 -0400
+ id 1wxKUE-0002fJ-K7; Fri, 21 Aug 2026 04:20:30 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linux.alibaba.com; s=default;
- t=1787300403; h=From:To:Subject:Date:Message-ID:MIME-Version;
- bh=7kYP1SmE4po1NHX60o1wn5jt4JN1ovNWLbqMRiHorT8=;
- b=ZteR+t0/97UWbV235VFI3/awPGp18I6cAef4AcRapRBhPZRQfqB2SIao2EwhLgJz99DKXSMBsLHwg9qZDfu1beaa5qJ2Q+7npV+jwegrO+C67wmU4HQBpXfauGqSA6vCH5CtwIg3K/oF7IoqGpNHh5ZYpDO7qVWv+NFKjUO8MLE=
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R181e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033045098064;
- MF=cp0613@linux.alibaba.com; NM=1; PH=DS; RN=19; SR=0;
- TI=SMTPD_---0X9LmLtZ_1787300402; 
+ t=1787300404; h=From:To:Subject:Date:Message-ID:MIME-Version;
+ bh=PAihpO6EyZnd/ojCMpA8hnP9BuA2Ld83ERB9dbyhRYY=;
+ b=c5XePg9v+WIg0h6x+56WczDHZYCoB1dnm+5gzCX4C1v4i1kzaKTzxY8qhLrlhfCVecwJ2meH3HqKP5nV3DDVk3wbthtWAarkJ3b/hwEndvML18h10BfScMbSHKCu3w6Kmy+BtB5/bG+dOlC6ExyqGSy8X2tmX9OI+DYdMY01wto=
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R201e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033037009110;
+ MF=cp0613@linux.alibaba.com; NM=1; PH=DS; RN=20; SR=0;
+ TI=SMTPD_---0X9LmLts_1787300403; 
 Received: from DESKTOP-S9E58SO.localdomain(mailfrom:cp0613@linux.alibaba.com
- fp:SMTPD_---0X9LmLtZ_1787300402 cluster:ay36) by smtp.aliyun-inc.com;
- Fri, 21 Aug 2026 16:20:02 +0800
+ fp:SMTPD_---0X9LmLts_1787300403 cluster:ay36) by smtp.aliyun-inc.com;
+ Fri, 21 Aug 2026 16:20:03 +0800
 From: Chen Pei <cp0613@linux.alibaba.com>
 To: palmer@dabbelt.com, alistair.francis@wdc.com, mst@redhat.com,
  imammedo@redhat.com, sunilvl@ventanamicro.com, jic23@kernel.org
@@ -37,19 +37,21 @@ Cc: pbonzini@redhat.com, liwei1518@gmail.com, daniel.barboza@oss.qualcomm.com,
  zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
  anisinha@redhat.com, dave.jiang@intel.com, alison.schofield@intel.com,
  junjie.cao@intel.com, guoren@kernel.org, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org, linux-cxl@vger.kernel.org
-Subject: [PATCH 1/4] hw/riscv/virt: Add CXL support to the RISC-V virt machine
-Date: Fri, 21 Aug 2026 16:19:51 +0800
-Message-ID: <20260821081954.1171-2-cp0613@linux.alibaba.com>
+ qemu-devel@nongnu.org, linux-cxl@vger.kernel.org,
+ Sunil V L <sunilvl@oss.qualcomm.com>
+Subject: [PATCH 2/4] hw/riscv/virt-acpi-build: Add _DEP to ACPI0017 for CXL
+ host bridge dependency
+Date: Fri, 21 Aug 2026 16:19:52 +0800
+Message-ID: <20260821081954.1171-3-cp0613@linux.alibaba.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260821081954.1171-1-cp0613@linux.alibaba.com>
 References: <20260821081954.1171-1-cp0613@linux.alibaba.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.118 (deferred)
-Received-SPF: pass client-ip=115.124.30.118;
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.119 (deferred)
+Received-SPF: pass client-ip=115.124.30.119;
  envelope-from=cp0613@linux.alibaba.com;
- helo=out30-118.freemail.mail.aliyun.com
+ helo=out30-119.freemail.mail.aliyun.com
 X-Spam_score_int: -166
 X-Spam_score: -16.7
 X-Spam_bar: ----------------
@@ -73,191 +75,94 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Enable CXL support on the RISC-V virt machine following the same
-approach used by the ARM virt machine:
-- Add PXB and ACPI_CXL Kconfig selections
-- Add CXLState and PCIBus pointer to RISCVVirtState
-- Register CXL machine properties via cxl_machine_init()
-- Create CXL host register region above the PCIe high MMIO region
-- Call cxl_hook_up_pxb_registers() and cxl_fmws_link_targets() at
-  machine_done time
-- Map Fixed Memory Windows above the CXL host register region
-- Add ACPI0017 device in DSDT and build CEDT table in virt-acpi-build.c
+On RISC-V QEMU virt platform with CXL enabled, the probe ordering
+of acpi_pci_root (ACPI0016) and cxl_acpi (ACPI0017) is not
+guaranteed. If cxl_acpi probes before acpi_pci_root has attached
+the CXL host bridges, the CXL port topology will be incomplete
+because to_cxl_host_bridge() silently skips devices whose PCI root
+is not yet ready.
 
+Add a _DEP object to the ACPI0017 device in the DSDT, declaring
+its dependency on the ACPI0016 CXL host bridge devices. This tells
+the OS to defer ACPI0017 enumeration until all ACPI0016 devices
+have been attached by acpi_pci_root.
+
+This requires a corresponding kernel change to call
+acpi_dev_clear_dependencies() in acpi_pci_root_add().
+
+Note on kernel compatibility: this is a "new QEMU feature requires a
+sufficiently new kernel" situation.  Kernels that process _DEP but
+lack the acpi_dev_clear_dependencies() call will leave the CXLM device
+deferred, so CXL memory is unusable there; kernels old enough to ignore
+_DEP entirely behave exactly as before this change.  In neither case is
+existing (non-CXL) PCIe affected.
+
+The resulting DSDT fragment (iasl -d output) for a single CXL host
+bridge at bus 0x01 looks like:
+
+  Device (CXLM)
+  {
+      Name (_HID, "ACPI0017")
+      Name (_DEP, Package (0x01)
+      {
+          \_SB.PC01
+      })
+      Method (_STA, 0, NotSerialized)
+      {
+          Return (0x0B)
+      }
+      ...
+  }
+
+Reviewed-by: Sunil V L <sunilvl@oss.qualcomm.com>
 Signed-off-by: Chen Pei <cp0613@linux.alibaba.com>
 ---
- hw/riscv/Kconfig           |  2 ++
- hw/riscv/virt-acpi-build.c | 20 ++++++++++++++++++++
- hw/riscv/virt.c            | 37 +++++++++++++++++++++++++++++++++++++
- include/hw/riscv/virt.h    |  3 +++
- 4 files changed, 62 insertions(+)
+ hw/riscv/virt-acpi-build.c | 32 ++++++++++++++++++++++++++++++++
+ 1 file changed, 32 insertions(+)
 
-diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-index de37c08cae..0ba3cd9e15 100644
---- a/hw/riscv/Kconfig
-+++ b/hw/riscv/Kconfig
-@@ -66,8 +66,10 @@ config RISCV_VIRT
-     select VIRTIO_MMIO
-     select FW_CFG_DMA
-     select PLATFORM_BUS
-+    select PXB
-     select ACPI
-     select ACPI_PCI
-+    select ACPI_CXL
- 
- config SHAKTI_C
-     bool
 diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
-index 59c454f4f9..3188cdc5bf 100644
+index 3188cdc5bf..56292f04a7 100644
 --- a/hw/riscv/virt-acpi-build.c
 +++ b/hw/riscv/virt-acpi-build.c
-@@ -29,12 +29,16 @@
- #include "hw/acpi/aml-build.h"
- #include "hw/acpi/pci.h"
- #include "hw/acpi/utils.h"
-+#include "hw/acpi/cxl.h"
- #include "hw/intc/riscv_aclint.h"
- #include "hw/nvram/fw_cfg_acpi.h"
- #include "hw/pci-host/gpex.h"
-+#include "hw/pci/pci_bus.h"
- #include "hw/riscv/virt.h"
- #include "hw/riscv/numa.h"
- #include "hw/virtio/virtio-acpi.h"
-+#include "hw/cxl/cxl.h"
-+#include "hw/cxl/cxl_host.h"
- #include "kvm/kvm_riscv.h"
- #include "migration/vmstate.h"
- #include "qapi/error.h"
-@@ -514,6 +518,17 @@ static void build_dsdt(GArray *table_data,
-         acpi_dsdt_add_gpex_host(scope, PCIE_IRQ + s->num_sources * 2);
-     }
- 
-+    if (s->cxl_devices_state.is_enabled) {
-+        Aml *cxl_dev = aml_device("CXLM");
-+        aml_append(cxl_dev, aml_name_decl("_HID", aml_string("ACPI0017")));
-+        Aml *method = aml_method("_STA", 0, AML_NOTSERIALIZED);
-+        aml_append(method, aml_return(aml_int(0x0B)));
-+        aml_append(cxl_dev, method);
-+        build_cxl_dsm_method(cxl_dev);
+@@ -521,6 +521,38 @@ static void build_dsdt(GArray *table_data,
+     if (s->cxl_devices_state.is_enabled) {
+         Aml *cxl_dev = aml_device("CXLM");
+         aml_append(cxl_dev, aml_name_decl("_HID", aml_string("ACPI0017")));
 +
-+        aml_append(scope, cxl_dev);
-+    }
++        /*
++         * Declare a _DEP on every ACPI0016 CXL host bridge so the OS
++         * defers ACPI0017 enumeration until acpi_pci_root has attached
++         * the CXL host bridges. Without this, cxl_acpi may probe before
++         * to_cxl_host_bridge() can resolve the PCI root and the CXL
++         * port topology comes up empty.
++         */
++        if (s->pci_bus) {
++            PCIBus *bus;
++            uint32_t num_cxl_hbs = 0;
 +
-     aml_append(dsdt, scope);
- 
-     /* copy AML table into ACPI tables blob and patch header there */
-@@ -921,6 +936,11 @@ static void virt_acpi_build(RISCVVirtState *s, AcpiBuildTables *tables)
-                    s->oem_table_id);
-     }
- 
-+    if (s->cxl_devices_state.is_enabled) {
-+        cxl_build_cedt(table_offsets, tables_blob, tables->linker,
-+                       s->oem_id, s->oem_table_id, &s->cxl_devices_state);
-+    }
++            QLIST_FOREACH(bus, &s->pci_bus->child, sibling) {
++                if (pci_bus_is_root(bus) && pci_bus_is_cxl(bus)) {
++                    num_cxl_hbs++;
++                }
++            }
 +
-     if (ms->numa_state->num_nodes > 0) {
-         acpi_add_table(table_offsets, tables_blob);
-         build_srat(tables_blob, tables->linker, s);
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 51bac47a91..e08c76af4d 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -55,6 +55,8 @@
- #include "hw/pci/pci.h"
- #include "hw/pci-host/gpex.h"
- #include "hw/display/ramfb.h"
-+#include "hw/cxl/cxl.h"
-+#include "hw/cxl/cxl_host.h"
- #include "hw/acpi/aml-build.h"
- #include "qapi/qapi-visit-common.h"
- #include "hw/virtio/virtio-iommu.h"
-@@ -1101,9 +1103,33 @@ static inline DeviceState *gpex_pcie_init(MemoryRegion *sys_mem,
-     }
- 
-     GPEX_HOST(dev)->gpex_cfg.bus = PCI_HOST_BRIDGE(dev)->bus;
-+    s->pci_bus = PCI_HOST_BRIDGE(dev)->bus;
-     return dev;
- }
- 
-+static void cxl_host_state_init(RISCVVirtState *s)
-+{
-+    MemoryRegion *sysmem = get_system_memory();
-+    MemoryRegion *mr = &s->cxl_devices_state.host_mr;
-+    hwaddr base;
++            if (num_cxl_hbs > 0) {
++                Aml *dep_pkg = aml_package(num_cxl_hbs);
 +
-+    if (!s->cxl_devices_state.is_enabled) {
-+        return;
-+    }
++                QLIST_FOREACH(bus, &s->pci_bus->child, sibling) {
++                    if (pci_bus_is_root(bus) && pci_bus_is_cxl(bus)) {
++                        aml_append(dep_pkg,
++                                   aml_name("\\_SB.PC%.02X",
++                                            pci_bus_num(bus)));
++                    }
++                }
++                aml_append(cxl_dev, aml_name_decl("_DEP", dep_pkg));
++            }
++        }
 +
-+    base = virt_high_pcie_memmap.base + virt_high_pcie_memmap.size;
-+    base = ROUND_UP(base, 64 * KiB);
-+
-+    memory_region_init(mr, OBJECT(s), "cxl_host_reg", 64 * KiB * 16);
-+    memory_region_add_subregion(sysmem, base, mr);
-+
-+    /* Map the Fixed Memory Windows above the CXL host register region. */
-+    base += memory_region_size(mr);
-+    base = ROUND_UP(base, 256 * MiB);
-+    cxl_fmws_set_memmap(base, UINT64_MAX);
-+    cxl_fmws_update_mmio();
-+}
-+
- static FWCfgState *create_fw_cfg(const MachineState *ms, hwaddr base)
- {
-     FWCfgState *fw_cfg;
-@@ -1205,6 +1231,13 @@ static void virt_machine_done(Notifier *notifier, void *data)
-                                      machine_done);
-     MachineState *machine = MACHINE(s);
-     hwaddr start_addr = s->memmap[VIRT_DRAM].base;
-+
-+    cxl_hook_up_pxb_registers(s->pci_bus, &s->cxl_devices_state,
-+                              &error_fatal);
-+
-+    if (s->cxl_devices_state.is_enabled) {
-+        cxl_fmws_link_targets(&error_fatal);
-+    }
-     hwaddr firmware_end_addr;
-     vaddr kernel_start_addr;
-     const char *firmware_name = riscv_default_firmware_name(&s->soc[0]);
-@@ -1451,6 +1484,8 @@ static void virt_machine_init(MachineState *machine)
-             ROUND_UP(virt_high_pcie_memmap.base, virt_high_pcie_memmap.size);
-     }
- 
-+    cxl_host_state_init(s);
-+
-     /* register system main memory (actual RAM) */
-     memory_region_add_subregion(system_memory, s->memmap[VIRT_DRAM].base,
-                                 machine->ram);
-@@ -1558,6 +1593,8 @@ static void virt_machine_instance_init(Object *obj)
-     s->acpi = ON_OFF_AUTO_AUTO;
-     s->iommu_sys = ON_OFF_AUTO_AUTO;
-     s->num_sources = VIRT_IRQCHIP_NUM_SOURCES;
-+
-+    cxl_machine_init(obj, &s->cxl_devices_state);
- }
- 
- static char *virt_get_aia_guests(Object *obj, Error **errp)
-diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
-index 36a2def410..4cf930ab9f 100644
---- a/include/hw/riscv/virt.h
-+++ b/include/hw/riscv/virt.h
-@@ -24,6 +24,7 @@
- #include "hw/core/sysbus.h"
- #include "hw/block/flash.h"
- #include "hw/intc/riscv_imsic.h"
-+#include "hw/cxl/cxl.h"
- 
- #define VIRT_CPUS_MAX_BITS             9
- #define VIRT_CPUS_MAX                  (1 << VIRT_CPUS_MAX_BITS)
-@@ -65,6 +66,8 @@ struct RISCVVirtState {
-     OnOffAuto iommu_sys;
-     uint16_t pci_iommu_bdf;
-     uint16_t num_sources;
-+    CXLState cxl_devices_state;
-+    PCIBus *pci_bus;
- };
- 
- enum {
+         Aml *method = aml_method("_STA", 0, AML_NOTSERIALIZED);
+         aml_append(method, aml_return(aml_int(0x0B)));
+         aml_append(cxl_dev, method);
 -- 
 2.50.1
 
