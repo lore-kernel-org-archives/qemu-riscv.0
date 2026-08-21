@@ -4,90 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D09A0C5DF97
-	for <qemu-riscv@archiver.kernel.org>; Fri, 21 Aug 2026 16:41:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AEDD3C5DF8C
+	for <qemu-riscv@archiver.kernel.org>; Fri, 21 Aug 2026 16:45:28 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wxSJF-0006R7-Tv; Fri, 21 Aug 2026 12:41:37 -0400
+	id 1wxSMN-0007VB-3i; Fri, 21 Aug 2026 12:44:51 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wxSJ3-0006Mj-2c
- for qemu-riscv@nongnu.org; Fri, 21 Aug 2026 12:41:25 -0400
-Received: from mail-pf1-x431.google.com ([2607:f8b0:4864:20::431])
+ id 1wxSMK-0007Tj-JS
+ for qemu-riscv@nongnu.org; Fri, 21 Aug 2026 12:44:48 -0400
+Received: from mail-pf1-x429.google.com ([2607:f8b0:4864:20::429])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wxSJ0-0008UN-He
- for qemu-riscv@nongnu.org; Fri, 21 Aug 2026 12:41:24 -0400
-Received: by mail-pf1-x431.google.com with SMTP id
- d2e1a72fcca58-848761b5897so487144b3a.3
- for <qemu-riscv@nongnu.org>; Fri, 21 Aug 2026 09:41:21 -0700 (PDT)
+ id 1wxSMI-0000t5-M6
+ for qemu-riscv@nongnu.org; Fri, 21 Aug 2026 12:44:48 -0400
+Received: by mail-pf1-x429.google.com with SMTP id
+ d2e1a72fcca58-84faf0fa17eso1162441b3a.2
+ for <qemu-riscv@nongnu.org>; Fri, 21 Aug 2026 09:44:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1787330480; x=1787935280; darn=nongnu.org;
+ d=linaro.org; s=google; t=1787330684; x=1787935484; darn=nongnu.org;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=o5Px8COhkGLvlJ0eaDBwZqzFKsB9CXZit19dsF07AGc=;
- b=aQahwhY70torV5LD6vkWzGoEvJhaHj2zqXfV3W+7Mxlm8BQFVMRPVq+PSv5UgwlBhf
- hTjYUpLLLXNeO5DHycDi/xPeqO4iDiwN78jLf+RvcFsgEQS372fS/ZWBGd8f+pvXWkjS
- Tw9yYuD+acloUX5GtH/xAeI2csUmwXSvopCz25ooB21JP0MkySY3hg6nzZF7Wy/cIFbF
- Iq2cRnhw7tYiIA9IOAePpZn9vgYH9Sxuv9ZmZWomj0aam3/oP3lQO/pauN2yXpSGk8e8
- dmn2YPtQP4BWunOcR2qcvfBZN7JvCrU3vCuBkVdj4Qzqu3WFukWnoRMDZdZZuF9gQOsC
- 5aOw==
+ bh=AbqaBiunWuN/LvRZX1FaCwbCv223Zk9IBDABCk4POsg=;
+ b=qq8EIPytYa/Voz7Gua0V72FgFgKBgjJ4xgl2jjCWqN0mkkzIABNnmMHXN5d/4MrWo4
+ pd7DNF6fC45+iDky4XJ4zWA85+5N9nac7H7Cs+3yY8TxdDcM244QxKxN/gI/6IoUv5rS
+ sX8C+i+JUdMzC2snzktmlrrGJEXk/yYhMcz0FB+AKs7jaPLR98fkfhgcpRZ0gvbuZc31
+ V/CH9eNUS78BuvrfuVZdFVpaEoepBj+FLJJrIvs/jTTonIuRUQ2cHOwhr4i0PLy6ZAzD
+ hJwUcSxL2jMWMIgA/Kvt8Dky5OJ2Ww2AiZJ6Nz8LVHpwijTCsk6eC0iDzaznZLm3Q4Ww
+ Lo2A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787330480; x=1787935280;
+ d=1e100.net; s=20251104; t=1787330684; x=1787935484;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=o5Px8COhkGLvlJ0eaDBwZqzFKsB9CXZit19dsF07AGc=;
- b=Qq3im9kF5jLTaMJ1tUqOQ8qGEucgoNcmQY8ukGWN4/cCVuO0vKixIENe8khzSdxQZK
- LjLl4XH64F9Cj4Av3hKkH5PmlUGWtHy/SYMaEDfYuThfq3IPajsXewdOMNwikUxaTOOU
- SDg6UIER0HdjKifQBJse9dr2D9r+TvsOBMV9QveoDSP8lc/r/IAGy5w51iUXh+NZfj/5
- XfRqkvf2obGxM/d4NgfFmhHO+dEdNgzzcNtxcT6Qna8KX09H7f4ZFnNAn0XYmM04PZXn
- TWzwAjYMI+S+Lf5BQvM/iO3Cv0FaPnDlg2laGO146DBrVtubSroXEqTadqo6F+JeBMIz
- pO3Q==
+ bh=AbqaBiunWuN/LvRZX1FaCwbCv223Zk9IBDABCk4POsg=;
+ b=IQ6pNxtTU9S1q816GZfZ9yHVYq8ciTNBf8SfcvtmRIP8b3FzArXifh8ke2vx4woxpn
+ BCafC+eg00YAvLZnh9/UksXotB7UTNNyxk6rFP00qxqR+96epINPQP3vnV7RR2nN8hdv
+ uNk/xva1ETHw/JOvSAam4GSc1YcJl9rYret9NHmd9l94Hi6rD++V4nO/yIvicjyfww3y
+ Mvq1Ex6q2zzynXovsjg4zxpraGOmq/OIDSD4/VUyhkjL7D/rGKZ+qEeNKGWrDgAdwFTS
+ Jfze8jBdZK3kKdUhl0nhIVW1vBQxouBnKbzQaOhTtfJW+sNifxpg+qiCBM3m5Dglbj/O
+ lYkw==
 X-Forwarded-Encrypted: i=1;
- AHgh+RrvA2Ie7srmCjQwiiVHymdYPQC0Gq60pUpBb/ISSyXXwzO+fP+tp2bcVvI49/q3OEGKb7fCIv8b06w8@nongnu.org
-X-Gm-Message-State: AFuF++kIPADJJcSjzIduyfW/gzdSTXMpsRa0GcSj816pWKau9K67me6T
- aqFqaJVyG5zEPXJYEJ+Ufc8Jg9rX+NRHOxysxGijYc7Ok+LQ/OvvP2GIqps2fbVmL/M=
-X-Gm-Gg: AR+sD12iIxajzfUyqtjDtcckWdMy7MxW3bi/ds4MEJYTi8wWLoRegWnT+gKB4v1ydWX
- Rn9KfJrzWAz6L96Dq+DOryJU4eIDaNREomfyqValMYot4WVJEp4xm+4hheqVUrI8dvJrZ9w7YI2
- IXaEOphq6W5IehqboJUNtR4Hp0wRwpZr7ROVwGPBMbzNDuSnvmut/QKmLR+HsESNT1XqBwWGEeC
- pVJy0dPanyJHlEw+cfmxbD3tPztUWl826VmHMJ+cm6oFJSPTamVsGL87dPI7faJTr/3faupZ80/
- LacRiI38llKTuQrc91w5A6b2SPmIiw3WoWcMKUEM3pNvy8nSQJ/JkpZKjYDFqvStwBZ7TWR7VWW
- zVf6KKWyWaeNJnXMMVKJXrEU2B3yRCHzNuDH9A8QeIXPBKcXDqUOksya6UVHR9VTOtA/beFUemx
- Y8w1tDeGSUgTFBRkDUUKV6igfAbbV2F/U69tE8+FqWCa0VRsF9tcp/O2921San6OIFjauUJ4BW4
- Pdx1cejWGrdhwQ=
-X-Received: by 2002:a05:6a00:4c98:b0:851:8baf:5b29 with SMTP id
- d2e1a72fcca58-851f9f7c38emr13055634b3a.10.1787330480361; 
- Fri, 21 Aug 2026 09:41:20 -0700 (PDT)
+ AHgh+Rr8OUg43NhzlPwiltWmMdUCVM9pfH6XnWWMeVqAU2LFmnOsklzAl5rcLr8+37bzohzOaefOlU0ZJ4SN@nongnu.org
+X-Gm-Message-State: AFuF++lBkvzSy8swi2VjQvd35d7gjes8X9Rdb7BEqLWV8r3f+X/mHzxB
+ PAUghVwjYZ0jpqrO7e5lEhuDdbvTdQWkq8JvLDrmajbEovJhOdsEgletPm4ADAVxEQY=
+X-Gm-Gg: AR+sD13Kgq8lwrTxQ5RuMwfnxdd6jYuOlOr2iuiGjTUpGAu8JOpsB+ur3PMvtnB/YWs
+ qYt98D6S73S8Wdu61FYBSYli2YSV9LnPIRC84d+kq0WS+hSixixSET9pyXkAWwQUD2b7QhKchg+
+ Ba2BDx+6dVwqa0hsOxuMyVCuNtzNJkixnemLN84oof3aaOYxTeO8hVacruv+4v8iVuANbr/X3Ed
+ tKmY8O6zU68ZDdCN57eDKMQfY33nrW0d7BXCm5fUkK8PWk8pGPGOfJJeX+Gd7TNZgG4/E6DW+x/
+ 00rxXK4SB9xvYWBXkUafx9r/bXFJHsFI8YVL/t3NxOG0ORZBCc0CfZCER+OHhpMyEzQWPrXHoNg
+ zIxrG2OL+jgEBQfmMCFL2/ptWUlLSKB7lThOgkFL2zCjGecepY84BfyuVwtu3G9NQOyGDiYePDs
+ xz1bst6XJZoY9G0G6FwUVtoMClurTEIAlR2OIj84N7zfYJRQRdji4fTeUP/sXz/Vzefj5LqI3eZ
+ kgj
+X-Received: by 2002:a05:6a00:4195:b0:84f:b01d:3693 with SMTP id
+ d2e1a72fcca58-851fa05af7dmr13403307b3a.15.1787330684425; 
+ Fri, 21 Aug 2026 09:44:44 -0700 (PDT)
 Received: from [172.20.6.168] ([108.174.179.84])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-851d3362b34sm3183343b3a.6.2026.08.21.09.41.19
+ d2e1a72fcca58-851d366d65dsm3271690b3a.50.2026.08.21.09.44.43
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 21 Aug 2026 09:41:19 -0700 (PDT)
-Message-ID: <82632207-7db4-4c37-8ad1-84694e578d4f@linaro.org>
-Date: Fri, 21 Aug 2026 09:41:12 -0700
+ Fri, 21 Aug 2026 09:44:44 -0700 (PDT)
+Message-ID: <c9988841-9b74-4274-bf54-b7f5d411b70d@linaro.org>
+Date: Fri, 21 Aug 2026 09:44:42 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 04/15] system/cpus: Constify various CPUState arguments
+Subject: Re: [PATCH v3 02/15] cpus: Add const-qualified CPU environment
+ accessors
 To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
  qemu-devel@nongnu.org
 Cc: Paolo Bonzini <pbonzini@redhat.com>, qemu-arm@nongnu.org,
  qemu-s390x@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
  =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@mailo.com>,
  Zhao Liu <zhao1.liu@intel.com>
 References: <20260821104950.32108-1-philmd@oss.qualcomm.com>
- <20260821104950.32108-5-philmd@oss.qualcomm.com>
+ <20260821104950.32108-3-philmd@oss.qualcomm.com>
 From: Richard Henderson <richard.henderson@linaro.org>
 Content-Language: en-US
-In-Reply-To: <20260821104950.32108-5-philmd@oss.qualcomm.com>
+In-Reply-To: <20260821104950.32108-3-philmd@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::431;
- envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x431.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::429;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x429.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -111,16 +114,10 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 8/21/26 03:49, Philippe Mathieu-Daudé wrote:
-> Mark the CPUState structure const when it is only accessed read-only.
-> 
-> Signed-off-by: Philippe Mathieu-Daudé<philmd@oss.qualcomm.com>
-> ---
->   include/hw/core/cpu.h | 4 ++--
->   include/system/cpus.h | 4 ++--
->   system/cpus.c         | 6 +++---
->   3 files changed, 7 insertions(+), 7 deletions(-)
+> +#define cpu_env(cpu) _Generic(*(cpu), \
+> +        /* We validate that CPUArchState follows CPUState in cpu-target.c */ \
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Out of date -- currently in target-info-stub.c.
 
 r~
 
