@@ -4,118 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7651C5DF7D
-	for <qemu-riscv@archiver.kernel.org>; Fri, 21 Aug 2026 03:56:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8DBAC5DF7D
+	for <qemu-riscv@archiver.kernel.org>; Fri, 21 Aug 2026 04:04:35 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wxGMu-0002xd-7g; Thu, 20 Aug 2026 23:56:36 -0400
+	id 1wxGUT-00067T-IV; Fri, 21 Aug 2026 00:04:25 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <flamboyant.h.01@gmail.com>)
- id 1wxGMp-0002wl-3o
- for qemu-riscv@nongnu.org; Thu, 20 Aug 2026 23:56:32 -0400
-Received: from mail-yx1-xb136.google.com ([2607:f8b0:4864:20::b136])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1wxGUQ-000651-Vx
+ for qemu-riscv@nongnu.org; Fri, 21 Aug 2026 00:04:23 -0400
+Received: from mail-pj1-x1031.google.com ([2607:f8b0:4864:20::1031])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <flamboyant.h.01@gmail.com>)
- id 1wxGMm-0002H6-92
- for qemu-riscv@nongnu.org; Thu, 20 Aug 2026 23:56:30 -0400
-Received: by mail-yx1-xb136.google.com with SMTP id
- 956f58d0204a3-66c7e3a2332so391600d50.2
- for <qemu-riscv@nongnu.org>; Thu, 20 Aug 2026 20:56:26 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1787284586; cv=none;
- d=google.com; s=arc-20260327;
- b=GRZ7s3Fbuz5fGsgDmRABDFOptj/y7TVOdEtuut8APT/2YL/s5XrZhW+LxGEdJlWBU6
- 7QHALLq6teEWi0PZB98V/HvXGmoOFaGP1Ef2jlE217FpGfpbgQ1Xl02tLcnJCx+izV+l
- FISnlK8zHQTFiprv5nuVRa1PDFUZ8dX7zC29lG25loDm194tRl2bTAXDbFqzSHk5+rzQ
- oQzGp1oXaBb+Iautez70on23Hh1Qag4qC5QM6OAvkq6lm84vVujw72edwGPrIQzRx6yS
- 2uJpGVRnlxQU+3WDB9z+K17MwIg/RCIpz4qCTLhOrFbgwO+pO397/7knPkjBltsePvzC
- OkBQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=e0/NANrCXjOobJNFshmIrntAvuqdQUXlvIojefKohd0=;
- fh=2JpraIqsWgN509zSMwDzhnhRp01KzEqPMpX5x46PMDI=;
- b=TfHYPhkcQSKqX+QT90jVVCFuxVN4xbf/5iDwQK/1DsPADdagEjGQ05b0hOTRndBVOe
- 8cN4/ye7RC1f+lwEOzN04Jx8qaO4up/Hj04fJHx6oDmL8RtISYgl8vyxN/OS1/X2i9NO
- wv4uaxdbjElpHO9YpzzEpAL+EikOXLn5JwsvL3qrQn42tMcF7gZDmjxhb87+EACfvywt
- OURRp54SLMWNHaSXom+CitBaH15Kdpsf5Z8CY7KVF/S1Llk8DOdxCOyqVk1v5OMIM+pk
- ZXNvfuVAmQhc4vUr05lsBusK5XtY2fH/+klzPPeW35gUIaSkErlDji36MzUo8+Ne5QMc
- ch9A==; darn=nongnu.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1wxGUP-0003Cw-0q
+ for qemu-riscv@nongnu.org; Fri, 21 Aug 2026 00:04:22 -0400
+Received: by mail-pj1-x1031.google.com with SMTP id
+ 98e67ed59e1d1-38101f85591so1316872a91.1
+ for <qemu-riscv@nongnu.org>; Thu, 20 Aug 2026 21:04:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1787284586; x=1787889386; darn=nongnu.org;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=e0/NANrCXjOobJNFshmIrntAvuqdQUXlvIojefKohd0=;
- b=WBFEalX/t6YVe/wyvwn+Y6D7LeSE1HVlKm4GOiZEterdgzYKmIWsB0Z1fHUrePBqos
- DbVXFRoVuZj2OWNXxQ5AX0xpkiHwjw3rBrSUZVd80FTGbsY8BROlzcREpxHN5PhAImNb
- zKWDJ+Eas9+lVhmMJm7stcADzHqaUq5zdhbNpYmWIOUkNHk3fsHGTdOGKtnAsbfBVz6v
- 6CR7rjL+9+sCtTTslc/x3C+olFu++t4u70hl4Zfgdig3M7sjhX8UF3UQEC7O12gtDt1T
- ZR2uFORB+lMTF8k2gZ4p0xCQ82dTrFoxZp9I0p9qCAJQGOFkF/kVFndX28aq26x2d/gI
- NhDg==
+ d=linaro.org; s=google; t=1787285060; x=1787889860; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=zakSNcKNR+QZBPobFR1l5c+AA7ezfGojoAb40bpT830=;
+ b=lmpv914v6z0oLWBs6VX7NteSitlUk/jJgv8kPWMox1PjGNB+kddAcKdkwGS/8J7vl4
+ jKfqZ7nWvdKsIjH4KVkPn4i3QKqaK72QmsbNzrEkBbszeQfGg9U19fnu62H64Mw7+RD9
+ sRq4q99Sxqdt4i/hsnCurGT0wXbU1kPkc/hDLOirHDaPIqyXYFIzvApyZa8TwtVPJtjk
+ ylZW6lJ1CLd0TOmGs4aEpReo1wBj52L/QexM+sUBJngfgW9rwoDFvdDWdoAKq1mkAPr8
+ tnMemV6f11G4Wh9KLyQ0Mx2VOyZmZ8rfAc4c7iKT22UKTxowQU1rEIgcK0upgJmwC8Pu
+ 5JOA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787284586; x=1787889386;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=e0/NANrCXjOobJNFshmIrntAvuqdQUXlvIojefKohd0=;
- b=WL8NlEtp5u/FqGmuZhs642GLwHr1TGs1ksoYPq6wgYQmv5pDTuKiSs1FnVD9zwtM4G
- 4g9qqNTL3GFoFCmN45CZFhRF5pE99AVB28VjPNyw3idFN3mYkxlHBgBazxLtqmGhwk1r
- mOfNt1HyiGTF8cbfnbekcjclHS0+Lwkfj6wBSwFkyBanSvg9eedtHB7pxF0jxESgMRsF
- n5LKrB7wdPrCf9g1266ImU+eXe8pgIaJwnSXsDwmi2ZdEj+LsMaeRxy6mJjiI026RweK
- 7YkpiWUR6cLB80o7VB77pUBn3el7sb1h0aP567OQyYl6qqHHAcm6tejjYTSfhgG16WIv
- M5Eg==
-X-Forwarded-Encrypted: i=1;
- AHgh+RpPSndv3GiW5eDx/mGIv2p1PCAAHmaOLJRBHZjZeojhGHxOjeNmD/El0+/ca+z5gF08cGKGU0ehwSDa@nongnu.org
-X-Gm-Message-State: AFuF++lGxbQh0Cs69awc9vA+OllN3J5pdIMZwmkyy1imqragS2Zb5qKG
- lHKMguZhYEX9o5CEByb4GXXEIOr1v2oS2X8rTFIJzjR7PAGhzBoiADgaSziev8j2OfulNb8WpaQ
- a6TdSTA+03b7hIV7Or/S2MabEC6HHM4M=
-X-Gm-Gg: AR+sD11Sh44ug8s5n3R9vUxpijUi5BK4xxpb0Aq+t30iJWRR7w6VH7MV//FoMqR/VGB
- uhy6B27lRGQzPh05Ph+kQwiwitYkcfYtoWNwcplN5Fvsilqsl+MZsWE7BKvx+/E8FUJtYuqExoc
- b2l4OJfaD2rWBUnlwxkIPDw33qA7TrZdVTGF2EFGOQCxLz83VbZldhpsd/TBveJm1Fe5bN+RCvr
- 1JUQIcEyyFVepuhGM8quWBgnkdtS2RYL70cZpljG1yTx+etSMyrzd74KW8fm0OjB4xz8nwDg9N0
- WZlXddlGSttAR+3HmvVNUFN/tMjQL+2M3Ji4zCk7Jwk/
-X-Received: by 2002:a05:690e:bc1:b0:66c:c7e4:2ff1 with SMTP id
- 956f58d0204a3-66ce4a1073bmr1416660d50.15.1787284586003; Thu, 20 Aug 2026
- 20:56:26 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1787285060; x=1787889860;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=zakSNcKNR+QZBPobFR1l5c+AA7ezfGojoAb40bpT830=;
+ b=e71XRkx3/+AyAulh4heF37S1mPoMlsS5vx/Ox72qbSk+Sky/sY9IhQzryFpniB/7so
+ ExwAqLF/5TOZsvyLNJSqNlzjPoB0aPxRf70n+FMCjMZ+b95rB/VQ2gCoN4K/hkHx9n6Q
+ r8RjEUv37TrwLP0Lb370QCa1K4kGmvUyFiHzFrQuVz+q0sxn64ye+EbLmKdFLINjwduh
+ grRdEQAbjwhjYD9ACCO/+HTwgIbcE+6MNhbaLLfY6xQ6NlDMUtMFvDdA05tH4itSghIC
+ puCrjzZarQZHdxKbxp7YWZVjmP7DdyVLPf3oZVsyMvUuWUmJ+XfMxZD8yxH4wVk2I9y1
+ afPg==
+X-Gm-Message-State: AFuF++khvDGKjVH4pcSPfV1qax/U7on0xk2TfzO4olASa6YMsGxU5DaI
+ 6jsaA+fB3gJw1Ay4uenac95uZkcAMZuCh7kykqLTQR2mYfQqM7R3vJNrDqebfarGfaAeLw7jVeb
+ NxAkS
+X-Gm-Gg: AR+sD10qlAv2BCOo9+RpUAwUHNtYxqg8+nKlws0FR1R/2z2bDUYndrzoyv+jt+jBnVU
+ q/ODovzIXi1o941+i6bvo6cXaKEyipMKD7VWT0iJYhyy6CVAgI4wZR1GPO+JzZvX9JAbZegejmb
+ cZZXU9oManXmpoG1NwAPXKFMO2DFxd9vJrV6Z5CLRLsiSNU5R3FTElWaxhdlL5t72rY8Ce8KyhH
+ j88N5JJIeaikl5drj8gGx3EEAOcBtV6W20kMK43gQWmR4Zsg4LbepihLZYRzyEkIcOEViVqkr+f
+ /MlyxKXP5qx6PixuT59zIefk3zsSp4CRYRj1qOLGxWI9Z0Ph0MuQGiejqq6Sq7I+ysF+M+ELw4i
+ jvROSLyLviY2jkwb6RosmVsrdSj/DG7RFRFh38WqqZFb4g0OsL+gEhr583aQZpDp5QlCN4zXF0A
+ so+YKs+vm9rzPmNJxfdS4dVM/GJg9osCsFYDwdiX9jQdyaRgAYXFiP+sPLBgLK2FB2R/sv
+X-Received: by 2002:a17:90b:2e4b:b0:38f:de94:bf34 with SMTP id
+ 98e67ed59e1d1-395c514b5cbmr2741953a91.10.1787285059543; 
+ Thu, 20 Aug 2026 21:04:19 -0700 (PDT)
+Received: from stoup.. ([108.174.179.84]) by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-395c4c194d2sm1298383a91.15.2026.08.20.21.04.18
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 20 Aug 2026 21:04:19 -0700 (PDT)
+From: Richard Henderson <richard.henderson@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org
+Subject: [PATCH v2 11/23] target/riscv: Use vext_ldst_us_notail in
+ vext_ldst_whole
+Date: Thu, 20 Aug 2026 21:03:52 -0700
+Message-ID: <20260821040404.268123-12-richard.henderson@linaro.org>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260821040404.268123-1-richard.henderson@linaro.org>
+References: <20260821040404.268123-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
-References: <20260808182956.290561-1-flamboyant.h.01@gmail.com>
- <20260808182956.290561-2-flamboyant.h.01@gmail.com>
- <3ed04624-9d4c-4c11-9d7b-4bb6568b2590@oss.tenstorrent.com>
-In-Reply-To: <3ed04624-9d4c-4c11-9d7b-4bb6568b2590@oss.tenstorrent.com>
-From: Kangjie Huang <flamboyant.h.01@gmail.com>
-Date: Fri, 21 Aug 2026 11:56:16 +0800
-X-Gm-Features: AcwNN1VE8RqSaOzsXzdPQvs6snSJSbnbVG7PiMoAjPTtDXkWyRjt2mRuWNbYDTI
-Message-ID: <CAAW0U4Z4hSpbC62xE78PJjJPQKNh+7XxF3-Q14QzymELedxhSg@mail.gmail.com>
-Subject: Re: [PATCH v3 1/5] hw/ssi: Add Synopsys DWC SSI standard PIO
- controller
-To: Portia Stephens <portias@oss.tenstorrent.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
- Bin Meng <bmeng.cn@gmail.com>, Chao Liu <chao.liu@processmission.com>, 
- Alistair Francis <alistair.francis@wdc.com>,
- Alistair Francis <alistair@alistair23.me>, 
- Palmer Dabbelt <palmer@dabbelt.com>, Weiwei Li <liwei1518@gmail.com>, 
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
- Paolo Bonzini <pbonzini@redhat.com>, 
- Fabiano Rosas <farosas@suse.de>, Laurent Vivier <lvivier@redhat.com>, 
- Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>,
- Kangjie Huang <flamboyant.h.01@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b136;
- envelope-from=flamboyant.h.01@gmail.com; helo=mail-yx1-xb136.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1031;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1031.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -133,36 +100,159 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Portia Stephens <portias@oss.tenstorrent.com> =E4=BA=8E2026=E5=B9=B48=E6=9C=
-=8821=E6=97=A5=E5=91=A8=E4=BA=94 09:11=E5=86=99=E9=81=93=EF=BC=9A
->
-> I don't think this will work for frame !=3D  8-bit with the m25p80 flash
-> model used by k230. ssi_transfer() takes a 32-bit value but it then
-> calls m25p80_transfer8() which will just transfer the bottom 8-bits and
-> drop the rest.
->
-> I don't know if this is an issue with your code or with the ssi_transfer
-> function though. It seems like ssi_transfer intends to accept 32-bit
-> values.
->
-Hi Portia,
+This eliminates the last use of probe_pages.
 
-Thanks for the review.
+Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+---
+ target/riscv/tcg/vector_helper.c | 119 +------------------------------
+ 1 file changed, 3 insertions(+), 116 deletions(-)
 
-On SPI_FRF: you are right, the explicit clearing in dw_ssi_write() is
-redundant because dw_ssi_write_masked() already drops the bits that are
-not in the writable mask. I will remove it and add a LOG_UNIMP warning
-when a non-zero SPI_FRF value is written.
+diff --git a/target/riscv/tcg/vector_helper.c b/target/riscv/tcg/vector_helper.c
+index 76f3babed6..76990894e5 100644
+--- a/target/riscv/tcg/vector_helper.c
++++ b/target/riscv/tcg/vector_helper.c
+@@ -149,50 +149,6 @@ static inline uint32_t vext_max_elems(uint32_t desc, uint32_t log2_esz)
+     return scale < 0 ? vlenb >> -scale : vlenb << scale;
+ }
+ 
+-/*
+- * This function checks watchpoint before real load operation.
+- *
+- * In system mode, the TLB API probe_access is enough for watchpoint check.
+- * In user mode, there is no watchpoint support now.
+- *
+- * It will trigger an exception if there is no mapping in TLB
+- * and page table walk can't fill the TLB entry. Then the guest
+- * software can return here after process the exception or never return.
+- *
+- * This function can also be used when direct access to probe_access_flags is
+- * needed in order to access the flags. If a pointer to a flags operand is
+- * provided the function will call probe_access_flags instead, use nonfault
+- * and update host and flags.
+- */
+-static void probe_pages(CPURISCVState *env, target_ulong addr, target_ulong len,
+-                        uintptr_t ra, MMUAccessType access_type, int mmu_index,
+-                        void **host, int *flags, bool nonfault)
+-{
+-    target_ulong pagelen = -(addr | TARGET_PAGE_MASK);
+-    target_ulong curlen = MIN(pagelen, len);
+-
+-    if (flags != NULL) {
+-        *flags = probe_access_flags(env, adjust_addr(env, addr), curlen,
+-                                    access_type, mmu_index, nonfault, host, ra);
+-    } else {
+-        probe_access(env, adjust_addr(env, addr), curlen, access_type,
+-                     mmu_index, ra);
+-    }
+-
+-    if (len > curlen) {
+-        addr += curlen;
+-        curlen = len - curlen;
+-        if (flags != NULL) {
+-            *flags |= probe_access_flags(env, adjust_addr(env, addr), curlen,
+-                                         access_type, mmu_index, nonfault,
+-                                         host, ra);
+-        } else {
+-            probe_access(env, adjust_addr(env, addr), curlen, access_type,
+-                         mmu_index, ra);
+-        }
+-    }
+-}
+-
+ static inline void vext_set_elem_mask(void *v0, int index,
+                                       uint8_t value)
+ {
+@@ -430,33 +386,6 @@ vext_page_ldst_us_tlb(CPURISCVState *env, void *vd, target_ulong addr,
+     } while (i < evl);
+ }
+ 
+-static inline QEMU_ALWAYS_INLINE void
+-vext_page_ldst_us(CPURISCVState *env, void *vd, target_ulong addr,
+-                  uint32_t elems, uint32_t nf, uint32_t max_elems,
+-                  uint32_t log2_esz, bool is_load, int mmu_index,
+-                  vext_ldst_elem_fn_tlb *ldst_tlb,
+-                  vext_ldst_elem_fn_host *ldst_host, uintptr_t ra)
+-{
+-    void *host;
+-    int flags;
+-    uint32_t size = (elems * nf) << log2_esz;
+-    uint32_t i = env->vstart;
+-    MMUAccessType access_type = is_load ? MMU_DATA_LOAD : MMU_DATA_STORE;
+-
+-    /* Check page permission/pmp/watchpoint/etc. */
+-    probe_pages(env, addr, size, ra, access_type, mmu_index, &host, &flags,
+-                true);
+-
+-    if (flags == 0) {
+-        vext_page_ldst_us_host(vd, host, i, i + elems, nf, log2_esz,
+-                               max_elems, ldst_host, is_load);
+-        env->vstart += elems;
+-    } else {
+-        vext_page_ldst_us_tlb(env, vd, addr, i, i + elems, nf, log2_esz,
+-                              max_elems, ldst_tlb, mmu_index, ra);
+-    }
+-}
+-
+ static void vext_test_alignment(CPURISCVState *env, vaddr addr, uint32_t esz,
+                                 MMUAccessType access_type, int mmu_index,
+                                 uintptr_t ra)
+@@ -1015,52 +944,10 @@ vext_ldst_whole(void *vd, target_ulong base, CPURISCVState *env, uint32_t desc,
+                 vext_ldst_elem_fn_host *ldst_host, uint32_t log2_esz,
+                 uintptr_t ra, bool is_load)
+ {
+-    target_ulong page_split, elems, addr;
+-    uint32_t nf = vext_nf(desc);
+-    uint32_t vlenb = riscv_cpu_cfg(env)->vlenb;
+-    uint32_t max_elems = vlenb >> log2_esz;
+-    uint32_t evl = nf * max_elems;
+-    uint32_t esz = 1 << log2_esz;
+-    int mmu_index = riscv_env_mmu_index(env, false);
+-    MMUAccessType access_type = is_load ? MMU_DATA_LOAD : MMU_DATA_STORE;
+-
+-    /* Calculate the page range of first page */
+-    addr = base + (env->vstart << log2_esz);
+-
+-    /* Recognize alignment fault before memory protection fault. */
+-    vext_test_alignment(env, addr, esz, access_type, mmu_index, ra);
+-
+-    page_split = -(addr | TARGET_PAGE_MASK);
+-    /* Get number of elements */
+-    elems = page_split / esz;
+-    if (unlikely(env->vstart + elems >= evl)) {
+-        elems = evl - env->vstart;
+-    }
+-
+-    /* Load/store elements in the first page */
+-    if (likely(elems)) {
+-        vext_page_ldst_us(env, vd, addr, elems, 1, max_elems, log2_esz,
+-                          is_load, mmu_index, ldst_tlb, ldst_host, ra);
+-    }
+-
+-    /* Load/store elements in the second page */
+-    if (unlikely(env->vstart < evl)) {
+-        /* Cross page element */
+-        if (unlikely(page_split % esz)) {
+-            addr = base + (env->vstart << log2_esz);
+-            ldst_tlb(env, adjust_addr(env, addr), env->vstart, vd, ra);
+-            env->vstart++;
+-        }
+-
+-        addr = base + (env->vstart << log2_esz);
+-        /* Get number of elements of second page */
+-        elems = evl - env->vstart;
+-
+-        /* Load/store elements in the second page */
+-        vext_page_ldst_us(env, vd, addr, elems, 1, max_elems, log2_esz,
+-                          is_load, mmu_index, ldst_tlb, ldst_host, ra);
+-    }
++    uint32_t evl = (riscv_cpu_cfg(env)->vlenb * vext_nf(desc)) >> log2_esz;
+ 
++    vext_ldst_us_notail(vd, base, env, log2_esz, 1, evl, evl, false,
++                        ldst_tlb, ldst_host, ra, is_load);
+     env->vstart = 0;
+ }
+ 
+-- 
+2.43.0
 
-On the frame width: ssi_transfer() takes a uint32_t word. The issue is
-that the DWC model uses CTRLR0.DFS (4..32 bits) to define each
-transmitted frame, while SPI NOR is an 8-bit consumer, so the two are
-aligned only when DFS is 8. The K230 SDK SPI-NOR paths use 8-bit
-frames, so this case is not exposed by the current K230 use case.
-Maybe either add a DFS !=3D 8 restriction with a LOG_UNIMP warning, or
-have the DWC model split byte-aligned 16/24/32-bit frames into
-multiple 8-bit ssi_transfer() calls=EF=BC=9F
-
-Thanks,
-Kangjie
 
