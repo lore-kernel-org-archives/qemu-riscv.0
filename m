@@ -4,122 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 334B5C5DF88
-	for <qemu-riscv@archiver.kernel.org>; Fri, 21 Aug 2026 05:33:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C74BC5DF88
+	for <qemu-riscv@archiver.kernel.org>; Fri, 21 Aug 2026 06:41:26 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wxHse-0004Ay-VP; Fri, 21 Aug 2026 01:33:29 -0400
+	id 1wxIwF-0001XZ-FK; Fri, 21 Aug 2026 02:41:15 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <flamboyant.h.01@gmail.com>)
- id 1wxHsc-0004AY-Hs
- for qemu-riscv@nongnu.org; Fri, 21 Aug 2026 01:33:26 -0400
-Received: from mail-yx1-xb131.google.com ([2607:f8b0:4864:20::b131])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <flamboyant.h.01@gmail.com>)
- id 1wxHsb-0001fZ-2C
- for qemu-riscv@nongnu.org; Fri, 21 Aug 2026 01:33:26 -0400
-Received: by mail-yx1-xb131.google.com with SMTP id
- 956f58d0204a3-66c7a743cf8so782860d50.0
- for <qemu-riscv@nongnu.org>; Thu, 20 Aug 2026 22:33:24 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1787290404; cv=none;
- d=google.com; s=arc-20260327;
- b=fwAhgdMKHLybkvGaP/IlDy6XVmcwryni/0rb6D9LO6KUXa4GjCSw56MwZXpqWqKnk5
- /elXgjZmjdcGxS6RIflub9RpIVxPzQ75hcXp5OKJYvsne6wpva7/YXsGnkJ2mTQBKTAm
- KWX5aOr44t3Nyg9NYQ8y7UqkwtNMoZAYIDL/Ls2lp7ylIYdIfTRusPc4P5GO7nNeoatJ
- Gq/oJzb1fzXgwretckhPg2aWp3cAOVfWPYm7rIVIm57ZeC0RoM6q6SRP1XcmyPEtHDLJ
- ErUGBWytD/h0CoHqWX/+fJqIvwIEFXf7pYjl1OdY3L3WkwW5Zpzx3zgwC/0e0jBsxdK9
- c7lA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=Hbn6DbDQGksNHikGVpR+3UUDGmghf0y1+rLu5GxTDKA=;
- fh=fwVxhi3cIRBbCqWIyPNr47h47oYN3TwYw0ogoH3RwIw=;
- b=jgZJ5EYHLAfTiEmwhTgZZ2m2dPZQrJmcKLXck5PFwo1m7bjE1GvSsAUTzHC8+A3Az+
- imVd/yHbVthtxzhxWHFn0d9H/KwiecPbQ+MC1zRAluejUYCf+eiA/GZREvdRwx3kskB4
- 9WjHjZ7YXa3+7p409bMWi0YN5JOEd2IVVYjOSXRN0YdwGM1+RgK+BBv2gA2ZilV0bADr
- W8TvH5xvR1IYmdPVB4Cd0/uKTXqdPg9EcBGQ6WsuNiMvfwywffvcj5Qi5sdL5xx506Fi
- JcvrOkZ28kdYaSnfuM3dgf1rnpGSj0YGm50G+AInmbdYVpPoDLj2E8r2msdyh7V9q9ns
- Ve6A==; darn=nongnu.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1wxIwE-0001WZ-7T; Fri, 21 Aug 2026 02:41:14 -0400
+Received: from [115.124.30.131] (helo=out30-131.freemail.mail.aliyun.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1wxIw9-000661-0D; Fri, 21 Aug 2026 02:41:13 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1787290404; x=1787895204; darn=nongnu.org;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=Hbn6DbDQGksNHikGVpR+3UUDGmghf0y1+rLu5GxTDKA=;
- b=Hethdn2jMEcMa0uB2KiOgZZX1ufx+2meW0dI4y6KS2FmlVO8nFbNsapLVjBYRoZKfT
- rRhQS1yoLsh/obj7h5jptLmUDjuYxmhNMKDZh7GE0Yg7qUkO8egj8teYn8akGGEc/mK9
- 6BvQ0kHlch2x6ZtsWwjXq9mjrhUc0+Km0Hv2TIqPEtriOcJrFrKYJwuXJkPcom76fm3j
- 1yviI0doB4Pt+Hvxb1LTNcQx8CJWaltJzWpSonRmZpRjSeoXMoOsneZHpsf9JSlco5t8
- j/BxhSs0YgiEaJQJ/vJAqWDqJQpZd0Tn4XzFxTJPpuhhhMlmAsIGAILTyhWA542230sV
- DkQw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787290404; x=1787895204;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=Hbn6DbDQGksNHikGVpR+3UUDGmghf0y1+rLu5GxTDKA=;
- b=rUpZC8/TMZXtFnlzXDufxkVYLreRuS9gpkjhs6+qOCGI4p+Bd1cj/D6rODHDA1mo2L
- EPi/CvWbpjDoKrKpYKhdEND8BYgXWxC3mz6GLKc2wLe4HROn7f151j2jCpshF6veKVQi
- TdmfFXx+0OeTA5d0+IBbscTBdH3DHJgcwGtF91UbKdNaNuvDn6nd6/TXty2UUMWyoYEC
- cQ5LWdJNwTjWy7I5KFCgorXPom7/POL/LWGBd9TDi1rozk8RuJU7rl1jpGN6uW8ZmToN
- dMX3+SqjEMP/MlsDJvA9lqC2OV+zu+bsyC7pPIJanb34gussRG1f5aJ9cGQZOp9qFvZp
- ctjA==
-X-Forwarded-Encrypted: i=1;
- AHgh+RoQ3MIyzGYB1TxIEaPN+RfqDZpYI/jSJ73+wEBoIYc24+++b2e0NjP2H5SuLYGOiXUINSUrP8nXfiYI@nongnu.org
-X-Gm-Message-State: AFuF++lfbuQLU1eHUeNrdZKSXB/G/DgbfQis6q8QFhGMeenlxg289Dad
- rjQWnELd1qkNyOVCd1g1BRThYWsbHHmz9uho0HaRrYHGEIimcrzMjGaDVa3fwJ76m20OLeUipEv
- StjjbUj+JA/CZUFeHOH4ha0XIqS6n6wk=
-X-Gm-Gg: AR+sD10sS1yqr9dWmE+Q/ofnltDRUuijzI9E3hJBt6LXjQ5LY8fj+0x/aStswwOfJ0J
- eeZ66SnMKWF/DCmPyEkSnDbtCSNjNMAameSj+RbTqSa2SMv+ytp+Rz5PVE95MXm1X4KN53Xspk1
- GNwBsCHr2/r4vCt982EL98ZgR6nR2tVpCaV1fj55ugLbAyl2n/S8smDMiSySNKAW6dPQ8xDB+kJ
- 0M8AHJNrY3XwqlRF8iWNnc3S1FPChnj8EyWcFz6+/PeQ6gOcZYQAAyEemhWGFYGxbCF4kjX2k4g
- zYuosOnUJuQzxLvaLnZvcldeV/gBXQH1zpuUFqUGVaYvYhTZCaeGBCT5748OnWF7+W0Z7vp6BSu
- zv7w=
-X-Received: by 2002:a53:bd41:0:b0:668:894e:4bf with SMTP id
- 956f58d0204a3-66cd69a2a2bmr3183044d50.13.1787290403849; Thu, 20 Aug 2026
- 22:33:23 -0700 (PDT)
+ d=linux.alibaba.com; s=default;
+ t=1787294441; h=From:To:Subject:Date:Message-Id:MIME-Version;
+ bh=UKnM9cWdP672CNzhiWDOMhhND+Qv5p67Q8VNGPB24y0=;
+ b=dNwEUWKHiih9g2AdvMJ/A+r0aRAfwLLMk6xt5kduR34+1o352GTlyVlDFht/V3mjKPJG4Mpg+gajs+KbJL8bcnzK7SnzejvrNsMjg9G7KemkFDK+UP5SE/ZyQU4ddBdqNwZoYWS5/G/uZ2FOXyCGlu6BqMC6VBBCjb/l5ZBc6K8=
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R141e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033037009110;
+ MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=11; SR=0;
+ TI=SMTPD_---0X9LMiSM_1787294440; 
+Received: from localhost.localdomain(mailfrom:zhiwei_liu@linux.alibaba.com
+ fp:SMTPD_---0X9LMiSM_1787294440 cluster:ay36) by smtp.aliyun-inc.com;
+ Fri, 21 Aug 2026 14:40:41 +0800
+From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org,
+	qemu-arm@nongnu.org
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com,
+ daniel.barboza@oss.qualcomm.com, chao.liu@processmission.com,
+ zhiwei_liu@linux.alibaba.com, peter.maydell@linaro.org,
+ richard.henderson@linaro.org
+Subject: [PATCH 2/3] target/arm: Fix RCsc ordering of store-release
+ instructions
+Date: Fri, 21 Aug 2026 14:40:31 +0800
+Message-Id: <20260821064032.49556-3-zhiwei_liu@linux.alibaba.com>
+X-Mailer: git-send-email 2.39.3 (Apple Git-146)
+In-Reply-To: <20260821064032.49556-1-zhiwei_liu@linux.alibaba.com>
+References: <20260821064032.49556-1-zhiwei_liu@linux.alibaba.com>
 MIME-Version: 1.0
-References: <20260808182956.290561-1-flamboyant.h.01@gmail.com>
- <20260808182956.290561-2-flamboyant.h.01@gmail.com>
- <3ed04624-9d4c-4c11-9d7b-4bb6568b2590@oss.tenstorrent.com>
- <CAAW0U4Z4hSpbC62xE78PJjJPQKNh+7XxF3-Q14QzymELedxhSg@mail.gmail.com>
- <7f691e05-7512-4982-a4e9-a1ba5f5bf823@oss.tenstorrent.com>
-In-Reply-To: <7f691e05-7512-4982-a4e9-a1ba5f5bf823@oss.tenstorrent.com>
-From: Kangjie Huang <flamboyant.h.01@gmail.com>
-Date: Fri, 21 Aug 2026 13:33:11 +0800
-X-Gm-Features: AcwNN1WEoi5Ej1uZ6hPdurQqz3aOtAqNmg5ZjQcp_LX5XTFpBP7uIUXd7vCqEsA
-Message-ID: <CAAW0U4YzxrDA7ukyaSzPFuAW+Bv3NPNA8hD7ApjC=mr=7S8PLA@mail.gmail.com>
-Subject: Re: [PATCH v3 1/5] hw/ssi: Add Synopsys DWC SSI standard PIO
- controller
-To: Portia Stephens <portias@oss.tenstorrent.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
- Bin Meng <bmeng.cn@gmail.com>, Chao Liu <chao.liu@processmission.com>, 
- Alistair Francis <alistair.francis@wdc.com>,
- Alistair Francis <alistair@alistair23.me>, 
- Palmer Dabbelt <palmer@dabbelt.com>, Weiwei Li <liwei1518@gmail.com>, 
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
- Paolo Bonzini <pbonzini@redhat.com>, 
- Fabiano Rosas <farosas@suse.de>, Laurent Vivier <lvivier@redhat.com>, 
- Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b131;
- envelope-from=flamboyant.h.01@gmail.com; helo=mail-yx1-xb131.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 8bit
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.131 (deferred)
+Received-SPF: pass client-ip=115.124.30.131;
+ envelope-from=zhiwei_liu@linux.alibaba.com;
+ helo=out30-131.freemail.mail.aliyun.com
+X-Spam_score_int: -166
+X-Spam_score: -16.7
+X-Spam_bar: ----------------
+X-Spam_report: (-16.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
+ RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001, USER_IN_DEF_DKIM_WL=-7.5,
+ USER_IN_DEF_SPF_WL=-7.5 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -135,54 +74,109 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Portia Stephens <portias@oss.tenstorrent.com> =E4=BA=8E2026=E5=B9=B48=E6=9C=
-=8821=E6=97=A5=E5=91=A8=E4=BA=94 12:53=E5=86=99=E9=81=93=EF=BC=9A
->
->
->
-> On 21/8/2026 1:56 PM, Kangjie Huang wrote:
-> > Portia Stephens <portias@oss.tenstorrent.com> =E4=BA=8E2026=E5=B9=B48=
-=E6=9C=8821=E6=97=A5=E5=91=A8=E4=BA=94 09:11=E5=86=99=E9=81=93=EF=BC=9A
-> >>
-> >> I don't think this will work for frame !=3D  8-bit with the m25p80 fla=
-sh
-> >> model used by k230. ssi_transfer() takes a 32-bit value but it then
-> >> calls m25p80_transfer8() which will just transfer the bottom 8-bits an=
-d
-> >> drop the rest.
-> >>
-> >> I don't know if this is an issue with your code or with the ssi_transf=
-er
-> >> function though. It seems like ssi_transfer intends to accept 32-bit
-> >> values.
-> >>
-> > Hi Portia,
-> >
-> > Thanks for the review.
-> >
-> > On SPI_FRF: you are right, the explicit clearing in dw_ssi_write() is
-> > redundant because dw_ssi_write_masked() already drops the bits that are
-> > not in the writable mask. I will remove it and add a LOG_UNIMP warning
-> > when a non-zero SPI_FRF value is written.
-> >
-> > On the frame width: ssi_transfer() takes a uint32_t word. The issue is
-> > that the DWC model uses CTRLR0.DFS (4..32 bits) to define each
-> > transmitted frame, while SPI NOR is an 8-bit consumer, so the two are
-> > aligned only when DFS is 8. The K230 SDK SPI-NOR paths use 8-bit
-> > frames, so this case is not exposed by the current K230 use case.
-> > Maybe either add a DFS !=3D 8 restriction with a LOG_UNIMP warning, or
-> > have the DWC model split byte-aligned 16/24/32-bit frames into
-> > multiple 8-bit ssi_transfer() calls=EF=BC=9F
->
->
-> I think either option is fine. If there isn't anything testing the
-> variable frame width it might make sense to just restrict the width to
-> what is tested.
-> >
-> > Thanks,
-> > Kangjie
-HI Portia
-     ok ,thanks a lot
-Thanks,
-Kangjie
+The Armv8 memory model has no RCpc store: every store-release in the
+architecture, including the AArch64 STLR and STLPUR and the A32/T32
+STL, STLB and STLH, carries RCsc semantics (Arm Architecture Reference
+Manual, DDI 0487, section B2.3.8 "Acquire and release semantics").
+The architecture therefore orders a Store-Release tagged RCsc before
+any subsequent Load-Acquire tagged RCsc of the same shareability
+domain, which is what forbids the [0,0] outcome of a Store Buffering
+litmus test that pairs "STLR X=1; LDAR Y" on one PE with
+"STLR Y=1; LDAR X" on another.
+
+The translators only emit a barrier before the store, which orders the
+memory operations preceding the store before the store itself (release
+semantics).  Nothing prevents the store from being reordered with the
+memory operations that follow it, so under MTTCG the host CPU may
+execute the load-acquire that immediately follows a store-release
+before the store has left its store buffer:
+
+  * on an x86 host (TSO), store-load is the only reordering the
+    hardware may perform, and it is exactly the ordering that is
+    missing here;
+
+  * on an aarch64 host, no dmb follows the store either.
+
+The defect is easily observed with a bare-metal Store Buffering litmus
+test on a 2 vCPU virt guest: "STLR X=1; LDAR Y" on CPU 0 and
+"STLR Y=1; LDAR X" on CPU 1 produce the architecturally forbidden [0,0]
+result in 6 to 7 out of 100000 iterations, while inserting a DMB ISH
+between the store and the load on each CPU brings the number to 0,
+which validates the harness.
+
+Fix this by emitting a full barrier after the store as well, for
+STLR/STLLR and STLPUR on the AArch64 side and STL/STLB/STLH on the
+A32/T32 side.  The TCG_MO_ST_LD bit included in TCG_MO_ALL makes the
+x86 backend emit a serializing lock-prefixed instruction after the
+store, draining the store buffer before any subsequent load executes,
+and the aarch64 backend emit dmb ish; the store therefore becomes
+globally visible before any subsequent memory operation of the same
+vCPU, and the RCsc store->load ordering is satisfied.  This is
+stronger than the architecture strictly requires, since the barrier
+also orders the store with respect to subsequent RCpc operations such
+as LDAPR, but this matches how QEMU already implements FENCE-like
+ordering and keeps the fix simple.  After the fix the litmus test no
+longer produces the forbidden outcome.
+
+The load-acquire side needs no change: the barrier emitted after an
+RCsc LDAR already orders it with all subsequent memory operations, and
+QEMU deliberately implements the RCpc LDAPR family as full load-acquire.
+
+Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+---
+ target/arm/tcg/translate-a64.c | 13 +++++++++++++
+ target/arm/tcg/translate.c     |  6 ++++++
+ 2 files changed, 19 insertions(+)
+
+diff --git a/target/arm/tcg/translate-a64.c b/target/arm/tcg/translate-a64.c
+index 4f9a93950b..b5bf977910 100644
+--- a/target/arm/tcg/translate-a64.c
++++ b/target/arm/tcg/translate-a64.c
+@@ -3672,6 +3672,13 @@ static bool trans_STLR(DisasContext *s, arg_stlr *a)
+                                 true, a->rn != 31, memop);
+     do_gpr_st(s, cpu_reg(s, a->rt), clean_addr, memop, true, a->rt,
+               iss_sf, a->lasr);
++    /*
++     * STLR is an RCsc store-release: the Armv8 architecture orders it
++     * before any subsequent RCsc load-acquire, which is what forbids the
++     * store-buffering litmus test.  The barrier above only orders
++     * previous accesses before the store.
++     */
++    tcg_gen_mb(TCG_MO_ALL | TCG_BAR_SC);
+     return true;
+ }
+ 
+@@ -4415,6 +4422,12 @@ static bool trans_STLR_i(DisasContext *s, arg_ldapr_stlr_i *a)
+     /* Store-Release semantics */
+     tcg_gen_mb(TCG_MO_ALL | TCG_BAR_STRL);
+     do_gpr_st(s, cpu_reg(s, a->rt), clean_addr, mop, true, a->rt, iss_sf, true);
++    /*
++     * Like STLR, STLPUR is an RCsc store-release and must be ordered
++     * before any subsequent RCsc load-acquire, so it needs a barrier
++     * after the store as well.
++     */
++    tcg_gen_mb(TCG_MO_ALL | TCG_BAR_SC);
+     return true;
+ }
+ 
+diff --git a/target/arm/tcg/translate.c b/target/arm/tcg/translate.c
+index 1770428d3c..bddac41bf9 100644
+--- a/target/arm/tcg/translate.c
++++ b/target/arm/tcg/translate.c
+@@ -4259,6 +4259,12 @@ static bool op_stl(DisasContext *s, arg_STL *a, MemOp mop)
+     tmp = load_reg(s, a->rt);
+     tcg_gen_mb(TCG_MO_ALL | TCG_BAR_STRL);
+     gen_aa32_st_i32(s, tmp, addr, get_mem_index(s), mop | MO_ALIGN);
++    /*
++     * STL has the same RCsc store-release semantics as the AArch64 STLR
++     * and must be ordered before a subsequent RCsc load-acquire (LDA).
++     * The barrier above only orders previous accesses before the store.
++     */
++    tcg_gen_mb(TCG_MO_ALL | TCG_BAR_SC);
+     disas_set_da_iss(s, mop, a->rt | ISSIsAcqRel | ISSIsWrite);
+ 
+     return true;
+-- 
+2.43.0
+
 
