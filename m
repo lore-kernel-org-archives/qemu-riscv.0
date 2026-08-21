@@ -4,129 +4,121 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 896E0C5DF89
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72AC0C5DF87
 	for <qemu-riscv@archiver.kernel.org>; Fri, 21 Aug 2026 10:50:35 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wxMpS-0004E1-Ef; Fri, 21 Aug 2026 06:50:30 -0400
+	id 1wxMoy-0003ht-LQ; Fri, 21 Aug 2026 06:50:00 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1wxMpR-0004DQ-N9
- for qemu-riscv@nongnu.org; Fri, 21 Aug 2026 06:50:29 -0400
+ id 1wxMow-0003gM-OI
+ for qemu-riscv@nongnu.org; Fri, 21 Aug 2026 06:49:58 -0400
 Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1wxMpP-0003A5-Er
- for qemu-riscv@nongnu.org; Fri, 21 Aug 2026 06:50:29 -0400
+ id 1wxMot-00033F-NZ
+ for qemu-riscv@nongnu.org; Fri, 21 Aug 2026 06:49:58 -0400
 Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 67L9LsYV1895322
- for <qemu-riscv@nongnu.org>; Fri, 21 Aug 2026 10:50:15 GMT
+ 67L9LsIT1895328
+ for <qemu-riscv@nongnu.org>; Fri, 21 Aug 2026 10:49:54 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- nP79f5AuOovrDB1ajsH1nmtiPD9rLwAHKHFOF2+RQ3k=; b=FHK0QkV4C2Qgetmf
- XdHQsVn5dlBIr64adF0H5qvVjx+OXdub1f0pFSr0d1RfWlBmlDJxRSJch1gflm1T
- bfgByBIM0qJQRNQioMUrjJ0rUDUqKAYsjSurxIiFtvrKsNAlpLc4H9XQ7Cl/D/Hh
- snbExd7pGeVxArnBH+QnrHIMDqZYzaz1Z2KlXZJyzCA4SGCLhCM/NkoyQObBp8O7
- YOctNEjpKHridSGNd0d+0s5/m6PmcXEPTU929U9VDWn0RTlqd9KeBSBqXPzLBCqk
- +98mLiaHjqspqze94YxZEtMdWHv6h1B61qFLN39siACg9Bs3bnXcVa4+J8e5ywY1
- 59SIHw==
-Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com
- [209.85.160.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g6gdn972v-1
+ cc:content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=qcppdkim1; bh=ZNFCI4C2NoYEsjyBhYlm7b
+ UDKocJg7C3gcE3cL9lgC0=; b=inoA4b5T/LPHtIS4f1VO7h7CRRwTTue9SAWjaf
+ D6gH96ee1RnNsutm8lX4ZFwqv3/KQz1iYQneycMS6LzX/qKrBpFI3KWl7tLIYi0A
+ xcq53SbGUPPiGzlRIoowMxWlKolv00tzgs9Ftmj4Oe1oBvyJEcWM1fZs04+1e8V6
+ NW0sHRM3t9hkpUcfhuVaOusVBuKuc1QSTsPjNd7cjFGNzpK6FP48rxlHM+8EVg0y
+ nl1eUXifkcb8kDriQWfqweqHoUEsNpyPSNEjN/3mvNC2cbeTNvyEEzM7yVCQtj0M
+ Th+lqKsQwkVzFwmdgh/q+X2etzakj64MrlezD2C3KgxP6Ymw==
+Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com
+ [209.85.222.198])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g6gdn970x-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Fri, 21 Aug 2026 10:50:15 +0000 (GMT)
-Received: by mail-qt1-f197.google.com with SMTP id
- d75a77b69052e-51c083f1818so9017131cf.0
- for <qemu-riscv@nongnu.org>; Fri, 21 Aug 2026 03:50:15 -0700 (PDT)
+ for <qemu-riscv@nongnu.org>; Fri, 21 Aug 2026 10:49:54 +0000 (GMT)
+Received: by mail-qk1-f198.google.com with SMTP id
+ af79cd13be357-92e695a3b28so211904085a.1
+ for <qemu-riscv@nongnu.org>; Fri, 21 Aug 2026 03:49:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1787309415; x=1787914215; darn=nongnu.org;
- h=content-transfer-encoding:content-type:mime-version:references
- :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=nP79f5AuOovrDB1ajsH1nmtiPD9rLwAHKHFOF2+RQ3k=;
- b=KwG5StNgR4iexvUFTyULkvX1LjdLXhTQ5OGnsLpbaG0bpF3AmPkdJ4+zxmeFoZl+e2
- EqGbFlcKKofxcCFPHHBLs9u3n647tJPU1GfwFCwuAsUDQ4KQPq+SdEB7TO7KOkBdMYZt
- BTN6J+0hMvK9RFXyuPQ5AIPcTxn4RdZdid0H/tVuKBRFOgGnGcOOSzQxLlBW1UyyTkAl
- LMSXuYUK7OotsxWZhnk7R5mIWp1IvhsOVHTwdlldJSmME95D8IENzuNqJpY9v5g2lVe4
- 45z6aVweSrFMF4tRWgh2ERG+TqnUaK4RZOnK/EzlP4fc8QmrdmAal8WRwmVml2PPfc7a
- Io4A==
+ d=oss.qualcomm.com; s=google; t=1787309393; x=1787914193; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:mime-version:message-id:date
+ :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=ZNFCI4C2NoYEsjyBhYlm7bUDKocJg7C3gcE3cL9lgC0=;
+ b=cEY5/yKKPRiCWCjxY+tCl0yT02ZG0SuO7P0ZggKMUyy2GGQwDbzU9Fb+QQyR9D/lZm
+ nRL8oiDRlPdcERDGQO5VSbdNym96nho75xnf4RyzjqRiAPOogf0RRF2n7VUzycCFdXDP
+ hL2jZ32hkGu3UqMPbMAOisdy1TIi8BRprnNSBkJXc+Sc3enVywXjGSR4scNEDvXCTdBo
+ JTTXNlPBF6oLVl1+DxqUiXOtOtGAp5G1/fncB5P8G06cCg1yrtj+H63e/uRwY8f0lyF4
+ z8w74H13nIRRI6waRt+VybN1vbrvE/d7wRnB6nYd8ghxqU4dLeWKKJZ3hHnBSc8IvPzY
+ GQDQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787309415; x=1787914215;
- h=content-transfer-encoding:content-type:mime-version:references
- :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=nP79f5AuOovrDB1ajsH1nmtiPD9rLwAHKHFOF2+RQ3k=;
- b=FnceQoLx6I6BYO2mX6552vBPOgofjZKnu5C498/OObpXdpUVztAf8vYaqLBXbqAM/J
- bias7I9DkvFGya/wPE1s0Wum1TuflY5nnF/8k+DLS4+StG2eJuKtQnnhf8S4RYHw9LcL
- ZnuW/4zWNospTJpxr4elfvrGtBSsafOPzH2TccgK1anFl+bNnie7Zo4ymBQn/vp3YRIS
- DwhXENDbj2TCItvRIRGqEK9Xfjun7m0v5lsGAVLkvzThtZAhxn4qpW0KawK3bEzoArRo
- Y38BHguDrc0InsX1dUsEbNbZON6QoPAl8cY4NDKsbandUdi5VzaFMEqMK1eR/wlemJbk
- eojg==
+ d=1e100.net; s=20251104; t=1787309393; x=1787914193;
+ h=content-transfer-encoding:content-type:mime-version:message-id:date
+ :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=ZNFCI4C2NoYEsjyBhYlm7bUDKocJg7C3gcE3cL9lgC0=;
+ b=gB7HzI4WziDA0d9yMSORARU2PEHlzPsH16KvbcQA0QTGbCJxZo0w5z7lvGWVV+14zY
+ 2cW/TfljgimbbL/f/QbUOQ5VSq+p84VltyXK8gJwaesCpTgZ7Co5iUyFK21dz5eS/EsG
+ 7XVaBFKQRus9rd7SQWn5PkBLPF5uUA+0BGi8lc90TlKElRUOBChI0NTB0eqHRzFhLKbY
+ H5ZD5m17dtIXtsMGx+se5oGEzctFmIwaDCaLlHyt+WrVFdZTczt1sXhbkvVNtJO3pW8q
+ dWatFf71eAs/AzK8T5cC8RQp9jh5znCF98Dz9yG2oATap33zaRxnszrVoHSV4Hzeux/Q
+ 0Beg==
 X-Forwarded-Encrypted: i=1;
- AHgh+RrzHcAUmmvNWy57awOP/1SFDLr/K7XaAszUdeRESVszALsNx6bvL9RB9B/oj47R9OzD86yAJuud4eSM@nongnu.org
-X-Gm-Message-State: AOJu0Yy5P3/ngr7Erpn63Cx8ykkwYqFmnBohd3mAw88adFg7QXfXTTwh
- MZJiFsUt+xFVNmE2cuvzbPH/vHM82Ww5TDAN/F/JrPHWwU3/PQc1K0P2l3Tp0inzVFdBP5vhfSo
- 3ymURgIO3fqSC13cnZ1fzYR2EXf4NzniTAQuFrhYnoiT5n89dSz4ncnXaZQ==
-X-Gm-Gg: AR+sD11wdI5SwTgYr+plIB4QdTGaT1v2If3Byh+SE8aLIURK9Nc+fZMa+f3x//yY08I
- VAZoSAUswn2dageym34A2M3UP6j1dcW7LQts4vU6IGk7qgO3VyuF11VR4E1E529xojv/SYmDqMg
- rtFS/Vgb8rPavKrBnA/i1kAMJURdsgySqRJzjipC1VK6paIzqFg9J+IajgylaF8mgcRN4zpVW6C
- Gc7BvXL89rXbJ5xDXCBx/tNxsR+e+8YHxQQP34YR8lVs9c1qYXjAbsV5V8sn6mxDX6N18ku6BL7
- PCk3w9CvB3aQ3sUd7QfhkLHzWGOyLKzBLTO6Bq5jHYuhlCO4SON6bqvnYbQLkZZY84g/gJuThge
- sgX1wesZbeDwYwLwG+7OFfiTHSg0+eW+YUl6yat0GAQ==
-X-Received: by 2002:a05:622a:4d49:b0:51c:1132:c80d with SMTP id
- d75a77b69052e-52df5a024c9mr46450711cf.28.1787309414849; 
- Fri, 21 Aug 2026 03:50:14 -0700 (PDT)
-X-Received: by 2002:a05:622a:4d49:b0:51c:1132:c80d with SMTP id
- d75a77b69052e-52df5a024c9mr46450391cf.28.1787309414489; 
- Fri, 21 Aug 2026 03:50:14 -0700 (PDT)
+ AHgh+RqtOecInRZqpGu4oqUdgoGB0OlWRIixOQNgx78akQ8Ftv7JC0PNDL/OMLauP5YA2QHaV1gyM5vS6qHE@nongnu.org
+X-Gm-Message-State: AOJu0Yx67RATQOI8/MNhFfXgdH+Z56321OTsHgZcIfulKGY+exDwFe++
+ 8UFZ/418FbVPMnQX3wBMaznN4AaBR1UAUi4/TAcNaTaLfd3TUw6oDtPhQP5Zu138PGpdkXNbnYo
+ +uw32x2F9IfvwoFQy05UFa9EA9UxVbQtGZNimQxax7qEbKOpe4XttH2uL8g==
+X-Gm-Gg: AR+sD11u5P02affq/b5oxz3HT971HDmUFKmFlZAMrHvjF5lbmZhKuzonRUh6cDFx75D
+ QY7LKCyzawmCE0MQ0Ic6DHTT5kR8lYmWkuOgyGCw5K/76tRd9h7GwFBsiEZ/ovQKxZnxqsc4zKu
+ dADF5F5hp6/ePl4pgtd7tULIuu5Agd428z1QZuMfrvhC7/hVl0DDMkcpXSfS9Uo3dWRSA+bGngC
+ uNhGtEz66XwjQTf884z7ivTNNvo0SWkog4bQGaBm6UL/e1IgZFfBnhlvcx9IskQM7uvlaSPzF1I
+ wtZtgSPt/80LF/hnAZ25aC02acJjKcDS0exp/BsgCe5gFx8FdB6brb3Ry7s+ZGkO/sxZ2j1uz6Y
+ LSYZdBG/Ny0/SvOCP74E3B6woVn6TEq23ziKFT8yOKw==
+X-Received: by 2002:a05:622a:1b28:b0:517:6fc2:4760 with SMTP id
+ d75a77b69052e-52de2fb21dbmr130260161cf.9.1787309393373; 
+ Fri, 21 Aug 2026 03:49:53 -0700 (PDT)
+X-Received: by 2002:a05:622a:1b28:b0:517:6fc2:4760 with SMTP id
+ d75a77b69052e-52de2fb21dbmr130259871cf.9.1787309392987; 
+ Fri, 21 Aug 2026 03:49:52 -0700 (PDT)
 Received: from localhost.localdomain (pmd666.hd.free.fr. [88.187.86.199])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-482b14c33b3sm15625877f8f.27.2026.08.21.03.50.13
+ ffacd0b85a97d-482b14b8050sm17287766f8f.19.2026.08.21.03.49.51
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 21 Aug 2026 03:50:13 -0700 (PDT)
+ Fri, 21 Aug 2026 03:49:52 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
 To: qemu-devel@nongnu.org
 Cc: Paolo Bonzini <pbonzini@redhat.com>, qemu-arm@nongnu.org,
  qemu-s390x@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
  qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@mailo.com>,
- Laurent Vivier <laurent@vivier.eu>, Helge Deller <deller@gmx.de>,
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
-Subject: [PATCH v3 03/15] linux-user: Replace env_cpu_const() by generic
- env_cpu() equivalent
-Date: Fri, 21 Aug 2026 12:49:37 +0200
-Message-ID: <20260821104950.32108-4-philmd@oss.qualcomm.com>
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
+Subject: [PATCH v3 00/15] cpus: Constify @cpu in SysemuCPUOps::has_work()
+ handler
+Date: Fri, 21 Aug 2026 12:49:34 +0200
+Message-ID: <20260821104950.32108-1-philmd@oss.qualcomm.com>
 X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260821104950.32108-1-philmd@oss.qualcomm.com>
-References: <20260821104950.32108-1-philmd@oss.qualcomm.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODIxMDA4MSBTYWx0ZWRfXxQb6Dr5jy8ZQ
- DPwvltqGTlVrFlaEHQslXrKSqQKvPbTMQxTC/gsTnEvauSiDCO8VXlDoM64qc1cUuTrvohyase9
- TPcgL/8d5D69KX0mVkXjzJIMZMyqQgXXZSSXjo0A9gm3Zq5cNmg4VlNNTZQsVipsRNtsSNOst+D
- +oyZQs4DSfAkTVE84SWZS6R2wyt+rxHPLznZ230xVuG+j0QDJwanOEKzsApYOJd+rQw0ushb1xp
- VInkA7p2tiq0BuNecwuw1gSGaIJlwEEP1yYCTDv6BpXnmTo3pTX01ij3cxNOmbTnMn94pU4KHLN
- CFKfkzSNZBMU2CWx0L6QEcVYQLeD9w9VCjkDZVcvSZY3bCryjmld0ooZpoFk2coDsHsIm3iT6s5
- DES0VJ1GoI6pFo0nWrKR/hYu26i4mA6qAZqrIL02fdfz3modXWn5t4ChaICORN5tf4Kq5WPisLn
- y7/mjN2hLcyMVYxrghA==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODIxMDA4MSBTYWx0ZWRfX2aCk6j+Bo4GJ
- TD7lXenrwRryXEPgdkB4mU3q3Q1H9bLDa2av4y+095gPzM0NOQIlwzXOCCKxKvv/8w0F7L8nyRn
- jlgfwgANnCUTDYPeZNcAfZjQSArx85Q=
-X-Proofpoint-ORIG-GUID: xHHdl_MN9KoQedkdhTo3fixgTLORTPlL
-X-Authority-Analysis: v=2.4 cv=BJyDalQG c=1 sm=1 tr=0 ts=6a882d67 cx=c_pps
- a=EVbN6Ke/fEF3bsl7X48z0g==:117 a=4s3hRJSeHn4rkQlkrse1kQ==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODIxMDA4MSBTYWx0ZWRfX6znq9UUi90/s
+ CtSlJJ2h6XPcqNfms6l3cWr4b4Uia0fXFObgWeyVyS0lSuPoyEQ6wBZ1Sua0qVA8NJOwiQxPJPz
+ MmxtM9KOPS8PDPJAkLMaCQCU3cAIrA3u+fvQKbFXHlA38eZGZhvYGSNttVpPjto0ETOF9zByIiO
+ cmaNVGQMOQYUvx6QRbqz6MNRKmXd0TTn2LcPyWaplI0g2i4vZASxxdkW3w4FSS2SFduhMjSIze9
+ m1z5Kzu0z1IjSZl95td7c+E5arK53Kcl68vd3n9XyFl2vxX/a1ZdOfa7Ll9TIx2vb3Ed71+0mVR
+ q78ktePQZAUinnhrJ2ZIcrJ6w2RTTM+TiH6ap8dE8vmeV6RyjB6mrNsEFLniLHIa4bPd2CDRLQJ
+ qgPoJZaBSF0m/1lxR4D0HFpupCseEBW9ZsC0XlmuR59x2W54gMdkTM2O7dKinCYQk4nu2GWCWOf
+ VmY5seAwSYSstjDir2A==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODIxMDA4MSBTYWx0ZWRfX8Z45e3iPW1eu
+ UC158JWmLF6El1Bdhp8ThRXaAvp20SZsh+oRt4GVZY1Nw2ObpYFWrhJJzO+KX0t+35Ifxr5J/th
+ KxUPRDPQ5gqMP5TE+p4s0bRPAYeW/a4=
+X-Proofpoint-ORIG-GUID: UrNt5IaBHevX92HfNa1WdPXMsCH9zKwL
+X-Authority-Analysis: v=2.4 cv=BJyDalQG c=1 sm=1 tr=0 ts=6a882d52 cx=c_pps
+ a=qKBjSQ1v91RyAK45QCPf5w==:117 a=4s3hRJSeHn4rkQlkrse1kQ==:17
  a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=M51BFTxLslgA:10 a=s4-Qcg_JpJYA:10
  a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=EUspDBNiAAAA:8 a=KKAkSRfTAAAA:8 a=xWu8-Agft_6X_INOG6MA:9 a=3ZKOabzyN94A:10
- a=QEXdDO2ut3YA:10 a=a_PwQJl-kcHnX1M80qC6:22 a=cvBusfyB2V15izCimMoJ:22
-X-Proofpoint-GUID: xHHdl_MN9KoQedkdhTo3fixgTLORTPlL
+ a=JaqPAoXzzHJsSOSiC2EA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=NFOGd7dJGGMPyQGDc5-O:22
+X-Proofpoint-GUID: UrNt5IaBHevX92HfNa1WdPXMsCH9zKwL
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-21_03,2026-08-21_01,2025-10-01_01
@@ -160,68 +152,108 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Use the generic env_cpu() macro introduced in the previous
-commit and remove the few env_cpu_const() uses.
+Missing review: 4, 15
+(I plan to merge myself once reviewed)
 
-Signed-off-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
----
- include/exec/cpu-common.h   | 1 -
- linux-user/elfload.c        | 2 +-
- linux-user/i386/elfload.c   | 2 +-
- linux-user/x86_64/elfload.c | 2 +-
- 4 files changed, 3 insertions(+), 4 deletions(-)
+Since v2:
+  - Reorder _Generic changes first to maintain bisectability
+Since v1:
+  - use _Generic (rth)
+  - no more RFC
 
-diff --git a/include/exec/cpu-common.h b/include/exec/cpu-common.h
-index bffef677607..d67d008236f 100644
---- a/include/exec/cpu-common.h
-+++ b/include/exec/cpu-common.h
-@@ -102,6 +102,5 @@ static inline bool cpu_loop_exit_requested(const CPUState *cpu)
-                 (CPUState *)((void *)env - sizeof(CPUState)), \
-             const CPUArchState: \
-                 (const CPUState *)((const void *)env - sizeof(CPUState)))
--#define env_cpu_const(cpu) env_cpu(cpu)
- 
- #endif /* CPU_COMMON_H */
-diff --git a/linux-user/elfload.c b/linux-user/elfload.c
-index 88508deac50..c4bdaa146a7 100644
---- a/linux-user/elfload.c
-+++ b/linux-user/elfload.c
-@@ -2128,7 +2128,7 @@ static int wmr_write_region(void *opaque, vaddr start,
- #endif
- static int elf_core_dump(int signr, const CPUArchState *env)
- {
--    const CPUState *cpu = env_cpu_const(env);
-+    const CPUState *cpu = env_cpu(env);
-     const TaskState *ts = (const TaskState *)get_task_state((CPUState *)cpu);
-     struct rlimit dumpsize;
-     CountAndSizeRegions css;
-diff --git a/linux-user/i386/elfload.c b/linux-user/i386/elfload.c
-index 26b12001a3e..2e10f38a412 100644
---- a/linux-user/i386/elfload.c
-+++ b/linux-user/i386/elfload.c
-@@ -38,7 +38,7 @@ void elf_core_copy_regs(target_elf_gregset_t *r, const CPUX86State *env)
-     r->pt.es = tswapal(env->segs[R_ES].selector & 0xffff);
-     r->pt.fs = tswapal(env->segs[R_FS].selector & 0xffff);
-     r->pt.gs = tswapal(env->segs[R_GS].selector & 0xffff);
--    r->pt.orig_ax = tswapal(get_task_state(env_cpu_const(env))->orig_ax);
-+    r->pt.orig_ax = tswapal(get_task_state(env_cpu(env))->orig_ax);
-     r->pt.ip = tswapal(env->eip);
-     r->pt.cs = tswapal(env->segs[R_CS].selector & 0xffff);
-     r->pt.flags = tswapal(env->eflags);
-diff --git a/linux-user/x86_64/elfload.c b/linux-user/x86_64/elfload.c
-index 49a6f6180e0..121a8167acc 100644
---- a/linux-user/x86_64/elfload.c
-+++ b/linux-user/x86_64/elfload.c
-@@ -59,7 +59,7 @@ void elf_core_copy_regs(target_elf_gregset_t *r, const CPUX86State *env)
-     r->pt.dx = tswapal(env->regs[R_EDX]);
-     r->pt.si = tswapal(env->regs[R_ESI]);
-     r->pt.di = tswapal(env->regs[R_EDI]);
--    r->pt.orig_ax = tswapal(get_task_state(env_cpu_const(env))->orig_ax);
-+    r->pt.orig_ax = tswapal(get_task_state(env_cpu(env))->orig_ax);
-     r->pt.ip = tswapal(env->eip);
-     r->pt.cs = tswapal(env->segs[R_CS].selector & 0xffff);
-     r->pt.flags = tswapal(env->eflags);
+- Patch 1-3 add const-qualified variants of cpu_env(),
+  env_cpu(), and env_archcpu() using _Generic() macros;
+  consolidate the redundant env_cpu_const() alias and update
+  linux-user to use the generic accessor
+- Patches 4-14 trivially add const qualifier for various
+  cpu_is/has() getters
+- Patch 15 finally convert the SysemuCPUOps::has_work
+  hook and all target implementations.
+
+No functional change; purely const-correctness improvment
+to enforce has_work() callees don't mutate CPUState.
+
+Build-tested.
+
+Following checkpatch.pl errors ignored:
+
+  2/15 Checking commit efef90983aa7 (cpus: Add const-qualified CPU environment accessors)
+  ERROR: spaces required around that ':' (ctx:VxE)
+  #46: FILE: include/exec/cpu-common.h:89:
+  +            CPUArchState: \
+                           ^
+  ERROR: spaces required around that ':' (ctx:VxE)
+  #62: FILE: include/exec/cpu-common.h:101:
+  +            CPUArchState: \
+                           ^
+  ERROR: spaces required around that ':' (ctx:VxE)
+  #90: FILE: include/hw/core/cpu.h:605:
+  +        CPUState: \
+                   ^
+  total: 3 errors, 0 warnings, 64 lines checked
+
+Philippe Mathieu-Daudé (15):
+  linux-user: Uncast void pointer argument as Object in
+    target_cpu_free()
+  cpus: Add const-qualified CPU environment accessors
+  linux-user: Replace env_cpu_const() by generic env_cpu() equivalent
+  system/cpus: Constify various CPUState arguments
+  target/avr: Constify CPUAVRState for some cpu_*() getters
+  target/hexagon: Constify CPUHexagonState in
+    hexagon_thread_is_enabled()
+  target/i386: Constify CPU*State for cpu_*_interrupt() getters
+  target/loongarch: Constify CPULoongArchState for various cpu_*()
+    getters
+  target/mips: Constify CPUMIPSState for various cpu_*() getters
+  target/s390x: Constify S390CPU for cpu_has_*() getters
+  target/riscv: Constify @iprio argument in riscv_cpu_pending_to_irq()
+  target/riscv: Constify CPURISCVState for various cpu_*() getters
+  target/sparc: Constify CPUSPARCState for various cpu_*() getters
+  target/tricore: Document architectural interrupts as not implemented
+  cpus: Constify @cpu in SysemuCPUOps::has_work() handler
+
+ include/exec/cpu-common.h        | 29 ++++++++++-------------------
+ include/hw/core/cpu.h            | 21 ++++++++++++++-------
+ include/hw/core/sysemu-cpu-ops.h |  4 ++--
+ include/system/cpus.h            |  4 ++--
+ target/avr/cpu.h                 |  6 +++---
+ target/hexagon/cpu.h             |  2 +-
+ target/i386/cpu.h                |  4 ++--
+ target/loongarch/cpu.h           |  6 +++---
+ target/loongarch/internals.h     |  2 +-
+ target/mips/cpu.h                |  6 +++---
+ target/mips/internal.h           | 10 +++++-----
+ target/riscv/cpu.h               | 29 +++++++++++++++--------------
+ target/s390x/cpu.h               |  2 +-
+ target/s390x/s390x-internal.h    | 12 ++++++------
+ target/sparc/cpu.h               | 12 ++++++------
+ linux-user/elfload.c             |  2 +-
+ linux-user/i386/cpu_loop.c       |  5 +++--
+ linux-user/i386/elfload.c        |  2 +-
+ linux-user/x86_64/elfload.c      |  2 +-
+ system/cpus.c                    |  6 +++---
+ target/alpha/cpu.c               |  2 +-
+ target/arm/cpu.c                 |  4 ++--
+ target/avr/cpu.c                 |  3 ++-
+ target/hexagon/cpu.c             |  8 ++++----
+ target/hppa/cpu.c                |  2 +-
+ target/i386/cpu.c                |  7 +++----
+ target/loongarch/cpu.c           |  4 ++--
+ target/m68k/cpu.c                |  2 +-
+ target/microblaze/cpu.c          |  2 +-
+ target/mips/cpu.c                |  4 ++--
+ target/or1k/cpu.c                |  2 +-
+ target/ppc/cpu_init.c            |  2 +-
+ target/riscv/cpu.c               | 17 ++++++++---------
+ target/rx/cpu.c                  |  2 +-
+ target/s390x/cpu-system.c        |  4 ++--
+ target/s390x/interrupt.c         | 22 +++++++++++-----------
+ target/sh4/cpu.c                 |  2 +-
+ target/sparc/cpu.c               |  2 +-
+ target/tricore/cpu.c             |  3 ++-
+ target/xtensa/cpu.c              |  4 ++--
+ 40 files changed, 132 insertions(+), 132 deletions(-)
+
 -- 
 2.53.0
 
