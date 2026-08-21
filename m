@@ -4,88 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC315C5DF97
-	for <qemu-riscv@archiver.kernel.org>; Fri, 21 Aug 2026 17:33:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 670BDC5DF7D
+	for <qemu-riscv@archiver.kernel.org>; Fri, 21 Aug 2026 21:07:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wxT6r-0005U0-ID; Fri, 21 Aug 2026 13:32:53 -0400
+	id 1wxWSV-0007xs-71; Fri, 21 Aug 2026 17:07:27 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wxT6o-0005TQ-9D
- for qemu-riscv@nongnu.org; Fri, 21 Aug 2026 13:32:50 -0400
-Received: from mail-pg1-x52b.google.com ([2607:f8b0:4864:20::52b])
+ id 1wxWST-0007xC-C2
+ for qemu-riscv@nongnu.org; Fri, 21 Aug 2026 17:07:25 -0400
+Received: from mail-pl1-x62a.google.com ([2607:f8b0:4864:20::62a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wxT6m-0004PM-BQ
- for qemu-riscv@nongnu.org; Fri, 21 Aug 2026 13:32:49 -0400
-Received: by mail-pg1-x52b.google.com with SMTP id
- 41be03b00d2f7-cbedd5aece4so1696546a12.0
- for <qemu-riscv@nongnu.org>; Fri, 21 Aug 2026 10:32:46 -0700 (PDT)
+ id 1wxWSR-0001er-Qy
+ for qemu-riscv@nongnu.org; Fri, 21 Aug 2026 17:07:25 -0400
+Received: by mail-pl1-x62a.google.com with SMTP id
+ d9443c01a7336-2cc7e86e7aeso19342375ad.2
+ for <qemu-riscv@nongnu.org>; Fri, 21 Aug 2026 14:07:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1787333565; x=1787938365; darn=nongnu.org;
+ d=linaro.org; s=google; t=1787346442; x=1787951242; darn=nongnu.org;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=AziSiQyaswun75qWBZdrTtRtHkm/3fH7WtNiAoSsvxw=;
- b=zKgOnhVh2FQJCJLUr0LkyWXUFe6TO+O5nKTczW3vod3FzqzuKbqnHpzNfN2hWa3qKY
- XjOCs3kECsY+fxDcttM9/DvLGqfXBx/UIzstSfhCitg+veXEpIciVPTwf9/TKdVpocJW
- tdIMpaiKheRrentkf5yqMyl0B8bVAM94xwSef+aTiI+eg0nQEi0Y6P+7divwH8YWIIlp
- F/BJCGDbz5EV3Fz3ThsMKo5KYY5oKFbqwBRAR0UUWpcQBCgPtSwcIBdYKoDrSGbd7YTL
- zGygzESoZqa0djpkI0Ugjl0Rqn52etREFn7Joh0xgY5kr6N8EBq3T/29cHg9npNxFFNb
- LfYA==
+ bh=ZUiSq8PsvavJBFzHfD6KJmOqkADBjSEXe9SnRzZnEAk=;
+ b=GjURinTsNm9XjZTxYOGy9+HIk+rKAZsqLmMk1xJ9cLJx2rrFoH9dK4khmMTnj5bXSU
+ X1heyxJseRBSD/ehfzZKOHpA7dCmoFYnx3tlLUALnIcyNxPWAvym31NwOvcSQmvQiegR
+ FgCm2fYX9dLnRnOWo3Mb2JWCasfouGxKxSd/Zp5XcYMW3uTvihCfYmlK7GEGTY9Q5pNz
+ jTBwoQUM2fbGN7JiOJMbNUjjExt1FJpdQ8Z9Qj0kjmzAWqGApr7ZvT7HFu7T+N+XYUg3
+ yfIBWHifDIvNvgGELI+KWg+pkVXFyv6ydYcyjC4vkgJ0fAuhgHzFM9SUPKJUO9G5ZN+9
+ oemA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787333565; x=1787938365;
+ d=1e100.net; s=20251104; t=1787346442; x=1787951242;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=AziSiQyaswun75qWBZdrTtRtHkm/3fH7WtNiAoSsvxw=;
- b=XCWNYAbMXIIcrW7gGRy8bbKIaUJAFkKqyqmUQGiQ2t9fbj8uYrbOHchSoDooJZGGhc
- RVLGB0xihLeBreAcleO/Hug7TPn6OVO8LhFVUwwFOSq0MMudvpaJzFmQaRRluZz3yDxg
- n26fL26lWdN+eX8K7u/pw0AI7DKdd/3jqahWcveJbCs9sNcn0rcDoEp3bHhqLmMPsojt
- PSY+2lIeLIBBOtJ3vtYruw/UPk4vLu17EPGsLOfdNpAx9hfizDV8JkYPer+dS1yhonRj
- caqc7SDVqi6L5D2V+0xLFJbCRbPEgF/CaLmLUDbbc77WDSGe62W8cGaThkxyx1jkQXu9
- JZ8A==
+ bh=ZUiSq8PsvavJBFzHfD6KJmOqkADBjSEXe9SnRzZnEAk=;
+ b=JsOLtYgEWJGWb5g88igiEzRZBd2udiJ0KN+UkyPvP2Z923TOSg+gmn2SROHuXH1dSD
+ 7M04fMDHkx0Nt5/ha4Mid02xBcW07K7V5rCHQQuwX9mltPX1gx7YWlU82RPyVlOnhnL5
+ stQoRhxaPkRz5AiOxDUHPfnnncWnpgwup1MsH84a9BqYtIl4vaUJrq7M1Nd+TwojZ/W+
+ VEFgP5Gr+oRu6J1JtJQ8nB25Nr1KYLRIIXSEG6y1w9uWiw79Nd21p7CJc9QRu+8fKHzT
+ Zpiiyzkv7GToBoBifM8ghpKsfWrFG/7yaTKNXZWyB0k/6i611a084E/jvZ/Gmv8jMnYK
+ LdjA==
 X-Forwarded-Encrypted: i=1;
- AHgh+RrwvxYknlih27cjn1PIq3j2Pn0xlJuPSCO8c6N2Pgohzqol7pOzv52YlRAA0KQG7D2ZPQIixBRczCs2@nongnu.org
-X-Gm-Message-State: AFuF++krJnMZjPT+UzI28Ya3vdpucqpnTPgrtpUEg+mjApd5TKC4KOrG
- hGAcJ8qlAh79gpcHGXki0zsSShJuc3W3UFasiyY6hkuExdQpgWTsv2PDdIboY2wtJac=
-X-Gm-Gg: AR+sD10jqB89zFd1vaPGzPDOJEClbfARHvHmGRyOTdMi0e0JcDxyeEU8nJaAYNubaFb
- uFhXVmAWOpS8L/z4ZW2zVfhyS8AxISBFDdRJPHxKm3syGeS1EqFS4ZLQ6Kq7f4dRpkrDHw0qwlA
- v7qTyYZ1SMD7I/2riAEz+aAlje813WJ7FbeqK7CCgOHSUNsh6apfVrruqlrZKIrpqg+HguWc3Hv
- wpgKsnFsnYOmfktlOEixba6baopj1SDMe0JWQf+WO1gU4IQZzllkQY8Hzak+E3nMkM4DWUNsGST
- XYxIXkTq2sWCQTTHLBpf/9BVwh8OVwxq4U6f8XPlyhbbrGGwhwuCjdr2HPqcN4sf4T1YzPo2cPJ
- MqEhF+kQwEYp+GZKwcJr3tI3o3YGhfIBo7Ysnke2C1AARL8+y5qcTxgaDy+FGToKZWB3+FFCfUm
- NE2ESyBo7xQSppti6TnfwC/bSb2pehfzI6wEwxFV9bseuYbovFk3QqnA1/A41htrYmDaAQzt5cv
- ne/XLo6dA==
-X-Received: by 2002:a17:90b:1dd2:b0:385:3ab:fecb with SMTP id
- 98e67ed59e1d1-395c4c98f17mr7683255a91.4.1787333565091; 
- Fri, 21 Aug 2026 10:32:45 -0700 (PDT)
-Received: from [172.20.6.168] ([108.174.179.84])
+ AHgh+RpmxeyAv7yDEqBIl9mVOILe/9c25FrHy16k14pkelJigNj7VBN/dVA84Oqe6hsJg+Abm367HbIzpYaR@nongnu.org
+X-Gm-Message-State: AFuF++mfhkYM8CEuYo5BgIdF/JKijJzyqf4elPzSCk9tsZ6pXFlIyluY
+ 1L+yQRsJfnldjz5raVAqKgtQgw4UU/AQnzqqstzYIGX3zvzJ7uxRHfC6kI+j6rCH9K8=
+X-Gm-Gg: AR+sD13vUhm7xWsS93fA8tDdTWyPqk/8ZNtg/RseHNQSEU5BiaE8IdHZA/r9MXOF/TD
+ slldlvHwEwMCA38gx3K53g2R5vksyz182I62nXlduStitwsjcxcB7XHyNWbOg2T3o5G3yfHGBv1
+ CKMFDWPoHhTANk4/qmG521JKmLqG3H1nU4Jw+BlqgkjA6h0rsYOhc9mRUrb6szv1dVeE18YHmiz
+ wHWuv2IoI6tXkxHSllfxnurdU0a+Jjlth+mwTr7r8//iBJs/91levhUyuLUa++F73ByYcirFb/5
+ EMUf89zvbdyFXOSuEvK9dgi6ZA8JCZ44rZOXVIIljuvE4EyZxt/bjtUqhm8fuRDaQHkxdNL6af0
+ q0rLk+xpkfYWr91qF6H/xoIO1WfU+n9eIzzZGb7mCPSUEXyMEU++JkUknjTIa+oXgD9Oxz5ecUD
+ PrV5tv1ju3cGa2ObE3XV6bXqWZ+lSsxoUFIVIIrv6wvitTrDw5QAk69I8FGnMYbLHlk9LnRayE7
+ 1ibB7Z5I6zXTW6YDQs4WuX81iwasmVE3w40TwXbfKUIPd+9aQ==
+X-Received: by 2002:a17:90b:54d0:b0:381:25ce:bcc2 with SMTP id
+ 98e67ed59e1d1-395c353ee4amr18153913a91.6.1787346442074; 
+ Fri, 21 Aug 2026 14:07:22 -0700 (PDT)
+Received: from ?IPV6:2607:fb90:339b:bfd7:dac5:d94a:debc:5ef7?
+ ([2607:fb90:339b:bfd7:dac5:d94a:debc:5ef7])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-395c4b47ae8sm4014181a91.13.2026.08.21.10.32.43
+ 98e67ed59e1d1-395e494fa73sm199595a91.4.2026.08.21.14.07.21
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 21 Aug 2026 10:32:44 -0700 (PDT)
-Message-ID: <bad5c8b3-668f-4893-974f-9dbca8dc6893@linaro.org>
-Date: Fri, 21 Aug 2026 10:32:42 -0700
+ Fri, 21 Aug 2026 14:07:21 -0700 (PDT)
+Message-ID: <180ce662-a0e8-4b03-9a7b-1b6d4feab0b2@linaro.org>
+Date: Fri, 21 Aug 2026 14:07:19 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] virtio: Add aligned ld/st accessors for vring
-To: Peter Maydell <peter.maydell@linaro.org>,
- BillXiang <xiangwencheng@lanxincomputing.com>
-Cc: mst@redhat.com, pbonzini@redhat.com, peterx@redhat.com, philmd@mailo.com, 
- qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-References: <20260821100856.1794011-1-xiangwencheng@lanxincomputing.com>
- <CAFEAcA_kLpaz0UQi3Q315kLVqvDtxKh77kU2meN9G1_evfKBeQ@mail.gmail.com>
+Subject: Re: [RFC PATCH 12/18] accel/tcg: Replace size with first/last in
+ TCGCPUOps.tlb_fill*
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
+ qemu-devel@nongnu.org
+Cc: qemu-arm@nongnu.org, qemu-riscv@nongnu.org
+References: <20260815203730.1468365-1-richard.henderson@linaro.org>
+ <20260815203730.1468365-13-richard.henderson@linaro.org>
+ <26a073f0-9e8e-40c1-97dc-6b420740e20a@oss.qualcomm.com>
 From: Richard Henderson <richard.henderson@linaro.org>
 Content-Language: en-US
-In-Reply-To: <CAFEAcA_kLpaz0UQi3Q315kLVqvDtxKh77kU2meN9G1_evfKBeQ@mail.gmail.com>
+In-Reply-To: <26a073f0-9e8e-40c1-97dc-6b420740e20a@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52b;
- envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x52b.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62a;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -108,24 +110,33 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 8/21/26 03:25, Peter Maydell wrote:
-> I'm tempted to suggest some kind of "if pointer is aligned take
-> aligned path, otherwise take slow path" either here or actually
-> in lduw_le_p(), but maybe that's a bad idea. Richard ?
+On 8/16/26 08:17, Philippe Mathieu-Daudé wrote:
+>> diff --git a/target/hexagon/cpu.c b/target/hexagon/cpu.c
+>> index 0ddd898e6e..bfcd9b6159 100644
+>> --- a/target/hexagon/cpu.c
+>> +++ b/target/hexagon/cpu.c
+>> @@ -666,11 +666,13 @@ static const char *access_type_names[] = { "MMU_DATA_LOAD ", 
+>> "MMU_DATA_STORE",
+>>   static const char *mmu_idx_names[] = { "MMU_USER_IDX", "MMU_GUEST_IDX",
+>>                                          "MMU_KERNEL_IDX" };
+>> -static bool hexagon_tlb_fill(CPUState *cs, vaddr address, int size,
+>> -                             MMUAccessType access_type, int mmu_idx, bool probe,
+>> -                             uintptr_t retaddr)
+>> +static bool hexagon_tlb_fill(CPUState *cs, vaddr address,
+>> +                             vaddr first, vaddr last,
+>> +                             MMUAccessType access_type, int mmu_idx,
+>> +                             bool probe, uintptr_t retaddr)
+>>   {
+>>       CPUHexagonState *env = cpu_env(cs);
+>> +    int size = last - address + 1;
 > 
-> (I have a suspicion that other places than this one will assume
-> that an aligned ldl_he_p() is not going to tear.)
-I agree -- I expect most everything assumes ldl_he_p won't tear for aligned accesses.
+> Nitpicking, since we know last >= first, could we use size_t instead?
+> Otherwise:
+> Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
 
-This kinda begs the question of what atomicity the caller expects.  It's not implausible 
-that an x86 path expects even unaligned accesses not crossing a cacheline to be atomic, 
-since that's been a thing since 1995.  I expect both IBM architectures similarly expect 
-atomicity by alignment, since that's been a thing for s390 since yonks and Power has the 
-same language.
+Certainly I won't change the type in this patch.
 
-We have a bunch of code in accel/tcg/ldst_atomicity.c.inc that can handle this, we'd just 
-need to provide it with the correct inputs.  And I assume we'd still like to inline the 
-single access on appropriate hosts.
+It's only used by logging/tracing, so I don't really care, but you may, after the fact.
 
 
 r~
