@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E1BDC5DF87
-	for <qemu-riscv@archiver.kernel.org>; Thu, 20 Aug 2026 23:57:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8C83C5DF87
+	for <qemu-riscv@archiver.kernel.org>; Fri, 21 Aug 2026 01:11:44 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wxCd6-0002PM-0L; Thu, 20 Aug 2026 19:57:04 -0400
+	id 1wxDmu-0003bl-4I; Thu, 20 Aug 2026 21:11:16 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <portias@tenstorrent.com>)
- id 1wxCd3-0002JQ-Tb
- for qemu-riscv@nongnu.org; Thu, 20 Aug 2026 19:57:01 -0400
-Received: from mail-pg1-x52d.google.com ([2607:f8b0:4864:20::52d])
+ id 1wxDmm-0003bM-8P
+ for qemu-riscv@nongnu.org; Thu, 20 Aug 2026 21:11:08 -0400
+Received: from mail-pl1-x635.google.com ([2607:f8b0:4864:20::635])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <portias@tenstorrent.com>)
- id 1wxCcz-0005t0-Gr
- for qemu-riscv@nongnu.org; Thu, 20 Aug 2026 19:57:01 -0400
-Received: by mail-pg1-x52d.google.com with SMTP id
- 41be03b00d2f7-cc148b158fbso50008a12.0
- for <qemu-riscv@nongnu.org>; Thu, 20 Aug 2026 16:56:56 -0700 (PDT)
+ id 1wxDmh-0003bC-6b
+ for qemu-riscv@nongnu.org; Thu, 20 Aug 2026 21:11:08 -0400
+Received: by mail-pl1-x635.google.com with SMTP id
+ d9443c01a7336-2d03fcd26a6so454195ad.2
+ for <qemu-riscv@nongnu.org>; Thu, 20 Aug 2026 18:11:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=tenstorrent.com; s=google; t=1787270216; x=1787875016; darn=nongnu.org;
+ d=tenstorrent.com; s=google; t=1787274661; x=1787879461; darn=nongnu.org;
  h=content-transfer-encoding:content-type:in-reply-to:from
  :content-language:references:cc:to:subject:user-agent:mime-version
  :date:message-id:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=XETJf+7m0Q4nWU4cPfZ7HyLyQoOE9WvyFTJzcHIt8cE=;
- b=DQyRSjfqBnizFoQf957I76EaURTkEDrm8MruSEacm8UGLtKkuevcv9SW3+YVICyZxW
- lDAjkD/k40M1EtEJvIYcF0txWMR4c/unuGsSm16V4gze6nwW+0M+QS3tG2fSF5Y5N5/z
- qAzt2ulwQcBCzs7IsOxvgjaaefpLgOOrm/fGJufo1mEmL4l3D3vdJu+vpPA9IBncq8qc
- LMIPoc5zzZV0szhHdmQGuW3SxuVwCA8e04yRapPghrfDS3XB7vuDTz3pt2NCcAXzAwU7
- x6L3oUzDPPiSlaCa9byJKVWqxvOa615UxywNCm0CIirkFMAi4ApypgoqfnsdVEn6gW5r
- o4/Q==
+ :content-type; bh=hisdukA2tH/Qe6CGAiQdl18PFD0OqyOxP4GGRFMBJM0=;
+ b=Aaf3GfTBRyC5ZousVYn69li9RAMGyRT7A6zjFXljTfKattJx1SPMC0xW6jHJwF2Ypi
+ XsIqtpzQKbZMrNIzYOGmQYwwccOlstJbR+/XaYJ/MzFmFBhT+mH9eKj0uQZ3NFKWYTl8
+ DRPjzLbNsu+LYSHi7YWXcYczW/yUEuw7oDv7+dSvJOmGB0nOJmt/3ZJFuJihDnmZPec5
+ 633fiKOxdIl6d0n2ibrUw3C4IQxLUl3FFZoPM6bkpcWDCf/noqyLSCStcV+sx0+EFtU/
+ 5GUzTk7npUMqC3+BCBVEg8Smxzm8E0+0gi0C7H/NqwsqGwKgtSaQHqM3pviVPI4L+4/8
+ jPvg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787270216; x=1787875016;
+ d=1e100.net; s=20251104; t=1787274661; x=1787879461;
  h=content-transfer-encoding:content-type:in-reply-to:from
  :content-language:references:cc:to:subject:user-agent:mime-version
  :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=XETJf+7m0Q4nWU4cPfZ7HyLyQoOE9WvyFTJzcHIt8cE=;
- b=H8VWSu2R7T4u6bEBpnNYK3ghjL6i4qDZojbTnuJOOicMnG4Q1z6u8nFf0n5AqwhSiF
- nYNd8ohIigNhjf6LT6JKjqwqMVn0/0EAEHE4vh2yLNkR3n/VH3eE6WuRn+V0Nrswhqb5
- ToeLBqFtw0zZwhCMpacuQ5kzcHnPsPUdcjvbQkfZubosFPUfL6psUxJRElOrA1NF5Qi9
- T3/sMYBGNPUGbhwW+7tZluitgwzv+4XzMOyRihir70xVsdYZ6LIdZxHVm+qpzpnXTdQM
- jA1BitaMHfIMklU9U1b4CXLKo0HZzJ0+JNJArtZ3qlIcVGeG2ubcYXta33cW/vT2Yxlw
- If3Q==
-X-Gm-Message-State: AFuF++lYkcT5qBOQJrUS5y6tQb75ivG+PrTokz8kVyHkBb4mSrg3zJzW
- Szr09irel9r2UuGKjjbJZzu+hwV8+Vygfrghc1hgvhD6mQ2rbXDwPIYP975zhHQB8j0=
-X-Gm-Gg: AR+sD11WGmAtFs0AMIp8pPU3Qz6FMEEjIuJHJLeaJZugSudTveplK7O7QxrB/iFFqhB
- nQCSztCMDs+8syiiALiofeDiYtgMLCGw+89XadvO7L7yPEiKWTynCHu3DzxV7YPLdwwwj5Nb2pL
- mjb8moF/SStxcUm9gEeFcebyc5cb3CF6wfj+FtQ8umyg50+pNbmWTjPQeFc1uG7Qp3n+M21tcUh
- d/Rfl47G2xxb5/eynVFBcqda2s7OdrfTtTO9iNwZyq1YxanqUyHhx6nxd7MTbcl32CzKzjb4Yjc
- /JbPNG8pRq6i8bYW+RwMgwwXcXs/O1+Z1ryF+oJhQY3fFDtc4dypOclT6NGraG0bQS1DW31u/7c
- +3Cf2eUaDi+lb/eWcDkuh27kMRoD3G1eCN8Chfus+jZ4jk5s+gUCQ9dXPRzBY1ylEj4fLgydkD5
- IKBOG6st5BXHyRxc7UdjU815S7+m/Cw7C2cyF5xvOCl98eEklYJ6JfWrSRZ1rLfTBy+Ub1tnsZL
- PXggisAfToQbCSX
-X-Received: by 2002:a05:6a00:4888:b0:847:9b61:375d with SMTP id
- d2e1a72fcca58-851f9fca1e5mr867303b3a.3.1787270215366; 
- Thu, 20 Aug 2026 16:56:55 -0700 (PDT)
+ bh=hisdukA2tH/Qe6CGAiQdl18PFD0OqyOxP4GGRFMBJM0=;
+ b=hmy4Xp6WJHd3+nfBL6G8D1ZXHQ5EIiWMdW7tYiR16LWb+z6dGc9K137KVF46L0/410
+ r5SQsfTwHN3Pann2PgiwhSoEE6rUKVmiysE1xnOR1/eIjmj6rzc3/QXTzt/65et1M73r
+ xBjNQj5d+gKe2LGWSMZcdQibXlRCtXnenvzcFIqPwG+eezhf0AbyuYOGsHJkEumggTbv
+ 5zYDh7KRmEpgHPy4yMsgZW/xoMGUjjqjcawaH+xalaCqGv1v7TegwKEtbAZU4csULDVW
+ /p2xRjiTbE4t+KQl1AsHHJ7XBMlGBoIVyin2QdyX0j5nnxKS3fxLMRtY7ELQv5vlo0S9
+ B7Zw==
+X-Gm-Message-State: AFuF++kLWxYT559rzuL1jY6MBTrDxCwU7EeniqU3n56DmGrher/jejMf
+ g8KHIWlsKq25ubXsgJSr4VmHJ+1lelXXPhbHNKtROozInB0PKr7Q1jXSxrq34ijX1uY=
+X-Gm-Gg: AR+sD12KGD/bHfuJljFIDL7RWOfXIjphBLCVWThHJfUdceI0/gB6vUNAXTXX7AlM/Yq
+ 8G30Co1CbgsG7L+CI877xCJ8uVEyt66hcU0FZlk47Smp+9SPWcl2YJM7pabpBmtQRXuDA3+7pdi
+ mrLeIdDJWzBkTPsF2Lgz1wFkbwHNejWdZhpyRbesMTEGApOnhQ2yJcwm9QFa6EYojph17GbXvEg
+ uo/mOYqINuAT+c/Vage6z0Orb1VWyU1e9tt3s1l2q1aej74UXfYKhy497VrG2tRhUycQNG/NbvK
+ 2ONukHHxV6Yb5fwi00MTy5aansnIdDWYDZirVx2NwoJjVWGmoWfZ6B1o5GNC52EkDGiOVOIprYF
+ xjUuA+Vv2QcRXHHpHFgh6qkwDEKUFH1iUsWon/DogpmIw+cKJw+P5E+XGL0hkGt348cnHGw1eFT
+ 9JbCo+HXpW08wL6OuI2c2bHstdmFWWEy8AFcTsWxBN7tnmIX5HMC2Gb4FXxBXlB24csnA5oh8l2
+ CjE3KUbIOy5iiPhUoMd3+bpa/+Y
+X-Received: by 2002:a17:903:4685:b0:2cf:9e90:8be with SMTP id
+ d9443c01a7336-2d64b0b66e5mr22939925ad.4.1787274661303; 
+ Thu, 20 Aug 2026 18:11:01 -0700 (PDT)
 Received: from [172.16.1.33] ([159.196.41.205])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-851d3615eb0sm2173040b3a.28.2026.08.20.16.56.49
+ 5a478bee46e88-327bf10d475sm23187815eec.18.2026.08.20.18.10.55
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 20 Aug 2026 16:56:54 -0700 (PDT)
-Message-ID: <582b873b-a62e-4080-9f8b-9a88718e7aa1@oss.tenstorrent.com>
-Date: Fri, 21 Aug 2026 09:56:46 +1000
+ Thu, 20 Aug 2026 18:11:00 -0700 (PDT)
+Message-ID: <3ed04624-9d4c-4c11-9d7b-4bb6568b2590@oss.tenstorrent.com>
+Date: Fri, 21 Aug 2026 11:10:52 +1000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v3 1/5] hw/ssi: Add Synopsys DWC SSI standard PIO
@@ -91,8 +91,8 @@ From: Portia Stephens <portias@oss.tenstorrent.com>
 In-Reply-To: <20260808182956.290561-2-flamboyant.h.01@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52d;
- envelope-from=portias@tenstorrent.com; helo=mail-pg1-x52d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::635;
+ envelope-from=portias@tenstorrent.com; helo=mail-pl1-x635.google.com
 X-Spam_score_int: -19
 X-Spam_score: -2.0
 X-Spam_bar: --
@@ -551,6 +551,16 @@ On 9/8/2026 4:29 AM, Kangjie Huang wrote:
 > +    uint32_t rx;
 > +
 > +    tx &= mask;
+
+I don't think this will work for frame !=  8-bit with the m25p80 flash 
+model used by k230. ssi_transfer() takes a 32-bit value but it then 
+calls m25p80_transfer8() which will just transfer the bottom 8-bits and 
+drop the rest.
+
+I don't know if this is an issue with your code or with the ssi_transfer 
+function though. It seems like ssi_transfer intends to accept 32-bit 
+values.
+
 > +
 > +    if (FIELD_EX32(s->regs[R_CTRLR0], CTRLR0, SRL)) {
 > +        rx = tx;
@@ -870,17 +880,6 @@ On 9/8/2026 4:29 AM, Kangjie Huang wrote:
 > +    case A_CTRLR0:
 > +        /* Keep SPI_FRF at Standard until enhanced SPI is fully modelled. */
 > +        value &= ~R_CTRLR0_SPI_FRF_MASK;
-
-Accidently sent this comment to your v2 patch, yesterday. Resending here.
-
-Why does the SPI_FRF field need to be explicity cleared? It will be 
-cleared in dw_ssi_write_masked since it is not contained in the 
-DW_SSI_CTRLR0_STANDARD_WRITABLE_MASK .
-
-Can you also print an unimplemented warning if a non-zero value is 
-written to the SPI_FRF field. Currently configuring the device to 
-enhanced mode is silently ignored.
-
 > +        dwc_ssi_write_masked(s, R_CTRLR0, value,
 > +                             DWC_SSI_CTRLR0_STANDARD_WRITABLE_MASK);
 > +        break;
