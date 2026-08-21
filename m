@@ -4,81 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E21AC5DF88
-	for <qemu-riscv@archiver.kernel.org>; Fri, 21 Aug 2026 04:08:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B26A4C5DF88
+	for <qemu-riscv@archiver.kernel.org>; Fri, 21 Aug 2026 04:08:48 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wxGV1-0006SX-5D; Fri, 21 Aug 2026 00:04:59 -0400
+	id 1wxGV1-0006Te-RF; Fri, 21 Aug 2026 00:04:59 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wxGUc-00069E-2k
+ id 1wxGUc-00069H-30
  for qemu-riscv@nongnu.org; Fri, 21 Aug 2026 00:04:35 -0400
-Received: from mail-pg1-x529.google.com ([2607:f8b0:4864:20::529])
+Received: from mail-pl1-x62e.google.com ([2607:f8b0:4864:20::62e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wxGUZ-0003Gq-Dp
+ id 1wxGUX-0003GP-EX
  for qemu-riscv@nongnu.org; Fri, 21 Aug 2026 00:04:33 -0400
-Received: by mail-pg1-x529.google.com with SMTP id
- 41be03b00d2f7-c9e607d81fcso366399a12.2
- for <qemu-riscv@nongnu.org>; Thu, 20 Aug 2026 21:04:30 -0700 (PDT)
+Received: by mail-pl1-x62e.google.com with SMTP id
+ d9443c01a7336-2ceab75934dso8359285ad.2
+ for <qemu-riscv@nongnu.org>; Thu, 20 Aug 2026 21:04:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1787285069; x=1787889869; darn=nongnu.org;
+ d=linaro.org; s=google; t=1787285068; x=1787889868; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=oUcA47zI0T3mx+6NPIXLmuwEUg4/HjoJ4MZuVuTU53U=;
- b=BGgzDcHdCBfsSXDsAQRxcXUaTcdl4Szu7CCO9LyZlTw1QnOIZc4lsIUq0IMazl0m0X
- K/z/ERf5iCIfxVd2I1OiGXET/9MlX3rh0SRDxW3CqXO2xKFtrTGWRoU63+dpn5m2oCEg
- T0wBag+9qqQFDMgGLtcF0IWKyFN7TqGxV3QBU1BzlKGZQsBRBe01NRid2xthh1Q6+F4N
- Co9a+YS55aSW1cnxOZREOwORXm8JIs16Y0PqT6vWl1rx9gJtne7dai+HGk8M0ts4DH6n
- B5Lj8OfM9qJVJBIljinPU3Li3gb4dk2iVCk9Nasna9AOLFqqZ+ES5l0iVXDRCsLY0rGS
- q17A==
+ bh=7DhfVuYLFdEoMKrZZuk/ONJCjnZ312P16LOTlvJKbjU=;
+ b=L2ciFoAHp442rdiFdzfDmjVbiBK3QbQeXmw5xWXkOQ7DXN2bEeU+9sieByBl6pYANf
+ d5VAJ2yJVo6gBGyngQQ81jdbtU6Mu/IGs4/tfnemHjKo/XSC4OMCLLIT3ZNJqoGLVRr7
+ FjPfUW3kOegGz5ilMB9fBlzlQ611pfm56qGIr9ahtPY66czYq64hZoVHBJ5TwLwmsZhe
+ 0gfk+QG5OoniWTOtgURG5fRpXdL1XJNEOIMqt4DPi059K8C2F8gkJqc+q5HyDn9AnyuP
+ CX9X59Lr1hMc27eYf+mlQkv8uFf92yCIHmER274EgcBxQ6ML3+lsjWqFgFhrmJZ+XeWx
+ OoGA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787285069; x=1787889869;
+ d=1e100.net; s=20251104; t=1787285068; x=1787889868;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=oUcA47zI0T3mx+6NPIXLmuwEUg4/HjoJ4MZuVuTU53U=;
- b=WUtoTMhDIOADYUze+yEidK6EVKKZqeM1Ge/cm0pQdSFxhf3M5MTdW49sTtikvwSbcZ
- 9xKJhWADc+4a0RjaCxQiENq42nQBx95onYQ8rq7yQoePCg67EPiyefdMZ8OOTV+LNUku
- Z0yUAWX4JC0PNy0GMRSnPYh0R0OkPEB1VHpNnUjvN0mIbaQc3kIunTsRKP56Dc8aHzd0
- JI1ltFlsF0t23dWEV/UHCgHTsDOt+ydSY8vureTn5LPMgFAta/uoBm6GFfDJPwhIRG49
- UrF0SMCM9IZsPliTP8QuLH9CTqhnRnYT7ONUi+Bj0BFrIahc1PuK3j4gJcOn4pN8J0d5
- /y2Q==
-X-Gm-Message-State: AFuF++nzUlmJuQQagykNVpP8jwh12DVeZ0dQmOxtwEiPETSX4N8cBHYR
- E/bBhX933XV2WIhuX9B/YPVathG3NKMTZc2N91YVxDLCJ1730mJjqYUNF21zQ+qJtHM=
-X-Gm-Gg: AR+sD11hs1MHbeDtBnIHkE5Y3b8SaEZTsbf/a/aCXHcjkhsokY+9/QUnxsIBxat3sC1
- UK9kAjSwbYKmcJpYTC6iryiZH3/WoEeb9aV347Icc6oxvNAz91JO4tu/rxyt6yABbLsdbJTzL2K
- Qx5j4uIgqbdoKLjV3swlMsSEFmXA5u3/WTZeQcxMhuWpHB9Bq0S/cDYZuxIkItl6TPabi8Mj1q7
- ceBzsfncq0nxVxBhDk/UxOiChf+KpjRgQsIzoeY02pr6RYTm7qq4HuPIAFCS1P61a+dqONRGmN8
- CSHn+GcRBJvYL9iKD0EIKXaQOz+DnF5CaAunshoVtjvfQyq+FTQpSaUSvkJvwF99AeZXtbHD44D
- ImzjFJXrDQWeOPmelYlLaUw76GmDdr3vzIzz/2anS3TVulHR+Q8BmjILEPFRlki0mO3j4NORydW
- +yvtSFoO4L/O9rkQDJEoPEiuVX6Qup5dlA5s67EiPgyIx2v00zFjEnHs3AxtLqTDftJAtUI1cXA
- nbY8Q==
-X-Received: by 2002:a17:90b:2d91:b0:38e:2e86:ed02 with SMTP id
- 98e67ed59e1d1-395c39cd288mr6454633a91.14.1787285069386; 
- Thu, 20 Aug 2026 21:04:29 -0700 (PDT)
+ bh=7DhfVuYLFdEoMKrZZuk/ONJCjnZ312P16LOTlvJKbjU=;
+ b=YCrVtv3XdO0LiXuxLxVSyquHzQ9NAax5bK3hw1tyUysR8hc3nVeNR1VrSvVd4mf1Rs
+ s/czABLlJrkVCilDSj/kjwZzNb32voDSVzk4sJY8Q+aIHvT9vV3SlUuITJ/FARGKFs+D
+ K+F55PbOFy8EtefmBxsgbsvrF49sXgay64sQFK7nK1XFsfSTj7C/I6otbf3+NThPaD4Z
+ Qkn6x2S7INO4eYLZA9JFbVd4sbPDo37UoXvv+RhsKqTosrp2YxdhXAVL0OgKiAgDUZj+
+ 5zhvPj5hP+dmtHWgbY5NnhK/h4sZaI8MuATWnbqO+DgDQ0zfD++QMPJnyRxU4xsHilYG
+ bptg==
+X-Gm-Message-State: AFuF++mg7DzdUKCxjOiwfu1UCDPnf9E8GNwyQG6gjflBkhhNif/GK36x
+ wjX8oVfHKHzcUnY7sMwsvPPi55HAVdQSFLclcXE5zKDDMwGSqjB6VCMV5tUQ36fnKPA=
+X-Gm-Gg: AR+sD12w/POlY8xvuBuSCoUuNZLq/3OFeegs8ms5yDfVgzQn/1dxF3Usxfop68pNCH1
+ jnqBdj8DajImLvL7L5s9ZaO63UvIRrTHPUYBwylQe86DH17dUghg+mFDAt62zG9rFbESrxaENRI
+ F5Pbt3JcACNHNlY0tWgZIHzCFFLYXOJQiIzLEzCvDDzMkMkAHivsS/dfZZDvxC0IYIRw/9rXfFs
+ Sfk5tNYMsdWfMMhkf7ySIWLi9DNxidRPih1lLhGhN+1++UcJtlXiEibBWgJWD/AQXXPX6x6CCHP
+ v6yE2E5FUEiVoj4nFpWMTRC/86g9H/ong0fPpVXRDHwP1YsoKh8vl4kcfwKqsQPhefPRUeO4Pyi
+ p0cXlDmBC1OqmOvnsRgQ2Y2ToOFvGuo68HvYznOk6fofXfREXcRdVNMgg0J6HFNXELwpeFjS2TO
+ hmUNVuIhreKD4X06wyRwEaYG65Kx/JIzNQo4MRoU7AuSxefXvLJiDtOPirRI1BoiId4sVJ
+X-Received: by 2002:a17:90b:5907:b0:36a:5d1f:7b6 with SMTP id
+ 98e67ed59e1d1-395c33ed38amr6655108a91.2.1787285067592; 
+ Thu, 20 Aug 2026 21:04:27 -0700 (PDT)
 Received: from stoup.. ([108.174.179.84]) by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-395c4c194d2sm1298383a91.15.2026.08.20.21.04.28
+ 98e67ed59e1d1-395c4c194d2sm1298383a91.15.2026.08.20.21.04.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 20 Aug 2026 21:04:29 -0700 (PDT)
+ Thu, 20 Aug 2026 21:04:27 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org,
-	Joel Stanley <joel@jms.id.au>
-Subject: [PATCH v2 23/23] tests/tcg/riscv64: Add intrinsics version of
- test-rvv-ldst
-Date: Thu, 20 Aug 2026 21:04:04 -0700
-Message-ID: <20260821040404.268123-24-richard.henderson@linaro.org>
+Cc: qemu-riscv@nongnu.org
+Subject: [PATCH v2 21/23] target/riscv: Drop v0 argument from
+ gen_helper_ldst_index
+Date: Thu, 20 Aug 2026 21:04:02 -0700
+Message-ID: <20260821040404.268123-22-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260821040404.268123-1-richard.henderson@linaro.org>
 References: <20260821040404.268123-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::529;
- envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x529.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62e;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -101,123 +99,181 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Joel Stanley <joel@jms.id.au>
+Since we're also passing env, v0 is always env->vreg.
 
-A C userspace program to perform vector loads and stores that cross page
-boundaries, and check the result.
-
-Signed-off-by: Joel Stanley <joel@jms.id.au>
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <20260820130223.2762-3-joel@jms.id.au>
 ---
- tests/tcg/riscv64/test-rvv-ldst-intrinsics.c | 66 ++++++++++++++++++++
- tests/tcg/riscv64/Makefile.target            | 12 +++-
- 2 files changed, 75 insertions(+), 3 deletions(-)
- create mode 100644 tests/tcg/riscv64/test-rvv-ldst-intrinsics.c
+ target/riscv/helper.h                       | 64 ++++++++++-----------
+ target/riscv/tcg/vector_helper.c            | 15 ++---
+ target/riscv/tcg/insn_trans/trans_rvv.c.inc | 17 ++----
+ 3 files changed, 46 insertions(+), 50 deletions(-)
 
-diff --git a/tests/tcg/riscv64/test-rvv-ldst-intrinsics.c b/tests/tcg/riscv64/test-rvv-ldst-intrinsics.c
-new file mode 100644
-index 0000000000..3dbc862470
---- /dev/null
-+++ b/tests/tcg/riscv64/test-rvv-ldst-intrinsics.c
-@@ -0,0 +1,66 @@
-+/*
-+ * RISC-V vector load/store test, including accesses that cross a page
-+ * boundary. Intrinsics version of test-rvv-ldst.S.
-+ *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ */
-+
-+#include <riscv_vector.h>
-+#include <stdint.h>
-+#include <stdlib.h>
-+#include <string.h>
-+
-+#define MAX_PAGE_SIZE 65536
-+#define NUM_BYTES 16
-+
-+struct cross_page {
-+    uint8_t pad[MAX_PAGE_SIZE - NUM_BYTES / 2];
-+    uint8_t data[NUM_BYTES];
-+};
-+
-+/* Page aligned so the within-page cases never cross a boundary */
-+static const uint8_t src_data[NUM_BYTES]
-+    __attribute__((aligned(MAX_PAGE_SIZE))) = {
-+    0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17,
-+    0x18, 0x19, 0x1A, 0x1B, 0x1C, 0x1D, 0x1E, 0x1F,
-+};
-+
-+static const struct cross_page src_cross
-+    __attribute__((aligned(MAX_PAGE_SIZE))) = {
-+    .data = {
-+        0x20, 0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x27,
-+        0x28, 0x29, 0x2A, 0x2B, 0x2C, 0x2D, 0x2E, 0x2F,
-+    },
-+};
-+
-+static uint8_t dst_data[NUM_BYTES] __attribute__((aligned(MAX_PAGE_SIZE)));
-+static struct cross_page dst_cross __attribute__((aligned(MAX_PAGE_SIZE)));
-+
-+static void vec_copy(uint8_t *dst, const uint8_t *src, int code)
-+{
-+    size_t vl = __riscv_vsetvl_e8m1(NUM_BYTES);
-+    if (vl != NUM_BYTES) {
-+        exit(code);
-+    }
-+
-+    vuint8m1_t v = __riscv_vle8_v_u8m1(src, vl);
-+    __riscv_vse8_v_u8m1(dst, v, vl);
-+
-+    if (memcmp(dst, src, NUM_BYTES)) {
-+        exit(code);
-+    }
-+}
-+
-+int main(void)
-+{
-+    /* Case 1: load/store within a page */
-+    vec_copy(dst_data, src_data, 1);
-+
-+    /* Case 2: the load straddles a page boundary */
-+    vec_copy(dst_data, src_cross.data, 2);
-+
-+    /* Case 3: the store straddles a page boundary */
-+    vec_copy(dst_cross.data, src_data, 3);
-+
-+    return 0;
-+}
-diff --git a/tests/tcg/riscv64/Makefile.target b/tests/tcg/riscv64/Makefile.target
-index 68a5ec5255..3c6cd4937c 100644
---- a/tests/tcg/riscv64/Makefile.target
-+++ b/tests/tcg/riscv64/Makefile.target
-@@ -14,10 +14,11 @@ TESTS += test-aes
- run-test-aes: QEMU_OPTS += -cpu rv64,zk=on
+diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+index 3ef352898b..bf49a793d5 100644
+--- a/target/riscv/helper.h
++++ b/target/riscv/helper.h
+@@ -187,38 +187,38 @@ DEF_HELPER_5(vsse8_v, void, ptr, tl, tl, env, i32)
+ DEF_HELPER_5(vsse16_v, void, ptr, tl, tl, env, i32)
+ DEF_HELPER_5(vsse32_v, void, ptr, tl, tl, env, i32)
+ DEF_HELPER_5(vsse64_v, void, ptr, tl, tl, env, i32)
+-DEF_HELPER_6(vlxei8_8_v, void, ptr, ptr, tl, ptr, env, i32)
+-DEF_HELPER_6(vlxei8_16_v, void, ptr, ptr, tl, ptr, env, i32)
+-DEF_HELPER_6(vlxei8_32_v, void, ptr, ptr, tl, ptr, env, i32)
+-DEF_HELPER_6(vlxei8_64_v, void, ptr, ptr, tl, ptr, env, i32)
+-DEF_HELPER_6(vlxei16_8_v, void, ptr, ptr, tl, ptr, env, i32)
+-DEF_HELPER_6(vlxei16_16_v, void, ptr, ptr, tl, ptr, env, i32)
+-DEF_HELPER_6(vlxei16_32_v, void, ptr, ptr, tl, ptr, env, i32)
+-DEF_HELPER_6(vlxei16_64_v, void, ptr, ptr, tl, ptr, env, i32)
+-DEF_HELPER_6(vlxei32_8_v, void, ptr, ptr, tl, ptr, env, i32)
+-DEF_HELPER_6(vlxei32_16_v, void, ptr, ptr, tl, ptr, env, i32)
+-DEF_HELPER_6(vlxei32_32_v, void, ptr, ptr, tl, ptr, env, i32)
+-DEF_HELPER_6(vlxei32_64_v, void, ptr, ptr, tl, ptr, env, i32)
+-DEF_HELPER_6(vlxei64_8_v, void, ptr, ptr, tl, ptr, env, i32)
+-DEF_HELPER_6(vlxei64_16_v, void, ptr, ptr, tl, ptr, env, i32)
+-DEF_HELPER_6(vlxei64_32_v, void, ptr, ptr, tl, ptr, env, i32)
+-DEF_HELPER_6(vlxei64_64_v, void, ptr, ptr, tl, ptr, env, i32)
+-DEF_HELPER_6(vsxei8_8_v, void, ptr, ptr, tl, ptr, env, i32)
+-DEF_HELPER_6(vsxei8_16_v, void, ptr, ptr, tl, ptr, env, i32)
+-DEF_HELPER_6(vsxei8_32_v, void, ptr, ptr, tl, ptr, env, i32)
+-DEF_HELPER_6(vsxei8_64_v, void, ptr, ptr, tl, ptr, env, i32)
+-DEF_HELPER_6(vsxei16_8_v, void, ptr, ptr, tl, ptr, env, i32)
+-DEF_HELPER_6(vsxei16_16_v, void, ptr, ptr, tl, ptr, env, i32)
+-DEF_HELPER_6(vsxei16_32_v, void, ptr, ptr, tl, ptr, env, i32)
+-DEF_HELPER_6(vsxei16_64_v, void, ptr, ptr, tl, ptr, env, i32)
+-DEF_HELPER_6(vsxei32_8_v, void, ptr, ptr, tl, ptr, env, i32)
+-DEF_HELPER_6(vsxei32_16_v, void, ptr, ptr, tl, ptr, env, i32)
+-DEF_HELPER_6(vsxei32_32_v, void, ptr, ptr, tl, ptr, env, i32)
+-DEF_HELPER_6(vsxei32_64_v, void, ptr, ptr, tl, ptr, env, i32)
+-DEF_HELPER_6(vsxei64_8_v, void, ptr, ptr, tl, ptr, env, i32)
+-DEF_HELPER_6(vsxei64_16_v, void, ptr, ptr, tl, ptr, env, i32)
+-DEF_HELPER_6(vsxei64_32_v, void, ptr, ptr, tl, ptr, env, i32)
+-DEF_HELPER_6(vsxei64_64_v, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_5(vlxei8_8_v, void, ptr, tl, ptr, env, i32)
++DEF_HELPER_5(vlxei8_16_v, void, ptr, tl, ptr, env, i32)
++DEF_HELPER_5(vlxei8_32_v, void, ptr, tl, ptr, env, i32)
++DEF_HELPER_5(vlxei8_64_v, void, ptr, tl, ptr, env, i32)
++DEF_HELPER_5(vlxei16_8_v, void, ptr, tl, ptr, env, i32)
++DEF_HELPER_5(vlxei16_16_v, void, ptr, tl, ptr, env, i32)
++DEF_HELPER_5(vlxei16_32_v, void, ptr, tl, ptr, env, i32)
++DEF_HELPER_5(vlxei16_64_v, void, ptr, tl, ptr, env, i32)
++DEF_HELPER_5(vlxei32_8_v, void, ptr, tl, ptr, env, i32)
++DEF_HELPER_5(vlxei32_16_v, void, ptr, tl, ptr, env, i32)
++DEF_HELPER_5(vlxei32_32_v, void, ptr, tl, ptr, env, i32)
++DEF_HELPER_5(vlxei32_64_v, void, ptr, tl, ptr, env, i32)
++DEF_HELPER_5(vlxei64_8_v, void, ptr, tl, ptr, env, i32)
++DEF_HELPER_5(vlxei64_16_v, void, ptr, tl, ptr, env, i32)
++DEF_HELPER_5(vlxei64_32_v, void, ptr, tl, ptr, env, i32)
++DEF_HELPER_5(vlxei64_64_v, void, ptr, tl, ptr, env, i32)
++DEF_HELPER_5(vsxei8_8_v, void, ptr, tl, ptr, env, i32)
++DEF_HELPER_5(vsxei8_16_v, void, ptr, tl, ptr, env, i32)
++DEF_HELPER_5(vsxei8_32_v, void, ptr, tl, ptr, env, i32)
++DEF_HELPER_5(vsxei8_64_v, void, ptr, tl, ptr, env, i32)
++DEF_HELPER_5(vsxei16_8_v, void, ptr, tl, ptr, env, i32)
++DEF_HELPER_5(vsxei16_16_v, void, ptr, tl, ptr, env, i32)
++DEF_HELPER_5(vsxei16_32_v, void, ptr, tl, ptr, env, i32)
++DEF_HELPER_5(vsxei16_64_v, void, ptr, tl, ptr, env, i32)
++DEF_HELPER_5(vsxei32_8_v, void, ptr, tl, ptr, env, i32)
++DEF_HELPER_5(vsxei32_16_v, void, ptr, tl, ptr, env, i32)
++DEF_HELPER_5(vsxei32_32_v, void, ptr, tl, ptr, env, i32)
++DEF_HELPER_5(vsxei32_64_v, void, ptr, tl, ptr, env, i32)
++DEF_HELPER_5(vsxei64_8_v, void, ptr, tl, ptr, env, i32)
++DEF_HELPER_5(vsxei64_16_v, void, ptr, tl, ptr, env, i32)
++DEF_HELPER_5(vsxei64_32_v, void, ptr, tl, ptr, env, i32)
++DEF_HELPER_5(vsxei64_64_v, void, ptr, tl, ptr, env, i32)
+ DEF_HELPER_4(vle8ff_v, void, ptr, tl, env, i32)
+ DEF_HELPER_4(vle16ff_v, void, ptr, tl, env, i32)
+ DEF_HELPER_4(vle32ff_v, void, ptr, tl, env, i32)
+diff --git a/target/riscv/tcg/vector_helper.c b/target/riscv/tcg/vector_helper.c
+index 15c1281538..d46fd5c9c4 100644
+--- a/target/riscv/tcg/vector_helper.c
++++ b/target/riscv/tcg/vector_helper.c
+@@ -598,12 +598,13 @@ GEN_VEXT_GET_INDEX_ADDR(idx_w, uint32_t, H4)
+ GEN_VEXT_GET_INDEX_ADDR(idx_d, uint64_t, H8)
  
- # Vector load test
--TESTS += test-rvv-ldst
--test-rvv-ldst: CFLAGS += -march=rv64gcv
-+TESTS += test-rvv-ldst test-rvv-ldst-intrinsics
-+test-rvv-ldst-intrinsics test-rvv-ldst: CFLAGS += -march=rv64gcv
- test-rvv-ldst: LDFLAGS = -nostdlib -static
--run-test-rvv-ldst: QEMU_OPTS += -cpu max
-+test-rvv-ldst-intrinsics: LDFLAGS = -static
-+run-test-rvv-ldst-intrinsics run-test-rvv-ldst: QEMU_OPTS += -cpu max
+ static void
+-vext_ldst_index(void *vd, void *v0, target_ulong base,
++vext_ldst_index(void *vd, target_ulong base,
+                 void *vs2, CPURISCVState *env, uint32_t desc,
+                 vext_get_index_addr get_index_addr,
+                 vext_ldst_elem_fn_tlb *ldst_elem,
+                 uint32_t log2_esz, uintptr_t ra)
+ {
++    void *v0 = env->vreg;
+     uint32_t nf = vext_nf(desc);
+     uint32_t vm = vext_vm(desc);
+     uint32_t max_elems = vext_max_elems(desc, log2_esz);
+@@ -633,10 +634,10 @@ vext_ldst_index(void *vd, void *v0, target_ulong base,
+ }
  
- # Re-run the vector tests at each supported VLEN
- TEST_RVV_VLENS = 128 256 512 1024
-@@ -26,6 +27,11 @@ run-test-rvv-ldst-vlen%: test-rvv-ldst
- 	$(call run-test, $@, env QEMU=$(QEMU) $(QEMU) $(QEMU_OPTS) -cpu max$(COMMA)vlen=$* $<, \
- 		test-rvv-ldst with vlen=$*)
+ #define GEN_VEXT_LD_INDEX(NAME, ETYPE, INDEX_FN, LOAD_FN)               \
+-QEMU_FLATTEN void HELPER(NAME)(void *vd, void *v0, target_ulong base,   \
+-                               void *vs2, CPURISCVState *env, uint32_t desc) \
++QEMU_FLATTEN void HELPER(NAME)(void *vd, target_ulong base, void *vs2,  \
++                               CPURISCVState *env, uint32_t desc)       \
+ {                                                                       \
+-    vext_ldst_index(vd, v0, base, vs2, env, desc, INDEX_FN,             \
++    vext_ldst_index(vd, base, vs2, env, desc, INDEX_FN,                 \
+                     LOAD_FN, ctzl(sizeof(ETYPE)), GETPC());             \
+ }
  
-+EXTRA_RUNS += $(patsubst %,run-test-rvv-ldst-intrinsics-vlen%,$(TEST_RVV_VLENS))
-+run-test-rvv-ldst-intrinsics-vlen%: test-rvv-ldst-intrinsics
-+	$(call run-test, $@, env QEMU=$(QEMU) $(QEMU) $(QEMU_OPTS) -cpu max$(COMMA)vlen=$* $<, \
-+		test-rvv-ldst-intrinsics with vlen=$*)
-+
- # Test for fcvtmod
- TESTS += test-fcvtmod
- test-fcvtmod: CFLAGS += -march=rv64imafdc
+@@ -658,10 +659,10 @@ GEN_VEXT_LD_INDEX(vlxei64_32_v, int32_t, idx_d, lde_w_tlb)
+ GEN_VEXT_LD_INDEX(vlxei64_64_v, int64_t, idx_d, lde_d_tlb)
+ 
+ #define GEN_VEXT_ST_INDEX(NAME, ETYPE, INDEX_FN, STORE_FN)              \
+-QEMU_FLATTEN void HELPER(NAME)(void *vd, void *v0, target_ulong base,   \
+-                               void *vs2, CPURISCVState *env, uint32_t desc) \
++QEMU_FLATTEN void HELPER(NAME)(void *vd, target_ulong base, void *vs2,  \
++                               CPURISCVState *env, uint32_t desc)       \
+ {                                                                       \
+-    vext_ldst_index(vd, v0, base, vs2, env, desc, INDEX_FN,             \
++    vext_ldst_index(vd, base, vs2, env, desc, INDEX_FN,                 \
+                     STORE_FN, ctzl(sizeof(ETYPE)), GETPC());            \
+ }
+ 
+diff --git a/target/riscv/tcg/insn_trans/trans_rvv.c.inc b/target/riscv/tcg/insn_trans/trans_rvv.c.inc
+index 5e352dbf41..4556c644cc 100644
+--- a/target/riscv/tcg/insn_trans/trans_rvv.c.inc
++++ b/target/riscv/tcg/insn_trans/trans_rvv.c.inc
+@@ -975,33 +975,28 @@ GEN_VEXT_TRANS(vsse64_v, MO_64, rnfvm, st_stride_op, st_stride_check)
+ /*
+  *** index load and store
+  */
+-typedef void gen_helper_ldst_index(TCGv_ptr, TCGv_ptr, TCGv,
+-                                   TCGv_ptr, TCGv_env, TCGv_i32);
++typedef void gen_helper_ldst_index(TCGv_ptr, TCGv, TCGv_ptr,
++                                   TCGv_env, TCGv_i32);
+ 
+ static bool ldst_index_trans(uint32_t vd, uint32_t rs1, uint32_t vs2,
+                              uint32_t data, gen_helper_ldst_index *fn,
+                              DisasContext *s)
+ {
+-    TCGv_ptr dest, mask, index;
+-    TCGv base;
++    TCGv_ptr dest = tcg_temp_new_ptr();
++    TCGv_ptr index = tcg_temp_new_ptr();
++    TCGv base = get_gpr(s, rs1, EXT_NONE);
+     TCGv_i32 desc;
+ 
+-    dest = tcg_temp_new_ptr();
+-    mask = tcg_temp_new_ptr();
+-    index = tcg_temp_new_ptr();
+-    base = get_gpr(s, rs1, EXT_NONE);
+-
+     data = vdata_add_memopidx(s, data);
+     desc = tcg_constant_i32(simd_desc(s->cfg_ptr->vlenb,
+                                       s->cfg_ptr->vlenb, data));
+ 
+     tcg_gen_addi_ptr(dest, tcg_env, vreg_ofs(s, vd));
+     tcg_gen_addi_ptr(index, tcg_env, vreg_ofs(s, vs2));
+-    tcg_gen_addi_ptr(mask, tcg_env, vreg_ofs(s, 0));
+ 
+     mark_vs_dirty(s);
+ 
+-    fn(dest, mask, base, index, tcg_env, desc);
++    fn(dest, base, index, tcg_env, desc);
+ 
+     finalize_rvv_inst(s);
+     return true;
 -- 
 2.43.0
 
