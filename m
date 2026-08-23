@@ -4,96 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1871CC5DF97
-	for <qemu-riscv@archiver.kernel.org>; Sat, 22 Aug 2026 19:45:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2FDFC5DF8C
+	for <qemu-riscv@archiver.kernel.org>; Sun, 23 Aug 2026 09:36:37 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wxrdB-0001vi-1e; Sat, 22 Aug 2026 15:43:53 -0400
+	id 1wy4cl-0004Cr-8T; Sun, 23 Aug 2026 05:36:19 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <visitorckw@gmail.com>)
- id 1wxrd9-0001vQ-Do
- for qemu-riscv@nongnu.org; Sat, 22 Aug 2026 15:43:51 -0400
-Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634])
+ (Exim 4.90_1) (envelope-from <163wangjack@gmail.com>)
+ id 1wy4cj-0004Bx-9s
+ for qemu-riscv@nongnu.org; Sun, 23 Aug 2026 05:36:17 -0400
+Received: from mail-pl1-x629.google.com ([2607:f8b0:4864:20::629])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <visitorckw@gmail.com>)
- id 1wxrd7-000774-BN
- for qemu-riscv@nongnu.org; Sat, 22 Aug 2026 15:43:51 -0400
-Received: by mail-pl1-x634.google.com with SMTP id
- d9443c01a7336-2ceab75934dso29568775ad.2
- for <qemu-riscv@nongnu.org>; Sat, 22 Aug 2026 12:43:48 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <163wangjack@gmail.com>)
+ id 1wy4ch-00041Q-Mu
+ for qemu-riscv@nongnu.org; Sun, 23 Aug 2026 05:36:17 -0400
+Received: by mail-pl1-x629.google.com with SMTP id
+ d9443c01a7336-2ceab75934dso33918555ad.2
+ for <qemu-riscv@nongnu.org>; Sun, 23 Aug 2026 02:36:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1787427828; x=1788032628; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=7YbGtFyJghBds0X81b0zsMRETgJDjhhcMH3+PLcidE8=;
- b=DvvBOnrk9Vk3O09nZtkL4hqS4N04cdl+T69gY+AuHyJJt6J1ZFwqPfNyM3/cJKfSOv
- z4GSxPpNZPKhzkMaV90SaA8bLVMZ15YoqDDjoRYVQFkFhe4r3rd/eEg4/lDA0KdeLg14
- VvGoXa4rA1H+85AifoiT7liWsvi/VkrFCdDE9dTnEXOuBrt+Y1kzZ1+Lt72Gh4rcsJHd
- fXJVQDEzAoGHRg9QY8HcORMt3mJegCDyYyI/nH2GIVj2FhznjCAgbpx4gfKw0cBcyB3y
- d0mXRX2XDTOjZIhtRo21xCuYmTslhCE2RUjfTgzgncRPlNwwdF2igK0HkrVuoCgm4jW+
- 6kmA==
+ d=gmail.com; s=20251104; t=1787477774; x=1788082574; darn=nongnu.org;
+ h=to:references:message-id:content-transfer-encoding:cc:date
+ :in-reply-to:from:subject:mime-version:content-type:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=GrfZIkiLIPkX4zgbKoe+aL7IslYfdCWoR76dhTFDNcE=;
+ b=Mc01y1u6qwnSV2VhZzITZK7pCXkogsGU7Mx1Uv7Ubh2M8yDWJQwQGDdyOF5UqQOuUG
+ uQww6kGVXsdpl/rn95GAYYUaOgkveh1vrw/SdTpKWeReK4S/msE+QWvHa1SBC+MWl9aI
+ aT/oBb0zcoksF+pE9yXYR38ek34nFUuDRFpLryIH656n0Z1Slia6aeuwAxDYL5Vzj3d2
+ dyeBQ9W1zTCsMhAmS3SjupKzi5OME/yR82wNIcBxV4Lbku5HJ1PxNLc3EBs4vR2Qs0aO
+ r6RSIk2mY0WLaoOAp9kpkoEgl3iDFQvZwGLQwuxHaEWmEw0P08jyjA1SM1au7+1A09nJ
+ ebig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787427828; x=1788032628;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=7YbGtFyJghBds0X81b0zsMRETgJDjhhcMH3+PLcidE8=;
- b=IEFyzZBCswaidyevpNYeoK0B4HwFkDCg+Unlc3siNm74fxNdG9XSu6TcT5UMXsW6Vz
- 6E/kC4dUCryrRBlESZbAD3iy7hfWnx30A62QkFi1u5BpoOSOG06xGanRT3GoBs6TFIy9
- BRMTTZviGdnrgfYbV7dZY8i11WqNiO/YkEm7b62tnER86DtllEhGCnq4qAtXoZTt2RQy
- lMxxJK9dGPMOioSDUoREDquzjme6ICp372vIZ+H5PHBWAVzBBJ87vmu6ew+3Lw0F49+g
- /FMYi0nu4iK/Nijljjs56V5horJziBt7aPucSr14r8PdEN6ou9c8AJghUAvzHPp4ngXA
- dUtQ==
+ d=1e100.net; s=20251104; t=1787477774; x=1788082574;
+ h=to:references:message-id:content-transfer-encoding:cc:date
+ :in-reply-to:from:subject:mime-version:content-type:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=GrfZIkiLIPkX4zgbKoe+aL7IslYfdCWoR76dhTFDNcE=;
+ b=G0/f00RO4Gwf0UvHPSvL0kLV5SVPGrLel5tVArYW6RpslzEZDtB93Km2DVmP33pelr
+ U6OLNhUoOQMGvo6B5DwcDKH4ydoheNi6d6P0cS+8Qhvc7vtWq+yAKv9DqUfoLHuNs9rJ
+ pDuwGcpnWDX9tymrig367EneBDYt+9tSShwQ6dfmznPgvVKXXPpGWEsBCY/eO3JyWGQI
+ GbaNcxq/G5Eu3vLg1+hIdHSqHz7cHDzrWARmP4XIbbHyff1mb0sw4Sw3Ad9BZByrQpoQ
+ fg5dXCISpnkE8HMRBGK6SmEjaE+VZ2qi1atbdNE5zx797iJCT/fo/Kv3zWeiHYYPX4Eh
+ tfhw==
 X-Forwarded-Encrypted: i=1;
- AHgh+RqdrWv0/cUgI1skEk9vM6QoizEJlno4n90O6yJdR12QzI1Boa9jeDwiQ1uK5gNj3NTNZtH5P2zBkoSJ@nongnu.org
-X-Gm-Message-State: AFuF++kxRTy/Q+FXjOwLEyTkZ8NvCt3d0t6uCJV8OfuqzWN9r1Gl6cdz
- JMWPFnMFOPHrB5ApCRKvcmz9B+TcautLsxBHjgYf0bFKuI0uxzW8j4S9
-X-Gm-Gg: AR+sD12Jo0R2fjfUBFJK/3rs8YLPZHZfzF4USirv/+MSVM6VW1LiqiL/tTlBlhMsJmX
- w56pNLPlA1B9olfx3ywNwbZ8aWArp1Y2WUagvnUXBIe4Lk1FC7juoBD9KUB9K9VJKPc3A1TLJRv
- /Upmk7uo3z33+ayHFnnGTp+NXQP9dFX+Q1Blxqmo94SP7EOZveU9ORXKHSSWA2mEr7ip7X/ndeu
- l9xPB8hrwLzhLB9kiYk+jyBYcok6j7+ftRILhrIzovB1TJQ63QfossVNcJjZOGWo/V39l2L72cj
- DawaTF+Ve0ODHn1ljn5dGHwxXl9GEhc4I3rBWWiX2yZqBMz9VnaDQ95Y/aIRdioxyGtNX+c/HrI
- 4renIZaCPxbuXbngYWF3VBoz2dvYGL5DsKZPkD6JVNsuPEPcmwzm+L2gjKTXL+7y383FlD1881Z
- bBrOzcp4PIA89CvTaInyH1TEtct3TkEJB93OpUk/Dtpc8EjqtgdzhGvCcXCAVQf2MOCFZnjWVFF
- lPrF/Xb4JxksBSYC8qtY0dtQ+Gw81Frkuk7oCNwx8R2YOF0PLB0PvLln9tEo4VVnQ==
-X-Received: by 2002:a17:902:cf0e:b0:2c9:aae1:a61a with SMTP id
- d9443c01a7336-2d670dd98d6mr139833495ad.14.1787427827929; 
- Sat, 22 Aug 2026 12:43:47 -0700 (PDT)
-Received: from visitorckw-work01.c.googlers.com.com
- (202.176.229.35.bc.googleusercontent.com. [35.229.176.202])
+ AHgh+RpzY5A4JWa2cHmtGaD8DM++/h2IYMw+GMO3YfJy0pEJZueakDT/4/qyZIgdy8APOUixSiHKnYhW+TpU@nongnu.org
+X-Gm-Message-State: AFuF++lX+SWoouDkbZ1iIcvNDi7MksKz4CNJGQlBwf7+9CCiYWFE2btX
+ 1DS4BhSpPRT9Rq7zCw4PFB4cKFmZHIxwNOnjvGFNT8qgo/iRbpkFD/W53fb/oPX1bypO/g==
+X-Gm-Gg: AR+sD13WGjRRGaJcCvSVnjsWz8zquDLr6R4XkNrScxg0jjxN08RHXj4uWdoQr7/z3H/
+ hKWSUNMPihZ744RoorTv4pPH70dufhOPpvB4/otmFIAOz/2c8IHW2vkUHS04BGEAztIKZ0vhG7+
+ hw+abWSxgzamFiycJm150G1sHY3QmGeDj/PBqJZy1BNZAkz3mxLT1uBc13A43NomK8wS++a635I
+ kdiC6tnbMhU/zRGcHMaI7MTqDLXyrppzmXrEENaZOea2zJ55pYcgdbF/OdfPIbIAe2Jz3g8bzfK
+ vb2xVg6L3iqfhFlWnjbb5J6OqBK+ini9tBLJl0oIaxRrQhFhlVtkkh8lzBqx1YKSVNUTDhu7Hq7
+ SGci/lkM4Myj9dywEIj4QqxKiX2jFSYiMW4YX8iHVauibtG2I1ikJqHZhrKDrqvUgOWDllNMNhr
+ EKdGBkVhQDcYAUr/f2JZIJG3NyjV7+Pnf8IhyV79kHrigRDE2TXK8e8NKT0n3gITEqsFB5UPPTA
+ 0S3uEE=
+X-Received: by 2002:a17:902:ce0b:b0:2d5:ccb7:12c3 with SMTP id
+ d9443c01a7336-2d670b83673mr204518995ad.2.1787477774111; 
+ Sun, 23 Aug 2026 02:36:14 -0700 (PDT)
+Received: from smtpclient.apple ([117.55.237.216])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2d676895799sm5892715ad.38.2026.08.22.12.43.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 22 Aug 2026 12:43:47 -0700 (PDT)
-From: Kuan-Wei Chiu <visitorckw@gmail.com>
-To: pierrick.bouvier@oss.qualcomm.com, almer@dabbelt.com,
- alistair.francis@wdc.com, pbonzini@redhat.com, marcandre.lureau@redhat.com,
- farosas@suse.de, lvivier@redhat.com
-Cc: liwei1518@gmail.com, daniel.barboza@oss.qualcomm.com,
- zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
- wxchen0913@gmail.com, jserv@ccns.ncku.edu.tw, marscheng@google.com,
- eleanor15x@gmail.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- Kuan-Wei Chiu <visitorckw@gmail.com>
-Subject: [PATCH v4 3/7] hw/riscv: Add Sophgo CV1800B SoC support
-Date: Sat, 22 Aug 2026 19:43:10 +0000
-Message-ID: <20260822194315.2550260-4-visitorckw@gmail.com>
-X-Mailer: git-send-email 2.55.0.766.g2966f0265a-goog
-In-Reply-To: <20260822194315.2550260-1-visitorckw@gmail.com>
-References: <20260822194315.2550260-1-visitorckw@gmail.com>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::634;
- envelope-from=visitorckw@gmail.com; helo=mail-pl1-x634.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ 5a478bee46e88-327f8e2a730sm15000783eec.0.2026.08.23.02.36.11
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Sun, 23 Aug 2026 02:36:13 -0700 (PDT)
+Content-Type: text/plain;
+	charset=us-ascii
+Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3864.600.51.1.1\))
+Subject: Re: [PATCH v2 0/2] hw/riscv/k230: add the K230 Reset Management Unit
+From: Jack Wang <163wangjack@gmail.com>
+In-Reply-To: <20260719180247.8660-1-163wangjack@gmail.com>
+Date: Sun, 23 Aug 2026 17:35:58 +0800
+Cc: Chao Liu <chao.liu.zevorn@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Alistair Francis <alistair.francis@wdc.com>, qemu-riscv@nongnu.org
+Content-Transfer-Encoding: quoted-printable
+Message-Id: <D5866774-254F-4900-80C1-857EAD752C30@gmail.com>
+References: <20260719180247.8660-1-163wangjack@gmail.com>
+To: qemu-devel@nongnu.org
+X-Mailer: Apple Mail (2.3864.600.51.1.1)
+Received-SPF: pass client-ip=2607:f8b0:4864:20::629;
+ envelope-from=163wangjack@gmail.com; helo=mail-pl1-x629.google.com
+X-Spam_score_int: -13
+X-Spam_score: -1.4
+X-Spam_bar: -
+X-Spam_report: (-1.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ FROM_STARTS_WITH_NUMS=0.738, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -109,297 +107,92 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Add the Sophgo CV1800B SoC, which is the heart of the Milk-V Duo board.
 
-The SoC features a T-Head C906 CPU along with integrated PLIC, CLINT,
-and dw8250 UART. The memory map and interrupts are configured according
-to the CV1800B datasheet. [1]
+Hi all,
 
-Several peripheral blocks are included as unimplemented devices to
-ensure that drivers can probe successfully without causing errors
-during boot.
+A polite ping for this RFC series.=20
+I fix problems raised by chao liu and Daniel.
+I apologize for previously missing the qemu-riscv
+Mailing list, it has been added to this ping mail.
+Any feedback or guidance would be greatly appreciated.
 
-Link: https://github.com/milkv-duo/duo-files/tree/main/duo/datasheet [1]
-Signed-off-by: Kuan-Wei Chiu <visitorckw@gmail.com>
----
- hw/riscv/Kconfig           |   8 ++
- hw/riscv/cv1800b.c         | 174 +++++++++++++++++++++++++++++++++++++
- hw/riscv/meson.build       |   2 +
- include/hw/riscv/cv1800b.h |  56 ++++++++++++
- 4 files changed, 240 insertions(+)
- create mode 100644 hw/riscv/cv1800b.c
- create mode 100644 include/hw/riscv/cv1800b.h
+Thanks for your time,
+Jack Wang
 
-diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-index de37c08cae..5ab38f228f 100644
---- a/hw/riscv/Kconfig
-+++ b/hw/riscv/Kconfig
-@@ -162,3 +162,11 @@ config K230
-     select SERIAL_MM
-     select UNIMP
-     select K230_WDT
-+
-+config SOPHGO_CV1800B
-+    bool
-+    depends on RISCV64
-+    select RISCV_ACLINT
-+    select SIFIVE_PLIC
-+    select SOPHGO_CV1800B_CLK
-+    select DW8250
-diff --git a/hw/riscv/cv1800b.c b/hw/riscv/cv1800b.c
-new file mode 100644
-index 0000000000..32e46a4639
---- /dev/null
-+++ b/hw/riscv/cv1800b.c
-@@ -0,0 +1,174 @@
-+/* SPDX-License-Identifier: GPL-2.0-or-later */
-+/*
-+ * Sophgo CV1800B SoC
-+ *
-+ * Copyright (c) 2026 Kuan-Wei Chiu <visitorckw@gmail.com>
-+ */
-+
-+#include "qemu/osdep.h"
-+#include "qapi/error.h"
-+#include "hw/riscv/cv1800b.h"
-+#include "hw/core/qdev-properties.h"
-+#include "target/riscv/cpu-qom.h"
-+#include "system/system.h"
-+#include "hw/intc/riscv_aclint.h"
-+#include "system/address-spaces.h"
-+#include "hw/intc/sifive_plic.h"
-+#include "target/riscv/cpu.h"
-+#include "hw/riscv/boot.h"
-+#include "hw/sd/sdhci.h"
-+#include "hw/misc/unimp.h"
-+
-+const MemMapEntry cv1800b_memmap[] = {
-+    [CV1800B_DEV_TOP_MISC]     = { 0x03000000,      0x1000 },
-+    [CV1800B_DEV_PINMUX]       = { 0x03001000,      0x1000 },
-+    [CV1800B_DEV_CLK]          = { 0x03002000,      0x1000 },
-+    [CV1800B_DEV_RST]          = { 0x03003000,      0x1000 },
-+    [CV1800B_DEV_WDT]          = { 0x03010000,      0x1000 },
-+    [CV1800B_DEV_GPIO]         = { 0x03020000,      0x4000 },
-+    [CV1800B_DEV_UART0]        = { 0x04140000,     0x10000 },
-+    [CV1800B_DEV_SD0]          = { 0x04310000,     0x10000 },
-+    [CV1800B_DEV_ROM]          = { 0x04400000,     0x10000 },
-+    [CV1800B_DEV_RTC_GPIO]     = { 0x05021000,      0x1000 },
-+    [CV1800B_DEV_RTC_IO]       = { 0x05027000,      0x1000 },
-+    [CV1800B_DEV_PLIC]         = { 0x70000000,   0x4000000 },
-+    [CV1800B_DEV_CLINT]        = { 0x74000000,     0x10000 },
-+    [CV1800B_DEV_DRAM]         = { 0x80000000,         0x0 },
-+};
-+
-+static void cv1800b_soc_instance_init(Object *obj)
-+{
-+    CV1800BSoCState *s = CV1800B_SOC(obj);
-+
-+    object_initialize_child(obj, "cpus", &s->cpus, TYPE_RISCV_HART_ARRAY);
-+    qdev_prop_set_uint32(DEVICE(&s->cpus), "hartid-base", 0);
-+    qdev_prop_set_string(DEVICE(&s->cpus), "cpu-type", TYPE_RISCV_CPU_THEAD_C906);
-+    qdev_prop_set_uint64(DEVICE(&s->cpus), "resetvec",
-+                         cv1800b_memmap[CV1800B_DEV_ROM].base);
-+
-+    object_initialize_child(obj, "clk", &s->clk, TYPE_CV1800B_CLK);
-+    object_initialize_child(obj, "uart", &s->uart, TYPE_DW8250);
-+    object_initialize_child(obj, "sdhci", &s->sdhci, TYPE_SYSBUS_SDHCI);
-+}
-+
-+static void cv1800b_soc_realize(DeviceState *dev, Error **errp)
-+{
-+    CV1800BSoCState *s = CV1800B_SOC(dev);
-+    MachineState *ms = MACHINE(qdev_get_machine());
-+    uint32_t num_harts = ms->smp.cpus;
-+    MemoryRegion *system_memory = get_system_memory();
-+    char *plic_hart_config;
-+
-+    qdev_prop_set_uint32(DEVICE(&s->cpus), "num-harts", num_harts);
-+
-+    if (!sysbus_realize(SYS_BUS_DEVICE(&s->cpus), errp)) {
-+        return;
-+    }
-+
-+    memory_region_init_rom(&s->rom, OBJECT(dev), "cv1800b.rom",
-+                           cv1800b_memmap[CV1800B_DEV_ROM].size, &error_fatal);
-+    memory_region_add_subregion(system_memory,
-+                                cv1800b_memmap[CV1800B_DEV_ROM].base, &s->rom);
-+
-+    riscv_aclint_swi_create(cv1800b_memmap[CV1800B_DEV_CLINT].base,
-+                            0, num_harts, false);
-+    riscv_aclint_mtimer_create(cv1800b_memmap[CV1800B_DEV_CLINT].base +
-+                               RISCV_ACLINT_SWI_SIZE,
-+                               RISCV_ACLINT_DEFAULT_MTIMER_SIZE,
-+                               0, num_harts, RISCV_ACLINT_DEFAULT_MTIMECMP,
-+                               RISCV_ACLINT_DEFAULT_MTIME,
-+                               RISCV_ACLINT_DEFAULT_TIMEBASE_FREQ, true);
-+
-+    plic_hart_config = riscv_plic_hart_config_string(num_harts);
-+    s->plic = sifive_plic_create(
-+        cv1800b_memmap[CV1800B_DEV_PLIC].base,
-+        plic_hart_config,
-+        num_harts,
-+        0,
-+        CV1800B_PLIC_NUM_SOURCES,
-+        CV1800B_PLIC_NUM_PRIORITIES,
-+        0x0,
-+        0x1000,
-+        0x2000,
-+        0x80,
-+        0x200000,
-+        0x1000,
-+        cv1800b_memmap[CV1800B_DEV_PLIC].size);
-+
-+    g_free(plic_hart_config);
-+
-+    qdev_prop_set_uint8(DEVICE(&s->uart), "regshift", 2);
-+    qdev_prop_set_chr(DEVICE(&s->uart), "chardev", serial_hd(0));
-+    if (!sysbus_realize(SYS_BUS_DEVICE(&s->uart), errp)) {
-+        return;
-+    }
-+    sysbus_mmio_map(SYS_BUS_DEVICE(&s->uart), 0, cv1800b_memmap[CV1800B_DEV_UART0].base);
-+    sysbus_connect_irq(SYS_BUS_DEVICE(&s->uart), 0,
-+                    qdev_get_gpio_in(DEVICE(s->plic), CV1800B_UART0_IRQ));
-+
-+    qdev_prop_set_uint8(DEVICE(&s->sdhci), "sd-spec-version", 3);
-+    qdev_prop_set_uint64(DEVICE(&s->sdhci), "capareg", 0x056900b9);
-+    if (!sysbus_realize(SYS_BUS_DEVICE(&s->sdhci), errp)) {
-+        return;
-+    }
-+    sysbus_mmio_map(SYS_BUS_DEVICE(&s->sdhci), 0, cv1800b_memmap[CV1800B_DEV_SD0].base);
-+    sysbus_connect_irq(SYS_BUS_DEVICE(&s->sdhci), 0,
-+                       qdev_get_gpio_in(DEVICE(s->plic), CV1800B_SD0_IRQ));
-+
-+    if (!sysbus_realize(SYS_BUS_DEVICE(&s->clk), errp)) {
-+        return;
-+    }
-+    sysbus_mmio_map(SYS_BUS_DEVICE(&s->clk), 0,
-+                    cv1800b_memmap[CV1800B_DEV_CLK].base);
-+
-+    create_unimplemented_device("cv1800b.top_misc",
-+                                cv1800b_memmap[CV1800B_DEV_TOP_MISC].base,
-+                                cv1800b_memmap[CV1800B_DEV_TOP_MISC].size);
-+
-+    create_unimplemented_device("cv1800b.pinmux",
-+                                cv1800b_memmap[CV1800B_DEV_PINMUX].base,
-+                                cv1800b_memmap[CV1800B_DEV_PINMUX].size);
-+
-+    create_unimplemented_device("cv1800b.rst",
-+                                cv1800b_memmap[CV1800B_DEV_RST].base,
-+                                cv1800b_memmap[CV1800B_DEV_RST].size);
-+
-+    create_unimplemented_device("cv1800b.wdt",
-+                                cv1800b_memmap[CV1800B_DEV_WDT].base,
-+                                cv1800b_memmap[CV1800B_DEV_WDT].size);
-+
-+    create_unimplemented_device("cv1800b.gpio0_3",
-+                                cv1800b_memmap[CV1800B_DEV_GPIO].base,
-+                                cv1800b_memmap[CV1800B_DEV_GPIO].size);
-+
-+    create_unimplemented_device("cv1800b.rtc_gpio",
-+                                cv1800b_memmap[CV1800B_DEV_RTC_GPIO].base,
-+                                cv1800b_memmap[CV1800B_DEV_RTC_GPIO].size);
-+
-+    create_unimplemented_device("cv1800b.rtc_io",
-+                                cv1800b_memmap[CV1800B_DEV_RTC_IO].base,
-+                                cv1800b_memmap[CV1800B_DEV_RTC_IO].size);
-+}
-+
-+static void cv1800b_soc_class_init(ObjectClass *oc, const void *data)
-+{
-+    DeviceClass *dc = DEVICE_CLASS(oc);
-+
-+    dc->realize = cv1800b_soc_realize;
-+    dc->user_creatable = false;
-+}
-+
-+static const TypeInfo cv1800b_soc_type_info = {
-+    .name = TYPE_CV1800B_SOC,
-+    .parent = TYPE_DEVICE,
-+    .instance_size = sizeof(CV1800BSoCState),
-+    .instance_init = cv1800b_soc_instance_init,
-+    .class_init = cv1800b_soc_class_init,
-+};
-+
-+static void cv1800b_soc_register_types(void)
-+{
-+    type_register_static(&cv1800b_soc_type_info);
-+}
-+
-+type_init(cv1800b_soc_register_types)
-diff --git a/hw/riscv/meson.build b/hw/riscv/meson.build
-index 0d82ceacc4..b278b443b6 100644
---- a/hw/riscv/meson.build
-+++ b/hw/riscv/meson.build
-@@ -21,4 +21,6 @@ riscv_ss.add(when: 'CONFIG_RISCV_MIPS_CPS', if_true: files('cps.c'))
- riscv_ss.add(when: 'CONFIG_MIPS_BOSTON_AIA', if_true: files('boston-aia.c'))
- riscv_ss.add(when: 'CONFIG_K230', if_true: files('k230.c'))
- 
-+riscv_ss.add(when: 'CONFIG_SOPHGO_CV1800B', if_true: files('cv1800b.c'))
-+
- hw_arch += {'riscv': riscv_ss}
-diff --git a/include/hw/riscv/cv1800b.h b/include/hw/riscv/cv1800b.h
-new file mode 100644
-index 0000000000..bde5eff96b
---- /dev/null
-+++ b/include/hw/riscv/cv1800b.h
-@@ -0,0 +1,56 @@
-+/* SPDX-License-Identifier: GPL-2.0-or-later */
-+/*
-+ * Sophgo CV1800B SoC
-+ *
-+ * Copyright (c) 2026 Kuan-Wei Chiu <visitorckw@gmail.com>
-+ */
-+
-+#ifndef HW_RISCV_CV1800B_H
-+#define HW_RISCV_CV1800B_H
-+
-+#include "hw/core/boards.h"
-+#include "hw/riscv/riscv_hart.h"
-+#include "hw/misc/cv1800b_clk.h"
-+#include "hw/char/dw8250.h"
-+#include "hw/sd/sdhci.h"
-+
-+#define TYPE_CV1800B_SOC "cv1800b-soc"
-+OBJECT_DECLARE_SIMPLE_TYPE(CV1800BSoCState, CV1800B_SOC)
-+
-+struct CV1800BSoCState {
-+    DeviceState parent_obj;
-+
-+    RISCVHartArrayState cpus;
-+    MemoryRegion rom;
-+    DeviceState *plic;
-+    CV1800BClkState clk;
-+    DW8250State uart;
-+    SDHCIState sdhci;
-+};
-+
-+#define CV1800B_PLIC_NUM_SOURCES 136
-+#define CV1800B_PLIC_NUM_PRIORITIES 31
-+
-+#define CV1800B_UART0_IRQ 44
-+#define CV1800B_SD0_IRQ   36
-+
-+enum {
-+    CV1800B_DEV_TOP_MISC,
-+    CV1800B_DEV_PINMUX,
-+    CV1800B_DEV_CLK,
-+    CV1800B_DEV_RST,
-+    CV1800B_DEV_WDT,
-+    CV1800B_DEV_GPIO,
-+    CV1800B_DEV_UART0,
-+    CV1800B_DEV_SD0,
-+    CV1800B_DEV_ROM,
-+    CV1800B_DEV_RTC_GPIO,
-+    CV1800B_DEV_RTC_IO,
-+    CV1800B_DEV_PLIC,
-+    CV1800B_DEV_CLINT,
-+    CV1800B_DEV_DRAM,
-+};
-+
-+extern const MemMapEntry cv1800b_memmap[];
-+
-+#endif
--- 
-2.55.0.766.g2966f0265a-goog
-
+> References: <20260709031237.21284-1-163wangjack@gmail.com>
+>=20
+> This v2 patch reply on review of=20
+> This series models the Kendryte K230 Reset Management Unit (RMU), a =
+bank of
+> reset-control registers at 0x91101000, and wires it into the K230 SoC. =
+It
+> replaces the create_unimplemented_device("rmu") stub so guest reset =
+drivers
+> (drivers/reset/reset-k230.c) work against a real model.
+>=20
+> Patch 1 adds the standalone device model; patch 2 wires it into the =
+SoC and
+> adds the qtest. The qtest is deliberately placed in patch 2 =
+accorinding to=20
+> suggestion from Daniel: it drives "-machine k230", which only
+> exists once the device is wired up.
+>=20
+> Register semantics, reset values and reserved-bit masks are taken from =
+the
+> K230 TRM chapter 2.1 "Reset" (V0.3.1) and cross-checked against the =
+mainline
+> Linux driver.
+>=20
+> Changes since v1:
+> - Switched to the Resettable API (phases.hold instead of the legacy
+>  device_class_set_legacy_reset()), per Daniel's review.
+> - Model real reset propagation: the RMU now cold-resets the two linked
+>  watchdogs via "wdt0"/"wdt1" QOM links when their PERI0 reset bits are
+>  written (Cao review).
+> - CPU1 reset request is now a two-step assert/deassert (not =
+self-clearing),
+>  matching the hardware (Cao review ).
+> - Filled in the documented per-register reset values and reserved-bit
+>  (writable) masks from the TRM; the *_rst_done status bits reset to 0, =
+so
+>  they follow the per-bit "Reset" column rather than the summarised =
+total.
+> - Added the reset-time-control (*_RST_TIM) registers as plain storage =
+with
+>  their documented reset values.
+> - Fixed the storage mask so the upper half of non-write-enable =
+registers is
+>  writable (surfaced by the new TIM registers).
+> - New qtests: reset values, TIM storage, reserved-bit read-only, CPU1
+>  two-step, and real watchdog reset propagation.
+> - Moved the qtest from patch 1 to patch 2 for bisectability; added the
+>  MAINTAINERS entries.
+>=20
+> Jack Wang (2):
+> hw/misc/k230_rmu: add Kendryte K230 Reset Management Unit model
+> hw/riscv/k230: wire up the RMU device
+>=20
+> MAINTAINERS                 |   3 +
+> docs/system/riscv/k230.rst  |   1 +
+> hw/misc/Kconfig             |   3 +
+> hw/misc/k230_rmu.c          | 425 ++++++++++++++++++++++++++++++++++++
+> hw/misc/meson.build         |   1 +
+> hw/misc/trace-events        |   7 +
+> hw/riscv/Kconfig            |   1 +
+> hw/riscv/k230.c             |  15 +-
+> include/hw/misc/k230_rmu.h  | 126 +++++++++++
+> include/hw/riscv/k230.h     |   2 +
+> tests/qtest/k230-rmu-test.c | 225 +++++++++++++++++++
+> tests/qtest/meson.build     |   3 +-
+> 12 files changed, 808 insertions(+), 4 deletions(-)
+> create mode 100644 hw/misc/k230_rmu.c
+> create mode 100644 include/hw/misc/k230_rmu.h
+> create mode 100644 tests/qtest/k230-rmu-test.c
+>=20
+> --=20
+> 2.53.0
+>=20
+>=20
+>=20
+>=20
 
