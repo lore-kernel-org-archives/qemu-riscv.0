@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF0E4C5DF97
-	for <qemu-riscv@archiver.kernel.org>; Sun, 23 Aug 2026 15:19:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0F86C5DF97
+	for <qemu-riscv@archiver.kernel.org>; Sun, 23 Aug 2026 15:19:29 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wy9y3-0008U2-EA; Sun, 23 Aug 2026 11:18:39 -0400
+	id 1wy9yH-0000gO-F1; Sun, 23 Aug 2026 11:18:53 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1wy9nq-0007RD-VA
- for qemu-riscv@nongnu.org; Sun, 23 Aug 2026 11:08:06 -0400
-Received: from mail-pj1-x102f.google.com ([2607:f8b0:4864:20::102f])
+ id 1wy9on-000876-6O
+ for qemu-riscv@nongnu.org; Sun, 23 Aug 2026 11:09:05 -0400
+Received: from mail-pg1-x535.google.com ([2607:f8b0:4864:20::535])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1wy9np-0008KO-CU
- for qemu-riscv@nongnu.org; Sun, 23 Aug 2026 11:08:06 -0400
-Received: by mail-pj1-x102f.google.com with SMTP id
- 98e67ed59e1d1-39266382df6so2011903a91.3
- for <qemu-riscv@nongnu.org>; Sun, 23 Aug 2026 08:08:05 -0700 (PDT)
+ id 1wy9ok-0000BR-Ml
+ for qemu-riscv@nongnu.org; Sun, 23 Aug 2026 11:09:04 -0400
+Received: by mail-pg1-x535.google.com with SMTP id
+ 41be03b00d2f7-cbb8b54fcf8so2558833a12.0
+ for <qemu-riscv@nongnu.org>; Sun, 23 Aug 2026 08:09:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1787497684; x=1788102484; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1787497741; x=1788102541; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=ySPa6h2ifrYJcA6pQJgvXQ8WNCjDkVVB+L9hgfcGq1Y=;
- b=h5HjiKu9/FE1JZpnGIPt+zwVwuYMgjahJIZKOgJdymhCMC1PzOy6IpLcqrv1dplge4
- mebmgellNfLjjSkas2FRr+z7CmjGJnPu9UwJpudHQ/WO3iTKefMXXzlPTbkCiR5UWP6t
- NJs4Ftxko8ShIBBP6nl+xF9Bg/BmOCbLx69HU8hMBP1kc1B4z/VoaHyl3ou/zR5wZrXt
- ulykdFmQ2LLfxFoydAilip49XzCGpXXulz+Z6dx+byK+qjclOGguNB0FvaMJjmBu1ZrS
- aNaKkeyhfCFTXTekhimQ+vbEXWq2UYR3XPd9WbwzDiqmReH2btYqP/EbH0C3nCzIEuy6
- dDYw==
+ bh=2w24/He90NoBe47Qt4gKRHsg9pnShD2f9kKavJ0MfiM=;
+ b=HeYuM3gyRJ0X/srsCfrOXyXYPpJDdzMEOu+O+Id2ir6OJHihHO8rMXfiKw+2yV41oU
+ dbumt34LzD4QdSyl8K6nQSimsROoUUWuutaUyo7joWyUL2Yd1RPXP1oRcWaY9P+Ikz+N
+ vvCbXEkY4MD+Cf01fYxdyIU+cx04weMvvU+e7kvrbguGtqrCtqIIMpjjICaWVdCZE/XY
+ TAcbc4YU0doAV4kqTqg48xI/AdONkDPk2O5+NxdwbkECDw2lGJD/YwwjkmEwPdWAayzA
+ rAKnv1RQIsKa+Xd5lpnW17cahzkNO+kfO5ISe6F0/S2azkXsvMi7QUgVEVTU27BO1H3F
+ ZO6g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787497684; x=1788102484;
+ d=1e100.net; s=20251104; t=1787497741; x=1788102541;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=ySPa6h2ifrYJcA6pQJgvXQ8WNCjDkVVB+L9hgfcGq1Y=;
- b=WI4XeD9i/xRf7Jh2rQFZmddnMmBLaI8yxNEK6px9g9nnQI3U2uY2It45eXkl7FYzlb
- Q8+jm2QQdH0dGeUcz+gBy/AgWAjZIkJAAKVHaVGX8iXP0V9bsqlZ6c7efJ15omqQXSqG
- vVJ/kdrtp9dz0e3RQC8+CGFO4yBagfhEunZXyyVtfmZ2VyMq7GsizhwHcNwuLrHY8tq8
- QWNTXhOYVNg5Q45jYvQ+b2POP10PbUj14KRT4CNAO2YQipONCEpo3N7KUyuw263UVqLv
- xZy9jLbzbo/00uXwZJWcRSJtx4MMNN1wvNiGPWyJJgfASvf6btHO3o8JT/9ilUundDnm
- CV/g==
+ bh=2w24/He90NoBe47Qt4gKRHsg9pnShD2f9kKavJ0MfiM=;
+ b=Y25derXfJkevYMqtYG8Yu0gfpSRA+nac6f6Yc1oGodNWPaeodQRJAtOLpR+GfKQBoh
+ z/5tu/0un4P9UV0WVxKGdUI0p7M+vKlulBfZ6DWtB91zBH5Rnp/7XK5Np/XXRbiZmhRL
+ 0/na/zYg5wRNRaAQDqs7aW/02ZsGKjvjqq0zv0GPiLMaTRxChrQUuKzekbhq6KZSqLIs
+ FnD59T7M4J8CHqTyYWkcH5RqSFIq+JcwPbzaVBteyh6rpUvyD7zzgO9MwyYPvQPLyj4i
+ uuu38glZWmYfsL/RpvGC27n8bjQTqVnII+07QliWLIKaOUFqpiyXm+jL7/0+FSeP/sC3
+ tlCg==
 X-Forwarded-Encrypted: i=1;
- AHgh+RoQIiTjGzJw6u7d/9geY0+xh8b147CYkyIIa4MI1p2JXFo2LAi9l2oqieifS6JeGGjLhlLTlyLKa2vt@nongnu.org
-X-Gm-Message-State: AFuF++lIBYExX5C2yHFvU4MUrLyP9O5zfsAljL11+nkEP4RYQ8JzVsmu
- 2PhMHjZbS4CmQSgH+k6xJ2KyTAZIlFeTZwQcw7dnErIDjMJl9V3lTFWH
-X-Gm-Gg: AR+sD121AezhG0ECarG8BZVqQVOpKEoSfAie05ZpYyMfJVTpcAhYvpykVCjlEqV1OeS
- kpzo7rPwHf9m8Sf2PutalcuK8h4100Y4B56GB7SuBpfcj9WTEqJZJnebxmHcZzbBW2b4eCMc/DU
- +U6PTF52KZm0a9prqJtdFlQCt8JcSOLnENB+gZjAfjgCjoc4gSsuPn5Tdab8c+wiQ08PGEM0OmT
- B64bZ/aFnLzfQMiqaBQs9Ye6LuYmVRELY8ycA4KdMqv4Snl32z7Ps8V9g7IwAUM/cV0U2sRF6jL
- YdWU5/EyAx0pc9sj4g9RUrwEQfJ6Nqhxl4JQudOiyW2AAQVukVQgkzqIuRcB/kbBWQSYs19ORrS
- jUvWtBycwMnuCuU3yS7oHxzlAxZvp2YWUft2ilH1TjHFSc5G4oW36YRuMue/a/cYtnFbUuKCHiD
- dp2SCqq+3eZ65AyFZqkg4O22aqGT6TxvsqfIACNxLUtzC3IFV4HVq/OzFYQIyIM9q/769+UoUKt
- /t2TNPZBLKHP81Aj9NVtjPjkPg1BYCy
-X-Received: by 2002:a17:90b:3902:b0:395:bbfe:fc6f with SMTP id
- 98e67ed59e1d1-395c333710emr32506801a91.3.1787497683982; 
- Sun, 23 Aug 2026 08:08:03 -0700 (PDT)
+ AHgh+RoxLKD76bRz1Eqk6dQ4s88AbOCh8C9DgvUW9rZIzr0xh+YGlQsghFCd6M4whHw1t+Giw/lNeyPsRKh0@nongnu.org
+X-Gm-Message-State: AFuF++mZiTF9UXulL3YtaNzU660CM9j+voyGdYd489spCt9DolbCHd0T
+ 0b6Ekx9Ivxbq+4mxShIvVJUt4Hfvoj8YklzGPdVgiR+IUjhbNDXxUGQp
+X-Gm-Gg: AR+sD12eGGow1Tg366z/UFRdUdmpC/CWX0/mQaIKW1W5GDKzGqfsepacZqEjQRI+2+M
+ 5rh94umqY0Ymj8Aeh38cIVKHSTQtpEPaD0anulVibzyxwVVGIEsm9JpKuXzw9l1NkjgypYgVb7W
+ ZphCkVjJaSDV6FFDpmElfUXIrUo8UaIEgQjN94A8lvkkDuBeSZWa1vBS0TSIRTPFcb6yGvfbWYz
+ zYPME2zgX1UhI/p9JOd3CXPHvoTqtawmKUsi2mHyFEEC6dkaSsb9iZlY4LQMEX+jpqKDD1aX03E
+ 3/eNnQKFRvsDVemUQtH7uN0iQKeuZsb78mtPP6Raq7rnaI+agf8RgKZnrUBatsbyXn4SbQMJ1Dr
+ pDhn7YAMmLxb1xOwvXISJQTOvenGK/fsPcQKFErqAqvEO7QVLkOfvSrw/A+ula/7T/MNsmlh7wf
+ nRLu5uXEJ4GwMEU4JbZgFEvwmz4l3Yx6OqkovMAL4LFfhWX6KGITJ+hljFopXiUGvv0BzMLmAQT
+ VuLKpxvvYyGunfK/T6+Xw==
+X-Received: by 2002:a17:90b:4a89:b0:390:8361:a532 with SMTP id
+ 98e67ed59e1d1-395c33bd6d1mr34692178a91.7.1787497740547; 
+ Sun, 23 Aug 2026 08:09:00 -0700 (PDT)
 Received: from WIN-BH9M8FJACR9 ([103.94.185.75])
  by smtp.googlemail.com with ESMTPSA id
- a92af1059eb24-1418619d6ecsm16024511c88.14.2026.08.23.08.07.55
+ a92af1059eb24-1418619d6ecsm16024511c88.14.2026.08.23.08.08.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 23 Aug 2026 08:08:02 -0700 (PDT)
+ Sun, 23 Aug 2026 08:08:59 -0700 (PDT)
 From: Yonggang Luo <luoyonggang@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: Xianglai Li <lixianglai@loongson.cn>,
@@ -100,16 +100,16 @@ Cc: Xianglai Li <lixianglai@loongson.cn>,
  =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
  Matthew Rosato <mjrosato@linux.ibm.com>, Weiwei Li <liwei1518@gmail.com>,
  Darren Kenny <darren.kenny@oracle.com>
-Subject: [PATCH 02/12] hw/riscv/virt: use unique QOM name and target filter
-Date: Sun, 23 Aug 2026 23:07:20 +0800
-Message-ID: <20260823150731.896-3-luoyonggang@gmail.com>
+Subject: [PATCH 08/12] target/riscv: seed cfg.big_endian from TargetInfo
+Date: Sun, 23 Aug 2026 23:07:26 +0800
+Message-ID: <20260823150731.896-9-luoyonggang@gmail.com>
 X-Mailer: git-send-email 2.52.0.windows.1
 In-Reply-To: <20260823150731.896-1-luoyonggang@gmail.com>
 References: <20260823150731.896-1-luoyonggang@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102f;
- envelope-from=luoyonggang@gmail.com; helo=mail-pj1-x102f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::535;
+ envelope-from=luoyonggang@gmail.com; helo=mail-pg1-x535.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -133,69 +133,62 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-- Set TYPE_RISCV_VIRT_MACHINE to MACHINE_TYPE_NAME("riscv-virt") so
-  RISC-V virt no longer collides with ARM virt-machine in one process.
-- Register TYPE_TARGET_SPECIFIC with is_available = target_base_riscv.
-- Keep -machine virt via mc->alias after the selected target is applied.
+GDB register packets use target_big_endian() only (gdb_get_reg16/32/64).
+RISC-V gdbstub already goes through those helpers, so future GDB
+big-endian support does not need a second endian source in the CPU
+gdbstub. It needs TargetInfo and the hart to agree.
+
+Hart endian is cpu->cfg.big_endian, copied into mstatus MBE/SBE/UBE at
+reset. The CPU property still defaults to little-endian, so a
+big-endian TargetInfo would make GDB swap as BE while the hart stayed
+LE.
+
+- Initialize cfg.big_endian from target_big_endian() in cpu init so a
+  big-endian TargetInfo also sets the hart.
+- Fail realize when -cpu big-endian= disagrees with that selection.
+  GDB cannot follow a per-CPU override, so a split would silently
+  corrupt register byte order.
 
 Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
 ---
- hw/riscv/virt.c         | 6 +++++-
- include/hw/riscv/virt.h | 2 +-
- 2 files changed, 6 insertions(+), 2 deletions(-)
+ target/riscv/cpu.c | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 2d242ef71a5..1b672b2169d 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -22,6 +22,7 @@
- #include "qemu/units.h"
- #include "qemu/error-report.h"
- #include "qemu/guest-random.h"
-+#include "qemu/target-info.h"
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 5a82e6563bf..0681bec0bef 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -29,6 +29,7 @@
  #include "qapi/error.h"
- #include "hw/core/boards.h"
- #include "hw/core/loader.h"
-@@ -1718,7 +1719,9 @@ static void virt_machine_class_init(ObjectClass *oc, const void *data)
-     MachineClass *mc = MACHINE_CLASS(oc);
-     HotplugHandlerClass *hc = HOTPLUG_HANDLER_CLASS(oc);
+ #include "qapi/visitor.h"
+ #include "qemu/error-report.h"
++#include "qemu/target-info.h"
+ #include "qemu/timer.h"
+ #include "hw/core/qdev-properties.h"
+ #include "hw/core/qdev-prop-internal.h"
+@@ -1226,6 +1227,13 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+     RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(dev);
+     Error *local_err = NULL;
  
-+    TARGET_SPECIFIC_CLASS(oc)->is_available = target_base_riscv;
-     mc->desc = "RISC-V VirtIO board";
-+    mc->alias = "virt";
-     mc->init = virt_machine_init;
-     mc->max_cpus = VIRT_CPUS_MAX;
-     mc->default_cpu_type = TYPE_RISCV_CPU_BASE;
-@@ -1782,7 +1785,7 @@ static void virt_machine_class_init(ObjectClass *oc, const void *data)
- }
++    if (cpu->cfg.big_endian != target_big_endian()) {
++        error_setg(errp,
++                   "CPU big-endian=%s does not match selected target endian",
++                   cpu->cfg.big_endian ? "on" : "off");
++        return;
++    }
++
+     cpu_exec_realizefn(cs, &local_err);
+     if (local_err != NULL) {
+         error_propagate(errp, local_err);
+@@ -1407,6 +1415,8 @@ static void riscv_cpu_init(Object *obj)
+     RISCVCPU *cpu = RISCV_CPU(obj);
+     CPURISCVState *env = &cpu->env;
  
- static const TypeInfo virt_machine_typeinfo = {
--    .name       = MACHINE_TYPE_NAME("virt"),
-+    .name       = TYPE_RISCV_VIRT_MACHINE,
-     .parent     = TYPE_MACHINE,
-     .class_init = virt_machine_class_init,
-     .instance_init = virt_machine_instance_init,
-@@ -1790,6 +1793,7 @@ static const TypeInfo virt_machine_typeinfo = {
-     .instance_size = sizeof(RISCVVirtState),
-     .interfaces = (const InterfaceInfo[]) {
-          { TYPE_HOTPLUG_HANDLER },
-+         { TYPE_TARGET_SPECIFIC },
-          { }
-     },
- };
-diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
-index 36a2def4109..5559783aebb 100644
---- a/include/hw/riscv/virt.h
-+++ b/include/hw/riscv/virt.h
-@@ -30,7 +30,7 @@
- #define VIRT_SOCKETS_MAX_BITS          2
- #define VIRT_SOCKETS_MAX               (1 << VIRT_SOCKETS_MAX_BITS)
++    cpu->cfg.big_endian = target_big_endian();
++
+     env->misa_mxl = mcc->def->misa_mxl_max;
  
--#define TYPE_RISCV_VIRT_MACHINE MACHINE_TYPE_NAME("virt")
-+#define TYPE_RISCV_VIRT_MACHINE MACHINE_TYPE_NAME("riscv-virt")
- typedef struct RISCVVirtState RISCVVirtState;
- DECLARE_INSTANCE_CHECKER(RISCVVirtState, RISCV_VIRT_MACHINE,
-                          TYPE_RISCV_VIRT_MACHINE)
+ #ifndef CONFIG_USER_ONLY
 -- 
 2.52.0.windows.1
 
