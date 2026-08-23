@@ -4,121 +4,144 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D43A6C5DF9A
-	for <qemu-riscv@archiver.kernel.org>; Sun, 23 Aug 2026 15:20:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F2A0C5DF8C
+	for <qemu-riscv@archiver.kernel.org>; Sun, 23 Aug 2026 21:56:13 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wy9y6-0000Bl-Oa; Sun, 23 Aug 2026 11:18:42 -0400
+	id 1wyGAC-00066L-CT; Sun, 23 Aug 2026 17:55:36 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1wy9nh-0007OZ-Sf
- for qemu-riscv@nongnu.org; Sun, 23 Aug 2026 11:07:58 -0400
-Received: from mail-pj1-x102a.google.com ([2607:f8b0:4864:20::102a])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1wy9ng-0008Gf-B0
- for qemu-riscv@nongnu.org; Sun, 23 Aug 2026 11:07:57 -0400
-Received: by mail-pj1-x102a.google.com with SMTP id
- 98e67ed59e1d1-38dcbade417so2914986a91.1
- for <qemu-riscv@nongnu.org>; Sun, 23 Aug 2026 08:07:55 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1wyGA9-00062n-Ty
+ for qemu-riscv@nongnu.org; Sun, 23 Aug 2026 17:55:33 -0400
+Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1wyGA7-0000oG-Do
+ for qemu-riscv@nongnu.org; Sun, 23 Aug 2026 17:55:33 -0400
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 67NLRrRu580911
+ for <qemu-riscv@nongnu.org>; Sun, 23 Aug 2026 21:55:27 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ Wkw9HatbFsxkw0XYl4HUff3BaEy9yXEfq3H1nmw3SeQ=; b=BcBrvlB/4rGmUf0d
+ 02pkZkMq8JCmDBCHc6hGpHAcSppI3bNgLP9xh0n4qCASels3G8084PwnvR25AFPl
+ 6hwmbtOnEQ5nuNF89MC63WuUnxD8/2J3yCi4tMt6DfMvUk3k3va9AWVeBTzaGQHY
+ CFFcAN+FQwY01YTwiUb8Ym0lFShKhnMEMvp3VzhZlPTXmSECIuu9rC7hWC8c9xut
+ cyV3FsiLI7WtT9tQ6CBJ/wC13DvZNUPGZ9UnPaBzKUke5mjNGBBoi8cyBqe3zMWt
+ hSLhpQwSdA3sRNkZMbtRu/3EHlT6esaJXvOeQn70LwckfVIUn2NdG3jg6bsUjl9j
+ 1rTYUw==
+Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com
+ [209.85.160.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g7456vn6n-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Sun, 23 Aug 2026 21:55:27 +0000 (GMT)
+Received: by mail-qt1-f199.google.com with SMTP id
+ d75a77b69052e-51c01ff996dso30752421cf.2
+ for <qemu-riscv@nongnu.org>; Sun, 23 Aug 2026 14:55:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1787497675; x=1788102475; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=IukQGcRHMsVbGXSG1mzI1R3dLtKOyYm2L7shctiJxkE=;
- b=buZO2k8g1g8cot/lybL9HqL7zbANnNDCB4c3EQT9FRSCeJbW5yD3Ip7jv0mIi3JwOS
- XgtMIz/g0y4JRhjGwKdf/CVG1RUUr3fEmd9+f4ZJJ1bmzByHWUFmgo0p3v3oZUBh8hbc
- xZVBUR0xuJblqNvTAYgDQIuPQcyKmqT0pzldzBarEXWzXfRwv2aOLBY1h09aM+JTdQTM
- xEdLEVnwFu+28dt1qiUUnbWXnwLV/FvxgF7zEKoN6J1ktJ6hPmzNtPaIKaeiX1/OGSwg
- /gBKQ7mb0yLZPieQnkyxCuQwOG5I7u9ATXey+nRJqgdkRVujj9DmLo3gGao1ov9ofGH+
- qRIQ==
+ d=oss.qualcomm.com; s=google; t=1787522127; x=1788126927; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=Wkw9HatbFsxkw0XYl4HUff3BaEy9yXEfq3H1nmw3SeQ=;
+ b=BmE/EJs5NTsDe/KytCBZmzaP8DMCX7qeRKjkUo6P1Sa/8dSQBR6OjprHhKKgs8aMy3
+ OJEi+5rsfvJQUstExTzptPXCm1lM0X2UgM/j2FJE4Rcmjko58GFBDLbJrAC/kaymMiho
+ E5i1wZwfURJt7bYEnnFMpUfLhLs//aDo1bmYnDegRFBEBrbrg9nr3Gj0IEWVSn2AKLdt
+ p96jhffVIguSUiDyE3JpzKNyCKPJdLcaOr5wYwKw+gKYqHRo1IeBop2ZqfNpjvA5hHrj
+ fxnQw50bWlbLyE2AI/O7azBqLxDoYcU4kb69zWIjAcnG4T7BqPUBjI9+6aaitgJEPx/j
+ uxfw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787497675; x=1788102475;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=IukQGcRHMsVbGXSG1mzI1R3dLtKOyYm2L7shctiJxkE=;
- b=E+dHCeNIZrY02HMMcp6QfMDHfL96u4dmp0h4PjNtqlaJ9uMus+xs4YO+79TJoyPSoM
- 2nZVQ+jVli+HUyMS3D70TqmeOvn6KzoXnpTZ4dlJV+QTq1fKBo24uZ7VA4aiMzL5J+50
- 5062ESOhDA6hLEeUZq2qYsLFeTJ1e/gW6/6PxGNDBSFyTOZrufZTBFDOf+unpEc3FC7A
- ozZwHp8EvlGjazmMdtHTk9yi7/xWi7TnX2R1+Oh+NnEe84A5j/u5oMyHtgUKZh1B+U71
- A+hpka2czsbLSTs7ijruPb/xFrmHg+kgfX+tJ33WddCnVa6ow+wKNcghBIcykFVB1pcW
- qJjQ==
+ d=1e100.net; s=20251104; t=1787522127; x=1788126927;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=Wkw9HatbFsxkw0XYl4HUff3BaEy9yXEfq3H1nmw3SeQ=;
+ b=CGWtMgGH6cQCbNZhiJ3ZRbfwsTkWX1VL6n8K/L9VCuy5K50IZZzu423vWoktSeTo1t
+ 4+CORMjL8PKH8VyJKVccSVorDRWPuOLLLh25j2q0sMgu0ZQSMotHp4YlNvhQewSFp7Si
+ COTHgujoTaeoYTw9Bfv+Ave9mco2jvvdMu/1nOXLqx4Oa1eonpYZlXk9uHNVeOiTXFvR
+ sctlPuZyfqFzkBySMySJhn/CmEayKWsHjIP1r/RvDF49xaorv7sun/iJgXeq8TvKxxsA
+ DJSt4OeKIO0BxZRCvmwJIE0MzhMJSl8nP9RaMg5/1cWipLtySvp464QXamVvBsI+ySka
+ MTDA==
 X-Forwarded-Encrypted: i=1;
- AHgh+Rq6cEFVnNbAM9VqJLssxurZdv/8EiuvUTnZAnGCeKhfUvVy/1kmGg5c+CpAxY8BQYusUR97tqT/b5my@nongnu.org
-X-Gm-Message-State: AFuF++n2iYomdBpWKdEb0nRYwUi2qU0gPJfDAwoGUdmoeHh+oVWX3Lzb
- E5VNuEH7o7TQQiUTl41/icxzvqRgJv7y2ZGsyXZ2cGCGrZM4YQn32uec
-X-Gm-Gg: AR+sD12/HwJyuIb43otL67FMrIl9FNYBKK4UeorlgaADJnSWV+kmcPnFFhM6HvigEI+
- I0xB7z8n2y2VtRrj6veWrihs2aGY3JsFyHAHxtobxXU3Tz7TiG1FTMJSFpt5WjBsTaw4vf+imcN
- 4f5u97fvUnKNEvukyILz1VEcfgQHpt1HfaCMeYHZEPuwcZaECGGN6LIAueaC9rXcNzCndNviXFs
- J/1MctI01+UXNB++AcOg+tsOyDGyPGJT4TNTlrond1jqe1k68F5HIBqQtbnheyYzFQP5IusZy7N
- 7DxZBQQCI05wXJ7IB4EdlzWQqyPZtePjW1crgWFUkWibvJ1+6XuFkYQWXFYizATRU2uKKozx4II
- SQKLINP467fmEZa3SmNYCnmD+7iadDF6+17BEaeZe1cNWdobvCaZI5JEpMr6fNBBkimNvwaVckv
- NdSkFQaz6n+Eefb2AnnTFFuwbR1sjQQWoK3jWQT+U4aqhILf+SfPuKaTK28X7VoEBtFZdK8b3nB
- zONdJPLPhs2LOzbJF/f4w==
-X-Received: by 2002:a17:90b:4484:b0:392:b509:b1a5 with SMTP id
- 98e67ed59e1d1-395c3552988mr30259195a91.14.1787497674881; 
- Sun, 23 Aug 2026 08:07:54 -0700 (PDT)
-Received: from WIN-BH9M8FJACR9 ([103.94.185.75])
- by smtp.googlemail.com with ESMTPSA id
- a92af1059eb24-1418619d6ecsm16024511c88.14.2026.08.23.08.07.46
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 23 Aug 2026 08:07:53 -0700 (PDT)
-From: Yonggang Luo <luoyonggang@gmail.com>
-To: qemu-devel@nongnu.org
-Cc: Xianglai Li <lixianglai@loongson.cn>,
- Alistair Francis <alistair.francis@wdc.com>,
- Chinmay Rath <rathc@linux.ibm.com>, Sunil V L <sunilvl@ventanamicro.com>,
- qemu-riscv@nongnu.org, Alexander Bulekov <alxndr@bu.edu>,
- Zhao Liu <zhao1.liu@intel.com>, Eric Farman <farman@linux.ibm.com>,
- Laurent Vivier <lvivier@redhat.com>,
- Peter Maydell <peter.maydell@linaro.org>,
- Chao Liu <chao.liu@processmission.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Song Gao <17746591750@163.com>,
- Harsh Prateek Bora <harshpb@linux.ibm.com>,
- Glenn Miles <milesg@linux.ibm.com>,
- =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
- qemu-s390x@nongnu.org, Jiaxun Yang <jiaxun.yang@flygoat.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@mailo.com>,
- "Michael S. Tsirkin" <mst@redhat.com>,
- Stefan Hajnoczi <stefanha@redhat.com>,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- David Hildenbrand <david@kernel.org>, qemu-ppc@nongnu.org,
- qemu-arm@nongnu.org, Igor Mammedov <imammedo@redhat.com>,
- Aleksandar Rikalo <arikalo@gmail.com>, Nicholas Piggin <npiggin@gmail.com>,
- Cornelia Huck <cohuck@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Ilya Leoshkevich <iii@linux.ibm.com>, Fabiano Rosas <farosas@suse.de>,
- Aurelien Jarno <aurelien@aurel32.net>, Paolo Bonzini <pbonzini@redhat.com>,
- Ani Sinha <anisinha@redhat.com>, Bibo Mao <maobibo@loongson.cn>,
- =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
- Matthew Rosato <mjrosato@linux.ibm.com>, Weiwei Li <liwei1518@gmail.com>,
- Darren Kenny <darren.kenny@oracle.com>
-Subject: [PATCH 01/12] accel: use a shared TYPE_ACCEL_CPU parent
-Date: Sun, 23 Aug 2026 23:07:19 +0800
-Message-ID: <20260823150731.896-2-luoyonggang@gmail.com>
-X-Mailer: git-send-email 2.52.0.windows.1
-In-Reply-To: <20260823150731.896-1-luoyonggang@gmail.com>
-References: <20260823150731.896-1-luoyonggang@gmail.com>
+ AHgh+RqgG8QcpYglnVM07hlkpDwQf2MJhRlJqq2dVLHZrOLrzM9JIFrxMXvndP4cWs9xDkt0qdtdL0flC40F@nongnu.org
+X-Gm-Message-State: AFuF++nfiIfZ3Pf7EdzAFDqXHZ3/7L8iDvtiMntirCNTfWbKqloJFRLk
+ J1GAxJm67EA7UqKgByp/c85Hwi8x42oTRgxO9H4migXBnkY8vZhGPJKQBffqAIhKOz1yZpR/zPx
+ 5F9nki0qPgPNDN6zUXveaXSh/ojJPXSnoGph/T4q2NuYBQmxaMFfbLWq+LQ==
+X-Gm-Gg: AR+sD12aEe3a+tYpel1iukg3YIn3752W8IjGRJS6Sc5alyLMmXnRTxFEYAYYHlzaIpo
+ OtaKqlWwiJSsAJ/gNUk5z+WQaFO5Zo9NnrN5A/UAxCnaSFwLG8qMaUcLsGBhRvh2eAGNkMjx1lO
+ ARkdA4jUF5pEccHiXP/3/MNHekHXAOvWPr8iXWE06ZeTY2bKujsb4dhJWQTitBVqhBV1WmchtdM
+ pt/rjLCSKUAfaZ7RPWKgnLid5R47bWKTVnODDg6MByH/UzZB5mmWtkG3at/k0x0aPdOwdqninjA
+ 979iPN2WhEP5PgfquxXq0/Fgx4EAVGm7KJcPp2ghKDY+BjIkj8Zy0Oo58yRWlG9BucS5RtUidoh
+ WBwF4uPEjl5oNdORRR99YOqJMFxzEag43PW3q
+X-Received: by 2002:ac8:5c81:0:b0:519:8998:661b with SMTP id
+ d75a77b69052e-52df5a08456mr230782251cf.20.1787522126674; 
+ Sun, 23 Aug 2026 14:55:26 -0700 (PDT)
+X-Received: by 2002:ac8:5c81:0:b0:519:8998:661b with SMTP id
+ d75a77b69052e-52df5a08456mr230781981cf.20.1787522126141; 
+ Sun, 23 Aug 2026 14:55:26 -0700 (PDT)
+Received: from [192.168.68.100] ([189.38.141.232])
+ by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-52e09975fbcsm35912341cf.4.2026.08.23.14.55.22
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 23 Aug 2026 14:55:25 -0700 (PDT)
+Message-ID: <75d038af-a1a0-460c-9fea-7cca0423a54c@oss.qualcomm.com>
+Date: Sun, 23 Aug 2026 18:55:20 -0300
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102a;
- envelope-from=luoyonggang@gmail.com; helo=mail-pj1-x102a.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3] riscv/virt: Add optional UART1
+To: Yanfeng Liu <yfliu2008@qq.com>, qemu-riscv@nongnu.org
+Cc: qemu-devel@nongnu.org, alistair.francis@wdc.com,
+ pierrick.bouvier@oss.qualcomm.com, sunilvl@ventanamicro.com,
+ palmer@dabbelt.com, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com,
+ chao.liu.zevorn@gmail.com
+References: <tencent_4EEBFC805F3E59863BEDC38094EF5A109206@qq.com>
+From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Content-Language: en-US
+In-Reply-To: <tencent_4EEBFC805F3E59863BEDC38094EF5A109206@qq.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODIzMDIwMSBTYWx0ZWRfXyYAkiKKRzRce
+ P4JfhOlF0uootdnRpiADqcIbTrYu8XrFAbYBMTdwOlSPIzDM7eZfMVyuuo6Sod5IB52bS1rA4l+
+ zpKvHGpFuGapuCb9Hi++4V9aewCd6ng=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODIzMDIwMSBTYWx0ZWRfX06Hxp6aBtfJ9
+ BFocQ+H9WFxEldMdUaE1WGw7k80avemuSF3l2gAUAVdYIKLr+VfkwOVI8c67dsIHcNTCLbPbQpm
+ PfxFMYseNMrDSPRkdAk3iwuHmxRqih365HGifsdna5pyf69fa73POJxP3e+HdTPF1H0LlclGDlF
+ Gac5Kz36zFeJR3S59wQSubzahhAXPaOx+c8yDrFM5PGsBLyJF3xwKolF2fwWSBPjyggctDvRQSQ
+ hWPOlZfPuphBuKpC4nh6wP4hbv62Dr2ZtWt6HQVDWVuDBiIhPtPAPyY51fIDqttdik4rVZdVoLZ
+ QvE5n0nYAsLoRDVAx0oXnUCf515mQvSGDdUWrrARCcCLtT5whqIfskeZL4djpAH+AuQWdh+DyOj
+ 7IjmyxPQ+Q6ZGLmaRWB8iB41ph4C1QU3/1/NMJtlBdiNS53YH/7HU4weqE7RyxVYgiHeMBvADF/
+ qPRuonKHNNGutVbpcqA==
+X-Authority-Analysis: v=2.4 cv=RtL16imK c=1 sm=1 tr=0 ts=6a8b6c4f cx=c_pps
+ a=WeENfcodrlLV9YRTxbY/uA==:117 a=MCIxunHWmQOg/5OnbzXZaw==:17
+ a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
+ a=dZbOZ2KzAAAA:8 a=umBbkq_vEPmigtP7UbEA:9 a=QEXdDO2ut3YA:10
+ a=kacYvNCVWA4VmyqE58fU:22
+X-Proofpoint-ORIG-GUID: WsigWMVtwAuCx0zc51RqrJpUbBXDysBN
+X-Proofpoint-GUID: WsigWMVtwAuCx0zc51RqrJpUbBXDysBN
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-23_07,2026-08-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 lowpriorityscore=0 adultscore=0 malwarescore=0 phishscore=0
+ impostorscore=0 priorityscore=1501 suspectscore=0 bulkscore=0 spamscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608230201
+Received-SPF: pass client-ip=205.220.180.131;
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Sun, 23 Aug 2026 11:18:31 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -133,93 +156,225 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-- TYPE_ACCEL_CPU was "accel-" CPU_RESOLVING_TYPE, so each arch compiled
-  a different parent (accel-arm-cpu, accel-riscv-cpu, ...). Common code
-  registered only one of those names from target_cpu_type() at
-  MODULE_INIT_QOM.
-- A combined binary still registers every linked AccelCPU subclass.
-  RISC-V tcg-accel-riscv-cpu has parent accel-riscv-cpu even when the
-  selected target is ARM, so the old one-parent type_init does not
-  cover the other family. Creating the parent in the subclass
-  register path would hide that, but it keeps per-arch parents that
-  AccelCPUClass does not need.
-- AccelCPUClass is arch-independent. The parent only supplies
-  class_size and ACCEL_CPU_CLASS(). Make TYPE_ACCEL_CPU the fixed
-  abstract type accel-cpu and register it once next to TYPE_ACCEL.
-- Leaf names still encode the CPU type so accel_init_cpu_interfaces()
-  can look up "<accel>-accel-" CPU_RESOLVING_TYPE (for example
-  tcg-accel-arm-cpu). ACCEL_CPU_NAME() keeps that string; it is no
-  longer derived from the parent type name.
-- Drop register_accel_target_type(). Subclasses keep
-  type_register_static() with .parent = TYPE_ACCEL_CPU.
 
-Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
----
- accel/accel-common.c             | 21 ++++++---------------
- include/accel/accel-cpu-target.h |  3 +--
- include/accel/accel-cpu.h        |  2 ++
- 3 files changed, 9 insertions(+), 17 deletions(-)
 
-diff --git a/accel/accel-common.c b/accel/accel-common.c
-index 00a400243f0..c4c365f38c7 100644
---- a/accel/accel-common.c
-+++ b/accel/accel-common.c
-@@ -126,21 +126,12 @@ static const TypeInfo accel_types[] = {
-         .instance_size  = sizeof(AccelState),
-         .abstract       = true,
-     },
-+    {
-+        .name           = TYPE_ACCEL_CPU,
-+        .parent         = TYPE_OBJECT,
-+        .abstract       = true,
-+        .class_size     = sizeof(AccelCPUClass),
-+    },
- };
- 
- DEFINE_TYPES(accel_types)
--
--static void register_accel_target_type(void)
--{
--    g_autofree char *name = g_strconcat("accel-", target_cpu_type(), NULL);
--    const TypeInfo accel_cpu_type = {
--        .name = name,
--        .parent = TYPE_OBJECT,
--        .abstract = true,
--        .class_size = sizeof(AccelCPUClass),
--    };
--
--    type_register_static(&accel_cpu_type);
--}
--
--type_init(register_accel_target_type);
-diff --git a/include/accel/accel-cpu-target.h b/include/accel/accel-cpu-target.h
-index 6feb344e29b..cf33ebd79fc 100644
---- a/include/accel/accel-cpu-target.h
-+++ b/include/accel/accel-cpu-target.h
-@@ -24,8 +24,7 @@
- #include "accel/accel-cpu.h"
- #include "cpu.h"
- 
--#define TYPE_ACCEL_CPU "accel-" CPU_RESOLVING_TYPE
--#define ACCEL_CPU_NAME(name) (name "-" TYPE_ACCEL_CPU)
-+#define ACCEL_CPU_NAME(name) (name "-accel-" CPU_RESOLVING_TYPE)
- DECLARE_CLASS_CHECKERS(AccelCPUClass, ACCEL_CPU, TYPE_ACCEL_CPU)
- 
- #endif /* ACCEL_CPU_H */
-diff --git a/include/accel/accel-cpu.h b/include/accel/accel-cpu.h
-index 9e7eede7c3c..5cfc2b24223 100644
---- a/include/accel/accel-cpu.h
-+++ b/include/accel/accel-cpu.h
-@@ -12,6 +12,8 @@
- #include "qom/object.h"
- #include "hw/core/cpu.h"
- 
-+#define TYPE_ACCEL_CPU "accel-cpu"
-+
- typedef struct AccelCPUClass {
-     ObjectClass parent_class;
- 
--- 
-2.52.0.windows.1
+On 7/17/2026 11:16 PM, Yanfeng Liu wrote:
+> This adds optional UART1 to RiscV virt board if required at
+> runtime to simplify multicore development.
+
+Can you please elaborate on the use case?  We can add multiple serial
+devices already.  E.g. this will add 4 serials:
+
+
+$ ./build/qemu-system-riscv64 -M virt --nodefaults \
+          -serial stdio \
+          -serial tcp::4444,server,nowait \
+          -serial pty  \
+          -serial file:uart4.log \
+          --nographic
+
+
+The difference here is that the additional serials won't have memory mappings
+and fdt nodes.
+
+
+Thanks,
+Daniel
+
+> 
+> Note that UART0 remains default serial_hd(0) and it is:
+> 
+> - the lowest address UART
+> - first serial in DTB
+> - behind /aliases/serial0 in DTB
+> - the /chosen/stdout-path in DTB
+> 
+> Note that UART1 is placed at different page from UART0 to
+> support page level isolation.
+> 
+> Signed-off-by: Yanfeng Liu <yfliu2008@qq.com>
+> ---
+>   docs/system/riscv/virt.rst |  5 ++++-
+>   hw/riscv/virt-acpi-build.c | 12 ++++++++----
+>   hw/riscv/virt.c            | 40 ++++++++++++++++++++++++++++----------
+>   include/hw/riscv/virt.h    |  3 +++
+>   4 files changed, 45 insertions(+), 15 deletions(-)
+> 
+> diff --git a/docs/system/riscv/virt.rst b/docs/system/riscv/virt.rst
+> index 60850970ce..45ac63ac77 100644
+> --- a/docs/system/riscv/virt.rst
+> +++ b/docs/system/riscv/virt.rst
+> @@ -16,7 +16,7 @@ The ``virt`` machine supports the following devices:
+>   * Core Local Interruptor (CLINT)
+>   * Platform-Level Interrupt Controller (PLIC)
+>   * CFI parallel NOR flash memory
+> -* 1 NS16550 compatible UART
+> +* Either 1 or 2 NS16550 compatible UARTs
+>   * 1 Google Goldfish RTC
+>   * 1 SiFive Test device
+>   * 8 virtio-mmio transport devices
+> @@ -27,6 +27,9 @@ The hypervisor extension has been enabled for the default CPU, so virtual
+>   machines with hypervisor extension can simply be used without explicitly
+>   declaring.
+>   
+> +The second UART only exists if a backend is configured explicitly (e.g.
+> +with a second `-serial` command line option).
+> +
+>   Hardware configuration information
+>   ----------------------------------
+>   
+> diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
+> index 413d47d70e..597751c84a 100644
+> --- a/hw/riscv/virt-acpi-build.c
+> +++ b/hw/riscv/virt-acpi-build.c
+> @@ -169,11 +169,11 @@ static void acpi_dsdt_add_plic_aplic(Aml *scope, uint8_t socket_count,
+>   
+>   static void
+>   acpi_dsdt_add_uart(Aml *scope, const MemMapEntry *uart_memmap,
+> -                    uint32_t uart_irq)
+> +                    uint32_t uart_irq, int uartidx)
+>   {
+> -    Aml *dev = aml_device("COM0");
+> +    Aml *dev = aml_device("COM%d", uartidx);
+>       aml_append(dev, aml_name_decl("_HID", aml_string("RSCV0003")));
+> -    aml_append(dev, aml_name_decl("_UID", aml_int(0)));
+> +    aml_append(dev, aml_name_decl("_UID", aml_int(uartidx)));
+>   
+>       Aml *crs = aml_resource_template();
+>       aml_append(crs, aml_memory32_fixed(uart_memmap->base,
+> @@ -479,7 +479,11 @@ static void build_dsdt(GArray *table_data,
+>                                    memmap[VIRT_APLIC_S].size, "RSCV0002");
+>       }
+>   
+> -    acpi_dsdt_add_uart(scope, &memmap[VIRT_UART0], UART0_IRQ);
+> +    acpi_dsdt_add_uart(scope, &memmap[VIRT_UART0], UART0_IRQ, 0);
+> +    if (s->uart1_present) {
+> +        acpi_dsdt_add_uart(scope, &memmap[VIRT_UART1], UART1_IRQ, 1);
+> +    }
+> +
+>       if (virt_is_iommu_sys_enabled(s)) {
+>           acpi_dsdt_add_iommu_sys(scope, &memmap[VIRT_IOMMU_SYS], IOMMU_SYS_IRQ);
+>       }
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index 33775a61fd..4703ac58f8 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -96,6 +96,8 @@ static const MemMapEntry virt_memmap[] = {
+>       [VIRT_APLIC_S] =      {  0xd000000, APLIC_SIZE(VIRT_CPUS_MAX) },
+>       [VIRT_UART0] =        { 0x10000000,         0x100 },
+>       [VIRT_VIRTIO] =       { 0x10001000,        0x1000 },
+> +    /* UART1 supports page isolation from UART0 */
+> +    [VIRT_UART1] =        { 0x1000a000,         0x100 },
+>       [VIRT_FW_CFG] =       { 0x10100000,          0x18 },
+>       [VIRT_FLASH] =        { 0x20000000,     0x4000000 },
+>       [VIRT_IMSIC_M] =      { 0x24000000, VIRT_IMSIC_MAX_SIZE },
+> @@ -186,7 +188,8 @@ static void create_pcie_irq_map(RISCVVirtState *s, void *fdt, char *nodename,
+>                             FDT_MAX_INT_MAP_WIDTH] = {};
+>       uint32_t *irq_map = full_irq_map;
+>   
+> -    /* This code creates a standard swizzle of interrupts such that
+> +    /*
+> +     * This code creates a standard swizzle of interrupts such that
+>        * each device's first interrupt is based on it's PCI_SLOT number.
+>        * (See pci_swizzle_map_irq_fn())
+>        *
+> @@ -832,28 +835,38 @@ static void create_fdt_reset(RISCVVirtState *s, uint32_t *phandle)
+>   }
+>   
+>   static void create_fdt_uart(RISCVVirtState *s,
+> -                            uint32_t irq_mmio_phandle)
+> +                            uint32_t irq_mmio_phandle, int memId, int irqNo)
+>   {
+>       g_autofree char *name = NULL;
+>       MachineState *ms = MACHINE(s);
+>   
+>       name = g_strdup_printf("/soc/serial@%"HWADDR_PRIx,
+> -                           s->memmap[VIRT_UART0].base);
+> +                           s->memmap[memId].base);
+>       qemu_fdt_add_subnode(ms->fdt, name);
+>       qemu_fdt_setprop_string(ms->fdt, name, "compatible", "ns16550a");
+>       qemu_fdt_setprop_sized_cells(ms->fdt, name, "reg",
+> -                                 2, s->memmap[VIRT_UART0].base,
+> -                                 2, s->memmap[VIRT_UART0].size);
+> +                                 2, s->memmap[memId].base,
+> +                                 2, s->memmap[memId].size);
+>       qemu_fdt_setprop_cell(ms->fdt, name, "clock-frequency", 3686400);
+>       qemu_fdt_setprop_cell(ms->fdt, name, "interrupt-parent", irq_mmio_phandle);
+>       if (s->aia_type == VIRT_AIA_TYPE_NONE) {
+> -        qemu_fdt_setprop_cell(ms->fdt, name, "interrupts", UART0_IRQ);
+> +        qemu_fdt_setprop_cell(ms->fdt, name, "interrupts", irqNo);
+>       } else {
+> -        qemu_fdt_setprop_cells(ms->fdt, name, "interrupts", UART0_IRQ, 0x4);
+> +        qemu_fdt_setprop_cells(ms->fdt, name, "interrupts", irqNo, 0x4);
+> +    }
+> +
+> +    if (VIRT_UART0 == memId) {
+> +        qemu_fdt_setprop_string(ms->fdt, "/chosen", "stdout-path", name);
+> +        qemu_fdt_setprop_string(ms->fdt, "/aliases", "serial0", name);
+>       }
+> +}
+>   
+> -    qemu_fdt_setprop_string(ms->fdt, "/chosen", "stdout-path", name);
+> -    qemu_fdt_setprop_string(ms->fdt, "/aliases", "serial0", name);
+> +static void create_fdt_uarts(RISCVVirtState *s, uint32_t irq_mmio_phandle)
+> +{
+> +    if (s->uart1_present) {
+> +        create_fdt_uart(s, irq_mmio_phandle, VIRT_UART1, UART1_IRQ);
+> +    }
+> +    create_fdt_uart(s, irq_mmio_phandle, VIRT_UART0, UART0_IRQ);
+>   }
+>   
+>   static void create_fdt_rtc(RISCVVirtState *s,
+> @@ -1023,7 +1036,7 @@ static void finalize_fdt(RISCVVirtState *s)
+>   
+>       create_fdt_reset(s, &phandle);
+>   
+> -    create_fdt_uart(s, irq_mmio_phandle);
+> +    create_fdt_uarts(s, irq_mmio_phandle);
+>   
+>       create_fdt_rtc(s, irq_mmio_phandle);
+>   }
+> @@ -1567,6 +1580,13 @@ static void virt_machine_init(MachineState *machine)
+>           0, qdev_get_gpio_in(mmio_irqchip, UART0_IRQ), 399193,
+>           serial_hd(0), DEVICE_LITTLE_ENDIAN);
+>   
+> +    if (serial_hd(1)) {
+> +        serial_mm_init(system_memory, s->memmap[VIRT_UART1].base,
+> +            0, qdev_get_gpio_in(mmio_irqchip, UART1_IRQ), 399193,
+> +            serial_hd(1), DEVICE_LITTLE_ENDIAN);
+> +        s->uart1_present = true;
+> +    }
+> +
+>       sysbus_create_simple("goldfish_rtc", s->memmap[VIRT_RTC].base,
+>           qdev_get_gpio_in(mmio_irqchip, RTC_IRQ));
+>   
+> diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
+> index 18a2a323a3..7d57c8292e 100644
+> --- a/include/hw/riscv/virt.h
+> +++ b/include/hw/riscv/virt.h
+> @@ -59,6 +59,7 @@ struct RISCVVirtState {
+>       int aia_guests;
+>       char *oem_id;
+>       char *oem_table_id;
+> +    bool uart1_present;
+>       OnOffAuto acpi;
+>       const MemMapEntry *memmap;
+>       struct GPEXHost *gpex_host;
+> @@ -78,6 +79,7 @@ enum {
+>       VIRT_APLIC_S,
+>       VIRT_UART0,
+>       VIRT_VIRTIO,
+> +    VIRT_UART1,
+>       VIRT_FW_CFG,
+>       VIRT_IMSIC_M,
+>       VIRT_IMSIC_S,
+> @@ -93,6 +95,7 @@ enum {
+>   enum {
+>       UART0_IRQ = 10,
+>       RTC_IRQ = 11,
+> +    UART1_IRQ = 12,
+>       VIRTIO_IRQ = 1, /* 1 to 8 */
+>       VIRTIO_COUNT = 8,
+>       PCIE_IRQ = 0x20, /* 32 to 35 */
 
 
