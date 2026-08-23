@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C5E3C5DF97
-	for <qemu-riscv@archiver.kernel.org>; Sun, 23 Aug 2026 15:19:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF0E4C5DF97
+	for <qemu-riscv@archiver.kernel.org>; Sun, 23 Aug 2026 15:19:24 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wy9y8-0000Fu-EP; Sun, 23 Aug 2026 11:18:44 -0400
+	id 1wy9y3-0008U2-EA; Sun, 23 Aug 2026 11:18:39 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1wy9oe-0007qQ-EN
- for qemu-riscv@nongnu.org; Sun, 23 Aug 2026 11:08:56 -0400
-Received: from mail-pg1-x52d.google.com ([2607:f8b0:4864:20::52d])
+ id 1wy9nq-0007RD-VA
+ for qemu-riscv@nongnu.org; Sun, 23 Aug 2026 11:08:06 -0400
+Received: from mail-pj1-x102f.google.com ([2607:f8b0:4864:20::102f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1wy9ob-00007G-8V
- for qemu-riscv@nongnu.org; Sun, 23 Aug 2026 11:08:56 -0400
-Received: by mail-pg1-x52d.google.com with SMTP id
- 41be03b00d2f7-c9d1fff21edso2083025a12.1
- for <qemu-riscv@nongnu.org>; Sun, 23 Aug 2026 08:08:52 -0700 (PDT)
+ id 1wy9np-0008KO-CU
+ for qemu-riscv@nongnu.org; Sun, 23 Aug 2026 11:08:06 -0400
+Received: by mail-pj1-x102f.google.com with SMTP id
+ 98e67ed59e1d1-39266382df6so2011903a91.3
+ for <qemu-riscv@nongnu.org>; Sun, 23 Aug 2026 08:08:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1787497732; x=1788102532; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1787497684; x=1788102484; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=eug6luKp4bq+h2AS/jTlsfDJn7/9afiJb85NExHjGfA=;
- b=iTvTDkklngoW+3qfpMTocSP5fbe/nFxt1QmNOk3q7HassFDD5YbvCBbgkImYZXRsS+
- iEKsccxATFIQz6HoXPl4HE/Ohhy393+6cy1N1btP3rtoD7tdLEiVKvidOmfJ+faJ7xAV
- GFUIvTzek0xwgIeZan1/nSbdX80bTjtEKPF6IAhyowF/6uY0WQoaDYCmBQNizy9AuZvp
- WiDdPWBBS7Yob6nOXLlNQh/zYNjZtR1+udaDw7c/pGXZ56vC/S8Ob5DTC0J4PCXIDDgn
- eQz6q8BSZHUzKBl1AsD/07RSaDOCwVR68+xXDk2rZovpmPi+sTQSQq0Tsskkf9NOUoJK
- 3/Vg==
+ bh=ySPa6h2ifrYJcA6pQJgvXQ8WNCjDkVVB+L9hgfcGq1Y=;
+ b=h5HjiKu9/FE1JZpnGIPt+zwVwuYMgjahJIZKOgJdymhCMC1PzOy6IpLcqrv1dplge4
+ mebmgellNfLjjSkas2FRr+z7CmjGJnPu9UwJpudHQ/WO3iTKefMXXzlPTbkCiR5UWP6t
+ NJs4Ftxko8ShIBBP6nl+xF9Bg/BmOCbLx69HU8hMBP1kc1B4z/VoaHyl3ou/zR5wZrXt
+ ulykdFmQ2LLfxFoydAilip49XzCGpXXulz+Z6dx+byK+qjclOGguNB0FvaMJjmBu1ZrS
+ aNaKkeyhfCFTXTekhimQ+vbEXWq2UYR3XPd9WbwzDiqmReH2btYqP/EbH0C3nCzIEuy6
+ dDYw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787497732; x=1788102532;
+ d=1e100.net; s=20251104; t=1787497684; x=1788102484;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=eug6luKp4bq+h2AS/jTlsfDJn7/9afiJb85NExHjGfA=;
- b=HSPQGQIgwdw17kr/0g9azD92VPih+eJbDooa5rxPsfPCMwe3RVgB+kyWyvbERWlhXN
- ZPZ4oHcvuFjy9Twv7YIvE/tbB/N7a2BauF99b2G/Vy3wOUyQvf+X3L186xtIf1cgDBvu
- YHDdYDFcVrPHtOdJMUtbegUHaLzprcGZvaqeuM3bYh/5d9pNxkRoJz0o296THt5fyL8B
- UOw13KQv9oQMZUWG4KyHAmkLhv6NHztEp9uYwXTDFKk6aCgQElVmyeQdnMsEXMMb5+fk
- gUag9YJ/UVnVhlCjdguY0fzrCQroqd1DyK12A05ksCmQzgjy+eGPPnBavGhGWAyDUHOk
- 9dbw==
+ bh=ySPa6h2ifrYJcA6pQJgvXQ8WNCjDkVVB+L9hgfcGq1Y=;
+ b=WI4XeD9i/xRf7Jh2rQFZmddnMmBLaI8yxNEK6px9g9nnQI3U2uY2It45eXkl7FYzlb
+ Q8+jm2QQdH0dGeUcz+gBy/AgWAjZIkJAAKVHaVGX8iXP0V9bsqlZ6c7efJ15omqQXSqG
+ vVJ/kdrtp9dz0e3RQC8+CGFO4yBagfhEunZXyyVtfmZ2VyMq7GsizhwHcNwuLrHY8tq8
+ QWNTXhOYVNg5Q45jYvQ+b2POP10PbUj14KRT4CNAO2YQipONCEpo3N7KUyuw263UVqLv
+ xZy9jLbzbo/00uXwZJWcRSJtx4MMNN1wvNiGPWyJJgfASvf6btHO3o8JT/9ilUundDnm
+ CV/g==
 X-Forwarded-Encrypted: i=1;
- AHgh+RpL/eECCEmb6q8H0NuJklCCEH6za7PkZYa704vI46kUEw2BBaQap7Tkf61kIurJzuUVINYVheMM5R3V@nongnu.org
-X-Gm-Message-State: AFuF++mNX5jGy9tYo7BmaPL9uz3/yoZaAZy8tp71l2NwYIVTHIfIP2Rp
- FLMrVt5p0c6B4xNBu0plWtTTFg1rRkTvQxUUAyJTSIUTGom+Abacz1cj
-X-Gm-Gg: AR+sD12GhBrJnKGS9/yf9e0ShpM+XjyNCHssoKUOd7vhspfYgOS8TU5HGIYHviZk0QB
- LB2Yk30pHP6q+7gz4ST8kiu8RvtkVJP+eeXTuldR4NNvMB6U8davA83zhYWfneaWMcWxHiVEEVw
- qKWNxKlDP/uZOmEqAH1FOZ2pPD4TiJjJHhq3LauPgJjPhztw2GRQGDv3KEMkvAU4FS+AI65lhKJ
- O4buovsDFpWIoooztFianpMPu4397FrC6UGGCpxfmmS9pUrM2qaciJZTIltgfWZGZYH2qD6GhKs
- ews1uTHGQGZciziLY+22AyaiXs2USVRlUSxyVAYEJgszfs5ICl+1Dn59Dm0nt3W0ff1aULY973F
- gSaon9mcQVnhncR9lIhSYh83B3CdBVseVYoIlzYxWO3BRJkqan/S2eMrikps8OMu5Y9hT4A1Jxi
- JhVzKfXrWs3jcKpWCDdMvqr/ECy+/zzLjUH8d64SAKyCtkdtA0C0M3dh2IINrGqPKIH+Yy253UY
- kR0/DEeuxcTZqqHFYmXLA==
-X-Received: by 2002:a17:90b:1c0a:b0:395:4290:46e0 with SMTP id
- 98e67ed59e1d1-395c336c815mr31577808a91.5.1787497731789; 
- Sun, 23 Aug 2026 08:08:51 -0700 (PDT)
+ AHgh+RoQIiTjGzJw6u7d/9geY0+xh8b147CYkyIIa4MI1p2JXFo2LAi9l2oqieifS6JeGGjLhlLTlyLKa2vt@nongnu.org
+X-Gm-Message-State: AFuF++lIBYExX5C2yHFvU4MUrLyP9O5zfsAljL11+nkEP4RYQ8JzVsmu
+ 2PhMHjZbS4CmQSgH+k6xJ2KyTAZIlFeTZwQcw7dnErIDjMJl9V3lTFWH
+X-Gm-Gg: AR+sD121AezhG0ECarG8BZVqQVOpKEoSfAie05ZpYyMfJVTpcAhYvpykVCjlEqV1OeS
+ kpzo7rPwHf9m8Sf2PutalcuK8h4100Y4B56GB7SuBpfcj9WTEqJZJnebxmHcZzbBW2b4eCMc/DU
+ +U6PTF52KZm0a9prqJtdFlQCt8JcSOLnENB+gZjAfjgCjoc4gSsuPn5Tdab8c+wiQ08PGEM0OmT
+ B64bZ/aFnLzfQMiqaBQs9Ye6LuYmVRELY8ycA4KdMqv4Snl32z7Ps8V9g7IwAUM/cV0U2sRF6jL
+ YdWU5/EyAx0pc9sj4g9RUrwEQfJ6Nqhxl4JQudOiyW2AAQVukVQgkzqIuRcB/kbBWQSYs19ORrS
+ jUvWtBycwMnuCuU3yS7oHxzlAxZvp2YWUft2ilH1TjHFSc5G4oW36YRuMue/a/cYtnFbUuKCHiD
+ dp2SCqq+3eZ65AyFZqkg4O22aqGT6TxvsqfIACNxLUtzC3IFV4HVq/OzFYQIyIM9q/769+UoUKt
+ /t2TNPZBLKHP81Aj9NVtjPjkPg1BYCy
+X-Received: by 2002:a17:90b:3902:b0:395:bbfe:fc6f with SMTP id
+ 98e67ed59e1d1-395c333710emr32506801a91.3.1787497683982; 
+ Sun, 23 Aug 2026 08:08:03 -0700 (PDT)
 Received: from WIN-BH9M8FJACR9 ([103.94.185.75])
  by smtp.googlemail.com with ESMTPSA id
- a92af1059eb24-1418619d6ecsm16024511c88.14.2026.08.23.08.08.43
+ a92af1059eb24-1418619d6ecsm16024511c88.14.2026.08.23.08.07.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 23 Aug 2026 08:08:51 -0700 (PDT)
+ Sun, 23 Aug 2026 08:08:02 -0700 (PDT)
 From: Yonggang Luo <luoyonggang@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: Xianglai Li <lixianglai@loongson.cn>,
@@ -100,17 +100,16 @@ Cc: Xianglai Li <lixianglai@loongson.cn>,
  =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
  Matthew Rosato <mjrosato@linux.ibm.com>, Weiwei Li <liwei1518@gmail.com>,
  Darren Kenny <darren.kenny@oracle.com>
-Subject: [PATCH 07/12] target/riscv: uniquify TCG crc32, crc32c,
- and wfi helper names
-Date: Sun, 23 Aug 2026 23:07:25 +0800
-Message-ID: <20260823150731.896-8-luoyonggang@gmail.com>
+Subject: [PATCH 02/12] hw/riscv/virt: use unique QOM name and target filter
+Date: Sun, 23 Aug 2026 23:07:20 +0800
+Message-ID: <20260823150731.896-3-luoyonggang@gmail.com>
 X-Mailer: git-send-email 2.52.0.windows.1
 In-Reply-To: <20260823150731.896-1-luoyonggang@gmail.com>
 References: <20260823150731.896-1-luoyonggang@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52d;
- envelope-from=luoyonggang@gmail.com; helo=mail-pg1-x52d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102f;
+ envelope-from=luoyonggang@gmail.com; helo=mail-pj1-x102f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -134,111 +133,69 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-- ARM already exports helper_crc32, helper_crc32c, helper_wfi, and the
-  matching helper_info_* objects. RISC-V used the same DEF_HELPER names,
-  which collide in a combined qemu-system link.
-- Rename the RISC-V helpers to riscv_crc32, riscv_crc32c, and riscv_wfi
-  so the generated C symbols are unique without meson -D prefixes.
+- Set TYPE_RISCV_VIRT_MACHINE to MACHINE_TYPE_NAME("riscv-virt") so
+  RISC-V virt no longer collides with ARM virt-machine in one process.
+- Register TYPE_TARGET_SPECIFIC with is_available = target_base_riscv.
+- Keep -machine virt via mc->alias after the selected target is applied.
 
 Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
 ---
- target/riscv/helper.h                              | 6 +++---
- target/riscv/tcg/bitmanip_helper.c                 | 4 ++--
- target/riscv/tcg/insn_trans/trans_privileged.c.inc | 2 +-
- target/riscv/tcg/insn_trans/trans_xlrbr.c.inc      | 4 ++--
- target/riscv/tcg/op_helper.c                       | 2 +-
- 5 files changed, 9 insertions(+), 9 deletions(-)
+ hw/riscv/virt.c         | 6 +++++-
+ include/hw/riscv/virt.h | 2 +-
+ 2 files changed, 6 insertions(+), 2 deletions(-)
 
-diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-index 542b7c264fc..dd4623d2a79 100644
---- a/target/riscv/helper.h
-+++ b/target/riscv/helper.h
-@@ -84,8 +84,8 @@ DEF_HELPER_FLAGS_1(unzip, TCG_CALL_NO_RWG_SE, tl, tl)
- DEF_HELPER_FLAGS_1(zip, TCG_CALL_NO_RWG_SE, tl, tl)
- DEF_HELPER_FLAGS_2(xperm4, TCG_CALL_NO_RWG_SE, tl, tl, tl)
- DEF_HELPER_FLAGS_2(xperm8, TCG_CALL_NO_RWG_SE, tl, tl, tl)
--DEF_HELPER_FLAGS_2(crc32, TCG_CALL_NO_RWG_SE, tl, tl, tl)
--DEF_HELPER_FLAGS_2(crc32c, TCG_CALL_NO_RWG_SE, tl, tl, tl)
-+DEF_HELPER_FLAGS_2(riscv_crc32, TCG_CALL_NO_RWG_SE, tl, tl, tl)
-+DEF_HELPER_FLAGS_2(riscv_crc32c, TCG_CALL_NO_RWG_SE, tl, tl, tl)
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index 2d242ef71a5..1b672b2169d 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -22,6 +22,7 @@
+ #include "qemu/units.h"
+ #include "qemu/error-report.h"
+ #include "qemu/guest-random.h"
++#include "qemu/target-info.h"
+ #include "qapi/error.h"
+ #include "hw/core/boards.h"
+ #include "hw/core/loader.h"
+@@ -1718,7 +1719,9 @@ static void virt_machine_class_init(ObjectClass *oc, const void *data)
+     MachineClass *mc = MACHINE_CLASS(oc);
+     HotplugHandlerClass *hc = HOTPLUG_HANDLER_CLASS(oc);
  
- /* Floating Point - Half Precision */
- DEF_HELPER_FLAGS_3(fadd_h, TCG_CALL_NO_RWG, i64, env, i64, i64)
-@@ -135,7 +135,7 @@ DEF_HELPER_1(sret, tl, env)
- DEF_HELPER_1(mret, tl, env)
- DEF_HELPER_1(mnret, tl, env)
- DEF_HELPER_1(ctr_clear, void, env)
--DEF_HELPER_1(wfi, void, env)
-+DEF_HELPER_1(riscv_wfi, void, env)
- DEF_HELPER_1(wrs_nto, void, env)
- DEF_HELPER_1(tlb_flush, void, env)
- DEF_HELPER_1(tlb_flush_all, void, env)
-diff --git a/target/riscv/tcg/bitmanip_helper.c b/target/riscv/tcg/bitmanip_helper.c
-index 1156a87dd31..18ad2fae1c9 100644
---- a/target/riscv/tcg/bitmanip_helper.c
-+++ b/target/riscv/tcg/bitmanip_helper.c
-@@ -132,7 +132,7 @@ target_ulong HELPER(xperm8)(target_ulong rs1, target_ulong rs2)
-     return do_xperm(rs1, rs2, 3);
++    TARGET_SPECIFIC_CLASS(oc)->is_available = target_base_riscv;
+     mc->desc = "RISC-V VirtIO board";
++    mc->alias = "virt";
+     mc->init = virt_machine_init;
+     mc->max_cpus = VIRT_CPUS_MAX;
+     mc->default_cpu_type = TYPE_RISCV_CPU_BASE;
+@@ -1782,7 +1785,7 @@ static void virt_machine_class_init(ObjectClass *oc, const void *data)
  }
  
--target_ulong HELPER(crc32)(target_ulong rs1, target_ulong sz)
-+target_ulong HELPER(riscv_crc32)(target_ulong rs1, target_ulong sz)
- {
-     for (target_ulong i = 0; i < sz; i++) {
-         rs1 = crc32_table[rs1 & 0xFF] ^ (rs1 >> 8);
-@@ -141,7 +141,7 @@ target_ulong HELPER(crc32)(target_ulong rs1, target_ulong sz)
-     return rs1;
- }
+ static const TypeInfo virt_machine_typeinfo = {
+-    .name       = MACHINE_TYPE_NAME("virt"),
++    .name       = TYPE_RISCV_VIRT_MACHINE,
+     .parent     = TYPE_MACHINE,
+     .class_init = virt_machine_class_init,
+     .instance_init = virt_machine_instance_init,
+@@ -1790,6 +1793,7 @@ static const TypeInfo virt_machine_typeinfo = {
+     .instance_size = sizeof(RISCVVirtState),
+     .interfaces = (const InterfaceInfo[]) {
+          { TYPE_HOTPLUG_HANDLER },
++         { TYPE_TARGET_SPECIFIC },
+          { }
+     },
+ };
+diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
+index 36a2def4109..5559783aebb 100644
+--- a/include/hw/riscv/virt.h
++++ b/include/hw/riscv/virt.h
+@@ -30,7 +30,7 @@
+ #define VIRT_SOCKETS_MAX_BITS          2
+ #define VIRT_SOCKETS_MAX               (1 << VIRT_SOCKETS_MAX_BITS)
  
--target_ulong HELPER(crc32c)(target_ulong rs1, target_ulong sz)
-+target_ulong HELPER(riscv_crc32c)(target_ulong rs1, target_ulong sz)
- {
-     for (target_ulong i = 0; i < sz; i++) {
-         rs1 = crc32c_table[rs1 & 0xFF] ^ (rs1 >> 8);
-diff --git a/target/riscv/tcg/insn_trans/trans_privileged.c.inc b/target/riscv/tcg/insn_trans/trans_privileged.c.inc
-index a8eaccef67e..0df78e89745 100644
---- a/target/riscv/tcg/insn_trans/trans_privileged.c.inc
-+++ b/target/riscv/tcg/insn_trans/trans_privileged.c.inc
-@@ -144,7 +144,7 @@ static bool trans_wfi(DisasContext *ctx, arg_wfi *a)
- #ifndef CONFIG_USER_ONLY
-     decode_save_opc(ctx, 0);
-     gen_update_pc(ctx, ctx->cur_insn_len);
--    gen_helper_wfi(tcg_env);
-+    gen_helper_riscv_wfi(tcg_env);
-     return true;
- #else
-     return false;
-diff --git a/target/riscv/tcg/insn_trans/trans_xlrbr.c.inc b/target/riscv/tcg/insn_trans/trans_xlrbr.c.inc
-index 01da2b6ce1d..795231f0839 100644
---- a/target/riscv/tcg/insn_trans/trans_xlrbr.c.inc
-+++ b/target/riscv/tcg/insn_trans/trans_xlrbr.c.inc
-@@ -29,11 +29,11 @@ static bool gen_crc(DisasContext *ctx, arg_r2 *a,
- #define TRANS_CRC32(NAME, SIZE) \
-     static bool trans_crc32_##NAME(DisasContext *ctx, arg_r2 *a) \
-     { if (SIZE == 8) { REQUIRE_64BIT(ctx); }; \
--      return gen_crc(ctx, a, gen_helper_crc32, tcg_constant_tl(SIZE)); }
-+      return gen_crc(ctx, a, gen_helper_riscv_crc32, tcg_constant_tl(SIZE)); }
- #define TRANS_CRC32C(NAME, SIZE) \
-     static bool trans_crc32c_##NAME(DisasContext *ctx, arg_r2 *a) \
-     { if (SIZE == 8) { REQUIRE_64BIT(ctx); }; \
--      return gen_crc(ctx, a, gen_helper_crc32c, tcg_constant_tl(SIZE)); }
-+      return gen_crc(ctx, a, gen_helper_riscv_crc32c, tcg_constant_tl(SIZE)); }
- 
- TRANS_CRC32(b, 1);
- TRANS_CRC32(h, 2);
-diff --git a/target/riscv/tcg/op_helper.c b/target/riscv/tcg/op_helper.c
-index ba3c7da375a..52bcedc7c6e 100644
---- a/target/riscv/tcg/op_helper.c
-+++ b/target/riscv/tcg/op_helper.c
-@@ -541,7 +541,7 @@ void helper_ctr_clear(CPURISCVState *env)
-     riscv_ctr_clear(env);
- }
- 
--void helper_wfi(CPURISCVState *env)
-+void HELPER(riscv_wfi)(CPURISCVState *env)
- {
-     CPUState *cs = env_cpu(env);
-     bool rvs = riscv_has_ext(env, RVS);
+-#define TYPE_RISCV_VIRT_MACHINE MACHINE_TYPE_NAME("virt")
++#define TYPE_RISCV_VIRT_MACHINE MACHINE_TYPE_NAME("riscv-virt")
+ typedef struct RISCVVirtState RISCVVirtState;
+ DECLARE_INSTANCE_CHECKER(RISCVVirtState, RISCV_VIRT_MACHINE,
+                          TYPE_RISCV_VIRT_MACHINE)
 -- 
 2.52.0.windows.1
 
