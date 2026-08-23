@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2F1BC5DF81
-	for <qemu-riscv@archiver.kernel.org>; Sun, 23 Aug 2026 15:20:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A50CCC5DF97
+	for <qemu-riscv@archiver.kernel.org>; Sun, 23 Aug 2026 15:20:10 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wy9y7-0000Dz-AW; Sun, 23 Aug 2026 11:18:43 -0400
+	id 1wy9y9-0000IX-9i; Sun, 23 Aug 2026 11:18:45 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1wy9oA-0007Vv-8T
- for qemu-riscv@nongnu.org; Sun, 23 Aug 2026 11:08:26 -0400
-Received: from mail-pj1-x102b.google.com ([2607:f8b0:4864:20::102b])
+ id 1wy9pM-0001Gg-Rn
+ for qemu-riscv@nongnu.org; Sun, 23 Aug 2026 11:09:41 -0400
+Received: from mail-pg1-x52e.google.com ([2607:f8b0:4864:20::52e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1wy9o7-0008Qt-7Q
- for qemu-riscv@nongnu.org; Sun, 23 Aug 2026 11:08:25 -0400
-Received: by mail-pj1-x102b.google.com with SMTP id
- 98e67ed59e1d1-38759bcd877so3039208a91.2
- for <qemu-riscv@nongnu.org>; Sun, 23 Aug 2026 08:08:22 -0700 (PDT)
+ id 1wy9pJ-0000XQ-Ar
+ for qemu-riscv@nongnu.org; Sun, 23 Aug 2026 11:09:40 -0400
+Received: by mail-pg1-x52e.google.com with SMTP id
+ 41be03b00d2f7-cc11a30a259so2644103a12.3
+ for <qemu-riscv@nongnu.org>; Sun, 23 Aug 2026 08:09:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1787497702; x=1788102502; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1787497776; x=1788102576; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=xgwd4PX46ht/V2FaG2Y1aX4X+MdwT8hU946QKIfXeC8=;
- b=lwclP/5Hku1ENpAnvfm1Qa6qxnaecxARKKUSaZgRURZ9/vJWoiSyyTXEma4gVlNRg5
- Boi2d4awZ6V1TNeC4s6P73+h3IjuZiJ9a43mz6Toxa3lltibIH6IJdJhcU+xwvZFPrvS
- XEWqKDyWDWtvbavnjFjC/c2Y70zB51dY69qFw4vM4L1d0+mJIxEo7VeHlERx0IHTUXtk
- 80Syr31pDOb+jdkKPTBi9dbQBh/yF5dinHI/MM7qV7jyrxuvsoz/8+BmJDBScxW5juwb
- fVftGAeIECGl6nbsR7rtyx5Wx88Irn3dWEWy8CQMcTV+zQBuBpckSDAI+IZVv95LZOsw
- I9QQ==
+ bh=2qJkFOwtR18gPKYVYlQn+zI+QIFrhM1zHQf4VsVINkE=;
+ b=FzeCJLytqo2kjRVPmBe26Y3C+axTAvs0wDRFIc0YdIDpJmFtqu5RqGhXTJpaJ9oJzk
+ pNyfB3vOOze2CyDSxj0kBH5zCkObpiIvaMkDlrVienxwe2WJafcjFC65dWW23LXAsi+u
+ kgssTElpP2MMFyWIXP9fnPSg3p2eBI6oSo1uAzsAMaTVr6DmskS8MPwojOdhKkf5Jq0r
+ fKb8pOR3fWXwpCJV+3g2NPtHS0undJqdpoTbEZ/lRZN4iBeUIv3T1n9KbbIGN3vIdmMD
+ mRhBwDOrHqjDgahSXa/1Q4uz26Dbpw7f2WZ/Ee8b2jzDxqXB6qkgWd9aOizTqsE01vQH
+ RTgg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787497702; x=1788102502;
+ d=1e100.net; s=20251104; t=1787497776; x=1788102576;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=xgwd4PX46ht/V2FaG2Y1aX4X+MdwT8hU946QKIfXeC8=;
- b=WkjiVBNxheO92utopG+32TAGJqdjKLl7HCtXXueWh9SUdM4WvpsVAIZz4eb5RET+rS
- dALUYo9v3KDry2KuWTTc4NXlKkY5qICXfsUJDwi09EtngjomgfvFI92BmFqEXeSMUNdx
- MCfxRAEW5u7dOmYEjLgfkUms3oBT3ORK6mtOdVrZpNEmr1R/gfiHco0B3clxidmjB1s/
- ZR5rNmMd3pdfT0owPz9lQD2y5yg0jXG3YtfPqU51pEpcHGrcZhH19y3jNoLdQCGMuBiE
- YwkZxCxAp6YPYujpvKZufqOm1Pw+J/fpH4fm0qdSqzD6qgjE4u0cR5A7RQKES/FukcER
- DT2g==
+ bh=2qJkFOwtR18gPKYVYlQn+zI+QIFrhM1zHQf4VsVINkE=;
+ b=sHt2lF5h+KPMDDwiSW4NCcrlISRbFdr5PNbRjPf3zl5LIYiut0unQqa6paHOQX+JGc
+ v4O1Y47Hmj7QYsOk7P2G0e8tRoW2gx6gJ27sGmpFxujhIcNnVCzp8YtfIQr0uYlBaOx2
+ WwYhZ6/u4H+rt3uMvYf+XYChEenPh/Lxb/egRvRxNzGWx3nwfc/mLRjSqIAfDFslUEv2
+ FeHqcxsi7EXhx77ptaeouBL/sGPVHGqLLfZSF7v+JRVyY8f6iUID+rkXNcEG9qiQ+L6V
+ RuSHRGKEmy6ZHrTd0s+IyR4A9QKTgPrztGam0Ug6V3rBBdgdkywsAbk4qfA0AWKVgc7M
+ OkxA==
 X-Forwarded-Encrypted: i=1;
- AHgh+RpJ+0NxXdSevLQDSOf+Mip7Tve7QMP2ZUEt2i6JGQdCcckW0qsKnhqgVW9BPU4ai7VX7+nrcZoy+QyH@nongnu.org
-X-Gm-Message-State: AFuF++mwva3NKV8QNpmgkMIi9PI6gRlG3q9adOMBNX3B1Aw9u81DvYAS
- XcbuRyqURdXT2qkuSehgKpcMjKRSBcU/MUY53ATXWUcqvfy6tJCuyQAE
-X-Gm-Gg: AR+sD130Etcb11QZ+m7IUp0FY33gdc0+GT8XG7YA1yzF6c3BA7iyENpHbt0ZFxt5hL6
- PaP74AzZg7XamFKcrjVpWR/G9g5zImrooJQvMVKLHGGnLzYjU/ndQt6tdTVVjdIs+XkBRXJ7P4G
- Jyzo/7GP3lX9lfW224HhV8XiavUdrMKL8gaTZOwpEWxUf6ByMqSWSrB7scGZ3Wd2mzFbV1qvcC8
- MPMtAVqlKtOdFyfZYj9AeOKGs+kMjwz8i0fzGRTD2CVOYCa89g+LpPimbgoj1L2bPBnHKS5Ysey
- 5qepZFhK90mBvPpv1shdYTS2DzUGtyG21R7kVzYneAoPjEOaXZMOIA85V07gMiJJ83EBGYLgPJB
- JhRupAUdP80qtJztPyeJCW3cJQWr8K8+QW/WymZ9OdkG5Ky9050nmD5q44b7mfZ8rasFSHL/g3k
- YaKJy5x4h85WjL/9sMP5oW3fjN7qTOm0fMP8hWBsxyczAhck1VOgkfp0+k6xhQCi3NxK5t9hX9Z
- +ecLSqFHZ5jtVkf+24Cyw==
-X-Received: by 2002:a17:90b:3883:b0:380:540:d499 with SMTP id
- 98e67ed59e1d1-395def03e79mr20349832a91.6.1787497701895; 
- Sun, 23 Aug 2026 08:08:21 -0700 (PDT)
+ AHgh+RqQSwHWg/teX/hsuIdhKXDADF9TNAx6okF/Nn5MS5nJWLmT9oxFbQ7FfFjcYJINh/fbP4yf9fK5UBn+@nongnu.org
+X-Gm-Message-State: AFuF++m7N4kpPP8Lux1UGJW8TEwJKl+tujvARCfZ8orhhcTESK7CwnmK
+ 2m+Mf2yDs4C/iJunt5aG+Id+rnVZqdkJut1renQFvd5LcoMrMxZ5F21K
+X-Gm-Gg: AR+sD13LUJ9A8gYtdEWY1500aCstvf4V1CvR4WPQVL5Vr5/VaSkZbpuIyabPnF6mIwj
+ 2gM9i6ggCQZ9LjqDZHQraSoPdwwV/iHFakzBJ4m6lsyhIne0O4RSqXN5jYth+Hd3NwLXE+vadeh
+ Tsmi1fydDDPz8nZjwgbErCq83PcfOsDCwF/+HWBd2HoLNEO69IpqEZI3NlD7kIpwwaREn+T8vr8
+ 3ls4ZBucZ6XlUBUGM0sWiognvg6oDGu6iCwFX3sHsnpuiphIM1tnZNA8Ym19+rvztpw/mm/gEll
+ EITtGbCNfOEd/Dl/X23oWtBSiwmM7PfuZvUZVCLSdKZ2GhdaYAJoAOGQgGEGKnZ1nvsPM22WZWi
+ a3dbS+uCJh894Z97cFM+aHZgCgWozKTOb22ekXNdb4HlUjmrcoXLZRPyFQvlZf07+T9x9b1VZAG
+ c42bjwzy+cx4eXfrKqi8zMs2JnYcAx2uye1kmCnCF8146qT6jugMyXFQxSi0Y7WJupB1e2ITWIQ
+ DhZL84nN5hFZuYgdNdgdg==
+X-Received: by 2002:a17:90b:280a:b0:38e:bfe:81e9 with SMTP id
+ 98e67ed59e1d1-395dee56103mr24094070a91.1.1787497775653; 
+ Sun, 23 Aug 2026 08:09:35 -0700 (PDT)
 Received: from WIN-BH9M8FJACR9 ([103.94.185.75])
  by smtp.googlemail.com with ESMTPSA id
- a92af1059eb24-1418619d6ecsm16024511c88.14.2026.08.23.08.08.13
+ a92af1059eb24-1418619d6ecsm16024511c88.14.2026.08.23.08.09.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 23 Aug 2026 08:08:20 -0700 (PDT)
+ Sun, 23 Aug 2026 08:09:34 -0700 (PDT)
 From: Yonggang Luo <luoyonggang@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: Xianglai Li <lixianglai@loongson.cn>,
@@ -100,23 +100,23 @@ Cc: Xianglai Li <lixianglai@loongson.cn>,
  =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
  Matthew Rosato <mjrosato@linux.ibm.com>, Weiwei Li <liwei1518@gmail.com>,
  Darren Kenny <darren.kenny@oracle.com>
-Subject: [PATCH 04/12] hw/arm/virt: prefix ACPI helpers with arm_virt_
-Date: Sun, 23 Aug 2026 23:07:22 +0800
-Message-ID: <20260823150731.896-5-luoyonggang@gmail.com>
+Subject: [PATCH 12/12] meson: link ARM and RISC-V into qemu-system
+Date: Sun, 23 Aug 2026 23:07:30 +0800
+Message-ID: <20260823150731.896-13-luoyonggang@gmail.com>
 X-Mailer: git-send-email 2.52.0.windows.1
 In-Reply-To: <20260823150731.896-1-luoyonggang@gmail.com>
 References: <20260823150731.896-1-luoyonggang@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102b;
- envelope-from=luoyonggang@gmail.com; helo=mail-pj1-x102b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52e;
+ envelope-from=luoyonggang@gmail.com; helo=mail-pg1-x52e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-Mailman-Approved-At: Sun, 23 Aug 2026 11:18:31 -0400
 X-BeenThere: qemu-riscv@nongnu.org
@@ -133,115 +133,206 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-- virt_acpi_setup and virt_is_acpi_enabled are generic names also used
-  by RISC-V and LoongArch virt. A combined binary cannot export two
-  functions with the same C symbol.
-- Rename the ARM helpers to arm_virt_acpi_setup and
-  arm_virt_is_acpi_enabled. Leave the trace event virt_acpi_setup
-  unchanged; it is a separate identifier.
+- Build qemu-system (and qemu-systemw on Windows) from aarch64
+  common/system objects plus RISC-V arch objects taken from the
+  existing riscv64 lib.
+- Pull 32-bit TargetInfo and 32-only boards from the arm/riscv32
+  libs so hw/arm and target/riscv are not compiled twice.
+- Skip linking qemu-system-{arm,aarch64,riscv32,riscv64} and the
+  Windows *w variants; symlink those names to qemu-system so
+  argv[0] still selects TargetInfo.
 
 Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
 ---
- hw/arm/virt-acpi-build.c |  4 ++--
- hw/arm/virt.c            | 12 ++++++------
- include/hw/arm/virt.h    |  4 ++--
- 3 files changed, 10 insertions(+), 10 deletions(-)
+ meson.build | 156 +++++++++++++++++++++++++++++++++++++++++++++++++---
+ 1 file changed, 147 insertions(+), 9 deletions(-)
 
-diff --git a/hw/arm/virt-acpi-build.c b/hw/arm/virt-acpi-build.c
-index f6386088b6f..a4a0d2c9997 100644
---- a/hw/arm/virt-acpi-build.c
-+++ b/hw/arm/virt-acpi-build.c
-@@ -1556,7 +1556,7 @@ static const VMStateDescription vmstate_virt_acpi_build = {
-     },
- };
+diff --git a/meson.build b/meson.build
+index 449d50f2983..b4f435f6a22 100644
+--- a/meson.build
++++ b/meson.build
+@@ -4250,6 +4250,10 @@ endif
  
--void virt_acpi_setup(VirtMachineState *vms)
-+void arm_virt_acpi_setup(VirtMachineState *vms)
- {
-     AcpiBuildTables tables;
-     AcpiBuildState *build_state;
-@@ -1567,7 +1567,7 @@ void virt_acpi_setup(VirtMachineState *vms)
-         return;
-     }
+ traceable = []
+ emulators = {}
++target_softmmu = {}
++combo_softmmu = ['aarch64-softmmu', 'arm-softmmu', 'riscv32-softmmu', 'riscv64-softmmu']
++have_qemu_system_combo = ('aarch64-softmmu' in target_dirs
++                          and 'riscv64-softmmu' in target_dirs)
+ foreach target : target_dirs
+   config_target = config_target_mak[target]
+   target_name = config_target['TARGET_NAME']
+@@ -4399,20 +4403,37 @@ foreach target : target_dirs
+                  c_args: c_args,
+                  build_by_default: false)
  
--    if (!virt_is_acpi_enabled(vms)) {
-+    if (!arm_virt_is_acpi_enabled(vms)) {
-         trace_virt_acpi_setup();
-         return;
-     }
-diff --git a/hw/arm/virt.c b/hw/arm/virt.c
-index c2ace7706f1..4b9e1e50d44 100644
---- a/hw/arm/virt.c
-+++ b/hw/arm/virt.c
-@@ -770,7 +770,7 @@ static void fdt_add_cpu_nodes(VirtMachineState *vms)
-                     &bottom_node,
-                     CPU_TOPOLOGY_LEVEL_SOCKET);
-             if (cache_at_topo_level) {
--                if (bottom_node == 1 && !virt_is_acpi_enabled(vms))
-+                if (bottom_node == 1 && !arm_virt_is_acpi_enabled(vms))
-                     error_setg(
-                         &error_fatal,
-                         "Cannot share L1 at socket_id %d."
-@@ -810,7 +810,7 @@ static void fdt_add_cpu_nodes(VirtMachineState *vms)
-                                                         top_cluster,
-                                                         bottom_cluster, cpu,
-                                                         &cluster_offset);
--                if (bottom_cluster == 1 && !virt_is_acpi_enabled(vms)) {
-+                if (bottom_cluster == 1 && !arm_virt_is_acpi_enabled(vms)) {
-                     error_setg(&error_fatal,
-                         "Cannot share L1 at socket_id %d, cluster_id %d. "
-                         "DT limitation on sharing at cache level = 1.",
-@@ -2037,7 +2037,7 @@ static void create_smmuv3_dev_dtb(VirtMachineState *vms, DeviceState *dev,
-     hwaddr base = platform_bus_get_mmio_addr(pbus, sbdev, 0);
-     MachineState *ms = MACHINE(vms);
++  if target in combo_softmmu
++    target_softmmu += {target: {
++      'lib': lib,
++      'arch_srcs': arch_srcs,
++      'arch_deps': arch_deps,
++      'c_args': c_args,
++      'link_args': link_args,
++      'target_stubs': target_stubs,
++      'main_rs': main_rs,
++      'config_target': config_target,
++      'target_base_arch': target_base_arch,
++    }}
++  endif
++
+   if target.endswith('-softmmu')
+-    execs = [{
+-      'name': 'qemu-system-' + target_name,
+-      'win_subsystem': 'console',
+-      'sources': [main_rs, files('system/main.c')],
+-      'dependencies': [sdl, target_stubs],
+-    }]
+-    if host_os == 'windows' and (sdl.found() or gtk.found())
++    execs = []
++    if not (have_qemu_system_combo and target in combo_softmmu)
+       execs += [{
+-        'name': 'qemu-system-' + target_name + 'w',
+-        'win_subsystem': 'windows',
++        'name': 'qemu-system-' + target_name,
++        'win_subsystem': 'console',
+         'sources': [main_rs, files('system/main.c')],
+         'dependencies': [sdl, target_stubs],
+       }]
++      if host_os == 'windows' and (sdl.found() or gtk.found())
++        execs += [{
++          'name': 'qemu-system-' + target_name + 'w',
++          'win_subsystem': 'windows',
++          'sources': [main_rs, files('system/main.c')],
++          'dependencies': [sdl, target_stubs],
++        }]
++      endif
+     endif
+     if get_option('fuzzing')
+       specific_fuzz = specific_fuzz_ss.apply(config_target, strict: false)
+@@ -4481,6 +4502,123 @@ foreach target : target_dirs
+   endforeach
+ endforeach
  
--    if (!(vms->bootinfo.firmware_loaded && virt_is_acpi_enabled(vms))) {
-+    if (!(vms->bootinfo.firmware_loaded && arm_virt_is_acpi_enabled(vms))) {
-         if (object_property_get_bool(OBJECT(dev), "accel", &error_abort)) {
-             error_setg(errp, "SMMUv3 with accel=on not supported for DT");
-             return;
-@@ -2447,7 +2447,7 @@ void virt_machine_done(Notifier *notifier, void *data)
-     pci_bus_add_fw_cfg_extra_pci_roots(vms->fw_cfg, vms->bus,
-                                        &error_abort);
++# Combined ARM + RISC-V system emulator (32 and 64).
++# Common/system objects come from aarch64. RISC-V arch objects come
++# from the existing riscv64 lib. 32-bit TargetInfo and 32-only boards
++# come from the arm/riscv32 libs. Per-target qemu-system-* names are
++# symlinks to qemu-system (argv[0] selects TargetInfo).
++if have_qemu_system_combo
++  a64 = target_softmmu['aarch64-softmmu']
++  rv = target_softmmu['riscv64-softmmu']
++  extra_objs = []
++  target_info_def = files('target-info-def.c')
++  foreach spec : [[common_ss, common_all], [system_ss, libsystem]]
++    rv_src = spec[0].apply(rv['config_target'], strict: false)
++    a64_src = spec[0].apply(a64['config_target'], strict: false)
++    extra = []
++    foreach f : rv_src.sources()
++      if f not in a64_src.sources() and not f.full_path().endswith('_stubs.c')
++        extra += f
++      endif
++    endforeach
++    if extra.length() > 0
++      extra_objs += spec[1].extract_objects(extra)
++    endif
++  endforeach
++  rv_base = rv['target_base_arch']
++  if rv_base in target_common_arch_libs
++    src = target_common_arch[rv_base].apply(rv['config_target'], strict: false)
++    extra_objs += target_common_arch_libs[rv_base].extract_objects(src.sources())
++  endif
++  if rv_base in target_common_system_arch_libs
++    src = target_common_system_arch[rv_base].apply(rv['config_target'], strict: false)
++    extra_objs += target_common_system_arch_libs[rv_base].extract_objects(src.sources())
++  endif
++  foreach pair : [['arm-softmmu', 'aarch64-softmmu'], ['riscv32-softmmu', 'riscv64-softmmu']]
++    t32 = pair[0]
++    t64 = pair[1]
++    if t32 in target_softmmu
++      extra_objs += target_softmmu[t32]['lib'].extract_objects(target_info_def)
++      base32 = target_softmmu[t32]['target_base_arch']
++      if base32 in hw_arch
++        hw32 = hw_arch[base32].apply(target_softmmu[t32]['config_target'], strict: false)
++        hw64 = hw_arch[base32].apply(target_softmmu[t64]['config_target'], strict: false)
++        extra_hw = []
++        foreach f : hw32.sources()
++          if f not in hw64.sources()
++            extra_hw += f
++          endif
++        endforeach
++        if extra_hw.length() > 0
++          extra_objs += target_softmmu[t32]['lib'].extract_objects(extra_hw)
++        endif
++      endif
++    endif
++  endforeach
++  combo_objects = extra_objs
++  combo_objects += a64['lib'].extract_all_objects(recursive: true)
++  combo_objects += rv['lib'].extract_objects(rv['arch_srcs'])
++  combo_deps = a64['arch_deps'] + rv['arch_deps'] + [sdl, a64['target_stubs'], rv['target_stubs']]
++  if 'arm-softmmu' in target_softmmu
++    combo_deps += target_softmmu['arm-softmmu']['arch_deps']
++  endif
++  if 'riscv32-softmmu' in target_softmmu
++    combo_deps += target_softmmu['riscv32-softmmu']['arch_deps']
++  endif
++  combo_execs = [{
++    'name': 'qemu-system',
++    'win_subsystem': 'console',
++  }]
++  if host_os == 'windows' and (sdl.found() or gtk.found())
++    combo_execs += [{
++      'name': 'qemu-systemw',
++      'win_subsystem': 'windows',
++    }]
++  endif
++  combo_exe_suffix = host_os == 'windows' ? '.exe' : ''
++  combo_alias_py = 'import os, sys; src, dst = sys.argv[1:3]; os.path.exists(dst) and os.remove(dst); os.symlink(os.path.basename(src), dst)'
++  foreach exe : combo_execs
++    emulator = executable(exe['name'], [a64['main_rs'], files('system/main.c')],
++               install: true,
++               c_args: a64['c_args'],
++               dependencies: combo_deps,
++               objects: combo_objects,
++               link_depends: [block_syms, qemu_syms],
++               link_args: a64['link_args'],
++               win_subsystem: exe['win_subsystem'])
++    emulators += {exe['name']: emulator}
++    traceable += [{
++      'exe': exe['name'],
++      'probe-prefix': 'qemu.system.multi',
++    }]
++    foreach t : combo_softmmu
++      if t not in target_softmmu
++        continue
++      endif
++      tname = target_softmmu[t]['config_target']['TARGET_NAME']
++      if exe['name'] == 'qemu-systemw'
++        alias = 'qemu-system-' + tname + 'w'
++      else
++        alias = 'qemu-system-' + tname
++      endif
++      alias_tgt = custom_target(alias,
++                                input: emulator,
++                                output: alias + combo_exe_suffix,
++                                command: [python, '-c', combo_alias_py, '@INPUT@', '@OUTPUT@'],
++                                build_by_default: true,
++                                install: false)
++      emulators += {alias: alias_tgt}
++      install_symlink(alias + combo_exe_suffix,
++                      pointing_to: exe['name'] + combo_exe_suffix,
++                      install_dir: get_option('bindir'))
++      traceable += [{
++        'exe': alias,
++        'probe-prefix': 'qemu.system.' + tname,
++      }]
++    endforeach
++  endforeach
++endif
++
+ # Other build targets
  
--    virt_acpi_setup(vms);
-+    arm_virt_acpi_setup(vms);
-     virt_build_smbios(vms);
- }
- 
-@@ -3211,7 +3211,7 @@ static void machvirt_init(MachineState *machine)
-     create_pcie(vms);
-     create_cxl_host_reg_region(vms);
- 
--    if (aarch64 && firmware_loaded && virt_is_acpi_enabled(vms)) {
-+    if (aarch64 && firmware_loaded && arm_virt_is_acpi_enabled(vms)) {
-         vms->acpi_dev = create_acpi_ged(vms);
-         vms->generic_error_notifier.notify = virt_generic_error_req;
-         notifier_list_add(&acpi_generic_error_notifiers,
-@@ -3561,7 +3561,7 @@ static void virt_set_oem_table_id(Object *obj, const char *value,
- }
- 
- 
--bool virt_is_acpi_enabled(const VirtMachineState *vms)
-+bool arm_virt_is_acpi_enabled(const VirtMachineState *vms)
- {
-     if (vms->acpi == ON_OFF_AUTO_OFF) {
-         return false;
-diff --git a/include/hw/arm/virt.h b/include/hw/arm/virt.h
-index 383ee320948..2ee61cc5a06 100644
---- a/include/hw/arm/virt.h
-+++ b/include/hw/arm/virt.h
-@@ -218,8 +218,8 @@ struct VirtMachineState {
- #define TYPE_VIRT_MACHINE   MACHINE_TYPE_NAME("arm-virt")
- OBJECT_DECLARE_TYPE(VirtMachineState, VirtMachineClass, VIRT_MACHINE)
- 
--void virt_acpi_setup(VirtMachineState *vms);
--bool virt_is_acpi_enabled(const VirtMachineState *vms);
-+void arm_virt_acpi_setup(VirtMachineState *vms);
-+bool arm_virt_is_acpi_enabled(const VirtMachineState *vms);
- 
- #define CLIDR_CTYPE_NO_CACHE 0x00
- #define CLIDR_CTYPE_I_CACHE 0x01
+ if get_option('plugins')
 -- 
 2.52.0.windows.1
 
