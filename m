@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 703CBC5DF97
-	for <qemu-riscv@archiver.kernel.org>; Sun, 23 Aug 2026 13:16:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E56B9C5DF8C
+	for <qemu-riscv@archiver.kernel.org>; Sun, 23 Aug 2026 13:16:13 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wy82N-0003yH-U7; Sun, 23 Aug 2026 09:14:59 -0400
+	id 1wy82O-0003zT-5b; Sun, 23 Aug 2026 09:15:00 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <wangyang25@otcaix.iscas.ac.cn>)
- id 1wy82D-0003uU-Kg; Sun, 23 Aug 2026 09:14:49 -0400
+ id 1wy82D-0003uV-If; Sun, 23 Aug 2026 09:14:49 -0400
 Received: from smtp25.cstnet.cn ([159.226.251.25] helo=cstnet.cn)
  by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
  (Exim 4.90_1) (envelope-from <wangyang25@otcaix.iscas.ac.cn>)
- id 1wy82A-0007Od-PQ; Sun, 23 Aug 2026 09:14:49 -0400
+ id 1wy82B-0007Og-3I; Sun, 23 Aug 2026 09:14:49 -0400
 Received: from DESKTOP-7FLBREN (unknown [124.16.137.194])
- by APP-05 (Coremail) with SMTP id zQCowAD3Yz478opq7al2Bg--.8255S6;
+ by APP-05 (Coremail) with SMTP id zQCowAD3Yz478opq7al2Bg--.8255S4;
  Sun, 23 Aug 2026 21:14:35 +0800 (CST)
-Message-ID: <f06b7dff002bb35f1524b271faefe0a9571459e6.1787489230.git.wangyang25@otcaix.iscas.ac.cn>
+Message-ID: <78f6f0b01d79a18cfb3a2a64f5219ae043243dfa.1787489230.git.wangyang25@otcaix.iscas.ac.cn>
 In-Reply-To: <cover.1787489230.git.wangyang25@otcaix.iscas.ac.cn>
 References: <cover.1787489230.git.wangyang25@otcaix.iscas.ac.cn>
 X-Mailer: git-send-email via .NET SmtpClient
@@ -32,16 +32,16 @@ Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
  liwei1518@gmail.com, daniel.barboza@oss.qualcomm.com,
  zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com
 Date: 23 Aug 2026 21:14:35 +0800
-Subject: [PATCH 3/5] target/riscv: mask inactive senvcfg.SSE on read
+Subject: [PATCH 1/5] target/riscv: make mnstatus.MNPELP writable with Zicfilp
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: base64
-X-CM-TRANSID: zQCowAD3Yz478opq7al2Bg--.8255S6
-X-Coremail-Antispam: 1UD129KBjvdXoWrKrW8JrWrKrWrGF48ZF17GFg_yoWfAFb_Cr
- 4ruFyxZ3yDZ3ZFkFWDXw1rAryFy3y8Kw1rKa4SkrZ0gryUWFyUZ3WkCFyDur15uw4UJ3Za
- ywn7GrWxWw17AjkaLaAFLSUrUUUUjb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
- 9fnUUIcSsGvfJTRUUUbG8YjsxI4VW3JwAYFVCjjxCrM7AC8VAFwI0_Wr0E3s1l1xkIjI8I
+X-CM-TRANSID: zQCowAD3Yz478opq7al2Bg--.8255S4
+X-Coremail-Antispam: 1UD129KBjvdXoW7GFWrKryfJw1xCry7AF17GFg_yoWfWwcEgF
+ 4fWFykWa4v9ws29FWDAw1rArZ5C3409F4fK39xJFWF9ry7uF9rJas2va48Jr4Uuw1UKF1f
+ Canxt3yxCr47AjkaLaAFLSUrUUUUjb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+ 9fnUUIcSsGvfJTRUUUbG8YjsxI4VW3JwAYFVCjjxCrM7AC8VAFwI0_Xr0_Wr1l1xkIjI8I
  6I8E6xAIw20EY4v20xvaj40_Wr0E3s1l1IIY67AEw4v_Jr0_Jr4l82xGYIkIc2x26280x7
- IE14v26r1rM28IrcIa0xkI8VCY1x0267AKxVW5JVCq3wA2ocxC64kIII0Yj41l84x0c7CE
+ IE14v26r18M28IrcIa0xkI8VCY1x0267AKxVWUCVW8JwA2ocxC64kIII0Yj41l84x0c7CE
  w4AK67xGY2AK021l84ACjcxK6xIIjxv20xvE14v26r1j6r1xM28EF7xvwVC0I7IYx2IY6x
  kF7I0E14v26r4j6F4UM28EF7xvwVC2z280aVAFwI0_Jr0_Gr1l84ACjcxK6I8E87Iv6xkF
  7I0E14v26r4j6r4UJwAac4AC62xK8xCEY4vEwIxC4wAS0I0E0xvYzxvE52x082IY62kv04
@@ -53,7 +53,7 @@ X-Coremail-Antispam: 1UD129KBjvdXoWrKrW8JrWrKrWrGF48ZF17GFg_yoWfAFb_Cr
  c2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI
  0_Gr0_Cr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r1j6r4U
  MIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UMVCEFcxC0VAYjxAxZFUvcSsGvfC2KfnxnU
- UI43ZEXa7IU0HE_tUUUUU==
+ UI43ZEXa7IUnUfQtUUUUU==
 X-Originating-IP: [124.16.137.194]
 X-CM-SenderInfo: 5zdqw5xdqjjk46rwut1l0ox2xfdvhtffof0/
 Received-SPF: pass client-ip=159.226.251.25;
@@ -78,23 +78,23 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-VGhlIENGSSBydWxlcyBtYWtlIHNlbnZjZmcuU1NFIHJlYWQgYXMgemVybyB3aGVuIG1l
-bnZjZmcuU1NFIGlzIGNsZWFyLgpJbiBWVSBtb2RlIGl0IGFsc28gcmVhZHMgYXMgemVy
-byB3aGVuIGhlbnZjZmcuU1NFIGlzIGNsZWFyLiBNYXNrIHRoZQpyZWFkYmFjayB0byBt
-YXRjaCB0aG9zZSBydWxlcy4KUmVzb2x2ZXM6IGh0dHBzOi8vZ2l0bGFiLmNvbS9xZW11
-LXByb2plY3QvcWVtdS8tL3dvcmtfaXRlbXMvNDIyNAoKU2lnbmVkLW9mZi1ieTogd2Fu
-Z3lhbmcgPHdhbmd5YW5nMjVAb3RjYWl4LmlzY2FzLmFjLmNuPgotLS0KIHRhcmdldC9y
-aXNjdi90Y2cvY3NyLmMgfCA4ICsrKysrKysrCiAxIGZpbGUgY2hhbmdlZCwgOCBpbnNl
-cnRpb25zKCspCgpkaWZmIC0tZ2l0IGEvdGFyZ2V0L3Jpc2N2L3RjZy9jc3IuYyBiL3Rh
-cmdldC9yaXNjdi90Y2cvY3NyLmMKaW5kZXggNWZmZDg1OC4uNzA3ODczNiAxMDA2NDQK
-LS0tIGEvdGFyZ2V0L3Jpc2N2L3RjZy9jc3IuYworKysgYi90YXJnZXQvcmlzY3YvdGNn
-L2Nzci5jCkBAIC0zMzA1LDYgKzMzMDUsMTQgQEAgc3RhdGljIFJJU0NWRXhjZXB0aW9u
-IHJlYWRfc2VudmNmZyhDUFVSSVNDVlN0YXRlICplbnYsIGludCBjc3JubywKICAgICB9
-CiAKICAgICAqdmFsID0gZW52LT5zZW52Y2ZnOworCisgICAgaWYgKGVudl9hcmNoY3B1
-KGVudiktPmNmZy5leHRfemljZmlzcykgeworICAgICAgICBpZiAoIShlbnYtPm1lbnZj
-ZmcgJiBNRU5WQ0ZHX1NTRSkgfHwKKyAgICAgICAgICAgIChlbnYtPnZpcnRfZW5hYmxl
-ZCAmJiAhKGVudi0+aGVudmNmZyAmIEhFTlZDRkdfU1NFKSkpIHsKKyAgICAgICAgICAg
-ICp2YWwgJj0gflNFTlZDRkdfU1NFOworICAgICAgICB9CisgICAgfQorCiAgICAgcmV0
-dXJuIFJJU0NWX0VYQ1BfTk9ORTsKIH0KIAotLSAKMi41NS4wLndpbmRvd3MuMgoK
+WmljZmlscCBhZGRzIE1OUEVMUCB0byBtbnN0YXR1cywgYW5kIE1OUkVUIGNvbnN1bWVz
+IGl0IHdoZW4gcmVzdG9yaW5nIEVMUC4KSW5jbHVkZSB0aGUgZmllbGQgaW4gd3JpdGVf
+bW5zdGF0dXMoKSB3aGVuIFppY2ZpbHAgaXMgaW1wbGVtZW50ZWQuClJlc29sdmVzOiBo
+dHRwczovL2dpdGxhYi5jb20vcWVtdS1wcm9qZWN0L3FlbXUvLS93b3JrX2l0ZW1zLzQy
+MjIKClNpZ25lZC1vZmYtYnk6IHdhbmd5YW5nIDx3YW5neWFuZzI1QG90Y2FpeC5pc2Nh
+cy5hYy5jbj4KLS0tCiB0YXJnZXQvcmlzY3YvdGNnL2Nzci5jIHwgNCArKysrCiAxIGZp
+bGUgY2hhbmdlZCwgNCBpbnNlcnRpb25zKCspCgpkaWZmIC0tZ2l0IGEvdGFyZ2V0L3Jp
+c2N2L3RjZy9jc3IuYyBiL3RhcmdldC9yaXNjdi90Y2cvY3NyLmMKaW5kZXggMzZmMjAw
+NC4uNWZmZDg1OCAxMDA2NDQKLS0tIGEvdGFyZ2V0L3Jpc2N2L3RjZy9jc3IuYworKysg
+Yi90YXJnZXQvcmlzY3YvdGNnL2Nzci5jCkBAIC01NTYzLDYgKzU1NjMsMTAgQEAgc3Rh
+dGljIFJJU0NWRXhjZXB0aW9uIHdyaXRlX21uc3RhdHVzKENQVVJJU0NWU3RhdGUgKmVu
+diwgaW50IGNzcm5vLAogICAgICAgICBtYXNrIHw9IE1OU1RBVFVTX01OUFY7CiAgICAg
+fQogCisgICAgaWYgKGVudl9hcmNoY3B1KGVudiktPmNmZy5leHRfemljZmlscCkgewor
+ICAgICAgICBtYXNrIHw9IE1OU1RBVFVTX01OUEVMUDsKKyAgICB9CisKICAgICAvKiBt
+bnN0YXR1cy5tbmllIGNhbiBvbmx5IGJlIGNsZWFyZWQgYnkgaGFyZHdhcmUuICovCiAg
+ICAgZW52LT5tbnN0YXR1cyA9IChlbnYtPm1uc3RhdHVzICYgTU5TVEFUVVNfTk1JRSkg
+fCAodmFsICYgbWFzayk7CiAgICAgcmV0dXJuIFJJU0NWX0VYQ1BfTk9ORTsKLS0gCjIu
+NTUuMC53aW5kb3dzLjIKCg==
 
 
