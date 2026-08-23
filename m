@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A50CCC5DF97
-	for <qemu-riscv@archiver.kernel.org>; Sun, 23 Aug 2026 15:20:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2B50C5DF81
+	for <qemu-riscv@archiver.kernel.org>; Sun, 23 Aug 2026 15:20:35 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wy9y9-0000IX-9i; Sun, 23 Aug 2026 11:18:45 -0400
+	id 1wy9y6-0000BW-K4; Sun, 23 Aug 2026 11:18:42 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1wy9pM-0001Gg-Rn
- for qemu-riscv@nongnu.org; Sun, 23 Aug 2026 11:09:41 -0400
-Received: from mail-pg1-x52e.google.com ([2607:f8b0:4864:20::52e])
+ id 1wy9oV-0007i3-I4
+ for qemu-riscv@nongnu.org; Sun, 23 Aug 2026 11:08:47 -0400
+Received: from mail-pj1-x1036.google.com ([2607:f8b0:4864:20::1036])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1wy9pJ-0000XQ-Ar
- for qemu-riscv@nongnu.org; Sun, 23 Aug 2026 11:09:40 -0400
-Received: by mail-pg1-x52e.google.com with SMTP id
- 41be03b00d2f7-cc11a30a259so2644103a12.3
- for <qemu-riscv@nongnu.org>; Sun, 23 Aug 2026 08:09:36 -0700 (PDT)
+ id 1wy9oS-00004u-LW
+ for qemu-riscv@nongnu.org; Sun, 23 Aug 2026 11:08:47 -0400
+Received: by mail-pj1-x1036.google.com with SMTP id
+ 98e67ed59e1d1-3811f512167so3525862a91.3
+ for <qemu-riscv@nongnu.org>; Sun, 23 Aug 2026 08:08:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1787497776; x=1788102576; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1787497723; x=1788102523; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=2qJkFOwtR18gPKYVYlQn+zI+QIFrhM1zHQf4VsVINkE=;
- b=FzeCJLytqo2kjRVPmBe26Y3C+axTAvs0wDRFIc0YdIDpJmFtqu5RqGhXTJpaJ9oJzk
- pNyfB3vOOze2CyDSxj0kBH5zCkObpiIvaMkDlrVienxwe2WJafcjFC65dWW23LXAsi+u
- kgssTElpP2MMFyWIXP9fnPSg3p2eBI6oSo1uAzsAMaTVr6DmskS8MPwojOdhKkf5Jq0r
- fKb8pOR3fWXwpCJV+3g2NPtHS0undJqdpoTbEZ/lRZN4iBeUIv3T1n9KbbIGN3vIdmMD
- mRhBwDOrHqjDgahSXa/1Q4uz26Dbpw7f2WZ/Ee8b2jzDxqXB6qkgWd9aOizTqsE01vQH
- RTgg==
+ bh=/YH/r0SUtYQNEVFWKkWujykCuJ9og3qDjzznOXWq+hY=;
+ b=jVX7xjblNshUwCZJtmnB4sgO5YP6dNfPMFFyxzUKu3z5TWwUS71x5hyrayvawIf7Ks
+ vrUPo1KHbEPzxyrTZ3aJm/77XhogiijjL61iVIKzNWMQMlYAmv9rtudzuauNwAP5X4kg
+ TWbu2kYym+REsP//r+adM7ZM7UYB4avAqbpxHMqlr7Q2MY8IqsgqOYT+p9E7+NBxstgK
+ cyDTQ9gyoN3MqQOrp2MAJ2yANfGm3qhpyWqJxseptjRk9kPT1+n1KChVyqzvCyxOYI+x
+ PtXBN9qFwyhupPswoxA+B9TCPtY4Xi3nXkETW4kg11BcA7tfYgiEemVEma8+how0AlrK
+ HhMQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787497776; x=1788102576;
+ d=1e100.net; s=20251104; t=1787497723; x=1788102523;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=2qJkFOwtR18gPKYVYlQn+zI+QIFrhM1zHQf4VsVINkE=;
- b=sHt2lF5h+KPMDDwiSW4NCcrlISRbFdr5PNbRjPf3zl5LIYiut0unQqa6paHOQX+JGc
- v4O1Y47Hmj7QYsOk7P2G0e8tRoW2gx6gJ27sGmpFxujhIcNnVCzp8YtfIQr0uYlBaOx2
- WwYhZ6/u4H+rt3uMvYf+XYChEenPh/Lxb/egRvRxNzGWx3nwfc/mLRjSqIAfDFslUEv2
- FeHqcxsi7EXhx77ptaeouBL/sGPVHGqLLfZSF7v+JRVyY8f6iUID+rkXNcEG9qiQ+L6V
- RuSHRGKEmy6ZHrTd0s+IyR4A9QKTgPrztGam0Ug6V3rBBdgdkywsAbk4qfA0AWKVgc7M
- OkxA==
+ bh=/YH/r0SUtYQNEVFWKkWujykCuJ9og3qDjzznOXWq+hY=;
+ b=BMnsTyKTDf1cD2emXN2WmgN9vzpaIV5nZO1IbBsWjQ7UOaGSiiYiK+tFIk0eaeAcl5
+ E0QAMyLYQEkesfJFwg8pdbRutN6zGDudqi/O0afV+eh2tAZvTJswLc4NvsdVQHo8Z8CH
+ BCRoo4AN999Zfn5rAqpttGiBigBQeULsW1A0Y7Xwn4+mKeSVsbGBarL3hp1pHqgE48vt
+ NbD2MUZ1g6/W4vhv1hmapuPCMHOgCXhKXnISTovE87yGakToUrcWtqiLPo0ynKMzS6Ny
+ W8NRg5TuJaHo3ul3NovIdNZWip3YWTovK0i2/TAWeIUJauZApZzSBvX5CAgv52RY5PI9
+ h1DQ==
 X-Forwarded-Encrypted: i=1;
- AHgh+RqQSwHWg/teX/hsuIdhKXDADF9TNAx6okF/Nn5MS5nJWLmT9oxFbQ7FfFjcYJINh/fbP4yf9fK5UBn+@nongnu.org
-X-Gm-Message-State: AFuF++m7N4kpPP8Lux1UGJW8TEwJKl+tujvARCfZ8orhhcTESK7CwnmK
- 2m+Mf2yDs4C/iJunt5aG+Id+rnVZqdkJut1renQFvd5LcoMrMxZ5F21K
-X-Gm-Gg: AR+sD13LUJ9A8gYtdEWY1500aCstvf4V1CvR4WPQVL5Vr5/VaSkZbpuIyabPnF6mIwj
- 2gM9i6ggCQZ9LjqDZHQraSoPdwwV/iHFakzBJ4m6lsyhIne0O4RSqXN5jYth+Hd3NwLXE+vadeh
- Tsmi1fydDDPz8nZjwgbErCq83PcfOsDCwF/+HWBd2HoLNEO69IpqEZI3NlD7kIpwwaREn+T8vr8
- 3ls4ZBucZ6XlUBUGM0sWiognvg6oDGu6iCwFX3sHsnpuiphIM1tnZNA8Ym19+rvztpw/mm/gEll
- EITtGbCNfOEd/Dl/X23oWtBSiwmM7PfuZvUZVCLSdKZ2GhdaYAJoAOGQgGEGKnZ1nvsPM22WZWi
- a3dbS+uCJh894Z97cFM+aHZgCgWozKTOb22ekXNdb4HlUjmrcoXLZRPyFQvlZf07+T9x9b1VZAG
- c42bjwzy+cx4eXfrKqi8zMs2JnYcAx2uye1kmCnCF8146qT6jugMyXFQxSi0Y7WJupB1e2ITWIQ
- DhZL84nN5hFZuYgdNdgdg==
-X-Received: by 2002:a17:90b:280a:b0:38e:bfe:81e9 with SMTP id
- 98e67ed59e1d1-395dee56103mr24094070a91.1.1787497775653; 
- Sun, 23 Aug 2026 08:09:35 -0700 (PDT)
+ AHgh+RofGNnJDtLlA7mRmgt3C4a2hSnZYvuiupJGrRwooTyB7yYu4CDbDM9cHBMg/2xK1VImcbak/6SSLX4m@nongnu.org
+X-Gm-Message-State: AFuF++k3vDof68ayrRb+gmKzNtCJ0XHI/uHWJ5DgpUvUHmpuWtUxHVqB
+ rZ8lZDEpAqaeZT6gvWt/mB1KLlAkcRLHLELXf1E6Tdd05vAPa+TO3jlz
+X-Gm-Gg: AR+sD119WZ9SCRWJJOCgMcUM/oyiTZYBQPhKxlfJimqkCeWBpLYT82UW2ubmsoFAMC6
+ a96W3WeZvDLSWld0BeM18GExY/Yf1rd5vUG4KC3u+x4iy4uTlzm//G620qgU1Y1F3S83t94GWwu
+ H3epvRwGxZgdFgsDA1EZAq6FSf5pK3oEePcXXv7i9dWyJyOAdQb9/oAHaMensbXwosVNptnyYDo
+ FNCud17aAVCP8vQkU1AhpTdiiK+4JCkOojQqChTB1yxH5Mr7vEOqw0YmywNQXZNyMZo5gvuWghe
+ 2fQQMINUViP+xNoPpSL3I/5xgsM8lI2gsSigW9oW4PA95Og9AIUZxg/P8Ugiepibzyggrkaby4n
+ er0J20JPNCwVLZgMQKqwUIZjkXldKRI07gTzkvg30rzeoBb4f9jyodBUU/bmelg3OSJ0qNE/x6y
+ Js8aqGX48bwKHZSjhwpV/xAk0t7vepnxYHw8cR/ugGHCVVZ45R/7pSsb2T+mvjf2/IOHj4x2w+a
+ 9p6MafjMDnKxgMfLcEaBw==
+X-Received: by 2002:a17:90a:d64e:b0:38e:1497:af5b with SMTP id
+ 98e67ed59e1d1-395c33dd84dmr37038272a91.1.1787497723107; 
+ Sun, 23 Aug 2026 08:08:43 -0700 (PDT)
 Received: from WIN-BH9M8FJACR9 ([103.94.185.75])
  by smtp.googlemail.com with ESMTPSA id
- a92af1059eb24-1418619d6ecsm16024511c88.14.2026.08.23.08.09.27
+ a92af1059eb24-1418619d6ecsm16024511c88.14.2026.08.23.08.08.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 23 Aug 2026 08:09:34 -0700 (PDT)
+ Sun, 23 Aug 2026 08:08:39 -0700 (PDT)
 From: Yonggang Luo <luoyonggang@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: Xianglai Li <lixianglai@loongson.cn>,
@@ -100,23 +100,24 @@ Cc: Xianglai Li <lixianglai@loongson.cn>,
  =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
  Matthew Rosato <mjrosato@linux.ibm.com>, Weiwei Li <liwei1518@gmail.com>,
  Darren Kenny <darren.kenny@oracle.com>
-Subject: [PATCH 12/12] meson: link ARM and RISC-V into qemu-system
-Date: Sun, 23 Aug 2026 23:07:30 +0800
-Message-ID: <20260823150731.896-13-luoyonggang@gmail.com>
+Subject: [PATCH 06/12] hw/loongarch/virt: prefix ACPI helper with
+ loongarch_virt_
+Date: Sun, 23 Aug 2026 23:07:24 +0800
+Message-ID: <20260823150731.896-7-luoyonggang@gmail.com>
 X-Mailer: git-send-email 2.52.0.windows.1
 In-Reply-To: <20260823150731.896-1-luoyonggang@gmail.com>
 References: <20260823150731.896-1-luoyonggang@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52e;
- envelope-from=luoyonggang@gmail.com; helo=mail-pg1-x52e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1036;
+ envelope-from=luoyonggang@gmail.com; helo=mail-pj1-x1036.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-Mailman-Approved-At: Sun, 23 Aug 2026 11:18:31 -0400
 X-BeenThere: qemu-riscv@nongnu.org
@@ -133,206 +134,76 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-- Build qemu-system (and qemu-systemw on Windows) from aarch64
-  common/system objects plus RISC-V arch objects taken from the
-  existing riscv64 lib.
-- Pull 32-bit TargetInfo and 32-only boards from the arm/riscv32
-  libs so hw/arm and target/riscv are not compiled twice.
-- Skip linking qemu-system-{arm,aarch64,riscv32,riscv64} and the
-  Windows *w variants; symlink those names to qemu-system so
-  argv[0] still selects TargetInfo.
+- virt_acpi_setup is the same C symbol used by ARM and RISC-V virt.
+  Rename it now so a later combined binary does not need meson -D
+  prefixes for LoongArch.
+- Rename the file-local virt_is_acpi_enabled to
+  loongarch_virt_is_acpi_enabled to match.
 
 Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
 ---
- meson.build | 156 +++++++++++++++++++++++++++++++++++++++++++++++++---
- 1 file changed, 147 insertions(+), 9 deletions(-)
+ hw/loongarch/virt-acpi-build.c | 6 +++---
+ hw/loongarch/virt.c            | 2 +-
+ include/hw/loongarch/virt.h    | 2 +-
+ 3 files changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/meson.build b/meson.build
-index 449d50f2983..b4f435f6a22 100644
---- a/meson.build
-+++ b/meson.build
-@@ -4250,6 +4250,10 @@ endif
+diff --git a/hw/loongarch/virt-acpi-build.c b/hw/loongarch/virt-acpi-build.c
+index a0b445f297b..bbbac289b49 100644
+--- a/hw/loongarch/virt-acpi-build.c
++++ b/hw/loongarch/virt-acpi-build.c
+@@ -674,7 +674,7 @@ static const VMStateDescription vmstate_acpi_build = {
+     },
+ };
  
- traceable = []
- emulators = {}
-+target_softmmu = {}
-+combo_softmmu = ['aarch64-softmmu', 'arm-softmmu', 'riscv32-softmmu', 'riscv64-softmmu']
-+have_qemu_system_combo = ('aarch64-softmmu' in target_dirs
-+                          and 'riscv64-softmmu' in target_dirs)
- foreach target : target_dirs
-   config_target = config_target_mak[target]
-   target_name = config_target['TARGET_NAME']
-@@ -4399,20 +4403,37 @@ foreach target : target_dirs
-                  c_args: c_args,
-                  build_by_default: false)
+-static bool virt_is_acpi_enabled(LoongArchVirtMachineState *lvms)
++static bool loongarch_virt_is_acpi_enabled(LoongArchVirtMachineState *lvms)
+ {
+     if (lvms->acpi == ON_OFF_AUTO_OFF) {
+         return false;
+@@ -682,7 +682,7 @@ static bool virt_is_acpi_enabled(LoongArchVirtMachineState *lvms)
+     return true;
+ }
  
-+  if target in combo_softmmu
-+    target_softmmu += {target: {
-+      'lib': lib,
-+      'arch_srcs': arch_srcs,
-+      'arch_deps': arch_deps,
-+      'c_args': c_args,
-+      'link_args': link_args,
-+      'target_stubs': target_stubs,
-+      'main_rs': main_rs,
-+      'config_target': config_target,
-+      'target_base_arch': target_base_arch,
-+    }}
-+  endif
-+
-   if target.endswith('-softmmu')
--    execs = [{
--      'name': 'qemu-system-' + target_name,
--      'win_subsystem': 'console',
--      'sources': [main_rs, files('system/main.c')],
--      'dependencies': [sdl, target_stubs],
--    }]
--    if host_os == 'windows' and (sdl.found() or gtk.found())
-+    execs = []
-+    if not (have_qemu_system_combo and target in combo_softmmu)
-       execs += [{
--        'name': 'qemu-system-' + target_name + 'w',
--        'win_subsystem': 'windows',
-+        'name': 'qemu-system-' + target_name,
-+        'win_subsystem': 'console',
-         'sources': [main_rs, files('system/main.c')],
-         'dependencies': [sdl, target_stubs],
-       }]
-+      if host_os == 'windows' and (sdl.found() or gtk.found())
-+        execs += [{
-+          'name': 'qemu-system-' + target_name + 'w',
-+          'win_subsystem': 'windows',
-+          'sources': [main_rs, files('system/main.c')],
-+          'dependencies': [sdl, target_stubs],
-+        }]
-+      endif
-     endif
-     if get_option('fuzzing')
-       specific_fuzz = specific_fuzz_ss.apply(config_target, strict: false)
-@@ -4481,6 +4502,123 @@ foreach target : target_dirs
-   endforeach
- endforeach
+-void virt_acpi_setup(LoongArchVirtMachineState *lvms)
++void loongarch_virt_acpi_setup(LoongArchVirtMachineState *lvms)
+ {
+     AcpiBuildTables tables;
+     AcpiBuildState *build_state;
+@@ -692,7 +692,7 @@ void virt_acpi_setup(LoongArchVirtMachineState *lvms)
+         return;
+     }
  
-+# Combined ARM + RISC-V system emulator (32 and 64).
-+# Common/system objects come from aarch64. RISC-V arch objects come
-+# from the existing riscv64 lib. 32-bit TargetInfo and 32-only boards
-+# come from the arm/riscv32 libs. Per-target qemu-system-* names are
-+# symlinks to qemu-system (argv[0] selects TargetInfo).
-+if have_qemu_system_combo
-+  a64 = target_softmmu['aarch64-softmmu']
-+  rv = target_softmmu['riscv64-softmmu']
-+  extra_objs = []
-+  target_info_def = files('target-info-def.c')
-+  foreach spec : [[common_ss, common_all], [system_ss, libsystem]]
-+    rv_src = spec[0].apply(rv['config_target'], strict: false)
-+    a64_src = spec[0].apply(a64['config_target'], strict: false)
-+    extra = []
-+    foreach f : rv_src.sources()
-+      if f not in a64_src.sources() and not f.full_path().endswith('_stubs.c')
-+        extra += f
-+      endif
-+    endforeach
-+    if extra.length() > 0
-+      extra_objs += spec[1].extract_objects(extra)
-+    endif
-+  endforeach
-+  rv_base = rv['target_base_arch']
-+  if rv_base in target_common_arch_libs
-+    src = target_common_arch[rv_base].apply(rv['config_target'], strict: false)
-+    extra_objs += target_common_arch_libs[rv_base].extract_objects(src.sources())
-+  endif
-+  if rv_base in target_common_system_arch_libs
-+    src = target_common_system_arch[rv_base].apply(rv['config_target'], strict: false)
-+    extra_objs += target_common_system_arch_libs[rv_base].extract_objects(src.sources())
-+  endif
-+  foreach pair : [['arm-softmmu', 'aarch64-softmmu'], ['riscv32-softmmu', 'riscv64-softmmu']]
-+    t32 = pair[0]
-+    t64 = pair[1]
-+    if t32 in target_softmmu
-+      extra_objs += target_softmmu[t32]['lib'].extract_objects(target_info_def)
-+      base32 = target_softmmu[t32]['target_base_arch']
-+      if base32 in hw_arch
-+        hw32 = hw_arch[base32].apply(target_softmmu[t32]['config_target'], strict: false)
-+        hw64 = hw_arch[base32].apply(target_softmmu[t64]['config_target'], strict: false)
-+        extra_hw = []
-+        foreach f : hw32.sources()
-+          if f not in hw64.sources()
-+            extra_hw += f
-+          endif
-+        endforeach
-+        if extra_hw.length() > 0
-+          extra_objs += target_softmmu[t32]['lib'].extract_objects(extra_hw)
-+        endif
-+      endif
-+    endif
-+  endforeach
-+  combo_objects = extra_objs
-+  combo_objects += a64['lib'].extract_all_objects(recursive: true)
-+  combo_objects += rv['lib'].extract_objects(rv['arch_srcs'])
-+  combo_deps = a64['arch_deps'] + rv['arch_deps'] + [sdl, a64['target_stubs'], rv['target_stubs']]
-+  if 'arm-softmmu' in target_softmmu
-+    combo_deps += target_softmmu['arm-softmmu']['arch_deps']
-+  endif
-+  if 'riscv32-softmmu' in target_softmmu
-+    combo_deps += target_softmmu['riscv32-softmmu']['arch_deps']
-+  endif
-+  combo_execs = [{
-+    'name': 'qemu-system',
-+    'win_subsystem': 'console',
-+  }]
-+  if host_os == 'windows' and (sdl.found() or gtk.found())
-+    combo_execs += [{
-+      'name': 'qemu-systemw',
-+      'win_subsystem': 'windows',
-+    }]
-+  endif
-+  combo_exe_suffix = host_os == 'windows' ? '.exe' : ''
-+  combo_alias_py = 'import os, sys; src, dst = sys.argv[1:3]; os.path.exists(dst) and os.remove(dst); os.symlink(os.path.basename(src), dst)'
-+  foreach exe : combo_execs
-+    emulator = executable(exe['name'], [a64['main_rs'], files('system/main.c')],
-+               install: true,
-+               c_args: a64['c_args'],
-+               dependencies: combo_deps,
-+               objects: combo_objects,
-+               link_depends: [block_syms, qemu_syms],
-+               link_args: a64['link_args'],
-+               win_subsystem: exe['win_subsystem'])
-+    emulators += {exe['name']: emulator}
-+    traceable += [{
-+      'exe': exe['name'],
-+      'probe-prefix': 'qemu.system.multi',
-+    }]
-+    foreach t : combo_softmmu
-+      if t not in target_softmmu
-+        continue
-+      endif
-+      tname = target_softmmu[t]['config_target']['TARGET_NAME']
-+      if exe['name'] == 'qemu-systemw'
-+        alias = 'qemu-system-' + tname + 'w'
-+      else
-+        alias = 'qemu-system-' + tname
-+      endif
-+      alias_tgt = custom_target(alias,
-+                                input: emulator,
-+                                output: alias + combo_exe_suffix,
-+                                command: [python, '-c', combo_alias_py, '@INPUT@', '@OUTPUT@'],
-+                                build_by_default: true,
-+                                install: false)
-+      emulators += {alias: alias_tgt}
-+      install_symlink(alias + combo_exe_suffix,
-+                      pointing_to: exe['name'] + combo_exe_suffix,
-+                      install_dir: get_option('bindir'))
-+      traceable += [{
-+        'exe': alias,
-+        'probe-prefix': 'qemu.system.' + tname,
-+      }]
-+    endforeach
-+  endforeach
-+endif
-+
- # Other build targets
+-    if (!virt_is_acpi_enabled(lvms)) {
++    if (!loongarch_virt_is_acpi_enabled(lvms)) {
+         ACPI_BUILD_DPRINTF("ACPI disabled. Bailing out.\n");
+         return;
+     }
+diff --git a/hw/loongarch/virt.c b/hw/loongarch/virt.c
+index 6693dea647b..74c9668b6e6 100644
+--- a/hw/loongarch/virt.c
++++ b/hw/loongarch/virt.c
+@@ -242,7 +242,7 @@ static void virt_done(Notifier *notifier, void *data)
+     LoongArchVirtMachineState *lvms = container_of(notifier,
+                                       LoongArchVirtMachineState, machine_done);
+     virt_build_smbios(lvms);
+-    virt_acpi_setup(lvms);
++    loongarch_virt_acpi_setup(lvms);
+     virt_fdt_setup(lvms);
+ }
  
- if get_option('plugins')
+diff --git a/include/hw/loongarch/virt.h b/include/hw/loongarch/virt.h
+index d39a9bbf5dd..72268466def 100644
+--- a/include/hw/loongarch/virt.h
++++ b/include/hw/loongarch/virt.h
+@@ -132,7 +132,7 @@ struct LoongArchVirtMachineState {
+ 
+ #define TYPE_LOONGARCH_VIRT_MACHINE  MACHINE_TYPE_NAME("virt")
+ OBJECT_DECLARE_SIMPLE_TYPE(LoongArchVirtMachineState, LOONGARCH_VIRT_MACHINE)
+-void virt_acpi_setup(LoongArchVirtMachineState *lvms);
++void loongarch_virt_acpi_setup(LoongArchVirtMachineState *lvms);
+ void virt_fdt_setup(LoongArchVirtMachineState *lvms);
+ 
+ static inline bool virt_has_dmsi(LoongArchVirtMachineState *lvms)
 -- 
 2.52.0.windows.1
 
