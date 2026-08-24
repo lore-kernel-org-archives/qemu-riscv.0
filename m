@@ -4,61 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F631C5DF94
-	for <qemu-riscv@archiver.kernel.org>; Mon, 24 Aug 2026 04:20:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0F2DC5DF8C
+	for <qemu-riscv@archiver.kernel.org>; Mon, 24 Aug 2026 05:58:26 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wyMA0-0007eq-2s; Mon, 24 Aug 2026 00:19:48 -0400
+	id 1wyNgi-00009f-Ip; Mon, 24 Aug 2026 01:57:43 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <xiangwencheng@lanxincomputing.com>)
- id 1wyM9w-0007Xc-4F
- for qemu-riscv@nongnu.org; Mon, 24 Aug 2026 00:19:44 -0400
-Received: from va-2-40.ptr.blmpb.com ([209.127.231.40])
+ (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
+ id 1wyNgC-0008SV-ED
+ for qemu-riscv@nongnu.org; Mon, 24 Aug 2026 01:57:13 -0400
+Received: from mail-pf1-x42f.google.com ([2607:f8b0:4864:20::42f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <xiangwencheng@lanxincomputing.com>)
- id 1wyM9n-0002E9-MR
- for qemu-riscv@nongnu.org; Mon, 24 Aug 2026 00:19:43 -0400
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- s=s1; d=lanxincomputing-com.20200927.dkim.feishu.cn; t=1787545159;
- h=from:subject:mime-version:from:date:message-id:subject:to:cc:
- reply-to:content-type:mime-version:in-reply-to:message-id;
- bh=sOu+nA9qfhPW2Q3g1lYMGd8euuxsXo5wHVgkjt6/5kU=;
- b=0C0K0C/fkwFJVIMbbtTvo0YBt/zf4GaSs9lt7fUxp7GL4WZcMc8H1WENzLEf7bQEDJI6FA
- XK0ETnSY0VPtNirZlWtbiectfwPCV4Y7z+oCazWwQsXmEWykiV9ugw6CXbqpbezdUbp/0y
- e/+U1dn2nPdNyanUqROCpbS0Vpe6gzJQuagSZzCLvsweBmJyp/RcE9IL9jL0FUrGb+MTyp
- jkX76L7IpO9Nz0Rc1kwVKmeqNVKeyvHnSmXaStnSg1dO5RHgZbFriBqsr7rwZsD+1PQqzf
- LMIRPWx6mD3G5m4Z/86ZQfih2Ukcw8TmXSLOvU6qBfnTDmXrVR2QIw6cCmcYSw==
-User-Agent: Mozilla Thunderbird
-Content-Transfer-Encoding: quoted-printable
-In-Reply-To: <bad5c8b3-668f-4893-974f-9dbca8dc6893@linaro.org>
-Mime-Version: 1.0
+ (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
+ id 1wyNgA-0004E4-64
+ for qemu-riscv@nongnu.org; Mon, 24 Aug 2026 01:57:07 -0400
+Received: by mail-pf1-x42f.google.com with SMTP id
+ d2e1a72fcca58-8486672f03cso3092130b3a.0
+ for <qemu-riscv@nongnu.org>; Sun, 23 Aug 2026 22:57:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1787551023; x=1788155823; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:mime-version:message-id:date
+ :subject:cc:to:from:sender:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=Urw+TPvG2B1ng41zr1P/WXr1QBJ22AO4z2NlpERbuIk=;
+ b=f+xOUq3e8OAqwMCiOSHSjMjdBTAdTICEFePqGlv5RH+NEGeotjoLBKAlzAHJpZvZgP
+ Lr3N0zQp2a0c+MMaFak7vi+xEXCKND+6v1+/JBA+qiE45k8MsSexaBmizxKSBFPDRqNL
+ 6x1hhhqNPtrFemKXTlr3MFbSqjP5C3gN+vnit6E4JItv1ZiArEesPLdQ90g0q3hBbD+i
+ V8cS11e2FE2h3lSre/XZYXVBpUs0TLCOTKAAp9c1V9tFWSsEnOwEybnBSvWXchJe420P
+ uhjUnvS8qQSgOUsyVgyvLaaux3avy7H3fst3SzCEvSpkH/P6bKfUYDDFFOEAF4sVXKJB
+ 4T3A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1787551023; x=1788155823;
+ h=content-transfer-encoding:content-type:mime-version:message-id:date
+ :subject:cc:to:from:sender:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=Urw+TPvG2B1ng41zr1P/WXr1QBJ22AO4z2NlpERbuIk=;
+ b=EDe2QuHbHSeyWlPPwkNQxUQxOQ21cvj1Lzny9r6gLQ+rPbxFZTJAL4bJ72ohTpuCFN
+ 5gbONzvkOlIHGVR3K15K6tWcoKv/PkCRCsKi1UT+CQA8EUJjiHmlJ6mBiLV3iO5rFY1x
+ NQ3f1zpsHUl0K3WO19Zm7uQKUaRvD2vq/pvMIguqlAgahUaMZJVaSrtO+lLzaxCVNyDB
+ SvQw1w9B7FG7yfPGj73GYZZ+rgHD8hwlzWxbqZz/QQAjDLrn5uAnz4eL45xqW9QF0Loh
+ hiG+mvpzpRuT7TbxyCYskZtFXzQm/bFnqQvCo3eWTZrBDQwLPFW83JUEgqJxUFDAb4Gq
+ RuyA==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RosSJjZPaEQCESbtPI3uxKb+H1j2avbdSev5T283gO0tXXXwwG4EM8pXwBjjhNHzf1YGQZSDtMobnAa@nongnu.org
+X-Gm-Message-State: AFuF++mpjfdgCIX/E5G38ZlHO0yqDfy2ENDLkNJkiP3glrhEqdp4qJtn
+ zJ4kmkSx8kBB2Wk+B5m1Cex8NzCewKrB9L103mPkWjy4mmJ/3WPjsYPq
+X-Gm-Gg: AR+sD13hcFgie4kCred+CMAcijIkHYR6TBMCncPp2FGUQTsQsizRV2vHi3Zg34g0o4W
+ QJsJf7Fc6XZR2KuWNyPaSYivRZfZPhqT0MR76nqYRKDxUSO8BiN/6A4PHeteZm+H2oOOpvfq6zn
+ wRAmzwbHC83Ek51aRr0tbT7triHuW5xcXSZVC4NQN7CsdaLZxdKYyGGN6DTRYBCEE54L+mhFgIu
+ uEuN1uKrkeVS+uLc0XSBKxvfWsEUoHcthqWBx6uJ/Jwe2VD/XuKJ8RB/PmlpovKE2aEZcS5cW4V
+ +rl43dFN/RVs84mmRFWsEhzpnqxfynNISNsEFLl6bljVaYDh41t4tcc85g6b2xcfBuO4YkfGcbM
+ F+TfW7iWrW3lkD2R6hS93YNDaHgXADQD3yOBXKSbst0xDqQpTnAKGFv/Hmn2m4YlElHILD9qun0
+ G6vFcZb2ihCIKdFmus+F+iEP3wIx/1yWuXYRkmtoLFG+A8oXPhPdD/6n0yHDHGqZ4Fr/xYY81Y3
+ w8ygwKVohQiG8l2GG8b97MT9mtx4rUfO+cH+wsySJcLeMThEbZeLVjwivZalf80UlcGrhgyr/3p
+ JMr+WI6NIP3t5uPZzxDoAw==
+X-Received: by 2002:a05:6a00:2d86:b0:84e:24f:2677 with SMTP id
+ d2e1a72fcca58-8520b966111mr26176715b3a.4.1787551023463; 
+ Sun, 23 Aug 2026 22:57:03 -0700 (PDT)
+Received: from donnager-debian.. ([180.150.112.50])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-8520f03b494sm1583474b3a.33.2026.08.23.22.56.58
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 23 Aug 2026 22:57:03 -0700 (PDT)
+From: Joel Stanley <joel@jms.id.au>
+To: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Cc: Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Chao Liu <chao.liu@processmission.com>,
+ Nicholas Piggin <npiggin@gmail.com>,
+ Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>,
+ Michael Ellerman <mpe@kernel.org>,
+ Portia Stephens <portias@oss.tenstorrent.com>,
+ Niek Linnenbank <nieklinnenbank@gmail.com>,
+ Peter Maydell <peter.maydell@linaro.org>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+Subject: [PATCH 0/4] hw/riscv: Post-review cleanups 
+Date: Mon, 24 Aug 2026 15:26:36 +0930
+Message-ID: <20260824055642.41098-1-joel@jms.id.au>
+X-Mailer: git-send-email 2.47.3
+MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-X-Original-From: BillXiang <xiangwencheng@lanxincomputing.com>
-X-Lms-Return-Path: <lba+26a8bc645+6fb25d+nongnu.org+xiangwencheng@lanxincomputing.com>
-From: "BillXiang" <xiangwencheng@lanxincomputing.com>
-Date: Mon, 24 Aug 2026 12:19:15 +0800
-References: <20260821100856.1794011-1-xiangwencheng@lanxincomputing.com>
- <CAFEAcA_kLpaz0UQi3Q315kLVqvDtxKh77kU2meN9G1_evfKBeQ@mail.gmail.com>
- <bad5c8b3-668f-4893-974f-9dbca8dc6893@linaro.org>
-Content-Language: en-US
-Received: from [127.0.0.1] ([123.120.5.129]) by smtp.feishu.cn with ESMTPS;
- Mon, 24 Aug 2026 12:19:16 +0800
-To: "Richard Henderson" <richard.henderson@linaro.org>, 
- "Peter Maydell" <peter.maydell@linaro.org>
-Cc: <mst@redhat.com>, <pbonzini@redhat.com>, <peterx@redhat.com>, 
- <philmd@mailo.com>, <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>
-Subject: Re: [PATCH v2] virtio: Add aligned ld/st accessors for vring
-Message-Id: <02da9676-febf-4389-b09b-5e5d41c1084e@lanxincomputing.com>
-Received-SPF: pass client-ip=209.127.231.40;
- envelope-from=xiangwencheng@lanxincomputing.com; helo=va-2-40.ptr.blmpb.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42f;
+ envelope-from=joel.stan@gmail.com; helo=mail-pf1-x42f.google.com
+X-Spam_score_int: -16
+X-Spam_score: -1.7
 X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.001,
+ FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.249,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -74,55 +113,26 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 8/22/2026 1:32 AM, Richard Henderson wrote:
-> On 8/21/26 03:25, Peter Maydell wrote:
->> I'm tempted to suggest some kind of "if pointer is aligned take
->> aligned path, otherwise take slow path" either here or actually
->> in lduw_le_p(), but maybe that's a bad idea. Richard ?
->>
->> (I have a suspicion that other places than this one will assume
->> that an aligned ldl_he_p() is not going to tear.)
-> I agree -- I expect most everything assumes ldl_he_p won't tear for=20
-> aligned accesses.
+Phil made a bunch of suggestions during the Atlantis review for things
+to clean up afterwards. Here are those cleanups. The patches are
+otherwise unrelated.
 
-Hi Peter, I noticed that in your commit [1], you have pointed out that=20
-ld*_he_p() and st*_he_p() is not atomic especially for vring_avail_idx.
-This suggests it=E2=80=99s time to finally implement the atomic functions. =
-And=20
-I think we should provide explicit atomic operations, similar to those=20
-in CPU instruction sets, rather than a single all=E2=80=91purpose function=
-=20
-cluttered with conditional branches =E2=80=94 and it should be the caller=
-=E2=80=99s=20
-responsibility to decide whether to use them.
+Joel Stanley (4):
+  hw/riscv/boot: Make RISCVBootInfo const where possible
+  hw/riscv/virt: Use hwaddr for IMSIC device tree address
+  tests/functional: Avoid unnecessary removal of scratch files
+  hw/riscv/atlantis: Document QEMU-only I2C device tree nodes
 
->=20
-> This kinda begs the question of what atomicity the caller expects.=C2=A0 =
-It's=20
-> not implausible that an x86 path expects even unaligned accesses not=20
-> crossing a cacheline to be atomic, since that's been a thing since=20
-> 1995.=C2=A0 I expect both IBM architectures similarly expect atomicity by=
-=20
-> alignment, since that's been a thing for s390 since yonks and Power has=
-=20
-> the same language.
->=20
-> We have a bunch of code in accel/tcg/ldst_atomicity.c.inc that can=20
-> handle this, we'd just need to provide it with the correct inputs.=C2=A0 =
-And=20
-> I assume we'd still like to inline the single access on appropriate hosts=
-.
->=20
->=20
-> r~
+ include/hw/riscv/boot.h                   |  6 +++---
+ hw/riscv/boot.c                           |  6 +++---
+ hw/riscv/tt_atlantis.c                    |  1 +
+ hw/riscv/virt.c                           |  5 +++--
+ tests/functional/arm/test_bpim2u.py       | 11 -----------
+ tests/functional/arm/test_orangepi.py     |  9 ---------
+ tests/functional/riscv64/test_sifive_u.py |  4 ----
+ 7 files changed, 10 insertions(+), 32 deletions(-)
 
-Hi Richard, I've read your code in accel/tcg/ldst_atomicity.c.inc. Do=20
-you think it would be better to make the load/store_atomic* public?
+-- 
+2.47.3
 
---
-Bill Xiang
-
-[1]=20
-https://lore.kernel.org/qemu-devel/1554826986-37164-4-git-send-email-pbonzi=
-ni@redhat.com/#r
 
