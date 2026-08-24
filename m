@@ -4,94 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1CF3C5DF9B
-	for <qemu-riscv@archiver.kernel.org>; Mon, 24 Aug 2026 12:23:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C81FC5DF94
+	for <qemu-riscv@archiver.kernel.org>; Mon, 24 Aug 2026 12:24:15 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wyThv-0007uS-VM; Mon, 24 Aug 2026 08:23:19 -0400
+	id 1wyThy-0007v6-9D; Mon, 24 Aug 2026 08:23:22 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wyThv-0007tq-3v
- for qemu-riscv@nongnu.org; Mon, 24 Aug 2026 08:23:19 -0400
+ id 1wyThx-0007ui-1x
+ for qemu-riscv@nongnu.org; Mon, 24 Aug 2026 08:23:21 -0400
 Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wyThs-0006qM-Fs
- for qemu-riscv@nongnu.org; Mon, 24 Aug 2026 08:23:18 -0400
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+ id 1wyThv-0006rO-9s
+ for qemu-riscv@nongnu.org; Mon, 24 Aug 2026 08:23:20 -0400
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 67OBMcPh2372592
- for <qemu-riscv@nongnu.org>; Mon, 24 Aug 2026 12:23:13 GMT
+ 67OBMgUj2864713
+ for <qemu-riscv@nongnu.org>; Mon, 24 Aug 2026 12:23:18 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- Z12nJpW5tZkFnWy5mZgtJ0R0vHsGEO/Ls+4LvllGM30=; b=XUTDGFDzEQLVtXt5
- wbCWKTz6rwwzzwrDXwxgimtMOI0bXh7OrPwbk0FBW34ouWE/ctwlm3lezdmE1z1i
- 4UKRZumCEl4mov/s71RRPWJJws/pWWpMiY+FtoqA+UZSP44xPAsefZ1XGZtnU8R1
- R7cly48ru05iFs8oXlqkCdR4Kly0Fz8shI0eL/YjZ0NtMjXcQP1w+CbRiRqCqO2g
- JIzKiv9HhtOJDf9KmBcbbA6A2zCaCQQv/+JU2PNs2dT78x7r75AAqlkUeOHUSQ1U
- mivLU8teN7oid61fAAjbpfl+ZUHyHgO+2XTukRESyYpIQhuL1uCDqveteqns5GZ4
- igXMDQ==
+ 4EgWiChQaTnV1u8nxSJ7MKjVlvD5Akc7VE4Rw5yM2cs=; b=lkyH3OCdMur3DsX1
+ 3WRmN9yBP2yl3BXtOsXe+VGog3aDhl1UN1hzk/SJeynTbkszqkZzzImYfqLVyn9g
+ 2B+vMsv3dCbRXmwSDwrdNwqQgDwkNB0x6r52qu14xgRvEVPvw3MTti8I7KhGkDVE
+ uGMK2aqqTIXPm5P3GQX9TuXqe24/55WAYTDnl20i9fYSc7WhaPsfc6N7xttVY6gF
+ a24Rl3MtLXTtXhAxvfsIb50w7Y/spAlFr+AD8wgFQSI93iTY1LKyfO+y5ipWGpaj
+ ZAq1kDjoa2ACuG+xwq7sghWYQ6mUChg6JJwr+ZSNN8ny6do8X0TvO14/IwxLB1aF
+ wYZdWA==
 Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com
  [209.85.160.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g8gdshjkf-1
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g8bdr2dfj-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Mon, 24 Aug 2026 12:23:12 +0000 (GMT)
+ for <qemu-riscv@nongnu.org>; Mon, 24 Aug 2026 12:23:18 +0000 (GMT)
 Received: by mail-qt1-f198.google.com with SMTP id
- d75a77b69052e-52e2d1bdce2so1439411cf.0
- for <qemu-riscv@nongnu.org>; Mon, 24 Aug 2026 05:23:12 -0700 (PDT)
+ d75a77b69052e-52ce3c7cb2eso65565631cf.3
+ for <qemu-riscv@nongnu.org>; Mon, 24 Aug 2026 05:23:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1787574192; x=1788178992; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1787574198; x=1788178998; darn=nongnu.org;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=Z12nJpW5tZkFnWy5mZgtJ0R0vHsGEO/Ls+4LvllGM30=;
- b=Pbiwci4rvXGme3znUHAvZaS2CUh5IgtM+B+IqBsFDO+A+IYC3ca1ZG2rAz/YSGgd8Y
- 3nkKJZ+q6VJtDKRSD3MMm4LNGS5ieQje94DcKoQkAT/+WzrOmzlZPirJZVVQCmExcvKL
- lLdK4oKEhCmRfVlPfdLzmiIApdqRdIB6ilAS+3PTNfaNDPuskXMOUWzM8rt2pEcjEHyM
- fas0AsQ/jf3vNyh5y82s9ICXmGBA3+32MHwlTKsQabqxD3+4PSVI1pr6mlqV/5+sM51t
- u4mli1mdPSIjnqhc8SYrYWYUB6eo+3yn2ZDKFPqtEbcgFrm5FyXQNhR6e9fn1Vwz3JGM
- 5Naw==
+ bh=4EgWiChQaTnV1u8nxSJ7MKjVlvD5Akc7VE4Rw5yM2cs=;
+ b=eLiHD3DUk6oKT8xC6m/B8MBw5zR1xas7hMvdajeknwB/kKJHVTXxWFpnIY9zemIH6H
+ uMaCLZ+ll9efzrvb6ZTGfgY4A8y5NtSljGB7+e8nbvm0dwlTgDeTauoVZp12HTCxEqpw
+ KlzTcDXogwHM4T3uCB8MBCH3pNztViSL9F1jzYtAUfkF6toIffLTOI3usN0icEJYVssJ
+ sBdEh7LvWql/1UapK7FSB1At6HZ/t0SqsDeGtTC2DpW4XxyyIFyQtKpzEJ/hx/OrLUQF
+ vRiFU0HcSUAdteYBEo/Bry00LHb/EKIMca//2VkMQXsh2OVA86Po5Eor5JbJIYzLea95
+ GNBA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787574192; x=1788178992;
+ d=1e100.net; s=20251104; t=1787574198; x=1788178998;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=Z12nJpW5tZkFnWy5mZgtJ0R0vHsGEO/Ls+4LvllGM30=;
- b=HgGJq30c4B/2f5vfLlslKcybeLVfvrsjU6Sytv06x9sinG/qZ3JwCgxHImb4fsMeoO
- kAPwR1f98fdvzROw4Xotte+AW6dBE+cTsindQfI+T4IB7BuikywEFtAbgPIKHyFeYwZ6
- itOz3PXphE0WYP9d2YKLCNgCT5EoE22bCAScqXdJB1xBeH/9zst8/UscI140LjxlQlkn
- 5qyeYy8iwwn8YOF1I3IhuyupJ7LsNJBr1LRnPnJE+SNpFtQR612OIE4vH/snrgIsjGxB
- lq9SV5LPzuXf9CswKrvbrf1GBA8q+27Cu5urH5/ILHvlFa94NNB/iWsJNJoLL7mvG99d
- nRCA==
-X-Gm-Message-State: AFuF++nxcN/m+IXe9H6Q0TWOgvGC7Irj7TOPdFOpN+6Q8i7GeyXQn7BU
- q1KsOweOziENXdhyhb8Xjw7lknGAlKoKjE/AcuksyRnGMqQq3NLBl2m7l9VIi+a2B0OpuxiEJm3
- 5WerAxARFts9bgtz615tODNfCOhaRcf64+o7hFkIv2/228Dtca27NNE8E9A==
-X-Gm-Gg: AR+sD12bfNv8j1lupCNJo8cZGBSfWOYuzDY9ZX4RLMNMsHwXMEyTvVRpEyb9x8B5VBW
- JlqtFj5fHae48IVpv6eOLf20sOTSaG7G5hp9znqmtzT9NykWolMXHpJk2ki2IwlsLsgoF46ZmBr
- NWErwEepBrwrj57IPqaGdNbIQwV264PsUCQ8wmqg05QNDSm34GjpmlKAPu/+eLyb2QfEu0WaMxI
- XVxkFvuPcyuXt5XhY1UkLyhdoOuImUbOXilS508qtRemyKpfUiFLI4ScskxqhHlY1QkTyGU7/Qi
- ZSgL2m0V8FWhQnXUBGVArlYWCJogL+kVUUyCab+VvSOIpamwx41hU4bFtcHYF0ESqvrw9ekeswg
- 02DtCT+Nsuf+oA4bjGORG0dvSTGv1XmG6LW2K
-X-Received: by 2002:a05:622a:481a:b0:51c:805:1be3 with SMTP id
- d75a77b69052e-52df5a5167amr270931081cf.31.1787574192096; 
- Mon, 24 Aug 2026 05:23:12 -0700 (PDT)
-X-Received: by 2002:a05:622a:481a:b0:51c:805:1be3 with SMTP id
- d75a77b69052e-52df5a5167amr270930161cf.31.1787574191556; 
- Mon, 24 Aug 2026 05:23:11 -0700 (PDT)
+ bh=4EgWiChQaTnV1u8nxSJ7MKjVlvD5Akc7VE4Rw5yM2cs=;
+ b=G2AzBlTGGlKeJ96DXDTWVoN8l4GCkon61AK6NBhebkLwmTvhDvr2YxNSm6UKBez5ap
+ jUsSZGLVFNlEdfUOd60Mhyhkobp3t+FPEEbaZ+fpa2DQLJp2rujJ5tmBSEYuC1B0Iff6
+ o7dd0+JqSgYv5DU7aYI2SmCq2CeY0AWm6cXobtMaXSUnNptl54KU3NQg58T5peSoRLD+
+ SCdCBbijQCvjYZeLfwB5NP4zlvV8dYFrgaMzH+ghvq11jNideVK2WvvjU2vWCeHODF6W
+ 4p3nW1S5d3WRyvNv9rPEHU70HRyE7H5Nfe5UVQVZG6mwsC09G3xMOZfbQgdY0VqMB8i4
+ bzkA==
+X-Gm-Message-State: AFuF++mCZEknpqPU1dWx0SpZygbLopOd5ylzsTemLetKI7mjkcuZWH/7
+ NoHuv9rhwMY395mRR2p2iLKdw+bvM3AciJVUFD2y5GYYcNflxuDwhXjkTJ1vgvk79nC5mwGxZml
+ fFOdGm+p5Pj/1+O1ct8dGCak+edq8DQVUcO9YsF/5XW7C3Twxw4DMtfrGtw==
+X-Gm-Gg: AR+sD11qXaXcxm4c03QM+HQAeEtYyMkdLfD5QozTY1lj1oljCvhWmIA/micyUXYIvE/
+ +J1RVWoFRUOE1wok5G3ZO821gcUV6PHGlTFYfhij0JleRWvwd52MtVA7HjYBAGRtVvy278uOmHO
+ a+g770w4xlirfX/vBS8FpdnYGVK9YLZ43cnPpznAJq3Xp8SjHriINF25eqyxLxdSEG56Wfcp5pM
+ W7Ikx4Sy1N2J0GgG33f4KGEriTpFBBxMeO7WQyrOxmcL1CE+R44+Y5Iab2/oWydkZsMSeS6Mg+X
+ WbEMOh0htNTM7YANIR5/Zo8189Ql0ZoFrye4SWoCdterdtx8OX+yG/YKA54wdR5YM8V7KbwGQRR
+ lWJQQs/QpQDnWUMnZ1M/oPwcc7NVkH3iIHPKC
+X-Received: by 2002:a05:622a:3c8:b0:51c:ace:de6a with SMTP id
+ d75a77b69052e-52df5696d94mr249664711cf.18.1787574197584; 
+ Mon, 24 Aug 2026 05:23:17 -0700 (PDT)
+X-Received: by 2002:a05:622a:3c8:b0:51c:ace:de6a with SMTP id
+ d75a77b69052e-52df5696d94mr249663901cf.18.1787574196938; 
+ Mon, 24 Aug 2026 05:23:16 -0700 (PDT)
 Received: from [192.168.68.100] ([189.38.141.232])
  by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-3a1c2faba20sm12192381fa.20.2026.08.24.05.23.07
+ 38308e7fff4ca-3a1c2faba20sm12192381fa.20.2026.08.24.05.23.12
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 24 Aug 2026 05:23:10 -0700 (PDT)
-Message-ID: <c4cf2ff9-09db-42f3-9672-257f35ce4836@oss.qualcomm.com>
-Date: Mon, 24 Aug 2026 09:23:03 -0300
+ Mon, 24 Aug 2026 05:23:15 -0700 (PDT)
+Message-ID: <93833a3e-348f-46a1-89bf-fbc1e137b185@oss.qualcomm.com>
+Date: Mon, 24 Aug 2026 09:23:11 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH 1/2] target/riscv: Add Sspesa extension and sample CSRs
+Subject: Re: [RFC PATCH 2/2] target/riscv: Capture Sspesa sample PC and
+ counter ID on overflow
 To: Mayuresh Chitale <mayuresh.chitale@oss.qualcomm.com>,
  Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
@@ -99,39 +100,40 @@ To: Mayuresh Chitale <mayuresh.chitale@oss.qualcomm.com>,
  Chao Liu <chao.liu@processmission.com>
 Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 References: <20260817160321.3313698-1-mayuresh.chitale@oss.qualcomm.com>
- <20260817160321.3313698-2-mayuresh.chitale@oss.qualcomm.com>
+ <20260817160321.3313698-3-mayuresh.chitale@oss.qualcomm.com>
 From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Content-Language: en-US
-In-Reply-To: <20260817160321.3313698-2-mayuresh.chitale@oss.qualcomm.com>
+In-Reply-To: <20260817160321.3313698-3-mayuresh.chitale@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-GUID: _paJ7LPAxv-6e3alF5RLQ15J6xHE2E1Q
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI0MDEwNCBTYWx0ZWRfX+DJWnWKfBmT0
- /znOWwtnAOUbRQnNRaYNuyDDQzkqrmlIdzH7bv+7Ua5dTeIJxEWVE6LGESHlkNEXc8tsINQLat8
- IYrFpGpioAjhMoLOvPZXyATIzC0awd1EUrOCkpF8JZCB6MwqmJQrHKqXwqfhLwfrggLBmXnxolt
- 30gbmA+Njnqa2fJoIXRUFLd530ZEWbzc5z6ekgCu9cZvsm17yEVTXJ3SQKsvCvgrTnPRNY+nBEt
- NvqNJVOVAQvSPIfQho1HLA1lujDgjdUDK88jaws0XmCiDn7U4qy8hfDn0a/2NlP8pYO/N4cVYst
- 0YuSy4pjW6r2N+Qc38GBrRzyLeaFuOa9C5njd5C7xQjMjmXUDZ0n/BHplD8pk3W8OJtgNfwutdl
- 4Hn9uhJLhVoKhIE8DwyjdGlWFDv7WSw/ZV2s8hgeUbFoTDUsCsVOsfezwGU+bE5jb6/XaNl4txd
- i4Kns0BrR8VfbjHcIPQ==
-X-Authority-Analysis: v=2.4 cv=Fqo1OWrq c=1 sm=1 tr=0 ts=6a8c37b0 cx=c_pps
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI0MDEwNCBTYWx0ZWRfXzovtswX9sNgA
+ uIlgnJkqhWQExIh5az25MFbxsW6R7D/wiR6seLwoIOHzFp+sKM740BSAqim74biHjiynfqKjVW/
+ drAOqVHTNf3rY5y4q7U6ibutYvobyeSvuVc2FnIWkHuHe8gNWeabnM7CG1rjEHzCwhvoRvgwC55
+ LOL8Jilz/bt2/eU27oS+9iQW677sa8Cd7jLqRbXS3Lcb4cH9Qk38nCT5hz9wum42+Wq42KBggc0
+ p5mgGAaqqcjWDDvfiYGsNhEyWs2mnZeax6w4gvuv4yQ9wXPViqYD7R8HQqpJi3j6O/8hAzQPNs0
+ P8gb6TOKktLv+bHY1Oq4AMT+5R4XiZ06RQLSQVkwa3tTm0aQkPFo0MEP3//ETOzw3YXVjAdnAUy
+ p7uadDBNCF1E++FnT9m4wphABBFsGtAYUG946iaz4d+WHFYS35r8bbvUd2agRpx27ZzDAL4gMfH
+ LK3KCoS/14YVMt1RK3g==
+X-Proofpoint-GUID: SstOWlSrKfsYS0CQaFBtOKWRU3NcvUIl
+X-Proofpoint-ORIG-GUID: SstOWlSrKfsYS0CQaFBtOKWRU3NcvUIl
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODI0MDEwNCBTYWx0ZWRfX7iObL8JoO+QC
+ 5T2N3Y/LKMbHdCCwlbAzmsVjjPQEMhoWCsQO85D1sAZ2VDMGsdsGNsdIAZQYDDXL5em+wVljw52
+ HfIkP73MSGtn2UOVtew6cUoM9WGxxCw=
+X-Authority-Analysis: v=2.4 cv=W8cIkxWk c=1 sm=1 tr=0 ts=6a8c37b6 cx=c_pps
  a=mPf7EqFMSY9/WdsSgAYMbA==:117 a=MCIxunHWmQOg/5OnbzXZaw==:17
  a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
- a=EUspDBNiAAAA:8 a=rGHe9hKdlJMoL7tw7QoA:9 a=QEXdDO2ut3YA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
+ a=EUspDBNiAAAA:8 a=9ezhH3L1faEcu5qmGvwA:9 a=QEXdDO2ut3YA:10
  a=dawVfQjAaf238kedN5IG:22
-X-Proofpoint-ORIG-GUID: _paJ7LPAxv-6e3alF5RLQ15J6xHE2E1Q
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODI0MDEwNCBTYWx0ZWRfX3W2Uc3jIDq+N
- giuMczB+5/tA9HKNPAVjxyXbK2BrUrduN6Ii1J+xOSYbDdy3UMn4boH11bN83Zp9pcP3h15WbUC
- zm2XymwkAmOigUDeRu47Qq5qTfqq+kk=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-24_03,2026-08-24_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 malwarescore=0 adultscore=0 lowpriorityscore=0 suspectscore=0
- impostorscore=0 phishscore=0 spamscore=0 clxscore=1015 priorityscore=1501
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608240104
+ impostorscore=0 suspectscore=0 lowpriorityscore=0 spamscore=0
+ priorityscore=1501 clxscore=1015 bulkscore=0 malwarescore=0 adultscore=0
+ phishscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2608240104
 Received-SPF: pass client-ip=205.220.180.131;
  envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
 X-Spam_score_int: -27
@@ -159,205 +161,155 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 On 8/17/2026 1:03 PM, Mayuresh Chitale wrote:
-> Add initial support for the Sspesa (Precise Event Sample Attribution)
-> extension from the RISC-V Performance Event Sampling specification.
-> 
-> Added the 'sspesa' and ssplcofi CPU properties, and the shpmspc and
-> shpmsdata CSRs.
+> On a Zihpm counter overflow and with LCOFIP asserted, record the
+> overflowing counter ID in shpmsdata and arm a capture. When the LCOFI is
+> actually delivered, the shpmspc register is populated with the address of
+> the interrupted instruction.
+> Capturing shpmspc at LCOFI delivery (rather than at overflow time)
+> ensures the sample PC reflects the correct interrupted instruction.
 > 
 > Signed-off-by: Mayuresh Chitale <mayuresh.chitale@oss.qualcomm.com>
 > ---
 
 Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 
->   target/riscv/cpu.c                | 13 ++++++-
->   target/riscv/cpu.h                |  4 +++
->   target/riscv/cpu_bits.h           |  7 ++++
->   target/riscv/cpu_cfg_fields.h.inc |  2 ++
->   target/riscv/tcg/csr.c            | 59 +++++++++++++++++++++++++++++--
->   5 files changed, 82 insertions(+), 3 deletions(-)
+>   target/riscv/cpu.h            |  2 ++
+>   target/riscv/tcg/cpu_helper.c |  6 ++++++
+>   target/riscv/tcg/csr.c        | 25 +++++++++++++++++++++++++
+>   target/riscv/tcg/pmu.c        | 27 +++++++++++++++++++++++++++
+>   4 files changed, 60 insertions(+)
 > 
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 5a82e6563b..f936cdeb68 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -278,6 +278,8 @@ const RISCVIsaExtData isa_edata_arr[] = {
->       ISA_EXT_DATA_ENTRY(ssctr, PRIV_VERSION_1_12_0, ext_ssctr),
->       ISA_EXT_DATA_ENTRY(ssdbltrp, PRIV_VERSION_1_13_0, ext_ssdbltrp),
->       ISA_EXT_DATA_ENTRY(ssnpm, PRIV_VERSION_1_13_0, ext_ssnpm),
-> +    ISA_EXT_DATA_ENTRY(sspesa, PRIV_VERSION_1_12_0, ext_sspesa),
-> +    ISA_EXT_DATA_ENTRY(ssplcofi, PRIV_VERSION_1_12_0, ext_ssplcofi),
->       ISA_EXT_DATA_ENTRY(sspm, PRIV_VERSION_1_13_0, ext_sspm),
->       ISA_INTERNAL_EXT_DATA_ENTRY(ssstateen, PRIV_VERSION_1_12_0, ext_ssstateen),
->       ISA_INTERNAL_EXT_DATA_ENTRY(ssstrict, PRIV_VERSION_1_12_0, has_priv_1_12),
-> @@ -2800,6 +2802,15 @@ static RISCVCPUImpliedExtsRule SSSTATEEN_IMPLIED = {
->       },
->   };
->   
-> +static RISCVCPUImpliedExtsRule SSPESA_IMPLIED = {
-> +    .ext = CPU_CFG_OFFSET(ext_sspesa),
-> +    .implied_multi_exts = {
-> +        CPU_CFG_OFFSET(ext_ssplcofi),
-> +
-> +        RISCV_IMPLIED_EXTS_RULE_END
-> +    },
-> +};
-> +
->   static RISCVCPUImpliedExtsRule ZVFBFA_IMPLIED = {
->       .ext = CPU_CFG_OFFSET(ext_zvfbfa),
->       .implied_multi_exts = {
-> @@ -2829,7 +2840,7 @@ RISCVCPUImpliedExtsRule *riscv_multi_ext_implied_rules[] = {
->       &ZVKNC_IMPLIED, &ZVKNG_IMPLIED, &ZVKNHB_IMPLIED,
->       &ZVKS_IMPLIED,  &ZVKSC_IMPLIED, &ZVKSG_IMPLIED, &SHA_IMPLIED,
->       &SSCFG_IMPLIED, &SUPM_IMPLIED, &SSPM_IMPLIED, &SMCTR_IMPLIED,
-> -    &SSCTR_IMPLIED, &SSSTATEEN_IMPLIED,
-> +    &SSCTR_IMPLIED, &SSSTATEEN_IMPLIED, &SSPESA_IMPLIED,
->       NULL
->   };
->   
 > diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index c9dfa7daff..fe56a6afd1 100644
+> index fe56a6afd1..36425c3605 100644
 > --- a/target/riscv/cpu.h
 > +++ b/target/riscv/cpu.h
-> @@ -470,6 +470,10 @@ struct CPUArchState {
->       uint64_t sscratch;
->       uint64_t mscratch;
+> @@ -473,6 +473,8 @@ struct CPUArchState {
+>       /* Sspesa CSRs */
+>       target_ulong shpmspc;
+>       target_ulong shpmsdata;
+> +    /* Capture shpmspc/shpmsdata only on the first overflow */
+> +    bool sspesa_capture_pending;
 >   
-> +    /* Sspesa CSRs */
-> +    target_ulong shpmspc;
-> +    target_ulong shpmsdata;
-> +
 >       /* Sstc CSRs */
 >       uint64_t stimecmp;
->   
-> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> index 3f146a43fe..d3afc9cada 100644
-> --- a/target/riscv/cpu_bits.h
-> +++ b/target/riscv/cpu_bits.h
-> @@ -601,6 +601,13 @@
->   
->   #define CSR_SCOUNTOVF       0xda0
->   
-> + /* Temporary addresses for Sspesa (Precise Event Sample Attribution) CSRs. */
-> +#define CSR_SHPMSPC         0x5d0
-> +#define CSR_SHPMSDATA       0x5d1
-> +
-> +/* shpmsdata fields */
-> +#define SHPMSDATA_CNTRID    0x1f
-> +
->   /* Crypto Extension */
->   #define CSR_SEED            0x015
->   
-> diff --git a/target/riscv/cpu_cfg_fields.h.inc b/target/riscv/cpu_cfg_fields.h.inc
-> index 9eb47af0a7..05e0162b76 100644
-> --- a/target/riscv/cpu_cfg_fields.h.inc
-> +++ b/target/riscv/cpu_cfg_fields.h.inc
-> @@ -110,6 +110,8 @@ BOOL_FIELD(ext_ssaia)
->   BOOL_FIELD(ext_smctr)
->   BOOL_FIELD(ext_ssctr)
->   BOOL_FIELD(ext_sscofpmf)
-> +BOOL_FIELD(ext_sspesa)
-> +BOOL_FIELD(ext_ssplcofi)
->   BOOL_FIELD(ext_smepmp)
->   BOOL_FIELD(ext_smrnmi)
->   BOOL_FIELD(ext_ssnpm)
+> diff --git a/target/riscv/tcg/cpu_helper.c b/target/riscv/tcg/cpu_helper.c
+> index 07d9222652..15af3262ed 100644
+> --- a/target/riscv/tcg/cpu_helper.c
+> +++ b/target/riscv/tcg/cpu_helper.c
+> @@ -2255,6 +2255,12 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+>           sxlen = 16 << riscv_cpu_sxl(env);
+>           env->scause = cause | ((target_ulong)async << (sxlen - 1));
+>           env->sepc = env->pc;
+> +        /* On LCOFI delivery, latch the sample PC to the interrupted PC. */
+> +        if (riscv_cpu_cfg(env)->ext_sspesa && env->sspesa_capture_pending) {
+> +            if (async && cause == IRQ_PMU_OVF) {
+> +                env->shpmspc = env->pc;
+> +            }
+> +        }
+>           env->stval = tval;
+>           env->htval = htval;
+>           env->htinst = tinst;
 > diff --git a/target/riscv/tcg/csr.c b/target/riscv/tcg/csr.c
-> index eb823b16b5..ea49d28aae 100644
+> index ea49d28aae..e48c954359 100644
 > --- a/target/riscv/tcg/csr.c
 > +++ b/target/riscv/tcg/csr.c
-> @@ -276,6 +276,28 @@ static RISCVException smcntrpmf(CPURISCVState *env, int csrno)
+> @@ -1228,6 +1228,15 @@ static RISCVException write_minstretcfgh(CPURISCVState *env, int csrno,
 >       return RISCV_EXCP_NONE;
 >   }
 >   
-> +static RISCVException sspesa(CPURISCVState *env, int csrno)
+> +static bool sspesa_is_captured_ctr(CPURISCVState *env, uint32_t evt_index)
 > +{
-> +    bool menvcfg_cde;
-> +
-> +    if (!riscv_cpu_cfg(env)->ext_sspesa) {
-> +        return RISCV_EXCP_ILLEGAL_INST;
+> +    if (!riscv_cpu_cfg(env)->ext_sspesa || !env->sspesa_capture_pending) {
+> +        return false;
 > +    }
 > +
-> +    if (env->priv == PRV_M) {
-> +        return RISCV_EXCP_NONE;
-> +    }
-> +
-> +    menvcfg_cde = get_field(env->menvcfg, MENVCFG_CDE);
-> +    /* Access to shpmspc/shpmsdata from VS-mode always causes a fault */
-> +    if (env->virt_enabled) {
-> +        return menvcfg_cde ? RISCV_EXCP_VIRT_INSTRUCTION_FAULT :
-> +                             RISCV_EXCP_ILLEGAL_INST;
-> +    }
-> +
-> +    return menvcfg_cde ? RISCV_EXCP_NONE : RISCV_EXCP_ILLEGAL_INST;
+> +    return (env->shpmsdata & SHPMSDATA_CNTRID) == evt_index;
 > +}
 > +
->   static RISCVException smcntrpmf_32(CPURISCVState *env, int csrno)
+>   static RISCVException read_mhpmevent(CPURISCVState *env, int csrno,
+>                                        target_ulong *val)
 >   {
->       if (riscv_cpu_mxl(env) != MXL_RV32) {
-> @@ -1672,6 +1694,34 @@ static RISCVException read_scountovf(CPURISCVState *env, int csrno,
->       return RISCV_EXCP_NONE;
+> @@ -1259,6 +1268,14 @@ static RISCVException write_mhpmevent(CPURISCVState *env, int csrno,
+>           mhpmevt_val = val & inh_avail_mask;
+>       }
+>   
+> +    /* Enable the sample capture when OF is cleared for the captured counter. */
+> +    if (sspesa_is_captured_ctr(env, evt_index)) {
+> +        if ((env->mhpmevent_val[evt_index] & MHPMEVENT_BIT_OF) &&
+> +            !(mhpmevt_val & MHPMEVENT_BIT_OF)) {
+> +            env->sspesa_capture_pending = false;
+> +        }
+> +    }
+> +
+>       env->mhpmevent_val[evt_index] = mhpmevt_val;
+>       riscv_pmu_update_event_map(env, mhpmevt_val, evt_index);
+>   
+> @@ -1289,6 +1306,14 @@ static RISCVException write_mhpmeventh(CPURISCVState *env, int csrno,
+>       inh_avail_mask |= (riscv_has_ext(env, RVH) &&
+>                          riscv_has_ext(env, RVS)) ? MHPMEVENTH_BIT_VSINH : 0;
+>   
+> +    /* Enable the sample capture when OF is cleared for the captured counter. */
+> +    if (sspesa_is_captured_ctr(env, evt_index)) {
+> +        if ((env->mhpmevent_val[evt_index] & MHPMEVENT_BIT_OF) &&
+> +            !((val & inh_avail_mask) & MHPMEVENTH_BIT_OF)) {
+> +            env->sspesa_capture_pending = false;
+> +        }
+> +    }
+> +
+>       env->mhpmevent_val[evt_index] = deposit64(env->mhpmevent_val[evt_index],
+>                                                 32, 32, val & inh_avail_mask);
+>   
+> diff --git a/target/riscv/tcg/pmu.c b/target/riscv/tcg/pmu.c
+> index 38ad2737e1..337e255da4 100644
+> --- a/target/riscv/tcg/pmu.c
+> +++ b/target/riscv/tcg/pmu.c
+> @@ -147,6 +147,31 @@ void riscv_pmu_update_fixed_ctrs(CPURISCVState *env,
+>       riscv_pmu_icount_update_priv(env, newpriv, new_virt);
 >   }
 >   
-> +static RISCVException read_shpmspc(CPURISCVState *env, int csrno,
-> +                                   target_ulong *val)
+> +static void riscv_pmu_sspesa_capture(CPURISCVState *env, uint32_t ctr_idx)
 > +{
-> +    *val = env->shpmspc;
-> +    return RISCV_EXCP_NONE;
+> +    RISCVCPU *cpu = env_archcpu(env);
+> +
+> +    if (!cpu->cfg.ext_sspesa) {
+> +        return;
+> +    }
+> +
+> +    /*
+> +     * Only the first overflow updates the sample CSRs. While a capture is
+> +     * pending, keep the lowest counter ID as required by the spec.
+> +     */
+> +    if (env->sspesa_capture_pending) {
+> +        if ((ctr_idx & SHPMSDATA_CNTRID) <
+> +            (env->shpmsdata & SHPMSDATA_CNTRID)) {
+> +            env->shpmsdata = ctr_idx & SHPMSDATA_CNTRID;
+> +        }
+> +        return;
+> +    }
+> +
+> +    /* shpmspc is latched later, on LCOFI delivery. */
+> +    env->shpmsdata = ctr_idx & SHPMSDATA_CNTRID;
+> +    env->sspesa_capture_pending = true;
 > +}
 > +
-> +static RISCVException write_shpmspc(CPURISCVState *env, int csrno,
-> +                                    target_ulong val, uintptr_t ra)
-> +{
-> +    env->shpmspc = val;
-> +    return RISCV_EXCP_NONE;
-> +}
-> +
-> +static RISCVException read_shpmsdata(CPURISCVState *env, int csrno,
-> +                                     target_ulong *val)
-> +{
-> +    *val = env->shpmsdata;
-> +    return RISCV_EXCP_NONE;
-> +}
-> +
-> +static RISCVException write_shpmsdata(CPURISCVState *env, int csrno,
-> +                                      target_ulong val, uintptr_t ra)
-> +{
-> +    env->shpmsdata = val;
-> +    return RISCV_EXCP_NONE;
-> +}
-> +
->   static RISCVException read_time(CPURISCVState *env, int csrno,
->                                   target_ulong *val)
+>   int riscv_pmu_incr_ctr(RISCVCPU *cpu, enum riscv_pmu_event_idx event_idx)
 >   {
-> @@ -3220,7 +3270,7 @@ static RISCVException write_menvcfg(CPURISCVState *env, int csrno,
->       if (riscv_cpu_mxl(env) == MXL_RV64) {
->           mask |= (cfg->ext_svpbmt ? MENVCFG_PBMTE : 0) |
->                   (cfg->ext_sstc ? MENVCFG_STCE : 0) |
-> -                (cfg->ext_smcdeleg ? MENVCFG_CDE : 0) |
-> +                ((cfg->ext_smcdeleg || cfg->ext_sspesa) ? MENVCFG_CDE : 0) |
->                   (cfg->ext_svadu ? MENVCFG_ADUE : 0) |
->                   (cfg->ext_ssdbltrp ? MENVCFG_DTE : 0);
+>       uint32_t ctr_idx;
+> @@ -191,6 +216,7 @@ int riscv_pmu_incr_ctr(RISCVCPU *cpu, enum riscv_pmu_event_idx event_idx)
+>           /* Generate interrupt only if OF bit is clear */
+>           if (!(env->mhpmevent_val[ctr_idx] & MHPMEVENT_BIT_OF)) {
+>               env->mhpmevent_val[ctr_idx] |= MHPMEVENT_BIT_OF;
+> +            riscv_pmu_sspesa_capture(env, ctr_idx);
+>               riscv_cpu_update_mip(env, MIP_LCOFIP, BOOL_TO_MASK(1));
+>           }
+>       } else {
+> @@ -383,6 +409,7 @@ static void pmu_timer_trigger_irq(RISCVCPU *cpu,
 >   
-> @@ -3272,7 +3322,7 @@ static RISCVException write_menvcfgh(CPURISCVState *env, int csrno,
->       uint64_t mask = (cfg->ext_svpbmt ? MENVCFG_PBMTE : 0) |
->                       (cfg->ext_sstc ? MENVCFG_STCE : 0) |
->                       (cfg->ext_svadu ? MENVCFG_ADUE : 0) |
-> -                    (cfg->ext_smcdeleg ? MENVCFG_CDE : 0) |
-> +                    ((cfg->ext_smcdeleg || cfg->ext_sspesa) ? MENVCFG_CDE : 0) |
->                       (cfg->ext_ssdbltrp ? MENVCFG_DTE : 0);
->       uint64_t valh = (uint64_t)val << 32;
->       bool stce_changed = false;
-> @@ -6771,6 +6821,11 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
->                                write_mhpmcounterh                         },
->       [CSR_SCOUNTOVF]      = { "scountovf", sscofpmf,  read_scountovf,
->                                .min_priv_ver = PRIV_VERSION_1_12_0 },
-> +    [CSR_SHPMSPC]        = { "shpmspc",   sspesa, read_shpmspc, write_shpmspc,
-> +                             .min_priv_ver = PRIV_VERSION_1_12_0 },
-> +    [CSR_SHPMSDATA]      = { "shpmsdata", sspesa, read_shpmsdata,
-> +                             write_shpmsdata,
-> +                             .min_priv_ver = PRIV_VERSION_1_12_0 },
->   
->   #endif /* !CONFIG_USER_ONLY */
->   };
+>       if (cpu->pmu_avail_ctrs & BIT(ctr_idx)) {
+>           if (pmu_hpmevent_set_of_if_clear(env, ctr_idx)) {
+> +            riscv_pmu_sspesa_capture(env, ctr_idx);
+>               riscv_cpu_update_mip(env, MIP_LCOFIP, BOOL_TO_MASK(1));
+>           }
+>       }
 
 
