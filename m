@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B74C2C5DF94
-	for <qemu-riscv@archiver.kernel.org>; Mon, 24 Aug 2026 05:59:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89F54C5DF94
+	for <qemu-riscv@archiver.kernel.org>; Mon, 24 Aug 2026 06:01:06 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wyNhH-0000VN-2C; Mon, 24 Aug 2026 01:58:15 -0400
+	id 1wyNhV-0000p7-2j; Mon, 24 Aug 2026 01:58:29 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1wyNgT-0008W1-Jy
- for qemu-riscv@nongnu.org; Mon, 24 Aug 2026 01:57:30 -0400
-Received: from mail-pf1-x433.google.com ([2607:f8b0:4864:20::433])
+ id 1wyNgY-00007b-7w
+ for qemu-riscv@nongnu.org; Mon, 24 Aug 2026 01:57:32 -0400
+Received: from mail-pf1-x432.google.com ([2607:f8b0:4864:20::432])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1wyNgN-0004FY-2a
- for qemu-riscv@nongnu.org; Mon, 24 Aug 2026 01:57:23 -0400
-Received: by mail-pf1-x433.google.com with SMTP id
- d2e1a72fcca58-84874b52eabso4048341b3a.0
- for <qemu-riscv@nongnu.org>; Sun, 23 Aug 2026 22:57:15 -0700 (PDT)
+ id 1wyNgV-0004HY-Qy
+ for qemu-riscv@nongnu.org; Mon, 24 Aug 2026 01:57:29 -0400
+Received: by mail-pf1-x432.google.com with SMTP id
+ d2e1a72fcca58-84830c774a0so3377178b3a.1
+ for <qemu-riscv@nongnu.org>; Sun, 23 Aug 2026 22:57:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1787551035; x=1788155835; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1787551046; x=1788155846; darn=nongnu.org;
  h=content-transfer-encoding:content-type:mime-version:references
  :in-reply-to:message-id:date:subject:cc:to:from:sender:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=5w0zTlYONzeGW1r7MUxxRRSGYvKItq3LTMlmC3GgUzc=;
- b=Q9jPr5EOuwGgJibDBM5PDQoIdz8V2XWd443tlg9jROeAyfpP2ZY3unu7+N29dyJ17Q
- ntqdV/DGql5zr3lx/cp/WXCXr9GZPCDAwVbGeI01b98A7BP22JtjD83Hqphtv1GeclS2
- wVjM9pkNX3u3vrL/TlGPwokholV7NtyFzQl3w3lilG48xTqX7O3ViBVjkCRH+RcJBfPV
- yjNDLJfNb2Qw02Fq6axGyWtnyIWCTmNQG7slz+HH0g9pz/B88/2rpkVkLqNhHLyMjdHI
- MXTrd9ZBB2u7TrGXfvFi3nQ/IfJ24pxSCu1tfV0x4tEVSn4tMvy6P+iPBMaqDPchOiQs
- iNKQ==
+ bh=xOKtZQG0hnTTR9GYt3EONXbWo75FyZ9WOPDuoAjiEYU=;
+ b=lUIqycGs/vL2DIKJdH5FGo0KYOM8JRJNJGCIYA2Vsectedvz9az727j4uOWVcZJW0+
+ uo/7XJMEdktyCaLyno08MxC+nZ4KeTqXncIkn2/kgK20jSONDZxbr0zlr82+UkeXMup6
+ JbalU3Rhcpf0rQ+3+BYhoOC0mWlbOr0aThSVkJbkjBpeIPI4V4KuvAEvbLlr8ht7EssO
+ Y3Zc5Yxo6m/ngjhe9Shx0HOxt9WEH/QoB8xKc0IudaLG4cs+yn0Wx7FDYpGQ9tk57v9Q
+ VAGS2ita89/X8hNZtZQvI0I3tcKAGVgnrQnwONlRKeEM4BlfdKDumk8srjOLOVpz1uDM
+ v8VQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787551035; x=1788155835;
+ d=1e100.net; s=20251104; t=1787551046; x=1788155846;
  h=content-transfer-encoding:content-type:mime-version:references
  :in-reply-to:message-id:date:subject:cc:to:from:sender:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=5w0zTlYONzeGW1r7MUxxRRSGYvKItq3LTMlmC3GgUzc=;
- b=G9YQ4gmD20D+ZMSFWztWZHEIStjSuOMZgzLAcCZDZZZUMEhtmpYmDHLrzW1rTG98o6
- TX5SySynRsRx1npx75ThA27JOGZHQwwxDY+XwbYIEKRS4n0sciabcTdr2W5fuC+G1kxW
- /I4AfBINDFT5THJcrrdCrFaJKSe9M5wq5Kzinvqbji/E5sihVFtvZQjbOVpsMEBQG9NX
- r5bpkH+dSziUwtILELimza476hZ+YjezyyGKNTyiEshrDrA+sfCxzfSAFslm+xbnoSMB
- Xy20vaGuEmBVn+0yvVr93s/5l4zIDHkDMOB6Trv178t/SUwdSH7sVJaA4s9t6k25f5BX
- +FtA==
+ bh=xOKtZQG0hnTTR9GYt3EONXbWo75FyZ9WOPDuoAjiEYU=;
+ b=qN/xHLNTAhXCjmBJUNkyHkLSJ8zdWDZ5inO6ZtFpQt6FJROfTA5CTi5V1GMVl3kp8J
+ ANiclqVwYlPSfHIgmySdE+TQ4sls1yPJZyDPOtYQl5NlbnZKZ+Rj27NeIdHdED5yVsn2
+ P3L3JxCK8Gsl2Ru5rZZYNmi4AuJ7ybt9+pW+ezL8ktgarGRxevwHJcBbIYogY/OONkjS
+ pntb+iq0RKdblRlcwQIy9FqaVU7xg3U3XUrxCx3sIQ8JrPJta+yfd0/ISvv8APRhgU1T
+ 1kd8RrMrw9TkfAjEHqzZvufXfnUF5fc+T6x79Al2YroXR8cCdBacCS5HBHBQfzbJz2tZ
+ 65hA==
 X-Forwarded-Encrypted: i=1;
- AHgh+RqrwBVKNP6Cmc9ZDtu6Zwi4wSqhcV4TvUNrOLrnMlubhGhgqWwebd6LFdMetgzUcjZcwMx3y8I6XeIg@nongnu.org
-X-Gm-Message-State: AFuF++kMADleHZVDtZ9Vl7xVVhUPYwjdGeskdw8BOuhPD7DLfNTZFT1z
- pl+ODS2fAn6oOpEy5loetRGKLd5O5sqCCuPsr6LLUvqoUC1RYYAwGnrV
-X-Gm-Gg: AR+sD10b7Wi8jMjneVWueSlUygHx5Tf3qDJo6Rd5Tys8iAISxNw9QLstpoifIhQEr2S
- f/QaVqaG63HBnSaYcZq9u6r+7jjYTycnIt8XeOiqGLxR8Wp7jfISTbLyceYn04tljvk26iSRpUs
- LARkN3OMRWaD1pa3wLBpst3vp9vnApLLWT2Vq4PJKNkhbH8P4dFd89ZiOH7Wr6nNw5FmWnOW5zT
- dm8UowaaiWN4EQWJU+nU3GyULPTzt9nH+GDcGZTW4/Hg7cab32/YwOGAX9xo6wEOPQEkIQuqpP+
- 5HXufaGKop+o9nKXr0e/XxKD+WT1fd6787eZbXpJRVszUdDlQjNyBlci8jsbIOQ6zkpW7QAFmLA
- +V+ptfrBnEjmhrkfpNi6Fun98cIzF9Rw76meZqGjGMgQGYvCgPKC+Q7a3soG9M4cBlbNYTvBHFs
- nCD/BZh9ucoAT6eTOCwpVQTVvuVq/3/ILqpwMH1OkikenEaw/hT4/MaEnfc8SCrjcJESB2wcZXp
- p68dQ2kKuC9OJeFhIPSbuKN3rO84GmdPgbD/AIWof1EBsfdlsOLoEipnCaWQdyTxMu8VEjfYJgj
- YqlgHZSw6W+R0Jn1LVqZOw==
-X-Received: by 2002:a05:6a00:7497:b0:851:fb36:a702 with SMTP id
- d2e1a72fcca58-851fb36a9f2mr34795777b3a.9.1787551034897; 
- Sun, 23 Aug 2026 22:57:14 -0700 (PDT)
+ AHgh+RpgBFmzNUbImeayegeJBTy21cy2tVrmaZUFQCPWFyuchJLMWTZ9ZMn4XCl6nLH6MXa3+VALtXrzUjdb@nongnu.org
+X-Gm-Message-State: AFuF++mz2HZ50ZE2Lq3xBKCcN7nfY6VjgroeEQaqzTRm7d2t/pBpeqEx
+ x5CEMJqkwlhF33W88nNxWiQDXpGhKfA4QKhl+qPSsj58+OSU8kYP9mU1
+X-Gm-Gg: AR+sD12j6s/zSCeAL75QUFDtK1eoJp8MK2NSMa4ulOAcm5AFkGbCoBQbXVROOXRDzVv
+ 6wawfPfqxbFqdI/M5vlFdX2tJES6RXazKwkM1foSdfLM4fwI5fVDOVd81WRS1nmQhv8NvdwA/i2
+ +YlGicN4hjCksPFrTqS1RC+n9DCKyn1rGPT2ciTUjcr8PN+F7PXvzYNrozVBG5mH1t6/aBlbwY/
+ mETfe/CzKLWwPImojlH6dkd7HRQfuDhnZcS4lvb3oel7fR7gtScU0oO5l4uBRnLvAAOM6owpcEr
+ DUkagDxUo96Sc/RYPoDq1oeqXxQmUtdBRX1LBd/xBhejfRfLZhHR49UJVvjEFU+VN4zp7akmlbw
+ iuvfsQUTFne066hkx/mzi03CQogBMGisbV4EntCvwJ0ppGiN4p6pVVWq39IFS6G7SZUgHXTgFxi
+ M1je4yOZRgmQ1EFtXpM4ukkD1qcD19vZsd2OCDQ/0iXvp4weRcBUU6Em/6kqGIeYH9ZqijaFPC2
+ YZegZPkAa/UaSB1NKfvgjOSc5xt4z/h1hWIgcbCeOPhB9VrfRus2RQv2xxk8+CCyRgvIhhFuRGb
+ cHyznAAvkrr7YRN6j8uApQ==
+X-Received: by 2002:a05:6a00:6ca2:b0:845:e7ee:eae7 with SMTP id
+ d2e1a72fcca58-851f9a2f1edmr43185672b3a.5.1787551045688; 
+ Sun, 23 Aug 2026 22:57:25 -0700 (PDT)
 Received: from donnager-debian.. ([180.150.112.50])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-8520f03b494sm1583474b3a.33.2026.08.23.22.57.09
+ d2e1a72fcca58-8520f03b494sm1583474b3a.33.2026.08.23.22.57.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 23 Aug 2026 22:57:14 -0700 (PDT)
+ Sun, 23 Aug 2026 22:57:25 -0700 (PDT)
 From: Joel Stanley <joel@jms.id.au>
 To: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  Alistair Francis <alistair.francis@wdc.com>,
@@ -81,19 +81,19 @@ Cc: Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Portia Stephens <portias@oss.tenstorrent.com>,
  Niek Linnenbank <nieklinnenbank@gmail.com>,
  Peter Maydell <peter.maydell@linaro.org>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@mailo.com>
-Subject: [PATCH 2/4] hw/riscv/virt: Use hwaddr for IMSIC device tree address
-Date: Mon, 24 Aug 2026 15:26:38 +0930
-Message-ID: <20260824055642.41098-3-joel@jms.id.au>
+ qemu-devel@nongnu.org
+Subject: [PATCH 4/4] hw/riscv/atlantis: Document QEMU-only I2C device tree
+ nodes
+Date: Mon, 24 Aug 2026 15:26:40 +0930
+Message-ID: <20260824055642.41098-5-joel@jms.id.au>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260824055642.41098-1-joel@jms.id.au>
 References: <20260824055642.41098-1-joel@jms.id.au>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::433;
- envelope-from=joel.stan@gmail.com; helo=mail-pf1-x433.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::432;
+ envelope-from=joel.stan@gmail.com; helo=mail-pf1-x432.google.com
 X-Spam_score_int: -16
 X-Spam_score: -1.7
 X-Spam_bar: -
@@ -117,38 +117,27 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-create_fdt_one_imsic() hard codes the top 32 bits to zero. Instead take
-a hwaddr and populate both the high and low cell.
+The QEMU only I2C devices have a comment next to them, do the same for
+the corresponding device tree entries.
 
-Suggested-by: Philippe Mathieu-Daudé <philmd@mailo.com>
+Suggested-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 Signed-off-by: Joel Stanley <joel@jms.id.au>
 ---
- hw/riscv/virt.c | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ hw/riscv/tt_atlantis.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index d58656f70d1b..b91d5066d8ad 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -383,7 +383,8 @@ static void create_fdt_one_imsic(RISCVVirtState *s, hwaddr base_addr,
-     g_autofree char *imsic_name = NULL;
-     MachineState *ms = MACHINE(s);
-     int socket_count = riscv_socket_count(ms);
--    uint32_t imsic_max_hart_per_socket, imsic_addr, imsic_size;
-+    uint32_t imsic_max_hart_per_socket, imsic_size;
-+    hwaddr imsic_addr;
-     g_autofree uint32_t *imsic_cells = NULL;
-     g_autofree uint32_t *imsic_regs = NULL;
-     static const char * const imsic_compat[2] = {
-@@ -403,7 +404,7 @@ static void create_fdt_one_imsic(RISCVVirtState *s, hwaddr base_addr,
-         imsic_addr = base_addr + socket * VIRT_IMSIC_GROUP_MAX_SIZE;
-         imsic_size = IMSIC_HART_SIZE(imsic_guest_bits) *
-                      s->soc[socket].num_harts;
--        imsic_regs[socket * 4 + 0] = 0;
-+        imsic_regs[socket * 4 + 0] = cpu_to_be32(imsic_addr >> 32);
-         imsic_regs[socket * 4 + 1] = cpu_to_be32(imsic_addr);
-         imsic_regs[socket * 4 + 2] = 0;
-         imsic_regs[socket * 4 + 3] = cpu_to_be32(imsic_size);
+diff --git a/hw/riscv/tt_atlantis.c b/hw/riscv/tt_atlantis.c
+index d808bcc11c34..82f087c836da 100644
+--- a/hw/riscv/tt_atlantis.c
++++ b/hw/riscv/tt_atlantis.c
+@@ -356,6 +356,7 @@ static void finalize_fdt(TTAtlantisState *s)
+                        aplic_s_phandle, periph_clk_phandle);
+     }
+ 
++    /* I2C peripherals: qemu specific */
+     create_fdt_i2c_device(s, 0, "dallas,ds1338", 0x6f);
+     create_fdt_i2c_device(s, 4, "ti,tmp105", 0x48);
+ }
 -- 
 2.47.3
 
