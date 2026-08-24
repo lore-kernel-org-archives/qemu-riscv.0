@@ -4,70 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFC59C5DF81
-	for <qemu-riscv@archiver.kernel.org>; Mon, 24 Aug 2026 17:43:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10329C5DF81
+	for <qemu-riscv@archiver.kernel.org>; Mon, 24 Aug 2026 18:33:32 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wyYhO-0003Ba-26; Mon, 24 Aug 2026 13:43:06 -0400
+	id 1wyZTl-0006v8-PZ; Mon, 24 Aug 2026 14:33:06 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1wyYhL-0003Ap-R1; Mon, 24 Aug 2026 13:43:04 -0400
-Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56])
+ (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
+ id 1wyZTj-0006ul-Uj; Mon, 24 Aug 2026 14:33:04 -0400
+Received: from isrv.corpit.ru ([212.248.84.144])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1wyYhJ-0000Z6-Jl; Mon, 24 Aug 2026 13:43:03 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=univ-grenoble-alpes.fr; s=2020; t=1787593376;
- bh=HjDQ6eJ+7RdVUGTg+kk0qj0ipShSqilDz1VxZisT4hw=;
- h=From:To:Cc:Subject:Date:From;
- b=CeU5PzVi8zp+LNO/lNV3813fj8DKKuFR3OnfwgRtIG8DL189orO0IJBuTMFraI5eD
- +bYfj2vxgJJlL7EKSzlyqZiYLW8w7LPpkeHneEpIM0bRAyOqik4VWfdbjnae4SQyE6
- p48m31/i7A1swnSxK0iHueSfDMMFl5UBRi+uw3P/G4cij3/p7TFGy8mrZPra8+j1lj
- exUjNPxv7QVYe7yagzHdv7IfSxNnvVj/yAm5P9GE5UCTY9f0N8VV0WX1lAqnqfg6v4
- A8Ui6fIUQZ+FFr2IJRT9CydFk0gNBg7oyfzv868vcxvRQil8EZ56O/dgiXogGltFNO
- YB3PwRyqWrbdA==
-Received: from mailhub-2.u-ga.fr (mailhub-2.u-ga.fr [129.88.178.102])
- by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id D4DFD40230;
- Mon, 24 Aug 2026 19:42:56 +0200 (CEST)
-Received: from smtps.univ-grenoble-alpes.fr (smtps2.u-ga.fr [152.77.18.2])
- by mailhub-2.u-ga.fr (Postfix) with ESMTP id D0DDAFF859;
- Mon, 24 Aug 2026 19:42:56 +0200 (CEST)
-Received: from naga.. (pers-165-50.vpn.u-ga.fr [147.171.165.50])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- (Authenticated sender: petrotf@univ-grenoble-alpes.fr)
- by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id 4BC3F14004C;
- Mon, 24 Aug 2026 19:42:55 +0200 (CEST)
-From: frederic.petrot@univ-grenoble-alpes.fr
-To: daniel.barboza@oss.qualcomm.com, palmer@dabbelt.com,
- alistair.francis@wdc.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Cc: =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20P=C3=A9trot?=
- <frederic.petrot@univ-grenoble-alpes.fr>
-Subject: [PATCH v2] tests/tcg/riscv64: Add tests for rv128 [ms]status
-Date: Mon, 24 Aug 2026 19:42:46 +0200
-Message-ID: <20260824174246.202150-1-frederic.petrot@univ-grenoble-alpes.fr>
-X-Mailer: git-send-email 2.43.0
+ (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
+ id 1wyZTh-0003Fz-PE; Mon, 24 Aug 2026 14:33:03 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=tls.msk.ru; s=202602;
+ t=1787596340; bh=SoKjRAusZxztZBTzlbQ36SaVyqq6PmCqcNBqI8DPcOU=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To;
+ b=fcDv/gA8s5uzVz+JwjeQpznSxkgpBpM4YdsefHBumYLBujYUHRescDuJpztacNA1b
+ LD86+HKbE3SMKE37WeLzsF1lDE5U1WCuGhLR+ittA9JWZxsrnGej7t9Wj5yPu/BDd6
+ flbmbIEMP0qEr/mOTIgrHqjDFpCm7OWy5d9cKSriDxwtpEq9bqeOQEijrJAelJDK63
+ +t9yhNcUHpqxF5mE2NtuR/8dFtq/TZo+iRlNv9YNGeContMh0tyZdzlamejXxTqUi6
+ 7FSSFoNHShQezHqVs1RwN+1mJ0ykQZX2WhBlVfyoP6Ygoy5pbR2R1NvtDJSSvYSRQv
+ jE8H/TyNAsrtw==
+Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
+ by isrv.corpit.ru (Postfix) with ESMTP id EE8EF1CDFE9;
+ Mon, 24 Aug 2026 21:32:20 +0300 (MSK)
+Received: from [192.168.177.130] (mjt.wg.tls.msk.ru [192.168.177.130])
+ by tsrv.corpit.ru (Postfix) with ESMTP id 85363415AA4;
+ Mon, 24 Aug 2026 21:32:56 +0300 (MSK)
+Message-ID: <ebbb40fc-9dd3-4088-9960-65f00ca26aea@tls.msk.ru>
+Date: Mon, 24 Aug 2026 21:32:20 +0300
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Greylist: Whitelist-UGA SMTP Authentifie (petrotf@univ-grenoble-alpes.fr)
- via submission-587 ACL (41)
-Received-SPF: pass client-ip=152.77.200.56;
- envelope-from=frederic.petrot@univ-grenoble-alpes.fr;
- helo=zm-mta-out-3.u-ga.fr
-X-Spam_score_int: -43
-X-Spam_score: -4.4
-X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001,
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] target/riscv: Fix PC sync in trans_sspopchk for CFI
+ exception handling
+To: A-Shehab <ahshehab24@gmail.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, Max Chou <max.chou@sifive.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
+ <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Chao Liu <chao.liu@processmission.com>, QEMU Stable <qemu-stable@nongnu.org>
+References: <20260730181852.1622-1-ahshehab24@gmail.com>
+Content-Language: en-US, ru-RU
+From: Michael Tokarev <mjt@tls.msk.ru>
+In-Reply-To: <20260730181852.1622-1-ahshehab24@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=212.248.84.144; envelope-from=mjt@tls.msk.ru;
+ helo=isrv.corpit.ru
+X-Spam_score_int: -19
+X-Spam_score: -2.0
+X-Spam_bar: --
+X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -84,228 +76,39 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
+On 7/30/26 21:18, A-Shehab wrote:
+> From: Max Chou <max.chou@sifive.com>
+> 
+> Move gen_update_pc call before conditional logic to ensure consistent
+> PC state regardless of execution path.
+> 
+> Previously, the host instructions generated to update the cpu_pc were
+> only executed in the failure path when shadow stack validation failed.
+> This created inconsistent PC synchronization.
+> 
+> This inconsistency caused issues in CF_PCREL mode where subsequent
+> instructions calculated wrong relative offsets from stale pc_save
+> values, and could lead to incorrect exception return addresses.
+> 
+> This fix ensures PC is always synchronized before any helper that
+> might raise an exception, maintaining consistent translator state
+> across all execution paths.
+> 
+> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/4118
+> Signed-off-by: Max Chou <max.chou@sifive.com>
+> [ahshehab: rebased on current master; file moved to
+>   target/riscv/tcg/insn_trans/ and the ssp load is now 64-bit wide]
+> Tested-by: A-Shehab <ahshehab24@gmail.com>
+> Signed-off-by: A-Shehab <ahshehab24@gmail.com>
 
-Adding asm tests to check that mstatus and sstatus are updated as
-expected in an rv128 cpu.
+I'm applying this to the current qemu stable series.
+In 11.0.x and 10.0.x, it is the original version of this patch
+(though maybe it is more productive to pick up other changes in
+this area to older stable branches and apply this change as-is).
 
-Signed-off-by: Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
-Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
----
- tests/tcg/riscv64/Makefile.softmmu-target |   9 ++
- tests/tcg/riscv64/test-rv128-mstatus.S    |  67 ++++++++++++++
- tests/tcg/riscv64/test-rv128-sstatus.S    | 108 ++++++++++++++++++++++
- 3 files changed, 184 insertions(+)
- create mode 100644 tests/tcg/riscv64/test-rv128-mstatus.S
- create mode 100644 tests/tcg/riscv64/test-rv128-sstatus.S
+Please let me know if I shouldn't pick it up.
 
-diff --git a/tests/tcg/riscv64/Makefile.softmmu-target b/tests/tcg/riscv64/Makefile.softmmu-target
-index 6a219c306c..575571de90 100644
---- a/tests/tcg/riscv64/Makefile.softmmu-target
-+++ b/tests/tcg/riscv64/Makefile.softmmu-target
-@@ -71,5 +71,14 @@ EXTRA_RUNS += run-test-misa-w
- run-test-misa-w: test-misa-w
- 	$(call run-test, $<, $(QEMU) -cpu rv64$(comma)x-misa-w=true$(comma)c=true$(comma)v=true $(QEMU_OPTS)$<)
- 
-+# Test for rv128
-+EXTRA_RUNS += run-test-rv128-mstatus
-+run-test-rv128-mstatus: test-rv128-mstatus
-+	$(call run-test, $<, $(QEMU) -cpu x-rv128 $(QEMU_OPTS)$<)
-+
-+EXTRA_RUNS += run-test-rv128-sstatus
-+run-test-rv128-sstatus: test-rv128-sstatus
-+	$(call run-test, $<, $(QEMU) -cpu x-rv128 $(QEMU_OPTS)$<)
-+
- # We don't currently support the multiarch system tests
- undefine MULTIARCH_TESTS
-diff --git a/tests/tcg/riscv64/test-rv128-mstatus.S b/tests/tcg/riscv64/test-rv128-mstatus.S
-new file mode 100644
-index 0000000000..323f65ef90
---- /dev/null
-+++ b/tests/tcg/riscv64/test-rv128-mstatus.S
-@@ -0,0 +1,67 @@
-+/*
-+ * Test rv128 mstatus update and access
-+ * Author: Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
-+ *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ */
-+#define srli(rd, rs1, imm)                .insn i  0b0010011, 0b101, rd, rs1, imm & 0b1111111
-+
-+    .option norvc
-+
-+    .text
-+    .globl _start
-+_start:
-+    csrr    s0, misa
-+    srli    (s1, s0, 126)
-+    li      s0, 3
-+    bne     s1, s0, fail
-+
-+    # Check UXL and SXL are set to RV128 too
-+    csrr    s0, mstatus
-+    srli    (s1, s0, 32)
-+    andi    s1, s1, 0xf
-+    li      s0, 0xf
-+    bne     s1, s0, fail
-+
-+    # Mark FPU dirty to check for SD
-+    .equiv  MSTATUS_FS, 0x00006000
-+    li      s0, MSTATUS_FS
-+    csrs    mstatus, s0
-+    # Do some useless computation
-+    fmadd.s f3, f2, f1, f0
-+    fmax.s  f0, f1, f2
-+    # Check SD has changed where expected
-+    csrr    s0, mstatus
-+    srli    (s1, s0, 127)
-+    li      s0, 1
-+    bne     s1, s0, fail
-+    # Mark FPU clean (2 in FS place)
-+    li      s0, ~0x00004000
-+    csrc    mstatus, s0
-+    csrr    s0, mstatus
-+    srli    (s1, s0, 13)
-+    andi    s1, s1, 3
-+    li      s0, 2
-+    bne     s1, s0, fail
-+    li      a0, 0
-+    j       _exit
-+fail:
-+    li      a0, 1
-+_exit:
-+    lla     a1, semiargs
-+    li      t0, 0x20026 # ADP_Stopped_ApplicationExit
-+    sd      t0, 0(a1)
-+    sd      a0, 8(a1)
-+    li      a0, 0x20    # TARGET_SYS_EXIT_EXTENDED
-+
-+    # Semihosting call sequence
-+    .balign 16
-+    slli   zero, zero, 0x1f
-+    ebreak
-+    srai   zero, zero, 0x7
-+    j      .
-+
-+    .data
-+    .balign 16
-+semiargs:
-+    .space  16
-diff --git a/tests/tcg/riscv64/test-rv128-sstatus.S b/tests/tcg/riscv64/test-rv128-sstatus.S
-new file mode 100644
-index 0000000000..af118e355a
---- /dev/null
-+++ b/tests/tcg/riscv64/test-rv128-sstatus.S
-@@ -0,0 +1,108 @@
-+/*
-+ * Test rv128 sstatus update and access
-+ * Author: Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
-+ *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ */
-+#define srli(rd, rs1, imm)                .insn i  0b0010011, 0b101, rd, rs1, imm & 0b1111111
-+
-+    .option norvc
-+
-+    .text
-+    .globl _start
-+_start:
-+    // Check RV128 is running
-+    csrr     s0, misa
-+    srli     (s1, s0, 126)
-+    li       s0, 3
-+    bne      s1, s0, fail
-+
-+    // Minimal pmp settings
-+#define PMP_NAPOT 0x18
-+#define PMP_R     0x01
-+#define PMP_W     0x02
-+#define PMP_X     0x04
-+
-+    li       s0, -1
-+    csrw     pmpaddr0, s0
-+    li       s0, PMP_NAPOT | PMP_R | PMP_W | PMP_X
-+    csrw     pmpcfg0, s0
-+
-+    la       s0, backm
-+    csrw     mtvec, s0
-+
-+    // Set MPP to supervisor
-+    csrr     s0, mstatus
-+    li       s1, ~0x1800 // mask
-+    and      s1, s1, s0
-+    li       s0, 0x0800  // supervisor
-+    or       s1, s1, s0
-+    csrw     mstatus, s1
-+    // Change to supervisor mode
-+    la       s0, 1f
-+    csrw     mepc, s0
-+    mret
-+1:
-+    // Check UXL is set to RV128
-+    csrr     s0, sstatus
-+    srli     (s1, s0, 32)
-+    andi     s1, s1, 0x3
-+    li       s0, 3
-+    bne      s1, s0, fail
-+    // Check SPP if is set to 1, since we
-+    // come from machine mode
-+    srli     (s1, s0, 8)
-+    andi     s1, s1, 0x1
-+    // Actually this check fails, so test 0
-+    li       s0, 0
-+    bne      s1, s0, fail
-+
-+    // Mark FPU dirty to check for SD
-+    .equiv   MSTATUS_FS, 0x00006000
-+    li       s0,  MSTATUS_FS
-+    csrs     sstatus, s0
-+    // Do some fun useless computation
-+    fmadd.s  f3, f2, f1, f0
-+    fmax.s   f0, f1, f2
-+    // Check SD has changed where expected
-+    csrr     s0, sstatus
-+    srli     (s1, s0, 127)
-+    li       s0, 1
-+    bne      s1, s0, fail
-+    // Mark FPU clean (2 in FS place)
-+    li       s0, ~0x00004000
-+    csrc     sstatus, s0
-+    csrr     s0, sstatus
-+    srli     (s1, s0, 127)
-+    li       s0, 0
-+    bne      s1, s0, fail
-+
-+    // Let's go back to machine mode to exit
-+    ecall
-+
-+    // mtvec bit 1:0 indicate mode, 00 is Direct, what
-+    // we want in this simple test
-+    .align 4
-+backm:
-+    li      a0, 0
-+    j       _exit
-+fail:
-+    li      a0, 1
-+_exit:
-+    lla     a1, semiargs
-+    li      t0, 0x20026 # ADP_Stopped_ApplicationExit
-+    sd      t0, 0(a1)
-+    sd      a0, 8(a1)
-+    li      a0, 0x20    # TARGET_SYS_EXIT_EXTENDED
-+
-+    # Semihosting call sequence
-+    .balign 16
-+    slli   zero, zero, 0x1f
-+    ebreak
-+    srai   zero, zero, 0x7
-+    j      .
-+
-+    .data
-+    .balign 16
-+semiargs:
-+    .space  16
--- 
-2.43.0
+Thanks,
 
+/mjt
 
