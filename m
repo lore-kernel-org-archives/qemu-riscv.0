@@ -4,133 +4,134 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00422C5DF94
-	for <qemu-riscv@archiver.kernel.org>; Mon, 24 Aug 2026 12:07:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1CF3C5DF9B
+	for <qemu-riscv@archiver.kernel.org>; Mon, 24 Aug 2026 12:23:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wyTS3-0001nz-LQ; Mon, 24 Aug 2026 08:06:55 -0400
+	id 1wyThv-0007uS-VM; Mon, 24 Aug 2026 08:23:19 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wyTS2-0001nQ-2Q
- for qemu-riscv@nongnu.org; Mon, 24 Aug 2026 08:06:54 -0400
+ id 1wyThv-0007tq-3v
+ for qemu-riscv@nongnu.org; Mon, 24 Aug 2026 08:23:19 -0400
 Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wyTRy-0003oL-VE
- for qemu-riscv@nongnu.org; Mon, 24 Aug 2026 08:06:53 -0400
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+ id 1wyThs-0006qM-Fs
+ for qemu-riscv@nongnu.org; Mon, 24 Aug 2026 08:23:18 -0400
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 67OBMUjk2647973
- for <qemu-riscv@nongnu.org>; Mon, 24 Aug 2026 12:06:49 GMT
+ 67OBMcPh2372592
+ for <qemu-riscv@nongnu.org>; Mon, 24 Aug 2026 12:23:13 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- xKgEiWiffeZ2KZXRG9zjUKMLyv8x/cjnXuQv8nvpJSc=; b=IHDNyJ7zgJT63fzD
- gT/+jnDEVkr6xdI6919ORCv9VqxYWblAw9sbvwjCwvV4GNZ3DSHbjcStcNM4Scqg
- HLX9855BOzZcWTU5go15LK1AtmbSDAJN5enFmdgMP11633goOhpWkL8t9GI5lugQ
- 6FelThYOp7x1m/gTswdBJFVIHXoy0o/qtOAT2ajfd20+YVmfVKShza3F6tJpTUMv
- relOmlwpTbrCOSS4vOP5jRtPuNazOgr1wpQ8BYAhPqFCGNwB60TXv7HErcxXrqV3
- SHS1S5FhUr6ySoSteaaZxbH81jlPpB/anvncXjotRZiotUKkwiYB2CLfI8yN16xy
- 6HeMfQ==
-Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com
- [209.85.219.72])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g8gqn9cjq-1
+ Z12nJpW5tZkFnWy5mZgtJ0R0vHsGEO/Ls+4LvllGM30=; b=XUTDGFDzEQLVtXt5
+ wbCWKTz6rwwzzwrDXwxgimtMOI0bXh7OrPwbk0FBW34ouWE/ctwlm3lezdmE1z1i
+ 4UKRZumCEl4mov/s71RRPWJJws/pWWpMiY+FtoqA+UZSP44xPAsefZ1XGZtnU8R1
+ R7cly48ru05iFs8oXlqkCdR4Kly0Fz8shI0eL/YjZ0NtMjXcQP1w+CbRiRqCqO2g
+ JIzKiv9HhtOJDf9KmBcbbA6A2zCaCQQv/+JU2PNs2dT78x7r75AAqlkUeOHUSQ1U
+ mivLU8teN7oid61fAAjbpfl+ZUHyHgO+2XTukRESyYpIQhuL1uCDqveteqns5GZ4
+ igXMDQ==
+Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com
+ [209.85.160.198])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g8gdshjkf-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Mon, 24 Aug 2026 12:06:49 +0000 (GMT)
-Received: by mail-qv1-f72.google.com with SMTP id
- 6a1803df08f44-8eeba1d9e47so18222226d6.2
- for <qemu-riscv@nongnu.org>; Mon, 24 Aug 2026 05:06:49 -0700 (PDT)
+ for <qemu-riscv@nongnu.org>; Mon, 24 Aug 2026 12:23:12 +0000 (GMT)
+Received: by mail-qt1-f198.google.com with SMTP id
+ d75a77b69052e-52e2d1bdce2so1439411cf.0
+ for <qemu-riscv@nongnu.org>; Mon, 24 Aug 2026 05:23:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1787573209; x=1788178009; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1787574192; x=1788178992; darn=nongnu.org;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=xKgEiWiffeZ2KZXRG9zjUKMLyv8x/cjnXuQv8nvpJSc=;
- b=aA1X/uu5RukObaNrt0WcPM927aEiKuSUZw2AhIPJ5/txAufccqAXkwMWG5YDEsNjHt
- EaCT/jmyQqWNRtSnriEZiqiFHretrgs9TGNW9QoXcJP3zAKOyzkuVI75XaDGpEL3I+vA
- MHQ2XLUf9G5HudZGCpcThUGAuSizNxrktP7ANlBBjkEgWxADMjHPZNfmEk8EDPhv/VJk
- ZqgjEzGjhyFCrcDzwLIG8b/QiI7ppERm2PgS484gO0cgrBc5s5YTgkV3R6ueHeU0bBHk
- SGkIosfK5CbyTXpl+m7EcDw0tc1AH9rvT+3XC701SJTzeKecO2+CuQ2RMVZ3JbBDEE+X
- 7cJw==
+ bh=Z12nJpW5tZkFnWy5mZgtJ0R0vHsGEO/Ls+4LvllGM30=;
+ b=Pbiwci4rvXGme3znUHAvZaS2CUh5IgtM+B+IqBsFDO+A+IYC3ca1ZG2rAz/YSGgd8Y
+ 3nkKJZ+q6VJtDKRSD3MMm4LNGS5ieQje94DcKoQkAT/+WzrOmzlZPirJZVVQCmExcvKL
+ lLdK4oKEhCmRfVlPfdLzmiIApdqRdIB6ilAS+3PTNfaNDPuskXMOUWzM8rt2pEcjEHyM
+ fas0AsQ/jf3vNyh5y82s9ICXmGBA3+32MHwlTKsQabqxD3+4PSVI1pr6mlqV/5+sM51t
+ u4mli1mdPSIjnqhc8SYrYWYUB6eo+3yn2ZDKFPqtEbcgFrm5FyXQNhR6e9fn1Vwz3JGM
+ 5Naw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787573209; x=1788178009;
+ d=1e100.net; s=20251104; t=1787574192; x=1788178992;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=xKgEiWiffeZ2KZXRG9zjUKMLyv8x/cjnXuQv8nvpJSc=;
- b=CEW0d+N9WaargZVLHccPLb8Q85uQQS92QHkTGvbSuBEOP8P75rVBnKwlaOfAbjdYiE
- zL2rCL31+1WMqel5haHW/WZQWomV2RbYtfcN0rwxk2ykvmKOtwtfVfxg9pguXma1wDKU
- Tppqzwh0g1mXHkckEHSWhOA9cjkh7v4km64/iiQR1bBuPJE/ocfczgOgTXRrJp0NH4R1
- nNt3c3hES3tTXM5rBeBsSLpF5gvx29B7M0uc6uU8jdoRT/wmmNWYUzGb6SD/FUnSky75
- vFTooeXilIJCZhlSDWpYoQXLRJW1wNMklxWTBXI4SdlPIMBwxxSS06DZLmyt7ZzdLqgK
- oBBQ==
-X-Gm-Message-State: AFuF++nkret7dGCNegNCsIpNLBo3X80xtc4J3IhK0odPDLOG/IwpLJ/W
- hMM5z9pBJlPUtRJcNLf9jRk7ckhYnlo7yTxl1JhvmZ+6FZ0RcMHF7dc9TN2dFGIZJnWfBXkqp1m
- virPGYdsIITyjCjYN/4Q8E+jDhOf95J88JaP5/7KLSRBEy4cnsQtQAPzz6w==
-X-Gm-Gg: AR+sD11PVk3aOyxWiEQ5n+jTLzt2sonRplq/mgJYiWtfPRpZ9NUeV3N0UE0StU7Xk/n
- hQdpAnGaraGkPnCAqBcagVRLO0z7E6mvJXlkpbDFVqamtb0Zht8nSh71N33sjusdzxeQte6XURQ
- PuhckvjxpPdYrprE6SOSMcIB2tobDQ5BrP1OuLqhV72gkD05r7t/2r4qv5J8GlpEeQiaK/P69EH
- iG5fYiyTgQ9OhBDPapGp2fWIucYQZPdd7JaBMX/q2mIbpKlDra98PaS0g0UKKk5ewUrurr7GgpB
- 1HP7NnwM7cB60mWBwBev3wBzvrO6g+2KNIs6xqldmKbFa7PysPkusMKaE55MDModJblTgR/P52g
- 9ghOlBG4uh48a24LGmkzRG6Gc5MtdBUM6Qe91
-X-Received: by 2002:a05:6214:d6b:b0:907:bf2a:481f with SMTP id
- 6a1803df08f44-90c809430dfmr263412786d6.1.1787573208696; 
- Mon, 24 Aug 2026 05:06:48 -0700 (PDT)
-X-Received: by 2002:a05:6214:d6b:b0:907:bf2a:481f with SMTP id
- 6a1803df08f44-90c809430dfmr263411746d6.1.1787573208173; 
- Mon, 24 Aug 2026 05:06:48 -0700 (PDT)
+ bh=Z12nJpW5tZkFnWy5mZgtJ0R0vHsGEO/Ls+4LvllGM30=;
+ b=HgGJq30c4B/2f5vfLlslKcybeLVfvrsjU6Sytv06x9sinG/qZ3JwCgxHImb4fsMeoO
+ kAPwR1f98fdvzROw4Xotte+AW6dBE+cTsindQfI+T4IB7BuikywEFtAbgPIKHyFeYwZ6
+ itOz3PXphE0WYP9d2YKLCNgCT5EoE22bCAScqXdJB1xBeH/9zst8/UscI140LjxlQlkn
+ 5qyeYy8iwwn8YOF1I3IhuyupJ7LsNJBr1LRnPnJE+SNpFtQR612OIE4vH/snrgIsjGxB
+ lq9SV5LPzuXf9CswKrvbrf1GBA8q+27Cu5urH5/ILHvlFa94NNB/iWsJNJoLL7mvG99d
+ nRCA==
+X-Gm-Message-State: AFuF++nxcN/m+IXe9H6Q0TWOgvGC7Irj7TOPdFOpN+6Q8i7GeyXQn7BU
+ q1KsOweOziENXdhyhb8Xjw7lknGAlKoKjE/AcuksyRnGMqQq3NLBl2m7l9VIi+a2B0OpuxiEJm3
+ 5WerAxARFts9bgtz615tODNfCOhaRcf64+o7hFkIv2/228Dtca27NNE8E9A==
+X-Gm-Gg: AR+sD12bfNv8j1lupCNJo8cZGBSfWOYuzDY9ZX4RLMNMsHwXMEyTvVRpEyb9x8B5VBW
+ JlqtFj5fHae48IVpv6eOLf20sOTSaG7G5hp9znqmtzT9NykWolMXHpJk2ki2IwlsLsgoF46ZmBr
+ NWErwEepBrwrj57IPqaGdNbIQwV264PsUCQ8wmqg05QNDSm34GjpmlKAPu/+eLyb2QfEu0WaMxI
+ XVxkFvuPcyuXt5XhY1UkLyhdoOuImUbOXilS508qtRemyKpfUiFLI4ScskxqhHlY1QkTyGU7/Qi
+ ZSgL2m0V8FWhQnXUBGVArlYWCJogL+kVUUyCab+VvSOIpamwx41hU4bFtcHYF0ESqvrw9ekeswg
+ 02DtCT+Nsuf+oA4bjGORG0dvSTGv1XmG6LW2K
+X-Received: by 2002:a05:622a:481a:b0:51c:805:1be3 with SMTP id
+ d75a77b69052e-52df5a5167amr270931081cf.31.1787574192096; 
+ Mon, 24 Aug 2026 05:23:12 -0700 (PDT)
+X-Received: by 2002:a05:622a:481a:b0:51c:805:1be3 with SMTP id
+ d75a77b69052e-52df5a5167amr270930161cf.31.1787574191556; 
+ Mon, 24 Aug 2026 05:23:11 -0700 (PDT)
 Received: from [192.168.68.100] ([189.38.141.232])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-90c93a90735sm59628836d6.47.2026.08.24.05.06.46
+ 38308e7fff4ca-3a1c2faba20sm12192381fa.20.2026.08.24.05.23.07
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 24 Aug 2026 05:06:47 -0700 (PDT)
-Message-ID: <faa2fb8a-063f-41c9-a1b2-e2c64b8e1809@oss.qualcomm.com>
-Date: Mon, 24 Aug 2026 09:06:44 -0300
+ Mon, 24 Aug 2026 05:23:10 -0700 (PDT)
+Message-ID: <c4cf2ff9-09db-42f3-9672-257f35ce4836@oss.qualcomm.com>
+Date: Mon, 24 Aug 2026 09:23:03 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] target/riscv: Fix LCOFI masking in sie/sip/mvip
+Subject: Re: [RFC PATCH 1/2] target/riscv: Add Sspesa extension and sample CSRs
 To: Mayuresh Chitale <mayuresh.chitale@oss.qualcomm.com>,
  Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
  <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Chao Liu <chao.liu@processmission.com>
 Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-References: <20260813134002.862578-1-mayuresh.chitale@oss.qualcomm.com>
+References: <20260817160321.3313698-1-mayuresh.chitale@oss.qualcomm.com>
+ <20260817160321.3313698-2-mayuresh.chitale@oss.qualcomm.com>
 From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Content-Language: en-US
-In-Reply-To: <20260813134002.862578-1-mayuresh.chitale@oss.qualcomm.com>
+In-Reply-To: <20260817160321.3313698-2-mayuresh.chitale@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODI0MDEwMSBTYWx0ZWRfXziNIctRmTe1n
- 9ypoQ/7cnFFXa7xVNGrmoQSTbUPmlArsXeWk2QVE/sLjfTr99EgF36CJaAy+DDf+v0/uqwjWvCP
- Dw51tx7qcPybdK7Q8ABt554B/wvgi/s=
-X-Proofpoint-GUID: YNKROhs3403cX7_M_7-t5CyiJNmnwosh
-X-Authority-Analysis: v=2.4 cv=fqXsol4f c=1 sm=1 tr=0 ts=6a8c33d9 cx=c_pps
- a=7E5Bxpl4vBhpaufnMqZlrw==:117 a=MCIxunHWmQOg/5OnbzXZaw==:17
+X-Proofpoint-GUID: _paJ7LPAxv-6e3alF5RLQ15J6xHE2E1Q
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI0MDEwNCBTYWx0ZWRfX+DJWnWKfBmT0
+ /znOWwtnAOUbRQnNRaYNuyDDQzkqrmlIdzH7bv+7Ua5dTeIJxEWVE6LGESHlkNEXc8tsINQLat8
+ IYrFpGpioAjhMoLOvPZXyATIzC0awd1EUrOCkpF8JZCB6MwqmJQrHKqXwqfhLwfrggLBmXnxolt
+ 30gbmA+Njnqa2fJoIXRUFLd530ZEWbzc5z6ekgCu9cZvsm17yEVTXJ3SQKsvCvgrTnPRNY+nBEt
+ NvqNJVOVAQvSPIfQho1HLA1lujDgjdUDK88jaws0XmCiDn7U4qy8hfDn0a/2NlP8pYO/N4cVYst
+ 0YuSy4pjW6r2N+Qc38GBrRzyLeaFuOa9C5njd5C7xQjMjmXUDZ0n/BHplD8pk3W8OJtgNfwutdl
+ 4Hn9uhJLhVoKhIE8DwyjdGlWFDv7WSw/ZV2s8hgeUbFoTDUsCsVOsfezwGU+bE5jb6/XaNl4txd
+ i4Kns0BrR8VfbjHcIPQ==
+X-Authority-Analysis: v=2.4 cv=Fqo1OWrq c=1 sm=1 tr=0 ts=6a8c37b0 cx=c_pps
+ a=mPf7EqFMSY9/WdsSgAYMbA==:117 a=MCIxunHWmQOg/5OnbzXZaw==:17
  a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
- a=EUspDBNiAAAA:8 a=WmrVEKmstOSfcGThU8YA:9 a=QEXdDO2ut3YA:10
- a=pJ04lnu7RYOZP9TFuWaZ:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI0MDEwMSBTYWx0ZWRfX/KHmwXG5lG2p
- Wrp7Zw/7+x40o31k88/kW/NX9ljcsSG5pc+mod9nPlHEGzh/HPq7giapXXgIUsJLDOScjOPHP4x
- efk9+MZuc46W34mLIq3RsFawEukm8mJzy4t3uvmJG/uMtiQy2JVrogs649MOCBWbvwogUCKtT6e
- dc+Px3hBVoWq4Tsy3ds2BIneO2I/Rm6HULXNkzd9swHnXU/Y4GjAtWSwa8rnN+v+s5oMJVRDQwY
- u3AYzz8PUH5moUp7lJt5uuA+LH1KvCSBJOT5PaGMPHSqxA9aYRx/olBowaQV9q+Gg2s3CaR/Wdv
- Qv6zuRoWXV8scxATXq+W/x1amWLKHxEfRf31iU27SmC2cZavClOL4tv9cGgFJx1uIqMvr3NIDTD
- q2V5bkrxTaXKt8VsIvCG8s6uMyr/Y5fwqXpP2hBpDAdqPYZUFdLifoRgrQY4gjXQcuW/JV1heeq
- 7vPZhafstTjNzkYr0DA==
-X-Proofpoint-ORIG-GUID: YNKROhs3403cX7_M_7-t5CyiJNmnwosh
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
+ a=EUspDBNiAAAA:8 a=rGHe9hKdlJMoL7tw7QoA:9 a=QEXdDO2ut3YA:10
+ a=dawVfQjAaf238kedN5IG:22
+X-Proofpoint-ORIG-GUID: _paJ7LPAxv-6e3alF5RLQ15J6xHE2E1Q
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODI0MDEwNCBTYWx0ZWRfX3W2Uc3jIDq+N
+ giuMczB+5/tA9HKNPAVjxyXbK2BrUrduN6Ii1J+xOSYbDdy3UMn4boH11bN83Zp9pcP3h15WbUC
+ zm2XymwkAmOigUDeRu47Qq5qTfqq+kk=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-24_03,2026-08-24_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 bulkscore=0 impostorscore=0 phishscore=0 clxscore=1015
- spamscore=0 lowpriorityscore=0 suspectscore=0 malwarescore=0 adultscore=0
+ bulkscore=0 malwarescore=0 adultscore=0 lowpriorityscore=0 suspectscore=0
+ impostorscore=0 phishscore=0 spamscore=0 clxscore=1015 priorityscore=1501
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608240101
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608240104
 Received-SPF: pass client-ip=205.220.180.131;
  envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
 X-Spam_score_int: -27
@@ -157,78 +158,206 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 
-On 8/13/2026 10:40 AM, Mayuresh Chitale wrote:
-> Commit 27f9566dcd98 ("target/riscv: Update the local interrupt mask")
-> dropped bit 13 (MIP_LCOFIP) from the supervisor-visible interrupt masks.
-> As a result, with Sscofpmf enabled and LCOFIP delegated to S-mode, the
-> overflow interrupt would be raised in mip but never delivered and hence
-> perf sampling stopped receiving overflow interrupts.
+On 8/17/2026 1:03 PM, Mayuresh Chitale wrote:
+> Add initial support for the Sspesa (Precise Event Sample Attribution)
+> extension from the RISC-V Performance Event Sampling specification.
 > 
-> Re-add MIP_LCOFIP to all_ints, sip_writable_mask, mvip_writable_mask
-> to allow it to be writable again.
+> Added the 'sspesa' and ssplcofi CPU properties, and the shpmspc and
+> shpmsdata CSRs.
 > 
-> Fixes: 27f9566dcd98 ("target/riscv: Update the local interrupt mask")
 > Signed-off-by: Mayuresh Chitale <mayuresh.chitale@oss.qualcomm.com>
 > ---
 
 Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 
->   target/riscv/tcg/csr.c | 17 ++++++++++-------
->   1 file changed, 10 insertions(+), 7 deletions(-)
+>   target/riscv/cpu.c                | 13 ++++++-
+>   target/riscv/cpu.h                |  4 +++
+>   target/riscv/cpu_bits.h           |  7 ++++
+>   target/riscv/cpu_cfg_fields.h.inc |  2 ++
+>   target/riscv/tcg/csr.c            | 59 +++++++++++++++++++++++++++++--
+>   5 files changed, 82 insertions(+), 3 deletions(-)
 > 
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 5a82e6563b..f936cdeb68 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -278,6 +278,8 @@ const RISCVIsaExtData isa_edata_arr[] = {
+>       ISA_EXT_DATA_ENTRY(ssctr, PRIV_VERSION_1_12_0, ext_ssctr),
+>       ISA_EXT_DATA_ENTRY(ssdbltrp, PRIV_VERSION_1_13_0, ext_ssdbltrp),
+>       ISA_EXT_DATA_ENTRY(ssnpm, PRIV_VERSION_1_13_0, ext_ssnpm),
+> +    ISA_EXT_DATA_ENTRY(sspesa, PRIV_VERSION_1_12_0, ext_sspesa),
+> +    ISA_EXT_DATA_ENTRY(ssplcofi, PRIV_VERSION_1_12_0, ext_ssplcofi),
+>       ISA_EXT_DATA_ENTRY(sspm, PRIV_VERSION_1_13_0, ext_sspm),
+>       ISA_INTERNAL_EXT_DATA_ENTRY(ssstateen, PRIV_VERSION_1_12_0, ext_ssstateen),
+>       ISA_INTERNAL_EXT_DATA_ENTRY(ssstrict, PRIV_VERSION_1_12_0, has_priv_1_12),
+> @@ -2800,6 +2802,15 @@ static RISCVCPUImpliedExtsRule SSSTATEEN_IMPLIED = {
+>       },
+>   };
+>   
+> +static RISCVCPUImpliedExtsRule SSPESA_IMPLIED = {
+> +    .ext = CPU_CFG_OFFSET(ext_sspesa),
+> +    .implied_multi_exts = {
+> +        CPU_CFG_OFFSET(ext_ssplcofi),
+> +
+> +        RISCV_IMPLIED_EXTS_RULE_END
+> +    },
+> +};
+> +
+>   static RISCVCPUImpliedExtsRule ZVFBFA_IMPLIED = {
+>       .ext = CPU_CFG_OFFSET(ext_zvfbfa),
+>       .implied_multi_exts = {
+> @@ -2829,7 +2840,7 @@ RISCVCPUImpliedExtsRule *riscv_multi_ext_implied_rules[] = {
+>       &ZVKNC_IMPLIED, &ZVKNG_IMPLIED, &ZVKNHB_IMPLIED,
+>       &ZVKS_IMPLIED,  &ZVKSC_IMPLIED, &ZVKSG_IMPLIED, &SHA_IMPLIED,
+>       &SSCFG_IMPLIED, &SUPM_IMPLIED, &SSPM_IMPLIED, &SMCTR_IMPLIED,
+> -    &SSCTR_IMPLIED, &SSSTATEEN_IMPLIED,
+> +    &SSCTR_IMPLIED, &SSSTATEEN_IMPLIED, &SSPESA_IMPLIED,
+>       NULL
+>   };
+>   
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index c9dfa7daff..fe56a6afd1 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -470,6 +470,10 @@ struct CPUArchState {
+>       uint64_t sscratch;
+>       uint64_t mscratch;
+>   
+> +    /* Sspesa CSRs */
+> +    target_ulong shpmspc;
+> +    target_ulong shpmsdata;
+> +
+>       /* Sstc CSRs */
+>       uint64_t stimecmp;
+>   
+> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+> index 3f146a43fe..d3afc9cada 100644
+> --- a/target/riscv/cpu_bits.h
+> +++ b/target/riscv/cpu_bits.h
+> @@ -601,6 +601,13 @@
+>   
+>   #define CSR_SCOUNTOVF       0xda0
+>   
+> + /* Temporary addresses for Sspesa (Precise Event Sample Attribution) CSRs. */
+> +#define CSR_SHPMSPC         0x5d0
+> +#define CSR_SHPMSDATA       0x5d1
+> +
+> +/* shpmsdata fields */
+> +#define SHPMSDATA_CNTRID    0x1f
+> +
+>   /* Crypto Extension */
+>   #define CSR_SEED            0x015
+>   
+> diff --git a/target/riscv/cpu_cfg_fields.h.inc b/target/riscv/cpu_cfg_fields.h.inc
+> index 9eb47af0a7..05e0162b76 100644
+> --- a/target/riscv/cpu_cfg_fields.h.inc
+> +++ b/target/riscv/cpu_cfg_fields.h.inc
+> @@ -110,6 +110,8 @@ BOOL_FIELD(ext_ssaia)
+>   BOOL_FIELD(ext_smctr)
+>   BOOL_FIELD(ext_ssctr)
+>   BOOL_FIELD(ext_sscofpmf)
+> +BOOL_FIELD(ext_sspesa)
+> +BOOL_FIELD(ext_ssplcofi)
+>   BOOL_FIELD(ext_smepmp)
+>   BOOL_FIELD(ext_smrnmi)
+>   BOOL_FIELD(ext_ssnpm)
 > diff --git a/target/riscv/tcg/csr.c b/target/riscv/tcg/csr.c
-> index c05c8ee076..ca68c1f5f1 100644
+> index eb823b16b5..ea49d28aae 100644
 > --- a/target/riscv/tcg/csr.c
 > +++ b/target/riscv/tcg/csr.c
-> @@ -1890,7 +1890,8 @@ static const uint64_t delegable_ints =
->   static const uint64_t vs_delegable_ints =
->       (VS_MODE_INTERRUPTS | LOCAL_INTERRUPTS) & ~MIP_LCOFIP;
->   static const uint64_t all_ints = M_MODE_INTERRUPTS | S_MODE_INTERRUPTS |
-> -                                     HS_MODE_INTERRUPTS | LOCAL_INTERRUPTS;
-> +                                     HS_MODE_INTERRUPTS | MIP_LCOFIP |
-> +                                     LOCAL_INTERRUPTS;
->   #define DELEGABLE_EXCPS ((1ULL << (RISCV_EXCP_INST_ADDR_MIS)) | \
->                            (1ULL << (RISCV_EXCP_INST_ACCESS_FAULT)) | \
->                            (1ULL << (RISCV_EXCP_ILLEGAL_INST)) | \
-> @@ -1936,11 +1937,12 @@ static const target_ulong sstatus_v1_10_mask = SSTATUS_SIE | SSTATUS_SPIE |
+> @@ -276,6 +276,28 @@ static RISCVException smcntrpmf(CPURISCVState *env, int csrno)
+>       return RISCV_EXCP_NONE;
+>   }
 >   
->   /* Bit STIP can be an alias of mip.STIP that's why it's writable in mvip. */
->   static const uint64_t mvip_writable_mask = MIP_SSIP | MIP_STIP | MIP_SEIP |
-> -                                    LOCAL_INTERRUPTS;
-> +                                    MIP_LCOFIP | LOCAL_INTERRUPTS;
->   static const uint64_t mvien_writable_mask = MIP_SSIP | MIP_SEIP |
->                                       LOCAL_INTERRUPTS;
->   
-> -static const uint64_t sip_writable_mask = SIP_SSIP | LOCAL_INTERRUPTS;
-> +static const uint64_t sip_writable_mask = SIP_SSIP | SIP_LCOFIP |
-> +                                          LOCAL_INTERRUPTS;
->   static const uint64_t hip_writable_mask = MIP_VSSIP;
->   static const uint64_t hvip_writable_mask = MIP_VSSIP | MIP_VSTIP |
->                                       MIP_VSEIP | LOCAL_INTERRUPTS;
-> @@ -3953,9 +3955,9 @@ static RISCVException rmw_mvip64(CPURISCVState *env, int csrno,
->        *  alias_mask denotes the bits that come from mip nalias_mask denotes bits
->        *  that come from hvip.
->        */
-> -    uint64_t alias_mask = ((S_MODE_INTERRUPTS | LOCAL_INTERRUPTS) &
-> +    uint64_t alias_mask = ((S_MODE_INTERRUPTS | MIP_LCOFIP | LOCAL_INTERRUPTS) &
->           (env->mideleg | ~env->mvien)) | MIP_STIP;
-> -    uint64_t nalias_mask = (S_MODE_INTERRUPTS | LOCAL_INTERRUPTS) &
-> +    uint64_t nalias_mask = (S_MODE_INTERRUPTS | MIP_LCOFIP | LOCAL_INTERRUPTS) &
->           (~env->mideleg & env->mvien);
->       uint64_t wr_mask_mvip;
->       uint64_t wr_mask_mip;
-> @@ -4188,9 +4190,10 @@ static RISCVException rmw_sie64(CPURISCVState *env, int csrno,
->                                   uint64_t *ret_val,
->                                   uint64_t new_val, uint64_t wr_mask)
+> +static RISCVException sspesa(CPURISCVState *env, int csrno)
+> +{
+> +    bool menvcfg_cde;
+> +
+> +    if (!riscv_cpu_cfg(env)->ext_sspesa) {
+> +        return RISCV_EXCP_ILLEGAL_INST;
+> +    }
+> +
+> +    if (env->priv == PRV_M) {
+> +        return RISCV_EXCP_NONE;
+> +    }
+> +
+> +    menvcfg_cde = get_field(env->menvcfg, MENVCFG_CDE);
+> +    /* Access to shpmspc/shpmsdata from VS-mode always causes a fault */
+> +    if (env->virt_enabled) {
+> +        return menvcfg_cde ? RISCV_EXCP_VIRT_INSTRUCTION_FAULT :
+> +                             RISCV_EXCP_ILLEGAL_INST;
+> +    }
+> +
+> +    return menvcfg_cde ? RISCV_EXCP_NONE : RISCV_EXCP_ILLEGAL_INST;
+> +}
+> +
+>   static RISCVException smcntrpmf_32(CPURISCVState *env, int csrno)
 >   {
-> -    uint64_t nalias_mask = (S_MODE_INTERRUPTS | LOCAL_INTERRUPTS) &
-> +    uint64_t nalias_mask = (S_MODE_INTERRUPTS | MIP_LCOFIP | LOCAL_INTERRUPTS) &
->           (~env->mideleg & env->mvien);
-> -    uint64_t alias_mask = (S_MODE_INTERRUPTS | LOCAL_INTERRUPTS) & env->mideleg;
-> +    uint64_t alias_mask = (S_MODE_INTERRUPTS | MIP_LCOFIP | LOCAL_INTERRUPTS) &
-> +        env->mideleg;
->       uint64_t sie_mask = wr_mask & nalias_mask;
->       RISCVException ret;
+>       if (riscv_cpu_mxl(env) != MXL_RV32) {
+> @@ -1672,6 +1694,34 @@ static RISCVException read_scountovf(CPURISCVState *env, int csrno,
+>       return RISCV_EXCP_NONE;
+>   }
 >   
+> +static RISCVException read_shpmspc(CPURISCVState *env, int csrno,
+> +                                   target_ulong *val)
+> +{
+> +    *val = env->shpmspc;
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +static RISCVException write_shpmspc(CPURISCVState *env, int csrno,
+> +                                    target_ulong val, uintptr_t ra)
+> +{
+> +    env->shpmspc = val;
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +static RISCVException read_shpmsdata(CPURISCVState *env, int csrno,
+> +                                     target_ulong *val)
+> +{
+> +    *val = env->shpmsdata;
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +static RISCVException write_shpmsdata(CPURISCVState *env, int csrno,
+> +                                      target_ulong val, uintptr_t ra)
+> +{
+> +    env->shpmsdata = val;
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+>   static RISCVException read_time(CPURISCVState *env, int csrno,
+>                                   target_ulong *val)
+>   {
+> @@ -3220,7 +3270,7 @@ static RISCVException write_menvcfg(CPURISCVState *env, int csrno,
+>       if (riscv_cpu_mxl(env) == MXL_RV64) {
+>           mask |= (cfg->ext_svpbmt ? MENVCFG_PBMTE : 0) |
+>                   (cfg->ext_sstc ? MENVCFG_STCE : 0) |
+> -                (cfg->ext_smcdeleg ? MENVCFG_CDE : 0) |
+> +                ((cfg->ext_smcdeleg || cfg->ext_sspesa) ? MENVCFG_CDE : 0) |
+>                   (cfg->ext_svadu ? MENVCFG_ADUE : 0) |
+>                   (cfg->ext_ssdbltrp ? MENVCFG_DTE : 0);
+>   
+> @@ -3272,7 +3322,7 @@ static RISCVException write_menvcfgh(CPURISCVState *env, int csrno,
+>       uint64_t mask = (cfg->ext_svpbmt ? MENVCFG_PBMTE : 0) |
+>                       (cfg->ext_sstc ? MENVCFG_STCE : 0) |
+>                       (cfg->ext_svadu ? MENVCFG_ADUE : 0) |
+> -                    (cfg->ext_smcdeleg ? MENVCFG_CDE : 0) |
+> +                    ((cfg->ext_smcdeleg || cfg->ext_sspesa) ? MENVCFG_CDE : 0) |
+>                       (cfg->ext_ssdbltrp ? MENVCFG_DTE : 0);
+>       uint64_t valh = (uint64_t)val << 32;
+>       bool stce_changed = false;
+> @@ -6771,6 +6821,11 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+>                                write_mhpmcounterh                         },
+>       [CSR_SCOUNTOVF]      = { "scountovf", sscofpmf,  read_scountovf,
+>                                .min_priv_ver = PRIV_VERSION_1_12_0 },
+> +    [CSR_SHPMSPC]        = { "shpmspc",   sspesa, read_shpmspc, write_shpmspc,
+> +                             .min_priv_ver = PRIV_VERSION_1_12_0 },
+> +    [CSR_SHPMSDATA]      = { "shpmsdata", sspesa, read_shpmsdata,
+> +                             write_shpmsdata,
+> +                             .min_priv_ver = PRIV_VERSION_1_12_0 },
+>   
+>   #endif /* !CONFIG_USER_ONLY */
+>   };
 
 
