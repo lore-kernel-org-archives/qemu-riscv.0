@@ -4,131 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 395DDC5DF81
-	for <qemu-riscv@archiver.kernel.org>; Mon, 24 Aug 2026 19:04:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 731A5C5DF81
+	for <qemu-riscv@archiver.kernel.org>; Mon, 24 Aug 2026 22:12:12 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wyZyM-0003wf-IA; Mon, 24 Aug 2026 15:04:42 -0400
+	id 1wyctg-0003Oe-3r; Mon, 24 Aug 2026 18:12:04 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1wyZyK-0003uQ-11
- for qemu-riscv@nongnu.org; Mon, 24 Aug 2026 15:04:40 -0400
-Received: from mail-ed1-x532.google.com ([2a00:1450:4864:20::532])
+ (Exim 4.90_1) (envelope-from <portias@tenstorrent.com>)
+ id 1wycte-0003OH-NQ
+ for qemu-riscv@nongnu.org; Mon, 24 Aug 2026 18:12:02 -0400
+Received: from mail-pf1-x436.google.com ([2607:f8b0:4864:20::436])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1wyZy9-0002zr-LK
- for qemu-riscv@nongnu.org; Mon, 24 Aug 2026 15:04:34 -0400
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-698ae09e356so5458326a12.2
- for <qemu-riscv@nongnu.org>; Mon, 24 Aug 2026 12:04:27 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1787598266; cv=none;
- d=google.com; s=arc-20260327;
- b=koQNf8qvbw5MH0CYop+GfsJnc8aWhZKcGmQStd+jOTMvgz/Dt147PEYQ+CjL3r9S3X
- KCBOvjrvz6ci8mB/bGcn+pLr9IdL7/VVYGlhkpJ0yf0/hpjYxoAGdqLI1YeSnjhjTPkQ
- 3k1vE6dXOs/GKxUxSJpLrluxECROItZJLSNcnhpzGAdxy9VJcjY/6X2RDxCDHBRdALOy
- xC5TGiKnBK78zdevAvu+i4cC+H83SQeUBzuegD5YDmNXTBdLe2N0rK8q/CBKW4D0HNi1
- VkgWcJTvT3MDoOw12SIXqkq+3GQuOhF6412AfACC82+2Y45ZbyeHlKnGxYNcv0Mn1OUt
- Fm/g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:reply-to:in-reply-to:references
- :mime-version:dkim-signature;
- bh=16z9UeUSeMr8MvDpTINfKr5DoOjSiqRCHnr5kWRYKAI=;
- fh=srSQ02I2sKlesiFmc/sRtib073Pztw1mdFJpPNEoz8M=;
- b=lXp9xEgnsGH0w8qXDRLNbiQgrDHcrIgK5i22ezBJpInczG69Lq6Ui81HFsU7EApb6+
- FLtMIiybicQwmJO9pUvTKVkwyMjMu9vLIjICsSxWCulq5kX23t84ea0yq478L6rLQdje
- JqyDQZwhgX7OvOlqycBwVO8AoAO1WBH4+kNgTjTCseq2OIy9aec+48Ok5qB6iYvARChW
- owMzoNLTWhA/vb8MZdz+GPD3x3OnEbdAwpb2REXODF4Bez+I78nA/CBaxI4Q1mNLkuNn
- W0KkI2TBd+k3uazZD/wj4Lu5JUIMKmH6glrzD6JqWQrmONz5rrs1BuwppMUbNstQBNbk
- 7GIw==; darn=nongnu.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ (Exim 4.90_1) (envelope-from <portias@tenstorrent.com>)
+ id 1wyctc-00088T-HM
+ for qemu-riscv@nongnu.org; Mon, 24 Aug 2026 18:12:02 -0400
+Received: by mail-pf1-x436.google.com with SMTP id
+ d2e1a72fcca58-84862aaa8bfso125239b3a.2
+ for <qemu-riscv@nongnu.org>; Mon, 24 Aug 2026 15:11:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1787598266; x=1788203066; darn=nongnu.org;
- h=content-type:cc:to:subject:message-id:date:from:reply-to
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=16z9UeUSeMr8MvDpTINfKr5DoOjSiqRCHnr5kWRYKAI=;
- b=i5IkUglTDNcfVH/m4t0ugqhQhuKKt8DgDA/yQKgqVbVj7KYGRSzPOanyo924MfbqSH
- /SD0nIDAZaDLhJMWFMl00gDwIm4bKA39LMamE/vgYgdTlvdk3VDeeijjDHPktz/Wv/tN
- tYVYrHD8eXDdBpOrbXehkvA8cqDV2zcIzbdStzvsO998Llh2g/haMh2WDSsrEggFbePG
- iYOZ96FkWw0XdgBK1zNJSe2PTURP4PevEfQGVuvYmjuI7SwQ+qMYu268EAVmi/5rC7n8
- XTUT42/hQorfiARQ56C/UyzjaVncF+H3VBRdDg7iXq2QA4cu2TKeZ1XliLaUBoArDQl9
- JKbA==
+ d=tenstorrent.com; s=google; t=1787609508; x=1788214308; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=YfPAJrzh23k5bf6NYHNz6je6+xhKQtygq0qvA9+KJck=;
+ b=DVq6FEF81+1sYAh0vlmoYOCxcNVwXkgdlGrexjLGcz/8xFwCLCE1qZtNsHspQtUye4
+ l4PvKx2JKi6xODAv6b9bpjUZf1LAKdtoXrNkJ5deUcEhNXrMwfT3AfDuO0aVKlEJDe7F
+ 6P1KkZCaH0Rzd1MoLuEeYKJHUBcmRdPlz026eCsNNQUO8bLhv9rLX5if1TXoCBQ0Mogd
+ 3zpuDMtiQlOELwJgsErsSMN+xf0zFIQ6ftsXgeBiS7nlG9PirKfPEoTrjYj0K4VXiuTk
+ imzERjpArrbxLdeFOFEaTHVPGHLXJdBZx471ccD0Z4+1Y647RYo/J4WqdAxlXmfzSwxv
+ MIUQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787598266; x=1788203066;
- h=content-type:cc:to:subject:message-id:date:from:reply-to
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=16z9UeUSeMr8MvDpTINfKr5DoOjSiqRCHnr5kWRYKAI=;
- b=n+N1ie7Pp/SVruinXsVRjDdX8FS52CKz/Q24pvUFij6oaJB0lAXd6vr1wm52UGTdHR
- Xn0niOn11vbd6BoNheG9Xf0IokGEdV7pz9h9Ukf1DQB1yTOUwmpdpa0DDrZb1i01rW8C
- moHJGcnznHHmt8HH6E53IJqd4j8XjEMJD+3HYa1vVcIFrX28pAZWyUtorf0lQQ8ojqNn
- MclWSuLIwM4FoRaY1ByNFe/UxDBbGXcQGgZZpmHtbMbA61eHFxbRjsjSFlh7Qm3jWpSK
- qnWvFl80gAhVXA2f5iDS2ZfM5X0iW08kwjshUgsVNT8AHgyFOcko67ROIUqnIeNnLI9D
- Xesg==
+ d=1e100.net; s=20251104; t=1787609508; x=1788214308;
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=YfPAJrzh23k5bf6NYHNz6je6+xhKQtygq0qvA9+KJck=;
+ b=P/TeDEQSZE2cc5Uu1MFJ7otk5mGO14vyaYOhhnnzCZ3L3oSpZTxTQ34CpuzbhF/pGJ
+ p8Uk5hschIYUbe4oVS5vkf19BYv6ntXbRsxE3UdOkU4YHCV+yh8mKVt4Ih9zsFb1NkDf
+ t5Jl53ziF4iq2fauNkzsGJcUZR9cNEJRPa0FA7DapbitmZj9/7DaN66zR2OVUm+w5sCK
+ X0SBYAchKqtWgU+U4sdhIhom4ybIYMVI8MaJkSYGqaJVG3B5yi2iJ/C8H2qxXPrnNrp0
+ KEAa5k7xKDPdsjF5/nzOZR0PRf7RItH1kCE2aQehJxqsR/Jhu/QSI+v9gqZQonlTD68/
+ yTpw==
 X-Forwarded-Encrypted: i=1;
- AHgh+RpFqllp2VqDc1KWPC2SGEzfydtXAwHn1vkFJVWg0mfwo9O2OfrXJQSrRAouUHRN8CgrJFu5JJvxtpMn@nongnu.org
-X-Gm-Message-State: AFuF++lJl49W5qarDQGeYzF7ApjmbZzGE5mtrOp7Xc4lYZ6HB21WTASI
- ku/9qLqBP/onoyawKjuumg0jWXwPp+6/CknGJxa8zZZf3BsNXk/ygobTfGn4/ayhE8Xbs9GLVIX
- SzFApJni8xEixTBtXR1MVVex3m8sgUac=
-X-Gm-Gg: AR+sD11/iAf1+N7csRn/FBNH3DVySSCVgddmnmHWG4Y79VE/zEbAHuupuWTQxiKkx/S
- UHxgJkHfJc00Lyc78+wjuhcOuKBed1iXUc6QWQI2zw1PNGkDbBUGd2vym2pW2JgC6e3txlQvvw2
- mWFRvKwlDHKngfMTDaxjDSl1SzNVx4JpExOE1H5/8MVF9CKw+wnzODg3yUfFb+JNsUCXKmi1TDz
- kAmXq4QOwhNNoSNgDUCOYn1OsVjYpjP+BlsT20mxMDS4L6IverTBpNau9Fy8Rsle9mhgSGxKz1/
- 6A+sP1wiS43lEzktjntPptxmjo/Ojfw81vNgFTsSr/wld0uzTgs7TFs=
-X-Received: by 2002:a17:907:a602:b0:c21:167b:47f0 with SMTP id
- a640c23a62f3a-c246a4ae088mr3658112166b.2.1787598265837; Mon, 24 Aug 2026
- 12:04:25 -0700 (PDT)
+ AHgh+RpZ52FzTGc5mM+TGyIPNO435gBzskAX+syc6pJr9m6ssm5XzVSWw85MZz85YyUPyeQhmsGXWk/+Z1Ur@nongnu.org
+X-Gm-Message-State: AFuF++mE0DquFz0HxYfcEoeSfF92dQ8MHJGm1Nm1TGppdfKUZ45cjAEK
+ OMe/55obLgAfg7+rUEtN1sQLHN6heBdtOwRz8BCJm7n+ONm8+Aiz/BkWTmpdErXlfNA=
+X-Gm-Gg: AR+sD13rXh1DxBrJzQRwKo18wo9/kBn55cpVEcc75BOOAt01XscVb+z237b5y+vOtGW
+ 021l3x3FQDz1SK7JfWA0RizgxylWTr/N/cjZHjwK9cZiUPuFLUqMrRJfljGxOcR5nQeSTwUKCs6
+ xL/5Q3uqWCG0eJPkJBVJYPf63n4lRmq6HQOA2Bj1d9Kpp1SIx4Rrnlg+KLR6/ALiTcRX4XopqIH
+ TkZwXlM96bGkWm1JWZF2xRJRUXej2r38zd0slC/62mc0TNVobqcCIo6ADgwNni0j3jJASFP/6VY
+ iMB8qP9Px7+JqIW8Q6yN6hBVV2ZAz5SQmkqUYWpTOWpGOMgzfO7Y+wjD0T9CH6snA+gs9iaHH3v
+ CxT0Kv/w/1T+pjIrO9DC3j89yMd+Wyoh8/+cFuhw4+oZcI0pwzu358rGXIzrOC5DgnFbf7UX6Tp
+ u85mqgXnAlNb2EautfOGBvSGhIH/AGYXNk7d7JWM9Sot09q6ybMQOgS0O3kEf8i4PhV/vYo2epl
+ ceIyUoMOLtncOmv
+X-Received: by 2002:a05:6a00:7183:b0:848:4d4f:d481 with SMTP id
+ d2e1a72fcca58-851f9fa9f18mr16205259b3a.2.1787609508252; 
+ Mon, 24 Aug 2026 15:11:48 -0700 (PDT)
+Received: from [172.16.1.33] ([159.196.41.205])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-8520eed2293sm2262821b3a.2.2026.08.24.15.11.42
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 24 Aug 2026 15:11:47 -0700 (PDT)
+Message-ID: <6dd03d71-b0e5-4039-bce9-37c1cff4b108@oss.tenstorrent.com>
+Date: Tue, 25 Aug 2026 08:11:40 +1000
 MIME-Version: 1.0
-References: <20260823150731.896-1-luoyonggang@gmail.com>
- <20260823150731.896-13-luoyonggang@gmail.com>
- <b9f0853b-adda-457d-94e1-add9bb2a2548@oss.qualcomm.com>
-In-Reply-To: <b9f0853b-adda-457d-94e1-add9bb2a2548@oss.qualcomm.com>
-From: Yonggang Luo <luoyonggang@gmail.com>
-Date: Tue, 25 Aug 2026 03:04:13 +0800
-X-Gm-Features: AcwNN1VpGS6HjZVALaJtNHZsMkMqA2SZOd0xqP28cZFoeWPX1v0HRwlhxBGrdRw
-Message-ID: <CAE2XoE9GvZQdikiacN11ryM8o_WwffoUNViMLcQymZXo8+1FKw@mail.gmail.com>
-Subject: Re: [PATCH 12/12] meson: link ARM and RISC-V into qemu-system
-To: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
-Cc: qemu-devel@nongnu.org, Xianglai Li <lixianglai@loongson.cn>, 
- Alistair Francis <alistair.francis@wdc.com>, Chinmay Rath <rathc@linux.ibm.com>,
- Sunil V L <sunilvl@ventanamicro.com>, qemu-riscv@nongnu.org, 
- Alexander Bulekov <alxndr@bu.edu>, Zhao Liu <zhao1.liu@intel.com>,
- Eric Farman <farman@linux.ibm.com>, 
- Laurent Vivier <lvivier@redhat.com>, Peter Maydell <peter.maydell@linaro.org>, 
- Chao Liu <chao.liu@processmission.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>, Song Gao <17746591750@163.com>, 
- Harsh Prateek Bora <harshpb@linux.ibm.com>, Glenn Miles <milesg@linux.ibm.com>,
- =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- qemu-s390x@nongnu.org, Jiaxun Yang <jiaxun.yang@flygoat.com>,
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@mailo.com>, 
- "Michael S. Tsirkin" <mst@redhat.com>, Stefan Hajnoczi <stefanha@redhat.com>, 
- =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, 
- David Hildenbrand <david@kernel.org>, qemu-ppc@nongnu.org, qemu-arm@nongnu.org,
- Igor Mammedov <imammedo@redhat.com>, Aleksandar Rikalo <arikalo@gmail.com>, 
- Nicholas Piggin <npiggin@gmail.com>, Cornelia Huck <cohuck@redhat.com>, 
- Richard Henderson <richard.henderson@linaro.org>,
- Ilya Leoshkevich <iii@linux.ibm.com>, 
- Fabiano Rosas <farosas@suse.de>, Aurelien Jarno <aurelien@aurel32.net>, 
- Paolo Bonzini <pbonzini@redhat.com>, Ani Sinha <anisinha@redhat.com>, 
- Bibo Mao <maobibo@loongson.cn>,
- =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>, 
- Matthew Rosato <mjrosato@linux.ibm.com>, Weiwei Li <liwei1518@gmail.com>, 
- Darren Kenny <darren.kenny@oracle.com>
-Content-Type: multipart/alternative; boundary="000000000000a2ec950659cfa7a9"
-Received-SPF: pass client-ip=2a00:1450:4864:20::532;
- envelope-from=luoyonggang@gmail.com; helo=mail-ed1-x532.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/4] hw/riscv/boot: Make RISCVBootInfo const where possible
+To: Joel Stanley <joel@jms.id.au>, =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?=
+ <philmd@linaro.org>, Alistair Francis <alistair.francis@wdc.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Cc: Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei
+ <zhiwei_liu@linux.alibaba.com>, Chao Liu <chao.liu@processmission.com>,
+ Nicholas Piggin <npiggin@gmail.com>,
+ Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>,
+ Michael Ellerman <mpe@kernel.org>, Niek Linnenbank
+ <nieklinnenbank@gmail.com>, Peter Maydell <peter.maydell@linaro.org>,
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+References: <20260824055642.41098-1-joel@jms.id.au>
+ <20260824055642.41098-2-joel@jms.id.au>
+Content-Language: en-US
+From: Portia Stephens <portias@oss.tenstorrent.com>
+In-Reply-To: <20260824055642.41098-2-joel@jms.id.au>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::436;
+ envelope-from=portias@tenstorrent.com; helo=mail-pf1-x436.google.com
+X-Spam_score_int: -19
+X-Spam_score: -2.0
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_NONE=-0.0001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -141,462 +110,81 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Reply-To: luoyonggang@gmail.com
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---000000000000a2ec950659cfa7a9
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-Thanks, a lot simpler, you can pick my patches(you think is good) into your
-patch series and repost as a new version, so the review process is easier.
-
-On Tue, Aug 25, 2026 at 12:20=E2=80=AFAM Pierrick Bouvier <
-pierrick.bouvier@oss.qualcomm.com> wrote:
+On 24/8/2026 3:56 PM, Joel Stanley wrote:
+> As with riscv_load_firmware, take a const pointer in functions that
+> reads the structure without writing.
 >
-> On 8/23/2026 8:07 AM, Yonggang Luo wrote:
-> > - Build qemu-system (and qemu-systemw on Windows) from aarch64
-> >   common/system objects plus RISC-V arch objects taken from the
-> >   existing riscv64 lib.
-> > - Pull 32-bit TargetInfo and 32-only boards from the arm/riscv32
-> >   libs so hw/arm and target/riscv are not compiled twice.
-> > - Skip linking qemu-system-{arm,aarch64,riscv32,riscv64} and the
-> >   Windows *w variants; symlink those names to qemu-system so
-> >   argv[0] still selects TargetInfo.
-> >
-> > Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
-> > ---
-> >  meson.build | 156 +++++++++++++++++++++++++++++++++++++++++++++++++---
-> >  1 file changed, 147 insertions(+), 9 deletions(-)
-> >
-> > diff --git a/meson.build b/meson.build
-> > index 449d50f2983..b4f435f6a22 100644
-> > --- a/meson.build
-> > +++ b/meson.build
-> > @@ -4250,6 +4250,10 @@ endif
-> >
-> >  traceable =3D []
-> >  emulators =3D {}
-> > +target_softmmu =3D {}
-> > +combo_softmmu =3D ['aarch64-softmmu', 'arm-softmmu', 'riscv32-softmmu'=
-,
-'riscv64-softmmu']
-> > +have_qemu_system_combo =3D ('aarch64-softmmu' in target_dirs
-> > +                          and 'riscv64-softmmu' in target_dirs)
-> >  foreach target : target_dirs
-> >    config_target =3D config_target_mak[target]
-> >    target_name =3D config_target['TARGET_NAME']
-> > @@ -4399,20 +4403,37 @@ foreach target : target_dirs
-> >                   c_args: c_args,
-> >                   build_by_default: false)
-> >
-> > +  if target in combo_softmmu
-> > +    target_softmmu +=3D {target: {
-> > +      'lib': lib,
-> > +      'arch_srcs': arch_srcs,
-> > +      'arch_deps': arch_deps,
-> > +      'c_args': c_args,
-> > +      'link_args': link_args,
-> > +      'target_stubs': target_stubs,
-> > +      'main_rs': main_rs,
-> > +      'config_target': config_target,
-> > +      'target_base_arch': target_base_arch,
-> > +    }}
-> > +  endif
-> > +
-> >    if target.endswith('-softmmu')
-> > -    execs =3D [{
-> > -      'name': 'qemu-system-' + target_name,
-> > -      'win_subsystem': 'console',
-> > -      'sources': [main_rs, files('system/main.c')],
-> > -      'dependencies': [sdl, target_stubs],
-> > -    }]
-> > -    if host_os =3D=3D 'windows' and (sdl.found() or gtk.found())
-> > +    execs =3D []
-> > +    if not (have_qemu_system_combo and target in combo_softmmu)
-> >        execs +=3D [{
-> > -        'name': 'qemu-system-' + target_name + 'w',
-> > -        'win_subsystem': 'windows',
-> > +        'name': 'qemu-system-' + target_name,
-> > +        'win_subsystem': 'console',
-> >          'sources': [main_rs, files('system/main.c')],
-> >          'dependencies': [sdl, target_stubs],
-> >        }]
-> > +      if host_os =3D=3D 'windows' and (sdl.found() or gtk.found())
-> > +        execs +=3D [{
-> > +          'name': 'qemu-system-' + target_name + 'w',
-> > +          'win_subsystem': 'windows',
-> > +          'sources': [main_rs, files('system/main.c')],
-> > +          'dependencies': [sdl, target_stubs],
-> > +        }]
-> > +      endif
-> >      endif
-> >      if get_option('fuzzing')
-> >        specific_fuzz =3D specific_fuzz_ss.apply(config_target, strict:
-false)
-> > @@ -4481,6 +4502,123 @@ foreach target : target_dirs
-> >    endforeach
-> >  endforeach
-> >
-> > +# Combined ARM + RISC-V system emulator (32 and 64).
-> > +# Common/system objects come from aarch64. RISC-V arch objects come
-> > +# from the existing riscv64 lib. 32-bit TargetInfo and 32-only boards
-> > +# come from the arm/riscv32 libs. Per-target qemu-system-* names are
-> > +# symlinks to qemu-system (argv[0] selects TargetInfo).
-> > +if have_qemu_system_combo
-> > +  a64 =3D target_softmmu['aarch64-softmmu']
-> > +  rv =3D target_softmmu['riscv64-softmmu']
-> > +  extra_objs =3D []
-> > +  target_info_def =3D files('target-info-def.c')
-> > +  foreach spec : [[common_ss, common_all], [system_ss, libsystem]]
-> > +    rv_src =3D spec[0].apply(rv['config_target'], strict: false)
-> > +    a64_src =3D spec[0].apply(a64['config_target'], strict: false)
-> > +    extra =3D []
-> > +    foreach f : rv_src.sources()
-> > +      if f not in a64_src.sources() and not
-f.full_path().endswith('_stubs.c')
-> > +        extra +=3D f
-> > +      endif
-> > +    endforeach
-> > +    if extra.length() > 0
-> > +      extra_objs +=3D spec[1].extract_objects(extra)
-> > +    endif
-> > +  endforeach
-> > +  rv_base =3D rv['target_base_arch']
-> > +  if rv_base in target_common_arch_libs
-> > +    src =3D target_common_arch[rv_base].apply(rv['config_target'],
-strict: false)
-> > +    extra_objs +=3D
-target_common_arch_libs[rv_base].extract_objects(src.sources())
-> > +  endif
-> > +  if rv_base in target_common_system_arch_libs
-> > +    src =3D
-target_common_system_arch[rv_base].apply(rv['config_target'], strict: false=
-)
-> > +    extra_objs +=3D
-target_common_system_arch_libs[rv_base].extract_objects(src.sources())
-> > +  endif
-> > +  foreach pair : [['arm-softmmu', 'aarch64-softmmu'],
-['riscv32-softmmu', 'riscv64-softmmu']]
-> > +    t32 =3D pair[0]
-> > +    t64 =3D pair[1]
-> > +    if t32 in target_softmmu
-> > +      extra_objs +=3D
-target_softmmu[t32]['lib'].extract_objects(target_info_def)
-> > +      base32 =3D target_softmmu[t32]['target_base_arch']
-> > +      if base32 in hw_arch
-> > +        hw32 =3D
-hw_arch[base32].apply(target_softmmu[t32]['config_target'], strict: false)
-> > +        hw64 =3D
-hw_arch[base32].apply(target_softmmu[t64]['config_target'], strict: false)
-> > +        extra_hw =3D []
-> > +        foreach f : hw32.sources()
-> > +          if f not in hw64.sources()
-> > +            extra_hw +=3D f
-> > +          endif
-> > +        endforeach
-> > +        if extra_hw.length() > 0
-> > +          extra_objs +=3D
-target_softmmu[t32]['lib'].extract_objects(extra_hw)
-> > +        endif
-> > +      endif
-> > +    endif
-> > +  endforeach
-> > +  combo_objects =3D extra_objs
-> > +  combo_objects +=3D a64['lib'].extract_all_objects(recursive: true)
-> > +  combo_objects +=3D rv['lib'].extract_objects(rv['arch_srcs'])
-> > +  combo_deps =3D a64['arch_deps'] + rv['arch_deps'] + [sdl,
-a64['target_stubs'], rv['target_stubs']]
-> > +  if 'arm-softmmu' in target_softmmu
-> > +    combo_deps +=3D target_softmmu['arm-softmmu']['arch_deps']
-> > +  endif
-> > +  if 'riscv32-softmmu' in target_softmmu
-> > +    combo_deps +=3D target_softmmu['riscv32-softmmu']['arch_deps']
-> > +  endif
-> > +  combo_execs =3D [{
-> > +    'name': 'qemu-system',
-> > +    'win_subsystem': 'console',
-> > +  }]
-> > +  if host_os =3D=3D 'windows' and (sdl.found() or gtk.found())
-> > +    combo_execs +=3D [{
-> > +      'name': 'qemu-systemw',
-> > +      'win_subsystem': 'windows',
-> > +    }]
-> > +  endif
-> > +  combo_exe_suffix =3D host_os =3D=3D 'windows' ? '.exe' : ''
-> > +  combo_alias_py =3D 'import os, sys; src, dst =3D sys.argv[1:3];
-os.path.exists(dst) and os.remove(dst); os.symlink(os.path.basename(src),
-dst)'
-> > +  foreach exe : combo_execs
-> > +    emulator =3D executable(exe['name'], [a64['main_rs'],
-files('system/main.c')],
-> > +               install: true,
-> > +               c_args: a64['c_args'],
-> > +               dependencies: combo_deps,
-> > +               objects: combo_objects,
-> > +               link_depends: [block_syms, qemu_syms],
-> > +               link_args: a64['link_args'],
-> > +               win_subsystem: exe['win_subsystem'])
-> > +    emulators +=3D {exe['name']: emulator}
-> > +    traceable +=3D [{
-> > +      'exe': exe['name'],
-> > +      'probe-prefix': 'qemu.system.multi',
-> > +    }]
-> > +    foreach t : combo_softmmu
-> > +      if t not in target_softmmu
-> > +        continue
-> > +      endif
-> > +      tname =3D target_softmmu[t]['config_target']['TARGET_NAME']
-> > +      if exe['name'] =3D=3D 'qemu-systemw'
-> > +        alias =3D 'qemu-system-' + tname + 'w'
-> > +      else
-> > +        alias =3D 'qemu-system-' + tname
-> > +      endif
-> > +      alias_tgt =3D custom_target(alias,
-> > +                                input: emulator,
-> > +                                output: alias + combo_exe_suffix,
-> > +                                command: [python, '-c',
-combo_alias_py, '@INPUT@', '@OUTPUT@'],
-> > +                                build_by_default: true,
-> > +                                install: false)
-> > +      emulators +=3D {alias: alias_tgt}
-> > +      install_symlink(alias + combo_exe_suffix,
-> > +                      pointing_to: exe['name'] + combo_exe_suffix,
-> > +                      install_dir: get_option('bindir'))
-> > +      traceable +=3D [{
-> > +        'exe': alias,
-> > +        'probe-prefix': 'qemu.system.' + tname,
-> > +      }]
-> > +    endforeach
-> > +  endforeach
-> > +endif
-> > +
-> >  # Other build targets
-> >
-> >  if get_option('plugins')
+> Suggested-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+> Signed-off-by: Joel Stanley <joel@jms.id.au>
+> ---
+>   include/hw/riscv/boot.h | 6 +++---
+>   hw/riscv/boot.c         | 6 +++---
+>   2 files changed, 6 insertions(+), 6 deletions(-)
+
+
+Reviewed-by: Portia Stephens <portias@oss.tenstorrent.com>
+
+
 >
-> Please find attached a much simpler implementation, which only requires
-> a single line update as we add new targets in single-binary.
->
-> Regards,
-> Pierrick
-
-
-
---
-         =E6=AD=A4=E8=87=B4
-=E7=A4=BC
-=E7=BD=97=E5=8B=87=E5=88=9A
-Yours
-    sincerely,
-Yonggang Luo
-
---000000000000a2ec950659cfa7a9
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Thanks, a lot simpler, you can pick my patches(you think i=
-s good) into your patch series and repost as a new version, so the review p=
-rocess is easier.<br><br>On Tue, Aug 25, 2026 at 12:20=E2=80=AFAM Pierrick =
-Bouvier &lt;<a href=3D"mailto:pierrick.bouvier@oss.qualcomm.com">pierrick.b=
-ouvier@oss.qualcomm.com</a>&gt; wrote:<br>&gt;<br>&gt; On 8/23/2026 8:07 AM=
-, Yonggang Luo wrote:<br>&gt; &gt; - Build qemu-system (and qemu-systemw on=
- Windows) from aarch64<br>&gt; &gt; =C2=A0 common/system objects plus RISC-=
-V arch objects taken from the<br>&gt; &gt; =C2=A0 existing riscv64 lib.<br>=
-&gt; &gt; - Pull 32-bit TargetInfo and 32-only boards from the arm/riscv32<=
-br>&gt; &gt; =C2=A0 libs so hw/arm and target/riscv are not compiled twice.=
-<br>&gt; &gt; - Skip linking qemu-system-{arm,aarch64,riscv32,riscv64} and =
-the<br>&gt; &gt; =C2=A0 Windows *w variants; symlink those names to qemu-sy=
-stem so<br>&gt; &gt; =C2=A0 argv[0] still selects TargetInfo.<br>&gt; &gt;<=
-br>&gt; &gt; Signed-off-by: Yonggang Luo &lt;<a href=3D"mailto:luoyonggang@=
-gmail.com">luoyonggang@gmail.com</a>&gt;<br>&gt; &gt; ---<br>&gt; &gt; =C2=
-=A0meson.build | 156 +++++++++++++++++++++++++++++++++++++++++++++++++---<b=
-r>&gt; &gt; =C2=A01 file changed, 147 insertions(+), 9 deletions(-)<br>&gt;=
- &gt;<br>&gt; &gt; diff --git a/meson.build b/meson.build<br>&gt; &gt; inde=
-x 449d50f2983..b4f435f6a22 100644<br>&gt; &gt; --- a/meson.build<br>&gt; &g=
-t; +++ b/meson.build<br>&gt; &gt; @@ -4250,6 +4250,10 @@ endif<br>&gt; &gt;=
-<br>&gt; &gt; =C2=A0traceable =3D []<br>&gt; &gt; =C2=A0emulators =3D {}<br=
->&gt; &gt; +target_softmmu =3D {}<br>&gt; &gt; +combo_softmmu =3D [&#39;aar=
-ch64-softmmu&#39;, &#39;arm-softmmu&#39;, &#39;riscv32-softmmu&#39;, &#39;r=
-iscv64-softmmu&#39;]<br>&gt; &gt; +have_qemu_system_combo =3D (&#39;aarch64=
--softmmu&#39; in target_dirs<br>&gt; &gt; + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0and &#39;riscv64=
--softmmu&#39; in target_dirs)<br>&gt; &gt; =C2=A0foreach target : target_di=
-rs<br>&gt; &gt; =C2=A0 =C2=A0config_target =3D config_target_mak[target]<br=
->&gt; &gt; =C2=A0 =C2=A0target_name =3D config_target[&#39;TARGET_NAME&#39;=
-]<br>&gt; &gt; @@ -4399,20 +4403,37 @@ foreach target : target_dirs<br>&gt;=
- &gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 c_args=
-: c_args,<br>&gt; &gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 build_by_default: false)<br>&gt; &gt;<br>&gt; &gt; + =C2=A0if ta=
-rget in combo_softmmu<br>&gt; &gt; + =C2=A0 =C2=A0target_softmmu +=3D {targ=
-et: {<br>&gt; &gt; + =C2=A0 =C2=A0 =C2=A0&#39;lib&#39;: lib,<br>&gt; &gt; +=
- =C2=A0 =C2=A0 =C2=A0&#39;arch_srcs&#39;: arch_srcs,<br>&gt; &gt; + =C2=A0 =
-=C2=A0 =C2=A0&#39;arch_deps&#39;: arch_deps,<br>&gt; &gt; + =C2=A0 =C2=A0 =
-=C2=A0&#39;c_args&#39;: c_args,<br>&gt; &gt; + =C2=A0 =C2=A0 =C2=A0&#39;lin=
-k_args&#39;: link_args,<br>&gt; &gt; + =C2=A0 =C2=A0 =C2=A0&#39;target_stub=
-s&#39;: target_stubs,<br>&gt; &gt; + =C2=A0 =C2=A0 =C2=A0&#39;main_rs&#39;:=
- main_rs,<br>&gt; &gt; + =C2=A0 =C2=A0 =C2=A0&#39;config_target&#39;: confi=
-g_target,<br>&gt; &gt; + =C2=A0 =C2=A0 =C2=A0&#39;target_base_arch&#39;: ta=
-rget_base_arch,<br>&gt; &gt; + =C2=A0 =C2=A0}}<br>&gt; &gt; + =C2=A0endif<b=
-r>&gt; &gt; +<br>&gt; &gt; =C2=A0 =C2=A0if target.endswith(&#39;-softmmu&#3=
-9;)<br>&gt; &gt; - =C2=A0 =C2=A0execs =3D [{<br>&gt; &gt; - =C2=A0 =C2=A0 =
-=C2=A0&#39;name&#39;: &#39;qemu-system-&#39; + target_name,<br>&gt; &gt; - =
-=C2=A0 =C2=A0 =C2=A0&#39;win_subsystem&#39;: &#39;console&#39;,<br>&gt; &gt=
-; - =C2=A0 =C2=A0 =C2=A0&#39;sources&#39;: [main_rs, files(&#39;system/main=
-.c&#39;)],<br>&gt; &gt; - =C2=A0 =C2=A0 =C2=A0&#39;dependencies&#39;: [sdl,=
- target_stubs],<br>&gt; &gt; - =C2=A0 =C2=A0}]<br>&gt; &gt; - =C2=A0 =C2=A0=
-if host_os =3D=3D &#39;windows&#39; and (sdl.found() or gtk.found())<br>&gt=
-; &gt; + =C2=A0 =C2=A0execs =3D []<br>&gt; &gt; + =C2=A0 =C2=A0if not (have=
-_qemu_system_combo and target in combo_softmmu)<br>&gt; &gt; =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0execs +=3D [{<br>&gt; &gt; - =C2=A0 =C2=A0 =C2=A0 =C2=A0&#39;n=
-ame&#39;: &#39;qemu-system-&#39; + target_name + &#39;w&#39;,<br>&gt; &gt; =
-- =C2=A0 =C2=A0 =C2=A0 =C2=A0&#39;win_subsystem&#39;: &#39;windows&#39;,<br=
->&gt; &gt; + =C2=A0 =C2=A0 =C2=A0 =C2=A0&#39;name&#39;: &#39;qemu-system-&#=
-39; + target_name,<br>&gt; &gt; + =C2=A0 =C2=A0 =C2=A0 =C2=A0&#39;win_subsy=
-stem&#39;: &#39;console&#39;,<br>&gt; &gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0&#39;sources&#39;: [main_rs, files(&#39;system/main.c&#39;)],<br>&gt; &g=
-t; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0&#39;dependencies&#39;: [sdl, target_s=
-tubs],<br>&gt; &gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0}]<br>&gt; &gt; + =C2=A0 =C2=
-=A0 =C2=A0if host_os =3D=3D &#39;windows&#39; and (sdl.found() or gtk.found=
-())<br>&gt; &gt; + =C2=A0 =C2=A0 =C2=A0 =C2=A0execs +=3D [{<br>&gt; &gt; + =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0&#39;name&#39;: &#39;qemu-system-&#39; + =
-target_name + &#39;w&#39;,<br>&gt; &gt; + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0&#39;win_subsystem&#39;: &#39;windows&#39;,<br>&gt; &gt; + =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0&#39;sources&#39;: [main_rs, files(&#39;system/main.c&=
-#39;)],<br>&gt; &gt; + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0&#39;dependencies&=
-#39;: [sdl, target_stubs],<br>&gt; &gt; + =C2=A0 =C2=A0 =C2=A0 =C2=A0}]<br>=
-&gt; &gt; + =C2=A0 =C2=A0 =C2=A0endif<br>&gt; &gt; =C2=A0 =C2=A0 =C2=A0endi=
-f<br>&gt; &gt; =C2=A0 =C2=A0 =C2=A0if get_option(&#39;fuzzing&#39;)<br>&gt;=
- &gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0specific_fuzz =3D specific_fuzz_ss.apply(c=
-onfig_target, strict: false)<br>&gt; &gt; @@ -4481,6 +4502,123 @@ foreach t=
-arget : target_dirs<br>&gt; &gt; =C2=A0 =C2=A0endforeach<br>&gt; &gt; =C2=
-=A0endforeach<br>&gt; &gt;<br>&gt; &gt; +# Combined ARM + RISC-V system emu=
-lator (32 and 64).<br>&gt; &gt; +# Common/system objects come from aarch64.=
- RISC-V arch objects come<br>&gt; &gt; +# from the existing riscv64 lib. 32=
--bit TargetInfo and 32-only boards<br>&gt; &gt; +# come from the arm/riscv3=
-2 libs. Per-target qemu-system-* names are<br>&gt; &gt; +# symlinks to qemu=
--system (argv[0] selects TargetInfo).<br>&gt; &gt; +if have_qemu_system_com=
-bo<br>&gt; &gt; + =C2=A0a64 =3D target_softmmu[&#39;aarch64-softmmu&#39;]<b=
-r>&gt; &gt; + =C2=A0rv =3D target_softmmu[&#39;riscv64-softmmu&#39;]<br>&gt=
-; &gt; + =C2=A0extra_objs =3D []<br>&gt; &gt; + =C2=A0target_info_def =3D f=
-iles(&#39;target-info-def.c&#39;)<br>&gt; &gt; + =C2=A0foreach spec : [[com=
-mon_ss, common_all], [system_ss, libsystem]]<br>&gt; &gt; + =C2=A0 =C2=A0rv=
-_src =3D spec[0].apply(rv[&#39;config_target&#39;], strict: false)<br>&gt; =
-&gt; + =C2=A0 =C2=A0a64_src =3D spec[0].apply(a64[&#39;config_target&#39;],=
- strict: false)<br>&gt; &gt; + =C2=A0 =C2=A0extra =3D []<br>&gt; &gt; + =C2=
-=A0 =C2=A0foreach f : rv_src.sources()<br>&gt; &gt; + =C2=A0 =C2=A0 =C2=A0i=
-f f not in a64_src.sources() and not f.full_path().endswith(&#39;_stubs.c&#=
-39;)<br>&gt; &gt; + =C2=A0 =C2=A0 =C2=A0 =C2=A0extra +=3D f<br>&gt; &gt; + =
-=C2=A0 =C2=A0 =C2=A0endif<br>&gt; &gt; + =C2=A0 =C2=A0endforeach<br>&gt; &g=
-t; + =C2=A0 =C2=A0if extra.length() &gt; 0<br>&gt; &gt; + =C2=A0 =C2=A0 =C2=
-=A0extra_objs +=3D spec[1].extract_objects(extra)<br>&gt; &gt; + =C2=A0 =C2=
-=A0endif<br>&gt; &gt; + =C2=A0endforeach<br>&gt; &gt; + =C2=A0rv_base =3D r=
-v[&#39;target_base_arch&#39;]<br>&gt; &gt; + =C2=A0if rv_base in target_com=
-mon_arch_libs<br>&gt; &gt; + =C2=A0 =C2=A0src =3D target_common_arch[rv_bas=
-e].apply(rv[&#39;config_target&#39;], strict: false)<br>&gt; &gt; + =C2=A0 =
-=C2=A0extra_objs +=3D target_common_arch_libs[rv_base].extract_objects(src.=
-sources())<br>&gt; &gt; + =C2=A0endif<br>&gt; &gt; + =C2=A0if rv_base in ta=
-rget_common_system_arch_libs<br>&gt; &gt; + =C2=A0 =C2=A0src =3D target_com=
-mon_system_arch[rv_base].apply(rv[&#39;config_target&#39;], strict: false)<=
-br>&gt; &gt; + =C2=A0 =C2=A0extra_objs +=3D target_common_system_arch_libs[=
-rv_base].extract_objects(src.sources())<br>&gt; &gt; + =C2=A0endif<br>&gt; =
-&gt; + =C2=A0foreach pair : [[&#39;arm-softmmu&#39;, &#39;aarch64-softmmu&#=
-39;], [&#39;riscv32-softmmu&#39;, &#39;riscv64-softmmu&#39;]]<br>&gt; &gt; =
-+ =C2=A0 =C2=A0t32 =3D pair[0]<br>&gt; &gt; + =C2=A0 =C2=A0t64 =3D pair[1]<=
-br>&gt; &gt; + =C2=A0 =C2=A0if t32 in target_softmmu<br>&gt; &gt; + =C2=A0 =
-=C2=A0 =C2=A0extra_objs +=3D target_softmmu[t32][&#39;lib&#39;].extract_obj=
-ects(target_info_def)<br>&gt; &gt; + =C2=A0 =C2=A0 =C2=A0base32 =3D target_=
-softmmu[t32][&#39;target_base_arch&#39;]<br>&gt; &gt; + =C2=A0 =C2=A0 =C2=
-=A0if base32 in hw_arch<br>&gt; &gt; + =C2=A0 =C2=A0 =C2=A0 =C2=A0hw32 =3D =
-hw_arch[base32].apply(target_softmmu[t32][&#39;config_target&#39;], strict:=
- false)<br>&gt; &gt; + =C2=A0 =C2=A0 =C2=A0 =C2=A0hw64 =3D hw_arch[base32].=
-apply(target_softmmu[t64][&#39;config_target&#39;], strict: false)<br>&gt; =
-&gt; + =C2=A0 =C2=A0 =C2=A0 =C2=A0extra_hw =3D []<br>&gt; &gt; + =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0foreach f : hw32.sources()<br>&gt; &gt; + =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0if f not in hw64.sources()<br>&gt; &gt; + =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0extra_hw +=3D f<br>&gt; &gt; + =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0endif<br>&gt; &gt; + =C2=A0 =C2=A0 =C2=A0 =C2=A0endfore=
-ach<br>&gt; &gt; + =C2=A0 =C2=A0 =C2=A0 =C2=A0if extra_hw.length() &gt; 0<b=
-r>&gt; &gt; + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0extra_objs +=3D target_soft=
-mmu[t32][&#39;lib&#39;].extract_objects(extra_hw)<br>&gt; &gt; + =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0endif<br>&gt; &gt; + =C2=A0 =C2=A0 =C2=A0endif<br>&gt; &gt=
-; + =C2=A0 =C2=A0endif<br>&gt; &gt; + =C2=A0endforeach<br>&gt; &gt; + =C2=
-=A0combo_objects =3D extra_objs<br>&gt; &gt; + =C2=A0combo_objects +=3D a64=
-[&#39;lib&#39;].extract_all_objects(recursive: true)<br>&gt; &gt; + =C2=A0c=
-ombo_objects +=3D rv[&#39;lib&#39;].extract_objects(rv[&#39;arch_srcs&#39;]=
-)<br>&gt; &gt; + =C2=A0combo_deps =3D a64[&#39;arch_deps&#39;] + rv[&#39;ar=
-ch_deps&#39;] + [sdl, a64[&#39;target_stubs&#39;], rv[&#39;target_stubs&#39=
-;]]<br>&gt; &gt; + =C2=A0if &#39;arm-softmmu&#39; in target_softmmu<br>&gt;=
- &gt; + =C2=A0 =C2=A0combo_deps +=3D target_softmmu[&#39;arm-softmmu&#39;][=
-&#39;arch_deps&#39;]<br>&gt; &gt; + =C2=A0endif<br>&gt; &gt; + =C2=A0if &#3=
-9;riscv32-softmmu&#39; in target_softmmu<br>&gt; &gt; + =C2=A0 =C2=A0combo_=
-deps +=3D target_softmmu[&#39;riscv32-softmmu&#39;][&#39;arch_deps&#39;]<br=
->&gt; &gt; + =C2=A0endif<br>&gt; &gt; + =C2=A0combo_execs =3D [{<br>&gt; &g=
-t; + =C2=A0 =C2=A0&#39;name&#39;: &#39;qemu-system&#39;,<br>&gt; &gt; + =C2=
-=A0 =C2=A0&#39;win_subsystem&#39;: &#39;console&#39;,<br>&gt; &gt; + =C2=A0=
-}]<br>&gt; &gt; + =C2=A0if host_os =3D=3D &#39;windows&#39; and (sdl.found(=
-) or gtk.found())<br>&gt; &gt; + =C2=A0 =C2=A0combo_execs +=3D [{<br>&gt; &=
-gt; + =C2=A0 =C2=A0 =C2=A0&#39;name&#39;: &#39;qemu-systemw&#39;,<br>&gt; &=
-gt; + =C2=A0 =C2=A0 =C2=A0&#39;win_subsystem&#39;: &#39;windows&#39;,<br>&g=
-t; &gt; + =C2=A0 =C2=A0}]<br>&gt; &gt; + =C2=A0endif<br>&gt; &gt; + =C2=A0c=
-ombo_exe_suffix =3D host_os =3D=3D &#39;windows&#39; ? &#39;.exe&#39; : &#3=
-9;&#39;<br>&gt; &gt; + =C2=A0combo_alias_py =3D &#39;import os, sys; src, d=
-st =3D sys.argv[1:3]; os.path.exists(dst) and os.remove(dst); os.symlink(os=
-.path.basename(src), dst)&#39;<br>&gt; &gt; + =C2=A0foreach exe : combo_exe=
-cs<br>&gt; &gt; + =C2=A0 =C2=A0emulator =3D executable(exe[&#39;name&#39;],=
- [a64[&#39;main_rs&#39;], files(&#39;system/main.c&#39;)],<br>&gt; &gt; + =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 install: true,<br>&gt; &gt=
-; + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 c_args: a64[&#39;c_arg=
-s&#39;],<br>&gt; &gt; + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 de=
-pendencies: combo_deps,<br>&gt; &gt; + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 objects: combo_objects,<br>&gt; &gt; + =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 link_depends: [block_syms, qemu_syms],<br>&gt; =
-&gt; + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 link_args: a64[&#39=
-;link_args&#39;],<br>&gt; &gt; + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 win_subsystem: exe[&#39;win_subsystem&#39;])<br>&gt; &gt; + =C2=A0 =
-=C2=A0emulators +=3D {exe[&#39;name&#39;]: emulator}<br>&gt; &gt; + =C2=A0 =
-=C2=A0traceable +=3D [{<br>&gt; &gt; + =C2=A0 =C2=A0 =C2=A0&#39;exe&#39;: e=
-xe[&#39;name&#39;],<br>&gt; &gt; + =C2=A0 =C2=A0 =C2=A0&#39;probe-prefix&#3=
-9;: &#39;qemu.system.multi&#39;,<br>&gt; &gt; + =C2=A0 =C2=A0}]<br>&gt; &gt=
-; + =C2=A0 =C2=A0foreach t : combo_softmmu<br>&gt; &gt; + =C2=A0 =C2=A0 =C2=
-=A0if t not in target_softmmu<br>&gt; &gt; + =C2=A0 =C2=A0 =C2=A0 =C2=A0con=
-tinue<br>&gt; &gt; + =C2=A0 =C2=A0 =C2=A0endif<br>&gt; &gt; + =C2=A0 =C2=A0=
- =C2=A0tname =3D target_softmmu[t][&#39;config_target&#39;][&#39;TARGET_NAM=
-E&#39;]<br>&gt; &gt; + =C2=A0 =C2=A0 =C2=A0if exe[&#39;name&#39;] =3D=3D &#=
-39;qemu-systemw&#39;<br>&gt; &gt; + =C2=A0 =C2=A0 =C2=A0 =C2=A0alias =3D &#=
-39;qemu-system-&#39; + tname + &#39;w&#39;<br>&gt; &gt; + =C2=A0 =C2=A0 =C2=
-=A0else<br>&gt; &gt; + =C2=A0 =C2=A0 =C2=A0 =C2=A0alias =3D &#39;qemu-syste=
-m-&#39; + tname<br>&gt; &gt; + =C2=A0 =C2=A0 =C2=A0endif<br>&gt; &gt; + =C2=
-=A0 =C2=A0 =C2=A0alias_tgt =3D custom_target(alias,<br>&gt; &gt; + =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0input: emulator,<br>&gt; &gt; + =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0output: alias + combo_exe_suffix,<br>&gt; &gt; +=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0command: [python, &#39;-c&#39;, combo=
-_alias_py, &#39;@INPUT@&#39;, &#39;@OUTPUT@&#39;],<br>&gt; &gt; + =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0build_by_default: true,<br>&gt; &gt; + =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0install: false)<br>&gt; &gt; + =C2=A0 =C2=
-=A0 =C2=A0emulators +=3D {alias: alias_tgt}<br>&gt; &gt; + =C2=A0 =C2=A0 =
-=C2=A0install_symlink(alias + combo_exe_suffix,<br>&gt; &gt; + =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0pointing_=
-to: exe[&#39;name&#39;] + combo_exe_suffix,<br>&gt; &gt; + =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0install_dir: =
-get_option(&#39;bindir&#39;))<br>&gt; &gt; + =C2=A0 =C2=A0 =C2=A0traceable =
-+=3D [{<br>&gt; &gt; + =C2=A0 =C2=A0 =C2=A0 =C2=A0&#39;exe&#39;: alias,<br>=
-&gt; &gt; + =C2=A0 =C2=A0 =C2=A0 =C2=A0&#39;probe-prefix&#39;: &#39;qemu.sy=
-stem.&#39; + tname,<br>&gt; &gt; + =C2=A0 =C2=A0 =C2=A0}]<br>&gt; &gt; + =
-=C2=A0 =C2=A0endforeach<br>&gt; &gt; + =C2=A0endforeach<br>&gt; &gt; +endif=
-<br>&gt; &gt; +<br>&gt; &gt; =C2=A0# Other build targets<br>&gt; &gt;<br>&g=
-t; &gt; =C2=A0if get_option(&#39;plugins&#39;)<br>&gt;<br>&gt; Please find =
-attached a much simpler implementation, which only requires<br>&gt; a singl=
-e line update as we add new targets in single-binary.<br>&gt;<br>&gt; Regar=
-ds,<br>&gt; Pierrick<br><br><br><br>--<br>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0=E6=AD=A4=E8=87=B4<br>=E7=A4=BC<br>=E7=BD=97=E5=8B=87=E5=88=9A<br>Yours<=
-br>=C2=A0 =C2=A0 sincerely,<br>Yonggang Luo</div>
-
---000000000000a2ec950659cfa7a9--
+> diff --git a/include/hw/riscv/boot.h b/include/hw/riscv/boot.h
+> index 4e7bd9a225ef..d23f45d78077 100644
+> --- a/include/hw/riscv/boot.h
+> +++ b/include/hw/riscv/boot.h
+> @@ -50,10 +50,10 @@ void riscv_boot_info_init(RISCVBootInfo *info, RISCVHartArrayState *harts);
+>   void riscv_boot_info_init_discontig_mem(RISCVBootInfo *info,
+>                                           RISCVHartArrayState *harts,
+>                                           hwaddr low_start, hwaddr low_size);
+> -vaddr riscv_calc_kernel_start_addr(RISCVBootInfo *info,
+> +vaddr riscv_calc_kernel_start_addr(const RISCVBootInfo *info,
+>                                      hwaddr firmware_end_addr);
+>   hwaddr riscv_find_and_load_firmware(MachineState *machine,
+> -                                    RISCVBootInfo *info,
+> +                                    const RISCVBootInfo *info,
+>                                       const char *default_machine_firmware,
+>                                       hwaddr *firmware_load_addr,
+>                                       symbol_fn_t sym_cb);
+> @@ -71,7 +71,7 @@ void riscv_load_kernel(MachineState *machine,
+>                          bool load_initrd,
+>                          symbol_fn_t sym_cb);
+>   uint64_t riscv_compute_fdt_addr(hwaddr dram_base, hwaddr dram_size,
+> -                                MachineState *ms, RISCVBootInfo *info);
+> +                                MachineState *ms, const RISCVBootInfo *info);
+>   void riscv_load_fdt(hwaddr fdt_addr, void *fdt);
+>   void riscv_setup_rom_reset_vec(MachineState *machine, RISCVHartArrayState *harts,
+>                                  hwaddr saddr,
+> diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+> index 5e2dfa091a13..4ac0b8ef6581 100644
+> --- a/hw/riscv/boot.c
+> +++ b/hw/riscv/boot.c
+> @@ -91,7 +91,7 @@ void riscv_boot_info_init_discontig_mem(RISCVBootInfo *info,
+>       info->ram_low_size = low_size;
+>   }
+>   
+> -vaddr riscv_calc_kernel_start_addr(RISCVBootInfo *info,
+> +vaddr riscv_calc_kernel_start_addr(const RISCVBootInfo *info,
+>                                      hwaddr firmware_end_addr) {
+>       if (info->is_32bit) {
+>           return QEMU_ALIGN_UP(firmware_end_addr, 4 * MiB);
+> @@ -151,7 +151,7 @@ char *riscv_find_firmware(const char *firmware_filename,
+>   }
+>   
+>   hwaddr riscv_find_and_load_firmware(MachineState *machine,
+> -                                    RISCVBootInfo *info,
+> +                                    const RISCVBootInfo *info,
+>                                       const char *default_machine_firmware,
+>                                       hwaddr *firmware_load_addr,
+>                                       symbol_fn_t sym_cb)
+> @@ -348,7 +348,7 @@ out:
+>    * The FDT is fdt_packed() during the calculation.
+>    */
+>   uint64_t riscv_compute_fdt_addr(hwaddr dram_base, hwaddr dram_size,
+> -                                MachineState *ms, RISCVBootInfo *info)
+> +                                MachineState *ms, const RISCVBootInfo *info)
+>   {
+>       int ret = fdt_pack(ms->fdt);
+>       hwaddr dram_end, temp;
 
