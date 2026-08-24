@@ -4,139 +4,136 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CD89C5DF94
-	for <qemu-riscv@archiver.kernel.org>; Mon, 24 Aug 2026 11:20:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D5CDC5DF81
+	for <qemu-riscv@archiver.kernel.org>; Mon, 24 Aug 2026 11:20:33 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wySiO-0006Qo-7h; Mon, 24 Aug 2026 07:19:44 -0400
+	id 1wySiA-0005K6-ID; Mon, 24 Aug 2026 07:19:30 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1wySiK-00068k-Pg
- for qemu-riscv@nongnu.org; Mon, 24 Aug 2026 07:19:40 -0400
-Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
+ id 1wySi8-0005AE-Eo
+ for qemu-riscv@nongnu.org; Mon, 24 Aug 2026 07:19:28 -0400
+Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1wySiH-00067g-Bx
- for qemu-riscv@nongnu.org; Mon, 24 Aug 2026 07:19:40 -0400
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+ id 1wySi5-0005rP-WC
+ for qemu-riscv@nongnu.org; Mon, 24 Aug 2026 07:19:28 -0400
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 67O99Bm62900598
- for <qemu-riscv@nongnu.org>; Mon, 24 Aug 2026 11:19:36 GMT
+ 67O9WRCk2036049
+ for <qemu-riscv@nongnu.org>; Mon, 24 Aug 2026 11:19:14 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- fvBIYCS8kU8+XY5bs75QoBPYP88ZzMJVKYNZ4wSfBZ8=; b=D8ej8BqNZtAoHC+A
- o+uwvXZNNwzIE2MsV2Bk6gAvWcJHZMa4fVSfZDwuwu1we8+VInmEyRmDsEL2tbpN
- o04AqoN3OFvTJE2NDT7estHDNenWmVkuN0i244JIEVdl5VKtP8bXfaLZe5k2gNAQ
- db99G9GfgLm9Uz2LZLaFciqugWcbncHk+5eEjQAuljvE4Z57g0X2fSv0uWQw4I92
- Z0HBEy2/Bj/eWV43s8Nb5IcbwuBuvvGwayMg69YeU3K0nBnyvCCZ3oP0ztQ183/M
- C7SiKUJpoIWc2+xTAx/gb6M/AY2vWdBf0WQy8Ji5yiYeJzZqLGJHcbsB4MnZymqg
- qKF8HQ==
-Received: from mail-ua1-f70.google.com (mail-ua1-f70.google.com
- [209.85.222.70])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g8hjgry2v-1
+ IZopBdEIfltoxSJ9HcEtNlFRgPrUC6DgWERd48LIieo=; b=nT9qiB8GP0bNGLfq
+ Y4EkJfBtwBZS7Dzsiso37MzygfxMTd8szCt3zvvh9YgMpKDCun2yjn2TMqNnMHJD
+ w1EMGUU/QwLy40jDKyLlEtxkBWyDuejEl5KHY+Y3Uzfz1OWpY4rgACrPy1ri+fWI
+ 9BL8tIUltfUQ1OLxOuF6awaYAqDc/lueHuYf2Briud4Qvto//N8uGzhVEm3GnyQ3
+ MOobyNuqqTCnUZnYP37ym0jRZ2CyOrN/oL672K+S4Nm+6tRjGTqH6yjnasEMEGCn
+ KO0i/0DCwxZY4VeMGESe8FMm5VkhH5oHsXvlf3+Y7l3zLt8/qC4q6nLHTVFYAlcp
+ 9gnUTQ==
+Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com
+ [209.85.160.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g8kdsgbv4-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Mon, 24 Aug 2026 11:19:36 +0000 (GMT)
-Received: by mail-ua1-f70.google.com with SMTP id
- a1e0cc1a2514c-97c7e5468abso2253542241.1
- for <qemu-riscv@nongnu.org>; Mon, 24 Aug 2026 04:19:36 -0700 (PDT)
+ for <qemu-riscv@nongnu.org>; Mon, 24 Aug 2026 11:19:14 +0000 (GMT)
+Received: by mail-qt1-f199.google.com with SMTP id
+ d75a77b69052e-5276aa86d00so37062091cf.2
+ for <qemu-riscv@nongnu.org>; Mon, 24 Aug 2026 04:19:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1787570375; x=1788175175; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1787570353; x=1788175153; darn=nongnu.org;
  h=content-transfer-encoding:content-type:mime-version:references
  :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=fvBIYCS8kU8+XY5bs75QoBPYP88ZzMJVKYNZ4wSfBZ8=;
- b=BzW8nc/8le+FkWAWGCMzlUbZX1O+wnz+zHRk+wyofrtmnMxTrHNiZReE/5MFWkYwPI
- Xjk/pE+hMk9ATfCMdgeC1grYLOIOTV5fG3qIdE4VBMqa0ySM0yvOyYWJMtqRZApiT2Y4
- OtoJwHXUdC9xUi+1WX92Hz1vs6iRI5xluVTQv2Y/zqloFj3DWlGYwdP7Xpd8gMEWgu+6
- MPoRugff2ez/92L91OCqhGNPUXRvu0mxxOSX/27Mah/V9vD8mrTeUIGzLKDvJZ0GKoBz
- ngjzr5HY8EBgnSqYXaHXfDLFJvUErk/4ph7PjxjIUfwmjFI/ViTYBEx3SsHRfFwZ+Cao
- o/TA==
+ bh=IZopBdEIfltoxSJ9HcEtNlFRgPrUC6DgWERd48LIieo=;
+ b=EM12bdi5GjjZh0771XvIqxeIx7/nl/xc2UUQJwsrhKclU+axG+wDz2U8W+MBSMVNAs
+ tOnluNsCPB2gX4HgcKaTkd8EZuqF1+fInMq2jK47yJr4+tGIYJAqicK4n/jYClAaxknV
+ Xs+midyYh9JXr5drwHB5i8xDQyboESMKuVbJYowJorp+0RYm1q4qoKpn+TvtcGLJD5c9
+ 0FQx2AqorxgU0Z/eIKE3BUVZcxvdbsX571D1w2MLoTzgzYmGfE7plSW7GGw8Lj+b8vmb
+ 6Uq0yw5CAp6T+I+VsLcjr2fGNuFjA7iLbAXiYrTJRhpoyQmZYPSw7Y2QTYcBoGnwpimY
+ ulGA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787570375; x=1788175175;
+ d=1e100.net; s=20251104; t=1787570353; x=1788175153;
  h=content-transfer-encoding:content-type:mime-version:references
  :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=fvBIYCS8kU8+XY5bs75QoBPYP88ZzMJVKYNZ4wSfBZ8=;
- b=BnBfIECW520Wupis74egs3ZIRNug9mwldDg1RBnJaT6UJ0ebi1WPn6hukpokgloI6c
- WQyY260rLdFeWlcC9IjGbZrxc6Uha1ihRhjlbpbRxZ7O38RcBwx/BO0dVo+7yohnPK3c
- 70S+gaPylrQSJMGWLZ1M4R/fwhX3UIQ+FeWtwzOUnu3aJ3je+Jhz1VURk5Yzqtp0Q5Pz
- jgkCBYmY3u2bv6tesHBu0ifCLi8UAp9+zYpvOOhgVC3tNLmOOgGZZkXCNyZ1u9bMt0tm
- gFF2zW6sRceo/3qG8PvL9J8k7sa2WjD2OFJcjh9sWOxI+rmiFeETErJdUTnBKiJVVQt3
- gxdw==
-X-Gm-Message-State: AFuF++nyBcfqu7TYNf6zu+26aRfqYo5/BFNxq4600Zj5bCjsOx5fu+/S
- HqLNwerXCXCzjsK0R/gt1FZC0+pixGck2PBofteptxRlyzzNUE1XEYNR14QY3UT4aDbfUMJmrKq
- uKDjM9cz3H60rmHZy+GS+xF8Y3C2vURdh1B2r7mRVD1oSSnm3usqFRg9fnA==
-X-Gm-Gg: AR+sD12MoYP7yX3L05NGf1stxjB7JtWbPA4oVKRJDMVa/urnTzwITGqnBjfSPl6gfWI
- ls726A62N9TMQHzBiI/KPBrrcy/ZdRfWNazP0PVXExrcWS/X7w7nAN0kuD+TE/zfj2999WZb9or
- 1Np1q89sl759Ki9U4GR3YXMKXv1aiGUy5n74N/UdkfwSTzH11a8ag51PYhxxSMqhlP/1klAA4/0
- A0yt9WL2ILct2kJ/DTt56KEZgz4T+x7EnopWYWezsQhZidseiDYczIe9MEZlrRDV1j2vihWH4Xe
- 005YrONE4YiIHGdAoJHqDkcbXrNWus75CZS5/4psC1I4KtbzCJwiRZL3e8vJWE0UsVxRHjRiXWV
- 5MbPyf0ZGLgpAk66C/7MKDgrxTIzarJ6WGFn7nzmviaRgirGRVQ==
-X-Received: by 2002:a05:6102:f8c:b0:77a:7cd:8473 with SMTP id
- ada2fe7eead31-77a62847969mr10938768137.4.1787570375587; 
- Mon, 24 Aug 2026 04:19:35 -0700 (PDT)
-X-Received: by 2002:a05:6102:f8c:b0:77a:7cd:8473 with SMTP id
- ada2fe7eead31-77a62847969mr10938752137.4.1787570375247; 
- Mon, 24 Aug 2026 04:19:35 -0700 (PDT)
+ bh=IZopBdEIfltoxSJ9HcEtNlFRgPrUC6DgWERd48LIieo=;
+ b=hUJxSH7F/Z+bCM34+o9GoOyYhmnurmPdaFG/k+WQClHk6K+ieunfXrjC5kSH/lHwZh
+ bm4OdmrX3ChzDM+ZIAtxzfySoVs8S+Y9HRuM7sFEDX2RWSOJ59Uv20BE75oCqoW9c2nG
+ kzFKbFBYe9sK1USKLvJ4/vilDcd0UtoAG06a8gXZ7wiYRIN+128sPHaUY2xfmV/aQc0J
+ dRQpR6M7Tu4qpd8FFYHGiRA5hYEbjGTAzfrUk9aGDMToq6MwC0xh6JVQrJVgFZBYFiB6
+ 90EnVDA8GPjWFBpHkwAm1fJsbWgonCwAwjiGULcSoygzX2Ofv+iUCH5vvOrX4o1ZlZKw
+ IpeQ==
+X-Gm-Message-State: AFuF++nrJtCsmShMZ1K7IDc8hA0lOf6crfjS6Vc6ImI4q7yLYSljl2wH
+ 2F0ft5AJ/O8EOLFxvHGf7uMmYruunDGxGIClFG7pgR1ltEt5I+IDktHD4eDF8KfFWsX3NF2Skz2
+ SZl7JDmaHsSP+1vsjV7FxD2E+s25STE4YTazw3kK7Nabik7S+kDKh0F+xwQ==
+X-Gm-Gg: AR+sD109e3qh0nUwaJew1JfC2RqpaqpEt47DqRRQ9km4gYtxF24vlHrpjrc7Ht10fl4
+ VaYV57DJxt2m64Ciw2x/ElcTvHRcK0vd9eRSe+vAM1R1ZTtgUQb/W6CWEDxaWWG7ZKO9zXnX3Na
+ d5nna3EY1QuUBXrC7MovmaR6C0RaI8bpMCgoaXMqTMoeJgKGM2zZes6x20FEablH/m0PLr4Uo1R
+ zGUtDcWR2Vqn/VzbRxe9+ZWzVwGQZ8iztzOFwmDO2WA7/3dIC9rxevCEKP3qwW8Cnp/wasYDpY1
+ RMEKr66AsZi2iL5I/mI+3qO0UOKiZ3cqrcs2WD7XUblEk/4N5x6NWuMcee63Z088nnmvAy6sgtk
+ +q/G4lY+xEOZ1Q796BfenoOFgO4b4WrnNFix+HxT4o2bHaNQx8g==
+X-Received: by 2002:a05:622a:1485:b0:52d:c1a:797a with SMTP id
+ d75a77b69052e-52df56e48f6mr266150931cf.8.1787570353289; 
+ Mon, 24 Aug 2026 04:19:13 -0700 (PDT)
+X-Received: by 2002:a05:622a:1485:b0:52d:c1a:797a with SMTP id
+ d75a77b69052e-52df56e48f6mr266150251cf.8.1787570352715; 
+ Mon, 24 Aug 2026 04:19:12 -0700 (PDT)
 Received: from localhost.localdomain (44.170.88.92.rev.sfr.net. [92.88.170.44])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-6a59e1ccf69sm8666438a12.25.2026.08.24.04.19.32
+ a640c23a62f3a-c24966f6b48sm1236666666b.33.2026.08.24.04.19.08
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Mon, 24 Aug 2026 04:19:34 -0700 (PDT)
+ Mon, 24 Aug 2026 04:19:12 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
  Richard Henderson <richard.henderson@linaro.org>, qemu-ppc@nongnu.org,
  qemu-s390x@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
- Ilya Leoshkevich <iii@linux.ibm.com>,
- =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
- Eric Farman <farman@linux.ibm.com>, Cornelia Huck <cohuck@redhat.com>,
- Matthew Rosato <mjrosato@linux.ibm.com>,
- David Hildenbrand <david@kernel.org>
-Subject: [PATCH v4 13/20] target/s390x: Constify S390CPU for cpu_has_*()
- getters
-Date: Mon, 24 Aug 2026 13:17:02 +0200
-Message-ID: <20260824111711.26297-14-philmd@oss.qualcomm.com>
+ Song Gao <17746591750@163.com>, Bibo Mao <maobibo@loongson.cn>,
+ Xianglai Li <lixianglai@loongson.cn>
+Subject: [PATCH v4 11/20] target/loongarch: Constify CPULoongArchState for
+ various tlb_*() getters
+Date: Mon, 24 Aug 2026 13:17:00 +0200
+Message-ID: <20260824111711.26297-12-philmd@oss.qualcomm.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260824111711.26297-1-philmd@oss.qualcomm.com>
 References: <20260824111711.26297-1-philmd@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODI0MDA5NCBTYWx0ZWRfX+Yg4IRWXKagZ
- rDgKMkCBNUZ1mMUBqfRz+EhzykX6yZlh0u6tfnTAzqnHoqm+kSA3eEMOXfEErNTH1uUsSBBwKjR
- WEr407smIOhi3Q6WL6bS13jRym66Zn8=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI0MDA5NCBTYWx0ZWRfX0l67JY1pvixf
- 22YRtMMEXciY7j3xouwcuB9QHw+5PP2Idg1mZ1X5P1/IVDV7palR0zjhZgtxp/jWIDa+2FQH7+Q
- c65klPWJqMhaZ7ErQHBtQrQjL9btitxr1cHykkDJDk8zeTMbS6v9T0nZ8sAVLlVlxSou7VoYnm1
- 887AU+XEPnLaBtrEx3m5fQuMkomOE0iOPHYftCpTp/koQNIc0ufsbwl4xyL+UymLWtecEfwXz79
- klIGngpRnS+p2VQELq1FRa4f+A3BpHhjgViQo2R0EQ3qXDKqu2s5CC0WqSZt0K94hEv8wC78A0B
- 4bxNrzv9k2zAkmm8xXyuoOzF3Cp9DokrmsRLbS3WtFFTxLONgVRBCLIjKN7aBYOA0vB5Kes/z5l
- GTWVm3fSPFMV1rI0hXpFM/euq56RAw1llx1jXgcNFPUxZA4gYsZSjH2ycP/FpJbubPMJ1m9ud6/
- GLwHNNF9HTfR+v2YS7A==
-X-Proofpoint-ORIG-GUID: VW-8Mhk9mzt9AoBcYQEa0IQ-nnxe66_i
-X-Authority-Analysis: v=2.4 cv=CoCPtH4D c=1 sm=1 tr=0 ts=6a8c28c8 cx=c_pps
- a=R6oCqFB+Yf/t2GF8e0/dFg==:117 a=s1NLoHz9uzatdv2VNqxUSg==:17
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODI0MDA5NCBTYWx0ZWRfX/9dEnvjaUI/N
+ taLa57kjZ/pN41EYky/4SGZcI0QS2lnhwYMNZem2qIoZjr3/NICP+2vtb0a0Ydhj4Uis7SlT7dI
+ miE1h5YsOy5BEPppt7lNrl0QzcpqroQ=
+X-Proofpoint-ORIG-GUID: nEVo-2FY59e8djP_WkyHDlEQMqF2vEds
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI0MDA5NCBTYWx0ZWRfXwV6JAx2NLPO2
+ dJQ7lpAe1ApCRu0jDhIu7KvUSpOrQV/QaRvOS5d24Yxdv44E8rXgMkw74x8br+e72ka/R3R3Xg3
+ 23Vc1DZERCKZ+KkwWO7pKZDKP4wV1sDZCRGE7RlWMO5KOp2uFADLQq7bHgRzFmvZzrBeYWrnSKs
+ GuxmhpfJLGPvUnnIWd36Sy4LWq0r+mXS/mQBggXF57IsTXDQn5+HBBjRiFKIOlw2JccUtoqk6iB
+ TpLD0npWWLP7q43lepqPZZZk5Vdo3MsaYMr/XSLtX097rovqczeRVGFLqy9YaGYtZhrnArc4jZt
+ U6LB0LOU3m+i7+JNsXuKuXxoPdJ+e/fNaSjI+NzlIwih0hT10o6uPutG5q12TSTXvH37frycZvm
+ i8PWL+L1moEOfUDU5+4cuNuZjvLu/WwWA8JJJEQ4b3mI/zSFlkQPnARZXJIjZRyoMLvxZM3nJgg
+ V3uSFKgpEd0GWmv8qyA==
+X-Proofpoint-GUID: nEVo-2FY59e8djP_WkyHDlEQMqF2vEds
+X-Authority-Analysis: v=2.4 cv=d8DFDxjE c=1 sm=1 tr=0 ts=6a8c28b2 cx=c_pps
+ a=WeENfcodrlLV9YRTxbY/uA==:117 a=s1NLoHz9uzatdv2VNqxUSg==:17
  a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=M51BFTxLslgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
- a=EUspDBNiAAAA:8 a=VnNF1IyMAAAA:8 a=20KFwNOVAAAA:8 a=mU8mmpTTODwToQi1tsoA:9
- a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10 a=TD8TdBvy0hsOASGTdmB-:22
-X-Proofpoint-GUID: VW-8Mhk9mzt9AoBcYQEa0IQ-nnxe66_i
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
+ a=EUspDBNiAAAA:8 a=L0vIak-SsUda2jp7rVUA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=kacYvNCVWA4VmyqE58fU:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-24_03,2026-08-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 priorityscore=1501 malwarescore=0 phishscore=0 bulkscore=0
- adultscore=0 spamscore=0 clxscore=1015 lowpriorityscore=0 impostorscore=0
+ suspectscore=0 lowpriorityscore=0 bulkscore=0 adultscore=0 priorityscore=1501
+ malwarescore=0 spamscore=0 phishscore=0 clxscore=1015 impostorscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608240094
-Received-SPF: pass client-ip=205.220.180.131;
- envelope-from=philmd@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
+Received-SPF: pass client-ip=205.220.168.131;
+ envelope-from=philmd@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
 X-Spam_score_int: -27
 X-Spam_score: -2.8
 X-Spam_bar: --
@@ -159,125 +156,259 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Add the const qualifier to S390CPU when the argument
-is accessed without modification.
+Add the const qualifier to CPULoongArchState when
+the argument is accessed without modification.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
-Reviewed-by: Ilya Leoshkevich <iii@linux.ibm.com>
-Reviewed-by: Marc-André Lureau <marcandre.lureau@redhat.com>
-Acked-by: Eric Farman <farman@linux.ibm.com>
 ---
- target/s390x/cpu.h            |  2 +-
- target/s390x/s390x-internal.h | 12 ++++++------
- target/s390x/interrupt.c      | 22 +++++++++++-----------
- 3 files changed, 18 insertions(+), 18 deletions(-)
+ target/loongarch/cpu-mmu.h           | 20 ++++++++++----------
+ target/loongarch/tcg/tcg_loongarch.h |  2 +-
+ target/loongarch/cpu_helper.c        | 20 ++++++++++----------
+ target/loongarch/tcg/tlb_helper.c    | 26 +++++++++++++-------------
+ 4 files changed, 34 insertions(+), 34 deletions(-)
 
-diff --git a/target/s390x/cpu.h b/target/s390x/cpu.h
-index f55b79ef8ac..998bbb0d7ff 100644
---- a/target/s390x/cpu.h
-+++ b/target/s390x/cpu.h
-@@ -854,7 +854,7 @@ static inline unsigned int s390_cpu_set_state(uint8_t cpu_state, S390CPU *cpu)
-     return 0;
- }
- #endif /* CONFIG_USER_ONLY */
--static inline uint8_t s390_cpu_get_state(S390CPU *cpu)
-+static inline uint8_t s390_cpu_get_state(const S390CPU *cpu)
+diff --git a/target/loongarch/cpu-mmu.h b/target/loongarch/cpu-mmu.h
+index 54fb732d62d..61b59f3d3f3 100644
+--- a/target/loongarch/cpu-mmu.h
++++ b/target/loongarch/cpu-mmu.h
+@@ -30,14 +30,14 @@ typedef struct MMUContext {
+     uint64_t      pte_buddy[2];
+ } MMUContext;
+ 
+-static inline bool cpu_has_ptw(CPULoongArchState *env)
++static inline bool cpu_has_ptw(const CPULoongArchState *env)
  {
-     return cpu->env.cpu_state;
- }
-diff --git a/target/s390x/s390x-internal.h b/target/s390x/s390x-internal.h
-index 50782fac3ce..ca4445e6474 100644
---- a/target/s390x/s390x-internal.h
-+++ b/target/s390x/s390x-internal.h
-@@ -333,12 +333,12 @@ void cpu_inject_clock_comparator(S390CPU *cpu);
- void cpu_inject_cpu_timer(S390CPU *cpu);
- void cpu_inject_emergency_signal(S390CPU *cpu, uint16_t src_cpu_addr);
- int cpu_inject_external_call(S390CPU *cpu, uint16_t src_cpu_addr);
--bool s390_cpu_has_io_int(S390CPU *cpu);
--bool s390_cpu_has_ext_int(S390CPU *cpu);
--bool s390_cpu_has_mcck_int(S390CPU *cpu);
--bool s390_cpu_has_int(S390CPU *cpu);
--bool s390_cpu_has_restart_int(S390CPU *cpu);
--bool s390_cpu_has_stop_int(S390CPU *cpu);
-+bool s390_cpu_has_io_int(const S390CPU *cpu);
-+bool s390_cpu_has_ext_int(const S390CPU *cpu);
-+bool s390_cpu_has_mcck_int(const S390CPU *cpu);
-+bool s390_cpu_has_int(const S390CPU *cpu);
-+bool s390_cpu_has_restart_int(const S390CPU *cpu);
-+bool s390_cpu_has_stop_int(const S390CPU *cpu);
- void cpu_inject_restart(S390CPU *cpu);
- void cpu_inject_stop(S390CPU *cpu);
- #endif /* CONFIG_USER_ONLY */
-diff --git a/target/s390x/interrupt.c b/target/s390x/interrupt.c
-index 1dca835c5d8..d7e3fd45e4b 100644
---- a/target/s390x/interrupt.c
-+++ b/target/s390x/interrupt.c
-@@ -139,10 +139,10 @@ void s390_crw_mchk(void)
-     fsc->inject_crw_mchk(fs);
+-    CPUSysState *sys = env_sys(env);
++    const CPUSysState *sys = env_sys(env);
+ 
+     return !!FIELD_EX64(sys->CSR_PWCH, CSR_PWCH, HPTW_EN);
  }
  
--bool s390_cpu_has_mcck_int(S390CPU *cpu)
-+bool s390_cpu_has_mcck_int(const S390CPU *cpu)
+-static inline bool pte_present(CPULoongArchState *env, uint64_t entry)
++static inline bool pte_present(const CPULoongArchState *env, uint64_t entry)
  {
-     QEMUS390FLICState *flic = s390_get_qemu_flic(s390_get_flic());
--    CPUS390XState *env = &cpu->env;
-+    const CPUS390XState *env = &cpu->env;
+     uint8_t present;
  
-     if (!(env->psw.mask & PSW_MASK_MCHECK)) {
+@@ -50,7 +50,7 @@ static inline bool pte_present(CPULoongArchState *env, uint64_t entry)
+     return !!present;
+ }
+ 
+-static inline bool pte_write(CPULoongArchState *env, uint64_t entry)
++static inline bool pte_write(const CPULoongArchState *env, uint64_t entry)
+ {
+     uint8_t writable;
+ 
+@@ -89,17 +89,17 @@ static inline bool pte_dirty(uint64_t entry)
+     return !!FIELD_EX64(entry, TLBENTRY, D);
+ }
+ 
+-bool check_ps(CPULoongArchState *ent, uint8_t ps);
+-TLBRet loongarch_check_pte(CPULoongArchState *env, MMUContext *context,
++bool check_ps(const CPULoongArchState *ent, uint8_t ps);
++TLBRet loongarch_check_pte(const CPULoongArchState *env, MMUContext *context,
+                            MMUAccessType access_type, int mmu_idx);
+-TLBRet get_physical_address(CPULoongArchState *env, MMUContext *context,
++TLBRet get_physical_address(const CPULoongArchState *env, MMUContext *context,
+                             MMUAccessType access_type, int mmu_idx,
+                             int is_debug);
+-TLBRet loongarch_ptw(CPULoongArchState *env, MMUContext *context,
++TLBRet loongarch_ptw(const CPULoongArchState *env, MMUContext *context,
+                      int access_type, int mmu_idx, int debug);
+-void get_dir_base_width(CPULoongArchState *env, uint64_t *dir_base,
++void get_dir_base_width(const CPULoongArchState *env, uint64_t *dir_base,
+                         uint64_t *dir_width, unsigned int level);
+ hwaddr loongarch_cpu_get_phys_addr_debug(CPUState *cpu, vaddr addr);
+-uint64_t loongarch_palen_mask(CPULoongArchState *env);
++uint64_t loongarch_palen_mask(const CPULoongArchState *env);
+ 
+ #endif  /* LOONGARCH_CPU_MMU_H */
+diff --git a/target/loongarch/tcg/tcg_loongarch.h b/target/loongarch/tcg/tcg_loongarch.h
+index 7fb627f2d63..0f20c60d73d 100644
+--- a/target/loongarch/tcg/tcg_loongarch.h
++++ b/target/loongarch/tcg/tcg_loongarch.h
+@@ -16,7 +16,7 @@ bool loongarch_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+                             MMUAccessType access_type, int mmu_idx,
+                             bool probe, uintptr_t retaddr);
+ 
+-TLBRet loongarch_get_addr_from_tlb(CPULoongArchState *env,
++TLBRet loongarch_get_addr_from_tlb(const CPULoongArchState *env,
+                                    MMUContext *context,
+                                    MMUAccessType access_type, int mmu_idx);
+ 
+diff --git a/target/loongarch/cpu_helper.c b/target/loongarch/cpu_helper.c
+index 123cad3d930..3401e7ed727 100644
+--- a/target/loongarch/cpu_helper.c
++++ b/target/loongarch/cpu_helper.c
+@@ -18,10 +18,10 @@
+ #include "cpu-mmu.h"
+ #include "tcg/tcg_loongarch.h"
+ 
+-void get_dir_base_width(CPULoongArchState *env, uint64_t *dir_base,
++void get_dir_base_width(const CPULoongArchState *env, uint64_t *dir_base,
+                         uint64_t *dir_width, unsigned int level)
+ {
+-    CPUSysState *sys = env_sys(env);
++    const CPUSysState *sys = env_sys(env);
+ 
+     switch (level) {
+     case 1:
+@@ -48,7 +48,7 @@ void get_dir_base_width(CPULoongArchState *env, uint64_t *dir_base,
+     }
+ }
+ 
+-TLBRet loongarch_check_pte(CPULoongArchState *env, MMUContext *context,
++TLBRet loongarch_check_pte(const CPULoongArchState *env, MMUContext *context,
+                            MMUAccessType access_type, int mmu_idx)
+ {
+     uint64_t plv = mmu_idx;
+@@ -111,7 +111,7 @@ TLBRet loongarch_check_pte(CPULoongArchState *env, MMUContext *context,
+     return TLBRET_MATCH;
+ }
+ 
+-static MemTxResult loongarch_cmpxchg_phys(CPUState *cs, hwaddr phys,
++static MemTxResult loongarch_cmpxchg_phys(const CPUState *cs, hwaddr phys,
+                                           uint64_t old, uint64_t new)
+ {
+     hwaddr addr1, l = 8;
+@@ -146,11 +146,11 @@ static MemTxResult loongarch_cmpxchg_phys(CPUState *cs, hwaddr phys,
+     return ret;
+ }
+ 
+-TLBRet loongarch_ptw(CPULoongArchState *env, MMUContext *context,
++TLBRet loongarch_ptw(const CPULoongArchState *env, MMUContext *context,
+                      int access_type, int mmu_idx, int debug)
+ {
+     const MemTxAttrs attrs = MEMTXATTRS_UNSPECIFIED;
+-    CPUState *cs = env_cpu(env);
++    const CPUState *cs = env_cpu(env);
+     hwaddr index = 0, phys = 0;
+     uint64_t palen_mask = loongarch_palen_mask(env);
+     uint64_t dir_base, dir_width;
+@@ -273,7 +273,7 @@ restart:
+     return ret;
+ }
+ 
+-static TLBRet loongarch_map_address(CPULoongArchState *env,
++static TLBRet loongarch_map_address(const CPULoongArchState *env,
+                                     MMUContext *context,
+                                     MMUAccessType access_type, int mmu_idx,
+                                     int is_debug)
+@@ -299,7 +299,7 @@ static TLBRet loongarch_map_address(CPULoongArchState *env,
+     return TLBRET_NOMATCH;
+ }
+ 
+-static hwaddr dmw_va2pa(CPULoongArchState *env, vaddr va, uint64_t dmw)
++static hwaddr dmw_va2pa(const CPULoongArchState *env, vaddr va, uint64_t dmw)
+ {
+     if (is_la64(env)) {
+         return va & TARGET_VIRT_MASK;
+@@ -310,7 +310,7 @@ static hwaddr dmw_va2pa(CPULoongArchState *env, vaddr va, uint64_t dmw)
+     }
+ }
+ 
+-TLBRet get_physical_address(CPULoongArchState *env, MMUContext *context,
++TLBRet get_physical_address(const CPULoongArchState *env, MMUContext *context,
+                             MMUAccessType access_type, int mmu_idx,
+                             int is_debug)
+ {
+@@ -376,7 +376,7 @@ hwaddr loongarch_cpu_get_phys_addr_debug(CPUState *cs, vaddr addr)
+     return context.physical;
+ }
+ 
+-uint64_t loongarch_palen_mask(CPULoongArchState *env)
++uint64_t loongarch_palen_mask(const CPULoongArchState *env)
+ {
+     /* PALEN stores physical address bits - 1 */
+     uint64_t phys_bits = FIELD_EX32(env->cpucfg[1], CPUCFG1, PALEN) + 1;
+diff --git a/target/loongarch/tcg/tlb_helper.c b/target/loongarch/tcg/tlb_helper.c
+index a4b90beca65..6194b976c36 100644
+--- a/target/loongarch/tcg/tlb_helper.c
++++ b/target/loongarch/tcg/tlb_helper.c
+@@ -35,9 +35,9 @@ static bool tlb_match_asid(bool global, int asid, int tlb_asid)
+     return !global && tlb_asid == asid;
+ }
+ 
+-bool check_ps(CPULoongArchState *env, uint8_t tlb_ps)
++bool check_ps(const CPULoongArchState *env, uint8_t tlb_ps)
+ {
+-    CPUSysState *sys = env_sys(env);
++    const CPUSysState *sys = env_sys(env);
+ 
+     if (tlb_ps >= 64) {
          return false;
-@@ -157,10 +157,10 @@ bool s390_cpu_has_mcck_int(S390CPU *cpu)
-     return false;
+@@ -238,11 +238,11 @@ static uint32_t get_random_tlb(uint32_t low, uint32_t high)
+  * field in tlb entry contains bit[47:13], so need adjust.
+  * virt_vpn = vaddr[47:13]
+  */
+-static LoongArchTLB *loongarch_tlb_search_cb(CPULoongArchState *env,
+-                                             vaddr vaddr, int csr_asid,
+-                                             tlb_match func)
++static const LoongArchTLB *
++loongarch_tlb_search_cb(const CPULoongArchState *env, vaddr vaddr,
++                        int csr_asid, tlb_match func)
+ {
+-    LoongArchTLB *tlb;
++    const LoongArchTLB *tlb;
+     uint16_t tlb_asid, stlb_idx;
+     uint8_t tlb_e, tlb_ps, stlb_ps;
+     bool tlb_g;
+@@ -291,12 +291,12 @@ static LoongArchTLB *loongarch_tlb_search_cb(CPULoongArchState *env,
+     return NULL;
  }
  
--bool s390_cpu_has_ext_int(S390CPU *cpu)
-+bool s390_cpu_has_ext_int(const S390CPU *cpu)
+-static bool loongarch_tlb_search(CPULoongArchState *env, vaddr vaddr,
++static bool loongarch_tlb_search(const CPULoongArchState *env, vaddr vaddr,
+                                  int *index)
  {
-     QEMUS390FLICState *flic = s390_get_qemu_flic(s390_get_flic());
--    CPUS390XState *env = &cpu->env;
-+    const CPUS390XState *env = &cpu->env;
+     int csr_asid;
+     tlb_match func;
+-    LoongArchTLB *tlb;
++    const LoongArchTLB *tlb;
+     CPUSysState *sys = env_sys(env);
  
-     if (!(env->psw.mask & PSW_MASK_EXT)) {
-         return false;
-@@ -199,10 +199,10 @@ bool s390_cpu_has_ext_int(S390CPU *cpu)
-     return false;
+     func = tlb_match_any;
+@@ -594,7 +594,7 @@ void helper_invtlb_page_asid(CPULoongArchState *env, target_ulong info,
+                              target_ulong addr)
+ {
+     int asid = info & 0x3ff;
+-    LoongArchTLB *tlb;
++    const LoongArchTLB *tlb;
+     tlb_match func;
+ 
+     func = tlb_match_asid;
+@@ -608,7 +608,7 @@ void helper_invtlb_page_asid_or_g(CPULoongArchState *env,
+                                   target_ulong info, target_ulong addr)
+ {
+     int asid = info & 0x3ff;
+-    LoongArchTLB *tlb;
++    const LoongArchTLB *tlb;
+     tlb_match func;
+ 
+     func = tlb_match_any;
+@@ -837,12 +837,12 @@ void helper_ldpte(CPULoongArchState *env, target_ulong base, target_ulong odd,
+     sys->CSR_TLBREHI = FIELD_DP64(sys->CSR_TLBREHI, CSR_TLBREHI, PS, ps);
  }
  
--bool s390_cpu_has_io_int(S390CPU *cpu)
-+bool s390_cpu_has_io_int(const S390CPU *cpu)
+-static TLBRet loongarch_map_tlb_entry(CPULoongArchState *env,
++static TLBRet loongarch_map_tlb_entry(const CPULoongArchState *env,
+                                       MMUContext *context,
+                                       MMUAccessType access_type, int index,
+                                       int mmu_idx)
  {
-     QEMUS390FLICState *flic = s390_get_qemu_flic(s390_get_flic());
--    CPUS390XState *env = &cpu->env;
-+    const CPUS390XState *env = &cpu->env;
+-    LoongArchTLB *tlb = &env->tlb[index];
++    const LoongArchTLB *tlb = &env->tlb[index];
+     uint8_t tlb_ps, n;
  
-     if (!(env->psw.mask & PSW_MASK_IO)) {
-         return false;
-@@ -211,21 +211,21 @@ bool s390_cpu_has_io_int(S390CPU *cpu)
-     return qemu_s390_flic_has_io(flic, env->cregs[6]);
+     tlb_ps = FIELD_EX64(tlb->tlb_misc, TLB_MISC, PS);
+@@ -853,7 +853,7 @@ static TLBRet loongarch_map_tlb_entry(CPULoongArchState *env,
+     return loongarch_check_pte(env, context, access_type, mmu_idx);
  }
  
--bool s390_cpu_has_restart_int(S390CPU *cpu)
-+bool s390_cpu_has_restart_int(const S390CPU *cpu)
+-TLBRet loongarch_get_addr_from_tlb(CPULoongArchState *env,
++TLBRet loongarch_get_addr_from_tlb(const CPULoongArchState *env,
+                                    MMUContext *context,
+                                    MMUAccessType access_type, int mmu_idx)
  {
--    CPUS390XState *env = &cpu->env;
-+    const CPUS390XState *env = &cpu->env;
- 
-     return env->pending_int & INTERRUPT_RESTART;
- }
- 
--bool s390_cpu_has_stop_int(S390CPU *cpu)
-+bool s390_cpu_has_stop_int(const S390CPU *cpu)
- {
--    CPUS390XState *env = &cpu->env;
-+    const CPUS390XState *env = &cpu->env;
- 
-     return env->pending_int & INTERRUPT_STOP;
- }
- 
--bool s390_cpu_has_int(S390CPU *cpu)
-+bool s390_cpu_has_int(const S390CPU *cpu)
- {
-     if (!tcg_enabled()) {
-         return false;
 -- 
 2.53.0
 
