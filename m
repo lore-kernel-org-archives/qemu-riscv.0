@@ -4,142 +4,172 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F2A0C5DF8C
-	for <qemu-riscv@archiver.kernel.org>; Sun, 23 Aug 2026 21:56:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D05AC5DF97
+	for <qemu-riscv@archiver.kernel.org>; Mon, 24 Aug 2026 00:35:58 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wyGAC-00066L-CT; Sun, 23 Aug 2026 17:55:36 -0400
+	id 1wyIey-0000dU-Iu; Sun, 23 Aug 2026 20:35:32 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wyGA9-00062n-Ty
- for qemu-riscv@nongnu.org; Sun, 23 Aug 2026 17:55:33 -0400
-Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
+ (Exim 4.90_1)
+ (envelope-from <prvs=689c12928=Alistair.Francis@wdc.com>)
+ id 1wyIew-0000XM-1a; Sun, 23 Aug 2026 20:35:30 -0400
+Received: from esa3.hgst.iphmx.com ([216.71.153.141])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wyGA7-0000oG-Do
- for qemu-riscv@nongnu.org; Sun, 23 Aug 2026 17:55:33 -0400
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 67NLRrRu580911
- for <qemu-riscv@nongnu.org>; Sun, 23 Aug 2026 21:55:27 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- Wkw9HatbFsxkw0XYl4HUff3BaEy9yXEfq3H1nmw3SeQ=; b=BcBrvlB/4rGmUf0d
- 02pkZkMq8JCmDBCHc6hGpHAcSppI3bNgLP9xh0n4qCASels3G8084PwnvR25AFPl
- 6hwmbtOnEQ5nuNF89MC63WuUnxD8/2J3yCi4tMt6DfMvUk3k3va9AWVeBTzaGQHY
- CFFcAN+FQwY01YTwiUb8Ym0lFShKhnMEMvp3VzhZlPTXmSECIuu9rC7hWC8c9xut
- cyV3FsiLI7WtT9tQ6CBJ/wC13DvZNUPGZ9UnPaBzKUke5mjNGBBoi8cyBqe3zMWt
- hSLhpQwSdA3sRNkZMbtRu/3EHlT6esaJXvOeQn70LwckfVIUn2NdG3jg6bsUjl9j
- 1rTYUw==
-Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com
- [209.85.160.199])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g7456vn6n-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Sun, 23 Aug 2026 21:55:27 +0000 (GMT)
-Received: by mail-qt1-f199.google.com with SMTP id
- d75a77b69052e-51c01ff996dso30752421cf.2
- for <qemu-riscv@nongnu.org>; Sun, 23 Aug 2026 14:55:27 -0700 (PDT)
+ (Exim 4.90_1)
+ (envelope-from <prvs=689c12928=Alistair.Francis@wdc.com>)
+ id 1wyIet-0008VV-KT; Sun, 23 Aug 2026 20:35:29 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1787531731; x=1819067731;
+ h=from:to:cc:subject:date:message-id:references:
+ in-reply-to:content-id:content-transfer-encoding: mime-version;
+ bh=CY5PPjdJlhKS99dD1kufTkcIGqjnSufA86sjlMorFO0=;
+ b=EpHJSiAGwuCQYwZfjTT8wq8P09A5NPepq0s5zasqHQKxt5b+XWn2Wp83
+ dhhHvUYOqixuO55aAIEoGuJPy9uvn20caRr6XcTlu28RVdJlNEDcLc3ew
+ hnVn5pvkC+xNeLX2v4sVCL8JVXm1EsOvQvqHEzRl8A4pB3JymYnphT5G9
+ k3YxGzhKEpejVM1VmuNCxELTkUVuQmSazuqit6xPJxnAa+M/2p4bbtzZg
+ J0DZbdZCgO9dJlsOqI6JT9vZQrfYJTbukKF0Xy0pF1mIwOqrM9VpsdVEC
+ Bmz+3Sk+ppJpR2mVSncMYkvx0k6FF2zF9OX5ManroJd/tiv1CCSDiD2gn w==;
+X-CSE-ConnectionGUID: I+qX8LQkQeOt60btlXmTFw==
+X-CSE-MsgGUID: SMNFuNUnTmeN1H39IBJVBw==
+X-IronPort-AV: E=Sophos;i="6.25,239,1779120000"; d="scan'208";a="154114970"
+Received: from mail-southcentralusazon11011058.outbound.protection.outlook.com
+ (HELO SN4PR0501CU005.outbound.protection.outlook.com) ([40.93.194.58])
+ by ob1.hgst.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
+ 24 Aug 2026 08:35:26 +0800
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=kA4+zR5risTlb/odrpQDYVY+Xg8XhlfFgSAAScfrGhfPUg9TtTYD8MWO1JYuKBvmBOvonAUj0dSESkS/FbaZoE+t7maL6itQxpUIMel+bBm1WDirGwJX7H2MJKqzHEyjmPQf3bfeycJKh2f1hNNPabNM2FSVnaZ3i3mt3Lspq1XWfoarQX8n2lpGjD3r8C9CPMcrxAhSNtyN6DavrlhOjC7ikYv9i/fbwgcTVmDjDxAMzsGwmkHBt/pCSNR3A2jrX+XsfTwfZrWTLPZuRqbNF8+8FkNbETnzXdnxTUbsov0fqL93TwRTSlqBtUvYJKO6F5+BE3z3GowrQDlZwi53mA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=CY5PPjdJlhKS99dD1kufTkcIGqjnSufA86sjlMorFO0=;
+ b=Isll/fel5VN/DvC6febnu2geGn4yriMi6fpWlMg7kDZ1mVjMaoC5ooJuSnCcsFaOHkKnv6Jl4SrFWCWLJnAHPamjIRAD+i0iD4wJaazC+8uYOkKajGW2fZ1CW59T2vRInHCdObrsNKal1RnAVQT7YpmMEQBRmbbwPJ82DW3KReDCG0gCCyqiOHx+1nsU75QvkYsOYuZC5wUpeol3MCKMPoz4vF5NOOkVLa4eagBCtxCX8+Q+3r0HNtq/bZEqU57zTD9iotRv9lfrjkGV1a7fgksIrGdEwIf1O5BtqmafHdZ0B02OC7DSX40pJaXoR/5nX8lwoSjmmSGBnubH24jbLw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
+ header.d=wdc.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1787522127; x=1788126927; darn=nongnu.org;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=Wkw9HatbFsxkw0XYl4HUff3BaEy9yXEfq3H1nmw3SeQ=;
- b=BmE/EJs5NTsDe/KytCBZmzaP8DMCX7qeRKjkUo6P1Sa/8dSQBR6OjprHhKKgs8aMy3
- OJEi+5rsfvJQUstExTzptPXCm1lM0X2UgM/j2FJE4Rcmjko58GFBDLbJrAC/kaymMiho
- E5i1wZwfURJt7bYEnnFMpUfLhLs//aDo1bmYnDegRFBEBrbrg9nr3Gj0IEWVSn2AKLdt
- p96jhffVIguSUiDyE3JpzKNyCKPJdLcaOr5wYwKw+gKYqHRo1IeBop2ZqfNpjvA5hHrj
- fxnQw50bWlbLyE2AI/O7azBqLxDoYcU4kb69zWIjAcnG4T7BqPUBjI9+6aaitgJEPx/j
- uxfw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787522127; x=1788126927;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=Wkw9HatbFsxkw0XYl4HUff3BaEy9yXEfq3H1nmw3SeQ=;
- b=CGWtMgGH6cQCbNZhiJ3ZRbfwsTkWX1VL6n8K/L9VCuy5K50IZZzu423vWoktSeTo1t
- 4+CORMjL8PKH8VyJKVccSVorDRWPuOLLLh25j2q0sMgu0ZQSMotHp4YlNvhQewSFp7Si
- COTHgujoTaeoYTw9Bfv+Ave9mco2jvvdMu/1nOXLqx4Oa1eonpYZlXk9uHNVeOiTXFvR
- sctlPuZyfqFzkBySMySJhn/CmEayKWsHjIP1r/RvDF49xaorv7sun/iJgXeq8TvKxxsA
- DJSt4OeKIO0BxZRCvmwJIE0MzhMJSl8nP9RaMg5/1cWipLtySvp464QXamVvBsI+ySka
- MTDA==
-X-Forwarded-Encrypted: i=1;
- AHgh+RqgG8QcpYglnVM07hlkpDwQf2MJhRlJqq2dVLHZrOLrzM9JIFrxMXvndP4cWs9xDkt0qdtdL0flC40F@nongnu.org
-X-Gm-Message-State: AFuF++nfiIfZ3Pf7EdzAFDqXHZ3/7L8iDvtiMntirCNTfWbKqloJFRLk
- J1GAxJm67EA7UqKgByp/c85Hwi8x42oTRgxO9H4migXBnkY8vZhGPJKQBffqAIhKOz1yZpR/zPx
- 5F9nki0qPgPNDN6zUXveaXSh/ojJPXSnoGph/T4q2NuYBQmxaMFfbLWq+LQ==
-X-Gm-Gg: AR+sD12aEe3a+tYpel1iukg3YIn3752W8IjGRJS6Sc5alyLMmXnRTxFEYAYYHlzaIpo
- OtaKqlWwiJSsAJ/gNUk5z+WQaFO5Zo9NnrN5A/UAxCnaSFwLG8qMaUcLsGBhRvh2eAGNkMjx1lO
- ARkdA4jUF5pEccHiXP/3/MNHekHXAOvWPr8iXWE06ZeTY2bKujsb4dhJWQTitBVqhBV1WmchtdM
- pt/rjLCSKUAfaZ7RPWKgnLid5R47bWKTVnODDg6MByH/UzZB5mmWtkG3at/k0x0aPdOwdqninjA
- 979iPN2WhEP5PgfquxXq0/Fgx4EAVGm7KJcPp2ghKDY+BjIkj8Zy0Oo58yRWlG9BucS5RtUidoh
- WBwF4uPEjl5oNdORRR99YOqJMFxzEag43PW3q
-X-Received: by 2002:ac8:5c81:0:b0:519:8998:661b with SMTP id
- d75a77b69052e-52df5a08456mr230782251cf.20.1787522126674; 
- Sun, 23 Aug 2026 14:55:26 -0700 (PDT)
-X-Received: by 2002:ac8:5c81:0:b0:519:8998:661b with SMTP id
- d75a77b69052e-52df5a08456mr230781981cf.20.1787522126141; 
- Sun, 23 Aug 2026 14:55:26 -0700 (PDT)
-Received: from [192.168.68.100] ([189.38.141.232])
- by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-52e09975fbcsm35912341cf.4.2026.08.23.14.55.22
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 23 Aug 2026 14:55:25 -0700 (PDT)
-Message-ID: <75d038af-a1a0-460c-9fea-7cca0423a54c@oss.qualcomm.com>
-Date: Sun, 23 Aug 2026 18:55:20 -0300
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
+ d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=CY5PPjdJlhKS99dD1kufTkcIGqjnSufA86sjlMorFO0=;
+ b=h+0h3ODi3wqoyR+5TTnwAiGH+Dcvvfdo0JZfTM6ORyFn8FWjdixCiXELEFsd11pGvI1wMkHrhC5/xYr6+KsVBIhJnRyqsBW5UpJqZfDu1gJpBCYLRb+gxu3uY8eSE/IZUM3NQAbezE44VjZ5S9YzOODFaVMYI0pOc5/2lsP2nfs=
+Received: from BY1PR04MB9561.namprd04.prod.outlook.com (2603:10b6:a03:5b6::11)
+ by CH0PR04MB8052.namprd04.prod.outlook.com (2603:10b6:610:f0::23)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.339.12; Mon, 24 Aug
+ 2026 00:35:19 +0000
+Received: from BY1PR04MB9561.namprd04.prod.outlook.com
+ ([fe80::3869:e494:2fa8:9888]) by BY1PR04MB9561.namprd04.prod.outlook.com
+ ([fe80::3869:e494:2fa8:9888%5]) with mapi id 15.21.0339.012; Mon, 24 Aug 2026
+ 00:35:18 +0000
+From: Alistair Francis <Alistair.Francis@wdc.com>
+To: "joel@jms.id.au" <joel@jms.id.au>, "yfliu2008@qq.com" <yfliu2008@qq.com>
+CC: "sunilvl@ventanamicro.com" <sunilvl@ventanamicro.com>,
+ "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
+ "daniel.barboza@oss.qualcomm.com" <daniel.barboza@oss.qualcomm.com>,
+ "chao.liu.zevorn@gmail.com" <chao.liu.zevorn@gmail.com>,
+ "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
+ "zhiwei_liu@linux.alibaba.com" <zhiwei_liu@linux.alibaba.com>,
+ "palmer@dabbelt.com" <palmer@dabbelt.com>, "liwei1518@gmail.com"
+ <liwei1518@gmail.com>, "pierrick.bouvier@oss.qualcomm.com"
+ <pierrick.bouvier@oss.qualcomm.com>
 Subject: Re: [PATCH v3] riscv/virt: Add optional UART1
-To: Yanfeng Liu <yfliu2008@qq.com>, qemu-riscv@nongnu.org
-Cc: qemu-devel@nongnu.org, alistair.francis@wdc.com,
- pierrick.bouvier@oss.qualcomm.com, sunilvl@ventanamicro.com,
- palmer@dabbelt.com, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com,
- chao.liu.zevorn@gmail.com
+Thread-Topic: [PATCH v3] riscv/virt: Add optional UART1
+Thread-Index: AQHdFlt6BaYTdbzdckSrt/642/QtAramn3+AgAX0qIA=
+Date: Mon, 24 Aug 2026 00:35:18 +0000
+Message-ID: <9a7807f5c9f6ed8c55860ebcacb403fe14a920ee.camel@wdc.com>
 References: <tencent_4EEBFC805F3E59863BEDC38094EF5A109206@qq.com>
-From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+ <CACPK8XefKWYjBqZrhbgf62QaSGqdgGMFwVbB4uwoWz+4ZfhmkQ@mail.gmail.com>
+In-Reply-To: <CACPK8XefKWYjBqZrhbgf62QaSGqdgGMFwVbB4uwoWz+4ZfhmkQ@mail.gmail.com>
+Accept-Language: en-US
 Content-Language: en-US
-In-Reply-To: <tencent_4EEBFC805F3E59863BEDC38094EF5A109206@qq.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODIzMDIwMSBTYWx0ZWRfXyYAkiKKRzRce
- P4JfhOlF0uootdnRpiADqcIbTrYu8XrFAbYBMTdwOlSPIzDM7eZfMVyuuo6Sod5IB52bS1rA4l+
- zpKvHGpFuGapuCb9Hi++4V9aewCd6ng=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODIzMDIwMSBTYWx0ZWRfX06Hxp6aBtfJ9
- BFocQ+H9WFxEldMdUaE1WGw7k80avemuSF3l2gAUAVdYIKLr+VfkwOVI8c67dsIHcNTCLbPbQpm
- PfxFMYseNMrDSPRkdAk3iwuHmxRqih365HGifsdna5pyf69fa73POJxP3e+HdTPF1H0LlclGDlF
- Gac5Kz36zFeJR3S59wQSubzahhAXPaOx+c8yDrFM5PGsBLyJF3xwKolF2fwWSBPjyggctDvRQSQ
- hWPOlZfPuphBuKpC4nh6wP4hbv62Dr2ZtWt6HQVDWVuDBiIhPtPAPyY51fIDqttdik4rVZdVoLZ
- QvE5n0nYAsLoRDVAx0oXnUCf515mQvSGDdUWrrARCcCLtT5whqIfskeZL4djpAH+AuQWdh+DyOj
- 7IjmyxPQ+Q6ZGLmaRWB8iB41ph4C1QU3/1/NMJtlBdiNS53YH/7HU4weqE7RyxVYgiHeMBvADF/
- qPRuonKHNNGutVbpcqA==
-X-Authority-Analysis: v=2.4 cv=RtL16imK c=1 sm=1 tr=0 ts=6a8b6c4f cx=c_pps
- a=WeENfcodrlLV9YRTxbY/uA==:117 a=MCIxunHWmQOg/5OnbzXZaw==:17
- a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
- a=dZbOZ2KzAAAA:8 a=umBbkq_vEPmigtP7UbEA:9 a=QEXdDO2ut3YA:10
- a=kacYvNCVWA4VmyqE58fU:22
-X-Proofpoint-ORIG-GUID: WsigWMVtwAuCx0zc51RqrJpUbBXDysBN
-X-Proofpoint-GUID: WsigWMVtwAuCx0zc51RqrJpUbBXDysBN
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-23_07,2026-08-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 lowpriorityscore=0 adultscore=0 malwarescore=0 phishscore=0
- impostorscore=0 priorityscore=1501 suspectscore=0 bulkscore=0 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608230201
-Received-SPF: pass client-ip=205.220.180.131;
- envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
-X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+user-agent: Evolution 3.60.2 (by Flathub.org) 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=wdc.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: BY1PR04MB9561:EE_|CH0PR04MB8052:EE_
+x-ms-office365-filtering-correlation-id: 0b6a0269-6ae5-4d9a-3a8c-08df017792fa
+wdcipoutbound: EOP-TRUE
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+ ARA:13230040|376014|7416014|1800799024|19092799006|366016|10070799003|23010399003|38070700021|10067099003|56012099006|11063799006|4143699003|18002099003|22082099003;
+x-microsoft-antispam-message-info: qwAcPnYi6Yq0L/K0atZcPXde1BnFACcYusG+ZiL71MmB3OK99xquCwsjg5MafBQRMIwZUwYKLBuOR1n+7KWcTYXlGJ6XgRkq6H3xqKQNFeMnsJIZadcQy/G4hHGkrQB7hxVwSaRlgC5PQdLTTEB1J6PiwWIk9eZ41RC6XW8SGHNax1Gd1cGO6VUrBVQSFzbPS+xesEPm2PP4rr30FrsIdr00iOQgfqYJGx39oQt0BQ3JbiV3xZV7a/W6Pb6FGHyrbsvBs2dm/Kxy1x7CpWLOftyFU7XfCKOCJAw2fcUslIjFmPwqA5zzVKKTawrbywpkSFEJiWWFmSkYqsAGkS8hw8ZgIkWKeI8za13zPuXRanxdSsS3REqiGuVGq7fiV7ITDkT4ArcfRgW0o8ySGGCya0+DrzSZNxVS7C82wtE6Kyp3ehI1w49MpM2xle6vvgRBXTK5CiRFPw8UXx3h/L3BKuJRe9sJyUq+Z0A95qFlkMPDnMXHiD99wVQG3JprwsobInBw07nC+ZKJDxNc1oXZP5rAmHEHUbBbbVJ9GctyCCiYL1g/mj8Wjjkfj4Dl86xEE59QK6imr5ZLcsbHm1nozLRlszXYvM5RGRE97i3LGPBcNZrMdZdw0pZICN9Tc7mW4IrFm3tJ4U4EWNNMrarOhggqXn3TI37PqMzuUk1SNPRZ97ezekQ88cJYHcwWsw1YM65L+wTh+KQWBrjNjEXbKt55J4f+8ML1YxebKykHZsc=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:BY1PR04MB9561.namprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(7416014)(1800799024)(19092799006)(366016)(10070799003)(23010399003)(38070700021)(10067099003)(56012099006)(11063799006)(4143699003)(18002099003)(22082099003);
+ DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 2
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?bkN2dW1zSGd5YUViQzNSSzBDRFNWc0MrbTh2alRURjZ2YS9sbm0wRjNCTXow?=
+ =?utf-8?B?L0taQzdGTDVzQWdtR0RPV3dlbUIrRmZGOWdtZWdVb0dLZ3M5NmFEa1ZlQlJm?=
+ =?utf-8?B?NThYaXFjQnFiZ0RPUzFMakRqcVRENmpBK29pUVZGT1NiTG1HU1UrVnJFUkxO?=
+ =?utf-8?B?ZFZjRnlJQ1R0ZDhrdWNSK2lMRjlCTFhkaEl0SXU3TGNQd25HZlNjZWlFZFFU?=
+ =?utf-8?B?Q0ltSDBuQktQL0w1R21na0NaZkpBNWNaTFo1Y3VUTmlod3czSTVpUkRNMGZx?=
+ =?utf-8?B?UWdYc2dkb0ZVeXZ1RXlvSE5zR2R3am1ROFNYYWlLUVNJSk9KMjhPK210bytn?=
+ =?utf-8?B?cEpyVzNtbnF3QVdrOTRhcGZTUjYzVkZHMnF0cjdVMEdnZFYrT0Y1OWdUZitF?=
+ =?utf-8?B?R3Rlem9CQkdJWmVESmptN3VjZmE5bTVWdTBLQTY1RTFqRHVLcDJzMVdpN2Mx?=
+ =?utf-8?B?OGhLcmJQVmdjTDJmODBEMjRHcWU5bm4wRUdMR3ZrMTF5QmxHQ3FLdm9IR2Zu?=
+ =?utf-8?B?aTcyN2tieXp3dUp4OUEwblJsTG9YL21YM0EyWmZEdU9VaVdWZi9lNkQyZUIv?=
+ =?utf-8?B?ZkNTVkszK1g5WkQ0YVpYSFhacEEwalZraHkzY2srOHFkMHg3bHFETHJDQUhr?=
+ =?utf-8?B?YUJPMEx2SnhtVURLWnFleG5SUXZCdndJbmRJSEpvNjhXWit0d0ZWVDRKNUcz?=
+ =?utf-8?B?QWhIR0s1Ukd3LzdTSVJVVFdtQUN4eE91MnJ3QW9Oa1ZYTW5QSGx0Sm4zYXVF?=
+ =?utf-8?B?L2EvTkZINHgycUxHdDBuNGY2TUZKRm9yYkxXVzk3ZXcwNWNqQjdseWYyWWZn?=
+ =?utf-8?B?ditrL0Q4Y3lkK0xBK0kzNzlBVGRQMDdueHRpZm4yTE5rNjNiaXlUN1RXMzVO?=
+ =?utf-8?B?NG5jQVVBb1A3ZTJFNGV5enFKWUpiN3JNY1JyMmZDOWhuSW10QjRoYTlRWDR0?=
+ =?utf-8?B?aTdNLzZPbkJUVjQ0M2ZvTFBsZzNPKzNJL2RLZkpOemFXV3RNTFNNZDgyYU8v?=
+ =?utf-8?B?amJERlM1dU9VTDE0NGZNMGpsaEZFS28rcStERWRTeUFabWQ2N2hyUVkwVVRZ?=
+ =?utf-8?B?Q3FVUWhjVzNtVCtlcnFIa3VCaVcwamNVTVljTHJnbTNZNGtOS2NORU1VYlNj?=
+ =?utf-8?B?N2FGSlhnVk8wT3l1VlBHV0kvM1V2Yk0zMDJDRDd4UW9neEV3WHVteVZRemsv?=
+ =?utf-8?B?QUNUVk5wZSsvMEFLVDVkVFJPU1lXRmhkWkRUQ0tyRkVsdVpoT2laVmxKbnc2?=
+ =?utf-8?B?emVyNGJUMmZFY2I5OWhSTG81Uzhvdy9ITXBJY0h3RjhtM3dPeEVHM3dkR0hu?=
+ =?utf-8?B?L0JvYXkvaFMxckREMEhCSEZxNDJIYlhsVDRZT2o3cU1oZXR2SjN3ZkFINWty?=
+ =?utf-8?B?NEZ6b01tVFNiZHhjTlg0a010V2ZycFByWHNVLzRvYTV1MEUzWXpONFdzWnVV?=
+ =?utf-8?B?Q1NTMmFyOTFGNFFuOGg0cE54SEZTVVppYW51WUZabUxsaDU4Z1U2NEVVeXdj?=
+ =?utf-8?B?WFVUMFNrdGZMajhzVWE5QWRKV0VTb1hPbWlSdnVBMGZ5SlJ6ZVlBRHk1cDZ0?=
+ =?utf-8?B?Z0pFeG5BditmZzRRejZlNXhDQWtpTFdMM2liZ3o4cUV0V2h0ZmxCaWhyTEpL?=
+ =?utf-8?B?UVI0bXZkeVdnKzRhMHV1UU9QeTM2L0FyRVdwSWEzMU5YbHRDcEQ3TnFMR05a?=
+ =?utf-8?B?UmxkZjZGOVpoYUE0RnZ5UXRxVERHcXh5VlB3Mk01aCtkS2FVTll0bDRwakpG?=
+ =?utf-8?B?a29zeDMxMGViZkNadnU2SGgyR3AvNEhuS3JobkpScmVYUmJpOXFObHpWTUND?=
+ =?utf-8?B?U05MY3NEMUpJR0d1cXlVUjJQYXV1UGhRd29KcG1HSGhyRHVrZHhsVG1xaXYy?=
+ =?utf-8?B?ektEcTFud3o0aWtjbVpCcWF1VXJhS0RNUGV4VFNab1JHMDdpQUtuTmgzY0tt?=
+ =?utf-8?B?TVhObHlSbURvbUFHZDg3M3d1bTZ3eTV5VXZIL0tLcCt2bzdYdUN0R1UxQ20v?=
+ =?utf-8?B?OWxkM0tyMDJxK0lOdXo1YXBqNUNTeDB4VFNodk8vM1lDbm1HN1VpdStSZ2NQ?=
+ =?utf-8?B?ckNTWCtTUGlaQi9QelF4S2R0RW5Ta3JEUFNLK3hIK0dLZnNaTjlwaXkxa3NU?=
+ =?utf-8?B?cS90ZTVqams3RlRPYkJ2TklzMDV0QTlnK2VwS3RsWmFvZk9zUFNpU0djK0Rh?=
+ =?utf-8?B?N2ZhWTlzNVRzQXlpZkREdU0vUk5rUTM1ZmQwbHdVekRhQTNURUFLb1dzajl5?=
+ =?utf-8?B?LzUrd1VpQ3YvVmFhWVVvYnJFWVRFUE9wUW42dTc2SHF1OFk2dHFJcGs5VWhj?=
+ =?utf-8?B?aDlDZ25uaHRRUy9EUVpybTgrSXhiS3hqdDFQWE5Gc2Z3QVJaZkFER284ZjdS?=
+ =?utf-8?Q?yrlRoSDlS5+3MWjcO+10jn3Q6mk4S/9APJyVTm1vUGAHm?=
+x-ms-exchange-antispam-messagedata-1: 3DAKskI7Imnu3N08jCg8Cee2f7TlKpU73bQ=
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <8A2A8F9C58A147489DE0F0536E9DE083@namprd04.prod.outlook.com>
+Content-Transfer-Encoding: base64
+MIME-Version: 1.0
+X-Exchange-RoutingPolicyChecked: Y07FFxd2qUTHUrSbUFq4xS+2968i+nhoYBvT66r1BIsM5clZ6olVBOdjT6JAO74k65/OYH6PqxmKi4RSzcXMicAG7XWgq21jYroeAyZyY9EY7EoGuifpdPnTCzXs0WlRAI4z30oBLFyiuXV11Heoc7lBDM8fR/KKUiiP92H03mia3Xe0vBfST3cTXhDIgrnyzW98za5sXXTf+lkB8uyzEGdcqFjec55rWMhJydGVXDgHnTcTgR0SK0BGFC3OE+WhOuZqjy9CpgjHsAhTKyBOxuij/ur2fnrtv+XJo2SBRjjHw8iODf594qurioSKeqWcRSdg5yeyd3+xbF4a1w3gRA==
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: 4ZJeYlWqkYHpQpXCgtLoRMDssXCHvMPndGc8OFpkSp8Qc/mVh7A/q9oRfQMFhATPVZY98AGD+PfQQ6n7tIDLeAGg2zcRGHLTCzBDIpE0kjHiN/fi1R5BbPIhYbVPowDuZITYPuONpGpdvAVlSnESjL1x17vIaP3PP7KtOxNreeEM4GhJkhndsjoeJOTJNtTzR0ThYqzvlRvxJZY17w+VNcB8SvbugZjTwtWgdtz8ejgKKmPnbgOUo4iAJ+My67z+T+bHPfqP7rPt7E6EuqryNmlcBgIXoOyEyrHtjJAFg0ezHmRK6Da5uSpSilUFhp7Cb6XGGKYShWGY/KluR2L0XskHonQuiPGC7vW6c63beNymhbhr/KGycTtUAL691fKuHYBmtrDL2xK54q4ypkTChZBIea5y6BH17hIkyr692DCGHlp0BuHPyB14aS4qpK3KWvNPcU12hx/0ULr067XD680BOJMmqtp+jGw0qofRWc2u+3JjG2LiKkxEUox/lftcv1aGGZjmQB7pDrdgIUg8INx4FxpP3ZXH9jnrMI08cYRkk0CDaduPm8oBizcKFWKPLHUUgsqt/Wr8ihjtJuZGl/CyCLDFiEI9M1ei/APAxQ+htcuZ02ibKQibBl878QO3
+X-OriginatorOrg: wdc.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: BY1PR04MB9561.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0b6a0269-6ae5-4d9a-3a8c-08df017792fa
+X-MS-Exchange-CrossTenant-originalarrivaltime: 24 Aug 2026 00:35:18.8026 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: OzDwsU559BKpKE4WSk1JHB5MeNgSHhR4cVLDpl5HC33wtbA/fwjrVYLKHlgVsE3HWn77AKj4i8mqmfHyE4t5TxS+VmfQYs+PwxTP8FUrsVQ=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH0PR04MB8052
+Received-SPF: pass client-ip=216.71.153.141;
+ envelope-from=prvs=689c12928=Alistair.Francis@wdc.com;
+ helo=esa3.hgst.iphmx.com
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -156,225 +186,24 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-
-
-On 7/17/2026 11:16 PM, Yanfeng Liu wrote:
-> This adds optional UART1 to RiscV virt board if required at
-> runtime to simplify multicore development.
-
-Can you please elaborate on the use case?  We can add multiple serial
-devices already.  E.g. this will add 4 serials:
-
-
-$ ./build/qemu-system-riscv64 -M virt --nodefaults \
-          -serial stdio \
-          -serial tcp::4444,server,nowait \
-          -serial pty  \
-          -serial file:uart4.log \
-          --nographic
-
-
-The difference here is that the additional serials won't have memory mappings
-and fdt nodes.
-
-
-Thanks,
-Daniel
-
-> 
-> Note that UART0 remains default serial_hd(0) and it is:
-> 
-> - the lowest address UART
-> - first serial in DTB
-> - behind /aliases/serial0 in DTB
-> - the /chosen/stdout-path in DTB
-> 
-> Note that UART1 is placed at different page from UART0 to
-> support page level isolation.
-> 
-> Signed-off-by: Yanfeng Liu <yfliu2008@qq.com>
-> ---
->   docs/system/riscv/virt.rst |  5 ++++-
->   hw/riscv/virt-acpi-build.c | 12 ++++++++----
->   hw/riscv/virt.c            | 40 ++++++++++++++++++++++++++++----------
->   include/hw/riscv/virt.h    |  3 +++
->   4 files changed, 45 insertions(+), 15 deletions(-)
-> 
-> diff --git a/docs/system/riscv/virt.rst b/docs/system/riscv/virt.rst
-> index 60850970ce..45ac63ac77 100644
-> --- a/docs/system/riscv/virt.rst
-> +++ b/docs/system/riscv/virt.rst
-> @@ -16,7 +16,7 @@ The ``virt`` machine supports the following devices:
->   * Core Local Interruptor (CLINT)
->   * Platform-Level Interrupt Controller (PLIC)
->   * CFI parallel NOR flash memory
-> -* 1 NS16550 compatible UART
-> +* Either 1 or 2 NS16550 compatible UARTs
->   * 1 Google Goldfish RTC
->   * 1 SiFive Test device
->   * 8 virtio-mmio transport devices
-> @@ -27,6 +27,9 @@ The hypervisor extension has been enabled for the default CPU, so virtual
->   machines with hypervisor extension can simply be used without explicitly
->   declaring.
->   
-> +The second UART only exists if a backend is configured explicitly (e.g.
-> +with a second `-serial` command line option).
-> +
->   Hardware configuration information
->   ----------------------------------
->   
-> diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
-> index 413d47d70e..597751c84a 100644
-> --- a/hw/riscv/virt-acpi-build.c
-> +++ b/hw/riscv/virt-acpi-build.c
-> @@ -169,11 +169,11 @@ static void acpi_dsdt_add_plic_aplic(Aml *scope, uint8_t socket_count,
->   
->   static void
->   acpi_dsdt_add_uart(Aml *scope, const MemMapEntry *uart_memmap,
-> -                    uint32_t uart_irq)
-> +                    uint32_t uart_irq, int uartidx)
->   {
-> -    Aml *dev = aml_device("COM0");
-> +    Aml *dev = aml_device("COM%d", uartidx);
->       aml_append(dev, aml_name_decl("_HID", aml_string("RSCV0003")));
-> -    aml_append(dev, aml_name_decl("_UID", aml_int(0)));
-> +    aml_append(dev, aml_name_decl("_UID", aml_int(uartidx)));
->   
->       Aml *crs = aml_resource_template();
->       aml_append(crs, aml_memory32_fixed(uart_memmap->base,
-> @@ -479,7 +479,11 @@ static void build_dsdt(GArray *table_data,
->                                    memmap[VIRT_APLIC_S].size, "RSCV0002");
->       }
->   
-> -    acpi_dsdt_add_uart(scope, &memmap[VIRT_UART0], UART0_IRQ);
-> +    acpi_dsdt_add_uart(scope, &memmap[VIRT_UART0], UART0_IRQ, 0);
-> +    if (s->uart1_present) {
-> +        acpi_dsdt_add_uart(scope, &memmap[VIRT_UART1], UART1_IRQ, 1);
-> +    }
-> +
->       if (virt_is_iommu_sys_enabled(s)) {
->           acpi_dsdt_add_iommu_sys(scope, &memmap[VIRT_IOMMU_SYS], IOMMU_SYS_IRQ);
->       }
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index 33775a61fd..4703ac58f8 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -96,6 +96,8 @@ static const MemMapEntry virt_memmap[] = {
->       [VIRT_APLIC_S] =      {  0xd000000, APLIC_SIZE(VIRT_CPUS_MAX) },
->       [VIRT_UART0] =        { 0x10000000,         0x100 },
->       [VIRT_VIRTIO] =       { 0x10001000,        0x1000 },
-> +    /* UART1 supports page isolation from UART0 */
-> +    [VIRT_UART1] =        { 0x1000a000,         0x100 },
->       [VIRT_FW_CFG] =       { 0x10100000,          0x18 },
->       [VIRT_FLASH] =        { 0x20000000,     0x4000000 },
->       [VIRT_IMSIC_M] =      { 0x24000000, VIRT_IMSIC_MAX_SIZE },
-> @@ -186,7 +188,8 @@ static void create_pcie_irq_map(RISCVVirtState *s, void *fdt, char *nodename,
->                             FDT_MAX_INT_MAP_WIDTH] = {};
->       uint32_t *irq_map = full_irq_map;
->   
-> -    /* This code creates a standard swizzle of interrupts such that
-> +    /*
-> +     * This code creates a standard swizzle of interrupts such that
->        * each device's first interrupt is based on it's PCI_SLOT number.
->        * (See pci_swizzle_map_irq_fn())
->        *
-> @@ -832,28 +835,38 @@ static void create_fdt_reset(RISCVVirtState *s, uint32_t *phandle)
->   }
->   
->   static void create_fdt_uart(RISCVVirtState *s,
-> -                            uint32_t irq_mmio_phandle)
-> +                            uint32_t irq_mmio_phandle, int memId, int irqNo)
->   {
->       g_autofree char *name = NULL;
->       MachineState *ms = MACHINE(s);
->   
->       name = g_strdup_printf("/soc/serial@%"HWADDR_PRIx,
-> -                           s->memmap[VIRT_UART0].base);
-> +                           s->memmap[memId].base);
->       qemu_fdt_add_subnode(ms->fdt, name);
->       qemu_fdt_setprop_string(ms->fdt, name, "compatible", "ns16550a");
->       qemu_fdt_setprop_sized_cells(ms->fdt, name, "reg",
-> -                                 2, s->memmap[VIRT_UART0].base,
-> -                                 2, s->memmap[VIRT_UART0].size);
-> +                                 2, s->memmap[memId].base,
-> +                                 2, s->memmap[memId].size);
->       qemu_fdt_setprop_cell(ms->fdt, name, "clock-frequency", 3686400);
->       qemu_fdt_setprop_cell(ms->fdt, name, "interrupt-parent", irq_mmio_phandle);
->       if (s->aia_type == VIRT_AIA_TYPE_NONE) {
-> -        qemu_fdt_setprop_cell(ms->fdt, name, "interrupts", UART0_IRQ);
-> +        qemu_fdt_setprop_cell(ms->fdt, name, "interrupts", irqNo);
->       } else {
-> -        qemu_fdt_setprop_cells(ms->fdt, name, "interrupts", UART0_IRQ, 0x4);
-> +        qemu_fdt_setprop_cells(ms->fdt, name, "interrupts", irqNo, 0x4);
-> +    }
-> +
-> +    if (VIRT_UART0 == memId) {
-> +        qemu_fdt_setprop_string(ms->fdt, "/chosen", "stdout-path", name);
-> +        qemu_fdt_setprop_string(ms->fdt, "/aliases", "serial0", name);
->       }
-> +}
->   
-> -    qemu_fdt_setprop_string(ms->fdt, "/chosen", "stdout-path", name);
-> -    qemu_fdt_setprop_string(ms->fdt, "/aliases", "serial0", name);
-> +static void create_fdt_uarts(RISCVVirtState *s, uint32_t irq_mmio_phandle)
-> +{
-> +    if (s->uart1_present) {
-> +        create_fdt_uart(s, irq_mmio_phandle, VIRT_UART1, UART1_IRQ);
-> +    }
-> +    create_fdt_uart(s, irq_mmio_phandle, VIRT_UART0, UART0_IRQ);
->   }
->   
->   static void create_fdt_rtc(RISCVVirtState *s,
-> @@ -1023,7 +1036,7 @@ static void finalize_fdt(RISCVVirtState *s)
->   
->       create_fdt_reset(s, &phandle);
->   
-> -    create_fdt_uart(s, irq_mmio_phandle);
-> +    create_fdt_uarts(s, irq_mmio_phandle);
->   
->       create_fdt_rtc(s, irq_mmio_phandle);
->   }
-> @@ -1567,6 +1580,13 @@ static void virt_machine_init(MachineState *machine)
->           0, qdev_get_gpio_in(mmio_irqchip, UART0_IRQ), 399193,
->           serial_hd(0), DEVICE_LITTLE_ENDIAN);
->   
-> +    if (serial_hd(1)) {
-> +        serial_mm_init(system_memory, s->memmap[VIRT_UART1].base,
-> +            0, qdev_get_gpio_in(mmio_irqchip, UART1_IRQ), 399193,
-> +            serial_hd(1), DEVICE_LITTLE_ENDIAN);
-> +        s->uart1_present = true;
-> +    }
-> +
->       sysbus_create_simple("goldfish_rtc", s->memmap[VIRT_RTC].base,
->           qdev_get_gpio_in(mmio_irqchip, RTC_IRQ));
->   
-> diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
-> index 18a2a323a3..7d57c8292e 100644
-> --- a/include/hw/riscv/virt.h
-> +++ b/include/hw/riscv/virt.h
-> @@ -59,6 +59,7 @@ struct RISCVVirtState {
->       int aia_guests;
->       char *oem_id;
->       char *oem_table_id;
-> +    bool uart1_present;
->       OnOffAuto acpi;
->       const MemMapEntry *memmap;
->       struct GPEXHost *gpex_host;
-> @@ -78,6 +79,7 @@ enum {
->       VIRT_APLIC_S,
->       VIRT_UART0,
->       VIRT_VIRTIO,
-> +    VIRT_UART1,
->       VIRT_FW_CFG,
->       VIRT_IMSIC_M,
->       VIRT_IMSIC_S,
-> @@ -93,6 +95,7 @@ enum {
->   enum {
->       UART0_IRQ = 10,
->       RTC_IRQ = 11,
-> +    UART1_IRQ = 12,
->       VIRTIO_IRQ = 1, /* 1 to 8 */
->       VIRTIO_COUNT = 8,
->       PCIE_IRQ = 0x20, /* 32 to 35 */
-
+T24gVGh1LCAyMDI2LTA4LTIwIGF0IDE1OjA4ICswOTMwLCBKb2VsIFN0YW5sZXkgd3JvdGU6DQo+
+IE9uIFNhdCwgMTggSnVsIDIwMjYgYXQgMTE6NDYsIFlhbmZlbmcgTGl1IDx5ZmxpdTIwMDhAcXEu
+Y29tPiB3cm90ZToNCj4gPiAtLS0gYS9kb2NzL3N5c3RlbS9yaXNjdi92aXJ0LnJzdA0KPiA+ICsr
+KyBiL2RvY3Mvc3lzdGVtL3Jpc2N2L3ZpcnQucnN0DQo+ID4gQEAgLTE2LDcgKzE2LDcgQEAgVGhl
+IGBgdmlydGBgIG1hY2hpbmUgc3VwcG9ydHMgdGhlIGZvbGxvd2luZw0KPiA+IGRldmljZXM6DQo+
+ID4gwqAqIENvcmUgTG9jYWwgSW50ZXJydXB0b3IgKENMSU5UKQ0KPiA+IMKgKiBQbGF0Zm9ybS1M
+ZXZlbCBJbnRlcnJ1cHQgQ29udHJvbGxlciAoUExJQykNCj4gPiDCoCogQ0ZJIHBhcmFsbGVsIE5P
+UiBmbGFzaCBtZW1vcnkNCj4gPiAtKiAxIE5TMTY1NTAgY29tcGF0aWJsZSBVQVJUDQo+ID4gKyog
+RWl0aGVyIDEgb3IgMiBOUzE2NTUwIGNvbXBhdGlibGUgVUFSVHMNCj4gPiDCoCogMSBHb29nbGUg
+R29sZGZpc2ggUlRDDQo+ID4gwqAqIDEgU2lGaXZlIFRlc3QgZGV2aWNlDQo+ID4gwqAqIDggdmly
+dGlvLW1taW8gdHJhbnNwb3J0IGRldmljZXMNCj4gPiBAQCAtMjcsNiArMjcsOSBAQCBUaGUgaHlw
+ZXJ2aXNvciBleHRlbnNpb24gaGFzIGJlZW4gZW5hYmxlZCBmb3IgdGhlDQo+ID4gZGVmYXVsdCBD
+UFUsIHNvIHZpcnR1YWwNCj4gPiDCoG1hY2hpbmVzIHdpdGggaHlwZXJ2aXNvciBleHRlbnNpb24g
+Y2FuIHNpbXBseSBiZSB1c2VkIHdpdGhvdXQNCj4gPiBleHBsaWNpdGx5DQo+ID4gwqBkZWNsYXJp
+bmcuDQo+ID4gDQo+ID4gK1RoZSBzZWNvbmQgVUFSVCBvbmx5IGV4aXN0cyBpZiBhIGJhY2tlbmQg
+aXMgY29uZmlndXJlZCBleHBsaWNpdGx5DQo+ID4gKGUuZy4NCj4gPiArd2l0aCBhIHNlY29uZCBg
+LXNlcmlhbGAgY29tbWFuZCBsaW5lIG9wdGlvbikuDQo+IA0KPiBUaGlzIGJyZWFrcyB0aGUgZG9j
+cyBidWlsZC4gSSB0aGluayB5b3Ugd2FudCBgYC1zZXJpYWxgYC4NCg0KVGhhdCBzaG91bGQgYmUg
+Zml4ZWQgaW4gbXkgdHJlZSBhbHJlYWR5IHRob3VnaA0KDQpBbGlzdGFpcg0KDQo+IA0KPiBDaGVl
+cnMsDQo+IA0KPiBKb2VsDQo=
 
