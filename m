@@ -4,147 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83C9DC5DF81
-	for <qemu-riscv@archiver.kernel.org>; Mon, 24 Aug 2026 13:43:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80A6BC5DF94
+	for <qemu-riscv@archiver.kernel.org>; Mon, 24 Aug 2026 13:58:50 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wyUx3-0000a6-64; Mon, 24 Aug 2026 09:43:01 -0400
+	id 1wyVC4-0006bp-Vk; Mon, 24 Aug 2026 09:58:33 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wyUx1-0000Yz-CC
- for qemu-riscv@nongnu.org; Mon, 24 Aug 2026 09:42:59 -0400
-Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wyUwy-0004pW-R8
- for qemu-riscv@nongnu.org; Mon, 24 Aug 2026 09:42:59 -0400
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 67OCv52i2006635
- for <qemu-riscv@nongnu.org>; Mon, 24 Aug 2026 13:42:55 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- fIUvQHKn5dD803IC0DXQ9TIMC+mBHa72mVMHV5/Z07k=; b=aGb/3niwsC8C5F3I
- SQo7LbnzBimoEhQgo2qEv3uG0pXf5jotq4vBLTbDyc3cgM4tByyvfpOsEH0NTVhw
- fN8JyqOKGy+XmDlkjLhV+l4iij3G9nzNCz6Bmh8qQlhyZz5fesRlvz1BtdnRae2E
- 47yTqm3VkQcUjcEW3gmFL/33ip0Wx8sp1HVdBSxJYs3SVJkIh+kG49Bg+Q8SHU3i
- ELl3IsVyPFGfX7FsmvHRQ/sdJGo7Le3Yp2BfNcqFZtLNP2o7JsIa3SuU326DIrRf
- p4i1mb5p2keaMR7r+VxBIwbZPq2j44XSLeUiPWhgywGae67YpuL7wHoXN71980vX
- HbAuWQ==
-Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com
- [209.85.160.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g8kv78ux5-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Mon, 24 Aug 2026 13:42:54 +0000 (GMT)
-Received: by mail-qt1-f198.google.com with SMTP id
- d75a77b69052e-5276aa86d00so39180271cf.2
- for <qemu-riscv@nongnu.org>; Mon, 24 Aug 2026 06:42:54 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <gsh517025@gmail.com>)
+ id 1wyUtW-00074q-LZ
+ for qemu-riscv@nongnu.org; Mon, 24 Aug 2026 09:39:22 -0400
+Received: from mail-pj2-x01.google.com ([2607:f8b0:4864:39::1])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <gsh517025@gmail.com>)
+ id 1wyUtU-0003d8-U7
+ for qemu-riscv@nongnu.org; Mon, 24 Aug 2026 09:39:22 -0400
+Received: by mail-pj2-x01.google.com with SMTP id
+ 98e67ed59e1d1-37fb1883fbfso1341357a91.0
+ for <qemu-riscv@nongnu.org>; Mon, 24 Aug 2026 06:39:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1787578974; x=1788183774; darn=nongnu.org;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=fIUvQHKn5dD803IC0DXQ9TIMC+mBHa72mVMHV5/Z07k=;
- b=AfpW4MRsW9PqIj+DUgFyQ1yhIypqvJYyzi00r1bTEIJbgExVUmimmwrdvMJA6p7Hey
- OH0+XroVQz2eef6QAGpFScMJHQnC+LySa2/Ik9Hn5YYNd1SRf9wdX8kYOnVUBQvVOmxe
- K8c4LIEcC53deBIqIZScMnyZyqMmb7t+SUO7/3duyEiTQUMk88yu6VD8gN66h+hTZIWc
- +ag73IrXlpCdihDrX/nlKCZfT0uwDZ9RV/UmTYpNfP84XyrWjKJ8C9lS0Aa+8WiYsgcz
- icw1uQLeVZqhJdYfwmDsZlCtVfS7Ibljxj06LdFZUlG+9hB9Q57vwOqv0lHMPG0CZ5rv
- C0Pw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787578974; x=1788183774;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20251104; t=1787578759; x=1788183559; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=fIUvQHKn5dD803IC0DXQ9TIMC+mBHa72mVMHV5/Z07k=;
- b=VjRelooW3UeotE5+txCMLqnjpeq6YSZjVsPRSdAyAOKVwY59LTMD8yeRRR9/LDUhGv
- KWsfANhWl90yifagy8fMnaQ67ATNBxdDWmwRTcQH8j4luRPq7LwQn5zT4zTY/dqGluQP
- 8Oa5ohELVG1o/704qSZYGp09wYUldB8FirBXc+jmt12zGMvbI0YgsgcFHYC8zpzhGtNz
- zYGU51PFVfS4aM+MtEOH9yT7ABdVv8CU1zcZoJAGyipIRIK08zxY2AK58UV4wo6SVkKW
- J6/mMJ53oa4xD7rxirIHpewo0taNsAucUXCMoVlY5PbalbnFwociPGGHugltLNhzsOm0
- L3UA==
+ bh=iBfWpMK7crx3Ube8UEJKq2oVd1VT5v0FXx0Fr5U2ZIg=;
+ b=kFfb+l/8ZbTCBJrKm0P1L/nCD/KPIEVXFu1+HUF6ZdNsfFn5L+NX0+P1Euh3SbrcFq
+ YWSArHQgQJGN1aoaahoHOKoBhH/thSeNikfjWXwHD/f6UrBi1wDaUljJn+bUYc6LKrUi
+ sR4JXdJh05e1+Ejl8GsvkZLmE2tvGmyZTetIN2cORvCh98UXFPek9Imu565JabXLZZKz
+ UhCY1SkR7SQeQ6HukfENb9y3yLJjehzwSG6Kg1FJpGEqn0cwzjeflO/qXReD/FEvVwbk
+ nfQzHROYR1EkOWpM90D+2ouWw4Jw7jLy0/OIMwFKBBkczNJrna1QEOkXnnTTdZA6ZwHH
+ 6EDA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1787578759; x=1788183559;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=iBfWpMK7crx3Ube8UEJKq2oVd1VT5v0FXx0Fr5U2ZIg=;
+ b=JRzRVexEK0S6Xkq7h2h45kQnBlAhY+xq6fot48eN4B1doxfMwdekdDGHbX5+oQrku8
+ Jm+IGIKKXlRa3U6LHVYTaoVuJxhLDk3wyx6ulACI6s2mTHA9NnAccP6eCl40O3mm7SHR
+ YlZM7JypXkNfaC4cyLAJJMtOgquXREwzWHPeP5rIXnB/dO3jScVGz52Cukrw6uE1YaPm
+ NtuZFO7kgT0KL4hq21myiRpwv+SIMFWIKrnHCz1OjtZmnw86Moa83QXjR8/6G/GoOyvB
+ vGNL5jCNmLlvMWgJma8qramL49Wl1r3SrQ+9LUk43A6CZm7TRsMtKwc+VJhOctH7kCtx
+ 3Asg==
 X-Forwarded-Encrypted: i=1;
- AHgh+RrR/zDdqeF5Lrf+pAjWzRBab2NoSqzt8p+uMa9yGf+oeIymWUrk6ceL+w2husXpOjYAU00JzDY7Z+fl@nongnu.org
-X-Gm-Message-State: AFuF++nU895QOue/PIlnb64/YwTW2tWM3TlymXYuAbCDsZ3O2Nxp7MOL
- Fxe/yPyIoKLp3pm8ber9qtuTzRHa64oGMLhFfTyUaBMWPgMOZBmiPjrDpyMOhLW5Pc+hzXUXjgf
- SxNqoebhPMmW6QTXBmQxeHs9z6SHnDEWUzPR1H1z7I3fMcg8Zwj777z3uew==
-X-Gm-Gg: AR+sD11LpTJ7h3wmJVAb82ziSN9S7Vg/MuqUvXfy2qLKVYdCdSboxEhal1ENHEs56vz
- zUAJc5J1Ko2LXh3gFjQvgy1Yywz2H+H9YsbQi0OpSb7k2hipy6KFVx1EWV/mCJSPshbb2quhs83
- Z4Nk+8coBLCz9SH6yTGuN9g0I0kF/F65Cqi8HLS8FeKL3Uy0jV5d/TaV3XSTKStSOqCvRsnaz3t
- 9Bkv7DZZkyFWaVMlYLZilqn0VHeocLHb1Rmk0lYT2fh0OTQlSQnIHU/UTdRVucJUIu/QI4+ah0Y
- CeGFe/TRv7jq8h8zKzih9Z2LFGBMbEsJbM+BG8FO9AlaMKHeWep/k7SxKP2rXyMBcPy71SB/jo+
- m0b6EvD3KztKedmRMXUrkI0yP+/UiKcb3Yv2/
-X-Received: by 2002:a05:622a:4d49:b0:51c:1132:c80d with SMTP id
- d75a77b69052e-52df5a024c9mr291449881cf.28.1787578973760; 
- Mon, 24 Aug 2026 06:42:53 -0700 (PDT)
-X-Received: by 2002:a05:622a:4d49:b0:51c:1132:c80d with SMTP id
- d75a77b69052e-52df5a024c9mr291449321cf.28.1787578973284; 
- Mon, 24 Aug 2026 06:42:53 -0700 (PDT)
-Received: from [192.168.68.100] ([189.38.141.232])
+ AHgh+Rq99D51uxrRYt1x3UNpr9Y9kyMWbOL9OZVwnSjno55KfPFhYF/BT5o24JRZTYeO7ZBPSc0fc1bL343o@nongnu.org
+X-Gm-Message-State: AFuF++nrzdED+MDE3LVxkpgjv3P03PiUgROR8R2ABHSxynp9Q1aD0BcG
+ 7I+hZrTAJV7xGlCMRPadjRR72Ao/mYvsOvygKWPtJ0eNmaNS8D1Vdfb6
+X-Gm-Gg: AR+sD11fuB0eL38BC8jNrJJX4zWj47jxNAwNh2007Ld2pYWhhzvxMEYsXkwHQFfWVZ3
+ GTMbzLeKTja2h9lisbP+1HuxP1a5aarvjm2gwlT1cSVipbGfW7WQyIfHl88JFkNyaT52XLlHTCK
+ RlwEWNJBnvKrXcVH0ji/ZlECydUQXstxhqoW+oHq1j4jFuJ5rWDklQOb2m/0sPv2LMxiaDVi/wm
+ tbeURupfnRipCuz9QQYgPliHZbljwIj+4C/2WgrKlUW2A+1csj78TK1aHflPCUdiuEjaD9r+ysM
+ sxgDIfJd3ZVPZrw0AmGa0iycOuLTO8smU5gu+FKAy8zQCcTumLIRW0ZAWJLsTflPVAaQySjvV/w
+ CGhgLzEE3We1QiPbzblfwBA8PFV9D9xfPlHm8SuN1tbomMp7ZdrlXLPNi68y851K5XLgAea+fjH
+ xDIavzlM3SmBkaAHVODJdgAxoZERwEKPlKbhTI7PEYPpEa9Ym3IbWGXMYbPfsokIOtMJiKc56sq
+ WxIzeSTwFM=
+X-Received: by 2002:a17:90b:1b03:b0:38e:524:8797 with SMTP id
+ 98e67ed59e1d1-395c39cb2damr41595853a91.13.1787578758727; 
+ Mon, 24 Aug 2026 06:39:18 -0700 (PDT)
+Received: from localhost.localdomain ([111.199.63.164])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-52e09aae6f4sm48160681cf.16.2026.08.24.06.42.50
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 24 Aug 2026 06:42:52 -0700 (PDT)
-Message-ID: <abd508c4-ddff-4cea-9e5b-a700d572badd@oss.qualcomm.com>
-Date: Mon, 24 Aug 2026 10:42:48 -0300
+ 98e67ed59e1d1-395e4b240e7sm9963126a91.13.2026.08.24.06.39.14
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 24 Aug 2026 06:39:17 -0700 (PDT)
+From: Gong Shuai <gsh517025@gmail.com>
+To: mayuresh.chitale@oss.qualcomm.com
+Cc: alistair.francis@wdc.com, chao.liu@processmission.com,
+ daniel.barboza@oss.qualcomm.com, liwei1518@gmail.com, palmer@dabbelt.com,
+ qemu-devel@nongnu.org, qemu-riscv@nongnu.org, zhiwei_liu@linux.alibaba.com,
+ gong.shuai@sanechips.com.cn
+Subject: Re: [PATCH] target/riscv: Fix LCOFI masking in sie/sip/mvip
+Date: Mon, 24 Aug 2026 21:39:12 +0800
+Message-ID: <20260824133912.8475-1-gsh517025@gmail.com>
+X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20260813134002.862578-1-mayuresh.chitale@oss.qualcomm.com>
+References: <20260813134002.862578-1-mayuresh.chitale@oss.qualcomm.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3] riscv/virt: Add optional UART1
-To: Yanfeng Liu <yfliu2008@qq.com>, qemu-riscv@nongnu.org
-Cc: qemu-devel@nongnu.org, alistair.francis@wdc.com,
- pierrick.bouvier@oss.qualcomm.com, sunilvl@ventanamicro.com,
- palmer@dabbelt.com, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com,
- chao.liu.zevorn@gmail.com
-References: <tencent_4EEBFC805F3E59863BEDC38094EF5A109206@qq.com>
- <75d038af-a1a0-460c-9fea-7cca0423a54c@oss.qualcomm.com>
- <tencent_2F7940BF03327177E3876829A8B51724AF07@qq.com>
-From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Content-Language: en-US
-In-Reply-To: <tencent_2F7940BF03327177E3876829A8B51724AF07@qq.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=Cfg4Irrl c=1 sm=1 tr=0 ts=6a8c4a5e cx=c_pps
- a=mPf7EqFMSY9/WdsSgAYMbA==:117 a=MCIxunHWmQOg/5OnbzXZaw==:17
- a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=dZbOZ2KzAAAA:8 a=Sv_bN-GAQshgOjlYIWUA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=dawVfQjAaf238kedN5IG:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODI0MDExNSBTYWx0ZWRfXzh1SyU0MpTxC
- e/vWGhHHbwDA/AefD7SG5eYX+ec9uO7m6b9pQwzAr5nYetFMYSHr1GDpir0zaNBSnBF6WL0m/Ec
- ipEWDR40v1TMNFKbh3qXfFmR46Dtcko=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI0MDExNSBTYWx0ZWRfX1iXeBohJcIbg
- vOADpUOh4e4is/2CBH7gPXFDY48mivIGsDjAZwa8ReEk4JP6vI4eWyaj0m0t0DclMNqJzg6FLkD
- oiMUEt3Nz8588SV0P1hA3U4zFjj4NplBZbWx03jRo1u4AFlZ7QBMoRBMrAFwNEllhRcHJScleTX
- jHm4tQzjt2vggz49AhET79zvaR0QXrCDvJsUZPYtDao4fyVY+pTjfbvyCue18Iqp/NEXbTiGjgQ
- 3Skf955XLFTwiKYDPuS9mD4MLPL15XlBRDCQ0IZpz1w8v9R1Jsv8ZWwhBpHtA3o9rh4yqQC+nkF
- LcsRJcSiFlEBYgYSW1BZLOEHQLJ8glv8f50++ZUjkgzrHgFScWqVqt5M1UYi6Se47S59pytgiDG
- rinM+w23O+O+FW6oDKQlO439z5QxyKCWybJxIHs6UReRiwVc+pk3WThc8dBGu9Tcgr118kWCwnA
- /L7XWV5vlQMiuiyiA+w==
-X-Proofpoint-ORIG-GUID: dAoaBNnCqTiL0ph0kgK6MpZPFQtCN037
-X-Proofpoint-GUID: dAoaBNnCqTiL0ph0kgK6MpZPFQtCN037
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-24_04,2026-08-24_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 phishscore=0 impostorscore=0 spamscore=0 suspectscore=0
- priorityscore=1501 malwarescore=0 clxscore=1015 lowpriorityscore=0
- bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2608240115
-Received-SPF: pass client-ip=205.220.168.131;
- envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
-X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Received-SPF: pass client-ip=2607:f8b0:4864:39::1;
+ envelope-from=gsh517025@gmail.com; helo=mail-pj2-x01.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Mon, 24 Aug 2026 09:58:30 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -159,294 +107,109 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+> Commit 27f9566dcd98 ("target/riscv: Update the local interrupt mask")
+> dropped bit 13 (MIP_LCOFIP) from the supervisor-visible interrupt masks.
+> As a result, with Sscofpmf enabled and LCOFIP delegated to S-mode, the
+> overflow interrupt would be raised in mip but never delivered and hence
+> perf sampling stopped receiving overflow interrupts.
+>
+> Re-add MIP_LCOFIP to all_ints, sip_writable_mask, mvip_writable_mask
+> to allow it to be writable again.
+>
+> Fixes: 27f9566dcd98 ("target/riscv: Update the local interrupt mask")
+> Signed-off-by: Mayuresh Chitale <mayuresh.chitale@oss.qualcomm.com>
 
 
-On 8/24/2026 10:37 AM, Yanfeng Liu wrote:
-> On Sun, 2026-08-23 at 18:55 -0300, Daniel Henrique Barboza wrote:
->>
->>
->> On 7/17/2026 11:16 PM, Yanfeng Liu wrote:
->>> This adds optional UART1 to RiscV virt board if required at
->>> runtime to simplify multicore development.
->>
->> Can you please elaborate on the use case?  We can add multiple serial
->> devices already.  E.g. this will add 4 serials:
->>
-> I was playing Bao hypervisor and found that having a 2nd NMIO UART can
-> ba handy.  Previoously when trying AMP I added 2nd MMIO UART to aid
-> debugging.
-> 
-> Since this happened to me at least twice, I am wondering someone else
-> might also need it. Besides many real devices have muitlple UARTs.
+Hi Mayuresh,
 
-And that's fine.  In fact I think this patch is already queued for upstream
-so we're going forward with the change.
+I applied your patch on top of QEMU v11.1.0 and it fixes the perf sampling
+regression.
 
-I was just curious about the second UART mapping being added.  I assume that
-this would be required for OpenSBI and etc to recognize both of them since
-it'll read via DT.
+While the read path is still inconsistent with the write path:
+
+In rmw_sip64(), the read-back mask still truncates the result with
+(S_MODE_INTERRUPTS | LOCAL_INTERRUPTS), which does not include bit 13.
+As a result, sip.LCOFIP always reads 0 even when mideleg.LCOFIP is set
+and mip.LCOFIP is pending. This contradicts the rule that sip[i] aliases
+mip[i] for bits delegated to S-mode, and it breaks consumers that check
+sip.LCOFIP.
+
+Would the following one-line change be suitable as a follow-up?
+
+--- a/target/riscv/tcg/csr.c
++++ b/target/riscv/tcg/csr.c
+@@ -4378,7 +4378,8 @@ static RISCVException rmw_sip64(CPURISCVState *env, int csrno,
+  if (ret_val) {
+ *ret_val &= (env->mideleg | env->mvien) &
+-            (S_MODE_INTERRUPTS | LOCAL_INTERRUPTS);
++            (S_MODE_INTERRUPTS | LOCAL_INTERRUPTS | MIP_LCOFIP);
+  }
+
+  return ret;
+}
+
+Thanks for the fix and best regards,
+Shuai
 
 
-Thanks,
-Daniel
-
-
-
-> 
->>
->>
->> $ ./build/qemu-system-riscv64 -M virt --nodefaults \
->>            -serial stdio \
->>            -serial tcp::4444,server,nowait \
->>            -serial pty  \
->>            -serial file:uart4.log \
->>            --nographic
->>
->>
->> The difference here is that the additional serials won't have memory
->> mappings
->> and fdt nodes.
->>
-> 
-> how these additional UARTs can be used by guests if they dont have
-> MMIO?
-> 
-> 
-> Regards,
-> Yanfeng
-> 
-> 
->>
->> Thanks,
->> Daniel
->>
->>>
->>> Note that UART0 remains default serial_hd(0) and it is:
->>>
->>> - the lowest address UART
->>> - first serial in DTB
->>> - behind /aliases/serial0 in DTB
->>> - the /chosen/stdout-path in DTB
->>>
->>> Note that UART1 is placed at different page from UART0 to
->>> support page level isolation.
->>>
->>> Signed-off-by: Yanfeng Liu <yfliu2008@qq.com>
->>> ---
->>>    docs/system/riscv/virt.rst |  5 ++++-
->>>    hw/riscv/virt-acpi-build.c | 12 ++++++++----
->>>    hw/riscv/virt.c            | 40 ++++++++++++++++++++++++++++-----
->>> -----
->>>    include/hw/riscv/virt.h    |  3 +++
->>>    4 files changed, 45 insertions(+), 15 deletions(-)
->>>
->>> diff --git a/docs/system/riscv/virt.rst
->>> b/docs/system/riscv/virt.rst
->>> index 60850970ce..45ac63ac77 100644
->>> --- a/docs/system/riscv/virt.rst
->>> +++ b/docs/system/riscv/virt.rst
->>> @@ -16,7 +16,7 @@ The ``virt`` machine supports the following
->>> devices:
->>>    * Core Local Interruptor (CLINT)
->>>    * Platform-Level Interrupt Controller (PLIC)
->>>    * CFI parallel NOR flash memory
->>> -* 1 NS16550 compatible UART
->>> +* Either 1 or 2 NS16550 compatible UARTs
->>>    * 1 Google Goldfish RTC
->>>    * 1 SiFive Test device
->>>    * 8 virtio-mmio transport devices
->>> @@ -27,6 +27,9 @@ The hypervisor extension has been enabled for the
->>> default CPU, so virtual
->>>    machines with hypervisor extension can simply be used without
->>> explicitly
->>>    declaring.
->>>    
->>> +The second UART only exists if a backend is configured explicitly
->>> (e.g.
->>> +with a second `-serial` command line option).
->>> +
->>>    Hardware configuration information
->>>    ----------------------------------
->>>    
->>> diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-
->>> build.c
->>> index 413d47d70e..597751c84a 100644
->>> --- a/hw/riscv/virt-acpi-build.c
->>> +++ b/hw/riscv/virt-acpi-build.c
->>> @@ -169,11 +169,11 @@ static void acpi_dsdt_add_plic_aplic(Aml
->>> *scope, uint8_t socket_count,
->>>    
->>>    static void
->>>    acpi_dsdt_add_uart(Aml *scope, const MemMapEntry *uart_memmap,
->>> -                    uint32_t uart_irq)
->>> +                    uint32_t uart_irq, int uartidx)
->>>    {
->>> -    Aml *dev = aml_device("COM0");
->>> +    Aml *dev = aml_device("COM%d", uartidx);
->>>        aml_append(dev, aml_name_decl("_HID",
->>> aml_string("RSCV0003")));
->>> -    aml_append(dev, aml_name_decl("_UID", aml_int(0)));
->>> +    aml_append(dev, aml_name_decl("_UID", aml_int(uartidx)));
->>>    
->>>        Aml *crs = aml_resource_template();
->>>        aml_append(crs, aml_memory32_fixed(uart_memmap->base,
->>> @@ -479,7 +479,11 @@ static void build_dsdt(GArray *table_data,
->>>                                     memmap[VIRT_APLIC_S].size,
->>> "RSCV0002");
->>>        }
->>>    
->>> -    acpi_dsdt_add_uart(scope, &memmap[VIRT_UART0], UART0_IRQ);
->>> +    acpi_dsdt_add_uart(scope, &memmap[VIRT_UART0], UART0_IRQ, 0);
->>> +    if (s->uart1_present) {
->>> +        acpi_dsdt_add_uart(scope, &memmap[VIRT_UART1], UART1_IRQ,
->>> 1);
->>> +    }
->>> +
->>>        if (virt_is_iommu_sys_enabled(s)) {
->>>            acpi_dsdt_add_iommu_sys(scope, &memmap[VIRT_IOMMU_SYS],
->>> IOMMU_SYS_IRQ);
->>>        }
->>> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
->>> index 33775a61fd..4703ac58f8 100644
->>> --- a/hw/riscv/virt.c
->>> +++ b/hw/riscv/virt.c
->>> @@ -96,6 +96,8 @@ static const MemMapEntry virt_memmap[] = {
->>>        [VIRT_APLIC_S] =      {  0xd000000, APLIC_SIZE(VIRT_CPUS_MAX)
->>> },
->>>        [VIRT_UART0] =        { 0x10000000,         0x100 },
->>>        [VIRT_VIRTIO] =       { 0x10001000,        0x1000 },
->>> +    /* UART1 supports page isolation from UART0 */
->>> +    [VIRT_UART1] =        { 0x1000a000,         0x100 },
->>>        [VIRT_FW_CFG] =       { 0x10100000,          0x18 },
->>>        [VIRT_FLASH] =        { 0x20000000,     0x4000000 },
->>>        [VIRT_IMSIC_M] =      { 0x24000000, VIRT_IMSIC_MAX_SIZE },
->>> @@ -186,7 +188,8 @@ static void create_pcie_irq_map(RISCVVirtState
->>> *s, void *fdt, char *nodename,
->>>                              FDT_MAX_INT_MAP_WIDTH] = {};
->>>        uint32_t *irq_map = full_irq_map;
->>>    
->>> -    /* This code creates a standard swizzle of interrupts such
->>> that
->>> +    /*
->>> +     * This code creates a standard swizzle of interrupts such
->>> that
->>>         * each device's first interrupt is based on it's PCI_SLOT
->>> number.
->>>         * (See pci_swizzle_map_irq_fn())
->>>         *
->>> @@ -832,28 +835,38 @@ static void create_fdt_reset(RISCVVirtState
->>> *s, uint32_t *phandle)
->>>    }
->>>    
->>>    static void create_fdt_uart(RISCVVirtState *s,
->>> -                            uint32_t irq_mmio_phandle)
->>> +                            uint32_t irq_mmio_phandle, int memId,
->>> int irqNo)
->>>    {
->>>        g_autofree char *name = NULL;
->>>        MachineState *ms = MACHINE(s);
->>>    
->>>        name = g_strdup_printf("/soc/serial@%"HWADDR_PRIx,
->>> -                           s->memmap[VIRT_UART0].base);
->>> +                           s->memmap[memId].base);
->>>        qemu_fdt_add_subnode(ms->fdt, name);
->>>        qemu_fdt_setprop_string(ms->fdt, name, "compatible",
->>> "ns16550a");
->>>        qemu_fdt_setprop_sized_cells(ms->fdt, name, "reg",
->>> -                                 2, s->memmap[VIRT_UART0].base,
->>> -                                 2, s->memmap[VIRT_UART0].size);
->>> +                                 2, s->memmap[memId].base,
->>> +                                 2, s->memmap[memId].size);
->>>        qemu_fdt_setprop_cell(ms->fdt, name, "clock-frequency",
->>> 3686400);
->>>        qemu_fdt_setprop_cell(ms->fdt, name, "interrupt-parent",
->>> irq_mmio_phandle);
->>>        if (s->aia_type == VIRT_AIA_TYPE_NONE) {
->>> -        qemu_fdt_setprop_cell(ms->fdt, name, "interrupts",
->>> UART0_IRQ);
->>> +        qemu_fdt_setprop_cell(ms->fdt, name, "interrupts", irqNo);
->>>        } else {
->>> -        qemu_fdt_setprop_cells(ms->fdt, name, "interrupts",
->>> UART0_IRQ, 0x4);
->>> +        qemu_fdt_setprop_cells(ms->fdt, name, "interrupts", irqNo,
->>> 0x4);
->>> +    }
->>> +
->>> +    if (VIRT_UART0 == memId) {
->>> +        qemu_fdt_setprop_string(ms->fdt, "/chosen", "stdout-path",
->>> name);
->>> +        qemu_fdt_setprop_string(ms->fdt, "/aliases", "serial0",
->>> name);
->>>        }
->>> +}
->>>    
->>> -    qemu_fdt_setprop_string(ms->fdt, "/chosen", "stdout-path",
->>> name);
->>> -    qemu_fdt_setprop_string(ms->fdt, "/aliases", "serial0", name);
->>> +static void create_fdt_uarts(RISCVVirtState *s, uint32_t
->>> irq_mmio_phandle)
->>> +{
->>> +    if (s->uart1_present) {
->>> +        create_fdt_uart(s, irq_mmio_phandle, VIRT_UART1,
->>> UART1_IRQ);
->>> +    }
->>> +    create_fdt_uart(s, irq_mmio_phandle, VIRT_UART0, UART0_IRQ);
->>>    }
->>>    
->>>    static void create_fdt_rtc(RISCVVirtState *s,
->>> @@ -1023,7 +1036,7 @@ static void finalize_fdt(RISCVVirtState *s)
->>>    
->>>        create_fdt_reset(s, &phandle);
->>>    
->>> -    create_fdt_uart(s, irq_mmio_phandle);
->>> +    create_fdt_uarts(s, irq_mmio_phandle);
->>>    
->>>        create_fdt_rtc(s, irq_mmio_phandle);
->>>    }
->>> @@ -1567,6 +1580,13 @@ static void virt_machine_init(MachineState
->>> *machine)
->>>            0, qdev_get_gpio_in(mmio_irqchip, UART0_IRQ), 399193,
->>>            serial_hd(0), DEVICE_LITTLE_ENDIAN);
->>>    
->>> +    if (serial_hd(1)) {
->>> +        serial_mm_init(system_memory, s->memmap[VIRT_UART1].base,
->>> +            0, qdev_get_gpio_in(mmio_irqchip, UART1_IRQ), 399193,
->>> +            serial_hd(1), DEVICE_LITTLE_ENDIAN);
->>> +        s->uart1_present = true;
->>> +    }
->>> +
->>>        sysbus_create_simple("goldfish_rtc", s-
->>>> memmap[VIRT_RTC].base,
->>>            qdev_get_gpio_in(mmio_irqchip, RTC_IRQ));
->>>    
->>> diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
->>> index 18a2a323a3..7d57c8292e 100644
->>> --- a/include/hw/riscv/virt.h
->>> +++ b/include/hw/riscv/virt.h
->>> @@ -59,6 +59,7 @@ struct RISCVVirtState {
->>>        int aia_guests;
->>>        char *oem_id;
->>>        char *oem_table_id;
->>> +    bool uart1_present;
->>>        OnOffAuto acpi;
->>>        const MemMapEntry *memmap;
->>>        struct GPEXHost *gpex_host;
->>> @@ -78,6 +79,7 @@ enum {
->>>        VIRT_APLIC_S,
->>>        VIRT_UART0,
->>>        VIRT_VIRTIO,
->>> +    VIRT_UART1,
->>>        VIRT_FW_CFG,
->>>        VIRT_IMSIC_M,
->>>        VIRT_IMSIC_S,
->>> @@ -93,6 +95,7 @@ enum {
->>>    enum {
->>>        UART0_IRQ = 10,
->>>        RTC_IRQ = 11,
->>> +    UART1_IRQ = 12,
->>>        VIRTIO_IRQ = 1, /* 1 to 8 */
->>>        VIRTIO_COUNT = 8,
->>>        PCIE_IRQ = 0x20, /* 32 to 35 */
-> 
-
+> ---
+>  target/riscv/tcg/csr.c | 17 ++++++++++-------
+>  1 file changed, 10 insertions(+), 7 deletions(-)
+>
+> diff --git a/target/riscv/tcg/csr.c b/target/riscv/tcg/csr.c
+> index c05c8ee076..ca68c1f5f1 100644
+> --- a/target/riscv/tcg/csr.c
+> +++ b/target/riscv/tcg/csr.c
+> @@ -1890,7 +1890,8 @@ static const uint64_t delegable_ints =
+>  static const uint64_t vs_delegable_ints =
+>      (VS_MODE_INTERRUPTS | LOCAL_INTERRUPTS) & ~MIP_LCOFIP;
+>  static const uint64_t all_ints = M_MODE_INTERRUPTS | S_MODE_INTERRUPTS |
+> -                                     HS_MODE_INTERRUPTS | LOCAL_INTERRUPTS;
+> +                                     HS_MODE_INTERRUPTS | MIP_LCOFIP |
+> +                                     LOCAL_INTERRUPTS;
+>  #define DELEGABLE_EXCPS ((1ULL << (RISCV_EXCP_INST_ADDR_MIS)) | \
+>                           (1ULL << (RISCV_EXCP_INST_ACCESS_FAULT)) | \
+>                           (1ULL << (RISCV_EXCP_ILLEGAL_INST)) | \
+> @@ -1936,11 +1937,12 @@ static const target_ulong sstatus_v1_10_mask = SSTATUS_SIE | SSTATUS_SPIE |
+>  
+>  /* Bit STIP can be an alias of mip.STIP that's why it's writable in mvip. */
+>  static const uint64_t mvip_writable_mask = MIP_SSIP | MIP_STIP | MIP_SEIP |
+> -                                    LOCAL_INTERRUPTS;
+> +                                    MIP_LCOFIP | LOCAL_INTERRUPTS;
+>  static const uint64_t mvien_writable_mask = MIP_SSIP | MIP_SEIP |
+>                                      LOCAL_INTERRUPTS;
+>  
+> -static const uint64_t sip_writable_mask = SIP_SSIP | LOCAL_INTERRUPTS;
+> +static const uint64_t sip_writable_mask = SIP_SSIP | SIP_LCOFIP |
+> +                                          LOCAL_INTERRUPTS;
+>  static const uint64_t hip_writable_mask = MIP_VSSIP;
+>  static const uint64_t hvip_writable_mask = MIP_VSSIP | MIP_VSTIP |
+>                                      MIP_VSEIP | LOCAL_INTERRUPTS;
+> @@ -3953,9 +3955,9 @@ static RISCVException rmw_mvip64(CPURISCVState *env, int csrno,
+>       *  alias_mask denotes the bits that come from mip nalias_mask denotes bits
+>       *  that come from hvip.
+>       */
+> -    uint64_t alias_mask = ((S_MODE_INTERRUPTS | LOCAL_INTERRUPTS) &
+> +    uint64_t alias_mask = ((S_MODE_INTERRUPTS | MIP_LCOFIP | LOCAL_INTERRUPTS) &
+>          (env->mideleg | ~env->mvien)) | MIP_STIP;
+> -    uint64_t nalias_mask = (S_MODE_INTERRUPTS | LOCAL_INTERRUPTS) &
+> +    uint64_t nalias_mask = (S_MODE_INTERRUPTS | MIP_LCOFIP | LOCAL_INTERRUPTS) &
+>          (~env->mideleg & env->mvien);
+>      uint64_t wr_mask_mvip;
+>      uint64_t wr_mask_mip;
+> @@ -4188,9 +4190,10 @@ static RISCVException rmw_sie64(CPURISCVState *env, int csrno,
+>                                  uint64_t *ret_val,
+>                                  uint64_t new_val, uint64_t wr_mask)
+>  {
+> -    uint64_t nalias_mask = (S_MODE_INTERRUPTS | LOCAL_INTERRUPTS) &
+> +    uint64_t nalias_mask = (S_MODE_INTERRUPTS | MIP_LCOFIP | LOCAL_INTERRUPTS) &
+>          (~env->mideleg & env->mvien);
+> -    uint64_t alias_mask = (S_MODE_INTERRUPTS | LOCAL_INTERRUPTS) & env->mideleg;
+> +    uint64_t alias_mask = (S_MODE_INTERRUPTS | MIP_LCOFIP | LOCAL_INTERRUPTS) &
+> +        env->mideleg;
+>      uint64_t sie_mask = wr_mask & nalias_mask;
+>      RISCVException ret;
+>  
+> --
+> 2.43.0
 
