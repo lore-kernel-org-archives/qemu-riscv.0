@@ -4,169 +4,141 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15AA5C5DF94
-	for <qemu-riscv@archiver.kernel.org>; Mon, 24 Aug 2026 11:21:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2409BC5DF81
+	for <qemu-riscv@archiver.kernel.org>; Mon, 24 Aug 2026 11:54:17 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wySjd-0002eF-NV; Mon, 24 Aug 2026 07:21:01 -0400
+	id 1wyTFd-0005V3-5V; Mon, 24 Aug 2026 07:54:05 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1wySjb-0002Rj-BS
- for qemu-riscv@nongnu.org; Mon, 24 Aug 2026 07:20:59 -0400
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1wyTFZ-0005TC-SN
+ for qemu-riscv@nongnu.org; Mon, 24 Aug 2026 07:54:02 -0400
 Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1wySjX-0006fH-4z
- for qemu-riscv@nongnu.org; Mon, 24 Aug 2026 07:20:58 -0400
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1wyTFX-0000vl-Uk
+ for qemu-riscv@nongnu.org; Mon, 24 Aug 2026 07:54:01 -0400
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 67O9WVRr2036111
- for <qemu-riscv@nongnu.org>; Mon, 24 Aug 2026 11:20:43 GMT
+ 67OBMhbt2846109
+ for <qemu-riscv@nongnu.org>; Mon, 24 Aug 2026 11:53:58 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- Z1sb8xdPE6jQ67WFAEfe8s7klmi3B+xWTGYkxFCxGUY=; b=PuyayCyPfGFVnTAW
- XzhWXrxbfQ+KqSPTekIQ6D+Knizu9BOzMgJ3O7+o4SBWjkeDrj7THwypwVjqpi6E
- OIc2hQtU0i+Q/iW8qIw1MMkaQK6zIW4X3NblTMFE07zYxW60WcCg4SwcU/afkGAD
- sLi/nsShjWAjhqfIrlLl/fYea4rIZnwyiZKFHsHSHbxd+uqtMO10hdng/78WjWV/
- EzyyYoyijOCZUyDUb0Z1iLW4r6gSvD270gNHqmoYR/bTIN+zpRxiArLN98ntgCex
- dbAvmr+BmoM63Ku2OWzRv5EinOjHZv17NKqedqCECE8gUUND547vqtuEj3ZK6YkI
- QuF6jA==
-Received: from mail-ua1-f71.google.com (mail-ua1-f71.google.com
- [209.85.222.71])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g8kdsgc32-1
+ GI5Jgp0Qctif8rzqQ9Ku0eL6Ypzf1pF6t/kI5aL2bPc=; b=K0lnBWcmrUekLo+A
+ sgQKNMvSQHZNLHDPZyj7pk+PVtNTaXjMQO00HCCsa8dTgq8a4qNTAZBaFcGl5YpN
+ 0vPCTyMJmnoUfnhxeC0TSjcaNwIhxl/BlkRoJStzcx4C83EFTnMznTcYGRtcGn0i
+ Gjta6+MECHycuI2r5WBZuZnpn8NqllekvvqPS2ohn7Op4FK5Iz03E0subndqu4jb
+ 4WM9yKCHpGPkBgYTIiT4yk4NAm3p2RB1dIy/t17TZhCbHRLmBC3LdgDPVvzbSl+6
+ 65vP+GpksVR5qlGDxRHb1fhtKJISKkODS6GmqDovNZmLZ7U6LELselp3eN6RMi6L
+ OtuQYg==
+Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com
+ [209.85.160.198])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g88k7jgxp-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Mon, 24 Aug 2026 11:20:43 +0000 (GMT)
-Received: by mail-ua1-f71.google.com with SMTP id
- a1e0cc1a2514c-977fa96a0a6so266791241.3
- for <qemu-riscv@nongnu.org>; Mon, 24 Aug 2026 04:20:43 -0700 (PDT)
+ for <qemu-riscv@nongnu.org>; Mon, 24 Aug 2026 11:53:57 +0000 (GMT)
+Received: by mail-qt1-f198.google.com with SMTP id
+ d75a77b69052e-51c0408254aso59702431cf.0
+ for <qemu-riscv@nongnu.org>; Mon, 24 Aug 2026 04:53:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1787570443; x=1788175243; darn=nongnu.org;
- h=content-transfer-encoding:content-type:mime-version:references
- :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=Z1sb8xdPE6jQ67WFAEfe8s7klmi3B+xWTGYkxFCxGUY=;
- b=cF5DwNQymxt3r3JossLpS0aMrqGHKyC0wCu0GrI/pk+SEH4wgYrvuYRA8qIRC6tghD
- XpsMNXuWCjc+v+jN311bggnkGUZjB9DbUTkUwf+tSY6uUIbzX9NmaG7c8mHV8SkicDy2
- 99Be0XiqJgMxLqBvlLHZEzXcaBd4AKr98McA5JR6LVIANLjOwE+uRlCt+wmSW2OwgPkv
- oYdUK49BKl04LvZYT5UO/qdchl0wj6WObZ8EdX9h/TD0H+dcocr07sCJ3u8a6A+fuC29
- y4GcpWQrzsetArC1XHtgLErlzWSc3sZigumfhjDRTCws1BCJIfxV3xJllOGPbIlRtgiU
- rRgA==
+ d=oss.qualcomm.com; s=google; t=1787572437; x=1788177237; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=GI5Jgp0Qctif8rzqQ9Ku0eL6Ypzf1pF6t/kI5aL2bPc=;
+ b=JKEcpe3x3PholsTpZuJqzE16j9mHcwdodgttkJ9mJxJKA/p1ZecXemaiZ01opCi2MY
+ BMNb1VRTOfeDJ+1ChpSPimQrFrhP7dvEN/S70Ao6mUSsce19kfj5shXv9xgKgO+SPbCV
+ r1tCgBhm1tJR67i6PGFS7OdZBD9ZowHoazVH6OelqlN1fXimPri79dwwR1Sc+lIj1aBC
+ fTC3MbHjUpdA+3kO/F9ozE6Vho/ruNZU+IZxr/bGzVD5ekHwRnrX6+YxiLrKN/IeM5X8
+ WHN4ZFS/Ju948IBAYWHWXvN1TJdZbfnyXAzKMmGpY/OE8iaTtXRc7BPWqiaCeX2gutnw
+ 0Nmw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787570443; x=1788175243;
- h=content-transfer-encoding:content-type:mime-version:references
- :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=Z1sb8xdPE6jQ67WFAEfe8s7klmi3B+xWTGYkxFCxGUY=;
- b=TL8H667/ND5dpCcAsLh85jV6O4BhE4emDYScZEI2qtT44gd+CEqTmVP5gpnvuBZBVV
- JxB1sJP6ZZ7F2lGlai5llsat2avyNxDdvSdqwt4ha/1bojUEiQrmA59ce7PVcy6arw8k
- iDrJ0IFoZlud2Hg07VoVla6phe/3/cZXjmk047T6Dcx+gsd5FhEJnIh4L7dIpOsPxSoP
- SfcS+hUXjV6DagG7q+PpRMNM2Bi/nnL7Jn/U56AiPVoC/iHWkCyyygFnbJncgTgFA1Xf
- bY04QFPl2G8522ue6TtJPcxgAw4MVCY4hegkJCazISK8rw0QPGxGg9GmP3lQokQEawGH
- izeg==
-X-Gm-Message-State: AFuF++ky85ycQv8rXYorKlmrSe8a04ctOvVrFpxnSViecM8GNrBUF2a6
- 6KpJQ6FKlaQSO9i7LHE+8cnciMB63p7W6OaLdFYYh1yGXngrZ6UeDLLoAdj+4XvP+GdfFipizxD
- ZbqaAQMqmTaKhsUAoOte6xkZL8vfUMMyXnp4IXQZmzFBbPKN+BrCnXu6b5A==
-X-Gm-Gg: AR+sD11HLLH9xI2SGOoWIXe0Lqw5G//cs3VDUeiLFUPnxEnEn2vkvKewpbZZ049w3z6
- g5QEPmozZOx81y5rOoOn1LnT/G6wVmwmPej9a6TefqkkkQOUFYhKB+VpFvqtXiOofXd5OG9h9e4
- idyB9iISLmhFFxIE8zpD+QpEaWe/9+cz5SWzPSS/K6UMDhFDx4+RXsC21WnslwtvbbJGGYz9SzO
- 0Y3+3WscTBfpqb7jiRjNaOJrgpgwE8UKyuArv+NMb0oLx6+157p1RsElx5K6i2etkjihvjaiF68
- /5ASuAPbcshXsopavB/Xy9VkWGiLZYOaYsYVgenzm5Fjzq0q4o7HKIWjM3BuoZMu0MsjIQdsnAz
- 6qOoydRQx1aETG0lGQUyX8SR+tf4mkgU8cNQeSglpl+pslzFPTA==
-X-Received: by 2002:a05:6102:3ec7:b0:77a:d53e:7d19 with SMTP id
- ada2fe7eead31-77ad53e7fbemr6896490137.13.1787570442445; 
- Mon, 24 Aug 2026 04:20:42 -0700 (PDT)
-X-Received: by 2002:a05:6102:3ec7:b0:77a:d53e:7d19 with SMTP id
- ada2fe7eead31-77ad53e7fbemr6896472137.13.1787570441948; 
- Mon, 24 Aug 2026 04:20:41 -0700 (PDT)
-Received: from localhost.localdomain (44.170.88.92.rev.sfr.net. [92.88.170.44])
+ d=1e100.net; s=20251104; t=1787572437; x=1788177237;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=GI5Jgp0Qctif8rzqQ9Ku0eL6Ypzf1pF6t/kI5aL2bPc=;
+ b=eSAIX7qUWskCK+DJXIl6Qo+p3iss5h0ijrNGAAhmZ17NiZmjJE66bnIl/cpBsVdNQe
+ zDXUc2ekPOg+KEbgn7B4QTOsuxLBoYIS1Kdynnf8ovGqSr12ZeifOpIVOXCGUuEVeISp
+ PzBJDgZ1tg4YWoWB7beuNXMbY3+KnyKQLS3UE0y2D/h4wvmuHnnrqpTdGySkWfhhNilh
+ dhkTWCa6yvlvyrQCik4tXZ4F9zrg+B/a6L9n8w0nXn7HI4iX0eP4zVj+oFFbRYPxAimY
+ 56INyGiSrITi2y/oiSm0Iph//K0sBAY5NynRLpFDge31HZeLnJPaxy7OEVThCzPNKHXO
+ UTlg==
+X-Gm-Message-State: AFuF++msfg6RKu5TGeIE+KEmHKrWsznqtQ9K/lsAJC7WUR5Zu0dKONyo
+ XDRsgrbK1JFdXbQN2bj8vNZz6CblddMiFysg8gYgaeeR47wAOoY4uSqBG4jw2Xllno9kgtkZqjn
+ /8fG2NuYtBZN5oMyeZpbncMAhWALKuWALBWbf4pVnmsE02942pZTipeFEkw==
+X-Gm-Gg: AR+sD11nOo0b7GoZegJCRVBwCszhECeGET9fdT34qQvbGoHAOi0IE48vrOCg7E7eAep
+ nVI5eWzWWDcKSVA9WU3q2kUVvXyJfOi/asRUL1/cSZCWoOcs274Gzje86mdD8GCJhfVuQ2cVPUU
+ YcR+pdFxu/vzOhEm089AlfTAsFn6AhbW5IHTJoH7mHghkGo7piyZH3TdB43HUEJ1ss6fwcaOwwD
+ ZllJEwqycVewFWjovUpU10QVL1TOGSLTjl4Df9sCwPbRn78YYORqUSuRoOQvIaPSbMm43fQOV3S
+ eJdVdHVJ2SPhZiZLJpMwjwzUi/jjlXYiHlGJHqoi+f9LHnruKT+0y6B2+odNQqH+NAZJhoYHsXS
+ Gx2JaX77fZGfVKcx5JAlYxGW8Ihq+4mWI92rZ
+X-Received: by 2002:ac8:6f0c:0:b0:51c:4f35:81b8 with SMTP id
+ d75a77b69052e-52df63fa288mr242216721cf.7.1787572436933; 
+ Mon, 24 Aug 2026 04:53:56 -0700 (PDT)
+X-Received: by 2002:ac8:6f0c:0:b0:51c:4f35:81b8 with SMTP id
+ d75a77b69052e-52df63fa288mr242216401cf.7.1787572436551; 
+ Mon, 24 Aug 2026 04:53:56 -0700 (PDT)
+Received: from [192.168.68.100] ([189.38.141.232])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-6a59e1cdbe9sm8226759a12.24.2026.08.24.04.20.33
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Mon, 24 Aug 2026 04:20:41 -0700 (PDT)
-From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
- Richard Henderson <richard.henderson@linaro.org>, qemu-ppc@nongnu.org,
- qemu-s390x@nongnu.org,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
- Peter Maydell <peter.maydell@linaro.org>,
- Michael Rolnik <mrolnik@gmail.com>,
- Brian Cain <brian.cain@oss.qualcomm.com>,
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
- Helge Deller <deller@gmx.de>, Paolo Bonzini <pbonzini@redhat.com>,
- Zhao Liu <zhao1.liu@intel.com>, Song Gao <17746591750@163.com>,
- Bibo Mao <maobibo@loongson.cn>, Xianglai Li <lixianglai@loongson.cn>,
- Laurent Vivier <laurent@vivier.eu>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@mailo.com>,
- Aurelien Jarno <aurelien@aurel32.net>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Aleksandar Rikalo <arikalo@gmail.com>,
- Stafford Horne <shorne@gmail.com>, Nicholas Piggin <npiggin@gmail.com>,
- Chinmay Rath <rathc@linux.ibm.com>, Glenn Miles <milesg@linux.ibm.com>,
- Harsh Prateek Bora <harshpb@linux.ibm.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu@processmission.com>,
- Yoshinori Sato <yoshinori.sato@nifty.com>,
- Cornelia Huck <cohuck@redhat.com>, Eric Farman <farman@linux.ibm.com>,
- Matthew Rosato <mjrosato@linux.ibm.com>,
- Ilya Leoshkevich <iii@linux.ibm.com>, David Hildenbrand <david@kernel.org>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Artyom Tarasenko <atar4qemu@gmail.com>, Max Filippov <jcmvbkbc@gmail.com>
-Subject: [PATCH v4 19/20] cpus: Constify @cpu in SysemuCPUOps::has_work()
- handler
-Date: Mon, 24 Aug 2026 13:17:08 +0200
-Message-ID: <20260824111711.26297-20-philmd@oss.qualcomm.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260824111711.26297-1-philmd@oss.qualcomm.com>
-References: <20260824111711.26297-1-philmd@oss.qualcomm.com>
+ d75a77b69052e-52e09aca49dsm45259871cf.23.2026.08.24.04.53.54
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 24 Aug 2026 04:53:56 -0700 (PDT)
+Message-ID: <053c35d3-5a72-4c1d-947a-a9dda6a2c999@oss.qualcomm.com>
+Date: Mon, 24 Aug 2026 08:53:52 -0300
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODI0MDA5NCBTYWx0ZWRfXyVzNIbCTCg0s
- sZhyLQZKhe/knMjx4L4HhHNdB6T/FvnPd1yBFJhAtbDNuCPaFIDsilV+6FDH5r8a/G9cR1VIdcf
- 5h/v4pdGx7sJnKfhYPP2awqk2HTPBBI=
-X-Proofpoint-ORIG-GUID: XL6OiNuqkom-BPWFvxZiVAVT11zysC3b
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI0MDA5NCBTYWx0ZWRfX9TI+wnr/S/91
- 7dLDznsKasjbmN1AudsilEyPfT+b3yKN6h5jQFQmaBu7fV6VJmBWuAQi2hz6gB2ZuSr83IQic+c
- OyxVhdhXZJAKDTQkBBZ07y+8/jeYPCag/GMa50RPBjm0tdWzT8UB5IZeWAOeSU1l4/RAOK5WKju
- f/oSIcf8EdLI77xHuzuJ27z3LK+nCOcKV8qfvxZ0Z4keeNxmTUXgMAyuJnG6VnTwmMagusK5MID
- tUrWesPOHwlXi5e7DxoIFgTpq1qYCzZyV6JUlkFzIGBnhlguBx503H6meOjPe0krcGSIYal/lYK
- /6ebdGKoYDzuN0EwVapx/ZGpwWj6yPf885xZc9mt35xpXB6IhibkKFxZgjbhnOcxYQWipydAaz2
- oW9M0AeyuKduOVQsnzcTG7fvPUlQMBZ8vk1+KwUALKcODgrvs6ztdjrEgc+yyfcu+8RPfFTpdCc
- 61f/PPWi8lvKRxXd49w==
-X-Proofpoint-GUID: XL6OiNuqkom-BPWFvxZiVAVT11zysC3b
-X-Authority-Analysis: v=2.4 cv=d8DFDxjE c=1 sm=1 tr=0 ts=6a8c290b cx=c_pps
- a=KB4UBwrhAZV1kjiGHFQexw==:117 a=s1NLoHz9uzatdv2VNqxUSg==:17
- a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=M51BFTxLslgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
- a=EUspDBNiAAAA:8 a=KKAkSRfTAAAA:8 a=cM1bI5kxBi4gRGPUlTgA:9 a=3ZKOabzyN94A:10
- a=QEXdDO2ut3YA:10 a=o1xkdb1NAhiiM49bd1HK:22 a=cvBusfyB2V15izCimMoJ:22
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] target/riscv: reject FMV.X.W and FMV.W.X with Zfinx
+To: Zephyr Li <fritchleybohrer@gmail.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com,
+ chao.liu@processmission.com
+References: <20260813041304.7618-1-fritchleybohrer@gmail.com>
+From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Content-Language: en-US
+In-Reply-To: <20260813041304.7618-1-fritchleybohrer@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Authority-Analysis: v=2.4 cv=b4iCJNGx c=1 sm=1 tr=0 ts=6a8c30d6 cx=c_pps
+ a=mPf7EqFMSY9/WdsSgAYMbA==:117 a=MCIxunHWmQOg/5OnbzXZaw==:17
+ a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
+ a=p0WdMEafAAAA:8 a=pGLkceISAAAA:8 a=cDuQM5WIG8g1AS9iI0wA:9 a=QEXdDO2ut3YA:10
+ a=dawVfQjAaf238kedN5IG:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODI0MDA5OSBTYWx0ZWRfX9FQBEh2EVRMW
+ EHAtfEC3EDR6bAY8dVtKEZpbLFDf1f7AVHqmpgcrgZCtq5rmlBg+zxKvpd5ADbFjCYmVR9dhZLM
+ aDWPzzMBtMZVnWj5eqxdwltFFe5J9jQ=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI0MDA5OSBTYWx0ZWRfX7jdjgP3BbdWK
+ OlvfJfDU2550YfUbSSNdiUSfAQciVoudzf0fx0C7yr1J+hpxnBdR8kfeCYbu1f6BGIstPWXFv2Z
+ v+kDr9xZug1qPUGXxsA0StYsMk2DNYVCcvy1Co4dv4Iw3cf7vQ5kSjNQqpoJ7FIYSrRsa5tVV7f
+ CA8ssxibOhsJ2ilzhpvGgvdfYBH/hWcfDxDPNiFfu3qzYDrFUT6i9kZGoB/dyOUUtVCDJ9uCSko
+ vye+C8mxm78W1BL3xTBNth1YryDiZ5Hvcifm9bwlmbYnRsP464feZr9ROW24hlscPlVGoqBz4yr
+ W/bpYcvFVs2arNZ8mv8gl7rxr4gI3Gqof2k7dBAtr+VQZayj6DDyGCKjiKYf9X22gcQi1elyroA
+ AR97/FWXjaL3Aiy33R2c5NBGwXFWOdLSzL3xi2sa1NIaQ1c+h4AVxMaKK2iPQkzppu/7vHcnORA
+ oldban2cNPZl1tag+Cg==
+X-Proofpoint-ORIG-GUID: h0P0tIlG2p6LWnJdvJX31Vwr9N7-Vikq
+X-Proofpoint-GUID: h0P0tIlG2p6LWnJdvJX31Vwr9N7-Vikq
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-24_03,2026-08-21_02,2025-10-01_01
+ definitions=2026-08-24_03,2026-08-24_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 lowpriorityscore=0 bulkscore=0 adultscore=0 priorityscore=1501
- malwarescore=0 spamscore=0 phishscore=0 clxscore=1015 impostorscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608240094
+ suspectscore=0 spamscore=0 phishscore=0 bulkscore=0 clxscore=1015
+ lowpriorityscore=0 impostorscore=0 adultscore=0 priorityscore=1501
+ malwarescore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2608240099
 Received-SPF: pass client-ip=205.220.168.131;
- envelope-from=philmd@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
 X-Spam_score_int: -27
 X-Spam_score: -2.8
 X-Spam_bar: --
 X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -182,328 +154,158 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-All functions called by target has_work() handler take a const @cpu
-argument. We can now fulfill the comment added in commit c2804566f6
-("target/arm: do not clear halting reason in has_work helper"),
-qualifying the handler const to denote its idempotency.
+Hi,
 
-Signed-off-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
----
- include/hw/core/sysemu-cpu-ops.h | 4 ++--
- target/alpha/cpu.c               | 2 +-
- target/arm/cpu.c                 | 4 ++--
- target/avr/cpu.c                 | 3 ++-
- target/hexagon/cpu.c             | 4 ++--
- target/hppa/cpu.c                | 2 +-
- target/i386/cpu.c                | 2 +-
- target/loongarch/cpu.c           | 2 +-
- target/m68k/cpu.c                | 2 +-
- target/microblaze/cpu.c          | 2 +-
- target/mips/cpu.c                | 4 ++--
- target/or1k/cpu.c                | 2 +-
- target/ppc/cpu_init.c            | 2 +-
- target/riscv/cpu.c               | 5 ++---
- target/rx/cpu.c                  | 2 +-
- target/s390x/cpu-system.c        | 4 ++--
- target/sh4/cpu.c                 | 2 +-
- target/sparc/cpu.c               | 2 +-
- target/tricore/cpu.c             | 2 +-
- target/xtensa/cpu.c              | 4 ++--
- 20 files changed, 28 insertions(+), 28 deletions(-)
+Seems like this has been fixed by this patch that is currently on the
+queue for merge:
 
-diff --git a/include/hw/core/sysemu-cpu-ops.h b/include/hw/core/sysemu-cpu-ops.h
-index 9a45596169a..095bdcd997a 100644
---- a/include/hw/core/sysemu-cpu-ops.h
-+++ b/include/hw/core/sysemu-cpu-ops.h
-@@ -19,10 +19,10 @@ typedef struct SysemuCPUOps {
-     /**
-      * @has_work: Callback for checking if there is work to do.
-      *
--     * This function should be idempotent (i.e. not change state) as
-+     * This function is idempotent (i.e. not change state) as
-      * it will likely be queried multiple times before a CPU resumes.
-      */
--    bool (*has_work)(CPUState *cpu); /* MANDATORY NON-NULL */
-+    bool (*has_work)(const CPUState *cpu); /* MANDATORY NON-NULL */
-     /**
-      * @get_memory_mapping: Callback for obtaining the memory mappings.
-      */
-diff --git a/target/alpha/cpu.c b/target/alpha/cpu.c
-index 7d1d036e1d3..21d4f8ac23b 100644
---- a/target/alpha/cpu.c
-+++ b/target/alpha/cpu.c
-@@ -77,7 +77,7 @@ static void alpha_restore_state_to_opc(CPUState *cs,
- }
- 
- #ifndef CONFIG_USER_ONLY
--static bool alpha_cpu_has_work(CPUState *cs)
-+static bool alpha_cpu_has_work(const CPUState *cs)
- {
-     /* Here we are checking to see if the CPU should wake up from HALT.
-        We will have gotten into this state only for WTINT from PALmode.  */
-diff --git a/target/arm/cpu.c b/target/arm/cpu.c
-index 9761bb173c1..ba66359d410 100644
---- a/target/arm/cpu.c
-+++ b/target/arm/cpu.c
-@@ -141,9 +141,9 @@ int arm_cpu_mmu_index(CPUState *cs, bool ifetch)
-  * CPU_INTERRUPT_*NMI anyway. So we might as well accept NMI here
-  * unconditionally.
-  */
--static bool arm_cpu_has_work(CPUState *cs)
-+static bool arm_cpu_has_work(const CPUState *cs)
- {
--    ARMCPU *cpu = ARM_CPU(cs);
-+    const ARMCPU *cpu = ARM_CPU(cs);
- 
-     /*
-      * Only another PSCI call can wake the CPU up in which case the
-diff --git a/target/avr/cpu.c b/target/avr/cpu.c
-index a01e6fa4751..a96bef46ff1 100644
---- a/target/avr/cpu.c
-+++ b/target/avr/cpu.c
-@@ -23,6 +23,7 @@
- #include "qemu/qemu-print.h"
- #include "exec/translation-block.h"
- #include "system/address-spaces.h"
-+#include "hw/core/cpu.h"
- #include "cpu.h"
- #include "disas/dis-asm.h"
- #include "tcg/debug-assert.h"
-@@ -43,7 +44,7 @@ static vaddr avr_cpu_get_pc(CPUState *cs)
-     return cpu->env.pc_w * 2;
- }
- 
--static bool avr_cpu_has_work(CPUState *cs)
-+static bool avr_cpu_has_work(const CPUState *cs)
- {
-     return cpu_test_interrupt(cs, CPU_INTERRUPT_HARD | CPU_INTERRUPT_RESET)
-             && cpu_interrupts_enabled(cpu_env(cs));
-diff --git a/target/hexagon/cpu.c b/target/hexagon/cpu.c
-index 4cc6bd67c28..868aef0cde4 100644
---- a/target/hexagon/cpu.c
-+++ b/target/hexagon/cpu.c
-@@ -364,9 +364,9 @@ bool hexagon_thread_is_enabled(const CPUHexagonState *env)
-     return E_bit;
- }
- 
--static bool hexagon_cpu_has_work(CPUState *cs)
-+static bool hexagon_cpu_has_work(const CPUState *cs)
- {
--    CPUHexagonState *env = cpu_env(cs);
-+    const CPUHexagonState *env = cpu_env(cs);
- 
-     return hexagon_thread_is_enabled(env) &&
-         (cs->interrupt_request & (CPU_INTERRUPT_HARD | CPU_INTERRUPT_SWI
-diff --git a/target/hppa/cpu.c b/target/hppa/cpu.c
-index 7b1309a7c38..dbf58466c24 100644
---- a/target/hppa/cpu.c
-+++ b/target/hppa/cpu.c
-@@ -134,7 +134,7 @@ static void hppa_restore_state_to_opc(CPUState *cs,
- }
- 
- #ifndef CONFIG_USER_ONLY
--static bool hppa_cpu_has_work(CPUState *cs)
-+static bool hppa_cpu_has_work(const CPUState *cs)
- {
-     return cpu_test_interrupt(cs, CPU_INTERRUPT_HARD | CPU_INTERRUPT_NMI);
- }
-diff --git a/target/i386/cpu.c b/target/i386/cpu.c
-index 1fc02cf94e6..0606ac16664 100644
---- a/target/i386/cpu.c
-+++ b/target/i386/cpu.c
-@@ -10638,7 +10638,7 @@ int x86_cpu_pending_interrupt(const CPUState *cs, int interrupt_request)
-     return 0;
- }
- 
--static bool x86_cpu_has_work(CPUState *cs)
-+static bool x86_cpu_has_work(const CPUState *cs)
- {
-     return x86_cpu_pending_interrupt(cs, cs->interrupt_request) != 0;
- }
-diff --git a/target/loongarch/cpu.c b/target/loongarch/cpu.c
-index 2dbe2203b20..7bf7596172b 100644
---- a/target/loongarch/cpu.c
-+++ b/target/loongarch/cpu.c
-@@ -96,7 +96,7 @@ bool cpu_loongarch_hw_interrupts_pending(const CPULoongArchState *env)
- #endif
- 
- #ifndef CONFIG_USER_ONLY
--static bool loongarch_cpu_has_work(CPUState *cs)
-+static bool loongarch_cpu_has_work(const CPUState *cs)
- {
-     bool has_work = false;
- 
-diff --git a/target/m68k/cpu.c b/target/m68k/cpu.c
-index 523694d8fbf..da3681fab1f 100644
---- a/target/m68k/cpu.c
-+++ b/target/m68k/cpu.c
-@@ -76,7 +76,7 @@ static void m68k_restore_state_to_opc(CPUState *cs,
- }
- 
- #ifndef CONFIG_USER_ONLY
--static bool m68k_cpu_has_work(CPUState *cs)
-+static bool m68k_cpu_has_work(const CPUState *cs)
- {
-     return cpu_test_interrupt(cs, CPU_INTERRUPT_HARD);
- }
-diff --git a/target/microblaze/cpu.c b/target/microblaze/cpu.c
-index 6013a8def8e..d1d2f0ec7e3 100644
---- a/target/microblaze/cpu.c
-+++ b/target/microblaze/cpu.c
-@@ -127,7 +127,7 @@ static void mb_restore_state_to_opc(CPUState *cs,
- }
- 
- #ifndef CONFIG_USER_ONLY
--static bool mb_cpu_has_work(CPUState *cs)
-+static bool mb_cpu_has_work(const CPUState *cs)
- {
-     return cpu_test_interrupt(cs, CPU_INTERRUPT_HARD | CPU_INTERRUPT_NMI);
- }
-diff --git a/target/mips/cpu.c b/target/mips/cpu.c
-index c069aa1c0b7..0f39f8fe0a5 100644
---- a/target/mips/cpu.c
-+++ b/target/mips/cpu.c
-@@ -134,9 +134,9 @@ static vaddr mips_cpu_get_pc(CPUState *cs)
- }
- 
- #if !defined(CONFIG_USER_ONLY)
--static bool mips_cpu_has_work(CPUState *cs)
-+static bool mips_cpu_has_work(const CPUState *cs)
- {
--    CPUMIPSState *env = cpu_env(cs);
-+    const CPUMIPSState *env = cpu_env(cs);
-     bool has_work = false;
- 
-     /*
-diff --git a/target/or1k/cpu.c b/target/or1k/cpu.c
-index 42d9351b6d7..10b13ae69cd 100644
---- a/target/or1k/cpu.c
-+++ b/target/or1k/cpu.c
-@@ -76,7 +76,7 @@ static void openrisc_restore_state_to_opc(CPUState *cs,
- }
- 
- #ifndef CONFIG_USER_ONLY
--static bool openrisc_cpu_has_work(CPUState *cs)
-+static bool openrisc_cpu_has_work(const CPUState *cs)
- {
-     return cpu_test_interrupt(cs, CPU_INTERRUPT_HARD | CPU_INTERRUPT_TIMER);
- }
-diff --git a/target/ppc/cpu_init.c b/target/ppc/cpu_init.c
-index 85a91ff4bb6..fd63cd6ab09 100644
---- a/target/ppc/cpu_init.c
-+++ b/target/ppc/cpu_init.c
-@@ -7224,7 +7224,7 @@ static int ppc_cpu_mmu_index(CPUState *cs, bool ifetch)
- #endif /* CONFIG_TCG */
- 
- #ifndef CONFIG_USER_ONLY
--static bool ppc_cpu_has_work(CPUState *cs)
-+static bool ppc_cpu_has_work(const CPUState *cs)
- {
-     return cpu_test_interrupt(cs, CPU_INTERRUPT_HARD);
- }
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 278e00d260c..928e1f9f6a4 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -950,10 +950,9 @@ int riscv_cpu_vsirq_pending(const CPURISCVState *env)
-                                     (irqs | irqs_f_vs), env->hviprio);
- }
- 
--static bool riscv_cpu_has_work(CPUState *cs)
-+static bool riscv_cpu_has_work(const CPUState *cs)
- {
--    RISCVCPU *cpu = RISCV_CPU(cs);
--    CPURISCVState *env = &cpu->env;
-+    const CPURISCVState *env = cpu_env(cs);
-     /*
-      * Definition of the WFI instruction requires it to ignore the privilege
-      * mode and delegation registers, but respect individual enables
-diff --git a/target/rx/cpu.c b/target/rx/cpu.c
-index 69946928995..dfa09a85bce 100644
---- a/target/rx/cpu.c
-+++ b/target/rx/cpu.c
-@@ -73,7 +73,7 @@ static void rx_restore_state_to_opc(CPUState *cs,
-     cpu->env.pc = data[0];
- }
- 
--static bool rx_cpu_has_work(CPUState *cs)
-+static bool rx_cpu_has_work(const CPUState *cs)
- {
-     return cpu_test_interrupt(cs, CPU_INTERRUPT_HARD | CPU_INTERRUPT_FIR);
- }
-diff --git a/target/s390x/cpu-system.c b/target/s390x/cpu-system.c
-index 84faceb3338..3a0ff46e144 100644
---- a/target/s390x/cpu-system.c
-+++ b/target/s390x/cpu-system.c
-@@ -39,9 +39,9 @@
- #include "system/tcg.h"
- #include "hw/core/sysemu-cpu-ops.h"
- 
--static bool s390_cpu_has_work(CPUState *cs)
-+static bool s390_cpu_has_work(const CPUState *cs)
- {
--    S390CPU *cpu = S390_CPU(cs);
-+    const S390CPU *cpu = S390_CPU(cs);
- 
-     /* STOPPED cpus can never wake up */
-     if (s390_cpu_get_state(cpu) != S390_CPU_STATE_LOAD &&
-diff --git a/target/sh4/cpu.c b/target/sh4/cpu.c
-index 55c73a1da35..b0ed356d0f7 100644
---- a/target/sh4/cpu.c
-+++ b/target/sh4/cpu.c
-@@ -107,7 +107,7 @@ static bool superh_io_recompile_replay_branch(CPUState *cs,
-     return false;
- }
- 
--static bool superh_cpu_has_work(CPUState *cs)
-+static bool superh_cpu_has_work(const CPUState *cs)
- {
-     return cpu_test_interrupt(cs, CPU_INTERRUPT_HARD);
- }
-diff --git a/target/sparc/cpu.c b/target/sparc/cpu.c
-index 2baa5036871..8dd9b0d5ee3 100644
---- a/target/sparc/cpu.c
-+++ b/target/sparc/cpu.c
-@@ -783,7 +783,7 @@ static void sparc_restore_state_to_opc(CPUState *cs,
- }
- 
- #ifndef CONFIG_USER_ONLY
--static bool sparc_cpu_has_work(CPUState *cs)
-+static bool sparc_cpu_has_work(const CPUState *cs)
- {
-     return cpu_test_interrupt(cs, CPU_INTERRUPT_HARD) &&
-            cpu_interrupts_enabled(cpu_env(cs));
-diff --git a/target/tricore/cpu.c b/target/tricore/cpu.c
-index 82b56c3cd56..357f3737053 100644
---- a/target/tricore/cpu.c
-+++ b/target/tricore/cpu.c
-@@ -111,7 +111,7 @@ static void tricore_cpu_reset_hold(Object *obj, ResetType type)
-     cpu_state_reset(cpu_env(cs));
- }
- 
--static bool tricore_cpu_has_work(CPUState *cs)
-+static bool tricore_cpu_has_work(const CPUState *cs)
- {
-     /* Interrupts are not implemented */
-     return true;
-diff --git a/target/xtensa/cpu.c b/target/xtensa/cpu.c
-index 99c8bd4b5fb..1b299568776 100644
---- a/target/xtensa/cpu.c
-+++ b/target/xtensa/cpu.c
-@@ -140,9 +140,9 @@ static void xtensa_restore_state_to_opc(CPUState *cs,
- }
- 
- #ifndef CONFIG_USER_ONLY
--static bool xtensa_cpu_has_work(CPUState *cs)
-+static bool xtensa_cpu_has_work(const CPUState *cs)
- {
--    CPUXtensaState *env = cpu_env(cs);
-+    const CPUXtensaState *env = cpu_env(cs);
- 
-     return !env->runstall && env->pending_irq_level;
- }
--- 
-2.53.0
+[PULL v2 87/96] target/riscv: reject FMV.X.W/FMV.W.X under Zfinx
+
+I'll send an email letting people know that we should comment in Gitlab
+when a bug fix is sent.
+
+
+
+Thanks,
+Daniel
+
+On 8/13/2026 1:13 AM, Zephyr Li wrote:
+> Zfinx excludes FMV.X.W and FMV.W.X, but QEMU currently accepts both
+> instructions when Zfinx is enabled without the F extension.
+> 
+> Require the F extension for these instructions so they raise an illegal
+> instruction exception on Zfinx-only CPUs.
+> 
+> Add TCG regression tests for both instructions.
+> 
+> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/4108
+> Signed-off-by: Zephyr Li <fritchleybohrer@gmail.com>
+> ---
+>   target/riscv/tcg/insn_trans/trans_rvf.c.inc |  4 +--
+>   tests/tcg/riscv64/Makefile.target           | 10 +++++++
+>   tests/tcg/riscv64/test-zfinx-fmv-w-x.S      | 33 +++++++++++++++++++++
+>   tests/tcg/riscv64/test-zfinx-fmv-x-w.S      | 33 +++++++++++++++++++++
+>   4 files changed, 78 insertions(+), 2 deletions(-)
+>   create mode 100644 tests/tcg/riscv64/test-zfinx-fmv-w-x.S
+>   create mode 100644 tests/tcg/riscv64/test-zfinx-fmv-x-w.S
+> 
+> diff --git a/target/riscv/tcg/insn_trans/trans_rvf.c.inc b/target/riscv/tcg/insn_trans/trans_rvf.c.inc
+> index e935523c93..70c66e9e25 100644
+> --- a/target/riscv/tcg/insn_trans/trans_rvf.c.inc
+> +++ b/target/riscv/tcg/insn_trans/trans_rvf.c.inc
+> @@ -428,7 +428,7 @@ static bool trans_fmv_x_w(DisasContext *ctx, arg_fmv_x_w *a)
+>   {
+>       /* NOTE: This was FMV.X.S in an earlier version of the ISA spec! */
+>       REQUIRE_FPU;
+> -    REQUIRE_ZFINX_OR_F(ctx);
+> +    REQUIRE_EXT(ctx, RVF);
+>   
+>       TCGv dest = dest_gpr(ctx, a->rd);
+>       TCGv_i64 src1 = get_fpr_hs(ctx, a->rs1);
+> @@ -531,7 +531,7 @@ static bool trans_fmv_w_x(DisasContext *ctx, arg_fmv_w_x *a)
+>   {
+>       /* NOTE: This was FMV.S.X in an earlier version of the ISA spec! */
+>       REQUIRE_FPU;
+> -    REQUIRE_ZFINX_OR_F(ctx);
+> +    REQUIRE_EXT(ctx, RVF);
+>   
+>       TCGv_i64 dest = dest_fpr(ctx, a->rd);
+>       TCGv src = get_gpr(ctx, a->rs1, EXT_ZERO);
+> diff --git a/tests/tcg/riscv64/Makefile.target b/tests/tcg/riscv64/Makefile.target
+> index 4da5b9a3b3..23e1152a10 100644
+> --- a/tests/tcg/riscv64/Makefile.target
+> +++ b/tests/tcg/riscv64/Makefile.target
+> @@ -18,3 +18,13 @@ TESTS += test-fcvtmod
+>   test-fcvtmod: CFLAGS += -march=rv64imafdc
+>   test-fcvtmod: LDFLAGS += -static
+>   run-test-fcvtmod: QEMU_OPTS += -cpu rv64,d=true,zfa=true
+> +
+> +TESTS += test-zfinx-fmv-x-w
+> +test-zfinx-fmv-x-w: LDFLAGS = -nostdlib -static
+> +run-test-zfinx-fmv-x-w: QEMU_OPTS += \
+> +	-cpu rv64,f=false,d=false,zfa=false,zfh=false,zfhmin=false,zfinx=true
+> +
+> +TESTS += test-zfinx-fmv-w-x
+> +test-zfinx-fmv-w-x: LDFLAGS = -nostdlib -static
+> +run-test-zfinx-fmv-w-x: QEMU_OPTS += \
+> +	-cpu rv64,f=false,d=false,zfa=false,zfh=false,zfhmin=false,zfinx=true
+> diff --git a/tests/tcg/riscv64/test-zfinx-fmv-w-x.S b/tests/tcg/riscv64/test-zfinx-fmv-w-x.S
+> new file mode 100644
+> index 0000000000..73c5c2b2bf
+> --- /dev/null
+> +++ b/tests/tcg/riscv64/test-zfinx-fmv-w-x.S
+> @@ -0,0 +1,33 @@
+> +/* SPDX-License-Identifier: GPL-2.0-or-later */
+> +#include <asm/unistd.h>
+> +
+> +        .text
+> +        .globl  _start
+> +_start:
+> +        .option norvc
+> +
+> +        li      a0, 4
+> +        la      a1, sa
+> +        li      a2, 0
+> +        li      a3, 8
+> +        li      a7, __NR_rt_sigaction
+> +        scall
+> +
+> +        .word   0xf0030453
+> +
+> +        li      a0, 1
+> +        j       exit
+> +
+> +pass:
+> +        li      a0, 0
+> +
+> +exit:
+> +        li      a7, __NR_exit
+> +        scall
+> +
+> +        .data
+> +        .type   sa, @object
+> +        .size   sa, 32
+> +sa:
+> +        .dword  pass
+> +        .zero   24
+> diff --git a/tests/tcg/riscv64/test-zfinx-fmv-x-w.S b/tests/tcg/riscv64/test-zfinx-fmv-x-w.S
+> new file mode 100644
+> index 0000000000..c4e853036f
+> --- /dev/null
+> +++ b/tests/tcg/riscv64/test-zfinx-fmv-x-w.S
+> @@ -0,0 +1,33 @@
+> +/* SPDX-License-Identifier: GPL-2.0-or-later */
+> +#include <asm/unistd.h>
+> +
+> +        .text
+> +        .globl  _start
+> +_start:
+> +        .option norvc
+> +
+> +        li      a0, 4
+> +        la      a1, sa
+> +        li      a2, 0
+> +        li      a3, 8
+> +        li      a7, __NR_rt_sigaction
+> +        scall
+> +
+> +        .word   0xe0030453
+> +
+> +        li      a0, 1
+> +        j       exit
+> +
+> +pass:
+> +        li      a0, 0
+> +
+> +exit:
+> +        li      a7, __NR_exit
+> +        scall
+> +
+> +        .data
+> +        .type   sa, @object
+> +        .size   sa, 32
+> +sa:
+> +        .dword  pass
+> +        .zero   24
 
 
