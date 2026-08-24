@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE93BC5DF98
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE8F0C5DF94
 	for <qemu-riscv@archiver.kernel.org>; Mon, 24 Aug 2026 05:59:08 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wyNhD-0000SZ-A2; Mon, 24 Aug 2026 01:58:12 -0400
+	id 1wyNh1-0000Jl-PS; Mon, 24 Aug 2026 01:58:00 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1wyNgT-0008Vz-Jy
+ id 1wyNgW-0008WL-10
  for qemu-riscv@nongnu.org; Mon, 24 Aug 2026 01:57:30 -0400
-Received: from mail-pf1-x429.google.com ([2607:f8b0:4864:20::429])
+Received: from mail-pg1-x52b.google.com ([2607:f8b0:4864:20::52b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1wyNgN-0004En-2E
- for qemu-riscv@nongnu.org; Mon, 24 Aug 2026 01:57:20 -0400
-Received: by mail-pf1-x429.google.com with SMTP id
- d2e1a72fcca58-851cbd64814so530125b3a.1
- for <qemu-riscv@nongnu.org>; Sun, 23 Aug 2026 22:57:10 -0700 (PDT)
+ id 1wyNgR-0004GX-Hk
+ for qemu-riscv@nongnu.org; Mon, 24 Aug 2026 01:57:26 -0400
+Received: by mail-pg1-x52b.google.com with SMTP id
+ 41be03b00d2f7-c966b9ee9cbso2157906a12.1
+ for <qemu-riscv@nongnu.org>; Sun, 23 Aug 2026 22:57:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1787551029; x=1788155829; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1787551040; x=1788155840; darn=nongnu.org;
  h=content-transfer-encoding:content-type:mime-version:references
  :in-reply-to:message-id:date:subject:cc:to:from:sender:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=SAnDMWJL1YbwFQMDLM1WCNCMfPxewQfgUk+BYKKeXhQ=;
- b=sOeG/Hmlz0CBBFAAy1xbmmfSivvkYNkJeKN5+i+mbwaOVfHFMtSNUF0BIMeAlKquQ1
- VCDf1/gHbtZzsBUoxnMSRnkuoosl2VaSOFwuH8/lI/P6or2tMWpSy1EQdYbcCxwXM1Js
- hy0QUWOXFowcafYKMja++vUvAuwNcXfjGuhuI/tOqtC5X56CHZek8GwXM08QF4Jvp/HO
- olZde+kVeeDlqV5jIJn9FRrBaIO1yUvoxdkGhRoH2PgxTi4qU/7tzpYLx//LJFm2AtTq
- n35at8X/t9c+6bxtIVH1AoIqkxIaHeFg4xTCPg9hJz3zXWUIJ2/Ar5xApwFueiNq0lNn
- SrjQ==
+ bh=0trJunRyXAgIv25VNMRcfKRxyzdPShngFatEy4Vfc4c=;
+ b=iD5Nx+ZxOescJHnz63y9To8zBmR6tw+frduSqRyaj1mrpISOeUp0HBTjEcrHSRPfH8
+ CulY+/gK5arTwLfenJ9Y9WB8aR1NNAX3K5yUKivPjHzkfx7SNwfZmhoCBuiIKSo8QcEz
+ k2qNiB/Zr0NdRXECfwGMIUPgr21FXY+8sBtyF719zOEjOhChJysOCGVZL/64N1YSKWfo
+ ILRn2wA5c/tnMmhwhjTDrz3z8mdXANwyQxW7e0B9sRzPkcLosnaN9mUX5hpFSIxARgSt
+ qkQacv1XdSMfgoQcEtp7gokCN7aVereq3TQoEE6/3c4yP1otHKgdVmkQqPNCluzhDEkx
+ BAtQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787551029; x=1788155829;
+ d=1e100.net; s=20251104; t=1787551040; x=1788155840;
  h=content-transfer-encoding:content-type:mime-version:references
  :in-reply-to:message-id:date:subject:cc:to:from:sender:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=SAnDMWJL1YbwFQMDLM1WCNCMfPxewQfgUk+BYKKeXhQ=;
- b=mxTn3Y0hhVyeLUUNmZjKJn4wqKlbWnVVeHDDPof264R428qnfcZMyeR+YYQ1674ORb
- bx+j6xSNi6wJ8RiLo3OWHmIs0TgVMNAb/bJoznKBXiEbaYBqyL51SOZAJZ1xCDQzTg51
- 2DA3Y81yOlbf//Zhq9HE/iyjQa3gWHfv8igFIf6dLkk5mC1KKLG4w3MXzCi9cEZgJYYR
- 1bg96Mnln840x07ZXQLPHuNKjL6+M2+5JgZYpqJ881oDlFd6phBPLScwOHq9lED10MRb
- ostUEmidMKyNluMxC+iqxi9GvtV6ujyl3Z9ZOqPeGODEbwmLuHQgwbRrGhCW2CHuX4Ry
- aOew==
+ bh=0trJunRyXAgIv25VNMRcfKRxyzdPShngFatEy4Vfc4c=;
+ b=QIYYu6ogmYSg0b9l8zWo+cLltJy/qN4RG8q/lT6LsmI7M0+S+wytXvbBGI/DLWiWGP
+ J6aUjIjZaWvvbPrWfqVNJ02diEk0JzY1HNixZrY1754OO15aYV9dyQNXs/0AFU1jg+M5
+ jceG2iTmWt+6iIHAjqVYxviVmfADmhiDZkLv7SWqkc1/RgZgnHftwiHlktgbFlwhNv+y
+ 7m0TYgGa5C5UT0bmrgA/+v9rrLxXVL5IFEoR+82zMMWJjVqAthcLlyG15mNYpe/TzgC0
+ IdgrwHp5cfXNLuO2Z62ZWyg2W5QeMs2U7cwUXJjd/3Rk7XjWCiQG7DdN57yw+uFvqK+P
+ lI9Q==
 X-Forwarded-Encrypted: i=1;
- AHgh+RrTk+0L0wx2UW+eFItTcv/y0DDOGvdQ6WRVoZUjqwCcGwNOMLgaGdBJ9sxp38ngkIUqdC+m/dcPDYZm@nongnu.org
-X-Gm-Message-State: AFuF++n+Qfw/dzRZop+RLkac9CBX8qAHC4b3aJaAKPapyLURq9ezx3Y7
- gDZEUR1kgi6Q89wntEE04R2bDXAQXdg4Wajgv/P71K5IcrYirOEswEdw
-X-Gm-Gg: AR+sD12gYemzIvGieTdIMC92OorbaT7/QWEELEEZ9oTcTtbIfrY5W5MCADSY5nkJLM1
- kgS+j1UDfuC+GzDfvhFXYNLWzofWjZ6/zg5in98oNFPEsRqhm/DkGSo8MxUA8L/M1KYi52ZGCdX
- c7gskBnv1xp3LTxPDEjjAmO+ZJuRJghWNA7kJoEFuIhEfGE6BNRqHWAl/3E6xU7HxHouKBZSivj
- xnidVr2GmVTy608Cxtw4F+nmrBQeRmbH7rkj2WnyWOb2qTtux+TSaeAv3QMfNSr1wSOT+8332/L
- fiDk7+PKHuFL0yxLFeaHjQ8acOApamuxi0wshIG1vrbJ6L+3AN3d2tW+n14OZwO9YeBnqtAf72S
- wbBY5oIqvC5wzRMIMNTKVBSShoUDna0RYBPf59Pf1v2VGo3c55rXZp1fYAKuvltfho6BhSCpe7z
- HJdYE3UvPyVfNfL9xkpHTqXR1H+gNGukOUDk5q3WXkdo97PlUSyWkQgz3T1vZHGfaC5ZvIL9Ba3
- ajsp0KSOLdcFR4S9sVW04aLj0XsvDkBJ9b5tG0E1apE7cy1k0nv6X4n+wvfRpB3fhCdFCc58SeV
- S+EG8yxZ/fibnwP+qgIS0A==
-X-Received: by 2002:a05:6a00:8014:b0:84c:4b58:2cec with SMTP id
- d2e1a72fcca58-8520ba2fd59mr29263795b3a.15.1787551029064; 
- Sun, 23 Aug 2026 22:57:09 -0700 (PDT)
+ AHgh+RoGtToMtJC9Qvr7+iyOHrH1Iy3lDEmKyd34gzosmyML97Nwid/x59HpUhX1kRXQGClyd+9+72YhLRze@nongnu.org
+X-Gm-Message-State: AFuF++lH1wtQaLZ8JbgZYEjtmgk0OrhcAgTiNzOERWm5ihbyu2nPDFov
+ Dv/EzoRLykxW4v0MDp326UdfRKzgRf7zMHccecHyB2FEkJy4iNe5ryU1
+X-Gm-Gg: AR+sD13NCoD2l2oLmCWDP50FYh9KkIB8Ix67ilaav/901NsSpf2d/po9yKrpFbqL8hx
+ oOq0QRHVZel2EGKTIY0WkNxHAyQSrNDkGhRDrj8H9z5to7pPHgsP241+0Vy9iw6E6IGXdRTg4Iq
+ kNN9Z77CRAsEnVwyRBNLzV96UO5cjOpsl4lQuVDrI12fPyKOk9rJhXsEsLOTvJw1mMNToIgNASL
+ ixHz3EofGxpmitzdwJPkY3n4Fw0ieFgs93fHTwu50Dztn5GToDvFqsMuU+uPhA7pf4d8cGq2leR
+ QN0QvDp92z1Bqu4nwLoxmMfI8N09b1MsyRnICkFPyldqXUa7NS+AJmlVrFHUn4tFvYkqiuQExGZ
+ p38OClCtElWQLZ63yg85qMi8pXoSGkxy7s0FtdPvANUyRS5R/NSN4D2N9F2z4UhaKfk1XObE0CH
+ dekuGAAHMNRo+UcdxWQQBFKYbDH+0lYTZ49y/loWho6yq2Rz4PpnvzSTnQEm3tY+UNKTJA2fUNm
+ ffRJ/XzIUVkkXlYLIBMUpiktcZkLSR3Ijv3ORGRnclqwHcOcQ6AKHaNgZ6kcgVnSaSXwRmVw60C
+ ephmlb+MQWueuCLAm+CH/Q==
+X-Received: by 2002:a05:6a00:4098:b0:847:8449:2bb6 with SMTP id
+ d2e1a72fcca58-8520b9460c1mr25940893b3a.4.1787551040279; 
+ Sun, 23 Aug 2026 22:57:20 -0700 (PDT)
 Received: from donnager-debian.. ([180.150.112.50])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-8520f03b494sm1583474b3a.33.2026.08.23.22.57.03
+ d2e1a72fcca58-8520f03b494sm1583474b3a.33.2026.08.23.22.57.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 23 Aug 2026 22:57:08 -0700 (PDT)
+ Sun, 23 Aug 2026 22:57:19 -0700 (PDT)
 From: Joel Stanley <joel@jms.id.au>
 To: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  Alistair Francis <alistair.francis@wdc.com>,
@@ -82,17 +82,18 @@ Cc: Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Niek Linnenbank <nieklinnenbank@gmail.com>,
  Peter Maydell <peter.maydell@linaro.org>, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org
-Subject: [PATCH 1/4] hw/riscv/boot: Make RISCVBootInfo const where possible
-Date: Mon, 24 Aug 2026 15:26:37 +0930
-Message-ID: <20260824055642.41098-2-joel@jms.id.au>
+Subject: [PATCH 3/4] tests/functional: Avoid unnecessary removal of scratch
+ files
+Date: Mon, 24 Aug 2026 15:26:39 +0930
+Message-ID: <20260824055642.41098-4-joel@jms.id.au>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260824055642.41098-1-joel@jms.id.au>
 References: <20260824055642.41098-1-joel@jms.id.au>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::429;
- envelope-from=joel.stan@gmail.com; helo=mail-pf1-x429.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52b;
+ envelope-from=joel.stan@gmail.com; helo=mail-pg1-x52b.google.com
 X-Spam_score_int: -16
 X-Spam_score: -1.7
 X-Spam_bar: -
@@ -116,73 +117,131 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-As with riscv_load_firmware, take a const pointer in functions that
-reads the structure without writing.
+Files written by uncompress() and archive_extract() are placed in a
+temporary directory that is cleaned up when the test exits, making
+os.remove() redundant. Drop it and the unused os import.
 
 Suggested-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 Signed-off-by: Joel Stanley <joel@jms.id.au>
 ---
- include/hw/riscv/boot.h | 6 +++---
- hw/riscv/boot.c         | 6 +++---
- 2 files changed, 6 insertions(+), 6 deletions(-)
+ tests/functional/arm/test_bpim2u.py       | 11 -----------
+ tests/functional/arm/test_orangepi.py     |  9 ---------
+ tests/functional/riscv64/test_sifive_u.py |  4 ----
+ 3 files changed, 24 deletions(-)
 
-diff --git a/include/hw/riscv/boot.h b/include/hw/riscv/boot.h
-index 4e7bd9a225ef..d23f45d78077 100644
---- a/include/hw/riscv/boot.h
-+++ b/include/hw/riscv/boot.h
-@@ -50,10 +50,10 @@ void riscv_boot_info_init(RISCVBootInfo *info, RISCVHartArrayState *harts);
- void riscv_boot_info_init_discontig_mem(RISCVBootInfo *info,
-                                         RISCVHartArrayState *harts,
-                                         hwaddr low_start, hwaddr low_size);
--vaddr riscv_calc_kernel_start_addr(RISCVBootInfo *info,
-+vaddr riscv_calc_kernel_start_addr(const RISCVBootInfo *info,
-                                    hwaddr firmware_end_addr);
- hwaddr riscv_find_and_load_firmware(MachineState *machine,
--                                    RISCVBootInfo *info,
-+                                    const RISCVBootInfo *info,
-                                     const char *default_machine_firmware,
-                                     hwaddr *firmware_load_addr,
-                                     symbol_fn_t sym_cb);
-@@ -71,7 +71,7 @@ void riscv_load_kernel(MachineState *machine,
-                        bool load_initrd,
-                        symbol_fn_t sym_cb);
- uint64_t riscv_compute_fdt_addr(hwaddr dram_base, hwaddr dram_size,
--                                MachineState *ms, RISCVBootInfo *info);
-+                                MachineState *ms, const RISCVBootInfo *info);
- void riscv_load_fdt(hwaddr fdt_addr, void *fdt);
- void riscv_setup_rom_reset_vec(MachineState *machine, RISCVHartArrayState *harts,
-                                hwaddr saddr,
-diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
-index 5e2dfa091a13..4ac0b8ef6581 100644
---- a/hw/riscv/boot.c
-+++ b/hw/riscv/boot.c
-@@ -91,7 +91,7 @@ void riscv_boot_info_init_discontig_mem(RISCVBootInfo *info,
-     info->ram_low_size = low_size;
- }
+diff --git a/tests/functional/arm/test_bpim2u.py b/tests/functional/arm/test_bpim2u.py
+index 8bed64b702fe..9192a2fbec45 100755
+--- a/tests/functional/arm/test_bpim2u.py
++++ b/tests/functional/arm/test_bpim2u.py
+@@ -5,8 +5,6 @@
+ #
+ # SPDX-License-Identifier: GPL-2.0-or-later
  
--vaddr riscv_calc_kernel_start_addr(RISCVBootInfo *info,
-+vaddr riscv_calc_kernel_start_addr(const RISCVBootInfo *info,
-                                    hwaddr firmware_end_addr) {
-     if (info->is_32bit) {
-         return QEMU_ALIGN_UP(firmware_end_addr, 4 * MiB);
-@@ -151,7 +151,7 @@ char *riscv_find_firmware(const char *firmware_filename,
- }
+-import os
+-
+ from qemu_test import LinuxKernelTest, exec_command_and_wait_for_pattern
+ from qemu_test import Asset, interrupt_interactive_console_until_pattern
+ from qemu_test import skipBigDataTest
+@@ -54,8 +52,6 @@ def test_arm_bpim2u(self):
+         self.vm.launch()
+         console_pattern = 'Kernel command line: %s' % kernel_command_line
+         self.wait_for_console_pattern(console_pattern)
+-        os.remove(kernel_path)
+-        os.remove(dtb_path)
  
- hwaddr riscv_find_and_load_firmware(MachineState *machine,
--                                    RISCVBootInfo *info,
-+                                    const RISCVBootInfo *info,
-                                     const char *default_machine_firmware,
-                                     hwaddr *firmware_load_addr,
-                                     symbol_fn_t sym_cb)
-@@ -348,7 +348,7 @@ out:
-  * The FDT is fdt_packed() during the calculation.
-  */
- uint64_t riscv_compute_fdt_addr(hwaddr dram_base, hwaddr dram_size,
--                                MachineState *ms, RISCVBootInfo *info)
-+                                MachineState *ms, const RISCVBootInfo *info)
- {
-     int ret = fdt_pack(ms->fdt);
-     hwaddr dram_end, temp;
+     def test_arm_bpim2u_initrd(self):
+         self.set_machine('bpim2u')
+@@ -86,9 +82,6 @@ def test_arm_bpim2u_initrd(self):
+                                                 'reboot: Restarting system')
+         # Wait for VM to shut down gracefully
+         self.vm.wait()
+-        os.remove(kernel_path)
+-        os.remove(dtb_path)
+-        os.remove(initrd_path)
+ 
+     def test_arm_bpim2u_gmac(self):
+         self.set_machine('bpim2u')
+@@ -133,9 +126,6 @@ def test_arm_bpim2u_gmac(self):
+                                                 'reboot: Restarting system')
+         # Wait for VM to shut down gracefully
+         self.vm.wait()
+-        os.remove(kernel_path)
+-        os.remove(dtb_path)
+-        os.remove(rootfs_path)
+ 
+     @skipBigDataTest()
+     def test_arm_bpim2u_openwrt_22_03_3(self):
+@@ -174,7 +164,6 @@ def test_arm_bpim2u_openwrt_22_03_3(self):
+                                                 'Allwinner sun8i Family')
+         exec_command_and_wait_for_pattern(self, 'cat /proc/iomem',
+                                                 'system-control@1c00000')
+-        os.remove(image_path)
+ 
+ if __name__ == '__main__':
+     LinuxKernelTest.main()
+diff --git a/tests/functional/arm/test_orangepi.py b/tests/functional/arm/test_orangepi.py
+index f9bfa8c78d99..09780236553f 100755
+--- a/tests/functional/arm/test_orangepi.py
++++ b/tests/functional/arm/test_orangepi.py
+@@ -5,7 +5,6 @@
+ #
+ # SPDX-License-Identifier: GPL-2.0-or-later
+ 
+-import os
+ import shutil
+ 
+ from qemu_test import LinuxKernelTest, exec_command_and_wait_for_pattern
+@@ -65,8 +64,6 @@ def test_arm_orangepi(self):
+         self.vm.launch()
+         console_pattern = 'Kernel command line: %s' % kernel_command_line
+         self.wait_for_console_pattern(console_pattern)
+-        os.remove(kernel_path)
+-        os.remove(dtb_path)
+ 
+     def test_arm_orangepi_initrd(self):
+         self.set_machine('orangepi-pc')
+@@ -97,9 +94,6 @@ def test_arm_orangepi_initrd(self):
+                                                 'reboot: Restarting system')
+         # Wait for VM to shut down gracefully
+         self.vm.wait()
+-        os.remove(kernel_path)
+-        os.remove(dtb_path)
+-        os.remove(initrd_path)
+ 
+     def test_arm_orangepi_sd(self):
+         self.set_machine('orangepi-pc')
+@@ -140,9 +134,6 @@ def test_arm_orangepi_sd(self):
+                                                 'reboot: Restarting system')
+         # Wait for VM to shut down gracefully
+         self.vm.wait()
+-        os.remove(kernel_path)
+-        os.remove(dtb_path)
+-        os.remove(rootfs_path)
+ 
+     @skipBigDataTest()
+     def test_arm_orangepi_armbian(self):
+diff --git a/tests/functional/riscv64/test_sifive_u.py b/tests/functional/riscv64/test_sifive_u.py
+index 54a0f9c64845..6bf5be15f93a 100755
+--- a/tests/functional/riscv64/test_sifive_u.py
++++ b/tests/functional/riscv64/test_sifive_u.py
+@@ -10,8 +10,6 @@
+ #
+ # SPDX-License-Identifier: GPL-2.0-or-later
+ 
+-import os
+-
+ from qemu_test import Asset, LinuxKernelTest
+ 
+ 
+@@ -49,8 +47,6 @@ def do_test_riscv64_sifive_u_mmc_spi(self, connect_card):
+         self.vm.launch()
+         self.wait_for_console_pattern(pattern)
+ 
+-        os.remove(rootfs_path)
+-
+     def test_riscv64_sifive_u_nommc_spi(self):
+         self.do_test_riscv64_sifive_u_mmc_spi(False)
+ 
 -- 
 2.47.3
 
