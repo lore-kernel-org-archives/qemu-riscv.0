@@ -4,107 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD086C5DF97
-	for <qemu-riscv@archiver.kernel.org>; Mon, 24 Aug 2026 00:45:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BEBDCC5DF97
+	for <qemu-riscv@archiver.kernel.org>; Mon, 24 Aug 2026 00:58:37 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wyIo6-0002jS-2c; Sun, 23 Aug 2026 20:44:58 -0400
+	id 1wyJ0h-0004dX-GC; Sun, 23 Aug 2026 20:57:59 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair@alistair23.me>)
- id 1wyIo3-0002jD-Nx
- for qemu-riscv@nongnu.org; Sun, 23 Aug 2026 20:44:55 -0400
-Received: from flow-b6-smtp.messagingengine.com ([202.12.124.141])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair@alistair23.me>)
- id 1wyIo2-0004Y6-0O
- for qemu-riscv@nongnu.org; Sun, 23 Aug 2026 20:44:55 -0400
-Received: from phl-compute-04.internal (phl-compute-04.internal [10.202.2.44])
- by mailflow.stl.internal (Postfix) with ESMTP id 35596130008E;
- Sun, 23 Aug 2026 20:44:50 -0400 (EDT)
-Received: from phl-frontend-04 ([10.202.2.163])
- by phl-compute-04.internal (MEProxy); Sun, 23 Aug 2026 20:44:51 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alistair23.me;
- h=cc:content-transfer-encoding:content-type:content-type:date
- :date:from:from:in-reply-to:message-id:mime-version:reply-to
- :subject:subject:to:to; s=fm3; t=1787532290; x=1787539490; bh=Gt
- TlyMEbbwxyLkDNL04J079vxHuHWrg7Ley02BReHYw=; b=QnggX+vWJ+DrA36k7O
- o9GNk+ayxNdh84bShTuBL720C323oOYMMzvEeqnZYCzTIt2rFLXiFKtyXPSx+XEi
- p09YjXGFbNWo9OdVP+qECFk5YI/mAwvVh3wpFRa9C185bmhmgc4nC7TNTODG/muT
- 4MMnMJ+JpeSyxP6jRByOrBpwUgPU5ejCA4Efhg99P9o6Au+HhPHnj+Y5+5/+fAuW
- 4hXgpyhlGb0DArlMzK9dCuLQ/4Qc/ixaod14ucok6rg9Df3CSsJd9yuH974932I/
- mz2dMDnVqAKiiUT6H2MkYsopUEafn/PGbX5o07k3YpZ5Gh4E+27ND2ijhGODqsP5
- bEbQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:content-transfer-encoding:content-type
- :content-type:date:date:feedback-id:feedback-id:from:from
- :in-reply-to:message-id:mime-version:reply-to:subject:subject:to
- :to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=
- 1787532290; x=1787539490; bh=GtTlyMEbbwxyLkDNL04J079vxHuHWrg7Ley
- 02BReHYw=; b=VgD37MxR0pbxB5G1ao77PM+4aZ9qONgc3tkphMXgZ7sH7YIRWYg
- jYstW8AgfZqaQmg2pT3pgyJDL3KPNwGUYkdJADLehbMdivVkhIi3TLiVHe8YP+7f
- hlV6Z3pQaUysVHR1Z17PKWDAileE5a+8DjcsvL27yEsk1DC1pXNG2eorzOMWz3Nc
- RuvVj5U37UAN++hWlLIGoe7ADECmI8CSuX9Qk0oqyEmw39fGck3NEsCrmJUkI6aQ
- s3/uFOCMbpJDdJrfzbQW6nBwTmzJ5b+1xREIJScdC636fFwJhMCPV6hFAcRa1uJr
- Eq77sz47xiXd79x4rdkCIaSxJSjtManvlTA==
-X-ME-Sender: <xms:_ZOLapaFiEh2ttSeriwKvZT9_HhGD_Vkiu3CGvaHYYWf-C3EWM6d9Q>
- <xme:_ZOLasIO8N5bWaMfxThAhmzPDR0HoGiOeTE1JB6hVTy2FSyfljDu-ELoKtcpB4Cva
- g7_50EUGOx07F3FcEi1QDVCjzR5_F7GXuDNskCVpYYbzK7eL-6kajwW>
-X-ME-Received: <xmr:_ZOLakgUf3C1Vw2fOx417ezjeVUxHpFniOoYAW5ykGsOWSqdaMMxItINH80oEX3ZHVMEMA-hCBA0HZldYYqzWBOWsR0>
-X-ME-Proxy-Cause: dmFkZTGYmrGHNnSMYQ+CxF3ibo9Kb6yuqNFi2YvCC4h99NXlVHuPmE6CMKB5XMm0gBnocp
- FGvRsUSeoFzcGhGM0A7nGiZ4ZeUbtQJVhmzC1h2+eaTwPCl3zu1cbXfqdJFZ+035qtxGKY
- +zEd8kudG0a+5J7KJ64E2IdIxNOUYAIawulHaqHGpHaQInQVwywCwPPlZUQgWZR7hJmw6k
- Tr9J/6P3N9IeDFDNa3r3hZDKwfOddKiXJtcXS7Gkd4YV1F9QqP9VXBW+gVet1IYwqlnZO2
- 0LNa4J2fhL4ef0yiH2iL74MBs4lzd1Vn/p2UhfHGXHTVKOVwPWNURtSM8iYztQP9HnkeWB
- alZOwkF6UKnd3Ca9arnEdUvy1gIpKJ9JmUiH1SF9OoMeBTTktvh2Zh3kuakv9TKgPDPT9V
- 6BqiwPEyXjiZ3Ra2kOx8sVX1FojIDj2LlYEP4sqiR7cwpDqcF0TqWtJv6uHa2ajsWkWxxN
- L1TBrzl8Q2BaMIxNpfBAowftYbYvGm7p0WT3oxNAhTWUqohXkhDHFW6ako7BSdnCz6+i5I
- LXKfJCUL0ExN5hhLWFghmSlmCg5Cz/ZPrYUa/jhk/piYo3JAKZfxDvUF/9BqVfKy3v44/C
- 2s0Nn+7G0o21ZZZ5BuXofbZTcADrSk8DS2f8ZoMEAWTzy4AmX2WdqdsInRxg
-X-ME-Proxy: <xmx:_ZOLaoyIQjEav7lNLzQYDj9q61BYxSsmen5gs-VLqVVMbuiIGPtZdA>
- <xmx:_ZOLau28f6iiBk3v8W_yIIgzyC-5-AVrmhkW0OMfCUjZLHqhe1HMdA>
- <xmx:_ZOLarRdgiKULSgQCncG2vYVi1qWDN6R2tXTBGEJOdq_f9yrXT3yoA>
- <xmx:_ZOLari7g9SZ_0syny7qaMfpIHkRyldBxionw8kbzIti1kABoagb5Q>
- <xmx:ApSLamD2hHovmy-oKUxgbeCdj8woiwLgoroTYrxKbJ2hBP7l_c5NPKI2>
-Feedback-ID: ifd214418:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Sun,
- 23 Aug 2026 20:44:33 -0400 (EDT)
-Message-ID: <8c1a5c069853873258553840a37a54c87c40d2ed.camel@alistair23.me>
-Subject: Use of AI Generated Content
-From: Alistair <alistair@alistair23.me>
-To: palmer@dabbelt.com, liwei1518@gmail.com, daniel.barboza@oss.qualcomm.com, 
- zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
- qemu-riscv@nongnu.org, 	dubdublan1987@gmail.com, xinxie908@gmail.com,
- ahshehab24@gmail.com, 	nendensu@ispras.ru,
- daniel.barboza@oss.qualcomm.com, caojunze424@gmail.com,
- wzy15515798875@gmail.com, wxchen0913@gmail.com,
- christianslima@proton.me, 	dingtao0430@163.com, xb@ultrarisc.com,
- heavenlydev01@gmail.com, 	leo-cheng@vip.qq.com, guochun.wang@foxmail.com,
- frank.chang@sifive.com, 	max.chou@sifive.com, fritchleybohrer@gmail.com,
- chao.liu@processmission.com, 	flamboyant.h.01@gmail.com,
- mayuresh.chitale@oss.qualcomm.com, 314abh@gmail.com,
- ilya.chichkov.dev@gmail.com, subrahmanya.lingappa@oss.qualcomm.com,
- liuxu@nucleisys.com, asrinivasan@oss.tenstorrent.com, vvisaev@gmail.com,
- 0860734llx@gmail.com, marcandre.lureau@redhat.com, rao232328@gmail.com,
- vsementsov@yandex-team.ru, joel@jms.id.au, richard.henderson@linaro.org,
- zhiwei_liu@linux.alibaba.com, cp0613@linux.alibaba.com,
- xiangwencheng@lanxincomputing.com,
- frederic.petrot@univ-grenoble-alpes.fr, 	philmd@oss.qualcomm.com,
- visitorckw@gmail.com, wangyang25@otcaix.iscas.ac.cn, luoyonggang@gmail.com
-Date: Mon, 24 Aug 2026 10:44:31 +1000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.60.2 (by Flathub.org) 
+ (Exim 4.90_1) (envelope-from <gaosong@loongson.cn>)
+ id 1wyJ0f-0004be-CH; Sun, 23 Aug 2026 20:57:57 -0400
+Received: from mail.loongson.cn ([114.242.206.163])
+ by eggs.gnu.org with esmtp (Exim 4.90_1)
+ (envelope-from <gaosong@loongson.cn>)
+ id 1wyJ0c-0006uH-FM; Sun, 23 Aug 2026 20:57:57 -0400
+Received: from loongson.cn (unknown [10.20.42.239])
+ by gateway (Coremail) with SMTP id _____8Axj9EHl4tqYiUEAA--.11925S3;
+ Mon, 24 Aug 2026 08:57:43 +0800 (CST)
+Received: from [10.20.42.239] (unknown [10.20.42.239])
+ by front1 (Coremail) with SMTP id qMiowJAxX88Fl4tqXPUPAA--.28041S2;
+ Mon, 24 Aug 2026 08:57:42 +0800 (CST)
+Subject: Re: [PATCH 06/12] hw/loongarch/virt: prefix ACPI helper with
+ loongarch_virt_
+To: Yonggang Luo <luoyonggang@gmail.com>, qemu-devel@nongnu.org
+Cc: Xianglai Li <lixianglai@loongson.cn>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Chinmay Rath <rathc@linux.ibm.com>, Sunil V L <sunilvl@ventanamicro.com>,
+ qemu-riscv@nongnu.org, Alexander Bulekov <alxndr@bu.edu>,
+ Zhao Liu <zhao1.liu@intel.com>, Eric Farman <farman@linux.ibm.com>,
+ Laurent Vivier <lvivier@redhat.com>, Peter Maydell
+ <peter.maydell@linaro.org>, Chao Liu <chao.liu@processmission.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Song Gao <17746591750@163.com>,
+ Harsh Prateek Bora <harshpb@linux.ibm.com>,
+ Glenn Miles <milesg@linux.ibm.com>, =?UTF-8?Q?Daniel_P=2e_Berrang=c3=a9?=
+ <berrange@redhat.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, qemu-s390x@nongnu.org,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@mailo.com>,
+ "Michael S. Tsirkin" <mst@redhat.com>, Stefan Hajnoczi
+ <stefanha@redhat.com>, =?UTF-8?Q?Alex_Benn=c3=a9e?=
+ <alex.bennee@linaro.org>, David Hildenbrand <david@kernel.org>,
+ qemu-ppc@nongnu.org, qemu-arm@nongnu.org, Igor Mammedov
+ <imammedo@redhat.com>, Aleksandar Rikalo <arikalo@gmail.com>,
+ Nicholas Piggin <npiggin@gmail.com>, Cornelia Huck <cohuck@redhat.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Ilya Leoshkevich <iii@linux.ibm.com>, Fabiano Rosas <farosas@suse.de>,
+ Aurelien Jarno <aurelien@aurel32.net>, Paolo Bonzini <pbonzini@redhat.com>,
+ Ani Sinha <anisinha@redhat.com>, Bibo Mao <maobibo@loongson.cn>,
+ =?UTF-8?Q?Marc-Andr=c3=a9_Lureau?= <marcandre.lureau@redhat.com>,
+ Matthew Rosato <mjrosato@linux.ibm.com>, Weiwei Li <liwei1518@gmail.com>,
+ Darren Kenny <darren.kenny@oracle.com>
+References: <20260823150731.896-1-luoyonggang@gmail.com>
+ <20260823150731.896-7-luoyonggang@gmail.com>
+From: gaosong <gaosong@loongson.cn>
+Message-ID: <b5850b95-25cc-ae1f-1852-16e061811d36@loongson.cn>
+Date: Mon, 24 Aug 2026 09:00:32 +0800
+User-Agent: Mozilla/5.0 (X11; Linux loongarch64; rv:68.0) Gecko/20100101
+ Thunderbird/68.7.0
 MIME-Version: 1.0
-Received-SPF: pass client-ip=202.12.124.141;
- envelope-from=alistair@alistair23.me; helo=flow-b6-smtp.messagingengine.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
-X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_PASS=-0.001,
+In-Reply-To: <20260823150731.896-7-luoyonggang@gmail.com>
+Content-Type: text/plain; charset=gbk; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
+X-CM-TRANSID: qMiowJAxX88Fl4tqXPUPAA--.28041S2
+X-CM-SenderInfo: 5jdr20tqj6z05rqj20fqof0/
+X-Coremail-Antispam: 1Uk129KBj93XoWxAFyUArWkAF15GFyxXFy7Arc_yoW5Ary3pF
+ ZrC3ZYyw1UWry7urZFy3s8WFn8Arn3u342qF1a9r40krsrWr1UWry8Z39FyFWUZ3ykXF40
+ vr1kGa4xXF47ZrXCm3ZEXasCq-sJn29KB7ZKAUJUUUUd529EdanIXcx71UUUUU7KY7ZEXa
+ sCq-sGcSsGvfJ3Ic02F40EFcxC0VAKzVAqx4xG6I80ebIjqfuFe4nvWSU5nxnvy29KBjDU
+ 0xBIdaVrnRJUUUP2b4IE77IF4wAFF20E14v26r1j6r4UM7CY07I20VC2zVCF04k26cxKx2
+ IYs7xG6rWj6s0DM7CIcVAFz4kK6r1Y6r17M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48v
+ e4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI
+ 0_Gr0_Cr1l84ACjcxK6I8E87Iv67AKxVW8JVWxJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_
+ Gr0_Gr1UM2kKe7AKxVWUtVW8ZwAS0I0E0xvYzxvE52x082IY62kv0487Mc804VCY07AIYI
+ kI8VC2zVCFFI0UMc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7IYx2IY67AKxVWUtVWr
+ XwAv7VC2z280aVAFwI0_Gr0_Cr1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0Y48IcVAKI48JMx
+ k0xIA0c2IEe2xFo4CEbIxvr21lc7CjxVAaw2AFwI0_GFv_Wryl42xK82IYc2Ij64vIr41l
+ 4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1l4IxYO2xFxVAFwI0_Jw0_GFylx2IqxVAqx4xG67AKxV
+ WUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26rWY6r4UJwCIc40Y
+ 0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r4j6ryUMIIF0xvE2Ix0cI8IcVCY1x0267AKxV
+ W8JVWxJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Gr0_Cr1l
+ IxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7IUeVpB3UUUU
+ U==
+Received-SPF: pass client-ip=114.242.206.163; envelope-from=gaosong@loongson.cn;
+ helo=mail.loongson.cn
+X-Spam_score_int: -6
+X-Spam_score: -0.7
+X-Spam_bar: /
+X-Spam_report: (-0.7 / 5.0 requ) BAYES_00=-1.9, MIME_CHARSET_FARAWAY=2.45,
+ NICE_REPLY_A=-1.251, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -121,29 +111,79 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hey everyone,
+ÔÚ 2026/8/23 ÏÂÎç11:07, Yonggang Luo Ð´µÀ:
+> - virt_acpi_setup is the same C symbol used by ARM and RISC-V virt.
+>    Rename it now so a later combined binary does not need meson -D
+>    prefixes for LoongArch.
+> - Rename the file-local virt_is_acpi_enabled to
+>    loongarch_virt_is_acpi_enabled to match.
+>
+> Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
+> ---
+>   hw/loongarch/virt-acpi-build.c | 6 +++---
+>   hw/loongarch/virt.c            | 2 +-
+>   include/hw/loongarch/virt.h    | 2 +-
+>   3 files changed, 5 insertions(+), 5 deletions(-)
+Reviewed-by: Song Gao <gaosong@loongson.cn>
 
-This is an email going out to:
- - the QEMU RISC-V list
- - the QEMU RISC-V Maintainers
- - the last 40 people to submit patches to the QEMU RISC-V list.
+Thanks.
+Song Gao
+> diff --git a/hw/loongarch/virt-acpi-build.c b/hw/loongarch/virt-acpi-build.c
+> index a0b445f297b..bbbac289b49 100644
+> --- a/hw/loongarch/virt-acpi-build.c
+> +++ b/hw/loongarch/virt-acpi-build.c
+> @@ -674,7 +674,7 @@ static const VMStateDescription vmstate_acpi_build = {
+>       },
+>   };
+>   
+> -static bool virt_is_acpi_enabled(LoongArchVirtMachineState *lvms)
+> +static bool loongarch_virt_is_acpi_enabled(LoongArchVirtMachineState *lvms)
+>   {
+>       if (lvms->acpi == ON_OFF_AUTO_OFF) {
+>           return false;
+> @@ -682,7 +682,7 @@ static bool virt_is_acpi_enabled(LoongArchVirtMachineState *lvms)
+>       return true;
+>   }
+>   
+> -void virt_acpi_setup(LoongArchVirtMachineState *lvms)
+> +void loongarch_virt_acpi_setup(LoongArchVirtMachineState *lvms)
+>   {
+>       AcpiBuildTables tables;
+>       AcpiBuildState *build_state;
+> @@ -692,7 +692,7 @@ void virt_acpi_setup(LoongArchVirtMachineState *lvms)
+>           return;
+>       }
+>   
+> -    if (!virt_is_acpi_enabled(lvms)) {
+> +    if (!loongarch_virt_is_acpi_enabled(lvms)) {
+>           ACPI_BUILD_DPRINTF("ACPI disabled. Bailing out.\n");
+>           return;
+>       }
+> diff --git a/hw/loongarch/virt.c b/hw/loongarch/virt.c
+> index 6693dea647b..74c9668b6e6 100644
+> --- a/hw/loongarch/virt.c
+> +++ b/hw/loongarch/virt.c
+> @@ -242,7 +242,7 @@ static void virt_done(Notifier *notifier, void *data)
+>       LoongArchVirtMachineState *lvms = container_of(notifier,
+>                                         LoongArchVirtMachineState, machine_done);
+>       virt_build_smbios(lvms);
+> -    virt_acpi_setup(lvms);
+> +    loongarch_virt_acpi_setup(lvms);
+>       virt_fdt_setup(lvms);
+>   }
+>   
+> diff --git a/include/hw/loongarch/virt.h b/include/hw/loongarch/virt.h
+> index d39a9bbf5dd..72268466def 100644
+> --- a/include/hw/loongarch/virt.h
+> +++ b/include/hw/loongarch/virt.h
+> @@ -132,7 +132,7 @@ struct LoongArchVirtMachineState {
+>   
+>   #define TYPE_LOONGARCH_VIRT_MACHINE  MACHINE_TYPE_NAME("virt")
+>   OBJECT_DECLARE_SIMPLE_TYPE(LoongArchVirtMachineState, LOONGARCH_VIRT_MACHINE)
+> -void virt_acpi_setup(LoongArchVirtMachineState *lvms);
+> +void loongarch_virt_acpi_setup(LoongArchVirtMachineState *lvms);
+>   void virt_fdt_setup(LoongArchVirtMachineState *lvms);
+>   
+>   static inline bool virt_has_dmsi(LoongArchVirtMachineState *lvms)
 
-I just wanted to remind everyone that AI generated code and AI
-generated commit messages are not allowed in QEMU.
-
-The current QEMU policy states:
-
-"""
-Current QEMU project policy is to DECLINE any contributions which are
-believed to include or derive from AI generated content. This includes
-ChatGPT, Claude, Copilot, Llama and similar tools.
-"""
-
-You can see the entire policy here:
-https://www.qemu.org/docs/master/devel/code-provenance.html#use-of-ai-gener=
-ated-content
-
-Just make sure you keep that in mind when working on QEMU code.
-
-Alistair
 
