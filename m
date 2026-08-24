@@ -4,74 +4,146 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED61EC5DF81
-	for <qemu-riscv@archiver.kernel.org>; Mon, 24 Aug 2026 13:37:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83C9DC5DF81
+	for <qemu-riscv@archiver.kernel.org>; Mon, 24 Aug 2026 13:43:12 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wyUri-0003lF-RW; Mon, 24 Aug 2026 09:37:30 -0400
+	id 1wyUx3-0000a6-64; Mon, 24 Aug 2026 09:43:01 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <yfliu2008@qq.com>)
- id 1wyUre-0003kp-5R; Mon, 24 Aug 2026 09:37:26 -0400
-Received: from out162-62-57-49.mail.qq.com ([162.62.57.49])
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1wyUx1-0000Yz-CC
+ for qemu-riscv@nongnu.org; Mon, 24 Aug 2026 09:42:59 -0400
+Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <yfliu2008@qq.com>)
- id 1wyUrb-0002WP-30; Mon, 24 Aug 2026 09:37:25 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
- t=1787578624; bh=jg5CUouK14mGBzp2YS5Y1LwEzxHi24z/ZhdmNEMp0hc=;
- h=Subject:From:To:Cc:Date:In-Reply-To:References;
- b=Eme2I/VKspRALP5GLILryimykDXyvAQWrOkV9X4w8+bv8upeZee5ejZ/gI12ERtk0
- A3bB+d9fSYLwDKYfKIaVihF0pimyXvrRlrSGSd1AhaQ3hfHmL8OJ6wjM4hut1iFa8j
- 6uXhELk7o7plE7SNwufy1s9yZe71c14rLL/D1NEw=
-Received: from [192.168.1.10] ([118.116.33.165])
- by newxmesmtplogicsvrszb51-0.qq.com (NewEsmtp) with SMTP
- id 9412AAF3; Mon, 24 Aug 2026 21:37:01 +0800
-X-QQ-mid: xmsmtpt1787578621tniu2lfd9
-Message-ID: <tencent_2F7940BF03327177E3876829A8B51724AF07@qq.com>
-X-QQ-XMAILINFO: MZtEYADUG4AgoH4elKpmsrrmNxWHUL/alUL1TyMJVEn6qHBecDELiTF5plk7EQ
- ezPdmiZJ/0KBZp6UrN0k8W31Qc2LmMgrvHfRwoW5I8Iz361TSGTMpg+BG17O2UAVtZWAsBB6MoUe
- vPY3nPlHO6oTBrrc096mFUtPQV43ajuD2+dhX9S/QshtJRZIIGqfdo2vdMioyQR8j0YFMpYYVzpH
- QuT55q+x34Lbfa7BTdepgd367xQgiP4dWOjzHFv3S+ujGs/85apHr6VtMHctCtP019jaSAsze2KC
- 41pyTVzBAZmHt/sQ5nxpSOTugNMwuJirOHrGJfodANM8hORkQguiPQMsxi58ltYlq7Ssp7JHHNSX
- LS8UJv/OtoEKdOgiID69DaesJHil+o+e39W9PqafWM5rgXOIohJx/FUkgpNZb3/Zn7png6dIRHqR
- Ye7aTu4jGgTEx/+PaTTH/8p1OuVHM8ek/Tadsd9q10Cfgt4kaykNDzOJYAnTCW5JXYP4uS2KuHV3
- Yy9c85vQGPMynbsqB3FeDy/S612A+bwozvLAhryX9T+U4znneATYOX76lhx2fvjRTEYGiCQfy4Cp
- nsg5t2CRt/5DCaYz4nkInvSr0q40VYshii6bUugE+VEWBeEUmoqjwqD2ee/iHvX6qXWGW90niSP2
- TX2kufplP7c8kgFzyrMGeE/9OrZw0Es+UQRmobu7wvojkLMAZ0JBQYuC9vqsojBaKimX3OJVlPrd
- 97hVPtLIS8RhToRINVLjCW9Yr7K5sw83b9G5KUonb9Pef9qndnsrjKqXUcRDrsamJfA+RxDwtx8U
- RQz6kUcgfCRlOzlZH143/8nDTRu5VKgM7H9k8mGAI7C+MAfrqXZey8oHWJAiAFA78DunlW1jqKUP
- NVy2JZiUE0oJLvYKYKDZVhOZlX4UjBYEuiNB+FzKP8amAPD6xs+GQLRgUxfiaLBGCP+kBtWLrAbh
- 7g7TKlUvP1zVR4uxVXxzUKeX+vqbaERLH1qyuVAEoY8yNHPDdcFXYZ/4g7m/nSjbrdqj1cPcG91M
- isyeoWySBblkHQdrtoNTgLsZzG4whJa7YSI8kvxI3yBnllySoc
-X-QQ-XMRINFO: NS+P29fieYNwqS3WCnRCOn9D1NpZuCnCRA==
-X-OQ-MSGID: <81571843d9c1e13c682bc494d287fd7d9bd79946.camel@qq.com>
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1wyUwy-0004pW-R8
+ for qemu-riscv@nongnu.org; Mon, 24 Aug 2026 09:42:59 -0400
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 67OCv52i2006635
+ for <qemu-riscv@nongnu.org>; Mon, 24 Aug 2026 13:42:55 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ fIUvQHKn5dD803IC0DXQ9TIMC+mBHa72mVMHV5/Z07k=; b=aGb/3niwsC8C5F3I
+ SQo7LbnzBimoEhQgo2qEv3uG0pXf5jotq4vBLTbDyc3cgM4tByyvfpOsEH0NTVhw
+ fN8JyqOKGy+XmDlkjLhV+l4iij3G9nzNCz6Bmh8qQlhyZz5fesRlvz1BtdnRae2E
+ 47yTqm3VkQcUjcEW3gmFL/33ip0Wx8sp1HVdBSxJYs3SVJkIh+kG49Bg+Q8SHU3i
+ ELl3IsVyPFGfX7FsmvHRQ/sdJGo7Le3Yp2BfNcqFZtLNP2o7JsIa3SuU326DIrRf
+ p4i1mb5p2keaMR7r+VxBIwbZPq2j44XSLeUiPWhgywGae67YpuL7wHoXN71980vX
+ HbAuWQ==
+Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com
+ [209.85.160.198])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g8kv78ux5-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Mon, 24 Aug 2026 13:42:54 +0000 (GMT)
+Received: by mail-qt1-f198.google.com with SMTP id
+ d75a77b69052e-5276aa86d00so39180271cf.2
+ for <qemu-riscv@nongnu.org>; Mon, 24 Aug 2026 06:42:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1787578974; x=1788183774; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=fIUvQHKn5dD803IC0DXQ9TIMC+mBHa72mVMHV5/Z07k=;
+ b=AfpW4MRsW9PqIj+DUgFyQ1yhIypqvJYyzi00r1bTEIJbgExVUmimmwrdvMJA6p7Hey
+ OH0+XroVQz2eef6QAGpFScMJHQnC+LySa2/Ik9Hn5YYNd1SRf9wdX8kYOnVUBQvVOmxe
+ K8c4LIEcC53deBIqIZScMnyZyqMmb7t+SUO7/3duyEiTQUMk88yu6VD8gN66h+hTZIWc
+ +ag73IrXlpCdihDrX/nlKCZfT0uwDZ9RV/UmTYpNfP84XyrWjKJ8C9lS0Aa+8WiYsgcz
+ icw1uQLeVZqhJdYfwmDsZlCtVfS7Ibljxj06LdFZUlG+9hB9Q57vwOqv0lHMPG0CZ5rv
+ C0Pw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1787578974; x=1788183774;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=fIUvQHKn5dD803IC0DXQ9TIMC+mBHa72mVMHV5/Z07k=;
+ b=VjRelooW3UeotE5+txCMLqnjpeq6YSZjVsPRSdAyAOKVwY59LTMD8yeRRR9/LDUhGv
+ KWsfANhWl90yifagy8fMnaQ67ATNBxdDWmwRTcQH8j4luRPq7LwQn5zT4zTY/dqGluQP
+ 8Oa5ohELVG1o/704qSZYGp09wYUldB8FirBXc+jmt12zGMvbI0YgsgcFHYC8zpzhGtNz
+ zYGU51PFVfS4aM+MtEOH9yT7ABdVv8CU1zcZoJAGyipIRIK08zxY2AK58UV4wo6SVkKW
+ J6/mMJ53oa4xD7rxirIHpewo0taNsAucUXCMoVlY5PbalbnFwociPGGHugltLNhzsOm0
+ L3UA==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RrR/zDdqeF5Lrf+pAjWzRBab2NoSqzt8p+uMa9yGf+oeIymWUrk6ceL+w2husXpOjYAU00JzDY7Z+fl@nongnu.org
+X-Gm-Message-State: AFuF++nU895QOue/PIlnb64/YwTW2tWM3TlymXYuAbCDsZ3O2Nxp7MOL
+ Fxe/yPyIoKLp3pm8ber9qtuTzRHa64oGMLhFfTyUaBMWPgMOZBmiPjrDpyMOhLW5Pc+hzXUXjgf
+ SxNqoebhPMmW6QTXBmQxeHs9z6SHnDEWUzPR1H1z7I3fMcg8Zwj777z3uew==
+X-Gm-Gg: AR+sD11LpTJ7h3wmJVAb82ziSN9S7Vg/MuqUvXfy2qLKVYdCdSboxEhal1ENHEs56vz
+ zUAJc5J1Ko2LXh3gFjQvgy1Yywz2H+H9YsbQi0OpSb7k2hipy6KFVx1EWV/mCJSPshbb2quhs83
+ Z4Nk+8coBLCz9SH6yTGuN9g0I0kF/F65Cqi8HLS8FeKL3Uy0jV5d/TaV3XSTKStSOqCvRsnaz3t
+ 9Bkv7DZZkyFWaVMlYLZilqn0VHeocLHb1Rmk0lYT2fh0OTQlSQnIHU/UTdRVucJUIu/QI4+ah0Y
+ CeGFe/TRv7jq8h8zKzih9Z2LFGBMbEsJbM+BG8FO9AlaMKHeWep/k7SxKP2rXyMBcPy71SB/jo+
+ m0b6EvD3KztKedmRMXUrkI0yP+/UiKcb3Yv2/
+X-Received: by 2002:a05:622a:4d49:b0:51c:1132:c80d with SMTP id
+ d75a77b69052e-52df5a024c9mr291449881cf.28.1787578973760; 
+ Mon, 24 Aug 2026 06:42:53 -0700 (PDT)
+X-Received: by 2002:a05:622a:4d49:b0:51c:1132:c80d with SMTP id
+ d75a77b69052e-52df5a024c9mr291449321cf.28.1787578973284; 
+ Mon, 24 Aug 2026 06:42:53 -0700 (PDT)
+Received: from [192.168.68.100] ([189.38.141.232])
+ by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-52e09aae6f4sm48160681cf.16.2026.08.24.06.42.50
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 24 Aug 2026 06:42:52 -0700 (PDT)
+Message-ID: <abd508c4-ddff-4cea-9e5b-a700d572badd@oss.qualcomm.com>
+Date: Mon, 24 Aug 2026 10:42:48 -0300
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v3] riscv/virt: Add optional UART1
-From: Yanfeng Liu <yfliu2008@qq.com>
-To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
- qemu-riscv@nongnu.org
-Cc: qemu-devel@nongnu.org, alistair.francis@wdc.com, 
+To: Yanfeng Liu <yfliu2008@qq.com>, qemu-riscv@nongnu.org
+Cc: qemu-devel@nongnu.org, alistair.francis@wdc.com,
  pierrick.bouvier@oss.qualcomm.com, sunilvl@ventanamicro.com,
- palmer@dabbelt.com,  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com,
+ palmer@dabbelt.com, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com,
  chao.liu.zevorn@gmail.com
-Date: Mon, 24 Aug 2026 21:37:00 +0800
-In-Reply-To: <75d038af-a1a0-460c-9fea-7cca0423a54c@oss.qualcomm.com>
 References: <tencent_4EEBFC805F3E59863BEDC38094EF5A109206@qq.com>
  <75d038af-a1a0-460c-9fea-7cca0423a54c@oss.qualcomm.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: base64
-User-Agent: Evolution 3.44.4-0ubuntu2.1 
-MIME-Version: 1.0
-Received-SPF: pass client-ip=162.62.57.49; envelope-from=yfliu2008@qq.com;
- helo=out162-62-57-49.mail.qq.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ <tencent_2F7940BF03327177E3876829A8B51724AF07@qq.com>
+From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Content-Language: en-US
+In-Reply-To: <tencent_2F7940BF03327177E3876829A8B51724AF07@qq.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Authority-Analysis: v=2.4 cv=Cfg4Irrl c=1 sm=1 tr=0 ts=6a8c4a5e cx=c_pps
+ a=mPf7EqFMSY9/WdsSgAYMbA==:117 a=MCIxunHWmQOg/5OnbzXZaw==:17
+ a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
+ a=dZbOZ2KzAAAA:8 a=Sv_bN-GAQshgOjlYIWUA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=dawVfQjAaf238kedN5IG:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODI0MDExNSBTYWx0ZWRfXzh1SyU0MpTxC
+ e/vWGhHHbwDA/AefD7SG5eYX+ec9uO7m6b9pQwzAr5nYetFMYSHr1GDpir0zaNBSnBF6WL0m/Ec
+ ipEWDR40v1TMNFKbh3qXfFmR46Dtcko=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI0MDExNSBTYWx0ZWRfX1iXeBohJcIbg
+ vOADpUOh4e4is/2CBH7gPXFDY48mivIGsDjAZwa8ReEk4JP6vI4eWyaj0m0t0DclMNqJzg6FLkD
+ oiMUEt3Nz8588SV0P1hA3U4zFjj4NplBZbWx03jRo1u4AFlZ7QBMoRBMrAFwNEllhRcHJScleTX
+ jHm4tQzjt2vggz49AhET79zvaR0QXrCDvJsUZPYtDao4fyVY+pTjfbvyCue18Iqp/NEXbTiGjgQ
+ 3Skf955XLFTwiKYDPuS9mD4MLPL15XlBRDCQ0IZpz1w8v9R1Jsv8ZWwhBpHtA3o9rh4yqQC+nkF
+ LcsRJcSiFlEBYgYSW1BZLOEHQLJ8glv8f50++ZUjkgzrHgFScWqVqt5M1UYi6Se47S59pytgiDG
+ rinM+w23O+O+FW6oDKQlO439z5QxyKCWybJxIHs6UReRiwVc+pk3WThc8dBGu9Tcgr118kWCwnA
+ /L7XWV5vlQMiuiyiA+w==
+X-Proofpoint-ORIG-GUID: dAoaBNnCqTiL0ph0kgK6MpZPFQtCN037
+X-Proofpoint-GUID: dAoaBNnCqTiL0ph0kgK6MpZPFQtCN037
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-24_04,2026-08-24_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ adultscore=0 phishscore=0 impostorscore=0 spamscore=0 suspectscore=0
+ priorityscore=1501 malwarescore=0 clxscore=1015 lowpriorityscore=0
+ bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2608240115
+Received-SPF: pass client-ip=205.220.168.131;
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
+X-Spam_bar: --
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001, HELO_STATIC_HOST=-0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -87,191 +159,294 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-T24gU3VuLCAyMDI2LTA4LTIzIGF0IDE4OjU1IC0wMzAwLCBEYW5pZWwgSGVucmlxdWUgQmFyYm96
-YSB3cm90ZToKPiAKPiAKPiBPbiA3LzE3LzIwMjYgMTE6MTYgUE0sIFlhbmZlbmcgTGl1IHdyb3Rl
-Ogo+ID4gVGhpcyBhZGRzIG9wdGlvbmFsIFVBUlQxIHRvIFJpc2NWIHZpcnQgYm9hcmQgaWYgcmVx
-dWlyZWQgYXQKPiA+IHJ1bnRpbWUgdG8gc2ltcGxpZnkgbXVsdGljb3JlIGRldmVsb3BtZW50Lgo+
-IAo+IENhbiB5b3UgcGxlYXNlIGVsYWJvcmF0ZSBvbiB0aGUgdXNlIGNhc2U/wqAgV2UgY2FuIGFk
-ZCBtdWx0aXBsZSBzZXJpYWwKPiBkZXZpY2VzIGFscmVhZHkuwqAgRS5nLiB0aGlzIHdpbGwgYWRk
-IDQgc2VyaWFsczoKPiAKSSB3YXMgcGxheWluZyBCYW8gaHlwZXJ2aXNvciBhbmQgZm91bmQgdGhh
-dCBoYXZpbmcgYSAybmQgTk1JTyBVQVJUIGNhbgpiYSBoYW5keS4gIFByZXZpb291c2x5IHdoZW4g
-dHJ5aW5nIEFNUCBJIGFkZGVkIDJuZCBNTUlPIFVBUlQgdG8gYWlkCmRlYnVnZ2luZy7CoAoKU2lu
-Y2UgdGhpcyBoYXBwZW5lZCB0byBtZSBhdCBsZWFzdCB0d2ljZSwgSSBhbSB3b25kZXJpbmcgc29t
-ZW9uZSBlbHNlCm1pZ2h0IGFsc28gbmVlZCBpdC4gQmVzaWRlcyBtYW55IHJlYWwgZGV2aWNlcyBo
-YXZlIG11aXRscGxlIFVBUlRzLgoKPiAKPiAKPiAkIC4vYnVpbGQvcWVtdS1zeXN0ZW0tcmlzY3Y2
-NCAtTSB2aXJ0IC0tbm9kZWZhdWx0cyBcCj4gwqDCoMKgwqDCoMKgwqDCoMKgIC1zZXJpYWwgc3Rk
-aW8gXAo+IMKgwqDCoMKgwqDCoMKgwqDCoCAtc2VyaWFsIHRjcDo6NDQ0NCxzZXJ2ZXIsbm93YWl0
-IFwKPiDCoMKgwqDCoMKgwqDCoMKgwqAgLXNlcmlhbCBwdHnCoCBcCj4gwqDCoMKgwqDCoMKgwqDC
-oMKgIC1zZXJpYWwgZmlsZTp1YXJ0NC5sb2cgXAo+IMKgwqDCoMKgwqDCoMKgwqDCoCAtLW5vZ3Jh
-cGhpYwo+IAo+IAo+IFRoZSBkaWZmZXJlbmNlIGhlcmUgaXMgdGhhdCB0aGUgYWRkaXRpb25hbCBz
-ZXJpYWxzIHdvbid0IGhhdmUgbWVtb3J5Cj4gbWFwcGluZ3MKPiBhbmQgZmR0IG5vZGVzLgo+IAoK
-aG93IHRoZXNlIGFkZGl0aW9uYWwgVUFSVHMgY2FuIGJlIHVzZWQgYnkgZ3Vlc3RzIGlmIHRoZXkg
-ZG9udCBoYXZlCk1NSU8/CgoKUmVnYXJkcywKWWFuZmVuZwoKCj4gCj4gVGhhbmtzLAo+IERhbmll
-bAo+IAo+ID4gCj4gPiBOb3RlIHRoYXQgVUFSVDAgcmVtYWlucyBkZWZhdWx0IHNlcmlhbF9oZCgw
-KSBhbmQgaXQgaXM6Cj4gPiAKPiA+IC0gdGhlIGxvd2VzdCBhZGRyZXNzIFVBUlQKPiA+IC0gZmly
-c3Qgc2VyaWFsIGluIERUQgo+ID4gLSBiZWhpbmQgL2FsaWFzZXMvc2VyaWFsMCBpbiBEVEIKPiA+
-IC0gdGhlIC9jaG9zZW4vc3Rkb3V0LXBhdGggaW4gRFRCCj4gPiAKPiA+IE5vdGUgdGhhdCBVQVJU
-MSBpcyBwbGFjZWQgYXQgZGlmZmVyZW50IHBhZ2UgZnJvbSBVQVJUMCB0bwo+ID4gc3VwcG9ydCBw
-YWdlIGxldmVsIGlzb2xhdGlvbi4KPiA+IAo+ID4gU2lnbmVkLW9mZi1ieTogWWFuZmVuZyBMaXUg
-PHlmbGl1MjAwOEBxcS5jb20+Cj4gPiAtLS0KPiA+IMKgIGRvY3Mvc3lzdGVtL3Jpc2N2L3ZpcnQu
-cnN0IHzCoCA1ICsrKystCj4gPiDCoCBody9yaXNjdi92aXJ0LWFjcGktYnVpbGQuYyB8IDEyICsr
-KysrKysrLS0tLQo+ID4gwqAgaHcvcmlzY3YvdmlydC5jwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8
-IDQwICsrKysrKysrKysrKysrKysrKysrKysrKysrKystLS0tLQo+ID4gLS0tLS0KPiA+IMKgIGlu
-Y2x1ZGUvaHcvcmlzY3YvdmlydC5owqDCoMKgIHzCoCAzICsrKwo+ID4gwqAgNCBmaWxlcyBjaGFu
-Z2VkLCA0NSBpbnNlcnRpb25zKCspLCAxNSBkZWxldGlvbnMoLSkKPiA+IAo+ID4gZGlmZiAtLWdp
-dCBhL2RvY3Mvc3lzdGVtL3Jpc2N2L3ZpcnQucnN0Cj4gPiBiL2RvY3Mvc3lzdGVtL3Jpc2N2L3Zp
-cnQucnN0Cj4gPiBpbmRleCA2MDg1MDk3MGNlLi40NWFjNjNhYzc3IDEwMDY0NAo+ID4gLS0tIGEv
-ZG9jcy9zeXN0ZW0vcmlzY3YvdmlydC5yc3QKPiA+ICsrKyBiL2RvY3Mvc3lzdGVtL3Jpc2N2L3Zp
-cnQucnN0Cj4gPiBAQCAtMTYsNyArMTYsNyBAQCBUaGUgYGB2aXJ0YGAgbWFjaGluZSBzdXBwb3J0
-cyB0aGUgZm9sbG93aW5nCj4gPiBkZXZpY2VzOgo+ID4gwqAgKiBDb3JlIExvY2FsIEludGVycnVw
-dG9yIChDTElOVCkKPiA+IMKgICogUGxhdGZvcm0tTGV2ZWwgSW50ZXJydXB0IENvbnRyb2xsZXIg
-KFBMSUMpCj4gPiDCoCAqIENGSSBwYXJhbGxlbCBOT1IgZmxhc2ggbWVtb3J5Cj4gPiAtKiAxIE5T
-MTY1NTAgY29tcGF0aWJsZSBVQVJUCj4gPiArKiBFaXRoZXIgMSBvciAyIE5TMTY1NTAgY29tcGF0
-aWJsZSBVQVJUcwo+ID4gwqAgKiAxIEdvb2dsZSBHb2xkZmlzaCBSVEMKPiA+IMKgICogMSBTaUZp
-dmUgVGVzdCBkZXZpY2UKPiA+IMKgICogOCB2aXJ0aW8tbW1pbyB0cmFuc3BvcnQgZGV2aWNlcwo+
-ID4gQEAgLTI3LDYgKzI3LDkgQEAgVGhlIGh5cGVydmlzb3IgZXh0ZW5zaW9uIGhhcyBiZWVuIGVu
-YWJsZWQgZm9yIHRoZQo+ID4gZGVmYXVsdCBDUFUsIHNvIHZpcnR1YWwKPiA+IMKgIG1hY2hpbmVz
-IHdpdGggaHlwZXJ2aXNvciBleHRlbnNpb24gY2FuIHNpbXBseSBiZSB1c2VkIHdpdGhvdXQKPiA+
-IGV4cGxpY2l0bHkKPiA+IMKgIGRlY2xhcmluZy4KPiA+IMKgIAo+ID4gK1RoZSBzZWNvbmQgVUFS
-VCBvbmx5IGV4aXN0cyBpZiBhIGJhY2tlbmQgaXMgY29uZmlndXJlZCBleHBsaWNpdGx5Cj4gPiAo
-ZS5nLgo+ID4gK3dpdGggYSBzZWNvbmQgYC1zZXJpYWxgIGNvbW1hbmQgbGluZSBvcHRpb24pLgo+
-ID4gKwo+ID4gwqAgSGFyZHdhcmUgY29uZmlndXJhdGlvbiBpbmZvcm1hdGlvbgo+ID4gwqAgLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQo+ID4gwqAgCj4gPiBkaWZmIC0tZ2l0IGEv
-aHcvcmlzY3YvdmlydC1hY3BpLWJ1aWxkLmMgYi9ody9yaXNjdi92aXJ0LWFjcGktCj4gPiBidWls
-ZC5jCj4gPiBpbmRleCA0MTNkNDdkNzBlLi41OTc3NTFjODRhIDEwMDY0NAo+ID4gLS0tIGEvaHcv
-cmlzY3YvdmlydC1hY3BpLWJ1aWxkLmMKPiA+ICsrKyBiL2h3L3Jpc2N2L3ZpcnQtYWNwaS1idWls
-ZC5jCj4gPiBAQCAtMTY5LDExICsxNjksMTEgQEAgc3RhdGljIHZvaWQgYWNwaV9kc2R0X2FkZF9w
-bGljX2FwbGljKEFtbAo+ID4gKnNjb3BlLCB1aW50OF90IHNvY2tldF9jb3VudCwKPiA+IMKgIAo+
-ID4gwqAgc3RhdGljIHZvaWQKPiA+IMKgIGFjcGlfZHNkdF9hZGRfdWFydChBbWwgKnNjb3BlLCBj
-b25zdCBNZW1NYXBFbnRyeSAqdWFydF9tZW1tYXAsCj4gPiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqAgdWludDMyX3QgdWFydF9pcnEpCj4gPiArwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgdWludDMyX3QgdWFydF9pcnEsIGludCB1YXJ0aWR4KQo+
-ID4gwqAgewo+ID4gLcKgwqDCoCBBbWwgKmRldiA9IGFtbF9kZXZpY2UoIkNPTTAiKTsKPiA+ICvC
-oMKgwqAgQW1sICpkZXYgPSBhbWxfZGV2aWNlKCJDT00lZCIsIHVhcnRpZHgpOwo+ID4gwqDCoMKg
-wqDCoCBhbWxfYXBwZW5kKGRldiwgYW1sX25hbWVfZGVjbCgiX0hJRCIsCj4gPiBhbWxfc3RyaW5n
-KCJSU0NWMDAwMyIpKSk7Cj4gPiAtwqDCoMKgIGFtbF9hcHBlbmQoZGV2LCBhbWxfbmFtZV9kZWNs
-KCJfVUlEIiwgYW1sX2ludCgwKSkpOwo+ID4gK8KgwqDCoCBhbWxfYXBwZW5kKGRldiwgYW1sX25h
-bWVfZGVjbCgiX1VJRCIsIGFtbF9pbnQodWFydGlkeCkpKTsKPiA+IMKgIAo+ID4gwqDCoMKgwqDC
-oCBBbWwgKmNycyA9IGFtbF9yZXNvdXJjZV90ZW1wbGF0ZSgpOwo+ID4gwqDCoMKgwqDCoCBhbWxf
-YXBwZW5kKGNycywgYW1sX21lbW9yeTMyX2ZpeGVkKHVhcnRfbWVtbWFwLT5iYXNlLAo+ID4gQEAg
-LTQ3OSw3ICs0NzksMTEgQEAgc3RhdGljIHZvaWQgYnVpbGRfZHNkdChHQXJyYXkgKnRhYmxlX2Rh
-dGEsCj4gPiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoCBtZW1tYXBbVklSVF9BUExJQ19TXS5zaXplLAo+ID4gIlJTQ1Yw
-MDAyIik7Cj4gPiDCoMKgwqDCoMKgIH0KPiA+IMKgIAo+ID4gLcKgwqDCoCBhY3BpX2RzZHRfYWRk
-X3VhcnQoc2NvcGUsICZtZW1tYXBbVklSVF9VQVJUMF0sIFVBUlQwX0lSUSk7Cj4gPiArwqDCoMKg
-IGFjcGlfZHNkdF9hZGRfdWFydChzY29wZSwgJm1lbW1hcFtWSVJUX1VBUlQwXSwgVUFSVDBfSVJR
-LCAwKTsKPiA+ICvCoMKgwqAgaWYgKHMtPnVhcnQxX3ByZXNlbnQpIHsKPiA+ICvCoMKgwqDCoMKg
-wqDCoCBhY3BpX2RzZHRfYWRkX3VhcnQoc2NvcGUsICZtZW1tYXBbVklSVF9VQVJUMV0sIFVBUlQx
-X0lSUSwKPiA+IDEpOwo+ID4gK8KgwqDCoCB9Cj4gPiArCj4gPiDCoMKgwqDCoMKgIGlmICh2aXJ0
-X2lzX2lvbW11X3N5c19lbmFibGVkKHMpKSB7Cj4gPiDCoMKgwqDCoMKgwqDCoMKgwqAgYWNwaV9k
-c2R0X2FkZF9pb21tdV9zeXMoc2NvcGUsICZtZW1tYXBbVklSVF9JT01NVV9TWVNdLAo+ID4gSU9N
-TVVfU1lTX0lSUSk7Cj4gPiDCoMKgwqDCoMKgIH0KPiA+IGRpZmYgLS1naXQgYS9ody9yaXNjdi92
-aXJ0LmMgYi9ody9yaXNjdi92aXJ0LmMKPiA+IGluZGV4IDMzNzc1YTYxZmQuLjQ3MDNhYzU4Zjgg
-MTAwNjQ0Cj4gPiAtLS0gYS9ody9yaXNjdi92aXJ0LmMKPiA+ICsrKyBiL2h3L3Jpc2N2L3ZpcnQu
-Ywo+ID4gQEAgLTk2LDYgKzk2LDggQEAgc3RhdGljIGNvbnN0IE1lbU1hcEVudHJ5IHZpcnRfbWVt
-bWFwW10gPSB7Cj4gPiDCoMKgwqDCoMKgIFtWSVJUX0FQTElDX1NdID3CoMKgwqDCoMKgIHvCoCAw
-eGQwMDAwMDAsIEFQTElDX1NJWkUoVklSVF9DUFVTX01BWCkKPiA+IH0sCj4gPiDCoMKgwqDCoMKg
-IFtWSVJUX1VBUlQwXSA9wqDCoMKgwqDCoMKgwqAgeyAweDEwMDAwMDAwLMKgwqDCoMKgwqDCoMKg
-wqAgMHgxMDAgfSwKPiA+IMKgwqDCoMKgwqAgW1ZJUlRfVklSVElPXSA9wqDCoMKgwqDCoMKgIHsg
-MHgxMDAwMTAwMCzCoMKgwqDCoMKgwqDCoCAweDEwMDAgfSwKPiA+ICvCoMKgwqAgLyogVUFSVDEg
-c3VwcG9ydHMgcGFnZSBpc29sYXRpb24gZnJvbSBVQVJUMCAqLwo+ID4gK8KgwqDCoCBbVklSVF9V
-QVJUMV0gPcKgwqDCoMKgwqDCoMKgIHsgMHgxMDAwYTAwMCzCoMKgwqDCoMKgwqDCoMKgIDB4MTAw
-IH0sCj4gPiDCoMKgwqDCoMKgIFtWSVJUX0ZXX0NGR10gPcKgwqDCoMKgwqDCoCB7IDB4MTAxMDAw
-MDAswqDCoMKgwqDCoMKgwqDCoMKgIDB4MTggfSwKPiA+IMKgwqDCoMKgwqAgW1ZJUlRfRkxBU0hd
-ID3CoMKgwqDCoMKgwqDCoCB7IDB4MjAwMDAwMDAswqDCoMKgwqAgMHg0MDAwMDAwIH0sCj4gPiDC
-oMKgwqDCoMKgIFtWSVJUX0lNU0lDX01dID3CoMKgwqDCoMKgIHsgMHgyNDAwMDAwMCwgVklSVF9J
-TVNJQ19NQVhfU0laRSB9LAo+ID4gQEAgLTE4Niw3ICsxODgsOCBAQCBzdGF0aWMgdm9pZCBjcmVh
-dGVfcGNpZV9pcnFfbWFwKFJJU0NWVmlydFN0YXRlCj4gPiAqcywgdm9pZCAqZmR0LCBjaGFyICpu
-b2RlbmFtZSwKPiA+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoCBGRFRfTUFYX0lOVF9NQVBfV0lEVEhdID0ge307Cj4gPiDCoMKgwqDCoMKgIHVp
-bnQzMl90ICppcnFfbWFwID0gZnVsbF9pcnFfbWFwOwo+ID4gwqAgCj4gPiAtwqDCoMKgIC8qIFRo
-aXMgY29kZSBjcmVhdGVzIGEgc3RhbmRhcmQgc3dpenpsZSBvZiBpbnRlcnJ1cHRzIHN1Y2gKPiA+
-IHRoYXQKPiA+ICvCoMKgwqAgLyoKPiA+ICvCoMKgwqDCoCAqIFRoaXMgY29kZSBjcmVhdGVzIGEg
-c3RhbmRhcmQgc3dpenpsZSBvZiBpbnRlcnJ1cHRzIHN1Y2gKPiA+IHRoYXQKPiA+IMKgwqDCoMKg
-wqDCoCAqIGVhY2ggZGV2aWNlJ3MgZmlyc3QgaW50ZXJydXB0IGlzIGJhc2VkIG9uIGl0J3MgUENJ
-X1NMT1QKPiA+IG51bWJlci4KPiA+IMKgwqDCoMKgwqDCoCAqIChTZWUgcGNpX3N3aXp6bGVfbWFw
-X2lycV9mbigpKQo+ID4gwqDCoMKgwqDCoMKgICoKPiA+IEBAIC04MzIsMjggKzgzNSwzOCBAQCBz
-dGF0aWMgdm9pZCBjcmVhdGVfZmR0X3Jlc2V0KFJJU0NWVmlydFN0YXRlCj4gPiAqcywgdWludDMy
-X3QgKnBoYW5kbGUpCj4gPiDCoCB9Cj4gPiDCoCAKPiA+IMKgIHN0YXRpYyB2b2lkIGNyZWF0ZV9m
-ZHRfdWFydChSSVNDVlZpcnRTdGF0ZSAqcywKPiA+IC3CoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgdWludDMyX3QgaXJxX21taW9fcGhhbmRsZSkK
-PiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqAgdWludDMyX3QgaXJxX21taW9fcGhhbmRsZSwgaW50IG1lbUlkLAo+ID4gaW50IGlycU5vKQo+
-ID4gwqAgewo+ID4gwqDCoMKgwqDCoCBnX2F1dG9mcmVlIGNoYXIgKm5hbWUgPSBOVUxMOwo+ID4g
-wqDCoMKgwqDCoCBNYWNoaW5lU3RhdGUgKm1zID0gTUFDSElORShzKTsKPiA+IMKgIAo+ID4gwqDC
-oMKgwqDCoCBuYW1lID0gZ19zdHJkdXBfcHJpbnRmKCIvc29jL3NlcmlhbEAlIkhXQUREUl9QUkl4
-LAo+ID4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqAgcy0+bWVtbWFwW1ZJUlRfVUFSVDBdLmJhc2UpOwo+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgcy0+bWVtbWFwW21lbUlkXS5iYXNlKTsK
-PiA+IMKgwqDCoMKgwqAgcWVtdV9mZHRfYWRkX3N1Ym5vZGUobXMtPmZkdCwgbmFtZSk7Cj4gPiDC
-oMKgwqDCoMKgIHFlbXVfZmR0X3NldHByb3Bfc3RyaW5nKG1zLT5mZHQsIG5hbWUsICJjb21wYXRp
-YmxlIiwKPiA+ICJuczE2NTUwYSIpOwo+ID4gwqDCoMKgwqDCoCBxZW11X2ZkdF9zZXRwcm9wX3Np
-emVkX2NlbGxzKG1zLT5mZHQsIG5hbWUsICJyZWciLAo+ID4gLcKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgMiwgcy0+bWVtbWFw
-W1ZJUlRfVUFSVDBdLmJhc2UsCj4gPiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCAyLCBzLT5tZW1tYXBbVklSVF9VQVJUMF0u
-c2l6ZSk7Cj4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoCAyLCBzLT5tZW1tYXBbbWVtSWRdLmJhc2UsCj4gPiArwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oCAyLCBzLT5tZW1tYXBbbWVtSWRdLnNpemUpOwo+ID4gwqDCoMKgwqDCoCBxZW11X2ZkdF9zZXRw
-cm9wX2NlbGwobXMtPmZkdCwgbmFtZSwgImNsb2NrLWZyZXF1ZW5jeSIsCj4gPiAzNjg2NDAwKTsK
-PiA+IMKgwqDCoMKgwqAgcWVtdV9mZHRfc2V0cHJvcF9jZWxsKG1zLT5mZHQsIG5hbWUsICJpbnRl
-cnJ1cHQtcGFyZW50IiwKPiA+IGlycV9tbWlvX3BoYW5kbGUpOwo+ID4gwqDCoMKgwqDCoCBpZiAo
-cy0+YWlhX3R5cGUgPT0gVklSVF9BSUFfVFlQRV9OT05FKSB7Cj4gPiAtwqDCoMKgwqDCoMKgwqAg
-cWVtdV9mZHRfc2V0cHJvcF9jZWxsKG1zLT5mZHQsIG5hbWUsICJpbnRlcnJ1cHRzIiwKPiA+IFVB
-UlQwX0lSUSk7Cj4gPiArwqDCoMKgwqDCoMKgwqAgcWVtdV9mZHRfc2V0cHJvcF9jZWxsKG1zLT5m
-ZHQsIG5hbWUsICJpbnRlcnJ1cHRzIiwgaXJxTm8pOwo+ID4gwqDCoMKgwqDCoCB9IGVsc2Ugewo+
-ID4gLcKgwqDCoMKgwqDCoMKgIHFlbXVfZmR0X3NldHByb3BfY2VsbHMobXMtPmZkdCwgbmFtZSwg
-ImludGVycnVwdHMiLAo+ID4gVUFSVDBfSVJRLCAweDQpOwo+ID4gK8KgwqDCoMKgwqDCoMKgIHFl
-bXVfZmR0X3NldHByb3BfY2VsbHMobXMtPmZkdCwgbmFtZSwgImludGVycnVwdHMiLCBpcnFObywK
-PiA+IDB4NCk7Cj4gPiArwqDCoMKgIH0KPiA+ICsKPiA+ICvCoMKgwqAgaWYgKFZJUlRfVUFSVDAg
-PT0gbWVtSWQpIHsKPiA+ICvCoMKgwqDCoMKgwqDCoCBxZW11X2ZkdF9zZXRwcm9wX3N0cmluZyht
-cy0+ZmR0LCAiL2Nob3NlbiIsICJzdGRvdXQtcGF0aCIsCj4gPiBuYW1lKTsKPiA+ICvCoMKgwqDC
-oMKgwqDCoCBxZW11X2ZkdF9zZXRwcm9wX3N0cmluZyhtcy0+ZmR0LCAiL2FsaWFzZXMiLCAic2Vy
-aWFsMCIsCj4gPiBuYW1lKTsKPiA+IMKgwqDCoMKgwqAgfQo+ID4gK30KPiA+IMKgIAo+ID4gLcKg
-wqDCoCBxZW11X2ZkdF9zZXRwcm9wX3N0cmluZyhtcy0+ZmR0LCAiL2Nob3NlbiIsICJzdGRvdXQt
-cGF0aCIsCj4gPiBuYW1lKTsKPiA+IC3CoMKgwqAgcWVtdV9mZHRfc2V0cHJvcF9zdHJpbmcobXMt
-PmZkdCwgIi9hbGlhc2VzIiwgInNlcmlhbDAiLCBuYW1lKTsKPiA+ICtzdGF0aWMgdm9pZCBjcmVh
-dGVfZmR0X3VhcnRzKFJJU0NWVmlydFN0YXRlICpzLCB1aW50MzJfdAo+ID4gaXJxX21taW9fcGhh
-bmRsZSkKPiA+ICt7Cj4gPiArwqDCoMKgIGlmIChzLT51YXJ0MV9wcmVzZW50KSB7Cj4gPiArwqDC
-oMKgwqDCoMKgwqAgY3JlYXRlX2ZkdF91YXJ0KHMsIGlycV9tbWlvX3BoYW5kbGUsIFZJUlRfVUFS
-VDEsCj4gPiBVQVJUMV9JUlEpOwo+ID4gK8KgwqDCoCB9Cj4gPiArwqDCoMKgIGNyZWF0ZV9mZHRf
-dWFydChzLCBpcnFfbW1pb19waGFuZGxlLCBWSVJUX1VBUlQwLCBVQVJUMF9JUlEpOwo+ID4gwqAg
-fQo+ID4gwqAgCj4gPiDCoCBzdGF0aWMgdm9pZCBjcmVhdGVfZmR0X3J0YyhSSVNDVlZpcnRTdGF0
-ZSAqcywKPiA+IEBAIC0xMDIzLDcgKzEwMzYsNyBAQCBzdGF0aWMgdm9pZCBmaW5hbGl6ZV9mZHQo
-UklTQ1ZWaXJ0U3RhdGUgKnMpCj4gPiDCoCAKPiA+IMKgwqDCoMKgwqAgY3JlYXRlX2ZkdF9yZXNl
-dChzLCAmcGhhbmRsZSk7Cj4gPiDCoCAKPiA+IC3CoMKgwqAgY3JlYXRlX2ZkdF91YXJ0KHMsIGly
-cV9tbWlvX3BoYW5kbGUpOwo+ID4gK8KgwqDCoCBjcmVhdGVfZmR0X3VhcnRzKHMsIGlycV9tbWlv
-X3BoYW5kbGUpOwo+ID4gwqAgCj4gPiDCoMKgwqDCoMKgIGNyZWF0ZV9mZHRfcnRjKHMsIGlycV9t
-bWlvX3BoYW5kbGUpOwo+ID4gwqAgfQo+ID4gQEAgLTE1NjcsNiArMTU4MCwxMyBAQCBzdGF0aWMg
-dm9pZCB2aXJ0X21hY2hpbmVfaW5pdChNYWNoaW5lU3RhdGUKPiA+ICptYWNoaW5lKQo+ID4gwqDC
-oMKgwqDCoMKgwqDCoMKgIDAsIHFkZXZfZ2V0X2dwaW9faW4obW1pb19pcnFjaGlwLCBVQVJUMF9J
-UlEpLCAzOTkxOTMsCj4gPiDCoMKgwqDCoMKgwqDCoMKgwqAgc2VyaWFsX2hkKDApLCBERVZJQ0Vf
-TElUVExFX0VORElBTik7Cj4gPiDCoCAKPiA+ICvCoMKgwqAgaWYgKHNlcmlhbF9oZCgxKSkgewo+
-ID4gK8KgwqDCoMKgwqDCoMKgIHNlcmlhbF9tbV9pbml0KHN5c3RlbV9tZW1vcnksIHMtPm1lbW1h
-cFtWSVJUX1VBUlQxXS5iYXNlLAo+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqAgMCwgcWRldl9n
-ZXRfZ3Bpb19pbihtbWlvX2lycWNoaXAsIFVBUlQxX0lSUSksIDM5OTE5MywKPiA+ICvCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgIHNlcmlhbF9oZCgxKSwgREVWSUNFX0xJVFRMRV9FTkRJQU4pOwo+ID4g
-K8KgwqDCoMKgwqDCoMKgIHMtPnVhcnQxX3ByZXNlbnQgPSB0cnVlOwo+ID4gK8KgwqDCoCB9Cj4g
-PiArCj4gPiDCoMKgwqDCoMKgIHN5c2J1c19jcmVhdGVfc2ltcGxlKCJnb2xkZmlzaF9ydGMiLCBz
-LQo+ID4gPm1lbW1hcFtWSVJUX1JUQ10uYmFzZSwKPiA+IMKgwqDCoMKgwqDCoMKgwqDCoCBxZGV2
-X2dldF9ncGlvX2luKG1taW9faXJxY2hpcCwgUlRDX0lSUSkpOwo+ID4gwqAgCj4gPiBkaWZmIC0t
-Z2l0IGEvaW5jbHVkZS9ody9yaXNjdi92aXJ0LmggYi9pbmNsdWRlL2h3L3Jpc2N2L3ZpcnQuaAo+
-ID4gaW5kZXggMThhMmEzMjNhMy4uN2Q1N2M4MjkyZSAxMDA2NDQKPiA+IC0tLSBhL2luY2x1ZGUv
-aHcvcmlzY3YvdmlydC5oCj4gPiArKysgYi9pbmNsdWRlL2h3L3Jpc2N2L3ZpcnQuaAo+ID4gQEAg
-LTU5LDYgKzU5LDcgQEAgc3RydWN0IFJJU0NWVmlydFN0YXRlIHsKPiA+IMKgwqDCoMKgwqAgaW50
-IGFpYV9ndWVzdHM7Cj4gPiDCoMKgwqDCoMKgIGNoYXIgKm9lbV9pZDsKPiA+IMKgwqDCoMKgwqAg
-Y2hhciAqb2VtX3RhYmxlX2lkOwo+ID4gK8KgwqDCoCBib29sIHVhcnQxX3ByZXNlbnQ7Cj4gPiDC
-oMKgwqDCoMKgIE9uT2ZmQXV0byBhY3BpOwo+ID4gwqDCoMKgwqDCoCBjb25zdCBNZW1NYXBFbnRy
-eSAqbWVtbWFwOwo+ID4gwqDCoMKgwqDCoCBzdHJ1Y3QgR1BFWEhvc3QgKmdwZXhfaG9zdDsKPiA+
-IEBAIC03OCw2ICs3OSw3IEBAIGVudW0gewo+ID4gwqDCoMKgwqDCoCBWSVJUX0FQTElDX1MsCj4g
-PiDCoMKgwqDCoMKgIFZJUlRfVUFSVDAsCj4gPiDCoMKgwqDCoMKgIFZJUlRfVklSVElPLAo+ID4g
-K8KgwqDCoCBWSVJUX1VBUlQxLAo+ID4gwqDCoMKgwqDCoCBWSVJUX0ZXX0NGRywKPiA+IMKgwqDC
-oMKgwqAgVklSVF9JTVNJQ19NLAo+ID4gwqDCoMKgwqDCoCBWSVJUX0lNU0lDX1MsCj4gPiBAQCAt
-OTMsNiArOTUsNyBAQCBlbnVtIHsKPiA+IMKgIGVudW0gewo+ID4gwqDCoMKgwqDCoCBVQVJUMF9J
-UlEgPSAxMCwKPiA+IMKgwqDCoMKgwqAgUlRDX0lSUSA9IDExLAo+ID4gK8KgwqDCoCBVQVJUMV9J
-UlEgPSAxMiwKPiA+IMKgwqDCoMKgwqAgVklSVElPX0lSUSA9IDEsIC8qIDEgdG8gOCAqLwo+ID4g
-wqDCoMKgwqDCoCBWSVJUSU9fQ09VTlQgPSA4LAo+ID4gwqDCoMKgwqDCoCBQQ0lFX0lSUSA9IDB4
-MjAsIC8qIDMyIHRvIDM1ICovCgo=
+
+
+On 8/24/2026 10:37 AM, Yanfeng Liu wrote:
+> On Sun, 2026-08-23 at 18:55 -0300, Daniel Henrique Barboza wrote:
+>>
+>>
+>> On 7/17/2026 11:16 PM, Yanfeng Liu wrote:
+>>> This adds optional UART1 to RiscV virt board if required at
+>>> runtime to simplify multicore development.
+>>
+>> Can you please elaborate on the use case?  We can add multiple serial
+>> devices already.  E.g. this will add 4 serials:
+>>
+> I was playing Bao hypervisor and found that having a 2nd NMIO UART can
+> ba handy.  Previoously when trying AMP I added 2nd MMIO UART to aid
+> debugging.
+> 
+> Since this happened to me at least twice, I am wondering someone else
+> might also need it. Besides many real devices have muitlple UARTs.
+
+And that's fine.  In fact I think this patch is already queued for upstream
+so we're going forward with the change.
+
+I was just curious about the second UART mapping being added.  I assume that
+this would be required for OpenSBI and etc to recognize both of them since
+it'll read via DT.
+
+
+Thanks,
+Daniel
+
+
+
+> 
+>>
+>>
+>> $ ./build/qemu-system-riscv64 -M virt --nodefaults \
+>>            -serial stdio \
+>>            -serial tcp::4444,server,nowait \
+>>            -serial pty  \
+>>            -serial file:uart4.log \
+>>            --nographic
+>>
+>>
+>> The difference here is that the additional serials won't have memory
+>> mappings
+>> and fdt nodes.
+>>
+> 
+> how these additional UARTs can be used by guests if they dont have
+> MMIO?
+> 
+> 
+> Regards,
+> Yanfeng
+> 
+> 
+>>
+>> Thanks,
+>> Daniel
+>>
+>>>
+>>> Note that UART0 remains default serial_hd(0) and it is:
+>>>
+>>> - the lowest address UART
+>>> - first serial in DTB
+>>> - behind /aliases/serial0 in DTB
+>>> - the /chosen/stdout-path in DTB
+>>>
+>>> Note that UART1 is placed at different page from UART0 to
+>>> support page level isolation.
+>>>
+>>> Signed-off-by: Yanfeng Liu <yfliu2008@qq.com>
+>>> ---
+>>>    docs/system/riscv/virt.rst |  5 ++++-
+>>>    hw/riscv/virt-acpi-build.c | 12 ++++++++----
+>>>    hw/riscv/virt.c            | 40 ++++++++++++++++++++++++++++-----
+>>> -----
+>>>    include/hw/riscv/virt.h    |  3 +++
+>>>    4 files changed, 45 insertions(+), 15 deletions(-)
+>>>
+>>> diff --git a/docs/system/riscv/virt.rst
+>>> b/docs/system/riscv/virt.rst
+>>> index 60850970ce..45ac63ac77 100644
+>>> --- a/docs/system/riscv/virt.rst
+>>> +++ b/docs/system/riscv/virt.rst
+>>> @@ -16,7 +16,7 @@ The ``virt`` machine supports the following
+>>> devices:
+>>>    * Core Local Interruptor (CLINT)
+>>>    * Platform-Level Interrupt Controller (PLIC)
+>>>    * CFI parallel NOR flash memory
+>>> -* 1 NS16550 compatible UART
+>>> +* Either 1 or 2 NS16550 compatible UARTs
+>>>    * 1 Google Goldfish RTC
+>>>    * 1 SiFive Test device
+>>>    * 8 virtio-mmio transport devices
+>>> @@ -27,6 +27,9 @@ The hypervisor extension has been enabled for the
+>>> default CPU, so virtual
+>>>    machines with hypervisor extension can simply be used without
+>>> explicitly
+>>>    declaring.
+>>>    
+>>> +The second UART only exists if a backend is configured explicitly
+>>> (e.g.
+>>> +with a second `-serial` command line option).
+>>> +
+>>>    Hardware configuration information
+>>>    ----------------------------------
+>>>    
+>>> diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-
+>>> build.c
+>>> index 413d47d70e..597751c84a 100644
+>>> --- a/hw/riscv/virt-acpi-build.c
+>>> +++ b/hw/riscv/virt-acpi-build.c
+>>> @@ -169,11 +169,11 @@ static void acpi_dsdt_add_plic_aplic(Aml
+>>> *scope, uint8_t socket_count,
+>>>    
+>>>    static void
+>>>    acpi_dsdt_add_uart(Aml *scope, const MemMapEntry *uart_memmap,
+>>> -                    uint32_t uart_irq)
+>>> +                    uint32_t uart_irq, int uartidx)
+>>>    {
+>>> -    Aml *dev = aml_device("COM0");
+>>> +    Aml *dev = aml_device("COM%d", uartidx);
+>>>        aml_append(dev, aml_name_decl("_HID",
+>>> aml_string("RSCV0003")));
+>>> -    aml_append(dev, aml_name_decl("_UID", aml_int(0)));
+>>> +    aml_append(dev, aml_name_decl("_UID", aml_int(uartidx)));
+>>>    
+>>>        Aml *crs = aml_resource_template();
+>>>        aml_append(crs, aml_memory32_fixed(uart_memmap->base,
+>>> @@ -479,7 +479,11 @@ static void build_dsdt(GArray *table_data,
+>>>                                     memmap[VIRT_APLIC_S].size,
+>>> "RSCV0002");
+>>>        }
+>>>    
+>>> -    acpi_dsdt_add_uart(scope, &memmap[VIRT_UART0], UART0_IRQ);
+>>> +    acpi_dsdt_add_uart(scope, &memmap[VIRT_UART0], UART0_IRQ, 0);
+>>> +    if (s->uart1_present) {
+>>> +        acpi_dsdt_add_uart(scope, &memmap[VIRT_UART1], UART1_IRQ,
+>>> 1);
+>>> +    }
+>>> +
+>>>        if (virt_is_iommu_sys_enabled(s)) {
+>>>            acpi_dsdt_add_iommu_sys(scope, &memmap[VIRT_IOMMU_SYS],
+>>> IOMMU_SYS_IRQ);
+>>>        }
+>>> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+>>> index 33775a61fd..4703ac58f8 100644
+>>> --- a/hw/riscv/virt.c
+>>> +++ b/hw/riscv/virt.c
+>>> @@ -96,6 +96,8 @@ static const MemMapEntry virt_memmap[] = {
+>>>        [VIRT_APLIC_S] =      {  0xd000000, APLIC_SIZE(VIRT_CPUS_MAX)
+>>> },
+>>>        [VIRT_UART0] =        { 0x10000000,         0x100 },
+>>>        [VIRT_VIRTIO] =       { 0x10001000,        0x1000 },
+>>> +    /* UART1 supports page isolation from UART0 */
+>>> +    [VIRT_UART1] =        { 0x1000a000,         0x100 },
+>>>        [VIRT_FW_CFG] =       { 0x10100000,          0x18 },
+>>>        [VIRT_FLASH] =        { 0x20000000,     0x4000000 },
+>>>        [VIRT_IMSIC_M] =      { 0x24000000, VIRT_IMSIC_MAX_SIZE },
+>>> @@ -186,7 +188,8 @@ static void create_pcie_irq_map(RISCVVirtState
+>>> *s, void *fdt, char *nodename,
+>>>                              FDT_MAX_INT_MAP_WIDTH] = {};
+>>>        uint32_t *irq_map = full_irq_map;
+>>>    
+>>> -    /* This code creates a standard swizzle of interrupts such
+>>> that
+>>> +    /*
+>>> +     * This code creates a standard swizzle of interrupts such
+>>> that
+>>>         * each device's first interrupt is based on it's PCI_SLOT
+>>> number.
+>>>         * (See pci_swizzle_map_irq_fn())
+>>>         *
+>>> @@ -832,28 +835,38 @@ static void create_fdt_reset(RISCVVirtState
+>>> *s, uint32_t *phandle)
+>>>    }
+>>>    
+>>>    static void create_fdt_uart(RISCVVirtState *s,
+>>> -                            uint32_t irq_mmio_phandle)
+>>> +                            uint32_t irq_mmio_phandle, int memId,
+>>> int irqNo)
+>>>    {
+>>>        g_autofree char *name = NULL;
+>>>        MachineState *ms = MACHINE(s);
+>>>    
+>>>        name = g_strdup_printf("/soc/serial@%"HWADDR_PRIx,
+>>> -                           s->memmap[VIRT_UART0].base);
+>>> +                           s->memmap[memId].base);
+>>>        qemu_fdt_add_subnode(ms->fdt, name);
+>>>        qemu_fdt_setprop_string(ms->fdt, name, "compatible",
+>>> "ns16550a");
+>>>        qemu_fdt_setprop_sized_cells(ms->fdt, name, "reg",
+>>> -                                 2, s->memmap[VIRT_UART0].base,
+>>> -                                 2, s->memmap[VIRT_UART0].size);
+>>> +                                 2, s->memmap[memId].base,
+>>> +                                 2, s->memmap[memId].size);
+>>>        qemu_fdt_setprop_cell(ms->fdt, name, "clock-frequency",
+>>> 3686400);
+>>>        qemu_fdt_setprop_cell(ms->fdt, name, "interrupt-parent",
+>>> irq_mmio_phandle);
+>>>        if (s->aia_type == VIRT_AIA_TYPE_NONE) {
+>>> -        qemu_fdt_setprop_cell(ms->fdt, name, "interrupts",
+>>> UART0_IRQ);
+>>> +        qemu_fdt_setprop_cell(ms->fdt, name, "interrupts", irqNo);
+>>>        } else {
+>>> -        qemu_fdt_setprop_cells(ms->fdt, name, "interrupts",
+>>> UART0_IRQ, 0x4);
+>>> +        qemu_fdt_setprop_cells(ms->fdt, name, "interrupts", irqNo,
+>>> 0x4);
+>>> +    }
+>>> +
+>>> +    if (VIRT_UART0 == memId) {
+>>> +        qemu_fdt_setprop_string(ms->fdt, "/chosen", "stdout-path",
+>>> name);
+>>> +        qemu_fdt_setprop_string(ms->fdt, "/aliases", "serial0",
+>>> name);
+>>>        }
+>>> +}
+>>>    
+>>> -    qemu_fdt_setprop_string(ms->fdt, "/chosen", "stdout-path",
+>>> name);
+>>> -    qemu_fdt_setprop_string(ms->fdt, "/aliases", "serial0", name);
+>>> +static void create_fdt_uarts(RISCVVirtState *s, uint32_t
+>>> irq_mmio_phandle)
+>>> +{
+>>> +    if (s->uart1_present) {
+>>> +        create_fdt_uart(s, irq_mmio_phandle, VIRT_UART1,
+>>> UART1_IRQ);
+>>> +    }
+>>> +    create_fdt_uart(s, irq_mmio_phandle, VIRT_UART0, UART0_IRQ);
+>>>    }
+>>>    
+>>>    static void create_fdt_rtc(RISCVVirtState *s,
+>>> @@ -1023,7 +1036,7 @@ static void finalize_fdt(RISCVVirtState *s)
+>>>    
+>>>        create_fdt_reset(s, &phandle);
+>>>    
+>>> -    create_fdt_uart(s, irq_mmio_phandle);
+>>> +    create_fdt_uarts(s, irq_mmio_phandle);
+>>>    
+>>>        create_fdt_rtc(s, irq_mmio_phandle);
+>>>    }
+>>> @@ -1567,6 +1580,13 @@ static void virt_machine_init(MachineState
+>>> *machine)
+>>>            0, qdev_get_gpio_in(mmio_irqchip, UART0_IRQ), 399193,
+>>>            serial_hd(0), DEVICE_LITTLE_ENDIAN);
+>>>    
+>>> +    if (serial_hd(1)) {
+>>> +        serial_mm_init(system_memory, s->memmap[VIRT_UART1].base,
+>>> +            0, qdev_get_gpio_in(mmio_irqchip, UART1_IRQ), 399193,
+>>> +            serial_hd(1), DEVICE_LITTLE_ENDIAN);
+>>> +        s->uart1_present = true;
+>>> +    }
+>>> +
+>>>        sysbus_create_simple("goldfish_rtc", s-
+>>>> memmap[VIRT_RTC].base,
+>>>            qdev_get_gpio_in(mmio_irqchip, RTC_IRQ));
+>>>    
+>>> diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
+>>> index 18a2a323a3..7d57c8292e 100644
+>>> --- a/include/hw/riscv/virt.h
+>>> +++ b/include/hw/riscv/virt.h
+>>> @@ -59,6 +59,7 @@ struct RISCVVirtState {
+>>>        int aia_guests;
+>>>        char *oem_id;
+>>>        char *oem_table_id;
+>>> +    bool uart1_present;
+>>>        OnOffAuto acpi;
+>>>        const MemMapEntry *memmap;
+>>>        struct GPEXHost *gpex_host;
+>>> @@ -78,6 +79,7 @@ enum {
+>>>        VIRT_APLIC_S,
+>>>        VIRT_UART0,
+>>>        VIRT_VIRTIO,
+>>> +    VIRT_UART1,
+>>>        VIRT_FW_CFG,
+>>>        VIRT_IMSIC_M,
+>>>        VIRT_IMSIC_S,
+>>> @@ -93,6 +95,7 @@ enum {
+>>>    enum {
+>>>        UART0_IRQ = 10,
+>>>        RTC_IRQ = 11,
+>>> +    UART1_IRQ = 12,
+>>>        VIRTIO_IRQ = 1, /* 1 to 8 */
+>>>        VIRTIO_COUNT = 8,
+>>>        PCIE_IRQ = 0x20, /* 32 to 35 */
+> 
 
 
