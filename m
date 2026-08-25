@@ -4,91 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A65CC61DBE
-	for <qemu-riscv@archiver.kernel.org>; Tue, 25 Aug 2026 16:56:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D40AC61DBC
+	for <qemu-riscv@archiver.kernel.org>; Tue, 25 Aug 2026 17:12:49 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wyuR8-0007Y7-Pc; Tue, 25 Aug 2026 12:55:46 -0400
+	id 1wyugx-0003o4-I9; Tue, 25 Aug 2026 13:12:07 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1wyuQx-0007WK-UO
- for qemu-riscv@nongnu.org; Tue, 25 Aug 2026 12:55:35 -0400
-Received: from mail-yw1-x1130.google.com ([2607:f8b0:4864:20::1130])
+ id 1wyugv-0003mc-It
+ for qemu-riscv@nongnu.org; Tue, 25 Aug 2026 13:12:05 -0400
+Received: from mail-yw1-x1132.google.com ([2607:f8b0:4864:20::1132])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1wyuQs-00074o-MZ
- for qemu-riscv@nongnu.org; Tue, 25 Aug 2026 12:55:35 -0400
-Received: by mail-yw1-x1130.google.com with SMTP id
- 00721157ae682-855de2d0d4dso403657b3.0
- for <qemu-riscv@nongnu.org>; Tue, 25 Aug 2026 09:55:26 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1787676925; cv=none;
+ id 1wyugs-0001gO-5x
+ for qemu-riscv@nongnu.org; Tue, 25 Aug 2026 13:12:05 -0400
+Received: by mail-yw1-x1132.google.com with SMTP id
+ 00721157ae682-852ee3bb0c3so30511267b3.3
+ for <qemu-riscv@nongnu.org>; Tue, 25 Aug 2026 10:12:01 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1787677921; cv=none;
  d=google.com; s=arc-20260327;
- b=ntalpEjDxoZ6YVj7qcFJ5OlPOwkss1NP7L42UKW5w8ofHrflb6Ge1R+CI3WEpGXF35
- vM7eJbWI4MlcgvpWQVGa/T167XE012y6xIzo/jz4hwb19Dq3U3cQp7V+DdApGUwp463v
- EvIU7QPD3CDw+buzxRwzYwJbSngo5xBtTTWvLfQqWWab08L1y2WnRoyItfVWxq2PcQAZ
- IIJ4XpZx5DZt0dXFlHK2nngt3l4biA3PS4yJR5Ew7LngcRRWW3iQpxjzkApDAi2wDrBn
- 9Z1+ijQsM6LbWobiIBovKf4gCrOdSYM63aa89Maa+fSaN2QVsU8tVrD9NBd5tj73/VPb
- xOdQ==
+ b=SJQcQrVHG/F6k4X8ToUZP3fqK8A+qeKI6MamfZhsfmGKuOiLVVlJU285eHGPhlcNkj
+ 2w1D5d3AuOSm6IE1e2ZJsYg59ODOCw/YIknFd7r0gv/j+cn2rbZItoevo25ihgtz/oxs
+ qOvxTVx5BJF+pu5rhdZosYzkm3AQ2THX718+diJw9SN0QuueynQtgTzWdNUIEtCeNyGw
+ Y36nQbnwcm9I1H9BtPLR9nBVvf3UAgtLVi7Qqnb5q4sFaWrDmkf5Wwr2rYMdSZ7b6LOa
+ Egd5//ub9LtuNJk43DXH7lFfNDiw3qeRAK49GQWdqX2sT3IQ0Lo8fyp4Izw1rnSCpa4t
+ xL7A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:reply-to:in-reply-to:references
  :mime-version:dkim-signature;
- bh=0PGKUcpisL/PdVjbCIBj9taleCgb4geVsx0pZw5E3b0=;
- fh=aLx5CtsOxDc6ePaQ3LftPfquc8rLxkhsKrvGzS9cyhw=;
- b=Ft3gRl3tw55Nz492xJjjfuwrFla4FcE/ptS5c05swPs2Gy5mS3khZ0WIJX5QSe66Uo
- xdoB7D76OeIxNRdxoFrkXVz9fFyreNyB9MqdFZGv5zH6nBz1HM2kfL1TJ8zLUaoxt2zq
- qdcPP5hyQQmuhwepVu4Vo0QrZUfyXCJ2NZfBt9lix+7uVkbGEd0GFQ3hnkFsVv3wkE9Q
- Z051HTcihYIFDFEp9lroyF+6OPAliFKIBZ1B0pxd3/y7MYBi/7PmhrLBu/GtHByRzC3a
- C7uOCq7LiyNyuvp/ZjVFMaV6UOii3I7JUb2y6JYU5vgXdtBF8UNwoW5K95joKgISZtB0
- aUIA==; darn=nongnu.org
+ bh=aLrwkN2hpeFMupH+bxDa1e3NGhRfPpCK+VUOuYRo6l4=;
+ fh=DLNVeOxxx+WpnscLMny8R8y4+DsYdrurwB2orbeDd0U=;
+ b=TjBslMmHSj/qxFHDYiFSZlXcwT6flgK1Eb276Eu0P4GQGK6dI0soAjBSELAZszFCko
+ axmMxFLRWSGfntnKvZvqXTbJW2WSQywFENF45gHJVmIfZ6YLEHm4mkGQiyaAJmgbP6Hm
+ v1rNwpYOTRsa9KdXKVyCwxBJNTA++adFdpC3YNl8onG55/e4OiHS9Ko8WhGnOHeRsP1M
+ iv6DLYz7Gcv0fUjfeSswBbFR6hCFSgdTCNFVcqi3Jpmj4gCcZTOSDEMOaAgh87yMclmN
+ 5txotLmPpKo+hKq9siud3oq65IGfBkHkqf6k13Hmrm6mTy3ja9ZFzKcdC8YdB332Oyo6
+ hKSw==; darn=nongnu.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1787676925; x=1788281725; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1787677921; x=1788282721; darn=nongnu.org;
  h=content-type:cc:to:subject:message-id:date:from:reply-to
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=0PGKUcpisL/PdVjbCIBj9taleCgb4geVsx0pZw5E3b0=;
- b=aqXc2a5bbAivHOjMse/rWLaE8J+/HniBJpk+4Xft1aOae3fpCwHmYUBcMFXgkFTsoQ
- Cy6N76XE95LzTe0gXjugPyDow+fjE6soUaHFXaOKqFBcY5qQf4ux7aUZ3YV86l528lJG
- liHgeQcjsbxgb2bZ+cYrrlkWn7raDkevMP5U4EAM+zBqEvNBK479CYTOpg3Qwa7Q1JFd
- gE/C/aEwC9Z1fp0nwpCQaQp/Yr6hGGeGRDgQF4Q9FIBD04P7MfHPv2nZ44KzhGcT4we2
- VQSYAhhkNNHfKqrNN03uTzwOaQe0+QGckdZlU6WZ7+bOM2XDIibmeOp87dI5XAGNotBy
- UaCw==
+ bh=aLrwkN2hpeFMupH+bxDa1e3NGhRfPpCK+VUOuYRo6l4=;
+ b=ZvzPECkQqnHgJmUBIIkiho69Nqg+7HV/pb1nfkaEDZEoU95VheTxMUucmx7J6C0gn7
+ lBPFkSmcQEBG+3vzwShj8ry0FCLRQv7vWhN83aW7ugQOuePvnjAdavbaW449aH6GpuLZ
+ DK6duT39/VFfyLBfoUrrBAEOdpEScDImlZ/Yzez4E9Ia4n3ovJTsQorbURXwR7gbWM84
+ FrjAlCcdS5sBJnHTSAjgGJp0grLlQcAGBgKP8v4JCUbnUbUri62YgBsme8QB0b1+RLTP
+ UEbFUp9rTbIWCgZIeNUNbxzqX5HLXk49mpVMC3CUnIrnimi5bu5qmlTic32mKe4oJpwn
+ dfHg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787676925; x=1788281725;
+ d=1e100.net; s=20251104; t=1787677921; x=1788282721;
  h=content-type:cc:to:subject:message-id:date:from:reply-to
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=0PGKUcpisL/PdVjbCIBj9taleCgb4geVsx0pZw5E3b0=;
- b=ZRt4Ce7RvKjuRctjDsBfR6Ve+iPxkn1bnxhBvbyZDU7DLN+s7Ob/ZqS/SMv4vNQyRz
- r4W+BcSxdaLakLpOEKkADw7VBp8tv+rMm+jeKTHmMXA+qh+sGeWRBSwCVOLCylHooyLB
- 7EZRI9jolhGuv9Ng5WYdw2bxd1UZ5pgeDupe5qLKcj0Cu1F6X2ex3WbUV0SQRyusvlBD
- XE642ZmVYPuLEQv7StV0SiMTr062we6qPCUWCMhPiRNOMkqyLn12NpiYIYC8uJyQ2wxx
- 6mn/rQ868kNcDpQRvkYSWYPF30QnYD0l7cv8zP1ZEJH8nOf2hxCmHMeCf/oc2ptuNhly
- 9eAA==
+ bh=aLrwkN2hpeFMupH+bxDa1e3NGhRfPpCK+VUOuYRo6l4=;
+ b=icdmZG3HQY6YY6etWN/hKmTj13zvv0e24rrzGuwuIX2TAJ7++09BBvmB631tZPI/tT
+ GWgHouunI4TZQODnHZah3PmxLP5tjRYubePHiKmfWjqBDUmrxqHVLRIOf16+lAZj9fXV
+ 01AURwj109LCiynyMeGwW0dExaula799558dir2u7Z61G14fmsL/VtCD/Gfaf3s+Vlah
+ rqj+PVIxuv2a0rOEAWwIx/TCtsjcpV8VnlF8P2/8N8vyvoJuFJKczIvmvmkFVt83HH18
+ agpaCIe6VR5Fp6RqyoSBGSuyuX9el4gW60VokLVC9vnvvC6m8SpALCxgUsGrK7HDC4Iz
+ EYKA==
 X-Forwarded-Encrypted: i=1;
- AHgh+RpZ+8OHhBxvygZ25Ctp2/uJaSNNFCR2YI6RwqfCDEG2DU/xV1WVCMnvH8mXI/Me6vgvVuY5+yaJoUjx@nongnu.org
-X-Gm-Message-State: AFuF++nAoZm2+PW7vcBAk0PK1nxwBC0/2e6Pbz1lKIdOweBKyh+4i1pK
- vKFIJT5UzHHk5rpWQVpD7nn13Pg15PWPV+KHKsrYhv8OmJ0q8OxY0+RQySnhNTSj1406vqlBPiv
- WYTLdA+0rsA70XqgsuByTtJCyK3kgDL4=
-X-Gm-Gg: AR+sD11NP1yZMNBFWat+rQce1e/I3gKEIm1Wh6YnRYfiozfeQjmALJlu5Yds+mLrJ/0
- WEJqXAEDLOmy/0fklt7XkQLJIbCak9IVwHrL6GksNHzV9yoP9YTT0ATsO/9VcVA3h+vHmGXmPH3
- w8d5hO/LOmOQMCJhUQMHLWMD9LruocT2ZOvGJ1mAUBm9RmYilXJf6CBBaFFx+Ma3HzciJmR9YDN
- N1RcootWd8/rO+7oeY63oSdfB/WimqZZ2DmkpknOHZulriEJiAO4kL4J0B9AWxzuTunqMn7Ioox
- HR0rQ501QV6Wpl3PI1DtzUZGe/mLE6i7i9aFV2eJqMmE
-X-Received: by 2002:a05:690c:30e:b0:81e:f337:494b with SMTP id
- 00721157ae682-85470beb834mr39361027b3.8.1787676924940; Tue, 25 Aug 2026
- 09:55:24 -0700 (PDT)
+ AHgh+RoODKyPjcdji8+N7Yboazwz/GwZ3FVMQ4rwaGlGtJe7eVaBEEdDtvjL4xozFj5yQwKZ/rppFDBPTx5W@nongnu.org
+X-Gm-Message-State: AFuF++mHb0r9OCmuO3zKX4jR+dXH91gKL7ZJAiCN2KPx8m5KghMsqTzj
+ ZrMFC0lOY7XVXbAU2A503GrhcuJGvdlr2Yt2aGlj/8Mr8TWb/cgIyRkck4WjqRTr4okc4EBD68h
+ XYpmQT9HQVzb8oHfoX6Hg8QZ2+NWtiuA=
+X-Gm-Gg: AR+sD13oX+tLt4+38dmmIoMYFKgjCfqV8/h8o+JGIsfz9BF3sjW3VxhMSrjp5XW41JY
+ ktmAJf9Uj3b7rj3gmdfadyP32vuHT4itccQWySmk8F4TErIWkqyktneT6+hKc6NHM0X7/kd1eHZ
+ x+NwXxTC5ittI03JxAkpwdiqRdrmiYpGHWSr092bPHe1PHLhcxYGS64D8ooLdl8za0YgQyHQCEN
+ /BMCWrQ0UEi1jQiEPZ2SezRCFTSbq0dyG3JCADDcZjfeepl0jjXhXuCCw71JY/63BpbxiG13yA4
+ 7jc4OWqfh31KtFl3mc9TiNiAbvIBCNdDLU5/t7ZJ94/G
+X-Received: by 2002:a05:690c:a701:b0:81e:c736:acce with SMTP id
+ 00721157ae682-8574173375fmr1148707b3.32.1787677920679; Tue, 25 Aug 2026
+ 10:12:00 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260823150731.896-1-luoyonggang@gmail.com>
  <ao235Hm8Uovrk0ON@redhat.com>
 In-Reply-To: <ao235Hm8Uovrk0ON@redhat.com>
 From: Yonggang Luo <luoyonggang@gmail.com>
-Date: Wed, 26 Aug 2026 00:55:09 +0800
-X-Gm-Features: AcwNN1XxiiOybUdcnAMhBxhLRl0Ru7IaT7l5U8Ezqkmoe0-ZJG7jflEoexKYMDY
-Message-ID: <CAE2XoE-EJQH7c3TWvpioa7yokNR6cf6pGMjZ2e001yU4-F7rag@mail.gmail.com>
+Date: Wed, 26 Aug 2026 01:11:46 +0800
+X-Gm-Features: AcwNN1W7IegOOQAdYSNJRFaa-idk915Db0vwA2saIsvqm3MO8VJAnZIhPjlE8MI
+Message-ID: <CAE2XoE-Y==KCjy8i9yUmivHs6J-zdVmpbCNRs66R-OsOEdhU=g@mail.gmail.com>
 Subject: Re: [PATCH 00/12] single-binary: link ARM and RISC-V into qemu-system
 To: =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>
 Cc: qemu-devel@nongnu.org, Xianglai Li <lixianglai@loongson.cn>, 
@@ -118,16 +118,16 @@ Cc: qemu-devel@nongnu.org, Xianglai Li <lixianglai@loongson.cn>,
  =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>, 
  Matthew Rosato <mjrosato@linux.ibm.com>, Weiwei Li <liwei1518@gmail.com>, 
  Darren Kenny <darren.kenny@oracle.com>
-Content-Type: multipart/alternative; boundary="00000000000015957c0659e1f89d"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1130;
- envelope-from=luoyonggang@gmail.com; helo=mail-yw1-x1130.google.com
-X-Spam_score_int: -10
-X-Spam_score: -1.1
-X-Spam_bar: -
-X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Content-Type: multipart/alternative; boundary="0000000000006f5cae0659e2333c"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1132;
+ envelope-from=luoyonggang@gmail.com; helo=mail-yw1-x1132.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- FREEMAIL_REPLYTO=1, HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=no autolearn_force=no
+ HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -144,9 +144,13 @@ Reply-To: luoyonggang@gmail.com
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---00000000000015957c0659e1f89d
+--0000000000006f5cae0659e2333c
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
+
+The github branch I built locally
+
+https://github.com/lygstate/qemu/tree/s11.1-riscv-arm
 
 On Tue, Aug 25, 2026 at 11:42=E2=80=AFPM Daniel P. Berrang=C3=A9 <berrange@=
 redhat.com>
@@ -166,16 +170,7 @@ omm.com/
 > Do you have a public git branch somewhere with this series ? I'm
 > having trouble getting either this series or Pierrick's to cleanly
 > apply at any point to test it.
-
-
-https://patchew.org/QEMU/20260823150731.896-1-luoyonggang@gmail.com/
-
-you can use git patchew do it
-
-git fetch https://github.com/patchew-project/qemu tags/patchew/
-20260823150731.896-1-luoyonggang@gmail.com
-
-a>
+>
 >
 > With regards,
 > Daniel
@@ -194,41 +189,37 @@ Yours
     sincerely,
 Yonggang Luo
 
---00000000000015957c0659e1f89d
+--0000000000006f5cae0659e2333c
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr"><br><br>On Tue, Aug 25, 2026 at 11:42=E2=80=AFPM Daniel P.=
- Berrang=C3=A9 &lt;<a href=3D"mailto:berrange@redhat.com">berrange@redhat.c=
-om</a>&gt; wrote:<br>&gt;<br>&gt; On Sun, Aug 23, 2026 at 11:07:18PM +0800,=
- Yonggang Luo wrote:<br>&gt; &gt; This series produces one qemu-system bina=
-ry that can run ARM (32 and 64)<br>&gt; &gt; and RISC-V (32 and 64, little-=
- and big-endian TargetInfo). It follows<br>&gt; &gt; Pierrick Bouvier&#39;s=
- merged series &quot;single-binary: implement dynamic<br>&gt; &gt; filterin=
-g for machine types&quot;:<br>&gt; &gt;<br>&gt; &gt; =C2=A0 <a href=3D"http=
-s://patchew.org/QEMU/20260724000948.234657-1-pierrick.bouvier@oss.qualcomm.=
-com/">https://patchew.org/QEMU/20260724000948.234657-1-pierrick.bouvier@oss=
-.qualcomm.com/</a><br>&gt;<br>&gt; Do you have a public git branch somewher=
-e with this series ? I&#39;m<br>&gt; having trouble getting either this ser=
-ies or Pierrick&#39;s to cleanly<br>&gt; apply at any point to test it.<br>=
-<br><br><a href=3D"https://patchew.org/QEMU/20260823150731.896-1-luoyonggan=
-g@gmail.com/">https://patchew.org/QEMU/20260823150731.896-1-luoyonggang@gma=
-il.com/</a><br><br>you can use git patchew do it <br><br><div>git fetch <a =
-href=3D"https://github.com/patchew-project/qemu">https://github.com/patchew=
--project/qemu</a> tags/patchew/<a href=3D"mailto:20260823150731.896-1-luoyo=
-nggang@gmail.com">20260823150731.896-1-luoyonggang@gmail.com</a><br><br>a&g=
-t;<br>&gt;<br>&gt; With regards,<br>&gt; Daniel<br>&gt; --<br>&gt; |: <a hr=
-ef=3D"https://berrange.com">https://berrange.com</a> =C2=A0 =C2=A0 =C2=A0 ~=
-~ =C2=A0 =C2=A0 =C2=A0 =C2=A0<a href=3D"https://hachyderm.io/@berrange">htt=
-ps://hachyderm.io/@berrange</a> :|<br>&gt; |: <a href=3D"https://libvirt.or=
-g">https://libvirt.org</a> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0~~ =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0<a href=3D"https://entangle-photo.org">https://enta=
-ngle-photo.org</a> :|<br>&gt; |: <a href=3D"https://pixelfed.art/berrange">=
-https://pixelfed.art/berrange</a> =C2=A0 ~~ =C2=A0 =C2=A0<a href=3D"https:/=
-/fstop138.berrange.com">https://fstop138.berrange.com</a> :|<br>&gt;<br><br=
-><br>--<br>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=E6=AD=A4=E8=87=B4<br>=E7=A4=
-=BC<br>=E7=BD=97=E5=8B=87=E5=88=9A<br>Yours<br>=C2=A0 =C2=A0 sincerely,<br>=
-Yonggang Luo</div></div>
+<div dir=3D"ltr">The github branch I built locally=C2=A0<div><br></div><div=
+><a href=3D"https://github.com/lygstate/qemu/tree/s11.1-riscv-arm">https://=
+github.com/lygstate/qemu/tree/s11.1-riscv-arm</a><br><br>On Tue, Aug 25, 20=
+26 at 11:42=E2=80=AFPM Daniel P. Berrang=C3=A9 &lt;<a href=3D"mailto:berran=
+ge@redhat.com">berrange@redhat.com</a>&gt; wrote:<br>&gt;<br>&gt; On Sun, A=
+ug 23, 2026 at 11:07:18PM +0800, Yonggang Luo wrote:<br>&gt; &gt; This seri=
+es produces one qemu-system binary that can run ARM (32 and 64)<br>&gt; &gt=
+; and RISC-V (32 and 64, little- and big-endian TargetInfo). It follows<br>=
+&gt; &gt; Pierrick Bouvier&#39;s merged series &quot;single-binary: impleme=
+nt dynamic<br>&gt; &gt; filtering for machine types&quot;:<br>&gt; &gt;<br>=
+&gt; &gt; =C2=A0 <a href=3D"https://patchew.org/QEMU/20260724000948.234657-=
+1-pierrick.bouvier@oss.qualcomm.com/">https://patchew.org/QEMU/202607240009=
+48.234657-1-pierrick.bouvier@oss.qualcomm.com/</a><br>&gt;<br>&gt; Do you h=
+ave a public git branch somewhere with this series ? I&#39;m<br>&gt; having=
+ trouble getting either this series or Pierrick&#39;s to cleanly<br>&gt; ap=
+ply at any point to test it.<br>&gt;<br>&gt;<br>&gt; With regards,<br>&gt; =
+Daniel<br>&gt; --<br>&gt; |: <a href=3D"https://berrange.com">https://berra=
+nge.com</a> =C2=A0 =C2=A0 =C2=A0 ~~ =C2=A0 =C2=A0 =C2=A0 =C2=A0<a href=3D"h=
+ttps://hachyderm.io/@berrange">https://hachyderm.io/@berrange</a> :|<br>&gt=
+; |: <a href=3D"https://libvirt.org">https://libvirt.org</a> =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0~~ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0<a href=3D"https:/=
+/entangle-photo.org">https://entangle-photo.org</a> :|<br>&gt; |: <a href=
+=3D"https://pixelfed.art/berrange">https://pixelfed.art/berrange</a> =C2=A0=
+ ~~ =C2=A0 =C2=A0<a href=3D"https://fstop138.berrange.com">https://fstop138=
+.berrange.com</a> :|<br>&gt;<br><br><br>--<br>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0=E6=AD=A4=E8=87=B4<br>=E7=A4=BC<br>=E7=BD=97=E5=8B=87=E5=88=9A<br>You=
+rs<br>=C2=A0 =C2=A0 sincerely,<br>Yonggang Luo</div></div>
 
---00000000000015957c0659e1f89d--
+--0000000000006f5cae0659e2333c--
 
