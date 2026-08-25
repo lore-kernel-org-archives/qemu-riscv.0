@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35AEDC61DBE
-	for <qemu-riscv@archiver.kernel.org>; Tue, 25 Aug 2026 14:48:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15E73C61DC2
+	for <qemu-riscv@archiver.kernel.org>; Tue, 25 Aug 2026 14:49:05 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wysRK-0000yz-5e; Tue, 25 Aug 2026 10:47:50 -0400
+	id 1wysRM-00010j-4r; Tue, 25 Aug 2026 10:47:52 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <antikostya2@gmail.com>)
- id 1wys31-0002xn-5o
- for qemu-riscv@nongnu.org; Tue, 25 Aug 2026 10:22:44 -0400
-Received: from mail-lj1-x236.google.com ([2a00:1450:4864:20::236])
+ id 1wys38-00030e-De
+ for qemu-riscv@nongnu.org; Tue, 25 Aug 2026 10:22:51 -0400
+Received: from mail-lj1-x232.google.com ([2a00:1450:4864:20::232])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <antikostya2@gmail.com>)
- id 1wys2y-0002Ci-PD
- for qemu-riscv@nongnu.org; Tue, 25 Aug 2026 10:22:42 -0400
-Received: by mail-lj1-x236.google.com with SMTP id
- 38308e7fff4ca-39c95395230so43290321fa.2
- for <qemu-riscv@nongnu.org>; Tue, 25 Aug 2026 07:22:40 -0700 (PDT)
+ id 1wys36-0002FN-Ry
+ for qemu-riscv@nongnu.org; Tue, 25 Aug 2026 10:22:50 -0400
+Received: by mail-lj1-x232.google.com with SMTP id
+ 38308e7fff4ca-39f1ac13687so31292251fa.0
+ for <qemu-riscv@nongnu.org>; Tue, 25 Aug 2026 07:22:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1787667759; x=1788272559; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1787667767; x=1788272567; darn=nongnu.org;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=+2Mr/ipwE4dzTL4NJo11V6O3s9hJ8jNTodoTedhmPBg=;
- b=KVbX0sHB9VJ8jiwTS8p3OizFNTY1V+3fQKOJwD+bsMpLE0vzRL02OP41HxuJL00ab8
- SMYFucPGjHZl3MpZdCW9TZ9sPsxBUoX8vWtWOHnQHod1HjcyUU3mDH3Hnx/Z8ooBzMsa
- xehs80kOjQcsG9YsEiJgSUVe3OS6Ih7tjRwcCq8Jhn/gMhqQRcfeB/n4juUwOjMTttO6
- Tdmf9NwagM7jZBVBKILAHbTbOfbDam1zpJ/EoL+ZjTvdm6oTVKYH2DUR+3Y2l0Dv6dxM
- xsshf1FR54/nykrksbhIpQvEK3KeeMyD4EhbFqw0hvVUzPLNgrBWlrdKzOXbq0q/ogMa
- hkyQ==
+ bh=VnF+nDQE1Id2poIia8XWf7bAfaVmktTinQp/48+p2s0=;
+ b=NAoeYLCW06g+qdcBBcR5j2I3HXRKATHiBhnMJPI/9z+vnJoHPgZGb7jrZgRZe1gSrf
+ cRLZ70pTHvkrZNprd4nVwiHUNaExY5YmcoumzWIH9CoNWAXGha5DWFL4U5oieFCNLqNn
+ BFWgeiSoJJ060TqEtRaHRAqis06EwQq3SoxhNPDArqSkcQ5DLMfuR0LmWQvJmptx8WN/
+ 4fGXVIl5WYzVdrGZ8MuS5z193k8lXM6CKfwlWV/zijXx/ab0BclhBXH86jESi7L+GwA1
+ jXHh0P3Z4/WncGe+PTYVUZZtxjP81saIQPbCZQFdfThg7STDNSlEpJTdAllwqG1luNxo
+ Bckg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787667759; x=1788272559;
+ d=1e100.net; s=20251104; t=1787667767; x=1788272567;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=+2Mr/ipwE4dzTL4NJo11V6O3s9hJ8jNTodoTedhmPBg=;
- b=rav0anBGg1usU4V8HYI70yFDWa/6FJkBqoNZS60Epobg/v5QzRxvpQ5KGb8wOlajEb
- mtqx1RrNirh8HJS71wxvkgaSDlPA4GqE3jGopNIWKx/395vWQCePM/LbZRDVnMrPrn0y
- g4nlA0vB89DahvS8BBv6PYKUxke19obtxPXpJfG1Xoz2SwkU4PCFU+3pGEQQr0UOxMUL
- qQsTSfJ3UUyUSMFaZGmgFRLiF57H1ZIw4liK+Ono6aNmjb9bJgY+ANMiYpRFAzLS5SJH
- WYQvyydYKdv8FyGB5yx9+kTSUbx57SEVSEF5GrYHcb18CjM7lw1HbVs6gEKT02Aakbsk
- NgPw==
+ bh=VnF+nDQE1Id2poIia8XWf7bAfaVmktTinQp/48+p2s0=;
+ b=PlR3UZtTVr1DFZo2wRo2CRNMQoh8zApLCWTuB0dD8JMzSN0snPMOGw7ZcV8lAruDCt
+ jdcSg+kLsxPUOnk29QZe9eBNSDMORb+L1JKs52YldSSC62LVVUBIZTyP1UKjh86qg9Sf
+ dlULdkzOVmdr2/RLZQBvycVvrTb/VjDSU4St9e1M1m2zcAwYEBr0SUtAlqhyyYpFGv1N
+ zuRENC1nX9dBQPiw1i1ZXgV06umoPU9oZWgeDZtZ4rXKxPBZPWLn904e+0t20gxM2lVb
+ nNr2/XVqP3Qz5QWBL563pfN5zlKWtHD6LQ6nTUrkH7jmJuzr3TxTbELvEMjddulZWTLg
+ LyLw==
 X-Forwarded-Encrypted: i=1;
- AHgh+RpoIhjIt9UKDKrqe8q0aTSZKz+gYltAJ8rfWYonTRf5qSXNlYoh/NAlKd63oQY+tizDW/KwmsCA28h8@nongnu.org
-X-Gm-Message-State: AFuF++lMQLHmTCoC3Y/4rbavg6B9W3C4dQaW+ZOptZiGMBpk/gzfbyrG
- ELfdqftm5au2JvoHwTON5t9aw5SkYou8Ve/fhQ4p0qb+0A8uw1kOF5go
-X-Gm-Gg: AR+sD12OBGQI7B0qWW0lScv5s/h9frxL8b7RJpMZUiR8/U9visGCn3GUU1dCRKDCdUN
- lWAbPy2qP9JsFYAQRtmScpcyo36XJuRPYI/jZ39PvL29kjvmyyKUkebHVnxuqqGeYhaoSsItju6
- UbSLGKkA62miFdC873tIuigSihgTUqhgCnFLx6PHcxaMNIBQCL3k5K1TH6ZtVTlYdlrDdLjpFXv
- szOLlbtm4XUYUnSeoXNTYJ5HzCpDrJVOO+WxRUp743RjN4RmN5QezYyVTgbnX0/T2Gp13kZqs1L
- Uje4M70PfF+tOVH80Z7Ya6686/rN+YjaRT/Ao5FZzaRjZ+zkn12I5cRjPGsw+SMZwSsSDsWaadL
- Izg4Jl0suXs9gcgNIBcaQ5LDzbfYcfE8Qz46GWomfDRxARCXgMYMCF6CLxtjY+cs/H28C5z7xYo
- LiDLs8feoj7TWfExbbgklxJK4/C2LjBVyqQL/qQiu5OkmH/T29psI3afJH6PEa7oDD1KeZIjBxQ
- xd8rrTSxPaoFgvcKgQlo+BO+SWVbw==
-X-Received: by 2002:a05:651c:a209:10b0:399:9436:15c8 with SMTP id
- 38308e7fff4ca-3a1ef340ca7mr10360901fa.2.1787667758592; 
- Tue, 25 Aug 2026 07:22:38 -0700 (PDT)
+ AHgh+RoE8348fHEStz8aCjqim6j++r5d7l5KK03d7BcKOMzjzYad/PEz2sIcJ1YGgDVz1VJJpApZQUPD80VC@nongnu.org
+X-Gm-Message-State: AFuF++l6+0M7NiCYAmmp3FnYMwYMGDAnCggbY4sQpYjCzxqYFUkZNcBC
+ b64tJZs9GOTaLU5nnu7n2SBI6mo/xTnb6+55jvygy8rsGjlI9jm6w8wy
+X-Gm-Gg: AR+sD11TGyrw3lD57h/7EqCaFU52XDQQpzq25qzA84bp1WyzGVSmmE6rk+3Kgwg8ozZ
+ wPcA9Nqde2vWcy7IOLp1SmawlrBsVlgCs0XYLrd7E264L8TcDkYC32QZaAhYL5g6wwXaYwWcah7
+ x/JOBDYXy8Ux6yF6VCRbBghmSchMhScszrSEGJEmqwErN1Ja/gp/Dgvk7k8hVW3WFWaemL5OdpC
+ PLHSPC2kUaYYmzR7hIYQj/lZOO13/nhx2A+nGIZLTZ3iaaH43lAXeOwvRhSvUlcNDKZ3sADUPqW
+ /1FhVFz92rTNTNsXlDF7cb0DgOHjY4LkG9hWKynVwAzvJ2le2mh9+GmwrxMaWxMRJeUWM/adm98
+ jn5j2ywlyIPc+SzyMTq4Ia6odu+tFRPXIVCu9RbnDYjWTUiu+pDZeeJSFTliOcI7wjaEl5OzvXQ
+ qw65nd5f/Jz3hs5WOP97/Z5hhyt/gEZdBE/Gb3bybLKcvakidm0NL4ME/BFVB+lrm/YRPU42mLK
+ wa9N/AMKjPthgd5e2ufXFvgDW7KLQ==
+X-Received: by 2002:a2e:a983:0:b0:38e:a12c:418c with SMTP id
+ 38308e7fff4ca-3a1ef5775bdmr16896011fa.11.1787667767095; 
+ Tue, 25 Aug 2026 07:22:47 -0700 (PDT)
 Received: from [127.0.1.1] (broadband-90-154-73-22.ip.moscow.rt.ru.
  [90.154.73.22]) by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-3a1c82f6b02sm22457551fa.41.2026.08.25.07.22.37
+ 38308e7fff4ca-3a1c82f6b02sm22457551fa.41.2026.08.25.07.22.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 25 Aug 2026 07:22:37 -0700 (PDT)
+ Tue, 25 Aug 2026 07:22:46 -0700 (PDT)
 From: Konstantin Semichastnov <antikostya2@gmail.com>
-Date: Tue, 25 Aug 2026 17:22:30 +0300
-Subject: [PATCH 06/13] hw/riscv: add n-trace IndirectBranchHist
- rv-trace-message
+Date: Tue, 25 Aug 2026 17:22:35 +0300
+Subject: [PATCH 11/13] hw/riscv/trace-encoder.c: add remaining fields to
+ trace-encoder
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260825-upstream-ntrace_core-v1-6-f8be2f40d2fd@gmail.com>
+Message-Id: <20260825-upstream-ntrace_core-v1-11-f8be2f40d2fd@gmail.com>
 References: <20260825-upstream-ntrace_core-v1-0-f8be2f40d2fd@gmail.com>
 In-Reply-To: <20260825-upstream-ntrace_core-v1-0-f8be2f40d2fd@gmail.com>
 To: qemu-devel@nongnu.org
@@ -88,35 +88,35 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Paolo Bonzini <pbonzini@redhat.com>, Alexei Filippov <halip0503@gmail.com>, 
  Konstantin Semichastnov <antikostya2@gmail.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=9518; i=antikostya2@gmail.com; 
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1324; i=antikostya2@gmail.com; 
  h=from:subject:message-id;
- bh=1hp3usv2luZh19p8uPxK4gCIjXWkwk4HyYib1VZ6GbE=; 
- b=owEBbQKS/ZANAwAKAUiKpW6lUN52AcsmYgBqjaUjlrgvD1XasY8pmiWsdTAQGo+YOK44EaUbL
- bRX4z+yY8SJAjMEAAEKAB0WIQRMBWLx2o+linEPEBhIiqVupVDedgUCao2lIwAKCRBIiqVupVDe
- drLzEAC0w+Bxyh5Z7uqAYvdPGHSKLANb/+SzI25qaN4W9aIHHKRmjL9a/7ijv9VNE0RidDXJnzF
- Ub1+8Urv9zFCXZx+G9jFp4K9xnkeEwygeMDTJYsjeD/WoDiedLkmshF7QdcjOBt87XAu5pXNtpw
- vPYkGg/fOq5nNPoiwmoxkVu2x9TnQ5xZrhc8vKAgGpsHPp31EndNmujk3XamD6rvE4SbBqAuqts
- WdV2Z+kskezsAW68P9ijEa9k8/8h+ubDfppeGsEfZG/d9kqeGmA+t6aitynnzrYe4Oquw6a9jP5
- oZd9pfYuJuR7/Bety8IdDQmf+X/XegymUlo4UIPy2eSQVY6pVm5j03IA9q9gqO95eDRoQOuyJxK
- t3tYii7kLekuy5qrzdhQzvEk5yLrjO9L/d4g+FYq3ZlF4tnuiQ29+K03zv0VWtBLjAe5NPBoDZW
- EHS4//m3W2QVS+aAb7NnZ8RBQJwUS9bi1qsVnpJhF8LMh39Aj7fba3nKAHpQJavbHgseCRnlQI7
- lG8YrtOFL5Ckm2jGYhBhDMatAtPVvm/NoNbnM3OMGCELa/zzMV14AAifvm5fOau+Qo+NyoVsp97
- rTcxAf74beZ3IDlOoDl3Tw619eoC/Vz+XnbkVufsbPuZxH+9/BU0SB82anYu+7ST05G1Kl6TEfp
- Yl2sdYoBx67w9CQ==
+ bh=GerEqUwk7lEOA/Gc+A4C2wt0HgXJhrpEEgUdOrF75hg=; 
+ b=owEBbQKS/ZANAwAKAUiKpW6lUN52AcsmYgBqjaUjKyMVhhCHB0Ob1a4cDp36m0yTMkFjkXu/D
+ dT7E0x73d6JAjMEAAEKAB0WIQRMBWLx2o+linEPEBhIiqVupVDedgUCao2lIwAKCRBIiqVupVDe
+ dueUD/wLioJCpD63aM4PfhBu02D6bGlCgNeLnTl+BbxPBddpEsrhdL4de0VWJM33v4V/L424A4T
+ 1gc7WxWUcdP2ZVvfDCQ3SmCHwRa8Y0B7fQFc74bbSbWsHsjO4SWhqzKF8oes+LD7/z9Ag6EiBEE
+ 11ErFDYeZNfEDFILJSjyir+iKXWZV9MlVMBwxiz2jvY5K7BOLzrfU0/Gnmlgt2urtGUnrh7ZMRp
+ dxmVqByPwoIFlo/E3Z3rkR7juSU6Pp5b9ozSGlVgEEQTQuqNp6ZxDrM45aJ1zaV2RTw8uyTp80B
+ ORBdNg2qgKdikehD440CQPAyKJoKGbQ/0d2Na9k+CCNeTWuS85mB1PyT3E/X70evmMPDKB4yyPT
+ 07TQb4RXJ3zf3qugkD7uW5tSozDNhyh7UeDDXsGKjbuf5Xdax2jDFE/SRdGmVgpe3w8TqUpe1Rj
+ fnHQQd7hE9q6NSjIWUqqQx0iIB+AV40Tiycte3r2DUP81+0mdPjC7x7/+LoaiSS23lFuyd/l98c
+ l/iUpseBevWZMApBYR5dJBoGs+10NwVAa3gDq9g756vYX2mGBxpXdADTnAuHK6uEgBkgnHgIZHb
+ 220NkqBLfdDWQ0/fYkm23pUV2J38NnkzjNL1oSgMcUR7KKjxBBqj2LqnEyGAoD3hUNAbTuQR5/E
+ gUx5wr55Sr8daYA==
 X-Developer-Key: i=antikostya2@gmail.com; a=openpgp;
  fpr=4C0562F1DA8FA58A710F1018488AA56EA550DE76
-Received-SPF: pass client-ip=2a00:1450:4864:20::236;
- envelope-from=antikostya2@gmail.com; helo=mail-lj1-x236.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+Received-SPF: pass client-ip=2a00:1450:4864:20::232;
+ envelope-from=antikostya2@gmail.com; helo=mail-lj1-x232.google.com
+X-Spam_score_int: -7
+X-Spam_score: -0.8
+X-Spam_bar: /
+X-Spam_report: (-0.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FORGED_GMAIL_RCVD=1,
  FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Tue, 25 Aug 2026 10:47:39 -0400
+X-Mailman-Approved-At: Tue, 25 Aug 2026 10:47:44 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -131,263 +131,35 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Add generation, encoding and sending logic for N-Trace
-IndirectBranchHist message.
+Add remaining unsupported register bits to trace-encoder as read-only zero
 
 Signed-off-by: Konstantin Semichastnov <antikostya2@gmail.com>
-Signed-off-by: Alexei Filippov <halip0503@gmail.com>
 ---
- hw/riscv/rv-trace-messages.c | 42 +++++++++++++++++++++
- hw/riscv/rv-trace-messages.h |  4 ++
- hw/riscv/trace-encoder.c     | 87 ++++++++++++++++++++++++++++++++++++++++++++
- hw/riscv/trace-encoder.h     | 10 +++++
- target/riscv/trace_helper.c  |  3 +-
- 5 files changed, 145 insertions(+), 1 deletion(-)
+ hw/riscv/trace-encoder.c | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/hw/riscv/rv-trace-messages.c b/hw/riscv/rv-trace-messages.c
-index 0b90d6a437..2ee38c4354 100644
---- a/hw/riscv/rv-trace-messages.c
-+++ b/hw/riscv/rv-trace-messages.c
-@@ -354,12 +354,16 @@ typedef enum {
- typedef enum {
-     WIDTH_TCODE  = 6,
-     WIDTH_SYNC   = 4,
-+    WIDTH_BTYPE  = 2,
-     WIDTH_ICNT   = 22,
-     WIDTH_FADDR  = 63,
-+    WIDTH_UADDR  = 63,
-+    WIDTH_HIST   = 32,
- } NTraceFieldWidth;
- 
- typedef enum {
-     TCODE_PROG_TRACE_SYNC        = 0x9,
-+    TCODE_INDIRECT_BRANCH_HIST   = 0x1c,
- } NTraceTcodeFieldValues;
- 
- typedef enum {
-@@ -387,6 +391,13 @@ typedef struct NTraceFieldPayload {
-         .value = (val),      \
-     }
- 
-+#define PAYLOAD_BTYPE(val)    \
-+    {                         \
-+        .type = FIELD_FIXED,  \
-+        .width = WIDTH_BTYPE, \
-+        .value = (val),       \
-+    }
-+
- #define PAYLOAD_ICNT(val)    \
-     {                        \
-         .type = FIELD_VAR,   \
-@@ -400,6 +411,20 @@ typedef struct NTraceFieldPayload {
-         .width = WIDTH_FADDR, \
-         .value = (val),       \
-     }
-+
-+#define PAYLOAD_UADDR(val)    \
-+    {                         \
-+        .type = FIELD_VAR,    \
-+        .width = WIDTH_UADDR, \
-+        .value = (val),       \
-+    }
-+
-+#define PAYLOAD_HIST(val)    \
-+    {                        \
-+        .type = FIELD_VAR,   \
-+        .width = WIDTH_HIST, \
-+        .value = (val),      \
-+    }
- #define PAYLOAD_END()      \
-     {                      \
-         .type = FIELD_END, \
-@@ -492,3 +517,20 @@ size_t rv_ntrace_gen_encoded_prog_trace_sync_msg(uint8_t *buf, uint64_t faddr)
-     return rv_ntrace_gen_encoded_msg(buf, msg_fields);
- }
- 
-+size_t rv_ntrace_gen_indirect_branch_hist_msg(uint8_t *buf, uint8_t btype,
-+                                              uint32_t icnt, uint64_t uaddr,
-+                                              uint32_t hist)
-+{
-+    const NTraceFieldPayload msg_fields[] = {
-+        PAYLOAD_TCODE(TCODE_INDIRECT_BRANCH_HIST),
-+        /* SRC field is not supported for now */
-+        PAYLOAD_BTYPE(btype),
-+        PAYLOAD_ICNT(icnt),
-+        PAYLOAD_UADDR(uaddr >> 1),
-+        PAYLOAD_HIST(hist),
-+        /* TSTAMP field is not supported for now */
-+        PAYLOAD_END(),
-+    };
-+
-+    return rv_ntrace_gen_encoded_msg(buf, msg_fields);
-+}
-diff --git a/hw/riscv/rv-trace-messages.h b/hw/riscv/rv-trace-messages.h
-index 635e498393..d113129d65 100644
---- a/hw/riscv/rv-trace-messages.h
-+++ b/hw/riscv/rv-trace-messages.h
-@@ -38,4 +38,8 @@ size_t rv_etrace_gen_encoded_format1(uint8_t *buf,
-                                      bool notify, bool updiscon);
- 
- size_t rv_ntrace_gen_encoded_prog_trace_sync_msg(uint8_t *buf, uint64_t faddr);
-+size_t rv_ntrace_gen_indirect_branch_hist_msg(uint8_t *buf, uint8_t btype,
-+                                              uint32_t icnt, uint64_t uaddr,
-+                                              uint32_t hist);
-+
- #endif
 diff --git a/hw/riscv/trace-encoder.c b/hw/riscv/trace-encoder.c
-index 46501e4f03..fafafb7b9b 100644
+index c36d205f50..58ed4b2646 100644
 --- a/hw/riscv/trace-encoder.c
 +++ b/hw/riscv/trace-encoder.c
-@@ -31,6 +31,11 @@
- 
- #define TRACE_MAX_BRANCHES 31
- 
-+static uint64_t rv_ntrace_encode_uaddr(TraceEncoder *trencoder, uint64_t target_pc);
-+static uint32_t rv_ntrace_encode_and_reset_branch_map(TraceEncoder *trencoder);
-+static uint32_t rv_ntrace_get_and_reset_icnt(TraceEncoder *trencoder,
-+                                             uint64_t pc, uint32_t inst_len);
-+
- static TracePrivLevel trencoder_get_curr_priv_level(TraceEncoder *te)
+@@ -68,6 +68,8 @@ REG32(TR_TE_CONTROL, 0x0)
+     FIELD(TR_TE_CONTROL, EMPTY, 3, 1)
+     FIELD(TR_TE_CONTROL, INST_MODE, 4, 3)
+     FIELD(TR_TE_CONTROL, CONTEXT, 9, 1)
++    FIELD(TR_TE_CONTROL, INST_TRIG_ENABLE, 11, 1)
++    FIELD(TR_TE_CONTROL, INST_STALL_OR_OVERFLOW, 12, 1)
+     FIELD(TR_TE_CONTROL, INST_STALL_ENA, 13, 1)
+     FIELD(TR_TE_CONTROL, INHIBIT_SRC, 15, 1)
+     FIELD(TR_TE_CONTROL, INST_SYNC_MODE, 16, 2)
+@@ -161,6 +163,8 @@ static uint64_t trencoder_te_ctrl_set_hardwire_vals(uint64_t input)
  {
-     CPURISCVState *env = &te->cpu->env;
-@@ -478,6 +483,28 @@ static void trencoder_send_sync_msg(Object *trencoder_obj, uint64_t pc)
-     trencoder_send_message_smem(trencoder, msg, msg_size);
- }
+     input = FIELD_DP32(input, TR_TE_CONTROL, INST_MODE, 0x6);
+     input = FIELD_DP32(input, TR_TE_CONTROL, CONTEXT, 0);
++    input = FIELD_DP32(input, TR_TE_CONTROL, INST_TRIG_ENABLE, 0);
++    input = FIELD_DP32(input, TR_TE_CONTROL, INST_STALL_OR_OVERFLOW, 0);
+     input = FIELD_DP32(input, TR_TE_CONTROL, INST_STALL_ENA, 0);
+     input = FIELD_DP32(input, TR_TE_CONTROL, INHIBIT_SRC, 1);
  
-+void trencoder_send_indirect_branch_hist(TraceEncoder *trencoder,
-+                                         uint64_t curr_pc,
-+                                         uint32_t curr_inst_len,
-+                                         uint64_t target_pc,
-+                                         TraceBranchType btype)
-+{
-+    g_autofree uint8_t *msg = g_malloc0(TRACE_MSG_MAX_SIZE);
-+    uint8_t msg_size;
-+
-+    uint32_t icnt = rv_ntrace_get_and_reset_icnt(trencoder, curr_pc, curr_inst_len);
-+    uint64_t uaddr = rv_ntrace_encode_uaddr(trencoder, target_pc);
-+    uint32_t hist = rv_ntrace_encode_and_reset_branch_map(trencoder);
-+
-+    g_assert(trencoder->ntrace);
-+
-+    msg_size = rv_ntrace_gen_indirect_branch_hist_msg(msg, btype, icnt, uaddr, hist);
-+    trencoder->last_addr_reported = target_pc;
-+    trencoder->last_icnt_reset = target_pc;
-+
-+    trencoder_send_message_smem(trencoder, msg, msg_size);
-+}
-+
- static void trencoder_send_updiscon(TraceEncoder *trencoder, uint64_t pc)
- {
-     g_autofree uint8_t *format2_msg = g_malloc0(TRACE_MSG_MAX_SIZE);
-@@ -551,6 +578,66 @@ void trencoder_send_prog_trace_sync(Object *trencoder_obj, uint64_t pc)
-     trencoder_send_message_smem(trencoder, msg, msg_size);
- }
- 
-+static uint64_t rv_ntrace_encode_uaddr(TraceEncoder *trencoder, uint64_t target_pc)
-+{
-+    return trencoder->last_addr_reported ^ target_pc;
-+}
-+
-+static uint32_t rv_ntrace_encode_and_reset_branch_map(TraceEncoder *trencoder)
-+{
-+    const uint32_t stop_bit = 1;
-+
-+    uint32_t hist = trencoder->branch_map;
-+
-+    if (trencoder->branches == 0) {
-+        /*
-+         * if branches == 0, we will overflow on bit shift, so just return
-+         * empty history value here (i.e. - only stop bit)
-+         */
-+        return stop_bit;
-+    }
-+
-+    /*
-+     * trencoder->branch_map stores bit 1 for NOT taken branches,
-+     * but N-Trace expects to stored bit 1 for TAKEN branches,
-+     * so, we should invert bits
-+     */
-+    hist = ~hist;
-+
-+    /*
-+     * Also, trencoder->branch_map is implemented in such way,
-+     * that oldest branch is LSB bit, but N-Trace format require
-+     * to HIST values be in shift-left format: the most recent branch
-+     * should be in LSB bit. So we should reverse order
-+     * of valid history bits
-+     */
-+    hist = revbit32(hist) >> (32 - trencoder->branches);
-+
-+    /* And finally N-Trace expects bit 1 as stop bit at the MSB position */
-+    hist = deposit32(hist, trencoder->branches, 1, stop_bit);
-+
-+    trencoder->branch_map = 0;
-+    trencoder->branches = 0;
-+
-+    return hist;
-+}
-+
-+static uint32_t rv_ntrace_get_and_reset_icnt(TraceEncoder *trencoder,
-+                                             uint64_t pc, uint32_t inst_len)
-+{
-+    uint64_t icnt = (pc + inst_len - trencoder->last_icnt_reset) / 2 +
-+                    trencoder->icnt_accumulated;
-+
-+    trencoder->last_icnt_reset = pc;
-+    trencoder->icnt_accumulated = 0;
-+
-+    if (icnt > MAKE_64BIT_MASK(0, 22)) {
-+        /* I-CNT overflow reporting is not supported for now */
-+        error_setg(&error_fatal, "N-Trace icnt overflowed");
-+    }
-+
-+    return icnt;
-+}
- 
- void trencoder_trace_trap_insn(Object *trencoder_obj,
-                                uint64_t pc, uint32_t ecause,
-diff --git a/hw/riscv/trace-encoder.h b/hw/riscv/trace-encoder.h
-index 6551ac77f9..f8a6a254dc 100644
---- a/hw/riscv/trace-encoder.h
-+++ b/hw/riscv/trace-encoder.h
-@@ -57,6 +57,11 @@ typedef enum {
-     BRANCH_TAKEN_UNCONDITIONAL = 2,
- } TraceBranchRes;
- 
-+typedef enum {
-+    BTYPE_CONTROL_FLOW = 0,
-+    BTYPE_EXCEPTION    = 2,
-+    BTYPE_INTERRUPT    = 3,
-+} TraceBranchType;
- 
- #define TYPE_TRACE_ENCODER "trace-encoder"
- 
-@@ -64,6 +69,11 @@ OBJECT_DECLARE_SIMPLE_TYPE(TraceEncoder, TRACE_ENCODER)
- 
- void trencoder_set_first_trace_insn(Object *trencoder_obj, uint64_t pc);
- void trencoder_send_prog_trace_sync(Object *trencoder_obj, uint64_t pc);
-+void trencoder_send_indirect_branch_hist(TraceEncoder *trencoder,
-+                                         uint64_t curr_pc,
-+                                         uint32_t curr_inst_len,
-+                                         uint64_t target_pc,
-+                                         TraceBranchType btype);
- void trencoder_trace_trap_insn(Object *trencoder_obj,
-                                uint64_t pc, uint32_t ecause,
-                                bool is_interrupt,
-diff --git a/target/riscv/trace_helper.c b/target/riscv/trace_helper.c
-index f6201e2fb9..d7763a998f 100644
---- a/target/riscv/trace_helper.c
-+++ b/target/riscv/trace_helper.c
-@@ -36,7 +36,8 @@ void helper_trace_updiscon(CPURISCVState *env, target_ulong curr_pc,
-     TraceEncoder *te = TRACE_ENCODER(cpu->trencoder);
- 
-     if (te->ntrace) {
--        /* send IndirectBranchHist message */
-+        trencoder_send_indirect_branch_hist(te, curr_pc, curr_inst_len, env->pc,
-+                                            BTYPE_CONTROL_FLOW);
-     } else {
-         te->updiscon_pending = true;
-         te->trace_next_insn = true;
 
 -- 
 2.43.0
