@@ -4,125 +4,125 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2B24C61DCA
-	for <qemu-riscv@archiver.kernel.org>; Tue, 25 Aug 2026 21:25:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40C60C61DC2
+	for <qemu-riscv@archiver.kernel.org>; Tue, 25 Aug 2026 21:26:01 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wyyci-0003WT-Gn; Tue, 25 Aug 2026 17:24:00 -0400
+	id 1wyyd0-0003nO-Vl; Tue, 25 Aug 2026 17:24:19 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wyycf-0003VK-Qf
- for qemu-riscv@nongnu.org; Tue, 25 Aug 2026 17:23:57 -0400
+ id 1wyycz-0003mr-M0
+ for qemu-riscv@nongnu.org; Tue, 25 Aug 2026 17:24:17 -0400
 Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wyycd-0002H8-HP
- for qemu-riscv@nongnu.org; Tue, 25 Aug 2026 17:23:57 -0400
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+ id 1wyycx-0002N1-QJ
+ for qemu-riscv@nongnu.org; Tue, 25 Aug 2026 17:24:17 -0400
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 67PLAMun1925656
- for <qemu-riscv@nongnu.org>; Tue, 25 Aug 2026 21:23:54 GMT
+ 67PL9vn72991549
+ for <qemu-riscv@nongnu.org>; Tue, 25 Aug 2026 21:24:14 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=g9NYXEbKr18
- TjHgXcHHA/K5gxI00/QYaZJRDaH3D9ew=; b=PvwdADS7D7bjdLDRu3KdB5Ap/Jy
- XNDazIsFJKjijjOgZv7zgh9QuHSpcXeFrMjkKZOGuFzlTLFZDNgj2IXyUFH1gi9o
- SR66YWGODZgqaXhaMzdTBPT5JidPTUZ8dWELgoPX2q/RT0b7ysnZBxJ7aNfz2/tI
- X06sf8lXyFsRXRg0Xt9iOi6Ls8g5N3/qXHRCsB+HSr72Ap0iYxAyGdqvo3zSbTsL
- LOzKJtw9f1lP4T0ruYeGKPNLKoHkPbFhdUw6R9GDxAxAqvDZAVwgJg2e82ThvK5y
- BgfGZ3l0DKbdbGF4OTuKxPGsdUejJ4faZu5O2o/GxzQPdXAK7s7oATWisyQ==
+ :mime-version:references:subject:to; s=qcppdkim1; bh=zik9fMnwPW+
+ cjZ1etBvvnJ0/y9M6axxZ9bmNknOgDGA=; b=PWdSrIAuJDQgM96F3IXQIJ4TQL8
+ Z8FFBN5Zf/Ro4o80k3n04VzE0mrzkv7i5XaOaA2qcnMTrrhxJ81XojTK7e3tVViI
+ N7hX10bh6/im46AUsOoo8jQFy6amTW716HpgTfNoTxC8mZ122PA1vlmPMmEVhz1w
+ Dc/GMwuxe8lYL27JDcIIHc60uUAy4fTsG4HfuuTvOu+SYnV7X9io7MbHpBEkK/xQ
+ GsS9dKjkMztVWyycYeVLaPj/zB7MosXaCsWUpA3x3cYMeMbaijJb6NO9vX8tcxqZ
+ GNOAvbRjFdwrLXxjEAaIJ3VBjaBoRfiz6NmCXgE5bRiNjgMl+LY4BjdK3aw==
 Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com
  [209.85.160.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g9f9urub4-1
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g9cgpspc1-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Tue, 25 Aug 2026 21:23:54 +0000 (GMT)
+ for <qemu-riscv@nongnu.org>; Tue, 25 Aug 2026 21:24:14 +0000 (GMT)
 Received: by mail-qt1-f197.google.com with SMTP id
- d75a77b69052e-51c1b4d961dso2780121cf.1
- for <qemu-riscv@nongnu.org>; Tue, 25 Aug 2026 14:23:54 -0700 (PDT)
+ d75a77b69052e-52d33c89a29so3912721cf.1
+ for <qemu-riscv@nongnu.org>; Tue, 25 Aug 2026 14:24:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1787693034; x=1788297834; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1787693054; x=1788297854; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=g9NYXEbKr18TjHgXcHHA/K5gxI00/QYaZJRDaH3D9ew=;
- b=Jt1QvF20ldbjdCoO6R7JdTtUD6WRl0JYBWoHz2EhwdND+y5e+FD94hsZJ1+OX0/EJK
- 0mxjACJgA80yWWSOAJmtKwHpfGotgbqMfSoHF+1nIL5+H/j/tdmvbRhPLW6T8ULIPWNj
- qlsXxxjQjCYgKlWrTwMopu9mmHFZtIl0ZwbwGVH7OIlhNxbcCa7G+iHSZxAbV42t3b+l
- LVtuNXgrKXaMrhFW0qAG2V5KBZLTLZJ+m0FKHqOCsAMmjRrEAJVNB1FV531IswSsVJW5
- U/1itv5swbUxgbRXmdWWIRu8Wo2BcAM8wuOn06QpodWY3pQgfvmfn1/9aD/q/Tkd6wDk
- T0Fg==
+ bh=zik9fMnwPW+cjZ1etBvvnJ0/y9M6axxZ9bmNknOgDGA=;
+ b=c9x4Np0EU4NhTRlm7AXdaO2MfcEwgBnpXtPqn89l5Hgnz2VXkjJgPPFRpVon6YSWd1
+ zKxNtAs3dYNyIT8Co00Vi1ka+4B48L1EmMEIGfwHkq9YFnsGsikkP6wrf+hLUy5Kggbp
+ jYqwFhDJ/eWC1C1ffSRvueNr8HeT0IVlDCiJN1N8THD2kAiS8TF9CdS2cBmhM6mGU5ek
+ PtDrd5op9Ezc/BlV+keLl0o7flgHNxismd8EW4DpTk8wAKREqCn0NphdtTsSCSm4lgOw
+ eMsHYZ53iFG8d6vR4lb446yzz2ECPnPmaNOLpojWjKMkLeNmuJ0MwPRgNStIqFCe1bzb
+ ypnA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787693034; x=1788297834;
+ d=1e100.net; s=20251104; t=1787693054; x=1788297854;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=g9NYXEbKr18TjHgXcHHA/K5gxI00/QYaZJRDaH3D9ew=;
- b=b+W8edisN8RIoDrbPWoTLD30djl638I/0JUdM0nWEtHvFD0Z/IonorHryKcgeEuid7
- jSi1eupmIA3Id1CZshohepmXeel1EYBu3Zyq092R2Te26nrHBtTQDNplf3HQq6ESaNo8
- Zxsa9Td9Vi+YByRO6SgOVlhOyf9VcnSFqHDRSihoWF5WkinLJfvkPoqON0wLc0rLEogF
- FI/etIZwfEzrHk3SvuIkuhb1XMPYwyGPMgp+VjpSr98PafatInDS9Rs5GRIVbYt1cX2X
- G9iSFsO2g+ZjkcZRJreNew9gVHgxAbNCKszzljh4qTGUwG/XUL0kcNNTPET8sfHp8cXo
- FEeA==
-X-Gm-Message-State: AFuF++kSGlRgrBHh5cxBUmVambSdVtasYpwEFS+ZmXJfCTgPGVDVfZ5S
- lp3AsLXde3VgfFVxvze+EO8SKOzW8dtD3Zwn1vLlVdJ1M88ABUfEqtwfpsyzX0uPITWXRUJtnyb
- JxRUZhhRX9FQnJZtCi2vzdaE2o3PsKVSi//MJ5E91QCqJY4daQMQofjJlSw==
-X-Gm-Gg: AR+sD12JuUjvQQ7T9OCQ4eyYYh+KOQdsCQlofZjJtdKWWLSoOXuWOZR1RMkAP2Yifnj
- 3grsdlNkI8RtHUXxFsLFZmykiY7KeBQtX6e45A0jRFg10/j3bfQW3FTU4vKWd0VrayaleoUDHlE
- MHK8tnLztX7hhrRXoOvedgdfn9Ea14msRIjtdTjmqLiIj2OHqLQbLgpWxvbwX+Zf51DjJpKjR5Q
- HOR49GyE4056gUml86V3ySTUi4U2Zld/np3Ebw5igEYmdyPnnlSCepdU5nlzmvYpyP6hFQL4P0X
- DQN1bFdcdEV4zkmHwvOImuwCI0G0JlRP4K52Efr9u864zxwf7IudkUUyJXS/k6zIFGBi0b6MLhu
- rnM9W6umlX/APAVD+dFt65frECD/ZvG1XhTbS6A==
-X-Received: by 2002:ac8:59d1:0:b0:52e:125b:9444 with SMTP id
- d75a77b69052e-52e2ed0710dmr104202621cf.17.1787693033743; 
- Tue, 25 Aug 2026 14:23:53 -0700 (PDT)
-X-Received: by 2002:ac8:59d1:0:b0:52e:125b:9444 with SMTP id
- d75a77b69052e-52e2ed0710dmr104202121cf.17.1787693033231; 
- Tue, 25 Aug 2026 14:23:53 -0700 (PDT)
+ bh=zik9fMnwPW+cjZ1etBvvnJ0/y9M6axxZ9bmNknOgDGA=;
+ b=Cs6HzLuRFPvaMm3S0GpA4roTTB7IcDXZSwW9oIbnZmeBxIrWzRuWilvhDB+j3/l3Nf
+ O6RrLf4jwgMMlrznkJb/222HXi+6jEQG5qVvXH3q/1KqulNDMXjQ4NkCldVeJQzyFUzA
+ qLgjAbQempUe9aNp9osLGQHFCsSZeU3g38eiUY8JQty7l6EaanE0vrZ7gMq170qG0orn
+ le8VfY9iYErkRBzw/gg4k1AwIsyCX1toTR41abEPwoVKvWr2Bk9TGlhgtlbNVgSdahWi
+ GUAQkjUhKKdhzZis137NJUZ0LObOfbRHBGQtUyL7u11C5IQtxT8UmHRd5rQ9nD+vZP1j
+ 0gSA==
+X-Gm-Message-State: AFuF++mGMHn8iiWeY6qEJ2Uww88WG3Agi93TfQGoB3duNNPS4L1+WE/I
+ METQoq+vP3KjULibRx5sF1jonAArRiaRYgNuaZLfNswcnn6Lu47LtZPvAHYsFgBFPsT8z4xL1W4
+ vnqnovpcnfkaLWVSaeRtdxoPhRI+JktXwVVRZF8vF8R+uElIqIdTLLP967RqijIFp/Q==
+X-Gm-Gg: AR+sD13JfbDBF8hwBWvPtWwQxsdaEq0Yl2hUNeUe+ibH5ChokinBPkj4kvY8kvBwAHl
+ x0kdz/lVeGD3a+DFioX8VoV8Grs+UCZ5BRZUBAfNzmZqf9HTaXHe95woIfRw02GmsVKM6VXzQat
+ bWgwSqjj00QWcILegiIDj05UbTTwPs/O4go1z9+mGEuZjNdVu2ZjzU7oGgAkUl2SiphDw+ZX622
+ bSPf5YTHdr3CTmtUntEdAxbDu5y2rLf3oP7Dvky5iMY9ZOULROqlm/gXj4Vt5WTODcGZjA/Y24Y
+ U9RY+ftOBgQCdK0WUoWpQypGU4yOcl/aPlIeQECL0DHFKwPaDU27K6FylG2p5SR0zmcA/NOxXeE
+ E6qUDf1yq5Xw+Vg3f1XIXBB/LCO638hXGK04uRg==
+X-Received: by 2002:a05:622a:1903:b0:528:3882:3869 with SMTP id
+ d75a77b69052e-52e4228dd23mr22908851cf.13.1787693054035; 
+ Tue, 25 Aug 2026 14:24:14 -0700 (PDT)
+X-Received: by 2002:a05:622a:1903:b0:528:3882:3869 with SMTP id
+ d75a77b69052e-52e4228dd23mr22907721cf.13.1787693053142; 
+ Tue, 25 Aug 2026 14:24:13 -0700 (PDT)
 Received: from QCOM-UWl2o8bcGT.qualcomm.com ([189.38.141.232])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-90cc65299f0sm8646386d6.41.2026.08.25.14.23.51
+ 6a1803df08f44-90cc65299f0sm8646386d6.41.2026.08.25.14.24.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 25 Aug 2026 14:23:52 -0700 (PDT)
+ Tue, 25 Aug 2026 14:24:12 -0700 (PDT)
 From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
  zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
  Palmer Dabbelt <palmer@dabbelt.com>
-Subject: [PATCH 04/13] hw/riscv/fdt_common, virt.c: add create_fdt_pcie()
-Date: Tue, 25 Aug 2026 18:23:16 -0300
-Message-ID: <20260825212326.1907-5-daniel.barboza@oss.qualcomm.com>
+Subject: [PATCH 12/13] hw/riscv/device-common, virt.c: add gpex_pcie_init()
+Date: Tue, 25 Aug 2026 18:23:24 -0300
+Message-ID: <20260825212326.1907-13-daniel.barboza@oss.qualcomm.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260825212326.1907-1-daniel.barboza@oss.qualcomm.com>
 References: <20260825212326.1907-1-daniel.barboza@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: sRQhI7SHho8tXxf1fSkAEfJNXQh1NPr6
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI1MDE4MiBTYWx0ZWRfXxFK8kFGBngFr
- t8uPR23gvJebZknl5m05EG3bBUtNjjugIrOPYt6qcP6HxT/Pe2Br44uyi3ztsRmBGn25E+2zH9i
- 7t+v/mSaCIdmO+ViBvhf8yEl9ENX35Px2EMLwRsAY9QfTno5O64ogqKJkKkiFSpyR1mba7r1L/x
- OdJ/fSuPWsvBYvHXRzpU4GK1kpN+5W4Y3pBsetFl1V48l0MlQEHK3NXlgjC7hoO+J7YFRZFQ4kr
- H5O+zVUJvPPZRiBzAwm7KGsU9msNmP60nL7+15c/bCNg0fig1UhYMMmtl4Xx/JahjAxQOWOug92
- ln2wDXF7WRCsjGYsswuLJcZmztTIaVoXS4kfw6gDJ/f9huSnJejrMArJGOiqG296ECrUZ8rtDYR
- k0o3CHdW4hQ8fwFlVJQ+GJOGUhbzJCS0iyOxkPyxnBEwyYC6NLVSBWGn5AHhxwGtPwaaIwU24wY
- wIfMFemIp1xyOnfXpcQ==
-X-Authority-Analysis: v=2.4 cv=acNRWxot c=1 sm=1 tr=0 ts=6a8e07ea cx=c_pps
+X-Proofpoint-GUID: goJ-4_sy_MdVKmOKwXw10L9JUT8PS5zf
+X-Proofpoint-ORIG-GUID: goJ-4_sy_MdVKmOKwXw10L9JUT8PS5zf
+X-Authority-Analysis: v=2.4 cv=I+NVgtgg c=1 sm=1 tr=0 ts=6a8e07fe cx=c_pps
  a=EVbN6Ke/fEF3bsl7X48z0g==:117 a=MCIxunHWmQOg/5OnbzXZaw==:17
  a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22 a=EUspDBNiAAAA:8
- a=nzCZRCZgkTuinHKBC8cA:9 a=a_PwQJl-kcHnX1M80qC6:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODI1MDE4MiBTYWx0ZWRfX16BJAWo8sH1A
- SfsWujmjqH3Yhc3D83h9WZ/sNcwC0LypnRl3eLTuQb4Q9dsjnn2TeTP5XWjz7cweqqwtmWFiFph
- zKasKB5ye7aUpfd+iNaK4LSibb+qIOc=
-X-Proofpoint-ORIG-GUID: sRQhI7SHho8tXxf1fSkAEfJNXQh1NPr6
+ a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22 a=EUspDBNiAAAA:8
+ a=i57S3HUJNi793Ni1t6cA:9 a=a_PwQJl-kcHnX1M80qC6:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI1MDE4MiBTYWx0ZWRfX8cuqcOTT7xrG
+ R0KGeUDeIQ6eGvF8FQYDAhybm2V9uOuRZfukk0Gnnkw3kJYEJkx20Y7Jc2/UR9lm4ndDAUyYMAx
+ kTmUBKkqD8gBmEt8MPoSnidq130BqPcNUJHsFD+ZLZN4QO9otOSnzQJ7lJrO82xI4h430RxM4HH
+ fEAFp2JAN8MV4GUNjOeQu01RQ4Wl8Jlpr0UKk7RhRiEdBabTWfNUSlXaqc4Bwo3MZ2mUJ5S1hI4
+ tbOMTUykpt7pPAC9UuEJGlXTgPqFs+NpYEooq4GV4QBeb9trDEe3sYyldTYkZfMYOit4lnDhNnl
+ oyFTc/IRH2gIP5b37L1w77zqyeyEXhc8K2iWcg/adJelOsdJSnIT1vxTb0NmcawYQKh+ptpF5dX
+ hyXJXiHA41PiODxWYJvSCgccJZNQd2YTXB13UwpCG3sfYz8A+MEnf/91n6oRYaoP7DtJbxF93Vs
+ VOd06cWUSqelhJKFypA==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODI1MDE4MiBTYWx0ZWRfX1fC5w1zOlTvf
+ sMhkS/zdFiGHmOfmWsu5xUwSpg6zJJH+Kxrn7OUsdiIJ0TG9bjS1uqHDDih3Q2kPsaq82MTlcoZ
+ /2dz/f8jOml4r7nazhyGu3yfwaqRTZ4=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-25_06,2026-08-24_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 bulkscore=0 clxscore=1015 phishscore=0 impostorscore=0
- malwarescore=0 priorityscore=1501 spamscore=0 adultscore=0 lowpriorityscore=0
+ clxscore=1015 impostorscore=0 bulkscore=0 suspectscore=0 malwarescore=0
+ priorityscore=1501 lowpriorityscore=0 phishscore=0 adultscore=0 spamscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608250182
 Received-SPF: pass client-ip=205.220.180.131;
@@ -149,355 +149,219 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The pcie FDT is quite tedious but can be parametrized into a helper.
-This is going to benefit only the 'virt' board for now but it will be
-used by the 'riscv-server-ref' board in the near future too.
-
-Some other changes made:
-
-- FDT related macros are moved to fdt-common.h.  Only a couple are being
-  used by the helper ATM but more will be added in the next patches;
-- an RISCVAIAType enum is created.  There are several FDTs that depends
-  on the active AIA type being used, and we want a way to represent the
-  different AIA modes that doesn't re-use the 'virt' specific VIRT_AIA_*
-  macros.  The enum vals are equivalent by design - we want "s->aia_type"
-  to be used by 'virt' when calling the fdt helpers, and other boards
-  will use "AIA_*" macros in their code.
-
-No FDT changes made.
+The GPEX_HOST initialization in 'virt' can be moved to device-common.c
+and be re-used later for other boards, namely the future
+'riscv-server-ref' emulation.
 
 Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 ---
- hw/riscv/fdt-common.c         | 108 ++++++++++++++++++++++++++++++++++
- hw/riscv/virt.c               | 108 ++--------------------------------
- include/hw/riscv/fdt-common.h |  26 ++++++++
- include/hw/riscv/virt.h       |  15 -----
- 4 files changed, 140 insertions(+), 117 deletions(-)
+ hw/riscv/device-common.c         | 76 +++++++++++++++++++++++++++++++
+ hw/riscv/virt.c                  | 77 ++------------------------------
+ include/hw/riscv/device-common.h |  7 +++
+ 3 files changed, 87 insertions(+), 73 deletions(-)
 
-diff --git a/hw/riscv/fdt-common.c b/hw/riscv/fdt-common.c
-index ddc56821d3..67a0a3d8f2 100644
---- a/hw/riscv/fdt-common.c
-+++ b/hw/riscv/fdt-common.c
+diff --git a/hw/riscv/device-common.c b/hw/riscv/device-common.c
+index 03e85a7c86..49f6fb8dd2 100644
+--- a/hw/riscv/device-common.c
++++ b/hw/riscv/device-common.c
 @@ -15,6 +15,8 @@
- #include "target/riscv/cpu_bits.h"
- #include "hw/riscv/riscv-iommu-bits.h"
- #include "hw/riscv/iommu.h"
+ #include "hw/core/qdev.h"
+ #include "hw/core/qdev-properties.h"
+ #include "hw/core/sysbus.h"
 +#include "hw/pci/pci.h"
-+#include "hw/pci/pcie_host.h"
- 
- void *create_board_device_tree(const char *model, const char *compatible,
-                                int *fdt_size)
-@@ -387,3 +389,109 @@ void create_fdt_riscv_iommu_sys(void *fdt, hwaddr addr, hwaddr size,
- 
-     *iommu_sys_phandle = iommu_phandle;
++#include "hw/pci-host/gpex.h"
+ #include "qapi/error.h"
+ #include "qom/object.h"
+ #include "system/address-spaces.h"
+@@ -90,3 +92,77 @@ void riscv_init_flash_map(PFlashCFI01 *flash, hwaddr base, hwaddr size,
+     memory_region_add_subregion(sysmem, base,
+                             sysbus_mmio_get_region(SYS_BUS_DEVICE(dev), 0));
  }
 +
-+static void create_pcie_irq_map(void *fdt, char *nodename,
-+                                uint32_t irqchip_phandle,
-+                                RISCVAIAType aia_type, uint32_t pcie_irq)
++DeviceState *gpex_pcie_init(MemoryRegion *sys_mem,
++                            DeviceState *irqchip,
++                            const MemMapEntry *pcie_ecam_mem,
++                            const MemMapEntry *pcie_mmio_mem,
++                            const MemMapEntry *high_pcie_mmio_mem,
++                            const MemMapEntry *pcie_pio_mem,
++                            int pcie_irq)
 +{
-+    int pin, dev;
-+    uint32_t irq_map_stride = 0;
-+    uint32_t full_irq_map[PCI_NUM_PINS * PCI_NUM_PINS *
-+                          FDT_MAX_INT_MAP_WIDTH] = {};
-+    uint32_t *irq_map = full_irq_map;
++    DeviceState *dev;
++    MemoryRegion *ecam_alias, *ecam_reg;
++    MemoryRegion *mmio_alias, *high_mmio_alias, *mmio_reg;
++    hwaddr ecam_base = pcie_ecam_mem->base;
++    hwaddr ecam_size = pcie_ecam_mem->size;
++    hwaddr mmio_base = pcie_mmio_mem->base;
++    hwaddr mmio_size = pcie_mmio_mem->size;
++    hwaddr high_mmio_base = high_pcie_mmio_mem->base;
++    hwaddr high_mmio_size = high_pcie_mmio_mem->size;
++    hwaddr pio_base = pcie_pio_mem->base;
++    hwaddr pio_size = pcie_pio_mem->size;
 +
-+    /*
-+     * This code creates a standard swizzle of interrupts such that
-+     * each device's first interrupt is based on it's PCI_SLOT number.
-+     * (See pci_swizzle_map_irq_fn())
-+     *
-+     * We only need one entry per interrupt in the table (not one per
-+     * possible slot) seeing the interrupt-map-mask will allow the table
-+     * to wrap to any number of devices.
-+     */
-+    for (dev = 0; dev < PCI_NUM_PINS; dev++) {
-+        int devfn = dev * 0x8;
++    dev = qdev_new(TYPE_GPEX_HOST);
 +
-+        for (pin = 0; pin < PCI_NUM_PINS; pin++) {
-+            int irq_nr = pcie_irq + ((pin + PCI_SLOT(devfn)) % PCI_NUM_PINS);
-+            int i = 0;
++    /* Set GPEX object properties for the virt machine */
++    object_property_set_uint(OBJECT(dev), PCI_HOST_ECAM_BASE,
++                            ecam_base, NULL);
++    object_property_set_int(OBJECT(dev), PCI_HOST_ECAM_SIZE,
++                            ecam_size, NULL);
++    object_property_set_uint(OBJECT(dev), PCI_HOST_BELOW_4G_MMIO_BASE,
++                             mmio_base, NULL);
++    object_property_set_int(OBJECT(dev), PCI_HOST_BELOW_4G_MMIO_SIZE,
++                            mmio_size, NULL);
++    object_property_set_uint(OBJECT(dev), PCI_HOST_ABOVE_4G_MMIO_BASE,
++                             high_mmio_base, NULL);
++    object_property_set_int(OBJECT(dev), PCI_HOST_ABOVE_4G_MMIO_SIZE,
++                            high_mmio_size, NULL);
++    object_property_set_uint(OBJECT(dev), PCI_HOST_PIO_BASE,
++                            pio_base, NULL);
++    object_property_set_int(OBJECT(dev), PCI_HOST_PIO_SIZE,
++                            pio_size, NULL);
 +
-+            /* Fill PCI address cells */
-+            irq_map[i] = cpu_to_be32(devfn << 8);
-+            i += FDT_PCI_ADDR_CELLS;
++    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
 +
-+            /* Fill PCI Interrupt cells */
-+            irq_map[i] = cpu_to_be32(pin + 1);
-+            i += FDT_PCI_INT_CELLS;
++    ecam_alias = g_new0(MemoryRegion, 1);
++    ecam_reg = sysbus_mmio_get_region(SYS_BUS_DEVICE(dev), 0);
++    memory_region_init_alias(ecam_alias, OBJECT(dev), "pcie-ecam",
++                             ecam_reg, 0, ecam_size);
++    memory_region_add_subregion(get_system_memory(), ecam_base, ecam_alias);
 +
-+            /* Fill interrupt controller phandle and cells */
-+            irq_map[i++] = cpu_to_be32(irqchip_phandle);
-+            irq_map[i++] = cpu_to_be32(irq_nr);
++    mmio_alias = g_new0(MemoryRegion, 1);
++    mmio_reg = sysbus_mmio_get_region(SYS_BUS_DEVICE(dev), 1);
++    memory_region_init_alias(mmio_alias, OBJECT(dev), "pcie-mmio",
++                             mmio_reg, mmio_base, mmio_size);
++    memory_region_add_subregion(get_system_memory(), mmio_base, mmio_alias);
 +
-+            if (aia_type != AIA_TYPE_NONE) {
-+                irq_map[i++] = cpu_to_be32(0x4);
-+            }
++    /* Map high MMIO space */
++    high_mmio_alias = g_new0(MemoryRegion, 1);
++    memory_region_init_alias(high_mmio_alias, OBJECT(dev), "pcie-mmio-high",
++                             mmio_reg, high_mmio_base, high_mmio_size);
++    memory_region_add_subregion(get_system_memory(), high_mmio_base,
++                                high_mmio_alias);
 +
-+            if (!irq_map_stride) {
-+                irq_map_stride = i;
-+            }
-+            irq_map += irq_map_stride;
-+        }
++    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 2, pio_base);
++
++    for (int i = 0; i < PCI_NUM_PINS; i++) {
++        qemu_irq irq = qdev_get_gpio_in(irqchip, pcie_irq + i);
++
++        sysbus_connect_irq(SYS_BUS_DEVICE(dev), i, irq);
++        gpex_set_irq_num(GPEX_HOST(dev), i, pcie_irq + i);
 +    }
 +
-+    qemu_fdt_setprop(fdt, nodename, "interrupt-map", full_irq_map,
-+                     PCI_NUM_PINS * PCI_NUM_PINS *
-+                     irq_map_stride * sizeof(uint32_t));
-+
-+    qemu_fdt_setprop_cells(fdt, nodename, "interrupt-map-mask",
-+                           0x1800, 0, 0, 0x7);
-+}
-+
-+/*
-+ * NOTE: this function uses a "/soc/pci@..." FDT subnode that
-+ * should be created beforehand.
-+ */
-+void create_fdt_pcie(void *fdt, int aia_type, bool has_iommu_sys,
-+                     const MemMapEntry *pcie_ecam, const MemMapEntry *pcie_pio,
-+                     const MemMapEntry *pcie_mmio, const MemMapEntry *high_pcie,
-+                     uint32_t irq_pcie_phandle, uint32_t msi_pcie_phandle,
-+                     uint32_t iommu_sys_phandle, uint32_t pcie_irq)
-+{
-+    g_autofree char *name = NULL;
-+
-+    name = g_strdup_printf("/soc/pci@%"HWADDR_PRIx, pcie_ecam->base);
-+    qemu_fdt_setprop_cell(fdt, name, "#address-cells", FDT_PCI_ADDR_CELLS);
-+    qemu_fdt_setprop_cell(fdt, name, "#interrupt-cells", FDT_PCI_INT_CELLS);
-+    qemu_fdt_setprop_cell(fdt, name, "#size-cells", 0x2);
-+    qemu_fdt_setprop_string(fdt, name, "compatible", "pci-host-ecam-generic");
-+    qemu_fdt_setprop_string(fdt, name, "device_type", "pci");
-+    qemu_fdt_setprop_cell(fdt, name, "linux,pci-domain", 0);
-+
-+    qemu_fdt_setprop_cells(fdt, name, "bus-range", 0,
-+                           pcie_ecam->size / PCIE_MMCFG_SIZE_MIN - 1);
-+    qemu_fdt_setprop(fdt, name, "dma-coherent", NULL, 0);
-+
-+    if (aia_type == AIA_TYPE_APLIC_IMSIC) {
-+        qemu_fdt_setprop_cell(fdt, name, "msi-parent", msi_pcie_phandle);
-+    }
-+
-+    qemu_fdt_setprop_sized_cells(fdt, name, "reg", 2,
-+                                 pcie_ecam->base, 2, pcie_ecam->size);
-+
-+    qemu_fdt_setprop_sized_cells(fdt, name, "ranges",
-+        1, FDT_PCI_RANGE_IOPORT, 2, 0,
-+        2, pcie_pio->base, 2, pcie_pio->size,
-+        1, FDT_PCI_RANGE_MMIO,
-+        2, pcie_mmio->base,
-+        2, pcie_mmio->base, 2, pcie_mmio->size,
-+        1, FDT_PCI_RANGE_MMIO_64BIT,
-+        2, high_pcie->base,
-+        2, high_pcie->base, 2, high_pcie->size);
-+
-+    if (has_iommu_sys) {
-+        qemu_fdt_setprop_cells(fdt, name, "iommu-map",
-+                               0, iommu_sys_phandle, 0, 0x10000);
-+    }
-+
-+    create_pcie_irq_map(fdt, name, irq_pcie_phandle, aia_type, pcie_irq);
++    GPEX_HOST(dev)->gpex_cfg.bus = PCI_HOST_BRIDGE(dev)->bus;
++    return dev;
 +}
 diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 9417aa7a06..fc381a07f3 100644
+index 6ffafae46d..af9de36726 100644
 --- a/hw/riscv/virt.c
 +++ b/hw/riscv/virt.c
-@@ -180,61 +180,6 @@ static void virt_flash_map(RISCVVirtState *s,
-                     sysmem);
+@@ -518,78 +518,6 @@ static void create_fdt(RISCVVirtState *s)
+     create_fdt_pmu(s);
  }
  
--static void create_pcie_irq_map(RISCVVirtState *s, void *fdt, char *nodename,
--                                uint32_t irqchip_phandle)
+-static inline DeviceState *gpex_pcie_init(MemoryRegion *sys_mem,
+-                                          DeviceState *irqchip,
+-                                          RISCVVirtState *s)
 -{
--    int pin, dev;
--    uint32_t irq_map_stride = 0;
--    uint32_t full_irq_map[PCI_NUM_PINS * PCI_NUM_PINS *
--                          FDT_MAX_INT_MAP_WIDTH] = {};
--    uint32_t *irq_map = full_irq_map;
+-    DeviceState *dev;
+-    MemoryRegion *ecam_alias, *ecam_reg;
+-    MemoryRegion *mmio_alias, *high_mmio_alias, *mmio_reg;
+-    hwaddr ecam_base = s->memmap[VIRT_PCIE_ECAM].base;
+-    hwaddr ecam_size = s->memmap[VIRT_PCIE_ECAM].size;
+-    hwaddr mmio_base = s->memmap[VIRT_PCIE_MMIO].base;
+-    hwaddr mmio_size = s->memmap[VIRT_PCIE_MMIO].size;
+-    hwaddr high_mmio_base = virt_high_pcie_memmap.base;
+-    hwaddr high_mmio_size = virt_high_pcie_memmap.size;
+-    hwaddr pio_base = s->memmap[VIRT_PCIE_PIO].base;
+-    hwaddr pio_size = s->memmap[VIRT_PCIE_PIO].size;
+-    qemu_irq irq;
+-    int i;
 -
--    /*
--     * This code creates a standard swizzle of interrupts such that
--     * each device's first interrupt is based on it's PCI_SLOT number.
--     * (See pci_swizzle_map_irq_fn())
--     *
--     * We only need one entry per interrupt in the table (not one per
--     * possible slot) seeing the interrupt-map-mask will allow the table
--     * to wrap to any number of devices.
--     */
--    for (dev = 0; dev < PCI_NUM_PINS; dev++) {
--        int devfn = dev * 0x8;
+-    dev = qdev_new(TYPE_GPEX_HOST);
 -
--        for (pin = 0; pin < PCI_NUM_PINS; pin++) {
--            int irq_nr = PCIE_IRQ + ((pin + PCI_SLOT(devfn)) % PCI_NUM_PINS);
--            int i = 0;
+-    /* Set GPEX object properties for the virt machine */
+-    object_property_set_uint(OBJECT(dev), PCI_HOST_ECAM_BASE,
+-                            ecam_base, NULL);
+-    object_property_set_int(OBJECT(dev), PCI_HOST_ECAM_SIZE,
+-                            ecam_size, NULL);
+-    object_property_set_uint(OBJECT(dev), PCI_HOST_BELOW_4G_MMIO_BASE,
+-                             mmio_base, NULL);
+-    object_property_set_int(OBJECT(dev), PCI_HOST_BELOW_4G_MMIO_SIZE,
+-                            mmio_size, NULL);
+-    object_property_set_uint(OBJECT(dev), PCI_HOST_ABOVE_4G_MMIO_BASE,
+-                             high_mmio_base, NULL);
+-    object_property_set_int(OBJECT(dev), PCI_HOST_ABOVE_4G_MMIO_SIZE,
+-                            high_mmio_size, NULL);
+-    object_property_set_uint(OBJECT(dev), PCI_HOST_PIO_BASE,
+-                            pio_base, NULL);
+-    object_property_set_int(OBJECT(dev), PCI_HOST_PIO_SIZE,
+-                            pio_size, NULL);
 -
--            /* Fill PCI address cells */
--            irq_map[i] = cpu_to_be32(devfn << 8);
--            i += FDT_PCI_ADDR_CELLS;
+-    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
 -
--            /* Fill PCI Interrupt cells */
--            irq_map[i] = cpu_to_be32(pin + 1);
--            i += FDT_PCI_INT_CELLS;
+-    ecam_alias = g_new0(MemoryRegion, 1);
+-    ecam_reg = sysbus_mmio_get_region(SYS_BUS_DEVICE(dev), 0);
+-    memory_region_init_alias(ecam_alias, OBJECT(dev), "pcie-ecam",
+-                             ecam_reg, 0, ecam_size);
+-    memory_region_add_subregion(get_system_memory(), ecam_base, ecam_alias);
 -
--            /* Fill interrupt controller phandle and cells */
--            irq_map[i++] = cpu_to_be32(irqchip_phandle);
--            irq_map[i++] = cpu_to_be32(irq_nr);
--            if (s->aia_type != VIRT_AIA_TYPE_NONE) {
--                irq_map[i++] = cpu_to_be32(0x4);
--            }
+-    mmio_alias = g_new0(MemoryRegion, 1);
+-    mmio_reg = sysbus_mmio_get_region(SYS_BUS_DEVICE(dev), 1);
+-    memory_region_init_alias(mmio_alias, OBJECT(dev), "pcie-mmio",
+-                             mmio_reg, mmio_base, mmio_size);
+-    memory_region_add_subregion(get_system_memory(), mmio_base, mmio_alias);
 -
--            if (!irq_map_stride) {
--                irq_map_stride = i;
--            }
--            irq_map += irq_map_stride;
--        }
+-    /* Map high MMIO space */
+-    high_mmio_alias = g_new0(MemoryRegion, 1);
+-    memory_region_init_alias(high_mmio_alias, OBJECT(dev), "pcie-mmio-high",
+-                             mmio_reg, high_mmio_base, high_mmio_size);
+-    memory_region_add_subregion(get_system_memory(), high_mmio_base,
+-                                high_mmio_alias);
+-
+-    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 2, pio_base);
+-
+-    for (i = 0; i < PCI_NUM_PINS; i++) {
+-        irq = qdev_get_gpio_in(irqchip, PCIE_IRQ + i);
+-
+-        sysbus_connect_irq(SYS_BUS_DEVICE(dev), i, irq);
+-        gpex_set_irq_num(GPEX_HOST(dev), i, PCIE_IRQ + i);
 -    }
 -
--    qemu_fdt_setprop(fdt, nodename, "interrupt-map", full_irq_map,
--                     PCI_NUM_PINS * PCI_NUM_PINS *
--                     irq_map_stride * sizeof(uint32_t));
--
--    qemu_fdt_setprop_cells(fdt, nodename, "interrupt-map-mask",
--                           0x1800, 0, 0, 0x7);
+-    GPEX_HOST(dev)->gpex_cfg.bus = PCI_HOST_BRIDGE(dev)->bus;
+-    return dev;
 -}
 -
- static void create_fdt_socket_aclint(RISCVVirtState *s,
-                                      int socket,
-                                      uint32_t *intc_phandles)
-@@ -721,51 +666,6 @@ static void create_fdt_virtio(RISCVVirtState *s, uint32_t irq_virtio_phandle)
-     }
- }
- 
--static void create_fdt_pcie(RISCVVirtState *s,
--                            uint32_t irq_pcie_phandle,
--                            uint32_t msi_pcie_phandle,
--                            uint32_t iommu_sys_phandle)
--{
--    g_autofree char *name = NULL;
--    MachineState *ms = MACHINE(s);
--
--    name = g_strdup_printf("/soc/pci@%"HWADDR_PRIx,
--                           s->memmap[VIRT_PCIE_ECAM].base);
--    qemu_fdt_setprop_cell(ms->fdt, name, "#address-cells",
--        FDT_PCI_ADDR_CELLS);
--    qemu_fdt_setprop_cell(ms->fdt, name, "#interrupt-cells",
--        FDT_PCI_INT_CELLS);
--    qemu_fdt_setprop_cell(ms->fdt, name, "#size-cells", 0x2);
--    qemu_fdt_setprop_string(ms->fdt, name, "compatible",
--        "pci-host-ecam-generic");
--    qemu_fdt_setprop_string(ms->fdt, name, "device_type", "pci");
--    qemu_fdt_setprop_cell(ms->fdt, name, "linux,pci-domain", 0);
--    qemu_fdt_setprop_cells(ms->fdt, name, "bus-range", 0,
--        s->memmap[VIRT_PCIE_ECAM].size / PCIE_MMCFG_SIZE_MIN - 1);
--    qemu_fdt_setprop(ms->fdt, name, "dma-coherent", NULL, 0);
--    if (s->aia_type == VIRT_AIA_TYPE_APLIC_IMSIC) {
--        qemu_fdt_setprop_cell(ms->fdt, name, "msi-parent", msi_pcie_phandle);
--    }
--    qemu_fdt_setprop_sized_cells(ms->fdt, name, "reg", 2,
--        s->memmap[VIRT_PCIE_ECAM].base, 2, s->memmap[VIRT_PCIE_ECAM].size);
--    qemu_fdt_setprop_sized_cells(ms->fdt, name, "ranges",
--        1, FDT_PCI_RANGE_IOPORT, 2, 0,
--        2, s->memmap[VIRT_PCIE_PIO].base, 2, s->memmap[VIRT_PCIE_PIO].size,
--        1, FDT_PCI_RANGE_MMIO,
--        2, s->memmap[VIRT_PCIE_MMIO].base,
--        2, s->memmap[VIRT_PCIE_MMIO].base, 2, s->memmap[VIRT_PCIE_MMIO].size,
--        1, FDT_PCI_RANGE_MMIO_64BIT,
--        2, virt_high_pcie_memmap.base,
--        2, virt_high_pcie_memmap.base, 2, virt_high_pcie_memmap.size);
--
--    if (virt_is_iommu_sys_enabled(s)) {
--        qemu_fdt_setprop_cells(ms->fdt, name, "iommu-map",
--                               0, iommu_sys_phandle, 0, 0x10000);
--    }
--
--    create_pcie_irq_map(s, ms->fdt, name, irq_pcie_phandle);
--}
--
- static void create_fdt_uart(RISCVVirtState *s,
-                             uint32_t irq_mmio_phandle, int memId, int irqNo)
+ static FWCfgState *create_fw_cfg(const MachineState *ms, hwaddr base)
  {
-@@ -911,8 +811,12 @@ static void finalize_fdt(RISCVVirtState *s)
-                                    irq_mmio_phandle, msi_pcie_phandle,
-                                    &iommu_sys_phandle, IOMMU_SYS_IRQ);
+     FWCfgState *fw_cfg;
+@@ -939,7 +867,10 @@ static void virt_machine_init(MachineState *machine)
+             qdev_get_gpio_in(virtio_irqchip, VIRTIO_IRQ + i));
      }
--    create_fdt_pcie(s, irq_pcie_phandle, msi_pcie_phandle,
--                    iommu_sys_phandle);
-+
-+    create_fdt_pcie(MACHINE(s)->fdt, s->aia_type, virt_is_iommu_sys_enabled(s),
-+                    &s->memmap[VIRT_PCIE_ECAM], &s->memmap[VIRT_PCIE_PIO],
-+                    &s->memmap[VIRT_PCIE_MMIO], &virt_high_pcie_memmap,
-+                    irq_pcie_phandle, msi_pcie_phandle, iommu_sys_phandle,
-+                    PCIE_IRQ);
  
-     create_fdt_syscon(MACHINE(s)->fdt, &phandle,
-                       s->memmap[VIRT_TEST].base, s->memmap[VIRT_TEST].size,
-diff --git a/include/hw/riscv/fdt-common.h b/include/hw/riscv/fdt-common.h
-index 37a1544706..bee8b85597 100644
---- a/include/hw/riscv/fdt-common.h
-+++ b/include/hw/riscv/fdt-common.h
-@@ -11,6 +11,27 @@
+-    gpex_pcie_init(system_memory, pcie_irqchip, s);
++    gpex_pcie_init(system_memory, pcie_irqchip,
++                   &s->memmap[VIRT_PCIE_ECAM], &s->memmap[VIRT_PCIE_MMIO],
++                   &virt_high_pcie_memmap, &s->memmap[VIRT_PCIE_PIO],
++                   PCIE_IRQ);
  
- #include "target/riscv/cpu.h"
- 
-+#define FDT_PCI_ADDR_CELLS    3
-+#define FDT_PCI_INT_CELLS     1
-+#define FDT_PLIC_ADDR_CELLS   0
-+#define FDT_PLIC_INT_CELLS    1
-+#define FDT_APLIC_INT_CELLS   2
-+#define FDT_APLIC_ADDR_CELLS  0
-+#define FDT_IMSIC_INT_CELLS   0
-+#define FDT_MAX_INT_CELLS     2
-+#define FDT_MAX_INT_MAP_WIDTH (FDT_PCI_ADDR_CELLS + FDT_PCI_INT_CELLS + \
-+                                 1 + FDT_MAX_INT_CELLS)
-+#define FDT_PLIC_INT_MAP_WIDTH  (FDT_PCI_ADDR_CELLS + FDT_PCI_INT_CELLS + \
-+                                 1 + FDT_PLIC_INT_CELLS)
-+#define FDT_APLIC_INT_MAP_WIDTH (FDT_PCI_ADDR_CELLS + FDT_PCI_INT_CELLS + \
-+                                 1 + FDT_APLIC_INT_CELLS)
-+
-+typedef enum RISCVAIAType {
-+    AIA_TYPE_NONE = 0,
-+    AIA_TYPE_APLIC,
-+    AIA_TYPE_APLIC_IMSIC,
-+} RISCVAIAType;
-+
- void *create_board_device_tree(const char *model, const char *compatible,
-                                int *fdt_size);
- void create_fdt_socket_memory(void *fdt, hwaddr addr, uint64_t size,
-@@ -46,4 +67,9 @@ void create_fdt_riscv_iommu_sys(void *fdt, hwaddr addr, hwaddr size,
-                                 uint32_t msi_phandle,
-                                 uint32_t *iommu_sys_phandle,
-                                 uint32_t iommu_sys_irq);
-+void create_fdt_pcie(void *fdt, int aia_type, bool has_iommu_sys,
-+                     const MemMapEntry *pcie_ecam, const MemMapEntry *pcie_pio,
-+                     const MemMapEntry *pcie_mmio, const MemMapEntry *high_pcie,
-+                     uint32_t irq_pcie_phandle, uint32_t msi_pcie_phandle,
-+                     uint32_t iommu_sys_phandle, uint32_t pcie_irq);
+     s->platform_bus_dev = create_platform_bus(mmio_irqchip,
+                                               &s->memmap[VIRT_PLATFORM_BUS],
+diff --git a/include/hw/riscv/device-common.h b/include/hw/riscv/device-common.h
+index 1cdb8ab5cc..77760e082c 100644
+--- a/include/hw/riscv/device-common.h
++++ b/include/hw/riscv/device-common.h
+@@ -22,4 +22,11 @@ PFlashCFI01 *riscv_flash_create(Object *parent, const char *name,
+                                 int flash_sector_size);
+ void riscv_init_flash_map(PFlashCFI01 *flash, hwaddr base, hwaddr size,
+                           MemoryRegion *sysmem, int flash_sector_size);
++DeviceState *gpex_pcie_init(MemoryRegion *sys_mem,
++                            DeviceState *irqchip,
++                            const MemMapEntry *pcie_ecam_mem,
++                            const MemMapEntry *pcie_mmio_mem,
++                            const MemMapEntry *high_pcie_mmio_mem,
++                            const MemMapEntry *pcie_pio_mem,
++                            int pcie_irq);
  #endif
-diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
-index 7c862b0da2..e516898f9a 100644
---- a/include/hw/riscv/virt.h
-+++ b/include/hw/riscv/virt.h
-@@ -121,21 +121,6 @@ enum {
- #define VIRT_PLIC_SIZE(__num_context) \
-     (VIRT_PLIC_CONTEXT_BASE + (__num_context) * VIRT_PLIC_CONTEXT_STRIDE)
- 
--#define FDT_PCI_ADDR_CELLS    3
--#define FDT_PCI_INT_CELLS     1
--#define FDT_PLIC_ADDR_CELLS   0
--#define FDT_PLIC_INT_CELLS    1
--#define FDT_APLIC_INT_CELLS   2
--#define FDT_APLIC_ADDR_CELLS  0
--#define FDT_IMSIC_INT_CELLS   0
--#define FDT_MAX_INT_CELLS     2
--#define FDT_MAX_INT_MAP_WIDTH (FDT_PCI_ADDR_CELLS + FDT_PCI_INT_CELLS + \
--                                 1 + FDT_MAX_INT_CELLS)
--#define FDT_PLIC_INT_MAP_WIDTH  (FDT_PCI_ADDR_CELLS + FDT_PCI_INT_CELLS + \
--                                 1 + FDT_PLIC_INT_CELLS)
--#define FDT_APLIC_INT_MAP_WIDTH (FDT_PCI_ADDR_CELLS + FDT_PCI_INT_CELLS + \
--                                 1 + FDT_APLIC_INT_CELLS)
--
- bool virt_is_acpi_enabled(RISCVVirtState *s);
- bool virt_is_iommu_sys_enabled(RISCVVirtState *s);
- void virt_acpi_setup(RISCVVirtState *vms);
 -- 
 2.43.0
 
