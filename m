@@ -4,84 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE71EC61DB9
-	for <qemu-riscv@archiver.kernel.org>; Tue, 25 Aug 2026 17:59:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16E8DC61DB9
+	for <qemu-riscv@archiver.kernel.org>; Tue, 25 Aug 2026 18:31:22 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wyvQF-0008NQ-BN; Tue, 25 Aug 2026 13:58:55 -0400
+	id 1wyvvU-0004Lw-OU; Tue, 25 Aug 2026 14:31:14 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1wyvQE-0008N0-A8
- for qemu-riscv@nongnu.org; Tue, 25 Aug 2026 13:58:54 -0400
-Received: from mail-pj1-x102a.google.com ([2607:f8b0:4864:20::102a])
+ id 1wyvvK-0004Km-Gb
+ for qemu-riscv@nongnu.org; Tue, 25 Aug 2026 14:31:03 -0400
+Received: from mail-pg1-x52c.google.com ([2607:f8b0:4864:20::52c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1wyvQC-0003i6-7j
- for qemu-riscv@nongnu.org; Tue, 25 Aug 2026 13:58:54 -0400
-Received: by mail-pj1-x102a.google.com with SMTP id
- 98e67ed59e1d1-3964b061528so183611a91.1
- for <qemu-riscv@nongnu.org>; Tue, 25 Aug 2026 10:58:51 -0700 (PDT)
+ id 1wyvvI-0005YK-N4
+ for qemu-riscv@nongnu.org; Tue, 25 Aug 2026 14:31:02 -0400
+Received: by mail-pg1-x52c.google.com with SMTP id
+ 41be03b00d2f7-cc1a4c62804so45768a12.3
+ for <qemu-riscv@nongnu.org>; Tue, 25 Aug 2026 11:31:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1787680730; x=1788285530; darn=nongnu.org;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :content-type:mime-version:references:message-id:subject:cc:to:from
- :date:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=cCfFLbwwaJ1Fp51XSeYBPjgTykUG+k2Xi9yFMY/cMkI=;
- b=S8jucgb5amf3P9H13L88Bh+4i4C6WxJJZCEIUSjIVbbfZQ5fTRG56teauQRRLd4eoW
- vmfUbmnq603932fW2l44Bi/ixumYyF3VNSdb11BAX1e62AJA2l83egDKV0nj+oz0iTcG
- kR0xUF9Kwmt3/lu/JO5Ngl65YT9cPjdjqG8/kiL/8rCryr4PjMo1Ai6eViz9QIQGf08R
- Gtw6oAbCQUpB1AllVYyKa24rEVWPJkR1t/SDVCdTWwkiHtuaLVyQ7gZRAr9XOEj6WBcJ
- i05q4rNXKGUTcL5EE3bSVzNR6voUFnoenbvP3zQLsTvslRuP5mf1mytAQvaFbU9uUL8a
- CZcw==
+ d=sifive.com; s=google; t=1787682659; x=1788287459; darn=nongnu.org;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=zzcWJ2HD/hgVg+MMFGSGmV1kwoxiSIEDKm4fM8YeB/0=;
+ b=eB6x44PcYoysU3Rw5F+8/qyjYd1cOdHCP7yA0ChTW5T9Nc9p6yLQwgwiGZxtevLF0v
+ O8TrzxeJtV9aPyb/JDolw01DBWkmwGrxCmHzhDz5nCVz7KR6YYPdVOxL0nFuay5wd9Ye
+ 2KTog5CAc64tYiMKtXWiDZu9l5MTM5EZRlyNS93VFFphMK56m33MnCIBIU0JFKSz2ypU
+ OEcI/NgGUS0dWA2OfRBk0KEw5EGh2vPVvjNX5GcPgWwn5QuUqz4B2gLHvRncw18uQOp5
+ jRyAlm5eqpG1Qzon92Ct7VUTuvIZPJ5dYO7h1IdPBUPM3UDMe3kLIDgy6+hFmAZXDSyV
+ +eOg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787680730; x=1788285530;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :content-type:mime-version:references:message-id:subject:cc:to:from
- :date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=cCfFLbwwaJ1Fp51XSeYBPjgTykUG+k2Xi9yFMY/cMkI=;
- b=Yu+6qGQX4cSo9EHkEvKJFHWNVdsbxxsT9DZ8EYxi0l6lOBZCHI5531cIYSc+112gpw
- whKF9pbtCcO8a2oMqns60fWQblU+lHXcyaTCY+asnRnzBwSZMeJrp97uBfB8Lok/FXwL
- kSTqlRUWJ3zQWjYBoRmKJ3/FZl7QrIG68idGO2BlvjJe8+mM34ouAVLbmGR+F/1XINNc
- MgYfkGSJw6Lku2GcO3g8CsYAmLuoOGzDdFcX91iZo2V3epdfchs7v4wJC4ge92IPwrJy
- UO+xv6fox8S9+biZVG3kCmm3CU0JLU1uD9A8cTLRrNCH+ePjSz3om3/+aptbG/9L6Gjh
- eHag==
+ d=1e100.net; s=20251104; t=1787682659; x=1788287459;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=zzcWJ2HD/hgVg+MMFGSGmV1kwoxiSIEDKm4fM8YeB/0=;
+ b=OXcHNz2B3NwRKhpzoJriD4W4nF5ZTM16/0voM1KAJz8c8MatnN7UfV300Ll7uGIa6l
+ 8eI/jIUnbEzu1e4mSobCK+taOXz8qniwNTMbqnrFO/8T4tbQ/rM3yzEl77trJWZHta9E
+ F9VVEptF7KE5UXlx2FgJQSlcvo7+jOen0wBeXb9nL8VoZjiKCM/6k+MeLhhm33aA70cP
+ bDed1yXQqrjpb4HTPFZZKgoh0cwwHLX3nu29zpWKEbKpuGfIu6B6RFso4uwkjucK9yg9
+ y4l8wxTZBmXheyLzYhqRRB+Zd1T5jCvYmJuyvV75oZfAu6Ju8l9oIXPquu+VSxmKl4FI
+ Dg3A==
 X-Forwarded-Encrypted: i=1;
- AHgh+Rq7CPaZJc8QjRrKLdtMSxAFR6OxsIKjCc7koibzMUw1r5/ubzFAiFjnBpcPRK8L9thANSkVA3HSNmeE@nongnu.org
-X-Gm-Message-State: AFuF++kWnTU4o42tCg8dpLOxIxMo8EufgfctiJ4PoX4KbH6dwCaAHRxD
- Gamz+aaA9SUBDHMJ3JNgMfHNKGrH4IPGza/EHgxNu9mAOTiyOpX8gRas9dDLIutBVUE=
-X-Gm-Gg: AR+sD11JcQOD5IwXTf47imFTuKf28Vadm31wGuOKfsRFSR9OaaC/IHe5joTNYvVVvwm
- cleqyOiQwocJYsNL+XiPbRgE2a/Ruzabzq4lFtKsCLoPN+h1Q8JgFCrFL6bggp4U+Fjlcum45YO
- jJHliKD4yhCXpIll6iZq/xa+sKlsD01I44QQS5DRPlCLuf5jtGz5mO+6zWBi5+tUjTIm1YW0cn1
- ZK60FeWCrlN9NU5FAg3dF702UWJ/iY+gjWYGXuDoNTK6cT5e90MzabeQSDTVgCAxd4j8MBhSEJc
- H0Ow3xHKu8ZBLc9uRVjEshFQLLuIS+i1LLITzauNy9RUrnZxcEU9n6PGUJmT59pdq59JVvgBwdr
- 41yrH9ylamJtodDWW4ROzvCFRPClTReLqE8/IkFtxDzYj0zuHEqFaR1LiOy6qaV0EUvRNLUQFYB
- XcXY6nts6zRYaPVxncgFkFE4wk3y8IC8lw/X4FgR8dc76hTN5rtwDRiUcmngPYId5ClQHRO+yEM
- btpkpWyUYa/eVhIOB4zguQeRt8gQYvFn/CrYc8=
-X-Received: by 2002:a17:90a:e70f:b0:38e:11ba:992c with SMTP id
- 98e67ed59e1d1-3966d4587b7mr1891204a91.12.1787680730104; 
- Tue, 25 Aug 2026 10:58:50 -0700 (PDT)
+ AHgh+RqbzrPJhD6bPiKOZbaxwkJIicpAK8w+ZPmG2QdS1QwA5o7Afe+34/od7GN7NkINRrHbZWUtoQjHzFC9@nongnu.org
+X-Gm-Message-State: AFuF++mpoGJpNl+2Nw5mTAF34hW3hfXU/RLtEvqOxJ492J4oMtMP7W2U
+ epvav4TKNEtPcnwnmmJ5wmLuKv6dU31GzLEbBezkBbVV9f6THYHO6YUlPZ+LNp/443c=
+X-Gm-Gg: AR+sD11M8NtodwsqIKvKTFxK5NvJKFeyMb+hizIgmLO3jjgvcdxDnd2LeSodF8wIW3Q
+ LXNh5FV/XGImL92eSlH7/n/dbQ5XIcKFyGML4TIPNswOdkAL9DtA7hJbybRZV2+yv8ld6W/jvLw
+ 7ryImPAuS0M+Hyfj9ZbDcgAR5Bvfu5moJPXQyfgUsaK5uEyhwwENp2OGSahHmqSkAQrSFuSJii5
+ 5aoxse9f8reteBdpiYc2g9ZluICUPa9TYv9Bipgy2QlWKVZEQ7454UgFMFo4M7jJuTuu6XJI1Js
+ 8ybo7CvLrAcm94IOfbWtML2tt2gNtgNE2hu6F/6bUb8ijiVTClqcBpBpcsXH9lH2VOha9N+1/lU
+ Yn2ZkH5PjC3sFkU4vnNKFjAZVeFme6oCJhieyVa4RizSa82jMy02Zfos8ycSZ3PUbTtBU2ZDlYp
+ BHkKUxmioGZcoiFysEZDCPNUHVosE4iRhK1SG9rBGoOcJLDL1W06WjaVt281D1x9cUIwF+flxtr
+ JhdeIGKzmsLmy3I6yFOWepsndEHiaBaqg==
+X-Received: by 2002:a05:6a00:4ac7:b0:846:de21:3da4 with SMTP id
+ d2e1a72fcca58-85371aacd42mr1442062b3a.3.1787682658806; 
+ Tue, 25 Aug 2026 11:30:58 -0700 (PDT)
 Received: from sifive.com ([136.226.240.165]) by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-39645d69f74sm4291048a91.14.2026.08.25.10.58.48
+ d2e1a72fcca58-8535d7262d2sm160655b3a.61.2026.08.25.11.30.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 25 Aug 2026 10:58:49 -0700 (PDT)
-Date: Wed, 26 Aug 2026 01:58:47 +0800
+ Tue, 25 Aug 2026 11:30:58 -0700 (PDT)
+Date: Wed, 26 Aug 2026 02:30:55 +0800
 From: Max Chou <max.chou@sifive.com>
 To: Richard Henderson <richard.henderson@linaro.org>
 Cc: qemu-devel@nongnu.org, frank.chang@sifive.com, qemu-riscv@nongnu.org
-Subject: Re: [PATCH 11/23] target/riscv: Rewrite vext_ldff
-Message-ID: <ao3JcPyrC7cZaCgp@sifive.com>
+Subject: Re: [PATCH 05/23] target/riscv: Add evl argument to
+ vext_ldst_elem_fn_host
+Message-ID: <ao3Yufx1A7yoMoDw@sifive.com>
 References: <20260815194549.1377505-1-richard.henderson@linaro.org>
- <20260815194549.1377505-12-richard.henderson@linaro.org>
+ <20260815194549.1377505-6-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20260815194549.1377505-12-richard.henderson@linaro.org>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102a;
- envelope-from=max.chou@sifive.com; helo=mail-pj1-x102a.google.com
+In-Reply-To: <20260815194549.1377505-6-richard.henderson@linaro.org>
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52c;
+ envelope-from=max.chou@sifive.com; helo=mail-pg1-x52c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -105,227 +105,154 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 2026-08-15 12:45, Richard Henderson wrote:
-> Do not call probe_pages for every active element.
-> We can make do with no more than 2 such calls for
-> the two pages the insn might reference.
+> This merges vext_continuous_ldst_host into the ldst_host function.
+> We can then handle the byte little-endian optimization at compile-time.
 > 
 > Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
-> +    /*
-> +     * Test whether the first page is accessible.
-> +     * If the first element is active, it must succeed.
-> +     */
-> +    flags = probe_access_flags(env, adjust_addr(env, addr),
-> +                               MIN(last, last_in_page) - addr + 1,
-> +                               MMU_DATA_LOAD, mmu_index, !first_active,
-> +                               &host, ra);
+> ---
+>  target/riscv/tcg/vector_helper.c | 83 +++++++++++++++-----------------
+>  1 file changed, 40 insertions(+), 43 deletions(-)
+> 
+> diff --git a/target/riscv/tcg/vector_helper.c b/target/riscv/tcg/vector_helper.c
+> index 661f1ab2f6..3786a17231 100644
+> --- a/target/riscv/tcg/vector_helper.c
+> +++ b/target/riscv/tcg/vector_helper.c
+> @@ -214,7 +214,8 @@ static inline MemOpIdx vext_make_memop_idx(CPURISCVState *env, size_t size)
+>  /* elements operations for load and store */
+>  typedef void vext_ldst_elem_fn_tlb(CPURISCVState *env, abi_ptr addr,
+>                                     uint32_t idx, void *vd, uintptr_t retaddr);
+> -typedef void vext_ldst_elem_fn_host(void *vd, uint32_t idx, void *host);
+> +typedef void vext_ldst_elem_fn_host(void *vd, void *host,
+> +                                    uint32_t idx, uint32_t evl);
 >  
-
-Hi Richard,
-
-This probe traverses every byte from the initial active element to the
-end of the page, not just the bytes of active elements. In the masked
-case, the range may encompass a masked-off element, and masked-off body
-elements do not perform memory accesses.
-I think it may causes unexpected vl.
-
-> +    /* Get number of complete elements in the first page. */
-> +    elems = MIN(page_split / msize, vl - i);
+>  #define GEN_VEXT_TLB_LD_ELEM(NAME, ETYPE, H, LDSUF)         \
+>  static inline QEMU_ALWAYS_INLINE                            \
+> @@ -226,12 +227,15 @@ void NAME##_tlb(CPURISCVState *env, abi_ptr addr,           \
+>      *cur = cpu_##LDSUF##_mmu(env, addr, oi, retaddr);       \
+>  }                                                           \
+>  
+> -#define GEN_VEXT_HOST_LD_ELEM(NAME, ETYPE, H, LDSUF)        \
+> -static inline QEMU_ALWAYS_INLINE                            \
+> -void NAME##_host(void *vd, uint32_t idx, void *host)        \
+> -{                                                           \
+> -    ETYPE *cur = ((ETYPE *)vd + H(idx));                    \
+> -    *cur = (ETYPE)LDSUF##_p(host);                          \
+> +#define GEN_VEXT_HOST_LD_ELEM(NAME, ETYPE, H, LDSUF)                    \
+> +static inline QEMU_ALWAYS_INLINE                                        \
+> +void NAME##_host(void *vd, void *host, uint32_t idx, uint32_t evl)      \
+> +{                                                                       \
+> +    do {                                                                \
+> +        ETYPE *cur = (ETYPE *)vd + H(idx);                              \
+> +        *cur = LDSUF##_p(host);                                         \
+> +        host += sizeof(ETYPE);                                          \
+> +    } while (++idx < evl);                                              \
+>  }
+>  
+>  GEN_VEXT_TLB_LD_ELEM(lde_b, uint8_t,  H1, ldb)
+> @@ -239,7 +243,16 @@ GEN_VEXT_TLB_LD_ELEM(lde_h, uint16_t, H2, ldw)
+>  GEN_VEXT_TLB_LD_ELEM(lde_w, uint32_t, H4, ldl)
+>  GEN_VEXT_TLB_LD_ELEM(lde_d, uint64_t, H8, ldq)
+>  
+> +#if HOST_BIG_ENDIAN
+>  GEN_VEXT_HOST_LD_ELEM(lde_b, uint8_t,  H1, ldub)
+> +#else
+> +static inline QEMU_ALWAYS_INLINE
+> +void lde_b_host(void *vd, void *host, uint32_t idx, uint32_t evl)
+> +{
+> +    memcpy(vd + idx, host, evl - idx);
+> +}
+> +#endif
 > +
-> +    /* Load complete elements from the first page. */
-> +    if (likely(elems)) {
-> +        uint32_t page_evl = i + elems;
+>  GEN_VEXT_HOST_LD_ELEM(lde_h, uint16_t, H2, lduw_le)
+>  GEN_VEXT_HOST_LD_ELEM(lde_w, uint32_t, H4, ldl_le)
+>  GEN_VEXT_HOST_LD_ELEM(lde_d, uint64_t, H8, ldq_le)
+> @@ -254,12 +267,15 @@ void NAME##_tlb(CPURISCVState *env, abi_ptr addr,           \
+>      cpu_##STSUF##_mmu(env, addr, data, oi, retaddr);        \
+>  }                                                           \
+>  
+> -#define GEN_VEXT_HOST_ST_ELEM(NAME, ETYPE, H, STSUF)        \
+> -static inline QEMU_ALWAYS_INLINE                            \
+> -void NAME##_host(void *vd, uint32_t idx, void *host)        \
+> -{                                                           \
+> -    ETYPE data = *((ETYPE *)vd + H(idx));                   \
+> -    STSUF##_p(host, data);                                  \
+> +#define GEN_VEXT_HOST_ST_ELEM(NAME, ETYPE, H, STSUF)                    \
+> +static inline QEMU_ALWAYS_INLINE                                        \
+> +void NAME##_host(void *vd, void *host, uint32_t idx, uint32_t evl)      \
+> +{                                                                       \
+> +    do {                                                                \
+> +        ETYPE data = *((ETYPE *)vd + H(idx));                           \
+> +        STSUF##_p(host, data);                                          \
+> +        host += sizeof(ETYPE);                                          \
+> +    } while (++idx < evl);                                              \
+>  }
+>  
+>  GEN_VEXT_TLB_ST_ELEM(ste_b, uint8_t,  H1, stb)
+> @@ -267,7 +283,16 @@ GEN_VEXT_TLB_ST_ELEM(ste_h, uint16_t, H2, stw)
+>  GEN_VEXT_TLB_ST_ELEM(ste_w, uint32_t, H4, stl)
+>  GEN_VEXT_TLB_ST_ELEM(ste_d, uint64_t, H8, stq)
+>  
+> +#if HOST_BIG_ENDIAN
+>  GEN_VEXT_HOST_ST_ELEM(ste_b, uint8_t,  H1, stb)
+> +#else
+> +static inline QEMU_ALWAYS_INLINE
+> +void ste_b_host(void *vd, void *host, uint32_t idx, uint32_t evl)
+> +{
+> +    memcpy(host, vd + idx, evl - idx);
+> +}
+> +#endif
 > +
-> +        if (flags == 0) {
-...
-> +        } else {
-> +            /*
-> +             * If the first element is active, it must succeed.
-> +             * This will load from MMIO or fault from INVALID.
-> +             */
-> +            if (first_active) {
-> +                vext_ldst_nf_tlb(env, vd, addr, 0, nf, esz,
-> +                                 max_elems, ldst_tlb, ra);
-> +                i = 1;
-> +                addr += msize;
-> +            }
-> +
-> +            /* Stop if invalid (unmapped) or mmio (transaction may fail). */
-> +            if (flags & (TLB_INVALID_MASK | TLB_MMIO)) {
-> +                env->vl = i;
-> +                goto tail;
-> +            }
-> +
+>  GEN_VEXT_HOST_ST_ELEM(ste_h, uint16_t, H2, stw_le)
+>  GEN_VEXT_HOST_ST_ELEM(ste_w, uint32_t, H4, stl_le)
+>  GEN_VEXT_HOST_ST_ELEM(ste_d, uint64_t, H8, stq_le)
+> @@ -284,33 +309,6 @@ vext_continuous_ldst_tlb(CPURISCVState *env, vext_ldst_elem_fn_tlb *ldst_tlb,
+>      }
+>  }
+>  
+> -static inline QEMU_ALWAYS_INLINE void
+> -vext_continuous_ldst_host(CPURISCVState *env, vext_ldst_elem_fn_host *ldst_host,
+> -                        void *vd, uint32_t evl, uint32_t reg_start, void *host,
+> -                        uint32_t esz, bool is_load)
+> -{
+> -    if (HOST_BIG_ENDIAN) {
+> -        for (; reg_start < evl; reg_start++, host += esz) {
+> -            ldst_host(vd, reg_start, host);
+> -        }
+> -    } else {
+> -        if (esz == 1) {
+> -            uint32_t byte_offset = reg_start * esz;
+> -            uint32_t size = (evl - reg_start) * esz;
+> -
+> -            if (is_load) {
+> -                memcpy(vd + byte_offset, host, size);
+> -            } else {
+> -                memcpy(host, vd + byte_offset, size);
+> -            }
+> -        } else {
+> -            for (; reg_start < evl; reg_start++, host += esz) {
+> -                ldst_host(vd, reg_start, host);
+> -            }
+> -        }
+> -    }
+> -}
+> -
+>  static void vext_set_tail_elems_1s(uint32_t vl, void *vd, uint32_t nf,
+>                                     uint32_t esz, uint32_t max_elems)
+>  {
+> @@ -334,7 +332,7 @@ static void vext_ldst_nf_host(void *vd, void *host, uint32_t i, uint32_t nf,
+>                                vext_ldst_elem_fn_host *ldst_host)
+>  {
+>      for (uint32_t k = 0; k < nf; k++, host += esz) {
+> -        ldst_host(vd, i + k * max_elems, host);
+> +        ldst_host(vd + k * max_elems, host, i, i + 1);
 
-For an example, assume
-- vl = 3
-- vstart = 0
-- the mask be [1, 0, 1]
-- assume element 0 and element 2 be readable, but deny the byte at element 1
-- all three elements are in the same target page.
+The type of ldst_host vd parameter is void *, so vd + k * max_elems
+advances in bytes, not the target element width.
 
-In theory, the element 1 is masked off and doesn’t perform any memory
-access, so the value of vl remains 3.
+I think here should be
 
-But the previous probe covers element 1 to 2 and the flags will be non
-zero due to the denied masked-off element 2. Then the vl will set to 1
-here.
+> +        ldst_host(vd, host, i + k * max_elems, i + k * max_elems + 1);
 
-Maybe we could switch to per element prob when vm is 0 and flags is not 0?
 
 rnax
-
-> +            /* None of these ldst_tlb calls may fault. */
-> +            if (vm) {
-> +                vext_page_ldst_us_tlb(env, vd, addr, i, page_evl, nf,
-> +                                      log2_esz, max_elems,
-> +                                      ldst_tlb, mmu_index, ra);
-> +            } else {
-> +                do {
-> +                    if (vext_elem_mask(v0, i)) {
-> +                        vext_ldst_nf_tlb(env, vd, base + i * msize, i, nf,
-> +                                         esz, max_elems, ldst_tlb, ra);
-> +                    } else if (vma) {
-> +                        vext_set_nf_elems_1s(vd, i, nf, esz, max_elems);
->                      }
-> -                    remain -= offset;
-> -                    addr_i = adjust_addr(env, addr_i + offset);
-> -                }
-> +                } while (++i < page_evl);
-> +            }
-> +        }
-> +
-> +        /* Usually the first page contains the entire vector. */
-> +        if (likely(page_evl == vl)) {
-> +            goto tail;
-> +        }
-> +        i = page_evl;
-> +    }
-> +
-> +    /* Skip forward to the next active element. */
-> +    if (!vm) {
-> +        while (1) {
-> +            if (vext_elem_mask(v0, i)) {
-> +                break;
-> +            }
-> +            if (vma) {
-> +                vext_set_nf_elems_1s(vd, i, nf, esz, max_elems);
-> +            }
-> +            if (++i == vl) {
-> +                goto tail;
->              }
->          }
->      }
-> -ProbeSuccess:
-> -    /* load bytes from guest memory */
-> -    if (vl != 0) {
-> -        env->vl = vl;
-> +
-> +    addr = base + i * msize;
-> +    page_split = -(addr | TARGET_PAGE_MASK);
-> +
-> +    /* Validate the second page is accessible. */
-> +    if (unlikely(page_split < msize)) {
-> +        /*
-> +         * Cross page element which isn't first.
-> +         * We have not yet advanced addr to the next page.
-> +         */
-> +        target_ulong next_page = addr + page_split;
-> +        flags |= probe_access_flags(env, adjust_addr(env, next_page),
-> +                                    last - next_page + 1, MMU_DATA_LOAD,
-> +                                    mmu_index, true, &host, ra);
-> +
-> +        /* Stop if invalid (unmapped) or mmio (transaction may fail). */
-> +        if (flags & (TLB_INVALID_MASK | TLB_MMIO)) {
-> +            env->vl = i;
-> +            goto tail;
-> +        }
-> +
-> +        vext_ldst_nf_tlb(env, vd, addr, i, nf, esz, max_elems, ldst_tlb, ra);
-> +        if (++i == vl) {
-> +            goto tail;
-> +        }
-> +        addr += msize;
-> +        if (host) {
-> +            host += addr - next_page;
-> +        }
-> +    } else {
-> +        flags = probe_access_flags(env, adjust_addr(env, addr),
-> +                                   last - addr + 1, MMU_DATA_LOAD,
-> +                                   mmu_index, true, &host, ra);
-> +
-> +        /* Stop if invalid (unmapped) or mmio (transaction may fail). */
-> +        if (flags & (TLB_INVALID_MASK | TLB_MMIO)) {
-> +            env->vl = i;
-> +            goto tail;
-> +        }
->      }
->  
-> -    if (env->vstart < env->vl) {
-> +    /* Load complete elements from the second page. */
-> +    if (flags == 0) {
->          if (vm) {
-> -            /* Load/store elements in the first page */
-> -            if (likely(elems)) {
-> -                vext_page_ldst_us(env, vd, addr, elems, nf, max_elems,
-> -                                  log2_esz, true, mmu_index, ldst_tlb,
-> -                                  ldst_host, ra);
-> -            }
-> -
-> -            /* Load/store elements in the second page */
-> -            if (unlikely(env->vstart < env->vl)) {
-> -                addr = base + env->vstart * msize;
-> -
-> -                /* Cross page element */
-> -                if (unlikely(page_split % msize)) {
-> -                    vext_ldst_nf_tlb(env, vd, addr, env->vstart, nf,
-> -                                     esz, max_elems, ldst_tlb, ra);
-> -                    env->vstart++;
-> -                    addr += msize;
-> -                }
-> -
-> -                /* Get number of elements of second page */
-> -                elems = env->vl - env->vstart;
-> -
-> -                /* Load/store elements in the second page */
-> -                vext_page_ldst_us(env, vd, addr, elems, nf, max_elems,
-> -                                  log2_esz, true, mmu_index, ldst_tlb,
-> -                                  ldst_host, ra);
-> -            }
-> +            vext_page_ldst_us_host(vd, host, i, vl, nf,
-> +                                   log2_esz, max_elems, ldst_host);
->          } else {
-> -            for (i = env->vstart; i < env->vl; i++) {
-> +            host -= addr - base;
-> +            do {
-> +                if (vext_elem_mask(v0, i)) {
-> +                    vext_ldst_nf_host(vd, host + i * msize, i, nf, esz,
-> +                                      max_elems, ldst_host);
-> +                } else if (vma) {
-> +                    vext_set_nf_elems_1s(vd, i, nf, esz, max_elems);
-> +                }
-> +            } while (++i < vl);
-> +        }
-> +    } else {
-> +        /* None of these ldst_tlb calls may fault. */
-> +        if (vm) {
-> +            vext_page_ldst_us_tlb(env, vd, addr, i, vl, nf,
-> +                                  log2_esz, max_elems,
-> +                                  ldst_tlb, mmu_index, ra);
-> +        } else {
-> +            do {
->                  if (vext_elem_mask(v0, i)) {
->                      vext_ldst_nf_tlb(env, vd, base + i * msize, i, nf,
->                                       esz, max_elems, ldst_tlb, ra);
->                  } else if (vma) {
->                      vext_set_nf_elems_1s(vd, i, nf, esz, max_elems);
->                  }
-> -            }
-> +            } while (++i < vl);
->          }
->      }
->  
-> -- 
-> 2.43.0
-> 
-> 
 
