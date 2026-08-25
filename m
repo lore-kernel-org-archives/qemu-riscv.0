@@ -4,71 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E99F6C61DB6
-	for <qemu-riscv@archiver.kernel.org>; Tue, 25 Aug 2026 07:04:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C8AFC61DBC
+	for <qemu-riscv@archiver.kernel.org>; Tue, 25 Aug 2026 07:13:49 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wylCK-0005Le-0g; Tue, 25 Aug 2026 03:03:52 -0400
+	id 1wylKc-0004SV-AK; Tue, 25 Aug 2026 03:12:26 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <xb@ultrarisc.com>)
- id 1wylCE-0005LE-D7; Tue, 25 Aug 2026 03:03:46 -0400
-Received: from [218.76.62.146] (helo=ultrarisc.com)
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <xb@ultrarisc.com>)
- id 1wylCB-0005Av-9s; Tue, 25 Aug 2026 03:03:46 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ultrarisc.com; s=dkim; h=Received:From:To:Cc:Subject:Date:
- Message-ID:In-Reply-To:References:MIME-Version:
- Content-Transfer-Encoding; bh=fcN7X+Xe6tIlsnfmZIBWKlkLfPrFqlGafM
- OLhd13yrA=; b=ehgROFMi1K6uVFETQh6V2uTjZ3t7Dt75ABPAyxuiTTGgAnNQHg
- /Uy+v9sHZ7Ppy6vwNiuIOvTAEtgp4qZOrQmGQOVaEWBpR7hPY5mgyHctWiXZ+Pc5
- QLSa1Gmr0QxDRh79IUj4evKFuyEEAr2DToHVyFC5nFKWrpumgAdkK0PFY=
-Received: from ur-dp1000 (unknown [192.168.100.1])
- by localhost.localdomain (Coremail) with SMTP id
- AQAAfwB3V847Po1qgC4BAA--.308S2; 
- Tue, 25 Aug 2026 15:03:34 +0800 (CST)
-From: Xie Bo <xb@ultrarisc.com>
-To: qemu-stable@nongnu.org
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
- palmer@dabbelt.com, daniel.barboza@oss.qualcomm.com,
- Xie Bo <xb@ultrarisc.com>
-Subject: Re: [PATCH v11 0/2] target/riscv: Fix riscv64 KVM migration
-Date: Tue, 25 Aug 2026 15:03:09 +0800
-Message-ID: <20260825070309.1086125-1-xb@ultrarisc.com>
-X-Mailer: git-send-email 2.54.0
-In-Reply-To: <20260808125157.1220511-1-xb@ultrarisc.com>
-References: <20260808125157.1220511-1-xb@ultrarisc.com>
+ (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
+ id 1wylKa-0004JN-5J; Tue, 25 Aug 2026 03:12:24 -0400
+Received: from isrv.corpit.ru ([212.248.84.144])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
+ id 1wylKY-00077U-DC; Tue, 25 Aug 2026 03:12:23 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=tls.msk.ru; s=202602;
+ t=1787641903; bh=7xb9enhUKDyhCmqCLRelZQYgOujhFvjWLt6eabUybBQ=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To;
+ b=LTpp8kbd2V3lOyBfingE/cVKVZqukP6Sm62Ce7AuMKCkJ99/pIKuDWSDuaZZz4jLl
+ Cr9g0nf7xNZrHrUEnC9l0kzYZ6TNNUjxDkpRIDYcrqUZWEgDcB0JvHCUWQTgqadmun
+ fAJdnGcZSGzPsxfeh7+m2/jv4Ohvk4040+Kz2rgwNnFMo6gFSCAieQSgmF7llFqR/d
+ U0K6Y8ueawqNRXHtLpdFE26U/nwTDtRvNLtECgkJ1idVBf0D9Wfc8PyHzzzNFRT7m+
+ lBNc9wiRV4DHx6jAoe9sIOzcdHJUSoHFaqXVw3pnFkFt0xQU27mrCq+YTuMBw3SCy2
+ 7q0Qw/+Tv8+dA==
+Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
+ by isrv.corpit.ru (Postfix) with ESMTP id BD99C1CE258;
+ Tue, 25 Aug 2026 10:11:43 +0300 (MSK)
+Received: from [192.168.177.130] (mjt.wg.tls.msk.ru [192.168.177.130])
+ by tsrv.corpit.ru (Postfix) with ESMTP id 6D2F4415FC3;
+ Tue, 25 Aug 2026 10:12:20 +0300 (MSK)
+Message-ID: <e350bfda-cd57-4b25-9c72-40585e30a488@tls.msk.ru>
+Date: Tue, 25 Aug 2026 10:11:43 +0300
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: AQAAfwB3V847Po1qgC4BAA--.308S2
-X-Coremail-Antispam: 1UD129KBjvdXoW7Xr1UXry5trWrCrWkXrWDArb_yoWxtrcEgr
- W29r1vkay5ZF10yF17WF4UCFy3K3ykJryYva17JrWDW348XrnxJan8AryrC3yfAFW8XrZ3
- X3ZFqa47Aw17ZjkaLaAFLSUrUUUUjb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
- 9fnUUIcSsGvfJTRUUUbIxFF20E14v26r4j6ryUM7CY07I20VC2zVCF04k26cxKx2IYs7xG
- 6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8w
- A2z4x0Y4vE2Ix0cI8IcVAFwI0_Jr0_JF4l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Jr0_
- Gr1l84ACjcxK6I8E87Iv67AKxVW8JVWxJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gr0_Gr
- 1UM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xII
- jxv20xvE14v26r1Y6r17McIj6I8E87Iv67AKxVW8JVWxJwAm72CE4IkC6x0Yz7v_Jr0_Gr
- 1lF7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7MxkF7I0En4kS14v26r12
- 6r1DMxkIecxEwVCm-wCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s
- 026c02F40E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_
- JF0_Jw1lIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20x
- vEc7CjxVAFwI0_Jr0_Gr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE
- 14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Jr0_GrUvcSsGvfC2KfnxnUUI43ZEXa
- 7VUjMqcUUUUUU==
-X-CM-SenderInfo: l0e63zxwud2x1vfou0bp/1tbiAQAJB2qKZnsAAgALs7
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 218.76.62.146 (failed)
-Received-SPF: pass client-ip=218.76.62.146; envelope-from=xb@ultrarisc.com;
- helo=ultrarisc.com
-X-Spam_score_int: -12
-X-Spam_score: -1.3
-X-Spam_bar: -
-X-Spam_report: (-1.3 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, RDNS_NONE=0.793,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=no autolearn_force=no
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 0/2] target/riscv: Fix seed CSR sign extension
+To: Ivan Efremov <nendensu@ispras.ru>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, palmer@dabbelt.com,
+ farosas@suse.de, lvivier@redhat.com
+References: <20260802113130.7818-1-nendensu@ispras.ru>
+Content-Language: en-US, ru-RU
+From: Michael Tokarev <mjt@tls.msk.ru>
+In-Reply-To: <20260802113130.7818-1-nendensu@ispras.ru>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=212.248.84.144; envelope-from=mjt@tls.msk.ru;
+ helo=isrv.corpit.ru
+X-Spam_score_int: -19
+X-Spam_score: -2.0
+X-Spam_bar: --
+X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -84,26 +70,49 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi,
+On 8/2/26 14:31, Ivan Efremov wrote:
+> The seed CSR value on RV64 was sign extended while converting to target_ulong.
+> 
+> The first patch makes SEED_OPST_* unsigned.
+> The second patch adds qtest to check that upper 32 bits are zero.
+> 
+> Tests ran:
+> - riscv-csr-test
+> - make check: 324 passed, 11 skipped
+> - RISC-V Zkr-00 architectural test
+> 
+> Ivan Efremov (2):
+>    target/riscv: Fix seed CSR sign extension
+>    tests/qtest: Add seed CSR zero extension test
 
-Now that this series is in master, could it also be considered for
-stable-11.1?
+I'm picking this patch set for the currently active qemu stable
+series (10.0 LTS, 11.0, 11.1).  However, it does not work on
+11.0.x already (it works ok on 11.1.x), the test fails:
 
-Both commits are needed together:
+TAP version 14
+# random seed: R02Sac6635c76a7dc335fadd70845da72f99
+1..2
+# Start of riscv64 tests
+# Start of cpu tests
+# starting QEMU: exec ./qemu-system-riscv64 -qtest unix:/tmp/qtest-182934.sock -qtest-log /dev/null -chardev 
+socket,path=/tmp/qtest-182934.qmp,id=char0 -mon chardev=char0,mode=control -display none -audio none -run-with exit-with-parent=on -machine virt -cpu 
+veyron-v1 -accel qtest
+ok 1 /riscv64/cpu/csr
+# Start of csr tests
+# starting QEMU: exec ./qemu-system-riscv64 -qtest unix:/tmp/qtest-182934.sock -qtest-log /dev/null -chardev 
+socket,path=/tmp/qtest-182934.qmp,id=char0 -mon chardev=char0,mode=control -display none -audio none -run-with exit-with-parent=on -machine virt -cpu 
+tt-ascalon -accel qtest
+**
+ERROR:../../build/qemu/11.0/hw/riscv/riscv_hart.c:78:csr_call: assertion failed: (ret == RISCV_EXCP_NONE)
+Bail out! ERROR:../../build/qemu/11.0/hw/riscv/riscv_hart.c:78:csr_call: assertion failed: (ret == RISCV_EXCP_NONE)
+Broken pipe
+../../build/qemu/11.0/tests/qtest/libqtest.c:210: kill_qemu() detected QEMU death from signal 6 (Aborted)
+Aborted
 
-7df9aa5 target/riscv/kvm: Synchronize privilege mode
-ddac7cf target/riscv/kvm: Preserve MP state across migration
-
-They fix RISC-V KVM live migration with multiple vCPUs. Without the
-second fix, secondary vCPUs can remain stopped after migration; without
-the first, the vCPU privilege mode may be restored incorrectly.
-
-I tested the series on native riscv64 hardware with KVM enabled,
-including multi-vCPU live migration, a 24-hour post-migration run, and
-multiple repeated migrations across two guests. I did not observe guest
-hangs or soft lockups.
+Should I pick something else for 11.0 and 10.0 (on 10.0 it fails the same way),
+so the test succeeds, or should I drop this patch set from 11.1.x?
 
 Thanks,
-Xie Bo
 
+/mjt
 
