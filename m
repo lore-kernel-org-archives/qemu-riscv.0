@@ -4,57 +4,111 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C8AFC61DBC
-	for <qemu-riscv@archiver.kernel.org>; Tue, 25 Aug 2026 07:13:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29D03C5DF94
+	for <qemu-riscv@archiver.kernel.org>; Tue, 25 Aug 2026 08:54:15 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wylKc-0004SV-AK; Tue, 25 Aug 2026 03:12:26 -0400
+	id 1wymuy-0003Z6-5e; Tue, 25 Aug 2026 04:54:04 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
- id 1wylKa-0004JN-5J; Tue, 25 Aug 2026 03:12:24 -0400
-Received: from isrv.corpit.ru ([212.248.84.144])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
- id 1wylKY-00077U-DC; Tue, 25 Aug 2026 03:12:23 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=tls.msk.ru; s=202602;
- t=1787641903; bh=7xb9enhUKDyhCmqCLRelZQYgOujhFvjWLt6eabUybBQ=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To;
- b=LTpp8kbd2V3lOyBfingE/cVKVZqukP6Sm62Ce7AuMKCkJ99/pIKuDWSDuaZZz4jLl
- Cr9g0nf7xNZrHrUEnC9l0kzYZ6TNNUjxDkpRIDYcrqUZWEgDcB0JvHCUWQTgqadmun
- fAJdnGcZSGzPsxfeh7+m2/jv4Ohvk4040+Kz2rgwNnFMo6gFSCAieQSgmF7llFqR/d
- U0K6Y8ueawqNRXHtLpdFE26U/nwTDtRvNLtECgkJ1idVBf0D9Wfc8PyHzzzNFRT7m+
- lBNc9wiRV4DHx6jAoe9sIOzcdHJUSoHFaqXVw3pnFkFt0xQU27mrCq+YTuMBw3SCy2
- 7q0Qw/+Tv8+dA==
-Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
- by isrv.corpit.ru (Postfix) with ESMTP id BD99C1CE258;
- Tue, 25 Aug 2026 10:11:43 +0300 (MSK)
-Received: from [192.168.177.130] (mjt.wg.tls.msk.ru [192.168.177.130])
- by tsrv.corpit.ru (Postfix) with ESMTP id 6D2F4415FC3;
- Tue, 25 Aug 2026 10:12:20 +0300 (MSK)
-Message-ID: <e350bfda-cd57-4b25-9c72-40585e30a488@tls.msk.ru>
-Date: Tue, 25 Aug 2026 10:11:43 +0300
+ (Exim 4.90_1) (envelope-from <jcmvbkbc@gmail.com>)
+ id 1wymux-0003YM-0f
+ for qemu-riscv@nongnu.org; Tue, 25 Aug 2026 04:54:03 -0400
+Received: from mail-qk1-x72c.google.com ([2607:f8b0:4864:20::72c])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <jcmvbkbc@gmail.com>)
+ id 1wymuu-0001ki-QQ
+ for qemu-riscv@nongnu.org; Tue, 25 Aug 2026 04:54:02 -0400
+Received: by mail-qk1-x72c.google.com with SMTP id
+ af79cd13be357-93695893ac1so268444485a.0
+ for <qemu-riscv@nongnu.org>; Tue, 25 Aug 2026 01:54:00 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1787648039; cv=none;
+ d=google.com; s=arc-20260327;
+ b=hDJ9QFlAjjVqnGOsuVgP4ihdYACUBCgJrmOb8xJAGHAC4KxOEgdIiTdwt7wGQXvd5d
+ rBfJzSLX9CRTOmejBHjEFuqH7X89SGFy6JkwrmaNLMNQd+K7F+ftTfKQfhO2lfOTT1Ug
+ zq3Se6RqNXWKLTPuTMQPePq1FxYDoGUy3uhvhaeligMrIKyeHfxcik9w4gwKspBvSJZP
+ bpS09tIRbodsw4h40c42YYgUSBn2ASM7ZW6icOZ2MgSBjo4SOMz6XnV8LcdO1S+i679K
+ W7fdsrwWgExjHkRKh8MQeXQbtqbp85jWJ8VRuAHNKJfP7+TmPBAywZDTkSM/5+S4w5LT
+ M2Uw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=IxATitYurc8EbXYI2BSj9Hs3kEcBruMDQ56bb7ZIbcg=;
+ fh=GmhAFJD7zA8Zl1/Dt02z8FNGRIFMNeY8AhDTK77tDcg=;
+ b=bEyJ2Pve4WfDMax1hl3DzZ61vG9HYPzYyj/l4R1425FXgRfd1N/hLCsBHdgqSumeMx
+ LSqXcQvLfdtxAvc7nMJDqeos/YWPOr2/eK0rwM1l8BNZh8PoVzh7XvjqtexL1q5BTXR0
+ c2HW2pRgkVBNQByqCkrZG4mZ1U4YRKD02uFhEVA/9uqhAvClj29DuzY49k76F9bPgjdX
+ Qf0aX06TliLzp89ybqvISi+CsW22dtfiNgvHZbxKB85mAN05ANvomfsAmNwEkQoBJOnz
+ Q10v2k2M0frdTjlO+Jhh3ZoUs6PWc9JU4pQjJqaFwvHitr4FkiqDO/kEP0WpBiXVv2zb
+ VKHw==; darn=nongnu.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1787648039; x=1788252839; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=IxATitYurc8EbXYI2BSj9Hs3kEcBruMDQ56bb7ZIbcg=;
+ b=AFyq+X6RZmIcRuxrROboRrqv2KFoTUZWAaDeTnYk7RYWKogNzohIynNze0Howa7oJc
+ wdU03bDSRwaESW3iyIorvznlu3DpqmDVLJQX73Q3xAMU2UEkHKNLgk9uJY+L9kQL4w6t
+ IBIygnJTv/cfTgdx0b+7mDO1AeJo60J2Efq3cZX+GeovwdxWNKdwiv38WHyfDDnXRPez
+ vd9kE7yhvfBUnR1wOW2rY4udSbpurfxkwNoAjV6zLDg0S9rYIksIWzldYegdazMYq3MJ
+ 7yo8KXSP0gJB7nIqL638sWfU+cUHU5nkCU0UFDfsi+R52smt3CSBPfuCO2PhX2N/98Z8
+ QBGQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1787648039; x=1788252839;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=IxATitYurc8EbXYI2BSj9Hs3kEcBruMDQ56bb7ZIbcg=;
+ b=ceFQvTaYuvhdM+KIQdhy6QXaZPDVHvnIz1vB3ws1sqYRvYm5GUAg1MhBtXxWoxPNLo
+ EfeQYHJGnNdG7ZQcq9BqfjKECq2mFMT7Y90Et1Y7mvD5psi9Tu/I2QRhKRK2vtXw02Ql
+ qQ/wVUKUrKnbUexmzPpsRKYGSBNNDRcRjXEm4t4rou6oMD2brgb4+Cf+jE3XlshZF1WY
+ Hoea9RwpmLMCzCuh95WfncGBwyb/+Libs/nbQcbeaFuXnWToxf2KwueiKurm4G8GbCpB
+ COSFywKc1BhAGfiuxQ7kFNDk0Jrrap05MXTxf/OoJOOCl59vCXS3YhZyzj8I1J2lA9tb
+ FXMg==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RrUeE7JaJWI6AylUgzg35+rzEnLDfy9d1I1h/Nmdjt10UVcho+tAsxx1JD4coDiOZnNR4NBHbH8j6MU@nongnu.org
+X-Gm-Message-State: AFuF++ns57+qbwQAo2ToDZ6U2kAoieU89OHCLIFrtwykiJeQwV73jqSI
+ Y+7lbeTVq00rY/9DKLbycJBe0/apBFN4mKTViYnxzXsDFJIyMgKqKk8Q443+GljwjPf9Bjaq5pB
+ kw8voboq5RYok7/cJ7ra54TqiJQytGnU=
+X-Gm-Gg: AR+sD11LqHIqjNLpEhg9oXp37Jo+KYmcolSoGv5DrHGLGkhJHtPXW1xxEuZ1eKNDuAt
+ 9Wf9tnL51ZrcH0FU1FykxDp5wzT8oD8oyXvvZN35vri5ft7RuUrGMCS3mGt43PjDezK1F7oOgVX
+ Wn+KBenecUg4jXYaMIUXZkF6GQ1UC3ByV0Eykqhtb+/mG/ov+WGCIRAwfqCN6T4VHlmz/7bFRhr
+ +cZjuwYEHcJs9XNoA7gzn3hPx4JlB9Oin8KhCMS7x0xNgNotvCdniMa/tHVvXuv+MgF0KgIJDzb
+ r3HPA876F+ygc7qxYQPCMDQ/pgn116WftK0wIDrpgF8tgCoKPNhlLUiukw4gWz3dn54Ps9xvFPN
+ 9sxerjgvYZ21iozmkCJWn1tS3qSZHL9EMe75lvsCm5BebpQRYXP7Jo5tCFLDm+NE=
+X-Received: by 2002:a05:620a:1a1d:b0:937:6771:e7e7 with SMTP id
+ af79cd13be357-9376771e8damr829132685a.30.1787648039244; Tue, 25 Aug 2026
+ 01:53:59 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/2] target/riscv: Fix seed CSR sign extension
-To: Ivan Efremov <nendensu@ispras.ru>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, palmer@dabbelt.com,
- farosas@suse.de, lvivier@redhat.com
-References: <20260802113130.7818-1-nendensu@ispras.ru>
-Content-Language: en-US, ru-RU
-From: Michael Tokarev <mjt@tls.msk.ru>
-In-Reply-To: <20260802113130.7818-1-nendensu@ispras.ru>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=212.248.84.144; envelope-from=mjt@tls.msk.ru;
- helo=isrv.corpit.ru
-X-Spam_score_int: -19
-X-Spam_score: -2.0
-X-Spam_bar: --
-X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+References: <20260824111711.26297-1-philmd@oss.qualcomm.com>
+ <20260824111711.26297-19-philmd@oss.qualcomm.com>
+In-Reply-To: <20260824111711.26297-19-philmd@oss.qualcomm.com>
+From: Max Filippov <jcmvbkbc@gmail.com>
+Date: Tue, 25 Aug 2026 01:53:47 -0700
+X-Gm-Features: AcwNN1WEwK2DUZH45Zj_m2ROUpqkMXxheouHHKZZ_3nAzeD16f7z7iGe_QZUvgg
+Message-ID: <CAMo8BfL88QP4WCRc_X3AXHZNjXp5L_6W1spUpZg06vQjR_fceg@mail.gmail.com>
+Subject: Re: [PATCH v4 18/20] target/xtensa: Constify CPUXtensaState in
+ xtensa_replicate_windowstart()
+To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@oss.qualcomm.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-arm@nongnu.org, 
+ Richard Henderson <richard.henderson@linaro.org>, qemu-ppc@nongnu.org,
+ qemu-s390x@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::72c;
+ envelope-from=jcmvbkbc@gmail.com; helo=mail-qk1-x72c.google.com
+X-Spam_score_int: -5
+X-Spam_score: -0.6
+X-Spam_bar: /
+X-Spam_report: (-0.6 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ FROM_LOCAL_NOVOWEL=0.5, HK_RANDOM_ENVFROM=0.004, HK_RANDOM_FROM=0.999,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -70,49 +124,38 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 8/2/26 14:31, Ivan Efremov wrote:
-> The seed CSR value on RV64 was sign extended while converting to target_ulong.
-> 
-> The first patch makes SEED_OPST_* unsigned.
-> The second patch adds qtest to check that upper 32 bits are zero.
-> 
-> Tests ran:
-> - riscv-csr-test
-> - make check: 324 passed, 11 skipped
-> - RISC-V Zkr-00 architectural test
-> 
-> Ivan Efremov (2):
->    target/riscv: Fix seed CSR sign extension
->    tests/qtest: Add seed CSR zero extension test
+On Mon, Aug 24, 2026 at 4:20=E2=80=AFAM Philippe Mathieu-Daud=C3=A9
+<philmd@oss.qualcomm.com> wrote:
+>
+> Add the const qualifier to CPUXtensaState when the
+> argument is accessed without modification.
+>
+> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@oss.qualcomm.com>
+> ---
+>  target/xtensa/cpu.h | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 
-I'm picking this patch set for the currently active qemu stable
-series (10.0 LTS, 11.0, 11.1).  However, it does not work on
-11.0.x already (it works ok on 11.1.x), the test fails:
+Reviewed-by: Max Filippov <jcmvbkbc@gmail.com>
 
-TAP version 14
-# random seed: R02Sac6635c76a7dc335fadd70845da72f99
-1..2
-# Start of riscv64 tests
-# Start of cpu tests
-# starting QEMU: exec ./qemu-system-riscv64 -qtest unix:/tmp/qtest-182934.sock -qtest-log /dev/null -chardev 
-socket,path=/tmp/qtest-182934.qmp,id=char0 -mon chardev=char0,mode=control -display none -audio none -run-with exit-with-parent=on -machine virt -cpu 
-veyron-v1 -accel qtest
-ok 1 /riscv64/cpu/csr
-# Start of csr tests
-# starting QEMU: exec ./qemu-system-riscv64 -qtest unix:/tmp/qtest-182934.sock -qtest-log /dev/null -chardev 
-socket,path=/tmp/qtest-182934.qmp,id=char0 -mon chardev=char0,mode=control -display none -audio none -run-with exit-with-parent=on -machine virt -cpu 
-tt-ascalon -accel qtest
-**
-ERROR:../../build/qemu/11.0/hw/riscv/riscv_hart.c:78:csr_call: assertion failed: (ret == RISCV_EXCP_NONE)
-Bail out! ERROR:../../build/qemu/11.0/hw/riscv/riscv_hart.c:78:csr_call: assertion failed: (ret == RISCV_EXCP_NONE)
-Broken pipe
-../../build/qemu/11.0/tests/qtest/libqtest.c:210: kill_qemu() detected QEMU death from signal 6 (Aborted)
-Aborted
+> diff --git a/target/xtensa/cpu.h b/target/xtensa/cpu.h
+> index 442e98bd1ba..49d6ad9083d 100644
+> --- a/target/xtensa/cpu.h
+> +++ b/target/xtensa/cpu.h
+> @@ -708,7 +708,7 @@ void xtensa_set_abi_call0(void);
+>  bool xtensa_abi_call0(void);
+>  #endif
+>
+> -static inline uint32_t xtensa_replicate_windowstart(CPUXtensaState *env)
+> +static inline uint32_t xtensa_replicate_windowstart(const CPUXtensaState=
+ *env)
+>  {
+>      return env->sregs[WINDOW_START] |
+>          (env->sregs[WINDOW_START] << env->config->nareg / 4);
+> --
+> 2.53.0
+>
 
-Should I pick something else for 11.0 and 10.0 (on 10.0 it fails the same way),
-so the test succeeds, or should I drop this patch set from 11.1.x?
-
-Thanks,
-
-/mjt
+--=20
+Thanks.
+-- Max
 
