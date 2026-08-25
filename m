@@ -4,72 +4,118 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32187C61DB4
-	for <qemu-riscv@archiver.kernel.org>; Tue, 25 Aug 2026 10:10:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25E75C61DB9
+	for <qemu-riscv@archiver.kernel.org>; Tue, 25 Aug 2026 14:48:01 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wyo61-000325-To; Tue, 25 Aug 2026 06:09:33 -0400
+	id 1wysRJ-0000xS-Og; Tue, 25 Aug 2026 10:47:49 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1wyo60-00031a-JB; Tue, 25 Aug 2026 06:09:32 -0400
-Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1wyo5y-0002g1-OV; Tue, 25 Aug 2026 06:09:32 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=univ-grenoble-alpes.fr; s=2020; t=1787652567;
- bh=J5B4/lNTroYD/nD4SiHMimb+gpYVo2Iss0+didhrzic=;
- h=From:To:Cc:Subject:Date:From;
- b=uhPlrXm/oWrWQ6LRA40y3veBL+NWOW1oYP15ZQsGMMan1rjeXlFl+Jtp1uYNRTzZw
- a4mPC5eH9Ous27NUkrzjqZjXeLp9AK6k8jD2S0oLZBIEl+UVWw/r3R9Fs5VgT5k7fh
- 6DN1XH47rTT/+TpTiMf1UvJVGFfpdkl9Jg92+OUeVDhPE4mnwXct7CQlHNDvF5q65d
- hRq+7+qPh89rlq8Zx35J3DUPgRSPlirC12QzGvNDkEXhB7UYEA0GPQqnU/OqVribQh
- TDzmMwsX/JsmJw8RzFjhorXrzRkaZXxn/6BbyPcJzueRrIKGB/W0VnjjtigBRHQxlD
- LyV6hf6eC6Gvg==
-Received: from mailhub-1.u-ga.fr (mailhub-1.u-ga.fr [129.88.178.98])
- by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id C482940245;
- Tue, 25 Aug 2026 12:09:27 +0200 (CEST)
-Received: from smtps.univ-grenoble-alpes.fr (smtps2.u-ga.fr [152.77.18.2])
- by mailhub-1.u-ga.fr (Postfix) with ESMTP id C04E2FF85D;
- Tue, 25 Aug 2026 12:09:27 +0200 (CEST)
-Received: from naga.. (pers-185-231.vpn-inp.grenoble-inp.fr [147.171.185.231])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- (Authenticated sender: petrotf@univ-grenoble-alpes.fr)
- by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id 3327E14004C;
- Tue, 25 Aug 2026 12:09:27 +0200 (CEST)
-From: frederic.petrot@univ-grenoble-alpes.fr
-To: daniel.barboza@oss.qualcomm.com, palmer@dabbelt.com,
- alistair.francis@wdc.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Cc: =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20P=C3=A9trot?=
- <frederic.petrot@univ-grenoble-alpes.fr>
-Subject: [PATCH v3 0/1] target/riscv: correct cbo and lq disassembly
-Date: Tue, 25 Aug 2026 12:09:21 +0200
-Message-ID: <20260825100922.387919-1-frederic.petrot@univ-grenoble-alpes.fr>
-X-Mailer: git-send-email 2.43.0
+ (Exim 4.90_1) (envelope-from <antikostya2@gmail.com>)
+ id 1wys2v-0002vn-Lc
+ for qemu-riscv@nongnu.org; Tue, 25 Aug 2026 10:22:37 -0400
+Received: from mail-lf1-x134.google.com ([2a00:1450:4864:20::134])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <antikostya2@gmail.com>)
+ id 1wys2t-0002BM-KE
+ for qemu-riscv@nongnu.org; Tue, 25 Aug 2026 10:22:37 -0400
+Received: by mail-lf1-x134.google.com with SMTP id
+ 2adb3069b0e04-5b01cb18515so4165581e87.2
+ for <qemu-riscv@nongnu.org>; Tue, 25 Aug 2026 07:22:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1787667754; x=1788272554; darn=nongnu.org;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=OzW86D2A1WfEQrpaeRRQf+AcujcXbbZ8Qz00fhhJRAU=;
+ b=JYsUf+rAG2Ei2iLHb9MZs9wKXU4OWx5ua4UhWDeuQUEIhQDl7IeHOFXnLmE8fCz+64
+ So2LBapmyNswFT4AZBAc6J74ed1brMH69HxSrWQgjkoh9nzgfB+gHV6RKNpjwDzbzpoh
+ vMID197w5WLfVHEAUzgckWAYp4A9J+gaAtB10kk3ba78X07XIzUqO1JJbdLJvpLdRRsy
+ pp3HAhhYMMA0uZsJfe8rdx18ysOvJpuFysI5rn6nZnbfcZA6gnj5LWCIUvWKp2pfyjnR
+ X5/B/l0zkm6JD6XrwaWGOHclNcHw7BtDkWgBoHYEDzLlElLceCQMU7K242URQnXBFplI
+ 4Q7A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1787667754; x=1788272554;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=OzW86D2A1WfEQrpaeRRQf+AcujcXbbZ8Qz00fhhJRAU=;
+ b=QYknRfXTCqpIoxiKbB1lbNIRs+skMjwy7UTjzZwaliqNiMmJ3t2+HlFukyrUWbNzn4
+ CJsD49A04yq5avSVw/H2AsZu8rpzfO/73ibAMEHpC5a/eCIrd4N/KLZU5kfv9lJ5TiFk
+ uAueUGvlhxkxdPe4KQL+bqfB5efCkxvPxZK4QybRixqiXm7H7nvynRooqgJjsjcYbVeH
+ mGJ5gbawOibcRON7RkdnO0OXCcIsUT5hbTRn3FIofpRkwKrie60IdHOd4UQVv8kRzYAv
+ l5nDC0w8c0hspr3ymxNn3S2vuVUWweS4EADRdUm3o838akml8xXSS1A+yaAlz0AIg+3c
+ xa6A==
+X-Forwarded-Encrypted: i=1;
+ AHgh+Rrxe7TgLnMT+j0mh636GvVCjBCR7sPMpeigfid9ZUG4EZ26zo36Xy9xJ9RErcvD6vze7Aml98rLhZhD@nongnu.org
+X-Gm-Message-State: AFuF++l/eHWKteTMspW4s6HH+y7sSGvI6VE36tfUD0U6CPMuxGaVQnfn
+ fPAcnWuGYKxoYT7RD6d8xMEnMGiVkSjXWAMmXntag+8qflTOiNX58pJb
+X-Gm-Gg: AR+sD13HRyILrqcIM+HmOQ/Aths7SMDTm9b4eQFw06Ad1vpsl1LndCtSedPfx0KaESx
+ yhXMm3usk6jyxGrOEyNFATJAvHj+y9YnlOfldQ3Z/IsyRyHteiQQW9l0higjup7SGrXLf+UHkbH
+ QgURjED3X/BuB5da0UogWkxUD60mXxlzyk83YFuIQHHqTC1g4k6azLwcjIVh3H6TsghmutJcMmN
+ /X0OiiQabu8AB9PoRH9eTZL8VSGS5Wc59xXQMw7oafCELxL77UqK9eog410yDBI5GhAF2SFi5M0
+ 2tKPIoYntovR4BQ952BChClCjAuHNHzopB4SloplTrLJrDbE271OvuXn8U55YcaCxzdH/ObFLNl
+ aUWUYr3K1ZOG74sFV58355Q8r6XsRIprhxo720FkwBvzjEkt5EnTESVhj5yZCIewDQaij5WbNRN
+ 6PvsQW7mGCUZUA1eJJQh2ohjYRJeTz3Ev4iYuFm5a6jymdz9lyrqBV9SdR1zhRYNxK6pJtZ7p1D
+ P9hekt1DUgDNWmiZJwioHS5dwx9ubDnOdm54ztp
+X-Received: by 2002:a05:6512:8381:b0:5b0:23b4:be97 with SMTP id
+ 2adb3069b0e04-5b48421a625mr8958086e87.6.1787667753452; 
+ Tue, 25 Aug 2026 07:22:33 -0700 (PDT)
+Received: from [127.0.1.1] (broadband-90-154-73-22.ip.moscow.rt.ru.
+ [90.154.73.22]) by smtp.gmail.com with ESMTPSA id
+ 38308e7fff4ca-3a1c82f6b02sm22457551fa.41.2026.08.25.07.22.32
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 25 Aug 2026 07:22:32 -0700 (PDT)
+From: Konstantin Semichastnov <antikostya2@gmail.com>
+Date: Tue, 25 Aug 2026 17:22:27 +0300
+Subject: [PATCH 03/13] hw/riscv: add n-trace encoder with ProgTraceSync message
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Greylist: Whitelist-UGA SMTP Authentifie (petrotf@univ-grenoble-alpes.fr)
- via submission-587 ACL (41)
-Received-SPF: pass client-ip=152.77.200.56;
- envelope-from=frederic.petrot@univ-grenoble-alpes.fr;
- helo=zm-mta-out-3.u-ga.fr
-X-Spam_score_int: -43
-X-Spam_score: -4.4
-X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260825-upstream-ntrace_core-v1-3-f8be2f40d2fd@gmail.com>
+References: <20260825-upstream-ntrace_core-v1-0-f8be2f40d2fd@gmail.com>
+In-Reply-To: <20260825-upstream-ntrace_core-v1-0-f8be2f40d2fd@gmail.com>
+To: qemu-devel@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org, 
+ Fabiano Rosas <farosas@suse.de>, Laurent Vivier <lvivier@redhat.com>, 
+ Paolo Bonzini <pbonzini@redhat.com>, Alexei Filippov <halip0503@gmail.com>, 
+ Konstantin Semichastnov <antikostya2@gmail.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=8283; i=antikostya2@gmail.com; 
+ h=from:subject:message-id;
+ bh=hWSIj6Fg7DbARIuisjiJMlp8YHlOaERfE21onkZwFs8=; 
+ b=owEBbQKS/ZANAwAKAUiKpW6lUN52AcsmYgBqjaUiGqP9GtW0ntxoZujT3oAAdQDpETYCHr+yV
+ H0lBdwIVXaJAjMEAAEKAB0WIQRMBWLx2o+linEPEBhIiqVupVDedgUCao2lIgAKCRBIiqVupVDe
+ dljqEACE3JXKlfrhukYWtU1tBftjyHMcfp76CxheuAvUO+kqabrZ/BDz9b88WkRXwik8LQsG+bS
+ OFppQEBuiTfcKaq9myVa6HlduqLyZvX75FdoovWXhnpfi5KjlcXdFw/gHlrhqr6oKUvjL9r/bkV
+ CSkLpAFzQgCKcMyAi7HRRkrbpTJ7d9mk/T3X+b5KJ29hEkMjy0d+ysXwI+JRHynLy8yLfun6/L4
+ IaCQ2CzgGZ1pEo+geKd1GbBCDwT6CIZw4OUvN9UhQPmAfi1MeDAOHHjx10SkM2O1eijZetIUlHD
+ NbX4Aq/bs9pNdZdYcvVyUFg2LHtnPvu2wPzSAEII+LA/TfLkGB+kYnS4u5Kkgi6drh73nuZgQYX
+ 7014ilgwB59UyiHsiq6+uW443k2+7t+4Zpy6OZLwGLpt9ts7LzMRleA9HV8vSyG2WvIJ0rFZcvs
+ 4OIYysTaQ5Shnmput249k1w3K6hEGw8+ju8HnUnS9Vev1WLvNfT7g6sOjoPPsW1+iC72K2qHAZ3
+ NYogCXdAYuM3w8Y0pgPQARqRr+XbMrrFwkLbotwNMNjgsbyGjQP6qA1hCzMfzQNRyWyRKkFy4Mn
+ iI3+nLFun3/kEh6sIgYPtoaHfMHyvwQd4gIshCBH2pwwd8T5F3orl9Y9KYfo3YeAhnSaTTv6HI8
+ WMMq5M0CtB8HLow==
+X-Developer-Key: i=antikostya2@gmail.com; a=openpgp;
+ fpr=4C0562F1DA8FA58A710F1018488AA56EA550DE76
+Received-SPF: pass client-ip=2a00:1450:4864:20::134;
+ envelope-from=antikostya2@gmail.com; helo=mail-lf1-x134.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Tue, 25 Aug 2026 10:47:37 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -84,26 +130,250 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
+Introduce N-Trace format message encoder, based on "RISC-V n-trace
+(Nexus-based Trace) Specificationand" Version 1.0.
 
-The CBO instructions were, AFAIU, disassembled erroneously.
-In addition, lq (load-quad, a RV128 instruction) shares the same
-opcode space as the CBOs, which also led to incorrect dasm for that
-instruction (understandable since RV128 is an experimental feature).
-To avoid overlaps, we now require that lq is decoded only if
-rd is not 0, as CBO requires the field corresponding to rd to be zero,
-both in dasm and decodetree.
+Add generation, encoding and sending logic for ProgTraceSync message
 
-Changes in v3:
-- rebase on master
-- squash the 3 original patches, at they did not make sense
-  anymore after rebasing
+Signed-off-by: Konstantin Semichastnov <antikostya2@gmail.com>
+---
+ hw/riscv/rv-trace-messages.c | 154 +++++++++++++++++++++++++++++++++++++++++++
+ hw/riscv/rv-trace-messages.h |   1 +
+ hw/riscv/trace-encoder.c     |  29 +++++++-
+ hw/riscv/trace-encoder.h     |   1 +
+ 4 files changed, 184 insertions(+), 1 deletion(-)
 
-Frédéric Pétrot (1):
-  disas/riscv.c: Correct dasm for cbo and lq
-
- disas/riscv.c | 18 ++++++++++--------
- 1 file changed, 10 insertions(+), 8 deletions(-)
+diff --git a/hw/riscv/rv-trace-messages.c b/hw/riscv/rv-trace-messages.c
+index 932f3ae499..0b90d6a437 100644
+--- a/hw/riscv/rv-trace-messages.c
++++ b/hw/riscv/rv-trace-messages.c
+@@ -338,3 +338,157 @@ size_t rv_etrace_gen_encoded_format1(uint8_t *buf,
+ 
+     return HEADER_SIZE + header.length;
+ }
++
++#define MDO_BITS_NUM  6
++#define MSEO_BITS_NUM 2
++
++#define MSEO_VAR_FIELD_FINISHED 0b01
++#define MSEO_END_OF_MESSAGE     0b11
++
++typedef enum {
++    FIELD_END = 0,
++    FIELD_FIXED,
++    FIELD_VAR,
++} NTraceFieldType;
++
++typedef enum {
++    WIDTH_TCODE  = 6,
++    WIDTH_SYNC   = 4,
++    WIDTH_ICNT   = 22,
++    WIDTH_FADDR  = 63,
++} NTraceFieldWidth;
++
++typedef enum {
++    TCODE_PROG_TRACE_SYNC        = 0x9,
++} NTraceTcodeFieldValues;
++
++typedef enum {
++    SYNC_PERIODIC      = 2,
++    SYNC_TRACE_ENABLED = 5,
++} NTraceSyncFieldValues;
++
++typedef struct NTraceFieldPayload {
++    NTraceFieldType type;
++    NTraceFieldWidth width;
++    uint64_t value;
++} NTraceFieldPayload;
++
++#define PAYLOAD_TCODE(val)    \
++    {                         \
++        .type = FIELD_FIXED,  \
++        .width = WIDTH_TCODE, \
++        .value = (val),       \
++    }
++
++#define PAYLOAD_SYNC(val)    \
++    {                        \
++        .type = FIELD_FIXED, \
++        .width = WIDTH_SYNC, \
++        .value = (val),      \
++    }
++
++#define PAYLOAD_ICNT(val)    \
++    {                        \
++        .type = FIELD_VAR,   \
++        .width = WIDTH_ICNT, \
++        .value = (val),      \
++    }
++
++#define PAYLOAD_FADDR(val)    \
++    {                         \
++        .type = FIELD_VAR,    \
++        .width = WIDTH_FADDR, \
++        .value = (val),       \
++    }
++#define PAYLOAD_END()      \
++    {                      \
++        .type = FIELD_END, \
++        .width = 0,        \
++        .value = 0,        \
++    }
++
++static size_t rv_ntrace_gen_encoded_msg(uint8_t *buf,
++                                        const NTraceFieldPayload *payload)
++{
++    uint8_t buf_byte   = 0;
++    uint8_t packed_bit = 0;
++    uint8_t packed_cur = 0;
++    uint8_t nr_move    = 0;
++
++    /*
++     * as described in "Chapter 3. N-Trace Transmission Protocol" of N-Trace
++     * spec each byte has only bits[7:2] filled with data, called MDO bits.
++     * Lowest 2 bits[1:0] are called MSEO bits and used to signal about
++     * boundaries between message fields and messages
++     */
++
++    while (payload->type != FIELD_END) {
++        for (uint8_t offset = 0; offset < payload->width; offset += nr_move) {
++            nr_move = MIN(MDO_BITS_NUM - packed_bit, payload->width - offset);
++            uint8_t chunk = extract64(payload->value, offset, nr_move);
++
++            packed_cur = deposit32(packed_cur, packed_bit, nr_move, chunk);
++            packed_bit += nr_move;
++
++            if (packed_bit == MDO_BITS_NUM) {
++                buf[buf_byte++] = packed_cur << MSEO_BITS_NUM;
++                packed_bit = 0;
++                packed_cur = 0;
++            }
++        }
++
++        /*
++         * if field has variable length - last byte of this field should have
++         * MSEO (lowest 2) bits set to 01, and zero filled to end of byte
++         *
++         * N-Trace spec: 3.1. MSEO Sequences.
++         */
++        if (payload->type == FIELD_VAR) {
++            if (packed_bit != 0) {
++                /* last chunk was not finished, leave remaining bits cleared */
++                buf[buf_byte++] = packed_cur << MSEO_BITS_NUM;
++                packed_bit = 0;
++                packed_cur = 0;
++            }
++
++            /* correct last chunk MSEO bits */
++            buf[buf_byte - 1] = deposit32(buf[buf_byte - 1], 0,
++                                          MSEO_BITS_NUM,
++                                          MSEO_VAR_FIELD_FINISHED);
++        }
++
++        payload++;
++    }
++
++    if (packed_bit != 0) {
++        /* last chunk was not finished, so finish it now */
++        buf[buf_byte++] = packed_cur;
++    }
++
++    /*
++     * last byte of message should have MSEO (lowest 2) bits set to 11
++     *
++     * N-Trace spec: 3.1. MSEO Sequences.
++     */
++    buf[buf_byte - 1] = deposit32(buf[buf_byte - 1], 0,
++                                  MSEO_BITS_NUM,
++                                  MSEO_END_OF_MESSAGE);
++
++    return buf_byte;
++}
++
++size_t rv_ntrace_gen_encoded_prog_trace_sync_msg(uint8_t *buf, uint64_t faddr)
++{
++    const NTraceFieldPayload msg_fields[] = {
++        PAYLOAD_TCODE(TCODE_PROG_TRACE_SYNC),
++        /* SRC field is not supported for now */
++        PAYLOAD_SYNC(SYNC_TRACE_ENABLED),
++        PAYLOAD_ICNT(0),
++        PAYLOAD_FADDR(faddr),
++        /* TSTAMP field is not supported for now */
++        PAYLOAD_END(),
++    };
++
++    return rv_ntrace_gen_encoded_msg(buf, msg_fields);
++}
++
+diff --git a/hw/riscv/rv-trace-messages.h b/hw/riscv/rv-trace-messages.h
+index 6f700eac8e..635e498393 100644
+--- a/hw/riscv/rv-trace-messages.h
++++ b/hw/riscv/rv-trace-messages.h
+@@ -37,4 +37,5 @@ size_t rv_etrace_gen_encoded_format1(uint8_t *buf,
+                                      uint64_t addr,
+                                      bool notify, bool updiscon);
+ 
++size_t rv_ntrace_gen_encoded_prog_trace_sync_msg(uint8_t *buf, uint64_t faddr);
+ #endif
+diff --git a/hw/riscv/trace-encoder.c b/hw/riscv/trace-encoder.c
+index 34c8f60ce1..10e52e207e 100644
+--- a/hw/riscv/trace-encoder.c
++++ b/hw/riscv/trace-encoder.c
+@@ -255,7 +255,13 @@ static void trencoder_te_ctrl_postw(RegisterInfo *reg, uint64_t val)
+     if (!te->trace_running && trTeInstTracing) {
+         /* Starting trace. Ask the CPU for the first trace insn */
+         if (te->ntrace) {
+-            /* send ProgTraceSync message */
++            /*
++             * N-Trace require to trace from very first instruction,
++             * not from next instruction, after enabling the trace,
++             * like E-Trace. So we need to send message here, instead of
++             * using te->trace_next_insn
++             */
++            trencoder_send_prog_trace_sync(OBJECT(te), env->pc);
+         } else {
+             te->trace_next_insn = true;
+         }
+@@ -508,6 +514,27 @@ void trencoder_set_first_trace_insn(Object *trencoder_obj, uint64_t pc)
+     trencoder_send_message_smem(trencoder, msg, msg_size);
+ }
+ 
++static uint64_t rv_ntrace_encode_faddr(uint64_t pc)
++{
++    return pc >> 1ul;
++}
++
++void trencoder_send_prog_trace_sync(Object *trencoder_obj, uint64_t pc)
++{
++    TraceEncoder *trencoder = TRACE_ENCODER(trencoder_obj);
++    g_autofree uint8_t *msg = g_malloc0(TRACE_MSG_MAX_SIZE);
++    uint8_t msg_size;
++
++    uint64_t faddr = rv_ntrace_encode_faddr(pc);
++
++    g_assert(trencoder->ntrace);
++
++    msg_size = rv_ntrace_gen_encoded_prog_trace_sync_msg(msg, faddr);
++
++    trencoder_send_message_smem(trencoder, msg, msg_size);
++}
++
++
+ void trencoder_trace_trap_insn(Object *trencoder_obj,
+                                uint64_t pc, uint32_t ecause,
+                                bool is_interrupt,
+diff --git a/hw/riscv/trace-encoder.h b/hw/riscv/trace-encoder.h
+index fed0ef9a48..96324d2b9a 100644
+--- a/hw/riscv/trace-encoder.h
++++ b/hw/riscv/trace-encoder.h
+@@ -53,6 +53,7 @@ struct TraceEncoder {
+ OBJECT_DECLARE_SIMPLE_TYPE(TraceEncoder, TRACE_ENCODER)
+ 
+ void trencoder_set_first_trace_insn(Object *trencoder_obj, uint64_t pc);
++void trencoder_send_prog_trace_sync(Object *trencoder_obj, uint64_t pc);
+ void trencoder_trace_trap_insn(Object *trencoder_obj,
+                                uint64_t pc, uint32_t ecause,
+                                bool is_interrupt,
 
 -- 
 2.43.0
