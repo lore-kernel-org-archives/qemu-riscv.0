@@ -4,111 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29D03C5DF94
-	for <qemu-riscv@archiver.kernel.org>; Tue, 25 Aug 2026 08:54:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F40CC61CE2
+	for <qemu-riscv@archiver.kernel.org>; Tue, 25 Aug 2026 10:10:00 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wymuy-0003Z6-5e; Tue, 25 Aug 2026 04:54:04 -0400
+	id 1wyo62-00032N-6J; Tue, 25 Aug 2026 06:09:34 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jcmvbkbc@gmail.com>)
- id 1wymux-0003YM-0f
- for qemu-riscv@nongnu.org; Tue, 25 Aug 2026 04:54:03 -0400
-Received: from mail-qk1-x72c.google.com ([2607:f8b0:4864:20::72c])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <jcmvbkbc@gmail.com>)
- id 1wymuu-0001ki-QQ
- for qemu-riscv@nongnu.org; Tue, 25 Aug 2026 04:54:02 -0400
-Received: by mail-qk1-x72c.google.com with SMTP id
- af79cd13be357-93695893ac1so268444485a.0
- for <qemu-riscv@nongnu.org>; Tue, 25 Aug 2026 01:54:00 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1787648039; cv=none;
- d=google.com; s=arc-20260327;
- b=hDJ9QFlAjjVqnGOsuVgP4ihdYACUBCgJrmOb8xJAGHAC4KxOEgdIiTdwt7wGQXvd5d
- rBfJzSLX9CRTOmejBHjEFuqH7X89SGFy6JkwrmaNLMNQd+K7F+ftTfKQfhO2lfOTT1Ug
- zq3Se6RqNXWKLTPuTMQPePq1FxYDoGUy3uhvhaeligMrIKyeHfxcik9w4gwKspBvSJZP
- bpS09tIRbodsw4h40c42YYgUSBn2ASM7ZW6icOZ2MgSBjo4SOMz6XnV8LcdO1S+i679K
- W7fdsrwWgExjHkRKh8MQeXQbtqbp85jWJ8VRuAHNKJfP7+TmPBAywZDTkSM/5+S4w5LT
- M2Uw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=IxATitYurc8EbXYI2BSj9Hs3kEcBruMDQ56bb7ZIbcg=;
- fh=GmhAFJD7zA8Zl1/Dt02z8FNGRIFMNeY8AhDTK77tDcg=;
- b=bEyJ2Pve4WfDMax1hl3DzZ61vG9HYPzYyj/l4R1425FXgRfd1N/hLCsBHdgqSumeMx
- LSqXcQvLfdtxAvc7nMJDqeos/YWPOr2/eK0rwM1l8BNZh8PoVzh7XvjqtexL1q5BTXR0
- c2HW2pRgkVBNQByqCkrZG4mZ1U4YRKD02uFhEVA/9uqhAvClj29DuzY49k76F9bPgjdX
- Qf0aX06TliLzp89ybqvISi+CsW22dtfiNgvHZbxKB85mAN05ANvomfsAmNwEkQoBJOnz
- Q10v2k2M0frdTjlO+Jhh3ZoUs6PWc9JU4pQjJqaFwvHitr4FkiqDO/kEP0WpBiXVv2zb
- VKHw==; darn=nongnu.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1787648039; x=1788252839; darn=nongnu.org;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=IxATitYurc8EbXYI2BSj9Hs3kEcBruMDQ56bb7ZIbcg=;
- b=AFyq+X6RZmIcRuxrROboRrqv2KFoTUZWAaDeTnYk7RYWKogNzohIynNze0Howa7oJc
- wdU03bDSRwaESW3iyIorvznlu3DpqmDVLJQX73Q3xAMU2UEkHKNLgk9uJY+L9kQL4w6t
- IBIygnJTv/cfTgdx0b+7mDO1AeJo60J2Efq3cZX+GeovwdxWNKdwiv38WHyfDDnXRPez
- vd9kE7yhvfBUnR1wOW2rY4udSbpurfxkwNoAjV6zLDg0S9rYIksIWzldYegdazMYq3MJ
- 7yo8KXSP0gJB7nIqL638sWfU+cUHU5nkCU0UFDfsi+R52smt3CSBPfuCO2PhX2N/98Z8
- QBGQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787648039; x=1788252839;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=IxATitYurc8EbXYI2BSj9Hs3kEcBruMDQ56bb7ZIbcg=;
- b=ceFQvTaYuvhdM+KIQdhy6QXaZPDVHvnIz1vB3ws1sqYRvYm5GUAg1MhBtXxWoxPNLo
- EfeQYHJGnNdG7ZQcq9BqfjKECq2mFMT7Y90Et1Y7mvD5psi9Tu/I2QRhKRK2vtXw02Ql
- qQ/wVUKUrKnbUexmzPpsRKYGSBNNDRcRjXEm4t4rou6oMD2brgb4+Cf+jE3XlshZF1WY
- Hoea9RwpmLMCzCuh95WfncGBwyb/+Libs/nbQcbeaFuXnWToxf2KwueiKurm4G8GbCpB
- COSFywKc1BhAGfiuxQ7kFNDk0Jrrap05MXTxf/OoJOOCl59vCXS3YhZyzj8I1J2lA9tb
- FXMg==
-X-Forwarded-Encrypted: i=1;
- AHgh+RrUeE7JaJWI6AylUgzg35+rzEnLDfy9d1I1h/Nmdjt10UVcho+tAsxx1JD4coDiOZnNR4NBHbH8j6MU@nongnu.org
-X-Gm-Message-State: AFuF++ns57+qbwQAo2ToDZ6U2kAoieU89OHCLIFrtwykiJeQwV73jqSI
- Y+7lbeTVq00rY/9DKLbycJBe0/apBFN4mKTViYnxzXsDFJIyMgKqKk8Q443+GljwjPf9Bjaq5pB
- kw8voboq5RYok7/cJ7ra54TqiJQytGnU=
-X-Gm-Gg: AR+sD11LqHIqjNLpEhg9oXp37Jo+KYmcolSoGv5DrHGLGkhJHtPXW1xxEuZ1eKNDuAt
- 9Wf9tnL51ZrcH0FU1FykxDp5wzT8oD8oyXvvZN35vri5ft7RuUrGMCS3mGt43PjDezK1F7oOgVX
- Wn+KBenecUg4jXYaMIUXZkF6GQ1UC3ByV0Eykqhtb+/mG/ov+WGCIRAwfqCN6T4VHlmz/7bFRhr
- +cZjuwYEHcJs9XNoA7gzn3hPx4JlB9Oin8KhCMS7x0xNgNotvCdniMa/tHVvXuv+MgF0KgIJDzb
- r3HPA876F+ygc7qxYQPCMDQ/pgn116WftK0wIDrpgF8tgCoKPNhlLUiukw4gWz3dn54Ps9xvFPN
- 9sxerjgvYZ21iozmkCJWn1tS3qSZHL9EMe75lvsCm5BebpQRYXP7Jo5tCFLDm+NE=
-X-Received: by 2002:a05:620a:1a1d:b0:937:6771:e7e7 with SMTP id
- af79cd13be357-9376771e8damr829132685a.30.1787648039244; Tue, 25 Aug 2026
- 01:53:59 -0700 (PDT)
+ (Exim 4.90_1)
+ (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
+ id 1wyo60-00031b-LK; Tue, 25 Aug 2026 06:09:32 -0400
+Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1)
+ (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
+ id 1wyo5y-0002g2-OU; Tue, 25 Aug 2026 06:09:32 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=univ-grenoble-alpes.fr; s=2020; t=1787652568;
+ bh=V7xWE/MO0+j9X5KVbBLBbazluYuQy+pYibiRpxq9GZE=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=oBdKL2pFOV6sbAqragzXU7uE/ehxzTcb4fJtUcf8/+xV/lZgnPLEWmKIOWYRfHGul
+ qjHMXBPjDfpC+JlN4r8NeI8QjKagRGmPXi3V6Q/M8HfX3Mq+VhQ4T9ISxMawHMmDKq
+ Eq6aYJA8wJSMPdsyruZI8hirntYx4tPDiusnHbkVQbrbFctEgJCi2rnhA+B3ppcL50
+ ti31jd/WwJpOWMn/fDw+9zjZw283I910RryUz15eP88Z+DTRSWzcCLfgIZIek8JJb7
+ R7y0oSc5wAfdMEwHlr5zDWH8JuWiS3w4syc3ucG/BdmmGboDyrOR+xeKDgLNCawiNi
+ JJvcz13ds97Kg==
+Received: from mailhub-1.u-ga.fr (mailhub-1.u-ga.fr [129.88.178.98])
+ by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id 0A15A4026E;
+ Tue, 25 Aug 2026 12:09:28 +0200 (CEST)
+Received: from smtps.univ-grenoble-alpes.fr (smtps2.u-ga.fr [152.77.18.2])
+ by mailhub-1.u-ga.fr (Postfix) with ESMTP id 05BF1FF85D;
+ Tue, 25 Aug 2026 12:09:28 +0200 (CEST)
+Received: from naga.. (pers-185-231.vpn-inp.grenoble-inp.fr [147.171.185.231])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ (Authenticated sender: petrotf@univ-grenoble-alpes.fr)
+ by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id C617014004C;
+ Tue, 25 Aug 2026 12:09:27 +0200 (CEST)
+From: frederic.petrot@univ-grenoble-alpes.fr
+To: daniel.barboza@oss.qualcomm.com, palmer@dabbelt.com,
+ alistair.francis@wdc.com, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Cc: =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20P=C3=A9trot?=
+ <frederic.petrot@univ-grenoble-alpes.fr>, 
+ Julien Thillard <julien.thillard@univ-grenoble-alpes.fr>
+Subject: [PATCH v3] disas/riscv.c: Correct dasm for cbo and lq
+Date: Tue, 25 Aug 2026 12:09:22 +0200
+Message-ID: <20260825100922.387919-2-frederic.petrot@univ-grenoble-alpes.fr>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260825100922.387919-1-frederic.petrot@univ-grenoble-alpes.fr>
+References: <20260825100922.387919-1-frederic.petrot@univ-grenoble-alpes.fr>
 MIME-Version: 1.0
-References: <20260824111711.26297-1-philmd@oss.qualcomm.com>
- <20260824111711.26297-19-philmd@oss.qualcomm.com>
-In-Reply-To: <20260824111711.26297-19-philmd@oss.qualcomm.com>
-From: Max Filippov <jcmvbkbc@gmail.com>
-Date: Tue, 25 Aug 2026 01:53:47 -0700
-X-Gm-Features: AcwNN1WEwK2DUZH45Zj_m2ROUpqkMXxheouHHKZZ_3nAzeD16f7z7iGe_QZUvgg
-Message-ID: <CAMo8BfL88QP4WCRc_X3AXHZNjXp5L_6W1spUpZg06vQjR_fceg@mail.gmail.com>
-Subject: Re: [PATCH v4 18/20] target/xtensa: Constify CPUXtensaState in
- xtensa_replicate_windowstart()
-To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@oss.qualcomm.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-arm@nongnu.org, 
- Richard Henderson <richard.henderson@linaro.org>, qemu-ppc@nongnu.org,
- qemu-s390x@nongnu.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::72c;
- envelope-from=jcmvbkbc@gmail.com; helo=mail-qk1-x72c.google.com
-X-Spam_score_int: -5
-X-Spam_score: -0.6
-X-Spam_bar: /
-X-Spam_report: (-0.6 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- FROM_LOCAL_NOVOWEL=0.5, HK_RANDOM_ENVFROM=0.004, HK_RANDOM_FROM=0.999,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Greylist: Whitelist-UGA SMTP Authentifie (petrotf@univ-grenoble-alpes.fr)
+ via submission-587 ACL (41)
+Received-SPF: pass client-ip=152.77.200.56;
+ envelope-from=frederic.petrot@univ-grenoble-alpes.fr;
+ helo=zm-mta-out-3.u-ga.fr
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -124,38 +87,74 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, Aug 24, 2026 at 4:20=E2=80=AFAM Philippe Mathieu-Daud=C3=A9
-<philmd@oss.qualcomm.com> wrote:
->
-> Add the const qualifier to CPUXtensaState when the
-> argument is accessed without modification.
->
-> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@oss.qualcomm.com>
-> ---
->  target/xtensa/cpu.h | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+From: Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
 
-Reviewed-by: Max Filippov <jcmvbkbc@gmail.com>
+Lq shares the cmo opcode space, but the cbos must have rd = 0.
+Now ensure that they are matched only in that case.
+This implies that lq can be recognized as such only when rd != 0.
+Update the decoder file accordingly.
 
-> diff --git a/target/xtensa/cpu.h b/target/xtensa/cpu.h
-> index 442e98bd1ba..49d6ad9083d 100644
-> --- a/target/xtensa/cpu.h
-> +++ b/target/xtensa/cpu.h
-> @@ -708,7 +708,7 @@ void xtensa_set_abi_call0(void);
->  bool xtensa_abi_call0(void);
->  #endif
->
-> -static inline uint32_t xtensa_replicate_windowstart(CPUXtensaState *env)
-> +static inline uint32_t xtensa_replicate_windowstart(const CPUXtensaState=
- *env)
->  {
->      return env->sregs[WINDOW_START] |
->          (env->sregs[WINDOW_START] << env->config->nareg / 4);
-> --
-> 2.53.0
->
+Fixes: 9273cda722 ("disas/riscv.c: add 'cbo' insns to disassembler")
+Reported-by: Julien Thillard <julien.thillard@univ-grenoble-alpes.fr>
+Signed-off-by: Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
+Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+---
+ disas/riscv.c              | 20 +++++++++++---------
+ target/riscv/insn32.decode |  2 ++
+ 2 files changed, 13 insertions(+), 9 deletions(-)
 
---=20
-Thanks.
--- Max
+diff --git a/disas/riscv.c b/disas/riscv.c
+index b8099cbdf8..e85dbac035 100644
+--- a/disas/riscv.c
++++ b/disas/riscv.c
+@@ -1281,22 +1281,24 @@ static const rv_opcode_data *decode_inst_opcode(rv_decode *dec, rv_isa isa)
+             case 2:
+                /*
+                 * 'lq' shares the "(...) 010 ..... 0001111" opcode space
+-                * with 'cbo' insns.  Check the next 5 bits to select
+-                * what we want:
++                * with 'cbo' insns.
+                 *
+                 * cbo_inval  0000000 00000 ..... 010 00000 0001111
+                 * cbo_clean  0000000 00001 ..... 010 00000 0001111
+                 * cbo_flush  0000000 00010 ..... 010 00000 0001111
+                 * cbo_zero   0000000 00100 ..... 010 00000 0001111
+                 *
+-                * Anything that doesn't match these will default to 'lq'.
++                * lq matches when rd != 0
+                 */
+-               switch ((inst >> 17) & 0b11111) {
+-               case 0: return &op_cbo_inval;
+-               case 1: return &op_cbo_clean;
+-               case 2: return &op_cbo_flush;
+-               case 4: return &op_cbo_zero;
+-               default: return &op_lq;
++               if ((inst >> 7) & 0b11111) {
++                   return &op_lq;
++               } else {
++                   switch (inst >> 20) {
++                   case 0: return &op_cbo_inval;
++                   case 1: return &op_cbo_clean;
++                   case 2: return &op_cbo_flush;
++                   case 4: return &op_cbo_zero;
++                   }
+                }
+             }
+             break;
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index 21272fdb50..aa02dae3c9 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -216,6 +216,8 @@ ldu      ............   ..... 111 ..... 0000011 @i
+   ]
+ 
+   # *** RVI128 lq ***
++  # *** Catches an lq with rd = 0, which we disallow
++  illegal  ------------   ----- 010 00000 0001111
+   lq       ............   ..... 010 ..... 0001111 @i
+ }
+ sq       ............   ..... 100 ..... 0100011 @s
+-- 
+2.43.0
+
 
