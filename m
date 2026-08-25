@@ -4,68 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F2E3C5DF81
-	for <qemu-riscv@archiver.kernel.org>; Tue, 25 Aug 2026 04:05:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83BA6C5B572
+	for <qemu-riscv@archiver.kernel.org>; Tue, 25 Aug 2026 04:05:41 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wyiPO-00065S-PA; Tue, 25 Aug 2026 00:05:10 -0400
+	id 1wyiPg-0006Hr-ET; Tue, 25 Aug 2026 00:05:28 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <stephensportia@gmail.com>)
- id 1wyiPO-00063V-2t
- for qemu-riscv@nongnu.org; Tue, 25 Aug 2026 00:05:10 -0400
-Received: from mail-pg1-x535.google.com ([2607:f8b0:4864:20::535])
+ id 1wyiPe-0006HD-9c
+ for qemu-riscv@nongnu.org; Tue, 25 Aug 2026 00:05:26 -0400
+Received: from mail-pl1-x62f.google.com ([2607:f8b0:4864:20::62f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <stephensportia@gmail.com>)
- id 1wyiPK-0007bB-Tt
- for qemu-riscv@nongnu.org; Tue, 25 Aug 2026 00:05:09 -0400
-Received: by mail-pg1-x535.google.com with SMTP id
- 41be03b00d2f7-c96c92c0980so2552983a12.3
- for <qemu-riscv@nongnu.org>; Mon, 24 Aug 2026 21:05:05 -0700 (PDT)
+ id 1wyiPc-0007dM-MU
+ for qemu-riscv@nongnu.org; Tue, 25 Aug 2026 00:05:26 -0400
+Received: by mail-pl1-x62f.google.com with SMTP id
+ d9443c01a7336-2caf228a910so33237425ad.2
+ for <qemu-riscv@nongnu.org>; Mon, 24 Aug 2026 21:05:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1787630705; x=1788235505; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:content-type:message-id:date
- :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=AUTHHBqmyJCPOXohtw2QY9zPZWECZBFWzrfwTsE4DA0=;
- b=iEad8K1jk4+LZSKJ6M5Nxsip/lCXZ1j/+MQ8uD9ksukj4EeXy2DTjvnhao+79l4ZVS
- xD4/JaT69o70iXGIWvtmXwmkJ1gxHjxWNmW7Nl+ooyGY5Gn/ZdLU22owNIDCpxgZSMMH
- ZU+tXG2JUqAcZ9clTnLfw+hT+kHXAeanF1Wn3M/by10sVtgH3v3lpshlOSXHD/oLwdsI
- b0bPIVumx3f8laZj6xn/Mk/5A2g5EFpufNWe1DjMeu25uOwG39G24hBY7trMS+nTclVY
- BzfejBgOLuPgOjYR7YS7nTCxJrUDtIGTa+UVLsohAb3+9z0HPFY73VHeImyQe0si8Mw/
- hGvA==
+ d=gmail.com; s=20251104; t=1787630723; x=1788235523; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=r9YZtJePZ3XT7IoRh5uSQAmm2CNF2ALweHO4SvoI3s4=;
+ b=FIPwN1mCqMpPRzI7qAiRnstt843eeHXP4thBPy6SIU/pk5cmGaWzNiv6fnkJYReM32
+ uvEHYaWoN3MCrmX32m7S+CTF4eZ95n1vHTqmfAaw2Rtpd4PLjI63MrR/6BadJmxKOh19
+ 2iEJlLiQ2RWUTpsw7r4Xzf92T/Uxxi0UPADXNxP+8jVrMWOWM1r8jEcBvzGWvQDpqTgo
+ WCHY4VkxiVp+UBZlJqo4jktXvCBbGmRQ8fDy6my3uzkW4Jneyj3v5W/Q0Jw4N/GObF9n
+ DVJYd04jHh6tzVcWMWxKObkVD1pBPS/fCqwtgMq/Kl9TCCWeqIFOmDqx8EyX4vrM9yt9
+ 3t1g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787630705; x=1788235505;
- h=content-transfer-encoding:mime-version:content-type:message-id:date
- :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=AUTHHBqmyJCPOXohtw2QY9zPZWECZBFWzrfwTsE4DA0=;
- b=ED/qUweN1jEjvvgS0Yy/vAmuk+U6ldQmhgwlyqNJk+Kxouc5jiij/12Rbhhas51pq/
- CE/TUGCjrL0HO1GS3vMqEpUYghP6fy51MaqDsFB7z4b+Ei2Xdj/P/z3omXTLLJneoiyt
- Grh75UM4jyWnodGqXLUGomY9fpNmA/UBnxa1BjsMqHbmRNMrKLHp56k+1AJx0deYdNtM
- t+uJLY9cCDTpjS0p4QzD9BZ2Ph3C58+a93dcE40D9UEBVn4H6EUtNi8a+bYMXMEFhLPL
- kg34xNP8WV3eNhnMOzuCWDDuumPc7wPqYs6Whf2ou4CKHDD1Vl5GIpuyt/M4F8ZVn2QW
- 7CNg==
+ d=1e100.net; s=20251104; t=1787630723; x=1788235523;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=r9YZtJePZ3XT7IoRh5uSQAmm2CNF2ALweHO4SvoI3s4=;
+ b=Tlb6CVsvODt7/ptGgtQpOcSjzx0Ft3Bd2wDQWUd1M6WlrGHSmRxaru/ZPm3yaOhH2z
+ OjZ4p2YZUwrn+E6VqauFU6bmAMsgrL5nqh2WDceKah6RKZTlJ9n18WxRj8vIPksV/Tq3
+ 9+wKM+WAXb4f0aCS3J574GnXZ3CtcsRmZoNYEWnBh3jg5EDiR4508Tuwiqv/QpI1dn4T
+ rkqCbQf3jjrAZhRFFmLtBy6k3CsDkKCaAerJHCb4MRx8agSELgtcCYxE1d/aFPzJqaLH
+ nT007Soz74t5rjifqO6G8F3CtvQkBHsUKBqOVWvq14ohlUvqz01EMNufWqUgLcxVUB2Y
+ NVJw==
 X-Forwarded-Encrypted: i=1;
- AHgh+RoET5nvcrSnvhm1puIQ5aTzUEqbVVPTncN7SiTcX4GXIM7Kl1XGZfiapMpvoC7KN29tMVl3qufHIZWc@nongnu.org
-X-Gm-Message-State: AFuF++n/t+t1G7bioqsgGMbviDRzV1ll9ahHoLOJGgBZTvZUmGB3bJpF
- 4NbFzsbt4FNjHxjg+faPIa6T41uI1/g9nwt4jlpGXC3yIv3R4qYDcbcT
-X-Gm-Gg: AR+sD11W082Ssp9cHHIYX3sZX6bGqDnErROcef94OAb2bMRuCJaLw7cDk/duw+XWHe4
- qwjfIg2CrqtzWH1sPdB04siKbAGZeHEARx4bxAW3nAZYUR+Au6/CaspoN9H4gAXmhKaSPFtM9eR
- 4FHuPsI0Z0+I66eqEMVwzeOHLpx8HiCU48yAIWlV7b5fHcCiF3YN+9HrcHkmk8TG2s+vfGEHm/C
- P/y4XEg9fGERqhlE/r2fID1UjvRCWtDhWIKrzv9DbwcUV5HRC/BApXjinMAwXHUYyXoDHMksz9N
- 2y75rAOX2539nzGFdCS4C7bRTzA/DNKS4zQTIwihbbBnaTTRG6dLcWAfg6urM0UfIAFCmQ88YEX
- dUzra6iaPDuj66aZscPTD4YbwafixZwjHgfrCuPxaE7nkz0HZwQdYhHNwZG9cQKfjx5xd0QOxnf
- XxkQG8MuRtKHVKvsEjCj1l7Dk1OW6wziHPJInitDEMEphhRkuwV1fFsbz0ZzeV7tAEr6kHKpf1l
- PS3gl4xZIhqL/ctzPQthKhKQglxMFjmVg==
-X-Received: by 2002:a05:6a21:70c8:b0:3c4:3767:adb2 with SMTP id
- adf61e73a8af0-3cd90f41247mr7722021637.1.1787630704648; 
- Mon, 24 Aug 2026 21:05:04 -0700 (PDT)
+ AHgh+Rp2FVB/NMz/nBxJ/vN87FSeEkCE6kl28giMuWUj18vfFbYSJDF8y5aIM3LKkQQPTEpD5yh9x7EX1wTQ@nongnu.org
+X-Gm-Message-State: AFuF++kgFGvR4j5WQf4KwkJORlGKF63LE/bFwbesS9KJEvJEGxKaKPiq
+ VY3cvHoZY4awxw9SSQdk/Yj8IGM1WWegxEHDj9HgfsKTyZH2ziIUjVMR
+X-Gm-Gg: AR+sD11BbbHEVbcshO6RK0QEwkug1wAl4Balu4FIjeXZGZ6T1ZJiVk8LoxEbJL49dZZ
+ uP4CbdHSSYm1TrTI6jDIAV0ZFT6fAzq+JmAkw2KoopVPHcQN8JOmNIzX0ErOAxFAP4smRyRZnUH
+ Hfvzhxdvgi+cehcr0PDHoTzfJ6XLmR3WHAtkQikhFGvfL2oCMCbbR58EKMpcSeGmrKv2rwreIWi
+ htj23pBKuK+blbkiXJPfQ6VIXbId1InkZSZSTUz8QCy+ko2OmBPVclAM/melw3HSiZkEH3+zU+K
+ 6mJw49wt+bSWNhlIYnQpe0szl7TPrgpEFdjBzX81plFA6fQ4k0YGUz3eghnIvtII7neHfqwQTuo
+ XEAfOKVp+x4cYzaxZW1F0inFtaE74GQjOq2Bh0k5FA3kkfCVLPOVWU/oI2eb35m4PQjitIDcV6O
+ g+DaLpMg+CCr+osJeqr0bLZSB6M1YBAcdbdZGl5fnIb/G2whdjC++hv39/lxqUloYQkhPmOvgCv
+ a/0TYCJc2AGrMCVhHMljJ3rwVg3Zo6PzA==
+X-Received: by 2002:a17:903:3888:b0:2d0:cc92:f7c2 with SMTP id
+ d9443c01a7336-2d670b4cdc9mr431321115ad.1.1787630723312; 
+ Mon, 24 Aug 2026 21:05:23 -0700 (PDT)
 Received: from lima-default.tail89d63.ts.net ([159.196.41.205])
  by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-327f909adc8sm34104212eec.2.2026.08.24.21.04.55
+ 5a478bee46e88-327f909adc8sm34104212eec.2.2026.08.24.21.05.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Aug 2026 21:05:04 -0700 (PDT)
+ Mon, 24 Aug 2026 21:05:22 -0700 (PDT)
 From: stephensportia@gmail.com
 To: qemu-devel@nongnu.org
 Cc: Palmer Dabbelt <palmer@dabbelt.com>,
@@ -87,22 +88,23 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Glenn Miles <milesg@linux.ibm.com>, qemu-riscv@nongnu.org,
  Jean-Christophe Dubois <jcd@tribudubois.net>,
  Portia Stephens <portias@oss.tenstorrent.com>
-Subject: [PATCH 0/4] Rename ssi_transfer to ssi_transfer8
-Date: Tue, 25 Aug 2026 14:04:48 +1000
-Message-ID: <20260825040452.1322251-1-stephensportia@gmail.com>
+Subject: [PATCH 2/4] hw/ssi/pl022: Fix dropped upper bytes of ssi transfer
+Date: Tue, 25 Aug 2026 14:04:50 +1000
+Message-ID: <20260825040452.1322251-3-stephensportia@gmail.com>
 X-Mailer: git-send-email 2.43.0
-Content-Type: text/plain; charset="utf-8"
+In-Reply-To: <20260825040452.1322251-1-stephensportia@gmail.com>
+References: <20260825040452.1322251-1-stephensportia@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::535;
- envelope-from=stephensportia@gmail.com; helo=mail-pg1-x535.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62f;
+ envelope-from=stephensportia@gmail.com; helo=mail-pl1-x62f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -120,53 +122,50 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: Portia Stephens <portias@oss.tenstorrent.com>
 
-The ssi_transfer function comments say that it takes a word varying
-between 8-bits and 32-bits. ssi_transfer takes a 32-bit arg to transfer
-but there is no means to indicate the number of bits that should
-actually be transferred. All child classes of SSI_PERIPHERAL class have
-transfer functions that, despite accepting a 32-bit tx, only transfer a
-single byte; m25p80_transfer8(), ssi_sd_transfer(), ssd0323_transfer().
+The pl022 model suports transferring a 8-bit or 16-bit frame width. The
+16-bit transfer is broken since the upper 8-bits are being dropped by
+the SSI peripheral transfer function. Fix this by adding a second call
+to ssi_transfer8() when the frame wdith is 16-bits.
 
-The current implementation depends on the SSI model to know
-what peripheral model will be attached and what transfer size it
-expects which is error prone. If a SSI_PERIPHERAL model was written that
-accepted 32-bit transfers, it could not attach to any existing SSI
-models.
+Signed-off-by: Portia Stephens <portias@oss.tenstorrent.com>
+---
+ hw/ssi/pl022.c | 12 ++++++++----
+ 1 file changed, 8 insertions(+), 4 deletions(-)
 
-This change updates the the naming of ssi_transfer to ssi_transfer8, as
-well as changes the return value and transmit argument to be 8-bit.
-
-Most ssi models handle this correctly already, sending a single byte at
-a time. There are a few models that are written to support non 8-bit
-transfers but there are no in-tree use cases that connect a peripheral
-to the SSI device. These have been updated to use 8-bit transfers.
-
-Portia Stephens (4):
-  hw/ssi: Rename ssi_transfer to ssi_transfer8
-  hw/ssi/pl022: Fix dropped upper bytes of ssi transfer
-  hw/arm/strongarm: Fix dropped upper byte of ssi transfer
-  hw/ssi/pnv_spi: Fix dropped upper bytes of ssi transfer
-
- hw/arm/strongarm.c         |  7 +++++--
- hw/ssi/allwinner-a10-spi.c |  2 +-
- hw/ssi/aspeed_smc.c        | 14 ++++++-------
- hw/ssi/bcm2835_spi.c       |  2 +-
- hw/ssi/ibex_spi_host.c     |  5 +++--
- hw/ssi/imx_spi.c           |  2 +-
- hw/ssi/mss-spi.c           |  2 +-
- hw/ssi/npcm7xx_fiu.c       | 42 +++++++++++++++++++-------------------
- hw/ssi/npcm_pspi.c         |  4 ++--
- hw/ssi/pl022.c             | 12 +++++++----
- hw/ssi/pnv_spi.c           | 28 ++++++++++---------------
- hw/ssi/sifive_spi.c        |  2 +-
- hw/ssi/ssi.c               |  4 ++--
- hw/ssi/stm32f2xx_spi.c     |  2 +-
- hw/ssi/xilinx_spi.c        | 10 ++++-----
- hw/ssi/xilinx_spips.c      |  4 ++--
- hw/ssi/xlnx-versal-ospi.c  |  4 ++--
- include/hw/ssi/ssi.h       | 17 ++++++++-------
- 18 files changed, 82 insertions(+), 81 deletions(-)
-
+diff --git a/hw/ssi/pl022.c b/hw/ssi/pl022.c
+index eaac664ec5..f4ade45ca9 100644
+--- a/hw/ssi/pl022.c
++++ b/hw/ssi/pl022.c
+@@ -74,7 +74,6 @@ static void pl022_xfer(PL022State *s)
+ {
+     int i;
+     int o;
+-    int val;
+ 
+     if ((s->cr1 & PL022_CR1_SSE) == 0) {
+         pl022_update(s);
+@@ -99,13 +98,18 @@ static void pl022_xfer(PL022State *s)
+        the transfer has completed.  */
+     while (s->tx_fifo_len && s->rx_fifo_len < 8) {
+         DPRINTF("xfer\n");
+-        val = s->tx_fifo[i];
++        uint16_t tx = s->tx_fifo[i];
++        uint16_t rx = 0;
+         if (s->cr1 & PL022_CR1_LBM) {
+             /* Loopback mode.  */
++            rx = tx;
+         } else {
+-            val = ssi_transfer8(s->ssi, val);
++            if (s->bitmask > 0xff) {
++                rx |= (ssi_transfer8(s->ssi, (tx >> 8) & 0xff) << 8);
++            }
++            rx |= ssi_transfer8(s->ssi, tx & 0xff);
+         }
+-        s->rx_fifo[o] = val & s->bitmask;
++        s->rx_fifo[o] = rx & s->bitmask;
+         i = (i + 1) & 7;
+         o = (o + 1) & 7;
+         s->tx_fifo_len--;
 -- 
 2.43.0
 
