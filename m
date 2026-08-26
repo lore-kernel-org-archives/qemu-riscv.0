@@ -4,170 +4,119 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7151C5DF97
-	for <qemu-riscv@archiver.kernel.org>; Wed, 26 Aug 2026 06:06:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A25B4C61DC2
+	for <qemu-riscv@archiver.kernel.org>; Wed, 26 Aug 2026 08:55:40 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wz6lJ-0001se-9Z; Wed, 26 Aug 2026 02:05:25 -0400
+	id 1wz9Pa-0002Kw-G9; Wed, 26 Aug 2026 04:55:10 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=6911f864d=Alistair.Francis@wdc.com>)
- id 1wz6lH-0001sR-VL; Wed, 26 Aug 2026 02:05:24 -0400
-Received: from esa3.hgst.iphmx.com ([216.71.153.141])
+ (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
+ id 1wz9PZ-0002KG-Cd
+ for qemu-riscv@nongnu.org; Wed, 26 Aug 2026 04:55:09 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=6911f864d=Alistair.Francis@wdc.com>)
- id 1wz6lF-0007DU-NI; Wed, 26 Aug 2026 02:05:23 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1787724325; x=1819260325;
- h=from:to:subject:date:message-id:references:in-reply-to:
- content-id:content-transfer-encoding:mime-version;
- bh=hqvo70sqCQuNimSK+EG13IGy9eaxuxfxA+JUNuAzVpU=;
- b=GPxOo855OqqBKemDv+6bvamydChraGac0XdY3qBwMjtvcAFhyDdGlJ00
- X5SGjvBorw6x82wqUCgMZPBA5BnxIdRnEaFCNysBIGrY5Il/7taKlZAhk
- +xUQX8mdkSXIv4hMV7ajNQox+Krb3cIDuNz8kIkFwVFkxVZAK2KqRjSa2
- BRb3Q3WXg/S2w33cvL1fE8JjTtURkRnY9gQ416tvb7HZc8L33/YCViS6s
- Puu339I+oJqvAwTpSSoOLuPNoGxmfzmgmGWbHk3i4e2qkwyu3c8C6Yghi
- 93FRecv1WRpkhnyFVSwvcxZ/DeukWmTe4t3f+Yd5VPVkGv99NwCH9nKSy w==;
-X-CSE-ConnectionGUID: HYl32vCpQie0bUUANot9Fg==
-X-CSE-MsgGUID: Lx+4tv3CSr6go7G7Zl1lzA==
-X-IronPort-AV: E=Sophos;i="6.25,244,1779120000"; d="scan'208";a="154288024"
-Received: from mail-westus2azon11012040.outbound.protection.outlook.com (HELO
- MW6PR02CU001.outbound.protection.outlook.com) ([52.101.48.40])
- by ob1.hgst.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 26 Aug 2026 14:05:21 +0800
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=FdCqGyxa90F7boDoEJo3LJKopcVOckRiq1L6ScRQJJA3z9UBVttbDVoEm/v+KfF57D/aQA4bn9DuozstD63JhRljSvrtcB9GmsUIlb/Q1PaiMY/IXqtgvjIl45JopWjxnu/zVxLILjdQuH9DjwsHz7+GNsWA7oc7BlKeGQzwMyFMpJH6s0ihmRGlQThTS6T1E6CvqUM8FXbETQTZYP8Itt78lJIrjSclf8u0IZZfE9nl8iqrBsm6FMsj/0yrJOwVYW4Cp7CfRjiT9bJMQ0Y8UN8A8my3UQLDGcX4BeH92akgvN/xdBDt67L48pWUaO/Cam1IJ91+UGnhRR8XIlFrnw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=hqvo70sqCQuNimSK+EG13IGy9eaxuxfxA+JUNuAzVpU=;
- b=aR3pHqQbzG/+GAFnWu07T9fTlT+ZUaczzNzbhHlo7rrTDF/j95Kj5vnhmODvZVESasWgNLscQXg3ETa/WnmCZs7nhnw53Hfr/Xj2/t+z9bMFNLabGbi4yHl3TpmNcXKdt3GBJh0bmRP7/HzP5D64s4NiinEKbFBG4lhplRWRSorgHEjASnAAIrkb1lw1D6NrsY5/jazVuWRxZnIvDcYqxsbm5h7DSyGKTc4K1c12UdzTChhCzRwFXhpqAHMKjWpaQj/b7XhnD2lcPGsIRiRauZpFRpQCZjW2dBsV8o9iSo/6dFNtVZ2tKoTPCasWzMiWIH6dAJ5XJrzG21oxDdNjtA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
- header.d=wdc.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=hqvo70sqCQuNimSK+EG13IGy9eaxuxfxA+JUNuAzVpU=;
- b=nDYS6DW2BaovkpiAqGPI/ztpoCeYwDf7pyClHeNaiZQZHrEAfbSHRQUzXiqkLinOhnECneAhUz8LvRdCMk+Ul60p1anFR6MJQp4YR8tvGOx/Lvd0aVRpxg5/ULo2D3+51Eqj9tGJje1wZitcDPtYRPbcuYqzaWoZmddl6OX7QGw=
-Received: from CH5PR04MB9550.namprd04.prod.outlook.com (2603:10b6:610:20e::17)
- by CH2PR04MB6490.namprd04.prod.outlook.com (2603:10b6:610:69::21)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.360.8; Wed, 26 Aug
- 2026 06:05:15 +0000
-Received: from CH5PR04MB9550.namprd04.prod.outlook.com
- ([fe80::2dd5:1dc8:e3e7:5d31]) by CH5PR04MB9550.namprd04.prod.outlook.com
- ([fe80::2dd5:1dc8:e3e7:5d31%4]) with mapi id 15.21.0360.005; Wed, 26 Aug 2026
- 06:05:15 +0000
-From: Alistair Francis <Alistair.Francis@wdc.com>
-To: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
- "daniel.barboza@oss.qualcomm.com" <daniel.barboza@oss.qualcomm.com>,
- "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
- "chao.liu@processmission.com" <chao.liu@processmission.com>,
- "zhiwei_liu@linux.alibaba.com" <zhiwei_liu@linux.alibaba.com>,
- "palmer@dabbelt.com" <palmer@dabbelt.com>, "liwei1518@gmail.com"
- <liwei1518@gmail.com>, "frederic.petrot@univ-grenoble-alpes.fr"
- <frederic.petrot@univ-grenoble-alpes.fr>
-Subject: Re: [PATCH v3 0/1] target/riscv: correct cbo and lq disassembly
-Thread-Topic: [PATCH v3 0/1] target/riscv: correct cbo and lq disassembly
-Thread-Index: AQHdNHnU+OudLdqfx0CPbmeMpeG0KLav2MQA
-Date: Wed, 26 Aug 2026 06:05:15 +0000
-Message-ID: <f30f8dbd7da63cb1035de4232858809020d72af8.camel@wdc.com>
-References: <20260825100922.387919-1-frederic.petrot@univ-grenoble-alpes.fr>
-In-Reply-To: <20260825100922.387919-1-frederic.petrot@univ-grenoble-alpes.fr>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-user-agent: Evolution 3.60.2 (by Flathub.org) 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=wdc.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: CH5PR04MB9550:EE_|CH2PR04MB6490:EE_
-x-ms-office365-filtering-correlation-id: 92665e8c-8b4a-4411-01b0-08df0337ff8b
-wdcipoutbound: EOP-TRUE
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
- ARA:13230040|1800799024|10070799003|23010399003|376014|366016|19092799006|22082099003|18002099003|11063799006|3023799007|38070700021|56012099006|10067099003;
-x-microsoft-antispam-message-info: bI7KuOsdGHfpa5skZB7+Ny5HcK6spyby27R8aFTWpkGkDWQDmYm6JyDoJY+7pwoAJFwRpQmlw9rkfQyq9Zr1pjI6T9rqouKZQEDcddZFWjiob84mt3N4C4kj4MovjQdMdPlW85DVD1BZPt8/pXzWCEdjMwOh8k2DxKG2RVNLMXg6TQwUcNC9EzwNYyX+x3vwZ4NOH2tGIDw/P3JohJEakkwSdcizxcGjMikZ/jTTTfuh3C5CWo0b3dBrayaLfN7sVygY6AH834DJSgMBD0YbjBPCdEz/WaobvP3PKMyWT22vYEC/JIEkZqdJ/dT9ui6bOGylYNHd+Bsq+TskWxBhRO2E6FXResVvzyLTPAebzavgXmhKERakfcZeSJBcVGeF3CcAOyn3HgE7O136Md/kyTB22M7/Fnz9nMF6VqFggXXDRHgFXnLftl5AO/FzOqfSBrrZIavxX/UHa3wX6mRnRgeFbS0gaNTDZxsosNIUU283Nd4srH5aa6tzn5LcN/eZyIY1QyyLjiyeykXLgwZtMcrU4idVTAtU6YfqtF3QUfvBrzXpBJ+MqZz1BE2TQSZZZTpqEvIOiv8Y93DRrKaW8+afsVPDpN9dcBh+5TLa4YNOjQdtInBmMG0OdS7ZpaTQ8BjTcFz1/pP41k0bhwnpkq4rWGYWHSOQlJXAB1lK+SUcLjpc2FCB/GeCQaNoByqOHgzsqjqt08MjrUtCLMwWSwhDa8CFPKb00s+R3a5GWI4=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:CH5PR04MB9550.namprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(10070799003)(23010399003)(376014)(366016)(19092799006)(22082099003)(18002099003)(11063799006)(3023799007)(38070700021)(56012099006)(10067099003);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 2
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?WEJHV3cxbUtOekpZaVFxenZFdTcwNXdIdFdmWTd4N3pzdVowWi9KZjBvcWVR?=
- =?utf-8?B?MmFKZE9RZUkyMkUxUTVuT3JxSnhDZGxIcDBOSkJ0SWdoOVFjS0ZpUDNybTFE?=
- =?utf-8?B?SUx0bk54TUJUWGFITDJUKzJnRVlPY25nYytTUlV3bVY1anZBUmFZVU9xSktj?=
- =?utf-8?B?WFBINTF4Ni9BNWFSQUhtMlpyTzc2czZ4Y2NjbXNqMXpIL0RFTFVOLzZkZzV5?=
- =?utf-8?B?b0NNNjNWS3c3L2tFWFM1SFZVakluNmZhRWJ4WWEvWDk4RUtJUHN6ckVsOW5t?=
- =?utf-8?B?YVdlZ3d4T0ZnRm5hRW5VSmtDYUQyVCtmRmhBRzNBQkZqdERTMFZrM1ZvWDI3?=
- =?utf-8?B?S2ZTQUwyNU93Q0c5b05HQlo3Qkt3RG51OGIxcU1pVkwwN1Yvb2hjWW5jejhH?=
- =?utf-8?B?WWg2QkxMR3BiV3pOdENOT1lwclEweDFzeDBiT3NkT3ZCZU9JTXU4WG9DMlY2?=
- =?utf-8?B?dWl4Yi85SCtPOTlsWjhCaDd4dnZPQ1hCbGxZaW1BaEgrS0dhMHZvV0lJT09N?=
- =?utf-8?B?WDBWZldEVGZhK3dKVzVackdaT2swY3RtU3NHL2lINkhNRlpjREhvTTJySVlx?=
- =?utf-8?B?YzBIQWNDU1Vkajhscm9jelY2U0xaOStVbFhBZ3FQVHlUdEl2d1BxRUduRk1V?=
- =?utf-8?B?bEZ5TkNxOWJZdzE3eHQrOUpwZ2xjeDUyTXNDbkQ4ZU54L3ZjNldVOTE2K3BH?=
- =?utf-8?B?M3NibFU5K1JRMWtDR09VdkFrZHlkWHpMd2I3OUZDcDFTeEk1eS9VdlF4UmNo?=
- =?utf-8?B?cmRZNGhtVU9Zc2tNMDAxZXQ1Z0JrUnBEdG1mUTZUNDI3VnRPaUYrU2JOdnYx?=
- =?utf-8?B?cW5SZVM0bHZ1KzBub1pqMDViS3RjYitVOVB6THpueXgvNXd0MlVnT29oS1hz?=
- =?utf-8?B?ZldnQU85c1F2UXBDZytoUTV5cDkxVVlubllOVm1zRVl3MC9xZk9DbVpZb1B3?=
- =?utf-8?B?d3RwYnlmaGNOSkFRcnpHeWlpcW1JNFhKZzdFWVVvcWFsVU9lNFVET0I5OXJj?=
- =?utf-8?B?anNQUFJaVUZ2Qy9KL1Z4VnVONDM4dWtRWGd3U0U4U1VvdUkxMzRvMElZVVFQ?=
- =?utf-8?B?U2FoOE5mZjVncG5Ld2VVRGJZQmY0Y3NHVkdFQkpwdGZsTmhRQjRjcmxPL2Js?=
- =?utf-8?B?Y2tPWDVEaHFNdy9KNXRBNzF0MllLekxNMjFJTi9OcnFsLzZRbEZaaGNDcDU5?=
- =?utf-8?B?MXhIV0pTTnJJaW5FaDVWSkxGK1U4MkFwb2VJbGlwaTZ4STNUa1BJTWE1QXNE?=
- =?utf-8?B?SEluZk5CNnBkQUVFak13VUw1dzBjWEIrL3NyLzhLeG1qeXJVWlpxTm01OStz?=
- =?utf-8?B?eHM2RHhzdU95b1JhSDM3Rk1ZbFJ4SkYyd2dURnY0a253bWZzVkc2NzZWc2FM?=
- =?utf-8?B?cmpHK09mSWNIZ0psNmtVVTVhdlJ3eWNJSFlKWmJPUmZ3VzhVcnFMMEhjb1I5?=
- =?utf-8?B?QVI2NVE2V3BVQzNsR1hWUkdLSVRsQkVJOU5yaUtYQ245WE9GNzJ1UjhSZHlU?=
- =?utf-8?B?V0krZnFodzFKRERtc3BveFJnNm1oRldEaGpPMHRSWEVtdzVhTlhmckNDb2M1?=
- =?utf-8?B?dWhKMElHZ3hKeVd1Nldua2hmVzJnRXRLOUs5QTBNYnBCcmdnYzE3SHFFTVhl?=
- =?utf-8?B?dm9pOHdqTzB5UHlnTzFsKytxaFVGV0RWcUI0WHRLcEh6c1pyaFhQd01ZbW8w?=
- =?utf-8?B?Z1JhVlh1NkN6M3psRENYSlBYVlkwZzluOU5oSk5zL3F0WGhlTFNiSmE2NUVq?=
- =?utf-8?B?VUNlcGN2d3ovZWJCa2JEdzRvTGt0M1hvdTNSVFB5VjlpdWVHR0JDQTlWeFpk?=
- =?utf-8?B?dFpQK0dIL0lkQnhIQ0RVem5WS1d2WG00Y1B5OTZwK0FtVGVuZVhKb0pkRGRQ?=
- =?utf-8?B?NkNOdXNYalRub2I3WnVtM3BySEREUDdDc2I5by9UNW54N3B0enpBaDRzend5?=
- =?utf-8?B?K0d2bmh2Nk5ZcXpSM2xnYWhrRmt3ckMyQWdoNVZCRVRya0NFNTFVaytTTndT?=
- =?utf-8?B?ZXdJOTM5UnBjNVkra3pDK0dVdkV3Mit5QW9wZ052enhaNEJxZXd2d2NjcDFX?=
- =?utf-8?B?TWxkYXVNU1VCWndKR092QkRJZ1ZBNHpXVm9sSng0VnE5emtMVnFSaUhldE9K?=
- =?utf-8?B?QStYWTFDY3ZvdFhYWWNTa0s0RWkwTGlKVjdzV2NJeWMzN2RCMnZpb3U3SDM2?=
- =?utf-8?B?OG9DaVQwcWhFUEQ0NVd4NnZLVHBvWDJhSzhYVU1FTGljZmxha0cyL0JBdW0z?=
- =?utf-8?B?MWtrMFd5OGdmKzM2TlY4cnhqSTlaOWpJVnZmMExIazFGb043ampjUmJoSW1X?=
- =?utf-8?B?WVZ0UWNyN0w1MmpteUYyd2RHdUhta1VETFZtTGRuWkJEaG56SlVDZWxvZ0R6?=
- =?utf-8?Q?bM4pUIKv5EBwbAiwtqLU3QxsjzoWcNqhAM3H9aK7QvNGQ?=
-x-ms-exchange-antispam-messagedata-1: OL+x995rmExAr2gOnhJdFYmcp6t+HXwO78o=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <2F45423C7F8F654DA03BE94F7AA3D909@namprd04.prod.outlook.com>
-Content-Transfer-Encoding: base64
+ (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
+ id 1wz9PX-0002dd-1p
+ for qemu-riscv@nongnu.org; Wed, 26 Aug 2026 04:55:09 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1787734506;
+ h=from:from:reply-to:reply-to:subject:subject:date:date:
+ message-id:message-id:to:to:cc:cc:mime-version:mime-version:
+ content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=QcEyEJ2C65GQ7/5bh8oNJgVP3iQUPaFAtGbhQuIC7mw=;
+ b=UFIwzdLRYcokiFpZ9mKGHOs6Pkie12EFtRsqr7GZl25hVbONo2Q4hr0NQUbCt6fSX9f4KA
+ 27Mk0bVCUNLMj1a0CTastTRCKIOpkIcxpQw9OSj5nMKmxww95hTyTnxOL9gRfcIkBPgd0v
+ ehuLeXUUAtGNRV0QMz7Iwfg/rLEao1s=
+Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-473-t03T1JrFMG6NkCjYtxZrkg-1; Wed,
+ 26 Aug 2026 04:55:01 -0400
+X-MC-Unique: t03T1JrFMG6NkCjYtxZrkg-1
+X-Mimecast-MFC-AGG-ID: t03T1JrFMG6NkCjYtxZrkg_1787734496
+Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 088181954ADD; Wed, 26 Aug 2026 08:54:53 +0000 (UTC)
+Received: from redhat.com (headnet05.pony-001.prod.iad2.dc.redhat.com
+ [10.2.32.117])
+ by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 25B3B1803A44; Wed, 26 Aug 2026 08:54:36 +0000 (UTC)
+Date: Wed, 26 Aug 2026 09:54:34 +0100
+From: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
+To: =?utf-8?Q?Marc-Andr=C3=A9?= Lureau <marcandre.lureau@redhat.com>
+Cc: qemu-devel@nongnu.org, dave@treblig.org,
+ Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@mailo.com>,
+ Markus Armbruster <armbru@redhat.com>, Gerd Hoffmann <kraxel@redhat.com>,
+ "Gonglei (Arei)" <arei.gonglei@huawei.com>,
+ zhenwei pi <zhenwei.pi@linux.dev>, Kevin Wolf <kwolf@redhat.com>,
+ Hanna Reitz <hreitz@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
+ Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+ Ani Sinha <anisinha@redhat.com>, "Michael S. Tsirkin" <mst@redhat.com>,
+ Laurent Vivier <lvivier@redhat.com>, Amit Shah <amit@kernel.org>,
+ Brian Cain <brian.cain@oss.qualcomm.com>,
+ David Woodhouse <dwmw2@infradead.org>, Paul Durrant <paul@xen.org>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Marcelo Tosatti <mtosatti@redhat.com>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Jiri Pirko <jiri@resnulli.us>, Jason Wang <jasowangio@gmail.com>,
+ Halil Pasic <pasic@linux.ibm.com>,
+ Christian Borntraeger <borntraeger@linux.ibm.com>,
+ Jason Herne <jjherne@linux.ibm.com>, Eric Farman <farman@linux.ibm.com>,
+ Matthew Rosato <mjrosato@linux.ibm.com>,
+ Ilya Leoshkevich <iii@linux.ibm.com>, David Hildenbrand <david@kernel.org>,
+ Cornelia Huck <cohuck@redhat.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Anthony PERARD <anthony@xenproject.org>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Hyman Huang <infra.ai.cloud@bitdeer.com>,
+ Peter Xu <peterx@redhat.com>, Fabiano Rosas <farosas@suse.de>,
+ Samuel Thibault <samuel.thibault@ens-lyon.org>,
+ Stefan Berger <stefanb@linux.vnet.ibm.com>,
+ Zhao Liu <zhao1.liu@intel.com>, Nicholas Piggin <npiggin@gmail.com>,
+ Chinmay Rath <rathc@linux.ibm.com>, Glenn Miles <milesg@linux.ibm.com>,
+ Harsh Prateek Bora <harshpb@linux.ibm.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Chao Liu <chao.liu@processmission.com>,
+ Yoshinori Sato <yoshinori.sato@nifty.com>,
+ Artyom Tarasenko <atar4qemu@gmail.com>, Max Filippov <jcmvbkbc@gmail.com>,
+ Stefan Hajnoczi <stefanha@redhat.com>, qemu-block@nongnu.org,
+ kvm@vger.kernel.org, qemu-ppc@nongnu.org, qemu-s390x@nongnu.org,
+ xen-devel@lists.xenproject.org, qemu-riscv@nongnu.org
+Subject: Re: [PATCH v4 36/49] monitor: tighten monitor_printf*()
+Message-ID: <ao6pyiBkHZJz_9JR@redhat.com>
+References: <20260825-qemu-no-hmp-v4-0-af60857c2fbe@redhat.com>
+ <20260825-qemu-no-hmp-v4-36-af60857c2fbe@redhat.com>
 MIME-Version: 1.0
-X-Exchange-RoutingPolicyChecked: YBrdYWL9sEv6BIygzn2EeuDOZ6YInerWw+b3npu+HPCbM7LhqPaqC4bs8XQbP+0bj0X/E5urJTMBSpAZgX7J6KaYvHJc5kaGHARjq3CEmtC84mIkvrSQ9yjaS2nzy7eKe1C02UblrlUxE8t5or2I2PfGNBp5uBe0oGXHr0z+9UZPjGZYSo2dux+rqtG80DDnn0Yu1z1+D82xf5L+jV1WKsasZKHZNdrfJ6/xxu9bPk34JgcYrh2hu/pVPOd4DYEZZ4wQG+7lUXpqAHB/hpzVBF95zqUeLqEadZDzI5X+GtOXnX7L/sgYII2KZ+GIJuyakZHxPwtdQJdMsIWJ2HrBNw==
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: P0+MLDB5a7llMDAuBnp8xzq3dULeVHORzLeiKTkhJxFtckwvCs/BG4FGeCwK03/b608r/Gj5gif591Nk4znMiR2wnql7lHNBXNd9/PWIdXan32XGyJRL88zFYEKcoBz5Fn5wpToIAJtppseQE2hQzvY4fHkqYhnUcq2Wezy+SAQ55WZSeqsdbKs/ozjqqf6lp5/4dqZuF7Ic92D7SK1mPpjrBMGpNvy3tQmoMteB1K4ODo4E4NDB4RRemoVBNZJBzuEcIBUSxtbGxsSr6uKVtG+xsZmcXFmHGR2hVjOLt9ennPGskh8NRTijrN5UjAKgkFNAQwpBIiVIUfrOT91USZId0eQPSNeDHyEhqB0amSxnyNsPguMt3OBN0yMFDt19rbJ++qgvSb95ymTV7WQIIrhb+y9/8Tz0pu0mI15PgoxXJNxztml4p9LWIojfpftk3SrIalQ1DwRSCr/b79JNWkYvYM/4VBEsF6VYDNEkWYVOCefT3yPxY4aTDymu6Bba/dq74sKAZ0iOswyiovZznjyIuR5W9fp0gg7+0ApKEvB7fvtxf9SHInxr9epKXw+BuOYfYqiwI1qXogRxCfhnUR2b/ruWlA0QlBNjp36h5X+tcDPOeTYKnfMaF6e8bxA7
-X-OriginatorOrg: wdc.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: CH5PR04MB9550.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 92665e8c-8b4a-4411-01b0-08df0337ff8b
-X-MS-Exchange-CrossTenant-originalarrivaltime: 26 Aug 2026 06:05:15.4746 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: X400n4Wj2VcEMcOYeTKB9H3XpvFjOoBWnz+OOv7zjWtsSR+7khnQKidMm6kidyFzdBelfEYGjm/k5HwUUohb9VIHwHcB2ZzbQ8zzhf5S1nY=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR04MB6490
-Received-SPF: pass client-ip=216.71.153.141;
- envelope-from=prvs=6911f864d=Alistair.Francis@wdc.com;
- helo=esa3.hgst.iphmx.com
-X-Spam_score_int: -43
-X-Spam_score: -4.4
-X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+In-Reply-To: <20260825-qemu-no-hmp-v4-36-af60857c2fbe@redhat.com>
+User-Agent: Mutt/2.4.0 (2026-06-19)
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
+X-Mimecast-MFC-PROC-ID: 9dvgUX6Bi9hJO52By_-Y1aXMGgp29bbQEv4zlrOMabQ_1787734496
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=berrange@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: 12
+X-Spam_score: 1.2
+X-Spam_bar: +
+X-Spam_report: (1.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=0.001, RCVD_IN_SBL_CSS=3.335,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -180,25 +129,151 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
+Reply-To: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-T24gVHVlLCAyMDI2LTA4LTI1IGF0IDEyOjA5ICswMjAwLA0KZnJlZGVyaWMucGV0cm90QHVuaXYt
-Z3Jlbm9ibGUtYWxwZXMuZnIgd3JvdGU6DQo+IEZyb206IEZyw6lkw6lyaWMgUMOpdHJvdCA8ZnJl
-ZGVyaWMucGV0cm90QHVuaXYtZ3Jlbm9ibGUtYWxwZXMuZnI+DQo+IA0KPiBUaGUgQ0JPIGluc3Ry
-dWN0aW9ucyB3ZXJlLCBBRkFJVSwgZGlzYXNzZW1ibGVkIGVycm9uZW91c2x5Lg0KPiBJbiBhZGRp
-dGlvbiwgbHEgKGxvYWQtcXVhZCwgYSBSVjEyOCBpbnN0cnVjdGlvbikgc2hhcmVzIHRoZSBzYW1l
-DQo+IG9wY29kZSBzcGFjZSBhcyB0aGUgQ0JPcywgd2hpY2ggYWxzbyBsZWQgdG8gaW5jb3JyZWN0
-IGRhc20gZm9yIHRoYXQNCj4gaW5zdHJ1Y3Rpb24gKHVuZGVyc3RhbmRhYmxlIHNpbmNlIFJWMTI4
-IGlzIGFuIGV4cGVyaW1lbnRhbCBmZWF0dXJlKS4NCj4gVG8gYXZvaWQgb3ZlcmxhcHMsIHdlIG5v
-dyByZXF1aXJlIHRoYXQgbHEgaXMgZGVjb2RlZCBvbmx5IGlmDQo+IHJkIGlzIG5vdCAwLCBhcyBD
-Qk8gcmVxdWlyZXMgdGhlIGZpZWxkIGNvcnJlc3BvbmRpbmcgdG8gcmQgdG8gYmUNCj4gemVybywN
-Cj4gYm90aCBpbiBkYXNtIGFuZCBkZWNvZGV0cmVlLg0KPiANCj4gQ2hhbmdlcyBpbiB2MzoNCj4g
-LSByZWJhc2Ugb24gbWFzdGVyDQo+IC0gc3F1YXNoIHRoZSAzIG9yaWdpbmFsIHBhdGNoZXMsIGF0
-IHRoZXkgZGlkIG5vdCBtYWtlIHNlbnNlDQo+IMKgIGFueW1vcmUgYWZ0ZXIgcmViYXNpbmcNCj4g
-DQo+IEZyw6lkw6lyaWMgUMOpdHJvdCAoMSk6DQo+IMKgIGRpc2FzL3Jpc2N2LmM6IENvcnJlY3Qg
-ZGFzbSBmb3IgY2JvIGFuZCBscQ0KDQpUaGFua3MhDQoNCkFwcGxpZWQgdG8gcmlzY3YtdG8tYXBw
-bHkubmV4dA0KDQpBbGlzdGFpcg0KDQo+IA0KPiDCoGRpc2FzL3Jpc2N2LmMgfCAxOCArKysrKysr
-KysrLS0tLS0tLS0NCj4gwqAxIGZpbGUgY2hhbmdlZCwgMTAgaW5zZXJ0aW9ucygrKSwgOCBkZWxl
-dGlvbnMoLSkNCg==
+On Tue, Aug 25, 2026 at 11:09:43PM +0400, Marc-André Lureau wrote:
+> Rename monitor_printf->monitor_hmp_printf, monitor_vprintf->
+> monitor_hmp_vprintf, and monitor_printc->monitor_hmp_printc, changing
+> the first parameter from Monitor * to MonitorHMP * to enforce type
+> safety. The implementation is also simplified: monitor_hmp_vprintf now
+> directly calls g_strdup_vprintf + monitor_puts, removing the virtual
+> dispatch via moncls->vprintf.
+> 
+> The dev_print() callbacks are temporarily using the MONITOR_HMP(mon)
+> cast, they are fixed in the following commits.
+> 
+> Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
+> ---
+>  audio/audio-hmp-cmds.c                  |   6 +-
+>  backends/cryptodev-hmp-cmds.c           |   9 +-
+>  block/monitor/block-hmp-cmds.c          | 170 +++++++++---------
+>  chardev/char-hmp-cmds.c                 |  12 +-
+>  disas/disas-mon.c                       |  10 +-
+>  docs/devel/style.rst                    |   2 +-
+>  docs/devel/writing-monitor-commands.rst |   8 +-
+>  dump/dump-hmp-cmds.c                    |   5 +-
+>  hw/char/virtio-serial-bus.c             |  10 +-
+>  hw/core/machine-hmp-cmds.c              | 213 +++++++++++-----------
+>  hw/core/sysbus.c                        |   5 +-
+>  hw/hexagon/hexagon_tlb.c                |  44 ++---
+>  hw/i386/kvm/xen-stubs.c                 |   6 +-
+>  hw/i386/kvm/xen_evtchn.c                |  21 +--
+>  hw/i386/sgx-hmp-stub.c                  |   3 +-
+>  hw/i386/sgx.c                           |  29 ++-
+>  hw/misc/auxbus.c                        |   9 +-
+>  hw/misc/mos6522-stub.c                  |   3 +-
+>  hw/net/rocker/rocker-hmp-cmds.c         | 146 ++++++++--------
+>  hw/pci/pci-hmp-cmds.c                   | 114 ++++++------
+>  hw/pci/pci-stub.c                       |   3 +-
+>  hw/s390x/s390-skeys.c                   |   9 +-
+>  hw/s390x/s390-stattrib.c                |  20 +--
+>  hw/uefi/ovmf-log.c                      |   5 +-
+>  hw/usb/bus.c                            |  11 +-
+>  hw/usb/host-libusb.c                    |  21 ++-
+>  hw/virtio/virtio-hmp-cmds.c             | 297 ++++++++++++++++---------------
+>  hw/xen/xen-bus.c                        |   5 +-
+>  include/disas/disas.h                   |   4 +-
+>  include/monitor/hmp.h                   |  12 +-
+>  migration/dirtyrate.c                   |  46 +++--
+>  migration/migration-hmp-cmds.c          | 301 ++++++++++++++++----------------
+>  monitor/hmp-cmds.c                      | 141 +++++++--------
+>  monitor/hmp.c                           | 143 +++++++--------
+>  monitor/monitor-internal.h              |   6 -
+>  monitor/monitor.c                       |  33 ++--
+>  net/net-hmp-cmds.c                      |  31 ++--
+>  net/slirp.c                             |  31 ++--
+>  qom/qom-hmp-cmds.c                      |  27 ++-
+>  replay/replay-debugging.c               |   5 +-
+>  stats/stats-hmp-cmds.c                  |  57 +++---
+>  stubs/hmp-cmd-info_sev.c                |   3 +-
+>  stubs/monitor-core.c                    |   2 +-
+>  system/dirtylimit-hmp-cmds.c            |  10 +-
+>  system/qdev-monitor.c                   |  19 +-
+>  system/runstate-hmp-cmds.c              |  16 +-
+>  system/tpm-hmp-cmds.c                   |  29 ++-
+>  target/i386/cpu-apic.c                  |   3 +-
+>  target/i386/monitor.c                   | 152 ++++++++--------
+>  target/i386/sev.c                       |  35 ++--
+>  target/m68k/monitor.c                   |   3 +-
+>  target/ppc/monitor.c                    |   3 +-
+>  target/riscv/monitor.c                  |  55 +++---
+>  target/sh4/monitor.c                    |  29 ++-
+>  target/sparc/monitor.c                  |   3 +-
+>  target/xtensa/monitor.c                 |   3 +-
+>  tests/unit/test-util-sockets.c          |   2 +-
+>  tools/qemu-vnc/clipboard.c              |   4 +-
+>  tools/qemu-vnc/stubs.c                  |   2 +-
+>  trace/trace-hmp-cmds.c                  |  12 +-
+>  ui/ui-hmp-cmds.c                        | 115 ++++++------
+>  util/error-report.c                     |   2 +-
+>  util/qemu-print.c                       |  11 +-
+>  63 files changed, 1219 insertions(+), 1327 deletions(-)
+
+
+
+
+> diff --git a/util/qemu-print.c b/util/qemu-print.c
+> index 5d4143d425a1..5938f2b6c338 100644
+> --- a/util/qemu-print.c
+> +++ b/util/qemu-print.c
+> @@ -13,6 +13,7 @@
+>  #include "qemu/osdep.h"
+>  #include "monitor/monitor.h"
+>  #include "monitor/hmp.h"
+> +#include "qom/object.h"
+>  #include "qemu/qemu-print.h"
+>  
+>  /*
+> @@ -23,8 +24,13 @@
+>  int qemu_vprintf(const char *fmt, va_list ap)
+>  {
+>      Monitor *cur_mon = monitor_cur();
+> +
+> +    /* for all monitors: QMP & HMP */
+>      if (cur_mon) {
+> -        return monitor_vprintf(cur_mon, fmt, ap);
+> +        /* don't use monitor_cur_hmp(), to avoid a second lookup */
+> +        MonitorHMP *hmp = (MonitorHMP *)
+> +            object_dynamic_cast(OBJECT(cur_mon), TYPE_MONITOR_HMP);
+> +        return monitor_hmp_vprintf(hmp, fmt, ap);
+
+This isn't the same semantics AFAICT.
+
+Original code, if monitor_cur() == QMP, we call monitor_vprintf()
+which will return -1.
+
+New code, if monitor_cur() == QMP, we will get a NULL back from
+object_dynamic_cast which we then pass into monitor_hmp_vprintf
+which will then crash on monitor_puts() IIUC.
+
+>      }
+>      return vprintf(fmt, ap);
+>  }
+> @@ -55,7 +61,8 @@ int qemu_printf(const char *fmt, ...)
+>  int qemu_vfprintf(FILE *stream, const char *fmt, va_list ap)
+>  {
+>      if (!stream) {
+> -        return monitor_vprintf(monitor_cur(), fmt, ap);
+> +        MonitorHMP *hmp = monitor_cur_hmp();
+> +        return monitor_hmp_vprintf(hmp, fmt, ap);
+
+Same, this should crash on QMP now IIUC.
+
+>      }
+>      return vfprintf(stream, fmt, ap);
+>  }
+> 
+> -- 
+> 2.55.0.543.g5ebe2ebe4ea8
+> 
+
+With regards,
+Daniel
+-- 
+|: https://berrange.com       ~~        https://hachyderm.io/@berrange :|
+|: https://libvirt.org          ~~          https://entangle-photo.org :|
+|: https://pixelfed.art/berrange   ~~    https://fstop138.berrange.com :|
+
 
