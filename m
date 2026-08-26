@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 201FFC5DF97
-	for <qemu-riscv@archiver.kernel.org>; Wed, 26 Aug 2026 22:07:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19881C61DC4
+	for <qemu-riscv@archiver.kernel.org>; Wed, 26 Aug 2026 22:07:45 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wzLlW-0005Ti-1F; Wed, 26 Aug 2026 18:06:38 -0400
+	id 1wzLlL-0005Fp-EK; Wed, 26 Aug 2026 18:06:27 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1wzLlU-0005T2-JE
- for qemu-riscv@nongnu.org; Wed, 26 Aug 2026 18:06:36 -0400
-Received: from mail-pj1-x1034.google.com ([2607:f8b0:4864:20::1034])
+ id 1wzLlJ-0005F1-TO
+ for qemu-riscv@nongnu.org; Wed, 26 Aug 2026 18:06:25 -0400
+Received: from mail-pj1-x1029.google.com ([2607:f8b0:4864:20::1029])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1wzLlS-0004qx-PI
- for qemu-riscv@nongnu.org; Wed, 26 Aug 2026 18:06:36 -0400
-Received: by mail-pj1-x1034.google.com with SMTP id
- 98e67ed59e1d1-38e42560ebcso1459634a91.1
- for <qemu-riscv@nongnu.org>; Wed, 26 Aug 2026 15:06:34 -0700 (PDT)
+ id 1wzLlI-0004o8-BD
+ for qemu-riscv@nongnu.org; Wed, 26 Aug 2026 18:06:25 -0400
+Received: by mail-pj1-x1029.google.com with SMTP id
+ 98e67ed59e1d1-39675172593so1256111a91.2
+ for <qemu-riscv@nongnu.org>; Wed, 26 Aug 2026 15:06:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1787781993; x=1788386793; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1787781983; x=1788386783; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:sender:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=OFYmGuYlL+4/TOCTKu3JsnhGO4Hq3PGwlVqkQXuCBNs=;
- b=SRwTDfKeG0r70QBCTtBN0Pik1CQ/YQ7G7FJnLtTGHrWxhXH9J6/TmDe8pHJMgEy8y5
- t6SR11/S5RiidbgdrB6AGvPFIo+TrI7huNhBlMHtl3LAPhmG02ZGtPSsQPqYSSaxwb7L
- ixfxcJ1CSSiYYdiKfjSoaBoNVk0APDLhx+N1C0+k5oOKuBEXrQlffRJAoxQK8pqHBgam
- wYHB57LuJf0BPogUIXF5wQe0BLt9H/0XM8JdfXY5Ic1vCRrIUxA1mK7HaKOuCHcrWGIZ
- vxsqaK37dpglqD0yjcKrZKc4fXKjhg4b4fenmmWyM9PyHKrZHsySk4yByEN6FOWgT+K+
- /DrQ==
+ bh=ZgJzq+XsYOvtH3xWP7INoFWVb96qT7YPWqEHVflcXbM=;
+ b=IXlhBAlKjYDFg+8NvJP0Nizz1/oKPIFk2UMzUz8fx48QXCLjNa9Snoqg2EDSB30hH9
+ yKyhjVDagOMfsK200LdeGrODXgAcP12COyD2Zllv17HK/96CcoXUXkcdFQJsh6xLfjrw
+ KvM2gWqLIUM91XQLBYuJrM2lEXeMa6nfTIH4BTDFpa3zKWMOjcyn+YqrKX0bPEPR68Q4
+ e9Qp7YZOX2xh0nE7OesOjs5sQHmRzqzpRlSgt8uNQlt2RBZB6K4H4JZA4w4Ik51tAOfz
+ 64NFUqmorPDgjZmI++khiUCsBcEmRuvB5L1VOjYEk8HELIuj5epaM02Q8NfIsS4lnj+Z
+ yknw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787781993; x=1788386793;
+ d=1e100.net; s=20251104; t=1787781983; x=1788386783;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:sender:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=OFYmGuYlL+4/TOCTKu3JsnhGO4Hq3PGwlVqkQXuCBNs=;
- b=Z4KVtCH4r4ftXRdqs88Fl7UPZhrWjXRyStIO/azgbLSGdkRMYpCagqh4nxGosjg9Ef
- dYjTfZqKbBF5CAa1oE9q1SjQDyJ3J0KJSOm58UY7crGcUc9GK4aAXvgAOxKv4RS06g1w
- E4pxh1Tgte33wMGN9fmxnZUhp7RgG8v/1yUY5Cve9QZTxBAl305EGtsJdNzV9dWEIKwy
- i+ttcJC932iC3cCM65LtGQfBrr97Ov+Qb5hxwewWEcRTvNBPRODb7BDKpXjYtZrLB/X9
- MrUsbskBXr5sVnX3WhPaOQ7N7cfYhjCRV1IQMSeGhXzC6KH2Uc6puUKkEnJabbDciviy
- 5CKw==
+ bh=ZgJzq+XsYOvtH3xWP7INoFWVb96qT7YPWqEHVflcXbM=;
+ b=djXmkaFZffrcQqKWJDkrXJaQvQ626oanLKOcxZSVwp2d52KBQ0OHTohha3L4z62Vpw
+ gomWsOah/24FfbUHC0OU2f42pz6TlRPAJw3n25siTYPaiueiPXf2itSpdtOx+YFqXvFS
+ wp91RozNBwfg8KJ8eiakgkW5lF/KmWJ6q0JM4/XgcDneKHMtepstDPZ2DITPnGkBC1Za
+ QEW8GDm9V/9e0dWQKXM3eAcMcAQHg3BhVLt4DRGMPScQOu4hma0rHMEScV+4Bmlmm4L7
+ dKE/PVjX5/34ZVmQQU4IBOYrPxp6CNRsG1/70f12Cz8GrrHSGjcK2eVqH9976Ap4lUX4
+ fftw==
 X-Forwarded-Encrypted: i=1;
- AHgh+RqCrDGS+4MlJftRU+G4c+1RB669Qhk458AZ1QF4xwFq9GgcPWSMTI/mD0+uRPRCcSU/4ZbT4SNQD+i5@nongnu.org
-X-Gm-Message-State: AFuF++nG/xHkWqLJOd31qkSTEULapiTzwBLL9cTQ2o2xyQvXjfKQlcnW
- J+aCNd7PYWM80eo19w9Gntai9/GlVKqY7cKLrCjaOvwD0TiuF6OoF6C8
-X-Gm-Gg: AR+sD12de73P52hdx7n6XaWJUfzg2tcQEphqQEkgzYsFwjl82aLROgviDWYmfzwHWU9
- ps2aQE+NjI6YapGRNOwXn4MO/xHmvh0sGxrE3rEwbxTllbXOp+o3anlLrZwzxIUZUdcUWg1K9ZH
- G+6uJnJH9wZM+CgBXHPZFpfrGBRStsvv+2PaOg9r94nR+G3z5dPZYxwwR9Qnm0ov2UugPTDYsEE
- qE1KwOb8gunLWgMmZKSoL/KC39fnBFLUu83IvO7qPaBLnLXo+n0KM9/afxFlKOOvq8QfzUayX5Y
- P+TVRAuUePvTVWss5fqnybtYxfuUcR1uDuxZ81eiRpdY6iSLKPTgUKIYZfEEXzB4vVIRgPpcQBF
- AVS0wwCX0/EqGJc7Y5SqiCFdJipsNge/SRJrSZPEkMyuqD2m+HIeysEh/RChWFvChKoGnCBdDeK
- DC5byd+HuntdVPq04Sin+tq+Dfv/WTugCuXwroHlDZ9FI6MRS7Tn7g/WmlkIg5TwB+VJ2V0hlLt
- x/sL0ExjwBzKRu88rgilpglTygNyzhAAujoftmeXK+lTJU9e4UZ4sg+QUkJe41JNxuohtnXAK6A
- YKDtFhzHpYO0PxrYDWA1
-X-Received: by 2002:a17:90a:d2c6:b0:38e:5c6:4db9 with SMTP id
- 98e67ed59e1d1-3966d3dafb9mr21864324a91.11.1787781993183; 
- Wed, 26 Aug 2026 15:06:33 -0700 (PDT)
+ AHgh+Rprp4joMXGzc5zn4W6DtMFJP3MEwB2eQGhOKQ8nerDCrp1BPBROOMx0qHg9nIbWva3qs4U8C08eU0ey@nongnu.org
+X-Gm-Message-State: AFuF++mWEs179zQyWn+1XZFJTMirkjpT9LjkYn9k9spLeSB3Q/KeDP3x
+ 1b7KVuThxqwuSm0l++sfpXaHfIABDCmp0Kxl5Jiof5QZ6xtQ2YvK/ApH
+X-Gm-Gg: AR+sD13dFsgw6bBessnrUXElUCGJgfWquT4JCHHiMIqVaJChaTGDsNihe9j6smHPFb0
+ q5HHRgvKz3eYs215EWpHm8O15O0ZpOVs0pF4CL7TSf8yIp6Cuu3lDEOMClMoGsqK4MA19vkvu4z
+ LW+dM2Mp9JWNqR1Ca3lMYk8qmW+RJOCKhToIjqcZq9a+bm/5UsnpMElrjYSkbLPPRdE4u0psvlE
+ E7P+V/HikQ3xCNhMjDlGIfdcRUaOaR/i8YuZCiuZPLtK7dKJvUSm+sVZf+GmGKY9qZyDjgYVgpk
+ esDDZgZNzQ0aderaT1babeT7AD31gPpOEW3eosuiGHSG+1rUTjiVZHJFWT4CU3GLNuD5kn9yAEO
+ mfTdvt6pFFiH2bVFIhyjswdfS5/ztUtCQwGQ2OX+oWtCE14+d7p9CDBLvtXnDscSt87HyXq6NC5
+ w7mdGUinkW6nCJ2LsOGHpfV3RItQV3OfY5nUMF4IEHAvF2uG4UZGV0o9V9glV5Sj4UijJNS1aJ2
+ CkpuJ+rreSGAs98eYDaV1PjJuCG9CUuY+KBXFeJQUww9HCbklqRFA6vgBg9O5GgSx12mMRv7abD
+ LT/RWNeg6TpG91NbeXN2
+X-Received: by 2002:a17:90b:530c:b0:38e:b400:a860 with SMTP id
+ 98e67ed59e1d1-3966d443d6bmr19042432a91.13.1787781983027; 
+ Wed, 26 Aug 2026 15:06:23 -0700 (PDT)
 Received: from donnager-debian.. ([180.150.112.50])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-39668a573a1sm5789956a91.14.2026.08.26.15.06.28
+ 98e67ed59e1d1-39668a573a1sm5789956a91.14.2026.08.26.15.06.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 26 Aug 2026 15:06:32 -0700 (PDT)
+ Wed, 26 Aug 2026 15:06:22 -0700 (PDT)
 From: Joel Stanley <joel@jms.id.au>
 To: Alistair Francis <alistair.francis@wdc.com>,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
@@ -80,16 +80,16 @@ Cc: Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Portia Stephens <portias@oss.tenstorrent.com>,
  =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
  qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Subject: [PATCH 09/16] hw/riscv/atlantis: Rename hart array 'soc' to 'cpus'
-Date: Thu, 27 Aug 2026 07:35:19 +0930
-Message-ID: <20260826220528.54516-10-joel@jms.id.au>
+Subject: [PATCH 07/16] hw/riscv/atlantis: Make UART unimp region a SoC device
+Date: Thu, 27 Aug 2026 07:35:17 +0930
+Message-ID: <20260826220528.54516-8-joel@jms.id.au>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260826220528.54516-1-joel@jms.id.au>
 References: <20260826220528.54516-1-joel@jms.id.au>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1034;
- envelope-from=joel.stan@gmail.com; helo=mail-pj1-x1034.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1029;
+ envelope-from=joel.stan@gmail.com; helo=mail-pj1-x1029.google.com
 X-Spam_score_int: -16
 X-Spam_score: -1.7
 X-Spam_bar: -
@@ -113,138 +113,78 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The RISCVHartArrayState member is named soc, but it's an array of cpus,
-not the entire SoC. Use cpus instead as an accurate description of the
-hart array.
+Make the unimplemented region covering the remainder of the console
+UART's register space a SoC child device, mapped using a helper. This
+makes it easier to map it into the SoC's memory container along with
+the other devices in the future.
+
+While here, rename the region from uart0 to uart1. The uart0 name was
+a leftover from an earlier revision that used a different device for
+the console.
 
 Signed-off-by: Joel Stanley <joel@jms.id.au>
 ---
- include/hw/riscv/tt_atlantis.h |  2 +-
- hw/riscv/tt_atlantis.c         | 34 +++++++++++++++++-----------------
- 2 files changed, 18 insertions(+), 18 deletions(-)
+ include/hw/riscv/tt_atlantis.h |  2 ++
+ hw/riscv/tt_atlantis.c         | 19 ++++++++++++++++---
+ 2 files changed, 18 insertions(+), 3 deletions(-)
 
 diff --git a/include/hw/riscv/tt_atlantis.h b/include/hw/riscv/tt_atlantis.h
-index d0cca3b02424..642490d21743 100644
+index 7f7d4a5a5905..c9308aa57017 100644
 --- a/include/hw/riscv/tt_atlantis.h
 +++ b/include/hw/riscv/tt_atlantis.h
-@@ -29,7 +29,7 @@ struct TTAtlantisState {
-     Notifier machine_done;
-     const MemMapEntry *memmap;
+@@ -13,6 +13,7 @@
+ #include "hw/core/sysbus.h"
+ #include "hw/i2c/designware_i2c.h"
+ #include "hw/intc/riscv_imsic.h"
++#include "hw/misc/unimp.h"
+ #include "hw/riscv/riscv_hart.h"
  
--    RISCVHartArrayState soc;
-+    RISCVHartArrayState cpus;
+ #define TYPE_TT_ATLANTIS_MACHINE MACHINE_TYPE_NAME("tt-atlantis")
+@@ -31,6 +32,7 @@ struct TTAtlantisState {
+     RISCVHartArrayState soc;
      DeviceState *irqchip;
      DesignWareI2CState i2c[TT_ATL_NUM_I2C];
-     UnimplementedDeviceState uart1;
++    UnimplementedDeviceState uart1;
+ 
+     int fdt_size;
+ };
 diff --git a/hw/riscv/tt_atlantis.c b/hw/riscv/tt_atlantis.c
-index 127c89be4f60..35b3be072a06 100644
+index 3f183db5c302..acfd0d31b368 100644
 --- a/hw/riscv/tt_atlantis.c
 +++ b/hw/riscv/tt_atlantis.c
-@@ -112,13 +112,13 @@ static void create_fdt_aclint(TTAtlantisState *s, uint32_t *intc_phandles)
-     uint32_t aclint_cells_size;
-     hwaddr addr;
- 
--    aclint_mtimer_cells = g_new0(uint32_t, s->soc.num_harts * 2);
-+    aclint_mtimer_cells = g_new0(uint32_t, s->cpus.num_harts * 2);
- 
--    for (int cpu = 0; cpu < s->soc.num_harts; cpu++) {
-+    for (int cpu = 0; cpu < s->cpus.num_harts; cpu++) {
-         aclint_mtimer_cells[cpu * 2 + 0] = cpu_to_be32(intc_phandles[cpu]);
-         aclint_mtimer_cells[cpu * 2 + 1] = cpu_to_be32(IRQ_M_TIMER);
-     }
--    aclint_cells_size = s->soc.num_harts * sizeof(uint32_t) * 2;
-+    aclint_cells_size = s->cpus.num_harts * sizeof(uint32_t) * 2;
- 
-     addr = s->memmap[TT_ATL_ACLINT].base;
- 
-@@ -210,7 +210,7 @@ static void create_fdt_pmu(TTAtlantisState *s)
- {
-     char pmu_name[] = "/pmu";
-     void *fdt = MACHINE(s)->fdt;
--    RISCVCPU *hart = &s->soc.harts[0];
-+    RISCVCPU *hart = &s->cpus.harts[0];
- 
-     qemu_fdt_add_subnode(fdt, pmu_name);
-     qemu_fdt_setprop_string(fdt, pmu_name, "compatible", "riscv,pmu");
-@@ -227,8 +227,8 @@ static void create_fdt_cpu(TTAtlantisState *s, const MemMapEntry *memmap,
- 
-     fdt_create_cpu_socket_subnode(fdt, TT_ACLINT_TIMEBASE_FREQ);
- 
--    create_fdt_socket_cpus(fdt, s->soc.harts, 0, s->soc.num_harts,
--                           s->soc.hartid_base, &fdt_phandle, intc_phandles,
-+    create_fdt_socket_cpus(fdt, s->cpus.harts, 0, s->cpus.num_harts,
-+                           s->cpus.hartid_base, &fdt_phandle, intc_phandles,
-                            false, false);
- 
+@@ -409,6 +409,17 @@ static void load_fdt(TTAtlantisState *s)
      create_fdt_memory(s);
-@@ -252,13 +252,13 @@ static void create_fdt_cpu(TTAtlantisState *s, const MemMapEntry *memmap,
-     create_fdt_one_aplic(fdt, &s->memmap[TT_ATL_MAPLIC],
-                          msi_m_phandle, intc_phandles,
-                          aplic_m_phandle, aplic_s_phandle,
--                         IRQ_M_EXT, s->soc.num_harts);
-+                         IRQ_M_EXT, s->cpus.num_harts);
- 
-     /* S-level APLIC node */
-     create_fdt_one_aplic(fdt, &s->memmap[TT_ATL_SAPLIC],
-                          imsic_s_phandle, intc_phandles,
-                          aplic_s_phandle, 0,
--                         IRQ_S_EXT, s->soc.num_harts);
-+                         IRQ_S_EXT, s->cpus.num_harts);
  }
  
- static void create_fdt_uart(void *fdt, const MemMapEntry *mem, int irq,
-@@ -429,7 +429,7 @@ static void tt_atlantis_machine_done(Notifier *notifier, void *data)
-     hwaddr start_addr = s->memmap[TT_ATL_DDR_LO].base;
-     hwaddr mem_size;
-     target_ulong firmware_end_addr, kernel_start_addr;
--    const char *firmware_name = riscv_default_firmware_name(&s->soc);
-+    const char *firmware_name = riscv_default_firmware_name(&s->cpus);
-     uint64_t fdt_load_addr;
-     uint64_t kernel_entry;
-     RISCVBootInfo boot_info;
-@@ -446,7 +446,7 @@ static void tt_atlantis_machine_done(Notifier *notifier, void *data)
-     if (mem_size > s->memmap[TT_ATL_DDR_LO].size) {
-         mem_size = s->memmap[TT_ATL_DDR_LO].size;
-     }
--    riscv_boot_info_init_discontig_mem(&boot_info, &s->soc,
-+    riscv_boot_info_init_discontig_mem(&boot_info, &s->cpus,
-                                        s->memmap[TT_ATL_DDR_LO].base,
-                                        mem_size);
++static void mmio_map_unimplemented(MemoryRegion *memory, SysBusDevice *dev,
++                                   const char *name, hwaddr addr, uint64_t size)
++{
++    qdev_prop_set_string(DEVICE(dev), "name", name);
++    qdev_prop_set_uint64(DEVICE(dev), "size", size);
++    sysbus_realize(dev, &error_abort);
++
++    memory_region_add_subregion_overlap(memory, addr,
++                                        sysbus_mmio_get_region(dev, 0), -1000);
++}
++
+ static void tt_atlantis_machine_done(Notifier *notifier, void *data)
+ {
+     TTAtlantisState *s = container_of(notifier, TTAtlantisState, machine_done);
+@@ -560,9 +571,11 @@ static void tt_atlantis_machine_init(MachineState *machine)
+      * Create an unimplemented device region so writes don't fault
+      * and reads return zero, which keeps Linux happy.
+      */
+-    create_unimplemented_device("tt-atlantis.uart0",
+-                                s->memmap[TT_ATL_UART1].base,
+-                                s->memmap[TT_ATL_UART1].size);
++    object_initialize_child(OBJECT(s), "uart1", &s->uart1,
++                            TYPE_UNIMPLEMENTED_DEVICE);
++    mmio_map_unimplemented(system_memory, SYS_BUS_DEVICE(&s->uart1),
++                           "tt-atlantis.uart1", s->memmap[TT_ATL_UART1].base,
++                           s->memmap[TT_ATL_UART1].size);
  
-@@ -476,7 +476,7 @@ static void tt_atlantis_machine_done(Notifier *notifier, void *data)
-     riscv_load_fdt(fdt_load_addr, machine->fdt);
- 
-     /* load the reset vector */
--    riscv_setup_rom_reset_vec(machine, &s->soc, start_addr,
-+    riscv_setup_rom_reset_vec(machine, &s->cpus, start_addr,
-                               s->memmap[TT_ATL_BOOTROM].base,
-                               s->memmap[TT_ATL_BOOTROM].size,
-                               kernel_entry,
-@@ -496,18 +496,18 @@ static void tt_atlantis_machine_init(MachineState *machine)
- 
-     s->memmap = tt_atlantis_memmap;
- 
--    object_initialize_child(OBJECT(machine), "soc", &s->soc,
-+    object_initialize_child(OBJECT(machine), "soc", &s->cpus,
-                             TYPE_RISCV_HART_ARRAY);
--    object_property_set_str(OBJECT(&s->soc), "cpu-type", machine->cpu_type,
-+    object_property_set_str(OBJECT(&s->cpus), "cpu-type", machine->cpu_type,
-                             &error_abort);
--    object_property_set_int(OBJECT(&s->soc), "hartid-base", 0,
-+    object_property_set_int(OBJECT(&s->cpus), "hartid-base", 0,
-                             &error_abort);
--    object_property_set_int(OBJECT(&s->soc), "num-harts", hart_count,
-+    object_property_set_int(OBJECT(&s->cpus), "num-harts", hart_count,
-                             &error_abort);
--    object_property_set_int(OBJECT(&s->soc), "resetvec",
-+    object_property_set_int(OBJECT(&s->cpus), "resetvec",
-                             s->memmap[TT_ATL_BOOTROM].base,
-                             &error_abort);
--    sysbus_realize(SYS_BUS_DEVICE(&s->soc), &error_fatal);
-+    sysbus_realize(SYS_BUS_DEVICE(&s->cpus), &error_fatal);
- 
-     s->irqchip = riscv_create_aia(system_memory,
-                                   true, TT_IMSIC_GUESTS,
+     /* I2C */
+     for (int i = 0; i < TT_ATL_NUM_I2C; i++) {
 -- 
 2.47.3
 
