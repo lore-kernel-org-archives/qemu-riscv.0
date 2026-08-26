@@ -4,172 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9A74C5DF97
-	for <qemu-riscv@archiver.kernel.org>; Wed, 26 Aug 2026 18:38:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F64EC61DBD
+	for <qemu-riscv@archiver.kernel.org>; Wed, 26 Aug 2026 18:41:11 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wzIVW-0004MA-To; Wed, 26 Aug 2026 14:37:54 -0400
+	id 1wzIYN-0005Wz-Bd; Wed, 26 Aug 2026 14:40:51 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1wzIVU-0004Il-2e
- for qemu-riscv@nongnu.org; Wed, 26 Aug 2026 14:37:52 -0400
-Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1wzIVR-0001OW-Ou
- for qemu-riscv@nongnu.org; Wed, 26 Aug 2026 14:37:51 -0400
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 67QHJfHl1573899
- for <qemu-riscv@nongnu.org>; Wed, 26 Aug 2026 18:37:48 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- JCwYThXifyy6LfW29TURN+uYYGzGJkJKgx2XvULwgnY=; b=kfv/+SBhdXsHWsxh
- pw95aOiEaMmuT9ofByLsvf5yLpH0m3nLuxdh1e8lIzTnyIVjAVte+mNR572h/1g/
- 7O5SsYfghCXh5pk+PkoK/m8zs6dYsN+41qOiUKF/tBcnWiq9qE0aW2vowhYDV/w1
- usy2msIlDUH7jFvAkqXZJiQ7qtFb6B/6HgG6JrdlUSgL9PUpgNuJBV5m8ANGQIbx
- KNX8Od1aXj9I2s5U9mp2TxXtSUguZ7OkWh3eBPyGiPAGzqzbPq2U0W1cmos4uVHZ
- 5HEGmtdEeb0Aolm8YIUi6lUTPYJ4vaRY2lfPOkSeljJqgWVI8HItnANXygE7zSYw
- xZGNLg==
-Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com
- [209.85.160.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ga4ec8a9r-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Wed, 26 Aug 2026 18:37:48 +0000 (GMT)
-Received: by mail-qt1-f198.google.com with SMTP id
- d75a77b69052e-5276aa86d00so14892041cf.2
- for <qemu-riscv@nongnu.org>; Wed, 26 Aug 2026 11:37:48 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
+ id 1wzIYL-0005WE-3y
+ for qemu-riscv@nongnu.org; Wed, 26 Aug 2026 14:40:49 -0400
+Received: from mail-pl1-x62a.google.com ([2607:f8b0:4864:20::62a])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
+ id 1wzIYJ-0001uM-8i
+ for qemu-riscv@nongnu.org; Wed, 26 Aug 2026 14:40:48 -0400
+Received: by mail-pl1-x62a.google.com with SMTP id
+ d9443c01a7336-2cacb8416a1so12759505ad.1
+ for <qemu-riscv@nongnu.org>; Wed, 26 Aug 2026 11:40:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1787769467; x=1788374267; darn=nongnu.org;
- h=content-transfer-encoding:content-type:in-reply-to:from:references
- :cc:to:content-language:subject:user-agent:mime-version:date
- :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=JCwYThXifyy6LfW29TURN+uYYGzGJkJKgx2XvULwgnY=;
- b=ZDAVexhYO83HR8GY4Tx5UG8Xs2UUrEMC3ZM2m8bbothZ+Coqp7VU4d2QGnmdWVkqyG
- vbaAwP1NQZay+GDmo3rZeOHLE+DfIvIP58SCcV7hQeIoZ2sGOid+4nJUAfY8sDD1xAQx
- sSBANvIbDsB6xQmXw949sbsN7MdBc+691wu4WmNZmgXB5SIZtG9MpcpNgItf1G6y8EUL
- +HhSYHsKSVV5DWHrKHIsHPoVNnRdUGeVATy+uRrzVyumF1Ci1Ci3e360aZGu6vU2u1YQ
- qGMC0OgGEdBwXl3VVVEl6PSqzHMwhkZc8IPIJT+Q5ioqEiqIDM4DrHfwQkBoDaiBc3BA
- unSg==
+ d=sifive.com; s=google; t=1787769645; x=1788374445; darn=nongnu.org;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :content-type:mime-version:references:message-id:subject:cc:to:from
+ :date:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=2RwGYqKwDPFeCLcJXcwe93n5V0oqEi7xNMqQdcuMlfY=;
+ b=B4X5ZMqyiOpsXK1qWJhixPdkc7eIQpSEuvBufQrybZ1MZyRIz9ZrIc0ftTkGCguCu8
+ n81cE5QLdfy7GnInlR4HwEEjIIW4h3xQhOub5GGasQbokIMmWXKyVzuZW1lIIqJzKNBk
+ cUxS8UZUz+MktYEwjJOIza13yAaOMsynGx0sgbL5KC3APUXOyw8c0oXtAaNv/P/Wemj4
+ vsUncqsNsk8NtWasjmEXKnUZmmsVYGyT2IZUQHF4xqIaB7TqolIP5MxjY/7uwNY600zA
+ phu0/HvJRL2reCcGkeDPJHVbU5x73gGcZHYfgwAL9gbhOxeuYK9GyUDqWW3ZY/DSQepI
+ mlow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787769467; x=1788374267;
- h=content-transfer-encoding:content-type:in-reply-to:from:references
- :cc:to:content-language:subject:user-agent:mime-version:date
- :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=JCwYThXifyy6LfW29TURN+uYYGzGJkJKgx2XvULwgnY=;
- b=r9mKFFfOZeJhFMGrA14tX87Gb3lmg7zFlU04C3jQtvYqGVMWT+6Nt18oKbsjf3JIg3
- BF2RJsTJW28kZZBkeNOfsQoMGHiIL0UCmhigPMhuuTSdKOEkcAjYGYRc/Z9fQY63nkGx
- E/U7CDzsiRDaa1knCGhvOlYbj8C1OYcxtTAa+zr3zTW5w6znraFq2DBTihwpqfr3OMuY
- v2N1ClZwdOkp+2tqB3hwgkMQa1H9n6ID8bcAufhAX9N4Zwmpjm+ihpaeivFWW84ZZx9B
- /Eve1aHTLV/7duRphW0cWMxw/FHSg+q085JptDviwwAAojWYC4GmaPAXJGpMQaYoVjEm
- vj2Q==
+ d=1e100.net; s=20251104; t=1787769645; x=1788374445;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :content-type:mime-version:references:message-id:subject:cc:to:from
+ :date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=2RwGYqKwDPFeCLcJXcwe93n5V0oqEi7xNMqQdcuMlfY=;
+ b=ZOR9BT4QLM4kWS7G8hkQ5iAoeFFzmnrgN2merWGQf+BseQbuOpPH8WbNE3KTBrXqHP
+ tTki0MX/IN6VoL+ucsUDvApPOgeVpwkAKvuW4zBsRagHVnG/QwBvgRBNQSQ6s56hGjcc
+ T8EtGaE1hLTIXIFUjrvfxqoa/83xS3ViJKOa3TE9MxyXhAX7v6e0EHLRJUQm6U/qFxRV
+ +xymY2H4bofcXJfP5JgFHaLRZ6D6aSrYQvfM7jmeyVg41Is4HEIMk4l5afiuMauEThFb
+ V94n5Re+xV88N+cziIPHDUR89wbLG7h4M3nERDPVYCgB9cF90pv04Jic9IWDOh9Xd9A2
+ Mgog==
 X-Forwarded-Encrypted: i=1;
- AHgh+Rq4K9yXDowvJImB7HzB1StGtf11ybzdXNYsTXy6KD9WQg80KgVm0CPTCdL3okx7JmpFOhL07lQBMfnc@nongnu.org
-X-Gm-Message-State: AFuF++mz29vhlnMcREXVTzJCTHpDqNlDdSNoMHDggTLIER6/XZ8qTFOP
- WI8VWTgvUjCiWdoiXTiqE2gtHU1V6Vm3NUIJrbKc7BhqyqIYnxuhOGhlzpycd21EL9yTarNik01
- Pj264dkYNvEsRR6T9RFgGYV+5W3RJhbyjdlD75L36dapCNcBy1t6bxiuFGA==
-X-Gm-Gg: AR+sD10CFavqPNjaoQsb4n55U6mfzLq/lz2RivecTMaFXiHnjY2/1L+E7+1TAkwwEvU
- 9ZdMgTWVVbQSZ7/i/1WJgDI4dwgNciItIdveRK8G9wma5N/JSeI/WkFMbfXEZ3tWOmnh8A65cIU
- HgMCFcoF07L1eBrdl1gKgt6EleP0qtKUh+031khWoxyQvQGZ10DII+PJNGa0KaomdfHGtjKAOa5
- oojyz0aNijIGLyW3kp9PcGpmD+XwFsrAGq2HOq72cc50AsWBE0nW5rVxy9FlpGs0HQjcRk+oM16
- rKvtuFjz+4RVCxUQR7MKbtckzFTiu6tKwOPjf1V1Twg2BIfM77oKbcX/Vx2X66o0gnO7vnZu6jc
- lbERF+Z63KEsjbMzGxIJHB22clCwB3Njwym+dzeqrKQUKoxPYvQ==
-X-Received: by 2002:a05:622a:1111:b0:528:32b1:c202 with SMTP id
- d75a77b69052e-52e42235670mr90965011cf.7.1787769467022; 
- Wed, 26 Aug 2026 11:37:47 -0700 (PDT)
-X-Received: by 2002:a05:622a:1111:b0:528:32b1:c202 with SMTP id
- d75a77b69052e-52e42235670mr90964331cf.7.1787769466529; 
- Wed, 26 Aug 2026 11:37:46 -0700 (PDT)
-Received: from [10.254.188.74] (134.171.88.92.rev.sfr.net. [92.88.171.134])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c250a6fd00csm662040566b.15.2026.08.26.11.37.38
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 26 Aug 2026 11:37:45 -0700 (PDT)
-Message-ID: <11ab11dc-aa98-467c-bd36-4dad90bc0069@oss.qualcomm.com>
-Date: Wed, 26 Aug 2026 20:37:37 +0200
+ AHgh+RqRdbNRzg/kvga+A/DeuQONLYikBvGaU7JFAuUluthEYL/tCMFR3XTGL116Sa8TmAE8TLpCXj9BuFdU@nongnu.org
+X-Gm-Message-State: AFuF++n7DCOyhmCS+mmLQQSqzvVVbQsjezoogYtLBlpG7kKTcavUyBF0
+ pZpklp2uUpnV3m/8GUceZ5DE2zzH7+0eKcxauJTZe5IDRmXuV/zLKFnQ8oruSuyyl1VZm95Lmc5
+ ZFK3TNsI=
+X-Gm-Gg: AR+sD12y0rZ1R+Q5FoqkXlefasenIvjWWdIDq5Bzdu/jwXiRlJUfoychTuwRQtJvwGZ
+ oIsAwHcWsCBUtjpYLSWoLT9g1WXsCt3lWOFvZZsvHcnWiuWZHXPJGT7W/aQVrUgq2P87gLDhOiU
+ kEwsJT7XxDVMeCaXrmfkE4ZKHtAYOZShC6SPDEd96TSfv2RrTCcjjZSG8BGdXtC1Eu3g3uJsGl1
+ 7WOtRyboTScmDAphqi8jG/XDC6G4GcBA7Q1/g8IXq056L62w9RKR36gquKFxngUlJcFPyMraCEF
+ IOTCZIDZA46x2S228yvEaJuLMsqQUiKimDrL/Kr0jTUSlzcarVpUWfT+zNN05HkePKVEsQ4hpGA
+ VxGmpqqx31BSpPuLkriIcp7Fbwdx0zzmnm6GTfTHLlsV3ILswrydq7TaLSmnr2Fm3zk2JH7OCT2
+ mBbEKx3DL1+ZlmAAKIkMOXJe24lDa1ASm57jc7ThBLVWhWnbp4nUIvOKQDLN5NckhOHIDnZSYf8
+ PgEXpe98TECPL/34RL9HzXlScTn1F/T3A==
+X-Received: by 2002:a17:903:4b4b:b0:2d3:160b:c01f with SMTP id
+ d9443c01a7336-2d707a8ebdfmr176203985ad.6.1787769645159; 
+ Wed, 26 Aug 2026 11:40:45 -0700 (PDT)
+Received: from sifive.com ([136.226.240.165]) by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2d7049a18aesm10519175ad.32.2026.08.26.11.40.43
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 26 Aug 2026 11:40:44 -0700 (PDT)
+Date: Thu, 27 Aug 2026 02:40:41 +0800
+From: Max Chou <max.chou@sifive.com>
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: qemu-devel@nongnu.org, frank.chang@sifive.com, qemu-riscv@nongnu.org
+Subject: Re: [PATCH 11/23] target/riscv: Rewrite vext_ldff
+Message-ID: <ao8wupCB3A-7-4-K@sifive.com>
+References: <20260815194549.1377505-1-richard.henderson@linaro.org>
+ <20260815194549.1377505-12-richard.henderson@linaro.org>
+ <ao3JcPyrC7cZaCgp@sifive.com>
+ <2db8ac0a-1b37-450d-8c11-2c5da46ca97a@linaro.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 08/12] target/riscv: seed cfg.big_endian from TargetInfo
-Content-Language: en-US
-To: Yonggang Luo <luoyonggang@gmail.com>, qemu-devel@nongnu.org
-Cc: Xianglai Li <lixianglai@loongson.cn>,
- Alistair Francis <alistair.francis@wdc.com>,
- Chinmay Rath <rathc@linux.ibm.com>,
- Sunil V L <sunilvl@ventanamicro.com>, qemu-riscv@nongnu.org,
- Alexander Bulekov <alxndr@bu.edu>, Zhao Liu <zhao1.liu@intel.com>,
- Eric Farman <farman@linux.ibm.com>, Laurent Vivier <lvivier@redhat.com>,
- Peter Maydell <peter.maydell@linaro.org>,
- Chao Liu <chao.liu@processmission.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Song Gao <17746591750@163.com>,
- Harsh Prateek Bora <harshpb@linux.ibm.com>,
- Glenn Miles <milesg@linux.ibm.com>, =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?=
- <berrange@redhat.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
- qemu-s390x@nongnu.org, Jiaxun Yang <jiaxun.yang@flygoat.com>,
- =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@mailo.com>,
- "Michael S. Tsirkin" <mst@redhat.com>, Stefan Hajnoczi
- <stefanha@redhat.com>, =?UTF-8?Q?Alex_Benn=C3=A9e?=
- <alex.bennee@linaro.org>,
- David Hildenbrand <david@kernel.org>, qemu-ppc@nongnu.org,
- qemu-arm@nongnu.org, Igor Mammedov <imammedo@redhat.com>,
- Aleksandar Rikalo <arikalo@gmail.com>,
- Nicholas Piggin <npiggin@gmail.com>, Cornelia Huck <cohuck@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Ilya Leoshkevich <iii@linux.ibm.com>, Fabiano Rosas <farosas@suse.de>,
- Aurelien Jarno <aurelien@aurel32.net>,
- Paolo Bonzini <pbonzini@redhat.com>, Ani Sinha <anisinha@redhat.com>,
- Bibo Mao <maobibo@loongson.cn>,
- =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
- Matthew Rosato <mjrosato@linux.ibm.com>, Weiwei Li <liwei1518@gmail.com>,
- Darren Kenny <darren.kenny@oracle.com>
-References: <20260823150731.896-1-luoyonggang@gmail.com>
- <20260823150731.896-9-luoyonggang@gmail.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
-In-Reply-To: <20260823150731.896-9-luoyonggang@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Authority-Analysis: v=2.4 cv=KIBqylFo c=1 sm=1 tr=0 ts=6a8f327c cx=c_pps
- a=mPf7EqFMSY9/WdsSgAYMbA==:117 a=o1isufRNksZXpKP+aqnsag==:17
- a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=M51BFTxLslgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
- a=pGLkceISAAAA:8 a=sk3sBhc6xHwubYSXd84A:9 a=QEXdDO2ut3YA:10
- a=dawVfQjAaf238kedN5IG:22
-X-Proofpoint-ORIG-GUID: WrOy7cWaAjrUrC8thD70AaKxPZ98vSIF
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI2MDE1NiBTYWx0ZWRfX6orXAnQR2lW7
- dKRCxbRjk35oGJD976HlfyNRIENTtbf7F7l47Wn2+HOprmmPOhF62XrQ8BcvYi+N1lxc2ZFVqyZ
- TkLGt7fZM+cJkbOGLcsUBGKCsqjna+/dxRKS7sbcjR7a4CVVKg+1t+cHd52IQZ8rd+zMSiUU+5t
- v4Rg5j8mEpUpGLwF2Rl3VgvJBkV42buuIxF3NOKbldb5VszwZSBe+AB4i016OUjpDFcPDCIg8sE
- VSb9sMsRjkE85R8Bhk3kv5LETtoe34X4KdNmVWaNJohok512AdO3r/fVDpNwrJ01UKdnIRGNszd
- okWGiSD2nDND901Za/H1gcJgCt2zxzQCkZMhwLnMtw9zCkP/SF3S2DMVVL/KINdZhX2bi4MXh74
- nrcZXvDPsxQ8ZB/7g5JE/yJGLQUZtJqy7RJQYkotqpb4JB/CyqHfZrV1OpYBur4Togur5gJINzu
- V2sN+NEh/fzxY6arIyw==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODI2MDE1NiBTYWx0ZWRfX5ax5t/fEsoIT
- n5hQr3I0ODdkY2o5L3Uol9m++4JtCuF7s4SUEp6OVrtAO27xLKYqn9w5CCj1/zXnGBoPXuam0cv
- IeTr3ZKSc/SgqJ6FWBSuSyLKUqye+Xs=
-X-Proofpoint-GUID: WrOy7cWaAjrUrC8thD70AaKxPZ98vSIF
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-26_05,2026-08-26_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 clxscore=1015 impostorscore=0 spamscore=0 phishscore=0
- adultscore=0 suspectscore=0 lowpriorityscore=0 bulkscore=0 priorityscore=1501
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608260156
-Received-SPF: pass client-ip=205.220.168.131;
- envelope-from=philmd@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <2db8ac0a-1b37-450d-8c11-2c5da46ca97a@linaro.org>
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62a;
+ envelope-from=max.chou@sifive.com; helo=mail-pl1-x62a.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -185,54 +107,130 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 23/8/26 17:07, Yonggang Luo wrote:
-> GDB register packets use target_big_endian() only (gdb_get_reg16/32/64).
-> RISC-V gdbstub already goes through those helpers, so future GDB
-> big-endian support does not need a second endian source in the CPU
-> gdbstub. It needs TargetInfo and the hart to agree.
+On 2026-08-25 13:15, Richard Henderson wrote:
+> On 8/25/26 10:58, Max Chou wrote:
 > 
-> Hart endian is cpu->cfg.big_endian, copied into mstatus MBE/SBE/UBE at
-> reset. The CPU property still defaults to little-endian, so a
-> big-endian TargetInfo would make GDB swap as BE while the hart stayed
-> LE.
+> > On 2026-08-15 12:45, Richard Henderson wrote:
+> > > Do not call probe_pages for every active element.
+> > > We can make do with no more than 2 such calls for
+> > > the two pages the insn might reference.
+> > > 
+> > > Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+> > > +    /*
+> > > +     * Test whether the first page is accessible.
+> > > +     * If the first element is active, it must succeed.
+> > > +     */
+> > > +    flags = probe_access_flags(env, adjust_addr(env, addr),
+> > > +                               MIN(last, last_in_page) - addr + 1,
+> > > +                               MMU_DATA_LOAD, mmu_index, !first_active,
+> > > +                               &host, ra);
+> > Hi Richard,
+> > 
+> > This probe traverses every byte from the initial active element to the
+> > end of the page, not just the bytes of active elements. In the masked
+> > case, the range may encompass a masked-off element, and masked-off body
+> > elements do not perform memory accesses.
+> > I think it may causes unexpected vl.
+> > 
+> > > +    /* Get number of complete elements in the first page. */
+> > > +    elems = MIN(page_split / msize, vl - i);
+> > > +
+> > > +    /* Load complete elements from the first page. */
+> > > +    if (likely(elems)) {
+> > > +        uint32_t page_evl = i + elems;
+> > > +
+> > > +        if (flags == 0) {
+> > ...
+> > > +        } else {
+> > > +            /*
+> > > +             * If the first element is active, it must succeed.
+> > > +             * This will load from MMIO or fault from INVALID.
+> > > +             */
+> > > +            if (first_active) {
+> > > +                vext_ldst_nf_tlb(env, vd, addr, 0, nf, esz,
+> > > +                                 max_elems, ldst_tlb, ra);
+> > > +                i = 1;
+> > > +                addr += msize;
+> > > +            }
+> > > +
+> > > +            /* Stop if invalid (unmapped) or mmio (transaction may fail). */
+> > > +            if (flags & (TLB_INVALID_MASK | TLB_MMIO)) {
+> > > +                env->vl = i;
+> > > +                goto tail;
+> > > +            }
+> > > +
+> > For an example, assume
+> > - vl = 3
+> > - vstart = 0
+> > - the mask be [1, 0, 1]
+> > - assume element 0 and element 2 be readable, but deny the byte at element 1
+> > - all three elements are in the same target page.
+> > 
+> > In theory, the element 1 is masked off and doesn’t perform any memory
+> > access, so the value of vl remains 3.
+> > 
+> > But the previous probe covers element 1 to 2 and the flags will be non
+> > zero due to the denied masked-off element 2. Then the vl will set to 1
+> > here.
+> > 
+> > Maybe we could switch to per element prob when vm is 0 and flags is not 0?
 > 
-> - Initialize cfg.big_endian from target_big_endian() in cpu init so a
->    big-endian TargetInfo also sets the hart.
-> - Fail realize when -cpu big-endian= disagrees with that selection.
->    GDB cannot follow a per-CPU override, so a split would silently
->    corrupt register byte order.
+> How are you going to deny the byte at element 1 to be unreadable?  Are you
+> expecting this to be some PMP thing, with a 1 byte range?
 > 
-> Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
-> ---
->   target/riscv/cpu.c | 10 ++++++++++
->   1 file changed, 10 insertions(+)
+> How I expect things to work is that:
 > 
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 5a82e6563bf..0681bec0bef 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -29,6 +29,7 @@
->   #include "qapi/error.h"
->   #include "qapi/visitor.h"
->   #include "qemu/error-report.h"
-> +#include "qemu/target-info.h"
->   #include "qemu/timer.h"
->   #include "hw/core/qdev-properties.h"
->   #include "hw/core/qdev-prop-internal.h"
-> @@ -1226,6 +1227,13 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
->       RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(dev);
->       Error *local_err = NULL;
->   
-> +    if (cpu->cfg.big_endian != target_big_endian()) {
-> +        error_setg(errp,
-> +                   "CPU big-endian=%s does not match selected target endian",
-> +                   cpu->cfg.big_endian ? "on" : "off");
+>  (1) We scan forward for the first active element, set vstart.
+> 
+>  (2) Probe the page for that element.  If that faults, vstart is visible to
+> the trap handler.
+> 
+>  (3) Discounting MMIO, all following elements in the same page cannot fault,
+> and we can process them immediately.  Obviously inactive elements get vma
+> handling not loads.
+> 
+Hi Richard,
 
-Surely the bug is on the GDB path.
-> +        return;
-> +    }
-> +
->       cpu_exec_realizefn(cs, &local_err);
->       if (local_err != NULL) {
->           error_propagate(errp, local_err);
+Sorry, my previous example was unclear. It does not need a 1-byte PMP
+region: RISC-V PMP definition allows the minimum 4-byte PMP region,
+which exactly matches one e32 element.
+
+For example, with vl=3, vstart=0, e32, and v0.mask = [1, 0, 1],
+configure locked PMP entries as follows:
+
+  PMP0: NA4   [base + 4, base + 7], L, ---    # element 1, no read
+  PMP1: NAPOT target page,          L, R      # lower-priority page allow
+
+  bytes:       base       base + 4     base + 8
+               +-----+    +-----+      +-----+
+  element:       0          1            2
+  mask:          1          0            1
+  access:     active      inactive      active
+  PMP:        PMP1 R      PMP0 ---      PMP1 R
+
+The RISC-V spec defines that masked vector loads access memory and raise
+exceptions only for active elements.
+Therefore this situation has reads only for elements 0 and 2; PMP0 must
+not create an access-fault condition for this instruction.
+
+My concern is that the page probe may be unsafe in some situations
+because PMP permissions can change at 4-byte granularity inside a
+target page, while the probe includes bytes which are not part of
+active vector memory operations.
+
+Maybe we could use the page probe only when it returns flags == 0,
+and otherwise fall back to checking only active elements or active
+runs?
+
+I'm trying to create masked fauly-only-first + PMP test for this.
+
+Thanks,
+
+rnax
+
+> I'm not sure I'm understanding your question properly...
+> 
+> 
+> r~
+> 
 
