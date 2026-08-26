@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A3D1C61DBE
-	for <qemu-riscv@archiver.kernel.org>; Wed, 26 Aug 2026 22:13:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E1A5C61DBE
+	for <qemu-riscv@archiver.kernel.org>; Wed, 26 Aug 2026 22:13:40 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wzLr6-0001oh-B0; Wed, 26 Aug 2026 18:12:24 -0400
+	id 1wzLrJ-0001re-FE; Wed, 26 Aug 2026 18:12:37 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1wzLr1-0001o3-Gb
- for qemu-riscv@nongnu.org; Wed, 26 Aug 2026 18:12:19 -0400
-Received: from mail-pl1-x629.google.com ([2607:f8b0:4864:20::629])
+ id 1wzLrG-0001rC-61
+ for qemu-riscv@nongnu.org; Wed, 26 Aug 2026 18:12:34 -0400
+Received: from mail-pj1-x1031.google.com ([2607:f8b0:4864:20::1031])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1wzLqz-0006Ze-BQ
- for qemu-riscv@nongnu.org; Wed, 26 Aug 2026 18:12:19 -0400
-Received: by mail-pl1-x629.google.com with SMTP id
- d9443c01a7336-2ccf2360620so14382765ad.3
- for <qemu-riscv@nongnu.org>; Wed, 26 Aug 2026 15:12:16 -0700 (PDT)
+ id 1wzLrD-0006bl-Ol
+ for qemu-riscv@nongnu.org; Wed, 26 Aug 2026 18:12:33 -0400
+Received: by mail-pj1-x1031.google.com with SMTP id
+ 98e67ed59e1d1-38511175ad3so39390a91.2
+ for <qemu-riscv@nongnu.org>; Wed, 26 Aug 2026 15:12:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1787782336; x=1788387136; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1787782350; x=1788387150; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:sender:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=lra/eGV1qBbWwyW2TOgrfmZZq5qvjxYH2/l0+JSydtI=;
- b=W1bCQ03lfaKQGMiP1OzK1yIxpBx17ZY0qbxH4Y3bzmjwwkJnhkPJa0vh4LKmRC6lVD
- wDO85mhuvLcD0xQIjjxb5jeuDedTT4w4r3rtDGTNKfVbB/MhLIgqgft21qfVtQ8pFjLV
- Y7k9UtAk92nwI0a7mVIkSW1F/XC6Ql3dYvJeMEjRe4yozjzkYxwXMGOBKbMWYMi4LBX8
- Lc9wHBGP3Yml+zgD5xWTgQjz7pIr+IXu93Zs8NS3/feRf7HHtx7g/cWMFcl6ENPM/NJj
- musEo1xYHK9veTd4gYcrMBr1exEdf26iWHoxhL76sjXFv/3AxFtl6B8D31PrV6ErpbTv
- PdzQ==
+ bh=YAXZV6zAbM1l8BTrMY8dps++9Fqi8o3MB24YeyVs67U=;
+ b=SLvM8RlWMpigXPp7eLZdKmmDlOaY5rRMxeU2tb+mGZYZBAS+AWIj819lOvMyh+cjoV
+ a5kX7QAlLGQOSXsiuhnL3Oo3/1D7sfTVRnsJ0FsyF0uFjO/KId4HgCnmnVRmggP086Cs
+ B/mjVd0PwCZgmpHJf22bDT69ptiW8IU0sFb7pikG1ALJvkieQvS14Ox4lUBV/In3yiFI
+ ElOrt2BBKF6T0y0e6rU6HGuSlAqcBQAz0wQu62bplFAUKXojjmtIPhAly9Njz8Hs6S7P
+ fYDuYaLeakystlwua+49ZtKWBlonwidl//M+QkdnP/nJLir/57vA6McG+nkJwFBPvc07
+ gToQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787782336; x=1788387136;
+ d=1e100.net; s=20251104; t=1787782350; x=1788387150;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:sender:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=lra/eGV1qBbWwyW2TOgrfmZZq5qvjxYH2/l0+JSydtI=;
- b=n+QYqAWzfO95kI8w4dNUBCMF3p9ebsW7U4YoHSByiE2/PHYc9RBh25Y521nb8MRzk7
- 4yZjoWNXg3NiWnCPj3tMAd7AtF729EZ7nl+iyoKVvGcBp6MPPcAAHwBK440ywxX9OGud
- cDd9qy6dbDB/2Zkl66ppwfXmzIlWKvmp53Q6w/pLvne4GUak5wtqykEgDxUUj4wOhCRQ
- 0ba+hYe7AZdP2x2gw0dhk5F68P2++6LqFpPDvIF2ynor9r+WstY6kfc4H+pMHLuBkhpE
- eqYEI9Xw4O0Z4G1teMs4fsJwXtVZMFapEP72aYul7g9yZaHMBindBvtLFNWW6b6j3KLf
- UeFQ==
+ bh=YAXZV6zAbM1l8BTrMY8dps++9Fqi8o3MB24YeyVs67U=;
+ b=s2QuNaxv3d6MGMQL6dxsylhX1vTBdmlOCQZW4siuoD3yrHTWS2njsztaX04tb3m1JR
+ DZuJFxfXP6VUD+a9Q3Q3xDFGkzGutTmRvBWrmnZm4PgLdmIqxzO6tzYc2/1gcCdtmlSX
+ G/kJNU3+V+T5f9OHFTQanBTSHrKyx41D4yj4Ir7jUaY1NSCIqrEdhz+42YUj1KGg9GIf
+ IOTnKSb55gqvsZfsP+0ymIB/nWya18xDPIAisQYaIh1mkVobsKfEDQS803oSpRlV7v84
+ mQzDu4j1e7YcM1jhVfMx/Cz7c5oy+JPYyBRxkfyGQIp/mum8h+k2nmsfPRjYfoLFpSao
+ jsEQ==
 X-Forwarded-Encrypted: i=1;
- AHgh+Ro1sZYks7OA0JL/E5P5suO1sw59ZVb3i/SpoXutAuKvqJvwuiPIMHsWVIo8s2NQu4wnRPwJxjzpE41f@nongnu.org
-X-Gm-Message-State: AFuF++mr/g684L3Qwf2Aa5ukw/Ed+wFiRxJjpu9ZOP/h5QD9ztfQBPDv
- n3HXFWq7r7YFqtJN7K41rvIj/tmBuTiI/ygJ7yGx5ERIs9EtU9DmpekE
-X-Gm-Gg: AR+sD12IYaREGhAgx2W79hbR+mVOmCDOZpM7HOkpq8WXlnSrctuN9FwACOoXgqgl2T5
- 8TLzTURKCQl0+LHZsRhjsORsU86Q8WKWpjLfc6ketHebHl67lExc/MZDtZwwfriXXjg3FdWlKnt
- LABuIr6Iaw/IVaBhPelrDXOE2baqjXSgCbxaVuL15fmqHznqizgIGEOGP9sIcAC/1srgcDu5gJ3
- Vo29axjA1gU/P+qCYo02MGiBYv5zpRrIBukI5WOwjnWZ7xeArLWdVS8h0EjqxSf9YJDPDMys23e
- cvHJwAPZIX1fxu8wsZvubuKMYOL3u7QhjxNL4/opZSo0wDvfGR0lclSSvnzMHpI80X+o3joZyVi
- omtS0nVlgA38GH5IlZFev1C21Vl5C0cpIYo1CSVkEOLHQCDAYx9yO/1F9HBVmYhBUAdX5W+qJDh
- pnjjflpbySgk0uVGKmCg8OBdsraR9V3cyWngNBbG7sK7iASnROU/OxuhYRpKJT+ycBXPiiuzJ3G
- 6nJacudevKllt4NjXQ/2GVBS2TB2RuXqjOIiQry4cU1OXjOQEZwboQo+VnBZoRd8AhJJWVn7U4r
- L21rRz+TXpduq14XS4kDOw==
-X-Received: by 2002:a17:90b:3b52:b0:396:602a:5bb6 with SMTP id
- 98e67ed59e1d1-3966d20f12cmr18160541a91.8.1787782335721; 
- Wed, 26 Aug 2026 15:12:15 -0700 (PDT)
+ AHgh+RpqiRQC3krkP+gbe92XBtAPpXTGlIY4s/L6n4zj4Vh/3DH9Q0/Fo5QAy038olkGOKPKSwYWKGy1ax3S@nongnu.org
+X-Gm-Message-State: AFuF++n54SoUwDqj71cB6pCREMXfbQX2TgkBjOqW1/Cf+LufLQgeuvxE
+ jgrLpAYucAWb5SmxYx+NImFmDFpdD32tuEV0Oc1iwksjCtgWPbZ5Q3Lh
+X-Gm-Gg: AR+sD131XBiqeEcjE374zW1dSaUloHhu46ADtW9LvXzM1TFdxyep+NIsaZgqVe98Rhn
+ AMwHse38L18gXoh9AdX+aArI2Y/JgB6xjqx9MgFKlvubjnQBk/S1Ti9RiJKNf0S+sEicE5P1o9H
+ 9gaBbuE6NsXv4kN1h9MkispyOxGndNtpLxTzX/o6q66et83BJsKyMF8aMYaxl3t88u3/owSQcbq
+ qFzF3/KjddzeM+1WUkxHD8iDFIh9c1y3Kd08yJijwh8Lrf+d8JmWEjD0AVXoG0C6R6Ibx5HNCeu
+ 0Drbk5KRk7/t5G9tYbL6fVi5J1EKC4zfHaOsD0O4NhAjSpnPAq4RLYjAvabvxPnqCKalopSKeX4
+ hotkdNx3uT/QX7nmxawPOFURWgZuG2d6k8DX3XM1aLx0dgYKpoBdAlv0pl5ozZE111jadoNMGwf
+ aym7TMGl0/RNR4AOWLLSGGXmtFItXUHCN6zvZkG0/mkrg2C2QKFKVkfsSkn3AUZBGOPuBSicmQ3
+ DgcjxmY6/7WxjFkWrw1Zb6lJ1KWdKBKVKlvhKTs2v1CXLLHXJq+2DnJmGPApPS9xh4yZoBMQ5ZM
+ LXigBS0v5dlmwFGlFgrd
+X-Received: by 2002:a17:90b:2247:b0:38e:6aa7:68ad with SMTP id
+ 98e67ed59e1d1-3966d1847c6mr19076054a91.5.1787782350309; 
+ Wed, 26 Aug 2026 15:12:30 -0700 (PDT)
 Received: from donnager-debian.. ([180.150.112.50])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-396b0d3d7fbsm17459a91.3.2026.08.26.15.12.11
+ 98e67ed59e1d1-396b0d3d7fbsm17459a91.3.2026.08.26.15.12.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 26 Aug 2026 15:12:15 -0700 (PDT)
+ Wed, 26 Aug 2026 15:12:29 -0700 (PDT)
 From: Joel Stanley <joel@jms.id.au>
 To: Alistair Francis <alistair.francis@wdc.com>,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
@@ -80,17 +80,18 @@ Cc: Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Portia Stephens <portias@oss.tenstorrent.com>,
  =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
  qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Subject: [PATCH 10/16] hw/riscv/atlantis: Rework device tree creation
-Date: Thu, 27 Aug 2026 07:41:46 +0930
-Message-ID: <20260826221154.54577-2-joel@jms.id.au>
+Subject: [PATCH 13/16] hw/riscv/atlantis: Make TTAtlantisState own memory
+ containers
+Date: Thu, 27 Aug 2026 07:41:49 +0930
+Message-ID: <20260826221154.54577-5-joel@jms.id.au>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260826221154.54577-1-joel@jms.id.au>
 References: <20260826220528.54516-1-joel@jms.id.au>
  <20260826221154.54577-1-joel@jms.id.au>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::629;
- envelope-from=joel.stan@gmail.com; helo=mail-pl1-x629.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1031;
+ envelope-from=joel.stan@gmail.com; helo=mail-pj1-x1031.google.com
 X-Spam_score_int: -16
 X-Spam_score: -1.7
 X-Spam_bar: -
@@ -114,186 +115,77 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Remove the direct use of MachineState from the device tree creation to
-allow separation between the SoC (TTAtlantisState) and the QEMU
-MachineState.
-
-Fix this for the device tree pointer by passing it directly to the
-functions that use it, instead of casting the TTAtlantisState to a
-MachineState.
-
-MachineState::smp.cpus is replaced with TTAtlantisState::cpus.num_harts,
-as these are equivalent after tt_atlantis_machine_init.
+The DRAM hi, DRAM low and bootrom memory containers can be owned by the
+TTAtlantisState.
 
 Signed-off-by: Joel Stanley <joel@jms.id.au>
 ---
- hw/riscv/tt_atlantis.c | 51 +++++++++++++++++++-----------------------
- 1 file changed, 23 insertions(+), 28 deletions(-)
+ include/hw/riscv/tt_atlantis.h |  4 ++++
+ hw/riscv/tt_atlantis.c         | 15 ++++++---------
+ 2 files changed, 10 insertions(+), 9 deletions(-)
 
+diff --git a/include/hw/riscv/tt_atlantis.h b/include/hw/riscv/tt_atlantis.h
+index 2ec283d0fd7b..9ca98bfb8478 100644
+--- a/include/hw/riscv/tt_atlantis.h
++++ b/include/hw/riscv/tt_atlantis.h
+@@ -31,10 +31,14 @@ struct TTAtlantisState {
+ 
+     MemoryRegion *memory;
+     MemoryRegion *dram;
++    MemoryRegion ram_hi;
++    MemoryRegion ram_lo;
++
+     RISCVHartArrayState cpus;
+     DeviceState *irqchip;
+     DesignWareI2CState i2c[TT_ATL_NUM_I2C];
+     UnimplementedDeviceState uart1;
++    MemoryRegion bootrom;
+ };
+ 
+ enum {
 diff --git a/hw/riscv/tt_atlantis.c b/hw/riscv/tt_atlantis.c
-index 35b3be072a06..c471c7cebf12 100644
+index 7a9f5872c7c0..b80bdf54c40b 100644
 --- a/hw/riscv/tt_atlantis.c
 +++ b/hw/riscv/tt_atlantis.c
-@@ -80,9 +80,8 @@ static uint32_t next_phandle(void)
-     return fdt_phandle++;
- }
- 
--static void create_fdt_memory(TTAtlantisState *s)
-+static void create_fdt_memory(void *fdt, TTAtlantisState *s)
+@@ -483,9 +483,6 @@ static void tt_atlantis_machine_init(MachineState *machine)
  {
--    void *fdt = MACHINE(s)->fdt;
-     hwaddr size_lo = MACHINE(s)->ram_size;
-     hwaddr size_hi = 0;
+     TTAtlantisState *s = TT_ATLANTIS_MACHINE(machine);
  
-@@ -104,9 +103,9 @@ static void create_fdt_memory(TTAtlantisState *s)
-     }
- }
+-    MemoryRegion *ram_hi = g_new(MemoryRegion, 1);
+-    MemoryRegion *ram_lo = g_new(MemoryRegion, 1);
+-    MemoryRegion *bootrom = g_new(MemoryRegion, 1);
+     ram_addr_t lo_ram_size, ram_size;
+     int hart_count = machine->smp.cpus;
  
--static void create_fdt_aclint(TTAtlantisState *s, uint32_t *intc_phandles)
-+static void create_fdt_aclint(void *fdt, TTAtlantisState *s,
-+                              uint32_t *intc_phandles)
- {
--    void *fdt = MACHINE(s)->fdt;
-     g_autofree char *name = NULL;
-     g_autofree uint32_t *aclint_mtimer_cells = NULL;
-     uint32_t aclint_cells_size;
-@@ -206,10 +205,9 @@ static void create_fdt_one_aplic(void *fdt,
-     qemu_fdt_setprop_cell(fdt, name, "phandle", aplic_phandle);
- }
- 
--static void create_fdt_pmu(TTAtlantisState *s)
-+static void create_fdt_pmu(void *fdt, TTAtlantisState *s)
- {
-     char pmu_name[] = "/pmu";
--    void *fdt = MACHINE(s)->fdt;
-     RISCVCPU *hart = &s->cpus.harts[0];
- 
-     qemu_fdt_add_subnode(fdt, pmu_name);
-@@ -217,32 +215,29 @@ static void create_fdt_pmu(TTAtlantisState *s)
-     riscv_pmu_generate_fdt_node(fdt, hart->pmu_avail_ctrs, pmu_name);
- }
- 
--static void create_fdt_cpu(TTAtlantisState *s, const MemMapEntry *memmap,
-+static void create_fdt_cpu(void *fdt, TTAtlantisState *s,
-                            uint32_t aplic_s_phandle,
-                            uint32_t imsic_s_phandle)
- {
--    MachineState *ms = MACHINE(s);
--    void *fdt = MACHINE(s)->fdt;
--    g_autofree uint32_t *intc_phandles = g_new0(uint32_t, ms->smp.cpus);
-+    g_autofree uint32_t *intc_phandles = g_new0(uint32_t, s->cpus.num_harts);
-+    int num_harts = s->cpus.num_harts;
- 
-     fdt_create_cpu_socket_subnode(fdt, TT_ACLINT_TIMEBASE_FREQ);
- 
--    create_fdt_socket_cpus(fdt, s->cpus.harts, 0, s->cpus.num_harts,
-+    create_fdt_socket_cpus(fdt, s->cpus.harts, 0, num_harts,
-                            s->cpus.hartid_base, &fdt_phandle, intc_phandles,
-                            false, false);
- 
--    create_fdt_memory(s);
--
--    create_fdt_aclint(s, intc_phandles);
-+    create_fdt_aclint(fdt, s, intc_phandles);
- 
-     /* M-level IMSIC node */
-     uint32_t msi_m_phandle = next_phandle();
--    create_fdt_one_imsic(fdt, &s->memmap[TT_ATL_MIMSIC], ms->smp.cpus,
-+    create_fdt_one_imsic(fdt, &s->memmap[TT_ATL_MIMSIC], num_harts,
-                          intc_phandles, msi_m_phandle,
-                          IRQ_M_EXT, TT_IMSIC_GUEST_BITS);
- 
-     /* S-level IMSIC node */
--    create_fdt_one_imsic(fdt, &s->memmap[TT_ATL_SIMSIC], ms->smp.cpus,
-+    create_fdt_one_imsic(fdt, &s->memmap[TT_ATL_SIMSIC], num_harts,
-                          intc_phandles, imsic_s_phandle,
-                          IRQ_S_EXT, TT_IMSIC_GUEST_BITS);
- 
-@@ -252,13 +247,13 @@ static void create_fdt_cpu(TTAtlantisState *s, const MemMapEntry *memmap,
-     create_fdt_one_aplic(fdt, &s->memmap[TT_ATL_MAPLIC],
-                          msi_m_phandle, intc_phandles,
-                          aplic_m_phandle, aplic_s_phandle,
--                         IRQ_M_EXT, s->cpus.num_harts);
-+                         IRQ_M_EXT, num_harts);
- 
-     /* S-level APLIC node */
-     create_fdt_one_aplic(fdt, &s->memmap[TT_ATL_SAPLIC],
-                          imsic_s_phandle, intc_phandles,
-                          aplic_s_phandle, 0,
--                         IRQ_S_EXT, s->cpus.num_harts);
-+                         IRQ_S_EXT, num_harts);
- }
- 
- static void create_fdt_uart(void *fdt, const MemMapEntry *mem, int irq,
-@@ -317,10 +312,9 @@ static void create_fdt_i2c(void *fdt, const MemMapEntry *mem, uint32_t irq,
-     qemu_fdt_setprop_cell(fdt, name, "#size-cells", 0);
- }
- 
--static void create_fdt_i2c_device(TTAtlantisState *s, int bus,
-+static void create_fdt_i2c_device(void *fdt, TTAtlantisState *s, int bus,
-                                   const char *compat, int addr)
- {
--    void *fdt = MACHINE(s)->fdt;
-     hwaddr base = s->memmap[TT_ATL_I2C0 + bus].base;
-     g_autofree char *name = g_strdup_printf("/soc/i2c@%"HWADDR_PRIX"/sensor@%x",
-                                             base, addr);
-@@ -330,14 +324,15 @@ static void create_fdt_i2c_device(TTAtlantisState *s, int bus,
-     qemu_fdt_setprop_cell(fdt, name, "reg", addr);
- }
- 
--static void finalize_fdt(TTAtlantisState *s)
-+static void finalize_fdt(void *fdt, TTAtlantisState *s)
- {
-     uint32_t aplic_s_phandle = next_phandle();
-     uint32_t imsic_s_phandle = next_phandle();
-     uint32_t periph_clk_phandle = next_phandle();
--    void *fdt = MACHINE(s)->fdt;
- 
--    create_fdt_cpu(s, s->memmap, aplic_s_phandle, imsic_s_phandle);
-+    create_fdt_cpu(fdt, s, aplic_s_phandle, imsic_s_phandle);
-+
-+    create_fdt_memory(fdt, s);
- 
-     /*
-      * We want to do this, but the Linux aplic driver was broken before v6.16
-@@ -359,8 +354,8 @@ static void finalize_fdt(TTAtlantisState *s)
+@@ -543,22 +540,22 @@ static void tt_atlantis_machine_init(MachineState *machine)
+         exit(EXIT_FAILURE);
      }
  
-     /* I2C peripherals: qemu specific */
--    create_fdt_i2c_device(s, 0, "dallas,ds1338", 0x6f);
--    create_fdt_i2c_device(s, 4, "ti,tmp105", 0x48);
-+    create_fdt_i2c_device(fdt, s, 0, "dallas,ds1338", 0x6f);
-+    create_fdt_i2c_device(fdt, s, 4, "ti,tmp105", 0x48);
- }
+-    memory_region_init_alias(ram_hi, OBJECT(machine), "ram.high", s->dram,
++    memory_region_init_alias(&s->ram_hi, OBJECT(machine), "ram.high", s->dram,
+                              0, ram_size);
+     memory_region_add_subregion(s->memory,
+-                                s->memmap[TT_ATL_DDR_HI].base, ram_hi);
++                                s->memmap[TT_ATL_DDR_HI].base, &s->ram_hi);
  
- static void create_fdt(TTAtlantisState *s)
-@@ -377,7 +372,7 @@ static void create_fdt(TTAtlantisState *s)
+     lo_ram_size = MIN(ram_size, s->memmap[TT_ATL_DDR_LO].size);
+-    memory_region_init_alias(ram_lo, OBJECT(machine), "ram.low", s->dram,
++    memory_region_init_alias(&s->ram_lo, OBJECT(machine), "ram.low", s->dram,
+                              0, lo_ram_size);
+     memory_region_add_subregion(s->memory,
+-                                s->memmap[TT_ATL_DDR_LO].base, ram_lo);
++                                s->memmap[TT_ATL_DDR_LO].base, &s->ram_lo);
  
-     qemu_fdt_add_subnode(ms->fdt, "/aliases");
+     /* Boot ROM */
+-    memory_region_init_rom(bootrom, NULL, "tt-atlantis.bootrom",
++    memory_region_init_rom(&s->bootrom, NULL, "tt-atlantis.bootrom",
+                            s->memmap[TT_ATL_BOOTROM].size, &error_fatal);
+     memory_region_add_subregion(s->memory, s->memmap[TT_ATL_BOOTROM].base,
+-                                bootrom);
++                                &s->bootrom);
  
--    create_fdt_pmu(s);
-+    create_fdt_pmu(ms->fdt, s);
- }
- 
- static void load_fdt(TTAtlantisState *s)
-@@ -408,7 +403,7 @@ static void load_fdt(TTAtlantisState *s)
-         g_strfreev(node_path);
-     }
- 
--    create_fdt_memory(s);
-+    create_fdt_memory(ms->fdt, s);
- }
- 
- static void mmio_map_unimplemented(MemoryRegion *memory, SysBusDevice *dev,
-@@ -439,7 +434,7 @@ static void tt_atlantis_machine_done(Notifier *notifier, void *data)
-      * dynamic sysbus devices. Our FDT needs to be finalized.
-      */
-     if (machine->dtb == NULL) {
--        finalize_fdt(s);
-+        finalize_fdt(machine->fdt, s);
-     }
- 
-     mem_size = machine->ram_size;
+     /* UART1, the soc console (UART0 is for the boot microcontroller) */
+     serial_mm_init(s->memory, s->memmap[TT_ATL_UART1].base, 2,
 -- 
 2.47.3
 
