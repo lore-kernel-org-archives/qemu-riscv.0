@@ -4,130 +4,134 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F6F6C5DF97
-	for <qemu-riscv@archiver.kernel.org>; Wed, 26 Aug 2026 21:48:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9810C61DC6
+	for <qemu-riscv@archiver.kernel.org>; Wed, 26 Aug 2026 21:48:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wzLT8-0003Zl-AS; Wed, 26 Aug 2026 17:47:38 -0400
+	id 1wzLSW-0003FY-U2; Wed, 26 Aug 2026 17:47:00 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wzLT6-0003WL-Eh
- for qemu-riscv@nongnu.org; Wed, 26 Aug 2026 17:47:36 -0400
+ id 1wzLSV-0003Eq-QW
+ for qemu-riscv@nongnu.org; Wed, 26 Aug 2026 17:46:59 -0400
 Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wzLT4-0001Oy-Op
- for qemu-riscv@nongnu.org; Wed, 26 Aug 2026 17:47:36 -0400
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+ id 1wzLST-0001Jj-7n
+ for qemu-riscv@nongnu.org; Wed, 26 Aug 2026 17:46:59 -0400
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 67QKdWU82340300
- for <qemu-riscv@nongnu.org>; Wed, 26 Aug 2026 21:47:24 GMT
+ 67QKe3Fx820933
+ for <qemu-riscv@nongnu.org>; Wed, 26 Aug 2026 21:46:56 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- TXXYzGBfZD6V3RJhLGHE2ttOLnRMKqlY3H2NvRaYbog=; b=Umeowt5MdZb/ozUd
- 1e5/Z59XpAYJ6MLot1YagxJojtLPFHTA1L+SiEgFhD1Q+VCoqMHZA3BvNGFioFZ/
- fO4hbLWpBPAnjQ2R9OUjdAELaTb1LVjUKnihmhHJi6CgNeHXjiIb4yuFcU0R9Ml/
- Dv4o7f9nDVPU1xyp/bQvAFaHG4Myzg2EGEXWJCyjvzRRFd4XPkUUHVWcML+peyDI
- mtEKl2qmvYwAbV5/0EFZplPDSsW7PRXiQFIadu1KTSakVobPnGLglr6DrwrXAnlb
- dimkmHECZEVsA+kHMLkp2cpKZ0tXdaO9XRYO6MbtXldGJehEHK/h3Rxh/acvVjbS
- rq3Qkg==
-Received: from mail-qv1-f71.google.com (mail-qv1-f71.google.com
- [209.85.219.71])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ga4eggxau-1
+ p+9P5IDeo2E3bJgBm+Bv9eguF7RWzHnyZjJE5Q+QRC4=; b=eCSeNirCiROZ0NiU
+ kRnVXJ9O8xIKcTeKzZdYg4aKFXXHl+P9/qNAKQ8y1t2neCBIdvB0Ey9jSX7dTWkI
+ LUd7KS0WZGI+OTPstVEAgNHjosp7VAb0ssHpKvoddk7gznZWnGiybRF8QGgyND0n
+ 9PteeDbgy/wShEbI/TtjoGgJ2OjBPWpqKSqD1itwidcdLdrLY9FnKVlLjTa+yfF6
+ hcGzWgBrpSTsH1shDbiJmy/nVhhCcy6JFAOrkPEdgYSxoJHvyfTl1he7aKN3ycC8
+ LSWno6mmokJuHiKs0EHxO75SFnj3DdEvJ57ona8ICnEJhNKiE0UXwNbKvt8xcsNV
+ UtcQDQ==
+Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com
+ [209.85.219.72])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g9uthu4x0-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Wed, 26 Aug 2026 21:47:23 +0000 (GMT)
-Received: by mail-qv1-f71.google.com with SMTP id
- 6a1803df08f44-9077b4c35c5so26990366d6.2
- for <qemu-riscv@nongnu.org>; Wed, 26 Aug 2026 14:47:23 -0700 (PDT)
+ for <qemu-riscv@nongnu.org>; Wed, 26 Aug 2026 21:46:56 +0000 (GMT)
+Received: by mail-qv1-f72.google.com with SMTP id
+ 6a1803df08f44-90cc9140539so4063756d6.1
+ for <qemu-riscv@nongnu.org>; Wed, 26 Aug 2026 14:46:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1787780843; x=1788385643; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1787780815; x=1788385615; darn=nongnu.org;
  h=content-transfer-encoding:content-type:mime-version:references
  :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=TXXYzGBfZD6V3RJhLGHE2ttOLnRMKqlY3H2NvRaYbog=;
- b=hR1opue+/Nw1kBRIuJxmal7qdJ+SUqmJiv5sngs8e2Y5dFQi1njrLVKHlfJUFOUDnq
- Wz0s5nhFwaljuYYfbBu+CKU5GkywkY8+IloxmlGPWdTuvXhNvDwW0CMcZy7jno84p7A6
- SmTTPrlzbAgH8jB1jmcAOAjwdREAro0soNugyFFtiv6ydHksh1lxnGQmum0kQltkNVtQ
- X/xUnaU46yoGT9nFIGivek8DfTkw6Br7xvgFI4WiII9rFRQhNjveKVMfemWlCy1gBA0u
- LroRnoNM2wjqo2k49RPjdcJj6iIlj6mukzfDdlRFioOv8dOt4VOKQYorrjpODTqqUqTr
- strQ==
+ bh=p+9P5IDeo2E3bJgBm+Bv9eguF7RWzHnyZjJE5Q+QRC4=;
+ b=Gvj+Tw7mCIcFO7q7tR97V+fHgmD3I6WUM/mV8oXlb2W6CtB6bS4xp6YHCZzGA/93Ei
+ 1+fCFgaMmXZmbfiYjZm6wijC12WM/p3ktaZgN9aqzwdXmvaFQK9eb0HmYUWR0mb07oQ4
+ zsLqBpoQpVS3ClYVArAHmSY9A+Cw2a2xj31Xe2jAQ5qirR2pnURZAJLE6Okl5Crw1Jr7
+ r1g38R/ohlHmS0y3e0K0dEtoYbG2NxTyQFzL9QiTXj2NVEw3KFO1gvGHz5rfz2e6PTdc
+ IowMD1GDMgyvS0qzR9KcXCXmPtET2evxhM2XmvXGywOibCmNj5SNDjGIsu2RDA2xL5hq
+ F6IA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787780843; x=1788385643;
+ d=1e100.net; s=20251104; t=1787780815; x=1788385615;
  h=content-transfer-encoding:content-type:mime-version:references
  :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=TXXYzGBfZD6V3RJhLGHE2ttOLnRMKqlY3H2NvRaYbog=;
- b=rNPE54r3UCIk9lsx6lVa0XzCkiJmZ1bxja+NflcC41rm5z7luj65JKAi4D7meqDmbc
- FqRjrjWEzpS33K8CokwPPTFsvsHwu2wxJz6HbUeT4mvRMZj+tLQvwpaHu6wK1pppmXFF
- myMZtIL8Gp/LLW1OdzoYpxgflhydI884m/HfqMrq9VpXtd26/W61B0yK9CftD67E5nRb
- DbwDSm7IGb54IzZXkaQrDgXAvMnH7ha99PAwgpAzLN+BCJ/mePIIRUH6SH/jUix1Yuu6
- pcZNdGvH8zkGpkwKfGkea6QBdJlrBXDcdtWBTCIcIWWiiTXGkGKcvdTB20P2uPko9I7l
- 6Lvw==
-X-Gm-Message-State: AFuF++mRQVtWmtxzNzd9xDqYdh+U6iMY17FhRZSFaAhQUCDHuNq3pupz
- 34/uz0Egqu55+AXkwribeROvnWWZHSC6RlvqMAIGC8zUFBaksOKPooxW9hekM/n9cW6AQQi2k5Y
- ZyDva0cWh4CL3sT37u4QvOQ0PgTNxVmn72k8NRgRb3dbP6/hsXJIC69eCUQ==
-X-Gm-Gg: AR+sD13cfgchVQG113tt/yq8JJV1ddJHhPQGsx8cJqbNQq5piBPpYUwqYQGcoePKIF2
- nPwUwaKVbiWxAQyaSwDlFcQEUvbhdfS19izF/Uwj21OKAR+AxSwg6Ri2rk5HxNzpItzpuFZEuRD
- 6B/jOG1I1l0GXjNdD8ZaLJhF1QT66Fl+S3jwf6R18r4NkU69ql32AdIbsROsXxokzjjsrB1pYAV
- f9W3fj8ihBJUyJJzDCQCP/aLiUpbSwbZkZVTHTl0fgxRXj1y4PEzuZkdZe91qMu/zvvhM/N8GX1
- T75A1fd3FYElz3I25foXMP2YRek9ITTr8QJFTZpid2arl+sVTOWs3alCYH9fHgM2SDTuKWOJ9sP
- I2YFUv5BhJMnmLeBgznY308qxUqn9DvlJ755NDQ==
-X-Received: by 2002:a05:6214:20aa:b0:90c:8fe7:22f1 with SMTP id
- 6a1803df08f44-90cc79498demr111228196d6.9.1787780843159; 
- Wed, 26 Aug 2026 14:47:23 -0700 (PDT)
-X-Received: by 2002:a05:6214:20aa:b0:90c:8fe7:22f1 with SMTP id
- 6a1803df08f44-90cc79498demr111227826d6.9.1787780842754; 
- Wed, 26 Aug 2026 14:47:22 -0700 (PDT)
+ bh=p+9P5IDeo2E3bJgBm+Bv9eguF7RWzHnyZjJE5Q+QRC4=;
+ b=ckr3DklEtUts0wSNQEgmiKCmDcdrPOCvjDqICJV4l7FkEA6na6TnJ8zlULGXnAKjyo
+ j98qkDMR0PQUJKyuVrJZmNh/m1eJF+eNuCAV7A2wtSBHHFGN1SKQ4uv7EA1xCDDyWgFB
+ bAjUenNnCFVVHj5oXC59ZK4jcYwIUz1yZXoAi7Cwqo9yoERKqDaXCIaeuAbpxtgqhXL5
+ +7CWXJC96vd6Jhw8IW8sCw495HJtERI/5RIs1UdP4ufD9VTuBuoTLgmuKtdRLmkahlYq
+ 4XhcS6FfzMH7JebNdVO1GN3u9dkYBpNzacfUcuWN3T0aTR4PAW9ZpWgWGebIE5tVizBw
+ M7YQ==
+X-Gm-Message-State: AFuF++nS2sebQoO9WYUbRb/OsizuJXsgRe4cL+SLWMbS24XDVSbrqGmJ
+ k6mxnFcAovOLaamHqP7gJU7kb26CpUwQ+GNRmXuuDJIeCNwWqseZHGzF0QLijDOajYtvnoYTVpv
+ QVF7Y16O/YICoRkIfuhawlOk9B5VK3UaT4NGaxFXDVWtMTywUKNBQsRtqbw==
+X-Gm-Gg: AR+sD12mM3Dh9UHWqC3Qi/8axHpup9Z2Tlov6xlrXZ2yFQJgt9IKlMCP06B/z8pJUCh
+ psz4FlDBmqgHEtJfLo/R1XDXyHof1bibO8sMao7MKrptG3lEAzESjmQX1CTMTRWhsoJc5HLQaQl
+ yGeZbV+ZoGzCvYgeulQ+NmH8p78sTNLf6EDpyoZCryA/kvXGDHpKO7zgAWjXuFLiWEVY1zdf/UX
+ 7c+z49LCXyP+61wzEmMNeLQnkD2d+G4LFiGWFLevr5SHoYWHjW6NW4NTIVW44wBeRQ4yrpoN96X
+ Z+NXj79zTPZfNfWzR/U/WrmBEbT1aVOYZBiQYVci51aOIqKMW5uXvlyPvJexb4oR7YUs3LpYaSC
+ TZ2zwwQ7673+Cs0D+r+15fIXVEZxws6EBLXq+fw==
+X-Received: by 2002:a05:6214:5f0d:b0:8f1:ed00:7fd8 with SMTP id
+ 6a1803df08f44-90cd4368dfemr33520016d6.3.1787780815205; 
+ Wed, 26 Aug 2026 14:46:55 -0700 (PDT)
+X-Received: by 2002:a05:6214:5f0d:b0:8f1:ed00:7fd8 with SMTP id
+ 6a1803df08f44-90cd4368dfemr33519576d6.3.1787780814685; 
+ Wed, 26 Aug 2026 14:46:54 -0700 (PDT)
 Received: from QCOM-UWl2o8bcGT.qualcomm.com ([189.38.141.232])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-90cd73e4117sm490916d6.24.2026.08.26.14.47.20
+ 6a1803df08f44-90cd73e4117sm490916d6.24.2026.08.26.14.46.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 26 Aug 2026 14:47:22 -0700 (PDT)
+ Wed, 26 Aug 2026 14:46:54 -0700 (PDT)
 From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
  zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
- Palmer Dabbelt <palmer@dabbelt.com>
-Subject: [PATCH v3 12/14] hw/riscv/device-common, virt.c: add flash helpers
-Date: Wed, 26 Aug 2026 18:46:40 -0300
-Message-ID: <20260826214643.122728-13-daniel.barboza@oss.qualcomm.com>
+ Palmer Dabbelt <palmer@dabbelt.com>, Joel Stanley <joel@jms.id.au>,
+ Nicholas Piggin <npiggin@gmail.com>,
+ Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>,
+ Michael Ellerman <mpe@kernel.org>,
+ Portia Stephens <portias@oss.tenstorrent.com>
+Subject: [PATCH v3 01/14] hw/riscv/fdt-common: prepend helpers with "riscv_"
+Date: Wed, 26 Aug 2026 18:46:29 -0300
+Message-ID: <20260826214643.122728-2-daniel.barboza@oss.qualcomm.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260826214643.122728-1-daniel.barboza@oss.qualcomm.com>
 References: <20260826214643.122728-1-daniel.barboza@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: DAORzXe3tOJB8dcIWvgc9uk3Pnd-gWGC
-X-Proofpoint-ORIG-GUID: DAORzXe3tOJB8dcIWvgc9uk3Pnd-gWGC
-X-Authority-Analysis: v=2.4 cv=DsRmPm/+ c=1 sm=1 tr=0 ts=6a8f5eeb cx=c_pps
- a=UgVkIMxJMSkC9lv97toC5g==:117 a=MCIxunHWmQOg/5OnbzXZaw==:17
+X-Authority-Analysis: v=2.4 cv=EMA2FVZC c=1 sm=1 tr=0 ts=6a8f5ed0 cx=c_pps
+ a=7E5Bxpl4vBhpaufnMqZlrw==:117 a=MCIxunHWmQOg/5OnbzXZaw==:17
  a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
- a=EUspDBNiAAAA:8 a=Faol744VrePhJRHcD5sA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=1HOtulTD9v-eNWfpl4qZ:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI2MDE4MyBTYWx0ZWRfX9U/+4HB4TIL9
- EQ+sGgUZCJH18LaiCFOVQ80C8Nelcm7I659eOaJZ8EmmLamlY6BAqZ1FM94JiWJejWuqVa0f0Fi
- RvQIdvg34x30+lYkxPdDV62Trjunwhggen+T73ZEHOjtKMCU2+Fzp/k5R++1kDiN5hU+tRIaKyu
- KGS3Frq4ut6AqxfKlUjZvI7SAezhPhXhldqa4KieMxcAAMgu4Dl+pPwdIYm63FQmOw/kTKVKadE
- QBUvmA44l1vMlRbjJgwu6r5yp9HFl5Ef342szDReXBJEWJxYdbEcj1YbSCXi8xiDLzRbnWFabyP
- ip6IFT4kcBVLqZtVnUf317LX93GINRcZQebPpyyF+/klOqlTAxT/d6ZcNcuXOzCe548fosyrqsq
- GbDn8BGmkZ7pMiJBlKSJRVRYVdrdWa4OBRa3ACbuLp9eCAdEOQDdCmIyV3WPC0vzyxwy5HLlqvM
- hvfz5UaWz9WZz1ZWk3g==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODI2MDE4MyBTYWx0ZWRfXzLpO6f6ntet6
- ESbnc3mDLzsZW+hT748RdBJu9V3LdKEKmGQZwyZ3iW+GR8gtH16VDBAiLUgE/2Omy0wN4uT6hwL
- JKPSp1H1E2UULvSvaHE2B9t3arZkL40=
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
+ a=EUspDBNiAAAA:8 a=SG9m4Rbq3iqSK_q1YnQA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=pJ04lnu7RYOZP9TFuWaZ:22
+X-Proofpoint-ORIG-GUID: 65hffJwMRgGqCJWl7xRtGmIDTPQk_oK_
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI2MDE4MyBTYWx0ZWRfXwJxZq1p2Dxis
+ 8BWZS5ViNSVX6orQi+bEUGMhqxi+8xWbiV4FXUU8PxMD6MA0kImrwKiQTBBdhnkj8ICVnlIalFq
+ TfxtTo1FdB0lzMN5a1oW+irX9UJuqOVjgeDHuS/HecYYdUQVi+Kq/itnaFi10cG3AklVSdlCK02
+ RkRr4v4xW/L4d2nnLHWqwOFrtcEQdUMVqUyBDvyM/LsMNIb6U1NnisGEfg8zP7KSkeBqmBpZf1Q
+ qVSBjay2ywyaVJBIbKNYNnxB84ujsR9Dl+uW2lqKWzfaMl+pLKVoZqvzWVPocd/3DSgU6/Lmt6x
+ piDpPYxMsjgZ6M8wWg+Sfk6SoQpSOp7zjWxmimi2Hd3bp3z1bhxdCBFlKLtUc5DHdOf3rGm8/CR
+ Mn0pto2stKG4CNraOeaYJXkIuCRbpVkQuIfA5ZuzZj0Ncff3pqCBwNpwrp5JUec5HrypK76kFqy
+ 9glxIHyxNW+mLrJWo+w==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODI2MDE4MyBTYWx0ZWRfX6edUEKml4IxP
+ yH5ZBYSX4qLNoRTLtSntKA0kZ/e4C6iKRDMqzPsA1Z0GmeUDSOQMLv/iddnQllRvhaaEYBHJAyY
+ ABjBkbWIsrKpXyZWR7qgeddTP0hVXVM=
+X-Proofpoint-GUID: 65hffJwMRgGqCJWl7xRtGmIDTPQk_oK_
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-26_06,2026-08-26_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 lowpriorityscore=0 impostorscore=0 bulkscore=0 malwarescore=0
- clxscore=1015 priorityscore=1501 phishscore=0 adultscore=0 spamscore=0
+ impostorscore=0 lowpriorityscore=0 spamscore=0 adultscore=0 malwarescore=0
+ clxscore=1015 phishscore=0 priorityscore=1501 suspectscore=0 bulkscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608260183
 Received-SPF: pass client-ip=205.220.180.131;
@@ -154,178 +158,446 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Move the flash device creating and flash map initialization to
-device-common.c.
+Given that the helpers are public API we should prefix them with
+"riscv_" to avoid conflicts when linking with different targets in the
+future, i.e. we should not use generic names like
+"create_fdt_socket_memory".
 
+Despite the amount of lines this is a mechanical change and no real
+FDT changes are intended.
+
+Suggested-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
 Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
 ---
- hw/riscv/device-common.c         | 44 ++++++++++++++++++++++++
- hw/riscv/virt.c                  | 57 +++++---------------------------
- include/hw/riscv/device-common.h |  6 ++++
- 3 files changed, 58 insertions(+), 49 deletions(-)
+ hw/riscv/fdt-common.c         | 45 ++++++++++++++++----------------
+ hw/riscv/sifive_u.c           | 34 +++++++++++++------------
+ hw/riscv/spike.c              | 30 ++++++++++++----------
+ hw/riscv/tt_atlantis.c        | 22 ++++++++--------
+ hw/riscv/virt.c               | 42 +++++++++++++++---------------
+ include/hw/riscv/fdt-common.h | 48 ++++++++++++++++++-----------------
+ 6 files changed, 117 insertions(+), 104 deletions(-)
 
-diff --git a/hw/riscv/device-common.c b/hw/riscv/device-common.c
-index d3c68a9e71..a054cd7114 100644
---- a/hw/riscv/device-common.c
-+++ b/hw/riscv/device-common.c
-@@ -10,11 +10,13 @@
+diff --git a/hw/riscv/fdt-common.c b/hw/riscv/fdt-common.c
+index aa143a618b..3a8da03cfb 100644
+--- a/hw/riscv/fdt-common.c
++++ b/hw/riscv/fdt-common.c
+@@ -14,8 +14,8 @@
+ #include "hw/riscv/fdt-common.h"
+ #include "target/riscv/cpu_bits.h"
  
- #include "hw/riscv/device-common.h"
+-void *create_board_device_tree(const char *model, const char *compatible,
+-                               int *fdt_size)
++void *riscv_create_board_device_tree(const char *model, const char *compatible,
++                                     int *fdt_size)
+ {
+     void *fdt = create_device_tree(fdt_size);
  
-+#include "hw/block/flash.h"
- #include "hw/core/platform-bus.h"
- #include "hw/core/qdev.h"
- #include "hw/core/qdev-properties.h"
- #include "hw/core/sysbus.h"
- #include "qapi/error.h"
-+#include "qom/object.h"
- #include "system/address-spaces.h"
- #include "system/memory.h"
- 
-@@ -46,3 +48,45 @@ DeviceState *riscv_create_platform_bus(DeviceState *irqchip,
- 
-     return dev;
+@@ -38,8 +38,8 @@ void *create_board_device_tree(const char *model, const char *compatible,
+     return fdt;
  }
-+
-+PFlashCFI01 *riscv_flash_create(Object *parent, const char *name,
-+                                const char *alias_prop_name,
-+                                int flash_sector_size)
-+{
-+    /*
-+     * Create a single flash device.  We use the same parameters as
-+     * the flash devices on the ARM virt board.
-+     */
-+    DeviceState *dev = qdev_new(TYPE_PFLASH_CFI01);
-+
-+    qdev_prop_set_uint64(dev, "sector-length", flash_sector_size);
-+    qdev_prop_set_uint8(dev, "width", 4);
-+    qdev_prop_set_uint8(dev, "device-width", 2);
-+    qdev_prop_set_bit(dev, "big-endian", false);
-+    qdev_prop_set_uint16(dev, "id0", 0x89);
-+    qdev_prop_set_uint16(dev, "id1", 0x18);
-+    qdev_prop_set_uint16(dev, "id2", 0x00);
-+    qdev_prop_set_uint16(dev, "id3", 0x00);
-+    qdev_prop_set_string(dev, "name", name);
-+
-+    object_property_add_child(parent, name, OBJECT(dev));
-+    object_property_add_alias(parent, alias_prop_name,
-+                              OBJECT(dev), "drive");
-+
-+    return PFLASH_CFI01(dev);
-+}
-+
-+void riscv_init_flash_map(PFlashCFI01 *flash, hwaddr base, hwaddr size,
-+                          MemoryRegion *sysmem, int flash_sector_size)
-+{
-+    DeviceState *dev = DEVICE(flash);
-+
-+    assert(QEMU_IS_ALIGNED(size, flash_sector_size));
-+    assert(size / flash_sector_size <= UINT32_MAX);
-+
-+    qdev_prop_set_uint32(dev, "num-blocks", size / flash_sector_size);
-+    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-+
-+    memory_region_add_subregion(sysmem, base,
-+                            sysbus_mmio_get_region(SYS_BUS_DEVICE(dev), 0));
-+}
+ 
+-void create_fdt_socket_memory(void *fdt, hwaddr addr, uint64_t size,
+-                              int socket_id, bool numa_enabled)
++void riscv_create_fdt_socket_memory(void *fdt, hwaddr addr, uint64_t size,
++                                    int socket_id, bool numa_enabled)
+ {
+     g_autofree char *mem_name = g_strdup_printf("/memory@%"HWADDR_PRIx, addr);
+ 
+@@ -52,9 +52,9 @@ void create_fdt_socket_memory(void *fdt, hwaddr addr, uint64_t size,
+     }
+ }
+ 
+-void create_fdt_socket_clint(void *fdt, hwaddr addr, uint64_t size,
+-                             int socket_id, uint32_t *intc_phandles,
+-                             int num_harts, bool numa_enabled)
++void riscv_create_fdt_socket_clint(void *fdt, hwaddr addr, uint64_t size,
++                                   int socket_id, uint32_t *intc_phandles,
++                                   int num_harts, bool numa_enabled)
+ {
+     g_autofree uint32_t *clint_cells = g_new0(uint32_t, num_harts * 4);
+     g_autofree char *clint_name = NULL;
+@@ -84,7 +84,8 @@ void create_fdt_socket_clint(void *fdt, hwaddr addr, uint64_t size,
+     }
+ }
+ 
+-void fdt_create_cpu_socket_subnode(void *fdt, uint64_t timebase_frequency)
++void riscv_fdt_create_cpu_socket_subnode(void *fdt,
++                                         uint64_t timebase_frequency)
+ {
+     qemu_fdt_add_subnode(fdt, "/cpus");
+     qemu_fdt_setprop_cell(fdt, "/cpus", "timebase-frequency",
+@@ -169,11 +170,11 @@ create_fdt_socket_cpu_internal(void *fdt, char *clust_name, RISCVCPU *cpu_ptr,
+     qemu_fdt_setprop_cell(fdt, core_name, "cpu", cpu_phandle);
+ }
+ 
+-void create_fdt_socket_cpus(void *fdt, RISCVCPU *socket_harts,
+-                            int socket_id, int num_harts_socket,
+-                            int socket_hartid_base, uint32_t *phandle,
+-                            uint32_t *intc_phandles, bool numa_enabled,
+-                            bool is_32_bit)
++void riscv_create_fdt_socket_cpus(void *fdt, RISCVCPU *socket_harts,
++                                  int socket_id, int num_harts_socket,
++                                  int socket_hartid_base, uint32_t *phandle,
++                                  uint32_t *intc_phandles, bool numa_enabled,
++                                  bool is_32_bit)
+ {
+     g_autofree char *clust_name = NULL;
+ 
+@@ -191,21 +192,21 @@ void create_fdt_socket_cpus(void *fdt, RISCVCPU *socket_harts,
+ }
+ 
+ void
+-create_fdt_socket_cpu_sifive(void *fdt, char *clust_name,
+-                             int cpu_id, int socket_id,
+-                             int socket_hartid_base, uint32_t *phandle,
+-                             uint32_t *intc_phandles)
++riscv_create_fdt_socket_cpu_sifive(void *fdt, char *clust_name,
++                                   int cpu_id, int socket_id,
++                                   int socket_hartid_base, uint32_t *phandle,
++                                   uint32_t *intc_phandles)
+ {
+     create_fdt_socket_cpu_internal(fdt, clust_name, NULL, cpu_id,
+                                    socket_id, socket_hartid_base,
+                                    phandle, intc_phandles, false, false);
+ }
+ 
+-void create_fdt_plic(void *fdt, hwaddr addr, uint64_t size,
+-                     uint32_t plic_phandle, uint32_t int_cells,
+-                     uint32_t addr_cells, uint32_t *plic_cells,
+-                     uint32_t cells_size, uint32_t ndev_sources,
+-                     bool numa_enabled, int socket_id)
++void riscv_create_fdt_plic(void *fdt, hwaddr addr, uint64_t size,
++                           uint32_t plic_phandle, uint32_t int_cells,
++                           uint32_t addr_cells, uint32_t *plic_cells,
++                           uint32_t cells_size, uint32_t ndev_sources,
++                           bool numa_enabled, int socket_id)
+ {
+     g_autofree char *nodename = NULL;
+     static const char * const plic_compat[2] = {
+diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+index 57a57c96e1..852c48c056 100644
+--- a/hw/riscv/sifive_u.c
++++ b/hw/riscv/sifive_u.c
+@@ -108,8 +108,10 @@ static void create_fdt(SiFiveUState *s, const MemMapEntry *memmap,
+     g_autofree uint32_t *intc_phandles = g_new0(uint32_t, ms->smp.cpus);
+     g_autofree char *clust_name = NULL;
+ 
+-    fdt = ms->fdt = create_board_device_tree("SiFive HiFive Unleashed A00",
+-        "sifive,hifive-unleashed-a00", &s->fdt_size);
++    fdt = ms->fdt = riscv_create_board_device_tree(
++        "SiFive HiFive Unleashed A00",
++        "sifive,hifive-unleashed-a00",
++        &s->fdt_size);
+ 
+     hfclk_phandle = phandle++;
+     nodename = g_strdup_printf("/hfclk");
+@@ -133,10 +135,10 @@ static void create_fdt(SiFiveUState *s, const MemMapEntry *memmap,
+     qemu_fdt_setprop_cell(fdt, nodename, "#clock-cells", 0x0);
+     g_free(nodename);
+ 
+-    create_fdt_socket_memory(fdt, memmap[SIFIVE_U_DEV_DRAM].base,
+-                             ms->ram_size, 0, false);
++    riscv_create_fdt_socket_memory(fdt, memmap[SIFIVE_U_DEV_DRAM].base,
++                                   ms->ram_size, 0, false);
+ 
+-    fdt_create_cpu_socket_subnode(fdt, CLINT_TIMEBASE_FREQ);
++    riscv_fdt_create_cpu_socket_subnode(fdt, CLINT_TIMEBASE_FREQ);
+ 
+     clust_name = g_strdup_printf("/cpus/cpu-map/cluster%d", 0);
+     qemu_fdt_add_subnode(fdt, clust_name);
+@@ -157,15 +159,15 @@ static void create_fdt(SiFiveUState *s, const MemMapEntry *memmap,
+             riscv_isa_write_fdt(&s->soc.e_cpus.harts[0], fdt, nodename);
+         }
+ 
+-        create_fdt_socket_cpu_sifive(fdt, clust_name, cpu, 0, 0,
+-                                     &phandle, intc_phandles);
++        riscv_create_fdt_socket_cpu_sifive(fdt, clust_name, cpu, 0, 0,
++                                           &phandle, intc_phandles);
+ 
+         g_free(nodename);
+     }
+ 
+-    create_fdt_socket_clint(fdt, memmap[SIFIVE_U_DEV_CLINT].base,
+-                            memmap[SIFIVE_U_DEV_CLINT].size, 0,
+-                            intc_phandles, ms->smp.cpus, false);
++    riscv_create_fdt_socket_clint(fdt, memmap[SIFIVE_U_DEV_CLINT].base,
++                                  memmap[SIFIVE_U_DEV_CLINT].size, 0,
++                                  intc_phandles, ms->smp.cpus, false);
+ 
+     nodename = g_strdup_printf("/soc/otp@%lx",
+         (long)memmap[SIFIVE_U_DEV_OTP].base);
+@@ -209,12 +211,12 @@ static void create_fdt(SiFiveUState *s, const MemMapEntry *memmap,
+         }
+     }
+ 
+-    create_fdt_plic(fdt, memmap[SIFIVE_U_DEV_PLIC].base,
+-                    memmap[SIFIVE_U_DEV_PLIC].size,
+-                    plic_phandle, SIFIVE_U_PLIC_INT_CELLS,
+-                    SIFIVE_U_PLIC_ADDR_CELLS, cells,
+-                    cells_length * sizeof(uint32_t),
+-                    SIFIVE_U_PLIC_NUM_SOURCES - 1, false, 0);
++    riscv_create_fdt_plic(fdt, memmap[SIFIVE_U_DEV_PLIC].base,
++                          memmap[SIFIVE_U_DEV_PLIC].size,
++                          plic_phandle, SIFIVE_U_PLIC_INT_CELLS,
++                          SIFIVE_U_PLIC_ADDR_CELLS, cells,
++                          cells_length * sizeof(uint32_t),
++                          SIFIVE_U_PLIC_NUM_SOURCES - 1, false, 0);
+     g_free(cells);
+ 
+     gpio_phandle = phandle++;
+diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
+index 630b65f569..8d7e93807c 100644
+--- a/hw/riscv/spike.c
++++ b/hw/riscv/spike.c
+@@ -61,8 +61,10 @@ static void create_fdt(SpikeState *s, const MemMapEntry *memmap,
+     uint32_t phandle = 1;
+     bool numa_enabled = riscv_numa_enabled(ms);
+ 
+-    fdt = ms->fdt = create_board_device_tree("ucbbar,spike-bare,qemu",
+-        "ucbbar,spike-bare-dev", &fdt_size);
++    fdt = ms->fdt = riscv_create_board_device_tree(
++        "ucbbar,spike-bare,qemu",
++        "ucbbar,spike-bare-dev",
++        &fdt_size);
+ 
+     qemu_fdt_add_subnode(fdt, "/htif");
+     qemu_fdt_setprop_string(fdt, "/htif", "compatible", "ucb,htif0");
+@@ -71,7 +73,8 @@ static void create_fdt(SpikeState *s, const MemMapEntry *memmap,
+             0x0, memmap[SPIKE_HTIF].base, 0x0, memmap[SPIKE_HTIF].size);
+     }
+ 
+-    fdt_create_cpu_socket_subnode(fdt, RISCV_ACLINT_DEFAULT_TIMEBASE_FREQ);
++    riscv_fdt_create_cpu_socket_subnode(fdt,
++                                        RISCV_ACLINT_DEFAULT_TIMEBASE_FREQ);
+ 
+     for (socket = (riscv_socket_count(ms) - 1); socket >= 0; socket--) {
+         g_autofree uint32_t *intc_phandles = g_new0(uint32_t,
+@@ -80,20 +83,21 @@ static void create_fdt(SpikeState *s, const MemMapEntry *memmap,
+                          riscv_socket_mem_offset(ms, socket);
+         uint64_t memsize =  riscv_socket_mem_size(ms, socket);
+ 
+-        create_fdt_socket_cpus(fdt, (&s->soc[socket])->harts, socket,
+-                               s->soc[socket].num_harts,
+-                               s->soc[socket].hartid_base,
+-                               &phandle, intc_phandles, numa_enabled,
+-                               is_32_bit);
++        riscv_create_fdt_socket_cpus(fdt, (&s->soc[socket])->harts, socket,
++                                     s->soc[socket].num_harts,
++                                     s->soc[socket].hartid_base,
++                                     &phandle, intc_phandles, numa_enabled,
++                                     is_32_bit);
+ 
+-        create_fdt_socket_memory(fdt, memaddr, memsize, socket,
+-                                 riscv_numa_enabled(ms));
++        riscv_create_fdt_socket_memory(fdt, memaddr, memsize, socket,
++                                       riscv_numa_enabled(ms));
+ 
+         clint_addr = memmap[SPIKE_CLINT].base +
+             (memmap[SPIKE_CLINT].size * socket);
+-        create_fdt_socket_clint(fdt, clint_addr, memmap[SPIKE_CLINT].size,
+-                                socket, intc_phandles,
+-                                s->soc[socket].num_harts, numa_enabled);
++        riscv_create_fdt_socket_clint(fdt, clint_addr,
++                                      memmap[SPIKE_CLINT].size, socket,
++                                      intc_phandles, s->soc[socket].num_harts,
++                                      numa_enabled);
+     }
+ 
+     riscv_socket_fdt_write_distance_matrix(ms);
+diff --git a/hw/riscv/tt_atlantis.c b/hw/riscv/tt_atlantis.c
+index d808bcc11c..6a2c57bb13 100644
+--- a/hw/riscv/tt_atlantis.c
++++ b/hw/riscv/tt_atlantis.c
+@@ -87,16 +87,17 @@ static void create_fdt_memory(TTAtlantisState *s)
+         size_hi = MACHINE(s)->ram_size - size_lo;
+     }
+ 
+-    create_fdt_socket_memory(fdt, s->memmap[TT_ATL_DDR_LO].base, size_lo,
+-                             0, false);
++    riscv_create_fdt_socket_memory(fdt, s->memmap[TT_ATL_DDR_LO].base,
++                                   size_lo, 0, false);
+     if (size_hi) {
+         /*
+          * The first part of the HI address is aliased at the LO address
+          * so do not include that as usable memory. Is there any way
+          * (or good reason) to describe that aliasing 2GB with DT?
+          */
+-        create_fdt_socket_memory(fdt, s->memmap[TT_ATL_DDR_HI].base + size_lo,
+-                                 size_hi, 0, false);
++        riscv_create_fdt_socket_memory(fdt,
++                                       s->memmap[TT_ATL_DDR_HI].base + size_lo,
++                                       size_hi, 0, false);
+     }
+ }
+ 
+@@ -221,11 +222,11 @@ static void create_fdt_cpu(TTAtlantisState *s, const MemMapEntry *memmap,
+     void *fdt = MACHINE(s)->fdt;
+     g_autofree uint32_t *intc_phandles = g_new0(uint32_t, ms->smp.cpus);
+ 
+-    fdt_create_cpu_socket_subnode(fdt, TT_ACLINT_TIMEBASE_FREQ);
++    riscv_fdt_create_cpu_socket_subnode(fdt, TT_ACLINT_TIMEBASE_FREQ);
+ 
+-    create_fdt_socket_cpus(fdt, s->soc.harts, 0, s->soc.num_harts,
+-                           s->soc.hartid_base, &fdt_phandle, intc_phandles,
+-                           false, false);
++    riscv_create_fdt_socket_cpus(fdt, s->soc.harts, 0, s->soc.num_harts,
++                                 s->soc.hartid_base, &fdt_phandle,
++                                 intc_phandles, false, false);
+ 
+     create_fdt_memory(s);
+ 
+@@ -364,8 +365,9 @@ static void create_fdt(TTAtlantisState *s)
+ {
+     MachineState *ms = MACHINE(s);
+ 
+-    ms->fdt = create_board_device_tree("Tenstorrent Atlantis RISC-V Machine",
+-                                       "tenstorrent,atlantis", &s->fdt_size);
++    ms->fdt = riscv_create_board_device_tree(
++        "Tenstorrent Atlantis RISC-V Machine",
++        "tenstorrent,atlantis", &s->fdt_size);
+ 
+     qemu_fdt_add_subnode(ms->fdt, "/chosen");
+ 
 diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 8ffe8ae538..b033c19fee 100644
+index d58656f70d..db0f7ecb81 100644
 --- a/hw/riscv/virt.c
 +++ b/hw/riscv/virt.c
-@@ -120,53 +120,12 @@ static MemMapEntry virt_high_pcie_memmap;
+@@ -360,12 +360,12 @@ static void create_fdt_socket_plic(RISCVVirtState *s,
  
- #define VIRT_FLASH_SECTOR_SIZE (256 * KiB)
+     plic_phandles[socket] = (*phandle)++;
  
--static PFlashCFI01 *virt_flash_create1(RISCVVirtState *s,
--                                       const char *name,
--                                       const char *alias_prop_name)
--{
--    /*
--     * Create a single flash device.  We use the same parameters as
--     * the flash devices on the ARM virt board.
--     */
--    DeviceState *dev = qdev_new(TYPE_PFLASH_CFI01);
--
--    qdev_prop_set_uint64(dev, "sector-length", VIRT_FLASH_SECTOR_SIZE);
--    qdev_prop_set_uint8(dev, "width", 4);
--    qdev_prop_set_uint8(dev, "device-width", 2);
--    qdev_prop_set_bit(dev, "big-endian", false);
--    qdev_prop_set_uint16(dev, "id0", 0x89);
--    qdev_prop_set_uint16(dev, "id1", 0x18);
--    qdev_prop_set_uint16(dev, "id2", 0x00);
--    qdev_prop_set_uint16(dev, "id3", 0x00);
--    qdev_prop_set_string(dev, "name", name);
--
--    object_property_add_child(OBJECT(s), name, OBJECT(dev));
--    object_property_add_alias(OBJECT(s), alias_prop_name,
--                              OBJECT(dev), "drive");
--
--    return PFLASH_CFI01(dev);
--}
--
- static void virt_flash_create(RISCVVirtState *s)
- {
--    s->flash[0] = virt_flash_create1(s, "virt.flash0", "pflash0");
--    s->flash[1] = virt_flash_create1(s, "virt.flash1", "pflash1");
--}
--
--static void virt_flash_map1(PFlashCFI01 *flash,
--                            hwaddr base, hwaddr size,
--                            MemoryRegion *sysmem)
--{
--    DeviceState *dev = DEVICE(flash);
--
--    assert(QEMU_IS_ALIGNED(size, VIRT_FLASH_SECTOR_SIZE));
--    assert(size / VIRT_FLASH_SECTOR_SIZE <= UINT32_MAX);
--    qdev_prop_set_uint32(dev, "num-blocks", size / VIRT_FLASH_SECTOR_SIZE);
--    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
--
--    memory_region_add_subregion(sysmem, base,
--                                sysbus_mmio_get_region(SYS_BUS_DEVICE(dev),
--                                                       0));
-+    s->flash[0] = riscv_flash_create(OBJECT(s), "virt.flash0", "pflash0",
-+                                     VIRT_FLASH_SECTOR_SIZE);
-+    s->flash[1] = riscv_flash_create(OBJECT(s), "virt.flash1", "pflash1",
-+                                     VIRT_FLASH_SECTOR_SIZE);
- }
+-    create_fdt_plic(ms->fdt, plic_addr, s->memmap[VIRT_PLIC].size,
+-                    plic_phandles[socket], FDT_PLIC_INT_CELLS,
+-                    FDT_PLIC_ADDR_CELLS, plic_cells,
+-                    cells_length * sizeof(uint32_t),
+-                    VIRT_IRQCHIP_NUM_SOURCES - 1,
+-                    numa_enabled, socket);
++    riscv_create_fdt_plic(ms->fdt, plic_addr, s->memmap[VIRT_PLIC].size,
++                          plic_phandles[socket], FDT_PLIC_INT_CELLS,
++                          FDT_PLIC_ADDR_CELLS, plic_cells,
++                          cells_length * sizeof(uint32_t),
++                          VIRT_IRQCHIP_NUM_SOURCES - 1,
++                          numa_enabled, socket);
  
- static void virt_flash_map(RISCVVirtState *s,
-@@ -175,10 +134,10 @@ static void virt_flash_map(RISCVVirtState *s,
-     hwaddr flashsize = s->memmap[VIRT_FLASH].size / 2;
-     hwaddr flashbase = s->memmap[VIRT_FLASH].base;
+     if (!socket) {
+         platform_bus_add_all_fdt_nodes(ms->fdt, plic_name,
+@@ -600,7 +600,7 @@ static void create_fdt_sockets(RISCVVirtState *s,
+     bool numa_enabled = riscv_numa_enabled(ms);
+     bool is_32_bit = riscv_is_32bit(&s->soc[0]);
  
--    virt_flash_map1(s->flash[0], flashbase, flashsize,
--                    sysmem);
--    virt_flash_map1(s->flash[1], flashbase + flashsize, flashsize,
--                    sysmem);
-+    riscv_init_flash_map(s->flash[0], flashbase, flashsize,
-+                         sysmem, VIRT_FLASH_SECTOR_SIZE);
-+    riscv_init_flash_map(s->flash[1], flashbase + flashsize, flashsize,
-+                         sysmem, VIRT_FLASH_SECTOR_SIZE);
- }
+-    fdt_create_cpu_socket_subnode(ms->fdt,
++    riscv_fdt_create_cpu_socket_subnode(ms->fdt,
+         kvm_enabled() ? kvm_riscv_get_timebase_frequency(&s->soc->harts[0]) :
+                         RISCV_ACLINT_DEFAULT_TIMEBASE_FREQ);
  
- static void create_fdt_socket_plic(RISCVVirtState *s,
-diff --git a/include/hw/riscv/device-common.h b/include/hw/riscv/device-common.h
-index 12af031bbf..9f8bc67a1d 100644
---- a/include/hw/riscv/device-common.h
-+++ b/include/hw/riscv/device-common.h
-@@ -10,10 +10,16 @@
- #define RISCV_DEVICE_COMMON_H
+@@ -614,14 +614,14 @@ static void create_fdt_sockets(RISCVVirtState *s,
  
- #include "exec/hwaddr.h"
-+#include "hw/block/flash.h"
- #include "hw/core/qdev.h"
+         phandle_pos -= s->soc[socket].num_harts;
  
- DeviceState *riscv_create_platform_bus(DeviceState *irqchip,
-                                        const MemMapEntry *platform_bus_mem,
-                                        int platform_bus_base_irq,
-                                        int platform_bus_num_irqs);
-+PFlashCFI01 *riscv_flash_create(Object *parent, const char *name,
-+                                const char *alias_prop_name,
-+                                int flash_sector_size);
-+void riscv_init_flash_map(PFlashCFI01 *flash, hwaddr base, hwaddr size,
-+                          MemoryRegion *sysmem, int flash_sector_size);
+-        create_fdt_socket_cpus(ms->fdt, (&s->soc[socket])->harts, socket,
+-                               s->soc[socket].num_harts,
+-                               s->soc[socket].hartid_base,
+-                               phandle, &intc_phandles[phandle_pos],
+-                               numa_enabled, is_32_bit);
++        riscv_create_fdt_socket_cpus(ms->fdt, (&s->soc[socket])->harts, socket,
++                                     s->soc[socket].num_harts,
++                                     s->soc[socket].hartid_base,
++                                     phandle, &intc_phandles[phandle_pos],
++                                     numa_enabled, is_32_bit);
+ 
+-        create_fdt_socket_memory(ms->fdt, memaddr, memsize,
+-                                 socket, riscv_numa_enabled(ms));
++        riscv_create_fdt_socket_memory(ms->fdt, memaddr, memsize,
++                                       socket, riscv_numa_enabled(ms));
+ 
+         if (virt_aclint_allowed() && s->have_aclint) {
+             create_fdt_socket_aclint(s, socket,
+@@ -630,10 +630,11 @@ static void create_fdt_sockets(RISCVVirtState *s,
+             hwaddr clintaddr = s->memmap[VIRT_CLINT].base +
+                                s->memmap[VIRT_CLINT].size * socket;
+ 
+-            create_fdt_socket_clint(ms->fdt, clintaddr,
+-                                    s->memmap[VIRT_CLINT].size,
+-                                    socket, &intc_phandles[phandle_pos],
+-                                    s->soc[socket].num_harts, numa_enabled);
++            riscv_create_fdt_socket_clint(ms->fdt, clintaddr,
++                                          s->memmap[VIRT_CLINT].size,
++                                          socket, &intc_phandles[phandle_pos],
++                                          s->soc[socket].num_harts,
++                                          numa_enabled);
+         }
+     }
+ 
+@@ -1020,8 +1021,9 @@ static void create_fdt(RISCVVirtState *s)
+     uint8_t rng_seed[32];
+     g_autofree char *name = NULL;
+ 
+-    ms->fdt = create_board_device_tree("riscv-virtio,qemu", "riscv-virtio",
+-                                       &s->fdt_size);
++    ms->fdt = riscv_create_board_device_tree("riscv-virtio,qemu",
++                                             "riscv-virtio",
++                                             &s->fdt_size);
+ 
+     /*
+      * The "/soc/pci@..." node is needed for PCIE hotplugs
+diff --git a/include/hw/riscv/fdt-common.h b/include/hw/riscv/fdt-common.h
+index 1729a6abc6..371971d79d 100644
+--- a/include/hw/riscv/fdt-common.h
++++ b/include/hw/riscv/fdt-common.h
+@@ -11,29 +11,31 @@
+ 
+ #include "target/riscv/cpu.h"
+ 
+-void *create_board_device_tree(const char *model, const char *compatible,
+-                               int *fdt_size);
+-void create_fdt_socket_memory(void *fdt, hwaddr addr, uint64_t size,
+-                              int socket_id, bool numa_enabled);
+-void create_fdt_clint(void *fdt, hwaddr addr, uint64_t size,
+-                      uint32_t *intc_phandles, int num_harts);
+-void create_fdt_socket_clint(void *fdt, hwaddr addr, uint64_t size,
+-                             int socket_id, uint32_t *intc_phandles,
+-                             int num_harts, bool numa_enabled);
+-void fdt_create_cpu_socket_subnode(void *fdt, uint64_t timebase_frequency);
+-void create_fdt_socket_cpus(void *fdt, RISCVCPU *socket_harts,
+-                            int socket_id, int num_harts_socket,
+-                            int socket_hartid_base, uint32_t *phandle,
+-                            uint32_t *intc_phandles, bool numa_enabled,
+-                            bool is_32_bit);
+-void create_fdt_socket_cpu_sifive(void *fdt, char *clust_name,
+-                                  int cpu_id, int socket_id,
++void *riscv_create_board_device_tree(const char *model, const char *compatible,
++                                     int *fdt_size);
++void riscv_create_fdt_socket_memory(void *fdt, hwaddr addr, uint64_t size,
++                                    int socket_id, bool numa_enabled);
++void riscv_create_fdt_clint(void *fdt, hwaddr addr, uint64_t size,
++                            uint32_t *intc_phandles, int num_harts);
++void riscv_create_fdt_socket_clint(void *fdt, hwaddr addr, uint64_t size,
++                                   int socket_id, uint32_t *intc_phandles,
++                                   int num_harts, bool numa_enabled);
++void riscv_fdt_create_cpu_socket_subnode(void *fdt,
++                                         uint64_t timebase_frequency);
++void riscv_create_fdt_socket_cpus(void *fdt, RISCVCPU *socket_harts,
++                                  int socket_id, int num_harts_socket,
+                                   int socket_hartid_base, uint32_t *phandle,
+-                                  uint32_t *intc_phandles);
+-void create_fdt_plic(void *fdt, hwaddr addr, uint64_t size,
+-                     uint32_t plic_phandle, uint32_t int_cells,
+-                     uint32_t addr_cells, uint32_t *plic_cells,
+-                     uint32_t cells_size, uint32_t ndev_sources,
+-                     bool numa_enabled, int socket);
++                                  uint32_t *intc_phandles, bool numa_enabled,
++                                  bool is_32_bit);
++void riscv_create_fdt_socket_cpu_sifive(void *fdt, char *clust_name,
++                                        int cpu_id, int socket_id,
++                                        int socket_hartid_base,
++                                        uint32_t *phandle,
++                                        uint32_t *intc_phandles);
++void riscv_create_fdt_plic(void *fdt, hwaddr addr, uint64_t size,
++                           uint32_t plic_phandle, uint32_t int_cells,
++                           uint32_t addr_cells, uint32_t *plic_cells,
++                           uint32_t cells_size, uint32_t ndev_sources,
++                           bool numa_enabled, int socket);
+ void riscv_pmu_generate_fdt_node(void *fdt, uint32_t cmask, char *pmu_name);
  #endif
 -- 
 2.43.0
