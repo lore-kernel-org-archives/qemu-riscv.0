@@ -4,132 +4,112 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7C66C61DBD
-	for <qemu-riscv@archiver.kernel.org>; Wed, 26 Aug 2026 14:50:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1A89C61DBD
+	for <qemu-riscv@archiver.kernel.org>; Wed, 26 Aug 2026 14:54:03 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wzExJ-0001wN-Ho; Wed, 26 Aug 2026 10:50:21 -0400
+	id 1wzF0e-0003cZ-PO; Wed, 26 Aug 2026 10:53:48 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1wzExH-0001vn-VG
- for qemu-riscv@nongnu.org; Wed, 26 Aug 2026 10:50:19 -0400
-Received: from mail-ed1-x536.google.com ([2a00:1450:4864:20::536])
+ (Exim 4.90_1) (envelope-from <asrinivasan@tenstorrent.com>)
+ id 1wzF0d-0003c6-Iv
+ for qemu-riscv@nongnu.org; Wed, 26 Aug 2026 10:53:47 -0400
+Received: from mail-yw1-x112e.google.com ([2607:f8b0:4864:20::112e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1wzExF-0007Zn-9x
- for qemu-riscv@nongnu.org; Wed, 26 Aug 2026 10:50:19 -0400
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-6a5ded53570so1759174a12.3
- for <qemu-riscv@nongnu.org>; Wed, 26 Aug 2026 07:50:16 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1787755815; cv=none;
+ (Exim 4.90_1) (envelope-from <asrinivasan@tenstorrent.com>)
+ id 1wzF0b-0008AU-Or
+ for qemu-riscv@nongnu.org; Wed, 26 Aug 2026 10:53:47 -0400
+Received: by mail-yw1-x112e.google.com with SMTP id
+ 00721157ae682-8200b55dc47so15955617b3.3
+ for <qemu-riscv@nongnu.org>; Wed, 26 Aug 2026 07:53:44 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1787756024; cv=none;
  d=google.com; s=arc-20260327;
- b=YPsS5cTGgKc2uvUbuhtdUUdSxSGR5L3nJIDetT2Eb4IJiFO87cuGt/5hCxwY32UN4J
- d1wGbnJS0kHcUGAhKLzACHSXotqNpRXrcGNzb5xAsPSzSjpKw0qG0obSPQFglizSpjI/
- MdkPe6pDF85ZMWwIAgOTcQI0ZrK9vTCUtut5tXhSW6KTUIK3U8Cb8h5+BhiSb50OI3pR
- gHfyNmsRUT6/fxRS4+d/hSG0LcbkBC2M0UYdqwWOrUe//3Kf0v7ecrO0cgOKB2/d1WZC
- cRxFU4WFpylXzLUsbqUsOC4+o9fWio4v1UaixaSlb4xcMUgJVRbRw9atkG5bFOA4lcfj
- rgBg==
+ b=gEGQmj7l6HHMPpFhFhfB1jDF468NAitpVfQtnb5MqsjGgMvC5N0a0jlaG113v2mhxq
+ 5p5YudVc6LgIWvriKHbm2C10sNMfg2/oo7h2CmDo5TeIxm2Y6zxJC3hloXoyt5SSE9gm
+ ChTF54W4/3i39jWhFnlVp63wR+SbshyQKJaXoFyaA65k014dfo+IgY2Oyl7pCQKDJvMQ
+ zF7ZsggJHV56zjdyCFrBe7WVnLoIHh7hYQNCtuD9oU302rMKr4f3aT/ydStVVq+s+dCy
+ 9mRV4jZEFEbs/544TVJ7SdcIWlcY81rbdhtuMtPwEFfoGsgPx4yB2To9/Bqk1mBJpZ7w
+ Z9pQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:reply-to:in-reply-to:references
- :mime-version:dkim-signature;
- bh=jhXEmhxBTNPgEuERuoabZDXRBbWJgledSUYNexn8Ch0=;
- fh=6IAEOad7dtw+4AnYOyvLW83CgjRXsO4s2QOq5NY43GI=;
- b=iiODf5MLb5IisIdQws0LHqlB78AA0SFQ+5Fr0tb0fntOs39rmTm8jtTbJwehMdX0Wm
- YomFosFQRqvnXosDML9SqmR1/OEBUSVRTAcGdZsPEMLRvwoBXRI4K50sGOWqlsojCQRk
- nPvcnAYS3+fWgnBQrMHCClFreSGIGuOQ7IqhRV2n6whcM6b0vwRGaI37hNM/qWNa7nx+
- fst20xwzPcBjUS2k36HkgdVB4DVYjDF4de1tJH2VZ7T43uSX8Ks/Uu8if8h9ezJMKBGE
- ouBJukvH4cr4vYrfQy5ZH1tEBEUmsbCtfeKI8Rwv5q9tvqkeq7k4Wa3F2HgjqUXRbG7c
- I6GA==; darn=nongnu.org
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=Hc16r7tXsZNKAaOX2hV1JeHhZOQ74MMgxV1jAOkO/WA=;
+ fh=v3FkjRDOstp+p2Kx9UAltc+tpcsVz49ITlTIcLetNAw=;
+ b=gODm/yh01YsQP3ltANIiidmJTiaJ2mCAw2KmgEg50rybW5I52LDZj5MTFQ6Rd3ABUY
+ fssGI7dQJ4qj3UcaK+lUpP3IPFoDa7U/nkkfqDuanp3KGCVHoGmErxgtfyZbxONczPz5
+ uTZ2ehopr2qU+wuWfdxzm+i6OUYtqa6VD51E2Ekdlbq1YhngsqbnbRNfvI7JXEoaIpMj
+ DmcBy39Ey6PRzTAySunmkoZaGo7bSjSFEFpiQgBPFxg5BBdL2ilyr8fxi/AwA+XX6QPa
+ U11uvnLHZiENxxBofg/Hf2znan1V6QJ2hFZkWgcazzSFmdWOz5hwYYNcy6NQrcn9x2yY
+ +rrA==; darn=nongnu.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1787755815; x=1788360615; darn=nongnu.org;
- h=content-type:cc:to:subject:message-id:date:from:reply-to
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=jhXEmhxBTNPgEuERuoabZDXRBbWJgledSUYNexn8Ch0=;
- b=pgfVxEb7neX5ETPgqZ6AFDoNlMdP72NpYJlQlU7ECJqua+RdRxrofvo9/d/vDf8EcL
- HS43obPxC64BeeKGTiaUEWFX7XxzADENVJy9VhTJYO35vv6NKCVhPq+PrSh96+9Mej6T
- XFvNVpMEvIXd/W7K14aJj7ll+Pm1cSsdEdqz2OA3rfW7tBrD987eKCQRv7LLoECHRdVh
- WX6nU4megugAh46l7uP2sttT+HSJJoyV9F3K/q5TEgu9eEL5OZtvbNeTqMzloDNhi6RK
- 74D+/3DP1/Ze2TFmvtr83kCg69YjZxPkawsIxV/CbrlHf2sYptyXP1MmzeTrpTTgqSv1
- 2KCA==
+ d=tenstorrent.com; s=google; t=1787756024; x=1788360824; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=Hc16r7tXsZNKAaOX2hV1JeHhZOQ74MMgxV1jAOkO/WA=;
+ b=B0ZbnTEX7jIYTJv57s2JU5CZhAv4q5EJ4fPdENQEq8P2jCsAX1O8xUG/TN8QXUPd/t
+ oNwai7e1HaYz6pTHsSVKOwNSpB8C0zfHX0POo1jwdZiyWs97rRFkzUkSzkMvzwF+oxkJ
+ VE5Pvg2Rk9aRknqb+ZWDGOTqcnF/j7jw6ipF0KkI1aHWrlDYSHI8A1/S1OqePExbC6r2
+ 4IrxTj8y/4gcyS833XPr7QXpPIAKy96UoLXOZDovdu+6tlMM2PPKnzJZwwTTW6jRmX19
+ 6bi3+jApldBeia6rHaJ+pDgs++m5ZL8odW4wMpx0uUYVbG94t1u3GpC7TJP8mICYqAch
+ m0kw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787755815; x=1788360615;
- h=content-type:cc:to:subject:message-id:date:from:reply-to
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=jhXEmhxBTNPgEuERuoabZDXRBbWJgledSUYNexn8Ch0=;
- b=mRKeLtYl+r7be61JVPUbNnv4PGKKuFvP73tsmSP/xbGF7Ck7HLAxak8F9wcYxiXlK2
- EQNb8IJ2Lrusp8LWWF6NqnVawdf+pfeT+z84glN7frwMMdGHEa0yskFTTgRqtlTOIVsK
- u1bsBYzjeO6RVHsp3lMwmmggrn9r+8MwpufMG5LCGQGrMJE/KnB0DT6l01FdMPICp1xT
- 0TRNepTuHv1Ry97fQmV7rDO9cwmX4IapUrmH6xbnkok+EAuai2ymF4HMhQJDe0ww0Sv7
- uwYs1w2kSrKa6f8Xt+PYSuRZW+NdPPtiaIXNt02VHwTXKPNgbO9ctEI2/ruSIMa1ttNR
- c1rw==
+ d=1e100.net; s=20251104; t=1787756024; x=1788360824;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=Hc16r7tXsZNKAaOX2hV1JeHhZOQ74MMgxV1jAOkO/WA=;
+ b=in8mU0yr92sCiH9LUeNsvyRRgwGLJAlz5BZY+9jEskTgxk/EkTyKDBshxsZHzIdtjF
+ b92MMFvbMtQR2iPB7K1625FgnBI0KmmEDrER3vXRUJpp3FtggQoc6waYT7LsE3CHQDDT
+ DI9o2fJmFSZyVobRBFcFqcLcio99LCSE8rqeznMta4k0hpBa9uev+wRkX5eghtI9WgwH
+ FvMGko6nGB4XkTahYZt9HKVEbBosTYqXuNVLZmhOO4drMmkU04aqZd9XXeZHsj+I3tAu
+ o/vdL2R1eIsEF5fz9CppuoDDBC8evhvp7Up0WxRW7s6n8peqCL8Xz8acV/nvJQKG3udH
+ zF5g==
 X-Forwarded-Encrypted: i=1;
- AHgh+RoTn/z1S8+m8XCHWvEao3shsxvny41iH+mmnW8YmWizigjZdwPYCNVkDBR3UuSy1of2ChYAWcwA4r6V@nongnu.org
-X-Gm-Message-State: AFuF++kCW0gCs4fCB5QCrsYo7/Rx9tbwCWgmtGJ2xX3doclsV+znzfuh
- lY7eu2knW6KtNzY8eYiDl5DURrp629GnMCwMcQRX/TRtX/vaKFJ8pvtk8gw69pa2tR7Easo79cJ
- BKVW30M8/b/xQqQqV+LttZ4QQn0iSSRQ=
-X-Gm-Gg: AR+sD11d+1a3yF9OASjEGZGYKDM4hwPIkXWHTJGp/Punc75AnRizKHawFfVTnAogXcy
- m/Ic5wLf8JlnIyl7EnyHW/2viNJtoz2cJzwJQzWtergyB872QylQrkjt4ovM8kXFiczQoKj3nOV
- ZnRVsGSObzeWWRLIQNWafXNxLTM7lzJpffJ5aQIwb+brb41rqNHLrN0UZ4m5E05bfzU2TX3Mgbg
- SgAE4Zt4jwSyc3gVeewb6PjNKiVue65a0mL6r7R/BS3YuLYCHTRqHbGr4r5WpbFa/DqB0IJ0NnH
- g3A66oR63EFJ1q0piQo1DSlRTn/M28fau3SQIKynVOOl
-X-Received: by 2002:a17:907:1c84:b0:c24:bf0b:6b62 with SMTP id
- a640c23a62f3a-c250bb05c1cmr712141266b.4.1787755814408; Wed, 26 Aug 2026
- 07:50:14 -0700 (PDT)
+ AHgh+RpW+dpXUVW8OsFahF4ySzWiTOHwXIEJ6+eoIELdZOmKkYmNzSOiqw7TacvSGLf7vrTEsumGUZFUWsR6@nongnu.org
+X-Gm-Message-State: AFuF++lzeFJkW6F/awTGB0QCK+d987K40TTszzNb7g+n8MwGfeJpiVNM
+ 6LvxrcDjHmz7PnYdiPnwq1HlHoy2lLs7n8ABqD7Ui/deKDPw0QGzhpBvVeKxGcFFIVfAjbCRjiC
+ vA3x4lXfdJBggYEfTTr7QGF0zYMtvdzMJu8XQ+66l9A==
+X-Gm-Gg: AR+sD10Py2zhNNX+44HCmDSq+xFax4MHKodi/tpDDZ9kk6XtW5YrCiyuT8HoDhQVknL
+ J2Msox8eCVNLyNE1V1z2coz5Cn1U3mEgjtBPgr+cY62j/AvcU/nnS/hDuoNsw3k1uwEx3UIvPDh
+ qlhredBwYmK6dJi/YbJCknfH8De0xvipoPm7e+zS7a56h32Ci9h9+6bA585ssO6Zu01txo1c/vu
+ /gEquVSPDiuUPHP//Uc3oB0SmeAmRfjZaOJ3hBQ3LlPQOK7W6yFCUuOIut2Uaq6W2aplVW+rrwU
+ X3Kal261KrweVBAxZ2SfE+J6UKdPXGayWHFj88ey0bvhn3rq3ITBnGx8Bfqy5ZWxSBYmpcyROaw
+ =
+X-Received: by 2002:a05:690c:5805:b0:80d:a249:4854 with SMTP id
+ 00721157ae682-857477a3fb3mr26241607b3.17.1787756023981; Wed, 26 Aug 2026
+ 07:53:43 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260823150731.896-1-luoyonggang@gmail.com>
- <ao7c-FiawF9sMCGj@redhat.com>
- <392d0652-2d06-4889-8b67-c199e59bd314@nutanix.com>
-In-Reply-To: <392d0652-2d06-4889-8b67-c199e59bd314@nutanix.com>
-From: Yonggang Luo <luoyonggang@gmail.com>
-Date: Wed, 26 Aug 2026 22:50:01 +0800
-X-Gm-Features: AcwNN1XsGorm7YtTmyNPNuqbUwv3DlmuK4C6hxozOcE4hdWxLv5l-T2KNGgK03Y
-Message-ID: <CAE2XoE82jR0rRCJFEqB4vvULCV0gQrcGeHPQAOPRvNEadjPZvg@mail.gmail.com>
-Subject: Re: [PATCH 00/12] single-binary: link ARM and RISC-V into qemu-system
-To: Mark Cave-Ayland <mark.caveayland@nutanix.com>
-Cc: =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
- qemu-devel@nongnu.org, Xianglai Li <lixianglai@loongson.cn>, 
- Alistair Francis <alistair.francis@wdc.com>, Chinmay Rath <rathc@linux.ibm.com>,
- Sunil V L <sunilvl@ventanamicro.com>, qemu-riscv@nongnu.org, 
- Alexander Bulekov <alxndr@bu.edu>, Zhao Liu <zhao1.liu@intel.com>,
- Eric Farman <farman@linux.ibm.com>, 
- Laurent Vivier <lvivier@redhat.com>, Peter Maydell <peter.maydell@linaro.org>, 
- Chao Liu <chao.liu@processmission.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>, Song Gao <17746591750@163.com>, 
- Harsh Prateek Bora <harshpb@linux.ibm.com>, Glenn Miles <milesg@linux.ibm.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, qemu-s390x@nongnu.org, 
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@mailo.com>, 
- "Michael S. Tsirkin" <mst@redhat.com>, Stefan Hajnoczi <stefanha@redhat.com>, 
- =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, 
- David Hildenbrand <david@kernel.org>, qemu-ppc@nongnu.org, qemu-arm@nongnu.org,
- Igor Mammedov <imammedo@redhat.com>, Aleksandar Rikalo <arikalo@gmail.com>, 
- Nicholas Piggin <npiggin@gmail.com>, Cornelia Huck <cohuck@redhat.com>, 
- Richard Henderson <richard.henderson@linaro.org>,
- Ilya Leoshkevich <iii@linux.ibm.com>, 
- Fabiano Rosas <farosas@suse.de>, Aurelien Jarno <aurelien@aurel32.net>, 
- Paolo Bonzini <pbonzini@redhat.com>, Ani Sinha <anisinha@redhat.com>, 
- Bibo Mao <maobibo@loongson.cn>,
- =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>, 
- Matthew Rosato <mjrosato@linux.ibm.com>, Weiwei Li <liwei1518@gmail.com>, 
- Darren Kenny <darren.kenny@oracle.com>
-Content-Type: multipart/alternative; boundary="0000000000004367eb0659f45685"
-Received-SPF: pass client-ip=2a00:1450:4864:20::536;
- envelope-from=luoyonggang@gmail.com; helo=mail-ed1-x536.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+References: <20260825212326.1907-1-daniel.barboza@oss.qualcomm.com>
+ <20260825212326.1907-9-daniel.barboza@oss.qualcomm.com>
+In-Reply-To: <20260825212326.1907-9-daniel.barboza@oss.qualcomm.com>
+From: Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
+Date: Wed, 26 Aug 2026 09:53:32 -0500
+X-Gm-Features: AcwNN1WhnBunGvND0aWLVyi0Wn_SoUe4nlBvtFW5I7tnt5C1Z6pOW_OzhdsXsdI
+Message-ID: <CAEev2e8fbPt04kcKh5a+ohXYtWPzC5-cD58gcMFS-NV3QQKwSw@mail.gmail.com>
+Subject: Re: [PATCH 08/13] hw/riscv/fdt-common, virt.c,
+ tt_atlantis.c: add create_fdt_uart()
+To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
+ chao.liu@processmission.com, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Joel Stanley <joel@jms.id.au>, Nicholas Piggin <npiggin@gmail.com>,
+ Michael Ellerman <mpe@kernel.org>, 
+ Portia Stephens <portias@oss.tenstorrent.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::112e;
+ envelope-from=asrinivasan@tenstorrent.com; helo=mail-yw1-x112e.google.com
+X-Spam_score_int: -19
+X-Spam_score: -2.0
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_NONE=-0.0001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -142,313 +122,75 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Reply-To: luoyonggang@gmail.com
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---0000000000004367eb0659f45685
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Hi Daniel,
 
-On Wed, Aug 26, 2026 at 9:41=E2=80=AFPM Mark Cave-Ayland <
-mark.caveayland@nutanix.com> wrote:
+On Tue, Aug 25, 2026 at 4:24=E2=80=AFPM Daniel Henrique Barboza
+<daniel.barboza@oss.qualcomm.com> wrote:
 >
-> On 26/08/2026 13:32, Daniel P. Berrang=C3=A9 wrote:
+> Add a common uart FDT helper to be used by 'virt' and 'tt-atlantis'.
 >
-> > On Sun, Aug 23, 2026 at 11:07:18PM +0800, Yonggang Luo wrote:
-> >
-> > snip,
-> >
-> > ..to comment just on the end result for now..
-> >
-> >> The last patch builds qemu-system (and qemu-systemw on Windows) from
-> >> aarch64 common/system objects plus RISC-V arch objects, and installs
-> >> qemu-system-{arm,aarch64,riscv32,riscv64} as symlinks so argv[0] still
-> >> selects TargetInfo.
-> >>
-> >> Examples:
-> >>
-> >>    qemu-system -target aarch64 -M virt ...
-> >>    qemu-system-riscv64 -M virt ...
-> >>
-> >> A basename that matches no registered token falls through to the uniqu=
-e
-> >> default. A combined binary with no suffix requires -target when more
-> >> than one default TargetInfo is registered.
-> >
-> > In testing and comparing  the new qemu-system-riscv64 symlink
-> > to qemu-system vs the current standalone qemu-system-riscv64
-> > binary there are some significant user visible changes.
-> >
-> > The simplest is 'qom-list-types' went from reporting approx
-> > 770 classes, to reporting approx 1530 classes. IOW, the
-> > qemu-system-riscv64 binary is now reporting supporting for
-> > all the classes that were unique to arm.
-> >
-> > The '-device help' output similarly shows a great many more
-> > devices
-> >
-> > TL;DR introspecting qemu-system-riscv64 is no longer accurate
-> > wrt riscv64 capabilities.
-> >
-> > This is not suprising, since we register all TypeInfo meaning
-> > we get all QOM classes present. Some of Pierricks patches try
-> > to filter places which iterate over classes, but this does not
-> > have full coverage.
-> >
-> >
-> > I think this is probably also what leads to the increased RAM
-> > usage in qemu-system-riscv64. Starting
-> >
-> >    qemu-system-riscv64 -nodefaults -display none -M none
-> >
-> > shows an increase in RAM usage from  17.3 to 20.7 MB which
-> > is about 15% increase. NB this is dirty, private RAM per
-> > process. The shared RAM pages also increase but that's not
-> > a concern since they're common to all QEMU processes.
-> >
-> > qemu-system-aarch64 shows a much smaller RAM increase, since
-> > it only grew from 1430 classes to 1530 classes.
-> >
-> > We have many more target though, so if we assume the end
-> > point where every single target is unified, the the union
-> > of all classes for all targets comes to approx 3600.
-> >
-> > My guesstimate is that would mean a memory increase for
-> > qemu-system-riscv64 from 17.3 to 39.9 MB, which is a
-> > 72% increase.
-> >
-> > In absolute terms this is still modest, but for deployments
-> > with large VM counts  and small RAM sizes, that gets to be
-> > significant.
-> >
-> >
-> > None of this means single binary is a bad idea.
-> >
-> >
-> > My main takeaway is that we're creating uneccessary work
-> > for ourselves by trying to make 'qemu-sytem' identical
-> > in behaviour to qemu-system-$TARGET.
-> >
-> > The complex filtering patches / QOM interfaces that I
-> > found uncomfortable in Pierrick's base series are largely
-> > around the filtering needed to simulate qemu-system-$TARGET,
-> > and they're still incomplete. I don't have high confidence
-> > in our ability to avoid regressions if we go route this
-> > route.
-> >
-> >
-> > IMHO we should make a clean break with the past. Leave
-> > the existing qemu-system-$TARGET binaries being built
-> > from the same pieces they are today, such that there
-> > is better confidence that we are not making behavioural
-> > changes to them.
-> >
-> >
-> > qemu-system should be built alongside qemu-system-$TARGET
-> > and offer new semantics where it is documented as exposing
-> > everything from all targets whenever introspected and does
-> > not apply target type or target Kconfig filtering to inputs/
-> > outputs.
-> >
-> > We still get the benefit of only building most  .o files
-> > once, so keeping qemu-system-$TARGET is only a small
-> > overhead in the final step of linking everything together.
-> >
-> >
-> > qemu-system will still have the increased memory overhead
-> > but that's fine as qemu-system-$TARGET will be unaffected.
-> > We can tackle the memory overhead of qemu-system at our
-> > leisure through use of loadable modules, and thus not have
-> > that as a task to think about today.
-> >
-> >
-> > With the clean break with the past, we also have the
-> > ability to tackle various long standing design mistakes
-> > present in qemu-system-$TARGET instead of carrying them
-> > over into the new binary.
-> >
-> > Specifically
-> >
-> >   * -nodefaults should become the default
-> >
-> >   * All CLI args should be processed in order from
-> >     the command line, so we eliminate the nonsense
-> >     where we process some -object, then -chardev,
-> >     then more -object through hand crafted deps
-> >
-> >   * No default machine type
+> To accomodate both boards the helper is doing the following:
+> - an 'additional_reg_props' flag is used to control whether we want
+>   'reg-shift' and 'reg-io-width' elements added.  OpenSBI won't boot
+>   with the tt-atlantis board without them, but 'virt' can't deal with
+>   them being added unconditionally either.
+> - an 'is_serial0' flag is added to control whether we need to set
+>   additional properties related to the first serial.  This is required
+>   because the 'virt' board adds two uarts in the FDT.
 >
-> I would even go as far as to suggest that we should make modules
+> No FDT changes intended.
+>
+> Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+> ---
+>  hw/riscv/fdt-common.c         | 39 +++++++++++++++++++++++++++++++
+>  hw/riscv/tt_atlantis.c        | 21 +----------------
+>  hw/riscv/virt.c               | 44 +++++++----------------------------
+>  include/hw/riscv/fdt-common.h |  4 ++++
+>  4 files changed, 52 insertions(+), 56 deletions(-)
+>
+> diff --git a/hw/riscv/fdt-common.c b/hw/riscv/fdt-common.c
+> index f31cc9d3cc..b3f3af3762 100644
+> --- a/hw/riscv/fdt-common.c
+> +++ b/hw/riscv/fdt-common.c
+> @@ -791,3 +791,42 @@ void create_fdt_socket_aclint(void *fdt, ACLINTFdtPr=
+ops *props,
+>          g_free(name);
+>      }
+>  }
+> +
+> +void create_fdt_uart(void *fdt, const MemMapEntry *uart_mem,
+> +                     int uart_irq, int aia_type,
+> +                     bool additional_reg_props, bool is_serial0,
+> +                     uint32_t irq_mmio_phandle)
+> +{
+> +    g_autofree char *name =3D NULL;
+> +
+> +    name =3D g_strdup_printf("/soc/serial@%"HWADDR_PRIx, uart_mem->base)=
+;
+> +    qemu_fdt_add_subnode(fdt, name);
+> +    qemu_fdt_setprop_string(fdt, name, "compatible", "ns16550a");
+> +    qemu_fdt_setprop_sized_cells(fdt, name, "reg",
+> +                                 2, uart_mem->base,
+> +                                 2, uart_mem->size);
+> +
+> +    /*
+> +     * The tt-atlantis board requires these extra props in the
+> +     * DT, but adding them unconditionally will break OpenSBI
+> +     * for 'virt'.
+> +     */
+> +    if (additional_reg_props) {
+> +        qemu_fdt_setprop_cell(fdt, name, "reg-shift", 2);
+> +        qemu_fdt_setprop_cell(fdt, name, "reg-io-width", 4);
+> +    }
 
-This is also why I post these patches, i've already enabled better modules
-support, so we can implement devices in dll(win32/linux/osx) all works.
-I achieve that by introducing a new plugin and getting the memory to be
-more configable. so that we can bind the device to dma-memory by option,
-not by link.
+I think the issue is that atlantis uses a uart that has 32 bit
+register spacing (0x0, 0x4, 0x8, 0xc....) rather than 8 bit spacing
+(0x0, 0x1, 0x2...). So rather than "additional_reg_props", would a
+name like "word_addressing" or "32_bit_spacing" make sense?
 
-
-> mandatory for qemu-system, so that devices can be loaded upon demand
-> during machine construction to help keep the size down.
->
-> I'll leave whether that is through dependency tracking or via an
-> explicit load directive for someone else to decide :)
-> >   * Drop all legacy syntax so we only have a single
-> >     QAPI based way of configuring.
-> >     eg drop -hda, -hdb, -cdrom, -drive, etc
-> >        only keeping -blockdev
-> >     eg drop -mon, -monitor, -qmp, etc only
-> >        keeping -object
->
-> The only problem with this is that I often get a lot of complaints that
-> QEMU command lines are complicated from retro folks who just want to run
-> their favourite old games. Why would they want to come up with a
-> long-winded -drive command line when they can just use -hda instead?
->
-> > We don't have to do all that straightaway. If we declare
-> > qemu-system "experimental" initially we can iterate on
-> > that intentionally breaking compat in releases, without
-> > any impact on qemu-system-$TARGET.
-> >
-> > Avoiding the back compat task will give us more flexibility
-> > with the follow on work when people come to create new
-> > machine types with heterogenous CPU targets.
-> I agree that this is a good opportunity to explore new things without
-> being tied to past decisions.
->
->
-> ATB,
->
-> Mark.
->
-
-
---
-         =E6=AD=A4=E8=87=B4
-=E7=A4=BC
-=E7=BD=97=E5=8B=87=E5=88=9A
-Yours
-    sincerely,
-Yonggang Luo
-
---0000000000004367eb0659f45685
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><br><br>On Wed, Aug 26, 2026 at 9:41=E2=80=AFPM Mark Cave-=
-Ayland &lt;<a href=3D"mailto:mark.caveayland@nutanix.com">mark.caveayland@n=
-utanix.com</a>&gt; wrote:<br>&gt;<br>&gt; On 26/08/2026 13:32, Daniel P. Be=
-rrang=C3=A9 wrote:<br>&gt;<br>&gt; &gt; On Sun, Aug 23, 2026 at 11:07:18PM =
-+0800, Yonggang Luo wrote:<br>&gt; &gt;<br>&gt; &gt; snip,<br>&gt; &gt;<br>=
-&gt; &gt; ..to comment just on the end result for now..<br>&gt; &gt;<br>&gt=
-; &gt;&gt; The last patch builds qemu-system (and qemu-systemw on Windows) =
-from<br>&gt; &gt;&gt; aarch64 common/system objects plus RISC-V arch object=
-s, and installs<br>&gt; &gt;&gt; qemu-system-{arm,aarch64,riscv32,riscv64} =
-as symlinks so argv[0] still<br>&gt; &gt;&gt; selects TargetInfo.<br>&gt; &=
-gt;&gt;<br>&gt; &gt;&gt; Examples:<br>&gt; &gt;&gt;<br>&gt; &gt;&gt; =C2=A0=
- =C2=A0qemu-system -target aarch64 -M virt ...<br>&gt; &gt;&gt; =C2=A0 =C2=
-=A0qemu-system-riscv64 -M virt ...<br>&gt; &gt;&gt;<br>&gt; &gt;&gt; A base=
-name that matches no registered token falls through to the unique<br>&gt; &=
-gt;&gt; default. A combined binary with no suffix requires -target when mor=
-e<br>&gt; &gt;&gt; than one default TargetInfo is registered.<br>&gt; &gt;<=
-br>&gt; &gt; In testing and comparing =C2=A0the new qemu-system-riscv64 sym=
-link<br>&gt; &gt; to qemu-system vs the current standalone qemu-system-risc=
-v64<br>&gt; &gt; binary there are some significant user visible changes.<br=
->&gt; &gt;<br>&gt; &gt; The simplest is &#39;qom-list-types&#39; went from =
-reporting approx<br>&gt; &gt; 770 classes, to reporting approx 1530 classes=
-. IOW, the<br>&gt; &gt; qemu-system-riscv64 binary is now reporting support=
-ing for<br>&gt; &gt; all the classes that were unique to arm.<br>&gt; &gt;<=
-br>&gt; &gt; The &#39;-device help&#39; output similarly shows a great many=
- more<br>&gt; &gt; devices<br>&gt; &gt;<br>&gt; &gt; TL;DR introspecting qe=
-mu-system-riscv64 is no longer accurate<br>&gt; &gt; wrt riscv64 capabiliti=
-es.<br>&gt; &gt;<br>&gt; &gt; This is not suprising, since we register all =
-TypeInfo meaning<br>&gt; &gt; we get all QOM classes present. Some of Pierr=
-icks patches try<br>&gt; &gt; to filter places which iterate over classes, =
-but this does not<br>&gt; &gt; have full coverage.<br>&gt; &gt;<br>&gt; &gt=
-;<br>&gt; &gt; I think this is probably also what leads to the increased RA=
-M<br>&gt; &gt; usage in qemu-system-riscv64. Starting<br>&gt; &gt;<br>&gt; =
-&gt; =C2=A0 =C2=A0qemu-system-riscv64 -nodefaults -display none -M none<br>=
-&gt; &gt;<br>&gt; &gt; shows an increase in RAM usage from =C2=A017.3 to 20=
-.7 MB which<br>&gt; &gt; is about 15% increase. NB this is dirty, private R=
-AM per<br>&gt; &gt; process. The shared RAM pages also increase but that&#3=
-9;s not<br>&gt; &gt; a concern since they&#39;re common to all QEMU process=
-es.<br>&gt; &gt;<br>&gt; &gt; qemu-system-aarch64 shows a much smaller RAM =
-increase, since<br>&gt; &gt; it only grew from 1430 classes to 1530 classes=
-.<br>&gt; &gt;<br>&gt; &gt; We have many more target though, so if we assum=
-e the end<br>&gt; &gt; point where every single target is unified, the the =
-union<br>&gt; &gt; of all classes for all targets comes to approx 3600.<br>=
-&gt; &gt;<br>&gt; &gt; My guesstimate is that would mean a memory increase =
-for<br>&gt; &gt; qemu-system-riscv64 from 17.3 to 39.9 MB, which is a<br>&g=
-t; &gt; 72% increase.<br>&gt; &gt;<br>&gt; &gt; In absolute terms this is s=
-till modest, but for deployments<br>&gt; &gt; with large VM counts =C2=A0an=
-d small RAM sizes, that gets to be<br>&gt; &gt; significant.<br>&gt; &gt;<b=
-r>&gt; &gt;<br>&gt; &gt; None of this means single binary is a bad idea.<br=
->&gt; &gt;<br>&gt; &gt;<br>&gt; &gt; My main takeaway is that we&#39;re cre=
-ating uneccessary work<br>&gt; &gt; for ourselves by trying to make &#39;qe=
-mu-sytem&#39; identical<br>&gt; &gt; in behaviour to qemu-system-$TARGET.<b=
-r>&gt; &gt;<br>&gt; &gt; The complex filtering patches / QOM interfaces tha=
-t I<br>&gt; &gt; found uncomfortable in Pierrick&#39;s base series are larg=
-ely<br>&gt; &gt; around the filtering needed to simulate qemu-system-$TARGE=
-T,<br>&gt; &gt; and they&#39;re still incomplete. I don&#39;t have high con=
-fidence<br>&gt; &gt; in our ability to avoid regressions if we go route thi=
-s<br>&gt; &gt; route.<br>&gt; &gt;<br>&gt; &gt;<br>&gt; &gt; IMHO we should=
- make a clean break with the past. Leave<br>&gt; &gt; the existing qemu-sys=
-tem-$TARGET binaries being built<br>&gt; &gt; from the same pieces they are=
- today, such that there<br>&gt; &gt; is better confidence that we are not m=
-aking behavioural<br>&gt; &gt; changes to them.<br>&gt; &gt;<br>&gt; &gt;<b=
-r>&gt; &gt; qemu-system should be built alongside qemu-system-$TARGET<br>&g=
-t; &gt; and offer new semantics where it is documented as exposing<br>&gt; =
-&gt; everything from all targets whenever introspected and does<br>&gt; &gt=
-; not apply target type or target Kconfig filtering to inputs/<br>&gt; &gt;=
- outputs.<br>&gt; &gt;<br>&gt; &gt; We still get the benefit of only buildi=
-ng most =C2=A0.o files<br>&gt; &gt; once, so keeping qemu-system-$TARGET is=
- only a small<br>&gt; &gt; overhead in the final step of linking everything=
- together.<br>&gt; &gt;<br>&gt; &gt;<br>&gt; &gt; qemu-system will still ha=
-ve the increased memory overhead<br>&gt; &gt; but that&#39;s fine as qemu-s=
-ystem-$TARGET will be unaffected.<br>&gt; &gt; We can tackle the memory ove=
-rhead of qemu-system at our<br>&gt; &gt; leisure through use of loadable mo=
-dules, and thus not have<br>&gt; &gt; that as a task to think about today.<=
-br>&gt; &gt;<br>&gt; &gt;<br>&gt; &gt; With the clean break with the past, =
-we also have the<br>&gt; &gt; ability to tackle various long standing desig=
-n mistakes<br>&gt; &gt; present in qemu-system-$TARGET instead of carrying =
-them<br>&gt; &gt; over into the new binary.<br>&gt; &gt;<br>&gt; &gt; Speci=
-fically<br>&gt; &gt;<br>&gt; &gt; =C2=A0 * -nodefaults should become the de=
-fault<br>&gt; &gt; =C2=A0 <br>&gt; &gt; =C2=A0 * All CLI args should be pro=
-cessed in order from<br>&gt; &gt; =C2=A0 =C2=A0 the command line, so we eli=
-minate the nonsense<br>&gt; &gt; =C2=A0 =C2=A0 where we process some -objec=
-t, then -chardev,<br>&gt; &gt; =C2=A0 =C2=A0 then more -object through hand=
- crafted deps<br>&gt; &gt;<br>&gt; &gt; =C2=A0 * No default machine type<br=
->&gt;<br>&gt; I would even go as far as to suggest that we should make modu=
-les<div><br></div><div>This is also why I post these patches, i&#39;ve alre=
-ady enabled better modules support, so we can implement devices in dll(win3=
-2/linux/osx) all works.</div><div>I achieve that by introducing a new plugi=
-n and getting the memory to be more configable. so that we can bind the dev=
-ice to dma-memory by option, not by link.</div><div><br></div><div><br>&gt;=
- mandatory for qemu-system, so that devices can be loaded upon demand<br>&g=
-t; during machine construction to help keep the size down.<br>&gt;<br>&gt; =
-I&#39;ll leave whether that is through dependency tracking or via an<br>&gt=
-; explicit load directive for someone else to decide :)<br>&gt; &gt; =C2=A0=
- * Drop all legacy syntax so we only have a single<br>&gt; &gt; =C2=A0 =C2=
-=A0 QAPI based way of configuring.<br>&gt; &gt; =C2=A0 =C2=A0 eg drop -hda,=
- -hdb, -cdrom, -drive, etc<br>&gt; &gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0only kee=
-ping -blockdev<br>&gt; &gt; =C2=A0 =C2=A0 eg drop -mon, -monitor, -qmp, etc=
- only<br>&gt; &gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0keeping -object<br>&gt;<br>&g=
-t; The only problem with this is that I often get a lot of complaints that<=
-br>&gt; QEMU command lines are complicated from retro folks who just want t=
-o run<br>&gt; their favourite old games. Why would they want to come up wit=
-h a<br>&gt; long-winded -drive command line when they can just use -hda ins=
-tead?<br>&gt;<br>&gt; &gt; We don&#39;t have to do all that straightaway. I=
-f we declare<br>&gt; &gt; qemu-system &quot;experimental&quot; initially we=
- can iterate on<br>&gt; &gt; that intentionally breaking compat in releases=
-, without<br>&gt; &gt; any impact on qemu-system-$TARGET.<br>&gt; &gt;<br>&=
-gt; &gt; Avoiding the back compat task will give us more flexibility<br>&gt=
-; &gt; with the follow on work when people come to create new<br>&gt; &gt; =
-machine types with heterogenous CPU targets.<br>&gt; I agree that this is a=
- good opportunity to explore new things without<br>&gt; being tied to past =
-decisions.<br>&gt;<br>&gt;<br>&gt; ATB,<br>&gt;<br>&gt; Mark.<br>&gt;<br><b=
-r><br>--<br>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=E6=AD=A4=E8=87=B4<br>=E7=A4=
-=BC<br>=E7=BD=97=E5=8B=87=E5=88=9A<br>Yours<br>=C2=A0 =C2=A0 sincerely,<br>=
-Yonggang Luo</div></div>
-
---0000000000004367eb0659f45685--
+Regards
+Anirudh Srinivasan
 
