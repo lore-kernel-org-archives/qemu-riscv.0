@@ -4,70 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 454C1C61DBD
-	for <qemu-riscv@archiver.kernel.org>; Wed, 26 Aug 2026 18:44:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CED24C61DC6
+	for <qemu-riscv@archiver.kernel.org>; Wed, 26 Aug 2026 18:44:23 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wzIbY-0002UV-Vd; Wed, 26 Aug 2026 14:44:09 -0400
+	id 1wzIb6-0000N0-LX; Wed, 26 Aug 2026 14:43:40 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1wzIbX-0002Mz-0V
- for qemu-riscv@nongnu.org; Wed, 26 Aug 2026 14:44:07 -0400
-Received: from mail-pg1-x52a.google.com ([2607:f8b0:4864:20::52a])
+ id 1wzIb4-0000Hq-U8
+ for qemu-riscv@nongnu.org; Wed, 26 Aug 2026 14:43:38 -0400
+Received: from mail-pj1-x1035.google.com ([2607:f8b0:4864:20::1035])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1wzIbU-0002b6-5h
- for qemu-riscv@nongnu.org; Wed, 26 Aug 2026 14:44:06 -0400
-Received: by mail-pg1-x52a.google.com with SMTP id
- 41be03b00d2f7-cc1bc88a20eso1445094a12.3
- for <qemu-riscv@nongnu.org>; Wed, 26 Aug 2026 11:44:03 -0700 (PDT)
+ id 1wzIb3-0002Uj-AT
+ for qemu-riscv@nongnu.org; Wed, 26 Aug 2026 14:43:38 -0400
+Received: by mail-pj1-x1035.google.com with SMTP id
+ 98e67ed59e1d1-383b4a3755fso1684221a91.3
+ for <qemu-riscv@nongnu.org>; Wed, 26 Aug 2026 11:43:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1787769842; x=1788374642; darn=nongnu.org;
- h=content-transfer-encoding:content-type:mime-version:references
- :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=qwzEZxEmFuyhMgoWNMywLma5RZEuBk1uut9/tIFYhTY=;
- b=qvwiQ6OZrXG1J/EbTBIU//8IaUc4bTb6VDIKHOJKSveqI5esEcBSJf7FpVIXjx91A5
- lJgySmz3cmTArAnChjc7MRBG6+XjoQWXM0NpsGTjimjaSmXnovzK76QXCtbIPaHfQsqB
- bDl9746eClKZ1KjYiDwO24O8khNI3AcaxJpEZnmbfsnk8H+xYCvTThsdklCqnD2cLdd9
- rYwrRqaEFoOx/gTxPn2taSry0Q+4Vr0E1ba7dHDu0wI+kgk2jffGllBjjgyMDDWtM3y1
- OsqhG58x8Tt80RmpvNgzLol5cbYaBHuLVwUSets0Gi5bDmWmMAIVhWjE7fNkDK7hhXzP
- FHRw==
+ d=gmail.com; s=20251104; t=1787769816; x=1788374616; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=3Hv9iWfS7mfY+j+Db48HXpOFPwt6LwOOGwuKKSASBkg=;
+ b=gxZRd9XxuLgTruvOXEDrMgpfnIvNhlflvj23vColCHZewrzwXQm9ko4nuoddaZuRVe
+ GnAbwRo7IgHLW7umK3tvGCBy3RmKbtXFpZnJMZiArxJ44vKhqeHlorY6DlkeES0Y3+gg
+ DkZM9NY6M4WYk3TyIatrq9x4W368tGOX62nf2aJyv+imEgvR7seNLOvPmSQOeXVk/Jv3
+ kT4pTEDoEB1B8chY1rVH+zHw5daWUdAWzO4tXO/moNzwr+d6PJCMqzl0/opfXEha3IP8
+ mLnaZHqnqn64rRtUjDJVoRQedoCye4ltfDVI7KcDS1VD0MgcOBHnLZyoCJGfROGdx1YV
+ gPXg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787769842; x=1788374642;
- h=content-transfer-encoding:content-type:mime-version:references
- :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=qwzEZxEmFuyhMgoWNMywLma5RZEuBk1uut9/tIFYhTY=;
- b=bLgdkwOt0yTJBqrBz3zrCChMyQwDF1njrXfp5UoIg0rl16qhehgWr/1E1Nt0SCrluv
- Ff3RnFPgnVz54sj1yetGZ7O+YED/LkroWw8PnRfHH0pzb4ngS5Ulu9jhUDQsH/OiiGqI
- uR5lA573yEpkFtoL0jD4VPV9KIFzKqUFqKQZ0/iyIqqb56fKhN91lbaipcTlh4uBuR35
- +clHCqwP3Z28S8vEH4VRvGNZpeEmIHmsRh0VZYQy1eR1PwRwAXHCucg0BjgfMM5SDKsf
- W5CpD6N6m84wTapj7KydNkKa9Wf6D8oggRt9HLfw5+/wC79sHj2CH82SdZoIcdMXTikS
- rMwQ==
+ d=1e100.net; s=20251104; t=1787769816; x=1788374616;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=3Hv9iWfS7mfY+j+Db48HXpOFPwt6LwOOGwuKKSASBkg=;
+ b=Hz1ztQf2K8FwdmtWdoBDgQ+/rNQpzvDfNF0v7HxwedcK1s8UeJ8BPKJXHLjZ6ggDVR
+ NGAUbBYpGuycRssKZQgdtICqFmxRuFBHD3JIIfbEZHyX6J3g7QrT9VXnGiGjJg4+lQp4
+ 0azEMfd0fQqlWtkRGyLhrmYfwoR6oK2MEjM0UOiAlNNeknKxrKUdmK4QmHblnV/e0csp
+ VhO3Ijhedr6jmnm051/vooY0zh4ucx9tsu9ysFqgF9YQXGC6FhP5yHTxVMqB+Jajcl/e
+ Um1IkgQmzo8qrzuNOauIMBTr6n9ozXu5IPXMdIyBygxs7sW54E7VdV5IT+1xbf7Jh/YB
+ 0VqA==
 X-Forwarded-Encrypted: i=1;
- AHgh+RrAdd+4PHhU2Dsjmu1lLqkWon3RPJG5WUCOnpTFENPhV6SjR7ZwOeJJt99zjRUrGljBmK84P5UXdmlk@nongnu.org
-X-Gm-Message-State: AFuF++m6EgAgcRjk2ubpyCQ+iwv1HcluRNPRwMYSrjt07pnRltar+CAH
- 2u3pwJMcPusZxvIPMhXgvJdjpjydAgbKDgF5lFk0dhUbMvLNebOPOavp
-X-Gm-Gg: AR+sD130TafDMOxz1rvS0sOuBhbAlQaKRRcexRFcSFPwOgiURUarl1XNv/tAFyTmMUF
- 0I/NJ9z47iFwZPoW4I2aY4A90bGVKBlv74g4qF/amefnTBrrFL/ddjf9rHNEWBkTpxV0qOVaPoH
- WNs+7OK1uQb68jUc+ArP0EdKnBULtaOzQDyVM8LSwQlT8qYpU4yNn7bl4OZKLbLTHCYQp/+07nS
- 90ovHVizI9nPgkKX59XiXzO68qK2NvnMUcXz3wAcsEz93eQ8K4aqCGpdp3amP1ksMV6XDwNMis4
- 1WFw7Jv5Jj1dYHoORVt9wrHb8dydwtcSHHPO1ULClaF2dXvucBYFoyMQiTS10H2fTuDclSbh+qI
- h7kXhF8OSk0fATtstw6hGpd5RC/Cy/KSwD1FXFSxa46owxRDKrbqPmoyc/CaYoA4HcWTSh8NRIm
- UQ29AZE+49et+Bf9tzqFnZ5RW9uGTrOm/vYo8x8W1vGe0WfvN1e6b49DXTeLfxvVljbPCa+yril
- S4tOdpqxeLcJxMMi9iSSQ==
-X-Received: by 2002:a05:6a20:938c:b0:3b3:216b:2743 with SMTP id
- adf61e73a8af0-3cf7576c44emr17712748637.4.1787769842497; 
- Wed, 26 Aug 2026 11:44:02 -0700 (PDT)
+ AHgh+Rrtu8he/+Et8RSR8qKlzq07hxT1rj+fK9c9sTbg4tfKPbXUo66A8iwvygAqzSMHvLTydNhNA08rSI2x@nongnu.org
+X-Gm-Message-State: AFuF++n9KwddzOgL7HoZdTvu3+7uGkOyvpQsvl4+PglSK2o0IdO4Mg3/
+ 3JcD3nN+R3NTuim20E0RWKKsqB2Vv4jcnAigzpbFqiYMohJNpAvLmikk
+X-Gm-Gg: AR+sD11g4OI3uUarmRNHD2Au+s+Me0+TbdXu9x1m7oF9FrLWR4ueIW+S7d/OpLY8ki+
+ T1xNst2QGBw4ro6Kc3NVsg4wCWGqQ72tkd10QDCp4akZ3jXcKOpHepprXxgO0G+nPFKZq6ByBI7
+ 0p6eRkaOE3rw/NW304o0bD5Ch0ChFJGccyaU0RyoSfT4RyvLInCrWYkbnGokjcFM51y4ODSjysi
+ hg9Av476M6CjTl4gfANjFIS+3JH8YMqDWorW6IWjZNE2grd+0MCgu3mbDz1Hw/V1kXLZCewytQw
+ /P9rrOSS1AMB5T4LJjyc6qI6X75Gz1yk97a3ZDeYMCke0Ynvy4FxRzpcigKUfAyumGPkQy3RiLH
+ 1eHK3UEaU/YDH2aDxpm7Jg3KiabyP6AH/KdULW+jpx1DxD/UyNpkCSVvBsSE2ZxJwCL1V+4QEmc
+ ulff8J4w1sSKjj171Q+NQMVQ1mxyGhLkLoyD2woUm6pIhRLqHeHfQp6uumZrdaK2wIPaUXdMAe9
+ D1Tb4GmpBIvyqmwYgJTceS99oU/ZEGY
+X-Received: by 2002:a17:90a:e70f:b0:38e:49c0:75a7 with SMTP id
+ 98e67ed59e1d1-3966d43471cmr19184220a91.8.1787769815927; 
+ Wed, 26 Aug 2026 11:43:35 -0700 (PDT)
 Received: from WIN-BH9M8FJACR9 ([103.94.185.75])
  by smtp.googlemail.com with ESMTPSA id
- 5a478bee46e88-3283d60c291sm17681846eec.6.2026.08.26.11.43.54
+ 5a478bee46e88-3283d60c291sm17681846eec.6.2026.08.26.11.43.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 26 Aug 2026 11:44:01 -0700 (PDT)
+ Wed, 26 Aug 2026 11:43:35 -0700 (PDT)
 From: Yonggang Luo <luoyonggang@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: Peter Maydell <peter.maydell@linaro.org>, Fabiano Rosas <farosas@suse.de>,
@@ -100,25 +99,23 @@ Cc: Peter Maydell <peter.maydell@linaro.org>, Fabiano Rosas <farosas@suse.de>,
  =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Igor Mammedov <imammedo@redhat.com>
-Subject: [PATCH v2 09/13] hw/loongarch/virt: prefix ACPI helper with
- loongarch_virt_
-Date: Thu, 27 Aug 2026 02:42:23 +0800
-Message-ID: <20260826184229.1145-10-luoyonggang@gmail.com>
+Subject: [PATCH v2 06/13] hw/arm/virt: use unique QOM name
+Date: Thu, 27 Aug 2026 02:42:20 +0800
+Message-ID: <20260826184229.1145-7-luoyonggang@gmail.com>
 X-Mailer: git-send-email 2.52.0.windows.1
 In-Reply-To: <20260826184229.1145-1-luoyonggang@gmail.com>
 References: <20260826184229.1145-1-luoyonggang@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52a;
- envelope-from=luoyonggang@gmail.com; helo=mail-pg1-x52a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1035;
+ envelope-from=luoyonggang@gmail.com; helo=mail-pj1-x1035.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -134,78 +131,50 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-- virt_acpi_setup is the same C symbol used by ARM and RISC-V virt.
-  Rename it now so a later combined binary does not need meson -D
-  prefixes for LoongArch.
-- Rename the file-local virt_is_acpi_enabled to
-  loongarch_virt_is_acpi_enabled to match.
+Set TYPE_VIRT_MACHINE to MACHINE_TYPE_NAME("arm-virt") so ARM virt
+no longer collides with other virt-machine types in one process.
+Keep the -M / help / migration name as virt-* via
+machine_class_set_name().
 
 Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
-Reviewed-by: Song Gao <gaosong@loongson.cn>
 ---
- hw/loongarch/virt-acpi-build.c | 6 +++---
- hw/loongarch/virt.c            | 2 +-
- include/hw/loongarch/virt.h    | 2 +-
- 3 files changed, 5 insertions(+), 5 deletions(-)
+ hw/arm/virt.c         | 3 ++-
+ include/hw/arm/virt.h | 2 +-
+ 2 files changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/hw/loongarch/virt-acpi-build.c b/hw/loongarch/virt-acpi-build.c
-index a0b445f297b..bbbac289b49 100644
---- a/hw/loongarch/virt-acpi-build.c
-+++ b/hw/loongarch/virt-acpi-build.c
-@@ -674,7 +674,7 @@ static const VMStateDescription vmstate_acpi_build = {
-     },
- };
+diff --git a/hw/arm/virt.c b/hw/arm/virt.c
+index c2ace7706f1..ee71974e67a 100644
+--- a/hw/arm/virt.c
++++ b/hw/arm/virt.c
+@@ -124,13 +124,14 @@ static void arm_virt_compat_default_set(MachineClass *mc)
+         MACHINE_VER_SYM(options, virt, __VA_ARGS__)(mc); \
+         mc->desc = "QEMU " MACHINE_VER_STR(__VA_ARGS__) " ARM Virtual Machine"; \
+         MACHINE_VER_DEPRECATION(__VA_ARGS__); \
++        machine_class_set_name(mc, "virt-" MACHINE_VER_STR(__VA_ARGS__)); \
+         if (latest) { \
+             mc->alias = "virt"; \
+         } \
+     } \
+     static const TypeInfo MACHINE_VER_SYM(info, virt, __VA_ARGS__) = \
+     { \
+-        .name = MACHINE_VER_TYPE_NAME("virt", __VA_ARGS__), \
++        .name = MACHINE_VER_TYPE_NAME("arm-virt", __VA_ARGS__), \
+         .parent = TYPE_VIRT_MACHINE, \
+         .class_init = MACHINE_VER_SYM(class_init, virt, __VA_ARGS__), \
+         .interfaces = type_target_specific, \
+diff --git a/include/hw/arm/virt.h b/include/hw/arm/virt.h
+index 22e66d1a113..383ee320948 100644
+--- a/include/hw/arm/virt.h
++++ b/include/hw/arm/virt.h
+@@ -215,7 +215,7 @@ struct VirtMachineState {
  
--static bool virt_is_acpi_enabled(LoongArchVirtMachineState *lvms)
-+static bool loongarch_virt_is_acpi_enabled(LoongArchVirtMachineState *lvms)
- {
-     if (lvms->acpi == ON_OFF_AUTO_OFF) {
-         return false;
-@@ -682,7 +682,7 @@ static bool virt_is_acpi_enabled(LoongArchVirtMachineState *lvms)
-     return true;
- }
+ #define VIRT_ECAM_ID(high) (high ? VIRT_HIGH_PCIE_ECAM : VIRT_PCIE_ECAM)
  
--void virt_acpi_setup(LoongArchVirtMachineState *lvms)
-+void loongarch_virt_acpi_setup(LoongArchVirtMachineState *lvms)
- {
-     AcpiBuildTables tables;
-     AcpiBuildState *build_state;
-@@ -692,7 +692,7 @@ void virt_acpi_setup(LoongArchVirtMachineState *lvms)
-         return;
-     }
+-#define TYPE_VIRT_MACHINE   MACHINE_TYPE_NAME("virt")
++#define TYPE_VIRT_MACHINE   MACHINE_TYPE_NAME("arm-virt")
+ OBJECT_DECLARE_TYPE(VirtMachineState, VirtMachineClass, VIRT_MACHINE)
  
--    if (!virt_is_acpi_enabled(lvms)) {
-+    if (!loongarch_virt_is_acpi_enabled(lvms)) {
-         ACPI_BUILD_DPRINTF("ACPI disabled. Bailing out.\n");
-         return;
-     }
-diff --git a/hw/loongarch/virt.c b/hw/loongarch/virt.c
-index 6693dea647b..74c9668b6e6 100644
---- a/hw/loongarch/virt.c
-+++ b/hw/loongarch/virt.c
-@@ -242,7 +242,7 @@ static void virt_done(Notifier *notifier, void *data)
-     LoongArchVirtMachineState *lvms = container_of(notifier,
-                                       LoongArchVirtMachineState, machine_done);
-     virt_build_smbios(lvms);
--    virt_acpi_setup(lvms);
-+    loongarch_virt_acpi_setup(lvms);
-     virt_fdt_setup(lvms);
- }
- 
-diff --git a/include/hw/loongarch/virt.h b/include/hw/loongarch/virt.h
-index d39a9bbf5dd..72268466def 100644
---- a/include/hw/loongarch/virt.h
-+++ b/include/hw/loongarch/virt.h
-@@ -132,7 +132,7 @@ struct LoongArchVirtMachineState {
- 
- #define TYPE_LOONGARCH_VIRT_MACHINE  MACHINE_TYPE_NAME("virt")
- OBJECT_DECLARE_SIMPLE_TYPE(LoongArchVirtMachineState, LOONGARCH_VIRT_MACHINE)
--void virt_acpi_setup(LoongArchVirtMachineState *lvms);
-+void loongarch_virt_acpi_setup(LoongArchVirtMachineState *lvms);
- void virt_fdt_setup(LoongArchVirtMachineState *lvms);
- 
- static inline bool virt_has_dmsi(LoongArchVirtMachineState *lvms)
+ void virt_acpi_setup(VirtMachineState *vms);
 -- 
 2.52.0.windows.1
 
