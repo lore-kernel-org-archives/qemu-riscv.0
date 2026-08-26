@@ -4,47 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25987C5DF97
-	for <qemu-riscv@archiver.kernel.org>; Wed, 26 Aug 2026 13:37:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFF48C5DF97
+	for <qemu-riscv@archiver.kernel.org>; Wed, 26 Aug 2026 13:38:38 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wzDp8-0006YZ-NU; Wed, 26 Aug 2026 09:37:50 -0400
+	id 1wzDpl-0006mG-Pu; Wed, 26 Aug 2026 09:38:29 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <junjie.cao@intel.com>)
- id 1wzDp6-0006Xr-9R; Wed, 26 Aug 2026 09:37:48 -0400
-Received: from mgamail.intel.com ([192.198.163.14])
+ id 1wzDpj-0006lb-TQ; Wed, 26 Aug 2026 09:38:27 -0400
+Received: from mgamail.intel.com ([198.175.65.9])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <junjie.cao@intel.com>)
- id 1wzDp4-0004kd-3W; Wed, 26 Aug 2026 09:37:48 -0400
+ id 1wzDpi-0004po-E3; Wed, 26 Aug 2026 09:38:27 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1787751466; x=1819287466;
+ t=1787751506; x=1819287506;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=N/ewH1XUjCFXF1ttKhEJj8Pkw0zsvEYKLlERLNbB4Is=;
- b=UKYw733b+XzdoWdSzVxIBzZ/RdZCNJpROaUfE/6e4bHGZbxpaV7KCKo6
- YxMYjmvur6sU/JBRF3n8JtabLwSZ9yFG28dYQg7PeNGSDrf1Rk3bk5QE5
- hDjuiT7qXMXffdvdi7AYxuAzNPMqfHisGAA1/2qtXas9+kJVTgALhPbTM
- 3VEuwZl7eaK44is5gdo9FLH7Ah0nWgfcdrLKUl2Mop9RnJ33jyVSSqGXd
- 5MHUMx7PnaLMDl+HRsiRUMahwbx8m+k4sZ78qfmJHQkyPBP4No53UbWsD
- 0USpvOplr9vY89DZaoNlVMwOEdTtvileEwnVrTENBYFBMqoCtMheoHrxc w==;
-X-CSE-ConnectionGUID: NFCajo+jRKeZY3QR8ydRkw==
-X-CSE-MsgGUID: VDp0pQEGSLib7hhEUolScw==
-X-IronPort-AV: E=McAfee;i="6800,10657,11886"; a="88249831"
-X-IronPort-AV: E=Sophos;i="6.25,244,1779174000"; d="scan'208";a="88249831"
-Received: from fmviesa004.fm.intel.com ([10.60.135.144])
- by fmvoesa108.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 26 Aug 2026 06:37:41 -0700
-X-CSE-ConnectionGUID: 8Bi5SUYJTHWTAzEIU7h1wA==
-X-CSE-MsgGUID: KGVcK7WGQfy5sjzSoFgxnA==
+ bh=IsA8DjF0vXOGSyrTm6RVyG1i2dRPzlY7XZ4uNzXBxUY=;
+ b=bp4q4tzoJtXksmh8FiXyWAqRMHa3gNkRLc1tZKeRVgi9canGpFTBmx/F
+ rI7igJiW/6OIBy2834MwKWzoMiECrMf67URzeSFXnAqBJCRASF9hEG7kZ
+ NeTXpWg285298J/npPdr43z6MHacmgyHV22BD9tpJB3fdmxVTS33ZgafS
+ FiEnx3hrpn7652QzDgq3xRUotv4jfiImZejgXv3vqxq5ADAY1hgdpsbQC
+ IqnJSWvauE0HotyhXgNgaYyYn1t4SK81zyCgg02+zhd6Q78lNDdv6K85N
+ wovwU5V6uLN6qsOANMqZ8jCKDgrVZKAE/k3tMyotZiwivZla5aDeqOhqk A==;
+X-CSE-ConnectionGUID: dSShFX8KTjG+1N5sIknnOg==
+X-CSE-MsgGUID: V/7MoIsvSYCJ6geMAfCd5A==
+X-IronPort-AV: E=McAfee;i="6800,10657,11886"; a="111016853"
+X-IronPort-AV: E=Sophos;i="6.25,244,1779174000"; d="scan'208";a="111016853"
+Received: from fmviesa010.fm.intel.com ([10.60.135.150])
+ by orvoesa101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 26 Aug 2026 06:38:24 -0700
+X-CSE-ConnectionGUID: yaiuLxGgT5qS8SBy6zuzdA==
+X-CSE-MsgGUID: Ie2kZ+SyR4WsekNMi0TBAA==
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.25,244,1779174000"; d="scan'208";a="269529694"
+X-IronPort-AV: E=Sophos;i="6.25,244,1779174000"; d="scan'208";a="263821967"
 Received: from junjie-desk-dev.bj.intel.com (HELO
  junjie-desk-dev.tail2c02c1.ts.net) ([10.238.152.71])
- by fmviesa004-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 26 Aug 2026 06:37:37 -0700
+ by fmviesa010-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 26 Aug 2026 06:38:19 -0700
 From: Junjie Cao <junjie.cao@intel.com>
 To: Chen Pei <cp0613@linux.alibaba.com>
 Cc: palmer@dabbelt.com, alistair.francis@wdc.com, mst@redhat.com,
@@ -54,16 +54,15 @@ Cc: palmer@dabbelt.com, alistair.francis@wdc.com, mst@redhat.com,
  chao.liu@processmission.com, anisinha@redhat.com, dave.jiang@intel.com,
  alison.schofield@intel.com, guoren@kernel.org, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org, linux-cxl@vger.kernel.org
-Subject: Re: [PATCH 0/4] hw/riscv/virt: Add CXL support to the RISC-V virt
- machine
-Date: Wed, 26 Aug 2026 21:37:24 +0800
-Message-ID: <20260826133725.355433-1-junjie.cao@intel.com>
+Subject: Re: [PATCH 4/4] tests/qtest: Add RISC-V ACPI bios tables test for CXL
+Date: Wed, 26 Aug 2026 21:38:10 +0800
+Message-ID: <20260826133812.355470-1-junjie.cao@intel.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260821081954.1171-1-cp0613@linux.alibaba.com>
-References: <20260821081954.1171-1-cp0613@linux.alibaba.com>
+In-Reply-To: <20260821081954.1171-5-cp0613@linux.alibaba.com>
+References: <20260821081954.1171-5-cp0613@linux.alibaba.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=192.198.163.14; envelope-from=junjie.cao@intel.com;
+Received-SPF: pass client-ip=198.175.65.9; envelope-from=junjie.cao@intel.com;
  helo=mgamail.intel.com
 X-Spam_score_int: -43
 X-Spam_score: -4.4
@@ -89,31 +88,21 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 Hi Chen Pei,
 
-On Fri, 21 Aug 2026 16:19:50 +0800, Chen Pei wrote:
->   - hw/riscv/virt: The MMIO-window patch no longer touches the common
->     gpex code (Igor).  The gpex_cfg.cxl_mmio32 field and the is_cxl
->     static _CRS branch are dropped; the ACPI0016 _CRS now comes from the
->     generic build_crs() path.  Since EDK2 does not enumerate the pxb-cxl
->     expander bridge, riscv simulates the firmware PCI initialization
->     (reserved window + depth-first bridge bus numbers) and re-applies it
->     via a reset handler.
+On Fri, 21 Aug 2026 16:19:54 +0800, Chen Pei wrote:
+>  tests/data/acpi/riscv64/virt/CEDT.cxl | Bin 0 -> 108 bytes
+>  tests/data/acpi/riscv64/virt/DSDT.cxl | Bin 0 -> 6212 bytes
+>  tests/qtest/bios-tables-test.c        |  54 ++++++++++++++++++++++++++
 
-Ran this on master eea8fe61b8 (it still applies clean on bde2492aac).
-riscv64 bios-tables-test passes. In the generated DSDT the PC0C _CRS
-now comes out of build_crs() with the reserved window
-0x70000000-0x7FFFFFFF and a bus range [0x0C,0x0D] taken from the real
-subordinate, PCI0 shrunk to 0x40000000-0x6FFFFFFF, and the CEDT CHBS
-and CFMWS matching the machine memmap. The machine-global window
-synthesis and the +15 bus range from v2 are gone.
+checkpatch errors on this one: expected files added together with
+tests. The flow at the top of bios-tables-test.c wants the new files
+added empty and listed in bios-tables-test-allowed-diff.h first, then
+the test, then the AML and the emptied allowed-diff in a final patch.
+The riscv64 goldens went in that way originally (cc3ba2422554).
+Alistair's Acked-by would need re-applying to whichever patch ends up
+holding the test code.
 
-system_reset from the monitor leaves the root port with the same
-window and secondary/subordinate numbers, so the reset handler does
-what it says.
-
-One larger question on 3/4 about where that enumeration should come
-from, and a note on 4/4.
-
-Tested-by: Junjie Cao <junjie.cao@intel.com>
+Worth settling 3/4 first -- if the _CRS ends up coming from firmware
+enumeration, the DSDT here changes anyway.
 
 Many thanks,
 Junjie
