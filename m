@@ -4,112 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B915AC5DF97
-	for <qemu-riscv@archiver.kernel.org>; Wed, 26 Aug 2026 10:04:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AC73C5DF97
+	for <qemu-riscv@archiver.kernel.org>; Wed, 26 Aug 2026 12:40:35 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wzAUW-0000y1-40; Wed, 26 Aug 2026 06:04:20 -0400
+	id 1wzCvR-0001OZ-KN; Wed, 26 Aug 2026 08:40:17 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1wzAUR-0000x8-9K
- for qemu-riscv@nongnu.org; Wed, 26 Aug 2026 06:04:15 -0400
+ id 1wzCvP-0001OM-Ok
+ for qemu-riscv@nongnu.org; Wed, 26 Aug 2026 08:40:15 -0400
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1wzAUN-0002w8-Vw
- for qemu-riscv@nongnu.org; Wed, 26 Aug 2026 06:04:14 -0400
+ id 1wzCvN-0006NF-ED
+ for qemu-riscv@nongnu.org; Wed, 26 Aug 2026 08:40:15 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1787738650;
+ s=mimecast20190719; t=1787748011;
  h=from:from:reply-to:reply-to:subject:subject:date:date:
  message-id:message-id:to:to:cc:cc:mime-version:mime-version:
- content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=yA81iAgWN+lZLxuNDfTXoR2CGhanHz154Xrqq+MkBZU=;
- b=LVd+dZ04jN33vjgKJtlSniA9dfvMi8a4MWrH1rh/HdHBWZ0ZLDhClBA7a5+JTbLi+vIRrv
- m5/37u9xH5Q0mXF7+Kin7oRZp7GFlE14TKI1hdXArMBhI4m/pUz4IEGbRo1D71DQJmt3t6
- /7HjQ+0Zg/8nQIafloBFy6g6kVjCfvA=
-Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
+ content-type:content-type:in-reply-to:in-reply-to:  references:references;
+ bh=3IZbLtMK+eaeWJqSopYckXC2Rifx6mwRmusak3iCl3k=;
+ b=Rh3uaNbgfJh+KVxBZnxul/EZZvuOQZDPZa8fiXrzBgbiU26vPCcwfWnN4Rxgy9Gq+Ztk15
+ SkJDx7rWpKGprVJ3Ur7dZs8vJlEX7M4cOWoss16JS9fAZYwx195BZahpfBvas4PopFp4PN
+ QzttLDNTXgZ9v8yY2fwlkXVj9gA+SUM=
+Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-528-hzOFc47gMD27ZIlhwAbX6w-1; Wed,
- 26 Aug 2026 06:04:07 -0400
-X-MC-Unique: hzOFc47gMD27ZIlhwAbX6w-1
-X-Mimecast-MFC-AGG-ID: hzOFc47gMD27ZIlhwAbX6w_1787738641
-Received: from mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.95])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-279-oqGOJo7BOWuwHfujpyszow-1; Wed,
+ 26 Aug 2026 08:33:20 -0400
+X-MC-Unique: oqGOJo7BOWuwHfujpyszow-1
+X-Mimecast-MFC-AGG-ID: oqGOJo7BOWuwHfujpyszow_1787747592
+Received: from mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.12])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 10553190FFB4; Wed, 26 Aug 2026 10:04:00 +0000 (UTC)
-Received: from redhat.com (headnet05.pony-001.prod.iad2.dc.redhat.com
- [10.2.32.117])
- by mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 58E0440E; Wed, 26 Aug 2026 10:03:43 +0000 (UTC)
-Date: Wed, 26 Aug 2026 11:03:41 +0100
+ by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 9320119560A5; Wed, 26 Aug 2026 12:33:11 +0000 (UTC)
+Received: from redhat.com (headnet03.pony-001.prod.iad2.dc.redhat.com
+ [10.2.32.114])
+ by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id AFFCB1955F05; Wed, 26 Aug 2026 12:32:59 +0000 (UTC)
+Date: Wed, 26 Aug 2026 13:32:56 +0100
 From: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
-To: =?utf-8?Q?Marc-Andr=C3=A9?= Lureau <marcandre.lureau@redhat.com>
-Cc: qemu-devel@nongnu.org, dave@treblig.org,
- Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@mailo.com>,
- Markus Armbruster <armbru@redhat.com>, Gerd Hoffmann <kraxel@redhat.com>,
- "Gonglei (Arei)" <arei.gonglei@huawei.com>,
- zhenwei pi <zhenwei.pi@linux.dev>, Kevin Wolf <kwolf@redhat.com>,
- Hanna Reitz <hreitz@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
- Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
- Ani Sinha <anisinha@redhat.com>, "Michael S. Tsirkin" <mst@redhat.com>,
- Laurent Vivier <lvivier@redhat.com>, Amit Shah <amit@kernel.org>,
- Brian Cain <brian.cain@oss.qualcomm.com>,
- David Woodhouse <dwmw2@infradead.org>, Paul Durrant <paul@xen.org>,
- Richard Henderson <richard.henderson@linaro.org>,
- Marcelo Tosatti <mtosatti@redhat.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Jiri Pirko <jiri@resnulli.us>, Jason Wang <jasowangio@gmail.com>,
- Halil Pasic <pasic@linux.ibm.com>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,
- Jason Herne <jjherne@linux.ibm.com>, Eric Farman <farman@linux.ibm.com>,
- Matthew Rosato <mjrosato@linux.ibm.com>,
- Ilya Leoshkevich <iii@linux.ibm.com>, David Hildenbrand <david@kernel.org>,
- Cornelia Huck <cohuck@redhat.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Anthony PERARD <anthony@xenproject.org>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Hyman Huang <infra.ai.cloud@bitdeer.com>,
- Peter Xu <peterx@redhat.com>, Fabiano Rosas <farosas@suse.de>,
- Samuel Thibault <samuel.thibault@ens-lyon.org>,
- Stefan Berger <stefanb@linux.vnet.ibm.com>,
- Zhao Liu <zhao1.liu@intel.com>, Nicholas Piggin <npiggin@gmail.com>,
- Chinmay Rath <rathc@linux.ibm.com>, Glenn Miles <milesg@linux.ibm.com>,
- Harsh Prateek Bora <harshpb@linux.ibm.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
+To: Yonggang Luo <luoyonggang@gmail.com>
+Cc: qemu-devel@nongnu.org, Xianglai Li <lixianglai@loongson.cn>,
  Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Chinmay Rath <rathc@linux.ibm.com>,
+ Sunil V L <sunilvl@ventanamicro.com>, qemu-riscv@nongnu.org,
+ Alexander Bulekov <alxndr@bu.edu>, Zhao Liu <zhao1.liu@intel.com>,
+ Eric Farman <farman@linux.ibm.com>, Laurent Vivier <lvivier@redhat.com>,
+ Peter Maydell <peter.maydell@linaro.org>,
  Chao Liu <chao.liu@processmission.com>,
- Yoshinori Sato <yoshinori.sato@nifty.com>,
- Artyom Tarasenko <atar4qemu@gmail.com>, Max Filippov <jcmvbkbc@gmail.com>,
- Stefan Hajnoczi <stefanha@redhat.com>, qemu-block@nongnu.org,
- kvm@vger.kernel.org, qemu-ppc@nongnu.org, qemu-s390x@nongnu.org,
- xen-devel@lists.xenproject.org, qemu-riscv@nongnu.org
-Subject: Re: [PATCH v4 36/49] monitor: tighten monitor_printf*()
-Message-ID: <ao65_XCKmkpm9s2F@redhat.com>
-References: <20260825-qemu-no-hmp-v4-0-af60857c2fbe@redhat.com>
- <20260825-qemu-no-hmp-v4-36-af60857c2fbe@redhat.com>
- <ao6pyiBkHZJz_9JR@redhat.com>
- <CAMxuvaz+85Pw=sZG2jXL5jJ_2=kkR5_P69-AZ6bzhVbGTA+5Xg@mail.gmail.com>
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Song Gao <17746591750@163.com>,
+ Harsh Prateek Bora <harshpb@linux.ibm.com>,
+ Glenn Miles <milesg@linux.ibm.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+ qemu-s390x@nongnu.org, Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@mailo.com>,
+ "Michael S. Tsirkin" <mst@redhat.com>,
+ Stefan Hajnoczi <stefanha@redhat.com>,
+ Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ David Hildenbrand <david@kernel.org>, qemu-ppc@nongnu.org,
+ qemu-arm@nongnu.org, Igor Mammedov <imammedo@redhat.com>,
+ Aleksandar Rikalo <arikalo@gmail.com>, Nicholas Piggin <npiggin@gmail.com>,
+ Cornelia Huck <cohuck@redhat.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Ilya Leoshkevich <iii@linux.ibm.com>, Fabiano Rosas <farosas@suse.de>,
+ Aurelien Jarno <aurelien@aurel32.net>, Paolo Bonzini <pbonzini@redhat.com>,
+ Ani Sinha <anisinha@redhat.com>, Bibo Mao <maobibo@loongson.cn>,
+ =?utf-8?Q?Marc-Andr=C3=A9?= Lureau <marcandre.lureau@redhat.com>,
+ Matthew Rosato <mjrosato@linux.ibm.com>, Weiwei Li <liwei1518@gmail.com>,
+ Darren Kenny <darren.kenny@oracle.com>
+Subject: Re: [PATCH 00/12] single-binary: link ARM and RISC-V into qemu-system
+Message-ID: <ao7c-FiawF9sMCGj@redhat.com>
+References: <20260823150731.896-1-luoyonggang@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <CAMxuvaz+85Pw=sZG2jXL5jJ_2=kkR5_P69-AZ6bzhVbGTA+5Xg@mail.gmail.com>
+In-Reply-To: <20260823150731.896-1-luoyonggang@gmail.com>
 User-Agent: Mutt/2.4.0 (2026-06-19)
-X-Scanned-By: MIMEDefang 3.6 on 10.30.177.95
-X-Mimecast-MFC-PROC-ID: LAuZvDrOPy_VRx92ANh6aKwDu4m3AtlKmjObw7kAkmE_1787738641
+X-Scanned-By: MIMEDefang 3.0 on 10.30.177.12
+X-Mimecast-MFC-PROC-ID: pIUD0AuBozRqc4e_89gkzwarA4kZYeImweqPKTwLKXE_1787747592
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=170.10.133.124; envelope-from=berrange@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: 12
@@ -136,131 +117,144 @@ Reply-To: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Aug 26, 2026 at 01:41:55PM +0400, Marc-André Lureau wrote:
-> Hi
-> 
-> On Wed, Aug 26, 2026 at 12:54 PM Daniel P. Berrangé <berrange@redhat.com> wrote:
-> >
-> > On Tue, Aug 25, 2026 at 11:09:43PM +0400, Marc-André Lureau wrote:
-> > > Rename monitor_printf->monitor_hmp_printf, monitor_vprintf->
-> > > monitor_hmp_vprintf, and monitor_printc->monitor_hmp_printc, changing
-> > > the first parameter from Monitor * to MonitorHMP * to enforce type
-> > > safety. The implementation is also simplified: monitor_hmp_vprintf now
-> > > directly calls g_strdup_vprintf + monitor_puts, removing the virtual
-> > > dispatch via moncls->vprintf.
-> > >
-> > > The dev_print() callbacks are temporarily using the MONITOR_HMP(mon)
-> > > cast, they are fixed in the following commits.
-> > >
-> > > Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
-> > > ---
-> > >  audio/audio-hmp-cmds.c                  |   6 +-
-> > >  backends/cryptodev-hmp-cmds.c           |   9 +-
-> > >  block/monitor/block-hmp-cmds.c          | 170 +++++++++---------
-> > >  chardev/char-hmp-cmds.c                 |  12 +-
-> > >  disas/disas-mon.c                       |  10 +-
-> > >  docs/devel/style.rst                    |   2 +-
-> > >  docs/devel/writing-monitor-commands.rst |   8 +-
-> > >  dump/dump-hmp-cmds.c                    |   5 +-
-> > >  hw/char/virtio-serial-bus.c             |  10 +-
-> > >  hw/core/machine-hmp-cmds.c              | 213 +++++++++++-----------
-> > >  hw/core/sysbus.c                        |   5 +-
-> > >  hw/hexagon/hexagon_tlb.c                |  44 ++---
-> > >  hw/i386/kvm/xen-stubs.c                 |   6 +-
-> > >  hw/i386/kvm/xen_evtchn.c                |  21 +--
-> > >  hw/i386/sgx-hmp-stub.c                  |   3 +-
-> > >  hw/i386/sgx.c                           |  29 ++-
-> > >  hw/misc/auxbus.c                        |   9 +-
-> > >  hw/misc/mos6522-stub.c                  |   3 +-
-> > >  hw/net/rocker/rocker-hmp-cmds.c         | 146 ++++++++--------
-> > >  hw/pci/pci-hmp-cmds.c                   | 114 ++++++------
-> > >  hw/pci/pci-stub.c                       |   3 +-
-> > >  hw/s390x/s390-skeys.c                   |   9 +-
-> > >  hw/s390x/s390-stattrib.c                |  20 +--
-> > >  hw/uefi/ovmf-log.c                      |   5 +-
-> > >  hw/usb/bus.c                            |  11 +-
-> > >  hw/usb/host-libusb.c                    |  21 ++-
-> > >  hw/virtio/virtio-hmp-cmds.c             | 297 ++++++++++++++++---------------
-> > >  hw/xen/xen-bus.c                        |   5 +-
-> > >  include/disas/disas.h                   |   4 +-
-> > >  include/monitor/hmp.h                   |  12 +-
-> > >  migration/dirtyrate.c                   |  46 +++--
-> > >  migration/migration-hmp-cmds.c          | 301 ++++++++++++++++----------------
-> > >  monitor/hmp-cmds.c                      | 141 +++++++--------
-> > >  monitor/hmp.c                           | 143 +++++++--------
-> > >  monitor/monitor-internal.h              |   6 -
-> > >  monitor/monitor.c                       |  33 ++--
-> > >  net/net-hmp-cmds.c                      |  31 ++--
-> > >  net/slirp.c                             |  31 ++--
-> > >  qom/qom-hmp-cmds.c                      |  27 ++-
-> > >  replay/replay-debugging.c               |   5 +-
-> > >  stats/stats-hmp-cmds.c                  |  57 +++---
-> > >  stubs/hmp-cmd-info_sev.c                |   3 +-
-> > >  stubs/monitor-core.c                    |   2 +-
-> > >  system/dirtylimit-hmp-cmds.c            |  10 +-
-> > >  system/qdev-monitor.c                   |  19 +-
-> > >  system/runstate-hmp-cmds.c              |  16 +-
-> > >  system/tpm-hmp-cmds.c                   |  29 ++-
-> > >  target/i386/cpu-apic.c                  |   3 +-
-> > >  target/i386/monitor.c                   | 152 ++++++++--------
-> > >  target/i386/sev.c                       |  35 ++--
-> > >  target/m68k/monitor.c                   |   3 +-
-> > >  target/ppc/monitor.c                    |   3 +-
-> > >  target/riscv/monitor.c                  |  55 +++---
-> > >  target/sh4/monitor.c                    |  29 ++-
-> > >  target/sparc/monitor.c                  |   3 +-
-> > >  target/xtensa/monitor.c                 |   3 +-
-> > >  tests/unit/test-util-sockets.c          |   2 +-
-> > >  tools/qemu-vnc/clipboard.c              |   4 +-
-> > >  tools/qemu-vnc/stubs.c                  |   2 +-
-> > >  trace/trace-hmp-cmds.c                  |  12 +-
-> > >  ui/ui-hmp-cmds.c                        | 115 ++++++------
-> > >  util/error-report.c                     |   2 +-
-> > >  util/qemu-print.c                       |  11 +-
-> > >  63 files changed, 1219 insertions(+), 1327 deletions(-)
-> >
-> >
-> >
-> >
-> > > diff --git a/util/qemu-print.c b/util/qemu-print.c
-> > > index 5d4143d425a1..5938f2b6c338 100644
-> > > --- a/util/qemu-print.c
-> > > +++ b/util/qemu-print.c
-> > > @@ -13,6 +13,7 @@
-> > >  #include "qemu/osdep.h"
-> > >  #include "monitor/monitor.h"
-> > >  #include "monitor/hmp.h"
-> > > +#include "qom/object.h"
-> > >  #include "qemu/qemu-print.h"
-> > >
-> > >  /*
-> > > @@ -23,8 +24,13 @@
-> > >  int qemu_vprintf(const char *fmt, va_list ap)
-> > >  {
-> > >      Monitor *cur_mon = monitor_cur();
-> > > +
-> > > +    /* for all monitors: QMP & HMP */
-> > >      if (cur_mon) {
-> > > -        return monitor_vprintf(cur_mon, fmt, ap);
-> > > +        /* don't use monitor_cur_hmp(), to avoid a second lookup */
-> > > +        MonitorHMP *hmp = (MonitorHMP *)
-> > > +            object_dynamic_cast(OBJECT(cur_mon), TYPE_MONITOR_HMP);
-> > > +        return monitor_hmp_vprintf(hmp, fmt, ap);
-> >
-> > This isn't the same semantics AFAICT.
-> >
-> > Original code, if monitor_cur() == QMP, we call monitor_vprintf()
-> > which will return -1.
-> >
-> > New code, if monitor_cur() == QMP, we will get a NULL back from
-> > object_dynamic_cast which we then pass into monitor_hmp_vprintf
-> > which will then crash on monitor_puts() IIUC.
-> 
-> monitor_hmp_vprintf() has an early return, if given NULL monitor, it returns -1.
+On Sun, Aug 23, 2026 at 11:07:18PM +0800, Yonggang Luo wrote:
 
-Hmm, I feel like we should be dealing with NULL in this method, as it
-is surprising to be calling a monitor_hmp_XXX method in scenario where
-QMP is a (theoretical) possibility.
+snip,
+
+..to comment just on the end result for now..
+
+> The last patch builds qemu-system (and qemu-systemw on Windows) from
+> aarch64 common/system objects plus RISC-V arch objects, and installs
+> qemu-system-{arm,aarch64,riscv32,riscv64} as symlinks so argv[0] still
+> selects TargetInfo.
+> 
+> Examples:
+> 
+>   qemu-system -target aarch64 -M virt ...
+>   qemu-system-riscv64 -M virt ...
+> 
+> A basename that matches no registered token falls through to the unique
+> default. A combined binary with no suffix requires -target when more
+> than one default TargetInfo is registered.
+
+In testing and comparing  the new qemu-system-riscv64 symlink
+to qemu-system vs the current standalone qemu-system-riscv64
+binary there are some significant user visible changes.
+
+The simplest is 'qom-list-types' went from reporting approx
+770 classes, to reporting approx 1530 classes. IOW, the
+qemu-system-riscv64 binary is now reporting supporting for
+all the classes that were unique to arm.
+
+The '-device help' output similarly shows a great many more
+devices
+
+TL;DR introspecting qemu-system-riscv64 is no longer accurate
+wrt riscv64 capabilities. 
+
+This is not suprising, since we register all TypeInfo meaning
+we get all QOM classes present. Some of Pierricks patches try
+to filter places which iterate over classes, but this does not
+have full coverage.
+
+
+I think this is probably also what leads to the increased RAM
+usage in qemu-system-riscv64. Starting
+
+  qemu-system-riscv64 -nodefaults -display none -M none
+
+shows an increase in RAM usage from  17.3 to 20.7 MB which
+is about 15% increase. NB this is dirty, private RAM per
+process. The shared RAM pages also increase but that's not
+a concern since they're common to all QEMU processes.
+
+qemu-system-aarch64 shows a much smaller RAM increase, since
+it only grew from 1430 classes to 1530 classes.
+
+We have many more target though, so if we assume the end
+point where every single target is unified, the the union
+of all classes for all targets comes to approx 3600.
+
+My guesstimate is that would mean a memory increase for
+qemu-system-riscv64 from 17.3 to 39.9 MB, which is a
+72% increase.
+
+In absolute terms this is still modest, but for deployments
+with large VM counts  and small RAM sizes, that gets to be
+significant.
+
+
+None of this means single binary is a bad idea.
+
+
+My main takeaway is that we're creating uneccessary work
+for ourselves by trying to make 'qemu-sytem' identical
+in behaviour to qemu-system-$TARGET.
+
+The complex filtering patches / QOM interfaces that I
+found uncomfortable in Pierrick's base series are largely
+around the filtering needed to simulate qemu-system-$TARGET,
+and they're still incomplete. I don't have high confidence
+in our ability to avoid regressions if we go route this
+route.
+
+
+IMHO we should make a clean break with the past. Leave
+the existing qemu-system-$TARGET binaries being built
+from the same pieces they are today, such that there
+is better confidence that we are not making behavioural
+changes to them.
+
+
+qemu-system should be built alongside qemu-system-$TARGET
+and offer new semantics where it is documented as exposing
+everything from all targets whenever introspected and does
+not apply target type or target Kconfig filtering to inputs/
+outputs. 
+
+We still get the benefit of only building most  .o files
+once, so keeping qemu-system-$TARGET is only a small
+overhead in the final step of linking everything together.
+
+
+qemu-system will still have the increased memory overhead
+but that's fine as qemu-system-$TARGET will be unaffected.
+We can tackle the memory overhead of qemu-system at our
+leisure through use of loadable modules, and thus not have
+that as a task to think about today.
+
+
+With the clean break with the past, we also have the
+ability to tackle various long standing design mistakes
+present in qemu-system-$TARGET instead of carrying them
+over into the new binary.
+
+Specifically
+
+ * -nodefaults should become the default
+ 
+ * All CLI args should be processed in order from
+   the command line, so we eliminate the nonsense
+   where we process some -object, then -chardev,
+   then more -object through hand crafted deps
+
+ * No default machine type
+
+ * Drop all legacy syntax so we only have a single
+   QAPI based way of configuring.
+   eg drop -hda, -hdb, -cdrom, -drive, etc
+      only keeping -blockdev
+   eg drop -mon, -monitor, -qmp, etc only
+      keeping -object
+
+We don't have to do all that straightaway. If we declare
+qemu-system "experimental" initially we can iterate on
+that intentionally breaking compat in releases, without
+any impact on qemu-system-$TARGET.
+
+Avoiding the back compat task will give us more flexibility
+with the follow on work when people come to create new
+machine types with heterogenous CPU targets.
 
 
 With regards,
