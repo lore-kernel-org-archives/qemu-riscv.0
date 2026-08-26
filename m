@@ -4,70 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98BB5C61DBD
-	for <qemu-riscv@archiver.kernel.org>; Wed, 26 Aug 2026 18:44:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0013FC61DC4
+	for <qemu-riscv@archiver.kernel.org>; Wed, 26 Aug 2026 18:44:35 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wzIbF-000147-O9; Wed, 26 Aug 2026 14:43:49 -0400
+	id 1wzIbo-00035r-IT; Wed, 26 Aug 2026 14:44:24 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1wzIbE-0000xK-3r
- for qemu-riscv@nongnu.org; Wed, 26 Aug 2026 14:43:48 -0400
-Received: from mail-pj1-x102e.google.com ([2607:f8b0:4864:20::102e])
+ id 1wzIbn-00032E-PC
+ for qemu-riscv@nongnu.org; Wed, 26 Aug 2026 14:44:23 -0400
+Received: from mail-pl1-x632.google.com ([2607:f8b0:4864:20::632])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1wzIbC-0002Ws-6Y
- for qemu-riscv@nongnu.org; Wed, 26 Aug 2026 14:43:47 -0400
-Received: by mail-pj1-x102e.google.com with SMTP id
- 98e67ed59e1d1-3965d3d9ab8so1345622a91.3
- for <qemu-riscv@nongnu.org>; Wed, 26 Aug 2026 11:43:45 -0700 (PDT)
+ id 1wzIbl-0002fO-Al
+ for qemu-riscv@nongnu.org; Wed, 26 Aug 2026 14:44:23 -0400
+Received: by mail-pl1-x632.google.com with SMTP id
+ d9443c01a7336-2caea3f742bso20669045ad.0
+ for <qemu-riscv@nongnu.org>; Wed, 26 Aug 2026 11:44:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1787769825; x=1788374625; darn=nongnu.org;
- h=content-transfer-encoding:content-type:mime-version:references
- :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=qvSXB6oRdyogOyBMO8/d9ul6EZydtk7qJ/Ia1vJDicE=;
- b=WrdLxbknpsKjm3ZTJmNl3loQ9WKFNrThZAAcAli4yS+YZ3G+CbgZtUaOjIamONLw4q
- c2ICmy2MhylQS5l5gXafdFyBUrXxq7IFvcx7APiQi1VvQM+A8UIkurRPtbKP3vU5bN++
- 06lrq9Ql928clzJduefiHXqfFwLuK8IBU3Hyl20R5fGhbw8GzgpnqbKeUoXrqXx5cMOE
- o7/Ygp1lAr69Ta9oM2Ogm4NHWRAMsxPAt+MfiK7oPbLmNhHkKaHG7MfLdxOeDCpHoOkd
- 024RRDpmlEIHebIF3nOrod5Py3jI510pgZvrgrgH1KNeFZ//mmh7furC9WeASpG7AlhM
- GUhA==
+ d=gmail.com; s=20251104; t=1787769860; x=1788374660; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=g47wJ4WBi7Stp9jnoE21g0pDTQck93gzO7r7wKRbrtQ=;
+ b=XgYHvgX45xZdM8qlTPA+GoHN6gu6XkUiK75ar2VZrNQi2hynwWXF+NOR8L5AEI6YQ5
+ AEeqVZ50wGa4fCWBVasdN2h7tQTYKXnwFrouwas8dG318Ut3NuFIzpIQidCRTq/hB2m0
+ cOjE/EfrWq9O+hBHRFUckvvCBslzfW0dXAa9N7CKezdJWyOJbG+zI0EnLzE3AWWeoemU
+ ivTXeQ2AnZM/K/5Q+kexIknvUc95HJ02UASEaXnxDp+8YjocrDgoW11GZhI0X7bFM5TZ
+ 6cZraXU3HJTm4WXx65DJPIau5BvcoBBkdcpPaOD7xjMoKvzjDF8Rk0CgGWCfE3QvIk9G
+ /3cg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787769825; x=1788374625;
- h=content-transfer-encoding:content-type:mime-version:references
- :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=qvSXB6oRdyogOyBMO8/d9ul6EZydtk7qJ/Ia1vJDicE=;
- b=emxJZ2L25GmQoanPvMU7HMgvy4oM0E2+DAXQkoD+ZKwKpJph0Oo51Z4mpK9xrnvqS8
- mRThFGu3QjsdB8pb76YCusM+UqALUtvXGgfYdkkGPKvH6w3aaaFFMQMH4/mPvBtmKvbj
- k78cSuKA2kWRT6ARbl6HQTggNqEG1BHHfhrqy0n1+ZnbfUroi6KvaJPAJpr52tOYKR7u
- XmtnpHXUt9gkhBsEl3+1gQGyfN9DJURs+x4cqD9Ud9ggZReoSttYLfBL1bwNo+KwK5dH
- ny3SwDK0UmsEN4kD5E7xtOKYiiPJybILcu5lAWifUny45ePrwACwtxCyf77NpNcWTGrO
- u/xg==
+ d=1e100.net; s=20251104; t=1787769860; x=1788374660;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=g47wJ4WBi7Stp9jnoE21g0pDTQck93gzO7r7wKRbrtQ=;
+ b=kRQXLM2bkwg19ii3k28f+YxAX8vyFUVloWzj5isa8vR8hqrpLKs37hmC8j7gAUvdwq
+ yZQndmcIwfLXyxq3gXT/lPoIEyi9aFVgXL3CGQ6dOwzv3LOz/136HWcZcbUrzdCRoGu9
+ ZwEd3Rjz7u4CVrUVziDnz/RscoubekPPJ4+O/PoLYYrIiYpi48HHANyTr0ibn+EK5b/Q
+ 9moPoIHdcWy+fKeNXaxyzgYNfzmdRhdVSF1n1Brt00SQ16Z0diUNlK6l30gFNmbGYbnV
+ EC6HPOvoMANzWWqnVTbxrrwLn+xJ++QSc4I/zu5rwN9GOWfpYGu+8UXwYo9kX91h+91Q
+ TYNQ==
 X-Forwarded-Encrypted: i=1;
- AHgh+RoRyHrxowrSlMiMuymigYSCMPOn7xnTCAR3SMSPBO4Ky23YiyOdK+DumXZegknwRdjE2ePvT3JFPMLT@nongnu.org
-X-Gm-Message-State: AFuF++nqHbtnYG7dRya0pswTZb5gATkGW6yWSfRBlJxVQn6/k4qLrrKl
- JYQHbQkLQC+mt1YlydHzzmzn/+OT9snfjFd4wkur6ZKlRgbtu0biP4sc
-X-Gm-Gg: AR+sD133MFE9M+nuGgX3pe0XQNBstIXsC5qyfiC4SWOYu0IxocZMKuCPnXHCpMte9EV
- 6BFzbP7su8Z9D0QWZo3yeS+h7XV5N1iKzf46PqGdj4oRZEFN2oG2BAIhv6fDHD0DjT/gCG4vC8a
- wnEgjkMYv3aNt5taTlgSzKnjHAzGoCYr66rIHSfZEp2pbO3aWXLyPB0Bnb/N3yPOUEHiHtqDVT4
- gNPOFrG+ir6TYu1FCRe+XmaxiWLhzTgYUKNLmcUn+vO8DQKY5g5HAA6SS16pgYkGu/qPy2CbbaF
- qgmUyUyoA/6YDkCmpLAbV0V02k0PSF467NuCj5kxkIdRek9rYqgYKhh/ONDQkm99kSPx9ZlyStZ
- j2khm3TjI5mtcxrNUTKlDjQaxpI1Efi1CZeC5mlokVmfbRB/MGiyR7Hl6txNnbViu6bhbaaCuOC
- MXvmPHkuKUfEMlbecY9TX12vqpPS6ESvaH7vRRgSxk11uND4ohR92dJ2mISOv6T5qqtebP8ghnp
- +Lkn0kc7+H/jIlUocLGeA==
-X-Received: by 2002:a17:90b:1dce:b0:381:cef1:11ac with SMTP id
- 98e67ed59e1d1-3966d3e1cfdmr18768363a91.10.1787769824719; 
- Wed, 26 Aug 2026 11:43:44 -0700 (PDT)
+ AHgh+RqCYcDd8Od2ZfaFv3Y05wFdlZx3IDliVQL5XG5U8aiOaZmS1VvTxWTQTTbfScmxaht8nDJaiAlhj1ML@nongnu.org
+X-Gm-Message-State: AFuF++lHah9/r76RcyzqFvUEiqXYpku9vciw1Sb6nLp8cF0moqXO5+2F
+ hUzIsOW31bPEdfPsIxfWR9E4u8/9vhC15bUcVvrJiSbesv6Vfm2VXiJr
+X-Gm-Gg: AR+sD13oJnibenBYJbHKlhUWDarzYs3TZAddJcTkHCqGp44pmi23A6ExTh5xO663SlM
+ Xo8CWojcLG0o9E4tMHHmFZCpkSkHI1DePetUAfI8jXtJh7ggI6VcWGHgbHSKTr90f4EydMUqeb3
+ BpzG7xDyxw7vB9qgmX6KiuNIqvURRNSovhiemGi3Q0f80FXK5wrTY2bLqI57I/d96dsNayfvnvN
+ T6gmAdTE9w6tz98BzNcIZjMurj7FMFfwP2wokMFrRgJQWeYt3H+t+XhILOUj8HK5lY0cHN1A/Hj
+ RAifrA6Z6NM9w1y8OzPrkXbrtutKuYFqgFlXoUCV58VuefZeXV3lG8uAHoKTP4w7KIzf2EGchhi
+ I9Si/QvpJwiVFT4wBcVBZFRkspR8d809TxI+bSWtLWA0Ds9wpCraglUJQPxFi1vbaJIL2pcj1NR
+ Zm5ikXuKlCQNgUjm6c8RDsEiTUJFBsg2pbLSMHL6orjkVBLgCMUAHMTyHTIHDXrVYkHU0Y8V93z
+ N8hS7BsI9TzGzRkYR76dnuXM6Tl/27j
+X-Received: by 2002:a17:902:fc4d:b0:2c6:9f66:d573 with SMTP id
+ d9443c01a7336-2d7079ffd98mr175930535ad.2.1787769859773; 
+ Wed, 26 Aug 2026 11:44:19 -0700 (PDT)
 Received: from WIN-BH9M8FJACR9 ([103.94.185.75])
  by smtp.googlemail.com with ESMTPSA id
- 5a478bee46e88-3283d60c291sm17681846eec.6.2026.08.26.11.43.36
+ 5a478bee46e88-3283d60c291sm17681846eec.6.2026.08.26.11.44.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 26 Aug 2026 11:43:44 -0700 (PDT)
+ Wed, 26 Aug 2026 11:44:19 -0700 (PDT)
 From: Yonggang Luo <luoyonggang@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: Peter Maydell <peter.maydell@linaro.org>, Fabiano Rosas <farosas@suse.de>,
@@ -100,24 +99,23 @@ Cc: Peter Maydell <peter.maydell@linaro.org>, Fabiano Rosas <farosas@suse.de>,
  =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Igor Mammedov <imammedo@redhat.com>
-Subject: [PATCH v2 07/13] hw/arm/virt: prefix ACPI helpers with arm_virt_
-Date: Thu, 27 Aug 2026 02:42:21 +0800
-Message-ID: <20260826184229.1145-8-luoyonggang@gmail.com>
+Subject: [PATCH v2 11/13] system/vl: add new option -target
+Date: Thu, 27 Aug 2026 02:42:25 +0800
+Message-ID: <20260826184229.1145-12-luoyonggang@gmail.com>
 X-Mailer: git-send-email 2.52.0.windows.1
 In-Reply-To: <20260826184229.1145-1-luoyonggang@gmail.com>
 References: <20260826184229.1145-1-luoyonggang@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102e;
- envelope-from=luoyonggang@gmail.com; helo=mail-pj1-x102e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::632;
+ envelope-from=luoyonggang@gmail.com; helo=mail-pl1-x632.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -133,116 +131,260 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-- virt_acpi_setup and virt_is_acpi_enabled are generic names also used
-  by RISC-V and LoongArch virt. A combined binary cannot export two
-  functions with the same C symbol.
-- Rename the ARM helpers to arm_virt_acpi_setup and
-  arm_virt_is_acpi_enabled. Leave the trace event virt_acpi_setup
-  unchanged; it is a separate identifier.
+- Parse -target with QEMU_OPTION_nouserconfig, right after
+  MODULE_INIT_TARGET_INFO, because later init depends on TargetInfo.
+- target_info_qom_set_target() takes Error **errp. A name comes from
+  -target or from argv0 (qemu-system-aarch64). qemu-system with no
+  suffix and no -target fails; use -target ? to list names.
+- Fuzz passes TARGET_NAME instead of relying on a unique TargetInfo.
 
+Signed-off-by: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
 Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
 ---
- hw/arm/virt-acpi-build.c |  4 ++--
- hw/arm/virt.c            | 12 ++++++------
- include/hw/arm/virt.h    |  4 ++--
- 3 files changed, 10 insertions(+), 10 deletions(-)
+ include/qemu/target-info-qom.h |  3 +-
+ qemu-options.hx                |  8 ++++
+ system/vl.c                    | 36 ++++++++++++----
+ target-info-qom.c              | 77 ++++++++++++++++++++++++++++++----
+ tests/qtest/fuzz/fuzz.c        |  2 +-
+ 5 files changed, 110 insertions(+), 16 deletions(-)
 
-diff --git a/hw/arm/virt-acpi-build.c b/hw/arm/virt-acpi-build.c
-index f6386088b6f..a4a0d2c9997 100644
---- a/hw/arm/virt-acpi-build.c
-+++ b/hw/arm/virt-acpi-build.c
-@@ -1556,7 +1556,7 @@ static const VMStateDescription vmstate_virt_acpi_build = {
+diff --git a/include/qemu/target-info-qom.h b/include/qemu/target-info-qom.h
+index 842cf241e0a..9e56383ea6b 100644
+--- a/include/qemu/target-info-qom.h
++++ b/include/qemu/target-info-qom.h
+@@ -10,6 +10,7 @@
+ #define QEMU_TARGET_INFO_QOM_H
+ 
+ #include "qemu/target-info-impl.h"
++#include "qapi/error.h"
+ #include "qom/object.h"
+ 
+ #define TYPE_TARGET_INFO "target-info"
+@@ -40,7 +41,7 @@ typedef struct TargetInfoQomClass {
+ 
+ OBJECT_DECLARE_TYPE(TargetInfoQom, TargetInfoQomClass, TARGET_INFO)
+ 
+-void target_info_qom_set_target(void);
++void target_info_qom_set_target(const char *name, Error **errp);
+ 
+ /**
+  * get_machine_types_available:
+diff --git a/qemu-options.hx b/qemu-options.hx
+index 34970fffc94..824807be1d8 100644
+--- a/qemu-options.hx
++++ b/qemu-options.hx
+@@ -24,6 +24,14 @@ SRST
+     Display version information and exit
+ ERST
+ 
++DEF("target", HAS_ARG, QEMU_OPTION_target, \
++    "-target target  selects the target architecture ('-target help' for list)\n",
++    QEMU_ARCH_ALL)
++SRST
++``-target target``
++    Selects target architecture ('-target help' for list)
++ERST
++
+ DEF("machine", HAS_ARG, QEMU_OPTION_machine, \
+     "-machine [type=]name[,prop=value[,...]]\n"
+     "                selects emulated machine ('-machine help' for list)\n"
+diff --git a/system/vl.c b/system/vl.c
+index 4b1fcd2031f..28c5741c385 100644
+--- a/system/vl.c
++++ b/system/vl.c
+@@ -281,6 +281,15 @@ static QemuOptsList qemu_accel_opts = {
      },
  };
  
--void virt_acpi_setup(VirtMachineState *vms)
-+void arm_virt_acpi_setup(VirtMachineState *vms)
- {
-     AcpiBuildTables tables;
-     AcpiBuildState *build_state;
-@@ -1567,7 +1567,7 @@ void virt_acpi_setup(VirtMachineState *vms)
-         return;
++static QemuOptsList qemu_target_opts = {
++    .name = "target",
++    .implied_opt_name = "target",
++    .head = QTAILQ_HEAD_INITIALIZER(qemu_target_opts.head),
++    .desc = {
++        { /* end of list */ },
++    },
++};
++
+ static QemuOptsList qemu_boot_opts = {
+     .name = "boot-opts",
+     .implied_opt_name = "order",
+@@ -2856,6 +2865,7 @@ void qemu_init(int argc, char **argv)
+     const char *optarg;
+     MachineClass *machine_class;
+     bool userconfig = true;
++    const char *target_name_option = NULL;
+     FILE *vmstate_dump_file = NULL;
+ 
+     qemu_add_opts(&qemu_drive_opts);
+@@ -2889,6 +2899,7 @@ void qemu_init(int argc, char **argv)
+     qemu_add_opts(&qemu_semihosting_config_opts);
+     qemu_add_opts(&qemu_fw_cfg_opts);
+     qemu_add_opts(&qemu_action_opts);
++    qemu_add_opts(&qemu_target_opts);
+     qemu_add_run_with_opts();
+     module_call_init(MODULE_INIT_OPTS);
+ 
+@@ -2898,13 +2909,6 @@ void qemu_init(int argc, char **argv)
+     os_setup_limits();
+ 
+     module_call_init(MODULE_INIT_TARGET_INFO);
+-    target_info_qom_set_target();
+-
+-    module_init_info(qemu_modinfo);
+-    module_allow_arch(target_name());
+-
+-    qemu_init_subsystems();
+-
+     /* first pass of option parsing */
+     optind = 1;
+     while (optind < argc) {
+@@ -2919,10 +2923,25 @@ void qemu_init(int argc, char **argv)
+             case QEMU_OPTION_nouserconfig:
+                 userconfig = false;
+                 break;
++            case QEMU_OPTION_target:
++                target_name_option = optarg;
++                break;
+             }
+         }
      }
  
--    if (!virt_is_acpi_enabled(vms)) {
-+    if (!arm_virt_is_acpi_enabled(vms)) {
-         trace_virt_acpi_setup();
-         return;
-     }
-diff --git a/hw/arm/virt.c b/hw/arm/virt.c
-index ee71974e67a..56d7154fed9 100644
---- a/hw/arm/virt.c
-+++ b/hw/arm/virt.c
-@@ -771,7 +771,7 @@ static void fdt_add_cpu_nodes(VirtMachineState *vms)
-                     &bottom_node,
-                     CPU_TOPOLOGY_LEVEL_SOCKET);
-             if (cache_at_topo_level) {
--                if (bottom_node == 1 && !virt_is_acpi_enabled(vms))
-+                if (bottom_node == 1 && !arm_virt_is_acpi_enabled(vms))
-                     error_setg(
-                         &error_fatal,
-                         "Cannot share L1 at socket_id %d."
-@@ -811,7 +811,7 @@ static void fdt_add_cpu_nodes(VirtMachineState *vms)
-                                                         top_cluster,
-                                                         bottom_cluster, cpu,
-                                                         &cluster_offset);
--                if (bottom_cluster == 1 && !virt_is_acpi_enabled(vms)) {
-+                if (bottom_cluster == 1 && !arm_virt_is_acpi_enabled(vms)) {
-                     error_setg(&error_fatal,
-                         "Cannot share L1 at socket_id %d, cluster_id %d. "
-                         "DT limitation on sharing at cache level = 1.",
-@@ -2038,7 +2038,7 @@ static void create_smmuv3_dev_dtb(VirtMachineState *vms, DeviceState *dev,
-     hwaddr base = platform_bus_get_mmio_addr(pbus, sbdev, 0);
-     MachineState *ms = MACHINE(vms);
++    /*
++     * Identify target: first from option, then from argv[0].
++     * This happens even before handling --help option, because it may contain
++     * entries that are target specific.
++     */
++    target_info_qom_set_target(target_name_option, &error_fatal);
++
++    module_init_info(qemu_modinfo);
++    module_allow_arch(target_name());
++
++    qemu_init_subsystems();
++
+     machine_opts_dict = qdict_new();
+     if (userconfig) {
+         qemu_read_default_config_file(&error_fatal);
+@@ -2946,6 +2965,9 @@ void qemu_init(int argc, char **argv)
+                 exit(1);
+             }
+             switch(popt->index) {
++            case QEMU_OPTION_target:
++                /* handled previously, ignore it here */
++                break;
+             case QEMU_OPTION_cpu:
+                 /* hw initialization will check this */
+                 cpu_option = optarg;
+diff --git a/target-info-qom.c b/target-info-qom.c
+index 68ad734049c..5f7af028749 100644
+--- a/target-info-qom.c
++++ b/target-info-qom.c
+@@ -7,6 +7,7 @@
+  */
  
--    if (!(vms->bootinfo.firmware_loaded && virt_is_acpi_enabled(vms))) {
-+    if (!(vms->bootinfo.firmware_loaded && arm_virt_is_acpi_enabled(vms))) {
-         if (object_property_get_bool(OBJECT(dev), "accel", &error_abort)) {
-             error_setg(errp, "SMMUv3 with accel=on not supported for DT");
-             return;
-@@ -2448,7 +2448,7 @@ void virt_machine_done(Notifier *notifier, void *data)
-     pci_bus_add_fw_cfg_extra_pci_roots(vms->fw_cfg, vms->bus,
-                                        &error_abort);
- 
--    virt_acpi_setup(vms);
-+    arm_virt_acpi_setup(vms);
-     virt_build_smbios(vms);
+ #include "qemu/osdep.h"
++#include "qemu/help_option.h"
+ #include "qapi/error.h"
+ #include "qom/object.h"
+ #include "qemu/target-info-impl.h"
+@@ -87,16 +88,78 @@ const TargetInfo *target_info(void)
+     return target_info_ptr;
  }
  
-@@ -3212,7 +3212,7 @@ static void machvirt_init(MachineState *machine)
-     create_pcie(vms);
-     create_cxl_host_reg_region(vms);
- 
--    if (aarch64 && firmware_loaded && virt_is_acpi_enabled(vms)) {
-+    if (aarch64 && firmware_loaded && arm_virt_is_acpi_enabled(vms)) {
-         vms->acpi_dev = create_acpi_ged(vms);
-         vms->generic_error_notifier.notify = virt_generic_error_req;
-         notifier_list_add(&acpi_generic_error_notifiers,
-@@ -3562,7 +3562,7 @@ static void virt_set_oem_table_id(Object *obj, const char *value,
- }
- 
- 
--bool virt_is_acpi_enabled(const VirtMachineState *vms)
-+bool arm_virt_is_acpi_enabled(const VirtMachineState *vms)
+-void target_info_qom_set_target(void)
++static void set_target_info(const TargetInfo *chosen)
  {
-     if (vms->acpi == ON_OFF_AUTO_OFF) {
-         return false;
-diff --git a/include/hw/arm/virt.h b/include/hw/arm/virt.h
-index 383ee320948..2ee61cc5a06 100644
---- a/include/hw/arm/virt.h
-+++ b/include/hw/arm/virt.h
-@@ -218,8 +218,8 @@ struct VirtMachineState {
- #define TYPE_VIRT_MACHINE   MACHINE_TYPE_NAME("arm-virt")
- OBJECT_DECLARE_TYPE(VirtMachineState, VirtMachineClass, VIRT_MACHINE)
+-    g_autoptr(GSList) targets = object_class_get_list(TYPE_TARGET_INFO, false);
++    target_info_ptr = chosen;
++}
++
++static void list_targets_available(void)
++{
++    printf("List of targets available:\n");
++    g_autoptr(GSList) targets = object_class_get_list_sorted(TYPE_TARGET_INFO, false);
++    for (GSList *elem = targets; elem; elem = elem->next) {
++        const TargetInfo *ti = TARGET_INFO_CLASS(elem->data)->target_info;
++
++        printf("- %s\n", ti->target_name);
++    }
++}
++
++static bool target_info_matches_name(const TargetInfo *ti, const char *name)
++{
++    return !strcmp(name, ti->target_name);
++}
++
++/* qemu-system-aarch64[.exe] -> aarch64; qemu-system[.exe] -> NULL. */
++static const char *target_from_argv0(char *base)
++{
++    if (g_str_has_prefix(base, "qemu-system-")) {
++        return base + strlen("qemu-system-");
++    }
++    return NULL;
++}
  
--void virt_acpi_setup(VirtMachineState *vms);
--bool virt_is_acpi_enabled(const VirtMachineState *vms);
-+void arm_virt_acpi_setup(VirtMachineState *vms);
-+bool arm_virt_is_acpi_enabled(const VirtMachineState *vms);
++void target_info_qom_set_target(const char *name, Error **errp)
++{
++    g_autoptr(GSList) targets = object_class_get_list(TYPE_TARGET_INFO, false);
++    g_autofree char *prg_base = NULL;
+     size_t num_found = g_slist_length(targets);
+-    if (num_found != 1) {
+-        error_setg(&error_fatal, num_found == 0 ?
+-                                 "no target-info is available" :
+-                                 "more than one target-info is available");
++
++    if (num_found == 0) {
++        error_setg(errp, "no target-info is available");
++        return;
++    }
++
++    if (!name) {
++        const char *prg = g_get_prgname();
++        if (prg && prg[0]) {
++            char *dot;
++
++            prg_base = g_path_get_basename(prg);
++            dot = strrchr(prg_base, '.');
++            if (dot && g_ascii_strcasecmp(dot, ".exe") == 0) {
++                *dot = '\0';
++            }
++            name = target_from_argv0(prg_base);
++        }
++    }
++
++    if (name) {
++        if (is_help_option(name)) {
++            list_targets_available();
++            exit(0);
++        }
++        for (GSList *elem = targets; elem; elem = elem->next) {
++            const TargetInfo *ti = TARGET_INFO_CLASS(elem->data)->target_info;
++            if (target_info_matches_name(ti, name)) {
++                set_target_info(ti);
++                return;
++            }
++        }
++        error_setg(errp, "target '%s' is not available, "
++                   "use -target ? to list available targets", name);
++        return;
+     }
  
- #define CLIDR_CTYPE_NO_CACHE 0x00
- #define CLIDR_CTYPE_I_CACHE 0x01
+-    target_info_ptr = TARGET_INFO_CLASS(targets->data)->target_info;
++    error_setg(errp, "no target specified, "
++               "use -target ? to list available targets");
+ }
+diff --git a/tests/qtest/fuzz/fuzz.c b/tests/qtest/fuzz/fuzz.c
+index a3a131c80f8..c992fab4079 100644
+--- a/tests/qtest/fuzz/fuzz.c
++++ b/tests/qtest/fuzz/fuzz.c
+@@ -174,7 +174,7 @@ int LLVMFuzzerInitialize(int *argc, char ***argv, char ***envp)
+     /* Initialize qgraph and modules */
+     qos_graph_init();
+     module_call_init(MODULE_INIT_TARGET_INFO);
+-    target_info_qom_set_target();
++    target_info_qom_set_target(fuzz_arch, &error_fatal);
+     module_call_init(MODULE_INIT_FUZZ_TARGET);
+     module_call_init(MODULE_INIT_QOM);
+     module_call_init(MODULE_INIT_LIBQOS);
 -- 
 2.52.0.windows.1
 
