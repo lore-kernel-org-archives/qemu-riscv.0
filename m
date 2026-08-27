@@ -4,148 +4,112 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D197C61DC6
-	for <qemu-riscv@archiver.kernel.org>; Thu, 27 Aug 2026 10:56:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 626CEC61DB9
+	for <qemu-riscv@archiver.kernel.org>; Thu, 27 Aug 2026 11:04:24 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wzXls-0003U6-KQ; Thu, 27 Aug 2026 06:55:48 -0400
+	id 1wzXtl-0005Pq-JA; Thu, 27 Aug 2026 07:03:57 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wzXlq-0003TI-Bf
- for qemu-riscv@nongnu.org; Thu, 27 Aug 2026 06:55:46 -0400
-Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
+ (Exim 4.90_1) (envelope-from <alistair@alistair23.me>)
+ id 1wzXtU-0005Kc-JE; Thu, 27 Aug 2026 07:03:40 -0400
+Received: from fhigh-b1-smtp.messagingengine.com ([202.12.124.152])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wzXlo-0002ro-F3
- for qemu-riscv@nongnu.org; Thu, 27 Aug 2026 06:55:46 -0400
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 67R9Hh3p3524148
- for <qemu-riscv@nongnu.org>; Thu, 27 Aug 2026 10:55:43 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- KBJPDc/62a7jiY080oygW50ZOAl0PZ8y0OIixkS/R60=; b=PJXN9Xz55DzOop8N
- tVBNa0IzZn2J5WpMJvcGYTJ8Pp9fMRBKjMlDfpdYozDaQNcy3RA+E4m9WPAWjO6Y
- 428IF89qO48Itq4LOMBC+iXuSjCSCkC4D6V+aNFDUG9IfdMTo6y5/uiq53fe2pMG
- 6nv/kjd6k1HBONxtRy8s+7gYRvJoGeVL+dom4yHifhNAGsMugrvn4ORRCkvdfyWE
- JQRTNuq0mFrCOPyO8QaPnuX43Wfy+3IOU/HmqKLdBZbtzxNeYIsgzUMHg8Fu6XEf
- 3rrYs2DbYLtIE31ZLaWStX1B/bz4kOx/qQuDhunqpsiXNTgcvSd2l4INAbRuoX1L
- hdLBNw==
-Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com
- [209.85.222.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gagjfrvvy-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Thu, 27 Aug 2026 10:55:42 +0000 (GMT)
-Received: by mail-qk1-f197.google.com with SMTP id
- af79cd13be357-934956beec8so337898085a.0
- for <qemu-riscv@nongnu.org>; Thu, 27 Aug 2026 03:55:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1787828142; x=1788432942; darn=nongnu.org;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=KBJPDc/62a7jiY080oygW50ZOAl0PZ8y0OIixkS/R60=;
- b=iuL9m0sAJZGBaSnq9sdTOQEzLsCJndLaghl8/0Q/ZoIaIGAObInGRV2qz0jLjZmmMT
- Jc32Vy0zNaC7YDJBQgNt5YE8TEnhgFlOxOpR3xaGQ0wJUsPInMbJz3wviLjl+qFJjDNY
- qHHSh44zG6oJfknBWl3EE9JLYTIN2SyH9/9uWn3bHsnSmicFVu0FbxQ0gRnSXwgfvNG8
- ri0wqoqylA8slkldxaF/YaN2E44xdNZQe4lxYnljfryNsQgzGwgjJNSwF/MNI4Exz//o
- mOcRBdgkzChDncpb+S8+iYlgB0rHXlsD5ONr/iuKr57su7iT3swvDKvSVpWJ1xJixaHe
- Lv6Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787828142; x=1788432942;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=KBJPDc/62a7jiY080oygW50ZOAl0PZ8y0OIixkS/R60=;
- b=nGBbTs0raKMAZ6i9ZxqQMyq1r/exCDuK4vXPAFrjP8ytjmhI6aCOuuPU3p0bUHFGd8
- eBnXrnLa5kR7yRNGu6dtzYlvunAfD+hWiJBVoUQ0ZN2p6gWv7sRU50k7wR/OXMS72Vtv
- +CwkjWIci5AfY6H1zmPIz7izzTPZOwfLuDe7vS38KDzSISz43ZEEK7FYV/Uav5HLjCT3
- U+T6SIGmiYwaLmuPjErSgUvKh55mWGpzSEWbGJqP857rM6SF1AkL7qKWlSSa6WGbA9jv
- S7y1R9Olrx5aeDD6rYiU2JKGjZLdm2fjjrPlOwqFRsoxc4dHcHQXAZcgAt43+zv8Iu7n
- xvAQ==
-X-Forwarded-Encrypted: i=1;
- AHgh+Rpif8tynYx+mhV4S+eaDVDOhchRDN0qNbIXZXrVg5PEGQetcGFieUOetAQPCk4adTtUFHM/sEe63maK@nongnu.org
-X-Gm-Message-State: AFuF++n6qbyRN9gGAJSVEX9yK+dd8nwuMtzb1IAIa0J2eQANF/SVIekV
- AB/R7FAtIYvO/6JArOo63VKcLb+Dtf8AhHsroxK9G8kktHvJM2BWZ1AdTiR1RDp4n6UMs8gxcJS
- oTcAPhR5D5/Bbi3//OPOwOV9RE+eJiDhwntMioO1lC3e+OnbzFLUFHJw4Pg==
-X-Gm-Gg: AR+sD12K9VaHeiqmJ0zSfv4II212uIMukibPk8l+bUU10wKJkw4CYvQlNi+6C81Y0tK
- TAiAu+3zG9vg9HTy8TgDEymkoJWGmUu1kkxVS0QDvE2wqa2KsgxSdE/lKXie5o+tr3e1+AxV8lh
- bNtZSgm178JwYZa+oAAwCY7216n64M2WrLSMn/MlpT3YWqIe7y17DunrOAxaNWspeu+8IfFaswf
- S9x4NERBlnBT3Ovkt4cFRo8frgm3MxtI5pZAAVds6q6jCdq+johdbdVRROVUOhYgmnts1nFRLbO
- gJK15UH+vsU9E4oBQxO0zTzGr4CrXIMVDHfh3Eibjp/zVeYswLJEevUFMAQVyIUnW4XfXIXYl3n
- DkgqS/UoxA8mRrdP7jmNOC1oDZxXbRVfUi4CL
-X-Received: by 2002:a05:620a:4725:b0:934:81ae:6d1b with SMTP id
- af79cd13be357-93780490d62mr1280664485a.22.1787828142299; 
- Thu, 27 Aug 2026 03:55:42 -0700 (PDT)
-X-Received: by 2002:a05:620a:4725:b0:934:81ae:6d1b with SMTP id
- af79cd13be357-93780490d62mr1280660285a.22.1787828141863; 
- Thu, 27 Aug 2026 03:55:41 -0700 (PDT)
-Received: from [192.168.68.100] ([189.38.141.232])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-93785a15ef3sm326438285a.40.2026.08.27.03.55.39
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 27 Aug 2026 03:55:41 -0700 (PDT)
-Message-ID: <4e4a712a-51cd-4880-8895-b3f0f2883b0c@oss.qualcomm.com>
-Date: Thu, 27 Aug 2026 07:55:37 -0300
+ (Exim 4.90_1) (envelope-from <alistair@alistair23.me>)
+ id 1wzXtS-0003hn-0B; Thu, 27 Aug 2026 07:03:40 -0400
+Received: from phl-compute-10.internal (phl-compute-10.internal [10.202.2.50])
+ by mailfhigh.stl.internal (Postfix) with ESMTP id 3CAE37A017E;
+ Thu, 27 Aug 2026 07:03:34 -0400 (EDT)
+Received: from phl-frontend-03 ([10.202.2.162])
+ by phl-compute-10.internal (MEProxy); Thu, 27 Aug 2026 07:03:34 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alistair23.me;
+ h=cc:cc:content-transfer-encoding:content-type:content-type
+ :date:date:from:from:in-reply-to:in-reply-to:message-id
+ :mime-version:references:reply-to:subject:subject:to:to; s=fm3;
+ t=1787828614; x=1787915014; bh=RT10QtGBhX0F+CryNdj9CJ+/n4njSmml
+ qQRCoDl1hKo=; b=J4/0jyJ9pKeVaei0jITYMNmJS6sImbiHNrxvg7gjhzSNCzk0
+ T2Kx32r/WwR82TQDp7BZLM84KrbshtYjJg6ljEEspk3pi8T+7m24FBSfOVSmdMqK
+ cxE4jJpm0kygpOK0PhaqXao9/byjtUjbddRZqtlbcJu496EEInucly7kMcMGA0WI
+ f9LJM/SlEgcIqF9R5vRRmL9cR/1tLXwh4AknU0llbRJSBUcRwC0slY2ZPds9/l+A
+ OObMPTH34F8fTjMG0d1GYppm0j/J0Mk5sawmr+m5c1N6j6nCUMQtjQV3ybnUq2fD
+ Vv8RguPgC2zXwSuF0rpMnptQYoTefWXl8V3EyA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-transfer-encoding
+ :content-type:content-type:date:date:feedback-id:feedback-id
+ :from:from:in-reply-to:in-reply-to:message-id:mime-version
+ :references:reply-to:subject:subject:to:to:x-me-proxy
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1787828614; x=
+ 1787915014; bh=RT10QtGBhX0F+CryNdj9CJ+/n4njSmmlqQRCoDl1hKo=; b=V
+ Jfh5Paj87E6e5TswxzhO3bb6A3dAFVNaHIBKZ7Bp4ssIySFpyzuoqg62ZqtfudEu
+ l7JPStZ+dr2oBzAa5jh4Ae533xgnQsqRyHdWUixoApVF12MmlbyuK+ZybMZR651n
+ tXE8rtTx5gMgmU+azwTwxO9/UJbsfydbN3N/CQVs3ApdCFsvH5SeVEBxfbh1KM+s
+ KOGQEgkNDWoM7R6a6fZP3Y+1+8bs8+Aq4Nz0DkQ/zLV7/hxgdQrqzAXhcg42aBse
+ 6hAb/V0TD4ie7yWQ1KOYv9Dsk3b27swh3mWXZhM37Z5QYPFdGGxkev3oF4jF6Z6D
+ D77dYM7CZ+UI6+mrDd+9g==
+X-ME-Sender: <xms:hBmQavjhwmkrggv47GvYXrPnxlpEKpi6EuETaX59GN2-rv6EdjG4Zw>
+ <xme:hBmQatplrsPl-iohOJehjsbhBRFZgrBAt_L_npx2DKeCAVch8EkEb4T5tOnJMv1LG
+ g95xTx4jmMu1VLZjB2prU9LuP6_IBSfTsWEaKHXIK6lBY8m2s4o8g>
+X-ME-Received: <xmr:hBmQatzjrJXHjs_tb7wxNgsUoZDu1x_SPkwmOvGiM14ZE8SHPY0gThOwiFzF6HBqdtY-chVVIMb6djEWGGHu>
+X-ME-Proxy-Cause: dmFkZTFK18F1qLTavhdDoXSd6ljD6SafRZLFHJSVi2DgUh3O1gSP6o8uYfBYwBArlF0Wtc
+ k77se2pfO6d4MSnQ4x7EYCafg8R2wggSN60mvjS9R4/WnRJLb00fFN87yyV8RAXGFom1li
+ hPGNr531s5ean3KJXvkaqu9sMZlrqvXwoBHl+y4WJB/vAU/EzAUINMsqtVX6b3Od+Strsb
+ m2CIuy9P3PHPgZJFp/eYiWm9uWFJCJ3elK8bzFJboDjNXyj4qi9nz/xu+7RTkLraOohxOI
+ ppQJvDTxHZl3aI9+9XI3SnSkOjFE4ZBVrw092VuhCIGxSJb9Dodz7bhN+NitwLIK/G7YCG
+ zPEeSfaxUrHoXfSPBCFX+cWhZNdzKk1sYhJOCM93Jf97c0WEbOdo6ZCouFSBCdJJv9aq28
+ GnN616XEb3llCeHvW7icdGbSv1MGAooZuitj/pUWH4p2FrcKdyUywxsXyYXIQ1nYgUs0cJ
+ qpXY/uD50sf1jQ0n1yqb2WDfXtjcyxRd3jPVyaftsXoGiLZ6jhAQtuSuypzTP5uUpGgV4y
+ XpKSt96nrUKO4ED40dV5wKfc42rLT/Ewa2Qn/4LjKLxTnnTTE0N6266zpX2Ar91nD7HdvL
+ tbTN5s4W6aPTqt+5LLh44N473u45n7APBNQ7xD7CvK5oOvG6vrXsM3Bbf2JQ
+X-ME-Proxy: <xmx:hBmQakwEHJ5yBLUJbdjS2pTet0y7IwD8SUIXbmsZPPnwqEKjw59IoA>
+ <xmx:hBmQatYyfuVintsaJFHTGJrYxpO2xUWxvbbACGQ5dcDwXB47XMUf4A>
+ <xmx:hBmQatnyYNma7FIdNZGKkGRFIFYDX14mEXOVpXkug12YwJLMZHklAQ>
+ <xmx:hBmQaqE9MLRTRqZ-1aLsDrAOkrTdHItcuT6lOr6nlOYoKLRWvaESsg>
+ <xmx:hhmQaraLJTPYhKNZ7JjLfUpp07aI6EtBTjkdlCWqxzRBWcV5C4Irx5Z5>
+Feedback-ID: ifd214418:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
+ 27 Aug 2026 07:03:21 -0400 (EDT)
+Message-ID: <ac30bd54b6f1f4e4753638c9e95dbb85d8b81eca.camel@alistair23.me>
+Subject: Re: [PATCH 0/4] Rename ssi_transfer to ssi_transfer8
+From: Alistair <alistair@alistair23.me>
+To: Peter Maydell <peter.maydell@linaro.org>, Portia Stephens
+ <stephensportia@gmail.com>
+Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
+ Jamin Lin	 <jamin_lin@aspeedtech.com>, qemu-ppc@nongnu.org,
+ =?ISO-8859-1?Q?C=E9dric?= Le Goater <clg@kaod.org>,
+ Steven Lee <steven_lee@aspeedtech.com>,
+ Andrew Jeffery	 <andrew@codeconstruct.com.au>,
+ Harsh Prateek Bora <harshpb@linux.ibm.com>,
+ Subbaraya Sundeep <sundeep.lkml@gmail.com>, Troy Lee <leetroy@gmail.com>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Philippe =?ISO-8859-1?Q?Mathieu-Daud=E9?=	 <philmd@mailo.com>,
+ Strahinja Jankovic <strahinja.p.jankovic@gmail.com>,
+ qemu-arm@nongnu.org, Tyrone Ting <kfting@nuvoton.com>,
+ Nicholas Piggin	 <npiggin@gmail.com>, Aditya Gupta <adityag@linux.ibm.com>,
+ Kane Chen	 <kane_chen@aspeedtech.com>,
+ Francisco Iglesias <francisco.iglesias@amd.com>,
+ Joel Stanley <joel@jms.id.au>, Hao Wu <wuhaotsh@google.com>,
+ Glenn Miles <milesg@linux.ibm.com>, 	qemu-riscv@nongnu.org,
+ Jean-Christophe Dubois <jcd@tribudubois.net>,
+ Portia Stephens <portias@oss.tenstorrent.com>
+Date: Thu, 27 Aug 2026 21:03:19 +1000
+In-Reply-To: <CAFEAcA-Ncv9_jMMg1i+Ox_xa9oM4D_MMLGnPpqbyGJV_5B9iMg@mail.gmail.com>
+References: <20260825040452.1322251-1-stephensportia@gmail.com>
+ <CAFEAcA9etHvjL1igO4mFy5iQNy1pCbNFGaSg5HFva+YCeMkGEA@mail.gmail.com>
+ <CACYNXwKU_UuhrBWHNFtYYmSfzRsUd5jRFjSc1++xvQHxPk6rew@mail.gmail.com>
+ <CAFEAcA-Ncv9_jMMg1i+Ox_xa9oM4D_MMLGnPpqbyGJV_5B9iMg@mail.gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.60.2 (by Flathub.org) 
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 03/16] hw/intc/riscv_imsic: Take a MemoryRegion for the
- created device
-To: Joel Stanley <joel@jms.id.au>, Alistair Francis <alistair.francis@wdc.com>
-Cc: Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu@processmission.com>,
- Nicholas Piggin <npiggin@gmail.com>,
- Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>,
- Michael Ellerman <mpe@kernel.org>,
- Portia Stephens <portias@oss.tenstorrent.com>,
- =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>,
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-References: <20260826220528.54516-1-joel@jms.id.au>
- <20260826220528.54516-4-joel@jms.id.au>
-From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Content-Language: en-US
-In-Reply-To: <20260826220528.54516-4-joel@jms.id.au>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-ORIG-GUID: TfTBXmefVFcPHoGqkB2qSY9kr6klgoal
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI3MDA5MCBTYWx0ZWRfX/c3N69JQ0UzO
- RJIiK9Gy9mp5UNgGD+wqYo14KfV2N50LduWvIiSd6ODlCWTkdaB7z9cN2JCGSf337dFwKN06+xZ
- AS9WCikbqDGNoFs1m/0osNib5xDynpQfmDzOVmi26ds0RWjSEilJ5F2WkiO+51WFcKMPYP736AJ
- rg9UrYYncZ09zSw/g0d6yXtrnEnpa3FY2hCX3F92y6U7A/xGcNWwOOyEDLOkdK8s++/gZSgCSjc
- XJQV+Humm6XbZf8Z2YYQQDP1r6+GdeeCNduhx/RcOlTaXEKK7GLugLYzh6W6oWs6iP5LpjWoMBP
- ruWtpR/0BKNMwYarwJSLoho6Z6IIIdU6rKA2wOkahYoP52cBvmU1eE2qzFH+WaxJh53UEvqwULV
- gI+G+/gfcGVlu/wbwJ2JgkjYXlssKmcCDvqlkqPzl5YwFtYPyQPO4a+7J++Vo1KWWNBO68D+Lzr
- XahzTdfgbGxQu0g303Q==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODI3MDA5MCBTYWx0ZWRfXxIoyKzptsGn3
- 8Ong7AdJAYIqnyfHAwTzAXISHbKlYxr86XQLoqp+me9UhVKLKUJEjGCkko4vw5jHLhGNpQJKm8H
- +LP8xYKKjWZA6zRb7z43/z2INmJZjMU=
-X-Proofpoint-GUID: TfTBXmefVFcPHoGqkB2qSY9kr6klgoal
-X-Authority-Analysis: v=2.4 cv=dd+wG3Xe c=1 sm=1 tr=0 ts=6a9017ae cx=c_pps
- a=50t2pK5VMbmlHzFWWp8p/g==:117 a=MCIxunHWmQOg/5OnbzXZaw==:17
- a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=EUspDBNiAAAA:8 a=2b0TUu-kZssljZTJo2oA:9 a=QEXdDO2ut3YA:10
- a=IoWCM6iH3mJn3m4BftBB:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-27_04,2026-08-26_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 priorityscore=1501 lowpriorityscore=0 clxscore=1015 bulkscore=0
- adultscore=0 suspectscore=0 impostorscore=0 malwarescore=0 phishscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608270090
-Received-SPF: pass client-ip=205.220.180.131;
- envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
+Received-SPF: pass client-ip=202.12.124.152;
+ envelope-from=alistair@alistair23.me; helo=fhigh-b1-smtp.messagingengine.com
 X-Spam_score_int: -27
 X-Spam_score: -2.8
 X-Spam_bar: --
 X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_PASS=-0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -162,111 +126,106 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+On Thu, 2026-08-27 at 11:53 +0100, Peter Maydell wrote:
+> On Thu, 27 Aug 2026 at 11:37, Portia Stephens
+> <stephensportia@gmail.com> wrote:
+> >=20
+> > On Thu, Aug 27, 2026 at 7:19=E2=80=AFPM Peter Maydell
+> > <peter.maydell@linaro.org> wrote:
+> > >=20
+> > > On Tue, 25 Aug 2026 at 05:05, <stephensportia@gmail.com> wrote:
+> > > >=20
+> > > > From: Portia Stephens <portias@oss.tenstorrent.com>
+> > > >=20
+> > > > The ssi_transfer function comments say that it takes a word
+> > > > varying
+> > > > between 8-bits and 32-bits. ssi_transfer takes a 32-bit arg to
+> > > > transfer
+> > > > but there is no means to indicate the number of bits that
+> > > > should
+> > > > actually be transferred. All child classes of SSI_PERIPHERAL
+> > > > class have
+> > > > transfer functions that, despite accepting a 32-bit tx, only
+> > > > transfer a
+> > > > single byte; m25p80_transfer8(), ssi_sd_transfer(),
+> > > > ssd0323_transfer().
+> > > >=20
+> > > > The current implementation depends on the SSI model to know
+> > > > what peripheral model will be attached and what transfer size
+> > > > it
+> > > > expects which is error prone. If a SSI_PERIPHERAL model was
+> > > > written that
+> > > > accepted 32-bit transfers, it could not attach to any existing
+> > > > SSI
+> > > > models.
+> > >=20
+> > > What is the motivation for this change?
+> >=20
+> > The motivation came from reviewing the designware ssi driver [1]
+> > and
+> > realizing how error prone it was. The designware ssi supports
+> > varying
+> > frame width but there is no way for the controller logic to know
+> > what
+> > the transfer size an attached device expects.
+>=20
+> But isn't this just the way the SSI specification is? If we're
+> modelling a "you just have to get this right in software" bit
+> of hardware then we don't need to somehow try to add extra
+> checks in QEMU for whether the software hasn't actually done
+> things right.
 
+From my reading of things this is a bug in QEMU, not a guest issue.
 
-On 8/26/2026 7:05 PM, Joel Stanley wrote:
-> riscv_imsic_create() maps the device it creates into system_memory,
-> which prevents its use by SoCs that map devices into their own memory
-> container.
-> 
-> Add a MemoryRegion parameter and map the device into it instead of
-> calling sysbus_mmio_map(). All callers pass system_memory, so there is
-> no change in behaviour.
-> 
-> Signed-off-by: Joel Stanley <joel@jms.id.au>
-> ---
+The fact that aspeed_smc_flash_setup() for example iterates over a
+larger value to send a single byte at a time shows that currently
+everyone *thinks* think function should send a single byte.
 
-Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+So it does seem broken today. Making the current function clear seems
+like a good step. Supporting different or larger transfers in the
+future is then possible.
 
->   include/hw/intc/riscv_imsic.h | 3 ++-
->   hw/intc/riscv_imsic.c         | 6 ++++--
->   hw/riscv/aia.c                | 6 ++++--
->   hw/riscv/xiangshan_kmh.c      | 5 +++--
->   4 files changed, 13 insertions(+), 7 deletions(-)
-> 
-> diff --git a/include/hw/intc/riscv_imsic.h b/include/hw/intc/riscv_imsic.h
-> index fae999731dff..8295b1f14452 100644
-> --- a/include/hw/intc/riscv_imsic.h
-> +++ b/include/hw/intc/riscv_imsic.h
-> @@ -62,7 +62,8 @@ struct RISCVIMSICState {
->       uint32_t num_irqs;
->   };
->   
-> -DeviceState *riscv_imsic_create(hwaddr addr, uint32_t hartid, bool mmode,
-> +DeviceState *riscv_imsic_create(MemoryRegion *mr, hwaddr addr,
-> +                                uint32_t hartid, bool mmode,
->                                   uint32_t num_pages, uint32_t num_ids);
->   
->   #endif
-> diff --git a/hw/intc/riscv_imsic.c b/hw/intc/riscv_imsic.c
-> index d6b46cdca220..26dd10a0462c 100644
-> --- a/hw/intc/riscv_imsic.c
-> +++ b/hw/intc/riscv_imsic.c
-> @@ -495,7 +495,8 @@ type_init(riscv_imsic_register_types)
->   /*
->    * Create IMSIC device.
->    */
-> -DeviceState *riscv_imsic_create(hwaddr addr, uint32_t hartid, bool mmode,
-> +DeviceState *riscv_imsic_create(MemoryRegion *mr, hwaddr addr,
-> +                                uint32_t hartid, bool mmode,
->                                   uint32_t num_pages, uint32_t num_ids)
->   {
->       DeviceState *dev = qdev_new(TYPE_RISCV_IMSIC);
-> @@ -518,7 +519,8 @@ DeviceState *riscv_imsic_create(hwaddr addr, uint32_t hartid, bool mmode,
->       qdev_prop_set_uint32(dev, "num-irqs", num_ids + 1);
->   
->       sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-> -    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, addr);
-> +    memory_region_add_subregion(mr, addr,
-> +        sysbus_mmio_get_region(SYS_BUS_DEVICE(dev), 0));
->   
->       if (!kvm_irqchip_in_kernel()) {
->           for (i = 0; i < num_pages; i++) {
-> diff --git a/hw/riscv/aia.c b/hw/riscv/aia.c
-> index 651552c8f970..49cb14349f00 100644
-> --- a/hw/riscv/aia.c
-> +++ b/hw/riscv/aia.c
-> @@ -52,7 +52,8 @@ DeviceState *riscv_create_aia(MemoryRegion *mr, bool msimode, int aia_guests,
->               /* Per-socket M-level IMSICs */
->               addr = imsic_m->base + socket * (1U << IMSIC_MMIO_GROUP_MIN_SHIFT);
->               for (i = 0; i < hart_count; i++) {
-> -                riscv_imsic_create(addr + i * m_imsic_stride,
-> +                riscv_imsic_create(mr,
-> +                                   addr + i * m_imsic_stride,
->                                      base_hartid + i, true, 1,
->                                      num_msis);
->               }
-> @@ -61,7 +62,8 @@ DeviceState *riscv_create_aia(MemoryRegion *mr, bool msimode, int aia_guests,
->           /* Per-socket S-level IMSICs */
->           addr = imsic_s->base + socket * (1U << IMSIC_MMIO_GROUP_MIN_SHIFT);
->           for (i = 0; i < hart_count; i++) {
-> -            riscv_imsic_create(addr + i * s_imsic_stride,
-> +            riscv_imsic_create(mr,
-> +                               addr + i * s_imsic_stride,
->                                  base_hartid + i, false, 1 + aia_guests,
->                                  num_msis);
->           }
-> diff --git a/hw/riscv/xiangshan_kmh.c b/hw/riscv/xiangshan_kmh.c
-> index 94f9d02a00b9..9eb608f8c578 100644
-> --- a/hw/riscv/xiangshan_kmh.c
-> +++ b/hw/riscv/xiangshan_kmh.c
-> @@ -65,14 +65,15 @@ static DeviceState *xiangshan_kmh_create_aia(uint32_t num_harts)
->       /* M-level IMSICs */
->       addr = memmap[XIANGSHAN_KMH_IMSIC_M].base;
->       for (i = 0; i < num_harts; i++) {
-> -        riscv_imsic_create(addr + i * IMSIC_HART_SIZE(0), i, true,
-> +        riscv_imsic_create(get_system_memory(),
-> +                           addr + i * IMSIC_HART_SIZE(0), i, true,
->                              1, XIANGSHAN_KMH_IMSIC_NUM_IDS);
->       }
->   
->       /* S-level IMSICs */
->       addr = memmap[XIANGSHAN_KMH_IMSIC_S].base;
->       for (i = 0; i < num_harts; i++) {
-> -        riscv_imsic_create(addr +
-> +        riscv_imsic_create(get_system_memory(), addr +
->                              i * IMSIC_HART_SIZE(XIANGSHAN_KMH_IMSIC_GUEST_BITS),
->                              i, false, 1 + XIANGSHAN_KMH_IMSIC_GUEST_BITS,
->                              XIANGSHAN_KMH_IMSIC_NUM_IDS);
+>=20
+> > It seems like all the
+> > code, that is actually connected to devices, is just written to
+> > expect
+> > 8-bit transfers so it should be made explicit.
+> >=20
+> > https://www.mail-archive.com/qemu-devel@nongnu.org/msg1218153.html
+> >=20
+> > >=20
+> > > As far as I know for the hardware SSI protocol, it is indeed
+> > > the case that the SSI controller (and/or the guest software)
+> > > needs
+> > > to know what transfer size the attached device expects: the
+> > > controller just transmits (or expects to receive) however many
+> > > bits it is programmed for.
+> >=20
+> > This is true but do the devices currently model only support 8-bit
+> > transfers in hardware, do they not support multiframe transfer? SPI
+> > supports varying framewidth but the devices are not actually
+> > modeled
+> > in this way.
+>=20
+> Do the actual devices we implement support varying framewidth,
+> or do they actually have exactly one frame width that the controller
+> needs to be programmed by the guest to use ?
+>=20
+> > A better solution may be to have multiple transfer functions,
+> > ssi_transfer8, ssi_transfer32, etc. This would require the device
+> > to
+> > explicitly set what it is expecting. It is challenging since the
+> > only
+> > model's not using 8-bit transfer don't have any devices connected
+> > upstream so testing is challenging.
+>=20
+> This doesn't allow for bit widths that aren't a multiple of 8.
 
+Wouldn't a ssi_transfer32() just be the same as today?
+
+Alistair
+
+>=20
+> thanks
+> -- PMM
 
