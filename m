@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AE88C61DC7
-	for <qemu-riscv@archiver.kernel.org>; Thu, 27 Aug 2026 10:14:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7FF2C61DCB
+	for <qemu-riscv@archiver.kernel.org>; Thu, 27 Aug 2026 10:23:31 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wzX7S-0003Mi-Pg; Thu, 27 Aug 2026 06:14:02 -0400
+	id 1wzXGB-0007Ki-PC; Thu, 27 Aug 2026 06:23:03 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1wzX7R-0003Lq-ED
- for qemu-riscv@nongnu.org; Thu, 27 Aug 2026 06:14:01 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ id 1wzXGA-0007KJ-IW
+ for qemu-riscv@nongnu.org; Thu, 27 Aug 2026 06:23:02 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1wzX7N-0002o3-Aq
- for qemu-riscv@nongnu.org; Thu, 27 Aug 2026 06:14:01 -0400
+ id 1wzXG8-0004ct-Lk
+ for qemu-riscv@nongnu.org; Thu, 27 Aug 2026 06:23:02 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1787825635;
+ s=mimecast20190719; t=1787826179;
  h=from:from:reply-to:reply-to:subject:subject:date:date:
  message-id:message-id:to:to:cc:cc:mime-version:mime-version:
  content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=hNqTnSzXjq1FFnhGJCIoqeClbAUQRviA1YvNpWOKzP4=;
- b=bKYM4vjjizzLNJ7HUlcdYWMqlyUn2HjgnriCa6B/i2OXWNgJbEPyUzxKsp5eEjPN1EZDo1
- CMTcKenmwh1la0fuKCixt/uMK2dbdYw8toVgJGRTIBDI2ofVIu2/FPp3i1kfcowJBPE+4v
- gNvGmtKEDaZEL/aqGZLzI9Ul8aIqdKE=
-Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
+ bh=EFG4une+pOjvmf8kvC8piq6u39t1e5EkqpJ+4mfgZOI=;
+ b=fhM+sr4an2NOQg9shGAICJgH0x3iHU2a1n5Z3XmQjNqBIXqfHnyZ6GiDC3XiuOFd327DeY
+ D+aly4U5yF8GEeh+MMw8lOs5gWeAXX2s1wFYre0wOqtf0mGFbBtDoAQXhIgsOjux3R6uNI
+ zTlXje1h5II5eN3oDM9dYOiSDi93ip8=
+Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-316-WJq6vs-7MUW811MQM2g7sg-1; Thu,
- 27 Aug 2026 06:13:51 -0400
-X-MC-Unique: WJq6vs-7MUW811MQM2g7sg-1
-X-Mimecast-MFC-AGG-ID: WJq6vs-7MUW811MQM2g7sg_1787825625
-Received: from mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.17])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-615-D8-y7MpaPd-oY3yG4MydeA-1; Thu,
+ 27 Aug 2026 06:22:57 -0400
+X-MC-Unique: D8-y7MpaPd-oY3yG4MydeA-1
+X-Mimecast-MFC-AGG-ID: D8-y7MpaPd-oY3yG4MydeA_1787826173
+Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 25F3A1802147; Thu, 27 Aug 2026 10:13:44 +0000 (UTC)
+ by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id EF12A1954227; Thu, 27 Aug 2026 10:22:52 +0000 (UTC)
 Received: from redhat.com (headnet05.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.117])
- by mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 6AA8B1956044; Thu, 27 Aug 2026 10:13:33 +0000 (UTC)
-Date: Thu, 27 Aug 2026 11:13:30 +0100
+ by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 62CFA18005BC; Thu, 27 Aug 2026 10:22:41 +0000 (UTC)
+Date: Thu, 27 Aug 2026 11:22:38 +0100
 From: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
 To: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
 Cc: Yonggang Luo <luoyonggang@gmail.com>, qemu-devel@nongnu.org,
@@ -82,30 +82,29 @@ Cc: Yonggang Luo <luoyonggang@gmail.com>, qemu-devel@nongnu.org,
  =?utf-8?Q?Marc-Andr=C3=A9?= Lureau <marcandre.lureau@redhat.com>,
  Matthew Rosato <mjrosato@linux.ibm.com>, Weiwei Li <liwei1518@gmail.com>,
  Darren Kenny <darren.kenny@oracle.com>
-Subject: Re: [PATCH 10/12] target-info: add -target and program-name selection
-Message-ID: <apANygsXLoXL96f6@redhat.com>
+Subject: Re: [PATCH 00/12] single-binary: link ARM and RISC-V into qemu-system
+Message-ID: <apAP7r--ejtgqwpy@redhat.com>
 References: <20260823150731.896-1-luoyonggang@gmail.com>
- <20260823150731.896-11-luoyonggang@gmail.com>
- <ao7gGVuiDcVZSN6v@redhat.com>
- <0f3d8fe9-b3ad-40c5-9078-c13738997998@oss.qualcomm.com>
+ <ao7c-FiawF9sMCGj@redhat.com>
+ <b2b1d77e-c3e3-4aad-87d2-f5d4834abd1a@oss.qualcomm.com>
 MIME-Version: 1.0
-In-Reply-To: <0f3d8fe9-b3ad-40c5-9078-c13738997998@oss.qualcomm.com>
+In-Reply-To: <b2b1d77e-c3e3-4aad-87d2-f5d4834abd1a@oss.qualcomm.com>
 User-Agent: Mutt/2.4.0 (2026-06-19)
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.17
-X-Mimecast-MFC-PROC-ID: DYc1iS8Dcy1ZJtgDUxsDa6Ol1grmV9aXiQAF-jBs8uk_1787825625
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
+X-Mimecast-MFC-PROC-ID: exUMRYzioXDWuE2PYqprgz-HWBazDU_cJs4NoY3ldkI_1787826173
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=berrange@redhat.com;
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=berrange@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+X-Spam_score_int: 12
+X-Spam_score: 1.2
+X-Spam_bar: +
+X-Spam_report: (1.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=0.001, RCVD_IN_SBL_CSS=3.335,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -122,94 +121,81 @@ Reply-To: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Aug 26, 2026 at 11:13:05AM -0700, Pierrick Bouvier wrote:
-> On 8/26/2026 5:46 AM, Daniel P. Berrangé wrote:
-> By implementing *strict* identical behavior with existing binaries, we
-> indeed didn't add any new feature, but:
-> - we reduced total number of compilation units by 30%
-> - we cleaned up a lot of headers and did a lot of refactoring
-> - we have a systematic approach to add new targets in single-binary
-> while being able to reuse all existing tests without any change.
->
-> From my point of view, what you see as a detour was precisely what made
-> us progress so far in a year.
-
-No, on the contrary, that's all good stuff.
-
-What I'm considering here is the behaviour of the new proposed
-qemu-system and what it needs to be able todo.
-
-Some of this work only appears relevant to a scenario where
-qemu-system-$target is dropped in favour of a symlink to the
-new qemu-system. That forces qemu-system to be 100% compatible
-with the existing binaries, which IMHO is an undesirable
-constraint and creates extra work.
-
-We can have the benefits of the compliation unit reduction,
-cleaner headers, etc, while still having qemu-system be a
-distinct break with the past in a number of areas.
-
-> > If we ignore historical compat and treat qemu-system as a
-> > clean break, then I'd suggest that 'target' is not a concept
-> > to be exposed to the user at all.
+On Wed, Aug 26, 2026 at 11:35:11AM -0700, Pierrick Bouvier wrote:
+> On 8/26/2026 5:32 AM, Daniel P. Berrangé wrote:
+> > I think this is probably also what leads to the increased RAM
+> > usage in qemu-system-riscv64. Starting
+> > 
+> >   qemu-system-riscv64 -nodefaults -display none -M none
+> > 
+> > shows an increase in RAM usage from  17.3 to 20.7 MB which
+> > is about 15% increase. NB this is dirty, private RAM per
+> > process. The shared RAM pages also increase but that's not
+> > a concern since they're common to all QEMU processes.
+> > 
+> > qemu-system-aarch64 shows a much smaller RAM increase, since
+> > it only grew from 1430 classes to 1530 classes.
+> > 
+> > We have many more target though, so if we assume the end
+> > point where every single target is unified, the the union
+> > of all classes for all targets comes to approx 3600.
+> > 
+> > My guesstimate is that would mean a memory increase for
+> > qemu-system-riscv64 from 17.3 to 39.9 MB, which is a
+> > 72% increase.
+> > 
+> > In absolute terms this is still modest, but for deployments
+> > with large VM counts  and small RAM sizes, that gets to be
+> > significant.
 > >
 > 
-> If your only problem is with having a new -target option, I would be
-> happy to just keep the behavior to derive the target from current binary
-> name. That's a very small compromise on my side, and -target is just
-> here for convenience. It's not the end of the path.
+> How surprising (:eye-roll:) it is that adding more code and more classes
+> would result in a higher memory usage, or bigger binary size for
+> qemu-system.
 
-It isn't about the syntax - whether it is implicit from the binary
-name or explicit from -target, that's still producing a design
-where the target is the top level concept, and machine is a second
-level concept. I don't see how that makes sense given the longer
-term intent to have machines with heterogeneous CPU targets.
+It is not a surprise, I'm just examining the effect.
 
-The machine looks like it should be the top level concept, with
-target(s) derived from that.
+> More seriously. If someone is concerned about it, the simple solution is
+> to restrict list of targets and/or Kconfig to include less.
 
-> > The user cares about the machine (and CPUs) they want to run,
-> > and their choice in this respect is what should determine the
-> > target(s) QEMU needs to enable. We should take
-> > 
-> >   qemu-system --machine vexpress-a15
-> > 
-> > that tells us we need the arm target. If we need to distinguish
-> > arm7 vs aarch64, then the choice of -cpu should determine 32
-> > bs 64 bit.
-> > 
-> > This extends better into the future world where we have
-> > machine type that could involve CPUs from multiple targets.
-> > 
-> > IOW machine config option / QOM class is what we should pivot
-> > off rather than a global target config option.
-> > 
-> > This likely implies that the MachineClass should gain a class
-> > method to query the QEMU_ARCH_XXXX bitmask required. Initially
-> > restricted to only a single target, so you can wire that through
-> > to the current global target info at startup. Later expanded to
-> > support multiple concurrent targets.
+Building custom minimized QEMU is not a path that works for
+distro vendors, as we can't tailor to distinct use cases,
+so the footprint of the generic build and any impact on our
+packaging is a factor I'm interested in.
+
+The 'modules' feature came out of our work to lower the
+footprint of a default "all features" QEMU build.
+
+As long as qemu-system-$target stays around as its current
+impl, it isn't a blocker. If qemu-system-$target were changed
+into a symlink to qemu-system, then it becomes a critical path
+problem for the distro packaging.
+
+I think the solution long term is to further expand the use
+of modules to more of the code.
+
+> > IMHO we should make a clean break with the past. Leave
+> > the existing qemu-system-$TARGET binaries being built
+> > from the same pieces they are today, such that there
+> > is better confidence that we are not making behavioural
+> > changes to them.
 > >
 > 
-> While it sounds nice on paper, you will be doomed to ambiguity with this:
+> Funny enough, it reminded me word for word of a blog post from a
+> Microsoft employee where he explained that powershell existed only
+> because young developers were scared to modify original cmd shell.
 > 
-> qemu-system -machine virt -cpu max
-> 
-> What is your next plan? add an environment variable to solve it?
+> Regression issues are solved with testing and good design, not by
+> inventing new things.
 
-The machine names need to be globally unique across all targets.
-So the 'virt' naming clash needs a rename, such as is done in
-an earlier patch in this series.
-
-> Deriving target from argv(0) or -target is explicit, predictable, boring
-> and reliable, and it's exactly what we need now.
-
-With the requirement that machine names are globally unique, we can
-determine the target(s) directly.
-
-Relying on argv(0) does not appear to work in a heterogeneous future
-as target is no longer unique per process, but the machine type would
-be unique.
+We don't have sufficient testing, nor is the current QEMU
+qemu-system-$target especially good from a design POV as
+it has decades of historical baggage holding us back. The
+introduction of a new binary is the ideal time to address
+this long term problem. It frees us to do changes that are
+otherwise impossible and to experiment with new ideas
+without worrying about implications for the current binaries
+and their users.
 
 With regards,
 Daniel
