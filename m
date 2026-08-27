@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29851C5DF9D
-	for <qemu-riscv@archiver.kernel.org>; Thu, 27 Aug 2026 05:13:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43CF6C61DB9
+	for <qemu-riscv@archiver.kernel.org>; Thu, 27 Aug 2026 05:13:20 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wzSOs-0004ZC-2G; Thu, 27 Aug 2026 01:11:42 -0400
+	id 1wzSOV-00041w-QU; Thu, 27 Aug 2026 01:11:19 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1wzSOg-0004IM-2C
- for qemu-riscv@nongnu.org; Thu, 27 Aug 2026 01:11:31 -0400
-Received: from mail-pg1-x52c.google.com ([2607:f8b0:4864:20::52c])
+ id 1wzSOU-0003y5-BM
+ for qemu-riscv@nongnu.org; Thu, 27 Aug 2026 01:11:18 -0400
+Received: from mail-pj1-x102a.google.com ([2607:f8b0:4864:20::102a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1wzSOd-0004FY-Fz
- for qemu-riscv@nongnu.org; Thu, 27 Aug 2026 01:11:29 -0400
-Received: by mail-pg1-x52c.google.com with SMTP id
- 41be03b00d2f7-ca7c1176317so1570738a12.1
- for <qemu-riscv@nongnu.org>; Wed, 26 Aug 2026 22:11:27 -0700 (PDT)
+ id 1wzSOR-0004Ce-Hj
+ for qemu-riscv@nongnu.org; Thu, 27 Aug 2026 01:11:18 -0400
+Received: by mail-pj1-x102a.google.com with SMTP id
+ 98e67ed59e1d1-39686abd426so1513068a91.1
+ for <qemu-riscv@nongnu.org>; Wed, 26 Aug 2026 22:11:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1787807486; x=1788412286; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1787807474; x=1788412274; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:sender:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=JSgAqHr1NOvqwxx08subUkX/lMIs5ZKn3UbhmDEC214=;
- b=NvvKn5L451EcW4L8TxNKXt8wOex5MBmOWhSX6b3BFl3q7b/HjxBgnCc4CaHklM9tJ0
- byCZSB4KXyGvZDArdHEZCRRuX8gx6nwBon4U0xSpITagDg9naM0lVvZABTORBBINL456
- rMahcfWEnVqnRCXS+Q1oiV+3OilQoOuunY/JKmWPtvCwEVhwadvQmLtdvs0yUPribTdS
- +oavZzU/E7ycJ6JfEL3OdeM/EB5+S4FJnEqs5pANChunETvmhpY/JKVZAzhzVPvGTdn+
- N8GJbCym5JZ2DkFSnP1v9OsoQO8KcjxEEtd1I+BPmejbhKr2hhNfyICtu5g6xTkjXtBe
- VHRg==
+ bh=c0YS6jznp++FiM/vCZWCrH/hv2wY1w+aZ3YBUBkwkEI=;
+ b=hcvWiW/+1ViWGzjR79HEO2O8E4SzPuuiHsRHJabmG3VVc5ww1KXKxANMM1HSLjQC59
+ LXidZvgfILN2xkg7OlIC0UpDp1l4d9r6KvSn7sga/VoxrCJNLw6AA4s03n53gvix/OOy
+ 8j18Ww4eFwpIVlW7DdjIeYjbEm3oK2lDWaq6f+2ZrB2oZM4X9MeRT/nbep6Ih3i6mc+F
+ 3RvS0fYj6Y2FuvbyKNAgP/DSk+UeZzXu/ZnrvE9aqQJOOeBAXZwHEi9W9SRvfUj6tqzz
+ 3VRXba3JlorJ6rVITMqc9FKhCxpzWcOmg5If2BExoHTkjysm8rZYNqJqUH9ohQMn8STr
+ F3YA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787807486; x=1788412286;
+ d=1e100.net; s=20251104; t=1787807474; x=1788412274;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:sender:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=JSgAqHr1NOvqwxx08subUkX/lMIs5ZKn3UbhmDEC214=;
- b=EyZcTKeUXv//Rv6vbfa+xJZ24voPP22Xpz0s45CW7HQ0w2VkgVmy9mArCz/BaKzI/K
- absxoRd7urDzRpeFk1DrvK2wlFJvSN9qL0VdppQ+cbH8IlWYg7/OSpkQjrayepBk1H/9
- kHbQE5BFZ+vc0Z75Y971T2xG7daw1/g4vQv9JLBUPovKm7epayaUB3fX3NsVFX7RiQe9
- yxtO1Kubt4uotlaxKI3dmvqcr97ei7g/8suP/Oyt1/sZqfxkSv69PI0+sd2CgwOke3YY
- WqVKZ48wG6GoGWHGtAQAI5WtPV+f4PPfJoX0ZM3uK2J/bjbxxANekwvaWqhOtWjhP2mq
- QNBQ==
+ bh=c0YS6jznp++FiM/vCZWCrH/hv2wY1w+aZ3YBUBkwkEI=;
+ b=MqmWuI4jCyktkBi70dVsIIHtu3dK7V8txatlxsAgbAChGb5in6Or5mbGmnnK67acDa
+ 2DD6oAzoG2PpARdj8wzLkXolk7jUgdqmmujhUmzItq2oJeOQOBgqvX+FNnb9FmtqYexP
+ NZNyPczcvflIWqxluM6neUwMMznIIHPvANRG3vqhwmss1/RuMoyb9kJ90kfM4x1elA/T
+ NzctHcA5c2gAjA6zvMlZF5SwpZ+1pTgihShUKY6qMn2uLLX1ra5317PB215JV9SDZtZx
+ zRrCRMo6w6LFtr2MBaqRsQexRzRf8NR9M1XlUUkqYFqHyvQX5UjDMFbsekzkB3IlaqT9
+ 16/g==
 X-Forwarded-Encrypted: i=1;
- AHgh+RpNjffhnQSDPWlVUj72yZ3f03wb4bj8na3i5QEYVlyUiex/Z64kx2klJQIyHIuKUTXZ2e8Qd2n4gWMb@nongnu.org
-X-Gm-Message-State: AFuF++lICXRcjLDhgvokkajNuoemfgopbRHM8oy+egalxo9z762485+f
- hyLYWIbJ46yo9Zn7aF1IDzEUv6CCUWAblcSTN/OJkRxaAaIM2iaSssrp
-X-Gm-Gg: AR+sD12zbIs3p0N/7Vlsv6hlMEKz1gB5yUeg5lBnFdg0rPc75KfZeS1ff2FQuxK62RR
- cEfCLYdBcsjW4KJW3+uAyfpeTEN3BebrBVHosfZ0kD5Gr6F78eGoOwqNc4ZtMRCIaUjVj4XBTvO
- oI6XGsQCpkz5njkKajdupzZ0E+In7yHfu3ry+GG8FmCV17JPbIiWTTj0RDFe6UfCqsrL2+BERZg
- Amg38nBqey083dVQLgw4HVoB9tSGKdGwMxUJy88lBrSP7E7B1voG067nEayZUWjeAc6RFjcDG/8
- R4qFsuhPy4FfiQBV6IDxUwJO9MobPhEueevOgrjoDycBd+HK3y1RYHnRxvCQcQHt5y0Cf+sxPSS
- FLiHGk0PE17UCXDb/AZDvjLHOH5CxKd/CyWLuS+IqNO7GUWg7LTmW69/1evTptIMGBRw3ICi4z/
- aonf75B9UzLwBw+p47TRZYV2YCWWUZfvrdms1Z8YaJB7iACjXgH2GO/hZcrRSQ0zL/85g6ZFy9j
- HAFz3VA8hakC3Ie8b6qcY2K0bcoB9zZUEcGMyZZDHFXHQyF0ZXF9S46NKTbhw1VTFKrRlON1R5z
- 3oIzkuY+Qrn18IZtywEb
-X-Received: by 2002:a17:90b:586d:b0:396:4cbf:45bc with SMTP id
- 98e67ed59e1d1-3966d491c45mr26485905a91.16.1787807485965; 
- Wed, 26 Aug 2026 22:11:25 -0700 (PDT)
+ AHgh+RqnXIeOuOXAXnJ9tHlUYuzro14V/xI2qby0nZ/TH7boVZQHrWpxITK1/pxT0uaTL/0O+T5NxJDWIVcP@nongnu.org
+X-Gm-Message-State: AFuF++mDpj//80Lm92JQCNRoJGvI5Xj/04teUdNr3JTGd5UhsMXbR6Uh
+ OEKBH6t2ZDklHM4ULU7g2qQRO38XHM9+fnZ/Ag74ZU+0kmcl/FSKT0St
+X-Gm-Gg: AR+sD10J7QbIsIX+YoFuvRjFwHmDcKiDY6xVzve3POJf4+OfuJWnWSi8xvIxZBcD7kl
+ 3VOPPDCld+GgZyJ5s0dX/xApWK8aNr7GNKHjK5yvlSzODJ39D8oCFjlVz+/anshLv2CS7gvcjr8
+ y5YzgHzrsvZQjx3v0Hut//y9VlKZGY7Fj6xWQ488n9zfcTsfuOsx6A2tNzcgPv0lLD0GtK9Dlot
+ wZMZtCdzp4x1sVcHiIVU1ASqW6u9v2qNJsWVJBzVUgq7Rv5Zd54EvqAdSh2Ip6B+LS2PJO0Wz2b
+ zgmbC98oQtBUKpLRg+SpFJyjlpZaU1oYXb/CcX7sJBP3MmPszQb+tpzVaUUld9ln25QxJWzpHT9
+ mRfid7d0m0n6DLrhb6nNrns/wOn8A5t2/keGo/3zVjDgLSP5DSBtzZ17bbidNGaSMzxiCTvG5tl
+ kmbU5liIdndYQwQQ+b3cqB5d963FUV1mBaQEJbOltMaUTOyPhd6vqwKzcBAOPoLAdDZoUPlkvYM
+ 6bWPfkyUUDoA9YuaRSSDGj35NvOX8FDVwrov05hnMNK2dzP9PPQO/LFlCIt+3VNVec2gt7UsaEH
+ 5g0geTbMqRZKzncHq/On
+X-Received: by 2002:a17:90b:3cc3:b0:38f:18f9:785 with SMTP id
+ 98e67ed59e1d1-3966d20cde1mr26855588a91.8.1787807474185; 
+ Wed, 26 Aug 2026 22:11:14 -0700 (PDT)
 Received: from donnager-debian.. ([180.150.112.50])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-39670599275sm2210473a91.0.2026.08.26.22.11.20
+ 98e67ed59e1d1-39670599275sm2210473a91.0.2026.08.26.22.11.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 26 Aug 2026 22:11:25 -0700 (PDT)
+ Wed, 26 Aug 2026 22:11:13 -0700 (PDT)
 From: Joel Stanley <joel@jms.id.au>
 To: Alistair Francis <alistair.francis@wdc.com>,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
@@ -82,16 +82,16 @@ Cc: Peter Maydell <peter.maydell@linaro.org>, Weiwei Li <liwei1518@gmail.com>,
  Michael Ellerman <mpe@kernel.org>,
  Portia Stephens <portias@oss.tenstorrent.com>, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org, qemu-arm@nongnu.org
-Subject: [PATCH 12/12] tests/tcg: Check vector memory tests contain vector ops
-Date: Thu, 27 Aug 2026 14:39:51 +0930
-Message-ID: <20260827050953.67184-13-joel@jms.id.au>
+Subject: [PATCH 10/12] tests/tcg/riscv64: Enable vectorised memory test
+Date: Thu, 27 Aug 2026 14:39:49 +0930
+Message-ID: <20260827050953.67184-11-joel@jms.id.au>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260827050953.67184-1-joel@jms.id.au>
 References: <20260827050953.67184-1-joel@jms.id.au>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52c;
- envelope-from=joel.stan@gmail.com; helo=mail-pg1-x52c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102a;
+ envelope-from=joel.stan@gmail.com; helo=mail-pj1-x102a.google.com
 X-Spam_score_int: -16
 X-Spam_score: -1.7
 X-Spam_bar: -
@@ -115,71 +115,36 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Disassemble the tests and count the SVE or RVV memory access. Delete the
-binary when the check fails otherwise a subsequent run will not run the
-check and silently succeed.
+Build memory.c a second time with -march=rv64gcv -O3, similar to
+aarch64's memory-sve, so the memory test checks RVV loads and
+stores, including across page boundaries.
 
-    CHECK   memory-rvv contains 7 vector loads and 7 stores
-
-    CHECK   memory-sve contains 20 vector loads and 17 stores
-
-This is a coarse check and could be improved by checking specific
-functions, and using something more precise than an opcode grep.
-However, it would have caught the bug fixed in "tests/tcg/multiarch: Fix
-vectorisation of memory test", which makes it worthwhile.
-
-Skipped when no cross objdump was found.
+Run it under -cpu rv64,v=true.
 
 Signed-off-by: Joel Stanley <joel@jms.id.au>
 ---
- tests/tcg/Makefile.target                 | 8 ++++++++
- tests/tcg/aarch64/Makefile.softmmu-target | 1 +
- tests/tcg/riscv64/Makefile.softmmu-target | 1 +
- 3 files changed, 10 insertions(+)
+ tests/tcg/riscv64/Makefile.softmmu-target | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-diff --git a/tests/tcg/Makefile.target b/tests/tcg/Makefile.target
-index d4dd0fec650d..a5b694d2f21c 100644
---- a/tests/tcg/Makefile.target
-+++ b/tests/tcg/Makefile.target
-@@ -79,6 +79,14 @@ conditional-diff-out = 							\
- 		$(call diff-out,$1,$2), 				\
- 		$(call skip-test,"$1 check","no reference"))
- 
-+# Check an ELF for vector load ($1) and store ($2) patterns.
-+# Deleted on failure so the check runs again on the next make.
-+check-vectorised = $(if $(OBJDUMP), \
-+	$(call quiet-command, \
-+	    ld=$$($(OBJDUMP) -d $@ | grep -cE '[[:space:]]$1'); \
-+	    st=$$($(OBJDUMP) -d $@ | grep -cE '[[:space:]]$2'); \
-+	    printf "  %-7s %s\n" CHECK "$@ contains $$ld vector loads and $$st stores"; \
-+	    test "$$ld" -gt 0 && test "$$st" -gt 0 || { rm -f $@; exit 1; }))
- 
- # Tests we are building
- TESTS=
-diff --git a/tests/tcg/aarch64/Makefile.softmmu-target b/tests/tcg/aarch64/Makefile.softmmu-target
-index 196a2afa50ee..99ad1a2799d7 100644
---- a/tests/tcg/aarch64/Makefile.softmmu-target
-+++ b/tests/tcg/aarch64/Makefile.softmmu-target
-@@ -50,6 +50,7 @@ memory: CFLAGS+=-DCHECK_UNALIGNED=1
- 
- memory-sve: memory.c $(LINK_SCRIPT) $(CRT_OBJS) $(MINILIB_OBJS)
- 	$(CC) $(CFLAGS) $(EXTRA_CFLAGS) $< -o $@ $(LDFLAGS) boot.o
-+	$(call check-vectorised,ld1[bhwds],st1[bhwd])
- 
- memory-sve: private CFLAGS+=-DCHECK_UNALIGNED=1 -march=armv8.1-a+sve -O3
- 
 diff --git a/tests/tcg/riscv64/Makefile.softmmu-target b/tests/tcg/riscv64/Makefile.softmmu-target
-index 301a6e6e5700..5262007e39a5 100644
+index 3f2a8ed16142..301a6e6e5700 100644
 --- a/tests/tcg/riscv64/Makefile.softmmu-target
 +++ b/tests/tcg/riscv64/Makefile.softmmu-target
-@@ -79,6 +79,7 @@ memory: private CFLAGS += -DCHECK_UNALIGNED=1
- memory-rvv: memory.c $(LINK_SCRIPT) $(CRT_OBJS) $(MINILIB_OBJS)
- 	$(call quiet-command, \
- 	 $(CC) $(CFLAGS) $(EXTRA_CFLAGS) $< -o $@ $(LDFLAGS) $(CRT_OBJS), CC, $@)
-+	$(call check-vectorised,vle,vse[0-9])
- memory-rvv: private CFLAGS += -DCHECK_UNALIGNED=1 -march=rv64gcv -O3
- run-memory-rvv: QEMU_CPU = rv64,v=true
+@@ -76,6 +76,14 @@ EXTRA_RUNS += $(MULTIARCH_RUNS)
+ # Default is zicclsm=true, so misaligned accesses must work
+ memory: private CFLAGS += -DCHECK_UNALIGNED=1
  
++memory-rvv: memory.c $(LINK_SCRIPT) $(CRT_OBJS) $(MINILIB_OBJS)
++	$(call quiet-command, \
++	 $(CC) $(CFLAGS) $(EXTRA_CFLAGS) $< -o $@ $(LDFLAGS) $(CRT_OBJS), CC, $@)
++memory-rvv: private CFLAGS += -DCHECK_UNALIGNED=1 -march=rv64gcv -O3
++run-memory-rvv: QEMU_CPU = rv64,v=true
++
++TESTS += memory-rvv
++
+ # Simple Record/Replay Test
+ .PHONY: memory-record
+ run-memory-record: memory-record memory
 -- 
 2.47.3
 
