@@ -4,148 +4,114 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B85F2C61DC2
-	for <qemu-riscv@archiver.kernel.org>; Thu, 27 Aug 2026 11:29:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01968C61DC2
+	for <qemu-riscv@archiver.kernel.org>; Thu, 27 Aug 2026 11:39:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wzYIS-0007aB-Bi; Thu, 27 Aug 2026 07:29:28 -0400
+	id 1wzYRH-0000LA-9W; Thu, 27 Aug 2026 07:38:35 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wzYIQ-0007ZJ-Si
- for qemu-riscv@nongnu.org; Thu, 27 Aug 2026 07:29:26 -0400
-Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wzYIO-0000V3-Nb
- for qemu-riscv@nongnu.org; Thu, 27 Aug 2026 07:29:26 -0400
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 67R9HhkZ3524178
- for <qemu-riscv@nongnu.org>; Thu, 27 Aug 2026 11:29:23 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- qcYoCs+KKKit7J0t52okbZmYmgrgsm0vYIFGzH/F4ro=; b=U0ddnhA+kCxJD4Km
- MedTQdzYAmBEi9p9/PcTNtgWcR12KOWCmZm8MHo9lk4k4vW5/lMhbrKlnlRDmnQf
- j3QqEaDxZyS9VwrTjg/DHBtckWVt3VODbLqm5e/f1jIhOUlPVCmsyloYZKzbrtLd
- ZV9i4/R4AyMSaPTFwPdjEOwiIvlXOAOxSjZsvC6rUIS6sASoJ9DuD9CgzbfANz5G
- mZ5Fkt9L+z9lNGZlXv9DUlbEa2f2kivFnibuZ45qxSTHQjDJ2M3wYwXfAqEUeexL
- 9VI+LLi5SiBlIrGn1aPVWhrbjB3jmoUZDoQ7Ku6G2kRPk86HWMMiXg660+33ASwB
- utWTDg==
-Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com
- [209.85.222.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gagjfs0uu-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Thu, 27 Aug 2026 11:29:22 +0000 (GMT)
-Received: by mail-qk1-f197.google.com with SMTP id
- af79cd13be357-93494cce712so67783685a.3
- for <qemu-riscv@nongnu.org>; Thu, 27 Aug 2026 04:29:22 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
+ id 1wzYR6-0000Jp-58
+ for qemu-riscv@nongnu.org; Thu, 27 Aug 2026 07:38:24 -0400
+Received: from mail-yx1-xb131.google.com ([2607:f8b0:4864:20::b131])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
+ id 1wzYR3-0001XJ-Jr
+ for qemu-riscv@nongnu.org; Thu, 27 Aug 2026 07:38:23 -0400
+Received: by mail-yx1-xb131.google.com with SMTP id
+ 956f58d0204a3-66e452df0easo286868d50.1
+ for <qemu-riscv@nongnu.org>; Thu, 27 Aug 2026 04:38:21 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1787830700; cv=none;
+ d=google.com; s=arc-20260327;
+ b=jTKIRgSPpWUexbqLr3SJcbKk+yBAWE9v4JGFOynYXL57TdzTzN1hZp1wQgZZSkkfra
+ MAgDnm/xJrTgkjy1mcTSdPnmi/StiC/ElnjDQ5F302aFi3s/W7PalUrPhDQpQZorRx8U
+ Vpbsl0XLgEEPoIHBD/goz1CHCgpUclpJVHaKXoT4aL/wOpJlOIhPjK1IhRKGxOQIVSTh
+ OM/oVkP6QaNcj38I35+38d7EsmKMf2xXmG71VXieVzeUb8Co8Kt+MA+VsGQMcWemQDOl
+ 2xxZ/1vf/NAuTCi1s9sau4gGJJ9gm31OaaQ34MKflPVxDhrkbiInm3prBq7Gni0AjQRm
+ QQMg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=smE1oioKynN20kHMh+tO2twTO8YmnrAzbMbMtnZZ3+U=;
+ fh=oo3cmdzTDgOG0lIX3qCagfe2Mp7ROBQgVnYWHIOjUvQ=;
+ b=a2+19G7WZpPfPXc7HC8i+KFrzhMTwJTgrp8/LInZfmBz4pxE1QUJ9o61ilwl99XJQv
+ D2LLuFHy/iU82ob7GDupisrTe9+xkyVXdhig/Czx2151SwqfIqvXclC2PhVWV5uxX2lW
+ MLZAAz9kb0fFeQDh04wxOZCHJUDY/CLc/uXVkLJ/k65Cf2dHqixW3k3XXu8lm7roBP9K
+ Ch8/etAJz1QefGOEPBv7b5qITnPvOCueOa4ESto/iMe3ctuA5GT8dNQKQ83SIDC7IXar
+ 8hveNaJDCRwZQos7ug3B52gP4ETxc9u7r6hyMLQNnnXbuym3lXAngVyWfGKr9ReINR3O
+ iVNQ==; darn=nongnu.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1787830162; x=1788434962; darn=nongnu.org;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=qcYoCs+KKKit7J0t52okbZmYmgrgsm0vYIFGzH/F4ro=;
- b=a7cHXVVvIkegzAdlGpYyCgizU8K/r23fOAbZwCePGhIQFYH2iV9isb65hpzJkb4NAa
- ZxExgm1pALa6hlXZTyqYisdfXtWxGqpOoS0R2faJokK98f+vTkGt4ZsmnFVb5FZmUYd9
- SVovjyC1fKJko63j4/l9y05EewnbqsOhh4A7D90qir0zH44Xq5TnAWQvuyISDIlmOb+D
- 719PlZrlKE38WwO3Tj+gA+TJUx1P70rn1Bm1EosdzJkaRFINf9/FkGkdWVSO1jF2RxBU
- ghsTrXjTAl2kX1VyzB7V9KrFQvOMXLp3j7csdQnhz30WloYSSfsrf1tBDoS/eFypW6lX
- Xe4Q==
+ d=jms.id.au; s=google; t=1787830700; x=1788435500; darn=nongnu.org;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=smE1oioKynN20kHMh+tO2twTO8YmnrAzbMbMtnZZ3+U=;
+ b=BzWRAHQD/02JTDcXjJGAFMWlgjyoX06mdL77yASa4NNSTe8RM9k8vOGgg/Nckld6Q9
+ CZH24PbLK86/DjV/HW0RsD7shp7Agl7y9Y/FaxXWZ7EWKO+fHlg9U/g/G7jbITYLkLJY
+ ARxPf3wEPen3zAHEWxykLTyAdkyhd04a62EBo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787830162; x=1788434962;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=qcYoCs+KKKit7J0t52okbZmYmgrgsm0vYIFGzH/F4ro=;
- b=MeRcANYKGhpU69IVu6ikrAR5k/xOsWfwUbc3J2m8kafJ6CtR0fjyXTDvqV9ey+vfLV
- iAqVzt6gFEGNaa+ZWWF1mJ3fcclRxpVHe3uaYtLftNqdwBu1cnPKBGK8h+umFm4ucE6e
- RaQNtV4yqI9G4FnV9Q5n8+zWd6vW0ki2R62jhSo1WUh1g9Ya5Nq53eIwTnY0FWrifOuD
- 5kUMw0DsefAkCtONcnwe85XlE5w2Gf7Su/nkxSFfc1rBWZoPgxUSJz/Tl2Ajt1dlYE8m
- q/g0i3Ccci1ju/vXi9cCmLGco5n6SGOm3f2dUOxgsAvAw+nPPNTv25ozkzUX82GwEULS
- zaYg==
+ d=1e100.net; s=20251104; t=1787830700; x=1788435500;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=smE1oioKynN20kHMh+tO2twTO8YmnrAzbMbMtnZZ3+U=;
+ b=V1ZGJT9Jm7/i4cWYZLremHE+kIaTBfzKgRn/7RcPZ8V0r+SMgm7de4W3En7PMAgkED
+ i40fW3W0+rVuxmC+rfO3b093rreDeUGrSZSEkuBL6T8z3g3GuS1qrR71yL13XIlBSJfL
+ N2xWN+T8AAWpKx8T0Wphc8Vmtf495tZ+28yrRzpJ767/P7BPf43icSLhIMgFT4mxziGA
+ ZS1zmAAo60Fx4ZDVKDp3EW6ARRQD8nrajFt0ERs5c+4F2xGmfEtMpXJrNXOvD53Q3+BJ
+ NpQA3SDlBevow+8/3ZJmH15V2PaTBCu62oKmeGjfXxWW6/DtqOXlwtKBBw3FcrLmN3cQ
+ FDLQ==
 X-Forwarded-Encrypted: i=1;
- AHgh+RrOir2Q+2wyjRRShJZlm411eIiL8gQ2i2ttsmlNv2DyUarZS0VosYjJdmgYTVyawEvlLcaJnPxUKo4Q@nongnu.org
-X-Gm-Message-State: AFuF++ko40uqugqFTy+VRptCD5MGYJIw1qweZqOoVnWuGf7Ck/jqY0UT
- k6A5q1BzXIzpzj29tPn2mio/jJe908iF/g7VKWQ46ZsQkLTNoHOqO4AGfGFnvN8QVU9GQm12+vI
- gxByVD+z0MsPWGXGFbeLF1K9cLXLU7ANKkGnn9mm69KxJ5cAjNzbRJA4w8w==
-X-Gm-Gg: AR+sD13AQD/q9SP46Urx+PDDHRd5OOW8OpOTQy8nl+1nBq4Lr3+53Zks8J5LRaqqlH9
- 7y4/fTaZygo+heg+E+fNYP4t0zE3M+4AxEs2gHqONBOyQKu51iTnl5tKjXme1aWIEIYyOFeDqMc
- nwb7PdUmGUPiGZzfeLfe6hq93uFXzfnxYgVSsJcsWgKtaiQ/x3/1eQaPqwGWlR1d/UW/zvj7F0m
- ic9kaZ99sBVmZd1YSj9ful5R54H1ILZOO2siGTvZKGN8G+3p7aN52l9VAxVn8CgE64+q2vkLkf1
- /Cn4TEJJcR1I1nIMxvjtfbl20O3E1jpbUE12p6WZfhkUb9MOGG+ZuJ7+T5Dco8eDh6dmj00m7C1
- +oaqenZVe2n0iMd5SX44V0vPDRfs2SkLjjJpz
-X-Received: by 2002:a05:620a:370e:b0:938:fd23:1e29 with SMTP id
- af79cd13be357-938fd232669mr776720585a.4.1787830162184; 
- Thu, 27 Aug 2026 04:29:22 -0700 (PDT)
-X-Received: by 2002:a05:620a:370e:b0:938:fd23:1e29 with SMTP id
- af79cd13be357-938fd232669mr776717085a.4.1787830161765; 
- Thu, 27 Aug 2026 04:29:21 -0700 (PDT)
-Received: from [192.168.68.100] ([189.38.141.232])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-9377e616605sm429794385a.29.2026.08.27.04.29.19
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 27 Aug 2026 04:29:21 -0700 (PDT)
-Message-ID: <db0370ab-83d2-4c37-8530-76a317800c0b@oss.qualcomm.com>
-Date: Thu, 27 Aug 2026 08:29:17 -0300
+ AHgh+Ro19Yc3vy834luW/f3SUMl6GP/MbMetMY7d3pLxKxrlK7CdqstblaKxRlCNv1tNo8BEThFvnA8Qh47Y@nongnu.org
+X-Gm-Message-State: AFuF++mE2ILb1PajwX4m1tJviTXAlL7Nc6GktvK3UxZQGyMGXmLIijJ9
+ v1HaEJJTMmmwDSEOyzB/GFizYvwDZE4xSzSbiZVqGsHAanRbFM7HmzXgwjNTujOErkvy4RxeyCg
+ f1XubRLz3kKm1yZVf1d6npfQsmoCywFQ=
+X-Gm-Gg: AR+sD1090ROb1vGVgJAlMeG39Sl79kOlfvUNkk7RuLI7/7J/nWWzzBuUMZB9P9mz+AU
+ WLnqI+e144j4OSjhZVo876LO0BOGeF0LMZAYMgF0UbQkI77UiiWVC/SREpms9flcqpnCF5eHnHY
+ ZflYz6Lm12DVclMsiao5tSo9dE9RhefHyN+c735y5UkFna4rR66rGws9gFiQSt1XovaoxKb0oxU
+ zUnhXUNkolAgxcYrIjWn1PqCxmdteaMKE4WHi/7XzkR6qwChQ1T0WDgrBb/w7MZVK98YAbClTaQ
+ FpIQlbuyNm1JzZ2ajioISR/6COJtwkOqXm1ioV3ZqKiAiBOFPeKELGvomhZi2YkXBHLqNCaKjB5
+ U8JAkGWGJwl5vRQiTJ/R8mKg7YpXe07O+3qcjILU1oZ2tqEncvhE9rZw/3Ziyjiqiqc0GYU0/Dz
+ 84dN7OkVOf9ssM7Xdo
+X-Received: by 2002:a05:690e:bcd:b0:66c:e0ea:a25b with SMTP id
+ 956f58d0204a3-66d80541034mr2387599d50.1.1787830700314; Thu, 27 Aug 2026
+ 04:38:20 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 09/16] hw/riscv/atlantis: Rename hart array 'soc' to 'cpus'
-To: Joel Stanley <joel@jms.id.au>, Alistair Francis <alistair.francis@wdc.com>
-Cc: Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu@processmission.com>,
- Nicholas Piggin <npiggin@gmail.com>,
- Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>,
- Michael Ellerman <mpe@kernel.org>,
- Portia Stephens <portias@oss.tenstorrent.com>,
- =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>,
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 References: <20260826220528.54516-1-joel@jms.id.au>
- <20260826220528.54516-10-joel@jms.id.au>
-From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Content-Language: en-US
-In-Reply-To: <20260826220528.54516-10-joel@jms.id.au>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-ORIG-GUID: 5ionbP3aifFf1W0r0u_LEmDfa7N0jC2t
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI3MDA5NSBTYWx0ZWRfX1W9hvv1IY+js
- 1bj9zs3pCzcEJFieVI12omWSfZb4Ee5gyL9/8/j/iWRSGhgU3nvN463LzWgxaFhYo8al5Ojg3Ps
- v23m1NTQUNVFOa8Hvh6w1USxyG/HDVZXYvZtLx+9q3zeW01L4vgUYDMxgrLQbsbAyEWX/A7E/RG
- kuKNaBN1qiXkDaMnqtBqJ2M47yJP9WAJco6tSODRxdh7uqE/5Pgvk/WyERy+rZAnFdO9mCdv1T8
- dPyPk0USu1PGWR0/LviV7owUM+8U3zANqbbVZex6htAVrC0dYDSsFRCTDGowhTABm5DS2I+dpfu
- DDb/9yNWyXDl/n9ogMyPZrRzvV/Dutv45eUmEXIVyABImtglAgP23t6zxET+hs72y2MUZbk7ccm
- IfGwl3DvY1ZYXUgfp1gJk+HNpmHctzO44fXOgEglf8IVnU1YuU3LddLNfzgdUjSnPJkJtb1Xf5G
- SlzmmFBFJigk5dRGJYw==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODI3MDA5NSBTYWx0ZWRfX6601tUE518aA
- amyTic9bvPwXNoQoShCSrHth6Iu6MzXT6zexHF7AYdgmcLps7e3tSupkBF+aeOgaTJC6K7yKoIJ
- cgUz9dp/NdtaKSex2sYZSHnYREedr4I=
-X-Proofpoint-GUID: 5ionbP3aifFf1W0r0u_LEmDfa7N0jC2t
-X-Authority-Analysis: v=2.4 cv=dd+wG3Xe c=1 sm=1 tr=0 ts=6a901f92 cx=c_pps
- a=50t2pK5VMbmlHzFWWp8p/g==:117 a=MCIxunHWmQOg/5OnbzXZaw==:17
- a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=EUspDBNiAAAA:8 a=S04PF1N2CULH3AedksMA:9 a=QEXdDO2ut3YA:10
- a=IoWCM6iH3mJn3m4BftBB:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-27_04,2026-08-26_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 priorityscore=1501 lowpriorityscore=0 clxscore=1015 bulkscore=0
- adultscore=0 suspectscore=0 impostorscore=0 malwarescore=0 phishscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608270095
-Received-SPF: pass client-ip=205.220.180.131;
- envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
-X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ <20260826220528.54516-5-joel@jms.id.au>
+ <53fe0bed-9694-44b0-a1ff-628e2983b0cb@oss.qualcomm.com>
+In-Reply-To: <53fe0bed-9694-44b0-a1ff-628e2983b0cb@oss.qualcomm.com>
+From: Joel Stanley <joel@jms.id.au>
+Date: Thu, 27 Aug 2026 21:08:07 +0930
+X-Gm-Features: AcwNN1WUFpBMG_leDaNXikIKmZ45jbz_LybxJAfCtsji0Vf2bUNrYQalH82vuK0
+Message-ID: <CACPK8XcyTVkdeifw3bvVR-SqWDc+JRetYDHcjkVo7hO8KrtEjw@mail.gmail.com>
+Subject: Re: [PATCH 04/16] hw/intc/riscv_aplic: Take a MemoryRegion for the
+ created device
+To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>,
+ Weiwei Li <liwei1518@gmail.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Chao Liu <chao.liu@processmission.com>, 
+ Nicholas Piggin <npiggin@gmail.com>,
+ Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>, 
+ Michael Ellerman <mpe@kernel.org>,
+ Portia Stephens <portias@oss.tenstorrent.com>, 
+ =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>, qemu-riscv@nongnu.org, 
+ qemu-devel@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b131;
+ envelope-from=joel.stan@gmail.com; helo=mail-yx1-xb131.google.com
+X-Spam_score_int: -16
+X-Spam_score: -1.7
+X-Spam_bar: -
+X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.001,
+ FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.249,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -161,166 +127,107 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+On Thu, 27 Aug 2026 at 20:38, Daniel Henrique Barboza
+<daniel.barboza@oss.qualcomm.com> wrote:
+>
+>
+>
+> On 8/26/2026 7:05 PM, Joel Stanley wrote:
+> > riscv_aplic_create() maps the device it creates into system_memory,
+> > which prevents its use by SoCs that map devices into their own memory
+> > container.
+> >
+> > Add a MemoryRegion parameter and map the device into it instead of
+> > calling sysbus_mmio_map(). The mapping still only happens when the
+> > APLIC is emulated. All callers pass system_memory, so there is no
+> > change in behaviour.
+> >
+> > Signed-off-by: Joel Stanley <joel@jms.id.au>
+> > ---
+> >   include/hw/intc/riscv_aplic.h | 2 +-
+> >   hw/intc/riscv_aplic.c         | 5 +++--
+> >   hw/riscv/aia.c                | 6 ++++--
+> >   hw/riscv/cps.c                | 6 ++++--
+> >   hw/riscv/xiangshan_kmh.c      | 6 ++++--
+> >   5 files changed, 16 insertions(+), 9 deletions(-)
+> >
+> > diff --git a/include/hw/intc/riscv_aplic.h b/include/hw/intc/riscv_aplic.h
+> > index c7a4d4ad0172..baeec76e4c3e 100644
+> > --- a/include/hw/intc/riscv_aplic.h
+> > +++ b/include/hw/intc/riscv_aplic.h
+> > @@ -80,7 +80,7 @@ bool riscv_is_kvm_aia_aplic_imsic(bool msimode);
+> >   bool riscv_use_emulated_aplic(bool msimode);
+> >   void riscv_aplic_set_kvm_msicfgaddr(RISCVAPLICState *aplic, hwaddr addr);
+> >
+> > -DeviceState *riscv_aplic_create(hwaddr addr, hwaddr size,
+> > +DeviceState *riscv_aplic_create(MemoryRegion *mr, hwaddr addr, hwaddr size,
+> >       uint32_t hartid_base, uint32_t num_harts, uint32_t num_sources,
+> >       uint32_t iprio_bits, bool msimode, bool mmode, DeviceState *parent);
+> >
+> > diff --git a/hw/intc/riscv_aplic.c b/hw/intc/riscv_aplic.c
+> > index 84606e9f3d88..87d7d9e49cdd 100644
+> > --- a/hw/intc/riscv_aplic.c
+> > +++ b/hw/intc/riscv_aplic.c
+> > @@ -1109,7 +1109,7 @@ void riscv_aplic_add_child(DeviceState *parent, DeviceState *child)
+> >   /*
+> >    * Create APLIC device.
+> >    */
+> > -DeviceState *riscv_aplic_create(hwaddr addr, hwaddr size,
+> > +DeviceState *riscv_aplic_create(MemoryRegion *mr, hwaddr addr, hwaddr size,
+> >       uint32_t hartid_base, uint32_t num_harts, uint32_t num_sources,
+> >       uint32_t iprio_bits, bool msimode, bool mmode, DeviceState *parent)
+> >   {
+> > @@ -1137,7 +1137,8 @@ DeviceState *riscv_aplic_create(hwaddr addr, hwaddr size,
+> >       sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
+> >
+> >       if (riscv_use_emulated_aplic(msimode)) {
+> > -        sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, addr);
+> > +        memory_region_add_subregion(mr, addr,
+> > +            sysbus_mmio_get_region(SYS_BUS_DEVICE(dev), 0));
+> >
+> >           if (!msimode) {
+> >               for (i = 0; i < num_harts; i++) {
+> > diff --git a/hw/riscv/aia.c b/hw/riscv/aia.c
+> > index 49cb14349f00..974806c425e2 100644
+> > --- a/hw/riscv/aia.c
+> > +++ b/hw/riscv/aia.c
+> > @@ -71,7 +71,8 @@ DeviceState *riscv_create_aia(MemoryRegion *mr, bool msimode, int aia_guests,
+> >
+> >       if (!kvm_enabled()) {
+> >           /* Per-socket M-level APLIC */
+> > -        aplic_m_dev = riscv_aplic_create(aplic_m->base +
+> > +        aplic_m_dev = riscv_aplic_create(mr,
+> > +                                     aplic_m->base +
+> >                                        socket * aplic_m->size,
+> >                                        aplic_m->size,
+> >                                        (msimode) ? 0 : base_hartid,
+>
+> Not a problem with your patch but seems like we have a goofed indentation here
+> and down below in the next riscv_aplic_create() instance.  Seems like we tried
+> very hard to avoid breaking the 80 char line and we ended up doing this:
+>
+>
+>          aplic_m_dev = riscv_aplic_create(aplic_m->base +
+>                                       socket * aplic_m->size,
+>                                       aplic_m->size,
+>                                       (msimode) ? 0 : base_hartid,
+>                                       (msimode) ? 0 : hart_count,
+>                                       num_sources,
+>                                       num_prio_bits,
+>                                       msimode, true, NULL);
+>
+>
+> i.e we moved the MULT to the next line, indented it, and all other parameters
+> follow suit.  The result is not pleasant.
+>
+> If you could take the oppourtinity to also fix the indentation of these 2 instances
+> that would be terrific.
 
+Agreed, x1000.
 
-On 8/26/2026 7:05 PM, Joel Stanley wrote:
-> The RISCVHartArrayState member is named soc, but it's an array of cpus,
-> not the entire SoC. Use cpus instead as an accurate description of the
-> hart array.
+> It will break 80+ char line soft rule and that's fine - the
+> hard limit for checkpatch is 90 chars per line for 10+ years now.  It should be
+> 120 char/line at this point but anyway ...
 
-For 'virt' and other boards that support more than one socket I always wanted
-to rename "soc" to "sockets".  E.g. for virt we have (include/hw/riscv/virt.h):
-
-RISCVHartArrayState soc[VIRT_SOCKETS_MAX];
-
-I always wanted to rename it to:
-
-RISCVHartArrayState sockets[VIRT_SOCKETS_MAX];
-
-And throughout the code we would do "s->socket[i].num_harts" instead of
-"s->soc[i].num_harts", which is more idiomatic IMO.
-
-If you want to keep semantics with the other boards you could rename it to
-"socket", a.k.a a single array of harts/cpus.  You would have this:
-
- > +    aclint_mtimer_cells = g_new0(uint32_t, s->socket.num_harts * 2);
-
-This would also make it clearer that tt_atlantis has a single socket.
-
-Note that all that I said above is stylistic/taste.  In the end "cpus" is
-a closer equivalent than "soc", so feel free to go ahead:
-
-
-Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-
-> 
-> Signed-off-by: Joel Stanley <joel@jms.id.au>
-> ---
->   include/hw/riscv/tt_atlantis.h |  2 +-
->   hw/riscv/tt_atlantis.c         | 34 +++++++++++++++++-----------------
->   2 files changed, 18 insertions(+), 18 deletions(-)
-> 
-> diff --git a/include/hw/riscv/tt_atlantis.h b/include/hw/riscv/tt_atlantis.h
-> index d0cca3b02424..642490d21743 100644
-> --- a/include/hw/riscv/tt_atlantis.h
-> +++ b/include/hw/riscv/tt_atlantis.h
-> @@ -29,7 +29,7 @@ struct TTAtlantisState {
->       Notifier machine_done;
->       const MemMapEntry *memmap;
->   
-> -    RISCVHartArrayState soc;
-> +    RISCVHartArrayState cpus;
->       DeviceState *irqchip;
->       DesignWareI2CState i2c[TT_ATL_NUM_I2C];
->       UnimplementedDeviceState uart1;
-> diff --git a/hw/riscv/tt_atlantis.c b/hw/riscv/tt_atlantis.c
-> index 127c89be4f60..35b3be072a06 100644
-> --- a/hw/riscv/tt_atlantis.c
-> +++ b/hw/riscv/tt_atlantis.c
-> @@ -112,13 +112,13 @@ static void create_fdt_aclint(TTAtlantisState *s, uint32_t *intc_phandles)
->       uint32_t aclint_cells_size;
->       hwaddr addr;
->   
-> -    aclint_mtimer_cells = g_new0(uint32_t, s->soc.num_harts * 2);
-> +    aclint_mtimer_cells = g_new0(uint32_t, s->cpus.num_harts * 2);
->   
-> -    for (int cpu = 0; cpu < s->soc.num_harts; cpu++) {
-> +    for (int cpu = 0; cpu < s->cpus.num_harts; cpu++) {
->           aclint_mtimer_cells[cpu * 2 + 0] = cpu_to_be32(intc_phandles[cpu]);
->           aclint_mtimer_cells[cpu * 2 + 1] = cpu_to_be32(IRQ_M_TIMER);
->       }
-> -    aclint_cells_size = s->soc.num_harts * sizeof(uint32_t) * 2;
-> +    aclint_cells_size = s->cpus.num_harts * sizeof(uint32_t) * 2;
->   
->       addr = s->memmap[TT_ATL_ACLINT].base;
->   
-> @@ -210,7 +210,7 @@ static void create_fdt_pmu(TTAtlantisState *s)
->   {
->       char pmu_name[] = "/pmu";
->       void *fdt = MACHINE(s)->fdt;
-> -    RISCVCPU *hart = &s->soc.harts[0];
-> +    RISCVCPU *hart = &s->cpus.harts[0];
->   
->       qemu_fdt_add_subnode(fdt, pmu_name);
->       qemu_fdt_setprop_string(fdt, pmu_name, "compatible", "riscv,pmu");
-> @@ -227,8 +227,8 @@ static void create_fdt_cpu(TTAtlantisState *s, const MemMapEntry *memmap,
->   
->       fdt_create_cpu_socket_subnode(fdt, TT_ACLINT_TIMEBASE_FREQ);
->   
-> -    create_fdt_socket_cpus(fdt, s->soc.harts, 0, s->soc.num_harts,
-> -                           s->soc.hartid_base, &fdt_phandle, intc_phandles,
-> +    create_fdt_socket_cpus(fdt, s->cpus.harts, 0, s->cpus.num_harts,
-> +                           s->cpus.hartid_base, &fdt_phandle, intc_phandles,
->                              false, false);
->   
->       create_fdt_memory(s);
-> @@ -252,13 +252,13 @@ static void create_fdt_cpu(TTAtlantisState *s, const MemMapEntry *memmap,
->       create_fdt_one_aplic(fdt, &s->memmap[TT_ATL_MAPLIC],
->                            msi_m_phandle, intc_phandles,
->                            aplic_m_phandle, aplic_s_phandle,
-> -                         IRQ_M_EXT, s->soc.num_harts);
-> +                         IRQ_M_EXT, s->cpus.num_harts);
->   
->       /* S-level APLIC node */
->       create_fdt_one_aplic(fdt, &s->memmap[TT_ATL_SAPLIC],
->                            imsic_s_phandle, intc_phandles,
->                            aplic_s_phandle, 0,
-> -                         IRQ_S_EXT, s->soc.num_harts);
-> +                         IRQ_S_EXT, s->cpus.num_harts);
->   }
->   
->   static void create_fdt_uart(void *fdt, const MemMapEntry *mem, int irq,
-> @@ -429,7 +429,7 @@ static void tt_atlantis_machine_done(Notifier *notifier, void *data)
->       hwaddr start_addr = s->memmap[TT_ATL_DDR_LO].base;
->       hwaddr mem_size;
->       target_ulong firmware_end_addr, kernel_start_addr;
-> -    const char *firmware_name = riscv_default_firmware_name(&s->soc);
-> +    const char *firmware_name = riscv_default_firmware_name(&s->cpus);
->       uint64_t fdt_load_addr;
->       uint64_t kernel_entry;
->       RISCVBootInfo boot_info;
-> @@ -446,7 +446,7 @@ static void tt_atlantis_machine_done(Notifier *notifier, void *data)
->       if (mem_size > s->memmap[TT_ATL_DDR_LO].size) {
->           mem_size = s->memmap[TT_ATL_DDR_LO].size;
->       }
-> -    riscv_boot_info_init_discontig_mem(&boot_info, &s->soc,
-> +    riscv_boot_info_init_discontig_mem(&boot_info, &s->cpus,
->                                          s->memmap[TT_ATL_DDR_LO].base,
->                                          mem_size);
->   
-> @@ -476,7 +476,7 @@ static void tt_atlantis_machine_done(Notifier *notifier, void *data)
->       riscv_load_fdt(fdt_load_addr, machine->fdt);
->   
->       /* load the reset vector */
-> -    riscv_setup_rom_reset_vec(machine, &s->soc, start_addr,
-> +    riscv_setup_rom_reset_vec(machine, &s->cpus, start_addr,
->                                 s->memmap[TT_ATL_BOOTROM].base,
->                                 s->memmap[TT_ATL_BOOTROM].size,
->                                 kernel_entry,
-> @@ -496,18 +496,18 @@ static void tt_atlantis_machine_init(MachineState *machine)
->   
->       s->memmap = tt_atlantis_memmap;
->   
-> -    object_initialize_child(OBJECT(machine), "soc", &s->soc,
-> +    object_initialize_child(OBJECT(machine), "soc", &s->cpus,
->                               TYPE_RISCV_HART_ARRAY);
-> -    object_property_set_str(OBJECT(&s->soc), "cpu-type", machine->cpu_type,
-> +    object_property_set_str(OBJECT(&s->cpus), "cpu-type", machine->cpu_type,
->                               &error_abort);
-> -    object_property_set_int(OBJECT(&s->soc), "hartid-base", 0,
-> +    object_property_set_int(OBJECT(&s->cpus), "hartid-base", 0,
->                               &error_abort);
-> -    object_property_set_int(OBJECT(&s->soc), "num-harts", hart_count,
-> +    object_property_set_int(OBJECT(&s->cpus), "num-harts", hart_count,
->                               &error_abort);
-> -    object_property_set_int(OBJECT(&s->soc), "resetvec",
-> +    object_property_set_int(OBJECT(&s->cpus), "resetvec",
->                               s->memmap[TT_ATL_BOOTROM].base,
->                               &error_abort);
-> -    sysbus_realize(SYS_BUS_DEVICE(&s->soc), &error_fatal);
-> +    sysbus_realize(SYS_BUS_DEVICE(&s->cpus), &error_fatal);
->   
->       s->irqchip = riscv_create_aia(system_memory,
->                                     true, TT_IMSIC_GUESTS,
-
+But I'll move this to the next line as to not pass comment on this can of worms.
 
