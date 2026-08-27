@@ -4,146 +4,121 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06891C61DB9
-	for <qemu-riscv@archiver.kernel.org>; Thu, 27 Aug 2026 08:46:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 411D3C61DC2
+	for <qemu-riscv@archiver.kernel.org>; Thu, 27 Aug 2026 09:09:49 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wzVkb-0005VQ-1F; Thu, 27 Aug 2026 04:46:21 -0400
+	id 1wzW6n-0006pF-3v; Thu, 27 Aug 2026 05:09:17 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1wzVkT-0005Tr-Ui
- for qemu-riscv@nongnu.org; Thu, 27 Aug 2026 04:46:14 -0400
-Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1wzVkS-0007YO-6l
- for qemu-riscv@nongnu.org; Thu, 27 Aug 2026 04:46:13 -0400
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 67R6QuWq3834518
- for <qemu-riscv@nongnu.org>; Thu, 27 Aug 2026 08:46:09 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- o8gAehL94WGGN1MYx9UOXC1P0U6rV2eAzOiDC442g08=; b=T3HddhlTbANOJj00
- HThYhJfCvbWklEh1yY2jKb33k9RqISF1w0Oeu7QJ9eKCLoYdT1GpE/WaX0wX5j78
- lu2O+O2CbchLjUbaD8huzphnpkeAkvxnuUxFUx/13wQJR0Mi8LRFp6Ml/86vw9/U
- 0+f8CWGUPqzpKqz8nUYUfmQQsk9gYqnd6Cs7t+celcjrwvwQxVyFfL/Zx11GLpud
- U09WX9lEQueinKm1HPaBlqNUqZBQr/Aws9w9l0/Lk6izsd2RXMkAT0CEZr6b/l67
- 8smF6OaEH7QDSFFmR5MlPCOn+sNvrr06SYJjqUVgsFuGwLNhZGj+wnxozg0yCKeV
- ZibtrQ==
-Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com
- [209.85.160.200])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ga0wbuub8-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Thu, 27 Aug 2026 08:46:09 +0000 (GMT)
-Received: by mail-qt1-f200.google.com with SMTP id
- d75a77b69052e-5276aa86d00so21158141cf.2
- for <qemu-riscv@nongnu.org>; Thu, 27 Aug 2026 01:46:09 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1wzW6l-0006ou-Ma
+ for qemu-riscv@nongnu.org; Thu, 27 Aug 2026 05:09:15 -0400
+Received: from mail-yw1-x1132.google.com ([2607:f8b0:4864:20::1132])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1wzW6k-0003xT-10
+ for qemu-riscv@nongnu.org; Thu, 27 Aug 2026 05:09:15 -0400
+Received: by mail-yw1-x1132.google.com with SMTP id
+ 00721157ae682-81f36179d72so32887817b3.2
+ for <qemu-riscv@nongnu.org>; Thu, 27 Aug 2026 02:09:13 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1787821753; cv=none;
+ d=google.com; s=arc-20260327;
+ b=I+8qKrsabiKvC2lZ3ja4oLeWDXewQJyhQHvlq1vBlKmtKJBDlGVzJon7q2WGO7Pyi9
+ nKOAQqyYIzIKKSqPuMkGfgN2EUmIPgB1Ksq68IapEqV9R3Uu5Us0y/L22d8Jval7Hwmv
+ t7CnslR8msv8r7Xeq8d2QMB1D45zNDsrwL3bQgweuP5F0eafpHvan4uL02RCIzf75IcV
+ 6AW965SBAfvlQ/a3m/1TzzgTLeF7ZF7BQiFh5/IkOjFU9vOJnBnKandFs1fVdWQeJ87u
+ uBIrL7ngZoLe2MfKlmH71nZ02UEqE5QLX3AdfL9e2ZJa7fDigPrMnJwYuzGfEO9AgsJM
+ b+SQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=nNeSuIzM80Ev2zL1czOqBtBwyX2vwQaGwFcIup6MpMc=;
+ fh=r3J3rw38UcrJV0cBssFnlsynEnncF1B8gr68EvkN9bs=;
+ b=sWRPUiTBWabU8IxQzUatK7fNK+likEwva4KIqOBqiM9Oc1f14sg25FwykXw8iBAXfk
+ u8QTuI7dJO3s5kiXfIayqv1oX1zT5FUtQ6SC7aUxvLWtJj7hD3eQ795Yg4LuYlEu+ED2
+ ByvoqzJZAOKetJURQ2pGr530W/1rXV2UrEswLk6dr1gP/RFUxBn43IZLsRmrzHxpxnTZ
+ gks8M0sMv97k1e2jCL18/5z9N+XqgSOzxr3FXXibz3Hw3wf4XwH7zI1jDsWnY6WhtGxt
+ eoJXp+xph6Rs8mmJRzOTCidldDHhtC9iHakrlJwX7Ow5WVSmfEEpNO41CtyTeVTRFBsv
+ C6GQ==; darn=nongnu.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1787820369; x=1788425169; darn=nongnu.org;
- h=content-transfer-encoding:content-type:in-reply-to:from:references
- :cc:to:content-language:subject:user-agent:mime-version:date
- :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=o8gAehL94WGGN1MYx9UOXC1P0U6rV2eAzOiDC442g08=;
- b=blchUnDVY8aCdogN7XboJoQ69aeM4A5/wgjKAXCvo9wri/63h1vvVL0dkLmeylppbh
- a/dX8ukkWP283OqR88EKuiuh6WWSjR/0HS4CwCGkYppPlIdHga7VwmXl+vmtPjyM6LFf
- 1z+x0ANRbG42v890yPBEo1xk4vTsYRGGkW32OywP7V+XIpre7IcSObVkffBou48NAgC2
- w3mteCplOJURgk/qMcKk8hf5m+axsQ6DG3TJUjCNAKnYzqIe8ftayxRlHWi61TAJhdTg
- /SslRKuiK7PpL5QhIDuj/wPrdoKbtXhEqVhN+0zjcNQ0JpT+K+XJfGxCfJMqeOCVgWyQ
- XYKg==
+ d=linaro.org; s=google; t=1787821753; x=1788426553; darn=nongnu.org;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=nNeSuIzM80Ev2zL1czOqBtBwyX2vwQaGwFcIup6MpMc=;
+ b=qwog4xO5/n0NmkCFyjCqTMo4FT2zs2EmtXvIrBGorjUzPB/D9Aw6hOz4B9KRPMvi/Y
+ NN6deAmYrz4AaEHFmloWFM6K5OUeL7VGXUAfaImM9OpKtK0Ko6P0Q6H+m0GObJpCNtGc
+ xzC41LU8pMjJoEgRKlsJbA873AkNm4RK+GMNmr7ng0y/hVPuZRR29VpeWPu53LjnRRiJ
+ Xwl2hRlJtxKr+nQBdq4EOJ4iyrLQgAUdIW7UXgiJdu05Fr4fz1vq1qXMOkCZruyeiaaS
+ 8ZWncLAxENQAvDmx5sT7hKS9GJeEm2+z2t7oSEd72oHe8BDh5ZdLWvC06EUHz7peluF3
+ vfag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787820369; x=1788425169;
- h=content-transfer-encoding:content-type:in-reply-to:from:references
- :cc:to:content-language:subject:user-agent:mime-version:date
- :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=o8gAehL94WGGN1MYx9UOXC1P0U6rV2eAzOiDC442g08=;
- b=EQXcp8HbsJKvPOGOGqf+Y/q1fEutoiWkbCjJjfWmiTCzGlqSKHhKjvXWu/8mxKSja5
- 32MdrEmkoH+Q+DCNTrjzI6RVR4h6EngdQ8qkY/UZGmDrZczyJj6sP4zbwraZ8D0ViweZ
- FJXdtvNrpuSm20Ad7+AQBEbukQyFhNEHs+cAPRUMiKMtcWKVj0bwgMZC0sua/PSQv7SJ
- bbiGzByoZ/hFPYbsN81DdVMUa9LHGwx7NhPQk+Vsp6GDag+vMOHEif+N/JI8vTZarAKl
- xyAA4MYuuxnaUz6r2XrZmXsvQxYJ9qL5MTfsoRvemjdPegTA+gwI732YQdCUZXfiGwPe
- a/jg==
+ d=1e100.net; s=20251104; t=1787821753; x=1788426553;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=nNeSuIzM80Ev2zL1czOqBtBwyX2vwQaGwFcIup6MpMc=;
+ b=GuadmqUw6pRGXKkPsmsOuZurLO5BXUX7ODIyBxfd46fRiW1JIRFbRwU5flSxVAWxh5
+ Mwtb///EDQZZVqpxZech5LeuURcVSORFQEPRW+WbmncHOyZlmJviHz2sEZRJ1alh8NUX
+ m0+w7YCY1XOfIb//HYbNxxnR0GkxKwpHm2bhA/GvX1Vm4YIl50RotdvukmCcVel/LWPQ
+ 3RllC9IqHjcNGkJa+jWTgnPNWMqhkfI5wh37QtWB05uQHtWvnKnuAkG12yKXzE54AaYB
+ Nqmbq7eDEQL4PJvjTBQI3IojQOyXzrdxKKXnyZY7NQUDxrlBRQJekIIAC5U5PmDWDaC3
+ X4+w==
 X-Forwarded-Encrypted: i=1;
- AHgh+RqXdi/Cx3Ms6rS79nmkb4wWGbK6R1+HDbJtnjFHYuxwDVBFqgpLHWhE/OP6fvYKceQYonw7h/g1fzUa@nongnu.org
-X-Gm-Message-State: AFuF++nWE/0ifHQY88FTaDt2w4dk2fL5VdBLGVkk2FJX5iDyHdKEqKVu
- fOiP5Rjr/IckM8DhnXdtHOPtGRHGyFBn9DyAqSr8B/u2DXpqkbFrOal7bnNXb8L1hZrQeRJR2WZ
- bXUBe3fkCMPOUxcNprv+iWWNYpgyjMwRMJPqsbKItNZGTW7PBd8j2EQciSA==
-X-Gm-Gg: AR+sD13XHzq8uAohhprEUb8vJUseaOWc9dpZxuIbXqTzjZqT6fDnxj8yeAlReVBzyIE
- OcbvPWCvLfE6UzZutjHkeW2Nwwrxqy8/QKIEdm0VdcA9ETbY+/b6EYD/gMPqCwWIgLmqdIa3FtP
- 0jWrtES5IPJooplWhCbKveVHMyntgTDB0TbTFdgNMnw5OyxSvsfIBI6vwHlp4dAcjgO2Wgb8sR4
- W2r+rMzO1xpYIjTnYK/V4HYs/ILmewx+9C8t4dPMwABgmYi+89M+Hds+BED1o3drXRYB++qqWnk
- TwYOqqJpZ5/Fsig1SD5rLQh9RXabCa9U9dXgPj3zJ11FtWfY9mV2afpq+NHiv3HpLHvEF6eH329
- y6eCocuUDB8sN1ARrr0gYb7/E3TCRU7wsMiPCDsKwR7wVkZKN
-X-Received: by 2002:a05:622a:5a19:b0:51c:2022:cef5 with SMTP id
- d75a77b69052e-52e42344bd3mr159220901cf.26.1787820368655; 
- Thu, 27 Aug 2026 01:46:08 -0700 (PDT)
-X-Received: by 2002:a05:622a:5a19:b0:51c:2022:cef5 with SMTP id
- d75a77b69052e-52e42344bd3mr159220721cf.26.1787820368316; 
- Thu, 27 Aug 2026 01:46:08 -0700 (PDT)
-Received: from [10.254.188.74] (164.170.88.92.rev.sfr.net. [92.88.170.164])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49b4d08d86dsm33940955e9.12.2026.08.27.01.46.05
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 27 Aug 2026 01:46:07 -0700 (PDT)
-Message-ID: <d12e77d8-e9a8-4a79-a952-06853b7162e7@oss.qualcomm.com>
-Date: Thu, 27 Aug 2026 10:46:04 +0200
+ AHgh+RrFCz/YHYkyBNy4h087Ec6HwEjcHFFwzzkmAAonaQXPBIe4CbiUbWv/A5lJkCeXudVEsKqHv8rxjCOn@nongnu.org
+X-Gm-Message-State: AFuF++khgFiItf+jfLrOrW7chMCx/ZXWJ3mqNa3wv2CwjdbBLMc/OuOG
+ fCSor0hzJ40YZyNQo7/ufnrMjfUh95OJxFL1qqkJ2dGgkbaqTuIol9ifFRGQI2cDEgIEP0+Zaqx
+ pcB/QbGWNtcM1zf96z4NfCuvS5SJ890xs2CfU+SR+4Q==
+X-Gm-Gg: AR+sD12ALVuMXZ+KUGQXpJxOLg8RIkmG7fYIl9Un5FkDbakGa6zelYLKZWfxjKhWrCj
+ VWmAcnsJTZs6hnjW1R3U/ie6NxJWZYGr9QEXeL7QUBuuFCn35AcKR+6VNrPOEVzqqwamPrw+Gvo
+ +ADPgJhZYx0K5uay8VrZm25+DbW/9IxeE+y2pOr2aTsUIlkvoMWQ4woUcdZqTOIrFGndqH4YNzB
+ JyCeIitOTYxoUJ2qkCv+DEG05EGgZ/+lclN9XkQiUacrO4aMV0yJ4hb3Il/TO99MtJBwj3Hv5LJ
+ fqHyxc+JBXNlipcuo5p7a1EnS5FY98ot2y0BuRNAP4uTJt0sfaiapzmIQlfdjkRg3eJE9wW4uPx
+ nEJYR3bBdMujdmgdUnsG9wv9cW/X5THby+d0eiJM=
+X-Received: by 2002:a05:690c:c50f:b0:858:d554:79e4 with SMTP id
+ 00721157ae682-858d5547cd3mr37363137b3.20.1787821752523; Thu, 27 Aug 2026
+ 02:09:12 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 06/12] edk2: rename risc-v firmware builds
-Content-Language: en-US
-To: Gerd Hoffmann <kraxel@redhat.com>, qemu-devel@nongnu.org
-Cc: Peter Maydell <peter.maydell@linaro.org>, qemu-arm@nongnu.org,
- Igor Mammedov <imammedo@redhat.com>,
- "Michael S. Tsirkin" <mst@redhat.com>, Ani Sinha <anisinha@redhat.com>,
- =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- qemu-riscv <qemu-riscv@nongnu.org>
-References: <20260824164751.1700783-1-kraxel@redhat.com>
- <20260824164751.1700783-7-kraxel@redhat.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
-In-Reply-To: <20260824164751.1700783-7-kraxel@redhat.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-ORIG-GUID: 49CWAmRkUTG_oqUTAEnv7_paCllex6Ue
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODI3MDA3MiBTYWx0ZWRfXx8I6YNUk+Q0U
- AL/NHWmJY4eAwAXij6pzvnoQMZZ0gA1VwXvkuerR6G0i4rDf3PL588NmjjMuU7Z4uQBMCvpCktD
- sIh7xtL3CvicfBGlcR61pSQVtYhBHdM=
-X-Proofpoint-GUID: 49CWAmRkUTG_oqUTAEnv7_paCllex6Ue
-X-Authority-Analysis: v=2.4 cv=SoCgLvO0 c=1 sm=1 tr=0 ts=6a8ff951 cx=c_pps
- a=JbAStetqSzwMeJznSMzCyw==:117 a=T/Q9W4kDmp1FI4VDxy1skw==:17
- a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=M51BFTxLslgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
- a=20KFwNOVAAAA:8 a=EUspDBNiAAAA:8 a=1tSEMpTH9XP_W59IOagA:9 a=3ZKOabzyN94A:10
- a=QEXdDO2ut3YA:10 a=uxP6HrT_eTzRwkO_Te1X:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI3MDA3MiBTYWx0ZWRfX05sHWHM3bB2A
- a9i8tfFKuJ6tQBSt0kqKZoagub+dnwJKvAoBtNnDNljWs42fYz6gECjfN9ir1vzIXkgw2tHK4MY
- /pRP55v5kNz25Sn8nzB+lbJLCUIyIt8AxR/4qVrvFmJsU3bs1XB4EChkwloOKkfucoiLwo7tjRd
- jf83AHEMc5cnWahoG6vqEjrqUpYE0gSR1Z5gqB9tfVLsUFRMamHCuLQ9PgWUnlE9CNr4hNU7Yyq
- i0isAb6Kgv+p9BjIuLqtRJUgCuAWW8hbydP2v6Xj1edZxofjIo4JxDuN2veorgNHsicq2ZNrX0t
- REF1YBHt8CjCHwgos7NYS0swrme44ZbI1GJ/kHS0u8rhLilR+3sP8HDpmgabUhRKZ0zO79dZfJO
- /56kuxd2zbVS2ZGIfYz9fkuz7KJTBbzywwuFIeykXLJal84QXZg2irQIqAsIJWFCv8V+G6pTBWk
- SzgMhbTT+X0yDUz/sjg==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-27_03,2026-08-26_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 impostorscore=0 malwarescore=0 bulkscore=0 spamscore=0
- clxscore=1015 lowpriorityscore=0 priorityscore=1501 suspectscore=0
- adultscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2608270072
-Received-SPF: pass client-ip=205.220.168.131;
- envelope-from=philmd@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
+References: <20260825040452.1322251-1-stephensportia@gmail.com>
+ <20260825040452.1322251-4-stephensportia@gmail.com>
+In-Reply-To: <20260825040452.1322251-4-stephensportia@gmail.com>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Thu, 27 Aug 2026 10:09:01 +0100
+X-Gm-Features: AcwNN1Xaft9WTF2mwWCVxtI7CYhEOz70afodYE300sE0wIN3NECIiYZJsbmOtus
+Message-ID: <CAFEAcA8h4JwFFxnTQwxgC2HPAE_YA8CnLSgJo6pdhFcJeLyGmg@mail.gmail.com>
+Subject: Re: [PATCH 3/4] hw/arm/strongarm: Fix dropped upper byte of ssi
+ transfer
+To: stephensportia@gmail.com
+Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Jamin Lin <jamin_lin@aspeedtech.com>, qemu-ppc@nongnu.org, 
+ =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>, 
+ Steven Lee <steven_lee@aspeedtech.com>,
+ Andrew Jeffery <andrew@codeconstruct.com.au>, 
+ Harsh Prateek Bora <harshpb@linux.ibm.com>,
+ Subbaraya Sundeep <sundeep.lkml@gmail.com>, 
+ Troy Lee <leetroy@gmail.com>, "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@mailo.com>, 
+ Alistair Francis <alistair@alistair23.me>, 
+ Strahinja Jankovic <strahinja.p.jankovic@gmail.com>, qemu-arm@nongnu.org, 
+ Tyrone Ting <kfting@nuvoton.com>, Nicholas Piggin <npiggin@gmail.com>, 
+ Aditya Gupta <adityag@linux.ibm.com>, Kane Chen <kane_chen@aspeedtech.com>, 
+ Francisco Iglesias <francisco.iglesias@amd.com>, Joel Stanley <joel@jms.id.au>,
+ Hao Wu <wuhaotsh@google.com>, Glenn Miles <milesg@linux.ibm.com>,
+ qemu-riscv@nongnu.org, Jean-Christophe Dubois <jcd@tribudubois.net>,
+ Portia Stephens <portias@oss.tenstorrent.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1132;
+ envelope-from=peter.maydell@linaro.org; helo=mail-yw1-x1132.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -159,21 +134,32 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 24/8/26 18:47, Gerd Hoffmann wrote:
-> 'riscv' => 'riscv64', for consistency with the other
-> architectures which all have '64' in the name.
-> 
-> Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
-> ---
->   tests/qtest/bios-tables-test.c                      |  12 ++++++------
->   pc-bios/descriptors/60-edk2-riscv64.json            |   4 ++--
->   ...2-riscv-code.fd.bz2 => edk2-riscv64-code.fd.bz2} | Bin
->   ...2-riscv-vars.fd.bz2 => edk2-riscv64-vars.fd.bz2} | Bin
->   pc-bios/meson.build                                 |   4 ++--
->   roms/edk2-build.config                              |   8 ++++----
->   6 files changed, 14 insertions(+), 14 deletions(-)
->   rename pc-bios/{edk2-riscv-code.fd.bz2 => edk2-riscv64-code.fd.bz2} (100%)
->   rename pc-bios/{edk2-riscv-vars.fd.bz2 => edk2-riscv64-vars.fd.bz2} (100%)
+On Tue, 25 Aug 2026 at 05:05, <stephensportia@gmail.com> wrote:
+>
+> From: Portia Stephens <portias@oss.tenstorrent.com>
+>
+> The strongarm model intends to transfer a 16-bit value over SSI. There
+> is no machine using this model with a peripheral attached so it is
+> impossible to know what the intended SSI peripheral is.
+> There is no in-tree peripheral support for 16-bit transfer, update to
+> use 8-bit transfer.
 
-Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
+This is the strongarm synchronous serial port; the manual says it
+"is used to interface to a variety of analog-to-digital converters,
+audio and telecom codecs, memory chips and keypad controllers
+as well as other miscellaneous serial devices". I don't know
+if it's actually connected to anything on real 'collie' hardware,
+but if it is then  I don't think QEMU's ever emulated the connected
+hardware.
+
+The data is between 4 and 16 bits long. I think the intention
+both for this hardware and for QEMU's ssi_transfer() API
+is that the guest software is supposed to know what the device
+on the other end of the SSI connection is, and program the
+controller appropriately. If it programs the controller to
+transfer 16 bits to a device that only expects 8 then things
+will go wrong in both hardware and QEMU; conversely if it
+sends 8 bits to a device that needs 16 that will also break.
+
+-- PMM
 
