@@ -4,92 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01968C61DC2
-	for <qemu-riscv@archiver.kernel.org>; Thu, 27 Aug 2026 11:39:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36FC0C61DC7
+	for <qemu-riscv@archiver.kernel.org>; Thu, 27 Aug 2026 11:43:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wzYRH-0000LA-9W; Thu, 27 Aug 2026 07:38:35 -0400
+	id 1wzYWD-0001UL-8O; Thu, 27 Aug 2026 07:43:41 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1wzYR6-0000Jp-58
- for qemu-riscv@nongnu.org; Thu, 27 Aug 2026 07:38:24 -0400
-Received: from mail-yx1-xb131.google.com ([2607:f8b0:4864:20::b131])
+ id 1wzYWB-0001U7-Kz
+ for qemu-riscv@nongnu.org; Thu, 27 Aug 2026 07:43:39 -0400
+Received: from mail-yx1-xb12c.google.com ([2607:f8b0:4864:20::b12c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1wzYR3-0001XJ-Jr
- for qemu-riscv@nongnu.org; Thu, 27 Aug 2026 07:38:23 -0400
-Received: by mail-yx1-xb131.google.com with SMTP id
- 956f58d0204a3-66e452df0easo286868d50.1
- for <qemu-riscv@nongnu.org>; Thu, 27 Aug 2026 04:38:21 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1787830700; cv=none;
+ id 1wzYWA-00028K-0I
+ for qemu-riscv@nongnu.org; Thu, 27 Aug 2026 07:43:39 -0400
+Received: by mail-yx1-xb12c.google.com with SMTP id
+ 956f58d0204a3-66ceaade3f1so1974121d50.1
+ for <qemu-riscv@nongnu.org>; Thu, 27 Aug 2026 04:43:37 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1787831017; cv=none;
  d=google.com; s=arc-20260327;
- b=jTKIRgSPpWUexbqLr3SJcbKk+yBAWE9v4JGFOynYXL57TdzTzN1hZp1wQgZZSkkfra
- MAgDnm/xJrTgkjy1mcTSdPnmi/StiC/ElnjDQ5F302aFi3s/W7PalUrPhDQpQZorRx8U
- Vpbsl0XLgEEPoIHBD/goz1CHCgpUclpJVHaKXoT4aL/wOpJlOIhPjK1IhRKGxOQIVSTh
- OM/oVkP6QaNcj38I35+38d7EsmKMf2xXmG71VXieVzeUb8Co8Kt+MA+VsGQMcWemQDOl
- 2xxZ/1vf/NAuTCi1s9sau4gGJJ9gm31OaaQ34MKflPVxDhrkbiInm3prBq7Gni0AjQRm
- QQMg==
+ b=j0aj/jS2kHn1DGAqgQ0CEKvBiVr2qRFT82M53jXblk6Qji35uLaDsAVDN5nGAKf81i
+ Fr3yRqnbFc2LzQkyzNic8aiheH4HmDciKYhazUANIho/jOgNhSaidldAb1oRpiF4rrxM
+ NnJT2AX46KhOaD3IhAII52HbHT7ZLU/6sr5esEyfbae5zOAnTu8W/6utxVrI2FSZ4cDS
+ N6aHoxeTEb8MmO9tB1fNSHCzovLShfud9Q9u8eF+1crlXnApcj/k+jPCeFsLVbuG1dHz
+ uns31CA8pfnockDNxDGOJ+gTHoez31Tq8p+//YNVUXglP3uuQi2T/WF5+FTyBgf/4xuK
+ m+5w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=smE1oioKynN20kHMh+tO2twTO8YmnrAzbMbMtnZZ3+U=;
- fh=oo3cmdzTDgOG0lIX3qCagfe2Mp7ROBQgVnYWHIOjUvQ=;
- b=a2+19G7WZpPfPXc7HC8i+KFrzhMTwJTgrp8/LInZfmBz4pxE1QUJ9o61ilwl99XJQv
- D2LLuFHy/iU82ob7GDupisrTe9+xkyVXdhig/Czx2151SwqfIqvXclC2PhVWV5uxX2lW
- MLZAAz9kb0fFeQDh04wxOZCHJUDY/CLc/uXVkLJ/k65Cf2dHqixW3k3XXu8lm7roBP9K
- Ch8/etAJz1QefGOEPBv7b5qITnPvOCueOa4ESto/iMe3ctuA5GT8dNQKQ83SIDC7IXar
- 8hveNaJDCRwZQos7ug3B52gP4ETxc9u7r6hyMLQNnnXbuym3lXAngVyWfGKr9ReINR3O
- iVNQ==; darn=nongnu.org
+ bh=U/QiQGqrVY6L6I6dyaHA0RjlF/f6uTPAhgIInOpAcag=;
+ fh=Z3wuoXmodqBfl4qyJVhrRFbiR12EuuFbd8+n+UQC6So=;
+ b=BLCMNpZRhHP+zNm9UHMfb5U1at/BdUgO97JOdK/F9+WIldk+Nnwy90c7HV1DZJpLoM
+ 7KIhOpHkg3/599KsbFttVs3PSBjV9jl9VFzzZSWLlbmTfugnu4hQBqclbK+euMQhJGxw
+ TR7/zrg5WMfEE3c/ZHcu53bXlVBDCB246RnpzR/Zy4AA82+W25NSAW8Ava3Bpr/+HTxV
+ iTNBfXzlHwoyKRORjVif0QrBWu3cmuoN8NnuwmnKKG5RzK+KvJo0gM8M+HoxEBcKk4gD
+ xtQ2r+zGQNHZZeobJawSeNPzobuh2OflYlqcx7snNPTg86l6MTU29ig8nNthBP8DBmIo
+ u6Bw==; darn=nongnu.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=jms.id.au; s=google; t=1787830700; x=1788435500; darn=nongnu.org;
+ d=jms.id.au; s=google; t=1787831017; x=1788435817; darn=nongnu.org;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=smE1oioKynN20kHMh+tO2twTO8YmnrAzbMbMtnZZ3+U=;
- b=BzWRAHQD/02JTDcXjJGAFMWlgjyoX06mdL77yASa4NNSTe8RM9k8vOGgg/Nckld6Q9
- CZH24PbLK86/DjV/HW0RsD7shp7Agl7y9Y/FaxXWZ7EWKO+fHlg9U/g/G7jbITYLkLJY
- ARxPf3wEPen3zAHEWxykLTyAdkyhd04a62EBo=
+ :content-type; bh=U/QiQGqrVY6L6I6dyaHA0RjlF/f6uTPAhgIInOpAcag=;
+ b=G8hd0za/qAvMfvZQOfjAouxeOH4I/1Nl+/KtfH/uDODQEO9cZqvu14p7wXyVrFo09U
+ fntN/aLuS4h7M6WHwGIm99WId8faEhJyDKk3z01fAwm0IcaLn9c+eh3DER1acxE8tJFT
+ feGnQG9TlrifHonMMpZXL60lTGaJp9fYj6oOk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787830700; x=1788435500;
+ d=1e100.net; s=20251104; t=1787831017; x=1788435817;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=smE1oioKynN20kHMh+tO2twTO8YmnrAzbMbMtnZZ3+U=;
- b=V1ZGJT9Jm7/i4cWYZLremHE+kIaTBfzKgRn/7RcPZ8V0r+SMgm7de4W3En7PMAgkED
- i40fW3W0+rVuxmC+rfO3b093rreDeUGrSZSEkuBL6T8z3g3GuS1qrR71yL13XIlBSJfL
- N2xWN+T8AAWpKx8T0Wphc8Vmtf495tZ+28yrRzpJ767/P7BPf43icSLhIMgFT4mxziGA
- ZS1zmAAo60Fx4ZDVKDp3EW6ARRQD8nrajFt0ERs5c+4F2xGmfEtMpXJrNXOvD53Q3+BJ
- NpQA3SDlBevow+8/3ZJmH15V2PaTBCu62oKmeGjfXxWW6/DtqOXlwtKBBw3FcrLmN3cQ
- FDLQ==
+ bh=U/QiQGqrVY6L6I6dyaHA0RjlF/f6uTPAhgIInOpAcag=;
+ b=moJ3b7pMCXNzuiSnC4sTXCZDrPlzXRklBZ+vxMvFGpKbUci9nYJSrPUbxm2Jgc4Xqs
+ sA7PskZC+uwFXpF296cyv8Su+ZkQ1abpGQDkTQBtOdZuxVLUwcrC+D8/t4U84Gq7XLfv
+ lbRLQAMqQ584rY597aI+YO4Q8rFI48Xpe3dSaR56NP1fY15SApx7h2A+A4NTQJQkdbs4
+ NIycG5A4xt5JTHW6pH/UXu3jnxytySdgX9E4JLfhKXlDBiVpSWzd7MxW+RAzDWL5MFiK
+ g8T1qYP7TnADDRmBKwzvUzzav7XvI+Dbyye8YoNjAmQBQ3g0f8oatFbOR2XOKfLBzO76
+ n25Q==
 X-Forwarded-Encrypted: i=1;
- AHgh+Ro19Yc3vy834luW/f3SUMl6GP/MbMetMY7d3pLxKxrlK7CdqstblaKxRlCNv1tNo8BEThFvnA8Qh47Y@nongnu.org
-X-Gm-Message-State: AFuF++mE2ILb1PajwX4m1tJviTXAlL7Nc6GktvK3UxZQGyMGXmLIijJ9
- v1HaEJJTMmmwDSEOyzB/GFizYvwDZE4xSzSbiZVqGsHAanRbFM7HmzXgwjNTujOErkvy4RxeyCg
- f1XubRLz3kKm1yZVf1d6npfQsmoCywFQ=
-X-Gm-Gg: AR+sD1090ROb1vGVgJAlMeG39Sl79kOlfvUNkk7RuLI7/7J/nWWzzBuUMZB9P9mz+AU
- WLnqI+e144j4OSjhZVo876LO0BOGeF0LMZAYMgF0UbQkI77UiiWVC/SREpms9flcqpnCF5eHnHY
- ZflYz6Lm12DVclMsiao5tSo9dE9RhefHyN+c735y5UkFna4rR66rGws9gFiQSt1XovaoxKb0oxU
- zUnhXUNkolAgxcYrIjWn1PqCxmdteaMKE4WHi/7XzkR6qwChQ1T0WDgrBb/w7MZVK98YAbClTaQ
- FpIQlbuyNm1JzZ2ajioISR/6COJtwkOqXm1ioV3ZqKiAiBOFPeKELGvomhZi2YkXBHLqNCaKjB5
- U8JAkGWGJwl5vRQiTJ/R8mKg7YpXe07O+3qcjILU1oZ2tqEncvhE9rZw/3Ziyjiqiqc0GYU0/Dz
- 84dN7OkVOf9ssM7Xdo
-X-Received: by 2002:a05:690e:bcd:b0:66c:e0ea:a25b with SMTP id
- 956f58d0204a3-66d80541034mr2387599d50.1.1787830700314; Thu, 27 Aug 2026
- 04:38:20 -0700 (PDT)
+ AHgh+RoppkRe/BS9IRGlAMMxR9fHZUANhBIuTmxEmKky5uh12P2/YNYX+1uQIhBlckSp0Az7UN1G+nsEf34g@nongnu.org
+X-Gm-Message-State: AFuF++moYg1TjuFHGe/lZTMjvCJLgoNIOQixaw6Vnnv9FJR2RJjMaluz
+ rVNhkyOvglkiWvrH0fR87tGTAiY7Un5FCqzRHLZyg3K6PpkySpRfAhYWFEHNcgkfglPBv+w8QES
+ +Dxe7nrN/7NGc5+r8jjIiBTddpKRoqeo=
+X-Gm-Gg: AR+sD12CLMGcsQ8lWolRY/nH2TKym6fScwNUohmIB/YSHH4pKx7hI9sJqJq2/8MpMee
+ tmQjMnF0tAOEQy6n45O7BIvOxiulpnpUYTlT7BTml6cVgw6BVhVJ2f2W2G+2ZzVm6J3qB7U4MUQ
+ Z+B1hiHjp/HhJx39T6eQTV/pX+dlkeEWpOTO0Ax38IfJmLPUOhU7j1eo69u1rE7ndtzudXvgbdc
+ RVWND96dTUyKarv3NY7Rf0DVx8n39OYpgAm+oNRXsRSMLo6RxKq0bCbq/jCQLRmwtXn1UKYv4vm
+ UlZ/OQpIpLiri0EDtvFGqWOZdu1aOBdvRXxrebkvtJUMJRQWAqeAbAV7tgGKKegIptKaYkTo6tY
+ Cj6mct6gUP+ZU6Y1hCA1yJSI7FwDiGBsfRuCI7SP2wBal2rhI5Va7BgGDNKHHQ9c53R+HZS7hVR
+ 3Kgq+H9P8EkrolCwUm
+X-Received: by 2002:a05:690e:12cb:b0:66d:113a:3928 with SMTP id
+ 956f58d0204a3-66d256827e9mr4966075d50.12.1787831016635; Thu, 27 Aug 2026
+ 04:43:36 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260826220528.54516-1-joel@jms.id.au>
- <20260826220528.54516-5-joel@jms.id.au>
- <53fe0bed-9694-44b0-a1ff-628e2983b0cb@oss.qualcomm.com>
-In-Reply-To: <53fe0bed-9694-44b0-a1ff-628e2983b0cb@oss.qualcomm.com>
+ <20260826220528.54516-9-joel@jms.id.au>
+ <0da0b312-106c-418b-9827-f340a736f502@oss.qualcomm.com>
+In-Reply-To: <0da0b312-106c-418b-9827-f340a736f502@oss.qualcomm.com>
 From: Joel Stanley <joel@jms.id.au>
-Date: Thu, 27 Aug 2026 21:08:07 +0930
-X-Gm-Features: AcwNN1WUFpBMG_leDaNXikIKmZ45jbz_LybxJAfCtsji0Vf2bUNrYQalH82vuK0
-Message-ID: <CACPK8XcyTVkdeifw3bvVR-SqWDc+JRetYDHcjkVo7hO8KrtEjw@mail.gmail.com>
-Subject: Re: [PATCH 04/16] hw/intc/riscv_aplic: Take a MemoryRegion for the
- created device
+Date: Thu, 27 Aug 2026 21:13:25 +0930
+X-Gm-Features: AcwNN1WzIeegeDA_EL8pclbrCytZlGwakQZ2kFExJzi4uwRLFK72xjEYfbE4QM4
+Message-ID: <CACPK8Xe+2ObYr2dFFcuPfMkigLEb5bTHX2t06Xr_ZzaDvJaAtQ@mail.gmail.com>
+Subject: Re: [PATCH 08/16] hw/riscv/atlantis: Remove unused fdt_size
 To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Cc: Alistair Francis <alistair.francis@wdc.com>,
  Weiwei Li <liwei1518@gmail.com>, 
@@ -102,8 +101,8 @@ Cc: Alistair Francis <alistair.francis@wdc.com>,
  =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>, qemu-riscv@nongnu.org, 
  qemu-devel@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b131;
- envelope-from=joel.stan@gmail.com; helo=mail-yx1-xb131.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b12c;
+ envelope-from=joel.stan@gmail.com; helo=mail-yx1-xb12c.google.com
 X-Spam_score_int: -16
 X-Spam_score: -1.7
 X-Spam_bar: -
@@ -127,107 +126,25 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, 27 Aug 2026 at 20:38, Daniel Henrique Barboza
+On Thu, 27 Aug 2026 at 20:45, Daniel Henrique Barboza
 <daniel.barboza@oss.qualcomm.com> wrote:
 >
 >
 >
 > On 8/26/2026 7:05 PM, Joel Stanley wrote:
-> > riscv_aplic_create() maps the device it creates into system_memory,
-> > which prevents its use by SoCs that map devices into their own memory
-> > container.
-> >
-> > Add a MemoryRegion parameter and map the device into it instead of
-> > calling sysbus_mmio_map(). The mapping still only happens when the
-> > APLIC is emulated. All callers pass system_memory, so there is no
-> > change in behaviour.
-> >
-> > Signed-off-by: Joel Stanley <joel@jms.id.au>
-> > ---
-> >   include/hw/intc/riscv_aplic.h | 2 +-
-> >   hw/intc/riscv_aplic.c         | 5 +++--
-> >   hw/riscv/aia.c                | 6 ++++--
-> >   hw/riscv/cps.c                | 6 ++++--
-> >   hw/riscv/xiangshan_kmh.c      | 6 ++++--
-> >   5 files changed, 16 insertions(+), 9 deletions(-)
-> >
-> > diff --git a/include/hw/intc/riscv_aplic.h b/include/hw/intc/riscv_aplic.h
-> > index c7a4d4ad0172..baeec76e4c3e 100644
-> > --- a/include/hw/intc/riscv_aplic.h
-> > +++ b/include/hw/intc/riscv_aplic.h
-> > @@ -80,7 +80,7 @@ bool riscv_is_kvm_aia_aplic_imsic(bool msimode);
-> >   bool riscv_use_emulated_aplic(bool msimode);
-> >   void riscv_aplic_set_kvm_msicfgaddr(RISCVAPLICState *aplic, hwaddr addr);
-> >
-> > -DeviceState *riscv_aplic_create(hwaddr addr, hwaddr size,
-> > +DeviceState *riscv_aplic_create(MemoryRegion *mr, hwaddr addr, hwaddr size,
-> >       uint32_t hartid_base, uint32_t num_harts, uint32_t num_sources,
-> >       uint32_t iprio_bits, bool msimode, bool mmode, DeviceState *parent);
-> >
-> > diff --git a/hw/intc/riscv_aplic.c b/hw/intc/riscv_aplic.c
-> > index 84606e9f3d88..87d7d9e49cdd 100644
-> > --- a/hw/intc/riscv_aplic.c
-> > +++ b/hw/intc/riscv_aplic.c
-> > @@ -1109,7 +1109,7 @@ void riscv_aplic_add_child(DeviceState *parent, DeviceState *child)
-> >   /*
-> >    * Create APLIC device.
-> >    */
-> > -DeviceState *riscv_aplic_create(hwaddr addr, hwaddr size,
-> > +DeviceState *riscv_aplic_create(MemoryRegion *mr, hwaddr addr, hwaddr size,
-> >       uint32_t hartid_base, uint32_t num_harts, uint32_t num_sources,
-> >       uint32_t iprio_bits, bool msimode, bool mmode, DeviceState *parent)
-> >   {
-> > @@ -1137,7 +1137,8 @@ DeviceState *riscv_aplic_create(hwaddr addr, hwaddr size,
-> >       sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-> >
-> >       if (riscv_use_emulated_aplic(msimode)) {
-> > -        sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, addr);
-> > +        memory_region_add_subregion(mr, addr,
-> > +            sysbus_mmio_get_region(SYS_BUS_DEVICE(dev), 0));
-> >
-> >           if (!msimode) {
-> >               for (i = 0; i < num_harts; i++) {
-> > diff --git a/hw/riscv/aia.c b/hw/riscv/aia.c
-> > index 49cb14349f00..974806c425e2 100644
-> > --- a/hw/riscv/aia.c
-> > +++ b/hw/riscv/aia.c
-> > @@ -71,7 +71,8 @@ DeviceState *riscv_create_aia(MemoryRegion *mr, bool msimode, int aia_guests,
-> >
-> >       if (!kvm_enabled()) {
-> >           /* Per-socket M-level APLIC */
-> > -        aplic_m_dev = riscv_aplic_create(aplic_m->base +
-> > +        aplic_m_dev = riscv_aplic_create(mr,
-> > +                                     aplic_m->base +
-> >                                        socket * aplic_m->size,
-> >                                        aplic_m->size,
-> >                                        (msimode) ? 0 : base_hartid,
+> > The machine state carries around the FDT size which isn't used by
+> > anything.
 >
-> Not a problem with your patch but seems like we have a goofed indentation here
-> and down below in the next riscv_aplic_create() instance.  Seems like we tried
-> very hard to avoid breaking the 80 char line and we ended up doing this:
+> AFAIK no RISC-V boards are doing anything with the fdt_size return value
+> from create_fdt() at this moment.  Maybe they were doing it in the past and
+> we just kept it around.
 >
->
->          aplic_m_dev = riscv_aplic_create(aplic_m->base +
->                                       socket * aplic_m->size,
->                                       aplic_m->size,
->                                       (msimode) ? 0 : base_hartid,
->                                       (msimode) ? 0 : hart_count,
->                                       num_sources,
->                                       num_prio_bits,
->                                       msimode, true, NULL);
->
->
-> i.e we moved the MULT to the next line, indented it, and all other parameters
-> follow suit.  The result is not pleasant.
->
-> If you could take the oppourtinity to also fix the indentation of these 2 instances
-> that would be terrific.
+> Probably something we could clean up in other boards too.
 
-Agreed, x1000.
+I noticed the same. It's dead code with the variable not checked, and
+in some code paths the size is not even modified by libfdt.
 
-> It will break 80+ char line soft rule and that's fine - the
-> hard limit for checkpatch is 90 chars per line for 10+ years now.  It should be
-> 120 char/line at this point but anyway ...
-
-But I'll move this to the next line as to not pass comment on this can of worms.
+It was at this point in development that I found myself making
+tree-wide changes and writing coccinelle scripts. I backed down for
+the moment, but watch this space.
 
