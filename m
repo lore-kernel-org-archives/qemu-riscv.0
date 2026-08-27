@@ -4,85 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42D53C61DC4
-	for <qemu-riscv@archiver.kernel.org>; Thu, 27 Aug 2026 17:49:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92BA8C61DC4
+	for <qemu-riscv@archiver.kernel.org>; Thu, 27 Aug 2026 18:00:12 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wzeDz-0001F9-Un; Thu, 27 Aug 2026 13:49:15 -0400
+	id 1wzeO3-0007Ax-3d; Thu, 27 Aug 2026 13:59:39 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <pbonzini@redhat.com>)
- id 1wzeDy-0001EM-OM
- for qemu-riscv@nongnu.org; Thu, 27 Aug 2026 13:49:14 -0400
+ id 1wzeO1-0007AE-Cz
+ for qemu-riscv@nongnu.org; Thu, 27 Aug 2026 13:59:37 -0400
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <pbonzini@redhat.com>)
- id 1wzeDx-0003yv-4W
- for qemu-riscv@nongnu.org; Thu, 27 Aug 2026 13:49:14 -0400
+ id 1wzeNz-0006Se-Ba
+ for qemu-riscv@nongnu.org; Thu, 27 Aug 2026 13:59:37 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1787852952;
+ s=mimecast20190719; t=1787853574;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=awWB6uB0BedZ29MREFEh7+eImC5cdPwPdJfM9BMb5dE=;
- b=IF2eZsls/RTm8CMitNhytLIcXLaOuHTB0PYZjqSLisYjJAXCCJu6L2pH2keEgqobpckPLQ
- 9DP0wA/fePyKo2lLmjhg2LeaQwnBhYYXHsL53fQzi7pXqgEq1OqpgYt3x++V7PY2f7Zs4U
- XAr733whiOFiTI0m88OYC2ZFAxH03/w=
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
- [209.85.221.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=y5tvMOgDlNPcG4RJ6rTsz18cC0h5UV1jgNVK5VwBpRU=;
+ b=hFCFuR2O/ApM7GDoPBCkIZOXCitkTiTOQxqS7nz2LAycq9zGYF/LBww5Xgho5+pIeefkuV
+ WuO+KIJVTD+Vp4uRA8J4OcqW3MRUgvuKT3Culf6aVenT7zgW6L8Tg4AZUMWBYcORAbprYS
+ VcqWXJaJJHXULgXty54lrXpaHgk4OOk=
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-636-6gTkmVeBMZm81kBGWh6L_A-1; Thu, 27 Aug 2026 13:49:11 -0400
-X-MC-Unique: 6gTkmVeBMZm81kBGWh6L_A-1
-X-Mimecast-MFC-AGG-ID: 6gTkmVeBMZm81kBGWh6L_A_1787852950
-Received: by mail-wr1-f70.google.com with SMTP id
- ffacd0b85a97d-47162f83c75so637332f8f.1
- for <qemu-riscv@nongnu.org>; Thu, 27 Aug 2026 10:49:10 -0700 (PDT)
+ us-mta-84-r17gnkR-NKWk0Xi7aw_76A-1; Thu, 27 Aug 2026 13:59:33 -0400
+X-MC-Unique: r17gnkR-NKWk0Xi7aw_76A-1
+X-Mimecast-MFC-AGG-ID: r17gnkR-NKWk0Xi7aw_76A_1787853572
+Received: by mail-wm1-f70.google.com with SMTP id
+ 5b1f17b1804b1-495529a93f9so220095e9.3
+ for <qemu-riscv@nongnu.org>; Thu, 27 Aug 2026 10:59:32 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787852949; x=1788457749;
+ d=1e100.net; s=20251104; t=1787853572; x=1788458372;
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=awWB6uB0BedZ29MREFEh7+eImC5cdPwPdJfM9BMb5dE=;
- b=P9EWq+uT69H07TjM75j5/MHbSV+5zdjkdOBH1Zn9H151Bl7Y+Z5nCjR+JpIeYzh7RA
- Uj0BHNlLSi3KiIr3DoLxAgxn+QNbX4Nx6BonqbNnQ98nNAxkF/PKV1McoeAMiz1v+d5l
- 3Ko8dffx0gIh1l1d/Pw7fm/m5CRpvQG0Il5OhD39x2lH/wK7QPBz20GYagyp4pDYXUwD
- isDBEvSbzfhksuA2f3GaZJ1GTrb9fqqYvRQ68nLQInp1RnhwFc/8vp8PWvAk3BIDErza
- ZpR1VHmxBDZrdpsADzmQV7gu8B0RTjyMKj4v+7CU/AHa2GjgNllbx5/JwP5PN4V9aaO0
- AGcQ==
+ bh=y5tvMOgDlNPcG4RJ6rTsz18cC0h5UV1jgNVK5VwBpRU=;
+ b=NUiyEsaY7gBv/hE2j+P+tSc5mr3lW1FwCFz7udMt+r9txuZgbfLZyNtxGN0iLb445/
+ WAzobQCBc1Oi+yWrOUvTtuUSXLtDRANEBR/6s9hVG2KO8+tVroIHGhfQ5xfJJsaSa99W
+ HRq+Wxxcx9tT9ZOMetZHZyiqm7XW9343IKG50S+hJbcy/p7vWEdaXHnIF6qjwr3VHV7N
+ K1mnaijzfaczeFM5Hk6FyCyEHV/HI/3uI1t+FRPAsTP7CUUKSjeVmU1pT9gNECDBjm/c
+ Ff8zP9CB7g12LZw6ptS604auHda5cQhPLSPObnFUNr+3A2Af9IT224ks5Gs0VHjdKR+q
+ OI2g==
 X-Forwarded-Encrypted: i=1;
- AHgh+RojURfyYHjw68oBMGaIyGulhEiDDUkj7p6gNiIE7MrXDzt4BtjVJFsQR0D5M+tvjFDb7q5t+hKsVr3p@nongnu.org
-X-Gm-Message-State: AFuF++mAcrVfiLEr19WaG3XowW2P6X32XkydhaDe6HALgknQwV7ZqtkX
- KoWH4C6ROkCwGK2IrXRT9+P93JDhC4IR0UBCoIqKFkXtPojNHWmfYKcI/ANCyCFvb2bFFShxpC4
- QYdhOcFekIUwAUDThHRF8YwEJeI2KUpSPFVR6wVQB6BkToRmxONIrQJl0iw6XVqwJNNai3IbULX
- BC75i6P67CzxoEKG5I+2APgKizy4VJFJM=
-X-Gm-Gg: AR+sD12NmNPdnYsPE3Wm4JFypQ4ibq/RGs5EvKndadoT8qVXpUnhH0NaeKXC0ZZxn68
- WZm2cI0i95x8j5PCKd3m/4OJ2PrFtoZu13oMxQ10FkAAFdmwdwI5g46E62xugCU79PydBbMwq85
- HZihhgo6XOf2U26EHiH87n2M8a9cViOAr2dnuZmBBMkzm9Ba+6DJq/TSJiAUCA/lH+b2LD6Riwy
- LHRc0mndDPa52cN0RLjJyCsm8TMAApg3NC2XvK7odUsmls/cQoRvgUbUxnW
-X-Received: by 2002:a05:6000:719:b0:474:bbbb:bf17 with SMTP id
- ffacd0b85a97d-482f71ecf61mr1510724f8f.0.1787852949265; 
- Thu, 27 Aug 2026 10:49:09 -0700 (PDT)
-X-Received: by 2002:a05:6000:719:b0:474:bbbb:bf17 with SMTP id
- ffacd0b85a97d-482f71ecf61mr1510638f8f.0.1787852948770; Thu, 27 Aug 2026
- 10:49:08 -0700 (PDT)
+ AHgh+Rrnki4rcr3Xh/AiMZpv50GMZfo1efXkdHMX+hijNbN48BbdnrqzrIqhhozCMr2P55Z6FNe8niJj7chr@nongnu.org
+X-Gm-Message-State: AFuF++m06NSvJBVe5ATUhh0u9afWN+Vfaae29HLP1VlrTECMLn2mYn+/
+ SH89vBd8i39j9YiQUvU/265/Wdlc/n2eXn8yzJwxL7VCnKWElF7HK953ubSGdTsMHUiIHKrOW4+
+ JvpOGBV2o8TPbmr7MdDa2BdeVB4MABR8a0lwlNp5rzktGTHpiZ6f3mzUP3i08bnf7kZO7XExNzF
+ QbPRpEETnZvg/4Sm/ABUDEtaYxNjHb/Gk=
+X-Gm-Gg: AR+sD13tHXzTEMsE7TvJDaMtyoQoNQaXAqIP9BERC4BZh4QK+2RSsMXbY/+IE/AVzDU
+ GEVQuUbHmsYnG+auDeDDWmaRlBGc39DKaVSWAS+EiItVU6nrjCdSrpXw9wwtouqC1GHVV0+W3DC
+ HWJaYGg/S/X3fcbX/r1UWsuby6Pa/mRg3S2KzMv/kOezmttGOig+OH1wtQY4hihVl+kN9/kCIyS
+ CeVrT0yUDAnr6X7HEkKjTZ/2hkcoVSEQ4sFMzSSnbLojtoMsVkWqHS0bpjX
+X-Received: by 2002:a5d:5e01:0:b0:480:c5:d635 with SMTP id
+ ffacd0b85a97d-482f782a4a2mr988170f8f.0.1787853571689; 
+ Thu, 27 Aug 2026 10:59:31 -0700 (PDT)
+X-Received: by 2002:a5d:5e01:0:b0:480:c5:d635 with SMTP id
+ ffacd0b85a97d-482f782a4a2mr988102f8f.0.1787853571294; 
+ Thu, 27 Aug 2026 10:59:31 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260823150731.896-1-luoyonggang@gmail.com>
  <ao7c-FiawF9sMCGj@redhat.com>
- <b2b1d77e-c3e3-4aad-87d2-f5d4834abd1a@oss.qualcomm.com>
- <apAG8JQTnQxRkfip@redhat.com>
- <9e36f8a0-5363-4ce2-accf-62ccf3602344@oss.qualcomm.com>
-In-Reply-To: <9e36f8a0-5363-4ce2-accf-62ccf3602344@oss.qualcomm.com>
+In-Reply-To: <ao7c-FiawF9sMCGj@redhat.com>
 From: Paolo Bonzini <pbonzini@redhat.com>
-Date: Thu, 27 Aug 2026 19:48:55 +0200
-X-Gm-Features: AcwNN1X1-eaT6TIQtq1c9AZkdJJPAFSqmjPm7XfVmNJJCniwRLGMzUtpOIIGOgA
-Message-ID: <CABgObfYw8U6q1xdUXcP5XBNTpB-n9MR=DkzFXpb6nkn7g00etQ@mail.gmail.com>
+Date: Thu, 27 Aug 2026 19:59:17 +0200
+X-Gm-Features: AcwNN1VpaapR05HRvOFF4orkVX2TS72Y3gXl8WNsZU1FMiT86DpM1kMM4s_3nag
+Message-ID: <CABgObfa4QiBKuj7o06RL+egm_QOX03hpP9PAHoeKYOr9wwGvFA@mail.gmail.com>
 Subject: Re: [PATCH 00/12] single-binary: link ARM and RISC-V into qemu-system
-To: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
-Cc: =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
- Yonggang Luo <luoyonggang@gmail.com>, qemu-devel@nongnu.org, 
+To: =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>
+Cc: Yonggang Luo <luoyonggang@gmail.com>, qemu-devel@nongnu.org, 
  Xianglai Li <lixianglai@loongson.cn>,
  Alistair Francis <alistair.francis@wdc.com>, 
  Chinmay Rath <rathc@linux.ibm.com>, Sunil V L <sunilvl@ventanamicro.com>,
@@ -94,8 +90,9 @@ Cc: =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
  Palmer Dabbelt <palmer@dabbelt.com>, Song Gao <17746591750@163.com>, 
  Harsh Prateek Bora <harshpb@linux.ibm.com>, Glenn Miles <milesg@linux.ibm.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- qemu-s390x@nongnu.org, Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, qemu-s390x@nongnu.org, 
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
  =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@mailo.com>, 
  "Michael S. Tsirkin" <mst@redhat.com>, Stefan Hajnoczi <stefanha@redhat.com>, 
  =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, 
@@ -110,7 +107,7 @@ Cc: =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>,
  Matthew Rosato <mjrosato@linux.ibm.com>, Weiwei Li <liwei1518@gmail.com>, 
  Darren Kenny <darren.kenny@oracle.com>
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: qSyYfLbpPPtIQ_8eTigUXiikMUy0Vrq_rmma59iWa7U_1787852950
+X-Mimecast-MFC-PROC-ID: bQtasD3D01yJkQM4gpopJwOKKmzn2SsApcg3rka2AeM_1787853572
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -138,52 +135,30 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Aug 27, 2026 at 6:32=E2=80=AFPM Pierrick Bouvier
-<pierrick.bouvier@oss.qualcomm.com> wrote:
->
-> On 8/27/2026 2:44 AM, Daniel P. Berrang=C3=A9 wrote:
-> > On Wed, Aug 26, 2026 at 11:35:11AM -0700, Pierrick Bouvier wrote:
-> >> Seems like the Genius.Artist. in the bottle just need to escape, and y=
-ou
-> >> can send us a nice series doing all this. Meanwhile, I'll try to find =
-a
-> >> carpet, a monkey, a princess and a suit to be the next Aladdin.
-> >
-> > This kind of comment is not productive and disrepectful to the time
-> > reviewers in invest in looking at the proposed patches. Please stop
-> > this.
-> >
->
-> The only person wasting everyone's time here is YOU.
-> There is not a single person who came on any thread to say "I agree with
-> you Daniel", while several posted or commented they were ok with the
-> approach here.
->
-> Project is QEMU, not Daniel's EMU.
+On Wed, Aug 26, 2026 at 2:33=E2=80=AFPM Daniel P. Berrang=C3=A9 <berrange@r=
+edhat.com> wrote:
+> With the clean break with the past, we also have the
+> ability to tackle various long standing design mistakes
+> present in qemu-system-$TARGET instead of carrying them
+> over into the new binary.
 
-Whoa whoa.
+I am not sure about this. Overall most (not all) of the complexity of
+command-line processing and legacy arguments is kept at bay, and
+contained within board code - and boards do not have to support it.
 
-Sometimes people don't reply not because they disagree, but because
-they trust the people involved to resolve the problem.
+The complexity that is left is tied to -drive, mostly due to
+differences between hot-unplug in -drive and -blockdev. And honestly
+I'd be very much opposed to dropping -drive because using -blockdev
+correctly is *extremely* hard and barely documented.
 
-Let me remind you of the discussion we had about -fms-bitfields and
-how it was resolved amicably and profitably.
+If we want a clean break, we need to drop the command line completely
+and just have a QMP monitor on stdin/stdout
+(https://wiki.qemu.org/User:Paolo_Bonzini/Machine_init_sequence).
+Start small adding just accel-new and machine-new, and add QMP
+equivalents of command line objects as needed.
 
-I will read the thread and try to understand what's going on but from
-the first impression, "wanting to keep the single-system
-qemu-system-riscv64 instead of a symlink" is a valid objection. In
-fact, with the proviso that I haven't read the code, I don't see why
-you'd want *anything else*.
-
-And especially, "How surprising (:eye-roll:) it is that adding more
-code and more classes would result in a higher memory usage, or bigger
-binary size for qemu-system" is not a good way to conduct a
-discussion.
-
-This project was extremely complex and some disagreements are normal,
-but overall I would say it has received support from the community for
-years. It is close to the finish line, let's not forget all the
-collaboration so far.
+That said, I understand that this is just an idea and not the crux of
+the disagreement.
 
 Paolo
 
