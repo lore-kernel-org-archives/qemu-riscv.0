@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A58BEC61DCB
-	for <qemu-riscv@archiver.kernel.org>; Thu, 27 Aug 2026 05:11:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B6E9C5DF9D
+	for <qemu-riscv@archiver.kernel.org>; Thu, 27 Aug 2026 05:11:51 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wzSNp-0002b0-4n; Thu, 27 Aug 2026 01:10:37 -0400
+	id 1wzSO7-0002m2-W4; Thu, 27 Aug 2026 01:10:56 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1wzSNo-0002ad-Bl
- for qemu-riscv@nongnu.org; Thu, 27 Aug 2026 01:10:36 -0400
-Received: from mail-pj1-x102e.google.com ([2607:f8b0:4864:20::102e])
+ id 1wzSO5-0002kV-W8
+ for qemu-riscv@nongnu.org; Thu, 27 Aug 2026 01:10:54 -0400
+Received: from mail-pj1-x1034.google.com ([2607:f8b0:4864:20::1034])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1wzSNm-00043n-Jj
- for qemu-riscv@nongnu.org; Thu, 27 Aug 2026 01:10:36 -0400
-Received: by mail-pj1-x102e.google.com with SMTP id
- 98e67ed59e1d1-3964dfb5a69so1799806a91.1
- for <qemu-riscv@nongnu.org>; Wed, 26 Aug 2026 22:10:34 -0700 (PDT)
+ id 1wzSO4-00047b-6E
+ for qemu-riscv@nongnu.org; Thu, 27 Aug 2026 01:10:53 -0400
+Received: by mail-pj1-x1034.google.com with SMTP id
+ 98e67ed59e1d1-38ec1402b05so1913499a91.2
+ for <qemu-riscv@nongnu.org>; Wed, 26 Aug 2026 22:10:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1787807433; x=1788412233; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1787807451; x=1788412251; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:sender:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=vh4dj4cz7gBkDt8LT9ZzL10T8leVWvoTLVZlSAppwZk=;
- b=nKrjF2CmxV6/J4vzLD/eZEMk8OKrylIn77HQeL2ErRBC54UyiiUwyOVN71/mM+laf5
- PcTshddp5Ju68GpEzGCuhQML2ELMz4Xfm521Rul+2jM/MEmElzHEB9PujfMQtu82Unf6
- tGv3eCHDtzTwCPe5Q/elX4p6rL27ZD4hXVHYMLQnKEKf+5WRQeOD9GQWFcedzLQD26LJ
- Y1bS8VPwmeXv+virFE7kpD227MnRhKD6+nR3vqHazqLRev0zWlbsfnn4Mqmvm72OQZg2
- /n5OygOHW4bf05jey8z/CeO/aX6UZVesOLLRVN6AeM7yFItAGmdxdblHUZZrMd+B0vmT
- TfDA==
+ bh=H3JPY4jlJyqqJXUD7/t3iwMSegC7rW8M+Jxwt7XCKQo=;
+ b=Y2u1fXWp0uRUb0/n1Mcw6zxj9jxjP6ov8nvwEWgJaYrbFN7IO0CCd/aZk0CDCuvh+9
+ 3Qo1bi83BRO4gd03beP12+S2kqKjYJE72yuZGvzgbqNLtxGAExVE9FTetwfrOHcADl7o
+ /qn9N19WEfp0RYLMpyypCY8VqeKnIiiwN2XJZ59HAGS0sE3h/xt9kpuWeUM20nYbL9Ig
+ Rwy8LMtnVXseLtUZc3TxYiG9f/ZM/tHQCcybaYxesA4l5bLTIbR4mJXZlkzS21kTiSOh
+ jx0udSUc5C/CBOvD8fpNOOEoYZKzQZXwFltofR6lm5U8ywrQMSRUFjSzTtuGjV34KUQ9
+ rFmA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787807433; x=1788412233;
+ d=1e100.net; s=20251104; t=1787807451; x=1788412251;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:sender:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=vh4dj4cz7gBkDt8LT9ZzL10T8leVWvoTLVZlSAppwZk=;
- b=onOZ0CYQtcOztlBVxWkyXrS8jPIF9DAl6xL3XctSMxQb6jVltYrCTcyDXDOXz4qwvv
- kd9chc1RZvK0GXtD+KcO5eQmDNxkhBaVpgiPwHphvj77MvLipx089vIv7fl4JOKiteTK
- XBLDqHVM5YMxaCaMo3JAnypzd9o7qqq8eOJQjbaAevCytpOCO1pJLx6ZZ4OMFvGvyNry
- Znx1DTcn9YyD/Fkusi5FwCEQMb4/mtp909nfl4j3rfBJiZiJqCsR7nzoa9Rdcar5M1xA
- PKqmB9lThyt8rwqIg1Tz4TeDli38eWtJceK2DFp38L6EfrudbbLOV4g6D998hO12MH3y
- qsew==
+ bh=H3JPY4jlJyqqJXUD7/t3iwMSegC7rW8M+Jxwt7XCKQo=;
+ b=pOKUO8Lf8kfsVENs+cdJQzPW4hls2hojLZi6uho/I89pvimnYljsYsBCEkX2AswcoU
+ dTTqBTUyllsDtAfPYS+wbC1GnAECAnQA2ZxzmQuRGyw9ko++5EEekiqgwSP5nOugx0T8
+ 6PDCgkREzeRux7rjfeRXYOrb7OcwMuX+xXOBUwLO9VcbTpjMjka6xHNpemVBJu5qVEEC
+ oW8bGBotgiJQJ4J2P9CWOrFtmDhCywW//xCumOhOiId68xoU+6KF9Q/cVMqhar4G5gn+
+ wZLnk/8CMBB1rM/RdfJGAnT3PsglrpHRLwDyd+wc9Bgc8MlyoP2wPjHn3qTxcrlIRTH+
+ COUg==
 X-Forwarded-Encrypted: i=1;
- AHgh+RpIyn67beXRx85sNtryP9lnI0Q7XzIIvtn81hzbovQBjIIWUdm5m4c3Txp8QB/8HDqruSpfoKgqk84I@nongnu.org
-X-Gm-Message-State: AFuF++nclx3EaNlaI4GQ9Xt85aL5gYCeqLmKQ+h9kTx27KSaU9O7cBE+
- z7zntFR2iKNvzgsb3QWws4vJXQXjeeaJU2F4pKtsyLsAZGtyxeKkRplJ
-X-Gm-Gg: AR+sD13VS1ZLL9K8wm6KCHCSBI+c5Y7CU9+TATcmwOh9Jos2UcZwY7F7i1tYEXIY0j9
- 0QKM3P7/vE/Z04e9QnFNZW2eoxUlRdbNRflMBHBW07l0LL0A0mr2R5H8AER6k1Qwrz8uLIl+5p9
- 6ONCPXzYMvdsLJeu4neMMGWBaBYkfwe4hL6uwN9tvD8IklxJIT0ogmSNkZRWjv9LEg2ugxYbL4Z
- IVX+SvWe+ONAz5QfLHxj/w5XntTbNCQivuuCNiWThtByzm3v2ebD3gQK9SVk4adqsIGMWtFp0m6
- TWqn0fPAYYq+zgjFoa+gHP6HNsVFYdO1ArPWILJ/SBQFTN+/wpFLvCCHPfCdxscHgrCbCj68hgR
- d7Ilie65nodfW3NfUpqszLygSd4GmoeGIIMnRsTcECjI/fFy5fXf3ltIZvRiETqmQI6/AjbeRTV
- VAlUCfLzbZ2NgiZr8WakgtXYdGMjB2IeLivS9Amcp7c8rhVwX3sm4r5bPwci3Q1nVI99BPdMPQl
- 7OWjRT9MHKuZrb0+Gkmav/G4UaCgyeUd1GAd1BgB6jrDGjvSSpOt6jf2DoJpa+Xzsu1iK456Mwe
- tm9RKECo0Ay2Nv5iYjcC
-X-Received: by 2002:a17:90b:4a50:b0:392:b509:b1a5 with SMTP id
- 98e67ed59e1d1-3966d48c3e9mr22557303a91.14.1787807433348; 
- Wed, 26 Aug 2026 22:10:33 -0700 (PDT)
+ AHgh+Rqrk/+1Ss3XihijfdzCJgoQ5tI3tf6YncpQiw0WcFoVdzxiSPmWmYQlKxW5ZWTBN84qqqRaBEUdeey2@nongnu.org
+X-Gm-Message-State: AFuF++mCMY5B+ys8C6sZ95H27ZAtpY8dA31ROP6l9At6DpoQnK+YyTu3
+ TE5JvINdYzD/W0tSMnRZGv/YoHq2utOd/eUYVCr8KH6LDpO/50ruMJS8
+X-Gm-Gg: AR+sD10QSPT//dfw5PJQj8gbbxr+a5yT5Gkgi+wX2kAo88P5QWkU7L8CZeCyN642T26
+ nfqca7DaIm3arwk0eq84rg5LlOHWWFNzYP1xWwZHFTKfC+dh+SaApY1FzH5d1rNj7ZsxsRvIR7+
+ s7pYcDBQiC7nUuw+6ap0n28awqJzQbU0HCpTUywTdgvBgrNimhRPRH6/PlzH7tIAdog1F+3H11T
+ s0lj0t+v6W0YoHsRO4JqQMewL/ZJht7anmVQS/3bxXCI1LQpRby4BeNYTQIqA7Foxd1dyWE6Qbj
+ Z5K9O3uMVzkvyw5+uPcSfZxhO3iEmZuEh1VEEMC+em5LQKrz2Vg4uWcfM8kvfoB6aPUCL1e1yyU
+ OCsU2WqzP+64x1D3CcecvXSBUZfbiX365JAa4cK1ycTtkGRDAyNXCw79aOY0wd74SFFIFafq9EP
+ yMNGtUmMT2mmTlKcOp/ubLDXTrVvquWw4Tg81IP2Y72tDTX9TT5CaCU/BPk8hl3sQuTjJ0xVBRK
+ 6fQnT1XVk+qRDj7tJixmzLUHP13rlpZmgM1/h3rRxaLkrY6Ag8ODwSTU/cuHLVy2DAinwjpMlcC
+ 2ryub4IAXmXwG4Rw88oi
+X-Received: by 2002:a17:90b:2604:b0:38e:ad9d:1151 with SMTP id
+ 98e67ed59e1d1-3966d18ec9dmr25886586a91.4.1787807450883; 
+ Wed, 26 Aug 2026 22:10:50 -0700 (PDT)
 Received: from donnager-debian.. ([180.150.112.50])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-39670599275sm2210473a91.0.2026.08.26.22.10.27
+ 98e67ed59e1d1-39670599275sm2210473a91.0.2026.08.26.22.10.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 26 Aug 2026 22:10:32 -0700 (PDT)
+ Wed, 26 Aug 2026 22:10:50 -0700 (PDT)
 From: Joel Stanley <joel@jms.id.au>
 To: Alistair Francis <alistair.francis@wdc.com>,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
@@ -82,17 +82,16 @@ Cc: Peter Maydell <peter.maydell@linaro.org>, Weiwei Li <liwei1518@gmail.com>,
  Michael Ellerman <mpe@kernel.org>,
  Portia Stephens <portias@oss.tenstorrent.com>, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org, qemu-arm@nongnu.org
-Subject: [PATCH 03/12] tests/tcg/riscv64: Boot semihost tests with -bios none
- -kernel
-Date: Thu, 27 Aug 2026 14:39:42 +0930
-Message-ID: <20260827050953.67184-4-joel@jms.id.au>
+Subject: [PATCH 06/12] tests/tcg/riscv64: Enable multiarch system tests
+Date: Thu, 27 Aug 2026 14:39:45 +0930
+Message-ID: <20260827050953.67184-7-joel@jms.id.au>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260827050953.67184-1-joel@jms.id.au>
 References: <20260827050953.67184-1-joel@jms.id.au>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102e;
- envelope-from=joel.stan@gmail.com; helo=mail-pj1-x102e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1034;
+ envelope-from=joel.stan@gmail.com; helo=mail-pj1-x1034.google.com
 X-Spam_score_int: -16
 X-Spam_score: -1.7
 X-Spam_bar: -
@@ -116,82 +115,162 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Loading tests should conflict with the opensbi ROM, however the generic
-loader writes through the CPU address space which bypasses the ROM
-overlap check.
+Add the boot code and semihosting helpers needed to run the multiarch
+system tests on riscv64, and add riscv64 to MULTIARCH_SOFTMMU_TARGETS.
+The aarch64 makefile was used as a guide for the make rules.
 
-Instead of depending on this happy accident, set -bios none to skip
-loading opensbi. This frees up the address space to load the test with
--kernel, required by a future change that uses the same rules to run the
-multiarch tests for riscv64.
+boot.S does not clear bss as the libmem plugin test would count the
+stores and fail with a mismatch. Instead the BSS is described as
+PT_LOAD, so the QEMU ELF loader fills the region with zero, the same as
+aarch64 and loongarch64.
 
 Signed-off-by: Joel Stanley <joel@jms.id.au>
 ---
- tests/tcg/riscv64/Makefile.softmmu-target | 18 +++++++++---------
- 1 file changed, 9 insertions(+), 9 deletions(-)
+ tests/tcg/riscv64/system.c                | 30 +++++++++++++++++
+ tests/tcg/Makefile.target                 |  2 +-
+ tests/tcg/riscv64/Makefile.softmmu-target | 40 ++++++++++++-----------
+ tests/tcg/riscv64/boot.S                  | 23 +++++++++++++
+ 4 files changed, 75 insertions(+), 20 deletions(-)
+ create mode 100644 tests/tcg/riscv64/system.c
+ create mode 100644 tests/tcg/riscv64/boot.S
 
+diff --git a/tests/tcg/riscv64/system.c b/tests/tcg/riscv64/system.c
+new file mode 100644
+index 000000000000..08196a540f96
+--- /dev/null
++++ b/tests/tcg/riscv64/system.c
+@@ -0,0 +1,30 @@
++/*
++ * RISC-V semihosting support for multiarch test suite
++ *
++ * Copyright 2026 Tenstorrent USA Inc
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ */
++
++#include "semicall.h"
++
++#define SYS_WRITEC      0x3
++#define SYS_EXIT        0x18
++
++#define ADP_Stopped_ApplicationExit 0x20026
++
++void __sys_outc(char c)
++{
++    __semi_call(SYS_WRITEC, (uintptr_t)&c);
++}
++
++void _exit(int code)
++{
++    const uintptr_t args[2] = { ADP_Stopped_ApplicationExit, (uintptr_t)code };
++
++    __semi_call(SYS_EXIT, (uintptr_t)args);
++
++    /* Hang if QEMU fails to exit */
++    while (1) {
++        asm volatile("wfi");
++    }
++}
+diff --git a/tests/tcg/Makefile.target b/tests/tcg/Makefile.target
+index 1b83824ff4e7..d4dd0fec650d 100644
+--- a/tests/tcg/Makefile.target
++++ b/tests/tcg/Makefile.target
+@@ -129,7 +129,7 @@ else
+ EXTRA_CFLAGS += -ffreestanding -fno-stack-protector
+ 
+ # We skip the multiarch tests if the target hasn't provided a boot.S
+-MULTIARCH_SOFTMMU_TARGETS = i386 alpha aarch64 arm loongarch64 s390x x86_64
++MULTIARCH_SOFTMMU_TARGETS = i386 alpha aarch64 arm loongarch64 s390x x86_64 riscv64
+ 
+ ifneq ($(filter $(TARGET_NAME),$(MULTIARCH_SOFTMMU_TARGETS)),)
+ -include $(SRC_PATH)/tests/tcg/minilib/Makefile.target
 diff --git a/tests/tcg/riscv64/Makefile.softmmu-target b/tests/tcg/riscv64/Makefile.softmmu-target
-index 6a219c306c43..562ac9b0e0fb 100644
+index f2850a194084..82e8fe2664b0 100644
 --- a/tests/tcg/riscv64/Makefile.softmmu-target
 +++ b/tests/tcg/riscv64/Makefile.softmmu-target
-@@ -14,36 +14,36 @@ CFLAGS += -g -Og
- %: %.o $(LINK_SCRIPT)
- 	$(LD) $(LDFLAGS) $< -o $@
+@@ -5,9 +5,11 @@
+ TEST_SRC = $(SRC_PATH)/tests/tcg/riscv64
+ VPATH += $(TEST_SRC)
  
--QEMU_OPTS += -M virt -display none -semihosting -device loader,file=
-+QEMU_OPTS += -M virt -display none -bios none -semihosting -kernel
++CRT_OBJS = boot.o system.o
++
+ LINK_SCRIPT = $(TEST_SRC)/semihost.ld
+-LDFLAGS = -T $(LINK_SCRIPT)
+-CFLAGS += -g -Og
++LDFLAGS = -Wl,-T$(LINK_SCRIPT) -static -nostdlib $(MINILIB_OBJS) -lgcc
++CFLAGS += -g -Og $(MINILIB_INC)
  
- EXTRA_RUNS += run-issue1060
- run-issue1060: issue1060
--	$(call run-test, $<, $(QEMU) $(QEMU_OPTS)$<)
-+	$(call run-test, $<, $(QEMU) $(QEMU_OPTS) $<)
+ # Used by riscv64 tcg tests and shared 'multiarch' tests
+ QEMU_CPU = rv64
+@@ -53,23 +55,23 @@ test-zicclsm-off.o: test-zicclsm.S
+ 	$(call quiet-command, \
+ 	  $(CC) $(CFLAGS) $< -Wa$(COMMA)--noexecstack -c -o $@, CC, $@)
  
- EXTRA_RUNS += run-test-mepc-masking
- run-test-mepc-masking: test-mepc-masking
--	$(call run-test, $<, $(QEMU) $(QEMU_OPTS)$<)
-+	$(call run-test, $<, $(QEMU) $(QEMU_OPTS) $<)
+-EXTRA_RUNS += run-plugin-doubletrap
+-run-plugin-doubletrap: doubletrap
+-	$(call run-test, $<, \
+-	  $(QEMU) -monitor none -display none \
+-		  -chardev file$(COMMA)path=$<.out$(COMMA)id=output \
+-		  -plugin ../plugins/libdiscons.so -d plugin -D $<.pout \
+-		  $(QEMU_OPTS) $<)
+-
+-EXTRA_RUNS += run-plugin-interruptedmemory
+-run-plugin-interruptedmemory: interruptedmemory
+-	$(call run-test, $<, \
+-	  $(QEMU) -monitor none -display none \
+-		  -chardev file$(COMMA)path=$<.out$(COMMA)id=output \
+-		  -plugin ../plugins/libdiscons.so -d plugin -D $<.pout \
+-		  $(QEMU_OPTS) $<)
++ifeq ($(CONFIG_PLUGIN),y)
++EXTRA_RUNS_WITH_PLUGIN += run-plugin-doubletrap-with-libdiscons.so \
++	run-plugin-interruptedmemory-with-libdiscons.so
++endif
  
- EXTRA_RUNS += run-test-minstret-ecall
- run-test-minstret-ecall: test-minstret-ecall
--	$(call run-test, $<, $(QEMU) -icount shift=1 $(QEMU_OPTS)$<)
-+	$(call run-test, $<, $(QEMU) -icount shift=1 $(QEMU_OPTS) $<)
+ CLEANFILES += interruptedmemory doubletrap
  
- EXTRA_RUNS += run-plugin-doubletrap
- run-plugin-doubletrap: doubletrap
- 	$(call run-test, $<, \
- 	  $(QEMU) -plugin ../plugins/libdiscons.so -d plugin -D $<.pout \
--	  $(QEMU_OPTS)$<)
-+	  $(QEMU_OPTS) $<)
- 
- EXTRA_RUNS += run-plugin-interruptedmemory
- run-plugin-interruptedmemory: interruptedmemory
- 	$(call run-test, $<, \
- 	  $(QEMU) -plugin ../plugins/libdiscons.so -d plugin -D $<.pout \
--	  $(QEMU_OPTS)$<)
-+	  $(QEMU_OPTS) $<)
- 
- EXTRA_RUNS += run-test-crc32
- comma:= ,
- run-test-crc32: test-crc32
--	$(call run-test, $<, $(QEMU) -cpu rv64$(comma)xlrbr=true $(QEMU_OPTS)$<)
-+	$(call run-test, $<, $(QEMU) -cpu rv64$(comma)xlrbr=true $(QEMU_OPTS) $<)
- 
- # Zicclsm: misaligned load/store support. Assemble one source twice: the
- # default build expects every misaligned access to succeed (zicclsm=true),
-@@ -61,11 +61,11 @@ test-zicclsm-off: test-zicclsm.S $(LINK_SCRIPT)
- 
- EXTRA_RUNS += run-test-zicclsm
- run-test-zicclsm: test-zicclsm
--	$(call run-test, $<, $(QEMU) -cpu rv64$(comma)v=true$(comma)zfh=true$(comma)zicclsm=true $(QEMU_OPTS)$<)
-+	$(call run-test, $<, $(QEMU) -cpu rv64$(comma)v=true$(comma)zfh=true$(comma)zicclsm=true $(QEMU_OPTS) $<)
- 
- EXTRA_RUNS += run-test-zicclsm-off
- run-test-zicclsm-off: test-zicclsm-off
--	$(call run-test, $<, $(QEMU) -cpu rv64$(comma)v=true$(comma)zfh=true$(comma)zicclsm=false $(QEMU_OPTS)$<)
-+	$(call run-test, $<, $(QEMU) -cpu rv64$(comma)v=true$(comma)zfh=true$(comma)zicclsm=false $(QEMU_OPTS) $<)
- 
- EXTRA_RUNS += run-test-misa-w
- run-test-misa-w: test-misa-w
+-# We don't currently support the multiarch system tests
+-undefine MULTIARCH_TESTS
++# Multiarch tests
++TESTS += $(MULTIARCH_TESTS)
++EXTRA_RUNS += $(MULTIARCH_RUNS)
++
++.PRECIOUS: $(CRT_OBJS)
++
++# Build and link the multiarch tests
++%: %.c $(LINK_SCRIPT) $(CRT_OBJS) $(MINILIB_OBJS)
++	$(call quiet-command, \
++	 $(CC) $(CFLAGS) $(EXTRA_CFLAGS) $< -o $@ $(LDFLAGS) $(CRT_OBJS), CC, $@)
++
++# Default is zicclsm=true, so misaligned accesses must work
++memory: private CFLAGS += -DCHECK_UNALIGNED=1
+diff --git a/tests/tcg/riscv64/boot.S b/tests/tcg/riscv64/boot.S
+new file mode 100644
+index 000000000000..b403549345a1
+--- /dev/null
++++ b/tests/tcg/riscv64/boot.S
+@@ -0,0 +1,23 @@
++/*
++ * RISC-V boot code for multiarch test suite
++ *
++ * Copyright 2026 Tenstorrent USA Inc
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ */
++
++#define MSTATUS_VS          0x00000600
++#define MSTATUS_FS          0x00006000
++
++.section .text._start
++        .global _start
++        .type _start, @function
++_start:
++        /* Enable FPU and vector unit */
++        li      t0, (MSTATUS_FS | MSTATUS_VS)
++        csrs    mstatus, t0
++        la      sp, __stack_top
++        call    main
++
++exit:
++        /* exit with main()'s return code */
++        call    _exit
 -- 
 2.47.3
 
