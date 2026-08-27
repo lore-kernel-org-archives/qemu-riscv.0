@@ -4,109 +4,122 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DC5FC61DC6
-	for <qemu-riscv@archiver.kernel.org>; Thu, 27 Aug 2026 12:50:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C491C61DC2
+	for <qemu-riscv@archiver.kernel.org>; Thu, 27 Aug 2026 12:53:09 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wzZYh-0000id-FR; Thu, 27 Aug 2026 08:50:19 -0400
+	id 1wzZbM-0001rm-3J; Thu, 27 Aug 2026 08:53:04 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1wzZYf-0000h0-Bo
- for qemu-riscv@nongnu.org; Thu, 27 Aug 2026 08:50:17 -0400
-Received: from mail-oa1-x33.google.com ([2001:4860:4864:20::33])
+ (Exim 4.90_1) (envelope-from <stephensportia@gmail.com>)
+ id 1wzZbK-0001nP-2F
+ for qemu-riscv@nongnu.org; Thu, 27 Aug 2026 08:53:02 -0400
+Received: from mail-ot1-x32b.google.com ([2607:f8b0:4864:20::32b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1wzZYc-0000HK-Hf
- for qemu-riscv@nongnu.org; Thu, 27 Aug 2026 08:50:17 -0400
-Received: by mail-oa1-x33.google.com with SMTP id
- 586e51a60fabf-44cd237446cso2419485fac.1
- for <qemu-riscv@nongnu.org>; Thu, 27 Aug 2026 05:50:14 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1787835013; cv=none;
+ (Exim 4.90_1) (envelope-from <stephensportia@gmail.com>)
+ id 1wzZbH-0000pC-44
+ for qemu-riscv@nongnu.org; Thu, 27 Aug 2026 08:53:01 -0400
+Received: by mail-ot1-x32b.google.com with SMTP id
+ 46e09a7af769-7f4e6b5bd30so364250a34.0
+ for <qemu-riscv@nongnu.org>; Thu, 27 Aug 2026 05:52:58 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1787835177; cv=none;
  d=google.com; s=arc-20260327;
- b=mz+GiLAA3xc5ptsGRlpayn6YOick0f6rey7Kz9cg641suuN1njqJLqfLZo13h7SPbb
- Rj+RlpIE0NjwdrSZdvCVK3W69Vn6pxFsaDB+//PYojNsuOLnIQhrVayz1oNNeovRsmrS
- x8pTg04MJtrdh7a0SXUWRfr3w3viQY2g42JPK9LfOnGJmC33SBtmmU95oxac2FaMNKiX
- 6h28NVjpPoMS4eI2s68jOKIzDeHLDAvksJTZ+er1HpRqUWQBz+WdGjfqSxtpgjBIUsPK
- 3tiHP44dSi0S9RP+XnsSIGPb4M0lBeaIKjUnftI7kjgxTyXlpNnZ5TLGRmuGggBAkPlp
- wvMQ==
+ b=c9uugngGV4sAyMNVsyfTyU6dHSFjIFNumMVX6fLkPVk0RPRW2SD6HvAR2LYE6Eze88
+ WSbty2bAsuylJbw2YDmi1YFGevo7rutZMuukbSXe5VwyCNTN/qsKpJy5pANIZCXR7QbF
+ pgJ4OXDt4rAg6wN1B3HL3ZNv9pNA6ddyiouOsyYKxdhptUb2aRn3tg5xzSuJlzPyWG/v
+ dhqV+CQaidjk2i4YBYltpUsnIAXNnc4tyZnkNDXJQG1cZreLcah9iinqzSbEh2rCTOiu
+ i4fGls39Xw3S0mtQeiw0fGHVR7VxGQqGvewRtFsk9DATywph1LZBWVSlCCZ6RFoC5qX0
+ L+vA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=jM2UHpB7frC1o8FlAEjLgLQniaKbP22sZS4mgkujvE8=;
- fh=UNsB4eCNQHAP0LrpRYoU+lF0E3BdbXZhAS7cvfFJLfk=;
- b=k+6LcPD/VIvPoL3bJlRZnDsDZHwJDqI3zIGtq+BpM9pDgVSYscYigsDzrtLIC5+X4U
- PIBpealfG0Ydmxm/3b/OIE/NxViv4E0SsLot5ydBmnPGyDzv5a2nH+BXJ2ITYzqLKKCc
- BBq6EtUSdh7famfQX8Bbw1wnm8YCVjDxdH2I9v13GhbVCZjGCwI7dVB28EcxKteLHbao
- VU1VldnyzIZega0/th0F5aLzuPLXguGIB0TR2qYz0HNcCOQj6WCgJnjLIPblnkThFfEy
- TCrlyUGmavl23SgkmOympkyUdrWIOE85hTjA9tYtibZazA/l6U5qTSwnXttQnmBoF6PK
- 74Uw==; darn=nongnu.org
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=972qMNuHpujV1LYeJOJewE8qoLbYh3ct+xxAxq/EtDQ=;
+ fh=ygvJZsfk5YivMJYNt5k2nSvsgD0+xja2W6CL8867aCg=;
+ b=rrP/7ZLxiHIbmjBX+IHotGPK7BzkUubO/iNSVz9AG9xx9jibuuzm4NX793zt2thSNT
+ zP9iV+9Mnj4DH4ESa4dhDT4m3KTHPyjmxf6dBrutGOWJ9ZoJk2K+Z0lJNulgqRp+aZxf
+ G9M3wqF8/vAkdNWdjuYpZmbRcGdCa20g0MXAnI7fjovIMAi9ASd05mTz0CtIi/3dpy0S
+ sE01QoOgQx5jzu/HneCcb2P6JJkbXj7v6JP1sYKBiBr5b8a0BxwmDb6ZtYc7pxDP0UwJ
+ W5/S+PAyoO+J6SDQYZEiXNRISzE++/3NR24rSENVaeb+ovWcBOZu9TFt2ASTh4sv8nuW
+ NHqA==; darn=nongnu.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1787835013; x=1788439813; darn=nongnu.org;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=jM2UHpB7frC1o8FlAEjLgLQniaKbP22sZS4mgkujvE8=;
- b=GEtaxTGoLP13ix3WjPxyMERa64HHrTCwDiyCqGa08xVKbu+BenamQCJ2JdfOyz1FmW
- aoebAN1VJkBz7WZ6WnKR19/wO+7L/DX2fUNzf3X2tphFl2ALAO0sYDrzxXrolFwGKptZ
- mW7B0Fj/3UNVXU0CoG9+5T7Bw5gMh2WIcriirPX2hVYSSIvwwyM9V5pPAAoil9JOuKx3
- ubdYcaimy/99ay7mhIz2ktIX2t7FMrEHPVxCMML58L7XLm8qzUIChQYU+qJDz3fCD8g1
- 0JRbvbfjPRYu8PPtv0Pmn/9A/CTTsVZu7RR1cNPf3egf4zlnnjCD5oKHxLReQVwYl4iQ
- zqNg==
+ d=gmail.com; s=20251104; t=1787835177; x=1788439977; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=972qMNuHpujV1LYeJOJewE8qoLbYh3ct+xxAxq/EtDQ=;
+ b=KLejYhhx/VqlRIcjiu/huxzeeXGoBy9pw2Z1ps/SCNcpYZEkOmrsrgsYiou/LoQkpI
+ kVlPTP+oOkOB4gXttWAgHpdBUYU8kb9EVQWFKNuWFKLSVCFxkqwkEZzrok+B4FuWo2p+
+ oOrHNoTXTkl9VqyGqEO+5KIbANvBH6soqNC4boGepzJHkiLC2LNnLtO7qWruQ4BwdZTJ
+ PI/OpMJUEjvIZBgVVIi+XERcV2GXERXVXpVUvOysOZbgQROoZlxBsJ/zWQwxg7a8VJmo
+ X68SFJO2XIzxyxy6yg0TTnINmpoR6mz6Hrya1Mz8aGC7IDVuroh2LKTonHJ9iMkJzNj8
+ +hqw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787835013; x=1788439813;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=jM2UHpB7frC1o8FlAEjLgLQniaKbP22sZS4mgkujvE8=;
- b=NPhNPZrAs94Nl0dvxj5jc9rWQxaqcq8uuGSP89u6GPKvUhiHimVWJUtIqRjscHX3+x
- sDy73rsojMTbXWiTUHSjE7OuBjGF6vAZ1CXyXwmHKuk8NyHosHm+VxCsfB+pKn6KP1TH
- IVZndwD5mZ3YepxTUnPYzM5IAk61jnsk5YQX/32Vn1YrhQpiIxCq44PZpsY2sFS2Cp8Z
- 3L/8VwExYVOJ2IcLktkVhnhplrqgfB0e84jWmJlWLwmh4/qZdGUJiDR7qfoYuJOpLAe3
- Tk1SqZ1EGwR6kC/rmOd6b34ypAXcX8kyYaLBK4B8Qtd5j4jUZ4XjMQP++AlIjdKVvBJG
- dcaA==
-X-Gm-Message-State: AFuF++mUy+a+Bp1k3zaxGrarybjMI7veLNYeUAmJ0LRONDJiuco+hGYo
- ukc30xAX45Qko5VWmceS1Kgn3Y+IdmXRDIHzrqZaWfNqyAxx+DCmAvDw+w1noqA2kN6IWEOQg0O
- SmJ+OUq8fXEo7gE2hFRtbpC5VMgy/nsSfrUMFx0iEOFSvL6wGRX+7
-X-Gm-Gg: AR+sD10fvATBfihP8yQ2oCoT5jdmyRpcewLdl7cf4GgdAjtBw4PLuChM85N5MIWlpHw
- 7E3HrvMIay1lb0fSBgthSD7/FxFZFB03gyNN3+GHUVQWqrY/HlQ1J2MHix3pVg5UZLm66K8o5kf
- XQSnr9quXODHKNvPRqWgfmr6gtHCeb6BS00WxRTCiTrlDrP5FfcNrn8U6f4YE7r3AfpESooTh1y
- cIwsElHtoDvFzwXsJFHG0d0CrbfKjjpL6pdeyKcU/Oj0akyVuXaW5KFqkB3KnhwYBs9tXtHNe73
- +3nxIDpTECA2eT0nRovo4YFWjzna9lCm3DIKvMbqOcGtyKiBgymciPo7ERiW7eKDRLNJscPvd4v
- q/KBa05CLiJMbo3GMCwNziJr12khw8Crp4TY=
-X-Received: by 2002:a05:6820:a513:20b0:6aa:e854:d05d with SMTP id
- 006d021491bc7-6b1a03b11bdmr11271009eaf.3.1787835012897; Thu, 27 Aug 2026
- 05:50:12 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1787835177; x=1788439977;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=972qMNuHpujV1LYeJOJewE8qoLbYh3ct+xxAxq/EtDQ=;
+ b=GHPqv9g9TCqz/MNSKJt1N5ub4cdKRkUhpy2fzcaO9piJKAJe56q/aN6zr9tg5DBF1s
+ IJQcl103aVSqIlCDb3dXRlh3wQp0+0L/28mzix6uhxvcLUlZqo+6eurkLZc5uvwp8WDz
+ wz3N2ihldHhhgQIP0SxLhnk7MQP1beZd1ITw3JNgOw7YCjgiZRBtJ+hbF6WxsOhvNHjN
+ W07HxwhkJEv8tJ8WsszkZBOdx8vvzoInLoPVs1qXdhbEFi+i269mVgAemU0SxxaeVgif
+ RmHfLm08feO5Qh5pYvG721++d86sFV+JdUR9mPNMoSw6t324Lr1Ngvt8SR3DGhkjVqjl
+ RQOQ==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RqRpadMkRbF69irul4HnNoAEHpadw7IlrP4WNfiSiR9Ng/hCwgl9H+oEQoxOUoAJa+pOHG6SMeYG57e@nongnu.org
+X-Gm-Message-State: AFuF++l6rCEJzKDiEBeEPXfILtB4M1v3rWynryFpEpaSWvkDxQyI8t0H
+ vZ97TE13eQyT+sAnFRqKcJPt7OspOhymQr1StCSq672bf4X/Lh8IJrCpmPvN3Ibnk9dM1/CAm+0
+ 4EAYMYs+AuEv0WFJmqJSZ4bqJIQ6Lhps=
+X-Gm-Gg: AR+sD10VFZjK9zMUOfnrS+L7Su2ax6OTf8bohVcRz+QFdyFRK51U3aUwdyL9zuWHIGK
+ n0pka1Kfk2bvzqGZts/yTG7GW0bw6RwFpzU/Y1N0XvKLkCy9sbipqrmeP4xJyM6ZCtvvhRnQ8eI
+ Gxe1MWZzH+q8IxGKs/onjku7RuEUOyhN9o9TGDvDTkrm5lONUZ2iZ0q3Sh/MGGu0Ea9/44zQcQz
+ AlBv1IqqxKdF8ACQh7K1+H1fGDmLQV503pGXY/ciOVg6VhT+bbFhAfLOQ9ZzjWd/6JFiXsrfkYc
+ mFQEjl7eUz/at8meHVE8QoBaDTpuEYGg3vD83dDt1Wv9bAB8MSACBfz4
+X-Received: by 2002:a05:6820:2e8e:b0:6b0:31d0:5fc9 with SMTP id
+ 006d021491bc7-6b1b000b6e8mr3898956eaf.7.1787835177486; Thu, 27 Aug 2026
+ 05:52:57 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260812174417.2468981-1-max.chou@sifive.com>
- <20260812174417.2468981-6-max.chou@sifive.com>
- <5ff4a05fc85d926c1a3352289a84d071220d871f.camel@wdc.com>
-In-Reply-To: <5ff4a05fc85d926c1a3352289a84d071220d871f.camel@wdc.com>
-From: Max Chou <max.chou@sifive.com>
-Date: Thu, 27 Aug 2026 20:50:01 +0800
-X-Gm-Features: AcwNN1W2SG6jJzE6odJLakbJ61tArNzn9Wp2-mrdiw5GCiWt-fo7Lb-DXkhYDU4
-Message-ID: <CANiaA1ts8nAf8cbntPBqm53Bp32EBGJzCocQ6tgT282qibmcPQ@mail.gmail.com>
-Subject: Re: [PATCH v2 5/6] disas/riscv: Add disassembler support for
- Xsfvqmaccdod/Xsfvqmaccqoq
-To: Alistair Francis <Alistair.Francis@wdc.com>
-Cc: "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
- "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, 
- "palmer@dabbelt.com" <palmer@dabbelt.com>, 
- "daniel.barboza@oss.qualcomm.com" <daniel.barboza@oss.qualcomm.com>, 
- "chao.liu@processmission.com" <chao.liu@processmission.com>, 
- "jason.chien@sifive.com" <jason.chien@sifive.com>,
- "liwei1518@gmail.com" <liwei1518@gmail.com>, 
- "zhiwei_liu@linux.alibaba.com" <zhiwei_liu@linux.alibaba.com>
-Content-Type: multipart/alternative; boundary="000000000000dc6b68065a06c662"
-Received-SPF: pass client-ip=2001:4860:4864:20::33;
- envelope-from=max.chou@sifive.com; helo=mail-oa1-x33.google.com
+References: <20260825040452.1322251-1-stephensportia@gmail.com>
+ <CAFEAcA9etHvjL1igO4mFy5iQNy1pCbNFGaSg5HFva+YCeMkGEA@mail.gmail.com>
+ <CACYNXwKU_UuhrBWHNFtYYmSfzRsUd5jRFjSc1++xvQHxPk6rew@mail.gmail.com>
+ <CAFEAcA-Ncv9_jMMg1i+Ox_xa9oM4D_MMLGnPpqbyGJV_5B9iMg@mail.gmail.com>
+In-Reply-To: <CAFEAcA-Ncv9_jMMg1i+Ox_xa9oM4D_MMLGnPpqbyGJV_5B9iMg@mail.gmail.com>
+From: Portia Stephens <stephensportia@gmail.com>
+Date: Thu, 27 Aug 2026 22:52:46 +1000
+X-Gm-Features: AcwNN1WVKjgO4vdGB-g71tMRr9kieksa0kFkCi8R0mhD7uVbUPbImyxUUUZGX6k
+Message-ID: <CACYNXwLEXFQ7s1PFgfWfk+O2k41W3Y=arJ=rxOyboqaR-9v70Q@mail.gmail.com>
+Subject: Re: [PATCH 0/4] Rename ssi_transfer to ssi_transfer8
+To: Peter Maydell <peter.maydell@linaro.org>
+Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Jamin Lin <jamin_lin@aspeedtech.com>, qemu-ppc@nongnu.org, 
+ =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>, 
+ Steven Lee <steven_lee@aspeedtech.com>,
+ Andrew Jeffery <andrew@codeconstruct.com.au>, 
+ Harsh Prateek Bora <harshpb@linux.ibm.com>,
+ Subbaraya Sundeep <sundeep.lkml@gmail.com>, 
+ Troy Lee <leetroy@gmail.com>, "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@mailo.com>, 
+ Alistair Francis <alistair@alistair23.me>, 
+ Strahinja Jankovic <strahinja.p.jankovic@gmail.com>, qemu-arm@nongnu.org, 
+ Tyrone Ting <kfting@nuvoton.com>, Nicholas Piggin <npiggin@gmail.com>, 
+ Aditya Gupta <adityag@linux.ibm.com>, Kane Chen <kane_chen@aspeedtech.com>, 
+ Francisco Iglesias <francisco.iglesias@amd.com>, Joel Stanley <joel@jms.id.au>,
+ Hao Wu <wuhaotsh@google.com>, Glenn Miles <milesg@linux.ibm.com>,
+ qemu-riscv@nongnu.org, Jean-Christophe Dubois <jcd@tribudubois.net>,
+ Portia Stephens <portias@oss.tenstorrent.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::32b;
+ envelope-from=stephensportia@gmail.com; helo=mail-ot1-x32b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
@@ -124,517 +137,101 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---000000000000dc6b68065a06c662
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, Aug 25, 2026 at 12:32 Alistair Francis <Alistair.Francis@wdc.com>
+On Thu, Aug 27, 2026 at 8:53=E2=80=AFPM Peter Maydell <peter.maydell@linaro=
+.org> wrote:
+>
+> On Thu, 27 Aug 2026 at 11:37, Portia Stephens <stephensportia@gmail.com> =
 wrote:
-
-> On Thu, 2026-08-13 at 01:44 +0800, Max Chou wrote:
-> > From: Jason Chien <jason.chien@sifive.com>
 > >
-> > Add disassembler support for all SiFive custom int8 matrix-multiply
-> > instructions: sf.vqmacc{u,,us,su}.4x8x4 and
-> > sf.vqmacc{u,,us,su}.2x8x2.
+> > On Thu, Aug 27, 2026 at 7:19=E2=80=AFPM Peter Maydell <peter.maydell@li=
+naro.org> wrote:
+> > >
+> > > On Tue, 25 Aug 2026 at 05:05, <stephensportia@gmail.com> wrote:
+> > > >
+> > > > From: Portia Stephens <portias@oss.tenstorrent.com>
+> > > >
+> > > > The ssi_transfer function comments say that it takes a word varying
+> > > > between 8-bits and 32-bits. ssi_transfer takes a 32-bit arg to tran=
+sfer
+> > > > but there is no means to indicate the number of bits that should
+> > > > actually be transferred. All child classes of SSI_PERIPHERAL class =
+have
+> > > > transfer functions that, despite accepting a 32-bit tx, only transf=
+er a
+> > > > single byte; m25p80_transfer8(), ssi_sd_transfer(), ssd0323_transfe=
+r().
+> > > >
+> > > > The current implementation depends on the SSI model to know
+> > > > what peripheral model will be attached and what transfer size it
+> > > > expects which is error prone. If a SSI_PERIPHERAL model was written=
+ that
+> > > > accepted 32-bit transfers, it could not attach to any existing SSI
+> > > > models.
+> > >
+> > > What is the motivation for this change?
 > >
-> > These instructions share opcode 0b1011011 and funct3 0b010, and are
-> > distinguished by funct6: 60-63 for the 4x8x4 (Xsfvqmaccqoq) tile and
-> > 44-47 for the 2x8x2 (Xsfvqmaccdod) tile.
-> >
-> > Signed-off-by: Jason Chien <jason.chien@sifive.com>
-> > Signed-off-by: Max Chou <max.chou@sifive.com>
-> > Reviewed-by: Daniel Henrique Barboza
-> > <daniel.barboza@oss.qualcomm.com>
-> > ---
-> >  MAINTAINERS       |  1 +
-> >  disas/meson.build |  3 +-
-> >  disas/riscv-xsf.c | 79
-> > +++++++++++++++++++++++++++++++++++++++++++++++
-> >  disas/riscv-xsf.h | 18 +++++++++++
-> >  disas/riscv.c     |  2 ++
-> >  disas/riscv.h     |  1 +
-> >  6 files changed, 103 insertions(+), 1 deletion(-)
-> >  create mode 100644 disas/riscv-xsf.c
-> >  create mode 100644 disas/riscv-xsf.h
-> >
-> > diff --git a/MAINTAINERS b/MAINTAINERS
-> > index 9c9f9bd645a..02ca1682099 100644
-> > --- a/MAINTAINERS
-> > +++ b/MAINTAINERS
-> > @@ -398,6 +398,7 @@ S: Supported
-> >  F: target/riscv/xsf.decode
-> >  F: target/riscv/tcg/insn_trans/trans_xsf.c.inc
-> >  F: target/riscv/tcg/xsf_helper.c
-> > +F: disas/riscv-xsf*
-> >
-> >  RENESAS RX CPUs
-> >  R: Yoshinori Sato <yoshinori.sato@nifty.com>
-> > diff --git a/disas/meson.build b/disas/meson.build
-> > index 42977a1f74d..91357162682 100644
-> > --- a/disas/meson.build
-> > +++ b/disas/meson.build
-> > @@ -8,7 +8,8 @@ common_ss.add(when: 'CONFIG_RISCV_DIS', if_true:
-> > files(
-> >      'riscv.c',
-> >      'riscv-xthead.c',
-> >      'riscv-xventana.c',
-> > -    'riscv-xlrbr.c'
-> > +    'riscv-xlrbr.c',
-> > +    'riscv-xsf.c'
-> >  ))
-> >  common_ss.add(when: 'CONFIG_SH4_DIS', if_true: files('sh4.c'))
-> >  common_ss.add(when: 'CONFIG_SPARC_DIS', if_true: files('sparc.c'))
-> > diff --git a/disas/riscv-xsf.c b/disas/riscv-xsf.c
-> > new file mode 100644
-> > index 00000000000..8f752657a7c
-> > --- /dev/null
-> > +++ b/disas/riscv-xsf.c
-> > @@ -0,0 +1,79 @@
-> > +/*
-> > + * QEMU RISC-V Disassembler for xsf (SiFive vendor extensions).
-> > + *
-> > + * Copyright (c) 2023 SiFive, Inc.
-> > + *
-> > + * SPDX-License-Identifier: GPL-2.0-or-later
-> > + */
-> > +
-> > +#include "qemu/osdep.h"
-> > +
-> > +#include "disas/riscv.h"
-> > +#include "disas/riscv-xsf.h"
-> > +
-> > +typedef enum {
-> > +    /* 0 is reserved for rv_op_illegal. */
+> > The motivation came from reviewing the designware ssi driver [1] and
+> > realizing how error prone it was. The designware ssi supports varying
+> > frame width but there is no way for the controller logic to know what
+> > the transfer size an attached device expects.
 >
-> This will need a rebase as this isn't required any more
+> But isn't this just the way the SSI specification is? If we're
+> modelling a "you just have to get this right in software" bit
+> of hardware then we don't need to somehow try to add extra
+> checks in QEMU for whether the software hasn't actually done
+> things right.
 >
-
-Thanks for the suggestion.
-I=E2=80=99ll send new rebase version to handle this part.
-
-rnax
-
-
-> Alistair
->
-> > +    xsf_op_sf_vqmaccu_4x8x4 =3D 1,
-> > +    xsf_op_sf_vqmacc_4x8x4 =3D 2,
-> > +    xsf_op_sf_vqmaccus_4x8x4 =3D 3,
-> > +    xsf_op_sf_vqmaccsu_4x8x4 =3D 4,
-> > +    xsf_op_sf_vqmaccu_2x8x2 =3D 5,
-> > +    xsf_op_sf_vqmacc_2x8x2 =3D 6,
-> > +    xsf_op_sf_vqmaccus_2x8x2 =3D 7,
-> > +    xsf_op_sf_vqmaccsu_2x8x2 =3D 8,
-> > +} rv_xsf_op;
-> > +
-> > +const rv_opcode_data xsf_opcode_data[] =3D {
-> > +    { "illegal", rv_codec_illegal, rv_fmt_none, NULL, 0, 0, 0 },
-> > +    { "sf.vqmaccu.4x8x4", rv_codec_v_r, rv_fmt_vd_vs1_vs2, NULL, 0,
-> > 0, 0 },
-> > +    { "sf.vqmacc.4x8x4", rv_codec_v_r, rv_fmt_vd_vs1_vs2, NULL, 0,
-> > 0, 0 },
-> > +    { "sf.vqmaccus.4x8x4", rv_codec_v_r, rv_fmt_vd_vs1_vs2, NULL, 0,
-> > 0, 0 },
-> > +    { "sf.vqmaccsu.4x8x4", rv_codec_v_r, rv_fmt_vd_vs1_vs2, NULL, 0,
-> > 0, 0 },
-> > +    { "sf.vqmaccu.2x8x2", rv_codec_v_r, rv_fmt_vd_vs1_vs2, NULL, 0,
-> > 0, 0 },
-> > +    { "sf.vqmacc.2x8x2", rv_codec_v_r, rv_fmt_vd_vs1_vs2, NULL, 0,
-> > 0, 0 },
-> > +    { "sf.vqmaccus.2x8x2", rv_codec_v_r, rv_fmt_vd_vs1_vs2, NULL, 0,
-> > 0, 0 },
-> > +    { "sf.vqmaccsu.2x8x2", rv_codec_v_r, rv_fmt_vd_vs1_vs2, NULL, 0,
-> > 0, 0 },
-> > +};
-> > +
-> > +void decode_xsf(rv_decode *dec, rv_isa isa)
-> > +{
-> > +    rv_inst inst =3D dec->inst;
-> > +    rv_opcode op =3D rv_op_illegal;
-> > +
-> > +    switch ((inst >> 0) & 0b1111111) {
-> > +    case 0b1011011:
-> > +        switch ((inst >> 12) & 0b111) {
-> > +        case 0b010:
-> > +            switch ((inst >> 26) & 0b111111) {
-> > +            case 60:
-> > +                op =3D xsf_op_sf_vqmaccu_4x8x4;
-> > +                break;
-> > +            case 61:
-> > +                op =3D xsf_op_sf_vqmacc_4x8x4;
-> > +                break;
-> > +            case 62:
-> > +                op =3D xsf_op_sf_vqmaccus_4x8x4;
-> > +                break;
-> > +            case 63:
-> > +                op =3D xsf_op_sf_vqmaccsu_4x8x4;
-> > +                break;
-> > +            case 44:
-> > +                op =3D xsf_op_sf_vqmaccu_2x8x2;
-> > +                break;
-> > +            case 45:
-> > +                op =3D xsf_op_sf_vqmacc_2x8x2;
-> > +                break;
-> > +            case 46:
-> > +                op =3D xsf_op_sf_vqmaccus_2x8x2;
-> > +                break;
-> > +            case 47:
-> > +                op =3D xsf_op_sf_vqmaccsu_2x8x2;
-> > +                break;
-> > +            }
-> > +            break;
-> > +        }
-> > +        break;
-> > +    }
-> > +
-> > +    dec->op =3D op;
-> > +}
-> > diff --git a/disas/riscv-xsf.h b/disas/riscv-xsf.h
-> > new file mode 100644
-> > index 00000000000..b8462c356e2
-> > --- /dev/null
-> > +++ b/disas/riscv-xsf.h
-> > @@ -0,0 +1,18 @@
-> > +/*
-> > + * QEMU disassembler -- RISC-V specific header (xsf*).
-> > + *
-> > + * Copyright (c) 2023 SiFive, Inc.
-> > + *
-> > + * SPDX-License-Identifier: GPL-2.0-or-later
-> > + */
-> > +
-> > +#ifndef DISAS_RISCV_XSF_H
-> > +#define DISAS_RISCV_XSF_H
-> > +
-> > +#include "disas/riscv.h"
-> > +
-> > +extern const rv_opcode_data xsf_opcode_data[];
-> > +
-> > +void decode_xsf(rv_decode *, rv_isa);
-> > +
-> > +#endif /* DISAS_RISCV_XSF_H */
-> > diff --git a/disas/riscv.c b/disas/riscv.c
-> > index 7f1b2627737..032cd31e35c 100644
-> > --- a/disas/riscv.c
-> > +++ b/disas/riscv.c
-> > @@ -27,6 +27,7 @@
-> >  #include "disas/riscv-xthead.h"
-> >  #include "disas/riscv-xventana.h"
-> >  #include "disas/riscv-xlrbr.h"
-> > +#include "disas/riscv-xsf.h"
+> > It seems like all the
+> > code, that is actually connected to devices, is just written to expect
+> > 8-bit transfers so it should be made explicit.
 > >
-> >  typedef enum {
-> >      /* 0 is reserved for rv_op_illegal. */
-> > @@ -5454,6 +5455,7 @@ static GString *disasm_inst(rv_isa isa,
-> > uint64_t pc, rv_inst inst,
-> >          { has_xtheadsync_p, xthead_opcode_data, decode_xtheadsync },
-> >          { has_XVentanaCondOps_p, ventana_opcode_data,
-> > decode_xventanacondops },
-> >          { has_xlrbr_p, rv_xlrbr_opcode_data, decode_xlrbr },
-> > +        { has_xsf_p, xsf_opcode_data, decode_xsf },
-> >      };
+> > https://www.mail-archive.com/qemu-devel@nongnu.org/msg1218153.html
 > >
-> >      for (size_t i =3D 0; i < ARRAY_SIZE(decoders); i++) {
-> > diff --git a/disas/riscv.h b/disas/riscv.h
-> > index 379e642ec84..66683201b9d 100644
-> > --- a/disas/riscv.h
-> > +++ b/disas/riscv.h
-> > @@ -280,6 +280,7 @@ enum {
-> >  #define rv_fmt_vd_vs2_imm_vm          "O\tD,F,im"
-> >  #define rv_fmt_vd_vs2_uimm            "O\tD,F,u"
-> >  #define rv_fmt_vd_vs2_uimm_vm         "O\tD,F,um"
-> > +#define rv_fmt_vd_vs1_vs2             "O\tD,E,F"
-> >  #define rv_fmt_vd_vs1_vs2_vm          "O\tD,E,Fm"
-> >  #define rv_fmt_vd_rs1_vs2_vm          "O\tD,1,Fm"
-> >  #define rv_fmt_vd_fs1_vs2_vm          "O\tD,4,Fm"
+> > >
+> > > As far as I know for the hardware SSI protocol, it is indeed
+> > > the case that the SSI controller (and/or the guest software) needs
+> > > to know what transfer size the attached device expects: the
+> > > controller just transmits (or expects to receive) however many
+> > > bits it is programmed for.
+> >
+> > This is true but do the devices currently model only support 8-bit
+> > transfers in hardware, do they not support multiframe transfer? SPI
+> > supports varying framewidth but the devices are not actually modeled
+> > in this way.
 >
+> Do the actual devices we implement support varying framewidth,
+> or do they actually have exactly one frame width that the controller
+> needs to be programmed by the guest to use ?
 
---000000000000dc6b68065a06c662
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+From my reading of the m25p80 spec, it does not have a fixed frame
+width. The frame would be determined by the CS being driven and the
+clock running. A frame could be 1 byte cmd + 3 byte address for a
+register read. For read mode, 1 byte cmd + 3 byte address + variable
+length read data. I don't understand how the 8-bit transfer size
+actually maps to what hardware does.
 
-<div dir=3D"auto">On Tue, Aug 25, 2026 at 12:32 Alistair Francis &lt;<a hre=
-f=3D"mailto:Alistair.Francis@wdc.com">Alistair.Francis@wdc.com</a>&gt; wrot=
-e:<br></div><div><div class=3D"gmail_quote gmail_quote_container"><blockquo=
-te class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px =
-solid rgb(204,204,204);padding-left:1ex">On Thu, 2026-08-13 at 01:44 +0800,=
- Max Chou wrote:<br>
-&gt; From: Jason Chien &lt;<a href=3D"mailto:jason.chien@sifive.com" target=
-=3D"_blank">jason.chien@sifive.com</a>&gt;<br>
-&gt; <br>
-&gt; Add disassembler support for all SiFive custom int8 matrix-multiply<br=
+When writing a controller that supports varying framewidths, it
+requires the controller model to know what transfer width will be
+expected from the device connected. You could have guest software that
+correctly sets the controller framewidth to 32-bits and connects a
+device that provides a 32-bit transfer function. How can the
+controller differentiate this from the case where the guest software
+correctly sets a 32-bit framewidth on the controller for a m25p80 read
+which has a 8-bit transfer size and the controller needs to call the
+transfer function 4 times to clock out the requested read data.
+
+Maybe I am misunderstanding what a transfer is or what a framewidth
+actually is or what the realistic use cases are here.
+
 >
-&gt; instructions: sf.vqmacc{u,,us,su}.4x8x4 and<br>
-&gt; sf.vqmacc{u,,us,su}.2x8x2.<br>
-&gt; <br>
-&gt; These instructions share opcode 0b1011011 and funct3 0b010, and are<br=
+> > A better solution may be to have multiple transfer functions,
+> > ssi_transfer8, ssi_transfer32, etc. This would require the device to
+> > explicitly set what it is expecting. It is challenging since the only
+> > model's not using 8-bit transfer don't have any devices connected
+> > upstream so testing is challenging.
 >
-&gt; distinguished by funct6: 60-63 for the 4x8x4 (Xsfvqmaccqoq) tile and<b=
-r>
-&gt; 44-47 for the 2x8x2 (Xsfvqmaccdod) tile.<br>
-&gt; <br>
-&gt; Signed-off-by: Jason Chien &lt;<a href=3D"mailto:jason.chien@sifive.co=
-m" target=3D"_blank">jason.chien@sifive.com</a>&gt;<br>
-&gt; Signed-off-by: Max Chou &lt;<a href=3D"mailto:max.chou@sifive.com" tar=
-get=3D"_blank">max.chou@sifive.com</a>&gt;<br>
-&gt; Reviewed-by: Daniel Henrique Barboza<br>
-&gt; &lt;<a href=3D"mailto:daniel.barboza@oss.qualcomm.com" target=3D"_blan=
-k">daniel.barboza@oss.qualcomm.com</a>&gt;<br>
-&gt; ---<br>
-&gt; =C2=A0MAINTAINERS=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0 1 +<br>
-&gt; =C2=A0disas/meson.build |=C2=A0 3 +-<br>
-&gt; =C2=A0disas/riscv-xsf.c | 79<br>
-&gt; +++++++++++++++++++++++++++++++++++++++++++++++<br>
-&gt; =C2=A0disas/riscv-xsf.h | 18 +++++++++++<br>
-&gt; =C2=A0disas/riscv.c=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0 2 ++<br>
-&gt; =C2=A0disas/riscv.h=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0 1 +<br>
-&gt; =C2=A06 files changed, 103 insertions(+), 1 deletion(-)<br>
-&gt; =C2=A0create mode 100644 disas/riscv-xsf.c<br>
-&gt; =C2=A0create mode 100644 disas/riscv-xsf.h<br>
-&gt; <br>
-&gt; diff --git a/MAINTAINERS b/MAINTAINERS<br>
-&gt; index 9c9f9bd645a..02ca1682099 100644<br>
-&gt; --- a/MAINTAINERS<br>
-&gt; +++ b/MAINTAINERS<br>
-&gt; @@ -398,6 +398,7 @@ S: Supported<br>
-&gt; =C2=A0F: target/riscv/xsf.decode<br>
-&gt; =C2=A0F: target/riscv/tcg/insn_trans/trans_xsf.c.inc<br>
-&gt; =C2=A0F: target/riscv/tcg/xsf_helper.c<br>
-&gt; +F: disas/riscv-xsf*<br>
-&gt; =C2=A0<br>
-&gt; =C2=A0RENESAS RX CPUs<br>
-&gt; =C2=A0R: Yoshinori Sato &lt;<a href=3D"mailto:yoshinori.sato@nifty.com=
-" target=3D"_blank">yoshinori.sato@nifty.com</a>&gt;<br>
-&gt; diff --git a/disas/meson.build b/disas/meson.build<br>
-&gt; index 42977a1f74d..91357162682 100644<br>
-&gt; --- a/disas/meson.build<br>
-&gt; +++ b/disas/meson.build<br>
-&gt; @@ -8,7 +8,8 @@ common_ss.add(when: &#39;CONFIG_RISCV_DIS&#39;, if_tru=
-e:<br>
-&gt; files(<br>
-&gt; =C2=A0=C2=A0=C2=A0=C2=A0 &#39;riscv.c&#39;,<br>
-&gt; =C2=A0=C2=A0=C2=A0=C2=A0 &#39;riscv-xthead.c&#39;,<br>
-&gt; =C2=A0=C2=A0=C2=A0=C2=A0 &#39;riscv-xventana.c&#39;,<br>
-&gt; -=C2=A0=C2=A0=C2=A0 &#39;riscv-xlrbr.c&#39;<br>
-&gt; +=C2=A0=C2=A0=C2=A0 &#39;riscv-xlrbr.c&#39;,<br>
-&gt; +=C2=A0=C2=A0=C2=A0 &#39;riscv-xsf.c&#39;<br>
-&gt; =C2=A0))<br>
-&gt; =C2=A0common_ss.add(when: &#39;CONFIG_SH4_DIS&#39;, if_true: files(&#3=
-9;sh4.c&#39;))<br>
-&gt; =C2=A0common_ss.add(when: &#39;CONFIG_SPARC_DIS&#39;, if_true: files(&=
-#39;sparc.c&#39;))<br>
-&gt; diff --git a/disas/riscv-xsf.c b/disas/riscv-xsf.c<br>
-&gt; new file mode 100644<br>
-&gt; index 00000000000..8f752657a7c<br>
-&gt; --- /dev/null<br>
-&gt; +++ b/disas/riscv-xsf.c<br>
-&gt; @@ -0,0 +1,79 @@<br>
-&gt; +/*<br>
-&gt; + * QEMU RISC-V Disassembler for xsf (SiFive vendor extensions).<br>
-&gt; + *<br>
-&gt; + * Copyright (c) 2023 SiFive, Inc.<br>
-&gt; + *<br>
-&gt; + * SPDX-License-Identifier: GPL-2.0-or-later<br>
-&gt; + */<br>
-&gt; +<br>
-&gt; +#include &quot;qemu/osdep.h&quot;<br>
-&gt; +<br>
-&gt; +#include &quot;disas/riscv.h&quot;<br>
-&gt; +#include &quot;disas/riscv-xsf.h&quot;<br>
-&gt; +<br>
-&gt; +typedef enum {<br>
-&gt; +=C2=A0=C2=A0=C2=A0 /* 0 is reserved for rv_op_illegal. */<br>
-<br>
-This will need a rebase as this isn&#39;t required any more<br>
-</blockquote><div dir=3D"auto"><br></div><div dir=3D"auto">Thanks for the s=
-uggestion.</div><div dir=3D"auto">I=E2=80=99ll send new rebase version to h=
-andle this part.</div><div dir=3D"auto"><br></div><div dir=3D"auto">rnax</d=
-iv><div dir=3D"auto"><br></div><blockquote class=3D"gmail_quote" style=3D"m=
-argin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left=
-:1ex"><br>
-Alistair<br>
-<br>
-&gt; +=C2=A0=C2=A0=C2=A0 xsf_op_sf_vqmaccu_4x8x4 =3D 1,<br>
-&gt; +=C2=A0=C2=A0=C2=A0 xsf_op_sf_vqmacc_4x8x4 =3D 2,<br>
-&gt; +=C2=A0=C2=A0=C2=A0 xsf_op_sf_vqmaccus_4x8x4 =3D 3,<br>
-&gt; +=C2=A0=C2=A0=C2=A0 xsf_op_sf_vqmaccsu_4x8x4 =3D 4,<br>
-&gt; +=C2=A0=C2=A0=C2=A0 xsf_op_sf_vqmaccu_2x8x2 =3D 5,<br>
-&gt; +=C2=A0=C2=A0=C2=A0 xsf_op_sf_vqmacc_2x8x2 =3D 6,<br>
-&gt; +=C2=A0=C2=A0=C2=A0 xsf_op_sf_vqmaccus_2x8x2 =3D 7,<br>
-&gt; +=C2=A0=C2=A0=C2=A0 xsf_op_sf_vqmaccsu_2x8x2 =3D 8,<br>
-&gt; +} rv_xsf_op;<br>
-&gt; +<br>
-&gt; +const rv_opcode_data xsf_opcode_data[] =3D {<br>
-&gt; +=C2=A0=C2=A0=C2=A0 { &quot;illegal&quot;, rv_codec_illegal, rv_fmt_no=
-ne, NULL, 0, 0, 0 },<br>
-&gt; +=C2=A0=C2=A0=C2=A0 { &quot;sf.vqmaccu.4x8x4&quot;, rv_codec_v_r, rv_f=
-mt_vd_vs1_vs2, NULL, 0,<br>
-&gt; 0, 0 },<br>
-&gt; +=C2=A0=C2=A0=C2=A0 { &quot;sf.vqmacc.4x8x4&quot;, rv_codec_v_r, rv_fm=
-t_vd_vs1_vs2, NULL, 0,<br>
-&gt; 0, 0 },<br>
-&gt; +=C2=A0=C2=A0=C2=A0 { &quot;sf.vqmaccus.4x8x4&quot;, rv_codec_v_r, rv_=
-fmt_vd_vs1_vs2, NULL, 0,<br>
-&gt; 0, 0 },<br>
-&gt; +=C2=A0=C2=A0=C2=A0 { &quot;sf.vqmaccsu.4x8x4&quot;, rv_codec_v_r, rv_=
-fmt_vd_vs1_vs2, NULL, 0,<br>
-&gt; 0, 0 },<br>
-&gt; +=C2=A0=C2=A0=C2=A0 { &quot;sf.vqmaccu.2x8x2&quot;, rv_codec_v_r, rv_f=
-mt_vd_vs1_vs2, NULL, 0,<br>
-&gt; 0, 0 },<br>
-&gt; +=C2=A0=C2=A0=C2=A0 { &quot;sf.vqmacc.2x8x2&quot;, rv_codec_v_r, rv_fm=
-t_vd_vs1_vs2, NULL, 0,<br>
-&gt; 0, 0 },<br>
-&gt; +=C2=A0=C2=A0=C2=A0 { &quot;sf.vqmaccus.2x8x2&quot;, rv_codec_v_r, rv_=
-fmt_vd_vs1_vs2, NULL, 0,<br>
-&gt; 0, 0 },<br>
-&gt; +=C2=A0=C2=A0=C2=A0 { &quot;sf.vqmaccsu.2x8x2&quot;, rv_codec_v_r, rv_=
-fmt_vd_vs1_vs2, NULL, 0,<br>
-&gt; 0, 0 },<br>
-&gt; +};<br>
-&gt; +<br>
-&gt; +void decode_xsf(rv_decode *dec, rv_isa isa)<br>
-&gt; +{<br>
-&gt; +=C2=A0=C2=A0=C2=A0 rv_inst inst =3D dec-&gt;inst;<br>
-&gt; +=C2=A0=C2=A0=C2=A0 rv_opcode op =3D rv_op_illegal;<br>
-&gt; +<br>
-&gt; +=C2=A0=C2=A0=C2=A0 switch ((inst &gt;&gt; 0) &amp; 0b1111111) {<br>
-&gt; +=C2=A0=C2=A0=C2=A0 case 0b1011011:<br>
-&gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 switch ((inst &gt;&gt; 12)=
- &amp; 0b111) {<br>
-&gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 case 0b010:<br>
-&gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 sw=
-itch ((inst &gt;&gt; 26) &amp; 0b111111) {<br>
-&gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ca=
-se 60:<br>
-&gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0 op =3D xsf_op_sf_vqmaccu_4x8x4;<br>
-&gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0 break;<br>
-&gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ca=
-se 61:<br>
-&gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0 op =3D xsf_op_sf_vqmacc_4x8x4;<br>
-&gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0 break;<br>
-&gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ca=
-se 62:<br>
-&gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0 op =3D xsf_op_sf_vqmaccus_4x8x4;<br>
-&gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0 break;<br>
-&gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ca=
-se 63:<br>
-&gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0 op =3D xsf_op_sf_vqmaccsu_4x8x4;<br>
-&gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0 break;<br>
-&gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ca=
-se 44:<br>
-&gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0 op =3D xsf_op_sf_vqmaccu_2x8x2;<br>
-&gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0 break;<br>
-&gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ca=
-se 45:<br>
-&gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0 op =3D xsf_op_sf_vqmacc_2x8x2;<br>
-&gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0 break;<br>
-&gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ca=
-se 46:<br>
-&gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0 op =3D xsf_op_sf_vqmaccus_2x8x2;<br>
-&gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0 break;<br>
-&gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ca=
-se 47:<br>
-&gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0 op =3D xsf_op_sf_vqmaccsu_2x8x2;<br>
-&gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0 break;<br>
-&gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }<=
-br>
-&gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 br=
-eak;<br>
-&gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }<br>
-&gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 break;<br>
-&gt; +=C2=A0=C2=A0=C2=A0 }<br>
-&gt; +<br>
-&gt; +=C2=A0=C2=A0=C2=A0 dec-&gt;op =3D op;<br>
-&gt; +}<br>
-&gt; diff --git a/disas/riscv-xsf.h b/disas/riscv-xsf.h<br>
-&gt; new file mode 100644<br>
-&gt; index 00000000000..b8462c356e2<br>
-&gt; --- /dev/null<br>
-&gt; +++ b/disas/riscv-xsf.h<br>
-&gt; @@ -0,0 +1,18 @@<br>
-&gt; +/*<br>
-&gt; + * QEMU disassembler -- RISC-V specific header (xsf*).<br>
-&gt; + *<br>
-&gt; + * Copyright (c) 2023 SiFive, Inc.<br>
-&gt; + *<br>
-&gt; + * SPDX-License-Identifier: GPL-2.0-or-later<br>
-&gt; + */<br>
-&gt; +<br>
-&gt; +#ifndef DISAS_RISCV_XSF_H<br>
-&gt; +#define DISAS_RISCV_XSF_H<br>
-&gt; +<br>
-&gt; +#include &quot;disas/riscv.h&quot;<br>
-&gt; +<br>
-&gt; +extern const rv_opcode_data xsf_opcode_data[];<br>
-&gt; +<br>
-&gt; +void decode_xsf(rv_decode *, rv_isa);<br>
-&gt; +<br>
-&gt; +#endif /* DISAS_RISCV_XSF_H */<br>
-&gt; diff --git a/disas/riscv.c b/disas/riscv.c<br>
-&gt; index 7f1b2627737..032cd31e35c 100644<br>
-&gt; --- a/disas/riscv.c<br>
-&gt; +++ b/disas/riscv.c<br>
-&gt; @@ -27,6 +27,7 @@<br>
-&gt; =C2=A0#include &quot;disas/riscv-xthead.h&quot;<br>
-&gt; =C2=A0#include &quot;disas/riscv-xventana.h&quot;<br>
-&gt; =C2=A0#include &quot;disas/riscv-xlrbr.h&quot;<br>
-&gt; +#include &quot;disas/riscv-xsf.h&quot;<br>
-&gt; =C2=A0<br>
-&gt; =C2=A0typedef enum {<br>
-&gt; =C2=A0=C2=A0=C2=A0=C2=A0 /* 0 is reserved for rv_op_illegal. */<br>
-&gt; @@ -5454,6 +5455,7 @@ static GString *disasm_inst(rv_isa isa,<br>
-&gt; uint64_t pc, rv_inst inst,<br>
-&gt; =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 { has_xtheadsync_p, x=
-thead_opcode_data, decode_xtheadsync },<br>
-&gt; =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 { has_XVentanaCondOps=
-_p, ventana_opcode_data,<br>
-&gt; decode_xventanacondops },<br>
-&gt; =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 { has_xlrbr_p, rv_xlr=
-br_opcode_data, decode_xlrbr },<br>
-&gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 { has_xsf_p, xsf_opcode_da=
-ta, decode_xsf },<br>
-&gt; =C2=A0=C2=A0=C2=A0=C2=A0 };<br>
-&gt; =C2=A0<br>
-&gt; =C2=A0=C2=A0=C2=A0=C2=A0 for (size_t i =3D 0; i &lt; ARRAY_SIZE(decode=
-rs); i++) {<br>
-&gt; diff --git a/disas/riscv.h b/disas/riscv.h<br>
-&gt; index 379e642ec84..66683201b9d 100644<br>
-&gt; --- a/disas/riscv.h<br>
-&gt; +++ b/disas/riscv.h<br>
-&gt; @@ -280,6 +280,7 @@ enum {<br>
-&gt; =C2=A0#define rv_fmt_vd_vs2_imm_vm=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0 &quot;O\tD,F,im&quot;<br>
-&gt; =C2=A0#define rv_fmt_vd_vs2_uimm=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 &quot;O\tD,F,u&quot;<br>
-&gt; =C2=A0#define rv_fmt_vd_vs2_uimm_vm=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0 &quot;O\tD,F,um&quot;<br>
-&gt; +#define rv_fmt_vd_vs1_vs2=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 &quot;O\tD,E,F&quot;<br>
-&gt; =C2=A0#define rv_fmt_vd_vs1_vs2_vm=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0 &quot;O\tD,E,Fm&quot;<br>
-&gt; =C2=A0#define rv_fmt_vd_rs1_vs2_vm=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0 &quot;O\tD,1,Fm&quot;<br>
-&gt; =C2=A0#define rv_fmt_vd_fs1_vs2_vm=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0 &quot;O\tD,4,Fm&quot;<br>
-</blockquote></div></div>
-
---000000000000dc6b68065a06c662--
+> This doesn't allow for bit widths that aren't a multiple of 8.
+>
+> thanks
+> -- PMM
 
