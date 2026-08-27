@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1973DC61DB9
-	for <qemu-riscv@archiver.kernel.org>; Thu, 27 Aug 2026 05:12:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29851C5DF9D
+	for <qemu-riscv@archiver.kernel.org>; Thu, 27 Aug 2026 05:13:06 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wzSOR-0003gw-8t; Thu, 27 Aug 2026 01:11:15 -0400
+	id 1wzSOs-0004ZC-2G; Thu, 27 Aug 2026 01:11:42 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1wzSOP-0003Ty-Jj
- for qemu-riscv@nongnu.org; Thu, 27 Aug 2026 01:11:13 -0400
-Received: from mail-pj1-x1036.google.com ([2607:f8b0:4864:20::1036])
+ id 1wzSOg-0004IM-2C
+ for qemu-riscv@nongnu.org; Thu, 27 Aug 2026 01:11:31 -0400
+Received: from mail-pg1-x52c.google.com ([2607:f8b0:4864:20::52c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1wzSOM-0004BV-9V
- for qemu-riscv@nongnu.org; Thu, 27 Aug 2026 01:11:13 -0400
-Received: by mail-pj1-x1036.google.com with SMTP id
- 98e67ed59e1d1-38e07ebd263so1455467a91.1
- for <qemu-riscv@nongnu.org>; Wed, 26 Aug 2026 22:11:09 -0700 (PDT)
+ id 1wzSOd-0004FY-Fz
+ for qemu-riscv@nongnu.org; Thu, 27 Aug 2026 01:11:29 -0400
+Received: by mail-pg1-x52c.google.com with SMTP id
+ 41be03b00d2f7-ca7c1176317so1570738a12.1
+ for <qemu-riscv@nongnu.org>; Wed, 26 Aug 2026 22:11:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1787807468; x=1788412268; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1787807486; x=1788412286; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:sender:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=7MocgzezO4mcFVyQD9N6vjeWFD6TnB7x7CFs1bu2VXk=;
- b=aoXg35RJWN6JfqFcXcLCDzKBzWFPBn3WyhT/E4my3emL0yg2vr+f87WVKRpwbIVT/j
- 8gwNIYdkUuVBO5ZwLbUPtoTgTgQEhRWhP1qw8p87Pbf79ijBmRCz2jgytaozaaqiU2Er
- glZfVRRJ1Bm5+vsvwbazlWq/Qlr6JuKZyot6XsZPPKKFhoq1N01iBPrAaQpnWVv8H2FL
- aYtpuphbXvtTgb43srjAEF+NLqt8SF6+cKA4XuCrfUCw1sEvHMXa87o2gftIRr94o1/9
- DeTNx4AO/Z4u5cteMRds+CBKn3XpjxfqHZFvSJJwF4rxc7/npWl/EYRbApbp6VwQzgmH
- 2R3Q==
+ bh=JSgAqHr1NOvqwxx08subUkX/lMIs5ZKn3UbhmDEC214=;
+ b=NvvKn5L451EcW4L8TxNKXt8wOex5MBmOWhSX6b3BFl3q7b/HjxBgnCc4CaHklM9tJ0
+ byCZSB4KXyGvZDArdHEZCRRuX8gx6nwBon4U0xSpITagDg9naM0lVvZABTORBBINL456
+ rMahcfWEnVqnRCXS+Q1oiV+3OilQoOuunY/JKmWPtvCwEVhwadvQmLtdvs0yUPribTdS
+ +oavZzU/E7ycJ6JfEL3OdeM/EB5+S4FJnEqs5pANChunETvmhpY/JKVZAzhzVPvGTdn+
+ N8GJbCym5JZ2DkFSnP1v9OsoQO8KcjxEEtd1I+BPmejbhKr2hhNfyICtu5g6xTkjXtBe
+ VHRg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787807468; x=1788412268;
+ d=1e100.net; s=20251104; t=1787807486; x=1788412286;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:sender:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=7MocgzezO4mcFVyQD9N6vjeWFD6TnB7x7CFs1bu2VXk=;
- b=AnQs4pvA7+5Lx6YTTzNukNPCLQ5/e1FRexWl4Wv0MYhkld5qh4qt8ZqDMJUOAYm9ke
- xGER8DGWHkAs+e4DP6Zt58BC6Rxc0aQDiw+cHssY3Q+mTRBdKR7bNgvxyFU0QB+hPWK0
- vRF2ip3FRPTYXguLXPnguQ8pjad4fG0NB6CyA37Euw+AIWlf4C2IXfBp6f4NCTONRRbf
- 6BXPN3grZ4odQPHxW38/k4eD6pwsJadpBYvi6baRRLnVh2FfxsyHRwU2eURy7bHSXPfN
- vm6r5eONdTtkDOQqFBlHYm0e2zFPylLhK4wey1wO0JdEuacjHYvvwpux6ASqgNYc6oFH
- b/ew==
+ bh=JSgAqHr1NOvqwxx08subUkX/lMIs5ZKn3UbhmDEC214=;
+ b=EyZcTKeUXv//Rv6vbfa+xJZ24voPP22Xpz0s45CW7HQ0w2VkgVmy9mArCz/BaKzI/K
+ absxoRd7urDzRpeFk1DrvK2wlFJvSN9qL0VdppQ+cbH8IlWYg7/OSpkQjrayepBk1H/9
+ kHbQE5BFZ+vc0Z75Y971T2xG7daw1/g4vQv9JLBUPovKm7epayaUB3fX3NsVFX7RiQe9
+ yxtO1Kubt4uotlaxKI3dmvqcr97ei7g/8suP/Oyt1/sZqfxkSv69PI0+sd2CgwOke3YY
+ WqVKZ48wG6GoGWHGtAQAI5WtPV+f4PPfJoX0ZM3uK2J/bjbxxANekwvaWqhOtWjhP2mq
+ QNBQ==
 X-Forwarded-Encrypted: i=1;
- AHgh+RoTpw35uiZL6jMjq2+mdILz+nxvsoySphUhzVnsg7KN36V1rGvmZhodZPcXs2kndfLifGBlsbq4AIX0@nongnu.org
-X-Gm-Message-State: AFuF++ks5+6KZmWLhvVVMPH/92f1BykLNZlSAYWa8v+PwsYZapQX/Vac
- I+AwOWbmpwxcZaFtOk2Tr71pib2JLhLV9wxKqCob/tnFb4PLAZmOAEC2
-X-Gm-Gg: AR+sD10On5P9fdw7Ur0LgLoE+10HIRNqbwaLiQQrOGOTAU0rZqMvVmFUuR37xPPdnXs
- OPW6+gRtVIO7a7+H1TOQDn76wtH4MB/BPIfUsBVZ+NUnb+A+YE8+xbazsuIFiaj8opURCzQsov7
- 7ZxHOWi1idm+f16H0jgkqADB9oefZsMRPfM0jbAhuW8ad1Qjpn0UQdC7O8XV7YdKE+9bswhUs2t
- t0kSN81HdptvESa4CZTjmgfX5852ePA4LBSc6uYUHCQpCdRaiwOTkuxtiPRS6bi4jhFbfTOcK2X
- ooYip8HtbXReRA14k6HpKlPvyvb4TkmnMh1bWnrr4OfbneOR8h7rekj3XMme0BVLq76YWRsbke7
- fp7G77ZQBJP908Gl5q3rDWSHHBZ0CJaNb9L0DL6GwCTCMUz6qz/IbVvgOJKgbf9rlU3b7Fxf3wE
- kKaGBS6PTO9NOqXBXyw2CDKPnude289Cg3xLEBW16klhZBcI2l5BOhCloFwFnbQoC6wu92/K9nN
- FzyT2lhhO6W9VJJgt5z/ydLeNrHy5hO7RPtplSbDPiKXwWJJjkpnJajhH9eTK+IyMdYQMRNiiFJ
- 38XR9uSx5zIdX077YNlSUA==
-X-Received: by 2002:a17:90b:54cb:b0:380:f389:447b with SMTP id
- 98e67ed59e1d1-3966d40becdmr26287538a91.11.1787807468439; 
- Wed, 26 Aug 2026 22:11:08 -0700 (PDT)
+ AHgh+RpNjffhnQSDPWlVUj72yZ3f03wb4bj8na3i5QEYVlyUiex/Z64kx2klJQIyHIuKUTXZ2e8Qd2n4gWMb@nongnu.org
+X-Gm-Message-State: AFuF++lICXRcjLDhgvokkajNuoemfgopbRHM8oy+egalxo9z762485+f
+ hyLYWIbJ46yo9Zn7aF1IDzEUv6CCUWAblcSTN/OJkRxaAaIM2iaSssrp
+X-Gm-Gg: AR+sD12zbIs3p0N/7Vlsv6hlMEKz1gB5yUeg5lBnFdg0rPc75KfZeS1ff2FQuxK62RR
+ cEfCLYdBcsjW4KJW3+uAyfpeTEN3BebrBVHosfZ0kD5Gr6F78eGoOwqNc4ZtMRCIaUjVj4XBTvO
+ oI6XGsQCpkz5njkKajdupzZ0E+In7yHfu3ry+GG8FmCV17JPbIiWTTj0RDFe6UfCqsrL2+BERZg
+ Amg38nBqey083dVQLgw4HVoB9tSGKdGwMxUJy88lBrSP7E7B1voG067nEayZUWjeAc6RFjcDG/8
+ R4qFsuhPy4FfiQBV6IDxUwJO9MobPhEueevOgrjoDycBd+HK3y1RYHnRxvCQcQHt5y0Cf+sxPSS
+ FLiHGk0PE17UCXDb/AZDvjLHOH5CxKd/CyWLuS+IqNO7GUWg7LTmW69/1evTptIMGBRw3ICi4z/
+ aonf75B9UzLwBw+p47TRZYV2YCWWUZfvrdms1Z8YaJB7iACjXgH2GO/hZcrRSQ0zL/85g6ZFy9j
+ HAFz3VA8hakC3Ie8b6qcY2K0bcoB9zZUEcGMyZZDHFXHQyF0ZXF9S46NKTbhw1VTFKrRlON1R5z
+ 3oIzkuY+Qrn18IZtywEb
+X-Received: by 2002:a17:90b:586d:b0:396:4cbf:45bc with SMTP id
+ 98e67ed59e1d1-3966d491c45mr26485905a91.16.1787807485965; 
+ Wed, 26 Aug 2026 22:11:25 -0700 (PDT)
 Received: from donnager-debian.. ([180.150.112.50])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-39670599275sm2210473a91.0.2026.08.26.22.11.02
+ 98e67ed59e1d1-39670599275sm2210473a91.0.2026.08.26.22.11.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 26 Aug 2026 22:11:07 -0700 (PDT)
+ Wed, 26 Aug 2026 22:11:25 -0700 (PDT)
 From: Joel Stanley <joel@jms.id.au>
 To: Alistair Francis <alistair.francis@wdc.com>,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
@@ -82,16 +82,16 @@ Cc: Peter Maydell <peter.maydell@linaro.org>, Weiwei Li <liwei1518@gmail.com>,
  Michael Ellerman <mpe@kernel.org>,
  Portia Stephens <portias@oss.tenstorrent.com>, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org, qemu-arm@nongnu.org
-Subject: [PATCH 09/12] tests/tcg/multiarch: Fix vectorisation of memory test
-Date: Thu, 27 Aug 2026 14:39:48 +0930
-Message-ID: <20260827050953.67184-10-joel@jms.id.au>
+Subject: [PATCH 12/12] tests/tcg: Check vector memory tests contain vector ops
+Date: Thu, 27 Aug 2026 14:39:51 +0930
+Message-ID: <20260827050953.67184-13-joel@jms.id.au>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260827050953.67184-1-joel@jms.id.au>
 References: <20260827050953.67184-1-joel@jms.id.au>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1036;
- envelope-from=joel.stan@gmail.com; helo=mail-pj1-x1036.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52c;
+ envelope-from=joel.stan@gmail.com; helo=mail-pg1-x52c.google.com
 X-Spam_score_int: -16
 X-Spam_score: -1.7
 X-Spam_bar: -
@@ -115,273 +115,71 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Compilers are not able to vectorise the load and store loops. Building
-with -fopt-info-vec-missed with gcc 16.1:
+Disassemble the tests and count the SVE or RVV memory access. Delete the
+binary when the check fails otherwise a subsequent run will not run the
+check and silently succeed.
 
-  missed: statement clobbers memory: ml_printf (".");
+    CHECK   memory-rvv contains 7 vector loads and 7 stores
 
-This can be fixed by doing the printf after the loops.
+    CHECK   memory-sve contains 20 vector loads and 17 stores
 
-Also, autovectorisation doesn't like more than one if statement in the
-loop:
+This is a coarse check and could be improved by checking specific
+functions, and using something more precise than an opcode grep.
+However, it would have caught the bug fixed in "tests/tcg/multiarch: Fix
+vectorisation of memory test", which makes it worthwhile.
 
-  missed: not vectorized: unsupported control flow in loop.
-
-By combining them into ternary statements and one if, the loops are able
-to be vectorised with both loads and stores.
-
-The trade off is the dots are gone, and the tests no longer report fine
-grained miscompares. A failure does report the number of bad elements in
-a failing test loop.
+Skipped when no cross objdump was found.
 
 Signed-off-by: Joel Stanley <joel@jms.id.au>
 ---
- tests/tcg/multiarch/system/memory.c | 113 ++++++++++++----------------
- 1 file changed, 50 insertions(+), 63 deletions(-)
+ tests/tcg/Makefile.target                 | 8 ++++++++
+ tests/tcg/aarch64/Makefile.softmmu-target | 1 +
+ tests/tcg/riscv64/Makefile.softmmu-target | 1 +
+ 3 files changed, 10 insertions(+)
 
-diff --git a/tests/tcg/multiarch/system/memory.c b/tests/tcg/multiarch/system/memory.c
-index 7508f6b916d0..6eeb738343ab 100644
---- a/tests/tcg/multiarch/system/memory.c
-+++ b/tests/tcg/multiarch/system/memory.c
-@@ -42,9 +42,6 @@ static void pdot(int count, bool write)
-     } else {
-         test_read_count++;
-     }
--    if (count % 128 == 0) {
--        ml_printf(".");
--    }
- }
+diff --git a/tests/tcg/Makefile.target b/tests/tcg/Makefile.target
+index d4dd0fec650d..a5b694d2f21c 100644
+--- a/tests/tcg/Makefile.target
++++ b/tests/tcg/Makefile.target
+@@ -79,6 +79,14 @@ conditional-diff-out = 							\
+ 		$(call diff-out,$1,$2), 				\
+ 		$(call skip-test,"$1 check","no reference"))
  
- /*
-@@ -77,7 +74,6 @@ static void init_test_data_u8(int unused_offset)
-         *ptr++ = BYTE_NEXT(count);
-         pdot(i, true);
-     }
--
-     ml_printf("done %d @ %p\n", i, ptr);
- }
++# Check an ELF for vector load ($1) and store ($2) patterns.
++# Deleted on failure so the check runs again on the next make.
++check-vectorised = $(if $(OBJDUMP), \
++	$(call quiet-command, \
++	    ld=$$($(OBJDUMP) -d $@ | grep -cE '[[:space:]]$1'); \
++	    st=$$($(OBJDUMP) -d $@ | grep -cE '[[:space:]]$2'); \
++	    printf "  %-7s %s\n" CHECK "$@ contains $$ld vector loads and $$st stores"; \
++	    test "$$ld" -gt 0 && test "$$st" -gt 0 || { rm -f $@; exit 1; }))
  
-@@ -127,7 +123,6 @@ static void reset_start_data(int offset)
-         *ptr++ = 0;
-         pdot(i, true);
-     }
--
-     ml_printf("done %d @ %p\n", i, ptr);
- }
+ # Tests we are building
+ TESTS=
+diff --git a/tests/tcg/aarch64/Makefile.softmmu-target b/tests/tcg/aarch64/Makefile.softmmu-target
+index 196a2afa50ee..99ad1a2799d7 100644
+--- a/tests/tcg/aarch64/Makefile.softmmu-target
++++ b/tests/tcg/aarch64/Makefile.softmmu-target
+@@ -50,6 +50,7 @@ memory: CFLAGS+=-DCHECK_UNALIGNED=1
  
-@@ -203,7 +198,7 @@ static void init_test_data_u64(int offset)
- static bool read_test_data_u16(int offset)
- {
-     uint16_t word, *ptr = (uint16_t *)&test_data[offset];
--    int i;
-+    int i, bad = 0;
-     const int max = (TEST_SIZE - offset) / sizeof(word);
+ memory-sve: memory.c $(LINK_SCRIPT) $(CRT_OBJS) $(MINILIB_OBJS)
+ 	$(CC) $(CFLAGS) $(EXTRA_CFLAGS) $< -o $@ $(LDFLAGS) boot.o
++	$(call check-vectorised,ld1[bhwds],st1[bhwd])
  
-     ml_printf("Reading u16 from %#lx (offset %d):", ptr, offset);
-@@ -214,12 +209,13 @@ static bool read_test_data_u16(int offset)
-         high = (word >> 8) & 0xff;
-         low = word & 0xff;
-         if (high < low && high != 0) {
--            ml_printf("Error %d < %d\n", high, low);
--            return false;
--        } else {
--            pdot(i, false);
-+            bad++;
-         }
--
-+    }
-+    test_read_count += max;
-+    if (bad) {
-+        ml_printf("Error: %d bad u16 words\n", bad);
-+        return false;
-     }
-     ml_printf("done %d @ %p\n", i, ptr);
-     return true;
-@@ -228,7 +224,7 @@ static bool read_test_data_u16(int offset)
- static bool read_test_data_u32(int offset)
- {
-     uint32_t word, *ptr = (uint32_t *)&test_data[offset];
--    int i;
-+    int i, bad = 0;
-     const int max = (TEST_SIZE - offset) / sizeof(word);
+ memory-sve: private CFLAGS+=-DCHECK_UNALIGNED=1 -march=armv8.1-a+sve -O3
  
-     ml_printf("Reading u32 from %#lx (offset %d):", ptr, offset);
-@@ -247,21 +243,18 @@ static bool read_test_data_u32(int offset)
-         zeros += (b2 == 0 ? 1 : 0);
-         zeros += (b3 == 0 ? 1 : 0);
-         zeros += (b4 == 0 ? 1 : 0);
--        if (zeros > 1) {
--            ml_printf("Error @ %p, more zeros than expected: %d, %d, %d, %d",
--                      ptr - 1, b1, b2, b3, b4);
--            return false;
--        }
--
--        if ((b1 < b2 && b1 != 0) ||
-+        if (zeros > 1 ||
-+            (b1 < b2 && b1 != 0) ||
-             (b2 < b3 && b2 != 0) ||
-             (b3 < b4 && b3 != 0)) {
--            ml_printf("Error %d, %d, %d, %d", b1, b2, b3, b4);
--            return false;
--        } else {
--            pdot(i, false);
-+            bad++;
-         }
-     }
-+    test_read_count += max;
-+    if (bad) {
-+        ml_printf("Error: %d bad u32 words\n", bad);
-+        return false;
-+    }
-     ml_printf("done %d @ %p\n", i, ptr);
-     return true;
- }
-@@ -270,7 +263,7 @@ static bool read_test_data_u32(int offset)
- static bool read_test_data_u64(int offset)
- {
-     uint64_t word, *ptr = (uint64_t *)&test_data[offset];
--    int i;
-+    int i, bad = 0;
-     const int max = (TEST_SIZE - offset) / sizeof(word);
+diff --git a/tests/tcg/riscv64/Makefile.softmmu-target b/tests/tcg/riscv64/Makefile.softmmu-target
+index 301a6e6e5700..5262007e39a5 100644
+--- a/tests/tcg/riscv64/Makefile.softmmu-target
++++ b/tests/tcg/riscv64/Makefile.softmmu-target
+@@ -79,6 +79,7 @@ memory: private CFLAGS += -DCHECK_UNALIGNED=1
+ memory-rvv: memory.c $(LINK_SCRIPT) $(CRT_OBJS) $(MINILIB_OBJS)
+ 	$(call quiet-command, \
+ 	 $(CC) $(CFLAGS) $(EXTRA_CFLAGS) $< -o $@ $(LDFLAGS) $(CRT_OBJS), CC, $@)
++	$(call check-vectorised,vle,vse[0-9])
+ memory-rvv: private CFLAGS += -DCHECK_UNALIGNED=1 -march=rv64gcv -O3
+ run-memory-rvv: QEMU_CPU = rv64,v=true
  
-     ml_printf("Reading u64 from %#lx (offset %d):", ptr, offset);
-@@ -297,26 +290,22 @@ static bool read_test_data_u64(int offset)
-         zeros += (b6 == 0 ? 1 : 0);
-         zeros += (b7 == 0 ? 1 : 0);
-         zeros += (b8 == 0 ? 1 : 0);
--        if (zeros > 1) {
--            ml_printf("Error @ %p, more zeros than expected: %d, %d, %d, %d, %d, %d, %d, %d",
--                      ptr - 1, b1, b2, b3, b4, b5, b6, b7, b8);
--            return false;
--        }
--
--        if ((b1 < b2 && b1 != 0) ||
-+        if (zeros > 1 ||
-+            (b1 < b2 && b1 != 0) ||
-             (b2 < b3 && b2 != 0) ||
-             (b3 < b4 && b3 != 0) ||
-             (b4 < b5 && b4 != 0) ||
-             (b5 < b6 && b5 != 0) ||
-             (b6 < b7 && b6 != 0) ||
-             (b7 < b8 && b7 != 0)) {
--            ml_printf("Error %d, %d, %d, %d, %d, %d, %d, %d",
--                      b1, b2, b3, b4, b5, b6, b7, b8);
--            return false;
--        } else {
--            pdot(i, false);
-+            bad++;
-         }
-     }
-+    test_read_count += max;
-+    if (bad) {
-+        ml_printf("Error: %d bad u64 words\n", bad);
-+        return false;
-+    }
-     ml_printf("done %d @ %p\n", i, ptr);
-     return true;
- }
-@@ -374,28 +363,26 @@ static bool do_unsigned_test(init_ufn fn)
- static bool read_test_data_s8(int offset, bool neg_first)
- {
-     int8_t *ptr = (int8_t *)&test_data[offset];
--    int i;
-+    int i, bad = 0;
-     const int max = (TEST_SIZE - offset) / 2;
- 
-     ml_printf("Reading s8 pairs from %#lx (offset %d):", ptr, offset);
- 
-     for (i = 0; i < max; i++) {
-         int16_t first, second;
--        bool ok;
-         first = *ptr++;
-         second = *ptr++;
- 
--        if (neg_first && first < 0 && second > 0) {
--            pdot(i, false);
--            pdot(i, false);
--        } else if (!neg_first && first > 0 && second < 0) {
--            pdot(i, false);
--            pdot(i, false);
--        } else {
--            ml_printf("Error %d %c %d\n", first, neg_first ? '<' : '>', second);
--            return false;
-+        if (!(neg_first ? (first < 0 && second > 0)
-+                        : (first > 0 && second < 0))) {
-+            bad++;
-         }
-     }
-+    test_read_count += max * 2;
-+    if (bad) {
-+        ml_printf("Error: %d bad s8 pairs\n", bad);
-+        return false;
-+    }
-     ml_printf("done %d @ %p\n", i * 2, ptr);
-     return true;
- }
-@@ -403,7 +390,7 @@ static bool read_test_data_s8(int offset, bool neg_first)
- static bool read_test_data_s16(int offset, bool neg_first)
- {
-     int16_t *ptr = (int16_t *)&test_data[offset];
--    int i;
-+    int i, bad = 0;
-     const int max = (TEST_SIZE - offset) / (sizeof(*ptr));
- 
-     ml_printf("Reading s16 from %#lx (offset %d, %s):", ptr,
-@@ -420,15 +407,15 @@ static bool read_test_data_s16(int offset, bool neg_first)
-     for (i = 0; i < max; i++) {
-         int32_t data = *ptr++;
- 
--        if (neg_first && data < 0) {
--            pdot(i, false);
--        } else if (!neg_first && data > 0) {
--            pdot(i, false);
--        } else {
--            ml_printf("Error %d %c 0\n", data, neg_first ? '<' : '>');
--            return false;
-+        if (!(neg_first ? data < 0 : data > 0)) {
-+            bad++;
-         }
-     }
-+    test_read_count += max;
-+    if (bad) {
-+        ml_printf("Error: %d bad s16 words\n", bad);
-+        return false;
-+    }
-     ml_printf("done %d @ %p\n", i, ptr);
-     return true;
- }
-@@ -436,7 +423,7 @@ static bool read_test_data_s16(int offset, bool neg_first)
- static bool read_test_data_s32(int offset, bool neg_first)
- {
-     int32_t *ptr = (int32_t *)&test_data[offset];
--    int i;
-+    int i, bad = 0;
-     const int max = (TEST_SIZE - offset) / (sizeof(int32_t));
- 
-     ml_printf("Reading s32 from %#lx (offset %d, %s):",
-@@ -453,15 +440,15 @@ static bool read_test_data_s32(int offset, bool neg_first)
-     for (i = 0; i < max; i++) {
-         int64_t data = *ptr++;
- 
--        if (neg_first && data < 0) {
--            pdot(i, false);
--        } else if (!neg_first && data > 0) {
--            pdot(i, false);
--        } else {
--            ml_printf("Error %d %c 0\n", data, neg_first ? '<' : '>');
--            return false;
-+        if (!(neg_first ? data < 0 : data > 0)) {
-+            bad++;
-         }
-     }
-+    test_read_count += max;
-+    if (bad) {
-+        ml_printf("Error: %d bad s32 words\n", bad);
-+        return false;
-+    }
-     ml_printf("done %d @ %p\n", i, ptr);
-     return true;
- }
 -- 
 2.47.3
 
