@@ -4,99 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43CF6C61DB9
-	for <qemu-riscv@archiver.kernel.org>; Thu, 27 Aug 2026 05:13:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3749C61DB9
+	for <qemu-riscv@archiver.kernel.org>; Thu, 27 Aug 2026 05:19:27 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wzSOV-00041w-QU; Thu, 27 Aug 2026 01:11:19 -0400
+	id 1wzSW0-0001HA-3z; Thu, 27 Aug 2026 01:19:04 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1wzSOU-0003y5-BM
- for qemu-riscv@nongnu.org; Thu, 27 Aug 2026 01:11:18 -0400
-Received: from mail-pj1-x102a.google.com ([2607:f8b0:4864:20::102a])
+ id 1wzSVx-0001GX-UA
+ for qemu-riscv@nongnu.org; Thu, 27 Aug 2026 01:19:02 -0400
+Received: from mail-pg1-x536.google.com ([2607:f8b0:4864:20::536])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1wzSOR-0004Ce-Hj
- for qemu-riscv@nongnu.org; Thu, 27 Aug 2026 01:11:18 -0400
-Received: by mail-pj1-x102a.google.com with SMTP id
- 98e67ed59e1d1-39686abd426so1513068a91.1
- for <qemu-riscv@nongnu.org>; Wed, 26 Aug 2026 22:11:15 -0700 (PDT)
+ id 1wzSVw-0005qA-5S
+ for qemu-riscv@nongnu.org; Thu, 27 Aug 2026 01:19:01 -0400
+Received: by mail-pg1-x536.google.com with SMTP id
+ 41be03b00d2f7-cc1b838f9b6so1518817a12.3
+ for <qemu-riscv@nongnu.org>; Wed, 26 Aug 2026 22:18:59 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1787807938; cv=none;
+ d=google.com; s=arc-20260327;
+ b=Bc4KDRWxb3dxOvCGolxIsqS3E4TLTeb2R0rasvHRt8x1shKnbZG+iRyAmpauI/ibK6
+ A6Z5NuYaDQxAlGoK8714wluaWJfnobENQU2aNxtUTgFIrfkJU83t/0y2f+mQ5owCOPlO
+ dlbTRRHScCNP7AwfgYuqM++rxwUPan63jH2z89rXMMUagvYxRGGNj+PsGFWJgGOL/loM
+ I7IJDezr7+ItDy5xxpsAic3DsGF1mKBaTXkSDL9rHwp1Gg3z+YIllljrTxxIOVFMQ2Rj
+ aQYpgLSaMTjQX7u0i8T38bWKpa6MjN8BhQ4dattMvqJ1QDJbZWrQFD9dr3ftQxYQUAHw
+ 94EQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=BVjPHVNFtbbt4NMLfE0oYpeZ2wgFlY7nGKpNUYSowlk=;
+ fh=nv6spKJeTtU6UsB7SrVCu9q/LN1d1AfHzdj0XsvR2E8=;
+ b=byos6L+3Aso13VhCzIl/s6IgIh5UpVoJrgdgyLfc32szP9AA3w/eQ7kexD9HYsNNTU
+ 0SGt1EOleZKEHkgw3ERYcPLM4DXcV0I7y9ix6RzmS3sdB6SB5lhrTjkY263itbwodlWM
+ EmtGkjM4kooBis4qxD80K05k1neynZWH7JPl5wLMe/p1q1SoVMzTElfs+OD8+mbPKDfM
+ gjN9+RuIAcW9sZdGX66O/BmwqYK85gHReOuV7JwgNTO4hEBs8PXsVAqDAnaeU9mRjF5N
+ cwTnMUwr4PyNPvlfVvAgmMHJjb6RPMewbw/i1Vgh8BTfR+IDlQRAg0DIgEjbs49OMGS4
+ N3Vw==; darn=nongnu.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1787807474; x=1788412274; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:sender:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=c0YS6jznp++FiM/vCZWCrH/hv2wY1w+aZ3YBUBkwkEI=;
- b=hcvWiW/+1ViWGzjR79HEO2O8E4SzPuuiHsRHJabmG3VVc5ww1KXKxANMM1HSLjQC59
- LXidZvgfILN2xkg7OlIC0UpDp1l4d9r6KvSn7sga/VoxrCJNLw6AA4s03n53gvix/OOy
- 8j18Ww4eFwpIVlW7DdjIeYjbEm3oK2lDWaq6f+2ZrB2oZM4X9MeRT/nbep6Ih3i6mc+F
- 3RvS0fYj6Y2FuvbyKNAgP/DSk+UeZzXu/ZnrvE9aqQJOOeBAXZwHEi9W9SRvfUj6tqzz
- 3VRXba3JlorJ6rVITMqc9FKhCxpzWcOmg5If2BExoHTkjysm8rZYNqJqUH9ohQMn8STr
- F3YA==
+ d=jms.id.au; s=google; t=1787807938; x=1788412738; darn=nongnu.org;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=BVjPHVNFtbbt4NMLfE0oYpeZ2wgFlY7nGKpNUYSowlk=;
+ b=VwT/6DNAI5993GowgSPNz2Oc/+L2MNEk/hLFZqNMqZ0I1azigfEJLZ3+xMv5jGD7SX
+ 6DYupqIvG32sFZflSfwVQppi9olTjHhxdTacxVP5QDJPBpVoOS89qpjSriYVh/f0LOwo
+ OpT62mQh7qU7gvQmZIwSSE+1CJrQbtbfL8iqA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787807474; x=1788412274;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:sender:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=c0YS6jznp++FiM/vCZWCrH/hv2wY1w+aZ3YBUBkwkEI=;
- b=MqmWuI4jCyktkBi70dVsIIHtu3dK7V8txatlxsAgbAChGb5in6Or5mbGmnnK67acDa
- 2DD6oAzoG2PpARdj8wzLkXolk7jUgdqmmujhUmzItq2oJeOQOBgqvX+FNnb9FmtqYexP
- NZNyPczcvflIWqxluM6neUwMMznIIHPvANRG3vqhwmss1/RuMoyb9kJ90kfM4x1elA/T
- NzctHcA5c2gAjA6zvMlZF5SwpZ+1pTgihShUKY6qMn2uLLX1ra5317PB215JV9SDZtZx
- zRrCRMo6w6LFtr2MBaqRsQexRzRf8NR9M1XlUUkqYFqHyvQX5UjDMFbsekzkB3IlaqT9
- 16/g==
+ d=1e100.net; s=20251104; t=1787807938; x=1788412738;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=BVjPHVNFtbbt4NMLfE0oYpeZ2wgFlY7nGKpNUYSowlk=;
+ b=o8VZBsMTGOFbf9vqKv2IEGoGNJ43sD58AVcIsctA9UsUruTEU2ynfSercjPeK2UBwC
+ Wjm/1E5tPCoBLo7sv0JE5DTyf1c3QZEGwE4ZtSbWEhyPvqLV4t5bGKYYxIUj8TLvipcg
+ rzeYLisIDp3un5imPbQCWu8L4UkESslwIFJocinaTGtyQGLFzDkGkbkcHoSeLkcGW7kO
+ 2Z6Vjjv4ZDmOg8tqZmJ+oInj2CMNKIumxh9OWQGvCoeYcNd9QrXFjK0oHh+VnFGFw/wM
+ xCaYJP9f9kG9Ga0JeacuTi2nSrD0EMmHHmqcqpDUcMKiy/a9TGo0alMJP5OznKVG4dB9
+ INfw==
 X-Forwarded-Encrypted: i=1;
- AHgh+RqnXIeOuOXAXnJ9tHlUYuzro14V/xI2qby0nZ/TH7boVZQHrWpxITK1/pxT0uaTL/0O+T5NxJDWIVcP@nongnu.org
-X-Gm-Message-State: AFuF++mDpj//80Lm92JQCNRoJGvI5Xj/04teUdNr3JTGd5UhsMXbR6Uh
- OEKBH6t2ZDklHM4ULU7g2qQRO38XHM9+fnZ/Ag74ZU+0kmcl/FSKT0St
-X-Gm-Gg: AR+sD10J7QbIsIX+YoFuvRjFwHmDcKiDY6xVzve3POJf4+OfuJWnWSi8xvIxZBcD7kl
- 3VOPPDCld+GgZyJ5s0dX/xApWK8aNr7GNKHjK5yvlSzODJ39D8oCFjlVz+/anshLv2CS7gvcjr8
- y5YzgHzrsvZQjx3v0Hut//y9VlKZGY7Fj6xWQ488n9zfcTsfuOsx6A2tNzcgPv0lLD0GtK9Dlot
- wZMZtCdzp4x1sVcHiIVU1ASqW6u9v2qNJsWVJBzVUgq7Rv5Zd54EvqAdSh2Ip6B+LS2PJO0Wz2b
- zgmbC98oQtBUKpLRg+SpFJyjlpZaU1oYXb/CcX7sJBP3MmPszQb+tpzVaUUld9ln25QxJWzpHT9
- mRfid7d0m0n6DLrhb6nNrns/wOn8A5t2/keGo/3zVjDgLSP5DSBtzZ17bbidNGaSMzxiCTvG5tl
- kmbU5liIdndYQwQQ+b3cqB5d963FUV1mBaQEJbOltMaUTOyPhd6vqwKzcBAOPoLAdDZoUPlkvYM
- 6bWPfkyUUDoA9YuaRSSDGj35NvOX8FDVwrov05hnMNK2dzP9PPQO/LFlCIt+3VNVec2gt7UsaEH
- 5g0geTbMqRZKzncHq/On
-X-Received: by 2002:a17:90b:3cc3:b0:38f:18f9:785 with SMTP id
- 98e67ed59e1d1-3966d20cde1mr26855588a91.8.1787807474185; 
- Wed, 26 Aug 2026 22:11:14 -0700 (PDT)
-Received: from donnager-debian.. ([180.150.112.50])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-39670599275sm2210473a91.0.2026.08.26.22.11.08
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 26 Aug 2026 22:11:13 -0700 (PDT)
-From: Joel Stanley <joel@jms.id.au>
-To: Alistair Francis <alistair.francis@wdc.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Paolo Bonzini <pbonzini@redhat.com>
-Cc: Peter Maydell <peter.maydell@linaro.org>, Weiwei Li <liwei1518@gmail.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu@processmission.com>,
- Nicholas Piggin <npiggin@gmail.com>,
- Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>,
- Michael Ellerman <mpe@kernel.org>,
- Portia Stephens <portias@oss.tenstorrent.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org, qemu-arm@nongnu.org
-Subject: [PATCH 10/12] tests/tcg/riscv64: Enable vectorised memory test
-Date: Thu, 27 Aug 2026 14:39:49 +0930
-Message-ID: <20260827050953.67184-11-joel@jms.id.au>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20260827050953.67184-1-joel@jms.id.au>
-References: <20260827050953.67184-1-joel@jms.id.au>
+ AHgh+RrGn1A7nXwynJq2x1/TroQa/m91ellOF3Y0pSNKJ9xeSgRYn9Y/sT1RqRAwwCtO3UgZWSwOK5Dtxe4C@nongnu.org
+X-Gm-Message-State: AFuF++n7DVzbEIEvBygXc1DPOCgMpIV3mmEch+m2WJqeZBY8RgSS3gUP
+ mwg9MyHBg9fnTPDvQk788Xdp1AGpfObP6mQkX66ryBiTWQTaOV4V36VcrwQovbYcr8XTzL+99Ei
+ AYxO32CkkMByt8lknFhdqVfDHQnQCuoA=
+X-Gm-Gg: AR+sD10OQ1Dy/FfJE9WxqhiB5y2bsvOyd+OwE1cDQ2D0g1CpvsTDka/ZP/Ok53X2oHu
+ EW8KZGSHPlu0Gpd3PQFteLbGuMzpWcHdQAh5SPRbsarKBCaUhn+CrvHX1NwkzIxqz6U8cMeIV0X
+ wXHQ6WT9CEpk0DPR76aTKKGH6wI8bh5ask8JRpXlho3DupBNx2rkIYx1/a6xal0F8sS+EPQpUEs
+ DY/hwlDgR3ewWS10HA9ZoTY3mFShrXJQ7asLWD+VD3SIKtvjPbsJHT9Nfakkz9HUmId317ArTAU
+ B46FJzj0K44mhpNavpXdQl4POfLi9BTv66txQorMqczvEzdVEOMJxDQLN8n7nI3D1Ot00S52Igg
+ Fz+HqgdVqpFQ13CDMEMy4IUq7iskQB9cdAD8VKWoczSeOJDhGNkiKMagac91cx5TWy5IML4t9nn
+ QTL1U84hu3xTKz+Ed0
+X-Received: by 2002:a05:6a21:e081:b0:3c4:3112:33 with SMTP id
+ adf61e73a8af0-3cf75f83f45mr20380876637.6.1787807938324; Wed, 26 Aug 2026
+ 22:18:58 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102a;
- envelope-from=joel.stan@gmail.com; helo=mail-pj1-x102a.google.com
+References: <20260802113130.7818-1-nendensu@ispras.ru>
+ <e350bfda-cd57-4b25-9c72-40585e30a488@tls.msk.ru>
+ <a985157941bd10429a3048618e3fb977@ispras.ru>
+In-Reply-To: <a985157941bd10429a3048618e3fb977@ispras.ru>
+From: Joel Stanley <joel@jms.id.au>
+Date: Thu, 27 Aug 2026 14:48:46 +0930
+X-Gm-Features: AcwNN1X23rdJ7vu-qDzyCNQTuwju6ArsSUxpre5apaty1dMCpUOCxPKP1b9Es0M
+Message-ID: <CACPK8XfEQnEqQ923ag8kWXcvBNsxmUKZK_dCdUm-AddD2Mf0dg@mail.gmail.com>
+Subject: Re: [PATCH 0/2] target/riscv: Fix seed CSR sign extension
+To: nendensu@ispras.ru
+Cc: Michael Tokarev <mjt@tls.msk.ru>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org, 
+ alistair.francis@wdc.com, palmer@dabbelt.com, farosas@suse.de, 
+ lvivier@redhat.com
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::536;
+ envelope-from=joel.stan@gmail.com; helo=mail-pg1-x536.google.com
 X-Spam_score_int: -16
 X-Spam_score: -1.7
 X-Spam_bar: -
 X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.001,
  FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.25,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=no autolearn_force=no
@@ -115,37 +120,27 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Build memory.c a second time with -march=rv64gcv -O3, similar to
-aarch64's memory-sve, so the memory test checks RVV loads and
-stores, including across page boundaries.
+On Thu, 27 Aug 2026 at 07:57, <nendensu@ispras.ru> wrote:
+> > I'm picking this patch set for the currently active qemu stable
+> > series (10.0 LTS, 11.0, 11.1).  However, it does not work on
+> > 11.0.x already (it works ok on 11.1.x), the test fails:
 
-Run it under -cpu rv64,v=true.
+> > Should I pick something else for 11.0 and 10.0 (on 10.0 it fails the
+> > same way),
+> > so the test succeeds, or should I drop this patch set from 11.1.x?
+> >
+> > Thanks,
+> >
+> > /mjt
+> Thank you for testing. From my runs it seems that 10.0, 11.0 lack commit
+> 569aa628 (target/riscv: tt-ascalon: Enable Zkr extension), which enables
+> Zkr for tt-ascalon, so reading the seed triggers an assertion in
+> csr_call. Apologies if I`m missing something here. I`m not sure which is
+> better for stable: backporting 569aa628, or skipping the test patch.
 
-Signed-off-by: Joel Stanley <joel@jms.id.au>
----
- tests/tcg/riscv64/Makefile.softmmu-target | 8 ++++++++
- 1 file changed, 8 insertions(+)
+Backporting 569aa628 seems reasonable to me.
 
-diff --git a/tests/tcg/riscv64/Makefile.softmmu-target b/tests/tcg/riscv64/Makefile.softmmu-target
-index 3f2a8ed16142..301a6e6e5700 100644
---- a/tests/tcg/riscv64/Makefile.softmmu-target
-+++ b/tests/tcg/riscv64/Makefile.softmmu-target
-@@ -76,6 +76,14 @@ EXTRA_RUNS += $(MULTIARCH_RUNS)
- # Default is zicclsm=true, so misaligned accesses must work
- memory: private CFLAGS += -DCHECK_UNALIGNED=1
- 
-+memory-rvv: memory.c $(LINK_SCRIPT) $(CRT_OBJS) $(MINILIB_OBJS)
-+	$(call quiet-command, \
-+	 $(CC) $(CFLAGS) $(EXTRA_CFLAGS) $< -o $@ $(LDFLAGS) $(CRT_OBJS), CC, $@)
-+memory-rvv: private CFLAGS += -DCHECK_UNALIGNED=1 -march=rv64gcv -O3
-+run-memory-rvv: QEMU_CPU = rv64,v=true
-+
-+TESTS += memory-rvv
-+
- # Simple Record/Replay Test
- .PHONY: memory-record
- run-memory-record: memory-record memory
--- 
-2.47.3
+Cheers,
 
+Joel
 
