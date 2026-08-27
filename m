@@ -4,146 +4,136 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C37EC61DB9
-	for <qemu-riscv@archiver.kernel.org>; Thu, 27 Aug 2026 17:37:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCA63C61DC4
+	for <qemu-riscv@archiver.kernel.org>; Thu, 27 Aug 2026 17:43:24 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wze1s-0003ra-ML; Thu, 27 Aug 2026 13:36:44 -0400
+	id 1wze7t-0006Vc-RO; Thu, 27 Aug 2026 13:42:57 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wze1o-0003r2-Rv
- for qemu-riscv@nongnu.org; Thu, 27 Aug 2026 13:36:40 -0400
-Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wze1m-0001Wo-Hp
- for qemu-riscv@nongnu.org; Thu, 27 Aug 2026 13:36:40 -0400
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 67RHXbQL541062
- for <qemu-riscv@nongnu.org>; Thu, 27 Aug 2026 17:36:36 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- +LarHlMc9PCIKNLJFQnBBhZzlXc9dN6xoGhL9dn0kD8=; b=jF8FMlytCHB5vg44
- +xMVs9iHdTdwAKx7YdY+v2zVCcav0vm7/oIUWM5exqE5Ylcn3pyliFvn06Ak2EB0
- 1UdLEe1jjT8sZ7vocxgqdkheADQ5KoezQgZQ6CO0s4vOhUYJhXFavQEoPU2RFkJ8
- aCF1yE184OafOYR3VXWmR41K7Eb4y9jHNIuPStuWvEo1C3GRkiXXEambLbKiddDh
- SP3uoClc5NRn4ILs6Kq9EIxZXu4gfEVm47JFiFM2tebdb5ToYDanOT8BTWwOJz+O
- sYdzPc0THFajCzpy+lsRUhU+DxnwlID1kEt0TS+qyeG9gJ/LhZj6SJpPenONx5ZA
- ztF7fA==
-Received: from mail-qv1-f70.google.com (mail-qv1-f70.google.com
- [209.85.219.70])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4garee0cdf-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Thu, 27 Aug 2026 17:36:36 +0000 (GMT)
-Received: by mail-qv1-f70.google.com with SMTP id
- 6a1803df08f44-90cd2cadc62so1897176d6.2
- for <qemu-riscv@nongnu.org>; Thu, 27 Aug 2026 10:36:35 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1wze7s-0006Tp-BA
+ for qemu-riscv@nongnu.org; Thu, 27 Aug 2026 13:42:56 -0400
+Received: from mail-yw1-x1133.google.com ([2607:f8b0:4864:20::1133])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1wze7p-0002rx-Dt
+ for qemu-riscv@nongnu.org; Thu, 27 Aug 2026 13:42:56 -0400
+Received: by mail-yw1-x1133.google.com with SMTP id
+ 00721157ae682-857ff9fef54so1204477b3.1
+ for <qemu-riscv@nongnu.org>; Thu, 27 Aug 2026 10:42:53 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1787852572; cv=none;
+ d=google.com; s=arc-20260327;
+ b=OQVnDwjuEqslYdrL58Qy9j08Bc02TN2xMD3+uyoFDKm10mW35bjU9a0rK18SF7PPvn
+ d7+gWas4ez5IXU/jbg98+uB2CaLEWXCrYkb6u7Rrcv5CGpMZUbWnVcvTYOj5E/lswtG/
+ L1JS3OP6IDKC4nJKy9F5L2ovc79X0WFg+jAmsxinM7tE86huqmOrQ0b7m5hzF44v4xdU
+ 84pMJ89bkz6u6uZRi5RZ/ftTn6b4h1o/uTdN3ScceUubAvPux/qk8c7iNOx3ZiM5Pin+
+ eNtuI4akvGN3Eaos6RN0Xz3OuPrVmK7qiphJPPUCKQhnJkxWG1PZUkmM+n8W52dEn3Il
+ B9Cg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=mHfCUFStXRQs4Vxp/BYAOOICbf0Ocg/AAwvAD3GsPxg=;
+ fh=t+kqrgitUoMtd8oEjpxK+xNFqcfxkag8EjpVhz0G3HY=;
+ b=QgmVnUY90e8H6SnxAonhoHh+ZmBeJbQfRw7My/nN55aMQcoj5sVBJtYeYXt6/AAQJa
+ fmagtRqW3HAumGISIai556QNPOpj0mJZv3bq+8kkqil8qaQtSATKfHL4vBRqauaCMw1L
+ EWoO9PNF4TEykwkHsdYaIY2+iYuu2ylG8JxobcoyV1g77j2LdL7iyP5p9UIlqRjeXUqB
+ g2y4zgxdhex3fpG+/U/PK2RnYc3TmwAW6zTNzlJVCiXPakkjKc6dK3bckEcHBH0x42Q3
+ DUebG4zL1AsTJTWfAU8qTq3TqfKz+Z+YFrevUCAqjpgefF5iLgO9l3Hd0T+QGPzJTj7d
+ 1nZA==; darn=nongnu.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1787852195; x=1788456995; darn=nongnu.org;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :references:cc:to:from:subject:user-agent:mime-version:date
- :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=+LarHlMc9PCIKNLJFQnBBhZzlXc9dN6xoGhL9dn0kD8=;
- b=W2VfmvvFLkQmMS2FTIxHN+MVT4+zOSEHz4rJOis7tVUJbq4YjVCUN2m7ai2Y9NLjJa
- +02yqAo/YHxEuD2u2hRoYWC5xO/j0eZgjmp+TteA11lGeZe70iDKbIxgjI+woVyYaXG/
- ncgo/scyC6BO08iVP0Bpebo5G6+HSC/ocEGSQmPCuMMhRTPe2c6ODQNaGm4h18+vAMyn
- nDXOXVNuloLQgpZW6uUujBDGa0or7WURcusl+CSy1xrYdii9vWufBUGDGjtAweZhkjJe
- uXxCn7gxJ8ZTOCxZ5zSu7EBVup4nYl9+LpLLoUuixST4EF8ENaM+iv7fzzYboObO9mZc
- i81g==
+ d=linaro.org; s=google; t=1787852572; x=1788457372; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=mHfCUFStXRQs4Vxp/BYAOOICbf0Ocg/AAwvAD3GsPxg=;
+ b=itz+9WjFZKtkaER7vkidlHRZw2QXtUl/GcB1vunzswuqQL6VzL2zC8+Xrz98P51xmY
+ dLaNnMzpVduHvZbu6z/XutfBRZ6KHSIJ3m1zxYGBIJo01tKmjiOTD3r9glZQPRCYsmxh
+ kq29yQ2xjPFMPUGjZnMKEcxc57WpFvkyFeU1FC0i/G/4FFLNW8ihcG2QHDHJNKXNvjEp
+ yRQqV02UsEAioY15YjHyAHRfSrl8H+KJAaG9Y6bv0o7n3jJYGx38DUvv/oDefQqymR3Q
+ QG4QXG84N6+ev50vmQ1MY9SSGrXeWvEjeLO8P0V8xn/hGMjAMZhL8AZ1guXPIY7/YBYp
+ i60g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787852195; x=1788456995;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :references:cc:to:from:subject:user-agent:mime-version:date
- :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=+LarHlMc9PCIKNLJFQnBBhZzlXc9dN6xoGhL9dn0kD8=;
- b=gvQ9vo1Lxx/scQYq6QXjdLgw3p5kDouY5JFavUgaxcej4AX1UMXGVA3dOOlBqcArXp
- radm8I0nkpvs968t7qnW0/67idzQzcmRr0mWldi9nsYOYy9gr2rN/Pa/bOq3Ro+fabf+
- dkhsmbJDRfETa1ozLa1pu7Z72R7Ku3N7/1TwLslo/snMygC/fl3Z+CM4OEED0zRpfURT
- kqgfv/GyXnjy7N23bClLOpmvmPmMLZTLjGy5bwcidEzOYsFRArgQf5tF5r927erJdb7m
- nlruQCCG2VIXRA3mBr18GrB883CV/zOzDPS4fmNJuiUeYr/H5a8MuUbRxZbCqphlX0ic
- I1Kw==
+ d=1e100.net; s=20251104; t=1787852572; x=1788457372;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=mHfCUFStXRQs4Vxp/BYAOOICbf0Ocg/AAwvAD3GsPxg=;
+ b=FYeEet0AEDthxFyKfGBlytiYuBiacCTNpyymb67EadBR32YVgelUzQ9nozvFhCW8NZ
+ isBJ1JuBFChlRReWw4wBK2SKUUbimBIHdGtKWktQdyWpTifGo0SusEGu6MYDuJfXsRFV
+ rJ5ONyHhcLS8PqTdPGOLMt+WRYmFhD2LDSUJWHnnLemsMHCFopvNUe335PEsLxdzcnBh
+ 75QUBNIwqQvAr9u++fp8c/Y05KP4PGbWyLJyaJewU4CfegkL2H+CyXgNpLnATOl68mNk
+ Uq2FkKAmqkV/rZS7MNssRhxKZG+TTzf/rdzPB9LyfGde3fDNrY68v1NffnkCbtkEUe0/
+ MoOw==
 X-Forwarded-Encrypted: i=1;
- AHgh+RrLxNFhmx9JiebBHd+G1psedS6zmyPrLkHDQo2C8epnqjcl88ELDbErIfl+iqzdj9QfaLXbHXDwFsCF@nongnu.org
-X-Gm-Message-State: AFuF++mMCTz0K62PaUgOodv9sqnxgo2FJN0LuQtOc8JhFHgB9FARMnpa
- +zSVa01HBFcdj2BILfYbtc3PomuLNSw/C1YZMgoloIKdqnJ7VszudXyXbZzu7BL4zoREa042AoE
- pfgJQB/O/4+m1pBUmBPx5JYL3qOxLKS7Aa/UvZBavZVc3lrHPOzLV/YQbIQ==
-X-Gm-Gg: AR+sD13C6SAV4EWWkIEOqqDtsdbmsz74A0j++KGpvBfMN0lMoi5TsTEcRGIDyq2601R
- lxW4MgPgitkGzouCLI77Rsg8lwaiZxG2kxVc7/EepvP6RhOxwvd6BVFlXlYJQNg51AGPaBooEpO
- 8qvF45QAxz/gI9Y8qn5g7Mi/pZyS/8pnQ9N7DUmFl9uA5qfi/Yo91sXVfIRADHw0AUCdtzvS/EF
- rx+43HxbPV4++6GqWYbKohV+6YdVXmn+foDZbwHj6mUjOmfUv7Jvf0CuNrzN8BfIQdJti0qSBh7
- oMs1dDVPquuKPHWvRpEcazPSHneO8kT2eEFSU48Y1MTG6XVeCw2q1bXXWjO2wl3bVNn3lVhlMr/
- b7fQFbpBSLiIOVeLTfP0V3NTmFzx34MrK/LVZ
-X-Received: by 2002:a05:620a:2682:b0:937:1538:6b93 with SMTP id
- af79cd13be357-9391395b42fmr28315485a.40.1787852194978; 
- Thu, 27 Aug 2026 10:36:34 -0700 (PDT)
-X-Received: by 2002:a05:620a:2682:b0:937:1538:6b93 with SMTP id
- af79cd13be357-9391395b42fmr28307885a.40.1787852194219; 
- Thu, 27 Aug 2026 10:36:34 -0700 (PDT)
-Received: from [192.168.68.100] ([189.38.141.232])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-90cd741536csm21522816d6.43.2026.08.27.10.36.32
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 27 Aug 2026 10:36:33 -0700 (PDT)
-Message-ID: <90e61b69-ac96-4021-b59f-291123ed3454@oss.qualcomm.com>
-Date: Thu, 27 Aug 2026 14:36:29 -0300
+ AHgh+Rq1icz4D+/oIv6gGicacrPua+yvQUYnfyKSyU3enIhrxElFqhBmF9umRBUVh482RGSIv7ezf9V7ZSCv@nongnu.org
+X-Gm-Message-State: AFuF++l5bF8xxT6CqBddf4EuXGAjap1X+6Q8x4gJDVKkbFGJTAU2GDU8
+ /hHF1KXpH0wdYeTp+nz9rqz/jnNzS3maHGUX3SINF68kdXN1BlbBBcoSbTQyL1+kIrdi7TwgIR2
+ 0jlXLjZynSdhJfFabSqGyIcYwt+Nb7ZOpuWoXVTXBiw==
+X-Gm-Gg: AR+sD11CZ4BB2V2N4Swc/XGRTCByVuBRhMJK5fbRUcJDKvoxfVqZ6A249Cf/Wy5SsDo
+ 23L2FBe+yy9WBTuLWLoQ6PjkWMuTC8nHb9jubNvccbvdfZXgKy6Aaia1OXOPmut2aabyo4bdx7z
+ FxGRfKFe1A80BLETFo0IRDpblXxJbT3Slf5mo+sAFZ6S412U/TX3Tf7sWmRUYIIkgtMhwTXRUPQ
+ 1UzdhvdxDdm8TQvtZzYziIJkB0Nn06MDmVYDY55/XnvxmmGEfoXL7I2r5fqVKU65Io3WzzXk4sq
+ 0HRpRjYkUMFR2d7lAKyJX4dubNSdeGV8+bwguia5AW2bvu2nOeUQPx2/a2Ky5wBS0+PxAdlzMCc
+ 3E5syEDMNAXaUfS8MtYbot+YLjmImYtje/Ib81ng=
+X-Received: by 2002:a05:690c:f15:b0:857:ba53:5f7 with SMTP id
+ 00721157ae682-85d69f00dfamr5665747b3.14.1787852571904; Thu, 27 Aug 2026
+ 10:42:51 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 04/14] hw/riscv/fdt-common, virt.c: add
- riscv_create_fdt_riscv_iommu_sys()
-From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-To: Joel Stanley <joel@jms.id.au>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com,
- chao.liu@processmission.com, =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?=
- <philmd@oss.qualcomm.com>, Palmer Dabbelt <palmer@dabbelt.com>
-References: <20260826214643.122728-1-daniel.barboza@oss.qualcomm.com>
- <20260826214643.122728-5-daniel.barboza@oss.qualcomm.com>
- <CACPK8Xfizz2EBxq+iyTCRxUCEek-vXaMeCuN1nJACVeSky_g-g@mail.gmail.com>
- <36d95fcc-bd0b-49b5-a6cb-017ab83ef906@oss.qualcomm.com>
-Content-Language: en-US
-In-Reply-To: <36d95fcc-bd0b-49b5-a6cb-017ab83ef906@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI3MDE0OSBTYWx0ZWRfXw6AMr76xGRGo
- /KVaxFdKNb9MWUPcHxgHghsKz2lj6uTe6SxQJEH46ZEzYimecCwX0Q6Inym+JusZbD551ovLhJb
- RTWbQdo+lGvX0vWnYGCwEDqQAmU0BwAIISY8sGneWpDOqxhztEWWh+K3TLKBBpq4YGI6PC7iqEw
- 1rXYMNIfc2B6egKDfJInciO+Za1iiv5m1FWcGu7Lkpjq+2t0vX5RBUfTgT6aR1szybUnIsr1R1A
- ouu3knv/9n5UiQutQszL4a17pTVZFjLHU1BSMPIV/ys123hkqNseie9XfgXnwXWG5OlPUix6sA2
- +iZ0PSM/egG1mDRLUGw+Rp7uKgIC+HkvpGp65uphwsM5S707SLgeZXQulZUYR0UXQg3R++ervYZ
- /i2fUTqyOcCqbi0F/utAcN8LmY4GxaACBEGBUjoG2WB18cuVZlCFoeNzWlI6upducfxEhakq+Mw
- /X8Hr6Pj/BSI6uS9DSw==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODI3MDE0OSBTYWx0ZWRfX5voSGo65+JzQ
- aa9ox28/iPROfvAcmpYsU3YJygXFqL3b0vsdbgEt3PaB3EqDt0Z+acqw3Yujs2CRvjfC95SQpen
- 0rV71I1MRS3TtoPXZByOfbdzHlS/Sso=
-X-Proofpoint-ORIG-GUID: l3_jBUtbTVT_naOE-2rLbw753w6SBLo8
-X-Proofpoint-GUID: l3_jBUtbTVT_naOE-2rLbw753w6SBLo8
-X-Authority-Analysis: v=2.4 cv=e8E2j6p/ c=1 sm=1 tr=0 ts=6a9075a4 cx=c_pps
- a=oc9J++0uMp73DTRD5QyR2A==:117 a=MCIxunHWmQOg/5OnbzXZaw==:17
- a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
- a=EUspDBNiAAAA:8 a=B3qmolBlM6JKNJlBsRgA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=iYH6xdkBrDN1Jqds4HTS:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-27_07,2026-08-27_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 clxscore=1015 phishscore=0 adultscore=0 priorityscore=1501
- bulkscore=0 malwarescore=0 suspectscore=0 spamscore=0 impostorscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608270149
-Received-SPF: pass client-ip=205.220.168.131;
- envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
+References: <20260823150731.896-1-luoyonggang@gmail.com>
+ <ao7c-FiawF9sMCGj@redhat.com>
+ <b2b1d77e-c3e3-4aad-87d2-f5d4834abd1a@oss.qualcomm.com>
+ <apAG8JQTnQxRkfip@redhat.com>
+ <9e36f8a0-5363-4ce2-accf-62ccf3602344@oss.qualcomm.com>
+In-Reply-To: <9e36f8a0-5363-4ce2-accf-62ccf3602344@oss.qualcomm.com>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Thu, 27 Aug 2026 18:42:40 +0100
+X-Gm-Features: AcwNN1XjP2okfaqDrZv7av6Q836_ff-1z6FvUw2VnaDSVYtGGUC4HG1j_CVuyjI
+Message-ID: <CAFEAcA9cmsMG9w32zLAuYNA37J7T6t=gK_4w_pZUVr-FXZna1A@mail.gmail.com>
+Subject: Re: [PATCH 00/12] single-binary: link ARM and RISC-V into qemu-system
+To: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
+Cc: =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
+ Yonggang Luo <luoyonggang@gmail.com>, qemu-devel@nongnu.org, 
+ Xianglai Li <lixianglai@loongson.cn>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Chinmay Rath <rathc@linux.ibm.com>, Sunil V L <sunilvl@ventanamicro.com>,
+ qemu-riscv@nongnu.org, 
+ Alexander Bulekov <alxndr@bu.edu>, Zhao Liu <zhao1.liu@intel.com>,
+ Eric Farman <farman@linux.ibm.com>, 
+ Laurent Vivier <lvivier@redhat.com>, Chao Liu <chao.liu@processmission.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Song Gao <17746591750@163.com>, Harsh Prateek Bora <harshpb@linux.ibm.com>, 
+ Glenn Miles <milesg@linux.ibm.com>, 
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ qemu-s390x@nongnu.org, Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@mailo.com>, 
+ "Michael S. Tsirkin" <mst@redhat.com>, Stefan Hajnoczi <stefanha@redhat.com>, 
+ =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, 
+ David Hildenbrand <david@kernel.org>, qemu-ppc@nongnu.org, qemu-arm@nongnu.org,
+ Igor Mammedov <imammedo@redhat.com>, Aleksandar Rikalo <arikalo@gmail.com>, 
+ Nicholas Piggin <npiggin@gmail.com>, Cornelia Huck <cohuck@redhat.com>, 
+ Richard Henderson <richard.henderson@linaro.org>,
+ Ilya Leoshkevich <iii@linux.ibm.com>, 
+ Fabiano Rosas <farosas@suse.de>, Aurelien Jarno <aurelien@aurel32.net>, 
+ Paolo Bonzini <pbonzini@redhat.com>, Ani Sinha <anisinha@redhat.com>, 
+ Bibo Mao <maobibo@loongson.cn>,
+ =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>, 
+ Matthew Rosato <mjrosato@linux.ibm.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Darren Kenny <darren.kenny@oracle.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1133;
+ envelope-from=peter.maydell@linaro.org; helo=mail-yw1-x1133.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -160,129 +150,41 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+On Thu, 27 Aug 2026 at 17:32, Pierrick Bouvier
+<pierrick.bouvier@oss.qualcomm.com> wrote:
+>
+> On 8/27/2026 2:44 AM, Daniel P. Berrang=C3=A9 wrote:
+> > On Wed, Aug 26, 2026 at 11:35:11AM -0700, Pierrick Bouvier wrote:
+> >> Seems like the Genius.Artist. in the bottle just need to escape, and y=
+ou
+> >> can send us a nice series doing all this. Meanwhile, I'll try to find =
+a
+> >> carpet, a monkey, a princess and a suit to be the next Aladdin.
+> >
+> > This kind of comment is not productive and disrepectful to the time
+> > reviewers in invest in looking at the proposed patches. Please stop
+> > this.
+> >
+>
+> The only person wasting everyone's time here is YOU.
+> There is not a single person who came on any thread to say "I agree with
+> you Daniel", while several posted or commented they were ok with the
+> approach here.
+>
+> Project is QEMU, not Daniel's EMU.
+>
+> Whether or not you like my joke above does not matter, just focus on the
+> first sentence of it. Send a series implementing your view instead of
+> long emails "I said so" on other people series. And go back to the lamp
+> until it's ready.
 
-On 8/27/2026 10:46 AM, Daniel Henrique Barboza wrote:
-> 
-> 
-> On 8/27/2026 2:55 AM, Joel Stanley wrote:
->> On Thu, 27 Aug 2026 at 07:16, Daniel Henrique Barboza
->> <daniel.barboza@oss.qualcomm.com> wrote:
->>>   void *riscv_create_board_device_tree(const char *model, const char *compatible,
->>>                                        int *fdt_size)
->>> @@ -348,3 +350,41 @@ void riscv_create_fdt_syscon(void *fdt, uint32_t *phandle,
->>>       qemu_fdt_setprop_cell(fdt, name, "value", poweroff);
->>>       g_free(name);
->>>   }
->>> +
->>> +void riscv_create_fdt_riscv_iommu_sys(void *fdt, hwaddr addr, hwaddr size,
->>> +                                      uint32_t irq_chip,
->>> +                                      uint32_t msi_phandle,
->>> +                                      uint32_t *iommu_sys_phandle,
->>> +                                      uint32_t iommu_sys_irq)
->>> +{
->>> +    const char comp[] = "riscv,iommu";
->>> +    uint32_t iommu_phandle;
->>> +    g_autofree char *iommu_node = NULL;
->>> +    uint32_t iommu_irq_map[RISCV_IOMMU_INTR_COUNT] = {
->>> +        iommu_sys_irq + RISCV_IOMMU_INTR_CQ,
->>> +        iommu_sys_irq + RISCV_IOMMU_INTR_FQ,
->>> +        iommu_sys_irq + RISCV_IOMMU_INTR_PM,
->>> +        iommu_sys_irq + RISCV_IOMMU_INTR_PQ,
->>> +    };
->>
->> Any reason to pack them into an array? Seems like they could be part
->> of the qemu_fdt_setprop_cells call:
->>
->> qemu_fdt_setprop_cells(fdt, iommu_node, "interrupts",
->>          iommu_sys_irq + RISCV_IOMMU_INTR_CQ, FDT_IRQ_TYPE_EDGE_LOW,
->>          iommu_sys_irq + RISCV_IOMMU_INTR_FQ, FDT_IRQ_TYPE_EDGE_LOW,
->>          iommu_sys_irq + RISCV_IOMMU_INTR_PM, FDT_IRQ_TYPE_EDGE_LOW,
->>          iommu_sys_irq + RISCV_IOMMU_INTR_PQ, FDT_IRQ_TYPE_EDGE_LOW);
-> 
-> No particular reason.  I'll make the change.
-> 
->>
->>> +
->>> +    iommu_node = g_strdup_printf("/soc/iommu@%"HWADDR_PRIx, addr);
->>> +    iommu_phandle = qemu_fdt_alloc_phandle(fdt);
->>
->> Ohh, that's neat. Any reason we don't use this for all of phandle
->> allocation needs?
-> 
-> So back in the day we were using a fdt_phandle int variable around, incrementing
-> it and using as phandle for nodes. As you might notice in the boards we still have
-> a similar pattern going on.
-> 
-> The choice I made with this particular fdt is because I didn't want to pass a
-> 'phandle' argument to the function.  Given that the iommu FDT is the last DT that
-> declares a new phandle I could get away with it.
-> 
-> Otherwise, if there are other DTs that follows it and are assigning DTs using integer
-> increment, there's a risk of phandle collision.
+Pierrick: please calm down and take a less confrontational attitude
+in your mailing list posts. Daniel is reviewing the code, which is part
+of the project's process. He hasn't done anything here that merits
+the sniping you've been doing in this thread.
 
-In the end I decided to do this:
+This is entirely separate from any technical issues about what the
+best approach here is.
 
-
-     if (next_phandle != NULL) {
-         *iommu_sys_phandle = (*next_phandle)++;
-     } else {
-         *iommu_sys_phandle = qemu_fdt_alloc_phandle(fdt);
-     }
-
-And now the helper is able to accept a phandle allocation from the board or, in
-case the board doesn't care about that, we'll use qemu_fdt_alloc_phandle().
-
-I believe this will make it easier to switch for a strategy where we'll always use
-alloc_phandle() in the future.
-
-Cheers,
-Daniel
-
-> 
-> 
->>
->> We should be consistent, so switch this one to the pattern used by the
->> rest of the file, or (preferably, IMO) switch them all over.
-> 
-> I agree that we should allocate phandles in an uniform manner, whatever that strategy
-> is.  To use alloc_phandle() everywhere we would need to take a look at how every board
-> is handling their own phandles first.  I believe this is worth doing, but out of scope
-> for this mostly "move stuff around" series we have here.
-> 
->>
->>> +    qemu_fdt_add_subnode(fdt, iommu_node);
->>> +
->>> +    qemu_fdt_setprop(fdt, iommu_node, "compatible", comp, sizeof(comp));
->>> +    qemu_fdt_setprop_cell(fdt, iommu_node, "#iommu-cells", 1);
->>> +    qemu_fdt_setprop_cell(fdt, iommu_node, "phandle", iommu_phandle);
->>> +
->>> +    qemu_fdt_setprop_sized_cells(fdt, iommu_node, "reg", 2, addr, 2, size);
->>> +    qemu_fdt_setprop_cell(fdt, iommu_node, "interrupt-parent", irq_chip);
->>> +
->>> +    qemu_fdt_setprop_cells(fdt, iommu_node, "interrupts",
->>> +        iommu_irq_map[0], FDT_IRQ_TYPE_EDGE_LOW,
->>> +        iommu_irq_map[1], FDT_IRQ_TYPE_EDGE_LOW,
->>> +        iommu_irq_map[2], FDT_IRQ_TYPE_EDGE_LOW,
->>> +        iommu_irq_map[3], FDT_IRQ_TYPE_EDGE_LOW);
->>> +
->>> +    qemu_fdt_setprop_cell(fdt, iommu_node, "msi-parent", msi_phandle);
->>> +
->>> +    *iommu_sys_phandle = iommu_phandle;
->>
->> Could we just return it? Or have it passed in, so we don't need to return it?
-> 
-> 
-> I guess I could not use alloc_phandle() and receive the phandle from the caller.
-> It would be consistent with what we already do in other cases, and then when/if we
-> decide to change everything to alloc_phandle() we'll do it in a consistent manner.
-> 
-> 
-> I'll remove "iommu_phandle = qemu_fdt_alloc_phandle(fdt);" and make the caller provide a
-> valid phandle in iommu_phandle.  Thanks,
-> 
-> Daniel
-> 
-> 
-> 
-
+-- PMM
 
