@@ -4,138 +4,141 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29ED5C61DC4
-	for <qemu-riscv@archiver.kernel.org>; Thu, 27 Aug 2026 13:46:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 920ACC61DC2
+	for <qemu-riscv@archiver.kernel.org>; Thu, 27 Aug 2026 14:03:01 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wzaRF-0000rk-2q; Thu, 27 Aug 2026 09:46:41 -0400
+	id 1wzagh-0000HF-3s; Thu, 27 Aug 2026 10:02:39 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wzaRD-0000rI-0d
- for qemu-riscv@nongnu.org; Thu, 27 Aug 2026 09:46:39 -0400
+ id 1wzagf-0000Gd-Rk
+ for qemu-riscv@nongnu.org; Thu, 27 Aug 2026 10:02:37 -0400
 Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wzaRA-0006SF-Po
- for qemu-riscv@nongnu.org; Thu, 27 Aug 2026 09:46:38 -0400
+ id 1wzagc-0003I5-Iv
+ for qemu-riscv@nongnu.org; Thu, 27 Aug 2026 10:02:37 -0400
 Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 67RCC7fl3473556
- for <qemu-riscv@nongnu.org>; Thu, 27 Aug 2026 13:46:34 GMT
+ 67RDt46c3695741
+ for <qemu-riscv@nongnu.org>; Thu, 27 Aug 2026 14:02:29 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- i0imSLtgBXMas12s9HcmNMuFGs6Kjl324WrLMCPMZh0=; b=cOBM9ZIAtv/Ng/RF
- zBpnIZejfD85xfc+yxmlXmZn49tiU4B0iRGsL+Ppxg8FR0ancLFjEjFfUffcTkGN
- 1ELIxtTPMPymzEnVXJx1CHTa5dSrFhi4O06abMi0vJQPl2q2aCk7gzSFxM3+cGH7
- 3XpYEiq76bNOonEYhwPv+EznmQu6x+OX7o9KI/A+OPPzwNsHUFNQIV7u3BMU5lOm
- wJcqbHO6pBtsEiNFI7rhtk9PVeXzpG+e5p7RFm4cANEG9pHlbeFP7j2//u/y2Dt+
- y1cOasLv9+eT92P0Fh1zsYK+iUAAug5S/AkhhiW3Ke4gZosRFuoqK7yCEUogo+7U
- grS0wg==
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com
- [209.85.222.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ga4fwm2wb-1
+ cTmnMWLfRpX+uLhk7JMygvPAvsqG3d1g1cep4nnwmo8=; b=FSlAnJuSfiTR794O
+ cVw3iMPEAsL/83lnUduJPCrP5yXBJe3+yg53BOTxpV8M38iIRbBHCLWiFUw3mxZh
+ 1C6UBAU7NieV9MxASQcl/24EdcGkTQdTF79fxn6Nh/k8DLpbcMnMr2GrSteCVATD
+ omoqrd6jdyBKm0zfxsZQV6cdPznI0Cm9EUSzWlZAYJy/u3VU3MNKVztERG4YmWoI
+ vneqThnhURZthWENi9HNmOp1UdgHMwhznZl/mZubxamYi2pcigiVEaGWJmRImPRo
+ g5j7THro4+6wZ/zkdJQJlQPSFNk2Cb/mMP7wPxzj8o5fHK3aA/suaND0zsNtA9SV
+ 9+W3cg==
+Received: from mail-vk1-f199.google.com (mail-vk1-f199.google.com
+ [209.85.221.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gaphw0156-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Thu, 27 Aug 2026 13:46:33 +0000 (GMT)
-Received: by mail-qk1-f198.google.com with SMTP id
- af79cd13be357-92e62e3459fso200487285a.0
- for <qemu-riscv@nongnu.org>; Thu, 27 Aug 2026 06:46:33 -0700 (PDT)
+ for <qemu-riscv@nongnu.org>; Thu, 27 Aug 2026 14:02:29 +0000 (GMT)
+Received: by mail-vk1-f199.google.com with SMTP id
+ 71dfb90a1353d-5bbd01d56ecso343276e0c.3
+ for <qemu-riscv@nongnu.org>; Thu, 27 Aug 2026 07:02:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1787838393; x=1788443193; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1787839349; x=1788444149; darn=nongnu.org;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=i0imSLtgBXMas12s9HcmNMuFGs6Kjl324WrLMCPMZh0=;
- b=FH4di/ww2S8ISy6z9Z1t6fLDAg7SfBjFrRN+2/oT6r6VWWEunnmWO5w5jSVIb/Sjgf
- jUjzflQz56qB6JzoeH5pfdFeUEh3Csw9QDZ9KDl3X80trJ4Ma4UeTAsXVUWFDPuUxn8X
- tGpqeomY8bJBIzwZJehrXMFDQTKk9kmk79fD+9dj7kPXn+ngVTbzToxSMbTZP1j1habZ
- 6sOCNyY4jdcEvZhd8JzDMTCygp0+NyvscjRsyVF+fVooXqzKkE17Gq0HRY/DeKwNEN8W
- hf1BZbg+PLKbx8afL+91p4u/vIA5ti5CdusmKvmKKH82y6JLDIozxT8pjpRxc9jsJczT
- 0IjA==
+ bh=cTmnMWLfRpX+uLhk7JMygvPAvsqG3d1g1cep4nnwmo8=;
+ b=Zy5X5DAOWO6ZekejgamPFqeOJs3/byZ+JGK2x8AFVJyGJb2Si5e4ICol5ARpuw7z6z
+ vKfVHmD8jqGw6DniH5/Pz+lIAd40ZngGc1AT7z8eHPk9CiGycsdxDUFRr9IwfbxSEtua
+ lc9Ah7lwSthcurOKv0WztoBjF+EcQeuML6z6AgrQASsn7mGoJ8bEtahsqgafyH4Atr3D
+ ZLA0hCZBOnb3pDudBfZdOryUphutPOgGVBxqADpFgAEFyrCjElezmYQqECOuOAj0FhbQ
+ 5jGlzVT+hJyPQSg+2ITYmNVnjr/mvxp3gmaF1aWDOWrmbEyBIP1X0tVdYjWfSCmwj1Wd
+ vjtQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787838393; x=1788443193;
+ d=1e100.net; s=20251104; t=1787839349; x=1788444149;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=i0imSLtgBXMas12s9HcmNMuFGs6Kjl324WrLMCPMZh0=;
- b=dK6xhygULqCN6N8UBJh5S8zijeOItLfAxhRssKiRlsUFqf/1haKyOajjq9Mn5I5Xlm
- oOate5a9Pnh6otr2TqvoHQJJmMGWZYakxq9jGdbyAMgneqMauFtr5s/bPWtGbIN3VX3g
- 5ZbSflXmQ+rpb2hlMbM1FjbyVHvoV11qq5gHyyxvCs2Sz/mElao6VWXX83Oks0BjiJrY
- E1onzZv3ghTiMEYyrhffO95ZlOjY84/LnsVMDdK4wpanDIIgT/JzNC+gpdSXUbLDP4hf
- ho+wUrc39L7nZJPQvS24IDayNLzs3oWQ/SeL5t/fFV5+T982JQrcNxfzCQw/KcKZydI1
- 2n5Q==
+ bh=cTmnMWLfRpX+uLhk7JMygvPAvsqG3d1g1cep4nnwmo8=;
+ b=cdZCevoFX7ny0BR5khdqORzDBtUwDTr2tJwKCudnbYTTMIkLHEUm0VxHQL5/aUf6qy
+ MOXBU3Y2vECHEzz1693A3FYRBQTaK2M5P+E9W4TXO/D431cPYo/AL2JezO44CBWuXLLU
+ LZEkorGfnQA9qIGBkaGx1L9IcA4aGyCQ+ZYmoFiDYBKDURzPk2CRORtW1/yB8cnze6mK
+ FplVP7j7efzKyc8Q4WMuNuC3xehgO1QYllBnGGsyCWJusU30x9bPhieqHo7SOARFmRkL
+ UorAaPwN98x7ObwhU50Ilc4Hpwv3MkwdcHGpj25YLDr6YaJKPSQ+mk8ti5ldPCGOEMAE
+ P+fA==
 X-Forwarded-Encrypted: i=1;
- AHgh+RpN0F708JO46BTtQg72PcNQdCoAfpVTvTdVGXStryM7JUNtBd7JVGHQf5tfu4VZ3womIhQ75vjeP7lx@nongnu.org
-X-Gm-Message-State: AFuF++n5vSn+NcLmUfCoKkS7pPXNLDH5Qc5nUKGrBnjDSNcOytcuffQz
- I8LsHicEXpRbCzOTn6sHBYPau/KPIfVQsi7zh8J6MewnGQuHouJz/M8ub0YTF6fXNl/BFDnrXOH
- T4oI46Am+MdpHLGMwWPf9TxL4EQRX6A71EAbFtz4WPFloVaXYqVxQxeeZjA==
-X-Gm-Gg: AR+sD12oG154yW9Bwew3cz0oCxSaSMN5tIg34MMLPj3AakMg08u9e3HvtOd1Fe1Hju+
- FYeUszrCqrqtYFQ/MvD9o8R5ao6+NN5cosqVVuWhtkAGWc418X2fo2KPbH6wN2eHhExSaiL8EZJ
- 1QpRYNIAMYZ4ae1homOk0itQ5iql/OBX3c68Lfhv2EboXsErdRYUf8xtFIt7N5Um1XjCdoZKE9Y
- PDIrp88/XmbgUcT1rn9OGDmAB/y0E3kQjDyFPruC+NW4Un8pCW+FjOhYeT6Gz6e+Ayc7xtJy+93
- 4uK2y4HQjsSf6c3wbtR2x6aF4LxQUBG3hOxrG1GHakobjeYyuSi9IKDKeYrV5kgS5Qj4bvJDwne
- PK5J+9sCUxTgc9iC1gQU33lhGy1QmEbZn8ftg
-X-Received: by 2002:ae9:c213:0:b0:936:cda7:554d with SMTP id
- af79cd13be357-9378016fc1dmr1414646385a.14.1787838393118; 
- Thu, 27 Aug 2026 06:46:33 -0700 (PDT)
-X-Received: by 2002:ae9:c213:0:b0:936:cda7:554d with SMTP id
- af79cd13be357-9378016fc1dmr1414638985a.14.1787838392455; 
- Thu, 27 Aug 2026 06:46:32 -0700 (PDT)
+ AHgh+RqrqEaVkjJ6ax2n+jaWEoNkADw4JV6zYR2cWnnDhE7MLiOcjxsTlLqW6I8YBaH1TdpQUDXdT0MvXIj/@nongnu.org
+X-Gm-Message-State: AFuF++nNjQh5J4F64nSfFhV3DkuyJxUgj9h42wHmjQEghQsKBy/B4kM7
+ 9lP0xgOa8n1/k0pCCBNdpcY6FRDZdfQv6cSRUTitDW2yZqfT/c4gnPhsEhoBbLeEA280jTrqzb0
+ CYF59A2Q1pswH/9Xq7dtHqm6vx7xPseZFjWR12yPhev4HoZZoOJEphF55kg==
+X-Gm-Gg: AR+sD11prgtyBOZyuoxrWvd55DhUjDTlMNRJjAkRzO8CWxGAtx/wwKAOuVVSJMS93Vt
+ /jMabHfbsE8pdJFzMnYYIXUHcPrHUqVKkNQbSRRMVRqq8Nsb/DuIhsOfKFqqL9+h7XfzJz2HSmo
+ 1HwQ1oNtMWjNlot6mGQ5gFrg7rBU5yDXAVUlbDjA9U9EKlSItUlq+sm7CjbVXeIu+FK8g1lheU+
+ cDtg2MIcmHUi0pr0DgWoKYAsTMM1P/xYnw88xYNCPhoQCbTcBVLBGzzhx/UkKbHX2snFZjSSX+w
+ SP85JblWaWFNkXXs/L5apE2UgHAW3WK8BSceac9hQPBXa681l8DYphdXZByU6JL0p4nEw/q6Fmn
+ Ax5xgqakCvLX10138BljFK/azV8oldbybuGm9
+X-Received: by 2002:a05:6122:3285:b0:5bd:b2e1:e1f5 with SMTP id
+ 71dfb90a1353d-5c65b9d67a0mr4718450e0c.2.1787839348882; 
+ Thu, 27 Aug 2026 07:02:28 -0700 (PDT)
+X-Received: by 2002:a05:6122:3285:b0:5bd:b2e1:e1f5 with SMTP id
+ 71dfb90a1353d-5c65b9d67a0mr4718342e0c.2.1787839348247; 
+ Thu, 27 Aug 2026 07:02:28 -0700 (PDT)
 Received: from [192.168.68.100] ([189.38.141.232])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-9377e36879asm449072585a.17.2026.08.27.06.46.30
+ a640c23a62f3a-c250a5d671csm698808466b.3.2026.08.27.07.02.23
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 27 Aug 2026 06:46:31 -0700 (PDT)
-Message-ID: <36d95fcc-bd0b-49b5-a6cb-017ab83ef906@oss.qualcomm.com>
-Date: Thu, 27 Aug 2026 10:46:27 -0300
+ Thu, 27 Aug 2026 07:02:27 -0700 (PDT)
+Message-ID: <8173990b-ae96-4345-84d7-9475608f94b2@oss.qualcomm.com>
+Date: Thu, 27 Aug 2026 11:02:20 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 04/14] hw/riscv/fdt-common, virt.c: add
- riscv_create_fdt_riscv_iommu_sys()
+Subject: Re: [PATCH v3 09/14] hw/riscv/fdt-common, virt.c, tt_atlantis.c: add
+ riscv_create_fdt_uart()
 To: Joel Stanley <joel@jms.id.au>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com,
- chao.liu@processmission.com, =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?=
- <philmd@oss.qualcomm.com>, Palmer Dabbelt <palmer@dabbelt.com>
+ chao.liu@processmission.com,
+ Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Nicholas Piggin <npiggin@gmail.com>, Michael Ellerman <mpe@kernel.org>,
+ Portia Stephens <portias@oss.tenstorrent.com>
 References: <20260826214643.122728-1-daniel.barboza@oss.qualcomm.com>
- <20260826214643.122728-5-daniel.barboza@oss.qualcomm.com>
- <CACPK8Xfizz2EBxq+iyTCRxUCEek-vXaMeCuN1nJACVeSky_g-g@mail.gmail.com>
+ <20260826214643.122728-10-daniel.barboza@oss.qualcomm.com>
+ <CACPK8XfRS0KCNshf88Gc75=E8V7qKUn_ywFu=9qv-7Jgfu8k-w@mail.gmail.com>
 From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Content-Language: en-US
-In-Reply-To: <CACPK8Xfizz2EBxq+iyTCRxUCEek-vXaMeCuN1nJACVeSky_g-g@mail.gmail.com>
+In-Reply-To: <CACPK8XfRS0KCNshf88Gc75=E8V7qKUn_ywFu=9qv-7Jgfu8k-w@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-GUID: L2tzG0qDDvEUHl2kjYWl83_K9RF1tc44
-X-Authority-Analysis: v=2.4 cv=OtZ/DS/t c=1 sm=1 tr=0 ts=6a903fba cx=c_pps
- a=qKBjSQ1v91RyAK45QCPf5w==:117 a=MCIxunHWmQOg/5OnbzXZaw==:17
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-GUID: -SxsoMcjXrMD88ok163atHu73-xzL9hC
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODI3MDExOCBTYWx0ZWRfXyTeYObda3xWE
+ CW5vDp5AQ9ru5yCiMtX18BQg0S8/SozqZRmpEZIqOCqB5ueRByyJ6qy7ScoAtPpnfJ45XFdqyKA
+ TftwXxqXmkw02Vu+3x4U4JHt95Q1Zjc=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI3MDExOCBTYWx0ZWRfX0EDYtPVrJ5ZP
+ kBkotgLroyJTqBI1VELrDkakEqm1ppi4wxvbqWc0SJqjEdwOroFMMUyEtf+/OgawnraRjLze3yr
+ qaeQSDDHYHbVe0+bmjaYXHbDpvsh+SwlzAy7x4/15AkjVYaVJ9pmoo/eJWeHHyPQ++GX9cEIga2
+ ALkM+p11Dp+E0ChlyqcsASfNpc3pqVWzvRoNfEbCmkcbedxf8YPtFO+bB7bCUhJgwvMvQacrQDd
+ aaOzKa+CRikRBUCX6iRFa8EuuWbwi5Gbi6vE93r4aJAPewti1x/tKl5LE/GOc5Y2QAcnJ0TIlwo
+ qM6yFkpi3XSSirhTHqtF1Lo1RjCG2yDHHfF6vlw/oP1fY3+Tb2pJqC8Zmtju1JDhMTr0If8MiKy
+ C8HoEtSG5hmuqG5g2A89qQjRPiJUZ29pFLeYbAPLG2/WNePBHmfGcDJFUhhg3eSONg6HQeh9Ogq
+ T37zCiXfueLw0ooMZtQ==
+X-Proofpoint-ORIG-GUID: -SxsoMcjXrMD88ok163atHu73-xzL9hC
+X-Authority-Analysis: v=2.4 cv=E8b9Y6dl c=1 sm=1 tr=0 ts=6a904375 cx=c_pps
+ a=+D9SDfe9YZWTjADjLiQY5g==:117 a=MCIxunHWmQOg/5OnbzXZaw==:17
  a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
  a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
- a=EUspDBNiAAAA:8 a=40UlVwmG8s1rjtrzD7wA:9 a=QEXdDO2ut3YA:10
- a=NFOGd7dJGGMPyQGDc5-O:22
-X-Proofpoint-ORIG-GUID: L2tzG0qDDvEUHl2kjYWl83_K9RF1tc44
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI3MDExNSBTYWx0ZWRfXweb4u51vW7SC
- 3VVkPxOlJ6M/HxPVEnEdr0BI1IrsW4CYgeKZi5ctRplsndjDuGfJGvluEunBk/VZ5/YeV4MebU9
- SaIKtb3UCIDyGax5bri/HK2avxavACQvWINkVO08sOr/bb67YZzsq98Kjq2iOvigLYIpUM9p8Ut
- FJuvE6r0CFpEsi5iRUYQKZKsS5sVMP2XIJ8/Gk/MCrVmBPyaUOxA6sAK2dvurO35TjetgdFWh0f
- hVTZGegns2AU3RMkKZpbkelGh8Icvw9fCuhuVHpKhVsNjGLDmkIGkds5sPSO0cFC+YZ4fHGVfrm
- YQLTVQkEryMqAtCRBaeAX6wi//MfTuW5ooe4LHxbIwqfqP1xSrfRYfeojWQVHqrDFT2oQ+eiwxz
- xOaa01LWnFUVhJ1hCQS4JtDLSeTsI6nKqnoI9WqM0nKFlZfWb+yPeytie2jmnJkyj+D9WqAuXZL
- 4cgH56vu4uvuUCuHQ+g==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODI3MDExNSBTYWx0ZWRfX6JRyKwGv7we0
- Za3B/A4AYt0CDKPC4J1eDBYLuNgHiGj0QJvlKEpP6BEnrSETElPE5DSnvLXLnB6VK/++0YrLRGj
- 5IL+wspf+PdPUq4z5tWhvUscqKNZF5E=
+ a=EUspDBNiAAAA:8 a=t9496tuAAAAA:8 a=1ejmK-093Ji4hAkYRu0A:9 a=3ZKOabzyN94A:10
+ a=QEXdDO2ut3YA:10 a=vmgOmaN-Xu0dpDh8OwbV:22 a=4wQ91nGE5lQcD7eh5OX0:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-27_05,2026-08-26_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 lowpriorityscore=0 clxscore=1015 impostorscore=0
- priorityscore=1501 malwarescore=0 bulkscore=0 phishscore=0 suspectscore=0
- adultscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2608270115
+ lowpriorityscore=0 spamscore=0 adultscore=0 phishscore=0 clxscore=1015
+ priorityscore=1501 impostorscore=0 malwarescore=0 bulkscore=0 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608270118
 Received-SPF: pass client-ip=205.220.180.131;
  envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
 X-Spam_score_int: -27
@@ -144,7 +147,7 @@ X-Spam_bar: --
 X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -162,105 +165,138 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 
-On 8/27/2026 2:55 AM, Joel Stanley wrote:
-> On Thu, 27 Aug 2026 at 07:16, Daniel Henrique Barboza
+On 8/27/2026 2:38 AM, Joel Stanley wrote:
+> On Thu, 27 Aug 2026 at 07:17, Daniel Henrique Barboza
 > <daniel.barboza@oss.qualcomm.com> wrote:
->>   void *riscv_create_board_device_tree(const char *model, const char *compatible,
->>                                        int *fdt_size)
->> @@ -348,3 +350,41 @@ void riscv_create_fdt_syscon(void *fdt, uint32_t *phandle,
->>       qemu_fdt_setprop_cell(fdt, name, "value", poweroff);
->>       g_free(name);
+>>
+>> Add a common uart FDT helper to be used by 'virt' and 'tt-atlantis'.
+>>
+>> To accomodate both boards the helper is doing the following:
+>> - an 'uses_32_bit_spacing' flag controls whether we need to set a
+>>    different uart reg spacing for the 'tt-atlantis' board;
+> 
+> Once the designware uart is merged, Atlantis will switch to using that
+> as it matches the real hardware. As part of that we will switch the
+> compatible too, and at that point it might be best leaving it in the
+> board file?
+
+I wasn't aware of this info.
+
+I'm also not sure what you're proposing here ... are you saying to leave the
+"compatible" out of the helper or to leave tt-atlantis out of this patch for
+now?
+
+
+> 
+>> - an 'is_serial0' flag is added to control whether we need to set
+>>    additional properties related to the first serial.  This is required
+>>    because the 'virt' board adds two uarts in the FDT.
+>>
+>> No FDT changes intended.
+>>
+>> Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+>> Reviewed-by: Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
+>> Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
+>> ---
+>>   hw/riscv/fdt-common.c         | 39 +++++++++++++++++++++++++++++++
+>>   hw/riscv/tt_atlantis.c        | 23 ++----------------
+>>   hw/riscv/virt.c               | 44 +++++++----------------------------
+>>   include/hw/riscv/fdt-common.h |  4 ++++
+>>   4 files changed, 53 insertions(+), 57 deletions(-)
+>>
+>> diff --git a/hw/riscv/fdt-common.c b/hw/riscv/fdt-common.c
+>> index e6bb107309..fb7098f213 100644
+>> --- a/hw/riscv/fdt-common.c
+>> +++ b/hw/riscv/fdt-common.c
+>> @@ -795,3 +795,42 @@ void riscv_create_fdt_socket_aclint(void *fdt, ACLINTFdtProps *props,
+>>           g_free(name);
+>>       }
 >>   }
 >> +
->> +void riscv_create_fdt_riscv_iommu_sys(void *fdt, hwaddr addr, hwaddr size,
->> +                                      uint32_t irq_chip,
->> +                                      uint32_t msi_phandle,
->> +                                      uint32_t *iommu_sys_phandle,
->> +                                      uint32_t iommu_sys_irq)
+>> +void riscv_create_fdt_uart(void *fdt, const MemMapEntry *uart_mem,
+>> +                           int uart_irq, int aia_type,
+>> +                           bool uses_32_bit_spacing, bool is_serial0,
+>> +                           uint32_t irq_mmio_phandle)
+> 
+> What does 'mmio' mean here? Perhaps irq_phandle?
+
+This name was inherited from 'virt'.  I'll change it.
+
+> 
 >> +{
->> +    const char comp[] = "riscv,iommu";
->> +    uint32_t iommu_phandle;
->> +    g_autofree char *iommu_node = NULL;
->> +    uint32_t iommu_irq_map[RISCV_IOMMU_INTR_COUNT] = {
->> +        iommu_sys_irq + RISCV_IOMMU_INTR_CQ,
->> +        iommu_sys_irq + RISCV_IOMMU_INTR_FQ,
->> +        iommu_sys_irq + RISCV_IOMMU_INTR_PM,
->> +        iommu_sys_irq + RISCV_IOMMU_INTR_PQ,
->> +    };
-> 
-> Any reason to pack them into an array? Seems like they could be part
-> of the qemu_fdt_setprop_cells call:
-> 
-> qemu_fdt_setprop_cells(fdt, iommu_node, "interrupts",
->          iommu_sys_irq + RISCV_IOMMU_INTR_CQ, FDT_IRQ_TYPE_EDGE_LOW,
->          iommu_sys_irq + RISCV_IOMMU_INTR_FQ, FDT_IRQ_TYPE_EDGE_LOW,
->          iommu_sys_irq + RISCV_IOMMU_INTR_PM, FDT_IRQ_TYPE_EDGE_LOW,
->          iommu_sys_irq + RISCV_IOMMU_INTR_PQ, FDT_IRQ_TYPE_EDGE_LOW);
-
-No particular reason.  I'll make the change.
-
-> 
+>> +    g_autofree char *name = NULL;
 >> +
->> +    iommu_node = g_strdup_printf("/soc/iommu@%"HWADDR_PRIx, addr);
->> +    iommu_phandle = qemu_fdt_alloc_phandle(fdt);
+>> +    name = g_strdup_printf("/soc/serial@%"HWADDR_PRIx, uart_mem->base);
+>> +    qemu_fdt_add_subnode(fdt, name);
+>> +    qemu_fdt_setprop_string(fdt, name, "compatible", "ns16550a");
+>> +    qemu_fdt_setprop_sized_cells(fdt, name, "reg",
+>> +                                 2, uart_mem->base,
+>> +                                 2, uart_mem->size);
+>> +
+>> +    /*
+>> +     * The tt-atlantis board uses an uart that has 32 bit
+>> +     * register spacing (0x0, 0x4, 0x8, 0xc....) rather than
+>> +     * 8 bit spacing like 'virt'.
 > 
-> Ohh, that's neat. Any reason we don't use this for all of phandle
-> allocation needs?
+>  From a survey of the linux source tree, most machines use reg-shift=2.
+> If we adopted this for the virt machine then you wouldn't need to
+> special case it, with the side effect that you'll match the layout
+> more likely to be in hardware.
 
-So back in the day we were using a fdt_phandle int variable around, incrementing
-it and using as phandle for nodes. As you might notice in the boards we still have
-a similar pattern going on.
-
-The choice I made with this particular fdt is because I didn't want to pass a
-'phandle' argument to the function.  Given that the iommu FDT is the last DT that
-declares a new phandle I could get away with it.
-
-Otherwise, if there are other DTs that follows it and are assigning DTs using integer
-increment, there's a risk of phandle collision.
-
-
-> 
-> We should be consistent, so switch this one to the pattern used by the
-> rest of the file, or (preferably, IMO) switch them all over.
-
-I agree that we should allocate phandles in an uniform manner, whatever that strategy
-is.  To use alloc_phandle() everywhere we would need to take a look at how every board
-is handling their own phandles first.  I believe this is worth doing, but out of scope
-for this mostly "move stuff around" series we have here.
+I am not sure if we have a demand to change the UART for 'virt'.  If that
+ends up happening then we'll have to revisit these regs.
 
 > 
->> +    qemu_fdt_add_subnode(fdt, iommu_node);
+>> +     */
+>> +    if (uses_32_bit_spacing) {
+>> +        qemu_fdt_setprop_cell(fdt, name, "reg-shift", 2);
+>> +        qemu_fdt_setprop_cell(fdt, name, "reg-io-width", 4);
+>> +    }
 >> +
->> +    qemu_fdt_setprop(fdt, iommu_node, "compatible", comp, sizeof(comp));
->> +    qemu_fdt_setprop_cell(fdt, iommu_node, "#iommu-cells", 1);
->> +    qemu_fdt_setprop_cell(fdt, iommu_node, "phandle", iommu_phandle);
->> +
->> +    qemu_fdt_setprop_sized_cells(fdt, iommu_node, "reg", 2, addr, 2, size);
->> +    qemu_fdt_setprop_cell(fdt, iommu_node, "interrupt-parent", irq_chip);
->> +
->> +    qemu_fdt_setprop_cells(fdt, iommu_node, "interrupts",
->> +        iommu_irq_map[0], FDT_IRQ_TYPE_EDGE_LOW,
->> +        iommu_irq_map[1], FDT_IRQ_TYPE_EDGE_LOW,
->> +        iommu_irq_map[2], FDT_IRQ_TYPE_EDGE_LOW,
->> +        iommu_irq_map[3], FDT_IRQ_TYPE_EDGE_LOW);
->> +
->> +    qemu_fdt_setprop_cell(fdt, iommu_node, "msi-parent", msi_phandle);
->> +
->> +    *iommu_sys_phandle = iommu_phandle;
+>> +    qemu_fdt_setprop_cell(fdt, name, "clock-frequency", 3686400);
 > 
-> Could we just return it? Or have it passed in, so we don't need to return it?
+> Hmmm.
+> 
+>> +    qemu_fdt_setprop_cell(fdt, name, "interrupt-parent", irq_mmio_phandle);
+>> +
+>> +    if (aia_type == AIA_TYPE_NONE) {
+>> +        qemu_fdt_setprop_cell(fdt, name, "interrupts", uart_irq);
+>> +    } else {
+>> +        qemu_fdt_setprop_cells(fdt, name, "interrupts", uart_irq, 0x4);
+>> +    }
+>> +
+>> +    if (is_serial0) {
+>> +        qemu_fdt_setprop_string(fdt, "/chosen", "stdout-path", name);
+> 
+> This is related to but not really part of the UART. Should it stay in
+> the machine, or be present as a separate helper?
+
+We could move it out of the helper but then the board needs to deal with the
+nodename.  I'll add a "riscv_fdt_serial_nodename()" that retrieves the nodename
+given a certain 'addr' and then each board can set stdout-path as desired.
 
 
-I guess I could not use alloc_phandle() and receive the phandle from the caller.
-It would be consistent with what we already do in other cases, and then when/if we
-decide to change everything to alloc_phandle() we'll do it in a consistent manner.
+> 
+>> +        qemu_fdt_setprop_string(fdt, "/aliases", "serial0", name);
+> 
+> How about passing a char* alias, which can be NULL:
+> 
+> if (alais) {
+>          qemu_fdt_setprop_string(fdt, "/aliases", alias, name);
+> }
+> 
+> ...might pay to check that /aliases exists too? The ordering was
+> enforced when this is part of a board, but now that they are APIs
+> called from anywhere.
 
 
-I'll remove "iommu_phandle = qemu_fdt_alloc_phandle(fdt);" and make the caller provide a
-valid phandle in iommu_phandle.  Thanks,
+Since we're taking 'stdout-path' out of the helper we could do the same with
+"alias" too. I think it's cleaner and less error prone since the board would know
+whether "/alias" is already created and so on.
 
+
+Thanks,
 Daniel
-
 
 
 
