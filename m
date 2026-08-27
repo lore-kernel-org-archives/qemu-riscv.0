@@ -4,123 +4,150 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BA1BC61DB9
-	for <qemu-riscv@archiver.kernel.org>; Thu, 27 Aug 2026 10:38:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70588C61DC2
+	for <qemu-riscv@archiver.kernel.org>; Thu, 27 Aug 2026 10:54:06 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wzXU9-00054I-DD; Thu, 27 Aug 2026 06:37:29 -0400
+	id 1wzXjg-0001Jb-AF; Thu, 27 Aug 2026 06:53:32 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <stephensportia@gmail.com>)
- id 1wzXU7-00053W-NU
- for qemu-riscv@nongnu.org; Thu, 27 Aug 2026 06:37:27 -0400
-Received: from mail-oi1-x236.google.com ([2607:f8b0:4864:20::236])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <stephensportia@gmail.com>)
- id 1wzXU4-0006Rw-90
- for qemu-riscv@nongnu.org; Thu, 27 Aug 2026 06:37:27 -0400
-Received: by mail-oi1-x236.google.com with SMTP id
- 5614622812f47-4b1fcd3b1a9so1451665b6e.0
- for <qemu-riscv@nongnu.org>; Thu, 27 Aug 2026 03:37:23 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1787827043; cv=none;
- d=google.com; s=arc-20260327;
- b=W6C5cmhylZIIacKXJVtJYB+PJCh4C5yL/gJbOjgfu58bRyEQE4attCfM3IyBnjqYan
- Iqw0aAX5X8s1doYAG/GHweUzI5RrYWmxu6Zk5g7szfzO4wfzkEwVuGGbJVmfNA3Rg1Kx
- XLlriTblhFJvZHBrXmmZawasgNT85eTH1+Cbv5MgZaaTnfMPkdjhmA+V/WVbnQpERnnk
- s6Wyjzoi3ZiEKfnNvVKumFzgiHTRm/9FmOyZNr4yjzyiJVH+a5ExB2HUtVZDpFR46Qpk
- MB4apH8Pk3HiaJxHPcDpOfKJXrX+6sGsMkDEP84hS4l0r1RqvWEtiWdhaczHfStXQHMI
- QkpQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=+049ShgHyUj99nuL783HWpFvu79K2tvNuriDgzPsxd8=;
- fh=vTT/wE/NCxtzfNbmZ+hcnYnaPWTwFdpS6gRbA+gKNBQ=;
- b=Nr21GWZE0TqV7JmIF/8GB3iTf6gYy1VGRW4a8Xw13iXPIlG5ueKovNbv28O9Rt6cZv
- xdvae7AI8HR/L5PxoSEY7vkLyVEtfbeZgqelgbqvvh2RNQHp7wnviZ9/m/9c5fQRPHvb
- NH6n3PpSdqf8WWSiFZ7wFLzaWhpdLTfu7r/v8IL4Jq4/dPhAsWvKHgXvIe9GYRDcnwpR
- T11NW094s9zgwCJ8rjz/F6QHKgBGRuDXnx7TN4bvhRZkFhfFJpuEC/Fdt2pq2pmtsli7
- S+X5EwLeNA8IvM/drCqlI7tAMrFbowLmO12jb/iH3V9S7uIP95ImGjcZBSmNbVCnZ41Y
- p6mQ==; darn=nongnu.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1wzXjd-0001IF-9g
+ for qemu-riscv@nongnu.org; Thu, 27 Aug 2026 06:53:29 -0400
+Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1wzXja-0001oN-S1
+ for qemu-riscv@nongnu.org; Thu, 27 Aug 2026 06:53:29 -0400
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 67R9Gtqo027270
+ for <qemu-riscv@nongnu.org>; Thu, 27 Aug 2026 10:53:25 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ /+pBUL78aL6jR5JQt1qGGicqOnD9HNZjaq0DKQ87DGw=; b=Nmixq/C3xun3eGXG
+ CGVG1tlmGBh07KYH+F9goeeBwj/PwpYxW/zjfYILVzj0xHGeZFYW4CbCeaoyfPTp
+ +4pgum4mju6bS07aTZRrOOjXoby6v6j4DdvDiinNGKAdOm32e1ncxGhji5LPlhH3
+ EmrY8TrEKA5FaFmfuCq3OtHhz7bsNi2DRdkyMG3SOkil7arkHf/qkfszVa7k3s29
+ EXw5oHhlL9SLA8WH7gCg4HLuBcUvs+oCOoJdweOT/cFrgQUAZcHM2wLRpnGB9sOr
+ vY2AgRqG7qvIYz59mbN2dqibnfxXG9jbmvh/e6rRVN3/Ob+JcN+58fZuzcl6Phtk
+ +oyYtA==
+Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com
+ [209.85.222.200])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ga0wbva7t-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Thu, 27 Aug 2026 10:53:24 +0000 (GMT)
+Received: by mail-qk1-f200.google.com with SMTP id
+ af79cd13be357-92e538afe65so73540185a.3
+ for <qemu-riscv@nongnu.org>; Thu, 27 Aug 2026 03:53:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1787827042; x=1788431842; darn=nongnu.org;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=+049ShgHyUj99nuL783HWpFvu79K2tvNuriDgzPsxd8=;
- b=eAFAnMAC+pQ/C1lVpTJhDQJ56+rXaC+uvcNiZkr0DyRkAymbpnpf+mCBwLNkLc7d4w
- JwzFcpw6/oQya2LQ3kP1L8qgERbVVZnMdr1XZS7bc4iwTVSnXgtgC8Vq/IF4Hdy25ZtX
- tbQx9dwX8C/5MDBZHKsLUhKFkmJlMPwnDloyl5LAz3c8gZAG0acd4uCL6yBbcvGdY90P
- 45fjLJtfXExMPWQGf52tfOdKB8A8dYD40dsoBfcWUJO5YMjPSbDlezGYS831J1xvRtD5
- +eVYadb8fHRFXKWUBrIJNooRwuU8ctM1k59PZb2oWnzJqBrJ8O0v+ERhl7wSYf4rkrF7
- EAqA==
+ d=oss.qualcomm.com; s=google; t=1787828004; x=1788432804; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=/+pBUL78aL6jR5JQt1qGGicqOnD9HNZjaq0DKQ87DGw=;
+ b=PQW0yMaP/n3R0PTysjGBQpsZE/qVOVi9ON28zSIcx1I2pMZI0GVmASr/opL6kee6P7
+ KFlTYBJyrm8glBvl2AEXd6owJ7FmkBL/jFJVCRcYHNolTsXfY+Qy8sctU1wp3aktJdsD
+ UNevC1XGTz7rUSyq/v+4g7ClncbSy1V64uTPrMvdZb8hZm9qtW2hExGROUQNbK4LyJgn
+ +EiOJK+DeQtYr+wt+vJAuCIBniU0uNu96zcxdkq/uyng+jeKtO1K+bs7HlzVxsqI+1oz
+ rdHSywtRSi8tq5WqOALBA6AbwoKWWTHS88Q5t+0vjXLBd5eMQULX03dNqrUYrR65ajvs
+ CSBg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787827043; x=1788431843;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=+049ShgHyUj99nuL783HWpFvu79K2tvNuriDgzPsxd8=;
- b=VKeqii4MAANyDSUrAs7mdkPoSaGex5sy01PL961/i2cgCNASaMS3sUJzQOT6d3m/fr
- oYwntsXsQe91QZZ8OZVkcj1A0ZjG45Fv69dnSU0ZE/OREyB5nK/M9tWZaL2YmcaSvvxQ
- R5qqC6OZMz2UZWKwMuD+S+bZKjUYk/3hFP5EMWHCaoDQ59FpnLd7Djqo6m/zvxSdguNv
- MsbQ18iM56ba6x5BJ1aBBu7HZD829YbyayBKrolp/WeUdFyogoaWDvJFbXRuZ0pPSqwc
- dBgxBbc0beVF7LN15zrbiQUYGRBPUlFQmT+wgzv2dwsdkt4BQB73pRQdQ1J7bcuzKiuA
- ttGQ==
+ d=1e100.net; s=20251104; t=1787828004; x=1788432804;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=/+pBUL78aL6jR5JQt1qGGicqOnD9HNZjaq0DKQ87DGw=;
+ b=Ey7qbPMAMdTegiWSMY8VdQ9zYD4Hv5qmxbdLky62/nLTBbeSI8fHszrrI4DwYpSRVw
+ wboK4WYaC0p12+RaWfSpJTMrABLcv2e89GPBWjR3M7y0cs/f2h0zYFXrIf02XwlNUZ2L
+ Ug14mVhmzfDUJgbYDARBnTqBVwCTsaYGSG423FrF5qYOXQHOxNfjQF1XzG71gkOt/zbu
+ Fnkw22DwVP5r0IYn1FuTT85i90GKbIa2L7sw9RSN7BPw0mEwK9n5DcHvWPwbyCMBd2g6
+ RBPCkIOwLcNWWFBZ/GUzL8LYpxjR6ypryjgUaeXRKUnqqQSVmfCiEZSLbdtFehN0vrQ1
+ Tf7A==
 X-Forwarded-Encrypted: i=1;
- AHgh+RqUonzqNS5Ea9wcObXdRI9ZO/PkKVi+r96TKVzYe/lRcm75kiwbFj3BCTu8YWt4WAFeIFj+IjFmAhBG@nongnu.org
-X-Gm-Message-State: AFuF++l1WxpsRAIww5lwbJmc3UO5QXu3di+ZGYtt3ij18+vg/DpudBWH
- EFnyanbRvs3+FNmyCfbm2IvljgOkH63MRXzkJ/yzFxTF7nk85IlCuGc9H8E/9h8raCTkSpUTrEy
- sQPyS0WMi3EygWmyFz/CVncf+fLUmGrM=
-X-Gm-Gg: AR+sD10CcJGvEBzedqBzW8ZoDCH0pKqsQVUxOfue9XqBLZU+dtLXGlErKmpmRrmNzbP
- APl+zwU2da7Nt5c0hn+M+D3DK+khMkiHy7Z/n1Bqgd6bsK2IzdUS9aTpMLJrux1lrwL67ouRRjg
- tF/RKx0QYWDCMQcexNEn61YnIQFgCXbo1QVIv8PAOcqAIxs/c4KRdBKcnNB1OnF0Nu4lMzc8UQ6
- KcEBl9X7HK5YG2BIHyPePF9uS0MH1/Disw3DVncuzpxCA1kGnBQCEfdldFK7Z29xavbJjJ50tSG
- xqiXYdRUDH41Han/CSel0oxZGxk+NkaphOKLYtAa8dX49TrmrJEYb8Q4Mi2CHjCyLnKDDexNnMc
- yh5Lamg7l
-X-Received: by 2002:a05:6808:1910:b0:4b3:880a:f08e with SMTP id
- 5614622812f47-4b3880b1abcmr2250536b6e.13.1787827042685; Thu, 27 Aug 2026
- 03:37:22 -0700 (PDT)
+ AHgh+RpFpMv9qGODsikLab22uzn26R0KRxO7UbVlnok0T4lfAfQQfMGmLQ9q1rlvHI4fZMGjjGOe1CNeLYJg@nongnu.org
+X-Gm-Message-State: AFuF++l+c76uTKHDkTmjcSoxx6nhOO8Jn/gQxU4bEyp2CwspE7i6lzgj
+ 4RQJvrzKTC1CxJHblUDRDiK6O2O0a7j4NmfU+szS7yClnFtKDZQk4YV0TCOSyZ9rcE2xMce/Oq7
+ zKTebUMfEkQ/x4ZtnlNLA/6DVxuO/LyHdfzdaoiXKvx5BYDHhkxAUBEmCHg==
+X-Gm-Gg: AR+sD12T1s+FSSf12SxtnEto2h6CJoyRd0kCOAAiN+iIiDCkNI3WtQf4PRZwBPN6bux
+ Q2oB52TQ0plJUp8I9NwpoRQj4qsoIeDLIU0LBj0O6oFUxp9Xqvs9OUEmY5yI2b6MHddq715kyDY
+ cOV/DuBodpv1ucPQzYbuHBLm+yJFDd7YYL9w5QeoXQTauLIn67rQqUeofja260VxZ5X1vFZECSt
+ ihz+gDIF1BLgWdNlGDtjoVQ3utCullzwF1ontiIle8XVoQw9psSf3yeDU5g2Akk1KOnkT4XCieU
+ QV/SBiMy0EryN14SwldJL2eoYZsEn72Y+uOrWfoNYvx4T//VvjcQFIwnwNHZKz3BBwFamOEgNnS
+ N4KX40j46yKAcKNtFYbhs8eHlO+0TtIzIqFHA
+X-Received: by 2002:a05:620a:618f:b0:923:7821:dc0d with SMTP id
+ af79cd13be357-93780446b68mr1490489685a.33.1787828003912; 
+ Thu, 27 Aug 2026 03:53:23 -0700 (PDT)
+X-Received: by 2002:a05:620a:618f:b0:923:7821:dc0d with SMTP id
+ af79cd13be357-93780446b68mr1490485285a.33.1787828003435; 
+ Thu, 27 Aug 2026 03:53:23 -0700 (PDT)
+Received: from [192.168.68.100] ([189.38.141.232])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-9377e30a2e9sm414898785a.2.2026.08.27.03.53.20
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 27 Aug 2026 03:53:22 -0700 (PDT)
+Message-ID: <4b5ac2bd-b7f3-4992-a85f-609183e06125@oss.qualcomm.com>
+Date: Thu, 27 Aug 2026 07:53:18 -0300
 MIME-Version: 1.0
-References: <20260825040452.1322251-1-stephensportia@gmail.com>
- <CAFEAcA9etHvjL1igO4mFy5iQNy1pCbNFGaSg5HFva+YCeMkGEA@mail.gmail.com>
-In-Reply-To: <CAFEAcA9etHvjL1igO4mFy5iQNy1pCbNFGaSg5HFva+YCeMkGEA@mail.gmail.com>
-From: Portia Stephens <stephensportia@gmail.com>
-Date: Thu, 27 Aug 2026 20:37:10 +1000
-X-Gm-Features: AcwNN1XcfRUbsldtwVE7ZLjcGTDazu0Fo4Mo2swVpAOsooTm6tjhILuszIFYo_I
-Message-ID: <CACYNXwKU_UuhrBWHNFtYYmSfzRsUd5jRFjSc1++xvQHxPk6rew@mail.gmail.com>
-Subject: Re: [PATCH 0/4] Rename ssi_transfer to ssi_transfer8
-To: Peter Maydell <peter.maydell@linaro.org>
-Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
- Jamin Lin <jamin_lin@aspeedtech.com>, qemu-ppc@nongnu.org, 
- =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>, 
- Steven Lee <steven_lee@aspeedtech.com>,
- Andrew Jeffery <andrew@codeconstruct.com.au>, 
- Harsh Prateek Bora <harshpb@linux.ibm.com>,
- Subbaraya Sundeep <sundeep.lkml@gmail.com>, 
- Troy Lee <leetroy@gmail.com>, "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@mailo.com>, 
- Alistair Francis <alistair@alistair23.me>, 
- Strahinja Jankovic <strahinja.p.jankovic@gmail.com>, qemu-arm@nongnu.org, 
- Tyrone Ting <kfting@nuvoton.com>, Nicholas Piggin <npiggin@gmail.com>, 
- Aditya Gupta <adityag@linux.ibm.com>, Kane Chen <kane_chen@aspeedtech.com>, 
- Francisco Iglesias <francisco.iglesias@amd.com>, Joel Stanley <joel@jms.id.au>,
- Hao Wu <wuhaotsh@google.com>, Glenn Miles <milesg@linux.ibm.com>,
- qemu-riscv@nongnu.org, Jean-Christophe Dubois <jcd@tribudubois.net>,
- Portia Stephens <portias@oss.tenstorrent.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::236;
- envelope-from=stephensportia@gmail.com; helo=mail-oi1-x236.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 01/16] hw/riscv/aia: Take a MemoryRegion for the created
+ devices
+To: Joel Stanley <joel@jms.id.au>, Alistair Francis <alistair.francis@wdc.com>
+Cc: Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Chao Liu <chao.liu@processmission.com>,
+ Nicholas Piggin <npiggin@gmail.com>,
+ Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>,
+ Michael Ellerman <mpe@kernel.org>,
+ Portia Stephens <portias@oss.tenstorrent.com>,
+ =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>,
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+References: <20260826220528.54516-1-joel@jms.id.au>
+ <20260826220528.54516-2-joel@jms.id.au>
+From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Content-Language: en-US
+In-Reply-To: <20260826220528.54516-2-joel@jms.id.au>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-ORIG-GUID: Mwu6ZePYDskli3i2SEfwv-KhxaptI9dm
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODI3MDA5MCBTYWx0ZWRfX2GvefhldRxBD
+ pTFHeZ0S7jdEgC2n+s9L3mK/DlmePVFnS2KLUz9VyyA8y85HzRo3MlVJpd2zXm23/hrfcDX/Fqh
+ baopABl+vPEFxPg/d9vCC6dBkqkioA4=
+X-Proofpoint-GUID: Mwu6ZePYDskli3i2SEfwv-KhxaptI9dm
+X-Authority-Analysis: v=2.4 cv=SoCgLvO0 c=1 sm=1 tr=0 ts=6a901724 cx=c_pps
+ a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=MCIxunHWmQOg/5OnbzXZaw==:17
+ a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
+ a=EUspDBNiAAAA:8 a=yi6NrY4SRzBuVuqO5NkA:9 a=QEXdDO2ut3YA:10
+ a=PEH46H7Ffwr30OY-TuGO:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI3MDA5MCBTYWx0ZWRfX/hfm3VLFeiRR
+ ArVQIH6dewy0vGpt8Rme/3l5C00XLzHJAXJNMiykX6ViWusq0myZbmGs+DB9uY66kxpXwO++RUl
+ PaTxFKXhgyBmjiB1fH2NHpAQXaFrvYNn7tABnCfWVXlCsdmWKreKkL79/4FYefwo8648eZMGzGh
+ CfLtoUDcsrS1vTHEqa4Uxmouk6uxGBrOiAqvUoiQO8ZEGyhNrfdm+jjBSC7Mjm0GTZpWZzcnNPV
+ 4pWpI8LPNGVruVYzb8xCYjCV+1tg1u4vT5kN9Ig1SL1PGKQSbUeHvgFTY4kVcmld/h5uYyZi2d0
+ TdCFljxfEZtw3kM/9307lMZ+1Rc+rXiZXDXwwowejJBtipaOdqI+f19d56Zv0JiMSeA9ifJ3sW6
+ KsHEsskMwlTt3hGDH8GowUNDSCKagWxLWR0a3/aTQYQS/x+aR7QaF9LeiG0hszqsb4fGGY+hJlU
+ gxRU/lwLmm7dahmV6yg==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-27_04,2026-08-26_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ phishscore=0 impostorscore=0 malwarescore=0 bulkscore=0 spamscore=0
+ clxscore=1015 lowpriorityscore=0 priorityscore=1501 suspectscore=0
+ adultscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2608270090
+Received-SPF: pass client-ip=205.220.168.131;
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -136,64 +163,83 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Aug 27, 2026 at 7:19=E2=80=AFPM Peter Maydell <peter.maydell@linaro=
-.org> wrote:
->
-> On Tue, 25 Aug 2026 at 05:05, <stephensportia@gmail.com> wrote:
-> >
-> > From: Portia Stephens <portias@oss.tenstorrent.com>
-> >
-> > The ssi_transfer function comments say that it takes a word varying
-> > between 8-bits and 32-bits. ssi_transfer takes a 32-bit arg to transfer
-> > but there is no means to indicate the number of bits that should
-> > actually be transferred. All child classes of SSI_PERIPHERAL class have
-> > transfer functions that, despite accepting a 32-bit tx, only transfer a
-> > single byte; m25p80_transfer8(), ssi_sd_transfer(), ssd0323_transfer().
-> >
-> > The current implementation depends on the SSI model to know
-> > what peripheral model will be attached and what transfer size it
-> > expects which is error prone. If a SSI_PERIPHERAL model was written tha=
-t
-> > accepted 32-bit transfers, it could not attach to any existing SSI
-> > models.
->
-> What is the motivation for this change?
 
-The motivation came from reviewing the designware ssi driver [1] and
-realizing how error prone it was. The designware ssi supports varying
-frame width but there is no way for the controller logic to know what
-the transfer size an attached device expects. It seems like all the
-code, that is actually connected to devices, is just written to expect
-8-bit transfers so it should be made explicit.
 
-https://www.mail-archive.com/qemu-devel@nongnu.org/msg1218153.html
+On 8/26/2026 7:05 PM, Joel Stanley wrote:
+> Add a MemoryRegion parameter to riscv_create_aia(), to be passed on to
+> the IMSIC and APLIC helpers so a SoC can have the controllers mapped
+> into its own memory container. Both callers pass system_memory, so there
+> is no change in behaviour.
+> 
+> As the controllers don't yet take a MemoryRegion the parameter is not
+> yet passed on. Changing riscv_create_aia first avoids churn in the
+> intermediate commits.
+> 
+> Signed-off-by: Joel Stanley <joel@jms.id.au>
+> ---
 
->
-> As far as I know for the hardware SSI protocol, it is indeed
-> the case that the SSI controller (and/or the guest software) needs
-> to know what transfer size the attached device expects: the
-> controller just transmits (or expects to receive) however many
-> bits it is programmed for.
+Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 
-This is true but do the devices currently model only support 8-bit
-transfers in hardware, do they not support multiframe transfer? SPI
-supports varying framewidth but the devices are not actually modeled
-in this way.
+>   hw/riscv/aia.h         | 2 +-
+>   hw/riscv/aia.c         | 2 +-
+>   hw/riscv/tt_atlantis.c | 3 ++-
+>   hw/riscv/virt.c        | 3 ++-
+>   4 files changed, 6 insertions(+), 4 deletions(-)
+> 
+> diff --git a/hw/riscv/aia.h b/hw/riscv/aia.h
+> index 3b6d7f962506..82ab601bf188 100644
+> --- a/hw/riscv/aia.h
+> +++ b/hw/riscv/aia.h
+> @@ -13,7 +13,7 @@
+>   
+>   uint32_t imsic_num_bits(uint32_t count);
+>   
+> -DeviceState *riscv_create_aia(bool msimode, int aia_guests,
+> +DeviceState *riscv_create_aia(MemoryRegion *mr, bool msimode, int aia_guests,
+>                                uint32_t m_imsic_stride,
+>                                uint32_t s_imsic_stride,
+>                                uint16_t num_sources,
+> diff --git a/hw/riscv/aia.c b/hw/riscv/aia.c
+> index c1a5982856c5..651552c8f970 100644
+> --- a/hw/riscv/aia.c
+> +++ b/hw/riscv/aia.c
+> @@ -24,7 +24,7 @@ uint32_t imsic_num_bits(uint32_t count)
+>       return ret;
+>   }
+>   
+> -DeviceState *riscv_create_aia(bool msimode, int aia_guests,
+> +DeviceState *riscv_create_aia(MemoryRegion *mr, bool msimode, int aia_guests,
+>                                uint32_t m_imsic_stride,
+>                                uint32_t s_imsic_stride,
+>                                uint16_t num_sources,
+> diff --git a/hw/riscv/tt_atlantis.c b/hw/riscv/tt_atlantis.c
+> index babce2b680f2..d69851df0a01 100644
+> --- a/hw/riscv/tt_atlantis.c
+> +++ b/hw/riscv/tt_atlantis.c
+> @@ -496,7 +496,8 @@ static void tt_atlantis_machine_init(MachineState *machine)
+>                               &error_abort);
+>       sysbus_realize(SYS_BUS_DEVICE(&s->soc), &error_fatal);
+>   
+> -    s->irqchip = riscv_create_aia(true, TT_IMSIC_GUESTS,
+> +    s->irqchip = riscv_create_aia(system_memory,
+> +                                  true, TT_IMSIC_GUESTS,
+>                                     TT_IMSIC_STRIDE,
+>                                     TT_IMSIC_STRIDE,
+>                                     TT_IRQCHIP_NUM_SOURCES,
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index 329ccdb5a7b6..22a607ed10bf 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -1411,8 +1411,9 @@ static void virt_machine_init(MachineState *machine)
+>               s->irqchip[i] = virt_create_plic(s->memmap, i,
+>                                                base_hartid, hart_count);
+>           } else {
+> +            bool msimode = s->aia_type == VIRT_AIA_TYPE_APLIC_IMSIC;
+>               int imsic_bits = imsic_num_bits(s->aia_guests + 1);
+> -            s->irqchip[i] = riscv_create_aia(s->aia_type == VIRT_AIA_TYPE_APLIC_IMSIC,
+> +            s->irqchip[i] = riscv_create_aia(system_memory, msimode,
+>                                                s->aia_guests,
+>                                                IMSIC_HART_SIZE(0),
+>                                                IMSIC_HART_SIZE(imsic_bits),
 
-A better solution may be to have multiple transfer functions,
-ssi_transfer8, ssi_transfer32, etc. This would require the device to
-explicitly set what it is expecting. It is challenging since the only
-model's not using 8-bit transfer don't have any devices connected
-upstream so testing is challenging.
-
->
-> > This change updates the the naming of ssi_transfer to ssi_transfer8, as
-> > well as changes the return value and transmit argument to be 8-bit.
->
-> This means that the API will no longer work for a controller
-> and device that aren't 8-bit. We happen not to have any of those
-> devices today, but why specifically stop them working?
->
-> thanks
-> -- PMM
 
