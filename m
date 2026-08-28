@@ -4,132 +4,150 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD2FDC61DBD
-	for <qemu-riscv@archiver.kernel.org>; Fri, 28 Aug 2026 19:01:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53400C61DBD
+	for <qemu-riscv@archiver.kernel.org>; Fri, 28 Aug 2026 19:52:44 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x01pN-0001hS-C2; Fri, 28 Aug 2026 15:01:25 -0400
+	id 1x02cx-0000gL-3o; Fri, 28 Aug 2026 15:52:39 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <chao.liu@processmission.com>)
- id 1x01pK-0001gD-Fr; Fri, 28 Aug 2026 15:01:22 -0400
-Received: from mail-koreacentralazlp170130006.outbound.protection.outlook.com
- ([2a01:111:f403:c40f::6] helo=SEYPR02CU001.outbound.protection.outlook.com)
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1x02cu-0000fv-MT
+ for qemu-riscv@nongnu.org; Fri, 28 Aug 2026 15:52:36 -0400
+Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <chao.liu@processmission.com>)
- id 1x01pH-0004dF-W5; Fri, 28 Aug 2026 15:01:22 -0400
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=wcKUfukV18wVpR1Zf/PpFsgaAr5I4YCUnByO7moZ8YhTMkRhjgsEOvJv3okcw/VqReH2A+1JLoipmkA0XOoa4lz8W1vc37x4PHSDizCKVwr3PSmDySAZ1ZgwxSzfh4eHGPnHDQRVZrCSePOjAJf7br1Eu4WvpVJZ11hUw7wUA1bVo949Xe4KtRkHbeIXxP8C48wnUsb1Z3XFy+54zBIxtcaPLMhSrOJbSmCWpwZL+pYRAQhwyMu0jWAavasJckMBb1A6gBJJz74BR69jVKUk5pzQHuFYlivVS8uaM388JZyhXkppFmoqr4K0ExrT/URe8zUS0kROOnlajfwwfqHXow==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=4wVtsUhbto/DC/z1nS/YtTVwD82HKKrtZgrSbhxZFQs=;
- b=t3CrVAKU4IJBJOxz230qclth28oglZyJCJy+FlmQeDz9D4Z6BU3yV5WUwmCSE88MKHQEWHtrTU12NOBk1cSYyS4WNaAFdfoe2Yle7m4eBxRWYGsbyXiWjx2ND3LE3G7O/N3FrBk7/EoHOj+dQjIEkunK6XKeEjfmuj5i+ALEH2kfzGIykGmXQtStqyd3vQUw8MPdD+t7AQU2ZzvGs/FdorcXC83sp16BndCXfupsIRRtEsEgw6CbsUPgeJivopL8v7oUncBMN8U6Yx35MPP6nCnUIcNqWESdCg5jHls6sEUowYs+NppYSj7Ym0gbajXhyRL+uPNw4t7fp/owac0KFA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=processmission.com; dmarc=pass action=none
- header.from=processmission.com; dkim=pass header.d=processmission.com;
- arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=processmission.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=4wVtsUhbto/DC/z1nS/YtTVwD82HKKrtZgrSbhxZFQs=;
- b=W/IqKrshaDrp5ELzx6UbNcCeK/iN1CDWxJetK2yzk8YWL1k9ICG4FcwHk9V3f7NR2bGy3XNDoEkbjKJkMf6kzwQrXthbGE4u0FiG8G9x14PUunOUPTeExeo+Z1XaDiDBcnyycqULSpcGwk7iV41+j6UGn3qNW3gp/PGdIEbbhhP8eYssl1JXPctYxwdNxSLzCWPDzJBXeIfXXVaFEU+10sPt5CVd2br5Q1Mg9QZZQEMyuF8hZDxHrfSuFDEC7V6G/gi2VfioUanszsVfmGOhksMlZna37apygULGRQbJsex5Mg8LL0p9l9H2v2AZIr6M+jJovZ29yEFkJ06Pshq9CQ==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=processmission.com;
-Received: from TYNPR02MB9351.apcprd02.prod.outlook.com (2603:1096:405:3d0::15)
- by SE3PR02MB9321.apcprd02.prod.outlook.com (2603:1096:101:333::12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.360.8; Fri, 28 Aug
- 2026 19:01:12 +0000
-Received: from TYNPR02MB9351.apcprd02.prod.outlook.com
- ([fe80::e5f3:5fb7:3d29:5934]) by TYNPR02MB9351.apcprd02.prod.outlook.com
- ([fe80::e5f3:5fb7:3d29:5934%4]) with mapi id 15.21.0360.008; Fri, 28 Aug 2026
- 19:01:12 +0000
-Date: Sat, 29 Aug 2026 03:01:06 +0800
-To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
- Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
- Palmer Dabbelt <palmer@dabbelt.com>
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1x02cr-00013G-3v
+ for qemu-riscv@nongnu.org; Fri, 28 Aug 2026 15:52:36 -0400
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 67SJ7G193675317
+ for <qemu-riscv@nongnu.org>; Fri, 28 Aug 2026 19:52:31 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ Ja2wSG3x7zRRlmVAgiQutWvbbULsHGwad0igVq6iAWo=; b=KWWJKDe/+ECU9/qm
+ rm00K7q5SUxnxnzHfY4pBmgZ38OEN2N0ZotgWy/EGNz3qCeIeizHULfd+heNeKNN
+ HwqG4XbTu58hGrJSdUsVyR79w5v8Lu1Q+Gbt4L/uCif7oJXp8n4cD/eh0DyoJqCI
+ 9aG2vMoe9IgTpF6J9HfXaQq97LVO0/FYbtjCMhsYR5YL4w1gGNDrIMCALO79DSPZ
+ qw6zvsksnm0Pur0hpS5TzALQ8e9dIvGwXd+KipkhgGNxHZz2X2VoRjleO4SsmTEb
+ 3J+y96nrue2vCoshNzv2u4IjOhFsIB+L0rgjQeN5rm/KvSce7EggQdSY139R7NyZ
+ w4QV5g==
+Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com
+ [209.85.222.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gb3hs3ecj-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Fri, 28 Aug 2026 19:52:30 +0000 (GMT)
+Received: by mail-qk1-f199.google.com with SMTP id
+ af79cd13be357-9382f9430deso168216285a.1
+ for <qemu-riscv@nongnu.org>; Fri, 28 Aug 2026 12:52:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1787946750; x=1788551550; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=Ja2wSG3x7zRRlmVAgiQutWvbbULsHGwad0igVq6iAWo=;
+ b=EcJvNETrg/PSeBge5XxD36BfvD93qWhWx5nu/pVW1DFYWF4BNclqbUNLh4fVmUiR5V
+ VNViOCrNpCVN6SjQNQels3exRuQDZPay/uLEeaWHdhB++qilA4gukfzrvyiC0016rYOL
+ w7NlZy1so9lsIjWcYhOaA7Tj0B4EfRHpsb/8Pff7P6YjUWyXwZYYYhXNhVd81r5BfLBW
+ S0QZYJwSguJQSi2LhUvNbea/eG45LD9U/3X+TKTvT2b7dv/NkbBfKArcB1ynf7d2ZO5x
+ V4Jn2RwLRxjmB6GQDVUgajTIjzx4f8gE2Z6Ky8HDboGnxhNNutcPeSpxvwg4TjiPvoJl
+ RYHw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1787946750; x=1788551550;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=Ja2wSG3x7zRRlmVAgiQutWvbbULsHGwad0igVq6iAWo=;
+ b=AcnCEDAvpZlr66nXzAkL3IpIZTvsNtUe+Uqn3hHPCcsKOMEBYw9V90QP/QXZIfsp2K
+ f500bskeds81HzeGGiSDw2BhhoOs99gR9njiNdUjTBpctrun2GJXVMHR1ESdwo9eIKdl
+ IMn0S/5klXG36L3miEgLZqO8/k5CjRgyVpPqVY1UbAiLJZGx2+M18ieqyaiV5tvHWFJY
+ 41dsTMdR9XJBrIf9y8P2n1zjgRWgLWI90jHVqY+VPw/6VfCd0nJP1PftgkEsA193vFMJ
+ l5XoAg6anbndi0Lnfy3Si1xURYzUuWHM51WKesl6MhSMQTlwqzggJskUQ7RzrC3D0gCt
+ unyw==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RpZqbz1f54s0ffLR4bwvrrHLoYgxY+ZVX130DDAV3KAh3BBpkKutyljySZJ4pQIqBlNRViIV8MgkWBY@nongnu.org
+X-Gm-Message-State: AFuF++lWgIoAkm4r8WaJOeUFpWfhJHh0knjShfyw9uxxXkuFokCqcBeo
+ QQOQgR0nY2m6qigtrJGpGx/a2Slg+pfwHkipQsiTCnbgGYvLdezObf4dEg11RqAyIdJPOX5LDL1
+ /vD0X7iAEmbFZfx+e7ADoJJx6eAQgVHelDzivD/Rm4hA7C4WBXyvoxAzclA==
+X-Gm-Gg: AR+sD101PnnVBkjhW1qvyB/Njcs0aqJsp06cPuGQ2YBs68ZOnZ2/yK4b77cVG0nuq6v
+ ynQ01/s/fHpk80B0OpcbX72nOXWcFSmUIyS4y57fLGLOs3vox/U732QaoYXArn4upRtD47KoLRQ
+ 3Gxx6OVlhXQ0goz0SAdl1x5CNm1i6LORqBxQdYM8Z+KEAmjKPZG331tZCRz2I3x2p+72DTUMIhW
+ ewzmOBPJDBuM/DwCRg5AL4lvY05TFY4qDbHNJRfPTwvBqdnxEXsJYZ/Lh75VSnvD+rrnnJZ5f6u
+ uOap00Gkvl9OBZXB/JuGbl7Be7pvl2B3oGo5dMmQ5YSu3wxPBQt88KRK+eNSOwQn/ag+rZrHp+3
+ rJ11eUTbd1q3Jvm7/IuD6tLrnqTzEkTbx8eCV
+X-Received: by 2002:a05:620a:a717:b0:92e:5b45:b572 with SMTP id
+ af79cd13be357-939137b8a4bmr960159085a.1.1787946750065; 
+ Fri, 28 Aug 2026 12:52:30 -0700 (PDT)
+X-Received: by 2002:a05:620a:a717:b0:92e:5b45:b572 with SMTP id
+ af79cd13be357-939137b8a4bmr960151085a.1.1787946749308; 
+ Fri, 28 Aug 2026 12:52:29 -0700 (PDT)
+Received: from [192.168.68.100] ([189.38.141.232])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-939172604f3sm215609585a.21.2026.08.28.12.52.26
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 28 Aug 2026 12:52:28 -0700 (PDT)
+Message-ID: <2f234b84-1d66-4a6a-a745-fd292df2c4a8@oss.qualcomm.com>
+Date: Fri, 28 Aug 2026 16:52:24 -0300
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v4 08/14] hw/riscv/fdt-common, virt.c: add
  riscv_create_fdt_socket_aclint()
-Message-ID: <apHH1upnh8udUUT-@ChaodeMacBook-Pro.local>
+To: Chao Liu <chao.liu@processmission.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>
 References: <20260827222608.329788-1-daniel.barboza@oss.qualcomm.com>
  <20260827222608.329788-9-daniel.barboza@oss.qualcomm.com>
  <apEGhbfBmPgZrT8r@ChaodeMacBook-Pro.local>
  <8274e2f5-38a5-4aee-842d-c1408a166f51@oss.qualcomm.com>
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
+ <apHH1upnh8udUUT-@ChaodeMacBook-Pro.local>
+From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Content-Language: en-US
+In-Reply-To: <apHH1upnh8udUUT-@ChaodeMacBook-Pro.local>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <8274e2f5-38a5-4aee-842d-c1408a166f51@oss.qualcomm.com>
-X-ClientProxiedBy: SJ0PR13CA0161.namprd13.prod.outlook.com
- (2603:10b6:a03:2c7::16) To TYNPR02MB9351.apcprd02.prod.outlook.com
- (2603:1096:405:3d0::15)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: TYNPR02MB9351:EE_|SE3PR02MB9321:EE_
-X-MS-Office365-Filtering-Correlation-Id: ed7d3c14-e17d-4dad-e643-08df0536ba39
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|23010399003|1800799024|366016|18002099003|22082099003|56012099006|10067099003|6133799003|4143699003;
-X-Microsoft-Antispam-Message-Info: e6q+SqVtBa8DTBklULyv9HtbGQvupR/dhjlM8Oelxy2SbCt6hqxwfjcLSzqu5qOZ3yIt3VJSCKh7vlIAy7EnMBjTQsjNA+3Ei7K6WqC0PEeKTiIPvnKU2DNsyIz539D5Do9gPBH+SGxTLNfeb6v8JwneVfJlZ+QWHXxCNV6JKlF9E1P3bdufELc8rbbLLtOE5rtD4VF8kcpivZAk6/4X1NsYLZd7NuiyRxHSK/lr4fnwkgt/q0foCXEaYcEOLMq0ki+WTrj+k/DuG1Ysg0IdhbBEIYtUJ9WQ0iggEbb7BtfQono4trHSVmntUFYAfiRiwpDziascD/mb7tQwzBQhpMwnLAzl6uUY3h1Xx50GSfqyquSFJdqpwRPgzNQlCAwV2seBaYkwvun1i6Wv4jcVopGcmT5ymaZEdAA/5J4s2mZREjpPtsJ9dMYQ4uB+/WMSbNmVuan/r1zkFYitzt1PMuBMEuOho/21HlMgb1jAy1/JgvC1rVbtU4N5U+ZuUpUeNgeqW2nofBpDIl03n3rGw2C2BTY2uWJct0WGYayGRpCN+bbp2Md4rjFsjurcfXUPFjkpd015TlnqPTuE1hJri1Y1mQeKgmVzOP+lBbqmTbRkNOYM+RqdKLrKPmCyuClt
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:TYNPR02MB9351.apcprd02.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(23010399003)(1800799024)(366016)(18002099003)(22082099003)(56012099006)(10067099003)(6133799003)(4143699003);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?iso-8859-1?Q?U3t0ggsYafJLELAWe2dPSCZ8+OjBafRN1lSYtqfrIO+woBttRPzBqoc0XL?=
- =?iso-8859-1?Q?Fphc9XLsDSyZvRjTr4PFrooL8YApt8v9/plg6rLsql3lLXpXyE9ggtnxJx?=
- =?iso-8859-1?Q?Agak9tpKfXSGPu7BVsl9D2ZzmEhSuXXhdvLF86T/5Ryy6n9FPSva4pnjdm?=
- =?iso-8859-1?Q?7yW+slW7ldLloWiyHywUHLyDdoqr3LMCpAYvNbT7iyJ+dO6bzHQq5lrDSp?=
- =?iso-8859-1?Q?j82SNBKovWkwCmchREMqsy3uw7MC16O8spuhxTHZqG7Kyl/7l4QNiAoNkI?=
- =?iso-8859-1?Q?eEF1dT70cnO0RfdemS9po0Mz+HtjVL57UhShIdwYn9FO770BDhoawZKMRe?=
- =?iso-8859-1?Q?sZVuhlLz2yvE9B/rw+eF76XaGqbcTB+GVR03+0UZPy54/x8rB5Gl6URotP?=
- =?iso-8859-1?Q?Kj5z1v861uBbuS87S/evEENRWuM7REReAfCBEmrfYNfX4/RRneEvyjTiUc?=
- =?iso-8859-1?Q?h0OOa7KGKEPy+7lO6bQ9WelVkV1pFslcEJfvp7a2wC0xZVLM5ShJYfaNB2?=
- =?iso-8859-1?Q?Gk95snjJi0q+NtlYx77EnsXdvY4BtOhI4xYknGPZHxjIilCyRqJWi4htu0?=
- =?iso-8859-1?Q?835CAsR99rjOfm5hPkdgz32TtS7pfrTgJ8b6Dce9MWhT8FIXllVSrA04Mp?=
- =?iso-8859-1?Q?0QRZVRJ8mUJeTy7ugkrSv4FN+en4+LRdBOiXZNzZrBuDUrS7CvGdD7Jxqu?=
- =?iso-8859-1?Q?/l8I67L/R4wOnD+hz/up9mYaLMPhrFNafdRSTO0CBNrWyv18+Cx2970dbj?=
- =?iso-8859-1?Q?FoW6H5YilaIb7XE/CkbH6NjD9kqTAkx3m8LSWc7bxEVy1lIlmA0l06TEQC?=
- =?iso-8859-1?Q?3vrZKHj6quBNtDQfMV0G32rAGVxd9ZeYAXN7lgR5o/p3K5yVy7GfZiuVMN?=
- =?iso-8859-1?Q?MmWukzeTlysCAVW2w8pD+zNlSDyWCozlImlWQNPs6LIuOZMqPPJJ6ybFpR?=
- =?iso-8859-1?Q?NQemXk8clQO7IXXDX41tYxxT+0S/rodTXTxEYDmxBoJNwyYPXGZghmLgom?=
- =?iso-8859-1?Q?txz3i0+YMZ4u2gRbf/pHF4efLq/FcMFGDir/tK1Rc9AayhIaLE5sqxYYKn?=
- =?iso-8859-1?Q?QP+hC3BD1p6ZPvd/ui4q/lB8meEvpDtvM9122G0L61Vsc88y6pl+d1h6qd?=
- =?iso-8859-1?Q?gMTb9ozG1TJTV+44ssBBOsWPzdhp1MIeOtseiH3+A3QNhVx8g+rRwxeFk4?=
- =?iso-8859-1?Q?IYddrIfpADLNxd9RIoWtjK1YDsBBhyj2EjA5Fe40lY/0RbEBEsWm+YEU2q?=
- =?iso-8859-1?Q?B72DRr3yFRPY8zxU2q7iE6hWjbFXT34e64O6NToE9EIGDlKSgYuoqYw8mH?=
- =?iso-8859-1?Q?HR04G9J756GPdu4yWEgdYd5oXYkLYdzCixYMzbrKmSX/UQC9jXvcvyN/fs?=
- =?iso-8859-1?Q?s/RM6PlVlXCECUccODg+93ukjc4XgYEvlFtQrNbzc2oW1LCcCLVXJGzUDe?=
- =?iso-8859-1?Q?DaWt+kXlUiVuaxMzCNZ0McTZHwfrIDrOfw64i1kh4Wc0EMAuPMuNjRAD58?=
- =?iso-8859-1?Q?lTd2CmECKZXqI/Jrt48g8xP39PPLfQSI3RcoYMnic3EeuETdVt7lmHlGfx?=
- =?iso-8859-1?Q?5kJpRUvOPXiK8/COhCdBUD8a7rLlOE0tDqi18uMXF5Ux+BSDnQpZD9ibpG?=
- =?iso-8859-1?Q?6rxhGmhkQ4MXNvMDMw16jtxjON2ADO+Bf7xGpOmjr7Cb+vgyT0+r0o+Gch?=
- =?iso-8859-1?Q?azHqguZWiwA021ovLbGsRqQdtxom3ex/e84wCXkXaAfnBf419VV+vk4DU7?=
- =?iso-8859-1?Q?fKXUucMUTtBRr6rKrSwb4EpFFJdzZTzZSXEVS+FYr79w0eEx4AcmFrYbUq?=
- =?iso-8859-1?Q?unmVo+HiPiOkiHRQShnD1CBWQqqg8gg=3D?=
-X-OriginatorOrg: processmission.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: ed7d3c14-e17d-4dad-e643-08df0536ba39
-X-MS-Exchange-CrossTenant-AuthSource: TYNPR02MB9351.apcprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Aug 2026 19:01:12.3679 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: e0544bf7-9765-4630-ab69-0b266dc2169c
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 4rRT1IUDPjGTrYuZWjn9L/CkWIoPToIY19Q9Nk0HXhiAwuFnMyLE2mBabUAXsMaLI65+LwABnATXKNGVt3UkRYuFhScoDAYAqz6nnMMCON8=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SE3PR02MB9321
-Received-SPF: pass client-ip=2a01:111:f403:c40f::6;
- envelope-from=chao.liu@processmission.com;
- helo=SEYPR02CU001.outbound.protection.outlook.com
-X-Spam_score_int: -16
-X-Spam_score: -1.7
-X-Spam_bar: -
-X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
- DKIM_SIGNED=0.1, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+X-Authority-Analysis: v=2.4 cv=XKYAjwhE c=1 sm=1 tr=0 ts=6a91e6fe cx=c_pps
+ a=HLyN3IcIa5EE8TELMZ618Q==:117 a=MCIxunHWmQOg/5OnbzXZaw==:17
+ a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
+ a=UXIAUNObAAAA:8 a=O76HWA22AAAA:20 a=EUspDBNiAAAA:8 a=7oRXlJWl_yl38FeU86IA:9
+ a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10 a=bTQJ7kPSJx9SKPbeHEYW:22
+ a=a1s67YnXd6TbAZZNj1wK:22 a=bA3UWDv6hWIuX7UZL3qL:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI4MDE3MyBTYWx0ZWRfXz2wdEYrx/Ldr
+ oD5a2GI8WAeX02pM1v35hoDxyR/fRI6hnKx3GcELZxj8/uBgTPxHxXvHYYnrsp3+eXKo+uFdX2s
+ ZDiMxyklYquuOJlVpCwX2DVNodn3s8gGKBI6+s09CDpUOlAsQiHtpJADXnS8oWjOZDkFNmXWOHT
+ d06cWa6zqZiwI3iutfDwtuJCP+JykougBfFInJZiy4O+49Q/CdAUxw1BVWEdUPQb1aFRDey56K+
+ lMnRb1Qkik0hm3Uro5i5OqyePcvbS2gKZohOolAeuPJ5PFIS4U9X93HNN23UADQtRoelBjin88e
+ grqild/dHybf11epMkzehf65rhDSr3udP7eXlIiRBAMB4YmnY4FBJgyHci3OxFE5fR1JRGh8JR3
+ jer4liVcB5Q/0PikU4QgVSJSU8H/+a8Zyuz7vu2iAVzZEp8IhGZF2Q/DpOqjlDBd4vGzWb1LB4S
+ Sd9pyO/oDrprB7x6oLQ==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODI4MDE3MyBTYWx0ZWRfX9FQzVmGHdqB9
+ 0fmhYE/5vxmRCLJIUEtrhESTRIgIHqISuKejMZGohg11fnvQT5aNXiW4QjVkTS8r6lAT6hKQ5fd
+ nLTkCSYAHRVUnJLdry/QmuGM7Pmxl9k=
+X-Proofpoint-GUID: LVaZYEVEqBt1odlEV3OJLbvOasARKagu
+X-Proofpoint-ORIG-GUID: LVaZYEVEqBt1odlEV3OJLbvOasARKagu
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-28_06,2026-08-27_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 lowpriorityscore=0 clxscore=1015 priorityscore=1501
+ bulkscore=0 adultscore=0 phishscore=0 suspectscore=0 impostorscore=0
+ spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2608280173
+Received-SPF: pass client-ip=205.220.180.131;
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
+X-Spam_bar: --
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -142,247 +160,258 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Reply-to:  Chao Liu <chao.liu@processmission.com>
-From:  Chao Liu via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Daniel,
 
-On Fri, Aug 28, 2026 at 12:40:38PM +0800, Daniel Henrique Barboza wrote:
+
+On 8/28/2026 4:01 PM, Chao Liu wrote:
+> Hi Daniel,
 > 
+> On Fri, Aug 28, 2026 at 12:40:38PM +0800, Daniel Henrique Barboza wrote:
+>>
+>>
+>> On 8/28/2026 1:13 AM, Chao Liu wrote:
+>>> On Thu, Aug 27, 2026 at 07:26:01PM +0800, Daniel Henrique Barboza wrote:
+>>>> Yet another FDT that we want to move to a helper to avoid copy/pasting
+>>>> code to other boards that will use a mtimer.  In particular the future
+>>>> 'riscv-server-ref' board.
+>>>>
+>>>> No FDT changes made.
+>>>>
+>>>> Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+>>>> Reviewed-by: Philippe Mathieu-DaudÃ© <philmd@oss.qualcomm.com>
+>>>> ---
+>>>>    hw/riscv/fdt-common.c         |  96 ++++++++++++++++++++++++++++++++
+>>>>    hw/riscv/virt.c               | 101 ++++------------------------------
+>>>>    include/hw/riscv/fdt-common.h |  11 ++++
+>>>>    3 files changed, 119 insertions(+), 89 deletions(-)
+>>>>
+>>>> diff --git a/hw/riscv/fdt-common.c b/hw/riscv/fdt-common.c
+>>>> index d815c5adff..76a783709d 100644
+>>>> --- a/hw/riscv/fdt-common.c
+>>>> +++ b/hw/riscv/fdt-common.c
+>>>> @@ -16,6 +16,7 @@
+>>>>    #include "target/riscv/cpu_bits.h"
+>>>>    #include "hw/riscv/riscv-iommu-bits.h"
+>>>>    #include "hw/riscv/iommu.h"
+>>>> +#include "hw/intc/riscv_aclint.h"
+>>>>    #include "hw/intc/riscv_imsic.h"
+>>>>    #include "hw/pci/pci.h"
+>>>>    #include "hw/pci/pcie_host.h"
+>>>> @@ -702,3 +703,98 @@ void riscv_create_fdt_socket_aplic(void *fdt, APLICFdtProps *props,
+>>>>        aplic_phandles[props->socket] = aplic_s_phandle;
+>>>>    }
+>>>> +
+>>>> +void riscv_create_fdt_socket_aclint(void *fdt, ACLINTFdtProps *props,
+>>>> +                                    uint32_t *intc_phandles)
+>>>> +{
+>>>> +    uint32_t aclint_cells_size = props->num_harts * sizeof(uint32_t) * 2;
+>>>> +    g_autofree uint32_t *aclint_mswi_cells = NULL;
+>>>> +    g_autofree uint32_t *aclint_sswi_cells = NULL;
+>>>> +    g_autofree uint32_t *aclint_mtimer_cells = NULL;
+>>>> +    hwaddr addr, size;
+>>>> +    char *name;
+>>>> +    int cpu;
+>>>> +
+>>>> +    aclint_mswi_cells = g_new0(uint32_t, props->num_harts * 2);
+>>>> +    aclint_mtimer_cells = g_new0(uint32_t, props->num_harts * 2);
+>>>> +    aclint_sswi_cells = g_new0(uint32_t, props->num_harts * 2);
+>>>> +
+>>>> +    for (cpu = 0; cpu < props->num_harts; cpu++) {
+>>>> +        aclint_mswi_cells[cpu * 2 + 0] = cpu_to_be32(intc_phandles[cpu]);
+>>>> +        aclint_mswi_cells[cpu * 2 + 1] = cpu_to_be32(IRQ_M_SOFT);
+>>>> +        aclint_mtimer_cells[cpu * 2 + 0] = cpu_to_be32(intc_phandles[cpu]);
+>>>> +        aclint_mtimer_cells[cpu * 2 + 1] = cpu_to_be32(IRQ_M_TIMER);
+>>>> +        aclint_sswi_cells[cpu * 2 + 0] = cpu_to_be32(intc_phandles[cpu]);
+>>>> +        aclint_sswi_cells[cpu * 2 + 1] = cpu_to_be32(IRQ_S_SOFT);
+>>>> +    }
+>>>> +
+>>>> +    if (props->aia_type != AIA_TYPE_APLIC_IMSIC) {
+>>>> +        addr = props->clint->base + (props->clint->size * props->socket);
+>>>> +        name = g_strdup_printf("/soc/mswi@%"HWADDR_PRIx, addr);
+>>>> +
+>>>> +        qemu_fdt_add_subnode(fdt, name);
+>>>> +        qemu_fdt_setprop_string(fdt, name, "compatible", "riscv,aclint-mswi");
+>>>> +        qemu_fdt_setprop_sized_cells(fdt, name, "reg",
+>>>> +                                     2, addr, 2, RISCV_ACLINT_SWI_SIZE);
+>>>> +        qemu_fdt_setprop(fdt, name, "interrupts-extended",
+>>>> +                         aclint_mswi_cells, aclint_cells_size);
+>>>> +        qemu_fdt_setprop(fdt, name, "interrupt-controller", NULL, 0);
+>>>> +        qemu_fdt_setprop_cell(fdt, name, "#interrupt-cells", 0);
+>>>> +
+>>>> +        if (props->numa_enabled) {
+>>>> +            qemu_fdt_setprop_cell(fdt, name, "numa-node-id", props->socket);
+>>>> +        }
+>>>> +
+>>>> +        g_free(name);
+>>>> +    }
+>>>> +
+>>>> +    if (props->aia_type == AIA_TYPE_APLIC_IMSIC) {
+>>>> +        addr = props->clint->base +
+>>>> +               (RISCV_ACLINT_DEFAULT_MTIMER_SIZE * props->socket);
+>>>> +        size = RISCV_ACLINT_DEFAULT_MTIMER_SIZE;
+>>>> +    } else {
+>>>> +        addr = props->clint->base + RISCV_ACLINT_SWI_SIZE +
+>>>> +               (props->clint->size * props->socket);
+>>>> +        size = props->clint->size - RISCV_ACLINT_SWI_SIZE;
+>>>> +    }
+>>>> +
+>>>> +    name = g_strdup_printf("/soc/mtimer@%"HWADDR_PRIx, addr);
+>>>> +    qemu_fdt_add_subnode(fdt, name);
+>>>> +    qemu_fdt_setprop_string(fdt, name, "compatible",
+>>>> +                            "riscv,aclint-mtimer");
+>>>> +    qemu_fdt_setprop_sized_cells(fdt, name, "reg",
+>>>> +        2, addr,
+>>> Should be:
+>>> 	   2, addr + RISCV_ACLINT_DEFAULT_MTIME,
+>>>
+>>> I found an MTIMER FDT issue in the virt machine FDT.
+>>>
+>>> Command:
+>>>
+>>> ```
+>>>     timeout 30s ./build/qemu-system-riscv64 \
+>>>       -machine virt,aia=aplic-imsic,aia-guests=5,aclint=on,dumpdtb=/tmp/virt.dtb \
+>>>       -smp 2 -display none -nodefaults
+>>>
+>>>     dtc -I dtb -O dts /tmp/virt.dtb | grep -A4 mtimer@
+>>> ```
+>>>
+>>> The generated FDT contains:
+>>>
+>>>                   mtimer@2000000 {
+>>>                           interrupts-extended = <0x04 0x07 0x02 0x07>;
+>>>                           reg = <0x00 0x2000000 0x00 0x08 0x00 0x2000000 0x00 0x7ff8>;
+>>>                           compatible = "riscv,aclint-mtimer";
+>>>                   };
+>>>
+>>> without this patches:
+>>>
+>>>                     mtimer@2000000 {
+>>>                             interrupts-extended = <0x04 0x07 0x02 0x07>;
+>>>                             reg = <0x00 0x2007ff8 0x00 0x08 0x00 0x2000000 0x00 0x7ff8>;
+>>>                             compatible = "riscv,aclint-mtimer";
+>>>                     };
+>>>
+>>> The first address should be 0x20007ff8.
+>>
+>> That was intentional and I forgot to document it in the commit msg. The
+>> "No FDT changes made" I said doesn't apply here. My bad!
+> Thanks for clarifying. I also noticed this waring during my previous
+> review and testing.
 > 
-> On 8/28/2026 1:13 AM, Chao Liu wrote:
-> > On Thu, Aug 27, 2026 at 07:26:01PM +0800, Daniel Henrique Barboza wrote:
-> > > Yet another FDT that we want to move to a helper to avoid copy/pasting
-> > > code to other boards that will use a mtimer.  In particular the future
-> > > 'riscv-server-ref' board.
-> > > 
-> > > No FDT changes made.
-> > > 
-> > > Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-> > > Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
-> > > ---
-> > >   hw/riscv/fdt-common.c         |  96 ++++++++++++++++++++++++++++++++
-> > >   hw/riscv/virt.c               | 101 ++++------------------------------
-> > >   include/hw/riscv/fdt-common.h |  11 ++++
-> > >   3 files changed, 119 insertions(+), 89 deletions(-)
-> > > 
-> > > diff --git a/hw/riscv/fdt-common.c b/hw/riscv/fdt-common.c
-> > > index d815c5adff..76a783709d 100644
-> > > --- a/hw/riscv/fdt-common.c
-> > > +++ b/hw/riscv/fdt-common.c
-> > > @@ -16,6 +16,7 @@
-> > >   #include "target/riscv/cpu_bits.h"
-> > >   #include "hw/riscv/riscv-iommu-bits.h"
-> > >   #include "hw/riscv/iommu.h"
-> > > +#include "hw/intc/riscv_aclint.h"
-> > >   #include "hw/intc/riscv_imsic.h"
-> > >   #include "hw/pci/pci.h"
-> > >   #include "hw/pci/pcie_host.h"
-> > > @@ -702,3 +703,98 @@ void riscv_create_fdt_socket_aplic(void *fdt, APLICFdtProps *props,
-> > >       aplic_phandles[props->socket] = aplic_s_phandle;
-> > >   }
-> > > +
-> > > +void riscv_create_fdt_socket_aclint(void *fdt, ACLINTFdtProps *props,
-> > > +                                    uint32_t *intc_phandles)
-> > > +{
-> > > +    uint32_t aclint_cells_size = props->num_harts * sizeof(uint32_t) * 2;
-> > > +    g_autofree uint32_t *aclint_mswi_cells = NULL;
-> > > +    g_autofree uint32_t *aclint_sswi_cells = NULL;
-> > > +    g_autofree uint32_t *aclint_mtimer_cells = NULL;
-> > > +    hwaddr addr, size;
-> > > +    char *name;
-> > > +    int cpu;
-> > > +
-> > > +    aclint_mswi_cells = g_new0(uint32_t, props->num_harts * 2);
-> > > +    aclint_mtimer_cells = g_new0(uint32_t, props->num_harts * 2);
-> > > +    aclint_sswi_cells = g_new0(uint32_t, props->num_harts * 2);
-> > > +
-> > > +    for (cpu = 0; cpu < props->num_harts; cpu++) {
-> > > +        aclint_mswi_cells[cpu * 2 + 0] = cpu_to_be32(intc_phandles[cpu]);
-> > > +        aclint_mswi_cells[cpu * 2 + 1] = cpu_to_be32(IRQ_M_SOFT);
-> > > +        aclint_mtimer_cells[cpu * 2 + 0] = cpu_to_be32(intc_phandles[cpu]);
-> > > +        aclint_mtimer_cells[cpu * 2 + 1] = cpu_to_be32(IRQ_M_TIMER);
-> > > +        aclint_sswi_cells[cpu * 2 + 0] = cpu_to_be32(intc_phandles[cpu]);
-> > > +        aclint_sswi_cells[cpu * 2 + 1] = cpu_to_be32(IRQ_S_SOFT);
-> > > +    }
-> > > +
-> > > +    if (props->aia_type != AIA_TYPE_APLIC_IMSIC) {
-> > > +        addr = props->clint->base + (props->clint->size * props->socket);
-> > > +        name = g_strdup_printf("/soc/mswi@%"HWADDR_PRIx, addr);
-> > > +
-> > > +        qemu_fdt_add_subnode(fdt, name);
-> > > +        qemu_fdt_setprop_string(fdt, name, "compatible", "riscv,aclint-mswi");
-> > > +        qemu_fdt_setprop_sized_cells(fdt, name, "reg",
-> > > +                                     2, addr, 2, RISCV_ACLINT_SWI_SIZE);
-> > > +        qemu_fdt_setprop(fdt, name, "interrupts-extended",
-> > > +                         aclint_mswi_cells, aclint_cells_size);
-> > > +        qemu_fdt_setprop(fdt, name, "interrupt-controller", NULL, 0);
-> > > +        qemu_fdt_setprop_cell(fdt, name, "#interrupt-cells", 0);
-> > > +
-> > > +        if (props->numa_enabled) {
-> > > +            qemu_fdt_setprop_cell(fdt, name, "numa-node-id", props->socket);
-> > > +        }
-> > > +
-> > > +        g_free(name);
-> > > +    }
-> > > +
-> > > +    if (props->aia_type == AIA_TYPE_APLIC_IMSIC) {
-> > > +        addr = props->clint->base +
-> > > +               (RISCV_ACLINT_DEFAULT_MTIMER_SIZE * props->socket);
-> > > +        size = RISCV_ACLINT_DEFAULT_MTIMER_SIZE;
-> > > +    } else {
-> > > +        addr = props->clint->base + RISCV_ACLINT_SWI_SIZE +
-> > > +               (props->clint->size * props->socket);
-> > > +        size = props->clint->size - RISCV_ACLINT_SWI_SIZE;
-> > > +    }
-> > > +
-> > > +    name = g_strdup_printf("/soc/mtimer@%"HWADDR_PRIx, addr);
-> > > +    qemu_fdt_add_subnode(fdt, name);
-> > > +    qemu_fdt_setprop_string(fdt, name, "compatible",
-> > > +                            "riscv,aclint-mtimer");
-> > > +    qemu_fdt_setprop_sized_cells(fdt, name, "reg",
-> > > +        2, addr,
-> > Should be:
-> > 	   2, addr + RISCV_ACLINT_DEFAULT_MTIME,
-> > 
-> > I found an MTIMER FDT issue in the virt machine FDT.
-> > 
-> > Command:
-> > 
-> > ```
-> >    timeout 30s ./build/qemu-system-riscv64 \
-> >      -machine virt,aia=aplic-imsic,aia-guests=5,aclint=on,dumpdtb=/tmp/virt.dtb \
-> >      -smp 2 -display none -nodefaults
-> > 
-> >    dtc -I dtb -O dts /tmp/virt.dtb | grep -A4 mtimer@
-> > ```
-> > 
-> > The generated FDT contains:
-> > 
-> >                  mtimer@2000000 {
-> >                          interrupts-extended = <0x04 0x07 0x02 0x07>;
-> >                          reg = <0x00 0x2000000 0x00 0x08 0x00 0x2000000 0x00 0x7ff8>;
-> >                          compatible = "riscv,aclint-mtimer";
-> >                  };
-> > 
-> > without this patches:
-> > 
-> >                    mtimer@2000000 {
-> >                            interrupts-extended = <0x04 0x07 0x02 0x07>;
-> >                            reg = <0x00 0x2007ff8 0x00 0x08 0x00 0x2000000 0x00 0x7ff8>;
-> >                            compatible = "riscv,aclint-mtimer";
-> >                    };
-> > 
-> > The first address should be 0x20007ff8.
+>>
+>> If you use 'dtc' in the current 'virt' DT you'll get warnings:
+>>
+>> dtc -I dtb -O dts virt.dtb > virt.dts
+>>
+>> <stdout>: Warning (simple_bus_reg): /soc/mtimer@2000000: simple-bus unit address format error, expected "2007ff8"
+>> <stdout>: Warning (simple_bus_reg): /soc/mtimer@2008000: simple-bus unit address format error, expected "200fff8"
+> Yes, the warning is valid, and I can reproduce it as well.
 > 
-> That was intentional and I forgot to document it in the commit msg. The
-> "No FDT changes made" I said doesn't apply here. My bad!
-Thanks for clarifying. I also noticed this waring during my previous
-review and testing.
+>>
+>>
+>> This happens because the unit address in the node name doesn't match the
+>> first address in 'reg'.  For mtimer@2000000, "reg" must be reg = <0x00 0x2000000 (...)>.
+>> For mtimer@2008000, reg = <0x00 2008000 (...)> and so on.
+> I agree that the address in the node name should match the first address
+> in `reg`, as described by the Devicetree Spec [1].
+> 
+> However, I think the value that needs to change is the node name, not
+> the first address in `reg`.
+> 
+> See ACLINT spec, an MITER device has two separate base addr: one for MTIME
+> and another for the MTIMECMP registers [2].
+> 
+> In the current QEMU implement, `addr` is the MTIMECMP base address, while
+> the MTIME register is located at:
+> 
+> 	addr + RISCV_ACLINT_DEFAULT_METIME
+> 
+> For this example:
+> 
+> 	MTIMECMP base = 0x2000000
+> 	MITIME   base = 0x2007ff8
+> 
+> So the existing `reg` property correctly describes the two register
+> regions:
+> 
+> 	reg = <0x00 0x2007ff8 0x00 0x08
+> 	       0x00 0x2000000 0x00 0x7ff8>
+> 
+>>
+>>
+>> Now, does this change break aclint in 'virt'?  Because in that case we'll
+>> just keep the "dtc" warning and live with it.  Aside from the existing tests
+>> we have in QEMU I didn't do a deep dive in aclint.
+> Yes, I think using `addr` here would make the ACLINT description
+> incorrect. `addr` is the MTIMECMP base address, while MTIME is located
+> at `addr + RISCV_ACLINT_DEFAULT_MTIME`.
+> 
+> Please keep the first `reg` address as it was:
+> 
+>        qemu_fdt_setprop_sized_cells(fdt, name, "reg",
+> -          2, addr,
+> +          2, addr + RISCV_ACLINT_DEFAULT_MTIME,
+>             2, size - RISCV_ACLINT_DEFAULT_MTIME,
+>             2, addr + RISCV_ACLINT_DEFAULT_MTIMECMP,
+>             2, RISCV_ACLINT_DEFAULT_MTIME);
+> 
+> Since this patch is mainly a code-duplication cleanup, I suggest
+> leaving the generated FDT unchanged here. The unit-address fix can be
+> sent as a separate follow-up patch:
+> 
+> - name = g_strdup_printf("/soc/mtimer@%" HWADDR_PRIx, addr);
+> + name = g_strdup_printf("/soc/mtimer@%" HWADDR_PRIx,
+> +                        addr + RISCV_ACLINT_DEFAULT_MTIME);
+
+Oh, I think I get it.  The correct fix is changing the nodename to use
+addr + RISCV_ACLINT_DEFAULT_MTIME.
+
+
+I'll do as you said in v5. Thanks for clarifying,
+
+Daniel
 
 > 
-> If you use 'dtc' in the current 'virt' DT you'll get warnings:
+> --
 > 
-> dtc -I dtb -O dts virt.dtb > virt.dts
+> LINK:
 > 
-> <stdout>: Warning (simple_bus_reg): /soc/mtimer@2000000: simple-bus unit address format error, expected "2007ff8"
-> <stdout>: Warning (simple_bus_reg): /soc/mtimer@2008000: simple-bus unit address format error, expected "200fff8"
-Yes, the warning is valid, and I can reproduce it as well.
-
+> [1] Devicetree Specification, Section 2.2.1, "Node Names":
+>      https://devicetree-specification.readthedocs.io/en/stable/devicetree-basics.html#node-names
 > 
-> 
-> This happens because the unit address in the node name doesn't match the
-> first address in 'reg'.  For mtimer@2000000, "reg" must be reg = <0x00 0x2000000 (...)>.
-> For mtimer@2008000, reg = <0x00 2008000 (...)> and so on.
-I agree that the address in the node name should match the first address
-in `reg`, as described by the Devicetree Spec [1].
-
-However, I think the value that needs to change is the node name, not
-the first address in `reg`.
-
-See ACLINT spec, an MITER device has two separate base addr: one for MTIME
-and another for the MTIMECMP registers [2].
-
-In the current QEMU implement, `addr` is the MTIMECMP base address, while
-the MTIME register is located at:
-
-	addr + RISCV_ACLINT_DEFAULT_METIME
-
-For this example:
-
-	MTIMECMP base = 0x2000000
-	MITIME   base = 0x2007ff8
-
-So the existing `reg` property correctly describes the two register
-regions:
-
-	reg = <0x00 0x2007ff8 0x00 0x08
-	       0x00 0x2000000 0x00 0x7ff8>
-
-> 
-> 
-> Now, does this change break aclint in 'virt'?  Because in that case we'll
-> just keep the "dtc" warning and live with it.  Aside from the existing tests
-> we have in QEMU I didn't do a deep dive in aclint.
-Yes, I think using `addr` here would make the ACLINT description
-incorrect. `addr` is the MTIMECMP base address, while MTIME is located
-at `addr + RISCV_ACLINT_DEFAULT_MTIME`.
-
-Please keep the first `reg` address as it was:
-
-      qemu_fdt_setprop_sized_cells(fdt, name, "reg",
--          2, addr,
-+          2, addr + RISCV_ACLINT_DEFAULT_MTIME,
-           2, size - RISCV_ACLINT_DEFAULT_MTIME,
-           2, addr + RISCV_ACLINT_DEFAULT_MTIMECMP,
-           2, RISCV_ACLINT_DEFAULT_MTIME);
-
-Since this patch is mainly a code-duplication cleanup, I suggest
-leaving the generated FDT unchanged here. The unit-address fix can be
-sent as a separate follow-up patch:
-
-- name = g_strdup_printf("/soc/mtimer@%" HWADDR_PRIx, addr);
-+ name = g_strdup_printf("/soc/mtimer@%" HWADDR_PRIx,
-+                        addr + RISCV_ACLINT_DEFAULT_MTIME);
-
---
-
-LINK:
-
-[1] Devicetree Specification, Section 2.2.1, "Node Names":
-    https://devicetree-specification.readthedocs.io/en/stable/devicetree-basics.html#node-names
-
-[2] RISC-V ACLINT Specification, "Machine-level Timer Device (MTIMER)",
-    Section "Register Map":
-    https://github.com/riscvarchive/riscv-aclint/blob/main/riscv-aclint.adoc
-
-
-Thanks,
-Chao
+> [2] RISC-V ACLINT Specification, "Machine-level Timer Device (MTIMER)",
+>      Section "Register Map":
+>      https://github.com/riscvarchive/riscv-aclint/blob/main/riscv-aclint.adoc
 > 
 > 
 > Thanks,
-> Daniel
-> 
-> > 
-> > > +        2, size - RISCV_ACLINT_DEFAULT_MTIME,
-> > > +        2, addr + RISCV_ACLINT_DEFAULT_MTIMECMP,
-> > > +        2, RISCV_ACLINT_DEFAULT_MTIME);
-> > 
-> > [...]
-> > 
-> > > +    qemu_fdt_setprop(fdt, name, "interrupts-extended",
-> > > -    qemu_fdt_setprop_sized_cells(ms->fdt, name, "reg",
-> > > -        2, addr + RISCV_ACLINT_DEFAULT_MTIME,
-> > I think this is the original code that was moved here.
-> > 
-> > Thanks,
-> > Chao
-> > > -        2, size - RISCV_ACLINT_DEFAULT_MTIME,
-> > > -        2, addr + RISCV_ACLINT_DEFAULT_MTIMECMP,
-> > > -        2, RISCV_ACLINT_DEFAULT_MTIME);
-> > 
-> 
+> Chao
+>>
+>>
+>> Thanks,
+>> Daniel
+>>
+>>>
+>>>> +        2, size - RISCV_ACLINT_DEFAULT_MTIME,
+>>>> +        2, addr + RISCV_ACLINT_DEFAULT_MTIMECMP,
+>>>> +        2, RISCV_ACLINT_DEFAULT_MTIME);
+>>>
+>>> [...]
+>>>
+>>>> +    qemu_fdt_setprop(fdt, name, "interrupts-extended",
+>>>> -    qemu_fdt_setprop_sized_cells(ms->fdt, name, "reg",
+>>>> -        2, addr + RISCV_ACLINT_DEFAULT_MTIME,
+>>> I think this is the original code that was moved here.
+>>>
+>>> Thanks,
+>>> Chao
+>>>> -        2, size - RISCV_ACLINT_DEFAULT_MTIME,
+>>>> -        2, addr + RISCV_ACLINT_DEFAULT_MTIMECMP,
+>>>> -        2, RISCV_ACLINT_DEFAULT_MTIME);
+>>>
+>>
+
 
