@@ -4,146 +4,150 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB314C61DBD
-	for <qemu-riscv@archiver.kernel.org>; Fri, 28 Aug 2026 15:41:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80B1EC61DBD
+	for <qemu-riscv@archiver.kernel.org>; Fri, 28 Aug 2026 17:01:13 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wzyhH-0005uU-1o; Fri, 28 Aug 2026 11:40:51 -0400
+	id 1wzzwv-0007uH-Qk; Fri, 28 Aug 2026 13:01:06 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wzyhF-0005u1-JD
- for qemu-riscv@nongnu.org; Fri, 28 Aug 2026 11:40:49 -0400
-Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
+ (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
+ id 1wzzwq-0007u0-70
+ for qemu-riscv@nongnu.org; Fri, 28 Aug 2026 13:01:01 -0400
+Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wzyhD-000258-GS
- for qemu-riscv@nongnu.org; Fri, 28 Aug 2026 11:40:49 -0400
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+ (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
+ id 1wzzwo-0002Ov-EZ
+ for qemu-riscv@nongnu.org; Fri, 28 Aug 2026 13:00:59 -0400
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 67SDkf583205338
- for <qemu-riscv@nongnu.org>; Fri, 28 Aug 2026 15:40:45 GMT
+ 67SGKAsK2969460
+ for <qemu-riscv@nongnu.org>; Fri, 28 Aug 2026 17:00:56 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- Y7IkztzI0Yd9AnwaWt8p15ACchUCpTg+OpsoiXY8pNA=; b=G5frsTP4Wx+bl3sY
- BCUTYXUHdch+Kr/EiGfWKHCkyZme9eFkXz48RLj9mZCJPHo5GZD06gvOgECZqEjA
- JRUWPukX699kKO5VLKj4TgkFjX4gBcXPsdsRGhmC6j2hPrWvgcyxeQJ+3rQ8QDh+
- AphI/kdM2gGGv7WQAQ8V0J7GIFZBCqxC+QiZ3xmOMP1CCnx+q/z219cVC4Z4FQfo
- nfjvjuXXcIHrSAXcP7kVwvW6QWaYKk4Bc17Dc9nurr/76rCjM1LOM1HRMnO0xGv6
- gJF0QBI1tYwedVPu3CQh7QJ994nKrzk4+XHlB/dVPstI+SYg4Zx+IFyjUHYGZaED
- zH9Caw==
-Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com
- [209.85.222.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gb7eh1ckm-1
+ TL/BG/MYwltrNZlgDX0CFVkaGxm9u+tfoFMlN0nioHM=; b=Eh6CP/aVGaiVVsxG
+ naagbh1dGUs70lvjDkg/hf+kdw/eezvalMkSfNkdT7y8ZxmM9fGFgaXEWq8o0arB
+ kZFXjqDMWdf4Ibhk+9XN+BhSbPFkmRtZbdQsoBbPvyurFm6xT2XDxhBYx0JwiukB
+ cpgisnL5m3+Uvtnvlu7bSux11pggYMNo1W8TTBU0azo2Nxx0lLewjpKjUuC60nzt
+ eK/grjvBbyw5I2ZzawvlkG04/hqLURO+o4EM5ZFGt/NbGNGFwthLin1nidrUt2r/
+ cJGFm7Kl+YShEOHOW9RMZQA+SGPghFtr5hwBqMJu3YADOk2VupwxtKlVPxDrn0PX
+ 898rUg==
+Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com
+ [209.85.160.197])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gb42raqyn-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Fri, 28 Aug 2026 15:40:45 +0000 (GMT)
-Received: by mail-qk1-f197.google.com with SMTP id
- af79cd13be357-930a098ea19so121205585a.1
- for <qemu-riscv@nongnu.org>; Fri, 28 Aug 2026 08:40:45 -0700 (PDT)
+ for <qemu-riscv@nongnu.org>; Fri, 28 Aug 2026 17:00:56 +0000 (GMT)
+Received: by mail-qt1-f197.google.com with SMTP id
+ d75a77b69052e-52f64c48bf2so25199371cf.0
+ for <qemu-riscv@nongnu.org>; Fri, 28 Aug 2026 10:00:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1787931644; x=1788536444; darn=nongnu.org;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
+ d=oss.qualcomm.com; s=google; t=1787936456; x=1788541256; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:from:references
+ :cc:to:content-language:subject:user-agent:mime-version:date
  :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=Y7IkztzI0Yd9AnwaWt8p15ACchUCpTg+OpsoiXY8pNA=;
- b=UA3J+fWhLUtA8Igy0m1lsmPw686b9hNuU2DGca8iC2BdikluSF5p5Wn8QIAUW+0EZr
- QjI7hlIAvihaZvdPlG1dm+uwIuLm464bbiH8GROab6Yuwzt9+7aNSKey+1G373XIPEE7
- xOFs5b0qWjMPqO5DsFcd49olV6dwQM7yWKbKU2PVX22OBKwPTIo7F+Qg3U/6gYP33UsP
- BBPPTp1f445n/2/JBZOHUAY7F6fM3622UoZEyAEXPO5fp7p+iEpyVpq9IlDENcWZk3Yy
- lVA3DPgSUaQyYepjR/WNgUpJ+89sDgv3aOZegyFUbioPjl7pcSOW9s06/o33xxh2NylS
- zEOg==
+ bh=TL/BG/MYwltrNZlgDX0CFVkaGxm9u+tfoFMlN0nioHM=;
+ b=C2VC9BpnijOVgn2gDtFtbMSvW8mGHJXaDkwWjofrs6jHnk0DgC8LBtcsE2oNPAg/pY
+ 1nAgXkmBhD83npZNNZ6JaT/tZFQ1x+dBJmRwb9wPc200Pmu6DHE/MtzJcgIHkNp2b+OQ
+ i+WH8q250vcNDw+872IF09E0DtTBxEwICNNBHjkyh4dR3N46MCT+JHjnIBvbJ9zmB2pa
+ b0+FkWlInxM262cPwSQdh4kyf9lpszROiQ54kMBERF0lQtd4UmPt4aPpXt920kx1SNcW
+ QqJwfRUnP7Zp4DctP90gvHp4B0cl28ChIVuHJKlarrSOoo+JJX6NC5A4qYzU8gTntr4p
+ iHJQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787931644; x=1788536444;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
+ d=1e100.net; s=20251104; t=1787936456; x=1788541256;
+ h=content-transfer-encoding:content-type:in-reply-to:from:references
+ :cc:to:content-language:subject:user-agent:mime-version:date
  :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=Y7IkztzI0Yd9AnwaWt8p15ACchUCpTg+OpsoiXY8pNA=;
- b=Cfj7+LoPVBu2cSdEVlgK0vONaJb32sXINVm4+XOBiSceRbgjXFrng2dkePmonSiuml
- YtwIcWan3LY560tU13J4isPzFQzwsQN7qT/TngJThLYjGfZAM05rBBEHteAh3XWgl+p/
- ygfPFw8o0N4wNLWN5xSkoE64dLIW5Bgk+fvkVgFebElWFQDGu8Pgda6dW8jw9TSyZMHS
- +uPyNGyZBygyNviLy77kn85Pmyb8gdgDvYk3tVg9rsSs6FwbzJ/017z9zs2cdF/pq64D
- muO5WfAPUDlJP4jAFPtBU40xxzIeqNSDwlPUTZuUayfeJvQehaAuDfuG3giM6WaIXkuf
- hcSw==
+ bh=TL/BG/MYwltrNZlgDX0CFVkaGxm9u+tfoFMlN0nioHM=;
+ b=GAD+UVgTPRLON/+4t020Yo59mexRqjSGQJ8LBjAxINmEAj54pt8pinfC+Tx5oHikFR
+ Ug3oTHVQnIWlZhz0BjLb9rej3/KFwNejagXtHIuo3XLre56rleI31bdvfcvEGv5RW+QV
+ BWJFUlnLFlG+vvFq7PX5S3SWyiq1GGTioQ0CxblIcA6bwZMwQtMpa5hQnT92nq+2pKxW
+ QqvmfqFiBF9yfATiBpE23JwT1cQiar+43pcJAv/94n4UsHMbn0U5Vd1c0rXMeUhbVZ89
+ hsZTw0hQqEXXfk4XJ7FaVpzLO3hGq/1lOW/Pd8qJsL+oZhMKDtAw5rR2L2ZyFiwq9vJl
+ 76FQ==
 X-Forwarded-Encrypted: i=1;
- AHgh+RpTAOVknL9FvuaVq7PZLw/Mo8BGN4R72ksszAMlC45dyEH3DIfV3W19NF1yghteElqSZhAieF2SbmFA@nongnu.org
-X-Gm-Message-State: AFuF++nSuRyt3PL8VDfdMsI0LYMhHlMV0Y2pRu//eIlpGFL7VwDL4Vjb
- sRwXHFCIDyJ+s3oWJti/POdmrJVtbGGVKCqDtche2U9bzX0KowdjhKLHk7ALUqPwocfUitoEP6y
- O/JcRfN7hrJex+V/pT1Vf+vsk2ZWIUlUaf3KWA7hqNxpnBSl0axGbQJYDag==
-X-Gm-Gg: AR+sD119h6f0rGwSG4Y582zayEmiLaMJRBb7husnVauL7qMpNZ/0IWr1MLgxC+SX36M
- oDmDpLiAM4d6oNaF8qZzd+Y2OzV72Ee5eA/WRvfxbeXwmNZBfGU/9c3iLahVJGhwRGb7ltgZcXe
- oWJ/0w4BvUKsc+mXZa5PAlPkdA/qEMRu83gQ4VYugqmgV12lcwm6fwNf2q0XAeFnBzp692Cpkr2
- cFEdorqI+ub07HX/qzfft79DYTJv4hat+wgmYLzd25NB0bSHcjEwqqbInt8mvACoYo9RCZ/1YI+
- rZ+dTsQStJ+GfBJYZQzgPSmk9wd4kf6B6MV6TCseT0I4j9LXGyxEqBIX249jVgev3dTb0mNK9Ax
- NZEeNZwJEHQLgmL5EwjAV7NLxMhvof+0kAeVv
-X-Received: by 2002:a05:620a:8003:b0:936:cd74:4f45 with SMTP id
- af79cd13be357-9391391b3f0mr842014285a.37.1787931643766; 
- Fri, 28 Aug 2026 08:40:43 -0700 (PDT)
-X-Received: by 2002:a05:620a:8003:b0:936:cd74:4f45 with SMTP id
- af79cd13be357-9391391b3f0mr842002385a.37.1787931642931; 
- Fri, 28 Aug 2026 08:40:42 -0700 (PDT)
-Received: from [192.168.68.100] ([189.38.141.232])
+ AHgh+RpRQNBr8e05+NvK2/FVMBen6Hpwwodrj0ov8t9AqKPkKtIY/Ec9hjvy6Pj61UsH7RcssVk8OR4vNWNc@nongnu.org
+X-Gm-Message-State: AFuF++kwZDzlND9MVQ1qRKdYKb9XaAyjR+dpnJD6yeB2UhsSC5pjfNsh
+ aSnau32UmyPj7vsbDzxbPXEwpWqpG19d7omKt0zvfBkgP/kGQwK86vMFgj04TTDCZidFch/V0Ov
+ GNiiflzODDDz/J+k41pQVEavBk1Wk9umcLRCC39wglcwbfs9im+pMPbuOXg==
+X-Gm-Gg: AR+sD12Olo8Pl/sRBgpDpbOYbeHelpfXw0Y7SjRCauiti0V7/vgVXxbHq14iiw05h9A
+ e3uF9GtWYPrEp+jFpGQKh3Z0CT5jhOwykmW3aRnwOxHIcayA8fvyPLT1qPrN2VCoEy62Xz+1mYj
+ YmG+iMXp8emzZWU4Fm2Hyo+w3/3bMC+2C0vVu1Iz8y+LGhF63DbQS35vm3YG2lVtDn2zXPWf1uN
+ 1IAR30ZuWQd36R6s90Q5NHW6f0gHVzjRLt/I0i7HJCRf7q20EmLAfnXFtF4UaS9cdXEE3M2cT9v
+ axp2IXUf+y5K1SsSYqfbktyjE5x0LrtSoqWLg6MJYufj49u2Rd57+RCaNb0gKSlqLWsfSqQejk3
+ B/prlfSC2ci14CTFYeZpQ+6x8nRPn+sA8kA==
+X-Received: by 2002:a05:622a:e14f:10b0:52f:e60e:70ca with SMTP id
+ d75a77b69052e-52fe60e75b0mr34039581cf.29.1787936455811; 
+ Fri, 28 Aug 2026 10:00:55 -0700 (PDT)
+X-Received: by 2002:a05:622a:e14f:10b0:52f:e60e:70ca with SMTP id
+ d75a77b69052e-52fe60e75b0mr34038441cf.29.1787936455254; 
+ Fri, 28 Aug 2026 10:00:55 -0700 (PDT)
+Received: from [192.168.69.226] (pmd666.hd.free.fr. [88.187.86.199])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-939173f2758sm163089285a.37.2026.08.28.08.40.40
+ ffacd0b85a97d-482fbab3f3asm5264579f8f.3.2026.08.28.10.00.53
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 28 Aug 2026 08:40:42 -0700 (PDT)
-Message-ID: <8274e2f5-38a5-4aee-842d-c1408a166f51@oss.qualcomm.com>
-Date: Fri, 28 Aug 2026 12:40:38 -0300
+ Fri, 28 Aug 2026 10:00:54 -0700 (PDT)
+Message-ID: <ebe27967-4926-4c03-b729-cb3987022b9f@oss.qualcomm.com>
+Date: Fri, 28 Aug 2026 19:00:53 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 08/14] hw/riscv/fdt-common, virt.c: add
- riscv_create_fdt_socket_aclint()
-To: Chao Liu <chao.liu@processmission.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com,
- =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
- Palmer Dabbelt <palmer@dabbelt.com>
-References: <20260827222608.329788-1-daniel.barboza@oss.qualcomm.com>
- <20260827222608.329788-9-daniel.barboza@oss.qualcomm.com>
- <apEGhbfBmPgZrT8r@ChaodeMacBook-Pro.local>
-From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Subject: Re: [PATCH 05/16] hw/intc/sifive_plic: Take a MemoryRegion for the
+ created device
 Content-Language: en-US
-In-Reply-To: <apEGhbfBmPgZrT8r@ChaodeMacBook-Pro.local>
+To: Joel Stanley <joel@jms.id.au>, Alistair Francis <alistair.francis@wdc.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Cc: Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Chao Liu <chao.liu@processmission.com>,
+ Nicholas Piggin <npiggin@gmail.com>,
+ Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>,
+ Michael Ellerman <mpe@kernel.org>,
+ Portia Stephens <portias@oss.tenstorrent.com>,
+ =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>,
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+References: <20260826220528.54516-1-joel@jms.id.au>
+ <20260826220528.54516-6-joel@jms.id.au>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
+In-Reply-To: <20260826220528.54516-6-joel@jms.id.au>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: qt110SFcvV6SBd-CooJDLX5p4q6_d8xg
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI4MDEzNiBTYWx0ZWRfX00yhBPt+HI3t
- tqL0fE+zDFhJizOEH79vSZ9KO4l3JoG2ZzZTB6F1Q26nL/iMBF+IJgliLS9SnLQ2TZxDL0Ep2Nm
- wzUDrqoU32LALjBUNpXKy4m7DOY0KYVZdS4FdzySLx7lKAfZgN2XG2vgdlzJSES+/o4S6GjnugZ
- +qSK5RbguMdTXyOyakXiF78YO23XzxiOD/fqht86KT4G1yCA53Wa16lPMuMP8s4aLUxFk0SOkBD
- Hq10Vmtu9CFxXLGMVjyOqFWInDnVSj6yeA7gmHWQ6CFaigZzp2GhZtNH+dSzPF7RfKOmPB56zL9
- vyzUJFIfxHSdCwhCRUmD1dy0xhQ2p9R7ohn39RHADJ+fPH8YDjGbPubjFPqt2Sm2Ya/4laPfLOh
- 2Va/ff2N6ve+XPYk1SktnyBoIzFpphLRLFKLKW6d2X3K8yd6AwEXA362ZNoqWs33nvNM4Yf+TgV
- adFJFjFlZoshhk0xYgA==
-X-Proofpoint-ORIG-GUID: qt110SFcvV6SBd-CooJDLX5p4q6_d8xg
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODI4MDEzNiBTYWx0ZWRfX7O9Sn/PDm4I6
- Z/mvTcSHSsfoNX5HEMul9DigiSgvvSGwLATlhnIRHUffmNG7ABYeW3BuCFNANJqSnEY1ufaiCe5
- ilYkFaorWF4DU2NOykmQ9HaQlc8Vook=
-X-Authority-Analysis: v=2.4 cv=RoP16imK c=1 sm=1 tr=0 ts=6a91abfd cx=c_pps
- a=50t2pK5VMbmlHzFWWp8p/g==:117 a=MCIxunHWmQOg/5OnbzXZaw==:17
- a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
- a=EUspDBNiAAAA:8 a=9N5s0NaVz43VL8GnKO4A:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=IoWCM6iH3mJn3m4BftBB:22
+X-Proofpoint-GUID: Byl-UIMNnNx2yCXpcqq15bxCoQmqkjvq
+X-Proofpoint-ORIG-GUID: Byl-UIMNnNx2yCXpcqq15bxCoQmqkjvq
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI4MDE0NyBTYWx0ZWRfX9UgRhu5NzFtb
+ UMvaR6W62bOZA61h6w6+uPpz7ZBKblJ6Ou1m1EQL6ynA6ZSLV98LiSh1p3PEDCr+qG337PHE7gr
+ /oynIYeu5e2cqCDlD7S2Uohmnfpnqcadrtcg4+J5PCXUGO9yC4ZRxMkuoYSt5efla+hMTYXtoAR
+ aA8S8FtB+DKoSfjr9mqg4DrXmEwwuYRjpE11nQQ92tbuCfQK7ktaIJV5wlWLmK/0S/y0aVIpeuS
+ sOumkywdavwqNB76X8ZaVjUXDg0k1UKGTDGT9r/6xgX6LlliXvrWrbF364KBoGdLPd4pmpTmFF5
+ kMlAM//3Q51VgBLQbA/krjTiXV2a+C5RNLjs6hLk9WIJkhXR3JnZcIOKUNxG35K2YRiwZAa78mG
+ 55OsDzXbB7FbUSP5n8Qs9u9Y5NOpSRb+ZCgHH6175z0AMwUAoZdmkmAYW/pYcx/qn8DgMSIjJM1
+ b0pqzXl+q9fXZfNyQag==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODI4MDE0NyBTYWx0ZWRfXzpJN1ofqwK6O
+ w9OFXBmSoiqnngReM7qZztU9O65MOxEx9cUPFWOCCpyFg9CaEYjAQplIH+/dEA/PnMAsHSOu9K4
+ nhM8MDxrxDX7KPvl7AffI+KJEkF3mUc=
+X-Authority-Analysis: v=2.4 cv=Fpo1OWrq c=1 sm=1 tr=0 ts=6a91bec8 cx=c_pps
+ a=EVbN6Ke/fEF3bsl7X48z0g==:117 a=4s3hRJSeHn4rkQlkrse1kQ==:17
+ a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=M51BFTxLslgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
+ a=EUspDBNiAAAA:8 a=khLHThV_XYJXy2OzJpEA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=a_PwQJl-kcHnX1M80qC6:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-28_04,2026-08-27_02,2025-10-01_01
+ definitions=2026-08-28_05,2026-08-27_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 adultscore=0 phishscore=0 suspectscore=0 impostorscore=0
- malwarescore=0 spamscore=0 bulkscore=0 clxscore=1015 priorityscore=1501
+ clxscore=1015 spamscore=0 malwarescore=0 lowpriorityscore=0 phishscore=0
+ bulkscore=0 adultscore=0 suspectscore=0 priorityscore=1501 impostorscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608280136
-Received-SPF: pass client-ip=205.220.168.131;
- envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608280147
+Received-SPF: pass client-ip=205.220.180.131;
+ envelope-from=philmd@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
 X-Spam_score_int: -27
 X-Spam_score: -2.8
 X-Spam_bar: --
 X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -159,175 +163,28 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+On 27/8/26 00:05, Joel Stanley wrote:
+> sifive_plic_create() maps the device it creates into system_memory,
+> which prevents its use by SoCs that map devices into their own memory
+> container.
 
+Correct. We'll need more of these refactor cleanups.
+Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
 
-On 8/28/2026 1:13 AM, Chao Liu wrote:
-> On Thu, Aug 27, 2026 at 07:26:01PM +0800, Daniel Henrique Barboza wrote:
->> Yet another FDT that we want to move to a helper to avoid copy/pasting
->> code to other boards that will use a mtimer.  In particular the future
->> 'riscv-server-ref' board.
->>
->> No FDT changes made.
->>
->> Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
->> Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
->> ---
->>   hw/riscv/fdt-common.c         |  96 ++++++++++++++++++++++++++++++++
->>   hw/riscv/virt.c               | 101 ++++------------------------------
->>   include/hw/riscv/fdt-common.h |  11 ++++
->>   3 files changed, 119 insertions(+), 89 deletions(-)
->>
->> diff --git a/hw/riscv/fdt-common.c b/hw/riscv/fdt-common.c
->> index d815c5adff..76a783709d 100644
->> --- a/hw/riscv/fdt-common.c
->> +++ b/hw/riscv/fdt-common.c
->> @@ -16,6 +16,7 @@
->>   #include "target/riscv/cpu_bits.h"
->>   #include "hw/riscv/riscv-iommu-bits.h"
->>   #include "hw/riscv/iommu.h"
->> +#include "hw/intc/riscv_aclint.h"
->>   #include "hw/intc/riscv_imsic.h"
->>   #include "hw/pci/pci.h"
->>   #include "hw/pci/pcie_host.h"
->> @@ -702,3 +703,98 @@ void riscv_create_fdt_socket_aplic(void *fdt, APLICFdtProps *props,
->>   
->>       aplic_phandles[props->socket] = aplic_s_phandle;
->>   }
->> +
->> +void riscv_create_fdt_socket_aclint(void *fdt, ACLINTFdtProps *props,
->> +                                    uint32_t *intc_phandles)
->> +{
->> +    uint32_t aclint_cells_size = props->num_harts * sizeof(uint32_t) * 2;
->> +    g_autofree uint32_t *aclint_mswi_cells = NULL;
->> +    g_autofree uint32_t *aclint_sswi_cells = NULL;
->> +    g_autofree uint32_t *aclint_mtimer_cells = NULL;
->> +    hwaddr addr, size;
->> +    char *name;
->> +    int cpu;
->> +
->> +    aclint_mswi_cells = g_new0(uint32_t, props->num_harts * 2);
->> +    aclint_mtimer_cells = g_new0(uint32_t, props->num_harts * 2);
->> +    aclint_sswi_cells = g_new0(uint32_t, props->num_harts * 2);
->> +
->> +    for (cpu = 0; cpu < props->num_harts; cpu++) {
->> +        aclint_mswi_cells[cpu * 2 + 0] = cpu_to_be32(intc_phandles[cpu]);
->> +        aclint_mswi_cells[cpu * 2 + 1] = cpu_to_be32(IRQ_M_SOFT);
->> +        aclint_mtimer_cells[cpu * 2 + 0] = cpu_to_be32(intc_phandles[cpu]);
->> +        aclint_mtimer_cells[cpu * 2 + 1] = cpu_to_be32(IRQ_M_TIMER);
->> +        aclint_sswi_cells[cpu * 2 + 0] = cpu_to_be32(intc_phandles[cpu]);
->> +        aclint_sswi_cells[cpu * 2 + 1] = cpu_to_be32(IRQ_S_SOFT);
->> +    }
->> +
->> +    if (props->aia_type != AIA_TYPE_APLIC_IMSIC) {
->> +        addr = props->clint->base + (props->clint->size * props->socket);
->> +        name = g_strdup_printf("/soc/mswi@%"HWADDR_PRIx, addr);
->> +
->> +        qemu_fdt_add_subnode(fdt, name);
->> +        qemu_fdt_setprop_string(fdt, name, "compatible", "riscv,aclint-mswi");
->> +        qemu_fdt_setprop_sized_cells(fdt, name, "reg",
->> +                                     2, addr, 2, RISCV_ACLINT_SWI_SIZE);
->> +        qemu_fdt_setprop(fdt, name, "interrupts-extended",
->> +                         aclint_mswi_cells, aclint_cells_size);
->> +        qemu_fdt_setprop(fdt, name, "interrupt-controller", NULL, 0);
->> +        qemu_fdt_setprop_cell(fdt, name, "#interrupt-cells", 0);
->> +
->> +        if (props->numa_enabled) {
->> +            qemu_fdt_setprop_cell(fdt, name, "numa-node-id", props->socket);
->> +        }
->> +
->> +        g_free(name);
->> +    }
->> +
->> +    if (props->aia_type == AIA_TYPE_APLIC_IMSIC) {
->> +        addr = props->clint->base +
->> +               (RISCV_ACLINT_DEFAULT_MTIMER_SIZE * props->socket);
->> +        size = RISCV_ACLINT_DEFAULT_MTIMER_SIZE;
->> +    } else {
->> +        addr = props->clint->base + RISCV_ACLINT_SWI_SIZE +
->> +               (props->clint->size * props->socket);
->> +        size = props->clint->size - RISCV_ACLINT_SWI_SIZE;
->> +    }
->> +
->> +    name = g_strdup_printf("/soc/mtimer@%"HWADDR_PRIx, addr);
->> +    qemu_fdt_add_subnode(fdt, name);
->> +    qemu_fdt_setprop_string(fdt, name, "compatible",
->> +                            "riscv,aclint-mtimer");
->> +    qemu_fdt_setprop_sized_cells(fdt, name, "reg",
->> +        2, addr,
-> Should be:
-> 	   2, addr + RISCV_ACLINT_DEFAULT_MTIME,
+> Add a MemoryRegion parameter and map the device into it instead of
+> calling sysbus_mmio_map(). All callers pass system_memory, so there is
+> no change in behaviour.
 > 
-> I found an MTIMER FDT issue in the virt machine FDT.
-> 
-> Command:
-> 
-> ```
->    timeout 30s ./build/qemu-system-riscv64 \
->      -machine virt,aia=aplic-imsic,aia-guests=5,aclint=on,dumpdtb=/tmp/virt.dtb \
->      -smp 2 -display none -nodefaults
-> 
->    dtc -I dtb -O dts /tmp/virt.dtb | grep -A4 mtimer@
-> ```
-> 
-> The generated FDT contains:
-> 
->                  mtimer@2000000 {
->                          interrupts-extended = <0x04 0x07 0x02 0x07>;
->                          reg = <0x00 0x2000000 0x00 0x08 0x00 0x2000000 0x00 0x7ff8>;
->                          compatible = "riscv,aclint-mtimer";
->                  };
-> 
-> without this patches:
-> 
->                    mtimer@2000000 {
->                            interrupts-extended = <0x04 0x07 0x02 0x07>;
->                            reg = <0x00 0x2007ff8 0x00 0x08 0x00 0x2000000 0x00 0x7ff8>;
->                            compatible = "riscv,aclint-mtimer";
->                    };
-> 
-> The first address should be 0x20007ff8.
-
-That was intentional and I forgot to document it in the commit msg. The
-"No FDT changes made" I said doesn't apply here. My bad!
-
-If you use 'dtc' in the current 'virt' DT you'll get warnings:
-
-dtc -I dtb -O dts virt.dtb > virt.dts
-
-<stdout>: Warning (simple_bus_reg): /soc/mtimer@2000000: simple-bus unit address format error, expected "2007ff8"
-<stdout>: Warning (simple_bus_reg): /soc/mtimer@2008000: simple-bus unit address format error, expected "200fff8"
-
-
-This happens because the unit address in the node name doesn't match the
-first address in 'reg'.  For mtimer@2000000, "reg" must be reg = <0x00 0x2000000 (...)>.
-For mtimer@2008000, reg = <0x00 2008000 (...)> and so on.
-
-
-Now, does this change break aclint in 'virt'?  Because in that case we'll
-just keep the "dtc" warning and live with it.  Aside from the existing tests
-we have in QEMU I didn't do a deep dive in aclint.
-
-
-Thanks,
-Daniel
-
-> 
->> +        2, size - RISCV_ACLINT_DEFAULT_MTIME,
->> +        2, addr + RISCV_ACLINT_DEFAULT_MTIMECMP,
->> +        2, RISCV_ACLINT_DEFAULT_MTIME);
-> 
-> [...]
-> 
->> +    qemu_fdt_setprop(fdt, name, "interrupts-extended",
->> -    qemu_fdt_setprop_sized_cells(ms->fdt, name, "reg",
->> -        2, addr + RISCV_ACLINT_DEFAULT_MTIME,
-> I think this is the original code that was moved here.
-> 
-> Thanks,
-> Chao
->> -        2, size - RISCV_ACLINT_DEFAULT_MTIME,
->> -        2, addr + RISCV_ACLINT_DEFAULT_MTIMECMP,
->> -        2, RISCV_ACLINT_DEFAULT_MTIME);
-> 
+> Signed-off-by: Joel Stanley <joel@jms.id.au>
+> ---
+>   include/hw/intc/sifive_plic.h | 3 ++-
+>   hw/intc/sifive_plic.c         | 6 ++++--
+>   hw/riscv/k230.c               | 3 ++-
+>   hw/riscv/microchip_pfsoc.c    | 3 ++-
+>   hw/riscv/shakti_c.c           | 3 ++-
+>   hw/riscv/sifive_e.c           | 2 +-
+>   hw/riscv/sifive_u.c           | 3 ++-
+>   hw/riscv/virt.c               | 1 +
+>   8 files changed, 16 insertions(+), 8 deletions(-)
 
 
