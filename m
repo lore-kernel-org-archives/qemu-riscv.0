@@ -4,61 +4,146 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E6EDC61DCB
-	for <qemu-riscv@archiver.kernel.org>; Fri, 28 Aug 2026 15:15:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB314C61DBD
+	for <qemu-riscv@archiver.kernel.org>; Fri, 28 Aug 2026 15:41:22 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wzyHH-0006Ew-FF; Fri, 28 Aug 2026 11:13:59 -0400
+	id 1wzyhH-0005uU-1o; Fri, 28 Aug 2026 11:40:51 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <cp0613@linux.alibaba.com>)
- id 1wzyHE-0006CE-2d; Fri, 28 Aug 2026 11:13:56 -0400
-Received: from [115.124.30.131] (helo=out30-131.freemail.mail.aliyun.com)
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1wzyhF-0005u1-JD
+ for qemu-riscv@nongnu.org; Fri, 28 Aug 2026 11:40:49 -0400
+Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <cp0613@linux.alibaba.com>)
- id 1wzyHB-0002f3-7Z; Fri, 28 Aug 2026 11:13:55 -0400
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1wzyhD-000258-GS
+ for qemu-riscv@nongnu.org; Fri, 28 Aug 2026 11:40:49 -0400
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 67SDkf583205338
+ for <qemu-riscv@nongnu.org>; Fri, 28 Aug 2026 15:40:45 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ Y7IkztzI0Yd9AnwaWt8p15ACchUCpTg+OpsoiXY8pNA=; b=G5frsTP4Wx+bl3sY
+ BCUTYXUHdch+Kr/EiGfWKHCkyZme9eFkXz48RLj9mZCJPHo5GZD06gvOgECZqEjA
+ JRUWPukX699kKO5VLKj4TgkFjX4gBcXPsdsRGhmC6j2hPrWvgcyxeQJ+3rQ8QDh+
+ AphI/kdM2gGGv7WQAQ8V0J7GIFZBCqxC+QiZ3xmOMP1CCnx+q/z219cVC4Z4FQfo
+ nfjvjuXXcIHrSAXcP7kVwvW6QWaYKk4Bc17Dc9nurr/76rCjM1LOM1HRMnO0xGv6
+ gJF0QBI1tYwedVPu3CQh7QJ994nKrzk4+XHlB/dVPstI+SYg4Zx+IFyjUHYGZaED
+ zH9Caw==
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com
+ [209.85.222.197])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gb7eh1ckm-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Fri, 28 Aug 2026 15:40:45 +0000 (GMT)
+Received: by mail-qk1-f197.google.com with SMTP id
+ af79cd13be357-930a098ea19so121205585a.1
+ for <qemu-riscv@nongnu.org>; Fri, 28 Aug 2026 08:40:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linux.alibaba.com; s=default;
- t=1787930016; h=From:To:Subject:Date:Message-ID:MIME-Version;
- bh=ooUWlanYV7gNkQZNCh6ZXUk1lJgKVukrOSt2aaGbE7k=;
- b=c65ChS6niY/kKNbphyU/uUp3P+HEgBt+yq7rEXe01S5UparQ2ZHYd9/ggMxf/Ud26HcsNCbq3ZqBOfT8Q51ak0my+9duOOytNrKgUuEbuHT3x4Z3Tbl8kDoWhCFqrP4nzGYN8F+mhxbJP9Ds+NKTelLmmkjm2W9ll2INOx61dZk=
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R841e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033032089153;
- MF=cp0613@linux.alibaba.com; NM=1; PH=DS; RN=19; SR=0;
- TI=SMTPD_---0X9md4z4_1787930015; 
-Received: from DESKTOP-S9E58SO.localdomain(mailfrom:cp0613@linux.alibaba.com
- fp:SMTPD_---0X9md4z4_1787930015 cluster:ay36) by smtp.aliyun-inc.com;
- Fri, 28 Aug 2026 23:13:35 +0800
-From: Chen Pei <cp0613@linux.alibaba.com>
-To: palmer@dabbelt.com, alistair.francis@wdc.com, mst@redhat.com,
- imammedo@redhat.com, sunilvl@ventanamicro.com, jic23@kernel.org
-Cc: pbonzini@redhat.com, liwei1518@gmail.com, daniel.barboza@oss.qualcomm.com,
- zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
- anisinha@redhat.com, dave.jiang@intel.com, alison.schofield@intel.com,
- junjie.cao@intel.com, guoren@kernel.org, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org, linux-cxl@vger.kernel.org
-Subject: [PATCH v4 6/6] tests/qtest: Update RISC-V CXL ACPI golden master
- binaries
-Date: Fri, 28 Aug 2026 23:13:05 +0800
-Message-ID: <20260828151317.815-7-cp0613@linux.alibaba.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260828151317.815-1-cp0613@linux.alibaba.com>
-References: <20260828151317.815-1-cp0613@linux.alibaba.com>
+ d=oss.qualcomm.com; s=google; t=1787931644; x=1788536444; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=Y7IkztzI0Yd9AnwaWt8p15ACchUCpTg+OpsoiXY8pNA=;
+ b=UA3J+fWhLUtA8Igy0m1lsmPw686b9hNuU2DGca8iC2BdikluSF5p5Wn8QIAUW+0EZr
+ QjI7hlIAvihaZvdPlG1dm+uwIuLm464bbiH8GROab6Yuwzt9+7aNSKey+1G373XIPEE7
+ xOFs5b0qWjMPqO5DsFcd49olV6dwQM7yWKbKU2PVX22OBKwPTIo7F+Qg3U/6gYP33UsP
+ BBPPTp1f445n/2/JBZOHUAY7F6fM3622UoZEyAEXPO5fp7p+iEpyVpq9IlDENcWZk3Yy
+ lVA3DPgSUaQyYepjR/WNgUpJ+89sDgv3aOZegyFUbioPjl7pcSOW9s06/o33xxh2NylS
+ zEOg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1787931644; x=1788536444;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=Y7IkztzI0Yd9AnwaWt8p15ACchUCpTg+OpsoiXY8pNA=;
+ b=Cfj7+LoPVBu2cSdEVlgK0vONaJb32sXINVm4+XOBiSceRbgjXFrng2dkePmonSiuml
+ YtwIcWan3LY560tU13J4isPzFQzwsQN7qT/TngJThLYjGfZAM05rBBEHteAh3XWgl+p/
+ ygfPFw8o0N4wNLWN5xSkoE64dLIW5Bgk+fvkVgFebElWFQDGu8Pgda6dW8jw9TSyZMHS
+ +uPyNGyZBygyNviLy77kn85Pmyb8gdgDvYk3tVg9rsSs6FwbzJ/017z9zs2cdF/pq64D
+ muO5WfAPUDlJP4jAFPtBU40xxzIeqNSDwlPUTZuUayfeJvQehaAuDfuG3giM6WaIXkuf
+ hcSw==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RpTAOVknL9FvuaVq7PZLw/Mo8BGN4R72ksszAMlC45dyEH3DIfV3W19NF1yghteElqSZhAieF2SbmFA@nongnu.org
+X-Gm-Message-State: AFuF++nSuRyt3PL8VDfdMsI0LYMhHlMV0Y2pRu//eIlpGFL7VwDL4Vjb
+ sRwXHFCIDyJ+s3oWJti/POdmrJVtbGGVKCqDtche2U9bzX0KowdjhKLHk7ALUqPwocfUitoEP6y
+ O/JcRfN7hrJex+V/pT1Vf+vsk2ZWIUlUaf3KWA7hqNxpnBSl0axGbQJYDag==
+X-Gm-Gg: AR+sD119h6f0rGwSG4Y582zayEmiLaMJRBb7husnVauL7qMpNZ/0IWr1MLgxC+SX36M
+ oDmDpLiAM4d6oNaF8qZzd+Y2OzV72Ee5eA/WRvfxbeXwmNZBfGU/9c3iLahVJGhwRGb7ltgZcXe
+ oWJ/0w4BvUKsc+mXZa5PAlPkdA/qEMRu83gQ4VYugqmgV12lcwm6fwNf2q0XAeFnBzp692Cpkr2
+ cFEdorqI+ub07HX/qzfft79DYTJv4hat+wgmYLzd25NB0bSHcjEwqqbInt8mvACoYo9RCZ/1YI+
+ rZ+dTsQStJ+GfBJYZQzgPSmk9wd4kf6B6MV6TCseT0I4j9LXGyxEqBIX249jVgev3dTb0mNK9Ax
+ NZEeNZwJEHQLgmL5EwjAV7NLxMhvof+0kAeVv
+X-Received: by 2002:a05:620a:8003:b0:936:cd74:4f45 with SMTP id
+ af79cd13be357-9391391b3f0mr842014285a.37.1787931643766; 
+ Fri, 28 Aug 2026 08:40:43 -0700 (PDT)
+X-Received: by 2002:a05:620a:8003:b0:936:cd74:4f45 with SMTP id
+ af79cd13be357-9391391b3f0mr842002385a.37.1787931642931; 
+ Fri, 28 Aug 2026 08:40:42 -0700 (PDT)
+Received: from [192.168.68.100] ([189.38.141.232])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-939173f2758sm163089285a.37.2026.08.28.08.40.40
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 28 Aug 2026 08:40:42 -0700 (PDT)
+Message-ID: <8274e2f5-38a5-4aee-842d-c1408a166f51@oss.qualcomm.com>
+Date: Fri, 28 Aug 2026 12:40:38 -0300
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 08/14] hw/riscv/fdt-common, virt.c: add
+ riscv_create_fdt_socket_aclint()
+To: Chao Liu <chao.liu@processmission.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>
+References: <20260827222608.329788-1-daniel.barboza@oss.qualcomm.com>
+ <20260827222608.329788-9-daniel.barboza@oss.qualcomm.com>
+ <apEGhbfBmPgZrT8r@ChaodeMacBook-Pro.local>
+From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Content-Language: en-US
+In-Reply-To: <apEGhbfBmPgZrT8r@ChaodeMacBook-Pro.local>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.131 (deferred)
-Received-SPF: pass client-ip=115.124.30.131;
- envelope-from=cp0613@linux.alibaba.com;
- helo=out30-131.freemail.mail.aliyun.com
-X-Spam_score_int: -166
-X-Spam_score: -16.7
-X-Spam_bar: ----------------
-X-Spam_report: (-16.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
- RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001, USER_IN_DEF_DKIM_WL=-7.5,
- USER_IN_DEF_SPF_WL=-7.5 autolearn=no autolearn_force=no
+X-Proofpoint-GUID: qt110SFcvV6SBd-CooJDLX5p4q6_d8xg
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI4MDEzNiBTYWx0ZWRfX00yhBPt+HI3t
+ tqL0fE+zDFhJizOEH79vSZ9KO4l3JoG2ZzZTB6F1Q26nL/iMBF+IJgliLS9SnLQ2TZxDL0Ep2Nm
+ wzUDrqoU32LALjBUNpXKy4m7DOY0KYVZdS4FdzySLx7lKAfZgN2XG2vgdlzJSES+/o4S6GjnugZ
+ +qSK5RbguMdTXyOyakXiF78YO23XzxiOD/fqht86KT4G1yCA53Wa16lPMuMP8s4aLUxFk0SOkBD
+ Hq10Vmtu9CFxXLGMVjyOqFWInDnVSj6yeA7gmHWQ6CFaigZzp2GhZtNH+dSzPF7RfKOmPB56zL9
+ vyzUJFIfxHSdCwhCRUmD1dy0xhQ2p9R7ohn39RHADJ+fPH8YDjGbPubjFPqt2Sm2Ya/4laPfLOh
+ 2Va/ff2N6ve+XPYk1SktnyBoIzFpphLRLFKLKW6d2X3K8yd6AwEXA362ZNoqWs33nvNM4Yf+TgV
+ adFJFjFlZoshhk0xYgA==
+X-Proofpoint-ORIG-GUID: qt110SFcvV6SBd-CooJDLX5p4q6_d8xg
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODI4MDEzNiBTYWx0ZWRfX7O9Sn/PDm4I6
+ Z/mvTcSHSsfoNX5HEMul9DigiSgvvSGwLATlhnIRHUffmNG7ABYeW3BuCFNANJqSnEY1ufaiCe5
+ ilYkFaorWF4DU2NOykmQ9HaQlc8Vook=
+X-Authority-Analysis: v=2.4 cv=RoP16imK c=1 sm=1 tr=0 ts=6a91abfd cx=c_pps
+ a=50t2pK5VMbmlHzFWWp8p/g==:117 a=MCIxunHWmQOg/5OnbzXZaw==:17
+ a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
+ a=EUspDBNiAAAA:8 a=9N5s0NaVz43VL8GnKO4A:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=IoWCM6iH3mJn3m4BftBB:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-28_04,2026-08-27_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ lowpriorityscore=0 adultscore=0 phishscore=0 suspectscore=0 impostorscore=0
+ malwarescore=0 spamscore=0 bulkscore=0 clxscore=1015 priorityscore=1501
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608280136
+Received-SPF: pass client-ip=205.220.168.131;
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
+X-Spam_bar: --
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -74,98 +159,175 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Populate the DSDT.cxl and CEDT.cxl golden master binaries for the
-RISC-V CXL bios-tables test and empty
-bios-tables-test-allowed-diff.h, following the bios-tables-test update
-process.
 
-The expected AML added by this series is:
 
-DSDT.cxl:
-  Device (PC0C)        // ACPI0016 CXL host bridge (pxb-cxl, bus 0x0C)
-    Name (_CRS, ResourceTemplate () {
-        DWordMemory (... 0x40400000 .. 0x405FFFFF ...)   // 32-bit MMIO
-        QWordMemory (... 0x400100000 .. 0x40020FFFF ...) // 64-bit MMIO
-        WordBusNumber (... 0x000C .. 0x000D ...)
-    })
-    Method (_OSC, ...)   // PCI host bridge + CXL UUIDs
-  Device (CXLM)        // ACPI0017 CXL memory controller
-    Name (_HID, "ACPI0017")
-    Name (_DEP, Package () { \_SB.PC0C })
-    Method (_STA, ...) / Method (_DSM, ...)
+On 8/28/2026 1:13 AM, Chao Liu wrote:
+> On Thu, Aug 27, 2026 at 07:26:01PM +0800, Daniel Henrique Barboza wrote:
+>> Yet another FDT that we want to move to a helper to avoid copy/pasting
+>> code to other boards that will use a mtimer.  In particular the future
+>> 'riscv-server-ref' board.
+>>
+>> No FDT changes made.
+>>
+>> Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+>> Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
+>> ---
+>>   hw/riscv/fdt-common.c         |  96 ++++++++++++++++++++++++++++++++
+>>   hw/riscv/virt.c               | 101 ++++------------------------------
+>>   include/hw/riscv/fdt-common.h |  11 ++++
+>>   3 files changed, 119 insertions(+), 89 deletions(-)
+>>
+>> diff --git a/hw/riscv/fdt-common.c b/hw/riscv/fdt-common.c
+>> index d815c5adff..76a783709d 100644
+>> --- a/hw/riscv/fdt-common.c
+>> +++ b/hw/riscv/fdt-common.c
+>> @@ -16,6 +16,7 @@
+>>   #include "target/riscv/cpu_bits.h"
+>>   #include "hw/riscv/riscv-iommu-bits.h"
+>>   #include "hw/riscv/iommu.h"
+>> +#include "hw/intc/riscv_aclint.h"
+>>   #include "hw/intc/riscv_imsic.h"
+>>   #include "hw/pci/pci.h"
+>>   #include "hw/pci/pcie_host.h"
+>> @@ -702,3 +703,98 @@ void riscv_create_fdt_socket_aplic(void *fdt, APLICFdtProps *props,
+>>   
+>>       aplic_phandles[props->socket] = aplic_s_phandle;
+>>   }
+>> +
+>> +void riscv_create_fdt_socket_aclint(void *fdt, ACLINTFdtProps *props,
+>> +                                    uint32_t *intc_phandles)
+>> +{
+>> +    uint32_t aclint_cells_size = props->num_harts * sizeof(uint32_t) * 2;
+>> +    g_autofree uint32_t *aclint_mswi_cells = NULL;
+>> +    g_autofree uint32_t *aclint_sswi_cells = NULL;
+>> +    g_autofree uint32_t *aclint_mtimer_cells = NULL;
+>> +    hwaddr addr, size;
+>> +    char *name;
+>> +    int cpu;
+>> +
+>> +    aclint_mswi_cells = g_new0(uint32_t, props->num_harts * 2);
+>> +    aclint_mtimer_cells = g_new0(uint32_t, props->num_harts * 2);
+>> +    aclint_sswi_cells = g_new0(uint32_t, props->num_harts * 2);
+>> +
+>> +    for (cpu = 0; cpu < props->num_harts; cpu++) {
+>> +        aclint_mswi_cells[cpu * 2 + 0] = cpu_to_be32(intc_phandles[cpu]);
+>> +        aclint_mswi_cells[cpu * 2 + 1] = cpu_to_be32(IRQ_M_SOFT);
+>> +        aclint_mtimer_cells[cpu * 2 + 0] = cpu_to_be32(intc_phandles[cpu]);
+>> +        aclint_mtimer_cells[cpu * 2 + 1] = cpu_to_be32(IRQ_M_TIMER);
+>> +        aclint_sswi_cells[cpu * 2 + 0] = cpu_to_be32(intc_phandles[cpu]);
+>> +        aclint_sswi_cells[cpu * 2 + 1] = cpu_to_be32(IRQ_S_SOFT);
+>> +    }
+>> +
+>> +    if (props->aia_type != AIA_TYPE_APLIC_IMSIC) {
+>> +        addr = props->clint->base + (props->clint->size * props->socket);
+>> +        name = g_strdup_printf("/soc/mswi@%"HWADDR_PRIx, addr);
+>> +
+>> +        qemu_fdt_add_subnode(fdt, name);
+>> +        qemu_fdt_setprop_string(fdt, name, "compatible", "riscv,aclint-mswi");
+>> +        qemu_fdt_setprop_sized_cells(fdt, name, "reg",
+>> +                                     2, addr, 2, RISCV_ACLINT_SWI_SIZE);
+>> +        qemu_fdt_setprop(fdt, name, "interrupts-extended",
+>> +                         aclint_mswi_cells, aclint_cells_size);
+>> +        qemu_fdt_setprop(fdt, name, "interrupt-controller", NULL, 0);
+>> +        qemu_fdt_setprop_cell(fdt, name, "#interrupt-cells", 0);
+>> +
+>> +        if (props->numa_enabled) {
+>> +            qemu_fdt_setprop_cell(fdt, name, "numa-node-id", props->socket);
+>> +        }
+>> +
+>> +        g_free(name);
+>> +    }
+>> +
+>> +    if (props->aia_type == AIA_TYPE_APLIC_IMSIC) {
+>> +        addr = props->clint->base +
+>> +               (RISCV_ACLINT_DEFAULT_MTIMER_SIZE * props->socket);
+>> +        size = RISCV_ACLINT_DEFAULT_MTIMER_SIZE;
+>> +    } else {
+>> +        addr = props->clint->base + RISCV_ACLINT_SWI_SIZE +
+>> +               (props->clint->size * props->socket);
+>> +        size = props->clint->size - RISCV_ACLINT_SWI_SIZE;
+>> +    }
+>> +
+>> +    name = g_strdup_printf("/soc/mtimer@%"HWADDR_PRIx, addr);
+>> +    qemu_fdt_add_subnode(fdt, name);
+>> +    qemu_fdt_setprop_string(fdt, name, "compatible",
+>> +                            "riscv,aclint-mtimer");
+>> +    qemu_fdt_setprop_sized_cells(fdt, name, "reg",
+>> +        2, addr,
+> Should be:
+> 	   2, addr + RISCV_ACLINT_DEFAULT_MTIME,
+> 
+> I found an MTIMER FDT issue in the virt machine FDT.
+> 
+> Command:
+> 
+> ```
+>    timeout 30s ./build/qemu-system-riscv64 \
+>      -machine virt,aia=aplic-imsic,aia-guests=5,aclint=on,dumpdtb=/tmp/virt.dtb \
+>      -smp 2 -display none -nodefaults
+> 
+>    dtc -I dtb -O dts /tmp/virt.dtb | grep -A4 mtimer@
+> ```
+> 
+> The generated FDT contains:
+> 
+>                  mtimer@2000000 {
+>                          interrupts-extended = <0x04 0x07 0x02 0x07>;
+>                          reg = <0x00 0x2000000 0x00 0x08 0x00 0x2000000 0x00 0x7ff8>;
+>                          compatible = "riscv,aclint-mtimer";
+>                  };
+> 
+> without this patches:
+> 
+>                    mtimer@2000000 {
+>                            interrupts-extended = <0x04 0x07 0x02 0x07>;
+>                            reg = <0x00 0x2007ff8 0x00 0x08 0x00 0x2000000 0x00 0x7ff8>;
+>                            compatible = "riscv,aclint-mtimer";
+>                    };
+> 
+> The first address should be 0x20007ff8.
 
-CEDT.cxl:
-  CHBS : CXL Host Bridge Structure, Register base 0x800000000
-  CFMWS: CXL Fixed Memory Window, base 0x810000000, size 4G
+That was intentional and I forgot to document it in the commit msg. The
+"No FDT changes made" I said doesn't apply here. My bad!
 
-Signed-off-by: Chen Pei <cp0613@linux.alibaba.com>
----
- tests/data/acpi/riscv64/virt/CEDT.cxl       | Bin 0 -> 108 bytes
- tests/data/acpi/riscv64/virt/DSDT.cxl       | Bin 0 -> 6331 bytes
- tests/qtest/bios-tables-test-allowed-diff.h |   2 --
- 3 files changed, 2 deletions(-)
+If you use 'dtc' in the current 'virt' DT you'll get warnings:
 
-diff --git a/tests/data/acpi/riscv64/virt/CEDT.cxl b/tests/data/acpi/riscv64/virt/CEDT.cxl
-index e69de29bb2d1d6434b8b29ae775ad8c2e48c5391..81d746dfb09ccb147e26bb64060404ca3191d097 100644
-GIT binary patch
-literal 108
-zc-nJzbqUE~U|?VjaPoKd2v%^42yj*a0!E-1hz+6{7!(+IKx!BefCEf2LP-snumA^?
-O0aMEg#QH!C(hmS*@&^F`
+dtc -I dtb -O dts virt.dtb > virt.dts
 
-literal 0
-Hc-jL100001
+<stdout>: Warning (simple_bus_reg): /soc/mtimer@2000000: simple-bus unit address format error, expected "2007ff8"
+<stdout>: Warning (simple_bus_reg): /soc/mtimer@2008000: simple-bus unit address format error, expected "200fff8"
 
-diff --git a/tests/data/acpi/riscv64/virt/DSDT.cxl b/tests/data/acpi/riscv64/virt/DSDT.cxl
-index e69de29bb2d1d6434b8b29ae775ad8c2e48c5391..c42c37a6a25998a70c42098b500a5e7163ae1513 100644
-GIT binary patch
-literal 6331
-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
 
-literal 0
-Hc-jL100001
+This happens because the unit address in the node name doesn't match the
+first address in 'reg'.  For mtimer@2000000, "reg" must be reg = <0x00 0x2000000 (...)>.
+For mtimer@2008000, reg = <0x00 2008000 (...)> and so on.
 
-diff --git a/tests/qtest/bios-tables-test-allowed-diff.h b/tests/qtest/bios-tables-test-allowed-diff.h
-index c05fb697a5..dfb8523c8b 100644
---- a/tests/qtest/bios-tables-test-allowed-diff.h
-+++ b/tests/qtest/bios-tables-test-allowed-diff.h
-@@ -1,3 +1 @@
- /* List of comma-separated changed AML files to ignore */
--"riscv64/virt/DSDT.cxl",
--"riscv64/virt/CEDT.cxl",
--- 
-2.50.1
+
+Now, does this change break aclint in 'virt'?  Because in that case we'll
+just keep the "dtc" warning and live with it.  Aside from the existing tests
+we have in QEMU I didn't do a deep dive in aclint.
+
+
+Thanks,
+Daniel
+
+> 
+>> +        2, size - RISCV_ACLINT_DEFAULT_MTIME,
+>> +        2, addr + RISCV_ACLINT_DEFAULT_MTIMECMP,
+>> +        2, RISCV_ACLINT_DEFAULT_MTIME);
+> 
+> [...]
+> 
+>> +    qemu_fdt_setprop(fdt, name, "interrupts-extended",
+>> -    qemu_fdt_setprop_sized_cells(ms->fdt, name, "reg",
+>> -        2, addr + RISCV_ACLINT_DEFAULT_MTIME,
+> I think this is the original code that was moved here.
+> 
+> Thanks,
+> Chao
+>> -        2, size - RISCV_ACLINT_DEFAULT_MTIME,
+>> -        2, addr + RISCV_ACLINT_DEFAULT_MTIMECMP,
+>> -        2, RISCV_ACLINT_DEFAULT_MTIME);
+> 
 
 
