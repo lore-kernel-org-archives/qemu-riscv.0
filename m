@@ -4,89 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94497C61DD7
-	for <qemu-riscv@archiver.kernel.org>; Fri, 28 Aug 2026 20:42:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21F71C61DD9
+	for <qemu-riscv@archiver.kernel.org>; Fri, 28 Aug 2026 20:42:05 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x03Mj-0007LS-KC; Fri, 28 Aug 2026 16:39:57 -0400
+	id 1x03MW-0007JW-8k; Fri, 28 Aug 2026 16:39:44 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1x03Mh-0007L1-Lb
- for qemu-riscv@nongnu.org; Fri, 28 Aug 2026 16:39:55 -0400
+ id 1x03MU-0007JO-Ny
+ for qemu-riscv@nongnu.org; Fri, 28 Aug 2026 16:39:42 -0400
 Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1x03Mf-0006Vr-EH
- for qemu-riscv@nongnu.org; Fri, 28 Aug 2026 16:39:55 -0400
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+ id 1x03MT-0006VE-0G
+ for qemu-riscv@nongnu.org; Fri, 28 Aug 2026 16:39:42 -0400
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 67SJ7Qt63330998
- for <qemu-riscv@nongnu.org>; Fri, 28 Aug 2026 20:39:42 GMT
+ 67SJdWtR125953
+ for <qemu-riscv@nongnu.org>; Fri, 28 Aug 2026 20:39:40 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- lmRRjl4/oHeX76B0w+4rgO8G5wwFPYRuA5NTYJ4X2h0=; b=gatpD3AAxmhQJcUe
- p74JDEXdpQtZAIrLXRS9I2lm2kwr5lwZSg6e/5xpWixBDS5gxnZba50OT0w78fMh
- HcCIIX1OGtcprraVGXQTq3lP37v1wqo8wTMcUY06oMXxWrdErLEmowwBMyOc2ZLf
- LXBVk/fhsSyo/hT1jMPkpHo8FGw5+BEZtRQQCY6+IEkBIp15+znYNa4RDMXkhWbg
- bgeBSZGb9hDIErWSTZpruYWwmNpxxXwAlIelbcDTUiXiKzAqxMosaZdzpSExjE4q
- PPZTVZWucM45ofAkAQrsekReK0yhS33uv5BWA+PKX+FaYtz0t2N1BJKJaOnW1+W8
- q5JfWw==
+ 5lxTjGnQRpUm8uZHl82+qqHwXTfZgivwQUa9kxfBh3Q=; b=YJED9Os0O8zR8jEs
+ DDy1IGZiysAtTJ+RrD702X4ScW7DPTB3ykGmuJ0Hyjc1J5bdTVtt32achbaf/riC
+ EV+7GhLYgN+t2AQbUBitz1eIX98gGvUscMOfpEvYRp1rrP6CEb9bePzh2k7PbJFZ
+ iMR84p+TXra9XAnYfg9MtgWBa3xh1MJWZYHpx8r8ydyX5MfJEvUpl2yL84LzDtFH
+ JBOz3MmTtFAT0oX4N3LwBAxGjksELzOzP5FPa/jePzwOCBKh2oJiHTsn+FyG64Za
+ JG9f9DedsWEXxetdVz9a1LSFp14FqobRYdjeAesTcRDSJUTF3+WWSH53C7TFEfGm
+ SMz5Ng==
 Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com
  [209.85.222.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gb42rbeeh-1
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gbgpc059e-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Fri, 28 Aug 2026 20:39:42 +0000 (GMT)
+ for <qemu-riscv@nongnu.org>; Fri, 28 Aug 2026 20:39:39 +0000 (GMT)
 Received: by mail-qk1-f197.google.com with SMTP id
- af79cd13be357-934956beec8so241683885a.0
- for <qemu-riscv@nongnu.org>; Fri, 28 Aug 2026 13:39:42 -0700 (PDT)
+ af79cd13be357-9375d92d8cdso214655385a.2
+ for <qemu-riscv@nongnu.org>; Fri, 28 Aug 2026 13:39:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1787949582; x=1788554382; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1787949579; x=1788554379; darn=nongnu.org;
  h=content-transfer-encoding:content-type:mime-version:references
  :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=lmRRjl4/oHeX76B0w+4rgO8G5wwFPYRuA5NTYJ4X2h0=;
- b=jJoRSjjKU07/UQwzAa8ihOAjvz885GrYG8+Xk1IQf4Mpfc1HtEtAs8yAihbiho9p35
- 8X2IVs5MycnBU1bK78xMavRAkck/U5sTdjyx4ZjLzmOS6gb7puDyZXx5qONu3GZAfQH8
- jJjPUpMlPoyubEyOcQA3TN8D/15sUuYGMUfcilFbfH3ndofvmw2MvrIAT4I6tFiAaPd1
- MhUnml448MXgWiQDSXlmwl5XTBBX0Hoe2IY2m3zxkfH+GdlDPIZaqA6oM9FITxAT57rj
- haH7FCnt6TzFklVxdJiSMRDz3bxg3E5OpSR0pggnXX+JDPoDLQ0xxuTvYGKpTJP2qzcL
- g8Aw==
+ bh=5lxTjGnQRpUm8uZHl82+qqHwXTfZgivwQUa9kxfBh3Q=;
+ b=OrbBEL5WtoqOVOWnZIg4Vaz0vxrHrHFSSuWrNnqIg8Fe8hF9DNjnf/o4OV77GJFe90
+ knVzBeyf2AOM91HbQhlsjAkrrWFpzvdVYGa6fK88zdV6FjvvEsUVlHQ7nvbCTxGW6k8H
+ W46AMj3QfFWYdABxBlXKkc2Kqv/qfUGCCOwRgT+SANPHslZFtx+vKJPhi2R+pWuyAwVh
+ gGUlCVOSRxKSsXx/qp6BCeP27PQYRnx2f/iI8A9EAawlYW7b3QGMf1qDBbr7WCchDkdD
+ qGydE3TdERe2VdFU5STSyhaLpzpnqzeE06yKhLYJphWNHz00HY6bPsUKhkbD9EH//FId
+ VGHQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787949582; x=1788554382;
+ d=1e100.net; s=20251104; t=1787949579; x=1788554379;
  h=content-transfer-encoding:content-type:mime-version:references
  :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=lmRRjl4/oHeX76B0w+4rgO8G5wwFPYRuA5NTYJ4X2h0=;
- b=VQ+AlS80VwDgFn4j4VCl/v7NO9zul/qVCrAmdW8i9Xvae3BpW31FiJYfdxiIgxwcKG
- jaVNDsOAYmdmbTnaouJVB+FdmJp9buswFVgwh8omj5m4P7G3hrG5/njlZ08TRxVGAqRP
- +HL0z9lM1E6dlgiuT5oKBtSJxC/W6CXUOJg5gSiVbHNGcfjJZlsIxZx66DupSfxxfoGi
- nHQatpoigtI5XKzYvV/fX6XovMnkLYNgFjlK2W1/Masjr3iOQ3a1Q4RLOiLq1XhwNvOh
- 6EAnk/zCtTBAys8dnGc7ScNq0X1OtX65kp/9b1KcddB2udqR9TKgTgSPc6ElF5u24HgC
- tw7w==
-X-Gm-Message-State: AFuF++mOF6vOSw8WOeLO0QtlGAYx4CvVrUWGprFH8tTWFSshQP2UYdqi
- SMflFjdRuMICox5l6qtPlGDLp7LiEqcwXxvLxoWF1TC79hyNVbsHMnq/BpQRB2FJwIzYgjCaC7k
- sSrhk4KcMRyZKbvadL//3X9G0EUKQr0NuvRjxMBl4dTC/HLaQP3UuXgoa+Q==
-X-Gm-Gg: AR+sD13hwGxUnvskv8dOL8GkuYEkxee6JERh5JDM6m1LvSW9hvoEgGDlihCryx58L8i
- sf2hM91KtTHOrUlP4kwJjZAgHs8VwQcRz6H5tQ8ZfjbNdv4nhiz+ipjN/iP+GCHfggXXHtmHh9v
- VXPGbbGYEOGx9CQlXWD/obZoisnLYv2eZrfLo++7LRgvr4jngrPHUu3eQGX7oCaVL66STxmuLZy
- hF3nRogSTKvDmBAF9kY/7xjS7g9nAkneyja0iH+G5cVlTybHT5P9q1lBONUJV9cmpTI3Kh/xt2R
- AbZS26kGUZVPZpq+T/+ZecHIrtFtTumWZi3NTEfir655XlxSI+LmYgWfX579x4vCDkFkoghcqOv
- MeYoHjwZ4kA+lMSGRDN8WyVAUh3MaFGkDubtEZQ==
-X-Received: by 2002:a05:620a:2b4a:b0:936:583a:dd75 with SMTP id
- af79cd13be357-9391384ea5cmr1278664085a.17.1787949581495; 
- Fri, 28 Aug 2026 13:39:41 -0700 (PDT)
-X-Received: by 2002:a05:620a:2b4a:b0:936:583a:dd75 with SMTP id
- af79cd13be357-9391384ea5cmr1278659385a.17.1787949581053; 
- Fri, 28 Aug 2026 13:39:41 -0700 (PDT)
+ bh=5lxTjGnQRpUm8uZHl82+qqHwXTfZgivwQUa9kxfBh3Q=;
+ b=HVCs/OHiUVsyef1uC8v9e935EK9F1EK1ZmnQQ+06BP7rbevpzqk7VWnc0wQFfl8pJD
+ LW6RfSRgoMhzL8NpG9h1sIQD4hSlIJgp5e6MVSd9dUEytKlj4uKemTDw2aRz2g53vNc8
+ HVGC6B4ywr3hOJYndLOqPiW7iIAbuEqbeOanrBfHC8xMpESUvRXgGd8sNE/KM0Qf78Mj
+ 0GoEHamjCGHV3kkuGAxSBEGO9heBIwFfJAaot8Qs2fB2TNVbY+mwsUMKnW2LHwsll/Xk
+ yBdTPM578MH0MPPzGGv89Ng9vm7eU1ZslC+YeVunz8UbFUX0DJ2kAhZeFsDybwPuk0XF
+ bysg==
+X-Gm-Message-State: AFuF++kAR8HfFxYHmQHusMlDoaLRhY8Vft+sOEEBUKCjL1YdRPTm3KPA
+ fwEwmsPIIBTyGBejPwqsR80PAeztPkWyhXJPGi2W7zWLvPdJ2Qu29U+mDrYrUZaGslDbjeNqOuz
+ +yfVLSn6qG97r4j6a9NedP+G0SOfgLWHbaPtOn50pv7qnz1Fa2GFU/hhm2Q==
+X-Gm-Gg: AR+sD13f7NOvNjbtbPDWfhEZeTiodmSYdl5aJ499mNswpF5PwsjTO+wt79CTjCaoKaz
+ JCCGzrf0Md08atDSrk1Zf81+Pu9uvBlYUDpPOk3tA1wXTzWN4dm07wpv1ZGKhcB4Lxuullxk+31
+ T4K9B4OSkyLtqNpSxxRUFpgcemot1rlqDMvfeMkLKAAtgFTcBu6re3j7qcflvoR8P+q8DIhv8rc
+ dKxhf1SSzxLKvToBRVJmk2qf40QIkMhqT+bdhvEXTmgT2pwq9blQDUw6rCRGD9J+Et4YCnveK8y
+ gmrjYTWR+NSmZ/+ALXXPNJfX7m089qGhnA9Ay+bp8qx4XEC5wlGHhsaq7OnPhHxSJsS1UujUtmv
+ DEiYI7Rk3Qu4QwrHma9+10V59aE+XUTk0AG7ERw==
+X-Received: by 2002:a05:620a:6193:b0:936:bc40:cae2 with SMTP id
+ af79cd13be357-9391398ee3bmr1019478285a.39.1787949578959; 
+ Fri, 28 Aug 2026 13:39:38 -0700 (PDT)
+X-Received: by 2002:a05:620a:6193:b0:936:bc40:cae2 with SMTP id
+ af79cd13be357-9391398ee3bmr1019473185a.39.1787949578558; 
+ Fri, 28 Aug 2026 13:39:38 -0700 (PDT)
 Received: from QCOM-UWl2o8bcGT.qualcomm.com ([189.38.141.232])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-939173f2758sm218063985a.37.2026.08.28.13.39.38
+ af79cd13be357-939173f2758sm218063985a.37.2026.08.28.13.39.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 28 Aug 2026 13:39:40 -0700 (PDT)
+ Fri, 28 Aug 2026 13:39:38 -0700 (PDT)
 From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
@@ -94,41 +94,41 @@ Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
  Palmer Dabbelt <palmer@dabbelt.com>
-Subject: [PATCH v5 05/15] hw/riscv/fdt_common,
- virt.c: add riscv_create_fdt_pcie()
-Date: Fri, 28 Aug 2026 17:39:07 -0300
-Message-ID: <20260828203918.350131-6-daniel.barboza@oss.qualcomm.com>
+Subject: [PATCH v5 04/15] hw/riscv/fdt-common,
+ virt.c: add riscv_create_fdt_riscv_iommu_sys()
+Date: Fri, 28 Aug 2026 17:39:06 -0300
+Message-ID: <20260828203918.350131-5-daniel.barboza@oss.qualcomm.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260828203918.350131-1-daniel.barboza@oss.qualcomm.com>
 References: <20260828203918.350131-1-daniel.barboza@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: z0_2yJi5pRUevY1jzK92rqETVXnHpa9K
-X-Proofpoint-ORIG-GUID: z0_2yJi5pRUevY1jzK92rqETVXnHpa9K
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI4MDE3OSBTYWx0ZWRfX99C/mwc8UT6k
- OrM21kUhmKYFerUx03CTpbNy/tx8yv3EGKfOF4k96zZNYPlsRVH9LjeINEaNsSFDPk46DmHV1k+
- H61ktu75TWUj1+8O8ubko0mE1OCzkeTaMGtm1oUOrnSShir14yeMx9JiloyqMWkn/SNMybcmhHL
- zida6XDhcp9++hrkABJxmmZnlMhSYjK6r63zRbSjRaXi0m0R5J/jMhbTB08mzUlNNkR/UzmRXoL
- joUzHo1k2TxI7AFJUfVnqGck+7lyfheD8Lq8zqcuVRQ3BptIJEK2dh0mKSm3GjJCX5g5+APNiKa
- RprbyRYNzMui35vakHEgKszfJ93Xf67y3y31mnw6Cy8FQBXbeU2FCVHmzct1Gxiv0MUIwOq4qbe
- xLAUxR6NEyavPC5KkuSUwpK0OuiVJGLyURg2vXpeUKBfiZu8sT6zZEIQGGdj/9UBhsBLvAazFzk
- mu+sDbOLLWCEc+PA8Jg==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODI4MDE3OSBTYWx0ZWRfX2fSaKKvbYYHS
- FKfVom9hAr+xf/LTu8Sqeqq58T3iK/uNi47i8yvpYJmh7ibLtxfXjOfsWAyAKf0uzB3xBazFr6q
- Gij++0HbhKm6kDVJzf2TRX8GuIEPBGQ=
-X-Authority-Analysis: v=2.4 cv=Fpo1OWrq c=1 sm=1 tr=0 ts=6a91f20e cx=c_pps
+X-Proofpoint-ORIG-GUID: HTTViE_LxHJSP41lKt6Ru1v6uL8uIGyb
+X-Proofpoint-GUID: HTTViE_LxHJSP41lKt6Ru1v6uL8uIGyb
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODI4MDE3OSBTYWx0ZWRfX3s78F5sec6Uz
+ KWMeo41QlLhKaVGsf/7Q0Y9DfRYCKKLeBFUNJi2o5+MeCBUSH6ypzJQ5A2OBSOFAo6vkVfETq+8
+ KLdURgomyyOwSys5NVsHOR3a70wXyWQ=
+X-Authority-Analysis: v=2.4 cv=dtfrzVg4 c=1 sm=1 tr=0 ts=6a91f20b cx=c_pps
  a=50t2pK5VMbmlHzFWWp8p/g==:117 a=MCIxunHWmQOg/5OnbzXZaw==:17
  a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
- a=EUspDBNiAAAA:8 a=nzCZRCZgkTuinHKBC8cA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=IoWCM6iH3mJn3m4BftBB:22
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
+ a=EUspDBNiAAAA:8 a=FRSEYCzRAAAA:8 a=4Tf7kDObtFz1SKwdFkIA:9 a=3ZKOabzyN94A:10
+ a=QEXdDO2ut3YA:10 a=IoWCM6iH3mJn3m4BftBB:22 a=H4N_Y-AU75W7NKDNhZlT:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI4MDE3OSBTYWx0ZWRfX2iB/dIyURj8t
+ aRsJqMVj1Kpl41dMIhMlppK6kcU9LqGK/H/B+JK8aJDH3sEHU7ODFEgt518v0ecx585Z020ecuL
+ oVPc6wYXMTrH9gQx3HHjQkv8P0DjvCz7Ww/7Ofujl3hbaqIMIq4msCVH6O9OmWHOj6k/IUIFyBd
+ P0ivjZlyW1HzQQifs1c34K3bSdssSbt7fyJpJSwR5u2eIXV7ACL4Fena305v+W3nXR7AWDm8NNH
+ Vmvhv/D5DAtETpe3dym6Z2VbDDy4q7cTO3WL3aPhqsw9vmc6Dx4nrgKYDr90BVMy4Gy+LiYlES8
+ kki+jQyCvk7a10K+dGF5vVBTzPcz9vBfNE5Fwk2AEXJLUgnsN0m98Iudct38lZbJOXnG7tmQc4Y
+ R3mTatvOksq9VlAPuKDVqmBDHYluOTgjYfVyiw+YWVdXWjaz9YJroV+sWGPRW4cIufATHlx0gyD
+ PVOaySSC6rZ9iuWz1yA==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-28_06,2026-08-27_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 spamscore=0 malwarescore=0 lowpriorityscore=0 phishscore=0
- bulkscore=0 adultscore=0 suspectscore=0 priorityscore=1501 impostorscore=0
+ impostorscore=0 spamscore=0 suspectscore=0 lowpriorityscore=0 bulkscore=0
+ adultscore=0 phishscore=0 priorityscore=1501 malwarescore=0 clxscore=1015
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608280179
 Received-SPF: pass client-ip=205.220.180.131;
@@ -139,7 +139,7 @@ X-Spam_bar: --
 X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -155,365 +155,154 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The pcie FDT is quite tedious but can be parametrized into a helper.
-This is going to benefit only the 'virt' board for now but it will be
-used by the 'riscv-server-ref' board in the near future too.
+Both the 'virt' board and the future 'riscv-server-ref' boards uses an
+iommu-sys device that is declared in the DT.  Create a helper to
+encapsulate the logic and avoid copy/pasting stuff between boards.
 
-Some other changes made:
-
-- FDT related macros are moved to fdt-common.h.  Only a couple are being
-  used by the helper ATM but more will be added in the next patches;
-- an RISCVAIAType enum is created.  There are several FDTs that depends
-  on the active AIA type being used, and we want a way to represent the
-  different AIA modes that doesn't re-use the 'virt' specific VIRT_AIA_*
-  macros.  The enum vals are equivalent by design - we want "s->aia_type"
-  to be used by 'virt' when calling the fdt helpers, and other boards
-  will use "AIA_*" macros in their code.
-
-No FDT changes made.
+The helper will return the iommu phandle value instead of returning void
+and writing the used phandle in an extra argument.
 
 Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
+Reviewed-by: Chao Liu <chao.liu@processmission.com>
 ---
- hw/riscv/fdt-common.c         | 111 ++++++++++++++++++++++++++++++++++
- hw/riscv/virt.c               | 111 +++-------------------------------
- include/hw/riscv/fdt-common.h |  29 +++++++++
- include/hw/riscv/virt.h       |  15 -----
- 4 files changed, 149 insertions(+), 117 deletions(-)
+ hw/riscv/fdt-common.c         | 35 ++++++++++++++++++++++++
+ hw/riscv/virt.c               | 50 ++++++-----------------------------
+ include/hw/riscv/fdt-common.h |  5 ++++
+ 3 files changed, 48 insertions(+), 42 deletions(-)
 
 diff --git a/hw/riscv/fdt-common.c b/hw/riscv/fdt-common.c
-index 88589330fb..38813b6aa7 100644
+index eac5ca9322..88589330fb 100644
 --- a/hw/riscv/fdt-common.c
 +++ b/hw/riscv/fdt-common.c
-@@ -15,6 +15,8 @@
+@@ -13,6 +13,8 @@
+ #include "hw/core/boards.h"
+ #include "hw/riscv/fdt-common.h"
  #include "target/riscv/cpu_bits.h"
- #include "hw/riscv/riscv-iommu-bits.h"
- #include "hw/riscv/iommu.h"
-+#include "hw/pci/pci.h"
-+#include "hw/pci/pcie_host.h"
++#include "hw/riscv/riscv-iommu-bits.h"
++#include "hw/riscv/iommu.h"
  
  void *riscv_create_board_device_tree(const char *model, const char *compatible,
                                       int *fdt_size)
-@@ -384,3 +386,112 @@ uint32_t riscv_create_fdt_riscv_iommu_sys(void *fdt, hwaddr addr, hwaddr size,
- 
-     return iommu_phandle;
+@@ -349,3 +351,36 @@ void riscv_create_fdt_syscon(void *fdt, uint32_t *next_phandle,
+     qemu_fdt_setprop_cell(fdt, name, "value", poweroff);
+     g_free(name);
  }
 +
-+static void create_pcie_irq_map(void *fdt, char *nodename,
-+                                uint32_t irqchip_phandle,
-+                                RISCVAIAType aia_type, uint32_t pcie_irq)
++uint32_t riscv_create_fdt_riscv_iommu_sys(void *fdt, hwaddr addr, hwaddr size,
++                                          uint32_t *next_phandle,
++                                          uint32_t irq_chip,
++                                          uint32_t msi_phandle,
++                                          uint32_t iommu_sys_irq)
 +{
-+    int pin, dev;
-+    uint32_t irq_map_stride = 0;
-+    uint32_t full_irq_map[PCI_NUM_PINS * PCI_NUM_PINS *
-+                          FDT_MAX_INT_MAP_WIDTH] = {};
-+    uint32_t *irq_map = full_irq_map;
++    const char comp[] = "riscv,iommu";
++    g_autofree char *iommu_node = NULL;
++    uint32_t iommu_phandle;
 +
-+    /*
-+     * This code creates a standard swizzle of interrupts such that
-+     * each device's first interrupt is based on it's PCI_SLOT number.
-+     * (See pci_swizzle_map_irq_fn())
-+     *
-+     * We only need one entry per interrupt in the table (not one per
-+     * possible slot) seeing the interrupt-map-mask will allow the table
-+     * to wrap to any number of devices.
-+     */
-+    for (dev = 0; dev < PCI_NUM_PINS; dev++) {
-+        int devfn = dev * 0x8;
++    iommu_node = g_strdup_printf("/soc/iommu@%"HWADDR_PRIx, addr);
++    qemu_fdt_add_subnode(fdt, iommu_node);
 +
-+        for (pin = 0; pin < PCI_NUM_PINS; pin++) {
-+            int irq_nr = pcie_irq + ((pin + PCI_SLOT(devfn)) % PCI_NUM_PINS);
-+            int i = 0;
++    qemu_fdt_setprop(fdt, iommu_node, "compatible", comp, sizeof(comp));
++    qemu_fdt_setprop_cell(fdt, iommu_node, "#iommu-cells", 1);
 +
-+            /* Fill PCI address cells */
-+            irq_map[i] = cpu_to_be32(devfn << 8);
-+            i += FDT_PCI_ADDR_CELLS;
++    iommu_phandle = next_phandle ? (*next_phandle)++ : qemu_fdt_alloc_phandle(fdt);
++    qemu_fdt_setprop_cell(fdt, iommu_node, "phandle", iommu_phandle);
 +
-+            /* Fill PCI Interrupt cells */
-+            irq_map[i] = cpu_to_be32(pin + 1);
-+            i += FDT_PCI_INT_CELLS;
++    qemu_fdt_setprop_sized_cells(fdt, iommu_node, "reg", 2, addr, 2, size);
++    qemu_fdt_setprop_cell(fdt, iommu_node, "interrupt-parent", irq_chip);
 +
-+            /* Fill interrupt controller phandle and cells */
-+            irq_map[i++] = cpu_to_be32(irqchip_phandle);
-+            irq_map[i++] = cpu_to_be32(irq_nr);
++    qemu_fdt_setprop_cells(fdt, iommu_node, "interrupts",
++        iommu_sys_irq + RISCV_IOMMU_INTR_CQ, FDT_IRQ_TYPE_EDGE_LOW,
++        iommu_sys_irq + RISCV_IOMMU_INTR_FQ, FDT_IRQ_TYPE_EDGE_LOW,
++        iommu_sys_irq + RISCV_IOMMU_INTR_PM, FDT_IRQ_TYPE_EDGE_LOW,
++        iommu_sys_irq + RISCV_IOMMU_INTR_PQ, FDT_IRQ_TYPE_EDGE_LOW);
 +
-+            if (aia_type != AIA_TYPE_NONE) {
-+                irq_map[i++] = cpu_to_be32(0x4);
-+            }
++    qemu_fdt_setprop_cell(fdt, iommu_node, "msi-parent", msi_phandle);
 +
-+            if (!irq_map_stride) {
-+                irq_map_stride = i;
-+            }
-+            irq_map += irq_map_stride;
-+        }
-+    }
-+
-+    qemu_fdt_setprop(fdt, nodename, "interrupt-map", full_irq_map,
-+                     PCI_NUM_PINS * PCI_NUM_PINS *
-+                     irq_map_stride * sizeof(uint32_t));
-+
-+    qemu_fdt_setprop_cells(fdt, nodename, "interrupt-map-mask",
-+                           0x1800, 0, 0, 0x7);
-+}
-+
-+/*
-+ * NOTE: this function uses a "/soc/pci@..." FDT subnode that
-+ * should be created beforehand.
-+ */
-+void riscv_create_fdt_pcie(void *fdt, int aia_type, bool has_iommu_sys,
-+                           const MemMapEntry *pcie_ecam,
-+                           const MemMapEntry *pcie_pio,
-+                           const MemMapEntry *pcie_mmio,
-+                           const MemMapEntry *high_pcie,
-+                           uint32_t irq_pcie_phandle,
-+                           uint32_t msi_pcie_phandle,
-+                           uint32_t iommu_sys_phandle, uint32_t pcie_irq)
-+{
-+    g_autofree char *name = NULL;
-+
-+    name = g_strdup_printf("/soc/pci@%"HWADDR_PRIx, pcie_ecam->base);
-+    qemu_fdt_setprop_cell(fdt, name, "#address-cells", FDT_PCI_ADDR_CELLS);
-+    qemu_fdt_setprop_cell(fdt, name, "#interrupt-cells", FDT_PCI_INT_CELLS);
-+    qemu_fdt_setprop_cell(fdt, name, "#size-cells", 0x2);
-+    qemu_fdt_setprop_string(fdt, name, "compatible", "pci-host-ecam-generic");
-+    qemu_fdt_setprop_string(fdt, name, "device_type", "pci");
-+    qemu_fdt_setprop_cell(fdt, name, "linux,pci-domain", 0);
-+
-+    qemu_fdt_setprop_cells(fdt, name, "bus-range", 0,
-+                           pcie_ecam->size / PCIE_MMCFG_SIZE_MIN - 1);
-+    qemu_fdt_setprop(fdt, name, "dma-coherent", NULL, 0);
-+
-+    if (aia_type == AIA_TYPE_APLIC_IMSIC) {
-+        qemu_fdt_setprop_cell(fdt, name, "msi-parent", msi_pcie_phandle);
-+    }
-+
-+    qemu_fdt_setprop_sized_cells(fdt, name, "reg", 2,
-+                                 pcie_ecam->base, 2, pcie_ecam->size);
-+
-+    qemu_fdt_setprop_sized_cells(fdt, name, "ranges",
-+        1, FDT_PCI_RANGE_IOPORT, 2, 0,
-+        2, pcie_pio->base, 2, pcie_pio->size,
-+        1, FDT_PCI_RANGE_MMIO,
-+        2, pcie_mmio->base,
-+        2, pcie_mmio->base, 2, pcie_mmio->size,
-+        1, FDT_PCI_RANGE_MMIO_64BIT,
-+        2, high_pcie->base,
-+        2, high_pcie->base, 2, high_pcie->size);
-+
-+    if (has_iommu_sys) {
-+        qemu_fdt_setprop_cells(fdt, name, "iommu-map",
-+                               0, iommu_sys_phandle, 0, 0x10000);
-+    }
-+
-+    create_pcie_irq_map(fdt, name, irq_pcie_phandle, aia_type, pcie_irq);
++    return iommu_phandle;
 +}
 diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 8a165f4d9e..a28e6d200a 100644
+index ab6c53c78a..8a165f4d9e 100644
 --- a/hw/riscv/virt.c
 +++ b/hw/riscv/virt.c
-@@ -180,61 +180,6 @@ static void virt_flash_map(RISCVVirtState *s,
-                     sysmem);
+@@ -869,46 +869,6 @@ static void create_fdt_virtio_iommu(RISCVVirtState *s, uint16_t bdf)
+                            bdf + 1, iommu_phandle, bdf + 1, 0xffff - bdf);
  }
  
--static void create_pcie_irq_map(RISCVVirtState *s, void *fdt, char *nodename,
--                                uint32_t irqchip_phandle)
+-static void create_fdt_iommu_sys(RISCVVirtState *s, uint32_t irq_chip,
+-                                 uint32_t msi_phandle,
+-                                 uint32_t *iommu_sys_phandle)
 -{
--    int pin, dev;
--    uint32_t irq_map_stride = 0;
--    uint32_t full_irq_map[PCI_NUM_PINS * PCI_NUM_PINS *
--                          FDT_MAX_INT_MAP_WIDTH] = {};
--    uint32_t *irq_map = full_irq_map;
+-    const char comp[] = "riscv,iommu";
+-    void *fdt = MACHINE(s)->fdt;
+-    uint32_t iommu_phandle;
+-    g_autofree char *iommu_node = NULL;
+-    hwaddr addr = s->memmap[VIRT_IOMMU_SYS].base;
+-    hwaddr size = s->memmap[VIRT_IOMMU_SYS].size;
+-    uint32_t iommu_irq_map[RISCV_IOMMU_INTR_COUNT] = {
+-        IOMMU_SYS_IRQ + RISCV_IOMMU_INTR_CQ,
+-        IOMMU_SYS_IRQ + RISCV_IOMMU_INTR_FQ,
+-        IOMMU_SYS_IRQ + RISCV_IOMMU_INTR_PM,
+-        IOMMU_SYS_IRQ + RISCV_IOMMU_INTR_PQ,
+-    };
 -
--    /*
--     * This code creates a standard swizzle of interrupts such that
--     * each device's first interrupt is based on it's PCI_SLOT number.
--     * (See pci_swizzle_map_irq_fn())
--     *
--     * We only need one entry per interrupt in the table (not one per
--     * possible slot) seeing the interrupt-map-mask will allow the table
--     * to wrap to any number of devices.
--     */
--    for (dev = 0; dev < PCI_NUM_PINS; dev++) {
--        int devfn = dev * 0x8;
+-    iommu_node = g_strdup_printf("/soc/iommu@%x",
+-                               (unsigned int) s->memmap[VIRT_IOMMU_SYS].base);
+-    iommu_phandle = qemu_fdt_alloc_phandle(fdt);
+-    qemu_fdt_add_subnode(fdt, iommu_node);
 -
--        for (pin = 0; pin < PCI_NUM_PINS; pin++) {
--            int irq_nr = PCIE_IRQ + ((pin + PCI_SLOT(devfn)) % PCI_NUM_PINS);
--            int i = 0;
+-    qemu_fdt_setprop(fdt, iommu_node, "compatible", comp, sizeof(comp));
+-    qemu_fdt_setprop_cell(fdt, iommu_node, "#iommu-cells", 1);
+-    qemu_fdt_setprop_cell(fdt, iommu_node, "phandle", iommu_phandle);
 -
--            /* Fill PCI address cells */
--            irq_map[i] = cpu_to_be32(devfn << 8);
--            i += FDT_PCI_ADDR_CELLS;
+-    qemu_fdt_setprop_sized_cells(fdt, iommu_node, "reg", 2, addr, 2, size);
+-    qemu_fdt_setprop_cell(fdt, iommu_node, "interrupt-parent", irq_chip);
 -
--            /* Fill PCI Interrupt cells */
--            irq_map[i] = cpu_to_be32(pin + 1);
--            i += FDT_PCI_INT_CELLS;
+-    qemu_fdt_setprop_cells(fdt, iommu_node, "interrupts",
+-        iommu_irq_map[0], FDT_IRQ_TYPE_EDGE_LOW,
+-        iommu_irq_map[1], FDT_IRQ_TYPE_EDGE_LOW,
+-        iommu_irq_map[2], FDT_IRQ_TYPE_EDGE_LOW,
+-        iommu_irq_map[3], FDT_IRQ_TYPE_EDGE_LOW);
 -
--            /* Fill interrupt controller phandle and cells */
--            irq_map[i++] = cpu_to_be32(irqchip_phandle);
--            irq_map[i++] = cpu_to_be32(irq_nr);
--            if (s->aia_type != VIRT_AIA_TYPE_NONE) {
--                irq_map[i++] = cpu_to_be32(0x4);
--            }
+-    qemu_fdt_setprop_cell(fdt, iommu_node, "msi-parent", msi_phandle);
 -
--            if (!irq_map_stride) {
--                irq_map_stride = i;
--            }
--            irq_map += irq_map_stride;
--        }
--    }
--
--    qemu_fdt_setprop(fdt, nodename, "interrupt-map", full_irq_map,
--                     PCI_NUM_PINS * PCI_NUM_PINS *
--                     irq_map_stride * sizeof(uint32_t));
--
--    qemu_fdt_setprop_cells(fdt, nodename, "interrupt-map-mask",
--                           0x1800, 0, 0, 0x7);
+-    *iommu_sys_phandle = iommu_phandle;
 -}
 -
- static void create_fdt_socket_aclint(RISCVVirtState *s,
-                                      int socket,
-                                      uint32_t *intc_phandles)
-@@ -723,51 +668,6 @@ static void create_fdt_virtio(RISCVVirtState *s, uint32_t irq_virtio_phandle)
-     }
- }
- 
--static void create_fdt_pcie(RISCVVirtState *s,
--                            uint32_t irq_pcie_phandle,
--                            uint32_t msi_pcie_phandle,
--                            uint32_t iommu_sys_phandle)
--{
--    g_autofree char *name = NULL;
--    MachineState *ms = MACHINE(s);
--
--    name = g_strdup_printf("/soc/pci@%"HWADDR_PRIx,
--                           s->memmap[VIRT_PCIE_ECAM].base);
--    qemu_fdt_setprop_cell(ms->fdt, name, "#address-cells",
--        FDT_PCI_ADDR_CELLS);
--    qemu_fdt_setprop_cell(ms->fdt, name, "#interrupt-cells",
--        FDT_PCI_INT_CELLS);
--    qemu_fdt_setprop_cell(ms->fdt, name, "#size-cells", 0x2);
--    qemu_fdt_setprop_string(ms->fdt, name, "compatible",
--        "pci-host-ecam-generic");
--    qemu_fdt_setprop_string(ms->fdt, name, "device_type", "pci");
--    qemu_fdt_setprop_cell(ms->fdt, name, "linux,pci-domain", 0);
--    qemu_fdt_setprop_cells(ms->fdt, name, "bus-range", 0,
--        s->memmap[VIRT_PCIE_ECAM].size / PCIE_MMCFG_SIZE_MIN - 1);
--    qemu_fdt_setprop(ms->fdt, name, "dma-coherent", NULL, 0);
--    if (s->aia_type == VIRT_AIA_TYPE_APLIC_IMSIC) {
--        qemu_fdt_setprop_cell(ms->fdt, name, "msi-parent", msi_pcie_phandle);
--    }
--    qemu_fdt_setprop_sized_cells(ms->fdt, name, "reg", 2,
--        s->memmap[VIRT_PCIE_ECAM].base, 2, s->memmap[VIRT_PCIE_ECAM].size);
--    qemu_fdt_setprop_sized_cells(ms->fdt, name, "ranges",
--        1, FDT_PCI_RANGE_IOPORT, 2, 0,
--        2, s->memmap[VIRT_PCIE_PIO].base, 2, s->memmap[VIRT_PCIE_PIO].size,
--        1, FDT_PCI_RANGE_MMIO,
--        2, s->memmap[VIRT_PCIE_MMIO].base,
--        2, s->memmap[VIRT_PCIE_MMIO].base, 2, s->memmap[VIRT_PCIE_MMIO].size,
--        1, FDT_PCI_RANGE_MMIO_64BIT,
--        2, virt_high_pcie_memmap.base,
--        2, virt_high_pcie_memmap.base, 2, virt_high_pcie_memmap.size);
--
--    if (virt_is_iommu_sys_enabled(s)) {
--        qemu_fdt_setprop_cells(ms->fdt, name, "iommu-map",
--                               0, iommu_sys_phandle, 0, 0x10000);
--    }
--
--    create_pcie_irq_map(s, ms->fdt, name, irq_pcie_phandle);
--}
--
- static void create_fdt_uart(RISCVVirtState *s,
-                             uint32_t irq_mmio_phandle, int memId, int irqNo)
+ static void create_fdt_iommu(RISCVVirtState *s, uint16_t bdf)
  {
-@@ -916,8 +816,15 @@ static void finalize_fdt(RISCVVirtState *s)
-                                              msi_pcie_phandle,
-                                              IOMMU_SYS_IRQ);
-     }
--    create_fdt_pcie(s, irq_pcie_phandle, msi_pcie_phandle,
--                    iommu_sys_phandle);
-+
-+    riscv_create_fdt_pcie(MACHINE(s)->fdt, s->aia_type,
-+                          virt_is_iommu_sys_enabled(s),
-+                          &s->memmap[VIRT_PCIE_ECAM],
-+                          &s->memmap[VIRT_PCIE_PIO],
-+                          &s->memmap[VIRT_PCIE_MMIO],
-+                          &virt_high_pcie_memmap,
-+                          irq_pcie_phandle, msi_pcie_phandle,
-+                          iommu_sys_phandle, PCIE_IRQ);
+     const char comp[] = "riscv,pci-iommu";
+@@ -947,8 +907,14 @@ static void finalize_fdt(RISCVVirtState *s)
+     create_fdt_virtio(s, irq_virtio_phandle);
  
-     riscv_create_fdt_syscon(MACHINE(s)->fdt, &phandle,
-                             s->memmap[VIRT_TEST].base,
+     if (virt_is_iommu_sys_enabled(s)) {
+-        create_fdt_iommu_sys(s, irq_mmio_phandle, msi_pcie_phandle,
+-                             &iommu_sys_phandle);
++        iommu_sys_phandle =
++            riscv_create_fdt_riscv_iommu_sys(MACHINE(s)->fdt,
++                                             s->memmap[VIRT_IOMMU_SYS].base,
++                                             s->memmap[VIRT_IOMMU_SYS].size,
++                                             &phandle,
++                                             irq_mmio_phandle,
++                                             msi_pcie_phandle,
++                                             IOMMU_SYS_IRQ);
+     }
+     create_fdt_pcie(s, irq_pcie_phandle, msi_pcie_phandle,
+                     iommu_sys_phandle);
 diff --git a/include/hw/riscv/fdt-common.h b/include/hw/riscv/fdt-common.h
-index 65711468b8..3750230865 100644
+index e377682b32..65711468b8 100644
 --- a/include/hw/riscv/fdt-common.h
 +++ b/include/hw/riscv/fdt-common.h
-@@ -11,6 +11,27 @@
- 
- #include "target/riscv/cpu.h"
- 
-+#define FDT_PCI_ADDR_CELLS    3
-+#define FDT_PCI_INT_CELLS     1
-+#define FDT_PLIC_ADDR_CELLS   0
-+#define FDT_PLIC_INT_CELLS    1
-+#define FDT_APLIC_INT_CELLS   2
-+#define FDT_APLIC_ADDR_CELLS  0
-+#define FDT_IMSIC_INT_CELLS   0
-+#define FDT_MAX_INT_CELLS     2
-+#define FDT_MAX_INT_MAP_WIDTH (FDT_PCI_ADDR_CELLS + FDT_PCI_INT_CELLS + \
-+                                 1 + FDT_MAX_INT_CELLS)
-+#define FDT_PLIC_INT_MAP_WIDTH  (FDT_PCI_ADDR_CELLS + FDT_PCI_INT_CELLS + \
-+                                 1 + FDT_PLIC_INT_CELLS)
-+#define FDT_APLIC_INT_MAP_WIDTH (FDT_PCI_ADDR_CELLS + FDT_PCI_INT_CELLS + \
-+                                 1 + FDT_APLIC_INT_CELLS)
-+
-+typedef enum RISCVAIAType {
-+    AIA_TYPE_NONE = 0,
-+    AIA_TYPE_APLIC,
-+    AIA_TYPE_APLIC_IMSIC,
-+} RISCVAIAType;
-+
- void *riscv_create_board_device_tree(const char *model, const char *compatible,
-                                      int *fdt_size);
- void riscv_create_fdt_socket_memory(void *fdt, hwaddr addr, uint64_t size,
-@@ -48,4 +69,12 @@ uint32_t riscv_create_fdt_riscv_iommu_sys(void *fdt, hwaddr addr, hwaddr size,
-                                           uint32_t irq_chip,
-                                           uint32_t msi_phandle,
-                                           uint32_t iommu_sys_irq);
-+void riscv_create_fdt_pcie(void *fdt, int aia_type, bool has_iommu_sys,
-+                           const MemMapEntry *pcie_ecam,
-+                           const MemMapEntry *pcie_pio,
-+                           const MemMapEntry *pcie_mmio,
-+                           const MemMapEntry *high_pcie,
-+                           uint32_t irq_pcie_phandle,
-+                           uint32_t msi_pcie_phandle,
-+                           uint32_t iommu_sys_phandle, uint32_t pcie_irq);
+@@ -43,4 +43,9 @@ void riscv_create_fdt_syscon(void *fdt, uint32_t *next_phandle,
+                              hwaddr addr, hwaddr size,
+                              uint32_t reboot, uint32_t poweroff,
+                              bool sifive_test_compat);
++uint32_t riscv_create_fdt_riscv_iommu_sys(void *fdt, hwaddr addr, hwaddr size,
++                                          uint32_t *next_phandle,
++                                          uint32_t irq_chip,
++                                          uint32_t msi_phandle,
++                                          uint32_t iommu_sys_irq);
  #endif
-diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
-index 7c862b0da2..e516898f9a 100644
---- a/include/hw/riscv/virt.h
-+++ b/include/hw/riscv/virt.h
-@@ -121,21 +121,6 @@ enum {
- #define VIRT_PLIC_SIZE(__num_context) \
-     (VIRT_PLIC_CONTEXT_BASE + (__num_context) * VIRT_PLIC_CONTEXT_STRIDE)
- 
--#define FDT_PCI_ADDR_CELLS    3
--#define FDT_PCI_INT_CELLS     1
--#define FDT_PLIC_ADDR_CELLS   0
--#define FDT_PLIC_INT_CELLS    1
--#define FDT_APLIC_INT_CELLS   2
--#define FDT_APLIC_ADDR_CELLS  0
--#define FDT_IMSIC_INT_CELLS   0
--#define FDT_MAX_INT_CELLS     2
--#define FDT_MAX_INT_MAP_WIDTH (FDT_PCI_ADDR_CELLS + FDT_PCI_INT_CELLS + \
--                                 1 + FDT_MAX_INT_CELLS)
--#define FDT_PLIC_INT_MAP_WIDTH  (FDT_PCI_ADDR_CELLS + FDT_PCI_INT_CELLS + \
--                                 1 + FDT_PLIC_INT_CELLS)
--#define FDT_APLIC_INT_MAP_WIDTH (FDT_PCI_ADDR_CELLS + FDT_PCI_INT_CELLS + \
--                                 1 + FDT_APLIC_INT_CELLS)
--
- bool virt_is_acpi_enabled(RISCVVirtState *s);
- bool virt_is_iommu_sys_enabled(RISCVVirtState *s);
- void virt_acpi_setup(RISCVVirtState *vms);
 -- 
 2.43.0
 
