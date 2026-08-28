@@ -4,130 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E47DC61DBD
-	for <qemu-riscv@archiver.kernel.org>; Fri, 28 Aug 2026 05:44:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23B60C61DB9
+	for <qemu-riscv@archiver.kernel.org>; Fri, 28 Aug 2026 07:05:03 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wzpOU-0006Ds-BE; Fri, 28 Aug 2026 01:44:50 -0400
+	id 1wzqdv-0003Mt-S9; Fri, 28 Aug 2026 03:04:52 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1wzpOS-0006DO-IP
- for qemu-riscv@nongnu.org; Fri, 28 Aug 2026 01:44:48 -0400
-Received: from mail-ed1-x530.google.com ([2a00:1450:4864:20::530])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1wzpOQ-0005NC-Aw
- for qemu-riscv@nongnu.org; Fri, 28 Aug 2026 01:44:48 -0400
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-6a5e971c970so2868568a12.0
- for <qemu-riscv@nongnu.org>; Thu, 27 Aug 2026 22:44:45 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1787895884; cv=none;
- d=google.com; s=arc-20260327;
- b=lC0JMdqvSZBqz+uA8SAtFO1aMbd+hVeqDl/JveJdShwLfU7Sckc0ZhpDCeyTXa6Xag
- NRKRfT6ETxaNXd4vLutaJ55NvCwV/+xWOd3ij2Od7yb0rMMqsU0mzSmdSvpVNrcb6Hdm
- zUibL2aPCKGiwoB6aDckR97Z3733aOgdzW8l8q89jyHYYVqq6oLcX88jQHoiFdxUhYHR
- CayQFkrr2NfTOjjmacFK/jjNh9TkX4pPZjy1uZEbWcMkq48rGwk1AKSXi5l89RavF0At
- jvnKDtqFtdKWfloj/f0VecZDK4XTN8SWJDI8L4zgdGe73JiwiaYmmnOrv/SFAQiXpMkB
- OZPA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:reply-to:in-reply-to:references
- :mime-version:dkim-signature;
- bh=xclwLkLVRxbn4Oeg5EdOyoBN23HEZDWzCEZ1snetFkg=;
- fh=YkM4JIjPBjIjniioK2Ty3X8h2mdKrh6zPp8qWYIf57I=;
- b=rbbxhelx8eeL/wu3Lg2wnz+TXSqSQvR4mmViAXg3Rv6pBl0iUbPy/sfnHpJiFGj7YR
- MSzSc/fB4oAdOlOI3FrKV6MCKGn5nulBcSJjptcslqWdfFhzQ5iCnDpfIjbAQMTn8Uc8
- dF6dypmTDLj19wG5mI3hounIPgQzMZ3hR2IPu4gmdrA9QdeqJ3X6b091xzeADdRnUvyn
- BzgkvFskGJBeek1qsICbQpfYxLstFnK/kWXhpB+1Wx5YzdOfpX9KXMTBQNOBgpLws2lM
- G1FYaaDepYZ9+/5FxnML4XWUdbjYbkBT5VyHCCPeR+lCWac8Y/FxqZoigJyLg+eZKQTy
- Vcnw==; darn=nongnu.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1787895884; x=1788500684; darn=nongnu.org;
- h=content-type:cc:to:subject:message-id:date:from:reply-to
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=xclwLkLVRxbn4Oeg5EdOyoBN23HEZDWzCEZ1snetFkg=;
- b=QJC3W0zxwCm/n43OezcqqQKQ7LSSwC0hDd42WxtNqzbBnxHA8PFXGBkaIe57QKbdNs
- Hptd5oHoNkuI4TPd1y2zF1hWLn74yeNsajotnubGAdMtlze5B4mdoXCSIZkUn32SY+K9
- Cg6s/Fa56yuUYOtH9EDj36cDgua7jEQCJKRghImaXh6mrOzEvbEP+ofIfLNPg5w8WEYC
- ANB3kvPS1ptgNieQVGOlU5oWIUec+KN4UUX8MCI2SQ2fSYhBN4jY8lIqDx8EuQBVQRhr
- PCVl4yRGMQmbiLGO8FXMDWB5wKYz9COw8hl5Qq83hHcUjCVL8J+SwizxXYf52z+LP2uH
- mX+A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787895884; x=1788500684;
- h=content-type:cc:to:subject:message-id:date:from:reply-to
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=xclwLkLVRxbn4Oeg5EdOyoBN23HEZDWzCEZ1snetFkg=;
- b=XEC0UEZufdoS+A/8xqpHC4JuOlz6bD9+JzmJgVXVMOnjpNgxYm/j+Hn+wm6v/Qm2Qo
- /JhzR1LUh20+s5W2R5wvd42P9hj+clNFwSm7ohin0LX9utsaYODABMSwH5iPqktiKhUa
- 9wL1o039ig+RdVO5oMHTLpqNly//s1YdCjpP2eQAT9fn8izrr2ZUA4nN8WsEQUjPII0q
- uh5e1Amamk4ACCGJgDyASBVwwPZhMhMWTowXAKsXF6tMQHiHgTclDBB4dW5U2oGb5+G1
- oimzX4HFlVwUWei0LEJ4Q2YqQzeVSvgTJmKXMwfRD/QzHfLHHf6WkQwAzhxiaORMeWle
- gcBw==
-X-Forwarded-Encrypted: i=1;
- AHgh+Rr3snAlU7dmPBOHvIXni+hGBfAy3lEHH4rRNUwmEEYCyrNLUxKBQ+3jJ03vnuj4LKm8mo8ZxwTYaWtU@nongnu.org
-X-Gm-Message-State: AFuF++kgJk1d9U2WHFZ3uB8Ro4LfyIYyVZRtcgvAwy2ahubLkl7wmU6n
- FTl8DMkEaopwenrQt59a7Eb1ZEz1nRgaIbPvUgtK81waMyG+wuifv8ebmUf7pp0BIj6AAHot6S6
- RXs0BYuf7tmE72uX5135xdIgn3hr+MWo=
-X-Gm-Gg: AR+sD10CyecxMvPdrc7Vxd7RRQUrEoejFHpwvkzd1OhVEMyvi2sr1IQDXw/FGcBmMAO
- Urbb415L9xBVGAgo8AC4GiQNzgIR2yIE1qNJa5lIO6AAUMvzktfC2wWV5EjFCq88yTKfboizxYJ
- 1zSvaM6AhvD6i3JXmaSUuOqg8nbSKE1NMcReP0f2YSZaxcdO/9V4YI59h+fOUX8U+a4N1zqdA9B
- Cv+qA3vA23nqrObM3wSjWQxvwM+mHU+puF8lx7MEy3EVlrMpSoLIVfKVcxPE9fpSHUYwcyeOULH
- PraOP7qw1XBpsFAmp7cL4eLSIs9+DenPngXxp/heOAb8
-X-Received: by 2002:a17:907:9b8d:b0:c25:5081:a9f7 with SMTP id
- a640c23a62f3a-c255081ace9mr352089166b.14.1787895884041; Thu, 27 Aug 2026
- 22:44:44 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
+ id 1wzqdt-0003MJ-Kx; Fri, 28 Aug 2026 03:04:49 -0400
+Received: from isrv.corpit.ru ([212.248.84.144])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
+ id 1wzqdr-0000gC-5K; Fri, 28 Aug 2026 03:04:49 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=tls.msk.ru; s=202602;
+ t=1787900674; bh=5Zo2nHE/4QKMw3elm5onMRr6EVtx/g68Ag16h7MO5cc=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To;
+ b=YLyxNZJq39N48ssOiap3ClRl67vRc3lOtD3EwvC69VBAPsIxyN/LkapABlzl/3efx
+ qfbFVKl/m+FyNpEWPzdnorQQoubX4sWdVXwGjXFVtdXheAhhcSmOAGODR4zjqMH4gn
+ C0TrWZvOp9/VwMnfNj7r53gjYxZbrqgutxB+2fn+qpZEQhAyyZ1FVcTUKE5qhiyxyP
+ TNDlFoJ+rOhFeDcAXHEDA8dBWvQo5g1K6OhsAJk4frLLSOEScjFrDBxr+NMZCjVUGL
+ M/n9CWLVVsBFdl2/SmXdbZftc/fepoUbhkiHJA38UAPoh0pe8J6vP5Yy5XhH8GsDTg
+ P9njSIeBnQDuQ==
+Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
+ by isrv.corpit.ru (Postfix) with ESMTP id 567961CF51C;
+ Fri, 28 Aug 2026 10:04:34 +0300 (MSK)
+Received: from [192.168.177.130] (mjt.wg.tls.msk.ru [192.168.177.130])
+ by tsrv.corpit.ru (Postfix) with ESMTP id 82DF6419A33;
+ Fri, 28 Aug 2026 10:04:38 +0300 (MSK)
+Message-ID: <a630b631-8b51-4b8e-af87-1c0de546ea8b@tls.msk.ru>
+Date: Fri, 28 Aug 2026 10:04:02 +0300
 MIME-Version: 1.0
-References: <20260823150731.896-1-luoyonggang@gmail.com>
- <ao7c-FiawF9sMCGj@redhat.com>
- <CABgObfa4QiBKuj7o06RL+egm_QOX03hpP9PAHoeKYOr9wwGvFA@mail.gmail.com>
-In-Reply-To: <CABgObfa4QiBKuj7o06RL+egm_QOX03hpP9PAHoeKYOr9wwGvFA@mail.gmail.com>
-From: Yonggang Luo <luoyonggang@gmail.com>
-Date: Fri, 28 Aug 2026 13:44:30 +0800
-X-Gm-Features: AcwNN1X1GOaj0QRVxiPqghu_RCWMtblSNbD_bINUi2HuZL8Vyf_lbN_vGb5HcNQ
-Message-ID: <CAE2XoE_KZYdo40HLdtxCWSa4q0nh1ZBiukCB3PdjeMLD6vfAYQ@mail.gmail.com>
-Subject: Re: [PATCH 00/12] single-binary: link ARM and RISC-V into qemu-system
-To: Paolo Bonzini <pbonzini@redhat.com>
-Cc: =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
- qemu-devel@nongnu.org, Xianglai Li <lixianglai@loongson.cn>, 
- Alistair Francis <alistair.francis@wdc.com>, Chinmay Rath <rathc@linux.ibm.com>,
- Sunil V L <sunilvl@ventanamicro.com>, qemu-riscv@nongnu.org, 
- Alexander Bulekov <alxndr@bu.edu>, Zhao Liu <zhao1.liu@intel.com>,
- Eric Farman <farman@linux.ibm.com>, 
- Laurent Vivier <lvivier@redhat.com>, Peter Maydell <peter.maydell@linaro.org>, 
- Chao Liu <chao.liu@processmission.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>, Song Gao <17746591750@163.com>, 
- Harsh Prateek Bora <harshpb@linux.ibm.com>, Glenn Miles <milesg@linux.ibm.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, qemu-s390x@nongnu.org, 
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@mailo.com>, 
- "Michael S. Tsirkin" <mst@redhat.com>, Stefan Hajnoczi <stefanha@redhat.com>, 
- =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, 
- David Hildenbrand <david@kernel.org>, qemu-ppc@nongnu.org, qemu-arm@nongnu.org,
- Igor Mammedov <imammedo@redhat.com>, Aleksandar Rikalo <arikalo@gmail.com>, 
- Nicholas Piggin <npiggin@gmail.com>, Cornelia Huck <cohuck@redhat.com>, 
- Richard Henderson <richard.henderson@linaro.org>,
- Ilya Leoshkevich <iii@linux.ibm.com>, 
- Fabiano Rosas <farosas@suse.de>, Aurelien Jarno <aurelien@aurel32.net>,
- Ani Sinha <anisinha@redhat.com>, Bibo Mao <maobibo@loongson.cn>,
- =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>, 
- Matthew Rosato <mjrosato@linux.ibm.com>, Weiwei Li <liwei1518@gmail.com>, 
- Darren Kenny <darren.kenny@oracle.com>
-Content-Type: multipart/alternative; boundary="0000000000001053ea065a14f372"
-Received-SPF: pass client-ip=2a00:1450:4864:20::530;
- envelope-from=luoyonggang@gmail.com; helo=mail-ed1-x530.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v11 0/2] target/riscv: Fix riscv64 KVM migration
+To: Xie Bo <xb@ultrarisc.com>, qemu-stable@nongnu.org
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
+ palmer@dabbelt.com, daniel.barboza@oss.qualcomm.com
+References: <20260808125157.1220511-1-xb@ultrarisc.com>
+ <20260825070309.1086125-1-xb@ultrarisc.com>
+Content-Language: en-US, ru-RU
+From: Michael Tokarev <mjt@tls.msk.ru>
+In-Reply-To: <20260825070309.1086125-1-xb@ultrarisc.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=212.248.84.144; envelope-from=mjt@tls.msk.ru;
+ helo=isrv.corpit.ru
+X-Spam_score_int: -19
+X-Spam_score: -2.0
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -141,152 +68,36 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Reply-To: luoyonggang@gmail.com
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---0000000000001053ea065a14f372
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On 8/25/26 10:03, Xie Bo wrote:
+> Hi,
+> 
+> Now that this series is in master, could it also be considered for
+> stable-11.1?
+> 
+> Both commits are needed together:
+> 
+> 7df9aa5 target/riscv/kvm: Synchronize privilege mode
+> ddac7cf target/riscv/kvm: Preserve MP state across migration
 
-On Fri, Aug 28, 2026 at 1:59=E2=80=AFAM Paolo Bonzini <pbonzini@redhat.com>=
- wrote:
->
-> On Wed, Aug 26, 2026 at 2:33=E2=80=AFPM Daniel P. Berrang=C3=A9 <berrange=
-@redhat.com>
-wrote:
-> > With the clean break with the past, we also have the
-> > ability to tackle various long standing design mistakes
-> > present in qemu-system-$TARGET instead of carrying them
-> > over into the new binary.
+Heh.  I remember that big riscv pull request.  I processed it before
+11.1.1, so changes from it are included in 11.1.1.
 
+However, these two changes didn't have neither Fixes: nor Resolves:
+tags, -- this is the criteria for riscv fixes for stable - so I
+skipped them :)
 
+Picked these two up now, but it will be about a month before the
+next stable release.
 
-Paolo also said keeping qemu-system-riscv64 as a real binary, not a
-symlink, is a valid objection.
+Yes, as Alistar noted, it is best to include Cc: qemu-stable@ when
+submitting a patch which should be picked up for the stable series.
+I understand sometimes it is not obvious, so yes, Cc'ing qemu-stable@
+after the fact works too.
 
-v2 already takes that part:
+Thank you!
 
-  https://patchew.org/QEMU/20260826184229.1145-1-luoyonggang@gmail.com/
-
-What v2 changed relative to v1:
-
-- qemu-system-$TARGET is still a separately linked binary. qemu-system
-  is extra, from the ARM + RISC-V union. v1 installed
-  qemu-system-{arm,aarch64,riscv32,riscv64} as symlinks; that is gone.
-- Bare qemu-system always requires -target. There is no unique-
-  TargetInfo fallback.
-- Dropped little- and big-endian TargetInfo variants from this series.
-  One TargetInfo per target_name. Endian variants are later work.
-- No qemu-systemw for the combined binary, so a Windows GUI twin does
-  not block enabling modules later.
-
-qemu-system -target aarch64 -M virt ...
-qemu-system-riscv64 -M virt ...
-
-The per-target binaries should keep the same QOM list and RSS as today.
-The extra RAM and incomplete filtering only apply to the extra
-qemu-system binary.
-
-v2 still uses -target and TYPE_TARGET_SPECIFIC on that combined binary.
-It does not drop legacy CLI, and it does not mark qemu-system
-experimental. I treated those as later work, not required to stop
-replacing qemu-system-$TARGET with a symlink.
-
-
-The v2 still based on TYPE_TARGET_SPECIFIC  changes from Pierrick Bouvier,
-it's a great changes that
-get target-info-def.c to be generic, so maybe we can review the v2 version
-instead.
-
-The v2 version can be merged without affecting existing qemu-system-*. if
-something wrong v2, tell me in v2 patches.
-
-
->
-> I am not sure about this. Overall most (not all) of the complexity of
-> command-line processing and legacy arguments is kept at bay, and
-> contained within board code - and boards do not have to support it.
->
-> The complexity that is left is tied to -drive, mostly due to
-> differences between hot-unplug in -drive and -blockdev. And honestly
-> I'd be very much opposed to dropping -drive because using -blockdev
-> correctly is *extremely* hard and barely documented.
->
-> If we want a clean break, we need to drop the command line completely
-> and just have a QMP monitor on stdin/stdout
-> (https://wiki.qemu.org/User:Paolo_Bonzini/Machine_init_sequence).
-> Start small adding just accel-new and machine-new, and add QMP
-> equivalents of command line objects as needed.
->
-> That said, I understand that this is just an idea and not the crux of
-> the disagreement.
->
-> Paolo
->
-
-
---
-         =E6=AD=A4=E8=87=B4
-=E7=A4=BC
-=E7=BD=97=E5=8B=87=E5=88=9A
-Yours
-    sincerely,
-Yonggang Luo
-
---0000000000001053ea065a14f372
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><br><br>On Fri, Aug 28, 2026 at 1:59=E2=80=AFAM Paolo Bonz=
-ini &lt;<a href=3D"mailto:pbonzini@redhat.com">pbonzini@redhat.com</a>&gt; =
-wrote:<br>&gt;<br>&gt; On Wed, Aug 26, 2026 at 2:33=E2=80=AFPM Daniel P. Be=
-rrang=C3=A9 &lt;<a href=3D"mailto:berrange@redhat.com">berrange@redhat.com<=
-/a>&gt; wrote:<br>&gt; &gt; With the clean break with the past, we also hav=
-e the<br>&gt; &gt; ability to tackle various long standing design mistakes<=
-br>&gt; &gt; present in qemu-system-$TARGET instead of carrying them<br>&gt=
-; &gt; over into the new binary.<br><br><br><br>Paolo also said keeping qem=
-u-system-riscv64 as a real binary, not a<br>symlink, is a valid objection.<=
-br><br>v2 already takes that part:<br><br>=C2=A0 <a href=3D"https://patchew=
-.org/QEMU/20260826184229.1145-1-luoyonggang@gmail.com/">https://patchew.org=
-/QEMU/20260826184229.1145-1-luoyonggang@gmail.com/</a><br><br>What v2 chang=
-ed relative to v1:<br><br>- qemu-system-$TARGET is still a separately linke=
-d binary. qemu-system<br>=C2=A0 is extra, from the ARM + RISC-V union. v1 i=
-nstalled<br>=C2=A0 qemu-system-{arm,aarch64,riscv32,riscv64} as symlinks; t=
-hat is gone.<br>- Bare qemu-system always requires -target. There is no uni=
-que-<br>=C2=A0 TargetInfo fallback.<br>- Dropped little- and big-endian Tar=
-getInfo variants from this series.<br>=C2=A0 One TargetInfo per target_name=
-. Endian variants are later work.<br>- No qemu-systemw for the combined bin=
-ary, so a Windows GUI twin does<br>=C2=A0 not block enabling modules later.=
-<br><br>qemu-system -target aarch64 -M virt ...<br>qemu-system-riscv64 -M v=
-irt ...<br><br>The per-target binaries should keep the same QOM list and RS=
-S as today.<br>The extra RAM and incomplete filtering only apply to the ext=
-ra<br>qemu-system binary.<br><br>v2 still uses -target and TYPE_TARGET_SPEC=
-IFIC on that combined binary.<br>It does not drop legacy CLI, and it does n=
-ot mark qemu-system<br>experimental. I treated those as later work, not req=
-uired to stop<br>replacing qemu-system-$TARGET with a symlink.<br><br><br>T=
-he v2 still based on TYPE_TARGET_SPECIFIC =C2=A0changes from Pierrick Bouvi=
-er, it&#39;s a great changes that<br>get target-info-def.c to be generic, s=
-o maybe we can review the v2 version instead.<br><br>The v2 version can be =
-merged without affecting existing qemu-system-*. if something wrong v2, tel=
-l me in v2 patches.<br><br><br>&gt;<br>&gt; I am not sure about this. Overa=
-ll most (not all) of the complexity of<br>&gt; command-line processing and =
-legacy arguments is kept at bay, and<br>&gt; contained within board code - =
-and boards do not have to support it.<br>&gt;<br>&gt; The complexity that i=
-s left is tied to -drive, mostly due to<br>&gt; differences between hot-unp=
-lug in -drive and -blockdev. And honestly<br>&gt; I&#39;d be very much oppo=
-sed to dropping -drive because using -blockdev<br>&gt; correctly is *extrem=
-ely* hard and barely documented.<br>&gt;<br>&gt; If we want a clean break, =
-we need to drop the command line completely<br>&gt; and just have a QMP mon=
-itor on stdin/stdout<br>&gt; (<a href=3D"https://wiki.qemu.org/User:Paolo_B=
-onzini/Machine_init_sequence">https://wiki.qemu.org/User:Paolo_Bonzini/Mach=
-ine_init_sequence</a>).<br>&gt; Start small adding just accel-new and machi=
-ne-new, and add QMP<br>&gt; equivalents of command line objects as needed.<=
-br>&gt;<br>&gt; That said, I understand that this is just an idea and not t=
-he crux of<br>&gt; the disagreement.<br>&gt;<br>&gt; Paolo<br>&gt;<br><br><=
-br>--<br>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=E6=AD=A4=E8=87=B4<br>=E7=A4=BC<=
-br>=E7=BD=97=E5=8B=87=E5=88=9A<br>Yours<br>=C2=A0 =C2=A0 sincerely,<br>Yong=
-gang Luo</div>
-
---0000000000001053ea065a14f372--
+/mjt
 
