@@ -4,130 +4,131 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDB61C61DB9
-	for <qemu-riscv@archiver.kernel.org>; Fri, 28 Aug 2026 04:13:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E47DC61DBD
+	for <qemu-riscv@archiver.kernel.org>; Fri, 28 Aug 2026 05:44:59 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wzny1-0003WQ-TD; Fri, 28 Aug 2026 00:13:25 -0400
+	id 1wzpOU-0006Ds-BE; Fri, 28 Aug 2026 01:44:50 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <chao.liu@processmission.com>)
- id 1wznxz-0003Vn-Ru; Fri, 28 Aug 2026 00:13:23 -0400
-Received: from mail-japaneastazlp170120005.outbound.protection.outlook.com
- ([2a01:111:f403:c405::5] helo=TYPPR03CU001.outbound.protection.outlook.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <chao.liu@processmission.com>)
- id 1wznxx-0001Je-Ln; Fri, 28 Aug 2026 00:13:23 -0400
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=PfoM+vzlbcKV886w9JYxEsXWCo2B2BbyQh3oyimFbikQN4J7Jsk9Zpr/Z/qeNhBFiG2KyMpGXjo5X/6OxTg6uBm20YKH+Xxt5ZMP8KM/zSGYpyGTi3TE53IdBegusaZFMjjiIwdU/rAmWV1mQnW7JH8qUbZUfPfAsU0x6KgPNmRD297YvDLI0Dii+ur9HOXxam4Bh92hG4eXRxWPCX15lBhAgJnSxkEhDzaI1Zm5LJvlebEJTj76tk5XU234ZwjbD4hXSXEfQ8T1poT1Gg3H/k8/hynD0ZMnTNTUBFLCx9tptpAycHgi0S6b89tf85l+JTtKQAgOhtkta1CRZRSOWg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=CFrPQFxVm978k+Ki8vW5PrGhc5B+DZdlIoIUB6bc344=;
- b=omBr3/yTni6siXRG/dg2JyOhP3/pMtfC/vB4VxEu3On7c3HL0Rrm0vP7qEtKXbiprjRimDfWXT73anqb3E4FVSGysYnz0kU5ZWimXB2wUN0nkwRF4/PajxltudxrlYUbGfDehVMbxDbhRISiUt41jf1oI+q/9g6gudL/uceLdXDXqy+jyHpQW7f3rMyEO7ZPMTL0xsLCYq2f2+SO/xSjApRpyP+XDkJbZf4eXEkOgF0RpISQyqA52IAzOHl+XUEqXYNiZvmGp297WuKfHx9Bep2G2OXlusovB8u0Xb1xc93nK3cqnO1ruNx589/wG7JRQlashqAdz54iX7604a1OwQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=processmission.com; dmarc=pass action=none
- header.from=processmission.com; dkim=pass header.d=processmission.com;
- arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=processmission.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=CFrPQFxVm978k+Ki8vW5PrGhc5B+DZdlIoIUB6bc344=;
- b=DoqRzaz3AQSmUQP7LGBWnGXd6nzZ17S4A3Ziju2QEy3SUYm/82p6RxwRP/J9AlY4mfGo9uUThFL3IDtuS6bclkLNOtJCpiuj7c1e7CfIfwj+8uH38RvpN38n3Uc4wrdd6gFSYzm1lCk3VQdaSkpK1lOpdhdWaWjUNJqRjcaJU9TH/c++ZJGckLGShEHiMGM9lFsfJ1YtNICihIVceK7jN5KpzhNpxTzx0uJsQ2iB85xlODcaqIOvd//akDiuekfj+hBLOZRxVvFngqVIfkREYzbbJvR7UhN/22LZD2qbEwHVvKX5qTX8S/AdSCAvI+IOG6FLDaUO9S86DlBIC/NqdA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=processmission.com;
-Received: from TYNPR02MB9351.apcprd02.prod.outlook.com (2603:1096:405:3d0::15)
- by TYSPR02MB7338.apcprd02.prod.outlook.com (2603:1096:405:30::7) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.360.10; Fri, 28 Aug
- 2026 04:13:14 +0000
-Received: from TYNPR02MB9351.apcprd02.prod.outlook.com
- ([fe80::e5f3:5fb7:3d29:5934]) by TYNPR02MB9351.apcprd02.prod.outlook.com
- ([fe80::e5f3:5fb7:3d29:5934%4]) with mapi id 15.21.0360.008; Fri, 28 Aug 2026
- 04:13:13 +0000
-Date: Fri, 28 Aug 2026 12:13:07 +0800
-To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
- Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
- Palmer Dabbelt <palmer@dabbelt.com>
-Subject: Re: [PATCH v4 08/14] hw/riscv/fdt-common, virt.c: add
- riscv_create_fdt_socket_aclint()
-Message-ID: <apEGhbfBmPgZrT8r@ChaodeMacBook-Pro.local>
-References: <20260827222608.329788-1-daniel.barboza@oss.qualcomm.com>
- <20260827222608.329788-9-daniel.barboza@oss.qualcomm.com>
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20260827222608.329788-9-daniel.barboza@oss.qualcomm.com>
-X-ClientProxiedBy: PH0P220CA0001.NAMP220.PROD.OUTLOOK.COM
- (2603:10b6:510:d3::6) To TYNPR02MB9351.apcprd02.prod.outlook.com
- (2603:1096:405:3d0::15)
+ (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
+ id 1wzpOS-0006DO-IP
+ for qemu-riscv@nongnu.org; Fri, 28 Aug 2026 01:44:48 -0400
+Received: from mail-ed1-x530.google.com ([2a00:1450:4864:20::530])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
+ id 1wzpOQ-0005NC-Aw
+ for qemu-riscv@nongnu.org; Fri, 28 Aug 2026 01:44:48 -0400
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-6a5e971c970so2868568a12.0
+ for <qemu-riscv@nongnu.org>; Thu, 27 Aug 2026 22:44:45 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1787895884; cv=none;
+ d=google.com; s=arc-20260327;
+ b=lC0JMdqvSZBqz+uA8SAtFO1aMbd+hVeqDl/JveJdShwLfU7Sckc0ZhpDCeyTXa6Xag
+ NRKRfT6ETxaNXd4vLutaJ55NvCwV/+xWOd3ij2Od7yb0rMMqsU0mzSmdSvpVNrcb6Hdm
+ zUibL2aPCKGiwoB6aDckR97Z3733aOgdzW8l8q89jyHYYVqq6oLcX88jQHoiFdxUhYHR
+ CayQFkrr2NfTOjjmacFK/jjNh9TkX4pPZjy1uZEbWcMkq48rGwk1AKSXi5l89RavF0At
+ jvnKDtqFtdKWfloj/f0VecZDK4XTN8SWJDI8L4zgdGe73JiwiaYmmnOrv/SFAQiXpMkB
+ OZPA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=cc:to:subject:message-id:date:from:reply-to:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=xclwLkLVRxbn4Oeg5EdOyoBN23HEZDWzCEZ1snetFkg=;
+ fh=YkM4JIjPBjIjniioK2Ty3X8h2mdKrh6zPp8qWYIf57I=;
+ b=rbbxhelx8eeL/wu3Lg2wnz+TXSqSQvR4mmViAXg3Rv6pBl0iUbPy/sfnHpJiFGj7YR
+ MSzSc/fB4oAdOlOI3FrKV6MCKGn5nulBcSJjptcslqWdfFhzQ5iCnDpfIjbAQMTn8Uc8
+ dF6dypmTDLj19wG5mI3hounIPgQzMZ3hR2IPu4gmdrA9QdeqJ3X6b091xzeADdRnUvyn
+ BzgkvFskGJBeek1qsICbQpfYxLstFnK/kWXhpB+1Wx5YzdOfpX9KXMTBQNOBgpLws2lM
+ G1FYaaDepYZ9+/5FxnML4XWUdbjYbkBT5VyHCCPeR+lCWac8Y/FxqZoigJyLg+eZKQTy
+ Vcnw==; darn=nongnu.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1787895884; x=1788500684; darn=nongnu.org;
+ h=content-type:cc:to:subject:message-id:date:from:reply-to
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=xclwLkLVRxbn4Oeg5EdOyoBN23HEZDWzCEZ1snetFkg=;
+ b=QJC3W0zxwCm/n43OezcqqQKQ7LSSwC0hDd42WxtNqzbBnxHA8PFXGBkaIe57QKbdNs
+ Hptd5oHoNkuI4TPd1y2zF1hWLn74yeNsajotnubGAdMtlze5B4mdoXCSIZkUn32SY+K9
+ Cg6s/Fa56yuUYOtH9EDj36cDgua7jEQCJKRghImaXh6mrOzEvbEP+ofIfLNPg5w8WEYC
+ ANB3kvPS1ptgNieQVGOlU5oWIUec+KN4UUX8MCI2SQ2fSYhBN4jY8lIqDx8EuQBVQRhr
+ PCVl4yRGMQmbiLGO8FXMDWB5wKYz9COw8hl5Qq83hHcUjCVL8J+SwizxXYf52z+LP2uH
+ mX+A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1787895884; x=1788500684;
+ h=content-type:cc:to:subject:message-id:date:from:reply-to
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=xclwLkLVRxbn4Oeg5EdOyoBN23HEZDWzCEZ1snetFkg=;
+ b=XEC0UEZufdoS+A/8xqpHC4JuOlz6bD9+JzmJgVXVMOnjpNgxYm/j+Hn+wm6v/Qm2Qo
+ /JhzR1LUh20+s5W2R5wvd42P9hj+clNFwSm7ohin0LX9utsaYODABMSwH5iPqktiKhUa
+ 9wL1o039ig+RdVO5oMHTLpqNly//s1YdCjpP2eQAT9fn8izrr2ZUA4nN8WsEQUjPII0q
+ uh5e1Amamk4ACCGJgDyASBVwwPZhMhMWTowXAKsXF6tMQHiHgTclDBB4dW5U2oGb5+G1
+ oimzX4HFlVwUWei0LEJ4Q2YqQzeVSvgTJmKXMwfRD/QzHfLHHf6WkQwAzhxiaORMeWle
+ gcBw==
+X-Forwarded-Encrypted: i=1;
+ AHgh+Rr3snAlU7dmPBOHvIXni+hGBfAy3lEHH4rRNUwmEEYCyrNLUxKBQ+3jJ03vnuj4LKm8mo8ZxwTYaWtU@nongnu.org
+X-Gm-Message-State: AFuF++kgJk1d9U2WHFZ3uB8Ro4LfyIYyVZRtcgvAwy2ahubLkl7wmU6n
+ FTl8DMkEaopwenrQt59a7Eb1ZEz1nRgaIbPvUgtK81waMyG+wuifv8ebmUf7pp0BIj6AAHot6S6
+ RXs0BYuf7tmE72uX5135xdIgn3hr+MWo=
+X-Gm-Gg: AR+sD10CyecxMvPdrc7Vxd7RRQUrEoejFHpwvkzd1OhVEMyvi2sr1IQDXw/FGcBmMAO
+ Urbb415L9xBVGAgo8AC4GiQNzgIR2yIE1qNJa5lIO6AAUMvzktfC2wWV5EjFCq88yTKfboizxYJ
+ 1zSvaM6AhvD6i3JXmaSUuOqg8nbSKE1NMcReP0f2YSZaxcdO/9V4YI59h+fOUX8U+a4N1zqdA9B
+ Cv+qA3vA23nqrObM3wSjWQxvwM+mHU+puF8lx7MEy3EVlrMpSoLIVfKVcxPE9fpSHUYwcyeOULH
+ PraOP7qw1XBpsFAmp7cL4eLSIs9+DenPngXxp/heOAb8
+X-Received: by 2002:a17:907:9b8d:b0:c25:5081:a9f7 with SMTP id
+ a640c23a62f3a-c255081ace9mr352089166b.14.1787895884041; Thu, 27 Aug 2026
+ 22:44:44 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: TYNPR02MB9351:EE_|TYSPR02MB7338:EE_
-X-MS-Office365-Filtering-Correlation-Id: 698f8bc8-717e-4c9d-fd25-08df04baadc4
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|23010399003|366016|1800799024|376014|10067099003|6133799003|18002099003|22082099003|4143699003|56012099006;
-X-Microsoft-Antispam-Message-Info: 1kEZH2ZMVB+jW/wkl693C1yBuKd5reKbnVU565tmO8MEGyyL3CruS718dbpRsBpnI/j9AA8vS2H7bXigao5weHiIqugwrPIkW8Gk4SMeSLGOapfCev8pDE/wdG3Qa8PvSKtOPJ2xTMcpL/hvQWHIbjcMtn1kZyf54xwP8LGOrmUjgs6Tsidk+ZZNbP3cBaZujYmkrkIIH6R3MTBdkJBthVY7ydiNIvyceA8kdE/j+OVuz8dmIjBOfocG8wcEVLEkuswl0CUY9isWZqL3faKp4HpPI/k2zOf0isXGr67VBYtZrPcVnqXO/yc+oxcGrVe/nLbDCjZol1To3/jwHehGHXM3NSsN7dnyAuoSBxoAPbr1jPzItAcGXP9nSt+DCD1KIicAp/SFFhGpZkzehsvpk5T6N3Us2ArsSRRtd69E9sjcU2StQVHlYCeawPYJYu/oS6a11RF0oITyUVBDa6npkWhhqOGQ1j/GZQqTspvrIrw4ay7FDDnlvqPERtzcRLz0kVnX8f5yxYKrbjtjZ9Lm5m/JYW+4XfOKjNf6yh7Tud67zlDeGyThKx8hhQ7OYPfrQvCSDx/cYeto0H/g2GmOGH1tNDgSQ1GSDs2XjKIEaySHOMllx5ClllEKC1Qyu6mTkrkeQt+HYLOmx36S69IEw36Cga0qQowpyPb2imF0syc=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:TYNPR02MB9351.apcprd02.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(23010399003)(366016)(1800799024)(376014)(10067099003)(6133799003)(18002099003)(22082099003)(4143699003)(56012099006);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?iso-8859-1?Q?We45pho+lbZuaXiqzv385jD5tI3KnimSYTDi+uzboSUIXEDA2I4RqnBqc9?=
- =?iso-8859-1?Q?UeBgqhrmaU8Uc8nd5XKX/GSwVqSlqsa9dZXQRiew3Q1HjH0GEIcQARD+yL?=
- =?iso-8859-1?Q?MWYh6IQJLo2j/LxUSHiZU+QB5cYPr+64vxHY5OoO6JIcR1U00BrTjDlA8s?=
- =?iso-8859-1?Q?wqoRHYRqZjFRyjrDRY5W8zv/MacVHdAgchMGwz1SP/onjBrP6wR0wHHv0w?=
- =?iso-8859-1?Q?cwhrVoW85r4kShRgrarBdjFJsz3/3iMy/3DeTZWiWT41b3tmDHnSZPYKgo?=
- =?iso-8859-1?Q?yRXu1p0DxTcuwm4DW8RuNK7XBb1K06vvFr99lrOsRJ72TybhqhOrw+iWsR?=
- =?iso-8859-1?Q?xxMAeHqKcwD3nFhhU41iBODosYkQ5BQdZuYh9K05SzC7qywvzpiU3dgumv?=
- =?iso-8859-1?Q?ZZxhLXk8ZpICBbivnstfXuznoqQZv7iwjIrTG/XaUc2L/Jfr6as1wcSCKq?=
- =?iso-8859-1?Q?4KIBUXreNS8tWicbRRfR7VcnH8PgGOTPl79Zp7MSHRJbXodDiIBhLieABj?=
- =?iso-8859-1?Q?0GjSb4t9gAI92LMy0E/ebK9nvXNwflDLEzFRVndNX+t5tJRc/LYQj19Fov?=
- =?iso-8859-1?Q?ls8ubcVgA7u9W9GyYG1zqyoVmCr//819L8eJcOXAD/dXS9gzi7cbkSQthv?=
- =?iso-8859-1?Q?zJtoi/iX1A8MW1q5JAl2PdMXPtLmPWkeGPvIY5WQ1OLS8nEOKoZq986w0c?=
- =?iso-8859-1?Q?07R+Nav+0MOv0u8vZaTHN20w1eXXJN7Gk0C0XnJwtfzjgfBYJQCV8GuPcW?=
- =?iso-8859-1?Q?+X0+sX8F4BlesTYmTlx+CSmG1Jku+9SaXVbJCT/MbDrVoq3VrWKrtUoomX?=
- =?iso-8859-1?Q?SqPFPgLRB/HzUDfo+wsgt5u/3pLbNJuLZo5Yd4mNuZ5dq0pnfFR6kFr6EN?=
- =?iso-8859-1?Q?VvLaynQD6kQghDY9Bw7AjjLpR7hEeav7H+xXiO4gZVP+E7yAWuPD0utPB8?=
- =?iso-8859-1?Q?ee8zCipSS4zzoEz8S4vh6krwrkmTXIcN/VHe6CTFiJEW8bE4XOvmtEbk/+?=
- =?iso-8859-1?Q?pwSmycwToVHdWU+yDZHa0emzUlj4XSLiGs5lzK9OTGdYcBYIwEO5W5mJs5?=
- =?iso-8859-1?Q?6Pm6Yl20PBmCNpwV6UQ6guKD1s0OLh1ftCrPhGt/w40ycXSnc7LviUuHbr?=
- =?iso-8859-1?Q?uyP+AWILFYs+hbzkb5bw40HKF2JQXKEI8DamKilwM/k0NOKJpf8DlWNa+x?=
- =?iso-8859-1?Q?vSNDYDQ0wBWbQd1DQl5RjKJoL7SW4x5AAlJtEY4m+j8yXOLFFaQ+9kyQrG?=
- =?iso-8859-1?Q?KqOxI0+zmBmK811lISUdrsUeUEpSU8qzDLAD+CRNSJAX0r/EUd4PsVnW32?=
- =?iso-8859-1?Q?18hUoIhczeaL6awCuy7D5uqPItFU2VyIdY9scdoJKlomh4kZc3FeNCQToq?=
- =?iso-8859-1?Q?H01xnSYOTZTPm7t9bx2SOyRzI5wmfuUd8jKYQaM3ODYdoMt6q7J2YVztna?=
- =?iso-8859-1?Q?6sHpn3kayd/TT1tCcRQIcVKH9DHltQF+qiAyNTF4MRpn1S+STn694sBAiU?=
- =?iso-8859-1?Q?J6SOBhFzYH6vyLkFqKmLcLv7+xtfA4Gdv9wTxYgCnkC/iprOGzRcKZ+IMX?=
- =?iso-8859-1?Q?RZwQs+beqMFERNFMpvrG8v5S93GqhBjHtowWnKOJpLAuRcebHW2D0lC5Ow?=
- =?iso-8859-1?Q?ERXyyvYydJhMY7zNqzoA6Bszk95WsNS6Sj72IT4Zezg0y1kzs6OSqsp6Qe?=
- =?iso-8859-1?Q?DzLdgNi24yCyiy/f+R7tNWTQc/y84A9+fweH45U+7848FosPZLgSrMDP5T?=
- =?iso-8859-1?Q?w8JYkgy86B56SjToc1OOaC6oXWDHFZKsIrvAKmW36/6q2yVDgCQgcccjrJ?=
- =?iso-8859-1?Q?pnIx73vPy7EZw6Hg1bOoWmhLbDTS1F0=3D?=
-X-OriginatorOrg: processmission.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 698f8bc8-717e-4c9d-fd25-08df04baadc4
-X-MS-Exchange-CrossTenant-AuthSource: TYNPR02MB9351.apcprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Aug 2026 04:13:13.6448 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: e0544bf7-9765-4630-ab69-0b266dc2169c
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 6Y95MLtUp+0j8nLbCQYbtNsohb2a6BhPwliD/88VEfLN0+GuIi/IjU4KoAG3Ug6A6yVHGQRmm5JEWTO0NwrA2zE/y2MkMZvBZ1opPOTL1Sw=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYSPR02MB7338
-Received-SPF: pass client-ip=2a01:111:f403:c405::5;
- envelope-from=chao.liu@processmission.com;
- helo=TYPPR03CU001.outbound.protection.outlook.com
-X-Spam_score_int: -16
-X-Spam_score: -1.7
-X-Spam_bar: -
-X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
- DKIM_SIGNED=0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+References: <20260823150731.896-1-luoyonggang@gmail.com>
+ <ao7c-FiawF9sMCGj@redhat.com>
+ <CABgObfa4QiBKuj7o06RL+egm_QOX03hpP9PAHoeKYOr9wwGvFA@mail.gmail.com>
+In-Reply-To: <CABgObfa4QiBKuj7o06RL+egm_QOX03hpP9PAHoeKYOr9wwGvFA@mail.gmail.com>
+From: Yonggang Luo <luoyonggang@gmail.com>
+Date: Fri, 28 Aug 2026 13:44:30 +0800
+X-Gm-Features: AcwNN1X1GOaj0QRVxiPqghu_RCWMtblSNbD_bINUi2HuZL8Vyf_lbN_vGb5HcNQ
+Message-ID: <CAE2XoE_KZYdo40HLdtxCWSa4q0nh1ZBiukCB3PdjeMLD6vfAYQ@mail.gmail.com>
+Subject: Re: [PATCH 00/12] single-binary: link ARM and RISC-V into qemu-system
+To: Paolo Bonzini <pbonzini@redhat.com>
+Cc: =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
+ qemu-devel@nongnu.org, Xianglai Li <lixianglai@loongson.cn>, 
+ Alistair Francis <alistair.francis@wdc.com>, Chinmay Rath <rathc@linux.ibm.com>,
+ Sunil V L <sunilvl@ventanamicro.com>, qemu-riscv@nongnu.org, 
+ Alexander Bulekov <alxndr@bu.edu>, Zhao Liu <zhao1.liu@intel.com>,
+ Eric Farman <farman@linux.ibm.com>, 
+ Laurent Vivier <lvivier@redhat.com>, Peter Maydell <peter.maydell@linaro.org>, 
+ Chao Liu <chao.liu@processmission.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, Song Gao <17746591750@163.com>, 
+ Harsh Prateek Bora <harshpb@linux.ibm.com>, Glenn Miles <milesg@linux.ibm.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, qemu-s390x@nongnu.org, 
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@mailo.com>, 
+ "Michael S. Tsirkin" <mst@redhat.com>, Stefan Hajnoczi <stefanha@redhat.com>, 
+ =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, 
+ David Hildenbrand <david@kernel.org>, qemu-ppc@nongnu.org, qemu-arm@nongnu.org,
+ Igor Mammedov <imammedo@redhat.com>, Aleksandar Rikalo <arikalo@gmail.com>, 
+ Nicholas Piggin <npiggin@gmail.com>, Cornelia Huck <cohuck@redhat.com>, 
+ Richard Henderson <richard.henderson@linaro.org>,
+ Ilya Leoshkevich <iii@linux.ibm.com>, 
+ Fabiano Rosas <farosas@suse.de>, Aurelien Jarno <aurelien@aurel32.net>,
+ Ani Sinha <anisinha@redhat.com>, Bibo Mao <maobibo@loongson.cn>,
+ =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>, 
+ Matthew Rosato <mjrosato@linux.ibm.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Darren Kenny <darren.kenny@oracle.com>
+Content-Type: multipart/alternative; boundary="0000000000001053ea065a14f372"
+Received-SPF: pass client-ip=2a00:1450:4864:20::530;
+ envelope-from=luoyonggang@gmail.com; helo=mail-ed1-x530.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -140,151 +141,152 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Reply-to:  Chao Liu <chao.liu@processmission.com>
-From:  Chao Liu via <qemu-riscv@nongnu.org>
+Reply-To: luoyonggang@gmail.com
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Aug 27, 2026 at 07:26:01PM +0800, Daniel Henrique Barboza wrote:
-> Yet another FDT that we want to move to a helper to avoid copy/pasting
-> code to other boards that will use a mtimer.  In particular the future
-> 'riscv-server-ref' board.
-> 
-> No FDT changes made.
-> 
-> Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-> Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
-> ---
->  hw/riscv/fdt-common.c         |  96 ++++++++++++++++++++++++++++++++
->  hw/riscv/virt.c               | 101 ++++------------------------------
->  include/hw/riscv/fdt-common.h |  11 ++++
->  3 files changed, 119 insertions(+), 89 deletions(-)
-> 
-> diff --git a/hw/riscv/fdt-common.c b/hw/riscv/fdt-common.c
-> index d815c5adff..76a783709d 100644
-> --- a/hw/riscv/fdt-common.c
-> +++ b/hw/riscv/fdt-common.c
-> @@ -16,6 +16,7 @@
->  #include "target/riscv/cpu_bits.h"
->  #include "hw/riscv/riscv-iommu-bits.h"
->  #include "hw/riscv/iommu.h"
-> +#include "hw/intc/riscv_aclint.h"
->  #include "hw/intc/riscv_imsic.h"
->  #include "hw/pci/pci.h"
->  #include "hw/pci/pcie_host.h"
-> @@ -702,3 +703,98 @@ void riscv_create_fdt_socket_aplic(void *fdt, APLICFdtProps *props,
->  
->      aplic_phandles[props->socket] = aplic_s_phandle;
->  }
-> +
-> +void riscv_create_fdt_socket_aclint(void *fdt, ACLINTFdtProps *props,
-> +                                    uint32_t *intc_phandles)
-> +{
-> +    uint32_t aclint_cells_size = props->num_harts * sizeof(uint32_t) * 2;
-> +    g_autofree uint32_t *aclint_mswi_cells = NULL;
-> +    g_autofree uint32_t *aclint_sswi_cells = NULL;
-> +    g_autofree uint32_t *aclint_mtimer_cells = NULL;
-> +    hwaddr addr, size;
-> +    char *name;
-> +    int cpu;
-> +
-> +    aclint_mswi_cells = g_new0(uint32_t, props->num_harts * 2);
-> +    aclint_mtimer_cells = g_new0(uint32_t, props->num_harts * 2);
-> +    aclint_sswi_cells = g_new0(uint32_t, props->num_harts * 2);
-> +
-> +    for (cpu = 0; cpu < props->num_harts; cpu++) {
-> +        aclint_mswi_cells[cpu * 2 + 0] = cpu_to_be32(intc_phandles[cpu]);
-> +        aclint_mswi_cells[cpu * 2 + 1] = cpu_to_be32(IRQ_M_SOFT);
-> +        aclint_mtimer_cells[cpu * 2 + 0] = cpu_to_be32(intc_phandles[cpu]);
-> +        aclint_mtimer_cells[cpu * 2 + 1] = cpu_to_be32(IRQ_M_TIMER);
-> +        aclint_sswi_cells[cpu * 2 + 0] = cpu_to_be32(intc_phandles[cpu]);
-> +        aclint_sswi_cells[cpu * 2 + 1] = cpu_to_be32(IRQ_S_SOFT);
-> +    }
-> +
-> +    if (props->aia_type != AIA_TYPE_APLIC_IMSIC) {
-> +        addr = props->clint->base + (props->clint->size * props->socket);
-> +        name = g_strdup_printf("/soc/mswi@%"HWADDR_PRIx, addr);
-> +
-> +        qemu_fdt_add_subnode(fdt, name);
-> +        qemu_fdt_setprop_string(fdt, name, "compatible", "riscv,aclint-mswi");
-> +        qemu_fdt_setprop_sized_cells(fdt, name, "reg",
-> +                                     2, addr, 2, RISCV_ACLINT_SWI_SIZE);
-> +        qemu_fdt_setprop(fdt, name, "interrupts-extended",
-> +                         aclint_mswi_cells, aclint_cells_size);
-> +        qemu_fdt_setprop(fdt, name, "interrupt-controller", NULL, 0);
-> +        qemu_fdt_setprop_cell(fdt, name, "#interrupt-cells", 0);
-> +
-> +        if (props->numa_enabled) {
-> +            qemu_fdt_setprop_cell(fdt, name, "numa-node-id", props->socket);
-> +        }
-> +
-> +        g_free(name);
-> +    }
-> +
-> +    if (props->aia_type == AIA_TYPE_APLIC_IMSIC) {
-> +        addr = props->clint->base +
-> +               (RISCV_ACLINT_DEFAULT_MTIMER_SIZE * props->socket);
-> +        size = RISCV_ACLINT_DEFAULT_MTIMER_SIZE;
-> +    } else {
-> +        addr = props->clint->base + RISCV_ACLINT_SWI_SIZE +
-> +               (props->clint->size * props->socket);
-> +        size = props->clint->size - RISCV_ACLINT_SWI_SIZE;
-> +    }
-> +
-> +    name = g_strdup_printf("/soc/mtimer@%"HWADDR_PRIx, addr);
-> +    qemu_fdt_add_subnode(fdt, name);
-> +    qemu_fdt_setprop_string(fdt, name, "compatible",
-> +                            "riscv,aclint-mtimer");
-> +    qemu_fdt_setprop_sized_cells(fdt, name, "reg",
-> +        2, addr,
-Should be:
-	   2, addr + RISCV_ACLINT_DEFAULT_MTIME,
+--0000000000001053ea065a14f372
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-I found an MTIMER FDT issue in the virt machine FDT.
+On Fri, Aug 28, 2026 at 1:59=E2=80=AFAM Paolo Bonzini <pbonzini@redhat.com>=
+ wrote:
+>
+> On Wed, Aug 26, 2026 at 2:33=E2=80=AFPM Daniel P. Berrang=C3=A9 <berrange=
+@redhat.com>
+wrote:
+> > With the clean break with the past, we also have the
+> > ability to tackle various long standing design mistakes
+> > present in qemu-system-$TARGET instead of carrying them
+> > over into the new binary.
 
-Command:
 
-```
-  timeout 30s ./build/qemu-system-riscv64 \
-    -machine virt,aia=aplic-imsic,aia-guests=5,aclint=on,dumpdtb=/tmp/virt.dtb \
-    -smp 2 -display none -nodefaults
 
-  dtc -I dtb -O dts /tmp/virt.dtb | grep -A4 mtimer@
-```
+Paolo also said keeping qemu-system-riscv64 as a real binary, not a
+symlink, is a valid objection.
 
-The generated FDT contains:
+v2 already takes that part:
 
-                mtimer@2000000 {
-                        interrupts-extended = <0x04 0x07 0x02 0x07>;
-                        reg = <0x00 0x2000000 0x00 0x08 0x00 0x2000000 0x00 0x7ff8>;
-                        compatible = "riscv,aclint-mtimer";
-                };
+  https://patchew.org/QEMU/20260826184229.1145-1-luoyonggang@gmail.com/
 
-without this patches:
+What v2 changed relative to v1:
 
-                  mtimer@2000000 {
-                          interrupts-extended = <0x04 0x07 0x02 0x07>;
-                          reg = <0x00 0x2007ff8 0x00 0x08 0x00 0x2000000 0x00 0x7ff8>;
-                          compatible = "riscv,aclint-mtimer";
-                  };
+- qemu-system-$TARGET is still a separately linked binary. qemu-system
+  is extra, from the ARM + RISC-V union. v1 installed
+  qemu-system-{arm,aarch64,riscv32,riscv64} as symlinks; that is gone.
+- Bare qemu-system always requires -target. There is no unique-
+  TargetInfo fallback.
+- Dropped little- and big-endian TargetInfo variants from this series.
+  One TargetInfo per target_name. Endian variants are later work.
+- No qemu-systemw for the combined binary, so a Windows GUI twin does
+  not block enabling modules later.
 
-The first address should be 0x20007ff8.
+qemu-system -target aarch64 -M virt ...
+qemu-system-riscv64 -M virt ...
 
-> +        2, size - RISCV_ACLINT_DEFAULT_MTIME,
-> +        2, addr + RISCV_ACLINT_DEFAULT_MTIMECMP,
-> +        2, RISCV_ACLINT_DEFAULT_MTIME);
+The per-target binaries should keep the same QOM list and RSS as today.
+The extra RAM and incomplete filtering only apply to the extra
+qemu-system binary.
 
-[...]
+v2 still uses -target and TYPE_TARGET_SPECIFIC on that combined binary.
+It does not drop legacy CLI, and it does not mark qemu-system
+experimental. I treated those as later work, not required to stop
+replacing qemu-system-$TARGET with a symlink.
 
-> +    qemu_fdt_setprop(fdt, name, "interrupts-extended",
-> -    qemu_fdt_setprop_sized_cells(ms->fdt, name, "reg",
-> -        2, addr + RISCV_ACLINT_DEFAULT_MTIME,
-I think this is the original code that was moved here.
 
-Thanks,
-Chao
-> -        2, size - RISCV_ACLINT_DEFAULT_MTIME,
-> -        2, addr + RISCV_ACLINT_DEFAULT_MTIMECMP,
-> -        2, RISCV_ACLINT_DEFAULT_MTIME);
+The v2 still based on TYPE_TARGET_SPECIFIC  changes from Pierrick Bouvier,
+it's a great changes that
+get target-info-def.c to be generic, so maybe we can review the v2 version
+instead.
 
+The v2 version can be merged without affecting existing qemu-system-*. if
+something wrong v2, tell me in v2 patches.
+
+
+>
+> I am not sure about this. Overall most (not all) of the complexity of
+> command-line processing and legacy arguments is kept at bay, and
+> contained within board code - and boards do not have to support it.
+>
+> The complexity that is left is tied to -drive, mostly due to
+> differences between hot-unplug in -drive and -blockdev. And honestly
+> I'd be very much opposed to dropping -drive because using -blockdev
+> correctly is *extremely* hard and barely documented.
+>
+> If we want a clean break, we need to drop the command line completely
+> and just have a QMP monitor on stdin/stdout
+> (https://wiki.qemu.org/User:Paolo_Bonzini/Machine_init_sequence).
+> Start small adding just accel-new and machine-new, and add QMP
+> equivalents of command line objects as needed.
+>
+> That said, I understand that this is just an idea and not the crux of
+> the disagreement.
+>
+> Paolo
+>
+
+
+--
+         =E6=AD=A4=E8=87=B4
+=E7=A4=BC
+=E7=BD=97=E5=8B=87=E5=88=9A
+Yours
+    sincerely,
+Yonggang Luo
+
+--0000000000001053ea065a14f372
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><br><br>On Fri, Aug 28, 2026 at 1:59=E2=80=AFAM Paolo Bonz=
+ini &lt;<a href=3D"mailto:pbonzini@redhat.com">pbonzini@redhat.com</a>&gt; =
+wrote:<br>&gt;<br>&gt; On Wed, Aug 26, 2026 at 2:33=E2=80=AFPM Daniel P. Be=
+rrang=C3=A9 &lt;<a href=3D"mailto:berrange@redhat.com">berrange@redhat.com<=
+/a>&gt; wrote:<br>&gt; &gt; With the clean break with the past, we also hav=
+e the<br>&gt; &gt; ability to tackle various long standing design mistakes<=
+br>&gt; &gt; present in qemu-system-$TARGET instead of carrying them<br>&gt=
+; &gt; over into the new binary.<br><br><br><br>Paolo also said keeping qem=
+u-system-riscv64 as a real binary, not a<br>symlink, is a valid objection.<=
+br><br>v2 already takes that part:<br><br>=C2=A0 <a href=3D"https://patchew=
+.org/QEMU/20260826184229.1145-1-luoyonggang@gmail.com/">https://patchew.org=
+/QEMU/20260826184229.1145-1-luoyonggang@gmail.com/</a><br><br>What v2 chang=
+ed relative to v1:<br><br>- qemu-system-$TARGET is still a separately linke=
+d binary. qemu-system<br>=C2=A0 is extra, from the ARM + RISC-V union. v1 i=
+nstalled<br>=C2=A0 qemu-system-{arm,aarch64,riscv32,riscv64} as symlinks; t=
+hat is gone.<br>- Bare qemu-system always requires -target. There is no uni=
+que-<br>=C2=A0 TargetInfo fallback.<br>- Dropped little- and big-endian Tar=
+getInfo variants from this series.<br>=C2=A0 One TargetInfo per target_name=
+. Endian variants are later work.<br>- No qemu-systemw for the combined bin=
+ary, so a Windows GUI twin does<br>=C2=A0 not block enabling modules later.=
+<br><br>qemu-system -target aarch64 -M virt ...<br>qemu-system-riscv64 -M v=
+irt ...<br><br>The per-target binaries should keep the same QOM list and RS=
+S as today.<br>The extra RAM and incomplete filtering only apply to the ext=
+ra<br>qemu-system binary.<br><br>v2 still uses -target and TYPE_TARGET_SPEC=
+IFIC on that combined binary.<br>It does not drop legacy CLI, and it does n=
+ot mark qemu-system<br>experimental. I treated those as later work, not req=
+uired to stop<br>replacing qemu-system-$TARGET with a symlink.<br><br><br>T=
+he v2 still based on TYPE_TARGET_SPECIFIC =C2=A0changes from Pierrick Bouvi=
+er, it&#39;s a great changes that<br>get target-info-def.c to be generic, s=
+o maybe we can review the v2 version instead.<br><br>The v2 version can be =
+merged without affecting existing qemu-system-*. if something wrong v2, tel=
+l me in v2 patches.<br><br><br>&gt;<br>&gt; I am not sure about this. Overa=
+ll most (not all) of the complexity of<br>&gt; command-line processing and =
+legacy arguments is kept at bay, and<br>&gt; contained within board code - =
+and boards do not have to support it.<br>&gt;<br>&gt; The complexity that i=
+s left is tied to -drive, mostly due to<br>&gt; differences between hot-unp=
+lug in -drive and -blockdev. And honestly<br>&gt; I&#39;d be very much oppo=
+sed to dropping -drive because using -blockdev<br>&gt; correctly is *extrem=
+ely* hard and barely documented.<br>&gt;<br>&gt; If we want a clean break, =
+we need to drop the command line completely<br>&gt; and just have a QMP mon=
+itor on stdin/stdout<br>&gt; (<a href=3D"https://wiki.qemu.org/User:Paolo_B=
+onzini/Machine_init_sequence">https://wiki.qemu.org/User:Paolo_Bonzini/Mach=
+ine_init_sequence</a>).<br>&gt; Start small adding just accel-new and machi=
+ne-new, and add QMP<br>&gt; equivalents of command line objects as needed.<=
+br>&gt;<br>&gt; That said, I understand that this is just an idea and not t=
+he crux of<br>&gt; the disagreement.<br>&gt;<br>&gt; Paolo<br>&gt;<br><br><=
+br>--<br>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=E6=AD=A4=E8=87=B4<br>=E7=A4=BC<=
+br>=E7=BD=97=E5=8B=87=E5=88=9A<br>Yours<br>=C2=A0 =C2=A0 sincerely,<br>Yong=
+gang Luo</div>
+
+--0000000000001053ea065a14f372--
 
