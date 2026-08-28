@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9CC2C61DCB
-	for <qemu-riscv@archiver.kernel.org>; Fri, 28 Aug 2026 15:14:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74356C61DBD
+	for <qemu-riscv@archiver.kernel.org>; Fri, 28 Aug 2026 15:14:59 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wzyHJ-0006Fn-DQ; Fri, 28 Aug 2026 11:14:01 -0400
+	id 1wzyHK-0006GI-BQ; Fri, 28 Aug 2026 11:14:02 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <cp0613@linux.alibaba.com>)
- id 1wzyHG-0006DW-AP; Fri, 28 Aug 2026 11:13:58 -0400
-Received: from [115.124.30.97] (helo=out30-97.freemail.mail.aliyun.com)
+ id 1wzyHG-0006Ct-0I; Fri, 28 Aug 2026 11:13:58 -0400
+Received: from [115.124.30.119] (helo=out30-119.freemail.mail.aliyun.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <cp0613@linux.alibaba.com>)
- id 1wzyHB-0002fD-0D; Fri, 28 Aug 2026 11:13:58 -0400
+ id 1wzyHA-0002dx-L3; Fri, 28 Aug 2026 11:13:57 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linux.alibaba.com; s=default;
- t=1787930015; h=From:To:Subject:Date:Message-ID:MIME-Version;
- bh=h9pooA5aBA96lNnW7CUv7B9YADSvf/FDW4PI23kWFUI=;
- b=NEGBnXVP517fiakY5XKv3Lbeb8UCBsyCOKIwONfpXmwYeXKhzVOWMTrEeplSjYTGPaDGGFqyWeXx6dtkFg8mDk0+pmrAiy04cihA14AW9BuCt1epWtwun6aLYng7cC4vbBGB8bFRysdbroR7hx7pnpvUtRg/AeUDF216hZ1V6MA=
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R551e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033037026112;
+ t=1787930009; h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
+ bh=VczuAjAG7lF2KeyCwVeFZP+t9HaL5xy/FEvZ6Ejt61g=;
+ b=TXs5t9i3mucBLGa7sNx4DrM0jt37uKLPlhE96Zi2EAw5xAOWEoEgb52a6OX8LzmtcGStisKWkgkiiimeZS/zk3+9g0SNROsru/ICp0ITMYua68dZe/Cuv1MuHPZP2Zq9sv7slPkZPRASJWB8fkfv77S6qYNtg725Oq1Tp2VSqEU=
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R561e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033037033178;
  MF=cp0613@linux.alibaba.com; NM=1; PH=DS; RN=19; SR=0;
- TI=SMTPD_---0X9md4yo_1787930013; 
+ TI=SMTPD_---0X9md4vf_1787929998; 
 Received: from DESKTOP-S9E58SO.localdomain(mailfrom:cp0613@linux.alibaba.com
- fp:SMTPD_---0X9md4yo_1787930013 cluster:ay36) by smtp.aliyun-inc.com;
- Fri, 28 Aug 2026 23:13:34 +0800
+ fp:SMTPD_---0X9md4vf_1787929998 cluster:ay36) by smtp.aliyun-inc.com;
+ Fri, 28 Aug 2026 23:13:28 +0800
 From: Chen Pei <cp0613@linux.alibaba.com>
 To: palmer@dabbelt.com, alistair.francis@wdc.com, mst@redhat.com,
  imammedo@redhat.com, sunilvl@ventanamicro.com, jic23@kernel.org
@@ -38,17 +38,18 @@ Cc: pbonzini@redhat.com, liwei1518@gmail.com, daniel.barboza@oss.qualcomm.com,
  anisinha@redhat.com, dave.jiang@intel.com, alison.schofield@intel.com,
  junjie.cao@intel.com, guoren@kernel.org, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org, linux-cxl@vger.kernel.org
-Subject: [PATCH v4 5/6] tests/qtest: Add RISC-V ACPI bios tables test for CXL
-Date: Fri, 28 Aug 2026 23:13:04 +0800
-Message-ID: <20260828151317.815-6-cp0613@linux.alibaba.com>
+Subject: [PATCH v4 0/6] hw/riscv/virt: Add CXL support to the RISC-V virt
+ machine
+Date: Fri, 28 Aug 2026 23:12:59 +0800
+Message-ID: <20260828151317.815-1-cp0613@linux.alibaba.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260828151317.815-1-cp0613@linux.alibaba.com>
-References: <20260828151317.815-1-cp0613@linux.alibaba.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.97 (deferred)
-Received-SPF: pass client-ip=115.124.30.97;
- envelope-from=cp0613@linux.alibaba.com; helo=out30-97.freemail.mail.aliyun.com
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.119 (deferred)
+Received-SPF: pass client-ip=115.124.30.119;
+ envelope-from=cp0613@linux.alibaba.com;
+ helo=out30-119.freemail.mail.aliyun.com
 X-Spam_score_int: -166
 X-Spam_score: -16.7
 X-Spam_bar: ----------------
@@ -72,98 +73,125 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Add test_acpi_riscv64_virt_tcg_cxl() to verify that enabling CXL on
-the RISC-V virt machine produces correct ACPI tables, including the
-ACPI0017 CXLM device with _DEP in the DSDT and the CEDT table.
+This series adds CXL support to the RISC-V virt machine, following the
+approach used by the ARM virt machine: CXL host bridges (pxb-cxl) are
+described as ACPI0016 devices, an ACPI0017 (CXLM) device is added to the
+DSDT with a _DEP on the CXL host bridges, and a CEDT table is built. A
+bios-tables test is added to pin down the generated ACPI tables.
 
-The test boots with cxl=on, one pxb-cxl bus (bus_nr=12), a CXL root
-port, a cxl-type3 device and a fixed memory window, mirroring the
-existing x86 q35 CXL test pattern.
+Changes since v3
+----------------
+  - The CXL host bridge resource handling is reworked, following Junjie
+    Cao's suggestion (and Igor Mammedov's earlier "fix UEFI" direction):
+    instead of reserving a fixed 256 MiB carve-out and simulating the
+    firmware PCI initialization in QEMU, the machine now advertises the
+    pxb-cxl expander root buses to firmware via the etc/extra-pci-roots
+    fw_cfg file (pci_bus_add_fw_cfg_extra_pci_roots(), as arm/virt and
+    x86 do).  EDK2's PciBusDxe then enumerates behind the CXL host
+    bridge and assigns the root-port window and bus numbers, and
+    build_crs() emits a correct _CRS for the ACPI0016 host bridge.
+    This keeps the machine code minimal (a single call, no carve-out),
+    scales to multiple pxb-cxl host bridges, and lets firmware size the
+    window to what is actually behind the bridge.
+  - The bios-tables test is split into the staged flow documented in
+    bios-tables-test.c, and ordered the same way the riscv64 goldens were
+    originally added upstream (Sunil V L's commit cc3ba2422554 et al.):
+    the feature code comes first, then three consecutive commits -- empty
+    golden files + allowed-diff.h, the test code, and the populated golden
+    master binaries with an emptied allowed-diff.h.
 
-Since pxb-cxl is a root bus, using -cdrom causes QEMU to auto-plug the
-cdrom drive into pxb-cxl, triggering "Only PCI/PCIe bridges can be
-plugged into pxb-cxl".  The ISO is instead attached explicitly via a
-virtio-scsi-pci controller on pcie.0, following the same approach as
-test_acpi_aarch64_virt_tcg_pxb().
+Changes since v2
+----------------
+  - hw/riscv/virt: The MMIO-window patch no longer touches the common
+    gpex code (Igor).  The gpex_cfg.cxl_mmio32 field and the is_cxl
+    static _CRS branch are dropped; the ACPI0016 _CRS now comes from the
+    generic build_crs() path.  Since EDK2 does not enumerate the pxb-cxl
+    expander bridge, riscv simulates the firmware PCI initialization
+    (reserved window + depth-first bridge bus numbers) and re-applies it
+    via a reset handler.
+  - hw/riscv/virt: Drops the machine-global window/bus-range synthesis
+    that did not scale past one pxb-cxl (Junjie).  The series targets a
+    single CXL host bridge for now, documented in the commit message and
+    a TODO.
+  - hw/riscv/virt: CXL host register region and FMW setup folded into a
+    single cxl_host_state_init() helper; redundant braces removed in
+    create_fdt_pcie() (Daniel).
+  - hw/riscv/virt-acpi-build: the _DEP commit message documents the
+    kernel-compatibility behaviour (Alistair).
+  - Carried review tags: Sunil V L's Reviewed-by on the _DEP patch and
+    Alistair Francis's Acked-by on the test.
 
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
-Signed-off-by: Chen Pei <cp0613@linux.alibaba.com>
----
- tests/qtest/bios-tables-test.c | 54 ++++++++++++++++++++++++++++++++++
- 1 file changed, 54 insertions(+)
+Changes since v1
+----------------
+  - hw/riscv/virt: PCIBus *bus renamed to PCIBus *pci_bus (Jonathan).
+  - hw/riscv/virt: Dropped outer if (s->pci_bus) guard around
+    cxl_hook_up_pxb_registers(); the function already handles a NULL
+    bus internally (Jonathan).
+  - hw/riscv/virt-acpi-build: All s->bus references updated to
+    s->pci_bus; iasl -d decompiled DSDT fragment added to commit
+    message.
+  - hw/riscv/virt,gpex: Commit message expanded with PCI-to-PCI Bridge
+    Spec §3.2.5.8/9/10 citations (Jonathan).
+  - Original patch 4 ("Map committed HDM decoder ranges as RAM for
+    direct DMA") dropped; superseded by Alireza Sanaee's v8 series [1],
+    which is now merged upstream and thus no longer a prerequisite.
+  - New patch 4: RISC-V ACPI bios-tables test for CXL, with golden AML
+    files generated and included.
 
-diff --git a/tests/qtest/bios-tables-test.c b/tests/qtest/bios-tables-test.c
-index 5cc526510a..d2b18d8ecb 100644
---- a/tests/qtest/bios-tables-test.c
-+++ b/tests/qtest/bios-tables-test.c
-@@ -2214,6 +2214,56 @@ static void test_acpi_riscv64_virt_tcg(void)
-     free_test_data(&data);
- }
- 
-+#ifdef CONFIG_POSIX
-+static void test_acpi_riscv64_virt_tcg_cxl(void)
-+{
-+    gchar *tmp_path = g_dir_make_tmp("qemu-test-cxl.XXXXXX", NULL);
-+    gchar *params;
-+
-+    test_data data = {
-+        .machine = "virt",
-+        .arch = "riscv64",
-+        .tcg_only = true,
-+        .uefi_fl1 = "pc-bios/edk2-riscv-code.fd",
-+        .uefi_fl2 = "pc-bios/edk2-riscv-vars.fd",
-+        .ram_start = 0x80000000ULL,
-+        .scan_len = 128ULL * MiB,
-+        .variant = ".cxl",
-+    };
-+
-+    /*
-+     * While using -cdrom, the cdrom would auto-plug into pxb-cxl because
-+     * its bus is also a root bus, triggering "Only PCI/PCIe bridges can be
-+     * plugged into pxb-cxl".  Attach the ISO explicitly to a scsi controller
-+     * on pcie.0 instead, following the same pattern as
-+     * test_acpi_aarch64_virt_tcg_pxb().
-+     */
-+    params = g_strdup_printf("-cpu rva22s64"
-+                             " -machine cxl=on"
-+                             " -device pcie-root-port,chassis=1,id=pci.1,bus=pcie.0"
-+                             " -device virtio-scsi-pci,id=scsi0,bus=pci.1"
-+                             " -drive file=tests/data/uefi-boot-images/"
-+                             "bios-tables-test.riscv64.iso.qcow2,"
-+                             "if=none,media=cdrom,id=drive-scsi0-0-0-1,readonly=on"
-+                             " -device scsi-cd,bus=scsi0.0,scsi-id=0,"
-+                             "drive=drive-scsi0-0-0-1,id=scsi0-0-0-1,bootindex=1"
-+                             " -object memory-backend-file,id=cxl-mem1,mem-path=%s,size=256M"
-+                             " -object memory-backend-file,id=lsa1,mem-path=%s,size=256M"
-+                             " -device pxb-cxl,bus_nr=12,bus=pcie.0,id=cxl.1"
-+                             " -device cxl-rp,port=0,bus=cxl.1,id=rp1,chassis=0,slot=2"
-+                             " -device cxl-type3,bus=rp1,persistent-memdev=cxl-mem1,lsa=lsa1"
-+                             " -M cxl-fmw.0.targets.0=cxl.1,cxl-fmw.0.size=4G,"
-+                             "cxl-fmw.0.interleave-granularity=8k",
-+                             tmp_path, tmp_path);
-+    test_acpi_one(params, &data);
-+
-+    g_free(params);
-+    g_assert(g_rmdir(tmp_path) == 0);
-+    g_free(tmp_path);
-+    free_test_data(&data);
-+}
-+#endif /* CONFIG_POSIX */
-+
- static void test_acpi_aarch64_virt_tcg(void)
- {
-     test_data data = {
-@@ -2963,6 +3013,10 @@ int main(int argc, char *argv[])
-                            test_acpi_riscv64_virt_tcg_numamem);
-             qtest_add_func("acpi/virt/acpispcr",
-                            test_acpi_riscv64_virt_tcg_acpi_spcr);
-+#ifdef CONFIG_POSIX
-+            qtest_add_func("acpi/virt/cxl",
-+                           test_acpi_riscv64_virt_tcg_cxl);
-+#endif
-         }
-     } else if (strcmp(arch, "loongarch64") == 0) {
-         if (has_tcg && qtest_has_machine("virt")) {
+[1] https://lore.kernel.org/qemu-devel/20260318171918.146-1-alireza.sanaee@huawei.com/
+
+Test
+----
+Built riscv64-softmmu and ran the new bios-tables test together with the
+existing riscv64 ACPI tests; all pass.
+
+Also booted an RVA22 guest with EDK2 firmware, using pxb-cxl + cxl-rp +
+cxl-type3 + a CFMW: EDK2's PciBusDxe enumerates behind the CXL host
+bridge (advertised via etc/extra-pci-roots), the root port and Type3
+device show up (0000:0c:00.0 / 0000:0d:00.0), and 'cxl list' reports
+the memdev (4 GiB) and the CFMWS root decoder.
+
+QEMU invocation (CXL-relevant options shown):
+
+    qemu-system-riscv64 \
+        -M virt,aia=aplic-imsic,acpi=on,cxl=on \
+        -cpu rva22s64 -smp 2 -m 4G \
+        -object memory-backend-ram,id=vmem0,share=on,size=4G \
+        -device pxb-cxl,bus_nr=12,bus=pcie.0,id=cxl.1 \
+        -device cxl-rp,port=0,bus=cxl.1,id=rp0,chassis=0,slot=2 \
+        -device cxl-type3,bus=rp0,volatile-memdev=vmem0 \
+        -M cxl-fmw.0.targets.0=cxl.1,cxl-fmw.0.size=4G \
+        ...
+
+Verification (total system memory grows by 4 GiB after onlining):
+
+    # cxl list
+    # cxl enable-memdev mem0
+    # cxl create-region -m -t ram -d decoder0.0 -w 1 mem0 -s 4G
+    # daxctl online-memory dax0.0
+    # free -h
+
+Chen Pei (6):
+  hw/riscv/virt: Add CXL support to the RISC-V virt machine
+  hw/riscv/virt-acpi-build: Add _DEP to ACPI0017 for CXL host bridge
+    dependency
+  hw/riscv/virt: Advertise the CXL host bridge to firmware via
+    extra-pci-roots
+  tests/qtest: Prepare golden files for the RISC-V CXL ACPI test
+  tests/qtest: Add RISC-V ACPI bios tables test for CXL
+  tests/qtest: Update RISC-V CXL ACPI golden master binaries
+
+ hw/riscv/Kconfig                      |   2 +
+ hw/riscv/virt-acpi-build.c            |  52 +++++++++++++++++++++++++
+ hw/riscv/virt.c                       |  45 +++++++++++++++++++++
+ include/hw/riscv/virt.h               |   3 ++
+ tests/data/acpi/riscv64/virt/CEDT.cxl | Bin 0 -> 108 bytes
+ tests/data/acpi/riscv64/virt/DSDT.cxl | Bin 0 -> 6331 bytes
+ tests/qtest/bios-tables-test.c        |  54 ++++++++++++++++++++++++++
+ 7 files changed, 156 insertions(+)
+ create mode 100644 tests/data/acpi/riscv64/virt/CEDT.cxl
+ create mode 100644 tests/data/acpi/riscv64/virt/DSDT.cxl
+
 -- 
 2.50.1
 
