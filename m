@@ -4,136 +4,133 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FBF5C61DB9
-	for <qemu-riscv@archiver.kernel.org>; Fri, 28 Aug 2026 11:30:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C21ADC61DB9
+	for <qemu-riscv@archiver.kernel.org>; Fri, 28 Aug 2026 11:34:33 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wzum0-00020T-13; Fri, 28 Aug 2026 07:29:28 -0400
+	id 1wzuql-0006fu-Tp; Fri, 28 Aug 2026 07:34:23 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <subrahmanya.lingappa@oss.qualcomm.com>)
- id 1wzuly-0001zR-Cn
- for qemu-riscv@nongnu.org; Fri, 28 Aug 2026 07:29:26 -0400
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1wzuql-0006ff-8q
+ for qemu-riscv@nongnu.org; Fri, 28 Aug 2026 07:34:23 -0400
 Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <subrahmanya.lingappa@oss.qualcomm.com>)
- id 1wzulw-0007nN-1F
- for qemu-riscv@nongnu.org; Fri, 28 Aug 2026 07:29:26 -0400
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1wzuqh-00013z-Qj
+ for qemu-riscv@nongnu.org; Fri, 28 Aug 2026 07:34:23 -0400
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 67SA8Tdf2798687
- for <qemu-riscv@nongnu.org>; Fri, 28 Aug 2026 11:29:23 GMT
+ 67SA86Vk3064411
+ for <qemu-riscv@nongnu.org>; Fri, 28 Aug 2026 11:34:18 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=ETPx3X9+/qb
- ti0IIfnwrbQHbBK46zAGcxv/t2I10wq0=; b=heHHYvzk70GwV54QrMsffY08tpB
- 771JzRdo5O7ZbwogFxGwlqjvNCaDDq2cUAcCBQKgUaCKuM12xy0Yg9eu45m4aVM3
- ePSI0+nzXk75iqiaIkvD4n7zhwqxyQ4/JRJUzDCuk9g5ZjP5dHnohzc0QljwFG8Y
- pj87OG5MoHq51YoQ6LDhmCkDYMXghe0JQfdujq33VNZdWEIz2ZRvfuC3X4czv8lJ
- S3HYQ0OlF7F3MXF3bxDyD2Iag36hXCPjKJmGvhJoldAEjUToMipaFBY21qP3pwJs
- QQk70sVpm7QrEN0cfss1fYg8r7taqOvXGRM5u0AKeL3ztfkiRya2KQa/bLg==
-Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com
- [209.85.216.69])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gb62h0x17-1
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ JGW4RgfEY7Ln5iUSNEPtUtMax4LL2q+BpytSc/Gpy3U=; b=dpLG4jqTRKrkz1Lt
+ zkoLqzSUdncEtPPCdqhhMQb9LKpIDQ1VQTJUDV8s39nWGu3VkW5LA0cmfSoCqekf
+ FH8GEBa/5uCCw6qYRUVsbMe2b+MqlK1iYFZEwbutcp+4/M2sjqh+mExeKZzrOfqh
+ XDhv1NJZzswQF/ieLbl09LN9M6JntKbZ0IpMpQCPkgPdOhEaQ4r29QcL1wyV1za0
+ a54xOnBKs0/Ue8Ai79kI460r1eu+OikpIt1fkyQ0jRBwLLth88nEdHbrLZNiBn+m
+ QD+FfJraLMt6yOgdFKqS4M1PdWBK5gmj5w+IoOC8QmtRs61jUdOUoTMEhTcRABeA
+ rTydxQ==
+Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com
+ [209.85.222.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gb47n1d8c-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Fri, 28 Aug 2026 11:29:23 +0000 (GMT)
-Received: by mail-pj1-f69.google.com with SMTP id
- 98e67ed59e1d1-38dc0eee75dso290586a91.0
- for <qemu-riscv@nongnu.org>; Fri, 28 Aug 2026 04:29:22 -0700 (PDT)
+ for <qemu-riscv@nongnu.org>; Fri, 28 Aug 2026 11:34:18 +0000 (GMT)
+Received: by mail-qk1-f199.google.com with SMTP id
+ af79cd13be357-9377829a759so79672485a.0
+ for <qemu-riscv@nongnu.org>; Fri, 28 Aug 2026 04:34:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1787916562; x=1788521362; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=ETPx3X9+/qbti0IIfnwrbQHbBK46zAGcxv/t2I10wq0=;
- b=kecrdyRrbU0mhNPMk6UlsI1xFMTaKM3fZH1gkhYYINzECJGTEXsRpVw/oZ944HrEUg
- 7K/N6jktqiWDAfTTBzibkHceBqPJ7rGlpxZWyplmZhvP6mZv7eOAfyl/olQChcI66JiS
- 8eUPCfHPfwHwwYvg/KDF6egw/Xtk9UaSCKHD2io4dUSDMahhtyup1+xdIA8t7dEiu1hV
- y2rbHXwTPcfygQNdCHNWeC4ozJmQ1hPDs3agVliSo68nOozYQzriTFbZESA+G5yWrXYe
- PG+yf/GV3+L2dYn1CwqVQTq1Pc2imOSVbGDeJ+w66zqFHBsOUP2UGqrbGoL9L6MA4cEc
- WkoQ==
+ d=oss.qualcomm.com; s=google; t=1787916858; x=1788521658; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=JGW4RgfEY7Ln5iUSNEPtUtMax4LL2q+BpytSc/Gpy3U=;
+ b=c8P2liJakOFHPrux1uh7Dq88icMX1sFeXgLQSr3qdpS4MyUAUZrU+DhWl5pWZi9pKV
+ z+rfK2tcYukHwyx0e5gJe+l2fwqXJUD4EpY00TwbH5Nyrw14lSEC/gJEVmb50cmbT14D
+ RAPpgFA9c29sScL6wx4a21prCLdaa4CkYekzLhqZLCqWR1KKTggr0iQq39WWz5uPun+H
+ LmDgk3U5MLtPXH+UEIfryiTp9sWG1AmWu0KIlOUAPd2DLMYc8Q+zxO5utg9x4J+NdmkR
+ 5XKzLepppsX3mHcOdRByGI8YcJ5ZAzmqgubH13Qw7KFT+70tk+ejXbFtAfO56uegFvpC
+ GaYw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787916562; x=1788521362;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=ETPx3X9+/qbti0IIfnwrbQHbBK46zAGcxv/t2I10wq0=;
- b=Ufn+hHFWSyYCUY7OKFbN9Kne/O03nIHY0WdUzySviC1u5e+AGiDJJ6Om3nFAFGwuOF
- ATOjr8X6XpfrlDLWett/je9virFQ8aDyi2IM73AEEIrpztqY0wZCa39uqsTRJy3PEJK7
- n2zYO7zQ1aZ2/6c6il8WMiVcx2ZdO3jgnQHzvTQscxBgbzD3Sbn4SuVCWKSBZRnhDQo1
- Y/NLZJ9MA2YPWdnMoKFbgZBjJ9J+7pDRkHKNkTsmv+LpuRwghbtgcqM3/RaC6zGq5PCM
- HWBFPbCtBMH3nLlk62rnelb01aKPlZj7Jt2cfmQ7vgOXNHM/Ih7F6Bc4OwOC0TjBFHLN
- ixuQ==
-X-Gm-Message-State: AFuF++kBxQirarYzXyuOVmCI3ydtGXeCgEdgIjdBlG7kxwR8mj3eDx9m
- 7ykQWpMwdw1Kuurvtqju6dnWjkSa03QmMB1Omeq03fvhgfdABJ9b+W0KJURtVUxhFQJd1zv4mVv
- MWP7OZk3TLg53uwSuqGemg7BJusB35hX2oliy58JyDw+N0/e1BopVnHHfkA==
-X-Gm-Gg: AR+sD13niIcxexUaIzIifApm6F5TJZqPJvSQ75UV5YMgJ/CW9XHrNRwkeEUKewxuxXV
- rGravJ7UcOxtHVb58bc/nA0F5BzvVt8iwPs+5bi82O4t0bDHABUtiDtHvcPxz1SM8ish/KqAKZO
- 03kwVdoYZGi9UXfo+aNP5F34mITaGGqPxDoqWCO3fOaTnA9y7sJsQWfzLKjE6tIhveXoqH6UIVr
- yhG5ruWqLEsbDvpd6IAZalpN1b7/mH3wIxsNoc4rYoHwQZZfR9bZwYcQoXdnnXSZysBTSV/gE+0
- 7AxX439tdqHP3MRvZnSgX35Gm/Pbz2Pt2uk9zcx1BvgC5Gf4DU6aRGRxIjzJpJaBkGsf/FPzUNT
- Qq4QjE2xEyRCAHgXMz9qw1XyU5b8yNUDXHWeSgR7uDzsW2mIcHotemdgWtS6U4GySbwLYkCCRC5
- SdktAz1sOeXQSgM+i+cilXGAlktQ7h+qI=
-X-Received: by 2002:a17:90b:4c84:b0:381:bcfb:e710 with SMTP id
- 98e67ed59e1d1-396d0fe0b90mr5818013a91.3.1787916561960; 
- Fri, 28 Aug 2026 04:29:21 -0700 (PDT)
-X-Received: by 2002:a17:90b:4c84:b0:381:bcfb:e710 with SMTP id
- 98e67ed59e1d1-396d0fe0b90mr5817971a91.3.1787916561458; 
- Fri, 28 Aug 2026 04:29:21 -0700 (PDT)
-Received: from hu-slingapp-blr.qualcomm.com
- (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ d=1e100.net; s=20251104; t=1787916858; x=1788521658;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=JGW4RgfEY7Ln5iUSNEPtUtMax4LL2q+BpytSc/Gpy3U=;
+ b=gsJFU9fqqSVBdgSVUZ9AOQJ03pVScoTGDfY6jeSC5eTSM8E9iASHEGkGs3Sh/mD//7
+ BjJVyHxthQq1S+ZzJ9iiF04i5YbuzQCgNtlXfTheHlxpvXBy8FOxu7HYQ6Kn8Xwd+hRQ
+ O/2jRgPE0z6hgyt6fGdjcwQhnQbI7ahnK6Sw6Qe5vVv6qMTiRreq2/NTsnrI0b8IY0GJ
+ cZSbQa10TBUamdLsQ8I+yTptvfB1NEeLsn+ys3lQe4BulD5MVVkNuxAojv7/I3mqCIi8
+ QxnMZlQxn/kwRnAvjInCg/FBViU4xbwKU9709s7eI9bZSYeyr+Xpx2T8dCndLqddgBUf
+ QxqQ==
+X-Gm-Message-State: AFuF++kELKYOtzcziVYKTax4CHB9jco3rBgy/ITp19UgnksSAoq4Moag
+ CowfgzZEabBQ9iCEiWHoMNq8VrjSTq+eYqUbTFZ/04jJD+lZB+S2Jz01+yQpHehQYHVIaUkb/F4
+ yvaS5odX46XJlAvK/GDmUWk06yTBbCrgbOvovMV9QoluhsJ25M7kMFKOm9Q==
+X-Gm-Gg: AR+sD119z+Bk9Q9v6GBxLRXAeHBS9wiXMZre9RqEjJG5NOZkHLfyIz5YvlSJurEpUSY
+ i9iNKSxlYcvMcli66Iu2Be6kuJN4o7Bv0nT7xixnzKs++A/Vy41xjgpHBdGas8bFw/XJIu0a9e7
+ fczHwvO9nl2C8mRmzPsrlIRIsaBQWjE66AIYL26mIxxYsf20XBqx6MlEq0BS/JQ/ivQzG06G7Ut
+ 0b/Zbjb+kYT1RtqXLy5H/F80Mr7UkcDOTZzPv6JX1a0rW4hb6cUunUH26tXR6OBIULOHepYf4+u
+ 1FPg4PUn9EoRSJ8xq4vk852PPrdNlVWzfcpO/TR22nHWaFEPvN0CgkDyglC/x83IwOFoyTUmhyV
+ LRhDRjcgnEABcGmGrED+OaQ0YSdICnCSSUFnb
+X-Received: by 2002:a05:620a:8003:b0:936:cd74:4f45 with SMTP id
+ af79cd13be357-9391391b3f0mr610132685a.37.1787916857221; 
+ Fri, 28 Aug 2026 04:34:17 -0700 (PDT)
+X-Received: by 2002:a05:620a:8003:b0:936:cd74:4f45 with SMTP id
+ af79cd13be357-9391391b3f0mr610122885a.37.1787916856389; 
+ Fri, 28 Aug 2026 04:34:16 -0700 (PDT)
+Received: from [192.168.68.100] ([189.38.141.232])
  by smtp.gmail.com with ESMTPSA id
- a92af1059eb24-142e0de4d92sm4997320c88.13.2026.08.28.04.29.18
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 28 Aug 2026 04:29:21 -0700 (PDT)
-From: Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcomm.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org,
- Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcomm.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu@processmission.com>
-Subject: [PATCH v10 07/10] riscv: add RPMI system suspend service
-Date: Fri, 28 Aug 2026 16:57:59 +0530
-Message-ID: <20260828112803.86636-8-subrahmanya.lingappa@oss.qualcomm.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260828112803.86636-1-subrahmanya.lingappa@oss.qualcomm.com>
-References: <20260828112803.86636-1-subrahmanya.lingappa@oss.qualcomm.com>
+ af79cd13be357-93917016ed4sm123413685a.9.2026.08.28.04.34.13
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 28 Aug 2026 04:34:15 -0700 (PDT)
+Message-ID: <11e5ab2c-b87e-4033-a424-028e42dc9954@oss.qualcomm.com>
+Date: Fri, 28 Aug 2026 08:34:10 -0300
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODI4MDA5OCBTYWx0ZWRfX2Ykiou+cO47W
- rC6HK9HYyvyM6J+TgMgTW+1IdDnlSYnjN/vnIgiNoXbIsktEh8XVt5h6+4xuMFG9mZT/4XUvOZ2
- R8SRyGMZiWZ3JjZphfFkWq9tcYLJK3A=
-X-Proofpoint-GUID: UF4PMts31r8dbRujSYew4X4FkLjNXbzC
-X-Proofpoint-ORIG-GUID: UF4PMts31r8dbRujSYew4X4FkLjNXbzC
-X-Authority-Analysis: v=2.4 cv=I5dVgtgg c=1 sm=1 tr=0 ts=6a917113 cx=c_pps
- a=vVfyC5vLCtgYJKYeQD43oA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22 a=EUspDBNiAAAA:8
- a=U8RMtI3d1EX5IS3VA7UA:9 a=rl5im9kqc5Lf4LNbBjHf:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI4MDA5OCBTYWx0ZWRfX/Ae6xgelAhZW
- EqCEiLIeqydiqoZOmVcEq2I4hLFyB5zFUY127JiWG56cda3UiHSoX8kTSpnxN8PlrUQAoXOsicq
- AQKtkkJHIqTVXk8psIjk2Xe7qUTAiJwaEtqpxm8I8MWGQ4N62eSCLxVFHGqxaa/awkkkoNz/sGf
- ynPrT2TAniW19HxuRGqqax4okJ9arqJNNz61uG+QW2k3lWOJy5Pw+r3gTVy6ThTXASeEWy6sxn/
- UVIgOy+ncfi1libOzZIXQu5Ye6j9PKOfGRF/6JDiGneReAQYTC/VAtJhCaEvm29vj7zFOpVh51i
- J/C0k1P0S5/LCVcdwI5gCGgOV7XBZiWLREHS62w6mhq7cBr+seM3DIHCxej8htz7vO7v2BoY3Q5
- iCeH0zqjoUc3qB525Q8sdos0dg38kL7N6m/MUCxvkkdu6idQ30xTRJGkiIRSV+MwOXY1C70Hyd1
- edHMIn1pcM5iETvFBWw==
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] target/riscv: Add experimental Zvabd extension support
+To: liumingliang <liumingliang.dev@bytedance.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, Alistair.Francis@wdc.com,
+ zhiwei_liu@linux.alibaba.com, liwei1518@gmail.com,
+ chao.liu@processmission.com, Zhibo Hong <hongzhibo@bytedance.com>
+References: <20260828092053.3787517-1-liumingliang.dev@bytedance.com>
+From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Content-Language: en-US
+In-Reply-To: <20260828092053.3787517-1-liumingliang.dev@bytedance.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Authority-Analysis: v=2.4 cv=a8YAM0SF c=1 sm=1 tr=0 ts=6a91723a cx=c_pps
+ a=HLyN3IcIa5EE8TELMZ618Q==:117 a=MCIxunHWmQOg/5OnbzXZaw==:17
+ a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
+ a=p0WdMEafAAAA:8 a=NEAV23lmAAAA:8 a=968KyxNXAAAA:8 a=jQRO3n_qYhbkmsKaj84A:9
+ a=QEXdDO2ut3YA:10 a=bTQJ7kPSJx9SKPbeHEYW:22
+X-Proofpoint-ORIG-GUID: nlJwQEGiDqYaSCBXqwltGZU44_jHZyHk
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODI4MDA5OSBTYWx0ZWRfX+qNvnZucHWlq
+ RRhKxINgjav8zeRey+4V5Gi7nmqK2wrPlcfvPPuPsgQrjUaEtx7txJI/1js1pgjfb2hu9ZdqiMv
+ juU0gK/HPeveNsXhP5aVjKW820XLtPE=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI4MDA5OSBTYWx0ZWRfX6iHusAgr5pzH
+ UAKo3PZN99qREjyyTjDe4Ep0XP6C0WO2a9QX6zrTahDZQdIxF7/8E5wPmZOHH7zXzmSDn3u9S0w
+ wTPlICZiJRSR7j508xTIEt4OWxHqb46cj/PBkWKW+1a7Tdxw20ekv/DN412StzGwHtCzGJlA9SG
+ eFBtec5T9xZY44i3PT7wJtiTfcX/tRzLKQYjHf9OR/+4feAR1zcnnnq3XemU5RIOLPUdVK/XsCg
+ kyNJVtLTA0eFDY8YkfZHkB3y0n07j36tDmBdyMLIWwpoXjbnbar50NP0IrsuMwYqVx2KJ+2yecB
+ HD/WIrCB6gYwRmhQERfFldRZH8aUzi112+ZcRblquIF9/KoTx8v0fymeaWKgkGR/WQHDXpLTnvA
+ zZAois+xnhmbLRMNuNagSgsuj86WEHGefD2iwDO14HVz3H/lUZQck2bqzgjPXnYQ9MHp3m6cWPt
+ AAwmN94sFG4nZ50DQyg==
+X-Proofpoint-GUID: nlJwQEGiDqYaSCBXqwltGZU44_jHZyHk
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-28_03,2026-08-27_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 impostorscore=0 adultscore=0 priorityscore=1501
- lowpriorityscore=0 spamscore=0 clxscore=1015 malwarescore=0 phishscore=0
- bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2608280098
+ clxscore=1015 phishscore=0 impostorscore=0 lowpriorityscore=0 bulkscore=0
+ spamscore=0 malwarescore=0 priorityscore=1501 suspectscore=0 adultscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608280099
 Received-SPF: pass client-ip=205.220.180.131;
- envelope-from=subrahmanya.lingappa@oss.qualcomm.com;
- helo=mx0b-0031df01.pphosted.com
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
 X-Spam_score_int: -27
 X-Spam_score: -2.8
 X-Spam_bar: --
@@ -156,376 +153,343 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Add the RPMI System Suspend service group for RISC-V virt.
+Hi,
 
-The service advertises suspend-to-RAM support through librpmi,
-registers QEMU wakeup support, and routes the suspend finalize callback
-to the machine suspend path. On wakeup it processes RPMI group events
-and defers the HSM hart resume until vCPUs are ready to run again.
+This patch is missing vabs.v, which is also part of the specification.
 
-Signed-off-by: Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcomm.com>
-Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
----
- hw/misc/meson.build           |   1 +
- hw/misc/riscv_rpmi.c          |   4 +
- hw/misc/riscv_rpmi_hsm.c      |  10 +-
- hw/misc/riscv_rpmi_internal.h |   6 ++
- hw/misc/riscv_rpmi_syssusp.c  | 194 ++++++++++++++++++++++++++++++++++
- hw/riscv/virt.c               |  24 +++++
- include/hw/misc/riscv_rpmi.h  |  10 ++
- 7 files changed, 248 insertions(+), 1 deletion(-)
- create mode 100644 hw/misc/riscv_rpmi_syssusp.c
+I added vabs.v, and a .S test file for this new insns, using Zhibo's original
+patch, in this branch:
 
-diff --git a/hw/misc/meson.build b/hw/misc/meson.build
-index 3f2caaf06f..a0b15aaf2e 100644
---- a/hw/misc/meson.build
-+++ b/hw/misc/meson.build
-@@ -180,4 +180,5 @@ system_ss.add(when: 'CONFIG_RISCV_RPMI', if_true: [files(
-   'riscv_rpmi.c',
-   'riscv_rpmi_sysreset.c',
-   'riscv_rpmi_hsm.c',
-+  'riscv_rpmi_syssusp.c',
- ), librpmi], if_false: files('riscv_rpmi-stub.c'))
-diff --git a/hw/misc/riscv_rpmi.c b/hw/misc/riscv_rpmi.c
-index d93bb70fca..c9593ee073 100644
---- a/hw/misc/riscv_rpmi.c
-+++ b/hw/misc/riscv_rpmi.c
-@@ -199,6 +199,10 @@ static const RiscvRpmiServiceOps riscv_rpmi_service_ops[] = {
-         .service_group = RPMI_SRVGRP_HSM,
-         .add = riscv_rpmi_hsm_add,
-         .remove = riscv_rpmi_hsm_remove,
-+    }, {
-+        .service_group = RPMI_SRVGRP_SYSTEM_SUSPEND,
-+        .add = riscv_rpmi_syssusp_add,
-+        .remove = riscv_rpmi_syssusp_remove,
-     },
- };
- 
-diff --git a/hw/misc/riscv_rpmi_hsm.c b/hw/misc/riscv_rpmi_hsm.c
-index 08a985cb30..928fe3e52e 100644
---- a/hw/misc/riscv_rpmi_hsm.c
-+++ b/hw/misc/riscv_rpmi_hsm.c
-@@ -236,7 +236,6 @@ static void riscv_rpmi_hsm_destroy(RiscvRpmiState *s)
-     g_clear_pointer(&s->hsm_hw_states, g_free);
- }
- 
--
- bool riscv_rpmi_hsm_add(RiscvRpmiState *s, Error **errp)
- {
-     struct rpmi_service_group *group;
-@@ -279,3 +278,12 @@ void riscv_rpmi_hsm_reset(RiscvRpmiState *s)
-         rpmi_hsm_process_state_changes(s->hsm);
-     }
- }
-+
-+void riscv_rpmi_hsm_resume(RiscvRpmiState *s, uint32_t hart_index,
-+                           uint64_t resume_addr)
-+{
-+    riscv_rpmi_hsm_set_hw_state(s, hart_index, RPMI_HART_HW_STATE_STARTED);
-+    if (s->hsm) {
-+        rpmi_hsm_process_state_changes(s->hsm);
-+    }
-+}
-diff --git a/hw/misc/riscv_rpmi_internal.h b/hw/misc/riscv_rpmi_internal.h
-index 7f9d110776..2c4723ad6b 100644
---- a/hw/misc/riscv_rpmi_internal.h
-+++ b/hw/misc/riscv_rpmi_internal.h
-@@ -33,5 +33,11 @@ void riscv_rpmi_sysreset_remove(RiscvRpmiState *s);
- bool riscv_rpmi_hsm_add(RiscvRpmiState *s, Error **errp);
- void riscv_rpmi_hsm_remove(RiscvRpmiState *s);
- void riscv_rpmi_hsm_reset(RiscvRpmiState *s);
-+void riscv_rpmi_hsm_resume(RiscvRpmiState *s, uint32_t hart_index,
-+                           uint64_t resume_addr);
-+
-+bool riscv_rpmi_syssusp_add(RiscvRpmiState *s, Error **errp);
-+void riscv_rpmi_syssusp_remove(RiscvRpmiState *s);
-+
- 
- #endif
-diff --git a/hw/misc/riscv_rpmi_syssusp.c b/hw/misc/riscv_rpmi_syssusp.c
-new file mode 100644
-index 0000000000..f4a9bbdaf4
---- /dev/null
-+++ b/hw/misc/riscv_rpmi_syssusp.c
-@@ -0,0 +1,194 @@
-+/*
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ *
-+ * RISC-V RPMI System Suspend service.
-+ *
-+ * Copyright (c) 2026 Qualcomm Technologies, Inc.
-+ * Author:
-+ *  Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcomm.com>
-+ */
-+
-+#include "qemu/osdep.h"
-+#include "riscv_rpmi_internal.h"
-+#include "qemu/timer.h"
-+#include "system/runstate.h"
-+
-+static const struct rpmi_system_suspend_type riscv_rpmi_syssusp_types[] = {
-+    {
-+        .type = RPMI_SYSSUSP_TYPE_SUSPEND_TO_RAM,
-+        .attr = RPMI_SYSSUSP_ATTRS_FLAGS_RESUMEADDR,
-+    },
-+};
-+
-+static enum rpmi_error riscv_rpmi_syssusp_prepare(
-+    void *priv, rpmi_uint32_t hart_index,
-+    const struct rpmi_system_suspend_type *syssusp_type,
-+    rpmi_uint64_t resume_addr)
-+{
-+    RiscvRpmiState *s = priv;
-+
-+    if (s->machine_ops && s->machine_ops->register_wakeup_support) {
-+        s->machine_ops->register_wakeup_support();
-+    }
-+    return RPMI_SUCCESS;
-+}
-+
-+static rpmi_bool_t riscv_rpmi_syssusp_ready(void *priv,
-+                                            rpmi_uint32_t hart_index)
-+{
-+    return true;
-+}
-+
-+static void riscv_rpmi_syssusp_finalize(
-+    void *priv, rpmi_uint32_t hart_index,
-+    const struct rpmi_system_suspend_type *syssusp_type,
-+    rpmi_uint64_t resume_addr)
-+{
-+    RiscvRpmiState *s = priv;
-+
-+    if (s->machine_ops && s->machine_ops->system_suspend) {
-+        s->machine_ops->system_suspend();
-+    }
-+}
-+
-+static rpmi_bool_t riscv_rpmi_syssusp_can_resume(void *priv,
-+                                                 rpmi_uint32_t hart_index)
-+{
-+    RiscvRpmiState *s = priv;
-+
-+    if (s->machine_ops && s->machine_ops->system_can_resume) {
-+        return s->machine_ops->system_can_resume();
-+    }
-+
-+    return true;
-+}
-+
-+static enum rpmi_error riscv_rpmi_syssusp_resume(
-+    void *priv, rpmi_uint32_t hart_index,
-+    const struct rpmi_system_suspend_type *syssusp_type,
-+    rpmi_uint64_t resume_addr)
-+{
-+    RiscvRpmiState *s = priv;
-+
-+    s->syssusp_resume_hart_index = hart_index;
-+    s->syssusp_resume_addr = resume_addr;
-+    s->syssusp_resume_pending = true;
-+    return RPMI_SUCCESS;
-+}
-+
-+static const struct rpmi_syssusp_platform_ops riscv_rpmi_syssusp_ops = {
-+    .system_suspend_prepare = riscv_rpmi_syssusp_prepare,
-+    .system_suspend_ready = riscv_rpmi_syssusp_ready,
-+    .system_suspend_finalize = riscv_rpmi_syssusp_finalize,
-+    .system_suspend_can_resume = riscv_rpmi_syssusp_can_resume,
-+    .system_suspend_resume = riscv_rpmi_syssusp_resume,
-+};
-+
-+static void riscv_rpmi_wakeup_timer(void *opaque)
-+{
-+    RiscvRpmiState *s = opaque;
-+
-+    if (s->syssusp_resume_pending) {
-+        riscv_rpmi_hsm_resume(s, s->syssusp_resume_hart_index,
-+                              s->syssusp_resume_addr);
-+        s->syssusp_resume_pending = false;
-+        s->syssusp_resume_addr = 0;
-+    }
-+}
-+
-+static void riscv_rpmi_wakeup_notify(Notifier *notifier, void *data)
-+{
-+    RiscvRpmiState *s = container_of(notifier, RiscvRpmiState,
-+                                     wakeup_notifier);
-+
-+    if (s->context) {
-+        rpmi_context_process_group_events(s->context,
-+                                          RPMI_SRVGRP_SYSTEM_SUSPEND);
-+    }
-+    if (s->wakeup_timer) {
-+        /*
-+         * Wakeup notifiers run before vCPUs resume. Defer the HSM
-+         * kick so OpenSBI can leave WFI after QEMU restarts execution.
-+         */
-+        timer_mod(s->wakeup_timer, qemu_clock_get_ms(QEMU_CLOCK_REALTIME) + 10);
-+    }
-+}
-+
-+static bool riscv_rpmi_syssusp_create(RiscvRpmiState *s,
-+                                      struct rpmi_service_group **group,
-+                                      Error **errp)
-+{
-+    if (!s->hsm) {
-+        error_setg(errp, "RPMI system suspend service requires HSM service");
-+        return false;
-+    }
-+
-+    if (s->machine_ops && s->machine_ops->register_wakeup_support) {
-+        s->machine_ops->register_wakeup_support();
-+    }
-+    if (!s->wakeup_timer) {
-+        s->wakeup_timer = timer_new_ms(QEMU_CLOCK_REALTIME,
-+                                       riscv_rpmi_wakeup_timer, s);
-+    }
-+    if (!s->wakeup_notifier_registered) {
-+        s->wakeup_notifier.notify = riscv_rpmi_wakeup_notify;
-+        qemu_register_wakeup_notifier(&s->wakeup_notifier);
-+        s->wakeup_notifier_registered = true;
-+    }
-+
-+    *group = rpmi_service_group_syssusp_create(
-+        s->hsm, ARRAY_SIZE(riscv_rpmi_syssusp_types),
-+        riscv_rpmi_syssusp_types, &riscv_rpmi_syssusp_ops, s);
-+    if (!*group) {
-+        error_setg(errp, "failed to create RPMI system suspend service group");
-+        return false;
-+    }
-+
-+    return true;
-+}
-+
-+static void riscv_rpmi_syssusp_destroy(RiscvRpmiState *s)
-+{
-+    if (s->wakeup_notifier_registered) {
-+        notifier_remove(&s->wakeup_notifier);
-+        s->wakeup_notifier_registered = false;
-+    }
-+    if (s->wakeup_timer) {
-+        timer_free(s->wakeup_timer);
-+        s->wakeup_timer = NULL;
-+    }
-+
-+    if (s->syssusp_group) {
-+        rpmi_service_group_syssusp_destroy(s->syssusp_group);
-+        s->syssusp_group = NULL;
-+    }
-+}
-+
-+bool riscv_rpmi_syssusp_add(RiscvRpmiState *s, Error **errp)
-+{
-+    struct rpmi_service_group *group;
-+
-+    if (s->syssusp_group) {
-+        error_setg(errp, "duplicate RPMI system suspend descriptor");
-+        return false;
-+    }
-+
-+    if (!riscv_rpmi_syssusp_create(s, &group, errp)) {
-+        return false;
-+    }
-+
-+    if (!riscv_rpmi_context_add_group(s, group, "system suspend", errp)) {
-+        s->syssusp_group = group;
-+        riscv_rpmi_syssusp_destroy(s);
-+        return false;
-+    }
-+
-+    s->syssusp_group = group;
-+    return true;
-+}
-+
-+void riscv_rpmi_syssusp_remove(RiscvRpmiState *s)
-+{
-+    riscv_rpmi_context_remove_group(s, s->syssusp_group);
-+    riscv_rpmi_syssusp_destroy(s);
-+}
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 7c29e3634c..87399ed803 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -50,6 +50,7 @@
- #include "chardev/char.h"
- #include "system/device_tree.h"
- #include "system/system.h"
-+#include "system/runstate.h"
- #include "system/tcg.h"
- #include "system/kvm.h"
- #include "system/tpm.h"
-@@ -1013,6 +1014,11 @@ static const RiscvRpmiServiceConfig virt_rpmi_services[] = {
-         .compatible = "riscv,rpmi-hsm",
-         .service_group = RPMI_SRVGRP_HSM,
-     },
-+    {
-+        .node_name = "suspend",
-+        .compatible = "riscv,rpmi-system-suspend",
-+        .service_group = RPMI_SRVGRP_SYSTEM_SUSPEND,
-+    },
- };
- 
- static uint32_t virt_rpmi_service_count(RISCVVirtState *s)
-@@ -1030,9 +1036,27 @@ static void virt_rpmi_system_shutdown(void)
-     qemu_system_shutdown_request(SHUTDOWN_CAUSE_GUEST_SHUTDOWN);
- }
- 
-+static void virt_rpmi_system_suspend(void)
-+{
-+    qemu_system_suspend_request();
-+}
-+
-+static void virt_rpmi_register_wakeup_support(void)
-+{
-+    qemu_register_wakeup_support();
-+}
-+
-+static bool virt_rpmi_system_can_resume(void)
-+{
-+    return runstate_check(RUN_STATE_RUNNING);
-+}
-+
- static const RiscvRpmiMachineOps virt_rpmi_machine_ops = {
-     .system_reset = virt_rpmi_system_reset,
-     .system_shutdown = virt_rpmi_system_shutdown,
-+    .system_suspend = virt_rpmi_system_suspend,
-+    .register_wakeup_support = virt_rpmi_register_wakeup_support,
-+    .system_can_resume = virt_rpmi_system_can_resume,
- };
- 
- static RiscvRpmiConfig virt_rpmi_config(RISCVVirtState *s,
-diff --git a/include/hw/misc/riscv_rpmi.h b/include/hw/misc/riscv_rpmi.h
-index 9f7aa9f6ef..a0381e31d7 100644
---- a/include/hw/misc/riscv_rpmi.h
-+++ b/include/hw/misc/riscv_rpmi.h
-@@ -49,6 +49,9 @@ struct rpmi_hsm;
- typedef struct RiscvRpmiMachineOps {
-     void (*system_reset)(void);
-     void (*system_shutdown)(void);
-+    void (*system_suspend)(void);
-+    void (*register_wakeup_support)(void);
-+    bool (*system_can_resume)(void);
- } RiscvRpmiMachineOps;
- 
- typedef struct RiscvRpmiServiceConfig {
-@@ -85,9 +88,16 @@ struct RiscvRpmiState {
-     char *platform_info;
-     const RiscvRpmiMachineOps *machine_ops;
-     struct rpmi_service_group *sysreset_group;
-+    struct rpmi_service_group *syssusp_group;
-     struct rpmi_hsm *hsm;
-     struct rpmi_service_group *hsm_group;
-     uint32_t *hsm_hw_states;
-+    Notifier wakeup_notifier;
-+    bool wakeup_notifier_registered;
-+    QEMUTimer *wakeup_timer;
-+    bool syssusp_resume_pending;
-+    uint32_t syssusp_resume_hart_index;
-+    uint64_t syssusp_resume_addr;
-     uint32_t *hart_ids;
-     uint32_t hart_count;
-     const RiscvRpmiServiceConfig *services;
--- 
-2.43.0
+https://gitlab.com/danielhb/qemu/-/tree/zvabd
+
+vabs.v implementation:
+
+https://gitlab.com/danielhb/qemu/-/commit/1ce5701e737f885f2e32248c1587614ea3435d76
+
+test file:
+
+https://gitlab.com/danielhb/qemu/-/commit/9f4626bc8e55c0768ff474037e291431d4deb0fb
+
+
+Feel free to add these 2 commits in this work.  It's already rebased on a recent code
+base so shouldn't be much of a problem.
+
+
+Also, I believe we'll want tests for the other zvabd insns too, so we'll need extra
+code in test-zvabd.S.
+
+
+Thanks,
+Daniel
+
+On 8/28/2026 6:20 AM, liumingliang wrote:
+> From: Zhibo Hong <hongzhibo@bytedance.com>
+> 
+> The draft Zvabd extension provides vector integer absolute-difference
+> operations for image, video, and other data-processing workloads. It
+> introduces eight new intructions:
+> 
+>    - vabd.vv, vabd.vx, vabdu.vv, and vabdu.vx support SEW values from
+>      8 through ELEN, with SEW 64 requiring Zve64x.
+>    - vwabda.vv, vwabda.vx, vwabdau.vv, and vwabdau.vx support SEW 8
+>      and 16 and accumulate into a double-width destination.
+> 
+> This patch implement this instruction extension, including instruction
+> decoder, TCG translation, and helpers, etc. The specification is under
+> review at:
+> https://github.com/riscv/riscv-isa-manual/pull/3279
+> 
+> Signed-off-by: Mingliang Liu <liumingliang.dev@bytedance.com>
+> ---
+>   disas/riscv-op.c.inc                        |  8 +++
+>   disas/riscv.c                               |  8 +++
+>   target/riscv/cpu.c                          |  1 +
+>   target/riscv/cpu_cfg_fields.h.inc           |  1 +
+>   target/riscv/helper.h                       | 26 ++++++++++
+>   target/riscv/insn32.decode                  | 10 ++++
+>   target/riscv/tcg/insn_trans/trans_rvv.c.inc | 45 +++++++++++++++++
+>   target/riscv/tcg/tcg-cpu.c                  |  6 +++
+>   target/riscv/tcg/vector_helper.c            | 56 +++++++++++++++++++++
+>   9 files changed, 161 insertions(+)
+> 
+> diff --git a/disas/riscv-op.c.inc b/disas/riscv-op.c.inc
+> index 1d334e4857..07b56f5d52 100644
+> --- a/disas/riscv-op.c.inc
+> +++ b/disas/riscv-op.c.inc
+> @@ -490,6 +490,10 @@ OP(vaadd_vv, "vaadd.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm)
+>   OP(vaadd_vx, "vaadd.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm)
+>   OP(vaaddu_vv, "vaaddu.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm)
+>   OP(vaaddu_vx, "vaaddu.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm)
+> +OP(vabd_vv, "vabd.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm)
+> +OP(vabd_vx, "vabd.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm)
+> +OP(vabdu_vv, "vabdu.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm)
+> +OP(vabdu_vx, "vabdu.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm)
+>   OP(vadc_vim, "vadc.vim", rv_codec_v_i, rv_fmt_vd_vs2_imm_vl)
+>   OP(vadc_vvm, "vadc.vvm", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vl)
+>   OP(vadc_vxm, "vadc.vxm", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vl)
+> @@ -861,6 +865,10 @@ OP(vsuxei16_v, "vsuxei16.v", rv_codec_v_r, rv_fmt_ldst_vd_rs1_vs2_vm)
+>   OP(vsuxei32_v, "vsuxei32.v", rv_codec_v_r, rv_fmt_ldst_vd_rs1_vs2_vm)
+>   OP(vsuxei64_v, "vsuxei64.v", rv_codec_v_r, rv_fmt_ldst_vd_rs1_vs2_vm)
+>   OP(vsuxei8_v, "vsuxei8.v", rv_codec_v_r, rv_fmt_ldst_vd_rs1_vs2_vm)
+> +OP(vwabda_vv, "vwabda.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm)
+> +OP(vwabda_vx, "vwabda.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm)
+> +OP(vwabdau_vv, "vwabdau.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm)
+> +OP(vwabdau_vx, "vwabdau.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm)
+>   OP(vwadd_vv, "vwadd.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm)
+>   OP(vwadd_vx, "vwadd.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm)
+>   OP(vwadd_wv, "vwadd.wv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm)
+> diff --git a/disas/riscv.c b/disas/riscv.c
+> index b8099cbdf8..e0a8b3a756 100644
+> --- a/disas/riscv.c
+> +++ b/disas/riscv.c
+> @@ -2022,6 +2022,8 @@ static const rv_opcode_data *decode_inst_opcode(rv_decode *dec, rv_isa isa)
+>                   case 48: return &op_vwredsumu_vs;
+>                   case 49: return &op_vwredsum_vs;
+>                   case 53: return &op_vwsll_vv;
+> +                case 61: return &op_vwabda_vv;
+> +                case 62: return &op_vwabdau_vv;
+>                   }
+>                   break;
+>               case 1:
+> @@ -2164,6 +2166,8 @@ static const rv_opcode_data *decode_inst_opcode(rv_decode *dec, rv_isa isa)
+>                           break;
+>                       }
+>                       break;
+> +                case 21: return &op_vabd_vv;
+> +                case 22: return &op_vabdu_vv;
+>                   case 23:
+>                       if ((inst >> 25) & 1) {
+>                           return &op_vcompress_vm;
+> @@ -2349,6 +2353,8 @@ static const rv_opcode_data *decode_inst_opcode(rv_decode *dec, rv_isa isa)
+>                   case 46: return &op_vnclipu_wx;
+>                   case 47: return &op_vnclip_wx;
+>                   case 53: return &op_vwsll_vx;
+> +                case 61: return &op_vwabda_vx;
+> +                case 62: return &op_vwabdau_vx;
+>                   }
+>                   break;
+>               case 5:
+> @@ -2417,6 +2423,8 @@ static const rv_opcode_data *decode_inst_opcode(rv_decode *dec, rv_isa isa)
+>                   case 13: return &op_vclmulh_vx;
+>                   case 14: return &op_vslide1up_vx;
+>                   case 15: return &op_vslide1down_vx;
+> +                case 21: return &op_vabd_vx;
+> +                case 22: return &op_vabdu_vx;
+>                   case 16:
+>                       switch ((inst >> 20) & 0b11111) {
+>                       case 0:
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index a13177b7b7..4b8944b051 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -220,6 +220,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
+>       ISA_EXT_DATA_ENTRY(zksh, PRIV_VERSION_1_12_0, ext_zksh),
+>       ISA_EXT_DATA_ENTRY(zkt, PRIV_VERSION_1_12_0, ext_zkt),
+>       ISA_EXT_DATA_ENTRY(ztso, PRIV_VERSION_1_12_0, ext_ztso),
+> +    ISA_EXPERIMENTAL_EXT_DATA_ENTRY(zvabd, PRIV_VERSION_1_13_0, ext_zvabd),
+>       ISA_EXT_DATA_ENTRY(zvbb, PRIV_VERSION_1_12_0, ext_zvbb),
+>       ISA_EXT_DATA_ENTRY(zvbc, PRIV_VERSION_1_12_0, ext_zvbc),
+>       ISA_EXT_DATA_ENTRY(zve32f, PRIV_VERSION_1_10_0, ext_zve32f),
+> diff --git a/target/riscv/cpu_cfg_fields.h.inc b/target/riscv/cpu_cfg_fields.h.inc
+> index f8c27a574f..6018e58195 100644
+> --- a/target/riscv/cpu_cfg_fields.h.inc
+> +++ b/target/riscv/cpu_cfg_fields.h.inc
+> @@ -83,6 +83,7 @@ BOOL_FIELD(ext_zve32x)
+>   BOOL_FIELD(ext_zve64f)
+>   BOOL_FIELD(ext_zve64d)
+>   BOOL_FIELD(ext_zve64x)
+> +BOOL_FIELD(ext_zvabd)
+>   BOOL_FIELD(ext_zvbb)
+>   BOOL_FIELD(ext_zvbc)
+>   BOOL_FIELD(ext_zvkb)
+> diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+> index 4fc2d3a155..3aef6e0e3e 100644
+> --- a/target/riscv/helper.h
+> +++ b/target/riscv/helper.h
+> @@ -1350,6 +1350,32 @@ DEF_HELPER_5(vsm4k_vi, void, ptr, ptr, i32, env, i32)
+>   DEF_HELPER_4(vsm4r_vv, void, ptr, ptr, env, i32)
+>   DEF_HELPER_4(vsm4r_vs, void, ptr, ptr, env, i32)
+>   
+> +/* Zvabd Extension */
+> +DEF_HELPER_6(vabd_vv_b, void, ptr, ptr, ptr, ptr, env, i32)
+> +DEF_HELPER_6(vabd_vv_h, void, ptr, ptr, ptr, ptr, env, i32)
+> +DEF_HELPER_6(vabd_vv_w, void, ptr, ptr, ptr, ptr, env, i32)
+> +DEF_HELPER_6(vabd_vv_d, void, ptr, ptr, ptr, ptr, env, i32)
+> +DEF_HELPER_6(vabd_vx_b, void, ptr, ptr, tl, ptr, env, i32)
+> +DEF_HELPER_6(vabd_vx_h, void, ptr, ptr, tl, ptr, env, i32)
+> +DEF_HELPER_6(vabd_vx_w, void, ptr, ptr, tl, ptr, env, i32)
+> +DEF_HELPER_6(vabd_vx_d, void, ptr, ptr, tl, ptr, env, i32)
+> +DEF_HELPER_6(vabdu_vv_b, void, ptr, ptr, ptr, ptr, env, i32)
+> +DEF_HELPER_6(vabdu_vv_h, void, ptr, ptr, ptr, ptr, env, i32)
+> +DEF_HELPER_6(vabdu_vv_w, void, ptr, ptr, ptr, ptr, env, i32)
+> +DEF_HELPER_6(vabdu_vv_d, void, ptr, ptr, ptr, ptr, env, i32)
+> +DEF_HELPER_6(vabdu_vx_b, void, ptr, ptr, tl, ptr, env, i32)
+> +DEF_HELPER_6(vabdu_vx_h, void, ptr, ptr, tl, ptr, env, i32)
+> +DEF_HELPER_6(vabdu_vx_w, void, ptr, ptr, tl, ptr, env, i32)
+> +DEF_HELPER_6(vabdu_vx_d, void, ptr, ptr, tl, ptr, env, i32)
+> +DEF_HELPER_6(vwabda_vv_b, void, ptr, ptr, ptr, ptr, env, i32)
+> +DEF_HELPER_6(vwabda_vv_h, void, ptr, ptr, ptr, ptr, env, i32)
+> +DEF_HELPER_6(vwabda_vx_b, void, ptr, ptr, tl, ptr, env, i32)
+> +DEF_HELPER_6(vwabda_vx_h, void, ptr, ptr, tl, ptr, env, i32)
+> +DEF_HELPER_6(vwabdau_vv_b, void, ptr, ptr, ptr, ptr, env, i32)
+> +DEF_HELPER_6(vwabdau_vv_h, void, ptr, ptr, ptr, ptr, env, i32)
+> +DEF_HELPER_6(vwabdau_vx_b, void, ptr, ptr, tl, ptr, env, i32)
+> +DEF_HELPER_6(vwabdau_vx_h, void, ptr, ptr, tl, ptr, env, i32)
+> +
+>   /* CFI (zicfiss) helpers */
+>   #ifndef CONFIG_USER_ONLY
+>   DEF_HELPER_1(ssamoswap_disabled, void, env)
+> diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+> index 21272fdb50..1c991a6f42 100644
+> --- a/target/riscv/insn32.decode
+> +++ b/target/riscv/insn32.decode
+> @@ -1084,3 +1084,13 @@ sb_aqrl  00111 . . ..... ..... 000 ..... 0101111 @atom_st
+>   sh_aqrl  00111 . . ..... ..... 001 ..... 0101111 @atom_st
+>   sw_aqrl  00111 . . ..... ..... 010 ..... 0101111 @atom_st
+>   sd_aqrl  00111 . . ..... ..... 011 ..... 0101111 @atom_st
+> +
+> +# *** Zvabd Extension ***
+> +vabd_vv       010101 . ..... ..... 010 ..... 1010111 @r_vm
+> +vabd_vx       010101 . ..... ..... 110 ..... 1010111 @r_vm
+> +vabdu_vv      010110 . ..... ..... 010 ..... 1010111 @r_vm
+> +vabdu_vx      010110 . ..... ..... 110 ..... 1010111 @r_vm
+> +vwabda_vv     111101 . ..... ..... 000 ..... 1010111 @r_vm
+> +vwabda_vx     111101 . ..... ..... 100 ..... 1010111 @r_vm
+> +vwabdau_vv    111110 . ..... ..... 000 ..... 1010111 @r_vm
+> +vwabdau_vx    111110 . ..... ..... 100 ..... 1010111 @r_vm
+> diff --git a/target/riscv/tcg/insn_trans/trans_rvv.c.inc b/target/riscv/tcg/insn_trans/trans_rvv.c.inc
+> index a22e2cae6c..14ef961607 100644
+> --- a/target/riscv/tcg/insn_trans/trans_rvv.c.inc
+> +++ b/target/riscv/tcg/insn_trans/trans_rvv.c.inc
+> @@ -4091,3 +4091,48 @@ GEN_INT_EXT_TRANS(vzext_vf8, 3, 2)
+>   GEN_INT_EXT_TRANS(vsext_vf2, 1, 3)
+>   GEN_INT_EXT_TRANS(vsext_vf4, 2, 4)
+>   GEN_INT_EXT_TRANS(vsext_vf8, 3, 5)
+> +
+> +/* Zvabd Extension */
+> +#define GEN_ABD_CHECK(NAME, CHECK_FN, MAX_SEW)                       \
+> +static bool NAME(DisasContext *s, arg_rmrr *a)                       \
+> +{                                                                    \
+> +    return CHECK_FN(s, a) && s->cfg_ptr->ext_zvabd &&                \
+> +           s->sew <= MAX_SEW &&                                      \
+> +           (s->sew != MO_64 || s->cfg_ptr->ext_zve64x);              \
+> +}
+> +GEN_ABD_CHECK(vabd_vv_check, opivv_check, MO_64)
+> +GEN_ABD_CHECK(vabd_vx_check, opivx_check, MO_64)
+> +GEN_ABD_CHECK(vwabd_vv_check, opivv_overwrite_widen_check, MO_16)
+> +GEN_ABD_CHECK(vwabd_vx_check, opivx_overwrite_widen_check, MO_16)
+> +
+> +GEN_OPIVV_TRANS(vabd_vv, vabd_vv_check)
+> +GEN_OPIVX_TRANS(vabd_vx, vabd_vx_check)
+> +GEN_OPIVV_TRANS(vabdu_vv, vabd_vv_check)
+> +GEN_OPIVX_TRANS(vabdu_vx, vabd_vx_check)
+> +
+> +#define GEN_ABD_OPIVV_WIDEN_TRANS(NAME, CHECK)                          \
+> +static bool trans_##NAME(DisasContext *s, arg_rmrr *a)                  \
+> +{                                                                       \
+> +    static gen_helper_gvec_4_ptr * const fns[2] = {                     \
+> +        gen_helper_##NAME##_b, gen_helper_##NAME##_h,                   \
+> +    };                                                                  \
+> +    return s->sew <= MO_16 && do_opivv_widen(s, a, fns[s->sew], CHECK); \
+> +}
+> +
+> +#define GEN_ABD_OPIVX_WIDEN_TRANS(NAME, CHECK)                          \
+> +static bool trans_##NAME(DisasContext *s, arg_rmrr *a)                  \
+> +{                                                                       \
+> +    if (CHECK(s, a)) {                                                  \
+> +        static gen_helper_opivx * const fns[2] = {                      \
+> +            gen_helper_##NAME##_b, gen_helper_##NAME##_h,               \
+> +        };                                                              \
+> +        return opivx_trans(a->rd, a->rs1, a->rs2, a->vm,                \
+> +                           fns[s->sew], s);                             \
+> +    }                                                                   \
+> +    return false;                                                       \
+> +}
+> +
+> +GEN_ABD_OPIVV_WIDEN_TRANS(vwabda_vv, vwabd_vv_check)
+> +GEN_ABD_OPIVX_WIDEN_TRANS(vwabda_vx, vwabd_vx_check)
+> +GEN_ABD_OPIVV_WIDEN_TRANS(vwabdau_vv, vwabd_vv_check)
+> +GEN_ABD_OPIVX_WIDEN_TRANS(vwabdau_vx, vwabd_vx_check)
+> diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+> index 9e3cc87f8a..4c2fb6f063 100644
+> --- a/target/riscv/tcg/tcg-cpu.c
+> +++ b/target/riscv/tcg/tcg-cpu.c
+> @@ -732,6 +732,12 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
+>           return;
+>       }
+>   
+> +    if ((cpu->cfg.ext_zvabd) && !cpu->cfg.ext_zve32x) {
+> +        error_setg(errp,
+> +                   "Zvabd extensions require V or Zve* extensions");
+> +        return;
+> +    }
+> +
+>       if (cpu->cfg.ext_zicntr && !cpu->cfg.ext_zicsr) {
+>           if (cpu_cfg_ext_is_user_set(CPU_CFG_OFFSET(ext_zicntr))) {
+>               error_setg(errp, "zicntr requires zicsr");
+> diff --git a/target/riscv/tcg/vector_helper.c b/target/riscv/tcg/vector_helper.c
+> index e28d8a3d9f..bdb1efcebc 100644
+> --- a/target/riscv/tcg/vector_helper.c
+> +++ b/target/riscv/tcg/vector_helper.c
+> @@ -5906,3 +5906,59 @@ GEN_VEXT_INT_EXT(vsext_vf2_d, int64_t, int32_t, H8, H4)
+>   GEN_VEXT_INT_EXT(vsext_vf4_w, int32_t, int8_t,  H4, H1)
+>   GEN_VEXT_INT_EXT(vsext_vf4_d, int64_t, int16_t, H8, H2)
+>   GEN_VEXT_INT_EXT(vsext_vf8_d, int64_t, int8_t,  H8, H1)
+> +
+> +/* Zvabd Extension */
+> +#define DO_ABD(N, M)  (N > M ? N - M : M - N)
+> +#define DO_ABDACC(N, M, D) (DO_ABD(N, M) + D)
+> +
+> +RVVCALL(OPIVV2, vabd_vv_b, OP_SSS_B, H1, H1, H1, DO_ABD)
+> +RVVCALL(OPIVV2, vabd_vv_h, OP_SSS_H, H2, H2, H2, DO_ABD)
+> +RVVCALL(OPIVV2, vabd_vv_w, OP_SSS_W, H4, H4, H4, DO_ABD)
+> +RVVCALL(OPIVV2, vabd_vv_d, OP_SSS_D, H8, H8, H8, DO_ABD)
+> +RVVCALL(OPIVX2, vabd_vx_b, OP_SSS_B, H1, H1, DO_ABD)
+> +RVVCALL(OPIVX2, vabd_vx_h, OP_SSS_H, H2, H2, DO_ABD)
+> +RVVCALL(OPIVX2, vabd_vx_w, OP_SSS_W, H4, H4, DO_ABD)
+> +RVVCALL(OPIVX2, vabd_vx_d, OP_SSS_D, H8, H8, DO_ABD)
+> +RVVCALL(OPIVV2, vabdu_vv_b, OP_UUU_B, H1, H1, H1, DO_ABD)
+> +RVVCALL(OPIVV2, vabdu_vv_h, OP_UUU_H, H2, H2, H2, DO_ABD)
+> +RVVCALL(OPIVV2, vabdu_vv_w, OP_UUU_W, H4, H4, H4, DO_ABD)
+> +RVVCALL(OPIVV2, vabdu_vv_d, OP_UUU_D, H8, H8, H8, DO_ABD)
+> +RVVCALL(OPIVX2, vabdu_vx_b, OP_UUU_B, H1, H1, DO_ABD)
+> +RVVCALL(OPIVX2, vabdu_vx_h, OP_UUU_H, H2, H2, DO_ABD)
+> +RVVCALL(OPIVX2, vabdu_vx_w, OP_UUU_W, H4, H4, DO_ABD)
+> +RVVCALL(OPIVX2, vabdu_vx_d, OP_UUU_D, H8, H8, DO_ABD)
+> +
+> +RVVCALL(OPIVV3, vwabda_vv_b, WOP_SSS_B, H2, H1, H1, DO_ABDACC)
+> +RVVCALL(OPIVV3, vwabda_vv_h, WOP_SSS_H, H4, H2, H2, DO_ABDACC)
+> +RVVCALL(OPIVX3, vwabda_vx_b, WOP_SSS_B, H2, H1, DO_ABDACC)
+> +RVVCALL(OPIVX3, vwabda_vx_h, WOP_SSS_H, H4, H2, DO_ABDACC)
+> +RVVCALL(OPIVV3, vwabdau_vv_b, WOP_UUU_B, H2, H1, H1, DO_ABDACC)
+> +RVVCALL(OPIVV3, vwabdau_vv_h, WOP_UUU_H, H4, H2, H2, DO_ABDACC)
+> +RVVCALL(OPIVX3, vwabdau_vx_b, WOP_UUU_B, H2, H1, DO_ABDACC)
+> +RVVCALL(OPIVX3, vwabdau_vx_h, WOP_UUU_H, H4, H2, DO_ABDACC)
+> +
+> +GEN_VEXT_VV(vabd_vv_b, 1)
+> +GEN_VEXT_VV(vabd_vv_h, 2)
+> +GEN_VEXT_VV(vabd_vv_w, 4)
+> +GEN_VEXT_VV(vabd_vv_d, 8)
+> +GEN_VEXT_VX(vabd_vx_b, 1)
+> +GEN_VEXT_VX(vabd_vx_h, 2)
+> +GEN_VEXT_VX(vabd_vx_w, 4)
+> +GEN_VEXT_VX(vabd_vx_d, 8)
+> +GEN_VEXT_VV(vabdu_vv_b, 1)
+> +GEN_VEXT_VV(vabdu_vv_h, 2)
+> +GEN_VEXT_VV(vabdu_vv_w, 4)
+> +GEN_VEXT_VV(vabdu_vv_d, 8)
+> +GEN_VEXT_VX(vabdu_vx_b, 1)
+> +GEN_VEXT_VX(vabdu_vx_h, 2)
+> +GEN_VEXT_VX(vabdu_vx_w, 4)
+> +GEN_VEXT_VX(vabdu_vx_d, 8)
+> +
+> +GEN_VEXT_VV(vwabda_vv_b, 2)
+> +GEN_VEXT_VV(vwabda_vv_h, 4)
+> +GEN_VEXT_VX(vwabda_vx_b, 2)
+> +GEN_VEXT_VX(vwabda_vx_h, 4)
+> +GEN_VEXT_VV(vwabdau_vv_b, 2)
+> +GEN_VEXT_VV(vwabdau_vv_h, 4)
+> +GEN_VEXT_VX(vwabdau_vx_b, 2)
+> +GEN_VEXT_VX(vwabdau_vx_h, 4)
 
 
