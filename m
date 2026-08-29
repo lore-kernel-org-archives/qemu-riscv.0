@@ -4,131 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58ABDC61DD3
-	for <qemu-riscv@archiver.kernel.org>; Sat, 29 Aug 2026 03:14:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36ECEC61DBE
+	for <qemu-riscv@archiver.kernel.org>; Sat, 29 Aug 2026 04:21:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x09W0-0000Fa-NG; Fri, 28 Aug 2026 23:13:56 -0400
+	id 1x0AYa-0000La-1d; Sat, 29 Aug 2026 00:20:40 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <chao.liu@processmission.com>)
- id 1x09Vy-0000AA-Rq; Fri, 28 Aug 2026 23:13:54 -0400
-Received: from mail-japanwestazlp170120003.outbound.protection.outlook.com
- ([2a01:111:f403:c406::3] helo=OS8PR02CU002.outbound.protection.outlook.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <chao.liu@processmission.com>)
- id 1x09Vv-0006Tn-Hd; Fri, 28 Aug 2026 23:13:53 -0400
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=T7UvozfSwYbi3QoHNgJ2s162RjI2wUr8ZFlZQIPQWYe4B282QDxrXwR16U5mUXwrNbplEAZGfHjxjskv8aJNSMacKB78GZj4xqz30qh25WcpnK2Ieq2VRPCmpZlu4PdGU8DrKzOiYmLqYOcgLxSRSgKg9gX0u8h8/okYEHN4/diTWDbUJNqI7tEzOD3mzNxw4gj6QHrtnghYPe7AmR9V7h+RNTnHxTJX0N96xvTjfeuVIArcSRiImVc1qEnXuXZccSsedLIVnz9vNGHW8BNpLm9Q6dqZtoz1f94PR/ROHr19dwQkmt2MVCwPoRlKAqh6XJQWgqbkDlO7OkZh4pCs0Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=s3ZnwIFrwDjxcr6Xas+ZgIIzIkY/gVFyCLdy0jN8tPg=;
- b=KaqwiqTfKwrsPn/DkL4jymZL4qBarIN4bb/xw6muUI35Wub5w/pW/aJiMeBGnmUtmAJQEsTEthyQlgaBNbGpCUHfDJl6WzQ69TmiQw1Qqjmk5nMTSJ4X+GHY204ArcIdZm1/fR4QgSNSH5xfX7lbr5nyABlaCkZpKkvUQvb+itf8/Vlo8na340vgCoeqBhlxIa7kRWjwoRSOTFe02N155Lo3hIs0v5Fw6UEpxPbUYefjQ12FcPIgJCGDrmHVgEPcPAnZlEgxgcgWPZFAnBiipmGGfwhiNsgObvOaBOCVa4tL0RJ7MCC43MxWV80UUnJQKMmhtBqJqWyE0YnmEnghiw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=processmission.com; dmarc=pass action=none
- header.from=processmission.com; dkim=pass header.d=processmission.com;
- arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=processmission.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=s3ZnwIFrwDjxcr6Xas+ZgIIzIkY/gVFyCLdy0jN8tPg=;
- b=FfuIL7GZluAemalniQHKZzUsn1tcXXmS/kOTFdRJe1/HtXFG8NFee3uQek0p/Lwf2/r9WDr+Wc7Gzs2T5A5zVb7OFTd2EK0SH1DhXRlneaUJXkg5M4tocVO67PShAlZDwE36+uldcdB7OMxMW83rBib6V7KjvqEyRF5t2CDE7RlCWrsPmD+zjNCNzSEMwTqFaXDBN6qiLERWU2vJGc3HjUCuXmWIHxLbxkzIZDE52M45NQF4h0ipChaGCwi+Zuvwl9QYiy8DCJWEdIAh0cRhgmF4HeX4cuz0Mx7/cDlqc46n/RgkVlNDoCvRPQHBMzmIr01pk52ZzHqOXhyvCil0Wg==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=processmission.com;
-Received: from TYNPR02MB9351.apcprd02.prod.outlook.com (2603:1096:405:3d0::15)
- by TY0PR02MB5574.apcprd02.prod.outlook.com (2603:1096:400:1ba::12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.360.11; Sat, 29 Aug
- 2026 03:13:47 +0000
-Received: from TYNPR02MB9351.apcprd02.prod.outlook.com
- ([fe80::e5f3:5fb7:3d29:5934]) by TYNPR02MB9351.apcprd02.prod.outlook.com
- ([fe80::e5f3:5fb7:3d29:5934%4]) with mapi id 15.21.0360.008; Sat, 29 Aug 2026
- 03:13:47 +0000
-Date: Sat, 29 Aug 2026 11:13:41 +0800
-To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
- Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
- Palmer Dabbelt <palmer@dabbelt.com>
-Subject: Re: [PATCH v5 15/15] hw/riscv/riscv-iommu-sys.c, virt.c: add
- riscv_create_iommu_sys()
-Message-ID: <apJOXTWS9j2AnuhN@ChaodeMacBook-Pro.local>
-References: <20260828203918.350131-1-daniel.barboza@oss.qualcomm.com>
- <20260828203918.350131-16-daniel.barboza@oss.qualcomm.com>
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20260828203918.350131-16-daniel.barboza@oss.qualcomm.com>
-X-ClientProxiedBy: PH7P220CA0053.NAMP220.PROD.OUTLOOK.COM
- (2603:10b6:510:32b::15) To TYNPR02MB9351.apcprd02.prod.outlook.com
- (2603:1096:405:3d0::15)
+ (Exim 4.90_1) (envelope-from <vae1207@gmail.com>) id 1x08Rj-0004nR-Df
+ for qemu-riscv@nongnu.org; Fri, 28 Aug 2026 22:05:27 -0400
+Received: from mail-pl1-x632.google.com ([2607:f8b0:4864:20::632])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <vae1207@gmail.com>) id 1x08Rg-0007nE-Va
+ for qemu-riscv@nongnu.org; Fri, 28 Aug 2026 22:05:27 -0400
+Received: by mail-pl1-x632.google.com with SMTP id
+ d9443c01a7336-2cf452def93so22456485ad.1
+ for <qemu-riscv@nongnu.org>; Fri, 28 Aug 2026 19:05:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1787969123; x=1788573923; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=7R5WDd0jmooDcW5HPp0cRFbEdNBKPJFny5PovUq6WAE=;
+ b=fspzbclDtvbh2BJ/IKBhiIU3e3p1gvLYKQ13oSsZeAit6i+rfFtRrIJz0dsQK2Jxwh
+ qw/GcyMH9R1+Z67inugn057qAlaBl6gwLDA38wau9hidLth3hmIWxNmZyDUP3Ty/BIw7
+ GzqiUiRcYkv+FGnoMMy1cvK6kpE4FJkA7oheNcVAPCIe4uaVrA1VZhLqbOJOpssh+RGx
+ Y9uW36tq4OrLz4s8VTzXXd6hVSX32z5MdQNgrXHtZ62adVmdhxbp/52MzAhDLZQ1dSbj
+ rX7V+a8clbwMi5ok/BxZ6xNc7J9xQtDCAdo7FrPYFiGvyWmfZtt0npedarRy/X46YAG6
+ odCA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1787969123; x=1788573923;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=7R5WDd0jmooDcW5HPp0cRFbEdNBKPJFny5PovUq6WAE=;
+ b=AO1LodNd3b4Si5YsXbXYq8QgRE3Hp9dyThOXSOuscWpDlg5bHcgr/4DpeucSK7vN9h
+ 3aIEnmzUU0zgmDUy1z+t1zUIO/qQDoyOaBdJEkMDIEebTVdUjL8JyYkkZx12IxsgoyEg
+ GxMa3nDSWWe/31FOWulhiPQBWjji9Adwd4Un6AvzMVntD4KrZVZPbStK6Jq1H4iyBNPy
+ ghZ5V3Ulh857l8sAiXljUpBFYybUG/kb8ivToG4/SNcscVndFicVG1QPzgqYCcZneqNw
+ 6i8ES6peS8OiZa/RAw7B+moXPMRx0Avk9QCJLuhApZ2HOPLxrvmzrDbGIZaId/ncF1wg
+ gUBA==
+X-Gm-Message-State: AFuF++mvADcKpmVUPhW0t0lMOy43ZXngEXITROHJyi7ZhCr6OlFFMG0C
+ ROQAso1luyMjMvVKZvi4xgQ8RAYGgrRPf3mN1j7Rzqm32rUOcbNTkY8s
+X-Gm-Gg: AYBFou2ZyiQdm46o+EsxWQykYHPSHgAR5MiSU+JN24vgBdqclyd290JP+3ZNJzFYPec
+ jz3Nfk9V0p6SySVVtgnU9Pued85bTgbIx+bD6Tv7LTQsz2BJzTeQL/pJ6eeY5pu9cvkval7Mdzb
+ pAa0ken27xhOpsgb6VUFox6OtsUy6Why9KjHsmrV6qWdc02s9hgtGtj/u4Ps8JMy27+XNZD0+0J
+ rfyo4RZD9juQ6tRSDJu402PspONZ4a9nxLL9PniGx5o7KmA5TS70SWJiHh58ZXK0v7BE0H5l57o
+ zmfF23Qw6/0UP/Fg2MRbkFx4mlOg3Ot5npAUTm5QPrHEC8bbiXNIsCvnJtBFjWNtkO0SNrCUBpZ
+ CkROMZrvthnTbFES9/UrQVBGeD5n9pjHAegNa1cRFDe7WSBmTNlwgXcfvjQKwy/n5naJ7qbkEQU
+ Q7ZffXQzKVypaoetDc94ThzCrO6iJldFbQEozpwB8it23BS8+veb19CtHLfAjmR7vzVQaoufMPe
+ CRzXQ/c
+X-Received: by 2002:a17:903:2ec5:b0:2d6:fddf:a890 with SMTP id
+ d9443c01a7336-2d72634612dmr244738765ad.6.1787969123178; 
+ Fri, 28 Aug 2026 19:05:23 -0700 (PDT)
+Received: from localhost.localdomain ([180.213.79.228])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2d759869aeesm10592695ad.46.2026.08.28.19.05.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 28 Aug 2026 19:05:22 -0700 (PDT)
+From: JunWei Li <vae1207@gmail.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, chenhuacai@canaan-creative.com,
+ JunWei Li <vae1207@gmail.com>
+Subject: [PATCH 1/3] hw/misc: add K230 PMU device
+Date: Sat, 29 Aug 2026 10:02:27 +0800
+Message-Id: <20260829020229.389742-2-vae1207@gmail.com>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20260829020229.389742-1-vae1207@gmail.com>
+References: <20260829020229.389742-1-vae1207@gmail.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: TYNPR02MB9351:EE_|TY0PR02MB5574:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5744a270-3a43-465f-86f0-08df057b8a49
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|376014|23010399003|1800799024|4143699003|10067099003|56012099006|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: XXrr03+ab6h7BwDWV8I2R9c35PPmIobbUnMVfoRfoMdfloOQ8azsyk4yUJc4UGweCaXYZv5UduHLrHcmXpnGHKdXiN2S8uoqhoe+I6idgwzDbjxau0aKDJd1KJoUS0fKPejh9L04lK9guEZYIpXUPR505J2zMj5tGO/m4UDXOUojVZE+xP3jLYiK3gMVH427swDEog8Tvl4BVrCCIt7/3gVa6Y/C2VJtYg0j61QCvG+HWvwEchwo9sbYSQsqUyiBVYHQ6zpXwWUnujDfcV3VYsd69OBrWElnvAH/GrwPYChOBeppvak+P7p1mWZMB3ojw2HBfkMlZ9IquaFr5ImnUal9Lr4TgplW2hWqc78Xav3eKfhYOLrXxkuDlekvmAbFYswcFP+ZB+OK29WBvEIg5jAqyZ/nHtu2zU72C1O9vh5N/5cx8557nqtyD/jkdUeTiprnv8Txd8RyBq7owVzfKUVHPdAAHlIiaSBBrUgZrplzTaUENJiY04+Ry8daIXEw2nzdUnUFIKZ8BesERZRipFgjBMefxzsqMBvkzuteZdNYYYMj7tpKESEGREO46kyB8Qjp9EphZzVyKW/t82vWFDFROzV/2uVhl23tVHr+x4MkhdMUkVH5dwYnbaWrOlRSUxOJ6yqM+5lLx2gQ1I75/7qzlpA8jV1dOwLAoTL3NXA=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:TYNPR02MB9351.apcprd02.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(376014)(23010399003)(1800799024)(4143699003)(10067099003)(56012099006)(18002099003)(22082099003);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?iso-8859-1?Q?HbAzpJ+Z6b19U2LqIFVOeTaLB5ckE8YVOzDEdki9vB36j8PXDRebF0SzRL?=
- =?iso-8859-1?Q?8CLAW70RaQcqttPh/5HLJCG+oJ9A0I01KIrmbOebrw4bqLO80XF4E/OsEx?=
- =?iso-8859-1?Q?FompMnYlTp5lB5QWXhk+1Azfel+1vN/uf3xzMNeYpiyKShDyTA1cHeGd7u?=
- =?iso-8859-1?Q?Cp3eWINRyyj90KXa7v/6EWLvDYa6JXWU6j9NIy/alIj3I6kWryPtvGE+26?=
- =?iso-8859-1?Q?v0xTKS26gHZfrsGrfEOoF/Aqt1m2OotLowzkThQkXfaByAmfZzgZBNFd7H?=
- =?iso-8859-1?Q?JjLUSyx9ECBacVuZMjCsb6BpwVAaYV+N3/bXzAnsOtEm8+HP5gKO5QWxNe?=
- =?iso-8859-1?Q?sS3HNBoNhp54HCICOrez2aXnCv9MZAf8PM0l9ftPC+J2LVs4VsMsY7tdCa?=
- =?iso-8859-1?Q?nB/YxXLiskeswm/wQz0zYTfbm5vhJ1WnugGx4k5rZh0OsVVIY1e3uN9swa?=
- =?iso-8859-1?Q?Z3mCagavTWZuD5Pxr2aTVByZa9ifYw9fD6/rFNjxx0IDdyTB46DFAEW8Xt?=
- =?iso-8859-1?Q?0IVFANAz8q874t6vlZUVwoZtl/Xf3cG6MjANX8tTKzwYpegfc6320V0YGl?=
- =?iso-8859-1?Q?8Di3wukg+sKOWQ4tWn1sf+q6sSGJ8Co5llRjq+qlehm5Un65lKEiqwH/Mc?=
- =?iso-8859-1?Q?7fXKI6sCharCuAj+5k4cPjWGz4mBlAccs5D7kVu3TEUKDqa3f09NXayVNy?=
- =?iso-8859-1?Q?r1LMz7WeGPS3b90lyFi2ot2jmMGOJvdas0TW8E+tTa9RG0T3JDN8Zn9CK/?=
- =?iso-8859-1?Q?BXR3pbJTr3zuhi88x2LsErw3rJsP0F03xbqB7u/2kC/hnU0nq/VacMaHUz?=
- =?iso-8859-1?Q?TaKGegef02lPnOUP7uYxizl05WIIeRYlPx4aZzL3tLcvNz7JDhjKhHEfN5?=
- =?iso-8859-1?Q?KD3i38q+JcebCKe7sOIUVBVOsIUZQT1qexIMupwnQ//iKlcTs3UPjIZEXw?=
- =?iso-8859-1?Q?rgwDpA/vkmRIGckQdDur4AWcbv04shZ4eI2/isCoPYp2txP6y+vSnAFsJl?=
- =?iso-8859-1?Q?OlMA10Ah3M6F2YBSozHVuxXcxQF6Kaqbwcgmyz2NKA+dAvwHHAcRhDlkn0?=
- =?iso-8859-1?Q?buQI+S9nQwqmxANdIbuZTconbwv64DTlJsH2VT4IWWDkrbAtLnRs1SoEAH?=
- =?iso-8859-1?Q?k3sRQElps9/RiyzCDKgVZoktfz69KtOl4Bwc8mVInwyVkDdJwOCdEuvyml?=
- =?iso-8859-1?Q?UXeQLWRIEXuJ+Wd2n6/F0HXUlH5jaDjJde0nvVKvlE28ThP0PFtEu4XPpF?=
- =?iso-8859-1?Q?6AaLFEAAL7CRfLRVgfEG9qIHRQmaqRuJoGod8VA+oQ1vTGyKcvcJ6mBiQ5?=
- =?iso-8859-1?Q?7MptuxwkdFeJzq4W0tv4XZ68OzJfRnsWc+U1DoWZKwfjRYNlA6REvWa5/E?=
- =?iso-8859-1?Q?b53U1e/Ca2wkbe6bILYWvrZCdo45/VBjEeenk/xYZtpjy0r1fKxSbJ8eBX?=
- =?iso-8859-1?Q?016PablC+lWsXLYgheC6yHIjiQhSbg9C0xGUSXNJ/PIVWAcYPpgNFZY4/J?=
- =?iso-8859-1?Q?h9TulNMa2LfteuQEHGnFs4Y6rDCIYiv5XL3sQDAHeCLURVVeZZ52qoWuax?=
- =?iso-8859-1?Q?F7Yi7D16DcjxESDbqFSchXZ80LjUVea6OHOMfrffkGy3pznf9GFlmF3j9Q?=
- =?iso-8859-1?Q?GijkCHaa40Hen+h3og0NRnmpLxfWC9fc1XV/gBzlsKbJwBABgp8no6sTVv?=
- =?iso-8859-1?Q?bEqQ+geXUrrcIBVsycqM4UDh9spho80or49QMN+W628kCYojzyTDaHse5d?=
- =?iso-8859-1?Q?OPuaZDex9wU50IfJ9rhl2We4VZKdaYDwokoV5dTw+1JkNv5KjMz1bz2Hrb?=
- =?iso-8859-1?Q?7zOfJA6IcTpv+2JrqatVSNf5/Sjuc2M=3D?=
-X-OriginatorOrg: processmission.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5744a270-3a43-465f-86f0-08df057b8a49
-X-MS-Exchange-CrossTenant-AuthSource: TYNPR02MB9351.apcprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Aug 2026 03:13:47.0567 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: e0544bf7-9765-4630-ab69-0b266dc2169c
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: WwcIU4a/jVDGMiVCyoUlqZhEpSwPdf4iK0t949EA7Uu0oqyr2ZwL8+eESLBIJ+ib4nzqd539Iw7T0ey7XCH+ezeIpzYQvqX1txuUgPUZXBg=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: TY0PR02MB5574
-Received-SPF: pass client-ip=2a01:111:f403:c406::3;
- envelope-from=chao.liu@processmission.com;
- helo=OS8PR02CU002.outbound.protection.outlook.com
-X-Spam_score_int: -16
-X-Spam_score: -1.7
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::632;
+ envelope-from=vae1207@gmail.com; helo=mail-pl1-x632.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
 X-Spam_bar: -
-X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
- DKIM_SIGNED=0.1, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Sat, 29 Aug 2026 00:20:39 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -140,121 +98,394 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Reply-to:  Chao Liu <chao.liu@processmission.com>
-From:  Chao Liu via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Aug 28, 2026 at 05:39:17PM +0800, Daniel Henrique Barboza wrote:
-> Move the creation of riscv-iommu-sys to its own file instead of open
-> coding it in the 'virt' board.  Other boards in the future might want to
-> use this device and we want to avoid code duplication.
-> 
-> Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-> Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
-Reviewed-by: Chao Liu <chao.liu@processmission.com>
+Add a model of the K230 power management unit with the APB register bank, interrupt detection state and the two PMIC output pads, based on the K230 Technical Reference Manual V0.3.1 chapter 14.
 
-Thanks,
-Chao
+The PMU registers keep their reset values and write masks from the TRM. PAD64..PAD69 inputs set the matching PMU_INT_STATE bit when the corresponding detection is enabled, and the interrupt line follows PMU_INT_STATE & PMU_INT0_TO_CPU. Writing PMU_SYSCTRL_REG drives the PAD70/PAD71 outputs. Long/short press timing, edge counting and debounce are not modelled yet.
 
-> ---
->  hw/riscv/riscv-iommu-sys.c | 25 +++++++++++++++++++++++++
->  hw/riscv/riscv-iommu.h     |  3 +++
->  hw/riscv/virt.c            | 23 +++--------------------
->  3 files changed, 31 insertions(+), 20 deletions(-)
-> 
-> diff --git a/hw/riscv/riscv-iommu-sys.c b/hw/riscv/riscv-iommu-sys.c
-> index 3314adeed2..258c171efd 100644
-> --- a/hw/riscv/riscv-iommu-sys.c
-> +++ b/hw/riscv/riscv-iommu-sys.c
-> @@ -217,6 +217,31 @@ static void riscv_iommu_sys_init(Object *obj)
->      riscv_iommu_set_cap_igs(iommu, RISCV_IOMMU_CAP_IGS_BOTH);
->  }
->  
-> +DeviceState *riscv_create_iommu_sys(DeviceState *mmio_irqchip,
-> +                                    hwaddr addr, int base_irq,
-> +                                    bool is_32_bit)
-> +{
-> +    DeviceState *iommu_sys = qdev_new(TYPE_RISCV_IOMMU_SYS);
-> +
-> +    object_property_set_uint(OBJECT(iommu_sys), "addr", addr, &error_fatal);
-> +    object_property_set_uint(OBJECT(iommu_sys), "base-irq",
-> +                             base_irq, &error_fatal);
-> +    object_property_set_link(OBJECT(iommu_sys), "irqchip",
-> +                             OBJECT(mmio_irqchip),
-> +                             &error_fatal);
-> +    /*
-> +     * For riscv64 use a physical address size of 56 bits (44 bit PPN),
-> +     * and for riscv32 use 34 bits (22 bit PPN).
-> +     */
-> +    object_property_set_uint(OBJECT(iommu_sys), "pas-bits",
-> +                             is_32_bit ? 34 : 56,
-> +                             &error_fatal);
-> +
-> +    sysbus_realize_and_unref(SYS_BUS_DEVICE(iommu_sys), &error_fatal);
-> +
-> +    return iommu_sys;
-> +}
-> +
->  static const Property riscv_iommu_sys_properties[] = {
->      DEFINE_PROP_UINT64("addr", RISCVIOMMUStateSys, addr, 0),
->      DEFINE_PROP_UINT32("base-irq", RISCVIOMMUStateSys, base_irq, 0),
-> diff --git a/hw/riscv/riscv-iommu.h b/hw/riscv/riscv-iommu.h
-> index da70e8bfa8..7c470ba084 100644
-> --- a/hw/riscv/riscv-iommu.h
-> +++ b/hw/riscv/riscv-iommu.h
-> @@ -104,6 +104,9 @@ void riscv_iommu_set_cap_igs(RISCVIOMMUState *s, riscv_iommu_igs_mode mode);
->  void riscv_iommu_reset(RISCVIOMMUState *s);
->  void riscv_iommu_notify(RISCVIOMMUState *s, int vec_type);
->  void riscv_iommu_fault(RISCVIOMMUState *s, struct riscv_iommu_fq_record *ev);
-> +DeviceState *riscv_create_iommu_sys(DeviceState *mmio_irqchip,
-> +                                    hwaddr addr, int base_irq,
-> +                                    bool is_32_bit);
->  
->  typedef struct RISCVIOMMUContext RISCVIOMMUContext;
->  /* Device translation context state. */
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index d75dec2dd2..de7b99c6a5 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -32,6 +32,7 @@
->  #include "hw/core/sysbus-fdt.h"
->  #include "hw/riscv/riscv_hart.h"
->  #include "hw/riscv/iommu.h"
-> +#include "hw/riscv/riscv-iommu.h"
->  #include "hw/riscv/riscv-iommu-bits.h"
->  #include "hw/riscv/virt.h"
->  #include "hw/riscv/boot.h"
-> @@ -933,26 +934,8 @@ static void virt_machine_init(MachineState *machine)
->      }
->  
->      if (virt_is_iommu_sys_enabled(s)) {
-> -        DeviceState *iommu_sys = qdev_new(TYPE_RISCV_IOMMU_SYS);
-> -
-> -        object_property_set_uint(OBJECT(iommu_sys), "addr",
-> -                                 s->memmap[VIRT_IOMMU_SYS].base,
-> -                                 &error_fatal);
-> -        object_property_set_uint(OBJECT(iommu_sys), "base-irq",
-> -                                 IOMMU_SYS_IRQ,
-> -                                 &error_fatal);
-> -        object_property_set_link(OBJECT(iommu_sys), "irqchip",
-> -                                 OBJECT(mmio_irqchip),
-> -                                 &error_fatal);
-> -        /*
-> -         * For riscv64 use a physical address size of 56 bits (44 bit PPN),
-> -         * and for riscv32 use 34 bits (22 bit PPN).
-> -         */
-> -        object_property_set_uint(OBJECT(iommu_sys), "pas-bits",
-> -                                 riscv_is_32bit(&s->soc[0]) ? 34 : 56,
-> -                                 &error_fatal);
-> -
-> -        sysbus_realize_and_unref(SYS_BUS_DEVICE(iommu_sys), &error_fatal);
-> +        riscv_create_iommu_sys(mmio_irqchip, s->memmap[VIRT_IOMMU_SYS].base,
-> +                               IOMMU_SYS_IRQ, riscv_is_32bit(&s->soc[0]));
->      }
->  
->      s->machine_done.notify = virt_machine_done;
-> -- 
-> 2.43.0
-> 
+Signed-off-by: JunWei Li <vae1207@gmail.com>
+---
+ MAINTAINERS                |   3 +
+ hw/misc/Kconfig            |   3 +
+ hw/misc/k230_pmu.c         | 242 +++++++++++++++++++++++++++++++++++++
+ hw/misc/meson.build        |   1 +
+ include/hw/misc/k230_pmu.h |  71 +++++++++++
+ 5 files changed, 320 insertions(+)
+ create mode 100644 hw/misc/k230_pmu.c
+ create mode 100644 include/hw/misc/k230_pmu.h
+
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 6171cc7494..49c165f71e 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -1824,10 +1824,13 @@ M: Chao Liu <chao.liu@processmission.com>
+ L: qemu-riscv@nongnu.org
+ S: Maintained
+ F: docs/system/riscv/k230.rst
++F: hw/misc/k230_pmu.c
+ F: hw/riscv/k230.c
+ F: hw/watchdog/k230_wdt.c
++F: include/hw/misc/k230_pmu.h
+ F: include/hw/riscv/k230.h
+ F: include/hw/watchdog/k230_wdt.h
++F: tests/qtest/k230-pmu-test.c
+ F: tests/qtest/k230-wdt-test.c
+ 
+ RX Machines
+diff --git a/hw/misc/Kconfig b/hw/misc/Kconfig
+index 1543ee6653..98a2ab3709 100644
+--- a/hw/misc/Kconfig
++++ b/hw/misc/Kconfig
+@@ -135,6 +135,9 @@ config RISCV_MIPS_CPC
+ config RISCV_MIPS_CPS
+     bool
+ 
++config K230_PMU
++    bool
++
+ config MPS2_FPGAIO
+     bool
+     select LED
+diff --git a/hw/misc/k230_pmu.c b/hw/misc/k230_pmu.c
+new file mode 100644
+index 0000000000..14a955dbd1
+--- /dev/null
++++ b/hw/misc/k230_pmu.c
+@@ -0,0 +1,242 @@
++/*
++ * K230 PMU device
++ *
++ * Copyright (c) 2026 LiJunWei <vae1207@gmail.com>
++ *
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ *
++ * K230 Technical Reference Manual V0.3.1 (2024-11-18):
++ * https://github.com/revyos/external-docs/blob/master/K230/en-us/K230_Technical_Reference_Manual_V0.3.1_20241118.pdf
++ *
++ * Minimal model of the PMU (TRM chapter 14): the APB register bank,
++ * the interrupt detection state and the two PMIC output pads.  The
++ * long/short press timing, edge counting and debounce units are not
++ * modelled yet.
++ */
++#include "qemu/osdep.h"
++
++#include "qemu/bitops.h"
++#include "qemu/log.h"
++#include "migration/vmstate.h"
++#include "hw/core/irq.h"
++#include "hw/core/sysbus.h"
++#include "hw/misc/k230_pmu.h"
++
++/* PMU_INT_DETECT_CLR bit i clears PMU_INT_STATE bit state_bit[i] */
++static const uint8_t state_bit[10] = {
++    [0] = 3, [1] = 4, [2] = 5, [3] = 6, [4] = 7,
++    [5] = 8, [6] = 9, [7] = 10, [8] = 0, [9] = 11,
++};
++
++/*
++ * PAD64..PAD69 edge/level detection.  For these inputs the
++ * PMU_INT_DETECT_EN enable bit and the PMU_INT_STATE state bit
++ * coincide.
++ */
++static const uint8_t input_bit[K230_PMU_INPUTS] = { 9, 7, 6, 5, 4, 3 };
++
++static void k230_pmu_update_irq(K230PmuState *s)
++{
++    qemu_set_irq(s->irq,
++                 (s->regs[R_INT_STATE] &
++                  s->regs[R_INT0_TO_CPU] & 0xfff) != 0);
++}
++
++static void k230_pmu_gpio_in(void *opaque, int n, int level)
++{
++    K230PmuState *s = opaque;
++    uint32_t bit = BIT(input_bit[n]);
++
++    if (level && (s->regs[R_INT_DETECT_EN] & bit)) {
++        s->regs[R_INT_STATE] |= bit;
++        k230_pmu_update_irq(s);
++    }
++}
++
++static uint64_t k230_pmu_read(void *opaque, hwaddr offset, unsigned size)
++{
++    K230PmuState *s = opaque;
++
++    if (offset >= K230_PMU_REG_COUNT * 4) {
++        qemu_log_mask(LOG_GUEST_ERROR,
++                      "%s: read from invalid offset 0x%" HWADDR_PRIx "\n",
++                      TYPE_K230_PMU, offset);
++        return 0;
++    }
++
++    return s->regs[offset / 4];
++}
++
++static void k230_pmu_write(void *opaque, hwaddr offset, uint64_t value,
++                           unsigned size)
++{
++    K230PmuState *s = opaque;
++    uint32_t mask;
++
++    if (offset >= K230_PMU_REG_COUNT * 4) {
++        qemu_log_mask(LOG_GUEST_ERROR,
++                      "%s: write to invalid offset 0x%" HWADDR_PRIx "\n",
++                      TYPE_K230_PMU, offset);
++        return;
++    }
++
++    switch (offset / 4) {
++    case R_INT_DETECT_CLR:      /* W1C */
++        for (unsigned int i = 0; i < ARRAY_SIZE(state_bit); i++) {
++            if (value & BIT(i)) {
++                s->regs[R_INT_STATE] &= ~BIT(state_bit[i]);
++            }
++        }
++        k230_pmu_update_irq(s);
++        return;
++    case R_INT_STATE:           /* RO */
++        return;
++    case R_SYSCTRL:             /* drives PAD70/71 */
++        s->regs[R_SYSCTRL] = value & 0x3;
++        qemu_set_irq(s->pad[0], s->regs[R_SYSCTRL] & BIT(0));
++        qemu_set_irq(s->pad[1], s->regs[R_SYSCTRL] & BIT(1));
++        return;
++    case R_INT0_TO_CTL:
++    case R_INT1_TO_CTL:
++    case R_INT0_TO_CPU:
++    case R_INT_DETECT_EN:
++    case R_OUT_EVENT_CTRL:
++        mask = 0x1fff;          /* [12:0] */
++        break;
++    case R_INT_DETECT_TYP:
++        mask = 0x1fffff;        /* [20:0] */
++        break;
++    case R_LONG_PRESS_TRIGGER:
++    case R_LONG_PRESS_SHUTDOWN:
++        mask = 0xfffff;         /* [19:0] */
++        break;
++    case R_SHORT_PRESS_TRIGGER:
++    case R_NORMAL_TIMER_VAL:
++        mask = 0xffff;          /* [15:0] */
++        break;
++    case R_LEVEL_DEBOUNCE:
++    case R_INT1_LEVEL_DEBOUNCE:
++    case R_INT2_LEVEL_DEBOUNCE:
++    case R_INT3_LEVEL_DEBOUNCE:
++        mask = 0xfff;           /* [11:0] */
++        break;
++    case R_EDGE_NUMBER:
++        mask = 0x3ff;           /* [9:0] */
++        break;
++    case R_OUT_DELAY_SET:
++        mask = 0x3ffffff;       /* [25:0] */
++        break;
++    case R_IO_CFG0:
++    case R_IO_CFG0 + 1:
++    case R_IO_CFG0 + 2:
++    case R_IO_CFG0 + 3:
++    case R_IO_CFG0 + 4:
++    case R_IO_CFG0 + 5:
++    case R_IO_CFG6:
++    case R_IO_CFG7:
++        mask = 0x3def;          /* [9] and [4] are reserved */
++        break;
++    default:
++        mask = 0xffffffff;
++        break;
++    }
++
++    s->regs[offset / 4] = (s->regs[offset / 4] & ~mask) | (value & mask);
++    k230_pmu_update_irq(s);
++}
++
++static void k230_pmu_reset(Object *obj, ResetType type)
++{
++    K230PmuState *s = K230_PMU(obj);
++
++    memset(s->regs, 0, sizeof(s->regs));
++    s->regs[R_INT0_TO_CTL] = 0xfff;
++    s->regs[R_INT1_TO_CTL] = 0xfff;
++    s->regs[R_INT_DETECT_EN] = 0x810;
++    s->regs[R_LONG_PRESS_TRIGGER] = 0x17700;
++    s->regs[R_LONG_PRESS_SHUTDOWN] = 0x4e200;
++    s->regs[R_SHORT_PRESS_TRIGGER] = 0x3e800;
++    s->regs[R_LEVEL_DEBOUNCE] = 0x100;
++    s->regs[R_EDGE_NUMBER] = 0x1;
++    s->regs[R_INT1_LEVEL_DEBOUNCE] = 0x100;
++    s->regs[R_INT2_LEVEL_DEBOUNCE] = 0x100;
++    s->regs[R_INT3_LEVEL_DEBOUNCE] = 0x100;
++    s->regs[R_SYSCTRL] = 0x1;
++    s->regs[R_OUT_DELAY_SET] = 0x1100640;
++    for (unsigned int i = 0; i < 6; i++) {
++        s->regs[R_IO_CFG0 + i] = 0x1124;
++    }
++    s->regs[R_IO_CFG6] = 0x10a4;
++    s->regs[R_IO_CFG7] = 0x1084;
++    s->regs[R_NORMAL_TIMER_VAL] = 0x780;
++    s->regs[R_OUT_EVENT_CTRL] = 0x5c;
++    s->regs[R_OUT_LOGIC_CTRL] = 0x2;
++
++    k230_pmu_update_irq(s);
++    qemu_set_irq(s->pad[0], s->regs[R_SYSCTRL] & BIT(0));
++    qemu_set_irq(s->pad[1], s->regs[R_SYSCTRL] & BIT(1));
++}
++
++static const MemoryRegionOps k230_pmu_ops = {
++    .read = k230_pmu_read,
++    .write = k230_pmu_write,
++    .endianness = DEVICE_LITTLE_ENDIAN,
++    .valid = {
++        .min_access_size = 4,
++        .max_access_size = 4,
++    },
++    .impl = {
++        .min_access_size = 4,
++        .max_access_size = 4,
++    },
++};
++
++static const VMStateDescription vmstate_k230_pmu = {
++    .name = TYPE_K230_PMU,
++    .version_id = 1,
++    .minimum_version_id = 1,
++    .fields = (VMStateField[]) {
++        VMSTATE_UINT32_ARRAY(regs, K230PmuState, K230_PMU_REG_COUNT),
++        VMSTATE_END_OF_LIST()
++    },
++};
++
++static void k230_pmu_init(Object *obj)
++{
++    K230PmuState *s = K230_PMU(obj);
++
++    memory_region_init_io(&s->iomem, obj, &k230_pmu_ops, s,
++                          TYPE_K230_PMU, K230_PMU_MMIO_SIZE);
++    sysbus_init_mmio(SYS_BUS_DEVICE(obj), &s->iomem);
++
++    sysbus_init_irq(SYS_BUS_DEVICE(obj), &s->irq);
++    sysbus_init_irq(SYS_BUS_DEVICE(obj), &s->pad[0]);
++    sysbus_init_irq(SYS_BUS_DEVICE(obj), &s->pad[1]);
++
++    qdev_init_gpio_in(DEVICE(obj), k230_pmu_gpio_in, K230_PMU_INPUTS);
++}
++
++static void k230_pmu_class_init(ObjectClass *klass, const void *data)
++{
++    DeviceClass *dc = DEVICE_CLASS(klass);
++    ResettableClass *rc = RESETTABLE_CLASS(klass);
++
++    dc->desc = "K230 PMU";
++    dc->vmsd = &vmstate_k230_pmu;
++    rc->phases.enter = k230_pmu_reset;
++}
++
++static const TypeInfo k230_pmu_type_info = {
++    .name = TYPE_K230_PMU,
++    .parent = TYPE_SYS_BUS_DEVICE,
++    .instance_size = sizeof(K230PmuState),
++    .instance_init = k230_pmu_init,
++    .class_init = k230_pmu_class_init,
++};
++
++static void k230_pmu_register_types(void)
++{
++    type_register_static(&k230_pmu_type_info);
++}
++
++type_init(k230_pmu_register_types)
+diff --git a/hw/misc/meson.build b/hw/misc/meson.build
+index 23265f6035..7eaff69081 100644
+--- a/hw/misc/meson.build
++++ b/hw/misc/meson.build
+@@ -28,6 +28,7 @@ system_ss.add(when: 'CONFIG_IOSB', if_true: files('iosb.c'))
+ system_ss.add(when: 'CONFIG_VIRT_CTRL', if_true: files('virt_ctrl.c'))
+ 
+ # RISC-V devices
++system_ss.add(when: 'CONFIG_K230_PMU', if_true: files('k230_pmu.c'))
+ system_ss.add(when: 'CONFIG_MCHP_PFSOC_DMC', if_true: files('mchp_pfsoc_dmc.c'))
+ system_ss.add(when: 'CONFIG_MCHP_PFSOC_IOSCB', if_true: files('mchp_pfsoc_ioscb.c'))
+ system_ss.add(when: 'CONFIG_MCHP_PFSOC_SYSREG', if_true: files('mchp_pfsoc_sysreg.c'))
+diff --git a/include/hw/misc/k230_pmu.h b/include/hw/misc/k230_pmu.h
+new file mode 100644
+index 0000000000..48f5052f61
+--- /dev/null
++++ b/include/hw/misc/k230_pmu.h
+@@ -0,0 +1,71 @@
++/*
++ * K230 PMU device
++ *
++ * Copyright (c) 2026 LiJunWei <vae1207@gmail.com>
++ *
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ */
++
++#ifndef HW_MISC_K230_PMU_H
++#define HW_MISC_K230_PMU_H
++
++#include "hw/core/registerfields.h"
++#include "hw/core/sysbus.h"
++
++REG32(LOGGER, 0x000)
++REG32(INT0_TO_CTL, 0x040)
++REG32(INT1_TO_CTL, 0x044)
++REG32(INT0_TO_CPU, 0x048)
++REG32(INT_DETECT_EN, 0x04c)
++    FIELD(INT_DETECT_EN, INT1_EDGE_NUM_TICK_EN, 0, 1)
++    FIELD(INT_DETECT_EN, INT7_EN, 1, 1)
++    FIELD(INT_DETECT_EN, INT6_EN, 2, 1)
++    FIELD(INT_DETECT_EN, INT5_EDGE_LEVEL_EN, 3, 1)
++    FIELD(INT_DETECT_EN, INT4_EDGE_LEVEL_EN, 4, 1)
++    FIELD(INT_DETECT_EN, INT3_EDGE_LEVEL_EN, 5, 1)
++    FIELD(INT_DETECT_EN, INT2_EDGE_LEVEL_EN, 6, 1)
++    FIELD(INT_DETECT_EN, INT1_EDGE_LEVEL_EN, 7, 1)
++    FIELD(INT_DETECT_EN, INT1_EDGE_NUM_EN, 8, 1)
++    FIELD(INT_DETECT_EN, INT0_EDGE_LEVEL_EN, 9, 1)
++    FIELD(INT_DETECT_EN, INT0_SHORT_PRESS_EN, 10, 1)
++    FIELD(INT_DETECT_EN, INT0_LONG_PRESS_EN, 11, 1)
++    FIELD(INT_DETECT_EN, INT0_SHUTDOWN_PRESS_EN, 12, 1)
++REG32(INT_DETECT_TYP, 0x050)
++REG32(INT_DETECT_CLR, 0x054)
++REG32(LONG_PRESS_TRIGGER, 0x058)
++REG32(LONG_PRESS_SHUTDOWN, 0x05c)
++REG32(SHORT_PRESS_TRIGGER, 0x060)
++REG32(LEVEL_DEBOUNCE, 0x064)
++REG32(EDGE_NUMBER, 0x068)
++REG32(INT1_LEVEL_DEBOUNCE, 0x06c)
++REG32(INT2_LEVEL_DEBOUNCE, 0x070)
++REG32(INT3_LEVEL_DEBOUNCE, 0x074)
++REG32(SYSCTRL, 0x078)
++REG32(OUT_DELAY_SET, 0x07c)
++REG32(IO_CFG0, 0x080)
++REG32(IO_CFG6, 0x098)
++REG32(IO_CFG7, 0x09c)
++REG32(NORMAL_TIMER_VAL, 0x0a0)
++REG32(OUT_EVENT_CTRL, 0x0a4)
++REG32(OUT_LOGIC_CTRL, 0x0a8)
++REG32(INT_STATE, 0x0ac)
++
++#define K230_PMU_MMIO_SIZE   0xc00
++#define K230_PMU_REG_COUNT   (R_INT_STATE + 1)
++#define K230_PMU_INPUTS      6
++#define K230_PMU_OUTPUTS     2
++
++#define TYPE_K230_PMU "riscv.k230.pmu"
++OBJECT_DECLARE_SIMPLE_TYPE(K230PmuState, K230_PMU)
++
++struct K230PmuState {
++    SysBusDevice parent_obj;
++
++    MemoryRegion iomem;
++    qemu_irq irq;
++    qemu_irq pad[K230_PMU_OUTPUTS];
++
++    uint32_t regs[K230_PMU_REG_COUNT];
++};
++
++#endif /* HW_MISC_K230_PMU_H */
+-- 
+2.20.1
+
 
