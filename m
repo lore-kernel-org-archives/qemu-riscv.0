@@ -4,170 +4,130 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8362C61DB9
-	for <qemu-riscv@archiver.kernel.org>; Fri, 28 Aug 2026 23:06:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78ED9C61DB9
+	for <qemu-riscv@archiver.kernel.org>; Sat, 29 Aug 2026 03:08:49 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x05eK-0001Zw-8l; Fri, 28 Aug 2026 19:06:16 -0400
+	id 1x09Qq-0004GD-7e; Fri, 28 Aug 2026 23:08:36 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <pierrick.bouvier@oss.qualcomm.com>)
- id 1x05eI-0001ZP-OD
- for qemu-riscv@nongnu.org; Fri, 28 Aug 2026 19:06:14 -0400
-Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
+ (Exim 4.90_1) (envelope-from <chao.liu@processmission.com>)
+ id 1x09Ql-0004FX-Mr; Fri, 28 Aug 2026 23:08:33 -0400
+Received: from mail-japanwestazlp170120003.outbound.protection.outlook.com
+ ([2a01:111:f403:c406::3] helo=OS8PR02CU002.outbound.protection.outlook.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <pierrick.bouvier@oss.qualcomm.com>)
- id 1x05eG-0006UX-E1
- for qemu-riscv@nongnu.org; Fri, 28 Aug 2026 19:06:14 -0400
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 67SMU1fX3757696
- for <qemu-riscv@nongnu.org>; Fri, 28 Aug 2026 23:06:11 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- fE5+FoZiKr2Sa5RCsVANMuI+3ptLbhtUFLS1svoTdA4=; b=EXXGVaICo/QVg9qY
- Y8cQYPhdHzYL5BLgpZq03XtypJQZDx+1byAixEIezaVjHPC0on9xSS0iRdfOwWcE
- 2PzPgRZ7IS97KRGo+zo8qzQouPlDksKssXZN8O0qEziFYm8V4ru8nc7Lz2TdFel1
- SASeKXPcq1kaoajV93tD1kOaPxIHMzMFzD/FH8FQN/Kt7GA7c57vK067vnJcjiuD
- KYek0ADOPrDlSfDkNpe5tnBwLTErqkyy+QCGvQwGwkmXfgZaXtYkaT6vZwXa4mGg
- LGHybc26lIPpCC9dOYYApPo3aRcq7mZZSOwEI867yhd7VxEuZmllo/LHucsrzmHH
- dh+8Lg==
-Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com
- [209.85.216.69])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gb42rbtj8-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Fri, 28 Aug 2026 23:06:10 +0000 (GMT)
-Received: by mail-pj1-f69.google.com with SMTP id
- 98e67ed59e1d1-38f283baf1fso2793546a91.3
- for <qemu-riscv@nongnu.org>; Fri, 28 Aug 2026 16:06:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1787958370; x=1788563170; darn=nongnu.org;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=fE5+FoZiKr2Sa5RCsVANMuI+3ptLbhtUFLS1svoTdA4=;
- b=hvIAHa4cC8duElMvfAe+ytXJz4FSz2mYOm2YNv/bXFezbW4K6PPtJZiFrCd6nbFhKL
- mdqvQjSVb/Npf5HZuTwgyF3wm2KBoq4/pzXSQejbCaDS6FDVDoA9DoB19ETtr9/Swt5t
- vQzIzr5BXFbBF1esMzAiLL2zW0Pp49MPRkSgarob/2eXA8YgjAAngwShTtrrTMGdZkI5
- wXRSQH0B1Tq5iZTLpMU7ag8pY+XpgR2uCi3mKQLNq/BoR4eS2Ak5VCu1YOmMMCfGBQDv
- OnIcqhHR/6syZjKO7IN95YLUInJ1tQf85/bk0uK4ICcHFYqXbQEEVnVxEghG8AxDBFJH
- wshw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787958370; x=1788563170;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=fE5+FoZiKr2Sa5RCsVANMuI+3ptLbhtUFLS1svoTdA4=;
- b=WACyIZu2g7hATio9o4tW24uETwpHt/QORp+eWUy/yW8sOrcFIn1e4Gnz8/Ji+j0/2l
- QNGFxwGKFBCw+Vud9feMp1596INjCOIkK9j9fIUK/mNYu92gbDzZSqn/dzjV0BMllzVs
- KE8XX6/kfn6AYBt1wVgzEkbwdsNpqQlJpkffjfLybu07cTitv9y1guMgX2911LjaNK0D
- 63y/eQYrUNtfMKMlLhGsVNsHw41jm8JG69onVQGEtTomoRFvDrZ3JKenMQHGYsG+M8l+
- RnzTeu3GKSrxNDONRef3YV3ShuB2HOdOt9rrSN4imWWrrZh7lKULwvucgMoh2nNSP/0d
- i/+A==
-X-Forwarded-Encrypted: i=1;
- AKwUvBx3ABZAtV3Fe03mfLG02IW/siXnXBxOuJm39WTXRrk4wSTbo/tmDWIfEaIJ067UPYVp0BxGc6ZQBCdH@nongnu.org
-X-Gm-Message-State: AFuF++mdsmYPRO7ll6++SGqXJjeTQNqxwXX10u8NNozOyhasYgP+gRJZ
- 5z1um88iRTi4fiwPIIvSo2JwP99sAovEqmXp4ljPqPuQCqLWabisZuCkYbFETVpMO1/5dvTQkV0
- fkE+GVJJyZAD3uA77X0rvmUrscpYaQgNeETD6AHBZGZs2AGzPCfard8qMiQ==
-X-Gm-Gg: AYBFou2OQPuqyUm/CAjfcJ6ZJfvSzX92mi/F9ZQ+ekU4uY2dbP4KUlEIzhXoYz3zdEx
- +rT/y4IFX0yExuQZQqK/KLs2VGWEuA2xFtWrlP+14OZiCkaVIF9qmt443iFoScLRKcLNuUSaX2q
- DfYJ04K0K79unoQ9lOjpkkGxOgECJpX9Tq8wep9CrlH7BTsmwITP0mVisEVA+eTkZY72KUR7Yd1
- L3XC9Ka2jfFD5zwK6/4bXAT1faz9ho0iGHbe1lr2YLBK93O4xTnDMgvV9vLPthzqX9oSerofCq6
- obqNaT1bLH02zzBgwF6a2HfAFk9qgKzHrPQkHWsKzpJyuJh4Y7pc+5QAeLynPdTQewoVhQ3zMjU
- pajz31zu5D76iWEwQjlic4KhgFEqY/c9c+51kQwpqBtp5kyUJ8hhFJUs4N/J2LsH0t09+
-X-Received: by 2002:a17:90b:380b:b0:380:f85c:94b4 with SMTP id
- 98e67ed59e1d1-396d0f2391cmr17399784a91.7.1787958369926; 
- Fri, 28 Aug 2026 16:06:09 -0700 (PDT)
-X-Received: by 2002:a17:90b:380b:b0:380:f85c:94b4 with SMTP id
- 98e67ed59e1d1-396d0f2391cmr17399719a91.7.1787958369403; 
- Fri, 28 Aug 2026 16:06:09 -0700 (PDT)
-Received: from [192.168.1.199] (216-71-219-44.dyn.novuscom.net.
- [216.71.219.44]) by smtp.gmail.com with ESMTPSA id
- a92af1059eb24-142e0d1abbdsm8506420c88.2.2026.08.28.16.06.06
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 28 Aug 2026 16:06:08 -0700 (PDT)
-Message-ID: <e62fd6e2-d5f2-4c2d-b4c6-d40ee17cbcf1@oss.qualcomm.com>
-Date: Fri, 28 Aug 2026 16:06:05 -0700
+ (Exim 4.90_1) (envelope-from <chao.liu@processmission.com>)
+ id 1x09Qi-0005l9-Vp; Fri, 28 Aug 2026 23:08:31 -0400
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=tbsdm33s/Po6NolxCDdYo6sd98dOmPtZ3Rpe+6H/8cDWKY/nHdNu4a0z1BV1VRV7IBwzNMG2xsDQnk1C69EIAYbMxkJrnJNU1S1q7I5ZabXkAU/XYnHETZvuOoNUJDhKXPSxUSd35lUyUIas53xNouWBUAu+w+zPW7ryMfIN0SimfsI0bY8sWXtOTy/6OU+pNBPhKjID/q6EWZymenLjVMpEdaU4A1HYk2KRhsHpf4lbooG0O8KzVwsZP0fJikgpJX35N5Ejueaweq+i3DAoMbR+za8t8Ljx1Ka/Xp6VQ+ClZbnUXzqoSGLYQMEY1JXNApc+rQiIx2shCtE8wELq8Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=GLp780rIOmvclHWdmQJv3OUsSnRhIuRdWTOX+I1FpUw=;
+ b=xh/ubSN5jykk04sjMgRGYkCWzn/YLlA1m8/0TuiSIBPwYRdjOv8rCKR/VZxUVOTAwgU/8ctFXThTPAciOqGA1eBHUm3tQVxTaXjmRcJzCyUHqiki+53I610RMLNdk2bP4xLOBqNKCbM9jr1bB8mf/gbiKly7FYHBB4tScflpQAQluFOyA6QigckZtZHzKtr1rdMWg6W9/6Qy4wqizpx8l0J0lDEjpkS1h7m2RnuHQLIAErSF1xojXk/0n+sMVydBI9AsoLPgtnpcaqK5RXOVeOZoo0oM51+uuVF+WqcugvJaovj2aOA0WorQMDj5hhNRzVdwatiULQdVL0BH98ao/w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=processmission.com; dmarc=pass action=none
+ header.from=processmission.com; dkim=pass header.d=processmission.com;
+ arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=processmission.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=GLp780rIOmvclHWdmQJv3OUsSnRhIuRdWTOX+I1FpUw=;
+ b=qdFwjlqRKAwtpR3k+lW1e95pHWHwOHzDwo5D3rfBX0YhSzWJ13Bg5M1AC8ab+Gd6DagdReJZgcuv9vjGtnWvYMP2XLaFRRILz48poV0iAsujh0db8U83wz9/jkt8GnazhjI6sxJnBYUQa5NHDzIOGRPI0wfZ2MR2AMBgWS8Op6xUj5D4LjP1BM7fVaOb1JHphBQnFNMDJJDW8a0CDRQq/teq/Y0paWJhQt+zwud8mZa4wiyeW9yF68CRIVbpt3VjJ1+ZK3OMZwDz3q3E7n+9wYBdzV+lYkwZ1SNCCYsWXJ1MK5RC5z+VGqlPqqLnlKp6OLcjhgEi7OK/ntN2LMBy7g==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=processmission.com;
+Received: from TYNPR02MB9351.apcprd02.prod.outlook.com (2603:1096:405:3d0::15)
+ by TY0PR02MB5574.apcprd02.prod.outlook.com (2603:1096:400:1ba::12)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.360.11; Sat, 29 Aug
+ 2026 03:08:18 +0000
+Received: from TYNPR02MB9351.apcprd02.prod.outlook.com
+ ([fe80::e5f3:5fb7:3d29:5934]) by TYNPR02MB9351.apcprd02.prod.outlook.com
+ ([fe80::e5f3:5fb7:3d29:5934%4]) with mapi id 15.21.0360.008; Sat, 29 Aug 2026
+ 03:08:18 +0000
+Date: Sat, 29 Aug 2026 11:08:13 +0800
+To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
+ Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>
+Subject: Re: [PATCH v5 05/15] hw/riscv/fdt_common, virt.c: add
+ riscv_create_fdt_pcie()
+Message-ID: <apJNESqYK3PiNVCi@ChaodeMacBook-Pro.local>
+References: <20260828203918.350131-1-daniel.barboza@oss.qualcomm.com>
+ <20260828203918.350131-6-daniel.barboza@oss.qualcomm.com>
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20260828203918.350131-6-daniel.barboza@oss.qualcomm.com>
+X-ClientProxiedBy: PH7P220CA0058.NAMP220.PROD.OUTLOOK.COM
+ (2603:10b6:510:32b::9) To TYNPR02MB9351.apcprd02.prod.outlook.com
+ (2603:1096:405:3d0::15)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 00/13] single-binary: link ARM and RISC-V into
- qemu-system
-To: Yonggang Luo <luoyonggang@gmail.com>, qemu-devel@nongnu.org
-Cc: Peter Maydell <peter.maydell@linaro.org>, Fabiano Rosas <farosas@suse.de>,
- Aurelien Jarno <aurelien@aurel32.net>, qemu-riscv@nongnu.org,
- Song Gao <17746591750@163.com>, "Michael S. Tsirkin" <mst@redhat.com>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, qemu-ppc@nongnu.org,
- Xianglai Li <lixianglai@loongson.cn>, David Hildenbrand <david@kernel.org>,
- Richard Henderson <richard.henderson@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>, Aleksandar Rikalo <arikalo@gmail.com>,
- Harsh Prateek Bora <harshpb@linux.ibm.com>,
- Bibo Mao <maobibo@loongson.cn>, Weiwei Li <liwei1518@gmail.com>,
- =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
- Matthew Rosato <mjrosato@linux.ibm.com>,
- Chinmay Rath <rathc@linux.ibm.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Alexander Bulekov <alxndr@bu.edu>, Chao Liu <chao.liu@processmission.com>,
- =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Glenn Miles <milesg@linux.ibm.com>, =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?=
- <philmd@mailo.com>,
- Laurent Vivier <lvivier@redhat.com>, Cornelia Huck <cohuck@redhat.com>,
- Zhao Liu <zhao1.liu@intel.com>, Eric Farman <farman@linux.ibm.com>,
- qemu-s390x@nongnu.org, Paolo Bonzini <pbonzini@redhat.com>,
- Stefan Hajnoczi <stefanha@redhat.com>, qemu-arm@nongnu.org,
- Ilya Leoshkevich <iii@linux.ibm.com>,
- Darren Kenny <darren.kenny@oracle.com>, Sunil V L
- <sunilvl@ventanamicro.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Ani Sinha <anisinha@redhat.com>, Nicholas Piggin <npiggin@gmail.com>,
- =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Igor Mammedov <imammedo@redhat.com>
-References: <20260826184229.1145-1-luoyonggang@gmail.com>
-From: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
-Content-Language: en-US
-In-Reply-To: <20260826184229.1145-1-luoyonggang@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-GUID: 6Ucfai0GfKJdwzfUi8oSz47am60F5ecw
-X-Proofpoint-ORIG-GUID: 6Ucfai0GfKJdwzfUi8oSz47am60F5ecw
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI4MDIwMCBTYWx0ZWRfX58AphRIrMFct
- ruc7foy4jBjKAM1P8dGlbNjCmsH9zWNmnfz9bZXR74yZHhQTeQdoI2CHCF7masGd3vcX6ECq4+Y
- Juz2h1qsyczxXskgG2f2ju6h6JwWejnAJc16eitwpeDAMhWFFA/d/rIYgdX6CCzqUTqxv7cCrpH
- 7azx1PwZOtFHUpjlh7/RvYoGhqy+ECJGvx9or1DepOsoFgKByL5OHbRP4C0Wn9jVo1D3OlsuxN8
- eJkqDdgyifEmMrJ9ipzjn1Hrpr1C/Dhr6fx+4Mh20ZwL3L84h1bBf8xHRMPqIdu62Z7DbI/h6Os
- ey9MO3MXRdEVAgK/f4Y/ZLOgIgEJQ+Rp5oH1z4U+bAqGN3uXJY0buNOGxpkcQdfyORH2U40MYg4
- GoddiMsCq4vNDriqXHCJDmdQVBikA5zWqXaMYzuXSC0zN6kEG0hZd2Vd1/5CxIbVtHDROzYvICx
- 5dlD7SEX7rmc+3v8Dyw==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODI4MDIwMCBTYWx0ZWRfXyl5tqT3elA3f
- C+FQewV0kwDZVKyJkhdQZ65wDiD5Jy808zTB9Il8r70Yhk2jBO68vicGMM6E4uQOzL2pDgTsMtp
- XGSUUGVKiAZxBbhyMz73CMi5TU4DcJo=
-X-Authority-Analysis: v=2.4 cv=Fpo1OWrq c=1 sm=1 tr=0 ts=6a921463 cx=c_pps
- a=vVfyC5vLCtgYJKYeQD43oA==:117 a=iLqgmErQAxjCjdq5jj1Aqg==:17
- a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
- a=GaQpPoNlAAAA:8 a=EUspDBNiAAAA:8 a=VwQbUJbxAAAA:8 a=wAUz5CRPtLaz9UZ5HuIA:9
- a=QEXdDO2ut3YA:10 a=rl5im9kqc5Lf4LNbBjHf:22 a=xF5q_uoM5gZT5J3czcBi:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-28_07,2026-08-27_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 spamscore=0 malwarescore=0 lowpriorityscore=0 phishscore=0
- bulkscore=0 adultscore=0 suspectscore=0 priorityscore=1501 impostorscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608280200
-Received-SPF: pass client-ip=205.220.180.131;
- envelope-from=pierrick.bouvier@oss.qualcomm.com;
- helo=mx0b-0031df01.pphosted.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
-X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: TYNPR02MB9351:EE_|TY0PR02MB5574:EE_
+X-MS-Office365-Filtering-Correlation-Id: a42bb8a0-64ac-4d70-b059-08df057ac637
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|376014|23010399003|1800799024|4143699003|10067099003|56012099006|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: NZy8SsZfTLir2zBLD88m6gVocaka+muyhk837jJMGFn4kPzUadfbAP1ilxB9X67huD29opbXE0xidZKn0lbFPz/TPto1CG7mHU8al98WLN26B9ouV8X1JTSpiY/0LvPpHCHrXhlaD8C4nI81TR8jpg6EJ289WQFKJkDgBIj/x4Pt7z7bJSnbqogYrqU7YsKWN4UZabuQ7rLV2/dKl5Nl25ser+rIH/kFpGQPQiiJWS9OAcXRoUhpV/12NcgO6RNEtul0VdkJwbusnDFTdhrMBRNDlOz+MqKe64B/bqP82pggqX5WDBQTs8XQ1E8rI/YUmMalHL/MBZibtj787/bZJJueShREFj1e7owCWG/A7xJhSE0T7S78oYJbQmbvmfq3eZkuu180F4iASDNWFbO20z+Km7QnrrHthgOrgsYPeQm5BtuGsAXWVCIFEhkwPvorfSir6odHQk81pdIaKj+w2d/ApGXx6Y66u8+ttFV0sixcM2DX9nF7Wz5dsJxrdXqcWt9ZVlJNJXvcoC4DPgwRkwhQt1Lvl9xscNkopF2g9si87aqfGv42ZPLkXd/0yjOm+rIPWrvicckGqcAYfAnySobsHZPZgoo3Xf6Cv7DQG0P+Q0NTKYWvgq/QNrpwpbDFLxBOglDbvi4iYOshPMdig7q4Lsj2NJpljb0sok2l9bQ=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:TYNPR02MB9351.apcprd02.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(376014)(23010399003)(1800799024)(4143699003)(10067099003)(56012099006)(18002099003)(22082099003);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?iso-8859-1?Q?yhWVK87hjRVR96Sn75xrGcFScPLJKB1dRlyYp0g+0e/682TRw7f9bqUpsV?=
+ =?iso-8859-1?Q?3Raki2zyi9T0hOy9VP2ye+4/YzaJNqJtIMRCs/qEYKd5uPyMVxEWn4Vf5b?=
+ =?iso-8859-1?Q?5fZPoqjGEwvsAOUXvwStpRRJ8R5MzOHE5ewiSpemKoLirw8uAk0/pH3YDa?=
+ =?iso-8859-1?Q?lTrskcRQIQmTTzlF55Ipk+za5KyNsxEjam1ESLGVZXIlkjpqFE8ELZ7o6S?=
+ =?iso-8859-1?Q?6zZ/q5Aj34Dm+cDT8S5faeGRePRPKH9jytWJ4rJG+Pn0LeaddfUFkp43cp?=
+ =?iso-8859-1?Q?NYXTXU86VbQ7FK5hiFZKlH6Dg/CWwKVYuOZMC52qhDGNZhv/L9htgNAid1?=
+ =?iso-8859-1?Q?ijGBYGahnBByN2HFY+MvvZsOFDJY6X0IeWeFODEtnCCChR6PqyyCSp9h85?=
+ =?iso-8859-1?Q?V4j0Qzhck4m3/PPBcNb/i/JNdQypjkgyz0iiWmB1wO62XtJV40G7nXuear?=
+ =?iso-8859-1?Q?hxA4nsC8lvUVyFZpTWCiY3M6l7llLY8ARmNy29Q7mkCp18zl5Z8ahY9UqO?=
+ =?iso-8859-1?Q?Blq2PE7xR5/9P+04DSUl3ao6YnXVrv2tH20LSAw3D5Wx3/f/ZfVU0knpOb?=
+ =?iso-8859-1?Q?A7RXz4zqhhqPsuWbyeUCmn85BCpOdlvcLLmUYnXUxzUtQta97gTFQN8LQy?=
+ =?iso-8859-1?Q?T61YzFYhk/mvJDG+kaBKCpNaZZdIiIzwFNRgFd06IQ1CeLvdn/6j0xJnt1?=
+ =?iso-8859-1?Q?6NmLp3sy85NgRxZwRy4Fb3RSwEEAlDvVH5mApmu2CXlh19lJrdcg1KdLFG?=
+ =?iso-8859-1?Q?VqhpnfbXuUHNobRyg8DJqdLGXodrCxolbdBB30CIX7NdZsjOjbYQVm+AWB?=
+ =?iso-8859-1?Q?sC00Toqrx7w+cufA8Mw8l0CAzAHeYWF/PWfLuuaM+1KNVkySgjCXRKHkXW?=
+ =?iso-8859-1?Q?qCUcx9zMPFaTBv0z2eJibVsaaH9p68ueH5mDsUgepI6OkWPgVmGXIPiRyS?=
+ =?iso-8859-1?Q?YGh93653zuDhrFE0L8GJrsPE+ToMfZ2tDrNdRZwBHwbTVyewNlfMVKwgV7?=
+ =?iso-8859-1?Q?amZgmGOhYoyMvKyHryZ9WMgv32Yo1jnFBxjqeBu/T6vo+qX4cfUnKCJSjw?=
+ =?iso-8859-1?Q?C1Ik+VOKP490hr+BZvHLE6Nl7lUshQ9ldX683RPbNtTyUFPrLlCtMfIuC2?=
+ =?iso-8859-1?Q?zLqLsCz6c83o6n1uZ1i/p8Ve2XUa/RFVE1Nki4VRaNj21r2IXpNXb0SPTm?=
+ =?iso-8859-1?Q?eM8pNE6nCOrugnHkWzicG0rfdcjHCfRuNKdj5rbNv1NTdx2cGAWz/jhoTl?=
+ =?iso-8859-1?Q?48uEKaO2Rwf+RO2TqXK9TKx8CwkkHY72eOwZBxqKyg5v0OW7uzF58jsv0a?=
+ =?iso-8859-1?Q?+KnJJYGC8bIWlSJc3XDBleaE/fDQLOJXGeRQp1wrUpJlYHhVqhG1D8t4wE?=
+ =?iso-8859-1?Q?BkHtKWqE48FTWdAKKg82GbZDpat3OkuPzncT/K8A8ARyWbL1avr0sVAEPh?=
+ =?iso-8859-1?Q?m6ZP39WemswT6B6T+QQPBEipLboTdypkF0sUElGRUMf4ZffSisgcMLmU1e?=
+ =?iso-8859-1?Q?hzhlE9gfeszWWA5OV3/KIbZ41i1dFuUgHdHB0naJk3AePteIt4RoEZW4yz?=
+ =?iso-8859-1?Q?/foTXbIvLPt9p5RcHdh4Kk3w/gXf5+j0NPL3OtqHIwAFc6RYGbBoHbidV9?=
+ =?iso-8859-1?Q?5kVnrQ2Zt0A+qmFrgRTbFrWdBpolZw4lwiiehzoauu58xfuT11iI3jzkKn?=
+ =?iso-8859-1?Q?Za07+wvMe/nv4CPH0dl2bPQqYR1DNN+naguZQUkzRQf7rCpFk1qCC+FYMY?=
+ =?iso-8859-1?Q?fZAsHcbDqgi1/Vs2Bf/QTwkxow5pwnFwGL+czXUGGxULxObCG487cAqFvR?=
+ =?iso-8859-1?Q?hwMqZ1rOQZm3fYPk9t+yxaB4pUDPA4I=3D?=
+X-OriginatorOrg: processmission.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: a42bb8a0-64ac-4d70-b059-08df057ac637
+X-MS-Exchange-CrossTenant-AuthSource: TYNPR02MB9351.apcprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Aug 2026 03:08:18.1649 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: e0544bf7-9765-4630-ab69-0b266dc2169c
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: KZfD9GDbBvNwbrMd1skxq1vZ4edLf+ISst7wE82njN/3yLIt/uaA/Cl32NS3pxTZ6Z8qpHytiNBEuYh7lXWfpW2kfo1Q9B7tSCDGadWEfn0=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: TY0PR02MB5574
+Received-SPF: pass client-ip=2a01:111:f403:c406::3;
+ envelope-from=chao.liu@processmission.com;
+ helo=OS8PR02CU002.outbound.protection.outlook.com
+X-Spam_score_int: -16
+X-Spam_score: -1.7
+X-Spam_bar: -
+X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
+ DKIM_SIGNED=0.1, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -180,166 +140,377 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
+Reply-to:  Chao Liu <chao.liu@processmission.com>
+From:  Chao Liu via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 8/26/2026 11:42 AM, Yonggang Luo wrote:
-> This series produces one qemu-system binary that can run ARM (32 and 64)
-> and RISC-V (32 and 64). It follows Pierrick Bouvier's merged series
-> "single-binary: implement dynamic filtering for machine types":
+On Fri, Aug 28, 2026 at 05:39:07PM +0800, Daniel Henrique Barboza wrote:
+> The pcie FDT is quite tedious but can be parametrized into a helper.
+> This is going to benefit only the 'virt' board for now but it will be
+> used by the 'riscv-server-ref' board in the near future too.
 > 
->   https://patchew.org/QEMU/20260724000948.234657-1-pierrick.bouvier@oss.qualcomm.com/
+> Some other changes made:
 > 
-> That work added TYPE_TARGET_SPECIFIC so machines can be filtered per
-> target in one process. This series uniquifies remaining per-target C
-> symbols and QOM names, selects TargetInfo at runtime, and links ARM
-> plus RISC-V into qemu-system.
+> - FDT related macros are moved to fdt-common.h.  Only a couple are being
+>   used by the helper ATM but more will be added in the next patches;
+> - an RISCVAIAType enum is created.  There are several FDTs that depends
+>   on the active AIA type being used, and we want a way to represent the
+>   different AIA modes that doesn't re-use the 'virt' specific VIRT_AIA_*
+>   macros.  The enum vals are equivalent by design - we want "s->aia_type"
+>   to be used by 'virt' when calling the fdt helpers, and other boards
+>   will use "AIA_*" macros in their code.
 > 
-> A combined link cannot keep C symbols or QOM type names that were unique
-> only because each qemu-system-$arch was a separate binary. The first
-> patches remove those collisions:
+> No FDT changes made.
 > 
-> - TYPE_ACCEL_CPU is a single abstract accel-cpu parent, registered once
->   next to TYPE_ACCEL. Leaf names still encode the CPU type so
->   accel_init_cpu_interfaces() can look up "<accel>-accel-"
->   CPU_RESOLVING_TYPE.
-> - ARM and RISC-V virt QOM names become arm-virt and riscv-virt. The
->   boards keep -machine virt via machine_class_set_name() after the
->   selected target is applied. Latest ARM virt still sets mc->alias.
-> - virt ACPI helpers and RISC-V TCG crc32/crc32c/wfi helpers get an arch
->   prefix so the combined link does not need meson -D name mangling.
->   LoongArch virt_acpi_setup is renamed in the same pass.
-> 
-> Target selection then has to work with more than one TargetInfo in the
-> process:
-> 
-> - Parse -target before TargetInfo is fixed. The token is target_name
->   (arm, aarch64, riscv32, riscv64). When -target is omitted, infer it
->   from the program basename (qemu-system-aarch64, strip .exe).
->   qemu-system with no arch suffix always requires -target; there is
->   no unique-TargetInfo fallback. Use -target ? to list names.
-> - Combined binaries cannot keep one global C symbol per arch for
->   query-cpu-definitions, dump notes, or Angel semihosting. Those
->   handlers move onto a process-wide TargetCpuOps table.
-> 
-> The last patch still builds qemu-system-$TARGET. qemu-system is extra,
-> from the union of ARM and RISC-V Kconfig plus aarch64/riscv64 arch
-> objects. Do not replace the per-target binaries with symlinks to
-> qemu-system. Do not add qemu-systemw on Windows: a GUI twin of the
-> combined binary would keep QEMU exporting data from the .exe into
-> DLLs, and those data exports cannot be delay-loaded (qdev_prop_array
-> and other qdev_prop_*). That would block enabling modules globally
-> on Windows.
-> 
-> Examples:
-> 
->   qemu-system -target aarch64 -M virt ...
->   qemu-system-riscv64 -M virt ...
-> 
-> A combined binary named qemu-system with no arch suffix always
-> requires -target. A missing or unknown name fails and points at
-> -target ?.
-> 
-> Changes v1 -> v2:
-> - Drop little- and big-endian TargetInfo variants from this series.
->   v1 registered target-info-<name>-le and -be, selected is_default from
->   TARGET_BIG_ENDIAN, and accepted -target tokens such as aarch64-le.
->   v2 keeps one TargetInfo per target_name. Endian variants are later
->   work, not required to link ARM and RISC-V into qemu-system.
-> - -target help/? lists target_name only. Unknown names point at
->   -target ? rather than printing the list and exit(1).
-> - qemu-system with no arch suffix always requires -target. v1 could
->   still pick a unique TargetInfo when only one was registered.
-> - Keep qemu-system-$TARGET; qemu-system is an extra binary. v1
->   described installing per-arch names as symlinks to qemu-system.
-> - Do not build qemu-systemw for the combined binary. A Windows GUI
->   twin would keep using exe symbols from DLLs, and data exports
->   cannot be delay-loaded (qdev_prop_array / qdev_prop_*), which
->   would block enabling modules globally on Windows.
-> 
-> Based-on: <20260724000948.234657-1-pierrick.bouvier@oss.qualcomm.com>
-> 
-> Yonggang Luo (13):
->   accel: use a shared TYPE_ACCEL_CPU parent
->   hw/riscv/virt: register TYPE_TARGET_SPECIFIC
->   hw/arm/virt: register TYPE_TARGET_SPECIFIC on the abstract parent
->   machine: allow -M name to differ from QOM type
->   hw/riscv/virt: use unique QOM name
->   hw/arm/virt: use unique QOM name
->   hw/arm/virt: prefix ACPI helpers with arm_virt_
->   hw/riscv/virt: prefix ACPI helpers with riscv_virt_
->   hw/loongarch/virt: prefix ACPI helper with loongarch_virt_
->   target/riscv: uniquify TCG crc32, crc32c, and wfi helper names
->   system/vl: add new option -target
->   target-info: dispatch CPU QMP, dump, and arm/riscv semihosting
->   meson: build single binary
-> 
->  MAINTAINERS                                   |  1 -
->  accel/accel-common.c                          | 21 ++---
->  hw/arm/virt-acpi-build.c                      |  4 +-
->  hw/arm/virt.c                                 | 17 ++--
->  hw/core/cpu-system.c                          | 23 ++++++
->  hw/core/machine-qmp-cmds.c                    | 26 +++++++
->  hw/core/machine.c                             |  6 ++
->  hw/loongarch/virt-acpi-build.c                |  6 +-
->  hw/loongarch/virt.c                           |  2 +-
->  hw/riscv/virt-acpi-build.c                    |  2 +-
->  hw/riscv/virt.c                               | 12 ++-
->  include/accel/accel-cpu-target.h              |  3 +-
->  include/accel/accel-cpu.h                     |  2 +
->  include/hw/arm/virt.h                         |  6 +-
->  include/hw/core/boards.h                      | 12 ++-
->  include/hw/loongarch/virt.h                   |  2 +-
->  include/hw/riscv/virt.h                       |  6 +-
->  include/qemu/target-info-qom.h                | 42 +++++++++-
->  include/semihosting/common-semi.h             | 56 ++++++++++++--
->  meson.build                                   | 69 ++++++++++++++++-
->  meson_options.txt                             |  2 +
->  qemu-options.hx                               |  8 ++
->  scripts/meson-buildoptions.sh                 |  3 +
->  stubs/dump.c                                  | 27 -------
->  stubs/meson.build                             |  2 -
->  stubs/qmp-cpu.c                               | 21 -----
->  system/vl.c                                   | 44 ++++++++---
->  target-info-qom.c                             | 77 +++++++++++++++++--
->  target-info.c                                 | 32 ++++++++
->  target/arm/arch_dump.c                        |  8 +-
->  target/arm/arm-qmp-cmds.c                     | 15 +++-
->  target/arm/common-semi-target.c               | 23 ++++--
->  target/arm/meson.build                        |  7 +-
->  target/i386/arch_dump.c                       |  8 +-
->  target/i386/cpu-system.c                      | 12 ++-
->  target/i386/cpu.c                             |  6 +-
->  target/loongarch/arch_dump.c                  |  8 +-
->  target/loongarch/loongarch-qmp-cmds.c         | 15 +++-
->  target/mips/system/mips-qmp-cmds.c            | 15 ++--
->  target/ppc/arch_dump.c                        |  8 +-
->  target/ppc/ppc-qmp-cmds.c                     | 15 ++--
->  target/riscv/arch_dump.c                      |  8 +-
->  target/riscv/common-semi-target.c             | 25 ++++--
->  target/riscv/helper.h                         |  6 +-
->  target/riscv/meson.build                      |  4 +-
->  target/riscv/riscv-qmp-cmds.c                 | 15 +++-
->  target/riscv/tcg/bitmanip_helper.c            |  4 +-
->  .../tcg/insn_trans/trans_privileged.c.inc     |  2 +-
->  target/riscv/tcg/insn_trans/trans_xlrbr.c.inc |  4 +-
->  target/riscv/tcg/op_helper.c                  |  2 +-
->  target/s390x/arch_dump.c                      |  8 +-
->  target/s390x/cpu_models_system.c              | 15 +++-
->  tests/qtest/fuzz/fuzz.c                       |  2 +-
->  53 files changed, 562 insertions(+), 207 deletions(-)
->  delete mode 100644 stubs/dump.c
->  delete mode 100644 stubs/qmp-cpu.c
-> 
+> Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+> Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
+Reviewed-by: Chao Liu <chao.liu@processmission.com>
 
-This series iterates on v1, but still does not tackle filtering of
-devices/cpus between the targets. This is a prerequisite before being to
-mix multiple targets together.
+Thanks,
+Chao
 
-I sent the following series to show how a full filtering would work, and
-if it's a direction people here would be interested to follow:
-https://lore.kernel.org/qemu-devel/20260828225901.367438-1-pierrick.bouvier@oss.qualcomm.com/T/#t
-
-Regards,
-Pierrick
+> ---
+>  hw/riscv/fdt-common.c         | 111 ++++++++++++++++++++++++++++++++++
+>  hw/riscv/virt.c               | 111 +++-------------------------------
+>  include/hw/riscv/fdt-common.h |  29 +++++++++
+>  include/hw/riscv/virt.h       |  15 -----
+>  4 files changed, 149 insertions(+), 117 deletions(-)
+> 
+> diff --git a/hw/riscv/fdt-common.c b/hw/riscv/fdt-common.c
+> index 88589330fb..38813b6aa7 100644
+> --- a/hw/riscv/fdt-common.c
+> +++ b/hw/riscv/fdt-common.c
+> @@ -15,6 +15,8 @@
+>  #include "target/riscv/cpu_bits.h"
+>  #include "hw/riscv/riscv-iommu-bits.h"
+>  #include "hw/riscv/iommu.h"
+> +#include "hw/pci/pci.h"
+> +#include "hw/pci/pcie_host.h"
+>  
+>  void *riscv_create_board_device_tree(const char *model, const char *compatible,
+>                                       int *fdt_size)
+> @@ -384,3 +386,112 @@ uint32_t riscv_create_fdt_riscv_iommu_sys(void *fdt, hwaddr addr, hwaddr size,
+>  
+>      return iommu_phandle;
+>  }
+> +
+> +static void create_pcie_irq_map(void *fdt, char *nodename,
+> +                                uint32_t irqchip_phandle,
+> +                                RISCVAIAType aia_type, uint32_t pcie_irq)
+> +{
+> +    int pin, dev;
+> +    uint32_t irq_map_stride = 0;
+> +    uint32_t full_irq_map[PCI_NUM_PINS * PCI_NUM_PINS *
+> +                          FDT_MAX_INT_MAP_WIDTH] = {};
+> +    uint32_t *irq_map = full_irq_map;
+> +
+> +    /*
+> +     * This code creates a standard swizzle of interrupts such that
+> +     * each device's first interrupt is based on it's PCI_SLOT number.
+> +     * (See pci_swizzle_map_irq_fn())
+> +     *
+> +     * We only need one entry per interrupt in the table (not one per
+> +     * possible slot) seeing the interrupt-map-mask will allow the table
+> +     * to wrap to any number of devices.
+> +     */
+> +    for (dev = 0; dev < PCI_NUM_PINS; dev++) {
+> +        int devfn = dev * 0x8;
+> +
+> +        for (pin = 0; pin < PCI_NUM_PINS; pin++) {
+> +            int irq_nr = pcie_irq + ((pin + PCI_SLOT(devfn)) % PCI_NUM_PINS);
+> +            int i = 0;
+> +
+> +            /* Fill PCI address cells */
+> +            irq_map[i] = cpu_to_be32(devfn << 8);
+> +            i += FDT_PCI_ADDR_CELLS;
+> +
+> +            /* Fill PCI Interrupt cells */
+> +            irq_map[i] = cpu_to_be32(pin + 1);
+> +            i += FDT_PCI_INT_CELLS;
+> +
+> +            /* Fill interrupt controller phandle and cells */
+> +            irq_map[i++] = cpu_to_be32(irqchip_phandle);
+> +            irq_map[i++] = cpu_to_be32(irq_nr);
+> +
+> +            if (aia_type != AIA_TYPE_NONE) {
+> +                irq_map[i++] = cpu_to_be32(0x4);
+> +            }
+> +
+> +            if (!irq_map_stride) {
+> +                irq_map_stride = i;
+> +            }
+> +            irq_map += irq_map_stride;
+> +        }
+> +    }
+> +
+> +    qemu_fdt_setprop(fdt, nodename, "interrupt-map", full_irq_map,
+> +                     PCI_NUM_PINS * PCI_NUM_PINS *
+> +                     irq_map_stride * sizeof(uint32_t));
+> +
+> +    qemu_fdt_setprop_cells(fdt, nodename, "interrupt-map-mask",
+> +                           0x1800, 0, 0, 0x7);
+> +}
+> +
+> +/*
+> + * NOTE: this function uses a "/soc/pci@..." FDT subnode that
+> + * should be created beforehand.
+> + */
+> +void riscv_create_fdt_pcie(void *fdt, int aia_type, bool has_iommu_sys,
+> +                           const MemMapEntry *pcie_ecam,
+> +                           const MemMapEntry *pcie_pio,
+> +                           const MemMapEntry *pcie_mmio,
+> +                           const MemMapEntry *high_pcie,
+> +                           uint32_t irq_pcie_phandle,
+> +                           uint32_t msi_pcie_phandle,
+> +                           uint32_t iommu_sys_phandle, uint32_t pcie_irq)
+> +{
+> +    g_autofree char *name = NULL;
+> +
+> +    name = g_strdup_printf("/soc/pci@%"HWADDR_PRIx, pcie_ecam->base);
+> +    qemu_fdt_setprop_cell(fdt, name, "#address-cells", FDT_PCI_ADDR_CELLS);
+> +    qemu_fdt_setprop_cell(fdt, name, "#interrupt-cells", FDT_PCI_INT_CELLS);
+> +    qemu_fdt_setprop_cell(fdt, name, "#size-cells", 0x2);
+> +    qemu_fdt_setprop_string(fdt, name, "compatible", "pci-host-ecam-generic");
+> +    qemu_fdt_setprop_string(fdt, name, "device_type", "pci");
+> +    qemu_fdt_setprop_cell(fdt, name, "linux,pci-domain", 0);
+> +
+> +    qemu_fdt_setprop_cells(fdt, name, "bus-range", 0,
+> +                           pcie_ecam->size / PCIE_MMCFG_SIZE_MIN - 1);
+> +    qemu_fdt_setprop(fdt, name, "dma-coherent", NULL, 0);
+> +
+> +    if (aia_type == AIA_TYPE_APLIC_IMSIC) {
+> +        qemu_fdt_setprop_cell(fdt, name, "msi-parent", msi_pcie_phandle);
+> +    }
+> +
+> +    qemu_fdt_setprop_sized_cells(fdt, name, "reg", 2,
+> +                                 pcie_ecam->base, 2, pcie_ecam->size);
+> +
+> +    qemu_fdt_setprop_sized_cells(fdt, name, "ranges",
+> +        1, FDT_PCI_RANGE_IOPORT, 2, 0,
+> +        2, pcie_pio->base, 2, pcie_pio->size,
+> +        1, FDT_PCI_RANGE_MMIO,
+> +        2, pcie_mmio->base,
+> +        2, pcie_mmio->base, 2, pcie_mmio->size,
+> +        1, FDT_PCI_RANGE_MMIO_64BIT,
+> +        2, high_pcie->base,
+> +        2, high_pcie->base, 2, high_pcie->size);
+> +
+> +    if (has_iommu_sys) {
+> +        qemu_fdt_setprop_cells(fdt, name, "iommu-map",
+> +                               0, iommu_sys_phandle, 0, 0x10000);
+> +    }
+> +
+> +    create_pcie_irq_map(fdt, name, irq_pcie_phandle, aia_type, pcie_irq);
+> +}
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index 8a165f4d9e..a28e6d200a 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -180,61 +180,6 @@ static void virt_flash_map(RISCVVirtState *s,
+>                      sysmem);
+>  }
+>  
+> -static void create_pcie_irq_map(RISCVVirtState *s, void *fdt, char *nodename,
+> -                                uint32_t irqchip_phandle)
+> -{
+> -    int pin, dev;
+> -    uint32_t irq_map_stride = 0;
+> -    uint32_t full_irq_map[PCI_NUM_PINS * PCI_NUM_PINS *
+> -                          FDT_MAX_INT_MAP_WIDTH] = {};
+> -    uint32_t *irq_map = full_irq_map;
+> -
+> -    /*
+> -     * This code creates a standard swizzle of interrupts such that
+> -     * each device's first interrupt is based on it's PCI_SLOT number.
+> -     * (See pci_swizzle_map_irq_fn())
+> -     *
+> -     * We only need one entry per interrupt in the table (not one per
+> -     * possible slot) seeing the interrupt-map-mask will allow the table
+> -     * to wrap to any number of devices.
+> -     */
+> -    for (dev = 0; dev < PCI_NUM_PINS; dev++) {
+> -        int devfn = dev * 0x8;
+> -
+> -        for (pin = 0; pin < PCI_NUM_PINS; pin++) {
+> -            int irq_nr = PCIE_IRQ + ((pin + PCI_SLOT(devfn)) % PCI_NUM_PINS);
+> -            int i = 0;
+> -
+> -            /* Fill PCI address cells */
+> -            irq_map[i] = cpu_to_be32(devfn << 8);
+> -            i += FDT_PCI_ADDR_CELLS;
+> -
+> -            /* Fill PCI Interrupt cells */
+> -            irq_map[i] = cpu_to_be32(pin + 1);
+> -            i += FDT_PCI_INT_CELLS;
+> -
+> -            /* Fill interrupt controller phandle and cells */
+> -            irq_map[i++] = cpu_to_be32(irqchip_phandle);
+> -            irq_map[i++] = cpu_to_be32(irq_nr);
+> -            if (s->aia_type != VIRT_AIA_TYPE_NONE) {
+> -                irq_map[i++] = cpu_to_be32(0x4);
+> -            }
+> -
+> -            if (!irq_map_stride) {
+> -                irq_map_stride = i;
+> -            }
+> -            irq_map += irq_map_stride;
+> -        }
+> -    }
+> -
+> -    qemu_fdt_setprop(fdt, nodename, "interrupt-map", full_irq_map,
+> -                     PCI_NUM_PINS * PCI_NUM_PINS *
+> -                     irq_map_stride * sizeof(uint32_t));
+> -
+> -    qemu_fdt_setprop_cells(fdt, nodename, "interrupt-map-mask",
+> -                           0x1800, 0, 0, 0x7);
+> -}
+> -
+>  static void create_fdt_socket_aclint(RISCVVirtState *s,
+>                                       int socket,
+>                                       uint32_t *intc_phandles)
+> @@ -723,51 +668,6 @@ static void create_fdt_virtio(RISCVVirtState *s, uint32_t irq_virtio_phandle)
+>      }
+>  }
+>  
+> -static void create_fdt_pcie(RISCVVirtState *s,
+> -                            uint32_t irq_pcie_phandle,
+> -                            uint32_t msi_pcie_phandle,
+> -                            uint32_t iommu_sys_phandle)
+> -{
+> -    g_autofree char *name = NULL;
+> -    MachineState *ms = MACHINE(s);
+> -
+> -    name = g_strdup_printf("/soc/pci@%"HWADDR_PRIx,
+> -                           s->memmap[VIRT_PCIE_ECAM].base);
+> -    qemu_fdt_setprop_cell(ms->fdt, name, "#address-cells",
+> -        FDT_PCI_ADDR_CELLS);
+> -    qemu_fdt_setprop_cell(ms->fdt, name, "#interrupt-cells",
+> -        FDT_PCI_INT_CELLS);
+> -    qemu_fdt_setprop_cell(ms->fdt, name, "#size-cells", 0x2);
+> -    qemu_fdt_setprop_string(ms->fdt, name, "compatible",
+> -        "pci-host-ecam-generic");
+> -    qemu_fdt_setprop_string(ms->fdt, name, "device_type", "pci");
+> -    qemu_fdt_setprop_cell(ms->fdt, name, "linux,pci-domain", 0);
+> -    qemu_fdt_setprop_cells(ms->fdt, name, "bus-range", 0,
+> -        s->memmap[VIRT_PCIE_ECAM].size / PCIE_MMCFG_SIZE_MIN - 1);
+> -    qemu_fdt_setprop(ms->fdt, name, "dma-coherent", NULL, 0);
+> -    if (s->aia_type == VIRT_AIA_TYPE_APLIC_IMSIC) {
+> -        qemu_fdt_setprop_cell(ms->fdt, name, "msi-parent", msi_pcie_phandle);
+> -    }
+> -    qemu_fdt_setprop_sized_cells(ms->fdt, name, "reg", 2,
+> -        s->memmap[VIRT_PCIE_ECAM].base, 2, s->memmap[VIRT_PCIE_ECAM].size);
+> -    qemu_fdt_setprop_sized_cells(ms->fdt, name, "ranges",
+> -        1, FDT_PCI_RANGE_IOPORT, 2, 0,
+> -        2, s->memmap[VIRT_PCIE_PIO].base, 2, s->memmap[VIRT_PCIE_PIO].size,
+> -        1, FDT_PCI_RANGE_MMIO,
+> -        2, s->memmap[VIRT_PCIE_MMIO].base,
+> -        2, s->memmap[VIRT_PCIE_MMIO].base, 2, s->memmap[VIRT_PCIE_MMIO].size,
+> -        1, FDT_PCI_RANGE_MMIO_64BIT,
+> -        2, virt_high_pcie_memmap.base,
+> -        2, virt_high_pcie_memmap.base, 2, virt_high_pcie_memmap.size);
+> -
+> -    if (virt_is_iommu_sys_enabled(s)) {
+> -        qemu_fdt_setprop_cells(ms->fdt, name, "iommu-map",
+> -                               0, iommu_sys_phandle, 0, 0x10000);
+> -    }
+> -
+> -    create_pcie_irq_map(s, ms->fdt, name, irq_pcie_phandle);
+> -}
+> -
+>  static void create_fdt_uart(RISCVVirtState *s,
+>                              uint32_t irq_mmio_phandle, int memId, int irqNo)
+>  {
+> @@ -916,8 +816,15 @@ static void finalize_fdt(RISCVVirtState *s)
+>                                               msi_pcie_phandle,
+>                                               IOMMU_SYS_IRQ);
+>      }
+> -    create_fdt_pcie(s, irq_pcie_phandle, msi_pcie_phandle,
+> -                    iommu_sys_phandle);
+> +
+> +    riscv_create_fdt_pcie(MACHINE(s)->fdt, s->aia_type,
+> +                          virt_is_iommu_sys_enabled(s),
+> +                          &s->memmap[VIRT_PCIE_ECAM],
+> +                          &s->memmap[VIRT_PCIE_PIO],
+> +                          &s->memmap[VIRT_PCIE_MMIO],
+> +                          &virt_high_pcie_memmap,
+> +                          irq_pcie_phandle, msi_pcie_phandle,
+> +                          iommu_sys_phandle, PCIE_IRQ);
+>  
+>      riscv_create_fdt_syscon(MACHINE(s)->fdt, &phandle,
+>                              s->memmap[VIRT_TEST].base,
+> diff --git a/include/hw/riscv/fdt-common.h b/include/hw/riscv/fdt-common.h
+> index 65711468b8..3750230865 100644
+> --- a/include/hw/riscv/fdt-common.h
+> +++ b/include/hw/riscv/fdt-common.h
+> @@ -11,6 +11,27 @@
+>  
+>  #include "target/riscv/cpu.h"
+>  
+> +#define FDT_PCI_ADDR_CELLS    3
+> +#define FDT_PCI_INT_CELLS     1
+> +#define FDT_PLIC_ADDR_CELLS   0
+> +#define FDT_PLIC_INT_CELLS    1
+> +#define FDT_APLIC_INT_CELLS   2
+> +#define FDT_APLIC_ADDR_CELLS  0
+> +#define FDT_IMSIC_INT_CELLS   0
+> +#define FDT_MAX_INT_CELLS     2
+> +#define FDT_MAX_INT_MAP_WIDTH (FDT_PCI_ADDR_CELLS + FDT_PCI_INT_CELLS + \
+> +                                 1 + FDT_MAX_INT_CELLS)
+> +#define FDT_PLIC_INT_MAP_WIDTH  (FDT_PCI_ADDR_CELLS + FDT_PCI_INT_CELLS + \
+> +                                 1 + FDT_PLIC_INT_CELLS)
+> +#define FDT_APLIC_INT_MAP_WIDTH (FDT_PCI_ADDR_CELLS + FDT_PCI_INT_CELLS + \
+> +                                 1 + FDT_APLIC_INT_CELLS)
+> +
+> +typedef enum RISCVAIAType {
+> +    AIA_TYPE_NONE = 0,
+> +    AIA_TYPE_APLIC,
+> +    AIA_TYPE_APLIC_IMSIC,
+> +} RISCVAIAType;
+> +
+>  void *riscv_create_board_device_tree(const char *model, const char *compatible,
+>                                       int *fdt_size);
+>  void riscv_create_fdt_socket_memory(void *fdt, hwaddr addr, uint64_t size,
+> @@ -48,4 +69,12 @@ uint32_t riscv_create_fdt_riscv_iommu_sys(void *fdt, hwaddr addr, hwaddr size,
+>                                            uint32_t irq_chip,
+>                                            uint32_t msi_phandle,
+>                                            uint32_t iommu_sys_irq);
+> +void riscv_create_fdt_pcie(void *fdt, int aia_type, bool has_iommu_sys,
+> +                           const MemMapEntry *pcie_ecam,
+> +                           const MemMapEntry *pcie_pio,
+> +                           const MemMapEntry *pcie_mmio,
+> +                           const MemMapEntry *high_pcie,
+> +                           uint32_t irq_pcie_phandle,
+> +                           uint32_t msi_pcie_phandle,
+> +                           uint32_t iommu_sys_phandle, uint32_t pcie_irq);
+>  #endif
+> diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
+> index 7c862b0da2..e516898f9a 100644
+> --- a/include/hw/riscv/virt.h
+> +++ b/include/hw/riscv/virt.h
+> @@ -121,21 +121,6 @@ enum {
+>  #define VIRT_PLIC_SIZE(__num_context) \
+>      (VIRT_PLIC_CONTEXT_BASE + (__num_context) * VIRT_PLIC_CONTEXT_STRIDE)
+>  
+> -#define FDT_PCI_ADDR_CELLS    3
+> -#define FDT_PCI_INT_CELLS     1
+> -#define FDT_PLIC_ADDR_CELLS   0
+> -#define FDT_PLIC_INT_CELLS    1
+> -#define FDT_APLIC_INT_CELLS   2
+> -#define FDT_APLIC_ADDR_CELLS  0
+> -#define FDT_IMSIC_INT_CELLS   0
+> -#define FDT_MAX_INT_CELLS     2
+> -#define FDT_MAX_INT_MAP_WIDTH (FDT_PCI_ADDR_CELLS + FDT_PCI_INT_CELLS + \
+> -                                 1 + FDT_MAX_INT_CELLS)
+> -#define FDT_PLIC_INT_MAP_WIDTH  (FDT_PCI_ADDR_CELLS + FDT_PCI_INT_CELLS + \
+> -                                 1 + FDT_PLIC_INT_CELLS)
+> -#define FDT_APLIC_INT_MAP_WIDTH (FDT_PCI_ADDR_CELLS + FDT_PCI_INT_CELLS + \
+> -                                 1 + FDT_APLIC_INT_CELLS)
+> -
+>  bool virt_is_acpi_enabled(RISCVVirtState *s);
+>  bool virt_is_iommu_sys_enabled(RISCVVirtState *s);
+>  void virt_acpi_setup(RISCVVirtState *vms);
+> -- 
+> 2.43.0
+> 
 
