@@ -4,93 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2EBFFC61DBE
-	for <qemu-riscv@archiver.kernel.org>; Sat, 29 Aug 2026 10:13:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34124C61DD9
+	for <qemu-riscv@archiver.kernel.org>; Sun, 30 Aug 2026 16:04:06 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x0G3S-0002Vu-Pd; Sat, 29 Aug 2026 06:12:54 -0400
+	id 1x0i0h-00062s-Ao; Sun, 30 Aug 2026 12:03:55 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <163wangjack@gmail.com>)
- id 1x0G3R-0002Ve-SU
- for qemu-riscv@nongnu.org; Sat, 29 Aug 2026 06:12:53 -0400
-Received: from mail-pj1-x1034.google.com ([2607:f8b0:4864:20::1034])
+ (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
+ id 1x0i0f-00061m-5S
+ for qemu-riscv@nongnu.org; Sun, 30 Aug 2026 12:03:53 -0400
+Received: from mail-pf1-x42e.google.com ([2607:f8b0:4864:20::42e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <163wangjack@gmail.com>)
- id 1x0G3Q-0005o2-8u
- for qemu-riscv@nongnu.org; Sat, 29 Aug 2026 06:12:53 -0400
-Received: by mail-pj1-x1034.google.com with SMTP id
- 98e67ed59e1d1-38a0c7e841fso2737318a91.2
- for <qemu-riscv@nongnu.org>; Sat, 29 Aug 2026 03:12:51 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
+ id 1x0i0Z-0007hy-MV
+ for qemu-riscv@nongnu.org; Sun, 30 Aug 2026 12:03:52 -0400
+Received: by mail-pf1-x42e.google.com with SMTP id
+ d2e1a72fcca58-8535a9be75eso1922316b3a.2
+ for <qemu-riscv@nongnu.org>; Sun, 30 Aug 2026 09:03:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1787998370; x=1788603170; darn=nongnu.org;
- h=to:references:message-id:content-transfer-encoding:cc:date
- :in-reply-to:from:subject:mime-version:content-type:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=MBVJG7s6MwOddcd7tH6RtphYGgZZlHn+SpSTGBFIEVs=;
- b=maLBSEonqhOUXhH9b7GoWfMwg57LJZs/iKNsJryS1jHJ/MWfLEz0UFkmuC7VCV8z2I
- 21KPQVwyh+zXakKoLjWb209qE33sHtpS+PKzvN4bdXNNiVihjRllRfBpejZk1hgfZAwr
- rJuCTfipmbCCReYHrOaL9zIA9tZEPrQWN4RAw8T3DSWLN+QOQsXlWdgSH8Rq069Rmdmz
- 0kUDuKbRQHg2dTdSVBK0OVj8tpb3u4M8HN80SfM2MshvPpUoU45x3IE278JUd94uCdnk
- qIFQi+BCSkBJucRNOUvWevjk/MgLDlwh5gAzIpfWi1cmckE7VQ+/qFdRBEUxPvG0MKxH
- x+bw==
+ d=sifive.com; s=google; t=1788105826; x=1788710626; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=e3+182cJvrOIa0h+b5iwFEYaEYm9QcYRRZMRS35cDQ4=;
+ b=OskNtxzpT7d1MGmmXru3CtzFi1atNHLRsCh8mc7hcIvNW7KxnlhwHsJ0szGrqaWuHb
+ 0hdMxcDVFn9uRF7412DJU74jbY1PQnWy02c1Z/iGAN9DnPibFJdfd5h5lLkY4Uoy8WBu
+ qQQV0PFX1qwPDULZf0cbYQrhAuIVdKywCfK/JOO/18nJNzXwqn2PnrIDpv2+rRKZ6Jpb
+ PPi+AcdhJ+fBsjAGfpUJD3xd9ncsG4GzPXyqfUPUjwBqRMJca3DFnQumg5OpVHlGaTP5
+ ZUY5fVUVo3eB8To0iN3ym1B341Bt6Od7Xk7iLHgOnp2KTDqADRIjk9eTv7L4jN/+VSl/
+ 3pcA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1787998370; x=1788603170;
- h=to:references:message-id:content-transfer-encoding:cc:date
- :in-reply-to:from:subject:mime-version:content-type:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=MBVJG7s6MwOddcd7tH6RtphYGgZZlHn+SpSTGBFIEVs=;
- b=sN8xLd9TQX8CNxbL3Ghpr6Oq9LNADl3J1C40NY/fY6+tuO/r0Mg9MlJebDieY7NySh
- Xtfxkv2FGCJDPe7HToyNOG0C7kLlRWJ8XsYCrw3AEw9hsfqp/EALqHNyUANMqpSfsDxk
- YtyEYvqXgZPXzA9QGP5x/FzXX0/VboZ13R31cTe8RXjQdMEoCvV2vvx9kKkyb0sAbA6d
- wBERNJMaHYNLQU4xtEW5X13yHGsJ0mT8VAddtA+s8f1/5lMCSxfj/pRte4GFkyeyiV6L
- 1TAoPy+HPgUsvGWDfT1D+zsm4a+axC5R/ZguSc3O9WZW1iHzens5XDa13oflHXhPrXUo
- 4cew==
+ d=1e100.net; s=20251104; t=1788105826; x=1788710626;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=e3+182cJvrOIa0h+b5iwFEYaEYm9QcYRRZMRS35cDQ4=;
+ b=FlNrdAjYw430Zn8lDWncRPltuRoxMZtPpJvayUwPOPLEkjxXAGqSAM5JjEYr6oPFlF
+ FK8Gg/tbl7o6Tz5Bsx2tzWKl/lbEFUeMXKmr4Ta+Ca/74c0OQShzPUUQoRceqH+qZQ4Q
+ /cx2YsxJSF4VvtTziQnDxdHALPOz/LVpO6Zh250df4A3r7PVe8O4Jc1UtbheCc8Xoyrk
+ UBXqJ9d6Zh6Eclv+18l42A5lnoGFzXByfF8h5PU2PkNTLfsVM2qzc8g3g1j8xBjnRQdr
+ xGaErsiwaow9dM6amnsRXOBhGRzLHLxwW6+cyX8852BvEugjla8OXd0CkJzTzkoemwod
+ 81xw==
 X-Forwarded-Encrypted: i=1;
- AKwUvBw0pLREVW3+6++eaS/f5HJjGawPywffQb74l5HJd8NuhK3bossmf+q0ov6F8w5i59ZEGb36TK3fqZ8W@nongnu.org
-X-Gm-Message-State: AFuF++lil58z6vK5n0QuH8p5C7DbIk21+OM0d/WRrRf4LWSi8HcaDctG
- XRakohdyMBuZw7Gnw7xKJyMMsgRXvyp4SKmCN1/OWe0gWo8t19EGTaLf
-X-Gm-Gg: AYBFou34fo0O+o2dH6sGFzCupSoTzXDZLXle8Xgrt5c2jmP8a8w67aVGfzJ+NKHPTJ3
- bb4M6WgsgnutUMT8JDQHsb8tG31BHP4BztFQrsKv1bA4NxXgcpw7hr9bL8haVEOSHYdJmvCtszH
- NR60xw0s/TJR6YYX9pwbtHNWz5BBtiyQ1Wab+xHbfP3wJHU7qPx/ri+G8wm6BGl0dhpS95ZWgxd
- yGuHtbTStKXHvBkdnmA0bP/R2VurbE8VtFAoHXpqDS/GHKDCmsOGVtD93X0wjym4kZi6JzX4QtC
- 92RD73ISPLDio8FMcwTPekZVf6lF/pmlr4mIyYus9TLXhW4xRk57ylXWmcMim5HWI1x1it7vl8I
- Rm/YPB98wloukJ+0D5/rwefxxJPU29OuAo2L/8ErQpGSXk3XBLo8ekc/xECDNZUDuU9VQoWyzx6
- hCZCDxbmd+BasL6pdB5IISxPeGUflbzUmPlH8871STnje9XswCA9iAToX245k9EHDxa0m3
-X-Received: by 2002:a17:90b:1f86:b0:396:4cbf:45a2 with SMTP id
- 98e67ed59e1d1-396d0ff5bb9mr24603922a91.14.1787998370042; 
- Sat, 29 Aug 2026 03:12:50 -0700 (PDT)
-Received: from smtpclient.apple ([117.55.237.216])
- by smtp.gmail.com with ESMTPSA id
- a92af1059eb24-142e0df264csm24354655c88.14.2026.08.29.03.12.47
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Sat, 29 Aug 2026 03:12:49 -0700 (PDT)
-Content-Type: text/plain;
-	charset=utf-8
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3864.600.51.1.1\))
-Subject: Re: [PATCH v2 0/2] hw/riscv/k230: add the K230 Reset Management Unit
-From: Jack wang <163wangjack@gmail.com>
-In-Reply-To: <20260719180247.8660-1-163wangjack@gmail.com>
-Date: Sat, 29 Aug 2026 18:12:34 +0800
-Cc: Chao Liu <chao.liu.zevorn@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Alistair Francis <alistair.francis@wdc.com>, qemu-riscv@nongnu.org
-Content-Transfer-Encoding: quoted-printable
-Message-Id: <0685DFA5-2C5E-47AC-8635-A38C69A1A4E2@gmail.com>
-References: <20260719180247.8660-1-163wangjack@gmail.com>
-To: qemu-devel@nongnu.org
-X-Mailer: Apple Mail (2.3864.600.51.1.1)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1034;
- envelope-from=163wangjack@gmail.com; helo=mail-pj1-x1034.google.com
-X-Spam_score_int: -13
-X-Spam_score: -1.4
-X-Spam_bar: -
-X-Spam_report: (-1.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- FROM_STARTS_WITH_NUMS=0.738, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+ AHgh+RqSKm5kYIBTipXwgxs9fhzPdqsuWAZ3IXt54uf1OE/fQ+zAvsIpcakqvj4hcdlBure9jYJPedhb8uFf@nongnu.org
+X-Gm-Message-State: AFuF++ku7qTPGXpjIfWQtiaDhNUy66Mkw9Gl6l2YcdNuA1pcl0Rq2tU6
+ 1KZ881+W+yIN7b3QbFsLD1Xlw9/qNwYw9h5EnspODfxlfrCp0CHkPYCR8fWrGyQgqb8=
+X-Gm-Gg: AR+sD13btz9p+7BDkZQngITl/ezS/73vd807g7kKpIpgProYQFKpldMNWY/5vD4iXhr
+ HVCIMulG1snKMcwgJvhybTg/0Jkf1V71tibi56Qq1OJ8tzDsX8I8PdJgGfndZUtV2ijmISU91kQ
+ zBKaoynBicCHO9ratOiL/p6a/Bc4g7T2OLBHdf8qyDD3BR/PPffUa/hECWWj+vXjl8M1mfLBREf
+ JBMi5BoNrC5mB4+rCpaLSxMhEhkF4qB07nqgwLp1IL1d+NgjUQo4IwNewHQ0NYKcgIhThvKatuI
+ 0B6JJ6pO7olilPLhAPz+J54cNYGEdj7d8k21GGgw44OdOlQVAMmrIopMZaNbaA9dDYh0N8uFsPK
+ MJop9dZl5259XT9zG2gCQoOjvc894oJIYlRZVdBusJap8suF0bpGBzM2tZVmr8lQ+uivgkUyveI
+ ahrvLo552jM/Bfv6hvk5D/pdYXC18C7z/bYiqtdpaZ93ByQng+A+i1yK52pGRIQZaobHidlVmNh
+ wV6yZK5YNHcwANuP0iOwesx4Gf0G7ppyOzNnLE3pRZnDfbzofGv4mE3HQx5Bwo=
+X-Received: by 2002:a05:6a00:4501:b0:857:72f8:dc94 with SMTP id
+ d2e1a72fcca58-85772f8de8emr19046427b3a.21.1788105825707; 
+ Sun, 30 Aug 2026 09:03:45 -0700 (PDT)
+Received: from duncan.localdomain (114-35-142-126.hinet-ip.hinet.net.
+ [114.35.142.126]) by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-8569ff701d5sm2455900b3a.25.2026.08.30.09.03.42
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 30 Aug 2026 09:03:45 -0700 (PDT)
+From: Max Chou <max.chou@sifive.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Max Chou <max.chou@sifive.com>, Weiwei Li <liwei1518@gmail.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Chao Liu <chao.liu@processmission.com>,
+ Alistair Francis <alistair.francis@wdc.com>
+Subject: [PATCH v3 1/6] target/riscv: Add cfg property for SiFive int8 matmul
+ extensions
+Date: Mon, 31 Aug 2026 00:03:30 +0800
+Message-ID: <20260830160335.3441069-2-max.chou@sifive.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260830160335.3441069-1-max.chou@sifive.com>
+References: <20260830160335.3441069-1-max.chou@sifive.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42e;
+ envelope-from=max.chou@sifive.com; helo=mail-pf1-x42e.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -106,87 +110,87 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Ping for this patch
+Add the CPU config properties for SiFive's custom int8 matrix
+multiply vector extensions:
 
-Thanks for your time
-JW..
+- Xsfvqmaccdod: 2x8x2 int8 matrix-multiply-accumulate operations
+- Xsfvqmaccqoq: 4x8x4 int8 matrix-multiply-accumulate operations
 
-> 2026=E5=B9=B47=E6=9C=8820=E6=97=A5 02:02=EF=BC=8CJack Wang =
-<163wangjack@gmail.com> =E5=86=99=E9=81=93=EF=BC=9A
->=20
-> References: <20260709031237.21284-1-163wangjack@gmail.com>
->=20
-> This v2 patch reply on review of=20
-> This series models the Kendryte K230 Reset Management Unit (RMU), a =
-bank of
-> reset-control registers at 0x91101000, and wires it into the K230 SoC. =
-It
-> replaces the create_unimplemented_device("rmu") stub so guest reset =
-drivers
-> (drivers/reset/reset-k230.c) work against a real model.
->=20
-> Patch 1 adds the standalone device model; patch 2 wires it into the =
-SoC and
-> adds the qtest. The qtest is deliberately placed in patch 2 =
-accorinding to=20
-> suggestion from Daniel: it drives "-machine k230", which only
-> exists once the device is wired up.
->=20
-> Register semantics, reset values and reserved-bit masks are taken from =
-the
-> K230 TRM chapter 2.1 "Reset" (V0.3.1) and cross-checked against the =
-mainline
-> Linux driver.
->=20
-> Changes since v1:
-> - Switched to the Resettable API (phases.hold instead of the legacy
->   device_class_set_legacy_reset()), per Daniel's review.
-> - Model real reset propagation: the RMU now cold-resets the two linked
->   watchdogs via "wdt0"/"wdt1" QOM links when their PERI0 reset bits =
-are
->   written (Cao review).
-> - CPU1 reset request is now a two-step assert/deassert (not =
-self-clearing),
->   matching the hardware (Cao review ).
-> - Filled in the documented per-register reset values and reserved-bit
->   (writable) masks from the TRM; the *_rst_done status bits reset to =
-0, so
->   they follow the per-bit "Reset" column rather than the summarised =
-total.
-> - Added the reset-time-control (*_RST_TIM) registers as plain storage =
-with
->   their documented reset values.
-> - Fixed the storage mask so the upper half of non-write-enable =
-registers is
->   writable (surfaced by the new TIM registers).
-> - New qtests: reset values, TIM storage, reserved-bit read-only, CPU1
->   two-step, and real watchdog reset propagation.
-> - Moved the qtest from patch 1 to patch 2 for bisectability; added the
->   MAINTAINERS entries.
->=20
-> Jack Wang (2):
->  hw/misc/k230_rmu: add Kendryte K230 Reset Management Unit model
->  hw/riscv/k230: wire up the RMU device
->=20
-> MAINTAINERS                 |   3 +
-> docs/system/riscv/k230.rst  |   1 +
-> hw/misc/Kconfig             |   3 +
-> hw/misc/k230_rmu.c          | 425 ++++++++++++++++++++++++++++++++++++
-> hw/misc/meson.build         |   1 +
-> hw/misc/trace-events        |   7 +
-> hw/riscv/Kconfig            |   1 +
-> hw/riscv/k230.c             |  15 +-
-> include/hw/misc/k230_rmu.h  | 126 +++++++++++
-> include/hw/riscv/k230.h     |   2 +
-> tests/qtest/k230-rmu-test.c | 225 +++++++++++++++++++
-> tests/qtest/meson.build     |   3 +-
-> 12 files changed, 808 insertions(+), 4 deletions(-)
-> create mode 100644 hw/misc/k230_rmu.c
-> create mode 100644 include/hw/misc/k230_rmu.h
-> create mode 100644 tests/qtest/k230-rmu-test.c
->=20
-> --=20
-> 2.53.0
->=20
+All instructions of these extensions require the Zve32x extension
+to be present whenever either extension is enabled. Validate this
+in riscv_cpu_validate_vendor_ext() alongside the existing vector
+extension validation in riscv_cpu_validate_set_extensions().
+
+Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Signed-off-by: Max Chou <max.chou@sifive.com>
+---
+ target/riscv/cpu.c                |  2 ++
+ target/riscv/cpu_cfg_fields.h.inc |  2 ++
+ target/riscv/tcg/tcg-cpu.c        | 16 ++++++++++++++++
+ 3 files changed, 20 insertions(+)
+
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 61109672d60..b4e34daf8ec 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -299,6 +299,8 @@ const RISCVIsaExtData isa_edata_arr[] = {
+     ISA_EXT_DATA_ENTRY(xmipscbop, PRIV_VERSION_1_12_0, ext_xmipscbop),
+     ISA_EXT_DATA_ENTRY(xmipscmov, PRIV_VERSION_1_12_0, ext_xmipscmov),
+     ISA_EXT_DATA_ENTRY(xmipslsp, PRIV_VERSION_1_12_0, ext_xmipslsp),
++    ISA_EXT_DATA_ENTRY(xsfvqmaccdod, PRIV_VERSION_1_13_0, ext_xsfvqmaccdod),
++    ISA_EXT_DATA_ENTRY(xsfvqmaccqoq, PRIV_VERSION_1_13_0, ext_xsfvqmaccqoq),
+     ISA_EXT_DATA_ENTRY(xtheadba, PRIV_VERSION_1_11_0, ext_xtheadba),
+     ISA_EXT_DATA_ENTRY(xtheadbb, PRIV_VERSION_1_11_0, ext_xtheadbb),
+     ISA_EXT_DATA_ENTRY(xtheadbs, PRIV_VERSION_1_11_0, ext_xtheadbs),
+diff --git a/target/riscv/cpu_cfg_fields.h.inc b/target/riscv/cpu_cfg_fields.h.inc
+index f91c780299c..0f3bda1331c 100644
+--- a/target/riscv/cpu_cfg_fields.h.inc
++++ b/target/riscv/cpu_cfg_fields.h.inc
+@@ -159,6 +159,8 @@ BOOL_FIELD(ext_xmipscbop)
+ BOOL_FIELD(ext_xmipscmov)
+ BOOL_FIELD(ext_xmipslsp)
+ BOOL_FIELD(ext_xlrbr)
++BOOL_FIELD(ext_xsfvqmaccdod)
++BOOL_FIELD(ext_xsfvqmaccqoq)
+ 
+ BOOL_FIELD(big_endian)
+ BOOL_FIELD(mmu)
+diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+index 54f1b66216c..bdb6dc6ab3f 100644
+--- a/target/riscv/tcg/tcg-cpu.c
++++ b/target/riscv/tcg/tcg-cpu.c
+@@ -418,6 +418,16 @@ static void riscv_cpu_validate_v(CPURISCVState *env, RISCVCPUConfig *cfg,
+     }
+ }
+ 
++static void riscv_cpu_validate_vendor_ext(RISCVCPU *cpu, Error **errp)
++{
++    if ((cpu->cfg.ext_xsfvqmaccdod || cpu->cfg.ext_xsfvqmaccqoq) &&
++        !cpu->cfg.ext_zve32x) {
++        error_setg(errp, "Xsfvqmaccdod/Xsfvqmaccqoq extensions require "
++                         "Zve32x extension");
++        return;
++    }
++}
++
+ static void riscv_cpu_disable_priv_spec_isa_exts(RISCVCPU *cpu)
+ {
+     CPURISCVState *env = &cpu->env;
+@@ -795,6 +805,12 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
+         return;
+     }
+ 
++    riscv_cpu_validate_vendor_ext(cpu, &local_err);
++    if (local_err != NULL) {
++        error_propagate(errp, local_err);
++        return;
++    }
++
+     if (mcc->def->misa_mxl_max == MXL_RV32 && cpu->cfg.ext_svukte) {
+         error_setg(errp, "svukte is not supported for RV32");
+         return;
+-- 
+2.43.0
 
 
