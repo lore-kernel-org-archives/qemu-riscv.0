@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F2D6C61DE2
-	for <qemu-riscv@archiver.kernel.org>; Mon, 31 Aug 2026 02:16:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12792C61DFD
+	for <qemu-riscv@archiver.kernel.org>; Mon, 31 Aug 2026 02:16:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x0rZ9-0003XA-Nu; Sun, 30 Aug 2026 22:16:07 -0400
+	id 1x0rZ4-0003RP-At; Sun, 30 Aug 2026 22:16:02 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1x0rZ7-0003Re-8H
- for qemu-riscv@nongnu.org; Sun, 30 Aug 2026 22:16:05 -0400
-Received: from mail-pg1-x534.google.com ([2607:f8b0:4864:20::534])
+ id 1x0rZ2-0003Qf-Cp
+ for qemu-riscv@nongnu.org; Sun, 30 Aug 2026 22:16:00 -0400
+Received: from mail-pj1-x1035.google.com ([2607:f8b0:4864:20::1035])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1x0rZ5-0007ZP-RP
- for qemu-riscv@nongnu.org; Sun, 30 Aug 2026 22:16:04 -0400
-Received: by mail-pg1-x534.google.com with SMTP id
- 41be03b00d2f7-cc1c3d79b9bso2507296a12.3
- for <qemu-riscv@nongnu.org>; Sun, 30 Aug 2026 19:16:03 -0700 (PDT)
+ id 1x0rZ0-0007Yn-Lv
+ for qemu-riscv@nongnu.org; Sun, 30 Aug 2026 22:16:00 -0400
+Received: by mail-pj1-x1035.google.com with SMTP id
+ 98e67ed59e1d1-398b3d66515so1396099a91.0
+ for <qemu-riscv@nongnu.org>; Sun, 30 Aug 2026 19:15:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1788142562; x=1788747362; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1788142557; x=1788747357; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:sender:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=5s/MHm9pZEMHdIBltCKmL5mdgHKUgYmEicbJN9o3MIY=;
- b=r7Qlg8wr+aFMTtcUo8mlfFi2trs7E7HqEiMoi1pepaE8AIxqDSyVbudC8NJxcnr12m
- EhylFrYFaoppjy9I0rrpzaBpQ1E4U1xLwyxw6Ds0K+r6uwmRNL7dOx5NLaZLebfxQ+y4
- Zz8u0MZcH+f8kle06w+XOMe/BH+02GX0SWvhMaK2z7ImrnYFol0gznCfIDMvzgcqmuw6
- o2yuoxCrEBHvahiMzpM4Qht/2l5UOsCi2hpqrFTziEQrvc2ebaeDxSEKSI9GbKvOSgPW
- CK/fhhGw0a4rVYHzOutDcpi8GbpU/aMBlxW5VW5oLVI43uDBGCxd76XpL323g/nW7v/L
- PzZw==
+ bh=pBIdq1IerXBEqjEqdh2t+EBfxfqKjlwofVB6m7BdaPs=;
+ b=jrpWA7V17L3EYI+SsF9Garmbst+JqXZuO0tm7Sx2EylNrgOovlw3Od56ecgyCxehdt
+ PE7KRvrQ0ytw1t+5/YjWL8DFv8XHB1aMfwH1rj53cbY7iJ7yL+u+2Qvu72WPFmJ9j0Gy
+ YUn8hzVYppxj8m7bMqUAx68FHm6YPX5OneSU739mGHA+lNcmJ5pVfPoDCIwzyhByCufM
+ vWSpFiISvl8KYLl5FY+GfU5vPzqCRVjpl1cbZCAFglGnSv+MKeYmAULS5QaJworM0m/I
+ Oe7CuWSg6UzBQVlnxH59jz1hx4+2aCuAmxk3S5vcLkqH845vekXEIitZeG9fe1yw7/HZ
+ OM0w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788142562; x=1788747362;
+ d=1e100.net; s=20251104; t=1788142557; x=1788747357;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:sender:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=5s/MHm9pZEMHdIBltCKmL5mdgHKUgYmEicbJN9o3MIY=;
- b=Dkgf1S7Tts/ETRNWQ9JR/YX5Mh8RoYifvgFf92V4uhaDjQdrbBQwPi0u5CY/RoB4pZ
- l4o2CfR+o1h21QaoTR/p0ByJWhGIVG8uEX5h+tI4yQ/hb6aEFEvdmEWuYgX3I+d3Exbx
- glbfzF9dOOYQUNGN7xGnhPsW8YfkBXzCvVPe/hWQoQHOJMv4lbwsHkjWgDp4ABpv/pOQ
- PZOGU/m5OHjEZzIF8WXrKilxubAUPiR/wR/YEPqLNLEO08ID8hQoYUR7hnjORby1Trwb
- TDonsBPZh0hcwjQrlfugBxOS31CAPWS8ICDcHzhSSx9B2A12Itzs8VT2PGA61edaqRMW
- ZM/g==
+ bh=pBIdq1IerXBEqjEqdh2t+EBfxfqKjlwofVB6m7BdaPs=;
+ b=IC5isKD2AGnbV2cLrC41+CeniIOmt2zJzk2VITofEoxnK8iqYFacHfBO39oGLfJW69
+ wJCggoay6BVoOXKFn1fDzEQ/S3zv80+QsXflFA4CWaYIWn25HrJMH+GdUQcUhab3np6x
+ ahm0aFnedNfZQwzE8WBoXh1FLcRc5+xiiEJbThz1oDIWkxuPCCzao5VmVc4P239dyiae
+ 5Rg8wFAqdnTCl0B2EJYoWDdhOQSXwUf4gluTOx/ANYs7hKSOGB9pkBUWlIulyg59jdsP
+ LTi0r6aWb7IBxF4jeHzERX8aoWQhaDMmpo+jarPkPamII5mT/pMxhRtry/+lezSS2Cnx
+ umSA==
 X-Forwarded-Encrypted: i=1;
- AKwUvByZdFwoho/qfioXnu1hnPd9H83Ol4xr/YVrH9jIsQLV7H+3kTvtzV/JN1sHdLcuTY3NA03dDA9EjnR6@nongnu.org
-X-Gm-Message-State: AFuF++myVWAAB63lsiwtGgTzYl8JR9UxT9bky1LNZonzahLBNlLYB9cw
- /qG84jFaLIS73WwTvdOPsO2iZA6BvVhwrkxNrF3EwOlqPvuqCTSC2FUG
-X-Gm-Gg: AYBFou0rFvifSNaOxUKzb0ZeGOte6KG7w0CrT6GJNYL3eysw2p5SrbZhW4RtYAj+SYo
- +asOyqNlA6Simssb/Aa9meVBXyKcCwN29CRjhcA530NYjenOvW/QHrG3vC52+xP7A+nlboQZb6L
- G9g+Cd4ZSJy8llAk8vm45XL2q306D8u8BBFdhkRVF8pLZryZsDwGXK2lEJZr52PwwAoojj4Pai+
- PMvQuqwDhWe14Jm6aCfs4W8BHWXCKEd/LRv6PV0GabrvKx/VPcZLF0Iucn6qEcGfaXp8iu+AuB8
- COzQmO66r+gRHYg7y8K733kw++U28A+39IG9MYh801yO2ri6BkR1Mi+oAU1WnUKt0In4V1365iU
- S/5HTB9GDbSJmmN8LqeVu0Lwp4TJburrjPmd1u1m/anWgLjCjUigmOsE2GTppuJXqv2bJoHlU8d
- Cvo6dAIaph3Lo2JNB6TaszOgrQFlPxoFMNzXZGLCQ9Exvv5CFQ5G/tzpAKCXLo6GvsZXwEhOofr
- XvOPO0v5jw2Ypt5UqKhwt/K08QfZ7EXdDevCa0cERRGGjH6TN5mfOrCqrhSJ6wQtdIZcRlIVvKd
- JXwo/9iOruRv4Q5iK9ee++s7xFbikyc=
-X-Received: by 2002:a17:90b:1a84:b0:37f:e326:6557 with SMTP id
- 98e67ed59e1d1-398f826de4fmr327270a91.4.1788142562350; 
- Sun, 30 Aug 2026 19:16:02 -0700 (PDT)
+ AKwUvBxqjSE4RaSfWb9jIZIGCuNdS8UMhQU/FTFZK7au0r67onwUQKI7VfsQW5lEzay8KLomG5QkKKmbcCzm@nongnu.org
+X-Gm-Message-State: AFuF++kv1LRDVBx01jC9QJfwv+jg47oI8ofOdADLKwCOHOISxB/T/XoH
+ W6oGPvKJGk4FO3hqBbb8gNS2JdOpgQIya8iY/S0HtpLc4Xchog62OV7BS07DGw==
+X-Gm-Gg: AYBFou0PbSDrP8JrjVDJQx6UIobAJRM7gDseAz7ZaY8GABf3qATlGq+jxPG3iKapu9T
+ AROeyZKlL1MBjYgycR8oqo9mu1J7Aq8yhv9NcV9pg7y0R4ZeyKqGZQCjtL9DFfQIG9VXgLcxvfI
+ c12ueaQLOg5E4jg7qqxR90NDV8o2CAXCmWJWKtf5VPyHE9sV7NhIsgMEO6hbV5FmoDs2xlELqm/
+ 8/Plvgo4tCqMOl4eoIeevefpdPMnC45fJ9p08B15slWXJTd1OuQLqpW3BaaoAySV+E+o+Tc9/wm
+ 5qUCj038L3NZwpw/SeVWM4RWLUz1ja4jUMYXrSs9thChVE+kR8TiS/YdbyhzM3vLz8dgLVn/xJ8
+ FO9LyqJx+kl9Vgy/wDDKfYtWy/gUbX3SJ4kBunuoZPBgN2UalYNoIhSLF9JH+6OtcEk3ioRzrD3
+ Z3JZK5WN5X4v/135/ppB7wTBvtbYDtVVrpd+WOBi/NwFAfkUzlM+UR1/XtlklkClrgNqH9hgHq2
+ GrEie6nFK9tKSndzwc8vWhpE4v8s0QaEQtq9hwbXjy3Hq6bBbUxnoDlekTjnqExpoWJcK2tyE4y
+ 9IPw/CdywG+vzgWyrtWT
+X-Received: by 2002:a17:90b:534b:b0:398:ceef:edbd with SMTP id
+ 98e67ed59e1d1-398ceefee8emr9742123a91.18.1788142557335; 
+ Sun, 30 Aug 2026 19:15:57 -0700 (PDT)
 Received: from donnager-debian.. ([180.150.112.50])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-396b186807bsm20071240a91.12.2026.08.30.19.15.57
+ 98e67ed59e1d1-396b186807bsm20071240a91.12.2026.08.30.19.15.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 30 Aug 2026 19:16:01 -0700 (PDT)
+ Sun, 30 Aug 2026 19:15:56 -0700 (PDT)
 From: Joel Stanley <joel@jms.id.au>
 To: Alistair Francis <alistair.francis@wdc.com>,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
@@ -80,17 +80,17 @@ Cc: Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Portia Stephens <portias@oss.tenstorrent.com>,
  =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
  qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Subject: [PATCH v2 06/16] hw/riscv/cps: Map interrupt controllers in SoC
- container
-Date: Mon, 31 Aug 2026 11:44:47 +0930
-Message-ID: <20260831021500.82565-7-joel@jms.id.au>
+Subject: [PATCH v2 05/16] hw/intc/sifive_plic: Take a MemoryRegion for the
+ created device
+Date: Mon, 31 Aug 2026 11:44:46 +0930
+Message-ID: <20260831021500.82565-6-joel@jms.id.au>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260831021500.82565-1-joel@jms.id.au>
 References: <20260831021500.82565-1-joel@jms.id.au>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::534;
- envelope-from=joel.stan@gmail.com; helo=mail-pg1-x534.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1035;
+ envelope-from=joel.stan@gmail.com; helo=mail-pj1-x1035.google.com
 X-Spam_score_int: -16
 X-Spam_score: -1.7
 X-Spam_bar: -
@@ -114,53 +114,145 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The CPS device maps some devices into a container region, but the
-ACLINT and APLIC were mapped directly to system_memory.
+sifive_plic_create() maps the device it creates into system_memory,
+which prevents its use by SoCs that map devices into their own memory
+container.
 
-Pass the container memory region to the interrupt controller helpers so
-all CPS devices live in the container. The location of devices in memory
-for the boston-aia machine is unchanged.
+Add a MemoryRegion parameter and map the device into it instead of
+calling sysbus_mmio_map(). All callers pass system_memory, so there is
+no change in behaviour.
 
 Signed-off-by: Joel Stanley <joel@jms.id.au>
 ---
- hw/riscv/cps.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ include/hw/intc/sifive_plic.h | 3 ++-
+ hw/intc/sifive_plic.c         | 6 ++++--
+ hw/riscv/k230.c               | 3 ++-
+ hw/riscv/microchip_pfsoc.c    | 3 ++-
+ hw/riscv/shakti_c.c           | 3 ++-
+ hw/riscv/sifive_e.c           | 2 +-
+ hw/riscv/sifive_u.c           | 3 ++-
+ hw/riscv/virt.c               | 1 +
+ 8 files changed, 16 insertions(+), 8 deletions(-)
 
-diff --git a/hw/riscv/cps.c b/hw/riscv/cps.c
-index d2fd9638a08d..21daaf4943d8 100644
---- a/hw/riscv/cps.c
-+++ b/hw/riscv/cps.c
-@@ -135,7 +135,7 @@ static void riscv_cps_realize(DeviceState *dev, Error **errp)
-     for (i = 0; i < num_of_clusters; i++) {
-         uint64_t cm_base = GLOBAL_CM_BASE + (CM_SIZE * i);
-         uint32_t hartid_base = i << MHARTID_CLUSTER_SHIFT;
--        s->aplic = riscv_aplic_create(get_system_memory(),
-+        s->aplic = riscv_aplic_create(&s->container,
-                                       cm_base + AIA_PLIC_M_OFFSET,
-                                       AIA_PLIC_M_SIZE,
-                                       hartid_base, /* hartid_base */
-@@ -143,7 +143,7 @@ static void riscv_cps_realize(DeviceState *dev, Error **errp)
-                                       APLIC_NUM_SOURCES,
-                                       APLIC_NUM_PRIO_BITS,
-                                       false, true, NULL);
--        riscv_aplic_create(get_system_memory(),
-+        riscv_aplic_create(&s->container,
-                            cm_base + AIA_PLIC_S_OFFSET,
-                            AIA_PLIC_S_SIZE,
-                            hartid_base, /* hartid_base */
-@@ -153,10 +153,10 @@ static void riscv_cps_realize(DeviceState *dev, Error **errp)
-                            false, false, s->aplic);
-         /* PLIC changes msi_nonbroken to ture. We revert the change. */
-         msi_nonbroken = false;
--        riscv_aclint_swi_create(get_system_memory(),
-+        riscv_aclint_swi_create(&s->container,
-                                 cm_base + AIA_CLINT_OFFSET,
-                                 hartid_base, MAX_HARTS, false);
--        riscv_aclint_mtimer_create(get_system_memory(),
-+        riscv_aclint_mtimer_create(&s->container,
-                                    cm_base + AIA_CLINT_OFFSET +
-                                    RISCV_ACLINT_SWI_SIZE,
-                                    RISCV_ACLINT_DEFAULT_MTIMER_SIZE,
+diff --git a/include/hw/intc/sifive_plic.h b/include/hw/intc/sifive_plic.h
+index 32973dbf281e..13fe6b2909d2 100644
+--- a/include/hw/intc/sifive_plic.h
++++ b/include/hw/intc/sifive_plic.h
+@@ -76,7 +76,8 @@ struct SiFivePLICState {
+     qemu_irq *s_external_irqs;
+ };
+ 
+-DeviceState *sifive_plic_create(hwaddr addr, char *hart_config,
++DeviceState *sifive_plic_create(MemoryRegion *mr, hwaddr addr,
++    char *hart_config,
+     uint32_t num_harts,
+     uint32_t hartid_base, uint32_t num_sources,
+     uint32_t num_priorities, uint32_t priority_base,
+diff --git a/hw/intc/sifive_plic.c b/hw/intc/sifive_plic.c
+index 9c84ff06a9fd..b6472443276b 100644
+--- a/hw/intc/sifive_plic.c
++++ b/hw/intc/sifive_plic.c
+@@ -473,7 +473,8 @@ type_init(sifive_plic_register_types)
+ /*
+  * Create PLIC device.
+  */
+-DeviceState *sifive_plic_create(hwaddr addr, char *hart_config,
++DeviceState *sifive_plic_create(MemoryRegion *mr, hwaddr addr,
++    char *hart_config,
+     uint32_t num_harts,
+     uint32_t hartid_base, uint32_t num_sources,
+     uint32_t num_priorities, uint32_t priority_base,
+@@ -499,7 +500,8 @@ DeviceState *sifive_plic_create(hwaddr addr, char *hart_config,
+     qdev_prop_set_uint32(dev, "context-stride", context_stride);
+     qdev_prop_set_uint32(dev, "aperture-size", aperture_size);
+     sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
+-    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, addr);
++    memory_region_add_subregion(mr, addr,
++        sysbus_mmio_get_region(SYS_BUS_DEVICE(dev), 0));
+ 
+     plic = SIFIVE_PLIC(dev);
+ 
+diff --git a/hw/riscv/k230.c b/hw/riscv/k230.c
+index 1ef4260c5391..6b0f0453c80b 100644
+--- a/hw/riscv/k230.c
++++ b/hw/riscv/k230.c
+@@ -134,7 +134,8 @@ static DeviceState *k230_create_plic(int base_hartid, int hartid_count)
+     plic_hart_config = riscv_plic_hart_config_string(hartid_count);
+ 
+     /* Per-socket PLIC */
+-    return sifive_plic_create(memmap[K230_DEV_PLIC].base,
++    return sifive_plic_create(get_system_memory(),
++                              memmap[K230_DEV_PLIC].base,
+                               plic_hart_config, hartid_count, base_hartid,
+                               K230_PLIC_NUM_SOURCES,
+                               K230_PLIC_NUM_PRIORITIES,
+diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
+index a6026776d4de..1f6d9f5ae1ed 100644
+--- a/hw/riscv/microchip_pfsoc.c
++++ b/hw/riscv/microchip_pfsoc.c
+@@ -282,7 +282,8 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
+     plic_hart_config = riscv_plic_hart_config_string(ms->smp.cpus);
+ 
+     /* PLIC */
+-    s->plic = sifive_plic_create(memmap[MICROCHIP_PFSOC_PLIC].base,
++    s->plic = sifive_plic_create(system_memory,
++        memmap[MICROCHIP_PFSOC_PLIC].base,
+         plic_hart_config, ms->smp.cpus, 0,
+         MICROCHIP_PFSOC_PLIC_NUM_SOURCES,
+         MICROCHIP_PFSOC_PLIC_NUM_PRIORITIES,
+diff --git a/hw/riscv/shakti_c.c b/hw/riscv/shakti_c.c
+index 86ff8f8fcaab..62052bf7c61e 100644
+--- a/hw/riscv/shakti_c.c
++++ b/hw/riscv/shakti_c.c
+@@ -115,7 +115,8 @@ static void shakti_c_soc_state_realize(DeviceState *dev, Error **errp)
+ 
+     sysbus_realize(SYS_BUS_DEVICE(&sss->cpus), &error_abort);
+ 
+-    sss->plic = sifive_plic_create(shakti_c_memmap[SHAKTI_C_PLIC].base,
++    sss->plic = sifive_plic_create(system_memory,
++        shakti_c_memmap[SHAKTI_C_PLIC].base,
+         (char *)SHAKTI_C_PLIC_HART_CONFIG, ms->smp.cpus, 0,
+         SHAKTI_C_PLIC_NUM_SOURCES,
+         SHAKTI_C_PLIC_NUM_PRIORITIES,
+diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
+index 0ea444f43bc5..81d7995ddcfb 100644
+--- a/hw/riscv/sifive_e.c
++++ b/hw/riscv/sifive_e.c
+@@ -214,7 +214,7 @@ static void sifive_e_soc_realize(DeviceState *dev, Error **errp)
+         memmap[SIFIVE_E_DEV_MROM].base, &s->mask_rom);
+ 
+     /* MMIO */
+-    s->plic = sifive_plic_create(memmap[SIFIVE_E_DEV_PLIC].base,
++    s->plic = sifive_plic_create(sys_mem, memmap[SIFIVE_E_DEV_PLIC].base,
+         (char *)SIFIVE_E_PLIC_HART_CONFIG, ms->smp.cpus, 0,
+         SIFIVE_E_PLIC_NUM_SOURCES,
+         SIFIVE_E_PLIC_NUM_PRIORITIES,
+diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+index 58b4744318f8..1cc6be744f08 100644
+--- a/hw/riscv/sifive_u.c
++++ b/hw/riscv/sifive_u.c
+@@ -772,7 +772,8 @@ static void sifive_u_soc_realize(DeviceState *dev, Error **errp)
+     plic_hart_config = riscv_plic_hart_config_string(ms->smp.cpus);
+ 
+     /* MMIO */
+-    s->plic = sifive_plic_create(memmap[SIFIVE_U_DEV_PLIC].base,
++    s->plic = sifive_plic_create(system_memory,
++        memmap[SIFIVE_U_DEV_PLIC].base,
+         plic_hart_config, ms->smp.cpus, 0,
+         SIFIVE_U_PLIC_NUM_SOURCES,
+         SIFIVE_U_PLIC_NUM_PRIORITIES,
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index 6e4b39315aaa..6d061a80ca9e 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -1138,6 +1138,7 @@ static DeviceState *virt_create_plic(const MemMapEntry *memmap, int socket,
+ 
+     /* Per-socket PLIC */
+     return sifive_plic_create(
++             get_system_memory(),
+              memmap[VIRT_PLIC].base + socket * memmap[VIRT_PLIC].size,
+              plic_hart_config, hart_count, base_hartid,
+              VIRT_IRQCHIP_NUM_SOURCES,
 -- 
 2.47.3
 
