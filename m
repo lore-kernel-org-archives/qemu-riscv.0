@@ -4,110 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 544DFC61DE2
-	for <qemu-riscv@archiver.kernel.org>; Mon, 31 Aug 2026 01:57:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 773A6C61DE2
+	for <qemu-riscv@archiver.kernel.org>; Mon, 31 Aug 2026 02:16:06 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x0rH5-0000Dw-8J; Sun, 30 Aug 2026 21:57:27 -0400
+	id 1x0rYg-0003LD-NE; Sun, 30 Aug 2026 22:15:38 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1x0rH4-0000Dc-BY
- for qemu-riscv@nongnu.org; Sun, 30 Aug 2026 21:57:26 -0400
-Received: from mail-yx1-xb12c.google.com ([2607:f8b0:4864:20::b12c])
+ id 1x0rYd-0003Kb-9k
+ for qemu-riscv@nongnu.org; Sun, 30 Aug 2026 22:15:36 -0400
+Received: from mail-pg1-x535.google.com ([2607:f8b0:4864:20::535])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1x0rH0-0004vx-Vq
- for qemu-riscv@nongnu.org; Sun, 30 Aug 2026 21:57:26 -0400
-Received: by mail-yx1-xb12c.google.com with SMTP id
- 956f58d0204a3-66e63c2c9e1so910810d50.0
- for <qemu-riscv@nongnu.org>; Sun, 30 Aug 2026 18:57:22 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1788141441; cv=none;
- d=google.com; s=arc-20260327;
- b=Uqji+LiCIA4s8M3kdurdk9NMHyNQQvT23XGJQlMeHezmKMDKDwmtkSkQVtbItzNZfp
- Jc4HD7FjiN9jQFZHhc3q3NqQFUGu5gTPQKNk0kvB4KZzlZfWd45u7cnEODNLPTCPT+pb
- WOREK7Z56ua0rH5Jk4z6F9F+r7gMshm08tSIfgYGiQLQ/rUUfH/got2p8tBfPJL3ckbD
- RKsjmmAGC0pUvky4rk66nDUpfTMdETxvy+3xuidQ6Mpc6GKDjuC8LSqKQAqDulnj5tG9
- zrho6RmIKqjv+rZeQZkjfE8YNS0hHFqg1DDipvuX5/LUhsNH9yh4PD51xx7c9bj5LQPW
- 2ipQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=EHWkIpJjbvCM8i9EVzGkfSqsE5M0tKBuD6Cyeoh+D9k=;
- fh=NF652YQ8WlNLTaNFRR3BFIV+qUJf9Dd7aS1HelgsxUs=;
- b=CVLF99W+N2AlUCQxIK5RsCymZEW2MWKFZAW9I24yA1scfd6a3C7QCZZQqHCAz5cDrA
- OVnNu4XeDEWvk6vBQZZptfGWIWRUSuCGUR0aK8fne6SckkepUWh527nEEc8TYYY15+jk
- HUOwpHy2plSwncSl8cMHDgO48FkoAORuYXNJkeqKaaZpMRuEqawbHV6yaBzKzhFh1ptl
- vtXYMl7y1XBQHQO/FB2IR6SO72kc4EvXiLX7YtnopgOe2DCNAYoqNQlDpy+6htN6LGY6
- PnlvGth5nLYAU/kkGU2xbRce9zXGk7VcqaXLdZ/tlb/tczfv0fMOZe9cG2cax7RoyQQn
- cMag==; darn=nongnu.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ id 1x0rYa-0007V8-U7
+ for qemu-riscv@nongnu.org; Sun, 30 Aug 2026 22:15:35 -0400
+Received: by mail-pg1-x535.google.com with SMTP id
+ 41be03b00d2f7-cc1cc97b84bso2557056a12.1
+ for <qemu-riscv@nongnu.org>; Sun, 30 Aug 2026 19:15:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=jms.id.au; s=google; t=1788141441; x=1788746241; darn=nongnu.org;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=EHWkIpJjbvCM8i9EVzGkfSqsE5M0tKBuD6Cyeoh+D9k=;
- b=VA6vrHTo0E6Aq2xSYI9ZWN3i6pD0uDiud1GTQB8KTWYa0Ka3YDsFNBLwOo+Dex8MFk
- mMVeNTol3NKG30s/MnE6zwqvmuKaxiWqWdL+eLoQAmQmIPBlQXMkk8/m0OxxxmbeQKLU
- QLNqV/QVg6U79gMFR5yF+HiL4h36SgQNBSxT8=
+ d=gmail.com; s=20251104; t=1788142531; x=1788747331; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:sender:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=mz4O3HnecUoq3Wz4In0RBCgqMHQ8636EaSh9x7GcB4c=;
+ b=b4RhYoZBQ094DX4v3HLk9+/hszmdG/I0VJHqXj29rLenT/qyU5dGH0C318z0HSPU/G
+ pWoQdgh+EN8kJIs8XVJ0eE2m54493cs4YENjWWM2buBZKBmTcPChxzmkB5RvdEOYKCTh
+ FLnqjBkGFv3lcUr8ul9BCXbSlCBgJ35F6FiPFH75Ihia+4UcW1ZFFXyhSEd1SEYVvCmI
+ 9usGL3v857Av0UMkxPs4BiuH6sDO1NiCMXsItb3S+C/2qCzdHMI3HaRhOQTixiH3RRpo
+ tDbLpBM9afRv5njDwZWydvfu/FvQaBH0sGQzBSYbjFTN89sZgS9p82SnNqevMlISM5i4
+ wadA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788141441; x=1788746241;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=EHWkIpJjbvCM8i9EVzGkfSqsE5M0tKBuD6Cyeoh+D9k=;
- b=Rl1zx8tYSNmIONnBI/jXn/Ro+2kiYzrI/u9iBw39byczJGhI1Wnie+LTQacti4cCFV
- DvHBv7lWpDUZzVwvi5SDQg41hu4mZSe3pyYq2GhqE077KRRFqzvhMXzT4PRMqzzqE3Z6
- MJyDmgZN591Zr3ymaF20kmi5bqmTq8D/jkt1v44QucG8MtYRON+UwO5oZ7r+eN7NUEz6
- 1cp9UD760+auAGgBlWRF4vN7/x/EryozvJSBPoXq5N6MiS/wJgjlTRqSpZ4IfEVuIxUn
- IXWM2NkQjWDX5IK626k3Y8uhLB2JgYu6x3LvBUYHPF/677dHnGMWsZAJHAqlFsxRcMZG
- y7fQ==
+ d=1e100.net; s=20251104; t=1788142531; x=1788747331;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:sender:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=mz4O3HnecUoq3Wz4In0RBCgqMHQ8636EaSh9x7GcB4c=;
+ b=YyB6ZwEJidOK0YQl+U9LnJAV42XBAH4D4i0FjUKtNgaya4vtpkdCvH7QFjVnETgOKI
+ EMrmvu9HlwSEr48HL5JmlaU+EezcfnrZITKl70s9l6iwb7ljIRJa4vr/GrRkJCrlAZbz
+ Nx9atw+q3aTa2xpygJ/pz5Q+SBVyl5QCMvRWifMyflBLMAtmcYOuH/Yhlq77OkSkJGjf
+ nevIY4jfulnlKOLWr1DrQDvSs7A8LHp+8egTL1fWHOypjHaktFTjZ9D9rzMqwS5R0JJ7
+ Y8P2b/ThK40seRmNRXjRAp36yzud5eVH06/pvUHuLTlmRjb5H9tvMLXkcVzO3ExzxV+q
+ VTtA==
 X-Forwarded-Encrypted: i=1;
- AKwUvBx4ZcOkQeOVukVz6u0Xicnmc7wHFO75/1AgxlEkuUdxGHU2I4msRULgi/8KgBzlenquJ0CT9lJi3WZW@nongnu.org
-X-Gm-Message-State: AFuF++neCoVqlq43KE70yX4Rtz0jjpGDP8Sk0etAEzEH23I0GyrXPxix
- vcyjUseokdtGdC71uHXqIzK6WhORC6YyMl9l4+QNB8b8TBpCLfWQkkcuhWLxVGS09+L4Aa2lkrc
- eF5FdbZa7YxUTjFRnC3jHbSU7m5RiDGs=
-X-Gm-Gg: AYBFou3TJYCzi6UDXhOZssbFbziZwUwbwrZN2UUCmbJk1+b8+pihmP/BDZ/EqadhhpO
- taB+vcM3eSEjnqyKG/TmbB3x+yC+CN3z0Vn3L8oepLrO7xQZ/C2k7fFdHtb6CB4ANcYMixfQkvQ
- c34LTM1ZyobdCLwLPbv7v627uaXFRClhHyGWohNgQZHAjr4g7D/rgxrJsLnmb8B5SLC3I87HI1f
- s9CaLO68SfHSjX0DCtOQADYgjLb2auUpK4sy3UhXjOT4se22hzul1ojchgvtqP5t2fwXt67wdcE
- u701vmTLFELza9LidU/ht3Y8tJxbyZCu5NdF7JdLgRX2CoHOj3bbyvcIdojMP07X4Kqtb9OpZ+b
- vjUF3t+zVdhgvu8FRcY1aOvyo31g795Hr0vdAzlKepW9xwwiQjxkGr9WINaC8kBJ0O+LqY++gsA
- mKAe+nakhT3LWmJUj5
-X-Received: by 2002:a05:690e:dcc:b0:66f:7717:a6f0 with SMTP id
- 956f58d0204a3-66f7717ad33mr1396300d50.9.1788141441358; Sun, 30 Aug 2026
- 18:57:21 -0700 (PDT)
-MIME-Version: 1.0
-References: <20260826220528.54516-1-joel@jms.id.au>
- <20260826221154.54577-1-joel@jms.id.au>
- <20260826221154.54577-6-joel@jms.id.au>
- <be675569-27ef-46cf-82bf-563852bbe66e@oss.qualcomm.com>
-In-Reply-To: <be675569-27ef-46cf-82bf-563852bbe66e@oss.qualcomm.com>
+ AKwUvBxyu9gKW6qqv+NCAes0p4v5qhVkSCo2w7kLsvEWMbuqzTzk+DS/BtBvl+lbvkdefm4EWKSh+kydkrjw@nongnu.org
+X-Gm-Message-State: AFuF++kI+MpJAvMmNAX11NCD6ASpIHb/VM/OIhcKsiaceeGP/l2LqdhA
+ fFYLvUNHnhgZbngior+cFp/N1ikXnIBzsOvB+2YamRBHWZWzOtT33g3R
+X-Gm-Gg: AYBFou3ffEuKisdeB5JOPXNWIvhGEHbZaVAtiJRGpAwJpnM7rWch2v3tcJ3UYb+vPK+
+ 6XRouIM5mkCM+6viefRvtn0D1o0HZlvgDKoVWNPBgFyaiAX79jfiqVtPgOAV7Pz1FZ5hBnahy2B
+ XPlghdr2ATMvNr3XnvPuGIsMy3GY/zYx5A3vL2va3dBmvm39PD/v12u35qqPHQZ5s2divSsP1ea
+ mF3SlCDNX1ZTEqYmxeSSabUhilLOouqgb2jOhYciDbOkL2BBHILWBomRaqQhHokrWvaorXkYqFy
+ HC6zNB6dPIxlvmd2fBjvc5RtVVIbD1sBNOfmn/ZMiQZIJ4jzP1W9Xxd2WqrxR60xH0gePf1Y6xH
+ SRadqbMZol/tFUgpLfLktG4uPLf1CHXqSV9Oxxk7YBJ/+G4yJ57TKarOUm4+Wx2jiCTMW3TgEW1
+ bhCpv93iaNWrlsxt9mqMDJDe3AS5K3FyNovxjqMdI3IUI4aRDb7apekz32KG0sIKiMfZb1jrItJ
+ SBYCjZcl6EoEF/4MwWi8aP8XVpy9WWx0lNgpuCjeIYAh7sN5cmJYwa+/3Ii/JkyOslvZYaSS4Pf
+ anI59l9ClTBmZb8hDAUL
+X-Received: by 2002:a17:90b:2886:b0:398:de86:5ff0 with SMTP id
+ 98e67ed59e1d1-398f88df3c3mr365943a91.19.1788142531121; 
+ Sun, 30 Aug 2026 19:15:31 -0700 (PDT)
+Received: from donnager-debian.. ([180.150.112.50])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-396b186807bsm20071240a91.12.2026.08.30.19.15.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 30 Aug 2026 19:15:30 -0700 (PDT)
 From: Joel Stanley <joel@jms.id.au>
-Date: Mon, 31 Aug 2026 11:27:10 +0930
-X-Gm-Features: AcwNN1X53eB0-VFKX1pK9bXW42LA3jchxcdYCgFmZq25_dYfGj50ql1BNvrUmys
-Message-ID: <CACPK8XczvftDPUVb=2pX9ofRNA31jhLopeFPse-o6s7h27BVuQ@mail.gmail.com>
-Subject: Re: [PATCH 14/16] hw/riscv: Add property to hart to allow private
- memory
-To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Cc: Alistair Francis <alistair.francis@wdc.com>,
- Portia Stephens <portias@oss.tenstorrent.com>, 
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Chao Liu <chao.liu@processmission.com>, Nicholas Piggin <npiggin@gmail.com>, 
+To: Alistair Francis <alistair.francis@wdc.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Cc: Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Chao Liu <chao.liu@processmission.com>,
+ Nicholas Piggin <npiggin@gmail.com>,
  Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>,
- Michael Ellerman <mpe@kernel.org>, 
- =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>, qemu-riscv@nongnu.org, 
- qemu-devel@nongnu.org
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b12c;
- envelope-from=joel.stan@gmail.com; helo=mail-yx1-xb12c.google.com
+ Michael Ellerman <mpe@kernel.org>,
+ Portia Stephens <portias@oss.tenstorrent.com>,
+ =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Subject: [PATCH v2 00/16] hw/riscv: Socify Atlantis
+Date: Mon, 31 Aug 2026 11:44:41 +0930
+Message-ID: <20260831021500.82565-1-joel@jms.id.au>
+X-Mailer: git-send-email 2.47.3
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::535;
+ envelope-from=joel.stan@gmail.com; helo=mail-pg1-x535.google.com
 X-Spam_score_int: -16
 X-Spam_score: -1.7
 X-Spam_bar: -
 X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.001,
  FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.25,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=no autolearn_force=no
@@ -126,48 +109,83 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, 27 Aug 2026 at 21:48, Daniel Henrique Barboza
-<daniel.barboza@oss.qualcomm.com> wrote:
->
-> On 8/26/2026 7:11 PM, Joel Stanley wrote:
-> > From: Portia Stephens <portias@oss.tenstorrent.com>
-> >
-> > There are platforms where CPUs have different mapping of system memory.
-> > The global system memory does not allow for this. This adds an optional
-> > property to assign a specific memory region to a hart. This allows for a
-> > machine to alias the hart's memory to system memory while the hart only
-> > views memory from its own memory region.
->
-> LGTM but please clarify in the commit msg that the memory region is being
-> assigned to the hart array, not "to a hart".
+v1: https://lore.kernel.org/qemu-riscv/20260826220528.54516-1-joel@jms.id.au/
 
-From the machine side you're right, but I agree with the commit
-message that the memory region assigned to the hart. The property is
-being set on the individual hart, not on the array:
+Changes in v2:
 
-    /* Use private memory instead of system_memory if provided */
-    if (s->memory) {
-        object_property_set_link(OBJECT(&s->harts[idx]), "memory",
-                                 OBJECT(s->memory), &error_abort);
-    }
+ - Reword patch 14 "hart private memory" commit message to clarify hart
+   vs hart array
+ - Fix indentation in patch 4 (riscv_aplic MemoryRegion)
 
-How about:
+Thanks to Daniel and Philippe for the reviews.
 
-"This adds an optional property on the hart array to assign a specific
-memory region. The array passes the region to each hart it creates,
-so a machine can alias the harts' memory to system memory, while
-the harts view memory from their own memory region."
+Original commit message:
 
+This addresses the review given by Cedric on v1 of the Atlantis patches,
+where he suggested making the machine a SoC. This is the pattern
+followed by the Aspeed ARM machines, where the SoC represents the
+modelled hardware, attaching its devices to a memory container, with the
+SoC instantiated by a QEMU machine that provides the memory container
+and the machine's RAM.
 
->
-> E.g.:
->
-> "(...) This adds an optional property to assign a specific memory region to the
->   hart array. This allows for a machine to alias the array's memory to
->   system memory while the array only views memory from its own memory region."
->
->
-> With the commit msg change:
->
-> Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Aside from the clean abstraction that this encourages, this pattern will
+be useful in adding other SoCs to the Atlantis machine, such as the RCPU
+(boot microcontroller) and CPL (Cluster Power Logic microcontroller).
+
+The series converts the RISC-V interrupt controllers to take a
+MemoryRegion for mapping themselves, with no change in behaviour for
+existing machines, and then cleans up the CPS device to place its
+devices in the memory container provided.
+
+The next few patches clean up the Atlantis machine to make extracting
+the SoC device and mapping it in a container relatively straightforward.
+
+Joel Stanley (15):
+  hw/riscv/aia: Take a MemoryRegion for the created devices
+  hw/intc/riscv_aclint: Take a MemoryRegion for the created devices
+  hw/intc/riscv_imsic: Take a MemoryRegion for the created device
+  hw/intc/riscv_aplic: Take a MemoryRegion for the created device
+  hw/intc/sifive_plic: Take a MemoryRegion for the created device
+  hw/riscv/cps: Map interrupt controllers in SoC container
+  hw/riscv/atlantis: Make UART unimp region a SoC device
+  hw/riscv/atlantis: Remove unused fdt_size
+  hw/riscv/atlantis: Rename hart array 'soc' to 'cpus'
+  hw/riscv/atlantis: Rework device tree creation
+  hw/riscv/atlantis: Use local reference for system memory
+  hw/riscv/atlantis: Decouple RAM size from MachineState
+  hw/riscv/atlantis: Make TTAtlantisState own memory containers
+  hw/riscv/atlantis: Extract an Atlantis SoC device
+  hw/riscv/atlantis: Map the SoC through a memory container
+
+Portia Stephens (1):
+  hw/riscv: Add property to hart to allow private memory
+
+ hw/riscv/aia.h                 |   2 +-
+ include/hw/intc/riscv_aclint.h |   7 +-
+ include/hw/intc/riscv_aplic.h  |   2 +-
+ include/hw/intc/riscv_imsic.h  |   3 +-
+ include/hw/intc/sifive_plic.h  |   3 +-
+ include/hw/riscv/riscv_hart.h  |   2 +
+ include/hw/riscv/tt_atlantis.h |  32 +++-
+ hw/intc/riscv_aclint.c         |  12 +-
+ hw/intc/riscv_aplic.c          |   5 +-
+ hw/intc/riscv_imsic.c          |   6 +-
+ hw/intc/sifive_plic.c          |   6 +-
+ hw/riscv/aia.c                 |  14 +-
+ hw/riscv/cps.c                 |  12 +-
+ hw/riscv/k230.c                |   9 +-
+ hw/riscv/microchip_pfsoc.c     |   8 +-
+ hw/riscv/riscv_hart.c          |   8 +
+ hw/riscv/shakti_c.c            |  10 +-
+ hw/riscv/sifive_e.c            |   6 +-
+ hw/riscv/sifive_u.c            |  10 +-
+ hw/riscv/spike.c               |   4 +-
+ hw/riscv/tt_atlantis.c         | 277 +++++++++++++++++++++------------
+ hw/riscv/virt.c                |  21 ++-
+ hw/riscv/xiangshan_kmh.c       |  17 +-
+ 23 files changed, 317 insertions(+), 159 deletions(-)
+
+-- 
+2.47.3
+
 
