@@ -4,150 +4,118 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 160DEC61DD3
-	for <qemu-riscv@archiver.kernel.org>; Mon, 31 Aug 2026 05:16:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 964C7C61DE8
+	for <qemu-riscv@archiver.kernel.org>; Mon, 31 Aug 2026 05:50:54 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x0uNm-000200-Or; Mon, 31 Aug 2026 01:16:34 -0400
+	id 1x0uue-0007tX-0n; Mon, 31 Aug 2026 01:50:32 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1x0uNl-0001zM-ID
- for qemu-riscv@nongnu.org; Mon, 31 Aug 2026 01:16:33 -0400
-Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1x0uNk-0007Zz-11
- for qemu-riscv@nongnu.org; Mon, 31 Aug 2026 01:16:33 -0400
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 67V52a7q2764504
- for <qemu-riscv@nongnu.org>; Mon, 31 Aug 2026 05:16:31 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- +tBUK7082SRujEg3Eh+b1JFxPvncwncvCGoOghE7fAo=; b=KXYtBI+/taPfRQg3
- IRR6lD0KYsJfxbw3mFIWWNGQJckbU2bb8scHz0URUPL1bH3lojtnUMFcInjuBmQM
- lAJ11N6o6uHITu+Ix6BgEMV00HQrgW1KFfP1bImc69AEEisWkP8cFgYQVSD5zDXG
- VxNtb3uiJa/pBgiOXcprC0H2Wg9u3D2B5zY/BMQC9XA2ii/irNJjrLagVftuSj48
- khlTDnELNqmyQNt4x8TK2UwC3kJfiL2BGD5Uy+U7t1N2ohlQQn+7ohSxnKOCMKZo
- 49WpdzqKMxP3hcsU8wYinJeAZ8WbrDKOlivW6jkc7oW3fveOmTNbi1MsTQCGH1E+
- t30xqg==
-Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com
- [209.85.222.200])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gbqgympfq-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Mon, 31 Aug 2026 05:16:30 +0000 (GMT)
-Received: by mail-qk1-f200.google.com with SMTP id
- af79cd13be357-938153538caso554165285a.1
- for <qemu-riscv@nongnu.org>; Sun, 30 Aug 2026 22:16:30 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
+ id 1x0uub-0007s3-Ie
+ for qemu-riscv@nongnu.org; Mon, 31 Aug 2026 01:50:29 -0400
+Received: from mail-yx1-xb130.google.com ([2607:f8b0:4864:20::b130])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
+ id 1x0uuZ-0002Ef-ID
+ for qemu-riscv@nongnu.org; Mon, 31 Aug 2026 01:50:29 -0400
+Received: by mail-yx1-xb130.google.com with SMTP id
+ 956f58d0204a3-66f79f58123so490043d50.1
+ for <qemu-riscv@nongnu.org>; Sun, 30 Aug 2026 22:50:27 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1788155426; cv=none;
+ d=google.com; s=arc-20260327;
+ b=mG8u5pMVkrYECMHHSCY10a1iXEmP3qfXwArrO+yrMC2XcSpome1mYKSgEKhfzKZxnO
+ n8B3MsSgK5RK6d83H0LLiF0wKdxwedOLuvR4SYKF/qnQ1tzFKxo7UsTvrN3Qqr+DCgmF
+ 2z5tJVEkst43X4IJ/ntQHo/u7urezzFvQDgEzaTca3MVs64iB5Bia1M1h605EXDLo3VB
+ ZsXekFW7p43CX4ovoOSfRJXcMj053fKflZZgSQZBN3LtADfwTaXIwmSjCBc3fsFIbUSl
+ IYdrES625sFZ33L33uCxasWqjKRYu+tay+BIriGFH47yYuaE+J6ElCk9irO2we9edQI6
+ 4p2A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=TrDTqsDtksxcqWEKP5dvuqCGL81ZMfNxkLMJwHT9lmo=;
+ fh=q+h7YXGEFqi0cOy3G077pzNFPG5lvI7v1+u4FH9MOpQ=;
+ b=Swgwd54/It4fX80XC7vCl/XddsGQkET587s9b2cCzB+I5ibicMob6P1Lk6MSddBuHA
+ a6QmydoSUWeyTXIbZfIApRfDkRGEKyWpSxLNpybDIZ443skn+MLBfjck5CHTNRONeDPR
+ YzZurkC+8tBn8MohKQ/3ODFDutJa6XWGlVa8gccPwKitlYzo4VEoODcZj/bqFxRordgg
+ KqfgOUyXMoMhx1pW9eqwIScyEJr5XDvfm8s5cbIg3u39+XJ9syJP/SSybNJG8Ja3YqCX
+ wrUAPG+w0hdZW0IzCnj+WyBShcO0BhcGzWoh6cG0bUWvcyLfEfwcinJIX7rcxwzhwrJB
+ slIA==; darn=nongnu.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1788153390; x=1788758190; darn=nongnu.org;
- h=content-transfer-encoding:content-type:in-reply-to:from:references
- :cc:to:content-language:subject:user-agent:mime-version:date
- :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=+tBUK7082SRujEg3Eh+b1JFxPvncwncvCGoOghE7fAo=;
- b=jhTqytxu1V46f9zSokFyvJpyiHEIogcPPt2eqGn8alS4LIaWBaHACdDx3g4Q4cX26f
- R08KkXEJY2t8vsvqvPbz/c3F5cywrd0Pgse3YsGjgx36ePGPRl6sPNj80Cuy3GIZFiIU
- HSrDuutKC4kIZn7kBAgvQf1Vg8cENqMWXHqqYWiaV7zpO41hgOLebdRH27uyB4csalJa
- eLK8JkB6FDWlDJdUtXFWhBNfep61n0qDaB9eHAE2FN2+kmJtKp6QMpyAgA/tF3nh1WBO
- peR3yXhYaKjfosEBC0skumg/M7XRch8Yg72oTgeBRt2Xh2lIZyYbg9GKZ9gj3hWvUGx7
- GEow==
+ d=jms.id.au; s=google; t=1788155426; x=1788760226; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=TrDTqsDtksxcqWEKP5dvuqCGL81ZMfNxkLMJwHT9lmo=;
+ b=jqhugEjp/oNRClf7iVeIABdad4osZ5ewl5D4kQ+iXMJHqbMS2ssMehTOytVD4IDH8J
+ v5kM7gQlzwRWUxEqU5g4s1l+cCk5YSYOgtZ+r84fX9SlWLkO6EkngtTf6+ITH1ICaJEE
+ 0O5dW111cPQT3HrnbzhZsdRxI92lqUmHpynZk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788153390; x=1788758190;
- h=content-transfer-encoding:content-type:in-reply-to:from:references
- :cc:to:content-language:subject:user-agent:mime-version:date
- :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=+tBUK7082SRujEg3Eh+b1JFxPvncwncvCGoOghE7fAo=;
- b=DnKVe7TuhAMgqbz33DkvvtQyWFXYj8HkNPD0ObAZaNzb5Btu1R16PNPD8ZvdT/TuhD
- H+4DB146g0lKmk8auhL9gj1DRHO+Nm0x1ASgBXt8rOPoBjaUfdaCwdjiX7+oMKoq5rP8
- W/clnj2uyMKAEY2xl5wZS4n0WAfoZeoJa4azI1W4DNXQnTTN5oQ3n1QPdy9NFR43yQi0
- FlQLC2hpG7PU/VuhWcP4qSTpxchDLA/3KevVRJfyl1ZaSXvB+J6vI30zRaV3+Wb0xL5y
- G+xTYu3JpS+DbCdTXzGnqDZdGbGWBWbP/RgP+bDrumQopHFwpy/KNCpV0Xl/Snhgauw0
- +sIg==
+ d=1e100.net; s=20251104; t=1788155426; x=1788760226;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=TrDTqsDtksxcqWEKP5dvuqCGL81ZMfNxkLMJwHT9lmo=;
+ b=S3w243rBoK4RuGTEYiOkomM9tz+N+sf0KS0PdhSmkMw/MhsWG/sfDJwH3wlj0999GO
+ VJIXl5L6Hy6URpgvqXV2gKNtGwJRwApzmddsGP8fel7MG0pjzB9qokia4RdJXzDDm11C
+ HenlzU2SscNUFDy546959uYnsqoSiNzyW+Zr9sB6cY8VmQLU1BvB+fRPZab6Yrrr//oa
+ 2ko9F7iIyUl43OFxipX0xw5ZbXA8SOJNrb8FfciTZDukZl/5PvPZkrL62MCo9d+H3bb9
+ mDzmvh6jt+QKoDP6DqQFNKPviEqhAuGLXnx6tGjhPNe1T3HwaC/DAMBYXNudwPTR4YqP
+ ul1Q==
 X-Forwarded-Encrypted: i=1;
- AHgh+RqllDWq31SRai/ihCXjmTRF8Ib8DuriL2boCK2SLm75GadJ0YqCdzldgf1phsJYc4KP3etTDwd/F4zc@nongnu.org
-X-Gm-Message-State: AFuF++ll6bjKqPxYRMDIXYmPv+tSYbiFsNEE/cuHrchJ5Ci9RHp4p77e
- Wq+AY90YN/jPHsm8Nn6TkUSUmUS8UT6bvGccASANHOMjipLAE2ElZEZbVg6s/I6ZcyZdwoyH/UT
- 8Lva55uQwcGr8ts8oPemz1HyYi3GcfCWEcj0/LUPQk1W3TJhwleDJcoKvyg==
-X-Gm-Gg: AR+sD10tzZhEIqgqcQ+kjh/QhzPIQDrSfJoCjGpHkEmr/uB6W3NIOwIvu7hz8R6M8QB
- WbYAIg7VYR3Y9mg8Q7IyReQAgEDi1xnOo5qm7zJcdxYAiKcVAiqbXG4s5Op6/hZgCIOXNLi3DV0
- 7MPqGvuZ6v4e8ty174KsFzmUN3V2mrjdtx4SjbEHbFcwuv2L8/rJzGxm8elVbJQfLnbmVaA2N36
- n2vWrogZ0TRhIzzG2KTvZTZfmi5XRyi36dJuDGahWy1Lv8adgi/ta1qEMwkIdEXz/EP6s9cNAoB
- c/qw5FSbPk+JO97rC9uly8gLyX37bW6acaCoCyi9Nq5zUEbeIwSQTQMorJkprReAA9uY0zVYqO9
- I3oXi8IVynRpVY4MhK+8qSFTpp2UBqhXFLg==
-X-Received: by 2002:a05:620a:1b92:b0:937:356d:eec with SMTP id
- af79cd13be357-93913816194mr2813056185a.16.1788153390417; 
- Sun, 30 Aug 2026 22:16:30 -0700 (PDT)
-X-Received: by 2002:a05:620a:1b92:b0:937:356d:eec with SMTP id
- af79cd13be357-93913816194mr2813053185a.16.1788153389987; 
- Sun, 30 Aug 2026 22:16:29 -0700 (PDT)
-Received: from [192.168.69.226] (pmd666.hd.free.fr. [88.187.86.199])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49b94dd2517sm261090265e9.7.2026.08.30.22.16.28
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 30 Aug 2026 22:16:29 -0700 (PDT)
-Message-ID: <ebdf3e7f-0026-4b71-a752-9eb18016fc82@oss.qualcomm.com>
-Date: Mon, 31 Aug 2026 07:16:28 +0200
+ AKwUvByAvxFbU3RlADdjvDKXfVW/yrIJ7mZHircTitpTm14NMN90AUvVe5VXyGCcJ6O9DpeY1b17q18IfVkO@nongnu.org
+X-Gm-Message-State: AFuF++lPpj9GCqgiReofaOhLn5kFj0fhzEB+4j6HvVKKvLbImuwyT1Yy
+ NGtP1LZ0sJTf/rah8k7Oy+bRhSpIs4MPFaLiUBPsuphJagQAleF+rvPY4dIW0E92vTF9tHzHL9a
+ 0RBVTSNnJMRCsBFvYRFCW5nBKzVg3wek=
+X-Gm-Gg: AYBFou05OzSyOjPT9GJZMJ94ZE275eIgluJEONCsd4mSlcx6vQGOa/osV9+iAFTSJQS
+ ZthZgikHm+Q7R4OaTYhUcBeZ6MqbpNWpOfW06yuwa81/ePV8d4D/11r9Cs3jbX18fqHREybyTxd
+ W5dkZj5pkRjFf/nkIiPOzBMyit9Tyzl2lYRsDbPufAefyWxyofoz8PO1GwzZAz/crYzoavRcfq5
+ pDRmYOB4++6iZxihpeRIxF6Kj+2PPsqng04Ilhj0Fh49pDjDHDKyIAh5nqe9ANbiF3tOBfZRCvA
+ Cbj+fpwPHS5D4rOegQ7tgowxUH8FB179RyZxFAo9Ps6HrfKKyfS1kNpEdzsm5cz5qYg0fowQu38
+ sKO2DWDchrH4FWQGGeCNMErjsVSke2Cou3pAI5uVDnQt662jL68sngATZRLg5j0XkbsqGjtn1uE
+ 9eL5489I6zWFVzRbUD
+X-Received: by 2002:a05:690e:4191:b0:66e:64b4:3444 with SMTP id
+ 956f58d0204a3-66f813863c3mr397785d50.9.1788155426042; Sun, 30 Aug 2026
+ 22:50:26 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 13/16] hw/riscv/atlantis: Make TTAtlantisState own
- memory containers
-Content-Language: en-US
-To: Joel Stanley <joel@jms.id.au>, Alistair Francis <alistair.francis@wdc.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Cc: Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu@processmission.com>,
- Nicholas Piggin <npiggin@gmail.com>,
- Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>,
- Michael Ellerman <mpe@kernel.org>,
- Portia Stephens <portias@oss.tenstorrent.com>,
- =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>,
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 References: <20260831021500.82565-1-joel@jms.id.au>
- <20260831021500.82565-14-joel@jms.id.au>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
-In-Reply-To: <20260831021500.82565-14-joel@jms.id.au>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODMxMDA0MyBTYWx0ZWRfX5oEp83yOf09u
- Aj1fOw1j+CgUHcoN2R/hSdsEBeK6Ln5F4vmeJvNKkVYASZdO7q8COd61iGQbglUta38+W9zoQD4
- OlJW4hAiNpUnCD4a5nR6d1/oK1vpwtM=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODMxMDA0MyBTYWx0ZWRfX1Ai51NUUjZKu
- 0wOk1CV5LiBH4ckQvX+97EOpBau7bdyVVgChRfxOvucCaQzFH+Y2r591lvEzTT47zqcQ+ygM5Hs
- a2z/gCcga/NSDZLnqpgq/m5M5tiyxShfE+b3srru4p6gVlc8f2bY19vO6Ah+vz8QYXEtKC88JUI
- aBQXpE/wQHkUDNam2MaBmd2v6Ty5ZvkikLgo1TACcJPK2Twe2bA5jd6GGtGtkQVEPwOzWusJoc8
- /1DgOmtS9CeXZ2wZ0gIf0g+9JCEEuISuEWowixzCrLyuxhDWaF4Mv7eELPS4qHozyONr70GWEiW
- WNCSFB04TJ6ZuIMF1jNuh+oKhnWxQf+Hh7Zs+qLu1ZiGrmK9+onBBkE7WuXTribsfz49/0fABVr
- cOsTNcoNnRTyulMr29ppD9HNCBh0mdmXBj6oPu12zkM31xEWPKjvDbJwj8nGXjoYqY7xB61sHKd
- aImGriPX0C687/PLcdg==
-X-Proofpoint-ORIG-GUID: _wK4TT9LagYVklSGyGya-aOX3OGmxa9Q
-X-Authority-Analysis: v=2.4 cv=R5Ez39RX c=1 sm=1 tr=0 ts=6a950e2e cx=c_pps
- a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=4s3hRJSeHn4rkQlkrse1kQ==:17
- a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=M51BFTxLslgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
- a=EUspDBNiAAAA:8 a=1tSEMpTH9XP_W59IOagA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=PEH46H7Ffwr30OY-TuGO:22
-X-Proofpoint-GUID: _wK4TT9LagYVklSGyGya-aOX3OGmxa9Q
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-31_02,2026-08-27_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 suspectscore=0 phishscore=0 impostorscore=0 spamscore=0
- bulkscore=0 adultscore=0 clxscore=1015 priorityscore=1501 lowpriorityscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608310043
-Received-SPF: pass client-ip=205.220.180.131;
- envelope-from=philmd@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
-X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ <20260831021500.82565-7-joel@jms.id.au>
+ <b6dde536-bc21-48b3-91c1-03bf900b1e5d@oss.qualcomm.com>
+In-Reply-To: <b6dde536-bc21-48b3-91c1-03bf900b1e5d@oss.qualcomm.com>
+From: Joel Stanley <joel@jms.id.au>
+Date: Mon, 31 Aug 2026 15:20:14 +0930
+X-Gm-Features: AcwNN1XsYWA2vlSJHzh-IxSD1Up_ywmKh0yZ6ClV7Ykw0ObPKNncJskpX3IM8XM
+Message-ID: <CACPK8XcOwv4JLrO-UnbJWoi_jgkARBZ=DMFf7_6RWs2QLiX4Mg@mail.gmail.com>
+Subject: Re: [PATCH v2 06/16] hw/riscv/cps: Map interrupt controllers in SoC
+ container
+To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@oss.qualcomm.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>, 
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Weiwei Li <liwei1518@gmail.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Chao Liu <chao.liu@processmission.com>, 
+ Nicholas Piggin <npiggin@gmail.com>,
+ Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>, 
+ Michael Ellerman <mpe@kernel.org>,
+ Portia Stephens <portias@oss.tenstorrent.com>, 
+ =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>, qemu-riscv@nongnu.org, 
+ qemu-devel@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b130;
+ envelope-from=joel.stan@gmail.com; helo=mail-yx1-xb130.google.com
+X-Spam_score_int: -16
+X-Spam_score: -1.7
+X-Spam_bar: -
+X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.001,
+ FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.25,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -163,15 +131,37 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 31/8/26 04:14, Joel Stanley wrote:
-> The DRAM hi, DRAM low and bootrom memory containers can be owned by the
-> TTAtlantisState.
-> 
-> Signed-off-by: Joel Stanley <joel@jms.id.au>
-> ---
->   include/hw/riscv/tt_atlantis.h |  4 ++++
->   hw/riscv/tt_atlantis.c         | 15 ++++++---------
->   2 files changed, 10 insertions(+), 9 deletions(-)
+On Mon, 31 Aug 2026 at 14:35, Philippe Mathieu-Daud=C3=A9
+<philmd@oss.qualcomm.com> wrote:
+>
+> On 31/8/26 04:14, Joel Stanley wrote:
+> > The CPS device maps some devices into a container region, but the
+> > ACLINT and APLIC were mapped directly to system_memory.
+> >
+> > Pass the container memory region to the interrupt controller helpers so
+> > all CPS devices live in the container. The location of devices in memor=
+y
+> > for the boston-aia machine is unchanged.
+> >
+> > Signed-off-by: Joel Stanley <joel@jms.id.au>
+> > ---
+> >   hw/riscv/cps.c | 8 ++++----
+> >   1 file changed, 4 insertions(+), 4 deletions(-)
+>
+> (I'd have expected this as 1st patch in this series)
 
-Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
+This is a fix that is enabled by the first four patches; only possible
+now that we can pass a MemoryRegion.
+
+So the first few patches modify the cps machine to pass
+system_memory() to preserve behaviour. Then this patch switches them
+over to use the container.
+
+Usually a no-no, modifying a line that was modified in an earlier
+patch. I could fold this change into the first few patches, but then
+the change in behaviour wouldn't have been as clear to reviewers.
+
+Cheers,
+
+Joel
 
