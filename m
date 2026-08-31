@@ -4,73 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8BA2C61DE2
-	for <qemu-riscv@archiver.kernel.org>; Mon, 31 Aug 2026 02:18:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A868C61DF0
+	for <qemu-riscv@archiver.kernel.org>; Mon, 31 Aug 2026 04:58:18 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x0rZZ-0003ha-DZ; Sun, 30 Aug 2026 22:16:33 -0400
+	id 1x0u5j-0004Pl-1d; Mon, 31 Aug 2026 00:57:55 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1x0rZX-0003gb-Os
- for qemu-riscv@nongnu.org; Sun, 30 Aug 2026 22:16:31 -0400
-Received: from mail-pg1-x536.google.com ([2607:f8b0:4864:20::536])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1x0rZW-0007ca-2v
- for qemu-riscv@nongnu.org; Sun, 30 Aug 2026 22:16:31 -0400
-Received: by mail-pg1-x536.google.com with SMTP id
- 41be03b00d2f7-cc1e1ff659bso2542490a12.0
- for <qemu-riscv@nongnu.org>; Sun, 30 Aug 2026 19:16:29 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
+ id 1x0u5e-0004Ov-Ra
+ for qemu-riscv@nongnu.org; Mon, 31 Aug 2026 00:57:51 -0400
+Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
+ id 1x0u5d-000689-9T
+ for qemu-riscv@nongnu.org; Mon, 31 Aug 2026 00:57:50 -0400
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 67V1c7rp3240839
+ for <qemu-riscv@nongnu.org>; Mon, 31 Aug 2026 04:57:47 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ y3YPPkYMOSBamSxvJGIPZEhLP7qy/jocOBTFT6Rg09c=; b=msLpd66/ALsbhEFC
+ GUj9hYRCMul8E07rrz/F8iXwKBf7CygsfGWczf42gaboSkUaLb4j/dpNTUCnNX0l
+ gH7s9G1EZ9txOUtoa7CJafR29J7LDwG0Yf61Dtb8rxrROzWot7gpxOIbC7CrgaUu
+ IKspuswj5AFgG2GlBQd7cAruPSMGSCBFYf2A6gMmG6b+mtCDJDfbE+ea+Hfgxp9A
+ nFiu83UED7YdAmWyp43g3DzRYCJRK1g70yn6tYSt7T9hs6pTdegZItMOOjl9P8Sp
+ gghb0pGo1HyQbClUZwkyGxLQFy30+cGDLFA+HmfpQAe00VcVpSbZ81VtsOZyJocR
+ NZw4sw==
+Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com
+ [209.85.222.198])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gcv8h0vky-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Mon, 31 Aug 2026 04:57:47 +0000 (GMT)
+Received: by mail-qk1-f198.google.com with SMTP id
+ af79cd13be357-93915f50a5cso575686485a.1
+ for <qemu-riscv@nongnu.org>; Sun, 30 Aug 2026 21:57:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1788142589; x=1788747389; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:sender:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=mQBiGju903XJawObkTSJlI2w6oNi2YYpQ1UlpzmMJzE=;
- b=lEkkvCQfvWVEOtiiBi+XM086vsf7XjRg2QFGfZ5zvLr2tRcf7qJD0ro5xULxMYlECL
- WvePzyToyuKV9266AslwpaRqMnwrDPuXd6rkwwylHPfr1gj2E/Eew9wpUywUCT3NkNpD
- ASqri3e47WnHAOZmzuDNWhhZkPsA1UlZYvVulSOBVT224+vKPtwiKBcQTFd4lTCKNyrD
- Q7lwi7wH8QPEN5geIcp7T+kbJha2zBSiMpLTg7o3tvL8PeL5hdl616zNkRd27TwAvvEW
- H7dyq+BMvjL4HfnU7XuxJsMTU8/a9Mc/pH68LZCXdGSY1jP/hT9kFbv/AyjpeJeqL6ci
- 9UXw==
+ d=oss.qualcomm.com; s=google; t=1788152266; x=1788757066; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:from:references
+ :cc:to:content-language:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=y3YPPkYMOSBamSxvJGIPZEhLP7qy/jocOBTFT6Rg09c=;
+ b=CBohuh4Y1abZaNS/ANlbtvLz+SCxOaJrwwNCV58aVRfPQz584O3RRGYiz492mkivK6
+ Rfiq1UXQSp1+NluJWaFOKxoySrqhA/65qmahreiwdfPCv5hvraUrc7NxyMfOyymd18eg
+ oQ1I4ikiUiAJGWD9twI4Oi7M9m7k2MoPSFKXG7Y77itPNMB3lFc6SzTMCKmbAlIYry/l
+ 7RvOrD2O8/C4bxEcbsQPXkuZ6c+GpLNb+E6j/KGMrLJeEGcOkVIZ5VHe0z2HIqwx2a7a
+ AhX3/UUv3qXB6O5YPY2o+hrnKAUJQa2OSTmDn9P9IGJjF/wtZNlhnWCHbYMFpjOyXKIK
+ M8Lw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788142589; x=1788747389;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:sender:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=mQBiGju903XJawObkTSJlI2w6oNi2YYpQ1UlpzmMJzE=;
- b=S/YvqR1LQOgLAeEgmRijFgiV14WSTg4CoqJyzUsc+plX+mZ1yP9v2TnleKF5DQALMQ
- jRAn1sqevqSsqZ5WzILUyc6nLl1GXgvd57oo+m1ldLtxoDOCY+AqoUvMUTnNvAAaVOqC
- DgRNSBkTVA4yTRLJjr6rzVhonUoqElaykG4Te9PDhtdmX/7NrmEQjM/Zic8m8hGU/cyx
- yZH1ArhRKKIvUF+ASI3DLi8yDCdl5ngIG0bHECZWXapckdo9Dxo7IWTCVr5mIQLyWRHh
- ZrlgWmy9fEhMk+6KVDYHQ0xRF8CvkUwWELgqofvH3lg3FsQMvChqmTzztOtK9cClKsEk
- JxVw==
+ d=1e100.net; s=20251104; t=1788152266; x=1788757066;
+ h=content-transfer-encoding:content-type:in-reply-to:from:references
+ :cc:to:content-language:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=y3YPPkYMOSBamSxvJGIPZEhLP7qy/jocOBTFT6Rg09c=;
+ b=koSgZSgpFLWsosjyWpTl8Uu0Vh2tZY7YwtOu0rd5MZ9zM65tNZrV2GL9Lk1Xmajm+k
+ FifO44eIxav2xFg9NCqdYxwKjvqfj8DoM/KPjM7psO1LRWWlUfsmEUo6w+5z/fCyYrb+
+ JDNa8YsTMttIxtfsK6+pPHJqDllrIK+vWW9K9cw5dV70LUcckohu2AdzACs76OJhsZcd
+ dg2HBVtuB/oPlpqBMBi6x2lXsdebtPH/evyEJ+PGjUDpNtyPdgYBksl0ejMISXy/t10W
+ 5f2sX06R4prOKB+KjXNSX4FI33BF2XLFLgpmZDmrHyF4kXuoeNYzsQFaXrHYlrIpya8z
+ swlA==
 X-Forwarded-Encrypted: i=1;
- AKwUvBy8jvKUR+d8If+hKSYIMxdS3xDymrdpj7VNM1MN6HKV25ZjsYXdSgA0NwEEbr20YWfpXVHANrCzkzKU@nongnu.org
-X-Gm-Message-State: AFuF++lw+3Y+MTnAxgJi7jQ26ZzSwif+qb4TUsjNRm4VWykN7hWnvkLT
- FtL/zG7Ht/QxZys/vtW1M1JHWQSfvHuo5G1wOspCGGVQz00OaMZyyM4Y
-X-Gm-Gg: AYBFou2EnPgw1naPGI4ZbiPrbzFXUXjEmGZ/JzMdwc0B3TNuqrYmsjhnJa7uQXIr4dE
- M0Hl2eY6n/mrW2bu6yQ575/0C8jVEpLdXTkdhYNZXPyzC58f8zsLWEeBESHoiYLHTlzX4h+k3B1
- AsriXUcQKZr41kg4s/8WwlnmH5wuJRlnwtRJHc9MDQIZQnHbqMuX1XMNcuHw9c3nFxisfcbclMS
- F/MiCgIRHSy4T913yoTbCGLIYgA3BaPefwrLGNOE2w6h+wQ3093OKUMA0UlirJ39kA9xrQVfZZM
- OUUu0floQxGizhsVmubkzR8/0Jd2Sb4vUQW8A3+gD6dZs0YJfj8gOS4no87/mSiV0TuWF0QhjyG
- iPVVzzE7zc7STHA6gGV1ghpdNv1+OBxLQp3TRYZ4FT58bfzHG3oQavm6Eos2EsGGsoxKyuit/Yp
- 9utNpyF0IH8HwGuuxKvhicFi/0o22qtlJA6ZQKQg6MoUrsnWTpyG/vUy3MhLSnc/cRMrWczVump
- BHWjvozeiryEqiUF6pamDd178ptAC+8BcHrnGd+5GE6E/PRMe8lzNcAScyaJTsK7hKSJWLRpMdo
- M2wnauIRRew5vrUgvukm
-X-Received: by 2002:a17:90b:380b:b0:380:f85c:94b4 with SMTP id
- 98e67ed59e1d1-396d0f2391cmr33143854a91.7.1788142588774; 
- Sun, 30 Aug 2026 19:16:28 -0700 (PDT)
-Received: from donnager-debian.. ([180.150.112.50])
+ AHgh+RpNG6noRmTJnIdatwZk195/zXiz+5ZTZfyfYKwMF729yDZhLJGJJVogrwLAAiLwMuP6sLV2UIkRHLIJ@nongnu.org
+X-Gm-Message-State: AFuF++mvBwCWYfgOzrB6xWsG7SA2VsYKT0DJN+fYTcM2DOoxdWHVQhhX
+ aG+aiWJb6A3Ne8wBSqteQiOQn4rGUgH/6QYCloM9BfrwdRUDJpm7q+P0KeCE/nxV0qjwKI3lihC
+ L3Fht8fGQvYiJCeRCZTDoQasJoumnU43NUWQhWIT4lbJUyljb6HIlEs2OTQ==
+X-Gm-Gg: AR+sD12mZ+HosqIZwgvznQfcUhkRvppPfGdpMZ2jCUiuP30ychHdXXu++KWooCFmDKX
+ LaiSrAyhgKsYuyh1GWDqvAjo05LkxL323sGPSNNdfrzyGfrcd3EhsRpJ+UYEBSzVE04ZBhUPM3R
+ 1ray2CYBd08wrMCCBZaiU49X2RBPAI/4kfPeLKwy2scdlj5lck0hzWjwLz9dos30ag2omFX+Exd
+ fs3ah6mRg0V8+L4n8XuDYrjjJKlQx5xN797gChQu08fbXapuCbprnq5o6QObGF/DnP2C0mDGxZc
+ UKSDq3+YKYxUD367nzy5dFkArg8v6Lu5wxhQkJM/KyZa7pnQ2fp4zBMz2/MItCX+CgrkC4CbGsr
+ 6lTZJNs6Q53rHExxIGwEFsHGaEQLI5NX+Kw==
+X-Received: by 2002:a05:620a:4148:b0:939:f89:368d with SMTP id
+ af79cd13be357-93936daaf1dmr578652585a.22.1788152266145; 
+ Sun, 30 Aug 2026 21:57:46 -0700 (PDT)
+X-Received: by 2002:a05:620a:4148:b0:939:f89:368d with SMTP id
+ af79cd13be357-93936daaf1dmr578650685a.22.1788152265718; 
+ Sun, 30 Aug 2026 21:57:45 -0700 (PDT)
+Received: from [192.168.69.226] (pmd666.hd.free.fr. [88.187.86.199])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-396b186807bsm20071240a91.12.2026.08.30.19.16.24
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 30 Aug 2026 19:16:28 -0700 (PDT)
-From: Joel Stanley <joel@jms.id.au>
-To: Alistair Francis <alistair.francis@wdc.com>,
+ 5b1f17b1804b1-49b4942298fsm352121605e9.1.2026.08.30.21.57.42
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 30 Aug 2026 21:57:44 -0700 (PDT)
+Message-ID: <522d3f1a-037d-40eb-a86a-38c5fc1b4b6a@oss.qualcomm.com>
+Date: Mon, 31 Aug 2026 06:57:42 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 01/16] hw/riscv/aia: Take a MemoryRegion for the
+ created devices
+Content-Language: en-US
+To: Joel Stanley <joel@jms.id.au>, Alistair Francis <alistair.francis@wdc.com>,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Cc: Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Chao Liu <chao.liu@processmission.com>,
@@ -78,27 +104,50 @@ Cc: Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>,
  Michael Ellerman <mpe@kernel.org>,
  Portia Stephens <portias@oss.tenstorrent.com>,
- =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
+ =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>,
  qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Subject: [PATCH v2 11/16] hw/riscv/atlantis: Use local reference for system
- memory
-Date: Mon, 31 Aug 2026 11:44:52 +0930
-Message-ID: <20260831021500.82565-12-joel@jms.id.au>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20260831021500.82565-1-joel@jms.id.au>
 References: <20260831021500.82565-1-joel@jms.id.au>
-MIME-Version: 1.0
+ <20260831021500.82565-2-joel@jms.id.au>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
+In-Reply-To: <20260831021500.82565-2-joel@jms.id.au>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::536;
- envelope-from=joel.stan@gmail.com; helo=mail-pg1-x536.google.com
-X-Spam_score_int: -16
-X-Spam_score: -1.7
-X-Spam_bar: -
-X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.001,
- FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.25,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+X-Authority-Analysis: v=2.4 cv=DY0nbPtW c=1 sm=1 tr=0 ts=6a9509cb cx=c_pps
+ a=qKBjSQ1v91RyAK45QCPf5w==:117 a=4s3hRJSeHn4rkQlkrse1kQ==:17
+ a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=M51BFTxLslgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
+ a=EUspDBNiAAAA:8 a=1tSEMpTH9XP_W59IOagA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=NFOGd7dJGGMPyQGDc5-O:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODMxMDA0MCBTYWx0ZWRfX5SF2LCEXHx8d
+ TdZ3dXKgg33MYpNTRdOlmUwVWgnauwGBMY28b8f/N+U54ek75n59qML3nEmLd3mefxnBnXecMHc
+ XMWr0W+dclpJ9ZZx0Wv9+1sl0qBGsTx+mD308bOt8Ys2CL0+S0ZQ0Qh4gEv5IO4JQqUV0T8YhHw
+ dkqoHURoM+6vvKrtA+gtKpzJ7nCqfW+xGCwcR2GulHN3Ft6xK5QZMn3d9wGrcH7S//joo7U15Y5
+ P8KbIxLT2MerDpTxJdoMXTKdFH6tOyVLljDkRqHwRwSt1Vci5kBqnTYH5efse9/SqOwhO+QChRU
+ JugUM5uIHj61INUWPXtH16+4fzitHzB9xdIzY0/jOxwBoj3R/Pm0W9XuO2I/ucc/MKRMYTm+8/Y
+ oz8mDf8/p2tBq1vKWfL0Ll34ssYhLzKvQV9rwP+X7XBkZ1IWGjj3nSFe1FkDMTyzfCp1RL8wlPK
+ xS4TDBSOB7whc0JEYQw==
+X-Proofpoint-ORIG-GUID: 48otUWELZMc1YktofikSMI-x8lJEDIvK
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODMxMDA0MCBTYWx0ZWRfX220P1YGcNjK/
+ waPX+4ssN5S9qHjpNr3EFxym1hx32uuuiF9G3fwMAbNNJM56L+ICWJUPLx517HEhPfVYz2n9m3X
+ OlDDQ5J3u/n3/urqwlXeKv1zZs73l2E=
+X-Proofpoint-GUID: 48otUWELZMc1YktofikSMI-x8lJEDIvK
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-31_01,2026-08-27_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ phishscore=0 adultscore=0 clxscore=1015 priorityscore=1501 spamscore=0
+ suspectscore=0 malwarescore=0 bulkscore=0 lowpriorityscore=0 impostorscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608310040
+Received-SPF: pass client-ip=205.220.168.131;
+ envelope-from=philmd@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
+X-Spam_bar: --
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -114,112 +163,23 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Instead of system_memory, attach devices to TTAtlantisState::memory in
-preparation for the ->memory becoming a container.
+On 31/8/26 04:14, Joel Stanley wrote:
+> Add a MemoryRegion parameter to riscv_create_aia(), to be passed on to
+> the IMSIC and APLIC helpers so a SoC can have the controllers mapped
+> into its own memory container. Both callers pass system_memory, so there
+> is no change in behaviour.
+> 
+> As the controllers don't yet take a MemoryRegion the parameter is not
+> yet passed on. Changing riscv_create_aia first avoids churn in the
+> intermediate commits.
+> 
+> Signed-off-by: Joel Stanley <joel@jms.id.au>
+> ---
+>   hw/riscv/aia.h         | 2 +-
+>   hw/riscv/aia.c         | 2 +-
+>   hw/riscv/tt_atlantis.c | 3 ++-
+>   hw/riscv/virt.c        | 3 ++-
+>   4 files changed, 6 insertions(+), 4 deletions(-)
 
-Signed-off-by: Joel Stanley <joel@jms.id.au>
----
- include/hw/riscv/tt_atlantis.h |  1 +
- hw/riscv/tt_atlantis.c         | 19 ++++++++++---------
- 2 files changed, 11 insertions(+), 9 deletions(-)
-
-diff --git a/include/hw/riscv/tt_atlantis.h b/include/hw/riscv/tt_atlantis.h
-index 642490d21743..a29c67c1cfcf 100644
---- a/include/hw/riscv/tt_atlantis.h
-+++ b/include/hw/riscv/tt_atlantis.h
-@@ -29,6 +29,7 @@ struct TTAtlantisState {
-     Notifier machine_done;
-     const MemMapEntry *memmap;
- 
-+    MemoryRegion *memory;
-     RISCVHartArrayState cpus;
-     DeviceState *irqchip;
-     DesignWareI2CState i2c[TT_ATL_NUM_I2C];
-diff --git a/hw/riscv/tt_atlantis.c b/hw/riscv/tt_atlantis.c
-index c471c7cebf12..1c75fb5d8d57 100644
---- a/hw/riscv/tt_atlantis.c
-+++ b/hw/riscv/tt_atlantis.c
-@@ -482,13 +482,14 @@ static void tt_atlantis_machine_init(MachineState *machine)
- {
-     TTAtlantisState *s = TT_ATLANTIS_MACHINE(machine);
- 
--    MemoryRegion *system_memory = get_system_memory();
-     MemoryRegion *ram_hi = g_new(MemoryRegion, 1);
-     MemoryRegion *ram_lo = g_new(MemoryRegion, 1);
-     MemoryRegion *bootrom = g_new(MemoryRegion, 1);
-     ram_addr_t lo_ram_size;
-     int hart_count = machine->smp.cpus;
- 
-+    s->memory = get_system_memory();
-+
-     s->memmap = tt_atlantis_memmap;
- 
-     object_initialize_child(OBJECT(machine), "soc", &s->cpus,
-@@ -504,7 +505,7 @@ static void tt_atlantis_machine_init(MachineState *machine)
-                             &error_abort);
-     sysbus_realize(SYS_BUS_DEVICE(&s->cpus), &error_fatal);
- 
--    s->irqchip = riscv_create_aia(system_memory,
-+    s->irqchip = riscv_create_aia(s->memory,
-                                   true, TT_IMSIC_GUESTS,
-                                   TT_IMSIC_STRIDE,
-                                   TT_IMSIC_STRIDE,
-@@ -517,7 +518,7 @@ static void tt_atlantis_machine_init(MachineState *machine)
-                                   TT_IRQCHIP_NUM_MSIS,
-                                   TT_IRQCHIP_NUM_PRIO_BITS);
- 
--    riscv_aclint_mtimer_create(system_memory,
-+    riscv_aclint_mtimer_create(s->memory,
-             s->memmap[TT_ATL_ACLINT].base,
-             TT_ACLINT_MTIME_SIZE,
-             0, hart_count,
-@@ -540,23 +541,23 @@ static void tt_atlantis_machine_init(MachineState *machine)
- 
-     memory_region_init_alias(ram_hi, OBJECT(machine), "ram.high", machine->ram,
-                              0, machine->ram_size);
--    memory_region_add_subregion(system_memory,
-+    memory_region_add_subregion(s->memory,
-                                 s->memmap[TT_ATL_DDR_HI].base, ram_hi);
- 
-     lo_ram_size = MIN(machine->ram_size, s->memmap[TT_ATL_DDR_LO].size);
-     memory_region_init_alias(ram_lo, OBJECT(machine), "ram.low", machine->ram,
-                              0, lo_ram_size);
--    memory_region_add_subregion(system_memory,
-+    memory_region_add_subregion(s->memory,
-                                 s->memmap[TT_ATL_DDR_LO].base, ram_lo);
- 
-     /* Boot ROM */
-     memory_region_init_rom(bootrom, NULL, "tt-atlantis.bootrom",
-                            s->memmap[TT_ATL_BOOTROM].size, &error_fatal);
--    memory_region_add_subregion(system_memory, s->memmap[TT_ATL_BOOTROM].base,
-+    memory_region_add_subregion(s->memory, s->memmap[TT_ATL_BOOTROM].base,
-                                 bootrom);
- 
-     /* UART1, the soc console (UART0 is for the boot microcontroller) */
--    serial_mm_init(system_memory, s->memmap[TT_ATL_UART1].base, 2,
-+    serial_mm_init(s->memory, s->memmap[TT_ATL_UART1].base, 2,
-                    qdev_get_gpio_in(s->irqchip, TT_ATL_UART1_IRQ),
-                    115200, serial_hd(0), DEVICE_LITTLE_ENDIAN);
-     /*
-@@ -570,7 +571,7 @@ static void tt_atlantis_machine_init(MachineState *machine)
-      */
-     object_initialize_child(OBJECT(s), "uart1", &s->uart1,
-                             TYPE_UNIMPLEMENTED_DEVICE);
--    mmio_map_unimplemented(system_memory, SYS_BUS_DEVICE(&s->uart1),
-+    mmio_map_unimplemented(s->memory, SYS_BUS_DEVICE(&s->uart1),
-                            "tt-atlantis.uart1", s->memmap[TT_ATL_UART1].base,
-                            s->memmap[TT_ATL_UART1].size);
- 
-@@ -582,7 +583,7 @@ static void tt_atlantis_machine_init(MachineState *machine)
-                                 TYPE_DESIGNWARE_I2C);
-         sbd = SYS_BUS_DEVICE(&s->i2c[i]);
-         sysbus_realize(sbd, &error_fatal);
--        memory_region_add_subregion(system_memory,
-+        memory_region_add_subregion(s->memory,
-                                     s->memmap[TT_ATL_I2C0 + i].base,
-                                     sysbus_mmio_get_region(sbd, 0));
-         sysbus_connect_irq(sbd, 0,
--- 
-2.47.3
-
+Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
 
