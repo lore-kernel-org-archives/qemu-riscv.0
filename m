@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B18CAC61DE4
-	for <qemu-riscv@archiver.kernel.org>; Mon, 31 Aug 2026 02:17:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1D93C61DE2
+	for <qemu-riscv@archiver.kernel.org>; Mon, 31 Aug 2026 02:17:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x0rYj-0003M6-Tj; Sun, 30 Aug 2026 22:15:42 -0400
+	id 1x0rZf-00044A-KW; Sun, 30 Aug 2026 22:16:40 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1x0rYh-0003Ld-Hc
- for qemu-riscv@nongnu.org; Sun, 30 Aug 2026 22:15:39 -0400
-Received: from mail-pl1-x632.google.com ([2607:f8b0:4864:20::632])
+ id 1x0rZd-0003sN-6w
+ for qemu-riscv@nongnu.org; Sun, 30 Aug 2026 22:16:37 -0400
+Received: from mail-pj1-x102d.google.com ([2607:f8b0:4864:20::102d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1x0rYf-0007WT-W1
- for qemu-riscv@nongnu.org; Sun, 30 Aug 2026 22:15:39 -0400
-Received: by mail-pl1-x632.google.com with SMTP id
- d9443c01a7336-2cfbbdfa60bso31486065ad.3
- for <qemu-riscv@nongnu.org>; Sun, 30 Aug 2026 19:15:37 -0700 (PDT)
+ id 1x0rZb-0007dJ-EG
+ for qemu-riscv@nongnu.org; Sun, 30 Aug 2026 22:16:36 -0400
+Received: by mail-pj1-x102d.google.com with SMTP id
+ 98e67ed59e1d1-38dc4553f62so4200990a91.0
+ for <qemu-riscv@nongnu.org>; Sun, 30 Aug 2026 19:16:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1788142536; x=1788747336; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1788142594; x=1788747394; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:sender:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=ciIuJKjZ6j1nR/uMT+7qHvjI8S/CyEwP7dM8aiHQmjM=;
- b=XZKa/x2FmylDE+Cr4stzzQwTRyaiODBCaJOloFfLA2Sg3KMr/EumTZC3gy8chFPqRF
- ZVj5qbha98jRwPcrmZ2gTvnZTc6GlYvD3w1sBsmpSsHOlEnzFkDnfrgGdKTD/CzDYGEs
- lyntx21Sz68mUvWhRk1r7a0wSD3D6Rkj1Ttae2VlfvZPVNN6PD9bLXZu9/CTKPYhYnrq
- 83K+r6OSvmNyycEk+mdr+vGdyOaUVZhUhjGcSN9Pv3q+oGGNNpMbu4zbpILcUA9noItM
- 4lFyC8pwwqGJYVLgmfgQowePUYKe+XJaq9Fone8Vpq6MxB9RzYFFiIGwqkkQp+ixpLzJ
- SmSw==
+ bh=nRdr9+gRC0JbR6btxUltpf7akCd8aKY2gzcWzpEXK0g=;
+ b=Y4Ibsn9asMSBdLpArHXwU7Q6otl4prfc+jIuA/9iChguDJFeZkR+i96r/w0BBsYR1N
+ 0+RrhRpyS1gT9/YJAeennT/R2vKdr2dtj/OKpD5Qz0umJBaQb5/NmjQiez5WzL3NqRYv
+ PKRFLM26gN1dR+TYvwY6GqU906QhoD11bDkXUdlS6+J/yhYi95xso+pG0/YUDNLxhEUG
+ rQoaI3MYZBBNZHlVnoKIKgBu4kCBrDhyO/FhJ3CMg+voTJT/cHbO8ixzhLmdIaQI/a1U
+ 7eEPDyvBVJ1t6jVBbBKOcL6gVKxiBK1d2IePU18AXJbR6G1avMEdu2Ev2HFXFaGRDrOd
+ Y83g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788142536; x=1788747336;
+ d=1e100.net; s=20251104; t=1788142594; x=1788747394;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:sender:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=ciIuJKjZ6j1nR/uMT+7qHvjI8S/CyEwP7dM8aiHQmjM=;
- b=QFHX4az7reON1CDphqTQL2ca36c10D5uqruqktp4zmREc/kPOGLEMHXZUwxmoFZ/a0
- e+rvkOW3dnD4nq41xHvVvHUxYtnkoKxrqkhVqEP5PMrGDxfZT9uunbz5QQI0mOcc1MJz
- qzEDOwTZIAH2svdraP5DkeMWWpKqjrgTSPwEipMbPNckn+z+NbV6DRFAkaD9rLILMq+x
- uf9QabOLtsHcGot1Co5V1caFq28osiNzD3FHTq1Bi5udTUTI+FP5ceHNk+uKEYz7rMjk
- /+imbwVrKHxN9Pz0QAapZEVOxPWlSTeHtN+EYQhl8BQwKiAaQpeIITMqXWfVTbKGWDdz
- B0hg==
+ bh=nRdr9+gRC0JbR6btxUltpf7akCd8aKY2gzcWzpEXK0g=;
+ b=WCKUaCIzPIKFnwCApG4llU7xfxnw1IOtie2vB0opqxqCHH8VDxr9xh5W4j1wM7cHSB
+ PPf/8XE0KiUUennvFWjQwi7zF1TcjMaxzqza6FdFeypJYrYKqgLqVzHKMl29vE++8JIV
+ lP0vfbBmpy7KvZk6pF6qHcGuiwh4bhSHEOiQVKYYnKPBpVAN8Jx3TllfjKWhk8SowyeU
+ OQAKpkwgwlRKr63j1slKSgT8Oqnml7MgHk1q7q/r6X9eobQawVtWc417yxph7sfbcB99
+ A0QRmFV1I9ud7OfTzDHqKED23dnCp8bVABb3V+63OO3ci/SHQWnhG94ueRPa/QCr/V0J
+ 51TA==
 X-Forwarded-Encrypted: i=1;
- AKwUvBwoX+jIzfscgI+nKQSD/uS+PST5Hfcf9odsqaafJX39kdUYwmehLuOASIZjyEhpLBEuvs7n0bhJlXxG@nongnu.org
-X-Gm-Message-State: AFuF++lkrtMQN4jfoSyCH4DrBLW7H372erhzcwPg1QU58l3+MInF73P3
- yACgVmWfeP64imvupGchaOMMqdWd3GHNKNYaAZZ4u4BUjFSXq3wjahBB
-X-Gm-Gg: AYBFou0rxp5QX6zyCXkyowQLUzlhvnXKzhM1tEHqQouyywoxe8b2sFAGLjrYf1fpqK9
- VA8SlSh1uTvqokJdflVH0eaQYiZEBfcSGbkiT/Hi3A6Tzgz5eXpHGnMAY2ub3e3ZrENDbl8Zroj
- LV6BRbho/rUaldXlRoRPmZvi+WM12ihEJTdAv+9jXIi+OyQlIjnuF0iJEXn/f9lYZ03ce1AZNFY
- jzOQWmLB7V3kdCHLk5bjvvq3MfYietX7iiA6ENucQiLWnG4DH+QTtynrXbwDUfmwW05qwwvDNMc
- yLqi1n1C2n3V10shUmJpaMPa6r7NL9iT28XZT+herTVL/uiSGjnw0YM4YbXQK2GrYNDH8R5ZHFR
- 5tVI44YIC5+nEmqIeTxgTN45izoOt/eXo9u6m3SCbX7g0UAtOWD8xrtwlDd6cMVU9Say4pzVIeO
- hMmEH6TZp1GzogeyQJzBWKP6rDb7HG1OBtxQdazxqtDfyNWzIUMz7fvsnVnmE/zk5xBcGi5rPAw
- ciMROaJ7+qDjLxWPKxgo80Ls7Wki65aR5tkeeZ+dxY5dmbAUZYVlWwD9OaiOuTtZApLXSRlnzLj
- bdBDXySctjTKKjN0RQUx
-X-Received: by 2002:a17:90b:1a8a:b0:398:9bd1:3211 with SMTP id
- 98e67ed59e1d1-3989bd135cbmr20127075a91.18.1788142536251; 
- Sun, 30 Aug 2026 19:15:36 -0700 (PDT)
+ AKwUvByeBlf8RTJEdGmzAvWROeU9KOX3BToxIB7cVMrZj47GaJinO4ScaCFC/k/hqlWfch6d/SYTNfihV9Hg@nongnu.org
+X-Gm-Message-State: AFuF++lXtRx+OldUnAjCtK5/V1jXmvG3J4gjmtXLlko8zXjEe5aFuOPF
+ MPHnhOkPFdKG05tMHOnT9VU1EAq5CCYXKNyJknUD8MJmKDasNz+VFyvi
+X-Gm-Gg: AYBFou0nUsOZXT9SvwroOOlOvy0kUvBLcM1m31mBKyTC0ImYUoS/9sGRBH7xv1LJO13
+ NkBA8WlkdgybHqecrRwU2ulJMDOhgSlSmes0Z/wDU+wBKgasIjlJ2+vOneOApeNpG2UZrQIXwAp
+ 98sIcC1WSs+QQZgfe4Sc5cwxFu5P+NcDiCgbzs7wBw1Ns759vGhVeP4Dg5NTAMMwiL+edRNRXZJ
+ 8PpJuQj0NbFugLNEariKauAzurmb0FOgVE1ReqmRa/n8PFiRjowz2Do4TLEUb9Abwk0qf0iCgtP
+ qm9uYkfjr0utvCGyN7GP9D8H84a7slklrSzSwzwTFKoPLb1EruJUfJyve14zi5rAcrYfZVNJPQB
+ 1lahr6UM5lwBwJUlJHVfTiBGkPAf4WHicvh8ICbJ1TM/8t9jNuF7TlQJVRipn7MaYv2BoQQ9qv8
+ KfxYraMwxkD5kcNIYjmVMTWNfVBLxl5mumAz8YRZ/JX3JaOuUpixi94LvPprDMozqr+cTQgf2Wh
+ 0mCgFia7tVpkOIMI06+TPOA7MxuNTjYePGiwvly1MyTk8mmRcM0RcE6L5/yHbmtZM7jy7BRou0G
+ LF5Q3hpySxC2OdYbhoMSbg==
+X-Received: by 2002:a17:90b:4cd1:b0:398:9bd4:d12 with SMTP id
+ 98e67ed59e1d1-3989bd40da3mr23554154a91.17.1788142593870; 
+ Sun, 30 Aug 2026 19:16:33 -0700 (PDT)
 Received: from donnager-debian.. ([180.150.112.50])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-396b186807bsm20071240a91.12.2026.08.30.19.15.31
+ 98e67ed59e1d1-396b186807bsm20071240a91.12.2026.08.30.19.16.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 30 Aug 2026 19:15:35 -0700 (PDT)
+ Sun, 30 Aug 2026 19:16:33 -0700 (PDT)
 From: Joel Stanley <joel@jms.id.au>
 To: Alistair Francis <alistair.francis@wdc.com>,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
@@ -80,17 +80,17 @@ Cc: Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Portia Stephens <portias@oss.tenstorrent.com>,
  =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
  qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Subject: [PATCH v2 01/16] hw/riscv/aia: Take a MemoryRegion for the created
- devices
-Date: Mon, 31 Aug 2026 11:44:42 +0930
-Message-ID: <20260831021500.82565-2-joel@jms.id.au>
+Subject: [PATCH v2 12/16] hw/riscv/atlantis: Decouple RAM size from
+ MachineState
+Date: Mon, 31 Aug 2026 11:44:53 +0930
+Message-ID: <20260831021500.82565-13-joel@jms.id.au>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260831021500.82565-1-joel@jms.id.au>
 References: <20260831021500.82565-1-joel@jms.id.au>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::632;
- envelope-from=joel.stan@gmail.com; helo=mail-pl1-x632.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102d;
+ envelope-from=joel.stan@gmail.com; helo=mail-pj1-x102d.google.com
 X-Spam_score_int: -16
 X-Spam_score: -1.7
 X-Spam_bar: -
@@ -114,78 +114,93 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Add a MemoryRegion parameter to riscv_create_aia(), to be passed on to
-the IMSIC and APLIC helpers so a SoC can have the controllers mapped
-into its own memory container. Both callers pass system_memory, so there
-is no change in behaviour.
+Keep a reference to the machine's RAM MemoryRegion in TTAtlantisState,
+and get the MemoryRegion's size where the configured RAM size is
+required.
 
-As the controllers don't yet take a MemoryRegion the parameter is not
-yet passed on. Changing riscv_create_aia first avoids churn in the
-intermediate commits.
+This allows reading the RAM size without needing a pointer to
+MachineState, decoupling the memory layout setup from the machine.
 
 Signed-off-by: Joel Stanley <joel@jms.id.au>
 ---
- hw/riscv/aia.h         | 2 +-
- hw/riscv/aia.c         | 2 +-
- hw/riscv/tt_atlantis.c | 3 ++-
- hw/riscv/virt.c        | 3 ++-
- 4 files changed, 6 insertions(+), 4 deletions(-)
+ include/hw/riscv/tt_atlantis.h |  1 +
+ hw/riscv/tt_atlantis.c         | 20 ++++++++++++--------
+ 2 files changed, 13 insertions(+), 8 deletions(-)
 
-diff --git a/hw/riscv/aia.h b/hw/riscv/aia.h
-index 3b6d7f962506..82ab601bf188 100644
---- a/hw/riscv/aia.h
-+++ b/hw/riscv/aia.h
-@@ -13,7 +13,7 @@
+diff --git a/include/hw/riscv/tt_atlantis.h b/include/hw/riscv/tt_atlantis.h
+index a29c67c1cfcf..2ec283d0fd7b 100644
+--- a/include/hw/riscv/tt_atlantis.h
++++ b/include/hw/riscv/tt_atlantis.h
+@@ -30,6 +30,7 @@ struct TTAtlantisState {
+     const MemMapEntry *memmap;
  
- uint32_t imsic_num_bits(uint32_t count);
- 
--DeviceState *riscv_create_aia(bool msimode, int aia_guests,
-+DeviceState *riscv_create_aia(MemoryRegion *mr, bool msimode, int aia_guests,
-                              uint32_t m_imsic_stride,
-                              uint32_t s_imsic_stride,
-                              uint16_t num_sources,
-diff --git a/hw/riscv/aia.c b/hw/riscv/aia.c
-index c1a5982856c5..651552c8f970 100644
---- a/hw/riscv/aia.c
-+++ b/hw/riscv/aia.c
-@@ -24,7 +24,7 @@ uint32_t imsic_num_bits(uint32_t count)
-     return ret;
- }
- 
--DeviceState *riscv_create_aia(bool msimode, int aia_guests,
-+DeviceState *riscv_create_aia(MemoryRegion *mr, bool msimode, int aia_guests,
-                              uint32_t m_imsic_stride,
-                              uint32_t s_imsic_stride,
-                              uint16_t num_sources,
+     MemoryRegion *memory;
++    MemoryRegion *dram;
+     RISCVHartArrayState cpus;
+     DeviceState *irqchip;
+     DesignWareI2CState i2c[TT_ATL_NUM_I2C];
 diff --git a/hw/riscv/tt_atlantis.c b/hw/riscv/tt_atlantis.c
-index babce2b680f2..d69851df0a01 100644
+index 1c75fb5d8d57..7a9f5872c7c0 100644
 --- a/hw/riscv/tt_atlantis.c
 +++ b/hw/riscv/tt_atlantis.c
-@@ -496,7 +496,8 @@ static void tt_atlantis_machine_init(MachineState *machine)
-                             &error_abort);
-     sysbus_realize(SYS_BUS_DEVICE(&s->soc), &error_fatal);
+@@ -82,12 +82,13 @@ static uint32_t next_phandle(void)
  
--    s->irqchip = riscv_create_aia(true, TT_IMSIC_GUESTS,
-+    s->irqchip = riscv_create_aia(system_memory,
-+                                  true, TT_IMSIC_GUESTS,
-                                   TT_IMSIC_STRIDE,
-                                   TT_IMSIC_STRIDE,
-                                   TT_IRQCHIP_NUM_SOURCES,
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 329ccdb5a7b6..22a607ed10bf 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -1411,8 +1411,9 @@ static void virt_machine_init(MachineState *machine)
-             s->irqchip[i] = virt_create_plic(s->memmap, i,
-                                              base_hartid, hart_count);
-         } else {
-+            bool msimode = s->aia_type == VIRT_AIA_TYPE_APLIC_IMSIC;
-             int imsic_bits = imsic_num_bits(s->aia_guests + 1);
--            s->irqchip[i] = riscv_create_aia(s->aia_type == VIRT_AIA_TYPE_APLIC_IMSIC,
-+            s->irqchip[i] = riscv_create_aia(system_memory, msimode,
-                                              s->aia_guests,
-                                              IMSIC_HART_SIZE(0),
-                                              IMSIC_HART_SIZE(imsic_bits),
+ static void create_fdt_memory(void *fdt, TTAtlantisState *s)
+ {
+-    hwaddr size_lo = MACHINE(s)->ram_size;
++    hwaddr ram_size = memory_region_size(s->dram);
++    hwaddr size_lo = ram_size;
+     hwaddr size_hi = 0;
+ 
+     if (size_lo > s->memmap[TT_ATL_DDR_LO].size) {
+         size_lo = s->memmap[TT_ATL_DDR_LO].size;
+-        size_hi = MACHINE(s)->ram_size - size_lo;
++        size_hi = ram_size - size_lo;
+     }
+ 
+     create_fdt_socket_memory(fdt, s->memmap[TT_ATL_DDR_LO].base, size_lo,
+@@ -485,11 +486,14 @@ static void tt_atlantis_machine_init(MachineState *machine)
+     MemoryRegion *ram_hi = g_new(MemoryRegion, 1);
+     MemoryRegion *ram_lo = g_new(MemoryRegion, 1);
+     MemoryRegion *bootrom = g_new(MemoryRegion, 1);
+-    ram_addr_t lo_ram_size;
++    ram_addr_t lo_ram_size, ram_size;
+     int hart_count = machine->smp.cpus;
+ 
+     s->memory = get_system_memory();
+ 
++    s->dram = machine->ram;
++    ram_size = memory_region_size(s->dram);
++
+     s->memmap = tt_atlantis_memmap;
+ 
+     object_initialize_child(OBJECT(machine), "soc", &s->cpus,
+@@ -532,20 +536,20 @@ static void tt_atlantis_machine_init(MachineState *machine)
+      * The high address is where RAM lives. It is always present and may be
+      * up to 64GB. The low address is an alias of the first 2GB of that RAM.
+      */
+-    if (machine->ram_size > s->memmap[TT_ATL_DDR_HI].size) {
++    if (ram_size > s->memmap[TT_ATL_DDR_HI].size) {
+         char *sz = size_to_str(s->memmap[TT_ATL_DDR_HI].size);
+         error_report("RAM size is too large, maximum is %s", sz);
+         g_free(sz);
+         exit(EXIT_FAILURE);
+     }
+ 
+-    memory_region_init_alias(ram_hi, OBJECT(machine), "ram.high", machine->ram,
+-                             0, machine->ram_size);
++    memory_region_init_alias(ram_hi, OBJECT(machine), "ram.high", s->dram,
++                             0, ram_size);
+     memory_region_add_subregion(s->memory,
+                                 s->memmap[TT_ATL_DDR_HI].base, ram_hi);
+ 
+-    lo_ram_size = MIN(machine->ram_size, s->memmap[TT_ATL_DDR_LO].size);
+-    memory_region_init_alias(ram_lo, OBJECT(machine), "ram.low", machine->ram,
++    lo_ram_size = MIN(ram_size, s->memmap[TT_ATL_DDR_LO].size);
++    memory_region_init_alias(ram_lo, OBJECT(machine), "ram.low", s->dram,
+                              0, lo_ram_size);
+     memory_region_add_subregion(s->memory,
+                                 s->memmap[TT_ATL_DDR_LO].base, ram_lo);
 -- 
 2.47.3
 
