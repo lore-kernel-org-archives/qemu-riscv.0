@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A0CEC624A5
-	for <qemu-riscv@archiver.kernel.org>; Mon, 31 Aug 2026 08:17:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2C43C61DD3
+	for <qemu-riscv@archiver.kernel.org>; Mon, 31 Aug 2026 08:21:12 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x0xC8-0004IB-4b; Mon, 31 Aug 2026 04:16:44 -0400
+	id 1x0xGM-0006GU-Hj; Mon, 31 Aug 2026 04:21:06 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <clg@kaod.org>) id 1x0xBz-0004Gn-G1
- for qemu-riscv@nongnu.org; Mon, 31 Aug 2026 04:16:36 -0400
-Received: from smtpout5.mo538.mail-out.ovh.net ([51.210.91.34])
+ (Exim 4.90_1) (envelope-from <clg@kaod.org>)
+ id 1x0xGK-0006FT-4C; Mon, 31 Aug 2026 04:21:04 -0400
+Received: from smtpout1.mo528.mail-out.ovh.net ([46.105.34.251])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <clg@kaod.org>) id 1x0xBv-0005u2-B5
- for qemu-riscv@nongnu.org; Mon, 31 Aug 2026 04:16:35 -0400
-Received: from director3.derp.mail-out.ovh.net
- (director3.derp.mail-out.ovh.net [79.137.60.223])
- by mo538.mail-out.ovh.net (Postfix) with ESMTPS id 4hYMJq1yVYz5xN5;
- Mon, 31 Aug 2026 08:16:27 +0000 (UTC)
-Received: from director3.derp.mail-out.ovh.net
- (director3.derp.mail-out.ovh.net. [127.0.0.1])
- by director3.derp.mail-out.ovh.net (inspect_sender_mail_agent) with SMTP
- for <liwei1518@gmail.com>; Mon, 31 Aug 2026 08:16:27 +0000 (UTC)
-Received: from mta2.priv.ovhmail-u2.ea.mail.ovh.net (unknown [10.110.113.201])
- by director3.derp.mail-out.ovh.net (Postfix) with ESMTPS id
- 4hYMJq0jp3z1y7l; Mon, 31 Aug 2026 08:16:27 +0000 (UTC)
-Received: from kaod.org (unknown [10.1.6.2])
+ (Exim 4.90_1) (envelope-from <clg@kaod.org>)
+ id 1x0xGH-0007M9-3a; Mon, 31 Aug 2026 04:21:03 -0400
+Received: from director4.derp.mail-out.ovh.net
+ (director4.derp.mail-out.ovh.net [79.137.60.37])
+ by mo528.mail-out.ovh.net (Postfix) with ESMTPS id 4hYMQ10FWXz66Zb;
+ Mon, 31 Aug 2026 08:20:57 +0000 (UTC)
+Received: from director4.derp.mail-out.ovh.net
+ (director4.derp.mail-out.ovh.net. [127.0.0.1])
+ by director4.derp.mail-out.ovh.net (inspect_sender_mail_agent) with SMTP
+ for <liwei1518@gmail.com>; Mon, 31 Aug 2026 08:20:56 +0000 (UTC)
+Received: from mta6.priv.ovhmail-u2.ea.mail.ovh.net (unknown [10.110.113.22])
+ by director4.derp.mail-out.ovh.net (Postfix) with ESMTPS id
+ 4hYMQ06SvBz1xv1; Mon, 31 Aug 2026 08:20:56 +0000 (UTC)
+Received: from kaod.org (unknown [10.1.6.3])
  (Authenticated sender: clg@kaod.org)
- by mta2.priv.ovhmail-u2.ea.mail.ovh.net (Postfix) with ESMTPSA id 6A87A941BCC; 
- Mon, 31 Aug 2026 08:16:25 +0000 (UTC)
+ by mta6.priv.ovhmail-u2.ea.mail.ovh.net (Postfix) with ESMTPSA id 392AC1B43F5B;
+ Mon, 31 Aug 2026 08:20:55 +0000 (UTC)
 Authentication-Results: garm.ovh; auth=pass
- (GARM-111S005a2760d27-3081-4788-8708-5303c2727376,
+ (GARM-102R00471d0ea2f-0ef7-4459-8dcc-a0cee931210d,
  20713A92955D5A277E4AF24F7FE8A47CC1774BFC) smtp.auth=clg@kaod.org
 X-OVh-ClientIp: 82.64.250.170
-Message-ID: <0aa098ef-605f-4047-804b-482894624e19@kaod.org>
-Date: Mon, 31 Aug 2026 10:16:24 +0200
+Message-ID: <bd0e113a-6495-4f4b-9ed7-bfd206a6acf7@kaod.org>
+Date: Mon, 31 Aug 2026 10:20:54 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v2 02/16] hw/intc/riscv_aclint: Take a MemoryRegion for
@@ -101,26 +101,27 @@ Autocrypt: addr=clg@kaod.org; keydata=
 In-Reply-To: <20260831021500.82565-3-joel@jms.id.au>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-x-ovh-tracer-id: 4060839489524706313
+x-ovh-tracer-id: 4136556258947017737
 X-VR-SPAMSTATE: OK
 X-VR-SPAMSCORE: -100
-X-VR-SPAMCAUSE: dmFkZTF3xkw+9jal2e6NfhEESGHZiDGjiBvGv2+LdLPW83yQsTwq642SbHnSx2X+3M237q50JCmzeKC46QeqpNyvYVfPLD4G74jm+8eQbwMa3uyr1iOO5RoRkHnd3bNVtVWCsGKGC6b1IcAigFbVLeTvQx6LZtWclCHvAjHDacnu5c3gko5CcqhoiEq3l4qk+rltPr4AAEicus2xhyWUDXLQNnXNyEFp1I2PJgCfi7ICJnn7YifkrKjGGeGWFaTIKLvji0Po8UmpsTQKyIAAXGuiSODJ3CCpxHDgchrsqV96M6DEci0ctrR5Wcr2dgoLAQEVjqhCvn2dmkMQOOnw8fgvK73uN2IRNQpC4tRx8pkg0nbHlpFUEMZVTnWOS3lD/yVbCfkxrQ9u3CxgCBCHx/Osl3v5YAmMxvkMLFi4sdcMPrq914A7GNR806JuWebWIXvB4ay9be3+UcWrW/tIO/sTTxJ60Vac1XwPOjuGqf6YmxN5TqgccOQOi4s2z+JaBueAv9lCJvFoE42lhNsVEpwA2Pr9hDIhYt/y8gxHr+bYkpt+xgfrxOBpZVrgGcyzCylbbGSpqL/D7X+upA+NRlufhI0+Jk5xZHeCntZsZAgUDEFSqIrer/94+gJrBvuT6WlIZNOseaMffnt/4dQwRjlDuKQeh18tfjkgN7vqNgiExNwxsw
-DKIM-Signature: a=rsa-sha256; bh=88/66VEnWpIzxC3hT1NdlQKgmRpfEtynAexZ0rn+29w=; 
+X-VR-SPAMCAUSE: dmFkZTFj/14Gu4I2wps2FLNz9Z5c0sv736XlXJJy0t1uNa4+DffTIO0tlCcBdV0yIL3CvYN+DoRpk/mBobvRLtK54meZAKHYS1l6jMHQIaKiQLGidLKRdq2nI/KwdYrDRTZtxgwNI0ZnBLoh3XUQS0fGx17C2/K5Dz0XpL/e/6pnN5BLVJmp4lsviw0NfCJMwrWEcLvIjHPm6oeIrKQcrP/bRJ8wZuzuIpubo61zTAGfWVYf2rgoY+619hruVlfz4fErdL6+CDWpeQ5dCS73k9DWR1zeHzOLGCNfVmH6cHodA2GQ2lU1VdOej3yZMWO0pbT5/G1iEK7Kb9avuKkAW0Y2+qDFfsxRmZWjA0sZBytevdnjIuu7WYrDadFoux3HuaTFbglqjC0hX5lpK3MNh28ErP8OSNcK9WG93QjXrsmo+wy394Th4o/wRxmuZtN/JSxigCu5VCdPzfUVu2hmcEQyt03CdshnoEMT2deruPu13fQUx3soH16NpfqwswN1HZLrJAkuz2JoZKB79+zN7ctVShZiErwzHDxF9dhiKBY+9a/vw5uDEgFZSO0w0wy9b9nXcjsKApXA52BaoDCR+SgNEy9Lq9Sdj7P6JU9T/gFNOjASBGEseOFyo5AgETEIpWF27/a5b80TmuybniWORH7xf215+M4Qi/Da9U/9G4fxAqJ9BA
+DKIM-Signature: a=rsa-sha256; bh=tWhiNjIWMFrZkFoqJYajZAgANowrxQhZ7hTjbawwQH8=; 
  c=relaxed/relaxed; d=kaod.org; h=From; s=ovhmo393970-selector1;
- t=1788164187; v=1;
- b=pmW7L+34btQ8S9PEVUHoX2WQsr7jJHABzTGCBBM3f5i3o/vWBJ3p52wbR7EB5DjTkS/2XFaX
- biqYSZaQWR0QNRhjalzjNZ6aCoUw+dXxsCU/i1h3c+eqUllXHGneGeQYabCdJAYwY0WPFD/TpfW
- t3sn81XOyaAtIwUYKWL33Iwgqnno80Ivq6jTzCKld5Gf1VPGe/pyqkck4zO8bKCvbXgrs/Q6Lyb
- mz7R1/WSKZcMUeSzQIgwWSX3qY0ZH2mKsTwkuJTEmEPxTTYzWAVg2FFi2Io6qrINnAz+fhTy3Mh
- eUHGGTlqysg2QUQRqmxdUBh/oOg9zUCmpKjHPxnlqIzPQ==
-Received-SPF: pass client-ip=51.210.91.34; envelope-from=clg@kaod.org;
- helo=smtpout5.mo538.mail-out.ovh.net
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ t=1788164457; v=1;
+ b=eCl5uJiK7O43dwLk6xVC2EXin84EpQuRCyOamOTY0wMJkBaI60G/pjgpbH+kjHeintO9V5wS
+ SvWl36VlvmvfsZPPvuN3oITZSvItnDN7lcVlcs4SG9v1chxYj7+fJ8fKloLrMpneZsH1dJ8O5wm
+ 0yRimm35pCZE/pmAZHoM8IRAkjQtjiO1d4Tbeke3iyPPSeSgx5wl1cjlMMP/feUMRPD/3uJ5H19
+ 9E6fTxluDZuBzR/kD52A5Lwlqb5L/iin1abbyKRSrkIrut1j+9/mG4+4GYUpc0m5khxGoAQEhzu
+ dsXQWd7K8MWRmNTVsG5c7822dcW0wKY4vtrdxxMX4uLwQ==
+Received-SPF: pass client-ip=46.105.34.251; envelope-from=clg@kaod.org;
+ helo=smtpout1.mo528.mail-out.ovh.net
+X-Spam_score_int: -30
+X-Spam_score: -3.1
+X-Spam_bar: ---
+X-Spam_report: (-3.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H5=-1, RCVD_IN_MSPIKE_WL=-0.01,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -140,6 +141,14 @@ On 8/31/26 04:14, Joel Stanley wrote:
 > The riscv_aclint_mtimer_create() and riscv_aclint_swi_create() helpers
 > map the device they create into system_memory, which prevents their use
 > by SoCs that map devices into a memory container of their own.
+
+Since these routines are going to be used later on in a realize()
+handler, I would add a 'Error **errp' parameter.
+
+Cheers,
+
+C.
+
 > 
 > Add a MemoryRegion parameter and map the device into it instead of
 > calling sysbus_mmio_map(). All callers pass system_memory, so there is
@@ -223,13 +232,6 @@ On 8/31/26 04:14, Joel Stanley wrote:
 > @@ -569,7 +572,8 @@ DeviceState *riscv_aclint_swi_create(hwaddr addr, uint32_t hartid_base,
 >       qdev_prop_set_uint32(dev, "num-harts", num_harts);
 >       qdev_prop_set_uint32(dev, "sswi", sswi ? true : false);
-
-let 'true' be 'true' !
-
-Cheers,
-
-C.
-
 >       sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
 > -    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, addr);
 > +    memory_region_add_subregion(mr, addr,
