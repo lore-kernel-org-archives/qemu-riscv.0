@@ -4,151 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72D17C61DE2
-	for <qemu-riscv@archiver.kernel.org>; Mon, 31 Aug 2026 09:49:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3D21C61DFD
+	for <qemu-riscv@archiver.kernel.org>; Mon, 31 Aug 2026 11:13:23 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x0ydY-0006VW-9g; Mon, 31 Aug 2026 05:49:08 -0400
+	id 1x0zwi-0001rY-Og; Mon, 31 Aug 2026 07:13:00 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1x0ydX-0006V9-7q
- for qemu-riscv@nongnu.org; Mon, 31 Aug 2026 05:49:07 -0400
-Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1x0ydV-00086e-EX
- for qemu-riscv@nongnu.org; Mon, 31 Aug 2026 05:49:07 -0400
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 67V9A7bP3182589
- for <qemu-riscv@nongnu.org>; Mon, 31 Aug 2026 09:49:01 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- eN48iTdEO9eyFztg0WuIybzBtG38C6lTtw9tqNlqPvE=; b=RSTkkhqrOmZEUiP5
- 9+G0uUSDl5Biwl05KrO0SMo8eaJPdmAECHk7x8W8H4/7fGpa49UKihzlqE0pM8uO
- ad1ZnyCPtJDw6GaI4e77KmxYzeQM0WwE8FdiP+aVXu+UQ1+jRdSVmP+vUYavgxsb
- ViMOy1vabBO/lKfeXIdz1pdfPlm2Vpe4Ct6QlUshU/pS7RHTYDongFXdFOn2BqCr
- 7tPS5gzflCgx95T9yLAzF236Uz6Uhz8T6jvHVJLIHZHu1Z7mOiiX0FoOQEk0o8tV
- +wvfcW8gWN3zVJjIES7zrka+/DW+aknKqewQrKdGxm65OC06uQnedq5FoZrpBWrM
- OKUUiw==
-Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com
- [209.85.160.199])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gd6rb8545-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Mon, 31 Aug 2026 09:49:01 +0000 (GMT)
-Received: by mail-qt1-f199.google.com with SMTP id
- d75a77b69052e-52ef04756caso49306781cf.1
- for <qemu-riscv@nongnu.org>; Mon, 31 Aug 2026 02:49:01 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <flamboyant.h.01@gmail.com>)
+ id 1x0zwh-0001qt-1e
+ for qemu-riscv@nongnu.org; Mon, 31 Aug 2026 07:12:59 -0400
+Received: from mail-pf1-x432.google.com ([2607:f8b0:4864:20::432])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <flamboyant.h.01@gmail.com>)
+ id 1x0zwe-0003Ey-Oe
+ for qemu-riscv@nongnu.org; Mon, 31 Aug 2026 07:12:58 -0400
+Received: by mail-pf1-x432.google.com with SMTP id
+ d2e1a72fcca58-853f8c34ba4so4543142b3a.0
+ for <qemu-riscv@nongnu.org>; Mon, 31 Aug 2026 04:12:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1788169741; x=1788774541; darn=nongnu.org;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=eN48iTdEO9eyFztg0WuIybzBtG38C6lTtw9tqNlqPvE=;
- b=iXM+oBScvIFTw9iEr0NK+Jc6QtugfBuMNnYnddvzqQOuH7b9jknhWCq51VHyq4MNgD
- r0MX25ZVTMoxIBpr6UR5Ct8fkOGyCDzgxNe62y248rxkZu/O3SJtu7x/2SGzAoEg+doV
- piDIxUR12CM9iSzNarifQTNw6IcF0f1TiIiCznU7KhXhmWxJgMN4T7bXYualS61MjHfm
- Q1L6fZGMIxGpnC/6mt1zbSwIh+jlBuPgyI3Kq4888fJz9gcFKZZbafbak4HJPE3WL25l
- p09OKbz7UZITLrST035PQ8/5Ot1iz02QcBLsonA7DMZEuQrt9Dv3bED8fv7cGtQRyM5j
- kYfg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788169741; x=1788774541;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20251104; t=1788174775; x=1788779575; darn=nongnu.org;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=eN48iTdEO9eyFztg0WuIybzBtG38C6lTtw9tqNlqPvE=;
- b=sYwuVSeAy2V6zKnpttaHz97yg73EUvhktbIhhiuCJRJwx2RqYPpiG8dycMAATcnJ+O
- GirjApPVHFmtId24w18lrArxwO7UR00Dvb2qH1sC7rs91e8UlJU5+JlUKsCfVPFR5ZCF
- K6nHyqd1ha450noGg1FL7qoTWESNjhQ7Ma1hv9lcuvdykx+r/7vEJ7Rtx3WrVHvOJx9d
- RZWIDkVc+YJLkgMWl2L1EmOKiO3oXqc9jbrOfN5DOtcheq07xFvg6DbHD+aXDXsk0trh
- FGny40PNZAqn+rdvAncIaXksYTiUvOUTZFyi3LEm+BElFeNWftdaRM1SfmZ8BKy/GXGX
- e8RA==
+ bh=/Z+X/PncSkuE6MgGSZCE8eysDDYP/aNPOAR017HvVGw=;
+ b=ZVZ7a3n96UjU1lxMCmTIoe2aFXkU+b3luRFUqzvgZq8v7bp/nTFAzfr3IPvGc/VHDU
+ zzDcIxjoFZoFmoNbOHjcYIy97U1fNXFPFoCCuTvwVIABoCjhoguRYL/q+0Jfx9g5AK/1
+ 8yqkUFVQUoW/JbHN3nlb+ECqqX3Bt2vDmSmN34NjiadYrKl4zgVrRt4xQMWGye/Yzyvh
+ OqPQduZbXHg7UucbsWk9Bp8lZmzOCX8rzA+WCZ+s15eDfLInge34VIRl7lSlVqUc3Rye
+ DBQVs/FHzwDT0hum3dwSJRT7UuBJ8zZfY2D2qypRYxTJtxbdjU/tPn+R9qgWKlgFe46S
+ wpUg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1788174775; x=1788779575;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=/Z+X/PncSkuE6MgGSZCE8eysDDYP/aNPOAR017HvVGw=;
+ b=CbC6wyg4x/XX1XEAVq73yC1E6W16LZXUBwReutft6uhN6YvxebuA1n8Z0kyLR4Hn02
+ N9fgIc0hWO1qc4qcYWwy3dvH+HV/CwAuGuigDQtnBCqIXtzh/g0IoXpxYVooE3mBNhtS
+ 11oh0TO6mYuD39g4hRvhN3mD+S0QgAcmrkOGNHHl7yv5n26OjOMYBofSVu0jmWJDOExX
+ CXHiICg4FVoHqi4inRXTtaFO2VfRDibeoE2ji4pUfpWNdMULVTGrSm3z/LfpWFCPWG6e
+ Er3IWIyHxvDsPJJaPb/jkH0OGU5HjRSth4SuG9h6iBWKWxk9E0VCsVtZOSRuHoiDYNOr
+ jABA==
 X-Forwarded-Encrypted: i=1;
- AHgh+RrAFx9skkVgZ3kyElb/VfWDCaeZHETkPha3BfmmLnF3fF+rzlR6P/a+4U45iVE5pEv7OZyBbP4ZenfV@nongnu.org
-X-Gm-Message-State: AFuF++lAQ+AwPGqEbnYstn4ArndpmUXYgPLVs8T29wwIy8fJv8AhxF/X
- DVHbukR8cQSStXiQv2xp1NVgdxjyRBq+QdD8bt0aa1/54iqueXHQLxnRfbGs1WwrOx/ZiK22ScU
- TjhBN/86CwQcFMVQ2kFPcchzn2jpvNXbAjfDeTvrpSHNhCzgr929imO6NoA==
-X-Gm-Gg: AR+sD11NPBFT/TDDvuUfkyDgJhsojCfG3iiwPx0fS9iy6fuzXPZ0TCttfEco1/fF1fe
- /Q5JE6LIvBw3vqR4rnVY6fgwf2W67VfNON1nu+TAO9lUSs/k007Pm5xyg97iFVZmtxjKvolOcVm
- P4zAjWt7kg7JuxItkgxCmi3LC+G6FuGTOrqIh1xipmNDWU5PWZK7nyj/LNDQJbRlmP3tFhKwiXo
- RUBUVtn17WlhQIVQ7A9WyeDJ4p8FNXq3Q1BfAcinN5WZmDGUgS+JXspQ9U9wghYaSYfuQd3NE6N
- HPNHo62p7Ytpw2CF3COSyAkXTO7NID0JsswyD87SedAZJybXSlKXW6W5LuuyrGXtfQaeULvHpmq
- A52mxhBeLeA+CyegAysqnVINFjgs7rZuIoJbb
-X-Received: by 2002:a05:622a:228a:b0:52f:b1b6:a4aa with SMTP id
- d75a77b69052e-5301b1943d6mr16197661cf.4.1788169740687; 
- Mon, 31 Aug 2026 02:49:00 -0700 (PDT)
-X-Received: by 2002:a05:622a:228a:b0:52f:b1b6:a4aa with SMTP id
- d75a77b69052e-5301b1943d6mr16197331cf.4.1788169740261; 
- Mon, 31 Aug 2026 02:49:00 -0700 (PDT)
-Received: from [192.168.68.100] ([152.250.131.13])
+ AHgh+RoC1JItbm/LWLYsiIjWAkbhdZU3+Z1Ev9cRVbcgwPgwZDlElEi4pDZCpfF8Msfr/+LlQuxEGpzNY1LQ@nongnu.org
+X-Gm-Message-State: AFuF++lZD7ScIzlMQdDGp1ndI+JQbw4vMRFvx6qvjI6xnGZOZID/t5W9
+ bjct4SOqjxh6M34uzQPQP7I4ZucCdsgbiUuW9i25xttP5LnPeweZ5YyU
+X-Gm-Gg: AR+sD12GG+mY35ZNXk7+FthrFisTafa8o+6UJwvHWeycr3c30oaF7O4HdRNhS2trdyw
+ Co8G8H2YSBWmUQqlbwoGUmF/x84MuMLsl4sodV5cQTMqYj+Vz95D5FByytu+tR0EmTeAxMDwjwc
+ SQy8HAmI0iizD4Ldpe3VfYBNQm3d7rSi06J2jI+MjXjO/Ub1+wuE+1ry/13ARGI52lvcnyGURWZ
+ 4BwyfBPVnjrHbcHy+n0H/yk3fTr2mhgvHZ90NXKgzGfDDtur8sXhRKhEj3Fbc7f6esBKmjB50wU
+ zc+Oc5+gIMykZaJxZ6m+Vsl76LDmaZ96RVudh/rk15S+an+KrqlIeaXID8F5SDmsX4tmCrjZmZ/
+ Rvh6BjQh7fm6NdSIHQ7T54n5co1NUbHQtLNTopX1HzmAJQMO1WxgV3AVK8b2AQ7fOB/CmEgfuoI
+ 2k8OMXIDr/dDUihpimqTi+QmDuZYwtKizniDLI+6GHr6RMOihy9wCDW+fEKpaqozgtcdCpGgXBG
+ 0QIh9/MDf5Zb0WZdXS4vMOWovxYmyC+Eo1a
+X-Received: by 2002:a05:6a00:ab0a:b0:84e:7ec:aa42 with SMTP id
+ d2e1a72fcca58-85629f09863mr42946001b3a.10.1788174775164; 
+ Mon, 31 Aug 2026 04:12:55 -0700 (PDT)
+Received: from LAPTOP-CS7CB8K1.localdomain
+ ([2409:8900:7ad7:8121:d841:db7e:846b:ea5e])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-52fbe878f4esm69173531cf.31.2026.08.31.02.48.57
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 31 Aug 2026 02:48:59 -0700 (PDT)
-Message-ID: <6d3b5400-4f73-4049-97bd-55cff8bcc4ef@oss.qualcomm.com>
-Date: Mon, 31 Aug 2026 06:48:55 -0300
+ d2e1a72fcca58-856a397d927sm3367329b3a.54.2026.08.31.04.12.49
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 31 Aug 2026 04:12:54 -0700 (PDT)
+From: Kangjie Huang <flamboyant.h.01@gmail.com>
+Date: Mon, 31 Aug 2026 19:11:14 +0800
+Subject: [PATCH v4 3/3] hw/riscv/k230: Attach a standard SPI NOR flash
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 14/16] hw/riscv: Add property to hart to allow private
- memory
-To: Joel Stanley <joel@jms.id.au>
-Cc: Alistair Francis <alistair.francis@wdc.com>,
- Portia Stephens <portias@oss.tenstorrent.com>,
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu@processmission.com>,
- Nicholas Piggin <npiggin@gmail.com>,
- Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>,
- Michael Ellerman <mpe@kernel.org>, =?UTF-8?Q?C=C3=A9dric_Le_Goater?=
- <clg@kaod.org>, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-References: <20260826220528.54516-1-joel@jms.id.au>
- <20260826221154.54577-1-joel@jms.id.au>
- <20260826221154.54577-6-joel@jms.id.au>
- <be675569-27ef-46cf-82bf-563852bbe66e@oss.qualcomm.com>
- <CACPK8XczvftDPUVb=2pX9ofRNA31jhLopeFPse-o6s7h27BVuQ@mail.gmail.com>
-From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Content-Language: en-US
-In-Reply-To: <CACPK8XczvftDPUVb=2pX9ofRNA31jhLopeFPse-o6s7h27BVuQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-ORIG-GUID: A7PBaoTJCUhqncdSzNNAstdvFABfh6RZ
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODMxMDA4NCBTYWx0ZWRfXyrDRHGz1ie3L
- k9mMRPDWijZQD6kR6J3PWBfDQcZieyUM1T5ovyZnVPZysdOUJ0avCbB6mfFQ4AJkUMLlV607mpk
- 0FB/1rCbnNtl5eQQHMAvY710EAvhXmC9RA4YGIobGS/ChKL8Kknm7gnug3JUFPtaAPRqFWrNxJW
- D1CHGJHJZwCTtI3fsTtlMl2jKKjjoasRHoMYLo2emBnf4LVOKLjNR8qCev5lfyBEFh3vIqUw+Eu
- D9CBpmDqIrf1KHajmgn5g0hM+DW5btZnqUdSdJu9dgAkbE3yQUVY4lgjBnW2j80qI+MMIt11iae
- SqHBQLrfZHc05lPfRIQGd9r30cw5x60SqTh9OdqHAZWvQKTINM1+iQvSdmSn/axa+/A8T6QlUCz
- DADQvRyfV+HHDq4Ffs5KQKjBPavHUsJDp48gnLhJimQTiMTmSgtC7gvownGj7KCfpA+nbOvK/fV
- RwFpO5nxOA4F2RQoGhA==
-X-Proofpoint-GUID: A7PBaoTJCUhqncdSzNNAstdvFABfh6RZ
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODMxMDA4NCBTYWx0ZWRfXwUo0wwuyFyaK
- kkX4UKXwf/lX2WZY/lCgN/2V7aD2u64WbKpq8jKjplSEY/EHly4mNCeQWn6DMI222YAgf9r2Ppq
- 5IxwUbFNQaOvkNU4lNKl687horlbAT8=
-X-Authority-Analysis: v=2.4 cv=d/fFDxjE c=1 sm=1 tr=0 ts=6a954e0d cx=c_pps
- a=WeENfcodrlLV9YRTxbY/uA==:117 a=CXdxNCAnTuDr1kYd6DjE4g==:17
- a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
- a=EUspDBNiAAAA:8 a=t9496tuAAAAA:8 a=AtdzOuRA7NdErCjRmd4A:9 a=QEXdDO2ut3YA:10
- a=kacYvNCVWA4VmyqE58fU:22 a=4wQ91nGE5lQcD7eh5OX0:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-31_03,2026-08-27_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 lowpriorityscore=0 suspectscore=0 impostorscore=0 spamscore=0
- phishscore=0 priorityscore=1501 clxscore=1015 adultscore=0 bulkscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608310084
-Received-SPF: pass client-ip=205.220.168.131;
- envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
-X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Message-Id: <20260831-t_v4_spi_patch-v4-3-370d416f26b5@gmail.com>
+References: <20260831-t_v4_spi_patch-v4-0-370d416f26b5@gmail.com>
+In-Reply-To: <20260831-t_v4_spi_patch-v4-0-370d416f26b5@gmail.com>
+To: qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+Cc: Portia Stephens <portias@oss.tenstorrent.com>, 
+ Bin Meng <bmeng.cn@gmail.com>, Chao Liu <chao.liu@processmission.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Alistair Francis <alistair@alistair23.me>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, 
+ Paolo Bonzini <pbonzini@redhat.com>, Fabiano Rosas <farosas@suse.de>, 
+ Laurent Vivier <lvivier@redhat.com>, 
+ Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>, 
+ Kangjie Huang <flamboyant.h.01@gmail.com>
+X-Mailer: b4 0.13.0
+Received-SPF: pass client-ip=2607:f8b0:4864:20::432;
+ envelope-from=flamboyant.h.01@gmail.com; helo=mail-pf1-x432.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -165,59 +117,291 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+Add an optional `spi-flash` machine property and attach the selected
+M25P80-compatible flash device to logical spi0 CS0.
 
+Add qtests covering the Standard 1-1-1 JEDEC ID read, a read at a fixed
+address, and an EEPROM read with a multi-byte command and a non-zero
+address.
 
-On 8/30/2026 10:57 PM, Joel Stanley wrote:
-> On Thu, 27 Aug 2026 at 21:48, Daniel Henrique Barboza
-> <daniel.barboza@oss.qualcomm.com> wrote:
->>
->> On 8/26/2026 7:11 PM, Joel Stanley wrote:
->>> From: Portia Stephens <portias@oss.tenstorrent.com>
->>>
->>> There are platforms where CPUs have different mapping of system memory.
->>> The global system memory does not allow for this. This adds an optional
->>> property to assign a specific memory region to a hart. This allows for a
->>> machine to alias the hart's memory to system memory while the hart only
->>> views memory from its own memory region.
->>
->> LGTM but please clarify in the commit msg that the memory region is being
->> assigned to the hart array, not "to a hart".
-> 
->  From the machine side you're right, but I agree with the commit
-> message that the memory region assigned to the hart. The property is
-> being set on the individual hart, not on the array:
-> 
->      /* Use private memory instead of system_memory if provided */
->      if (s->memory) {
->          object_property_set_link(OBJECT(&s->harts[idx]), "memory",
->                                   OBJECT(s->memory), &error_abort);
->      }
-> 
-> How about:
-> 
-> "This adds an optional property on the hart array to assign a specific
-> memory region. The array passes the region to each hart it creates,
-> so a machine can alias the harts' memory to system memory, while
-> the harts view memory from their own memory region."
+Standard 1-1-1 transfers against the attached flash were also manually
+verified through the U-Boot and Linux SPI paths of the K230 SDK.
 
+Enhanced SPI, IDMA and XIP paths are out of scope for this series.
 
-That works for me. Thx!
+Signed-off-by: Kangjie Huang <flamboyant.h.01@gmail.com>
+---
+ docs/system/riscv/k230.rst      |  1 +
+ hw/riscv/Kconfig                |  1 +
+ hw/riscv/k230.c                 | 66 ++++++++++++++++++++++++++++++++
+ include/hw/riscv/k230.h         |  2 +
+ tests/qtest/k230-dwc-ssi-test.c | 83 +++++++++++++++++++++++++++++++++++++++++
+ 5 files changed, 153 insertions(+)
 
+diff --git a/docs/system/riscv/k230.rst b/docs/system/riscv/k230.rst
+index a7f7a494cd..7113e79ab1 100644
+--- a/docs/system/riscv/k230.rst
++++ b/docs/system/riscv/k230.rst
+@@ -24,6 +24,7 @@ The ``k230`` machine supports the following devices:
+ * System Direct Memory Access (SDMA)
+ * GZIP Decompress Engine (Decomp_gzip)
+ * 3 DWC SSI controllers (Standard SPI mode)
++* Optional SPI NOR flash on spi0 CS0
+ 
+ Boot options
+ ------------
+diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
+index f348da6d20..1fbf1e0722 100644
+--- a/hw/riscv/Kconfig
++++ b/hw/riscv/Kconfig
+@@ -165,3 +165,4 @@ config K230
+     select K230_GSDMA
+     select K230_DECOMP_GZIP
+     select DWC_SSI
++    select SSI_M25P80
+diff --git a/hw/riscv/k230.c b/hw/riscv/k230.c
+index eb40b53ba8..abd1cc508c 100644
+--- a/hw/riscv/k230.c
++++ b/hw/riscv/k230.c
+@@ -21,7 +21,9 @@
+ #include "system/device_tree.h"
+ #include "system/system.h"
+ #include "system/memory.h"
++#include "system/blockdev.h"
+ #include "target/riscv/cpu.h"
++#include "hw/block/flash.h"
+ #include "hw/core/loader.h"
+ #include "hw/core/sysbus.h"
+ #include "hw/riscv/k230.h"
+@@ -31,6 +33,7 @@
+ #include "hw/intc/sifive_plic.h"
+ #include "hw/char/serial-mm.h"
+ #include "hw/misc/unimp.h"
++#include "hw/ssi/ssi.h"
+ 
+ /* Align K230_SDK k230_canmv_defconfig */
+ #define K230_DIRECT_OPENSBI_ADDR 0x8000000
+@@ -577,6 +580,49 @@ static void k230_firmware_boot(K230MachineState *s, MachineState *machine)
+                               memmap[K230_DEV_BOOTROM].size, 0, 0);
+ }
+ 
++static char *k230_machine_get_spi_flash(Object *obj, Error **errp)
++{
++    K230MachineState *s = RISCV_K230_MACHINE(obj);
++
++    return g_strdup(s->spi_flash_model);
++}
++
++static void k230_machine_set_spi_flash(Object *obj, const char *value,
++                                       Error **errp)
++{
++    K230MachineState *s = RISCV_K230_MACHINE(obj);
++
++    g_free(s->spi_flash_model);
++    s->spi_flash_model = g_strdup(value);
++}
++
++static void k230_connect_spi_flash(DwcSsiState *ssi, unsigned int cs,
++                                   const char *flash_type, DriveInfo *dinfo)
++{
++    ObjectClass *flash_class;
++    DeviceState *flash;
++    qemu_irq flash_cs;
++
++    flash_class = module_object_class_by_name(flash_type);
++    if (!flash_class || object_class_is_abstract(flash_class) ||
++        !object_class_dynamic_cast(flash_class, TYPE_M25P80)) {
++        error_report("'%s' is either abstract or not a subtype of m25p80",
++                     flash_type);
++        exit(EXIT_FAILURE);
++    }
++
++    flash = qdev_new(flash_type);
++
++    if (dinfo) {
++        qdev_prop_set_drive(flash, "drive", blk_by_legacy_dinfo(dinfo));
++    }
++
++    qdev_realize_and_unref(flash, BUS(ssi->spi), &error_fatal);
++
++    flash_cs = qdev_get_gpio_in_named(flash, SSI_GPIO_CS, 0);
++    qdev_connect_gpio_out_named(DEVICE(ssi), "cs", cs, flash_cs);
++}
++
+ static void k230_machine_done(Notifier *notifier, void *data)
+ {
+     K230MachineState *s = container_of(notifier, K230MachineState,
+@@ -608,6 +654,12 @@ static void k230_machine_init(MachineState *machine)
+                             TYPE_RISCV_K230_SOC);
+     qdev_realize(DEVICE(&s->soc), NULL, &error_fatal);
+ 
++    if (s->spi_flash_model) {
++        k230_connect_spi_flash(&s->soc.dwc_ssi[2], 0,
++                               s->spi_flash_model,
++                               drive_get(IF_MTD, 0, 0));
++    }
++
+     /* Data Memory */
+     memory_region_add_subregion(sys_mem, memmap[K230_DEV_DDRC].base,
+                                 machine->ram);
+@@ -620,6 +672,13 @@ static void k230_machine_instance_init(Object *obj)
+ {
+ }
+ 
++static void k230_machine_instance_finalize(Object *obj)
++{
++    K230MachineState *s = RISCV_K230_MACHINE(obj);
++
++    g_clear_pointer(&s->spi_flash_model, g_free);
++}
++
+ static void k230_machine_class_init(ObjectClass *oc, const void *data)
+ {
+     MachineClass *mc = MACHINE_CLASS(oc);
+@@ -629,6 +688,12 @@ static void k230_machine_class_init(ObjectClass *oc, const void *data)
+     mc->default_cpus = 1;
+     mc->default_ram_id = "riscv.K230.ram"; /* DDR */
+     mc->default_ram_size = memmap[K230_DEV_DDRC].size;
++
++    object_class_property_add_str(oc, "spi-flash",
++                                  k230_machine_get_spi_flash,
++                                  k230_machine_set_spi_flash);
++    object_class_property_set_description(
++        oc, "spi-flash", "Attach an M25P80-compatible flash to spi0 CS0");
+ }
+ 
+ static const TypeInfo k230_machine_typeinfo = {
+@@ -636,6 +701,7 @@ static const TypeInfo k230_machine_typeinfo = {
+     .parent     = TYPE_MACHINE,
+     .class_init = k230_machine_class_init,
+     .instance_init = k230_machine_instance_init,
++    .instance_finalize = k230_machine_instance_finalize,
+     .instance_size = sizeof(K230MachineState),
+     .interfaces = riscv64_machine_interfaces,
+ };
+diff --git a/include/hw/riscv/k230.h b/include/hw/riscv/k230.h
+index fdabf454be..9b581ff3e0 100644
+--- a/include/hw/riscv/k230.h
++++ b/include/hw/riscv/k230.h
+@@ -59,6 +59,8 @@ typedef struct K230MachineState {
+     /*< public >*/
+     K230SoCState soc;
+     Notifier machine_done;
++
++    char *spi_flash_model;
+ } K230MachineState;
+ 
+ enum {
+diff --git a/tests/qtest/k230-dwc-ssi-test.c b/tests/qtest/k230-dwc-ssi-test.c
+index 42e3190cb4..a0ec580679 100644
+--- a/tests/qtest/k230-dwc-ssi-test.c
++++ b/tests/qtest/k230-dwc-ssi-test.c
+@@ -80,6 +80,7 @@
+ #define K230_SSI_XIP_MODE_BITS          0x0fc
+ 
+ #define K230_SSI_FIFO_DEPTH             256
++#define K230_SSI_FLASH_SIZE              MiB
+ 
+ typedef struct K230SsiInstance {
+     uint64_t base;
+@@ -593,7 +594,87 @@ static void test_icr_total_clear(void)
+     qtest_quit(qts);
+ }
+ 
++static void test_flash_jedec_id(void)
++{
++    QTestState *qts = qtest_init("-machine k230,spi-flash=m25p80");
++    uint32_t id;
++
++    k230_ssi_configure(qts, K230_SPI0_BASE, K230_SSI_TMOD_TR, 8, 0);
++    k230_ssi_enable_cs(qts, K230_SPI0_BASE, BIT(0));
++
++    /* JEDEC RDID (0x9f): m25p80 reports 0x20 0x20 0x14. */
++    k230_ssi_write_frame(qts, K230_SPI0_BASE, 0x9f);
++    (void)k230_ssi_read_frame(qts, K230_SPI0_BASE);
++    k230_ssi_write_frame(qts, K230_SPI0_BASE, 0x00);
++    id = k230_ssi_read_frame(qts, K230_SPI0_BASE);
++    g_assert_cmphex(id & 0xff, ==, 0x20);
++    k230_ssi_write_frame(qts, K230_SPI0_BASE, 0x00);
++    id = k230_ssi_read_frame(qts, K230_SPI0_BASE);
++    g_assert_cmphex(id & 0xff, ==, 0x20);
++    k230_ssi_write_frame(qts, K230_SPI0_BASE, 0x00);
++    id = k230_ssi_read_frame(qts, K230_SPI0_BASE);
++    g_assert_cmphex(id & 0xff, ==, 0x14);
++
++    qtest_quit(qts);
++}
++
++static void test_flash_fixed_read(void)
++{
++    QTestState *qts = qtest_init("-machine k230,spi-flash=m25p80");
++    g_autofree uint8_t *image = g_malloc(K230_SSI_FLASH_SIZE);
++    g_autofree char *flash_path = NULL;
++    uint32_t byte;
++    int fd;
++
++    k230_ssi_configure(qts, K230_SPI0_BASE, K230_SSI_TMOD_TR, 8, 0);
++    k230_ssi_enable_cs(qts, K230_SPI0_BASE, BIT(0));
++
++    /* Standard 1-1-1 READ (0x03) at address 0x000000. */
++    k230_ssi_write_frame(qts, K230_SPI0_BASE, 0x03);
++    (void)k230_ssi_read_frame(qts, K230_SPI0_BASE);
++    k230_ssi_write_frame(qts, K230_SPI0_BASE, 0x00);
++    (void)k230_ssi_read_frame(qts, K230_SPI0_BASE);
++    k230_ssi_write_frame(qts, K230_SPI0_BASE, 0x00);
++    (void)k230_ssi_read_frame(qts, K230_SPI0_BASE);
++    k230_ssi_write_frame(qts, K230_SPI0_BASE, 0x00);
++    (void)k230_ssi_read_frame(qts, K230_SPI0_BASE);
++
++    /* Without a backend the flash is erased and reads back 0xff. */
++    k230_ssi_write_frame(qts, K230_SPI0_BASE, 0x00);
++    byte = k230_ssi_read_frame(qts, K230_SPI0_BASE);
++    g_assert_cmphex(byte & 0xff, ==, 0xff);
++    k230_ssi_write_frame(qts, K230_SPI0_BASE, 0x00);
++    byte = k230_ssi_read_frame(qts, K230_SPI0_BASE);
++    g_assert_cmphex(byte & 0xff, ==, 0xff);
++
++    qtest_quit(qts);
+ 
++    memset(image, 0xff, K230_SSI_FLASH_SIZE);
++    image[0x123] = 0x5a;
++    image[0x124] = 0xc3;
++    fd = g_file_open_tmp("qtest-k230-ssi-XXXXXX", &flash_path, NULL);
++    g_assert_cmpint(fd, >=, 0);
++    close(fd);
++    g_assert_true(g_file_set_contents(flash_path, (char *)image,
++                                      K230_SSI_FLASH_SIZE, NULL));
++
++    qts = qtest_initf("-machine k230,spi-flash=m25p80 "
++                      "-drive file=%s,format=raw,if=mtd", flash_path);
++    k230_ssi_configure(qts, K230_SPI0_BASE, K230_SSI_TMOD_EEPROM_READ,
++                       8, 1);
++    k230_ssi_writel(qts, K230_SPI0_BASE, K230_SSI_SSIENR, 1);
++    k230_ssi_write_frame(qts, K230_SPI0_BASE, 0x03);
++    k230_ssi_write_frame(qts, K230_SPI0_BASE, 0x00);
++    k230_ssi_write_frame(qts, K230_SPI0_BASE, 0x01);
++    k230_ssi_write_frame(qts, K230_SPI0_BASE, 0x23);
++    k230_ssi_writel(qts, K230_SPI0_BASE, K230_SSI_SER, BIT(0));
++    k230_ssi_wait_mask(qts, K230_SPI0_BASE, K230_SSI_RXFLR,
++                       UINT32_MAX, 2);
++    g_assert_cmphex(k230_ssi_read_frame(qts, K230_SPI0_BASE), ==, 0x5a);
++    g_assert_cmphex(k230_ssi_read_frame(qts, K230_SPI0_BASE), ==, 0xc3);
++    qtest_quit(qts);
++    g_assert_cmpint(g_unlink(flash_path), ==, 0);
++}
+ 
+ static void test_unsupported_registers(void)
+ {
+@@ -633,5 +714,7 @@ int main(int argc, char **argv)
+     qtest_add_func("/k230-dwc-ssi/icr-total-clear", test_icr_total_clear);
+     qtest_add_func("/k230-dwc-ssi/unsupported-registers",
+                    test_unsupported_registers);
++    qtest_add_func("/k230-dwc-ssi/flash-jedec-id", test_flash_jedec_id);
++    qtest_add_func("/k230-dwc-ssi/flash-fixed-read", test_flash_fixed_read);
+     return g_test_run();
+ }
 
-Daniel
-
-> 
-> 
->>
->> E.g.:
->>
->> "(...) This adds an optional property to assign a specific memory region to the
->>    hart array. This allows for a machine to alias the array's memory to
->>    system memory while the array only views memory from its own memory region."
->>
->>
->> With the commit msg change:
->>
->> Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+-- 
+2.43.0
 
 
