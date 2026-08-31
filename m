@@ -4,61 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD3C5C624C6
-	for <qemu-riscv@archiver.kernel.org>; Mon, 31 Aug 2026 13:25:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E2DDC624A4
+	for <qemu-riscv@archiver.kernel.org>; Mon, 31 Aug 2026 13:30:45 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x11zs-00020g-79; Mon, 31 Aug 2026 09:24:24 -0400
+	id 1x125r-0006Lr-Ug; Mon, 31 Aug 2026 09:30:35 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <cp0613@linux.alibaba.com>)
- id 1x11zm-0001rv-0D; Mon, 31 Aug 2026 09:24:18 -0400
-Received: from [115.124.30.101] (helo=out30-101.freemail.mail.aliyun.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <cp0613@linux.alibaba.com>)
- id 1x11zd-0006pQ-6f; Mon, 31 Aug 2026 09:24:17 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linux.alibaba.com; s=default;
- t=1788182634; h=From:To:Subject:Date:Message-ID:MIME-Version;
- bh=v6XMDCYt94mF76Zx8dVfb9niwUZxkL4xtAl2xsI0yz8=;
- b=jrlybt3I+JssfTV0FZ2nd2DfpGPSRwF0XejVy47+YjnDo/jFtnV5x4N7El3ELWixxc3KQXOe3sZX5SvROxqeEhtto7loWPy8azc3NtXXOLUy9lqT4lb4Vkz3ipvOC7w1FEt7APWgatzchZPA5L4NTWIkLO7Wll+ddbBe9TXb+J8=
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R101e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033045133197;
- MF=cp0613@linux.alibaba.com; NM=1; PH=DS; RN=19; SR=0;
- TI=SMTPD_---0X9znfpq_1788182632; 
-Received: from DESKTOP-S9E58SO.localdomain(mailfrom:cp0613@linux.alibaba.com
- fp:SMTPD_---0X9znfpq_1788182632 cluster:ay36) by smtp.aliyun-inc.com;
- Mon, 31 Aug 2026 21:23:53 +0800
-From: Chen Pei <cp0613@linux.alibaba.com>
-To: palmer@dabbelt.com, alistair.francis@wdc.com, mst@redhat.com,
- imammedo@redhat.com, sunilvl@ventanamicro.com, jic23@kernel.org
-Cc: pbonzini@redhat.com, liwei1518@gmail.com, daniel.barboza@oss.qualcomm.com,
- zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
- anisinha@redhat.com, dave.jiang@intel.com, alison.schofield@intel.com,
- junjie.cao@intel.com, guoren@kernel.org, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org, linux-cxl@vger.kernel.org
-Subject: [PATCH v5 1/6] hw/riscv/virt: Add CXL support to the RISC-V virt
- machine
-Date: Mon, 31 Aug 2026 21:23:32 +0800
-Message-ID: <20260831132340.5345-2-cp0613@linux.alibaba.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260831132340.5345-1-cp0613@linux.alibaba.com>
-References: <20260831132340.5345-1-cp0613@linux.alibaba.com>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.101 (deferred)
-Received-SPF: pass client-ip=115.124.30.101;
- envelope-from=cp0613@linux.alibaba.com;
- helo=out30-101.freemail.mail.aliyun.com
-X-Spam_score_int: -166
-X-Spam_score: -16.7
-X-Spam_bar: ----------------
-X-Spam_report: (-16.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
- RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001, USER_IN_DEF_DKIM_WL=-7.5,
- USER_IN_DEF_SPF_WL=-7.5 autolearn=no autolearn_force=no
+ (Exim 4.90_1) (envelope-from <liumingliang.dev@bytedance.com>)
+ id 1x125q-0006L2-Bc
+ for qemu-riscv@nongnu.org; Mon, 31 Aug 2026 09:30:34 -0400
+Received: from va-1-111.ptr.blmpb.com ([209.127.230.111])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <liumingliang.dev@bytedance.com>)
+ id 1x125m-00084P-PR
+ for qemu-riscv@nongnu.org; Mon, 31 Aug 2026 09:30:34 -0400
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ s=2212171451; d=bytedance.com; t=1788183019; h=from:subject:
+ mime-version:from:date:message-id:subject:to:cc:reply-to:content-type:
+ mime-version:in-reply-to:message-id;
+ bh=6i4pwkRLbFmq2zEgQqOHRQZhbm5KLyeVDQucYgNdsgg=;
+ b=pavFGdIGJvDCFMQZC4dLON8fQSEm2P2TfTESFLsZdvoYpUN+lLuk7fCBI9EPH65aEcG4j9
+ oPJfFBAXg6vxTcX++I01KgPnODBiZc8ZAP+9IluZQC4ZfYE8emku8roA9mqkrbjUnZ/uNe
+ 004p5jaVkcPZDls6BLben796Vl+7Pu+NXYJg20crdrrqkW5vobsnz+nfrx+9Hjcyc6e4W0
+ 3+qWpC1cBxs6iUgV0gZ7Uqa6Yv7+wwLPF1xOv7Z9qGkQNMWq2iL9uJ3b6y2cOK5WoZ2Zwt
+ Uolm6d0PHqZ78p0B7XoWRgcyLff+wuIDXXXNd4ZpydlP7mXt5TCUFhjG/miH1g==
+Mime-Version: 1.0
+X-Original-From: Mingliang Liu <liumingliang.dev@bytedance.com>
+X-Lms-Return-Path: <lba+26a9581e9+521c6f+nongnu.org+liumingliang.dev@bytedance.com>
+Cc: <qemu-riscv@nongnu.org>, <palmer@dabbelt.com>, 
+ <Alistair.Francis@wdc.com>, <zhiwei_liu@linux.alibaba.com>, 
+ <liwei1518@gmail.com>, <daniel.barboza@oss.qualcomm.com>, 
+ <chao.liu@processmission.com>, 
+ "Mingliang Liu" <liumingliang.dev@bytedance.com>
+From: "Mingliang Liu" <liumingliang.dev@bytedance.com>
+Date: Mon, 31 Aug 2026 21:29:57 +0800
+Message-Id: <20260831133000.982059-1-liumingliang.dev@bytedance.com>
+Content-Transfer-Encoding: 7bit
+To: <qemu-devel@nongnu.org>
+Subject: [PATCH v2 0/3] target/riscv: Add experimental Zvabd extension support
+Content-Type: text/plain; charset=UTF-8
+X-Mailer: git-send-email 2.39.5
+Received-SPF: pass client-ip=209.127.230.111;
+ envelope-from=liumingliang.dev@bytedance.com; helo=va-1-111.ptr.blmpb.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -74,192 +69,46 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Enable CXL support on the RISC-V virt machine following the same
-approach used by the ARM virt machine:
-- Add PXB and ACPI_CXL Kconfig selections
-- Add CXLState and PCIBus pointer to RISCVVirtState
-- Register CXL machine properties via cxl_machine_init()
-- Create CXL host register region above the PCIe high MMIO region
-- Call cxl_hook_up_pxb_registers() and cxl_fmws_link_targets() at
-  machine_done time
-- Map Fixed Memory Windows above the CXL host register region
-- Add ACPI0017 device in DSDT and build CEDT table in virt-acpi-build.c
+The draft Zvabd extension provides vector integer absolute-difference
+operations for image, video, and other data-processing workloads. It
+introduces eight new instructions:
 
-Signed-off-by: Chen Pei <cp0613@linux.alibaba.com>
----
- hw/riscv/Kconfig           |  2 ++
- hw/riscv/virt-acpi-build.c | 20 ++++++++++++++++++++
- hw/riscv/virt.c            | 37 +++++++++++++++++++++++++++++++++++++
- include/hw/riscv/virt.h    |  3 +++
- 4 files changed, 62 insertions(+)
+  - vabd.vv, vabd.vx, vabdu.vv, and vabdu.vx support SEW values from
+    8 through ELEN, with SEW 64 requiring Zve64x.
+  - vwabda.vv, vwabda.vx, vwabdau.vv, and vwabdau.vx support SEW 8
+    and 16 and accumulate into a double-width destination.
 
-diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-index de37c08cae..0ba3cd9e15 100644
---- a/hw/riscv/Kconfig
-+++ b/hw/riscv/Kconfig
-@@ -66,8 +66,10 @@ config RISCV_VIRT
-     select VIRTIO_MMIO
-     select FW_CFG_DMA
-     select PLATFORM_BUS
-+    select PXB
-     select ACPI
-     select ACPI_PCI
-+    select ACPI_CXL
- 
- config SHAKTI_C
-     bool
-diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
-index 59c454f4f9..3188cdc5bf 100644
---- a/hw/riscv/virt-acpi-build.c
-+++ b/hw/riscv/virt-acpi-build.c
-@@ -29,12 +29,16 @@
- #include "hw/acpi/aml-build.h"
- #include "hw/acpi/pci.h"
- #include "hw/acpi/utils.h"
-+#include "hw/acpi/cxl.h"
- #include "hw/intc/riscv_aclint.h"
- #include "hw/nvram/fw_cfg_acpi.h"
- #include "hw/pci-host/gpex.h"
-+#include "hw/pci/pci_bus.h"
- #include "hw/riscv/virt.h"
- #include "hw/riscv/numa.h"
- #include "hw/virtio/virtio-acpi.h"
-+#include "hw/cxl/cxl.h"
-+#include "hw/cxl/cxl_host.h"
- #include "kvm/kvm_riscv.h"
- #include "migration/vmstate.h"
- #include "qapi/error.h"
-@@ -514,6 +518,17 @@ static void build_dsdt(GArray *table_data,
-         acpi_dsdt_add_gpex_host(scope, PCIE_IRQ + s->num_sources * 2);
-     }
- 
-+    if (s->cxl_devices_state.is_enabled) {
-+        Aml *cxl_dev = aml_device("CXLM");
-+        aml_append(cxl_dev, aml_name_decl("_HID", aml_string("ACPI0017")));
-+        Aml *method = aml_method("_STA", 0, AML_NOTSERIALIZED);
-+        aml_append(method, aml_return(aml_int(0x0B)));
-+        aml_append(cxl_dev, method);
-+        build_cxl_dsm_method(cxl_dev);
-+
-+        aml_append(scope, cxl_dev);
-+    }
-+
-     aml_append(dsdt, scope);
- 
-     /* copy AML table into ACPI tables blob and patch header there */
-@@ -921,6 +936,11 @@ static void virt_acpi_build(RISCVVirtState *s, AcpiBuildTables *tables)
-                    s->oem_table_id);
-     }
- 
-+    if (s->cxl_devices_state.is_enabled) {
-+        cxl_build_cedt(table_offsets, tables_blob, tables->linker,
-+                       s->oem_id, s->oem_table_id, &s->cxl_devices_state);
-+    }
-+
-     if (ms->numa_state->num_nodes > 0) {
-         acpi_add_table(table_offsets, tables_blob);
-         build_srat(tables_blob, tables->linker, s);
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 51bac47a91..e903551263 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -55,6 +55,8 @@
- #include "hw/pci/pci.h"
- #include "hw/pci-host/gpex.h"
- #include "hw/display/ramfb.h"
-+#include "hw/cxl/cxl.h"
-+#include "hw/cxl/cxl_host.h"
- #include "hw/acpi/aml-build.h"
- #include "qapi/qapi-visit-common.h"
- #include "hw/virtio/virtio-iommu.h"
-@@ -1101,9 +1103,33 @@ static inline DeviceState *gpex_pcie_init(MemoryRegion *sys_mem,
-     }
- 
-     GPEX_HOST(dev)->gpex_cfg.bus = PCI_HOST_BRIDGE(dev)->bus;
-+    s->pci_bus = PCI_HOST_BRIDGE(dev)->bus;
-     return dev;
- }
- 
-+static void cxl_host_state_init(RISCVVirtState *s)
-+{
-+    MemoryRegion *sysmem = get_system_memory();
-+    MemoryRegion *mr = &s->cxl_devices_state.host_mr;
-+    hwaddr base;
-+
-+    if (!s->cxl_devices_state.is_enabled) {
-+        return;
-+    }
-+
-+    base = virt_high_pcie_memmap.base + virt_high_pcie_memmap.size;
-+    base = ROUND_UP(base, 64 * KiB);
-+
-+    memory_region_init(mr, OBJECT(s), "cxl_host_reg", 64 * KiB * 16);
-+    memory_region_add_subregion(sysmem, base, mr);
-+
-+    /* Map the Fixed Memory Windows above the CXL host register region. */
-+    base += memory_region_size(mr);
-+    base = ROUND_UP(base, 256 * MiB);
-+    cxl_fmws_set_memmap(base, UINT64_MAX);
-+    cxl_fmws_update_mmio();
-+}
-+
- static FWCfgState *create_fw_cfg(const MachineState *ms, hwaddr base)
- {
-     FWCfgState *fw_cfg;
-@@ -1213,6 +1239,13 @@ static void virt_machine_done(Notifier *notifier, void *data)
-     BlockBackend *pflash_blk0;
-     RISCVBootInfo boot_info;
- 
-+    cxl_hook_up_pxb_registers(s->pci_bus, &s->cxl_devices_state,
-+                              &error_fatal);
-+
-+    if (s->cxl_devices_state.is_enabled) {
-+        cxl_fmws_link_targets(&error_fatal);
-+    }
-+
-     /*
-      * An user provided dtb must include everything, including
-      * dynamic sysbus devices. Our FDT needs to be finalized.
-@@ -1451,6 +1484,8 @@ static void virt_machine_init(MachineState *machine)
-             ROUND_UP(virt_high_pcie_memmap.base, virt_high_pcie_memmap.size);
-     }
- 
-+    cxl_host_state_init(s);
-+
-     /* register system main memory (actual RAM) */
-     memory_region_add_subregion(system_memory, s->memmap[VIRT_DRAM].base,
-                                 machine->ram);
-@@ -1558,6 +1593,8 @@ static void virt_machine_instance_init(Object *obj)
-     s->acpi = ON_OFF_AUTO_AUTO;
-     s->iommu_sys = ON_OFF_AUTO_AUTO;
-     s->num_sources = VIRT_IRQCHIP_NUM_SOURCES;
-+
-+    cxl_machine_init(obj, &s->cxl_devices_state);
- }
- 
- static char *virt_get_aia_guests(Object *obj, Error **errp)
-diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
-index 36a2def410..4cf930ab9f 100644
---- a/include/hw/riscv/virt.h
-+++ b/include/hw/riscv/virt.h
-@@ -24,6 +24,7 @@
- #include "hw/core/sysbus.h"
- #include "hw/block/flash.h"
- #include "hw/intc/riscv_imsic.h"
-+#include "hw/cxl/cxl.h"
- 
- #define VIRT_CPUS_MAX_BITS             9
- #define VIRT_CPUS_MAX                  (1 << VIRT_CPUS_MAX_BITS)
-@@ -65,6 +66,8 @@ struct RISCVVirtState {
-     OnOffAuto iommu_sys;
-     uint16_t pci_iommu_bdf;
-     uint16_t num_sources;
-+    CXLState cxl_devices_state;
-+    PCIBus *pci_bus;
- };
- 
- enum {
+The specification is under review at:
+https://github.com/riscv/riscv-isa-manual/pull/3279
+
+These patch implement this instruction extension, including instruction
+decoder, TCG translation, helpers, and tests, etc.
+
+After the first review, this patch has been updated as follows:
+  - Added support for recognizing the vabs.v pseudo-instruction in the disassembler.
+  - Added tests for the eight Zvabd instructions based on Daniel's tests.
+
+Mingliang Liu (2):
+  disas/riscv: Support vabs.v pseudo-instruction
+  tests/tcg/riscv64: Add tests for Zvabd extension
+
+Zhibo Hong (1):
+  target/riscv: Add experimental Zvabd extension support
+
+ disas/riscv-op.c.inc                        |   9 +
+ disas/riscv.c                               |  14 +
+ target/riscv/cpu.c                          |   1 +
+ target/riscv/cpu_cfg_fields.h.inc           |   1 +
+ target/riscv/helper.h                       |  26 +
+ target/riscv/insn32.decode                  |  10 +
+ target/riscv/tcg/insn_trans/trans_rvv.c.inc |  45 ++
+ target/riscv/tcg/tcg-cpu.c                  |   6 +
+ target/riscv/tcg/vector_helper.c            |  56 ++
+ tests/tcg/riscv64/Makefile.softmmu-target   |   8 +
+ tests/tcg/riscv64/test-zvabd.S              | 659 ++++++++++++++++++++
+ 11 files changed, 835 insertions(+)
+ create mode 100644 tests/tcg/riscv64/test-zvabd.S
+
 -- 
-2.50.1
-
+2.39.5
 
