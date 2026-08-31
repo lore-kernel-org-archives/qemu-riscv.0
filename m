@@ -4,71 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A207AC624C2
-	for <qemu-riscv@archiver.kernel.org>; Mon, 31 Aug 2026 07:42:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 024DDC61DE2
+	for <qemu-riscv@archiver.kernel.org>; Mon, 31 Aug 2026 08:16:31 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x0weV-0003hz-8l; Mon, 31 Aug 2026 03:41:59 -0400
+	id 1x0xBa-0004E6-Ns; Mon, 31 Aug 2026 04:16:10 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <xb@ultrarisc.com>)
- id 1x0weS-0003eI-QX; Mon, 31 Aug 2026 03:41:56 -0400
-Received: from [218.76.62.146] (helo=ultrarisc.com)
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <xb@ultrarisc.com>)
- id 1x0weQ-00052J-HK; Mon, 31 Aug 2026 03:41:56 -0400
+ (Exim 4.90_1) (envelope-from <lyndra@linux.alibaba.com>)
+ id 1x0xBZ-0004DW-4c; Mon, 31 Aug 2026 04:16:09 -0400
+Received: from [115.124.30.97] (helo=out30-97.freemail.mail.aliyun.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <lyndra@linux.alibaba.com>)
+ id 1x0xBS-0005kL-No; Mon, 31 Aug 2026 04:16:08 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ultrarisc.com; s=dkim; h=Received:From:To:Cc:Subject:Date:
- Message-ID:MIME-Version:Content-Transfer-Encoding; bh=Nt7lEld3dW
- AtkCJoWxMQi3BMcDyUI7vsc0kJkDLYU28=; b=Q++dGdxgq/dhQklIT8jz7SmDR3
- sVkVOfOufsOPM7xlVNQy3ynsYWoRuON2Fqp60bK6hDgJP8ErY+005bUlUNq1M8fz
- 9sl5etRPmpogSTrorqVKCsQO9W8oEji/wNsv5RDf8MO0fCeU4CwV7jOYslg+Egbv
- D/6XdzdMEZMMgaIyc=
-Received: from ur-dp1000 (unknown [192.168.100.1])
- by localhost.localdomain (Coremail) with SMTP id
- AQAAfwDHQAceMJVq4BUAAA--.112S2; 
- Mon, 31 Aug 2026 15:41:36 +0800 (CST)
-From: Xie Bo <xb@ultrarisc.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com,
- daniel.barboza@oss.qualcomm.com, zhiwei_liu@linux.alibaba.com,
- chao.liu@processmission.com, qemu-stable@nongnu.org,
- Xie Bo <xb@ultrarisc.com>
-Subject: [PATCH 0/3] target/riscv/kvm: Fix a few migration issues
-Date: Mon, 31 Aug 2026 15:41:03 +0800
-Message-ID: <20260831074106.1798671-1-xb@ultrarisc.com>
-X-Mailer: git-send-email 2.54.0
+ d=linux.alibaba.com; s=default;
+ t=1788164139; h=Message-ID:Date:MIME-Version:From:Subject:To:Content-Type;
+ bh=3mOtK5HVWrO0c7khLTkhvRIt2EjJuwTAV+yVsqi/j1E=;
+ b=uc6N0JpBTe89dJi0e9OMciMCsb2UtWNc4aMn+zxeG8ZqBIUe4hUe2Wvdrrt1MyIzDJ150Cd2QoRvP42lismsMMiQMv+QepkqmzMr7qoLwRPnkly025wxB5JipfU+ZeyYwZE5WpBuApRPcGDvwIt4J1h7WfcqBlZauAKfnRXv6hA=
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R201e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033032089153;
+ MF=lyndra@linux.alibaba.com; NM=1; PH=DS; RN=10; SR=0;
+ TI=SMTPD_---0X9vWv4j_1788164137; 
+Received: from 30.166.80.78(mailfrom:lyndra@linux.alibaba.com
+ fp:SMTPD_---0X9vWv4j_1788164137 cluster:ay36) by smtp.aliyun-inc.com;
+ Mon, 31 Aug 2026 16:15:38 +0800
+Message-ID: <6354eb8b-7319-4e03-ab16-12e8857added@linux.alibaba.com>
+Date: Mon, 31 Aug 2026 16:15:37 +0800
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: AQAAfwDHQAceMJVq4BUAAA--.112S2
-X-Coremail-Antispam: 1UD129KBjvdXoW7Jr1xKr47KF43ZryfXw47urg_yoWkuFg_Ww
- 40yFW3ua4UXFyUXFWUuw15JrW3JrWrGFyUCa17Jr4DK34UWryDJ3Z8GF15ZrWUArW5Jryf
- Ar1Sqa4xKw17XjkaLaAFLSUrUUUUjb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
- 9fnUUIcSsGvfJTRUUUb-kFF20E14v26r4j6ryUM7CY07I20VC2zVCF04k26cxKx2IYs7xG
- 6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8w
- A2z4x0Y4vE2Ix0cI8IcVAFwI0_Jr0_JF4l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr0_
- Cr1l84ACjcxK6I8E87Iv67AKxVW8JVWxJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gr0_Gr
- 1UM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xII
- jxv20xvE14v26r1Y6r17McIj6I8E87Iv67AKxVW8JVWxJwAm72CE4IkC6x0Yz7v_Jr0_Gr
- 1lF7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7M4IIrI8v6xkF7I0E8cxa
- n2IY04v7MxkF7I0En4kS14v26r1q6r43MxkIecxEwVCm-wCF04k20xvY0x0EwIxGrwCFx2
- IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v26r1j6r18MI8I3I0E7480Y4vE14v2
- 6r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67
- AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Jr0_Gr1lIxAIcVCF04k26cxKx2IY
- s7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Jr
- 0_GrUvcSsGvfC2KfnxnUUI43ZEXa7VUbzpBDUUUUU==
-X-CM-SenderInfo: l0e63zxwud2x1vfou0bp/1tbiAQAMB2qOWvsAQwALsH
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 218.76.62.146 (failed)
-Received-SPF: pass client-ip=218.76.62.146; envelope-from=xb@ultrarisc.com;
- helo=ultrarisc.com
-X-Spam_score_int: -12
-X-Spam_score: -1.3
-X-Spam_bar: -
-X-Spam_report: (-1.3 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, RDNS_NONE=0.793,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=no autolearn_force=no
+User-Agent: Mozilla Thunderbird
+From: TianCheng TANG <lyndra@linux.alibaba.com>
+Subject: Re: [PATCH] target/riscv: Fix LCOFI masking in sie/sip/mvip
+To: Mayuresh Chitale <mayuresh.chitale@oss.qualcomm.com>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
+ <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Chao Liu <chao.liu@processmission.com>, Gong Shuai <gsh517025@gmail.com>,
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+References: <20260813134002.862578-1-mayuresh.chitale@oss.qualcomm.com>
+In-Reply-To: <20260813134002.862578-1-mayuresh.chitale@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.97 (deferred)
+Received-SPF: pass client-ip=115.124.30.97;
+ envelope-from=lyndra@linux.alibaba.com; helo=out30-97.freemail.mail.aliyun.com
+X-Spam_score_int: -166
+X-Spam_score: -16.7
+X-Spam_bar: ----------------
+X-Spam_report: (-16.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.01, RDNS_NONE=0.793,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001,
+ USER_IN_DEF_DKIM_WL=-7.5,
+ USER_IN_DEF_SPF_WL=-7.5 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -84,40 +75,29 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi,
+Hi Mayuresh,
 
-Here are three RISC-V KVM migration fixes I found while testing live
-migration.
+Thanks for fixing this.
 
-The first patch fixes FCSR migration.  The second makes the existing
-timer-frequency restriction effective by rejecting migration between
-hosts with different frequencies.  While checking the vector register
-code, I also noticed that vcsr was not synchronized.
+While testing related RISC-V PMU changes, I noticed the same read-back
+issue reported by Gong: rmw_sip64() also needs to include LCOFI in its
+read mask.
 
-I tested KVM and non-KVM builds.  On the RISC-V host, a four-vCPU guest
-kept running after migration and FCSR was preserved.  Migration from a
-10 MHz source to a destination reporting 11 MHz was rejected.
+I also noticed that adding MIP_LCOFIP to the static masks exposes bit
+13 when Sscofpmf is disabled. The specification requires sip.LCOFIP
+and sie.LCOFIE to be read-only zero in that configuration. Would it
+make sense to condition these masks on ext_sscofpmf?
 
-The test host does not have the V extension, so I could only
-compile-test the last patch.
+For the virtual-interrupt path, Smcdeleg requires both mvip and mvien
+LCOFI when Smcdeleg, Sscofpmf, and Smaia are implemented. Is mvien
+support planned as a follow-up?
+
+I have local TCG tests covering the base, extension-disabled, and
+virtual-interrupt cases and can share them if useful.
+
+This also appears to address:
+https://gitlab.com/qemu-project/qemu/-/work_items/3969
 
 Thanks,
-Bo
-
-Xie Bo (3):
-  target/riscv/kvm: Preserve FCSR across migration
-  target/riscv/kvm: Reject migration with a different timer frequency
-  target/riscv/kvm: Preserve VCSR across migration
-
- target/riscv/cpu.h           |  4 ++
- target/riscv/kvm/kvm-cpu.c   | 74 +++++++++++++++++++++++++++---------
- target/riscv/kvm/kvm_riscv.h |  1 +
- target/riscv/machine.c       | 58 ++++++++++++++++++++++++++++
- 4 files changed, 119 insertions(+), 18 deletions(-)
-
-
-base-commit: d2e570cc0f97b936902a5b1b86b73c0f5998b475
--- 
-2.17.1
-
+Tiancheng
 
