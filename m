@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA681C624C6
-	for <qemu-riscv@archiver.kernel.org>; Mon, 31 Aug 2026 13:24:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 307BAC624A4
+	for <qemu-riscv@archiver.kernel.org>; Mon, 31 Aug 2026 13:25:14 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x11zo-0001tl-FK; Mon, 31 Aug 2026 09:24:20 -0400
+	id 1x11zl-0001pq-Tb; Mon, 31 Aug 2026 09:24:18 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <cp0613@linux.alibaba.com>)
- id 1x11zk-0001py-RR; Mon, 31 Aug 2026 09:24:16 -0400
+ id 1x11zi-0001ms-Hg; Mon, 31 Aug 2026 09:24:14 -0400
 Received: from [115.124.30.99] (helo=out30-99.freemail.mail.aliyun.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <cp0613@linux.alibaba.com>)
- id 1x11zd-0006pr-Je; Mon, 31 Aug 2026 09:24:16 -0400
+ id 1x11zc-0006qG-PX; Mon, 31 Aug 2026 09:24:14 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linux.alibaba.com; s=default;
- t=1788182636; h=From:To:Subject:Date:Message-ID:MIME-Version;
- bh=qUoiwS+nVtbX4Kx79t0Lc82rPB+U+QOyOnVoT6G/J5I=;
- b=Mz2ND8JNRYklwMwY28YSR61OvEAPM3NqR4767ozka+xWAZMln7KN1Wz1FzD0XWD/U8s25kWBDTMmVkyFQx/Ugdk6Q1JXwGg45dOi8AkQUL70Vo05mRDrvYJ94EU7qF2Q8HV1kYjIh8FOyjbTJWAAI+EBO98w2zGmglX6vp0tAAM=
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R831e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam011083073210;
+ t=1788182638; h=From:To:Subject:Date:Message-ID:MIME-Version;
+ bh=pgiT/hQFiGb8Z/BKq58nZtBYUay8m5suI2xbvvisSTg=;
+ b=jV2uX+ZRW/OZvMdN28QKDXZNuKsvew1HhULzZDXbJk5UCu9b6XdxW6YJCDcyhEcUHS1rSB0EDaOKzzKWYyVwxDtbGZk3D6HjVUvhJT3NaPp3Udejn+SN1xN2EtWuqdq9tsaCmT96g6BXLmqgOqBbe9RJ1zwe/it8Wgk9OQgLG8I=
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R781e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033037026112;
  MF=cp0613@linux.alibaba.com; NM=1; PH=DS; RN=19; SR=0;
- TI=SMTPD_---0X9znfql_1788182635; 
+ TI=SMTPD_---0X9znfrJ_1788182637; 
 Received: from DESKTOP-S9E58SO.localdomain(mailfrom:cp0613@linux.alibaba.com
- fp:SMTPD_---0X9znfql_1788182635 cluster:ay36) by smtp.aliyun-inc.com;
- Mon, 31 Aug 2026 21:23:56 +0800
+ fp:SMTPD_---0X9znfrJ_1788182637 cluster:ay36) by smtp.aliyun-inc.com;
+ Mon, 31 Aug 2026 21:23:57 +0800
 From: Chen Pei <cp0613@linux.alibaba.com>
 To: palmer@dabbelt.com, alistair.francis@wdc.com, mst@redhat.com,
  imammedo@redhat.com, sunilvl@ventanamicro.com, jic23@kernel.org
@@ -38,10 +38,10 @@ Cc: pbonzini@redhat.com, liwei1518@gmail.com, daniel.barboza@oss.qualcomm.com,
  anisinha@redhat.com, dave.jiang@intel.com, alison.schofield@intel.com,
  junjie.cao@intel.com, guoren@kernel.org, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org, linux-cxl@vger.kernel.org
-Subject: [PATCH v5 4/6] tests/qtest: Prepare golden files for the RISC-V CXL
- ACPI test
-Date: Mon, 31 Aug 2026 21:23:35 +0800
-Message-ID: <20260831132340.5345-5-cp0613@linux.alibaba.com>
+Subject: [PATCH v5 6/6] tests/qtest: Update RISC-V CXL ACPI golden master
+ binaries
+Date: Mon, 31 Aug 2026 21:23:37 +0800
+Message-ID: <20260831132340.5345-7-cp0613@linux.alibaba.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260831132340.5345-1-cp0613@linux.alibaba.com>
 References: <20260831132340.5345-1-cp0613@linux.alibaba.com>
@@ -73,44 +73,104 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Add empty DSDT.cxl and CEDT.cxl golden files and list them in
-bios-tables-test-allowed-diff.h, in preparation for the RISC-V CXL
-bios-tables test added in the following patch.  The populated golden
-master binaries are committed separately in a final patch, following
-the bios-tables-test update process.
+Populate the DSDT.cxl and CEDT.cxl golden master binaries for the
+RISC-V CXL bios-tables test and empty
+bios-tables-test-allowed-diff.h, following the bios-tables-test update
+process.
+
+The expected AML added by this series is:
+
+DSDT.cxl:
+  Device (PC0C)        // ACPI0016 CXL host bridge (pxb-cxl, bus 0x0C)
+    Name (_CRS, ResourceTemplate () {
+        DWordMemory (... 0x40400000 .. 0x405FFFFF ...)   // 32-bit MMIO
+        QWordMemory (... 0x400100000 .. 0x40010FFFF ...) // 64-bit MMIO
+        WordBusNumber (... 0x000C .. 0x000D ...)
+    })
+    Method (_OSC, ...)   // PCI host bridge + CXL UUIDs
+  Device (CXLM)        // ACPI0017 CXL memory controller
+    Name (_HID, "ACPI0017")
+    Name (_DEP, Package () { \_SB.PC0C })
+    Method (_STA, ...) / Method (_DSM, ...)
+
+CEDT.cxl:
+  CHBS : CXL Host Bridge Structure, Register base 0x800000000
+  CFMWS: CXL Fixed Memory Window, base 0x810000000, size 4G
 
 Reviewed-by: Junjie Cao <junjie.cao@intel.com>
 Signed-off-by: Chen Pei <cp0613@linux.alibaba.com>
 ---
 
-v4:
-- Split the CXL bios-tables test into the staged flow documented in
-  bios-tables-test.c: empty golden files + allowed-diff.h, then the test
-  code, then the populated golden master binaries with an emptied
-  allowed-diff.h in a final patch (matching how the riscv64 goldens were
-  originally added upstream).
+v5:
+- Regenerate DSDT.cxl against the in-tree edk2-riscv-code.fd blob the
+  test boots: the 64-bit window becomes 0x400100000..0x40010FFFF with
+  the matching PCI0 range shift.
 
- tests/data/acpi/riscv64/virt/CEDT.cxl       | 0
- tests/data/acpi/riscv64/virt/DSDT.cxl       | 0
- tests/qtest/bios-tables-test-allowed-diff.h | 2 ++
- 3 files changed, 2 insertions(+)
- create mode 100644 tests/data/acpi/riscv64/virt/CEDT.cxl
- create mode 100644 tests/data/acpi/riscv64/virt/DSDT.cxl
+ tests/data/acpi/riscv64/virt/CEDT.cxl       | Bin 0 -> 108 bytes
+ tests/data/acpi/riscv64/virt/DSDT.cxl       | Bin 0 -> 6331 bytes
+ tests/qtest/bios-tables-test-allowed-diff.h |   2 --
+ 3 files changed, 2 deletions(-)
 
 diff --git a/tests/data/acpi/riscv64/virt/CEDT.cxl b/tests/data/acpi/riscv64/virt/CEDT.cxl
-new file mode 100644
-index 0000000000..e69de29bb2
+index e69de29bb2d1d6434b8b29ae775ad8c2e48c5391..81d746dfb09ccb147e26bb64060404ca3191d097 100644
+GIT binary patch
+literal 108
+zc-nJzbqUE~U|?VjaPoKd2v%^42yj*a0!E-1hz+6{7!(+IKx!BefCEf2LP-snumA^?
+O0aMEg#QH!C(hmS*@&^F`
+
+literal 0
+Hc-jL100001
+
 diff --git a/tests/data/acpi/riscv64/virt/DSDT.cxl b/tests/data/acpi/riscv64/virt/DSDT.cxl
-new file mode 100644
-index 0000000000..e69de29bb2
+index e69de29bb2d1d6434b8b29ae775ad8c2e48c5391..c3d68cf3a080ab66160f6847267fe4b9f8a8c6fc 100644
+GIT binary patch
+literal 6331
+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
+
+literal 0
+Hc-jL100001
+
 diff --git a/tests/qtest/bios-tables-test-allowed-diff.h b/tests/qtest/bios-tables-test-allowed-diff.h
-index dfb8523c8b..c05fb697a5 100644
+index c05fb697a5..dfb8523c8b 100644
 --- a/tests/qtest/bios-tables-test-allowed-diff.h
 +++ b/tests/qtest/bios-tables-test-allowed-diff.h
-@@ -1 +1,3 @@
+@@ -1,3 +1 @@
  /* List of comma-separated changed AML files to ignore */
-+"riscv64/virt/DSDT.cxl",
-+"riscv64/virt/CEDT.cxl",
+-"riscv64/virt/DSDT.cxl",
+-"riscv64/virt/CEDT.cxl",
 -- 
 2.50.1
 
