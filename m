@@ -4,112 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74803C61DE2
-	for <qemu-riscv@archiver.kernel.org>; Mon, 31 Aug 2026 07:06:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C363CC61DD3
+	for <qemu-riscv@archiver.kernel.org>; Mon, 31 Aug 2026 07:41:59 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x0w6E-0002ww-45; Mon, 31 Aug 2026 03:06:34 -0400
+	id 1x0wdu-0003WO-OL; Mon, 31 Aug 2026 03:41:22 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1x0w68-0002wK-Ty
- for qemu-riscv@nongnu.org; Mon, 31 Aug 2026 03:06:30 -0400
-Received: from mail-yx1-xb12b.google.com ([2607:f8b0:4864:20::b12b])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1x0w66-0002f4-JO
- for qemu-riscv@nongnu.org; Mon, 31 Aug 2026 03:06:28 -0400
-Received: by mail-yx1-xb12b.google.com with SMTP id
- 956f58d0204a3-66f79f58123so533833d50.1
- for <qemu-riscv@nongnu.org>; Mon, 31 Aug 2026 00:06:25 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1788159985; cv=none;
- d=google.com; s=arc-20260327;
- b=F0gzRY0Q9b93MzsIsUK1RjGXTtGyyH7yZRZnCHnZ4BG3D9aoiSL62SgeqDZDsIprv8
- qIv6J737jCTiXxod9rPFSB6aWL6Whmhb8NyArNAQ8eJDRRK5dt2Dy8GuP4ALnGuAufpk
- YVOGV9cep8JDQuNhnM+j0d83t3FVGo13atz2CxpEWYn+GdAQq9I7xttTcB+4ZQhGnWTp
- jTHrRFcyMcZrXdk+Hmd+20E1fGl3MyDgeNfn4DQ3ufZOfBJNn6e7CNNYbfcvpsuLovV6
- v3tIqZ/fDxOfGSOACbRz9PbwQXgwJzSh1xROeAJ49ycrmS7b/bK9AiR1G9bQrQK4stav
- SK4w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=Vh1sNaFQo/dCNzKzQAqORQc/BQd2gCS7fALdj1uI5Tc=;
- fh=Jo1AliR2Oxf9w1xazjsa7ZWzDu4jbTxktW2AduyMWSg=;
- b=Xwyw3upoMq8dK0Af2juY+T/QGJarBn240iSEX2c/bUEFnqzwL6k4YAq0H5Qpr2lKSD
- NTeySo+CUs7tokSySeTywli91CcoeYJN6R5ptn39/vE1c4R6QwDQWmoRhQFnJKeZhAKh
- wGTnsZTYxi3Cxov7G307t3Rjs2Xm8XM28K8tGvm9USqrFyZWgKQdm3Il/TSzWC3SjnZr
- KB134/ochBarCy2jmtnnOuesg0BfFvTiQYr86IPzzBzzGkCS4JXupDa8lrc6XgxAKfyt
- eaPa9NR4bOS4mGyfoPSekpL+pYDdOy6OHs4FmG4NvjPBOoU4dn8DDh3lmMgOS+9zXC0D
- du2w==; darn=nongnu.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ (Exim 4.90_1) (envelope-from <lyndra@linux.alibaba.com>)
+ id 1x0wdq-0003WB-Tf; Mon, 31 Aug 2026 03:41:19 -0400
+Received: from [115.124.30.130] (helo=out30-130.freemail.mail.aliyun.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <lyndra@linux.alibaba.com>)
+ id 1x0wdn-0004ml-Am; Mon, 31 Aug 2026 03:41:18 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=jms.id.au; s=google; t=1788159985; x=1788764785; darn=nongnu.org;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=Vh1sNaFQo/dCNzKzQAqORQc/BQd2gCS7fALdj1uI5Tc=;
- b=TI4ympfGdGs3HYjYB7XjAwnxTmfAwjRi3+vmkrNv1OGInvaWLedZIk7IYm9MN3pT0U
- 6kGC/Miaed9jMLe6zm8LvEBBNCMaj2mcKj5eY7dz25xQFVdu+MSMkpL67u9qHy1k7T8e
- sGq+LJVB2ng/yGlingg33KoB2QyoHep5skOcQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788159985; x=1788764785;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=Vh1sNaFQo/dCNzKzQAqORQc/BQd2gCS7fALdj1uI5Tc=;
- b=our8bjanYEnd4yC7FTt59p7tk3itSQjm+lX6sSpK2N2j33CBEJOT6DxTRz0wU8M+hv
- vKqxVhYU0whPed1TQiM+pFkAjwqtUAiz2ItVr7rVMm/sP4VC6sITG02UpodFFGmmuPMD
- fiiiYRbt2pUloQ1WeVdq8u7LjEQJ5NkKV8zpH5RJlpJwvMvjK0IX9P/qlKMtBEaW//wI
- tF6Lbqgk5uToLE9bXrEysEnHUdh/Ct7v7ulGacQ51gGqH3r4EEyuwBbB8PuvFY+fJFul
- z/Sg8yqqZhZLpHAnMfcVADB+hC/YqPua71DbCbcES2YFotcoEQJ6A6N7/kjxQbEOFDn1
- FnPQ==
-X-Forwarded-Encrypted: i=1;
- AKwUvBxAk8k8XPeWQo/AO9nWqNMf7I4uk6hvpvyrQEax84fLh+XrUFIpgUeTXMZSjpFelsB0LuEBPXUCPOIH@nongnu.org
-X-Gm-Message-State: AFuF++lPJLtWlgbgP8AwCBdSs0aopLdex5igKPJoWDWX3+Uyc5cd9HS+
- nQp8qGg+Q72+5F1YK5zF1wmYRRZoptjXfN6AI800/axK4/MI8dR7XtR5RQVP12tt5ndCTksOgAR
- ONWT2TmfYqvRiy3HEY2i1M+oulLNk8A0=
-X-Gm-Gg: AYBFou01m0h62NybQCID35TWfOi0hKqk+rGOL/SYDjwC98hejsLldBHjGwyV0r0tysw
- wnidTBto0obBIOCrkPowHNIOs7gxG5A3DUz5XFgSkwl3uxdbutufbcGIMWO36PinW3FR5tUZBZ0
- o2+wEV33hn5plRcOcDaM/H3rfD8rjqjfPoOsLk0CMjDoCgw/d1L9gLNBwNPIdaAbqyq0hI/PsKX
- ng0ymnPIlIDI/r9dnmfzPWMz5+/JuVJOb+LyMdklPApVcR4T5W9+MLwM6Q+PVY1VYoY5OeInPfu
- hX6nW3il6A+HEzTsKKhNBe76HNZm6EOBik1flzC0cFcex00onBVzjMj2620wIuZVwi0eQ/bmvq6
- 5vZbiqtG2Ut0/N/Oiov11yTTQXIB/l2C68TA2CcmnO/V9D0VXi21HPuAol/+qH9vA/s4r0zk6bh
- pA6/+TDyKqVnVtmlMO
-X-Received: by 2002:a05:690e:484a:b0:66c:e38c:599b with SMTP id
- 956f58d0204a3-66f8149fb4bmr420201d50.27.1788159984517; Mon, 31 Aug 2026
- 00:06:24 -0700 (PDT)
+ d=linux.alibaba.com; s=default;
+ t=1788162050; h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To;
+ bh=EyMzEUFX18h3H7e54rfyjeZ+71H4oGlpgGNQWBVUORs=;
+ b=aThZzsc01WbTlaSZNZJvAkRoX3v4ZUF2SEV9LodGx/WL634W6L63jJPksmrjUMHjARb9bWvKw0UWeBb6/qMnTaA+wWtDOMFLX9ge4/+yTeiaZqmKIZReMixpDlR41avB5reRU/x7ag87/+pYgs4wCA1n0Gq3yRe0deCTxm1lr1A=
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R121e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033037009110;
+ MF=lyndra@linux.alibaba.com; NM=1; PH=DS; RN=9; SR=0;
+ TI=SMTPD_---0X9v6Xbf_1788162044; 
+Received: from
+ riscv-project-v011122129236.ea134.tbsite.net(mailfrom:lyndra@linux.alibaba.com
+ fp:SMTPD_---0X9v6Xbf_1788162044 cluster:ay36) by smtp.aliyun-inc.com;
+ Mon, 31 Aug 2026 15:40:49 +0800
+From: TANG Tiancheng <lyndra@linux.alibaba.com>
+Date: Mon, 31 Aug 2026 15:40:35 +0800
+Subject: [PATCH] target/riscv/tcg: fix user option hash table leaks
 MIME-Version: 1.0
-References: <20260817-atlantis_prcm-v2-0-ffba0b944419@oss.tenstorrent.com>
- <20260817-atlantis_prcm-v2-2-ffba0b944419@oss.tenstorrent.com>
-In-Reply-To: <20260817-atlantis_prcm-v2-2-ffba0b944419@oss.tenstorrent.com>
-From: Joel Stanley <joel@jms.id.au>
-Date: Mon, 31 Aug 2026 16:36:13 +0930
-X-Gm-Features: AcwNN1UQHQDeZR1BqnATpRxHPdEAXelsS9uswlsu8cEphw3yloymyXlajif9quA
-Message-ID: <CACPK8XcEk4xXDYnY_FSZ7Wud0RQqyLzX_VVA3vXT2q27Z2dn8g@mail.gmail.com>
-Subject: Re: [PATCH v2 2/2] hw/riscv/tt-atlantis: Add PRCMs to tt-atlantis
- model
-To: Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
-Cc: qemu-devel@nongnu.org, Nicholas Piggin <npiggin@gmail.com>, 
- Michael Ellerman <mpe@kernel.org>,
- Portia Stephens <portias@oss.tenstorrent.com>, qemu-riscv@nongnu.org, 
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, Weiwei Li <liwei1518@gmail.com>, 
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260831-b4-riscv-cpu-user-option-leak-v1-1-6b020c8b6964@linux.alibaba.com>
+X-B4-Tracking: v=1; b=H4sIAPIvlWoC/x3MTQ5AMBBA4avIrE1CWz9xFbGoGkwITYtIxN1NL
+ N/iew9ECkwRmuSBQBdH3jeJPE3AzXabCHmQBpWpMqt1jr3BwNFd6PyJp2jc/SEIV7ILmtqaSld
+ DMVoF8vCBRr7/f9u97wcbj/jPbwAAAA==
+X-Change-ID: 20260831-b4-riscv-cpu-user-option-leak-48a4737d5fa2
+To: qemu-devel@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Chao Liu <chao.liu@processmission.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b12b;
- envelope-from=joel.stan@gmail.com; helo=mail-yx1-xb12b.google.com
-X-Spam_score_int: -16
-X-Spam_score: -1.7
-X-Spam_bar: -
-X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.001,
- FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.25,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+ Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org, 
+ TANG Tiancheng <lyndra@linux.alibaba.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1788162049; l=10681;
+ i=lyndra@linux.alibaba.com; s=20250909; h=from:subject:message-id;
+ bh=ViRIE0gWRAoMlBPw1LyxfuB2Died6CDpQQf0hy76HOQ=;
+ b=M2zO+mf/GmRcOHVWRUeryyF0GznKkEecg+OtKMjAxsTjSFYPRH2uBDQf0GXNUM0hOsg2sW3Jr
+ kwu0HJdCvrEDjiGLW61hwqU10IFOEe1BDvbJqE6pdHpLOdjvDFVTP6G
+X-Developer-Key: i=lyndra@linux.alibaba.com; a=ed25519;
+ pk=GQh4uOSLVucXGkaZfEuQ956CrYS14cn1TA3N8AiIjBw=
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.130 (deferred)
+Received-SPF: pass client-ip=115.124.30.130;
+ envelope-from=lyndra@linux.alibaba.com;
+ helo=out30-130.freemail.mail.aliyun.com
+X-Spam_score_int: -166
+X-Spam_score: -16.7
+X-Spam_bar: ----------------
+X-Spam_report: (-16.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
+ RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001, USER_IN_DEF_DKIM_WL=-7.5,
+ USER_IN_DEF_SPF_WL=-7.5 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -125,188 +85,253 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, 18 Aug 2026 at 00:13, Anirudh Srinivasan
-<asrinivasan@oss.tenstorrent.com> wrote:
->
-> Atlantis has 4 PRCMs that are visible from S mode by the Ascalon Core
-> (RCPU, HSIO, PCIe and MM). This commit adds these 4 PRCM blocks to the
-> tt-atlantis model, along with necessary device tree nodes for them.
->
-> Reviewed-by: Chao Liu <chao.liu@processmission.com>
-> Signed-off-by: Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
-> ---
->  docs/system/riscv/tt_atlantis.rst |  1 +
->  hw/riscv/tt_atlantis.c            | 94 +++++++++++++++++++++++++++++++++++++++
->  include/hw/riscv/tt_atlantis.h    | 19 ++++++++
->  3 files changed, 114 insertions(+)
->
-> diff --git a/docs/system/riscv/tt_atlantis.rst b/docs/system/riscv/tt_atlantis.rst
-> index 1f2880d617..539c22354f 100644
-> --- a/docs/system/riscv/tt_atlantis.rst
-> +++ b/docs/system/riscv/tt_atlantis.rst
-> @@ -14,6 +14,7 @@ tt-atlantis QEMU model features
->  * 8-core Ascalon-X CPU Cluster
->  * RISC-V compliant Advanced Interrupt Architecture
->  * 16550A compatible UART
-> +* 4 PRCMs (Clock and Reset Controllers)
->
->  Known limitations
->  -----------------
-> diff --git a/hw/riscv/tt_atlantis.c b/hw/riscv/tt_atlantis.c
-> index d808bcc11c..9ebba07703 100644
-> --- a/hw/riscv/tt_atlantis.c
-> +++ b/hw/riscv/tt_atlantis.c
-> @@ -26,6 +26,7 @@
->  #include "hw/char/serial-mm.h"
->  #include "hw/intc/riscv_aclint.h"
->  #include "hw/misc/unimp.h"
-> +#include "hw/misc/tt_atlantis_prcm.h"
->
->  #include "system/system.h"
->  #include "system/device_tree.h"
-> @@ -59,6 +60,10 @@ static const MemMapEntry tt_atlantis_memmap[] = {
->      [TT_ATL_I2C3] =             { 0xd4070000,       0x10000 },
->      [TT_ATL_I2C4] =             { 0xd4080000,       0x10000 },
->      [TT_ATL_UART1] =            { 0xd4110000,       0x10000 },
-> +    [TT_ATL_PRCM_RCPU] =        { 0xd0000000,       0x10000 },
-> +    [TT_ATL_PRCM_PCIE] =        { 0xd8000000,         0x100 },
-> +    [TT_ATL_PRCM_MM] =          { 0xdc000000,        0x1000 },
-> +    [TT_ATL_PRCM_HSIO] =        { 0xe00c0000,         0x510 },
->      [TT_ATL_SAPLIC] =           { 0xe8000000,     0x4000000 },
->      [TT_ATL_DDR_HI] =          { 0x100000000,  0x1000000000 },
->  };
-> @@ -328,11 +333,35 @@ static void create_fdt_i2c_device(TTAtlantisState *s, int bus,
->      qemu_fdt_setprop_cell(fdt, name, "reg", addr);
->  }
->
-> +static char *create_fdt_prcm(void *fdt, const MemMapEntry *mem,
-> +                             const char *prcm_name)
-> +{
-> +    hwaddr base = mem->base;
-> +    hwaddr size = mem->size;
-> +    char *name = g_strdup_printf("/soc/prcm_%s@%" PRIx64,
-> +                                 prcm_name, mem->base);
+The misa_ext_user_opts and multi_ext_user_opts hash tables are global,
+but riscv_tcg_cpu_instance_init() recreates both for every CPU instance.
+Creating a second CPU overwrites the only references to the first CPU's
+tables. LeakSanitizer reports two direct and four indirect leaks, 320
+bytes in total, when a two-hart virt machine exits.
 
-Use the locals, or drop them and use mem->base both times.
+The option state belongs to a CPU instance, like user_options. Move both
+tables into RISCVCPU, pass the CPU to their access helpers, and free them
+from the existing instance finalizer. Keep the implied-rule tables global
+because those are initialized once and shared.
 
-> +    g_autofree char *compatible =
-> +        g_strdup_printf("tenstorrent,atlantis-prcm-%s", prcm_name);
-> +
-> +    qemu_fdt_add_subnode(fdt, name);
-> +    qemu_fdt_setprop_string(fdt, name, "compatible", compatible);
-> +    qemu_fdt_setprop_sized_cells(fdt, name, "reg", 2, base, 2, size);
-> +    qemu_fdt_setprop_cell(fdt, name, "#address-cells", 1);
-> +    qemu_fdt_setprop_cell(fdt, name, "#size-cells", 0);
-> +    qemu_fdt_setprop_cell(fdt, name, "#clock-cells", 1);
-> +    qemu_fdt_setprop_cell(fdt, name, "#reset-cells", 1);
-> +    qemu_fdt_setprop_cell(fdt, name, "phandle", next_phandle());
+Fixes: 549cbf789ef8 ("target/riscv/cpu.c: introduce RISCVCPUMultiExtConfig")
+Fixes: 21915d16c6fb ("target/riscv/tcg: add MISA user options hash")
+Signed-off-by: TANG Tiancheng <lyndra@linux.alibaba.com>
+---
+The misa_ext_user_opts and multi_ext_user_opts hash tables are global, but
+riscv_tcg_cpu_instance_init() creates both for every CPU instance.  A second
+CPU therefore overwrites the only references to the first CPU's tables.
 
-If a phandle falls in the woods and nobody...
+Move the tables into RISCVCPU and release them from the existing CPU instance
+finalizer.  Keep the implied-rule tables global because they are initialized
+once and shared.
 
-If you're not saving this value anywhere, is there any need to set one?
+Testing:
+- No ASan/LSan errors after QMP quit for virt TCG with
+  -cpu rv64 and both -smp 1 and -smp 2.
+- Expected dependency errors were reported for:
+  -cpu rv64,zce=true,zca=false
+  -cpu rv64,zfa=true,f=false
+---
+ target/riscv/cpu.c         |  2 ++
+ target/riscv/cpu.h         |  2 ++
+ target/riscv/tcg/tcg-cpu.c | 54 ++++++++++++++++++++++------------------------
+ 3 files changed, 30 insertions(+), 28 deletions(-)
 
-> +
-> +    return name;
-> +}
-> +
->  static void finalize_fdt(TTAtlantisState *s)
->  {
->      uint32_t aplic_s_phandle = next_phandle();
->      uint32_t imsic_s_phandle = next_phandle();
->      uint32_t periph_clk_phandle = next_phandle();
-> +    uint32_t osc_24m_phandle = next_phandle();
-> +    uint32_t prcm_rcpu_phandle;
->      void *fdt = MACHINE(s)->fdt;
->
->      create_fdt_cpu(s, s->memmap, aplic_s_phandle, imsic_s_phandle);
-> @@ -348,6 +377,34 @@ static void finalize_fdt(TTAtlantisState *s)
->                      aplic_s_phandle);
->
->      create_fdt_clk(fdt, "periph-clk", 100000000, periph_clk_phandle);
-> +    create_fdt_clk(fdt, "osc_24m", 24000000, osc_24m_phandle);
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 61109672d60b4fa554e10401d58e5a27d7f2f679..c0f979ae0586c7e377fdfe328689d5953a0c1216 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -3279,6 +3279,8 @@ static void riscv_cpu_instance_finalize(Object *obj)
+     g_clear_pointer(&cpu->pmu_event_ctr_map, g_hash_table_destroy);
+ #endif
+     g_clear_pointer(&cpu->user_options, g_hash_table_destroy);
++    g_clear_pointer(&cpu->misa_ext_user_opts, g_hash_table_destroy);
++    g_clear_pointer(&cpu->multi_ext_user_opts, g_hash_table_destroy);
+ }
+ 
+ static const TypeInfo riscv_cpu_type_infos[] = {
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 718b66487a21b42f6df55c8f754c5fc2e54ce864..afce7c2eca708256a4310caa7d0f5a89093d1999 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -582,6 +582,8 @@ struct ArchCPU {
+     /* Mapping of events to counters */
+     GHashTable *pmu_event_ctr_map;
+     GHashTable *user_options;
++    GHashTable *misa_ext_user_opts;
++    GHashTable *multi_ext_user_opts;
+     const GPtrArray *decoders;
+ };
+ 
+diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+index 54f1b66216cabb731222bce7115f2f4c59de18e0..b68160af8307c1e46d3f200c5313823d240eb7b3 100644
+--- a/target/riscv/tcg/tcg-cpu.c
++++ b/target/riscv/tcg/tcg-cpu.c
+@@ -41,34 +41,32 @@
+ #include "target/riscv/tcg/csr.h"
+ #endif
+ 
+-/* Hash that stores user set extensions */
+-static GHashTable *multi_ext_user_opts;
+-static GHashTable *misa_ext_user_opts;
+-
+ static GHashTable *multi_ext_implied_rules;
+ static GHashTable *misa_ext_implied_rules;
+ 
+-static bool cpu_cfg_ext_is_user_set(uint32_t ext_offset)
++static bool cpu_cfg_ext_is_user_set(RISCVCPU *cpu, uint32_t ext_offset)
+ {
+-    return g_hash_table_contains(multi_ext_user_opts,
++    return g_hash_table_contains(cpu->multi_ext_user_opts,
+                                  GUINT_TO_POINTER(ext_offset));
+ }
+ 
+-static bool cpu_misa_ext_is_user_set(uint32_t misa_bit)
++static bool cpu_misa_ext_is_user_set(RISCVCPU *cpu, uint32_t misa_bit)
+ {
+-    return g_hash_table_contains(misa_ext_user_opts,
++    return g_hash_table_contains(cpu->misa_ext_user_opts,
+                                  GUINT_TO_POINTER(misa_bit));
+ }
+ 
+-static void cpu_cfg_ext_add_user_opt(uint32_t ext_offset, bool value)
++static void cpu_cfg_ext_add_user_opt(RISCVCPU *cpu, uint32_t ext_offset,
++                                     bool value)
+ {
+-    g_hash_table_insert(multi_ext_user_opts, GUINT_TO_POINTER(ext_offset),
++    g_hash_table_insert(cpu->multi_ext_user_opts,
++                        GUINT_TO_POINTER(ext_offset),
+                         (gpointer)value);
+ }
+ 
+-static void cpu_misa_ext_add_user_opt(uint32_t bit, bool value)
++static void cpu_misa_ext_add_user_opt(RISCVCPU *cpu, uint32_t bit, bool value)
+ {
+-    g_hash_table_insert(misa_ext_user_opts, GUINT_TO_POINTER(bit),
++    g_hash_table_insert(cpu->misa_ext_user_opts, GUINT_TO_POINTER(bit),
+                         (gpointer)value);
+ }
+ 
+@@ -358,7 +356,7 @@ static void cpu_cfg_ext_auto_update(RISCVCPU *cpu, uint32_t ext_offset,
+         return;
+     }
+ 
+-    if (cpu_cfg_ext_is_user_set(ext_offset)) {
++    if (cpu_cfg_ext_is_user_set(cpu, ext_offset)) {
+         return;
+     }
+ 
+@@ -491,7 +489,7 @@ static void riscv_cpu_validate_g(RISCVCPU *cpu)
+ {
+     const char *warn_msg = "RVG mandates disabled extension %s";
+     uint32_t g_misa_bits[] = {RVI, RVM, RVA, RVF, RVD};
+-    bool send_warn = cpu_misa_ext_is_user_set(RVG);
++    bool send_warn = cpu_misa_ext_is_user_set(cpu, RVG);
+ 
+     for (int i = 0; i < ARRAY_SIZE(g_misa_bits); i++) {
+         uint32_t bit = g_misa_bits[i];
+@@ -734,7 +732,7 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
+     }
+ 
+     if (cpu->cfg.ext_zicntr && !cpu->cfg.ext_zicsr) {
+-        if (cpu_cfg_ext_is_user_set(CPU_CFG_OFFSET(ext_zicntr))) {
++        if (cpu_cfg_ext_is_user_set(cpu, CPU_CFG_OFFSET(ext_zicntr))) {
+             error_setg(errp, "zicntr requires zicsr");
+             return;
+         }
+@@ -742,7 +740,7 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
+     }
+ 
+     if (cpu->cfg.ext_zihpm && !cpu->cfg.ext_zicsr) {
+-        if (cpu_cfg_ext_is_user_set(CPU_CFG_OFFSET(ext_zihpm))) {
++        if (cpu_cfg_ext_is_user_set(cpu, CPU_CFG_OFFSET(ext_zihpm))) {
+             error_setg(errp, "zihpm requires zicsr");
+             return;
+         }
+@@ -802,8 +800,8 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
+ 
+     if ((cpu->cfg.ext_smctr || cpu->cfg.ext_ssctr) &&
+         (!riscv_has_ext(env, RVS) || !cpu->cfg.ext_sscsrind)) {
+-        if (cpu_cfg_ext_is_user_set(CPU_CFG_OFFSET(ext_smctr)) ||
+-            cpu_cfg_ext_is_user_set(CPU_CFG_OFFSET(ext_ssctr))) {
++        if (cpu_cfg_ext_is_user_set(cpu, CPU_CFG_OFFSET(ext_smctr)) ||
++            cpu_cfg_ext_is_user_set(cpu, CPU_CFG_OFFSET(ext_ssctr))) {
+             error_setg(errp, "Smctr and Ssctr require S-mode and Sscsrind");
+             return;
+         }
+@@ -820,7 +818,7 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
+ #ifndef CONFIG_USER_ONLY
+     if (cpu->cfg.ext_svpbmt && cpu->cfg.max_satp_mode < VM_1_10_SV39) {
+         cpu->cfg.ext_svpbmt = false;
+-        if (cpu_cfg_ext_is_user_set(CPU_CFG_OFFSET(ext_svpbmt))) {
++        if (cpu_cfg_ext_is_user_set(cpu, CPU_CFG_OFFSET(ext_svpbmt))) {
+             warn_report("svpbmt requires at least satp sv39, "
+                         "current satp mode: %s",
+                         satp_mode_str(cpu->cfg.max_satp_mode,
+@@ -830,7 +828,7 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
+ 
+     if (cpu->cfg.ext_svnapot && cpu->cfg.max_satp_mode < VM_1_10_SV39) {
+         cpu->cfg.ext_svnapot = false;
+-        if (cpu_cfg_ext_is_user_set(CPU_CFG_OFFSET(ext_svnapot))) {
++        if (cpu_cfg_ext_is_user_set(cpu, CPU_CFG_OFFSET(ext_svnapot))) {
+             warn_report("svnapot requires at least satp sv39, "
+                         "current satp mode: %s",
+                         satp_mode_str(cpu->cfg.max_satp_mode,
+@@ -1007,7 +1005,7 @@ static void cpu_enable_implied_rule(RISCVCPU *cpu,
+                      * If the user disabled the misa_bit do not re-enable it
+                      * and do not apply any implied rules related to it.
+                      */
+-                    if (cpu_misa_ext_is_user_set(misa_bits[i]) &&
++                    if (cpu_misa_ext_is_user_set(cpu, misa_bits[i]) &&
+                         !(env->misa_ext & misa_bits[i])) {
+                         continue;
+                     }
+@@ -1143,7 +1141,7 @@ static void riscv_cpu_update_misa_c(RISCVCPU *cpu)
+     }
+ 
+     if (set_misa_c) {
+-        if (cpu_misa_ext_is_user_set(RVC)) {
++        if (cpu_misa_ext_is_user_set(cpu, RVC)) {
+             warn_report("RVC mandated by Zca/Zcf/Zcd extensions");
+             return;
+         }
+@@ -1285,7 +1283,7 @@ static void riscv_cpu_set_profile(RISCVCPU *cpu,
+             continue;
+         }
+ 
+-        cpu_misa_ext_add_user_opt(bit, profile->enabled);
++        cpu_misa_ext_add_user_opt(cpu, bit, profile->enabled);
+         riscv_cpu_write_misa_bit(cpu, bit, profile->enabled);
+     }
+ 
+@@ -1296,7 +1294,7 @@ static void riscv_cpu_set_profile(RISCVCPU *cpu,
+             cpu_bump_multi_ext_priv_ver(&cpu->env, ext_offset);
+         }
+ 
+-        cpu_cfg_ext_add_user_opt(ext_offset, profile->enabled);
++        cpu_cfg_ext_add_user_opt(cpu, ext_offset, profile->enabled);
+         isa_ext_update_enabled(cpu, ext_offset, profile->enabled);
+     }
+ }
+@@ -1356,7 +1354,7 @@ static void cpu_set_misa_ext_cfg(Object *obj, Visitor *v, const char *name,
+         return;
+     }
+ 
+-    cpu_misa_ext_add_user_opt(misa_bit, value);
++    cpu_misa_ext_add_user_opt(cpu, misa_bit, value);
+ 
+     prev_val = env->misa_ext & misa_bit;
+ 
+@@ -1520,7 +1518,7 @@ static void cpu_set_multi_ext_cfg(Object *obj, Visitor *v, const char *name,
+         return;
+     }
+ 
+-    cpu_cfg_ext_add_user_opt(cfg_offset, value);
++    cpu_cfg_ext_add_user_opt(cpu, cfg_offset, value);
+ 
+     prev_val = isa_ext_is_enabled(cpu, cfg_offset);
+ 
+@@ -1684,8 +1682,8 @@ static void riscv_tcg_cpu_instance_init(CPUState *cs)
+                             "riscv.cpu.rnmi", RNMI_MAX);
+ #endif
+ 
+-    misa_ext_user_opts = g_hash_table_new(NULL, g_direct_equal);
+-    multi_ext_user_opts = g_hash_table_new(NULL, g_direct_equal);
++    cpu->misa_ext_user_opts = g_hash_table_new(NULL, g_direct_equal);
++    cpu->multi_ext_user_opts = g_hash_table_new(NULL, g_direct_equal);
+ 
+     if (!misa_ext_implied_rules) {
+         misa_ext_implied_rules = g_hash_table_new(NULL, g_direct_equal);
 
-With the PRCM enabled the UART and I2C can get a real clock? So we can
-drop the periph-clk node and modify create_fdt_i2c as well as
-create_fdt_uart to use the real PRCM phandles. This will shake out any
-issues with how you're wiring up the device tree too.
+---
+base-commit: aee18ec8d3c54fa98d33acdf617ad5af96d8e9fe
+change-id: 20260831-b4-riscv-cpu-user-option-leak-48a4737d5fa2
 
-> +
-> +    g_autofree char *rcpu_name = create_fdt_prcm(fdt,
-> +        &s->memmap[TT_ATL_PRCM_RCPU], "rcpu");
-> +    prcm_rcpu_phandle = qemu_fdt_get_phandle(fdt, rcpu_name);
+Best regards,
+-- 
+TANG Tiancheng <lyndra@linux.alibaba.com>
 
-This is a great function that I didn't know of when I wrote
-next_phandle(). I'm all for using it, but lets swap the entire file
-over at once.
-
-> +    qemu_fdt_setprop_cells(fdt, rcpu_name, "clocks", osc_24m_phandle);
-> +    qemu_fdt_setprop_cells(fdt, rcpu_name, "assigned-clocks",
-> +                           prcm_rcpu_phandle, TT_ATL_CLK_RCPU_ROOT,
-> +                           prcm_rcpu_phandle, TT_ATL_CLK_NOCC_CLK);
-> +    qemu_fdt_setprop_cells(fdt, rcpu_name, "assigned-clock-parents",
-> +                           prcm_rcpu_phandle, TT_ATL_CLK_RCPU_PLL,
-> +                           prcm_rcpu_phandle, TT_ATL_CLK_NOC_PLL);
-
-> @@ -545,6 +602,43 @@ static void tt_atlantis_machine_init(MachineState *machine)
->      serial_mm_init(system_memory, s->memmap[TT_ATL_UART1].base, 2,
->                     qdev_get_gpio_in(s->irqchip, TT_ATL_UART1_IRQ),
->                     115200, serial_hd(0), DEVICE_LITTLE_ENDIAN);
-> +
-> +    /* Add rcpu prcm block */
-> +    object_initialize_child(OBJECT(s), "prcm-rcpu", &s->prcm[0],
-> +                            TYPE_TT_ATLANTIS_PRCM_RCPU);
-> +    sysbus_realize(SYS_BUS_DEVICE(&s->prcm[0]), &error_fatal);
-> +    memory_region_add_subregion(system_memory,
-
-Since you're already sending a v3, can you rebase it on this series please:
-
- https://lore.kernel.org/qemu-riscv/20260831021500.82565-1-joel@jms.id.au/
-
-Aside from code shuffling, you will pass s->memory to
-memory_region_add_subregion, the _realize calls go in
-tt_atlantis_soc_realize, and the initalise calls go in
-tt_atlantis_soc_init.
-
-> +                                s->memmap[TT_ATL_PRCM_RCPU].base,
-> +                                sysbus_mmio_get_region(
-> +                                    SYS_BUS_DEVICE(&s->prcm[0]), 0));
-> +
-
-> diff --git a/include/hw/riscv/tt_atlantis.h b/include/hw/riscv/tt_atlantis.h
-> index 7f7d4a5a59..20bcdfeb52 100644
-> --- a/include/hw/riscv/tt_atlantis.h
-> +++ b/include/hw/riscv/tt_atlantis.h
-
-> @@ -59,6 +62,22 @@ enum {
->      TT_ATL_SAPLIC,
->      TT_ATL_SIMSIC,
->      TT_ATL_UART1,
-> +    TT_ATL_PRCM_RCPU,
-> +    TT_ATL_PRCM_HSIO,
-> +    TT_ATL_PRCM_PCIE,
-> +    TT_ATL_PRCM_MM,
-> +};
-> +
-> +/* RCPU PRCM Clock IDs */
-
-Do these come from
-include/dt-bindings/clock/tenstorrent,atlantis-prcm-rcpu.h in linux?
-Add a comment.
-
-> +enum {
-> +    TT_ATL_CLK_RCPU_PLL = 0,
-> +    TT_ATL_CLK_RCPU_ROOT = 1,
-> +    TT_ATL_CLK_NOC_PLL = 25,
-> +    TT_ATL_CLK_NOCC_CLK = 26,
-> +    TT_ATL_CLK_HSIO_PLL = 54,
-> +    TT_ATL_CLK_PCIE_PLL = 55,
-> +    TT_ATL_CLK_MM_PLL0 = 56,
-> +    TT_ATL_CLK_MM_PLL1 = 57,
->  };
->
->  #endif
->
-> --
-> 2.43.0
->
 
