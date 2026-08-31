@@ -4,157 +4,112 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0429DC624A5
-	for <qemu-riscv@archiver.kernel.org>; Mon, 31 Aug 2026 07:00:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74803C61DE2
+	for <qemu-riscv@archiver.kernel.org>; Mon, 31 Aug 2026 07:06:38 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x0vzu-0000Yq-9D; Mon, 31 Aug 2026 03:00:02 -0400
+	id 1x0w6E-0002ww-45; Mon, 31 Aug 2026 03:06:34 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mayuresh.chitale@oss.qualcomm.com>)
- id 1x0vzp-0000Xx-6p
- for qemu-riscv@nongnu.org; Mon, 31 Aug 2026 02:59:58 -0400
-Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mayuresh.chitale@oss.qualcomm.com>)
- id 1x0vzm-000109-JK
- for qemu-riscv@nongnu.org; Mon, 31 Aug 2026 02:59:56 -0400
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 67V52iMH2423465
- for <qemu-riscv@nongnu.org>; Mon, 31 Aug 2026 06:59:51 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- 8+3c/sK0SFFkjgtqIIVLo/GIHCfM69vIAZuX33XepYw=; b=nWSB5sWkJIhr9VGY
- U6gZYSgKqU3Vu88YedGF+BaALqz62vgqpAJ8YhdPmHlr0lbUvdfEwyFf43Os+hfI
- gcoQyuPBlD086Agefwc7VNN6GketUy7qJytRkCaQ5sIbZJ8xwoNgxXfxK2ctKUdf
- tljZVGu5JOdllJiOvZHZxynKbZR1xMVHAk3g0iRTJRBacQg1ej3v/3kfIEiAl2fN
- 6e1lIIK7rEhGLdJXGbamuUUh819aR2GKYyQ0uTZDaUKMtO7tq2IFBxegLXV/IUvl
- AHSyA1cgAebhcuvH97ZqDLdxzGzFc5FS7q4qkwHyK8naWg6kPLTcLWe5BFGGG7Kd
- PNfuAg==
-Received: from mail-pg1-f197.google.com (mail-pg1-f197.google.com
- [209.85.215.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gbqe2d2r1-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Mon, 31 Aug 2026 06:59:51 +0000 (GMT)
-Received: by mail-pg1-f197.google.com with SMTP id
- 41be03b00d2f7-cc1c1cc5206so2970750a12.3
- for <qemu-riscv@nongnu.org>; Sun, 30 Aug 2026 23:59:51 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1788159590; cv=none;
+ (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
+ id 1x0w68-0002wK-Ty
+ for qemu-riscv@nongnu.org; Mon, 31 Aug 2026 03:06:30 -0400
+Received: from mail-yx1-xb12b.google.com ([2607:f8b0:4864:20::b12b])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
+ id 1x0w66-0002f4-JO
+ for qemu-riscv@nongnu.org; Mon, 31 Aug 2026 03:06:28 -0400
+Received: by mail-yx1-xb12b.google.com with SMTP id
+ 956f58d0204a3-66f79f58123so533833d50.1
+ for <qemu-riscv@nongnu.org>; Mon, 31 Aug 2026 00:06:25 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1788159985; cv=none;
  d=google.com; s=arc-20260327;
- b=SBBKUPjxA3Dj9hvGPSvukG8bnlGvZwZOVzgTomK5rHTO9RDimxVEVgScvVNmeS1L82
- CeXS5odlKvTUQuxqr74mzX+UUwm/tLD5o2xvcmdB17mbfhBdAVtCqcyLdHmtfKtBJU1d
- 0eFdyS0ZvCKbQwDEiLM1kOeeofjJ/TGWXE4dyQrggruJhxW4Fw1qaOd6usWbDc8ViJGZ
- Imb+Vlqykyg7Sxef4s/vyXwXltI9ONbU5MWyPTDvsYbQ0phMQYPstsWRD7dBUmNrepIr
- 2sB/qzoYiJb1C1YWRM4QWRBl22RjKvmxo+aNXl8kWHJ3w7w8lRcTUTKLpRJZzEPwLZ8t
- GNOg==
+ b=F0gzRY0Q9b93MzsIsUK1RjGXTtGyyH7yZRZnCHnZ4BG3D9aoiSL62SgeqDZDsIprv8
+ qIv6J737jCTiXxod9rPFSB6aWL6Whmhb8NyArNAQ8eJDRRK5dt2Dy8GuP4ALnGuAufpk
+ YVOGV9cep8JDQuNhnM+j0d83t3FVGo13atz2CxpEWYn+GdAQq9I7xttTcB+4ZQhGnWTp
+ jTHrRFcyMcZrXdk+Hmd+20E1fGl3MyDgeNfn4DQ3ufZOfBJNn6e7CNNYbfcvpsuLovV6
+ v3tIqZ/fDxOfGSOACbRz9PbwQXgwJzSh1xROeAJ49ycrmS7b/bK9AiR1G9bQrQK4stav
+ SK4w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=8+3c/sK0SFFkjgtqIIVLo/GIHCfM69vIAZuX33XepYw=;
- fh=L3kN8A7ckjiM6W6gfGwBcj4bjtJVf2mweDuCHs13IFo=;
- b=rzBYJ+BmloGdTYChG0wIs4AjCeo7YTxSuJXIK92AIN4ZxtQ9Ss54HfkfX6+g9N4l0b
- oJwC3SGIa/sOgKo6Otpt3gxQVaezLJE3BCt7xJdCQTCOzdeye44q4d3HW6mJJS27Ynt0
- FGG6s27Ic2Cd7y6MwQm17sRK+KyE5s37pS7TRGZspj/EvOj1LOUI6phWWvJB5U/pfUIV
- 9IDlBaNtFEdk6oDPpv9vpHnuHjYcBnSpx0/Mo5F1qrl3GymG/YL0V99BXhsN+ahuGR4l
- D/Yi9z3zdiPr8OQfJzQTy7eEnBQ+/xP1cpeAr5Yzr+179hR9cPG89CXERpS7XoCDTcbG
- 9lXw==; darn=nongnu.org
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=Vh1sNaFQo/dCNzKzQAqORQc/BQd2gCS7fALdj1uI5Tc=;
+ fh=Jo1AliR2Oxf9w1xazjsa7ZWzDu4jbTxktW2AduyMWSg=;
+ b=Xwyw3upoMq8dK0Af2juY+T/QGJarBn240iSEX2c/bUEFnqzwL6k4YAq0H5Qpr2lKSD
+ NTeySo+CUs7tokSySeTywli91CcoeYJN6R5ptn39/vE1c4R6QwDQWmoRhQFnJKeZhAKh
+ wGTnsZTYxi3Cxov7G307t3Rjs2Xm8XM28K8tGvm9USqrFyZWgKQdm3Il/TSzWC3SjnZr
+ KB134/ochBarCy2jmtnnOuesg0BfFvTiQYr86IPzzBzzGkCS4JXupDa8lrc6XgxAKfyt
+ eaPa9NR4bOS4mGyfoPSekpL+pYDdOy6OHs4FmG4NvjPBOoU4dn8DDh3lmMgOS+9zXC0D
+ du2w==; darn=nongnu.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1788159590; x=1788764390; darn=nongnu.org;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=8+3c/sK0SFFkjgtqIIVLo/GIHCfM69vIAZuX33XepYw=;
- b=QklmVSa7DbXIcOyhIeoiYiDy71/gUiE6Na8tX57c+Mej847yHHh/NuezRXnUFz0nTT
- NP+vS0xzJVpJE7cH9PdoXIfyeIp444vVlzI53jsoaIf1G52ilL4jn/7dhfjYrCYUZcTL
- J9zBFwVwnbwqo4zC05zLb8WgmK8K0xaRrMx7FfEA8IXq+7gvznEMAPb8ytunezT1reVv
- KCFylmoKTxWSnppfsx00bUV7/YPbu+YTQfTxkjJzkZ8VIX4E9Wd2+Vita9dq0wUfZDsg
- vcqbBoTRWDr+tbke47poKlI5qfTSq9EdMPuoIK8nPIKf1biV4/DMXYPpsTNlVw9npZ5w
- fdyw==
+ d=jms.id.au; s=google; t=1788159985; x=1788764785; darn=nongnu.org;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=Vh1sNaFQo/dCNzKzQAqORQc/BQd2gCS7fALdj1uI5Tc=;
+ b=TI4ympfGdGs3HYjYB7XjAwnxTmfAwjRi3+vmkrNv1OGInvaWLedZIk7IYm9MN3pT0U
+ 6kGC/Miaed9jMLe6zm8LvEBBNCMaj2mcKj5eY7dz25xQFVdu+MSMkpL67u9qHy1k7T8e
+ sGq+LJVB2ng/yGlingg33KoB2QyoHep5skOcQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788159590; x=1788764390;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=8+3c/sK0SFFkjgtqIIVLo/GIHCfM69vIAZuX33XepYw=;
- b=U9mZHe1lC0yksCzolgY8KH1vrtbtvxb6OiYV1ZDYTXu/PGvP47eR9jSe9bIBHkWdma
- rbbVb2MgrJXi3vnUVB4laPx7m6Wo0FZhfBCAKdmh8aPphLd7jXZ21Nq1Fz0Rcr7r5TAP
- DTLKfCFDK7qcSdCoZ+3NKoIwbMtibk3kd2MwGoT/6+SsU8MTKbRGk2YenKAOQDpoaEiw
- fNa4g9G+CHVv0wVlQF090ivSqe6JukCNLFNWtRfBTauqQcfR4b0+Pm4GlhbL509euTil
- h9JSalIh9SSngOUx0eLtBMoYH5AZCctTnlJFx338PH/PRenM982dwbC6LE3vghCOzbC8
- l2Dg==
+ d=1e100.net; s=20251104; t=1788159985; x=1788764785;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=Vh1sNaFQo/dCNzKzQAqORQc/BQd2gCS7fALdj1uI5Tc=;
+ b=our8bjanYEnd4yC7FTt59p7tk3itSQjm+lX6sSpK2N2j33CBEJOT6DxTRz0wU8M+hv
+ vKqxVhYU0whPed1TQiM+pFkAjwqtUAiz2ItVr7rVMm/sP4VC6sITG02UpodFFGmmuPMD
+ fiiiYRbt2pUloQ1WeVdq8u7LjEQJ5NkKV8zpH5RJlpJwvMvjK0IX9P/qlKMtBEaW//wI
+ tF6Lbqgk5uToLE9bXrEysEnHUdh/Ct7v7ulGacQ51gGqH3r4EEyuwBbB8PuvFY+fJFul
+ z/Sg8yqqZhZLpHAnMfcVADB+hC/YqPua71DbCbcES2YFotcoEQJ6A6N7/kjxQbEOFDn1
+ FnPQ==
 X-Forwarded-Encrypted: i=1;
- AHgh+RqsL9aEBgjRX4h2+mfMvDmkl7HUspzYEIv2a3PXDz6nnmWiFujbhkJtpu+MQrai75abm1QxLUCu7+Gf@nongnu.org
-X-Gm-Message-State: AFuF++kiQ/9KV6/Z2GcP6uOu7Qak4J1Ugk8OyqgD6owLs0zlVEkUhJv0
- i7DcPvmttEDxIBzHBszXiEihWZiaxeveHgMsAYnYzLKbe7yHWDow4OqK+cfGZv8MlIBOgLrI43p
- wb277MSAwjpip3yQuLoqhkdEkgOtfQBNrJ9b2DdFDyo7kd+dmIX6vFsdFoGD8Vxmebf+H+3MQUw
- Be8jdGAkTw9wh5Ydkpg+fAuUOFjOeUng65
-X-Gm-Gg: AR+sD12aLbnu+uewD9WaBcUm30Q0mHcBbD7J12MZDMpLbniF4JGxHlkvJhHvVtL3ksV
- pDs9hM+3zcD7r0jC33YhrmSlz9AsiXHvq/UFPoilGXHjFowLhUMXgLLHSCNrIc8OOwHG8O12dGs
- n1Vi2eAXvO9ecE/DIOIVbTxkatNs3/1J8m13iMrHPD85go9Azn09BvXJI6/Rw=
-X-Received: by 2002:a17:903:3b88:b0:2d8:df44:a5c2 with SMTP id
- d9443c01a7336-2d8df44b118mr228747255ad.20.1788159590337; 
- Sun, 30 Aug 2026 23:59:50 -0700 (PDT)
-X-Received: by 2002:a17:903:3b88:b0:2d8:df44:a5c2 with SMTP id
- d9443c01a7336-2d8df44b118mr228746875ad.20.1788159589872; Sun, 30 Aug 2026
- 23:59:49 -0700 (PDT)
+ AKwUvBxAk8k8XPeWQo/AO9nWqNMf7I4uk6hvpvyrQEax84fLh+XrUFIpgUeTXMZSjpFelsB0LuEBPXUCPOIH@nongnu.org
+X-Gm-Message-State: AFuF++lPJLtWlgbgP8AwCBdSs0aopLdex5igKPJoWDWX3+Uyc5cd9HS+
+ nQp8qGg+Q72+5F1YK5zF1wmYRRZoptjXfN6AI800/axK4/MI8dR7XtR5RQVP12tt5ndCTksOgAR
+ ONWT2TmfYqvRiy3HEY2i1M+oulLNk8A0=
+X-Gm-Gg: AYBFou01m0h62NybQCID35TWfOi0hKqk+rGOL/SYDjwC98hejsLldBHjGwyV0r0tysw
+ wnidTBto0obBIOCrkPowHNIOs7gxG5A3DUz5XFgSkwl3uxdbutufbcGIMWO36PinW3FR5tUZBZ0
+ o2+wEV33hn5plRcOcDaM/H3rfD8rjqjfPoOsLk0CMjDoCgw/d1L9gLNBwNPIdaAbqyq0hI/PsKX
+ ng0ymnPIlIDI/r9dnmfzPWMz5+/JuVJOb+LyMdklPApVcR4T5W9+MLwM6Q+PVY1VYoY5OeInPfu
+ hX6nW3il6A+HEzTsKKhNBe76HNZm6EOBik1flzC0cFcex00onBVzjMj2620wIuZVwi0eQ/bmvq6
+ 5vZbiqtG2Ut0/N/Oiov11yTTQXIB/l2C68TA2CcmnO/V9D0VXi21HPuAol/+qH9vA/s4r0zk6bh
+ pA6/+TDyKqVnVtmlMO
+X-Received: by 2002:a05:690e:484a:b0:66c:e38c:599b with SMTP id
+ 956f58d0204a3-66f8149fb4bmr420201d50.27.1788159984517; Mon, 31 Aug 2026
+ 00:06:24 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260813134002.862578-1-mayuresh.chitale@oss.qualcomm.com>
- <20260824133912.8475-1-gsh517025@gmail.com>
-In-Reply-To: <20260824133912.8475-1-gsh517025@gmail.com>
-From: Mayuresh Chitale <mayuresh.chitale@oss.qualcomm.com>
-Date: Mon, 31 Aug 2026 12:29:38 +0530
-X-Gm-Features: AcwNN1WF8oZU-S0WdDqLtQStZMOFG-VLU2D7Ry4mVBhFV_IvA3oWHXygcWf5ue8
-Message-ID: <CAHuiULC7GMcQKRczb4Q7PSrEOYNOd+O+w53Z0GJycTwZSw6nAA@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv: Fix LCOFI masking in sie/sip/mvip
-To: Gong Shuai <gsh517025@gmail.com>
-Cc: alistair.francis@wdc.com, chao.liu@processmission.com,
- daniel.barboza@oss.qualcomm.com, liwei1518@gmail.com,
- palmer@dabbelt.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- zhiwei_liu@linux.alibaba.com, gong.shuai@sanechips.com.cn
+References: <20260817-atlantis_prcm-v2-0-ffba0b944419@oss.tenstorrent.com>
+ <20260817-atlantis_prcm-v2-2-ffba0b944419@oss.tenstorrent.com>
+In-Reply-To: <20260817-atlantis_prcm-v2-2-ffba0b944419@oss.tenstorrent.com>
+From: Joel Stanley <joel@jms.id.au>
+Date: Mon, 31 Aug 2026 16:36:13 +0930
+X-Gm-Features: AcwNN1UQHQDeZR1BqnATpRxHPdEAXelsS9uswlsu8cEphw3yloymyXlajif9quA
+Message-ID: <CACPK8XcEk4xXDYnY_FSZ7Wud0RQqyLzX_VVA3vXT2q27Z2dn8g@mail.gmail.com>
+Subject: Re: [PATCH v2 2/2] hw/riscv/tt-atlantis: Add PRCMs to tt-atlantis
+ model
+To: Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
+Cc: qemu-devel@nongnu.org, Nicholas Piggin <npiggin@gmail.com>, 
+ Michael Ellerman <mpe@kernel.org>,
+ Portia Stephens <portias@oss.tenstorrent.com>, qemu-riscv@nongnu.org, 
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Chao Liu <chao.liu@processmission.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Authority-Analysis: v=2.4 cv=Iskutr/g c=1 sm=1 tr=0 ts=6a952667 cx=c_pps
- a=rz3CxIlbcmazkYymdCej/Q==:117 a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=ZpdpYltYx_vBUK5n70dp:22 a=pGLkceISAAAA:8 a=EUspDBNiAAAA:8
- a=ANOeVwrl4sSREQryxUIA:9 a=QEXdDO2ut3YA:10 a=bFCP_H2QrGi7Okbo017w:22
-X-Proofpoint-GUID: elAEFQungE1OZGjBu1YVxbTUja06DQ8f
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODMxMDA1OCBTYWx0ZWRfX0Gl2MharLCcx
- n76avyYJksLma18hR649mT1I+HqpL4KB1huy2000Db5vUE6OYl1jDrNmicmYYEdxTIbOzaKAdaC
- ow79zAJjfIhft3btrydfUKF927eICJAjBBhuGChxngsK8eb+M35c2/8tVxR/AGPcdRFDlbFXI09
- sC7iXwYdVf4ZWP30zr0Fa/nHG1Tx8PVHB0mv1U3rtZVDO4xPngaIQfUZTvDztl8HMyJos8gBPYV
- yBQKjOBnZDo8rjTnhYXhPjm51Ka642S7PuflNOXtT/afYT3aNIzJksUggLp940K3Flpffhfvi1X
- Rv8DbgJLRoYB0FSeaVL2K8z/i8ZR3eez7aqaLtUfj5ZVM20CKXz8F9t8CF5r42uHwpK00YdmMRT
- cQWmCI6+DIjGR8EcXapm/52SBPu3/FbKlZ+WxwUF56q/dJx3OfWV39GJlTdYNRCcgik0b7/mgdO
- 9F9dHmVwLZJypJy5y+Q==
-X-Proofpoint-ORIG-GUID: elAEFQungE1OZGjBu1YVxbTUja06DQ8f
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODMxMDA1OCBTYWx0ZWRfX3Go1/CihShxD
- C6ESSzHh1/hMekWCIHtAn9z+u0YUffx3KVm6xrMCXOVWSRVMz3OHu82ltMaPCqwfmCIuoGcxF2v
- te7d/h6I7ovZE3/NcCl5T4pOk5BrWi8=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-31_02,2026-08-27_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 bulkscore=0 malwarescore=0 adultscore=0 lowpriorityscore=0
- clxscore=1015 priorityscore=1501 impostorscore=0 suspectscore=0 phishscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608310058
-Received-SPF: pass client-ip=205.220.180.131;
- envelope-from=mayuresh.chitale@oss.qualcomm.com;
- helo=mx0b-0031df01.pphosted.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
-X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b12b;
+ envelope-from=joel.stan@gmail.com; helo=mail-yx1-xb12b.google.com
+X-Spam_score_int: -16
+X-Spam_score: -1.7
+X-Spam_bar: -
+X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.001,
+ FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.25,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -170,136 +125,188 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Shuai,
+On Tue, 18 Aug 2026 at 00:13, Anirudh Srinivasan
+<asrinivasan@oss.tenstorrent.com> wrote:
+>
+> Atlantis has 4 PRCMs that are visible from S mode by the Ascalon Core
+> (RCPU, HSIO, PCIe and MM). This commit adds these 4 PRCM blocks to the
+> tt-atlantis model, along with necessary device tree nodes for them.
+>
+> Reviewed-by: Chao Liu <chao.liu@processmission.com>
+> Signed-off-by: Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
+> ---
+>  docs/system/riscv/tt_atlantis.rst |  1 +
+>  hw/riscv/tt_atlantis.c            | 94 +++++++++++++++++++++++++++++++++++++++
+>  include/hw/riscv/tt_atlantis.h    | 19 ++++++++
+>  3 files changed, 114 insertions(+)
+>
+> diff --git a/docs/system/riscv/tt_atlantis.rst b/docs/system/riscv/tt_atlantis.rst
+> index 1f2880d617..539c22354f 100644
+> --- a/docs/system/riscv/tt_atlantis.rst
+> +++ b/docs/system/riscv/tt_atlantis.rst
+> @@ -14,6 +14,7 @@ tt-atlantis QEMU model features
+>  * 8-core Ascalon-X CPU Cluster
+>  * RISC-V compliant Advanced Interrupt Architecture
+>  * 16550A compatible UART
+> +* 4 PRCMs (Clock and Reset Controllers)
+>
+>  Known limitations
+>  -----------------
+> diff --git a/hw/riscv/tt_atlantis.c b/hw/riscv/tt_atlantis.c
+> index d808bcc11c..9ebba07703 100644
+> --- a/hw/riscv/tt_atlantis.c
+> +++ b/hw/riscv/tt_atlantis.c
+> @@ -26,6 +26,7 @@
+>  #include "hw/char/serial-mm.h"
+>  #include "hw/intc/riscv_aclint.h"
+>  #include "hw/misc/unimp.h"
+> +#include "hw/misc/tt_atlantis_prcm.h"
+>
+>  #include "system/system.h"
+>  #include "system/device_tree.h"
+> @@ -59,6 +60,10 @@ static const MemMapEntry tt_atlantis_memmap[] = {
+>      [TT_ATL_I2C3] =             { 0xd4070000,       0x10000 },
+>      [TT_ATL_I2C4] =             { 0xd4080000,       0x10000 },
+>      [TT_ATL_UART1] =            { 0xd4110000,       0x10000 },
+> +    [TT_ATL_PRCM_RCPU] =        { 0xd0000000,       0x10000 },
+> +    [TT_ATL_PRCM_PCIE] =        { 0xd8000000,         0x100 },
+> +    [TT_ATL_PRCM_MM] =          { 0xdc000000,        0x1000 },
+> +    [TT_ATL_PRCM_HSIO] =        { 0xe00c0000,         0x510 },
+>      [TT_ATL_SAPLIC] =           { 0xe8000000,     0x4000000 },
+>      [TT_ATL_DDR_HI] =          { 0x100000000,  0x1000000000 },
+>  };
+> @@ -328,11 +333,35 @@ static void create_fdt_i2c_device(TTAtlantisState *s, int bus,
+>      qemu_fdt_setprop_cell(fdt, name, "reg", addr);
+>  }
+>
+> +static char *create_fdt_prcm(void *fdt, const MemMapEntry *mem,
+> +                             const char *prcm_name)
+> +{
+> +    hwaddr base = mem->base;
+> +    hwaddr size = mem->size;
+> +    char *name = g_strdup_printf("/soc/prcm_%s@%" PRIx64,
+> +                                 prcm_name, mem->base);
 
-On Mon, Aug 24, 2026 at 7:09=E2=80=AFPM Gong Shuai <gsh517025@gmail.com> wr=
-ote:
->
-> > Commit 27f9566dcd98 ("target/riscv: Update the local interrupt mask")
-> > dropped bit 13 (MIP_LCOFIP) from the supervisor-visible interrupt masks=
-.
-> > As a result, with Sscofpmf enabled and LCOFIP delegated to S-mode, the
-> > overflow interrupt would be raised in mip but never delivered and hence
-> > perf sampling stopped receiving overflow interrupts.
-> >
-> > Re-add MIP_LCOFIP to all_ints, sip_writable_mask, mvip_writable_mask
-> > to allow it to be writable again.
-> >
-> > Fixes: 27f9566dcd98 ("target/riscv: Update the local interrupt mask")
-> > Signed-off-by: Mayuresh Chitale <mayuresh.chitale@oss.qualcomm.com>
->
->
-> Hi Mayuresh,
->
-> I applied your patch on top of QEMU v11.1.0 and it fixes the perf samplin=
-g
-> regression.
->
-> While the read path is still inconsistent with the write path:
->
-> In rmw_sip64(), the read-back mask still truncates the result with
-> (S_MODE_INTERRUPTS | LOCAL_INTERRUPTS), which does not include bit 13.
-> As a result, sip.LCOFIP always reads 0 even when mideleg.LCOFIP is set
-> and mip.LCOFIP is pending. This contradicts the rule that sip[i] aliases
-> mip[i] for bits delegated to S-mode, and it breaks consumers that check
-> sip.LCOFIP.
->
-> Would the following one-line change be suitable as a follow-up?
+Use the locals, or drop them and use mem->base both times.
 
-Yes, this change is required. I will add it in v2.
+> +    g_autofree char *compatible =
+> +        g_strdup_printf("tenstorrent,atlantis-prcm-%s", prcm_name);
+> +
+> +    qemu_fdt_add_subnode(fdt, name);
+> +    qemu_fdt_setprop_string(fdt, name, "compatible", compatible);
+> +    qemu_fdt_setprop_sized_cells(fdt, name, "reg", 2, base, 2, size);
+> +    qemu_fdt_setprop_cell(fdt, name, "#address-cells", 1);
+> +    qemu_fdt_setprop_cell(fdt, name, "#size-cells", 0);
+> +    qemu_fdt_setprop_cell(fdt, name, "#clock-cells", 1);
+> +    qemu_fdt_setprop_cell(fdt, name, "#reset-cells", 1);
+> +    qemu_fdt_setprop_cell(fdt, name, "phandle", next_phandle());
 
-Thanks,
-Mayuresh.
+If a phandle falls in the woods and nobody...
+
+If you're not saving this value anywhere, is there any need to set one?
+
+> +
+> +    return name;
+> +}
+> +
+>  static void finalize_fdt(TTAtlantisState *s)
+>  {
+>      uint32_t aplic_s_phandle = next_phandle();
+>      uint32_t imsic_s_phandle = next_phandle();
+>      uint32_t periph_clk_phandle = next_phandle();
+> +    uint32_t osc_24m_phandle = next_phandle();
+> +    uint32_t prcm_rcpu_phandle;
+>      void *fdt = MACHINE(s)->fdt;
 >
-> --- a/target/riscv/tcg/csr.c
-> +++ b/target/riscv/tcg/csr.c
-> @@ -4378,7 +4378,8 @@ static RISCVException rmw_sip64(CPURISCVState *env,=
- int csrno,
->   if (ret_val) {
->  *ret_val &=3D (env->mideleg | env->mvien) &
-> -            (S_MODE_INTERRUPTS | LOCAL_INTERRUPTS);
-> +            (S_MODE_INTERRUPTS | LOCAL_INTERRUPTS | MIP_LCOFIP);
->   }
+>      create_fdt_cpu(s, s->memmap, aplic_s_phandle, imsic_s_phandle);
+> @@ -348,6 +377,34 @@ static void finalize_fdt(TTAtlantisState *s)
+>                      aplic_s_phandle);
 >
->   return ret;
-> }
+>      create_fdt_clk(fdt, "periph-clk", 100000000, periph_clk_phandle);
+> +    create_fdt_clk(fdt, "osc_24m", 24000000, osc_24m_phandle);
+
+With the PRCM enabled the UART and I2C can get a real clock? So we can
+drop the periph-clk node and modify create_fdt_i2c as well as
+create_fdt_uart to use the real PRCM phandles. This will shake out any
+issues with how you're wiring up the device tree too.
+
+> +
+> +    g_autofree char *rcpu_name = create_fdt_prcm(fdt,
+> +        &s->memmap[TT_ATL_PRCM_RCPU], "rcpu");
+> +    prcm_rcpu_phandle = qemu_fdt_get_phandle(fdt, rcpu_name);
+
+This is a great function that I didn't know of when I wrote
+next_phandle(). I'm all for using it, but lets swap the entire file
+over at once.
+
+> +    qemu_fdt_setprop_cells(fdt, rcpu_name, "clocks", osc_24m_phandle);
+> +    qemu_fdt_setprop_cells(fdt, rcpu_name, "assigned-clocks",
+> +                           prcm_rcpu_phandle, TT_ATL_CLK_RCPU_ROOT,
+> +                           prcm_rcpu_phandle, TT_ATL_CLK_NOCC_CLK);
+> +    qemu_fdt_setprop_cells(fdt, rcpu_name, "assigned-clock-parents",
+> +                           prcm_rcpu_phandle, TT_ATL_CLK_RCPU_PLL,
+> +                           prcm_rcpu_phandle, TT_ATL_CLK_NOC_PLL);
+
+> @@ -545,6 +602,43 @@ static void tt_atlantis_machine_init(MachineState *machine)
+>      serial_mm_init(system_memory, s->memmap[TT_ATL_UART1].base, 2,
+>                     qdev_get_gpio_in(s->irqchip, TT_ATL_UART1_IRQ),
+>                     115200, serial_hd(0), DEVICE_LITTLE_ENDIAN);
+> +
+> +    /* Add rcpu prcm block */
+> +    object_initialize_child(OBJECT(s), "prcm-rcpu", &s->prcm[0],
+> +                            TYPE_TT_ATLANTIS_PRCM_RCPU);
+> +    sysbus_realize(SYS_BUS_DEVICE(&s->prcm[0]), &error_fatal);
+> +    memory_region_add_subregion(system_memory,
+
+Since you're already sending a v3, can you rebase it on this series please:
+
+ https://lore.kernel.org/qemu-riscv/20260831021500.82565-1-joel@jms.id.au/
+
+Aside from code shuffling, you will pass s->memory to
+memory_region_add_subregion, the _realize calls go in
+tt_atlantis_soc_realize, and the initalise calls go in
+tt_atlantis_soc_init.
+
+> +                                s->memmap[TT_ATL_PRCM_RCPU].base,
+> +                                sysbus_mmio_get_region(
+> +                                    SYS_BUS_DEVICE(&s->prcm[0]), 0));
+> +
+
+> diff --git a/include/hw/riscv/tt_atlantis.h b/include/hw/riscv/tt_atlantis.h
+> index 7f7d4a5a59..20bcdfeb52 100644
+> --- a/include/hw/riscv/tt_atlantis.h
+> +++ b/include/hw/riscv/tt_atlantis.h
+
+> @@ -59,6 +62,22 @@ enum {
+>      TT_ATL_SAPLIC,
+>      TT_ATL_SIMSIC,
+>      TT_ATL_UART1,
+> +    TT_ATL_PRCM_RCPU,
+> +    TT_ATL_PRCM_HSIO,
+> +    TT_ATL_PRCM_PCIE,
+> +    TT_ATL_PRCM_MM,
+> +};
+> +
+> +/* RCPU PRCM Clock IDs */
+
+Do these come from
+include/dt-bindings/clock/tenstorrent,atlantis-prcm-rcpu.h in linux?
+Add a comment.
+
+> +enum {
+> +    TT_ATL_CLK_RCPU_PLL = 0,
+> +    TT_ATL_CLK_RCPU_ROOT = 1,
+> +    TT_ATL_CLK_NOC_PLL = 25,
+> +    TT_ATL_CLK_NOCC_CLK = 26,
+> +    TT_ATL_CLK_HSIO_PLL = 54,
+> +    TT_ATL_CLK_PCIE_PLL = 55,
+> +    TT_ATL_CLK_MM_PLL0 = 56,
+> +    TT_ATL_CLK_MM_PLL1 = 57,
+>  };
 >
-> Thanks for the fix and best regards,
-> Shuai
+>  #endif
 >
+> --
+> 2.43.0
 >
-> > ---
-> >  target/riscv/tcg/csr.c | 17 ++++++++++-------
-> >  1 file changed, 10 insertions(+), 7 deletions(-)
-> >
-> > diff --git a/target/riscv/tcg/csr.c b/target/riscv/tcg/csr.c
-> > index c05c8ee076..ca68c1f5f1 100644
-> > --- a/target/riscv/tcg/csr.c
-> > +++ b/target/riscv/tcg/csr.c
-> > @@ -1890,7 +1890,8 @@ static const uint64_t delegable_ints =3D
-> >  static const uint64_t vs_delegable_ints =3D
-> >      (VS_MODE_INTERRUPTS | LOCAL_INTERRUPTS) & ~MIP_LCOFIP;
-> >  static const uint64_t all_ints =3D M_MODE_INTERRUPTS | S_MODE_INTERRUP=
-TS |
-> > -                                     HS_MODE_INTERRUPTS | LOCAL_INTERR=
-UPTS;
-> > +                                     HS_MODE_INTERRUPTS | MIP_LCOFIP |
-> > +                                     LOCAL_INTERRUPTS;
-> >  #define DELEGABLE_EXCPS ((1ULL << (RISCV_EXCP_INST_ADDR_MIS)) | \
-> >                           (1ULL << (RISCV_EXCP_INST_ACCESS_FAULT)) | \
-> >                           (1ULL << (RISCV_EXCP_ILLEGAL_INST)) | \
-> > @@ -1936,11 +1937,12 @@ static const target_ulong sstatus_v1_10_mask =
-=3D SSTATUS_SIE | SSTATUS_SPIE |
-> >
-> >  /* Bit STIP can be an alias of mip.STIP that's why it's writable in mv=
-ip. */
-> >  static const uint64_t mvip_writable_mask =3D MIP_SSIP | MIP_STIP | MIP=
-_SEIP |
-> > -                                    LOCAL_INTERRUPTS;
-> > +                                    MIP_LCOFIP | LOCAL_INTERRUPTS;
-> >  static const uint64_t mvien_writable_mask =3D MIP_SSIP | MIP_SEIP |
-> >                                      LOCAL_INTERRUPTS;
-> >
-> > -static const uint64_t sip_writable_mask =3D SIP_SSIP | LOCAL_INTERRUPT=
-S;
-> > +static const uint64_t sip_writable_mask =3D SIP_SSIP | SIP_LCOFIP |
-> > +                                          LOCAL_INTERRUPTS;
-> >  static const uint64_t hip_writable_mask =3D MIP_VSSIP;
-> >  static const uint64_t hvip_writable_mask =3D MIP_VSSIP | MIP_VSTIP |
-> >                                      MIP_VSEIP | LOCAL_INTERRUPTS;
-> > @@ -3953,9 +3955,9 @@ static RISCVException rmw_mvip64(CPURISCVState *e=
-nv, int csrno,
-> >       *  alias_mask denotes the bits that come from mip nalias_mask den=
-otes bits
-> >       *  that come from hvip.
-> >       */
-> > -    uint64_t alias_mask =3D ((S_MODE_INTERRUPTS | LOCAL_INTERRUPTS) &
-> > +    uint64_t alias_mask =3D ((S_MODE_INTERRUPTS | MIP_LCOFIP | LOCAL_I=
-NTERRUPTS) &
-> >          (env->mideleg | ~env->mvien)) | MIP_STIP;
-> > -    uint64_t nalias_mask =3D (S_MODE_INTERRUPTS | LOCAL_INTERRUPTS) &
-> > +    uint64_t nalias_mask =3D (S_MODE_INTERRUPTS | MIP_LCOFIP | LOCAL_I=
-NTERRUPTS) &
-> >          (~env->mideleg & env->mvien);
-> >      uint64_t wr_mask_mvip;
-> >      uint64_t wr_mask_mip;
-> > @@ -4188,9 +4190,10 @@ static RISCVException rmw_sie64(CPURISCVState *e=
-nv, int csrno,
-> >                                  uint64_t *ret_val,
-> >                                  uint64_t new_val, uint64_t wr_mask)
-> >  {
-> > -    uint64_t nalias_mask =3D (S_MODE_INTERRUPTS | LOCAL_INTERRUPTS) &
-> > +    uint64_t nalias_mask =3D (S_MODE_INTERRUPTS | MIP_LCOFIP | LOCAL_I=
-NTERRUPTS) &
-> >          (~env->mideleg & env->mvien);
-> > -    uint64_t alias_mask =3D (S_MODE_INTERRUPTS | LOCAL_INTERRUPTS) & e=
-nv->mideleg;
-> > +    uint64_t alias_mask =3D (S_MODE_INTERRUPTS | MIP_LCOFIP | LOCAL_IN=
-TERRUPTS) &
-> > +        env->mideleg;
-> >      uint64_t sie_mask =3D wr_mask & nalias_mask;
-> >      RISCVException ret;
-> >
-> > --
-> > 2.43.0
 
