@@ -4,93 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2AD8C61DFD
-	for <qemu-riscv@archiver.kernel.org>; Mon, 31 Aug 2026 02:17:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8BA2C61DE2
+	for <qemu-riscv@archiver.kernel.org>; Mon, 31 Aug 2026 02:18:20 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x0rZo-0004mp-Vb; Sun, 30 Aug 2026 22:16:49 -0400
+	id 1x0rZZ-0003ha-DZ; Sun, 30 Aug 2026 22:16:33 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1x0rZn-0004lT-2z
- for qemu-riscv@nongnu.org; Sun, 30 Aug 2026 22:16:47 -0400
-Received: from mail-pj1-x102b.google.com ([2607:f8b0:4864:20::102b])
+ id 1x0rZX-0003gb-Os
+ for qemu-riscv@nongnu.org; Sun, 30 Aug 2026 22:16:31 -0400
+Received: from mail-pg1-x536.google.com ([2607:f8b0:4864:20::536])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1x0rZl-0007fG-Je
- for qemu-riscv@nongnu.org; Sun, 30 Aug 2026 22:16:46 -0400
-Received: by mail-pj1-x102b.google.com with SMTP id
- 98e67ed59e1d1-38fdeaed181so4463229a91.1
- for <qemu-riscv@nongnu.org>; Sun, 30 Aug 2026 19:16:45 -0700 (PDT)
+ id 1x0rZW-0007ca-2v
+ for qemu-riscv@nongnu.org; Sun, 30 Aug 2026 22:16:31 -0400
+Received: by mail-pg1-x536.google.com with SMTP id
+ 41be03b00d2f7-cc1e1ff659bso2542490a12.0
+ for <qemu-riscv@nongnu.org>; Sun, 30 Aug 2026 19:16:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1788142604; x=1788747404; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1788142589; x=1788747389; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:sender:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=yj3X6s5HDsl64/BQ6b/GU1IeAoNk6/eV2nZC5+pnfqY=;
- b=LBqLsmtDgmaS9I+kD7reIK91ezWFX1TtLgQ1UK2APgNRDhUry7PTbX07/nUJb9KOdh
- FUb9/uJfXjWsNiCK9jOu9CNwT+miMcNmX0F+x6F3yQfdXeZXUxK4FXYhi07LeCsO8wwy
- BVUByJEskjXwmdmxwQAAU6Lbl4m6j6pLggp85yv6aQP4yfZD6nD+r7nM5XLZkWJqElY9
- +AOtOx64qE03s0Ca8c1QYfgQD9pfMSDm4ym/WIC346pDCI9N7Jt1ZtKpYxNH/QSmhwpf
- C+CrkSHoYNvHUKmL5xuqbU0vHwZBzy74dMAluea0dbDjeCf17fW5DKnYoP0aQq8u4USF
- srkw==
+ bh=mQBiGju903XJawObkTSJlI2w6oNi2YYpQ1UlpzmMJzE=;
+ b=lEkkvCQfvWVEOtiiBi+XM086vsf7XjRg2QFGfZ5zvLr2tRcf7qJD0ro5xULxMYlECL
+ WvePzyToyuKV9266AslwpaRqMnwrDPuXd6rkwwylHPfr1gj2E/Eew9wpUywUCT3NkNpD
+ ASqri3e47WnHAOZmzuDNWhhZkPsA1UlZYvVulSOBVT224+vKPtwiKBcQTFd4lTCKNyrD
+ Q7lwi7wH8QPEN5geIcp7T+kbJha2zBSiMpLTg7o3tvL8PeL5hdl616zNkRd27TwAvvEW
+ H7dyq+BMvjL4HfnU7XuxJsMTU8/a9Mc/pH68LZCXdGSY1jP/hT9kFbv/AyjpeJeqL6ci
+ 9UXw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788142604; x=1788747404;
+ d=1e100.net; s=20251104; t=1788142589; x=1788747389;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:sender:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=yj3X6s5HDsl64/BQ6b/GU1IeAoNk6/eV2nZC5+pnfqY=;
- b=d+UwjEp2C6qAvD5o0AfjwNkG9M5hNQg0j9wj/yyqhn2z2dGY3XhjXldgCQmwlGTdvy
- uqmtqTa9onJvOqTzCrqBCegTodkS1965Uj7HjgANRxKCFbbtHaJ2ZqhnIRIx/I+u+jvZ
- Mgq3ccMoa03PMVZReq3/AItmLRIv+jbaaNvu3QhFjRtp5KrxvV6hvAPChAs9N3qFTNul
- lM7exOpiSSuYEo+Hjf2RRCv6KyOllufnijdoLcOY+cuLYcV7DsME+eyY7GNYNSdS/SuD
- G2lOvkhNArHg+VUsPLUOKGN1vrOFVliWsHf6qSgg1dWzq3zmHhVzwa6hNH+l2/zfSEcd
- sFyg==
+ bh=mQBiGju903XJawObkTSJlI2w6oNi2YYpQ1UlpzmMJzE=;
+ b=S/YvqR1LQOgLAeEgmRijFgiV14WSTg4CoqJyzUsc+plX+mZ1yP9v2TnleKF5DQALMQ
+ jRAn1sqevqSsqZ5WzILUyc6nLl1GXgvd57oo+m1ldLtxoDOCY+AqoUvMUTnNvAAaVOqC
+ DgRNSBkTVA4yTRLJjr6rzVhonUoqElaykG4Te9PDhtdmX/7NrmEQjM/Zic8m8hGU/cyx
+ yZH1ArhRKKIvUF+ASI3DLi8yDCdl5ngIG0bHECZWXapckdo9Dxo7IWTCVr5mIQLyWRHh
+ ZrlgWmy9fEhMk+6KVDYHQ0xRF8CvkUwWELgqofvH3lg3FsQMvChqmTzztOtK9cClKsEk
+ JxVw==
 X-Forwarded-Encrypted: i=1;
- AKwUvBxi1JO4L0xU6NAbZM6A1op/UNXSaIBO+6k+Gni/9ycP9uv6T0ZDxtfvXtvowW1IehXzZPv32AZjjive@nongnu.org
-X-Gm-Message-State: AFuF++lK+tW0qvPTKaWtc1YilbXhImJOtd00m18nprXFOMoo9PruGRQ4
- ZqJg70Oku1voojtMTrKgk8u9zEk72zypru8GC+suFY4oOkEfHxnI8Fbu
-X-Gm-Gg: AYBFou0n9ImW8gwEHUZDXVYWhYtVJoKu8uja00eb+5MqBkI0KZ3CJjFFICnhW15o47I
- skpnleRcHAtL8HpwKg64UeXZUTTWvu6lKUiu+Dz5bQoLvCQM42hs7/lkLa0tnypKMPAqeG/24KD
- 7h7FXANM/upRf8mwjU++tVSYZXehESvzGDc/spOo8v1c6yti7pf7xG+8nJIywfpG2pcThqQ9sW/
- DXDJz1rBBqvle3s5MGBjzjzQLJqjuGHvlPUyLDkcnRSMJlY+ed3hL5YDe38rnUOt/LWq/ttSlNY
- SAZiYGyBXPl3OJZLwD9x8P9D0d1KW6tD7qB9If4A7+IJfvrqwLO71GKpdj9bpo48rXurTuA6NWM
- yz9xPY4sV1TClVz26Z+vx7FoMtV5eplBhBzht1c4b5Yv44zb+fwJYJnuLvzZ3sg/2MrUTsyVfxl
- k/+zoxIl65xGMbN0uUCVN7K99MurRUgKprxbLwlVr6O1ODHJaskyKXzjQXwh5RL6hRRuYAeMB5d
- IJpHnemg+nzC3Fgaa23TOkyE4ReplNIJHQ2hobouTTvlWSAwO1RmHjXN8hJK/M7h9awSVep+kwl
- 4wvSPKxUPbcgOCTSXL0y
-X-Received: by 2002:a17:90b:3c8d:b0:398:e969:87ef with SMTP id
- 98e67ed59e1d1-398e9698ae3mr4131221a91.24.1788142604336; 
- Sun, 30 Aug 2026 19:16:44 -0700 (PDT)
+ AKwUvBy8jvKUR+d8If+hKSYIMxdS3xDymrdpj7VNM1MN6HKV25ZjsYXdSgA0NwEEbr20YWfpXVHANrCzkzKU@nongnu.org
+X-Gm-Message-State: AFuF++lw+3Y+MTnAxgJi7jQ26ZzSwif+qb4TUsjNRm4VWykN7hWnvkLT
+ FtL/zG7Ht/QxZys/vtW1M1JHWQSfvHuo5G1wOspCGGVQz00OaMZyyM4Y
+X-Gm-Gg: AYBFou2EnPgw1naPGI4ZbiPrbzFXUXjEmGZ/JzMdwc0B3TNuqrYmsjhnJa7uQXIr4dE
+ M0Hl2eY6n/mrW2bu6yQ575/0C8jVEpLdXTkdhYNZXPyzC58f8zsLWEeBESHoiYLHTlzX4h+k3B1
+ AsriXUcQKZr41kg4s/8WwlnmH5wuJRlnwtRJHc9MDQIZQnHbqMuX1XMNcuHw9c3nFxisfcbclMS
+ F/MiCgIRHSy4T913yoTbCGLIYgA3BaPefwrLGNOE2w6h+wQ3093OKUMA0UlirJ39kA9xrQVfZZM
+ OUUu0floQxGizhsVmubkzR8/0Jd2Sb4vUQW8A3+gD6dZs0YJfj8gOS4no87/mSiV0TuWF0QhjyG
+ iPVVzzE7zc7STHA6gGV1ghpdNv1+OBxLQp3TRYZ4FT58bfzHG3oQavm6Eos2EsGGsoxKyuit/Yp
+ 9utNpyF0IH8HwGuuxKvhicFi/0o22qtlJA6ZQKQg6MoUrsnWTpyG/vUy3MhLSnc/cRMrWczVump
+ BHWjvozeiryEqiUF6pamDd178ptAC+8BcHrnGd+5GE6E/PRMe8lzNcAScyaJTsK7hKSJWLRpMdo
+ M2wnauIRRew5vrUgvukm
+X-Received: by 2002:a17:90b:380b:b0:380:f85c:94b4 with SMTP id
+ 98e67ed59e1d1-396d0f2391cmr33143854a91.7.1788142588774; 
+ Sun, 30 Aug 2026 19:16:28 -0700 (PDT)
 Received: from donnager-debian.. ([180.150.112.50])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-396b186807bsm20071240a91.12.2026.08.30.19.16.39
+ 98e67ed59e1d1-396b186807bsm20071240a91.12.2026.08.30.19.16.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 30 Aug 2026 19:16:43 -0700 (PDT)
+ Sun, 30 Aug 2026 19:16:28 -0700 (PDT)
 From: Joel Stanley <joel@jms.id.au>
 To: Alistair Francis <alistair.francis@wdc.com>,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Cc: Portia Stephens <portias@oss.tenstorrent.com>,
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+Cc: Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Chao Liu <chao.liu@processmission.com>,
  Nicholas Piggin <npiggin@gmail.com>,
  Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>,
  Michael Ellerman <mpe@kernel.org>,
+ Portia Stephens <portias@oss.tenstorrent.com>,
  =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
  qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Subject: [PATCH v2 14/16] hw/riscv: Add property to hart to allow private
+Subject: [PATCH v2 11/16] hw/riscv/atlantis: Use local reference for system
  memory
-Date: Mon, 31 Aug 2026 11:44:55 +0930
-Message-ID: <20260831021500.82565-15-joel@jms.id.au>
+Date: Mon, 31 Aug 2026 11:44:52 +0930
+Message-ID: <20260831021500.82565-12-joel@jms.id.au>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260831021500.82565-1-joel@jms.id.au>
 References: <20260831021500.82565-1-joel@jms.id.au>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102b;
- envelope-from=joel.stan@gmail.com; helo=mail-pj1-x102b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::536;
+ envelope-from=joel.stan@gmail.com; helo=mail-pg1-x536.google.com
 X-Spam_score_int: -16
 X-Spam_score: -1.7
 X-Spam_bar: -
@@ -114,60 +114,111 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Portia Stephens <portias@oss.tenstorrent.com>
+Instead of system_memory, attach devices to TTAtlantisState::memory in
+preparation for the ->memory becoming a container.
 
-There are platforms where CPUs have different mapping of system memory.
-The global system memory does not allow for this. This adds an optional
-property to assign a specific memory region to a hart. This allows for a
-machine to alias the hart's memory to system memory while the hart only
-views memory from its own memory region.
-
-Signed-off-by: Portia Stephens <portias@oss.tenstorrent.com>
 Signed-off-by: Joel Stanley <joel@jms.id.au>
 ---
- include/hw/riscv/riscv_hart.h | 2 ++
- hw/riscv/riscv_hart.c         | 8 ++++++++
- 2 files changed, 10 insertions(+)
+ include/hw/riscv/tt_atlantis.h |  1 +
+ hw/riscv/tt_atlantis.c         | 19 ++++++++++---------
+ 2 files changed, 11 insertions(+), 9 deletions(-)
 
-diff --git a/include/hw/riscv/riscv_hart.h b/include/hw/riscv/riscv_hart.h
-index 197fa1623115..c3cd05a2c877 100644
---- a/include/hw/riscv/riscv_hart.h
-+++ b/include/hw/riscv/riscv_hart.h
-@@ -42,6 +42,8 @@ struct RISCVHartArrayState {
-     uint64_t *rnmi_irqvec;
-     uint32_t num_rnmi_excpvec;
-     uint64_t *rnmi_excpvec;
-+    /* Optional private memory region for use instead of system memory */
+diff --git a/include/hw/riscv/tt_atlantis.h b/include/hw/riscv/tt_atlantis.h
+index 642490d21743..a29c67c1cfcf 100644
+--- a/include/hw/riscv/tt_atlantis.h
++++ b/include/hw/riscv/tt_atlantis.h
+@@ -29,6 +29,7 @@ struct TTAtlantisState {
+     Notifier machine_done;
+     const MemMapEntry *memmap;
+ 
 +    MemoryRegion *memory;
-     RISCVCPU *harts;
- };
+     RISCVHartArrayState cpus;
+     DeviceState *irqchip;
+     DesignWareI2CState i2c[TT_ATL_NUM_I2C];
+diff --git a/hw/riscv/tt_atlantis.c b/hw/riscv/tt_atlantis.c
+index c471c7cebf12..1c75fb5d8d57 100644
+--- a/hw/riscv/tt_atlantis.c
++++ b/hw/riscv/tt_atlantis.c
+@@ -482,13 +482,14 @@ static void tt_atlantis_machine_init(MachineState *machine)
+ {
+     TTAtlantisState *s = TT_ATLANTIS_MACHINE(machine);
  
-diff --git a/hw/riscv/riscv_hart.c b/hw/riscv/riscv_hart.c
-index 747754be6158..32fd39737ff6 100644
---- a/hw/riscv/riscv_hart.c
-+++ b/hw/riscv/riscv_hart.c
-@@ -53,6 +53,8 @@ static const Property riscv_harts_props[] = {
-     DEFINE_PROP_ARRAY("rnmi-exception-vector", RISCVHartArrayState,
-                       num_rnmi_excpvec, rnmi_excpvec, qdev_prop_uint64,
-                       uint64_t),
-+    DEFINE_PROP_LINK("memory", RISCVHartArrayState, memory,
-+                     TYPE_MEMORY_REGION, MemoryRegion *),
- };
+-    MemoryRegion *system_memory = get_system_memory();
+     MemoryRegion *ram_hi = g_new(MemoryRegion, 1);
+     MemoryRegion *ram_lo = g_new(MemoryRegion, 1);
+     MemoryRegion *bootrom = g_new(MemoryRegion, 1);
+     ram_addr_t lo_ram_size;
+     int hart_count = machine->smp.cpus;
  
- static void riscv_harts_cpu_reset(void *opaque)
-@@ -117,6 +119,12 @@ static bool riscv_hart_realize(RISCVHartArrayState *s, int idx,
-     object_initialize_child(OBJECT(s), "harts[*]", &s->harts[idx], cpu_type);
-     qdev_prop_set_uint64(DEVICE(&s->harts[idx]), "resetvec", s->resetvec);
- 
-+    /* Use private memory instead of system_memory if provided */
-+    if (s->memory) {
-+        object_property_set_link(OBJECT(&s->harts[idx]), "memory",
-+                                 OBJECT(s->memory), &error_abort);
-+    }
++    s->memory = get_system_memory();
 +
-     if (s->harts[idx].cfg.ext_smrnmi) {
-         if (idx < s->num_rnmi_irqvec) {
-             qdev_prop_set_uint64(DEVICE(&s->harts[idx]),
+     s->memmap = tt_atlantis_memmap;
+ 
+     object_initialize_child(OBJECT(machine), "soc", &s->cpus,
+@@ -504,7 +505,7 @@ static void tt_atlantis_machine_init(MachineState *machine)
+                             &error_abort);
+     sysbus_realize(SYS_BUS_DEVICE(&s->cpus), &error_fatal);
+ 
+-    s->irqchip = riscv_create_aia(system_memory,
++    s->irqchip = riscv_create_aia(s->memory,
+                                   true, TT_IMSIC_GUESTS,
+                                   TT_IMSIC_STRIDE,
+                                   TT_IMSIC_STRIDE,
+@@ -517,7 +518,7 @@ static void tt_atlantis_machine_init(MachineState *machine)
+                                   TT_IRQCHIP_NUM_MSIS,
+                                   TT_IRQCHIP_NUM_PRIO_BITS);
+ 
+-    riscv_aclint_mtimer_create(system_memory,
++    riscv_aclint_mtimer_create(s->memory,
+             s->memmap[TT_ATL_ACLINT].base,
+             TT_ACLINT_MTIME_SIZE,
+             0, hart_count,
+@@ -540,23 +541,23 @@ static void tt_atlantis_machine_init(MachineState *machine)
+ 
+     memory_region_init_alias(ram_hi, OBJECT(machine), "ram.high", machine->ram,
+                              0, machine->ram_size);
+-    memory_region_add_subregion(system_memory,
++    memory_region_add_subregion(s->memory,
+                                 s->memmap[TT_ATL_DDR_HI].base, ram_hi);
+ 
+     lo_ram_size = MIN(machine->ram_size, s->memmap[TT_ATL_DDR_LO].size);
+     memory_region_init_alias(ram_lo, OBJECT(machine), "ram.low", machine->ram,
+                              0, lo_ram_size);
+-    memory_region_add_subregion(system_memory,
++    memory_region_add_subregion(s->memory,
+                                 s->memmap[TT_ATL_DDR_LO].base, ram_lo);
+ 
+     /* Boot ROM */
+     memory_region_init_rom(bootrom, NULL, "tt-atlantis.bootrom",
+                            s->memmap[TT_ATL_BOOTROM].size, &error_fatal);
+-    memory_region_add_subregion(system_memory, s->memmap[TT_ATL_BOOTROM].base,
++    memory_region_add_subregion(s->memory, s->memmap[TT_ATL_BOOTROM].base,
+                                 bootrom);
+ 
+     /* UART1, the soc console (UART0 is for the boot microcontroller) */
+-    serial_mm_init(system_memory, s->memmap[TT_ATL_UART1].base, 2,
++    serial_mm_init(s->memory, s->memmap[TT_ATL_UART1].base, 2,
+                    qdev_get_gpio_in(s->irqchip, TT_ATL_UART1_IRQ),
+                    115200, serial_hd(0), DEVICE_LITTLE_ENDIAN);
+     /*
+@@ -570,7 +571,7 @@ static void tt_atlantis_machine_init(MachineState *machine)
+      */
+     object_initialize_child(OBJECT(s), "uart1", &s->uart1,
+                             TYPE_UNIMPLEMENTED_DEVICE);
+-    mmio_map_unimplemented(system_memory, SYS_BUS_DEVICE(&s->uart1),
++    mmio_map_unimplemented(s->memory, SYS_BUS_DEVICE(&s->uart1),
+                            "tt-atlantis.uart1", s->memmap[TT_ATL_UART1].base,
+                            s->memmap[TT_ATL_UART1].size);
+ 
+@@ -582,7 +583,7 @@ static void tt_atlantis_machine_init(MachineState *machine)
+                                 TYPE_DESIGNWARE_I2C);
+         sbd = SYS_BUS_DEVICE(&s->i2c[i]);
+         sysbus_realize(sbd, &error_fatal);
+-        memory_region_add_subregion(system_memory,
++        memory_region_add_subregion(s->memory,
+                                     s->memmap[TT_ATL_I2C0 + i].base,
+                                     sysbus_mmio_get_region(sbd, 0));
+         sysbus_connect_irq(sbd, 0,
 -- 
 2.47.3
 
