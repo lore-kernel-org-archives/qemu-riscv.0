@@ -4,100 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEF8CC61DD3
-	for <qemu-riscv@archiver.kernel.org>; Mon, 31 Aug 2026 19:55:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05368C624CE
+	for <qemu-riscv@archiver.kernel.org>; Tue,  1 Sep 2026 02:45:01 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x185b-0004DE-2H; Mon, 31 Aug 2026 15:54:43 -0400
+	id 1x1EUT-0006QA-W4; Mon, 31 Aug 2026 22:44:50 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <tgamblin@baylibre.com>)
- id 1x17ES-0001OM-DC
- for qemu-riscv@nongnu.org; Mon, 31 Aug 2026 14:59:48 -0400
-Received: from mail-qv1-xf2c.google.com ([2607:f8b0:4864:20::f2c])
+ (Exim 4.90_1) (envelope-from <xiangwencheng@lanxincomputing.com>)
+ id 1x1EUF-0006LL-Ap
+ for qemu-riscv@nongnu.org; Mon, 31 Aug 2026 22:44:38 -0400
+Received: from va-2-35.ptr.blmpb.com ([209.127.231.35])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <tgamblin@baylibre.com>)
- id 1x17EP-0000Al-Ip
- for qemu-riscv@nongnu.org; Mon, 31 Aug 2026 14:59:48 -0400
-Received: by mail-qv1-xf2c.google.com with SMTP id
- 6a1803df08f44-90cca401c89so772246d6.2
- for <qemu-riscv@nongnu.org>; Mon, 31 Aug 2026 11:59:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1788202784; x=1788807584; darn=nongnu.org;
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=XGz8niZ6gXi+qB2ANR+FEUbgCy1MUBbubi45Fx5v+3g=;
- b=jJNq6nkAuxWeyanl7cT7qsITTfOoaoSDixdKEv3/60TlsV8t8RzJsr8gM9xOPbNbC2
- Qqfk9PAEOEPMRLlV6paS0avTziupuDxb62feYBtIGL7Gvl2tIrx3THdXb4nA3U0TYaSM
- SzMzstUK17IEQy2zeBNFpg/Mfhmzhh8Hezpy1DiqSB4TQm2VsEynI9+MIIr4z04hpwuv
- 3slBukVip8Y6Qza2o5k/gP4fseO3Dd6rZneDZS2sYWHQUHKT4gudmSZ7hq5ciivDo1ar
- lxebIzrKjCDPqs9jGXR7hC/vGSkb6nJ9n8+RwN1O93um1NqUJM5K5Js8F9GZUsc76HUM
- 5ZPQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788202784; x=1788807584;
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=XGz8niZ6gXi+qB2ANR+FEUbgCy1MUBbubi45Fx5v+3g=;
- b=YwoCuS6O5Z4FoGDCswoK2WlcBAKdtllvlz+h0NduzCkqduJ0ha4vUnUT28AxLAIHjA
- p/bG6bLas0rzxso1FFwj73wiICZbzZbonE4JwpHN4XaMUPIEkKtIcSniFVegUsVTG4oG
- xzV2LYu/q+N7b2bZE3A7ANVYuq7T4M56YhD+bswr77c5RVf5ORautLwSNRmghha54yvr
- RcvNIqAXjC5no9TgQ6oDk7RRFFMgw9pKWi+PRMiEzvva0K9+PNXBV0zw12JlXP7yEI3s
- 2I9qoYwxMcdB+BXxwo1jK00ctxY/GpDTfHrEXtocdvDN5H7OByazQyARgo6MLX/JFTzQ
- 1ahw==
-X-Forwarded-Encrypted: i=1;
- AHgh+RrCPAx/f8Q9kGupcO3XssgD5LTAmtUss2FlqSWuapzqFiZu4xzZ9vllh+Tb6nZvETc8q5lIXRxgDlV6@nongnu.org
-X-Gm-Message-State: AFuF++lBLwrANU5yJJljXHQ54QXlSZ83+Xn0YOQvo20AVPrF4CGwBzyz
- YSEcVirHs1uI0bvSwnpyXCjVlVTL8hbYhEzAfPF+rNyJxQKdLZAMdyOl2tZ5PaXTR8Y0gwoqvLQ
- 84gROlnc=
-X-Gm-Gg: AR+sD10aMTQ5dr1/soU1Vf1qqdyv++yiyzqnFvOZs4RUtFePFCG/9qH74uVVctERcc3
- N9hGgAlq0K5OwpMhOilBc1SaxZ0TInSMk4SVOP40/fqWyABZg6C2QxTreZV9OH2aBNqyrBGVBXD
- MQcgjb1uC382YZFFxt4JW2RFFLmuI8RXCITHhw0fjfr5TX9kmeFBdqecOqqSxOgEiBMDYI2cPqQ
- XRnbDUG+sGMRUSKcDWZ6zRXwWsBXIpw3HGiVZKVyp0HPBXVVaSmnaS3joTyHcfeoxTRL/LGCPzb
- 7Vl9KEYA1ov9/Y/ZYROT2r/h3EnqOVFDNnH1DQA5KjNIGh7lBwDCYYgJtUH7pUq2zsmJBNSB7Ki
- U4lTiw+FFJrIhxo+NRMifJgrkS9aVekd5NIEGunx685k2oM2/Gvi3LGKTrynhWHoQQyUsi/8hMy
- 8gL2fsNLNM/+n1+gx8ikUchucnv5S5ICCQewG9PE1sxJ6xv9Vj04TQJQ96f16QYC+fzEC1G5dA
-X-Received: by 2002:a05:6214:3199:b0:90a:7f54:2e47 with SMTP id
- 6a1803df08f44-90ce0f6853bmr385883446d6.29.1788202783517; 
- Mon, 31 Aug 2026 11:59:43 -0700 (PDT)
-Received: from [192.168.40.230] ([2001:1970:3847:e000:1977:be2f:4a71:2892])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-90ce44f5695sm90952986d6.26.2026.08.31.11.59.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 31 Aug 2026 11:59:41 -0700 (PDT)
-From: Trevor Gamblin <tgamblin@baylibre.com>
-Subject: [PATCH 0/3] target: riscv: support TLB page flush for sfence.vma
-Date: Mon, 31 Aug 2026 14:59:38 -0400
-Message-Id: <20260831-riscv_tlb_page_flush-v1-0-4fc6af95673a@baylibre.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIABrPlWoC/yXMQQqDMBBG4avIrBtwFFrbq5QSkvhHp4iVjIog3
- r2pXX6L93ZSJIHSo9gpYRWVz5jBl4JC78YORtpsqsrqWjY1myQaVjsP3k6ug43Dor1hdk0dccf
- NM+V0Soiyndvn629d/Bth/r3oOL7dakkseAAAAA==
-X-Change-ID: 20260831-riscv_tlb_page_flush-11a83fe9e7b1
-To: qemu-devel@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, 
- Weiwei Li <liwei1518@gmail.com>, 
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org, 
- Trevor Gamblin <tgamblin@baylibre.com>
-X-Mailer: b4 0.16.0
-Received-SPF: pass client-ip=2607:f8b0:4864:20::f2c;
- envelope-from=tgamblin@baylibre.com; helo=mail-qv1-xf2c.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ (Exim 4.90_1) (envelope-from <xiangwencheng@lanxincomputing.com>)
+ id 1x1EU8-0003MQ-KK
+ for qemu-riscv@nongnu.org; Mon, 31 Aug 2026 22:44:33 -0400
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ s=s1; d=lanxincomputing-com.20200927.dkim.feishu.cn; t=1788230658;
+ h=from:subject:mime-version:from:date:message-id:subject:to:cc:
+ reply-to:content-type:mime-version:in-reply-to:message-id;
+ bh=/dwDJJE9tK5MO97zjKOTyeDl627AaCmlf5Kz+YbbnQc=;
+ b=Q2GQpDfVkWoNfBqABbe6g3q8xxhCqb1rypp36h+8/KG2hAw84n/IMQCm7e63fZnGikC8/1
+ SEHVfZSRfBIVeX7jgssUqqGjfFbOBQ9x6xJTGI0vNkkvO1bnzByQ6SP0HFI+iTAV01Riga
+ Egzw/C8NIpnRcsIgYprWBz4+1zBy47UzCwm+LUDwWOkp3QkE/egEjpRe4BrDJLB03XUYM+
+ dZEV/yaEmWsHk6BwsiJhXnhwvPjDrHbAuB7lIt/yi71Zvj8GBdWwnKLoOjMfDhIkKvnEod
+ l+Kfxf5i3JabL7zGssUV4Xfs2qxSdkGh5BMthiLOnbme95zLD7JjRo8E75KFLg==
+Message-Id: <5a2a8e0e-2fa6-4905-9752-b2ed0ab3f0ac@lanxincomputing.com>
+Content-Transfer-Encoding: quoted-printable
+References: <20260821100856.1794011-1-xiangwencheng@lanxincomputing.com>
+ <CAFEAcA_kLpaz0UQi3Q315kLVqvDtxKh77kU2meN9G1_evfKBeQ@mail.gmail.com>
+ <bad5c8b3-668f-4893-974f-9dbca8dc6893@linaro.org>
+ <02da9676-febf-4389-b09b-5e5d41c1084e@lanxincomputing.com>
+ <aoxiBB2Wn8NiL5s6@x1.local>
+Cc: "Richard Henderson" <richard.henderson@linaro.org>, 
+ "Peter Maydell" <peter.maydell@linaro.org>, <mst@redhat.com>, 
+ <pbonzini@redhat.com>, <philmd@mailo.com>, <qemu-devel@nongnu.org>, 
+ <qemu-riscv@nongnu.org>, "BillXiang" <xiangwencheng@lanxincomputing.com>
+From: "BillXiang" <xiangwencheng@lanxincomputing.com>
+X-Original-From: BillXiang <xiangwencheng@lanxincomputing.com>
+In-Reply-To: <aoxiBB2Wn8NiL5s6@x1.local>
+Mime-Version: 1.0
+Content-Language: en-US
+Subject: Re: [PATCH v2] virtio: Add aligned ld/st accessors for vring
+User-Agent: Mozilla Thunderbird
+Received: from [127.0.0.1] ([123.120.5.129]) by smtp.feishu.cn with ESMTPS;
+ Tue, 01 Sep 2026 10:44:14 +0800
+Content-Type: text/plain; charset=UTF-8
+X-Lms-Return-Path: <lba+26a963c00+a1dd44+nongnu.org+xiangwencheng@lanxincomputing.com>
+To: "Peter Xu" <peterx@redhat.com>
+Date: Tue, 1 Sep 2026 10:44:13 +0800
+Received-SPF: pass client-ip=209.127.231.35;
+ envelope-from=xiangwencheng@lanxincomputing.com; helo=va-2-35.ptr.blmpb.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, MSGID_FROM_MTA_HEADER=0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Mon, 31 Aug 2026 15:54:34 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -112,135 +77,175 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Introduce a new function, sfence_vma_allowed(), to handle
-privilege/hypervisor checks currently performed in helper_tlb_flush(),
-and make use of it in that function. Then, add helper_tlb_flush_page()
-for flushing only a single TLB page, using sfence_vma_allowed() inside
-it similarly to with helper_tlb_flush(). Finally, rework the
-trans_sfence_vma() function to use helper_tlb_flush_page() when rs1 !=
-0.
+On 8/24/2026 11:23 PM, Peter Xu wrote:
+> On Mon, Aug 24, 2026 at 12:19:15PM +0800, BillXiang wrote:
+>> Hi Richard, I've read your code in accel/tcg/ldst_atomicity.c.inc. Do
+>> you think it would be better to make the load/store_atomic* public?
+>=20
+> They do not fit by default, as we need to still process unaligned cases?
 
-The third patch also includes the fix for a regression in the
-'test_tuxrun.TuxRunRiscV64Test.test_riscv64_maxcpu' test encountered
-with the draft version of this series, which hanged indefinitely until
-killed when the patches were applied. This was fixed by making sure to
-use get_address() to canonicalize the address being passed to
-helper_tlb_flush_page().
+You mentioned the use of guest CPU context in [1]. However, what I meant=20
+by load/store_atomic* is code like the following:
 
-make-check and make-functional were both run with the patches applied on
-master, and no regressions for riscv64 were observed (beyond the one
-mentioned as fixed above). 
+static inline uint16_t load_atomic2(void *pv)
+{
+     uint16_t *p =3D __builtin_assume_aligned(pv, 2);
+     return qatomic_read(p);
+}
 
-Daniel Barboza helped me with initial triage, direction, and cleaning up
-this series for submission - thanks again!
+static inline void store_atomic2(void *pv, uint16_t val)
+{
+     uint16_t *p =3D __builtin_assume_aligned(pv, 2);
+     qatomic_set(p, val);
+}
 
-Some background context: as part of the RISE Project[1] mission to
-improve the RISC-V software ecosystem, the Yocto Project[2] is receiving
-assistance with triaging bugs and enhancing RISC-V support in the core
-layer. The 'qemuriscv32' and 'qemuriscv64' targets were enabled as part
-of the Yocto's CI system, known as the Autobuilder[3] in 2025, and since
-that time various intermittent failures have been observed on the
-'ptest' ('package test', where a package's test suites are bundled into
-an image and then booted to do basic runtime compatibility testing)
-case, 'qemuriscv64-ptest'. These almost always manifest as timeouts in
-the guest, usually around heavier and/or more complex test cases, and
-they additionally seem to occur only under heavy host system (x86_64)
-load. 
+I consider these to be generic atomic load/store primitives.
 
-Comparing to other major architectures like x86_64 and arm64, the
-riscv64 guests are always emulated in TCG mode, since the Yocto
-Autobuilder cluster does not (yet) have native riscv64 hosts to dedicate
-for runtime testing with kvm support. While this is likely a major
-factor in why qemuriscv64 runs fail at higher rates than other
-architectures, it was noted after compiling the triage data[4] that
-local comparisons of the same ptest images running on TCG-mode qemuarm64
-and qemuriscv64 showed the latter taking significantly longer to
-complete (using some of the test suites which have been observed failing
-as examples), even with no other meaningful system load on the host. In
-particular, the coreutils case showed over 70% longer runtime for
-qemuriscv64 compared to qemuarm64 (~1000s vs ~580s).
+>=20
+> I wished we can use qemu_mem_move() directly that just got introduced.. b=
+ut
+> it does slightly more than wanted.  Maybe something like this?  Below dif=
+f
+> dropped ldsw_he_p() alone the way as it's never used.
+>=20
+> Thanks,
+>=20
+> =3D=3D=3D8<=3D=3D=3D
+>=20
+> diff --git a/include/qemu/bswap.h b/include/qemu/bswap.h
+> index 387d65c0b0..04a0f63612 100644
+> --- a/include/qemu/bswap.h
+> +++ b/include/qemu/bswap.h
+> @@ -1,6 +1,7 @@
+>   #ifndef BSWAP_H
+>   #define BSWAP_H
+>  =20
+> +#include "qemu/atomic.h"
+>   #include "qemu/target-info.h"
+>   #include "exec/memop.h"
+>  =20
+> @@ -238,62 +239,52 @@ static inline void stb_p(void *ptr, uint8_t v)
+>       *(uint8_t *)ptr =3D v;
+>   }
+>  =20
+> -/*
+> - * Any compiler worth its salt will turn these memcpy into native unalig=
+ned
+> - * operations.  Thus we don't need to play games with packed attributes,=
+ or
+> - * inline byte-by-byte stores.
+> - * Some compilation environments (eg some fortify-source implementations=
+)
+> - * may intercept memcpy() in a way that defeats the compiler optimizatio=
+n,
+> - * though, so we use __builtin_memcpy() to give ourselves the best chanc=
+e
+> - * of good performance.
+> - */
+> -
+> -static inline int lduw_he_p(const void *ptr)
+> -{
+> -    uint16_t r;
+> -    __builtin_memcpy(&r, ptr, sizeof(r));
+> -    return r;
+> -}
+> -
+> -static inline int ldsw_he_p(const void *ptr)
+> -{
+> -    int16_t r;
+> -    __builtin_memcpy(&r, ptr, sizeof(r));
+> -    return r;
+> -}
+> +#define  LD_HE_P(type, size)                                \
+> +    static inline type                                      \
+> +    glue(glue(ld, size), _he_p)(const void *ptr)            \
+> +    {                                                       \
+> +        type v;                                             \
+> +        if (unlikely((uintptr_t)ptr & (sizeof(v) - 1))) {   \
+> +            __builtin_memcpy(&v, ptr, sizeof(v));           \
+> +        } else {                                            \
+> +            v =3D qatomic_read((type *)ptr);                  \
+> +        }                                                   \
+> +        return v;                                           \
+> +    }
+>  =20
+> -static inline void stw_he_p(void *ptr, uint16_t v)
+> -{
+> -    __builtin_memcpy(ptr, &v, sizeof(v));
+> -}
+> +#define  ST_HE_P(type, size)                                \
+> +    static inline void                                      \
+> +    glue(glue(st, size), _he_p)(void *ptr, type v)          \
+> +    {                                                       \
+> +        if (unlikely((uintptr_t)ptr & (sizeof(v) - 1))) {   \
+> +            __builtin_memcpy(ptr, &v, sizeof(v));           \
+> +        } else {                                            \
+> +            qatomic_set((type *)ptr, v);                    \
+> +        }                                                   \
+> +    }
+>  =20
+> -static inline void st24_he_p(void *ptr, uint32_t v)
+> -{
+> -    __builtin_memcpy(ptr, &v, 3);
+> -}
+> +LD_HE_P(uint16_t, 16)
+> +LD_HE_P(uint32_t, 32)
+> +LD_HE_P(uint64_t, 64)
+> +ST_HE_P(uint16_t, 16)
+> +ST_HE_P(uint32_t, 32)
+> +ST_HE_P(uint64_t, 64)
+>  =20
+> -static inline int ldl_he_p(const void *ptr)
+> -{
+> -    int32_t r;
+> -    __builtin_memcpy(&r, ptr, sizeof(r));
+> -    return r;
+> -}
+> +#undef LD_HE_P
+> +#undef ST_HE_P
+> +#undef ADDR_ALIGNED
+>  =20
+> -static inline void stl_he_p(void *ptr, uint32_t v)
+> -{
+> -    __builtin_memcpy(ptr, &v, sizeof(v));
+> -}
+> +#define  lduw_he_p  ld16_he_p
+> +#define  ldl_he_p  ld32_he_p
+> +#define  ldq_he_p  ld64_he_p
+>  =20
+> -static inline uint64_t ldq_he_p(const void *ptr)
+> -{
+> -    uint64_t r;
+> -    __builtin_memcpy(&r, ptr, sizeof(r));
+> -    return r;
+> -}
+> +#define  stw_he_p  st16_he_p
+> +#define  stl_he_p  st32_he_p
+> +#define  stq_he_p  st64_he_p
+>  =20
+> -static inline void stq_he_p(void *ptr, uint64_t v)
+> +static inline void st24_he_p(void *ptr, uint32_t v)
+>   {
+> -    __builtin_memcpy(ptr, &v, sizeof(v));
+> +    __builtin_memcpy(ptr, &v, 3);
+>   }
+>  =20
+>   static inline int lduw_le_p(const void *ptr)
 
-Fully investigating the source of this discrepancy was a long process.
-For Yocto builds, native QEMU binaries are built from source as part of
-the overall image build, so the first place to look was in QEMU's
-configuration and boot options. Other suggestions included trying to
-disable TCG plugins or alter the QEMU and guest package configs (Yocto's
-QEMU is RVA23S64 profile by default, while the runtime packages are
-built for riscv64gc). However, these changes either produced no
-meaningful effect or actually increased runtime. The next step was to
-investigate the QEMU source, which is what ultimately led to this patch
-series. It turns out that these changes significantly improve the
-reference runtime test case for coreutils in Yocto, although it is still
-somewhat slower than in qemuarm64. It remains to be seen whether these
-changes to the QEMU source eliminate the intermittent issues in Yocto's
-testing, but it is a meaningful improvement which opens the door to
-further optimizations for RISC-V.
+IMO, your change serves as a good optimization for the original=20
+load/store by taking advantage of alignment. However, the real issue I'm=20
+trying to address is the atomicity of these operations=E2=80=94for use case=
+s=20
+like avail_idx in virtio, and this should not limited to virtio alone. I=20
+still believe we should provide explicit atomic load/store interfaces=20
+for callers, rather than relying solely on aligned load/store. And I=20
+admit it was my mistake to use the aligned versions here in the first=20
+place. I'll send another version later and look forward to more feedback.
 
-As an example, compare the before and after results on a local run of
-core-image-ptest-coreutils for qemuriscv64:
+Thanks,
 
-|============================================================================
-|Testsuite summary for GNU coreutils 9.11
-|============================================================================
-|# TOTAL: 733
-|# PASS:  561
-|# SKIP:  172
-|# XFAIL: 0
-|# FAIL:  0
-|# XPASS: 0
-|# ERROR: 0
-|============================================================================
-|make[1]: Leaving directory '/usr/lib/coreutils/ptest'
-|DURATION: 1049
-|END: /usr/lib/coreutils/ptest
-|2026-08-31T17:23
-|STOP: ptest-runner
-|TOTAL: 1 FAIL: 0
+--
+BillXiang
 
-versus:
-
-|============================================================================
-|Testsuite summary for GNU coreutils 9.11
-|============================================================================
-|# TOTAL: 733
-|# PASS:  561
-|# SKIP:  172
-|# XFAIL: 0
-|# FAIL:  0
-|# XPASS: 0
-|# ERROR: 0
-|============================================================================
-|make[1]: Leaving directory '/usr/lib/coreutils/ptest'
-|DURATION: 646
-|END: /usr/lib/coreutils/ptest
-|2026-08-31T16:10
-|STOP: ptest-runner
-|TOTAL: 1 FAIL: 0
-|root@qemuriscv64:~#
-
-Signed-off-by: Trevor Gamblin <tgamblin@baylibre.com>
-
-[1]: https://riseproject.dev/
-[2]: https://www.yoctoproject.org/
-[3]: https://autobuilder.yoctoproject.org/valkyrie/
-[4]: https://docs.google.com/document/d/1HUk-RvMDdW2EKV-qE1VNfZBycPscQUsayEZ5AgJ85C8
-
----
-Trevor Gamblin (3):
-      target/riscv: extract sfence_vma_allowed() from helper_tlb_flush()
-      target/riscv: add helper_tlb_flush_page()
-      target/riscv: use a targeted TLB page flush for sfence.vma with a vaddr operand
-
- target/riscv/helper.h                              |  1 +
- target/riscv/tcg/insn_trans/trans_privileged.c.inc |  6 ++++-
- target/riscv/tcg/op_helper.c                       | 26 +++++++++++++++++-----
- 3 files changed, 26 insertions(+), 7 deletions(-)
----
-base-commit: d2e570cc0f97b936902a5b1b86b73c0f5998b475
-change-id: 20260831-riscv_tlb_page_flush-11a83fe9e7b1
-
-Best regards,
---  
-Trevor Gamblin <tgamblin@baylibre.com>
-
+[1] https://lore.kernel.org/qemu-devel/apW0SkNxWPCyvVV6@x1.local/
 
