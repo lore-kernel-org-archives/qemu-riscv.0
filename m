@@ -4,127 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D606CC61DD6
-	for <qemu-riscv@archiver.kernel.org>; Tue,  1 Sep 2026 08:57:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FB96C624C6
+	for <qemu-riscv@archiver.kernel.org>; Tue,  1 Sep 2026 09:17:12 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x1KIg-0000K0-LJ; Tue, 01 Sep 2026 04:57:02 -0400
+	id 1x1Kbx-000279-KA; Tue, 01 Sep 2026 05:16:57 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1x1KIg-0000JM-2J
- for qemu-riscv@nongnu.org; Tue, 01 Sep 2026 04:57:02 -0400
-Received: from mail-yx1-xb12d.google.com ([2607:f8b0:4864:20::b12d])
+ (Exim 4.90_1) (envelope-from <fritchleybohrer@gmail.com>)
+ id 1x1Kbt-00025I-L2
+ for qemu-riscv@nongnu.org; Tue, 01 Sep 2026 05:16:55 -0400
+Received: from mail-pj2-x05.google.com ([2607:f8b0:4864:39::5])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1x1KId-0007zI-38
- for qemu-riscv@nongnu.org; Tue, 01 Sep 2026 04:57:01 -0400
-Received: by mail-yx1-xb12d.google.com with SMTP id
- 956f58d0204a3-66825847b2cso3895157d50.3
- for <qemu-riscv@nongnu.org>; Tue, 01 Sep 2026 01:56:57 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1788253017; cv=none;
- d=google.com; s=arc-20260327;
- b=hgKGgZYvfBRamuulyEFYFucz0q0Nsh8PpsCIJvto+4OZrqMn4FOgs4UTK1PJulx/ml
- +4rEWOhVWKKAIkQ7jDVHpEGS6WKTGOCLiOkznQtyukKZsjPhsXNUWpepSyx+Pt+UYsAm
- /Cd5koSBaC41nZu3jEX0dwUf0PbOdWTnEQDBgIjnYbwOSDHDDKmgdt2Sh/VPJxQlYpw2
- xcyZn8aZQMjNtWnP6eNVOOWlwgaEi4OtUOmP8zpO5t8rNkas0EofU7tbqDOZJ/kIo7y0
- HFTESKwxTKk78+UIucoiUm5UWPKRnZbAeXOsgekA4TM11P9YYEbNY8NRsdnLSRDJoXXz
- TMCA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=Cq8YbfnJO8CtC22hnEedOTnWA4GJcNao2yClP9ojwDQ=;
- fh=5ruCa7zPfCRIJEdCTHeST5gWSO4LJDm0Ub5Mz8fUgb8=;
- b=bZbwi41a8ukaTyOUwJssUUSK0gKzGjcR+9F3QJU/NoYEYjIcO5QDSEM5RWhcUuZc7A
- 5ng19PIblIU22G47Z4CUiJx5T/5AfT8kY+5NfdbYfS5iP6iCZ/KxFziZUlbpbiC3BN5R
- JSg77QQSeidM+hKQ7rWCt/NA1utQLZLGTc+2wQbIav0/X8yJUtBNwCJ6MshLrIJiM9FV
- M7blsmWvi6A+pgJ5sfhWcqrc3qOFXiba9i3KCaYLyvLbkWyk8aWWlPR9ORnlRZyJvlQ7
- qvSoWp73nkrmD+vdqWkiCmEgjYlrMQM4f2CSyJRvFFCTi8l8TlZlmhGGqruc0yy4DOJk
- Lhrg==; darn=nongnu.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ (Exim 4.90_1) (envelope-from <fritchleybohrer@gmail.com>)
+ id 1x1Kbr-0001o6-Pk
+ for qemu-riscv@nongnu.org; Tue, 01 Sep 2026 05:16:53 -0400
+Received: by mail-pj2-x05.google.com with SMTP id
+ d9443c01a7336-2d952ac253dso4158365ad.0
+ for <qemu-riscv@nongnu.org>; Tue, 01 Sep 2026 02:16:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1788253017; x=1788857817; darn=nongnu.org;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=Cq8YbfnJO8CtC22hnEedOTnWA4GJcNao2yClP9ojwDQ=;
- b=Q02Zjgl4Ve1emeidF80AvUOoMgra9VShAxZJbZkfqyGadfga+NDSaKU83MVkTPqNrW
- gMZrHW+BKvz9Mvqk7lJuXUgUK5+9hxHSnO905mtK6xd6YUI3xgD4AsQD35b/B1DXFO5C
- ERpJo9ifH5eKHVsiB1zM3Ci2hI1rxD2RTJUCIMGXew0NFb8Ox+DiATmpQvOd2OruknJE
- DognZt1pDV7jpYfVXV2/iR5f47nZyA2DuWPfnmMYyIhdIOaCeizKbXEaQMrvKZ35rXzq
- IiyHFq3a+RHtEXEww3TrHR046Xl2nZMQS/p8e8RcNDnADpWC9fhZKAbuun1PsQtKLs+R
- X1mA==
+ d=gmail.com; s=20251104; t=1788254210; x=1788859010; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=pqiSDtPP2yU4efD3ynS3kttzqeRAM1ybKSi3j0Qh5+8=;
+ b=nf+fe4CUahh2iA81vn0Lt88ZHtFCkgz1r2Juyv5b5Jsc8CBKyZwwmjFNeFm2tqD4C1
+ TPWJi9CjHjtfpt++KLnd+0Bzpi1jUG3v8MwtPcb1I45jdEdBrq/hQxFx30tY32Uay1kI
+ sDRarlmnZrLafjqXWDe1T6nMyvqbsIbla8BHdML2hX4g/ZRcqllIjRvgRQLX6cT+9onQ
+ C1+kWducWGjO3RHD9pVuHLa+LOi/f636/L8NwXW8kLqTTNpXzJ3U9aFVgiScbRVpqKQK
+ zdD9jyLb1n/jONJXm76sXb6pxJbrBeuVkBBrBPw17KA+uR3JCufrvPGez1upsJkeoMr6
+ LNOg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788253017; x=1788857817;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=Cq8YbfnJO8CtC22hnEedOTnWA4GJcNao2yClP9ojwDQ=;
- b=G8GCM9qZ6tllD5+35I9e9uWifkx6+6L9iJCsEqU+nMg1+0iND+wo41akr/ExzAiTHB
- Z6re0ZtpK2teGypMiJNWFdfvz9vQDI/yKGCsPA+BJhEuIRmg+N9+5GFgkqM0stwQX4/4
- xL3JqIV8z/8jNUD11NzO86Cd5Gv7RwIZjUxbKUjf+sNYMDAppGInj19XtNKjNRXGmX0j
- xDxZnE804M9oKc5qZXcluqnA9U8FxXLr6J1GEtGhtVL70EfKqPWGSHTs+4ehrxFOyjzQ
- 66EHrnFBShnVmWr9tvwVGB/ht8ZhK+s97zxSLdKesqfZj+AzzJ5UR71RXUbG/R2HK4XY
- BYQQ==
-X-Forwarded-Encrypted: i=1;
- AKwUvBz+sStnd+NprOGzCEPwvmM6rKGEH0JWO5uCw5raFJrRpEsiqwMfg19C4BbqTeIwPOK0l8C5aBDIfgy7@nongnu.org
-X-Gm-Message-State: AFuF++nGzxlMpAkUMJT4BYlJdWZCELRl1nbYyFe357qXqody+qJJqdqi
- WuKQA1EPX/bsH21YLquVG5AxV99iSGjv9MvX2dnA3ClJhOqLaNXWPOf2ooaQhqcoFTiVbOE7xtC
- dEjbMz5Sa6vIyCsglCN6mUT1EmQgQo4Q=
-X-Gm-Gg: AYBFou3pyrP55kj0TzxENlMgotgVk8OpaalHWoYihrZthfV/I2OGKAIA1eiZCQr0TMz
- CmO+S66ADW1LQ3jqbfwhUHX+fb4v2O1GCD0Pe58ZHHGKdBae09jiINcLmBn8sVU3JU5HigIfj5V
- I2Hy9ug6DcSjrZ4kDDJkoz51nQxkaU24VztH3Jq4ZI3XpMVksVs8VVHWm+V81F3pB7gF6A9WTHE
- bcOcPfj4lPO3FFAhO7w+WK+EZpxfRcjOdqUb1reUZp9WHxYH5dnFH9wIG8u6t57MwXSbXWGq1fg
- L14NpH2EikhQ2sxeQHY/B3vhr1HA8KScksA4x8kFQq9m
-X-Received: by 2002:a05:690e:43c6:b0:66f:80b6:e954 with SMTP id
- 956f58d0204a3-66f80b6f278mr2191446d50.42.1788253016861; Tue, 01 Sep 2026
- 01:56:56 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1788254210; x=1788859010;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=pqiSDtPP2yU4efD3ynS3kttzqeRAM1ybKSi3j0Qh5+8=;
+ b=h+04HPW07VNHckQ+NucTrozN8EeXOHmNycIV0iVFvKlvMGON2L4ZZTpSDL64X781VP
+ VG239Wa9ggUiG/ikIeI/RIiw7CLZxI6an76Vyj4O5xS3fnRyhSvdCxShJCN8tuw97HaG
+ 2XrNsqvxazjveTDSEPo8xy22eM4zCpwgj+SRCURcibqYVpZUyzZefCTfX3ArH/jqtkJA
+ 0kQDxebeADKLD9kIGD0SfbIX5qIYMdJIAFd9lHZBciqa+K8bSvllLSCqj7wIk+QUxuQj
+ D9uGwzBOw9Hg/HYJ4fgsmYiTlhne4tjci37UWeFubwdA8We+v9USHPFjjpgjmphoGzvk
+ iQ8A==
+X-Gm-Message-State: AFuF++mEBS332uJgkPj+nhzYT4CgTGN9UKaGxFvIxpYNFjiXCylXSXKB
+ W6q9mmu5B+1z4MvQDs7G0t1elb7/pQpVI7+4cvTF1vD4dIYeBrRWNyEpYky+aO5XSNY=
+X-Gm-Gg: AYBFou0IAuW9OoBt1cB5JjhaeC81IE/TCSJd6dctoqZiEN1W5ccuZNmCzuPiU0SkGmz
+ oBYIxqQyR0cB0moi30TP9zbW9WdIvG1n+lqyTX5kw3aQY7Pp9RQn8vyEaq4qrAqImAwMoCpoYAN
+ 4i6Lfo73HBFbrqitRGj6Z3x0qRA16M2VtymzxqFa3hfXNYmAvspE6Piwsux/4vQBmt1Jg76F83v
+ Lw5asFFO7StqbuiyYhYSmY+NcDHRMg5sKIh/g/qkxwdEtUBXz98iMeTdE/QJZvg4dhCKILMn5wL
+ YCw7FF6HZVDZSpfoXbNv8auz2NPE3DLean0WZd5PCAgdkmzstxX7jx8oPiSVGk2GSfBZiM3/ESZ
+ QZksbaJFRHy9+bcCicJACn6v4ZGPdMIxS/7jGAFPnE62rqTcJB1KvMB60QFIaEM3o+HkPMbuf2V
+ 1BtQ23kQhoxIFFXK7QAthSdJuMrCZh6zMufbhcFjmBfsQ0VBa/JWfV0ucbPnNLPp9SkFsDJxtvl
+ jmZXlgT7Sh16Yw0Nghpl892Yg==
+X-Received: by 2002:a17:903:286:b0:2c8:248a:5dbb with SMTP id
+ d9443c01a7336-2d74dcbe867mr504176905ad.7.1788254209377; 
+ Tue, 01 Sep 2026 02:16:49 -0700 (PDT)
+Received: from Dell-WorkStation.localdomain ([123.150.5.13])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2d75963bc14sm48463445ad.32.2026.09.01.02.16.45
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 01 Sep 2026 02:16:48 -0700 (PDT)
+From: Zephyr Li <fritchleybohrer@gmail.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Chao Liu <chao.liu@processmission.com>,
+ Zephyr Li <fritchleybohrer@gmail.com>
+Subject: [PATCH] target/riscv: report WRS.NTO opcode in tval on illegal
+ instruction
+Date: Tue,  1 Sep 2026 17:16:22 +0800
+Message-ID: <20260901091622.88113-1-fritchleybohrer@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20260825040452.1322251-1-stephensportia@gmail.com>
- <CAFEAcA9etHvjL1igO4mFy5iQNy1pCbNFGaSg5HFva+YCeMkGEA@mail.gmail.com>
- <CACYNXwKU_UuhrBWHNFtYYmSfzRsUd5jRFjSc1++xvQHxPk6rew@mail.gmail.com>
- <CAFEAcA-Ncv9_jMMg1i+Ox_xa9oM4D_MMLGnPpqbyGJV_5B9iMg@mail.gmail.com>
- <ac30bd54b6f1f4e4753638c9e95dbb85d8b81eca.camel@alistair23.me>
- <CAFEAcA9zz60hTDMEMePnc1osis7dPjn5KmSksrWKATpSMc8SHw@mail.gmail.com>
- <3796c9917796a0fe26f2462645d95cc7039539af.camel@alistair23.me>
- <a7c8c510-3391-4ab8-ab5a-c5432c9fb216@kaod.org>
-In-Reply-To: <a7c8c510-3391-4ab8-ab5a-c5432c9fb216@kaod.org>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Tue, 1 Sep 2026 16:56:44 +0800
-X-Gm-Features: AcwNN1W96iyzyiIRe5Dkw3W0pE6hdTHOcsaf3iHwkrWyoWMAWbyvMiTeSTSAiYY
-Message-ID: <CAEUhbmWO70G1sBUX7s5VzGbM-FqhRSirDEn7YbW0T2qKEVwbhg@mail.gmail.com>
-Subject: Re: [PATCH 0/4] Rename ssi_transfer to ssi_transfer8
-To: =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>
-Cc: Alistair <alistair@alistair23.me>, Peter Maydell <peter.maydell@linaro.org>,
- Portia Stephens <stephensportia@gmail.com>, qemu-devel@nongnu.org, 
- Palmer Dabbelt <palmer@dabbelt.com>, Jamin Lin <jamin_lin@aspeedtech.com>,
- qemu-ppc@nongnu.org, Steven Lee <steven_lee@aspeedtech.com>,
- Andrew Jeffery <andrew@codeconstruct.com.au>, 
- Harsh Prateek Bora <harshpb@linux.ibm.com>,
- Subbaraya Sundeep <sundeep.lkml@gmail.com>, 
- Troy Lee <leetroy@gmail.com>, "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@mailo.com>, 
- Strahinja Jankovic <strahinja.p.jankovic@gmail.com>, qemu-arm@nongnu.org, 
- Tyrone Ting <kfting@nuvoton.com>, Nicholas Piggin <npiggin@gmail.com>, 
- Aditya Gupta <adityag@linux.ibm.com>, Kane Chen <kane_chen@aspeedtech.com>, 
- Francisco Iglesias <francisco.iglesias@amd.com>, Joel Stanley <joel@jms.id.au>,
- Hao Wu <wuhaotsh@google.com>, Glenn Miles <milesg@linux.ibm.com>,
- qemu-riscv@nongnu.org, Jean-Christophe Dubois <jcd@tribudubois.net>,
- Portia Stephens <portias@oss.tenstorrent.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b12d;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yx1-xb12d.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:39::5;
+ envelope-from=fritchleybohrer@gmail.com; helo=mail-pj2-x05.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -140,81 +104,149 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, Aug 31, 2026 at 9:03=E2=80=AFPM C=C3=A9dric Le Goater <clg@kaod.org=
-> wrote:
->
-> On 8/28/26 02:07, Alistair wrote:
-> > On Thu, 2026-08-27 at 12:17 +0100, Peter Maydell wrote:
-> >> On Thu, 27 Aug 2026 at 12:03, Alistair <alistair@alistair23.me>
-> >> wrote:
-> >>>
-> >>> On Thu, 2026-08-27 at 11:53 +0100, Peter Maydell wrote:
-> >>>> But isn't this just the way the SSI specification is? If we're
-> >>>> modelling a "you just have to get this right in software" bit
-> >>>> of hardware then we don't need to somehow try to add extra
-> >>>> checks in QEMU for whether the software hasn't actually done
-> >>>> things right.
-> >>>
-> >>>  From my reading of things this is a bug in QEMU, not a guest issue.
-> >>>
-> >>> The fact that aspeed_smc_flash_setup() for example iterates over a
-> >>> larger value to send a single byte at a time shows that currently
-> >>> everyone *thinks* think function should send a single byte.
-> >>
-> >> Doesn't that just show that the aspeed flash controller knows
-> >> it is always talking to an 8-bit SSI device ? It wouldn't
-> >
-> > But I don't think that's guaranteed to be true.
-> >
-> > On real hardware the software could know that it's only ever connected
-> > to an 8-bit SSI device, and set the driver accordingly. That seems
-> > entirely possible.
-> >
-> > But the hardware seems to support larger sizes reading [1].
-> >
-> > In this case the QEMU code is the hardware, and I don't see how we know
-> > we are only ever accessing an 8-bit device.
-> >
-> > 1:
-> > https://patchew.org/linux/20220304083643.1079142-1-clg@kaod.org/2022030=
-4083643.1079142-5-clg@kaod.org/
->
-> On the Aspeed SoC, MMIO accesses (1, 2, 4 bytes) to the SPI controller
-> are converted by the hardware into SPI bus transfers. The exact
-> serialization is hardware-specific. QEMU's choice is to generate
-> byte-oriented SPI transfers.
->
-> In any case, SPI is generally byte-oriented, with bits shifted over
-> 1/2/4/8 I/O lines. So byte transfer is sufficient.
+helper_wrs_nto() may raise an illegal or virtual-instruction exception.
+However, trans_wrs_nto() does not save the decoded opcode before calling
+the helper. As a result, exception unwinding leaves env->bins stale and
+trap handling reports an incorrect value in tval.
 
-Correct, one evidence is the spi-mem driver interface in the Linux
-kernel for the spi-nor dummy cycles is converted to bytes. Although
-some spi-nor devices do support different bit widths other than
-8-bit/16-bit/24-bit/32-bit, other bit widths that are not multiple of
-8 are currently not supported in the kernel, neither does QEMU.
+Call decode_save_opc() before the helper so the faulting instruction
+encoding is restored for trap handling.
 
->
-> C.
->
-> >
-> >> surprise me if the SPI-NOR standard in particular insisted on
-> >> 8-bit transfers, though I can't find anything claiming to be
-> >> that standard.
-> >>
-> >>> So it does seem broken today. Making the current function clear
-> >>> seems
-> >>> like a good step. Supporting different or larger transfers in the
-> >>> future is then possible.
-> >>
-> >> I think the current interface already supports different or
-> >> larger transfers. We just happen to not be using that.
-> >
-> > Kind of. It does support larger transfers, but there is no size
-> > argument. So how can the SSI device know how much was sent? Everything
-> > seems to just assume a single byte, but it has no way to actually know
-> > that.
-> >
+Add a TCG test that delegates the mstatus.TW-triggered illegal-instruction
+exception to S-mode and checks scause, sepc and stval.
 
-Regards,
-Bin
+Fixes: b62e0ce76098 ("target/riscv: Raise exceptions on wrs.nto")
+Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/4080
+Signed-off-by: Zephyr Li <fritchleybohrer@gmail.com>
+---
+ .../riscv/tcg/insn_trans/trans_rvzawrs.c.inc  |  2 +
+ tests/tcg/riscv64/Makefile.softmmu-target     |  4 +
+ tests/tcg/riscv64/test-zawrs-stval.S          | 87 +++++++++++++++++++
+ 3 files changed, 93 insertions(+)
+ create mode 100644 tests/tcg/riscv64/test-zawrs-stval.S
+
+diff --git a/target/riscv/tcg/insn_trans/trans_rvzawrs.c.inc b/target/riscv/tcg/insn_trans/trans_rvzawrs.c.inc
+index 0eef033..ecebec0 100644
+--- a/target/riscv/tcg/insn_trans/trans_rvzawrs.c.inc
++++ b/target/riscv/tcg/insn_trans/trans_rvzawrs.c.inc
+@@ -54,6 +54,8 @@ static bool trans_wrs_nto(DisasContext *ctx, arg_wrs_nto *a)
+      * exception, as handled by the wrs.nto helper.
+      */
+ #ifndef CONFIG_USER_ONLY
++    /* Save the opcode in case the helper raises an exception. */
++    decode_save_opc(ctx, 0);
+     gen_helper_wrs_nto(tcg_env);
+ #endif
+ 
+diff --git a/tests/tcg/riscv64/Makefile.softmmu-target b/tests/tcg/riscv64/Makefile.softmmu-target
+index 6a219c3..979df2c 100644
+--- a/tests/tcg/riscv64/Makefile.softmmu-target
++++ b/tests/tcg/riscv64/Makefile.softmmu-target
+@@ -20,6 +20,10 @@ EXTRA_RUNS += run-issue1060
+ run-issue1060: issue1060
+ 	$(call run-test, $<, $(QEMU) $(QEMU_OPTS)$<)
+ 
++EXTRA_RUNS += run-test-zawrs-stval
++run-test-zawrs-stval: test-zawrs-stval
++	$(call run-test, $<, $(QEMU) -cpu max $(QEMU_OPTS)$<)
++
+ EXTRA_RUNS += run-test-mepc-masking
+ run-test-mepc-masking: test-mepc-masking
+ 	$(call run-test, $<, $(QEMU) $(QEMU_OPTS)$<)
+diff --git a/tests/tcg/riscv64/test-zawrs-stval.S b/tests/tcg/riscv64/test-zawrs-stval.S
+new file mode 100644
+index 0000000..42a9901
+--- /dev/null
++++ b/tests/tcg/riscv64/test-zawrs-stval.S
+@@ -0,0 +1,87 @@
++/*
++ * Test that WRS.NTO writes the instruction encoding to stval when
++ * mstatus.TW causes an illegal-instruction exception in S-mode.
++ *
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ */
++
++	.option	norvc
++
++	.text
++	.global	_start
++_start:
++	/* Unexpected traps to M-mode fail the test. */
++	lla	t0, machine_trap
++	csrw	mtvec, t0
++
++	/* Delegate illegal-instruction exceptions to S-mode. */
++	li	t0, 1 << 2
++	csrs	medeleg, t0
++
++	lla	t0, supervisor_trap
++	csrw	stvec, t0
++
++	/* Give S-mode read, write and execute access to all memory. */
++	li	t0, -1
++	csrw	pmpaddr0, t0
++	li	t0, 0xf
++	csrw	pmpcfg0, t0
++
++	/* Set mstatus.TW and select S-mode for mret. */
++	li	t0, 3 << 11
++	csrc	mstatus, t0
++	li	t0, (1 << 21) | (1 << 11)
++	csrs	mstatus, t0
++
++	lla	t0, supervisor_start
++	csrw	mepc, t0
++	mret
++
++supervisor_start:
++	/* WRS.NTO must trap because mstatus.TW is set. */
++	li	a0, 1
++wrs_nto:
++	.word	0x00d00073
++	j	_exit
++
++machine_trap:
++	li	a0, 2
++	j	_exit
++
++supervisor_trap:
++	li	a0, 3
++
++	csrr	t0, scause
++	li	t1, 2
++	bne	t0, t1, _exit
++
++	csrr	t0, sepc
++	lla	t1, wrs_nto
++	bne	t0, t1, _exit
++
++	csrr	t1, stval
++	lwu	t2, 0(t0)
++	bne	t1, t2, _exit
++	li	t2, 0x00d00073
++	bne	t1, t2, _exit
++
++	li	a0, 0
++
++_exit:
++	lla	a1, semiargs
++	li	t0, 0x20026	/* ADP_Stopped_ApplicationExit */
++	sd	t0, 0(a1)
++	sd	a0, 8(a1)
++	li	a0, 0x20	/* TARGET_SYS_EXIT_EXTENDED */
++
++	/* Semihosting call sequence. */
++	.balign	16
++	slli	zero, zero, 0x1f
++	ebreak
++	srai	zero, zero, 0x7
++	j	.
++
++	.data
++	.balign	16
++semiargs:
++	.space	16
+-- 
+2.43.0
+
 
