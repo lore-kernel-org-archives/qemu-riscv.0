@@ -4,130 +4,130 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC153C61DD6
-	for <qemu-riscv@archiver.kernel.org>; Tue,  1 Sep 2026 21:03:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40880C61DD3
+	for <qemu-riscv@archiver.kernel.org>; Tue,  1 Sep 2026 21:03:33 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x1Vcx-0005Zb-IR; Tue, 01 Sep 2026 17:02:43 -0400
+	id 1x1VdP-0005gV-KI; Tue, 01 Sep 2026 17:03:11 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1x1Vcv-0005ZB-KG
- for qemu-riscv@nongnu.org; Tue, 01 Sep 2026 17:02:41 -0400
+ id 1x1VdO-0005fi-8J
+ for qemu-riscv@nongnu.org; Tue, 01 Sep 2026 17:03:10 -0400
 Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1x1Vcs-0003IK-2F
- for qemu-riscv@nongnu.org; Tue, 01 Sep 2026 17:02:41 -0400
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+ id 1x1VdL-0003Lp-Ew
+ for qemu-riscv@nongnu.org; Tue, 01 Sep 2026 17:03:09 -0400
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 681KTGXR2468846
- for <qemu-riscv@nongnu.org>; Tue, 1 Sep 2026 21:02:35 GMT
+ 681KTDdr3663784
+ for <qemu-riscv@nongnu.org>; Tue, 1 Sep 2026 21:03:06 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- 2TIkADdDYKGeGeVyxhzr754GGDvPdN4I3ngKzOkJs+w=; b=Nagn54dlDYHDZVRn
- OazyWPEyQIuSAfdv8DhzBfFpC/ETi8A87VBa6qQy1UwZM5RdLv+L/nCmANGjD3nG
- ZRfOAcllYbl0qCq2ZFlCPZ1hy0syy/KVGjX5izk1MZktDRabvUnTKVmDx5DqQ/uL
- 7xViKkLmMdAiT9iws9fbOHoN5JJPYXzvQuK+k8t7y4PmRECCsGy7MDGJpryFZ7zp
- h+QPSsj8BX36UKLh+x8hgbankuQOggBeGmb4yqckT52FLIydTrumUjs8rF2wWxd6
- Lhzi1xI3zHv9P21DHFiWbvctagWn5ntdF4jIRQun0Lq/UBMn2lSyV33vclrD2iJy
- jSYt6Q==
-Received: from mail-qv1-f69.google.com (mail-qv1-f69.google.com
- [209.85.219.69])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ge39cgthq-1
+ b0yItMi8o672xb063eFff9lvWiOqsgC75//Hyp+vIDo=; b=E61LBQ74r7BaKK6q
+ zle4yqgAUsJ2UoLftmfErLd/63QOGeW6yR9adXQmaJ6L8+vPsmo8GGaZebtsGf+P
+ m1dZva7+Y0hUNG1wqttKgz4CsygrBncU0J/dqzu0n2DqL8uOzptPbv56kJt+GUR7
+ TpdRsMsAawJA2KmJ1YYAepwO40fbkAJIQKwINi0DB4ViMn5Zzp2ykkpb9u1CGOZ9
+ dJ0Q0nPyz7SdqgCAN3ZXX0zsUasTwJzvniDAd6anxxKZF8GzFkToRmjNgBAPpjte
+ tPuSUCUERAjZcBnPMJC1cg5vB4tHMnaigkNH2h/4u+R1Av0HeyoIHMEqZU+8rS1x
+ RN8gsg==
+Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com
+ [209.85.160.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ge37j0uht-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Tue, 01 Sep 2026 21:02:35 +0000 (GMT)
-Received: by mail-qv1-f69.google.com with SMTP id
- 6a1803df08f44-90e80ce3597so6892066d6.1
- for <qemu-riscv@nongnu.org>; Tue, 01 Sep 2026 14:02:35 -0700 (PDT)
+ for <qemu-riscv@nongnu.org>; Tue, 01 Sep 2026 21:03:05 +0000 (GMT)
+Received: by mail-qt1-f199.google.com with SMTP id
+ d75a77b69052e-5302b692c8cso5828301cf.2
+ for <qemu-riscv@nongnu.org>; Tue, 01 Sep 2026 14:03:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1788296554; x=1788901354; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1788296585; x=1788901385; darn=nongnu.org;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=2TIkADdDYKGeGeVyxhzr754GGDvPdN4I3ngKzOkJs+w=;
- b=eKOcvrYR5v3mzmgc3zXKSBgTl/DXGUz+du3oK+u3Nv4/cIKvEMppk1eLd5nhxzHATx
- ePczU3KOi+aORJPejTUq6GT/C9pCEBD71iSHCazAydgUyj7iLUwnVwWYp49f37w/ysqn
- 38KV8GOfuEy4bhpmkOkhvUWa3MSVUpdmJGW1shS6ySXzOKpqIw6K7KVQaJDeo9DFm4DW
- ckqOdbG9UlFF0oIGdS7WJ8Gdv7uThnRk0hNP30BcN9drKCmUpy1AfLym5NAeMIJpX/BV
- YEk6KrAfazAgT0YNPexRBkjHkuqJgrtH+D3uPo58RYUBeYCZOqVQdkrceB9K7oJFy63L
- dYig==
+ bh=b0yItMi8o672xb063eFff9lvWiOqsgC75//Hyp+vIDo=;
+ b=ar0QORMRgFm6C2xCcQ1+Gtozb7cDqE2QeApTrDTzIeECL//8tSz98X3tSJ6VYBj0QW
+ 53w2qhEpOFpOMsSAIc19ua4CjEUf+7zDuyNjgAB4hTZ9xuw6AqttoowYoCMKg/XjMn+r
+ Ff+ewo6H8gp6tl+4yaOI48lBa54ei5E9CSZvtNMnxr+nLe/rRqQcpRHwmIJ+kK3/zpDV
+ jo3jcx3hb5jIfr3XBQbdZOyWS8ZQaV3mETOD8WlH1CDAaBx448yGee85YUHWRVbxzKTq
+ KveUgMkStwDJ5sPHaQFc+sYkR7WQNUnPN9IdJyEBhp8uaHUc5QSZaAokdbS/TlEhpcj3
+ GTtA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788296554; x=1788901354;
+ d=1e100.net; s=20251104; t=1788296585; x=1788901385;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=2TIkADdDYKGeGeVyxhzr754GGDvPdN4I3ngKzOkJs+w=;
- b=ouXPV5npNbS13aIZycmkCW7gVuWX9j6C4fg21/ET9Znrobvi+Yu3NHTMjUE5WtMjdO
- znBJSBnm81D5kIU46kcY9xIYqQr/s+3Z34Eyvx8xxIX0DMxmBkL7ur+u12K09O8Nz3W5
- ZNemAHjO4Sf3txvsmLfefVQO5NBtiTiE9hYu2x4mtdMEZTnasgytk2dYH4MKriAwSfLF
- XmdTSblg0DdhpgGWCnh10RnFL1Jx0IBuZ5JmNWwDTBH+JBf4Rgc7lkfCDxUBcvm98kDF
- snaEORF4DrAT/BTEfS9l+/PwXxp7xVAnOHzEWyAButkffZWJ6/ZqiCltLUFHPirzhrAL
- JERw==
-X-Gm-Message-State: AFuF++mONsNiEG3xVLH1v3c4MwdT8y10QMCtbvrHVkiZNuxlu4LzEEGY
- FdabL1zPD7I40PRTp1ZP1vwE7V7aDMGMVsMQCYKzI2tRScxhUZDeUauTOQJ3QcWo357XaX8FHPj
- HLl0DeXc0qlCmhBmIpwASP6pYHkGQeQnE/aYE4Skn8QiYE+8UUCMbmjFwvA==
-X-Gm-Gg: AYBFou1gtcJGZ+4JG0nlbR92CiwMMP9/Gm7Mn6PIAIO6hQo1809cHyL4OYDqI+Rlo+U
- Hw7zPxA9X7+JNPwJaAuBg5eDObbChkARZtjSmnAL+ZlgkJxmy2Yy5EtZOZTGV8tZG78OM/koIQm
- xr9+miTE8XeYxpPtyKpLXfpG+G9C3RDQ96NMdZDkIUfTDqm4mdQLcEEhm589vkkR3IzWu+3yu3D
- r+bpADREpRcK0GEeKZdfKHnBeHVYTtUT1qSAewmIKtHwV/8R2OTxhbDJaNPEP4mDXrttKZVIRGC
- oywDtbbTz8KHBtFkyM7IPqjGhUa5WRibn7LZjvKDFrMgG3vpbFpxZpO7nV7DO04Xy5r3IvxL526
- sP99Fy9zH69OO/nVfzQ9QqwkS0MXcBEgwU/zF
-X-Received: by 2002:a05:6214:1c09:b0:90e:975c:7805 with SMTP id
- 6a1803df08f44-90ebab701dbmr7441866d6.20.1788296554487; 
- Tue, 01 Sep 2026 14:02:34 -0700 (PDT)
-X-Received: by 2002:a05:6214:1c09:b0:90e:975c:7805 with SMTP id
- 6a1803df08f44-90ebab701dbmr7440716d6.20.1788296553945; 
- Tue, 01 Sep 2026 14:02:33 -0700 (PDT)
+ bh=b0yItMi8o672xb063eFff9lvWiOqsgC75//Hyp+vIDo=;
+ b=ihXYmNmF/hAcJXDg3t63nPAaBFd/Jqr35DaeZhBq9glDv3KOBUEnttD6E8beXGJyOx
+ X70jKPi3Qhl9+I770pVrvK5aYAHQNtYBc+YGJqXwjGL/uGLn6JJepaU0pHyFw3m+pfgB
+ APdsgzhjkQQkWVc99Qt2sxGZ2r/IO5jTmJCmH6IaboOYCuDk3fn7/q81rnMPwteHkxSf
+ 9xbZzdBeBcaknjwv0+iN+pK6nDfFKamz03GYuhd/18XALgB6vn2i2SFz6FKEKxTGY5aI
+ 8blKB3rQCxJtCNxSNGEC03cnuarjVc3k7XnVuiaVfJYphEIRfrnA3hcaI3cuir8gMK2C
+ 6GmQ==
+X-Gm-Message-State: AFuF++m+yKunCcaSUicvx+SYcOIj8ux32a51I4JKIzZXGKE0S9AsP8fu
+ mQteFdVipPLPGn8w0Tbs7LwcwDGnXPB+7/QIQJNQcYaH8Cj1VEdCNjCaDW6t8e3BCfLpjecqdMU
+ nJnuQQJ90wIp7xOQlFWb9Uq2lOz9sCKQWFjW5ibun7JJ5VHd+2+dpTLDgbA==
+X-Gm-Gg: AR+sD11+7S03tG8qBXyIaUKcibASo53zN2ZoC2h2OcoyvIwDG79GK9WzDb1T/92KEXi
+ wqY4LDfA61h16TC2CiJDHKpRG9W9bL0MjVGZk7JCGeZncLiZY/BlKtOo3vytItWpTATrD/1bqp7
+ yZ4W81XPgUJH3nPnoXDVZ/29yXLt8SHBLhRVf9/QsL8AesdDn52UtAUo8IBWVPdIZlvwTaUe99i
+ Bu45RvruOfwSgVFQfj/KDaxMdEM7doRKJGyyeWA48Tz5oWqT5vfB80XyDMTiwXjn51OPy2YRFOz
+ rDHMucSHp3wrk0ulQqCCOQIx2wXrJ9KLCJkleMemq+NvYfo+IpxggKpk3lhlaO9hgjH02RbmPy9
+ d3yA4tSaBdCv7jXPWhAdde2xsl9EyhUZhNbZ6
+X-Received: by 2002:a05:622a:5913:b0:52f:f472:bad1 with SMTP id
+ d75a77b69052e-52ff472c08bmr422198781cf.33.1788296584263; 
+ Tue, 01 Sep 2026 14:03:04 -0700 (PDT)
+X-Received: by 2002:a05:622a:5913:b0:52f:f472:bad1 with SMTP id
+ d75a77b69052e-52ff472c08bmr422196761cf.33.1788296583290; 
+ Tue, 01 Sep 2026 14:03:03 -0700 (PDT)
 Received: from [192.168.68.101] ([152.250.131.13])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-90e9eee7f12sm2614376d6.39.2026.09.01.14.02.31
+ d75a77b69052e-530331d9d83sm4984841cf.14.2026.09.01.14.03.00
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 01 Sep 2026 14:02:33 -0700 (PDT)
-Message-ID: <87af3207-dee2-48e2-bafd-f8e714c2d566@oss.qualcomm.com>
-Date: Tue, 1 Sep 2026 18:02:30 -0300
+ Tue, 01 Sep 2026 14:03:02 -0700 (PDT)
+Message-ID: <6cf265f7-da12-47b5-b769-2dcab261ae92@oss.qualcomm.com>
+Date: Tue, 1 Sep 2026 18:02:59 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/3] disas/riscv: Support vabs.v pseudo-instruction
+Subject: Re: [PATCH v2 3/3] tests/tcg/riscv64: Add tests for Zvabd extension
 To: Mingliang Liu <liumingliang.dev@bytedance.com>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, Alistair.Francis@wdc.com,
  zhiwei_liu@linux.alibaba.com, liwei1518@gmail.com,
  chao.liu@processmission.com
 References: <20260831133000.982059-1-liumingliang.dev@bytedance.com>
- <20260831133000.982059-3-liumingliang.dev@bytedance.com>
+ <20260831133000.982059-4-liumingliang.dev@bytedance.com>
 From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Content-Language: en-US
-In-Reply-To: <20260831133000.982059-3-liumingliang.dev@bytedance.com>
+In-Reply-To: <20260831133000.982059-4-liumingliang.dev@bytedance.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Authority-Analysis: v=2.4 cv=T968ifKQ c=1 sm=1 tr=0 ts=6a973d6b cx=c_pps
- a=wEM5vcRIz55oU/E2lInRtA==:117 a=CXdxNCAnTuDr1kYd6DjE4g==:17
+X-Proofpoint-GUID: gRMpugd-7hq3_beltqT1sV-WcSs9ADmB
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTAxMDE4NCBTYWx0ZWRfXwWFjMIX0RtbE
+ A9vrHCBh07528Rp2sROfwyB0hUmuFhSB+MI5SoZeAeMccJ/xeKV2NOScJXCWu61Yx+BSZADtSN4
+ USi1xrpcU7iwbC72tolKz7Mx9VZ0wY8=
+X-Proofpoint-ORIG-GUID: gRMpugd-7hq3_beltqT1sV-WcSs9ADmB
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTAxMDE4NCBTYWx0ZWRfX6/IQVH1iaYjd
+ E3XfZzm5N9Zdav/nuu4MMTc6tpBEQtdh62hjJqX0lOhmQ/aRYuXVYPlvl4kgnSCCL058dNQi7xv
+ w7Zusgopt8fsym/85pBaLsg6u0L5vtKvkrRXvULpFWTKPW3Tf1hHDhCm7KtVgEqY34agsPIeBWQ
+ IOpQmeoXQmxETorA2/fEQkiVEray6+JFgEIvI/L4O55befh/jJ+g+Q7uts8U7v3T8NGmoyffh8r
+ 528fp6SEtM4XRv7/SJK0D9G2lA9YMCx+0iNinULkHTM+3KCMTkqa0KrZQ6U1vgY3Mpq1w4tXHcu
+ 4QdH8zOhYvnX7GdI1RuuNTEOX+WkispL5Y0agtSMcaaGqqRRanXDhah746MPoW4HJiiE9bKIIzL
+ ypYS0K+sHmpXZdQh9ewjQwTFufZeKnTqAwOfGsukd/0bGzmV+HRRyIZkebZs/lioL306C34TOHa
+ YbE8QJ8oHajl8TMCg+w==
+X-Authority-Analysis: v=2.4 cv=PKg/P/qC c=1 sm=1 tr=0 ts=6a973d89 cx=c_pps
+ a=WeENfcodrlLV9YRTxbY/uA==:117 a=CXdxNCAnTuDr1kYd6DjE4g==:17
  a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=968KyxNXAAAA:8 a=EUspDBNiAAAA:8 a=oV8bDTWlGSPqd8E9x_IA:9 a=QEXdDO2ut3YA:10
- a=OIgjcC2v60KrkQgK7BGD:22
-X-Proofpoint-ORIG-GUID: MoaUTW8FgsWKvxlcKo6krQpBkaCaAWtn
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTAxMDE4NCBTYWx0ZWRfX/aNLf7d7SZ/l
- W/JzC2jjFEZeLxUStGqSG2iuUCq1B78mcDxDi9RE450pY9SfYnshaNQ7X5VuqW4UDviQKL07PpV
- 3/HFIN0wYmpubNRTWNlVzhb4k8lMt9w=
-X-Proofpoint-GUID: MoaUTW8FgsWKvxlcKo6krQpBkaCaAWtn
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTAxMDE4NCBTYWx0ZWRfXw/hDBVy2nshi
- Li3BPkNod9N86BBIhWzyF+8+BFDdOs3h9JcVuBqToxu9cFYOsjlToMjjNa7qRlybwGhzQS9B8+X
- KJUwelmZpluNJSCy1GXBKk30XXqliTUtt1g7QJPA/KjKRwTBbSnNRA8O6lp7h/8x7JnC6gcTNqa
- MdYlR+IZ6h6bM2jyfOAz8EeyN2FaY4HtDsR4g/0OTO0UgqSR23nVrdZTuTI7SqeVar2VRGY8Pek
- WkhssSi/VDeYXo2HB6elwi+Q69hdHB7YeC0uThxWl3FF2oUdM44Xf31VfT/9XJujLadtsP42kW/
- gqmxKE6P88swv1D3MPe/wq7DZAzvTOOkU+XRxGqdwWveJ8YDI4Bz5HB+3DIwgBEx1GjP2OY2fZE
- 1ybNsYxiS8iSrhdSek6EAcyBEN49kfSOq7+SIANbR0VWluRPTYSOGo/c20KlrZ4ltdp3IdMDLpT
- GbOqAbB5NdKjglyGoYQ==
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
+ a=EUspDBNiAAAA:8 a=968KyxNXAAAA:8 a=mG-cHNy2rWmjIYH_kXoA:9 a=QEXdDO2ut3YA:10
+ a=kacYvNCVWA4VmyqE58fU:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-01_06,2026-09-01_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 adultscore=0 clxscore=1015 phishscore=0 priorityscore=1501
- impostorscore=0 bulkscore=0 spamscore=0 malwarescore=0 lowpriorityscore=0
+ priorityscore=1501 malwarescore=0 impostorscore=0 phishscore=0 clxscore=1015
+ lowpriorityscore=0 bulkscore=0 spamscore=0 adultscore=0 suspectscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609010184
 Received-SPF: pass client-ip=205.220.168.131;
@@ -156,55 +156,700 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 
-On 8/31/2026 10:29 AM, Mingliang Liu wrote:
+On 8/31/2026 10:30 AM, Mingliang Liu wrote:
+> Co-Auther: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 > Signed-off-by: Mingliang Liu <liumingliang.dev@bytedance.com>
 > ---
 
 Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 
->   disas/riscv-op.c.inc | 3 ++-
->   disas/riscv.c        | 6 ++++++
->   2 files changed, 8 insertions(+), 1 deletion(-)
+>   tests/tcg/riscv64/Makefile.softmmu-target |   8 +
+>   tests/tcg/riscv64/test-zvabd.S            | 659 ++++++++++++++++++++++
+>   2 files changed, 667 insertions(+)
+>   create mode 100644 tests/tcg/riscv64/test-zvabd.S
 > 
-> diff --git a/disas/riscv-op.c.inc b/disas/riscv-op.c.inc
-> index 07b56f5d52..425473ee61 100644
-> --- a/disas/riscv-op.c.inc
-> +++ b/disas/riscv-op.c.inc
-> @@ -491,9 +491,10 @@ OP(vaadd_vx, "vaadd.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm)
->   OP(vaaddu_vv, "vaaddu.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm)
->   OP(vaaddu_vx, "vaaddu.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm)
->   OP(vabd_vv, "vabd.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm)
-> -OP(vabd_vx, "vabd.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm)
-> +OP(vabd_vx, "vabd.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, rvcp_vabd_vx)
->   OP(vabdu_vv, "vabdu.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm)
->   OP(vabdu_vx, "vabdu.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm)
-> +OP(vabs_v, "vabs.v", rv_codec_illegal, rv_fmt_vd_vs2_vm)
->   OP(vadc_vim, "vadc.vim", rv_codec_v_i, rv_fmt_vd_vs2_imm_vl)
->   OP(vadc_vvm, "vadc.vvm", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vl)
->   OP(vadc_vxm, "vadc.vxm", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vl)
-> diff --git a/disas/riscv.c b/disas/riscv.c
-> index e0a8b3a756..2aecaaa25a 100644
-> --- a/disas/riscv.c
-> +++ b/disas/riscv.c
-> @@ -103,6 +103,7 @@ static const rvc_constraint rvcc_j[] = { rvc_rd_eq_x0, rvc_end };
->   static const rvc_constraint rvcc_ret[] = { rvc_rs1_eq_ra, rvc_end };
->   static const rvc_constraint rvcc_jr[] = { rvc_rd_eq_x0, rvc_imm_eq_zero,
->                                             rvc_end };
-> +static const rvc_constraint rvcc_vabs_v[] = { rvc_rs1_eq_x0, rvc_end };
->   static const rvc_constraint rvcc_true[] = { rvc_end };
+> diff --git a/tests/tcg/riscv64/Makefile.softmmu-target b/tests/tcg/riscv64/Makefile.softmmu-target
+> index 6a219c306c..787fdaab40 100644
+> --- a/tests/tcg/riscv64/Makefile.softmmu-target
+> +++ b/tests/tcg/riscv64/Makefile.softmmu-target
+> @@ -71,5 +71,13 @@ EXTRA_RUNS += run-test-misa-w
+>   run-test-misa-w: test-misa-w
+>   	$(call run-test, $<, $(QEMU) -cpu rv64$(comma)x-misa-w=true$(comma)c=true$(comma)v=true $(QEMU_OPTS)$<)
 >   
->   /* pseudo-instruction metadata */
-> @@ -242,6 +243,11 @@ static const rv_comp_data rvcp_fsgnjx_q[] = {
->       { },
->   };
->   
-> +static const rv_comp_data rvcp_vabd_vx[] = {
-> +    { &op_vabs_v, rvcc_vabs_v },
-> +    { },
-> +};
+> +EXTRA_RUNS += run-test-zvabd
+> +ZVABD_CPU = rv64$(comma)v=true$(comma)vlen=256$(comma)x-zvabd=true
+> +CLEANFILES += test-zvabd
+> +test-zvabd: test-zvabd.o $(LINK_SCRIPT)
+> +	$(LD) $(LDFLAGS) $< -o $@
+> +run-test-zvabd: test-zvabd
+> +	$(call run-test, $<, $(QEMU) -cpu $(ZVABD_CPU) $(QEMU_OPTS)$<)
 > +
->   /* Convert compressed insns into normal insns via pseudo expansion. */
->   #define DECOMP(X)  &(const rv_comp_data){ &X, rvcc_true }
->   
+>   # We don't currently support the multiarch system tests
+>   undefine MULTIARCH_TESTS
+> diff --git a/tests/tcg/riscv64/test-zvabd.S b/tests/tcg/riscv64/test-zvabd.S
+> new file mode 100644
+> index 0000000000..01db2fd7dc
+> --- /dev/null
+> +++ b/tests/tcg/riscv64/test-zvabd.S
+> @@ -0,0 +1,659 @@
+> +/*
+> + * Test the Zvabd vector absolute-difference instructions and the vabs.v
+> + * pseudoinstruction.
+> + *
+> + * SPDX-License-Identifier: GPL-2.0-or-later
+> + */
+> +
+> +	.option arch, +v
+> +	.option norvc
+> +
+> +	.text
+> +
+> +	.global _start
+> +_start:
+> +	/* Enable the vector unit (mstatus.VS = Initial). */
+> +	li	t0, 1 << 9
+> +	csrs	mstatus, t0
+> +
+> +	/* Route synchronous traps to trap_handler (mtvec direct mode). */
+> +	la	t0, trap_handler
+> +	csrw	mtvec, t0
+> +
+> +	/* Run each test function. */
+> +	call	test_vabs_v
+> +	bnez	a0, _exit
+> +	call	test_vabs_v_mask
+> +	bnez	a0, _exit
+> +
+> +	call	test_vabd_vv
+> +	bnez	a0, _exit
+> +	call	test_vabd_vv_mask
+> +	bnez	a0, _exit
+> +
+> +	call	test_vabd_vx
+> +	bnez	a0, _exit
+> +	call	test_vabd_vx_mask
+> +	bnez	a0, _exit
+> +
+> +	call	test_vabdu_vv
+> +	bnez	a0, _exit
+> +	call	test_vabdu_vv_mask
+> +	bnez	a0, _exit
+> +
+> +	call	test_vabdu_vx
+> +	bnez	a0, _exit
+> +	call	test_vabdu_vx_mask
+> +	bnez	a0, _exit
+> +
+> +	call	test_vwabda_vv
+> +	bnez	a0, _exit
+> +	call	test_vwabda_vv_mask
+> +	bnez	a0, _exit
+> +
+> +	call	test_vwabda_vx
+> +	bnez	a0, _exit
+> +	call	test_vwabda_vx_mask
+> +	bnez	a0, _exit
+> +
+> +	call	test_vwabdau_vv
+> +	bnez	a0, _exit
+> +	call	test_vwabdau_vv_mask
+> +	bnez	a0, _exit
+> +
+> +	call	test_vwabdau_vx
+> +	bnez	a0, _exit
+> +	call	test_vwabdau_vx_mask
+> +	bnez	a0, _exit
+> +
+> +	j	_exit
+> +
+> +test_vabs_v:
+> +	vsetivli zero, 2, e8, m1, ta, ma
+> +
+> +	/* Load .arr_neg array in v1 */
+> +	la     t0,.arr_neg
+> +	vle8.v v1,0(t0)
+> +
+> +	/* vabs.v v2, v1 (vabd.vx v2, v1, x0) raw opcode */
+> +	.word   0x56106157
+> +
+> +	/* Load .arr_pos in v3 */
+> +	la      t1,.arr_pos
+> +	vle8.v  v3,0(t1)
+> +
+> +	/* Compare v2 and v3 into v0 */
+> +	vmsne.vv  v0,v2,v3
+> +	vcpop.m a0,v0
+> +	snez    a0,a0
+> +
+> +	ret
+> +
+> +test_vabs_v_mask:
+> +	vsetivli zero, 2, e8, m1, ta, mu
+> +
+> +	/* Load .arr_neg array in v1 */
+> +	la      t0, .arr_neg
+> +	vle8.v  v1, 0(t0)
+> +
+> +	/* Zero v2 using .arr_zero */
+> +	la     t0,.arr_zero
+> +	vle8.v v2,0(t0)
+> +
+> +	/* Load .v0_mask array in v0 */
+> +	la     t1,.v0_mask
+> +	vle8.v v0,0(t1)
+> +
+> +	/* vabs.v v2, v1, v0.t raw opcode */
+> +	.word   0x54106157
+> +
+> +	/* Load .arr_masked in v3 */
+> +	la      t0,.arr_masked
+> +	vle8.v  v3,0(t0)
+> +
+> +	/* Compare v2 and v3 into v0 */
+> +	vmsne.vv  v0,v2,v3
+> +	vcpop.m a0,v0
+> +	snez    a0,a0
+> +
+> +	ret
+> +
+> +test_vabd_vv:
+> +	/*
+> +	 * Test signed vector-vector absolute difference:
+> +	 * abs({-5, -7} - {5, 7}) = {10, 14}.
+> +	 */
+> +	vsetivli zero, 2, e8, m1, ta, mu
+> +
+> +	/* Load the two signed source vectors into v1 and v3. */
+> +	la      t0, .arr_neg
+> +	vle8.v  v1, 0(t0)
+> +	la      t0, .arr_pos
+> +	vle8.v  v3, 0(t0)
+> +
+> +	/* Execute vabd.vv v2, v1, v3. */
+> +	.word   0x5611a157
+> +
+> +	/* Load the expected result into v3. */
+> +	la      t0, .expect_vabd_vv
+> +	vle8.v  v3, 0(t0)
+> +
+> +	/* Compare v2 and v3 into v0 */
+> +	vmsne.vv  v0, v2, v3
+> +	vcpop.m a0, v0
+> +	snez    a0, a0
+> +
+> +	ret
+> +
+> +test_vabd_vv_mask:
+> +	/*
+> +	 * Test masked vabd.vv.  Element 0 remains 9 and element 1 becomes
+> +	 * abs(-7 - 7) = 14.
+> +	 */
+> +	vsetivli zero, 2, e8, m1, ta, mu
+> +
+> +	/* Load the two signed source vectors into v1 and v3. */
+> +	la      t0, .arr_neg
+> +	vle8.v  v1, 0(t0)
+> +	la      t0, .arr_pos
+> +	vle8.v  v3, 0(t0)
+> +
+> +	/* Load original value into v2 */
+> +	la      t0, .arr_init
+> +	vle8.v  v2, 0(t0)
+> +
+> +	/* Load mask value into v0 */
+> +	la      t0, .v0_mask
+> +	vle8.v  v0, 0(t0)
+> +
+> +	.word   0x5411a157
+> +
+> +	/* Load the expected result into v3. */
+> +	la      t0, .expect_vabd_vv_masked
+> +	vle8.v  v3, 0(t0)
+> +
+> +	vmsne.vv  v0, v2, v3
+> +	vcpop.m a0, v0
+> +	snez    a0, a0
+> +	ret
+> +
+> +test_vabd_vx:
+> +	/*
+> +	 * Test signed vector-scalar absolute difference:
+> +	 * abs({-5, -7} - 3) = {8, 10}.
+> +	 */
+> +	vsetivli zero, 2, e8, m1, ta, mu
+> +	la      t0, .arr_neg
+> +	vle8.v  v1, 0(t0)
+> +	li      a2, 3
+> +
+> +	/* Execute vabd.vx v2, v1, a2. */
+> +	.word   0x56166157
+> +
+> +	/* Load the expected result into v3. */
+> +	la      t0, .expect_vabd_vx
+> +	vle8.v  v3, 0(t0)
+> +
+> +	vmsne.vv  v0, v2, v3
+> +	vcpop.m a0, v0
+> +	snez    a0, a0
+> +	ret
+> +
+> +test_vabd_vx_mask:
+> +	/*
+> +	 * Test masked vabd.vx.  Element 0 remains 9 and element 1 becomes
+> +	 * abs(-7 - 3) = 10.
+> +	 */
+> +	vsetivli zero, 2, e8, m1, ta, mu
+> +
+> +	la      t0, .arr_neg
+> +	vle8.v  v1, 0(t0)
+> +	li      a2, 3
+> +
+> +	la      t0, .arr_init
+> +	vle8.v  v2, 0(t0)
+> +
+> +	la      t0, .v0_mask
+> +	vle8.v  v0, 0(t0)
+> +
+> +	.word   0x54166157
+> +
+> +	la      t0, .expect_vabd_vx_masked
+> +	vle8.v  v3, 0(t0)
+> +
+> +	vmsne.vv  v0, v2, v3
+> +	vcpop.m a0, v0
+> +	snez    a0, a0
+> +	ret
+> +
+> +test_vabdu_vv:
+> +	/*
+> +	 * Test unsigned vector-vector absolute difference:
+> +	 * abs({0, 255} - {255, 0}) = {255, 255}.
+> +	 */
+> +	vsetivli zero, 2, e8, m1, ta, mu
+> +
+> +	/* Load the two unsigned source vectors into v1 and v3. */
+> +	la      t0, .arr_unsigned_lhs
+> +	vle8.v  v1, 0(t0)
+> +	la      t0, .arr_unsigned_rhs
+> +	vle8.v  v3, 0(t0)
+> +
+> +	/* Execute vabdu.vv v2, v1, v3. */
+> +	.word   0x5a11a157
+> +
+> +	/* Load the expected result into v3. */
+> +	la      t0, .expect_vabdu_vv
+> +	vle8.v  v3, 0(t0)
+> +
+> +	vmsne.vv  v0, v2, v3
+> +	vcpop.m a0, v0
+> +	snez    a0, a0
+> +	ret
+> +
+> +test_vabdu_vv_mask:
+> +	/*
+> +	 * Test masked vabdu.vv.  Element 0 remains 9 and element 1 becomes
+> +	 * abs(255 - 0) = 255.
+> +	 */
+> +	vsetivli zero, 2, e8, m1, ta, mu
+> +
+> +	la      t0, .arr_unsigned_lhs
+> +	vle8.v  v1, 0(t0)
+> +	la      t0, .arr_unsigned_rhs
+> +	vle8.v  v3, 0(t0)
+> +
+> +	la      t0, .arr_init
+> +	vle8.v  v2, 0(t0)
+> +
+> +	la      t0, .v0_mask
+> +	vle8.v  v0, 0(t0)
+> +
+> +	.word   0x5811a157
+> +
+> +	la      t0, .expect_vabdu_vv_masked
+> +	vle8.v  v3, 0(t0)
+> +
+> +	vmsne.vv  v0, v2, v3
+> +	vcpop.m a0, v0
+> +	snez    a0, a0
+> +	ret
+> +
+> +test_vabdu_vx:
+> +	/*
+> +	 * Test unsigned vector-scalar absolute difference:
+> +	 * abs({0, 255} - 128) = {128, 127}.
+> +	 */
+> +	vsetivli zero, 2, e8, m1, ta, mu
+> +
+> +	la      t0, .arr_unsigned_lhs
+> +	vle8.v  v1, 0(t0)
+> +	li      a2, 128
+> +
+> +	/* Execute vabdu.vx v2, v1, a2. */
+> +	.word   0x5a166157
+> +
+> +	la      t0, .expect_vabdu_vx
+> +	vle8.v  v3, 0(t0)
+> +
+> +	vmsne.vv  v0, v2, v3
+> +	vcpop.m a0, v0
+> +	snez    a0, a0
+> +	ret
+> +
+> +test_vabdu_vx_mask:
+> +	/*
+> +	 * Test masked vabdu.vx.  Element 0 remains 9 and element 1 becomes
+> +	 * abs(255 - 128) = 127.
+> +	 */
+> +	vsetivli zero, 2, e8, m1, ta, mu
+> +
+> +	la      t0, .arr_unsigned_lhs
+> +	vle8.v  v1, 0(t0)
+> +	li      a2, 128
+> +
+> +	la      t0, .arr_init
+> +	vle8.v  v2, 0(t0)
+> +
+> +	la      t0, .v0_mask
+> +	vle8.v  v0, 0(t0)
+> +
+> +	.word   0x58166157
+> +
+> +	la      t0, .expect_vabdu_vx_masked
+> +	vle8.v  v3, 0(t0)
+> +
+> +	vmsne.vv  v0, v2, v3
+> +	vcpop.m a0, v0
+> +	snez    a0, a0
+> +	ret
+> +
+> +test_vwabda_vv:
+> +	/*
+> +	 * Test signed widening vector-vector absolute difference and
+> +	 * accumulation. Start with v4 = {1000, -1000}, and the expected
+> +	 * widened result is {1000, -1000} + abs({-5, -7} - {5, 7}) =
+> +	 * {1010, -986}.
+> +	 */
+> +	/* Load the 16-bit accumulator before selecting 8-bit operands. */
+> +	vsetivli zero, 2, e16, m2, ta, mu
+> +	la      t0, .arr_signed_acc
+> +	vle16.v v4, 0(t0)
+> +
+> +	vsetivli zero, 2, e8, m1, ta, mu
+> +	la      t0, .arr_neg
+> +	vle8.v  v1, 0(t0)
+> +	la      t0, .arr_pos
+> +	vle8.v  v2, 0(t0)
+> +
+> +	/* Execute vwabda.vv v4, v1, v2. */
+> +	.word   0xf6110257
+> +
+> +	/* Select the widened EEW and compare v4 with the expected result. */
+> +	vsetivli zero, 2, e16, m2, ta, mu
+> +	la      t0, .expect_vwabda_vv
+> +	vle16.v v6, 0(t0)
+> +
+> +	vmsne.vv  v0, v4, v6
+> +	vcpop.m a0, v0
+> +	snez    a0, a0
+> +	ret
+> +
+> +test_vwabda_vv_mask:
+> +	/*
+> +	 * Test masked vwabda.vv.
+> +	 * Start with v4 = {1000, -1000}, v0 = {0, 1}, and the expected widened
+> +	 * result is {1000, -1000} + abs({-5, -7} - {5, 7}) = {1000, -986}.
+> +	 */
+> +	vsetivli zero, 2, e16, m2, ta, mu
+> +	la      t0, .arr_signed_acc
+> +	vle16.v v4, 0(t0)
+> +
+> +	vsetivli zero, 2, e8, m1, ta, mu
+> +	la      t0, .arr_neg
+> +	vle8.v  v1, 0(t0)
+> +	la      t0, .arr_pos
+> +	vle8.v  v2, 0(t0)
+> +
+> +	la      t0, .v0_mask
+> +	vle8.v  v0, 0(t0)
+> +
+> +	.word   0xf4110257
+> +
+> +	vsetivli zero, 2, e16, m2, ta, mu
+> +	la      t0, .expect_vwabda_vv_masked
+> +
+> +	vle16.v v6, 0(t0)
+> +	vmsne.vv  v0, v4, v6
+> +	vcpop.m a0, v0
+> +	snez    a0, a0
+> +	ret
+> +
+> +test_vwabda_vx:
+> +	/*
+> +	 * Test signed widening vector-scalar absolute difference and
+> +	 * accumulation. With scalar 3, v4 becomes {1000 + 8, -1000 + 10}.
+> +	 */
+> +	/* Load the 16-bit accumulator before selecting 8-bit operands. */
+> +	vsetivli zero, 2, e16, m2, ta, mu
+> +	la      t0, .arr_signed_acc
+> +	vle16.v v4, 0(t0)
+> +
+> +	vsetivli zero, 2, e8, m1, ta, mu
+> +	la      t0, .arr_neg
+> +	vle8.v  v1, 0(t0)
+> +	li      a2, 3
+> +
+> +	/* Execute vwabda.vx v4, v1, a2. */
+> +	.word   0xf6164257
+> +
+> +	/* Select the widened EEW and compare v4 with the expected result. */
+> +	vsetivli zero, 2, e16, m2, ta, mu
+> +	la      t0, .expect_vwabda_vx
+> +	vle16.v v6, 0(t0)
+> +
+> +	vmsne.vv  v0, v4, v6
+> +	vcpop.m a0, v0
+> +	snez    a0, a0
+> +	ret
+> +
+> +test_vwabda_vx_mask:
+> +	/*
+> +	 * Test masked vwabda.vx.  Element 0 remains 1000 while element 1
+> +	 * accumulates 10 and becomes -990.
+> +	 */
+> +	vsetivli zero, 2, e16, m2, ta, mu
+> +
+> +	la      t0, .arr_signed_acc
+> +	vle16.v v4, 0(t0)
+> +
+> +	vsetivli zero, 2, e8, m1, ta, mu
+> +	la      t0, .arr_neg
+> +	vle8.v  v1, 0(t0)
+> +	li      a2, 3
+> +
+> +	la      t0, .v0_mask
+> +	vle8.v  v0, 0(t0)
+> +
+> +	.word   0xf4164257
+> +
+> +	vsetivli zero, 2, e16, m2, ta, mu
+> +	la      t0, .expect_vwabda_vx_masked
+> +	vle16.v v6, 0(t0)
+> +
+> +	vmsne.vv  v0, v4, v6
+> +	vcpop.m a0, v0
+> +	snez    a0, a0
+> +	ret
+> +
+> +test_vwabdau_vv:
+> +	/*
+> +	 * Test unsigned widening vector-vector absolute difference and
+> +	 * accumulation. Start with v4 = {1000, 2000}, adding {255, 255}
+> +	 * produces {1255, 2255}.
+> +	 */
+> +	/* Load the unsigned 16-bit accumulator and 8-bit source vectors. */
+> +	vsetivli zero, 2, e16, m2, ta, mu
+> +
+> +	la      t0, .arr_unsigned_acc
+> +	vle16.v v4, 0(t0)
+> +	vsetivli zero, 2, e8, m1, ta, mu
+> +
+> +	la      t0, .arr_unsigned_lhs
+> +	vle8.v  v1, 0(t0)
+> +	la      t0, .arr_unsigned_rhs
+> +	vle8.v  v2, 0(t0)
+> +
+> +	/* Execute vwabdau.vv v4, v1, v2. */
+> +	.word   0xfa110257
+> +
+> +	/* Select the widened EEW and compare v4 with the expected result. */
+> +	vsetivli zero, 2, e16, m2, ta, mu
+> +	la      t0, .expect_vwabdau_vv
+> +	vle16.v v6, 0(t0)
+> +
+> +	vmsne.vv  v0, v4, v6
+> +	vcpop.m a0, v0
+> +	snez    a0, a0
+> +	ret
+> +
+> +test_vwabdau_vv_mask:
+> +	/*
+> +	 * Test masked vwabdau.vv.  Element 0 remains 1000 while element 1
+> +	 * accumulates 255 and becomes 2255.
+> +	 */
+> +	vsetivli zero, 2, e16, m2, ta, mu
+> +
+> +	la      t0, .arr_unsigned_acc
+> +	vle16.v v4, 0(t0)
+> +
+> +	vsetivli zero, 2, e8, m1, ta, mu
+> +	la      t0, .arr_unsigned_lhs
+> +	vle8.v  v1, 0(t0)
+> +	la      t0, .arr_unsigned_rhs
+> +	vle8.v  v2, 0(t0)
+> +
+> +	la      t0, .v0_mask
+> +	vle8.v  v0, 0(t0)
+> +
+> +	.word   0xf8110257
+> +
+> +	vsetivli zero, 2, e16, m2, ta, mu
+> +	la      t0, .expect_vwabdau_vv_masked
+> +	vle16.v v6, 0(t0)
+> +
+> +	vmsne.vv  v0, v4, v6
+> +	vcpop.m a0, v0
+> +	snez    a0, a0
+> +	ret
+> +
+> +test_vwabdau_vx:
+> +	/*
+> +	 * Test unsigned widening vector-scalar absolute difference and
+> +	 * accumulation. With scalar 128, v4 becomes {1000 + 128, 2000 + 127}.
+> +	 */
+> +	/* Load the unsigned 16-bit accumulator and 8-bit source vector. */
+> +	vsetivli zero, 2, e16, m2, ta, mu
+> +
+> +	la      t0, .arr_unsigned_acc
+> +	vle16.v v4, 0(t0)
+> +
+> +	vsetivli zero, 2, e8, m1, ta, mu
+> +	la      t0, .arr_unsigned_lhs
+> +	vle8.v  v1, 0(t0)
+> +	li      a2, 128
+> +
+> +	/* Execute vwabdau.vx v4, v1, a2. */
+> +	.word   0xfa164257
+> +
+> +	/* Select the widened EEW and compare v4 with the expected result. */
+> +	vsetivli zero, 2, e16, m2, ta, mu
+> +	la      t0, .expect_vwabdau_vx
+> +	vle16.v v6, 0(t0)
+> +
+> +	vmsne.vv  v0, v4, v6
+> +	vcpop.m a0, v0
+> +	snez    a0, a0
+> +	ret
+> +
+> +test_vwabdau_vx_mask:
+> +	/*
+> +	 * Test masked vwabdau.vx.  Element 0 remains 1000 while element 1
+> +	 * accumulates 127 and becomes 2127.
+> +	 */
+> +	vsetivli zero, 2, e16, m2, ta, mu
+> +
+> +	la      t0, .arr_unsigned_acc
+> +	vle16.v v4, 0(t0)
+> +
+> +	vsetivli zero, 2, e8, m1, ta, mu
+> +	la      t0, .arr_unsigned_lhs
+> +	vle8.v  v1, 0(t0)
+> +	li      a2, 128
+> +
+> +	la      t0, .v0_mask
+> +	vle8.v  v0, 0(t0)
+> +
+> +	.word   0xf8164257
+> +
+> +	vsetivli zero, 2, e16, m2, ta, mu
+> +	la      t0, .expect_vwabdau_vx_masked
+> +	vle16.v v6, 0(t0)
+> +
+> +	vmsne.vv  v0, v4, v6
+> +	vcpop.m a0, v0
+> +	snez    a0, a0
+> +	ret
+> +
+> +
+> +/* Exit through the semihosting SYS_EXIT_EXTENDED call with a0 as the code. */
+> +_exit:
+> +	la	a1, semiargs
+> +	li	t0, 0x20026	/* ADP_Stopped_ApplicationExit */
+> +	sd	t0, 0(a1)
+> +	sd	a0, 8(a1)
+> +	li	a0, 0x20	/* TARGET_SYS_EXIT_EXTENDED */
+> +	.balign	16
+> +	slli	zero, zero, 0x1f
+> +	ebreak
+> +	srai	zero, zero, 0x7
+> +	j	.
+> +
+> +	.balign	4
+> +trap_handler:
+> +	csrr	t4, mcause
+> +	la	t5, trap_mcause
+> +	sd	t4, 0(t5)
+> +	csrr	t4, mtval
+> +	la	t5, trap_mtval
+> +	sd	t4, 0(t5)
+> +	li	a0, 1
+> +	j	_exit
+> +
+> +	.data
+> +	.balign	8
+> +semiargs:
+> +	.space	16
+> +trap_mcause:
+> +	.space	8
+> +trap_mtval:
+> +	.space	8
+> +.arr_neg:
+> +	.byte -5, -7
+> +.arr_pos:
+> +	.byte 5, 7
+> +.arr_zero:
+> +	.byte 0, 0
+> +.arr_init:
+> +	.byte 9, 9
+> +.v0_mask:
+> +	.byte 0b10
+> +.arr_masked:
+> +	.byte 0, 7
+> +
+> +/* Unsigned input vectors used by vabdu and vwabdau. */
+> +.arr_unsigned_lhs:
+> +	.byte 0, 255
+> +.arr_unsigned_rhs:
+> +	.byte 255, 0
+> +	.balign 2
+> +
+> +/* Nonzero accumulators verify the add part of widening operations. */
+> +.arr_signed_acc:
+> +	.half 1000, -1000
+> +.arr_unsigned_acc:
+> +	.half 1000, 2000
+> +
+> +/* Expected results for the unmasked and masked forms. */
+> +.expect_vabd_vv:
+> +	.byte 10, 14
+> +.expect_vabd_vv_masked:
+> +	.byte 9, 14
+> +.expect_vabd_vx:
+> +	.byte 8, 10
+> +.expect_vabd_vx_masked:
+> +	.byte 9, 10
+> +.expect_vabdu_vv:
+> +	.byte 255, 255
+> +.expect_vabdu_vv_masked:
+> +	.byte 9, 255
+> +.expect_vabdu_vx:
+> +	.byte 128, 127
+> +.expect_vabdu_vx_masked:
+> +	.byte 9, 127
+> +.expect_vwabda_vv:
+> +	.half 1010, -986
+> +.expect_vwabda_vv_masked:
+> +	.half 1000, -986
+> +.expect_vwabda_vx:
+> +	.half 1008, -990
+> +.expect_vwabda_vx_masked:
+> +	.half 1000, -990
+> +.expect_vwabdau_vv:
+> +	.half 1255, 2255
+> +.expect_vwabdau_vv_masked:
+> +	.half 1000, 2255
+> +.expect_vwabdau_vx:
+> +	.half 1128, 2127
+> +.expect_vwabdau_vx_masked:
+> +	.half 1000, 2127
 
 
