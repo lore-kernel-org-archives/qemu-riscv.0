@@ -4,98 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14B6BC624D3
-	for <qemu-riscv@archiver.kernel.org>; Tue,  1 Sep 2026 14:41:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91DA4C624D3
+	for <qemu-riscv@archiver.kernel.org>; Tue,  1 Sep 2026 14:43:40 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x1Pfu-0003nC-KC; Tue, 01 Sep 2026 10:41:22 -0400
+	id 1x1Phf-0004rL-K2; Tue, 01 Sep 2026 10:43:11 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1x1Pfn-0003ew-Ry
- for qemu-riscv@nongnu.org; Tue, 01 Sep 2026 10:41:16 -0400
-Received: from mail-yw1-x112d.google.com ([2607:f8b0:4864:20::112d])
+ id 1x1Phc-0004qf-GM
+ for qemu-riscv@nongnu.org; Tue, 01 Sep 2026 10:43:10 -0400
+Received: from mail-yw1-x1129.google.com ([2607:f8b0:4864:20::1129])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1x1Pfl-00061m-NK
- for qemu-riscv@nongnu.org; Tue, 01 Sep 2026 10:41:15 -0400
-Received: by mail-yw1-x112d.google.com with SMTP id
- 00721157ae682-855a66e5b5dso47456617b3.0
- for <qemu-riscv@nongnu.org>; Tue, 01 Sep 2026 07:41:13 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1788273672; cv=none;
+ id 1x1Pha-0006Q9-2z
+ for qemu-riscv@nongnu.org; Tue, 01 Sep 2026 10:43:08 -0400
+Received: by mail-yw1-x1129.google.com with SMTP id
+ 00721157ae682-8565d77c277so48082407b3.0
+ for <qemu-riscv@nongnu.org>; Tue, 01 Sep 2026 07:43:05 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1788273785; cv=none;
  d=google.com; s=arc-20260327;
- b=IoOsZpq9707b26rV7LZ/5D8iTShosmuUHQb6FSmE1S/XZ2OKrI52G9uiKuBPzqWAla
- p3tIrl5GwtDb1px7gi8gPIr1gfdg3n4RKe6POWzxe76hMC3KA98KpPH9aUMPhDKvcB/7
- Mn2SEDUY2z0csyeA+1euCFBfnLxvT5X56SRSKqrcCuc7WPvA0HY7i0qKkHef5zI4gp0k
- rVjJHGLpsyz1JHsm8YH4yHyo/+kOZzk176xl3d6AtwL85RjQWCnfAVk1L8MyVn8Nq0Mp
- wQUmo5jElGwUvK6ZooD3w5zKtBWsa546u9v4Cht5RP8NM3LuOU6GVTHsDWd6laFPbmht
- qu5g==
+ b=Ad6BP5uKtgVMPeU+o+UTEuZOXsDtbvYShFk/8ZY5pa1etUwgSyQx780UmFnpTK56eY
+ h2YMFcQorb25kPNjCK4raHmFRcTUJuPz3BHrLtJZLcm3M9uDI1xH9UD8QeIVcB5HXgwn
+ O5Ez8+AuThUek0UEynNKYbPq32T8ZIhlyaUjPkBCU7+LAhljSI/3h/1uqCb0xGFM5dQj
+ 28LH8CxRpuaKtcNJKfHNuXdQhIno5i2PytgPZjrNEukmYrexwc7l56ltR21wT9swW1bO
+ 27HRcuBe0FeLVnDI//10RcVrWRLP3kpeKH0xMv8CkcbdyQFHAfQk7ZLZ8gP/HUEL1rAR
+ wH7A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=Ss9lVa1WoFp5SLkXNTCKE7ZQJZkcyYo5+kKKXmMUTkM=;
- fh=He3gQ9y5pTjqCRSQNMi4w+9E5QJ6N+VUaHPUkA+Aqeo=;
- b=duM1N78Db7of38yM/p09mjIHlAY7J1gvsh7vkR4/itg3YY3fTWky9j6p+lDcKFYmjB
- fRKYGH8iDfB6pA3bbKto/fX4oDBX2b3LUPXTrkHJY97DKS8Sz+kKkwRG/j0feTMOz9z9
- lctOl/1SyF/bLRpKT71SZdh3l7JeWCTyqxr1RdVS20iycmfouGGtEbRSalYyrc749ZOx
- jN/axpcHftA876HLe2hm8sFv7wafp/h4eFj3ufxzxluAGlXS2G8y2ooY/WzKTHWim48c
- uzB6cene94w0h6A23BzrJgmtlHyeJBhD33GSnwG8MFrs6asCRU4cPfdT3eDlzL9g9Jk+
- 974A==; darn=nongnu.org
+ bh=QO2CmtSZJqRqK5aZrDGJlW/UwjtyZh866PfxdVIqIuQ=;
+ fh=cTg2Goa0BU+dPqdFccqe0LXfMut3464bKSnXFV0XZYg=;
+ b=pdtjdsiMJuxR4YXYoraw0gQymf3oYoPKF1DeaW4olOyeJDjIkL49DqbyfcpsmA8Mlg
+ Rqum4QSIPx89f48fIA3V7ShcAt+6ESDg3LP2KhciNujxc5S5K+IezG2dSQtAgbA2diMN
+ HcvjJWeenUmlAJosOP4e/AUcLeP2qHb6Bj9rxeQVpohZ/QD3mCULY8ApUe+ANyqyzL3K
+ BAi06Nj0Az2q27DyUHu9huDNxOlQOghYtD6kKm68C3s2Af++SBEh0gL0u2UL1B8H44of
+ 3GT7ovhy+xAfAh6T+XdKqF5vaOpvT4aq+0dux2nNojF9PKRjTEBzN+Pid7BTlzheKdBl
+ PgGQ==; darn=nongnu.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1788273672; x=1788878472; darn=nongnu.org;
+ d=linaro.org; s=google; t=1788273785; x=1788878585; darn=nongnu.org;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=Ss9lVa1WoFp5SLkXNTCKE7ZQJZkcyYo5+kKKXmMUTkM=;
- b=X4b3SGutYgN0aym2fMqlH8C7I0v1dl37gL/CTfn9Ld5BdpB0SaD//D54jebpWf2XU0
- w6CsA7USB+I/iuz2iQO7lJsNyhM5h4CB42TdhG/zKgI+dptAHCK3gJM3udog9ScDhNg7
- sBmaRyFG0p/4ybEhBuVf/S8DYd3ejHnTFrX3P+jPLPQy/UDpJny6HeG5/K8QkPNsyv2r
- EvvE+clBFkBsYvIzPijevOB8kLryiAecZgntuI8IjhqTOuj0E35FGvAA8heCPiJUAY8n
- h1zIa8ugG4q0szJeHE4pPCZovmVaIDBosPPS2UXfYlfNVxAob//DNeiNSMlQNhwl0t8G
- 31dg==
+ :content-type; bh=QO2CmtSZJqRqK5aZrDGJlW/UwjtyZh866PfxdVIqIuQ=;
+ b=n+Ug/O7lwgrHlsXUQxlecYW++tZHXYAFQqHNro7QxL4MDdMZBXW+cwtNnMgPrLYCer
+ 2MCDi3Q7zaMLSWpHh5oTrCxadlpDBIay5M+8evF8utSoT3uXOuw96LqMtsAab2K1sxkb
+ hHCxhNG4EuMXMIehvxkA6wqqQT7msoQk3NCqEjvW5oyTmCEzBxD08lg/DnMZBCidhrgg
+ LNOaE29JdbJNBh0vVzd62tXjQbgvRAJNcV9jq5S8CXUynT8vihQUjCtOG6kmfpHC/lYP
+ WGZMrJXg7tQzSauUWmV0aoWleUku7sQJt+gS7z+baXruT0Vn18cBivyThCoCoLYJ+0si
+ EHbw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788273672; x=1788878472;
+ d=1e100.net; s=20251104; t=1788273785; x=1788878585;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=Ss9lVa1WoFp5SLkXNTCKE7ZQJZkcyYo5+kKKXmMUTkM=;
- b=V+PsCI5YoBYAJx0QTbYgfUsdldn1ZAqoxeXfxDMETqKfsIpbL+q0ALoF09tTY7tfNT
- 65UrzT3zYZx9bje5FxxK7Fe8d0X2RUCCfWzDarlQRKTa92hA0zJ8t3slGqbIPnFUILRI
- cCLiwKzuTrRC6lgBEUgAmJ1t+ZFx+IdQ6C+ykrxIenCqKslxCv4rASEt8fYHq+G+VgtQ
- 4KjVhwxdwpUUfBexWRrANGVugrYBeOEuTf6OPqphRPs+5fz/hraXX5uJzTz1P0ZZPi+8
- KbUxUcHktiLtbszhF4WsFJW2rS/aPReP9uc2gXu2Rz9A197MQyH9cVrLG28s/2prOI/T
- DxKQ==
+ bh=QO2CmtSZJqRqK5aZrDGJlW/UwjtyZh866PfxdVIqIuQ=;
+ b=XuDPDpkjsJ5KH6eitzk5pe+o93DYYodLb/6W9fZFlG3oZqOkyDMwb169QITJ1qGPPI
+ ep0BN/PZWqB9p6BUnM5ceZnOlgOFJ0/xrG9i3U7cMbJq00rolnT3y49i53bMCexLIgLu
+ 2iaz8alDOAJIvRFQbDXYNlL8SDrldFke7Qn3Gcfebo5irDJMn/f34AixGCDOZBPvUQmG
+ g2smVrG1JQhEbUR/rsU8o0Kmy4wETpCJJl+kRzj4wO1V32ZUtWd0xIBWlXplKZ5qXabL
+ oJLIcMCYdG+QIdsTdcYoUZtLSbdts0LIm2DY0R/b2vJEK/N/2BYn56VNAEn+SRtFP5dp
+ wPrA==
 X-Forwarded-Encrypted: i=1;
- AKwUvBysSRFqZAz/FSREc2VfDX4Ni/lNo0mjpb+4lrcewmpSAiuuikagQPtkCGqHWqPAkqbHcmf+4Bhp7WXF@nongnu.org
-X-Gm-Message-State: AFuF++m7s16VKNp/drVFx7ILzRBlNVpnG/VcpGuEXhePx3DDaCgRA9EQ
- OlX7rUWFTantziLNytQAsjX7HJ9yHPG+/m+zYmQ5vKUpfaRfx2eS2krYExUKS4CGl4GyEhtW2DZ
- mySLITo3uIvOuvocYqxZ+K1jC1q0amRXVH//PTng4Bw==
-X-Gm-Gg: AYBFou2r1IH309bZJ4qlEcfXYXUCyKaC9YYNlN/+tH7x6WJU9bvP/9PYzZRw48RprJT
- p4nUHCU01pNW7p17jQyet0WgDwaFp1XGkpL8+AEJRKZiW2Rbm47/wBFt+jlf3UevTmqud2JHIxB
- EUGSun8VUhMgX50yBCEpzBtN0eXrgK7AW2k0cNj6/X8A9wyILv81x5YlFYEES2KGAZNmscetVFJ
- pOjEZiI6tTuX4op3i4QJeg/YL/yXzSKz+vX5KsyPvivrEnwqKX6krTk0YNDpsMtZ+iBL9+lEqHh
- cG7SwZbSimv0shjaIfwgs2RuJCZzlL/IzUqAiP+x6QhSXJvEbJL/bTjoU2dB21u0zfEMZ3+Q8j2
- 8IUpWyiPbXKqDVsSulwRC+dGXirHh
-X-Received: by 2002:a05:690c:4017:b0:859:9c98:b8b4 with SMTP id
- 00721157ae682-86875b7b5a6mr39126547b3.31.1788273672159; Tue, 01 Sep 2026
- 07:41:12 -0700 (PDT)
+ AKwUvBw1tO0dBzAORXX63RJstAV08kgL8zkqvpyAqPWfZ9swZHciga8+EctIONuk1vvbSqRfCPvYvPwqSfnH@nongnu.org
+X-Gm-Message-State: AFuF++mJR+GW9aGRQBVjbymsBj7NQWYoG+SVhjc9TN7LqHAFwpUw13pi
+ xbXqJJBsoc59ivxzVODx9CNGJA9s2271+yqwIABjbLAX/IkFbx5qasNIbqglzchnfhSJHX7BgCL
+ 8rImhn91vBZS+pSHXk1PuJpu3fPsLlsFfm2hITEvZjg==
+X-Gm-Gg: AYBFou1pjBQZ5diq3G/wWMt5QvzlcrlJ1q86uNf07heGluPB2LLUlpuUsEuLMX2S1fa
+ inUaPNWQ8gQyJ5n1vdGqCnEA4lX4PcCDtfWg4+yYZBK00/IEgP1QdAV2PktHS334Vb2mRO/28RX
+ 2DYgsN5Fp6Pje0zh+2yFI1a5MZ7OG5Zx8ylemPqSL1fp395JSTOSssBpJaxBVTbv3Pi5dWM4d7N
+ lh5zuewB/E/gIR6LjJlIgsDHFaT3rxoaA9kWASF4Kuw3dIyjP3SePdleCfSne8ofAtuJyDLZXvq
+ VmTHe49nZWAApWjTCqv9rfyvyJGckn1CGZbyETLbdRSR3/ZLRdXVCdUxG4369/xsUR0wPLpX+aw
+ 1GJYqFBXD3jtResugldUZgY9MqUWb
+X-Received: by 2002:a05:690c:7003:b0:85b:f1ba:b076 with SMTP id
+ 00721157ae682-85d6a7c5a18mr131247437b3.9.1788273784203; Tue, 01 Sep 2026
+ 07:43:04 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260815203730.1468365-1-richard.henderson@linaro.org>
- <20260815203730.1468365-5-richard.henderson@linaro.org>
-In-Reply-To: <20260815203730.1468365-5-richard.henderson@linaro.org>
+ <20260815203730.1468365-6-richard.henderson@linaro.org>
+In-Reply-To: <20260815203730.1468365-6-richard.henderson@linaro.org>
 From: Peter Maydell <peter.maydell@linaro.org>
-Date: Tue, 1 Sep 2026 15:41:00 +0100
-X-Gm-Features: AcwNN1UJKfZbjKh2bd_FuMYds1GxfgSxuJBFRTy6fyi2zfdUtM1DbjjX0Ul-b4I
-Message-ID: <CAFEAcA90XrBA4EzTY_jQd0MtyXSpFn7tGy-jvRDwAe=HHmgdjg@mail.gmail.com>
-Subject: Re: [RFC PATCH 04/18] target/arm: Generalize probe argument to
+Date: Tue, 1 Sep 2026 15:42:51 +0100
+X-Gm-Features: AcwNN1UoQR0KODSwrd0TZhPptNbegPArztbJECkLwRb1SLvhT8Z5ysKRnE0jX3U
+Message-ID: <CAFEAcA-+AJwEE4MOw5WgA-RgD=8bkcjcMQc+_9wkGoDUXX8K=g@mail.gmail.com>
+Subject: Re: [RFC PATCH 05/18] target/arm: Probe second page earlier in
  allocation_tag_mem_internal
 To: Richard Henderson <richard.henderson@linaro.org>
 Cc: qemu-devel@nongnu.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::112d;
- envelope-from=peter.maydell@linaro.org; helo=mail-yw1-x112d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1129;
+ envelope-from=peter.maydell@linaro.org; helo=mail-yw1-x1129.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -121,47 +121,13 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 On Sat, 15 Aug 2026 at 21:39, Richard Henderson
 <richard.henderson@linaro.org> wrote:
 >
-> We had a confusing relationship between 'probe' and 'ra == 0'.
-> Make this explicit via an enumeration.
+> Translation faults have priority over everything else in
+> this function.  We were failing to trap for the second page
+> entirely in the user-only case, and when tag access is disabled
+> on the first page for the system case.
 >
 > Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
-> ---
->  target/arm/tcg/mte_helper.c | 130 ++++++++++++++++++++++--------------
->  1 file changed, 80 insertions(+), 50 deletions(-)
->
-> diff --git a/target/arm/tcg/mte_helper.c b/target/arm/tcg/mte_helper.c
-> index dd4c10ef4f..31bf58c937 100644
-> --- a/target/arm/tcg/mte_helper.c
-> +++ b/target/arm/tcg/mte_helper.c
-> @@ -87,28 +87,48 @@ typedef struct AllocationTagMem {
->      MemTxAttrs attrs;
->  } AllocationTagMem;
->
-> +typedef enum {
-> +    /* Trap on missing pages, invalid tag access, or watchpoints. */
-> +    ATM_NORMAL,
-> +    /* Gracefully return no tag memory for invalid pages. */
-> +    ATM_PROBE_PAGES,
-> +    /*
-> +     * Basic page access has already been checked,
-> +     * so a missing tlb entry is some sort of bug.
-> +     * Assert the tlb entry is present, but gracefully fail if tag
-> +     * access is not permitted to the page.
-> +     */
-> +    ATM_ASSERT_PAGES,
-> +} AllocationTagMemKind;
-> +
->  static AllocationTagMem
->  allocation_tag_mem_internal(CPUARMState *env, int ptr_mmu_idx,
->                              vaddr ptr, MMUAccessType ptr_access,
->                              int ptr_size, MMUAccessType tag_access,
-> -                            bool probe, uintptr_t ra)
-> +                            uintptr_t ra, AllocationTagMemKind atm_kind)
 
-I think we generally prefer to make 'uintptr_t ra' the final argument
-to a function call (though we don't 100% follow that convention).
-
-Otherwise
 Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
 
 thanks
