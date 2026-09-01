@@ -4,98 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E742C624D5
-	for <qemu-riscv@archiver.kernel.org>; Tue,  1 Sep 2026 15:33:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 215ECC624D3
+	for <qemu-riscv@archiver.kernel.org>; Tue,  1 Sep 2026 15:44:27 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x1QU4-0000Vg-Df; Tue, 01 Sep 2026 11:33:12 -0400
+	id 1x1Qek-000339-SW; Tue, 01 Sep 2026 11:44:14 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1x1QU1-0000UQ-0H
- for qemu-riscv@nongnu.org; Tue, 01 Sep 2026 11:33:09 -0400
-Received: from mail-yw1-x1133.google.com ([2607:f8b0:4864:20::1133])
+ id 1x1Qei-00032O-QD
+ for qemu-riscv@nongnu.org; Tue, 01 Sep 2026 11:44:12 -0400
+Received: from mail-yw1-x112d.google.com ([2607:f8b0:4864:20::112d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1x1QTx-0002hK-Ql
- for qemu-riscv@nongnu.org; Tue, 01 Sep 2026 11:33:08 -0400
-Received: by mail-yw1-x1133.google.com with SMTP id
- 00721157ae682-855de2d0d4dso17964587b3.0
- for <qemu-riscv@nongnu.org>; Tue, 01 Sep 2026 08:33:05 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1788276784; cv=none;
+ id 1x1Qef-0005Ba-W6
+ for qemu-riscv@nongnu.org; Tue, 01 Sep 2026 11:44:12 -0400
+Received: by mail-yw1-x112d.google.com with SMTP id
+ 00721157ae682-8615bb9d857so664067b3.2
+ for <qemu-riscv@nongnu.org>; Tue, 01 Sep 2026 08:44:04 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1788277443; cv=none;
  d=google.com; s=arc-20260327;
- b=dnm3fXSaI5Y4N4TqJeIqwSc0JUVco11f8b+dOHdFLouCW3mrbi+W0YgWVSG57f8C5r
- tHcAnsaCi4vs42WeDU6ovcbUncCemcP9c/QrlfCkrdtkNQobzCy3WAhohG/wX2BGtyIE
- SNsKHbAFaMQOuze8VyREilzWscZnKnfPrXKBDVgpLznIzzWGToIELLqlbB+SZ+SmY0SJ
- EXjDiqfljm6wAaJIyblU2Dk0wY+5n0ZrasXb94QzM1NpGoinq7H/tb+0E51+VeKTx9uN
- O2VinRO6iMr0I8MrL8VdZ+BzUyNBN5kCRgFUo3f/U+x29CYXG+fJYC5UqoX4DVXanT58
- NuLw==
+ b=EWKZr24fhFSvH4jXfXQAp0v1ASgVP+9GHaCk3hyNZKJVPT2ixrApI36R6LuWL1S3F3
+ 9YW2AxstcTLOqThELbwQjJMkTmpKfSyOIlmiFwV6eoWDBvykK5J3FYBvbtFv3dJRExUC
+ nga8ICZQSOnPOH+v15PQ8KKn8E49vMFFoTyTMLOg/wCGqEzrm9c+PSJOyBRpBZeXlsCk
+ IWPfD7KbjDaT66dEr906mY/khIo9p2goqmxdOFJlo7x23I0+fbFKUXwuGRmABhzGVE/r
+ xx5kqp8Po6VSbvCIFxe84qes1+qf0DyIXwolM920GdgIcXNCwydCcXCakEKvTBV5ObSk
+ ENZA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=TfsYZWGUp3JEz46SYJF6kaNN+w8kJcJepqqETpNYZOw=;
- fh=0Yg7SDVrAdiJ1Gwqzt7iHHW0Z6hsai3hTLpkRzCqvNw=;
- b=X+bwUhDnmzbv1pykOApW8nA99fgk2v4yPX3sLbxdORu6WFdodpu9HHuUF3VYx95xZz
- RJC7wNjs9I0a9JOPGgmJWXLf17zQ5tVV2YfVSJZS8MBXAPoA7Zno2eV8VbtcjxJj9msf
- +kF5D+VeI2OgMRZfkOACCT1qcDtW5tD55XrFQlgM11/cfQw97T1ey25hM9rAFYnsQeyB
- /TEqPoQRX4kZSxxkcKzBiSBpo6w9w1eLbvnVtwT6rYnlZnkglyFDlXedhTEZ4heOcSCi
- vuxInPVmlJ4Ow9Al/qhgC6wREg7ii5+kxmwqDIcpj0eLMafuaN6qmlFF8hi1GKEDHoqf
- N8Gw==; darn=nongnu.org
+ bh=1kvjv5Gfdk/GMHKRwBrkjHRbEfyU/KRdl6K73Z8xPg4=;
+ fh=8Uxh7OpRRGZ8EMXC4bcvrBbtQhqOna6MMvrk0HpBei4=;
+ b=XJesnL6dw7+0Y3j9nt+WFMYZmdUIcdHtVkWVpHQyoR+cVD+eJfV3RvRo5d5PJIgbss
+ 6GFEkzkzbbNbrA+jt4RKEUaRMpPjs5VmePC9R83nn2iJpoO7GW2l1z/K7qE5iy3u/tTZ
+ 5YUi5BTvweZZTdFD4sG75HeQO97qOCcO9HaYdMryjAfH29K2VXnadTJ2SFDmR96n6yls
+ 13IwcdIiGl0FFdK7rfxhkx+nsC4b4CXf4X46wCJdMKYRunCPmr5ZJe+0j57UHq6fai9S
+ Nu9PaujXrrAR4FrqEv4gSwm7/YTSlCObSPlHe7Qkklx3iDRhJDdqgYwgnBeYwbZLPF5z
+ gO2A==; darn=nongnu.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1788276784; x=1788881584; darn=nongnu.org;
+ d=linaro.org; s=google; t=1788277443; x=1788882243; darn=nongnu.org;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=TfsYZWGUp3JEz46SYJF6kaNN+w8kJcJepqqETpNYZOw=;
- b=GIgNi2qjpdKeeKU/zUTyG8MGQB+b/f/kF1xnUD7B19vRw3vw67eea1Nayb3gnAMM8c
- OT9RgnLuFHUz6Vkqe2hbnGTnSy6sB+KchPW7pkpRkjtfDiFI0ifDiBqnBGenyKGKVCgK
- opFss+hmEEJTSMxuDAllSqt766Hc0u5VjtG0cTf0n/qwTk3v4XhhU9m/KfzU4QujvlWL
- i4FD11eMiM8A/iUFTf4BiqWLGoSnvNl4vEGxaeB1tPnKjFZGztX+vUN28/LzAocYsib2
- LQC6tHtcqJJmK30H691PcxQHhIxkXwnKH7dOyIK/0QEu0p9FmukyiBrtxfhHvaoiAebl
- M/Xg==
+ :content-type; bh=1kvjv5Gfdk/GMHKRwBrkjHRbEfyU/KRdl6K73Z8xPg4=;
+ b=yUXEMo5tbn1ZAU/i7dVVbDJXLf8c9yN3NQT/6lsMoa2VV691vwqvBcT75HLl9VolWZ
+ Lw/hgLCpJXi0UOqVlyrqHqgQA5X9goEm2bNHhHW4CNA9PGfglMBr2ol1tLFXwxwCGMUp
+ 5lQ2EijfjnCbePyx3f/aK1lMnYb4WDdZJgAq3OqpYfb8jXKirDM3uyWwYnl2oC13sRyN
+ AHNUbKPMg2rcXtrHBwPVGpEmGNfpqSjffW9I/jrb62ssHwhFXgu8wjPAyED6LQSUypBg
+ cIOVa5I3rE9o9uMUMxuvC7z3Iy4xmvPxY4HRMLNkOB3zq3kxLJ4rfee+ZGF04FSwy/b7
+ iucw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788276784; x=1788881584;
+ d=1e100.net; s=20251104; t=1788277443; x=1788882243;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=TfsYZWGUp3JEz46SYJF6kaNN+w8kJcJepqqETpNYZOw=;
- b=MTrT/QyvRadbUHRys3NrNVWd6KNAf9PNTJpOlitz/Ul/tF25hF7ZkWe7pmRx0bywpB
- KHueFU7T5a6muUre/HN8zUQs4MiMxtyYsIze5tidtHrq/L/S+eE5OdtZ9wJ4fGI/cjgA
- Lju4mv6+PbM3ij+0nE92Eg/L6afZs22vX6ye/8M2qV/bvfPngil7YJDN0zG3FLVluT76
- w2MT3fudBvtYS6ETvMESx2zh7ZtnMUiGdfW7w4V+5GD51FG6fct17hf96cMXqBXOvPtl
- TAv0MAyMI2l/xAI4uDrpT7EN4124RCjjy6q0y+XSCLcVFwXO+Zu3ahCGxouedqkM9Fli
- EW4w==
+ bh=1kvjv5Gfdk/GMHKRwBrkjHRbEfyU/KRdl6K73Z8xPg4=;
+ b=eICys6YPwbyWXMHKUY1DlX9yAPu9+eeW9Nm+Ieb6L2GufzowUonoDZzfEVBCjJsaRO
+ XL+mNhRjuzC37H0W6yxM0disjB+IrQSdl84AZAoAFzLbZEfvVTTWK3aROyK+CqNLJebP
+ K3Wg9ezLgcFq7bYy3666oCROLgEBm71qY2UnV96r4IxG5aITugvhn2f/A8N3iN8XbAj7
+ ctbt3qzOp7dk25KjddHoWXDnwU29pT1Nkmo1QIDbHdkioHR9MYTojJlzmK6Be47Ils8P
+ KaIi5Drh5Rna9jOKqRkPV9cGRVCYT3ORaW06fvogw3HKHRBihvJsoFpa7T1F3iMfRdRG
+ dDaQ==
 X-Forwarded-Encrypted: i=1;
- AKwUvByUGTV5+TesOJvZYyDfxnvT7+Lt4BvSQiZCpu8eYlkCvULPoSUzkvmDJNt808T9hZpWrM1CaYoF/eFx@nongnu.org
-X-Gm-Message-State: AFuF++ly3bubRR7WUxy5+Bme1z5ZVEyXO8iMa0NABm2wcigv1BTqyQ/N
- rT9CgS0clJb/46R7ASSSZAeZ7vDSv1X8WQPkRkdiUSXV9eN6rSDONW+MhtLXdo1I7vqJfzWg/MX
- KSWrKBoslWEtWuJ+sMjsQrXMANHl/1ai3hTk6Q3SN90KnYhymqO11zTA=
-X-Gm-Gg: AYBFou3BpF2CUjj1QV9HT5bM4kj7o3Pb8E9sMRQbLrRq4I+HOAQ3MX+7FLmShB/rdBP
- OLhOdpIaTuBnSg5jX4PmZbqn9S/u5QO6wMl2yE9b4HPnHDQP9ofgHXTD/4qc6aDwIdK7kQU6hLV
- 4xtMo6/BfPwhExXn1NQ07gaSGj1VdyKw8AcBTCoyPNbsX2Zz3cJ8mq/7aB03xjsbkgY3FjS4Z/p
- hUA8FJ2ukgqoBXJY1OZaBoDpqTMycuhkxSxWecL/QS4bizXahZURvJwe3VLpXvQhuIwe6Bu6uma
- JU3X5It5IEXE75OKPCJsLC2H/UA3sjprjohPnnqQm4T0iJRpFRL2fHAxTRmfBPt6N7Dlfene537
- slfRjBZQUyzUkeUx2dSqiLP5cKQP/0T4qwVV3EAs=
-X-Received: by 2002:a05:690c:6612:b0:82d:8dc0:9cf with SMTP id
- 00721157ae682-8694d8b47dfmr27793407b3.13.1788276784411; Tue, 01 Sep 2026
- 08:33:04 -0700 (PDT)
+ AKwUvBwbtIexLmmEd1PlLHDzjex46HncOWGcx/nWVvQLQNa9H6juU7x8Y8K/o1IohZ8WeUsAQtG4gjwRoZwx@nongnu.org
+X-Gm-Message-State: AFuF++kM8God1nV6AR/E3hhFIuqSMFi6ljLKSK9vwPNVo3T6M1iNNAMH
+ BX//e1BA/MnOwgsWiw4WeIqUAEtRLh+oZwvi0nNWH4yYatw1WSsXna3EUrNKVk/MMbkpiTMGhJM
+ cXvXUauz/g6/aWXP79zIgUDNTMhE+8ZpOMV77XIzzyQ==
+X-Gm-Gg: AYBFou3L9TZMFbG3sdT2dUVf8+D9IAQTjAB3NchxWAlWDi8eNjGCp+EgG6OZdWMHpZ7
+ JTtIg1FGqG28grePhE9ptUpKLoLt8U0YjRaZdil8ZlV0oMJy5xdkVxayGnQKBxyaVtynss+suDo
+ FNkGBFEJxMZM54pASaFTcn1aGKIk9D5MUJdtKJB1x4i+JaoOBWImqdOvMKwol1aBu5L0jrOEhG/
+ v2mdQKgLAu5ZPKBncXdRvvoD4LVzsIPAtMOCA1/OllqfbStgcwcl35ANMCeoBxT6tlvWrrNHpBo
+ CXen6rtmMmpvrgCyHfq4W8Px2dDv4X7lPaub1t/QI8c7qY7c6rj7XQzMNpep4j/c2kNEvO+iKSR
+ o4BbVG8TJ/deU6bNfo4hJv/3kBwYI
+X-Received: by 2002:a05:690c:a642:b0:820:15ad:522c with SMTP id
+ 00721157ae682-85d67251799mr116246197b3.11.1788277443006; Tue, 01 Sep 2026
+ 08:44:03 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260815203730.1468365-1-richard.henderson@linaro.org>
- <20260815203730.1468365-12-richard.henderson@linaro.org>
-In-Reply-To: <20260815203730.1468365-12-richard.henderson@linaro.org>
+In-Reply-To: <20260815203730.1468365-1-richard.henderson@linaro.org>
 From: Peter Maydell <peter.maydell@linaro.org>
-Date: Tue, 1 Sep 2026 16:32:52 +0100
-X-Gm-Features: AcwNN1VaWNaLBvJzUz4ncwiHukBE1sGNIdi--zfmzWUHZDkOOjWrXqjsU6ZrGdw
-Message-ID: <CAFEAcA_SLOJ9HufYt5B88S5LwCKo1Cmj8EqcvRn1Ym0jCFc_WA@mail.gmail.com>
-Subject: Re: [RFC PATCH 11/18] accel/tcg: Replace size with first/last in
- tlb_fill_align
+Date: Tue, 1 Sep 2026 16:43:51 +0100
+X-Gm-Features: AcwNN1X_-5DwmKotV19zndnktRTnWLg1Di2wnrhkJJV_liuHxx3Ln1RlQZS1iok
+Message-ID: <CAFEAcA9CXPA=3AHqqCu8Kv9iHUGra37wBUfVcikMdBrAkX54qQ@mail.gmail.com>
+Subject: Re: [RFC PATCH 00/18] accel/tcg: Change tlb_fill/probe_access to
+ (addr, first, last) tuple
 To: Richard Henderson <richard.henderson@linaro.org>
 Cc: qemu-devel@nongnu.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1133;
- envelope-from=peter.maydell@linaro.org; helo=mail-yw1-x1133.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::112d;
+ envelope-from=peter.maydell@linaro.org; helo=mail-yw1-x112d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -118,47 +117,33 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Sat, 15 Aug 2026 at 21:39, Richard Henderson
+On Sat, 15 Aug 2026 at 21:37, Richard Henderson
 <richard.henderson@linaro.org> wrote:
 >
-> Propagate the API change down one step further within cputlb.c.
+> The driver for this RFC is
+> https://lore.kernel.org/qemu-devel/ce3a48b5-9847-4cc4-a02f-86db497c91ae@linaro.org/
 >
-> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+> Based-on: 20260815194549.1377505-1-richard.henderson@linaro.org
+> ("[PATCH 00/23] target/riscv: Reorg vector load/store")
+>
+> But also merged to master, so for avoidance of doubt:
+> https://gitlab.com/rth7680/qemu/-/commits/tcg-probe
+>
+> Convert probe_access_full, probe_access_flags, and the backend tlb_fill
+> hooks, but not (yet) probe_access itself.  I'm less certain about that,
+> since its uses are (1) less complicated and (2) there's also a path,
+> which I can't prove isn't used but neither can I find, which avoids
+> both watchpoints and notdirty pages.
+>
+> I've tweaked the riscv pmp check to use the new parameters.
+> The similar Armv8-M code is a bit more complicated to push through,
+> and I need to study it a bit more.
 
-
-> @@ -1664,8 +1665,8 @@ static bool mmu_lookup1(CPUState *cpu, MMULookupPageData *data, MemOp memop,
->      if (!tlb_hit(tlb_addr, addr)) {
->          if (!victim_tlb_hit(cpu, mmu_idx, index, access_type,
->                              addr & TARGET_PAGE_MASK)) {
-> -            tlb_fill_align(cpu, addr, access_type, mmu_idx,
-> -                           memop, data->size, false, ra);
-> +            tlb_fill_align(cpu, addr, addr, addr + data->size - 1,
-> +                           access_type, mmu_idx, memop, false, ra);
-
-Can the "addr + data->size - 1" in these mmu lookup functions overflow?
-
->              maybe_resized = true;
->              index = tlb_index(cpu, mmu_idx, addr);
->              entry = tlb_entry(cpu, mmu_idx, addr);
-> @@ -1833,8 +1834,8 @@ static void *atomic_mmu_lookup(CPUState *cpu, vaddr addr, MemOpIdx oi,
->      if (!tlb_hit(tlb_addr, addr)) {
->          if (!victim_tlb_hit(cpu, mmu_idx, index, MMU_DATA_STORE,
->                              addr & TARGET_PAGE_MASK)) {
-> -            tlb_fill_align(cpu, addr, MMU_DATA_STORE, mmu_idx,
-> -                           mop, size, false, retaddr);
-> +            tlb_fill_align(cpu, addr, addr, addr + size - 1,
-> +                           MMU_DATA_STORE, mmu_idx, mop, false, retaddr);
->              did_tlb_fill = true;
->              index = tlb_index(cpu, mmu_idx, addr);
->              tlbe = tlb_entry(cpu, mmu_idx, addr);
-> @@ -1849,8 +1850,8 @@ static void *atomic_mmu_lookup(CPUState *cpu, vaddr addr, MemOpIdx oi,
->       * but addr_read will only be -1 if PAGE_READ was unset.
->       */
->      if (unlikely(tlbe->addr_read == -1)) {
-> -        tlb_fill_align(cpu, addr, MMU_DATA_LOAD, mmu_idx,
-> -                       0, size, false, retaddr);
-> +        tlb_fill_align(cpu, addr, addr, addr + size - 1,
-> +                       MMU_DATA_LOAD, mmu_idx, 0, false, retaddr);
+I think this is a good API change, and getting rid of the confusing
+"probe with size 0" is definitely worthwhile. I think we need to
+be careful as we do this refactor about places where we calculate
+a "last" address via "addr + size - 1" and that might wrap around;
+I've left comments where I think that might happen.
 
 thanks
 -- PMM
