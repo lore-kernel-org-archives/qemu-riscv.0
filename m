@@ -4,117 +4,127 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 196F1C61DD6
-	for <qemu-riscv@archiver.kernel.org>; Tue,  1 Sep 2026 07:46:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D606CC61DD6
+	for <qemu-riscv@archiver.kernel.org>; Tue,  1 Sep 2026 08:57:42 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x1JBm-0005I7-Cl; Tue, 01 Sep 2026 03:45:50 -0400
+	id 1x1KIg-0000K0-LJ; Tue, 01 Sep 2026 04:57:02 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1x1JBk-0005HY-Nz
- for qemu-riscv@nongnu.org; Tue, 01 Sep 2026 03:45:48 -0400
-Received: from mail-yx1-xb129.google.com ([2607:f8b0:4864:20::b129])
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1x1KIg-0000JM-2J
+ for qemu-riscv@nongnu.org; Tue, 01 Sep 2026 04:57:02 -0400
+Received: from mail-yx1-xb12d.google.com ([2607:f8b0:4864:20::b12d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1x1JBi-0006yl-Dh
- for qemu-riscv@nongnu.org; Tue, 01 Sep 2026 03:45:48 -0400
-Received: by mail-yx1-xb129.google.com with SMTP id
- 956f58d0204a3-66de7e0bc85so575823d50.2
- for <qemu-riscv@nongnu.org>; Tue, 01 Sep 2026 00:45:45 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1788248745; cv=none;
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1x1KId-0007zI-38
+ for qemu-riscv@nongnu.org; Tue, 01 Sep 2026 04:57:01 -0400
+Received: by mail-yx1-xb12d.google.com with SMTP id
+ 956f58d0204a3-66825847b2cso3895157d50.3
+ for <qemu-riscv@nongnu.org>; Tue, 01 Sep 2026 01:56:57 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1788253017; cv=none;
  d=google.com; s=arc-20260327;
- b=MrQBZtn2g+VwZPpOffArJovNNmpNfQ1LgAF6gaTDC+Pk/jhjcJdjmyWUkzFscN7xWi
- 4qOsylIbzO+n7fz9Ud3+JgE4Hc7vaK/KMD5rQipDnWdP91+fxttFcpWl6ZPB5Hc1tnEE
- LFEuw7o6C8yn1MGxbMzbINRkgwwizQkcgC6bEDa4AqmKhybXvT5KsRaUX/dr4NuLK2EW
- OwsNBGDFYUdxGG7NsxrxGXD7b0LLUnx6AyAxUJb0Bmyb/DevyrrroTdLJ+3a3CKrqcAF
- jtKOrchfslcUf2eiYZrtz248qM4JooSqulwiU0tm/Dcr09ynEUWlWuD/jOwatSDgy/Md
- kIEA==
+ b=hgKGgZYvfBRamuulyEFYFucz0q0Nsh8PpsCIJvto+4OZrqMn4FOgs4UTK1PJulx/ml
+ +4rEWOhVWKKAIkQ7jDVHpEGS6WKTGOCLiOkznQtyukKZsjPhsXNUWpepSyx+Pt+UYsAm
+ /Cd5koSBaC41nZu3jEX0dwUf0PbOdWTnEQDBgIjnYbwOSDHDDKmgdt2Sh/VPJxQlYpw2
+ xcyZn8aZQMjNtWnP6eNVOOWlwgaEi4OtUOmP8zpO5t8rNkas0EofU7tbqDOZJ/kIo7y0
+ HFTESKwxTKk78+UIucoiUm5UWPKRnZbAeXOsgekA4TM11P9YYEbNY8NRsdnLSRDJoXXz
+ TMCA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=U48hKlV1cRP43rKRiCqIlG/RIdxRBIvcw8d20WllOJI=;
- fh=tJXbOTbr+rqCjhZf0TzEDOP8uptdfzqBwJyUS428YwU=;
- b=mvA8MD4zneZ/kQBI+a2TE0T0KR8MJA4fvgCY0nzZKLpWqmamOUSs3+xLgj2MT838Sh
- bfrYs7GHVa9N5ZAZAW7n4sYjX2Atft0BFnNGhw7mHORStG58allQhl01oR2OVrITkRbW
- E0GFH98Ow4kvZnULubXDCgf0/4jTHA5TZi9OrCT7SY3NQH1D+1zNyBiOVqgU+RscIFg4
- MsaEGSFGUC4WkwQjDC+xWffteNADLXOHxXcSVA+v/Ip58cYi2HvJGDR7P6AqjQn2Wl3y
- yyyZQu75lUtiDPExSgofVzfINlNCqcN2UPB0SzwTvu5OOm5tQ0SNjO32wKQUeldLF/qb
- LU7g==; darn=nongnu.org
+ bh=Cq8YbfnJO8CtC22hnEedOTnWA4GJcNao2yClP9ojwDQ=;
+ fh=5ruCa7zPfCRIJEdCTHeST5gWSO4LJDm0Ub5Mz8fUgb8=;
+ b=bZbwi41a8ukaTyOUwJssUUSK0gKzGjcR+9F3QJU/NoYEYjIcO5QDSEM5RWhcUuZc7A
+ 5ng19PIblIU22G47Z4CUiJx5T/5AfT8kY+5NfdbYfS5iP6iCZ/KxFziZUlbpbiC3BN5R
+ JSg77QQSeidM+hKQ7rWCt/NA1utQLZLGTc+2wQbIav0/X8yJUtBNwCJ6MshLrIJiM9FV
+ M7blsmWvi6A+pgJ5sfhWcqrc3qOFXiba9i3KCaYLyvLbkWyk8aWWlPR9ORnlRZyJvlQ7
+ qvSoWp73nkrmD+vdqWkiCmEgjYlrMQM4f2CSyJRvFFCTi8l8TlZlmhGGqruc0yy4DOJk
+ Lhrg==; darn=nongnu.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=jms.id.au; s=google; t=1788248745; x=1788853545; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1788253017; x=1788857817; darn=nongnu.org;
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=U48hKlV1cRP43rKRiCqIlG/RIdxRBIvcw8d20WllOJI=;
- b=CzJgD7F293TdsJyL+yTQQT0dOK9AEfV9XA5Sw4szVlnCVrRU29LxwOMKerWW9JmWG7
- 7mCZvVigTgjSQAk9m0O0zb7G22wWkF+OzYlv/q0OlkQYnNkPnw9vOX0YX/6uXat+eGeS
- WPJqQ2xThrjjFqk+AlcTg52HbzRmTYffQBXrs=
+ bh=Cq8YbfnJO8CtC22hnEedOTnWA4GJcNao2yClP9ojwDQ=;
+ b=Q02Zjgl4Ve1emeidF80AvUOoMgra9VShAxZJbZkfqyGadfga+NDSaKU83MVkTPqNrW
+ gMZrHW+BKvz9Mvqk7lJuXUgUK5+9hxHSnO905mtK6xd6YUI3xgD4AsQD35b/B1DXFO5C
+ ERpJo9ifH5eKHVsiB1zM3Ci2hI1rxD2RTJUCIMGXew0NFb8Ox+DiATmpQvOd2OruknJE
+ DognZt1pDV7jpYfVXV2/iR5f47nZyA2DuWPfnmMYyIhdIOaCeizKbXEaQMrvKZ35rXzq
+ IiyHFq3a+RHtEXEww3TrHR046Xl2nZMQS/p8e8RcNDnADpWC9fhZKAbuun1PsQtKLs+R
+ X1mA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788248745; x=1788853545;
+ d=1e100.net; s=20251104; t=1788253017; x=1788857817;
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=U48hKlV1cRP43rKRiCqIlG/RIdxRBIvcw8d20WllOJI=;
- b=Ca5q/SzT0Wgsk46Id50MKG6sCfXGb2slBA7hiQK09ztVVm80X/qTWIVID7qwIT05BI
- dNq3HYJX+np5X2Nn6hAEmsx3AGwUXPJNwqdvCE5yoBbgj1eHiyNfkGIE0wXhnhp2wMKX
- sDTkPhLGNBZEFqzlij46DRbqI9ms4DGqM3dqfawV7BqUd4ZCjjUXcT0NFSmoW7WInnA5
- 6rMhb4BbA+M8qWyogh0iHWRZF4+gpktwFdXbER5h+BiYhVUZqwG0/O+oWvkzLnDEkBko
- MUt2ckeGeh8yy/4rAD+HAWi3loRgZbyosz1a7HvRxVU0tUAH+oBu94HgbT1Ui0zws5iN
- dbNQ==
+ bh=Cq8YbfnJO8CtC22hnEedOTnWA4GJcNao2yClP9ojwDQ=;
+ b=G8GCM9qZ6tllD5+35I9e9uWifkx6+6L9iJCsEqU+nMg1+0iND+wo41akr/ExzAiTHB
+ Z6re0ZtpK2teGypMiJNWFdfvz9vQDI/yKGCsPA+BJhEuIRmg+N9+5GFgkqM0stwQX4/4
+ xL3JqIV8z/8jNUD11NzO86Cd5Gv7RwIZjUxbKUjf+sNYMDAppGInj19XtNKjNRXGmX0j
+ xDxZnE804M9oKc5qZXcluqnA9U8FxXLr6J1GEtGhtVL70EfKqPWGSHTs+4ehrxFOyjzQ
+ 66EHrnFBShnVmWr9tvwVGB/ht8ZhK+s97zxSLdKesqfZj+AzzJ5UR71RXUbG/R2HK4XY
+ BYQQ==
 X-Forwarded-Encrypted: i=1;
- AKwUvBwJuHGYeQNFTUgj2VMzIiD6yWKpQ73bvZDZGKKxq10SEyq8Fe7PMFljIl7OzljkA7XwYEigN2fXuyOi@nongnu.org
-X-Gm-Message-State: AFuF++luNfQ7P+RguJEJcftOKr+1G8DF5+IfZAeU7enCEvCJ9GKKYjsk
- DOiXcZA5Rn8KeROn8pZfp5WC/OSlQQZkVvkyqU8n4qJCoch7FT3X25ucLqKlQR2XihUiNU8whlF
- eAiuyH2zr5I5p+Mk+JwxYxqTPRlgIBNk=
-X-Gm-Gg: AYBFou3VQXpEd+461cbZR50bfhoMEGB/1+d9Jz6KAEJh+QGzqLG4q01m/pfAYM36fUR
- WPnq2mYfqXBGb0Eh/ylqK7VkP5g7sk7bLvoSayOQFCGP9AV7EGwuy+RrSRnABPo/s8bC6bWwvEX
- Ldul4ydosHx1cBGkVBSQ64XnW0rG8ykQj0PoM76KAfdPVNI1etn3SgxP/Y3db4oyOGB90CO1aCa
- LsEFSDsP1yKCH6Ud8Z9z7MvEAy9fgXnJU4vpF1LZc8nwv8wAex07mwowVdNXnAH5eDB5LwGcdTF
- L1YpJsiwqc/uWYZqR5iJ+6PfGbZBfy/3nLNnb5QT64vapPWbx6VyIM2XtC388/PfkezClFIAiCD
- I576CbiHsFglfmNwVivG+bxX0wao6Yeu4q6MhXTPDQP4sR9lIT09rgkNkFmp1aL4WnakH+YIEgO
- Md7mJqHYvA/1hutk7w
-X-Received: by 2002:a53:a2cf:0:b0:66f:7d7f:508c with SMTP id
- 956f58d0204a3-66f80c61e8amr2529567d50.50.1788248744728; Tue, 01 Sep 2026
- 00:45:44 -0700 (PDT)
+ AKwUvBz+sStnd+NprOGzCEPwvmM6rKGEH0JWO5uCw5raFJrRpEsiqwMfg19C4BbqTeIwPOK0l8C5aBDIfgy7@nongnu.org
+X-Gm-Message-State: AFuF++nGzxlMpAkUMJT4BYlJdWZCELRl1nbYyFe357qXqody+qJJqdqi
+ WuKQA1EPX/bsH21YLquVG5AxV99iSGjv9MvX2dnA3ClJhOqLaNXWPOf2ooaQhqcoFTiVbOE7xtC
+ dEjbMz5Sa6vIyCsglCN6mUT1EmQgQo4Q=
+X-Gm-Gg: AYBFou3pyrP55kj0TzxENlMgotgVk8OpaalHWoYihrZthfV/I2OGKAIA1eiZCQr0TMz
+ CmO+S66ADW1LQ3jqbfwhUHX+fb4v2O1GCD0Pe58ZHHGKdBae09jiINcLmBn8sVU3JU5HigIfj5V
+ I2Hy9ug6DcSjrZ4kDDJkoz51nQxkaU24VztH3Jq4ZI3XpMVksVs8VVHWm+V81F3pB7gF6A9WTHE
+ bcOcPfj4lPO3FFAhO7w+WK+EZpxfRcjOdqUb1reUZp9WHxYH5dnFH9wIG8u6t57MwXSbXWGq1fg
+ L14NpH2EikhQ2sxeQHY/B3vhr1HA8KScksA4x8kFQq9m
+X-Received: by 2002:a05:690e:43c6:b0:66f:80b6:e954 with SMTP id
+ 956f58d0204a3-66f80b6f278mr2191446d50.42.1788253016861; Tue, 01 Sep 2026
+ 01:56:56 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260831021500.82565-1-joel@jms.id.au>
- <20260831021500.82565-3-joel@jms.id.au>
- <bd0e113a-6495-4f4b-9ed7-bfd206a6acf7@kaod.org>
-In-Reply-To: <bd0e113a-6495-4f4b-9ed7-bfd206a6acf7@kaod.org>
-From: Joel Stanley <joel@jms.id.au>
-Date: Tue, 1 Sep 2026 17:15:33 +0930
-X-Gm-Features: AcwNN1VdMoeETI9xhtG6mjaODAq76yAEzKe1JEV7ydmW1S5HiKtyQXku9OH3C0w
-Message-ID: <CACPK8Xf5UVHuwCo9gyXNUCqH53F2zji5ZZ3K6h-1Rz7bELzYTQ@mail.gmail.com>
-Subject: Re: [PATCH v2 02/16] hw/intc/riscv_aclint: Take a MemoryRegion for
- the created devices
+References: <20260825040452.1322251-1-stephensportia@gmail.com>
+ <CAFEAcA9etHvjL1igO4mFy5iQNy1pCbNFGaSg5HFva+YCeMkGEA@mail.gmail.com>
+ <CACYNXwKU_UuhrBWHNFtYYmSfzRsUd5jRFjSc1++xvQHxPk6rew@mail.gmail.com>
+ <CAFEAcA-Ncv9_jMMg1i+Ox_xa9oM4D_MMLGnPpqbyGJV_5B9iMg@mail.gmail.com>
+ <ac30bd54b6f1f4e4753638c9e95dbb85d8b81eca.camel@alistair23.me>
+ <CAFEAcA9zz60hTDMEMePnc1osis7dPjn5KmSksrWKATpSMc8SHw@mail.gmail.com>
+ <3796c9917796a0fe26f2462645d95cc7039539af.camel@alistair23.me>
+ <a7c8c510-3391-4ab8-ab5a-c5432c9fb216@kaod.org>
+In-Reply-To: <a7c8c510-3391-4ab8-ab5a-c5432c9fb216@kaod.org>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Tue, 1 Sep 2026 16:56:44 +0800
+X-Gm-Features: AcwNN1W96iyzyiIRe5Dkw3W0pE6hdTHOcsaf3iHwkrWyoWMAWbyvMiTeSTSAiYY
+Message-ID: <CAEUhbmWO70G1sBUX7s5VzGbM-FqhRSirDEn7YbW0T2qKEVwbhg@mail.gmail.com>
+Subject: Re: [PATCH 0/4] Rename ssi_transfer to ssi_transfer8
 To: =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>
-Cc: Alistair Francis <alistair.francis@wdc.com>, 
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Weiwei Li <liwei1518@gmail.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu@processmission.com>, 
- Nicholas Piggin <npiggin@gmail.com>,
- Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>, 
- Michael Ellerman <mpe@kernel.org>,
- Portia Stephens <portias@oss.tenstorrent.com>, qemu-riscv@nongnu.org, 
- qemu-devel@nongnu.org
+Cc: Alistair <alistair@alistair23.me>, Peter Maydell <peter.maydell@linaro.org>,
+ Portia Stephens <stephensportia@gmail.com>, qemu-devel@nongnu.org, 
+ Palmer Dabbelt <palmer@dabbelt.com>, Jamin Lin <jamin_lin@aspeedtech.com>,
+ qemu-ppc@nongnu.org, Steven Lee <steven_lee@aspeedtech.com>,
+ Andrew Jeffery <andrew@codeconstruct.com.au>, 
+ Harsh Prateek Bora <harshpb@linux.ibm.com>,
+ Subbaraya Sundeep <sundeep.lkml@gmail.com>, 
+ Troy Lee <leetroy@gmail.com>, "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@mailo.com>, 
+ Strahinja Jankovic <strahinja.p.jankovic@gmail.com>, qemu-arm@nongnu.org, 
+ Tyrone Ting <kfting@nuvoton.com>, Nicholas Piggin <npiggin@gmail.com>, 
+ Aditya Gupta <adityag@linux.ibm.com>, Kane Chen <kane_chen@aspeedtech.com>, 
+ Francisco Iglesias <francisco.iglesias@amd.com>, Joel Stanley <joel@jms.id.au>,
+ Hao Wu <wuhaotsh@google.com>, Glenn Miles <milesg@linux.ibm.com>,
+ qemu-riscv@nongnu.org, Jean-Christophe Dubois <jcd@tribudubois.net>,
+ Portia Stephens <portias@oss.tenstorrent.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b129;
- envelope-from=joel.stan@gmail.com; helo=mail-yx1-xb129.google.com
-X-Spam_score_int: -16
-X-Spam_score: -1.7
-X-Spam_bar: -
-X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.001,
- FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.25,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b12d;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yx1-xb12d.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -130,23 +140,81 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, 31 Aug 2026 at 17:51, C=C3=A9dric Le Goater <clg@kaod.org> wrote:
+On Mon, Aug 31, 2026 at 9:03=E2=80=AFPM C=C3=A9dric Le Goater <clg@kaod.org=
+> wrote:
 >
-> On 8/31/26 04:14, Joel Stanley wrote:
-> > The riscv_aclint_mtimer_create() and riscv_aclint_swi_create() helpers
-> > map the device they create into system_memory, which prevents their use
-> > by SoCs that map devices into a memory container of their own.
+> On 8/28/26 02:07, Alistair wrote:
+> > On Thu, 2026-08-27 at 12:17 +0100, Peter Maydell wrote:
+> >> On Thu, 27 Aug 2026 at 12:03, Alistair <alistair@alistair23.me>
+> >> wrote:
+> >>>
+> >>> On Thu, 2026-08-27 at 11:53 +0100, Peter Maydell wrote:
+> >>>> But isn't this just the way the SSI specification is? If we're
+> >>>> modelling a "you just have to get this right in software" bit
+> >>>> of hardware then we don't need to somehow try to add extra
+> >>>> checks in QEMU for whether the software hasn't actually done
+> >>>> things right.
+> >>>
+> >>>  From my reading of things this is a bug in QEMU, not a guest issue.
+> >>>
+> >>> The fact that aspeed_smc_flash_setup() for example iterates over a
+> >>> larger value to send a single byte at a time shows that currently
+> >>> everyone *thinks* think function should send a single byte.
+> >>
+> >> Doesn't that just show that the aspeed flash controller knows
+> >> it is always talking to an 8-bit SSI device ? It wouldn't
+> >
+> > But I don't think that's guaranteed to be true.
+> >
+> > On real hardware the software could know that it's only ever connected
+> > to an 8-bit SSI device, and set the driver accordingly. That seems
+> > entirely possible.
+> >
+> > But the hardware seems to support larger sizes reading [1].
+> >
+> > In this case the QEMU code is the hardware, and I don't see how we know
+> > we are only ever accessing an 8-bit device.
+> >
+> > 1:
+> > https://patchew.org/linux/20220304083643.1079142-1-clg@kaod.org/2022030=
+4083643.1079142-5-clg@kaod.org/
 >
-> Since these routines are going to be used later on in a realize()
-> handler, I would add a 'Error **errp' parameter.
+> On the Aspeed SoC, MMIO accesses (1, 2, 4 bytes) to the SPI controller
+> are converted by the hardware into SPI bus transfers. The exact
+> serialization is hardware-specific. QEMU's choice is to generate
+> byte-oriented SPI transfers.
+>
+> In any case, SPI is generally byte-oriented, with bits shifted over
+> 1/2/4/8 I/O lines. So byte transfer is sufficient.
 
-Seems like a reasonable thing to do.
+Correct, one evidence is the spi-mem driver interface in the Linux
+kernel for the spi-nor dummy cycles is converted to bytes. Although
+some spi-nor devices do support different bit widths other than
+8-bit/16-bit/24-bit/32-bit, other bit widths that are not multiple of
+8 are currently not supported in the kernel, neither does QEMU.
 
-I started having a look at this and plumbing through errp is a bit
-more involved. I think I'll do that as it's own series as a follow up
-to this one.
+>
+> C.
+>
+> >
+> >> surprise me if the SPI-NOR standard in particular insisted on
+> >> 8-bit transfers, though I can't find anything claiming to be
+> >> that standard.
+> >>
+> >>> So it does seem broken today. Making the current function clear
+> >>> seems
+> >>> like a good step. Supporting different or larger transfers in the
+> >>> future is then possible.
+> >>
+> >> I think the current interface already supports different or
+> >> larger transfers. We just happen to not be using that.
+> >
+> > Kind of. It does support larger transfers, but there is no size
+> > argument. So how can the SSI device know how much was sent? Everything
+> > seems to just assume a single byte, but it has no way to actually know
+> > that.
+> >
 
-Cheers,
-
-Joel
+Regards,
+Bin
 
