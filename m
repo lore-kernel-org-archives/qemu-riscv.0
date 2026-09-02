@@ -4,97 +4,145 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E0A5C624D3
-	for <qemu-riscv@archiver.kernel.org>; Wed,  2 Sep 2026 14:53:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5238C61DD6
+	for <qemu-riscv@archiver.kernel.org>; Wed,  2 Sep 2026 15:21:46 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x1mKf-0004xu-8N; Wed, 02 Sep 2026 10:52:57 -0400
+	id 1x1mmF-0002Yv-Mo; Wed, 02 Sep 2026 11:21:27 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <tgamblin@baylibre.com>)
- id 1x1mKd-0004x7-4X
- for qemu-riscv@nongnu.org; Wed, 02 Sep 2026 10:52:55 -0400
-Received: from mail-ej1-x62a.google.com ([2a00:1450:4864:20::62a])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <tgamblin@baylibre.com>)
- id 1x1mKb-0003C7-0s
- for qemu-riscv@nongnu.org; Wed, 02 Sep 2026 10:52:54 -0400
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-c2529b3139fso164307366b.3
- for <qemu-riscv@nongnu.org>; Wed, 02 Sep 2026 07:52:51 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
+ id 1x1mm5-0002RU-Pt
+ for qemu-riscv@nongnu.org; Wed, 02 Sep 2026 11:21:20 -0400
+Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
+ id 1x1mm2-0000EL-MR
+ for qemu-riscv@nongnu.org; Wed, 02 Sep 2026 11:21:17 -0400
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 682Ed5DR1676255
+ for <qemu-riscv@nongnu.org>; Wed, 2 Sep 2026 15:21:13 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ Ji5J4HKmPdW/CWTW2SUhTxHcUUTcenx5uhnZFfihhVE=; b=cqX616d/uyTXUNky
+ cJut0zr4MaV7+EUooCerieI9I8TrtsBHshbM70H3UK9Dr47Wxv2ZHoBi7AzwTkBn
+ gWQPdyCzT8A6nChtMHsKoGuNAqYlBgfiTbifEpGX/+9I3Hg3/9J5ViI7p3/itsIG
+ vK0H8wMD4hitaKZa4Q6VtvQf/vnVKyyEP2wFLFBOSbQ5NQSyAMTO6DgAdbqC1KEc
+ cgEktR8E3m1/dLAnMZ3QugU3ShnKO8leC48Dlh/oALNRvIfHwjnRmy98hVqW7XFJ
+ Zlzg/ddITZiMX+oqiinFgRGCg55fToMQFACscoee84ANMaotLfd3ahkBFdwINSFR
+ nfMQFg==
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com
+ [209.85.222.197])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4genrdr585-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Wed, 02 Sep 2026 15:21:13 +0000 (GMT)
+Received: by mail-qk1-f197.google.com with SMTP id
+ af79cd13be357-93922c75037so39128185a.1
+ for <qemu-riscv@nongnu.org>; Wed, 02 Sep 2026 08:21:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1788360769; x=1788965569; darn=nongnu.org;
- h=in-reply-to:references:to:from:subject:cc:message-id:date
- :content-type:content-transfer-encoding:mime-version:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=fwvpFEnfTpgT3q0Qh5EpNXC0ncY0Cpnj1G69ubLzRaQ=;
- b=VO9LVRC9uD+DwbXHzUdXtvjmfisPSijzojCdxCxTOXu5jqef4i0sP2pxAAVUjqTnvt
- IsmICgJ5TcYpmOXDnwrF337Mr9Uf4fz1UzhLXpXi9d0N4X9ae/wSjneUjqrO4yY8ZvrA
- lRw8sKawZU6Md9rzuBxGTFBYouIpeN+K9sgNYLBulDDrubiPMoM1fZmjSWwmdxcljU7d
- XjoEsG5ktcpwoXQHU4MP3ecW/bFGyWc20Ky6uklrHDL5NuznkNXbx1s5pNano2CtcsHi
- InJASjuU2nkAmC/gUMirtsWBUY1N30UxQHEPq7Hy5TIcuHKCy7/ugbm4hbt4Qg4lTFdi
- 5dVA==
+ d=oss.qualcomm.com; s=google; t=1788362473; x=1788967273; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:mime-version:references
+ :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=Ji5J4HKmPdW/CWTW2SUhTxHcUUTcenx5uhnZFfihhVE=;
+ b=KyopZ55Fb4cGJfufJBbsH+osNZJKqYauriBJAF440QgkjhGHpfj6YXIKZMMQ75DkPx
+ 6Wydz/LhZfTa5+zLgLhwuiYQ/gEg+qEfRuI6MZm5xMLn3WT2GyhaQwMwG6sBUQ1HP8D0
+ 7ECN+tg80FTjgQE/Eb9EbxgUieOAjT4EDxiBppl9SmDW3DUegbFTonZahizSTTmOkoBN
+ ve9uUEMZYWUq5zuXntI+NQNJD0nfTxe0dGIdqi0bx/aVS88IPBfcySFZj2Lchcu8YYKG
+ TPXzRhPFcZ0g1poZro6l92KY8w3V7xqsAMhpzNZ1mUhhF/VY8e0/GV4Kq/JFmVPcLaVV
+ T/cg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788360769; x=1788965569;
- h=in-reply-to:references:to:from:subject:cc:message-id:date
- :content-type:content-transfer-encoding:mime-version:x-gm-gg
+ d=1e100.net; s=20251104; t=1788362473; x=1788967273;
+ h=content-transfer-encoding:content-type:mime-version:references
+ :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=fwvpFEnfTpgT3q0Qh5EpNXC0ncY0Cpnj1G69ubLzRaQ=;
- b=fDdI4dcDrm+IKJZ75sDqynjUcZ9Wyaf6qYZ3r0uKkIJU/qByBlIUYUxzJcsWJKYDwb
- 5oaCCiDk9K4iYprj5CSyuHSelkyrxRhPgn3nhhwpyh2DizFmNx+6e4Z+1cyp00aZ2yDo
- 8JqpTd+WrxOCLcWXQTEzirhOW0jN2Egb+TozcDxlc9pdIvdKAhTLP/E/WrvfZxlbyFza
- C6qdorFgmeuiARO3zQGTjaae/Guu8bfYp/3SyZDlPhuQ8v8z/Jp8VWl3+NsyOAe/bEPd
- dPewF93u7w82d1InCzH7PzATIXh/TF6EvAO1V9ii+slqNi5qRiXiXzJjzbeW28QV72Vd
- VZSA==
+ bh=Ji5J4HKmPdW/CWTW2SUhTxHcUUTcenx5uhnZFfihhVE=;
+ b=WIsZNZ5PqF5LEtOOAVvxX+fkwCTKG9+jCDP3f8OAy9QFzJ+i7e0gZv5O9fioG2VJEW
+ ISTQzZ9sCTNjZagcpWQdMRD8wM0gMHa5y7BS00EY+A+u7e1pSINr5d8xtcLNITvaz3e6
+ 29O76Cg4SpqtDLqXWv/HhEYlpgk+khC6Yfmnoeg46BLCftLRMuIyfDJ9RYTssHGGOaOW
+ E0DhWsq904Utzm99IHEBtKc6qOJDi2+0DFq81h27pQpMRpcL4PKk51egESdxvIJHefy4
+ 5G5bOeulglLbTMOCNwCPXw0Y0Hu8yv7IBiGKZil5fkFsxb7W3jIbdxNdRUAO3Fc7XnXu
+ 6B/Q==
 X-Forwarded-Encrypted: i=1;
- AKwUvBx/E2uXlmrNStKOKWyzipudHozx+gUQOWgtWCcFpyuydVVkC5bP6OAUeUo09CibdYILDENhAE3EOJXF@nongnu.org
-X-Gm-Message-State: AFuF++mvP3vDbyYg91/c+xLg56aDnz2tMEud4yp6K69cFmPno02RppvS
- 5m0q4Ki0oWHAe4MUkRGlsHvDgFWZHW60F0AsnM/VFtKS5ut77V4RmjIPHYdMpMOqOfk=
-X-Gm-Gg: AYBFou1OFWNBoGLsUVypOywPPYWGapTxOYLBEsvQD9j1ZA16i1kPRJv5SvoDW3Kxq3J
- PrYM7yTtRQhkEiX/Pygyzu/nBg0JKcBscAA6Mr66CtqjUsgWL0YfPCUEb/+Xvsi2idDia7lM9Xs
- GJ3AwWf40QDBPh5+2sstu4oWM4JRMd5ytx+sYmcu3dlr8icgooCmOhg24xUzhZYXL96wsGYs6iY
- 5ZWJcjCLyvQHNOVGHadfUGH9/TViIZDoxkvXAGiA6hcffc1vYWTG+TyV+xDpTkxX4LhM4cgXpbb
- Tdt2pyfTaHPbO9CPxuKDrGbZK5MqpGlDzP49aUUvwH/JvhMa0HZzB5+bzP3kphS+ovFh1hRyNtZ
- AnR4snG++qR7/90G13qgA2YM3YU8aBcjnxa8Idv4VJnSK8bMfzM48/vfrzVuuAvWw1OfMITEg2j
- lgUGX7VcG9W1m5Hyjy6y368/gznf1/lPP0T9KhTM2ad2uuhoishBhCmEqQOuBEd4A=
-X-Received: by 2002:a17:906:9c96:b0:c25:4b3e:ff24 with SMTP id
- a640c23a62f3a-c25d53dceaamr477043366b.10.1788360769532; 
- Wed, 02 Sep 2026 07:52:49 -0700 (PDT)
-Received: from localhost ([2001:1970:3847:e000:1977:be2f:4a71:2892])
+ AHgh+Rq2XNhRTg7K0MriTM069bOE5+lSj1wuWkeD29NYxw55VqBiff+V/jbmDcc8Xm6c0ea2m4Xnd79SF3dy@nongnu.org
+X-Gm-Message-State: AFuF++kAKHIxLcFPEsblkSg3VmJRvapwb1O96TCA1ufPRJkFrgj3nold
+ j7lKLuBzb+mme2d9jbJH+eRv2do6wq6N35YxZMs551klE4PFih0+bqSORkBHyYeL5mobYyyrzbQ
+ eOYXkh14vL2bXKC8yU6sns+5MLIgH79OcYJnT4F+yvG+9YvD73bY++/BnXw==
+X-Gm-Gg: AR+sD11iuWU9n82auGCP7S6MZRvg4XWpXrXz1wpX4mjwWGg36ZIBk5WLQKGuaJ6xINN
+ oY0A2qcApV4KJFC2NTt1bG8ljRO3vw2yI/AcZXFdtV1dJDS/O1RKXc1SVSOl5mBgsBimqcx92mr
+ jWf8jdwOq/WXm2T/LRLSMQXVO2UYOvGU8fnv7dbYqxJUpNnsTcR9isiXRogcH4wfioEFq3pp7zc
+ 9CZQteWNBSlq+pqzsJCrhgi9dJI+MBV3rSKqv/yL1CcDTWL37a+wEL6K1jq33lV+7TKV65ZntHm
+ EUvZfc2Rg/u9nvSMTARRAD4uCzH2dtenYEDJyv5bLGONSTIcOiNInrMvAZhYhm87CQt/ybDKwYG
+ aaA8l3auRHMI1hIbDVl6S+87JkOUIUyCZ1EkSe1Bo
+X-Received: by 2002:a05:620a:371c:b0:937:6772:d8d with SMTP id
+ af79cd13be357-93960f1811emr695447585a.20.1788362472814; 
+ Wed, 02 Sep 2026 08:21:12 -0700 (PDT)
+X-Received: by 2002:a05:620a:371c:b0:937:6772:d8d with SMTP id
+ af79cd13be357-93960f1811emr695415885a.20.1788362471438; 
+ Wed, 02 Sep 2026 08:21:11 -0700 (PDT)
+Received: from localhost.localdomain (pmd666.hd.free.fr. [88.187.86.199])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c25d043e6bcsm157333066b.61.2026.09.02.07.52.47
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 02 Sep 2026 07:52:48 -0700 (PDT)
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+ 5b1f17b1804b1-49ce58da3acsm127559305e9.0.2026.09.02.08.21.10
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Wed, 02 Sep 2026 08:21:10 -0700 (PDT)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
+To: qemu-devel@nongnu.org
+Cc: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Paolo Bonzini <pbonzini@redhat.com>, qemu-ppc@nongnu.org,
+ qemu-s390x@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+ qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
+Subject: [PATCH v3 03/11] target/i386: Rename fake_do_interrupt to
+ fake_user_exception
+Date: Wed,  2 Sep 2026 17:20:34 +0200
+Message-ID: <20260902152044.31291-4-philmd@oss.qualcomm.com>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260902152044.31291-1-philmd@oss.qualcomm.com>
+References: <20260902152044.31291-1-philmd@oss.qualcomm.com>
+MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Wed, 02 Sep 2026 10:52:45 -0400
-Message-Id: <DL4WZE1GUDFS.21LK9WLVD9S5X@baylibre.com>
-Cc: "Palmer Dabbelt" <palmer@dabbelt.com>, "Alistair Francis"
- <alistair.francis@wdc.com>, "Weiwei Li" <liwei1518@gmail.com>, "Liu Zhiwei"
- <zhiwei_liu@linux.alibaba.com>, "Chao Liu" <chao.liu@processmission.com>,
- <qemu-riscv@nongnu.org>,
- <qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org>
-Subject: Re: [PATCH 3/3] target/riscv: use a targeted TLB page flush for
- sfence.vma with a vaddr operand
-From: "Trevor Gamblin" <tgamblin@baylibre.com>
-To: "Daniel Henrique Barboza" <daniel.barboza@oss.qualcomm.com>, "Trevor
- Gamblin" <tgamblin@baylibre.com>, <qemu-devel@nongnu.org>
-X-Mailer: aerc 0.22.0
-References: <20260831-riscv_tlb_page_flush-v1-0-4fc6af95673a@baylibre.com>
- <20260831-riscv_tlb_page_flush-v1-3-4fc6af95673a@baylibre.com>
- <b8ab3fbd-cf37-499b-8efa-26df5fd01fd9@oss.qualcomm.com>
-In-Reply-To: <b8ab3fbd-cf37-499b-8efa-26df5fd01fd9@oss.qualcomm.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::62a;
- envelope-from=tgamblin@baylibre.com; helo=mail-ej1-x62a.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+Content-Transfer-Encoding: 8bit
+X-Authority-Analysis: v=2.4 cv=H4/rBeYi c=1 sm=1 tr=0 ts=6a983ee9 cx=c_pps
+ a=50t2pK5VMbmlHzFWWp8p/g==:117 a=4s3hRJSeHn4rkQlkrse1kQ==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=M51BFTxLslgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
+ a=EUspDBNiAAAA:8 a=QvbPrhRjooIPkqPMRvUA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=IoWCM6iH3mJn3m4BftBB:22
+X-Proofpoint-GUID: 74YR1GXgGdsrFVjKVD9C142en-9S6lPf
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTAyMDEzNSBTYWx0ZWRfX4/pzzOtviND0
+ eZ6OL2QB2E02Ww01TjJJz9YtrBxtPPvECPjdt3GYvV23hn6r67JPhcC1K5aVplAm7axQ6nDaOi2
+ qC3LvtzfPVRUdcvNyv2WuXMPUZDEGSM82G2enyuSnZuj1GF4Cp2ZNlZyKEigWGz2arA6TW9iSXU
+ RySOHeLhjE0ey0coIg16yUKWJFTiqZOPiQ56Na+tuL4vvE0l/D2XKiBUAU/EU/+lRZkqzFGFjCL
+ NIZ7wnL7quSUiTKXfKoiVuZSLhucrbqK8iHAr0PWYIIOEZjNO4kryf20OiieZ8GR8K7Y+cNggid
+ EYDEXIxtupSk4StWq8y6Y4Q1f3Ds/WMj3p7Auh4UA3C+IiNV/NjvVTGYc9f5sOAg8a9DPmJgQid
+ waONibOEgWOjbz7BXS8//v/0i80J1PdL9utnNgJH3swmugHMMTuck48kdY4Jsra5tKvT0rtTo9S
+ jI0OdPX36ULG+GWRsOA==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTAyMDEzNSBTYWx0ZWRfX88o3MZb6P4ou
+ 0FZfZwyCvZODJOEEQ73/ojfhr4VDtkHSZsIYi5z6A9dDgZTs947V+M4Q2ziWe9Ep4JtB267DUC5
+ VFWTfJiiJQHbLjoQV38p6tFSfyQNTxw=
+X-Proofpoint-ORIG-GUID: 74YR1GXgGdsrFVjKVD9C142en-9S6lPf
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-02_03,2026-09-01_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ lowpriorityscore=0 priorityscore=1501 adultscore=0 bulkscore=0 clxscore=1015
+ malwarescore=0 spamscore=0 phishscore=0 impostorscore=0 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609020135
+Received-SPF: pass client-ip=205.220.180.131;
+ envelope-from=philmd@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -111,68 +159,117 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue Sep 1, 2026 at 5:53 PM EDT, Daniel Henrique Barboza wrote:
->
->
-> On 8/31/2026 3:59 PM, Trevor Gamblin wrote:
->> sfence.vma unconditionally called helper_tlb_flush(), regardless of the
->> rs1 (vaddr) and rs2 (asid) operands, forcing a page-table walk on the
->> next access. Use helper_tlb_flush_page() whenever rs1 !=3D 0, falling ba=
-ck
->> to the existing full flush for rs1 =3D=3D 0. This makes RISC-V behaviour
->> more similar to ARM's equivalent (tlbi_aa64_vae1_write), which already
->> does tlb_flush_page_by_mmuidx() instead of a full flush.
->>=20
->> Pass get_address(ctx, a->rs1, 0) to gen_helper_tlb_flush_page() rather
->> than get_gpr(), so that the address being passed matches the current
->> addr_xl width regardless of '-cpu' input. Otherwise, the raw register
->> value can carry garbage above that width and never match the address the
->> TLB entry was actually filled under, so the flush silently misses and a
->> stale mapping survives.
->>=20
->> Signed-off-by: Trevor Gamblin <tgamblin@baylibre.com>
->> ---
->>   target/riscv/tcg/insn_trans/trans_privileged.c.inc | 6 +++++-
->>   1 file changed, 5 insertions(+), 1 deletion(-)
->>=20
->> diff --git a/target/riscv/tcg/insn_trans/trans_privileged.c.inc b/target=
-/riscv/tcg/insn_trans/trans_privileged.c.inc
->> index a8eaccef67..8655fa332e 100644
->> --- a/target/riscv/tcg/insn_trans/trans_privileged.c.inc
->> +++ b/target/riscv/tcg/insn_trans/trans_privileged.c.inc
->> @@ -155,7 +155,11 @@ static bool trans_sfence_vma(DisasContext *ctx, arg=
-_sfence_vma *a)
->>   {
->>   #ifndef CONFIG_USER_ONLY
->>       decode_save_opc(ctx, 0);
->> -    gen_helper_tlb_flush(tcg_env);
->> +    if (a->rs1 =3D=3D 0) {
->> +        gen_helper_tlb_flush(tcg_env);
->> +    } else {
->> +        gen_helper_tlb_flush_page(tcg_env, get_address(ctx, a->rs1, 0))=
-;
->> +    }
->
-> As I said in patch 2 I believe patch 2 and 3 should be squashed.
->
-> LGTM otherwise.  That's a nice performance boost for a handful of lines. =
- If only
-> all optimizations were like that :)
->
-Thanks for the review! I'll make the changes you suggested, but I'll also w=
-ait a
-couple of days before submitting a v2 in case others have feedback.
+The fake_user_exception hook handles exceptions in the outer
+exception loop (cpu_handle_exception), not inner loop interrupts
+(cpu_handle_interrupt). Rename to clarify the scope and intent.
 
-Trevor
->
->
-> Thanks,
-> Daniel
->
->>       return true;
->>   #endif
->>       return false;
->>=20
+Signed-off-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
+---
+ include/accel/tcg/cpu-ops.h       | 4 ++--
+ target/i386/tcg/helper-tcg.h      | 4 +++-
+ accel/tcg/cpu-exec.c              | 4 ++--
+ target/i386/tcg/tcg-cpu.c         | 2 +-
+ target/i386/tcg/user/seg_helper.c | 6 +++---
+ 5 files changed, 11 insertions(+), 9 deletions(-)
 
+diff --git a/include/accel/tcg/cpu-ops.h b/include/accel/tcg/cpu-ops.h
+index 3ff6e6810e0..ded7cc700df 100644
+--- a/include/accel/tcg/cpu-ops.h
++++ b/include/accel/tcg/cpu-ops.h
+@@ -106,12 +106,12 @@ struct TCGCPUOps {
+ 
+ #ifdef CONFIG_USER_ONLY
+     /**
+-     * @fake_user_interrupt: Callback for 'fake exception' handling.
++     * @fake_user_exception: Callback for 'fake exception' handling.
+      *
+      * Simulate 'fake exception' which will be handled outside the
+      * cpu execution loop (hack for x86 user mode).
+      */
+-    void (*fake_user_interrupt)(CPUState *cpu);
++    void (*fake_user_exception)(CPUState *cpu);
+ 
+     /**
+      * record_sigsegv:
+diff --git a/target/i386/tcg/helper-tcg.h b/target/i386/tcg/helper-tcg.h
+index f4b2ff740d5..5349ab71be9 100644
+--- a/target/i386/tcg/helper-tcg.h
++++ b/target/i386/tcg/helper-tcg.h
+@@ -35,11 +35,13 @@
+  * x86_cpu_do_interrupt:
+  * @cpu: vCPU the interrupt is to be handled by.
+  */
+-void x86_cpu_do_interrupt(CPUState *cpu);
+ #ifndef CONFIG_USER_ONLY
++void x86_cpu_do_interrupt(CPUState *cpu);
+ bool x86_cpu_exec_halt(CPUState *cpu);
+ bool x86_need_replay_interrupt(int interrupt_request);
+ bool x86_cpu_exec_interrupt(CPUState *cpu, int int_req);
++#else
++void x86_cpu_fake_user_exception(CPUState *cs);
+ #endif
+ 
+ void breakpoint_handler(CPUState *cs);
+diff --git a/accel/tcg/cpu-exec.c b/accel/tcg/cpu-exec.c
+index 257211235db..609931a0d6e 100644
+--- a/accel/tcg/cpu-exec.c
++++ b/accel/tcg/cpu-exec.c
+@@ -717,8 +717,8 @@ static inline bool cpu_handle_exception(CPUState *cpu, int *ret)
+      * handled outside the cpu execution loop.
+      */
+     const TCGCPUOps *tcg_ops = cpu->cc->tcg_ops;
+-    if (tcg_ops->fake_user_interrupt) {
+-        tcg_ops->fake_user_interrupt(cpu);
++    if (tcg_ops->fake_user_exception) {
++        tcg_ops->fake_user_exception(cpu);
+     }
+     *ret = cpu->exception_index;
+     cpu->exception_index = -1;
+diff --git a/target/i386/tcg/tcg-cpu.c b/target/i386/tcg/tcg-cpu.c
+index 6f5dc06b3b9..7a4d73e7fee 100644
+--- a/target/i386/tcg/tcg-cpu.c
++++ b/target/i386/tcg/tcg-cpu.c
+@@ -173,7 +173,7 @@ const TCGCPUOps x86_tcg_ops = {
+     .cpu_exec_enter = x86_cpu_exec_enter,
+     .cpu_exec_exit = x86_cpu_exec_exit,
+ #ifdef CONFIG_USER_ONLY
+-    .fake_user_interrupt = x86_cpu_do_interrupt,
++    .fake_user_exception = x86_cpu_fake_user_exception,
+     .record_sigsegv = x86_cpu_record_sigsegv,
+     .record_sigbus = x86_cpu_record_sigbus,
+ #else
+diff --git a/target/i386/tcg/user/seg_helper.c b/target/i386/tcg/user/seg_helper.c
+index 3a4a6d5a745..019a781458b 100644
+--- a/target/i386/tcg/user/seg_helper.c
++++ b/target/i386/tcg/user/seg_helper.c
+@@ -42,7 +42,7 @@ void helper_syscall(CPUX86State *env, int next_eip_addend)
+  * instruction. It is only relevant if is_int is TRUE or if intno
+  * is EXCP_SYSCALL.
+  */
+-static void do_interrupt_user(CPUX86State *env, int intno, int is_int,
++static void do_exception_user(CPUX86State *env, int intno, int is_int,
+                               int error_code, target_ulong next_eip)
+ {
+     if (is_int) {
+@@ -76,7 +76,7 @@ static void do_interrupt_user(CPUX86State *env, int intno, int is_int,
+     }
+ }
+ 
+-void x86_cpu_do_interrupt(CPUState *cs)
++void x86_cpu_fake_user_exception(CPUState *cs)
+ {
+     X86CPU *cpu = X86_CPU(cs);
+     CPUX86State *env = &cpu->env;
+@@ -84,7 +84,7 @@ void x86_cpu_do_interrupt(CPUState *cs)
+     /* if user mode only, we simulate a fake exception
+        which will be handled outside the cpu execution
+        loop */
+-    do_interrupt_user(env, cs->exception_index,
++    do_exception_user(env, cs->exception_index,
+                       env->exception_is_int,
+                       env->error_code,
+                       env->exception_next_eip);
+-- 
+2.53.0
 
 
