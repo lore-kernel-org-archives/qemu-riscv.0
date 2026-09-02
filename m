@@ -4,91 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F586C624D3
-	for <qemu-riscv@archiver.kernel.org>; Wed,  2 Sep 2026 15:23:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCA10C624D4
+	for <qemu-riscv@archiver.kernel.org>; Wed,  2 Sep 2026 15:23:16 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x1mmf-0003RK-1B; Wed, 02 Sep 2026 11:21:53 -0400
+	id 1x1mn0-0004JK-15; Wed, 02 Sep 2026 11:22:14 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1x1mmd-0003Nf-0s
- for qemu-riscv@nongnu.org; Wed, 02 Sep 2026 11:21:51 -0400
-Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
+ id 1x1mmy-0004Gg-Vy
+ for qemu-riscv@nongnu.org; Wed, 02 Sep 2026 11:22:13 -0400
+Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1x1mma-0000In-M9
- for qemu-riscv@nongnu.org; Wed, 02 Sep 2026 11:21:50 -0400
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+ id 1x1mmv-0000Mt-SY
+ for qemu-riscv@nongnu.org; Wed, 02 Sep 2026 11:22:12 -0400
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 682D58ia1076947
- for <qemu-riscv@nongnu.org>; Wed, 2 Sep 2026 15:21:37 GMT
+ 682CRFEW2001738
+ for <qemu-riscv@nongnu.org>; Wed, 2 Sep 2026 15:21:59 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- h2+ZiWw8+5mpW6m21rupiFU1RDmVanI9GjdO6x6eHwo=; b=H6YrUhHjWkcvUm8S
- /qv26Ao2ZGm2l2/ig7AiSwF+J1MavGJGhzF/YmlkyBY0Od2Osj7rbOtPOU7j3fnV
- jItlemjXWAzwQtFZBaAmjw69XA/WkHVzCquXEvUBX9SKObECPr02ic0YXlJWN7aS
- OtBssKygj3A2YnAfcjL0ma8u912GytjQRFNGWtonIppDSNSQBZ60j0IhhrcES4da
- xfSgOGLfpuYHGCbFhgRx8IjeWHvtrJojvInkFBXWLMmrEvibrw2Qm/VYrmu+N7eE
- 6XH7EGtqKDszqt3Z+6vChf34Z264EHdrHp1dKF/hw0nnnPUhBLmENNSMwnKtJhLz
- 8+bndA==
-Received: from mail-vs1-f69.google.com (mail-vs1-f69.google.com
- [209.85.217.69])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gemce8j7s-1
+ SjB+WsiUNVtJNvJVB5dqKRZIiGYlMTYMCAkchDEtNgc=; b=TUDPoA5uCVbKCwsC
+ IMgSPhLFOiV4N7UcK99Sbemz82kwmsh8TXE8cCqZgH+8HyRImfyCMltv0+jBXjD4
+ vET/gdrQ6C5KD86Wc8k/5EpuKwgSAQq4JZxDm1TFsdkdo35bv+ir/dbP24+bubJW
+ FFmGJmmR5/uFHcbB6HPR6yZwVuSKyaH7Iuw/LO/m7/A0v55cymY1CeK4swIPq8uI
+ 5eSRwaYLlAkrV/kicszyzvSD+8bmwF/WcsaZNbb1wuNROGfg3rRPvUxFtd/+kWbt
+ g7T597L6gZ5/FbaLlr5S4HSbAy+AA7CUpRCbX+jXqQCCXvi6iZgWolbKlyp39v5u
+ 1P+F4Q==
+Received: from mail-ua1-f69.google.com (mail-ua1-f69.google.com
+ [209.85.222.69])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4geguy1ffw-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Wed, 02 Sep 2026 15:21:37 +0000 (GMT)
-Received: by mail-vs1-f69.google.com with SMTP id
- ada2fe7eead31-784eaf6cdb7so282597137.3
- for <qemu-riscv@nongnu.org>; Wed, 02 Sep 2026 08:21:37 -0700 (PDT)
+ for <qemu-riscv@nongnu.org>; Wed, 02 Sep 2026 15:21:58 +0000 (GMT)
+Received: by mail-ua1-f69.google.com with SMTP id
+ a1e0cc1a2514c-97ca6578487so755174241.3
+ for <qemu-riscv@nongnu.org>; Wed, 02 Sep 2026 08:21:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1788362496; x=1788967296; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1788362518; x=1788967318; darn=nongnu.org;
  h=content-transfer-encoding:content-type:mime-version:references
  :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=h2+ZiWw8+5mpW6m21rupiFU1RDmVanI9GjdO6x6eHwo=;
- b=Ld2qXcYYvR6hsMcosumUXSfWh73GLMIHN2qr+Ep/cWXRXpHJ42RXaGMdcQ+XnEYhOh
- z+SMA8rVA6WoBpslX5xFTX1SmDe425iZ8ACjm1G0EoMJD5CbAD2px9RHW67tcddcl196
- HeiIIwKy6UBBMW+uq8TlmZBH/VekKs/4wFXLqejzXl6ae5C7Rem5DNhTwUzIMlMBgANY
- AobBsEufXT1yjMlQ+TaGiL1BOeeBCF5HtHbJIiyaL2MxnVduIJS/rG1xpeLlTZoSFw2V
- j0XW4Tl9b787CT3R9Ds59fIn6pKEJu8jfeJ94cA1I4WyqJ9cYjXGQeQ352OxJZpAa0Hw
- aJ7g==
+ bh=SjB+WsiUNVtJNvJVB5dqKRZIiGYlMTYMCAkchDEtNgc=;
+ b=VrN7xDni5XM1kpAi6f9dJhUIGrlsvr6cJ/cnyxp7f056yXQHaogy6vi/nJf9urPwO2
+ OIITDZByOqbo03x2ODl8OeCBPvRR8disE+L5YVZ44gAj2CG6aOIzKTOWyJd0/azfPdJx
+ ePlMev5rNKKivTgIG1svHpjxk9RUc/IT/4vxvevYjSpWi3yAwe00oVW9XY0JJ3HWgur3
+ GXByN3hQMxwq5o6oQBpNBDapr8bnGCkpluq3FfrnbAhIVwM9uwwMBsei50Sa7M/Jhtdy
+ i0ph6+4R6vsid1e4N87PIHSAd7XBUkGdBtBpB841BdOtLgeQViu/n4ugvl+EGMKTu+7Z
+ 8VZg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788362496; x=1788967296;
+ d=1e100.net; s=20251104; t=1788362518; x=1788967318;
  h=content-transfer-encoding:content-type:mime-version:references
  :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=h2+ZiWw8+5mpW6m21rupiFU1RDmVanI9GjdO6x6eHwo=;
- b=sp+6ZAfTqgeLJ4zK3Lf1QGKnHakXLzyQT7HQ04I47W32Cl23E8pt3RKLyjN9rgH1hx
- Imqh+Q4uCwcjzjpjuID80W802NNNUIM0YzaLFPAg8DqeiNSUCJyoKZl+Q8WsezOwV9Vn
- ALkyKP2DEs5acKvuyasoj3yTDpyHI49IKE7PhjQ1HWSJYwZDP8vVfA/gi6geEPGazcGh
- LRQOBqDC4KfyVlTT1p/TAVp6DA8ZttLoiT/LzLT2paWTrO7v50YvzM34CgrBDk/24XBc
- Jszqb54Rk5MQ16xU9ulRoLF3A2J3VnP6H2adqAmX77+zEuaNw7sO/PvqxkXILSlXKgjQ
- hIfA==
+ bh=SjB+WsiUNVtJNvJVB5dqKRZIiGYlMTYMCAkchDEtNgc=;
+ b=Gq/8jnxzT6Xcz67CuEUkjGVOEeTOy53sOog1o0phG8IWsJm9gKYhuu4vnvJ3FG3UUQ
+ sxq4WKSxGIxK0TDnec1wN4kJ2E3uqA5mCiU46CQuAc6C44ABeGHsHTMWqNLCm4XQi63H
+ KO/nMFsMX18zewE8weNmDN2D6ZLjneNlTaEjyNhBcVBhlFgj7nKmnxn6A0hvscF01g5z
+ I+43M46N/qp5QxLUYXH+OAOlLtaJ3STzI9100I78R6U4SHWVURYHKTW105ZgC2JLFmOA
+ SJaF72gEyw/Ip92bc8rbYzezH1eCBe1RvKMaYfRQBl9mPyNCzbomCGFw2EjTWYEDanXd
+ vgXQ==
 X-Forwarded-Encrypted: i=1;
- AKwUvBwN34j/jKNmUSr68jwD5rdF1hvZkxa3KtF+SspygmeDaZQ5V66hX38z56vQEY6FNyPDk9i7uHcw2oTn@nongnu.org
-X-Gm-Message-State: AFuF++lMOVR2U+XIs8MtHoFxR5+b1Bkx1tJGWXjFW6ZBOr7qoD8Gj8Om
- 7nMIC+T2z2stfQh38l19cyqQ3cwMK5XOfJKcT+WnGx6n28eMFSQQmZQRTeY7rkQOCIG0qKW2mov
- bLZEp17Lzy1sS2iZb6RiE84/xTHAsnyGcrHxNP8qDQXHczVu9H1MXa1XNcw==
-X-Gm-Gg: AYBFou26/OfwN3MZx1yKedh0bAKKBri9kmT0GEsd8TbI7gAg5wgiWFg8d/T9uh5t0ji
- WHdxZP94BFShej4lFZO5sZdzYUnbbVXfa7CpevBbc3lRTm/dt9p+Bx7lOgiLciNqTcGY2uTKnDk
- qKpxl+7c9j1bOzrBKrzqHXAmPqui6oM5dF/Wg54wDoe9ImpNZzA6SJ4SKKZR6AsG9Z1zJ5+6DY/
- ho316Uo9Y4GrZqqxCe6XHsKR/+8Tu4cNcy5aTRfvE2/INn7GtFPsMUGVrffROdmIZZlyBh1Xthd
- 875PMLek/DNnB8MNgyKkOUeT3Ge8p8Pu622os/LvulziyQ8w4wSj7lPNII0nNQM0twZ1Jeu9A3f
- rgRNj8sMkB0gLYvgP8oF0OO35QKR/rDM84Skh0a78
-X-Received: by 2002:a05:6102:14a5:b0:784:94dd:5389 with SMTP id
- ada2fe7eead31-78a1f3954bfmr1681506137.13.1788362495973; 
- Wed, 02 Sep 2026 08:21:35 -0700 (PDT)
-X-Received: by 2002:a05:6102:14a5:b0:784:94dd:5389 with SMTP id
- ada2fe7eead31-78a1f3954bfmr1681490137.13.1788362495303; 
- Wed, 02 Sep 2026 08:21:35 -0700 (PDT)
+ AKwUvBwWK7xhszEJ2iSTb93xCGtJ6O4N7rchEvM4OR11hH6VJFTYZum93Rflx+POCbZzIReJo7xzKwvo+ywy@nongnu.org
+X-Gm-Message-State: AFuF++nYnYt+khEoKqbXlznwocVwDWx/F7HSa/29gL0VugoG4kfaLPiG
+ jky2Q4ie9p5T9HgacpFEA42I0uO2qVMUa2G+bAyDFmpMzxTP9tdo6uDIBf+QZhJiWQHnruEPAvh
+ mhkWp8p89+pqMk8+F6GyyNLjimPBQ6fW1yOOH2yQB2KdiGL0B1Nud0pI4zA==
+X-Gm-Gg: AYBFou2HRNdgcImzCyjOBjj7lRWegkUH1WfcheoyAIaYWmBQCPqcTfs6aIUiBY2/KsR
+ PUZ0CU4aqMuB68MZSy32edX0BajC56bwl7wd5aKjtvg3/gncUucjtzsASlT3vxg+dZoHz2r+77a
+ /wkrF/SO0kfBMzueISH8BaFiPqULFAfHHtpW7MAdUpLc7pQgcMTknZ683c/5ENbtBcAiqoP+Xj0
+ aZv6CIwd2/WV4niz6ACdfIhPGiLKATFuY3YyEweLnt91Lo3MK7m64fkkHcoIs69YTP1SeDafNgy
+ zhWNqo+6KMjytnIoATo80xL5yx9+fuNH0UU4HjLZwDAWKRA/8DVWwd2PmcWxBT9R54s3tDRROqd
+ maOUvsUdrjqdgQ88mQZoDTHuAL0Sxys0/VcLmpQoS
+X-Received: by 2002:a05:6102:4243:b0:786:e7a0:603e with SMTP id
+ ada2fe7eead31-78a1f233cb6mr2343298137.7.1788362518031; 
+ Wed, 02 Sep 2026 08:21:58 -0700 (PDT)
+X-Received: by 2002:a05:6102:4243:b0:786:e7a0:603e with SMTP id
+ ada2fe7eead31-78a1f233cb6mr2343259137.7.1788362517484; 
+ Wed, 02 Sep 2026 08:21:57 -0700 (PDT)
 Received: from localhost.localdomain (pmd666.hd.free.fr. [88.187.86.199])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49cdce0b456sm178993705e9.2.2026.09.02.08.21.32
+ 5b1f17b1804b1-49ce309e418sm97965215e9.13.2026.09.02.08.21.55
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Wed, 02 Sep 2026 08:21:34 -0700 (PDT)
+ Wed, 02 Sep 2026 08:21:56 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
 To: qemu-devel@nongnu.org
 Cc: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
@@ -97,71 +97,50 @@ Cc: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
  qemu-s390x@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
  Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
  qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
- Robert Foley <robert.foley@linaro.org>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
- Michael Rolnik <mrolnik@gmail.com>,
- Brian Cain <brian.cain@oss.qualcomm.com>, Helge Deller <deller@gmx.de>,
  Song Gao <17746591750@163.com>, Bibo Mao <maobibo@loongson.cn>,
  Xianglai Li <lixianglai@loongson.cn>, Laurent Vivier <laurent@vivier.eu>,
  "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@mailo.com>,
- Aurelien Jarno <aurelien@aurel32.net>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Aleksandar Rikalo <arikalo@gmail.com>,
- Stafford Horne <shorne@gmail.com>, Chinmay Rath <rathc@linux.ibm.com>,
- Nicholas Piggin <npiggin@gmail.com>, Glenn Miles <milesg@linux.ibm.com>,
- Harsh Prateek Bora <harshpb@linux.ibm.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu@processmission.com>,
- Yoshinori Sato <yoshinori.sato@nifty.com>,
- Cornelia Huck <cohuck@redhat.com>, Eric Farman <farman@linux.ibm.com>,
- Matthew Rosato <mjrosato@linux.ibm.com>,
- Ilya Leoshkevich <iii@linux.ibm.com>, David Hildenbrand <david@kernel.org>,
- Artyom Tarasenko <atar4qemu@gmail.com>, Max Filippov <jcmvbkbc@gmail.com>
-Subject: [PATCH v3 06/11] accel/tcg: Rename do_interrupt() to
- do_interrupt_locked()
-Date: Wed,  2 Sep 2026 17:20:37 +0200
-Message-ID: <20260902152044.31291-7-philmd@oss.qualcomm.com>
+ Stafford Horne <shorne@gmail.com>
+Subject: [RFC PATCH v3 09/11] targets: Move interrupt handlers to
+ do_interrupt()
+Date: Wed,  2 Sep 2026 17:20:40 +0200
+Message-ID: <20260902152044.31291-10-philmd@oss.qualcomm.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260902152044.31291-1-philmd@oss.qualcomm.com>
 References: <20260902152044.31291-1-philmd@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTAyMDEzNiBTYWx0ZWRfX1QRFn6pTB4dM
- Tah8ppWnFgqAJG3CgmOajlYBIBwIWaN1K9k+KseKgsmGOq+dCa8VTCaGYNTJn7+vQ3KcSqsl1Yp
- NNv9ZNCP1dcAV3GR2eONAcCzeT5oY9qn7Owzmz9SeXcZo9EAaSQ5D+ZwfLWg7I5GPJRPy+5Zh7G
- q6L+/tlP/HYVz2j0qJpj/k3ARLC7r5Rj+GsBl1hAhrQO+UQceN+NFKDc0u7q+ixkecSDjjGqVtm
- yR5klGBXQgT6EuIGitzRGL8OU7DG93i10KBWiS90FBzRzereCNSHrsmF5YRaeyH7evyqeIwH4WQ
- u35TYwKS8WQIFJub0BcepCAtRVHhQD7JYP+GR3hsHhEKJ0tLBAbn+w/i6KCfpoSHQU3maR6uVEg
- zIGvDt2UF1InUHM5psbFgxPiN8jkhj0X7TyqLIdCBIW0j1/G1BLLvqa/6OvvmtNpMkcTFZXVBth
- T7zp77I6JM2tdJL7NsQ==
-X-Proofpoint-ORIG-GUID: LhBKPcrSMm21xYZy1V_3tae_wJiCbPKE
-X-Authority-Analysis: v=2.4 cv=QfpWeMbv c=1 sm=1 tr=0 ts=6a983f01 cx=c_pps
- a=5HAIKLe1ejAbszaTRHs9Ug==:117 a=4s3hRJSeHn4rkQlkrse1kQ==:17
+X-Authority-Analysis: v=2.4 cv=UZthjqSN c=1 sm=1 tr=0 ts=6a983f16 cx=c_pps
+ a=UbhLPJ621ZpgOD2l3yZY1w==:117 a=4s3hRJSeHn4rkQlkrse1kQ==:17
  a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=M51BFTxLslgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
- a=KKAkSRfTAAAA:8 a=20KFwNOVAAAA:8 a=EUspDBNiAAAA:8 a=2r7OHPqeXRgJTkdu1hoA:9
- a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10 a=gYDTvv6II1OnSo0itH1n:22
- a=cvBusfyB2V15izCimMoJ:22
-X-Proofpoint-GUID: LhBKPcrSMm21xYZy1V_3tae_wJiCbPKE
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTAyMDEzNiBTYWx0ZWRfX95JeVeRxVQ6b
- mRSXJpdSc6EXCVDye7bxBw11vdyruTs5d4GQ+eB3QGnl7QExYkPTtVUe2ik2s3p8x2gQ47SfrEH
- 4LcDlFLkcqQg83RylgPGxXJEsKGDM0s=
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
+ a=EUspDBNiAAAA:8 a=-wU1GuQjd2BOtWieTlsA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=TOPH6uDL9cOC6tEoww4z:22
+X-Proofpoint-GUID: kApkT5oERhhzrVVed29OmngRy5RqNaIH
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTAyMDEzNiBTYWx0ZWRfXxI4ArpX+rytB
+ xl3C+orC2LWubww8EdBPvXeWp6QBBcxpOYrOVxBayUNd/J+5K6WQsUbmKIL4wBXkLWU8n8d2T+o
+ NKYpaUXqEKM5aM8kGg5vuE0jg8OcNj0=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTAyMDEzNiBTYWx0ZWRfXyE/9enaSbS8Y
+ Poe88ff7drTatRnXpPyCBm9Sf1lfeStFIlOB0kIUBNV3Lz3uDX7iPMeiigOx6wsGZJaB2Znza6q
+ LyUCT7Ngp7AICi/fdYTJROorflgsV0McQw1vm7V/p3hU12YU6VX5AgX8G1cQMRPJNdR0bzHDlWm
+ CB1FpwYix7v9aE2w9fVFR1IvxxlBSyzzLNOsDdLy8jMfKCPPVHgh6sLCNty7N7YcHH4xg72ZbpC
+ S+HvwlkVfl4ycS+IS3HQxBkRW2QeexSjLo1f3+svMAtkp7JuUPJYDUoj1VpTVjG5ETclSC0Zx0h
+ TFC4zus0EXeJR84SA9p59d44zfR2AOfNNozgtzmHo6nUIloUxzyPXM/XlYp4hNq2x2TRq82jSyp
+ RcVZyGVuZvCOMcuNqXpKiIaH3tT6ULE28Ln6DE2xy2nDq/nMPZnEWYpf6zZUyGylwh4LpYEYHsT
+ R9nQQh6DN7Q/VziAM5A==
+X-Proofpoint-ORIG-GUID: kApkT5oERhhzrVVed29OmngRy5RqNaIH
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-02_03,2026-09-01_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 impostorscore=0 bulkscore=0 phishscore=0 suspectscore=0
- lowpriorityscore=0 malwarescore=0 adultscore=0 clxscore=1015 spamscore=0
+ suspectscore=0 bulkscore=0 impostorscore=0 adultscore=0 malwarescore=0
+ lowpriorityscore=0 spamscore=0 clxscore=1015 phishscore=0 priorityscore=1501
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609020136
-Received-SPF: pass client-ip=205.220.168.131;
- envelope-from=philmd@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
+Received-SPF: pass client-ip=205.220.180.131;
+ envelope-from=philmd@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
 X-Spam_score_int: -27
 X-Spam_score: -2.8
 X-Spam_bar: --
@@ -184,332 +163,70 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Robert Foley <robert.foley@linaro.org>
+LoongArch, M68K, MicroBlaze, and OpenRISC interrupt handlers
+don't require external BQL protection, so move them from
+do_interrupt_locked() to do_interrupt().
 
-Prepare for pushing BQL locking down to per-target implementations.
-The old do_interrupt() name will later be reused for a wrapper that
-acquires BQL and calls do_interrupt_locked(), enabling targets to
-eventually remove BQL from the cpu_handle_interrupt/exception paths.
-
-Suggested-by: Paolo Bonzini <pbonzini@redhat.com>
-Signed-off-by: Robert Foley <robert.foley@linaro.org>
-[PMD: Rebased and reworded description]
 Signed-off-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
 ---
- include/accel/tcg/cpu-ops.h    | 4 ++--
- accel/tcg/cpu-exec.c           | 4 ++--
- target/alpha/cpu.c             | 2 +-
- target/arm/cpu.c               | 2 +-
- target/arm/tcg/cpu-v7m.c       | 2 +-
- target/avr/cpu.c               | 2 +-
- target/hexagon/cpu.c           | 2 +-
- target/hppa/cpu.c              | 2 +-
- target/i386/tcg/tcg-cpu.c      | 2 +-
  target/loongarch/tcg/tcg_cpu.c | 2 +-
  target/m68k/cpu.c              | 2 +-
  target/microblaze/cpu.c        | 2 +-
- target/mips/cpu.c              | 2 +-
  target/or1k/cpu.c              | 2 +-
- target/ppc/cpu_init.c          | 2 +-
- target/riscv/tcg/tcg-cpu.c     | 2 +-
- target/rx/cpu.c                | 2 +-
- target/s390x/cpu.c             | 2 +-
- target/sh4/cpu.c               | 2 +-
- target/sparc/cpu.c             | 2 +-
- target/xtensa/cpu.c            | 2 +-
- 21 files changed, 23 insertions(+), 23 deletions(-)
+ 4 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/include/accel/tcg/cpu-ops.h b/include/accel/tcg/cpu-ops.h
-index 13df70eaa9f..2e97f79a373 100644
---- a/include/accel/tcg/cpu-ops.h
-+++ b/include/accel/tcg/cpu-ops.h
-@@ -170,7 +170,7 @@ struct TCGCPUOps {
-     vaddr (*untagged_addr)(CPUState *cs, vaddr addr);
- #else
-     /**
--     * @do_interrupt: Deliver a pending exception/interrupt to the CPU
-+     * @do_interrupt_locked: Deliver a pending exception/interrupt to the CPU
-      * @cpu: cpu context
-      *
-      * Called when cs->exception_index contains an exception code to deliver.
-@@ -179,7 +179,7 @@ struct TCGCPUOps {
-      *
-      * Called from cpu_handle_exception() with BQL held.
-      */
--    void (*do_interrupt)(CPUState *cpu);
-+    void (*do_interrupt_locked)(CPUState *cpu);
- 
-     /**
-      * @cpu_exec_interrupt: Callback for processing target-specific interrupts
-diff --git a/accel/tcg/cpu-exec.c b/accel/tcg/cpu-exec.c
-index 2fae2c024b8..8d9c203f222 100644
---- a/accel/tcg/cpu-exec.c
-+++ b/accel/tcg/cpu-exec.c
-@@ -728,7 +728,7 @@ static inline bool cpu_handle_exception(CPUState *cpu, int *ret)
-         const TCGCPUOps *tcg_ops = cpu->cc->tcg_ops;
- 
-         bql_lock();
--        tcg_ops->do_interrupt(cpu);
-+        tcg_ops->do_interrupt_locked(cpu);
-         bql_unlock();
-         cpu->exception_index = -1;
- 
-@@ -1059,7 +1059,7 @@ bool tcg_exec_realizefn(CPUState *cpu, Error **errp)
-         assert(tcg_ops->cpu_exec_halt);
-         assert(tcg_ops->cpu_exec_interrupt);
-         assert(tcg_ops->cpu_exec_reset);
--        assert(tcg_ops->do_interrupt);
-+        assert(tcg_ops->do_interrupt_locked);
-         assert(tcg_ops->pointer_wrap);
- #endif /* !CONFIG_USER_ONLY */
-         assert(tcg_ops->translate_code);
-diff --git a/target/alpha/cpu.c b/target/alpha/cpu.c
-index 12e86021663..aca9e82bfb2 100644
---- a/target/alpha/cpu.c
-+++ b/target/alpha/cpu.c
-@@ -267,7 +267,7 @@ static const TCGCPUOps alpha_tcg_ops = {
-     .cpu_exec_interrupt = alpha_cpu_exec_interrupt,
-     .cpu_exec_halt = alpha_cpu_has_work,
-     .cpu_exec_reset = cpu_reset,
--    .do_interrupt = alpha_cpu_do_interrupt,
-+    .do_interrupt_locked = alpha_cpu_do_interrupt,
-     .do_transaction_failed = alpha_cpu_do_transaction_failed,
-     .do_unaligned_access = alpha_cpu_do_unaligned_access,
- #endif /* !CONFIG_USER_ONLY */
-diff --git a/target/arm/cpu.c b/target/arm/cpu.c
-index 77aa78f00e2..0d0555b7ad4 100644
---- a/target/arm/cpu.c
-+++ b/target/arm/cpu.c
-@@ -2606,7 +2606,7 @@ static const TCGCPUOps arm_tcg_ops = {
-     .cpu_exec_interrupt = arm_cpu_exec_interrupt,
-     .cpu_exec_halt = arm_cpu_exec_halt,
-     .cpu_exec_reset = cpu_reset,
--    .do_interrupt = arm_cpu_do_interrupt,
-+    .do_interrupt_locked = arm_cpu_do_interrupt,
-     .do_transaction_failed = arm_cpu_do_transaction_failed,
-     .do_unaligned_access = arm_cpu_do_unaligned_access,
-     .adjust_watchpoint_address = arm_adjust_watchpoint_address,
-diff --git a/target/arm/tcg/cpu-v7m.c b/target/arm/tcg/cpu-v7m.c
-index 502998dbd1c..1f698b70283 100644
---- a/target/arm/tcg/cpu-v7m.c
-+++ b/target/arm/tcg/cpu-v7m.c
-@@ -304,7 +304,7 @@ static const TCGCPUOps arm_v7m_tcg_ops = {
-     .cpu_exec_interrupt = arm_v7m_cpu_exec_interrupt,
-     .cpu_exec_halt = arm_cpu_exec_halt,
-     .cpu_exec_reset = cpu_reset,
--    .do_interrupt = arm_v7m_cpu_do_interrupt,
-+    .do_interrupt_locked = arm_v7m_cpu_do_interrupt,
-     .do_transaction_failed = arm_cpu_do_transaction_failed,
-     .do_unaligned_access = arm_cpu_do_unaligned_access,
-     .adjust_watchpoint_address = arm_adjust_watchpoint_address,
-diff --git a/target/avr/cpu.c b/target/avr/cpu.c
-index f8409f32ab9..bc7639031b8 100644
---- a/target/avr/cpu.c
-+++ b/target/avr/cpu.c
-@@ -249,7 +249,7 @@ static const TCGCPUOps avr_tcg_ops = {
-     .cpu_exec_halt = avr_cpu_has_work,
-     .cpu_exec_reset = cpu_reset,
-     .tlb_fill = avr_cpu_tlb_fill,
--    .do_interrupt = avr_cpu_do_interrupt,
-+    .do_interrupt_locked = avr_cpu_do_interrupt,
-     /*
-      * TODO: code and data wrapping are different, but for the most part
-      * AVR only references bytes or aligned code fetches.  But we use
-diff --git a/target/hexagon/cpu.c b/target/hexagon/cpu.c
-index 7067e5b70f7..b5dcbfc99db 100644
---- a/target/hexagon/cpu.c
-+++ b/target/hexagon/cpu.c
-@@ -769,7 +769,7 @@ static const TCGCPUOps hexagon_tcg_ops = {
-     .tlb_fill = hexagon_tlb_fill,
-     .do_unaligned_access = hexagon_cpu_do_unaligned_access,
-     .cpu_exec_halt = hexagon_cpu_has_work,
--    .do_interrupt = hexagon_cpu_do_interrupt,
-+    .do_interrupt_locked = hexagon_cpu_do_interrupt,
- #endif /* !CONFIG_USER_ONLY */
- };
- 
-diff --git a/target/hppa/cpu.c b/target/hppa/cpu.c
-index 07b49e51326..c6d915d314f 100644
---- a/target/hppa/cpu.c
-+++ b/target/hppa/cpu.c
-@@ -272,7 +272,7 @@ static const TCGCPUOps hppa_tcg_ops = {
-     .cpu_exec_interrupt = hppa_cpu_exec_interrupt,
-     .cpu_exec_halt = hppa_cpu_has_work,
-     .cpu_exec_reset = cpu_reset,
--    .do_interrupt = hppa_cpu_do_interrupt,
-+    .do_interrupt_locked = hppa_cpu_do_interrupt,
-     .do_unaligned_access = hppa_cpu_do_unaligned_access,
-     .do_transaction_failed = hppa_cpu_do_transaction_failed,
- #endif /* !CONFIG_USER_ONLY */
-diff --git a/target/i386/tcg/tcg-cpu.c b/target/i386/tcg/tcg-cpu.c
-index 7a4d73e7fee..ff65641654d 100644
---- a/target/i386/tcg/tcg-cpu.c
-+++ b/target/i386/tcg/tcg-cpu.c
-@@ -179,7 +179,7 @@ const TCGCPUOps x86_tcg_ops = {
- #else
-     .tlb_fill = x86_cpu_tlb_fill,
-     .pointer_wrap = x86_pointer_wrap,
--    .do_interrupt = x86_cpu_do_interrupt,
-+    .do_interrupt_locked = x86_cpu_do_interrupt,
-     .cpu_exec_halt = x86_cpu_exec_halt,
-     .cpu_exec_interrupt = x86_cpu_exec_interrupt,
-     .cpu_exec_reset = x86_cpu_exec_reset,
 diff --git a/target/loongarch/tcg/tcg_cpu.c b/target/loongarch/tcg/tcg_cpu.c
-index 4b1d44a1644..6455ae0c99a 100644
+index 6455ae0c99a..4b1d44a1644 100644
 --- a/target/loongarch/tcg/tcg_cpu.c
 +++ b/target/loongarch/tcg/tcg_cpu.c
 @@ -329,7 +329,7 @@ const TCGCPUOps loongarch_tcg_ops = {
      .cpu_exec_interrupt = loongarch_cpu_exec_interrupt,
      .cpu_exec_halt = loongarch_cpu_has_work,
      .cpu_exec_reset = cpu_reset,
--    .do_interrupt = loongarch_cpu_do_interrupt,
-+    .do_interrupt_locked = loongarch_cpu_do_interrupt,
+-    .do_interrupt_locked = loongarch_cpu_do_interrupt,
++    .do_interrupt = loongarch_cpu_do_interrupt,
      .do_transaction_failed = loongarch_cpu_do_transaction_failed,
  #endif
  };
 diff --git a/target/m68k/cpu.c b/target/m68k/cpu.c
-index 9b52ad5fc23..85496deff67 100644
+index 85496deff67..9b52ad5fc23 100644
 --- a/target/m68k/cpu.c
 +++ b/target/m68k/cpu.c
 @@ -712,7 +712,7 @@ static const TCGCPUOps m68k_tcg_ops = {
      .cpu_exec_interrupt = m68k_cpu_exec_interrupt,
      .cpu_exec_halt = m68k_cpu_has_work,
      .cpu_exec_reset = cpu_reset,
--    .do_interrupt = m68k_cpu_do_interrupt,
-+    .do_interrupt_locked = m68k_cpu_do_interrupt,
+-    .do_interrupt_locked = m68k_cpu_do_interrupt,
++    .do_interrupt = m68k_cpu_do_interrupt,
      .do_transaction_failed = m68k_cpu_transaction_failed,
  #endif /* !CONFIG_USER_ONLY */
  };
 diff --git a/target/microblaze/cpu.c b/target/microblaze/cpu.c
-index 389a5124b12..649bcebf703 100644
+index 649bcebf703..389a5124b12 100644
 --- a/target/microblaze/cpu.c
 +++ b/target/microblaze/cpu.c
 @@ -450,7 +450,7 @@ static const TCGCPUOps mb_tcg_ops = {
      .cpu_exec_interrupt = mb_cpu_exec_interrupt,
      .cpu_exec_halt = mb_cpu_has_work,
      .cpu_exec_reset = cpu_reset,
--    .do_interrupt = mb_cpu_do_interrupt,
-+    .do_interrupt_locked = mb_cpu_do_interrupt,
+-    .do_interrupt_locked = mb_cpu_do_interrupt,
++    .do_interrupt = mb_cpu_do_interrupt,
      .do_transaction_failed = mb_cpu_transaction_failed,
      .do_unaligned_access = mb_cpu_do_unaligned_access,
  #endif /* !CONFIG_USER_ONLY */
-diff --git a/target/mips/cpu.c b/target/mips/cpu.c
-index 0fead20d651..073e466b713 100644
---- a/target/mips/cpu.c
-+++ b/target/mips/cpu.c
-@@ -718,7 +718,7 @@ static const TCGCPUOps mips_tcg_ops = {
-     .cpu_exec_interrupt = mips_cpu_exec_interrupt,
-     .cpu_exec_halt = mips_cpu_has_work,
-     .cpu_exec_reset = cpu_reset,
--    .do_interrupt = mips_cpu_do_interrupt,
-+    .do_interrupt_locked = mips_cpu_do_interrupt,
-     .do_transaction_failed = mips_cpu_do_transaction_failed,
-     .do_unaligned_access = mips_cpu_do_unaligned_access,
-     .io_recompile_replay_branch = mips_io_recompile_replay_branch,
 diff --git a/target/or1k/cpu.c b/target/or1k/cpu.c
-index 66c00c0930c..83dc071c180 100644
+index 83dc071c180..66c00c0930c 100644
 --- a/target/or1k/cpu.c
 +++ b/target/or1k/cpu.c
 @@ -268,7 +268,7 @@ static const TCGCPUOps openrisc_tcg_ops = {
      .cpu_exec_interrupt = openrisc_cpu_exec_interrupt,
      .cpu_exec_halt = openrisc_cpu_has_work,
      .cpu_exec_reset = cpu_reset,
--    .do_interrupt = openrisc_cpu_do_interrupt,
-+    .do_interrupt_locked = openrisc_cpu_do_interrupt,
+-    .do_interrupt_locked = openrisc_cpu_do_interrupt,
++    .do_interrupt = openrisc_cpu_do_interrupt,
  #endif /* !CONFIG_USER_ONLY */
  };
  
-diff --git a/target/ppc/cpu_init.c b/target/ppc/cpu_init.c
-index 6c626843c93..2676562b2f1 100644
---- a/target/ppc/cpu_init.c
-+++ b/target/ppc/cpu_init.c
-@@ -7498,7 +7498,7 @@ static const TCGCPUOps ppc_tcg_ops = {
-   .cpu_exec_interrupt = ppc_cpu_exec_interrupt,
-   .cpu_exec_halt = ppc_cpu_has_work,
-   .cpu_exec_reset = cpu_reset,
--  .do_interrupt = ppc_cpu_do_interrupt,
-+  .do_interrupt_locked = ppc_cpu_do_interrupt,
-   .cpu_exec_enter = ppc_cpu_exec_enter,
-   .cpu_exec_exit = ppc_cpu_exec_exit,
-   .do_unaligned_access = ppc_cpu_do_unaligned_access,
-diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-index 9e3cc87f8a3..ea3189ab3d2 100644
---- a/target/riscv/tcg/tcg-cpu.c
-+++ b/target/riscv/tcg/tcg-cpu.c
-@@ -289,7 +289,7 @@ const TCGCPUOps riscv_tcg_ops = {
-     .cpu_exec_interrupt = riscv_cpu_exec_interrupt,
-     .cpu_exec_halt = riscv_cpu_has_work,
-     .cpu_exec_reset = cpu_reset,
--    .do_interrupt = riscv_cpu_do_interrupt,
-+    .do_interrupt_locked = riscv_cpu_do_interrupt,
-     .do_transaction_failed = riscv_cpu_do_transaction_failed,
-     .do_unaligned_access = riscv_cpu_do_unaligned_access,
-     .debug_excp_handler = riscv_cpu_debug_excp_handler,
-diff --git a/target/rx/cpu.c b/target/rx/cpu.c
-index 9b8473d71cf..ea58a804154 100644
---- a/target/rx/cpu.c
-+++ b/target/rx/cpu.c
-@@ -229,7 +229,7 @@ static const TCGCPUOps rx_tcg_ops = {
-     .cpu_exec_interrupt = rx_cpu_exec_interrupt,
-     .cpu_exec_halt = rx_cpu_has_work,
-     .cpu_exec_reset = cpu_reset,
--    .do_interrupt = rx_cpu_do_interrupt,
-+    .do_interrupt_locked = rx_cpu_do_interrupt,
- };
- 
- static void rx_cpu_class_init(ObjectClass *klass, const void *data)
-diff --git a/target/s390x/cpu.c b/target/s390x/cpu.c
-index 7c725b8a4a4..053eafaa842 100644
---- a/target/s390x/cpu.c
-+++ b/target/s390x/cpu.c
-@@ -386,7 +386,7 @@ static const TCGCPUOps s390_tcg_ops = {
-     .cpu_exec_interrupt = s390_cpu_exec_interrupt,
-     .cpu_exec_halt = s390_cpu_has_work,
-     .cpu_exec_reset = cpu_reset,
--    .do_interrupt = s390_cpu_do_interrupt,
-+    .do_interrupt_locked = s390_cpu_do_interrupt,
-     .debug_excp_handler = s390x_cpu_debug_excp_handler,
-     .do_unaligned_access = s390x_cpu_do_unaligned_access,
- #endif /* !CONFIG_USER_ONLY */
-diff --git a/target/sh4/cpu.c b/target/sh4/cpu.c
-index 3bbdee301d5..fdab5106b27 100644
---- a/target/sh4/cpu.c
-+++ b/target/sh4/cpu.c
-@@ -314,7 +314,7 @@ static const TCGCPUOps superh_tcg_ops = {
-     .cpu_exec_interrupt = superh_cpu_exec_interrupt,
-     .cpu_exec_halt = superh_cpu_has_work,
-     .cpu_exec_reset = cpu_reset,
--    .do_interrupt = superh_cpu_do_interrupt,
-+    .do_interrupt_locked = superh_cpu_do_interrupt,
-     .do_unaligned_access = superh_cpu_do_unaligned_access,
-     .io_recompile_replay_branch = superh_io_recompile_replay_branch,
- #endif /* !CONFIG_USER_ONLY */
-diff --git a/target/sparc/cpu.c b/target/sparc/cpu.c
-index ae9bdca9df8..23fd0a5e3fe 100644
---- a/target/sparc/cpu.c
-+++ b/target/sparc/cpu.c
-@@ -1076,7 +1076,7 @@ static const TCGCPUOps sparc_tcg_ops = {
-     .cpu_exec_interrupt = sparc_cpu_exec_interrupt,
-     .cpu_exec_halt = sparc_cpu_has_work,
-     .cpu_exec_reset = cpu_reset,
--    .do_interrupt = sparc_cpu_do_interrupt,
-+    .do_interrupt_locked = sparc_cpu_do_interrupt,
-     .do_transaction_failed = sparc_cpu_do_transaction_failed,
-     .do_unaligned_access = sparc_cpu_do_unaligned_access,
- #endif /* !CONFIG_USER_ONLY */
-diff --git a/target/xtensa/cpu.c b/target/xtensa/cpu.c
-index 7c25b9ab707..e980a13eadd 100644
---- a/target/xtensa/cpu.c
-+++ b/target/xtensa/cpu.c
-@@ -327,7 +327,7 @@ static const TCGCPUOps xtensa_tcg_ops = {
-     .cpu_exec_interrupt = xtensa_cpu_exec_interrupt,
-     .cpu_exec_halt = xtensa_cpu_has_work,
-     .cpu_exec_reset = cpu_reset,
--    .do_interrupt = xtensa_cpu_do_interrupt,
-+    .do_interrupt_locked = xtensa_cpu_do_interrupt,
-     .do_transaction_failed = xtensa_cpu_do_transaction_failed,
-     .do_unaligned_access = xtensa_cpu_do_unaligned_access,
-     .debug_check_breakpoint = xtensa_debug_check_breakpoint,
 -- 
 2.53.0
 
