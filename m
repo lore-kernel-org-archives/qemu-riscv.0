@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C789BC61DD3
-	for <qemu-riscv@archiver.kernel.org>; Thu,  3 Sep 2026 05:54:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E74AC624D4
+	for <qemu-riscv@archiver.kernel.org>; Thu,  3 Sep 2026 05:54:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x20Oe-0008TP-PM; Thu, 03 Sep 2026 01:54:01 -0400
+	id 1x20Nm-0006ax-97; Thu, 03 Sep 2026 01:53:06 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1x20OZ-0008Oo-Hz
- for qemu-riscv@nongnu.org; Thu, 03 Sep 2026 01:53:55 -0400
-Received: from mail-pf1-x42f.google.com ([2607:f8b0:4864:20::42f])
+ id 1x20Nk-0006a9-15
+ for qemu-riscv@nongnu.org; Thu, 03 Sep 2026 01:53:04 -0400
+Received: from mail-pj1-x1032.google.com ([2607:f8b0:4864:20::1032])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1x20OX-0006XC-Vu
- for qemu-riscv@nongnu.org; Thu, 03 Sep 2026 01:53:55 -0400
-Received: by mail-pf1-x42f.google.com with SMTP id
- d2e1a72fcca58-853c401326eso1223638b3a.2
- for <qemu-riscv@nongnu.org>; Wed, 02 Sep 2026 22:53:52 -0700 (PDT)
+ id 1x20Ni-0006QD-Fk
+ for qemu-riscv@nongnu.org; Thu, 03 Sep 2026 01:53:03 -0400
+Received: by mail-pj1-x1032.google.com with SMTP id
+ 98e67ed59e1d1-398c1101c1bso2280704a91.1
+ for <qemu-riscv@nongnu.org>; Wed, 02 Sep 2026 22:52:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1788414832; x=1789019632; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:sender:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=x1RKetAYUO6DQYUtxx7Wjswe/LX2S4835vuil13oPxY=;
- b=FsAMsirK0sKPSOEtisTMw0vKvlmkqX0IbVoqPNbDyEHE+S6FmbcFO9601s9+M/LdD0
- w2IZ6lW4bD7aSfh0Y1EMJRxN6VoRsfMYARYmMfoXqBkOYRkXMc5iPqyyIJTXZOPEpiBD
- TAgoL3ld2XwRVv1/Wk+Hhr6KfGu5nFGLhUa6liDk8ja7H7KV7BdsslUxUNI4CwZzprAV
- 0iGN5OTwRq3aXA2HzBBBzqfW/TC9l55q9037BwHcWprvyNXJmkU2ZcEYn3r75Wd9x5LR
- 3+8Gdide+TpjfIhscePNEZ32h1W7u+PVCSsWoBrflm9B2ZV+LNFDPjpoOWKz+Ol1/9xP
- gj+w==
+ d=gmail.com; s=20251104; t=1788414777; x=1789019577; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:mime-version:references
+ :in-reply-to:message-id:date:subject:cc:to:from:sender:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=Y8EVb0wo7FJ2wKANnrIolOje3sbSNMFNHjbGc+3Puiw=;
+ b=mM58JECN5DGv9o7aa+6so17F7nbSWqRMRyTapcCmwvMXn7i4FTreJDByGXGUfpBXpb
+ K684cUe55ymysnAqylbF9UUNVunANrwAqgxQokLAfCooekJ2bGM1l9NBLmLOk2EJAREd
+ QEa+UuXmBiUeWr1qD39QTlvbqI+/fkYU31W/5jKTBLgRRIP7qhudsYP22LuH2l7RWipk
+ 59aaz7PPNE/9S9S6V66clQ83zKTK+abpWemqoptspGdZgJe0ir7qYVnW0/35WoRflWNc
+ GbhphvCNpxvNbVPuxhWdIPXz9BW50icP+fl3evOJ+2MVefI4ezGAUtXQ5VCLZQGmBH2p
+ buXg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788414832; x=1789019632;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:sender:x-gm-gg
+ d=1e100.net; s=20251104; t=1788414777; x=1789019577;
+ h=content-transfer-encoding:content-type:mime-version:references
+ :in-reply-to:message-id:date:subject:cc:to:from:sender:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=x1RKetAYUO6DQYUtxx7Wjswe/LX2S4835vuil13oPxY=;
- b=o+z7wGIFQqG1j2W4Nhxg4jrigitMT9NEN7m5AbUsrqvONocUOKGQ50BUIARghftTHk
- iiwm2nI26uXbwkjDY1iHJek1/tv7rMcB3jISNOHYVt555Swxp6hoHPNF6OoAa/zJRaYc
- RqvGhQ+6k1w96HdRHFRae6kSi03DiAMvVxNGyo179Hf24uuO9tuwbIWAT+8QVmrD8ajm
- ZNov6JiajBkdm0bCJWp7N0zmk9PzaC51MyKVS0DC9QaLrwXcrb0Pg0edT/PlnWmyGAGN
- +7OSfopJtKXbOiRzTzz5lDa0h5e04nSqdkD9kmWrA6CYQ2fbReEbk+n/9tbnD+bsoDCD
- aehw==
+ bh=Y8EVb0wo7FJ2wKANnrIolOje3sbSNMFNHjbGc+3Puiw=;
+ b=b45uj2oCXMNp/tAdixLzYa66TW5bYULxoS9rFOCkEenVKJVIXFOsyaThuD1gvikHXy
+ Uq+bhuyVi+/Q83MEqmE8hRscfQwY+HmB5Ij4Hc6+fF15xLGC0nocMhZh9JjGG+MTk4gS
+ iFibYu6oHRQMt2rb+I5rUdfMEU4/JbngWwesF0TIGUrkgILN6P0e0Z3b7ChcZQ/pimnQ
+ j7vH/F/PZ+ItRPVPQVli3SS6VRa6kaj8BZWYvx4zB5AHtVxpYru9GLSQvucCUMa4Mzfm
+ Kik64FD/W+a0v9OzrNPfhECUwlL3INaNmk5RmpoER7lE6ouae4xi8EEHoKU955iyeCKo
+ DZyQ==
 X-Forwarded-Encrypted: i=1;
- AKwUvBzhx2l6hZA381ob+eqrv+jbIyob6LB+FZ1mavKNdf9p6ESArmJaUjfuzsxtle7u7ub3Xxr7/7rElvJf@nongnu.org
-X-Gm-Message-State: AFuF++liGdBkbW9vHTus3jizweebZB9Tsv1nI/Q4fNxEWw574hpCUAjt
- TiUDVC879BR+eEy8dvK+J5xU6o3Hfeu3lfK9ObDZ17ZCvbtXLUPl6C7NW7gZqQcn
-X-Gm-Gg: AYBFou1e9WKpXqcTYBl8q22CIAPz//3GpQVBQWL+bC3hUJCUWKa7pTGq8rX3a0hwlfJ
- g2zj1WYjM7gfPvYmlpBqUkzfL+alZVp3GrHlFxHQXPsgqAnvSYXcMssXTOeZ+wnTAGBT3h7JUwx
- FzPO6ChhaFRKop6lNC4VYEj1sPlR1zxgBL2H6t2TDFC4Pz5F4iR2EiibjQ1VSLC949UP4U3jud5
- hxCMkj+KcsFhgNY7SlkDECZawLPChAMbtf8ESxFVSMHeeoqpt7cxTcdn9j2ULlo71aH2XLIz1Fd
- GYNO+B3cb2j77QXXZeu40i5glS5YGDtob1y4Y4x8vzefpvouAuOh3BElI9tyUFdaFZGFBzhD9U+
- v4iKoQvs4XhfkdESE9PuLfpyUWyE1hld9f/Li4h9EHhpVHesVJcRUlnEWASdVcZc8nhYTkc0L63
- GjBscb/CP0DLKLS6SiQmTfVKzs81DxdaJXP/dKmQ6JkzLyAalB7eImiP7iygJe9EcU95m530gZv
- ef9SlC4+sTX3YoKK0Brhmw2lsOtnwXBq/GYJiEJCxllnqgC7XUk9aS4OGWMStf99E7tJvEKfwQx
- KT7APpf+qyQn783ugTSZ
-X-Received: by 2002:a05:6a20:6a1a:b0:3d3:b02a:61a5 with SMTP id
- adf61e73a8af0-3d9b0a3a286mr12173308637.28.1788414831639; 
- Wed, 02 Sep 2026 22:53:51 -0700 (PDT)
+ AKwUvByouo65188GeyIuH9InZNZ9LKvBTkE9meukCQMZZc1/qkMrmS+LJzNYo1mTU8b3GqkadGhCMd0Mf3eQ@nongnu.org
+X-Gm-Message-State: AFuF++nHLSZVNHVA5r/kq6bhsxxGd5NP3rxzVz8ztNjyVsRjdkhOmjMI
+ 9MGJhyrSABhCpgCxXI88zz338BIIoVxMbynEqAO6hK1de3UlvOGp/PxI
+X-Gm-Gg: AYBFou0hhdZqerhSTFbHqflx/74OWYFtpWGG5xQhwgloXNV9ix0nhFf57ZGaJdQU6Ie
+ lwlcJ86svGBejeg0RxzqH36zAEg4GrRVTi+/t6XtU1u/0CHG8mfNAfvZCcPaJs0ni6T98Dcduae
+ 6K82tkad0wOYw7ANr6U0mzs6ay/lkv0vxSd6TdTaXJF1gdpysVcvkzoSiBHOb2M6TijiagCpYX3
+ GqGxWvszctSFBwJtmwJ3XPrlYAn3etsLgknDO3vGEXoomr+J6tDSIHLspnr22qSGx87lspNkArx
+ y5bj4HM83KroKGeLSopXXoGCI6+VWaM/Yp3/ht/YhW8br2qqLMzeVMi5J3vAo6a4R9WvPpkZM7M
+ d074IvaEccW6bb0PJn5suLXxVhA4tIezxKkg8E0Ivwp+Eezz80JGeptWH2wxiN5yjcR5L/igWAr
+ 55xtFk8Iyc7yTzowmoP+eq+fNnd7U1u+WcCzQNoYd77tgNwcwriVXlLOpCa/vq1WZ7rdp2Ya5JK
+ esstAuO4I72c9mJ+gP6Wqz4PRt42BRWoBV2GJBg3mJTmlpm+DYEHiqVxntnwEGBL8NO0jcxqpIK
+ E85sZCaEiThSWFIl3sZT
+X-Received: by 2002:a17:90b:4a07:b0:38e:97f0:aa4b with SMTP id
+ 98e67ed59e1d1-39aee0e5ca1mr12945331a91.13.1788414777074; 
+ Wed, 02 Sep 2026 22:52:57 -0700 (PDT)
 Received: from donnager-debian.. ([180.150.112.50])
  by smtp.gmail.com with ESMTPSA id
- a92af1059eb24-1431990a39bsm2770619c88.3.2026.09.02.22.53.46
+ a92af1059eb24-1431990a39bsm2770619c88.3.2026.09.02.22.52.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 02 Sep 2026 22:53:50 -0700 (PDT)
+ Wed, 02 Sep 2026 22:52:56 -0700 (PDT)
 From: Joel Stanley <joel@jms.id.au>
 To: Alistair Francis <alistair.francis@wdc.com>,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
@@ -79,18 +79,20 @@ Cc: Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Michael Ellerman <mpe@kernel.org>,
  Portia Stephens <portias@oss.tenstorrent.com>,
  =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Subject: [PATCH v3 16/16] hw/riscv/atlantis: Map the SoC through a memory
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
+Subject: [PATCH v3 06/16] hw/riscv/cps: Map interrupt controllers in SoC
  container
-Date: Thu,  3 Sep 2026 15:21:30 +0930
-Message-ID: <20260903055131.257903-17-joel@jms.id.au>
+Date: Thu,  3 Sep 2026 15:21:20 +0930
+Message-ID: <20260903055131.257903-7-joel@jms.id.au>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260903055131.257903-1-joel@jms.id.au>
 References: <20260903055131.257903-1-joel@jms.id.au>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42f;
- envelope-from=joel.stan@gmail.com; helo=mail-pf1-x42f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1032;
+ envelope-from=joel.stan@gmail.com; helo=mail-pj1-x1032.google.com
 X-Spam_score_int: -16
 X-Spam_score: -1.7
 X-Spam_bar: -
@@ -114,92 +116,56 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Give the Atlantis SoC a 'memory' link property. The machine creates a
-container MemoryRegion, maps it at address 0 of system memory, and
-passes it to the SoC together with the machine RAM. The SoC maps devices
-into the 'memory' container instead of system memory, allowing
-TTAtlantisSoCState to be composed together with other SoCs in the
-future.
+The CPS device maps some devices into a container region, but the
+ACLINT and APLIC were mapped directly to system_memory.
 
-This prepares the machine for adding other microcontrollers that share
-the memory bus with the Ascalon complex (aka the Atlantis SoC), but with
-their own view of the address map.
+Pass the container memory region to the interrupt controller helpers so
+all CPS devices live in the container. The location of devices in memory
+for the boston-aia machine is unchanged.
 
 Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
 Signed-off-by: Joel Stanley <joel@jms.id.au>
 ---
- include/hw/riscv/tt_atlantis.h |  1 +
- hw/riscv/tt_atlantis.c         | 17 +++++++++++++++--
- 2 files changed, 16 insertions(+), 2 deletions(-)
+ hw/riscv/cps.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/include/hw/riscv/tt_atlantis.h b/include/hw/riscv/tt_atlantis.h
-index 5d4e4d133bd9..3923308b7c89 100644
---- a/include/hw/riscv/tt_atlantis.h
-+++ b/include/hw/riscv/tt_atlantis.h
-@@ -53,6 +53,7 @@ struct TTAtlantisState {
-     /*< public >*/
-     Notifier machine_done;
- 
-+    MemoryRegion soc_memory;
-     TTAtlantisSoCState soc;
- };
- 
-diff --git a/hw/riscv/tt_atlantis.c b/hw/riscv/tt_atlantis.c
-index 6c46121287c7..c6f235a7eac0 100644
---- a/hw/riscv/tt_atlantis.c
-+++ b/hw/riscv/tt_atlantis.c
-@@ -504,8 +504,10 @@ static void tt_atlantis_soc_realize(DeviceState *dev, Error **errp)
-     ram_addr_t lo_ram_size, ram_size;
-     int hart_count = s->num_harts;
- 
--    s->memory = get_system_memory();
--
-+    if (!s->memory) {
-+        error_setg(errp, "'memory' link is not set");
-+        return;
-+    }
-     if (!s->dram) {
-         error_setg(errp, "'dram' link is not set");
-         return;
-@@ -524,6 +526,8 @@ static void tt_atlantis_soc_realize(DeviceState *dev, Error **errp)
-     object_property_set_int(OBJECT(&s->cpus), "resetvec",
-                             s->memmap[TT_ATL_BOOTROM].base,
-                             &error_abort);
-+    object_property_set_link(OBJECT(&s->cpus), "memory", OBJECT(s->memory),
-+                             &error_abort);
-     if (!sysbus_realize(SYS_BUS_DEVICE(&s->cpus), errp)) {
-         return;
-     }
-@@ -615,6 +619,8 @@ static void tt_atlantis_soc_realize(DeviceState *dev, Error **errp)
- static const Property tt_atlantis_soc_props[] = {
-     DEFINE_PROP_STRING("cpu-type", TTAtlantisSoCState, cpu_type),
-     DEFINE_PROP_UINT32("num-harts", TTAtlantisSoCState, num_harts, 8),
-+    DEFINE_PROP_LINK("memory", TTAtlantisSoCState, memory,
-+                     TYPE_MEMORY_REGION, MemoryRegion *),
-     DEFINE_PROP_LINK("dram", TTAtlantisSoCState, dram,
-                      TYPE_MEMORY_REGION, MemoryRegion *),
- };
-@@ -634,12 +640,19 @@ static void tt_atlantis_machine_init(MachineState *machine)
-     TTAtlantisState *ams = TT_ATLANTIS_MACHINE(machine);
-     TTAtlantisSoCState *s = &ams->soc;
- 
-+    memory_region_init(&ams->soc_memory, OBJECT(machine),
-+                       "tt-atlantis.soc-memory", UINT64_MAX);
-+    memory_region_add_subregion(get_system_memory(), 0, &ams->soc_memory);
-+
-     object_initialize_child(OBJECT(machine), "soc", &ams->soc,
-                             TYPE_TT_ATLANTIS_SOC);
-     object_property_set_str(OBJECT(&ams->soc), "cpu-type", machine->cpu_type,
-                             &error_abort);
-     object_property_set_int(OBJECT(&ams->soc), "num-harts", machine->smp.cpus,
-                             &error_abort);
-+
-+    object_property_set_link(OBJECT(&ams->soc), "memory",
-+                             OBJECT(&ams->soc_memory), &error_abort);
-     object_property_set_link(OBJECT(&ams->soc), "dram", OBJECT(machine->ram),
-                              &error_abort);
-     qdev_realize(DEVICE(&ams->soc), NULL, &error_fatal);
+diff --git a/hw/riscv/cps.c b/hw/riscv/cps.c
+index d2fd9638a08d..21daaf4943d8 100644
+--- a/hw/riscv/cps.c
++++ b/hw/riscv/cps.c
+@@ -135,7 +135,7 @@ static void riscv_cps_realize(DeviceState *dev, Error **errp)
+     for (i = 0; i < num_of_clusters; i++) {
+         uint64_t cm_base = GLOBAL_CM_BASE + (CM_SIZE * i);
+         uint32_t hartid_base = i << MHARTID_CLUSTER_SHIFT;
+-        s->aplic = riscv_aplic_create(get_system_memory(),
++        s->aplic = riscv_aplic_create(&s->container,
+                                       cm_base + AIA_PLIC_M_OFFSET,
+                                       AIA_PLIC_M_SIZE,
+                                       hartid_base, /* hartid_base */
+@@ -143,7 +143,7 @@ static void riscv_cps_realize(DeviceState *dev, Error **errp)
+                                       APLIC_NUM_SOURCES,
+                                       APLIC_NUM_PRIO_BITS,
+                                       false, true, NULL);
+-        riscv_aplic_create(get_system_memory(),
++        riscv_aplic_create(&s->container,
+                            cm_base + AIA_PLIC_S_OFFSET,
+                            AIA_PLIC_S_SIZE,
+                            hartid_base, /* hartid_base */
+@@ -153,10 +153,10 @@ static void riscv_cps_realize(DeviceState *dev, Error **errp)
+                            false, false, s->aplic);
+         /* PLIC changes msi_nonbroken to ture. We revert the change. */
+         msi_nonbroken = false;
+-        riscv_aclint_swi_create(get_system_memory(),
++        riscv_aclint_swi_create(&s->container,
+                                 cm_base + AIA_CLINT_OFFSET,
+                                 hartid_base, MAX_HARTS, false);
+-        riscv_aclint_mtimer_create(get_system_memory(),
++        riscv_aclint_mtimer_create(&s->container,
+                                    cm_base + AIA_CLINT_OFFSET +
+                                    RISCV_ACLINT_SWI_SIZE,
+                                    RISCV_ACLINT_DEFAULT_MTIMER_SIZE,
 -- 
 2.47.3
 
