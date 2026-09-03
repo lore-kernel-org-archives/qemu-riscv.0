@@ -4,93 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51DC6C624D6
-	for <qemu-riscv@archiver.kernel.org>; Thu,  3 Sep 2026 05:54:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E2CDC61DD3
+	for <qemu-riscv@archiver.kernel.org>; Thu,  3 Sep 2026 05:54:27 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x20OS-00086h-Rn; Thu, 03 Sep 2026 01:53:48 -0400
+	id 1x20Ny-0006kP-62; Thu, 03 Sep 2026 01:53:18 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1x20OO-00083N-4v
- for qemu-riscv@nongnu.org; Thu, 03 Sep 2026 01:53:44 -0400
-Received: from mail-pl1-x62a.google.com ([2607:f8b0:4864:20::62a])
+ id 1x20Nl-0006af-R5
+ for qemu-riscv@nongnu.org; Thu, 03 Sep 2026 01:53:05 -0400
+Received: from mail-pf1-x433.google.com ([2607:f8b0:4864:20::433])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1x20OM-0006WN-IU
- for qemu-riscv@nongnu.org; Thu, 03 Sep 2026 01:53:43 -0400
-Received: by mail-pl1-x62a.google.com with SMTP id
- d9443c01a7336-2d032846c95so23853535ad.1
- for <qemu-riscv@nongnu.org>; Wed, 02 Sep 2026 22:53:42 -0700 (PDT)
+ id 1x20Nk-0006Sh-4p
+ for qemu-riscv@nongnu.org; Thu, 03 Sep 2026 01:53:05 -0400
+Received: by mail-pf1-x433.google.com with SMTP id
+ d2e1a72fcca58-8485b358552so1773437b3a.2
+ for <qemu-riscv@nongnu.org>; Wed, 02 Sep 2026 22:53:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1788414821; x=1789019621; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:sender:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=ia4P/jyA4f87m0nyaT4ywXgyJnS0qKlG0zYD7mw5Fo0=;
- b=lDDadWvLig4+G5Wfwai3nfnmMx8i478pJvXLcZI0+PSUmjmpwC+lIzUi0f21rReQsR
- IOOxFx+d6aZM+18GYzXwfpWlS/eQ8bT5oR/ujjhx0rDPC1J3knFyQx+RzlYWzpm67XSD
- R36ZN+Pt3HQCWMSnPSjlEp+m0P3TtUULw3qtenpA93hlXA+VR7WkWsyeEvAiFfnqkijJ
- IlRzcAatQ/DINapn86pnIFEwlObtqFYECggCo/g7v37/P27r+8YMqplpUt0xN9muvwpg
- SuGtNrn65z98IPT5g063+ADniP0tVH6YcoaFPHK2eN30YBbsddc6bSWauhI/ahGvLtLf
- L40Q==
+ d=gmail.com; s=20251104; t=1788414783; x=1789019583; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:mime-version:references
+ :in-reply-to:message-id:date:subject:cc:to:from:sender:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=+s6fEopBsd7ppapT8KmLn2uzOdAaKJBsOus7rTyRoiQ=;
+ b=BUwzsxNFQkASONZA9oUyKAChshn/LlUK8DdDaype+ejB9me3Ozv8Ve0j6wTyIAFyBW
+ Ftu5uJx8POraCNlBpSOilitDlk21rMBMaIjRojZIYCifZbjZAPeD6pdeO573tpj2m0LZ
+ OT88FuWH3Q+YOWf+k75S5X3VIRONRQVPCigZ+ZIyuyaQYbNfyIgxm80COq7mKb9DadUR
+ 0uoedgdZMUShGCGiVpc8vBsrir78rlr42BvuUjJoP9RFQCmbSqc2gbtB4EXNDVyNyfH3
+ /TXKVLjp0MlTNF2g6CvwFdD4QlWGwJRltnxfqJdJeALLGNDGVeicKS0Lh2WdF/+kSQdC
+ wLgA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788414821; x=1789019621;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:sender:x-gm-gg
+ d=1e100.net; s=20251104; t=1788414783; x=1789019583;
+ h=content-transfer-encoding:content-type:mime-version:references
+ :in-reply-to:message-id:date:subject:cc:to:from:sender:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=ia4P/jyA4f87m0nyaT4ywXgyJnS0qKlG0zYD7mw5Fo0=;
- b=MOTp7zWUDGhnzGTUuYR59KCVTh2BdQ6l5BWZyGyqX8hQUrkqzhk/hwMuiPvleL275L
- 5F+vKDnDHikirH1hX/SfWy7o4i8ozQm3IvM9bzVsxhpdDuJHJDQkjnpJOPWeqzSu4Jrw
- KAqadWDITHF8wECQRqeY9bn78yuaBIRoCB45ALPfsZMMgI9cs2ryVjNjoh7k5tlrR3Bu
- UzkXQdFOaqz7fh6WPtNP0hxoksshu5vVVsgsGJklNTl8BfZKPgf3/6TZQLQsMyBjSp1d
- CkUfAXiY7jzJkVRWXsai2doWwV3YbVNC8SZ+d0f/PAsFNh0BOLNHXKhGlXxPaIZmZZCS
- DOZQ==
+ bh=+s6fEopBsd7ppapT8KmLn2uzOdAaKJBsOus7rTyRoiQ=;
+ b=tJaA3cY/INpd2SfSV7ThGPuA7nmW2f1AwTgsup6LT/BwHje1RvpDorkjusiZbwRqo/
+ WUz/TRwzfKPBhy809fiWDZ9izFLa60tCsM4B/v+Y5IEen+1fSV5FMqPcHa6Xui3zPHFU
+ HqfesWL/M5caOZbpjy4aDmLHcKepLqFVWS4kRwoEwz9p/OLPpS8FSdI3DdO4+/1Sf43h
+ oSv6/VnysYvZDUtizeHrbD/pNlO5Nuj6Vfr5rpHu/45jXFkEGkEBEOIKJq840B0SQljv
+ yXJtFayDFN1il8y/XdgjV7ApnNAYT2+sObqTgFuZpDQ7s9lq4/HQ61KReRx9ol0KuTEs
+ Oh9A==
 X-Forwarded-Encrypted: i=1;
- AKwUvByM6eDEay2CAyAmKriUYh52Gf5iFC6q7q0M+rm6W6NJMgJVwwKjtC4SNdJzu7D4vRBDtrhH6MaEfpYX@nongnu.org
-X-Gm-Message-State: AFuF++lISighID+RwNUhKczNJTsAcAZfHQNiyog22oKYLeCIAqsvReXD
- vfQFtgm5IpB92v7mAp7VXVfJCilOK/qoR+UOxh51VEHgCDjEHQK5ARqf
-X-Gm-Gg: AYBFou12FG05UD5V71GJEXxE144xCQPByJgHVjsPmhb5J8iHllPD25OvOkPtR11sNXy
- VGA7lmZIWNb3z6KG0lsXbxK5LBcjnfPS+hfWPaOZHn2rN+MBJAA52SnAdHqr2jip9IkKIiT6j1R
- T0njfagyCO9qMjPDL1UaJMpYEoCvSeb0rNWcMAt3I9Nh4CPmjA7rhLTe5K1AImDlIQn0dFHzK4I
- 6ldiH4v962MedZAul+DlDGs6URS5Dc6eCbOzJaRp+k0XkP+iiCKOfkGvXWS6N56xU8GkGo9lZLF
- lh/ZRmQaClFrxaYM3nUgBhv0mJoeL44Mhabr+99TsYZ5HAxqbsIPcQTfKjKxnvx9iKrmCaqm+jo
- T5nMaCJjtcnHmo0kfbYd0dcFjef2o16rTQaYwu702nQlk3GbIoao67R8EbtKF01GR68qiHmjwm/
- Qkr1cwc+EsskzAVUiXJI9wZAXRhzOpFCDLw3n3hx4DUcb2ygU4eSiJAkW3K8LZrZ+JGgQu1OUXD
- nsbeMRtQ7/SkgVTh+geNFp2AD80noF2r3x+SfS7kXTR83gAuL9jwlI4t2ovsqXem6mXILDo6GHG
- BULd78PuXy+Nus5xKg8a9t5hdP1J7Nk=
-X-Received: by 2002:a17:90b:268d:b0:398:ab03:95b2 with SMTP id
- 98e67ed59e1d1-39aee023191mr16722961a91.10.1788414821101; 
- Wed, 02 Sep 2026 22:53:41 -0700 (PDT)
+ AKwUvBwf/GJw5aH+2M14TBgKq33yyCez+RseH330Jt5uglVnmSWIolY472vkfW4scqJv1FC6LaIoa6n3RtSt@nongnu.org
+X-Gm-Message-State: AFuF++klsdmJjuNPkCwqlrHxA0Sm/JTMwlnPynl9pDX9ucoxC1vst5O6
+ du+E7jO9IqxsfYinjtvzC7HXPIoHB/mJl2jkebSyFRHxNT6/0L64IAe2
+X-Gm-Gg: AYBFou26P1x+r6M/qf5AxcgDhNRLA9IqZihIJy7HDQCKKEBhZimuSaClrmnxCt3Sxue
+ qFV1ZCBVeWmxzurP+/axNz3T9RDB4rXZ156sGrKachCu2MkHSPuCkInwjPNNlQTrkFjZoCNwyOg
+ gNQegD2mJrr4d7ztM4K8WbvZqiwXLqhtx8O7G7FTpmPRQR5dRCQHAOvfLIgP9MtDD5qhq1fPyF2
+ 1Zf5O8AYbAFIHB5n0YHRiLTY/nhvm/No5RHTYNOgRFbP667Vi0DtuGf1uZ/3oL641Q0NpsY0GdN
+ AaKp5NrjD1uKH/zVk8ek1nAvE+TKfCoVSSJL+OzbnKIrs0Z2c2K319IEzKqi+GVq1DsECa6umld
+ v53aO684nAyMvEc1NWeqpS5VB2TXtAHLuL8LynYDKKXp7asdh3MnXEEWnbghkYe7puoBY8e/+/Q
+ NS+HpxqcF/rCPtpB6dN5P79+Xp+9EpxYMBEUTKX9iydud8TmFsxDahFwTfHnV1R0gIf5f64rzrX
+ sT5n6vzG8ocZQO/OvQVqSzzGVQLcGIt4GMdZWSb+kfAzTZ/hO98pXqNpGgC7nuC7CY0WKqTB/r1
+ YxWFfDyRJTS8gfZyYc+UUVuee8LIDgw=
+X-Received: by 2002:a05:6a20:9381:b0:3c3:7179:a640 with SMTP id
+ adf61e73a8af0-3d9adabade4mr14397385637.3.1788414782660; 
+ Wed, 02 Sep 2026 22:53:02 -0700 (PDT)
 Received: from donnager-debian.. ([180.150.112.50])
  by smtp.gmail.com with ESMTPSA id
- a92af1059eb24-1431990a39bsm2770619c88.3.2026.09.02.22.53.36
+ a92af1059eb24-1431990a39bsm2770619c88.3.2026.09.02.22.52.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 02 Sep 2026 22:53:39 -0700 (PDT)
+ Wed, 02 Sep 2026 22:53:01 -0700 (PDT)
 From: Joel Stanley <joel@jms.id.au>
 To: Alistair Francis <alistair.francis@wdc.com>,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Cc: Portia Stephens <portias@oss.tenstorrent.com>,
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+Cc: Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Chao Liu <chao.liu@processmission.com>,
  Nicholas Piggin <npiggin@gmail.com>,
  Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>,
  Michael Ellerman <mpe@kernel.org>,
+ Portia Stephens <portias@oss.tenstorrent.com>,
  =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Subject: [PATCH v3 14/16] hw/riscv: Add property to hart array to allow
- private memory
-Date: Thu,  3 Sep 2026 15:21:28 +0930
-Message-ID: <20260903055131.257903-15-joel@jms.id.au>
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
+Subject: [PATCH v3 07/16] hw/riscv/atlantis: Make UART unimp region a SoC
+ device
+Date: Thu,  3 Sep 2026 15:21:21 +0930
+Message-ID: <20260903055131.257903-8-joel@jms.id.au>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260903055131.257903-1-joel@jms.id.au>
 References: <20260903055131.257903-1-joel@jms.id.au>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62a;
- envelope-from=joel.stan@gmail.com; helo=mail-pl1-x62a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::433;
+ envelope-from=joel.stan@gmail.com; helo=mail-pf1-x433.google.com
 X-Spam_score_int: -16
 X-Spam_score: -1.7
 X-Spam_bar: -
@@ -114,63 +116,81 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Portia Stephens <portias@oss.tenstorrent.com>
+Make the unimplemented region covering the remainder of the console
+UART's register space a SoC child device, mapped using a helper. This
+makes it easier to map it into the SoC's memory container along with
+the other devices in the future.
 
-There are platforms where CPUs have different mapping of system memory.
-The global system memory does not allow for this. This adds an optional
-property on the hart array to assign a specific memory region. The array
-passes the region to each hart it creates, so a machine can alias the
-harts' memory to system memory, while the harts view memory from their
-own memory region.
+While here, rename the region from uart0 to uart1. The uart0 name was
+a leftover from an earlier revision that used a different device for
+the console.
 
-Signed-off-by: Portia Stephens <portias@oss.tenstorrent.com>
 Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Signed-off-by: Joel Stanley <joel@jms.id.au>
 ---
- include/hw/riscv/riscv_hart.h | 2 ++
- hw/riscv/riscv_hart.c         | 8 ++++++++
- 2 files changed, 10 insertions(+)
+ include/hw/riscv/tt_atlantis.h |  2 ++
+ hw/riscv/tt_atlantis.c         | 19 ++++++++++++++++---
+ 2 files changed, 18 insertions(+), 3 deletions(-)
 
-diff --git a/include/hw/riscv/riscv_hart.h b/include/hw/riscv/riscv_hart.h
-index 197fa1623115..c3cd05a2c877 100644
---- a/include/hw/riscv/riscv_hart.h
-+++ b/include/hw/riscv/riscv_hart.h
-@@ -42,6 +42,8 @@ struct RISCVHartArrayState {
-     uint64_t *rnmi_irqvec;
-     uint32_t num_rnmi_excpvec;
-     uint64_t *rnmi_excpvec;
-+    /* Optional private memory region for use instead of system memory */
-+    MemoryRegion *memory;
-     RISCVCPU *harts;
+diff --git a/include/hw/riscv/tt_atlantis.h b/include/hw/riscv/tt_atlantis.h
+index 7f7d4a5a5905..c9308aa57017 100644
+--- a/include/hw/riscv/tt_atlantis.h
++++ b/include/hw/riscv/tt_atlantis.h
+@@ -13,6 +13,7 @@
+ #include "hw/core/sysbus.h"
+ #include "hw/i2c/designware_i2c.h"
+ #include "hw/intc/riscv_imsic.h"
++#include "hw/misc/unimp.h"
+ #include "hw/riscv/riscv_hart.h"
+ 
+ #define TYPE_TT_ATLANTIS_MACHINE MACHINE_TYPE_NAME("tt-atlantis")
+@@ -31,6 +32,7 @@ struct TTAtlantisState {
+     RISCVHartArrayState soc;
+     DeviceState *irqchip;
+     DesignWareI2CState i2c[TT_ATL_NUM_I2C];
++    UnimplementedDeviceState uart1;
+ 
+     int fdt_size;
  };
+diff --git a/hw/riscv/tt_atlantis.c b/hw/riscv/tt_atlantis.c
+index 373d4dabf3a4..a2fb83aab78e 100644
+--- a/hw/riscv/tt_atlantis.c
++++ b/hw/riscv/tt_atlantis.c
+@@ -411,6 +411,17 @@ static void load_fdt(TTAtlantisState *s)
+     create_fdt_memory(s);
+ }
  
-diff --git a/hw/riscv/riscv_hart.c b/hw/riscv/riscv_hart.c
-index 747754be6158..32fd39737ff6 100644
---- a/hw/riscv/riscv_hart.c
-+++ b/hw/riscv/riscv_hart.c
-@@ -53,6 +53,8 @@ static const Property riscv_harts_props[] = {
-     DEFINE_PROP_ARRAY("rnmi-exception-vector", RISCVHartArrayState,
-                       num_rnmi_excpvec, rnmi_excpvec, qdev_prop_uint64,
-                       uint64_t),
-+    DEFINE_PROP_LINK("memory", RISCVHartArrayState, memory,
-+                     TYPE_MEMORY_REGION, MemoryRegion *),
- };
- 
- static void riscv_harts_cpu_reset(void *opaque)
-@@ -117,6 +119,12 @@ static bool riscv_hart_realize(RISCVHartArrayState *s, int idx,
-     object_initialize_child(OBJECT(s), "harts[*]", &s->harts[idx], cpu_type);
-     qdev_prop_set_uint64(DEVICE(&s->harts[idx]), "resetvec", s->resetvec);
- 
-+    /* Use private memory instead of system_memory if provided */
-+    if (s->memory) {
-+        object_property_set_link(OBJECT(&s->harts[idx]), "memory",
-+                                 OBJECT(s->memory), &error_abort);
-+    }
++static void mmio_map_unimplemented(MemoryRegion *memory, SysBusDevice *dev,
++                                   const char *name, hwaddr addr, uint64_t size)
++{
++    qdev_prop_set_string(DEVICE(dev), "name", name);
++    qdev_prop_set_uint64(DEVICE(dev), "size", size);
++    sysbus_realize(dev, &error_abort);
 +
-     if (s->harts[idx].cfg.ext_smrnmi) {
-         if (idx < s->num_rnmi_irqvec) {
-             qdev_prop_set_uint64(DEVICE(&s->harts[idx]),
++    memory_region_add_subregion_overlap(memory, addr,
++                                        sysbus_mmio_get_region(dev, 0), -1000);
++}
++
+ static void tt_atlantis_machine_done(Notifier *notifier, void *data)
+ {
+     TTAtlantisState *s = container_of(notifier, TTAtlantisState, machine_done);
+@@ -562,9 +573,11 @@ static void tt_atlantis_machine_init(MachineState *machine)
+      * Create an unimplemented device region so writes don't fault
+      * and reads return zero, which keeps Linux happy.
+      */
+-    create_unimplemented_device("tt-atlantis.uart0",
+-                                s->memmap[TT_ATL_UART1].base,
+-                                s->memmap[TT_ATL_UART1].size);
++    object_initialize_child(OBJECT(s), "uart1", &s->uart1,
++                            TYPE_UNIMPLEMENTED_DEVICE);
++    mmio_map_unimplemented(system_memory, SYS_BUS_DEVICE(&s->uart1),
++                           "tt-atlantis.uart1", s->memmap[TT_ATL_UART1].base,
++                           s->memmap[TT_ATL_UART1].size);
+ 
+     /* I2C */
+     for (int i = 0; i < TT_ATL_NUM_I2C; i++) {
 -- 
 2.47.3
 
