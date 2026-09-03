@@ -4,64 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDDE5C624A4
-	for <qemu-riscv@archiver.kernel.org>; Thu,  3 Sep 2026 07:54:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56A2FC624A4
+	for <qemu-riscv@archiver.kernel.org>; Thu,  3 Sep 2026 17:00:44 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x22Gy-0008Fp-2a; Thu, 03 Sep 2026 03:54:12 -0400
+	id 1x2AnY-0000PX-Ap; Thu, 03 Sep 2026 13:00:24 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <wangyang25@otcaix.iscas.ac.cn>)
- id 1x22Gv-0008FN-MY; Thu, 03 Sep 2026 03:54:09 -0400
-Received: from smtp81.cstnet.cn ([159.226.251.81] helo=cstnet.cn)
- by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <wangyang25@otcaix.iscas.ac.cn>)
- id 1x22Gt-0005Lr-22; Thu, 03 Sep 2026 03:54:09 -0400
-Received: from [172.21.96.1] (unknown [124.16.137.194])
- by APP-03 (Coremail) with SMTP id rQCowADn8kCXJ5lqiQHQBg--.16018S3;
- Thu, 03 Sep 2026 15:54:00 +0800 (CST)
-From: Wang Yang <wangyang25@otcaix.iscas.ac.cn>
-To: Alistair.Francis@wdc.com, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, daniel.barboza@oss.qualcomm.com,
- chao.liu@processmission.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com
-Subject: Re: [PATCH 2/5] target/riscv: save ELP in MPELP for RNMI exceptions
-In-Reply-To: <d0de80b7fbf7981fceb58f921580616e3751745b.camel@wdc.com>
-References: <cover.1787489230.git.wangyang25@otcaix.iscas.ac.cn>
- <ce36a27e6346228b12c926a6f95835521ba56f86.1787489230.git.wangyang25@otcaix.iscas.ac.cn>
- <d0de80b7fbf7981fceb58f921580616e3751745b.camel@wdc.com>
-Message-ID: <178842203941.34748.15055654521332091813@otcaix.iscas.ac.cn>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+ (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
+ id 1x2AnX-0000P0-8e
+ for qemu-riscv@nongnu.org; Thu, 03 Sep 2026 13:00:23 -0400
+Received: from mail-pg1-x531.google.com ([2607:f8b0:4864:20::531])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
+ id 1x2AnV-0002R0-3p
+ for qemu-riscv@nongnu.org; Thu, 03 Sep 2026 13:00:23 -0400
+Received: by mail-pg1-x531.google.com with SMTP id
+ 41be03b00d2f7-cc147d86bebso65024a12.0
+ for <qemu-riscv@nongnu.org>; Thu, 03 Sep 2026 10:00:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sifive.com; s=google; t=1788454818; x=1789059618; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=xMzA1Edr4/9AcwAAKxC0Ug+VONOQc457rjo8K3c+xXg=;
+ b=hvbMfTSGQaAbY6d8/40j1+oPQJwtIQx3vGVcgHa6yH3hIvckZGYz1/3bieIpx7Ki98
+ Uu29h1P9YYoQAtCG2kX77BcGXuMzoBgYQgRqSPlIVuPHGMVcc0fjahQlpC9FSQ3vT3Dz
+ zqah4hWPPKBBju16WK6CivvLj73bJdoDJrhcc9FjD27E6DCuBiiVLcnPyWyLXucY3F3h
+ 9sB/osyNDCoxB0WQ63wOy7EI0bQApi4WswnzL7iyylgaxZIM5bZj67wiHxKUcATxLNya
+ Vh2Q9rn9XLm5qqXRnPgHIILm/Cs+REc52nvV2fzrQN32dbhwOuhEqtK/OdtrRVPrK1+/
+ 59Sg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1788454818; x=1789059618;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=xMzA1Edr4/9AcwAAKxC0Ug+VONOQc457rjo8K3c+xXg=;
+ b=hiCm30ub+nvVfInQPUcsiVj39FCD6Juo1NPnkl6/rVhhjRBXZW9kKGHHyQdMtQVKoz
+ 3X/05JE4705SZXHEsNWw53E6fX5S/tCTE2JE5H0XYWJAZXy8KZXCPMjzHar9WIZ+OZ6z
+ JYRFgk2jZhudck4Q9YjRYGKTKDaswnMWyytn+MMQZZC+d0qUCh3CyhJidffuGZT28jeP
+ ctpseDD6PRKP2G+3qrPCh6KR3u5zib3WGCT0cmrF7cdbefBHcSHSl6x2Q+SPVEbxsXY6
+ bxoXFXGCnPQgJ54sFtU8q2MMbq+P6UFA9z2VvZFyFlGo7ShF6tAvnXwdvkljaRKJCF7k
+ 0mCQ==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBypCVzcsDXkM2RKY10+2sRe9fguupWz2cyhzygYN6XbGID2HoywgFmv0FnIGeSzhnAmmep5mCVWsatF@nongnu.org
+X-Gm-Message-State: AFuF++l724hVwAgujnC4ItWC9OmWuUYOXEgdIrlGQCyyXtQF7fQGua5j
+ YuMRSILOeRMxfSAarTbIzCcCz4HFWcyHtnfHdTPA9KOki94NLIaA6JQnHlqBtSWTA4g=
+X-Gm-Gg: AYBFou1DjUT5k8zULj0+HmJaXrIUHJ9ELdgwlaTwNV8twZlHOVOjqXYAZmPdoERiq5c
+ HxOefu5LZtUK9BAJaxkp3yuGPfDfq8nXEZ7O9EaiHUxkhSRAPZZKpChpA1H+Ld/kfPYLS7ChRrK
+ eVgfGDuW7pcEBBvr2hb4NuKT5s4A7tJp8ZIRZSkakiFnKGz2fQAWZp6sqNW41udEw7eNv6MeWTH
+ mjqYNTBX89kvLRn7C3TFs9rYz9+HqnbqC8LkCFDWsFHWA47lIVEeAybetuP5/FbY5MYRXFuZqEK
+ 0LIGOd2rQyTktr56TeEpIB5ETYT7zTtkKRGAh9YpljcMwvA/iu9QFBAvHXAVquUOLaUpJqtPpDC
+ m2zCs4jsBrPFR1Yjz3EWy7BcaXAE5YVpvYtgU5dhquI2PZHoOORob28Y15mCQMmfmKibplQcPUn
+ yr/pTIb6OfW4O3wEZPHT9rPBp2kKbKWWSQij3wrYmBGKXjSwMgUiYWn1NMtt4Eh1zaXKZFiOAKF
+ H7obD26HbYwWMpJBhdhvSrbN09pFpuRZvkTZAb62phrjjwPjZPan5cW9Rb+thA=
+X-Received: by 2002:a17:90a:c106:b0:398:9bd3:d6d6 with SMTP id
+ 98e67ed59e1d1-39b13324513mr3809123a91.16.1788454817550; 
+ Thu, 03 Sep 2026 10:00:17 -0700 (PDT)
+Received: from duncan.localdomain (114-35-142-126.hinet-ip.hinet.net.
+ [114.35.142.126]) by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-39b087b59a0sm6592159a91.17.2026.09.03.10.00.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 03 Sep 2026 10:00:17 -0700 (PDT)
+From: Max Chou <max.chou@sifive.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Max Chou <max.chou@sifive.com>
+Subject: [PATCH] tcg/riscv64: Set vtype before whole-register vector moves
+Date: Fri,  4 Sep 2026 01:00:11 +0800
+Message-ID: <20260903170011.3627720-1-max.chou@sifive.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-X-CM-TRANSID: rQCowADn8kCXJ5lqiQHQBg--.16018S3
-X-Coremail-Antispam: 1UD129KBjvdXoW7GrykJw1DGw47Xw13AFW3trb_yoWftFbE9F
- 17J3sIk3W8Zw45W3W3trnxZr9Fgr98Xr1rAw4DJr1qvw1kZF9rAa1kur15ur1aqay0qrna
- krsxW3y7ur92gjkaLaAFLSUrUUUUbb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
- 9fnUUIcSsGvfJTRUUUb3AYjsxI4VWDJwAYFVCjjxCrM7AC8VAFwI0_Gr0_Xr1l1xkIjI8I
- 6I8E6xAIw20EY4v20xvaj40_Wr0E3s1l1IIY67AEw4v_Jr0_Jr4l8cAvFVAK0II2c7xJM2
- 8CjxkF64kEwVA0rcxSw2x7M28EF7xvwVC0I7IYx2IY67AKxVWUJVWUCwA2z4x0Y4vE2Ix0
- cI8IcVCY1x0267AKxVW8JVWxJwA2z4x0Y4vEx4A2jsIE14v26r4j6F4UM28EF7xvwVC2z2
- 80aVCY1x0267AKxVW8JVW8Jr1lnxkEFVAIw20F6cxK64vIFxWle2I262IYc4CY6c8Ij28I
- cVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2Ix0cI8IcVAFwI0_Jrv_JF1lYx
- 0Ex4A2jsIE14v26r4j6F4UMcvjeVCFs4IE7xkEbVWUJVW8JwACjcxG0xvEwIxGrwCY1x02
- 62kKe7AKxVWUtVW8ZwCY02Avz4vE14v_GF4l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x
- 0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2
- zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF
- 4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r4j6F4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWU
- CwCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCT
- nIWIevJa73UjIFyTuYvjxU45rcUUUUU
-X-Originating-IP: [124.16.137.194]
-Date: Thu, 3 Sep 2026 15:54:01 +0800 (CST)
-X-CM-SenderInfo: 5zdqw5xdqjjk46rwut1l0ox2xfdvhtffof0/
-Received-SPF: pass client-ip=159.226.251.81;
- envelope-from=wangyang25@otcaix.iscas.ac.cn; helo=cstnet.cn
-X-Spam_score_int: -41
-X-Spam_score: -4.2
-X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::531;
+ envelope-from=max.chou@sifive.com; helo=mail-pg1-x531.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -77,24 +104,35 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Alistair,
+According to the RISC-V unpriviledge spec,
+  "vset{i}vl{i} and whole register loads and stores do not depend upon
+   vtype."
+The whole-register vector move instructions reuqire legal vtype that
+trap when VILL is set.
 
-Thank you for the feedback, and sorry that the commit message was unclear.
+The tcg_out_mov in tcg/riscv64 missed the vtype setup before emitting the
+OPC_VMVNR_V.
 
-This patch fixes the Smrnmi and Zicfilp case where an M-mode exception occurs=
- with mnstatus.NMIE=3D0. QEMU currently saves ELP in mnstatus.MNPELP when red=
-irecting to the RNMI exception vector, but this path returns with MRET, which=
- restores ELP from mstatus.MPELP. As a result, ELP is lost and a subsequent i=
-ndirect branch requiring a landing pad may avoid the expected software-check =
-exception. The patch saves ELP in mstatus.MPELP for this path; the true RNMI =
-interrupt path using MNPELP and MNRET is unchanged.
+Fixes: d4be6ee1111 ("tcg/riscv: Implement vector mov/dup{m/i}")
+Signed-off-by: Max Chou <max.chou@sifive.com>
+---
+ tcg/riscv64/tcg-target.c.inc | 2 ++
+ 1 file changed, 2 insertions(+)
 
-I also found that Zephyr Li has submitted an equivalent fix, including a TCG =
-regression test: https://www.mail-archive.com/qemu-devel@nongnu.org/msg122208=
-4.html. Since that patch fixes the same issue, I will not submit a duplicate =
-revision. Please let me know if any further clarification is needed.
-
-Best regards,
-Wang Yang
+diff --git a/tcg/riscv64/tcg-target.c.inc b/tcg/riscv64/tcg-target.c.inc
+index 2ce9d47a633..fbfb4c44470 100644
+--- a/tcg/riscv64/tcg-target.c.inc
++++ b/tcg/riscv64/tcg-target.c.inc
+@@ -778,6 +778,8 @@ static bool tcg_out_mov(TCGContext *s, TCGType type, TCGReg ret, TCGReg arg)
+         {
+             int lmul = type - riscv_lg2_vlenb;
+             int nf = 1 << MAX(lmul, 0);
++
++            set_vtype_len(s, type);
+             tcg_out_opc_vi(s, OPC_VMVNR_V, ret, arg, nf - 1);
+         }
+         break;
+-- 
+2.43.0
 
 
