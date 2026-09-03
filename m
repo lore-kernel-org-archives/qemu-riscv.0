@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80744C61DD3
-	for <qemu-riscv@archiver.kernel.org>; Thu,  3 Sep 2026 05:54:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C789BC61DD3
+	for <qemu-riscv@archiver.kernel.org>; Thu,  3 Sep 2026 05:54:17 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x20OL-0007no-3v; Thu, 03 Sep 2026 01:53:41 -0400
+	id 1x20Oe-0008TP-PM; Thu, 03 Sep 2026 01:54:01 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1x20OI-0007fX-Na
- for qemu-riscv@nongnu.org; Thu, 03 Sep 2026 01:53:38 -0400
-Received: from mail-pg1-x52e.google.com ([2607:f8b0:4864:20::52e])
+ id 1x20OZ-0008Oo-Hz
+ for qemu-riscv@nongnu.org; Thu, 03 Sep 2026 01:53:55 -0400
+Received: from mail-pf1-x42f.google.com ([2607:f8b0:4864:20::42f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1x20OH-0006Vc-3K
- for qemu-riscv@nongnu.org; Thu, 03 Sep 2026 01:53:38 -0400
-Received: by mail-pg1-x52e.google.com with SMTP id
- 41be03b00d2f7-ca12086c06eso1614004a12.0
- for <qemu-riscv@nongnu.org>; Wed, 02 Sep 2026 22:53:36 -0700 (PDT)
+ id 1x20OX-0006XC-Vu
+ for qemu-riscv@nongnu.org; Thu, 03 Sep 2026 01:53:55 -0400
+Received: by mail-pf1-x42f.google.com with SMTP id
+ d2e1a72fcca58-853c401326eso1223638b3a.2
+ for <qemu-riscv@nongnu.org>; Wed, 02 Sep 2026 22:53:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1788414815; x=1789019615; darn=nongnu.org;
- h=content-transfer-encoding:content-type:mime-version:references
- :in-reply-to:message-id:date:subject:cc:to:from:sender:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=h84XBkjDHnyNzYT31LGlAcrbsHdqgnWyjCPO93XfIRk=;
- b=KS4gDmj97QUr1lTkAfjEIPuZaTvermoW4ry+sWa5tEadLXSFzj2sTAHsY4CinrgzYl
- wnSBDZpfH6N2eJgLUZdxp4RMZXphh0Vbx6sjZHqihnRycfdy6FWd/NkysWzgNccIodFj
- YMTZp2Ty6oAK/qXbUw2uKfBorMQ0HmgQWV0LnLLcmxUozfvwmogPxh+L/c2LMU9VpxQl
- 2uC31XHbWrc7X0G5Tid36vBTD2XEVs/g6v+ygZsoDx0NFV3buw/91jGKdZiIlJ+A0taW
- e3JoBroZZlsJvsgZt2w12/n//jomQGzBIfwfgrdwPyb9tdS9+aUqUb4M4tsyRom6n6qX
- SMLA==
+ d=gmail.com; s=20251104; t=1788414832; x=1789019632; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:sender:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=x1RKetAYUO6DQYUtxx7Wjswe/LX2S4835vuil13oPxY=;
+ b=FsAMsirK0sKPSOEtisTMw0vKvlmkqX0IbVoqPNbDyEHE+S6FmbcFO9601s9+M/LdD0
+ w2IZ6lW4bD7aSfh0Y1EMJRxN6VoRsfMYARYmMfoXqBkOYRkXMc5iPqyyIJTXZOPEpiBD
+ TAgoL3ld2XwRVv1/Wk+Hhr6KfGu5nFGLhUa6liDk8ja7H7KV7BdsslUxUNI4CwZzprAV
+ 0iGN5OTwRq3aXA2HzBBBzqfW/TC9l55q9037BwHcWprvyNXJmkU2ZcEYn3r75Wd9x5LR
+ 3+8Gdide+TpjfIhscePNEZ32h1W7u+PVCSsWoBrflm9B2ZV+LNFDPjpoOWKz+Ol1/9xP
+ gj+w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788414815; x=1789019615;
- h=content-transfer-encoding:content-type:mime-version:references
- :in-reply-to:message-id:date:subject:cc:to:from:sender:x-gm-gg
+ d=1e100.net; s=20251104; t=1788414832; x=1789019632;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:sender:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=h84XBkjDHnyNzYT31LGlAcrbsHdqgnWyjCPO93XfIRk=;
- b=hS4Nq7P+rAIa5T/H2GcD2f+48rodCMjcRxHrA9glKKK2vGlea5Le3gLVGBsrUTd5KE
- k7lhSXthcmxX4icGiTvGTPEZ9ah9mHgY8wMpnPm6RyrfMzuMkFOPTumwoDCsCvllrNoW
- c8qYt++sYFMEVyxjz/PHaewVTlRjsUCLrWIWvLbaxND2ne/R509FBa2uBJPDcTjGJD0L
- eYs30Xfta9Dh4gPd0WEa+O2IOLoKcqoxAxgjftoTbOKjwbrH848QFvynSBKokn9VIMGx
- Z27KBRMn4PHd0ZZF2ZM9oqZFHTev2rCh0lxFfLYJQ4LIGlqWNdixFZvPO1PK5YYI6229
- OHzQ==
+ bh=x1RKetAYUO6DQYUtxx7Wjswe/LX2S4835vuil13oPxY=;
+ b=o+z7wGIFQqG1j2W4Nhxg4jrigitMT9NEN7m5AbUsrqvONocUOKGQ50BUIARghftTHk
+ iiwm2nI26uXbwkjDY1iHJek1/tv7rMcB3jISNOHYVt555Swxp6hoHPNF6OoAa/zJRaYc
+ RqvGhQ+6k1w96HdRHFRae6kSi03DiAMvVxNGyo179Hf24uuO9tuwbIWAT+8QVmrD8ajm
+ ZNov6JiajBkdm0bCJWp7N0zmk9PzaC51MyKVS0DC9QaLrwXcrb0Pg0edT/PlnWmyGAGN
+ +7OSfopJtKXbOiRzTzz5lDa0h5e04nSqdkD9kmWrA6CYQ2fbReEbk+n/9tbnD+bsoDCD
+ aehw==
 X-Forwarded-Encrypted: i=1;
- AKwUvBwkQNGefWlyr6Bg4pGu5D86TfvghZiXSsmWEuO7TVQ9eBdPxGbYpjxc11NW1WSYyNkaVsbIPQKQHpal@nongnu.org
-X-Gm-Message-State: AFuF++lSc7n3T73A7KVcm3pe7s1oPPbuX1wiLoIDt3f0sZL/aUkcGIpk
- AOCrND964TganUAfAQw+1DYeTDAntP8W9gCjIhQgjmk9sGqIWMMlms0x
-X-Gm-Gg: AYBFou2G7/JcQPahW5q0CcosgOW+Aq0+IgZtCmBulVM87vpI5PybL+Pp0APFB1dudKb
- fihD/0Zf3R5r1QnX+iFkloB7OzhtBL5eUNrew7ufQm6xY0qwzKLKiRkp8xrIJbiHu/nVaHDjmRN
- ffi6zNf5ILjdpqHHroSBW9ZKVCEiJ0ra3qJBlXt26g2RE8jCqPVOh6Y+zymME2cPqXloFWjNbgh
- x0XI/QYdisyjFWYRDzaXvaPn6XQz4+xUcojKNPui+nfzZB4tFE128ePO6Hj7gj8fOl5c+eWPntm
- IYgQg5ksbzNN08tp0pvAOVVYs0447MyoNSEqZO2+U4RvfW0J1Rq0yATUNjTmoGr9Zw6Lzy8tJkc
- KwHqJBR08e9Ghv8sdK4D1wN4B0UpC+OpzYsymeaq478O8rec1IpEABRDTiUIHNaDW7FH3BAxir9
- LpTXirZTy6nHfZ3pJE/fe1aQKObiCgMDmcsd/zBdHL167YG4//3AXhvAi46191SUSJBJ24t3IiA
- O2G4J3fWuGzkMSYeFgvLAur7B0PoMTpgufF97wR0SWw1VONiaftfs/w9TfncAaF67i4iKdM8cQ2
- bQtnL4Qz2YEOZWkgsdYz
-X-Received: by 2002:a05:6a20:2584:b0:3c3:6f6c:aa21 with SMTP id
- adf61e73a8af0-3d9ae8e5abemr13034587637.11.1788414815638; 
- Wed, 02 Sep 2026 22:53:35 -0700 (PDT)
+ AKwUvBzhx2l6hZA381ob+eqrv+jbIyob6LB+FZ1mavKNdf9p6ESArmJaUjfuzsxtle7u7ub3Xxr7/7rElvJf@nongnu.org
+X-Gm-Message-State: AFuF++liGdBkbW9vHTus3jizweebZB9Tsv1nI/Q4fNxEWw574hpCUAjt
+ TiUDVC879BR+eEy8dvK+J5xU6o3Hfeu3lfK9ObDZ17ZCvbtXLUPl6C7NW7gZqQcn
+X-Gm-Gg: AYBFou1e9WKpXqcTYBl8q22CIAPz//3GpQVBQWL+bC3hUJCUWKa7pTGq8rX3a0hwlfJ
+ g2zj1WYjM7gfPvYmlpBqUkzfL+alZVp3GrHlFxHQXPsgqAnvSYXcMssXTOeZ+wnTAGBT3h7JUwx
+ FzPO6ChhaFRKop6lNC4VYEj1sPlR1zxgBL2H6t2TDFC4Pz5F4iR2EiibjQ1VSLC949UP4U3jud5
+ hxCMkj+KcsFhgNY7SlkDECZawLPChAMbtf8ESxFVSMHeeoqpt7cxTcdn9j2ULlo71aH2XLIz1Fd
+ GYNO+B3cb2j77QXXZeu40i5glS5YGDtob1y4Y4x8vzefpvouAuOh3BElI9tyUFdaFZGFBzhD9U+
+ v4iKoQvs4XhfkdESE9PuLfpyUWyE1hld9f/Li4h9EHhpVHesVJcRUlnEWASdVcZc8nhYTkc0L63
+ GjBscb/CP0DLKLS6SiQmTfVKzs81DxdaJXP/dKmQ6JkzLyAalB7eImiP7iygJe9EcU95m530gZv
+ ef9SlC4+sTX3YoKK0Brhmw2lsOtnwXBq/GYJiEJCxllnqgC7XUk9aS4OGWMStf99E7tJvEKfwQx
+ KT7APpf+qyQn783ugTSZ
+X-Received: by 2002:a05:6a20:6a1a:b0:3d3:b02a:61a5 with SMTP id
+ adf61e73a8af0-3d9b0a3a286mr12173308637.28.1788414831639; 
+ Wed, 02 Sep 2026 22:53:51 -0700 (PDT)
 Received: from donnager-debian.. ([180.150.112.50])
  by smtp.gmail.com with ESMTPSA id
- a92af1059eb24-1431990a39bsm2770619c88.3.2026.09.02.22.53.30
+ a92af1059eb24-1431990a39bsm2770619c88.3.2026.09.02.22.53.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 02 Sep 2026 22:53:34 -0700 (PDT)
+ Wed, 02 Sep 2026 22:53:50 -0700 (PDT)
 From: Joel Stanley <joel@jms.id.au>
 To: Alistair Francis <alistair.francis@wdc.com>,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
@@ -79,20 +79,18 @@ Cc: Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Michael Ellerman <mpe@kernel.org>,
  Portia Stephens <portias@oss.tenstorrent.com>,
  =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
-Subject: [PATCH v3 13/16] hw/riscv/atlantis: Make TTAtlantisState own memory
- containers
-Date: Thu,  3 Sep 2026 15:21:27 +0930
-Message-ID: <20260903055131.257903-14-joel@jms.id.au>
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Subject: [PATCH v3 16/16] hw/riscv/atlantis: Map the SoC through a memory
+ container
+Date: Thu,  3 Sep 2026 15:21:30 +0930
+Message-ID: <20260903055131.257903-17-joel@jms.id.au>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260903055131.257903-1-joel@jms.id.au>
 References: <20260903055131.257903-1-joel@jms.id.au>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52e;
- envelope-from=joel.stan@gmail.com; helo=mail-pg1-x52e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42f;
+ envelope-from=joel.stan@gmail.com; helo=mail-pf1-x42f.google.com
 X-Spam_score_int: -16
 X-Spam_score: -1.7
 X-Spam_bar: -
@@ -116,80 +114,92 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The DRAM hi, DRAM low and bootrom memory containers can be owned by the
-TTAtlantisState.
+Give the Atlantis SoC a 'memory' link property. The machine creates a
+container MemoryRegion, maps it at address 0 of system memory, and
+passes it to the SoC together with the machine RAM. The SoC maps devices
+into the 'memory' container instead of system memory, allowing
+TTAtlantisSoCState to be composed together with other SoCs in the
+future.
+
+This prepares the machine for adding other microcontrollers that share
+the memory bus with the Ascalon complex (aka the Atlantis SoC), but with
+their own view of the address map.
 
 Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
 Signed-off-by: Joel Stanley <joel@jms.id.au>
 ---
- include/hw/riscv/tt_atlantis.h |  4 ++++
- hw/riscv/tt_atlantis.c         | 15 ++++++---------
- 2 files changed, 10 insertions(+), 9 deletions(-)
+ include/hw/riscv/tt_atlantis.h |  1 +
+ hw/riscv/tt_atlantis.c         | 17 +++++++++++++++--
+ 2 files changed, 16 insertions(+), 2 deletions(-)
 
 diff --git a/include/hw/riscv/tt_atlantis.h b/include/hw/riscv/tt_atlantis.h
-index 2ec283d0fd7b..9ca98bfb8478 100644
+index 5d4e4d133bd9..3923308b7c89 100644
 --- a/include/hw/riscv/tt_atlantis.h
 +++ b/include/hw/riscv/tt_atlantis.h
-@@ -31,10 +31,14 @@ struct TTAtlantisState {
+@@ -53,6 +53,7 @@ struct TTAtlantisState {
+     /*< public >*/
+     Notifier machine_done;
  
-     MemoryRegion *memory;
-     MemoryRegion *dram;
-+    MemoryRegion ram_hi;
-+    MemoryRegion ram_lo;
-+
-     RISCVHartArrayState cpus;
-     DeviceState *irqchip;
-     DesignWareI2CState i2c[TT_ATL_NUM_I2C];
-     UnimplementedDeviceState uart1;
-+    MemoryRegion bootrom;
++    MemoryRegion soc_memory;
+     TTAtlantisSoCState soc;
  };
  
- enum {
 diff --git a/hw/riscv/tt_atlantis.c b/hw/riscv/tt_atlantis.c
-index 90b8e1bc904a..d4fe505fe033 100644
+index 6c46121287c7..c6f235a7eac0 100644
 --- a/hw/riscv/tt_atlantis.c
 +++ b/hw/riscv/tt_atlantis.c
-@@ -484,9 +484,6 @@ static void tt_atlantis_machine_init(MachineState *machine)
- {
-     TTAtlantisState *s = TT_ATLANTIS_MACHINE(machine);
- 
--    MemoryRegion *ram_hi = g_new(MemoryRegion, 1);
--    MemoryRegion *ram_lo = g_new(MemoryRegion, 1);
--    MemoryRegion *bootrom = g_new(MemoryRegion, 1);
+@@ -504,8 +504,10 @@ static void tt_atlantis_soc_realize(DeviceState *dev, Error **errp)
      ram_addr_t lo_ram_size, ram_size;
-     int hart_count = machine->smp.cpus;
+     int hart_count = s->num_harts;
  
-@@ -544,22 +541,22 @@ static void tt_atlantis_machine_init(MachineState *machine)
-         exit(EXIT_FAILURE);
+-    s->memory = get_system_memory();
+-
++    if (!s->memory) {
++        error_setg(errp, "'memory' link is not set");
++        return;
++    }
+     if (!s->dram) {
+         error_setg(errp, "'dram' link is not set");
+         return;
+@@ -524,6 +526,8 @@ static void tt_atlantis_soc_realize(DeviceState *dev, Error **errp)
+     object_property_set_int(OBJECT(&s->cpus), "resetvec",
+                             s->memmap[TT_ATL_BOOTROM].base,
+                             &error_abort);
++    object_property_set_link(OBJECT(&s->cpus), "memory", OBJECT(s->memory),
++                             &error_abort);
+     if (!sysbus_realize(SYS_BUS_DEVICE(&s->cpus), errp)) {
+         return;
      }
+@@ -615,6 +619,8 @@ static void tt_atlantis_soc_realize(DeviceState *dev, Error **errp)
+ static const Property tt_atlantis_soc_props[] = {
+     DEFINE_PROP_STRING("cpu-type", TTAtlantisSoCState, cpu_type),
+     DEFINE_PROP_UINT32("num-harts", TTAtlantisSoCState, num_harts, 8),
++    DEFINE_PROP_LINK("memory", TTAtlantisSoCState, memory,
++                     TYPE_MEMORY_REGION, MemoryRegion *),
+     DEFINE_PROP_LINK("dram", TTAtlantisSoCState, dram,
+                      TYPE_MEMORY_REGION, MemoryRegion *),
+ };
+@@ -634,12 +640,19 @@ static void tt_atlantis_machine_init(MachineState *machine)
+     TTAtlantisState *ams = TT_ATLANTIS_MACHINE(machine);
+     TTAtlantisSoCState *s = &ams->soc;
  
--    memory_region_init_alias(ram_hi, OBJECT(machine), "ram.high", s->dram,
-+    memory_region_init_alias(&s->ram_hi, OBJECT(machine), "ram.high", s->dram,
-                              0, ram_size);
-     memory_region_add_subregion(s->memory,
--                                s->memmap[TT_ATL_DDR_HI].base, ram_hi);
-+                                s->memmap[TT_ATL_DDR_HI].base, &s->ram_hi);
- 
-     lo_ram_size = MIN(ram_size, s->memmap[TT_ATL_DDR_LO].size);
--    memory_region_init_alias(ram_lo, OBJECT(machine), "ram.low", s->dram,
-+    memory_region_init_alias(&s->ram_lo, OBJECT(machine), "ram.low", s->dram,
-                              0, lo_ram_size);
-     memory_region_add_subregion(s->memory,
--                                s->memmap[TT_ATL_DDR_LO].base, ram_lo);
-+                                s->memmap[TT_ATL_DDR_LO].base, &s->ram_lo);
- 
-     /* Boot ROM */
--    memory_region_init_rom(bootrom, NULL, "tt-atlantis.bootrom",
-+    memory_region_init_rom(&s->bootrom, NULL, "tt-atlantis.bootrom",
-                            s->memmap[TT_ATL_BOOTROM].size, &error_fatal);
-     memory_region_add_subregion(s->memory, s->memmap[TT_ATL_BOOTROM].base,
--                                bootrom);
-+                                &s->bootrom);
- 
-     /* UART1, the soc console (UART0 is for the boot microcontroller) */
-     serial_mm_init(s->memory, s->memmap[TT_ATL_UART1].base, 2,
++    memory_region_init(&ams->soc_memory, OBJECT(machine),
++                       "tt-atlantis.soc-memory", UINT64_MAX);
++    memory_region_add_subregion(get_system_memory(), 0, &ams->soc_memory);
++
+     object_initialize_child(OBJECT(machine), "soc", &ams->soc,
+                             TYPE_TT_ATLANTIS_SOC);
+     object_property_set_str(OBJECT(&ams->soc), "cpu-type", machine->cpu_type,
+                             &error_abort);
+     object_property_set_int(OBJECT(&ams->soc), "num-harts", machine->smp.cpus,
+                             &error_abort);
++
++    object_property_set_link(OBJECT(&ams->soc), "memory",
++                             OBJECT(&ams->soc_memory), &error_abort);
+     object_property_set_link(OBJECT(&ams->soc), "dram", OBJECT(machine->ram),
+                              &error_abort);
+     qdev_realize(DEVICE(&ams->soc), NULL, &error_fatal);
 -- 
 2.47.3
 
