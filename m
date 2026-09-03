@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56A2FC624A4
-	for <qemu-riscv@archiver.kernel.org>; Thu,  3 Sep 2026 17:00:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C8B8C624D4
+	for <qemu-riscv@archiver.kernel.org>; Thu,  3 Sep 2026 17:04:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x2AnY-0000PX-Ap; Thu, 03 Sep 2026 13:00:24 -0400
+	id 1x2ArO-0002Dm-2Y; Thu, 03 Sep 2026 13:04:22 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1x2AnX-0000P0-8e
- for qemu-riscv@nongnu.org; Thu, 03 Sep 2026 13:00:23 -0400
-Received: from mail-pg1-x531.google.com ([2607:f8b0:4864:20::531])
+ id 1x2ArM-0002D6-PV
+ for qemu-riscv@nongnu.org; Thu, 03 Sep 2026 13:04:20 -0400
+Received: from mail-pf1-f177.google.com ([209.85.210.177])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1x2AnV-0002R0-3p
- for qemu-riscv@nongnu.org; Thu, 03 Sep 2026 13:00:23 -0400
-Received: by mail-pg1-x531.google.com with SMTP id
- 41be03b00d2f7-cc147d86bebso65024a12.0
- for <qemu-riscv@nongnu.org>; Thu, 03 Sep 2026 10:00:19 -0700 (PDT)
+ id 1x2ArH-0004xv-5H
+ for qemu-riscv@nongnu.org; Thu, 03 Sep 2026 13:04:20 -0400
+Received: by mail-pf1-f177.google.com with SMTP id
+ d2e1a72fcca58-853c401326eso2295b3a.2
+ for <qemu-riscv@nongnu.org>; Thu, 03 Sep 2026 10:04:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1788454818; x=1789059618; darn=nongnu.org;
+ d=sifive.com; s=google; t=1788455053; x=1789059853; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=xMzA1Edr4/9AcwAAKxC0Ug+VONOQc457rjo8K3c+xXg=;
- b=hvbMfTSGQaAbY6d8/40j1+oPQJwtIQx3vGVcgHa6yH3hIvckZGYz1/3bieIpx7Ki98
- Uu29h1P9YYoQAtCG2kX77BcGXuMzoBgYQgRqSPlIVuPHGMVcc0fjahQlpC9FSQ3vT3Dz
- zqah4hWPPKBBju16WK6CivvLj73bJdoDJrhcc9FjD27E6DCuBiiVLcnPyWyLXucY3F3h
- 9sB/osyNDCoxB0WQ63wOy7EI0bQApi4WswnzL7iyylgaxZIM5bZj67wiHxKUcATxLNya
- Vh2Q9rn9XLm5qqXRnPgHIILm/Cs+REc52nvV2fzrQN32dbhwOuhEqtK/OdtrRVPrK1+/
- 59Sg==
+ bh=/CJ8KzvlazOBKLEVXH1fy9ZNXLYvu4iaL4gRsQwz/YM=;
+ b=WRvdzaK2cPxj0Ha5MRtzTzRa9lgN8UEG3kyMxdj+tmzBvIUvZFssysN8adbmOuMCwY
+ rElA7b13U0j79/h/1Vyw/n7B3wGpQqDkFGDra1Cktcr0K9Imenrgj+HR9fyO26kbXOMJ
+ AEdsO0KxzATySgfEUiovJQzxVWaYOYX2yhcztnQXY9SskuRhGuRIf1rEmWa8Pf2xmo34
+ +FwNp/rc+6fWMrIxtsR7kZM+rZCHB7fyIuPlEnShtZ/vRiE+IZv5YgaVhWQ4G37bYUuP
+ 7eLK32IDsqhKangaqjzvDRWCekC0Z3iFee4QaQtdaZIaokCenfWufl57pY09u1dg/6VH
+ dDCQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788454818; x=1789059618;
+ d=1e100.net; s=20251104; t=1788455053; x=1789059853;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=xMzA1Edr4/9AcwAAKxC0Ug+VONOQc457rjo8K3c+xXg=;
- b=hiCm30ub+nvVfInQPUcsiVj39FCD6Juo1NPnkl6/rVhhjRBXZW9kKGHHyQdMtQVKoz
- 3X/05JE4705SZXHEsNWw53E6fX5S/tCTE2JE5H0XYWJAZXy8KZXCPMjzHar9WIZ+OZ6z
- JYRFgk2jZhudck4Q9YjRYGKTKDaswnMWyytn+MMQZZC+d0qUCh3CyhJidffuGZT28jeP
- ctpseDD6PRKP2G+3qrPCh6KR3u5zib3WGCT0cmrF7cdbefBHcSHSl6x2Q+SPVEbxsXY6
- bxoXFXGCnPQgJ54sFtU8q2MMbq+P6UFA9z2VvZFyFlGo7ShF6tAvnXwdvkljaRKJCF7k
- 0mCQ==
+ bh=/CJ8KzvlazOBKLEVXH1fy9ZNXLYvu4iaL4gRsQwz/YM=;
+ b=WPwzBrKXfq8sMu90sMffnVni0rCd+AElAeumh2/byrg1ByHBnmfUhBt+o0oLdjloDv
+ tMnLncnUYG5KY7w7CsvRWuT5QO7nlIEn/Ys27YUUHy9YGx8xsoaSmRpDiqWeTQ2GXzFQ
+ uqpW4oQej9//7PdQKPXiKOXUTCEKduiXDmAObsC+qW21zXnVNLEOY+PBEhQVLPWFQ0GK
+ yM8nEOrzV/KqnFiGSCn4jetbwYSVwcCWKVNIz2iH3E6daU33n/bEwt7aTEVa1hhQtWCo
+ 3vh5hUTO6bJhftHcAO3mukvf8WdWqx2TZGCAdSJgvaZuUZJrguhWizEQ41ZYrRp3vN62
+ nkQg==
 X-Forwarded-Encrypted: i=1;
- AKwUvBypCVzcsDXkM2RKY10+2sRe9fguupWz2cyhzygYN6XbGID2HoywgFmv0FnIGeSzhnAmmep5mCVWsatF@nongnu.org
-X-Gm-Message-State: AFuF++l724hVwAgujnC4ItWC9OmWuUYOXEgdIrlGQCyyXtQF7fQGua5j
- YuMRSILOeRMxfSAarTbIzCcCz4HFWcyHtnfHdTPA9KOki94NLIaA6JQnHlqBtSWTA4g=
-X-Gm-Gg: AYBFou1DjUT5k8zULj0+HmJaXrIUHJ9ELdgwlaTwNV8twZlHOVOjqXYAZmPdoERiq5c
- HxOefu5LZtUK9BAJaxkp3yuGPfDfq8nXEZ7O9EaiHUxkhSRAPZZKpChpA1H+Ld/kfPYLS7ChRrK
- eVgfGDuW7pcEBBvr2hb4NuKT5s4A7tJp8ZIRZSkakiFnKGz2fQAWZp6sqNW41udEw7eNv6MeWTH
- mjqYNTBX89kvLRn7C3TFs9rYz9+HqnbqC8LkCFDWsFHWA47lIVEeAybetuP5/FbY5MYRXFuZqEK
- 0LIGOd2rQyTktr56TeEpIB5ETYT7zTtkKRGAh9YpljcMwvA/iu9QFBAvHXAVquUOLaUpJqtPpDC
- m2zCs4jsBrPFR1Yjz3EWy7BcaXAE5YVpvYtgU5dhquI2PZHoOORob28Y15mCQMmfmKibplQcPUn
- yr/pTIb6OfW4O3wEZPHT9rPBp2kKbKWWSQij3wrYmBGKXjSwMgUiYWn1NMtt4Eh1zaXKZFiOAKF
- H7obD26HbYwWMpJBhdhvSrbN09pFpuRZvkTZAb62phrjjwPjZPan5cW9Rb+thA=
-X-Received: by 2002:a17:90a:c106:b0:398:9bd3:d6d6 with SMTP id
- 98e67ed59e1d1-39b13324513mr3809123a91.16.1788454817550; 
- Thu, 03 Sep 2026 10:00:17 -0700 (PDT)
+ AKwUvBzPOYnOErpbQvbSwg6QkpeTObpz74ZaAIv5L3zy4+lanoROZwNJULykDAjNQXEq1+edeXaSKs4jqR+T@nongnu.org
+X-Gm-Message-State: AFuF++kIrJnfBweTTOxFZJKFv0RNiNvHX2lDIui3d/4KiKFrEVkAvHyB
+ iXM/c2Am5ZIsb6swfff0W1nfoHVzl4EG+YcGRRydQe9wPtO/wJOx/bn0XdPvJjKpl5g=
+X-Gm-Gg: AYBFou3AXTxNTKlOV0vgbeBvcUjLeK1CHXFLCJSjZlGn5D529nvvZ6qyxBELFrvKOZF
+ awNoKeuEWM3auVMBqv19jHkBhmOHxbFwqpFFTnM3YHC8JdM9ujlEdglOoi0M1G2sOsuJQA9dNBE
+ p6vk7YSsD8W2b0SYI96MhPJJJMdcy167Rz3IqxLzNcHg+2QQNMHSlNqEvsj1AfcSuN5A59VlwZO
+ JSkevFk7FjETFIExAs3uOLIWzxrEm6TDW7cZyZVEM6sk0ZFPlLS5cGedsAbPu02Ig/LUPvBZBKg
+ jiUa9JtlPFstogjeEolsyeasMxcRKPbtsAJjWKmqQjked+nXBzesA4aRYdgoreM5pXO/6j6zv8b
+ mzMmnfQHR3tF/rnH+k0yffzpglII04O6Wp7enKyYQSsKe8BhQf6WfGumexNZ49mhU/Q+WFR8odQ
+ p0QmhkBcg1HJO5rUTQqXiTTo+kt7/TYDwtXBDwSCQIDtjPIENKtCnhsRfj7tb0Kkdn/uRFcrWAC
+ aJeZkSBH2pDZ7XIG/JY+TUInLkh8x0jX0QNTRVhrO/j+y7zIHRN8pwgDYVjq65lP5QqMVBgvA==
+X-Received: by 2002:a05:6a21:115:b0:3d3:adbf:7782 with SMTP id
+ adf61e73a8af0-3d9b0012574mr22893038637.23.1788455051517; 
+ Thu, 03 Sep 2026 10:04:11 -0700 (PDT)
 Received: from duncan.localdomain (114-35-142-126.hinet-ip.hinet.net.
  [114.35.142.126]) by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-39b087b59a0sm6592159a91.17.2026.09.03.10.00.15
+ 41be03b00d2f7-cc43d39e4ddsm1227860a12.5.2026.09.03.10.04.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 03 Sep 2026 10:00:17 -0700 (PDT)
+ Thu, 03 Sep 2026 10:04:11 -0700 (PDT)
 From: Max Chou <max.chou@sifive.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -74,22 +74,14 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
  Richard Henderson <richard.henderson@linaro.org>,
  Max Chou <max.chou@sifive.com>
-Subject: [PATCH] tcg/riscv64: Set vtype before whole-register vector moves
-Date: Fri,  4 Sep 2026 01:00:11 +0800
-Message-ID: <20260903170011.3627720-1-max.chou@sifive.com>
+Subject: [PATCH 0/2] tcg/riscv64: Fix AUIPC pair range validation
+Date: Fri,  4 Sep 2026 01:04:03 +0800
+Message-ID: <20260903170405.3632015-1-max.chou@sifive.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::531;
- envelope-from=max.chou@sifive.com; helo=mail-pg1-x531.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
-X-Spam_action: no action
+Received-SPF: pass client-ip=209.85.210.177; envelope-from=max.chou@sifive.com;
+ helo=mail-pf1-f177.google.com
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -104,35 +96,74 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-According to the RISC-V unpriviledge spec,
-  "vset{i}vl{i} and whole register loads and stores do not depend upon
-   vtype."
-The whole-register vector move instructions reuqire legal vtype that
-trap when VILL is set.
+This patchset tries to fix the AUIPC-pair range checking issue in
+current TCG riscv64 backend.
 
-The tcg_out_mov in tcg/riscv64 missed the vtype setup before emitting the
-OPC_VMVNR_V.
-
-Fixes: d4be6ee1111 ("tcg/riscv: Implement vector mov/dup{m/i}")
-Signed-off-by: Max Chou <max.chou@sifive.com>
+The issue will be triggered in the following example.
 ---
- tcg/riscv64/tcg-target.c.inc | 2 ++
- 1 file changed, 2 insertions(+)
+Assumptions
+- AUIPC at       0x00007fff77fa1258
+- target call at 0x00007ffff7fa12d6
 
-diff --git a/tcg/riscv64/tcg-target.c.inc b/tcg/riscv64/tcg-target.c.inc
-index 2ce9d47a633..fbfb4c44470 100644
---- a/tcg/riscv64/tcg-target.c.inc
-+++ b/tcg/riscv64/tcg-target.c.inc
-@@ -778,6 +778,8 @@ static bool tcg_out_mov(TCGContext *s, TCGType type, TCGReg ret, TCGReg arg)
-         {
-             int lmul = type - riscv_lg2_vlenb;
-             int nf = 1 << MAX(lmul, 0);
-+
-+            set_vtype_len(s, type);
-             tcg_out_opc_vi(s, OPC_VMVNR_V, ret, arg, nf - 1);
-         }
-         break;
+The direct pc-relative displacement from the AUIPC at 0x00007fff77fa1258
+is 0x000000008000007e, so it is already outside the signed 32-bit range.
+tcg_out_call_int therefore takes its far-call path: it separates the JALR
+immediate (0x2d6) and asks tcg_out_movi to materialize this page-aligned
+base:
+
+  target call  = 0x00007ffff7fa12d6
+  JALR lo      =              0x2d6
+  base         = 0x00007ffff7fa1000
+  base - AUIPC = 0x000000007ffffda8
+
+The final value, 0x7ffffda8, is less than INT32_MAX. The current range 
+therefore accepts it, but that is not sufficient: the signed low 12-bit
+immediate must be removed before the value can be encoded in AUIPC.
+
+The current reloc_call performs that split as follows:
+
+  int32_t lo = sextreg(offset, 0, 12);
+  int32_t hi = offset - lo;
+
+For the captured placement, the values required by the split are:
+
+  offset = 0x000000007ffffda8
+  lo     = 0xfffffffffffffda8
+  hi     = 0x0000000080000000
+
+The lo is representable by the ADDI immediate. But the hi is not
+representable by int32_t: narrowing it produces the bit pattern
+0x80000000, which is -0x80000000 as a signed 32-bit value.
+Thus the int32_t split can accept a wrapped upper value instead of
+proving that the positive upper contribution required by AUIPC is
+representable.
+
+AUIPC has a 20-bit immediate which it shifts left by 12 and sign-extends.
+Consequently, an encoded immediate of 0x80000 means -0x80000000, not the
+required +0x80000000. The resulting generated code will be:
+
+  0x00007fff77fa1258: auipc t6,-524288
+  0x00007fff77fa125c: addi  t6,t6,-600
+  0x00007fff77fa1260: jalr  ra,t6,726
+
+It computes the base as 0x00007ffef7fa1000 and transfers to
+0x00007ffef7fa12d6, exactly 4 GiB below the requested callback which is
+0x00007ffff7fa12d6.
+---
+
+This patchset addresses the issue of AUIPC split checking and applies
+the corrected split. It ensures that the split is checked before
+emitting AUIPC/ADDI and AUIPC/JALR pairs in tcg_out_[movi|call_int].
+
+rnax
+
+Max Chou (2):
+  tcg/riscv64: Validate AUIPC relocation range
+  tcg/riscv64: Fall back when AUIPC pairs are out of range
+
+ tcg/riscv64/tcg-target.c.inc | 68 ++++++++++++++++++++++++++----------
+ 1 file changed, 49 insertions(+), 19 deletions(-)
+
 -- 
-2.43.0
-
+2.43.7
 
