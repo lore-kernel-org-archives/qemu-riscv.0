@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07081C624D6
-	for <qemu-riscv@archiver.kernel.org>; Thu,  3 Sep 2026 05:54:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D603C624D4
+	for <qemu-riscv@archiver.kernel.org>; Thu,  3 Sep 2026 05:54:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x20OE-0007SQ-ND; Thu, 03 Sep 2026 01:53:34 -0400
+	id 1x20O0-0006mp-Ko; Thu, 03 Sep 2026 01:53:21 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1x20OD-0007I1-9i
- for qemu-riscv@nongnu.org; Thu, 03 Sep 2026 01:53:33 -0400
-Received: from mail-pf1-x42d.google.com ([2607:f8b0:4864:20::42d])
+ id 1x20Nr-0006hZ-7B
+ for qemu-riscv@nongnu.org; Thu, 03 Sep 2026 01:53:13 -0400
+Received: from mail-pf1-x42e.google.com ([2607:f8b0:4864:20::42e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1x20OB-0006V9-GM
- for qemu-riscv@nongnu.org; Thu, 03 Sep 2026 01:53:32 -0400
-Received: by mail-pf1-x42d.google.com with SMTP id
- d2e1a72fcca58-8541875f596so878658b3a.0
- for <qemu-riscv@nongnu.org>; Wed, 02 Sep 2026 22:53:31 -0700 (PDT)
+ id 1x20Np-0006TO-Ij
+ for qemu-riscv@nongnu.org; Thu, 03 Sep 2026 01:53:10 -0400
+Received: by mail-pf1-x42e.google.com with SMTP id
+ d2e1a72fcca58-84e0688b7e8so1898169b3a.1
+ for <qemu-riscv@nongnu.org>; Wed, 02 Sep 2026 22:53:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1788414810; x=1789019610; darn=nongnu.org;
- h=content-transfer-encoding:content-type:mime-version:references
- :in-reply-to:message-id:date:subject:cc:to:from:sender:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=MaHj2HowZCWhtPsZkI2qVF6kAeDGq/nORPPomR0v2Cc=;
- b=g1C8o5MacZcQpmU7wqC2YyTb5b+mW28iEYnInPpmP7NvWITFbBNLuJk+ZCCA6G6ZB5
- TSbCzx3tUplET8Hwwlo3uThVegG4TAIZozyuQhd/aLy9E+D5SDKz6J28S/xPQtVAqUAp
- N8nCuwC9R3rsejdm293RL0ViXj5VLJ0d+ZOnNxMqHu+Bp56hIB4rVigmbyqSZ56/ceMW
- GgLAHPM8mmv/XeHq1CwIFRpA7DJ3AstJXcNWMhEQyYFuCfKy5bgFZgHKcJEUEbo8XjTe
- V4AicHGBIvlIP8PZJjtIjR0HzLxjvW9Svos6nWsgmnXNbKE1dwY3YcYd1DS0r9V3Hugm
- r5KQ==
+ d=gmail.com; s=20251104; t=1788414788; x=1789019588; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:sender:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=zzHd8Swv+yj+u2BkQmCyGqXupXQENpHU2L/YRyfQl20=;
+ b=KCujN2wR5P4OQYFEdTOY5sKXckMQTolwpxfLcYDB/v1SnEjNNApM9h7rgIGKfwTT81
+ nPo+QlXRaN4iAd6bK786Gt0NJwTTQlcWL26mbQOQ03GSGDiiPV1oFXJcuy5gtS195FNb
+ zJhZktuKu3bQhTcbnNjH+3V0JWSfTBW21dSaN7CmJwE+6HN/yNY5dfXAOwJpVSYexRRs
+ IM5vdmqvMZSrdgITu+K1Ft6ywHrXDWsWS9fmWqi+mdDOdiUK2xVZ7cHCSBRNogvTEJha
+ zxBnsZqK39rLR+8yV0nZMo6vVHPNKswp6hGHeHaeVxdq//tIci4g3im5ziVjlIwG63Yt
+ URaA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788414810; x=1789019610;
- h=content-transfer-encoding:content-type:mime-version:references
- :in-reply-to:message-id:date:subject:cc:to:from:sender:x-gm-gg
+ d=1e100.net; s=20251104; t=1788414788; x=1789019588;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:sender:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=MaHj2HowZCWhtPsZkI2qVF6kAeDGq/nORPPomR0v2Cc=;
- b=emS9JtxmN7iU5l+VWetYUUHr36Jnd9L+iW0wpjCKfvVnGtjKeUaU/1eIoYKXpo4mYP
- 5POJ7tNdlKVYiFwgy9MVlgW83eXs+EmbaiPhPIGI6lES74N+xH4/DNPh0ECBpixEie83
- HPkqrOCwTHVcWzorAuV7rAXeiCE/Cc3GQVhJFuI+RBz9asUiq3HUKlVLZHgOFXExA18g
- pYroRsRwF3IUNkQzXgRE1OJJkEDI5MRq/ePRM0oT/cxFs/2XtRI94km1JBaqXCX6vyKD
- DpveVI3rlki4jypzcuSYkdchh81N+JQIkLdV35wpTgp0aKmmEl94o9PmuqsSMtJjgM/7
- FcOA==
+ bh=zzHd8Swv+yj+u2BkQmCyGqXupXQENpHU2L/YRyfQl20=;
+ b=LP12Cvc10ONnzI7DB38lzTf+fPbD9e69Wqz7JqgoBoEBcv7KDRgrXRLzeWlrYONYcR
+ RnDqP82+EFAxsHIwbzHJ0K/AM3Pu7xf93K7ITwoLSY6bT/5fgCPmtp716AerOeXTxmDB
+ tB8/XaoCFAokpFTuOjQS9imP5ZnTy65W4Cofmny1ad+4wlynlAWU0PItmcDBuQbOQZRo
+ pI2Z4u7W3W0y3nFjAYVEU0f3zR7wLBSWr0h9tNN/ENfO3FAR76Wio1q6Yk21uc+0b6tf
+ LAcTEE/QNA32yUP0yoMwKTxf5EWJ1jjCriTK/ufbo5ISeQqHSV7GmiPRsf57de6ZDQ38
+ XAFg==
 X-Forwarded-Encrypted: i=1;
- AKwUvBwrTxTR0bwnhzvwesi29JzgO8sCeDSNiDH+ZMf09vAfFz31f/2wON6wOQrVwXscLpGnLrHJTF5M8PxZ@nongnu.org
-X-Gm-Message-State: AFuF++lW7RZnDHFWgZAdaG9oheQHLU9tK/MGN2W7BhDBrRMqw1ijmVgt
- 8tOcrZlz0dB0rcdXD8pH28X2EzOTyecNVE5q5WeQwHh5stVWJMmPSTZ7
-X-Gm-Gg: AYBFou3ePJxWafX4cJr+DZc1nn0gKEfIs6bwvRIeAz9UYXSHb+0zSf2mcarhGzLWovF
- UC4qus9xRmAd6AQZpnv/kN7DWtT0aHvJ587XW2O5ftRSA4Al+9luMwpTQ/8KOF7Cv3IM7WXM+9v
- BsA20CFw7v1ib5TGuB0LqTTzZwJaL5hDwI5kOoMSV675+FUzzn9HX6/yKdpkywcnRrH6xKWuCyH
- hZspYAvu4kMKdXVF0N4/JN/1DbDkRD1ltpbiJTr6K+DfYBWio5wh1tgOiks9z0wL9fWJfQO6ryq
- 7+jCfPnFKvst8RezrTTJnGLvkRJzvN9QCX21LhMwnrKu+N783wn/SJYhJHoJMTncgmaGC6/liuS
- VSiIOFY1kvRmFjac65qIQB4NAxVV088gvnMziKRrcfYLdLwjvYAeLKWfgH8+bIpKYRzSu32Ic2C
- NHzzaBhY+4T3Lyor5s4FMI/KmNmFH2ceUqmz4iRdZznkk+K5qyW+1G7z/XKBnaVawgqMnv3LjKx
- vKSikMlgJ0R5GtDN+I5hnnC+RZm4m89Idn4IoR8csvb44iMK9q38CpAX3xr5Y3MtML16rLRhyZS
- nn/i+N/d2816P08HYgyZOWlqLwiPzBQ=
-X-Received: by 2002:a05:6a21:9f17:b0:3d3:ad3c:49a8 with SMTP id
- adf61e73a8af0-3d9ae7e0913mr15697142637.22.1788414810140; 
- Wed, 02 Sep 2026 22:53:30 -0700 (PDT)
+ AKwUvBxcTynXDpEJYqyxu2KORQukOhZpqSwZQq8DDiTwqpyRtxr/nDQkgeoTMgN2LrD1YE6UWktbwDq4dgBf@nongnu.org
+X-Gm-Message-State: AFuF++mHQjI+31orv+ijiD208Rk6DzlcJmg5ohwd08+J9tO+V8BeIVyr
+ e40jlNa9oRriSoMx87/PxmvL9deMpHEKCUEZO00EVHQt4xA/r4Sh55Re
+X-Gm-Gg: AYBFou0dACon8d7wJg7y5T703vm3DULj5TzxejX0GOtVwsv2mtILQj4riJmSC/Gb1KQ
+ IgjZ63j9PIuaYbE5MmEH6j8Wl+0PGXlH5YRHl9dVpAAN4m+4+ygyijaYpGJ6ScP+PgVQa3MuuPC
+ pwsobBmyCgyNbOysvw0t2NUCtNfQ3+sYNc+4wHvz9sr9hicUcb8ARHaf2hWq/OpDmvLNgqCgsiY
+ Yc+XhnfvOe5q3pJF7cujn0uiWxE6g+5Ayi+ZOVs9CMu8RIcffwV1y5mwEus+G6hmdWFTS7MUNrO
+ Cxri+AnM4jNEXzC1wMalsml+HA6GY40TDB86vHzp1XfRqRpKrB+RHjQXRUemK8uI4gPmUx+TGDL
+ HTMLoBGTOJ5lIN5+fY9HPuTlG81jhVBv7Ne/C8UHlR1Kn/+TitphCvJ7fWCqcLsxNgC6z25bBm/
+ fJVWNSiWE6d1fdL3DVjJBIG9U1XOvcNTj0eIeL/nSwhyxAvE7LNvuA6LrzXp+741yRQ/Mx0LDCF
+ STkMlGlxIb9/3EekbRn1O2bTzMBNlkS8keudKi3S+wFuV3o7dZd5xp4tzihju6erBW3JAz61djT
+ COaER2w1tTiRdbZUzFZ6
+X-Received: by 2002:a05:6a20:9146:b0:3b2:a809:1000 with SMTP id
+ adf61e73a8af0-3d9ac8425c0mr13410369637.3.1788414788072; 
+ Wed, 02 Sep 2026 22:53:08 -0700 (PDT)
 Received: from donnager-debian.. ([180.150.112.50])
  by smtp.gmail.com with ESMTPSA id
- a92af1059eb24-1431990a39bsm2770619c88.3.2026.09.02.22.53.24
+ a92af1059eb24-1431990a39bsm2770619c88.3.2026.09.02.22.53.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 02 Sep 2026 22:53:29 -0700 (PDT)
+ Wed, 02 Sep 2026 22:53:07 -0700 (PDT)
 From: Joel Stanley <joel@jms.id.au>
 To: Alistair Francis <alistair.francis@wdc.com>,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
@@ -79,20 +79,17 @@ Cc: Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Michael Ellerman <mpe@kernel.org>,
  Portia Stephens <portias@oss.tenstorrent.com>,
  =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
-Subject: [PATCH v3 12/16] hw/riscv/atlantis: Decouple RAM size from
- MachineState
-Date: Thu,  3 Sep 2026 15:21:26 +0930
-Message-ID: <20260903055131.257903-13-joel@jms.id.au>
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Subject: [PATCH v3 08/16] hw/riscv/atlantis: Remove unused fdt_size
+Date: Thu,  3 Sep 2026 15:21:22 +0930
+Message-ID: <20260903055131.257903-9-joel@jms.id.au>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260903055131.257903-1-joel@jms.id.au>
 References: <20260903055131.257903-1-joel@jms.id.au>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42d;
- envelope-from=joel.stan@gmail.com; helo=mail-pf1-x42d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42e;
+ envelope-from=joel.stan@gmail.com; helo=mail-pf1-x42e.google.com
 X-Spam_score_int: -16
 X-Spam_score: -1.7
 X-Spam_bar: -
@@ -116,96 +113,59 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Keep a reference to the machine's RAM MemoryRegion in TTAtlantisState,
-and get the MemoryRegion's size where the configured RAM size is
-required.
-
-This allows reading the RAM size without needing a pointer to
-MachineState, decoupling the memory layout setup from the machine.
+The machine state carries around the FDT size which isn't used by
+anything.
 
 Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
 Signed-off-by: Joel Stanley <joel@jms.id.au>
 ---
- include/hw/riscv/tt_atlantis.h |  1 +
- hw/riscv/tt_atlantis.c         | 20 ++++++++++++--------
- 2 files changed, 13 insertions(+), 8 deletions(-)
+ include/hw/riscv/tt_atlantis.h | 2 --
+ hw/riscv/tt_atlantis.c         | 9 +++++----
+ 2 files changed, 5 insertions(+), 6 deletions(-)
 
 diff --git a/include/hw/riscv/tt_atlantis.h b/include/hw/riscv/tt_atlantis.h
-index a29c67c1cfcf..2ec283d0fd7b 100644
+index c9308aa57017..d0cca3b02424 100644
 --- a/include/hw/riscv/tt_atlantis.h
 +++ b/include/hw/riscv/tt_atlantis.h
-@@ -30,6 +30,7 @@ struct TTAtlantisState {
-     const MemMapEntry *memmap;
- 
-     MemoryRegion *memory;
-+    MemoryRegion *dram;
-     RISCVHartArrayState cpus;
+@@ -33,8 +33,6 @@ struct TTAtlantisState {
      DeviceState *irqchip;
      DesignWareI2CState i2c[TT_ATL_NUM_I2C];
+     UnimplementedDeviceState uart1;
+-
+-    int fdt_size;
+ };
+ 
+ enum {
 diff --git a/hw/riscv/tt_atlantis.c b/hw/riscv/tt_atlantis.c
-index 2a70119c2c6b..90b8e1bc904a 100644
+index a2fb83aab78e..7d31294ea1fb 100644
 --- a/hw/riscv/tt_atlantis.c
 +++ b/hw/riscv/tt_atlantis.c
-@@ -82,12 +82,13 @@ static uint32_t next_phandle(void)
- 
- static void create_fdt_memory(void *fdt, TTAtlantisState *s)
+@@ -367,10 +367,10 @@ static void finalize_fdt(TTAtlantisState *s)
+ static void create_fdt(TTAtlantisState *s)
  {
--    hwaddr size_lo = MACHINE(s)->ram_size;
-+    hwaddr ram_size = memory_region_size(s->dram);
-+    hwaddr size_lo = ram_size;
-     hwaddr size_hi = 0;
+     MachineState *ms = MACHINE(s);
++    int fdt_size = 0;
  
-     if (size_lo > s->memmap[TT_ATL_DDR_LO].size) {
-         size_lo = s->memmap[TT_ATL_DDR_LO].size;
--        size_hi = MACHINE(s)->ram_size - size_lo;
-+        size_hi = ram_size - size_lo;
-     }
+-    ms->fdt = riscv_create_board_device_tree(
+-        "Tenstorrent Atlantis RISC-V Machine",
+-        "tenstorrent,atlantis", &s->fdt_size);
++    ms->fdt = riscv_create_board_device_tree("Tenstorrent Atlantis RISC-V Machine",
++                                             "tenstorrent,atlantis", &fdt_size);
  
-     riscv_create_fdt_socket_memory(fdt, s->memmap[TT_ATL_DDR_LO].base,
-@@ -486,11 +487,14 @@ static void tt_atlantis_machine_init(MachineState *machine)
-     MemoryRegion *ram_hi = g_new(MemoryRegion, 1);
-     MemoryRegion *ram_lo = g_new(MemoryRegion, 1);
-     MemoryRegion *bootrom = g_new(MemoryRegion, 1);
--    ram_addr_t lo_ram_size;
-+    ram_addr_t lo_ram_size, ram_size;
-     int hart_count = machine->smp.cpus;
+     qemu_fdt_add_subnode(ms->fdt, "/chosen");
  
-     s->memory = get_system_memory();
+@@ -386,8 +386,9 @@ static void load_fdt(TTAtlantisState *s)
+     MachineState *ms = MACHINE(s);
+     char **node_path;
+     Error *err = NULL;
++    int fdt_size = 0;
  
-+    s->dram = machine->ram;
-+    ram_size = memory_region_size(s->dram);
-+
-     s->memmap = tt_atlantis_memmap;
- 
-     object_initialize_child(OBJECT(machine), "soc", &s->cpus,
-@@ -533,20 +537,20 @@ static void tt_atlantis_machine_init(MachineState *machine)
-      * The high address is where RAM lives. It is always present and may be
-      * up to 64GB. The low address is an alias of the first 2GB of that RAM.
-      */
--    if (machine->ram_size > s->memmap[TT_ATL_DDR_HI].size) {
-+    if (ram_size > s->memmap[TT_ATL_DDR_HI].size) {
-         char *sz = size_to_str(s->memmap[TT_ATL_DDR_HI].size);
-         error_report("RAM size is too large, maximum is %s", sz);
-         g_free(sz);
-         exit(EXIT_FAILURE);
-     }
- 
--    memory_region_init_alias(ram_hi, OBJECT(machine), "ram.high", machine->ram,
--                             0, machine->ram_size);
-+    memory_region_init_alias(ram_hi, OBJECT(machine), "ram.high", s->dram,
-+                             0, ram_size);
-     memory_region_add_subregion(s->memory,
-                                 s->memmap[TT_ATL_DDR_HI].base, ram_hi);
- 
--    lo_ram_size = MIN(machine->ram_size, s->memmap[TT_ATL_DDR_LO].size);
--    memory_region_init_alias(ram_lo, OBJECT(machine), "ram.low", machine->ram,
-+    lo_ram_size = MIN(ram_size, s->memmap[TT_ATL_DDR_LO].size);
-+    memory_region_init_alias(ram_lo, OBJECT(machine), "ram.low", s->dram,
-                              0, lo_ram_size);
-     memory_region_add_subregion(s->memory,
-                                 s->memmap[TT_ATL_DDR_LO].base, ram_lo);
+-    ms->fdt = load_device_tree(ms->dtb, &s->fdt_size);
++    ms->fdt = load_device_tree(ms->dtb, &fdt_size);
+     if (!ms->fdt) {
+         error_report("load_device_tree() failed");
+         exit(1);
 -- 
 2.47.3
 
