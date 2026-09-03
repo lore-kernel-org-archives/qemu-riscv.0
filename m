@@ -4,148 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03641C624D4
-	for <qemu-riscv@archiver.kernel.org>; Thu,  3 Sep 2026 00:16:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF18BC624D6
+	for <qemu-riscv@archiver.kernel.org>; Thu,  3 Sep 2026 01:37:43 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x1v7O-0002aQ-7m; Wed, 02 Sep 2026 20:15:50 -0400
+	id 1x1wNv-0002C1-E8; Wed, 02 Sep 2026 21:36:59 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <brian.cain@oss.qualcomm.com>)
- id 1x1v7N-0002Zb-83
- for qemu-riscv@nongnu.org; Wed, 02 Sep 2026 20:15:49 -0400
-Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <brian.cain@oss.qualcomm.com>)
- id 1x1v7K-00083X-L8
- for qemu-riscv@nongnu.org; Wed, 02 Sep 2026 20:15:48 -0400
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 682NHcf62805840
- for <qemu-riscv@nongnu.org>; Thu, 3 Sep 2026 00:15:43 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- ihIYbwk9MLemaviwg136qnzZ070iXCIt5GZ5ewBPZjE=; b=GFvFdtFFFAR4uVf2
- y27ZvO2p0YmUzxn48yav1mf0g1kdb7HOQiy1BY+eMQ7gfKMgBags2q7zpTbEhmpo
- gJBA1FKaXuSqgml26auhG5O1nw2BxSgfxwUGO3Us1mn8M+XmzBk2vPXjDpjJyjgV
- ZE6lNr3SToQkbBa/CAVKVpeMwiGHyEwCDTSP7ybdICUX4wv6Mf2owwEmVs+hGjNU
- Dyxk9uTYfA6UqCWeJRWSABdxnxpXvLlnTrgBrELi+zD6sD1usZ3pFEP7Mywr9XfH
- byYD14hLpSyxLDxF6oBjaDHU7igp/v+PvvC/TJgwMdkd2OG5/U2j5mC7E2jZT0eV
- KGHf4g==
-Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com
- [209.85.160.199])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4genrdtc4u-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Thu, 03 Sep 2026 00:15:43 +0000 (GMT)
-Received: by mail-qt1-f199.google.com with SMTP id
- d75a77b69052e-53033887f50so40715251cf.2
- for <qemu-riscv@nongnu.org>; Wed, 02 Sep 2026 17:15:43 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <fritchleybohrer@gmail.com>)
+ id 1x1wNt-0002BY-NB
+ for qemu-riscv@nongnu.org; Wed, 02 Sep 2026 21:36:57 -0400
+Received: from mail-pj2-x05.google.com ([2607:f8b0:4864:39::5])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <fritchleybohrer@gmail.com>)
+ id 1x1wNr-0001hV-8c
+ for qemu-riscv@nongnu.org; Wed, 02 Sep 2026 21:36:57 -0400
+Received: by mail-pj2-x05.google.com with SMTP id
+ d9443c01a7336-2d942de6574so10299605ad.0
+ for <qemu-riscv@nongnu.org>; Wed, 02 Sep 2026 18:36:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1788394543; x=1788999343; darn=nongnu.org;
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=ihIYbwk9MLemaviwg136qnzZ070iXCIt5GZ5ewBPZjE=;
- b=GD5RbwdFa+GgpC1ZAuAM/NH9eQo48B3SJEFI/ZGxGiC8alrWkb0RQrizD4Oah1NXoe
- nSCdjWy++xKYjwWt3Jwj143+/QeqDcvW08exw1GjwEPgl+8owCfpP35SckfPMuw/jnVn
- MmxA/PxjOYuHWZ6RmGQ6vLPrudy0iFypYreJMg2t9M70Q7xPvbDu+P1zft7V8jINRIVn
- lNhnSJ03vdjENbuK5wHmtN/C4I2W1uxNoeOa1Tu4oGtLWGc0XfTAI7vAl6peBxFpTbWj
- +TGFr5gcrDUV2IGzpD5LnlwtYzpr02lHwxJW67yuUb5Mwb8eYcF3/arr7xjsL6zeKeV5
- f5kw==
+ d=gmail.com; s=20251104; t=1788399413; x=1789004213; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=Y+Er1ySClcSQZ5eIZigpbczfs6irJAot5XGj3pf/ZPY=;
+ b=a27111/Cle3TOE5GhT8YMrLQGP0FOBF/WRKvNpSBvmAKpXl7RnDMMDNQ6vESBL8UeQ
+ 3zT0CfQSC7MXahPnWAkNmMRBP5MQds+y8pDaU6fH24jpbsgX1x31eK+GUhqEt2kTUDtr
+ J9kJw+6fmN7+7I7UXygdD7BaG52rFqGpmlqhPFiF37oZvVGSlBxW8ZaDq+P6LZIsdDo7
+ rSP7Xqtw3S86Y/B4TtvWedFjle+CDOFkh/L4C2C7C2YFWDZdzmBJ47nUIbGyG2DFgOu0
+ D9A+jC+tho52YBD2GU2c6fpdktiHr5k0IejKxCnv7pGYx4d9DLUU4/WALmyg7bGqtWau
+ frQw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788394543; x=1788999343;
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20251104; t=1788399413; x=1789004213;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=ihIYbwk9MLemaviwg136qnzZ070iXCIt5GZ5ewBPZjE=;
- b=GT7nlg8Z4RKjOTcWNXvk9sgL4Uq2/BnxEKt8hby8mMhcaxwmT6T/HahirBwKMyd9rD
- VirF8W2H+WGLU0syKCAP1IlfOaIb1roFgO2IcISSHu7RdXBls5lJRAcx0sZtJLd0dP5a
- NRrcgcMMvk4R3Lv3MOhln0gpVR4f7mfHdke8/5saovJJrTu9/Y9bcklzJf0bcAGqGLQm
- H3g7TSyStsB/r0amm2B+J/yQSjQwEC830wPmF+lUIeajDGseSjbv7cuyK9WepZL6BlPo
- gx5kxlQMMqAzZa/pQlv/vg6hqrEC7oKJVI7dTioBrihkB3bXZlrV+MfPPWsFuqokzgrH
- uLgQ==
-X-Forwarded-Encrypted: i=1;
- AKwUvBxyKNA26kOXZumZD9TvLuSsyx0/hBAGtNyJLx6k1eLKTpHfE1zwxp7YMuL2GQtGcu0fblDhnNe5FjIv@nongnu.org
-X-Gm-Message-State: AFuF++mNAK1pMB3E6+Y90aj2Aq3p4Hi7/F/CxviOkNmSTD8XYIwc/0We
- voc0/aLQ2FDMop73diAuiMjRn7yYZaMSFsyOL+wtHBI+fPK8hSGuF9flTo1kHrf7yOPqT3lNcTZ
- x6up2E2/cNdpcTiUNwO7/8q1vB9bjkiENHz+iC17pIkeDHUrd4vye5xeibw==
-X-Gm-Gg: AYBFou12HI6X+mIWqE7OK0rLsrJ9TYMLENFdYmdTi44az/i52D3JSaefKcwSsNvJNOe
- fglYEgTC//7hdqIX60iqcqrPbLR1KMifvklNGzi93Oji1xc+ClvaxJFi6Iu2VYE7aRJzoq1PiE9
- MeoWhlYgNtwJBBbvSESVGIv4is9G3w1YW50D1/VPv4BE0SKY6Xop7t0pE3tKqwMkmQkLyIf2aVs
- 5lggWgZ3b32bL3XOBBb1f0lWLhYo/34Us0NZ+90ajK8kZ4H2A8xX+wtg9R/X0ODv6F811tKuCrc
- UWLkP145djkHKXAzYseZNtRXAGgOyvoBw7jVypFAew8+9OW3l66x3Nf+k53TOfa9TaxJn++MN4z
- Jrz9WcCcN2OPYHTOfwz2ZX6L/tSDpYac76W0lvUIOopjZL35aDp/3P7P8TycyYdROsDJfEsnZV0
- q3CJmq
-X-Received: by 2002:a05:622a:4014:b0:530:3387:8cf4 with SMTP id
- d75a77b69052e-53036d17a25mr116478831cf.31.1788394542627; 
- Wed, 02 Sep 2026 17:15:42 -0700 (PDT)
-X-Received: by 2002:a05:622a:4014:b0:530:3387:8cf4 with SMTP id
- d75a77b69052e-53036d17a25mr116478051cf.31.1788394542019; 
- Wed, 02 Sep 2026 17:15:42 -0700 (PDT)
-Received: from [192.168.1.199] (104-54-226-75.lightspeed.austtx.sbcglobal.net.
- [104.54.226.75]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-90e9ef0e9b1sm30747006d6.43.2026.09.02.17.15.39
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 02 Sep 2026 17:15:40 -0700 (PDT)
-Message-ID: <64ef65dc-fae0-44e5-ad96-c806e0a6d8d5@oss.qualcomm.com>
-Date: Wed, 2 Sep 2026 19:15:38 -0500
+ bh=Y+Er1ySClcSQZ5eIZigpbczfs6irJAot5XGj3pf/ZPY=;
+ b=bosceDaB5L+A28ZPY0ypO76fHTWEykRCdpHs/XLOCmWoRfQreyO6zlMVxBgf9Py5KC
+ wtC/Kq8zvkKzV+D625ZXp9ELRWTpLlyG/6y+RdyHNwvsa8fUFRlrHGJP7shO4+2kn6bY
+ O/ob6Z1yBd+67mQbOOHstASVL9jKvREkCmiNUUPSCNOXM6tXIJHg7uoWv7JbjN8+I0dP
+ EO0joVNXVEB7a1nf2145BaFc2zwFBlyRj3NZKZuuV2JsqBn4cc344ZHHUIrPNUssPeCu
+ cMHJdYQeKAxQVh4nqcI3uy8vmCg/w12TtRM+tbHHy4fhoYfMtend/xIF3YI0ZT1cRS34
+ oU7Q==
+X-Gm-Message-State: AFuF++kyUN6a8IXbbp+Wwu9clGSejR4ypxlzO6QXTDOvOwuAlVDtzmWe
+ eRQUfHXyxE9n9xRCsKWLAzLPRzTK4usI+Ei+6gBxknmWNVAKOZuUOO36
+X-Gm-Gg: AYBFou3pHuV4HX+krEgvQXY+OttXm9eLQjOG3sWJLFPwhpRsCPQBf/HbL7A6rU59pFV
+ p+hT1j37FM+H28S/0IgOutYgKiWayGUEe5brstThUfiJQrifL9aPkac5x3nBhTuDKCzHyYFzgBV
+ 2yyoRKVrlZrYnwY3GRK4UZBYJ3peEG0yNqn2wxOLMUx5W8Rklyuc5K2HM2OinTS4TrnwYH6Vxhe
+ eLgYWib6dNxiLysDaa9C6RE2omJaGzXXLshg4zkt9GjSUVbf/TTXkbfz38yz7uhsUQGK7pgbhZw
+ cIpCWE+t3ntbBRmd0Hko5WiAK0kjoZ9cFt6v55kzf2rTn86+CcvQ/qxocZCwGsPQIlWF3sirv05
+ 3X+KzqWqmb1N4tHzcywjr6yleai1objMmgEtvmrrRAf2GkJDYDPLdayJEaEITQvNlAjGxnoeDYA
+ Mgf+KljaKjDhsdsC8sSml1gv/ZGRhFgWtdQNXd5POXlLeLyYucDp4DAymJAi37jxIzgGA/YRfuh
+ HoHbaMeSBehZYh2
+X-Received: by 2002:a17:902:da87:b0:2d6:d3f9:d394 with SMTP id
+ d9443c01a7336-2daec43fd64mr117603075ad.0.1788399412927; 
+ Wed, 02 Sep 2026 18:36:52 -0700 (PDT)
+Received: from Dell-WorkStation.localdomain ([149.118.62.92])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2dafe9268d6sm2136705ad.31.2026.09.02.18.36.48
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 02 Sep 2026 18:36:52 -0700 (PDT)
+From: Zephyr Li <fritchleybohrer@gmail.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Chao Liu <chao.liu@processmission.com>,
+ Zephyr Li <fritchleybohrer@gmail.com>
+Subject: [PATCH v2] target/riscv: save ELP in MPELP for NMIE=0 exceptions
+Date: Thu,  3 Sep 2026 09:36:26 +0800
+Message-ID: <20260903013627.1105-1-fritchleybohrer@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 08/11] target/hexagon: Move to do_interrupt() (BQL
- acquired internally)
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
- qemu-devel@nongnu.org
-Cc: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Peter Maydell <peter.maydell@linaro.org>, Paolo Bonzini
- <pbonzini@redhat.com>, qemu-ppc@nongnu.org, qemu-s390x@nongnu.org,
- Richard Henderson <richard.henderson@linaro.org>,
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
- qemu-riscv@nongnu.org, qemu-arm@nongnu.org
-References: <20260902152044.31291-1-philmd@oss.qualcomm.com>
- <20260902152044.31291-9-philmd@oss.qualcomm.com>
-Content-Language: en-US
-From: Brian Cain <brian.cain@oss.qualcomm.com>
-In-Reply-To: <20260902152044.31291-9-philmd@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=H4/rBeYi c=1 sm=1 tr=0 ts=6a98bc2f cx=c_pps
- a=WeENfcodrlLV9YRTxbY/uA==:117 a=x6rl1zRT+JsLSO7OGbGBKQ==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
- a=EUspDBNiAAAA:8 a=GUtW-XfJRLY4ZrtkAG8A:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=kacYvNCVWA4VmyqE58fU:22
-X-Proofpoint-GUID: Ncatdl60KwJAuPRcXH1qKhsiXUrPwMuB
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTAzMDAwMCBTYWx0ZWRfXxKPC7Q5JcaR3
- MGaNn0PiBm8Z9k+nzG8HJFErb9+8DMvCgppsWcoAEMm3EQFofynMMSzhlV2Mx7BuNKrAdY/YTS2
- Zncs2WK4NjpEqu9xvnKvVa7Zowi9n8eGCXCqYm5yFkuLGqu5ZZWXJkL4rJOXwB6Tn65MvZ8dQna
- 8EfV1zKg/fFhtF5tq3pPwR7gbMUk6Y26WcO7NVnoqW/nuezknVcm25tvysFmzmNvS+A7qEu79XZ
- N2LOIOHnvpiQGalYKlY46G2cMea25gRnNzNtaJqO2iC/ISFe5iZY6Z+U/NUAxk8VzibTVuz7JfO
- o3zZ1UNn2QqhEkDu6EHA8PCzFw3yI3vExFXy6js1GvHD3bf1f2RCfttp005CJ6nks6ZU0S9hkr7
- oEsM1Y0qteWzim80MQecVTcTweQ3VAu2ZUT++/eIgyEBNU55dBwipMnihSH35yNsYnrh6dO5r1f
- MY42ZOdQ3TqKi/uVWbA==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTAzMDAwMCBTYWx0ZWRfX5DFX8ByCA+zm
- iv0kVjQuBGWtoXIuq6OtnaWE01dndm1HMQaLujpcu7l57w9nOyo7inmbp/f/BWhWF9ee1+9E0/1
- /XNBXAL9cGlrwpUMB2HmwuGHInwhb5s=
-X-Proofpoint-ORIG-GUID: Ncatdl60KwJAuPRcXH1qKhsiXUrPwMuB
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-02_06,2026-09-02_04,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 priorityscore=1501 adultscore=0 bulkscore=0 clxscore=1015
- malwarescore=0 spamscore=0 phishscore=0 impostorscore=0 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609030000
-Received-SPF: pass client-ip=205.220.180.131;
- envelope-from=brian.cain@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
+Received-SPF: pass client-ip=2607:f8b0:4864:39::5;
+ envelope-from=fritchleybohrer@gmail.com; helo=mail-pj2-x05.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -162,33 +103,210 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+The Smrnmi specification, section 8.5, "RNMI Operation", states:
 
-On 9/2/2026 10:20 AM, Philippe Mathieu-Daudé wrote:
-> hexagon_cpu_do_interrupt() already acquires the BQL internally,
-> so register it as do_interrupt() instead of do_interrupt_locked().
-> This reflects the actual locking model used by the target.
->
-> Signed-off-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
+  If the hart encounters an exception while executing in M-mode with the
+  mnstatus.NMIE bit clear, the exception is an RNMI exception. Trap state
+  is still saved in the regular M-mode CSRs and the handler returns with
+  MRET.
 
+riscv_cpu_do_interrupt() instead saves ELP in mnstatus.MNPELP on this
+path. MRET restores ELP from mstatus.MPELP, so the expected landing-pad
+state is lost.
 
-Reviewed-by: Brian Cain <brian.cain@oss.qualcomm.com>
+Always save ELP in mstatus.MPELP for M-mode exceptions. Keep MNPELP for
+the actual RNMI interrupt path, which returns with MNRET.
 
+Add a TCG test that checks ELP preservation across an NMIE=0 M-mode
+exception and MRET.
 
-> ---
->   target/hexagon/cpu.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/target/hexagon/cpu.c b/target/hexagon/cpu.c
-> index b5dcbfc99db..7067e5b70f7 100644
-> --- a/target/hexagon/cpu.c
-> +++ b/target/hexagon/cpu.c
-> @@ -769,7 +769,7 @@ static const TCGCPUOps hexagon_tcg_ops = {
->       .tlb_fill = hexagon_tlb_fill,
->       .do_unaligned_access = hexagon_cpu_do_unaligned_access,
->       .cpu_exec_halt = hexagon_cpu_has_work,
-> -    .do_interrupt_locked = hexagon_cpu_do_interrupt,
-> +    .do_interrupt = hexagon_cpu_do_interrupt,
->   #endif /* !CONFIG_USER_ONLY */
->   };
->   
+Fixes: 0266fd8b56a4 ("target/riscv: Add Zicfilp support for Smrnmi")
+Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/4223
+Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Signed-off-by: Zephyr Li <fritchleybohrer@gmail.com>
+---
+Changes in v2:
+- Quote the relevant Smrnmi specification text in the commit message.
+
+---
+ target/riscv/tcg/cpu_helper.c             |  18 +---
+ tests/tcg/riscv64/Makefile.softmmu-target |   8 ++
+ tests/tcg/riscv64/test-zicfilp-smrnmi.S   | 117 ++++++++++++++++++++++
+ 3 files changed, 127 insertions(+), 16 deletions(-)
+ create mode 100644 tests/tcg/riscv64/test-zicfilp-smrnmi.S
+
+diff --git a/target/riscv/tcg/cpu_helper.c b/target/riscv/tcg/cpu_helper.c
+index 07d9222652..a0d79b33a5 100644
+--- a/target/riscv/tcg/cpu_helper.c
++++ b/target/riscv/tcg/cpu_helper.c
+@@ -2264,23 +2264,9 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+ 
+         src = env->sepc;
+     } else {
+-        /*
+-         * If the hart encounters an exception while executing in M-mode
+-         * with the mnstatus.NMIE bit clear, the exception is an RNMI exception.
+-         */
+-        nnmi_excep = cpu->cfg.ext_smrnmi &&
+-                     !get_field(env->mnstatus, MNSTATUS_NMIE) &&
+-                     !async;
+-
+-        /* handle the trap in M-mode */
+-        /* save elp status */
++        /* Save ELP for MRET. */
+         if (cpu_get_fcfien(env)) {
+-            if (nnmi_excep) {
+-                env->mnstatus = set_field(env->mnstatus, MNSTATUS_MNPELP,
+-                                          env->elp);
+-            } else {
+-                env->mstatus = set_field(env->mstatus, MSTATUS_MPELP, env->elp);
+-            }
++            env->mstatus = set_field(env->mstatus, MSTATUS_MPELP, env->elp);
+         }
+ 
+         if (riscv_has_ext(env, RVH)) {
+diff --git a/tests/tcg/riscv64/Makefile.softmmu-target b/tests/tcg/riscv64/Makefile.softmmu-target
+index 6a219c306c..8522c3fe6f 100644
+--- a/tests/tcg/riscv64/Makefile.softmmu-target
++++ b/tests/tcg/riscv64/Makefile.softmmu-target
+@@ -45,6 +45,14 @@ comma:= ,
+ run-test-crc32: test-crc32
+ 	$(call run-test, $<, $(QEMU) -cpu rv64$(comma)xlrbr=true $(QEMU_OPTS)$<)
+ 
++EXTRA_RUNS += run-test-zicfilp-smrnmi
++run-test-zicfilp-smrnmi: test-zicfilp-smrnmi
++	$(call run-test, $<, \
++	  $(QEMU) \
++	  -cpu rv64$(comma)zicsr=true$(comma)zicfilp=true$(comma)smrnmi=true \
++	  -global rv64-riscv-cpu.rnmi-exception-vector=0x80000100 \
++	  $(QEMU_OPTS)$<)
++
+ # Zicclsm: misaligned load/store support. Assemble one source twice: the
+ # default build expects every misaligned access to succeed (zicclsm=true),
+ # the -DZICCLSM_DISABLED build expects every one to trap (zicclsm=false).
+diff --git a/tests/tcg/riscv64/test-zicfilp-smrnmi.S b/tests/tcg/riscv64/test-zicfilp-smrnmi.S
+new file mode 100644
+index 0000000000..b5965bf705
+--- /dev/null
++++ b/tests/tcg/riscv64/test-zicfilp-smrnmi.S
+@@ -0,0 +1,117 @@
++/*
++ * Test that an M-mode exception taken with mnstatus.NMIE clear saves ELP in
++ * mstatus.MPELP, so that it is restored by MRET.  MNPELP is reserved for the
++ * actual RNMI path, which returns with MNRET.
++ *
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ */
++
++	.option	norvc
++
++	.equ	CSR_MNSTATUS, 0x744
++	.equ	CSR_MSECCFG, 0x747
++	.equ	MNSTATUS_NMIE, 1 << 3
++	.equ	MNSTATUS_MNPELP, 1 << 9
++	.equ	MSECCFG_MLPE, 1 << 10
++	.equ	MSTATUS_MPELP, 1 << 41
++	.equ	EXCP_INST_ACCESS_FAULT, 1
++	.equ	EXCP_SW_CHECK, 18
++	.equ	SW_CHECK_FCFI_TVAL, 2
++
++	.text
++	.global	_start
++_start:
++	/* Verify that NMIE is clear before exercising the exception path. */
++	csrr	t0, CSR_MNSTATUS
++	andi	t0, t0, MNSTATUS_NMIE
++	bnez	t0, fail_nmie
++
++	/* Enable landing-pad checks in M-mode, then start a new TB. */
++	li	t0, MSECCFG_MLPE
++	csrs	CSR_MSECCFG, t0
++	j	tracked_jump
++
++tracked_jump:
++	/* Make a Zicfilp-tracked indirect jump to an address that faults. */
++	li	t1, 0
++	jalr	zero, 0(t1)
++
++	/*
++	 * The instruction access fault should have redirected to the handler.
++	 */
++	li	a0, 1
++	j	_exit
++
++fail_nmie:
++	li	a0, 6
++	j	_exit
++
++	/* Must match rnmi-exception-vector in Makefile.softmmu-target. */
++	.org	0x100
++rnmi_exception:
++	csrr	t0, mcause
++	li	t1, EXCP_INST_ACCESS_FAULT
++	beq	t0, t1, handle_fetch_fault
++	li	t1, EXCP_SW_CHECK
++	beq	t0, t1, handle_sw_check
++
++	li	a0, 4
++	j	_exit
++
++handle_fetch_fault:
++	/* This is an M-mode exception and will return with MRET. */
++	csrr	t0, mstatus
++	li	t1, MSTATUS_MPELP
++	and	t0, t0, t1
++	beqz	t0, fail_mpelp
++
++	csrr	t0, CSR_MNSTATUS
++	andi	t0, t0, MNSTATUS_MNPELP
++	bnez	t0, fail_mnpelp
++
++	lla	t0, resume_non_lpad
++	csrw	mepc, t0
++	mret
++
++resume_non_lpad:
++	/* MRET must restore ELP, so this instruction must not retire. */
++	li	a0, 1
++	j	_exit
++
++handle_sw_check:
++	csrr	t0, mtval
++	li	t1, SW_CHECK_FCFI_TVAL
++	bne	t0, t1, fail_tval
++
++	li	a0, 0
++	j	_exit
++
++fail_mpelp:
++	li	a0, 2
++	j	_exit
++
++fail_mnpelp:
++	li	a0, 3
++	j	_exit
++
++fail_tval:
++	li	a0, 5
++
++_exit:
++	lla	a1, semiargs
++	li	t0, 0x20026	/* ADP_Stopped_ApplicationExit */
++	sd	t0, 0(a1)
++	sd	a0, 8(a1)
++	li	a0, 0x20	/* TARGET_SYS_EXIT_EXTENDED */
++
++	/* Semihosting call sequence. */
++	.balign	16
++	slli	zero, zero, 0x1f
++	ebreak
++	srai	zero, zero, 0x7
++	j	.
++
++	.data
++	.balign	16
++semiargs:
++	.space	16
+-- 
+2.43.0
 
