@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E2CDC61DD3
-	for <qemu-riscv@archiver.kernel.org>; Thu,  3 Sep 2026 05:54:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDC46C61DD3
+	for <qemu-riscv@archiver.kernel.org>; Thu,  3 Sep 2026 05:54:37 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x20Ny-0006kP-62; Thu, 03 Sep 2026 01:53:18 -0400
+	id 1x20OD-0007LF-R6; Thu, 03 Sep 2026 01:53:33 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1x20Nl-0006af-R5
- for qemu-riscv@nongnu.org; Thu, 03 Sep 2026 01:53:05 -0400
-Received: from mail-pf1-x433.google.com ([2607:f8b0:4864:20::433])
+ id 1x20O7-0006tX-MA
+ for qemu-riscv@nongnu.org; Thu, 03 Sep 2026 01:53:28 -0400
+Received: from mail-pj1-x1033.google.com ([2607:f8b0:4864:20::1033])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1x20Nk-0006Sh-4p
- for qemu-riscv@nongnu.org; Thu, 03 Sep 2026 01:53:05 -0400
-Received: by mail-pf1-x433.google.com with SMTP id
- d2e1a72fcca58-8485b358552so1773437b3a.2
- for <qemu-riscv@nongnu.org>; Wed, 02 Sep 2026 22:53:03 -0700 (PDT)
+ id 1x20O5-0006Uc-QV
+ for qemu-riscv@nongnu.org; Thu, 03 Sep 2026 01:53:27 -0400
+Received: by mail-pj1-x1033.google.com with SMTP id
+ 98e67ed59e1d1-3964e480f76so2661868a91.1
+ for <qemu-riscv@nongnu.org>; Wed, 02 Sep 2026 22:53:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1788414783; x=1789019583; darn=nongnu.org;
- h=content-transfer-encoding:content-type:mime-version:references
- :in-reply-to:message-id:date:subject:cc:to:from:sender:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=+s6fEopBsd7ppapT8KmLn2uzOdAaKJBsOus7rTyRoiQ=;
- b=BUwzsxNFQkASONZA9oUyKAChshn/LlUK8DdDaype+ejB9me3Ozv8Ve0j6wTyIAFyBW
- Ftu5uJx8POraCNlBpSOilitDlk21rMBMaIjRojZIYCifZbjZAPeD6pdeO573tpj2m0LZ
- OT88FuWH3Q+YOWf+k75S5X3VIRONRQVPCigZ+ZIyuyaQYbNfyIgxm80COq7mKb9DadUR
- 0uoedgdZMUShGCGiVpc8vBsrir78rlr42BvuUjJoP9RFQCmbSqc2gbtB4EXNDVyNyfH3
- /TXKVLjp0MlTNF2g6CvwFdD4QlWGwJRltnxfqJdJeALLGNDGVeicKS0Lh2WdF/+kSQdC
- wLgA==
+ d=gmail.com; s=20251104; t=1788414804; x=1789019604; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:sender:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=bYttDmg2r4bFrMHv9SJAbeD+cu8jH7R+zt2RRkb6f7M=;
+ b=jAp9lRF+hS+KnO/RoR7vz7e9JaDlMMZruGyNYvbH6tiO6d1kMJzJppsD0sQr4c012j
+ jHRG0HixzC7WtujL3QhSSIivO8mXUu3FjO7Y7Thulo1gkf0Lb219mpwD85s+6I55TXqa
+ BzhuFW+owTmvzaeUn1GividQqe0dB1NpLWG6xuo4SQDaINjMW313OK8Mw8C0ZDiVxyEO
+ mBAMX3OL1cJsExGJeBje//o6Pgi98XC1WMz4EysOKD5jQOatVYPWHHNWmTaU87b8KsuF
+ vvs9FyaHWI1DDpsQouJ+widk3u/gQ2xqHJfffsfIRjTaDdq2eBct5pDJyrPZ3OhKyLyS
+ 6AqQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788414783; x=1789019583;
- h=content-transfer-encoding:content-type:mime-version:references
- :in-reply-to:message-id:date:subject:cc:to:from:sender:x-gm-gg
+ d=1e100.net; s=20251104; t=1788414804; x=1789019604;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:sender:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=+s6fEopBsd7ppapT8KmLn2uzOdAaKJBsOus7rTyRoiQ=;
- b=tJaA3cY/INpd2SfSV7ThGPuA7nmW2f1AwTgsup6LT/BwHje1RvpDorkjusiZbwRqo/
- WUz/TRwzfKPBhy809fiWDZ9izFLa60tCsM4B/v+Y5IEen+1fSV5FMqPcHa6Xui3zPHFU
- HqfesWL/M5caOZbpjy4aDmLHcKepLqFVWS4kRwoEwz9p/OLPpS8FSdI3DdO4+/1Sf43h
- oSv6/VnysYvZDUtizeHrbD/pNlO5Nuj6Vfr5rpHu/45jXFkEGkEBEOIKJq840B0SQljv
- yXJtFayDFN1il8y/XdgjV7ApnNAYT2+sObqTgFuZpDQ7s9lq4/HQ61KReRx9ol0KuTEs
- Oh9A==
+ bh=bYttDmg2r4bFrMHv9SJAbeD+cu8jH7R+zt2RRkb6f7M=;
+ b=Je1rrmrnkS+glvisbWrEDazCrb6RJTvukpXecrqUdxCaA3sPbURaS/bopnqscxV8ap
+ ivXIAPj5rXAW+SPIytQjUAnMRLv1pTT52KbjBXfM9hyfali7QaDSwMfrw5KyvGOqa09n
+ VPkvpohtXkye/5AGQTARtm8607dCq0uOwdwC2Lqbdk6soPF6SYsDaHrTqqGnuA9EvioH
+ f7z8jvhgoilkeDleDDO7XrSLiXyQs00NoDzRR1gWBsoPNau3fXo3RT/yoBuSLdBcyKw1
+ ztvm47tsMdMifWIfbAdRq3xl9THNjcrMlO/F3wFGbcbTLld+JsEOKSb3WDOrAPdHb4y9
+ iIfw==
 X-Forwarded-Encrypted: i=1;
- AKwUvBwf/GJw5aH+2M14TBgKq33yyCez+RseH330Jt5uglVnmSWIolY472vkfW4scqJv1FC6LaIoa6n3RtSt@nongnu.org
-X-Gm-Message-State: AFuF++klsdmJjuNPkCwqlrHxA0Sm/JTMwlnPynl9pDX9ucoxC1vst5O6
- du+E7jO9IqxsfYinjtvzC7HXPIoHB/mJl2jkebSyFRHxNT6/0L64IAe2
-X-Gm-Gg: AYBFou26P1x+r6M/qf5AxcgDhNRLA9IqZihIJy7HDQCKKEBhZimuSaClrmnxCt3Sxue
- qFV1ZCBVeWmxzurP+/axNz3T9RDB4rXZ156sGrKachCu2MkHSPuCkInwjPNNlQTrkFjZoCNwyOg
- gNQegD2mJrr4d7ztM4K8WbvZqiwXLqhtx8O7G7FTpmPRQR5dRCQHAOvfLIgP9MtDD5qhq1fPyF2
- 1Zf5O8AYbAFIHB5n0YHRiLTY/nhvm/No5RHTYNOgRFbP667Vi0DtuGf1uZ/3oL641Q0NpsY0GdN
- AaKp5NrjD1uKH/zVk8ek1nAvE+TKfCoVSSJL+OzbnKIrs0Z2c2K319IEzKqi+GVq1DsECa6umld
- v53aO684nAyMvEc1NWeqpS5VB2TXtAHLuL8LynYDKKXp7asdh3MnXEEWnbghkYe7puoBY8e/+/Q
- NS+HpxqcF/rCPtpB6dN5P79+Xp+9EpxYMBEUTKX9iydud8TmFsxDahFwTfHnV1R0gIf5f64rzrX
- sT5n6vzG8ocZQO/OvQVqSzzGVQLcGIt4GMdZWSb+kfAzTZ/hO98pXqNpGgC7nuC7CY0WKqTB/r1
- YxWFfDyRJTS8gfZyYc+UUVuee8LIDgw=
-X-Received: by 2002:a05:6a20:9381:b0:3c3:7179:a640 with SMTP id
- adf61e73a8af0-3d9adabade4mr14397385637.3.1788414782660; 
- Wed, 02 Sep 2026 22:53:02 -0700 (PDT)
+ AKwUvBx2aO/X+l9c31rM49dEsOw+++A13a6VvIzOm21chacYJ9bHdsZ4Yox1BfWqNm1u2hcq0EqEqw2lrJBi@nongnu.org
+X-Gm-Message-State: AFuF++mx/70gInjf+NzjCm/9VMPKh4uDN3NqT1/kSUByOTay7Xf5eBU+
+ M7388YDYyFimyhfrP8cLOaHH67vrF4rF0CUtkuOSVQaT/w3a5lPupNEQ
+X-Gm-Gg: AYBFou0RNuPzaZRjkvpmg99vGYZCeo/8gEQ8OQw+4vMgXjH/VkLvdlyWjlMcR3vu3Je
+ 5ZBw67NkaV+pMA4Cdu86Mla9vHJlZv3s/KVrRLBNDj5ZbIuxiRcDORC9J39rFDY8SLdN/BNkxtd
+ JPaidZhtMcWDKxxRDA1KSw1jh6Lp9Zp09LrwF1iHG477ZN0gYD8q/6tMln6h6sPIHbEVJKm9K6I
+ 2NWDxNBgJKeNBoimsQpzxAJ16mH2TKjIQ27SIhf4t8lwVJ/xqnsy8NImDn4UNSlM8IXHWXRczA+
+ ObV/X5vVMg2y3a5hDLFV2I+8teS6FV3xtZhd85sPnBEbMKPb6JOLEFXoQIhlSZ3Vj5uNfKIRxBp
+ HGNE+fgRM4lOGI676xz+yZXWxbTfpfFCQSk7HN9v7dVUH5v5VByzd9n68yOvwRYbvK3Fbjgfu6Y
+ OXzEEFDAsVYws2aTSlkNXymAIw75DOU06bz/mNiSMMc9BJc+FvXmQwsmO6YTc7Mr8WJLNu3Gs8P
+ 86a+pldHEf+TRoyRoGhk1JBfiMm0MxnGcBWWlWkcvGNpOb/qsq/l5TQVk4FDl5llJg17m0NXcj+
+ v5TVSHCsnBOZYFmbWzrF
+X-Received: by 2002:a17:90b:2f04:b0:380:fead:448d with SMTP id
+ 98e67ed59e1d1-39aee165cf5mr16401208a91.13.1788414804409; 
+ Wed, 02 Sep 2026 22:53:24 -0700 (PDT)
 Received: from donnager-debian.. ([180.150.112.50])
  by smtp.gmail.com with ESMTPSA id
- a92af1059eb24-1431990a39bsm2770619c88.3.2026.09.02.22.52.57
+ a92af1059eb24-1431990a39bsm2770619c88.3.2026.09.02.22.53.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 02 Sep 2026 22:53:01 -0700 (PDT)
+ Wed, 02 Sep 2026 22:53:23 -0700 (PDT)
 From: Joel Stanley <joel@jms.id.au>
 To: Alistair Francis <alistair.francis@wdc.com>,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
@@ -79,20 +79,18 @@ Cc: Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Michael Ellerman <mpe@kernel.org>,
  Portia Stephens <portias@oss.tenstorrent.com>,
  =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
-Subject: [PATCH v3 07/16] hw/riscv/atlantis: Make UART unimp region a SoC
- device
-Date: Thu,  3 Sep 2026 15:21:21 +0930
-Message-ID: <20260903055131.257903-8-joel@jms.id.au>
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Subject: [PATCH v3 11/16] hw/riscv/atlantis: Use local reference for system
+ memory
+Date: Thu,  3 Sep 2026 15:21:25 +0930
+Message-ID: <20260903055131.257903-12-joel@jms.id.au>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260903055131.257903-1-joel@jms.id.au>
 References: <20260903055131.257903-1-joel@jms.id.au>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::433;
- envelope-from=joel.stan@gmail.com; helo=mail-pf1-x433.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1033;
+ envelope-from=joel.stan@gmail.com; helo=mail-pj1-x1033.google.com
 X-Spam_score_int: -16
 X-Spam_score: -1.7
 X-Spam_bar: -
@@ -116,81 +114,113 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Make the unimplemented region covering the remainder of the console
-UART's register space a SoC child device, mapped using a helper. This
-makes it easier to map it into the SoC's memory container along with
-the other devices in the future.
-
-While here, rename the region from uart0 to uart1. The uart0 name was
-a leftover from an earlier revision that used a different device for
-the console.
+Instead of system_memory, attach devices to TTAtlantisState::memory in
+preparation for the ->memory becoming a container.
 
 Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Signed-off-by: Joel Stanley <joel@jms.id.au>
 ---
- include/hw/riscv/tt_atlantis.h |  2 ++
- hw/riscv/tt_atlantis.c         | 19 ++++++++++++++++---
- 2 files changed, 18 insertions(+), 3 deletions(-)
+ include/hw/riscv/tt_atlantis.h |  1 +
+ hw/riscv/tt_atlantis.c         | 19 ++++++++++---------
+ 2 files changed, 11 insertions(+), 9 deletions(-)
 
 diff --git a/include/hw/riscv/tt_atlantis.h b/include/hw/riscv/tt_atlantis.h
-index 7f7d4a5a5905..c9308aa57017 100644
+index 642490d21743..a29c67c1cfcf 100644
 --- a/include/hw/riscv/tt_atlantis.h
 +++ b/include/hw/riscv/tt_atlantis.h
-@@ -13,6 +13,7 @@
- #include "hw/core/sysbus.h"
- #include "hw/i2c/designware_i2c.h"
- #include "hw/intc/riscv_imsic.h"
-+#include "hw/misc/unimp.h"
- #include "hw/riscv/riscv_hart.h"
+@@ -29,6 +29,7 @@ struct TTAtlantisState {
+     Notifier machine_done;
+     const MemMapEntry *memmap;
  
- #define TYPE_TT_ATLANTIS_MACHINE MACHINE_TYPE_NAME("tt-atlantis")
-@@ -31,6 +32,7 @@ struct TTAtlantisState {
-     RISCVHartArrayState soc;
++    MemoryRegion *memory;
+     RISCVHartArrayState cpus;
      DeviceState *irqchip;
      DesignWareI2CState i2c[TT_ATL_NUM_I2C];
-+    UnimplementedDeviceState uart1;
- 
-     int fdt_size;
- };
 diff --git a/hw/riscv/tt_atlantis.c b/hw/riscv/tt_atlantis.c
-index 373d4dabf3a4..a2fb83aab78e 100644
+index f2a4a051d1f6..2a70119c2c6b 100644
 --- a/hw/riscv/tt_atlantis.c
 +++ b/hw/riscv/tt_atlantis.c
-@@ -411,6 +411,17 @@ static void load_fdt(TTAtlantisState *s)
-     create_fdt_memory(s);
- }
- 
-+static void mmio_map_unimplemented(MemoryRegion *memory, SysBusDevice *dev,
-+                                   const char *name, hwaddr addr, uint64_t size)
-+{
-+    qdev_prop_set_string(DEVICE(dev), "name", name);
-+    qdev_prop_set_uint64(DEVICE(dev), "size", size);
-+    sysbus_realize(dev, &error_abort);
-+
-+    memory_region_add_subregion_overlap(memory, addr,
-+                                        sysbus_mmio_get_region(dev, 0), -1000);
-+}
-+
- static void tt_atlantis_machine_done(Notifier *notifier, void *data)
+@@ -483,13 +483,14 @@ static void tt_atlantis_machine_init(MachineState *machine)
  {
-     TTAtlantisState *s = container_of(notifier, TTAtlantisState, machine_done);
-@@ -562,9 +573,11 @@ static void tt_atlantis_machine_init(MachineState *machine)
-      * Create an unimplemented device region so writes don't fault
-      * and reads return zero, which keeps Linux happy.
-      */
--    create_unimplemented_device("tt-atlantis.uart0",
--                                s->memmap[TT_ATL_UART1].base,
--                                s->memmap[TT_ATL_UART1].size);
-+    object_initialize_child(OBJECT(s), "uart1", &s->uart1,
-+                            TYPE_UNIMPLEMENTED_DEVICE);
-+    mmio_map_unimplemented(system_memory, SYS_BUS_DEVICE(&s->uart1),
-+                           "tt-atlantis.uart1", s->memmap[TT_ATL_UART1].base,
-+                           s->memmap[TT_ATL_UART1].size);
+     TTAtlantisState *s = TT_ATLANTIS_MACHINE(machine);
  
-     /* I2C */
-     for (int i = 0; i < TT_ATL_NUM_I2C; i++) {
+-    MemoryRegion *system_memory = get_system_memory();
+     MemoryRegion *ram_hi = g_new(MemoryRegion, 1);
+     MemoryRegion *ram_lo = g_new(MemoryRegion, 1);
+     MemoryRegion *bootrom = g_new(MemoryRegion, 1);
+     ram_addr_t lo_ram_size;
+     int hart_count = machine->smp.cpus;
+ 
++    s->memory = get_system_memory();
++
+     s->memmap = tt_atlantis_memmap;
+ 
+     object_initialize_child(OBJECT(machine), "soc", &s->cpus,
+@@ -505,7 +506,7 @@ static void tt_atlantis_machine_init(MachineState *machine)
+                             &error_abort);
+     sysbus_realize(SYS_BUS_DEVICE(&s->cpus), &error_fatal);
+ 
+-    s->irqchip = riscv_create_aia(system_memory,
++    s->irqchip = riscv_create_aia(s->memory,
+                                   true, TT_IMSIC_GUESTS,
+                                   TT_IMSIC_STRIDE,
+                                   TT_IMSIC_STRIDE,
+@@ -518,7 +519,7 @@ static void tt_atlantis_machine_init(MachineState *machine)
+                                   TT_IRQCHIP_NUM_MSIS,
+                                   TT_IRQCHIP_NUM_PRIO_BITS);
+ 
+-    riscv_aclint_mtimer_create(system_memory,
++    riscv_aclint_mtimer_create(s->memory,
+             s->memmap[TT_ATL_ACLINT].base,
+             TT_ACLINT_MTIME_SIZE,
+             0, hart_count,
+@@ -541,23 +542,23 @@ static void tt_atlantis_machine_init(MachineState *machine)
+ 
+     memory_region_init_alias(ram_hi, OBJECT(machine), "ram.high", machine->ram,
+                              0, machine->ram_size);
+-    memory_region_add_subregion(system_memory,
++    memory_region_add_subregion(s->memory,
+                                 s->memmap[TT_ATL_DDR_HI].base, ram_hi);
+ 
+     lo_ram_size = MIN(machine->ram_size, s->memmap[TT_ATL_DDR_LO].size);
+     memory_region_init_alias(ram_lo, OBJECT(machine), "ram.low", machine->ram,
+                              0, lo_ram_size);
+-    memory_region_add_subregion(system_memory,
++    memory_region_add_subregion(s->memory,
+                                 s->memmap[TT_ATL_DDR_LO].base, ram_lo);
+ 
+     /* Boot ROM */
+     memory_region_init_rom(bootrom, NULL, "tt-atlantis.bootrom",
+                            s->memmap[TT_ATL_BOOTROM].size, &error_fatal);
+-    memory_region_add_subregion(system_memory, s->memmap[TT_ATL_BOOTROM].base,
++    memory_region_add_subregion(s->memory, s->memmap[TT_ATL_BOOTROM].base,
+                                 bootrom);
+ 
+     /* UART1, the soc console (UART0 is for the boot microcontroller) */
+-    serial_mm_init(system_memory, s->memmap[TT_ATL_UART1].base, 2,
++    serial_mm_init(s->memory, s->memmap[TT_ATL_UART1].base, 2,
+                    qdev_get_gpio_in(s->irqchip, TT_ATL_UART1_IRQ),
+                    115200, serial_hd(0), DEVICE_LITTLE_ENDIAN);
+     /*
+@@ -571,7 +572,7 @@ static void tt_atlantis_machine_init(MachineState *machine)
+      */
+     object_initialize_child(OBJECT(s), "uart1", &s->uart1,
+                             TYPE_UNIMPLEMENTED_DEVICE);
+-    mmio_map_unimplemented(system_memory, SYS_BUS_DEVICE(&s->uart1),
++    mmio_map_unimplemented(s->memory, SYS_BUS_DEVICE(&s->uart1),
+                            "tt-atlantis.uart1", s->memmap[TT_ATL_UART1].base,
+                            s->memmap[TT_ATL_UART1].size);
+ 
+@@ -583,7 +584,7 @@ static void tt_atlantis_machine_init(MachineState *machine)
+                                 TYPE_DESIGNWARE_I2C);
+         sbd = SYS_BUS_DEVICE(&s->i2c[i]);
+         sysbus_realize(sbd, &error_fatal);
+-        memory_region_add_subregion(system_memory,
++        memory_region_add_subregion(s->memory,
+                                     s->memmap[TT_ATL_I2C0 + i].base,
+                                     sysbus_mmio_get_region(sbd, 0));
+         sysbus_connect_irq(sbd, 0,
 -- 
 2.47.3
 
