@@ -4,133 +4,155 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9560C624DE
-	for <qemu-riscv@archiver.kernel.org>; Fri,  4 Sep 2026 16:04:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E02D3C624DE
+	for <qemu-riscv@archiver.kernel.org>; Fri,  4 Sep 2026 16:12:29 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x2WJw-0005ZN-Un; Fri, 04 Sep 2026 11:59:17 -0400
+	id 1x2WWD-0001fO-Mb; Fri, 04 Sep 2026 12:11:57 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bin.meng@processmission.com>)
- id 1x2WJp-0005DQ-9S; Fri, 04 Sep 2026 11:59:11 -0400
-Received: from mail-koreacentralazlp170130006.outbound.protection.outlook.com
- ([2a01:111:f403:c40f::6] helo=SEYPR02CU001.outbound.protection.outlook.com)
+ (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
+ id 1x2WW5-0001dC-RA
+ for qemu-riscv@nongnu.org; Fri, 04 Sep 2026 12:11:49 -0400
+Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bin.meng@processmission.com>)
- id 1x2WJn-0004Wv-1V; Fri, 04 Sep 2026 11:59:08 -0400
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=jdyDQ51xiuaie15gKUL5ykBllf1MRq2EzOCj5X2s2QCmiKnnH2w90mSmIH7MVmgnVYPlkGJe+VvHlgHuEcT+27r0QJyjh7WMU/2pdflWAuFketASRb0Pl9V4Ynz6mgB8cmKImWPOpATVcraDp8gmUqTioGJ5Vw4QpCfLCKmhsPssxYKJvbyPvcpKubBwH5ptUelDbXXoJ66Dqf61fCF0nlCDHyQIUW9i7u9qDtq0e+FIlQYB2ClL0qsLoG0w8FXGc0wD+7ZmDF1hh1U0qsT9CRQ2jxwBCePIdLSYCPJbjYMULri7Y30Ny8MOaCsmfA09DZ/PmCl1JjmE2I4aOtuKOg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Cp0VDAfnEZTVdGdMl+NM76Z2lanDroe1nrOqFOcANCI=;
- b=ih1OLx8Ddu4oqGB6l7QmpwI7LxZzaPQk5kkXAy+Azbe4W4HrpQe4ygS3QF2wdPi+USt7eYc/gMrfngM7VMq+KiRkWuzcRF5H7uiVxyjzDGY+7RU9GwbxWI5Py5zbcZloJFurwCLN0oDksIX1FTxYFoGSSWnhwmFOQePRzvuFHVoEotSDPgwYWqtzM9Ezm13OpdY0e02uUx3jJV9HDeKukws7AjtWYUX7pXbNuldr6xloOc2rMi0iUlYU5slXVTgXp0cDLwODfY7B8R3lSrZzL4HwV9n+V4F2aKQ6p6EmnWRxDKZi87Os2jeV5WC7tYMnyOU5CETJs6RKkngWqpr1uw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=processmission.com; dmarc=pass action=none
- header.from=processmission.com; dkim=pass header.d=processmission.com;
- arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=processmission.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Cp0VDAfnEZTVdGdMl+NM76Z2lanDroe1nrOqFOcANCI=;
- b=QgLCrQdaP23igkIzsjFW+bG9FdUnoo51x2oPyW4mdnZ3If7K+POvLKk8wzKVjinvhLG9QplTlwOHQyrH5bLNuG5Yr97OmAuljzHW/U075HZ7Vsn8qL8ZXXJ2T4ZRcmkEYKLWzgmzaM7FNa+MMXG5jyTR+c2woUOkSKELjXu2w651oQaPj4dyMGKnpB25XUhAxcWaJMM/L8yTP6X2ZV3kReFqYFExCg2Kx6gwWWOs0p9RzHm/2kI+p08efco4u6+oity/yFbQW1TGBJiZcg/hhH6zoBJD3StNSyA/jQYrqQ/XZg3BQMx0UctZy+a9XAzRBil6ed6eWQExhhB40w4zXw==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=processmission.com;
-Received: from KL1PR02MB4977.apcprd02.prod.outlook.com (2603:1096:820:71::8)
- by TYSPR02MB7490.apcprd02.prod.outlook.com (2603:1096:405:37::14) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.360.13; Fri, 4 Sep
- 2026 15:58:59 +0000
-Received: from KL1PR02MB4977.apcprd02.prod.outlook.com
- ([fe80::9fdf:2557:8351:6c03]) by KL1PR02MB4977.apcprd02.prod.outlook.com
- ([fe80::9fdf:2557:8351:6c03%4]) with mapi id 15.21.0382.007; Fri, 4 Sep 2026
- 15:58:59 +0000
-From: Bin Meng <bin.meng@processmission.com>
-To: QEMU <qemu-devel@nongnu.org>
-Cc: Chao Liu <chao.liu@processmission.com>,
- Alistair Francis <alistair.francis@wdc.com>,
+ (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
+ id 1x2WW1-0007tu-Ic
+ for qemu-riscv@nongnu.org; Fri, 04 Sep 2026 12:11:48 -0400
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 684EiS7t195842
+ for <qemu-riscv@nongnu.org>; Fri, 4 Sep 2026 16:11:42 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ 319RC2bK5JelNNshAyAdW1rnMQ1Dm5h0J3wBGe6Q/n8=; b=KyMa+m/FQpPXp1Hq
+ fMQLyvVyyiWbhBz9cOOfUp7J/w76vQaOjJFT0S6gYIq8hSQX5hsuYnqZmIbyrafg
+ XsSnpMDtmeHVnNHAxkxaoNB6T20UEkooCLs/H98VAPLPT+oTam+mZ3OwZfoG3vUw
+ HHzNDPAutA1nA3MSt7QUk8z8rT6OnaHXMNkPxAEM8RtIvCEvPkYiiDFOSdHPeJuX
+ E4xm/pthrS8FR3TeKmXBbyQ/ski/WRS3FLW4Hp53IAcQvQUs0d0uid2yTktfCG1Z
+ 21oxr8DkZgKAJvbFWHabvJcHn+sYSoRSZgitXR6cwCm9nzra9A68GkcOsq1NHksf
+ y3lGhQ==
+Received: from mail-vs1-f71.google.com (mail-vs1-f71.google.com
+ [209.85.217.71])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gg0120qp6-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Fri, 04 Sep 2026 16:11:42 +0000 (GMT)
+Received: by mail-vs1-f71.google.com with SMTP id
+ ada2fe7eead31-78a59f5ed87so90958137.3
+ for <qemu-riscv@nongnu.org>; Fri, 04 Sep 2026 09:11:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1788538301; x=1789143101; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=319RC2bK5JelNNshAyAdW1rnMQ1Dm5h0J3wBGe6Q/n8=;
+ b=YqyhtHztr45NKJyFtDM9tS/nNd0l8d82cWFCJCTIn+OW4dIXsowqQlRucp7Cv6LX5H
+ VDdP84ffWZQ/14rKcdSNuBkKxggHFrDtqe0NEyS4ls+lJoyetLVRZQjg7LF3aPpdnU5f
+ 57mGgywi959yXYEUWfcGDckWiV1Zoms6VB5DID2Hi7091JQoGOaZnV7gU13OvBZxbU3N
+ IRIriiyds7VO8CDcfW9j4+sg7cIBa3IZu7XHA1BSEvQhCDCMYvQ8a3nOlfqJcjTpf3n8
+ nzBqskPB0KRsVy4KGI+ySb8PAIjkCuVo/RI6UDOQ3KaZsVqDJ55XuMluMIchLrtH/PqD
+ 4UDw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1788538301; x=1789143101;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=319RC2bK5JelNNshAyAdW1rnMQ1Dm5h0J3wBGe6Q/n8=;
+ b=GjGYHORe4sjADoychLSmbh4TShLeYoXOTs0TG33uG3vHaSPjoLxsJH/0FvCfHl/cfQ
+ WSpRIFBsUhQv4jzUiIy0MGrhmhm2mFR01PROvy61y/3Gib9MVLYr/LWYioyxgUQGAj5T
+ ZabMoUGCBENbL9P2lfzVsTA40Sipdf+LZ+BuXl95OsypnssNIcFHwKI+ThU8V5ljX5fM
+ QKS7Tti/9IubnWaXwNpLsGYEXMSMBrl5QUDmVfFJH+Yh9ge4VTfOoNn0+JPQj0G1wp6i
+ 6qTmtYlawsaFGax2XsfLPDAqOc96uD2kXnuQisasbi2xHEXsnVYpMdcuJmV/DZWkDzNb
+ qfAA==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBxKLrLCFW458bvoKUbxrjwufJPBWTG0EFZ+/lILWrrqNlD/0siTEfvBcX1WmDvZNfI2yXc7ogQViy1F@nongnu.org
+X-Gm-Message-State: AFuF++nZ6ibzj52IaXfNeOTEBtIB1XWLTzbD3Z/lm51XOzyhbk2tm98r
+ tBpMNmkEZwvdtzpShrnZBT/dRXxk2iRPUBP119lxIx3bLySNY+SbN8jk9BKn7VHP+hYyHy8rC5q
+ RYzu+xkXB04GWsabqUeX2z24/MfRtP4ninDUGLhZqNY4uxI/KvY/V97eSEQ==
+X-Gm-Gg: AYBFou1gmW8D4K8syPyy2opkVaRh0rzp7GGGqMcTVnSYn0UaQOU3tmfjBhdZNis9UU/
+ j1uxFDuiQDvMDoAxo7M+QgOigjsgSuX3FiHfuw3HlGHzmuZAMsKGTdfJ8a26e/wQWwLpjIjZ2wy
+ 4JSZB/HEQSQIyxPyNK9D4kUFxXlv9ukQiaFGziTutaPzDSpZx1o6Y8e7rskJYhLq2hr5LG/7iqe
+ 5tvUXFISN6bJbIFa6/CGwUnpbOiO/q23MCbXru/b38dPJGqZKFfLJ2t3IaUHi01kazMkt/qG5ss
+ NsDy5LHKPNM2D4iWsZNKZwOddfOTTush8J5tqjgxjlsYATvsvJyuU7WUqVDSbuMDWD2QVI2fQig
+ /pFAJ1iRGL609rD79WZtH47b35JSZwAo7Uw==
+X-Received: by 2002:a05:6102:943:b0:782:de7b:eead with SMTP id
+ ada2fe7eead31-78a4a68089bmr2218816137.1.1788538301570; 
+ Fri, 04 Sep 2026 09:11:41 -0700 (PDT)
+X-Received: by 2002:a05:6102:943:b0:782:de7b:eead with SMTP id
+ ada2fe7eead31-78a4a68089bmr2218793137.1.1788538301030; 
+ Fri, 04 Sep 2026 09:11:41 -0700 (PDT)
+Received: from [192.168.69.202] (pmd666.hd.free.fr. [88.187.86.199])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-4858ac2b4cdsm5738768f8f.16.2026.09.04.09.11.39
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 04 Sep 2026 09:11:40 -0700 (PDT)
+Message-ID: <7a6ef890-a630-46b3-aedf-a687fec487cc@oss.qualcomm.com>
+Date: Fri, 4 Sep 2026 18:11:38 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 00/24] hw/riscv: Restore Microchip PolarFire SoC Icicle
+ Kit firmware boot
+To: Bin Meng <bin.meng@processmission.com>, QEMU <qemu-devel@nongnu.org>
+Cc: Alistair Francis <alistair.francis@wdc.com>,
+ Alistair Francis <alistair@alistair23.me>,
+ Bin Meng <bmeng.cn@gmail.com>, Chao Liu <chao.liu@processmission.com>,
  Conor Dooley <conor@kernel.org>,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Fabiano Rosas <farosas@suse.de>, Laurent Vivier <lvivier@redhat.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
+ Markus Armbruster <armbru@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, Peter Maydell
+ <peter.maydell@linaro.org>,
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
  Sebastian Huber <sebastian.huber@embedded-brains.de>,
- Weiwei Li <liwei1518@gmail.com>, qemu-riscv@nongnu.org
-Subject: [PATCH v2 16/24] hw/misc: pfsoc: Honor PolarFire service notification
- requests
-Date: Fri,  4 Sep 2026 23:57:35 +0800
-Message-ID: <20260904155758.3833179-17-bin.meng@processmission.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260904155758.3833179-1-bin.meng@processmission.com>
+ Thomas Huth <thuth@redhat.com>, Weiwei Li <liwei1518@gmail.com>,
+ qemu-arm@nongnu.org, qemu-block@nongnu.org, qemu-riscv@nongnu.org
 References: <20260904155758.3833179-1-bin.meng@processmission.com>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: TY4P286CA0020.JPNP286.PROD.OUTLOOK.COM
- (2603:1096:405:2b0::13) To KL1PR02MB4977.apcprd02.prod.outlook.com
- (2603:1096:820:71::8)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: KL1PR02MB4977:EE_|TYSPR02MB7490:EE_
-X-MS-Office365-Filtering-Correlation-Id: fbea58e0-7f1c-4f78-4bcc-08df0a9d6ecb
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|23010399003|1800799024|366016|6133799003|10067099003|5023799004|22082099003|18002099003|56012099006;
-X-Microsoft-Antispam-Message-Info: eO5p1mr4YDoBDL5q/D20Ja0Dwl12ZX8mQnHEQMmghaQGr8FjKOhU9uvRoeFRJWzlz6KgAU5k/SUCSZ5wMs5NTt7OOWU+e/9RyboXSKo+WzKopGDgNWchHoJRV62uXLfJ3h+STpGe1bNhw5juaDZ+m3QD2dah06cnoVyfXNdhzWXuM9BvxYPtiloHdMbyqAzL4fpxNILGNbnNgRdIul4P6FoRhSOtSZnTRXwiHCsFaj7v9oWD/bAjNABpaQSc+cHkWfMRxjUD07AKFBor+GW4zO5biKe6xvL06sKnY1hoIqAZoLaz8MKDb+lt0DUOiQ1giTFISWAsokHD2dDhUqljvU4rXrsKUP2z5iZ/OSXW4natq8zdHeLTIBOJbDqu4DB+KqEOdfDC29XEXUDTSfa9yZzVhYfGqeG/akQ68x88KdCO05bJ5K6z80ev3Bz7IT3OUn092EL2s+56xqNnuNQZjO0PjiCNCMGZ8ja4sOEm/SXzBDVfGcv4VGiGkVWsHRMx+Rferx1idWJ9Env1HqDKC/HAylm9X4ZtDPfsECBS10Q7isMR2qTLn6mOK6XW8OvzT7VodzbFqh+tulgymS1y/8cyoK3ZUtLzsOFB6kGI6serXG8gxeljAKzbQ0MYQE9I4VVKBynz8KEinmskwaJ5GK/iUB6r/guOgcl9YVcPjZE=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:KL1PR02MB4977.apcprd02.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(23010399003)(1800799024)(366016)(6133799003)(10067099003)(5023799004)(22082099003)(18002099003)(56012099006);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?w/hV7M8gUl7X8GmRcuAVBDISCyak5mSuO+PsyAs7v2MH7tmAEdNjcA+mrgED?=
- =?us-ascii?Q?8aERrQIHBhnpBgvDp5y5mJryM+59lHa5YaqwXeVuzJ86onnfAU1FdHy07xSy?=
- =?us-ascii?Q?lHsrg+OrrrIGRqQV6uAnFCe2mF/tBxyQm7aV5K1FEUBre+6ENYtaZfwnDL1j?=
- =?us-ascii?Q?lAudS2Z3MRittP+awaA3lB780pRk4yYpmPP8idpkwdkIAsw26LjuNnbSKohD?=
- =?us-ascii?Q?0xhO4RmvFpOqyimWRPDB7Z78duJTD3jQlQIYJ5EeBIgbQwENJd2BwWyB+Qb9?=
- =?us-ascii?Q?KJeAV5IWbBKwLeng1Zr7TY3H9sORpLnJJ8Vgq952JUAu4CREdip1467MtkcA?=
- =?us-ascii?Q?CjDssEfGWSu08l3k/ZksCjIngQigZyzO50plPbsdf2imd/ZHdEEnVIKcvXUR?=
- =?us-ascii?Q?cKiV89/ZXTxLJcpw4qgVh4zrDgxHcb2UygwCYS0m2lDbUrbTryRxMK4KcDbS?=
- =?us-ascii?Q?rOPNvmtB+QIe687U4lwVh1gBs/yT4swzZzA4f44OQPH8MncFfEcF90WmA4A7?=
- =?us-ascii?Q?UPom4Un2jrKaLqAUVbXZd17G13O1+DecKhgZhknbEWNFmi4FTC3mzbEoxqMk?=
- =?us-ascii?Q?+j92cDysBGxFECCoBmQfQcwZI9jueNLFqyFas6fRA1u0xKoRN9KTLJn5fDPY?=
- =?us-ascii?Q?Y7b6IOfLwfHM+Zigwm1pYtu1A5P28uY4NqPEtMorMkxAQ9RcDLBhCVStBafQ?=
- =?us-ascii?Q?oyFsSNjVe8tdnKCdtD4YQUgA56GRrzX4tN+TJQu5ouMa/jXh1+zl8yrgZhYC?=
- =?us-ascii?Q?cRXZyN5viO0BV5ZltIDXlo1qOUyIjKHMoorxSDXqZTJGis1GRzO+EdO+aIMR?=
- =?us-ascii?Q?Y12w+Aq4gXP7WEm3j2SdOgDQQO8b3D2LfoCW4F4Jx56K6yjMXG0vqYNcQUC2?=
- =?us-ascii?Q?W/bvwUoajSjn94GuQZ4ke4YfIGSFVusV57quvg4P5WHK5KBbVoiFrmmkFR3p?=
- =?us-ascii?Q?E7EhzjTkzqFkegVs0NcaX7fq1MPb98jrsY+ClOsaq/DqFztL4qP3Ogl4QU1q?=
- =?us-ascii?Q?MPXsZKsPwtiOkWbenb3WF3WFIA01RclVPJEWxJO97LSJcPfuYruRyEVbGiXX?=
- =?us-ascii?Q?az+oNyObSbo3aY5OadaEGo0FAxRlF6lqIgWRdZaEh90CnWGmeRmABpV/Nmum?=
- =?us-ascii?Q?bSZ25Jrc9dNAIUb2URJktLitRhwUVuCmKpVewVHqR7ALjUZsTSsqldYv/nah?=
- =?us-ascii?Q?Qw5Jh8MD1IgC6hAf7OTBxhLjH7FMuzKNTf/0qLFaToNKXrzg9f+FvT6tP2gA?=
- =?us-ascii?Q?behuWz5JNoDObSKef9h8ImYGbMo8Fwjr1gH+C34DEcZiWUTv5g+nnI8UU8ka?=
- =?us-ascii?Q?BNH8Bo4GtSkMMZBOd928rDtAIP9AU+wua5OOvkhAcdgpbXLRlXmMrSN7PQQS?=
- =?us-ascii?Q?4jfD/etltco6WopCWUggYjtU+/BYZ0YCjddIUIHwTXrJ/+F2TRbQzbrqu511?=
- =?us-ascii?Q?t733p5avyZUQN1HTaxx/zVaJnM6/I6EfjUFXYzqjWFjvcXE8QBEhkwAtD45b?=
- =?us-ascii?Q?nn6nqYyvcDVii7nkDrVnFJ5vAPa7/Y5cewB+t+Typp1Q0KRckE4YkSYWAJmJ?=
- =?us-ascii?Q?tKInB1AtL1VT17Luy5Grhe9j/+PCPQYeLEHqnrSeTqFzGpxM3inpdbSwMo4N?=
- =?us-ascii?Q?jkOILBj6yyQusyY7sggdSYLokV4+HHqwYmuyau1os0mll65Dr/hflWrecfa7?=
- =?us-ascii?Q?kDDG3OKUTygMu2BVzU2i5GMz8jA0EnAjsMgcqw6fa9gi1VlyTLA2r8WFHDGS?=
- =?us-ascii?Q?fYfFYjpVaFb+wR+6sz+ehscYbgAJweM=3D?=
-X-OriginatorOrg: processmission.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: fbea58e0-7f1c-4f78-4bcc-08df0a9d6ecb
-X-MS-Exchange-CrossTenant-AuthSource: KL1PR02MB4977.apcprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Sep 2026 15:58:59.6307 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: e0544bf7-9765-4630-ab69-0b266dc2169c
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: PBTvICNQoCQcpKKBgjwPsvrwoUxBW+BMBlv4LWI48VK68gENTN1cp4SMZD0PtxAL8B97vKmZsaDDXoDltq8pLSIF/5lLn3VOyo9JpVnZskc=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYSPR02MB7490
-Received-SPF: pass client-ip=2a01:111:f403:c40f::6;
- envelope-from=bin.meng@processmission.com;
- helo=SEYPR02CU001.outbound.protection.outlook.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
+Content-Language: en-US
+In-Reply-To: <20260904155758.3833179-1-bin.meng@processmission.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA0MDE0NyBTYWx0ZWRfX3oix39XNfq/l
+ zC/TtIkZEYg0yVJHIR/iiUZNL4k3/OAfbABvuAL+bsgJx5SIWZJIOSFbopAUfhFKmZzU/EIIU1i
+ idW+RR+u8IbW1MiKWOsb9FHRTEAcXoE=
+X-Proofpoint-GUID: qix-b6svE9AJe709bVrk3UY1R5dHwndc
+X-Authority-Analysis: v=2.4 cv=LreiDHdc c=1 sm=1 tr=0 ts=6a9aedbe cx=c_pps
+ a=P2rfLEam3zuxRRdjJWA2cw==:117 a=4s3hRJSeHn4rkQlkrse1kQ==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=M51BFTxLslgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
+ a=fSYeKqFsUNyXvTew9nkA:9 a=QEXdDO2ut3YA:10 a=ODZdjJIeia2B_SHc_B0f:22
+X-Proofpoint-ORIG-GUID: qix-b6svE9AJe709bVrk3UY1R5dHwndc
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA0MDE0NyBTYWx0ZWRfX+M1HlQeXL/Uh
+ ptzkSUb+iHHw6/bTJt5aDv+4lwz4UjgjYS6mLx+gJcPXAH44/pbEdCiWFxd54h3nsS82nQXUdKZ
+ IJ3unCXG3ROuIa3+MWYCp2uqzYJwhKdQ9whTS3Fz4hJyVNRoq9Yt73K1laQTPtkVTjoUoYPWeLp
+ Pbiht6rFmG6Sksl1PvG3RbNGOsARTz/O99M0fxdDHO+Y7O04rhN0J0MU6U4mljFyNw3tiLs4z4S
+ wLZ5lJkDzaV0G/6/AtVFCc/z141kUUIxMbc91E7q0/Rl4Ao9RrBjmtyPMuCSgmMQw1ng35uA3eR
+ 6hNplySoWUnrwmJ0oF1muOaW/wQDzk/DiokUfnd03lEwxzRwB81f7Cdxzatuhl0zJlDunCQyAVo
+ ZjK7C6T5mWS4NNXOnRGyd1Ox9B14rR51nB92lbK1W4+AyGZnrm2w2ce7y4AlgVEdlcnmlExCZ0K
+ FitUmPERXgdKlNA+d8Q==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-04_04,2026-09-03_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 adultscore=0 bulkscore=0 phishscore=0 clxscore=1015
+ priorityscore=1501 impostorscore=0 malwarescore=0 lowpriorityscore=0
+ spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2609040147
+Received-SPF: pass client-ip=205.220.180.131;
+ envelope-from=philmd@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -146,189 +168,37 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Polling firmware requests system services without requesting an
-interrupt. The old model ignored this distinction:
+On 4/9/26 17:57, Bin Meng wrote:
 
-1. HSS requests the serial number with REQUEST set and NOTIFY clear.
-2. QEMU synchronously fills the mailbox and clears REQUEST.
-3. QEMU incorrectly asserts PLIC source 96.
-4. HSS polls REQUEST and neither waits for nor handles the interrupt.
-5. PLIC source 96 remains pending.
-6. Linux registers the MPFS mailbox driver.
-7. The stale interrupt immediately enters mpfs_mbox_inbox_isr().
-8. Linux has not submitted a request or installed its response pointer.
-9. The ISR dereferences that null pointer and faults near address 0x10.
+> Bin Meng (23):
+>    hw/riscv: pfsoc: Correct the L2LIM maximum mapped size
+>    hw/riscv: pfsoc: Map the L2 zero device window
+>    hw/misc: pfsoc: Support DDR training with newer HSS
+>    hw/misc: pfsoc: Model L2 cache controller registers
+>    hw/riscv: pfsoc: Couple L2CC to L2-LIM
+>    tests/qtest: Add PolarFire SoC L2CC coverage
+>    hw/sd: sdhci: Run ADMA independently of MMIO
+>    hw/sd: sd: Keep high-capacity memory blocks at 512 bytes
+>    hw/sd: cadence: Add 64-bit system bus property
 
-Honor SERVICES_CR.NOTIFY, let IOSCB own the pending interrupt state,
-and route the SYSREG acknowledgement through an IOSCB clear input.
+FYI I tagged this series (in particular the SD/HCI patches)
+to review but won't be able to until Sept 21. Not a blocker
+although if Alistair think the series is ready.
 
-Signed-off-by: Bin Meng <bin.meng@processmission.com>
-Reviewed-by: Chao Liu <chao.liu@processmission.com>
----
-
-(no changes since v1)
-
- include/hw/misc/mchp_pfsoc_ioscb.h |  2 ++
- hw/misc/mchp_pfsoc_ioscb.c         | 39 +++++++++++++++++++++++++++---
- hw/misc/mchp_pfsoc_sysreg.c        |  9 ++++++-
- hw/riscv/microchip_pfsoc.c         |  6 ++---
- 4 files changed, 49 insertions(+), 7 deletions(-)
-
-diff --git a/include/hw/misc/mchp_pfsoc_ioscb.h b/include/hw/misc/mchp_pfsoc_ioscb.h
-index fd31427304..e39d995b64 100644
---- a/include/hw/misc/mchp_pfsoc_ioscb.h
-+++ b/include/hw/misc/mchp_pfsoc_ioscb.h
-@@ -26,6 +26,7 @@
- #include "hw/core/sysbus.h"
- 
- #define MCHP_PFSOC_IOSCB_MAILBOX_SIZE 0x1000
-+#define MCHP_PFSOC_IOSCB_IRQ_CLEAR "irq-clear"
- 
- typedef struct MchpPfSoCIoscbState {
-     SysBusDevice parent;
-@@ -53,6 +54,7 @@ typedef struct MchpPfSoCIoscbState {
-     uint32_t services_sr;
-     uint8_t mailbox_data[MCHP_PFSOC_IOSCB_MAILBOX_SIZE];
-     char *serial_number;
-+    bool irq_pending;
-     qemu_irq irq;
- } MchpPfSoCIoscbState;
- 
-diff --git a/hw/misc/mchp_pfsoc_ioscb.c b/hw/misc/mchp_pfsoc_ioscb.c
-index 7c82b55986..ccc2201b7a 100644
---- a/hw/misc/mchp_pfsoc_ioscb.c
-+++ b/hw/misc/mchp_pfsoc_ioscb.c
-@@ -192,12 +192,13 @@ static const MemoryRegionOps mchp_pfsoc_io_calib_ddr_ops = {
- 
- #define SERVICES_CR                         0x50
- #define SERVICES_CR_REQUEST                 BIT(0)
-+#define SERVICES_CR_NOTIFY                  BIT(3)
- #define SERVICES_CR_COMMAND_SHIFT           16
- #define SERVICES_CR_COMMAND_WIDTH           8
- #define SERVICES_CR_COMMAND_MASK            \
-         MAKE_64BIT_MASK(SERVICES_CR_COMMAND_SHIFT, SERVICES_CR_COMMAND_WIDTH)
- #define SERVICES_CR_MASK                    \
--        (SERVICES_CR_REQUEST | SERVICES_CR_COMMAND_MASK)
-+        (SERVICES_CR_REQUEST | SERVICES_CR_NOTIFY | SERVICES_CR_COMMAND_MASK)
- #define SERVICES_SR                         0x54
- #define SERVICES_SR_STATUS_SHIFT            16
- #define SERVICES_COMMAND_SERIAL_NUMBER      0
-@@ -205,6 +206,21 @@ static const MemoryRegionOps mchp_pfsoc_io_calib_ddr_ops = {
- #define SERVICES_STATUS_FAILED              1
- #define SERVICES_MAILBOX_RESPONSE_OFFSET    0
- 
-+static void mchp_pfsoc_ioscb_update_irq(MchpPfSoCIoscbState *s)
-+{
-+    qemu_set_irq(s->irq, s->irq_pending);
-+}
-+
-+static void mchp_pfsoc_ioscb_clear_irq(void *opaque, int n, int level)
-+{
-+    MchpPfSoCIoscbState *s = opaque;
-+
-+    if (level) {
-+        s->irq_pending = false;
-+        mchp_pfsoc_ioscb_update_irq(s);
-+    }
-+}
-+
- static void services_cr_write(MchpPfSoCIoscbState *s, uint32_t value)
- {
-     uint32_t command;
-@@ -236,7 +252,15 @@ static void services_cr_write(MchpPfSoCIoscbState *s, uint32_t value)
-     }
- 
-     s->services_sr = status << SERVICES_SR_STATUS_SHIFT;
--    qemu_irq_raise(s->irq);
-+    /*
-+     * HSS and U-Boot submit polling requests with REQUEST set and NOTIFY
-+     * clear, then poll REQUEST/BUSY for completion. Linux sets both bits
-+     * and expects completion through PLIC source 96.
-+     */
-+    if (value & SERVICES_CR_NOTIFY) {
-+        s->irq_pending = true;
-+        mchp_pfsoc_ioscb_update_irq(s);
-+    }
- }
- 
- static uint64_t mchp_pfsoc_ctrl_read(void *opaque, hwaddr offset,
-@@ -325,7 +349,8 @@ static void mchp_pfsoc_ioscb_reset(DeviceState *dev)
-     s->services_cr = 0;
-     s->services_sr = 0;
-     memset(s->mailbox_data, 0, sizeof(s->mailbox_data));
--    qemu_irq_lower(s->irq);
-+    s->irq_pending = false;
-+    mchp_pfsoc_ioscb_update_irq(s);
- }
- 
- static const Property mchp_pfsoc_ioscb_properties[] = {
-@@ -333,6 +358,13 @@ static const Property mchp_pfsoc_ioscb_properties[] = {
-                        MchpPfSoCIoscbState, serial_number),
- };
- 
-+static void mchp_pfsoc_ioscb_init(Object *obj)
-+{
-+    /* Accept service interrupt acknowledgements from SYSREG MESSAGE_INT */
-+    qdev_init_gpio_in_named(DEVICE(obj), mchp_pfsoc_ioscb_clear_irq,
-+                            MCHP_PFSOC_IOSCB_IRQ_CLEAR, 1);
-+}
-+
- static void mchp_pfsoc_ioscb_realize(DeviceState *dev, Error **errp)
- {
-     MchpPfSoCIoscbState *s = MCHP_PFSOC_IOSCB(dev);
-@@ -456,6 +488,7 @@ static const TypeInfo mchp_pfsoc_ioscb_info = {
-     .name          = TYPE_MCHP_PFSOC_IOSCB,
-     .parent        = TYPE_SYS_BUS_DEVICE,
-     .instance_size = sizeof(MchpPfSoCIoscbState),
-+    .instance_init = mchp_pfsoc_ioscb_init,
-     .class_init    = mchp_pfsoc_ioscb_class_init,
- };
- 
-diff --git a/hw/misc/mchp_pfsoc_sysreg.c b/hw/misc/mchp_pfsoc_sysreg.c
-index 1d9154280a..899b485da6 100644
---- a/hw/misc/mchp_pfsoc_sysreg.c
-+++ b/hw/misc/mchp_pfsoc_sysreg.c
-@@ -77,7 +77,14 @@ static void mchp_pfsoc_sysreg_write(void *opaque, hwaddr offset,
-         }
-         break;
-     case MESSAGE_INT:
--        qemu_irq_lower(s->irq);
-+        /*
-+         * A MESSAGE_INT write is an acknowledgement event, not a level that
-+         * remains asserted. Model it as an active-high pulse. The rising edge
-+         * invokes IOSCB's irq-clear input with level 1, which clears
-+         * irq_pending and lowers PLIC source 96. The falling edge invokes the
-+         * input with level 0 and is ignored.
-+         */
-+        qemu_irq_pulse(s->irq);
-         break;
-     default:
-         qemu_log_mask(LOG_UNIMP, "%s: unimplemented device write "
-diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
-index fb0e18edba..87c9c89cb0 100644
---- a/hw/riscv/microchip_pfsoc.c
-+++ b/hw/riscv/microchip_pfsoc.c
-@@ -336,9 +336,6 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
-     sysbus_realize(SYS_BUS_DEVICE(&s->sysreg), errp);
-     sysbus_mmio_map(SYS_BUS_DEVICE(&s->sysreg), 0,
-                     memmap[MICROCHIP_PFSOC_SYSREG].base);
--    sysbus_connect_irq(SYS_BUS_DEVICE(&s->sysreg), 0,
--                       qdev_get_gpio_in(DEVICE(s->plic),
--                       MICROCHIP_PFSOC_MAILBOX_IRQ));
- 
-     /* AXISW */
-     create_unimplemented_device("microchip.pfsoc.axisw",
-@@ -492,6 +489,9 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
-     sysbus_connect_irq(SYS_BUS_DEVICE(&s->ioscb), 0,
-                        qdev_get_gpio_in(DEVICE(s->plic),
-                        MICROCHIP_PFSOC_MAILBOX_IRQ));
-+    sysbus_connect_irq(SYS_BUS_DEVICE(&s->sysreg), 0,
-+        qdev_get_gpio_in_named(DEVICE(&s->ioscb),
-+                               MCHP_PFSOC_IOSCB_IRQ_CLEAR, 0));
- 
-     /* FPGA Fabric */
-     create_unimplemented_device("microchip.pfsoc.fabricfic3",
--- 
-2.53.0
+>    hw/riscv: pfsoc: Enable 64-bit SDHCI system bus support
+>    hw/misc: pfsoc: Model PolarFire SoC serial number service
+>    hw/rtc: Add PolarFire SoC RTC model
+>    hw/riscv: pfsoc: Add PolarFire SoC RTC to Icicle Kit
+>    tests/qtest: Add PolarFire SoC RTC coverage
+>    hw/misc: pfsoc: Honor PolarFire service notification requests
+>    hw/riscv: pfsoc: Correct PolarFire SoC DDR aliases
+>    hw/riscv: pfsoc: Fix Icicle Kit RAM size at 2 GiB
+>    hw/riscv: pfsoc: Fix Icicle Kit hart count at five
+>    docs/system/riscv: Document Icicle Kit HSS boot
+>    docs/system/riscv: pfsoc: Document CLINT topology for direct Linux
+>      boot
+>    tests/functional/riscv64: Add Icicle Kit firmware boot test
+>    MAINTAINERS: Add PolarFire SoC Icicle Kit maintainer
+>    MAINTAINERS: Move Conor Dooley to PolarFire SoC reviewer
 
 
