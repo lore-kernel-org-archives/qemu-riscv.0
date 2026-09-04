@@ -4,78 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDA00C624D3
-	for <qemu-riscv@archiver.kernel.org>; Fri,  4 Sep 2026 18:43:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28BB6C79F82
+	for <qemu-riscv@archiver.kernel.org>; Fri,  4 Sep 2026 18:43:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x2Ysg-0007ei-FA; Fri, 04 Sep 2026 14:43:19 -0400
+	id 1x2Ysk-0007ey-G5; Fri, 04 Sep 2026 14:43:22 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <tgamblin@baylibre.com>)
- id 1x2Ysb-0007bY-JU
- for qemu-riscv@nongnu.org; Fri, 04 Sep 2026 14:43:15 -0400
+ id 1x2Ysa-0007bU-4g
+ for qemu-riscv@nongnu.org; Fri, 04 Sep 2026 14:43:14 -0400
 Received: from mail-qk1-x72f.google.com ([2607:f8b0:4864:20::72f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <tgamblin@baylibre.com>)
- id 1x2YsY-0007FR-Rb
- for qemu-riscv@nongnu.org; Fri, 04 Sep 2026 14:43:13 -0400
+ id 1x2YsY-0007FF-Ed
+ for qemu-riscv@nongnu.org; Fri, 04 Sep 2026 14:43:11 -0400
 Received: by mail-qk1-x72f.google.com with SMTP id
- af79cd13be357-936e393176fso100600385a.0
- for <qemu-riscv@nongnu.org>; Fri, 04 Sep 2026 11:43:10 -0700 (PDT)
+ af79cd13be357-93906e8a5feso137289985a.1
+ for <qemu-riscv@nongnu.org>; Fri, 04 Sep 2026 11:43:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1788547390; x=1789152190; darn=nongnu.org;
+ d=baylibre.com; s=google; t=1788547388; x=1789152188; darn=nongnu.org;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=PxmRkSNwe28Owu3zn38AwK3jEgeKY6PGeVmRV+GhjYQ=;
- b=CIq/un1X9xSy+EfsLi3z6qOZfhcOJR4+IefigYxb0q93eWV87LzoAZWmI5vmLiq4tS
- dxbB88jY0iKvKS49Chz9DiPpZySFmcUKSjkmtDYCjxrxLw121LxDnQ1gcoS3cBzrm489
- MXYLC9jUZeOC/FWCjad18NJW72Kzx4kot+BzZODjWSLVAel2BL73km6xNaPrRQrggNou
- jgfi+VX8+dMTGRHgPwqbtmujV36oNwqkjr3WR2JL8fEHbLT/A00L03iuRDnj2vbGDAen
- s4rw2bRIG8H6xZsXypIrv93c0j+DQ3SdT6yavVXYxwX0sbK71RgY0i8Yu8lz9QlKZJHA
- Cq4g==
+ bh=E+pG4qBbSeUEKSM2bhtmJlr1wyo0TQnVA/1AeBtIvkg=;
+ b=OBQUKcq6vSncp62sYOnMSESylDYMLRWssNrkliOCDP7SqxBUUGrbWiHA7D2/qbJJDz
+ VsDRD6YM1iSPuCqI/1RkUcK5viwHMSauO0XpMyVyrTYIxS/cXH3Pw8gOQcZVpnyibuaI
+ QlHHy1AEj4SQZcH62a4a+T2banLTyDKOKmHt8DNX1qHvZRHTKeOLWLjaL+8OcX3SyOBV
+ 6z38sOCwFN87J0ewb1fnu8aKLGRUzYFjP1AJLWcvlOc8dQvzbRIVmyw9CGCerK+zAizB
+ 87VwMpE5Fper9nnWMz9nran7JtXi3EUwD+eQzLw7MFPuCG77minGt6QKRhgoJ63/dT2r
+ aCZw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788547390; x=1789152190;
+ d=1e100.net; s=20251104; t=1788547388; x=1789152188;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=PxmRkSNwe28Owu3zn38AwK3jEgeKY6PGeVmRV+GhjYQ=;
- b=phJKMO/Jt2POQ8OdINV5lsM6sh0uU9Rla3Cco2Pl/nBDWO1VtwzSHY2d2K5r0KvFPL
- 4sOliZtv4ms2m3Sul+GOAY+8n64wsVMD6RKTsF7flR6sKBsTs45RoQL1WWxQzFb2W7GA
- Ap8nifLSL+8mGBI+yyqU18zBPYZSJAPbAy1ztZJ1FP6yabxa+59oZTrI6t+8aVAyETyI
- SMqAVWIHlaGfAWQpA8IuCNVC5vwUHZ5CmqgMpE9w2bN+l0Ylio8IebvzI2ZDUwJSdnaI
- efmsHIRT7itA3qVJAMZcs14WXjZ7Bf1M6RmEecp5GtVEDz0rHo22Q70Vi6G1NYPIx91H
- pGjA==
+ bh=E+pG4qBbSeUEKSM2bhtmJlr1wyo0TQnVA/1AeBtIvkg=;
+ b=pODzeMFMBCm5U+RzREVLEMxzjUyEKYZ3yY/hc6BnZscMdqNOGJvTZJaNxoyBHXDvPy
+ dvXWMK+2QrUAOwHa6PpH8xi9McJY8JqdvuDCIV/So9bCyuvtPrUZS9AzrCFRYqrcllm6
+ poLpMAqiienZdssTqstcMLomda9zEUuyWmzS7l9ctBwQXHmR3QaCgLPXL+uDh1SpNTJz
+ DlzeoMQVdmpWc7cEU8sjD0/78LmrAdNaL0Q1wlr6apWmZZwpFlpyD13DTEXDdGf3hbiG
+ iXDOF1WEELSqDICYnIbi+0zgD820aFX1rJoc9gnlL6kGAvhy3KM9Rto3wi9uLw0HXNQe
+ +y2Q==
 X-Forwarded-Encrypted: i=1;
- AKwUvBztAddetTyE+0XBTPc+k3AmPHHnaw3pbyYj3mFZJLfv/wiyU5ZDkjqGtQ5VVksVZU5S2H0YfIiViYNB@nongnu.org
-X-Gm-Message-State: AFuF++mtlMso4R/2B5om1owqji1dizaLs7PHFUJxWwlUlQvs5AuKqAqU
- 5FWzH6NKWExaEPKwCMndhnBm4z42k7EXw3+qbBbbBIiotl1AuhF2ZjX4Ck5Oc6V/yik=
-X-Gm-Gg: AYBFou3aXHd7sxeseIGToPS6znewpSirBOBJDZk/tG5dPJBEIJRxmPwgnvnp5Rfj6RZ
- V1uF5vq/MydWkIRuvcTX3/Zxwv+Hk+/xwWMhRBoMEQFRSsm0o5D0qHAXcvHf5T1wFxMkntnOMD9
- UrFT3xPbSGQ0j8I/sg15UT3CIWpD8nB2sphm9EBTZWDOofn9kXYfMR7n+lXxoCKfNy55jNzD3Eg
- 5DDzE81iYl08RqS3JbksQCbxNRR3XxUApE2kmxtyVM2CCMvadhWR97IxzKZySvXerGFuf1OfD/k
- Kquuc8MjNi4TgDRNWrv4kiJoz1nRTOntAyY0FEochZgjZBlumkWfJYQdAXePsa927YlNs9+XwsL
- fcL4xKMAJHtKJSQPcKKpHjhxIOqbdnVj4f0eaRg5LfzdPxe8qJJS5ikqNgDmHsRo0jH5VxwXHQD
- 4Qix5O5DiyjcxED70W/qLrt3utDt2l4dDmrPmPjpMU19rNiLTARRNbtfHTqjKz8B7GndxxiqHSA
- OKFEFirUvs=
-X-Received: by 2002:a05:620a:831b:b0:92e:5fe2:fd35 with SMTP id
- af79cd13be357-939804070f6mr649303885a.32.1788547389901; 
- Fri, 04 Sep 2026 11:43:09 -0700 (PDT)
+ AKwUvBxdudFVNl7mCRdHOYBFciQx5ZHL8ZyxybWFii4E5CtAsvB4tQfRRNpTTYrIjt1HHx2K0nNM4G7II0fp@nongnu.org
+X-Gm-Message-State: AFuF++lXcN52+d7kDimaYZh9pR1INi/Hf5qqM4nW91pL/TaM4x+4YtL/
+ cBOlOjcL70P4WfzerqGbrcI5LU/wypmrcV3M/9zGSEkkn1hPvsd73Vk6YwiFgYYQ3DM=
+X-Gm-Gg: AYBFou3C4ayqQfx9vIdKiE+zZVT7KdSgPGDFa+avV8maIMI69Iyskf2jD6Hp6ss2IcK
+ HjTlMH6nqqjy1JCJQfxMbnEfRadVThGp5/lNTKLxDo6g6Ysnoz0YDJunrhCs5Jw4n2tNeijFOTu
+ I/tdVQK8n9UyX3hV7i3a4Um6z8k2QRDzEpoow3eMUidMqKJQhU0Ud0De9d/DZHegbt9UJKnuJ9m
+ QmuVnokuy7BYccLDfkyObAdl+TTByeuQWVj8sw3EnWWP10ltmuZuzV/OePwhusMCYOtf399TMgf
+ FDlb7wAoZ35zx/L6b4ARryIeLMVe401FmTLZTlrTe9IE4W0vio3NyBbU4wp9OAPLtxH2sULMdpC
+ 5D3GAIsYjSeu/hjb6fhzM8rk/fDPS2scqwtK9WDjw56lyjhpWz5w0bMBvO55dV8d/daokX/yGcH
+ J0pQZLTOp3htQDN3NVCTVxCfCVGZCtf8DCA04feRHT9up5sNFW03Su4Utkz1nd0EWKOfXTVYoM
+X-Received: by 2002:a05:620a:8423:b0:938:fc91:91ce with SMTP id
+ af79cd13be357-9398036365cmr630114185a.20.1788547388181; 
+ Fri, 04 Sep 2026 11:43:08 -0700 (PDT)
 Received: from [192.168.40.230] ([2001:1970:3847:e000:1977:be2f:4a71:2892])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-9397fb36129sm277111985a.19.2026.09.04.11.43.08
+ af79cd13be357-9397fb36129sm277111985a.19.2026.09.04.11.43.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 04 Sep 2026 11:43:09 -0700 (PDT)
+ Fri, 04 Sep 2026 11:43:07 -0700 (PDT)
 From: Trevor Gamblin <tgamblin@baylibre.com>
-Date: Fri, 04 Sep 2026 14:43:05 -0400
-Subject: [PATCH v2 2/2] target/riscv: add helper_tlb_flush_page(), use for
- sfence.vma with vaddr operand
+Date: Fri, 04 Sep 2026 14:43:04 -0400
+Subject: [PATCH v2 1/2] target/riscv: extract check_sfence_vma() from
+ helper_tlb_flush()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260904-riscv_tlb_page_flush-v2-2-defec3f29312@baylibre.com>
+Message-Id: <20260904-riscv_tlb_page_flush-v2-1-defec3f29312@baylibre.com>
 References: <20260904-riscv_tlb_page_flush-v2-0-defec3f29312@baylibre.com>
 In-Reply-To: <20260904-riscv_tlb_page_flush-v2-0-defec3f29312@baylibre.com>
 To: qemu-devel@nongnu.org
@@ -111,69 +110,47 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-sfence.vma unconditionally called helper_tlb_flush(), regardless of the
-rs1 (vaddr) and rs2 (asid) operands, forcing a page-table walk on the
-next access. Create a page-level counterpart to helper_tlb_flush()
-called helper_tlb_flush_page(), and use it whenever rs1 != 0, falling
-back to the existing full flush for rs1 == 0. This makes RISC-V
-behaviour more similar to ARM's equivalent (tlbi_aa64_vae1_write), which
-already does tlb_flush_page_by_mmuidx() instead of a full flush.
-
-Pass get_address(ctx, a->rs1, 0) to gen_helper_tlb_flush_page() rather
-than get_gpr(), so that the address being passed matches the current
-addr_xl width regardless of '-cpu' input. Otherwise, the raw register
-value can carry garbage above that width and never match the address the
-TLB entry was actually filled under, so the flush silently misses and a
-stale mapping survives.
+Create a new function to encapsulate the privilege/hypervisor checks
+performed inside helper_tlb_flush(). The idea is to pass GETPC() as an
+argument directly to it inside the helper_tlb_flush() function. We'll
+use this function in the following patch for helper_tlb_flush_page().
 
 Signed-off-by: Trevor Gamblin <tgamblin@baylibre.com>
 ---
- target/riscv/helper.h                              | 1 +
- target/riscv/tcg/insn_trans/trans_privileged.c.inc | 6 +++++-
- target/riscv/tcg/op_helper.c                       | 6 ++++++
- 3 files changed, 12 insertions(+), 1 deletion(-)
+ target/riscv/tcg/op_helper.c | 16 ++++++++++------
+ 1 file changed, 10 insertions(+), 6 deletions(-)
 
-diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-index 4fc2d3a155..652f85a5c7 100644
---- a/target/riscv/helper.h
-+++ b/target/riscv/helper.h
-@@ -137,6 +137,7 @@ DEF_HELPER_1(ctr_clear, void, env)
- DEF_HELPER_1(wfi, void, env)
- DEF_HELPER_1(wrs_nto, void, env)
- DEF_HELPER_1(tlb_flush, void, env)
-+DEF_HELPER_2(tlb_flush_page, void, env, tl)
- DEF_HELPER_1(tlb_flush_all, void, env)
- DEF_HELPER_4(ctr_add_entry, void, env, tl, tl, tl)
- /* Native Debug */
-diff --git a/target/riscv/tcg/insn_trans/trans_privileged.c.inc b/target/riscv/tcg/insn_trans/trans_privileged.c.inc
-index a8eaccef67..8655fa332e 100644
---- a/target/riscv/tcg/insn_trans/trans_privileged.c.inc
-+++ b/target/riscv/tcg/insn_trans/trans_privileged.c.inc
-@@ -155,7 +155,11 @@ static bool trans_sfence_vma(DisasContext *ctx, arg_sfence_vma *a)
- {
- #ifndef CONFIG_USER_ONLY
-     decode_save_opc(ctx, 0);
--    gen_helper_tlb_flush(tcg_env);
-+    if (a->rs1 == 0) {
-+        gen_helper_tlb_flush(tcg_env);
-+    } else {
-+        gen_helper_tlb_flush_page(tcg_env, get_address(ctx, a->rs1, 0));
-+    }
-     return true;
- #endif
-     return false;
 diff --git a/target/riscv/tcg/op_helper.c b/target/riscv/tcg/op_helper.c
-index 7f63f3ada5..178b4d271b 100644
+index 3e94005d2b..7f63f3ada5 100644
 --- a/target/riscv/tcg/op_helper.c
 +++ b/target/riscv/tcg/op_helper.c
-@@ -607,6 +607,12 @@ void helper_tlb_flush(CPURISCVState *env)
-     tlb_flush(cs);
+@@ -588,21 +588,25 @@ void helper_wrs_nto(CPURISCVState *env)
+     }
  }
  
-+void helper_tlb_flush_page(CPURISCVState *env, target_ulong addr)
+-void helper_tlb_flush(CPURISCVState *env)
++static void check_sfence_vma(CPURISCVState *env, uintptr_t ra)
+ {
+-    CPUState *cs = env_cpu(env);
+     if (!env->virt_enabled &&
+         (env->priv == PRV_U ||
+          (env->priv == PRV_S && get_field(env->mstatus, MSTATUS_TVM)))) {
+-        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, ra);
+     } else if (env->virt_enabled &&
+                (env->priv == PRV_U || get_field(env->hstatus, HSTATUS_VTVM))) {
+-        riscv_raise_exception(env, RISCV_EXCP_VIRT_INSTRUCTION_FAULT, GETPC());
+-    } else {
+-        tlb_flush(cs);
++        riscv_raise_exception(env, RISCV_EXCP_VIRT_INSTRUCTION_FAULT, ra);
+     }
+ }
+ 
++void helper_tlb_flush(CPURISCVState *env)
 +{
++    CPUState *cs = env_cpu(env);
 +    check_sfence_vma(env, GETPC());
-+    tlb_flush_page(env_cpu(env), addr);
++    tlb_flush(cs);
 +}
 +
  void helper_tlb_flush_all(CPURISCVState *env)
