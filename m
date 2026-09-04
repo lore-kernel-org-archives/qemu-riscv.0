@@ -4,110 +4,133 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77E72C624DE
-	for <qemu-riscv@archiver.kernel.org>; Fri,  4 Sep 2026 15:57:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77A03C624DE
+	for <qemu-riscv@archiver.kernel.org>; Fri,  4 Sep 2026 15:59:03 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x2WIQ-0003s7-RZ; Fri, 04 Sep 2026 11:57:42 -0400
+	id 1x2WJK-0004Gr-Gl; Fri, 04 Sep 2026 11:58:38 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1x2WIP-0003rb-Vx
- for qemu-riscv@nongnu.org; Fri, 04 Sep 2026 11:57:42 -0400
-Received: from mail-yw1-x1132.google.com ([2607:f8b0:4864:20::1132])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1x2WIN-0004NG-KH
- for qemu-riscv@nongnu.org; Fri, 04 Sep 2026 11:57:41 -0400
-Received: by mail-yw1-x1132.google.com with SMTP id
- 00721157ae682-8588583a7c3so14328137b3.2
- for <qemu-riscv@nongnu.org>; Fri, 04 Sep 2026 08:57:38 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1788537458; cv=none;
- d=google.com; s=arc-20260327;
- b=eSO1aeduLSUCk5DCD56/+d5JajIPfeVVOrFIKeDZE6xvVT/jTlCFmnqDv1umZPsHGa
- G+1MChrzes7/t3qKqA1hUvROJ+WFdD2uIYSsUegvh07UDDKI4vfdMEzqF7z6yCysI4Y1
- 4rxzdAtT1l9CIuk3AS0Y91ARI3CRGoDulwEtPL67VUs1hd1UGi9PxB6Mk/oW9LKygrw3
- Z3IzUwftnB9AT/DTcNjUb0GwhVUgl8PexmE6VpD6bytc1CShRfELEl4KKm6ITRx3xQzm
- JRMQW0qifNUFhL0ZSAtoxzT5t2Qb5X6YinVw2lkOsXxYK/kO/TFchMLCe8K6FnBPM1+r
- 1iUw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=9x+a9V+XCDnZNdlCUrGxrg0BtmLiYzZzQf75J3U5oJM=;
- fh=SADFVfb5oTO+ZL7mF7Uq+JZ6TZQObeUVzsLg2PFege8=;
- b=K7RIZRTjDlNzPgVImUVDVmYgdXF0hbN831w2QWC7ORFiytBUrrQA+eNs785brBJSGO
- BJLGNehHWvgY2Ppei49jhXRgtXjnAmeZdu2RGr4aBN5RcPK54NieUbdnhQupIGJ8blNZ
- jV0eS8IMbn4tUbeBzkGqZraLiJjKnY12PWagrssCVG3KmiYDzKbF5fbpa+CThbQZHpKu
- dZo6rWWHRwuAy0gUvA6D6vC5QzXYa7TS/uLPiDlEYVj2sjTt6Qczx3jIqahan3MoQtnD
- cV6IuzElA67EM/QqV78pycWs2fsSdC3T/Bz48vxQMQdKOTBVAI7sGW5rTCH4PQJCvYte
- Ndvw==; darn=nongnu.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1788537458; x=1789142258; darn=nongnu.org;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=9x+a9V+XCDnZNdlCUrGxrg0BtmLiYzZzQf75J3U5oJM=;
- b=PzJbHxMU39LN7HdPo9WxAeDbpKvBIa82W855b8kHXLoBxs6HAJ3kj3gQU1Rsn272RU
- l680xt2f/o7L19Y7gWGbZupy2r3y9Fs0pCHZI5vy47P5Wuk6qV856wb7NvQ+uVHMiRaG
- HxB1leNHt6BwF/0Y6meMGuRmmOJhXrCTuRPkonG2RdGglwEwMkw1irlRLVeo+Epu+Tmw
- 9ySeXzJ3PGzoq+Vaok+LAPmTkIeNaeHBGO5HdQ+JOGR4kng+nIzr4z2zQNyr1vEkbK4z
- C+Of7lXORnR9eh8ym22b03HuIYUtaVEvne3GLqbwMFGCKx0XN8rGRtsXIGo8S9qaPVYP
- s1Xg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788537458; x=1789142258;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=9x+a9V+XCDnZNdlCUrGxrg0BtmLiYzZzQf75J3U5oJM=;
- b=iLsNqzysdk1bviJM/5D9mF1AdqRaskWd8WikM8np+PMeNqFd5HaeR19aKG+wjydbE+
- DRIvqKqmuiBqVrjQMYCfuQ4JOfKPsSDuHl+sREDb0NontWKnQfer0Q7wRbnAzqZb3dh6
- gwbnLHFTZyRQtjRG9CdljxBEj+C/jjkC2tDbNOSjtQrDfeCYxqUKXE5g9ngYivnGknYW
- EHo/nKrNe2gSz3jAw0cFxXZuWO8uFGaxmeYXZ3J9xcZqnaopm3JWSbV70GK/JG5UnkGc
- jdunyVo4sMGEVhnLAu7GiIMKBhXIC3Z1KlXTGQI2PjU0CQlQT31zaNl2ODbpNonwVQtC
- 7Dcw==
-X-Forwarded-Encrypted: i=1;
- AKwUvBzL5jpXnMJ0UaMZ6EZV37jGXhDadXlrZihzXW9xeWTfdwRa/qfuJgGm6fWWH9gjZNgGV5i/VGoXSynw@nongnu.org
-X-Gm-Message-State: AFuF++l3iKqSIDdFtBVhXHMba3P3e1L4KmaxRTKKfI+xpNFNIs2YHaE0
- WwUNwReWKauL/7Vcl0vrrtE9iUi5NQdhBI1ra3nC5rqytt95TBxDq+p0Ej5uabMIe3fDhEw5Jhf
- X4fk4FpkVBMY4NnZTrcuI48k4dglEcYo1tUeIuYJsDg==
-X-Gm-Gg: AYBFou15wt5dYutjV057+A+0vmUU+qMywJ2LW+QorkEtFhsALfwifr+uRCzW7WvXiNC
- K3ax5nVtSGRvI7KFFJZfezIb4ESwkj+1tSZ7W0hJFi8qz1XWSWu5ywcv89d96Ja9ohvB03PfXDn
- x5xfBBfHCIGftbURjXKJmn8FfWL+RUitCoCrNX/vgN3Pb7R6DLSwxWiI5mH+s4EjJ45zYcMiy5C
- woYsoNqcWwOJX7yq9Ch/loHWwI4z5UJnLW1O/uQsuI0kU5MFM19GFjlckhXZfS9gvC7si+puPB8
- 8sgBPjAd+ezpOMY+ov9NZNt1ngus4g5ThUNTxDmgisnZmfPbZdunObTlddvwJGJ6KMUOtJW4/qW
- b4NE/wUtqWci/6S93iUJqn5yyo6G/E//eTx+ogdc=
-X-Received: by 2002:a05:690c:f14:b0:870:107b:6359 with SMTP id
- 00721157ae682-871246a70e1mr40941217b3.15.1788537457684; Fri, 04 Sep 2026
- 08:57:37 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <bin.meng@processmission.com>)
+ id 1x2WJH-0004CR-1n; Fri, 04 Sep 2026 11:58:35 -0400
+Received: from mail-koreacentralazlp170130006.outbound.protection.outlook.com
+ ([2a01:111:f403:c40f::6] helo=SEYPR02CU001.outbound.protection.outlook.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <bin.meng@processmission.com>)
+ id 1x2WJF-0004Pg-Fy; Fri, 04 Sep 2026 11:58:34 -0400
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=ti4TAwgkQbfQNj/3cmEwjNwaG5g4pilRVDq/+XvT/bRgXpHaHs15ACH7cpLz7NElo7oP/U413upr0lU/uz/4JAFM8nzxpN948m4oIODVVhNf2E5QcOvrcK/QGH5EDRQsfRfzdKDxTqsAZkmVve75RlrjD6lQDNZ7CsFYjOn442JcgwPB+ZNDT3Ug8tok22YzAIKPw1jAGuyo45BjkIIR4XFhfVgqh7mJv13w4kc6OVx5nLq2zTlK/KYC91gYZLyVyUVdqe0iOnp1rw2cedeRVvEgZlDr+GWKR885/wTGw054x/O7pTEM1JLIB0Qq1jTbSksrPQF2WlqVk7ppVdEkyg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=L0rhl7GY61g03mQTRcsJ8UabnJ+bj3IidlZgZGOwU+o=;
+ b=Fc35ljGtVvTNdaee9h5js5i9kXl/zVA/g0ZG3bE0OXLf+nSunoNYBqrB7BNlWns9hmeP/Nlj5RUz7/Kpldu0hZ3da4zTJ9pqGV5FGCpEoOj6RL62OYbeJtM97t9bPkdbAtydrGvhDzFsLf0eCm4eJ4dkMq7rEqWVgipQC6sCAucfiiBMydrL1Fk8G+09BEd7GJk4etvIVcKYrkvWlloX6VmsRz3jGMugxWpTshs76gAcQECYlQaICipQYOL4VXy0DmfkoDy+0hc0Tvwm/abEfZvIQRgfzGNQsf5sjgDL8tpl4cUqNiZteHVxbnKGniyw0jITk/vl5KTzQSgEqPK0EQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=processmission.com; dmarc=pass action=none
+ header.from=processmission.com; dkim=pass header.d=processmission.com;
+ arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=processmission.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=L0rhl7GY61g03mQTRcsJ8UabnJ+bj3IidlZgZGOwU+o=;
+ b=kza1/1UMvSOtPPq9FDx8ORnyW+SCKv8Wy9L+MuqcCH5M0O6ztB/pzZFJwkEsU8GMdAYepQk4xIJpo2fsQU0L2pNTzqfGCiKYll9mIS23ahJXN9piIME0Nc4ntQjl/Wj4HB5lu7UQwmP/a8SuwtqPtJwCRXwQMR8iEaEYleHjfwkCslO/zxc7GxnEBkDFRTxvpEoqfzI8E9bwIl8EqfO+G3DHJtO9i7u5EpH8kzUl2xD1iQCEoZQ5Un37aJXS8U+7se6u1Il1i3GGHLun5CWq8oFw43TwVe+KKPtZJZX4z6qyT92ZWY/ONTwkqn/kVckKIxWv0cXYZuGFcw/38cAJ/A==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=processmission.com;
+Received: from KL1PR02MB4977.apcprd02.prod.outlook.com (2603:1096:820:71::8)
+ by TYPPR02MB9175.apcprd02.prod.outlook.com (2603:1096:405:394::8) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.360.13; Fri, 4 Sep
+ 2026 15:58:21 +0000
+Received: from KL1PR02MB4977.apcprd02.prod.outlook.com
+ ([fe80::9fdf:2557:8351:6c03]) by KL1PR02MB4977.apcprd02.prod.outlook.com
+ ([fe80::9fdf:2557:8351:6c03%4]) with mapi id 15.21.0382.007; Fri, 4 Sep 2026
+ 15:58:21 +0000
+From: Bin Meng <bin.meng@processmission.com>
+To: QEMU <qemu-devel@nongnu.org>
+Cc: Chao Liu <chao.liu@processmission.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Conor Dooley <conor@kernel.org>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Sebastian Huber <sebastian.huber@embedded-brains.de>,
+ Weiwei Li <liwei1518@gmail.com>, qemu-riscv@nongnu.org
+Subject: [PATCH v2 01/24] hw/riscv: pfsoc: Correct the L2LIM maximum mapped
+ size
+Date: Fri,  4 Sep 2026 23:57:20 +0800
+Message-ID: <20260904155758.3833179-2-bin.meng@processmission.com>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260904155758.3833179-1-bin.meng@processmission.com>
+References: <20260904155758.3833179-1-bin.meng@processmission.com>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: TY4P286CA0020.JPNP286.PROD.OUTLOOK.COM
+ (2603:1096:405:2b0::13) To KL1PR02MB4977.apcprd02.prod.outlook.com
+ (2603:1096:820:71::8)
 MIME-Version: 1.0
-References: <20260904124604.2207440-1-alex.bennee@linaro.org>
- <18f4fdf4-1e8a-449f-a003-3bff20499a29@oss.qualcomm.com>
- <87h5k5owco.fsf@draig.linaro.org>
-In-Reply-To: <87h5k5owco.fsf@draig.linaro.org>
-From: Peter Maydell <peter.maydell@linaro.org>
-Date: Fri, 4 Sep 2026 16:57:25 +0100
-X-Gm-Features: AcwNN1XE4CyLYGIF92hfZ0gbZM4pifKjPmbcheth8Ebwj6XNdKo7RICYpYMXzYg
-Message-ID: <CAFEAcA-ive77P5GCVLswnz64VehJ3b8ewYK18KEs9bANSAzRQQ@mail.gmail.com>
-Subject: Re: [PULL 000/105] move check-tcg into the meson build
-To: =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>
-Cc: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@oss.qualcomm.com>, 
- qemu-devel@nongnu.org, Pierrick Bouvier <pierrick.bouvier@linaro.org>, 
- qemu-riscv <qemu-riscv@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1132;
- envelope-from=peter.maydell@linaro.org; helo=mail-yw1-x1132.google.com
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: KL1PR02MB4977:EE_|TYPPR02MB9175:EE_
+X-MS-Office365-Filtering-Correlation-Id: 30d7dc9d-a2b7-4206-1ef3-08df0a9d581d
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|23010399003|366016|1800799024|376014|56012099006|10067099003|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info: 1v/tzAUEm9H0Nbuc/4pOkAizDn4mg4AHvkJU3EKt6yZYe4nXFk8CynDcmRzj/xRf9GKeJajnmQyFiclRbKB0SKaJc1B21QYeuPKXSD3tIQco5KvSbNF2mR3BghTrvqipmi1h/ziBZvpkOeEG28PRNH5AK1oS3Pd/di2rNVyScj1bwQm/yYS6z5Kj1uCihWqpS3eZOEOD9+iLtFq4YpBs9g1ST//Pg8CDCXcSPJdXbsmjDy6NyzDs/kh4QL4AwvEqPnWQ1y1r93JcS+WVJDArLFm2QByvmVVKTjENcT2a0kPG0X5M98g0U+TLQMb7fbyJouRpawtkxz526h+leZex5osuN6xXzng8WPB/uRVCmP3eK8mQvWmR2s081vM6SECuabLmJsirwzWwlp47RusIjB1h+/AKgG3nUzMlyxno4vpibReG64XzQ76P0XKzXFI2dzo74WaOREvyk4w3gYqSPGeAL6LuAxQC4mlqYAGyWwPBYs3GCwvyRnMxoWNajVmdMHXmpCyRGkjEr27Ggm6s4lSqhFPAZwLBObLi9ykM6SSeMGa8Rg03O3Q+P3kEkI/RA4/coHFPifCg7XwYFv/NwvhDxUWf4v5H3qRbf+A1xWDpNV8JW5FYj9fx1LJNAyMT7WvFfdP4Mat53sOY+PAhO/BjPSav0ngtrQsPqqiKxHg=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:KL1PR02MB4977.apcprd02.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(23010399003)(366016)(1800799024)(376014)(56012099006)(10067099003)(22082099003)(18002099003);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?FbC0AYuqVDkLjYEk0C9mjNdHyNfuH79m4wJQi0EMvYnwYD4UlxRe04Z9Dx6e?=
+ =?us-ascii?Q?NXUDjfjz3EFE4y9uXBHCgnaLZex/OIhoDbiGAwvQKZZlLyvhu1i7N+LAdrab?=
+ =?us-ascii?Q?lZ0gvbglbTX11gBiJ+lfYvN47uhL5zfQLMvILcq+IIgOLIhhu4jcb8wepAaC?=
+ =?us-ascii?Q?wz8tdUR7Ym1JLH2lT8kkkJsH06p5KwhgiO1Z/PpO33RiBhNVd4XiLNgmaa44?=
+ =?us-ascii?Q?cUqhlV53liaPmSgdeTbYciMK7q8+1WJWWEvPrg1R7l8T5hff92oHqTedUi3/?=
+ =?us-ascii?Q?lP3EzDlZAuvcBvMXButUxJMk7VYdq/9odM3RYGqRnvG0hBZPlTGMut2OjnoS?=
+ =?us-ascii?Q?4OII0wldS+MKil+6+BvCBp7rD/zp0KiGu38DkXfy7Qfwmm83D8sUgVC48vlO?=
+ =?us-ascii?Q?plz7TwO750wKpCkNK8PJBrP55dDMKd4stHI0J633cpijqvaajUXsjmdzSpK4?=
+ =?us-ascii?Q?KEkdzIqW39QfR99hJ/XVHgt+iNdDa+l1Ej6UvBcXqzcliYz8YV193LIgs6fj?=
+ =?us-ascii?Q?DF1KyY1jNWt2NYfeBN0QcYC1WJ0O3G8JVofKjudQ5O4xTBT7MmVxkqEudmkZ?=
+ =?us-ascii?Q?LUP6fkOwVZXUoSmRSNXrjlwXt3wRTU3aqkCKa0GFNXiSt9xaIrT/3S9G9Q6h?=
+ =?us-ascii?Q?W+bgrpADxS17DtL/DuaGWzNoY9H3N0utweIhg38c5NMj2Z6MhO91F80oT8oY?=
+ =?us-ascii?Q?L3DcbaOQu6nuidWLs5xxyTGaaBu2YBfslano0nWSZWjseAYvu1bTOnx9oXTt?=
+ =?us-ascii?Q?18d2WA8N2//lk7kMvCVF+RvC2AGtVKOa8oN+viTRb4Wo/qyotVTb5jIxy5kT?=
+ =?us-ascii?Q?pfqanI1Y+MGIy4yetNoR6ciZ+zuP/UQyfWgMHgjr5K40REp3eVs3yrvp1XPr?=
+ =?us-ascii?Q?24/urf2ZybERHIntKWgRqX/BLKC7JgpC7z92/FRuKNpAZhpQj1EhwD5yVf5I?=
+ =?us-ascii?Q?mvjuqNNzo8ozB+PSWlzK2CR9le28dW8LtsdXfUF29F1T6wRRt3cgXfeNXK/q?=
+ =?us-ascii?Q?zovnxNjzOj5ox3zlC1omxNufao+lP0x2G8Qn/t8NZhzqq4pX60Ld2C1h9Glw?=
+ =?us-ascii?Q?F+mPmlNHiB6yFlFprGlv1qezq9n69GtEQa+1Yh6XluKdgsXzZKsPpKdW0QTx?=
+ =?us-ascii?Q?GkeaS72MS3hWooN/8Gm+1lqzLeZ3Tsfc5vMrHSvX/zElLuQO2wgxHkfRxFtC?=
+ =?us-ascii?Q?ZKj5p9dbpjJ9cNkgLkMnYk4fUnYJfybD/EaJF0TmGQP5DSKqfvCKzvCzJMnF?=
+ =?us-ascii?Q?R1jb3BM4vUm89aJWHgf53qawS29cD38kL2lbl7bez5VCV73dHj8XokCLeEQJ?=
+ =?us-ascii?Q?q54ONzU0iv1SFgXDcDNjc4/yLew8hquDatrwrma07rGo+fII6d+VwTij2zpk?=
+ =?us-ascii?Q?0N1Zhj5Ti28W3raaZWPelDEkPXfZrFSxiaAeh/f4PTUjmk/jesy1Ri5JmtLr?=
+ =?us-ascii?Q?Vt7mu+tUjUs/QK2vF3sjnSlL6MhwJ0g6iiO0C7RIjlRr2O88yPYRBdf1UmWV?=
+ =?us-ascii?Q?1ckqp+t8ay1+E7KQou450OJTznXcip27UJ+AGpV25rxb0Dco4PgEnvUvbKdx?=
+ =?us-ascii?Q?9HOuEs5+XXL5ke97DSyevG38dUBZExqKY9PI1gNL156yhe6Q85WSZajhOFS4?=
+ =?us-ascii?Q?siy4JtRJAPo7mPNJyHuuzRjahM9bK4nnQExdlElsjAi//U+lkafUWexkMum5?=
+ =?us-ascii?Q?X+ddW4g41TxNgU2gML6Hf4KS7ViH3lbjXyQbBioY/fQbi1cUJHIs8yiNl0v+?=
+ =?us-ascii?Q?zE1rsromdTDHxm/saa+uvyKRBOu5H8c=3D?=
+X-OriginatorOrg: processmission.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 30d7dc9d-a2b7-4206-1ef3-08df0a9d581d
+X-MS-Exchange-CrossTenant-AuthSource: KL1PR02MB4977.apcprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Sep 2026 15:58:21.6776 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: e0544bf7-9765-4630-ab69-0b266dc2169c
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 9pKs7jJm7INX+MnhaW/b+nlG0x/3f4r+TiA8h0i4b2ytDhAiAeNZLBwSGHAwsPIrbY9vUCasc2ghIf9oY56qVthh784xZ9lAbo5mimHHvow=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYPPR02MB9175
+Received-SPF: pass client-ip=2a01:111:f403:c40f::6;
+ envelope-from=bin.meng@processmission.com;
+ helo=SEYPR02CU001.outbound.protection.outlook.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -123,65 +146,33 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, 4 Sept 2026 at 16:44, Alex Benn=C3=A9e <alex.bennee@linaro.org> wro=
-te:
->
-> Philippe Mathieu-Daud=C3=A9 <philmd@oss.qualcomm.com> writes:
->
-> > On 4/9/26 14:44, Alex Benn=C3=83=C2=A9e wrote:
-> >> The following changes since commit 99e54ab5e7a6efc945af6d5661842155d1f=
-3fc7a:
-> >>    Merge tag 'hw-misc-20260903' of https://github.com/philmd/qemu
-> >> into staging (2026-09-03 16:43:24 +0100)
-> >> are available in the Git repository at:
-> >>    https://gitlab.com/stsquad/qemu.git
-> >> tags/pull-11.1-check-tcg-meson-040926-1
-> >> for you to fetch changes up to
-> >> 26395b536c3ec0a857dffd6548d8ef49479dedad:
-> >>    MAINTAINERS: add maintainer for tcg/tests meson infrastructure
-> >> (2026-09-04 11:38:01 +0100)
-> >> ----------------------------------------------------------------
-> >> tests/tcg: conversion to meson
-> >>    - remove unused variable from multiarch/memory
-> >>    - standardise checking plugin output
-> >>    - bump minimal meson to 1.6.0
-> >>    - introduce meson plumbing for check-tcg
-> >>    - return error code if docker probe fails
-> >>    - add CI/self/mem test to gdbstub prot-none tests
-> >>    - use raw opcode for fprcvt test in arm
-> >>    - remove unused variables from gpc-test
-> >>    - teach probe-gdb-support about mips
-> >>    - identify or1k pc register
-> >>    - port check-tcg logic to meson (all targets)
-> >>    - update documentation
-> >>    - add Pierrick as a maintainer for tests/tcg
-> >> ----------------------------------------------------------------
-> >> Pierrick Bouvier (105):
-> >
-> >>        tests/tcg/riscv64: add float reference files
-> >>        tests/tcg/riscv64: user tests
-> >>        tests/tcg/riscv64: system tests
-> >
-> > Some of these likely need to be updated for the latest RISCV merge:
-> >
-> > $ git diff --stat 99e54ab5e7a..d2843fbf802 tests/ | fgrep Makefile
-> >  tests/tcg/riscv64/Makefile.softmmu-target |  14 ++++
-> >
-> > $ git log --oneline 99e54ab5e7a..d2843fbf802
-> > tests/tcg/riscv64/Makefile.softmmu-target
-> > 883a4d4da4d target/riscv: preserve vl on element-zero fault
-> > bbdccc84fc3 tests/tcg/riscv64: Add tests for rv128 [ms]status
-> >
-> > (not sure if this can be done on top although)
->
-> Merged inline, see v2:
->
->   Message-ID: <20260904150826.2331577-1-alex.bennee@linaro.org>
->   Date: Fri,  4 Sep 2026 16:08:26 +0100
->   Subject: [PULL v2 000/105] move check-tcg into the meson build
->   From: =3D?UTF-8?q?Alex=3D20Benn=3DC3=3DA9e?=3D <alex.bennee@linaro.org>
+PolarFire SoC has a 2MiB L2 cache, so the maximum mapped size of
+L2LIM should be set to 2MiB too.
 
-Thanks; I've abandoned testing v1 and am trying v2.
+Signed-off-by: Bin Meng <bin.meng@processmission.com>
+Reviewed-by: Chao Liu <chao.liu@processmission.com>
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
+---
 
--- PMM
+(no changes since v1)
+
+ hw/riscv/microchip_pfsoc.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
+index edd29626fa..cfba2990b6 100644
+--- a/hw/riscv/microchip_pfsoc.c
++++ b/hw/riscv/microchip_pfsoc.c
+@@ -95,7 +95,7 @@ static const MemMapEntry microchip_pfsoc_memmap[] = {
+     [MICROCHIP_PFSOC_CLINT] =           {  0x2000000,      0x10000 },
+     [MICROCHIP_PFSOC_L2CC] =            {  0x2010000,       0x1000 },
+     [MICROCHIP_PFSOC_DMA] =             {  0x3000000,     0x100000 },
+-    [MICROCHIP_PFSOC_L2LIM] =           {  0x8000000,    0x2000000 },
++    [MICROCHIP_PFSOC_L2LIM] =           {  0x8000000,     0x200000 },
+     [MICROCHIP_PFSOC_PLIC] =            {  0xc000000,    0x4000000 },
+     [MICROCHIP_PFSOC_MMUART0] =         { 0x20000000,       0x1000 },
+     [MICROCHIP_PFSOC_WDOG0] =           { 0x20001000,       0x1000 },
+-- 
+2.53.0
+
 
