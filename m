@@ -4,98 +4,139 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5AF85C79F82
-	for <qemu-riscv@archiver.kernel.org>; Fri,  4 Sep 2026 18:44:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A313C624D3
+	for <qemu-riscv@archiver.kernel.org>; Fri,  4 Sep 2026 19:56:33 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x2Ysn-0007gt-TN; Fri, 04 Sep 2026 14:43:26 -0400
+	id 1x2a1S-0002x9-Qt; Fri, 04 Sep 2026 15:56:26 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <tgamblin@baylibre.com>)
- id 1x2Ysd-0007bb-Cz
- for qemu-riscv@nongnu.org; Fri, 04 Sep 2026 14:43:15 -0400
-Received: from mail-qk1-x72b.google.com ([2607:f8b0:4864:20::72b])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <tgamblin@baylibre.com>)
- id 1x2Ysa-0007Fe-GD
- for qemu-riscv@nongnu.org; Fri, 04 Sep 2026 14:43:15 -0400
-Received: by mail-qk1-x72b.google.com with SMTP id
- af79cd13be357-9397e2994dcso115312185a.2
- for <qemu-riscv@nongnu.org>; Fri, 04 Sep 2026 11:43:12 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1x2a1R-0002wg-B9
+ for qemu-riscv@nongnu.org; Fri, 04 Sep 2026 15:56:25 -0400
+Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1x2a1P-0007j2-Ps
+ for qemu-riscv@nongnu.org; Fri, 04 Sep 2026 15:56:25 -0400
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 684HILtq3585994
+ for <qemu-riscv@nongnu.org>; Fri, 4 Sep 2026 19:56:22 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:date:from:in-reply-to:message-id
+ :mime-version:references:subject:to; s=qcppdkim1; bh=vl6d4L1i+c4
+ sykN/zuTBI4TPp/Bc6S5aA+qfuafTrM8=; b=luYsX21+cFWZk6kce4Dgie7CupF
+ PFl6D41LUaTJLtVV3km8eQx+O0tWqZ3uV64Asx6nXjhkWxaG36U7JIF+uQisdak3
+ Vv/rZSMLT/zoS7kg5OyAWOVMB+gtMsjQRPZ1IAUHMbfivogh5ffPYyduNsdNIf+z
+ ytMG3p3R1/vi2xomiPlFcWChLOkzmRM/0vS4NMWFQ53ytUGCGdXN979uXSzJWheS
+ kSEcRce11BBqJpp2DZT0SVvrWKUuUgmvVmdnEuLcsYoztR75V3BU2yqkQeGbI6WT
+ +nJNIWGHEh8Q8YFhL/AFl447VtUs+7P1tbIBjphynfrJf/UU/UJ4SoW93bg==
+Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com
+ [209.85.222.200])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gfp1fkxh4-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Fri, 04 Sep 2026 19:56:22 +0000 (GMT)
+Received: by mail-qk1-f200.google.com with SMTP id
+ af79cd13be357-92e62e3459fso225546385a.0
+ for <qemu-riscv@nongnu.org>; Fri, 04 Sep 2026 12:56:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1788547391; x=1789152191; darn=nongnu.org;
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=v4bmJUEOgxrrJZU9J3darmlkBkvz3ZkB2+0//zGgDso=;
- b=SSJjFftqMw7+jLwQIpnUWS0HBTEU9uZEhOPdHFhBX9cA1Kc/QtFSFQwGYwXSrfCnWo
- lIbm9FE/osLdtGUj5/a1Muc3T03a+fz6nBIA85zTIb+5KWsv+63J4ilv8PA1jN6ftNCL
- x59OwC5NSyVVDhdD0tEsJuRk3FdLaJ06a3WDXZiveYiHFFj73PGSNjb3x2rTR5PsqU7G
- 0GTcpq9ccJepnKH14vjdV9b/OmeVaOp7/T6IqsIoXeTxAMvFRLO8N7BvXsHelHRWjSnN
- bkcIKigW0gT5wDI2F0bg1T5ShLLml7Lkk4OZsV+yNpZH56rZDuJRNvrrk4ViEX+taNK1
- DPew==
+ d=oss.qualcomm.com; s=google; t=1788551781; x=1789156581; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=vl6d4L1i+c4sykN/zuTBI4TPp/Bc6S5aA+qfuafTrM8=;
+ b=RtsnDEwe5tuZwnxGlOtQGL2t3JdmqvnB+Vn7jnVOhwZzvfe183DywUCTPALCoZ7VFG
+ 9O9YZFnrPmn+wW6dJUAoaPFkQa3lqTND+PyKrFyI2xSKxZ1t/8zkpr9FtupmNk9g2UOk
+ 7nXB2bhzLTBfvCxwuYQqOAFmKpVfBwS5BvEWTlUCvJE9ivgKWG4zOjjC8qgpB772yV4o
+ J4ss3rvxyeQgjGEfqECqUiRejquqcMg9Bqq/RfCWEmHe3Dx0HReqtKapmGpN/rokYvQ5
+ kC5hK0Ci13ouWDqwLmORdHaeN8kVwD88cZ0bFnDwzAPxbb4b6IUtKrzIEw594eOY8ga6
+ fmjw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788547391; x=1789152191;
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=v4bmJUEOgxrrJZU9J3darmlkBkvz3ZkB2+0//zGgDso=;
- b=qjq2/WNHOy6yyjr+6AscXGq8JMtbshw/ggWlDetGzcWvNjMqAg7x+YIvecWAtxqqxl
- FvtgldkJ6QVcx6FeyzPRpW6ni0WinTfBOnrj+0o0Zyx2nRk52oVM2SkCDmQsDpAgl0TK
- Vs5BRSuFqATq0Yd8As59gQfiYbTD05GmQajaiWJBoSW1UttvXHLO6gQpcndRXLA1mM2c
- x9lCy6lftPs6srci3MAtegohrEbFTkyN5jDU9MqBcZqXuHnH6aR4ast3XC4bVZt+t23W
- 2E7ClqvBjp3HqG/creMGXg5tWz1JxxKwWk3AePvhPGGO0/Mm5T6gMzrYAD4kBMzhdBkA
- rvTQ==
-X-Forwarded-Encrypted: i=1;
- AKwUvBxyela+08e383sDJG8az+iorjGWOGUywx96MHZRvmqaV3+73RE3z8iEgZth4spDZNz33JC6OEv4pFBk@nongnu.org
-X-Gm-Message-State: AFuF++k/VdOWIXgnIAUnxJ8yzfh+ad9JfBJk3PP+ner8lnc9oBHxaOa5
- mQftA9OlTChL+nvfbY4nkC+RnGUp/YGgYCymYcvavC7tr7DxN+HHb6y9wZBxVdGbYQQ=
-X-Gm-Gg: AYBFou1Hk9DzeMx7CYncRljIk2pZuzmyVJhV18SDY4DF/bWjfgmES7EqksvOQOU0Dk6
- uZKXAAAj9uKQGstMdhgDSPjbfaCki6t7co/7+5vjITqbBEZAWyz03W9Fy+ELroZb3RV4DO4m2Du
- bQtKokn6h2n25fbnZntQAN0pV4nLHQzw8we04oqaODOP6SGRJnkZSh8tIVwUwaYnJsRDkJGPpUg
- ON9JjfjSO3BL8MxwdOU0WRup/5W9iCVfIXG3xFgnltMVkPzSCOlG+MbWH3N/PScSSlE/FuR55Xr
- TaJsx1K0i6rBC2ihQ6kVY+f/tp1CmHMbdNdiC9DMxB+Ozd8Z0RMICfn1gTXotro+gpvSFLy5qtd
- /Rt81sD3BaWdQ62KOf5uDypFaXQSYks/P+E2709FFEu1ilaOSORaTdr6M+UEN16NUfmiuBcM5VO
- iRDX5cDRMgt7NaKIiRH/lWsc+mkAddVmgNDlSYq/L8jjE2ddy0TMMHsnloVVjNHqomadoHKGqt
-X-Received: by 2002:a05:620a:995:b0:939:7ea5:de2b with SMTP id
- af79cd13be357-939803118f6mr603690585a.2.1788547386530; 
- Fri, 04 Sep 2026 11:43:06 -0700 (PDT)
-Received: from [192.168.40.230] ([2001:1970:3847:e000:1977:be2f:4a71:2892])
+ d=1e100.net; s=20251104; t=1788551781; x=1789156581;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=vl6d4L1i+c4sykN/zuTBI4TPp/Bc6S5aA+qfuafTrM8=;
+ b=fFqtH1VAmp371p2N4IL6XGKCHTHUztB5Jw0BAjziSEjRhE3t81//WnrgOqTgN9zVBp
+ aRalf9vLcuu63vZShZeK+H8lHL4bGo28TXoQQsR20c8y/tpD5fbsEHp95dIN9Dc6UnGR
+ oHszgJjCWj3qZgIBBTxfWCV9fShP5/FVxXi9+4fVKm/x9gVueMN3pXhJ/C38T2lanyId
+ eQGBesQXDwQrMO7P7u2sahwbMz2gpXGhMRHBWbuwUJZs59Rca9vHWx4cWx5zecK2b2Ms
+ elrLB2wNaub1Eqv061LwSlUsLOQCGfFpXvLpJWP7UE91kVdm+zNl+EJ63zwHs1e1WW4r
+ UsxA==
+X-Gm-Message-State: AFuF++kqPqUbOH4aQU83eChy9FwwN7i0Z2Qq1lgS4Glb5u0SwmEKOlzG
+ 8RgadZVt3DC0aTnvZd6qVM+WpH0cI0UB3TIJI/OEtmHX+qhzGJsk/016jGf/f2THr2o645E8Zul
+ oDmHA9JZ2HgJmvB7Z108pExWOiBGpDxfxyFoWAH3BTVgeSShYDN3vd/WRIA==
+X-Gm-Gg: AYBFou2YL5RRdb3gO0uoeOIIG+a/BBK+J1v+M8u3IIHDFjaEIZWaVnOeyFdu0YCQzI4
+ Un954adQFyDFoKuxyXtalXWOeYedHkmlnHKZvQIwMc2DiGFwdlxwLGrBsWaBU1F/fIHkqN9bqFu
+ WoIUqS05W6Um/Gu3U54hNqikCjqTRdmPOoErkN9Pw4EAoTaGBXixIQCJCbT/btsXU5cCdc2IaX5
+ 1Z9bJvk7qY1t4/PLBcH85F+nPe99969Y3kDrdIGRxAr4STiPjbK5gcz0Di6vd7hiZ2Cqq7P8I4d
+ W1L9CAQGXM59isXBVDDD9BLCe9L+nYyTE+MDgP8HbBeF6MYtgX9pU7ELGuKGryfTxSbLhNP61+g
+ 2RhjJAHwmCo0sJv3RVsqbMDz8gGSaiSIPs1gv
+X-Received: by 2002:a05:620a:1a03:b0:934:ab73:ac53 with SMTP id
+ af79cd13be357-9398013bb1emr837589885a.0.1788551781362; 
+ Fri, 04 Sep 2026 12:56:21 -0700 (PDT)
+X-Received: by 2002:a05:620a:1a03:b0:934:ab73:ac53 with SMTP id
+ af79cd13be357-9398013bb1emr837585785a.0.1788551780838; 
+ Fri, 04 Sep 2026 12:56:20 -0700 (PDT)
+Received: from QCOM-UWl2o8bcGT.qualcomm.com ([177.18.66.131])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-9397fb36129sm277111985a.19.2026.09.04.11.43.04
+ 6a1803df08f44-910406871b6sm29117736d6.32.2026.09.04.12.56.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 04 Sep 2026 11:43:05 -0700 (PDT)
-From: Trevor Gamblin <tgamblin@baylibre.com>
-Subject: [PATCH v2 0/2] target: riscv: support TLB page flush for
- sfence.vma
-Date: Fri, 04 Sep 2026 14:43:03 -0400
-Message-Id: <20260904-riscv_tlb_page_flush-v2-0-defec3f29312@baylibre.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIADcRm2oC/4WNWw6CMBBFt0Lm2xoKysMv92EIaesUxiAlHWgkh
- L0LuAA/T3LuuQswekKGW7SAx0BMrt8gOUVgWtU3KOi5MSRxksVFKoUnNqEeO10PqsHadhO3Qkp
- VpBZLzLWEbTp4tPQ5so/qxzzpF5pxb+1GSzw6Px+/Qe7en4sgRSwu1mTKltcsT9Vdq7kj7fFs3
- BuqdV2/4aSN1s0AAAA=
-X-Change-ID: 20260831-riscv_tlb_page_flush-11a83fe9e7b1
+ Fri, 04 Sep 2026 12:56:20 -0700 (PDT)
+From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 To: qemu-devel@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, 
- Weiwei Li <liwei1518@gmail.com>, 
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org, 
- Trevor Gamblin <tgamblin@baylibre.com>
-X-Mailer: b4 0.16.0
-Received-SPF: pass client-ip=2607:f8b0:4864:20::72b;
- envelope-from=tgamblin@baylibre.com; helo=mail-qk1-x72b.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
+ andrew.jones@oss.qualcomm.com, leif.lindholm@oss.qualcomm.com,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>
+Subject: [PATCH v10 1/5] target/riscv/cpu.c: remove 'bare' condition for
+ .profile
+Date: Fri,  4 Sep 2026 16:56:06 -0300
+Message-ID: <20260904195610.964829-2-daniel.barboza@oss.qualcomm.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260904195610.964829-1-daniel.barboza@oss.qualcomm.com>
+References: <20260904195610.964829-1-daniel.barboza@oss.qualcomm.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Authority-Analysis: v=2.4 cv=F+xnsKhN c=1 sm=1 tr=0 ts=6a9b2266 cx=c_pps
+ a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=CQQxcbsX5Byh3TlVSSGwig==:17
+ a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22 a=EUspDBNiAAAA:8
+ a=JF9118EUAAAA:8 a=FRSEYCzRAAAA:8 a=GhL2bEVCvcqOW28JNKkA:9
+ a=PEH46H7Ffwr30OY-TuGO:22 a=xVlTc564ipvMDusKsbsT:22 a=H4N_Y-AU75W7NKDNhZlT:22
+X-Proofpoint-ORIG-GUID: zkPXBSBGY0M3DHva1gQ1WvZUr_kA4sj5
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA0MDE4MiBTYWx0ZWRfX94KZqYQgbqaW
+ qzGMRlRNAKASAUHfj7TVcgPPJc1VnsKA0s2XY8YG134+n8M59P5iv7G6+rYp9KvKl0m1R0/uaeU
+ rikjiCn0S6Nn+f4dWZ+6GiVIdvq3bm4=
+X-Proofpoint-GUID: zkPXBSBGY0M3DHva1gQ1WvZUr_kA4sj5
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA0MDE4MiBTYWx0ZWRfX0a8vdoCvaZXc
+ 7wlKIaeselhHqHI5QLXaMc+WDt8L7jJWg0yJw3BrsHAB4fF3bpiNVaUwdLvodk4nowXQhn1v+x9
+ +wI3lBLPMaxeZe6H8ICIaBrVu2CHgImiTzhfepSv0Ysb3p09NdZYJZhmejsC2mamHUfbgreu5qx
+ LYfnIpQWnt53lOwGV0FZ4EektajpUm3Kl/JA2O+GYZ6EhXi0eu0Fn9+5QNus16DeNXi2X3LjLHU
+ 3VNV4hOETHkuQ2ZfmdHk8xGVW1QD1Oj0mqJNcbgSJwchccnXBdhy3WBjK0FXY2nIS7R8Zhmoxgz
+ N/nlujDwM+gQ+3OPxd95xvPVlVDPA4vfc6YVw25ggIZN6yHO7aUPoLyTBCnbo9T31Qc8B92rMf+
+ a8AoQKEMNQcYeiT8SjqAT3QyyII6BKc/qOGMNfOezUsfua4o2aWMqb6l+jlFmgcfqxAzA+94DwC
+ jLOUsSIqgNWNp208Pbg==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-04_05,2026-09-03_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 phishscore=0 adultscore=0 spamscore=0 suspectscore=0
+ lowpriorityscore=0 priorityscore=1501 malwarescore=0 impostorscore=0
+ bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2609040182
+Received-SPF: pass client-ip=205.220.180.131;
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -112,151 +153,35 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Introduce a new function, check_sfence_vma(), to handle
-privilege/hypervisor checks currently performed in helper_tlb_flush(),
-and make use of it in that function. Then, add helper_tlb_flush_page()
-for flushing only a single TLB page, using check_sfence_vma() inside it
-similarly to helper_tlb_flush(). Finally, rework the trans_sfence_vma()
-function to use helper_tlb_flush_page() when rs1 != 0.
+We want to configure other CPU types to use profiles as an alternative
+to adding every profile extension explicitly, i.e. a profile is nothing
+more than an extension bundle.
 
-The second patch also includes the fix for a regression in the
-'test_tuxrun.TuxRunRiscV64Test.test_riscv64_maxcpu' test encountered
-with the draft version of this series, which hanged indefinitely until
-killed when the patches were applied. This was fixed by making sure to
-use get_address() to canonicalize the address being passed to
-helper_tlb_flush_page().
+This means that a vendor CPU can set .profile=rva23s64 while having the
+same handling as any other vendor CPU. Same thing with all other CPU
+types.
 
-make-check and make-functional were both run with the patches applied on
-master, and no regressions for riscv64 were observed (beyond the one
-mentioned as fixed above). 
-
-Daniel Barboza helped me with initial triage, direction, and cleaning up
-this series for submission - thanks again!
-
-Some background context: as part of the RISE Project[1] mission to
-improve the RISC-V software ecosystem, the Yocto Project[2] is receiving
-assistance with triaging bugs and enhancing RISC-V support in the core
-layer. The 'qemuriscv32' and 'qemuriscv64' targets were enabled as part
-of the Yocto's CI system, known as the Autobuilder[3] in 2025, and since
-that time various intermittent failures have been observed on the
-'ptest' ('package test', where a package's test suites are bundled into
-an image and then booted to do basic runtime compatibility testing)
-case, 'qemuriscv64-ptest'. These almost always manifest as timeouts in
-the guest, usually around heavier and/or more complex test cases, and
-they additionally seem to occur only under heavy host system (x86_64)
-load. 
-
-Comparing to other major architectures like x86_64 and arm64, the
-riscv64 guests are always emulated in TCG mode, since the Yocto
-Autobuilder cluster does not (yet) have native riscv64 hosts to dedicate
-for runtime testing with kvm support. While this is likely a major
-factor in why qemuriscv64 runs fail at higher rates than other
-architectures, it was noted after compiling the triage data[4] that
-local comparisons of the same ptest images running on TCG-mode qemuarm64
-and qemuriscv64 showed the latter taking significantly longer to
-complete (using some of the test suites which have been observed failing
-as examples), even with no other meaningful system load on the host. In
-particular, the coreutils case showed over 70% longer runtime for
-qemuriscv64 compared to qemuarm64 (~1000s vs ~580s).
-
-Fully investigating the source of this discrepancy was a long process.
-For Yocto builds, native QEMU binaries are built from source as part of
-the overall image build, so the first place to look was in QEMU's
-configuration and boot options. Other suggestions included trying to
-disable TCG plugins or alter the QEMU and guest package configs (Yocto's
-QEMU is RVA23S64 profile by default, while the runtime packages are
-built for riscv64gc). However, these changes either produced no
-meaningful effect or actually increased runtime. The next step was to
-investigate the QEMU source, which is what ultimately led to this patch
-series. It turns out that these changes significantly improve the
-reference runtime test case for coreutils in Yocto, although it is still
-somewhat slower than in qemuarm64. It remains to be seen whether these
-changes to the QEMU source eliminate the intermittent issues in Yocto's
-testing, but it is a meaningful improvement which opens the door to
-further optimizations for RISC-V.
-
-As an example, compare the before and after results on a local run of
-core-image-ptest-coreutils for qemuriscv64:
-
-|============================================================================
-|Testsuite summary for GNU coreutils 9.11
-|============================================================================
-|# TOTAL: 733
-|# PASS:  561
-|# SKIP:  172
-|# XFAIL: 0
-|# FAIL:  0
-|# XPASS: 0
-|# ERROR: 0
-|============================================================================
-|make[1]: Leaving directory '/usr/lib/coreutils/ptest'
-|DURATION: 1049
-|END: /usr/lib/coreutils/ptest
-|2026-08-31T17:23
-|STOP: ptest-runner
-|TOTAL: 1 FAIL: 0
-
-versus:
-
-|============================================================================
-|Testsuite summary for GNU coreutils 9.11
-|============================================================================
-|# TOTAL: 733
-|# PASS:  561
-|# SKIP:  172
-|# XFAIL: 0
-|# FAIL:  0
-|# XPASS: 0
-|# ERROR: 0
-|============================================================================
-|make[1]: Leaving directory '/usr/lib/coreutils/ptest'
-|DURATION: 646
-|END: /usr/lib/coreutils/ptest
-|2026-08-31T16:10
-|STOP: ptest-runner
-|TOTAL: 1 FAIL: 0
-|root@qemuriscv64:~#
-
-Signed-off-by: Trevor Gamblin <tgamblin@baylibre.com>
-
-[1]: https://riseproject.dev/
-[2]: https://www.yoctoproject.org/
-[3]: https://autobuilder.yoctoproject.org/valkyrie/
-[4]: https://docs.google.com/document/d/1HUk-RvMDdW2EKV-qE1VNfZBycPscQUsayEZ5AgJ85C8
-
+Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Reviewed-by: Andrew Jones <andrew.jones@oss.qualcomm.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Chao Liu <chao.liu@processmission.com>
 ---
-Changes in v2:
-- Renamed sfence_vma_allowed() to check_sfence_vma()
-- Squashed patches 2 and 3 together
-- Reworked check_sfence_vma() and helpers using it to be consistent with
-  rest of codebase (e.g. no unnecessary returns)
-- Adjusted cover letter to match check_sfence_vma() naming
-- Link to v1: https://lore.kernel.org/qemu-devel/20260831-riscv_tlb_page_flush-v1-0-4fc6af95673a@baylibre.com
+ target/riscv/cpu.c | 1 -
+ 1 file changed, 1 deletion(-)
 
-To: qemu-devel@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>
-Cc: Alistair Francis <alistair.francis@wdc.com>
-Cc: Weiwei Li <liwei1518@gmail.com>
-Cc: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Cc: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Cc: Chao Liu <chao.liu@processmission.com>
-Cc: qemu-riscv@nongnu.org
-
----
-Trevor Gamblin (2):
-      target/riscv: extract check_sfence_vma() from helper_tlb_flush()
-      target/riscv: add helper_tlb_flush_page(), use for sfence.vma with vaddr operand
-
- target/riscv/helper.h                              |  1 +
- target/riscv/tcg/insn_trans/trans_privileged.c.inc |  6 +++++-
- target/riscv/tcg/op_helper.c                       | 22 ++++++++++++++++------
- 3 files changed, 22 insertions(+), 7 deletions(-)
----
-base-commit: c513597761d6fc06690b5b7cf10dfb7ab05815d0
-change-id: 20260831-riscv_tlb_page_flush-11a83fe9e7b1
-
-Best regards,
---  
-Trevor Gamblin <tgamblin@baylibre.com>
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 652311ddef..185474a8cf 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -3096,7 +3096,6 @@ static void riscv_cpu_class_base_init(ObjectClass *c, const void *data)
+         mcc->def->bare |= def->bare;
+         if (def->profile) {
+             assert(profile_extends(def->profile, mcc->def->profile));
+-            assert(mcc->def->bare);
+             mcc->def->profile = def->profile;
+         }
+         if (def->misa_mxl_max) {
+-- 
+2.43.0
 
 
