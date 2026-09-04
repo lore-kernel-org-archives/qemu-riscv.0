@@ -4,77 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 956BAC61DD6
-	for <qemu-riscv@archiver.kernel.org>; Fri,  4 Sep 2026 14:48:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F02A8C79F88
+	for <qemu-riscv@archiver.kernel.org>; Fri,  4 Sep 2026 14:48:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x2VD1-00037a-11; Fri, 04 Sep 2026 10:48:03 -0400
+	id 1x2VD2-00039D-5U; Fri, 04 Sep 2026 10:48:04 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <asrinivasan@tenstorrent.com>)
- id 1x2VCz-00034h-Kg
- for qemu-riscv@nongnu.org; Fri, 04 Sep 2026 10:48:01 -0400
-Received: from mail-yw1-x1132.google.com ([2607:f8b0:4864:20::1132])
+ id 1x2VD0-00035R-1f
+ for qemu-riscv@nongnu.org; Fri, 04 Sep 2026 10:48:02 -0400
+Received: from mail-yw1-x1135.google.com ([2607:f8b0:4864:20::1135])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <asrinivasan@tenstorrent.com>)
- id 1x2VCw-0004VB-7x
+ id 1x2VCy-0004Wo-0s
  for qemu-riscv@nongnu.org; Fri, 04 Sep 2026 10:48:01 -0400
-Received: by mail-yw1-x1132.google.com with SMTP id
- 00721157ae682-870502743a4so6929837b3.3
- for <qemu-riscv@nongnu.org>; Fri, 04 Sep 2026 07:47:57 -0700 (PDT)
+Received: by mail-yw1-x1135.google.com with SMTP id
+ 00721157ae682-8726acc5eadso5015407b3.0
+ for <qemu-riscv@nongnu.org>; Fri, 04 Sep 2026 07:47:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=tenstorrent.com; s=google; t=1788533277; x=1789138077; darn=nongnu.org;
+ d=tenstorrent.com; s=google; t=1788533279; x=1789138079; darn=nongnu.org;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=SM+c0cnIvb5LQUN7VGkNy8kRUZs+dR2DbPx/QxsCklE=;
- b=eyd81mo6HckrGc8wPO6sGCQY/YbMvudErK/3tj8tJ4jk4q2ugH0e2D4F87JR6JAjRy
- llMadyWjXF2I07HDirR4pvrT76HhpYBp1IbPGaf8nVMN8Q9WmXhXQB8yogsFYbntfEzj
- KWrHUdS34VINuhUwUDQpnq9ifs8aJAb0aAWGiTwXynK6rjoArvchCFNhGMsOi34dfxw8
- MC1stQIHsvne3z8P6Xv9NeG4WIzxBj7cRrxXXRGH5cN4AkLRlOaUILLa/4iBl0sEnEIU
- gPn/hudOraJyK8QLEO2pLRx8V3Mm8cqfNPs/DcUG9luSFw7MPtcxuH3JVSOysvqLd4g8
- IJSg==
+ bh=biRWN0Vn6reTvQrPILLrlJnEjUgjTnAxX3bLorKSI6Y=;
+ b=PyO8d/Q51yVrmK/nIH7y90Gg42biRCXqplE9DFsEbnyLmhNmdRx4YqvCalA7QgFZ9P
+ AhpCilJ6U47pBAWn3+i2jzSY5+1lDbF71YTn0jhzkTNXUSoD6FEomFC5WOerHnWdCbcQ
+ ncrztELj5EOAJPu0VKELHHC1fX+VkA5hW7yqyUUnu2ogf7cLYfoO/rjFwVlgsfrMlh5Z
+ Mi3x/6BrH0uus9aTyHL74yv/yeUpP8wZ59M6jMiWFjxs2FCff7JOfh7JNUqQt9o27rZL
+ M/tmcFB9XN/UwokjKhUVgLQsoWsiuSmui3DtUjTv88wl49b2RzlVa24YvcYeakBnbMAj
+ zr1g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788533277; x=1789138077;
+ d=1e100.net; s=20251104; t=1788533279; x=1789138079;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=SM+c0cnIvb5LQUN7VGkNy8kRUZs+dR2DbPx/QxsCklE=;
- b=r1I3zF2uS9qMVgtXJw6VUo4trjZD7FVRcfH6uksKfC6lMlYVfCEWf/oIoEQfArcT5H
- I7l8RguKTTLrpPU5+ReE6jhvqCgOSXofuxiuZ+V4a8DfoMu2Nu2ayek0GvWkNhVaHyGI
- vqgX72RSqGwh7McL94ZQHmWU1aDW9BKIn5TMOZcKs5U2oa/1ok0bVfVTuCYxkZGJBxUU
- w+/d4YVwermyYoOu80pmjdTncUu2IeyPVg3Zme7hRQPFpth2Tisx3dTtcFJMrbNvPijj
- jgRg3CV2eYPkzAoFjt6lHgKidlul9IiU+0tYci/1NLFMGt3F7Sv7R0HNyw5ggOlRiUKT
- f4IA==
+ bh=biRWN0Vn6reTvQrPILLrlJnEjUgjTnAxX3bLorKSI6Y=;
+ b=ibIwF69zMZC8iILarieICWDZUEz7DIzjeYFlJLXc0e7Zz4ftt3Jvk7zs7Tr19UOXow
+ y8cyb+AtPJ7xBfCaEAN75hH2acZnVzImWEuLDc0M5PdDQeDl7c8zLY1RzfHZwrKFWXwz
+ jvrrL+bd5O/oPcHjCAdFVoVkccVDe57l8F5Jhz1MRv2nCTPTtwLy1U9qXlgcnJdG4nrt
+ CJRIP3jIZhemTQTw+tQ6fA+/CN8yRNl8qRaYdHHOoR98ya3K3fOEXArQeli3jWGWsUVc
+ V5ytKZkl+IiGT4C0uMPY/JuazNQiiP9x4jOYxprIkQ+9bOGFFpH+TAqd4uD2dDPBECWn
+ UnbA==
 X-Forwarded-Encrypted: i=1;
- AKwUvBxJ4QKH3g0bnDcsT6VpBPLvvG+t6kz+rvhOkHTCih/FG3fa9VazzlIU9fWJYPHpskUNS01NVK7n6D5w@nongnu.org
-X-Gm-Message-State: AFuF++lkJEgAVnHjqCJWN78Q6J6XXLnXE8OhEr0NsOzKtodJJy/GTJRr
- mSL6Fn0PXsVHz+c1MBY59Hp0lSTPOR45OmcEaBjpGjRhJ6VGyvDHsv3JQIrMUHJ8h98=
-X-Gm-Gg: AYBFou0ZlFeNLR7iVb/xwamprVYKUgnLtAy9HWvUFN/Vu6nja/j+hMASulWE3haJE1m
- irVKb1gwZEEH8ADU6iFO+QCMrFcfM7nU9Nqb4srwD3QcVmDcivBuFDQZikfMfaR1sczjvst7ZKX
- njC2HJbBV6Mk8yMJ7h66222kt33mwh/gQQsdL6cAP2d6C8GfYbOq164Bp+cDJkEQiC9jvK2DAoA
- gDvXfDXspyly26OdpLrWXRkwK5FVZomkubOc0aEcEw5iJ/xlIUm3DwxPzXwqWeKygpM1cFHKPC3
- OmPFsLfzW1DH/cR72zBjDxVIOiJQ1rydRevOLUjRWQQRqsvni/GCBEPQ6ja4GurjuJ2xVAfigLt
- eQoS6At9hpTqv/zbYNwqFE1dW6ATYGkTdfly6onF238zbxB7ISkJzc9ORNfe7IKq11VCmNzIBY4
- VLxghIQwxof1uN+IWBTdNL0bYkskS9o0nSjNPKBAFjFd2kz6xwnzFhcG0InE/Bpq+pjTHGdJh0A
- I0FUZoM7UaQGqtJO1ch0mEyR2Fkr7yhv+mTyY5l7KiK
-X-Received: by 2002:a05:690c:d85:b0:873:5bd1:98bb with SMTP id
- 00721157ae682-8735bd19fadmr6039107b3.45.1788533276748; 
- Fri, 04 Sep 2026 07:47:56 -0700 (PDT)
+ AKwUvBwtL0YajmuBGxdwLBW71pkylbIn2BJLISZdzKO2lJMg4bR9OVgQtQO6dpR5F35tv/DXg8BdMJUureYp@nongnu.org
+X-Gm-Message-State: AFuF++nJnuLU/6tcnFhPjzOyxhcQk7Ir1ycpgTsWR5S1R/lG9HzoBQpI
+ pKW0Jd/V/y3hhB2JcelMHurgxsw7scY4Lw89fHn6Gl3P5kDJQmswE8LvH8LSvW3xdMk=
+X-Gm-Gg: AYBFou2f2i4oPXFvZl+DVmdcSNTUdeHafqVF8c+cQnJLE0tMQ9ucWjIi/KdrYd7ZoQQ
+ RmUu+L/NC5gccxE/OIOj46wBj+63LF2dPfWpxXF1So4oE1HiFapVRxwUTCQNUpUnIA0s8hHTs1F
+ dL94uHhFJvZhTa43RP0nK30ArfN9NhbZPzoIaFOB7+3h6YX3c5YjkYsuViJtFog8uJAd1POsTnG
+ VNbF3u+CuHsbnmeKJAW8RxJA1MOUMM4tG/LP+dkuniQDdl6ZT3Nj+koI9KuDEaFCvQx8I7yobjG
+ W03yOEOl0/AY9SOOMLsUOz7GmUcTUfr5jvNOQxpeFfKVtKhyNuQlvh6meJIpJdclY2dRbUQ+VGh
+ NHRFgTP7C6Fcovov4cTsCoWF675f6+hLqTdo3Q9VO3D1jxxZjL9RO94N9MW2OK8z8eSnWjDKT7L
+ kGn/nrVyLNeHULsTpBOFH4kFcqpnM2EXu8mI9Kgp3UM89K4WKlbUmHKFHuF4VTklDic137M8hq2
+ KdZoGYYk1rbFkQPgVypFgQrzILPzA8Kq6L3hx581Y9Z
+X-Received: by 2002:a05:690c:c4fa:b0:866:e57f:58db with SMTP id
+ 00721157ae682-8711ec239e9mr32273627b3.0.1788533278633; 
+ Fri, 04 Sep 2026 07:47:58 -0700 (PDT)
 Received: from [192.168.2.129] ([2600:1700:220:59e0:6f99:bae4:e245:b362])
  by smtp.gmail.com with ESMTPSA id
- 00721157ae682-8714ab73f23sm19274597b3.33.2026.09.04.07.47.55
+ 00721157ae682-8714ab73f23sm19274597b3.33.2026.09.04.07.47.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 04 Sep 2026 07:47:56 -0700 (PDT)
+ Fri, 04 Sep 2026 07:47:58 -0700 (PDT)
 From: Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
-Date: Fri, 04 Sep 2026 09:47:28 -0500
-Subject: [PATCH v3 1/3] hw/misc: Add Tenstorrent Atlantis PRCM model
+Date: Fri, 04 Sep 2026 09:47:30 -0500
+Subject: [PATCH v3 3/3] hw/riscv/tt-atlantis: Update UART and I2C to use
+ clk from PRCM
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260904-atlantis_prcm-v3-1-8bf20795a381@oss.tenstorrent.com>
+Message-Id: <20260904-atlantis_prcm-v3-3-8bf20795a381@oss.tenstorrent.com>
 References: <20260904-atlantis_prcm-v3-0-8bf20795a381@oss.tenstorrent.com>
 In-Reply-To: <20260904-atlantis_prcm-v3-0-8bf20795a381@oss.tenstorrent.com>
 To: qemu-devel@nongnu.org
@@ -90,14 +91,14 @@ Cc: Joel Stanley <joel@jms.id.au>, Nicholas Piggin <npiggin@gmail.com>,
  Chao Liu <chao.liu@processmission.com>, 
  Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
 X-Mailer: b4 0.15.1
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1132;
- envelope-from=asrinivasan@tenstorrent.com; helo=mail-yw1-x1132.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1135;
+ envelope-from=asrinivasan@tenstorrent.com; helo=mail-yw1-x1135.google.com
 X-Spam_score_int: -19
 X-Spam_score: -2.0
 X-Spam_bar: --
 X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_NONE=-0.0001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -113,568 +114,116 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This device present in Tenstorrent Atlantis has registers that control
-clocks, reset and other misc functionality in the SoC. This commit adds
-models for the RCPU, HSIO, PCIE, MM and 2 DDR PRCMs.
+Now that we have the PRCM modelled, update the DT nodes for UART1 and
+the 5 I2C controllers to use the rcpu_prcm as a clock provider. This
+also allows us to eliminate the periph_clk that was added to the DT
+previously.
 
-Co-developed-by: Portia Stephens <portias@oss.tenstorrent.com>
-Signed-off-by: Portia Stephens <portias@oss.tenstorrent.com>
 Signed-off-by: Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
 ---
- MAINTAINERS                        |   2 +
- hw/misc/meson.build                |   1 +
- hw/misc/trace-events               |   4 +
- hw/misc/tt_atlantis_prcm.c         | 446 +++++++++++++++++++++++++++++++++++++
- include/hw/misc/tt_atlantis_prcm.h |  51 +++++
- 5 files changed, 504 insertions(+)
+ hw/riscv/tt_atlantis.c         | 25 ++++++++++++++-----------
+ include/hw/riscv/tt_atlantis.h |  6 ++++++
+ 2 files changed, 20 insertions(+), 11 deletions(-)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index f524d90523..b6cc077602 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1830,7 +1830,9 @@ R: Portia Stephens <portias@oss.tenstorrent.com>
- L: qemu-riscv@nongnu.org
- S: Supported
- F: docs/system/riscv/tt_*.rst
-+F: hw/misc/tt_*.c
- F: hw/riscv/tt_*.c
-+F: include/hw/misc/tt_*.h
- F: include/hw/riscv/tt_*.h
- F: tests/functional/riscv64/test_tt_*.py
+diff --git a/hw/riscv/tt_atlantis.c b/hw/riscv/tt_atlantis.c
+index 15b4192f4d..8455329861 100644
+--- a/hw/riscv/tt_atlantis.c
++++ b/hw/riscv/tt_atlantis.c
+@@ -265,7 +265,8 @@ static void create_fdt_cpu(void *fdt, TTAtlantisSoCState *s,
+ }
  
-diff --git a/hw/misc/meson.build b/hw/misc/meson.build
-index 54e07aacda..11b9593e03 100644
---- a/hw/misc/meson.build
-+++ b/hw/misc/meson.build
-@@ -39,6 +39,7 @@ system_ss.add(when: 'CONFIG_SIFIVE_E_AON', if_true: files('sifive_e_aon.c'))
- system_ss.add(when: 'CONFIG_SIFIVE_U_OTP', if_true: files('sifive_u_otp.c'))
- system_ss.add(when: 'CONFIG_SIFIVE_U_PRCI', if_true: files('sifive_u_prci.c'))
- system_ss.add(when: 'CONFIG_K230_DECOMP_GZIP', if_true: files('k230_decomp_gzip.c'))
-+system_ss.add(when: 'CONFIG_TENSTORRENT', if_true: files('tt_atlantis_prcm.c'))
+ static void create_fdt_uart(void *fdt, const MemMapEntry *mem, int irq,
+-                            int irqchip_phandle)
++                            int irqchip_phandle, uint32_t clk_parent_phandle,
++                            uint32_t clk_phandle)
+ {
+     g_autofree char *name = g_strdup_printf("/soc/serial@%"HWADDR_PRIX,
+                                             mem->base);
+@@ -275,7 +276,8 @@ static void create_fdt_uart(void *fdt, const MemMapEntry *mem, int irq,
+     qemu_fdt_setprop_sized_cells(fdt, name, "reg", 2, mem->base, 2, mem->size);
+     qemu_fdt_setprop_cell(fdt, name, "reg-shift", 2);
+     qemu_fdt_setprop_cell(fdt, name, "reg-io-width", 4);
+-    qemu_fdt_setprop_cell(fdt, name, "clock-frequency", 3686400);
++    qemu_fdt_setprop_cells(fdt, name, "clocks", clk_parent_phandle,
++                           clk_phandle);
+     qemu_fdt_setprop_cell(fdt, name, "interrupt-parent", irqchip_phandle);
+     qemu_fdt_setprop_cells(fdt, name, "interrupts", irq, 0x4);
  
- subdir('macio')
+@@ -305,7 +307,9 @@ static void create_fdt_clk(void *fdt, const char *clock_name,
+ }
  
-diff --git a/hw/misc/trace-events b/hw/misc/trace-events
-index 0b8be3d0f2..8b80b71107 100644
---- a/hw/misc/trace-events
-+++ b/hw/misc/trace-events
-@@ -452,3 +452,7 @@ launch_update_write(void) ""
- vmlaunch_reset_enter(void) ""
- vm_launchupdate_finalize(void) ""
- restore_host_x86_igvm(void) ""
-+
-+# tt_atlantis_prcm.c
-+tt_atlantis_prcm_read(uint32_t domain, uint64_t offset, uint64_t data) "domain 0x%02x offset 0x%" PRIx64 " data 0x%" PRIx64
-+tt_atlantis_prcm_write(uint32_t domain, uint64_t offset, uint64_t data) "domain 0x%02x offset 0x%" PRIx64 " data 0x%" PRIx64
-diff --git a/hw/misc/tt_atlantis_prcm.c b/hw/misc/tt_atlantis_prcm.c
-new file mode 100644
-index 0000000000..392d7da7f4
---- /dev/null
-+++ b/hw/misc/tt_atlantis_prcm.c
-@@ -0,0 +1,446 @@
-+/*
-+ * PRCM (Clock and Reset Controller) in Tenstorrent Atlantis SoC
-+ *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ *
-+ * Copyright 2026 Tenstorrent
-+ */
-+
-+#include "qemu/osdep.h"
-+#include "qemu/bitops.h"
-+#include "qapi/error.h"
-+#include "qemu/log.h"
-+#include "hw/misc/tt_atlantis_prcm.h"
-+#include "hw/core/qdev-properties.h"
-+#include "hw/core/registerfields.h"
-+#include "hw/core/irq.h"
-+#include "trace.h"
-+
-+#define TO_REG(offset) ((offset) >> 2)
-+
-+#define PLL_LOCK_BIT        31
-+#define PLL_FBDIV_LSB       14
-+#define PLL_POSTDIV2_LSB    11
-+#define PLL_POSTDIV1_LSB    8
-+#define PLL_REFDIV_LSB      2
-+#define PLL_BYPASS_BIT      1
-+
-+#define PLL_RESET_VAL(BYPASS, REFDIV, POSTDIV1, POSTDIV2, FBDIV, LOCK)         \
-+  ((LOCK << PLL_LOCK_BIT) | (FBDIV << PLL_FBDIV_LSB) |                         \
-+   (POSTDIV2 << PLL_POSTDIV2_LSB) | (POSTDIV1 << PLL_POSTDIV1_LSB) |           \
-+   (REFDIV << PLL_REFDIV_LSB) | (BYPASS << PLL_BYPASS_BIT))
-+
-+#define RCPU_PLL_RCPU_CFG   TO_REG(0)
-+#define RCPU_PLL_NOCC_CFG   TO_REG(0x4)
-+#define RCPU_NOCC_CLK_CFG   TO_REG(0x8)
-+#define RCPU_RCPU_DIV_CFG   TO_REG(0xc)
-+#define RCPU_RCPU_BLK_CG    TO_REG(0x14)
-+#define RCPU_LSIO_BLK_CG    TO_REG(0x18)
-+#define RCPU_RCPU_BLK_RST   TO_REG(0x1c)
-+#define RCPU_LSIO_BLK_RST   TO_REG(0x20)
-+#define RCPU_PLL_RCPU_EN    TO_REG(0x11c)
-+#define RCPU_PLL_NOCC_EN    TO_REG(0x120)
-+#define RCPU_PLL_MM_EN      TO_REG(0x0124)
-+#define RCPU_PLL1_MM_EN     TO_REG(0x0128)
-+#define RCPU_PLL_HSIO_EN    TO_REG(0x12c)
-+#define RCPU_PLL_PCIE_EN    TO_REG(0x138)
-+#define RCPU_PLL_I2S_EN     TO_REG(0x13C)
-+#define RCPU_PLL_MM_CFG     TO_REG(0x19c)
-+#define RCPU_PLL_HSIO_CFG   TO_REG(0x1a0)
-+#define RCPU_PLL_PCIE_CFG   TO_REG(0x1ac)
-+#define RCPU_BOOT_MODE_CFG  TO_REG(0x1b0)
-+#define RCPU_PLL_I2S_CFG    TO_REG(0x1f4)
-+#define RCPU_I2S_DIV_CFG    TO_REG(0x1f8)
-+#define RCPU_BUS_CFG        TO_REG(0x1fc)
-+#define RCPU_PLL1_MM_CFG    TO_REG(0x2a4)
-+
-+#define HSIO_HSIO_DIV_CFG       TO_REG(0x0)
-+#define HSIO_HSIO_DIV_CFG1      TO_REG(0x4)
-+#define HSIO_HSIO_BLK_CG        TO_REG(0x8)
-+#define HSIO_HSIO_BLK_RST       TO_REG(0xc)
-+#define HSIO_HSIO_GMAC_DIV_CFG  TO_REG(0x10)
-+
-+#define PCIE_SUBS_RST_CTL   TO_REG(0x0)
-+#define PCIE_SUBS_CG_CTL    TO_REG(0x4)
-+#define PCIE_SUBS_CK_CTL    TO_REG(0x8)
-+
-+#define MM_MM_CLK_GATE_CFG  TO_REG(0x8)
-+#define MM_MM_CLK_DIV_CFG   TO_REG(0xC)
-+#define MM_MM_CLK_SEL_CFG   TO_REG(0x10)
-+#define MM_MM_RSTN          TO_REG(0x14)
-+#define MM_MM_CLK_DIV_CFG1  TO_REG(0x130)
-+
-+#define DDRC_STAT           TO_REG(0x10014)
-+#define DDRC_DFISTAT        TO_REG(0x10514)
-+#define DDRC_SWSTAT         TO_REG(0x10c84)
-+
-+#define PLL_EN              BIT(0)
-+#define RCPU_PLL_BUS_CG_EN  BIT(7)
-+#define HSIO_PLL_BUS_CG_EN  BIT(3)
-+#define PCIE_PLL_BUS_CG_EN  BIT(1)
-+#define NOCC_PLL_BUS_CG_EN  BIT(0)
-+
-+#define RCPU_BOOT_MODE_UART      (0x0 << 4)
-+#define RCPU_BOOT_MODE_NOR       (0x1 << 4)
-+#define RCPU_BOOT_MODE_SD        (0x2 << 4)
-+
-+#define RCPU_DOMAIN_SIZE   0x10000
-+#define HSIO_DOMAIN_SIZE   0x510
-+#define PCIE_DOMAIN_SIZE   0x100
-+#define MM_DOMAIN_SIZE     0x1000
-+#define DDRC0_DOMAIN_SIZE  0x101000
-+#define DDRC1_DOMAIN_SIZE  0x101000
-+
-+static uint64_t tt_atlantis_prcm_read(void *opaque, hwaddr offset,
-+                                      unsigned size)
-+{
-+    TTAtlantisPRCMState *s = TT_ATLANTIS_PRCM(opaque);
-+    TTAtlantisPRCMClass *c = TT_ATLANTIS_PRCM_GET_CLASS(s);
-+    uint32_t data;
-+
-+    if (offset >= c->regs_size) {
-+        qemu_log_mask(LOG_GUEST_ERROR,
-+                      "%s: Out-of-bounds read at offset 0x%" HWADDR_PRIx "\n",
-+                      __func__, offset);
-+        return 0;
-+    }
-+    data = s->regs[TO_REG(offset)];
-+
-+    trace_tt_atlantis_prcm_read(c->domain, offset, data);
-+    return data;
-+}
-+
-+static void tt_atlantis_prcm_write(void *opaque, hwaddr offset,
-+                                   uint64_t data, unsigned size)
-+{
-+    TTAtlantisPRCMState *s = TT_ATLANTIS_PRCM(opaque);
-+    TTAtlantisPRCMClass *c = TT_ATLANTIS_PRCM_GET_CLASS(s);
-+
-+    if (offset >= c->regs_size) {
-+        qemu_log_mask(LOG_GUEST_ERROR,
-+                      "%s: Out-of-bounds write at offset 0x%" HWADDR_PRIx "\n",
-+                      __func__, offset);
-+        return;
-+    }
-+
-+    trace_tt_atlantis_prcm_write(c->domain, offset, data);
-+
-+    s->regs[TO_REG(offset)] = data;
-+}
-+
-+static void tt_atlantis_prcm_rcpu_write(void *opaque, hwaddr offset,
-+                                        uint64_t data, unsigned size)
-+{
-+    TTAtlantisPRCMState *s = TT_ATLANTIS_PRCM(opaque);
-+    uint32_t pll_reg_offset;
-+
-+    tt_atlantis_prcm_write(opaque, offset, data, size);
-+
-+    switch (TO_REG(offset)) {
-+    case RCPU_PLL_RCPU_EN:
-+        pll_reg_offset = RCPU_PLL_RCPU_CFG;
-+        break;
-+    case RCPU_PLL_NOCC_EN:
-+        pll_reg_offset = RCPU_PLL_NOCC_CFG;
-+        break;
-+    case RCPU_PLL_HSIO_EN:
-+        pll_reg_offset = RCPU_PLL_HSIO_CFG;
-+        break;
-+    case RCPU_PLL_PCIE_EN:
-+        pll_reg_offset = RCPU_PLL_PCIE_CFG;
-+        break;
-+    case RCPU_PLL_MM_EN:
-+        pll_reg_offset = RCPU_PLL_MM_CFG;
-+        break;
-+    case RCPU_PLL1_MM_EN:
-+        pll_reg_offset = RCPU_PLL1_MM_CFG;
-+        break;
-+    case RCPU_PLL_I2S_EN:
-+        pll_reg_offset = RCPU_PLL_I2S_CFG;
-+        break;
-+    default:
-+        return;
-+    }
-+
-+    if (data & PLL_EN) {
-+        s->regs[pll_reg_offset] |= BIT(PLL_LOCK_BIT);
-+    } else {
-+        s->regs[pll_reg_offset] &= ~BIT(PLL_LOCK_BIT);
-+    }
-+}
-+
-+static const MemoryRegionOps tt_atlantis_prcm_ops = {
-+    .read = tt_atlantis_prcm_read,
-+    .write = tt_atlantis_prcm_write,
-+    .endianness = DEVICE_LITTLE_ENDIAN,
-+    .valid.min_access_size = 4,
-+    .valid.max_access_size = 4,
-+};
-+
-+static const MemoryRegionOps tt_atlantis_prcm_rcpu_ops = {
-+    .read = tt_atlantis_prcm_read,
-+    .write = tt_atlantis_prcm_rcpu_write,
-+    .endianness = DEVICE_LITTLE_ENDIAN,
-+    .valid.min_access_size = 4,
-+    .valid.max_access_size = 4,
-+};
-+
-+static void tt_atlantis_prcm_realize(DeviceState *dev, Error **errp)
-+{
-+    TTAtlantisPRCMState *s = TT_ATLANTIS_PRCM(dev);
-+    SysBusDevice *sbd = SYS_BUS_DEVICE(dev);
-+    TTAtlantisPRCMClass *c = TT_ATLANTIS_PRCM_GET_CLASS(s);
-+
-+    if (c->domain >= PRCM_DOMAIN_COUNT) {
-+        error_setg(errp,
-+                   "domain %d is larger than max number of possible domains %d",
-+                   c->domain, PRCM_DOMAIN_COUNT);
-+        return;
-+    }
-+    s->regs = g_new0(uint32_t, TO_REG(c->regs_size));
-+
-+    memory_region_init_io(&s->mmio, OBJECT(s), c->ops, s,
-+                          TYPE_TT_ATLANTIS_PRCM, c->regs_size);
-+    sysbus_init_mmio(sbd, &s->mmio);
-+}
-+
-+static void tt_atlantis_prcm_reset_hold(Object *obj, ResetType type)
-+{
-+    TTAtlantisPRCMState *s = TT_ATLANTIS_PRCM(obj);
-+    TTAtlantisPRCMClass *c = TT_ATLANTIS_PRCM_GET_CLASS(s);
-+
-+    memset(s->regs, 0, c->regs_size);
-+}
-+
-+static void tt_atlantis_prcm_rcpu_reset_hold(Object *obj, ResetType type)
-+{
-+    TTAtlantisPRCMState *s = TT_ATLANTIS_PRCM(obj);
-+    tt_atlantis_prcm_reset_hold(obj, type);
-+
-+    /* Reset values come from Datasheet */
-+    s->regs[RCPU_PLL_RCPU_CFG] = PLL_RESET_VAL(1, 0, 4, 0, 100, 1);
-+    s->regs[RCPU_PLL_NOCC_CFG] = PLL_RESET_VAL(0, 2, 2, 2, 267, 1);
-+    s->regs[RCPU_NOCC_CLK_CFG] = (0x25f31 << 1) | BIT(0);
-+    s->regs[RCPU_RCPU_DIV_CFG] = (0xb8c2 << 1);
-+    s->regs[RCPU_RCPU_BLK_CG] = 0;
-+    s->regs[RCPU_LSIO_BLK_CG] = 0;
-+    s->regs[RCPU_RCPU_BLK_RST] = 0xffffffff;
-+    s->regs[RCPU_LSIO_BLK_RST] = 0xffffffff;
-+    s->regs[RCPU_PLL_RCPU_EN] = PLL_EN;
-+    s->regs[RCPU_PLL_NOCC_EN] = PLL_EN;
-+    s->regs[RCPU_PLL_HSIO_EN] = 0;
-+    s->regs[RCPU_PLL_MM_EN] = 0;
-+    s->regs[RCPU_PLL1_MM_EN] = 0;
-+    s->regs[RCPU_PLL_I2S_EN] = 0;
-+    s->regs[RCPU_PLL_PCIE_EN] = 0;
-+    s->regs[RCPU_PLL_HSIO_CFG] = PLL_RESET_VAL(0, 1, 2, 1, 50, 0);
-+    s->regs[RCPU_PLL_PCIE_CFG] = PLL_RESET_VAL(0, 2, 3, 1, 250, 0);
-+    s->regs[RCPU_BOOT_MODE_CFG] = RCPU_BOOT_MODE_SD;
-+    s->regs[RCPU_PLL_MM_CFG] = PLL_RESET_VAL(0, 1, 2, 1, 50, 1);
-+    s->regs[RCPU_PLL1_MM_CFG] = PLL_RESET_VAL(0, 1, 2, 1, 50, 1);
-+    s->regs[RCPU_PLL_I2S_CFG] = PLL_RESET_VAL(0, 1, 6, 6, 33, 0);
-+    s->regs[RCPU_I2S_DIV_CFG] = 0xde69ad31;
-+    s->regs[RCPU_BUS_CFG] = NOCC_PLL_BUS_CG_EN | HSIO_PLL_BUS_CG_EN;
-+}
-+
-+static void tt_atlantis_prcm_ddrc_reset_hold(Object *obj, ResetType type)
-+{
-+    TTAtlantisPRCMState *s = TT_ATLANTIS_PRCM(obj);
-+    tt_atlantis_prcm_reset_hold(obj, type);
-+
-+    /* Reset values come from Datasheet */
-+    s->regs[DDRC_STAT] = 0x1;
-+    s->regs[DDRC_DFISTAT] = 0x1;
-+    s->regs[DDRC_SWSTAT] = 0x1;
-+}
-+
-+static void tt_atlantis_prcm_hsio_reset_hold(Object *obj, ResetType type)
-+{
-+    TTAtlantisPRCMState *s = TT_ATLANTIS_PRCM(obj);
-+    tt_atlantis_prcm_reset_hold(obj, type);
-+
-+    /* Reset values come from Datasheet */
-+    s->regs[HSIO_HSIO_DIV_CFG] = 0x20821731;
-+    s->regs[HSIO_HSIO_DIV_CFG1] = 0x8;
-+    s->regs[HSIO_HSIO_BLK_CG] = 0;
-+    s->regs[HSIO_HSIO_BLK_RST] = 0;
-+    s->regs[HSIO_HSIO_GMAC_DIV_CFG] = 0;
-+}
-+
-+static void tt_atlantis_prcm_pcie_reset_hold(Object *obj, ResetType type)
-+{
-+    TTAtlantisPRCMState *s = TT_ATLANTIS_PRCM(obj);
-+    tt_atlantis_prcm_reset_hold(obj, type);
-+
-+    /* Reset values come from Datasheet */
-+    s->regs[PCIE_SUBS_RST_CTL] = 0;
-+    s->regs[PCIE_SUBS_CG_CTL] = 0;
-+    s->regs[PCIE_SUBS_CK_CTL] = 0x44908;
-+}
-+
-+static void tt_atlantis_prcm_mm_reset_hold(Object *obj, ResetType type)
-+{
-+    TTAtlantisPRCMState *s = TT_ATLANTIS_PRCM(obj);
-+    tt_atlantis_prcm_reset_hold(obj, type);
-+
-+    /* Reset values come from Datasheet */
-+    s->regs[MM_MM_CLK_GATE_CFG] = 0;
-+    s->regs[MM_MM_CLK_DIV_CFG] = 0xddc8312;
-+    s->regs[MM_MM_CLK_SEL_CFG] = 0;
-+    s->regs[MM_MM_RSTN] = 0;
-+    s->regs[MM_MM_CLK_DIV_CFG1] = 0x333;
-+}
-+
-+static void tt_atlantis_prcm_unrealize(DeviceState *dev)
-+{
-+    TTAtlantisPRCMState *s = TT_ATLANTIS_PRCM(dev);
-+
-+    g_free(s->regs);
-+}
-+
-+static void tt_atlantis_prcm_class_init(ObjectClass *klass,
-+                                        const void *data)
-+{
-+    DeviceClass *dc = DEVICE_CLASS(klass);
-+    ResettableClass *rc = RESETTABLE_CLASS(klass);
-+    TTAtlantisPRCMClass *c = TT_ATLANTIS_PRCM_CLASS(klass);
-+
-+    dc->realize = tt_atlantis_prcm_realize;
-+    dc->unrealize = tt_atlantis_prcm_unrealize;
-+    dc->desc = "Tenstorrent Atlantis PRCM Controller";
-+    rc->phases.hold = tt_atlantis_prcm_reset_hold;
-+    c->ops = &tt_atlantis_prcm_ops;
-+}
-+
-+static void tt_atlantis_prcm_rcpu_class_init(ObjectClass *klass,
-+                                             const void *data)
-+{
-+    DeviceClass *dc = DEVICE_CLASS(klass);
-+    ResettableClass *rc = RESETTABLE_CLASS(klass);
-+    TTAtlantisPRCMClass *c = TT_ATLANTIS_PRCM_CLASS(klass);
-+
-+    dc->realize = tt_atlantis_prcm_realize;
-+    dc->desc = "Tenstorrent Atlantis RCPU PRCM Controller";
-+    rc->phases.hold = tt_atlantis_prcm_rcpu_reset_hold;
-+    c->domain = PRCM_DOMAIN_RCPU;
-+    c->regs_size = RCPU_DOMAIN_SIZE;
-+    c->ops = &tt_atlantis_prcm_rcpu_ops;
-+}
-+
-+static void tt_atlantis_prcm_hsio_class_init(ObjectClass *klass,
-+                                             const void *data)
-+{
-+    DeviceClass *dc = DEVICE_CLASS(klass);
-+    ResettableClass *rc = RESETTABLE_CLASS(klass);
-+    TTAtlantisPRCMClass *c = TT_ATLANTIS_PRCM_CLASS(klass);
-+
-+    dc->realize = tt_atlantis_prcm_realize;
-+    dc->desc = "Tenstorrent Atlantis HSIO PRCM Controller";
-+    rc->phases.hold = tt_atlantis_prcm_hsio_reset_hold;
-+    c->domain = PRCM_DOMAIN_HSIO;
-+    c->regs_size = HSIO_DOMAIN_SIZE;
-+    c->ops = &tt_atlantis_prcm_ops;
-+}
-+
-+static void tt_atlantis_prcm_pcie_class_init(ObjectClass *klass,
-+                                             const void *data)
-+{
-+    DeviceClass *dc = DEVICE_CLASS(klass);
-+    ResettableClass *rc = RESETTABLE_CLASS(klass);
-+    TTAtlantisPRCMClass *c = TT_ATLANTIS_PRCM_CLASS(klass);
-+
-+    dc->realize = tt_atlantis_prcm_realize;
-+    dc->desc = "Tenstorrent Atlantis PCIE PRCM Controller";
-+    rc->phases.hold = tt_atlantis_prcm_pcie_reset_hold;
-+    c->domain = PRCM_DOMAIN_PCIE;
-+    c->regs_size = PCIE_DOMAIN_SIZE;
-+    c->ops = &tt_atlantis_prcm_ops;
-+}
-+
-+static void tt_atlantis_prcm_mm_class_init(ObjectClass *klass,
-+                                           const void *data)
-+{
-+    DeviceClass *dc = DEVICE_CLASS(klass);
-+    ResettableClass *rc = RESETTABLE_CLASS(klass);
-+    TTAtlantisPRCMClass *c = TT_ATLANTIS_PRCM_CLASS(klass);
-+
-+    dc->realize = tt_atlantis_prcm_realize;
-+    dc->desc = "Tenstorrent Atlantis MM PRCM Controller";
-+    rc->phases.hold = tt_atlantis_prcm_mm_reset_hold;
-+    c->domain = PRCM_DOMAIN_MM;
-+    c->regs_size = MM_DOMAIN_SIZE;
-+    c->ops = &tt_atlantis_prcm_ops;
-+}
-+
-+static void tt_atlantis_prcm_ddrc0_class_init(ObjectClass *klass,
-+                                              const void *data)
-+{
-+    DeviceClass *dc = DEVICE_CLASS(klass);
-+    ResettableClass *rc = RESETTABLE_CLASS(klass);
-+    TTAtlantisPRCMClass *c = TT_ATLANTIS_PRCM_CLASS(klass);
-+
-+    dc->realize = tt_atlantis_prcm_realize;
-+    dc->desc = "Tenstorrent Atlantis DDR Memory Controller 0 PRCM";
-+    rc->phases.hold = tt_atlantis_prcm_ddrc_reset_hold;
-+    c->domain = PRCM_DOMAIN_DDRC0;
-+    c->regs_size = DDRC0_DOMAIN_SIZE;
-+    c->ops = &tt_atlantis_prcm_ops;
-+}
-+
-+static void tt_atlantis_prcm_ddrc1_class_init(ObjectClass *klass,
-+                                              const void *data)
-+{
-+    DeviceClass *dc = DEVICE_CLASS(klass);
-+    ResettableClass *rc = RESETTABLE_CLASS(klass);
-+    TTAtlantisPRCMClass *c = TT_ATLANTIS_PRCM_CLASS(klass);
-+
-+    dc->realize = tt_atlantis_prcm_realize;
-+    dc->desc = "Tenstorrent Atlantis DDR Memory Controller 1 PRCM";
-+    rc->phases.hold = tt_atlantis_prcm_ddrc_reset_hold;
-+    c->domain = PRCM_DOMAIN_DDRC1;
-+    c->regs_size = DDRC1_DOMAIN_SIZE;
-+    c->ops = &tt_atlantis_prcm_ops;
-+}
-+
-+static const TypeInfo tt_atlantis_prcm_types[] = {
-+    {
-+        .name = TYPE_TT_ATLANTIS_PRCM,
-+        .parent = TYPE_SYS_BUS_DEVICE,
-+        .instance_size = sizeof(TTAtlantisPRCMState),
-+        .class_init = tt_atlantis_prcm_class_init,
-+        .class_size = sizeof(TTAtlantisPRCMClass),
-+        .abstract = true,
-+    },
-+    {
-+        .name = TYPE_TT_ATLANTIS_PRCM_RCPU,
-+        .parent = TYPE_TT_ATLANTIS_PRCM,
-+        .class_init = tt_atlantis_prcm_rcpu_class_init,
-+    },
-+    {
-+        .name = TYPE_TT_ATLANTIS_PRCM_HSIO,
-+        .parent = TYPE_TT_ATLANTIS_PRCM,
-+        .class_init = tt_atlantis_prcm_hsio_class_init,
-+    },
-+    {
-+        .name = TYPE_TT_ATLANTIS_PRCM_PCIE,
-+        .parent = TYPE_TT_ATLANTIS_PRCM,
-+        .class_init = tt_atlantis_prcm_pcie_class_init,
-+    },
-+    {
-+        .name = TYPE_TT_ATLANTIS_PRCM_MM,
-+        .parent = TYPE_TT_ATLANTIS_PRCM,
-+        .class_init = tt_atlantis_prcm_mm_class_init,
-+    },
-+    {
-+        .name = TYPE_TT_ATLANTIS_PRCM_DDRC0,
-+        .parent = TYPE_TT_ATLANTIS_PRCM,
-+        .class_init = tt_atlantis_prcm_ddrc0_class_init,
-+    },
-+    {
-+        .name = TYPE_TT_ATLANTIS_PRCM_DDRC1,
-+        .parent = TYPE_TT_ATLANTIS_PRCM,
-+        .class_init = tt_atlantis_prcm_ddrc1_class_init,
-+    },
-+};
-+
-+DEFINE_TYPES(tt_atlantis_prcm_types);
-diff --git a/include/hw/misc/tt_atlantis_prcm.h b/include/hw/misc/tt_atlantis_prcm.h
-new file mode 100644
-index 0000000000..dc7938433a
---- /dev/null
-+++ b/include/hw/misc/tt_atlantis_prcm.h
-@@ -0,0 +1,51 @@
-+/*
-+ * PRCM (Clock and Reset Controller) in Tenstorrent Atlantis SoC
-+ *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ *
-+ * Copyright 2026 Tenstorrent
-+ */
-+
-+#ifndef TT_ATLANTIS_PRCM_H
-+#define TT_ATLANTIS_PRCM_H
-+
-+#include "hw/core/sysbus.h"
-+
-+#define TYPE_TT_ATLANTIS_PRCM "tt.atlantis.prcm"
-+#define TYPE_TT_ATLANTIS_PRCM_RCPU "tt.atlantis.prcm.rcpu"
-+#define TYPE_TT_ATLANTIS_PRCM_HSIO "tt.atlantis.prcm.hsio"
-+#define TYPE_TT_ATLANTIS_PRCM_PCIE "tt.atlantis.prcm.pcie"
-+#define TYPE_TT_ATLANTIS_PRCM_MM "tt.atlantis.prcm.mm"
-+#define TYPE_TT_ATLANTIS_PRCM_DDRC0 "tt.atlantis.prcm.ddrc0"
-+#define TYPE_TT_ATLANTIS_PRCM_DDRC1 "tt.atlantis.prcm.ddrc1"
-+OBJECT_DECLARE_TYPE(TTAtlantisPRCMState, TTAtlantisPRCMClass,
-+                    TT_ATLANTIS_PRCM);
-+
-+
-+enum {
-+    PRCM_DOMAIN_RCPU = 0,
-+    PRCM_DOMAIN_HSIO = 1,
-+    PRCM_DOMAIN_PCIE = 2,
-+    PRCM_DOMAIN_MM = 3,
-+    PRCM_DOMAIN_DDRC0 = 4,
-+    PRCM_DOMAIN_DDRC1 = 5,
-+    PRCM_DOMAIN_COUNT = 6
-+};
-+
-+struct TTAtlantisPRCMState {
-+    SysBusDevice parent;
-+
-+    MemoryRegion mmio;
-+
-+    uint32_t *regs;
-+};
-+
-+struct TTAtlantisPRCMClass {
-+    SysBusDeviceClass parent_class;
-+
-+    uint32_t domain;
-+    uint32_t regs_size;
-+    const MemoryRegionOps *ops;
-+};
-+
-+#endif
+ static void create_fdt_i2c(void *fdt, const MemMapEntry *mem, uint32_t irq,
+-                           uint32_t irqchip_phandle, uint32_t clk_phandle)
++                           uint32_t irqchip_phandle,
++                           uint32_t clk_parent_phandle,
++                           uint32_t clk_phandle)
+ {
+     g_autofree char *name = g_strdup_printf("/soc/i2c@%"HWADDR_PRIX, mem->base);
+ 
+@@ -314,8 +318,8 @@ static void create_fdt_i2c(void *fdt, const MemMapEntry *mem, uint32_t irq,
+     qemu_fdt_setprop_sized_cells(fdt, name, "reg", 2, mem->base, 2, mem->size);
+     qemu_fdt_setprop_cell(fdt, name, "interrupt-parent", irqchip_phandle);
+     qemu_fdt_setprop_cells(fdt, name, "interrupts", irq, 0x4);
+-    qemu_fdt_setprop_cell(fdt, name, "clocks", clk_phandle);
+-    qemu_fdt_setprop_cell(fdt, name, "clock-frequency", 100000);
++    qemu_fdt_setprop_cells(fdt, name, "clocks", clk_parent_phandle,
++                           clk_phandle);
+     qemu_fdt_setprop_cell(fdt, name, "#address-cells", 1);
+     qemu_fdt_setprop_cell(fdt, name, "#size-cells", 0);
+ }
+@@ -358,7 +362,6 @@ static void finalize_fdt(void *fdt, TTAtlantisSoCState *s)
+ {
+     uint32_t aplic_s_phandle = next_phandle();
+     uint32_t imsic_s_phandle = next_phandle();
+-    uint32_t periph_clk_phandle = next_phandle();
+     uint32_t osc_24m_phandle = next_phandle();
+     uint32_t prcm_rcpu_phandle;
+     g_autofree char *rcpu_name, *hsio_name, *pcie_name, *mm_name;
+@@ -374,10 +377,6 @@ static void finalize_fdt(void *fdt, TTAtlantisSoCState *s)
+      *                       aplic_s_phandle);
+      */
+ 
+-    create_fdt_uart(fdt, &s->memmap[TT_ATL_UART1], TT_ATL_UART1_IRQ,
+-                    aplic_s_phandle);
+-
+-    create_fdt_clk(fdt, "periph-clk", 100000000, periph_clk_phandle);
+     create_fdt_clk(fdt, "osc_24m", 24000000, osc_24m_phandle);
+ 
+     rcpu_name = create_fdt_prcm(fdt, &s->memmap[TT_ATL_PRCM_RCPU], "rcpu");
+@@ -403,11 +402,15 @@ static void finalize_fdt(void *fdt, TTAtlantisSoCState *s)
+                            prcm_rcpu_phandle, TT_ATL_CLK_MM_PLL0,
+                            prcm_rcpu_phandle, TT_ATL_CLK_MM_PLL1);
+ 
++    create_fdt_uart(fdt, &s->memmap[TT_ATL_UART1], TT_ATL_UART1_IRQ,
++                    aplic_s_phandle, prcm_rcpu_phandle, TT_ATL_CLK_UART1_PCLK);
++
+     for (int i = 0; i < TT_ATL_NUM_I2C; i++) {
+         create_fdt_i2c(fdt,
+                        &s->memmap[TT_ATL_I2C0 + i],
+                        TT_ATL_I2C0_IRQ + i,
+-                       aplic_s_phandle, periph_clk_phandle);
++                       aplic_s_phandle, prcm_rcpu_phandle,
++                       TT_ATL_CLK_I2C0_PCLK + i);
+     }
+ 
+     /* I2C peripherals: qemu specific */
+diff --git a/include/hw/riscv/tt_atlantis.h b/include/hw/riscv/tt_atlantis.h
+index db1dfed157..577c867d71 100644
+--- a/include/hw/riscv/tt_atlantis.h
++++ b/include/hw/riscv/tt_atlantis.h
+@@ -99,6 +99,12 @@ enum {
+     TT_ATL_CLK_RCPU_ROOT = 1,
+     TT_ATL_CLK_NOC_PLL = 25,
+     TT_ATL_CLK_NOCC_CLK = 26,
++    TT_ATL_CLK_I2C0_PCLK = 33,
++    TT_ATL_CLK_I2C1_PCLK = 34,
++    TT_ATL_CLK_I2C2_PCLK = 35,
++    TT_ATL_CLK_I2C3_PCLK = 36,
++    TT_ATL_CLK_I2C4_PCLK = 37,
++    TT_ATL_CLK_UART1_PCLK = 39,
+     TT_ATL_CLK_HSIO_PLL = 54,
+     TT_ATL_CLK_PCIE_PLL = 55,
+     TT_ATL_CLK_MM_PLL0 = 56,
 
 -- 
 2.43.0
