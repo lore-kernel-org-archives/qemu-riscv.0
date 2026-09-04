@@ -4,145 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 707BAC624DE
-	for <qemu-riscv@archiver.kernel.org>; Fri,  4 Sep 2026 12:49:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 330BEC61DD6
+	for <qemu-riscv@archiver.kernel.org>; Fri,  4 Sep 2026 13:04:42 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x2TL8-0001qC-N3; Fri, 04 Sep 2026 08:48:19 -0400
+	id 1x2Tah-00078x-Az; Fri, 04 Sep 2026 09:04:23 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <pbonzini@redhat.com>)
- id 1x2TL6-0001kd-5u
- for qemu-riscv@nongnu.org; Fri, 04 Sep 2026 08:48:16 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <pbonzini@redhat.com>)
- id 1x2TL4-0007Do-9q
- for qemu-riscv@nongnu.org; Fri, 04 Sep 2026 08:48:15 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1788526093;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=Tq5KMhFBnIVo+NJEijoDMOG7Qosb7UKOdH/sdS6kPRk=;
- b=DNr7xKSp5TP89/e3XOlZlTzDvylW7paTPf9+CBMSxFS042JvM0Wce4O61DT4CXYDhjDtZD
- HRsBkt4V+JFOoQk8QaZA4IFZzkgyp0/MBXSy90RXSVVfFXGyYrAhhDnNzLYObHeq6fQJB5
- YKSQpkOOcenfyccTzSN9RJi5zFSL2W0=
-Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-612-aEnUB-nuP4ydBveevyj2Fg-1; Fri,
- 04 Sep 2026 08:48:11 -0400
-X-MC-Unique: aEnUB-nuP4ydBveevyj2Fg-1
-X-Mimecast-MFC-AGG-ID: aEnUB-nuP4ydBveevyj2Fg_1788526087
-Received: from mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.95])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 2F037195F16A; Fri,  4 Sep 2026 12:48:05 +0000 (UTC)
-Received: from [100.90.56.12] (headnet03.pony-001.prod.iad2.dc.redhat.com
- [10.2.32.114])
- by mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id A98C2423; Fri,  4 Sep 2026 12:47:49 +0000 (UTC)
-Message-ID: <b426be77-d233-4f45-9c14-889e95141b6d@redhat.com>
-Date: Fri, 4 Sep 2026 14:47:42 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 00/12] single-binary: link ARM and RISC-V into qemu-system
-To: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
-Cc: =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>,
- Yonggang Luo <luoyonggang@gmail.com>, qemu-devel@nongnu.org,
- Xianglai Li <lixianglai@loongson.cn>,
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1x2Ta8-0006VX-Li
+ for qemu-riscv@nongnu.org; Fri, 04 Sep 2026 09:03:51 -0400
+Received: from mail-wm1-x32f.google.com ([2a00:1450:4864:20::32f])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1x2TZz-00039n-5O
+ for qemu-riscv@nongnu.org; Fri, 04 Sep 2026 09:03:47 -0400
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-49b392ccaacso15449555e9.2
+ for <qemu-riscv@nongnu.org>; Fri, 04 Sep 2026 06:03:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1788527017; x=1789131817; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:mime-version:references
+ :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=+hFNbY683+aKu5INm/nevVq53hBRivg5hbWYiM/SJ/U=;
+ b=o+QWBW4LpVMKqyPTLaHNO9kWuFED5Hr31c5ilBdyvAc/ONSLWeeCYBOGzQuNJio09c
+ VVbk0/nsitH41sRGAZD3TiuJ7MmkiIfhtD1XTYQhwcwcU7A6vYszAPgT6OLQ9a64sk6P
+ ss70APgl0ib/vxktXF6Pi1Rkiw4d6xgS4NvfNtl2gtzoszbLrw2YmJ0t6HPOYl8oz5nt
+ sY4mt7IpdBCb2ijgFdJGoAUsZRvf2AuWZycNfuVKEgKwvMhbx+BRs+eWRso4R+2uiVyj
+ jtD5aww8pAR/JQM2CGPxtmSFr14GswpSrKgxY0WV3Z1oNU2eLm/pZS1plKA6ezM2qxEy
+ KNXQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1788527017; x=1789131817;
+ h=content-transfer-encoding:content-type:mime-version:references
+ :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=+hFNbY683+aKu5INm/nevVq53hBRivg5hbWYiM/SJ/U=;
+ b=WMLCRrvvTFvhZpBl0xI1wADXDQo7PcV1CVZqRyzOy0BQ3txFbgjVcDC+yIY/nJ3ppy
+ WfN/on3GtWyNWVzDueR3yUoVGWevQ0WIoBvyvjseckQdA5uQeVyQv9Qb/NlOOVqO6TWn
+ 7Mnc4s/3XBI/KL4TyFlnsebYdFjLo0HMf2Yd4J2qU6dPduwWrMfa0D+VgI6wWIiE0LkV
+ PaAkF4B8qDVUKJIv7/9StUu6vsfFpzQ4oO0/30iukNCrdCvotRx9bfW8NB/Xpv5pYtGm
+ j10WcA05TV6ThbXvGYqEUDyLA1ZpDEs0PqBnuM+9dqeHmacm2THWZZY8lcKdzmEbUj/m
+ FasA==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBxKcUJIlgQjQ/hO5w4hX4V2wohO8IHe9F/RD+i9LqMvAfdW/zb5/YkNIcoWW7ZWkvQI1ktY2rcX0hxw@nongnu.org
+X-Gm-Message-State: AFuF++nltCHONjk96k4F075lYWJDIlM+v6rHrXr83qZvyCueOMSXdQNx
+ ZGrHtazYYpU+APXFq2+8VTqDZpk6VzGJvKCdqMiC5KCOE4ozDgEFzCth1PSTHj2VxSs=
+X-Gm-Gg: AYBFou1kbmO4qNfMWaBgvRywHgaqXK0mr0OK8zTl4Ewpn5v//lcN85AUgc4bCL/R+FW
+ 4Uir+Z0Tvb8cX8UzRZPgbESnHrYjJbynIZ2ORi2LN6DcNxpN3jLDJ8AHCvgg1WZ1vW2H6pUSyQF
+ wN4/wt01BmOsibnJUoFmBYpM0r9pk/JVKmMVgUwp67SHuN/M8/tb0eTWV4dqCbbHvKDj9Jti9On
+ 0bWtKR4saDmhPfBv094MSSy3WEjrKzLUaP5iIckUDU8pbPUmzItu36BlHF3QD9ZBM1a35nQXx+c
+ PidRB3lW/K9lc24JyWGPNoHU1fp4ON29O8TXRTXnRSMJn/m+IyzzbTHQaqC8wOrHMErWont3Ozh
+ i9hgdXrOYftaMXtIGBc0rkmpH09F3H8+OmMmzi016uCFcpvpzbaadwDHuu/DgYRSul4i/RG4sRl
+ intGs4QIFZkW+HZTpT2FfAOgE63PNQkwe8wYTVH2s01nFQa8Ui1sVTF2LCcGWt
+X-Received: by 2002:a05:600c:310e:b0:49c:fa21:1c84 with SMTP id
+ 5b1f17b1804b1-49cfa211ce7mr40051485e9.25.1788527017203; 
+ Fri, 04 Sep 2026 06:03:37 -0700 (PDT)
+Received: from draig.lan ([185.124.0.156]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-49ce5563c6csm161486995e9.4.2026.09.04.06.03.32
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 04 Sep 2026 06:03:37 -0700 (PDT)
+Received: from draig.lan (localhost [IPv6:::1])
+ by draig.lan (Postfix) with ESMTP id E15F261D56;
+ Fri, 04 Sep 2026 13:46:12 +0100 (BST)
+From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
+ Aniket Sahu <asahu1x@linux.ibm.com>,
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
- Chinmay Rath <rathc@linux.ibm.com>, Sunil V L <sunilvl@ventanamicro.com>,
- qemu-riscv@nongnu.org, Alexander Bulekov <alxndr@bu.edu>,
- Zhao Liu <zhao1.liu@intel.com>, Eric Farman <farman@linux.ibm.com>,
- Laurent Vivier <lvivier@redhat.com>, Peter Maydell
- <peter.maydell@linaro.org>, Chao Liu <chao.liu@processmission.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Song Gao <17746591750@163.com>,
- Harsh Prateek Bora <harshpb@linux.ibm.com>,
- Glenn Miles <milesg@linux.ibm.com>,
+ Weiwei Li <liwei1518@gmail.com>,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- qemu-s390x@nongnu.org, Jiaxun Yang <jiaxun.yang@flygoat.com>,
- =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@mailo.com>,
- "Michael S. Tsirkin" <mst@redhat.com>, Stefan Hajnoczi
- <stefanha@redhat.com>, =?UTF-8?Q?Alex_Benn=C3=A9e?=
- <alex.bennee@linaro.org>, David Hildenbrand <david@kernel.org>,
- qemu-ppc@nongnu.org, qemu-arm@nongnu.org, Igor Mammedov
- <imammedo@redhat.com>, Aleksandar Rikalo <arikalo@gmail.com>,
- Nicholas Piggin <npiggin@gmail.com>, Cornelia Huck <cohuck@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Ilya Leoshkevich <iii@linux.ibm.com>, Fabiano Rosas <farosas@suse.de>,
- Aurelien Jarno <aurelien@aurel32.net>, Ani Sinha <anisinha@redhat.com>,
- Bibo Mao <maobibo@loongson.cn>,
- =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
- Matthew Rosato <mjrosato@linux.ibm.com>, Weiwei Li <liwei1518@gmail.com>,
- Darren Kenny <darren.kenny@oracle.com>
-References: <20260823150731.896-1-luoyonggang@gmail.com>
- <ao7c-FiawF9sMCGj@redhat.com>
- <b2b1d77e-c3e3-4aad-87d2-f5d4834abd1a@oss.qualcomm.com>
- <apAG8JQTnQxRkfip@redhat.com>
- <9e36f8a0-5363-4ce2-accf-62ccf3602344@oss.qualcomm.com>
- <CABgObfYw8U6q1xdUXcP5XBNTpB-n9MR=DkzFXpb6nkn7g00etQ@mail.gmail.com>
- <997fad72-3d6f-4ec6-9017-290959d9848f@oss.qualcomm.com>
-From: Paolo Bonzini <pbonzini@redhat.com>
-Autocrypt: addr=pbonzini@redhat.com; keydata=
- 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
-In-Reply-To: <997fad72-3d6f-4ec6-9017-290959d9848f@oss.qualcomm.com>
-X-Scanned-By: MIMEDefang 3.6 on 10.30.177.95
-X-Mimecast-MFC-PROC-ID: BHlThce93VWS6NWcX_KMhydzMqzODB2kNOfAhAjvtpw_1788526087
-X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=pbonzini@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: 12
-X-Spam_score: 1.2
-X-Spam_bar: +
-X-Spam_report: (1.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
- RCVD_IN_SBL_CSS=3.335, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Chao Liu <chao.liu@processmission.com>,
+ qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
+Subject: [PULL 080/105] tests/tcg/riscv64: user tests
+Date: Fri,  4 Sep 2026 13:45:34 +0100
+Message-ID: <20260904124604.2207440-81-alex.bennee@linaro.org>
+X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20260904124604.2207440-1-alex.bennee@linaro.org>
+References: <20260904124604.2207440-1-alex.bennee@linaro.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::32f;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32f.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -158,113 +115,95 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 8/27/26 21:58, Pierrick Bouvier wrote:
-> On 8/27/2026 10:48 AM, Paolo Bonzini wrote:
->> Whoa whoa.
->>
-> 
-> I apologize to Daniel, and other people on this thread for resorting to
-> sarcasm in this situation, and personally mention Daniel in my answer.
-> 
-> It stems from the fact that it's not the first time Daniel come on a
-> thread to push a view (that might be wrong) and don't listen to other's
-> people opinion, or leave the conversation when he has no more arguments
-> or discover he's wrong. I'm not the first one to discover this, and it's
-> a topic that came from multiple people I met. I invite anyone to tell me
-> publicly it's in my head, and that it is wrong.
+From: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
 
-Please stop.  Just stop.  "It came from multiple people" never ends well.
+Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
+Tested-by: Aniket Sahu <asahu1x@linux.ibm.com>
+Signed-off-by: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
+Message-ID: <20260827221506.91574-81-pierrick.bouvier@oss.qualcomm.com>
+Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 
-I have my own disagreements with Daniel, which is no surprise since I've 
-known him at work for over 15 years.  In fact, we probably had a couple 
-just this week, though that's fortunately above average.  We have 
-different personalities, we come from different cultural backgrounds. 
-We are still able to respect each other and I seek his opinion even if 
-(or sometimes because) I know it'll be different and make things harder 
-for me. :)
-
->> Sometimes people don't reply not because they disagree, but because
->> they trust the people involved to resolve the problem.
-> 
-> We presented a plan a year ago, for which multiple people have been
-> supportive in general. Now we are close to having a single binary
-> upstream, we have Daniel coming last minute and asking to solve issues
-> we are not at yet. I feel it's not helping us, and simply blocking work.
-> 
-> Daniel's main concern (correct me if I'm wrong), is that we might
-> introduce regressions by introducing a -target option, and filtering on
-> QOM types.
-
-I'll briefly touch the technical part.  As it was explained, the problem 
-is really just in the use of symlinks for aarch64 and riscv64 binaries.
-
-All that Daniel is *asking for* is to split the experimental part from 
-the existing one.  Did he go on a tangent on what else he'd like from 
-the experimental part?  Yes, but that's simply a justification for why 
-it's better to keep it split.
-
-> I have no problem with anyone deciding to refactor the QEMU command
-> line, but it's a different problem from what we are doing now.
-> We just want to provide a first version upstream mixing at least two
-> base architectures, and providing exact same behavior than existing
-> binaries.
-
-Yes, and that's fine.
-
->> Let me remind you of the discussion we had about -fms-bitfields and
->> how it was resolved amicably and profitably.
-> 
-> I really appreciated this exchange with you. Even if I was a newcomer,
-> you explained where you disagreed, but accepted a different answer. Then
-> we iterated to prove that existing struct layout were not impacted, and
-> we both observed it was safe to remove this option. I felt like we both
-> worked toward a goal, and not that you pushed your personal vision
-> without any technical basis.
-
-I have a different memory.  While I am also satisfied with the outcome, 
-I remember that it was hard to explain why you couldn't just drop 
--fms-bitfields, and what analysis was required before you did that.  And 
-the outcome was positive mostly (or only) because *I* did the analysis 
-that was necessary to ensure there would be no regressions with *your* 
-proposed patch.
-
-What Daniel is asking is even less - he's only asking to *remove* the 
-bits that symlink qemu-system-arm and qemu-system-riscv64 into 
-qemu-system.  (Perhaps you could do that with a configure option 
-instead, btw, that's also a possibility and would make CI integration 
-easier).
->> This project was extremely complex and some disagreements are normal,
->> but overall I would say it has received support from the community for
->> years. It is close to the finish line, let's not forget all the
->> collaboration so far.
-> 
-> At this point, I don't see the finish line coming anytime soon.
-> We are stuck in a situation where we now might have to design a whole
-> new command line from scratch, for a reason I ignore.
-
-This is simply not true. The important part: "We don't have to do all 
-that straightaway. If we declare qemu-system 'experimental' initially we 
-can iterate on that intentionally breaking compat in releases, without 
-any impact on qemu-system-$TARGET".
-
-Experimental doesn't mean unusable.
-> - let's go with original plan, and just introduce -target option and
-> call it a day for now. CLI refactoring can be initiated in parallel.
-
-That's exactly what Daniel suggested.  In fact the same is true for more 
-things than just the command line:
-
-- filtering can be applied (if needed at all) to qemu-system *after* the 
-binary is available in qemu.git, exactly because qemu-system is 
-experimental;
-
-- if we decide later that -target is not always needed, that would also 
-be doable after the merge.
-
-I hope this helps not so much solving the technical disagreement, but 
-clarifying that yes, sometimes you've got to "agree to disagree", but 
-personal attacks of any intensity are not "agreeing to disagree".
-
-Paolo
+diff --git a/tests/tcg/meson.build b/tests/tcg/meson.build
+index f13f0d84792..1a48b37f75c 100644
+--- a/tests/tcg/meson.build
++++ b/tests/tcg/meson.build
+@@ -151,6 +151,7 @@ subdir('mips64el')
+ subdir('or1k')
+ subdir('ppc64')
+ subdir('ppc64le')
++subdir('riscv64')
+ 
+ image_targets = {}
+ exe_targets = []
+diff --git a/tests/tcg/riscv64/Makefile.target b/tests/tcg/riscv64/Makefile.target
+deleted file mode 100644
+index 4da5b9a3b32..00000000000
+--- a/tests/tcg/riscv64/Makefile.target
++++ /dev/null
+@@ -1,20 +0,0 @@
+-# -*- Mode: makefile -*-
+-# RISC-V specific tweaks
+-
+-VPATH += $(SRC_PATH)/tests/tcg/riscv64
+-TESTS += test-div
+-TESTS += noexec
+-
+-# Disable compressed instructions for test-noc
+-TESTS += test-noc
+-test-noc: LDFLAGS = -nostdlib -static
+-run-test-noc: QEMU_OPTS += -cpu rv64,c=false
+-
+-TESTS += test-aes
+-run-test-aes: QEMU_OPTS += -cpu rv64,zk=on
+-
+-# Test for fcvtmod
+-TESTS += test-fcvtmod
+-test-fcvtmod: CFLAGS += -march=rv64imafdc
+-test-fcvtmod: LDFLAGS += -static
+-run-test-fcvtmod: QEMU_OPTS += -cpu rv64,d=true,zfa=true
+diff --git a/tests/tcg/riscv64/meson.build b/tests/tcg/riscv64/meson.build
+new file mode 100644
+index 00000000000..b5f574c1377
+--- /dev/null
++++ b/tests/tcg/riscv64/meson.build
+@@ -0,0 +1,36 @@
++cc = 'riscv64-linux-gnu-gcc'
++cc_dockerfile = 'debian-all-test-cross'
++cc_docker_host_arch = ['aarch64', 'x86_64']
++
++tests = []
++
++# Multi arch tests
++tests += tcg_tests['multiarch-linux-user']['tests']
++
++tests += {
++  'noexec.c': {},
++  'test-aes.c': {'qemu_args': ['-cpu', 'rv64,zk=on']},
++  'test-div.c': {},
++  'test-fcvtmod.c': {
++    'cflags': ['-march=rv64imafdc'],
++    'qemu_args': ['-cpu', 'rv64,d=true,zfa=true'],
++  },
++  'test-noc.S': {
++    'cflags': ['-nostdlib'],
++    'qemu_args': ['-cpu', 'rv64,c=false'],
++  },
++}
++
++if 'qemu-riscv64' in emulators
++  tcg_tests += {
++    'riscv64-linux-user': {
++      'cc': cc,
++      'cc_dockerfile': cc_dockerfile,
++      'cc_docker_host_arch': cc_docker_host_arch,
++      'folder': 'riscv64',
++      'gdb_arch': 'riscv64',
++      'qemu': emulators['qemu-riscv64'],
++      'tests': tests,
++    }
++  }
++endif
+-- 
+2.47.3
 
 
