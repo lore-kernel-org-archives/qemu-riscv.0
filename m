@@ -4,96 +4,150 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89200C624DE
-	for <qemu-riscv@archiver.kernel.org>; Fri,  4 Sep 2026 08:55:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F05AC61DD6
+	for <qemu-riscv@archiver.kernel.org>; Fri,  4 Sep 2026 10:43:27 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x2Ph2-0005JX-4J; Fri, 04 Sep 2026 04:54:40 -0400
+	id 1x2RNo-0000BZ-8x; Fri, 04 Sep 2026 06:42:56 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1x2Ph0-0005Ig-Iv
- for qemu-riscv@nongnu.org; Fri, 04 Sep 2026 04:54:38 -0400
-Received: from mail-pj1-x102e.google.com ([2607:f8b0:4864:20::102e])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1x2Pgz-0007Xc-1I
- for qemu-riscv@nongnu.org; Fri, 04 Sep 2026 04:54:38 -0400
-Received: by mail-pj1-x102e.google.com with SMTP id
- 98e67ed59e1d1-38e58034d05so608626a91.2
- for <qemu-riscv@nongnu.org>; Fri, 04 Sep 2026 01:54:36 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
+ id 1x2RNl-0000Ab-MX
+ for qemu-riscv@nongnu.org; Fri, 04 Sep 2026 06:42:53 -0400
+Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
+ id 1x2RNi-0004XH-RI
+ for qemu-riscv@nongnu.org; Fri, 04 Sep 2026 06:42:52 -0400
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 684AI9PK2616015
+ for <qemu-riscv@nongnu.org>; Fri, 4 Sep 2026 10:42:48 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ 50SIKzO1p5asV7sJAAY3zU7mEKvMmrAZny1H5BPdTBQ=; b=WysMxFQYYaGEawEx
+ UuaNSEregwkaVZaXLsos73ah+EAgIqIiCZa7jnTOkJHWR+cmMaCYJt74rU9SzP3C
+ XUwW6xMd55UOVXa2JD9W3mMcS0FV6jA4J6mg7MUiAMzbXN5zo+6t6DXk09D5K48j
+ tEulwTcrxQ8SgtxE0t1ClQVvxXZJewOIkWko8NEAMhpMMJ7T9oL4kxpVyC3mbkgx
+ mK/Tv3bnG65dygIUx1U/yiuDsDuRXH9h6afhQSvq5YyqfLv6xTyP38nMRrbn0OXI
+ jZ1/Ei5EMlud3FM8kh5vstyLeTT0esPiBsDGYLv8IU/JZ+btFqhp1UQtNqvhRbZm
+ k0Z43g==
+Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com
+ [209.85.222.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gfdyp34wa-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Fri, 04 Sep 2026 10:42:48 +0000 (GMT)
+Received: by mail-qk1-f199.google.com with SMTP id
+ af79cd13be357-9390ca1a9abso117072385a.2
+ for <qemu-riscv@nongnu.org>; Fri, 04 Sep 2026 03:42:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1788512075; x=1789116875; darn=nongnu.org;
- h=content-transfer-encoding:content-type:mime-version:references
- :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=cKiuKxyyWJSuIyXVWzlv/wqmaebtjtdx2ZKx6moBL3s=;
- b=ay7J7zsul7AsmlPxQdsVzu1APh6D9VjhIEaFflUcbDKuR4Svmk4X4UqYxnO37EfBNS
- vIrsYwh7OR3QRjYSpauEygCvYGCWguIxvOI/BGWdQ3SOAD0Sxda8BUOIg/hDXdCk2coC
- gqpc7XOG3VDRhdOcn2yRHYhLyIPfnL3ZoAMBPxaOKlu+lbcYKH22u3GR4oL3FY2BuMzr
- W7qZKOlAuAhcXs1O4EthULMWys1PFAihmQBxFQKrp1TMQThsfUYvhXiY18LGJaH0wWpp
- tJ8RfEzvr7FzSQU02YXUug/46tvIUqg3+C97p/x/l8lEcDiftcpBuQNuH9P6YLoo5c/X
- iHcw==
+ d=oss.qualcomm.com; s=google; t=1788518567; x=1789123367; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:from:references
+ :cc:to:content-language:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=50SIKzO1p5asV7sJAAY3zU7mEKvMmrAZny1H5BPdTBQ=;
+ b=g7gDEAa/6jWVF081n7K7D082544Wvinzl0m+slcqknYr8UTyTMF2ZDfSnXdP3XcYRV
+ NxnovAWZzOF5Vb3l03YX5oEsQURVY9UgpaOLknSRnBx4lw0/e330kZPI0t0AFLgiIin5
+ 3V6Eu7i26Q1U770DWejE2JwUCzhoPjQ0RxqcIyLM8ZFozIc0yV+j+0bz/ooiU69jgkfa
+ OV4mICvwQxlTcSDOBUrHuKsCV5QIRNQzJitpYV+qntUHqbEbrNr5WJv+byZiCqs0KPMA
+ B/VZHN21bskpIdsqGdmPpRAFyG6CFm5MErWzWddl6gumGJ8/6P/PXvNwXYONDqq9qPK7
+ epLA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788512075; x=1789116875;
- h=content-transfer-encoding:content-type:mime-version:references
- :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=cKiuKxyyWJSuIyXVWzlv/wqmaebtjtdx2ZKx6moBL3s=;
- b=GQncQDXfQKfptqfdhp88lITkT4UYvlE3/lgHqmJVFmqd8S/Jm2xG2pSVIAvwmHhv0t
- gag7iysCSTkpD9ujIt+jAWkTLvfxSDwqtQeAPWt5l+O5GQe565pm1pcm+95oRl6/Hhk8
- 4qwgxp0QpgMJHsbkw2ilOwRoaFNs84hTEDCMaa0i8Wg9RMJMd5bVnU2/n7ZfDM+TGOCM
- 2zBsvMH+NoAjv75iMZGdH8mS+/vBJMnAI33XM57KQVSWylRmQl9NS42EH+kiTFa4IWMJ
- R30QeoLw6jAe2dPY1zTv6c46YAZGy4Tr3UjIm4zwwBKFyASUw0Kn5b1rBoZrKbceoaF3
- vwfQ==
+ d=1e100.net; s=20251104; t=1788518567; x=1789123367;
+ h=content-transfer-encoding:content-type:in-reply-to:from:references
+ :cc:to:content-language:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=50SIKzO1p5asV7sJAAY3zU7mEKvMmrAZny1H5BPdTBQ=;
+ b=i2etCMAtkm8EGWmv64JAuYKF4khLwEQ9P7fdNOOxI2G1TeCQjwcEIhOZvHs7Tun/sn
+ q+D/oZYa63rB/J31p0aqW86iDOUnhAI9Qnoy2tdn6pXTmm3DZ5nujRKpGrYbyZLjo4Rq
+ yO/nUGVhmYb9RASvdqI56AZEMrBVyOXajbcAQVYkT3FBXqTslumX2yNTg+wx95fvukMw
+ hkBxShjxDh9wE4LqojgZAZiLQ5Gn1PBf5ggSO8KcudJYQH37rMc2/rUlFPeGYq8evf4f
+ cDqO2MHrkOndWnimtk51fuPw4X+Ygv1JT+wDZElHXys+id/ncd31kfRp8GpL0bhiKC/Q
+ nT7g==
 X-Forwarded-Encrypted: i=1;
- AKwUvBwJOyI3FU8qA6IqqXhIm7nRcrqe8ae7/r69Hab/NNZxUGMd08dBSaBA8sdA/1OE0ahJokHsWvAxHlrC@nongnu.org
-X-Gm-Message-State: AFuF++lL7EYfVNh1ZhaqT0wB90E4kLwgtQB95K+WDO0hQQY0GVhXHEqA
- dRPgvJDuTeZkoHlnbZKdEW+x+lI+c2oOMp568raTr7jedjMh41+32e/iLp/Q529veWM=
-X-Gm-Gg: AYBFou01urohBH9slqGsyibhZIYt+AqtAUB7kcatz01Z2ShMpFsGWnL3FNtz5uDocmm
- 7BrP1NsAJymZSquJAIppLEsLOp7yHMhJRJGWYYteUjvXrdiYPl5CJ3/92bK3K1qb7P1i8VC81dU
- T0T/bOtvoWSrCYAuaaB1q6J6QHi/gd7PaOpHCe7yaRkgwN9zLA3nFUrQANtwLj71sw/zUty5pcK
- cHd7rFsjrofHTfhOuN40REyKEBhCWUFTQ0rKI691xKTx7m9eARTYm5DvNddy77S3Xh6dJmKm8Dy
- N2ogyXu33gPtay1r4D1sAG0C3Umzh7621a+77sdXskx1fgHg+obT7IFZ2e5r7jisTw7SIpMuUlj
- 1aY0IIHRG90RNlOZLJf+jRtc/pqXdO8njujNar6Ab5bPsAGWseyAkVl00yVdz13boTEzYF28z8A
- 0Q2Cc5gIRV3e5eit1NTEywjEuDjLZP/ej/WLZt3QDUR7cndAlbKFsajDdB9Oqku31LjbZ+qMoM3
- iF830LVjy08BfJYcv1x3aLDhrwCHnH9yJ0u2iu4V+HByLn+CYLKXKmm3nO+rVw=
-X-Received: by 2002:a17:90b:4c4e:b0:399:1b64:e0d7 with SMTP id
- 98e67ed59e1d1-39b262aaf32mr7108644a91.19.1788512075489; 
- Fri, 04 Sep 2026 01:54:35 -0700 (PDT)
-Received: from duncan.localdomain (114-35-142-126.hinet-ip.hinet.net.
- [114.35.142.126]) by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-39ae8f1448esm4782912a91.4.2026.09.04.01.54.33
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 04 Sep 2026 01:54:35 -0700 (PDT)
-From: Max Chou <max.chou@sifive.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Max Chou <max.chou@sifive.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
-Subject: [PATCH v2 1/2] tcg/riscv64: Validate AUIPC relocation range
-Date: Fri,  4 Sep 2026 16:54:25 +0800
-Message-ID: <20260904085426.3686492-2-max.chou@sifive.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260904085426.3686492-1-max.chou@sifive.com>
-References: <20260904085426.3686492-1-max.chou@sifive.com>
+ AKwUvBzDTyf0GgMCojRGFM7vWgnZRPNDzvrToX06VsJAU9fCWIhM5O7yC+dqk6uFol3euz1oOS6KayODrWix@nongnu.org
+X-Gm-Message-State: AFuF++kW5PvAEHnS5O4dCAWocSF5vEZeYP+hlSHpcUfW7Fo9KsmSx8Aq
+ gTKEnOdAYRKNvU1QeK0rL2m48i4xDx1c2BmvidgmBQbuzNsJAM+gu1oZ+LUpwIj7AcLkl1+pX1w
+ sm30DDwy86A4K5NT5+zUBsP/mx010NCmXPPSQdDdc0UpXuydIWbiQZvCKIQ==
+X-Gm-Gg: AYBFou0cwF32xsTDxunvr9cI2bien7d6Ntf+OwcZlc4gRxLU08nNRdERCSfnnRtNjn+
+ H6yxsR9jAFw+yBwEijjw3f9wWVrF0yEv7qWUaeC57WpUeXRzTqaom7HVPdBHIdlUctBvWqkdoRA
+ +ZkWCEUGn/XfBFoSZkm22o8wyNNVIypyFWHvjHNdybrq8PkwJxPtptBpMybWB8yDz6Wk7HrNTlZ
+ EuzZ/PKcDkevStGtt65g3Qq5lrW7kWCLniL6V0En8btk/qfynzf0U3bo3j+KBlMB/DVwDxly6D4
+ Po562K8KzhmsMs25MbsXyRL5lZgkurye1uppKMxLkyVBS0J7MHjk6un3/VQ5vaETi93bATf/VJa
+ wi3UoOUcsU2e2hKWpZZ+/b0brzYAV1CdZlg==
+X-Received: by 2002:a05:620a:f0f:b0:937:19d3:3fda with SMTP id
+ af79cd13be357-9398042d815mr462286085a.28.1788518567634; 
+ Fri, 04 Sep 2026 03:42:47 -0700 (PDT)
+X-Received: by 2002:a05:620a:f0f:b0:937:19d3:3fda with SMTP id
+ af79cd13be357-9398042d815mr462281585a.28.1788518567207; 
+ Fri, 04 Sep 2026 03:42:47 -0700 (PDT)
+Received: from [192.168.69.202] (pmd666.hd.free.fr. [88.187.86.199])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-49cf772692dsm70648315e9.10.2026.09.04.03.42.45
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 04 Sep 2026 03:42:46 -0700 (PDT)
+Message-ID: <a4b3c4a2-e359-4952-8b1a-34db4e2b3c9a@oss.qualcomm.com>
+Date: Fri, 4 Sep 2026 12:42:45 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102e;
- envelope-from=max.chou@sifive.com; helo=mail-pj1-x102e.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 14/16] hw/riscv: Add property to hart array to allow
+ private memory
+Content-Language: en-US
+To: Joel Stanley <joel@jms.id.au>, Alistair Francis <alistair.francis@wdc.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Cc: Portia Stephens <portias@oss.tenstorrent.com>,
+ Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Chao Liu <chao.liu@processmission.com>,
+ Nicholas Piggin <npiggin@gmail.com>,
+ Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>,
+ Michael Ellerman <mpe@kernel.org>, =?UTF-8?Q?C=C3=A9dric_Le_Goater?=
+ <clg@kaod.org>, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+References: <20260903055131.257903-1-joel@jms.id.au>
+ <20260903055131.257903-15-joel@jms.id.au>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
+In-Reply-To: <20260903055131.257903-15-joel@jms.id.au>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-ORIG-GUID: HGFk4K0ll79MXlalgAhQmOReKTio62oM
+X-Proofpoint-GUID: HGFk4K0ll79MXlalgAhQmOReKTio62oM
+X-Authority-Analysis: v=2.4 cv=Q5XiJY2a c=1 sm=1 tr=0 ts=6a9aa0a8 cx=c_pps
+ a=HLyN3IcIa5EE8TELMZ618Q==:117 a=4s3hRJSeHn4rkQlkrse1kQ==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=M51BFTxLslgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
+ a=t9496tuAAAAA:8 a=EUspDBNiAAAA:8 a=JF9118EUAAAA:8 a=S4Sp4hC2xgBoH1LN8d0A:9
+ a=QEXdDO2ut3YA:10 a=bTQJ7kPSJx9SKPbeHEYW:22 a=4wQ91nGE5lQcD7eh5OX0:22
+ a=xVlTc564ipvMDusKsbsT:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA0MDA5NiBTYWx0ZWRfX9cDmwqUtmFYr
+ R5fW3xShBg+LnJck/DMcLhGRPTSJHaUyIbPchPJHLn0bkPYjZrUR0+27j2frkIKFqhng60E8Pmd
+ NKxxiDvp3gxM3y66fzv7viceHdFjJuIK/bufnxjIVJaar+fJ9DvI1ZK38MyOBi2vEKKaQkNotZT
+ sFlULPCCrE8yjxpsLMKuf+NP9Yr6Lj1TsCq6CKoPZSA2WWyNyZNi0kPV5Q1toNhUvQF2eXHSu5G
+ Nv8bcUU4LEzdy6ZBkheKRwN0UTlvcT9QgN5srHctOTDbDZ/7302Zi8VoSgLO2AW5LOz5SRIwwFr
+ gifrgvooHgKY99GPpEJ6Qm264ugPhjsnAE4YHtp04CgcoT9Wn1vPLzjflse4d4YHgGctpyeGVU/
+ OGyFuEd3MjpPi9z6oCuwyo/rM/Ac+ZXb8GxW13zcoyLf8ipt0ZdJ0qYx5xTrYFxR1X69JHipord
+ NPCNFSqW/iyrDtKoMMQ==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA0MDA5NiBTYWx0ZWRfXxoOfgh5D7o19
+ QF02+ULOVEbN/KdG7KzE1VedqeIWjLEW5HQAPdJXmHkBp5/9ZaXMfAiJxJu7UFaxBpxz+DvMTu2
+ v7xEUXAphB2r684f9vvIr88Lz9XyhwU=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-04_03,2026-09-03_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 phishscore=0 priorityscore=1501 lowpriorityscore=0
+ clxscore=1015 impostorscore=0 adultscore=0 bulkscore=0 spamscore=0
+ suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2609040096
+Received-SPF: pass client-ip=205.220.168.131;
+ envelope-from=philmd@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -110,64 +164,69 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-reloc_call splits a PC-relative offset into a signed 12-bit low
-immediate and an AUIPC contribution. When the low immediate carries into
-bit 31, the existing 32-bit arithmetic can accept an unencodable
-positive 0x80000000 AUIPC contribution.
+On 3/9/26 07:51, Joel Stanley wrote:
+> From: Portia Stephens <portias@oss.tenstorrent.com>
+> 
+> There are platforms where CPUs have different mapping of system memory.
+> The global system memory does not allow for this. This adds an optional
+> property on the hart array to assign a specific memory region. The array
+> passes the region to each hart it creates, so a machine can alias the
+> harts' memory to system memory, while the harts view memory from their
+> own memory region.
+> 
+> Signed-off-by: Portia Stephens <portias@oss.tenstorrent.com>
+> Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+> Signed-off-by: Joel Stanley <joel@jms.id.au>
+> ---
+>   include/hw/riscv/riscv_hart.h | 2 ++
+>   hw/riscv/riscv_hart.c         | 8 ++++++++
+>   2 files changed, 10 insertions(+)
+> 
+> diff --git a/include/hw/riscv/riscv_hart.h b/include/hw/riscv/riscv_hart.h
+> index 197fa1623115..c3cd05a2c877 100644
+> --- a/include/hw/riscv/riscv_hart.h
+> +++ b/include/hw/riscv/riscv_hart.h
+> @@ -42,6 +42,8 @@ struct RISCVHartArrayState {
+>       uint64_t *rnmi_irqvec;
+>       uint32_t num_rnmi_excpvec;
+>       uint64_t *rnmi_excpvec;
+> +    /* Optional private memory region for use instead of system memory */
+> +    MemoryRegion *memory;
+>       RISCVCPU *harts;
+>   };
+>   
+> diff --git a/hw/riscv/riscv_hart.c b/hw/riscv/riscv_hart.c
+> index 747754be6158..32fd39737ff6 100644
+> --- a/hw/riscv/riscv_hart.c
+> +++ b/hw/riscv/riscv_hart.c
+> @@ -53,6 +53,8 @@ static const Property riscv_harts_props[] = {
+>       DEFINE_PROP_ARRAY("rnmi-exception-vector", RISCVHartArrayState,
+>                         num_rnmi_excpvec, rnmi_excpvec, qdev_prop_uint64,
+>                         uint64_t),
+> +    DEFINE_PROP_LINK("memory", RISCVHartArrayState, memory,
+> +                     TYPE_MEMORY_REGION, MemoryRegion *),
+>   };
+>   
+>   static void riscv_harts_cpu_reset(void *opaque)
+> @@ -117,6 +119,12 @@ static bool riscv_hart_realize(RISCVHartArrayState *s, int idx,
+>       object_initialize_child(OBJECT(s), "harts[*]", &s->harts[idx], cpu_type);
+>       qdev_prop_set_uint64(DEVICE(&s->harts[idx]), "resetvec", s->resetvec);
+>   
+> +    /* Use private memory instead of system_memory if provided */
+> +    if (s->memory) {
+> +        object_property_set_link(OBJECT(&s->harts[idx]), "memory",
+> +                                 OBJECT(s->memory), &error_abort);
 
-Keep the split in pointer-width arithmetic and reject it unless the
-rounded upper contribution is representable as signed 32-bit. Factor
-this validation into split_auipc_offset so reloc_call retains its
-existing failure contract.
+IMHO this logic should be inverted: we want explicit memory bus mapping
+by default, and if not set then take the global memory. Personally I'd
+even go further and assert it is set (otherwise programming error), with
+a preliminary patch setting global system memory to current machines.
 
-Fixes: dfa8e74f9463 ("tcg/riscv: Add the relocation functions")
-Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
-Signed-off-by: Max Chou <max.chou@sifive.com>
----
- tcg/riscv64/tcg-target.c.inc | 25 +++++++++++++++++++++----
- 1 file changed, 21 insertions(+), 4 deletions(-)
-
-diff --git a/tcg/riscv64/tcg-target.c.inc b/tcg/riscv64/tcg-target.c.inc
-index 2ce9d47a633..76db0de94c3 100644
---- a/tcg/riscv64/tcg-target.c.inc
-+++ b/tcg/riscv64/tcg-target.c.inc
-@@ -641,14 +641,31 @@ static bool reloc_jimm20(tcg_insn_unit *src_rw, const tcg_insn_unit *target)
-     return false;
- }
- 
--static bool reloc_call(tcg_insn_unit *src_rw, const tcg_insn_unit *target)
-+static bool split_auipc_offset(tcg_insn_unit *src_rw,
-+                               const tcg_insn_unit *target,
-+                               uint32_t *hi, uint32_t *lo)
- {
-     const tcg_insn_unit *src_rx = tcg_splitwx_to_rx(src_rw);
-     intptr_t offset = (intptr_t)target - (intptr_t)src_rx;
--    int32_t lo = sextreg(offset, 0, 12);
--    int32_t hi = offset - lo;
-+    intptr_t low = sextreg(offset, 0, 12);
-+    intptr_t high = offset - low;
-+
-+    /* AUIPC sign-extends its 20-bit immediate after shifting by 12. */
-+    if (high != sextreg(high, 0, 32)) {
-+        return false;
-+    }
-+
-+    *hi = (uint32_t)high;
-+    *lo = (uint32_t)low;
-+
-+    return true;
-+}
-+
-+static bool reloc_call(tcg_insn_unit *src_rw, const tcg_insn_unit *target)
-+{
-+    uint32_t hi, lo;
- 
--    if (offset == hi + lo) {
-+    if (split_auipc_offset(src_rw, target, &hi, &lo)) {
-         src_rw[0] |= encode_uimm20(hi);
-         src_rw[1] |= encode_imm12(lo);
-         return true;
--- 
-2.43.0
+> +    }
+> +
+>       if (s->harts[idx].cfg.ext_smrnmi) {
+>           if (idx < s->num_rnmi_irqvec) {
+>               qdev_prop_set_uint64(DEVICE(&s->harts[idx]),
 
 
