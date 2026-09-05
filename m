@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE869C624D3
-	for <qemu-riscv@archiver.kernel.org>; Sat,  5 Sep 2026 09:38:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46542C624D3
+	for <qemu-riscv@archiver.kernel.org>; Sat,  5 Sep 2026 09:38:45 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x2mqe-0004pb-O5; Sat, 05 Sep 2026 05:38:08 -0400
+	id 1x2mqf-0004pu-0c; Sat, 05 Sep 2026 05:38:09 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <wangyang25@otcaix.iscas.ac.cn>)
- id 1x2mqc-0004my-Iq; Sat, 05 Sep 2026 05:38:06 -0400
+ id 1x2mqc-0004n2-Lb; Sat, 05 Sep 2026 05:38:06 -0400
 Received: from smtp81.cstnet.cn ([159.226.251.81] helo=cstnet.cn)
  by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
  (Exim 4.90_1) (envelope-from <wangyang25@otcaix.iscas.ac.cn>)
- id 1x2mqY-0002d4-MO; Sat, 05 Sep 2026 05:38:06 -0400
+ id 1x2mqY-0002d6-QQ; Sat, 05 Sep 2026 05:38:06 -0400
 Received: from DESKTOP-7FLBREN (unknown [124.16.137.194])
- by APP-03 (Coremail) with SMTP id rQCowABHUT_u4ptqIsvvBg--.16071S4;
- Sat, 05 Sep 2026 17:37:52 +0800 (CST)
+ by APP-03 (Coremail) with SMTP id rQCowABHUT_u4ptqIsvvBg--.16071S6;
+ Sat, 05 Sep 2026 17:37:53 +0800 (CST)
 From: wangyang <wangyang25@otcaix.iscas.ac.cn>
 To: qemu-devel@nongnu.org
 Cc: wangyang <wangyang25@otcaix.iscas.ac.cn>,
@@ -30,32 +30,33 @@ Cc: wangyang <wangyang25@otcaix.iscas.ac.cn>,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org
-Subject: [PATCH 2/5] target/riscv: mask RV32 XTheadBb th.srri shift amount
-Date: Sat,  5 Sep 2026 17:37:46 +0800
-Message-ID: <20260905093749.491-3-wangyang25@otcaix.iscas.ac.cn>
+Subject: [PATCH 4/5] target/riscv: prioritize Zicfilp checks for misaligned
+ JALR
+Date: Sat,  5 Sep 2026 17:37:48 +0800
+Message-ID: <20260905093749.491-5-wangyang25@otcaix.iscas.ac.cn>
 X-Mailer: git-send-email 2.55.0.windows.2
 In-Reply-To: <20260905093749.491-1-wangyang25@otcaix.iscas.ac.cn>
 References: <20260905093749.491-1-wangyang25@otcaix.iscas.ac.cn>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: rQCowABHUT_u4ptqIsvvBg--.16071S4
-X-Coremail-Antispam: 1UD129KBjvdXoW7Xw4fGrW8Xr4kur4Uur15Jwb_yoWkCrX_KF
- 18GFn7u395Xr47Ka9Fkr18CF1UCry5KFn0y39xtay3u3sxWF15uFn7WFn5A3WUCwn5Grs3
- AwsrXa429r1Y9jkaLaAFLSUrUUUUjb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
- 9fnUUIcSsGvfJTRUUUb9kFF20E14v26rWj6s0DM7CY07I20VC2zVCF04k26cxKx2IYs7xG
- 6rWj6s0DM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI8067AKxVWUXwA2048vs2IY02
- 0Ec7CjxVAFwI0_Gr0_Xr1l8cAvFVAK0II2c7xJM28CjxkF64kEwVA0rcxSw2x7M28EF7xv
- wVC0I7IYx2IY67AKxVWUJVWUCwA2z4x0Y4vE2Ix0cI8IcVCY1x0267AKxVW8JVWxJwA2z4
- x0Y4vEx4A2jsIE14v26r1j6r4UM28EF7xvwVC2z280aVCY1x0267AKxVW8JVW8Jr1lnxkE
- FVAIw20F6cxK64vIFxWle2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I
- 8CrVC2j2WlYx0E2Ix0cI8IcVAFwI0_JF0_Jw1lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCF
- s4IE7xkEbVWUJVW8JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lc7
- CjxVAaw2AFwI0_Jw0_GFylc2xSY4AK67AK6r4fMxAIw28IcxkI7VAKI48JMxC20s026xCa
- FVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_Jr
- Wlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j
- 6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVW8JVWxJwCI42IY6xAIw20EY4v20xvaj40_Jr
- 0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUv
- cSsGvfC2KfnxnUUI43ZEXa7VUU22NtUUUUU==
+X-CM-TRANSID: rQCowABHUT_u4ptqIsvvBg--.16071S6
+X-Coremail-Antispam: 1UD129KBjvJXoW7tF4UWF17Zr1fWF4DJryDtrb_yoW8XF4fpF
+ 40krWUKrW5tFZ5ZF4IqF4UtF43Xa1fWa10qws2q3Z5tF4Yyry3tF1qkryagF1UCF4kWr12
+ 9FWqy3W5WFWUJ3JanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUmC14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
+ kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
+ z4x0Y4vE2Ix0cI8IcVAFwI0_Jr0_JF4l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr0_Cr
+ 1l84ACjcxK6I8E87Iv67AKxVWUJVW8JwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1U
+ M2vYz4IE04k24VAvwVAKI4IrM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64
+ kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v26r126r1DMcIj6I8E87Iv67AKxVWUJVW8JwAm
+ 72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYx
+ C7MxkF7I0En4kS14v26r1q6r43MxkIecxEwVAFwVW8uwCF04k20xvY0x0EwIxGrwCFx2Iq
+ xVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v26r1j6r18MI8I3I0E7480Y4vE14v26r
+ 106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AK
+ xVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Gr0_Cr1lIxAIcVCF04k26cxKx2IYs7
+ xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_
+ Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUfcTQUUUUU=
 X-Originating-IP: [124.16.137.194]
 X-CM-SenderInfo: 5zdqw5xdqjjk46rwut1l0ox2xfdvhtffof0/
 Received-SPF: pass client-ip=159.226.251.81;
@@ -80,32 +81,41 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The XTheadBb th.srri instruction uses the low log2(XLEN) bits of
-imm6. The generic shift helper rejects values greater than or equal to
-XLEN, which incorrectly rejects imm6 values 32 through 63 on RV32.
-Normalize the operand before calling the helper.
+When Zicfilp tracking is active, a misaligned indirect JALR target also
+violates the landing-pad requirement. Generate the landing-pad
+software-check before the generic instruction-address-misaligned
+exception for tracked targets, while retaining the existing exception
+for untracked targets.
 
-Tested: RV32 imm6 0, 31, 32, and 63 witnesses with XTheadBb
-enabled and disabled.
-Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/4413
+Tested: RV64 M-mode and S-mode Zicfilp controls and misaligned
+targets with c=true and c=false.
+Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/4415
 
 Signed-off-by: wangyang <wangyang25@otcaix.iscas.ac.cn>
 ---
- target/riscv/tcg/insn_trans/trans_xthead.c.inc | 1 +
- 1 file changed, 1 insertion(+)
+ target/riscv/tcg/insn_trans/trans_rvi.c.inc | 9 ++++++++-
+ 1 file changed, 8 insertions(+), 1 deletion(-)
 
-diff --git a/target/riscv/tcg/insn_trans/trans_xthead.c.inc b/target/riscv/tcg/insn_trans/trans_xthead.c.inc
-index 681f70e5bc..34226b1be5 100644
---- a/target/riscv/tcg/insn_trans/trans_xthead.c.inc
-+++ b/target/riscv/tcg/insn_trans/trans_xthead.c.inc
-@@ -141,6 +141,7 @@ GEN_TRANS_TH_ADDSL(3)
- static bool trans_th_srri(DisasContext *ctx, arg_th_srri * a)
- {
-     REQUIRE_XTHEADBB(ctx);
-+    a->shamt &= get_olen(ctx) - 1;
-     return gen_shift_imm_fn_per_ol(ctx, a, EXT_NONE,
-                                    tcg_gen_rotri_tl, gen_roriw, NULL);
- }
+diff --git a/target/riscv/tcg/insn_trans/trans_rvi.c.inc b/target/riscv/tcg/insn_trans/trans_rvi.c.inc
+index cc1b5dbbad..aa79a5ef3c 100644
+--- a/target/riscv/tcg/insn_trans/trans_rvi.c.inc
++++ b/target/riscv/tcg/insn_trans/trans_rvi.c.inc
+@@ -187,7 +187,14 @@ static bool trans_jalr(DisasContext *ctx, arg_jalr *a)
+ 
+     if (misaligned) {
+         gen_set_label(misaligned);
+-        gen_exception_inst_addr_mis(ctx, target_pc);
++        if (ctx->fcfi_enabled &&
++            a->rs1 != xRA && a->rs1 != xT0 && a->rs1 != xT2) {
++            tcg_gen_st8_i32(tcg_constant_i32(RISCV_EXCP_SW_CHECK_FCFI_TVAL),
++                            tcg_env, offsetof(CPURISCVState, sw_check_code));
++            generate_exception(ctx, RISCV_EXCP_SW_CHECK);
++        } else {
++            gen_exception_inst_addr_mis(ctx, target_pc);
++        }
+     }
+     ctx->base.is_jmp = DISAS_NORETURN;
+ 
 -- 
 2.55.0.windows.2
 
