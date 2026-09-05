@@ -4,104 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2D38C624D3
-	for <qemu-riscv@archiver.kernel.org>; Fri,  4 Sep 2026 20:04:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EDDAC624DB
+	for <qemu-riscv@archiver.kernel.org>; Sat,  5 Sep 2026 09:29:09 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x2a7D-0004g5-Kk; Fri, 04 Sep 2026 16:02:23 -0400
+	id 1x2mhY-0003VE-Db; Sat, 05 Sep 2026 05:28:44 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1x2a7B-0004TQ-Ai
- for qemu-riscv@nongnu.org; Fri, 04 Sep 2026 16:02:21 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1x2a78-00008V-7s
- for qemu-riscv@nongnu.org; Fri, 04 Sep 2026 16:02:20 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1788552137;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=t43vVbAqt9a44+uxeyZhjiVCXGpQtyarxq5dgbrLkic=;
- b=MNbroCXXRGRSMGD3O9pKC0fmc6FviVptOzQ0f4sJVdYa+lvzrEtC07Tzulv8lsk6v55aOO
- OqD/BTTzURL0Z6zvSsFRuvjArRAZa4QjSUfuRZNRky/jxnz1W6em7tqJkpZWpRKfT6RZlE
- WckdV4xDyjOBHS08Fdr6ZqJKA8kZaow=
-Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-655-m-GKPx0sO2OwgKOSDNJIIw-1; Fri,
- 04 Sep 2026 16:02:14 -0400
-X-MC-Unique: m-GKPx0sO2OwgKOSDNJIIw-1
-X-Mimecast-MFC-AGG-ID: m-GKPx0sO2OwgKOSDNJIIw_1788552132
-Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 04ADB195399B; Fri,  4 Sep 2026 20:02:12 +0000 (UTC)
-Received: from localhost (headnet05.pony-001.prod.iad2.dc.redhat.com
- [10.2.32.117])
- by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 240001800641; Fri,  4 Sep 2026 20:02:10 +0000 (UTC)
-From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-Date: Fri, 04 Sep 2026 23:58:48 +0400
-Subject: [PATCH v4 65/75] target/riscv: fix incorrect QAPI types and u8 casting
-MIME-Version: 1.0
-Message-Id: <20260904-qom-qapi-v4-65-a985f168e938@redhat.com>
-References: <20260904-qom-qapi-v4-0-a985f168e938@redhat.com>
-In-Reply-To: <20260904-qom-qapi-v4-0-a985f168e938@redhat.com>
+ (Exim 4.90_1) (envelope-from <fritchleybohrer@gmail.com>)
+ id 1x2mhW-0003Ux-R1
+ for qemu-riscv@nongnu.org; Sat, 05 Sep 2026 05:28:42 -0400
+Received: from mail-pj2-x0b.google.com ([2607:f8b0:4864:39::b])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <fritchleybohrer@gmail.com>)
+ id 1x2mhU-0001Bc-Ny
+ for qemu-riscv@nongnu.org; Sat, 05 Sep 2026 05:28:42 -0400
+Received: by mail-pj2-x0b.google.com with SMTP id
+ 98e67ed59e1d1-39569e136f9so1008947a91.0
+ for <qemu-riscv@nongnu.org>; Sat, 05 Sep 2026 02:28:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1788600518; x=1789205318; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=X1nANIyuagdrZRb9Ehhzh9IW135m80P2Hck8xm6ZCRQ=;
+ b=LI7EI3lwwCbE62FxwF8/RDHiAxznD1aRez/JMPZ+cAnZK1+1h8fSoU3Q3wUXX4QfDH
+ WklDWtWtZaIIpGl5MAti2p7CEmhgbAVfeS6K1IQqAuuSXut7NleyHiOAKDkZi+hBPgYl
+ dk2+YpQR9JSzzijWO1rvGiLXQu0qbcfdBHqPrUw4QJvo5av3L71GQhSAvc3EAIqnnVOK
+ l8O4VOS0h2VbT4L8n4Z2PavJPKP5giSr3/mgmQw45TTMZMDkqIlQyOrPzvYyIvzIxwUs
+ wDMUJP9YbhCv1MnpnhsOs9BVOFRHYVP8fbe97P83TTTuz/xj2JG5XB3WcezV1K9+8Fba
+ 1qgA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1788600518; x=1789205318;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=X1nANIyuagdrZRb9Ehhzh9IW135m80P2Hck8xm6ZCRQ=;
+ b=YArrQYdVHj/9qXyhf+w8EueZFjzrz38O84IlAfAkS/tvrF8NaiYY5QDiXDC+xCkbu5
+ QyCUsCz/tRIOLGkiCaQ/8e10fXnljA4DLW47vQNKg0wJhYuIpK+/5EqUGOzqHG+mI2kx
+ L1mLHYjJ2a1zQmRZkLafadfIYLswvbnZNr7AU5ORiODx50rPEe845DQcMbJTDq4EHyvb
+ toEuw4a+apCh9WR8swMQGl036BDTHyDABxfwNZ3Kf+blgvoPWPB/e4+IirT0UKqFTlTk
+ 7GVYIGD9tSGYymwNwvguW7IkoAUryKtnHcmcIZxHhNJ5krGzxms5PYTVGOK5nYEtX0QD
+ PnAA==
+X-Gm-Message-State: AFuF++lPYpi7LUCecXaE+E/m6TYBx//3cbvaGZ7HUQVF54cMYQmS3k5A
+ 2V4kOypXhAKVG1fhzIrWJlXDGlKX9NITPwIeAPfxw3E53TiCu6tS23sy
+X-Gm-Gg: AYBFou1lTWUj5anPKvaKeY2DDOIKvhxPp9v4vsiZbfViT6vCDnuYZFOH9qdzuyVGYTm
+ G4xoX+qeHBufgtUFC/Onmf2euTVJEQDaB/XT5q8GIP+pjSL7Zt+dTc6uYzyfsufUvJ6QdaQ1u35
+ DV5h3BJmltl5/Cq2x1EDR5MaOvC688E0LMY5s7Hepb4uSNR9zLyt7fGLnNq0ryTx5Z1ivFv6gpQ
+ V7Bpr5YWjKI1Bz/6SxONv76Kjq5A6pmXeQ8Rtf3S8yzKECQVfY5lQ1S1cBT1/zr+cQMhmKo0hUH
+ +Q5MoAhkd8KVKEqGaq/CP7QUbjAxAHINa6W0F3M5dgk7OKzBLFc/vzCQDvchTnHZuD7TJWBQibT
+ PumXctfnkjEQaVGly++Cy29Vko3gTEtTQnXfFCV3MRwz4CBwDAELJghrcrK5CHC3NDNoSpB2675
+ 9MOoX+uGu7kh1O81SdIHulg0zK09OjVxyJObdem91yA+Bf32W27K2uCxY/vp7LBB3TziCWzuVR0
+ t8QfPDrciq0gVn+Qd8rszl84Ck=
+X-Received: by 2002:a17:90b:57d0:b0:395:4de0:b78f with SMTP id
+ 98e67ed59e1d1-39b260d28eamr16252166a91.1.1788600518144; 
+ Sat, 05 Sep 2026 02:28:38 -0700 (PDT)
+Received: from Dell-WorkStation.localdomain ([149.118.62.92])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-39b25f8d2c5sm9309502a91.2.2026.09.05.02.28.33
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 05 Sep 2026 02:28:37 -0700 (PDT)
+From: Zephyr Li <fritchleybohrer@gmail.com>
 To: qemu-devel@nongnu.org
-Cc: Markus Armbruster <armbru@redhat.com>, 
- Paolo Bonzini <pbonzini@redhat.com>, 
- =?utf-8?q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
- =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>, 
- Michael Roth <michael.roth@amd.com>, 
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, 
- =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>, 
- Alistair Francis <alistair.francis@wdc.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, 
- Weiwei Li <liwei1518@gmail.com>, 
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1696;
- i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=YoOMy/B5EQPhqWBYY6y+EbIrpX6/2zs8Ep/p5YEq0BI=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBqmyLLP0i09YeYpDmNiYmzFmy/4uyiSUfDgpti3
- ajYpXO9LSeJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCapsiywAKCRDa6OEJdZac
- 5cyuD/9oLJh4GPcQRNVwM8ScGpXhfLuHjw2Ku54eAV1mZpe3B2FSiHZ7BRH5F6Blgu+eOt5EqIk
- ZH6ZNYgwMR5zaJKHvzGv+d8V3beG6eydH4Lqw3MYY9k8AO2jk2b15hkXJBRP4SpI9teU1DnOte8
- YuOcxlVk601+7akhlYniWpy5+pqqBXjPFgNd+NvzktX0jaBZZTRdrPTuCsD2stgCezdQOdfmbsN
- 86J6Ch/U+zcv0he8WhQENo+XwcfJ1FXpU3Bp32Va57AnSbhbGw+iH8iImtWxn3IOifW3DSmV6A9
- l320ENHQX5F12gjXu2s0tAS1WWcxc3l0gPe13x393MLWpmgCUd6AOujg25jeIw8EQc9UwYcgIt9
- 6MI6ZBkZpdUCR5gPFREr11Auvy8pQjfV31ocpOYTFMNwnSHmmDkirveGFuuSYI/zVk+SebK6oQb
- AkGJ2O406NCtKvRiaTg1ZRyFR0fesCzcScIf8wV+7HMkoJNUsvL0bB1tA+mqCyXa0GSbK4ARhQF
- mfZy8xPtGrEtN02WcbPWZVSEHFUJYPYbLCWHuo00uFpb4JkZn3+m/pr8Rlbpr4Efmb87A2AQM5n
- X+pnIXexlUaR+760m5jaj6x0dUZt+eBPR1aSa1bRWfDoe4VlBdl9z0gMyeYz6Qn8yIdeqpIyHbC
- QNCgIR7fGXUAHyA==
-X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
- fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
-X-Mimecast-MFC-PROC-ID: HNzfn-G3BB2PB-ieAvnRzDLJyw4MlYSXjD58pPz8RTY_1788552132
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="utf-8"
+Cc: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Chao Liu <chao.liu@processmission.com>,
+ Zephyr Li <fritchleybohrer@gmail.com>
+Subject: [PATCH] target/riscv: fix RV32 fixed counter accesses
+Date: Sat,  5 Sep 2026 17:28:10 +0800
+Message-ID: <20260905092810.660-1-fritchleybohrer@gmail.com>
+X-Mailer: git-send-email 2.43.0
+MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.129.124;
- envelope-from=marcandre.lureau@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: 12
-X-Spam_score: 1.2
-X-Spam_bar: +
-X-Spam_report: (1.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=0.001, RCVD_IN_SBL_CSS=3.335,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=no autolearn_force=no
+Received-SPF: pass client-ip=2607:f8b0:4864:39::b;
+ envelope-from=fritchleybohrer@gmail.com; helo=mail-pj2-x0b.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -117,54 +103,199 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-"pmu_num" is u8, "pmu_mask" is u32, so is "pmp-granularity"
+Since commit cfc96df65e01, riscv_pmu_ctr_get_fixed_counters_val()
+returns the complete 64-bit fixed-counter value. The RV32 counter
+access paths, however, still perform parts of the offset calculation
+on separately extracted 32-bit halves.
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
+In particular, riscv_pmu_write_ctrh() deposits the low 32 bits of the
+complete fixed-counter value into the high half of mhpmcounter_prev.
+riscv_pmu_read_ctr() also subtracts a 32-bit half of the previous value
+from the complete 64-bit fixed-counter value. Consequently, writes to
+mcycleh can be lost and carries between the low and high halves are not
+handled correctly.
+
+Keep the fixed-counter offset calculation entirely in 64 bits. Before
+a running counter is partially written, materialize its current
+architectural value and reset the fixed-counter baseline. On reads,
+calculate the complete 64-bit counter value before extracting the half
+requested by RV32.
+
+Add an RV32 system TCG test for high-half writes, low-to-high carry, and
+preserving the carried high half across a subsequent low-half write.
+
+Fixes: cfc96df65e01 ("target/riscv: Remove upper_half from riscv_pmu_ctr_get_fixed_counters_val")
+Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/4219
+Signed-off-by: Zephyr Li <fritchleybohrer@gmail.com>
 ---
- target/riscv/cpu.c | 9 +++++----
- 1 file changed, 5 insertions(+), 4 deletions(-)
+ target/riscv/tcg/csr.c                    | 32 ++++++++--------
+ tests/tcg/riscv64/Makefile.softmmu-target | 12 ++++++
+ tests/tcg/riscv64/test-mcycle-rv32.S      | 45 +++++++++++++++++++++++
+ 3 files changed, 74 insertions(+), 15 deletions(-)
+ create mode 100644 tests/tcg/riscv64/test-mcycle-rv32.S
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index a1faea801d1d..0f25f0c8fb5f 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -1688,7 +1688,7 @@ static void prop_pmu_num_get(Object *obj, Visitor *v, const char *name,
- }
+diff --git a/target/riscv/tcg/csr.c b/target/riscv/tcg/csr.c
+index 002f7e69c1..ffdd5c4aa6 100644
+--- a/target/riscv/tcg/csr.c
++++ b/target/riscv/tcg/csr.c
+@@ -1337,23 +1337,23 @@ static RISCVException riscv_pmu_write_ctr(CPURISCVState *env, target_ulong val,
+     int deposit_size = rv32 ? 32 : 64;
+     uint64_t ctr;
  
- static const PropertyInfo prop_pmu_num = {
--    .type = "int8",
-+    .type = "uint8",
-     .description = "pmu-num",
-     .get = prop_pmu_num_get,
-     .set = prop_pmu_num_set,
-@@ -1724,13 +1724,13 @@ static void prop_pmu_mask_set(Object *obj, Visitor *v, const char *name,
- static void prop_pmu_mask_get(Object *obj, Visitor *v, const char *name,
-                              void *opaque, Error **errp)
+-    counter->mhpmcounter_val = deposit64(counter->mhpmcounter_val,
+-                                         0, deposit_size, val);
+-
+     if (!get_field(env->mcountinhibit, BIT(ctr_idx)) &&
+         (riscv_pmu_ctr_monitor_cycles(env, ctr_idx) ||
+          riscv_pmu_ctr_monitor_instructions(env, ctr_idx))) {
+         ctr = riscv_pmu_ctr_get_fixed_counters_val(env, ctr_idx);
+-        counter->mhpmcounter_prev = deposit64(counter->mhpmcounter_prev,
+-                                              0, deposit_size, ctr);
++        counter->mhpmcounter_val += ctr - counter->mhpmcounter_prev;
++        counter->mhpmcounter_val = deposit64(counter->mhpmcounter_val,
++                                             0, deposit_size, val);
++        counter->mhpmcounter_prev = ctr;
+         if (ctr_idx > 2) {
+             riscv_pmu_setup_timer(env, counter->mhpmcounter_val, ctr_idx);
+         }
+      } else {
++        counter->mhpmcounter_val = deposit64(counter->mhpmcounter_val,
++                                             0, deposit_size, val);
+         /* Other counters can keep incrementing from the given value */
+         counter->mhpmcounter_prev = deposit64(counter->mhpmcounter_prev,
+                                               0, deposit_size, val);
+-
+     }
+ 
+     return RISCV_EXCP_NONE;
+@@ -1363,20 +1363,22 @@ static RISCVException riscv_pmu_write_ctrh(CPURISCVState *env, target_ulong val,
+                                           uint32_t ctr_idx)
  {
--    uint8_t pmu_mask = RISCV_CPU(obj)->cfg.pmu_mask;
-+    uint32_t pmu_mask = RISCV_CPU(obj)->cfg.pmu_mask;
+     PMUCTRState *counter = &env->pmu_ctrs[ctr_idx];
+-    uint64_t ctrh;
++    uint64_t ctr;
  
--    visit_type_uint8(v, name, &pmu_mask, errp);
-+    visit_type_uint32(v, name, &pmu_mask, errp);
- }
+-    counter->mhpmcounter_val = deposit64(counter->mhpmcounter_val,
+-                                         32, 32, val);
+     if (!get_field(env->mcountinhibit, BIT(ctr_idx)) &&
+         (riscv_pmu_ctr_monitor_cycles(env, ctr_idx) ||
+          riscv_pmu_ctr_monitor_instructions(env, ctr_idx))) {
+-        ctrh = riscv_pmu_ctr_get_fixed_counters_val(env, ctr_idx);
+-        counter->mhpmcounter_prev = deposit64(counter->mhpmcounter_prev,
+-                                              32, 32, ctrh);
++        ctr = riscv_pmu_ctr_get_fixed_counters_val(env, ctr_idx);
++        counter->mhpmcounter_val += ctr - counter->mhpmcounter_prev;
++        counter->mhpmcounter_val = deposit64(counter->mhpmcounter_val,
++                                             32, 32, val);
++        counter->mhpmcounter_prev = ctr;
+         if (ctr_idx > 2) {
+             riscv_pmu_setup_timer(env, counter->mhpmcounter_val, ctr_idx);
+         }
+     } else {
++        counter->mhpmcounter_val = deposit64(counter->mhpmcounter_val,
++                                             32, 32, val);
+         counter->mhpmcounter_prev = deposit64(counter->mhpmcounter_prev,
+                                               32, 32, val);
+     }
+@@ -1407,12 +1409,11 @@ RISCVException riscv_pmu_read_ctr(CPURISCVState *env, target_ulong *val,
+     bool rv32 = riscv_cpu_mxl(env) == MXL_RV32;
+     int start = upper_half ? 32 : 0;
+     int length = rv32 ? 32 : 64;
+-    uint64_t ctr_prev, ctr_val;
++    uint64_t ctr_val;
  
- static const PropertyInfo prop_pmu_mask = {
--    .type = "int8",
-+    .type = "uint32",
-     .description = "pmu-mask",
-     .get = prop_pmu_mask_get,
-     .set = prop_pmu_mask_set,
-@@ -1873,6 +1873,7 @@ static void prop_pmp_granularity_get(Object *obj, Visitor *v, const char *name,
- }
+     /* Ensure upper_half is only set for XLEN == 32 */
+     g_assert(rv32 || !upper_half);
  
- static const PropertyInfo prop_pmp_granularity = {
-+    .type = "uint32",
-     .description = "pmp-granularity",
-     .get = prop_pmp_granularity_get,
-     .set = prop_pmp_granularity_set,
-
+-    ctr_prev = extract64(counter->mhpmcounter_prev, start, length);
+     ctr_val  = extract64(counter->mhpmcounter_val, start, length);
+ 
+     if (get_field(env->mcountinhibit, BIT(ctr_idx))) {
+@@ -1431,7 +1432,8 @@ RISCVException riscv_pmu_read_ctr(CPURISCVState *env, target_ulong *val,
+     if (riscv_pmu_ctr_monitor_cycles(env, ctr_idx) ||
+         riscv_pmu_ctr_monitor_instructions(env, ctr_idx)) {
+         uint64_t cntr = riscv_pmu_ctr_get_fixed_counters_val(env, ctr_idx) -
+-                                                             ctr_prev + ctr_val;
++                        counter->mhpmcounter_prev +
++                        counter->mhpmcounter_val;
+         *val = extract64(cntr, start, length);
+     } else {
+         *val = ctr_val;
+diff --git a/tests/tcg/riscv64/Makefile.softmmu-target b/tests/tcg/riscv64/Makefile.softmmu-target
+index 6a219c306c..15c7371acd 100644
+--- a/tests/tcg/riscv64/Makefile.softmmu-target
++++ b/tests/tcg/riscv64/Makefile.softmmu-target
+@@ -28,6 +28,18 @@ EXTRA_RUNS += run-test-minstret-ecall
+ run-test-minstret-ecall: test-minstret-ecall
+ 	$(call run-test, $<, $(QEMU) -icount shift=1 $(QEMU_OPTS)$<)
+ 
++RV32_CFLAGS = -march=rv32im_zicsr -mabi=ilp32
++CLEANFILES += test-mcycle-rv32
++
++test-mcycle-rv32: test-mcycle-rv32.S $(LINK_SCRIPT)
++	$(CC) $(CFLAGS) $(RV32_CFLAGS) $< -Wa,--noexecstack -c -o $@.o
++	$(LD) -m elf32lriscv $(LDFLAGS) $@.o -o $@
++
++EXTRA_RUNS += run-test-mcycle-rv32
++run-test-mcycle-rv32: test-mcycle-rv32
++	$(call run-test, $<, \
++	  $(QEMU) -cpu rv32 -icount shift=1 $(QEMU_OPTS)$<)
++
+ EXTRA_RUNS += run-plugin-doubletrap
+ run-plugin-doubletrap: doubletrap
+ 	$(call run-test, $<, \
+diff --git a/tests/tcg/riscv64/test-mcycle-rv32.S b/tests/tcg/riscv64/test-mcycle-rv32.S
+new file mode 100644
+index 0000000000..189d1e13a2
+--- /dev/null
++++ b/tests/tcg/riscv64/test-mcycle-rv32.S
+@@ -0,0 +1,45 @@
++/* SPDX-License-Identifier: GPL-2.0-or-later */
++
++	.option	norvc
++
++	.text
++	.global	_start
++_start:
++	/* Exercise writes while mcycle is running. */
++	csrw	mcountinhibit, zero
++	csrw	mcycle, zero
++
++	/* A write to the high half must be immediately observable. */
++	li	s0, 0x1234ffff
++	csrw	mcycleh, s0
++	csrr	t0, mcycleh
++	bne	t0, s0, fail
++
++	/* Check carry from the low half into the high half. */
++	li	s0, 0x12345678
++	csrw	mcycleh, s0
++	li	t0, 0xfffffff0
++	csrw	mcycle, t0
++	.rept	32
++	nop
++	.endr
++	csrr	t0, mcycleh
++	addi	s0, s0, 1
++	bne	t0, s0, fail
++
++	/* A low-half write must preserve the carried high half. */
++	li	t0, 0x22222222
++	csrw	mcycle, t0
++	csrr	t0, mcycleh
++	bne	t0, s0, fail
++
++	li	t0, 0x100000
++	li	t1, 0x5555	/* FINISHER_PASS */
++	sw	t1, 0(t0)
++	j	.
++
++fail:
++	li	t0, 0x100000
++	li	t1, 0x13333	/* status = FINISHER_FAIL, code = 1 */
++	sw	t1, 0(t0)
++	j	.
 -- 
-2.55.0.543.g5ebe2ebe4ea8
+2.43.0
 
 
