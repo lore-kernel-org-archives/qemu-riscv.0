@@ -4,39 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3CFEC79F8C
-	for <qemu-riscv@archiver.kernel.org>; Sun,  6 Sep 2026 16:40:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5EFDC79F9F
+	for <qemu-riscv@archiver.kernel.org>; Sun,  6 Sep 2026 16:40:41 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x3FsX-0002tp-W6; Sun, 06 Sep 2026 12:38:02 -0400
+	id 1x3FsX-0002tR-OI; Sun, 06 Sep 2026 12:38:01 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <lyndra@linux.alibaba.com>)
- id 1x3FsW-0002rk-5K; Sun, 06 Sep 2026 12:38:00 -0400
-Received: from [115.124.30.110] (helo=out30-110.freemail.mail.aliyun.com)
+ id 1x3FsV-0002r9-E9; Sun, 06 Sep 2026 12:37:59 -0400
+Received: from [115.124.30.130] (helo=out30-130.freemail.mail.aliyun.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <lyndra@linux.alibaba.com>)
- id 1x3FsQ-00034r-1T; Sun, 06 Sep 2026 12:37:59 -0400
+ id 1x3FsO-00033U-DL; Sun, 06 Sep 2026 12:37:59 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linux.alibaba.com; s=default;
- t=1788712661; h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To;
- bh=viOOe7smLkpWORSnnyjZ7fkNNcWDtL6fhqM5XkykUVY=;
- b=iWT5ke6zr0qxKa9MuZX8WBjcuTl4Ec/ebltXWepFRbzXeJs2VcQsZMo7Kr3OuKx44GWDULzl77TQT0V4IqG2mP4UHGnFD1b2qS75HEGJ7rCZvN5VEFDkre0Iw5Wb/e0LL5z6CDB8GRsjPX/gMfVDsXkGvO2wTP4nUAHxTImofwM=
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R121e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033045098064;
+ t=1788712653; h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To;
+ bh=8kmJ+U2czJtSLYkhnnST/lEwFU0nr+9dKHTdViNoHZI=;
+ b=GakJzGGADDqv9ceDZgaS35BxHVeZcKFAkxWtshCsxH9bEGvpeeg+ms38ldVv2/xgewrmHQEwUOUXk+lMI+M5TKEuCThRBydSQq55XpphiC2nsAitUsVgcRFO+2Jtf5VhQCgYKSMmMJFgJ4C5WE7KD0evEXbIMCHHQ1GJkooqObs=
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R491e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033037026112;
  MF=lyndra@linux.alibaba.com; NM=1; PH=DS; RN=13; SR=0;
- TI=SMTPD_---0XANKIKw_1788712659; 
+ TI=SMTPD_---0XANKIIZ_1788712652; 
 Received: from ea134-sw06.eng.xrvm.cn(mailfrom:lyndra@linux.alibaba.com
- fp:SMTPD_---0XANKIKw_1788712659 cluster:ay36) by smtp.aliyun-inc.com;
- Mon, 07 Sep 2026 00:37:39 +0800
+ fp:SMTPD_---0XANKIIZ_1788712652 cluster:ay36) by smtp.aliyun-inc.com;
+ Mon, 07 Sep 2026 00:37:32 +0800
 From: TANG Tiancheng <lyndra@linux.alibaba.com>
-Date: Mon, 07 Sep 2026 00:37:30 +0800
-Subject: [PATCH 14/14] target/riscv: Preserve fixed PMU state across reset
+Date: Mon, 07 Sep 2026 00:37:20 +0800
+Subject: [PATCH 04/14] target/riscv: Preserve MINH on delegated config
+ reads
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260907-riscv-pmu-correctness-v1-14-5f1f41458989@linux.alibaba.com>
+Message-Id: <20260907-riscv-pmu-correctness-v1-4-5f1f41458989@linux.alibaba.com>
 References: <20260907-riscv-pmu-correctness-v1-0-5f1f41458989@linux.alibaba.com>
 In-Reply-To: <20260907-riscv-pmu-correctness-v1-0-5f1f41458989@linux.alibaba.com>
 To: qemu-devel@nongnu.org
@@ -52,17 +53,17 @@ Cc: Zephyr Li <fritchleybohrer@gmail.com>,
  =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>, 
  TANG Tiancheng <lyndra@linux.alibaba.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1788712649; l=7074;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1788712649; l=8019;
  i=lyndra@linux.alibaba.com; s=20250909; h=from:subject:message-id;
- bh=2enD98ZE6bl3nA0tsxaYMcS19QEg1Xx+ZgF2vOA5LYM=;
- b=R073xL1WvFir862XvJDQhJiTfXD07OyvVjhsl3n3xmUd63ApkQRcVFIX8EVV0y2oscdO9gOoT
- W4H0LKmiPbcBxZd9iQGnfTDP/g2BSrsG+VlOehCrFOGvGe7qp4SaKgc
+ bh=9hnSioaihNxUR8jDthpZPvWFAvgJ4fXsLSawsn9mE8o=;
+ b=FhPPdZndAzamOAHtsZH6gQyw0VSIS4xdgomJkwrz7FOQxxba6xIuRkOngM743YYLFjjG+uVdk
+ DOYZH+da7HXBFbRePSVtlNFHHk0RNYRuXDPQNlq4Jotp+7ZHrVK0wdI
 X-Developer-Key: i=lyndra@linux.alibaba.com; a=ed25519;
  pk=GQh4uOSLVucXGkaZfEuQ956CrYS14cn1TA3N8AiIjBw=
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.110 (deferred)
-Received-SPF: pass client-ip=115.124.30.110;
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.130 (deferred)
+Received-SPF: pass client-ip=115.124.30.130;
  envelope-from=lyndra@linux.alibaba.com;
- helo=out30-110.freemail.mail.aliyun.com
+ helo=out30-130.freemail.mail.aliyun.com
 X-Spam_score_int: -166
 X-Spam_score: -16.7
 X-Spam_bar: ----------------
@@ -86,216 +87,248 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Privilege filtering records cycle/instruction increments per mode. Reset
-overwrites privilege/V without adding the final interval to the old
-mode's total, so a counter filtering for that mode loses those counts.
+Smcdeleg requires MINH to read as zero through sireg*. The RV64 callback
+masks it by modifying the machine register; the RV32 high-half callback
+does not mask it.
 
-Account for the old mode before entering M-mode with V=0 and rebuild the
-overflow timer after reset. On initial reset, only initialize baselines:
-no guest code has run, so pre-execution QEMU time must not count.
-Preserve architectural counter and selector state, as before.
+Return a masked copy without changing mcyclecfg or minstretcfg. Test both
+configuration registers on RV32 and RV64.
 
-Test that a VS-only cycle counter retains its counts across reset.
-
+Fixes: d9fa41e10156 ("target/riscv: Bugfix make bit 62 read-only 0 for sireg* cfg CSR read")
 Signed-off-by: TANG Tiancheng <lyndra@linux.alibaba.com>
 ---
- target/riscv/cpu.c                        |  16 +++++
- target/riscv/tcg/pmu.c                    |  11 ++++
- target/riscv/tcg/pmu.h                    |   1 +
- tests/tcg/riscv64/Makefile.softmmu-target |   6 ++
- tests/tcg/riscv64/pmu-reset-vs.S          | 102 ++++++++++++++++++++++++++++++
- 5 files changed, 136 insertions(+)
+ target/riscv/tcg/csr.c                    |  8 ++--
+ tests/tcg/riscv32/Makefile.softmmu-target | 22 ++++++++++
+ tests/tcg/riscv32/smcdeleg-minh-rv32.S    | 70 +++++++++++++++++++++++++++++++
+ tests/tcg/riscv64/Makefile.softmmu-target |  4 ++
+ tests/tcg/riscv64/smcdeleg-minh.S         | 70 +++++++++++++++++++++++++++++++
+ 5 files changed, 170 insertions(+), 4 deletions(-)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index b7ce3ebd45d8467464654a8b8560e88deeea4ff9..4355f72cdfda41ab4e9678a066821c0f410fe17c 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -42,6 +42,9 @@
- #include "disas/capstone.h"
- #if !defined(CONFIG_USER_ONLY)
- #include "target/riscv/tcg/debug.h"
-+#ifdef CONFIG_TCG
-+#include "target/riscv/tcg/pmu.h"
-+#endif
- #endif
- 
- /* RISC-V CPU definitions */
-@@ -979,6 +982,16 @@ static void riscv_cpu_reset_hold(Object *obj, ResetType type)
-     }
- #ifndef CONFIG_USER_ONLY
-     env->misa_mxl = mcc->def->misa_mxl_max;
-+#ifdef CONFIG_TCG
-+    /* The initial reset has no guest execution to count. */
-+    if (tcg_enabled()) {
-+        if (qdev_is_realized(DEVICE(cpu))) {
-+            riscv_pmu_update_fixed_ctrs(env, PRV_M, false);
-+        } else {
-+            riscv_pmu_init_fixed_counter_baselines(env);
-+        }
-+    }
-+#endif
-     env->priv = PRV_M;
-     env->virt_enabled = false;
-     env->mstatus &= ~(MSTATUS_MIE | MSTATUS_MPRV);
-@@ -1092,6 +1105,9 @@ static void riscv_cpu_reset_hold(Object *obj, ResetType type)
- 
- #ifndef CONFIG_USER_ONLY
- #ifdef CONFIG_TCG
-+    if (tcg_enabled()) {
-+        riscv_pmu_rebuild_timer(env);
-+    }
-     if (cpu->cfg.debug || cpu->cfg.ext_sdtrig) {
-         riscv_trigger_reset_hold(env);
-     }
-diff --git a/target/riscv/tcg/pmu.c b/target/riscv/tcg/pmu.c
-index df99b572a4c16cb1ac65c2f7cde35c6f8349e681..1d692a0a8e3f7759e033214d579103627d070b5b 100644
---- a/target/riscv/tcg/pmu.c
-+++ b/target/riscv/tcg/pmu.c
-@@ -171,6 +171,17 @@ void riscv_pmu_update_fixed_ctrs(CPURISCVState *env,
-     riscv_pmu_update_fixed_ctrs_snapshot(env, newpriv, new_virt, &snapshot);
- }
- 
-+void riscv_pmu_init_fixed_counter_baselines(CPURISCVState *env)
-+{
-+    RISCVPMUFixedSnapshot snapshot;
-+
-+    riscv_pmu_take_fixed_snapshot(env, &snapshot);
-+    env->pmu_fixed_ctrs[RISCV_PMU_FIXED_DOMAIN_CYCLE]
-+        .counter_prev[PRV_M] = snapshot.cycle;
-+    env->pmu_fixed_ctrs[RISCV_PMU_FIXED_DOMAIN_INSTRET]
-+        .counter_prev[PRV_M] = snapshot.instret;
-+}
-+
- uint64_t
- riscv_pmu_ctr_get_fixed_value(CPURISCVState *env, uint32_t ctr_idx,
-                               const RISCVPMUFixedSnapshot *snapshot)
-diff --git a/target/riscv/tcg/pmu.h b/target/riscv/tcg/pmu.h
-index 1cfe6acf55b5468f5c00c4a136ece88981384341..fac84dbb1a8a6c637f7241ca27910e5e212223e9 100644
---- a/target/riscv/tcg/pmu.h
-+++ b/target/riscv/tcg/pmu.h
-@@ -53,6 +53,7 @@ int riscv_pmu_incr_ctr(RISCVCPU *cpu, enum riscv_pmu_event_idx event_idx);
- void riscv_pmu_generate_fdt_node(void *fdt, uint32_t cmask, char *pmu_name);
- void riscv_pmu_update_fixed_ctrs(CPURISCVState *env, privilege_mode_t newpriv,
-                                  bool new_virt);
-+void riscv_pmu_init_fixed_counter_baselines(CPURISCVState *env);
- void riscv_pmu_decr_instret(CPURISCVState *env);
- RISCVException riscv_pmu_read_ctr(CPURISCVState *env, target_ulong *val,
-                                   bool upper_half, uint32_t ctr_idx,
-diff --git a/tests/tcg/riscv64/Makefile.softmmu-target b/tests/tcg/riscv64/Makefile.softmmu-target
-index deb44ece5feeb13756f9f3abcd38258d75bd9ba1..ef7641b16deb449e3a84e429dfca998dbd63a54e 100644
---- a/tests/tcg/riscv64/Makefile.softmmu-target
-+++ b/tests/tcg/riscv64/Makefile.softmmu-target
-@@ -95,6 +95,12 @@ TESTS += pmu-cycle-controls
- run-pmu-cycle-controls: pmu-cycle-controls
- 	$(call run-test, $<, $(QEMU) -cpu max -icount shift=0 $(QEMU_OPTS)$<)
- 
-+TESTS += pmu-reset-vs
-+run-pmu-reset-vs: pmu-reset-vs
-+	$(call run-test, $<, $(QEMU) -M virt -bios none -kernel $< \
-+		-display none -semihosting -cpu max$(COMMA)smcntrpmf=true \
-+		-icount shift=0)
-+
- EXTRA_RUNS += run-plugin-doubletrap
- run-plugin-doubletrap: doubletrap
- 	$(call run-test, $<, \
-diff --git a/tests/tcg/riscv64/pmu-reset-vs.S b/tests/tcg/riscv64/pmu-reset-vs.S
+diff --git a/target/riscv/tcg/csr.c b/target/riscv/tcg/csr.c
+index 60caee32dc0cf5b6a8492e0cf8ff15f71acc2087..57030724f85a897e21e5082b9857411b50f932ac 100644
+--- a/target/riscv/tcg/csr.c
++++ b/target/riscv/tcg/csr.c
+@@ -1607,7 +1607,7 @@ static int rmw_cd_ctr_cfg(CPURISCVState *env, int cfg_index, target_ulong *val,
+             wr_mask &= ~MCYCLECFG_BIT_MINH;
+             env->mcyclecfg = (new_val & wr_mask) | (env->mcyclecfg & ~wr_mask);
+         } else {
+-            *val = env->mcyclecfg &= ~MHPMEVENT_BIT_MINH;
++            *val = env->mcyclecfg & ~MCYCLECFG_BIT_MINH;
+         }
+         break;
+     case 2:             /* INSTRETCFG */
+@@ -1616,7 +1616,7 @@ static int rmw_cd_ctr_cfg(CPURISCVState *env, int cfg_index, target_ulong *val,
+             env->minstretcfg = (new_val & wr_mask) |
+                                (env->minstretcfg & ~wr_mask);
+         } else {
+-            *val = env->minstretcfg &= ~MHPMEVENT_BIT_MINH;
++            *val = env->minstretcfg & ~MINSTRETCFG_BIT_MINH;
+         }
+         break;
+     default:
+@@ -1642,7 +1642,7 @@ static int rmw_cd_ctr_cfgh(CPURISCVState *env, int cfg_index, target_ulong *val,
+             cfgh = (new_val & wr_mask) | (cfgh & ~wr_mask);
+             env->mcyclecfg = deposit64(env->mcyclecfg, 32, 32, cfgh);
+         } else {
+-            *val = cfgh;
++            *val = cfgh & ~MCYCLECFGH_BIT_MINH;
+         }
+         break;
+     case 2:          /* INSTRETCFGH */
+@@ -1652,7 +1652,7 @@ static int rmw_cd_ctr_cfgh(CPURISCVState *env, int cfg_index, target_ulong *val,
+             cfgh = (new_val & wr_mask) | (cfgh & ~wr_mask);
+             env->minstretcfg = deposit64(env->minstretcfg, 32, 32, cfgh);
+         } else {
+-            *val = cfgh;
++            *val = cfgh & ~MINSTRETCFGH_BIT_MINH;
+         }
+         break;
+     default:
+diff --git a/tests/tcg/riscv32/Makefile.softmmu-target b/tests/tcg/riscv32/Makefile.softmmu-target
 new file mode 100644
-index 0000000000000000000000000000000000000000..856ca003fa1115fdba5e789128aa1d6fd0f950b6
+index 0000000000000000000000000000000000000000..67d334974577e14ff36e7c51067ebcab4c1349bd
 --- /dev/null
-+++ b/tests/tcg/riscv64/pmu-reset-vs.S
-@@ -0,0 +1,102 @@
++++ b/tests/tcg/riscv32/Makefile.softmmu-target
+@@ -0,0 +1,22 @@
++# SPDX-License-Identifier: GPL-2.0-or-later
++#
++# RISC-V 32-bit system tests
++#
++
++TEST_SRC = $(SRC_PATH)/tests/tcg/riscv32
++VPATH += $(TEST_SRC)
++
++LINK_SCRIPT = $(SRC_PATH)/tests/tcg/riscv64/semihost.ld
++LDFLAGS = -m elf32lriscv -T $(LINK_SCRIPT)
++CFLAGS += -g -Og $(EXTRA_CFLAGS) -march=rv32im_zicsr -mabi=ilp32
++
++%.o: %.S
++	$(CC) $(CFLAGS) $< -Wa,--noexecstack -c -o $@
++%: %.o $(LINK_SCRIPT)
++	$(LD) $(LDFLAGS) $< -o $@
++
++QEMU_OPTS += -M virt -display none -semihosting -device loader,file=
++
++TESTS += smcdeleg-minh-rv32
++run-smcdeleg-minh-rv32: smcdeleg-minh-rv32
++	$(call run-test, $<, $(QEMU) -cpu max $(QEMU_OPTS)$<)
+diff --git a/tests/tcg/riscv32/smcdeleg-minh-rv32.S b/tests/tcg/riscv32/smcdeleg-minh-rv32.S
+new file mode 100644
+index 0000000000000000000000000000000000000000..2e8ee394f5f8a4e01b1c9efc815d21af18de4b3c
+--- /dev/null
++++ b/tests/tcg/riscv32/smcdeleg-minh-rv32.S
+@@ -0,0 +1,70 @@
 +/* SPDX-License-Identifier: GPL-2.0-or-later */
 +
 +	.option	norvc
 +	.option	norelax
 +
-+	.equ	MSTATUS_MPP_S,  (1 << 11)
-+	.equ	MSTATUS_MPP,    (3 << 11)
-+	.equ	MSTATUS_SPP,    (1 << 8)
-+	.equ	HSTATUS_SPV,    (1 << 7)
-+	.equ	SIFIVE_TEST,    0x100000
-+	.equ	MTIMECMP,       0x2004000
-+	.equ	FINISHER_RESET, 0x7777
++	.text
++	.global _start
++_start:
++	/*
++	 * Failure bits:
++	 * 0: delegated cyclecfgh exposes MINH
++	 * 1: reading delegated cyclecfgh clears mcyclecfgh.MINH
++	 * 2: delegated instretcfgh exposes MINH
++	 * 3: reading delegated instretcfgh clears minstretcfgh.MINH
++	 */
++	li	t4, 0
++	li	t0, 1
++	slli	t0, t0, 30		/* MINH in the high half */
++	csrw	0x721, t0		/* mcyclecfgh */
++	csrw	0x722, t0		/* minstretcfgh */
++	li	t1, 1
++	slli	t1, t1, 28		/* menvcfgh.CDE */
++	csrw	0x31a, t1
++	li	t1, 5			/* delegate cycle and instret */
++	csrw	mcounteren, t1
++
++	li	t1, 0x40
++	csrw	0x150, t1		/* siselect: cycle */
++	csrr	t1, 0x156		/* sireg5: cyclecfgh */
++	and	t1, t1, t0
++	sltu	t1, zero, t1
++	or	t4, t4, t1
++	csrr	t1, 0x721
++	and	t1, t1, t0
++	sltu	t1, zero, t1
++	xori	t1, t1, 1
++	slli	t1, t1, 1
++	or	t4, t4, t1
++
++	li	t1, 0x42
++	csrw	0x150, t1		/* siselect: instret */
++	csrr	t1, 0x156		/* sireg5: instretcfgh */
++	and	t1, t1, t0
++	sltu	t1, zero, t1
++	slli	t1, t1, 2
++	or	t4, t4, t1
++	csrr	t1, 0x722
++	and	t1, t1, t0
++	sltu	t1, zero, t1
++	xori	t1, t1, 1
++	slli	t1, t1, 3
++	or	t4, t4, t1
++
++	la	a1, semiargs
++	li	t0, 0x20026	/* ADP_Stopped_ApplicationExit */
++	sw	t0, 0(a1)
++	sw	t4, 4(a1)
++	li	a0, 0x20	/* TARGET_SYS_EXIT_EXTENDED */
++
++	/* Semihosting call sequence. */
++	.balign	16
++	slli	zero, zero, 0x1f
++	ebreak
++	srai	zero, zero, 0x7
++	j	.
++
++	.data
++	.balign	16
++semiargs:
++	.space	8
+diff --git a/tests/tcg/riscv64/Makefile.softmmu-target b/tests/tcg/riscv64/Makefile.softmmu-target
+index 677244e8b187435b09fc6b7616e269992543587c..af6bc1aad8893726a3b26392da89f34319dd78a8 100644
+--- a/tests/tcg/riscv64/Makefile.softmmu-target
++++ b/tests/tcg/riscv64/Makefile.softmmu-target
+@@ -48,6 +48,10 @@ TESTS += sscofpmf-cycle-overflow
+ run-sscofpmf-cycle-overflow: sscofpmf-cycle-overflow
+ 	$(call run-test, $<, $(QEMU) -cpu max -icount shift=3 $(QEMU_OPTS)$<)
+ 
++TESTS += smcdeleg-minh
++run-smcdeleg-minh: smcdeleg-minh
++	$(call run-test, $<, $(QEMU) -cpu max $(QEMU_OPTS)$<)
++
+ EXTRA_RUNS += run-plugin-doubletrap
+ run-plugin-doubletrap: doubletrap
+ 	$(call run-test, $<, \
+diff --git a/tests/tcg/riscv64/smcdeleg-minh.S b/tests/tcg/riscv64/smcdeleg-minh.S
+new file mode 100644
+index 0000000000000000000000000000000000000000..41cbb580475b5dcd079d4542631dfe2474536d60
+--- /dev/null
++++ b/tests/tcg/riscv64/smcdeleg-minh.S
+@@ -0,0 +1,70 @@
++/* SPDX-License-Identifier: GPL-2.0-or-later */
++
++	.option	norvc
++	.option	norelax
 +
 +	.text
 +	.global _start
 +_start:
-+	/* MTIMECMP retains the marker and saved count across the RAM reload. */
-+	li	t0, MTIMECMP
-+	ld	t1, 0(t0)
-+	srli	t2, t1, 48
-+	li	t3, 0xa5a5
-+	beq	t2, t3, after_reset
-+
-+	/* Count VS only, then remember the value before entering VS-mode. */
-+	li	t0, 0x1d		/* MINH | SINH | UINH | VUINH */
-+	slli	t0, t0, 58
++	/*
++	 * Failure bits:
++	 * 0: delegated cyclecfg exposes MINH
++	 * 1: reading delegated cyclecfg clears mcyclecfg.MINH
++	 * 2: delegated instretcfg exposes MINH
++	 * 3: reading delegated instretcfg clears minstretcfg.MINH
++	 */
++	li	t4, 0
++	li	t0, 1
++	slli	t0, t0, 62		/* MINH */
 +	csrw	0x321, t0		/* mcyclecfg */
-+	csrr	t1, mcycle
-+	slli	t1, t1, 16
-+	srli	t1, t1, 16
-+	li	t2, 0xa5a5
-+	slli	t2, t2, 48
-+	or	t1, t1, t2
-+	li	t0, MTIMECMP
-+	sd	t1, 0(t0)
-+	li	t0, -1
-+	csrw	pmpaddr0, t0
-+	li	t0, 0x1f		/* RWX, NAPOT */
-+	csrw	pmpcfg0, t0
++	csrw	0x322, t0		/* minstretcfg */
++	li	t1, 1
++	slli	t1, t1, 60		/* menvcfg.CDE */
++	csrw	0x30a, t1
++	li	t1, 5			/* delegate cycle and instret */
++	csrw	mcounteren, t1
 +
-+	/* Enter HS-mode first. */
-+	csrr	t0, mstatus
-+	li	t1, MSTATUS_MPP
-+	not	t1, t1
-+	and	t0, t0, t1
-+	li	t1, MSTATUS_MPP_S
-+	or	t0, t0, t1
-+	csrw	mstatus, t0
-+	lla	t0, hs_enter
-+	csrw	mepc, t0
-+	mret
++	li	t1, 0x40
++	csrw	0x150, t1		/* siselect: cycle */
++	csrr	t1, 0x152		/* sireg2: cyclecfg */
++	and	t1, t1, t0
++	sltu	t1, zero, t1
++	or	t4, t4, t1
++	csrr	t1, 0x321		/* mcyclecfg: MINH remains set */
++	and	t1, t1, t0
++	sltu	t1, zero, t1
++	xori	t1, t1, 1
++	slli	t1, t1, 1
++	or	t4, t4, t1
 +
-+hs_enter:
-+	li	t0, HSTATUS_SPV
-+	csrs	hstatus, t0
-+	li	t0, MSTATUS_SPP
-+	csrs	sstatus, t0
-+	lla	t0, vs_reset
-+	csrw	sepc, t0
-+	sret
++	li	t1, 0x42
++	csrw	0x150, t1		/* siselect: instret */
++	csrr	t1, 0x152		/* sireg2: instretcfg */
++	and	t1, t1, t0
++	sltu	t1, zero, t1
++	slli	t1, t1, 2
++	or	t4, t4, t1
++	csrr	t1, 0x322		/* minstretcfg: MINH remains set */
++	and	t1, t1, t0
++	sltu	t1, zero, t1
++	xori	t1, t1, 1
++	slli	t1, t1, 3
++	or	t4, t4, t1
 +
-+vs_reset:
-+	/* These VS-mode cycles must remain in mcycle after reset. */
-+	li	t0, 128
-+1:
-+	addi	t0, t0, -1
-+	bnez	t0, 1b
-+
-+	li	t0, SIFIVE_TEST
-+	li	t1, FINISHER_RESET
-+	sw	t1, 0(t0)
-+	j	.
-+
-+after_reset:
-+	csrr	t0, mcycle
-+	slli	t1, t1, 16		/* Clear the MTIMECMP marker. */
-+	srli	t1, t1, 16
-+	addi	t1, t1, 128
-+	bgeu	t1, t0, fail
-+	li	t3, 0
-+	j	exit
-+
-+fail:
-+	li	t3, 1
-+
-+exit:
 +	lla	a1, semiargs
-+	li	t0, 0x20026		/* ADP_Stopped_ApplicationExit */
++	li	t0, 0x20026	/* ADP_Stopped_ApplicationExit */
 +	sd	t0, 0(a1)
-+	sd	t3, 8(a1)
-+	li	a0, 0x20		/* TARGET_SYS_EXIT_EXTENDED */
++	sd	t4, 8(a1)
++	li	a0, 0x20	/* TARGET_SYS_EXIT_EXTENDED */
 +
++	/* Semihosting call sequence. */
 +	.balign	16
 +	slli	zero, zero, 0x1f
 +	ebreak
