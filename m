@@ -4,67 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1568AC624D3
-	for <qemu-riscv@archiver.kernel.org>; Sat,  5 Sep 2026 09:39:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4EDB2C79F8C
+	for <qemu-riscv@archiver.kernel.org>; Sun,  6 Sep 2026 16:38:15 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x2mqg-0004qc-F6; Sat, 05 Sep 2026 05:38:10 -0400
+	id 1x3FsV-0002rZ-Vx; Sun, 06 Sep 2026 12:38:00 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <wangyang25@otcaix.iscas.ac.cn>)
- id 1x2mqc-0004n0-Ky; Sat, 05 Sep 2026 05:38:06 -0400
-Received: from smtp81.cstnet.cn ([159.226.251.81] helo=cstnet.cn)
- by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <wangyang25@otcaix.iscas.ac.cn>)
- id 1x2mqY-0002d8-Ni; Sat, 05 Sep 2026 05:38:06 -0400
-Received: from DESKTOP-7FLBREN (unknown [124.16.137.194])
- by APP-03 (Coremail) with SMTP id rQCowABHUT_u4ptqIsvvBg--.16071S7;
- Sat, 05 Sep 2026 17:37:53 +0800 (CST)
-From: wangyang <wangyang25@otcaix.iscas.ac.cn>
-To: qemu-devel@nongnu.org
-Cc: wangyang <wangyang25@otcaix.iscas.ac.cn>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org
-Subject: [PATCH 5/5] target/riscv: canonicalize reserved CBIE encoding
-Date: Sat,  5 Sep 2026 17:37:49 +0800
-Message-ID: <20260905093749.491-6-wangyang25@otcaix.iscas.ac.cn>
-X-Mailer: git-send-email 2.55.0.windows.2
-In-Reply-To: <20260905093749.491-1-wangyang25@otcaix.iscas.ac.cn>
-References: <20260905093749.491-1-wangyang25@otcaix.iscas.ac.cn>
+ (Exim 4.90_1) (envelope-from <lyndra@linux.alibaba.com>)
+ id 1x3FsT-0002pe-5U; Sun, 06 Sep 2026 12:37:57 -0400
+Received: from [115.124.30.98] (helo=out30-98.freemail.mail.aliyun.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <lyndra@linux.alibaba.com>)
+ id 1x3FsO-00033c-Rw; Sun, 06 Sep 2026 12:37:56 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linux.alibaba.com; s=default;
+ t=1788712654; h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To;
+ bh=uRt0gBb8L8FGHi21aFS83kzFqYi/Wj94R+OnC6gSM+4=;
+ b=U+8dkjAB0ey0OM6z/RIoebvGkSyUfQtFaoqu/nK4K9K8GXPJn1FeCUdqYByIFfqZ+lAYlvGwICXoV/qqy+ugygvDjWPFMyi9kfW4R3u656wjI88xdyIxDn0LUM8feGIDtcpcbZtySYwv5T7BmYqxxdIlF8k0Ntx/P7RsKWFYoRo=
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R171e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033032089153;
+ MF=lyndra@linux.alibaba.com; NM=1; PH=DS; RN=13; SR=0;
+ TI=SMTPD_---0XANKIIv_1788712653; 
+Received: from ea134-sw06.eng.xrvm.cn(mailfrom:lyndra@linux.alibaba.com
+ fp:SMTPD_---0XANKIIv_1788712653 cluster:ay36) by smtp.aliyun-inc.com;
+ Mon, 07 Sep 2026 00:37:33 +0800
+From: TANG Tiancheng <lyndra@linux.alibaba.com>
+Date: Mon, 07 Sep 2026 00:37:21 +0800
+Subject: [PATCH 05/14] target/riscv: Preserve minstretcfgh on RV32
+ minstretcfg writes
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: rQCowABHUT_u4ptqIsvvBg--.16071S7
-X-Coremail-Antispam: 1UD129KBjvJXoW7CFy3Wr48uF1kXr15urW7Jwb_yoW8tF48pF
- 4UWF45KrWv934I9a93Jr1UWF1akrWrGay5Wwnruw4kXa13GFyftFnrG345Kr4UWFWxK3sF
- 9wsxGry5Cws5JFDanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUmE14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
- kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
- z4x0Y4vE2Ix0cI8IcVAFwI0_JFI_Gr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Cr0_Gr
- 1UM28EF7xvwVC2z280aVAFwI0_Jr0_Gr1l84ACjcxK6I8E87Iv6xkF7I0E14v26r4j6r4U
- JwAac4AC62xK8xCEY4vEwIxC4wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0V
- AKzVAqx4xG6I80ewAv7VC0I7IYx2IY67AKxVWUAVWUtwAv7VC2z280aVAFwI0_Jr0_Gr1l
- Ox8S6xCaFVCjc4AY6r1j6r4UM4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErc
- IFxwCY1x0262kKe7AKxVWUtVW8ZwCY02Avz4vE14v_GFWl42xK82IYc2Ij64vIr41l4I8I
- 3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxV
- WUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAF
- wI0_JFI_Gr1lIxAIcVC0I7IYx2IY6xkF7I0E14v26F4j6r4UJwCI42IY6xAIw20EY4v20x
- vaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVW8
- JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7VUjGYLPUUUUU==
-X-Originating-IP: [124.16.137.194]
-X-CM-SenderInfo: 5zdqw5xdqjjk46rwut1l0ox2xfdvhtffof0/
-Received-SPF: pass client-ip=159.226.251.81;
- envelope-from=wangyang25@otcaix.iscas.ac.cn; helo=cstnet.cn
-X-Spam_score_int: -41
-X-Spam_score: -4.2
-X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260907-riscv-pmu-correctness-v1-5-5f1f41458989@linux.alibaba.com>
+References: <20260907-riscv-pmu-correctness-v1-0-5f1f41458989@linux.alibaba.com>
+In-Reply-To: <20260907-riscv-pmu-correctness-v1-0-5f1f41458989@linux.alibaba.com>
+To: qemu-devel@nongnu.org
+Cc: Zephyr Li <fritchleybohrer@gmail.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org, 
+ Richard Henderson <richard.henderson@linaro.org>, 
+ Paolo Bonzini <pbonzini@redhat.com>, 
+ =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>, 
+ TANG Tiancheng <lyndra@linux.alibaba.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1788712649; l=3379;
+ i=lyndra@linux.alibaba.com; s=20250909; h=from:subject:message-id;
+ bh=IdUFjos+O+zWBPe2lmEXuq6/NeB+c260XZxX21qLlJ4=;
+ b=UazR3ic5L6ZlPb9Cp1TC29Btv/HvlK7CvnOqkiHWFSKbcHIIyBr+/LBjqc/MVBfR/M+jTjHj3
+ r70IyBg+3efCE8s0IyqiYWTQWixraeXI8xO4EtWomkfPQ1hsDVDC50S
+X-Developer-Key: i=lyndra@linux.alibaba.com; a=ed25519;
+ pk=GQh4uOSLVucXGkaZfEuQ956CrYS14cn1TA3N8AiIjBw=
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.98 (deferred)
+Received-SPF: pass client-ip=115.124.30.98;
+ envelope-from=lyndra@linux.alibaba.com; helo=out30-98.freemail.mail.aliyun.com
+X-Spam_score_int: -166
+X-Spam_score: -16.7
+X-Spam_bar: ----------------
+X-Spam_report: (-16.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
+ RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001, USER_IN_DEF_DKIM_WL=-7.5,
+ USER_IN_DEF_SPF_WL=-7.5 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -80,75 +86,101 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-CBIE encoding 10 is reserved when Zicbom is implemented, while
-encoding 11 has defined behavior. Canonicalize only encoding 10 in the
-menvcfg, senvcfg, and henvcfg write paths so the reserved value is not
-retained and the defined encoding remains unchanged.
+RV32 write_minstretcfg() replaces the full 64-bit register, clearing
+minstretcfgh and its privilege-inhibit bits.
 
-Tested: RV64 menvcfg, senvcfg, and henvcfg CBIE 10 and CBIE 11
-write/readback witnesses.
-Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/4416
+Replace only bits 31:0, as write_mcyclecfg() does. Test that a low-half
+write preserves both set and clear xINH bits in minstretcfgh.
 
-Signed-off-by: wangyang <wangyang25@otcaix.iscas.ac.cn>
+Fixes: b54a84c15e38 ("target/riscv: Add cycle & instret privilege mode filtering support")
+Signed-off-by: TANG Tiancheng <lyndra@linux.alibaba.com>
 ---
- target/riscv/tcg/csr.c | 29 +++++++++++++++++++++++++++++
- 1 file changed, 29 insertions(+)
+ target/riscv/tcg/csr.c                    |  2 +-
+ tests/tcg/riscv32/Makefile.softmmu-target |  4 +++
+ tests/tcg/riscv32/pmu-minstretcfg-rv32.S  | 48 +++++++++++++++++++++++++++++++
+ 3 files changed, 53 insertions(+), 1 deletion(-)
 
 diff --git a/target/riscv/tcg/csr.c b/target/riscv/tcg/csr.c
-index bd4b6dc114..cf59f9ae54 100644
+index 57030724f85a897e21e5082b9857411b50f932ac..f9f43a9c12e1afdbdf6c7202c167988389963c10 100644
 --- a/target/riscv/tcg/csr.c
 +++ b/target/riscv/tcg/csr.c
-@@ -3260,6 +3260,16 @@ static RISCVException write_menvcfg(CPURISCVState *env, int csrno,
-             stce_changed = true;
-         }
-     }
-+
-+    /*
-+     * CBIE is a WARL field: encoding 10 is reserved.  A software write of
-+     * this encoding must canonicalize to a supported value instead of being
-+     * retained in the readback.
-+     */
-+    if (cfg->ext_zicbom && get_field(val, MENVCFG_CBIE) == 2) {
-+        val &= ~MENVCFG_CBIE;
-+    }
-+
-     env->menvcfg = (env->menvcfg & ~mask) | (val & mask);
+@@ -1167,7 +1167,7 @@ static RISCVException write_minstretcfg(CPURISCVState *env, int csrno,
+     uint64_t inh_avail_mask;
  
-     if (stce_changed) {
-@@ -3354,6 +3364,16 @@ static RISCVException write_senvcfg(CPURISCVState *env, int csrno,
-         mask |= SENVCFG_UKTE;
-     }
- 
-+    /*
-+     * CBIE is a WARL field: encoding 10 is reserved.  A software write of
-+     * this encoding must canonicalize to a supported value instead of being
-+     * retained in the readback.
-+     */
-+    if (env_archcpu(env)->cfg.ext_zicbom &&
-+        get_field(val, SENVCFG_CBIE) == 2) {
-+        val &= ~SENVCFG_CBIE;
-+    }
-+
-     env->senvcfg = (env->senvcfg & ~mask) | (val & mask);
-     return RISCV_EXCP_NONE;
- }
-@@ -3422,6 +3442,15 @@ static RISCVException write_henvcfg(CPURISCVState *env, int csrno,
-         }
-     }
- 
-+    /*
-+     * CBIE is a WARL field: encoding 10 is reserved.  A software write of
-+     * this encoding must canonicalize to a supported value instead of being
-+     * retained in the readback.
-+     */
-+    if (cfg->ext_zicbom && get_field(val, HENVCFG_CBIE) == 2) {
-+        val &= ~HENVCFG_CBIE;
-+    }
-+
      if (riscv_cpu_mxl(env) == MXL_RV32) {
-         /*
-          * RV32 stores STCE/ADUE/PBMTE/DTE in henvcfgh, so a low-half henvcfg
+-        env->minstretcfg = val;
++        env->minstretcfg = deposit64(env->minstretcfg, 0, 32, val);
+     } else {
+         inh_avail_mask = ~MHPMEVENT_FILTER_MASK | MINSTRETCFG_BIT_MINH;
+         inh_avail_mask |= riscv_has_ext(env, RVU) ? MINSTRETCFG_BIT_UINH : 0;
+diff --git a/tests/tcg/riscv32/Makefile.softmmu-target b/tests/tcg/riscv32/Makefile.softmmu-target
+index 67d334974577e14ff36e7c51067ebcab4c1349bd..43c162fd337f7b0d5d3e4dedb3f5b06b2821fd88 100644
+--- a/tests/tcg/riscv32/Makefile.softmmu-target
++++ b/tests/tcg/riscv32/Makefile.softmmu-target
+@@ -20,3 +20,7 @@ QEMU_OPTS += -M virt -display none -semihosting -device loader,file=
+ TESTS += smcdeleg-minh-rv32
+ run-smcdeleg-minh-rv32: smcdeleg-minh-rv32
+ 	$(call run-test, $<, $(QEMU) -cpu max $(QEMU_OPTS)$<)
++
++TESTS += pmu-minstretcfg-rv32
++run-pmu-minstretcfg-rv32: pmu-minstretcfg-rv32
++	$(call run-test, $<, $(QEMU) -cpu max $(QEMU_OPTS)$<)
+diff --git a/tests/tcg/riscv32/pmu-minstretcfg-rv32.S b/tests/tcg/riscv32/pmu-minstretcfg-rv32.S
+new file mode 100644
+index 0000000000000000000000000000000000000000..44f6127da1babe04d6d1094dce5f37528282bee3
+--- /dev/null
++++ b/tests/tcg/riscv32/pmu-minstretcfg-rv32.S
+@@ -0,0 +1,48 @@
++/* SPDX-License-Identifier: GPL-2.0-or-later */
++
++/* RV32 writes to minstretcfg must preserve minstretcfgh. */
++
++	.option	norvc
++	.option	norelax
++
++	.text
++	.global _start
++_start:
++	/*
++	 * Use complementary patterns to check both set and clear xINH bits.
++	 * All fields in the low half are WPRI, so write zero there.
++	 * Exit status 1 or 2 identifies the pattern that was not preserved.
++	 */
++	li	t4, 1
++	li	t0, 0x54000000		/* MINH, UINH, VUINH */
++	csrw	0x722, t0		/* minstretcfgh */
++	csrw	0x322, zero		/* minstretcfg */
++	csrr	t1, 0x722
++	bne	t0, t1, exit
++
++	li	t4, 2
++	li	t0, 0x28000000		/* SINH, VSINH */
++	csrw	0x722, t0		/* minstretcfgh */
++	csrw	0x322, zero		/* minstretcfg */
++	csrr	t1, 0x722
++	bne	t0, t1, exit
++	li	t4, 0
++
++exit:
++	lla	a1, semiargs
++	li	t0, 0x20026		/* ADP_Stopped_ApplicationExit */
++	sw	t0, 0(a1)
++	sw	t4, 4(a1)
++	li	a0, 0x20		/* TARGET_SYS_EXIT_EXTENDED */
++
++	/* Semihosting call sequence. */
++	.balign	16
++	slli	zero, zero, 0x1f
++	ebreak
++	srai	zero, zero, 0x7
++	j	.
++
++	.data
++	.balign	16
++semiargs:
++	.space	8
+
 -- 
-2.55.0.windows.2
+2.43.0
 
 
