@@ -4,60 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F76CC79FA1
-	for <qemu-riscv@archiver.kernel.org>; Mon,  7 Sep 2026 15:26:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 477F6C79F99
+	for <qemu-riscv@archiver.kernel.org>; Mon,  7 Sep 2026 17:13:16 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x3bDi-0000pG-Bf; Mon, 07 Sep 2026 11:25:18 -0400
+	id 1x3ctp-0001xy-0O; Mon, 07 Sep 2026 13:12:53 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liumingliang.dev@bytedance.com>)
- id 1x3bDf-0000kl-Sm
- for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 11:25:16 -0400
-Received: from va-1-113.ptr.blmpb.com ([209.127.230.113])
+ (Exim 4.90_1) (envelope-from <eblot.ml@gmail.com>)
+ id 1x3cRf-0007tP-DG
+ for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 12:43:47 -0400
+Received: from mail-wr1-f51.google.com ([209.85.221.51])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <liumingliang.dev@bytedance.com>)
- id 1x3bDd-0005K0-DC
- for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 11:25:15 -0400
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- s=2212171451; d=bytedance.com; t=1788794707; h=from:subject:
- mime-version:from:date:message-id:subject:to:cc:reply-to:content-type:
- mime-version:in-reply-to:message-id;
- bh=Q/kRnyWSs8akzB6wrHg7b8l6NkUp84ME2XFUpqnK3vY=;
- b=VFaWIDAhoNcZWslF4ofsj3o+NOezd35ghzABkdeFiVBg3tLf3Tl8bpPVo7dkJ5M26+7I6w
- eLD44i7vsRk022bRKImP+Jm61UaCJmKJ1Vl5Hr801Iro9C6kCsvpsdlBR2gsjep2IR+keZ
- ldU/E05vvqOtIbbxwRDUYy+EL8UGu+GsjQZTYS9FSNZ+Ih4nHgUpsv9IrsVfQAVwKSiFm7
- 5bKRzC9Hwj6MkM/RqMCgaWQYU7yj+eRxAJbH+L709WVKPVa/VbNr0B2DenjYOnDFR8Dl2/
- T7IPDu5FFV0cPip5PlZUm9x3sbgh5Qd5cJYWFyGEO3TaS9jV+Lay+TLU8v8qLw==
-From: "Mingliang Liu" <liumingliang.dev@bytedance.com>
-Mime-Version: 1.0
-In-Reply-To: <20260907152301.1701394-1-liumingliang.dev@bytedance.com>
-X-Lms-Return-Path: <lba+26a9ed751+0fbf85+nongnu.org+liumingliang.dev@bytedance.com>
-To: <qemu-devel@nongnu.org>
-X-Mailer: git-send-email 2.39.5
-X-Original-From: Mingliang Liu <liumingliang.dev@bytedance.com>
-Cc: <qemu-riscv@nongnu.org>, <palmer@dabbelt.com>, 
- <Alistair.Francis@wdc.com>, <zhiwei_liu@linux.alibaba.com>, 
- <liwei1518@gmail.com>, <daniel.barboza@oss.qualcomm.com>, 
- <chao.liu@processmission.com>, "Zhibo Hong" <hongzhibo@bytedance.com>, 
- "Joel Stanley" <joel@jms.id.au>, 
- "Mingliang Liu" <liumingliang.dev@bytedance.com>
-Subject: [PATCH v3 1/3] target/riscv: Add support for the Zvabd extension
-Date: Mon,  7 Sep 2026 23:22:59 +0800
-Content-Type: text/plain; charset=UTF-8
-Message-Id: <20260907152301.1701394-2-liumingliang.dev@bytedance.com>
-References: <20260907152301.1701394-1-liumingliang.dev@bytedance.com>
+ (Exim 4.90_1) (envelope-from <eblot.ml@gmail.com>)
+ id 1x3cRc-0002uD-JT
+ for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 12:43:47 -0400
+Received: by mail-wr1-f51.google.com with SMTP id
+ ffacd0b85a97d-485850cf499so2405164f8f.3
+ for <qemu-riscv@nongnu.org>; Mon, 07 Sep 2026 09:43:41 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1788799420; x=1789404220;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=cBS24KyVkFdx9K1mrb9mnaPLSyXbJlcPXKfV6TpuYbc=;
+ b=J/nZ5BogL97D4z0C71X8Z5BRpY2QqINOefRAO0c8UTtPfpi4PnSER2rK45RE6xwcvX
+ qYi2iSCf6DoL27DuIX9pH4iFJ2ryd5VJLichEp3PDrZyF17YnjVuqwRNsX+CTJAq7uye
+ d9SIdp4GsWzxZZQotdktQYf8pGnuhUqhUD9YPtnmFBwYxtolaBn4YXjultNxtov2kUXu
+ uZrFjzElRGcpWPMEyqO8+52CWWNkwGn5x8F6U3rCpi8P1Nsd5QUg4jE6leU63WpGri/E
+ hrdeN2Q8OOHQ0YV6KmN0vx6DRrDqbTD3pyUG8ubvpQAZ7Q2Zk3ET7l8QQgAv9tD3ypqH
+ 1rHA==
+X-Forwarded-Encrypted: i=1;
+ AKwUvByp4WdHWHG2DZ0O20vhgCV41YzyCtllRpbMpUM/jyuJX+VP5oK3O58yXFwVQlDl9n+nrpcBKt3XKSoo@nongnu.org
+X-Gm-Message-State: AFuF++nJyGSye/HCjgdxnFzzzNVYYjvz8xSSoBq4MnublstTDaR8DpSK
+ axNEa1jCFcOaFJ5/GzDvEjE5cf46dD7abw/YcDWlzqW2eYeMI53R7oaOvOC3l4Sp
+X-Gm-Gg: AYBFou32JlA/pQIgmiagJ+fvQdqzf33rQ7E71j++fLWNZcqtTvKUG7LdTpXe5kIdKsR
+ /WAiNfD1IprkveDxhBRQ76uXcKRS236aYBrUdHXjZURuChqHSP5RJiRdn/yr29aOMjj1I4OHaKy
+ 8+VDGiJlY6dzJmFg/qZuuRs+8c/znQqNcz3fvrchrtWU14mFV3gglaG6mlcAnlqIM5I5OeOtqkr
+ R9qkox2DLa/mBDxKM0s4NrDwPPxz81x0gtvGoRykd3dZ3ykWBdesPirxXeTj+2Ve+ecoupOxp/g
+ P1eS28PcLoB2s5iBwFS1Oclvcvq14WSW7kxs+2o3ht6TbFbQmVMsP/5zNISGx2BtwDGs8pfl1nw
+ 0pBaXDbnuqospTCib9pO/ll1ZAjHHrNsG70t99Swx/RvTnAUzj1XPEyS9yBof2SLGrGcfl1uXWm
+ LgmayrXHpxPsTCztCn2VDrJ4MD5cL5EQaUy5kCqv/rNacSQmihnnmMMyAmj2D1LSlER5lSolAPE
+ tNTPlb7wDk0Utlk3pL0NYitSy2KaBRhpBI=
+X-Received: by 2002:a05:600c:474a:b0:49c:e42b:a4ac with SMTP id
+ 5b1f17b1804b1-49cf823f60amr211651975e9.11.1788799420181; 
+ Mon, 07 Sep 2026 09:43:40 -0700 (PDT)
+Received: from localhost (89-93-216-19.hfc.dyn.abo.bbox.fr. [89.93.216.19])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-49ce5563c6csm349072185e9.4.2026.09.07.09.43.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 07 Sep 2026 09:43:39 -0700 (PDT)
+Date: Mon, 07 Sep 2026 18:41:56 +0200
+Subject: [PATCH 06/50] hw/i2c: pca954x: migrate mux state
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=209.127.230.113;
- envelope-from=liumingliang.dev@bytedance.com; helo=va-1-113.ptr.blmpb.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Message-Id: <20260907-bmc-minerva-v1-6-0d83ad610c3b@free.fr>
+References: <20260907-bmc-minerva-v1-0-0d83ad610c3b@free.fr>
+In-Reply-To: <20260907-bmc-minerva-v1-0-0d83ad610c3b@free.fr>
+To: qemu-devel@nongnu.org
+Cc: =?utf-8?q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>, 
+ Peter Maydell <peter.maydell@linaro.org>, 
+ Steven Lee <steven_lee@aspeedtech.com>, Troy Lee <leetroy@gmail.com>, 
+ Jamin Lin <jamin_lin@aspeedtech.com>, Kane Chen <kane_chen@aspeedtech.com>, 
+ Andrew Jeffery <andrew@codeconstruct.com.au>, Joel Stanley <joel@jms.id.au>, 
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, qemu-arm@nongnu.org, 
+ Patrick Leis <venture@google.com>, Fabiano Rosas <farosas@suse.de>, 
+ Laurent Vivier <lvivier@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>, 
+ qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, 
+ =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>, 
+ Emmanuel Blot <emmanuel.blot@free.fr>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1788799319; l=1912;
+ i=emmanuel.blot@free.fr; s=20260602; h=from:subject:message-id;
+ bh=6X3qtF5y9bDFv2QNu2TGa306El/FnP4ElGjKxh8N7cM=;
+ b=RiY+touNeouJPHPg0XaLz54f1yFoRxrHYeecw6h5+E0u9TudjvUcFTHm+cxKznm1V2R++OJcC
+ WWf1JvKmu5fD9TJJYF0+bv84pS8EjMvOlHxF49uXBu7d64srbnWoc5A
+X-Developer-Key: i=emmanuel.blot@free.fr; a=ed25519;
+ pk=0qFrZ21FAAN8OfVsSoVcCFTk/NMYOWzxJz4paSAVm0g=
+Received-SPF: pass client-ip=209.85.221.51; envelope-from=eblot.ml@gmail.com;
+ helo=mail-wr1-f51.google.com
+X-Spam_score_int: -15
+X-Spam_score: -1.6
+X-Spam_bar: -
+X-Spam_report: (-1.6 / 5.0 requ) BAYES_00=-1.9,
+ FREEMAIL_FORGED_FROMDOMAIN=0.001, FREEMAIL_FROM=0.001,
+ HEADER_FROM_DIFFERENT_DOMAINS=0.25, RCVD_IN_DNSWL_NONE=-0.0001,
+ RCVD_IN_MSPIKE_H2=0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Mon, 07 Sep 2026 13:12:51 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,322 +107,73 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
+Reply-to:  Emmanuel Blot <emmanuel.blot@free.fr>
+From:  Emmanuel Blot via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Zhibo Hong <hongzhibo@bytedance.com>
+The pca954x model had no VMStateDescription, so neither the channel
+selection nor the PCA9545 interrupt status survived a migration.
 
-The draft Zvabd extension version 0.9 provides vector integer
-absolute-difference operations for image, video, and other
-data-processing workloads. It introduces eight new instructions:
+This changes the migration stream of the pre-existing PCA9546 and
+PCA9548, which an older QEMU rejects.
 
-  - vabd.vv, vabd.vx, vabdu.vv, and vabdu.vx support SEW values from
-    8 through ELEN, with SEW 64 requiring Zve64x.
-  - vwabda.vv, vwabda.vx, vwabdau.vv, and vwabdau.vx support SEW 8
-    and 16 and accumulate into a double-width destination.
-
-This patch implements the extension, including instruction decoding,
-TCG translation, and helper functions. This implementation targets
-version 0.9, whose instruction encodings differ from version 0.7.
-
-The specification is under review at:
-https://github.com/riscv/riscv-isa-manual/pull/3279
-
-Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Reviewed-by: Joel Stanley <joel@jms.id.au>
-Signed-off-by: Zhibo Hong <hongzhibo@bytedance.com>
-Signed-off-by: Mingliang Liu <liumingliang.dev@bytedance.com>
+Signed-off-by: Emmanuel Blot <emmanuel.blot@free.fr>
 ---
- disas/riscv-op.c.inc                        |  8 +++
- disas/riscv.c                               |  8 +++
- target/riscv/cpu.c                          |  1 +
- target/riscv/cpu_cfg_fields.h.inc           |  1 +
- target/riscv/helper.h                       | 26 ++++++++++
- target/riscv/insn32.decode                  | 10 ++++
- target/riscv/tcg/insn_trans/trans_rvv.c.inc | 45 +++++++++++++++++
- target/riscv/tcg/tcg-cpu.c                  |  6 +++
- target/riscv/tcg/vector_helper.c            | 56 +++++++++++++++++++++
- 9 files changed, 161 insertions(+)
+ hw/i2c/i2c_mux_pca954x.c | 24 ++++++++++++++++++++++++
+ 1 file changed, 24 insertions(+)
 
-diff --git a/disas/riscv-op.c.inc b/disas/riscv-op.c.inc
-index 1d334e4857..07b56f5d52 100644
---- a/disas/riscv-op.c.inc
-+++ b/disas/riscv-op.c.inc
-@@ -490,6 +490,10 @@ OP(vaadd_vv, "vaadd.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm)
- OP(vaadd_vx, "vaadd.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm)
- OP(vaaddu_vv, "vaaddu.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm)
- OP(vaaddu_vx, "vaaddu.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm)
-+OP(vabd_vv, "vabd.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm)
-+OP(vabd_vx, "vabd.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm)
-+OP(vabdu_vv, "vabdu.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm)
-+OP(vabdu_vx, "vabdu.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm)
- OP(vadc_vim, "vadc.vim", rv_codec_v_i, rv_fmt_vd_vs2_imm_vl)
- OP(vadc_vvm, "vadc.vvm", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vl)
- OP(vadc_vxm, "vadc.vxm", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vl)
-@@ -861,6 +865,10 @@ OP(vsuxei16_v, "vsuxei16.v", rv_codec_v_r, rv_fmt_ldst_vd_rs1_vs2_vm)
- OP(vsuxei32_v, "vsuxei32.v", rv_codec_v_r, rv_fmt_ldst_vd_rs1_vs2_vm)
- OP(vsuxei64_v, "vsuxei64.v", rv_codec_v_r, rv_fmt_ldst_vd_rs1_vs2_vm)
- OP(vsuxei8_v, "vsuxei8.v", rv_codec_v_r, rv_fmt_ldst_vd_rs1_vs2_vm)
-+OP(vwabda_vv, "vwabda.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm)
-+OP(vwabda_vx, "vwabda.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm)
-+OP(vwabdau_vv, "vwabdau.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm)
-+OP(vwabdau_vx, "vwabdau.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm)
- OP(vwadd_vv, "vwadd.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm)
- OP(vwadd_vx, "vwadd.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm)
- OP(vwadd_wv, "vwadd.wv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm)
-diff --git a/disas/riscv.c b/disas/riscv.c
-index b8099cbdf8..410ec1e565 100644
---- a/disas/riscv.c
-+++ b/disas/riscv.c
-@@ -2022,6 +2022,8 @@ static const rv_opcode_data *decode_inst_opcode(rv_decode *dec, rv_isa isa)
-                 case 48: return &op_vwredsumu_vs;
-                 case 49: return &op_vwredsum_vs;
-                 case 53: return &op_vwsll_vv;
-+                case 61: return &op_vwabda_vv;
-+                case 62: return &op_vwabdau_vv;
-                 }
-                 break;
-             case 1:
-@@ -2164,6 +2166,8 @@ static const rv_opcode_data *decode_inst_opcode(rv_decode *dec, rv_isa isa)
-                         break;
-                     }
-                     break;
-+                case 21: return &op_vabd_vv;
-+                case 22: return &op_vabdu_vv;
-                 case 23:
-                     if ((inst >> 25) & 1) {
-                         return &op_vcompress_vm;
-@@ -2349,6 +2353,8 @@ static const rv_opcode_data *decode_inst_opcode(rv_decode *dec, rv_isa isa)
-                 case 46: return &op_vnclipu_wx;
-                 case 47: return &op_vnclip_wx;
-                 case 53: return &op_vwsll_vx;
-+                case 61: return &op_vwabda_vx;
-+                case 62: return &op_vwabdau_vx;
-                 }
-                 break;
-             case 5:
-@@ -2425,6 +2431,8 @@ static const rv_opcode_data *decode_inst_opcode(rv_decode *dec, rv_isa isa)
-                         }
-                     }
-                     break;
-+                case 21: return &op_vabd_vx;
-+                case 22: return &op_vabdu_vx;
-                 case 32: return &op_vdivu_vx;
-                 case 33: return &op_vdiv_vx;
-                 case 34: return &op_vremu_vx;
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index a13177b7b7..4b8944b051 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -220,6 +220,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
-     ISA_EXT_DATA_ENTRY(zksh, PRIV_VERSION_1_12_0, ext_zksh),
-     ISA_EXT_DATA_ENTRY(zkt, PRIV_VERSION_1_12_0, ext_zkt),
-     ISA_EXT_DATA_ENTRY(ztso, PRIV_VERSION_1_12_0, ext_ztso),
-+    ISA_EXPERIMENTAL_EXT_DATA_ENTRY(zvabd, PRIV_VERSION_1_13_0, ext_zvabd),
-     ISA_EXT_DATA_ENTRY(zvbb, PRIV_VERSION_1_12_0, ext_zvbb),
-     ISA_EXT_DATA_ENTRY(zvbc, PRIV_VERSION_1_12_0, ext_zvbc),
-     ISA_EXT_DATA_ENTRY(zve32f, PRIV_VERSION_1_10_0, ext_zve32f),
-diff --git a/target/riscv/cpu_cfg_fields.h.inc b/target/riscv/cpu_cfg_fields.h.inc
-index f8c27a574f..6018e58195 100644
---- a/target/riscv/cpu_cfg_fields.h.inc
-+++ b/target/riscv/cpu_cfg_fields.h.inc
-@@ -83,6 +83,7 @@ BOOL_FIELD(ext_zve32x)
- BOOL_FIELD(ext_zve64f)
- BOOL_FIELD(ext_zve64d)
- BOOL_FIELD(ext_zve64x)
-+BOOL_FIELD(ext_zvabd)
- BOOL_FIELD(ext_zvbb)
- BOOL_FIELD(ext_zvbc)
- BOOL_FIELD(ext_zvkb)
-diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-index 4fc2d3a155..3aef6e0e3e 100644
---- a/target/riscv/helper.h
-+++ b/target/riscv/helper.h
-@@ -1350,6 +1350,32 @@ DEF_HELPER_5(vsm4k_vi, void, ptr, ptr, i32, env, i32)
- DEF_HELPER_4(vsm4r_vv, void, ptr, ptr, env, i32)
- DEF_HELPER_4(vsm4r_vs, void, ptr, ptr, env, i32)
- 
-+/* Zvabd Extension */
-+DEF_HELPER_6(vabd_vv_b, void, ptr, ptr, ptr, ptr, env, i32)
-+DEF_HELPER_6(vabd_vv_h, void, ptr, ptr, ptr, ptr, env, i32)
-+DEF_HELPER_6(vabd_vv_w, void, ptr, ptr, ptr, ptr, env, i32)
-+DEF_HELPER_6(vabd_vv_d, void, ptr, ptr, ptr, ptr, env, i32)
-+DEF_HELPER_6(vabd_vx_b, void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vabd_vx_h, void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vabd_vx_w, void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vabd_vx_d, void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vabdu_vv_b, void, ptr, ptr, ptr, ptr, env, i32)
-+DEF_HELPER_6(vabdu_vv_h, void, ptr, ptr, ptr, ptr, env, i32)
-+DEF_HELPER_6(vabdu_vv_w, void, ptr, ptr, ptr, ptr, env, i32)
-+DEF_HELPER_6(vabdu_vv_d, void, ptr, ptr, ptr, ptr, env, i32)
-+DEF_HELPER_6(vabdu_vx_b, void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vabdu_vx_h, void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vabdu_vx_w, void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vabdu_vx_d, void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vwabda_vv_b, void, ptr, ptr, ptr, ptr, env, i32)
-+DEF_HELPER_6(vwabda_vv_h, void, ptr, ptr, ptr, ptr, env, i32)
-+DEF_HELPER_6(vwabda_vx_b, void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vwabda_vx_h, void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vwabdau_vv_b, void, ptr, ptr, ptr, ptr, env, i32)
-+DEF_HELPER_6(vwabdau_vv_h, void, ptr, ptr, ptr, ptr, env, i32)
-+DEF_HELPER_6(vwabdau_vx_b, void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vwabdau_vx_h, void, ptr, ptr, tl, ptr, env, i32)
-+
- /* CFI (zicfiss) helpers */
- #ifndef CONFIG_USER_ONLY
- DEF_HELPER_1(ssamoswap_disabled, void, env)
-diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index 21272fdb50..1c991a6f42 100644
---- a/target/riscv/insn32.decode
-+++ b/target/riscv/insn32.decode
-@@ -1084,3 +1084,13 @@ sb_aqrl  00111 . . ..... ..... 000 ..... 0101111 @atom_st
- sh_aqrl  00111 . . ..... ..... 001 ..... 0101111 @atom_st
- sw_aqrl  00111 . . ..... ..... 010 ..... 0101111 @atom_st
- sd_aqrl  00111 . . ..... ..... 011 ..... 0101111 @atom_st
-+
-+# *** Zvabd Extension ***
-+vabd_vv       010101 . ..... ..... 010 ..... 1010111 @r_vm
-+vabd_vx       010101 . ..... ..... 110 ..... 1010111 @r_vm
-+vabdu_vv      010110 . ..... ..... 010 ..... 1010111 @r_vm
-+vabdu_vx      010110 . ..... ..... 110 ..... 1010111 @r_vm
-+vwabda_vv     111101 . ..... ..... 000 ..... 1010111 @r_vm
-+vwabda_vx     111101 . ..... ..... 100 ..... 1010111 @r_vm
-+vwabdau_vv    111110 . ..... ..... 000 ..... 1010111 @r_vm
-+vwabdau_vx    111110 . ..... ..... 100 ..... 1010111 @r_vm
-diff --git a/target/riscv/tcg/insn_trans/trans_rvv.c.inc b/target/riscv/tcg/insn_trans/trans_rvv.c.inc
-index a22e2cae6c..14ef961607 100644
---- a/target/riscv/tcg/insn_trans/trans_rvv.c.inc
-+++ b/target/riscv/tcg/insn_trans/trans_rvv.c.inc
-@@ -4091,3 +4091,48 @@ GEN_INT_EXT_TRANS(vzext_vf8, 3, 2)
- GEN_INT_EXT_TRANS(vsext_vf2, 1, 3)
- GEN_INT_EXT_TRANS(vsext_vf4, 2, 4)
- GEN_INT_EXT_TRANS(vsext_vf8, 3, 5)
-+
-+/* Zvabd Extension */
-+#define GEN_ABD_CHECK(NAME, CHECK_FN, MAX_SEW)                       \
-+static bool NAME(DisasContext *s, arg_rmrr *a)                       \
-+{                                                                    \
-+    return CHECK_FN(s, a) && s->cfg_ptr->ext_zvabd &&                \
-+           s->sew <= MAX_SEW &&                                      \
-+           (s->sew != MO_64 || s->cfg_ptr->ext_zve64x);              \
-+}
-+GEN_ABD_CHECK(vabd_vv_check, opivv_check, MO_64)
-+GEN_ABD_CHECK(vabd_vx_check, opivx_check, MO_64)
-+GEN_ABD_CHECK(vwabd_vv_check, opivv_overwrite_widen_check, MO_16)
-+GEN_ABD_CHECK(vwabd_vx_check, opivx_overwrite_widen_check, MO_16)
-+
-+GEN_OPIVV_TRANS(vabd_vv, vabd_vv_check)
-+GEN_OPIVX_TRANS(vabd_vx, vabd_vx_check)
-+GEN_OPIVV_TRANS(vabdu_vv, vabd_vv_check)
-+GEN_OPIVX_TRANS(vabdu_vx, vabd_vx_check)
-+
-+#define GEN_ABD_OPIVV_WIDEN_TRANS(NAME, CHECK)                          \
-+static bool trans_##NAME(DisasContext *s, arg_rmrr *a)                  \
-+{                                                                       \
-+    static gen_helper_gvec_4_ptr * const fns[2] = {                     \
-+        gen_helper_##NAME##_b, gen_helper_##NAME##_h,                   \
-+    };                                                                  \
-+    return s->sew <= MO_16 && do_opivv_widen(s, a, fns[s->sew], CHECK); \
-+}
-+
-+#define GEN_ABD_OPIVX_WIDEN_TRANS(NAME, CHECK)                          \
-+static bool trans_##NAME(DisasContext *s, arg_rmrr *a)                  \
-+{                                                                       \
-+    if (CHECK(s, a)) {                                                  \
-+        static gen_helper_opivx * const fns[2] = {                      \
-+            gen_helper_##NAME##_b, gen_helper_##NAME##_h,               \
-+        };                                                              \
-+        return opivx_trans(a->rd, a->rs1, a->rs2, a->vm,                \
-+                           fns[s->sew], s);                             \
-+    }                                                                   \
-+    return false;                                                       \
-+}
-+
-+GEN_ABD_OPIVV_WIDEN_TRANS(vwabda_vv, vwabd_vv_check)
-+GEN_ABD_OPIVX_WIDEN_TRANS(vwabda_vx, vwabd_vx_check)
-+GEN_ABD_OPIVV_WIDEN_TRANS(vwabdau_vv, vwabd_vv_check)
-+GEN_ABD_OPIVX_WIDEN_TRANS(vwabdau_vx, vwabd_vx_check)
-diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-index 9e3cc87f8a..4c2fb6f063 100644
---- a/target/riscv/tcg/tcg-cpu.c
-+++ b/target/riscv/tcg/tcg-cpu.c
-@@ -732,6 +732,12 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
-         return;
+diff --git a/hw/i2c/i2c_mux_pca954x.c b/hw/i2c/i2c_mux_pca954x.c
+index 4bb078a03c..597e57d99a 100644
+--- a/hw/i2c/i2c_mux_pca954x.c
++++ b/hw/i2c/i2c_mux_pca954x.c
+@@ -28,6 +28,7 @@
+ #include "hw/core/irq.h"
+ #include "hw/core/qdev.h"
+ #include "hw/core/qdev-properties.h"
++#include "migration/vmstate.h"
+ #include "qemu/log.h"
+ #include "qemu/queue.h"
+ #include "qom/object.h"
+@@ -270,6 +271,28 @@ static void pca954x_init(Object *obj)
      }
+ }
  
-+    if ((cpu->cfg.ext_zvabd) && !cpu->cfg.ext_zve32x) {
-+        error_setg(errp,
-+                   "Zvabd extensions require V or Zve* extensions");
-+        return;
-+    }
++static int pca954x_post_load(void *opaque, int version_id)
++{
++    Pca954xState *s = PCA954X(opaque);
 +
-     if (cpu->cfg.ext_zicntr && !cpu->cfg.ext_zicsr) {
-         if (cpu_cfg_ext_is_user_set(CPU_CFG_OFFSET(ext_zicntr))) {
-             error_setg(errp, "zicntr requires zicsr");
-diff --git a/target/riscv/tcg/vector_helper.c b/target/riscv/tcg/vector_helper.c
-index e28d8a3d9f..bdb1efcebc 100644
---- a/target/riscv/tcg/vector_helper.c
-+++ b/target/riscv/tcg/vector_helper.c
-@@ -5906,3 +5906,59 @@ GEN_VEXT_INT_EXT(vsext_vf2_d, int64_t, int32_t, H8, H4)
- GEN_VEXT_INT_EXT(vsext_vf4_w, int32_t, int8_t,  H4, H1)
- GEN_VEXT_INT_EXT(vsext_vf4_d, int64_t, int16_t, H8, H2)
- GEN_VEXT_INT_EXT(vsext_vf8_d, int64_t, int8_t,  H8, H1)
++    pca954x_enable_channel(s, s->control);
++    qemu_set_irq(s->int_out, s->int_status == 0);
++    return 0;
++}
 +
-+/* Zvabd Extension */
-+#define DO_ABD(N, M)  (N > M ? N - M : M - N)
-+#define DO_ABDACC(N, M, D) (DO_ABD(N, M) + D)
++static const VMStateDescription vmstate_pca954x = {
++    .name = "pca954x",
++    .version_id = 1,
++    .minimum_version_id = 1,
++    .post_load = pca954x_post_load,
++    .fields = (const VMStateField[]) {
++        VMSTATE_SMBUS_DEVICE(parent, Pca954xState),
++        VMSTATE_UINT8(control, Pca954xState),
++        VMSTATE_UINT8(int_status, Pca954xState),
++        VMSTATE_END_OF_LIST()
++    },
++};
 +
-+RVVCALL(OPIVV2, vabd_vv_b, OP_SSS_B, H1, H1, H1, DO_ABD)
-+RVVCALL(OPIVV2, vabd_vv_h, OP_SSS_H, H2, H2, H2, DO_ABD)
-+RVVCALL(OPIVV2, vabd_vv_w, OP_SSS_W, H4, H4, H4, DO_ABD)
-+RVVCALL(OPIVV2, vabd_vv_d, OP_SSS_D, H8, H8, H8, DO_ABD)
-+RVVCALL(OPIVX2, vabd_vx_b, OP_SSS_B, H1, H1, DO_ABD)
-+RVVCALL(OPIVX2, vabd_vx_h, OP_SSS_H, H2, H2, DO_ABD)
-+RVVCALL(OPIVX2, vabd_vx_w, OP_SSS_W, H4, H4, DO_ABD)
-+RVVCALL(OPIVX2, vabd_vx_d, OP_SSS_D, H8, H8, DO_ABD)
-+RVVCALL(OPIVV2, vabdu_vv_b, OP_UUU_B, H1, H1, H1, DO_ABD)
-+RVVCALL(OPIVV2, vabdu_vv_h, OP_UUU_H, H2, H2, H2, DO_ABD)
-+RVVCALL(OPIVV2, vabdu_vv_w, OP_UUU_W, H4, H4, H4, DO_ABD)
-+RVVCALL(OPIVV2, vabdu_vv_d, OP_UUU_D, H8, H8, H8, DO_ABD)
-+RVVCALL(OPIVX2, vabdu_vx_b, OP_UUU_B, H1, H1, DO_ABD)
-+RVVCALL(OPIVX2, vabdu_vx_h, OP_UUU_H, H2, H2, DO_ABD)
-+RVVCALL(OPIVX2, vabdu_vx_w, OP_UUU_W, H4, H4, DO_ABD)
-+RVVCALL(OPIVX2, vabdu_vx_d, OP_UUU_D, H8, H8, DO_ABD)
-+
-+RVVCALL(OPIVV3, vwabda_vv_b, WOP_SSS_B, H2, H1, H1, DO_ABDACC)
-+RVVCALL(OPIVV3, vwabda_vv_h, WOP_SSS_H, H4, H2, H2, DO_ABDACC)
-+RVVCALL(OPIVX3, vwabda_vx_b, WOP_SSS_B, H2, H1, DO_ABDACC)
-+RVVCALL(OPIVX3, vwabda_vx_h, WOP_SSS_H, H4, H2, DO_ABDACC)
-+RVVCALL(OPIVV3, vwabdau_vv_b, WOP_UUU_B, H2, H1, H1, DO_ABDACC)
-+RVVCALL(OPIVV3, vwabdau_vv_h, WOP_UUU_H, H4, H2, H2, DO_ABDACC)
-+RVVCALL(OPIVX3, vwabdau_vx_b, WOP_UUU_B, H2, H1, DO_ABDACC)
-+RVVCALL(OPIVX3, vwabdau_vx_h, WOP_UUU_H, H4, H2, DO_ABDACC)
-+
-+GEN_VEXT_VV(vabd_vv_b, 1)
-+GEN_VEXT_VV(vabd_vv_h, 2)
-+GEN_VEXT_VV(vabd_vv_w, 4)
-+GEN_VEXT_VV(vabd_vv_d, 8)
-+GEN_VEXT_VX(vabd_vx_b, 1)
-+GEN_VEXT_VX(vabd_vx_h, 2)
-+GEN_VEXT_VX(vabd_vx_w, 4)
-+GEN_VEXT_VX(vabd_vx_d, 8)
-+GEN_VEXT_VV(vabdu_vv_b, 1)
-+GEN_VEXT_VV(vabdu_vv_h, 2)
-+GEN_VEXT_VV(vabdu_vv_w, 4)
-+GEN_VEXT_VV(vabdu_vv_d, 8)
-+GEN_VEXT_VX(vabdu_vx_b, 1)
-+GEN_VEXT_VX(vabdu_vx_h, 2)
-+GEN_VEXT_VX(vabdu_vx_w, 4)
-+GEN_VEXT_VX(vabdu_vx_d, 8)
-+
-+GEN_VEXT_VV(vwabda_vv_b, 2)
-+GEN_VEXT_VV(vwabda_vv_h, 4)
-+GEN_VEXT_VX(vwabda_vx_b, 2)
-+GEN_VEXT_VX(vwabda_vx_h, 4)
-+GEN_VEXT_VV(vwabdau_vv_b, 2)
-+GEN_VEXT_VV(vwabdau_vv_h, 4)
-+GEN_VEXT_VX(vwabdau_vx_b, 2)
-+GEN_VEXT_VX(vwabdau_vx_h, 4)
+ static const Property pca954x_props[] = {
+     DEFINE_PROP_STRING("name", Pca954xState, name),
+ };
+@@ -287,6 +310,7 @@ static void pca954x_class_init(ObjectClass *klass, const void *data)
+ 
+     dc->desc = "Pca954x i2c-mux";
+     dc->realize = pca954x_realize;
++    dc->vmsd = &vmstate_pca954x;
+ 
+     k->write_data = pca954x_write_data;
+     k->receive_byte = pca954x_read_byte;
+
 -- 
-2.39.5
+2.50.1
+
 
