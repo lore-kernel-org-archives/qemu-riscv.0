@@ -4,64 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30299C79F99
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC06FC79FA0
 	for <qemu-riscv@archiver.kernel.org>; Mon,  7 Sep 2026 17:14:47 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x3ctz-00027Q-5i; Mon, 07 Sep 2026 13:13:03 -0400
+	id 1x3cts-0001zn-Px; Mon, 07 Sep 2026 13:12:56 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <eblot.ml@gmail.com>)
- id 1x3cSN-0002RN-M1
- for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 12:44:31 -0400
+ id 1x3cXR-0007MM-TN
+ for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 12:49:45 -0400
 Received: from mail-wr1-f53.google.com ([209.85.221.53])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <eblot.ml@gmail.com>)
- id 1x3cSK-00037g-OF
- for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 12:44:31 -0400
+ id 1x3cXO-0004CA-Le
+ for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 12:49:45 -0400
 Received: by mail-wr1-f53.google.com with SMTP id
- ffacd0b85a97d-47de0093c42so3642837f8f.3
- for <qemu-riscv@nongnu.org>; Mon, 07 Sep 2026 09:44:28 -0700 (PDT)
+ ffacd0b85a97d-484374f54d0so2338358f8f.3
+ for <qemu-riscv@nongnu.org>; Mon, 07 Sep 2026 09:49:42 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788799467; x=1789404267;
+ d=1e100.net; s=20251104; t=1788799781; x=1789404581;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=uBN2fajLUkSLR6UGUjgMftgFKf7I37iwakER3PeDYqk=;
- b=e/9eyQ2tSw4MeBjFqyvWlajIUGR/zNeUAcL5Ds0ak8yKNgZPL+T7HgHILE6YeSrwFh
- YoK+f66l9SVg60h94k7kK4SWqtsx9dzBKt4kwcfOP9QXSz4I/i06xPEa6oHkP43+2E5V
- LZplf/vpAQpZWc6p/6uZuuvriArtjObCVXsvVh7x976PTW1Eu6t2WCjXOR/6UjhiFjCT
- 1NvTYnw2l+lsPbIkVYELPcLTkDgg+AAra5MBYyEkk1GxnvlK7eZLDlxt/qPm9cI+PGPT
- /57ABYWFuZ+dIj57nNhGnBXvKULKXkVKmoaDgsARo/6VZLqf/0EUGrgOkrIyAKawgBpg
- B8Xw==
+ bh=vlKqMzmrK40spXKv/yB5zNGWaGlUqMdf8882/o2C+B4=;
+ b=SUzlHhjyjg21CFX87O1uelI2H5aQSBNPAJmB83h9lEAowrPadmyZgTqoGLVWQQeY0V
+ JDbQJ01M2cdrYDqxDEw8psyEst2QTk7S6GIKLKp2uMtV7eooEBPBDP1RDkEX4STD9CvE
+ 5mJhAYRxVa5VjkJpZR52SvnMFJP7hZxVj08qqf/MlTl+2ShnLimou5Em0P3xCm+FZRqA
+ fIkYlmhgYfMrVrlRh1xbvMKr8WD8loo/ZNxHc2N8ra6yrLUawlVjiT1wYPpJpkUsrZ2U
+ 04L6B+ZccnoEWXX6O+iVX8IDF0LL68fG7JVtAQX16MMrwE2sVsPX1cbSnD6MiO4Prvop
+ 2uEw==
 X-Forwarded-Encrypted: i=1;
- AKwUvBxHRml4AlwmRcS0YgWDa43+PZhxWHJKPMt3oUdAMn4rvedk6YKA3E7aE5r26XewYnG0Nxjf5R1b7Ira@nongnu.org
-X-Gm-Message-State: AFuF++kMo/gMyTjeoyIP9zYzBd+It/cHYZlPLb9PJ8LVHJ0jVDrRk8QQ
- IVryi9IDP0ZkZzElAKD2KwpnFwYoho85xSusT/645e+0HGFcs82OOyRO
-X-Gm-Gg: AYBFou0sWn7Ug8RU7pRE+4iISSGrmjTW8rNZbAGoSlog/XYAfGfWHA8rFTioDuHz9Xt
- pCFOr31k38C/ML7tfQ9sF39iijJVo1Z4jkT/oEYwjk6rY50Z5QBQAAncpD0AmnoCZscyPw3FY8U
- UUJ2E/CjoJi8vRWbZh60ViT1wpKhb06uwOR2PBvgrmXesZqIKYbYq27viwCf8X77yPP1kCrOXfL
- zBo3MyftKvMIpBYvvkNM3js44Gr4ZNTOIETmMiAThaw7pTJgWnzyLwJ1XuOqve0a7s4tVWFiCsE
- 0G/EQd9ZKXNsTzhewGECZpHRY2dn9lsih/Y2CCxd2B69UPThYCffOl9Z7QkoHhtc9vRtyiRqY8R
- ysyED03bWeIuKMcqBExnQCgYkPRDb1Z/wf0ZiZzIMezuPORdKB4XV8vadHdjwjjANNJI6eYLUow
- TehmhG/wWmLXIxgGBI4/tQ4Tat5BljMaUiAmMzbQ/oJ/EfCZqgczZ8hCBZ6ctqt0Iz49mcxCM8+
- C2SWQdFmzZ5ngY3blRUTNWk4RL6tHQNqf00sgRswsdJ2A==
-X-Received: by 2002:a5d:6f1e:0:b0:485:8c16:5ef0 with SMTP id
- ffacd0b85a97d-4858c166129mr22614304f8f.42.1788799467119; 
- Mon, 07 Sep 2026 09:44:27 -0700 (PDT)
+ AKwUvBz7xMQmoiMZ15u3OxGIuNlDOGUnvm1E7OYadnC3s3R0myLlWN6GBWLV/hn0AU3utPHWNEmwcI45H6we@nongnu.org
+X-Gm-Message-State: AFuF++kXfSf4/ygmUJZKj5VNDBlF7fI6r/uZpq0DyRP/L6vmlNvLbXxL
+ R1jeT1+jyyMdQwzoujAuO7hHYr8iCKcsxrzXLGBDVvaxoED/ilNJzpL3
+X-Gm-Gg: AYBFou0rbb39S8mM/lxlm6rzI/T8pcm5O3RUPmhi3KoaWrMVYcHoYnqNi3g7GREuFtP
+ duBcHFpokUWZcFlskXo3HLqdn0grT8fUJN3h/mkwTTZrAU/V3JbdAhbJmYFzSfwXH7XAWneYzqN
+ igNwY70PGO9nqVukYK4sUbFQnE/a1aw4YZw9HzOPX/7ugYPGsChoF2QWvh8K9fz6Ed83ertCIcH
+ t0gmJ41H+LZW7nLko3s0L19FZbpB20PRicWNxsea4xlL7NtQafgsPzje7Inr+9TuZBy2M6Eg+Cm
+ AqBy7fmnWEpixR3cPT7mLmpTCSPLHkyryQ/9TXEZNW6jhkV0ZSsOcdVapUcgQfJ21XCHah/TbYl
+ ooYP50hJvDXcaBt29nzgSIEDHzhWL+ilTsUgag/21vYaXZwPBCoPv9eGUnmYMJdw5oMwt6WRGfO
+ 3CgeN2/smrzENGfGv4Ei1/6fo1pehBxsqpBqJaizg08X+MNPP8FZwH0/HSbqA1BSLG2ZvuY3S7F
+ HBlyfrIlcRErQPjFO5zFDW+Al+pGUnhjMs=
+X-Received: by 2002:a05:6000:420d:b0:485:8ebb:be1a with SMTP id
+ ffacd0b85a97d-4858ebbbee4mr38457374f8f.4.1788799781076; 
+ Mon, 07 Sep 2026 09:49:41 -0700 (PDT)
 Received: from localhost (89-93-216-19.hfc.dyn.abo.bbox.fr. [89.93.216.19])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48594172546sm21043507f8f.15.2026.09.07.09.44.26
+ ffacd0b85a97d-485885bf3f0sm32571466f8f.33.2026.09.07.09.49.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 07 Sep 2026 09:44:26 -0700 (PDT)
-Date: Mon, 07 Sep 2026 18:42:00 +0200
-Subject: [PATCH 10/50] hw/rtc: ds1338: implement Resettable reset
+ Mon, 07 Sep 2026 09:49:40 -0700 (PDT)
+Date: Mon, 07 Sep 2026 18:42:27 +0200
+Subject: [PATCH 37/50] tests/qtest: ina230: cover operating modes and
+ triggered conversions
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260907-bmc-minerva-v1-10-0d83ad610c3b@free.fr>
+Message-Id: <20260907-bmc-minerva-v1-37-0d83ad610c3b@free.fr>
 References: <20260907-bmc-minerva-v1-0-0d83ad610c3b@free.fr>
 In-Reply-To: <20260907-bmc-minerva-v1-0-0d83ad610c3b@free.fr>
 To: qemu-devel@nongnu.org
@@ -77,11 +78,11 @@ Cc: =?utf-8?q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>,
  =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>, 
  Emmanuel Blot <emmanuel.blot@free.fr>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1788799320; l=1334;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1788799322; l=5271;
  i=emmanuel.blot@free.fr; s=20260602; h=from:subject:message-id;
- bh=dw30TFJwCbFZiHnP+oufY0O0rlo9ULUgYxm9lxU/N6I=;
- b=pu9ebqJet/tiBDoaaf4BN7KUK21xC4ntJwcGAkWudZttiuCq9DRmHNE0e48w2ji6Ngrs8Oway
- igoMaykKGBXCwok8q42UE3LL5LVRMFqrmdFeQ6XBKAts6Zxg+dH4wlK
+ bh=Mc0oCEh0KqXrK8lJcAnq4Li1G/vyttVEriaHtSwE3o8=;
+ b=Yx/Z6BPfNgz8qAjgf1heLMVSxs0JUqEhTM9MeBEQi5Ax4rW9sNQ82bZ6nZak3Zsm2trWV6MTS
+ Sa28skbvUiNDetNTEhv77D4b+W3yJmXTXk2hdW3rt6hOQURUyWEIlvz
 X-Developer-Key: i=emmanuel.blot@free.fr; a=ed25519;
  pk=0qFrZ21FAAN8OfVsSoVcCFTk/NMYOWzxJz4paSAVm0g=
 Received-SPF: pass client-ip=209.85.221.53; envelope-from=eblot.ml@gmail.com;
@@ -112,45 +113,129 @@ From:  Emmanuel Blot via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The device relied on device_class_set_legacy_reset(), a compatibility
-shim around the legacy DeviceState reset hook. Convert ds1338_reset()
-into a proper Resettable hold phase, dropping the legacy shim.
+Add coverage for the MODE field: power-down retains the last results,
+the shunt/bus channel-enable bits gate which registers track new inputs,
+triggered modes convert once per Config write, and bus-only mode still
+derives power from the retained current.
 
 Signed-off-by: Emmanuel Blot <emmanuel.blot@free.fr>
 ---
- hw/rtc/ds1338.c | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
+ tests/qtest/ina230-test.c | 95 ++++++++++++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 94 insertions(+), 1 deletion(-)
 
-diff --git a/hw/rtc/ds1338.c b/hw/rtc/ds1338.c
-index f8b3340bf0..74aee6c746 100644
---- a/hw/rtc/ds1338.c
-+++ b/hw/rtc/ds1338.c
-@@ -208,9 +208,9 @@ static int ds1338_send(I2CSlave *i2c, uint8_t data)
-     return 0;
+diff --git a/tests/qtest/ina230-test.c b/tests/qtest/ina230-test.c
+index 36c899efee..f8b982686a 100644
+--- a/tests/qtest/ina230-test.c
++++ b/tests/qtest/ina230-test.c
+@@ -142,7 +142,97 @@ static void test_config_wmask(void *obj, void *data, QGuestAllocator *alloc)
+     g_assert_cmphex(i2c_get16(dev, REG_CONFIG), ==, 0x7FFF);
  }
  
--static void ds1338_reset(DeviceState *dev)
-+static void ds1338_reset_hold(Object *obj, ResetType type)
+-/* Shunt voltage register, including two's-complement negatives */
++/* Operating modes */
++static void test_modes(void *obj, void *data, QGuestAllocator *alloc)
++{
++    QI2CDevice *dev = (QI2CDevice *)obj;
++    static const struct {
++        uint8_t mode;
++        uint16_t shunt, bus, current, power;
++    } cases[] = {
++        /* Power-down: no conversion, every register retains the baseline */
++        { 0x0, 0x1F40, 0x2570, 0x2710, 0x12B8 },
++        { 0x4, 0x1F40, 0x2570, 0x2710, 0x12B8 },
++        /* Shunt only (continuous): shunt and current track the probe */
++        { 0x5, 0x0FA0, 0x2570, 0x1388, 0x12B8 },
++        /* Shunt and bus (continuous): every register tracks the probe */
++        { 0x7, 0x0FA0, 0x12C0, 0x1388, 0x04B0 },
++    };
++    size_t idx;
++
++    for (idx = 0; idx < ARRAY_SIZE(cases); idx++) {
++        i2c_set16(dev, REG_CONFIG, CONFIG_RST);
++        i2c_set16(dev, REG_CALIBRATION, 0x0A00);
++        qmp_ina230_set("shunt-voltage", 20000000);
++        qmp_ina230_set("bus-voltage", 11980000);
++
++        i2c_set16(dev, REG_CONFIG, cases[idx].mode);
++        qmp_ina230_set("shunt-voltage", 10000000);
++        qmp_ina230_set("bus-voltage", 6000000);
++
++        g_assert_cmphex(i2c_get16(dev, REG_SHUNT), ==, cases[idx].shunt);
++        g_assert_cmphex(i2c_get16(dev, REG_BUS), ==, cases[idx].bus);
++        g_assert_cmphex(i2c_get16(dev, REG_CURRENT), ==, cases[idx].current);
++        g_assert_cmphex(i2c_get16(dev, REG_POWER), ==, cases[idx].power);
++    }
++}
++
++/*
++ * Triggered modes perform exactly one conversion per trigger, where the
++ * trigger is a Configuration-register write. Injected input changes
++ * between triggers are ignored until the next write.
++ */
++static void test_triggered(void *obj, void *data, QGuestAllocator *alloc)
++{
++    QI2CDevice *dev = (QI2CDevice *)obj;
++
++    i2c_set16(dev, REG_CONFIG, CONFIG_RST);
++    i2c_set16(dev, REG_CALIBRATION, 0x0A00);
++
++    qmp_ina230_set("shunt-voltage", 20000000);
++    qmp_ina230_set("bus-voltage", 11980000);
++
++    i2c_set16(dev, REG_CONFIG, 0x03);
++    g_assert_cmphex(i2c_get16(dev, REG_SHUNT), ==, 0x1F40);
++    g_assert_cmphex(i2c_get16(dev, REG_BUS), ==, 0x2570);
++
++    qmp_ina230_set("shunt-voltage", 10000000);
++    qmp_ina230_set("bus-voltage", 6000000);
++    g_assert_cmphex(i2c_get16(dev, REG_SHUNT), ==, 0x1F40);
++    g_assert_cmphex(i2c_get16(dev, REG_BUS), ==, 0x2570);
++
++    i2c_set16(dev, REG_CONFIG, 0x03);
++    g_assert_cmphex(i2c_get16(dev, REG_SHUNT), ==, 0x0FA0);
++    g_assert_cmphex(i2c_get16(dev, REG_BUS), ==, 0x12C0);
++
++    i2c_set16(dev, REG_CONFIG, 0x07);
++    qmp_ina230_set("shunt-voltage", 20000000); /* A */
++    g_assert_cmphex(i2c_get16(dev, REG_SHUNT), ==, 0x1F40);
++}
++
++/*
++ * In a bus-only mode the current register is retained, but the power register
++ * is still refreshed on each bus conversion from that retained current.
++ */
++static void test_bus_only_power(void *obj, void *data, QGuestAllocator *alloc)
++{
++    QI2CDevice *dev = (QI2CDevice *)obj;
++
++    i2c_set16(dev, REG_CONFIG, CONFIG_RST);
++    i2c_set16(dev, REG_CALIBRATION, 0x0A00);
++    qmp_ina230_set("shunt-voltage", 20000000);
++    qmp_ina230_set("bus-voltage", 11980000);
++    g_assert_cmphex(i2c_get16(dev, REG_CURRENT), ==, 0x2710);
++
++    i2c_set16(dev, REG_CONFIG, 0x06);
++    qmp_ina230_set("bus-voltage", 6000000);
++
++    g_assert_cmphex(i2c_get16(dev, REG_CURRENT), ==, 0x2710);
++    g_assert_cmphex(i2c_get16(dev, REG_BUS), ==, 0x12C0);
++    g_assert_cmphex(i2c_get16(dev, REG_POWER), ==, 0x0960);
++}
++
++/* Shunt voltage register */
+ static void test_shunt_injection(void *obj, void *data, QGuestAllocator *alloc)
  {
--    DS1338State *s = DS1338(dev);
-+    DS1338State *s = DS1338(obj);
- 
-     /* The clock is running and synchronized with the host */
-     s->offset = 0;
-@@ -224,11 +224,12 @@ static void ds1338_class_init(ObjectClass *klass, const void *data)
- {
-     DeviceClass *dc = DEVICE_CLASS(klass);
-     I2CSlaveClass *k = I2C_SLAVE_CLASS(klass);
-+    ResettableClass *rc = RESETTABLE_CLASS(klass);
- 
-     k->event = ds1338_event;
-     k->recv = ds1338_recv;
-     k->send = ds1338_send;
--    device_class_set_legacy_reset(dc, ds1338_reset);
-+    rc->phases.hold = ds1338_reset_hold;
-     dc->vmsd = &vmstate_ds1338;
- }
- 
+     QI2CDevice *dev = (QI2CDevice *)obj;
+@@ -377,6 +467,9 @@ static void ina230_register_nodes(void)
+     qos_add_test("defaults", "ina230", test_defaults, NULL);
+     qos_add_test("soft-reset", "ina230", test_soft_reset, NULL);
+     qos_add_test("config-wmask", "ina230", test_config_wmask, NULL);
++    qos_add_test("modes", "ina230", test_modes, NULL);
++    qos_add_test("triggered", "ina230", test_triggered, NULL);
++    qos_add_test("bus-only-power", "ina230", test_bus_only_power, NULL);
+     qos_add_test("shunt-injection", "ina230", test_shunt_injection, NULL);
+     qos_add_test("bus-injection", "ina230", test_bus_injection, NULL);
+     qos_add_test("shunt-limits", "ina230", test_shunt_limits, NULL);
 
 -- 
 2.50.1
