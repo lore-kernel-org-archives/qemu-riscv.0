@@ -4,87 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26A56C79F9E
-	for <qemu-riscv@archiver.kernel.org>; Mon,  7 Sep 2026 11:47:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FC12C79FA0
+	for <qemu-riscv@archiver.kernel.org>; Mon,  7 Sep 2026 11:47:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x3XoA-0002iZ-FQ; Mon, 07 Sep 2026 07:46:42 -0400
+	id 1x3XoO-0002pH-NA; Mon, 07 Sep 2026 07:46:56 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1x3Xo1-0002gu-6B
- for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 07:46:33 -0400
-Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
+ id 1x3Xo5-0002iF-Ce
+ for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 07:46:40 -0400
+Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1x3Xny-0003EQ-5u
- for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 07:46:32 -0400
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+ id 1x3Xo3-0003FV-Iq
+ for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 07:46:37 -0400
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 687An3PL3230485
- for <qemu-riscv@nongnu.org>; Mon, 7 Sep 2026 11:46:28 GMT
+ 687AmtpG3180823
+ for <qemu-riscv@nongnu.org>; Mon, 7 Sep 2026 11:46:34 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=SM7MtFv4BNB
- sgJqZcEG5MOgQiwjcmD01gdu+WKc/Lbw=; b=HFdwrwXYpiTR8MYtjxrzioBfEZq
- HE4hKFgWxk/VUAwPwyuFBFbXHzraorMCsiz0dxBEUh+5eBipPosSfa/uk3nkr3Uu
- e4gPd8wWrH9JnjGZPppF1PfYah4votJtnEWtNLKDB1wjW8XIXFN1uOT8iyWy+NTq
- mpMaY9V11ytdrd6W3WaPokEUDgQdEF7qGWnFZoPVCW7H2fee+vDcfd7m5zezNCCM
- G1GJKr3eKSI/VFn2mQiI7xKruokMZ3ikVuP2B3eMd3TusFUebxlLBcjSZqb93g0X
- LGbY8SC0U7mHen/ASxH/xKwvMjZmvUe9G+ZOKgAjKbPEFS/Ywx4MMMg2+iw==
-Received: from mail-qv1-f69.google.com (mail-qv1-f69.google.com
- [209.85.219.69])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ghfxkthj3-1
+ :mime-version:references:subject:to; s=qcppdkim1; bh=rQRIvS4B5Ef
+ nTVfHSEcinZ01H6Ql1EnlvJudtDsuPNE=; b=Jr1/YFrtmYToCltqTwneyOSSWOF
+ 9gfJIIdJLxvUAB6qoZLUIJcoW/oQJXfNhjXKITXzmsdov/SQt7kgOpIBDBWFpVGU
+ 64eGviFsj16lX+mvmI3PLgjHnzjC11NyGVnLO5iTXqSm1EIbmVclrPQzgQSSGCAl
+ NLSu+oSdsF68o81VxICFN0kqe0Ds05k4DtU+ScE8rZ4B7JldhejJ4mIsmiF7LLFJ
+ HickOgTbiLYQFKEvXTa3/3VX6CPHmmmQIy655ATyX+prvQJYsRa/kttRXQe0kRKR
+ 9DVbpSYlpAmrL08L9yaKJxwuq1Mi+LOnyDbvMdieMV/+qljH0EH9zB98F1Q==
+Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com
+ [209.85.219.72])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ghsw20sd7-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Mon, 07 Sep 2026 11:46:28 +0000 (GMT)
-Received: by mail-qv1-f69.google.com with SMTP id
- 6a1803df08f44-91030f96c70so44657716d6.0
- for <qemu-riscv@nongnu.org>; Mon, 07 Sep 2026 04:46:28 -0700 (PDT)
+ for <qemu-riscv@nongnu.org>; Mon, 07 Sep 2026 11:46:33 +0000 (GMT)
+Received: by mail-qv1-f72.google.com with SMTP id
+ 6a1803df08f44-9105be46009so15288966d6.1
+ for <qemu-riscv@nongnu.org>; Mon, 07 Sep 2026 04:46:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1788781588; x=1789386388; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1788781593; x=1789386393; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=SM7MtFv4BNBsgJqZcEG5MOgQiwjcmD01gdu+WKc/Lbw=;
- b=W1jylKGlb4fh9yZqgcykTnwPxHt1zrKzkyTz/KKJ1hwkBC3FUXddJjrgclfhH0AcgF
- FTaFHZ3HdAtjx/4pH3sYIxa1zThAtQKzLG3rYMxx1MQAcu2KxEAHLSOOs3ps1w3IWkZQ
- g9Lv6u3MMc9Y8B7kF9Yl3S8A5JPLtZm/GbaXhIOiwS3ojsCLrdKR84f5bizQvRUFV848
- RXWS9gh2iDTeEhyX1Ys4TG7JaLp0B7d5/3gOpQxbrTI8unv54VRJGsHH2NSmCKoTqVEU
- vPzxhaEtaeW+I4L4DH2+6cvLi2tCn+IPe/cy0vKjwTaU4iB3g7h9Ux5jsYPLYtFuKWXc
- qh0Q==
+ bh=rQRIvS4B5EfnTVfHSEcinZ01H6Ql1EnlvJudtDsuPNE=;
+ b=KHBbfDRw69bXLBYS5wnVAzqknT0m1YT4JszMSl/wL00F+x4XSc7ed7ftofUziO/XKE
+ q1lf5PtFRfh5TLTx1obPdhLArOMR/FOf4SCGArcjCl1nthcbFSLQo1ZholWX8gcNKMtn
+ vbHZI6HLCXzrUGSlek1z2R0yJwyBfDQ9F1/n6NVf/aDTM7p6Tpwq+k1dmZJtkE2KDdmB
+ pYIpUr3S/LYpay4vEGG3s6Hq+NFM2xtkREUwx2IimZYF4tCXSGJ5frXTG15RXCGJMAj1
+ +A/+NcYG9nJwzFZqVHwtYFhqilNZDI/4J2+N1yTqynP6FXr5FwctNBIX0D2O8+g1Zu4F
+ sV5A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788781588; x=1789386388;
+ d=1e100.net; s=20251104; t=1788781593; x=1789386393;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=SM7MtFv4BNBsgJqZcEG5MOgQiwjcmD01gdu+WKc/Lbw=;
- b=UU5LF4NHBqmWy7x1dZ77bgg0BwJy3k8JO6jfJt6/draGyvU9Cs5LEPRMG6OR8lNSTO
- V29vckVZOEEgMLbAv1zvgwJQtN+p5vVoQE0kAb1qxv2xyAKotWOrr3s/G8iwQSeZUPUY
- CIRENJ3NrfLUWcavX/1Cl7PnTRCqMgE/BiyG16roRBNFFtdY2LYUFrQBjCrOI7ZGv2kY
- WprROOZvICoWPLjocZcOzUb83EpyXxNGJ5t3z54ZHAen2ye8qgkr7jhACnqsJ0yDvFsw
- GpmFKfTxKct4+wJGHVGxyxVR9/VmiOBLagUNq84Ke9scp/3adeZxkW6K1FNb5+8T+vRf
- K20Q==
-X-Gm-Message-State: AFuF++nNHCMBjuQ+zBrmRZr7TrGMUqw/YxS8j94h1k5tEmWGKVJN2hN6
- sp2cBJxOGz5dp4w56Z6md/opfMx47xX3yr13RMZAEN5G0aRLucEmOzo0YUZup8dA68TKF8HT9Ih
- W1J0XsVvXaxf/BbKNEkAOwNwj1LhCHnKQrpjEIJYrwT46oUM+keTrDtuhXA==
-X-Gm-Gg: AYBFou0NTy91bvDpSFzNSq1UlnVpS4r4B6JHXzCJ2mg1Zr+XH/vgHUnC+GLKVkjCwoV
- makcnzIHKuPculE5RB4liDm/sFmgNOvjs8mkYsYuBBONJsEuu5m3Ztb29SKLjNp2ImHoFVx+p84
- xw9fFhSkx/IsSl2jzewJNwFUdBE9Y4wne10bMNXqm2U2FLtq97IRv1EQzsZ5laHuXZ3T3QzZR2E
- FR2ebRQ7GqGZRvojIDbb320jHXIVcWlU2/37G7evG0BW49wAdkBFBiqeo3/jjkVhe07QqGZmn1K
- ecb/ZZX0Sk73NSFtciTn4sbgsgz4E/nNBj5NO0dgCCb6TbzW6b2lnfHoOko4RYiUCzlWT7l7Muf
- ZWOLAXMBQ29uqzye0jYpW7OCCtHc4abAuNBYa
-X-Received: by 2002:a05:6214:85d4:20b0:8ef:e0d0:9fae with SMTP id
- 6a1803df08f44-9103ef2ddb7mr201189016d6.14.1788781587740; 
- Mon, 07 Sep 2026 04:46:27 -0700 (PDT)
-X-Received: by 2002:a05:6214:85d4:20b0:8ef:e0d0:9fae with SMTP id
- 6a1803df08f44-9103ef2ddb7mr201188646d6.14.1788781587240; 
- Mon, 07 Sep 2026 04:46:27 -0700 (PDT)
+ bh=rQRIvS4B5EfnTVfHSEcinZ01H6Ql1EnlvJudtDsuPNE=;
+ b=nonVc1K2VZ9tz/mkDiKGf1/THm2emmZH7yuySqz4aeADF/YIBkLKmSRgDWSyHLl0Fb
+ BadTOruyB9zNAL3Ujd6I8NyLB1wdHceCL67pifPGIubQCRvCu7Fz+kG26ItB+ZL+jR4z
+ iy8kereJKciCcbXfzrepGlOvK6F/GgjGSbHu1CeD9O9EUeSFsX7k0THul6oLvKdgNVjS
+ dSesKQC2HqcYwf/W7k7b/E056HlXFF/N+FP6Mpiu7BzqioqLNIBCzzEmWeNku5/fhKHP
+ qwna2uYhwST/NkMzplgLdk2zm6fiMDQoW3t9IrkrGhiPHoCklGGSbDsgbBKzLBYP44vW
+ e4jw==
+X-Gm-Message-State: AFuF++k0RUEupfpuvF5EJDVjy9FAHrY7ZsSxBkGLNznBE9MFYL3P1XFp
+ y8CA+bqg56zVMMvuEp2R7lQN5tHmVI0n0orfnZfzGkFhZrPbjnpYlmhKwFMf09NH5U12J5eT1YA
+ BGjVecgP1IJpSoBeiIbwJOFOLkYui7StcKcJJ7oeHMfV2KZv+Uh5c7ULM0Q==
+X-Gm-Gg: AYBFou3PXEEqSYW0dLyiLaLkX60iyjYdFlZJGwqM+rHNXMUUcLJyhvSQMf/NvgEOpXR
+ g1taLbgGW67W2FGvKO4RNeYQ4/+ZLILTQfzwYtfIC6UoPELonB3sWNjU3qs2gYQjFMudP7Hrc5N
+ 07dzUr+By6+OOrl1iwRWhVF85++AiBVH2XkXFJPvR4D48vAz2onCWZ7Du61cP+IWwAe7f0JOFgE
+ p4nxM+rNiHrJxN3BJN3PlaesEuZa2EpOZAEOSdmbQuh9/AkQ9dHWCMpBGpW1YlUtOBgJ2quxygq
+ 6KuX82ddMWGhZorsF7akKH8wxfDOHWY+SAcD64lM1bg59h5B5DwalFm8Z3WGpRXFBhVMlreQOAo
+ eM/Lh/wxRdlquOJ9ys4RDiCZWv58oyvJGR1tH
+X-Received: by 2002:a05:6214:4001:b0:90e:940d:afe6 with SMTP id
+ 6a1803df08f44-9106202083dmr4093826d6.15.1788781592716; 
+ Mon, 07 Sep 2026 04:46:32 -0700 (PDT)
+X-Received: by 2002:a05:6214:4001:b0:90e:940d:afe6 with SMTP id
+ 6a1803df08f44-9106202083dmr4093496d6.15.1788781592267; 
+ Mon, 07 Sep 2026 04:46:32 -0700 (PDT)
 Received: from QCOM-UWl2o8bcGT.qualcomm.com ([177.18.66.131])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-91040679e13sm89834876d6.26.2026.09.07.04.46.24
+ 6a1803df08f44-91040679e13sm89834876d6.26.2026.09.07.04.46.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 07 Sep 2026 04:46:26 -0700 (PDT)
+ Mon, 07 Sep 2026 04:46:31 -0700 (PDT)
 From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
@@ -92,43 +92,44 @@ Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
  Chao Liu <chao.liu.zevorn@gmail.com>,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
  Tao Tang <tangtao1634@phytium.com.cn>, Palmer Dabbelt <palmer@dabbelt.com>
-Subject: [PATCH v8 1/7] target/riscv: add sdext debug CSRs state
-Date: Mon,  7 Sep 2026 08:46:08 -0300
-Message-ID: <20260907114615.1609913-2-daniel.barboza@oss.qualcomm.com>
+Subject: [PATCH v8 3/7] target/riscv: add dret instruction
+Date: Mon,  7 Sep 2026 08:46:10 -0300
+Message-ID: <20260907114615.1609913-4-daniel.barboza@oss.qualcomm.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260907114615.1609913-1-daniel.barboza@oss.qualcomm.com>
 References: <20260907114615.1609913-1-daniel.barboza@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA3MDEzMCBTYWx0ZWRfX6PL1gt5Dr2JZ
- sA7fAyCMFsaS1VU8AB7/YETMaEr0uspmVXMszcotQN9RtItLZ5lhMirz/UOOCugsXpFlTW6mZc1
- CdgHY4d8NOuwEut8DMER1HxkUaEtPJ+psWHI9Y0hIxbjV1+jEBD9yhIXOQU52BkVF7oV4Hj/Fwf
- f+J7zvMAA9xQLDnLi+Ljrk0gT7akjT+0WT1VX8x/n2mLggMuHVJMGqpH/vdR3vKpzgu5PtwY7mX
- 5mxn6gckex8RE446lJ8SM3QrH1BUp4AIe21CmvFtw0eoT3Zx0+LefDYHBjam+l0vgzU1UFdrUOt
- lcvX8ZS4Q9B9fqZYKkzJjcigq9ATMEXyHpsHN/k+zJcgCIDXhYb7Hf2yalus4csOMmKrRQFavOS
- voitwNSxaUz9QPcDMmYp0cUp2+FJZx/vVWGMMDoM0MxadDQgxzu62fqMBS5zGGt0aXh51bQ00e5
- wTcE3moJ2d+0xlU5FMg==
-X-Proofpoint-GUID: _u8vUtyOauRumGEeFAyw0PFxJ6wAAfIU
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA3MDEzMCBTYWx0ZWRfX9rUtx3dKryqJ
- 0lpwVEuj61FA5ZYjpPwtqCy7VqXYdU4eD3W1VZizIv5b2xCVMPjJhht4ZK/4+9iE89SBY12qPWo
- /ogk46KbH5LZLfMe/xZU5wDp+x5Bol4=
-X-Authority-Analysis: v=2.4 cv=daOwG3Xe c=1 sm=1 tr=0 ts=6a9ea414 cx=c_pps
- a=wEM5vcRIz55oU/E2lInRtA==:117 a=CQQxcbsX5Byh3TlVSSGwig==:17
+X-Proofpoint-ORIG-GUID: 75y3ZGhR602Q1jaP5NviQWN2tLlKlDvw
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA3MDEzMCBTYWx0ZWRfX64xL6RS9jslr
+ DZbiThkgTPQqjXmQMrSCAFgjx434sl7QkpluhTNEzxLH8YZApYjPjqmhhWGocc9a1ZdWxzsy++Z
+ ctysRKrIO5T+qrYdQ9KC0VegdS8bsWE=
+X-Authority-Analysis: v=2.4 cv=eKwjSnp1 c=1 sm=1 tr=0 ts=6a9ea419 cx=c_pps
+ a=7E5Bxpl4vBhpaufnMqZlrw==:117 a=CQQxcbsX5Byh3TlVSSGwig==:17
  a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22 a=xvfqbYfxAAAA:20
- a=pGLkceISAAAA:8 a=EUspDBNiAAAA:8 a=fgrLqfBXAAAA:8 a=8aUGYKOvqt1NoZA4oJ4A:9
- a=OIgjcC2v60KrkQgK7BGD:22 a=_Ge82aPy-h_wFa7gWU4u:22 a=bA3UWDv6hWIuX7UZL3qL:22
-X-Proofpoint-ORIG-GUID: _u8vUtyOauRumGEeFAyw0PFxJ6wAAfIU
+ a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22 a=xvfqbYfxAAAA:20
+ a=pGLkceISAAAA:8 a=EUspDBNiAAAA:8 a=fgrLqfBXAAAA:8 a=2wZ2TuoAFSEcmpuqsd8A:9
+ a=pJ04lnu7RYOZP9TFuWaZ:22 a=_Ge82aPy-h_wFa7gWU4u:22 a=bA3UWDv6hWIuX7UZL3qL:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA3MDEzMCBTYWx0ZWRfXymvIEgdQ0nHa
+ MzPjJMetwzACXlXf8oA/Xf8ZJEQ1SQR6/lfBb8amPoa7NEI26oHNFEOYmXFdskRIdUtbICHNa7i
+ eJIGjfs+d4zaDySlb5Nd0lnM7qntI5wKHi4Cg27QV+2JkJbvlJeHGdJRET8hY2gFNK+M/5lOIEW
+ OKzzLB0caZ4cvQ5VeiOwxG7saOB1mYRGpV8vReSA/av6RfqMmoUrF5sunCCi/Leu/3O2KwK3de8
+ 8O6Y9n0o1JNHvRyA9VTQWEIhtjIxcrwUYrMmsHO0+HKThBgHT/QhGDIKmwh5pdBONLb0zE2cG23
+ X/r7wrBQK8dUNVhX+JTJ7q9vut/sT4zt+N0jofRizqH/A9R0L9MqyCTSwdcYIhtpAovmLPVYeCO
+ /ucJThN+8t4QJixinfhJl+JPhdikyXZEhftsSFeapswz8DEtSu6ZfH++G8ggwYpdLLFbiniwVZz
+ ZPY77R5bui5Kkgg4aBw==
+X-Proofpoint-GUID: 75y3ZGhR602Q1jaP5NviQWN2tLlKlDvw
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-07_03,2026-09-07_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 priorityscore=1501 bulkscore=0 spamscore=0 phishscore=0
- lowpriorityscore=0 adultscore=0 malwarescore=0 impostorscore=0 clxscore=1015
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609070130
-Received-SPF: pass client-ip=205.220.180.131;
- envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
+ bulkscore=0 lowpriorityscore=0 malwarescore=0 priorityscore=1501
+ suspectscore=0 clxscore=1015 adultscore=0 spamscore=0 phishscore=0
+ impostorscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2609070130
+Received-SPF: pass client-ip=205.220.168.131;
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
 X-Spam_score_int: -27
 X-Spam_score: -2.8
 X-Spam_bar: --
@@ -156,303 +157,100 @@ From: Chao Liu <chao.liu.zevorn@gmail.com>
 RISC-V Debug Specification:
 https://github.com/riscv/riscv-debug-spec/releases/tag/1.0
 
-Add architectural state for Sdext Debug Mode: debug_mode, dcsr, dpc
-and dscratch0/1. Wire up CSR access for dcsr/dpc/dscratch and gate
-them to Debug Mode (or host debugger access).
-
-The Sdext is not fully implemented, so it is disabled by default.
+Add DRET decode/translate and a helper to leave Debug Mode and return
+to dpc. Executing DRET outside Debug Mode raises illegal instruction.
 
 Signed-off-by: Chao Liu <chao.liu.zevorn@gmail.com>
 Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Tested-by: Tao Tang <tangtao1634@phytium.com.cn>
 Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 ---
- target/riscv/cpu.c                |   7 ++
- target/riscv/cpu.h                |   4 +
- target/riscv/cpu_bits.h           |  33 ++++++++
- target/riscv/cpu_cfg_fields.h.inc |   1 +
- target/riscv/machine.c            |  20 +++++
- target/riscv/tcg/csr.c            | 126 ++++++++++++++++++++++++++++++
- 6 files changed, 191 insertions(+)
+ target/riscv/helper.h                          |  1 +
+ target/riscv/insn32.decode                     |  1 +
+ .../tcg/insn_trans/trans_privileged.c.inc      | 18 ++++++++++++++++++
+ target/riscv/tcg/op_helper.c                   | 16 ++++++++++++++++
+ 4 files changed, 36 insertions(+)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 652311ddef..c71986da61 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -248,6 +248,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
-     ISA_EXT_DATA_ENTRY(zvkt, PRIV_VERSION_1_12_0, ext_zvkt),
-     ISA_EXT_DATA_ENTRY(zhinx, PRIV_VERSION_1_12_0, ext_zhinx),
-     ISA_EXT_DATA_ENTRY(zhinxmin, PRIV_VERSION_1_12_0, ext_zhinxmin),
-+    ISA_EXT_DATA_ENTRY(sdext, PRIV_VERSION_1_12_0, ext_sdext),
-     ISA_EXT_DATA_ENTRY(sdtrig, PRIV_VERSION_1_12_0, ext_sdtrig),
-     ISA_INTERNAL_EXT_DATA_ENTRY(shcounterenw, PRIV_VERSION_1_12_0,
-                                 has_priv_1_12),
-@@ -1091,6 +1092,12 @@ static void riscv_cpu_reset_hold(Object *obj, ResetType type)
- 
+diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+index 4fc2d3a155..b4c47d0738 100644
+--- a/target/riscv/helper.h
++++ b/target/riscv/helper.h
+@@ -132,6 +132,7 @@ DEF_HELPER_6(csrrw_i128, tl, env, int, tl, tl, tl, tl)
  #ifndef CONFIG_USER_ONLY
- #ifdef CONFIG_TCG
-+    env->debug_mode = false;
-+    env->dcsr = DCSR_DEBUGVER(4);
-+    env->dpc = 0;
-+    env->dscratch[0] = 0;
-+    env->dscratch[1] = 0;
-+
-     if (cpu->cfg.debug || cpu->cfg.ext_sdtrig) {
-         riscv_trigger_reset_hold(env);
-     }
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index c2138dbd4b..7b343d7a3e 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -507,6 +507,10 @@ struct CPUArchState {
+ DEF_HELPER_1(sret, tl, env)
+ DEF_HELPER_1(mret, tl, env)
++DEF_HELPER_1(dret, tl, env)
+ DEF_HELPER_1(mnret, tl, env)
+ DEF_HELPER_1(ctr_clear, void, env)
+ DEF_HELPER_1(wfi, void, env)
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index aa02dae3c9..46b00411ff 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -118,6 +118,7 @@ sctrclr     000100000100     00000 000 00000 1110011
+ uret        0000000    00010 00000 000 00000 1110011
+ sret        0001000    00010 00000 000 00000 1110011
+ mret        0011000    00010 00000 000 00000 1110011
++dret        0111101    10010 00000 000 00000 1110011
+ wfi         0001000    00101 00000 000 00000 1110011
+ sfence_vma  0001001    ..... ..... 000 00000 1110011 @sfence_vma
  
-     /* True if in debugger mode.  */
-     bool debugger;
-+    bool debug_mode;
-+    target_ulong dcsr;
-+    target_ulong dpc;
-+    target_ulong dscratch[2];
- 
-     uint64_t mstateen[SMSTATEEN_MAX_COUNT];
-     uint64_t hstateen[SMSTATEEN_MAX_COUNT];
-diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index c01050ce2b..769c945517 100644
---- a/target/riscv/cpu_bits.h
-+++ b/target/riscv/cpu_bits.h
-@@ -467,6 +467,39 @@
- #define CSR_DCSR            0x7b0
- #define CSR_DPC             0x7b1
- #define CSR_DSCRATCH        0x7b2
-+#define CSR_DSCRATCH1       0x7b3
-+
-+/* DCSR fields */
-+#define DCSR_XDEBUGVER_SHIFT    28
-+#define DCSR_XDEBUGVER_MASK     (0xfu << DCSR_XDEBUGVER_SHIFT)
-+#define DCSR_DEBUGVER(val)      ((target_ulong)(val) << DCSR_XDEBUGVER_SHIFT)
-+#define DCSR_EXTCAUSE_SHIFT     24
-+#define DCSR_EXTCAUSE_MASK      (0x7u << DCSR_EXTCAUSE_SHIFT)
-+#define DCSR_CETRIG             BIT(19)
-+#define DCSR_PELP               BIT(18)
-+#define DCSR_EBREAKVS           BIT(17)
-+#define DCSR_EBREAKVU           BIT(16)
-+#define DCSR_EBREAKM            BIT(15)
-+#define DCSR_EBREAKS            BIT(13)
-+#define DCSR_EBREAKU            BIT(12)
-+#define DCSR_STEPIE             BIT(11)
-+#define DCSR_STOPCOUNT          BIT(10)
-+#define DCSR_STOPTIME           BIT(9)
-+#define DCSR_CAUSE_SHIFT        6
-+#define DCSR_CAUSE_MASK         (0x7u << DCSR_CAUSE_SHIFT)
-+#define DCSR_V                  BIT(5)
-+#define DCSR_MPRVEN             BIT(4)
-+#define DCSR_NMIP               BIT(3)
-+#define DCSR_STEP               BIT(2)
-+#define DCSR_PRV_MASK           0x3u
-+
-+#define DCSR_CAUSE_EBREAK       1
-+#define DCSR_CAUSE_TRIGGER      2
-+#define DCSR_CAUSE_HALTREQ      3
-+#define DCSR_CAUSE_STEP         4
-+#define DCSR_CAUSE_RESET        5
-+#define DCSR_CAUSE_GROUP        6
-+#define DCSR_CAUSE_OTHER        7
- 
- /* Performance Counters */
- #define CSR_MHPMCOUNTER3    0xb03
-diff --git a/target/riscv/cpu_cfg_fields.h.inc b/target/riscv/cpu_cfg_fields.h.inc
-index f91c780299..24f3606f94 100644
---- a/target/riscv/cpu_cfg_fields.h.inc
-+++ b/target/riscv/cpu_cfg_fields.h.inc
-@@ -105,6 +105,7 @@ BOOL_FIELD(ext_zvfbfmin)
- BOOL_FIELD(ext_zvfbfwma)
- BOOL_FIELD(ext_zvfh)
- BOOL_FIELD(ext_zvfhmin)
-+BOOL_FIELD(ext_sdext)
- BOOL_FIELD(ext_sdtrig)
- BOOL_FIELD(ext_smaia)
- BOOL_FIELD(ext_ssaia)
-diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-index bf203bffce..8658d43643 100644
---- a/target/riscv/machine.c
-+++ b/target/riscv/machine.c
-@@ -301,6 +301,25 @@ static const VMStateDescription vmstate_debug = {
-         VMSTATE_VARRAY_UINT32(env.tdata3, RISCVCPU,
-                               env.num_triggers, 0,
-                               vmstate_info_uint64, uint64_t),
-+        VMSTATE_BOOL_V(env.debug_mode, RISCVCPU, 3),
-+        VMSTATE_UINTTL_V(env.dcsr, RISCVCPU, 3),
-+        VMSTATE_UINTTL_V(env.dpc, RISCVCPU, 3),
-+        VMSTATE_UINTTL_ARRAY_V(env.dscratch, RISCVCPU, 2, 3),
-+        VMSTATE_END_OF_LIST()
-+    }
-+};
-+
-+static const VMStateDescription vmstate_sdext = {
-+    .name = "cpu/sdext",
-+    .version_id = 1,
-+    .minimum_version_id = 1,
-+    .needed = debug_needed,
-+    .post_load = debug_post_load,
-+    .fields = (const VMStateField[]) {
-+        VMSTATE_BOOL_V(env.debug_mode, RISCVCPU, 3),
-+        VMSTATE_UINTTL_V(env.dcsr, RISCVCPU, 3),
-+        VMSTATE_UINTTL_V(env.dpc, RISCVCPU, 3),
-+        VMSTATE_UINTTL_ARRAY_V(env.dscratch, RISCVCPU, 2, 3),
-         VMSTATE_END_OF_LIST()
-     }
- };
-@@ -576,6 +595,7 @@ const VMStateDescription vmstate_riscv_cpu = {
-         &vmstate_ctr,
-         &vmstate_sstc,
-         &vmstate_mseccfg,
-+        &vmstate_sdext,
-         NULL
-     }
- };
-diff --git a/target/riscv/tcg/csr.c b/target/riscv/tcg/csr.c
-index bd4b6dc114..988261cccf 100644
---- a/target/riscv/tcg/csr.c
-+++ b/target/riscv/tcg/csr.c
-@@ -3207,6 +3207,126 @@ static RISCVException write_mtval(CPURISCVState *env, int csrno,
-     return RISCV_EXCP_NONE;
+diff --git a/target/riscv/tcg/insn_trans/trans_privileged.c.inc b/target/riscv/tcg/insn_trans/trans_privileged.c.inc
+index a8eaccef67..4e57901880 100644
+--- a/target/riscv/tcg/insn_trans/trans_privileged.c.inc
++++ b/target/riscv/tcg/insn_trans/trans_privileged.c.inc
+@@ -125,6 +125,24 @@ static bool trans_mret(DisasContext *ctx, arg_mret *a)
+ #endif
  }
  
-+#if !defined(CONFIG_USER_ONLY)
-+static RISCVException sdext(CPURISCVState *env, int csrno)
++static bool trans_dret(DisasContext *ctx, arg_dret *a)
 +{
-+    if (!riscv_cpu_cfg(env)->ext_sdext) {
-+        return RISCV_EXCP_ILLEGAL_INST;
++#ifndef CONFIG_USER_ONLY
++    if (!ctx->cfg_ptr->ext_sdext) {
++        return false;
 +    }
-+
-+    if (!env->debug_mode && !env->debugger) {
-+        return RISCV_EXCP_ILLEGAL_INST;
-+    }
-+
-+    return RISCV_EXCP_NONE;
-+}
-+
-+static target_ulong dcsr_visible_mask(CPURISCVState *env)
-+{
-+    target_ulong mask = (target_ulong)-1;
-+    RISCVCPU *cpu = env_archcpu(env);
-+
-+    if (!riscv_has_ext(env, RVH)) {
-+        mask &= ~(DCSR_EBREAKVS | DCSR_EBREAKVU | DCSR_V);
-+    }
-+    if (!riscv_has_ext(env, RVS)) {
-+        mask &= ~DCSR_EBREAKS;
-+    }
-+    if (!riscv_has_ext(env, RVU)) {
-+        mask &= ~DCSR_EBREAKU;
-+    }
-+    if (!cpu->cfg.ext_zicfilp) {
-+        mask &= ~DCSR_PELP;
-+    }
-+    if (!cpu->cfg.ext_smdbltrp) {
-+        mask &= ~DCSR_CETRIG;
-+    }
-+
-+    return mask;
-+}
-+
-+static RISCVException read_dcsr(CPURISCVState *env, int csrno,
-+                                target_ulong *val)
-+{
-+    *val = env->dcsr & dcsr_visible_mask(env);
-+    return RISCV_EXCP_NONE;
-+}
-+
-+static target_ulong dcsr_writable_mask(CPURISCVState *env)
-+{
-+    target_ulong mask = DCSR_EBREAKM | DCSR_EBREAKS | DCSR_EBREAKU |
-+                        DCSR_STEPIE | DCSR_STOPCOUNT | DCSR_STOPTIME |
-+                        DCSR_STEP | DCSR_PRV_MASK;
-+    RISCVCPU *cpu = env_archcpu(env);
-+
-+    mask |= DCSR_MPRVEN;
-+
-+    if (riscv_has_ext(env, RVH)) {
-+        mask |= DCSR_EBREAKVS | DCSR_EBREAKVU | DCSR_V;
-+    }
-+    if (riscv_has_ext(env, RVS)) {
-+        mask |= DCSR_EBREAKS;
-+    }
-+    if (riscv_has_ext(env, RVU)) {
-+        mask |= DCSR_EBREAKU;
-+    }
-+    if (cpu->cfg.ext_zicfilp) {
-+        mask |= DCSR_PELP;
-+    }
-+    if (cpu->cfg.ext_smdbltrp) {
-+        mask |= DCSR_CETRIG;
-+    }
-+
-+    return mask;
-+}
-+
-+static RISCVException write_dcsr(CPURISCVState *env, int csrno,
-+                                 target_ulong val, uintptr_t ra)
-+{
-+    target_ulong mask = dcsr_writable_mask(env);
-+    target_ulong new_val = env->dcsr;
-+
-+    new_val &= ~mask;
-+    new_val |= val & mask;
-+    new_val &= ~DCSR_XDEBUGVER_MASK;
-+    new_val |= DCSR_DEBUGVER(4);
-+    env->dcsr = new_val;
-+    return RISCV_EXCP_NONE;
-+}
-+
-+static RISCVException read_dpc(CPURISCVState *env, int csrno,
-+                               target_ulong *val)
-+{
-+    *val = env->dpc & get_xepc_mask(env);
-+    return RISCV_EXCP_NONE;
-+}
-+
-+static RISCVException write_dpc(CPURISCVState *env, int csrno,
-+                                target_ulong val, uintptr_t ra)
-+{
-+    env->dpc = val & get_xepc_mask(env);
-+    return RISCV_EXCP_NONE;
-+}
-+
-+static RISCVException read_dscratch(CPURISCVState *env, int csrno,
-+                                    target_ulong *val)
-+{
-+    int index = (csrno == CSR_DSCRATCH1) ? 1 : 0;
-+
-+    *val = env->dscratch[index];
-+    return RISCV_EXCP_NONE;
-+}
-+
-+static RISCVException write_dscratch(CPURISCVState *env, int csrno,
-+                                     target_ulong val, uintptr_t ra)
-+{
-+    int index = (csrno == CSR_DSCRATCH1) ? 1 : 0;
-+
-+    env->dscratch[index] = val;
-+    return RISCV_EXCP_NONE;
-+}
-+#endif /* !CONFIG_USER_ONLY */
-+
- /* Execution environment configuration setup */
- static RISCVException read_menvcfg(CPURISCVState *env, int csrno,
-                                    target_ulong *val)
-@@ -6435,6 +6555,12 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
-     [CSR_TDATA3]    =  { "tdata3",   debug, read_tdata,    write_tdata    },
-     [CSR_TINFO]     =  { "tinfo",    debug, read_tinfo,    write_ignore   },
-     [CSR_MCONTEXT]  =  { "mcontext", debug, read_mcontext, write_mcontext },
-+#if !defined(CONFIG_USER_ONLY)
-+    [CSR_DCSR]      =  { "dcsr",      sdext, read_dcsr,     write_dcsr },
-+    [CSR_DPC]       =  { "dpc",       sdext, read_dpc,      write_dpc },
-+    [CSR_DSCRATCH]  =  { "dscratch0", sdext, read_dscratch, write_dscratch },
-+    [CSR_DSCRATCH1] =  { "dscratch1", sdext, read_dscratch, write_dscratch },
++    decode_save_opc(ctx, 0);
++    translator_io_start(&ctx->base);
++    gen_update_pc(ctx, 0);
++    gen_helper_dret(cpu_pc, tcg_env);
++    exit_tb(ctx); /* no chaining */
++    ctx->base.is_jmp = DISAS_NORETURN;
++    return true;
++#else
++    return false;
 +#endif
++}
++
+ static bool trans_mnret(DisasContext *ctx, arg_mnret *a)
+ {
+ #ifndef CONFIG_USER_ONLY
+diff --git a/target/riscv/tcg/op_helper.c b/target/riscv/tcg/op_helper.c
+index 3e94005d2b..54269efee1 100644
+--- a/target/riscv/tcg/op_helper.c
++++ b/target/riscv/tcg/op_helper.c
+@@ -473,6 +473,22 @@ target_ulong helper_mret(CPURISCVState *env)
+     return retpc;
+ }
  
-     [CSR_MCTRCTL]    = { "mctrctl",    ctr_mmode,  NULL, NULL, rmw_xctrctl    },
-     [CSR_SCTRCTL]    = { "sctrctl",    ctr_smode,  NULL, NULL, rmw_xctrctl    },
++target_ulong helper_dret(CPURISCVState *env)
++{
++    uintptr_t ra = GETPC();
++#ifdef CONFIG_USER_ONLY
++    riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, ra);
++    return 0;
++#else
++    if (!riscv_cpu_cfg(env)->ext_sdext || !env->debug_mode) {
++        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, ra);
++    }
++    target_ulong retpc = env->dpc & get_xepc_mask(env);
++    riscv_cpu_leave_debug_mode(env);
++    return retpc;
++#endif
++}
++
+ target_ulong helper_mnret(CPURISCVState *env)
+ {
+     target_ulong retpc = env->mnepc;
 -- 
 2.43.0
 
