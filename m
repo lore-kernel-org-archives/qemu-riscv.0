@@ -4,150 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51877C79F9E
-	for <qemu-riscv@archiver.kernel.org>; Mon,  7 Sep 2026 13:15:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 274BEC79F9E
+	for <qemu-riscv@archiver.kernel.org>; Mon,  7 Sep 2026 13:30:03 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x3ZBG-0004Yy-Ma; Mon, 07 Sep 2026 09:14:38 -0400
+	id 1x3ZPe-0004Ol-Do; Mon, 07 Sep 2026 09:29:30 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1x3ZBC-0004NS-1W
- for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 09:14:34 -0400
-Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
+ (Exim 4.90_1) (envelope-from <conor@kernel.org>)
+ id 1x3ZPZ-0004MM-Ru; Mon, 07 Sep 2026 09:29:25 -0400
+Received: from sea.source.kernel.org ([2600:3c0a:e001:78e:0:1991:8:25])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1x3ZB9-0006VT-8q
- for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 09:14:33 -0400
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 687AnEP92652808
- for <qemu-riscv@nongnu.org>; Mon, 7 Sep 2026 13:14:29 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- RqixD4N0z/3b0DiXXrUuQajWU8nOL0jAJX2FEo7z3Y8=; b=oAv4N/tKdWwh1KBR
- PfoV5HKWQt3IPsoe5Pj5pTtF8uu2F3TNxQbJOGUu1f8gMjlFULTEwnhlMNUctAVY
- xuUdp1gfmaUdNO619HXLb19VmTTCm4pH7UWpgBkneV7+ovg9G7qajz1DcLK20uFQ
- WHDWuBNw2Fc9Ilg7p+LxIAFGPo0a7UPLiNP8QLL4dMW5pQhUzD2YPZ/VMVfFSXVO
- 5uMwvKSKhIvRJpHX3NNeviieK4yhuPz0t2RgpgU94r9fPfRZoAWtl5B4WVOEatJ/
- KCJZcWTsb+rMkbTf0F5xSAwvgBerV/GANomSdx1VoDwOeHb+pK9jaVTDVLX6Ex2P
- qOMBDw==
-Received: from mail-yx1-f71.google.com (mail-yx1-f71.google.com
- [74.125.224.71])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ghtty0sde-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Mon, 07 Sep 2026 13:14:28 +0000 (GMT)
-Received: by mail-yx1-f71.google.com with SMTP id
- 956f58d0204a3-66e509682ccso4662971d50.3
- for <qemu-riscv@nongnu.org>; Mon, 07 Sep 2026 06:14:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1788786868; x=1789391668; darn=nongnu.org;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=RqixD4N0z/3b0DiXXrUuQajWU8nOL0jAJX2FEo7z3Y8=;
- b=CGdja9NBqXgmxPsfJPr271JXVpJUgAYSx7PwzOC6EiAqssMDckmmUYz8G1xnD9YTUZ
- j8HCqG9CA4SpKSDNroXr8bJd+bctMfENVvGReXXJ3j1zf8xHD0QwNk5WHM93ldVRoWvt
- nvRl8xZ9U637KM37p38z4tKFsDZG/2bSzcYRiBfi0n1IiTq5vEjgsyRggXOgOvA2cnoE
- znog6Aqzb/I6Mj0eN2D8chTQGU6K7mVU8PKrFbYP8w6daK7fcfGO8an79nZKQ1OzXirY
- hxp6lnfrE7EcfFKngYCeHL64tyr09aL/PNP1BNwo6Bnzqo1oc7Lvc9HoK5mlnA3yg/cy
- Q2TA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788786868; x=1789391668;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=RqixD4N0z/3b0DiXXrUuQajWU8nOL0jAJX2FEo7z3Y8=;
- b=nwOknbzsJ5AnGd6Q6WS1dk/bVjg9VuZQV9UUrIicRC88qiX2K4TaE55H0KPx8cX4+V
- tTsP8rtyPWyA0/3nCw1jFHabnIHICp4FqDWwFg3hnma/uWkApU80SQ3745bTqlryZVjD
- YJmqS24xY+5esBpZnHrHeYi09Lp059saHvDXj07Q68tkAJpjGCtilvwh4POa142b6LG8
- b/IaFXHZpoMoPigfzB5IhA+EhKFKNEUhT1VszdogXgDkouhvYr1cyiQjD0cJCtuwtynT
- ZncTpGP1Geo2qPo4YscvCrKPPLKnvDXProbqsdV0WpZWizQqFm2ZqZEoEZE26P0mfG0V
- +p3w==
-X-Forwarded-Encrypted: i=1;
- AKwUvBzUqgxsuj/1KTR/eDWxI1cNrazNUC64Yf0qQ04b9v8ORdxDBqh33w9JoKzoR6pwmsBHXrr0UfPnl6NP@nongnu.org
-X-Gm-Message-State: AFuF++nLofsiXEDcYkPch2Pnmm+J39qQP6F8twSzO8HduvkBA7mDc+UT
- pvwUq/LNaoPyFZL3JhIwNPwzVzzA4mP+llVp7UU39+EEXuV94oBF4C6uBLKol5QPunAQMO9+3T7
- UUJLhF4rAVRF6Em6sqpdgADY33tQ31IVYWLWdr1/XZnJ8LbdPuxOcuNE6bQ==
-X-Gm-Gg: AYBFou0ke4Hm7MpyP3P0Jt5nzq8ZVzJTNhLx97zcH1q2NcmWpF3DzSHvzhWc2gMdl53
- whFhRn72bh0QXBbcEYUtS1aGE5a0OAz1nUeW9icvF3SYL4SrhP5IW2pa6GfycICeW361BINIUjJ
- sDEahNwSGB7D+iwmbOJUInG/PPEJd0Hh/JsP8Bhmnw11PoztPUX77nK7bFuSoxX4ziKYsmXJKld
- sjFJzx3WA4YXIr4Ug/m/ALJjeEx48XFlm9fiNr0wG9WTPN74nz3qL1pHFMVCVptV5cIF2KHYmLU
- OCd5AB4tTihJcKonDDZrsMhnNBff3U9SBVBy6niaFEUQYtic2Z6tmoBCZ8F6yt6jnjVLrzH1CPL
- mr2h324zNwXDVd4sWKjuRsOs1Ly5p/G5Zm4E=
-X-Received: by 2002:a05:690e:4142:b0:66d:1a61:5c6 with SMTP id
- 956f58d0204a3-66fc1b959dfmr5477103d50.29.1788786867774; 
- Mon, 07 Sep 2026 06:14:27 -0700 (PDT)
-X-Received: by 2002:a05:690e:4142:b0:66d:1a61:5c6 with SMTP id
- 956f58d0204a3-66fc1b959dfmr5477074d50.29.1788786867028; 
- Mon, 07 Sep 2026 06:14:27 -0700 (PDT)
-Received: from [192.168.68.102] ([177.18.66.131])
- by smtp.gmail.com with ESMTPSA id
- 00721157ae682-871439c54e4sm71639827b3.6.2026.09.07.06.14.24
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 07 Sep 2026 06:14:26 -0700 (PDT)
-Message-ID: <165fb72b-3cf2-4693-88e4-f9d36c5c498d@oss.qualcomm.com>
-Date: Mon, 7 Sep 2026 10:14:23 -0300
+ (Exim 4.90_1) (envelope-from <conor@kernel.org>)
+ id 1x3ZPX-0008EW-43; Mon, 07 Sep 2026 09:29:24 -0400
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by sea.source.kernel.org (Postfix) with ESMTP id 71C1E43E3E;
+ Mon,  7 Sep 2026 13:29:19 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2A6541F00A3D;
+ Mon,  7 Sep 2026 13:29:15 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+ s=k20260515; t=1788787759;
+ bh=0t9xL962eoHzfQTVPINrp0LliqjObPfTvJyXN3o6ulM=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To;
+ b=lLtKmljxCHi3GMDXrWPxBbU8Vq075oSvzMaEp3TFtqUiMDsOTjfX3la2J1ttZweun
+ OiUITt205emSfK8miuucBEMJOCTSmgoo8IRl4HNlha5nT1HRyPtkGvLlqB/JLzlU/Z
+ PcWjTnbZpGN694YlF2cjpv4EeRwzt7vVsoUqT0gm6YJEauet7D/27dAvN5TRx9DV3z
+ 9sdif8G888SYO1lMezQmMxyd/dkmhxZUihRXPbFoWefetFMoBtFfk5ygqjBHuQ9Hg7
+ 1vJPhqZrSG0tfpxMYlMbkAmYToSDcl2sFhlLQNieoaSfoOpITEjd4qaEeY5vShncP9
+ W6hIJuquwA6NQ==
+Date: Mon, 7 Sep 2026 14:29:12 +0100
+From: Conor Dooley <conor@kernel.org>
+To: Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@oss.qualcomm.com>
+Cc: Bin Meng <bin.meng@processmission.com>, QEMU <qemu-devel@nongnu.org>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Alistair Francis <alistair@alistair23.me>, Bin Meng <bmeng.cn@gmail.com>,
+ Chao Liu <chao.liu@processmission.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Fabiano Rosas <farosas@suse.de>, Laurent Vivier <lvivier@redhat.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Markus Armbruster <armbru@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+ Sebastian Huber <sebastian.huber@embedded-brains.de>,
+ Thomas Huth <thuth@redhat.com>, Weiwei Li <liwei1518@gmail.com>,
+ qemu-arm@nongnu.org, qemu-block@nongnu.org, qemu-riscv@nongnu.org
+Subject: Re: [PATCH v2 00/24] hw/riscv: Restore Microchip PolarFire SoC
+ Icicle Kit firmware boot
+Message-ID: <20260907-cognition-happiness-822c3be7e45c@spud>
+References: <20260904155758.3833179-1-bin.meng@processmission.com>
+ <7a6ef890-a630-46b3-aedf-a687fec487cc@oss.qualcomm.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 0/2] target: riscv: support TLB page flush for
- sfence.vma
-To: Trevor Gamblin <tgamblin@baylibre.com>, qemu-devel@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
- <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org,
- Richard Henderson <richard.henderson@linaro.org>
-References: <20260904-riscv_tlb_page_flush-v2-0-defec3f29312@baylibre.com>
-From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Content-Language: en-US
-In-Reply-To: <20260904-riscv_tlb_page_flush-v2-0-defec3f29312@baylibre.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Authority-Analysis: v=2.4 cv=QNBYgALL c=1 sm=1 tr=0 ts=6a9eb8b4 cx=c_pps
- a=ngMg22mHWrP7m7pwYf9JkA==:117 a=CQQxcbsX5Byh3TlVSSGwig==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=y3tPqhoVAAAA:8 a=iGHA9ds3AAAA:8 a=B6KMzFptAAAA:20 a=VwQbUJbxAAAA:8
- a=IpJZQVW2AAAA:8 a=69wJf7TsAAAA:8 a=_O3DOGVWAAAA:8 a=JF9118EUAAAA:8
- a=pGLkceISAAAA:8 a=EUspDBNiAAAA:8 a=SRrdq9N9AAAA:8 a=FRSEYCzRAAAA:8
- a=SS0N6QsqKKa_8Qt3vWMA:9 a=QEXdDO2ut3YA:10 a=yHXA93iunegOHmWoMUFd:22
- a=xB3BzkE1M_ohbp1J8EAO:22 a=nM-MV4yxpKKO9kiQg6Ot:22 a=IawgGOuG5U0WyFbmm1f5:22
- a=Fg1AiH1G6rFz08G2ETeA:22 a=2TKV-7w1aU1AVAwN0oqT:22 a=xVlTc564ipvMDusKsbsT:22
- a=H4N_Y-AU75W7NKDNhZlT:22
-X-Proofpoint-ORIG-GUID: tHiDD21EvGZDF1y7etBhfAdHd2sj4KwU
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA3MDE0NSBTYWx0ZWRfX/XdXIo9Qj8mV
- rNMkG+Paw8HertV345r3Qi4q1FJJJqEbV+F1VLs/RsyKoobOUZYOXqQca9aVkvkLl3lW/LSBN9V
- 9jIzXMLcKiYocmzni0sPOELHBesnZoI=
-X-Proofpoint-GUID: tHiDD21EvGZDF1y7etBhfAdHd2sj4KwU
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA3MDE0NSBTYWx0ZWRfX/pLgAK7d6bb9
- tu/5AAsnK7YRONdyzxtxn0YWppOXCz3lNWahpONFhAW/rDFFd+r4yE4y3lky4KzsqpuV7X23IiM
- cGiEo3VrLFJeLPSeP/0wlR7/HAl+RsQr2AZNrAN7IXKIpDzS+WNXH91vXATFxfNbmXP3uLQb+vB
- ibOZ2Fh/uWI77o4QaCsYhYne2IsdBi3Jaq0AYc7FGItACFFT3C9rgPHCFQao9ezJlL7EZHMTTv/
- dnXKc61nKPDBdDSZZpO9OTAfzHtBpXkqip/cUcfU3L11uDyMnrsSlajj5l8ngBsXBDHpm/9Yl4c
- Oxvjez3O21aJ/rIRRGGdyYTsFf+ur26A07lUpJLIxAMvyJb/fbznsi1ScQLIw5q4ReQHGBjTuPk
- ttutd9Tec7yIA5NpHPZ0ExOW3jkchxjPGFDMa+smd2ILY01209tsx8BW2VzJO0SobB2AJYqX1/x
- OIFFbCZV2a08LrSahWg==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-07_03,2026-09-07_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 spamscore=0 suspectscore=0 phishscore=0 priorityscore=1501
- lowpriorityscore=0 adultscore=0 clxscore=1015 bulkscore=0 impostorscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609070145
-Received-SPF: pass client-ip=205.220.168.131;
- envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="mXywBnsZ83DGzamE"
+Content-Disposition: inline
+In-Reply-To: <7a6ef890-a630-46b3-aedf-a687fec487cc@oss.qualcomm.com>
+Received-SPF: pass client-ip=2600:3c0a:e001:78e:0:1991:8:25;
+ envelope-from=conor@kernel.org; helo=sea.source.kernel.org
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -163,183 +84,61 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Richard,
+--mXywBnsZ83DGzamE
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
+On Fri, Sep 04, 2026 at 06:11:38PM +0200, Philippe Mathieu-Daud=E9 wrote:
+> On 4/9/26 17:57, Bin Meng wrote:
+>=20
+> > Bin Meng (23):
+> >    hw/riscv: pfsoc: Correct the L2LIM maximum mapped size
+> >    hw/riscv: pfsoc: Map the L2 zero device window
+> >    hw/misc: pfsoc: Support DDR training with newer HSS
+> >    hw/misc: pfsoc: Model L2 cache controller registers
+> >    hw/riscv: pfsoc: Couple L2CC to L2-LIM
+> >    tests/qtest: Add PolarFire SoC L2CC coverage
+> >    hw/sd: sdhci: Run ADMA independently of MMIO
+> >    hw/sd: sd: Keep high-capacity memory blocks at 512 bytes
+> >    hw/sd: cadence: Add 64-bit system bus property
+>=20
+> FYI I tagged this series (in particular the SD/HCI patches)
+> to review but won't be able to until Sept 21. Not a blocker
+> although if Alistair think the series is ready.
 
-This tlb_flush change is giving a +20% performance boost in riscv64-tuxrun.  From
-this:
+FWIW, I'd like to look at the pfsoc parts but I am also indisposed
+until the 21st.
 
-23/23 func-thorough+func-riscv64-thorough+thorough - qemu:func-riscv64-tuxrun  OK   92.71s   4 subtests passed
+>=20
+> >    hw/riscv: pfsoc: Enable 64-bit SDHCI system bus support
+> >    hw/misc: pfsoc: Model PolarFire SoC serial number service
+> >    hw/rtc: Add PolarFire SoC RTC model
+> >    hw/riscv: pfsoc: Add PolarFire SoC RTC to Icicle Kit
+> >    tests/qtest: Add PolarFire SoC RTC coverage
+> >    hw/misc: pfsoc: Honor PolarFire service notification requests
+> >    hw/riscv: pfsoc: Correct PolarFire SoC DDR aliases
+> >    hw/riscv: pfsoc: Fix Icicle Kit RAM size at 2 GiB
+> >    hw/riscv: pfsoc: Fix Icicle Kit hart count at five
+> >    docs/system/riscv: Document Icicle Kit HSS boot
+> >    docs/system/riscv: pfsoc: Document CLINT topology for direct Linux
+> >      boot
+> >    tests/functional/riscv64: Add Icicle Kit firmware boot test
+> >    MAINTAINERS: Add PolarFire SoC Icicle Kit maintainer
+> >    MAINTAINERS: Move Conor Dooley to PolarFire SoC reviewer
+>=20
+>=20
 
-To this:
+--mXywBnsZ83DGzamE
+Content-Type: application/pgp-signature; name=signature.asc
 
-23/23 func-thorough+func-riscv64-thorough+thorough - qemu:func-riscv64-tuxrun  OK   73.45s   4 subtests passed
+-----BEGIN PGP SIGNATURE-----
 
-Other tests weren't that affected - I take it has to do with the amount of
-sfence.vma being issued.  They look fine in my own testing with an emulated
-Ubuntu host as well.
+iHUEABYKAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCap68KAAKCRB4tDGHoIJi
+0lhdAP91XDEzupVU41fGt+BpEjmihb++kxg0fc4nQkfx4XSDUQEA0ku4gqgn1dnO
+Y5iJlMI9utsx6IMdO2tzUeYgVAH26AI=
+=6ORC
+-----END PGP SIGNATURE-----
 
-This is all fantastic but I wonder if we're missing something.  If you could
-please take a look at these 2 patches and see if we're handling the tlb flushes
-according that would be terrific.
-
-
-Thanks,
-Daniel
-
-
-
-
-
-
-
-On 9/4/2026 3:43 PM, Trevor Gamblin wrote:
-> Introduce a new function, check_sfence_vma(), to handle
-> privilege/hypervisor checks currently performed in helper_tlb_flush(),
-> and make use of it in that function. Then, add helper_tlb_flush_page()
-> for flushing only a single TLB page, using check_sfence_vma() inside it
-> similarly to helper_tlb_flush(). Finally, rework the trans_sfence_vma()
-> function to use helper_tlb_flush_page() when rs1 != 0.
-> 
-> The second patch also includes the fix for a regression in the
-> 'test_tuxrun.TuxRunRiscV64Test.test_riscv64_maxcpu' test encountered
-> with the draft version of this series, which hanged indefinitely until
-> killed when the patches were applied. This was fixed by making sure to
-> use get_address() to canonicalize the address being passed to
-> helper_tlb_flush_page().
-> 
-> make-check and make-functional were both run with the patches applied on
-> master, and no regressions for riscv64 were observed (beyond the one
-> mentioned as fixed above).
-> 
-> Daniel Barboza helped me with initial triage, direction, and cleaning up
-> this series for submission - thanks again!
-> 
-> Some background context: as part of the RISE Project[1] mission to
-> improve the RISC-V software ecosystem, the Yocto Project[2] is receiving
-> assistance with triaging bugs and enhancing RISC-V support in the core
-> layer. The 'qemuriscv32' and 'qemuriscv64' targets were enabled as part
-> of the Yocto's CI system, known as the Autobuilder[3] in 2025, and since
-> that time various intermittent failures have been observed on the
-> 'ptest' ('package test', where a package's test suites are bundled into
-> an image and then booted to do basic runtime compatibility testing)
-> case, 'qemuriscv64-ptest'. These almost always manifest as timeouts in
-> the guest, usually around heavier and/or more complex test cases, and
-> they additionally seem to occur only under heavy host system (x86_64)
-> load.
-> 
-> Comparing to other major architectures like x86_64 and arm64, the
-> riscv64 guests are always emulated in TCG mode, since the Yocto
-> Autobuilder cluster does not (yet) have native riscv64 hosts to dedicate
-> for runtime testing with kvm support. While this is likely a major
-> factor in why qemuriscv64 runs fail at higher rates than other
-> architectures, it was noted after compiling the triage data[4] that
-> local comparisons of the same ptest images running on TCG-mode qemuarm64
-> and qemuriscv64 showed the latter taking significantly longer to
-> complete (using some of the test suites which have been observed failing
-> as examples), even with no other meaningful system load on the host. In
-> particular, the coreutils case showed over 70% longer runtime for
-> qemuriscv64 compared to qemuarm64 (~1000s vs ~580s).
-> 
-> Fully investigating the source of this discrepancy was a long process.
-> For Yocto builds, native QEMU binaries are built from source as part of
-> the overall image build, so the first place to look was in QEMU's
-> configuration and boot options. Other suggestions included trying to
-> disable TCG plugins or alter the QEMU and guest package configs (Yocto's
-> QEMU is RVA23S64 profile by default, while the runtime packages are
-> built for riscv64gc). However, these changes either produced no
-> meaningful effect or actually increased runtime. The next step was to
-> investigate the QEMU source, which is what ultimately led to this patch
-> series. It turns out that these changes significantly improve the
-> reference runtime test case for coreutils in Yocto, although it is still
-> somewhat slower than in qemuarm64. It remains to be seen whether these
-> changes to the QEMU source eliminate the intermittent issues in Yocto's
-> testing, but it is a meaningful improvement which opens the door to
-> further optimizations for RISC-V.
-> 
-> As an example, compare the before and after results on a local run of
-> core-image-ptest-coreutils for qemuriscv64:
-> 
-> |============================================================================
-> |Testsuite summary for GNU coreutils 9.11
-> |============================================================================
-> |# TOTAL: 733
-> |# PASS:  561
-> |# SKIP:  172
-> |# XFAIL: 0
-> |# FAIL:  0
-> |# XPASS: 0
-> |# ERROR: 0
-> |============================================================================
-> |make[1]: Leaving directory '/usr/lib/coreutils/ptest'
-> |DURATION: 1049
-> |END: /usr/lib/coreutils/ptest
-> |2026-08-31T17:23
-> |STOP: ptest-runner
-> |TOTAL: 1 FAIL: 0
-> 
-> versus:
-> 
-> |============================================================================
-> |Testsuite summary for GNU coreutils 9.11
-> |============================================================================
-> |# TOTAL: 733
-> |# PASS:  561
-> |# SKIP:  172
-> |# XFAIL: 0
-> |# FAIL:  0
-> |# XPASS: 0
-> |# ERROR: 0
-> |============================================================================
-> |make[1]: Leaving directory '/usr/lib/coreutils/ptest'
-> |DURATION: 646
-> |END: /usr/lib/coreutils/ptest
-> |2026-08-31T16:10
-> |STOP: ptest-runner
-> |TOTAL: 1 FAIL: 0
-> |root@qemuriscv64:~#
-> 
-> Signed-off-by: Trevor Gamblin <tgamblin@baylibre.com>
-> 
-> [1]: https://riseproject.dev/
-> [2]: https://www.yoctoproject.org/
-> [3]: https://autobuilder.yoctoproject.org/valkyrie/
-> [4]: https://docs.google.com/document/d/1HUk-RvMDdW2EKV-qE1VNfZBycPscQUsayEZ5AgJ85C8
-> 
-> ---
-> Changes in v2:
-> - Renamed sfence_vma_allowed() to check_sfence_vma()
-> - Squashed patches 2 and 3 together
-> - Reworked check_sfence_vma() and helpers using it to be consistent with
->    rest of codebase (e.g. no unnecessary returns)
-> - Adjusted cover letter to match check_sfence_vma() naming
-> - Link to v1: https://lore.kernel.org/qemu-devel/20260831-riscv_tlb_page_flush-v1-0-4fc6af95673a@baylibre.com
-> 
-> To: qemu-devel@nongnu.org
-> Cc: Palmer Dabbelt <palmer@dabbelt.com>
-> Cc: Alistair Francis <alistair.francis@wdc.com>
-> Cc: Weiwei Li <liwei1518@gmail.com>
-> Cc: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-> Cc: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-> Cc: Chao Liu <chao.liu@processmission.com>
-> Cc: qemu-riscv@nongnu.org
-> 
-> ---
-> Trevor Gamblin (2):
->        target/riscv: extract check_sfence_vma() from helper_tlb_flush()
->        target/riscv: add helper_tlb_flush_page(), use for sfence.vma with vaddr operand
-> 
->   target/riscv/helper.h                              |  1 +
->   target/riscv/tcg/insn_trans/trans_privileged.c.inc |  6 +++++-
->   target/riscv/tcg/op_helper.c                       | 22 ++++++++++++++++------
->   3 files changed, 22 insertions(+), 7 deletions(-)
-> ---
-> base-commit: c513597761d6fc06690b5b7cf10dfb7ab05815d0
-> change-id: 20260831-riscv_tlb_page_flush-11a83fe9e7b1
-> 
-> Best regards,
-> --
-> Trevor Gamblin <tgamblin@baylibre.com>
-> 
-
+--mXywBnsZ83DGzamE--
 
