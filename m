@@ -4,128 +4,130 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61671C79FA0
-	for <qemu-riscv@archiver.kernel.org>; Mon,  7 Sep 2026 11:39:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F7A0C79FA0
+	for <qemu-riscv@archiver.kernel.org>; Mon,  7 Sep 2026 11:47:29 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x3Xfk-0007yR-AO; Mon, 07 Sep 2026 07:38:00 -0400
+	id 1x3XoS-0002uS-Vp; Mon, 07 Sep 2026 07:47:01 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <subrahmanya.lingappa@oss.qualcomm.com>)
- id 1x3Xfi-0007xh-Co
- for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 07:37:58 -0400
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1x3XoG-0002kO-NH
+ for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 07:46:49 -0400
 Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <subrahmanya.lingappa@oss.qualcomm.com>)
- id 1x3Xff-0001gn-ME
- for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 07:37:58 -0400
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1x3XoD-0003Gh-MP
+ for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 07:46:48 -0400
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 687Amt513872823
- for <qemu-riscv@nongnu.org>; Mon, 7 Sep 2026 11:37:50 GMT
+ 687AnE9g2652808
+ for <qemu-riscv@nongnu.org>; Mon, 7 Sep 2026 11:46:44 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:date:from:message-id:mime-version
- :subject:to; s=qcppdkim1; bh=wbz+NUyX1mcY6m3RPT/McHzeKi8bAyxsRjF
- xkx87UlY=; b=HgLwJUzVEXwHUQh2WKDDb5BkCPiNsXkgG468CHVYa6IcUCSj58a
- aQpzRr7FU6gEWXlJFEvXkLgDZY+h4w7PPaE1OGVHLAqWiK3eT7e67H5tJliCzfiX
- 7NO+OtCc3gBrfq6Cdl7fGn117RJHwWZQ17taJjI1+riM8GbRRhQucbfv34JFm3Gs
- rwZmMqEPpozXQuFARaOg1P+yWZ6RJcXLmFA7bFLtrpTAPPK5HE6JAdBxAdbXdnFI
- yRMoFjFiXjS41dKIJYOxslAg5WAT9303YH7Omp610GMLs/6DBn7n3mb2NGzSf8It
- 8/Dp1JtcfjQfcFbuUtsFFWvawPPg3z5Ar7A==
-Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com
- [209.85.216.69])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ghnmj1tq7-1
+ cc:content-transfer-encoding:date:from:in-reply-to:message-id
+ :mime-version:references:subject:to; s=qcppdkim1; bh=1LQc3MHagbs
+ qNP6Gfy/bvJe0yknu38X5VO+oSaaO4w8=; b=Pvl8E5oD9/g4FGMGdre9JP9oP51
+ bvaOokE2xRslFkZxkbdHvbikuQb6HOMVli4/eora0VO656azj5eywm5yiSZVTGDn
+ O7xZsPx0NAEcQ229Vb+u+4wODEYhQttVJkZIhBOiSeAnS1C268pHexoEGX8d4sHD
+ FydK/jvw+jMPox9l6arYfm+HJReS93qVuvUcZCRrmMi8O1PnPT75AQSZ7cgfj0Gd
+ C4oY6bZQAmqDmNuRjrbVD5hFIySl0hs6wrVB++tBGt7Ib4yPEoe5dxZsMdaDAmGy
+ SMNvg6hodWv0o2JiAlpa1UTGEje8E0LpuZQTi/SpBLrm4sgNz5zf6fvhE+Q==
+Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com
+ [209.85.222.200])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ghtty0fjx-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Mon, 07 Sep 2026 11:37:49 +0000 (GMT)
-Received: by mail-pj1-f69.google.com with SMTP id
- 98e67ed59e1d1-38ddc70b9d5so830319a91.3
- for <qemu-riscv@nongnu.org>; Mon, 07 Sep 2026 04:37:49 -0700 (PDT)
+ for <qemu-riscv@nongnu.org>; Mon, 07 Sep 2026 11:46:44 +0000 (GMT)
+Received: by mail-qk1-f200.google.com with SMTP id
+ af79cd13be357-92e62e3459fso534706085a.0
+ for <qemu-riscv@nongnu.org>; Mon, 07 Sep 2026 04:46:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1788781069; x=1789385869; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=wbz+NUyX1mcY6m3RPT/McHzeKi8bAyxsRjFxkx87UlY=;
- b=QwMGrrg7c6QMSx9Ms7dHQV2/Pi3YYPseb3+BTZqquKmn+X6+wnqUOVY+IlqWYpqdGC
- IMHh5MHIpfgpwI6/wui70DiYgjSeMCcuzX0MUnYuU3/krTyOuHMa0zangd1u7noK8jFX
- neSm7Tal8YRK1SxvzoEoGQVBgzCkVF3RPCHoqQHEhx2RTvJSl8YFGvEZQzcZLYDpELhX
- SlKRUd47PgVOt/QF58CdjlIgI3Mq6ecyrEMk8LZEyOEKq8pp0EBuu2vlTTdVgVOQgviK
- eD4s2tBmFzH2o5XUwYQvSzAUFwaXBvXYToElmlcHGwEGWYwsurMgSgo2f6V5x2PidG00
- rnDQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788781069; x=1789385869;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=oss.qualcomm.com; s=google; t=1788781603; x=1789386403; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=wbz+NUyX1mcY6m3RPT/McHzeKi8bAyxsRjFxkx87UlY=;
- b=oA/LUGD/NBs5gXLSV/deCipSMulodpeyM/NCPXkyyhCpVhJjc3D398MsiCXP9ho/bD
- vM2KE3vRqaIdKhVCigdjK5XWqUMUTCSZ1Qe7qe/pX7THiOgjW817TmzYKS59IfP5d7pk
- bXxQzUTtHxcaL9GS8lw6Z85b8hOFoxawqgVWweX222haXWkckpHS/t/BVg6Jz+bTa2YG
- z8d9d0U04qyFW7eu0GT5htFMdhpsK0rdivRDXCCbfwzi60RtrqB1vp2u5041gcy3OLpG
- 5aph8ODcOkYNciHmOPQtOeeEbGrna5AZxEOLHlxZ2LqUxSTaPq+HqCvZUufNqUSfDxMH
- 9Tag==
-X-Gm-Message-State: AFuF++lE5Ml/QFBYPMnBDQxjrmBvjs72rO6mepPiMK8+rmdKAGwmjlRH
- uf3OKQgIp6kl0+/mVg/jhfakKzyngu9dW4wxcC+NOURhSND8eT3/Ibe89QQudtWCv2rp4TYbreq
- n9s9y/tb7CTkQ6qXP4zF5gUdPVEMOAOSJYcySHrOpnyz/raNn5xJNcGWcOA==
-X-Gm-Gg: AYBFou3hmv/oo/jheYP69ydnCBfCZMagyJaRyhifJG6LOpOMFClzjwO4tIpm4SBwHaG
- ubUv7darrW/jeSbZYYcoXnG+4yHytQs37lZYlseAiK9uYk0Bc3n3SWb7+sPRZDIMJiiTKvhJHHG
- i0ccG9iyb/WRAaapl2r6Iski7fSn9HgnIB8ewZX0k1zxGEV8/NQioq6OII02/4X26DRPK+upSYa
- tQQwg13GETsUGidItBqWaEW45fbV/kca020fH7w+PdekCVk/VHZ7hsi1ELrMiZnd4CfyGY5iJ1W
- /Uik8B++5W/YJ/kQlXrg7dKD96IhZpPOZRNVHMELNjTluMKTKa6QxhVv5feW8KHnx6UbZYVf5eY
- EMENETWanAcpChgDtTwE4fmq4ZzoreD1FxMlA8ruJ8K4eUGfPOxl6FPdYvslHoXB8X04pWCCWc7
- nDxaPmURxcMjY4qvVlF4i/TGSqlSlrqVM=
-X-Received: by 2002:a17:90b:384d:b0:398:bac0:238e with SMTP id
- 98e67ed59e1d1-39b3d8377camr16468454a91.6.1788781069115; 
- Mon, 07 Sep 2026 04:37:49 -0700 (PDT)
-X-Received: by 2002:a17:90b:384d:b0:398:bac0:238e with SMTP id
- 98e67ed59e1d1-39b3d8377camr16468399a91.6.1788781068497; 
- Mon, 07 Sep 2026 04:37:48 -0700 (PDT)
-Received: from hu-slingapp-blr.qualcomm.com
- (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ bh=1LQc3MHagbsqNP6Gfy/bvJe0yknu38X5VO+oSaaO4w8=;
+ b=A8aNQVk67dyoHgc0b8Ez7cFH8kmnnlmXCCbYH4TWbOz+mhgMPxBlz5TE7wYPss8yqC
+ +tMCObS6F/rsl/ZbRwpiVxs3nhUJgjwB4hRjYviB9C8GwEJkGfUnYODpO4w958nNATLP
+ 244FBylN1iyjZRuCJliN8OgyIOe/hd84TQpiBmD/mf7BXNcpE91YTAKlefxOoqYsjnO9
+ /nkWy/781FdSEiRUdGW9n2+8VDcz9oElT/k6Y2xVAwNa4o0vZHqqz7Njgz5WRSWSGWL7
+ 7fNNNN6UkET8s4xADBfndbQtB+8Ljgv8j6blXAQ5FXBqVxwKPjgs8KQoJM5R1laNItaE
+ FsUg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1788781603; x=1789386403;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=1LQc3MHagbsqNP6Gfy/bvJe0yknu38X5VO+oSaaO4w8=;
+ b=ZHfcbYj3w0cDN8DjWP/eDfmjc5Kf4dZ50nB2e7OwTDjtBoXWiO+LCeNvebM4L7f+sN
+ NCJuZieCs4ANLgzYVZ9xWSyuTKZV/xZlKLfwktNnhHU5pdlDHO8ocjfVZqc1+fWPRfOC
+ K53h7hV+n3JPsJjelevPi/TABf8fJGah0sziFwCdWE7oVu0I/w+2fln+KHd3cMGjK67a
+ ErUh7VNPXd215mDxjpJHXFaiPdbFv0BIdDWrMOcDZK6WRG09Bylwplo8vVH0wz1S47SQ
+ SY/F93iKCvzUKVBCMMmbVbGDHG2a/q31dgMbFVrP+wbKi1YHJrc4fDgFGSOAp0L15RTA
+ MjtQ==
+X-Gm-Message-State: AFuF++nBNnmDtr2w/E7SM/yqhBRM65Cm/1oTXML5o1978TdW2Hbm1xru
+ WbajdAqSrKeHC+NEb4qcQXeu4jmCrT/fuGX4otuyozIdTWL+Pmo7uwMZUMX4ieIoD3Pklp9egio
+ xP8o1gnQ0q76AztivrhUg4wnK4Nn2euduRqhqYE6WV1kPurArEhmel1/Y+A==
+X-Gm-Gg: AYBFou1zdCo3/9BTGvzDACHKLNcRRRK85kHViZ7UKppWOavUlwnxiptvmb7KLT1iBd3
+ LPvrleJDqCwWxzQGaUfEjXp0h/mzn0d34ak564UYm66/eLY9L1oNHrSO/F7USUxiTkv97Yhlf/t
+ BNWLLYXCdX32oPUsfu52aON9WPvPiZG87m+2E1sxWwRmvQDzAGxdlur3bmIrQeqbYLIGo+5q0zv
+ oaexlRVv6BLYp7MK1x7CjsnslA9lhbYM2T5f16tRLsACy75hgjlq5oR+Tx+gYosJrPIzxvgNUx1
+ 50paFoJywdVuNhEQPWdUa30XRavzckEZPpJPCwZApwxNHIldo8biH5v889xfJhAtRfO8h+xUYVS
+ zhv+9iPj9BlzLDeyfdZGBBx2p/cKFj/lCGWmJ
+X-Received: by 2002:a05:620a:5229:b0:936:afa0:3661 with SMTP id
+ af79cd13be357-939804a386cmr1758002385a.36.1788781602991; 
+ Mon, 07 Sep 2026 04:46:42 -0700 (PDT)
+X-Received: by 2002:a05:620a:5229:b0:936:afa0:3661 with SMTP id
+ af79cd13be357-939804a386cmr1757996185a.36.1788781602375; 
+ Mon, 07 Sep 2026 04:46:42 -0700 (PDT)
+Received: from QCOM-UWl2o8bcGT.qualcomm.com ([177.18.66.131])
  by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-33517b57ac8sm17169507eec.28.2026.09.07.04.37.46
+ 6a1803df08f44-91040679e13sm89834876d6.26.2026.09.07.04.46.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 07 Sep 2026 04:37:48 -0700 (PDT)
-From: Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcomm.com>
+ Mon, 07 Sep 2026 04:46:41 -0700 (PDT)
+From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org,
- Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcomm.com>
-Subject: [PATCH v1 0/2] riscv: add RPMI support for server reference platform
-Date: Mon,  7 Sep 2026 17:07:13 +0530
-Message-ID: <20260907113715.1219775-1-subrahmanya.lingappa@oss.qualcomm.com>
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>
+Subject: [PATCH v8 7/7] tests/tcg/riscv64: add sdext "not on Debug mode"
+ sigill tests
+Date: Mon,  7 Sep 2026 08:46:14 -0300
+Message-ID: <20260907114615.1609913-8-daniel.barboza@oss.qualcomm.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260907114615.1609913-1-daniel.barboza@oss.qualcomm.com>
+References: <20260907114615.1609913-1-daniel.barboza@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA3MDEyOCBTYWx0ZWRfX3kFaUmTiEnPF
- +X6KBB0sgslyyWZQc4+T2Mn0I6sbU3hZUeXgJEsXt6dQ4A0FhUL57TxyQUiRriL47Yz43IwdnA4
- fKBaLL5Yryez3w1HIVxrNiS6t+gofDQTP5lP4zW3LZQEqAG75SiQwA4WghHrwoxZDBDIzuW8Upd
- YKXFj4HRp9sWubtNKGUq0yOMrP7qsjoRIOHJ4RjYWI87to0tMD6UaC0RNC8jJ+B3Et51++/EE+V
- bX+qiBzXFcI9YjZ8GQHdj1N7WQRmUsjDc08rBVQD6h4etPKvEKeVFLqddBdyRX13bbhsM70BAQt
- A5iusVf+MIQJis2Q2A7j0ySh8ulqmRA4l46vU+kzSMg5hWNvn6HtYSczPtAK5yeleTTxNZXcdKi
- Y0O+jVFR1CpzaWWjmep5AWtvukfkQNv2sfyL6Q/RlhlWpkHw2r/KHSRg+MIVbL0SiPlAMV/Um2A
- qoemq7dpd/QOvN+myWw==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA3MDEyOCBTYWx0ZWRfXzqX4XpL8WTz4
- WUCEGN75bhuHMdWus7aWP8mo23QWqEgZxB+OYABnn4PZ+A7e+HpfuiJ+QojUC59WPPMxuZtBxID
- hc3F11t6ixvgq4FT/GSMAWpjoPjCrFw=
-X-Proofpoint-ORIG-GUID: F8ZosBV3i7VtB_GGYrEmo3nV10S9tCpi
-X-Proofpoint-GUID: F8ZosBV3i7VtB_GGYrEmo3nV10S9tCpi
-X-Authority-Analysis: v=2.4 cv=LZYMLDfi c=1 sm=1 tr=0 ts=6a9ea20d cx=c_pps
- a=vVfyC5vLCtgYJKYeQD43oA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+X-Authority-Analysis: v=2.4 cv=QNBYgALL c=1 sm=1 tr=0 ts=6a9ea424 cx=c_pps
+ a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=CQQxcbsX5Byh3TlVSSGwig==:17
  a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22 a=VwQbUJbxAAAA:8
- a=EUspDBNiAAAA:8 a=NEAV23lmAAAA:8 a=D1dBp2MNxbUKwEfqZIUA:9
- a=rl5im9kqc5Lf4LNbBjHf:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22 a=EUspDBNiAAAA:8
+ a=FibE5N0eoUlo320SlN0A:9 a=PEH46H7Ffwr30OY-TuGO:22
+X-Proofpoint-ORIG-GUID: Ko8sFhwkOzu1lYXHcxJEVXzYkcLTpktQ
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA3MDEzMCBTYWx0ZWRfX4aaedN1Eolbm
+ 2TgCW+l6SLckboF/og864Ol0ARFoREzJi0P0cW8Yw3j8CDicp/D+gfGh/SrJPX8sBMm7iXG4EO/
+ vTgQQa39VG2mwWy52d7qNLr99M1/NiM=
+X-Proofpoint-GUID: Ko8sFhwkOzu1lYXHcxJEVXzYkcLTpktQ
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA3MDEzMCBTYWx0ZWRfX+uZzKrx1GDjV
+ 4U6Gg9bERN9Ep11LvdxLEOIj1xGfVVgcYKzYagZMTJT47yGylHGC/WQEpMVO3Kv5W9Og9mFHKOl
+ QP6zcQktg0Cr5poWxybMMnqg71ugvr62D/PvGIzXhe9Y6Rcbq9NZIpFu6e3lbtWfG81aLJRxOxS
+ ziydbQ0dLfJWgdaNKc/+rrvQuaYi9oavflNfIo2YhNp7wab1DrpkBIxrKH84zaZsrWiuIBL8M1p
+ mZC5Ia1ECjg8iN25R8nCMzOKqOWwaOcPNH/Thz1OcdeHSCg6wjTphsK/huaveleRGlQSpHkSkiu
+ k2xg3aNvRPmf4w+nyAvIYF28uJ/06pENsyy77plorASZkXsNpE7SjkMn1ErItTZbkprWqKuIExu
+ 05+mzu7zQGf+s1UfAlORYJPq1JHC+EANy4FgY4CrPE2GuOd/ZWGtSNxFkgUEAWafBuQKmCSXZUi
+ fmRplcGMbtVpEHigdow==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-07_03,2026-09-07_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 priorityscore=1501 malwarescore=0 suspectscore=0 impostorscore=0
- lowpriorityscore=0 phishscore=0 bulkscore=0 clxscore=1015 adultscore=0
+ malwarescore=0 spamscore=0 suspectscore=0 phishscore=0 priorityscore=1501
+ lowpriorityscore=0 adultscore=0 clxscore=1015 bulkscore=0 impostorscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609070128
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609070130
 Received-SPF: pass client-ip=205.220.168.131;
- envelope-from=subrahmanya.lingappa@oss.qualcomm.com;
- helo=mx0a-0031df01.pphosted.com
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
 X-Spam_score_int: -27
 X-Spam_score: -2.8
 X-Spam_bar: --
@@ -148,70 +150,130 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Add RPMI support for the RISC-V server reference platform by wiring the
-existing RISC-V RPMI device and FDT helpers into the riscv-server-ref
-machine.
+Adding proper TCG automated tests to sdext CSRs requires enabling
+gdbstub support for riscv64, which we don't have, since the nature of
+the CSRs added is that they run in a higher privilege than M mode.
 
-The series enables Base, System Reset, HSM, and System Suspend service
-groups for riscv-server-ref.  When QEMU is built with librpmi support,
-the riscv-server-ref machine always advertises reset, shutdown, HSM, and
-suspend through RPMI and has no rpmi=on|off machine option.
+DCSR has bits to allow for context switching from other modes to Debug
+mode, but those bits must be set via an external entity (e.g. gdb)
+beforehand.
 
-If librpmi is not enabled in a default riscv64-softmmu build, configure
-warns that riscv-server-ref will be built without RPMI support and
-continues so RISC-V machines that do not require RPMI still build without
-librpmi.  Booting riscv-server-ref from such a build also emits a warning
-that RPMI support is not compiled in.
+What we can do for now is a "negative" TCG test to ensure that we'll
+throw illegal insn traps when trying to write sdext CSRs in machine
+mode.
 
-Dependencies:
-- Daniel Henrique Barboza's prerequisite server reference board series:
-  [PATCH v9 0/5] hw/riscv: Server Platform Reference Board
-  https://lore.kernel.org/qemu-devel/20260903183125.682865-1-daniel.barboza@oss.qualcomm.com/
-- RPMI virt prerequisite:
-  [PATCH v10 00/10] riscv: add initial RPMI virt support
-  https://lore.kernel.org/qemu-devel/20260828112803.86636-1-subrahmanya.lingappa@oss.qualcomm.com/
+Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+---
+ tests/tcg/riscv64/Makefile.softmmu-target |  5 ++
+ tests/tcg/riscv64/test-sdext-sigill.S     | 83 +++++++++++++++++++++++
+ 2 files changed, 88 insertions(+)
+ create mode 100644 tests/tcg/riscv64/test-sdext-sigill.S
 
-Public branch for this exact stack:
-https://github.com/slingappa/qemu/tree/server-ref-platform
-
-The PR/review branch is based on a replay of the RPMI virt support on
-top of Daniel's server-ref v9 branch:
-https://github.com/slingappa/qemu/tree/server-ref-platform-base
-
-Testing:
-- Built riscv64-softmmu with librpmi.
-- Ran focused RPMI qtests:
-  - qemu:qtest-riscv64/riscv-rpmi-virt-test: 18 subtests passed
-  - qemu:qtest-riscv64/riscv-rpmi-server-ref-test: 15 subtests passed
-- Built riscv64-softmmu without librpmi.
-- Checked that riscv-server-ref boots from the no-librpmi build and
-  reports that RPMI support is not compiled in.
-- Booted riscv-server-ref Linux guest and checked OpenSBI, Linux, board
-  model, e1000e, and init startup console messages.
-- Booted riscv-server-ref Linux guest to login prompt and validated
-  RPMI-backed poweroff, reboot, and suspend/wakeup from the guest console.
-
-Subrahmanya Lingappa (2):
-  hw/riscv: add RPMI support for server reference platform
-  tests/qtest: split RISC-V RPMI tests by machine
-
- MAINTAINERS                              |   2 +-
- docs/system/riscv/riscv-server-ref.rst   |  41 ++
- hw/riscv/Kconfig                         |   1 +
- hw/riscv/server_platform_ref.c           | 146 ++++++-
- meson.build                              |   4 +
- tests/qtest/meson.build                  |   4 +-
- tests/qtest/riscv-rpmi-server-ref-test.c |  36 ++
- tests/qtest/riscv-rpmi-test.c            | 476 ++++++++++++-----------
- tests/qtest/riscv-rpmi-test.h            | 131 +++++++
- tests/qtest/riscv-rpmi-virt-test.c       |  45 +++
- 10 files changed, 659 insertions(+), 227 deletions(-)
- create mode 100644 tests/qtest/riscv-rpmi-server-ref-test.c
- create mode 100644 tests/qtest/riscv-rpmi-test.h
- create mode 100644 tests/qtest/riscv-rpmi-virt-test.c
-
-
-base-commit: 8e3bcd4648eea7e4f38781308eff13cbf828ae82
+diff --git a/tests/tcg/riscv64/Makefile.softmmu-target b/tests/tcg/riscv64/Makefile.softmmu-target
+index f2c75abd57..0a36376f85 100644
+--- a/tests/tcg/riscv64/Makefile.softmmu-target
++++ b/tests/tcg/riscv64/Makefile.softmmu-target
+@@ -85,5 +85,10 @@ run-test-vle32ff: test-vle32ff
+ 	$(call run-test, $<, $(QEMU) -cpu rv64$(comma)v=true $(QEMU_OPTS)$<)
+ test-vle32ff: CFLAGS += -march=rv64gcv
+ 
++EXTRA_RUNS += run-test-sdext-sigill
++SDEXT_CPU = rv64$(comma)sdtrig=true$(comma)sdext=true
++run-test-sdext-sigill: test-sdext-sigill
++	$(call run-test, $<, $(QEMU) -cpu $(SDEXT_CPU) $(QEMU_OPTS)$<)
++
+ # We don't currently support the multiarch system tests
+ undefine MULTIARCH_TESTS
+diff --git a/tests/tcg/riscv64/test-sdext-sigill.S b/tests/tcg/riscv64/test-sdext-sigill.S
+new file mode 100644
+index 0000000000..80a6c06465
+--- /dev/null
++++ b/tests/tcg/riscv64/test-sdext-sigill.S
+@@ -0,0 +1,83 @@
++/*
++ * RISC-V sdext extension "SIGILL" test: check if sdext CSRs
++ * and 'dret' will throw SIGILLs outside of Debug Mode.
++ *
++ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ */
++
++.equ CSR_DCSR,      0x7b0
++.equ CSR_DPC,       0x7b1
++.equ CSR_DSCRATCH0, 0x7b2
++
++	.option norvc
++	.text
++
++	.global _start
++
++_start:
++	la t0, trap_handler
++	csrw mtvec, t0
++
++	dret
++	j _fail
++
++	li t0, 1
++	csrw CSR_DPC, t0
++	j _fail
++
++	li t0, 1
++	csrw CSR_DSCRATCH0, t0
++	j _fail
++
++	li t0, 1
++	csrw CSR_DCSR, t0
++	j _fail
++
++	li a0, 0
++	j _exit
++
++_fail:
++	li a0, 1
++
++/* Exit through the semihosting SYS_EXIT_EXTENDED call with a0 as the code. */
++_exit:
++	la	a1, semiargs
++	li	t0, 0x20026	/* ADP_Stopped_ApplicationExit */
++	sd	t0, 0(a1)
++	sd	a0, 8(a1)
++	li	a0, 0x20	/* TARGET_SYS_EXIT_EXTENDED */
++	.balign	16
++	slli	zero, zero, 0x1f
++	ebreak
++	srai	zero, zero, 0x7
++	j	.
++
++
++	.balign	4
++trap_handler:
++	csrr	t4, mcause
++	la	t5, trap_mcause
++	sd	t4, 0(t5)
++	csrr	t4, mtval
++	la	t5, trap_mtval
++	sd	t4, 0(t5)
++	csrr	t4, mepc
++
++	/*
++	 * Skip 2 insns (8 increment in mepc) to skip both the
++	 * insn that caused the trap and the "j  _fail" insn
++	 * that follows it.
++	 */
++	addi	t4, t4, 8
++	csrw	mepc, t4
++	mret
++
++	.data
++	.balign	8
++semiargs:
++	.space	16
++trap_mcause:
++	.space	8
++trap_mtval:
++	.space	8
 -- 
 2.43.0
+
 
