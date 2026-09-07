@@ -4,64 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FF27C79FA1
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8833BC79FA0
 	for <qemu-riscv@archiver.kernel.org>; Mon,  7 Sep 2026 17:13:50 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x3ctq-0001yA-8o; Mon, 07 Sep 2026 13:12:54 -0400
+	id 1x3ctp-0001y4-Hm; Mon, 07 Sep 2026 13:12:53 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <eblot.ml@gmail.com>)
- id 1x3cS0-00012T-RP
- for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 12:44:08 -0400
-Received: from mail-wr2-f12.google.com ([74.125.225.76])
+ id 1x3cZH-0003Ru-4X
+ for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 12:51:39 -0400
+Received: from mail-wr1-f48.google.com ([209.85.221.48])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <eblot.ml@gmail.com>)
- id 1x3cRy-00033Q-4a
- for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 12:44:08 -0400
-Received: by mail-wr2-f12.google.com with SMTP id
- ffacd0b85a97d-482f6356256so175162f8f.1
- for <qemu-riscv@nongnu.org>; Mon, 07 Sep 2026 09:44:05 -0700 (PDT)
+ id 1x3cZE-0004qt-KG
+ for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 12:51:38 -0400
+Received: by mail-wr1-f48.google.com with SMTP id
+ ffacd0b85a97d-48444ec4fe2so2294902f8f.0
+ for <qemu-riscv@nongnu.org>; Mon, 07 Sep 2026 09:51:36 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788799444; x=1789404244;
+ d=1e100.net; s=20251104; t=1788799895; x=1789404695;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=+nb48/mqPn7+bPDRAaLkgFFQLPP5yyaURUgKFTQWIgU=;
- b=ce/8wbzPF9qadu0Av5G2tx/IeI0DkaZ0TptASZ14+23xwfAN/CIt781SIfNbngOpDm
- fPbSYqlPyonDDozOFw0lya0kZ8P8EEcYm7oGDvYMbXzuyiiF3EHrH1hS2Q6XvwN7/WRq
- hPVQt7DIgNBjJcrLwC4mcNzJRiQ3oe/Z0d5ITs58DqKd+ho1ngcqIq8yILGL0XyibMhV
- pdasVJ/yWymxupPYsqybBcpNqFMT8cMjM+ipwyHMImjv89PNHN39NvBNerqeBN1cd7Zr
- GD2fEv4Jw+mneJKpiAITXLfpwq8xRAEeWHReiV3yDL+ehSz+WUvfcWDxmCnKexY+ggG7
- /vjA==
+ bh=DtmNqWBTeMCh3h6zcOOCMvs2LhtYSQ9Lz7AsIV3ilrU=;
+ b=b5QG9x4oNSKNu0M4mf41Sop60B0IAodK+GXDtAD4UpIVrOn+ROTTBq3Po1lx64u4R6
+ 598jvTnINKJ6XM/bOGiTgE6ddZW1WBfvw4EX1rHfawv7sIqYUo2n0LHDeOyZ/kYLiQBO
+ aGs2/oCl1FQH295evgv2y+4qjsTj670Pfw9ypn4L4QpB6MXq9wPB50ASnIMynf4eAx73
+ 2QxpKnwc+ifV4ql64cCLSmjKlMKC7bssRHQTlxR4lAl9MjB22bgohlVu9hhNnKrNUUHu
+ 8FtSVwQxa/RK13hUFApgbOdGlJV9FhI5QlSJqNcaEM8NtmIWCnqgSYbtyaPm5QTZ5Xg8
+ JroQ==
 X-Forwarded-Encrypted: i=1;
- AKwUvBz9povLi/StaXEh7AAyKrrzS3/T4TXhdslcg8jdi64CI8t0cfMY/SVm2eadcr3HhJLKSBzyF5baVY6P@nongnu.org
-X-Gm-Message-State: AFuF++lUZKSICJVIFq1+ZwdUkqtz6XyM3CwM7jq/16kZgrBjJ0Pg9+Zq
- DJcRsjAYjRcH2BsMEhCOmzQANnzn0hJBC4Q9sMfE2VGMw0ZKRa9/eXMV
-X-Gm-Gg: AYBFou0xVS8A+TDFV/EkxbeDJOW8OD984Hje+oo3Y0yEcUYhVu8vgbKojYKXFMX1uMn
- C8dJPd2kb5y7hchUAcdn/w4NUE4Zv2GVy66ecAiw9u4yN9CZsnvGFraJjttVVNakAwPlZuEHqyX
- UMDwjmnq7JOUh9u3vRMIgBT4MIzeqfqMRKSLAKotwbX4G6H4oFpYnbRJ97KlbjBLdi1pMJxELvw
- lGhjQKQdhO7KegUuCDtL0fLPUnVG4PROgUFAVFGMSix70u1l2yOlxwVgYKvotgAtzKH28FyD0B5
- Z3VAkMxkCLNykhOqp1JFYtr2R5kXmwCWZ24WFlqpHTPR3YXa7CVOgNQijBWC3ODywf34HnfyE0i
- w31zF4kk/x8pmrI296TqWZQaSLxzwzey0kfhy7lp4ojHDgQIEhGyL+hniYgnD8zEgm0GMnEZyLz
- P7YZSTiOCGtVELHOuAK+LYmXyceXyuQeZu35Rhy02T+dwg1vWTBL/Z8qq4UBoehro4HLdeExP8X
- Nek8gFXlh8t9meyfIivUIu49dyqXMUqxRk=
-X-Received: by 2002:a05:600c:b8d:b0:49c:e37e:4389 with SMTP id
- 5b1f17b1804b1-49d1754e950mr23261705e9.4.1788799444266; 
- Mon, 07 Sep 2026 09:44:04 -0700 (PDT)
+ AKwUvBwQCSzjQ1ad59J8ARDq93O3BVcSpH9kvHJZ+q+gLhqAFhOWFWclxQKA8RrmYoPPJgX6UsuxbV8uWxsQ@nongnu.org
+X-Gm-Message-State: AFuF++mGhOUpHAHVpNAI+bnGpPrBGAfOtpVSOXM2juQrWtspuHmqFWLY
+ bdh8PMJyLsaaj9AHdrERafVZDpQToPb6j98kAxn/dTnO+1KKCZQ6v7sn
+X-Gm-Gg: AYBFou0FlnYqNhQcXQCYLCOyAaHVJaR/G3FBMgVzkzvtF1Q4g5dpF7apjyGKosqzYNB
+ JOw0k7fg+lf34Ufd2BX3uoZHE9sT6/Yc+MvEMKwe8rzvMa9FYK71dCD+RQ+QrCWXrSBW4o8ZdTJ
+ II7aX/n6fhwHVn+1hDyXiuPVVv1z96fKXRimXR/OKglQJC8xG6kqKyXwZUAd9445hpSm7XL9MeX
+ wFA866Nse9aqgnBP8AzQpguWSW2XrOtbfl28b745H/4SZQ6sPEqkc/ublpqvXFaotLmHTMUjBf6
+ ewQbz6fCRtquD63onf4UK1OYa0bT9/642KHqsnQqhWspmHXkmFTF1SPIK1J0Qvq1YqqmsBF7G8j
+ 8VQNXRiaUwmiLpuXpdKxDS4QpJfT3F7lzZmIKwsExFjfkgt5WICD8oGa4qG6Ep6ca3lI+yAto4a
+ v0RojDvqIG1lcH38Os3SJseyko51Y2lCmG8nFYldnmO05erBfyI7zLY/oSZpMS/5yo/wSD8Arls
+ +NJ+JBviZXMHTdlepyiKA4oKKrRJhH0xGSytRkeawELyA==
+X-Received: by 2002:a05:6000:420d:b0:485:8ebb:be1a with SMTP id
+ ffacd0b85a97d-4858ebbbee4mr38478081f8f.4.1788799894826; 
+ Mon, 07 Sep 2026 09:51:34 -0700 (PDT)
 Received: from localhost (89-93-216-19.hfc.dyn.abo.bbox.fr. [89.93.216.19])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49cee6024a8sm423469295e9.6.2026.09.07.09.44.02
+ ffacd0b85a97d-485885be01bsm29121377f8f.31.2026.09.07.09.51.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 07 Sep 2026 09:44:02 -0700 (PDT)
-Date: Mon, 07 Sep 2026 18:41:58 +0200
-Subject: [PATCH 08/50] hw/rtc: ds1338: move TYPE_DS1338 to a public header
+ Mon, 07 Sep 2026 09:51:34 -0700 (PDT)
+Date: Mon, 07 Sep 2026 18:42:37 +0200
+Subject: [PATCH 47/50] tests/qtest: ina238: cover a cleared calibration per
+ channel
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260907-bmc-minerva-v1-8-0d83ad610c3b@free.fr>
+Message-Id: <20260907-bmc-minerva-v1-47-0d83ad610c3b@free.fr>
 References: <20260907-bmc-minerva-v1-0-0d83ad610c3b@free.fr>
 In-Reply-To: <20260907-bmc-minerva-v1-0-0d83ad610c3b@free.fr>
 To: qemu-devel@nongnu.org
@@ -77,15 +78,15 @@ Cc: =?utf-8?q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>,
  =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>, 
  Emmanuel Blot <emmanuel.blot@free.fr>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1788799319; l=1555;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1788799323; l=4048;
  i=emmanuel.blot@free.fr; s=20260602; h=from:subject:message-id;
- bh=rDiuDaI9O+3b6OvM3HVMevuI7PTOL9dpbkK/b/AU00Y=;
- b=TJjwhDYORc6vDrt5LIRvQ49PiDCLxbk25KlMDreMqTb/SaS2ALuZeVzGwRczc7nwjNk6xjWFO
- Xs5RyVKQbsdCjmEo9KNgOnszVkOpUgnFQj3sNDNtvSUMi8Tgqx6NHgP
+ bh=AlHMNosYKAAxMErgMhv2dpLo39gC6fRYeKA3EA+XnDY=;
+ b=9jMjyF1vTEa5RILmDYgIclOjBKMBT9aCUyeIXq/7z7Nt+zkUT4dWfOhr0tKSIsHd9IhFprHWu
+ t50AXocteDlC7wXXhnMvgDjMbMwj8cWV4SBP3Nw5/B6YoMyAwYvN+/J
 X-Developer-Key: i=emmanuel.blot@free.fr; a=ed25519;
  pk=0qFrZ21FAAN8OfVsSoVcCFTk/NMYOWzxJz4paSAVm0g=
-Received-SPF: pass client-ip=74.125.225.76; envelope-from=eblot.ml@gmail.com;
- helo=mail-wr2-f12.google.com
+Received-SPF: pass client-ip=209.85.221.48; envelope-from=eblot.ml@gmail.com;
+ helo=mail-wr1-f48.google.com
 X-Spam_score_int: -15
 X-Spam_score: -1.6
 X-Spam_bar: -
@@ -112,62 +113,94 @@ From:  Emmanuel Blot via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Move the TYPE_DS1338 type name definition from ds1338.c into a new
-include/hw/rtc/ds1338.h header so that boards instantiating the device
-no longer need to redefine the type name string locally.
+Verify that without a calibration value the current and power
+registers read zero, whichever channels the mode converts.
 
 Signed-off-by: Emmanuel Blot <emmanuel.blot@free.fr>
 ---
- hw/rtc/ds1338.c         |  2 +-
- include/hw/rtc/ds1338.h | 20 ++++++++++++++++++++
- 2 files changed, 21 insertions(+), 1 deletion(-)
+ tests/qtest/ina238-test.c | 48 +++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 48 insertions(+)
 
-diff --git a/hw/rtc/ds1338.c b/hw/rtc/ds1338.c
-index 5f1ee2e410a..f8b3340bf0f 100644
---- a/hw/rtc/ds1338.c
-+++ b/hw/rtc/ds1338.c
-@@ -12,6 +12,7 @@
+diff --git a/tests/qtest/ina238-test.c b/tests/qtest/ina238-test.c
+index e7dd50a822..4e4146461c 100644
+--- a/tests/qtest/ina238-test.c
++++ b/tests/qtest/ina238-test.c
+@@ -282,6 +282,30 @@ static void test_zero_cal(void *obj, void *data, QGuestAllocator *alloc)
+     g_assert_cmpuint(i2c_get24(dev, REG_POWER), ==, 0);
+ }
  
- #include "qemu/osdep.h"
- #include "hw/i2c/i2c.h"
-+#include "hw/rtc/ds1338.h"
- #include "migration/vmstate.h"
- #include "qemu/bcd.h"
- #include "qom/object.h"
-@@ -29,7 +30,6 @@
- #define HOURS_PM   0x20
- #define CTRL_OSF   0x20
++/* Clearing SHUNT_CAL zeroes both derived registers in any mode */
++static void test_zero_cal_channels(void *obj, void *data,
++                                   QGuestAllocator *alloc)
++{
++    QI2CDevice *dev = (QI2CDevice *)obj;
++    static const uint16_t modes[] = { 0x9000, 0xA000, 0xF000 };
++    size_t idx;
++
++    for (idx = 0; idx < ARRAY_SIZE(modes); idx++) {
++        i2c_set16(dev, REG_CONFIG, CONFIG_RST);
++        i2c_set16(dev, REG_SHUNT_CAL, 0x0FD2);
++        qmp_ina238_set("shunt-voltage", 97200000);
++        qmp_ina238_set("bus-voltage", 48000000);
++        g_assert_cmphex(i2c_get16(dev, REG_CURRENT), !=, 0x0000);
++        g_assert_cmpuint(i2c_get24(dev, REG_POWER), !=, 0);
++
++        i2c_set16(dev, REG_ADC_CONFIG, modes[idx]);
++        i2c_set16(dev, REG_SHUNT_CAL, 0x0000);
++
++        g_assert_cmphex(i2c_get16(dev, REG_CURRENT), ==, 0x0000);
++        g_assert_cmpuint(i2c_get24(dev, REG_POWER), ==, 0);
++    }
++}
++
+ /* ADCRANGE changes the shunt LSB, not the current divisor. */
+ static void test_adcrange(void *obj, void *data, QGuestAllocator *alloc)
+ {
+@@ -458,6 +482,27 @@ static void test_alert_power(void *obj, void *data, QGuestAllocator *alloc)
+     g_assert_cmphex(i2c_get16(dev, REG_DIAG_ALRT) & DIAG_POL, ==, 0);
+ }
  
--#define TYPE_DS1338 "ds1338"
- OBJECT_DECLARE_SIMPLE_TYPE(DS1338State, DS1338)
- 
- struct DS1338State {
-diff --git a/include/hw/rtc/ds1338.h b/include/hw/rtc/ds1338.h
-new file mode 100644
-index 00000000000..f4cfe6a8e76
---- /dev/null
-+++ b/include/hw/rtc/ds1338.h
-@@ -0,0 +1,20 @@
-+/*
-+ * MAXIM DS1338 I2C RTC+NVRAM
-+ *
-+ * Copyright (c) 2009 CodeSourcery.
-+ * Written by Paul Brook
-+ *
-+ * This code is licensed under the GNU GPL v2.
-+ *
-+ * Contributions after 2012-01-13 are licensed under the terms of the
-+ * GNU GPL, version 2 or (at your option) any later version.
-+ *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ */
++/* Clearing SHUNT_CAL drops the power alert with the power reading */
++static void test_alert_power_zero_cal(void *obj, void *data,
++                                      QGuestAllocator *alloc)
++{
++    QI2CDevice *dev = (QI2CDevice *)obj;
 +
-+#ifndef HW_RTC_DS1338_H
-+#define HW_RTC_DS1338_H
++    i2c_set16(dev, REG_CONFIG, CONFIG_RST);
++    qmp_ina238_set("shunt-voltage", 97200000);
++    qmp_ina238_set("bus-voltage", 48000000);
++    i2c_set16(dev, REG_SHUNT_CAL, 0x0FD2);
++    i2c_set16(dev, REG_PWR_LIMIT, 0x0100);
++    g_assert_cmphex(i2c_get16(dev, REG_DIAG_ALRT) & DIAG_POL, ==, DIAG_POL);
 +
-+#define TYPE_DS1338 "ds1338"
++    /* Continuous shunt-only: the power register is not reconverted. */
++    i2c_set16(dev, REG_ADC_CONFIG, 0xA000);
++    i2c_set16(dev, REG_SHUNT_CAL, 0x0000);
 +
-+#endif
++    g_assert_cmpuint(i2c_get24(dev, REG_POWER), ==, 0);
++    g_assert_cmphex(i2c_get16(dev, REG_DIAG_ALRT) & DIAG_POL, ==, 0);
++}
++
+ /* Two thresholds crossed at once are reported simultaneously (multi-alert) */
+ static void test_alert_multi(void *obj, void *data, QGuestAllocator *alloc)
+ {
+@@ -733,6 +778,7 @@ static void ina238_register_nodes(void)
+                  NULL);
+     qos_add_test("power", "ina238", test_power, NULL);
+     qos_add_test("zero-cal", "ina238", test_zero_cal, NULL);
++    qos_add_test("zero-cal-channels", "ina238", test_zero_cal_channels, NULL);
+     qos_add_test("adcrange", "ina238", test_adcrange, NULL);
+     qos_add_test("mode-shutdown", "ina238", test_mode_shutdown, NULL);
+     qos_add_test("mode-triggered", "ina238", test_mode_triggered, NULL);
+@@ -742,6 +788,8 @@ static void ina238_register_nodes(void)
+     qos_add_test("alert-bus", "ina238", test_alert_bus, NULL);
+     qos_add_test("alert-temp", "ina238", test_alert_temp, NULL);
+     qos_add_test("alert-power", "ina238", test_alert_power, NULL);
++    qos_add_test("alert-power-zero-cal", "ina238", test_alert_power_zero_cal,
++                 NULL);
+     qos_add_test("alert-multi", "ina238", test_alert_multi, NULL);
+     qos_add_test("alert-latch", "ina238", test_alert_latch, NULL);
+     qos_add_test("alert-latch-persist", "ina238", test_alert_latch_persist,
 
 -- 
 2.50.1
