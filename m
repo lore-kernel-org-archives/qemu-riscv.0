@@ -4,147 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 937FDC79F89
-	for <qemu-riscv@archiver.kernel.org>; Mon,  7 Sep 2026 10:05:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29A16C79F99
+	for <qemu-riscv@archiver.kernel.org>; Mon,  7 Sep 2026 10:12:42 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x3WE2-0003A2-HQ; Mon, 07 Sep 2026 06:05:18 -0400
+	id 1x3WKp-0004zG-8V; Mon, 07 Sep 2026 06:12:19 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1x3WDy-00038L-Ud
- for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 06:05:15 -0400
-Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1x3WDv-0007sA-QC
- for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 06:05:14 -0400
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6879bXHA319010
- for <qemu-riscv@nongnu.org>; Mon, 7 Sep 2026 10:05:08 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- 3K2i4GH86TLL24kggVR95cChnQkN7yywKo44YwnpuZs=; b=iVUdW5bcRMnsLBkm
- TWwSImwXP/sWM8oQPgONrcqWJTkewI6+SczZpNGqZ7WCrGNVjqCyCeMFM15nrMVM
- 06j72iilqENyEqntZF9nCSUxH1oiN2mf6CiyMCHIw0AEFFlKd7nMXSh5KAGqMCtB
- YSHI/JCMQwa7RDithbYDR5neN4hNSCU5Mmbgyb0XbzNmR/qxeH0lcqj+Lt+bJpJI
- zPD4y6wYtISOEPSCXGvfKxZwHJpEseq+jdTtvENOIG+ohfmxvgDVBES1cInuY8SZ
- VQKCi7PDj3QFPFaXdQA81GQJrxHNZL8jA2upSXPzxNtbSCD4sl14Hk6AWT0KYaH1
- kys5og==
-Received: from mail-ot1-f70.google.com (mail-ot1-f70.google.com
- [209.85.210.70])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ghfwjj5mr-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Mon, 07 Sep 2026 10:05:08 +0000 (GMT)
-Received: by mail-ot1-f70.google.com with SMTP id
- 46e09a7af769-7f4e52682f0so5036000a34.0
- for <qemu-riscv@nongnu.org>; Mon, 07 Sep 2026 03:05:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1788775507; x=1789380307; darn=nongnu.org;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=3K2i4GH86TLL24kggVR95cChnQkN7yywKo44YwnpuZs=;
- b=J1dtz+KujgcVjl+KKrhpMQjkRvXNXtbMEr6lGVy7aUMJJ7pyjve2CsW5AG+1sKuIq6
- oSgUTk6hdAS/GZFuHJUljHuJDssLV51YsmfJN5aJ1kCQ7TCW4hC2Xg5SBHQn+ynCpCJ+
- PtODX87zdq0mv8gfZ/yTc34gpW/fGsnyFrfGT9yXAwQGVQAyOArOugo4TNsbhlXp9/z4
- Ms9DezUHouc2AP13eg18prS9my/Z38kVp0ilNXP6ptkbZSxm2hvtQ1WjcjEgN5h8Ejju
- yZ3eGlsf9LkWeGnoHGM2Oifo5HBEJwJv6IeE0jg9In1ueJ9HVYK4MbXrJNqB6kiTAGTs
- UuOg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788775507; x=1789380307;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=3K2i4GH86TLL24kggVR95cChnQkN7yywKo44YwnpuZs=;
- b=CtGthk6stuIpi6+cjgCrh5DOAh/Cmb2QVcgbUgSIeWWYpd8ZgN9AaVFX9x1z1luCJz
- zBxN3c3YLcvUa7KLGwBJ8AW/8gry2YddGKfrTpIcF5vXKoSe544Hxym8U3sv1oDgLLzw
- 5LCQ2Dm4+eAGK0KIDzLR1HRROYbr7jzbvFLjlAn1QWDrrT3p4/awCxBhAg0smAVqZ3Ib
- MMEPimYKBJxCTgyNUrSKT52iJ6VmHI5rQ15QQacFSwXuiQRc1/nY7MryRCZIOYpw21tO
- S0Kd+w1at1aK7iVHFKWfjuDIRSCQuDQkY5cLssWZFNwNTNlL0F923IwLiQmma/cD0ts1
- Vyvg==
-X-Gm-Message-State: AFuF++leJBS1xV7n9XgM7f0u4kB4RuERdJ8o5s+m9SdlvueKSZDK7TR9
- NseftoGrkGPLHxWZc7v7gaAtbycjwl9LfjDSC6jS3rYFxsEZyovbZnNjB+4FibVT00w9bgcs6fs
- MrtHwzOuD3wEL05nnEHGdVAnthFsuMyCTVPXzZ71pVMS1yTFpZyUc0YoxCQ==
-X-Gm-Gg: AYBFou2pWuP14MyyAuqTRifEhCbBFqfQ1VNH304ANEKMQY4/OHD48owkEt188/EZrt6
- sJxQKfqVT+eHym2IvWhKa1HKxrpSHH/V7de6HebEoiMZqpWovb+d2KBcgH+2gyf4mrdZ+PptgCE
- kXKO6axrMIunIcnPMy/I1pD2GlxBrN9moYvuIOenh/n+ugYm38HnA8l/Le4F5tGhcDIhUxLDgPe
- VNx3Ei4w3dnW3fw+d0VpW3E82kwnryuKt0c8McCSh6WQnXVV5+CbJGxImUHZoFxj5nSgrC5/N37
- tB1p1zcSBUOPuk2D8H/fImhZJxqxqXOdTIYaAUXuHe2AoI0KApt/+qAFliFpPuceFL2J5C9c44P
- nLHfFqYNZ5OKcc2Alat8qhoJiTKu2ng/NAOw=
-X-Received: by 2002:a05:6830:83b7:b0:7f4:bd7e:1394 with SMTP id
- 46e09a7af769-7fa1e1b786bmr15928457a34.1.1788775507311; 
- Mon, 07 Sep 2026 03:05:07 -0700 (PDT)
-X-Received: by 2002:a05:6830:83b7:b0:7f4:bd7e:1394 with SMTP id
- 46e09a7af769-7fa1e1b786bmr15928431a34.1.1788775506856; 
- Mon, 07 Sep 2026 03:05:06 -0700 (PDT)
-Received: from [192.168.68.102] ([177.18.66.131])
- by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7fcef193dc2sm4846573a34.19.2026.09.07.03.05.03
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 07 Sep 2026 03:05:06 -0700 (PDT)
-Message-ID: <d266c4a4-372a-4a96-bd7e-f9f8cece7e94@oss.qualcomm.com>
-Date: Mon, 7 Sep 2026 07:05:01 -0300
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 1/7] target/riscv: add sdext debug CSRs state
-To: Alistair Francis <Alistair.Francis@wdc.com>,
- "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>
-Cc: "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
- "chao.liu.zevorn@gmail.com" <chao.liu.zevorn@gmail.com>,
- "palmer@dabbelt.com" <palmer@dabbelt.com>,
- "chao.liu@processmission.com" <chao.liu@processmission.com>,
- "tangtao1634@phytium.com.cn" <tangtao1634@phytium.com.cn>,
- "liwei1518@gmail.com" <liwei1518@gmail.com>,
- "zhiwei_liu@linux.alibaba.com" <zhiwei_liu@linux.alibaba.com>
-References: <20260831141007.353854-1-daniel.barboza@oss.qualcomm.com>
- <20260831141007.353854-2-daniel.barboza@oss.qualcomm.com>
- <663b12c47712248b50206dd8c8b5add6812cf91a.camel@wdc.com>
-From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+ (Exim 4.90_1) (envelope-from <xiangwencheng@lanxincomputing.com>)
+ id 1x3WKm-0004yW-Ow
+ for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 06:12:16 -0400
+Received: from va-2-35.ptr.blmpb.com ([209.127.231.35])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <xiangwencheng@lanxincomputing.com>)
+ id 1x3WKh-0000c4-Rw
+ for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 06:12:16 -0400
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ s=s1; d=lanxincomputing-com.20200927.dkim.feishu.cn; t=1788775913;
+ h=from:subject:mime-version:from:date:message-id:subject:to:cc:
+ reply-to:content-type:mime-version:in-reply-to:message-id;
+ bh=cX13N075+JOZRjEQY7TTYD2+uWHRYC6kdSkZtODJFyE=;
+ b=PyDGH1yXsTOvuyOeJhUOr0peEBmNRyb9HYBGGgukCtjGvp8UDn4i5CysYYB0LNPmpvbZkY
+ XW0xiiJ7fxQu1DD0/+DS/jhEFv3Klcz54gjwJgzRB8MI33jsvwK7+plHfJVOxJt+vanVXv
+ bQ+7dZwExUi3iPUpkZnQM9gYJwuidGBvqtvAUBEjZGAn4U/NrIKAZ/P1zV+BLqPeHBpKk0
+ zn+fcPfF79xR6IuOK/YmbtenvR8suNz0qFSRPw/rNodErwk+B+rV14l2ajUspznkjNS3/Q
+ 8y59XF9GtNLsMgMUkfwCdHK8a23G3iIogtRn1zIFKeUDnLRiDi42qqVUt7X7zQ==
+Message-Id: <9d125a95-0fa1-4ea8-a8a6-4869afc629bc@lanxincomputing.com>
 Content-Language: en-US
-In-Reply-To: <663b12c47712248b50206dd8c8b5add6812cf91a.camel@wdc.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA3MDExMCBTYWx0ZWRfXzxlX+H+Gl5bC
- 5MHfOvCXb5xwJyudSephE/oNHCVb7mg4K2j0RwixvjtFadTrbO4wx28JZ0zDKMD2+nwGphUQuBY
- jwfs77cnL+4iMyA7VJI1PUyd6KKJA+4=
-X-Authority-Analysis: v=2.4 cv=NanWEWD4 c=1 sm=1 tr=0 ts=6a9e8c54 cx=c_pps
- a=7uPEO8VhqeOX8vTJ3z8K6Q==:117 a=CQQxcbsX5Byh3TlVSSGwig==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
- a=xvfqbYfxAAAA:20 a=pGLkceISAAAA:8 a=EUspDBNiAAAA:8 a=fgrLqfBXAAAA:8
- a=pbq2bq-YRYBN5HSKhH4A:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=EXS-LbY8YePsIyqnH6vw:22 a=_Ge82aPy-h_wFa7gWU4u:22 a=bA3UWDv6hWIuX7UZL3qL:22
-X-Proofpoint-GUID: zMD9r3Yltk9tEKlzXDYd8nOnq7xzVV_k
-X-Proofpoint-ORIG-GUID: zMD9r3Yltk9tEKlzXDYd8nOnq7xzVV_k
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA3MDExMCBTYWx0ZWRfXzHNsnttvLYQo
- 4XPB57NACWgO6y4Xm+BgK5L+E9rmJQGjFH4ntmiqA02X5hCxzBnGrsnsVN+acHDMhvvkClznc/i
- JiGSD5DZT3NZKBgdRdknf2KHCJbdtSl1GeRjs2DBedmgCAwjR1XgBD1q+zXGR0W+lIUrA9rxIj5
- iQLM/3lfpHhcSpMCUStpC2oYcN8lFbVozjAEX+a25Zf0PMU9BL/LwCxa6QStnxHiFmXhezeD8xn
- jCivH8d0GT+u83gDmulu7sP7whCy1Qfe8oJtzks6xoFC6tDgrksmo0hDerz4Dns2AKkgHuYtav5
- eVcMxM3S5yFugOPDtCQnjxNM9NTBZY5jFZjRkmPCrpzG2GUzMQ+gF7kq8ntnuSIpKhT1NXhcnFv
- kGu7Nut+vtb0R0diz2mz9poT7WcDQ7+z9y3DkNElcprGF48bHWjJemVnQtzgbta6I/P2cbLhxIt
- 8SHR7+jJKAoSgjwaj0A==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-07_02,2026-09-07_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 spamscore=0 impostorscore=0 suspectscore=0 adultscore=0
- priorityscore=1501 lowpriorityscore=0 phishscore=0 bulkscore=0 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609070110
-Received-SPF: pass client-ip=205.220.168.131;
- envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
-X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+Content-Transfer-Encoding: quoted-printable
+X-Original-From: BillXiang <xiangwencheng@lanxincomputing.com>
+User-Agent: Mozilla Thunderbird
+From: "BillXiang" <xiangwencheng@lanxincomputing.com>
+Mime-Version: 1.0
+In-Reply-To: <aprI8xQIDCRTJOV1@x1.local>
+References: <20260821100856.1794011-1-xiangwencheng@lanxincomputing.com>
+ <CAFEAcA_kLpaz0UQi3Q315kLVqvDtxKh77kU2meN9G1_evfKBeQ@mail.gmail.com>
+ <bad5c8b3-668f-4893-974f-9dbca8dc6893@linaro.org>
+ <02da9676-febf-4389-b09b-5e5d41c1084e@lanxincomputing.com>
+ <aoxiBB2Wn8NiL5s6@x1.local>
+ <5a2a8e0e-2fa6-4905-9752-b2ed0ab3f0ac@lanxincomputing.com>
+ <aprI8xQIDCRTJOV1@x1.local>
+Received: from [127.0.0.1] ([123.120.5.129]) by smtp.feishu.cn with ESMTPS;
+ Mon, 07 Sep 2026 18:11:50 +0800
+Cc: "Richard Henderson" <richard.henderson@linaro.org>, 
+ "Peter Maydell" <peter.maydell@linaro.org>, <mst@redhat.com>, 
+ <pbonzini@redhat.com>, <philmd@mailo.com>, <qemu-devel@nongnu.org>, 
+ <qemu-riscv@nongnu.org>
+Date: Mon, 7 Sep 2026 18:11:48 +0800
+X-Lms-Return-Path: <lba+26a9e8de7+0a9d37+nongnu.org+xiangwencheng@lanxincomputing.com>
+Content-Type: text/plain; charset=UTF-8
+To: "Peter Xu" <peterx@redhat.com>
+Subject: Re: [PATCH v2] virtio: Add aligned ld/st accessors for vring
+Received-SPF: pass client-ip=209.127.231.35;
+ envelope-from=xiangwencheng@lanxincomputing.com; helo=va-2-35.ptr.blmpb.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, MSGID_FROM_MTA_HEADER=0.001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -161,344 +79,229 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-
-
-On 9/7/2026 1:39 AM, Alistair Francis wrote:
-> On Mon, 2026-08-31 at 11:10 -0300, Daniel Henrique Barboza wrote:
->> From: Chao Liu <chao.liu.zevorn@gmail.com>
+On 9/4/2026 9:34 PM, Peter Xu wrote:
+> On Tue, Sep 01, 2026 at 10:44:13AM +0800, BillXiang wrote:
+>> On 8/24/2026 11:23 PM, Peter Xu wrote:
+>>> On Mon, Aug 24, 2026 at 12:19:15PM +0800, BillXiang wrote:
+>>>> Hi Richard, I've read your code in accel/tcg/ldst_atomicity.c.inc. Do
+>>>> you think it would be better to make the load/store_atomic* public?
+>>>
+>>> They do not fit by default, as we need to still process unaligned cases=
+?
 >>
->> RISC-V Debug Specification:
->> https://github.com/riscv/riscv-debug-spec/releases/tag/1.0
+>> You mentioned the use of guest CPU context in [1]. However, what I meant
+>> by load/store_atomic* is code like the following:
 >>
->> Add architectural state for Sdext Debug Mode: debug_mode, dcsr, dpc
->> and dscratch0/1. Wire up CSR access for dcsr/dpc/dscratch and gate
->> them to Debug Mode (or host debugger access).
+>> static inline uint16_t load_atomic2(void *pv)
+>> {
+>>       uint16_t *p =3D __builtin_assume_aligned(pv, 2);
+>>       return qatomic_read(p);
+>> }
 >>
->> The Sdext is not fully implemented, so it is disabled by default.
+>> static inline void store_atomic2(void *pv, uint16_t val)
+>> {
+>>       uint16_t *p =3D __builtin_assume_aligned(pv, 2);
+>>       qatomic_set(p, val);
+>> }
 >>
->> Signed-off-by: Chao Liu <chao.liu.zevorn@gmail.com>
->> Reviewed-by: Daniel Henrique Barboza
->> <daniel.barboza@oss.qualcomm.com>
->> Tested-by: Tao Tang <tangtao1634@phytium.com.cn>
-> 
-> You are missing your Signed-off-by line here (and on the other
-> patches).
+>> I consider these to be generic atomic load/store primitives.
+>=20
+> __builtin_assume_aligned() tells the compiler the address is aligned.  Wh=
+at
+> if it is not?
 
-Ops. I'll re-send it with my s-o-b on patches 1-6.
+When using __builtin_assume_aligned, the compiler will generate=20
+unaligned load/store instructions if the data is not aligned, rather=20
+than emitting byte=E2=80=91by=E2=80=91byte code, which may cause errors on =
+processors=20
+that do not support unaligned accesses. That's what I mean: callers must=20
+ensure @addr is naturally aligned to the access size.
 
+>=20
+>>
+>>>
+>>> I wished we can use qemu_mem_move() directly that just got introduced..=
+ but
+>>> it does slightly more than wanted.  Maybe something like this?  Below d=
+iff
+>>> dropped ldsw_he_p() alone the way as it's never used.
+>>>
+>>> Thanks,
+>>>
+>>> =3D=3D=3D8<=3D=3D=3D
+>>>
+>>> diff --git a/include/qemu/bswap.h b/include/qemu/bswap.h
+>>> index 387d65c0b0..04a0f63612 100644
+>>> --- a/include/qemu/bswap.h
+>>> +++ b/include/qemu/bswap.h
+>>> @@ -1,6 +1,7 @@
+>>>    #ifndef BSWAP_H
+>>>    #define BSWAP_H
+>>>   =20
+>>> +#include "qemu/atomic.h"
+>>>    #include "qemu/target-info.h"
+>>>    #include "exec/memop.h"
+>>>   =20
+>>> @@ -238,62 +239,52 @@ static inline void stb_p(void *ptr, uint8_t v)
+>>>        *(uint8_t *)ptr =3D v;
+>>>    }
+>>>   =20
+>>> -/*
+>>> - * Any compiler worth its salt will turn these memcpy into native unal=
+igned
+>>> - * operations.  Thus we don't need to play games with packed attribute=
+s, or
+>>> - * inline byte-by-byte stores.
+>>> - * Some compilation environments (eg some fortify-source implementatio=
+ns)
+>>> - * may intercept memcpy() in a way that defeats the compiler optimizat=
+ion,
+>>> - * though, so we use __builtin_memcpy() to give ourselves the best cha=
+nce
+>>> - * of good performance.
+>>> - */
+>>> -
+>>> -static inline int lduw_he_p(const void *ptr)
+>>> -{
+>>> -    uint16_t r;
+>>> -    __builtin_memcpy(&r, ptr, sizeof(r));
+>>> -    return r;
+>>> -}
+>>> -
+>>> -static inline int ldsw_he_p(const void *ptr)
+>>> -{
+>>> -    int16_t r;
+>>> -    __builtin_memcpy(&r, ptr, sizeof(r));
+>>> -    return r;
+>>> -}
+>>> +#define  LD_HE_P(type, size)                                \
+>>> +    static inline type                                      \
+>>> +    glue(glue(ld, size), _he_p)(const void *ptr)            \
+>>> +    {                                                       \
+>>> +        type v;                                             \
+>>> +        if (unlikely((uintptr_t)ptr & (sizeof(v) - 1))) {   \
+>>> +            __builtin_memcpy(&v, ptr, sizeof(v));           \
+>>> +        } else {                                            \
+>>> +            v =3D qatomic_read((type *)ptr);                  \
+>>> +        }                                                   \
+>>> +        return v;                                           \
+>>> +    }
+>>>   =20
+>>> -static inline void stw_he_p(void *ptr, uint16_t v)
+>>> -{
+>>> -    __builtin_memcpy(ptr, &v, sizeof(v));
+>>> -}
+>>> +#define  ST_HE_P(type, size)                                \
+>>> +    static inline void                                      \
+>>> +    glue(glue(st, size), _he_p)(void *ptr, type v)          \
+>>> +    {                                                       \
+>>> +        if (unlikely((uintptr_t)ptr & (sizeof(v) - 1))) {   \
+>>> +            __builtin_memcpy(ptr, &v, sizeof(v));           \
+>>> +        } else {                                            \
+>>> +            qatomic_set((type *)ptr, v);                    \
+>>> +        }                                                   \
+>>> +    }
+>>>   =20
+>>> -static inline void st24_he_p(void *ptr, uint32_t v)
+>>> -{
+>>> -    __builtin_memcpy(ptr, &v, 3);
+>>> -}
+>>> +LD_HE_P(uint16_t, 16)
+>>> +LD_HE_P(uint32_t, 32)
+>>> +LD_HE_P(uint64_t, 64)
+>>> +ST_HE_P(uint16_t, 16)
+>>> +ST_HE_P(uint32_t, 32)
+>>> +ST_HE_P(uint64_t, 64)
+>>>   =20
+>>> -static inline int ldl_he_p(const void *ptr)
+>>> -{
+>>> -    int32_t r;
+>>> -    __builtin_memcpy(&r, ptr, sizeof(r));
+>>> -    return r;
+>>> -}
+>>> +#undef LD_HE_P
+>>> +#undef ST_HE_P
+>>> +#undef ADDR_ALIGNED
+>>>   =20
+>>> -static inline void stl_he_p(void *ptr, uint32_t v)
+>>> -{
+>>> -    __builtin_memcpy(ptr, &v, sizeof(v));
+>>> -}
+>>> +#define  lduw_he_p  ld16_he_p
+>>> +#define  ldl_he_p  ld32_he_p
+>>> +#define  ldq_he_p  ld64_he_p
+>>>   =20
+>>> -static inline uint64_t ldq_he_p(const void *ptr)
+>>> -{
+>>> -    uint64_t r;
+>>> -    __builtin_memcpy(&r, ptr, sizeof(r));
+>>> -    return r;
+>>> -}
+>>> +#define  stw_he_p  st16_he_p
+>>> +#define  stl_he_p  st32_he_p
+>>> +#define  stq_he_p  st64_he_p
+>>>   =20
+>>> -static inline void stq_he_p(void *ptr, uint64_t v)
+>>> +static inline void st24_he_p(void *ptr, uint32_t v)
+>>>    {
+>>> -    __builtin_memcpy(ptr, &v, sizeof(v));
+>>> +    __builtin_memcpy(ptr, &v, 3);
+>>>    }
+>>>   =20
+>>>    static inline int lduw_le_p(const void *ptr)
+>>
+>> IMO, your change serves as a good optimization for the original
+>> load/store by taking advantage of alignment. However, the real issue I'm
+>> trying to address is the atomicity of these operations=E2=80=94for use c=
+ases
+>> like avail_idx in virtio, and this should not limited to virtio alone. I
+>> still believe we should provide explicit atomic load/store interfaces
+>> for callers, rather than relying solely on aligned load/store. And I
+>> admit it was my mistake to use the aligned versions here in the first
+>> place. I'll send another version later and look forward to more feedback=
+.
+>=20
+> Explicit atomic load/store maybe still make sense somewhere as API, but I
+> think Peter Maydell also raised that this exact failure may not be the on=
+ly
+> one.
+
+I agree with that. Perhaps we should systematically find all relevant=20
+places and switch to explicit atomic load/store in the future.
+
+>=20
+> IMHO we could directly switch to aligned access automatically when it can=
+,
+> the only concern is we add one more test instruction in this path, but I
+> expect it always hit the aligned case.  Also I expect callers of these ho=
+st
+> endian APIs to not loop over a range of addr.  So irrelevant of whether
+> above change would make sense, we want to study more on the impact of the
+> extra if on the callers.  The hope is it is minimum impact and in case
+> there're corner cases we can switch to other API even if existed.
+
+I used your latest code [1] to test virtio=E2=80=91net with =E2=80=9Ciperf3=
+ -u -l 64=E2=80=9D on=20
+my RISC=E2=80=91V server, and found that the extra conditional check has=20
+negligible impact.
+
+>=20
+> Thanks,
+>=20
+>>
+>> Thanks,
+>>
+>> --
+>> BillXiang
+>>
+>> [1] https://lore.kernel.org/qemu-devel/apW0SkNxWPCyvVV6@x1.local/
+>>
+>=20
 
 Thanks,
-Daniel
 
-> 
->> ---
->>   target/riscv/cpu.c                |   7 ++
->>   target/riscv/cpu.h                |   4 +
->>   target/riscv/cpu_bits.h           |  33 ++++++++
->>   target/riscv/cpu_cfg_fields.h.inc |   1 +
->>   target/riscv/machine.c            |  20 +++++
->>   target/riscv/tcg/csr.c            | 126
->> ++++++++++++++++++++++++++++++
->>   6 files changed, 191 insertions(+)
->>
->> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
->> index 61109672d6..c2078473aa 100644
->> --- a/target/riscv/cpu.c
->> +++ b/target/riscv/cpu.c
->> @@ -248,6 +248,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
->>       ISA_EXT_DATA_ENTRY(zvkt, PRIV_VERSION_1_12_0, ext_zvkt),
->>       ISA_EXT_DATA_ENTRY(zhinx, PRIV_VERSION_1_12_0, ext_zhinx),
->>       ISA_EXT_DATA_ENTRY(zhinxmin, PRIV_VERSION_1_12_0, ext_zhinxmin),
->> +    ISA_EXT_DATA_ENTRY(sdext, PRIV_VERSION_1_12_0, ext_sdext),
->>       ISA_EXT_DATA_ENTRY(sdtrig, PRIV_VERSION_1_12_0, ext_sdtrig),
->>       ISA_INTERNAL_EXT_DATA_ENTRY(shcounterenw, PRIV_VERSION_1_12_0,
->>                                   has_priv_1_12),
->> @@ -1091,6 +1092,12 @@ static void riscv_cpu_reset_hold(Object *obj,
->> ResetType type)
->>   
->>   #ifndef CONFIG_USER_ONLY
->>   #ifdef CONFIG_TCG
->> +    env->debug_mode = false;
->> +    env->dcsr = DCSR_DEBUGVER(4);
->> +    env->dpc = 0;
->> +    env->dscratch[0] = 0;
->> +    env->dscratch[1] = 0;
->> +
->>       if (cpu->cfg.debug || cpu->cfg.ext_sdtrig) {
->>           riscv_trigger_reset_hold(env);
->>       }
->> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
->> index 718b66487a..74bddc8415 100644
->> --- a/target/riscv/cpu.h
->> +++ b/target/riscv/cpu.h
->> @@ -507,6 +507,10 @@ struct CPUArchState {
->>   
->>       /* True if in debugger mode.  */
->>       bool debugger;
->> +    bool debug_mode;
->> +    target_ulong dcsr;
->> +    target_ulong dpc;
->> +    target_ulong dscratch[2];
->>   
->>       uint64_t mstateen[SMSTATEEN_MAX_COUNT];
->>       uint64_t hstateen[SMSTATEEN_MAX_COUNT];
->> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
->> index c01050ce2b..769c945517 100644
->> --- a/target/riscv/cpu_bits.h
->> +++ b/target/riscv/cpu_bits.h
->> @@ -467,6 +467,39 @@
->>   #define CSR_DCSR            0x7b0
->>   #define CSR_DPC             0x7b1
->>   #define CSR_DSCRATCH        0x7b2
->> +#define CSR_DSCRATCH1       0x7b3
->> +
->> +/* DCSR fields */
->> +#define DCSR_XDEBUGVER_SHIFT    28
->> +#define DCSR_XDEBUGVER_MASK     (0xfu << DCSR_XDEBUGVER_SHIFT)
->> +#define DCSR_DEBUGVER(val)      ((target_ulong)(val) <<
->> DCSR_XDEBUGVER_SHIFT)
->> +#define DCSR_EXTCAUSE_SHIFT     24
->> +#define DCSR_EXTCAUSE_MASK      (0x7u << DCSR_EXTCAUSE_SHIFT)
->> +#define DCSR_CETRIG             BIT(19)
->> +#define DCSR_PELP               BIT(18)
->> +#define DCSR_EBREAKVS           BIT(17)
->> +#define DCSR_EBREAKVU           BIT(16)
->> +#define DCSR_EBREAKM            BIT(15)
->> +#define DCSR_EBREAKS            BIT(13)
->> +#define DCSR_EBREAKU            BIT(12)
->> +#define DCSR_STEPIE             BIT(11)
->> +#define DCSR_STOPCOUNT          BIT(10)
->> +#define DCSR_STOPTIME           BIT(9)
->> +#define DCSR_CAUSE_SHIFT        6
->> +#define DCSR_CAUSE_MASK         (0x7u << DCSR_CAUSE_SHIFT)
->> +#define DCSR_V                  BIT(5)
->> +#define DCSR_MPRVEN             BIT(4)
->> +#define DCSR_NMIP               BIT(3)
->> +#define DCSR_STEP               BIT(2)
->> +#define DCSR_PRV_MASK           0x3u
->> +
->> +#define DCSR_CAUSE_EBREAK       1
->> +#define DCSR_CAUSE_TRIGGER      2
->> +#define DCSR_CAUSE_HALTREQ      3
->> +#define DCSR_CAUSE_STEP         4
->> +#define DCSR_CAUSE_RESET        5
->> +#define DCSR_CAUSE_GROUP        6
->> +#define DCSR_CAUSE_OTHER        7
->>   
->>   /* Performance Counters */
->>   #define CSR_MHPMCOUNTER3    0xb03
->> diff --git a/target/riscv/cpu_cfg_fields.h.inc
->> b/target/riscv/cpu_cfg_fields.h.inc
->> index f91c780299..24f3606f94 100644
->> --- a/target/riscv/cpu_cfg_fields.h.inc
->> +++ b/target/riscv/cpu_cfg_fields.h.inc
->> @@ -105,6 +105,7 @@ BOOL_FIELD(ext_zvfbfmin)
->>   BOOL_FIELD(ext_zvfbfwma)
->>   BOOL_FIELD(ext_zvfh)
->>   BOOL_FIELD(ext_zvfhmin)
->> +BOOL_FIELD(ext_sdext)
->>   BOOL_FIELD(ext_sdtrig)
->>   BOOL_FIELD(ext_smaia)
->>   BOOL_FIELD(ext_ssaia)
->> diff --git a/target/riscv/machine.c b/target/riscv/machine.c
->> index 74edb8c2b5..aba162d0f1 100644
->> --- a/target/riscv/machine.c
->> +++ b/target/riscv/machine.c
->> @@ -302,6 +302,25 @@ static const VMStateDescription vmstate_debug =
->> {
->>           VMSTATE_VARRAY_UINT32(env.tdata3, RISCVCPU,
->>                                 env.num_triggers, 0,
->>                                 vmstate_info_uint64, uint64_t),
->> +        VMSTATE_BOOL_V(env.debug_mode, RISCVCPU, 3),
->> +        VMSTATE_UINTTL_V(env.dcsr, RISCVCPU, 3),
->> +        VMSTATE_UINTTL_V(env.dpc, RISCVCPU, 3),
->> +        VMSTATE_UINTTL_ARRAY_V(env.dscratch, RISCVCPU, 2, 3),
->> +        VMSTATE_END_OF_LIST()
->> +    }
->> +};
->> +
->> +static const VMStateDescription vmstate_sdext = {
->> +    .name = "cpu/sdext",
->> +    .version_id = 1,
->> +    .minimum_version_id = 1,
->> +    .needed = debug_needed,
->> +    .post_load = debug_post_load,
->> +    .fields = (const VMStateField[]) {
->> +        VMSTATE_BOOL_V(env.debug_mode, RISCVCPU, 3),
->> +        VMSTATE_UINTTL_V(env.dcsr, RISCVCPU, 3),
->> +        VMSTATE_UINTTL_V(env.dpc, RISCVCPU, 3),
->> +        VMSTATE_UINTTL_ARRAY_V(env.dscratch, RISCVCPU, 2, 3),
->>           VMSTATE_END_OF_LIST()
->>       }
->>   };
->> @@ -577,6 +596,7 @@ const VMStateDescription vmstate_riscv_cpu = {
->>           &vmstate_ctr,
->>           &vmstate_sstc,
->>           &vmstate_mseccfg,
->> +        &vmstate_sdext,
->>           NULL
->>       }
->>   };
->> diff --git a/target/riscv/tcg/csr.c b/target/riscv/tcg/csr.c
->> index bd4b6dc114..988261cccf 100644
->> --- a/target/riscv/tcg/csr.c
->> +++ b/target/riscv/tcg/csr.c
->> @@ -3207,6 +3207,126 @@ static RISCVException
->> write_mtval(CPURISCVState *env, int csrno,
->>       return RISCV_EXCP_NONE;
->>   }
->>   
->> +#if !defined(CONFIG_USER_ONLY)
->> +static RISCVException sdext(CPURISCVState *env, int csrno)
->> +{
->> +    if (!riscv_cpu_cfg(env)->ext_sdext) {
->> +        return RISCV_EXCP_ILLEGAL_INST;
->> +    }
->> +
->> +    if (!env->debug_mode && !env->debugger) {
->> +        return RISCV_EXCP_ILLEGAL_INST;
->> +    }
->> +
->> +    return RISCV_EXCP_NONE;
->> +}
->> +
->> +static target_ulong dcsr_visible_mask(CPURISCVState *env)
->> +{
->> +    target_ulong mask = (target_ulong)-1;
-> 
-> This should be a 32-bit value, as the register is always 32-bit
-> 
-> Alistair
-> 
->> +    RISCVCPU *cpu = env_archcpu(env);
->> +
->> +    if (!riscv_has_ext(env, RVH)) {
->> +        mask &= ~(DCSR_EBREAKVS | DCSR_EBREAKVU | DCSR_V);
->> +    }
->> +    if (!riscv_has_ext(env, RVS)) {
->> +        mask &= ~DCSR_EBREAKS;
->> +    }
->> +    if (!riscv_has_ext(env, RVU)) {
->> +        mask &= ~DCSR_EBREAKU;
->> +    }
->> +    if (!cpu->cfg.ext_zicfilp) {
->> +        mask &= ~DCSR_PELP;
->> +    }
->> +    if (!cpu->cfg.ext_smdbltrp) {
->> +        mask &= ~DCSR_CETRIG;
->> +    }
->> +
->> +    return mask;
->> +}
->> +
->> +static RISCVException read_dcsr(CPURISCVState *env, int csrno,
->> +                                target_ulong *val)
->> +{
->> +    *val = env->dcsr & dcsr_visible_mask(env);
->> +    return RISCV_EXCP_NONE;
->> +}
->> +
->> +static target_ulong dcsr_writable_mask(CPURISCVState *env)
->> +{
->> +    target_ulong mask = DCSR_EBREAKM | DCSR_EBREAKS | DCSR_EBREAKU |
->> +                        DCSR_STEPIE | DCSR_STOPCOUNT | DCSR_STOPTIME
->> |
->> +                        DCSR_STEP | DCSR_PRV_MASK;
->> +    RISCVCPU *cpu = env_archcpu(env);
->> +
->> +    mask |= DCSR_MPRVEN;
->> +
->> +    if (riscv_has_ext(env, RVH)) {
->> +        mask |= DCSR_EBREAKVS | DCSR_EBREAKVU | DCSR_V;
->> +    }
->> +    if (riscv_has_ext(env, RVS)) {
->> +        mask |= DCSR_EBREAKS;
->> +    }
->> +    if (riscv_has_ext(env, RVU)) {
->> +        mask |= DCSR_EBREAKU;
->> +    }
->> +    if (cpu->cfg.ext_zicfilp) {
->> +        mask |= DCSR_PELP;
->> +    }
->> +    if (cpu->cfg.ext_smdbltrp) {
->> +        mask |= DCSR_CETRIG;
->> +    }
->> +
->> +    return mask;
->> +}
->> +
->> +static RISCVException write_dcsr(CPURISCVState *env, int csrno,
->> +                                 target_ulong val, uintptr_t ra)
->> +{
->> +    target_ulong mask = dcsr_writable_mask(env);
->> +    target_ulong new_val = env->dcsr;
->> +
->> +    new_val &= ~mask;
->> +    new_val |= val & mask;
->> +    new_val &= ~DCSR_XDEBUGVER_MASK;
->> +    new_val |= DCSR_DEBUGVER(4);
->> +    env->dcsr = new_val;
->> +    return RISCV_EXCP_NONE;
->> +}
->> +
->> +static RISCVException read_dpc(CPURISCVState *env, int csrno,
->> +                               target_ulong *val)
->> +{
->> +    *val = env->dpc & get_xepc_mask(env);
->> +    return RISCV_EXCP_NONE;
->> +}
->> +
->> +static RISCVException write_dpc(CPURISCVState *env, int csrno,
->> +                                target_ulong val, uintptr_t ra)
->> +{
->> +    env->dpc = val & get_xepc_mask(env);
->> +    return RISCV_EXCP_NONE;
->> +}
->> +
->> +static RISCVException read_dscratch(CPURISCVState *env, int csrno,
->> +                                    target_ulong *val)
->> +{
->> +    int index = (csrno == CSR_DSCRATCH1) ? 1 : 0;
->> +
->> +    *val = env->dscratch[index];
->> +    return RISCV_EXCP_NONE;
->> +}
->> +
->> +static RISCVException write_dscratch(CPURISCVState *env, int csrno,
->> +                                     target_ulong val, uintptr_t ra)
->> +{
->> +    int index = (csrno == CSR_DSCRATCH1) ? 1 : 0;
->> +
->> +    env->dscratch[index] = val;
->> +    return RISCV_EXCP_NONE;
->> +}
->> +#endif /* !CONFIG_USER_ONLY */
->> +
->>   /* Execution environment configuration setup */
->>   static RISCVException read_menvcfg(CPURISCVState *env, int csrno,
->>                                      target_ulong *val)
->> @@ -6435,6 +6555,12 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =
->> {
->>       [CSR_TDATA3]    =  { "tdata3",   debug, read_tdata,
->> write_tdata    },
->>       [CSR_TINFO]     =  { "tinfo",    debug, read_tinfo,
->> write_ignore   },
->>       [CSR_MCONTEXT]  =  { "mcontext", debug, read_mcontext,
->> write_mcontext },
->> +#if !defined(CONFIG_USER_ONLY)
->> +    [CSR_DCSR]      =  { "dcsr",      sdext, read_dcsr,
->> write_dcsr },
->> +    [CSR_DPC]       =  { "dpc",       sdext, read_dpc,
->> write_dpc },
->> +    [CSR_DSCRATCH]  =  { "dscratch0", sdext, read_dscratch,
->> write_dscratch },
->> +    [CSR_DSCRATCH1] =  { "dscratch1", sdext, read_dscratch,
->> write_dscratch },
->> +#endif
->>   
->>       [CSR_MCTRCTL]    = { "mctrctl",    ctr_mmode,  NULL, NULL,
->> rmw_xctrctl    },
->>       [CSR_SCTRCTL]    = { "sctrctl",    ctr_smode,  NULL, NULL,
->> rmw_xctrctl    },
+--
+BillXiang
 
+[1] https://lore.kernel.org/qemu-devel/aoxiBB2Wn8NiL5s6@x1.local/
 
