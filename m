@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A971CC79FA0
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D94F0C79FA1
 	for <qemu-riscv@archiver.kernel.org>; Mon,  7 Sep 2026 17:15:34 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x3ctr-0001yO-Js; Mon, 07 Sep 2026 13:12:55 -0400
+	id 1x3cts-0001zG-GG; Mon, 07 Sep 2026 13:12:56 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <eblot.ml@gmail.com>)
- id 1x3cVl-0002qQ-MQ
- for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 12:48:01 -0400
-Received: from mail-wm1-f50.google.com ([209.85.128.50])
+ id 1x3cXH-0006mn-0u
+ for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 12:49:35 -0400
+Received: from mail-wr1-f51.google.com ([209.85.221.51])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <eblot.ml@gmail.com>)
- id 1x3cVi-0003uE-9b
- for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 12:48:01 -0400
-Received: by mail-wm1-f50.google.com with SMTP id
- 5b1f17b1804b1-49b965570d7so44219885e9.0
- for <qemu-riscv@nongnu.org>; Mon, 07 Sep 2026 09:47:57 -0700 (PDT)
+ id 1x3cXD-0004AT-JD
+ for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 12:49:34 -0400
+Received: by mail-wr1-f51.google.com with SMTP id
+ ffacd0b85a97d-4843e397f74so4557318f8f.1
+ for <qemu-riscv@nongnu.org>; Mon, 07 Sep 2026 09:49:31 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788799676; x=1789404476;
+ d=1e100.net; s=20251104; t=1788799770; x=1789404570;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=LphZT+IzejkArL3oUvhqeY3sCcOug01WUt4J0/5+FMM=;
- b=VVZtNAGighlHWTVsCzSDb2Zw9dYyS43TdtM+FFgKnEXE9anl52rM7A8OA6Agg3CCey
- /Hf5B8SNPKkuP+t5bgUXHjioEB5S41VTm2LLz/M9sHLFGHFvotLF6aAOYi0dbakxcNsl
- Z6J+qf1or/wAVNwtqktrww4SBBs7pkX910jfCklKsUtebL/pbziqtrutjks2SxuaPqI/
- 3UtbSIpGtIsVLHJZCMTAsZ1v4ry60+mjcyxGfdf+1K//4BkuXyAJNJLJYOOO4UnE6iE5
- kHy3w+4XlNZN/gDRVU5GQOgoo43Ae7Cp3K6XTzT+plwo3bdsLS9ZPjn9JMNBAYEdXbL6
- 3/Pw==
+ bh=tT25q+kAs26amHD55A44HNQvdNP+ZXuCq/4WXpNirRE=;
+ b=clQH8vshoaHfiISHHYFLSop6nmSfvytzQQgD2ANwpEQlip/HVhgUEWSKARu+BAJOU5
+ 7Tn5STb6uw6oK6hpBpjpEKVPKH6x23mxyZmRoXqyTEgML7gzwkSL8CIFTJu6eNwQyd17
+ rxNVYVKnBLLJ9MWXLGZouNZ2uuO6dEQ3ZrS/wp9giji5ffwpPBIE0mgJ0b1QAqM+f22n
+ Y6XBdRtlnN6KBlhwE0XjnelKD8kOLhoiz5wvXYRgcqglPdTJTi8HJYO5klkShxUnmhUd
+ 8Ii/ELLksfo9R1sSAErX9hLb0BQ5MUdH4xl1IWWKyUBUV4oJ7hRrqnVDdyjYLP+oNaJ6
+ MBmQ==
 X-Forwarded-Encrypted: i=1;
- AKwUvByRW1W7bSgYHVqnMVgCqya7bylMtz0/idTuLzdwynsvdKCKBPe6l04o5hHf28Kvev0K3T0B3MeBSCbw@nongnu.org
-X-Gm-Message-State: AFuF++kXMtrnF5s0JUtXVBLPAXj66xuFbB9x4B29icI8PSL/CAi8zAES
- gH1JRKGt2Jjp+Y6Qgss9n3TZEt0P9V4cvH7KE5X7nzNewTN7mcoWLilA
-X-Gm-Gg: AYBFou1Q/zKDjgV98kvI3QBpph66kE30b8kKTV7I5os7K+F/+wC+WMFSMTw04zRZ0ty
- z5a9WTcNsHL68ddncUcdFlZQ2k1lrjnTY2EFGJQq9TTQXlvikRIkN65ZOTdmcLmfg9pmMIAaidi
- V65nuzys9LHuNZ+kpP3/yxEDpB6bWqMndZyBJl23PUUmpfAFpSzBZbg3S40jJt7mWVQ2A2xbQYy
- ytOjMsTBeYH1Iu+MmZ/HQPaf2nJddT/llyJl9mhKpW54hfwM7oWqEm0EgpdwurYiV0g9JO7ZvYN
- 4TCYN9t7LU+jlVIT2S4dEShAJ2LLobBcmGl52fmCFkVj+OY4jRUXR1rDzDYUAT/4Egc4DoY5ib3
- 7vW1IM1YrF2Immwk0x1y8Zm6ww7aprFBOT7w7L2zP4sK4wFZR5Cd7p5a7XP/zfxlPzX7vmZ7Ebh
- G4ux+4lht+vm1MniluMXFcOUAElumt9qBljopzqhst2JKtVcOnNB7rQLWfr5V6fUdc6/5j5uThH
- J9hHdQpfvBDe3hR/FtYe/ijfgTSDNeLVVU=
-X-Received: by 2002:a05:600c:4714:b0:49d:462:6eda with SMTP id
- 5b1f17b1804b1-49d04627387mr147409055e9.28.1788799676293; 
- Mon, 07 Sep 2026 09:47:56 -0700 (PDT)
+ AKwUvBwfZ/O4U/PRm+DJfEMLCft0t2gedilLioJBTXSxwNWyJHlwwJrTptRX06T+lRpiFvtSKGT58njaMi2k@nongnu.org
+X-Gm-Message-State: AFuF++mZXsyg4LDzJPmYq0+utpooYiUU3ya0UrgzcesYrOs8sqnkeMf2
+ MZGhV6TfBFiNSorX3wF+2V+aulCH+I9jnoQsY2udqFHVHHPQtWBs8y8e
+X-Gm-Gg: AYBFou14kM5CHja9Vrh+nLQnmNQYk02YaIOeGZK+4KSri5bQWqdRCNXEimtjSpwZNon
+ KXu8RhL3pfA2T5AoOZ1EAlvYEYR8yq10oumLwTc/UkgcMbu56aqzH8SbjaI9NF1TCcxoCTO20ml
+ rFrWyod4fqn9GCdgPtCEJjasjxH/8lSlfh817UgASKe/rLwkuAf8CRJmUeUtzUzekk5UHpSQzbz
+ kdamspSh8FpRa91tRFAo1+6u8zYr404M2z29brl84hmwceYFP2zuOcFcnnkvI6DCa1y4cE3+EGy
+ MTJHeIjHSXe9Pn3DJRFCKgFcZtiaITj7D593o2k/IZL8KG8XTSFNpUajfqVmKwjSH9hTXxQeyf7
+ 8Jef9moOTJ908rd7byVWTBWiLjTh0j/VyQAThBWe8+PrEV83qSMZYSizABFshcJ9RAqacn0zljb
+ VXBBdPi3qlh2ypvYQ4/yVcHtiKx5GNWYNvAYFAVVV3EqSrddnB6l87/O9d9+rNKpWcY4t1jFPqQ
+ 4eZ4JxF4j495iD6AThmoQ4bO/r5YJ1pZ6k=
+X-Received: by 2002:a05:6000:64e:b0:485:8226:c69c with SMTP id
+ ffacd0b85a97d-4858226cab5mr34722144f8f.27.1788799769985; 
+ Mon, 07 Sep 2026 09:49:29 -0700 (PDT)
 Received: from localhost (89-93-216-19.hfc.dyn.abo.bbox.fr. [89.93.216.19])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49d00a5b19dsm256272105e9.2.2026.09.07.09.47.54
+ ffacd0b85a97d-485885bfdf6sm30892594f8f.34.2026.09.07.09.49.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 07 Sep 2026 09:47:55 -0700 (PDT)
-Date: Mon, 07 Sep 2026 18:42:18 +0200
-Subject: [PATCH 28/50] tests/qtest: ds1339: cover the 12-hour format
+ Mon, 07 Sep 2026 09:49:29 -0700 (PDT)
+Date: Mon, 07 Sep 2026 18:42:26 +0200
+Subject: [PATCH 36/50] tests/qtest: ina230: cover the injection-property limits
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260907-bmc-minerva-v1-28-0d83ad610c3b@free.fr>
+Message-Id: <20260907-bmc-minerva-v1-36-0d83ad610c3b@free.fr>
 References: <20260907-bmc-minerva-v1-0-0d83ad610c3b@free.fr>
 In-Reply-To: <20260907-bmc-minerva-v1-0-0d83ad610c3b@free.fr>
 To: qemu-devel@nongnu.org
@@ -77,15 +77,15 @@ Cc: =?utf-8?q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>,
  =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>, 
  Emmanuel Blot <emmanuel.blot@free.fr>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1788799321; l=3517;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1788799322; l=4015;
  i=emmanuel.blot@free.fr; s=20260602; h=from:subject:message-id;
- bh=d52DOv2V3QB3CGvMZYkl6mYb22coBmAW9Fq+mpMglf8=;
- b=8YgWFhQAHFckAd2VW3wFUmavs5Bco2/obcvgu7M/qizAK5VPt6XBRsk08kjKwkLhWfijPK4Y2
- 8pQQ88Q1t3YC4kI6csgDojdwBWslTEvHTHBOUQoQtO+YnxF+6vyMBKB
+ bh=wQmdLPHBw+ci32U6sjobS3P/cDhoGbED08CSbaHRchk=;
+ b=GWOaAHfudsUURaeLwOMp7pfcXhHPS8GB2EvTl3/ozpztdphpgnCY7uvriPe0Fot2GqmxEg5Zc
+ /zmtqj8gauhBcywwNPhC+NyBsfPi1OXovHlwngRNyJMdVwJzF93rFDC
 X-Developer-Key: i=emmanuel.blot@free.fr; a=ed25519;
  pk=0qFrZ21FAAN8OfVsSoVcCFTk/NMYOWzxJz4paSAVm0g=
-Received-SPF: pass client-ip=209.85.128.50; envelope-from=eblot.ml@gmail.com;
- helo=mail-wm1-f50.google.com
+Received-SPF: pass client-ip=209.85.221.51; envelope-from=eblot.ml@gmail.com;
+ helo=mail-wr1-f51.google.com
 X-Spam_score_int: -15
 X-Spam_score: -1.6
 X-Spam_bar: -
@@ -112,91 +112,106 @@ From:  Emmanuel Blot via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Both directions of the 12-hour conversion carry a fixup for midnight
-and noon, and neither had been exercised.
+Verify that the extremes of the shunt- and bus-voltage injection ranges
+round-trip through the QOM property without truncation or wraparound,
+and that values just outside are rejected rather than silently wrapped.
 
 Signed-off-by: Emmanuel Blot <emmanuel.blot@free.fr>
 ---
- tests/qtest/ds1339-test.c | 45 +++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 45 insertions(+)
+ tests/qtest/ina230-test.c | 59 +++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 59 insertions(+)
 
-diff --git a/tests/qtest/ds1339-test.c b/tests/qtest/ds1339-test.c
-index 7eec163049..3259fa1df3 100644
---- a/tests/qtest/ds1339-test.c
-+++ b/tests/qtest/ds1339-test.c
-@@ -14,6 +14,7 @@
+diff --git a/tests/qtest/ina230-test.c b/tests/qtest/ina230-test.c
+index 1c55028fcb..36c899efee 100644
+--- a/tests/qtest/ina230-test.c
++++ b/tests/qtest/ina230-test.c
+@@ -47,6 +47,11 @@
+ #define SHUNT_LSB_NV        2500
+ #define BUS_LSB_UV          1250
  
- /* DS1339 register map */
- #define DS1339_SECONDS   0x00
-+#define DS1339_HOURS     0x02
- #define DS1339_DATE      0x04
- #define DS1339_MONTH     0x05
- #define DS1339_YEAR      0x06
-@@ -26,6 +27,9 @@
- 
- #define DS1339_STATUS_OSF 0x80
- 
-+#define DS1339_HOURS_12  0x40
-+#define DS1339_HOURS_PM  0x20
++/* Injection-property limits (see ina230.c) */
++#define SHUNT_MIN_NV        (-81920000)
++#define SHUNT_MAX_NV        81917500
++#define BUS_MAX_UV          36000000
 +
- /* The clock and calendar come up on the host time. */
- static void test_time(void *obj, void *data, QGuestAllocator *alloc)
- {
-@@ -170,6 +174,46 @@ static void test_eosc_restart(void *obj, void *data, QGuestAllocator *alloc)
-     g_assert_cmphex(resp[6], ==, 0x31);
+ #define DIE_ID_VAL          0x2310
+ 
+ /* QMP helpers for injecting the physical inputs */
+@@ -76,6 +81,18 @@ static int qmp_ina230_get(const char *property)
+     return ret;
  }
  
-+/* Midnight and noon are the hours the 12-hour encoding special-cases. */
-+static void test_hour_mode_12(void *obj, void *data, QGuestAllocator *alloc)
++/* A qom-set expected to be rejected (value outside the supported range) */
++static void qmp_ina230_set_fail(const char *property, int64_t value)
 +{
-+    QI2CDevice *i2cdev = (QI2CDevice *)obj;
-+    const uint8_t tod[3] = {
-+        0x59, 0x59, DS1339_HOURS_12 | DS1339_HOURS_PM | 0x11 /* 11:59:59 PM */
-+    };
-+    unsigned idx;
++    QDict *resp;
 +
-+    i2c_set8(i2cdev, DS1339_HOURS, DS1339_HOURS_12 | 0x12);
-+    g_assert_cmphex(i2c_get8(i2cdev, DS1339_HOURS), ==,
-+                    DS1339_HOURS_12 | 0x12);          /* 12 AM is midnight */
-+
-+    i2c_set8(i2cdev, DS1339_HOURS, DS1339_HOURS_12 | DS1339_HOURS_PM | 0x12);
-+    g_assert_cmphex(i2c_get8(i2cdev, DS1339_HOURS), ==,
-+                    DS1339_HOURS_12 | DS1339_HOURS_PM | 0x12); /* 12 PM noon */
-+
-+    i2c_set8(i2cdev, DS1339_HOURS, DS1339_HOURS_12 | DS1339_HOURS_PM | 0x01);
-+    g_assert_cmphex(i2c_get8(i2cdev, DS1339_HOURS), ==,
-+                    DS1339_HOURS_12 | DS1339_HOURS_PM | 0x01);
-+
-+    i2c_set8(i2cdev, DS1339_HOURS, DS1339_HOURS_12 | 0x11);
-+    g_assert_cmphex(i2c_get8(i2cdev, DS1339_HOURS), ==,
-+                    DS1339_HOURS_12 | 0x11);
-+
-+    i2c_set8(i2cdev, DS1339_HOURS, 0x13);
-+    g_assert_cmphex(i2c_get8(i2cdev, DS1339_HOURS), ==, 0x13);
-+
-+    /* An elapsed midnight moves 11 PM on to 12 AM, not to 00 or 13. */
-+    i2c_write_block(i2cdev, DS1339_SECONDS, tod, sizeof(tod));
-+    for (idx = 0; idx < 50; idx++) {
-+        if (i2c_get8(i2cdev, DS1339_HOURS) != tod[2]) {
-+            break;
-+        }
-+        g_usleep(100 * 1000);
-+    }
-+    g_assert_cmphex(i2c_get8(i2cdev, DS1339_HOURS), ==,
-+                    DS1339_HOURS_12 | 0x12);
++    resp = qmp("{ 'execute': 'qom-set', 'arguments':"
++               " { 'path': %s, 'property': %s, 'value': %lld } }",
++               INA230_TEST_ID, property, (long long)value);
++    g_assert(qdict_haskey(resp, "error"));
++    qobject_unref(resp);
 +}
 +
- /* Program 23:59:59 on the last day of a month and run the clock past it. */
- static void check_month_rollover(QI2CDevice *i2cdev,
-                                  uint8_t date, uint8_t month, uint8_t year,
-@@ -370,6 +414,7 @@ static void ds1339_register_nodes(void)
-     qos_add_test("eosc-restart", "ds1339", test_eosc_restart, NULL);
-     qos_add_test("stopped-reserved-bits", "ds1339",
-                  test_stopped_reserved_bits, NULL);
-+    qos_add_test("hour-mode-12", "ds1339", test_hour_mode_12, NULL);
-     qos_add_test("month-28-days", "ds1339", test_month_28_days, NULL);
-     qos_add_test("month-29-days", "ds1339", test_month_29_days, NULL);
-     qos_add_test("month-30-days", "ds1339", test_month_30_days, NULL);
+ /* Power-on-reset default values and the Die ID */
+ static void test_defaults(void *obj, void *data, QGuestAllocator *alloc)
+ {
+@@ -307,6 +324,46 @@ static void test_cvrf(void *obj, void *data, QGuestAllocator *alloc)
+     g_assert_cmphex(i2c_get16(dev, REG_MASK_ENABLE) & ME_CVRF, ==, 0);
+ }
+ 
++/* Shunt-voltage injection limits */
++static void test_shunt_limits(void *obj, void *data, QGuestAllocator *alloc)
++{
++    QI2CDevice *dev = (QI2CDevice *)obj;
++
++    i2c_set16(dev, REG_CONFIG, CONFIG_RST);
++
++    qmp_ina230_set("shunt-voltage", SHUNT_MAX_NV);
++    g_assert_cmphex(i2c_get16(dev, REG_SHUNT), ==, 0x7FFF);
++    g_assert_cmpint(qmp_ina230_get("shunt-voltage"), ==, SHUNT_MAX_NV);
++
++    qmp_ina230_set("shunt-voltage", SHUNT_MIN_NV);
++    g_assert_cmphex(i2c_get16(dev, REG_SHUNT), ==, 0x8000);
++    g_assert_cmpint(qmp_ina230_get("shunt-voltage"), ==, SHUNT_MIN_NV);
++
++    qmp_ina230_set_fail("shunt-voltage", (int64_t)SHUNT_MAX_NV + 1);
++    qmp_ina230_set_fail("shunt-voltage", (int64_t)SHUNT_MIN_NV - 1);
++    g_assert_cmpint(qmp_ina230_get("shunt-voltage"), ==, SHUNT_MIN_NV);
++    g_assert_cmphex(i2c_get16(dev, REG_SHUNT), ==, 0x8000);
++}
++
++/* Bus-voltage injection limits. */
++static void test_bus_limits(void *obj, void *data, QGuestAllocator *alloc)
++{
++    QI2CDevice *dev = (QI2CDevice *)obj;
++
++    i2c_set16(dev, REG_CONFIG, CONFIG_RST);
++
++    qmp_ina230_set("bus-voltage", 0);
++    g_assert_cmphex(i2c_get16(dev, REG_BUS), ==, 0x0000);
++
++    qmp_ina230_set("bus-voltage", BUS_MAX_UV);
++    g_assert_cmphex(i2c_get16(dev, REG_BUS), ==, 0x7080);
++    g_assert_cmpint(qmp_ina230_get("bus-voltage"), ==, BUS_MAX_UV);
++
++    qmp_ina230_set_fail("bus-voltage", (int64_t)BUS_MAX_UV + 1);
++    qmp_ina230_set_fail("bus-voltage", -1);
++    g_assert_cmpint(qmp_ina230_get("bus-voltage"), ==, BUS_MAX_UV);
++}
++
+ static void ina230_register_nodes(void)
+ {
+     QOSGraphEdgeOptions opts = {
+@@ -322,6 +379,8 @@ static void ina230_register_nodes(void)
+     qos_add_test("config-wmask", "ina230", test_config_wmask, NULL);
+     qos_add_test("shunt-injection", "ina230", test_shunt_injection, NULL);
+     qos_add_test("bus-injection", "ina230", test_bus_injection, NULL);
++    qos_add_test("shunt-limits", "ina230", test_shunt_limits, NULL);
++    qos_add_test("bus-limits", "ina230", test_bus_limits, NULL);
+     qos_add_test("calibration-current", "ina230", test_calibration_current,
+                  NULL);
+     qos_add_test("power", "ina230", test_power, NULL);
 
 -- 
 2.50.1
