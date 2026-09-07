@@ -4,61 +4,148 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68440C79F89
-	for <qemu-riscv@archiver.kernel.org>; Mon,  7 Sep 2026 09:39:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 937FDC79F89
+	for <qemu-riscv@archiver.kernel.org>; Mon,  7 Sep 2026 10:05:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x3Vnm-0001fK-E9; Mon, 07 Sep 2026 05:38:10 -0400
+	id 1x3WE2-0003A2-HQ; Mon, 07 Sep 2026 06:05:18 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <cp0613@linux.alibaba.com>)
- id 1x3Vnk-0001dQ-7C; Mon, 07 Sep 2026 05:38:08 -0400
-Received: from [115.124.30.111] (helo=out30-111.freemail.mail.aliyun.com)
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1x3WDy-00038L-Ud
+ for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 06:05:15 -0400
+Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <cp0613@linux.alibaba.com>)
- id 1x3Vnd-00047K-Re; Mon, 07 Sep 2026 05:38:07 -0400
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1x3WDv-0007sA-QC
+ for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 06:05:14 -0400
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 6879bXHA319010
+ for <qemu-riscv@nongnu.org>; Mon, 7 Sep 2026 10:05:08 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ 3K2i4GH86TLL24kggVR95cChnQkN7yywKo44YwnpuZs=; b=iVUdW5bcRMnsLBkm
+ TWwSImwXP/sWM8oQPgONrcqWJTkewI6+SczZpNGqZ7WCrGNVjqCyCeMFM15nrMVM
+ 06j72iilqENyEqntZF9nCSUxH1oiN2mf6CiyMCHIw0AEFFlKd7nMXSh5KAGqMCtB
+ YSHI/JCMQwa7RDithbYDR5neN4hNSCU5Mmbgyb0XbzNmR/qxeH0lcqj+Lt+bJpJI
+ zPD4y6wYtISOEPSCXGvfKxZwHJpEseq+jdTtvENOIG+ohfmxvgDVBES1cInuY8SZ
+ VQKCi7PDj3QFPFaXdQA81GQJrxHNZL8jA2upSXPzxNtbSCD4sl14Hk6AWT0KYaH1
+ kys5og==
+Received: from mail-ot1-f70.google.com (mail-ot1-f70.google.com
+ [209.85.210.70])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ghfwjj5mr-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Mon, 07 Sep 2026 10:05:08 +0000 (GMT)
+Received: by mail-ot1-f70.google.com with SMTP id
+ 46e09a7af769-7f4e52682f0so5036000a34.0
+ for <qemu-riscv@nongnu.org>; Mon, 07 Sep 2026 03:05:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linux.alibaba.com; s=default;
- t=1788773868; h=From:To:Subject:Date:Message-ID:MIME-Version;
- bh=yc5KhGVgl+0DuLZrt8gjwOQ2YjB/WdP3UupIKvk84hk=;
- b=XK1swFaiA4Bqd9F0URePupAZwuTPPJul/PzWxDTuJEcdWcwrIEycYKUZ7o5jR8y4WfvzGZNVVCK2eMzEsWPlFucPyAUrftwQVPcY7BMoR95u6GUvpAoittRNvza9d0nvGTxIymols/9vdlAOXzAK3ylFwSOktWjEvRcO8e6Shb8=
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R251e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033045133197;
- MF=cp0613@linux.alibaba.com; NM=1; PH=DS; RN=19; SR=0;
- TI=SMTPD_---0XATXGyL_1788773867; 
-Received: from DESKTOP-S9E58SO.localdomain(mailfrom:cp0613@linux.alibaba.com
- fp:SMTPD_---0XATXGyL_1788773867 cluster:ay36) by smtp.aliyun-inc.com;
- Mon, 07 Sep 2026 17:37:47 +0800
-From: Chen Pei <cp0613@linux.alibaba.com>
-To: palmer@dabbelt.com, alistair.francis@wdc.com, mst@redhat.com,
- imammedo@redhat.com, sunilvl@ventanamicro.com, jic23@kernel.org
-Cc: pbonzini@redhat.com, liwei1518@gmail.com, daniel.barboza@oss.qualcomm.com,
- zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
- anisinha@redhat.com, dave.jiang@intel.com, alison.schofield@intel.com,
- junjie.cao@intel.com, guoren@kernel.org, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org, linux-cxl@vger.kernel.org
-Subject: [PATCH v6 3/6] hw/riscv/virt: Advertise the CXL host bridge to
- firmware via extra-pci-roots
-Date: Mon,  7 Sep 2026 17:37:30 +0800
-Message-ID: <20260907093735.2753-4-cp0613@linux.alibaba.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260907093735.2753-1-cp0613@linux.alibaba.com>
-References: <20260907093735.2753-1-cp0613@linux.alibaba.com>
+ d=oss.qualcomm.com; s=google; t=1788775507; x=1789380307; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=3K2i4GH86TLL24kggVR95cChnQkN7yywKo44YwnpuZs=;
+ b=J1dtz+KujgcVjl+KKrhpMQjkRvXNXtbMEr6lGVy7aUMJJ7pyjve2CsW5AG+1sKuIq6
+ oSgUTk6hdAS/GZFuHJUljHuJDssLV51YsmfJN5aJ1kCQ7TCW4hC2Xg5SBHQn+ynCpCJ+
+ PtODX87zdq0mv8gfZ/yTc34gpW/fGsnyFrfGT9yXAwQGVQAyOArOugo4TNsbhlXp9/z4
+ Ms9DezUHouc2AP13eg18prS9my/Z38kVp0ilNXP6ptkbZSxm2hvtQ1WjcjEgN5h8Ejju
+ yZ3eGlsf9LkWeGnoHGM2Oifo5HBEJwJv6IeE0jg9In1ueJ9HVYK4MbXrJNqB6kiTAGTs
+ UuOg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1788775507; x=1789380307;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=3K2i4GH86TLL24kggVR95cChnQkN7yywKo44YwnpuZs=;
+ b=CtGthk6stuIpi6+cjgCrh5DOAh/Cmb2QVcgbUgSIeWWYpd8ZgN9AaVFX9x1z1luCJz
+ zBxN3c3YLcvUa7KLGwBJ8AW/8gry2YddGKfrTpIcF5vXKoSe544Hxym8U3sv1oDgLLzw
+ 5LCQ2Dm4+eAGK0KIDzLR1HRROYbr7jzbvFLjlAn1QWDrrT3p4/awCxBhAg0smAVqZ3Ib
+ MMEPimYKBJxCTgyNUrSKT52iJ6VmHI5rQ15QQacFSwXuiQRc1/nY7MryRCZIOYpw21tO
+ S0Kd+w1at1aK7iVHFKWfjuDIRSCQuDQkY5cLssWZFNwNTNlL0F923IwLiQmma/cD0ts1
+ Vyvg==
+X-Gm-Message-State: AFuF++leJBS1xV7n9XgM7f0u4kB4RuERdJ8o5s+m9SdlvueKSZDK7TR9
+ NseftoGrkGPLHxWZc7v7gaAtbycjwl9LfjDSC6jS3rYFxsEZyovbZnNjB+4FibVT00w9bgcs6fs
+ MrtHwzOuD3wEL05nnEHGdVAnthFsuMyCTVPXzZ71pVMS1yTFpZyUc0YoxCQ==
+X-Gm-Gg: AYBFou2pWuP14MyyAuqTRifEhCbBFqfQ1VNH304ANEKMQY4/OHD48owkEt188/EZrt6
+ sJxQKfqVT+eHym2IvWhKa1HKxrpSHH/V7de6HebEoiMZqpWovb+d2KBcgH+2gyf4mrdZ+PptgCE
+ kXKO6axrMIunIcnPMy/I1pD2GlxBrN9moYvuIOenh/n+ugYm38HnA8l/Le4F5tGhcDIhUxLDgPe
+ VNx3Ei4w3dnW3fw+d0VpW3E82kwnryuKt0c8McCSh6WQnXVV5+CbJGxImUHZoFxj5nSgrC5/N37
+ tB1p1zcSBUOPuk2D8H/fImhZJxqxqXOdTIYaAUXuHe2AoI0KApt/+qAFliFpPuceFL2J5C9c44P
+ nLHfFqYNZ5OKcc2Alat8qhoJiTKu2ng/NAOw=
+X-Received: by 2002:a05:6830:83b7:b0:7f4:bd7e:1394 with SMTP id
+ 46e09a7af769-7fa1e1b786bmr15928457a34.1.1788775507311; 
+ Mon, 07 Sep 2026 03:05:07 -0700 (PDT)
+X-Received: by 2002:a05:6830:83b7:b0:7f4:bd7e:1394 with SMTP id
+ 46e09a7af769-7fa1e1b786bmr15928431a34.1.1788775506856; 
+ Mon, 07 Sep 2026 03:05:06 -0700 (PDT)
+Received: from [192.168.68.102] ([177.18.66.131])
+ by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7fcef193dc2sm4846573a34.19.2026.09.07.03.05.03
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 07 Sep 2026 03:05:06 -0700 (PDT)
+Message-ID: <d266c4a4-372a-4a96-bd7e-f9f8cece7e94@oss.qualcomm.com>
+Date: Mon, 7 Sep 2026 07:05:01 -0300
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v7 1/7] target/riscv: add sdext debug CSRs state
+To: Alistair Francis <Alistair.Francis@wdc.com>,
+ "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>
+Cc: "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
+ "chao.liu.zevorn@gmail.com" <chao.liu.zevorn@gmail.com>,
+ "palmer@dabbelt.com" <palmer@dabbelt.com>,
+ "chao.liu@processmission.com" <chao.liu@processmission.com>,
+ "tangtao1634@phytium.com.cn" <tangtao1634@phytium.com.cn>,
+ "liwei1518@gmail.com" <liwei1518@gmail.com>,
+ "zhiwei_liu@linux.alibaba.com" <zhiwei_liu@linux.alibaba.com>
+References: <20260831141007.353854-1-daniel.barboza@oss.qualcomm.com>
+ <20260831141007.353854-2-daniel.barboza@oss.qualcomm.com>
+ <663b12c47712248b50206dd8c8b5add6812cf91a.camel@wdc.com>
+From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Content-Language: en-US
+In-Reply-To: <663b12c47712248b50206dd8c8b5add6812cf91a.camel@wdc.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.111 (deferred)
-Received-SPF: pass client-ip=115.124.30.111;
- envelope-from=cp0613@linux.alibaba.com;
- helo=out30-111.freemail.mail.aliyun.com
-X-Spam_score_int: -166
-X-Spam_score: -16.7
-X-Spam_bar: ----------------
-X-Spam_report: (-16.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
- RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001, USER_IN_DEF_DKIM_WL=-7.5,
- USER_IN_DEF_SPF_WL=-7.5 autolearn=no autolearn_force=no
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA3MDExMCBTYWx0ZWRfXzxlX+H+Gl5bC
+ 5MHfOvCXb5xwJyudSephE/oNHCVb7mg4K2j0RwixvjtFadTrbO4wx28JZ0zDKMD2+nwGphUQuBY
+ jwfs77cnL+4iMyA7VJI1PUyd6KKJA+4=
+X-Authority-Analysis: v=2.4 cv=NanWEWD4 c=1 sm=1 tr=0 ts=6a9e8c54 cx=c_pps
+ a=7uPEO8VhqeOX8vTJ3z8K6Q==:117 a=CQQxcbsX5Byh3TlVSSGwig==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
+ a=xvfqbYfxAAAA:20 a=pGLkceISAAAA:8 a=EUspDBNiAAAA:8 a=fgrLqfBXAAAA:8
+ a=pbq2bq-YRYBN5HSKhH4A:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=EXS-LbY8YePsIyqnH6vw:22 a=_Ge82aPy-h_wFa7gWU4u:22 a=bA3UWDv6hWIuX7UZL3qL:22
+X-Proofpoint-GUID: zMD9r3Yltk9tEKlzXDYd8nOnq7xzVV_k
+X-Proofpoint-ORIG-GUID: zMD9r3Yltk9tEKlzXDYd8nOnq7xzVV_k
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA3MDExMCBTYWx0ZWRfXzHNsnttvLYQo
+ 4XPB57NACWgO6y4Xm+BgK5L+E9rmJQGjFH4ntmiqA02X5hCxzBnGrsnsVN+acHDMhvvkClznc/i
+ JiGSD5DZT3NZKBgdRdknf2KHCJbdtSl1GeRjs2DBedmgCAwjR1XgBD1q+zXGR0W+lIUrA9rxIj5
+ iQLM/3lfpHhcSpMCUStpC2oYcN8lFbVozjAEX+a25Zf0PMU9BL/LwCxa6QStnxHiFmXhezeD8xn
+ jCivH8d0GT+u83gDmulu7sP7whCy1Qfe8oJtzks6xoFC6tDgrksmo0hDerz4Dns2AKkgHuYtav5
+ eVcMxM3S5yFugOPDtCQnjxNM9NTBZY5jFZjRkmPCrpzG2GUzMQ+gF7kq8ntnuSIpKhT1NXhcnFv
+ kGu7Nut+vtb0R0diz2mz9poT7WcDQ7+z9y3DkNElcprGF48bHWjJemVnQtzgbta6I/P2cbLhxIt
+ 8SHR7+jJKAoSgjwaj0A==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-07_02,2026-09-07_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 spamscore=0 impostorscore=0 suspectscore=0 adultscore=0
+ priorityscore=1501 lowpriorityscore=0 phishscore=0 bulkscore=0 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609070110
+Received-SPF: pass client-ip=205.220.168.131;
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
+X-Spam_bar: --
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -74,62 +161,344 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The pxb-cxl expander bridge presents as a class 0x0600 host bridge with
-a type-0 header, so EDK2's PciBusDxe never recurses into it and never
-assigns the CXL root port a memory window or bus numbers.  As a result
-build_crs() produces an empty _CRS for the ACPI0016 host bridge and the
-CXL devices behind it are not enumerated by the OS.
 
-Advertise the pxb-cxl expander root buses to firmware via the
-etc/extra-pci-roots fw_cfg file, the same way arm/virt and x86 do, by
-calling pci_bus_add_fw_cfg_extra_pci_roots() from virt_machine_done().
-EDK2's PciBusDxe then enumerates behind the CXL host bridge and assigns
-the root-port window and bus numbers.  The ACPI tables are rebuilt when
-the guest reads them (after that firmware enumeration), so build_crs()
-then emits a correct _CRS for the ACPI0016 host bridge.
 
-The call is made unconditionally, in line with arm/virt, pc and hppa,
-so plain pxb-pcie expander bridges, which likewise depend on
-etc/extra-pci-roots, are advertised as well; the generator simply
-returns nothing when there is no expander root bus.
+On 9/7/2026 1:39 AM, Alistair Francis wrote:
+> On Mon, 2026-08-31 at 11:10 -0300, Daniel Henrique Barboza wrote:
+>> From: Chao Liu <chao.liu.zevorn@gmail.com>
+>>
+>> RISC-V Debug Specification:
+>> https://github.com/riscv/riscv-debug-spec/releases/tag/1.0
+>>
+>> Add architectural state for Sdext Debug Mode: debug_mode, dcsr, dpc
+>> and dscratch0/1. Wire up CSR access for dcsr/dpc/dscratch and gate
+>> them to Debug Mode (or host debugger access).
+>>
+>> The Sdext is not fully implemented, so it is disabled by default.
+>>
+>> Signed-off-by: Chao Liu <chao.liu.zevorn@gmail.com>
+>> Reviewed-by: Daniel Henrique Barboza
+>> <daniel.barboza@oss.qualcomm.com>
+>> Tested-by: Tao Tang <tangtao1634@phytium.com.cn>
+> 
+> You are missing your Signed-off-by line here (and on the other
+> patches).
 
-This approach also scales to multiple pxb-cxl host bridges (each gets
-its own window from the shared aperture) and lets firmware size the
-window to what is actually behind the bridge, rather than reserving a
-fixed carve-out.
+Ops. I'll re-send it with my s-o-b on patches 1-6.
 
-Verified by booting an RVA22 guest: the CXL root port and Type3 device
-enumerate, and 'cxl enable-memdev' / 'cxl create-region' /
-'daxctl online-memory' bring the CXL memory online as system RAM.
 
-Reviewed-by: Junjie Cao <junjie.cao@intel.com>
-Tested-by: Junjie Cao <junjie.cao@intel.com>
-Signed-off-by: Chen Pei <cp0613@linux.alibaba.com>
----
- hw/riscv/virt.c | 9 +++++++++
- 1 file changed, 9 insertions(+)
+Thanks,
+Daniel
 
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 70090ca70a..885020af83 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -657,6 +657,15 @@ static void virt_machine_done(Notifier *notifier, void *data)
-         cxl_fmws_link_targets(&error_fatal);
-     }
- 
-+    /*
-+     * Advertise the pxb/pxb-cxl expander root buses to firmware so that
-+     * it enumerates behind them and assigns bus numbers and windows.  For
-+     * the CXL host bridges, build_crs() then builds the ACPI0016 _CRS
-+     * from the resulting state when the guest reads the ACPI tables.
-+     * This is a no-op without any expander root bus.
-+     */
-+    pci_bus_add_fw_cfg_extra_pci_roots(s->fw_cfg, s->pci_bus, &error_abort);
-+
-     /*
-      * An user provided dtb must include everything, including
-      * dynamic sysbus devices. Our FDT needs to be finalized.
--- 
-2.50.1
+> 
+>> ---
+>>   target/riscv/cpu.c                |   7 ++
+>>   target/riscv/cpu.h                |   4 +
+>>   target/riscv/cpu_bits.h           |  33 ++++++++
+>>   target/riscv/cpu_cfg_fields.h.inc |   1 +
+>>   target/riscv/machine.c            |  20 +++++
+>>   target/riscv/tcg/csr.c            | 126
+>> ++++++++++++++++++++++++++++++
+>>   6 files changed, 191 insertions(+)
+>>
+>> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+>> index 61109672d6..c2078473aa 100644
+>> --- a/target/riscv/cpu.c
+>> +++ b/target/riscv/cpu.c
+>> @@ -248,6 +248,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
+>>       ISA_EXT_DATA_ENTRY(zvkt, PRIV_VERSION_1_12_0, ext_zvkt),
+>>       ISA_EXT_DATA_ENTRY(zhinx, PRIV_VERSION_1_12_0, ext_zhinx),
+>>       ISA_EXT_DATA_ENTRY(zhinxmin, PRIV_VERSION_1_12_0, ext_zhinxmin),
+>> +    ISA_EXT_DATA_ENTRY(sdext, PRIV_VERSION_1_12_0, ext_sdext),
+>>       ISA_EXT_DATA_ENTRY(sdtrig, PRIV_VERSION_1_12_0, ext_sdtrig),
+>>       ISA_INTERNAL_EXT_DATA_ENTRY(shcounterenw, PRIV_VERSION_1_12_0,
+>>                                   has_priv_1_12),
+>> @@ -1091,6 +1092,12 @@ static void riscv_cpu_reset_hold(Object *obj,
+>> ResetType type)
+>>   
+>>   #ifndef CONFIG_USER_ONLY
+>>   #ifdef CONFIG_TCG
+>> +    env->debug_mode = false;
+>> +    env->dcsr = DCSR_DEBUGVER(4);
+>> +    env->dpc = 0;
+>> +    env->dscratch[0] = 0;
+>> +    env->dscratch[1] = 0;
+>> +
+>>       if (cpu->cfg.debug || cpu->cfg.ext_sdtrig) {
+>>           riscv_trigger_reset_hold(env);
+>>       }
+>> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+>> index 718b66487a..74bddc8415 100644
+>> --- a/target/riscv/cpu.h
+>> +++ b/target/riscv/cpu.h
+>> @@ -507,6 +507,10 @@ struct CPUArchState {
+>>   
+>>       /* True if in debugger mode.  */
+>>       bool debugger;
+>> +    bool debug_mode;
+>> +    target_ulong dcsr;
+>> +    target_ulong dpc;
+>> +    target_ulong dscratch[2];
+>>   
+>>       uint64_t mstateen[SMSTATEEN_MAX_COUNT];
+>>       uint64_t hstateen[SMSTATEEN_MAX_COUNT];
+>> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+>> index c01050ce2b..769c945517 100644
+>> --- a/target/riscv/cpu_bits.h
+>> +++ b/target/riscv/cpu_bits.h
+>> @@ -467,6 +467,39 @@
+>>   #define CSR_DCSR            0x7b0
+>>   #define CSR_DPC             0x7b1
+>>   #define CSR_DSCRATCH        0x7b2
+>> +#define CSR_DSCRATCH1       0x7b3
+>> +
+>> +/* DCSR fields */
+>> +#define DCSR_XDEBUGVER_SHIFT    28
+>> +#define DCSR_XDEBUGVER_MASK     (0xfu << DCSR_XDEBUGVER_SHIFT)
+>> +#define DCSR_DEBUGVER(val)      ((target_ulong)(val) <<
+>> DCSR_XDEBUGVER_SHIFT)
+>> +#define DCSR_EXTCAUSE_SHIFT     24
+>> +#define DCSR_EXTCAUSE_MASK      (0x7u << DCSR_EXTCAUSE_SHIFT)
+>> +#define DCSR_CETRIG             BIT(19)
+>> +#define DCSR_PELP               BIT(18)
+>> +#define DCSR_EBREAKVS           BIT(17)
+>> +#define DCSR_EBREAKVU           BIT(16)
+>> +#define DCSR_EBREAKM            BIT(15)
+>> +#define DCSR_EBREAKS            BIT(13)
+>> +#define DCSR_EBREAKU            BIT(12)
+>> +#define DCSR_STEPIE             BIT(11)
+>> +#define DCSR_STOPCOUNT          BIT(10)
+>> +#define DCSR_STOPTIME           BIT(9)
+>> +#define DCSR_CAUSE_SHIFT        6
+>> +#define DCSR_CAUSE_MASK         (0x7u << DCSR_CAUSE_SHIFT)
+>> +#define DCSR_V                  BIT(5)
+>> +#define DCSR_MPRVEN             BIT(4)
+>> +#define DCSR_NMIP               BIT(3)
+>> +#define DCSR_STEP               BIT(2)
+>> +#define DCSR_PRV_MASK           0x3u
+>> +
+>> +#define DCSR_CAUSE_EBREAK       1
+>> +#define DCSR_CAUSE_TRIGGER      2
+>> +#define DCSR_CAUSE_HALTREQ      3
+>> +#define DCSR_CAUSE_STEP         4
+>> +#define DCSR_CAUSE_RESET        5
+>> +#define DCSR_CAUSE_GROUP        6
+>> +#define DCSR_CAUSE_OTHER        7
+>>   
+>>   /* Performance Counters */
+>>   #define CSR_MHPMCOUNTER3    0xb03
+>> diff --git a/target/riscv/cpu_cfg_fields.h.inc
+>> b/target/riscv/cpu_cfg_fields.h.inc
+>> index f91c780299..24f3606f94 100644
+>> --- a/target/riscv/cpu_cfg_fields.h.inc
+>> +++ b/target/riscv/cpu_cfg_fields.h.inc
+>> @@ -105,6 +105,7 @@ BOOL_FIELD(ext_zvfbfmin)
+>>   BOOL_FIELD(ext_zvfbfwma)
+>>   BOOL_FIELD(ext_zvfh)
+>>   BOOL_FIELD(ext_zvfhmin)
+>> +BOOL_FIELD(ext_sdext)
+>>   BOOL_FIELD(ext_sdtrig)
+>>   BOOL_FIELD(ext_smaia)
+>>   BOOL_FIELD(ext_ssaia)
+>> diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+>> index 74edb8c2b5..aba162d0f1 100644
+>> --- a/target/riscv/machine.c
+>> +++ b/target/riscv/machine.c
+>> @@ -302,6 +302,25 @@ static const VMStateDescription vmstate_debug =
+>> {
+>>           VMSTATE_VARRAY_UINT32(env.tdata3, RISCVCPU,
+>>                                 env.num_triggers, 0,
+>>                                 vmstate_info_uint64, uint64_t),
+>> +        VMSTATE_BOOL_V(env.debug_mode, RISCVCPU, 3),
+>> +        VMSTATE_UINTTL_V(env.dcsr, RISCVCPU, 3),
+>> +        VMSTATE_UINTTL_V(env.dpc, RISCVCPU, 3),
+>> +        VMSTATE_UINTTL_ARRAY_V(env.dscratch, RISCVCPU, 2, 3),
+>> +        VMSTATE_END_OF_LIST()
+>> +    }
+>> +};
+>> +
+>> +static const VMStateDescription vmstate_sdext = {
+>> +    .name = "cpu/sdext",
+>> +    .version_id = 1,
+>> +    .minimum_version_id = 1,
+>> +    .needed = debug_needed,
+>> +    .post_load = debug_post_load,
+>> +    .fields = (const VMStateField[]) {
+>> +        VMSTATE_BOOL_V(env.debug_mode, RISCVCPU, 3),
+>> +        VMSTATE_UINTTL_V(env.dcsr, RISCVCPU, 3),
+>> +        VMSTATE_UINTTL_V(env.dpc, RISCVCPU, 3),
+>> +        VMSTATE_UINTTL_ARRAY_V(env.dscratch, RISCVCPU, 2, 3),
+>>           VMSTATE_END_OF_LIST()
+>>       }
+>>   };
+>> @@ -577,6 +596,7 @@ const VMStateDescription vmstate_riscv_cpu = {
+>>           &vmstate_ctr,
+>>           &vmstate_sstc,
+>>           &vmstate_mseccfg,
+>> +        &vmstate_sdext,
+>>           NULL
+>>       }
+>>   };
+>> diff --git a/target/riscv/tcg/csr.c b/target/riscv/tcg/csr.c
+>> index bd4b6dc114..988261cccf 100644
+>> --- a/target/riscv/tcg/csr.c
+>> +++ b/target/riscv/tcg/csr.c
+>> @@ -3207,6 +3207,126 @@ static RISCVException
+>> write_mtval(CPURISCVState *env, int csrno,
+>>       return RISCV_EXCP_NONE;
+>>   }
+>>   
+>> +#if !defined(CONFIG_USER_ONLY)
+>> +static RISCVException sdext(CPURISCVState *env, int csrno)
+>> +{
+>> +    if (!riscv_cpu_cfg(env)->ext_sdext) {
+>> +        return RISCV_EXCP_ILLEGAL_INST;
+>> +    }
+>> +
+>> +    if (!env->debug_mode && !env->debugger) {
+>> +        return RISCV_EXCP_ILLEGAL_INST;
+>> +    }
+>> +
+>> +    return RISCV_EXCP_NONE;
+>> +}
+>> +
+>> +static target_ulong dcsr_visible_mask(CPURISCVState *env)
+>> +{
+>> +    target_ulong mask = (target_ulong)-1;
+> 
+> This should be a 32-bit value, as the register is always 32-bit
+> 
+> Alistair
+> 
+>> +    RISCVCPU *cpu = env_archcpu(env);
+>> +
+>> +    if (!riscv_has_ext(env, RVH)) {
+>> +        mask &= ~(DCSR_EBREAKVS | DCSR_EBREAKVU | DCSR_V);
+>> +    }
+>> +    if (!riscv_has_ext(env, RVS)) {
+>> +        mask &= ~DCSR_EBREAKS;
+>> +    }
+>> +    if (!riscv_has_ext(env, RVU)) {
+>> +        mask &= ~DCSR_EBREAKU;
+>> +    }
+>> +    if (!cpu->cfg.ext_zicfilp) {
+>> +        mask &= ~DCSR_PELP;
+>> +    }
+>> +    if (!cpu->cfg.ext_smdbltrp) {
+>> +        mask &= ~DCSR_CETRIG;
+>> +    }
+>> +
+>> +    return mask;
+>> +}
+>> +
+>> +static RISCVException read_dcsr(CPURISCVState *env, int csrno,
+>> +                                target_ulong *val)
+>> +{
+>> +    *val = env->dcsr & dcsr_visible_mask(env);
+>> +    return RISCV_EXCP_NONE;
+>> +}
+>> +
+>> +static target_ulong dcsr_writable_mask(CPURISCVState *env)
+>> +{
+>> +    target_ulong mask = DCSR_EBREAKM | DCSR_EBREAKS | DCSR_EBREAKU |
+>> +                        DCSR_STEPIE | DCSR_STOPCOUNT | DCSR_STOPTIME
+>> |
+>> +                        DCSR_STEP | DCSR_PRV_MASK;
+>> +    RISCVCPU *cpu = env_archcpu(env);
+>> +
+>> +    mask |= DCSR_MPRVEN;
+>> +
+>> +    if (riscv_has_ext(env, RVH)) {
+>> +        mask |= DCSR_EBREAKVS | DCSR_EBREAKVU | DCSR_V;
+>> +    }
+>> +    if (riscv_has_ext(env, RVS)) {
+>> +        mask |= DCSR_EBREAKS;
+>> +    }
+>> +    if (riscv_has_ext(env, RVU)) {
+>> +        mask |= DCSR_EBREAKU;
+>> +    }
+>> +    if (cpu->cfg.ext_zicfilp) {
+>> +        mask |= DCSR_PELP;
+>> +    }
+>> +    if (cpu->cfg.ext_smdbltrp) {
+>> +        mask |= DCSR_CETRIG;
+>> +    }
+>> +
+>> +    return mask;
+>> +}
+>> +
+>> +static RISCVException write_dcsr(CPURISCVState *env, int csrno,
+>> +                                 target_ulong val, uintptr_t ra)
+>> +{
+>> +    target_ulong mask = dcsr_writable_mask(env);
+>> +    target_ulong new_val = env->dcsr;
+>> +
+>> +    new_val &= ~mask;
+>> +    new_val |= val & mask;
+>> +    new_val &= ~DCSR_XDEBUGVER_MASK;
+>> +    new_val |= DCSR_DEBUGVER(4);
+>> +    env->dcsr = new_val;
+>> +    return RISCV_EXCP_NONE;
+>> +}
+>> +
+>> +static RISCVException read_dpc(CPURISCVState *env, int csrno,
+>> +                               target_ulong *val)
+>> +{
+>> +    *val = env->dpc & get_xepc_mask(env);
+>> +    return RISCV_EXCP_NONE;
+>> +}
+>> +
+>> +static RISCVException write_dpc(CPURISCVState *env, int csrno,
+>> +                                target_ulong val, uintptr_t ra)
+>> +{
+>> +    env->dpc = val & get_xepc_mask(env);
+>> +    return RISCV_EXCP_NONE;
+>> +}
+>> +
+>> +static RISCVException read_dscratch(CPURISCVState *env, int csrno,
+>> +                                    target_ulong *val)
+>> +{
+>> +    int index = (csrno == CSR_DSCRATCH1) ? 1 : 0;
+>> +
+>> +    *val = env->dscratch[index];
+>> +    return RISCV_EXCP_NONE;
+>> +}
+>> +
+>> +static RISCVException write_dscratch(CPURISCVState *env, int csrno,
+>> +                                     target_ulong val, uintptr_t ra)
+>> +{
+>> +    int index = (csrno == CSR_DSCRATCH1) ? 1 : 0;
+>> +
+>> +    env->dscratch[index] = val;
+>> +    return RISCV_EXCP_NONE;
+>> +}
+>> +#endif /* !CONFIG_USER_ONLY */
+>> +
+>>   /* Execution environment configuration setup */
+>>   static RISCVException read_menvcfg(CPURISCVState *env, int csrno,
+>>                                      target_ulong *val)
+>> @@ -6435,6 +6555,12 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =
+>> {
+>>       [CSR_TDATA3]    =  { "tdata3",   debug, read_tdata,
+>> write_tdata    },
+>>       [CSR_TINFO]     =  { "tinfo",    debug, read_tinfo,
+>> write_ignore   },
+>>       [CSR_MCONTEXT]  =  { "mcontext", debug, read_mcontext,
+>> write_mcontext },
+>> +#if !defined(CONFIG_USER_ONLY)
+>> +    [CSR_DCSR]      =  { "dcsr",      sdext, read_dcsr,
+>> write_dcsr },
+>> +    [CSR_DPC]       =  { "dpc",       sdext, read_dpc,
+>> write_dpc },
+>> +    [CSR_DSCRATCH]  =  { "dscratch0", sdext, read_dscratch,
+>> write_dscratch },
+>> +    [CSR_DSCRATCH1] =  { "dscratch1", sdext, read_dscratch,
+>> write_dscratch },
+>> +#endif
+>>   
+>>       [CSR_MCTRCTL]    = { "mctrctl",    ctr_mmode,  NULL, NULL,
+>> rmw_xctrctl    },
+>>       [CSR_SCTRCTL]    = { "sctrctl",    ctr_smode,  NULL, NULL,
+>> rmw_xctrctl    },
 
 
