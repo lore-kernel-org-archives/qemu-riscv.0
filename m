@@ -4,137 +4,141 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41218C79F9E
-	for <qemu-riscv@archiver.kernel.org>; Mon,  7 Sep 2026 13:06:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51877C79F9E
+	for <qemu-riscv@archiver.kernel.org>; Mon,  7 Sep 2026 13:15:54 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x3Z2T-0001iE-IP; Mon, 07 Sep 2026 09:05:34 -0400
+	id 1x3ZBG-0004Yy-Ma; Mon, 07 Sep 2026 09:14:38 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1x3Z2P-0001gw-A7
- for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 09:05:29 -0400
+ id 1x3ZBC-0004NS-1W
+ for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 09:14:34 -0400
 Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1x3Z2M-0005F4-0B
- for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 09:05:29 -0400
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+ id 1x3ZB9-0006VT-8q
+ for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 09:14:33 -0400
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 687An0aV3180874
- for <qemu-riscv@nongnu.org>; Mon, 7 Sep 2026 13:05:23 GMT
+ 687AnEP92652808
+ for <qemu-riscv@nongnu.org>; Mon, 7 Sep 2026 13:14:29 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- cAjzyiuILn6+OaeltpkP/1uSU4XGR9Q/WoMJDwLAAro=; b=hR94l22sgTpgYT6y
- 5EnDu4EP+22zLAkWAdBInwNrvw2TOfQb/0jEMJuGZOBsQHASh1RpeR8QwmE+/hxt
- o3KTJjbbmm00YX+UtENsUL6GaMDlHre8WW4en+dOOunOSRlhkr2lg0Qa/+NXnY3R
- tdV60LRl5EJuCXCnmtN0v/o5zuiZDe41+7RwkNcYH11OpbAQYEU3pWQSGMRzkJCY
- pUaCinNn/dj+qPbzNL93Lwq/aZVpZz6LOP5LQrmt8UwHwzpnBgN5iLBRse1bRiP2
- UssN9AxB/fAqepitc3QOp0UaCRKDzx3TsEHoFrOVheyJz69iMo2Ejk+icWpnOD7/
- BoQ1ig==
-Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com
- [209.85.222.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ghsw212e6-1
+ RqixD4N0z/3b0DiXXrUuQajWU8nOL0jAJX2FEo7z3Y8=; b=oAv4N/tKdWwh1KBR
+ PfoV5HKWQt3IPsoe5Pj5pTtF8uu2F3TNxQbJOGUu1f8gMjlFULTEwnhlMNUctAVY
+ xuUdp1gfmaUdNO619HXLb19VmTTCm4pH7UWpgBkneV7+ovg9G7qajz1DcLK20uFQ
+ WHDWuBNw2Fc9Ilg7p+LxIAFGPo0a7UPLiNP8QLL4dMW5pQhUzD2YPZ/VMVfFSXVO
+ 5uMwvKSKhIvRJpHX3NNeviieK4yhuPz0t2RgpgU94r9fPfRZoAWtl5B4WVOEatJ/
+ KCJZcWTsb+rMkbTf0F5xSAwvgBerV/GANomSdx1VoDwOeHb+pK9jaVTDVLX6Ex2P
+ qOMBDw==
+Received: from mail-yx1-f71.google.com (mail-yx1-f71.google.com
+ [74.125.224.71])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ghtty0sde-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Mon, 07 Sep 2026 13:05:23 +0000 (GMT)
-Received: by mail-qk1-f197.google.com with SMTP id
- af79cd13be357-9394ad7f64aso579360985a.3
- for <qemu-riscv@nongnu.org>; Mon, 07 Sep 2026 06:05:23 -0700 (PDT)
+ for <qemu-riscv@nongnu.org>; Mon, 07 Sep 2026 13:14:28 +0000 (GMT)
+Received: by mail-yx1-f71.google.com with SMTP id
+ 956f58d0204a3-66e509682ccso4662971d50.3
+ for <qemu-riscv@nongnu.org>; Mon, 07 Sep 2026 06:14:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1788786322; x=1789391122; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1788786868; x=1789391668; darn=nongnu.org;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=cAjzyiuILn6+OaeltpkP/1uSU4XGR9Q/WoMJDwLAAro=;
- b=BYTY++cqioRscfv5By0NSDZC0YsA7BS1FV2RVBn9E993buuzS7ihM6i/5wsHGiZ02r
- BKnGAWG0FP73d7bumm5YC0OUeKtONIxT6XmHawCoybZj8SfQOHu87LcReQlo/HAG2NKM
- ehtPNlaMZDuzYamG9GU5K1PEZkD+Lyxw7XDGpCzAj1851whvovGex+QtW6PkRAJdZsjo
- EuNBURBaZPhBjkNhKpMoJzhcqu8IsB11JgZR99gPxpVhOdFnU7DfN2/U3ze2eNl+txJ4
- 9irrwtTBl9i+pIZYqhV1TIJIpmWa+MB/0qqBC5P9Yk5cMlyIh1xAZcbv2kF1mbAGxqCW
- Bd4g==
+ bh=RqixD4N0z/3b0DiXXrUuQajWU8nOL0jAJX2FEo7z3Y8=;
+ b=CGdja9NBqXgmxPsfJPr271JXVpJUgAYSx7PwzOC6EiAqssMDckmmUYz8G1xnD9YTUZ
+ j8HCqG9CA4SpKSDNroXr8bJd+bctMfENVvGReXXJ3j1zf8xHD0QwNk5WHM93ldVRoWvt
+ nvRl8xZ9U637KM37p38z4tKFsDZG/2bSzcYRiBfi0n1IiTq5vEjgsyRggXOgOvA2cnoE
+ znog6Aqzb/I6Mj0eN2D8chTQGU6K7mVU8PKrFbYP8w6daK7fcfGO8an79nZKQ1OzXirY
+ hxp6lnfrE7EcfFKngYCeHL64tyr09aL/PNP1BNwo6Bnzqo1oc7Lvc9HoK5mlnA3yg/cy
+ Q2TA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788786322; x=1789391122;
+ d=1e100.net; s=20251104; t=1788786868; x=1789391668;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=cAjzyiuILn6+OaeltpkP/1uSU4XGR9Q/WoMJDwLAAro=;
- b=LImJHDbSEMGfRBVy9kItcLHQsPTX0YXsCGy7FwEwYO7q4uF14NnWMvLr62/jLjNqO7
- KqNV8tfqgyG8QAgajxj0U1UYot+a/tWK3QOVNlQdG23TriybkYRctN55b/bBy2pBl/Ve
- lA5ALNVZTaidJMQpSOGV67X3MgdIMYlsd9btUpNfaUecMiTAmZv7zVjIVrMJwfRNyXGY
- Eq6Z/ZG4kNxUY0rqjzakI/J4ePuavdaA7mwsKwZmFXlm3PMaYzRcdb7GLXbn3L4qnO+W
- Bx9v93Qtq+AVZZzU6/uiAmgXPLoqfcSCfAjTeRFxGBrxNQGMoZiubsq9pN5d9eBnuudA
- 4nTw==
+ bh=RqixD4N0z/3b0DiXXrUuQajWU8nOL0jAJX2FEo7z3Y8=;
+ b=nwOknbzsJ5AnGd6Q6WS1dk/bVjg9VuZQV9UUrIicRC88qiX2K4TaE55H0KPx8cX4+V
+ tTsP8rtyPWyA0/3nCw1jFHabnIHICp4FqDWwFg3hnma/uWkApU80SQ3745bTqlryZVjD
+ YJmqS24xY+5esBpZnHrHeYi09Lp059saHvDXj07Q68tkAJpjGCtilvwh4POa142b6LG8
+ b/IaFXHZpoMoPigfzB5IhA+EhKFKNEUhT1VszdogXgDkouhvYr1cyiQjD0cJCtuwtynT
+ ZncTpGP1Geo2qPo4YscvCrKPPLKnvDXProbqsdV0WpZWizQqFm2ZqZEoEZE26P0mfG0V
+ +p3w==
 X-Forwarded-Encrypted: i=1;
- AKwUvBwty470QkrkQIoEyETNkNFGQbNjhId5QLeX/PtavYxx8BSq7ZXTfc+w+iuzPRtBO9YBKSxlWvyVaHs6@nongnu.org
-X-Gm-Message-State: AFuF++k5LQuRJav9ZUIsAww/UeUiWFIWtXe10l8QjjgCt29IJh6tRb0l
- Yg1ObPRdCUSNVddGltFBaMewLINUEK34PrG1UZfMDiYnTs3B++UlH0dbcJIhCitNBjQHemHDqnY
- uLZcH9z4Ga0CGLg6+nu+JIr7tLfqHIu28XcWPYDjvJeoYDOffvQIpV6j3lw==
-X-Gm-Gg: AYBFou3BjZZOJU6/kaLxclQqtIENHGjKFcanE0EqSWFzSpPT1ErFPl3jlxUbRv69slt
- hoLvZyM7L4GifTlpd+MYZB2ms/nYXVoahBLQOIs7ZNfRNJPTezrh0UseDonm3V+QKxI2dV5xxkj
- h9bKf/6u40qYPzUjNbygjcxgNTduARd2grYmgN2NHj4uv7tiHFr4ObCkbMtPzhMvdQIKNBhS3it
- 2mIEiPZmpNxpS03r6K9a3VGp7KtB5jezoicEVhZp4T2B7r8aXO9ojTnDOTR9OTes6Ly8oFGKzHo
- Y4NHIowEZ5MErawJUbyeMd4JkPxmFGASadTbxSLR4oR1UisbUfbW0WAsj/eP89azUNTnrbZ6xyV
- l13SA1zvDgbwcmAvfb0vPBKNsvIxHxDCUd0M=
-X-Received: by 2002:a05:620a:870d:20b0:939:6df9:1278 with SMTP id
- af79cd13be357-939804c0ce4mr1904643685a.51.1788786322433; 
- Mon, 07 Sep 2026 06:05:22 -0700 (PDT)
-X-Received: by 2002:a05:620a:870d:20b0:939:6df9:1278 with SMTP id
- af79cd13be357-939804c0ce4mr1904632785a.51.1788786321946; 
- Mon, 07 Sep 2026 06:05:21 -0700 (PDT)
+ AKwUvBzUqgxsuj/1KTR/eDWxI1cNrazNUC64Yf0qQ04b9v8ORdxDBqh33w9JoKzoR6pwmsBHXrr0UfPnl6NP@nongnu.org
+X-Gm-Message-State: AFuF++nLofsiXEDcYkPch2Pnmm+J39qQP6F8twSzO8HduvkBA7mDc+UT
+ pvwUq/LNaoPyFZL3JhIwNPwzVzzA4mP+llVp7UU39+EEXuV94oBF4C6uBLKol5QPunAQMO9+3T7
+ UUJLhF4rAVRF6Em6sqpdgADY33tQ31IVYWLWdr1/XZnJ8LbdPuxOcuNE6bQ==
+X-Gm-Gg: AYBFou0ke4Hm7MpyP3P0Jt5nzq8ZVzJTNhLx97zcH1q2NcmWpF3DzSHvzhWc2gMdl53
+ whFhRn72bh0QXBbcEYUtS1aGE5a0OAz1nUeW9icvF3SYL4SrhP5IW2pa6GfycICeW361BINIUjJ
+ sDEahNwSGB7D+iwmbOJUInG/PPEJd0Hh/JsP8Bhmnw11PoztPUX77nK7bFuSoxX4ziKYsmXJKld
+ sjFJzx3WA4YXIr4Ug/m/ALJjeEx48XFlm9fiNr0wG9WTPN74nz3qL1pHFMVCVptV5cIF2KHYmLU
+ OCd5AB4tTihJcKonDDZrsMhnNBff3U9SBVBy6niaFEUQYtic2Z6tmoBCZ8F6yt6jnjVLrzH1CPL
+ mr2h324zNwXDVd4sWKjuRsOs1Ly5p/G5Zm4E=
+X-Received: by 2002:a05:690e:4142:b0:66d:1a61:5c6 with SMTP id
+ 956f58d0204a3-66fc1b959dfmr5477103d50.29.1788786867774; 
+ Mon, 07 Sep 2026 06:14:27 -0700 (PDT)
+X-Received: by 2002:a05:690e:4142:b0:66d:1a61:5c6 with SMTP id
+ 956f58d0204a3-66fc1b959dfmr5477074d50.29.1788786867028; 
+ Mon, 07 Sep 2026 06:14:27 -0700 (PDT)
 Received: from [192.168.68.102] ([177.18.66.131])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-939b871742esm10173285a.39.2026.09.07.06.05.19
+ 00721157ae682-871439c54e4sm71639827b3.6.2026.09.07.06.14.24
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 07 Sep 2026 06:05:21 -0700 (PDT)
-Message-ID: <ce444959-912c-47e2-867c-db011473d806@oss.qualcomm.com>
-Date: Mon, 7 Sep 2026 10:05:17 -0300
+ Mon, 07 Sep 2026 06:14:26 -0700 (PDT)
+Message-ID: <165fb72b-3cf2-4693-88e4-f9d36c5c498d@oss.qualcomm.com>
+Date: Mon, 7 Sep 2026 10:14:23 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/2] target/riscv: extract check_sfence_vma() from
- helper_tlb_flush()
+Subject: Re: [PATCH v2 0/2] target: riscv: support TLB page flush for
+ sfence.vma
 To: Trevor Gamblin <tgamblin@baylibre.com>, qemu-devel@nongnu.org
 Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
  <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org
+ Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org,
+ Richard Henderson <richard.henderson@linaro.org>
 References: <20260904-riscv_tlb_page_flush-v2-0-defec3f29312@baylibre.com>
- <20260904-riscv_tlb_page_flush-v2-1-defec3f29312@baylibre.com>
 From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Content-Language: en-US
-In-Reply-To: <20260904-riscv_tlb_page_flush-v2-1-defec3f29312@baylibre.com>
+In-Reply-To: <20260904-riscv_tlb_page_flush-v2-0-defec3f29312@baylibre.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-ORIG-GUID: -AeKDJyMv3Cm7Gtbf2HLpm8SwDovMDlM
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA3MDE0NCBTYWx0ZWRfXy6knAz2sn7F5
- cJkiPZ/5mGXM3psveg+mrVC3ly1gbLU5nlyeBGQzJPi5OYRo1W44feF4BTsi9IN7HIiXcQmM/sE
- V5LVw9WnObfpdcptkNiQyNc5exeZa74=
-X-Authority-Analysis: v=2.4 cv=eKwjSnp1 c=1 sm=1 tr=0 ts=6a9eb693 cx=c_pps
- a=50t2pK5VMbmlHzFWWp8p/g==:117 a=CQQxcbsX5Byh3TlVSSGwig==:17
+X-Authority-Analysis: v=2.4 cv=QNBYgALL c=1 sm=1 tr=0 ts=6a9eb8b4 cx=c_pps
+ a=ngMg22mHWrP7m7pwYf9JkA==:117 a=CQQxcbsX5Byh3TlVSSGwig==:17
  a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
- a=IpJZQVW2AAAA:8 a=EUspDBNiAAAA:8 a=fIT3gf-4d1xXVelyxpkA:9 a=QEXdDO2ut3YA:10
- a=IoWCM6iH3mJn3m4BftBB:22 a=IawgGOuG5U0WyFbmm1f5:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA3MDE0NCBTYWx0ZWRfXxvQW4DjsN6RX
- gtg1xC3JDv0UDriGDj/M/vdRB2mF2ZgF0NFRTp6GVkb8TI3F5iftrmDzGEhHuTff33bG61h1i/I
- Jv/TbpHrakWpTDiej1KWh0Ih2A0p66o4p8VqOkDt8cWgNPpWZyDmGKUx8KHEsWPzDu/GY2bfmtF
- lOE6hYnyrqbT/xYUY0EsACbZrrIH2tpW909krTI4x35YkeQ68n+LFKAxBxVI8Z62Fk8vny93ozu
- wUfEqYhWCRS/JunNgmBo1UkzCn6E0erxUc+5gxrZ6ost0B0Fp0wOGkdybFdBRy33j/52kMJw0k6
- lVY0Cc8fkfRaA6xWD71EyXD4YZ7mD9aylG7dhq83Q4lzqSHgUcXEdmTPK1b2/lQ+9ZL1po5Aauo
- af+vTbVsD9rH9Ezkj6D22t+AukPZgXeK0YvXqWy5nwe2RWzhRio2WhTRiRuIMNlC0lIeiIPciId
- nVHS/F5iiBI22vmHPCQ==
-X-Proofpoint-GUID: -AeKDJyMv3Cm7Gtbf2HLpm8SwDovMDlM
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
+ a=y3tPqhoVAAAA:8 a=iGHA9ds3AAAA:8 a=B6KMzFptAAAA:20 a=VwQbUJbxAAAA:8
+ a=IpJZQVW2AAAA:8 a=69wJf7TsAAAA:8 a=_O3DOGVWAAAA:8 a=JF9118EUAAAA:8
+ a=pGLkceISAAAA:8 a=EUspDBNiAAAA:8 a=SRrdq9N9AAAA:8 a=FRSEYCzRAAAA:8
+ a=SS0N6QsqKKa_8Qt3vWMA:9 a=QEXdDO2ut3YA:10 a=yHXA93iunegOHmWoMUFd:22
+ a=xB3BzkE1M_ohbp1J8EAO:22 a=nM-MV4yxpKKO9kiQg6Ot:22 a=IawgGOuG5U0WyFbmm1f5:22
+ a=Fg1AiH1G6rFz08G2ETeA:22 a=2TKV-7w1aU1AVAwN0oqT:22 a=xVlTc564ipvMDusKsbsT:22
+ a=H4N_Y-AU75W7NKDNhZlT:22
+X-Proofpoint-ORIG-GUID: tHiDD21EvGZDF1y7etBhfAdHd2sj4KwU
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA3MDE0NSBTYWx0ZWRfX/XdXIo9Qj8mV
+ rNMkG+Paw8HertV345r3Qi4q1FJJJqEbV+F1VLs/RsyKoobOUZYOXqQca9aVkvkLl3lW/LSBN9V
+ 9jIzXMLcKiYocmzni0sPOELHBesnZoI=
+X-Proofpoint-GUID: tHiDD21EvGZDF1y7etBhfAdHd2sj4KwU
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA3MDE0NSBTYWx0ZWRfX/pLgAK7d6bb9
+ tu/5AAsnK7YRONdyzxtxn0YWppOXCz3lNWahpONFhAW/rDFFd+r4yE4y3lky4KzsqpuV7X23IiM
+ cGiEo3VrLFJeLPSeP/0wlR7/HAl+RsQr2AZNrAN7IXKIpDzS+WNXH91vXATFxfNbmXP3uLQb+vB
+ ibOZ2Fh/uWI77o4QaCsYhYne2IsdBi3Jaq0AYc7FGItACFFT3C9rgPHCFQao9ezJlL7EZHMTTv/
+ dnXKc61nKPDBdDSZZpO9OTAfzHtBpXkqip/cUcfU3L11uDyMnrsSlajj5l8ngBsXBDHpm/9Yl4c
+ Oxvjez3O21aJ/rIRRGGdyYTsFf+ur26A07lUpJLIxAMvyJb/fbznsi1ScQLIw5q4ReQHGBjTuPk
+ ttutd9Tec7yIA5NpHPZ0ExOW3jkchxjPGFDMa+smd2ILY01209tsx8BW2VzJO0SobB2AJYqX1/x
+ OIFFbCZV2a08LrSahWg==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-07_03,2026-09-07_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 lowpriorityscore=0 malwarescore=0 priorityscore=1501
- suspectscore=0 clxscore=1015 adultscore=0 spamscore=0 phishscore=0
- impostorscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2609070144
+ malwarescore=0 spamscore=0 suspectscore=0 phishscore=0 priorityscore=1501
+ lowpriorityscore=0 adultscore=0 clxscore=1015 bulkscore=0 impostorscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609070145
 Received-SPF: pass client-ip=205.220.168.131;
  envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
 X-Spam_score_int: -27
@@ -143,7 +147,7 @@ X-Spam_bar: --
 X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -159,58 +163,183 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+Richard,
+
+
+This tlb_flush change is giving a +20% performance boost in riscv64-tuxrun.  From
+this:
+
+23/23 func-thorough+func-riscv64-thorough+thorough - qemu:func-riscv64-tuxrun  OK   92.71s   4 subtests passed
+
+To this:
+
+23/23 func-thorough+func-riscv64-thorough+thorough - qemu:func-riscv64-tuxrun  OK   73.45s   4 subtests passed
+
+Other tests weren't that affected - I take it has to do with the amount of
+sfence.vma being issued.  They look fine in my own testing with an emulated
+Ubuntu host as well.
+
+This is all fantastic but I wonder if we're missing something.  If you could
+please take a look at these 2 patches and see if we're handling the tlb flushes
+according that would be terrific.
+
+
+Thanks,
+Daniel
+
+
+
+
+
 
 
 On 9/4/2026 3:43 PM, Trevor Gamblin wrote:
-> Create a new function to encapsulate the privilege/hypervisor checks
-> performed inside helper_tlb_flush(). The idea is to pass GETPC() as an
-> argument directly to it inside the helper_tlb_flush() function. We'll
-> use this function in the following patch for helper_tlb_flush_page().
+> Introduce a new function, check_sfence_vma(), to handle
+> privilege/hypervisor checks currently performed in helper_tlb_flush(),
+> and make use of it in that function. Then, add helper_tlb_flush_page()
+> for flushing only a single TLB page, using check_sfence_vma() inside it
+> similarly to helper_tlb_flush(). Finally, rework the trans_sfence_vma()
+> function to use helper_tlb_flush_page() when rs1 != 0.
+> 
+> The second patch also includes the fix for a regression in the
+> 'test_tuxrun.TuxRunRiscV64Test.test_riscv64_maxcpu' test encountered
+> with the draft version of this series, which hanged indefinitely until
+> killed when the patches were applied. This was fixed by making sure to
+> use get_address() to canonicalize the address being passed to
+> helper_tlb_flush_page().
+> 
+> make-check and make-functional were both run with the patches applied on
+> master, and no regressions for riscv64 were observed (beyond the one
+> mentioned as fixed above).
+> 
+> Daniel Barboza helped me with initial triage, direction, and cleaning up
+> this series for submission - thanks again!
+> 
+> Some background context: as part of the RISE Project[1] mission to
+> improve the RISC-V software ecosystem, the Yocto Project[2] is receiving
+> assistance with triaging bugs and enhancing RISC-V support in the core
+> layer. The 'qemuriscv32' and 'qemuriscv64' targets were enabled as part
+> of the Yocto's CI system, known as the Autobuilder[3] in 2025, and since
+> that time various intermittent failures have been observed on the
+> 'ptest' ('package test', where a package's test suites are bundled into
+> an image and then booted to do basic runtime compatibility testing)
+> case, 'qemuriscv64-ptest'. These almost always manifest as timeouts in
+> the guest, usually around heavier and/or more complex test cases, and
+> they additionally seem to occur only under heavy host system (x86_64)
+> load.
+> 
+> Comparing to other major architectures like x86_64 and arm64, the
+> riscv64 guests are always emulated in TCG mode, since the Yocto
+> Autobuilder cluster does not (yet) have native riscv64 hosts to dedicate
+> for runtime testing with kvm support. While this is likely a major
+> factor in why qemuriscv64 runs fail at higher rates than other
+> architectures, it was noted after compiling the triage data[4] that
+> local comparisons of the same ptest images running on TCG-mode qemuarm64
+> and qemuriscv64 showed the latter taking significantly longer to
+> complete (using some of the test suites which have been observed failing
+> as examples), even with no other meaningful system load on the host. In
+> particular, the coreutils case showed over 70% longer runtime for
+> qemuriscv64 compared to qemuarm64 (~1000s vs ~580s).
+> 
+> Fully investigating the source of this discrepancy was a long process.
+> For Yocto builds, native QEMU binaries are built from source as part of
+> the overall image build, so the first place to look was in QEMU's
+> configuration and boot options. Other suggestions included trying to
+> disable TCG plugins or alter the QEMU and guest package configs (Yocto's
+> QEMU is RVA23S64 profile by default, while the runtime packages are
+> built for riscv64gc). However, these changes either produced no
+> meaningful effect or actually increased runtime. The next step was to
+> investigate the QEMU source, which is what ultimately led to this patch
+> series. It turns out that these changes significantly improve the
+> reference runtime test case for coreutils in Yocto, although it is still
+> somewhat slower than in qemuarm64. It remains to be seen whether these
+> changes to the QEMU source eliminate the intermittent issues in Yocto's
+> testing, but it is a meaningful improvement which opens the door to
+> further optimizations for RISC-V.
+> 
+> As an example, compare the before and after results on a local run of
+> core-image-ptest-coreutils for qemuriscv64:
+> 
+> |============================================================================
+> |Testsuite summary for GNU coreutils 9.11
+> |============================================================================
+> |# TOTAL: 733
+> |# PASS:  561
+> |# SKIP:  172
+> |# XFAIL: 0
+> |# FAIL:  0
+> |# XPASS: 0
+> |# ERROR: 0
+> |============================================================================
+> |make[1]: Leaving directory '/usr/lib/coreutils/ptest'
+> |DURATION: 1049
+> |END: /usr/lib/coreutils/ptest
+> |2026-08-31T17:23
+> |STOP: ptest-runner
+> |TOTAL: 1 FAIL: 0
+> 
+> versus:
+> 
+> |============================================================================
+> |Testsuite summary for GNU coreutils 9.11
+> |============================================================================
+> |# TOTAL: 733
+> |# PASS:  561
+> |# SKIP:  172
+> |# XFAIL: 0
+> |# FAIL:  0
+> |# XPASS: 0
+> |# ERROR: 0
+> |============================================================================
+> |make[1]: Leaving directory '/usr/lib/coreutils/ptest'
+> |DURATION: 646
+> |END: /usr/lib/coreutils/ptest
+> |2026-08-31T16:10
+> |STOP: ptest-runner
+> |TOTAL: 1 FAIL: 0
+> |root@qemuriscv64:~#
 > 
 > Signed-off-by: Trevor Gamblin <tgamblin@baylibre.com>
-> ---
-
-Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-
->   target/riscv/tcg/op_helper.c | 16 ++++++++++------
->   1 file changed, 10 insertions(+), 6 deletions(-)
 > 
-> diff --git a/target/riscv/tcg/op_helper.c b/target/riscv/tcg/op_helper.c
-> index 3e94005d2b..7f63f3ada5 100644
-> --- a/target/riscv/tcg/op_helper.c
-> +++ b/target/riscv/tcg/op_helper.c
-> @@ -588,21 +588,25 @@ void helper_wrs_nto(CPURISCVState *env)
->       }
->   }
->   
-> -void helper_tlb_flush(CPURISCVState *env)
-> +static void check_sfence_vma(CPURISCVState *env, uintptr_t ra)
->   {
-> -    CPUState *cs = env_cpu(env);
->       if (!env->virt_enabled &&
->           (env->priv == PRV_U ||
->            (env->priv == PRV_S && get_field(env->mstatus, MSTATUS_TVM)))) {
-> -        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-> +        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, ra);
->       } else if (env->virt_enabled &&
->                  (env->priv == PRV_U || get_field(env->hstatus, HSTATUS_VTVM))) {
-> -        riscv_raise_exception(env, RISCV_EXCP_VIRT_INSTRUCTION_FAULT, GETPC());
-> -    } else {
-> -        tlb_flush(cs);
-> +        riscv_raise_exception(env, RISCV_EXCP_VIRT_INSTRUCTION_FAULT, ra);
->       }
->   }
->   
-> +void helper_tlb_flush(CPURISCVState *env)
-> +{
-> +    CPUState *cs = env_cpu(env);
-> +    check_sfence_vma(env, GETPC());
-> +    tlb_flush(cs);
-> +}
-> +
->   void helper_tlb_flush_all(CPURISCVState *env)
->   {
->       CPUState *cs = env_cpu(env);
+> [1]: https://riseproject.dev/
+> [2]: https://www.yoctoproject.org/
+> [3]: https://autobuilder.yoctoproject.org/valkyrie/
+> [4]: https://docs.google.com/document/d/1HUk-RvMDdW2EKV-qE1VNfZBycPscQUsayEZ5AgJ85C8
+> 
+> ---
+> Changes in v2:
+> - Renamed sfence_vma_allowed() to check_sfence_vma()
+> - Squashed patches 2 and 3 together
+> - Reworked check_sfence_vma() and helpers using it to be consistent with
+>    rest of codebase (e.g. no unnecessary returns)
+> - Adjusted cover letter to match check_sfence_vma() naming
+> - Link to v1: https://lore.kernel.org/qemu-devel/20260831-riscv_tlb_page_flush-v1-0-4fc6af95673a@baylibre.com
+> 
+> To: qemu-devel@nongnu.org
+> Cc: Palmer Dabbelt <palmer@dabbelt.com>
+> Cc: Alistair Francis <alistair.francis@wdc.com>
+> Cc: Weiwei Li <liwei1518@gmail.com>
+> Cc: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+> Cc: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+> Cc: Chao Liu <chao.liu@processmission.com>
+> Cc: qemu-riscv@nongnu.org
+> 
+> ---
+> Trevor Gamblin (2):
+>        target/riscv: extract check_sfence_vma() from helper_tlb_flush()
+>        target/riscv: add helper_tlb_flush_page(), use for sfence.vma with vaddr operand
+> 
+>   target/riscv/helper.h                              |  1 +
+>   target/riscv/tcg/insn_trans/trans_privileged.c.inc |  6 +++++-
+>   target/riscv/tcg/op_helper.c                       | 22 ++++++++++++++++------
+>   3 files changed, 22 insertions(+), 7 deletions(-)
+> ---
+> base-commit: c513597761d6fc06690b5b7cf10dfb7ab05815d0
+> change-id: 20260831-riscv_tlb_page_flush-11a83fe9e7b1
+> 
+> Best regards,
+> --
+> Trevor Gamblin <tgamblin@baylibre.com>
 > 
 
 
