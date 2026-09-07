@@ -4,99 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3DB9C79F9E
-	for <qemu-riscv@archiver.kernel.org>; Mon,  7 Sep 2026 02:00:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E4B1C79F8C
+	for <qemu-riscv@archiver.kernel.org>; Mon,  7 Sep 2026 02:28:10 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x3OeS-00045L-Ao; Sun, 06 Sep 2026 22:00:04 -0400
+	id 1x3P5E-0007eg-2G; Sun, 06 Sep 2026 22:27:44 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1x3OeQ-00044y-Cd
- for qemu-riscv@nongnu.org; Sun, 06 Sep 2026 22:00:02 -0400
-Received: from mail-yx1-xb135.google.com ([2607:f8b0:4864:20::b135])
+ id 1x3P5C-0007eJ-Jo
+ for qemu-riscv@nongnu.org; Sun, 06 Sep 2026 22:27:42 -0400
+Received: from mail-yx1-xb132.google.com ([2607:f8b0:4864:20::b132])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1x3OeN-0004mU-Fo
- for qemu-riscv@nongnu.org; Sun, 06 Sep 2026 22:00:02 -0400
-Received: by mail-yx1-xb135.google.com with SMTP id
- 956f58d0204a3-66c9995ca60so3849246d50.1
- for <qemu-riscv@nongnu.org>; Sun, 06 Sep 2026 18:59:58 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1788746398; cv=none;
+ id 1x3P5A-0007Bq-Cg
+ for qemu-riscv@nongnu.org; Sun, 06 Sep 2026 22:27:42 -0400
+Received: by mail-yx1-xb132.google.com with SMTP id
+ 956f58d0204a3-66d29b298a4so962810d50.1
+ for <qemu-riscv@nongnu.org>; Sun, 06 Sep 2026 19:27:40 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1788748059; cv=none;
  d=google.com; s=arc-20260327;
- b=TbTZd7OB4dezzCNQBBGjG9/dacu+FDeHiTNCYRlXyOF63imvxsuDnret5246f50hxI
- Yrw1HSIwoIlzrD+mkIg3nmGp8KsLCdmiBW6HthEE/1enpbSC/UZcooqa29tvUm7kiOey
- s1vXOuCWyUxs625+p+YNOzVn4vfMbt47D/UhZzVoQ//dc7jQIyjxFnDwVMBly85H4pG6
- hzh9EP2cmHdsb9csX7sKIHUXIQ1ka+le/cn7xrJOeJxWz0O5eZW7HINMTHGNFQUDc2G9
- d8g3zft2muKAKmE5bgNvLFA3bZucKg3NVOg2eyMO/ksjvX3UqwGqZ2nDPj1ah6ZKQFzx
- qwUw==
+ b=BIEPCwnKQbUsGIP2FctwYRAQR/S5r6CWZ6SteXaqPAsZa/QToz665nz3ty1Lv9n8hL
+ LJUwhQsRibD1gVl3ztaXAnzf2ceqYxRvmY7XQNspEAWLjA66YR7EHkiY1ZyYgCW4DL1M
+ lvzO6s9LtUK34wRvR8ljWg8juUjDsIdiS4M8nv5hvvJzAv/3iKccHD/BqIFydxk7yx9Z
+ 82eYQOr7g/PpB4RvFuexfc3sc6HpQeJ8IbzpgOlvTjahhT2IPgBfvaUTAuLhYpMhsKKF
+ ljmIBwW2FjvPj9sIEt8XP+cIWb0WBM3sQ3mNF60Qp0l8Tu2KDaoz4fRajNl6BucvCEhk
+ BKiw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=3a35i00JcPO+1PlUnpIvpEu7xlvw5Pcruz3A3w+M5h4=;
- fh=11H9+SR2ZxAWd8SOrAo7HByLRyUKZ/7fcBD2zXTRIN8=;
- b=ecf4DMQI6JzNnOuus9ans8NgDjktATEGEzjb3dzLfZ/DIol262wTRObTzTv4DRxx9t
- QaUH+p2k/0VoKeXvt3xsYvzxWTff0++hqJqDS4Y9nWzlv6Xdiz/Sz6W0UmEnCqs11Q/X
- N4NF36d9XLQFGftWHm9nIs+eMxeue/lwTXiHtrbASvY0N8c0q9QSRRTwoiQav22iAe2h
- QOmTMqVXqksq0GLsxKMoJiDC77UsvR7UY3Pb5eps7+17dQ3AweuAYyVPZvV5HUlxWBus
- q8qgHPTp+7Cmy7da5c8b9Wo7PaU50c+w+innBRAMq0nggZHNbyYGuHv7No1umI9pMhqk
- weqQ==; darn=nongnu.org
+ bh=Fmo+ecuEKQm+N37XLc/59ti0srpTndziRJEkJ+jpT3w=;
+ fh=MpCZEuAfjQ7o/I8xkAdN7FUIwXKxmdlp9xdVuex3YQk=;
+ b=Sc6fjSXiPxj07kC+cJn75C23dzWSeeH+xCP4u1KDnj+Q5WdI+ng3uegyszgiDOm810
+ QosYmw7r7reU4tMwi6GPgcDfARPBCEogxRJTLu/eOGbQXOlxkhvYYAH21ho0z6L14JJ6
+ 7NYQ1oIRS8J3BGMJVQv7CXXQPoeu6XxFarqHUx6AXscZmVqaNQ2LiY4UBWFGxZKN4a/2
+ tZCa5J5nllNCp/nkWwxWna4gi0WBHEQYAJaRhpRSICGvgk06tXXSHLna59KtcsPd2Foz
+ ey30EZwKlmNF+7XXbsKPbkxHQ+m1swXzQQDEsJ9GSdR9bqJzauLOJmYbtvQSSWHMUE0i
+ c+ww==; darn=nongnu.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=jms.id.au; s=google; t=1788746398; x=1789351198; darn=nongnu.org;
+ d=jms.id.au; s=google; t=1788748059; x=1789352859; darn=nongnu.org;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=3a35i00JcPO+1PlUnpIvpEu7xlvw5Pcruz3A3w+M5h4=;
- b=CIUcJ/4kELXbMD25Y6cUe2SsYWQccm/UI43v4uq+9NdZdjEuUsbWXj9YIgd+iVCVpy
- hXwS+uJ1+vhHaPUmsR5Dq6At84Cjz7ggxzSL4gLRyz0jSwjtEpmWioOIWT7AZ0pcb5Pu
- HyBqTvPr6g5hEwj1uZ/HwajEvtbdEucsk0U5A=
+ :content-type; bh=Fmo+ecuEKQm+N37XLc/59ti0srpTndziRJEkJ+jpT3w=;
+ b=Nx1kW60kZbuNIVQmeRqzFWGNC3o6e1FQpSVIPgE8KjfeAT7FQ5ia2cBzgiLd1vGMQI
+ j53IouVxPif6wVhXmj2w+l0X+eBWE3Zbv2qpF046gcQ0ptL/+ohfMsqKRwmTv+2VkWMg
+ 9DkkLFang8CSsqYf73cJAnT0JH5jhoUABnsxc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788746398; x=1789351198;
+ d=1e100.net; s=20251104; t=1788748059; x=1789352859;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=3a35i00JcPO+1PlUnpIvpEu7xlvw5Pcruz3A3w+M5h4=;
- b=H/Cl4kX9optDmJEQJgxbJ75ohGD1BSzVQkwAB5aRUVYhlrvqYiYKwewafwSZ3u/HyP
- 4IGqYlCkc7Irg6OK6wjCKt/xe0oF0TpbwKGo4L4jsnAE3/fwzTCOknwzXpiGVA6t727R
- dyq9zcDKAtwo98piPFg0S9vM0vRLNrysAAVXBO/l6IsAOKFS4So+yKGW9a1Fr2O44jaT
- 6Z/H09Ct/CTTU2U67nezNLUA4IyKdWXodurj5R+hxVoKg99jMzi44MOLCOsTMTJ8Eubx
- DbURf0ct3ZG7qZArMqmCo+0Hnd03U87tvSkMhRxB7b4czkjztTsUxy0hkdtjkfVUfuom
- O5bQ==
+ bh=Fmo+ecuEKQm+N37XLc/59ti0srpTndziRJEkJ+jpT3w=;
+ b=IztcgNZF/cADlAB/Ej6kAbB4Oe3njglg+yB4SVCd5LV+3QWrQsP18TCRMABNTJBMwC
+ sT5ZFhV7pzmuZxazUDIJS8vuPAn7HytQL5Xv6UBIo6MMuBKokS/xoqdYhUXyyv7UzpBM
+ qdZvZE+d6B3ktNCYYNx+LC3Dv10qgdxRCtHXRHgqyHB+Hl3x7TV9Rdj+5vOioIoZpoH/
+ F+5iRN1OOLO3/6BWN1RCxPw3YozO5nHOCEPaoI8wJKupUs77iFX1wo3fJO74YKy5oA06
+ FUQkqmiW3KyI3HiPhdivlHmwx89GmS+PtqEa1SKjm4huITikHtCnSyWLsoKL9itsLph0
+ FYzg==
 X-Forwarded-Encrypted: i=1;
- AKwUvBzt0hd3g39BZUpYw74NlFsmmpqir4+bub+xEx5Hi5okqfnnSXm/FHjldup925DGmiiZp2CB9cT6WfS5@nongnu.org
-X-Gm-Message-State: AFuF++lKN35xVl30qreVOLCQ2JWh06lHL7b/04OIKQO581Tt/Fa/jBlv
- 4apc+P21atUPQ+okgNXZI0lvoieUJj7tXDSFbBPO8SqdhDuRkUece9yF3Wv7uCQVuggsag1PQJE
- QfnCZtkEbnjo34lWys7ephMN0VQr+xsU=
-X-Gm-Gg: AYBFou2CE6bbLFzVLJ2J7FHdcvRVZs+nkuQ11EaC+SkxWnY3pzqCEIEJVinXeh8fPO1
- XDJjrh1hHTwxq3Qp3ApKP6GRKVLCus9YSeoJiZq/XYOGhzo+7JGpejYX4yCqlpJHVo85g+PE0nM
- 5XcR5z4h+QNxVeL7j+IO5Oha+JWVG1BusoVN3zFft0XuvfnovnsJnwgkiWquIZV3FiiTQ5978U7
- 79meJf8mdnwATVqaefG0/TUqMc+VgkF//SRXR+BEWU16egcidQ+VjcRSptYj4AZ8Gh/tlMgAfJn
- BlHjUrevwGDt4AaSqebwInozVAGMBJ7WAgM1Yf40aFwNkIZp0O/YQ/JrKY9eLp7h+94j5Em7jR+
- lcX06Mm/hpmWNgO0qbySN8Qrv03h10Z5PvNp98SfVttESChHni5UINR8FGZ0xnWhWUb7MgaYru1
- 64Oj8SB4pkAw8OV9OE
-X-Received: by 2002:a05:690e:191e:b0:66f:b0f7:5958 with SMTP id
- 956f58d0204a3-66fb6cb6334mr3775842d50.6.1788746397762; Sun, 06 Sep 2026
- 18:59:57 -0700 (PDT)
+ AKwUvBwhISKgKZ7C2GZndVdqpD02PuHJyhXPuX59qWmSMCiJbnH86qcaCPOAx8YzY906lXCv7zShtwyhjCF8@nongnu.org
+X-Gm-Message-State: AFuF++mqm/el1vlXKaENMVPgrUz9xgxUnylE75rVJSEbjHw1EQ6qudRk
+ f2Ez03QW+xNGbcXBqR90daXenF+LWudJB73uueqJt2E9r2pJ0qNVsMiep6AowSRF4Wb6Pr0sdVP
+ zyxdS+F3gwIw0ZOTko2OsyRc0c50NQJY=
+X-Gm-Gg: AYBFou2de0wfKqW2wXYWaRKre8esC4ARs5gEhYI6jiMwH3upo7r3eqkffaidnres/e8
+ tCTFHr0KEGXxpz4W2BztnuPAgrsR05rE87g8ZPOqyLWpJEwfBRCKjZ/fws12oYoZ7I+o1fPMqM5
+ YZFUIUwV/h2JOzKB/r8ncKGrjRIPI/tEoL0MzGRy9+JuJGWytVF6PICZVGVIK5rnB5Q0IiHKtL/
+ 8c5/GA3XzNi0g/X60H4s4w+SOSR81cBebW3lNG1zw5ENGTEuDh63twcrkTdwCFgFYKPYo3+YqkY
+ 1PcqKV5/SWklusywpBdrI+TWexE5GSF7slyoHc5xuuEviX5vAFjA/HHiWCFEWBk+U8Mjt7ZuKgb
+ o9vw4JBbvanprzfDd+y6S2FQIMvQ6D5K1HqL7aVtlUflvRNQLx0c8ReqzM8ySncI5lTwKGg9IfS
+ u4MEllfvKn1sjkOk4AaAy6Pzvs7YM=
+X-Received: by 2002:a53:d012:0:b0:66a:b15e:bb93 with SMTP id
+ 956f58d0204a3-66fb6d605fdmr2544848d50.13.1788748059166; Sun, 06 Sep 2026
+ 19:27:39 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260831133000.982059-1-liumingliang.dev@bytedance.com>
- <20260831133000.982059-2-liumingliang.dev@bytedance.com>
-In-Reply-To: <20260831133000.982059-2-liumingliang.dev@bytedance.com>
+ <20260831133000.982059-4-liumingliang.dev@bytedance.com>
+In-Reply-To: <20260831133000.982059-4-liumingliang.dev@bytedance.com>
 From: Joel Stanley <joel@jms.id.au>
-Date: Mon, 7 Sep 2026 11:29:45 +0930
-X-Gm-Features: AcwNN1V23c1kPMAFUaWEPk66EgbdprmVFqcJroVl-T7pE2Vshb1acPwRpIo_5PQ
-Message-ID: <CACPK8XfqEi8-hbdVLo0gtrsBrGYJhSFqkQmaF5QLb6at9uk7pA@mail.gmail.com>
-Subject: Re: [PATCH v2 1/3] target/riscv: Add experimental Zvabd extension
- support
+Date: Mon, 7 Sep 2026 11:57:28 +0930
+X-Gm-Features: AcwNN1WfmvzMZ69dvtEJC7ehjUvqaRiP4ezxDBKui0LJoE-ot9q9IAqmOLnmySA
+Message-ID: <CACPK8Xc4u-79Tcga3tw3PKj9g3Om79evM1qK38d9pfbVi9kzeg@mail.gmail.com>
+Subject: Re: [PATCH v2 3/3] tests/tcg/riscv64: Add tests for Zvabd extension
 To: Mingliang Liu <liumingliang.dev@bytedance.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, palmer@dabbelt.com, 
  Alistair.Francis@wdc.com, zhiwei_liu@linux.alibaba.com, liwei1518@gmail.com, 
- daniel.barboza@oss.qualcomm.com, chao.liu@processmission.com, 
- Zhibo Hong <hongzhibo@bytedance.com>
+ daniel.barboza@oss.qualcomm.com, chao.liu@processmission.com
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b135;
- envelope-from=joel.stan@gmail.com; helo=mail-yx1-xb135.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b132;
+ envelope-from=joel.stan@gmail.com; helo=mail-yx1-xb132.google.com
 X-Spam_score_int: -16
 X-Spam_score: -1.7
 X-Spam_bar: -
@@ -120,53 +118,74 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, 31 Aug 2026 at 22:59, Mingliang Liu
+On Mon, 31 Aug 2026 at 23:00, Mingliang Liu
 <liumingliang.dev@bytedance.com> wrote:
 >
-> From: Zhibo Hong <hongzhibo@bytedance.com>
->
-> The draft Zvabd extension provides vector integer absolute-difference
-> operations for image, video, and other data-processing workloads. It
-> introduces eight new instructions:
->
->   - vabd.vv, vabd.vx, vabdu.vv, and vabdu.vx support SEW values from
->     8 through ELEN, with SEW 64 requiring Zve64x.
->   - vwabda.vv, vwabda.vx, vwabdau.vv, and vwabdau.vx support SEW 8
->     and 16 and accumulate into a double-width destination.
->
-> This patch implement this instruction extension, including instruction
-> decoder, TCG translation, and helpers, etc.
->
-> The specification is under review at:
-> https://github.com/riscv/riscv-isa-manual/pull/3279
+> Co-Auther: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 
-Mention this implements 0.9 of the spec. It's notable that the opcodes
-(and other things) have changed since 0.7.
+Typo: Co-Author
+
+This should include a Signed-off-by from Daniel as well.
+
+Mention in the commit message that the assembler doesn't support the
+opcodes yet so instructions are hardcoded for the time being.
+
+Also worth mentioning that binutils/gas 2.47 has the 0.7 opcodes(!),
+so the test should never be built with that version, even once support
+is changed over to use the mnemonics.
+
+https://github.com/gnutools/binutils-gdb/commit/d3b84dac949ac10f8736c85253b4a1073d244ac1
 
 > Signed-off-by: Mingliang Liu <liumingliang.dev@bytedance.com>
+> ---
+>  tests/tcg/riscv64/Makefile.softmmu-target |   8 +
+>  tests/tcg/riscv64/test-zvabd.S            | 659 ++++++++++++++++++++++
+>  2 files changed, 667 insertions(+)
+>  create mode 100644 tests/tcg/riscv64/test-zvabd.S
+>
+> diff --git a/tests/tcg/riscv64/Makefile.softmmu-target b/tests/tcg/riscv64/Makefile.softmmu-target
+> index 6a219c306c..787fdaab40 100644
+> --- a/tests/tcg/riscv64/Makefile.softmmu-target
+> +++ b/tests/tcg/riscv64/Makefile.softmmu-target
+> @@ -71,5 +71,13 @@ EXTRA_RUNS += run-test-misa-w
+>  run-test-misa-w: test-misa-w
+>         $(call run-test, $<, $(QEMU) -cpu rv64$(comma)x-misa-w=true$(comma)c=true$(comma)v=true $(QEMU_OPTS)$<)
+>
+> +EXTRA_RUNS += run-test-zvabd
+> +ZVABD_CPU = rv64$(comma)v=true$(comma)vlen=256$(comma)x-zvabd=true
+> +CLEANFILES += test-zvabd
+> +test-zvabd: test-zvabd.o $(LINK_SCRIPT)
+> +       $(LD) $(LDFLAGS) $< -o $@
+> +run-test-zvabd: test-zvabd
+> +       $(call run-test, $<, $(QEMU) -cpu $(ZVABD_CPU) $(QEMU_OPTS)$<)
+> +
+>  # We don't currently support the multiarch system tests
+>  undefine MULTIARCH_TESTS
+> diff --git a/tests/tcg/riscv64/test-zvabd.S b/tests/tcg/riscv64/test-zvabd.S
+> new file mode 100644
+> index 0000000000..01db2fd7dc
+> --- /dev/null
+> +++ b/tests/tcg/riscv64/test-zvabd.S
+> @@ -0,0 +1,659 @@
+> +/*
+> + * Test the Zvabd vector absolute-difference instructions and the vabs.v
+> + * pseudoinstruction.
+> + *
 
-Assuming we follow the same convention as the kernel, include a
-Signed-off-by line from the author, followed by yours as the
-submitter.
+> +test_vabs_v:
+> +       vsetivli zero, 2, e8, m1, ta, ma
+> +
+> +       /* Load .arr_neg array in v1 */
+> +       la     t0,.arr_neg
+> +       vle8.v v1,0(t0)
+> +
+> +       /* vabs.v v2, v1 (vabd.vx v2, v1, x0) raw opcode */
+> +       .word   0x56106157
 
-> --- a/disas/riscv.c
-> +++ b/disas/riscv.c
+Palmer mentioned using .insn instead of .word. It is a little bit
+easier to check than the raw .word:
 
-> @@ -2417,6 +2423,8 @@ static const rv_opcode_data *decode_inst_opcode(rv_decode *dec, rv_isa isa)
->                  case 13: return &op_vclmulh_vx;
->                  case 14: return &op_vslide1up_vx;
->                  case 15: return &op_vslide1down_vx;
-> +                case 21: return &op_vabd_vx;
-> +                case 22: return &op_vabdu_vx;
+.insn r 0x57, 0x6, 0x2b, x2, x0, x1
 
-Should these be in numerical order?
-
-Otherwise, looks good.
-
-Reviewed-by: Joel Stanley <joel@jms.id.au>
-
-
->                  case 16:
->                      switch ((inst >> 20) & 0b11111) {
->                      case 0:
+I don't have a strong opinion either way.
 
