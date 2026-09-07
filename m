@@ -4,50 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 584E6C79FA3
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42B52C79FA1
 	for <qemu-riscv@archiver.kernel.org>; Mon,  7 Sep 2026 15:25:43 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x3bDW-0000ey-N5; Mon, 07 Sep 2026 11:25:06 -0400
+	id 1x3bDs-0000rT-HQ; Mon, 07 Sep 2026 11:25:28 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liumingliang.dev@bytedance.com>)
- id 1x3bDS-0000eW-Ci
- for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 11:25:02 -0400
-Received: from va-1-112.ptr.blmpb.com ([209.127.230.112])
+ id 1x3bDq-0000qX-Ul
+ for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 11:25:26 -0400
+Received: from va-1-114.ptr.blmpb.com ([209.127.230.114])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <liumingliang.dev@bytedance.com>)
- id 1x3bDP-00056S-Je
- for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 11:25:02 -0400
+ id 1x3bDp-0005Jz-Gk
+ for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 11:25:26 -0400
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- s=2212171451; d=bytedance.com; t=1788794685; h=from:subject:
+ s=2212171451; d=bytedance.com; t=1788794721; h=from:subject:
  mime-version:from:date:message-id:subject:to:cc:reply-to:content-type:
  mime-version:in-reply-to:message-id;
- bh=X1smG7YZrVv8w/+73atNrtl4NI3HBJ0T1S6dqZmUak8=;
- b=FxP1NkYEhc4Zw/lJA0QJh9wp4PQsXG1lOxzb/FwVQMPD3m/S90Fm3FXMzQuWPHVieOAx5+
- D4uPxqdZgIBWnf5SAoBS4kgVAIGWmT8UO8HCcTGCeb/mgtqPwWP7uXQnQvDPvdJKJF6QHa
- a+qD/i0nZWIGmRU77RKWREfb5jFlqgjVumWE2r7KnhWih2krr/QtlgkYfY4cOPfBWSa3wD
- 4rVtiXb6VypoYDnTsMVl8NnizFlqqu5ElJKBgr+4stqAxSeH+GoKjw4AH5Xk7eZIpoCZt/
- XK4AZZShA2C4/YZo0Qohz3TNvKLSdYP1wv+Z2eMjbG3t3+jCcODPYP6dEZwpkQ==
-Date: Mon,  7 Sep 2026 23:22:58 +0800
-Mime-Version: 1.0
+ bh=tUEe2j5ZSx1Auym7QjqH5VGVuiqOsBGJWO3fvxQy7/A=;
+ b=NFcnnHZTWGvGaFd0ycQqv+ee8MKvSTJZuVvKW6sTRi7G+ZXp9Tp5q7RwrLXF+0l/ypvvMo
+ MImskZRGmXVWYjIxLdv79FYc/7IkhTEKjRWEZbiQgRdEgfMAIWuDn2GP8n4oRq7VZIboWb
+ 0qtkP17DpC/2zvr5z3IHq3DHuaLp19T3I/xzuJwMmF2zSdbrCaJKiySlauOy3/ol7oQ3g1
+ Tw+Zd6LyV6tdnnJ3mFQuG8tB/QYwBbHIGq0FEh7xnperunvGzbfHknKAJjWEnxou8+7ctp
+ 5y0ZQWhBrbL9wXmIt8qnC8U6/tW9izX395x6hp2DAR8HloQUeOL4TW7s7gujqg==
+Subject: [PATCH v3 2/3] disas/riscv: Support vabs.v pseudo-instruction
 X-Original-From: Mingliang Liu <liumingliang.dev@bytedance.com>
-Subject: [PATCH v3 0/3] target/riscv: Add experimental Zvabd extension support
+Content-Type: text/plain; charset=UTF-8
+Date: Mon,  7 Sep 2026 23:23:00 +0800
+Message-Id: <20260907152301.1701394-3-liumingliang.dev@bytedance.com>
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.39.5
+References: <20260907152301.1701394-1-liumingliang.dev@bytedance.com>
 Cc: <qemu-riscv@nongnu.org>, <palmer@dabbelt.com>, 
  <Alistair.Francis@wdc.com>, <zhiwei_liu@linux.alibaba.com>, 
  <liwei1518@gmail.com>, <daniel.barboza@oss.qualcomm.com>, 
  <chao.liu@processmission.com>, 
  "Mingliang Liu" <liumingliang.dev@bytedance.com>
-From: "Mingliang Liu" <liumingliang.dev@bytedance.com>
-Content-Type: text/plain; charset=UTF-8
 To: <qemu-devel@nongnu.org>
-Message-Id: <20260907152301.1701394-1-liumingliang.dev@bytedance.com>
-X-Lms-Return-Path: <lba+26a9ed73b+da0120+nongnu.org+liumingliang.dev@bytedance.com>
-X-Mailer: git-send-email 2.39.5
+From: "Mingliang Liu" <liumingliang.dev@bytedance.com>
+In-Reply-To: <20260907152301.1701394-1-liumingliang.dev@bytedance.com>
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=209.127.230.112;
- envelope-from=liumingliang.dev@bytedance.com; helo=va-1-112.ptr.blmpb.com
+X-Lms-Return-Path: <lba+26a9ed75f+4f2623+nongnu.org+liumingliang.dev@bytedance.com>
+Received-SPF: pass client-ip=209.127.230.114;
+ envelope-from=liumingliang.dev@bytedance.com; helo=va-1-114.ptr.blmpb.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -69,52 +71,53 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This series adds support for version 0.9 of the draft RISC-V Zvabd
-extension. The extension provides vector integer absolute-difference
-instructions for image, video, and other data-processing workloads.
-It introduces eight new instructions:
+Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Signed-off-by: Mingliang Liu <liumingliang.dev@bytedance.com>
+---
+ disas/riscv-op.c.inc | 3 ++-
+ disas/riscv.c        | 6 ++++++
+ 2 files changed, 8 insertions(+), 1 deletion(-)
 
-  - vabd.vv, vabd.vx, vabdu.vv, and vabdu.vx support SEW values from
-    8 through ELEN, with SEW 64 requiring Zve64x.
-  - vwabda.vv, vwabda.vx, vwabdau.vv, and vwabdau.vx support SEW 8
-    and 16 and accumulate into a double-width destination.
-
-The specification is currently under review at:
-https://github.com/riscv/riscv-isa-manual/pull/3279
-
-The series implement this instruction extension, including instruction
-decoder, TCG translation, helpers, and tests, etc.
-
-Changes in v1:
-  - Added support for recognizing the vabs.v pseudo-instruction in the disassembler.
-  - Added tests for the eight Zvabd instructions based on Daniel's tests.
-
-Changes in v2:
-  - Order the switch cases numerically in patch 1.
-  - Use .insn instead of .word to encode instructions in patch 3.
-  - Refine the commit messages for patches 1 and 3.
-
-Mingliang Liu (2):
-  disas/riscv: Support vabs.v pseudo-instruction
-  tests/tcg/riscv64: Add Zvabd extension tests
-
-Zhibo Hong (1):
-  target/riscv: Add support for the Zvabd extension
-
- disas/riscv-op.c.inc                        |   9 +
- disas/riscv.c                               |  14 +
- target/riscv/cpu.c                          |   1 +
- target/riscv/cpu_cfg_fields.h.inc           |   1 +
- target/riscv/helper.h                       |  26 +
- target/riscv/insn32.decode                  |  10 +
- target/riscv/tcg/insn_trans/trans_rvv.c.inc |  45 ++
- target/riscv/tcg/tcg-cpu.c                  |   6 +
- target/riscv/tcg/vector_helper.c            |  56 ++
- tests/tcg/riscv64/Makefile.softmmu-target   |   8 +
- tests/tcg/riscv64/test-zvabd.S              | 659 ++++++++++++++++++++
- 11 files changed, 835 insertions(+)
- create mode 100644 tests/tcg/riscv64/test-zvabd.S
-
+diff --git a/disas/riscv-op.c.inc b/disas/riscv-op.c.inc
+index 07b56f5d52..425473ee61 100644
+--- a/disas/riscv-op.c.inc
++++ b/disas/riscv-op.c.inc
+@@ -491,9 +491,10 @@ OP(vaadd_vx, "vaadd.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm)
+ OP(vaaddu_vv, "vaaddu.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm)
+ OP(vaaddu_vx, "vaaddu.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm)
+ OP(vabd_vv, "vabd.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm)
+-OP(vabd_vx, "vabd.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm)
++OP(vabd_vx, "vabd.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, rvcp_vabd_vx)
+ OP(vabdu_vv, "vabdu.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm)
+ OP(vabdu_vx, "vabdu.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm)
++OP(vabs_v, "vabs.v", rv_codec_illegal, rv_fmt_vd_vs2_vm)
+ OP(vadc_vim, "vadc.vim", rv_codec_v_i, rv_fmt_vd_vs2_imm_vl)
+ OP(vadc_vvm, "vadc.vvm", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vl)
+ OP(vadc_vxm, "vadc.vxm", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vl)
+diff --git a/disas/riscv.c b/disas/riscv.c
+index 410ec1e565..eae1792032 100644
+--- a/disas/riscv.c
++++ b/disas/riscv.c
+@@ -103,6 +103,7 @@ static const rvc_constraint rvcc_j[] = { rvc_rd_eq_x0, rvc_end };
+ static const rvc_constraint rvcc_ret[] = { rvc_rs1_eq_ra, rvc_end };
+ static const rvc_constraint rvcc_jr[] = { rvc_rd_eq_x0, rvc_imm_eq_zero,
+                                           rvc_end };
++static const rvc_constraint rvcc_vabs_v[] = { rvc_rs1_eq_x0, rvc_end };
+ static const rvc_constraint rvcc_true[] = { rvc_end };
+ 
+ /* pseudo-instruction metadata */
+@@ -242,6 +243,11 @@ static const rv_comp_data rvcp_fsgnjx_q[] = {
+     { },
+ };
+ 
++static const rv_comp_data rvcp_vabd_vx[] = {
++    { &op_vabs_v, rvcc_vabs_v },
++    { },
++};
++
+ /* Convert compressed insns into normal insns via pseudo expansion. */
+ #define DECOMP(X)  &(const rv_comp_data){ &X, rvcc_true }
+ 
 -- 
 2.39.5
 
