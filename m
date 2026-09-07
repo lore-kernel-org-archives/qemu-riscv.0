@@ -4,128 +4,124 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F7A0C79FA0
-	for <qemu-riscv@archiver.kernel.org>; Mon,  7 Sep 2026 11:47:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5F5BC79F9E
+	for <qemu-riscv@archiver.kernel.org>; Mon,  7 Sep 2026 11:47:33 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x3XoS-0002uS-Vp; Mon, 07 Sep 2026 07:47:01 -0400
+	id 1x3Xo3-0002h3-Vy; Mon, 07 Sep 2026 07:46:36 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1x3XoG-0002kO-NH
- for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 07:46:49 -0400
+ id 1x3Xnz-0002gd-1Y
+ for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 07:46:31 -0400
 Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1x3XoD-0003Gh-MP
- for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 07:46:48 -0400
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+ id 1x3Xnw-0003ED-Ph
+ for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 07:46:30 -0400
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 687AnE9g2652808
- for <qemu-riscv@nongnu.org>; Mon, 7 Sep 2026 11:46:44 GMT
+ 687AmmQs3180715
+ for <qemu-riscv@nongnu.org>; Mon, 7 Sep 2026 11:46:26 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=1LQc3MHagbs
- qNP6Gfy/bvJe0yknu38X5VO+oSaaO4w8=; b=Pvl8E5oD9/g4FGMGdre9JP9oP51
- bvaOokE2xRslFkZxkbdHvbikuQb6HOMVli4/eora0VO656azj5eywm5yiSZVTGDn
- O7xZsPx0NAEcQ229Vb+u+4wODEYhQttVJkZIhBOiSeAnS1C268pHexoEGX8d4sHD
- FydK/jvw+jMPox9l6arYfm+HJReS93qVuvUcZCRrmMi8O1PnPT75AQSZ7cgfj0Gd
- C4oY6bZQAmqDmNuRjrbVD5hFIySl0hs6wrVB++tBGt7Ib4yPEoe5dxZsMdaDAmGy
- SMNvg6hodWv0o2JiAlpa1UTGEje8E0LpuZQTi/SpBLrm4sgNz5zf6fvhE+Q==
-Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com
- [209.85.222.200])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ghtty0fjx-1
+ cc:content-transfer-encoding:date:from:message-id:mime-version
+ :subject:to; s=qcppdkim1; bh=MfOh7ttXWdhkxG5r0SqLAEJyPpyfp4MVb+0
+ xcBgjsYw=; b=QyL+9DdkR8Uic3TfY96iweE0BIO/+Jpl3R3vZTWODQTM8yIag9I
+ WCERbQE5g8IUWpIliVKQAyHGyD3ESLQ36e3A995aRk4AYL8AnhPk2WilPIlzM1U9
+ pjWWM6WIelStxVI1TRZfiaJtSfOcF+lul+uGzEMwImgj4HD0QjkFW5Nx6cx2vTIS
+ fWWK9Xw2SWPRS1i0yyTWqNP81fzBKSmGotXe16PChEoo+NZjBs6aPZ2FEFzQmTl3
+ kkJfNSfbab0Rn7N/XL5dN6w3Z8P55jyWWQsmSx9p8iB31bh4OCp8/5mewFuhpv09
+ 332ZlID9SbCwLCSx8UnkgNPAHEvd2hmGNJw==
+Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com
+ [209.85.160.198])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ghsw20scj-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Mon, 07 Sep 2026 11:46:44 +0000 (GMT)
-Received: by mail-qk1-f200.google.com with SMTP id
- af79cd13be357-92e62e3459fso534706085a.0
- for <qemu-riscv@nongnu.org>; Mon, 07 Sep 2026 04:46:44 -0700 (PDT)
+ for <qemu-riscv@nongnu.org>; Mon, 07 Sep 2026 11:46:26 +0000 (GMT)
+Received: by mail-qt1-f198.google.com with SMTP id
+ d75a77b69052e-52ef04756caso67744031cf.1
+ for <qemu-riscv@nongnu.org>; Mon, 07 Sep 2026 04:46:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1788781603; x=1789386403; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=1LQc3MHagbsqNP6Gfy/bvJe0yknu38X5VO+oSaaO4w8=;
- b=A8aNQVk67dyoHgc0b8Ez7cFH8kmnnlmXCCbYH4TWbOz+mhgMPxBlz5TE7wYPss8yqC
- +tMCObS6F/rsl/ZbRwpiVxs3nhUJgjwB4hRjYviB9C8GwEJkGfUnYODpO4w958nNATLP
- 244FBylN1iyjZRuCJliN8OgyIOe/hd84TQpiBmD/mf7BXNcpE91YTAKlefxOoqYsjnO9
- /nkWy/781FdSEiRUdGW9n2+8VDcz9oElT/k6Y2xVAwNa4o0vZHqqz7Njgz5WRSWSGWL7
- 7fNNNN6UkET8s4xADBfndbQtB+8Ljgv8j6blXAQ5FXBqVxwKPjgs8KQoJM5R1laNItaE
- FsUg==
+ d=oss.qualcomm.com; s=google; t=1788781585; x=1789386385; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=MfOh7ttXWdhkxG5r0SqLAEJyPpyfp4MVb+0xcBgjsYw=;
+ b=RQv45dcI96TpR20Uf4uFrHh43aYY6+8MFY8v2X9bLSGOr2I9dVbiec4rqvhECP5kr/
+ cLkeoWemztF76vrS8WK6Pc4wrUZZlvpAZQ/nY87B6wOKLBh3chQaUoXVM7z7nMD30mRQ
+ W0gsw99KumdtHogOZeL4T/OBGP9xhrkoQnsAyW613H/RdlXMdQKkKhq4kBd3zhIMacwl
+ XKZv4TmhoA2Qj3Ps0q3c9PljM7xVgMcHEIp63RkjpWuyFoCKAsGUdlPI3a6t9zfnRMFF
+ ZLOSek5b+58bF5r3ZqOgOGgEH/ZcrFjMgCaWJHA0uZMhsskDQk8ydYdgzipvd0hWwMXr
+ 31ZA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788781603; x=1789386403;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=1LQc3MHagbsqNP6Gfy/bvJe0yknu38X5VO+oSaaO4w8=;
- b=ZHfcbYj3w0cDN8DjWP/eDfmjc5Kf4dZ50nB2e7OwTDjtBoXWiO+LCeNvebM4L7f+sN
- NCJuZieCs4ANLgzYVZ9xWSyuTKZV/xZlKLfwktNnhHU5pdlDHO8ocjfVZqc1+fWPRfOC
- K53h7hV+n3JPsJjelevPi/TABf8fJGah0sziFwCdWE7oVu0I/w+2fln+KHd3cMGjK67a
- ErUh7VNPXd215mDxjpJHXFaiPdbFv0BIdDWrMOcDZK6WRG09Bylwplo8vVH0wz1S47SQ
- SY/F93iKCvzUKVBCMMmbVbGDHG2a/q31dgMbFVrP+wbKi1YHJrc4fDgFGSOAp0L15RTA
- MjtQ==
-X-Gm-Message-State: AFuF++nBNnmDtr2w/E7SM/yqhBRM65Cm/1oTXML5o1978TdW2Hbm1xru
- WbajdAqSrKeHC+NEb4qcQXeu4jmCrT/fuGX4otuyozIdTWL+Pmo7uwMZUMX4ieIoD3Pklp9egio
- xP8o1gnQ0q76AztivrhUg4wnK4Nn2euduRqhqYE6WV1kPurArEhmel1/Y+A==
-X-Gm-Gg: AYBFou1zdCo3/9BTGvzDACHKLNcRRRK85kHViZ7UKppWOavUlwnxiptvmb7KLT1iBd3
- LPvrleJDqCwWxzQGaUfEjXp0h/mzn0d34ak564UYm66/eLY9L1oNHrSO/F7USUxiTkv97Yhlf/t
- BNWLLYXCdX32oPUsfu52aON9WPvPiZG87m+2E1sxWwRmvQDzAGxdlur3bmIrQeqbYLIGo+5q0zv
- oaexlRVv6BLYp7MK1x7CjsnslA9lhbYM2T5f16tRLsACy75hgjlq5oR+Tx+gYosJrPIzxvgNUx1
- 50paFoJywdVuNhEQPWdUa30XRavzckEZPpJPCwZApwxNHIldo8biH5v889xfJhAtRfO8h+xUYVS
- zhv+9iPj9BlzLDeyfdZGBBx2p/cKFj/lCGWmJ
-X-Received: by 2002:a05:620a:5229:b0:936:afa0:3661 with SMTP id
- af79cd13be357-939804a386cmr1758002385a.36.1788781602991; 
- Mon, 07 Sep 2026 04:46:42 -0700 (PDT)
-X-Received: by 2002:a05:620a:5229:b0:936:afa0:3661 with SMTP id
- af79cd13be357-939804a386cmr1757996185a.36.1788781602375; 
- Mon, 07 Sep 2026 04:46:42 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1788781585; x=1789386385;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=MfOh7ttXWdhkxG5r0SqLAEJyPpyfp4MVb+0xcBgjsYw=;
+ b=j74V5yEJfojvYr2AOBgush5RhNrMOPa0SNXfUwwPS82ASMiGx1qPrVspEFwjhdEazV
+ PhcKqJ/cwfEJFJ7rf5qjN6BZImn91uoJQcXkkudfOB7R4TM+lo8voV2j/x+OHZVngT0b
+ o4DKJOSIsymh87Mg3+2WbIo3T+LOq8Om9r45yJ4fltSPUzwITvH1TZt0pG/za5OwwNUp
+ scAXFf65NVxaVEwUFTaWZ9337mJhuqWMswDR4vIUJdONhsikS4KWcbV06Ww1+W5Ftyvi
+ leiTgeen844C65+UqzmVz5O/F8FBqKkfjMnsbkyqC9CqEtDCFlYHzG7lPPXCUqfNB/2m
+ kTiw==
+X-Gm-Message-State: AFuF++mTL6OWmcqdHZTF/XTAtb5PbU2OSMuZ0Irje8pYrnqbauRjig+C
+ R5REQPpm7OWlWk95BKEtCNKXh2y6JjhGiWoNwaAxO3uZKiQkrTTlHgvDkWvcbZ1VvYP0FOsqVca
+ V4XOnD08ZqQYSZHDAraw2wS8Sud9ud4E7B8+5oure+R3OEVDy97jom34mKw==
+X-Gm-Gg: AYBFou3Ihcv1pD/9K364bZ/rCbKZ/b+6FOdQvGNKvgAxGXZxAAGJ4lBV6beknMDueGi
+ aErY3snhodzd6XThoHO/3W8mbhJm2iQLOkAnWPmuC4xKeL0G2oiPxopVmYkIoPt3ftGFD1oUxUw
+ A1ZoptNOWegwlW0F19BCaMime/hTANNprU6QNjVGxbV4+nzlm/0XnwqynjszzVZmpAn6z442s4a
+ 73aO4CMikm+GolBNevqipzOn0FLFsDwtZUTsQpk9vMoSYUWsoLMKEy8KIDDwhEvUvIsrSWbEnmY
+ OJmYTc68+JnDgoVjSfaXgwJ6TO1q56tfAmOu7TCFLw+7M2/QpC7iS7ulNvll8cbwgX2m0zNadmk
+ dblncuf1pnkLAg3vXQpMEDnUA3ArCXibmGQfy
+X-Received: by 2002:a05:622a:17c7:b0:52e:2e04:44f2 with SMTP id
+ d75a77b69052e-530548c8f29mr286564741cf.20.1788781585077; 
+ Mon, 07 Sep 2026 04:46:25 -0700 (PDT)
+X-Received: by 2002:a05:622a:17c7:b0:52e:2e04:44f2 with SMTP id
+ d75a77b69052e-530548c8f29mr286564051cf.20.1788781584556; 
+ Mon, 07 Sep 2026 04:46:24 -0700 (PDT)
 Received: from QCOM-UWl2o8bcGT.qualcomm.com ([177.18.66.131])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-91040679e13sm89834876d6.26.2026.09.07.04.46.40
+ 6a1803df08f44-91040679e13sm89834876d6.26.2026.09.07.04.46.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 07 Sep 2026 04:46:41 -0700 (PDT)
+ Mon, 07 Sep 2026 04:46:24 -0700 (PDT)
 From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
  zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Palmer Dabbelt <palmer@dabbelt.com>
-Subject: [PATCH v8 7/7] tests/tcg/riscv64: add sdext "not on Debug mode"
- sigill tests
-Date: Mon,  7 Sep 2026 08:46:14 -0300
-Message-ID: <20260907114615.1609913-8-daniel.barboza@oss.qualcomm.com>
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Subject: [PATCH v8 0/7] riscv: add initial sdext support
+Date: Mon,  7 Sep 2026 08:46:07 -0300
+Message-ID: <20260907114615.1609913-1-daniel.barboza@oss.qualcomm.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260907114615.1609913-1-daniel.barboza@oss.qualcomm.com>
-References: <20260907114615.1609913-1-daniel.barboza@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=QNBYgALL c=1 sm=1 tr=0 ts=6a9ea424 cx=c_pps
- a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=CQQxcbsX5Byh3TlVSSGwig==:17
+X-Proofpoint-ORIG-GUID: 4nESXAlUX-XpvhrOLe1CcFuKs_SY4QLh
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA3MDEzMCBTYWx0ZWRfX0c9YoFEVw1/N
+ a6ZCMLlgovYcwf8NgDHo8w2k2vVDFqLSG+Xdan6sNIUw9gdCUEAvFIlpZ20dIy6bGlFZH0BT0Hu
+ Kw/rnJUrc84mSWf0ZWl0x98AEGdP5Jk=
+X-Authority-Analysis: v=2.4 cv=eKwjSnp1 c=1 sm=1 tr=0 ts=6a9ea412 cx=c_pps
+ a=mPf7EqFMSY9/WdsSgAYMbA==:117 a=CQQxcbsX5Byh3TlVSSGwig==:17
  a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22 a=EUspDBNiAAAA:8
- a=FibE5N0eoUlo320SlN0A:9 a=PEH46H7Ffwr30OY-TuGO:22
-X-Proofpoint-ORIG-GUID: Ko8sFhwkOzu1lYXHcxJEVXzYkcLTpktQ
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA3MDEzMCBTYWx0ZWRfX4aaedN1Eolbm
- 2TgCW+l6SLckboF/og864Ol0ARFoREzJi0P0cW8Yw3j8CDicp/D+gfGh/SrJPX8sBMm7iXG4EO/
- vTgQQa39VG2mwWy52d7qNLr99M1/NiM=
-X-Proofpoint-GUID: Ko8sFhwkOzu1lYXHcxJEVXzYkcLTpktQ
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA3MDEzMCBTYWx0ZWRfX+uZzKrx1GDjV
- 4U6Gg9bERN9Ep11LvdxLEOIj1xGfVVgcYKzYagZMTJT47yGylHGC/WQEpMVO3Kv5W9Og9mFHKOl
- QP6zcQktg0Cr5poWxybMMnqg71ugvr62D/PvGIzXhe9Y6Rcbq9NZIpFu6e3lbtWfG81aLJRxOxS
- ziydbQ0dLfJWgdaNKc/+rrvQuaYi9oavflNfIo2YhNp7wab1DrpkBIxrKH84zaZsrWiuIBL8M1p
- mZC5Ia1ECjg8iN25R8nCMzOKqOWwaOcPNH/Thz1OcdeHSCg6wjTphsK/huaveleRGlQSpHkSkiu
- k2xg3aNvRPmf4w+nyAvIYF28uJ/06pENsyy77plorASZkXsNpE7SjkMn1ErItTZbkprWqKuIExu
- 05+mzu7zQGf+s1UfAlORYJPq1JHC+EANy4FgY4CrPE2GuOd/ZWGtSNxFkgUEAWafBuQKmCSXZUi
- fmRplcGMbtVpEHigdow==
+ a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22 a=VwQbUJbxAAAA:8
+ a=EUspDBNiAAAA:8 a=1X1KHL8RLlM2lqwBaMMA:9 a=dawVfQjAaf238kedN5IG:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA3MDEzMCBTYWx0ZWRfX01tmEwNvkZJ/
+ CYMpzTKXJ7exgI6w82vrBWcadgk1ioCa/y+ldw0/jcPfuoKx7O51H4Fi0lGCBwjXRRNlRuPd8gg
+ DwwO+10sDzZJtshINAe84WO3ehu376DYyI/v0qoIPZ9kr285yYOT4Vt+uCjxFNeGjWBUl0VpxkG
+ hkmZr5/AMZrEIzukjpWpK6kDoC/uOuvo8Cxm64dKVW/zMwbhw9FdJuya3oQDq3hq7Hsm9AhavQU
+ 7Et+pRwidJGWyrl2aDkwKTtROvGVyIjrAtYOPJP+TKh7rO9iEOM05W0Txsmz1DNs0bmq9prA8Mt
+ P2gNJCa2qhpXL+dPpea779SgmV16aAK+hci0rnZbA12gXudJhe0XYjC1hF28E9eo4aiGnlZOUG9
+ tifjCz0yD85pEqFPQA2QzjOkDWWK7OyIAXxV2z0HyL0bBrA4BClmwwZVz93sDH6uTWSNPcc4GP2
+ pnxTlzA4RX35UlHRSLg==
+X-Proofpoint-GUID: 4nESXAlUX-XpvhrOLe1CcFuKs_SY4QLh
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-07_03,2026-09-07_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 spamscore=0 suspectscore=0 phishscore=0 priorityscore=1501
- lowpriorityscore=0 adultscore=0 clxscore=1015 bulkscore=0 impostorscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609070130
+ bulkscore=0 lowpriorityscore=0 malwarescore=0 priorityscore=1501
+ suspectscore=0 clxscore=1015 adultscore=0 spamscore=0 phishscore=0
+ impostorscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2609070130
 Received-SPF: pass client-ip=205.220.168.131;
  envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
 X-Spam_score_int: -27
@@ -134,7 +130,7 @@ X-Spam_bar: --
 X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -150,129 +146,51 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Adding proper TCG automated tests to sdext CSRs requires enabling
-gdbstub support for riscv64, which we don't have, since the nature of
-the CSRs added is that they run in a higher privilege than M mode.
+Greetings,
 
-DCSR has bits to allow for context switching from other modes to Debug
-mode, but those bits must be set via an external entity (e.g. gdb)
-beforehand.
+This version is a simple rebase with master, where a trivial conflict
+with tests/tcg/riscv64/Makefile.softmmu-target was solved, and with my
+S-o-Bs on patches 1-6. 
 
-What we can do for now is a "negative" TCG test to ensure that we'll
-throw illegal insn traps when trying to write sdext CSRs in machine
-mode.
+No other changes made.  Patches based on master.
 
-Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
----
- tests/tcg/riscv64/Makefile.softmmu-target |  5 ++
- tests/tcg/riscv64/test-sdext-sigill.S     | 83 +++++++++++++++++++++++
- 2 files changed, 88 insertions(+)
+Changes from v7:
+- Added my S-o-B in patches 1-6
+- Patch 7:
+  - fixed conflict with Makefile.softmmu-target
+- v7 link: https://lore.kernel.org/qemu-devel/20260831141007.353854-1-daniel.barboza@oss.qualcomm.com/
+
+Chao Liu (6):
+  target/riscv: add sdext debug CSRs state
+  target/riscv: add sdext Debug Mode helpers
+  target/riscv: add dret instruction
+  target/riscv: add sdext enter Debug Mode on ebreak
+  target/riscv: add sdext single-step support
+  target/riscv: add sdtrig trigger action=debug mode
+
+Daniel Henrique Barboza (1):
+  tests/tcg/riscv64: add sdext "not on Debug mode" sigill tests
+
+ include/exec/translation-block.h              |   4 +-
+ target/riscv/cpu.c                            |   7 +
+ target/riscv/cpu.h                            |   9 ++
+ target/riscv/cpu_bits.h                       |  33 +++++
+ target/riscv/cpu_cfg_fields.h.inc             |   1 +
+ target/riscv/helper.h                         |   3 +
+ target/riscv/insn32.decode                    |   1 +
+ target/riscv/machine.c                        |  20 +++
+ target/riscv/tcg/cpu_helper.c                 |  91 +++++++++++++
+ target/riscv/tcg/csr.c                        | 126 ++++++++++++++++++
+ target/riscv/tcg/debug.c                      |  59 +++++++-
+ .../tcg/insn_trans/trans_privileged.c.inc     |  24 ++++
+ target/riscv/tcg/op_helper.c                  |  70 ++++++++++
+ target/riscv/tcg/tcg-cpu.c                    |  19 +++
+ target/riscv/tcg/translate.c                  |  15 ++-
+ tests/tcg/riscv64/Makefile.softmmu-target     |   5 +
+ tests/tcg/riscv64/test-sdext-sigill.S         |  83 ++++++++++++
+ 17 files changed, 564 insertions(+), 6 deletions(-)
  create mode 100644 tests/tcg/riscv64/test-sdext-sigill.S
 
-diff --git a/tests/tcg/riscv64/Makefile.softmmu-target b/tests/tcg/riscv64/Makefile.softmmu-target
-index f2c75abd57..0a36376f85 100644
---- a/tests/tcg/riscv64/Makefile.softmmu-target
-+++ b/tests/tcg/riscv64/Makefile.softmmu-target
-@@ -85,5 +85,10 @@ run-test-vle32ff: test-vle32ff
- 	$(call run-test, $<, $(QEMU) -cpu rv64$(comma)v=true $(QEMU_OPTS)$<)
- test-vle32ff: CFLAGS += -march=rv64gcv
- 
-+EXTRA_RUNS += run-test-sdext-sigill
-+SDEXT_CPU = rv64$(comma)sdtrig=true$(comma)sdext=true
-+run-test-sdext-sigill: test-sdext-sigill
-+	$(call run-test, $<, $(QEMU) -cpu $(SDEXT_CPU) $(QEMU_OPTS)$<)
-+
- # We don't currently support the multiarch system tests
- undefine MULTIARCH_TESTS
-diff --git a/tests/tcg/riscv64/test-sdext-sigill.S b/tests/tcg/riscv64/test-sdext-sigill.S
-new file mode 100644
-index 0000000000..80a6c06465
---- /dev/null
-+++ b/tests/tcg/riscv64/test-sdext-sigill.S
-@@ -0,0 +1,83 @@
-+/*
-+ * RISC-V sdext extension "SIGILL" test: check if sdext CSRs
-+ * and 'dret' will throw SIGILLs outside of Debug Mode.
-+ *
-+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ */
-+
-+.equ CSR_DCSR,      0x7b0
-+.equ CSR_DPC,       0x7b1
-+.equ CSR_DSCRATCH0, 0x7b2
-+
-+	.option norvc
-+	.text
-+
-+	.global _start
-+
-+_start:
-+	la t0, trap_handler
-+	csrw mtvec, t0
-+
-+	dret
-+	j _fail
-+
-+	li t0, 1
-+	csrw CSR_DPC, t0
-+	j _fail
-+
-+	li t0, 1
-+	csrw CSR_DSCRATCH0, t0
-+	j _fail
-+
-+	li t0, 1
-+	csrw CSR_DCSR, t0
-+	j _fail
-+
-+	li a0, 0
-+	j _exit
-+
-+_fail:
-+	li a0, 1
-+
-+/* Exit through the semihosting SYS_EXIT_EXTENDED call with a0 as the code. */
-+_exit:
-+	la	a1, semiargs
-+	li	t0, 0x20026	/* ADP_Stopped_ApplicationExit */
-+	sd	t0, 0(a1)
-+	sd	a0, 8(a1)
-+	li	a0, 0x20	/* TARGET_SYS_EXIT_EXTENDED */
-+	.balign	16
-+	slli	zero, zero, 0x1f
-+	ebreak
-+	srai	zero, zero, 0x7
-+	j	.
-+
-+
-+	.balign	4
-+trap_handler:
-+	csrr	t4, mcause
-+	la	t5, trap_mcause
-+	sd	t4, 0(t5)
-+	csrr	t4, mtval
-+	la	t5, trap_mtval
-+	sd	t4, 0(t5)
-+	csrr	t4, mepc
-+
-+	/*
-+	 * Skip 2 insns (8 increment in mepc) to skip both the
-+	 * insn that caused the trap and the "j  _fail" insn
-+	 * that follows it.
-+	 */
-+	addi	t4, t4, 8
-+	csrw	mepc, t4
-+	mret
-+
-+	.data
-+	.balign	8
-+semiargs:
-+	.space	16
-+trap_mcause:
-+	.space	8
-+trap_mtval:
-+	.space	8
 -- 
 2.43.0
 
