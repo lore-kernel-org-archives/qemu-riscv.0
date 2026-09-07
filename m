@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3E7FC79FA0
-	for <qemu-riscv@archiver.kernel.org>; Mon,  7 Sep 2026 17:14:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF854C79FA1
+	for <qemu-riscv@archiver.kernel.org>; Mon,  7 Sep 2026 17:14:12 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x3ctq-0001y8-8r; Mon, 07 Sep 2026 13:12:54 -0400
+	id 1x3ctz-00027U-Bl; Mon, 07 Sep 2026 13:13:03 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <eblot.ml@gmail.com>)
- id 1x3cZp-00054F-TJ
- for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 12:52:17 -0400
-Received: from mail-wr1-f47.google.com ([209.85.221.47])
+ id 1x3cRE-0007QD-D6
+ for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 12:43:20 -0400
+Received: from mail-wr1-f44.google.com ([209.85.221.44])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <eblot.ml@gmail.com>)
- id 1x3cZn-0004zr-Nv
- for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 12:52:13 -0400
-Received: by mail-wr1-f47.google.com with SMTP id
- ffacd0b85a97d-482dd6ee390so4316072f8f.3
- for <qemu-riscv@nongnu.org>; Mon, 07 Sep 2026 09:52:11 -0700 (PDT)
+ id 1x3cRC-0002pf-7G
+ for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 12:43:20 -0400
+Received: by mail-wr1-f44.google.com with SMTP id
+ ffacd0b85a97d-48441a2ba14so3293451f8f.1
+ for <qemu-riscv@nongnu.org>; Mon, 07 Sep 2026 09:43:17 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788799930; x=1789404730;
+ d=1e100.net; s=20251104; t=1788799396; x=1789404196;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=SvxLkYLFxBz+kmta5sRtklppBkoMZNtdkurTxLQZymc=;
- b=UTNiOAZYoPzKdCC4FmQDlkLqJ7+dZZh2Fzt3MAcKxeHsW3y+Yw7ken1DStf/vEOA06
- 52/8fPXA43DOIk4tWnTeLudQtvq62newIaRgbQ8ll+skJc4FejWHdV1GEJC/Y5eRQo6D
- Jb2TYnEYY0UCrqP8hYcKiPgWgiBKy9ksT9Z+ezlMpMNdJ8JKPjbiItLa1gR9tOxaD/u2
- cDCkpnCs//s3Q2k1892OkR9xaM/+fASj0PmJBLReflaQCRkDuzKEAOOQhB+6TUNMej5h
- a3yJXZO2+NVTipX17Zrw6IvaGbUd8+WTkpphFnsj5DPOWYOrIhzU+w56s5XU1HZSChMR
- LGnQ==
+ bh=ojXOoPy7qb9Ji3StIqOoikH1Y+fN6ya8UhzSWcfVEz4=;
+ b=qkdPFFWdlCdP24+QgOcRIxM/4qu0qty6Z/Jzv4ixg9wahL4SYin2Iy7YtlMUCSXc3o
+ avdNltuymF4FM23w8FLLS+ziFj/XbZ229s+Gs6ZYDp0ZosoauX9QOf3mGIETXLEwtevF
+ cY4dyiK77yNMGVNGrhmAGLDFYGbRcGY1N3kxUPDbn/6QHcIsXKOIC3xXLthA/OCKtrkC
+ VEMVo93EN6IvnwgUuvnUS/TuK1w7WUSvDfgXNd5ni+eXdUT5mCr6zQnVxNi8gSba2NV1
+ h5Z1jorMsVxrwT1UP1C5hBjeV/LssKGmeYuQxYsg+7tfzaBGsNr2/h+mq7UH3A/DEb8h
+ yDsQ==
 X-Forwarded-Encrypted: i=1;
- AKwUvBy7kvKR+OiwkQnc8UFL6r06Up47l3xnHiVIJq0Rxd4icPahbn0phsqjf9Fm8pPdPvBtlD/NMH7/sGWH@nongnu.org
-X-Gm-Message-State: AFuF++l5jHfv4y40SPgpC5yFClCkfAs18dKskxb1Zd6tsV+OjORwo5W4
- N2dYLvcLdMvD1sRgH/LNSF9QNk4X4AtfIFcyzzkMBM0dyqrenp8HzZ8cr6EcIqku
-X-Gm-Gg: AYBFou2T0GVYZZvN0AYedfnH5Qh2yVtqPRB5rHpowO5CxQlx+ga3cIyZWR061uyVMkZ
- h8okSfZB45/U2Y+PXrMbjkWFy/qyCm0Vdq3gCGmepKo9tYcKNxhayoz7cdnQEApD613P3aBxOkX
- ccD8VkjTcLe119n8+xefFO9eXVQKBTgSUTlpfNmoS2XoZ5RyKOv5uGSRoipYme68riabGbZnPpZ
- Z0Bxo/ZNKNbE1uMpws3OdoraW4YhF4+9QF9xwmRi/Ddtat4G+ByM7qMCH6vpDSm9SBYCT0M0K1k
- 3GMd1WIXHehoQe+gt2MwZIMdmj+TgCPVvPC7HkGOvr/eU9px+DxAxbpFlaUWHCrVk3tKHFi5v/0
- 0DrediLb5ti4pEoJk5hphYJ/FU472vDRfrBINxHVEPHD9yRE/BrlY+zQVmSzaRGFu4er/J1GqL9
- 0DJWBhrayVmkxq3TzA041XUiF5pnt2XsAavxGtomVHMlAPHkPo8xmEPZyzbh3SSypMl6S4zc6Rk
- kJKZNuXg9e7Xw2LUV5rxvyN8Fiz0n7wSK8=
-X-Received: by 2002:a05:600c:c173:b0:49c:cedc:3c36 with SMTP id
- 5b1f17b1804b1-49cf82a514cmr244391835e9.16.1788799930026; 
- Mon, 07 Sep 2026 09:52:10 -0700 (PDT)
+ AKwUvBzcUsZ1sYj1MUnZKYnfeeTL21yc1E+88RjNeNvNd8orUAPFPMEHjVIWUFoflSuJrk6WbYXubuifIFTY@nongnu.org
+X-Gm-Message-State: AFuF++l/OmAW0edWvYtyRO1wSrWZkVXD167/o1lKJGF+5T0/kAEhNHkv
+ uJ3sbzs863L0YqGQjs2Gy/aE14XDaqwg5iM7M+xT5oZ30wwW0nxlpBbk
+X-Gm-Gg: AYBFou2m2q1qkbvZgOcSH3LDT9drmuU6tfUOUXODy9DnrfUnW9dSpSNEfDfw7v8jGEl
+ 6ONilVX+rYOotN0aexvrvxLhWQp1ps5cL41bdZMQOLYzLAA3QCcJIAgAvd0iKGD5y/ykSivSsQ6
+ 87F0yjT9ZPN264jTxNNn93suXdK+EXM6SlFT+QtP3JCbhf7aob19rbMOaFl+BOn0awkPXh7Wz5t
+ sWJeWRsTqv8xxfXb5Zzr64Y4gSFOhYeZACz3xqDpiRVABM0EwLaVnTRp0V30LwJu+0FbqeJYCh0
+ eKOvoYXAvpx5XKeMH8FoIwmmrgYat3R0acK/DZM37t9EN4EN7BZN8XIhTec0o+Mi7hhXOy5MLJk
+ udbDZtr5zX9GpwF04fkEWj7KUcCBcYBoKjU0YxNYqjOFmnLCWjb5pTWPzVpEKL9MR3wDsYx9G98
+ 8EV85SYsi4xnEO6BKggasLfI2CuvG6rsDh2t+ZJj7XKh5bwBjgc/U4Y0vEGm5dK341GgNlb3zpf
+ aEHLD/aLMiWDQYGf9svZGEyz9hgtgrfBVNPS40bfNy2pA==
+X-Received: by 2002:a05:6000:1863:b0:485:8a46:704c with SMTP id
+ ffacd0b85a97d-4858a46716bmr21823339f8f.30.1788799396182; 
+ Mon, 07 Sep 2026 09:43:16 -0700 (PDT)
 Received: from localhost (89-93-216-19.hfc.dyn.abo.bbox.fr. [89.93.216.19])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49cf772692dsm383936695e9.10.2026.09.07.09.52.09
+ ffacd0b85a97d-4858ac2b4cdsm28550376f8f.16.2026.09.07.09.43.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 07 Sep 2026 09:52:09 -0700 (PDT)
-Date: Mon, 07 Sep 2026 18:42:40 +0200
-Subject: [PATCH 50/50] tests/functional/arm: minerva: add BMC boot test
+ Mon, 07 Sep 2026 09:43:15 -0700 (PDT)
+Date: Mon, 07 Sep 2026 18:41:54 +0200
+Subject: [PATCH 04/50] hw/i2c: pca954x: drop unused header inclusions
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260907-bmc-minerva-v1-50-0d83ad610c3b@free.fr>
+Message-Id: <20260907-bmc-minerva-v1-4-0d83ad610c3b@free.fr>
 References: <20260907-bmc-minerva-v1-0-0d83ad610c3b@free.fr>
 In-Reply-To: <20260907-bmc-minerva-v1-0-0d83ad610c3b@free.fr>
 To: qemu-devel@nongnu.org
@@ -77,15 +77,15 @@ Cc: =?utf-8?q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>,
  =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>, 
  Emmanuel Blot <emmanuel.blot@free.fr>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1788799323; l=2482;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1788799319; l=840;
  i=emmanuel.blot@free.fr; s=20260602; h=from:subject:message-id;
- bh=zMnHp1SdNieEAjweeitFky57rPPnAgy18OpmLaUpJ1g=;
- b=V1QzQMxFouIxH4+6g0pVsz7I5wTEN7pR2ggQuv3Iq8sMs0tlCTfPc+Z4JyM62A5ZZPXCfz4/Y
- BQs9aZ1zMwsC5KjI+t1YSLVMlBc+KUKDXGAHdGYkT58OSPpETyxitFy
+ bh=uUIqo2cMsRAcBY+czFTMxvhiWXutmm3Zl9xFpRFXck0=;
+ b=zDu2jnqnvbVCx2F+4Yl7UpI+XoysiLJwJphorKoCApt7XdSoDeuVqvz8LYcgIUrNG58L4m+OM
+ optoI6Xt6vcBCMKQws3B6b64hdvAB9MjyaauK3l2NPxwly6BDC2SHWC
 X-Developer-Key: i=emmanuel.blot@free.fr; a=ed25519;
  pk=0qFrZ21FAAN8OfVsSoVcCFTk/NMYOWzxJz4paSAVm0g=
-Received-SPF: pass client-ip=209.85.221.47; envelope-from=eblot.ml@gmail.com;
- helo=mail-wr1-f47.google.com
+Received-SPF: pass client-ip=209.85.221.44; envelope-from=eblot.ml@gmail.com;
+ helo=mail-wr1-f44.google.com
 X-Spam_score_int: -15
 X-Spam_score: -1.6
 X-Spam_bar: -
@@ -112,74 +112,34 @@ From:  Emmanuel Blot via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Add a functional test booting the Facebook Minerva BMC machine.
-
-Note: The boot image currently lives on a personal fork; a TODO in the
-test notes it should be relocated under legoater/qemu-aspeed-boot before
-upstreaming.
+The qapi/error.h, hw/core/sysbus.h and qemu/module.h headers are
+included but not used by i2c_mux_pca954x.c. Remove them.
 
 Signed-off-by: Emmanuel Blot <emmanuel.blot@free.fr>
 ---
- tests/functional/arm/meson.build            |  2 ++
- tests/functional/arm/test_aspeed_minerva.py | 30 +++++++++++++++++++++++++++++
- 2 files changed, 32 insertions(+)
+ hw/i2c/i2c_mux_pca954x.c | 3 ---
+ 1 file changed, 3 deletions(-)
 
-diff --git a/tests/functional/arm/meson.build b/tests/functional/arm/meson.build
-index 61b00932db..dd1ddf7f6f 100644
---- a/tests/functional/arm/meson.build
-+++ b/tests/functional/arm/meson.build
-@@ -16,6 +16,7 @@ test_arm_timeouts = {
-   'aspeed_bletchley' : 480,
-   'aspeed_catalina' : 480,
-   'aspeed_gb200nvl_bmc' : 480,
-+  'aspeed_minerva' : 480,
-   'aspeed_rainier' : 480,
-   'bpim2u' : 500,
-   'collie' : 180,
-@@ -51,6 +52,7 @@ tests_arm_system_thorough = [
-   'aspeed_bletchley',
-   'aspeed_catalina',
-   'aspeed_gb200nvl_bmc',
-+  'aspeed_minerva',
-   'aspeed_rainier',
-   'bpim2u',
-   'canona1100',
-diff --git a/tests/functional/arm/test_aspeed_minerva.py b/tests/functional/arm/test_aspeed_minerva.py
-new file mode 100644
-index 0000000000..925a82b139
---- /dev/null
-+++ b/tests/functional/arm/test_aspeed_minerva.py
-@@ -0,0 +1,30 @@
-+#!/usr/bin/env python3
-+#
-+# Functional test that boots the ASPEED machines
-+#
-+# Copyright (c) 2026 Meta Platforms, Inc. and affiliates.
-+#
-+# SPDX-License-Identifier: GPL-2.0-or-later
-+
-+from qemu_test import Asset
-+from aspeed import AspeedTest
-+
-+
-+class MinervaMachine(AspeedTest):
-+
-+    # TODO: the boot image currently lives on a personal fork; move it under
-+    # legoater/qemu-aspeed-boot before upstreaming.
-+    ASSET_MINERVA_FLASH = Asset(
-+        'https://github.com/eblot/qemu-aspeed-boot/raw/refs/heads/minerva-bmc/images/minerva-bmc/openbmc-20260720025047/'
-+            'obmc-phosphor-image-minerva-20260720025047.static.mtd.xz',
-+        'bd713df39d3c09846299a2377315465187a4dcd33c29d3b3d683ef13b59f36bb')
-+
-+    def test_arm_ast2600_minerva_openbmc(self):
-+        image_path = self.uncompress(self.ASSET_MINERVA_FLASH)
-+
-+        self.do_test_arm_aspeed_openbmc('minerva-bmc', image=image_path,
-+                                        uboot='2019.04', cpu_id='0xf00',
-+                                        soc='AST2600 rev A3')
-+
-+if __name__ == '__main__':
-+    AspeedTest.main()
+diff --git a/hw/i2c/i2c_mux_pca954x.c b/hw/i2c/i2c_mux_pca954x.c
+index c6034460284..c8e75da8b2e 100644
+--- a/hw/i2c/i2c_mux_pca954x.c
++++ b/hw/i2c/i2c_mux_pca954x.c
+@@ -15,15 +15,12 @@
+  */
+ 
+ #include "qemu/osdep.h"
+-#include "qapi/error.h"
+ #include "hw/i2c/i2c.h"
+ #include "hw/i2c/i2c_mux_pca954x.h"
+ #include "hw/i2c/smbus_slave.h"
+ #include "hw/core/qdev.h"
+ #include "hw/core/qdev-properties.h"
+-#include "hw/core/sysbus.h"
+ #include "qemu/log.h"
+-#include "qemu/module.h"
+ #include "qemu/queue.h"
+ #include "qom/object.h"
+ #include "trace.h"
 
 -- 
 2.50.1
