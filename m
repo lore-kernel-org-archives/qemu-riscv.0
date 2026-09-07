@@ -4,109 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66CA9C79F9E
-	for <qemu-riscv@archiver.kernel.org>; Mon,  7 Sep 2026 07:17:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67E5CC79F9E
+	for <qemu-riscv@archiver.kernel.org>; Mon,  7 Sep 2026 07:27:55 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x3Taz-0007Ul-N2; Mon, 07 Sep 2026 03:16:49 -0400
+	id 1x3Tlf-0001Dw-2X; Mon, 07 Sep 2026 03:27:51 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1x3Tax-0007Tu-BD
- for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 03:16:47 -0400
-Received: from mail-yx1-xb12e.google.com ([2607:f8b0:4864:20::b12e])
+ id 1x3Tlc-0001D7-UB
+ for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 03:27:49 -0400
+Received: from mail-yx1-xb130.google.com ([2607:f8b0:4864:20::b130])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1x3Tau-0001B7-Rv
- for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 03:16:47 -0400
-Received: by mail-yx1-xb12e.google.com with SMTP id
- 956f58d0204a3-66c9995ca60so3999657d50.1
- for <qemu-riscv@nongnu.org>; Mon, 07 Sep 2026 00:16:44 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1788765403; cv=none;
+ id 1x3Tlb-0002Ki-6y
+ for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 03:27:48 -0400
+Received: by mail-yx1-xb130.google.com with SMTP id
+ 956f58d0204a3-66c744a00edso2493382d50.2
+ for <qemu-riscv@nongnu.org>; Mon, 07 Sep 2026 00:27:46 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1788766066; cv=none;
  d=google.com; s=arc-20260327;
- b=spazt4hAq/py0awcdvd1Lq3ojYdIzqxPtEzC1RJ0mERDNClYnyaGSdfokK1nUprBMZ
- iDa79ZvweWRcCmnbmSD7ZSpGbbPsNT7VXEimTl3kYLZK86+xbY9m3aTZfXBGVZ0VQ3ZP
- YICzbv6HZiOLQhFpVkCBNG2PFcxfAGk+FMruXtnxwI+nxcijADmWt9EG3rDFEBzetktX
- wQf0a6W925He9va6ct+/L8TajRBWcupp4HJ2l4ePnELZAg1Lqop1QM6lSfEWEzktD0AP
- IkxQcI7Gw5EOx6XORe0wUGIxDA5aRaZVwqPap61H8AzsBbBkC90T9HkwzUTX8bpHztng
- 3WGw==
+ b=K4wLOiprRkIWZDnxSIrvPkUSnKn3HhyhnGPkolV/Cj1PQdTEXZCYgIWUGv5VapJSxP
+ z8JJp6f0Kk0dyuq3gsUBOfuzPPhlPw07IfYIwsvuMfrwA04HYO6dNFyRALcBjV9r683d
+ 0/LyU2RiwHSq8IeAACn1l9D8700nnQ58EFz7QANaUkhhRCZr4XUiw3rfeC8zMBV5dBxW
+ 8LslsVTYiIEcWq/u6boKuG6UODawXOrQNgy6XrcfM1FRKss7hjktKr7m3O9tlmuQ4lUc
+ 8sXsK49bgrQZBdo+WRtlxFTan2h+a71a8ksHmCds2qS1arQGiOLxYWa9rFxVnYcjE5JY
+ CeoA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=QCti3rgeZN1YIm9TfGLPl2KhexTOFxw/SKTwmPEtp6A=;
- fh=31GbVEmt9EZcQfvn86eg8upc2n/2zOZnfKaotVu+OLI=;
- b=LU+DC3VwvUp/JGOrpyqwFCocgoPH94xFPN59ZCZfTLVj7jQAywZiXsScPB6bf7Eujr
- pI+UR9ip9PyU4nRdhij3lOLk70NvvP5nIzGiU+4aYHjzRTm/TD2yjsgewoeLP+7kWI5N
- UuIDGaT3Xi+Xu7TCTsDd7BDN/0Lk5jbthhTYHWKbEJdR+qjnR5MzuawJ9Z8DZGDxLt81
- oAeeGzuVICkwW8o2ZEEERDO7lnSZNELGMYgoDcXS8qajsi1yYaUc/9brx7+hhDQDYCbD
- 9V1u56iDiI6FnmoXJaWJCUxIJujYl0vGTS2rwYoDLA4UAgHyGe4nTtQy5y3skcX2FK0s
- JGpw==; darn=nongnu.org
+ bh=4FaTlUWDVjkPnqBZK6+CQD1ELMYVOOzDwSl4e2vjXk0=;
+ fh=8XlIB8yzz3p+ziRYrowIl76DmmO+LzuZBVDxn7oT8dM=;
+ b=A7CaVd4ka3JCdMZy8PfGWI8FAAYsqYtiPnNFx1+6RYMfzXyN/YLeX5Mwi/kgiXVI9W
+ IxiAY69HsmOtjOs1AHUDYjLrdFIWmR7c8tsrmT4c+XhxGg43FlM2Fye+tVxyHJDhHnV9
+ qBkj8WS6l7eqR2uNoe9oAPffeIdU3mX/kELaejn1+RTagLrTthwLEdkpxph2FM4cexgt
+ ySxg+aGp04u2jm/XS/AZ4jSlKNrLtkIV2AI3igo1KmL2ux1tu2UP4duKTMOqI8JPbBlE
+ 6xtcTtxQb6r8P5NxW0zCpToHBXGLXgVqWiwJwnZCtaOyQlUdtLPAjt1FaWrio2P/7dfm
+ pbBw==; darn=nongnu.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=jms.id.au; s=google; t=1788765403; x=1789370203; darn=nongnu.org;
+ d=jms.id.au; s=google; t=1788766066; x=1789370866; darn=nongnu.org;
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=QCti3rgeZN1YIm9TfGLPl2KhexTOFxw/SKTwmPEtp6A=;
- b=Wl/nNtMYIJfudq/VboAi7rx4VReWTRJ9fVOZCbraBRThdjhB72/SnsIqufmsh1D9oL
- k/nBewySlYg7BLwM68crPg1ZzCJeHxhiQ/kswiXjA0wSu+s+teCGt2sVFdTCuiJShjw5
- rxTJ7eB84jqAb/BFX/8CnjXBScPvEzaGwA3To=
+ bh=4FaTlUWDVjkPnqBZK6+CQD1ELMYVOOzDwSl4e2vjXk0=;
+ b=O7khH4QJJcCU2+9piydLi/zpmamjq2rs+kVv+TyfLH4EJ130bALrmFSKvHtgsuXIq2
+ 727P4I4ztqIr6EmauwlS+OzcZnJ/FuvXND/cOkQJuRKiMZiDGOQdS3NfEPYa56bHB6DP
+ YUVAPgQ5cwJBA3PhYp2WbMcgl98Rb6C3TxdoM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788765403; x=1789370203;
+ d=1e100.net; s=20251104; t=1788766066; x=1789370866;
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=QCti3rgeZN1YIm9TfGLPl2KhexTOFxw/SKTwmPEtp6A=;
- b=LFssFg/PX24IDRj/hF1i/HCW2wZSBIWVst9f1cBJzYinGWOLEL4h1twFSBeJAGVkHp
- 8OoHOkabzQI0tt9wz7GuwH4OLqzGsdzkrujCKqErFVXD4ST+ipsG67o1g2nZ2UzoiBau
- O3E1ox8e3+G8F95XEmBn7ZU4VR5TH/r6nHY6QgTSdMw5rLB/Kj6+DeXzQLo99htpYIGW
- jGBL7VkP2WSO6A5BNyUpgH5ZYl1sWwgqekgimaPkuKP4LfSyPdPG4dvBl64QGwcivbcr
- GqG426DNfFgprr/2vUojj/QGuo3/Ld2CBBoCjsZ4CNMWrZJYMsJ8KKKnnnz2hCmIl2Py
- XGKw==
+ bh=4FaTlUWDVjkPnqBZK6+CQD1ELMYVOOzDwSl4e2vjXk0=;
+ b=J0pSBoCAE1QhmPNt6eWtyXzbAx+4vTFP3Sap6Ih/1wpVYC3xthHgxQZc9ncxOmuSLX
+ gsGf5rYrYwF4jponSL8kJVj+TVT/itksgoMfDbIcUuLSrXmTW03dz7A3pN46XgZvPj8L
+ AD/Eg/Z4xpd5CxwDztFduDoy0RkG3rZybbBDGBb4tNXTu3hb8hoYVWB2OUznPuKfgXCY
+ ydQkMVHZ/D0sadGb0lXIY6RAaVvAkeyfO8bf+5W6eBs2z50+jChnhUJdrUKZVisIfKcM
+ DMJv0Ip+cr0piEVb/A0FwBmlXpbiXwRHz80JaNEajC8+CFpbrRZrDvrxDkHm4YzIYnoz
+ a0qg==
 X-Forwarded-Encrypted: i=1;
- AKwUvBx9se/Qgf3Y9KTPA830OEFPWPsmwpY7oIrCScny8ymbhaWsSvDZuK34tGjSoQ2XlcXU7Pwpge6413/1@nongnu.org
-X-Gm-Message-State: AFuF++m3B7zbE5tfRkychlAiUnImNJfEGzg0rlEx2H5GXTONTk0Ik8Iz
- GC87DDYCdv+YcrfOpgIoQA7gxbOzkToVd7eqEyEwE50HsnqUbSbc/PWMhe7OBc8SAI+jByuont2
- +aTypFlpU7JGOjzNHaSOAJD8VbkN2qaM=
-X-Gm-Gg: AYBFou3R/ZIzyX0i/vYUkhkLQ/mDQyMrCcayf2sbGnOWbBYg2tikSu0/Fdi+9bEzvJR
- 0jefTSJ2hfOmQ2oV3vhHfP7nzvD/mUUefH+jI5jrF5JCrYwhydHNrYxAidSWrABeAu6zLs6B/Pc
- m9JgMPNnrKi2UkULsqHqfhEZzp+TYNEhTrSBOPz6FHBMJ/1SoYOWoa+k2m6JdGp8Kg3d5dMcrHU
- nRr3WPZ5aQfjR0yOW4jmdxdrLHxU6QzOoTB+ebNGtBBYhjlihYGiJQA+vb+VQz9Gi6vvDOYkWqI
- PoUoldCNbEIVOhTZzCUXyOIUnHPJ+m+C6kV8kuLbGHL3/MFna7H8AAkYW2Onh0BEuWT9BObuLz/
- OHy1fj9Snwi2cOq7i7EBeb3TNUdxRHjTcs5dB3xBwUnLdgsSOcaHTx5k/QMrxe1CsRReq6ZmmZh
- exwIS6gWlwvzTu1d/tUcAUCp1pGIU=
-X-Received: by 2002:a05:690e:42cf:b0:66f:c1bc:4058 with SMTP id
- 956f58d0204a3-66fc1bc4289mr1725167d50.32.1788765403506; Mon, 07 Sep 2026
- 00:16:43 -0700 (PDT)
+ AKwUvBzbUtTIHAscVwVVKga8N1cNrbrgYpXlPVV+QqLR/T9rAp0o0FCPpjJSItNuFHxgW3/ieO1EJhmEgcXN@nongnu.org
+X-Gm-Message-State: AFuF++kkh+YGcOJ1SGohbfkBIczWBOjJ9jI/h6APTPzEFDEvJqx/WMkW
+ uG7tLOo7NFFpi3pI4tMKice0LLvCPJ7tnUv/gAV4Esf0juFoQJ5n32IFytJnj8Ah9BYDWaLbokH
+ tBXhA8dBUGTvIsNasnvAeCjs771R5kOk=
+X-Gm-Gg: AYBFou1hJvUxk3cltsiQpc3R9lVAXNXhkKhbsuChIlEScHE6ThMGFLmwu1Pav3BZlpA
+ loMRTIq2TjqoOYkaP7M+SEh6LDM0UXuSRZJXOm2f8MJTo4Plo2J1FBRMmXwBLOJ6w2vTyQvKViK
+ oJtGF+pQe4UtNsnmMg9pNGCtWZSL3wdZl9MZZPz3sbPEIU17UUR/WvLURLp6ln1chNtUa8SmZ+9
+ ZBJNOJ+Fb7Ea8URkDPjc7yDSz0DyaAGL2OvWdMqFKD/p9suinRaRmEPfVamfqE42OlA/+8KAymh
+ l3ypDypl3Ii1sh/axbqwVE0Ac+D9+q2hK05cW1ez4WUODaQUO63VQazK/58QBgJnsqI5xuHMilX
+ tA7VzjACK7zOf4fqboetKfathbdmf2wUv+2A7OColJxPBkXIBSwcQOzeF86FBz3udhQ+VLqTTUr
+ toVvCbpqgbyar0PRNyD0JfYNMO4+U=
+X-Received: by 2002:a05:690e:4283:20b0:66f:c1be:a663 with SMTP id
+ 956f58d0204a3-66fc1beadf1mr2802491d50.85.1788766065936; Mon, 07 Sep 2026
+ 00:27:45 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260903055131.257903-1-joel@jms.id.au>
- <20260903055131.257903-16-joel@jms.id.au>
- <5d681d59-4a2f-4068-b36d-4ca40ab7b921@oss.qualcomm.com>
-In-Reply-To: <5d681d59-4a2f-4068-b36d-4ca40ab7b921@oss.qualcomm.com>
+ <20260903055131.257903-15-joel@jms.id.au>
+ <a4b3c4a2-e359-4952-8b1a-34db4e2b3c9a@oss.qualcomm.com>
+In-Reply-To: <a4b3c4a2-e359-4952-8b1a-34db4e2b3c9a@oss.qualcomm.com>
 From: Joel Stanley <joel@jms.id.au>
-Date: Mon, 7 Sep 2026 16:46:31 +0930
-X-Gm-Features: AcwNN1UcYx2HqbMD2LOa_8r0qgM2x62xIoq0t9zrFPpADh8wMPNrLIavJiosD5I
-Message-ID: <CACPK8Xf6Lot-Vs1-=iF+UoLZ=qBoRHhao6Z1FR8JC382qKLXBA@mail.gmail.com>
-Subject: Re: [PATCH v3 15/16] hw/riscv/atlantis: Extract an Atlantis SoC device
+Date: Mon, 7 Sep 2026 16:57:34 +0930
+X-Gm-Features: AcwNN1XbKouwtUcJQbmHGY8llY8T9UYA8KYi7aof3H8oop9a8W8fi0muNztLxI0
+Message-ID: <CACPK8Xd-GLWSve3_7ctEqAmLFRoNVG=WzYw6dKwGqPbHi-aE4w@mail.gmail.com>
+Subject: Re: [PATCH v3 14/16] hw/riscv: Add property to hart array to allow
+ private memory
 To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@oss.qualcomm.com>
 Cc: Alistair Francis <alistair.francis@wdc.com>, 
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
+ Portia Stephens <portias@oss.tenstorrent.com>, Weiwei Li <liwei1518@gmail.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Chao Liu <chao.liu@processmission.com>, 
  Nicholas Piggin <npiggin@gmail.com>,
  Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>, 
  Michael Ellerman <mpe@kernel.org>,
- Portia Stephens <portias@oss.tenstorrent.com>, 
- =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>, qemu-riscv@nongnu.org, 
- qemu-devel@nongnu.org
+ =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>, 
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b12e;
- envelope-from=joel.stan@gmail.com; helo=mail-yx1-xb12e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b130;
+ envelope-from=joel.stan@gmail.com; helo=mail-yx1-xb130.google.com
 X-Spam_score_int: -16
 X-Spam_score: -1.7
 X-Spam_bar: -
@@ -130,39 +130,32 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, 4 Sept 2026 at 20:17, Philippe Mathieu-Daud=C3=A9
+On Fri, 4 Sept 2026 at 20:13, Philippe Mathieu-Daud=C3=A9
 <philmd@oss.qualcomm.com> wrote:
->
-> On 3/9/26 07:51, Joel Stanley wrote:
-> > Introduce TYPE_TT_ATLANTIS_SOC and move the hart array, AIA, ACLINT,
-> > boot ROM, UART and I2C controllers into the new TTAtlantisSoCState. The
-> > machine keeps ownership of RAM, device tree generation, firmware
-> > loading, and the board-level I2C slaves.
+> > @@ -117,6 +119,12 @@ static bool riscv_hart_realize(RISCVHartArrayState=
+ *s, int idx,
+> >       object_initialize_child(OBJECT(s), "harts[*]", &s->harts[idx], cp=
+u_type);
+> >       qdev_prop_set_uint64(DEVICE(&s->harts[idx]), "resetvec", s->reset=
+vec);
 > >
-> > This makes it easier to compose the SoC into a more complex machine in
-> > the future.
-> >
-> > Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-> > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-> > Signed-off-by: Joel Stanley <joel@jms.id.au>
-> > ---
-> >   include/hw/riscv/tt_atlantis.h |  21 ++++-
-> >   hw/riscv/tt_atlantis.c         | 144 +++++++++++++++++++++++---------=
--
-> >   2 files changed, 119 insertions(+), 46 deletions(-)
+> > +    /* Use private memory instead of system_memory if provided */
+> > +    if (s->memory) {
+> > +        object_property_set_link(OBJECT(&s->harts[idx]), "memory",
+> > +                                 OBJECT(s->memory), &error_abort);
 >
->
-> > -struct TTAtlantisState {
-> > +struct TTAtlantisSoCState {
-> >       /*< private >*/
->
-> While here please drop these legacy private/public comments (QOM
-> style doesn't want them anymore).
+> IMHO this logic should be inverted: we want explicit memory bus mapping
+> by default, and if not set then take the global memory. Personally I'd
+> even go further and assert it is set (otherwise programming error), with
+> a preliminary patch setting global system memory to current machines.
 
-Thanks, TIL. I might send a cleanup for the risc-v tree to set an
-example for new code.
+I'm on board with this idea, but I couldn't follow what you meant by
+"if not set then take the global memory"? That's what happens
+currently?
 
-Cheers,
+Are you saying always set the memory link to the provided MemoryRegion
+(with a fallback to system_memory, or in the stronger case with an
+assert if not set)?
 
-Joel
+Then we could drop cpu_exec_init.
 
