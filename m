@@ -4,65 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 990B8C79FA0
-	for <qemu-riscv@archiver.kernel.org>; Mon,  7 Sep 2026 17:13:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CB75C79F99
+	for <qemu-riscv@archiver.kernel.org>; Mon,  7 Sep 2026 17:13:41 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x3ctq-0001y9-8n; Mon, 07 Sep 2026 13:12:54 -0400
+	id 1x3ctp-0001y3-Fl; Mon, 07 Sep 2026 13:12:53 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <eblot.ml@gmail.com>)
- id 1x3cR3-0007Jk-KO
- for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 12:43:09 -0400
-Received: from mail-wm1-f49.google.com ([209.85.128.49])
+ id 1x3cVx-0003is-M5
+ for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 12:48:13 -0400
+Received: from mail-wm1-f45.google.com ([209.85.128.45])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <eblot.ml@gmail.com>)
- id 1x3cR0-0002oM-N0
- for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 12:43:09 -0400
-Received: by mail-wm1-f49.google.com with SMTP id
- 5b1f17b1804b1-49cca4ffdcfso31085605e9.0
- for <qemu-riscv@nongnu.org>; Mon, 07 Sep 2026 09:43:06 -0700 (PDT)
+ id 1x3cVu-0003w8-OD
+ for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 12:48:13 -0400
+Received: by mail-wm1-f45.google.com with SMTP id
+ 5b1f17b1804b1-49d036e0e99so12814255e9.1
+ for <qemu-riscv@nongnu.org>; Mon, 07 Sep 2026 09:48:10 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788799385; x=1789404185;
+ d=1e100.net; s=20251104; t=1788799689; x=1789404489;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=6rZV+0Rq4PmlZn+kvmoVgaQLW2OyVLJsEpdjV2a5OvI=;
- b=Tg6w+egEC4+AGNh2j5Vs3RfM4r/RJLQXGmaRKt7LjK/cuJJArUNx7qvJ+yOU0YZ17F
- pmQLFDwiMnIWvlfmVk7EwbNWu206YNfp0BGyrBACqA0TRPrIsPSYE99MLBlRWH3gC2Jw
- DSIA/eX9ocB1+ouHKO/vTN9cwUEdPbz4Gy96gnInMaHUkwlFz5ntSMgkkzYaq8YGk+Fq
- Y+dMwd0sEXU+L+BTTYsVJaq5DYXfVYu47YMaNBlTIfJj35gyvLRzoGviosGr2+a5Jhsi
- 5YEtC6Vjtr1XtV1oiUwn/tCkryqqkjLaQY77YbEnKB/VtLUnZl3SCJs0T1qSTnT+/W0q
- 1Mjw==
+ bh=xDaZUroT2n8sJrtLzMe0uCr4D4Xox3szI0g/uL81yHs=;
+ b=cSDEqI8o6u+PO6Qv9JdbhADe6PwGNDdoxTzJwGoy6T6HWlcN1UIt7a/4JgaNh9/5v3
+ vLXtp4bdHcObRR/Rh5z77OuG6w/4PIJBU9hpyKBGZ/0Q8wbLsKp5scyGRxjIh8E/VZWZ
+ QBQc0FLvi4HUstO0lvc5CvcYC+6/EmTDBsayPD+UvPL03vEqvcR0KxWhPOQ6ZZlkMjd9
+ DSHUPacBfC5OpVfLivIk89tKAnJ2XiDvZVcISP10t/XLixLWgiPRp2z/AjrIqBc0Fk4P
+ jRz8xhWISJyrvwMdZPKrRcXxfrhpF+j7KcBpqUC+07M7Px/vJ0kWRKL5Bg5FUjhgkWNj
+ F0zA==
 X-Forwarded-Encrypted: i=1;
- AKwUvBwTynGjYoaQ1FvnY0NX2DWx1/uYmZmvNMzNrg+mderNXHZlTBi/U9d2wI04V5pMy7Bb2PbY7rnvNS+I@nongnu.org
-X-Gm-Message-State: AFuF++mtkZnWaA3XEN8Xa/aJZwt5Y+w4sA2NCL4BVLPAe4od2e+DFKiG
- BChtlDDOk9SdfGExP1sadR9talN0Lt1bEWpkpRRCXJ/C9JhbzRqHWRQC
-X-Gm-Gg: AYBFou0sYTY/99EAwHsAL9q00xSsEigd/Ua/oCn+f1w+3pZbGTXOLBKrgvH5LlF//RV
- fM0gyffIFZ2nn7BNmC8m19Bu05t+/16N5sEUTdMu5LuEtInhksWQNYITCluh+7BewXNld4N4cfg
- TtLeWwGYYfwtogIPuBNF3Spa+FPZlrOqjyNFjTKI++TbC7mVBee+rVWihT3OgMvQXuBo2Cun0mx
- FGyz6OfY/uAmgWSJlpStDOnnIy1TCwkhpc3eqWPbExExfAX1Z3fadVKuJxIn4qSaXLNm6HIMtNd
- 1CBnwcXi5Kn3AWGBp25sWsYM8wVa5Mw8o6dnzjGD8KQL7Typvw++d6VG3F7IFekuGJ6WPWusf+n
- ilOGWL1Q724YuTz/sk8kb521NwGopiGF58WdlWmpNTFMFMAjVqQUgpcD0p62Lc9WxfDviqcLXkh
- MXJmX7ljCvYh1l30kl14wCRGbjXuO0vQV4FIHg1HcxvNhugc6t9ORT8LzjpiUss2Wr2jnZcp4BI
- hrqNS/difd+Ts+5+0BO0ujC6TNGaTMf9RU=
-X-Received: by 2002:a05:600c:1d0d:b0:49d:99c:3bd9 with SMTP id
- 5b1f17b1804b1-49d099c3fc9mr105824635e9.33.1788799384968; 
- Mon, 07 Sep 2026 09:43:04 -0700 (PDT)
+ AKwUvBxRKa6k7HBO/JBWXywCPieg8XojjCpOPn4uDQjEm5w8gRahv96hTr/S1EZsWC9s2aR3aIW1mv4MIo+n@nongnu.org
+X-Gm-Message-State: AFuF++nKVWx7iSyQ+RZhG4AGs/KjF5UB4nPZwHfKs32JN7EOVBx9jaKS
+ WCyshW9wxdXtcDu6HFI6Gir4Apj0AFVFFZeKZ6imEYOD13yfZ2z8ik8g
+X-Gm-Gg: AYBFou0x4ax3kgLbHIXyF6RsvjkmHVLEwE9ZqHl05H9NkThTOqs3UNbVDNce0JS9CtQ
+ dQ3wYyyHsE9yNIkorETyNRm8VsZZfeXhl7IneC8D1TfBhDmd/NwCMqfcGUES4f14aRmcGhnB7yc
+ LyIQ9arpTZnz4d0Eg/XTGSmHNRLHRmBLMyV2FGFcy+t3y4T5fDTlKv0EmwVRJvFTT35tnTRFK+2
+ aX3XABjaJJm3ZfPxK01n9KyYOmmmLXvlhRBepoX39WZjKC1xkk15BeAYeiDbb49Wb5zWu8Zu5Vp
+ Qq/HeTSYCHWUzLtGcDKWdd/A7xKwY3sqeXUDM9ZlL2epunAbhoXNh2PJr5Wpi2u8D7ZG+Of613F
+ ApFxmbZM6dL0NIYqvchnWIspXu1sj4SnwGFrLOoZgb7hArpy8R+T+FuqQia4Rgil2p5kEOe0ZUB
+ QhlVGg8+0z+InLDb5UlJBo7t50ienEXgmr6YUr8yiblM/Vg103K6DOY/iXQ5KH5sMoCoboV/PAL
+ zrLscC+Mc8TKb+FUzz01aj8v6037HK04D8=
+X-Received: by 2002:a05:600c:4f12:b0:49c:fc6c:be00 with SMTP id
+ 5b1f17b1804b1-49cfc6cbfcamr207136815e9.23.1788799689202; 
+ Mon, 07 Sep 2026 09:48:09 -0700 (PDT)
 Received: from localhost (89-93-216-19.hfc.dyn.abo.bbox.fr. [89.93.216.19])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49ce46696e8sm291092065e9.0.2026.09.07.09.43.04
+ 5b1f17b1804b1-49cee5d476esm447480005e9.1.2026.09.07.09.48.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 07 Sep 2026 09:43:04 -0700 (PDT)
-Date: Mon, 07 Sep 2026 18:41:53 +0200
-Subject: [PATCH 03/50] hw/arm: sanmiguel: remove the second SPI flash
- controller
+ Mon, 07 Sep 2026 09:48:07 -0700 (PDT)
+Date: Mon, 07 Sep 2026 18:42:19 +0200
+Subject: [PATCH 29/50] tests/qtest: ds1339: cover the day-of-week counter
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260907-bmc-minerva-v1-3-0d83ad610c3b@free.fr>
+Message-Id: <20260907-bmc-minerva-v1-29-0d83ad610c3b@free.fr>
 References: <20260907-bmc-minerva-v1-0-0d83ad610c3b@free.fr>
 In-Reply-To: <20260907-bmc-minerva-v1-0-0d83ad610c3b@free.fr>
 To: qemu-devel@nongnu.org
@@ -78,15 +77,15 @@ Cc: =?utf-8?q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>,
  =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>, 
  Emmanuel Blot <emmanuel.blot@free.fr>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1788799319; l=1273;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1788799321; l=2630;
  i=emmanuel.blot@free.fr; s=20260602; h=from:subject:message-id;
- bh=A/n8ct+D5Xu+mMgfHstzXeaf3QPL+KzcwDlNWjocwiE=;
- b=cqM5K1I8x8srHtJZ7eQ24cJrKOwHfhjzCBExf6iCiP2xEGdxhprPiDhShDDYyx3oDp/VNGd/U
- B4JJR/ufbTqBFIsfEEdq9W8VAmtwiYqQRpn0eDgPFMyknNP6tP8k0oi
+ bh=K9HOm83SsQOK9R4XDnsjhxDGcTLTCjXMrgk6bTqgUo0=;
+ b=JqTAAXTa1cgPUsXsODqk7cQoKOlWxIWYoUxLPLHP78hdfyu1C66KsHKEnMwiCVuEejruUkYW9
+ +AjcmKkEYZKDOS7XaDGtsoOYcPKbdBQ6nYI8iT7cbeDpTL7w97ZWif2
 X-Developer-Key: i=emmanuel.blot@free.fr; a=ed25519;
  pk=0qFrZ21FAAN8OfVsSoVcCFTk/NMYOWzxJz4paSAVm0g=
-Received-SPF: pass client-ip=209.85.128.49; envelope-from=eblot.ml@gmail.com;
- helo=mail-wm1-f49.google.com
+Received-SPF: pass client-ip=209.85.128.45; envelope-from=eblot.ml@gmail.com;
+ helo=mail-wm1-f45.google.com
 X-Spam_score_int: -15
 X-Spam_score: -1.6
 X-Spam_bar: -
@@ -113,40 +112,71 @@ From:  Emmanuel Blot via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The board only populates the flash device attached to the FMC
-controller; the SoC SPI controllers are left unused. Advertising a
-part there presents the guest with a flash device the hardware does
-not have.
-
-While here, add the missing year to the copyright line.
+The day-of-week register and the offset behind it had no coverage at
+all.
 
 Signed-off-by: Emmanuel Blot <emmanuel.blot@free.fr>
 ---
- hw/arm/aspeed_ast2600_sanmiguel.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ tests/qtest/ds1339-test.c | 32 ++++++++++++++++++++++++++++++++
+ 1 file changed, 32 insertions(+)
 
-diff --git a/hw/arm/aspeed_ast2600_sanmiguel.c b/hw/arm/aspeed_ast2600_sanmiguel.c
-index 599ef1701f..1dbbef11f2 100644
---- a/hw/arm/aspeed_ast2600_sanmiguel.c
-+++ b/hw/arm/aspeed_ast2600_sanmiguel.c
-@@ -1,7 +1,7 @@
- /*
-  * Facebook SanMiguel BMC
-  *
-- * Copyright (c) Meta Platforms, Inc. and affiliates.
-+ * Copyright (c) 2026 Meta Platforms, Inc. and affiliates.
-  *
-  * SPDX-License-Identifier: GPL-2.0-or-later
-  */
-@@ -384,7 +384,7 @@ static void aspeed_machine_sanmiguel_class_init(ObjectClass *oc,
-     amc->hw_strap1 = SANMIGUEL_BMC_HW_STRAP1;
-     amc->hw_strap2 = SANMIGUEL_BMC_HW_STRAP2;
-     amc->fmc_model = "mx66l1g45g";
--    amc->spi_model = "mx66l1g45g";
-+    amc->spi_model = NULL;
-     amc->num_cs    = 2;
-     amc->macs_mask = ASPEED_MAC0_ON;
-     amc->i2c_init  = sanmiguel_bmc_i2c_init;
+diff --git a/tests/qtest/ds1339-test.c b/tests/qtest/ds1339-test.c
+index 3259fa1df3..12562eff5f 100644
+--- a/tests/qtest/ds1339-test.c
++++ b/tests/qtest/ds1339-test.c
+@@ -15,6 +15,7 @@
+ /* DS1339 register map */
+ #define DS1339_SECONDS   0x00
+ #define DS1339_HOURS     0x02
++#define DS1339_DAY       0x03
+ #define DS1339_DATE      0x04
+ #define DS1339_MONTH     0x05
+ #define DS1339_YEAR      0x06
+@@ -174,6 +175,36 @@ static void test_eosc_restart(void *obj, void *data, QGuestAllocator *alloc)
+     g_assert_cmphex(resp[6], ==, 0x31);
+ }
+ 
++/* The day counter is the guest's own numbering, and steps at midnight. */
++static void test_day_of_week(void *obj, void *data, QGuestAllocator *alloc)
++{
++    QI2CDevice *i2cdev = (QI2CDevice *)obj;
++    /* 23:59:59 on 14 June 2024, the day counter reading 7. */
++    const uint8_t tod[7] = { 0x59, 0x59, 0x23, 0x07, 0x14, 0x06, 0x24 };
++    unsigned idx;
++
++    for (idx = 1; idx <= 7; idx++) {
++        i2c_set8(i2cdev, DS1339_DAY, idx);
++        g_assert_cmphex(i2c_get8(i2cdev, DS1339_DAY), ==, idx);
++    }
++
++    i2c_set8(i2cdev, DS1339_DAY, 0x03);
++    i2c_set8(i2cdev, DS1339_DATE, 0x14);
++    i2c_set8(i2cdev, DS1339_MONTH, 0x06);
++    i2c_set8(i2cdev, DS1339_YEAR, 0x24);
++    g_assert_cmphex(i2c_get8(i2cdev, DS1339_DAY), ==, 0x03);
++
++    i2c_write_block(i2cdev, DS1339_SECONDS, tod, sizeof(tod));
++    for (idx = 0; idx < 50; idx++) {
++        if (i2c_get8(i2cdev, DS1339_DAY) != 0x07) {
++            break;
++        }
++        g_usleep(100 * 1000);
++    }
++    g_assert_cmphex(i2c_get8(i2cdev, DS1339_DAY), ==, 0x01);
++    g_assert_cmphex(i2c_get8(i2cdev, DS1339_DATE), ==, 0x15);
++}
++
+ /* Midnight and noon are the hours the 12-hour encoding special-cases. */
+ static void test_hour_mode_12(void *obj, void *data, QGuestAllocator *alloc)
+ {
+@@ -414,6 +445,7 @@ static void ds1339_register_nodes(void)
+     qos_add_test("eosc-restart", "ds1339", test_eosc_restart, NULL);
+     qos_add_test("stopped-reserved-bits", "ds1339",
+                  test_stopped_reserved_bits, NULL);
++    qos_add_test("day-of-week", "ds1339", test_day_of_week, NULL);
+     qos_add_test("hour-mode-12", "ds1339", test_hour_mode_12, NULL);
+     qos_add_test("month-28-days", "ds1339", test_month_28_days, NULL);
+     qos_add_test("month-29-days", "ds1339", test_month_29_days, NULL);
 
 -- 
 2.50.1
