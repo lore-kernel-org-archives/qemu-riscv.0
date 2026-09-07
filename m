@@ -4,65 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97EF3C79FA0
-	for <qemu-riscv@archiver.kernel.org>; Mon,  7 Sep 2026 17:15:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4505FC79F99
+	for <qemu-riscv@archiver.kernel.org>; Mon,  7 Sep 2026 17:15:39 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x3cts-0001zm-Q5; Mon, 07 Sep 2026 13:12:56 -0400
+	id 1x3ctr-0001yS-Sa; Mon, 07 Sep 2026 13:12:55 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <eblot.ml@gmail.com>)
- id 1x3cX4-00061c-Rj
- for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 12:49:23 -0400
-Received: from mail-wm1-f46.google.com ([209.85.128.46])
+ id 1x3cWK-0004gI-RT
+ for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 12:48:36 -0400
+Received: from mail-wm1-f45.google.com ([209.85.128.45])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <eblot.ml@gmail.com>)
- id 1x3cX2-00048l-GX
- for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 12:49:22 -0400
-Received: by mail-wm1-f46.google.com with SMTP id
- 5b1f17b1804b1-49d0da752ffso16185405e9.3
- for <qemu-riscv@nongnu.org>; Mon, 07 Sep 2026 09:49:20 -0700 (PDT)
+ id 1x3cWI-00040f-OK
+ for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 12:48:36 -0400
+Received: by mail-wm1-f45.google.com with SMTP id
+ 5b1f17b1804b1-499ae1c6471so36769015e9.3
+ for <qemu-riscv@nongnu.org>; Mon, 07 Sep 2026 09:48:34 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788799759; x=1789404559;
+ d=1e100.net; s=20251104; t=1788799713; x=1789404513;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=MZwOnu4u3mbwMqdzuk9WWRV5vzGX0PpwyIdVH5RHZDU=;
- b=VO3fQ+uMwU7e7sDX4RSyt1eJeRwbgj249obZrkiyFJ9HjfpI3RR4lgYgx2yw8RFCzu
- 8hVEEH8+qe++S97qXlxA7tn0QQIsrgxXZGQjoMObQnqdNYfjiLcT5eHMjNONUMg1W/9c
- +Ap2azvKsyaWiLNv+/uOiZU1lMLIGnwgE0R4dxqRG4rxXtClD5GCrdX8H3URMxU5xkOC
- VzWUJtVqW2RudSd20xE/KM9+VfzgbGtgIcDFx022MXZnCxNwgqs+i4KqF2jxhiinJdsQ
- /noSBShB1gipn6NF5O0UuP8aTy191ACIc4D2nOTPKxoopZRrf7PHCKfTsCTEjBtvxlaq
- btNA==
+ bh=RnkBBeLG1eQDE9P6Yi95zQOq3H0LATrNJD3fWP7niYw=;
+ b=qatv+pxjBFkzySaW03uNdFzr04hzxOElQiZGVBCHBjUS0VtQP9+m/Z9WdRuWopkrYN
+ T+6M1jX3+Jn6wiTJJdrLXvwtQjUIdbWAAhwNp+DXcTpdB4ZKGaTZv46e8/SKDGdQMUJL
+ 3FQ4u9LJgIvuj//KVqcHW40CpZxyHuLES8oNnnIlN1tTvZCNu0a0YQ2xqkzROcbMSx5h
+ 0KiIJsntgo034deYtWvVHbXhHQPCHc2tp/3A4AJ1V2r/su4KCY0RZOAGDmw+35B4sg55
+ MSOn0jqU9mlHJKy1SYpedRHT6TjKchgTEw/1pMqO2P1cpt4DH+U58gyiiuOVpaZP4UoY
+ to/A==
 X-Forwarded-Encrypted: i=1;
- AKwUvBxWkvxS0L9jL3cKq/lk6bRI5iGVL3adJAJRE7h+wosWfa3CYmTwqbJ6A8Fx+axZPdhoBGoN7WCE110S@nongnu.org
-X-Gm-Message-State: AFuF++mQdAh3nHjEIQil/qQErnPk4FhDqwkoI0bNrxG1UPaPv8pPB+VK
- 0MOKc3zpVSvFxu3jlFF5QZyKQY8FH6F1cA62i9U4W6G4LlfovTxUeebx
-X-Gm-Gg: AYBFou1VYgfQxlV5xsGlomvlwcpvrOYlod6+dYBH49PhGP4Jb8s5LYGKtozqIheQk1S
- 7rifIoofbLETg9GJJ24Un3B/qjA6BcJ5Qr77VtgffrUCU9aSJ0niD9UoGzZXzDdN2Ab6rMbv4ZY
- Baf2pcfQPKPk1X9heDEGcJREGa+whLAaC6q49LjaQDNvxxyu4J3BEOSeZ6Wcs29x7kaef82NgTA
- AUYH6zDNWY6HlwQSbTpaJxFBLNBBKaORISpnR666dOmvwPwzkz2NHRnKkFCskZqtDhPggpJbE5G
- RSI8A7iVbxhiT1/DIx2T3HpKtkkgn6tBhXPLjvJuDJ7LHXuYi6NeSgfAuMMwYaro/zzsavVUwKL
- Rcfpvo1orr7c7qjx+tHNi+up+irPbdfQXL8tBA3wQHkpYa4WktYiR6OmLzHEaeH0HXirIDX58Sz
- fUIieo5SZ49UmYoY+Z2ZzCcr4RjT341Fm8oACKFl5stS8n9ddtiQ0nyRhNvX2vSFT/G+GrUpaNJ
- Ta8P7WzvVrFU9N5/+pFrp/lmivq0T1IvCpRNPePbTqZ8g==
-X-Received: by 2002:a05:600c:1da8:b0:49c:cf18:494e with SMTP id
- 5b1f17b1804b1-49cf825a530mr284573165e9.12.1788799758881; 
- Mon, 07 Sep 2026 09:49:18 -0700 (PDT)
+ AKwUvBzPX8yC21IalmJQ9lz90zbwiuL9OlvJE/vtL9v8XBE1w5DBWmUuDbjAYbi0UHTqmSYpLPkhYszg0mZa@nongnu.org
+X-Gm-Message-State: AFuF++lw+tGqJ9w0uv1jTcI9JHAny8g41+JgEkuenylAZ/tiwfZ23VFJ
+ JWWZkhmwAUg5P1loTeCoCia/XeGNzJcZauHY9kYXUFznQ+8jYvkUWkLf
+X-Gm-Gg: AYBFou38onIvqPRTV+rXeejIasvP4MZMfYDhBCadXeLQrY7e+FTszeLtkL5GIGk6bEu
+ Xbsl/8yHZIsF+obd7ScW+5Uu00zq8CRLjGCkVFenWBdUgDRoUIhBvJ0pNwPaAN0m61ABesl2w79
+ e1tGNioPk5H+1LDJaOj26yZqVhNxx1fnBfw6PHmxsjHl2X5wWOO5LHfIhKpanQFvwalNclKd6SJ
+ a1ead0yxcyhcbQWiAj4JP5hXITd2MfxIN2Ov7bZVOCWz9gEh6iOBXByv317DGQ2P1yZaw+B114C
+ ee9B6CDfmgKZ3+zwERib6wNbSWXb4cOO7qTRVJAtg+rvdKxM/FS12/tPdb0PNV2uJrjxrmg/ba3
+ D+ZSjkFnxkJazdumza2Amn//DJuyJ4LdIPvi4CdR9RZ6zxWrhBsbGnaubErboY6XJsO4SeqWgOu
+ 4wkT4lYZl83JROFr5SFjOns5TbkeYcHp7Zn8pM76SPQJmhwkU5eem+BGF0Z8DQGtTPLd9m5bN0E
+ AMv6x7NdX7Dq62EHPkUOYnMPsSqz+9D3nKgh/mgYiQd2NU=
+X-Received: by 2002:a05:600c:468b:b0:49b:9105:cdaf with SMTP id
+ 5b1f17b1804b1-49cf8214eaemr417058335e9.8.1788799712977; 
+ Mon, 07 Sep 2026 09:48:32 -0700 (PDT)
 Received: from localhost (89-93-216-19.hfc.dyn.abo.bbox.fr. [89.93.216.19])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49cff8195ffsm269860585e9.14.2026.09.07.09.49.18
+ ffacd0b85a97d-4859162f354sm22111509f8f.20.2026.09.07.09.48.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 07 Sep 2026 09:49:18 -0700 (PDT)
-Date: Mon, 07 Sep 2026 18:42:25 +0200
-Subject: [PATCH 35/50] tests/qtest: ina230: cover the ALERT limit functions
- and CVRF
+ Mon, 07 Sep 2026 09:48:32 -0700 (PDT)
+Date: Mon, 07 Sep 2026 18:42:21 +0200
+Subject: [PATCH 31/50] tests/qtest: ds1339: cover the migration round trip
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260907-bmc-minerva-v1-35-0d83ad610c3b@free.fr>
+Message-Id: <20260907-bmc-minerva-v1-31-0d83ad610c3b@free.fr>
 References: <20260907-bmc-minerva-v1-0-0d83ad610c3b@free.fr>
 In-Reply-To: <20260907-bmc-minerva-v1-0-0d83ad610c3b@free.fr>
 To: qemu-devel@nongnu.org
@@ -78,15 +77,15 @@ Cc: =?utf-8?q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>,
  =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>, 
  Emmanuel Blot <emmanuel.blot@free.fr>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1788799322; l=4599;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1788799321; l=3500;
  i=emmanuel.blot@free.fr; s=20260602; h=from:subject:message-id;
- bh=g1WQNWNWvejsNUmKknPzwDjtl/zzqUIEuhP5ANmhVl4=;
- b=tUBf2HfFmowEQjPjIIQYDcvcY8arjZ+mEQt4LiRsrw0Uk90DyAHpWcXS8BpmEM0TE5JoIRsyR
- P3su0cibwWhBC6ooPytgNBdFWYreqiBDms0Q1Esag2fFOKkV9e2FTro
+ bh=BGMUGmamSzCjRMfmtfuZ7L1tiySTP5BVtx1tPB5MRVw=;
+ b=G4/lsIrREMbyh33JJLmAuv/nzTrFbZO/vkDL9IAKhpr2+RDXMANBzrHtccpEjfLG9cNlDvAZ5
+ dI8W4bCUtMzAqSBCDddjRyWEw0AgnZz0unNUjly8dphi6Q0nh/EMZW4
 X-Developer-Key: i=emmanuel.blot@free.fr; a=ed25519;
  pk=0qFrZ21FAAN8OfVsSoVcCFTk/NMYOWzxJz4paSAVm0g=
-Received-SPF: pass client-ip=209.85.128.46; envelope-from=eblot.ml@gmail.com;
- helo=mail-wm1-f46.google.com
+Received-SPF: pass client-ip=209.85.128.45; envelope-from=eblot.ml@gmail.com;
+ helo=mail-wm1-f45.google.com
 X-Spam_score_int: -15
 X-Spam_score: -1.6
 X-Spam_bar: -
@@ -113,128 +112,104 @@ From:  Emmanuel Blot via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Cover the shunt/bus/power alert-limit functions, the alert latch
-behaviour and the conversion-ready flag.
+Nothing covered the migration of the register file or the oscillator
+state, so a dropped field or a wrong version gate would have gone
+unnoticed.
 
 Signed-off-by: Emmanuel Blot <emmanuel.blot@free.fr>
 ---
- tests/qtest/ina230-test.c | 97 +++++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 97 insertions(+)
+ tests/qtest/ds1339-test.c | 61 +++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 61 insertions(+)
 
-diff --git a/tests/qtest/ina230-test.c b/tests/qtest/ina230-test.c
-index b01f9445d1..1c55028fcb 100644
---- a/tests/qtest/ina230-test.c
-+++ b/tests/qtest/ina230-test.c
-@@ -215,6 +215,98 @@ static void test_edges_overflow(void *obj, void *data, QGuestAllocator *alloc)
-     g_assert_cmphex(i2c_get16(dev, REG_MASK_ENABLE) & ME_OVF, ==, ME_OVF);
+diff --git a/tests/qtest/ds1339-test.c b/tests/qtest/ds1339-test.c
+index a1b5afb331..ca2378aa34 100644
+--- a/tests/qtest/ds1339-test.c
++++ b/tests/qtest/ds1339-test.c
+@@ -7,9 +7,13 @@
+  */
+ 
+ #include "qemu/osdep.h"
++
++#include <glib/gstdio.h>
++
+ #include "qemu/bcd.h"
+ #include "libqtest.h"
+ #include "libqtest-single.h"
++#include "libqos/qgraph.h"
+ #include "libqos/i2c.h"
+ #include "qobject/qdict.h"
+ 
+@@ -475,6 +479,62 @@ static void test_reset_persists(void *obj, void *data, QGuestAllocator *alloc)
+     check_reset((QI2CDevice *)obj, true);
  }
  
-+/* Shunt over-limit alert (transparent mode) sets the AFF flag */
-+static void test_alert_shunt_over(void *obj, void *data,
-+                                  QGuestAllocator *alloc)
++/* The register file, the Century bit and a stopped clock all migrate. */
++static void test_migration(void *obj, void *data, QGuestAllocator *alloc)
 +{
-+    QI2CDevice *dev = (QI2CDevice *)obj;
++    QI2CDevice *i2cdev = (QI2CDevice *)obj;
++    /* 23:59:59 on the last day of 2099, Century set. */
++    const uint8_t tod[7] = { 0x59, 0x59, 0x23, 0x03, 0x31, 0x8c, 0x99 };
++    g_autofree char *tmpfs = NULL;
++    g_autofree char *mig_path = NULL;
++    g_autofree char *uri = NULL;
++    GString *dest_cmdline;
++    GError *err = NULL;
++    QTestState *from, *to;
++    uint8_t resp[7];
++    QDict *rsp;
 +
-+    i2c_set16(dev, REG_CONFIG, CONFIG_RST);
++    tmpfs = g_dir_make_tmp("ds1339-test-XXXXXX", &err);
++    g_assert_no_error(err);
++    g_assert(tmpfs);
 +
-+    i2c_set16(dev, REG_ALERT_LIMIT, 0x1000);
-+    i2c_set16(dev, REG_MASK_ENABLE, ME_SOL);
++    mig_path = g_strdup_printf("%s/socket.mig", tmpfs);
++    uri = g_strdup_printf("unix:%s", mig_path);
 +
-+    qmp_ina230_set("shunt-voltage", 2500000);
-+    g_assert_cmphex(i2c_get16(dev, REG_MASK_ENABLE) & ME_AFF, ==, 0);
++    /* Stop the clock first, so both sides have the same time to compare. */
++    i2c_set8(i2cdev, DS1339_CONTROL, 0x18 | 0x80);
++    i2c_write_block(i2cdev, DS1339_SECONDS, tod, sizeof(tod));
++    i2c_set8(i2cdev, DS1339_ALARM1, 0xa5);
 +
-+    qmp_ina230_set("shunt-voltage", 20000000);
-+    g_assert_cmphex(i2c_get16(dev, REG_MASK_ENABLE) & ME_AFF, ==, ME_AFF);
++    dest_cmdline = g_string_new(qos_get_current_command_line());
++    g_string_append_printf(dest_cmdline, " -incoming %s", uri);
++    to = qtest_init(dest_cmdline->str);
 +
-+    qmp_ina230_set("shunt-voltage", 2500000);
-+    g_assert_cmphex(i2c_get16(dev, REG_MASK_ENABLE) & ME_AFF, ==, 0);
++    rsp = qmp("{ 'execute': 'migrate', 'arguments': { 'uri': %s } }", uri);
++    g_assert(qdict_haskey(rsp, "return"));
++    qobject_unref(rsp);
++
++    qmp_eventwait("STOP");
++    qtest_qmp_eventwait(to, "RESUME");
++
++    from = i2cdev->bus->qts;
++    i2cdev->bus->qts = to;
++
++    i2c_read_block(i2cdev, DS1339_SECONDS, resp, sizeof(resp));
++    g_assert_cmpmem(resp, sizeof(resp), tod, sizeof(tod));
++    g_assert_cmphex(i2c_get8(i2cdev, DS1339_ALARM1), ==, 0xa5);
++    g_assert_cmphex(i2c_get8(i2cdev, DS1339_CONTROL), ==, 0x18 | 0x80);
++    g_assert_cmphex(i2c_get8(i2cdev, DS1339_STATUS) & DS1339_STATUS_OSF,
++                    ==, DS1339_STATUS_OSF);
++
++    i2cdev->bus->qts = from;
++
++    qtest_quit(to);
++    g_unlink(mig_path);
++    g_rmdir(tmpfs);
++    g_string_free(dest_cmdline, true);
 +}
 +
-+/* Latch mode holds the alert until the Mask/Enable register is read */
-+static void test_alert_latch(void *obj, void *data, QGuestAllocator *alloc)
-+{
-+    QI2CDevice *dev = (QI2CDevice *)obj;
-+    uint16_t me;
-+
-+    i2c_set16(dev, REG_CONFIG, CONFIG_RST);
-+
-+    i2c_set16(dev, REG_ALERT_LIMIT, 0x1000);
-+    i2c_set16(dev, REG_MASK_ENABLE, ME_SOL | ME_LEN);
-+
-+    qmp_ina230_set("shunt-voltage", 20000000);
-+    qmp_ina230_set("shunt-voltage", 2500000);
-+
-+    me = i2c_get16(dev, REG_MASK_ENABLE);
-+    g_assert_cmphex(me & ME_AFF, ==, ME_AFF);
-+
-+    g_assert_cmphex(i2c_get16(dev, REG_MASK_ENABLE) & ME_AFF, ==, 0);
-+}
-+
-+/* Bus over-limit alert */
-+static void test_alert_bus(void *obj, void *data, QGuestAllocator *alloc)
-+{
-+    QI2CDevice *dev = (QI2CDevice *)obj;
-+
-+    i2c_set16(dev, REG_CONFIG, CONFIG_RST);
-+
-+    i2c_set16(dev, REG_ALERT_LIMIT, 0x2000);
-+    i2c_set16(dev, REG_MASK_ENABLE, ME_BOL);
-+
-+    qmp_ina230_set("bus-voltage", 5000000);
-+    g_assert_cmphex(i2c_get16(dev, REG_MASK_ENABLE) & ME_AFF, ==, 0);
-+
-+    qmp_ina230_set("bus-voltage", 12000000);
-+    g_assert_cmphex(i2c_get16(dev, REG_MASK_ENABLE) & ME_AFF, ==, ME_AFF);
-+}
-+
-+/* Power over-limit alert */
-+static void test_alert_power(void *obj, void *data, QGuestAllocator *alloc)
-+{
-+    QI2CDevice *dev = (QI2CDevice *)obj;
-+
-+    i2c_set16(dev, REG_CONFIG, CONFIG_RST);
-+
-+    qmp_ina230_set("shunt-voltage", 20000000);
-+    qmp_ina230_set("bus-voltage", 11980000);
-+    i2c_set16(dev, REG_CALIBRATION, 0x0A00);
-+
-+    i2c_set16(dev, REG_ALERT_LIMIT, 0x1000);
-+    i2c_set16(dev, REG_MASK_ENABLE, ME_POL);
-+    g_assert_cmphex(i2c_get16(dev, REG_MASK_ENABLE) & ME_AFF, ==, ME_AFF);
-+
-+    i2c_set16(dev, REG_ALERT_LIMIT, 0x2000);
-+    g_assert_cmphex(i2c_get16(dev, REG_MASK_ENABLE) & ME_AFF, ==, 0);
-+}
-+
-+/* Conversion Ready Flag: set on conversion, cleared by reading Mask/Enable */
-+static void test_cvrf(void *obj, void *data, QGuestAllocator *alloc)
-+{
-+    QI2CDevice *dev = (QI2CDevice *)obj;
-+
-+    i2c_set16(dev, REG_CONFIG, CONFIG_RST);
-+
-+    /* A conversion (triggered by injection) sets CVRF */
-+    qmp_ina230_set("shunt-voltage", 20000000);
-+    g_assert_cmphex(i2c_get16(dev, REG_MASK_ENABLE) & ME_CVRF, ==, ME_CVRF);
-+
-+    /* The previous read cleared CVRF; no conversion since, so it stays clear */
-+    g_assert_cmphex(i2c_get16(dev, REG_MASK_ENABLE) & ME_CVRF, ==, 0);
-+}
-+
- static void ina230_register_nodes(void)
+ static void ds1339_register_nodes(void)
  {
      QOSGraphEdgeOptions opts = {
-@@ -235,5 +327,10 @@ static void ina230_register_nodes(void)
-     qos_add_test("power", "ina230", test_power, NULL);
-     qos_add_test("zero-cal", "ina230", test_zero_cal, NULL);
-     qos_add_test("edges-overflow", "ina230", test_edges_overflow, NULL);
-+    qos_add_test("alert-shunt-over", "ina230", test_alert_shunt_over, NULL);
-+    qos_add_test("alert-latch", "ina230", test_alert_latch, NULL);
-+    qos_add_test("alert-bus", "ina230", test_alert_bus, NULL);
-+    qos_add_test("alert-power", "ina230", test_alert_power, NULL);
-+    qos_add_test("cvrf", "ina230", test_cvrf, NULL);
- }
- libqos_init(ina230_register_nodes);
+@@ -509,6 +569,7 @@ static void ds1339_register_nodes(void)
+     qos_add_test("alarm-registers", "ds1339", test_alarm_registers,
+                  NULL);
+     qos_add_test("reset-clears", "ds1339", test_reset_clears, NULL);
++    qos_add_test("migration", "ds1339", test_migration, NULL);
+ 
+     opts.extra_device_opts = "address=0x68,persist-on-reset=on";
+     qos_node_create_driver_named("ds1339-persist", "ds1339", i2c_device_create);
 
 -- 
 2.50.1
