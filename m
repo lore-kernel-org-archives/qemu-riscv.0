@@ -4,65 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07DD9C79F99
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3E7FC79FA0
 	for <qemu-riscv@archiver.kernel.org>; Mon,  7 Sep 2026 17:14:06 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x3ctz-00027j-G1; Mon, 07 Sep 2026 13:13:03 -0400
+	id 1x3ctq-0001y8-8r; Mon, 07 Sep 2026 13:12:54 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <eblot.ml@gmail.com>)
- id 1x3cTI-0004nP-CB
- for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 12:45:29 -0400
-Received: from mail-wm1-f43.google.com ([209.85.128.43])
+ id 1x3cZp-00054F-TJ
+ for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 12:52:17 -0400
+Received: from mail-wr1-f47.google.com ([209.85.221.47])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <eblot.ml@gmail.com>)
- id 1x3cTG-0003U1-IT
- for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 12:45:28 -0400
-Received: by mail-wm1-f43.google.com with SMTP id
- 5b1f17b1804b1-49b0dd3c9a0so36172515e9.1
- for <qemu-riscv@nongnu.org>; Mon, 07 Sep 2026 09:45:26 -0700 (PDT)
+ id 1x3cZn-0004zr-Nv
+ for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 12:52:13 -0400
+Received: by mail-wr1-f47.google.com with SMTP id
+ ffacd0b85a97d-482dd6ee390so4316072f8f.3
+ for <qemu-riscv@nongnu.org>; Mon, 07 Sep 2026 09:52:11 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788799525; x=1789404325;
+ d=1e100.net; s=20251104; t=1788799930; x=1789404730;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=8pehCOpu14U96pPALBKxZw+FwtcRSZWqcNAlSAWQxRQ=;
- b=LN/p9syC+ao+i0fceMBYJ1BAtRXxSEtGMXoFlsgiU8F40X+oDC2qlFQgdQj6yQr7ER
- yBed67h/aM7gw0QbfY/I1qaEmqCzWawSvjhXAKlbVaKNfwrhu/yX5hhsAXMPthVFMXhR
- Ha5rjkH2qpgfdV1FgbnoluL9PsnoeNvQldT1bpXwEmvo3ScGDr3fBwRrYAYt/bianZzg
- 9dBneBkMf0JLIddgfcXRATa1PtoVBmYiJePFMqHygYNmjcuto9+WjRK49qwADPsWF45J
- /ltNbJqpPh9uTj2fywDY5rGs7B3+/AI7O8Sku5dQRvApbLL/p4xrkPBZy+0V77wiJt6S
- D2Nw==
+ bh=SvxLkYLFxBz+kmta5sRtklppBkoMZNtdkurTxLQZymc=;
+ b=UTNiOAZYoPzKdCC4FmQDlkLqJ7+dZZh2Fzt3MAcKxeHsW3y+Yw7ken1DStf/vEOA06
+ 52/8fPXA43DOIk4tWnTeLudQtvq62newIaRgbQ8ll+skJc4FejWHdV1GEJC/Y5eRQo6D
+ Jb2TYnEYY0UCrqP8hYcKiPgWgiBKy9ksT9Z+ezlMpMNdJ8JKPjbiItLa1gR9tOxaD/u2
+ cDCkpnCs//s3Q2k1892OkR9xaM/+fASj0PmJBLReflaQCRkDuzKEAOOQhB+6TUNMej5h
+ a3yJXZO2+NVTipX17Zrw6IvaGbUd8+WTkpphFnsj5DPOWYOrIhzU+w56s5XU1HZSChMR
+ LGnQ==
 X-Forwarded-Encrypted: i=1;
- AKwUvByqRm719DDjAgUhKIMUGphgKKxQocRgNpbchOMqxbOghrwBQf/4FdPCouhE5i0vQgylfbKL03up8Pj9@nongnu.org
-X-Gm-Message-State: AFuF++mrUwBbxfjX+F0J16iuaB/KiuLGlcTsd0I3mE4t7dBYYTyEq48h
- xDd3Z9Q0tnyX0fNB50uXL9TLHo2ruQSbIxF57NmxX+idKuXRtY1sZDuW
-X-Gm-Gg: AYBFou2oaksJLAZbC3vhvj8+m96GPVfYQRbY19BL5wZD28arQnnKHbqkmp/yCWTiLQd
- LDO0Uw6b4z8qfDT9pj00RkITErgiH+vTTb25RkXW2IGQSTqS+pNP3H7ZrICS2FxGjIaxWTvQrTi
- fOIxkncaqzDyoXGD32q6pJAc0kMjkLcsJKhoyPl4Fqd8/5QS9wQk+9DAcLsjqSoyckB79YeF/gt
- RpHN1by8CFN0/LY5fSXrOcopg+TehRJM38WFnOpiDqJukqvxOCb6rAZC1BTWqlYigQs3KuiWHQ1
- 6J4SinRF5nK8Nn3+0RO7/zyCF4pr6ppKA5UnQyJ1pBQDN88pScrZ5mDSuF6spMgPAEnF3t2p6mf
- a3g4NDpu4IWiDF0ebQL1PvKaFkmpbKsfI/n8is3J1TuTZKpVvSLDLUBGA0YKdI05vrjnydOqb6T
- Kty4Og9412ETyKBP6knDU/8Qv+01lGLLZBP5cwXDv6WkdJRTD3uxx6YFWNuANyfjwNqKi1p5tvu
- E9/36I+8X2FqkoYRSO68ksHlAEbyer+hks=
-X-Received: by 2002:a05:600c:4e51:b0:49c:ff8d:b548 with SMTP id
- 5b1f17b1804b1-49cff8db5demr407389125e9.11.1788799525075; 
- Mon, 07 Sep 2026 09:45:25 -0700 (PDT)
+ AKwUvBy7kvKR+OiwkQnc8UFL6r06Up47l3xnHiVIJq0Rxd4icPahbn0phsqjf9Fm8pPdPvBtlD/NMH7/sGWH@nongnu.org
+X-Gm-Message-State: AFuF++l5jHfv4y40SPgpC5yFClCkfAs18dKskxb1Zd6tsV+OjORwo5W4
+ N2dYLvcLdMvD1sRgH/LNSF9QNk4X4AtfIFcyzzkMBM0dyqrenp8HzZ8cr6EcIqku
+X-Gm-Gg: AYBFou2T0GVYZZvN0AYedfnH5Qh2yVtqPRB5rHpowO5CxQlx+ga3cIyZWR061uyVMkZ
+ h8okSfZB45/U2Y+PXrMbjkWFy/qyCm0Vdq3gCGmepKo9tYcKNxhayoz7cdnQEApD613P3aBxOkX
+ ccD8VkjTcLe119n8+xefFO9eXVQKBTgSUTlpfNmoS2XoZ5RyKOv5uGSRoipYme68riabGbZnPpZ
+ Z0Bxo/ZNKNbE1uMpws3OdoraW4YhF4+9QF9xwmRi/Ddtat4G+ByM7qMCH6vpDSm9SBYCT0M0K1k
+ 3GMd1WIXHehoQe+gt2MwZIMdmj+TgCPVvPC7HkGOvr/eU9px+DxAxbpFlaUWHCrVk3tKHFi5v/0
+ 0DrediLb5ti4pEoJk5hphYJ/FU472vDRfrBINxHVEPHD9yRE/BrlY+zQVmSzaRGFu4er/J1GqL9
+ 0DJWBhrayVmkxq3TzA041XUiF5pnt2XsAavxGtomVHMlAPHkPo8xmEPZyzbh3SSypMl6S4zc6Rk
+ kJKZNuXg9e7Xw2LUV5rxvyN8Fiz0n7wSK8=
+X-Received: by 2002:a05:600c:c173:b0:49c:cedc:3c36 with SMTP id
+ 5b1f17b1804b1-49cf82a514cmr244391835e9.16.1788799930026; 
+ Mon, 07 Sep 2026 09:52:10 -0700 (PDT)
 Received: from localhost (89-93-216-19.hfc.dyn.abo.bbox.fr. [89.93.216.19])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49cf75cd8d0sm301952595e9.2.2026.09.07.09.45.24
+ 5b1f17b1804b1-49cf772692dsm383936695e9.10.2026.09.07.09.52.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 07 Sep 2026 09:45:24 -0700 (PDT)
-Date: Mon, 07 Sep 2026 18:42:05 +0200
-Subject: [PATCH 15/50] hw/rtc: ds1338: refresh the user registers on a read
- rollover only
+ Mon, 07 Sep 2026 09:52:09 -0700 (PDT)
+Date: Mon, 07 Sep 2026 18:42:40 +0200
+Subject: [PATCH 50/50] tests/functional/arm: minerva: add BMC boot test
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260907-bmc-minerva-v1-15-0d83ad610c3b@free.fr>
+Message-Id: <20260907-bmc-minerva-v1-50-0d83ad610c3b@free.fr>
 References: <20260907-bmc-minerva-v1-0-0d83ad610c3b@free.fr>
 In-Reply-To: <20260907-bmc-minerva-v1-0-0d83ad610c3b@free.fr>
 To: qemu-devel@nongnu.org
@@ -78,15 +77,15 @@ Cc: =?utf-8?q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>,
  =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>, 
  Emmanuel Blot <emmanuel.blot@free.fr>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1788799320; l=1980;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1788799323; l=2482;
  i=emmanuel.blot@free.fr; s=20260602; h=from:subject:message-id;
- bh=/o1Te60tyzFbC8yX3wDit9+fgGxpiXPXZOuAAft1sW4=;
- b=f15x0jIyNuUi46sinkjJoM/PZjrjJ1fBNnM59WzMt4MJyhcmPGIhJW7FaJ+g7uJabYF5Gv9sB
- +ENB4W4OukIBNZ+DoUx6z94x3yDlmjzu2SBCOytGMpQFt9PpDVNu10w
+ bh=zMnHp1SdNieEAjweeitFky57rPPnAgy18OpmLaUpJ1g=;
+ b=V1QzQMxFouIxH4+6g0pVsz7I5wTEN7pR2ggQuv3Iq8sMs0tlCTfPc+Z4JyM62A5ZZPXCfz4/Y
+ BQs9aZ1zMwsC5KjI+t1YSLVMlBc+KUKDXGAHdGYkT58OSPpETyxitFy
 X-Developer-Key: i=emmanuel.blot@free.fr; a=ed25519;
  pk=0qFrZ21FAAN8OfVsSoVcCFTk/NMYOWzxJz4paSAVm0g=
-Received-SPF: pass client-ip=209.85.128.43; envelope-from=eblot.ml@gmail.com;
- helo=mail-wm1-f43.google.com
+Received-SPF: pass client-ip=209.85.221.47; envelope-from=eblot.ml@gmail.com;
+ helo=mail-wr1-f47.google.com
 X-Spam_score_int: -15
 X-Spam_score: -1.6
 X-Spam_bar: -
@@ -113,59 +112,74 @@ From:  Emmanuel Blot via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Synchronising the user buffers when the register pointer rolls over to
-zero is a property of reading them; hardware routes a write to the
-counters themselves. Doing it from the shared pointer increment meant a
-write transfer long enough to wrap overwrote the bytes the guest had
-just sent with the current time.
+Add a functional test booting the Facebook Minerva BMC machine.
 
-Move the refresh to the read path.
+Note: The boot image currently lives on a personal fork; a TODO in the
+test notes it should be relocated under legoater/qemu-aspeed-boot before
+upstreaming.
 
 Signed-off-by: Emmanuel Blot <emmanuel.blot@free.fr>
 ---
- hw/rtc/ds1338.c | 14 ++++++--------
- 1 file changed, 6 insertions(+), 8 deletions(-)
+ tests/functional/arm/meson.build            |  2 ++
+ tests/functional/arm/test_aspeed_minerva.py | 30 +++++++++++++++++++++++++++++
+ 2 files changed, 32 insertions(+)
 
-diff --git a/hw/rtc/ds1338.c b/hw/rtc/ds1338.c
-index 79bcff4599..c5fc74e6ca 100644
---- a/hw/rtc/ds1338.c
-+++ b/hw/rtc/ds1338.c
-@@ -12,6 +12,8 @@
-  * Limitations:
-  * - Writing the seconds register does not reset the internal countdown chain,
-  *   so the sub-second phase of the clock is not modelled.
-+ * - The user registers are refreshed on a START and on a read that wraps the
-+ *   register pointer, but not on a STOP.
-  * - Leap years follow the Gregorian rule, where the parts stop at 2100: they
-  *   derive the leap year from the two-digit year alone.
-  * - The model comes up with the clock running; real hardware comes up halted.
-@@ -157,15 +159,7 @@ static void ds1338_inc_regptr(DS1338State *s)
- {
-     DS1338Class *k = DS1338_GET_CLASS(s);
- 
--    /*
--     * The register pointer wraps around after the last register; wraparound
--     * causes the current time/date to be retransferred into the secondary
--     * registers.
--     */
-     s->ptr = (s->ptr + 1) % k->num_regs;
--    if (!s->ptr) {
--        ds1338_capture_current_time(s);
--    }
- }
- 
- static int ds1338_event(I2CSlave *i2c, enum i2c_event event)
-@@ -201,6 +195,10 @@ static uint8_t ds1338_recv(I2CSlave *i2c)
-     trace_ds1338_recv(s->ptr, res);
- 
-     ds1338_inc_regptr(s);
-+    if (!s->ptr) {
-+        /* Read-only: a wrapping write must keep the bytes it just sent. */
-+        ds1338_capture_current_time(s);
-+    }
-     return res;
- }
- 
+diff --git a/tests/functional/arm/meson.build b/tests/functional/arm/meson.build
+index 61b00932db..dd1ddf7f6f 100644
+--- a/tests/functional/arm/meson.build
++++ b/tests/functional/arm/meson.build
+@@ -16,6 +16,7 @@ test_arm_timeouts = {
+   'aspeed_bletchley' : 480,
+   'aspeed_catalina' : 480,
+   'aspeed_gb200nvl_bmc' : 480,
++  'aspeed_minerva' : 480,
+   'aspeed_rainier' : 480,
+   'bpim2u' : 500,
+   'collie' : 180,
+@@ -51,6 +52,7 @@ tests_arm_system_thorough = [
+   'aspeed_bletchley',
+   'aspeed_catalina',
+   'aspeed_gb200nvl_bmc',
++  'aspeed_minerva',
+   'aspeed_rainier',
+   'bpim2u',
+   'canona1100',
+diff --git a/tests/functional/arm/test_aspeed_minerva.py b/tests/functional/arm/test_aspeed_minerva.py
+new file mode 100644
+index 0000000000..925a82b139
+--- /dev/null
++++ b/tests/functional/arm/test_aspeed_minerva.py
+@@ -0,0 +1,30 @@
++#!/usr/bin/env python3
++#
++# Functional test that boots the ASPEED machines
++#
++# Copyright (c) 2026 Meta Platforms, Inc. and affiliates.
++#
++# SPDX-License-Identifier: GPL-2.0-or-later
++
++from qemu_test import Asset
++from aspeed import AspeedTest
++
++
++class MinervaMachine(AspeedTest):
++
++    # TODO: the boot image currently lives on a personal fork; move it under
++    # legoater/qemu-aspeed-boot before upstreaming.
++    ASSET_MINERVA_FLASH = Asset(
++        'https://github.com/eblot/qemu-aspeed-boot/raw/refs/heads/minerva-bmc/images/minerva-bmc/openbmc-20260720025047/'
++            'obmc-phosphor-image-minerva-20260720025047.static.mtd.xz',
++        'bd713df39d3c09846299a2377315465187a4dcd33c29d3b3d683ef13b59f36bb')
++
++    def test_arm_ast2600_minerva_openbmc(self):
++        image_path = self.uncompress(self.ASSET_MINERVA_FLASH)
++
++        self.do_test_arm_aspeed_openbmc('minerva-bmc', image=image_path,
++                                        uboot='2019.04', cpu_id='0xf00',
++                                        soc='AST2600 rev A3')
++
++if __name__ == '__main__':
++    AspeedTest.main()
 
 -- 
 2.50.1
