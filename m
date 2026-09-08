@@ -4,101 +4,141 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D2A3C79FAE
-	for <qemu-riscv@archiver.kernel.org>; Tue,  8 Sep 2026 10:47:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22814C79F82
+	for <qemu-riscv@archiver.kernel.org>; Tue,  8 Sep 2026 11:18:01 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x3tLA-0001NA-5g; Tue, 08 Sep 2026 06:46:12 -0400
+	id 1x3tpi-0004yV-Tk; Tue, 08 Sep 2026 07:17:46 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <shentey@gmail.com>) id 1x3tL8-0001Ko-Ri
- for qemu-riscv@nongnu.org; Tue, 08 Sep 2026 06:46:10 -0400
-Received: from mail-ed1-x531.google.com ([2a00:1450:4864:20::531])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <shentey@gmail.com>) id 1x3tL6-0007AF-Gt
- for qemu-riscv@nongnu.org; Tue, 08 Sep 2026 06:46:10 -0400
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-6a7f27637d6so6169197a12.3
- for <qemu-riscv@nongnu.org>; Tue, 08 Sep 2026 03:46:07 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1x3tpc-0004xn-I6
+ for qemu-riscv@nongnu.org; Tue, 08 Sep 2026 07:17:44 -0400
+Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1x3tpZ-0004X8-NH
+ for qemu-riscv@nongnu.org; Tue, 08 Sep 2026 07:17:40 -0400
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 688AEF0R2043841
+ for <qemu-riscv@nongnu.org>; Tue, 8 Sep 2026 11:17:34 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ Z3gBqr1tMwecJrW86FDsov3Ol6f0JFD/I2ppVgB1cIA=; b=ec32S8yewFuZ/L5F
+ NXR9SoCfJq2wteuhFCqMI00IVidYxHkl3pYcL3f/gSqMxeFYi+4Wgq9F/09bi3u9
+ Fn2UqF8IBfoKnX1m/R3wlB9fMPpj0zNipqPUiasOHINiqcr4TnqctbZkNKiiOufM
+ xWjpDb839ONWceikBhEyotMuvbVe5IIYYhPLe6zgTqwhmJxNEVcoI9owcZsXRRPv
+ vpLQCYyiQasH4bj84OLzj6B3WZbGnB+R38Uv/rBnGh6XLT6NBPm6gz4ualIQDwvm
+ WuFhwiAkUxCfMSiyqWKBerg1nQoXdstG08TrnxuNiddGJE0Mko0V8F3Vi/2lKg0U
+ GJAoHQ==
+Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com
+ [209.85.222.198])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gj077kfc6-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Tue, 08 Sep 2026 11:17:34 +0000 (GMT)
+Received: by mail-qk1-f198.google.com with SMTP id
+ af79cd13be357-939a00c45easo335330685a.2
+ for <qemu-riscv@nongnu.org>; Tue, 08 Sep 2026 04:17:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1788864366; x=1789469166; darn=nongnu.org;
- h=content-transfer-encoding:content-type:mime-version:message-id
- :references:in-reply-to:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=m/61nE4RZAQCSiXlvZv8ZPhxDHQ+auYzWrng+fg5aUU=;
- b=huPEZGrW+WapsX7m13zgsWmSmOPXEIPYGTPCS6vb2JjZCf1BJy9cLjUTpfULb56MSK
- 1cut+SExz5Qg4QWCH5yTmPYJIKLqlpzcpFgA3oYn3ROvd+675JxunPG8RYUxUOBifNGw
- KnqtnwiMS22lwP0U5CQfWkvoJrT1uxKUaj6KyrIEsfvnayW5Q9r4RG9+XR7OwM+vfHTB
- 1ijMECSAojK6KVDV+jcb79/cJPbJAnKfC2a931u1JT6f7W6d4dSqWhOlK5ZTAzrk0Jsu
- /fTi8YoE1RIUeHbeKm+Uo170ZgOQ67S/l75PrMOjrwuCpz7o/3HaBHEeQNmCKZPCFRYF
- pzaQ==
+ d=oss.qualcomm.com; s=google; t=1788866254; x=1789471054; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=Z3gBqr1tMwecJrW86FDsov3Ol6f0JFD/I2ppVgB1cIA=;
+ b=Ew9QqGH+wvKZYlZgek6tXh2dKkR54kAplX1cDV6s3Ud/J5qCl+NlW3I5zOu0UbEXEH
+ siYuvLPwuTLkp8HqTXZVYwqZR6ktySujSLoqbVC1xQ9o5/YuqdrxUQxA5VyMxiCGfEbu
+ oq3gFuBwyf1P424iOzr97VSwuz6JlT5hCqVhr3HK8JzH3tQjWyXDCAYMCR/swMx8JabA
+ JHZC2YBZDYOHxDGGW9VOgWPx/UwPN+gSuCZMRBQ+ao9NaNgJQrCPuQ9wmhtaNm9SxmFz
+ R1UpFUJ6bS7vCBHYcfdk3c+jdfT1VZtpZUXZ/yjqMk7Qz+21dqISkP9ZDA884Am9o2Pd
+ d95g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788864366; x=1789469166;
- h=content-transfer-encoding:content-type:mime-version:message-id
- :references:in-reply-to:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=m/61nE4RZAQCSiXlvZv8ZPhxDHQ+auYzWrng+fg5aUU=;
- b=Fb+obD76uJkCdmUYmUcPZ5O/4R2YZQtSwnnCDL1j36gArhTs6WMj+2YZQVfSiT6vxk
- MT5rDH0Na52BFc+L4wnggrvSwEC+s44uTXuLjwhKUwO1Z3bYt0CXhYG+OfJt6aHngyA9
- ov8mjxjrZkSplBJ0YFpfDHTD7qUhWHC0pXPqO3QdzcHiEuownOPgBZ9ZNACTukNFVfzf
- bmQDTNyDs8lM6d8O0erv6ILiJg6i1cAU4vA+srgDpLVHv7p6hluYjGNOxK7ER+p9CYc+
- ULinJaJPrmBukCGrFBBF8jzXZ2/sFTrhhYURrXdyvYd0KhIwXPXcFimlj6s7biAsvZTa
- PMxg==
-X-Forwarded-Encrypted: i=1;
- AKwUvBzL8UQeQxjNLslJwx2B5ZpxMxlC2r7ZP/vPEAgU9ZfPUBwCgDbf4ki7yRf6zkj7JV1U+4FK7FmKvdbg@nongnu.org
-X-Gm-Message-State: AFuF++neC36VUlvF7JWIdaN4JkyMUeLINegnLdoeIxaY/Cc5wM0ZMeqV
- i88wQ37Lg55LGs5SjUO6dnITAWDM2mslxqKPKLL7iX5xAb3kAGeTYFt4
-X-Gm-Gg: AYBFou2G4anLi155NXcVyJnv284vM3XqhEXACM5S2qYKffZDNgxE5/DuyYODaBxNAuJ
- lvZwFG/5XDnNT6pKUjm4NrtvvFV4C2g2vebA3yNFhkF4ZqZsHf2tzdr0Tg2eWhzgTKUNZcE9Uzo
- rhhT63xLFfxHzBSC+h0q33LSVPmm3GWB3YtzA/VEzKdnGzo/SI3WCcLrEpK4sfY1vY2Uu+vNTC9
- bgncbFt2cKxHE9I2W4cX5GcH4v2impeC79OykxIlF9XqXDZAgz60NglrTbQETrtXQzwBS1lw3fT
- bvhPFG9nvzSwUQEQgQI7IywTb6yJv40nXjei+jxfKFVB7fftOCzzk3vLB8V1Q7AeOgK2SbePBxY
- iLH7zXCEe0yWKn3VOse15ISgaU0qeRuNQHnY1P6nMkaI/Uyg0yVUMgUOf5dvh+gHUuL77T+uhSf
- 1tXGr11d/bTU39iftPtrFkLh5X9XDloycSjIAyVYwGnJB169E1t0m6zZKjlIaC9lz73w==
-X-Received: by 2002:a05:6402:a244:10b0:6a7:f2fc:deb7 with SMTP id
- 4fb4d7f45d1cf-6a7f2fce000mr11967045a12.14.1788864365993; 
- Tue, 08 Sep 2026 03:46:05 -0700 (PDT)
-Received: from ehlo.thunderbird.net ([62.214.191.67])
+ d=1e100.net; s=20251104; t=1788866254; x=1789471054;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=Z3gBqr1tMwecJrW86FDsov3Ol6f0JFD/I2ppVgB1cIA=;
+ b=oopQJK3koL22QjU3k/lOzPdIqW7EJ5apOb0bb4rTuAVpJd0tm3JKB2Z7F7rHJnC5Lb
+ XqZ7diz4cU86vFzOlqKlqSqs2+Z1OFSD/J5IzZRIdX7vp6OEN0C7ivDBMq+fDeHEEQA7
+ 1ZqaPMKh0cxftSDNU4Si79zKoX5WKJa2/9gjrWTjk1Q3g1PvmCaD6o+Jf+ob8gOAjiJN
+ zk9nYzSehDQ6ZHPk6eaEVo0E0TTe+WJbSx/jN1w2Rvj+AEPhkcnduKRyknW2ErKX4dnH
+ KSkZQXSDUUxCulb8Zj2HVtA9X4skl4TnRmAKhCLW4vZofaEV6gUVnbVp9fxYqmK+3wOO
+ YwdQ==
+X-Gm-Message-State: AFuF++kikQnslEJ1e3jRIiKV6pZGC3ePkjSDTvrMQmqyEYoTo9Y0D9t3
+ xrimqL2DKzDZ5GY/HegjUtfd3c/dJNuGpQxTpYEqjp0HRDxVdAV99jWQi9m1aqy/gjfqJ41gtKh
+ oQHeqHwJqvS5AHyGjAz9NOr+2cPYHCdLLeJix0thMAQs84Kxwk3H/vWJxxw==
+X-Gm-Gg: AYBFou30rcY8VwDBD+jUnkzpYGxbR/uQAtPHBEL5y4X7zYslGIcgMbo8JpAG0pKywm/
+ OXEqZNkS4CGjsLtCuy+TkD73yPeq36bDn2JYjFr+S2vhrG5IqTEncq1dM2nkloOjyytAfQDxOcc
+ nVWnqtJ5s80ntEtck544qs4MRPJVLjve0gzQht/e6DGt6HRkJUI+gI1wSB6X9viR2C6hcrWAVEx
+ 6zgtpeOFIjzRD1lqXmkwrJnIgtNWaxHm9vDL0TU2kLQNmgKzj0uMxQPxdlvpfvjXMPZIOXxw4+h
+ E+1qKzaAMFrsJ0qasSSNNl3Mq9Vmi1M4MLSSByJdtVbHzQKUDIF2RW3byl5VKkKJ4PD001sBQMH
+ OqkE4qfiOl6pROv2/r4W4QYBiJ3Lk240+vY59
+X-Received: by 2002:a05:620a:bce:b0:939:993e:bffb with SMTP id
+ af79cd13be357-939993ec19amr2109932085a.22.1788866253721; 
+ Tue, 08 Sep 2026 04:17:33 -0700 (PDT)
+X-Received: by 2002:a05:620a:bce:b0:939:993e:bffb with SMTP id
+ af79cd13be357-939993ec19amr2109924785a.22.1788866253091; 
+ Tue, 08 Sep 2026 04:17:33 -0700 (PDT)
+Received: from [192.168.15.12] ([177.214.151.199])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-6a7e68e921esm5359704a12.18.2026.09.08.03.46.05
+ af79cd13be357-9397fb2fd82sm1109544985a.17.2026.09.08.04.17.30
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 08 Sep 2026 03:46:05 -0700 (PDT)
-Date: Tue, 08 Sep 2026 10:44:52 +0000
-From: Bernhard Beschow <shentey@gmail.com>
-To: Emmanuel Blot <emmanuel.blot@free.fr>,
- Emmanuel Blot via qemu development <qemu-devel@nongnu.org>,
- qemu-devel@nongnu.org
-CC: =?ISO-8859-1?Q?C=E9dric_Le_Goater?= <clg@kaod.org>,
- Peter Maydell <peter.maydell@linaro.org>,
- Steven Lee <steven_lee@aspeedtech.com>, Troy Lee <leetroy@gmail.com>,
- Jamin Lin <jamin_lin@aspeedtech.com>, Kane Chen <kane_chen@aspeedtech.com>,
- Andrew Jeffery <andrew@codeconstruct.com.au>, Joel Stanley <joel@jms.id.au>,
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, qemu-arm@nongnu.org,
- Patrick Leis <venture@google.com>, Fabiano Rosas <farosas@suse.de>,
- Laurent Vivier <lvivier@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
- qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
- =?ISO-8859-1?Q?Philippe_Mathieu-Daud=E9?= <philmd@oss.qualcomm.com>
-Subject: =?US-ASCII?Q?Re=3A_=5BPATCH_09/50=5D_hw=3A_ds1338=3A_use_the_TYPE=5FD?=
- =?US-ASCII?Q?S1338_constant_instead_of_the_=22ds1338=22_string?=
-In-Reply-To: <20260907-bmc-minerva-v1-9-0d83ad610c3b@free.fr>
-References: <20260907-bmc-minerva-v1-0-0d83ad610c3b@free.fr>
- <20260907-bmc-minerva-v1-9-0d83ad610c3b@free.fr>
-Message-ID: <55B670A1-7B96-46AF-963F-0E105462AF6B@gmail.com>
+ Tue, 08 Sep 2026 04:17:32 -0700 (PDT)
+Message-ID: <61be29dd-2aab-4d7e-b199-10aa49b82418@oss.qualcomm.com>
+Date: Tue, 8 Sep 2026 08:17:29 -0300
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::531;
- envelope-from=shentey@gmail.com; helo=mail-ed1-x531.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] target/riscv: fix RV32 fixed counter accesses
+To: Zephyr Li <fritchleybohrer@gmail.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
+ <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Chao Liu <chao.liu@processmission.com>
+References: <20260905092810.660-1-fritchleybohrer@gmail.com>
+From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Content-Language: en-US
+In-Reply-To: <20260905092810.660-1-fritchleybohrer@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA4MDEyMCBTYWx0ZWRfX6QTJQ9nw5Rql
+ WwmaIJEWaSwyzL6Xs+R+GQClKTQd4KhSp33R1ODdfCCi4VOkAoMRSAN2qOqczo4sJrOMjCz8QGe
+ 47a/FbeG9wlk0sitZDz9TI3UVPvpYnBaBWgDj9EIYXfwrNuIxfa/hT8d/aNiY5khk+1BugI+VOU
+ n7eaviOQD4mvepN0CAijeVZI9ZYzlcjoNZ/k15wXY8f/g4RdKdcx4T3FKG2m1cEnn8WK63A7RRw
+ Pf3DGruortOe02sSgX9a99mt9X98RDakJ0/yPRzZvjSl2CBuHc1t4FFZPEa1jXjT7xthhaWU/jy
+ /JAdi3cFl6UEI+1ZwWrES9khW3KJ+g73Jx2A1R93Qjfd2JYntRemRGQNMvYvr5E96v2MeLDwLBO
+ Jr5OemNbK9mHXNe5w29qm+CXShZ1cyg64+Iymu/eoOxlGIE2hKU7rIfkOiUzM5WPpKq/BV6bF3e
+ qOdixXs5q8abr2AMENQ==
+X-Authority-Analysis: v=2.4 cv=Xbe5Co55 c=1 sm=1 tr=0 ts=6a9feece cx=c_pps
+ a=qKBjSQ1v91RyAK45QCPf5w==:117 a=lJrVL2S40hk4Skp227i47g==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
+ a=p0WdMEafAAAA:8 a=pGLkceISAAAA:8 a=EUspDBNiAAAA:8 a=CterQ15v7jWwiqUy-LwA:9
+ a=QEXdDO2ut3YA:10 a=NFOGd7dJGGMPyQGDc5-O:22
+X-Proofpoint-ORIG-GUID: fp-jmZVBaO0RWrGFpoAgE0xEf_r36nTO
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA4MDEyMCBTYWx0ZWRfX2AfkYTJKfA+i
+ lYNQLvkE8NXJ342r/q6/2LQCUJWsjl16sgT0KWb2epyxcBmFCpah5h4XoXkgjZac4vu6BQ+Pjpu
+ DzmDFC+s0ZJfd2yUSFPI33aY+NpRQQ8=
+X-Proofpoint-GUID: fp-jmZVBaO0RWrGFpoAgE0xEf_r36nTO
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-08_02,2026-09-07_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 impostorscore=0 lowpriorityscore=0 clxscore=1015 adultscore=0
+ suspectscore=0 priorityscore=1501 spamscore=0 bulkscore=0 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609080120
+Received-SPF: pass client-ip=205.220.180.131;
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -116,323 +156,201 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 
-Am 7=2E September 2026 16:41:59 UTC schrieb Emmanuel Blot via qemu develop=
-ment <qemu-devel@nongnu=2Eorg>:
->Now that TYPE_DS1338 is exposed by include/hw/rtc/ds1338=2Eh, use it in
->the machines that instantiate the RTC by its raw type name string=2E
->
->No functional change=2E
->
->Signed-off-by: Emmanuel Blot <emmanuel=2Eblot@free=2Efr>
->---
-> hw/arm/aspeed_ast2400_palmetto=2Ec          | 4 +++-
-> hw/arm/aspeed_ast2400_supermicrox11=2Ec     | 4 +++-
-> hw/arm/aspeed_ast2500_romulus=2Ec           | 4 +++-
-> hw/arm/aspeed_ast2500_supermicro-x11spi=2Ec | 4 +++-
-> hw/arm/aspeed_ast2500_witherspoon=2Ec       | 4 +++-
-> hw/arm/aspeed_ast2600_bletchley=2Ec         | 3 ++-
-> hw/arm/aspeed_ast2600_catalina=2Ec          | 2 +-
-> hw/arm/aspeed_ast2600_sanmiguel=2Ec         | 3 +--
-> hw/arm/realview=2Ec                         | 3 ++-
-> hw/arm/versatilepb=2Ec                      | 3 ++-
-> hw/ppc/e500=2Ec                             | 3 ++-
-> hw/riscv/tt_atlantis=2Ec                    | 3 ++-
-> 12 files changed, 27 insertions(+), 13 deletions(-)
->
->diff --git a/hw/arm/aspeed_ast2400_palmetto=2Ec b/hw/arm/aspeed_ast2400_p=
-almetto=2Ec
->index e2350e5b6c=2E=2E185185f0bb 100644
->--- a/hw/arm/aspeed_ast2400_palmetto=2Ec
->+++ b/hw/arm/aspeed_ast2400_palmetto=2Ec
->@@ -11,6 +11,7 @@
-> #include "hw/arm/aspeed=2Eh"
-> #include "hw/arm/aspeed_soc=2Eh"
-> #include "hw/i2c/smbus_eeprom=2Eh"
->+#include "hw/rtc/ds1338=2Eh"
->=20
-> /* Palmetto hardware value: 0x120CE416 */
-> #define PALMETTO_BMC_HW_STRAP1 (                                        =
-\
->@@ -36,7 +37,8 @@ static void palmetto_bmc_i2c_init(AspeedMachineState *b=
-mc)
->      * The palmetto platform expects a ds3231 RTC but a ds1338 is
->      * enough to provide basic RTC features=2E Alarms will be missing
->      */
->-    i2c_slave_create_simple(aspeed_i2c_get_bus(&soc->i2c, 0), "ds1338", =
-0x68);
->+    i2c_slave_create_simple(aspeed_i2c_get_bus(&soc->i2c, 0), TYPE_DS133=
-8,
->+                            0x68);
->=20
->     smbus_eeprom_init_one(aspeed_i2c_get_bus(&soc->i2c, 0), 0x50,
->                           eeprom_buf);
->diff --git a/hw/arm/aspeed_ast2400_supermicrox11=2Ec b/hw/arm/aspeed_ast2=
-400_supermicrox11=2Ec
->index c75898cc6d=2E=2E051e072c5a 100644
->--- a/hw/arm/aspeed_ast2400_supermicrox11=2Ec
->+++ b/hw/arm/aspeed_ast2400_supermicrox11=2Ec
->@@ -11,6 +11,7 @@
-> #include "hw/arm/aspeed=2Eh"
-> #include "hw/arm/aspeed_soc=2Eh"
-> #include "hw/i2c/smbus_eeprom=2Eh"
->+#include "hw/rtc/ds1338=2Eh"
->=20
-> /* TODO: Find the actual hardware value */
-> #define SUPERMICROX11_BMC_HW_STRAP1 (                                   =
-\
->@@ -36,7 +37,8 @@ static void supermicrox11_bmc_i2c_init(AspeedMachineSta=
-te *bmc)
->      * The palmetto platform expects a ds3231 RTC but a ds1338 is
->      * enough to provide basic RTC features=2E Alarms will be missing
->      */
->-    i2c_slave_create_simple(aspeed_i2c_get_bus(&soc->i2c, 0), "ds1338", =
-0x68);
->+    i2c_slave_create_simple(aspeed_i2c_get_bus(&soc->i2c, 0), TYPE_DS133=
-8,
->+                            0x68);
->=20
->     smbus_eeprom_init_one(aspeed_i2c_get_bus(&soc->i2c, 0), 0x50,
->                           eeprom_buf);
->diff --git a/hw/arm/aspeed_ast2500_romulus=2Ec b/hw/arm/aspeed_ast2500_ro=
-mulus=2Ec
->index 340a74408b=2E=2E87f90ed361 100644
->--- a/hw/arm/aspeed_ast2500_romulus=2Ec
->+++ b/hw/arm/aspeed_ast2500_romulus=2Ec
->@@ -10,6 +10,7 @@
-> #include "qapi/error=2Eh"
-> #include "hw/arm/aspeed=2Eh"
-> #include "hw/arm/aspeed_soc=2Eh"
->+#include "hw/rtc/ds1338=2Eh"
->=20
-> /* Romulus hardware value: 0xF10AD206 */
-> #define ROMULUS_BMC_HW_STRAP1 (                                         =
-\
->@@ -29,7 +30,8 @@ static void romulus_bmc_i2c_init(AspeedMachineState *bm=
-c)
->      * The romulus board expects Epson RX8900 I2C RTC but a ds1338 is
->      * good enough
->      */
->-    i2c_slave_create_simple(aspeed_i2c_get_bus(&soc->i2c, 11), "ds1338",=
- 0x32);
->+    i2c_slave_create_simple(aspeed_i2c_get_bus(&soc->i2c, 11), TYPE_DS13=
-38,
->+                            0x32);
-> }
->=20
-> static void aspeed_machine_romulus_class_init(ObjectClass *oc,
->diff --git a/hw/arm/aspeed_ast2500_supermicro-x11spi=2Ec b/hw/arm/aspeed_=
-ast2500_supermicro-x11spi=2Ec
->index 5a7e49d6cc=2E=2Edc0248422d 100644
->--- a/hw/arm/aspeed_ast2500_supermicro-x11spi=2Ec
->+++ b/hw/arm/aspeed_ast2500_supermicro-x11spi=2Ec
->@@ -11,6 +11,7 @@
-> #include "hw/arm/aspeed=2Eh"
-> #include "hw/arm/aspeed_soc=2Eh"
-> #include "hw/i2c/smbus_eeprom=2Eh"
->+#include "hw/rtc/ds1338=2Eh"
->=20
-> /* TODO: Find the actual hardware value */
-> #define SUPERMICRO_X11SPI_BMC_HW_STRAP1 (                               =
-\
->@@ -32,7 +33,8 @@ static void supermicro_x11spi_bmc_i2c_init(AspeedMachin=
-eState *bmc)
->      * The palmetto platform expects a ds3231 RTC but a ds1338 is
->      * enough to provide basic RTC features=2E Alarms will be missing
->      */
->-    i2c_slave_create_simple(aspeed_i2c_get_bus(&soc->i2c, 0), "ds1338", =
-0x68);
->+    i2c_slave_create_simple(aspeed_i2c_get_bus(&soc->i2c, 0), TYPE_DS133=
-8,
->+                            0x68);
->=20
->     smbus_eeprom_init_one(aspeed_i2c_get_bus(&soc->i2c, 0), 0x50,
->                           eeprom_buf);
->diff --git a/hw/arm/aspeed_ast2500_witherspoon=2Ec b/hw/arm/aspeed_ast250=
-0_witherspoon=2Ec
->index 26ddb67347=2E=2Ec69065846c 100644
->--- a/hw/arm/aspeed_ast2500_witherspoon=2Ec
->+++ b/hw/arm/aspeed_ast2500_witherspoon=2Ec
->@@ -14,6 +14,7 @@
-> #include "hw/sensor/tmp105=2Eh"
-> #include "hw/i2c/smbus_eeprom=2Eh"
-> #include "hw/gpio/pca9552=2Eh"
->+#include "hw/rtc/ds1338=2Eh"
->=20
-> /* Witherspoon hardware value: 0xF10AD216 */
-> #define WITHERSPOON_BMC_HW_STRAP1 (                                     =
-\
->@@ -70,7 +71,8 @@ static void witherspoon_bmc_i2c_init(AspeedMachineState=
- *bmc)
->      * The witherspoon board expects Epson RX8900 I2C RTC but a ds1338 i=
-s
->      * good enough
->      */
->-    i2c_slave_create_simple(aspeed_i2c_get_bus(&soc->i2c, 11), "ds1338",=
- 0x32);
->+    i2c_slave_create_simple(aspeed_i2c_get_bus(&soc->i2c, 11), TYPE_DS13=
-38,
->+                            0x32);
->=20
->     smbus_eeprom_init_one(aspeed_i2c_get_bus(&soc->i2c, 11), 0x51,
->                           eeprom_buf);
->diff --git a/hw/arm/aspeed_ast2600_bletchley=2Ec b/hw/arm/aspeed_ast2600_=
-bletchley=2Ec
->index 2822f6bdf5=2E=2E7bd1f90555 100644
->--- a/hw/arm/aspeed_ast2600_bletchley=2Ec
->+++ b/hw/arm/aspeed_ast2600_bletchley=2Ec
->@@ -12,6 +12,7 @@
-> #include "hw/arm/aspeed_soc=2Eh"
-> #include "hw/gpio/pca9552=2Eh"
-> #include "hw/nvram/eeprom_at24c=2Eh"
->+#include "hw/rtc/ds1338=2Eh"
->=20
-> #define TYPE_TMP421 "tmp421"
-> /* Bletchley hardware value */
->@@ -44,7 +45,7 @@ static void bletchley_bmc_i2c_init(AspeedMachineState *=
-bmc)
->     /* Bus 6 */
->     at24c_eeprom_init(i2c[6], 0x56, 65536);
->     /* Missing model: nxp,pcf85263 @ 0x51 , but ds1338 works enough */
->-    i2c_slave_create_simple(i2c[6], "ds1338", 0x51);
->+    i2c_slave_create_simple(i2c[6], TYPE_DS1338, 0x51);
->=20
->=20
->     /* Bus 7 */
->diff --git a/hw/arm/aspeed_ast2600_catalina=2Ec b/hw/arm/aspeed_ast2600_c=
-atalina=2Ec
->index ad2953dfea=2E=2Ee1dc988425 100644
->--- a/hw/arm/aspeed_ast2600_catalina=2Ec
->+++ b/hw/arm/aspeed_ast2600_catalina=2Ec
->@@ -14,6 +14,7 @@
-> #include "hw/gpio/pca9552=2Eh"
-> #include "hw/gpio/pca9554=2Eh"
-> #include "hw/nvram/eeprom_at24c=2Eh"
->+#include "hw/rtc/ds1338=2Eh"
-> #include "hw/sensor/tmp105=2Eh"
->=20
-> /* Catalina hardware value */
->@@ -22,7 +23,6 @@
-> #define CATALINA_BMC_RAM_SIZE ASPEED_RAM_SIZE(2 * GiB)
->=20
-> #define TYPE_TMP421 "tmp421"
->-#define TYPE_DS1338 "ds1338"
->=20
-> /*
->  * "BMC Storage Module" FRU data=2E  Generated with frugen=2E
->diff --git a/hw/arm/aspeed_ast2600_sanmiguel=2Ec b/hw/arm/aspeed_ast2600_=
-sanmiguel=2Ec
->index 1dbbef11f2=2E=2E5ab2b43e9c 100644
->--- a/hw/arm/aspeed_ast2600_sanmiguel=2Ec
->+++ b/hw/arm/aspeed_ast2600_sanmiguel=2Ec
->@@ -13,6 +13,7 @@
-> #include "hw/gpio/pca9552=2Eh"
-> #include "hw/gpio/pca9554=2Eh"
-> #include "hw/nvram/eeprom_at24c=2Eh"
->+#include "hw/rtc/ds1338=2Eh"
-> #include "hw/sensor/tmp105=2Eh"
->=20
-> /* SanMiguel hardware values */
->@@ -20,8 +21,6 @@
-> #define SANMIGUEL_BMC_HW_STRAP2 0x00000000
-> #define SANMIGUEL_BMC_RAM_SIZE ASPEED_RAM_SIZE(2 * GiB)
->=20
->-#define TYPE_DS1338 "ds1338"
->-
-> /*
->  * "Front IO" FRU data=2E Generated with frugen=2E
->  *
->diff --git a/hw/arm/realview=2Ec b/hw/arm/realview=2Ec
->index ceba0331b0=2E=2E4cdf939511 100644
->--- a/hw/arm/realview=2Ec
->+++ b/hw/arm/realview=2Ec
->@@ -28,6 +28,7 @@
-> #include "hw/intc/realview_gic=2Eh"
-> #include "hw/core/irq=2Eh"
-> #include "hw/i2c/arm_sbcon_i2c=2Eh"
->+#include "hw/rtc/ds1338=2Eh"
-> #include "hw/sd/sd=2Eh"
-> #include "target/arm/cpu-qom=2Eh"
->=20
->@@ -323,7 +324,7 @@ static void realview_init(MachineState *machine,
->=20
->     dev =3D sysbus_create_simple(TYPE_ARM_SBCON_I2C, 0x10002000, NULL);
->     i2c =3D (I2CBus *)qdev_get_child_bus(dev, "i2c");
->-    i2c_slave_create_simple(i2c, "ds1338", 0x68);
->+    i2c_slave_create_simple(i2c, TYPE_DS1338, 0x68);
->=20
->     /* Memory map for RealView Emulation Baseboard:  */
->     /* 0x10000000 System registers=2E  */
->diff --git a/hw/arm/versatilepb=2Ec b/hw/arm/versatilepb=2Ec
->index f94bf96599=2E=2E737cd21c27 100644
->--- a/hw/arm/versatilepb=2Ec
->+++ b/hw/arm/versatilepb=2Ec
->@@ -18,6 +18,7 @@
-> #include "hw/pci/pci=2Eh"
-> #include "hw/i2c/i2c=2Eh"
-> #include "hw/i2c/arm_sbcon_i2c=2Eh"
->+#include "hw/rtc/ds1338=2Eh"
-> #include "hw/core/irq=2Eh"
-> #include "hw/core/boards=2Eh"
-> #include "hw/block/flash=2Eh"
->@@ -346,7 +347,7 @@ static void versatile_init(MachineState *machine, int=
- board_id)
->=20
->     dev =3D sysbus_create_simple(TYPE_ARM_SBCON_I2C, 0x10002000, NULL);
->     i2c =3D (I2CBus *)qdev_get_child_bus(dev, "i2c");
->-    i2c_slave_create_simple(i2c, "ds1338", 0x68);
->+    i2c_slave_create_simple(i2c, TYPE_DS1338, 0x68);
->=20
->     /* Add PL041 AACI Interface to the LM4549 codec */
->     pl041 =3D qdev_new("pl041");
->diff --git a/hw/ppc/e500=2Ec b/hw/ppc/e500=2Ec
->index 1876882a04=2E=2E469cef9d2f 100644
->--- a/hw/ppc/e500=2Ec
->+++ b/hw/ppc/e500=2Ec
->@@ -50,6 +50,7 @@
-> #include "hw/core/platform-bus=2Eh"
-> #include "hw/net/fsl_etsec/etsec=2Eh"
-> #include "hw/i2c/i2c=2Eh"
->+#include "hw/rtc/ds1338=2Eh"
-> #include "hw/core/irq=2Eh"
-> #include "hw/sd/sdhci=2Eh"
-> #include "hw/misc/unimp=2Eh"
->@@ -1025,7 +1026,7 @@ void ppce500_init(MachineState *machine)
->     memory_region_add_subregion(ccsr_addr_space, MPC8544_I2C_REGS_OFFSET=
-,
->                                 sysbus_mmio_get_region(s, 0));
->     i2c =3D I2C_BUS(qdev_get_child_bus(dev, "i2c"));
->-    i2c_slave_create_simple(i2c, "ds1338", RTC_REGS_OFFSET);
->+    i2c_slave_create_simple(i2c, TYPE_DS1338, RTC_REGS_OFFSET);
+On 9/5/2026 6:28 AM, Zephyr Li wrote:
+> Since commit cfc96df65e01, riscv_pmu_ctr_get_fixed_counters_val()
+> returns the complete 64-bit fixed-counter value. The RV32 counter
+> access paths, however, still perform parts of the offset calculation
+> on separately extracted 32-bit halves.
+> 
+> In particular, riscv_pmu_write_ctrh() deposits the low 32 bits of the
+> complete fixed-counter value into the high half of mhpmcounter_prev.
+> riscv_pmu_read_ctr() also subtracts a 32-bit half of the previous value
+> from the complete 64-bit fixed-counter value. Consequently, writes to
+> mcycleh can be lost and carries between the low and high halves are not
+> handled correctly.
+> 
+> Keep the fixed-counter offset calculation entirely in 64 bits. Before
+> a running counter is partially written, materialize its current
+> architectural value and reset the fixed-counter baseline. On reads,
+> calculate the complete 64-bit counter value before extracting the half
+> requested by RV32.
+> 
+> Add an RV32 system TCG test for high-half writes, low-to-high carry, and
+> preserving the carried high half across a subsequent low-half write.
+> 
+> Fixes: cfc96df65e01 ("target/riscv: Remove upper_half from riscv_pmu_ctr_get_fixed_counters_val")
+> Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/4219
+> Signed-off-by: Zephyr Li <fritchleybohrer@gmail.com>
+> ---
 
-Good idea!
+Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 
-For e500:
-Acked-by: Bernhard Beschow <sgentey@gmail=2Ecom>
+>   target/riscv/tcg/csr.c                    | 32 ++++++++--------
+>   tests/tcg/riscv64/Makefile.softmmu-target | 12 ++++++
+>   tests/tcg/riscv64/test-mcycle-rv32.S      | 45 +++++++++++++++++++++++
+>   3 files changed, 74 insertions(+), 15 deletions(-)
+>   create mode 100644 tests/tcg/riscv64/test-mcycle-rv32.S
+> 
+> diff --git a/target/riscv/tcg/csr.c b/target/riscv/tcg/csr.c
+> index 002f7e69c1..ffdd5c4aa6 100644
+> --- a/target/riscv/tcg/csr.c
+> +++ b/target/riscv/tcg/csr.c
+> @@ -1337,23 +1337,23 @@ static RISCVException riscv_pmu_write_ctr(CPURISCVState *env, target_ulong val,
+>       int deposit_size = rv32 ? 32 : 64;
+>       uint64_t ctr;
+>   
+> -    counter->mhpmcounter_val = deposit64(counter->mhpmcounter_val,
+> -                                         0, deposit_size, val);
+> -
+>       if (!get_field(env->mcountinhibit, BIT(ctr_idx)) &&
+>           (riscv_pmu_ctr_monitor_cycles(env, ctr_idx) ||
+>            riscv_pmu_ctr_monitor_instructions(env, ctr_idx))) {
+>           ctr = riscv_pmu_ctr_get_fixed_counters_val(env, ctr_idx);
+> -        counter->mhpmcounter_prev = deposit64(counter->mhpmcounter_prev,
+> -                                              0, deposit_size, ctr);
+> +        counter->mhpmcounter_val += ctr - counter->mhpmcounter_prev;
+> +        counter->mhpmcounter_val = deposit64(counter->mhpmcounter_val,
+> +                                             0, deposit_size, val);
+> +        counter->mhpmcounter_prev = ctr;
+>           if (ctr_idx > 2) {
+>               riscv_pmu_setup_timer(env, counter->mhpmcounter_val, ctr_idx);
+>           }
+>        } else {
+> +        counter->mhpmcounter_val = deposit64(counter->mhpmcounter_val,
+> +                                             0, deposit_size, val);
+>           /* Other counters can keep incrementing from the given value */
+>           counter->mhpmcounter_prev = deposit64(counter->mhpmcounter_prev,
+>                                                 0, deposit_size, val);
+> -
+>       }
+>   
+>       return RISCV_EXCP_NONE;
+> @@ -1363,20 +1363,22 @@ static RISCVException riscv_pmu_write_ctrh(CPURISCVState *env, target_ulong val,
+>                                             uint32_t ctr_idx)
+>   {
+>       PMUCTRState *counter = &env->pmu_ctrs[ctr_idx];
+> -    uint64_t ctrh;
+> +    uint64_t ctr;
+>   
+> -    counter->mhpmcounter_val = deposit64(counter->mhpmcounter_val,
+> -                                         32, 32, val);
+>       if (!get_field(env->mcountinhibit, BIT(ctr_idx)) &&
+>           (riscv_pmu_ctr_monitor_cycles(env, ctr_idx) ||
+>            riscv_pmu_ctr_monitor_instructions(env, ctr_idx))) {
+> -        ctrh = riscv_pmu_ctr_get_fixed_counters_val(env, ctr_idx);
+> -        counter->mhpmcounter_prev = deposit64(counter->mhpmcounter_prev,
+> -                                              32, 32, ctrh);
+> +        ctr = riscv_pmu_ctr_get_fixed_counters_val(env, ctr_idx);
+> +        counter->mhpmcounter_val += ctr - counter->mhpmcounter_prev;
+> +        counter->mhpmcounter_val = deposit64(counter->mhpmcounter_val,
+> +                                             32, 32, val);
+> +        counter->mhpmcounter_prev = ctr;
+>           if (ctr_idx > 2) {
+>               riscv_pmu_setup_timer(env, counter->mhpmcounter_val, ctr_idx);
+>           }
+>       } else {
+> +        counter->mhpmcounter_val = deposit64(counter->mhpmcounter_val,
+> +                                             32, 32, val);
+>           counter->mhpmcounter_prev = deposit64(counter->mhpmcounter_prev,
+>                                                 32, 32, val);
+>       }
+> @@ -1407,12 +1409,11 @@ RISCVException riscv_pmu_read_ctr(CPURISCVState *env, target_ulong *val,
+>       bool rv32 = riscv_cpu_mxl(env) == MXL_RV32;
+>       int start = upper_half ? 32 : 0;
+>       int length = rv32 ? 32 : 64;
+> -    uint64_t ctr_prev, ctr_val;
+> +    uint64_t ctr_val;
+>   
+>       /* Ensure upper_half is only set for XLEN == 32 */
+>       g_assert(rv32 || !upper_half);
+>   
+> -    ctr_prev = extract64(counter->mhpmcounter_prev, start, length);
+>       ctr_val  = extract64(counter->mhpmcounter_val, start, length);
+>   
+>       if (get_field(env->mcountinhibit, BIT(ctr_idx))) {
+> @@ -1431,7 +1432,8 @@ RISCVException riscv_pmu_read_ctr(CPURISCVState *env, target_ulong *val,
+>       if (riscv_pmu_ctr_monitor_cycles(env, ctr_idx) ||
+>           riscv_pmu_ctr_monitor_instructions(env, ctr_idx)) {
+>           uint64_t cntr = riscv_pmu_ctr_get_fixed_counters_val(env, ctr_idx) -
+> -                                                             ctr_prev + ctr_val;
+> +                        counter->mhpmcounter_prev +
+> +                        counter->mhpmcounter_val;
+>           *val = extract64(cntr, start, length);
+>       } else {
+>           *val = ctr_val;
+> diff --git a/tests/tcg/riscv64/Makefile.softmmu-target b/tests/tcg/riscv64/Makefile.softmmu-target
+> index 6a219c306c..15c7371acd 100644
+> --- a/tests/tcg/riscv64/Makefile.softmmu-target
+> +++ b/tests/tcg/riscv64/Makefile.softmmu-target
+> @@ -28,6 +28,18 @@ EXTRA_RUNS += run-test-minstret-ecall
+>   run-test-minstret-ecall: test-minstret-ecall
+>   	$(call run-test, $<, $(QEMU) -icount shift=1 $(QEMU_OPTS)$<)
+>   
+> +RV32_CFLAGS = -march=rv32im_zicsr -mabi=ilp32
+> +CLEANFILES += test-mcycle-rv32
+> +
+> +test-mcycle-rv32: test-mcycle-rv32.S $(LINK_SCRIPT)
+> +	$(CC) $(CFLAGS) $(RV32_CFLAGS) $< -Wa,--noexecstack -c -o $@.o
+> +	$(LD) -m elf32lriscv $(LDFLAGS) $@.o -o $@
+> +
+> +EXTRA_RUNS += run-test-mcycle-rv32
+> +run-test-mcycle-rv32: test-mcycle-rv32
+> +	$(call run-test, $<, \
+> +	  $(QEMU) -cpu rv32 -icount shift=1 $(QEMU_OPTS)$<)
+> +
+>   EXTRA_RUNS += run-plugin-doubletrap
+>   run-plugin-doubletrap: doubletrap
+>   	$(call run-test, $<, \
+> diff --git a/tests/tcg/riscv64/test-mcycle-rv32.S b/tests/tcg/riscv64/test-mcycle-rv32.S
+> new file mode 100644
+> index 0000000000..189d1e13a2
+> --- /dev/null
+> +++ b/tests/tcg/riscv64/test-mcycle-rv32.S
+> @@ -0,0 +1,45 @@
+> +/* SPDX-License-Identifier: GPL-2.0-or-later */
+> +
+> +	.option	norvc
+> +
+> +	.text
+> +	.global	_start
+> +_start:
+> +	/* Exercise writes while mcycle is running. */
+> +	csrw	mcountinhibit, zero
+> +	csrw	mcycle, zero
+> +
+> +	/* A write to the high half must be immediately observable. */
+> +	li	s0, 0x1234ffff
+> +	csrw	mcycleh, s0
+> +	csrr	t0, mcycleh
+> +	bne	t0, s0, fail
+> +
+> +	/* Check carry from the low half into the high half. */
+> +	li	s0, 0x12345678
+> +	csrw	mcycleh, s0
+> +	li	t0, 0xfffffff0
+> +	csrw	mcycle, t0
+> +	.rept	32
+> +	nop
+> +	.endr
+> +	csrr	t0, mcycleh
+> +	addi	s0, s0, 1
+> +	bne	t0, s0, fail
+> +
+> +	/* A low-half write must preserve the carried high half. */
+> +	li	t0, 0x22222222
+> +	csrw	mcycle, t0
+> +	csrr	t0, mcycleh
+> +	bne	t0, s0, fail
+> +
+> +	li	t0, 0x100000
+> +	li	t1, 0x5555	/* FINISHER_PASS */
+> +	sw	t1, 0(t0)
+> +	j	.
+> +
+> +fail:
+> +	li	t0, 0x100000
+> +	li	t1, 0x13333	/* status = FINISHER_FAIL, code = 1 */
+> +	sw	t1, 0(t0)
+> +	j	.
 
->=20
->     /* eSDHC */
->     if (pmc->has_esdhc) {
->diff --git a/hw/riscv/tt_atlantis=2Ec b/hw/riscv/tt_atlantis=2Ec
->index 8a219afef7=2E=2E910713c6bb 100644
->--- a/hw/riscv/tt_atlantis=2Ec
->+++ b/hw/riscv/tt_atlantis=2Ec
->@@ -27,6 +27,7 @@
-> #include "hw/char/serial-mm=2Eh"
-> #include "hw/intc/riscv_aclint=2Eh"
-> #include "hw/misc/unimp=2Eh"
->+#include "hw/rtc/ds1338=2Eh"
->=20
-> #include "system/system=2Eh"
-> #include "system/device_tree=2Eh"
->@@ -657,7 +658,7 @@ static void tt_atlantis_machine_init(MachineState *ma=
-chine)
->     qdev_realize(DEVICE(&ams->soc), NULL, &error_fatal);
->=20
->     /* I2C peripherals: qemu specific */
->-    i2c_slave_create_simple(i2c_get_bus(s, 0), "ds1338", 0x6f);
->+    i2c_slave_create_simple(i2c_get_bus(s, 0), TYPE_DS1338, 0x6f);
->     i2c_slave_create_simple(i2c_get_bus(s, 4), "tmp105", 0x48);
->=20
->     /* Load or create device tree */
->
 
