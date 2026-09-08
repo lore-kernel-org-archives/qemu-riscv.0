@@ -4,159 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F475C79F99
-	for <qemu-riscv@archiver.kernel.org>; Tue,  8 Sep 2026 03:26:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F4A4C79F9E
+	for <qemu-riscv@archiver.kernel.org>; Tue,  8 Sep 2026 04:48:54 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x3mTk-0002We-DP; Mon, 07 Sep 2026 23:26:36 -0400
+	id 1x3nkh-0004jb-0V; Tue, 08 Sep 2026 00:48:11 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <sunil.laxminarasimha@oss.qualcomm.com>)
- id 1x3mTi-0002Tj-Eb
- for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 23:26:34 -0400
-Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <sunil.laxminarasimha@oss.qualcomm.com>)
- id 1x3mTg-0001qD-Ph
- for qemu-riscv@nongnu.org; Mon, 07 Sep 2026 23:26:34 -0400
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 687NlLmd107470
- for <qemu-riscv@nongnu.org>; Tue, 8 Sep 2026 03:26:30 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:reply-to:subject:to; s=
- qcppdkim1; bh=9j0UveKfPew29zTgQY7NnDUBGQE0tK5aAFfrmn/neCY=; b=Vt
- CfLWPPRddgp0Y3b+vm4PZCwRtjemVfbNfaaktTduHh/m/od8J/MSQSk7Q9khWTxT
- dClJQs5jfJULsIaMDI/CoLPulK9I8tU0qe8Zq4jkSgpAs6/NDxh3wcdc7lamJEs/
- brRNUuinBXUzZnGoSjoTNTLWQ8BRTdSfgPQc154X7m6OdC6MmOwLSnwbVCNTWpTy
- F1335l9Guu8Q/faCFg/MkiPbHqoEt+rDAjjs3yxNmbHCpNDhVviHc/u5u7jgBIZK
- ZCSlG+pG/1khe6A41MndIHvGJMpjDuOdr4XN1pS3cqyVwpnxzcqGU5h4qVGeSAK1
- xLHgl63qwJxdeOfxgbYw==
-Received: from mail-yw1-f199.google.com (mail-yw1-f199.google.com
- [209.85.128.199])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ghtty330k-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Tue, 08 Sep 2026 03:26:30 +0000 (GMT)
-Received: by mail-yw1-f199.google.com with SMTP id
- 00721157ae682-85da2b96c35so76844477b3.2
- for <qemu-riscv@nongnu.org>; Mon, 07 Sep 2026 20:26:30 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1788837990; cv=none;
- d=google.com; s=arc-20260327;
- b=cv8OhZSv5fqHXHe1Lx//FSF6x+gLFWfq1G7+H1qsxBigLqGG5cdG8vfVZl8PULZk0L
- AVOPS6GMFOi5Opy3Cy5se6f3pGfFr3gt9PgwexK8dRGvBcKt79CeBTvj4PTXp/LDJeSI
- zbC//dhFaZOj2KgIOG5Srfd/DVpGI7ZSrC4F8BxAW5W0Xf87KrA3pNa4ecm8AunwwpUj
- AGGH/ovyWnpoOCf37JXt+Ms+zhpH61g7G+Co0BemHsGzVIPrUWPpSQOcQvAaVj5e75AZ
- 06W5H95VRn9SbfLfYF9iPxHH70DbfDsxHV0b1klI0RBv5dSxeHVLLmhntGVHD9DJGvSq
- UGmQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :reply-to:in-reply-to:references:mime-version:dkim-signature;
- bh=9j0UveKfPew29zTgQY7NnDUBGQE0tK5aAFfrmn/neCY=;
- fh=j6x/u+4u8bGXW37OnLecmnG+O2NYyhWa+dVwLMWBqAk=;
- b=Rt66Cd8B+fOKTdQi0QfSwDtnUeVzoQ/5CoW0KRzZaldJVpFle2BJAbTKwykCwIu0B7
- JZHm0CtlrYRR2dr6MLdXL93TS+i7KCrM0fids8hQO7qckzr5Jd86T80kHujWF6G7qfea
- pYwW35GEI2stGNJM9QfzX5T2kSJsJW7l1TWVrRXD5ZWijP4XpI5SsFXYuPG9Ug8Slv+x
- pAbkq5RrlFm0kOkxKrUenS98SUNTT+ICG2ly+KjAoFpLqxpzZOTt6yQnulIujP4l8n6U
- phtoKFVTYejbUidfPZ5REyGXo3/BJabRJ7KF3W3erVrSaAr/+Z5FQ1wFqXrxDMXy9Gcq
- 1xnA==; darn=nongnu.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1788837990; x=1789442790; darn=nongnu.org;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:reply-to:in-reply-to:references:mime-version:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=9j0UveKfPew29zTgQY7NnDUBGQE0tK5aAFfrmn/neCY=;
- b=YgMkUwrAVMKMGzfkmCTSRbSuwn59PPkpv4gVdmzc3H2y4dT2LpJsu4OepmgqPdWymz
- BPjtV36ldmEZ6Kycfmv2QsXTx686S5Mr5rCEpEuRICdKGXnbLpdRCS8O2p6wr1ddY/gB
- vfkxD7UDjcMzoZNpAdzWyupv5cZIrefTackxIrZGDDpoizKyBPbknrkjYI+JPeukNgdC
- PYk+Dz0bTZYU5+74pY/nBROJClA8UhQ9axqt28NpiAA1GZpb+kPeEc0RJIHVKDl5T91E
- JS94844GyvdmgvkmaQWtJfpjyBzQO5lZ+4/9lpWhbd0Bo9d+1CrRi917cYiPfcJ+3Yqp
- Tx9w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788837990; x=1789442790;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:reply-to:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=9j0UveKfPew29zTgQY7NnDUBGQE0tK5aAFfrmn/neCY=;
- b=s5XwPCY3hwRqEm18iUvnaaT9tWs1GQn5Z1CAmps5pWNwSap9ZzOqGINLLanT0nyVp4
- px8NHejuXfvJdECkPw9njCKZwwDoRPc9JyiZjhQiDElhGiSkVvH055nbfbRDNOl0BFoW
- nXLoa9KCEjbqQ53HbFM/mo68BO2DUO8S6hho9KAAUboUtEGXOHmFaAc6FbH5Z4WGHbhF
- PPypmFZJrzomiYQl1i2BBuugsTxC8QbQRuB3Zcuvaa6Irx+kg4vZ3t6LbKZHDx9zbFCA
- sen1f7iSeNS7lZ0ybckWB1i4/FRf//ktnzsb/PTzBQjHinsANwUSE1iaJI4tl6x00Zm5
- SlnA==
-X-Forwarded-Encrypted: i=1;
- AKwUvBwc2OZKJBg12PlyJC4CrDCD3DJGbspAslV6WjLnF0I6nnMnKS4mrMBVdKo9uU4QSGTIDK3fSnSjFmxq@nongnu.org
-X-Gm-Message-State: AFuF++lR5tsjgkemoci3iXvmMTsjtNdg6Zzyp3clNUlvjj4wsjC4ba48
- 1JKEnFSdsltEmQz0K4hqO5ObVD8B5vrjb9JicTOhrh7fF8Ed08KqXHGLd4EDdKy3ZbpZjHaHbN4
- OsUQLg8F/waWQX2uXAjNPOfZaVHaIKuFqhtfqMsgYRGONgJWZHUEq+1pu4BV5Iu0mVqtkwf4rar
- locHFGJj3C7xoluan7MbDvEsqVxxKXId/1
-X-Gm-Gg: AYBFou33zMs5Y7poKG8ZZDsXdr15vl1NSh9oDzVhMysTN0ijlX9dEssYFwAanKg4lNE
- Gm8WcGboNppqri0A+rYVMHd7/nrWnpUgr0onEjD84faJOgNBThEYiDZww5i/2P97wCTKZ3Ff5An
- 3mBSKeXKc9o5qZdTMZFEwQbVdqTpVNfe5OMV0OzdGW0NAsIjsWXFgKzQpTzTo=
-X-Received: by 2002:a05:690e:134a:b0:66f:cabb:d8eb with SMTP id
- 956f58d0204a3-670f6f4148amr1054583d50.45.1788837989841; 
- Mon, 07 Sep 2026 20:26:29 -0700 (PDT)
-X-Received: by 2002:a05:690e:134a:b0:66f:cabb:d8eb with SMTP id
- 956f58d0204a3-670f6f4148amr1054566d50.45.1788837989459; Mon, 07 Sep 2026
- 20:26:29 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <wangyang25@otcaix.iscas.ac.cn>)
+ id 1x3nkc-0004fs-RH; Tue, 08 Sep 2026 00:48:06 -0400
+Received: from smtp21.cstnet.cn ([159.226.251.21] helo=cstnet.cn)
+ by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
+ (Exim 4.90_1) (envelope-from <wangyang25@otcaix.iscas.ac.cn>)
+ id 1x3nkZ-00019C-UC; Tue, 08 Sep 2026 00:48:06 -0400
+Received: from [192.168.144.1] (unknown [124.16.137.194])
+ by APP-01 (Coremail) with SMTP id qwCowACnfPB7k59qBn5uBw--.61717S7;
+ Tue, 08 Sep 2026 12:47:56 +0800 (CST)
+From: wangyang <wangyang25@otcaix.iscas.ac.cn>
+To: qemu-devel@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Chao Liu <chao.liu@processmission.com>,    qemu-riscv@nongnu.org
+Subject: [PATCH v3 5/5] target/riscv: canonicalize reserved CBIE encoding
+Date: Tue, 08 Sep 2026 12:47:55 +0800
+Message-ID: <20260908124755-v3-5-wangyang25@otcaix.iscas.ac.cn>
+In-Reply-To: <20260908124755-v3-0-wangyang25@otcaix.iscas.ac.cn>
+References: <20260908124755-v3-0-wangyang25@otcaix.iscas.ac.cn>
+X-Mailer: git-send-email 2.55.0.windows.2
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
 MIME-Version: 1.0
-References: <20260904195610.964829-1-daniel.barboza@oss.qualcomm.com>
- <20260904195610.964829-2-daniel.barboza@oss.qualcomm.com>
-In-Reply-To: <20260904195610.964829-2-daniel.barboza@oss.qualcomm.com>
-From: Sunil V L <sunilvl@oss.qualcomm.com>
-Date: Tue, 8 Sep 2026 08:56:18 +0530
-X-Gm-Features: AcwNN1Vup0mya5WT3-kIqbNd3_cdkqNOWaM6V6w7wNdaDy6RE_Q0RKMFMMr3mPk
-Message-ID: <CAB19ukEaJRKHqqW44L2_Ff8NYgcHh9oW1E1w8R9XmcoXsGBOwg@mail.gmail.com>
-Subject: Re: [PATCH v10 1/5] target/riscv/cpu.c: remove 'bare' condition for
- .profile
-To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com,
- chao.liu@processmission.com, andrew.jones@oss.qualcomm.com,
- leif.lindholm@oss.qualcomm.com, Palmer Dabbelt <palmer@dabbelt.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Authority-Analysis: v=2.4 cv=QNBYgALL c=1 sm=1 tr=0 ts=6a9f8066 cx=c_pps
- a=72HoHk1woDtn7btP4rdmlg==:117 a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=DJpcGTmdVt4CTyJn9g5Z:22 a=EUspDBNiAAAA:8 a=JF9118EUAAAA:8 a=FRSEYCzRAAAA:8
- a=f2ANdWxeLYQbYMvOFHIA:9 a=QEXdDO2ut3YA:10 a=kA6IBgd4cpdPkAWqgNAz:22
- a=xVlTc564ipvMDusKsbsT:22 a=H4N_Y-AU75W7NKDNhZlT:22
-X-Proofpoint-ORIG-GUID: hXbPoLFE1i3_LDsOgyxS9N0iPBQ-O_Ap
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA4MDAzNCBTYWx0ZWRfX77PG+o+DY0Ao
- zRFQXsIeEtcczB3A/1FUxpH7pgGVxLbjsdh9XtzTYjMfrvo1vsupuK2RbZDuBKg+tevG9LBPTev
- P4PCILpQst3N9RgqrYIgxalFnk/2TCo=
-X-Proofpoint-GUID: hXbPoLFE1i3_LDsOgyxS9N0iPBQ-O_Ap
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA4MDAzNCBTYWx0ZWRfX8ORu8kasKCcZ
- QkRi3ZFh0yo2uG5/tBJGTn/RirRRXPLRUUFyd57q99NusfUAXzXEO3k7EHeXtJyNk/qqxcS2T5w
- edRFq8HLgCdK6PMKBjmHK/t89AhdzN6IWO15mtMyFwnQzYRA9SyX/g5QfBmsThv9cg3kj/s4Xxr
- dOloa3j4/JgZmPG9vnQQTwWbX89gKierdd/xUD9iI42+sz+dO7PY+z40EyUW4DETme5fKxNC0Xx
- tr1o9cB/J8+geV5T8WUuN0/aBAKBqrhWhu32UqiEgMVAkK0HjpzZXozPuomfTbyTlw73aJjZRA+
- WuDYy2aDly8muN/xXGaUrLhPLp0GMXGyO49Cl0zG5QMUTtYzDr4qF+E82w4ygvVnmGvcn2HSw0B
- /8QdKjaQjFiowoeWsELoV7ts0R8ti294020GS1S8BV35KKQDk2FRSjthazuFMxhqAuD//PNzk0h
- UcdiYHR1L9m8vLek6Qg==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-07_07,2026-09-07_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 spamscore=0 suspectscore=0 phishscore=0 priorityscore=1501
- lowpriorityscore=0 adultscore=0 clxscore=1015 bulkscore=0 impostorscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609080034
-Received-SPF: pass client-ip=205.220.168.131;
- envelope-from=sunil.laxminarasimha@oss.qualcomm.com;
- helo=mx0a-0031df01.pphosted.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
-X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-CM-TRANSID: qwCowACnfPB7k59qBn5uBw--.61717S7
+X-Coremail-Antispam: 1UD129KBjvJXoW7CFy3Wr48uF1kXr15urW7Jwb_yoW8tF48pF
+ 4UWF45KrWq9ryI9a93Jr1UWF13Kr4rGay5Wwnruw4kXa13CFyftFnrK345Kr4UXFWxK3sF
+ 9wsxGry5Cws5JFDanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUmvb7Iv0xC_Kw4lb4IE77IF4wAFF20E14v26rWj6s0DM7CY07I2
+ 0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI
+ 8067AKxVWUAVCq3wA2048vs2IY020Ec7CjxVAFwI0_Xr0E3s1l8cAvFVAK0II2c7xJM28C
+ jxkF64kEwVA0rcxSw2x7M28EF7xvwVC0I7IYx2IY67AKxVWUCVW8JwA2z4x0Y4vE2Ix0cI
+ 8IcVCY1x0267AKxVW8JVWxJwA2z4x0Y4vEx4A2jsIE14v26r4j6F4UM28EF7xvwVC2z280
+ aVCY1x0267AKxVW8Jr0_Cr1UM2vYz4IE04k24VAvwVAKI4IrM2AIxVAIcxkEcVAq07x20x
+ vEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v26r1j6r18McIj
+ 6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IYc2Ij64vIr41lc7
+ CjxVAaw2AFwI0_JF0_Jw1lc2xSY4AK67AK6r45MxAIw28IcxkI7VAKI48JMxC20s026xCa
+ FVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_Jr
+ Wlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1I
+ 6r4UMIIF0xvE2Ix0cI8IcVCY1x0267AKxVW8JVWxJwCI42IY6xAIw20EY4v20xvaj40_Jr
+ 0_JF4lIxAIcVC2z280aVAFwI0_Gr0_Cr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUv
+ cSsGvfC2KfnxnUUI43ZEXa7IU5KjgDUUUUU==
+X-Originating-IP: [124.16.137.194]
+X-CM-SenderInfo: 5zdqw5xdqjjk46rwut1l0ox2xfdvhtffof0/
+Received-SPF: pass client-ip=159.226.251.21;
+ envelope-from=wangyang25@otcaix.iscas.ac.cn; helo=cstnet.cn
+X-Spam_score_int: -41
+X-Spam_score: -4.2
+X-Spam_bar: ----
+X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -169,44 +77,78 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Reply-To: sunilvl@oss.qualcomm.com
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Sat, Sep 5, 2026 at 1:27=E2=80=AFAM Daniel Henrique Barboza
-<daniel.barboza@oss.qualcomm.com> wrote:
->
-> We want to configure other CPU types to use profiles as an alternative
-> to adding every profile extension explicitly, i.e. a profile is nothing
-> more than an extension bundle.
->
-> This means that a vendor CPU can set .profile=3Drva23s64 while having the
-> same handling as any other vendor CPU. Same thing with all other CPU
-> types.
->
-> Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-> Reviewed-by: Andrew Jones <andrew.jones@oss.qualcomm.com>
-> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-> Reviewed-by: Chao Liu <chao.liu@processmission.com>
-> ---
->  target/riscv/cpu.c | 1 -
->  1 file changed, 1 deletion(-)
->
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 652311ddef..185474a8cf 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -3096,7 +3096,6 @@ static void riscv_cpu_class_base_init(ObjectClass *=
-c, const void *data)
->          mcc->def->bare |=3D def->bare;
->          if (def->profile) {
->              assert(profile_extends(def->profile, mcc->def->profile));
-> -            assert(mcc->def->bare);
->              mcc->def->profile =3D def->profile;
->          }
->          if (def->misa_mxl_max) {
-> --
-> 2.43.0
->
-Reviewed-by: Sunil V L <sunilvl@oss.qualcomm.com>
+CBIE encoding 10 is reserved when Zicbom is implemented, while
+encoding 11 has defined behavior. Canonicalize only encoding 10 in the
+menvcfg, senvcfg, and henvcfg write paths so the reserved value is not
+retained and the defined encoding remains unchanged.
+
+Tested: RV64 menvcfg, senvcfg, and henvcfg CBIE 10 and CBIE 11
+write/readback test cases.
+Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/4416
+
+Signed-off-by: wangyang <wangyang25@otcaix.iscas.ac.cn>
+---
+ target/riscv/tcg/csr.c | 29 +++++++++++++++++++++++++++++
+ 1 file changed, 29 insertions(+)
+
+diff --git a/target/riscv/tcg/csr.c b/target/riscv/tcg/csr.c
+index bd4b6dc114..cf59f9ae54 100644
+--- a/target/riscv/tcg/csr.c
++++ b/target/riscv/tcg/csr.c
+@@ -3260,6 +3260,16 @@ static RISCVException write_menvcfg(CPURISCVState *env, int csrno,
+             stce_changed = true;
+         }
+     }
++
++    /*
++     * CBIE is a WARL field: encoding 10 is reserved.  A software write of
++     * this encoding must canonicalize to a supported value instead of being
++     * retained in the readback.
++     */
++    if (cfg->ext_zicbom && get_field(val, MENVCFG_CBIE) == 2) {
++        val &= ~MENVCFG_CBIE;
++    }
++
+     env->menvcfg = (env->menvcfg & ~mask) | (val & mask);
+ 
+     if (stce_changed) {
+@@ -3354,6 +3364,16 @@ static RISCVException write_senvcfg(CPURISCVState *env, int csrno,
+         mask |= SENVCFG_UKTE;
+     }
+ 
++    /*
++     * CBIE is a WARL field: encoding 10 is reserved.  A software write of
++     * this encoding must canonicalize to a supported value instead of being
++     * retained in the readback.
++     */
++    if (env_archcpu(env)->cfg.ext_zicbom &&
++        get_field(val, SENVCFG_CBIE) == 2) {
++        val &= ~SENVCFG_CBIE;
++    }
++
+     env->senvcfg = (env->senvcfg & ~mask) | (val & mask);
+     return RISCV_EXCP_NONE;
+ }
+@@ -3422,6 +3442,15 @@ static RISCVException write_henvcfg(CPURISCVState *env, int csrno,
+         }
+     }
+ 
++    /*
++     * CBIE is a WARL field: encoding 10 is reserved.  A software write of
++     * this encoding must canonicalize to a supported value instead of being
++     * retained in the readback.
++     */
++    if (cfg->ext_zicbom && get_field(val, HENVCFG_CBIE) == 2) {
++        val &= ~HENVCFG_CBIE;
++    }
++
+     if (riscv_cpu_mxl(env) == MXL_RV32) {
+         /*
+          * RV32 stores STCE/ADUE/PBMTE/DTE in henvcfgh, so a low-half henvcfg
+-- 
+2.55.0.windows.2
+
 
