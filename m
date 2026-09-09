@@ -4,109 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE774C79F8C
-	for <qemu-riscv@archiver.kernel.org>; Wed,  9 Sep 2026 07:33:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6651AC79F8C
+	for <qemu-riscv@archiver.kernel.org>; Wed,  9 Sep 2026 08:43:30 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x4Cnl-0007UW-IC; Wed, 09 Sep 2026 03:33:01 -0400
+	id 1x4DtF-0008FD-1q; Wed, 09 Sep 2026 04:42:45 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <readqemu@gmail.com>)
- id 1x4Cnk-0007U6-NI
- for qemu-riscv@nongnu.org; Wed, 09 Sep 2026 03:33:00 -0400
-Received: from mail-ed1-x52e.google.com ([2a00:1450:4864:20::52e])
+ (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
+ id 1x4DtC-0008EO-T5
+ for qemu-riscv@nongnu.org; Wed, 09 Sep 2026 04:42:42 -0400
+Received: from mail-pl1-x635.google.com ([2607:f8b0:4864:20::635])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <readqemu@gmail.com>)
- id 1x4Cnj-0004ON-Af
- for qemu-riscv@nongnu.org; Wed, 09 Sep 2026 03:33:00 -0400
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-6a60f0dbeccso7319107a12.0
- for <qemu-riscv@nongnu.org>; Wed, 09 Sep 2026 00:32:58 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1788939177; cv=none;
- d=google.com; s=arc-20260327;
- b=DwbcB7cEf3PSnnFI6mpBayJsfeVgQ3NSi0N28oGZuNrwYNLWIE+2iH/1s/uimUSSIw
- 8ooRPmdLtqeQf2I1xackT+DzhMjkQSzgJO74uN+MOIavnBZ0qR/BjOHU+mqhjY7r8/U/
- 9VxL9JBV0rmtJqDoQwuRy0z/fgCHsLGk3AQ5lGjmqNHzWXuCwIl1vXXrIrKaNV4DCfi8
- gocitEM7H0i40h6Gj2FHm8ITsS9N84hP7+bshA0Z8sdtbxlMUXItSigwMM7Gc6RVEyxt
- XwAw+oUjxww/4oCvcbtReX0Kcjy99GdlPKnFdNTa2ZbMlT7LHLPpeUeznrcuOxmYxM/J
- dNOg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=L1lp+a6grUq9QWrKs7p5Wo+a4nCUMqQfkPzxpyIiF+8=;
- fh=NR3nEGYjcJ9oIS3xUtdkm/GXNX9ypWw7PiBlMYWw17s=;
- b=nViT0/+9wcxxyleMF1cR7Zl+ZBtgHDY8ZKJ/WpTdQ+r/UKyeaXI0LRA/APiIRG/+0Q
- orIxZXSmpOQprmn2GcNoNBt+4a9aUbAzZ6toDXSRmrmb7cpHxbjo8cTeuUB5Gd3PmnwS
- CQIjjG/VzZoj9LQBvdCnIdDhsYr5j43CrZoWiZfdjrBbZEMJRgNR/F86zufDRG8Y+bVR
- azsLWVm+dc0dve3cekncmVMfWb8FpspUz6qf+hmmGP9AgqkAfGUS3whSpmfNsDAecDP2
- rGWSXx2jHyOf4R+0TmmHjg1B1aI8RvFfIHORwP4VY2T2c71K09EZwj9L1OfamIeF7QJI
- bWkA==; darn=nongnu.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
+ id 1x4DtB-0003IK-94
+ for qemu-riscv@nongnu.org; Wed, 09 Sep 2026 04:42:42 -0400
+Received: by mail-pl1-x635.google.com with SMTP id
+ d9443c01a7336-2d71d1cc8b2so42021335ad.1
+ for <qemu-riscv@nongnu.org>; Wed, 09 Sep 2026 01:42:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1788939177; x=1789543977; darn=nongnu.org;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=L1lp+a6grUq9QWrKs7p5Wo+a4nCUMqQfkPzxpyIiF+8=;
- b=QktBvQMYFMK3aZpmaDVQjtGbd8JeqTqb6SROYp476j2eY2BmFEKy8ho1qs9R4sXiVd
- S1KSHJpJc55TRjoBAM9gSG2HDOY1eZcycWA/o8QnALi4pbdTuTCkiYFhuoPvAiE3DyD/
- TsQ6w4ADNv60xgcOXRjibnfu+lhuEVVcY5+7Aa/y7hze/zg/QYo2Kjp4hRilUegH2TRG
- VsemNhRflfZDi1BI/6mYXhkZ06poNezDk4/il8/cdggnDEexjvof7nFAgtWDUip8lD7f
- dJxszPamCxTB38UxcowujRz7F1YAD3zPPuPcW23HR6BfaU4nNuThFOfo5lgPaha99G1H
- axIw==
+ d=sifive.com; s=google; t=1788943360; x=1789548160; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=YonI5g7MMuvuxfLeG4auDPo0EnkSd0OHxLNejjnXnho=;
+ b=fYr+1foXHyR1S5aVBqcpdxIsWJjyy/uLQEnacmjUXNZ8+SuD9utAifLmD6Fq+wtEpG
+ OSHA8s+1dvAi5/QgiCLsuJwZmNDMJ8dOTzpoRRewSTcR9DtfJwgca1HZwtK3m9+1hGv2
+ kSNnudwfGhJY+vR9L25v9lbPyhC3wzce4BKzjtMx4lvDCjOipgiZPSrm4klrbhqy7mIk
+ 8jaIHrHmHEMTblC7TZVNQe3DW7RkLns81WfmHj2qF7GKQt7TNB2eaRJrZ1jGyGLFqm+E
+ rPGJA2GtCwZ9fCHD/GAxEOmSUuum96/hfeho4SSE+pnNfkDqdtE17GufV210ynG3nCME
+ V7FQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788939177; x=1789543977;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=L1lp+a6grUq9QWrKs7p5Wo+a4nCUMqQfkPzxpyIiF+8=;
- b=cEwXj2OFv6JJ6qk2vHWV/LKRvYzpsDK4h1Zr/qK8Q6rBoZSGh9DPTSPBlaeTvsD8tk
- ew8SvibYbwiURSXxk9fHBekyDYIT+046GAeevqpBgIP3frzaGRzAEbDo106Zgromwvr9
- yruo2PV9AnhSIfhZ8wLN/HWiI398GhnjOMUysAtKrN3L2h/pwd8OF2dRv2v4EfD6YWZ4
- ZgKHcbz54hVDDcDsb+KPKOWyLEzL324gjNMkVavAnZ9G/X1rqSA3UmmjKalCzVfZyVSC
- 7Ye8RReFTvgA5Iq+v4JfUvukYskD+PdkH2uHjP6ufb7R/57E0YUkQ7AVJ7Z2qdj9j9y4
- Y5XA==
+ d=1e100.net; s=20251104; t=1788943360; x=1789548160;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=YonI5g7MMuvuxfLeG4auDPo0EnkSd0OHxLNejjnXnho=;
+ b=eHZ6e8VpjIUyCi/WtPA469FLfkfdiYCRtuQWy4TY4wV0/ALYPyh98LdoHZkLXYJnp4
+ xrPiXVvc7SjwuyimyItIwD291tay2zLmvL/3ZwvNrP5QH5L9vMuNdtjgDB0SYb/GuDFP
+ E+EMcnEirG97opraJHptBuoMhT8JGLbjszXrnCJDBgXa17HMJOH+KCB7V/OwoezGWjS3
+ UkLw3rh3Pgvmev4jRBby6JCZHv8SLVABgBbX/sfNO46P6DxCqzPs4uzeYqlv4gvrF5XO
+ 96LhHX9TbxKFu73l+w94kHXgKB5PuVjJAjMRrNbQ7KCuvORVfbzhNaD/p+xKm5f1r9F8
+ /6lA==
 X-Forwarded-Encrypted: i=1;
- AKwUvBzNyRvkO6zJj6/bE2FZ7HUZWtFgutCMS5R6GYDdyn1MpS+WfoUUKvKwZBm85Lq5/2FV6cMnw0iu0RyV@nongnu.org
-X-Gm-Message-State: AFuF++nKxVkVEw53c5M4KZ4qIqNVGYXhSONeEe+yYIJ6iBzmVXCNSyzY
- NaZKWcg6wTknYiZhO3O63wwBsfjyx9HvlqNHp7O5UrgYnMIrRRiueA6UoqBWNVgYNXJAMk6P2Xe
- jGxJf0gxXhACd0nyBI29TRmpYSbXozdY=
-X-Gm-Gg: AYBFou3cd5VNIcJpCnYz3IzPyRPnAUZ9l1xJKfRxDFDsMra05HlGfG0w8+wCpIQk3Hw
- 4brZsEfzhlK/qXKSytnUNqxW0O2jNYvi2S8Z+Ttmqk96ig3TCWhcB6tIVt3ei8k66vQQt1LVFMm
- K9L0KWse/q//KkIKnbCq8zI/gI7cld9lS813VmP4jsevxlTV2l1uWvaNxA7SL+11pJnIjsd0F60
- qwXOXY5HTGD5XPtsEBGuIz8VUxiSTbyh0YE6UHNX3EiuGdXF/Tzn9CH63ssedTq45k+6jUnLx4k
- +Hr9lQqvAcG2RKZPmYLdGc/iJZzmQtzYE8u5sUJyUYr6k0/6Wy8Ul81eMg==
-X-Received: by 2002:a05:6402:13d2:b0:698:e614:e4bf with SMTP id
- 4fb4d7f45d1cf-6a7e8cb530amr11447107a12.0.1788939177276; Wed, 09 Sep 2026
- 00:32:57 -0700 (PDT)
+ AKwUvBx1yvh7LfAhl4jHOkvNm/o78CdGlJycaO39HnO8gl33/ot4X3hpGLhLEv7jXU6aoAYjFPq3YKthEho8@nongnu.org
+X-Gm-Message-State: AFuF++mXmSJMh7sDKuE81zSxs+ZCSfakOxXsmARt2i20Oghg4aF50IA8
+ vJkil9l2zXtV9sqb2PxidKCBLuLakJ9ZuV87u92JiaAmoPZlsJ4T2fEgnHi9lYcIKhY=
+X-Gm-Gg: AYBFou3IdzqaCfwanKJdw4YimAo6uDWR0tFfA5yFzj/zp0af1170Iit0BM1d1FEDLgH
+ 88fUbYGevJabYONzpErX5LIOL/IHwhscht/gZrklJAsxStRoksjX1rmTWKW9HNzqf+WULVl57Gq
+ boBhTSUl5tFettQA0iXFyFiqTQd4aPzagI5Yzr5lMMItB3N6jhAzVcf38D5FDpVzgbgQLbdGG+B
+ u6vAkGQk5ZT7B3UoVb/zBWXvcQcpRHXk9YKlKJ+FK9+ZJ42/f2JKoVtwnf4WDQ22UCOs8pkELMr
+ R5nKpWN6N9NIr6WUSJevST5Y3VtaDEAPkRLSwFa6Z6dXU9w9s3eNngGSTymo8CmFhdGw0bb+CXd
+ ByuHAjvE+v+4yMLl/lGNOoWFYkUyqGzITENR4uZqTv3Q/CkQYqdQC7Fg+LCChzg6xsXJkiHQhYe
+ Ck5ouzLUJ1175gaEaIE1xyN39ZAYydlDIq9eqw8lZUmA+TNPw6r7DOASNvfkwOOhjCPXxLJDqRU
+ BqIjP0abND507VKi8IiRbsuF95X6dX2cO0qybtUh/Dq61g2WTK8b8QohS13WhN6QXf/zpFApA==
+X-Received: by 2002:a17:903:2a8c:b0:2d6:f988:398f with SMTP id
+ d9443c01a7336-2db1259d1edmr482824065ad.12.1788943359705; 
+ Wed, 09 Sep 2026 01:42:39 -0700 (PDT)
+Received: from duncan.localdomain (114-35-142-126.hinet-ip.hinet.net.
+ [114.35.142.126]) by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2db56c2a1f1sm38328225ad.78.2026.09.09.01.42.36
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 09 Sep 2026 01:42:38 -0700 (PDT)
+From: Max Chou <max.chou@sifive.com>
+To: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, richard.henderson@linaro.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Chao Liu <chao.liu@processmission.com>, Max Chou <max.chou@sifive.com>
+Subject: [PATCH 1/6] target/riscv: Match PMP entries lying inside the checked
+ range
+Date: Wed,  9 Sep 2026 16:41:48 +0800
+Message-ID: <20260909084154.223529-2-max.chou@sifive.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260909084154.223529-1-max.chou@sifive.com>
+References: <20260909084154.223529-1-max.chou@sifive.com>
 MIME-Version: 1.0
-References: <20260723200325.24969-1-zhiwei_liu@linux.alibaba.com>
- <20260723200325.24969-2-zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <20260723200325.24969-2-zhiwei_liu@linux.alibaba.com>
-From: Qemu <readqemu@gmail.com>
-Date: Wed, 9 Sep 2026 15:32:44 +0800
-X-Gm-Features: AcwNN1UthEaXlNHv0uiJDAv2G2v1Z8J-UPbzgvVms4BfFSJ9r3khhaCgEsqZf7g
-Message-ID: <CAMXXpfZoEHGRXTMzWtmtkBcnp+YO9O=sJqV0M4oyUYKvoPs7hg@mail.gmail.com>
-Subject: Re: [PATCH v8 01/11] target/riscv: Add basic definitions and CSRs for
- SMMPT
-To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-Cc: qemu-devel@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com, 
- daniel.barboza@oss.qualcomm.com, chao.liu.zevorn@gmail.com, 
- liwei1518@gmail.com, qemu-riscv@nongnu.org, rahul@summations.net, 
- xiangyi.zeng@linux.alibaba.com, cxx194832@alibaba-inc.com, 
- Huang Tao <eric.huang@linux.alibaba.com>,
- TANG Tiancheng <lyndra@linux.alibaba.com>
-Content-Type: multipart/alternative; boundary="0000000000002fb934065b07dce6"
-Received-SPF: pass client-ip=2a00:1450:4864:20::52e;
- envelope-from=readqemu@gmail.com; helo=mail-ed1-x52e.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::635;
+ envelope-from=max.chou@sifive.com; helo=mail-pl1-x635.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -122,35 +108,86 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---0000000000002fb934065b07dce6
-Content-Type: text/plain; charset="UTF-8"
+pmp_hart_has_privs decides the permissions of a byte range by testing
+only the two endpoint bytes against each PMP entry. An active entry
+lying strictly between the endpoints matches neither byte and is
+skipped, so a lower-priority entry silently grants an access that the
+higher-priority entry must deny.
 
-> This provides the necessary infrastructure for the core MPT logic and
-> MMU integration that will follow.
->
-> Co-authored-by: Huang Tao <eric.huang@linux.alibaba.com>
-> Co-authored-by: TANG Tiancheng <lyndra@linux.alibaba.com>
-> Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+Replace the endpoint sampling with interval tests, mirroring the
+predicate pmp_get_tlb_size already uses.
 
-Reviewed-by: Jay Chang <jay.chang@sifive.com>
+Signed-off-by: Max Chou <max.chou@sifive.com>
+---
+ target/riscv/tcg/pmp.c | 31 ++++++++++---------------------
+ 1 file changed, 10 insertions(+), 21 deletions(-)
 
-Thanks.
+diff --git a/target/riscv/tcg/pmp.c b/target/riscv/tcg/pmp.c
+index 41b55519a8e..94224920d8d 100644
+--- a/target/riscv/tcg/pmp.c
++++ b/target/riscv/tcg/pmp.c
+@@ -299,20 +299,6 @@ void pmp_update_rule_nums(CPURISCVState *env)
+     }
+ }
+ 
+-static int pmp_is_in_range(CPURISCVState *env, int pmp_index, hwaddr addr)
+-{
+-    int result = 0;
+-
+-    if ((addr >= env->pmp_state.addr[pmp_index].sa) &&
+-        (addr <= env->pmp_state.addr[pmp_index].ea)) {
+-        result = 1;
+-    } else {
+-        result = 0;
+-    }
+-
+-    return result;
+-}
+-
+ /*
+  * Check if the address has required RWX privs when no PMP entry is matched.
+  */
+@@ -387,8 +373,8 @@ bool pmp_hart_has_privs(CPURISCVState *env, hwaddr addr,
+ {
+     int i = 0;
+     int pmp_size = 0;
+-    hwaddr s = 0;
+-    hwaddr e = 0;
++    hwaddr last = 0;
++    bool size_known = size != 0;
+     uint8_t pmp_regions = riscv_cpu_cfg(env)->pmp_regions;
+ 
+     /* Short cut if no rules */
+@@ -414,12 +400,15 @@ bool pmp_hart_has_privs(CPURISCVState *env, hwaddr addr,
+      * 1.10 draft priv spec states there is an implicit order
+      * from low to high
+      */
++    last = addr + pmp_size - 1;
++
+     for (i = 0; i < pmp_regions; i++) {
+-        s = pmp_is_in_range(env, i, addr);
+-        e = pmp_is_in_range(env, i, addr + pmp_size - 1);
++        hwaddr sa = env->pmp_state.addr[i].sa;
++        hwaddr ea = env->pmp_state.addr[i].ea;
++        bool contains = (sa <= addr) && (last <= ea);
++        bool overlaps = (addr <= ea) && (sa <= last);
+ 
+-        /* partially inside */
+-        if ((s + e) == 1) {
++        if (size_known && overlaps && !contains) {
+             qemu_log_mask(LOG_GUEST_ERROR,
+                           "pmp violation - access is partially inside\n");
+             *allowed_privs = 0;
+@@ -430,7 +419,7 @@ bool pmp_hart_has_privs(CPURISCVState *env, hwaddr addr,
+         const uint8_t a_field =
+             pmp_get_a_field(env->pmp_state.pmp[i].cfg_reg);
+ 
+-        if (((s + e) == 2) && (PMP_AMATCH_OFF != a_field)) {
++        if (contains && (PMP_AMATCH_OFF != a_field)) {
+             /*
+              * If the PMP entry is not off and the address is in range,
+              * do the priv check
+-- 
+2.43.0
 
---0000000000002fb934065b07dce6
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div><span class=3D"gmail-il">&gt; This provides the neces=
-sary infrastructure for the core MPT logic and<br>&gt; MMU integration that=
- will follow.<br>&gt;=C2=A0<br>&gt; Co-authored-by: Huang Tao &lt;<a href=
-=3D"mailto:eric.huang@linux.alibaba.com" target=3D"_blank">eric.huang@linux=
-.alibaba.com</a>&gt;<br>&gt; Co-authored-by: TANG Tiancheng &lt;<a href=3D"=
-mailto:lyndra@linux.alibaba.com" target=3D"_blank">lyndra@linux.alibaba.com=
-</a>&gt;<br>&gt; Signed-off-by: LIU Zhiwei &lt;<a href=3D"mailto:zhiwei_liu=
-@linux.alibaba.com" target=3D"_blank">zhiwei_liu@linux.alibaba.com</a>&gt;<=
-/span></div><div><span class=3D"gmail-il"><br></span></div><span class=3D"g=
-mail-il">Reviewed</span>-by: Jay Chang &lt;<a href=3D"mailto:jay.chang@sifi=
-ve.com">jay.chang@sifive.com</a>&gt;<div><br></div><div>Thanks.</div></div>
-
---0000000000002fb934065b07dce6--
 
