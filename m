@@ -4,139 +4,146 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B59F7C79FBB
-	for <qemu-riscv@archiver.kernel.org>; Wed,  9 Sep 2026 13:33:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBE4DC79FB7
+	for <qemu-riscv@archiver.kernel.org>; Wed,  9 Sep 2026 13:42:39 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x4IQ0-00056z-77; Wed, 09 Sep 2026 09:32:52 -0400
+	id 1x4IZI-0007WR-3d; Wed, 09 Sep 2026 09:42:28 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1x4IPu-00056F-Kr
- for qemu-riscv@nongnu.org; Wed, 09 Sep 2026 09:32:48 -0400
-Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
+ id 1x4IZH-0007WD-8Q
+ for qemu-riscv@nongnu.org; Wed, 09 Sep 2026 09:42:27 -0400
+Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1x4IPq-0005BF-WB
- for qemu-riscv@nongnu.org; Wed, 09 Sep 2026 09:32:46 -0400
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+ id 1x4IZF-0007Ix-A6
+ for qemu-riscv@nongnu.org; Wed, 09 Sep 2026 09:42:27 -0400
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 689BU1P91810006
- for <qemu-riscv@nongnu.org>; Wed, 9 Sep 2026 13:32:39 GMT
+ 689BoXrR2698591
+ for <qemu-riscv@nongnu.org>; Wed, 9 Sep 2026 13:42:23 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- t7LjnAahdGyKDVmM/szv2AcgJF+dliGyaokTG9V3aeM=; b=IJXLAWjYph+ft3Gf
- AY4m5JU/lCpc7/NMJeN1RAYg4KwyTJLkPWSkg/UIuRGx9NqRhdktP5/dSaUda8Jp
- LJNU4ndn7JvGe5ercVZDOKtbcJT+x1VtEKNVjtrjxJL3PIOp0WJCbpZdfs2O6EwX
- IH9hSupaz+3yabOAi3TEL9flJ5fRb1eLaMXp5893A9H/k2NAI2rqY9bFLSDkSy2k
- oWYsw/0cggYpgg6g94QW9GDV93LsGooHjmjRUQwInPdBMCwWwyGlm/FtL6KAAjl5
- R/p9XseUvD4FHdon5Mt+UOWUNR0x7hAKP7Wfv8XWFiyKksL7qCbGwrfjWuWi59zF
- Q/oC2A==
-Received: from mail-oi1-f198.google.com (mail-oi1-f198.google.com
- [209.85.167.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gk4xj0vnp-1
+ zGHYY1cLtxzUa1g9TN9Lq69vVvh4kJwNdcwvmNTqxQI=; b=fO5LwvXfxw9Obr/E
+ GwtK3M84rg22XjkPbLT8juCm47H6X1rEU9WLkHLJSWXz1tgMDZ8gzD7BwtDRuLWL
+ I+zM/L40SZYT5ru7/91Fbo63D+MzhVbEg3uSXyUvBoapnx9PkFu9euE0znx9oXUM
+ aPsEPORHKzNQo8gTxcnjTWATDz0xtAqfWtPoxGPseOuczyO2sDE2LkGRAc3VUEEk
+ SXJu0A54f7lT3NTO+VIUBWxeXsXoKECw/MtbvvwdBtFS7xQBLKBWc/QctCBJ8oXa
+ 0ROq13iEFPGGxW2pZ049rIuTSABUbmJ2Uu1nXh3q6Fa6Xnqoqr0k3hB7cAacwA44
+ 0jUrgg==
+Received: from mail-yw1-f200.google.com (mail-yw1-f200.google.com
+ [209.85.128.200])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gk6xh0f2e-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Wed, 09 Sep 2026 13:32:39 +0000 (GMT)
-Received: by mail-oi1-f198.google.com with SMTP id
- 5614622812f47-4b37733badcso7386110b6e.1
- for <qemu-riscv@nongnu.org>; Wed, 09 Sep 2026 06:32:39 -0700 (PDT)
+ for <qemu-riscv@nongnu.org>; Wed, 09 Sep 2026 13:42:23 +0000 (GMT)
+Received: by mail-yw1-f200.google.com with SMTP id
+ 00721157ae682-872022ea47eso90349027b3.0
+ for <qemu-riscv@nongnu.org>; Wed, 09 Sep 2026 06:42:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1788960759; x=1789565559; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1788961342; x=1789566142; darn=nongnu.org;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=t7LjnAahdGyKDVmM/szv2AcgJF+dliGyaokTG9V3aeM=;
- b=KSG8UqG6cutp4/o33X5mEWS8zBLiiGC244K5NKpAvzS/HJXz7OM/rAr+xJZ4ss31Fc
- 5+4dU7iMpW9PNxpe4dgJ8jEn6l42J4X5w+cmPY0kTeByZXG9HG3LV9BDVDfoJptfoU0u
- NpqqzBrRTeUGotfJ7ov4Kul0p0YGokQr6qpX541QhbVbd2R/4UBJzwZicaYe4Qr3/sM4
- FumOngDaaRzizDfTo/TdHJAAAGkO7RTGDBVvwC/7JdglXD1oDnZAa0b1mWzOODwLXJ9l
- 6xb68MLvVb2h9i7t0Fto/Bg24jn737aP11CKZrHGPGeOMZpET67m0kHMvDikvRCYQUmY
- c9fw==
+ bh=zGHYY1cLtxzUa1g9TN9Lq69vVvh4kJwNdcwvmNTqxQI=;
+ b=GgaQ7rH3Lg337WyV+tdhKQI9JFUJdEbQAja2eH2NYSjkHSYw49rw8QX5al+K0V+yTQ
+ Bqn78S+f1+eDRXsu91rD3Quu5ivKQ0sMWHWhwgIzjuhcJWV8f/tASBI67SEuMuToZdZl
+ KOAbzLtKOYEGe5fpCIo1+ENSPUU8e+a1+f9qwFD6MTK6ID8uzfIwdhu5NPvje7sslu6u
+ Br14GU6Ym8OidqcwyH9x6p8/rmdOtlz7LIWEecFNHH5bNRJFpJHquCE0BvKzSawkc08d
+ PZ+z19sQwZAgRXs3rpmZcOb4N6yYyNXgO3q45zWyFuMV5SzQ9TYVIzT7J7v/MACfHS3m
+ yc6g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788960759; x=1789565559;
+ d=1e100.net; s=20251104; t=1788961342; x=1789566142;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=t7LjnAahdGyKDVmM/szv2AcgJF+dliGyaokTG9V3aeM=;
- b=Hj3R7+xJgbX91IILbeScHEiUHxhp/tk8WZ+azSdAPVyTxm5Gjw9bteYiDOTOvdtHyp
- Y77bOttRWXCTNGgBPYcMr+JZLCAwyL0yXsMDuf6Cq/et333ua7OLGvRxgCo8SemxyvLF
- 6EQSiY3VhdjXd6xhJsK7xwVRJwwF7Qymy9KSI59nmlTqUNsZbDubiTfSN2gNOQV472n2
- rx7Kb9vxaJqqMPEF+XF6nJir+0xckz44cb1uax95Yz9Sdm2ya3sYWor5fhOTNnB/Nzzv
- plZ18aTvQk+hesXN5imT5fAx0w/22zW1yff3BLrLGTpr0Qj0TJ7bUZQPhcXvRrGlaqW+
- udxg==
-X-Gm-Message-State: AFuF++l/q+igmAKPeFkt7zuRw4a6zEwfOFkjAx0BQCyo+/vWVnAACquB
- XYIm3ysP7UV2DjlVfsqg2iXXwJ9cKiN2L0cNFDW/iqBrSKfUcoFEfy8pyMeqrj6aI3HM5ZBho7l
- WJhu3Xe6B7I9fEmGvwuaO+kWMg2UvcNHZgb7CKMOdkD/BAKfhfa8lreX6bA==
-X-Gm-Gg: AYBFou3VSA5iYN9bKDK4KWiusM3+JE/Dn3cEIv0NOJmoXk1mIDybOhocVutBSdMQH7h
- GNs9+aiMk5/oOmCOuIBxGRLyNtxA3UjxiPY3+mtwGerqxH7gmWUyxBQxCkxHbD1bkrX/9gQjs46
- fQhUD0J76CYaM+E/bb5RUpply8ELvRa6sHbIM0oE3nW8XfZd/2zPxitTIxP9F7kqo4U6I2Yc/ik
- Y022a5nzG6S4WnZoj17DPPM1FrRvJBmg3P4VAGyEog2+3vFHj8VOW2wDO3UCV1kd3cuBfSiMaCQ
- QkTkHxzibpgwGuMW5LTBTS9LOfe4RjjbaosqUA6hJU3OWFoN7vygsruUPkIjY3p/T4DMdj2vFNG
- MZyAeJ/lPysPyazCCCNCQnXC+JBlJwDXV0l4=
-X-Received: by 2002:a05:6808:4487:b0:4b9:e5fa:890d with SMTP id
- 5614622812f47-4b9e5fa8d80mr18245156b6e.32.1788960758624; 
- Wed, 09 Sep 2026 06:32:38 -0700 (PDT)
-X-Received: by 2002:a05:6808:4487:b0:4b9:e5fa:890d with SMTP id
- 5614622812f47-4b9e5fa8d80mr18245124b6e.32.1788960758148; 
- Wed, 09 Sep 2026 06:32:38 -0700 (PDT)
+ bh=zGHYY1cLtxzUa1g9TN9Lq69vVvh4kJwNdcwvmNTqxQI=;
+ b=e2ovr4ceNsrYlZPwJAuA2q3SMDJDyEzdmIZbkFTkJkBg4/NJ4oR3SyhiSLekDWdNZd
+ 2rAuJ9wyNW0XuZQQ/EUXB4Aq/TvhH5FfEyFip6C6ZSHIQ0+tiyNqjGUUpvX+aboKcRuk
+ BEcOFU8qxCaDSvIBkeCDuZZlZ7SybZnVl4QQ5pPjKaLavjo+u7FhYMjhQH0oHFxJfnjz
+ gVDwEwUhz8TRuRIF0ptlcXngl8jRk/+wP2QHGzTDEO+T6b6xiE+V2zmTXSes+IbsAlW4
+ p3e6ifD+Rw/8tPDdF72yQaFJFzUjMH2koi29OBpoWWmfC0XkOOmW9fjtnEJ1cM3uBhIf
+ YgAw==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBznK2TgX6IzCDeScpKb4dxLkRXC7whEbCZLTP1yID4BZf1MtOHzOM2WyGHiiZaOnTCi7EhU+2hpbLVC@nongnu.org
+X-Gm-Message-State: AFuF++lVb2StezGcZ3jmm+1zP00z4rVWwiB4Gb8mAKWyxn1XRdAOuSR4
+ mgB/qEipm2gGi9ZBDOfuyvo43Bd7ujZx4ikoQk0xAjtldbeAtc8wqprR8zuBrViFlYBMzQQFU2X
+ PQWsPH8xdJrGTjhHH7dq1wqJ64RSMuWuCcP0dDWrvekmjRbD3MuIZYfJ8Hg==
+X-Gm-Gg: AYBFou2uxDLhFNBW8JKszR1zvSHOn6z5AmQcEY5+Dlf9occR69KTfXPUPFOtZ37VumP
+ dsXbDsGm9Vu+7PcUU95JVfWz5u6Czc8pv3v0qH25f0i8Vb+ueNbo7f8zkbzoJAmRDPAK2VojKNM
+ l9a845ITiifMqvKsu8St0jz260IqWJcmmmlLhmz5gfz2SmlnEeNlxVm57qRbIYHNyqX5DqfySBb
+ pAIIheYHSu6kFRLcmyj89PBXIb2AbYjN8YTC06uruzlW7KDnAH3vX62uEBv+sINLna5J97AkjC4
+ MDjU/Ie32r3HfCvVYYd9lO46IkQeoFCalNaDc2vVyPLZTQQUVlWVJef7RXkzNz3ray0MyBAanxi
+ dBQwDc1pT/apLu6AxS3Add4YltKH8jrDa3Fs=
+X-Received: by 2002:a05:690e:1596:20b0:66f:c1d8:19db with SMTP id
+ 956f58d0204a3-671101242cfmr324559d50.51.1788961342401; 
+ Wed, 09 Sep 2026 06:42:22 -0700 (PDT)
+X-Received: by 2002:a05:690e:1596:20b0:66f:c1d8:19db with SMTP id
+ 956f58d0204a3-671101242cfmr324410d50.51.1788961337211; 
+ Wed, 09 Sep 2026 06:42:17 -0700 (PDT)
 Received: from [192.168.68.102] ([177.18.66.131])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-6a9857ce120sm1623463a12.4.2026.09.09.06.32.34
+ 956f58d0204a3-66fb48b374bsm12367579d50.3.2026.09.09.06.42.14
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 09 Sep 2026 06:32:37 -0700 (PDT)
-Message-ID: <a45bb8de-bd10-4745-9865-7f277fec148d@oss.qualcomm.com>
-Date: Wed, 9 Sep 2026 10:32:32 -0300
+ Wed, 09 Sep 2026 06:42:16 -0700 (PDT)
+Message-ID: <57ee549f-9ffa-426a-abd8-95c9f8cbcc31@oss.qualcomm.com>
+Date: Wed, 9 Sep 2026 10:42:12 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v8 0/7] riscv: add initial sdext support
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com
-References: <20260907114615.1609913-1-daniel.barboza@oss.qualcomm.com>
+Subject: Re: [PATCH v2] target/riscv: Fix LCOFI interrupt masking in
+ sie/sip/mvip
+To: Mayuresh Chitale <mayuresh.chitale@oss.qualcomm.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>
+Cc: Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Chao Liu <chao.liu@processmission.com>, Gong Shuai <gsh517025@gmail.com>,
+ TianCheng TANG <lyndra@linux.alibaba.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+References: <20260907065112.2287127-1-mayuresh.chitale@oss.qualcomm.com>
 From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Content-Language: en-US
-In-Reply-To: <20260907114615.1609913-1-daniel.barboza@oss.qualcomm.com>
+In-Reply-To: <20260907065112.2287127-1-mayuresh.chitale@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA5MDE1MCBTYWx0ZWRfXzdS0PkAfakRf
- 459Q4SFBC8z+FQjTfn0Oth+UET3pCwjVQMjNtEhLOYAHyyLrEYoFMtSsjntDUmQnZeddiNitMP/
- hQDpLZdFXABlDvdyVLTGUcEBC4chDHo=
-X-Authority-Analysis: v=2.4 cv=J52aKgnS c=1 sm=1 tr=0 ts=6aa15ff7 cx=c_pps
- a=4ztaESFFfuz8Af0l9swBwA==:117 a=CQQxcbsX5Byh3TlVSSGwig==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA5MDE1MiBTYWx0ZWRfX8DOdNphHwnd/
+ YiDXrOWC0o/x+7wEih7+uZlKCKBtRj+LLA+cFmkTtbFnHwTBvEaKOG6/sNBFRca6FQxya24uH2t
+ HPWO29bQ4mlhAygBgPHz1Dddw4GlvNHVGqUALLq+MKIFe25+FUSi8KKYKoM5mGaWk+30f2GctEG
+ QC8Vi5SIXQRQirKTC2X6EyAYghCQD5g6jFTlS7fiXq91ASImQzUywPRuoMBeT+++r05QiU4OkDS
+ VgMnxDefU7ChEpTJFX9W0BjRQL7ZEStgH2CjwZGgO4i1a3O+YWHdFdDyFTEXGFCbRXgnER4eixc
+ 0Et06el7UJTOY7+3p7j69tjNdqhrpzBVyVChP/1DawO6an4jkfkqaNFw32bKJBp/UNraeqsDWb3
+ KQzxYck9y5IPla8qvD2MeGVdseoiZCEf5Y7qoaiKPNBId97cmZpdOskwDRkrxnt2nuHnb0fCvtv
+ nqUvJW4Ca8d0duWzWWQ==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA5MDE1MiBTYWx0ZWRfX0FyXhVyHKm2M
+ RB9+BvESXljXB8zVzjk+pJUTblDe1N5NqAdN77/2DMFjOMj1cssIzRoUNe0SrtVMqb2/0pVD2YI
+ xRrsRO6PPnzCnobNR4ipDts+pId2H5s=
+X-Proofpoint-GUID: gr-ORaebZ18c9eCcCEXPDC5yvR19TRU8
+X-Authority-Analysis: v=2.4 cv=KOlqylFo c=1 sm=1 tr=0 ts=6aa1623f cx=c_pps
+ a=NMvoxGxYzVyQPkMeJjVPKg==:117 a=CQQxcbsX5Byh3TlVSSGwig==:17
  a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=1SPZ6byordM7Gp-ApXYA:9 a=QEXdDO2ut3YA:10
- a=TPnrazJqx2CeVZ-ItzZ-:22
-X-Proofpoint-ORIG-GUID: bUWE7pAIzmLxkJTso1btlwneumTWtvfo
-X-Proofpoint-GUID: bUWE7pAIzmLxkJTso1btlwneumTWtvfo
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA5MDE1MCBTYWx0ZWRfX/zzGl08vHIxq
- n4GZwf9Srm9jJpJF9pxaWCSUv27jKSC5Bd9QfFskbXRPPZ4IQmWoL/pikViG4SOdMrLBmLuqJqT
- ou1yNFz66oVkqc32VE3Bv+2omHczNwgs4K3VV4ANaJNsxfZye8//LcnheCRaL9Y6C0ItxQXuKCZ
- 8OUo/zFpHXHRgZg09sjfDtbNBh+QhhwPX8YKlJrTn68gmwdzy694l7BQ9WUvxmbDhRDC3/+tMNg
- EzvWLY2cFmy4fr0gNeOHfq24M5BOqjToc0ShWiJo4Z3x0Wn/vTijinzVhR4cirwA5EV/jxn4t6h
- RO8e4RnamW67aIPeiR+j1QbfamfCuGglrANJHBfabyue+bAQIOTlCx5JuUFuhrZFrZgs8qNipY9
- IscudRStiMKXnB46dDA1BRHyx52eo200aF7r/fImDjsHjyeoUGDMaHQuf1TChOvtKiLIkDuvAwB
- D+/RUlo36c3jjiXPWOQ==
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
+ a=pGLkceISAAAA:8 a=SRrdq9N9AAAA:8 a=EUspDBNiAAAA:8 a=sIDyt5ZV4yyprIpx9BAA:9
+ a=QEXdDO2ut3YA:10 a=kLokIza1BN8a-hAJ3hfR:22
+X-Proofpoint-ORIG-GUID: gr-ORaebZ18c9eCcCEXPDC5yvR19TRU8
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-08_03,2026-09-09_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 priorityscore=1501 spamscore=0 adultscore=0 malwarescore=0
- suspectscore=0 impostorscore=0 bulkscore=0 clxscore=1015 phishscore=0
+ adultscore=0 priorityscore=1501 spamscore=0 impostorscore=0 phishscore=0
+ lowpriorityscore=0 bulkscore=0 suspectscore=0 clxscore=1015 malwarescore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609090150
-Received-SPF: pass client-ip=205.220.180.131;
- envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609090152
+Received-SPF: pass client-ip=205.220.168.131;
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
 X-Spam_score_int: -27
 X-Spam_score: -2.8
 X-Spam_bar: --
 X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -152,80 +159,184 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hello!
-
-It seems like after the tcg/tests meson infrastructure work we shouldn't
-add TCG tests the way we were doing before.
-
-With this series as is, on top of a recent master:
-
-$ make -C build -j 16 check-tcg
-(...)
-$ grep 'sdext'  /local/mnt/workspace/qemu/build/meson-logs/testlog.txt
-$
-
-If I change to the new meson infrastructure:
-
-$ make -C build -j 16 check-tcg
-(...)
-$ grep  'sdext'  /local/mnt/workspace/qemu/build/meson-logs/testlog.txt
-test:         tcg+tcg-riscv64-softmmu - qemu:riscv64-softmmu-test-sdext-sigill
-command:      MESON_TEST_ITERATION=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MALLOC_PERTURB_=171 RUST_BACKTRACE=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /usr/bin/env QEMU=/local/mnt/workspace/qemu/build/qemu-system-riscv64 /local/mnt/workspace/qemu/build/qemu-system-riscv64 -cpu rv64,sdtrig=true,sdext=true -M virt -display none -serial stdio 
--semihosting -bios tests/tcg/riscv64-softmmu-test-sdext-sigill.test
 
 
-We want to run the test with 'check-tcg' (and seems like it also runs with
-'check' too) so I'll re-send the patches with the relevant test changes.
-
-Cheers,
-Daniel
-
-
-On 9/7/2026 8:46 AM, Daniel Henrique Barboza wrote:
-> Greetings,
+On 9/7/2026 3:51 AM, Mayuresh Chitale wrote:
+> Commit 27f9566dcd98 dropped bit 13 (MIP_LCOFIP) from the LOCAL_INTERRUPTS
+> macro and hence also from individual masks such as all_ints,
+> sip_writable_mask etc.
 > 
-> This version is a simple rebase with master, where a trivial conflict
-> with tests/tcg/riscv64/Makefile.softmmu-target was solved, and with my
-> S-o-Bs on patches 1-6.
+> As a result, with Sscofpmf enabled and LCOFIP delegated to S-mode, the
+> overflow interrupt was raised in mip but was not visible in sip and it
+> never got delivered to the PMU driver. For the same reason, sie.LCOFIE
+> also became read-only 0.
 > 
-> No other changes made.  Patches based on master.
+> Add back bit 13 in the affected masks, but gate it on Sscofpmf being
+> implemented. In addition, for the virtual interrupt path, mvip/mvien
+> LCOFI also requires Smcdeleg and Smaia to be implemented. Also make
+> LCOFI delegable only if Sscofpmf is implemented.
 > 
-> Changes from v7:
-> - Added my S-o-B in patches 1-6
-> - Patch 7:
->    - fixed conflict with Makefile.softmmu-target
-> - v7 link: https://lore.kernel.org/qemu-devel/20260831141007.353854-1-daniel.barboza@oss.qualcomm.com/
+> Fixes: 27f9566dcd98 ("target/riscv: Update the local interrupt mask")
+> Suggested-by: Gong Shuai <gsh517025@gmail.com>
+> Suggested-by: TianCheng TANG <lyndra@linux.alibaba.com>
+> Signed-off-by: Mayuresh Chitale <mayuresh.chitale@oss.qualcomm.com>
+> ---
+
+Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+
+> v2:
+> - Fix the sip.LCOFIP read-back mask in rmw_sip64() so that it matches
+>    the write path.
+> - Gate LCOFI on the Sscofpmf, Smcdeleg and Smaia extensions, depending
+>    on the register being accessed and on whether it is the virtual
+>    interrupt path.
 > 
-> Chao Liu (6):
->    target/riscv: add sdext debug CSRs state
->    target/riscv: add sdext Debug Mode helpers
->    target/riscv: add dret instruction
->    target/riscv: add sdext enter Debug Mode on ebreak
->    target/riscv: add sdext single-step support
->    target/riscv: add sdtrig trigger action=debug mode
+>   target/riscv/tcg/csr.c | 59 +++++++++++++++++++++++++++++++++++-------
+>   1 file changed, 50 insertions(+), 9 deletions(-)
 > 
-> Daniel Henrique Barboza (1):
->    tests/tcg/riscv64: add sdext "not on Debug mode" sigill tests
+> diff --git a/target/riscv/tcg/csr.c b/target/riscv/tcg/csr.c
+> index 002f7e69c1..966a0897bb 100644
+> --- a/target/riscv/tcg/csr.c
+> +++ b/target/riscv/tcg/csr.c
+> @@ -1812,7 +1812,7 @@ static RISCVException write_stimecmph(CPURISCVState *env, int csrno,
+>   #define LOCAL_INTERRUPTS   (~0xFFFFULL)
+>   
+>   static const uint64_t delegable_ints =
+> -    S_MODE_INTERRUPTS | VS_MODE_INTERRUPTS | MIP_LCOFIP;
+> +    S_MODE_INTERRUPTS | VS_MODE_INTERRUPTS;
+>   static const uint64_t vs_delegable_ints =
+>       (VS_MODE_INTERRUPTS | LOCAL_INTERRUPTS) & ~MIP_LCOFIP;
+>   static const uint64_t all_ints = M_MODE_INTERRUPTS | S_MODE_INTERRUPTS |
+> @@ -1874,6 +1874,25 @@ static const uint64_t hvien_writable_mask = LOCAL_INTERRUPTS;
+>   
+>   static const uint64_t vsip_writable_mask = MIP_VSSIP | LOCAL_INTERRUPTS;
+>   
+> +static bool lcofi_present(CPURISCVState *env, bool virt_int)
+> +{
+> +    const RISCVCPUConfig *cfg = riscv_cpu_cfg(env);
+> +
+> +    if (!cfg->ext_sscofpmf) {
+> +        return false;
+> +    }
+> +
+> +    /*
+> +     * For the virtual interrupts path, we also need to check if smcdeleg and
+> +     * smaia are both implemented.
+> +     */
+> +    if (virt_int && !(cfg->ext_smcdeleg && cfg->ext_smaia)) {
+> +        return false;
+> +    }
+> +
+> +    return true;
+> +}
+> +
+>   /* Machine Information Registers */
+>   static RISCVException read_zero(CPURISCVState *env, int csrno,
+>                                   target_ulong *val)
+> @@ -2248,6 +2267,10 @@ static RISCVException rmw_mideleg64(CPURISCVState *env, int csrno,
+>   {
+>       uint64_t mask = wr_mask & delegable_ints;
+>   
+> +    if (lcofi_present(env, false)) {
+> +        mask |= wr_mask & MIP_LCOFIP;
+> +    }
+> +
+>       if (ret_val) {
+>           *ret_val = env->mideleg;
+>       }
+> @@ -2299,6 +2322,10 @@ static RISCVException rmw_mie64(CPURISCVState *env, int csrno,
+>   {
+>       uint64_t mask = wr_mask & all_ints;
+>   
+> +    if (lcofi_present(env, false)) {
+> +        mask |= wr_mask & MIP_LCOFIP;
+> +    }
+> +
+>       if (ret_val) {
+>           *ret_val = env->mie;
+>       }
+> @@ -2349,6 +2376,10 @@ static RISCVException rmw_mvien64(CPURISCVState *env, int csrno,
+>   {
+>       uint64_t mask = wr_mask & mvien_writable_mask;
+>   
+> +    if (lcofi_present(env, true)) {
+> +        mask |= wr_mask & MIP_LCOFIP;
+> +    }
+> +
+>       if (ret_val) {
+>           *ret_val = env->mvien;
+>       }
+> @@ -3784,6 +3815,10 @@ static RISCVException rmw_mip64(CPURISCVState *env, int csrno,
+>       uint64_t old_mip, mask = wr_mask & delegable_ints;
+>       uint32_t gin;
+>   
+> +    if (lcofi_present(env, false)) {
+> +        mask |= wr_mask & MIP_LCOFIP;
+> +    }
+> +
+>       /*
+>        * When mvien[9]=1, mip.SEIP is read-only and reflects only
+>        * the external interrupt signal from the interrupt controller.
+> @@ -3897,9 +3932,11 @@ static RISCVException rmw_mvip64(CPURISCVState *env, int csrno,
+>        *  alias_mask denotes the bits that come from mip nalias_mask denotes bits
+>        *  that come from hvip.
+>        */
+> -    uint64_t alias_mask = ((S_MODE_INTERRUPTS | LOCAL_INTERRUPTS) &
+> +    bool virt_int = (csrno == CSR_MVIP) || (csrno == CSR_MVIPH);
+> +    uint64_t lcofi_mask = lcofi_present(env, virt_int) ? MIP_LCOFIP : 0;
+> +    uint64_t alias_mask = ((S_MODE_INTERRUPTS | lcofi_mask | LOCAL_INTERRUPTS) &
+>           (env->mideleg | ~env->mvien)) | MIP_STIP;
+> -    uint64_t nalias_mask = (S_MODE_INTERRUPTS | LOCAL_INTERRUPTS) &
+> +    uint64_t nalias_mask = (S_MODE_INTERRUPTS | lcofi_mask | LOCAL_INTERRUPTS) &
+>           (~env->mideleg & env->mvien);
+>       uint64_t wr_mask_mvip;
+>       uint64_t wr_mask_mip;
+> @@ -3928,8 +3965,8 @@ static RISCVException rmw_mvip64(CPURISCVState *env, int csrno,
+>           alias_mask &= ~MIP_STIP;
+>       }
+>   
+> -    wr_mask_mip = wr_mask & alias_mask & mvip_writable_mask;
+> -    wr_mask_mvip = wr_mask & nalias_mask & mvip_writable_mask;
+> +    wr_mask_mip = wr_mask & alias_mask & (mvip_writable_mask | lcofi_mask);
+> +    wr_mask_mvip = wr_mask & nalias_mask & (mvip_writable_mask | lcofi_mask);
+>   
+>       /*
+>        * For bits set in alias_mask, mvip needs to be alias of mip, so forward
+> @@ -4132,9 +4169,11 @@ static RISCVException rmw_sie64(CPURISCVState *env, int csrno,
+>                                   uint64_t *ret_val,
+>                                   uint64_t new_val, uint64_t wr_mask)
+>   {
+> -    uint64_t nalias_mask = (S_MODE_INTERRUPTS | LOCAL_INTERRUPTS) &
+> +    uint64_t lcofi_mask = lcofi_present(env, false) ? MIP_LCOFIP : 0;
+> +    uint64_t nalias_mask = (S_MODE_INTERRUPTS | lcofi_mask | LOCAL_INTERRUPTS) &
+>           (~env->mideleg & env->mvien);
+> -    uint64_t alias_mask = (S_MODE_INTERRUPTS | LOCAL_INTERRUPTS) & env->mideleg;
+> +    uint64_t alias_mask = (S_MODE_INTERRUPTS | lcofi_mask | LOCAL_INTERRUPTS) &
+> +        env->mideleg;
+>       uint64_t sie_mask = wr_mask & nalias_mask;
+>       RISCVException ret;
+>   
+> @@ -4379,7 +4418,9 @@ static RISCVException rmw_sip64(CPURISCVState *env, int csrno,
+>                                   uint64_t new_val, uint64_t wr_mask)
+>   {
+>       RISCVException ret;
+> -    uint64_t mask = (env->mideleg | env->mvien) & sip_writable_mask;
+> +    uint64_t lcofi_mask = lcofi_present(env, false) ? MIP_LCOFIP : 0;
+> +    uint64_t mask = (env->mideleg | env->mvien) &
+> +                    (sip_writable_mask | lcofi_mask);
+>   
+>       if (env->virt_enabled) {
+>           if (env->hvictl & HVICTL_VTI) {
+> @@ -4392,7 +4433,7 @@ static RISCVException rmw_sip64(CPURISCVState *env, int csrno,
+>   
+>       if (ret_val) {
+>           *ret_val &= (env->mideleg | env->mvien) &
+> -            (S_MODE_INTERRUPTS | LOCAL_INTERRUPTS);
+> +            (S_MODE_INTERRUPTS | lcofi_mask | LOCAL_INTERRUPTS);
+>       }
+>   
+>       return ret;
 > 
->   include/exec/translation-block.h              |   4 +-
->   target/riscv/cpu.c                            |   7 +
->   target/riscv/cpu.h                            |   9 ++
->   target/riscv/cpu_bits.h                       |  33 +++++
->   target/riscv/cpu_cfg_fields.h.inc             |   1 +
->   target/riscv/helper.h                         |   3 +
->   target/riscv/insn32.decode                    |   1 +
->   target/riscv/machine.c                        |  20 +++
->   target/riscv/tcg/cpu_helper.c                 |  91 +++++++++++++
->   target/riscv/tcg/csr.c                        | 126 ++++++++++++++++++
->   target/riscv/tcg/debug.c                      |  59 +++++++-
->   .../tcg/insn_trans/trans_privileged.c.inc     |  24 ++++
->   target/riscv/tcg/op_helper.c                  |  70 ++++++++++
->   target/riscv/tcg/tcg-cpu.c                    |  19 +++
->   target/riscv/tcg/translate.c                  |  15 ++-
->   tests/tcg/riscv64/Makefile.softmmu-target     |   5 +
->   tests/tcg/riscv64/test-sdext-sigill.S         |  83 ++++++++++++
->   17 files changed, 564 insertions(+), 6 deletions(-)
->   create mode 100644 tests/tcg/riscv64/test-sdext-sigill.S
-> 
+> base-commit: a925240509d1b4b656cc480f1cc79ba4d7c8bc08
 
 
