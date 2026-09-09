@@ -4,95 +4,139 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1531EC79F8C
-	for <qemu-riscv@archiver.kernel.org>; Wed,  9 Sep 2026 08:44:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B59F7C79FBB
+	for <qemu-riscv@archiver.kernel.org>; Wed,  9 Sep 2026 13:33:15 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x4DtN-0008Hd-Hm; Wed, 09 Sep 2026 04:42:53 -0400
+	id 1x4IQ0-00056z-77; Wed, 09 Sep 2026 09:32:52 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1x4DtL-0008Gr-Hu
- for qemu-riscv@nongnu.org; Wed, 09 Sep 2026 04:42:51 -0400
-Received: from mail-pj2-x10.google.com ([2607:f8b0:4864:39::10])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1x4DtJ-0003JM-CT
- for qemu-riscv@nongnu.org; Wed, 09 Sep 2026 04:42:51 -0400
-Received: by mail-pj2-x10.google.com with SMTP id
- d9443c01a7336-2d747ee1f38so6899885ad.2
- for <qemu-riscv@nongnu.org>; Wed, 09 Sep 2026 01:42:49 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1x4IPu-00056F-Kr
+ for qemu-riscv@nongnu.org; Wed, 09 Sep 2026 09:32:48 -0400
+Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1x4IPq-0005BF-WB
+ for qemu-riscv@nongnu.org; Wed, 09 Sep 2026 09:32:46 -0400
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 689BU1P91810006
+ for <qemu-riscv@nongnu.org>; Wed, 9 Sep 2026 13:32:39 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ t7LjnAahdGyKDVmM/szv2AcgJF+dliGyaokTG9V3aeM=; b=IJXLAWjYph+ft3Gf
+ AY4m5JU/lCpc7/NMJeN1RAYg4KwyTJLkPWSkg/UIuRGx9NqRhdktP5/dSaUda8Jp
+ LJNU4ndn7JvGe5ercVZDOKtbcJT+x1VtEKNVjtrjxJL3PIOp0WJCbpZdfs2O6EwX
+ IH9hSupaz+3yabOAi3TEL9flJ5fRb1eLaMXp5893A9H/k2NAI2rqY9bFLSDkSy2k
+ oWYsw/0cggYpgg6g94QW9GDV93LsGooHjmjRUQwInPdBMCwWwyGlm/FtL6KAAjl5
+ R/p9XseUvD4FHdon5Mt+UOWUNR0x7hAKP7Wfv8XWFiyKksL7qCbGwrfjWuWi59zF
+ Q/oC2A==
+Received: from mail-oi1-f198.google.com (mail-oi1-f198.google.com
+ [209.85.167.198])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gk4xj0vnp-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Wed, 09 Sep 2026 13:32:39 +0000 (GMT)
+Received: by mail-oi1-f198.google.com with SMTP id
+ 5614622812f47-4b37733badcso7386110b6e.1
+ for <qemu-riscv@nongnu.org>; Wed, 09 Sep 2026 06:32:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1788943368; x=1789548168; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=vImdkmvMo/lSnFvS/i/NnfNPKJd5mdI+EH5Dgwt+YC8=;
- b=kozbK1NmsgMXNpEtC+BcQBTnK4sNv2Ku4dZ+5YvJJtBCfdn3bPuFeJ93P3j5RCJn9p
- r0UAqYQTBwtqMXOK8FH6m/5AMQFlc9dsw4TSxH9YeDxXO4ySkvkmhcyfVUca/pz1xcNq
- V0asP57L1m8nmOauv73fecZNRwQWjqW8n4lEUfEEsqeCgZBBp9tOs0BxyT65U0r//lUd
- zorN/UgWN8UOibTwEed85Tkfp7xAvNRfD2iFWN0DDFBpR1R4a7suee7KEZP1GvxnTECl
- HXfC1MUEneKE324QdDhAFqPU7Yqir1a3Jv5GB8Hv5w462gs+b5Zc9NksvcMtJmDMxPYL
- XJ4A==
+ d=oss.qualcomm.com; s=google; t=1788960759; x=1789565559; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=t7LjnAahdGyKDVmM/szv2AcgJF+dliGyaokTG9V3aeM=;
+ b=KSG8UqG6cutp4/o33X5mEWS8zBLiiGC244K5NKpAvzS/HJXz7OM/rAr+xJZ4ss31Fc
+ 5+4dU7iMpW9PNxpe4dgJ8jEn6l42J4X5w+cmPY0kTeByZXG9HG3LV9BDVDfoJptfoU0u
+ NpqqzBrRTeUGotfJ7ov4Kul0p0YGokQr6qpX541QhbVbd2R/4UBJzwZicaYe4Qr3/sM4
+ FumOngDaaRzizDfTo/TdHJAAAGkO7RTGDBVvwC/7JdglXD1oDnZAa0b1mWzOODwLXJ9l
+ 6xb68MLvVb2h9i7t0Fto/Bg24jn737aP11CKZrHGPGeOMZpET67m0kHMvDikvRCYQUmY
+ c9fw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788943368; x=1789548168;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=vImdkmvMo/lSnFvS/i/NnfNPKJd5mdI+EH5Dgwt+YC8=;
- b=M83jBL7onx8osUbtdWei/7xVUiEoaQqrBO4OLw0qEImGHVLppb82eKd+p85WoUtEFw
- n8UhwxUjv9dk32THe8hWhjsAdH2rbu3Rom2bijNAn5YLbT0S/zJaPh6qCiNHnA4aH/pU
- k6+A27u0nIxjTdwHp3iU3NwiKtm3uGS4NNPdotCwsY9R/dE/5dPpXR9bSBjwdN6kig5X
- tUWq4VjABW6ijYDdwj0JUNxqcYr0QhREJd7ffTe4mPxqlumLUNITmZqLeIcPTE65LnDY
- Wc55ZnUN/hV6kaOmfT59WwXRM4/RHB0rbSj2Qny6Fa1vqosdRZ6Q2FRB5dVQnYewrVKl
- ld4g==
-X-Forwarded-Encrypted: i=1;
- AKwUvBzbd1ieZYcpmUNhXl1Zcpec7p2Xyul2P3/daLO5nS74Hkn/tNtVRZ2toh2Q7dnq+DwpkSMqACxROWVM@nongnu.org
-X-Gm-Message-State: AFuF++lYpuNw/SI/aZ/xGLd3LNgvkROQDWOjT/TpgyF2CBvW3ucb6wef
- 3/psxMn+OqKa+EyeCJiGe2iDZj5kjFme2CbsjjjIIQHxKkkpxSajVpihezGWVw45AB0=
-X-Gm-Gg: AYBFou0fZcbPpqrZVk4nuiwG8B9Z369R+FbcWKQ79G1uDGxenBP9eTB+sL8nK01Slwx
- nztD2W1fC7f0i1jHn6mFu/J/BWKIle6DppGYJk6fpbPBNp8LWRv5hM7RfVrWji0GeEILKC4hYNO
- wLN9XnGk/Qg0pajrlv1OZRiIkCi7wHnSZ1Hp8XF9D9er6gLZh9RYyOJVOHW7wyeDDBKa0KDoGls
- zv6VAotCi9fAKyCo1VVLubPB7IGlQbRuRiHbgevqSpkxSH0FRGvc/QBR8oeqBc9TG8+ITfwUgWX
- lkqbomX4YJ9Vjv/6hmQziZ/L7HZ/4RX2pFm5ZdV3mtQ1GufZDBIB9Q8kRxem6uidwS1arQMVfR5
- a7hBIFIGKaq3TgJ7GDZs6jj9M6P79+jtDMxJ/iFg/Nr3GCRWDm5zXYWq9aPXPkKwsKvUP7T+u4I
- uxMcGPq46b3XuzKTkckB/OIFP/WOAvCccMy9BjcCOjrwjPgi4v7/Co/p6JkXZlYPk3eEqknpATG
- gaAHZKcbRRmGw1vc4NhmNbo6j38Zv5UkS7ueHgEZeGBCcKrlHEi5OLaRK5Oh/HMM7HBfie/4BJt
- xWFfqEgW
-X-Received: by 2002:a17:902:fc4e:b0:2d7:3f6e:5cb9 with SMTP id
- d9443c01a7336-2db8da30a48mr62754735ad.8.1788943367894; 
- Wed, 09 Sep 2026 01:42:47 -0700 (PDT)
-Received: from duncan.localdomain (114-35-142-126.hinet-ip.hinet.net.
- [114.35.142.126]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2db56c2a1f1sm38328225ad.78.2026.09.09.01.42.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 09 Sep 2026 01:42:47 -0700 (PDT)
-From: Max Chou <max.chou@sifive.com>
-To: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, richard.henderson@linaro.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu@processmission.com>, Max Chou <max.chou@sifive.com>
-Subject: [PATCH 4/6] tests/tcg/riscv64: Add vector unit-stride PMP test
-Date: Wed,  9 Sep 2026 16:41:51 +0800
-Message-ID: <20260909084154.223529-5-max.chou@sifive.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260909084154.223529-1-max.chou@sifive.com>
-References: <20260909084154.223529-1-max.chou@sifive.com>
+ d=1e100.net; s=20251104; t=1788960759; x=1789565559;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=t7LjnAahdGyKDVmM/szv2AcgJF+dliGyaokTG9V3aeM=;
+ b=Hj3R7+xJgbX91IILbeScHEiUHxhp/tk8WZ+azSdAPVyTxm5Gjw9bteYiDOTOvdtHyp
+ Y77bOttRWXCTNGgBPYcMr+JZLCAwyL0yXsMDuf6Cq/et333ua7OLGvRxgCo8SemxyvLF
+ 6EQSiY3VhdjXd6xhJsK7xwVRJwwF7Qymy9KSI59nmlTqUNsZbDubiTfSN2gNOQV472n2
+ rx7Kb9vxaJqqMPEF+XF6nJir+0xckz44cb1uax95Yz9Sdm2ya3sYWor5fhOTNnB/Nzzv
+ plZ18aTvQk+hesXN5imT5fAx0w/22zW1yff3BLrLGTpr0Qj0TJ7bUZQPhcXvRrGlaqW+
+ udxg==
+X-Gm-Message-State: AFuF++l/q+igmAKPeFkt7zuRw4a6zEwfOFkjAx0BQCyo+/vWVnAACquB
+ XYIm3ysP7UV2DjlVfsqg2iXXwJ9cKiN2L0cNFDW/iqBrSKfUcoFEfy8pyMeqrj6aI3HM5ZBho7l
+ WJhu3Xe6B7I9fEmGvwuaO+kWMg2UvcNHZgb7CKMOdkD/BAKfhfa8lreX6bA==
+X-Gm-Gg: AYBFou3VSA5iYN9bKDK4KWiusM3+JE/Dn3cEIv0NOJmoXk1mIDybOhocVutBSdMQH7h
+ GNs9+aiMk5/oOmCOuIBxGRLyNtxA3UjxiPY3+mtwGerqxH7gmWUyxBQxCkxHbD1bkrX/9gQjs46
+ fQhUD0J76CYaM+E/bb5RUpply8ELvRa6sHbIM0oE3nW8XfZd/2zPxitTIxP9F7kqo4U6I2Yc/ik
+ Y022a5nzG6S4WnZoj17DPPM1FrRvJBmg3P4VAGyEog2+3vFHj8VOW2wDO3UCV1kd3cuBfSiMaCQ
+ QkTkHxzibpgwGuMW5LTBTS9LOfe4RjjbaosqUA6hJU3OWFoN7vygsruUPkIjY3p/T4DMdj2vFNG
+ MZyAeJ/lPysPyazCCCNCQnXC+JBlJwDXV0l4=
+X-Received: by 2002:a05:6808:4487:b0:4b9:e5fa:890d with SMTP id
+ 5614622812f47-4b9e5fa8d80mr18245156b6e.32.1788960758624; 
+ Wed, 09 Sep 2026 06:32:38 -0700 (PDT)
+X-Received: by 2002:a05:6808:4487:b0:4b9:e5fa:890d with SMTP id
+ 5614622812f47-4b9e5fa8d80mr18245124b6e.32.1788960758148; 
+ Wed, 09 Sep 2026 06:32:38 -0700 (PDT)
+Received: from [192.168.68.102] ([177.18.66.131])
+ by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-6a9857ce120sm1623463a12.4.2026.09.09.06.32.34
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 09 Sep 2026 06:32:37 -0700 (PDT)
+Message-ID: <a45bb8de-bd10-4745-9865-7f277fec148d@oss.qualcomm.com>
+Date: Wed, 9 Sep 2026 10:32:32 -0300
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:39::10;
- envelope-from=max.chou@sifive.com; helo=mail-pj2-x10.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v8 0/7] riscv: add initial sdext support
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com
+References: <20260907114615.1609913-1-daniel.barboza@oss.qualcomm.com>
+From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Content-Language: en-US
+In-Reply-To: <20260907114615.1609913-1-daniel.barboza@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA5MDE1MCBTYWx0ZWRfXzdS0PkAfakRf
+ 459Q4SFBC8z+FQjTfn0Oth+UET3pCwjVQMjNtEhLOYAHyyLrEYoFMtSsjntDUmQnZeddiNitMP/
+ hQDpLZdFXABlDvdyVLTGUcEBC4chDHo=
+X-Authority-Analysis: v=2.4 cv=J52aKgnS c=1 sm=1 tr=0 ts=6aa15ff7 cx=c_pps
+ a=4ztaESFFfuz8Af0l9swBwA==:117 a=CQQxcbsX5Byh3TlVSSGwig==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=1SPZ6byordM7Gp-ApXYA:9 a=QEXdDO2ut3YA:10
+ a=TPnrazJqx2CeVZ-ItzZ-:22
+X-Proofpoint-ORIG-GUID: bUWE7pAIzmLxkJTso1btlwneumTWtvfo
+X-Proofpoint-GUID: bUWE7pAIzmLxkJTso1btlwneumTWtvfo
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA5MDE1MCBTYWx0ZWRfX/zzGl08vHIxq
+ n4GZwf9Srm9jJpJF9pxaWCSUv27jKSC5Bd9QfFskbXRPPZ4IQmWoL/pikViG4SOdMrLBmLuqJqT
+ ou1yNFz66oVkqc32VE3Bv+2omHczNwgs4K3VV4ANaJNsxfZye8//LcnheCRaL9Y6C0ItxQXuKCZ
+ 8OUo/zFpHXHRgZg09sjfDtbNBh+QhhwPX8YKlJrTn68gmwdzy694l7BQ9WUvxmbDhRDC3/+tMNg
+ EzvWLY2cFmy4fr0gNeOHfq24M5BOqjToc0ShWiJo4Z3x0Wn/vTijinzVhR4cirwA5EV/jxn4t6h
+ RO8e4RnamW67aIPeiR+j1QbfamfCuGglrANJHBfabyue+bAQIOTlCx5JuUFuhrZFrZgs8qNipY9
+ IscudRStiMKXnB46dDA1BRHyx52eo200aF7r/fImDjsHjyeoUGDMaHQuf1TChOvtKiLIkDuvAwB
+ D+/RUlo36c3jjiXPWOQ==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-08_03,2026-09-09_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ lowpriorityscore=0 priorityscore=1501 spamscore=0 adultscore=0 malwarescore=0
+ suspectscore=0 impostorscore=0 bulkscore=0 clxscore=1015 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609090150
+Received-SPF: pass client-ip=205.220.180.131;
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -108,334 +152,80 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Add a bare-metal test for locked NA4 PMP permissions lying inside
-unit-stride access ranges. The test covers unmasked and masked reads
-and writes, and checks that an interior deny is reported with the
-exact faulting mtval and vstart rather than merely trapping somewhere
-in the range.
+Hello!
 
-Signed-off-by: Max Chou <max.chou@sifive.com>
----
- tests/tcg/riscv64/Makefile.softmmu-target |   7 +-
- tests/tcg/riscv64/test-rvv-ldst-us-pmp.S  | 281 ++++++++++++++++++++++
- 2 files changed, 286 insertions(+), 2 deletions(-)
- create mode 100644 tests/tcg/riscv64/test-rvv-ldst-us-pmp.S
+It seems like after the tcg/tests meson infrastructure work we shouldn't
+add TCG tests the way we were doing before.
 
-diff --git a/tests/tcg/riscv64/Makefile.softmmu-target b/tests/tcg/riscv64/Makefile.softmmu-target
-index 0fdf242f735..9e0e0490753 100644
---- a/tests/tcg/riscv64/Makefile.softmmu-target
-+++ b/tests/tcg/riscv64/Makefile.softmmu-target
-@@ -86,17 +86,20 @@ run-test-vle32ff: test-vle32ff
- test-vle32ff: CFLAGS += -march=rv64gcv
- 
- RVV_LDST_MARCH = -march=rv64gcv
--RVV_LDST_TESTS = test-rvv-ldst-ff-pmp
-+RVV_LDST_TESTS = test-rvv-ldst-ff-pmp test-rvv-ldst-us-pmp
- CLEANFILES += $(RVV_LDST_TESTS)
- 
- $(RVV_LDST_TESTS): %: %.S rvv-ldst.inc $(LINK_SCRIPT)
- 	$(CC) $(CFLAGS) $(RVV_LDST_MARCH) $< -Wa,--noexecstack -c -o $@.o
- 	$(LD) $(LDFLAGS) $@.o -o $@
- 
--EXTRA_RUNS += run-test-rvv-ldst-ff-pmp
-+EXTRA_RUNS += run-test-rvv-ldst-ff-pmp run-test-rvv-ldst-us-pmp
- 
- run-test-rvv-ldst-ff-pmp: test-rvv-ldst-ff-pmp
- 	$(call run-test, $<, $(QEMU) -cpu rv64$(comma)v=true$(comma)vlen=128$(comma)elen=64$(comma)vext_spec=v1.0$(comma)rvv_ta_all_1s=true$(comma)rvv_ma_all_1s=true $(QEMU_OPTS)$<)
- 
-+run-test-rvv-ldst-us-pmp: test-rvv-ldst-us-pmp
-+	$(call run-test, $<, $(QEMU) -cpu rv64$(comma)v=true$(comma)vlen=128$(comma)elen=64$(comma)vext_spec=v1.0$(comma)rvv_ta_all_1s=true$(comma)rvv_ma_all_1s=true $(QEMU_OPTS)$<)
-+
- # We don't currently support the multiarch system tests
- undefine MULTIARCH_TESTS
-diff --git a/tests/tcg/riscv64/test-rvv-ldst-us-pmp.S b/tests/tcg/riscv64/test-rvv-ldst-us-pmp.S
-new file mode 100644
-index 00000000000..521667628da
---- /dev/null
-+++ b/tests/tcg/riscv64/test-rvv-ldst-us-pmp.S
-@@ -0,0 +1,281 @@
-+/*
-+ * RISC-V vector unit-stride with PMP tests
-+ *
-+ * Runs with rvv_ta_all_1s=true and rvv_ma_all_1s=true so that with a
-+ * "ta, ma" vtype QEMU fills every masked-off and tail element with
-+ * all-1s, distinct from the 0x05050505 sentinel and the loaded data.
-+ *
-+ * PMP layout (locked entries, lowest number wins; everything outside
-+ * the test page is unmatched and so fully accessible from M-mode):
-+ *   pmp0: NA4   buf_a+4,   L, ---   deny word 1 of buf_a
-+ *   pmp1: NA4   buf_b+8,   L, ---   deny word 2 of buf_b
-+ *   pmp2: NA4   buf_c+4,   L, R--   word 1 of buf_c readable, no write
-+ *   pmp3: NAPOT test page, L, RW    lower-priority page allow
-+ *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ */
-+    #include "rvv-ldst.inc"
-+
-+    /* Assert the word at \sym+\off (readable) still equals \expected. */
-+    .macro  CHECK_WORD sym, off, expected
-+    lla     t1, \sym
-+    lw      t0, \off(t1)
-+    li      t6, \expected
-+    bne     t0, t6, fail
-+    .endm
-+
-+    .text
-+    .global _start
-+_start:
-+    RVV_ENABLE
-+    lla     t0, trap_handler
-+    csrw    mtvec, t0
-+
-+    /*
-+     * Trap handler protocol:
-+     *   s0: expected mcause (0: no trap expected)
-+     *   s1: expected mtval  (-1: any mtval accepted)
-+     *   s2: traps taken     s3: vstart seen at last trap
-+     *   s4: traps expected  s5: mtval seen at last trap
-+     */
-+    li      s0, 0
-+    li      s1, 0
-+    li      s2, 0
-+    li      s3, -1
-+    li      s4, 0
-+    li      s5, -1
-+
-+    /* Program the locked PMP entries; single locking cfg write last. */
-+    lla     t0, buf_a + 4
-+    srli    t0, t0, 2
-+    csrw    pmpaddr0, t0
-+    lla     t0, buf_b + 8
-+    srli    t0, t0, 2
-+    csrw    pmpaddr1, t0
-+    lla     t0, buf_c + 4
-+    srli    t0, t0, 2
-+    csrw    pmpaddr2, t0
-+    lla     t0, pmp_page
-+    srli    t0, t0, 2
-+    ori     t0, t0, 0x1ff
-+    csrw    pmpaddr3, t0
-+    li      t0, 0x000000009b919090
-+    csrw    pmpcfg0, t0
-+
-+    /*
-+     * Case 1: sanity: the NA4 read deny traps a scalar load.
-+     */
-+    CASE    1
-+    li      s0, 5
-+    li      s1, -1
-+    lla     t1, buf_a
-+    lw      t0, 4(t1)
-+    CHECK_TRAP
-+
-+    /*
-+     * Case 2: sanity: the read-only NA4 word traps a scalar store and
-+     * still reads back, proving stores can be verified via loads.
-+     */
-+    CASE    2
-+    li          s0, 7
-+    li          s1, -1
-+    lla         t1, buf_c
-+    sw          t1, 4(t1)
-+    CHECK_TRAP
-+    CHECK_WORD  buf_c, 4, 0x00cc0001
-+
-+    /*
-+     * Case 3: unmasked vle32.v, vl 3, read deny strictly inside the
-+     * range at buf_a+4 (element 1): element 1 is active, so the access
-+     * must raise a load access fault.  A probe that samples only the range
-+     * endpoints sees just the page allow and loads the denied word silently.
-+     */
-+    CASE    3
-+    PREFILL
-+    li          s0, 5
-+    li          s1, -1
-+    vsetivli    zero, 3, e32, m1, ta, ma
-+    lla         a0, buf_a
-+    vle32.v     v2, (a0)
-+    CHECK_TRAP
-+
-+    /*
-+     * Case 4: unmasked vle32.v with the denied word first in the
-+     * range: element 0 faults and vstart is zero.
-+     */
-+    CASE    4
-+    PREFILL
-+    li          s0, 5
-+    li          s1, -1
-+    vsetivli    zero, 3, e32, m1, ta, ma
-+    lla         a0, buf_a + 4
-+    vle32.v     v2, (a0)
-+    CHECK_TRAP
-+    bnez        s3, fail
-+
-+    /*
-+     * Case 5: unmasked vle32.v with the denied word last in the range
-+     * at buf_b+8 (element 2): must trap.
-+     */
-+    CASE    5
-+    PREFILL
-+    li          s0, 5
-+    li          s1, -1
-+    vsetivli    zero, 3, e32, m1, ta, ma
-+    lla         a0, buf_b
-+    vle32.v     v2, (a0)
-+    CHECK_TRAP
-+
-+    /*
-+     * Case 6: unmasked vse32.v, vl 3, write deny strictly inside the
-+     * range at buf_c+4 (element 1): the protected word must remain
-+     * unmodified.  Element 0 must have been stored and element 2 must
-+     * not, so that a "store every element whose own probe succeeds"
-+     * implementation is rejected rather than passing on the protected
-+     * word alone.
-+     */
-+    CASE    6
-+    vsetivli    zero, 4, e32, m1, ta, ma
-+    lla         a0, st_data_a
-+    vle32.v     v4, (a0)
-+    li          s0, 7
-+    li          s1, -1
-+    vsetivli    zero, 3, e32, m1, ta, ma
-+    lla         a0, buf_c
-+    vse32.v     v4, (a0)
-+    CHECK_TRAP
-+    CHECK_WORD  buf_c, 0, 0x11111111
-+    CHECK_WORD  buf_c, 4, 0x00cc0001
-+    CHECK_WORD  buf_c, 8, 0x00cc0002
-+
-+    /*
-+     * Case 7: masked vle32.v with the read deny only under masked-off
-+     * element 1: no access is performed there, so no trap and the
-+     * mask-agnostic all-1s fill applies.
-+     */
-+    CASE    7
-+    PREFILL
-+    SET_MASK    0b101
-+    vsetivli    zero, 3, e32, m1, ta, ma
-+    lla         a0, buf_a
-+    vle32.v     v2, (a0), v0.t
-+    CHECK_NO_TRAP
-+    CHECK_VELEM v2, 0, 0x00aa0000
-+    CHECK_VELEM v2, 1, -1
-+    CHECK_VELEM v2, 2, 0x00aa0002
-+    CHECK_VELEM v2, 3, -1
-+
-+    /*
-+     * Case 8: masked vse32.v with the write deny only under masked-off
-+     * element 1: no trap, elements 0 and 2 stored, the protected word
-+     * untouched.
-+     */
-+    CASE    8
-+    vsetivli    zero, 4, e32, m1, ta, ma
-+    lla         a0, st_data_b
-+    vle32.v     v4, (a0)
-+    SET_MASK    0b101
-+    vsetivli    zero, 3, e32, m1, ta, ma
-+    lla         a0, buf_c
-+    vse32.v     v4, (a0), v0.t
-+    CHECK_NO_TRAP
-+    CHECK_WORD  buf_c, 0, 0x44444444
-+    CHECK_WORD  buf_c, 4, 0x00cc0001
-+    CHECK_WORD  buf_c, 8, 0x66666666
-+
-+    /*
-+     * Case 9: like case 3 (read deny at element 1 of 3), the mtval should be
-+     * the denied word's own address and vstart should be 1, not the range
-+     * base and 0.
-+     */
-+    CASE    9
-+    PREFILL
-+    li          s0, 5
-+    lla         s1, buf_a + 4
-+    vsetivli    zero, 3, e32, m1, ta, ma
-+    lla         a0, buf_a
-+    vle32.v     v2, (a0)
-+    CHECK_TRAP
-+    ASSERT_EQ   s3, 1
-+
-+    /*
-+     * Case 10: like case 5 (read deny at element 2, the last of 3),
-+     * confirming precise reporting also holds when the denied element
-+     * is not the first one probed.
-+     */
-+    CASE    10
-+    PREFILL
-+    li          s0, 5
-+    lla         s1, buf_b + 8
-+    vsetivli    zero, 3, e32, m1, ta, ma
-+    lla         a0, buf_b
-+    vle32.v     v2, (a0)
-+    CHECK_TRAP
-+    ASSERT_EQ   s3, 2
-+
-+    /*
-+     * Case 11: like case 6 (write deny at element 1 of 3), on the
-+     * store side.  buf_c+8 still holds the 0x66666666 that case 8
-+     * stored, so checking it here proves element 2 was not written
-+     * after the trap.
-+     */
-+    CASE    11
-+    vsetivli    zero, 4, e32, m1, ta, ma
-+    lla         a0, st_data_a
-+    vle32.v     v4, (a0)
-+    li          s0, 7
-+    lla         s1, buf_c + 4
-+    vsetivli    zero, 3, e32, m1, ta, ma
-+    lla         a0, buf_c
-+    vse32.v     v4, (a0)
-+    CHECK_TRAP
-+    ASSERT_EQ   s3, 1
-+    CHECK_WORD  buf_c, 0, 0x11111111
-+    CHECK_WORD  buf_c, 4, 0x00cc0001
-+    CHECK_WORD  buf_c, 8, 0x66666666
-+
-+    li    a0, 0
-+exit:
-+    SEMI_EXIT
-+    FAIL
-+
-+    .balign    4
-+trap_handler:
-+    csrr    t5, mcause
-+    bne     t5, s0, fail
-+    csrr    s5, mtval
-+    li      t5, -1
-+    beq     s1, t5, 1f
-+    bne     s5, s1, fail
-+1:
-+    csrr    s3, vstart
-+    addi    s2, s2, 1
-+    csrw    vstart, zero
-+    csrr    t5, mepc
-+    addi    t5, t5, 4
-+    csrw    mepc, t5
-+    mret
-+
-+    .data
-+    .balign    16
-+semiargs: .space 16
-+
-+    /* Store source data; outside every PMP region. */
-+st_data_a: .word    0x11111111, 0x22222222, 0x33333333, 0x77777777
-+st_data_b: .word    0x44444444, 0x55555555, 0x66666666, 0x88888888
-+
-+    /* One dedicated page governed by the locked NAPOT RW entry. */
-+    .balign    4096
-+pmp_page:
-+buf_a:
-+    .word    0x00aa0000, 0x00aa0001, 0x00aa0002, 0x00aa0003
-+    .word    0x00aa0004, 0x00aa0005
-+    .skip    40
-+buf_b:
-+    .word    0x00bb0000, 0x00bb0001, 0x00bb0002, 0x00bb0003
-+    .word    0x00bb0004, 0x00bb0005
-+    .skip    40
-+buf_c:
-+    .word    0x00cc0000, 0x00cc0001, 0x00cc0002, 0x00cc0003
-+    .word    0x00cc0004, 0x00cc0005
-+    .skip    3944
--- 
-2.43.0
+With this series as is, on top of a recent master:
+
+$ make -C build -j 16 check-tcg
+(...)
+$ grep 'sdext'  /local/mnt/workspace/qemu/build/meson-logs/testlog.txt
+$
+
+If I change to the new meson infrastructure:
+
+$ make -C build -j 16 check-tcg
+(...)
+$ grep  'sdext'  /local/mnt/workspace/qemu/build/meson-logs/testlog.txt
+test:         tcg+tcg-riscv64-softmmu - qemu:riscv64-softmmu-test-sdext-sigill
+command:      MESON_TEST_ITERATION=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MALLOC_PERTURB_=171 RUST_BACKTRACE=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /usr/bin/env QEMU=/local/mnt/workspace/qemu/build/qemu-system-riscv64 /local/mnt/workspace/qemu/build/qemu-system-riscv64 -cpu rv64,sdtrig=true,sdext=true -M virt -display none -serial stdio 
+-semihosting -bios tests/tcg/riscv64-softmmu-test-sdext-sigill.test
+
+
+We want to run the test with 'check-tcg' (and seems like it also runs with
+'check' too) so I'll re-send the patches with the relevant test changes.
+
+Cheers,
+Daniel
+
+
+On 9/7/2026 8:46 AM, Daniel Henrique Barboza wrote:
+> Greetings,
+> 
+> This version is a simple rebase with master, where a trivial conflict
+> with tests/tcg/riscv64/Makefile.softmmu-target was solved, and with my
+> S-o-Bs on patches 1-6.
+> 
+> No other changes made.  Patches based on master.
+> 
+> Changes from v7:
+> - Added my S-o-B in patches 1-6
+> - Patch 7:
+>    - fixed conflict with Makefile.softmmu-target
+> - v7 link: https://lore.kernel.org/qemu-devel/20260831141007.353854-1-daniel.barboza@oss.qualcomm.com/
+> 
+> Chao Liu (6):
+>    target/riscv: add sdext debug CSRs state
+>    target/riscv: add sdext Debug Mode helpers
+>    target/riscv: add dret instruction
+>    target/riscv: add sdext enter Debug Mode on ebreak
+>    target/riscv: add sdext single-step support
+>    target/riscv: add sdtrig trigger action=debug mode
+> 
+> Daniel Henrique Barboza (1):
+>    tests/tcg/riscv64: add sdext "not on Debug mode" sigill tests
+> 
+>   include/exec/translation-block.h              |   4 +-
+>   target/riscv/cpu.c                            |   7 +
+>   target/riscv/cpu.h                            |   9 ++
+>   target/riscv/cpu_bits.h                       |  33 +++++
+>   target/riscv/cpu_cfg_fields.h.inc             |   1 +
+>   target/riscv/helper.h                         |   3 +
+>   target/riscv/insn32.decode                    |   1 +
+>   target/riscv/machine.c                        |  20 +++
+>   target/riscv/tcg/cpu_helper.c                 |  91 +++++++++++++
+>   target/riscv/tcg/csr.c                        | 126 ++++++++++++++++++
+>   target/riscv/tcg/debug.c                      |  59 +++++++-
+>   .../tcg/insn_trans/trans_privileged.c.inc     |  24 ++++
+>   target/riscv/tcg/op_helper.c                  |  70 ++++++++++
+>   target/riscv/tcg/tcg-cpu.c                    |  19 +++
+>   target/riscv/tcg/translate.c                  |  15 ++-
+>   tests/tcg/riscv64/Makefile.softmmu-target     |   5 +
+>   tests/tcg/riscv64/test-sdext-sigill.S         |  83 ++++++++++++
+>   17 files changed, 564 insertions(+), 6 deletions(-)
+>   create mode 100644 tests/tcg/riscv64/test-sdext-sigill.S
+> 
 
 
