@@ -4,138 +4,131 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79E7CC79FB7
-	for <qemu-riscv@archiver.kernel.org>; Wed,  9 Sep 2026 20:50:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FEECC79FB6
+	for <qemu-riscv@archiver.kernel.org>; Wed,  9 Sep 2026 21:08:30 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x4PEu-0004H5-BG; Wed, 09 Sep 2026 16:49:52 -0400
+	id 1x4PWi-0000xw-9F; Wed, 09 Sep 2026 17:08:16 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1x4PEm-0004CY-VK
- for qemu-riscv@nongnu.org; Wed, 09 Sep 2026 16:49:46 -0400
+ id 1x4PWg-0000xN-JA
+ for qemu-riscv@nongnu.org; Wed, 09 Sep 2026 17:08:14 -0400
 Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1x4PEk-00053Q-HT
- for qemu-riscv@nongnu.org; Wed, 09 Sep 2026 16:49:44 -0400
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+ id 1x4PWe-0000WQ-6q
+ for qemu-riscv@nongnu.org; Wed, 09 Sep 2026 17:08:13 -0400
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 689JI7CT2363684
- for <qemu-riscv@nongnu.org>; Wed, 9 Sep 2026 20:49:33 GMT
+ 689JIE7H2896364
+ for <qemu-riscv@nongnu.org>; Wed, 9 Sep 2026 21:08:11 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- 9LTa7ZqnCfcxe2A1k2KyaoI364ha3WHTvARZ/wYwA80=; b=L9kLd8xO7x/XjBO3
- O35Yl0ZqKt3MstcDUODzNJTMMNApi+Z9NPsVNHDjEfkxALsWLwSr1Yv5aMJN8U7y
- DjNdCoxD1+XA1N66mq4CM7EnPsj4R3c3poFn4eegIuVi3ev/GSrFX4wAW/IVohvG
- 1G/Dqjh5C0whADxxra2ptU6Yc2vPKe0obCmD2WowtCgYxnUT2m4QpJ4ZVyAFDS0y
- iBfsN2xqbq9jydLAvwc85YqcEkk2UjXNmWN78z1v9l5rlHNN1w4VGAFWmYqjQ/lb
- EPg3A2DqCRKyRLWxasUn8oFezR0zsMhpMPedkQS7zSk11XH5WbHbBgYyozGeXSxT
- 3i3YPQ==
-Received: from mail-qv1-f71.google.com (mail-qv1-f71.google.com
- [209.85.219.71])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gkcydrjnk-1
+ cc:content-transfer-encoding:date:from:in-reply-to:message-id
+ :mime-version:references:subject:to; s=qcppdkim1; bh=S1lXxqviL5/
+ yxkT8bRuVehG/I464kIAL8gID/sBy0xc=; b=epg+rKeuj1VVd2W/I8UNGMsg4P1
+ cVCbLLKMP1cDX45IBsWN4YmmOhzY/t0wcU+PqOaavhn11kbaGko5/L3a5PCsuXE/
+ HRMaItuOaH/gipPdhpX59k3RUUnA3ap0zguCovgGcjNSav36xfDJofBBy8mgt3Ai
+ Iygtf8x5Gabt0Smm24E9Pid+EbUJmEsl58IU6be4aPm89PXOVvPgBsK6IlVaOjL8
+ 0YtWL0XbkLcSDQ1mdF3VBQLOoBvMxysEycjgLQdhcgpbxVRmAjj4WXeObcksvw8d
+ 3MWnOng7v3DNv1GOgW3v+QqIOcwgaPdQR482duj1fawpKbKAvElAs4lA7GQ==
+Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com
+ [209.85.219.72])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gkcygrjv7-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Wed, 09 Sep 2026 20:49:33 +0000 (GMT)
-Received: by mail-qv1-f71.google.com with SMTP id
- 6a1803df08f44-90e80ce3597so112191706d6.1
- for <qemu-riscv@nongnu.org>; Wed, 09 Sep 2026 13:49:33 -0700 (PDT)
+ for <qemu-riscv@nongnu.org>; Wed, 09 Sep 2026 21:08:10 +0000 (GMT)
+Received: by mail-qv1-f72.google.com with SMTP id
+ 6a1803df08f44-91049eac948so63727206d6.1
+ for <qemu-riscv@nongnu.org>; Wed, 09 Sep 2026 14:08:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1788986970; x=1789591770; darn=nongnu.org;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=9LTa7ZqnCfcxe2A1k2KyaoI364ha3WHTvARZ/wYwA80=;
- b=dbeoGZaeiZRTVojA4AWmrpob76UbSMDfLbj1C8sijgDcRlNit6bTaUK9guE7Q9JcoA
- uC059wGr5Z28rwfveby7OCXVB7aEMWrW1spLg8xD9l8APAbK66towwiwoKCMd9vbjj+g
- 8se+lA208b3CNR9l2PB9mFdnI4tlYGKI9nHgJ5rIR4JzuJwO+xqjJ7FhLFRSPbqoaw4j
- Y4HMiSgOAYg2OGr1eYQM/dg6POHat8C3gOY2ytB+qE7MiQCaWwIwSCh81CmLSotRoZQT
- j6HL3wj9JTSg4lsMmJCOpEgubNagnRLabhu96ojF19FGGeQ0jsBFYGpwz8tvapsOnSo4
- tsZg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788986970; x=1789591770;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=oss.qualcomm.com; s=google; t=1788988090; x=1789592890; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=9LTa7ZqnCfcxe2A1k2KyaoI364ha3WHTvARZ/wYwA80=;
- b=lEcsG8yd4ZMeQnPBfauf23QNKO7OyTDu+n0O8lqTOrhS4igG+HBZzZbk0khjogtALa
- avzK+K6rzWNTHELRcr/+qT7nsbt47IeOQP3qmXJMyAp/tMs3hZBgE1hqC6u2gWjCAl0x
- Z6vOXxqTbVNqDjb76XPlrGLtc05VmUWkBkxwNBPE/yfHntPmmYLJrxWgi/GwDOBYB0zG
- wJrm+M1js2Q+w/6M5DpBEtvlk4M4Pg0OMVCoZKvBTYKFpkbm31/6TC2COnFzb8pA8O2P
- 6MQXei7fO1faFpR5sFj0Ze7AabXuI04TZiV8+Rr/XJ/O+OH62qfeBBFMW5fgrt6Daxpd
- ZVyw==
-X-Forwarded-Encrypted: i=1;
- AKwUvBykoZUUZEXqU2sYQtXepxM8qut1wQ6HOupdCd0KGiYP7BJBxzHAQo36eDcAJh4244gZ+LVSE698h5lB@nongnu.org
-X-Gm-Message-State: AFuF++kz6oytNnvhNdz3Bn8YR0Bd0+3NyqL7y086HgmzlpwVNlC4NXZ3
- vHrmkA0L+ID+HpFcGcWjddC5J1BKosZM6XfVlVcxakR/ptEV5gUcLsgAPjYc3TZg6KOizQS8zCO
- P3n59LKS4s7rn2Kvz4p3cdsnka7f7j3CDco5liDQOxV+lvFQoLrBiby7RXA==
-X-Gm-Gg: AYBFou0ouTRunKAk4pLFo+YMSFCiYxfl7CbqFxsNcDzYIH3LaSj90Lvm6yL11kIZkG1
- pc/oTF0tR4QyeQe+oJLRcagFNuVFHAcIIEgmUx/sv5C2dIohAqeT8mg6gjX7KpUilHTvoeGffDt
- 6e8tghES7gWzi1nGM7a4ePj9A8BPl6qW1Ve8MrXctpMrHjNRUItwdaxbQ3RkHwnbPQ/GXp84KvW
- ccJ8q9VeRaRzyWl28uBug9tdJLylQaTPpUfeii2SMpEbjklrjI1zT4NTQNfedBM32+MatCjbJGm
- F/EYvVkkqJOHbL8nvcHh5CmEWm4T5qNL+1/ZIQoQHRKYIdpkkiBwJIi+30F76sZVWscY91lujg8
- X2it7w///+YgDWurNYegg0QVcab/ahelJjYc=
-X-Received: by 2002:a05:6214:858d:10b0:910:3451:b181 with SMTP id
- 6a1803df08f44-9103efd4489mr33417736d6.34.1788986966395; 
- Wed, 09 Sep 2026 13:49:26 -0700 (PDT)
-X-Received: by 2002:a05:6214:858d:10b0:910:3451:b181 with SMTP id
- 6a1803df08f44-9103efd4489mr33417236d6.34.1788986965877; 
- Wed, 09 Sep 2026 13:49:25 -0700 (PDT)
-Received: from [192.168.68.102] ([177.18.66.131])
+ bh=S1lXxqviL5/yxkT8bRuVehG/I464kIAL8gID/sBy0xc=;
+ b=j8DpMMclukC6aqKPk+WQCL8Rix0kclskmD1IMMUibE1OMNIemFsxaeXybeCKOilQqz
+ mofnvXJqXvbz4sezj52hWY1y6BaHMzRCDHd3Bc0tlnwM48nsdu6LUsUpSM2Yt2CMw7Ov
+ YI1wjCtRsg0RoQbP8cv/88PjQHlyn7gcj8bEdb1y4lLEfV2NJwXMgLa3wx/ZPX3kLOBf
+ oGevtaevlY4InP4dcG8ohk6D6l8XDWwBPF9Vh5vyUsoOU0pd19KADIm26RuD1oDQgbIN
+ 9S/0tlMDo2Cwu3w9sWTtSmpEfRcs6Xj8QeiJECyqK9rO4BglLg3lcOemBarRtGZQTJka
+ kBfA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1788988090; x=1789592890;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=S1lXxqviL5/yxkT8bRuVehG/I464kIAL8gID/sBy0xc=;
+ b=Md+xGUB+Qx+Vs4btPch8QyEONkKT4aIKl7riYM6F3/QR9vbfAXdGUHR317LtYlfNfk
+ J/AxzIO1FiRCXvqp+rtzQIHVDaqs7jAM9cuBXi7JCQn/X1GQBrt/865+/KzRY01esRXQ
+ 9q8R5L2NCH8iGpzskJey2WcYrcqI3FC+Fq9ljuGn4qgDGaN+yAj7ScRywJSE9WQ4xkQi
+ PKHAoZOMPY+kHlR87r79e5c2xFenkElpVyhkjMWMiuwDDfXlmw0J6LZhSNHnRhkLPJ3+
+ LA2dhoMlGBjbufM0bhwvkQRPC2n3b8Q5J4BJhzHUvOkF5x4dfi5rIDVkRcPUY4OQHyHM
+ ZACA==
+X-Gm-Message-State: AFuF++nzLIMW9SbShG2Tif0P/sU9BL7uWdPTyIUoz9cnA0tAtBAgTdvB
+ utVY05zu2J6K+KtBqnteAkZzmZOJzyKngS5KcmkDd+G21RThELgZnUW9NrMeiYgbC54uR5wa2P0
+ W32atoV9E7LLtO9OS/ZRmXYhoAwB8t4u25USDSkAPx3OkncqJyEu4rtzkUA==
+X-Gm-Gg: AYBFou2yIzg3ColjxhcXI5QKB4I6RTFkB1+jvu1xvKOjSsSiFt/1+BuYXFbOfCiIY64
+ mpSg5Ea4ENJm5PngdH+SZLGxKjkDPxwyT1NzWMlV2NPnXZKHmR5UzsrGeAMAwihwXwcO8ox/L3U
+ C55GiYvamWnum2uwTIHSRVu6QWRsC3JbxvlCxoUkA95RromSQRA4XNbEzGUeCip3yUUTc4xDpP7
+ 3CqTbRsZjZ5E6CruJ4DKKD853Iu+gquWEhjnOD0V31reicg0VKumksTk65gTA31QJmpr829bx+z
+ xP3FeI/W278zxcsNGMlxY0+/3J8Z4P1lbrx24BEv0eHPnkyv/mWkCkMlnL+Lmo2p2vwD5OuIIfX
+ WSyNPRFRCHIr+DExEyCb6BC77TjaoC3f9EXBq
+X-Received: by 2002:a05:6214:d88:b0:910:6f9c:5b8 with SMTP id
+ 6a1803df08f44-9106f9c072emr67009306d6.9.1788988089492; 
+ Wed, 09 Sep 2026 14:08:09 -0700 (PDT)
+X-Received: by 2002:a05:6214:d88:b0:910:6f9c:5b8 with SMTP id
+ 6a1803df08f44-9106f9c072emr67008836d6.9.1788988089032; 
+ Wed, 09 Sep 2026 14:08:09 -0700 (PDT)
+Received: from QCOM-UWl2o8bcGT.qualcomm.com ([177.18.66.131])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-9104fc73ea5sm105336696d6.39.2026.09.09.13.49.23
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 09 Sep 2026 13:49:25 -0700 (PDT)
-Message-ID: <083828b1-5847-4fb7-8872-725dac0c2f1a@oss.qualcomm.com>
-Date: Wed, 9 Sep 2026 17:49:21 -0300
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 00/14] RISC-V TCG PMU correctness fixes
-To: TANG Tiancheng <lyndra@linux.alibaba.com>, qemu-devel@nongnu.org
-Cc: Zephyr Li <fritchleybohrer@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org,
- Richard Henderson <richard.henderson@linaro.org>,
- Paolo Bonzini <pbonzini@redhat.com>,
- =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
-References: <20260907-riscv-pmu-correctness-v1-0-5f1f41458989@linux.alibaba.com>
+ 6a1803df08f44-91040646d59sm151811336d6.8.2026.09.09.14.08.05
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 09 Sep 2026 14:08:07 -0700 (PDT)
 From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Content-Language: en-US
-In-Reply-To: <20260907-riscv-pmu-correctness-v1-0-5f1f41458989@linux.alibaba.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Authority-Analysis: v=2.4 cv=IfsSymqa c=1 sm=1 tr=0 ts=6aa1c65d cx=c_pps
- a=UgVkIMxJMSkC9lv97toC5g==:117 a=CQQxcbsX5Byh3TlVSSGwig==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
- a=VwQbUJbxAAAA:8 a=pGLkceISAAAA:8 a=SRrdq9N9AAAA:8 a=X6rMypcUmwSNIqAgvc8A:9
- a=QEXdDO2ut3YA:10 a=1HOtulTD9v-eNWfpl4qZ:22
-X-Proofpoint-GUID: 59DrGxqOLV3jLtk3D3F9Jbb80utw0mVc
-X-Proofpoint-ORIG-GUID: 59DrGxqOLV3jLtk3D3F9Jbb80utw0mVc
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA5MDIzMyBTYWx0ZWRfX6Ipgz6Zz8lXz
- C9R4Dysoyth5xIgy1fVzmmQwtplv2MqJwSqqBubVyD6+7nya9BWWxpUPxY5ZuCKA7Pf0/sT1SAx
- xxfN2bjefR0lZSD0BZ2WiKVURvCYIsU=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA5MDIzMyBTYWx0ZWRfX+1t33fo0A8o8
- WTQCpGc7G9P5GJlmbk8TVnwzQOOyUUyG2Q5Jxeajqz5IsUXmnmfl17m83WlXg7JjPpgyjfPmvB9
- U3ijvGCcLR5rScsKaaUj3A45F/B6zQGWbYc0yVrSR+5kzuGLpbp6Wg70F6Ct1CnG/UM9REjpTqJ
- 5NyDFk/6nizrE3hCnvREkcwgpEAdOj3tEPPU6hWxbT7SfgplvV1UGHPINGgeNO3392B+UMJULMU
- 81KzTfKml/pgmlvLC6urhzhxsfTz9UN9phcxGB6lM+w3EQjl+ImojKltJJnXpU8r8XJYfhi5Xjx
- E6lL72Di4K1nmD49Xrm2L9eAttwrHsXSDdkzQWg/ku25HdozkUJwzoFMYFLGQK9UcXa5oxYVeg4
- lnXBETFf2SzbTTZT9I4EgegozK0rsNcXt/FbeWcBxwaOW+aheAcyIA2vg0fwMw+Lytdf9RRBK+K
- mnhLplhJHCOiMC3PR2g==
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Icenowy Zheng <uwu@icenowy.me>,
+ Matheus Ferst <matheus.ferst@eldorado.org.br>,
+ Sunil V L <sunilvl@oss.qualcomm.com>, Palmer Dabbelt <palmer@dabbelt.com>
+Subject: [PATCH v11 2/5] target/riscv: add riscv-server-ref CPU
+Date: Wed,  9 Sep 2026 18:07:52 -0300
+Message-ID: <20260909210756.1767711-3-daniel.barboza@oss.qualcomm.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260909210756.1767711-1-daniel.barboza@oss.qualcomm.com>
+References: <20260909210756.1767711-1-daniel.barboza@oss.qualcomm.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA5MDIzNiBTYWx0ZWRfX96Rwy9TeIhzC
+ z7MGwFUB+NDptyeF7/+oJySIUL5aa9yLnj0WOtnIydsuE4EYcMLT981PwRVtuOKubTOVopsKeZ/
+ oVgj5XvpDBI4XLZNCOTNm97Jku6oM9T11eCJfim7LzI6UVnL92vhWHhSSNA1qZdmVp67WywF1C0
+ 16wpopvMtH6wGJ3MU5qi3yCkd4zXVHvVR5T3FoXkw7yQjpgNXz7+E6jXVdnXQZVoh7aAo2Q6vIA
+ fAiQTuNd357Blp9K2N6G454WT1mkWRi+LcsxfcYUSbj0NrVZlJLUTNfCaRjyJ+CsZCRwZf+1usI
+ FMuEutoMnMV1I7cnnPU3S61juQ6ev932yDa/ivfywQIaoRaT5oLIkeUyjRLiqtI6UCAckT+e7S3
+ 0KlRytZ9DLn3nMhBciApb8MB4mnDezLlEH/bl9HCbjTqm8GtsUtMToeRF8LWTPBNFXLB/10vQws
+ xNNalIjQXUtbmD2rJRA==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA5MDIzNiBTYWx0ZWRfX6SdIEFKINiaM
+ ebdFRqO82HAWV/UxAczdPKa9jVXpFyG4gNZ1gwINiYLfcx1cpY5bHBRnGX1N1ixyCe0NBijsjHP
+ lgzgCXsqxVYkb6B6fAyCz+hpMyo6cVU=
+X-Proofpoint-ORIG-GUID: leGVBPpa1e-kuIjZpgZg7Ts1Jld8HGO3
+X-Authority-Analysis: v=2.4 cv=VONIDNPX c=1 sm=1 tr=0 ts=6aa1caba cx=c_pps
+ a=7E5Bxpl4vBhpaufnMqZlrw==:117 a=CQQxcbsX5Byh3TlVSSGwig==:17
+ a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22 a=V1jnuoLLAAAA:20
+ a=EUspDBNiAAAA:8 a=JF9118EUAAAA:8 a=PXcuKL70AAAA:8 a=FRSEYCzRAAAA:8
+ a=zLUtPzHEVTZWnbMtJKMA:9 a=pJ04lnu7RYOZP9TFuWaZ:22 a=xVlTc564ipvMDusKsbsT:22
+ a=1qLaeP4TCVy2vqIEy19U:22 a=H4N_Y-AU75W7NKDNhZlT:22 a=bA3UWDv6hWIuX7UZL3qL:22
+X-Proofpoint-GUID: leGVBPpa1e-kuIjZpgZg7Ts1Jld8HGO3
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-09_01,2026-09-09_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 malwarescore=0 priorityscore=1501 lowpriorityscore=0
- impostorscore=0 spamscore=0 adultscore=0 suspectscore=0 bulkscore=0
- clxscore=1015 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
- definitions=main-2609090233
+ impostorscore=0 adultscore=0 phishscore=0 priorityscore=1501 bulkscore=0
+ clxscore=1015 suspectscore=0 lowpriorityscore=0 spamscore=0 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609090236
 Received-SPF: pass client-ip=205.220.168.131;
  envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
 X-Spam_score_int: -27
@@ -144,7 +137,7 @@ X-Spam_bar: --
 X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -160,111 +153,110 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Tang,
+The harts requirements of RISC-V server platform [1] require RVA23 ISA
+profile support and others.
 
+We're going for a profile-based implementation, instead of a regular CPU
+that can inherit RVA23, to allow future CPUs to use it internally as a
+starting base for their own extension sets.  There's also a new
+'rvserver-ref-1.0' flag that can be used to set the extensions in the
+command line for other CPUs, which can be used for testing/debugging
+purposes.
 
-I took a look in all patches and they all look LGTM code-wise.  But seems
-like we need a new version of all patches rebased on top of a recent
-master, using a new meson framework instead of Makefile, otherwise check-tcg
-won't be able to run them.  In theory is as simple as adding entries in
-tests/tcg/riscv32/system/meson.build and tests/tcg/riscv64/system/meson.build
-instead of Makefile.softmmu-target.
+Note that for all intents and purposes "riscv-server-ref" is a regular
+CPU and no, we're not trying to set a precedent of calling the riscv
+server platform spec a profile.
 
-Given that the series is based on the v1 of "target/riscv: fix RV32 fixed counter
-accesses"  I believe you can re-send v2 based on the new version Zephyr Li
-sent:
+[1] defines in rule SEE_020 that we must support at least 11 debug
+triggers (4 for insn address, 4 for insn load/store, 1 for icount,
+one for int, one for excp).  We're going for the minimum.  If more
+triggers are needed users can set any trigger amount with:
 
-[PATCH v2] target/riscv: fix RV32 fixed counter accesses
+-cpu riscv-server-ref,trigger-count=N
 
-This v2 has additional scaffolding for meson tcg tests for riscv32.  Might as well
-use it to rebase this work.
+Note that N must be <= 128.
 
+[1] https://github.com/riscv-non-isa/riscv-server-platform/blob/main/server_platform_requirements.adoc
 
-Thanks,
-Daniel
+Suggested-by: Icenowy Zheng <uwu@icenowy.me>
+Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Matheus Ferst <matheus.ferst@eldorado.org.br>
+Reviewed-by: Chao Liu <chao.liu@processmission.com>
+Reviewed-by: Sunil V L <sunilvl@oss.qualcomm.com>
+---
+ target/riscv/cpu-qom.h |  1 +
+ target/riscv/cpu.c     | 32 ++++++++++++++++++++++++++++++++
+ 2 files changed, 33 insertions(+)
 
-
-On 9/6/2026 1:37 PM, TANG Tiancheng wrote:
-> This series fixes RISC-V TCG PMU accounting, overflow notification, and
-> migration. It is based on Zephyr Li's "target/riscv: fix RV32 fixed
-> counter accesses" [1], which is a prerequisite and is not included here.
-> 
-> The patches allow multiple HPM counters to select the same event and
-> preserve counts across selector, privilege-filter, and inhibit writes.
-> They use consistent cycle/instruction sources and compute the shared
-> overflow deadline from all eligible counters. Timer callbacks queue
-> checks on the owner vCPU instead of racing MTTCG execution.
-> 
-> Migration saves counter values including pending increments and restores
-> destination-local source baselines, event mappings, and overflow
-> scheduling. A new cpu/pmu-fixed subsection carries mcyclecfg/minstretcfg
-> and identifies this format. All TCG CPUs require the subsection; loading
-> older TCG streams without it is rejected. Source and destination still
-> need compatible CPU configurations. KVM PMU migration is unchanged.
-> 
-> The reset changes preserve the final counts in the old privilege/V mode
-> before entering M-mode with V=0.
-> 
-> TCG tests cover RV32/RV64 counter accesses, delegated registers, selector
-> and filter changes, multiple counters per event, overflow notification
-> with and without Sscofpmf, instruction exceptions, and reset. The RV32
-> HPM tests also cover full-width accesses through the shared counter path.
-> 
-> [1] https://lore.kernel.org/qemu-devel/20260905092810.660-1-fritchleybohrer@gmail.com/
-> Based-on: <20260905092810.660-1-fritchleybohrer@gmail.com>
-> 
-> Signed-off-by: TANG Tiancheng <lyndra@linux.alibaba.com>
-> ---
-> TANG Tiancheng (14):
->        target/riscv: Preserve PMU state across event selector writes
->        target/riscv: Support multiple counters per PMU event
->        target/riscv: Use VM-elapsed sources for fixed PMU events
->        target/riscv: Preserve MINH on delegated config reads
->        target/riscv: Preserve minstretcfgh on RV32 minstretcfg writes
->        target/riscv: Fix RV32 accesses to delegated PMU registers
->        target/riscv: Preserve fixed counters across PMU state changes
->        target/riscv: Require Sscofpmf for non-fixed event overflow
->        target/riscv: Rebuild fixed-event PMU overflow deadlines
->        target/riscv: Apply minstret exception accounting to HPM counters
->        target/riscv: Process PMU timer expiry on the owner vCPU
->        target/riscv: Migrate fixed PMU counter state
->        target/riscv: Clear virtualization mode on reset
->        target/riscv: Preserve fixed PMU state across reset
-> 
->   system/cpu-timers.c                         |   4 +-
->   system/cpus.c                               |   6 +-
->   target/riscv/cpu.c                          |  17 +
->   target/riscv/cpu.h                          |  14 +-
->   target/riscv/machine.c                      |  92 +++-
->   target/riscv/tcg/cpu_helper.c               |   2 +
->   target/riscv/tcg/csr.c                      | 281 +++-------
->   target/riscv/tcg/pmu.c                      | 793 +++++++++++++++++++---------
->   target/riscv/tcg/pmu.h                      |  29 +-
->   target/riscv/tcg/tcg-cpu.c                  |  10 +
->   tests/tcg/riscv32/Makefile.softmmu-target   |  42 ++
->   tests/tcg/riscv32/pmu-fixed-rv32.S          |  90 ++++
->   tests/tcg/riscv32/pmu-minstretcfg-rv32.S    |  48 ++
->   tests/tcg/riscv32/smcdeleg-counter-rv32.S   |  84 +++
->   tests/tcg/riscv32/smcdeleg-event-rv32.S     |  69 +++
->   tests/tcg/riscv32/smcdeleg-minh-rv32.S      |  70 +++
->   tests/tcg/riscv32/sscofpmf-event-rv32.S     |  91 ++++
->   tests/tcg/riscv64/Makefile.softmmu-target   |  63 ++-
->   tests/tcg/riscv64/pmu-cycle-controls.S      | 104 ++++
->   tests/tcg/riscv64/pmu-lpad.S                |  69 +++
->   tests/tcg/riscv64/pmu-reset-vs.S            | 102 ++++
->   tests/tcg/riscv64/smcdeleg-minh.S           |  70 +++
->   tests/tcg/riscv64/smcdeleg-sxl32.S          | 219 ++++++++
->   tests/tcg/riscv64/sscofpmf-cycle-overflow.S |  58 ++
->   tests/tcg/riscv64/sscofpmf-event-overflow.S | 103 ++++
->   tests/tcg/riscv64/sscofpmf-overflow.S       | 134 +++++
->   tests/tcg/riscv64/test-minstret-ecall.S     |  26 +
->   27 files changed, 2223 insertions(+), 467 deletions(-)
-> ---
-> base-commit: b23a62773a7856299cbb3782e64968b6a92c792f
-> change-id: 20260827-riscv-pmu-correctness-fa880fd9c48d
-> prerequisite-message-id: <20260905092810.660-1-fritchleybohrer@gmail.com>
-> prerequisite-patch-id: 3dfb379e910f47acaa9e94ac5766045f86e76799
-> 
-> Best regards,
+diff --git a/target/riscv/cpu-qom.h b/target/riscv/cpu-qom.h
+index 1a28f1369c..61234842e3 100644
+--- a/target/riscv/cpu-qom.h
++++ b/target/riscv/cpu-qom.h
+@@ -42,6 +42,7 @@
+ #define TYPE_RISCV_CPU_RVA22S64         RISCV_CPU_TYPE_NAME("rva22s64")
+ #define TYPE_RISCV_CPU_RVA23U64         RISCV_CPU_TYPE_NAME("rva23u64")
+ #define TYPE_RISCV_CPU_RVA23S64         RISCV_CPU_TYPE_NAME("rva23s64")
++#define TYPE_RISCV_CPU_RVSERVER_REF     RISCV_CPU_TYPE_NAME("riscv-server-ref")
+ #define TYPE_RISCV_CPU_IBEX             RISCV_CPU_TYPE_NAME("lowrisc-ibex")
+ #define TYPE_RISCV_CPU_SHAKTI_C         RISCV_CPU_TYPE_NAME("shakti-c")
+ #define TYPE_RISCV_CPU_SIFIVE_E         RISCV_CPU_TYPE_NAME("sifive-e")
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 773aeba8da..0b0b8e0a99 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -2424,11 +2424,36 @@ static RISCVCPUProfile RVA23S64 = {
+     }
+ };
+ 
++/*
++ * This riscv-server-ref entry isn't a profile per se but its
++ * CPU definition can be modelled as a profile that extends
++ * RVA23, with additional things on top of it, and allowing
++ * future CPUs to derive from it via
++ * ".profile = &RVServerRef1_0;".
++ */
++static RISCVCPUProfile RVServerRef1_0 = {
++    .s_parent = &RVA23S64,
++    .name = "riscv-server-ref-1.0",
++    .satp_mode = VM_1_10_SV48,
++    .ext_offsets = {
++        CPU_CFG_OFFSET(ext_zkr),
++        CPU_CFG_OFFSET(ext_sdext),
++        CPU_CFG_OFFSET(ext_sdtrig),
++        CPU_CFG_OFFSET(ext_ssaia),
++        CPU_CFG_OFFSET(ext_ssccfg),
++        /* ssstrict is always enabled for PRIV_VER_1_12 */
++
++        RISCV_PROFILE_EXT_LIST_END
++    }
++};
++
++
+ RISCVCPUProfile *riscv_profiles[] = {
+     &RVA22U64,
+     &RVA22S64,
+     &RVA23U64,
+     &RVA23S64,
++    &RVServerRef1_0,
+     NULL,
+ };
+ 
+@@ -3766,6 +3791,13 @@ static const TypeInfo riscv_cpu_type_infos[] = {
+ #endif
+     ),
+ 
++    DEFINE_RISCV_CPU(TYPE_RISCV_CPU_RVSERVER_REF, TYPE_RISCV_BARE_CPU,
++        .profile = &RVServerRef1_0,
++        .misa_mxl_max = MXL_RV64,
++        .cfg.max_satp_mode = VM_1_10_SV57,
++        .num_triggers = 11,
++    ),
++
+ #if defined(CONFIG_TCG) && !defined(CONFIG_USER_ONLY)
+     DEFINE_RISCV_CPU(TYPE_RISCV_CPU_BASE128, TYPE_RISCV_DYNAMIC_CPU,
+         .cfg.max_satp_mode = VM_1_10_SV57,
+-- 
+2.43.0
 
 
