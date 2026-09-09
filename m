@@ -4,88 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD18CC79F8C
-	for <qemu-riscv@archiver.kernel.org>; Wed,  9 Sep 2026 07:24:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE774C79F8C
+	for <qemu-riscv@archiver.kernel.org>; Wed,  9 Sep 2026 07:33:09 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x4CfZ-0002xM-7d; Wed, 09 Sep 2026 03:24:33 -0400
+	id 1x4Cnl-0007UW-IC; Wed, 09 Sep 2026 03:33:01 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <fritchleybohrer@gmail.com>)
- id 1x4CfX-0002x2-Ur
- for qemu-riscv@nongnu.org; Wed, 09 Sep 2026 03:24:32 -0400
-Received: from mail-pj2-x07.google.com ([2607:f8b0:4864:39::7])
+ (Exim 4.90_1) (envelope-from <readqemu@gmail.com>)
+ id 1x4Cnk-0007U6-NI
+ for qemu-riscv@nongnu.org; Wed, 09 Sep 2026 03:33:00 -0400
+Received: from mail-ed1-x52e.google.com ([2a00:1450:4864:20::52e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <fritchleybohrer@gmail.com>)
- id 1x4CfV-0002hu-0P
- for qemu-riscv@nongnu.org; Wed, 09 Sep 2026 03:24:31 -0400
-Received: by mail-pj2-x07.google.com with SMTP id
- d9443c01a7336-2d561173f9fso32323545ad.0
- for <qemu-riscv@nongnu.org>; Wed, 09 Sep 2026 00:24:28 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <readqemu@gmail.com>)
+ id 1x4Cnj-0004ON-Af
+ for qemu-riscv@nongnu.org; Wed, 09 Sep 2026 03:33:00 -0400
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-6a60f0dbeccso7319107a12.0
+ for <qemu-riscv@nongnu.org>; Wed, 09 Sep 2026 00:32:58 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1788939177; cv=none;
+ d=google.com; s=arc-20260327;
+ b=DwbcB7cEf3PSnnFI6mpBayJsfeVgQ3NSi0N28oGZuNrwYNLWIE+2iH/1s/uimUSSIw
+ 8ooRPmdLtqeQf2I1xackT+DzhMjkQSzgJO74uN+MOIavnBZ0qR/BjOHU+mqhjY7r8/U/
+ 9VxL9JBV0rmtJqDoQwuRy0z/fgCHsLGk3AQ5lGjmqNHzWXuCwIl1vXXrIrKaNV4DCfi8
+ gocitEM7H0i40h6Gj2FHm8ITsS9N84hP7+bshA0Z8sdtbxlMUXItSigwMM7Gc6RVEyxt
+ XwAw+oUjxww/4oCvcbtReX0Kcjy99GdlPKnFdNTa2ZbMlT7LHLPpeUeznrcuOxmYxM/J
+ dNOg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=L1lp+a6grUq9QWrKs7p5Wo+a4nCUMqQfkPzxpyIiF+8=;
+ fh=NR3nEGYjcJ9oIS3xUtdkm/GXNX9ypWw7PiBlMYWw17s=;
+ b=nViT0/+9wcxxyleMF1cR7Zl+ZBtgHDY8ZKJ/WpTdQ+r/UKyeaXI0LRA/APiIRG/+0Q
+ orIxZXSmpOQprmn2GcNoNBt+4a9aUbAzZ6toDXSRmrmb7cpHxbjo8cTeuUB5Gd3PmnwS
+ CQIjjG/VzZoj9LQBvdCnIdDhsYr5j43CrZoWiZfdjrBbZEMJRgNR/F86zufDRG8Y+bVR
+ azsLWVm+dc0dve3cekncmVMfWb8FpspUz6qf+hmmGP9AgqkAfGUS3whSpmfNsDAecDP2
+ rGWSXx2jHyOf4R+0TmmHjg1B1aI8RvFfIHORwP4VY2T2c71K09EZwj9L1OfamIeF7QJI
+ bWkA==; darn=nongnu.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1788938667; x=1789543467; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=+uU2gXfS1myt7enjNIVdCj8KJ86abQ0iiAxL4qdzD74=;
- b=maxfMCruYsJEIqts2CYTiXwedCCgExYYdYSNc29y/rDJFwHBTLG8mwzEQblkFejegw
- fqDvJe6rH3gnXKKN/cGPgYDJpvChiVIizGZBhkDWkZZ5NO/pJfCdFTfuku7d1fPkzWdf
- 4X2+ywM7k+YgOi7WesUmmxYdG//ibF67LTOT6Gv2J3tzsnz2mj8FH1t9+Ez6PSv0Y6Ov
- JuUdju0AOU2NcEwbVXYeUm4oKYrmYN+D1rOtFNRPdPJdI8D8yZ30HyvwLkyb0945b2fm
- fHsli1LI7BWyAxaNlCvom2ZYxPTfTFW8KDkKfMil1HrkfApbvNPPkHGwaQe9932i/bTJ
- yESQ==
+ d=gmail.com; s=20251104; t=1788939177; x=1789543977; darn=nongnu.org;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=L1lp+a6grUq9QWrKs7p5Wo+a4nCUMqQfkPzxpyIiF+8=;
+ b=QktBvQMYFMK3aZpmaDVQjtGbd8JeqTqb6SROYp476j2eY2BmFEKy8ho1qs9R4sXiVd
+ S1KSHJpJc55TRjoBAM9gSG2HDOY1eZcycWA/o8QnALi4pbdTuTCkiYFhuoPvAiE3DyD/
+ TsQ6w4ADNv60xgcOXRjibnfu+lhuEVVcY5+7Aa/y7hze/zg/QYo2Kjp4hRilUegH2TRG
+ VsemNhRflfZDi1BI/6mYXhkZ06poNezDk4/il8/cdggnDEexjvof7nFAgtWDUip8lD7f
+ dJxszPamCxTB38UxcowujRz7F1YAD3zPPuPcW23HR6BfaU4nNuThFOfo5lgPaha99G1H
+ axIw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1788938667; x=1789543467;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=+uU2gXfS1myt7enjNIVdCj8KJ86abQ0iiAxL4qdzD74=;
- b=AXMc9NPEX6oMynEhoRn6HtpJshmOMRrW81dqJd57o8hxklwbyMYTS3iasidkrGar20
- ivszV8m+0iSKMBWc4cFU1Z5/FTHJcrKYURI9zWJoFKmMPp+G1p2eD3oKs/UkIky/WxPD
- 2tmR8pyYfHVSe6263nh3MmbtDcEsfhnKDoawKq3Z+b2BMjffnhe/ODxzR1//4YMnJKs6
- grroSof61FWvLL0KOVF/605yDcztLWO21ZFolySkC2stxUO0MDk9/bBdm+C4l+1Bfpgy
- cJuBy9GnNkEd8XBuhbJVkil9Z3sRKKnc1kP650f8TJ9l6XoqiNI+gUtHpwEygNsqf/4+
- pRrA==
-X-Gm-Message-State: AFuF++keBRHqnWe9n2xn3hCnI7VNx7qah54k7opnwe4zNBY788Ovvj11
- iD/FPG+JmADsdpJ7j2nI6/DQv6Cmk8uywRAIGZyK/VYByePhHr3j5vrC
-X-Gm-Gg: AYBFou2rq5+NwONetrls5kWCFHqRvwbMMIIWs69JOx+esFijacfyjrYPyIYtJETDCgT
- GScjBb0/iFYk2+5z/ytN00nNE5qnYCA0wuZr1Y/2CvLFnZs4r9pHuzlInW8UcoknNI9qjjH0IBd
- dSxDbC7EPN3HWHJz4H4v8mdEAusJU3lkop3kFFoIMpD2Y9t2vEKdDiIoBv42RXd6eM6ia37duqA
- GF9ooY2RPLOYrLPt8DjRdJ6tvk5VdCM40dTNxE3dSAGPaK5k8BjGjGnKjj9olKSfdO6Mh6HGFDK
- 2sI760y1lJV/Xb4ijdSezIB2UggWuc/nKBVVrq/bH70n1Pnba/MccUHbC7zyGYU/vQcCDHGMOtY
- yqCvqR9rVhTOXf4hCsP253ukFD2tvhN9Y5Ny7F3yDu2SIhzirLjSCYA9RSNcaR1E9NRPmToL0Fe
- dKoI8ZJUrV5OLXX4w0DpEFbuNcpiPVYKUfmradYpKuTpOMbzFf38WU47kci+M/IuZ2kEL9PO1sI
- QcNqRlVWw5wBKjjlVQHtBrnjXSE
-X-Received: by 2002:a05:6a21:3a44:b0:3cc:8344:1213 with SMTP id
- adf61e73a8af0-3da39e68250mr52821620637.8.1788938666784; 
- Wed, 09 Sep 2026 00:24:26 -0700 (PDT)
-Received: from Dell-WorkStation.localdomain ([103.190.179.27])
- by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-cc45c62012bsm5949351a12.4.2026.09.09.00.24.19
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 09 Sep 2026 00:24:26 -0700 (PDT)
-From: Zephyr Li <fritchleybohrer@gmail.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, qemu-stable@nongnu.org, pbonzini@redhat.com,
- marcandre.lureau@redhat.com, berrange@redhat.com,
- pierrick.bouvier@oss.qualcomm.com, alex.bennee@linaro.org,
- palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com,
- daniel.barboza@oss.qualcomm.com, zhiwei_liu@linux.alibaba.com,
- chao.liu@processmission.com, Zephyr Li <fritchleybohrer@gmail.com>
-Subject: [PATCH v2] target/riscv: fix RV32 fixed counter accesses
-Date: Wed,  9 Sep 2026 15:23:55 +0800
-Message-ID: <20260909072356.42784-1-fritchleybohrer@gmail.com>
-X-Mailer: git-send-email 2.43.0
+ d=1e100.net; s=20251104; t=1788939177; x=1789543977;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=L1lp+a6grUq9QWrKs7p5Wo+a4nCUMqQfkPzxpyIiF+8=;
+ b=cEwXj2OFv6JJ6qk2vHWV/LKRvYzpsDK4h1Zr/qK8Q6rBoZSGh9DPTSPBlaeTvsD8tk
+ ew8SvibYbwiURSXxk9fHBekyDYIT+046GAeevqpBgIP3frzaGRzAEbDo106Zgromwvr9
+ yruo2PV9AnhSIfhZ8wLN/HWiI398GhnjOMUysAtKrN3L2h/pwd8OF2dRv2v4EfD6YWZ4
+ ZgKHcbz54hVDDcDsb+KPKOWyLEzL324gjNMkVavAnZ9G/X1rqSA3UmmjKalCzVfZyVSC
+ 7Ye8RReFTvgA5Iq+v4JfUvukYskD+PdkH2uHjP6ufb7R/57E0YUkQ7AVJ7Z2qdj9j9y4
+ Y5XA==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBzNyRvkO6zJj6/bE2FZ7HUZWtFgutCMS5R6GYDdyn1MpS+WfoUUKvKwZBm85Lq5/2FV6cMnw0iu0RyV@nongnu.org
+X-Gm-Message-State: AFuF++nKxVkVEw53c5M4KZ4qIqNVGYXhSONeEe+yYIJ6iBzmVXCNSyzY
+ NaZKWcg6wTknYiZhO3O63wwBsfjyx9HvlqNHp7O5UrgYnMIrRRiueA6UoqBWNVgYNXJAMk6P2Xe
+ jGxJf0gxXhACd0nyBI29TRmpYSbXozdY=
+X-Gm-Gg: AYBFou3cd5VNIcJpCnYz3IzPyRPnAUZ9l1xJKfRxDFDsMra05HlGfG0w8+wCpIQk3Hw
+ 4brZsEfzhlK/qXKSytnUNqxW0O2jNYvi2S8Z+Ttmqk96ig3TCWhcB6tIVt3ei8k66vQQt1LVFMm
+ K9L0KWse/q//KkIKnbCq8zI/gI7cld9lS813VmP4jsevxlTV2l1uWvaNxA7SL+11pJnIjsd0F60
+ qwXOXY5HTGD5XPtsEBGuIz8VUxiSTbyh0YE6UHNX3EiuGdXF/Tzn9CH63ssedTq45k+6jUnLx4k
+ +Hr9lQqvAcG2RKZPmYLdGc/iJZzmQtzYE8u5sUJyUYr6k0/6Wy8Ul81eMg==
+X-Received: by 2002:a05:6402:13d2:b0:698:e614:e4bf with SMTP id
+ 4fb4d7f45d1cf-6a7e8cb530amr11447107a12.0.1788939177276; Wed, 09 Sep 2026
+ 00:32:57 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:39::7;
- envelope-from=fritchleybohrer@gmail.com; helo=mail-pj2-x07.google.com
+References: <20260723200325.24969-1-zhiwei_liu@linux.alibaba.com>
+ <20260723200325.24969-2-zhiwei_liu@linux.alibaba.com>
+In-Reply-To: <20260723200325.24969-2-zhiwei_liu@linux.alibaba.com>
+From: Qemu <readqemu@gmail.com>
+Date: Wed, 9 Sep 2026 15:32:44 +0800
+X-Gm-Features: AcwNN1UthEaXlNHv0uiJDAv2G2v1Z8J-UPbzgvVms4BfFSJ9r3khhaCgEsqZf7g
+Message-ID: <CAMXXpfZoEHGRXTMzWtmtkBcnp+YO9O=sJqV0M4oyUYKvoPs7hg@mail.gmail.com>
+Subject: Re: [PATCH v8 01/11] target/riscv: Add basic definitions and CSRs for
+ SMMPT
+To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+Cc: qemu-devel@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com, 
+ daniel.barboza@oss.qualcomm.com, chao.liu.zevorn@gmail.com, 
+ liwei1518@gmail.com, qemu-riscv@nongnu.org, rahul@summations.net, 
+ xiangyi.zeng@linux.alibaba.com, cxx194832@alibaba-inc.com, 
+ Huang Tao <eric.huang@linux.alibaba.com>,
+ TANG Tiancheng <lyndra@linux.alibaba.com>
+Content-Type: multipart/alternative; boundary="0000000000002fb934065b07dce6"
+Received-SPF: pass client-ip=2a00:1450:4864:20::52e;
+ envelope-from=readqemu@gmail.com; helo=mail-ed1-x52e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -102,302 +122,35 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Since commit cfc96df65e01, riscv_pmu_ctr_get_fixed_counters_val()
-returns the complete 64-bit fixed-counter value. The RV32 counter
-access paths, however, still perform parts of the offset calculation
-on separately extracted 32-bit halves.
+--0000000000002fb934065b07dce6
+Content-Type: text/plain; charset="UTF-8"
 
-In particular, riscv_pmu_write_ctrh() deposits the low 32 bits of the
-complete fixed-counter value into the high half of mhpmcounter_prev.
-riscv_pmu_read_ctr() also subtracts a 32-bit half of the previous value
-from the complete 64-bit fixed-counter value. Consequently, writes to
-mcycleh can be lost and carries between the low and high halves are not
-handled correctly.
+> This provides the necessary infrastructure for the core MPT logic and
+> MMU integration that will follow.
+>
+> Co-authored-by: Huang Tao <eric.huang@linux.alibaba.com>
+> Co-authored-by: TANG Tiancheng <lyndra@linux.alibaba.com>
+> Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 
-Keep the fixed-counter offset calculation entirely in 64 bits. Before
-a running counter is partially written, materialize its current
-architectural value and reset the fixed-counter baseline. On reads,
-calculate the complete 64-bit counter value before extracting the half
-requested by RV32.
+Reviewed-by: Jay Chang <jay.chang@sifive.com>
 
-Register RV32 system TCG tests with the Meson build. Add a test for
-high-half writes, low-to-high carry, and preserving the carried high
-half across a subsequent low-half write.
+Thanks.
 
-Fixes: cfc96df65e01 ("target/riscv: Remove upper_half from riscv_pmu_ctr_get_fixed_counters_val")
-Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/4219
-Signed-off-by: Zephyr Li <fritchleybohrer@gmail.com>
+--0000000000002fb934065b07dce6
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
----
-Changes in v2:
-- Move the test to a new tests/tcg/riscv32 directory.
-- Convert the test registration to the Meson TCG test framework.
-- Add RV32 TCG cross-compiler options and cover the test directory in
-  MAINTAINERS.
-- Add a riscv32-local semihosting linker script.
+<div dir=3D"ltr"><div><span class=3D"gmail-il">&gt; This provides the neces=
+sary infrastructure for the core MPT logic and<br>&gt; MMU integration that=
+ will follow.<br>&gt;=C2=A0<br>&gt; Co-authored-by: Huang Tao &lt;<a href=
+=3D"mailto:eric.huang@linux.alibaba.com" target=3D"_blank">eric.huang@linux=
+.alibaba.com</a>&gt;<br>&gt; Co-authored-by: TANG Tiancheng &lt;<a href=3D"=
+mailto:lyndra@linux.alibaba.com" target=3D"_blank">lyndra@linux.alibaba.com=
+</a>&gt;<br>&gt; Signed-off-by: LIU Zhiwei &lt;<a href=3D"mailto:zhiwei_liu=
+@linux.alibaba.com" target=3D"_blank">zhiwei_liu@linux.alibaba.com</a>&gt;<=
+/span></div><div><span class=3D"gmail-il"><br></span></div><span class=3D"g=
+mail-il">Reviewed</span>-by: Jay Chang &lt;<a href=3D"mailto:jay.chang@sifi=
+ve.com">jay.chang@sifive.com</a>&gt;<div><br></div><div>Thanks.</div></div>
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 7183babd6a..5f75b2684f 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -377,6 +377,7 @@ F: include/hw/riscv/
- F: common-user/host/riscv*
- F: tests/functional/riscv32
- F: tests/functional/riscv64
-+F: tests/tcg/riscv32/
- F: tests/tcg/riscv64/
- F: tests/qtest/iommu-riscv-test.c
- 
-diff --git a/meson_options.txt b/meson_options.txt
-index 292625af08..2ceebe7a44 100644
---- a/meson_options.txt
-+++ b/meson_options.txt
-@@ -452,6 +452,10 @@ option('tcg_tests_cross_cc_ppc64le', type: 'string',
-        description: 'cc for ppc64le tcg tests')
- option('tcg_tests_cross_cflags_ppc64le', type: 'string',
-        description: 'cflags for ppc64le tcg tests')
-+option('tcg_tests_cross_cc_riscv32', type: 'string',
-+       description: 'cc for riscv32 tcg tests')
-+option('tcg_tests_cross_cflags_riscv32', type: 'string',
-+       description: 'cflags for riscv32 tcg tests')
- option('tcg_tests_cross_cc_riscv64', type: 'string',
-        description: 'cc for riscv64 tcg tests')
- option('tcg_tests_cross_cflags_riscv64', type: 'string',
-diff --git a/target/riscv/tcg/csr.c b/target/riscv/tcg/csr.c
-index bd4b6dc114..65985efb22 100644
---- a/target/riscv/tcg/csr.c
-+++ b/target/riscv/tcg/csr.c
-@@ -1337,23 +1337,23 @@ static RISCVException riscv_pmu_write_ctr(CPURISCVState *env, target_ulong val,
-     int deposit_size = rv32 ? 32 : 64;
-     uint64_t ctr;
- 
--    counter->mhpmcounter_val = deposit64(counter->mhpmcounter_val,
--                                         0, deposit_size, val);
--
-     if (!get_field(env->mcountinhibit, BIT(ctr_idx)) &&
-         (riscv_pmu_ctr_monitor_cycles(env, ctr_idx) ||
-          riscv_pmu_ctr_monitor_instructions(env, ctr_idx))) {
-         ctr = riscv_pmu_ctr_get_fixed_counters_val(env, ctr_idx);
--        counter->mhpmcounter_prev = deposit64(counter->mhpmcounter_prev,
--                                              0, deposit_size, ctr);
-+        counter->mhpmcounter_val += ctr - counter->mhpmcounter_prev;
-+        counter->mhpmcounter_val = deposit64(counter->mhpmcounter_val,
-+                                             0, deposit_size, val);
-+        counter->mhpmcounter_prev = ctr;
-         if (ctr_idx > 2) {
-             riscv_pmu_setup_timer(env, counter->mhpmcounter_val, ctr_idx);
-         }
-      } else {
-+        counter->mhpmcounter_val = deposit64(counter->mhpmcounter_val,
-+                                             0, deposit_size, val);
-         /* Other counters can keep incrementing from the given value */
-         counter->mhpmcounter_prev = deposit64(counter->mhpmcounter_prev,
-                                               0, deposit_size, val);
--
-     }
- 
-     return RISCV_EXCP_NONE;
-@@ -1363,20 +1363,22 @@ static RISCVException riscv_pmu_write_ctrh(CPURISCVState *env, target_ulong val,
-                                           uint32_t ctr_idx)
- {
-     PMUCTRState *counter = &env->pmu_ctrs[ctr_idx];
--    uint64_t ctrh;
-+    uint64_t ctr;
- 
--    counter->mhpmcounter_val = deposit64(counter->mhpmcounter_val,
--                                         32, 32, val);
-     if (!get_field(env->mcountinhibit, BIT(ctr_idx)) &&
-         (riscv_pmu_ctr_monitor_cycles(env, ctr_idx) ||
-          riscv_pmu_ctr_monitor_instructions(env, ctr_idx))) {
--        ctrh = riscv_pmu_ctr_get_fixed_counters_val(env, ctr_idx);
--        counter->mhpmcounter_prev = deposit64(counter->mhpmcounter_prev,
--                                              32, 32, ctrh);
-+        ctr = riscv_pmu_ctr_get_fixed_counters_val(env, ctr_idx);
-+        counter->mhpmcounter_val += ctr - counter->mhpmcounter_prev;
-+        counter->mhpmcounter_val = deposit64(counter->mhpmcounter_val,
-+                                             32, 32, val);
-+        counter->mhpmcounter_prev = ctr;
-         if (ctr_idx > 2) {
-             riscv_pmu_setup_timer(env, counter->mhpmcounter_val, ctr_idx);
-         }
-     } else {
-+        counter->mhpmcounter_val = deposit64(counter->mhpmcounter_val,
-+                                             32, 32, val);
-         counter->mhpmcounter_prev = deposit64(counter->mhpmcounter_prev,
-                                               32, 32, val);
-     }
-@@ -1407,12 +1409,11 @@ RISCVException riscv_pmu_read_ctr(CPURISCVState *env, target_ulong *val,
-     bool rv32 = riscv_cpu_mxl(env) == MXL_RV32;
-     int start = upper_half ? 32 : 0;
-     int length = rv32 ? 32 : 64;
--    uint64_t ctr_prev, ctr_val;
-+    uint64_t ctr_val;
- 
-     /* Ensure upper_half is only set for XLEN == 32 */
-     g_assert(rv32 || !upper_half);
- 
--    ctr_prev = extract64(counter->mhpmcounter_prev, start, length);
-     ctr_val  = extract64(counter->mhpmcounter_val, start, length);
- 
-     if (get_field(env->mcountinhibit, BIT(ctr_idx))) {
-@@ -1431,7 +1432,8 @@ RISCVException riscv_pmu_read_ctr(CPURISCVState *env, target_ulong *val,
-     if (riscv_pmu_ctr_monitor_cycles(env, ctr_idx) ||
-         riscv_pmu_ctr_monitor_instructions(env, ctr_idx)) {
-         uint64_t cntr = riscv_pmu_ctr_get_fixed_counters_val(env, ctr_idx) -
--                                                             ctr_prev + ctr_val;
-+                        counter->mhpmcounter_prev +
-+                        counter->mhpmcounter_val;
-         *val = extract64(cntr, start, length);
-     } else {
-         *val = ctr_val;
-diff --git a/tests/tcg/meson.build b/tests/tcg/meson.build
-index d41a228fb3..60b5ce2529 100644
---- a/tests/tcg/meson.build
-+++ b/tests/tcg/meson.build
-@@ -169,6 +169,7 @@ subdir('mips64el')
- subdir('or1k')
- subdir('ppc64')
- subdir('ppc64le')
-+subdir('riscv32')
- subdir('riscv64')
- subdir('s390x')
- subdir('sh4')
-diff --git a/tests/tcg/riscv32/meson.build b/tests/tcg/riscv32/meson.build
-new file mode 100644
-index 0000000000..c08dfd772d
---- /dev/null
-+++ b/tests/tcg/riscv32/meson.build
-@@ -0,0 +1,7 @@
-+# SPDX-License-Identifier: GPL-2.0-or-later
-+
-+cc = 'riscv64-linux-gnu-gcc'
-+cc_dockerfile = 'debian-all-test-cross'
-+cc_docker_host_arch = ['aarch64', 'x86_64']
-+
-+subdir('system')
-diff --git a/tests/tcg/riscv32/semihost.ld b/tests/tcg/riscv32/semihost.ld
-new file mode 100644
-index 0000000000..874838a865
---- /dev/null
-+++ b/tests/tcg/riscv32/semihost.ld
-@@ -0,0 +1,23 @@
-+/* SPDX-License-Identifier: GPL-2.0-or-later */
-+
-+ENTRY(_start)
-+
-+SECTIONS
-+{
-+    /* virt machine, RAM starts at 2gb */
-+    . = 0x80000000;
-+    .text : {
-+        *(.text)
-+    }
-+    .rodata : {
-+        *(.rodata)
-+    }
-+    /* align r/w section to next 2mb */
-+    . = ALIGN(1 << 21);
-+    .data : {
-+        *(.data)
-+    }
-+    .bss : {
-+        *(.bss)
-+    }
-+}
-diff --git a/tests/tcg/riscv32/system/meson.build b/tests/tcg/riscv32/system/meson.build
-new file mode 100644
-index 0000000000..16f9a06c94
---- /dev/null
-+++ b/tests/tcg/riscv32/system/meson.build
-@@ -0,0 +1,37 @@
-+# SPDX-License-Identifier: GPL-2.0-or-later
-+
-+tests = []
-+
-+link_script = files('../semihost.ld')[0]
-+cflags = ['-march=rv32im_zicsr',
-+          '-mabi=ilp32',
-+          '-nostdlib',
-+          '-ffreestanding',
-+          '-Wa,--noexecstack',
-+          '-Wl,-T', link_script]
-+qemu_args = ['-M', 'virt',
-+             '-display', 'none',
-+             '-serial', 'stdio',
-+             '-semihosting',
-+             '-bios']
-+
-+tests += {
-+  'test-mcycle.S': {
-+    'cflags': cflags,
-+    'qemu_args': ['-icount', 'shift=1', qemu_args],
-+  },
-+}
-+
-+if 'qemu-system-riscv32' in emulators
-+  tcg_tests += {
-+    'riscv32-softmmu': {
-+      'cc': cc,
-+      'cc_dockerfile': cc_dockerfile,
-+      'cc_docker_host_arch': cc_docker_host_arch,
-+      'folder': 'riscv32',
-+      'gdb_arch': 'riscv32',
-+      'qemu': emulators['qemu-system-riscv32'],
-+      'tests': tests,
-+    }
-+  }
-+endif
-diff --git a/tests/tcg/riscv32/test-mcycle.S b/tests/tcg/riscv32/test-mcycle.S
-new file mode 100644
-index 0000000000..189d1e13a2
---- /dev/null
-+++ b/tests/tcg/riscv32/test-mcycle.S
-@@ -0,0 +1,45 @@
-+/* SPDX-License-Identifier: GPL-2.0-or-later */
-+
-+	.option	norvc
-+
-+	.text
-+	.global	_start
-+_start:
-+	/* Exercise writes while mcycle is running. */
-+	csrw	mcountinhibit, zero
-+	csrw	mcycle, zero
-+
-+	/* A write to the high half must be immediately observable. */
-+	li	s0, 0x1234ffff
-+	csrw	mcycleh, s0
-+	csrr	t0, mcycleh
-+	bne	t0, s0, fail
-+
-+	/* Check carry from the low half into the high half. */
-+	li	s0, 0x12345678
-+	csrw	mcycleh, s0
-+	li	t0, 0xfffffff0
-+	csrw	mcycle, t0
-+	.rept	32
-+	nop
-+	.endr
-+	csrr	t0, mcycleh
-+	addi	s0, s0, 1
-+	bne	t0, s0, fail
-+
-+	/* A low-half write must preserve the carried high half. */
-+	li	t0, 0x22222222
-+	csrw	mcycle, t0
-+	csrr	t0, mcycleh
-+	bne	t0, s0, fail
-+
-+	li	t0, 0x100000
-+	li	t1, 0x5555	/* FINISHER_PASS */
-+	sw	t1, 0(t0)
-+	j	.
-+
-+fail:
-+	li	t0, 0x100000
-+	li	t1, 0x13333	/* status = FINISHER_FAIL, code = 1 */
-+	sw	t1, 0(t0)
-+	j	.
--- 
-2.43.0
+--0000000000002fb934065b07dce6--
 
