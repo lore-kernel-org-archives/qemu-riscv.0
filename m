@@ -4,39 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32AC6C88E47
-	for <qemu-riscv@archiver.kernel.org>; Thu, 10 Sep 2026 14:41:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4BB1C79FB9
+	for <qemu-riscv@archiver.kernel.org>; Thu, 10 Sep 2026 14:41:54 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x4fwq-000358-3G; Thu, 10 Sep 2026 10:40:20 -0400
+	id 1x4fxN-0003Es-IR; Thu, 10 Sep 2026 10:40:53 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <lyndra@linux.alibaba.com>)
- id 1x4fwn-000320-PT; Thu, 10 Sep 2026 10:40:17 -0400
-Received: from [115.124.30.132] (helo=out30-132.freemail.mail.aliyun.com)
+ id 1x4fwr-00035a-5Y; Thu, 10 Sep 2026 10:40:21 -0400
+Received: from [115.124.30.130] (helo=out30-130.freemail.mail.aliyun.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <lyndra@linux.alibaba.com>)
- id 1x4fwc-0003Q2-Uj; Thu, 10 Sep 2026 10:40:17 -0400
+ id 1x4fwg-0003QQ-Io; Thu, 10 Sep 2026 10:40:20 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linux.alibaba.com; s=default;
- t=1789051195; h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To;
- bh=3cIrX8vvphZfU+2tkgq7BXATXV6vv2BRT69Mz08tqJ4=;
- b=v9gm5rPLE8F+v9ra2159KXgS0OTI+DXRJF8rA2sBAVxeXP4g0QHD9G/Pgcud7WOmeNg877xvOxvYNWRqL2wAIgMelh2z3b5JISBID03CqD1h/PUzR5elUZv920ZOtYdDd6H+8T8S7sQzkxIfpEtA2AAaJv1JXR5kRGqL+cCJf9E=
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R201e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033045098064;
+ t=1789051199; h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To;
+ bh=avKIryUkCle6rG2xxyoi/YBRXErQNkoEhUu85f54lL4=;
+ b=AM/sH11UIkeJpsK17xPoW0DEY9Q3Fxi8stLJSGusfukuBByTWVZq8BsYD9uSeb29iLG5UQLL2aXDpVBzSR+ODrdbz1007dYhhNrJpTbuToePw/Il8LuCaeqnupc2TvwqzL0PqUtXy8L858G5Uq/fB34dqj0WwQGgPUbrdU+NT+Y=
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R121e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam011083073210;
  MF=lyndra@linux.alibaba.com; NM=1; PH=DS; RN=13; SR=0;
- TI=SMTPD_---0XAhkcF0_1789051194; 
+ TI=SMTPD_---0XAhkcGf_1789051198; 
 Received: from ea134-sw06.eng.xrvm.cn(mailfrom:lyndra@linux.alibaba.com
- fp:SMTPD_---0XAhkcF0_1789051194 cluster:ay36) by smtp.aliyun-inc.com;
- Thu, 10 Sep 2026 22:39:54 +0800
+ fp:SMTPD_---0XAhkcGf_1789051198 cluster:ay36) by smtp.aliyun-inc.com;
+ Thu, 10 Sep 2026 22:39:58 +0800
 From: TANG Tiancheng <lyndra@linux.alibaba.com>
-Date: Thu, 10 Sep 2026 22:39:41 +0800
-Subject: [PATCH v2 04/14] target/riscv: Preserve MINH on delegated config reads
+Date: Thu, 10 Sep 2026 22:39:47 +0800
+Subject: [PATCH v2 10/14] target/riscv: Apply minstret exception accounting
+ to HPM counters
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260910-riscv-pmu-correctness-v2-4-5da5159a0c64@linux.alibaba.com>
+Message-Id: <20260910-riscv-pmu-correctness-v2-10-5da5159a0c64@linux.alibaba.com>
 References: <20260910-riscv-pmu-correctness-v2-0-5da5159a0c64@linux.alibaba.com>
 In-Reply-To: <20260910-riscv-pmu-correctness-v2-0-5da5159a0c64@linux.alibaba.com>
 To: qemu-devel@nongnu.org
@@ -52,17 +53,17 @@ Cc: Zephyr Li <fritchleybohrer@gmail.com>,
  =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>, 
  TANG Tiancheng <lyndra@linux.alibaba.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1789051191; l=7924;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1789051191; l=6491;
  i=lyndra@linux.alibaba.com; s=20250909; h=from:subject:message-id;
- bh=i8/tbCt+1+qC76L/RPpROlwyD4V+t52qb1hqpeRSKkY=;
- b=8Tk5vwxK06E2wuAXHIyqsdmc4eax3RIEibcEleFhiaOUNPc2C3IT+9fdzg58PrG3GStauPK7G
- dO59kIgIoDLDb7xtwaOtvl4JSicOfpIjVXoSIb4TY0LPj6jodAsuRcH
+ bh=Dec5fXS+l6zzZVr99/10WAgd/MsnKh87Iw6WbQXKeR0=;
+ b=S4MHlhe1hwNbJJSaM2+pcoTcbQ1wRodVq4xED/k2zSRnUcfQzOmKcWSDpd7NXSJhWSfXOXlTh
+ iYB/zJdma00AidxmeaeSev6WDxteencYx2ucE+evE2wzwDE/q0foW9H
 X-Developer-Key: i=lyndra@linux.alibaba.com; a=ed25519;
  pk=GQh4uOSLVucXGkaZfEuQ956CrYS14cn1TA3N8AiIjBw=
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.132 (deferred)
-Received-SPF: pass client-ip=115.124.30.132;
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.130 (deferred)
+Received-SPF: pass client-ip=115.124.30.130;
  envelope-from=lyndra@linux.alibaba.com;
- helo=out30-132.freemail.mail.aliyun.com
+ helo=out30-130.freemail.mail.aliyun.com
 X-Spam_score_int: -166
 X-Spam_score: -16.7
 X-Spam_bar: ----------------
@@ -86,179 +87,89 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Smcdeleg requires MINH to read as zero through sireg*. The RV64 callback
-masks it by modifying the machine register; the RV32 high-half callback
-does not mask it.
+With icount, helper_raise_exception() excludes faulting instructions from
+minstret but not HPM counters selecting HW_INSTRUCTIONS.
 
-Return a masked copy without changing mcyclecfg or minstretcfg. Test both
-configuration registers on RV32 and RV64.
+Adjust the baseline of every running instruction counter that counts the
+current privilege mode. Do not read icount here: the helper can run inside
+a TB. Keep the existing timer, since excluding an instruction can only
+postpone overflow and expiry checks for an actual wrap.
 
-Fixes: d9fa41e10156 ("target/riscv: Bugfix make bit 62 read-only 0 for sireg* cfg CSR read")
+Extend the ECALL regression to compare both counters and add an LPAD
+fault test covering an exception inside a multi-instruction TB.
+
+Fixes: 14664483457b ("target/riscv: Add sscofpmf extension support")
 Signed-off-by: TANG Tiancheng <lyndra@linux.alibaba.com>
 ---
- target/riscv/tcg/csr.c                 |  8 ++--
- tests/tcg/riscv32/smcdeleg-minh-rv32.S | 78 ++++++++++++++++++++++++++++++++++
- tests/tcg/riscv32/system/meson.build   |  7 +++
- tests/tcg/riscv64/smcdeleg-minh.S      | 78 ++++++++++++++++++++++++++++++++++
- tests/tcg/riscv64/system/meson.build   |  7 +++
- 5 files changed, 174 insertions(+), 4 deletions(-)
+ target/riscv/tcg/pmu.c                  | 35 ++++++++++++----
+ tests/tcg/riscv64/pmu-lpad.S            | 72 +++++++++++++++++++++++++++++++++
+ tests/tcg/riscv64/system/meson.build    |  7 ++++
+ tests/tcg/riscv64/test-minstret-ecall.S | 26 ++++++++++++
+ 4 files changed, 133 insertions(+), 7 deletions(-)
 
-diff --git a/target/riscv/tcg/csr.c b/target/riscv/tcg/csr.c
-index 60caee32dc0cf5b6a8492e0cf8ff15f71acc2087..57030724f85a897e21e5082b9857411b50f932ac 100644
---- a/target/riscv/tcg/csr.c
-+++ b/target/riscv/tcg/csr.c
-@@ -1607,7 +1607,7 @@ static int rmw_cd_ctr_cfg(CPURISCVState *env, int cfg_index, target_ulong *val,
-             wr_mask &= ~MCYCLECFG_BIT_MINH;
-             env->mcyclecfg = (new_val & wr_mask) | (env->mcyclecfg & ~wr_mask);
-         } else {
--            *val = env->mcyclecfg &= ~MHPMEVENT_BIT_MINH;
-+            *val = env->mcyclecfg & ~MCYCLECFG_BIT_MINH;
-         }
-         break;
-     case 2:             /* INSTRETCFG */
-@@ -1616,7 +1616,7 @@ static int rmw_cd_ctr_cfg(CPURISCVState *env, int cfg_index, target_ulong *val,
-             env->minstretcfg = (new_val & wr_mask) |
-                                (env->minstretcfg & ~wr_mask);
-         } else {
--            *val = env->minstretcfg &= ~MHPMEVENT_BIT_MINH;
-+            *val = env->minstretcfg & ~MINSTRETCFG_BIT_MINH;
-         }
-         break;
-     default:
-@@ -1642,7 +1642,7 @@ static int rmw_cd_ctr_cfgh(CPURISCVState *env, int cfg_index, target_ulong *val,
-             cfgh = (new_val & wr_mask) | (cfgh & ~wr_mask);
-             env->mcyclecfg = deposit64(env->mcyclecfg, 32, 32, cfgh);
-         } else {
--            *val = cfgh;
-+            *val = cfgh & ~MCYCLECFGH_BIT_MINH;
-         }
-         break;
-     case 2:          /* INSTRETCFGH */
-@@ -1652,7 +1652,7 @@ static int rmw_cd_ctr_cfgh(CPURISCVState *env, int cfg_index, target_ulong *val,
-             cfgh = (new_val & wr_mask) | (cfgh & ~wr_mask);
-             env->minstretcfg = deposit64(env->minstretcfg, 32, 32, cfgh);
-         } else {
--            *val = cfgh;
-+            *val = cfgh & ~MINSTRETCFGH_BIT_MINH;
-         }
-         break;
-     default:
-diff --git a/tests/tcg/riscv32/smcdeleg-minh-rv32.S b/tests/tcg/riscv32/smcdeleg-minh-rv32.S
-new file mode 100644
-index 0000000000000000000000000000000000000000..db467b95cf1441e3440f59097401cf6956d294d3
---- /dev/null
-+++ b/tests/tcg/riscv32/smcdeleg-minh-rv32.S
-@@ -0,0 +1,78 @@
-+/* SPDX-License-Identifier: GPL-2.0-or-later */
+diff --git a/target/riscv/tcg/pmu.c b/target/riscv/tcg/pmu.c
+index f88f6ae671d877ed874d22c9d4b840edb6f433a5..08298010b6d06f5792fa14ff81fe2f7a28c6476f 100644
+--- a/target/riscv/tcg/pmu.c
++++ b/target/riscv/tcg/pmu.c
+@@ -387,18 +387,39 @@ void riscv_pmu_write_inhibit(CPURISCVState *env, uint32_t value)
+ 
+ void riscv_pmu_decr_instret(CPURISCVState *env)
+ {
+-    if (!icount_enabled() ||
+-        (env->mcountinhibit & COUNTEREN_IR) ||
+-        riscv_pmu_counter_filtered(env, env->minstretcfg)) {
++    RISCVCPU *cpu = env_archcpu(env);
++    uint32_t ctr_mask;
 +
-+/* CSR numbers for older assemblers. */
-+#define CSR_SISELECT         0x150
-+#define CSR_SIREG5           0x156
-+#define CSR_MENVCFGH         0x31a
-+#define CSR_MCYCLECFGH       0x721
-+#define CSR_MINSTRETCFGH     0x722
++    if (!icount_enabled()) {
+         return;
+     }
+ 
+     /*
+-     * minstret is derived from icount, which includes the current
+-     * instruction.  Move the baseline forward to exclude an instruction
+-     * that raises an exception and therefore does not retire.
++     * Fixed instruction events are derived from icount, which includes the
++     * current instruction.  Move the baseline of each running
++     * instruction-source counter that counts the current privilege mode to
++     * exclude an instruction that raises an exception and does not retire.
++     *
++     * Do not read icount here: this helper can run in the middle of a TB.
++     * Excluding an instruction only postpones overflow, so keep the current
++     * timer deadline. The expiry handler checks for an actual counter wrap.
+      */
+-    env->pmu_ctrs[2].mhpmcounter_prev++;
++    ctr_mask = COUNTEREN_IR |
++               riscv_pmu_event_counter_mask(
++                   cpu, RISCV_PMU_EVENT_HW_INSTRUCTIONS);
++    while (ctr_mask) {
++        uint32_t ctr_idx = ctz32(ctr_mask);
++        uint64_t cfg = ctr_idx == 2 ? env->minstretcfg :
++                                      env->mhpmevent_val[ctr_idx];
 +
-+	.option	norvc
-+	.option	norelax
++        ctr_mask &= ~BIT(ctr_idx);
++        if (!riscv_pmu_fixed_ctr_running(env, ctr_idx) ||
++            riscv_pmu_counter_filtered(env, cfg)) {
++            continue;
++        }
 +
-+	.text
-+	.global	_start
-+_start:
-+	/*
-+	 * Failure bits:
-+	 * 0: delegated cyclecfgh exposes MINH
-+	 * 1: reading delegated cyclecfgh clears mcyclecfgh.MINH
-+	 * 2: delegated instretcfgh exposes MINH
-+	 * 3: reading delegated instretcfgh clears minstretcfgh.MINH
-+	 */
-+	li	t4, 0
-+	li	t0, 1
-+	slli	t0, t0, 30		/* MINH in the high half */
-+	csrw	CSR_MCYCLECFGH, t0
-+	csrw	CSR_MINSTRETCFGH, t0
-+	li	t1, 1
-+	slli	t1, t1, 28		/* menvcfgh.CDE */
-+	csrw	CSR_MENVCFGH, t1
-+	li	t1, 5			/* Delegate cycle and instret. */
-+	csrw	mcounteren, t1
-+
-+	/* Check the delegated view, then the underlying machine register. */
-+	li	t1, 0x40		/* siselect: cycle */
-+	csrw	CSR_SISELECT, t1
-+	csrr	t1, CSR_SIREG5
-+	and	t1, t1, t0
-+	sltu	t1, zero, t1
-+	or	t4, t4, t1
-+	csrr	t1, CSR_MCYCLECFGH
-+	and	t1, t1, t0
-+	sltu	t1, zero, t1
-+	xori	t1, t1, 1
-+	slli	t1, t1, 1
-+	or	t4, t4, t1
-+
-+	li	t1, 0x42		/* siselect: instret */
-+	csrw	CSR_SISELECT, t1
-+	csrr	t1, CSR_SIREG5
-+	and	t1, t1, t0
-+	sltu	t1, zero, t1
-+	slli	t1, t1, 2
-+	or	t4, t4, t1
-+	csrr	t1, CSR_MINSTRETCFGH
-+	and	t1, t1, t0
-+	sltu	t1, zero, t1
-+	xori	t1, t1, 1
-+	slli	t1, t1, 3
-+	or	t4, t4, t1
-+
-+	lla	a1, semiargs
-+	li	t0, 0x20026		/* ADP_Stopped_ApplicationExit */
-+	sw	t0, 0(a1)
-+	sw	t4, 4(a1)
-+	li	a0, 0x20		/* TARGET_SYS_EXIT_EXTENDED */
-+
-+	/* Semihosting call sequence. */
-+	.balign	16
-+	slli	zero, zero, 0x1f
-+	ebreak
-+	srai	zero, zero, 0x7
-+	j	.
-+
-+	.data
-+	.balign	16
-+semiargs:
-+	.space	8
-diff --git a/tests/tcg/riscv32/system/meson.build b/tests/tcg/riscv32/system/meson.build
-index 16f9a06c9485ed75b3d127d6b9d090f5eaad4486..cfe2d854b729a8dfdbce2373e73b91b470db6b4e 100644
---- a/tests/tcg/riscv32/system/meson.build
-+++ b/tests/tcg/riscv32/system/meson.build
-@@ -22,6 +22,13 @@ tests += {
-   },
++        env->pmu_ctrs[ctr_idx].mhpmcounter_prev++;
++    }
  }
  
-+tests += {
-+  'smcdeleg-minh-rv32.S': {
-+    'cflags': cflags,
-+    'qemu_args': ['-cpu', 'max', qemu_args],
-+  },
-+}
-+
- if 'qemu-system-riscv32' in emulators
-   tcg_tests += {
-     'riscv32-softmmu': {
-diff --git a/tests/tcg/riscv64/smcdeleg-minh.S b/tests/tcg/riscv64/smcdeleg-minh.S
+ int riscv_pmu_incr_ctr(RISCVCPU *cpu, enum riscv_pmu_event_idx event_idx)
+diff --git a/tests/tcg/riscv64/pmu-lpad.S b/tests/tcg/riscv64/pmu-lpad.S
 new file mode 100644
-index 0000000000000000000000000000000000000000..38d3c30f0afaa416a46322f2b892e5969172a60f
+index 0000000000000000000000000000000000000000..40a6b34b7c2b71dd42e78b6873d72df4d508289d
 --- /dev/null
-+++ b/tests/tcg/riscv64/smcdeleg-minh.S
-@@ -0,0 +1,78 @@
++++ b/tests/tcg/riscv64/pmu-lpad.S
+@@ -0,0 +1,72 @@
 +/* SPDX-License-Identifier: GPL-2.0-or-later */
 +
-+/* CSR numbers for older assemblers. */
-+#define CSR_SISELECT         0x150
-+#define CSR_SIREG2           0x152
-+#define CSR_MENVCFG          0x30a
-+#define CSR_MCYCLECFG        0x321
-+#define CSR_MINSTRETCFG      0x322
++/* CSR number for older assemblers. */
++#define CSR_MSECCFG          0x747
++
++/* An LPAD fault must be deliverable with HPM instruction counting enabled. */
 +
 +	.option	norvc
 +	.option	norelax
@@ -266,57 +177,53 @@ index 0000000000000000000000000000000000000000..38d3c30f0afaa416a46322f2b892e596
 +	.text
 +	.global	_start
 +_start:
++	lla	t0, trap
++	csrw	mtvec, t0
++	li	t0, 2		/* HW_INSTRUCTIONS */
++	csrw	mhpmevent3, t0
++	li	t0, 1 << 10	/* mseccfg.MLPE */
++	csrs	CSR_MSECCFG, t0
++
++	/* x7[31:12] = 0 does not match the nonzero LPAD label. */
++	li	t2, 0
++	lla	a0, target
++	jalr	ra, a0, 0
++	j	fail
++
++	.balign	4
++target:
++	.word	0x00001017	/* lpad 1 */
 +	/*
-+	 * Failure bits:
-+	 * 0: delegated cyclecfg exposes MINH
-+	 * 1: reading delegated cyclecfg clears mcyclecfg.MINH
-+	 * 2: delegated instretcfg exposes MINH
-+	 * 3: reading delegated instretcfg clears minstretcfg.MINH
++	 * Keep the LPAD check inside a multi-instruction TB. Its exception
++	 * helper must not read icount before leaving generated code.
 +	 */
-+	li	t4, 0
-+	li	t0, 1
-+	slli	t0, t0, 62		/* MINH */
-+	csrw	CSR_MCYCLECFG, t0
-+	csrw	CSR_MINSTRETCFG, t0
-+	li	t1, 1
-+	slli	t1, t1, 60		/* menvcfg.CDE */
-+	csrw	CSR_MENVCFG, t1
-+	li	t1, 5			/* Delegate cycle and instret. */
-+	csrw	mcounteren, t1
++	.rept	16
++	nop
++	.endr
++	j	fail
 +
-+	/* Check the delegated view, then the underlying machine register. */
-+	li	t1, 0x40		/* siselect: cycle */
-+	csrw	CSR_SISELECT, t1
-+	csrr	t1, CSR_SIREG2
-+	and	t1, t1, t0
-+	sltu	t1, zero, t1
-+	or	t4, t4, t1
-+	csrr	t1, CSR_MCYCLECFG
-+	and	t1, t1, t0
-+	sltu	t1, zero, t1
-+	xori	t1, t1, 1
-+	slli	t1, t1, 1
-+	or	t4, t4, t1
++trap:
++	csrr	t0, mcause
++	li	t1, 18		/* Software-check exception */
++	bne	t0, t1, fail
++	csrr	t0, mtval
++	li	t1, 2		/* Landing-pad fault */
++	bne	t0, t1, fail
++	csrr	t0, mepc
++	lla	t1, target
++	bne	t0, t1, fail
++	li	a0, 0
++	j	exit
 +
-+	li	t1, 0x42		/* siselect: instret */
-+	csrw	CSR_SISELECT, t1
-+	csrr	t1, CSR_SIREG2
-+	and	t1, t1, t0
-+	sltu	t1, zero, t1
-+	slli	t1, t1, 2
-+	or	t4, t4, t1
-+	csrr	t1, CSR_MINSTRETCFG
-+	and	t1, t1, t0
-+	sltu	t1, zero, t1
-+	xori	t1, t1, 1
-+	slli	t1, t1, 3
-+	or	t4, t4, t1
++fail:
++	li	a0, 1
 +
++exit:
 +	lla	a1, semiargs
-+	li	t0, 0x20026		/* ADP_Stopped_ApplicationExit */
++	li	t0, 0x20026	/* ADP_Stopped_ApplicationExit */
 +	sd	t0, 0(a1)
-+	sd	t4, 8(a1)
-+	li	a0, 0x20		/* TARGET_SYS_EXIT_EXTENDED */
++	sd	a0, 8(a1)
++	li	a0, 0x20	/* TARGET_SYS_EXIT_EXTENDED */
 +
 +	/* Semihosting call sequence. */
 +	.balign	16
@@ -330,23 +237,65 @@ index 0000000000000000000000000000000000000000..38d3c30f0afaa416a46322f2b892e596
 +semiargs:
 +	.space	16
 diff --git a/tests/tcg/riscv64/system/meson.build b/tests/tcg/riscv64/system/meson.build
-index 668a9a76070b6f16087b08ea84683d883312e951..5d91381c62d77ae7e37c129112d6367f692df660 100644
+index 13ee7954ef4f09559a02a3730fb017ccf2cfd882..d2355090121ba7a7d0046c1fc1824d6a89c1267f 100644
 --- a/tests/tcg/riscv64/system/meson.build
 +++ b/tests/tcg/riscv64/system/meson.build
-@@ -75,6 +75,13 @@ tests += {
-   },
+@@ -61,6 +61,13 @@ tests += {
+   }
  }
  
 +tests += {
-+  'smcdeleg-minh.S': {
++  'pmu-lpad.S': {
 +    'cflags': cflags,
-+    'qemu_args': ['-cpu', 'max', qemu_args],
++    'qemu_args': ['-cpu', 'max', '-icount', 'shift=0', qemu_args],
 +  },
 +}
 +
- if 'qemu-system-riscv64' in emulators
-   tcg_tests += {
-     'riscv64-softmmu': {
+ # Exercise RV32 CSRs with the RV64 emulator's 64-bit target_ulong.
+ tests += {
+   '../riscv32/smcdeleg-rv32.S': {
+diff --git a/tests/tcg/riscv64/test-minstret-ecall.S b/tests/tcg/riscv64/test-minstret-ecall.S
+index ab268f7f22985820f19bde353215385608643f3a..b1857543d488df984b923ad1c135edb35cb948c7 100644
+--- a/tests/tcg/riscv64/test-minstret-ecall.S
++++ b/tests/tcg/riscv64/test-minstret-ecall.S
+@@ -18,11 +18,37 @@ _start:
+ 	li	t1, 1
+ 	bne	t0, t1, fail
+ 
++	/*
++	 * minstret and a counter selecting HW_INSTRUCTIONS must both exclude
++	 * ECALL, so they must contain the same number of retired instructions.
++	 */
++	li	t0, 12		/* mcountinhibit.IR | mcountinhibit.HPM3 */
++	csrs	mcountinhibit, t0
++	csrw	minstret, zero
++	csrw	mhpmcounter3, zero
++	li	t0, 2		/* RISCV_PMU_EVENT_HW_INSTRUCTIONS */
++	csrw	mhpmevent3, t0
++	lla	t0, trap_hpm
++	csrw	mtvec, t0
++	li	t0, 12
++	csrc	mcountinhibit, t0
++	ecall
++	bne	s3, s4, fail
++
+ 	li	a0, 0
+ 	j	_exit
+ 
+ trap:
+ 	csrr	s1, minstret
++	j	trap_check
++
++trap_hpm:
++	li	t0, 12
++	csrs	mcountinhibit, t0
++	csrr	s3, minstret
++	csrr	s4, mhpmcounter3
++
++trap_check:
+ 	csrr	t0, mcause
+ 	li	t1, 11		/* Environment call from M-mode */
+ 	bne	t0, t1, fail
 
 -- 
 2.43.0
