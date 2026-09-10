@@ -4,145 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 008F9C79FB9
-	for <qemu-riscv@archiver.kernel.org>; Thu, 10 Sep 2026 14:18:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4913C79FB9
+	for <qemu-riscv@archiver.kernel.org>; Thu, 10 Sep 2026 14:40:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x4fbA-0007h8-5X; Thu, 10 Sep 2026 10:17:56 -0400
+	id 1x4fwp-00034r-ID; Thu, 10 Sep 2026 10:40:19 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <andrew.jones@oss.qualcomm.com>)
- id 1x4fb8-0007gx-3C
- for qemu-riscv@nongnu.org; Thu, 10 Sep 2026 10:17:54 -0400
-Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
+ (Exim 4.90_1) (envelope-from <lyndra@linux.alibaba.com>)
+ id 1x4fwk-0002yZ-Lb; Thu, 10 Sep 2026 10:40:14 -0400
+Received: from [115.124.30.133] (helo=out30-133.freemail.mail.aliyun.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <andrew.jones@oss.qualcomm.com>)
- id 1x4fb3-0006Mn-Q7
- for qemu-riscv@nongnu.org; Thu, 10 Sep 2026 10:17:53 -0400
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 68ADqqsQ1151397
- for <qemu-riscv@nongnu.org>; Thu, 10 Sep 2026 14:17:47 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-type:date:from:in-reply-to:message-id:mime-version
- :references:subject:to; s=qcppdkim1; bh=J1N/uqAFYfACwM6PZBLrAwEG
- fO9dyVbyHFjMJuzekrE=; b=K3/jehSxCD391p45BvHKJf4nx1HsL8UJ7cG1Hima
- J1byTCpIwZ9TCeFOVLnJZLvV05c8ST0J5fJBHyheetHNYmwfhn5oD3W6TnbUiAh6
- 14HRofO5kPg0ni16au7uyWADriiMXdaF3B+RBOx0CGQbIDoudM7P4P9TqiEIQMyu
- 7AiHZqpvPdm0uEJLPTJA9mWBt+VCNG0hVN94LxUwyN2gRckAXwVZ9rLGhcA+Fm6X
- Q7Y9woWo9GX4ccu1rCo+/JD0MuUcW9ZF7bYREtkyLWjv7fx17a0jTtM0ZRsJ9xUJ
- 5/lsMMiP43zHKDcKsNXBFyPreyptDohoWBUYsUdmDtjoHA==
-Received: from mail-ua1-f69.google.com (mail-ua1-f69.google.com
- [209.85.222.69])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gkwts05bp-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Thu, 10 Sep 2026 14:17:46 +0000 (GMT)
-Received: by mail-ua1-f69.google.com with SMTP id
- a1e0cc1a2514c-97e8d95121cso707598241.0
- for <qemu-riscv@nongnu.org>; Thu, 10 Sep 2026 07:17:46 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <lyndra@linux.alibaba.com>)
+ id 1x4fwc-0003Pq-EY; Thu, 10 Sep 2026 10:40:14 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1789049866; x=1789654666; darn=nongnu.org;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=J1N/uqAFYfACwM6PZBLrAwEGfO9dyVbyHFjMJuzekrE=;
- b=GMO6NdHozJaGyCTFeNKATKDwT3AGhO0lytnlyUYcRdLTLc+KNyjBOZ4y3/ET5yn+r5
- SfXeeFfwkQFSGSrNz/I66L9sl/zbtQ2uswL22rMNkJVn98UvpIWp+pbqLIKU4GNMkv1H
- 8H6s02Lbb1v4BP2yXvTX4kFuQRfOExtitLPU8uQYIbCgvysfZu/M581oP5UYZVe0qLoi
- K4ht8CV8PUnE0dire4LRjMiX+VDPujPzLJN3fkDeBrpWJ559tyFOu5F9yHSuoPbAcnqh
- m+kVnGU4itJHwhB+gf5YbJuC1DSKNvrtO6YNSdi8D39902vv2Nxm4fGrisUrTAiNDjEZ
- RcGg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1789049866; x=1789654666;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=J1N/uqAFYfACwM6PZBLrAwEGfO9dyVbyHFjMJuzekrE=;
- b=f5doHZG2QpvjN8oUZc7p5nptU7EvVo1SXiqDRBJfAVkZTA63hD5NVgb4RVorXci3bn
- X0/ZdGF+qFbYxUJUpO1ms8DrMc6Tjn61emohQ6G001zCF462HOy1tt9lIkrtDcFFH70j
- dF7mcMz3aJSrijGubZep21D2toMQH1gmGJ0hxy0E7jYj2x8cm5dtPKirdbb43TYrz99y
- UozmgnkjR/Jo0P9xKoZep0tVaWYfcVYtH5P4gTaPQSubZ5TJDxymK2G7dZkqXkqhXL4P
- lA/wdtAPKRpQex/i0dUHZcsGvbb9PeFltJi/2A9xBJaRf3DORCIORuXiGm4TWM2/XK/2
- 9wSg==
-X-Forwarded-Encrypted: i=1;
- AKwUvBwzhSEn2K0uzw78Pxs5sRDdRrkMzSn8HhxL0ulE+ni108qfgH/YQVWzcwLzD+6tphAKHq1MAvudYURB@nongnu.org
-X-Gm-Message-State: AFuF++lSLyyUcHpbPvvkjFARoPzukdhhS4k7JuZlwUxBaac4Tr7SboOy
- 29qkKht0s29aw1eO/49L7HMNUu4iUukG6vQURVJgDTpcSoX64vS6OfBkCXDTZAnGMHcpUQehE3Z
- p+ItW5u0HT3Itg5U/paxbIDzEokRAq9nDqV8975TchSURPVFFZkDKGo9RBA==
-X-Gm-Gg: AYBFou0x6Fx7lAEObBDhVTedYEVbUQUkzpz7X1c6p6r71mh8ZAYNAOikKiVD2oSMSjG
- kxPbjJ7TvAu/AbDEXqY2ws5ryWS4+RYohkIO80KbKFtdwXpBdhNCe93F2gLDrBtCXpjJoGE31YY
- kf3AXrNKeWVKzoGmDbB1QyVaugAmOMKmDCapWAeSQauuDRAVFadqnU9VxInVbVaMWIgP25lam4l
- EjsSvm0m9kBWO/6R+VrmgASSIZNzH6bH7XYDOUcqcKVKg/5N+655C1V4AhI7Cs5paoPtxmzR9Bf
- IuNcnxzM8FVFh45CyDiVVZOQsT1t9p+t/qlQucKNm6aiY5+OABgwg3I5jWLY5a7THmhTEz3rkTf
- SxDokaPkprSuVUnJFWrSaM8k=
-X-Received: by 2002:a05:6122:4689:b0:5bd:81fc:ebe9 with SMTP id
- 71dfb90a1353d-5c7ed087c0cmr24063727e0c.0.1789049865100; 
- Thu, 10 Sep 2026 07:17:45 -0700 (PDT)
-X-Received: by 2002:a05:6122:4689:b0:5bd:81fc:ebe9 with SMTP id
- 71dfb90a1353d-5c7ed087c0cmr24063590e0c.0.1789049864293; 
- Thu, 10 Sep 2026 07:17:44 -0700 (PDT)
-Received: from localhost (ip-86-49-245-11.bb.vodafone.cz. [86.49.245.11])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c260d6e1c93sm922489866b.63.2026.09.10.07.17.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 10 Sep 2026 07:17:43 -0700 (PDT)
-Date: Thu, 10 Sep 2026 16:17:42 +0200
-From: Andrew Jones <andrew.jones@oss.qualcomm.com>
-To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com,
- chao.liu@processmission.com, Icenowy Zheng <uwu@icenowy.me>,
- Matheus Ferst <matheus.ferst@eldorado.org.br>,
- Sunil V L <sunilvl@oss.qualcomm.com>, Palmer Dabbelt <palmer@dabbelt.com>
-Subject: Re: [PATCH v11 2/5] target/riscv: add riscv-server-ref CPU
-Message-ID: <w44ujiuswgc4adzlmgimorjgad34vav6vdfcgqtbkbifjjczqa@43b4y5n5pqwv>
-References: <20260909210756.1767711-1-daniel.barboza@oss.qualcomm.com>
- <20260909210756.1767711-3-daniel.barboza@oss.qualcomm.com>
- <7jkwao2hlaqtkdi44zkvgfe6rij7rpz6dd7qqwm6gw7xmta6vp@biexkhgtrofw>
+ d=linux.alibaba.com; s=default;
+ t=1789051193; h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To;
+ bh=6QB9Wg5wul/4ejfuCicWnHoFeUOCpvMI7cTCZbtZ1nE=;
+ b=xqr3ORg1mdrSG7nICcodryEFaGaGspRifSvKFVhivzmJsnRH6kmZcKgzwMB1eQah8ICW30xxjMEmCjVCMRL0EE0FNeVt+LLGjslb/Y8zZF4vAepTMj8GeKGd41X+DI+M4MiK9Bm7p5UbGM7hSGeR7YGHsq4ed/hQzdrZ614s6Y8=
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R121e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033037009110;
+ MF=lyndra@linux.alibaba.com; NM=1; PH=DS; RN=13; SR=0;
+ TI=SMTPD_---0XAhkcDz_1789051192; 
+Received: from ea134-sw06.eng.xrvm.cn(mailfrom:lyndra@linux.alibaba.com
+ fp:SMTPD_---0XAhkcDz_1789051192 cluster:ay36) by smtp.aliyun-inc.com;
+ Thu, 10 Sep 2026 22:39:52 +0800
+From: TANG Tiancheng <lyndra@linux.alibaba.com>
+Date: Thu, 10 Sep 2026 22:39:38 +0800
+Subject: [PATCH v2 01/14] target/riscv: Preserve PMU state across event
+ selector writes
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <7jkwao2hlaqtkdi44zkvgfe6rij7rpz6dd7qqwm6gw7xmta6vp@biexkhgtrofw>
-X-Authority-Analysis: v=2.4 cv=PIaaavqC c=1 sm=1 tr=0 ts=6aa2bc0a cx=c_pps
- a=UbhLPJ621ZpgOD2l3yZY1w==:117 a=4CXLxsOAgPM/krjtHEZQyA==:17
- a=kj9zAlcOel0A:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
- a=V1jnuoLLAAAA:20 a=EUspDBNiAAAA:8 a=JF9118EUAAAA:8 a=PXcuKL70AAAA:8
- a=FRSEYCzRAAAA:8 a=lvWoAcddulKRHkWN8sIA:9 a=CjuIK1q_8ugA:10
- a=TOPH6uDL9cOC6tEoww4z:22 a=xVlTc564ipvMDusKsbsT:22 a=1qLaeP4TCVy2vqIEy19U:22
- a=H4N_Y-AU75W7NKDNhZlT:22 a=bA3UWDv6hWIuX7UZL3qL:22
-X-Proofpoint-GUID: Ink8Ir4LmgMCEVFGEGb5O5BWJuJG64zX
-X-Proofpoint-ORIG-GUID: Ink8Ir4LmgMCEVFGEGb5O5BWJuJG64zX
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTEwMDE3MiBTYWx0ZWRfX5u12Zi+MuQCP
- bbjo0ZVi2qAlnMxLTJ5JGYaFkXq+d/Bxnw6zeAZlAuG6oE4T7YKTNFjQd40V7fmC8elG3cSo8/M
- 3pWqN5lvo1s392OTt1LpM4Y97VhoFL8=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTEwMDE3MiBTYWx0ZWRfX1hNArBtE/vO1
- uNbeGdjaZLk2Qbr8zpTcRKzorEvEI3/gWhY6sc1IsORrWaoLbW8VeMWomdSklArEY7KjJT8/uUA
- RbjTDkdUD32jD1qWKWO1wMobhj8NGIdK4DyJSLNm7ivmrL8YXxrJShoCYabZYi4A5GNbhP9vjQl
- dGqhBDmPncTxXJtKuQ/WqaCj5NvyLPspp0yOelOnjRQKpxVjRz5Vo2mM7bTy0lAPfhR+Kj++LKZ
- BqComHMfrncdkY+4nLiSYOr+2HoSs4IhxMtCN/UQVEUzhTk/JgAjwSkH706iWFAu+WnTLpGX9iD
- iNeJsWXzENjL0W+EL0TzdiLuS4iWAi3/nCK+/h0o3dNs0iErNHj3SmY6UgyRZO3Ksjan5kXq56m
- MO0+RwG/7PcbR9yYVdXkJz6DV6KWav0CdUOb2FAO7G9bCetOCeiPrBq6gR3lMMY26hHK/HDn4tU
- p2TULgHnAn4XHQj86Pw==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-10_04,2026-09-09_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 priorityscore=1501 phishscore=0 spamscore=0 clxscore=1015
- suspectscore=0 malwarescore=0 adultscore=0 bulkscore=0 impostorscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609100172
-Received-SPF: pass client-ip=205.220.168.131;
- envelope-from=andrew.jones@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
-X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260910-riscv-pmu-correctness-v2-1-5da5159a0c64@linux.alibaba.com>
+References: <20260910-riscv-pmu-correctness-v2-0-5da5159a0c64@linux.alibaba.com>
+In-Reply-To: <20260910-riscv-pmu-correctness-v2-0-5da5159a0c64@linux.alibaba.com>
+To: qemu-devel@nongnu.org
+Cc: Zephyr Li <fritchleybohrer@gmail.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org, 
+ Richard Henderson <richard.henderson@linaro.org>, 
+ Paolo Bonzini <pbonzini@redhat.com>, 
+ =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>, 
+ TANG Tiancheng <lyndra@linux.alibaba.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1789051191; l=10059;
+ i=lyndra@linux.alibaba.com; s=20250909; h=from:subject:message-id;
+ bh=1GxQCcZMwvXqgh+qyLGeY2NR8CuEqs1kzB9vVtjD8tA=;
+ b=7ZYdeuAvOT1RxSSMg3mkR7AzvdRum+wQqpnuQTbvYpIqnWxI4Jcn2KzK2pUILfQDvmIYAWtPW
+ MPn7d+w2FpGBKOgtUZhZx9RuZxHdSPfcM27etZP1T21aBDQP3V7afXJ
+X-Developer-Key: i=lyndra@linux.alibaba.com; a=ed25519;
+ pk=GQh4uOSLVucXGkaZfEuQ956CrYS14cn1TA3N8AiIjBw=
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.133 (deferred)
+Received-SPF: pass client-ip=115.124.30.133;
+ envelope-from=lyndra@linux.alibaba.com;
+ helo=out30-133.freemail.mail.aliyun.com
+X-Spam_score_int: -166
+X-Spam_score: -16.7
+X-Spam_bar: ----------------
+X-Spam_report: (-16.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
+ RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793, SPF_PASS=-0.001,
+ T_SPF_HELO_TEMPERROR=0.01, UNPARSEABLE_RELAY=0.001, USER_IN_DEF_DKIM_WL=-7.5,
+ USER_IN_DEF_SPF_WL=-7.5 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -158,149 +87,271 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+Changing mhpmevent can lose pending cycle/instruction counts or leave a
+new fixed source without a baseline and overflow timer.
 
-More comments...
+Account for the old source before replacing the selector, then establish
+the enabled counter's new baseline and timer. Apply this to direct and
+indirect writes.
 
-On Thu, Sep 10, 2026 at 09:47:27AM +0200, Andrew Jones wrote:
-> On Wed, Sep 09, 2026 at 06:07:52PM -0300, Daniel Henrique Barboza wrote:
-> > The harts requirements of RISC-V server platform [1] require RVA23 ISA
-> > profile support and others.
-> > 
-> > We're going for a profile-based implementation, instead of a regular CPU
-> > that can inherit RVA23, to allow future CPUs to use it internally as a
-> > starting base for their own extension sets.  There's also a new
-> > 'rvserver-ref-1.0' flag that can be used to set the extensions in the
-> > command line for other CPUs, which can be used for testing/debugging
-> > purposes.
-> > 
-> > Note that for all intents and purposes "riscv-server-ref" is a regular
-> > CPU and no, we're not trying to set a precedent of calling the riscv
-> > server platform spec a profile.
-> > 
-> > [1] defines in rule SEE_020 that we must support at least 11 debug
-> > triggers (4 for insn address, 4 for insn load/store, 1 for icount,
-> > one for int, one for excp).  We're going for the minimum.  If more
-> > triggers are needed users can set any trigger amount with:
-> > 
-> > -cpu riscv-server-ref,trigger-count=N
+Test overflow after initializing a counter with event zero and then
+selecting instructions.
 
-s/trigger-count/num-triggers/
+Fixes: 14664483457b ("target/riscv: Add sscofpmf extension support")
+Signed-off-by: TANG Tiancheng <lyndra@linux.alibaba.com>
+Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+---
+ target/riscv/tcg/csr.c                | 73 +++++++++++++++++++++++++----------
+ tests/tcg/riscv64/sscofpmf-overflow.S | 60 ++++++++++++++++++++++++++++
+ tests/tcg/riscv64/system/meson.build  |  7 ++++
+ 3 files changed, 119 insertions(+), 21 deletions(-)
 
-> > 
-> > Note that N must be <= 128.
+diff --git a/target/riscv/tcg/csr.c b/target/riscv/tcg/csr.c
+index 65985efb220c80023cfd9d08e1878a19342aa879..52664a26f5a97a5dc8ff37abf99b4d10927fb120 100644
+--- a/target/riscv/tcg/csr.c
++++ b/target/riscv/tcg/csr.c
+@@ -1209,23 +1209,58 @@ static RISCVException write_minstretcfgh(CPURISCVState *env, int csrno,
+ static RISCVException read_mhpmevent(CPURISCVState *env, int csrno,
+                                      target_ulong *val)
+ {
+-    int evt_index = csrno - CSR_MCOUNTINHIBIT;
++    int ctr_idx = csrno - CSR_MCOUNTINHIBIT;
+     bool rv32 = riscv_cpu_mxl(env) == MXL_RV32;
+ 
+-    *val = extract64(env->mhpmevent_val[evt_index], 0, rv32 ? 32 : 64);
++    *val = extract64(env->mhpmevent_val[ctr_idx], 0, rv32 ? 32 : 64);
+ 
+     return RISCV_EXCP_NONE;
+ }
+ 
++static uint64_t riscv_pmu_ctr_get_fixed_counters_val(CPURISCVState *env,
++                                                     int counter_idx);
++
++static void riscv_pmu_write_mhpmevent(CPURISCVState *env,
++                                      uint32_t ctr_idx, uint64_t value)
++{
++    PMUCTRState *counter = &env->pmu_ctrs[ctr_idx];
++    bool enabled = !get_field(env->mcountinhibit, BIT(ctr_idx));
++
++    /*
++     * A programmable counter backed by a fixed source uses mhpmcounter_val
++     * as its base and mhpmcounter_prev as the source snapshot.  Preserve the
++     * visible value before changing the source or its privilege filters.
++     */
++    if (enabled &&
++        (riscv_pmu_ctr_monitor_cycles(env, ctr_idx) ||
++         riscv_pmu_ctr_monitor_instructions(env, ctr_idx))) {
++        uint64_t source = riscv_pmu_ctr_get_fixed_counters_val(env,
++                                                               ctr_idx);
++
++        counter->mhpmcounter_val += source - counter->mhpmcounter_prev;
++    }
++
++    env->mhpmevent_val[ctr_idx] = value;
++    riscv_pmu_update_event_map(env, value, ctr_idx);
++
++    if (enabled &&
++        (riscv_pmu_ctr_monitor_cycles(env, ctr_idx) ||
++         riscv_pmu_ctr_monitor_instructions(env, ctr_idx))) {
++        counter->mhpmcounter_prev =
++            riscv_pmu_ctr_get_fixed_counters_val(env, ctr_idx);
++        riscv_pmu_setup_timer(env, counter->mhpmcounter_val, ctr_idx);
++    }
++}
++
+ static RISCVException write_mhpmevent(CPURISCVState *env, int csrno,
+                                       target_ulong val, uintptr_t ra)
+ {
+-    int evt_index = csrno - CSR_MCOUNTINHIBIT;
++    int ctr_idx = csrno - CSR_MCOUNTINHIBIT;
+     uint64_t mhpmevt_val;
+     uint64_t inh_avail_mask;
+ 
+     if (riscv_cpu_mxl(env) == MXL_RV32) {
+-        mhpmevt_val = deposit64(env->mhpmevent_val[evt_index], 0, 32, val);
++        mhpmevt_val = deposit64(env->mhpmevent_val[ctr_idx], 0, 32, val);
+     } else {
+         inh_avail_mask = ~MHPMEVENT_FILTER_MASK | MHPMEVENT_BIT_MINH;
+         inh_avail_mask |= riscv_has_ext(env, RVU) ? MHPMEVENT_BIT_UINH : 0;
+@@ -1237,8 +1272,7 @@ static RISCVException write_mhpmevent(CPURISCVState *env, int csrno,
+         mhpmevt_val = val & inh_avail_mask;
+     }
+ 
+-    env->mhpmevent_val[evt_index] = mhpmevt_val;
+-    riscv_pmu_update_event_map(env, mhpmevt_val, evt_index);
++    riscv_pmu_write_mhpmevent(env, ctr_idx, mhpmevt_val);
+ 
+     return RISCV_EXCP_NONE;
+ }
+@@ -1246,9 +1280,9 @@ static RISCVException write_mhpmevent(CPURISCVState *env, int csrno,
+ static RISCVException read_mhpmeventh(CPURISCVState *env, int csrno,
+                                       target_ulong *val)
+ {
+-    int evt_index = csrno - CSR_MHPMEVENT3H + 3;
++    int ctr_idx = csrno - CSR_MHPMEVENT3H + 3;
+ 
+-    *val = extract64(env->mhpmevent_val[evt_index], 32, 32);
++    *val = extract64(env->mhpmevent_val[ctr_idx], 32, 32);
+ 
+     return RISCV_EXCP_NONE;
+ }
+@@ -1256,7 +1290,7 @@ static RISCVException read_mhpmeventh(CPURISCVState *env, int csrno,
+ static RISCVException write_mhpmeventh(CPURISCVState *env, int csrno,
+                                        target_ulong val, uintptr_t ra)
+ {
+-    int evt_index = csrno - CSR_MHPMEVENT3H + 3;
++    int ctr_idx = csrno - CSR_MHPMEVENT3H + 3;
+     target_ulong inh_avail_mask = (target_ulong)(~MHPMEVENTH_FILTER_MASK |
+                                                   MHPMEVENTH_BIT_MINH);
+ 
+@@ -1267,10 +1301,9 @@ static RISCVException write_mhpmeventh(CPURISCVState *env, int csrno,
+     inh_avail_mask |= (riscv_has_ext(env, RVH) &&
+                        riscv_has_ext(env, RVS)) ? MHPMEVENTH_BIT_VSINH : 0;
+ 
+-    env->mhpmevent_val[evt_index] = deposit64(env->mhpmevent_val[evt_index],
+-                                              32, 32, val & inh_avail_mask);
+-
+-    riscv_pmu_update_event_map(env, env->mhpmevent_val[evt_index], evt_index);
++    riscv_pmu_write_mhpmevent(env, ctr_idx,
++                              deposit64(env->mhpmevent_val[ctr_idx], 32, 32,
++                                        val & inh_avail_mask));
+ 
+     return RISCV_EXCP_NONE;
+ }
+@@ -1512,11 +1545,11 @@ static int rmw_cd_mhpmcounterh(CPURISCVState *env, int ctr_idx,
+     return 0;
+ }
+ 
+-static int rmw_cd_mhpmevent(CPURISCVState *env, int evt_index,
++static int rmw_cd_mhpmevent(CPURISCVState *env, int ctr_idx,
+                             target_ulong *val, target_ulong new_val,
+                             uint64_t wr_mask)
+ {
+-    uint64_t mhpmevt_val = env->mhpmevent_val[evt_index];
++    uint64_t mhpmevt_val = env->mhpmevent_val[ctr_idx];
+ 
+     if (wr_mask != 0 && wr_mask != -1) {
+         return -EINVAL;
+@@ -1531,8 +1564,7 @@ static int rmw_cd_mhpmevent(CPURISCVState *env, int evt_index,
+         wr_mask &= ~MHPMEVENT_BIT_MINH;
+         /* wr_mask is 64-bit so upper 32 bits of mhpmevt_val are retained */
+         mhpmevt_val = (new_val & wr_mask) | (mhpmevt_val & ~wr_mask);
+-        env->mhpmevent_val[evt_index] = mhpmevt_val;
+-        riscv_pmu_update_event_map(env, mhpmevt_val, evt_index);
++        riscv_pmu_write_mhpmevent(env, ctr_idx, mhpmevt_val);
+     } else {
+         return -EINVAL;
+     }
+@@ -1540,11 +1572,11 @@ static int rmw_cd_mhpmevent(CPURISCVState *env, int evt_index,
+     return 0;
+ }
+ 
+-static int rmw_cd_mhpmeventh(CPURISCVState *env, int evt_index,
++static int rmw_cd_mhpmeventh(CPURISCVState *env, int ctr_idx,
+                              target_ulong *val, target_ulong new_val,
+                              target_ulong wr_mask)
+ {
+-    uint64_t mhpmevt_val = env->mhpmevent_val[evt_index];
++    uint64_t mhpmevt_val = env->mhpmevent_val[ctr_idx];
+     uint32_t mhpmevth_val = extract64(mhpmevt_val, 32, 32);
+ 
+     if (wr_mask != 0 && wr_mask != -1) {
+@@ -1560,8 +1592,7 @@ static int rmw_cd_mhpmeventh(CPURISCVState *env, int evt_index,
+         wr_mask &= ~MHPMEVENTH_BIT_MINH;
+         mhpmevth_val = (new_val & wr_mask) | (mhpmevth_val & ~wr_mask);
+         mhpmevt_val = deposit64(mhpmevt_val, 32, 32, mhpmevth_val);
+-        env->mhpmevent_val[evt_index] = mhpmevt_val;
+-        riscv_pmu_update_event_map(env, mhpmevt_val, evt_index);
++        riscv_pmu_write_mhpmevent(env, ctr_idx, mhpmevt_val);
+     } else {
+         return -EINVAL;
+     }
+diff --git a/tests/tcg/riscv64/sscofpmf-overflow.S b/tests/tcg/riscv64/sscofpmf-overflow.S
+new file mode 100644
+index 0000000000000000000000000000000000000000..97f03037bbfdd44f2288b257afb91499e4534f13
+--- /dev/null
++++ b/tests/tcg/riscv64/sscofpmf-overflow.S
+@@ -0,0 +1,60 @@
++/* SPDX-License-Identifier: GPL-2.0-or-later */
++
++	.option	norvc
++	.option	norelax
++
++	.text
++	.global _start
++_start:
++	/* Program hpmcounter3 while no event is selected. */
++	csrw	mhpmevent3, zero
++	li	t0, -256
++	csrw	mhpmcounter3, t0
++
++	/* Start counting retired instructions with overflow enabled. */
++	li	t0, 2
++	csrw	mhpmevent3, t0
++
++	/* Cross the 64-bit unsigned overflow boundary. */
++	.rept	1024
++	nop
++	.endr
++
++	/* OF must be sticky and LCOFIP must pend even with LCOFIE clear. */
++	li	t4, 0
++	csrr	t0, mhpmevent3
++	srli	t1, t0, 63
++	xori	t1, t1, 1
++	or	t4, t4, t1
++
++	csrr	t0, mip
++	li	t1, 1 << 13
++	and	t0, t0, t1
++	sltu	t0, zero, t0
++	xori	t0, t0, 1
++	or	t4, t4, t0
++
++	/* The counter wraps and continues counting after overflow. */
++	csrr	t0, mhpmcounter3
++	li	t1, -256
++	sltu	t0, t0, t1
++	xori	t0, t0, 1
++	or	t4, t4, t0
++
++	lla	a1, semiargs
++	li	t0, 0x20026		/* ADP_Stopped_ApplicationExit */
++	sd	t0, 0(a1)
++	sd	t4, 8(a1)
++	li	a0, 0x20		/* TARGET_SYS_EXIT_EXTENDED */
++
++	/* Semihosting call sequence. */
++	.balign	16
++	slli	zero, zero, 0x1f
++	ebreak
++	srai	zero, zero, 0x7
++	j	.
++
++	.data
++	.balign	16
++semiargs:
++	.space	16
+diff --git a/tests/tcg/riscv64/system/meson.build b/tests/tcg/riscv64/system/meson.build
+index 8604c2a45a9ad6bf8589f90d5b0d8fd1b2736db4..ebe78200fd551b42d3c99ae19ca03803797f803d 100644
+--- a/tests/tcg/riscv64/system/meson.build
++++ b/tests/tcg/riscv64/system/meson.build
+@@ -61,6 +61,13 @@ tests += {
+   }
+ }
+ 
++tests += {
++  'sscofpmf-overflow.S': {
++    'cflags': cflags,
++    'qemu_args': ['-cpu', 'max', '-icount', 'shift=0', qemu_args],
++  },
++}
++
+ if 'qemu-system-riscv64' in emulators
+   tcg_tests += {
+     'riscv64-softmmu': {
 
-Why? Isn't the limit RV_MAX_TRIGGERS == 1024?
+-- 
+2.43.0
 
-> > 
-> > [1] https://github.com/riscv-non-isa/riscv-server-platform/blob/main/server_platform_requirements.adoc
-> > 
-> > Suggested-by: Icenowy Zheng <uwu@icenowy.me>
-> > Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-> > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-> > Reviewed-by: Matheus Ferst <matheus.ferst@eldorado.org.br>
-> > Reviewed-by: Chao Liu <chao.liu@processmission.com>
-> > Reviewed-by: Sunil V L <sunilvl@oss.qualcomm.com>
-> > ---
-> >  target/riscv/cpu-qom.h |  1 +
-> >  target/riscv/cpu.c     | 32 ++++++++++++++++++++++++++++++++
-> >  2 files changed, 33 insertions(+)
-> > 
-> > diff --git a/target/riscv/cpu-qom.h b/target/riscv/cpu-qom.h
-> > index 1a28f1369c..61234842e3 100644
-> > --- a/target/riscv/cpu-qom.h
-> > +++ b/target/riscv/cpu-qom.h
-> > @@ -42,6 +42,7 @@
-> >  #define TYPE_RISCV_CPU_RVA22S64         RISCV_CPU_TYPE_NAME("rva22s64")
-> >  #define TYPE_RISCV_CPU_RVA23U64         RISCV_CPU_TYPE_NAME("rva23u64")
-> >  #define TYPE_RISCV_CPU_RVA23S64         RISCV_CPU_TYPE_NAME("rva23s64")
-> > +#define TYPE_RISCV_CPU_RVSERVER_REF     RISCV_CPU_TYPE_NAME("riscv-server-ref")
-> >  #define TYPE_RISCV_CPU_IBEX             RISCV_CPU_TYPE_NAME("lowrisc-ibex")
-> >  #define TYPE_RISCV_CPU_SHAKTI_C         RISCV_CPU_TYPE_NAME("shakti-c")
-> >  #define TYPE_RISCV_CPU_SIFIVE_E         RISCV_CPU_TYPE_NAME("sifive-e")
-> > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> > index 773aeba8da..0b0b8e0a99 100644
-> > --- a/target/riscv/cpu.c
-> > +++ b/target/riscv/cpu.c
-> > @@ -2424,11 +2424,36 @@ static RISCVCPUProfile RVA23S64 = {
-> >      }
-> >  };
-> >  
-> > +/*
-> > + * This riscv-server-ref entry isn't a profile per se but its
-> > + * CPU definition can be modelled as a profile that extends
-> > + * RVA23, with additional things on top of it, and allowing
-> > + * future CPUs to derive from it via
-> > + * ".profile = &RVServerRef1_0;".
-> > + */
-> > +static RISCVCPUProfile RVServerRef1_0 = {
-> > +    .s_parent = &RVA23S64,
-> > +    .name = "riscv-server-ref-1.0",
-
-rva23 mandates Ss1p13, so shouldn't we have an explicit
-
- .priv_spec = PRIV_VERSION_1_13_0 
-
-here?
-
-> > +    .satp_mode = VM_1_10_SV48,
-> > +    .ext_offsets = {
-> > +        CPU_CFG_OFFSET(ext_zkr),
-> > +        CPU_CFG_OFFSET(ext_sdext),
-> > +        CPU_CFG_OFFSET(ext_sdtrig),
-> > +        CPU_CFG_OFFSET(ext_ssaia),
-> > +        CPU_CFG_OFFSET(ext_ssccfg),
-> > +        /* ssstrict is always enabled for PRIV_VER_1_12 */
-> > +
-> > +        RISCV_PROFILE_EXT_LIST_END
-> > +    }
-> > +};
-> > +
-> > +
-> >  RISCVCPUProfile *riscv_profiles[] = {
-> >      &RVA22U64,
-> >      &RVA22S64,
-> >      &RVA23U64,
-> >      &RVA23S64,
-> > +    &RVServerRef1_0,
-> >      NULL,
-> >  };
-> >  
-> > @@ -3766,6 +3791,13 @@ static const TypeInfo riscv_cpu_type_infos[] = {
-> >  #endif
-> >      ),
-> >  
-> > +    DEFINE_RISCV_CPU(TYPE_RISCV_CPU_RVSERVER_REF, TYPE_RISCV_BARE_CPU,
-> > +        .profile = &RVServerRef1_0,
-> > +        .misa_mxl_max = MXL_RV64,
-> > +        .cfg.max_satp_mode = VM_1_10_SV57,
-
-To stick to our minimalist approach, we could default the number of
-counters to six
-
- .cfg.pmu_mask = MAKE_64BIT_MASK(3, 6),
-
-See RVA_060. The user can get more counters with pmu-mask/pmu-num.
-
-
-> > +        .num_triggers = 11,
-
-Outside the scope of this series, more debug-trigger work is needed for
-complete SEE_020 support. In particular, QEMU still needs interrupt and
-exception triggers and the required VMID/ASID filtering. The 11 slots
-configured here provide the intended capacity, but do not by themselves
-provide all the required trigger capabilities.
-
-> > +    ),
-> > +
-> >  #if defined(CONFIG_TCG) && !defined(CONFIG_USER_ONLY)
-> >      DEFINE_RISCV_CPU(TYPE_RISCV_CPU_BASE128, TYPE_RISCV_DYNAMIC_CPU,
-> >          .cfg.max_satp_mode = VM_1_10_SV57,
-> > -- 
-> > 2.43.0
-> > 
-> >
->
-
-Thanks,
-drew
 
