@@ -4,59 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 487C2C79FB7
-	for <qemu-riscv@archiver.kernel.org>; Wed,  9 Sep 2026 21:30:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70F01C79FB7
+	for <qemu-riscv@archiver.kernel.org>; Thu, 10 Sep 2026 00:55:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x4Prv-0007A0-Jv; Wed, 09 Sep 2026 17:30:11 -0400
+	id 1x4T43-0007Ar-8y; Wed, 09 Sep 2026 20:54:55 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <christianslima@proton.me>)
- id 1x4Prt-000756-5i; Wed, 09 Sep 2026 17:30:10 -0400
-Received: from mail-07.mail-europe.com ([37.187.220.204])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <christianslima@proton.me>)
- id 1x4Prn-0003C2-N5; Wed, 09 Sep 2026 17:30:08 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
- s=5hrwh5ecj5e37oycfptl43ouuy.protonmail; t=1788989395; x=1789248595;
- bh=PW59cMrmwWyr6MGeEwGaszieMNWIiortXadVDHe7r/k=;
- h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
- Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
- Message-ID:BIMI-Selector;
- b=E7CN/mBnhEfsdtofH/MaUxs58ZjtT93C0c47knr/MG4o2lX522do/ZmNm8WUnyOCy
- AOEseR1LbXy5NbIs0EMRWTlmKD+FqUU92bCzHDaCvKAA6PsOQqUJsco8U081Ionj23
- 810o+SPG3unI/D2VymqyACtJRjK56kNj32YPYRMV2TKiGBA7yQiP96GgPbXPGPDGIS
- tLRMX3976gMbICxS1uYERo5nudsAsnzI1t09sl5zXDIHRXWmQGZzARNkOnjRHqqF0A
- gncaN9HH1iWFtFO1jJkI/4de8Mq0lAwlwSceLKEy/SGUMq/kox+tytfr1nVjAJKeWG
- KoH7Ug6Zn0x/A==
-Date: Wed, 09 Sep 2026 21:29:46 +0000
-To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-From: Christian <christianslima@proton.me>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Weiwei Li <liwei1518@gmail.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu@processmission.com>
-Subject: Re: [PATCH] target/riscv/tcg: svinval instructions raise virtual
- instruction
-Message-ID: <tg7qNQGvNyXBGgDnONN58iemm20yWr5lyZ8tCdhJ-HqZm8aiqHd6Ru-K-E325IoYPLUY7H0CWyc8l8mHo-Lsg1g6vqh3vQgNkxGKb8AM0dY=@proton.me>
-In-Reply-To: <ee67fe57-7098-4905-8eda-24175bb889fa@oss.qualcomm.com>
-References: <20260908222825.84642-1-christianslima@proton.me>
- <ee67fe57-7098-4905-8eda-24175bb889fa@oss.qualcomm.com>
-Feedback-ID: 169431447:user:proton
-X-Pm-Message-ID: 16b9793c0a4ec4bf5298b18ac21f68393d0c1832
+ (Exim 4.90_1) (envelope-from <fritchleybohrer@gmail.com>)
+ id 1x4T42-0007A6-DQ
+ for qemu-riscv@nongnu.org; Wed, 09 Sep 2026 20:54:54 -0400
+Received: from mail-lr2-x02.google.com ([2a00:1450:4864:38::2])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <fritchleybohrer@gmail.com>)
+ id 1x4T3z-0005tq-MX
+ for qemu-riscv@nongnu.org; Wed, 09 Sep 2026 20:54:54 -0400
+Received: by mail-lr2-x02.google.com with SMTP id
+ 38308e7fff4ca-3a4f7261b56so6290741fa.1
+ for <qemu-riscv@nongnu.org>; Wed, 09 Sep 2026 17:54:51 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1789001689; cv=none;
+ d=google.com; s=arc-20260327;
+ b=fQTLVZxeQm5ot5ImDbs1Jtf/ZgUp6kbtwjSa7BpbY0Oe5WLhUWOfGZwnRaN/3lbOTk
+ DRIk/MzO6OP6hAJ/7gdsBmuqOl6u8TTCJ+1p7P1+/hAGETYSjiBsTamFR7XlpDOqALOG
+ xAUdiwK0AdF5Z9oxPp5bil3Ov4dS6kUE/0ncmrNlZtW0eTsnUm+PxglTX8vQABPg3P1o
+ VBeH0XqfCFGYygOMYG7HUsyFCNF3xSaFzISx1r5EBFx/96Cv4zI0DBBJmvvryz7m+RgD
+ WqnCsjFsm5H9w4bEpOfSC5nowcHJ41LWi1l7riO32lyVCkU9ZOPT3TXGACO7O7+7/pVe
+ Sd/Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=UZR3kTQP/ZuSqEKmlQyM/dZDQ34Jcu5Z0hqt/BqZEwA=;
+ fh=7E/QaMj/A0Ya2seO85vNvX6UncXJ3zhkdTYeJWg3MXw=;
+ b=qhOkUYhmgnyCjumZH+oUoX2OuYR+izO0I5pfqsmCiZbeRpAFLtltfHHdVuuGYgUWo6
+ lmlqz/0JDhAqSc+O61uFQxpcSZzaT5JsF3eBYIjPoe4LnydoDcA2l9D7zq/xWh+jjiMO
+ 16imUqxHrxOR+rL1YXgoIpxVcoeVt6rRIBu5/6t791tZNuP7VTDV/xVNQT1lmJBy9UEj
+ sfikcDdPvpI65Tzv2pR1BKQZ2fS1RIJ60q74Ywylke6pYFj081zMo1VMS2ZFGnDEWTKB
+ MLhN89ZTpyKoQOkeurri9MhdWTtQre8Mlwace1EirSaP5c0FT/umhhTezOcDgIKhEH99
+ 1JaQ==; darn=nongnu.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1789001689; x=1789606489; darn=nongnu.org;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=UZR3kTQP/ZuSqEKmlQyM/dZDQ34Jcu5Z0hqt/BqZEwA=;
+ b=odm1Wij4SaT/mIvY/VVXgYKRe7exghXBVC1ZtMAg+UtFEOBwI0teBISkh43oAZqDei
+ kNOSspHvnFTMJn0+iqBcDwAmIOVYCC+4EYl9KO7sDr8liGZb1vJAWE7V2k44Tk6cjoUJ
+ EP7Gka+iKlXv+Z0IHyShJARSWtPgTsPa2W9mq0eoyT8zLkmQwEKgBXm8EKcFviimGoh0
+ rNhD4up8LKu9Yq+2bh44TWjV1+cvrmShNq37v4iqgdeXhtasbqhgUe8DqkdqHajTkCop
+ RPwz3yQnijvFja/7+JdhIxUfadg//drrOqI11VwP3PKUXUK7J6ahi3s6RXsEz1ak5mcG
+ JQfw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1789001689; x=1789606489;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=UZR3kTQP/ZuSqEKmlQyM/dZDQ34Jcu5Z0hqt/BqZEwA=;
+ b=qm/XvYyX+HwryW/hBLv1u0jFvVUi4CHWFTf8/NHZtakU2A1mGrIpnqwKlpJMOsfa8r
+ gOyuoB6x5sYF3xtLM1vo4P9NlZ/s5CE6GPZXLW199MUUeX+fP/jEX0Z5YGnZYIU2mrUh
+ //WNiFwbek7bGrE2SnQEfTod46Qu4l+Qb3eZxERF3PXyp/isWuIzw6Q9KfEOQl9uELEf
+ FFx0UjPhodS+NNa45y20DZp+sEQEVz+1baRcWqa954lqmtAMZfTw5EE2E9OjMtJbJG3o
+ ZMQW/BLelXchnmFSdeJAfcd7uGeJgFySN+/Pt+t+dk4UKduINwOn+I0kNYu0GPzVDkMe
+ impQ==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBwqxX+MH/tmcoKgD+EjM8ypu0kxsAFAH8hWa0KUfNcDWFna+3mD8s4/0YJtuood0SQMc31tFBH0HpGt@nongnu.org
+X-Gm-Message-State: AFuF++lgQIYH6mBeOYHvJF5WgN9WdCAi4kG/MSfcBiSJhZoyjziYKGHw
+ hlGx3LM21NPM6lIY6A6hf0VpXjDbucvhb+71B+1tBN56IX0s4oRNk/TYWGE0nH3gB4ItIo+Oty5
+ wX0Q3mVv0T+5BdhYIx7OQ+OcZJHpoo6I=
+X-Gm-Gg: AYBFou20Ee/gIPA9/dsEfkxubjh/IPXie0dPq8AWACMC9knxrA+00KZGcVoehVt7ECW
+ Cwp1NvGvM4WmrPTSybS0aDI21Qg0d4GMQJJjHXuablGiFv/cDZrtRNX7T4B8IExkEsLJqVgbty0
+ 9GA2YQY+Spg+HEgnMq4EpGrDTQDBETrf9/PyPlE1TJ7Z0sDzrdBJmnuDbwYwnDxa5ADP2Upfxj2
+ MgTCrNMJZq1dU+ZklbJTMTqZpyA1gfJXRiWFydYVMZzKMnMm279gNjHRFMXeLsYDfKmEhli3YaB
+ gluyUAArRZ6akdvcOaR6q5PXnp3qCJrJQsNYu6isSI98faYaTmZEnWpMeWGIGDQ8GxxpkpU8cGa
+ dawaAlJTviUFnLw==
+X-Received: by 2002:a05:6512:6881:10b0:5b6:1a7c:aa22 with SMTP id
+ 2adb3069b0e04-5b61a7cacf7mr3644004e87.58.1789001688242; Wed, 09 Sep 2026
+ 17:54:48 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=37.187.220.204;
- envelope-from=christianslima@proton.me; helo=mail-07.mail-europe.com
+References: <20260908022744.20333-1-fritchleybohrer@gmail.com>
+ <71246cae-21b4-4725-aa83-e1afcf338bbd@oss.qualcomm.com>
+In-Reply-To: <71246cae-21b4-4725-aa83-e1afcf338bbd@oss.qualcomm.com>
+From: Zephyr Li <fritchleybohrer@gmail.com>
+Date: Thu, 10 Sep 2026 08:54:33 +0800
+X-Gm-Features: AcwNN1UYQ4TpFsrhO-NMz-EqoxSOKN99BY1w4pDMseGpSwe4CTDdEES5D0JAnqU
+Message-ID: <CAN4PorWjFn6ZZ93CEsNPhciqtJCod=cLE4XQpCANoJOxG=nxpA@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: stop translating after WFI
+To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Chao Liu <chao.liu@processmission.com>
+Content-Type: multipart/alternative; boundary="0000000000002160d9065b166a01"
+Received-SPF: pass client-ip=2a00:1450:4864:38::2;
+ envelope-from=fritchleybohrer@gmail.com; helo=mail-lr2-x02.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_MSPIKE_H2=0.001, SPF_HELO_NONE=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -73,115 +121,416 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi, Daniel
+--0000000000002160d9065b166a01
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-> Hi,
->=20
-> On 9/8/2026 7:28 PM, Christian S. Lima wrote:
-> > The risc v privileged specification requires hinval.vvma, hinval.gvma,
-> > sfence.w.inval and sfence.inval.ir should raise a virtual instruction
-> > exception when executed in the vu-mode. This patch add the check to
-> > raise the virtual instruction exception when is in the vu-mode.
+Got it, thanks!
+
+On Thu, Sep 10, 2026 at 4:00=E2=80=AFAM Daniel Henrique Barboza <
+daniel.barboza@oss.qualcomm.com> wrote:
+
+>
+>
+> On 9/7/2026 11:27 PM, Zephyr Li wrote:
+> > helper_wfi() never returns to translated code: it either raises an
+> > exception or exits the CPU loop after marking the CPU as halted. Howeve=
+r,
+> > trans_wfi() leaves the translation state as DISAS_NEXT, so instructions
+> > following WFI can be included in the same TB.
 > >
-> > Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/3621
+> > With icount enabled, this makes the following instruction part of the
+> TB's
+> > instruction count when WFI exits, causing minstret to be incremented on=
+ce
+> > too many. Set DISAS_NORETURN after emitting the helper.
 > >
-> > Signed-off-by: Christian S. Lima <christianslima@proton.me>
+> > Add a TCG test for both reported cases: WFI waking for a locally enable=
+d
+> > pending interrupt with mstatus.MIE clear, and WFI taking a timer
+> interrupt.
+> >
+> > Fixes: 55c2a12cbcd3 ("RISC-V TCG Code Generation")
+> > Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/4230
+> > Signed-off-by: Zephyr Li <fritchleybohrer@gmail.com>
 > > ---
-> >   target/riscv/tcg/insn_trans/trans_svinval.c.inc |  4 ++++
-> >   target/riscv/tcg/insn_trans/trans_xthead.c.inc  | 13 ++++++++-----
-> >   2 files changed, 12 insertions(+), 5 deletions(-)
-> >
-> > diff --git a/target/riscv/tcg/insn_trans/trans_svinval.c.inc b/target/r=
-iscv/tcg/insn_trans/trans_svinval.c.inc
-> > index 4614c1489c..251d9c5815 100644
-> > --- a/target/riscv/tcg/insn_trans/trans_svinval.c.inc
-> > +++ b/target/riscv/tcg/insn_trans/trans_svinval.c.inc
-> > @@ -25,8 +25,12 @@
-> >   /* Test if priv level is M or S. */
-> >   #define REQUIRE_PRIV_MS(ctx) do {          \
-> >       if (ctx->priv =3D=3D PRV_U) {              \
-> > +        if (ctx->virt_enabled) {           \
-> > +            ctx->virt_inst_excp =3D true;    \
-> > +        }                                  \
-> >           return false;                      \
-> >       }                                      \
-> > +    return true;                           \
->=20
-> We can't 'return true' in this macro.  This is a "return false if wrong, =
-otherwise
-> do nothing" macro that this file uses.  It works like REQUIRE_SVINVAL():
->=20
-> #define REQUIRE_SVINVAL(ctx) do {          \
->      if (!ctx->cfg_ptr->ext_svinval) {      \
->          return false;                      \
->      }                                      \
-> } while (0)
->=20
->=20
-> If you look at trans_sinval_vma(), adding a 'return true' in REQUIRE_PRIV=
-_MS() will
-> cause an early exit right after the macro, short-circuiting everything af=
-ter it:
->=20
-> static bool trans_sinval_vma(DisasContext *ctx, arg_sinval_vma *a)
-> {
->      REQUIRE_SVINVAL(ctx);
->      /* Do the same as sfence.vma currently */
->      REQUIRE_EXT(ctx, RVS);
->      REQUIRE_PRIV_MS(ctx);  <=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> #ifndef CONFIG_USER_ONLY
->      decode_save_opc(ctx, 0);
->      gen_helper_tlb_flush(tcg_env);
->      return true;
-> #endif
->      return false;
->=20
->=20
-> Same thing with REQUIRE_PRIV_MS(ctx) in trans_xthead.c.inc down below: we=
- can't add a
-> 'return true' in it too.
-
-I see, I did tests again without the `return true;` and the code works as e=
-xpected. I'll fix this in the v2.
-
->=20
->=20
->=20
-> Cheers,
+>
+> Code LGTM.  We just need to use the meson stuff for the new
+> test-minstret-wfi.S
+> test.  Otherwise 'check-tcg' won't execute it.
+>
+>
+> Thanks,
 > Daniel
->=20
-> >   } while (0)
+>
+> >   .../tcg/insn_trans/trans_privileged.c.inc     |   1 +
+> >   tests/tcg/riscv64/Makefile.softmmu-target     |   4 +
+> >   tests/tcg/riscv64/test-minstret-wfi.S         | 100 +++++++++++++++++=
++
+> >   3 files changed, 105 insertions(+)
+> >   create mode 100644 tests/tcg/riscv64/test-minstret-wfi.S
 > >
-> >   static bool trans_sinval_vma(DisasContext *ctx, arg_sinval_vma *a)
-> > diff --git a/target/riscv/tcg/insn_trans/trans_xthead.c.inc b/target/ri=
-scv/tcg/insn_trans/trans_xthead.c.inc
-> > index f4e3051000..c00b007895 100644
-> > --- a/target/riscv/tcg/insn_trans/trans_xthead.c.inc
-> > +++ b/target/riscv/tcg/insn_trans/trans_xthead.c.inc
-> > @@ -267,11 +267,14 @@ static bool trans_th_tst(DisasContext *ctx, arg_t=
-h_tst *a)
-> >   #define REQUIRE_PRIV_MSU(ctx)
+> > diff --git a/target/riscv/tcg/insn_trans/trans_privileged.c.inc
+> b/target/riscv/tcg/insn_trans/trans_privileged.c.inc
+> > index a8eaccef67..ebbbb01179 100644
+> > --- a/target/riscv/tcg/insn_trans/trans_privileged.c.inc
+> > +++ b/target/riscv/tcg/insn_trans/trans_privileged.c.inc
+> > @@ -145,6 +145,7 @@ static bool trans_wfi(DisasContext *ctx, arg_wfi *a=
+)
+> >       decode_save_opc(ctx, 0);
+> >       gen_update_pc(ctx, ctx->cur_insn_len);
+> >       gen_helper_wfi(tcg_env);
+> > +    ctx->base.is_jmp =3D DISAS_NORETURN;
+> >       return true;
+> >   #else
+> >       return false;
+> > diff --git a/tests/tcg/riscv64/Makefile.softmmu-target
+> b/tests/tcg/riscv64/Makefile.softmmu-target
+> > index 6a219c306c..96a3ab32c9 100644
+> > --- a/tests/tcg/riscv64/Makefile.softmmu-target
+> > +++ b/tests/tcg/riscv64/Makefile.softmmu-target
+> > @@ -28,6 +28,10 @@ EXTRA_RUNS +=3D run-test-minstret-ecall
+> >   run-test-minstret-ecall: test-minstret-ecall
+> >       $(call run-test, $<, $(QEMU) -icount shift=3D1 $(QEMU_OPTS)$<)
 > >
-> >   /* Test if priv level is M or S. */
-> > -#define REQUIRE_PRIV_MS(ctx)                                    \
-> > -do {                                                            \
-> > -    if (ctx->priv =3D=3D PRV_U) {                                   \
-> > -        return false;                                           \
-> > -    }                                                           \
-> > +#define REQUIRE_PRIV_MS(ctx) do {          \
-> > +    if (ctx->priv =3D=3D PRV_U) {              \
-> > +        if (ctx->virt_enabled) {           \
-> > +            ctx->virt_inst_excp =3D true;    \
-> > +        }                                  \
-> > +        return false;                      \
-> > +    }                                      \
-> > +    return true;                           \
-> >   } while (0)
-> >
-> >   #define NOP_PRIVCHECK(insn, extcheck, privcheck)                \
->=20
->=20
+> > +EXTRA_RUNS +=3D run-test-minstret-wfi
+> > +run-test-minstret-wfi: test-minstret-wfi
+> > +     $(call run-test, $<, $(QEMU) -icount shift=3D1 $(QEMU_OPTS)$<)
+> > +
+> >   EXTRA_RUNS +=3D run-plugin-doubletrap
+> >   run-plugin-doubletrap: doubletrap
+> >       $(call run-test, $<, \
+> > diff --git a/tests/tcg/riscv64/test-minstret-wfi.S
+> b/tests/tcg/riscv64/test-minstret-wfi.S
+> > new file mode 100644
+> > index 0000000000..0fd0158d5b
+> > --- /dev/null
+> > +++ b/tests/tcg/riscv64/test-minstret-wfi.S
+> > @@ -0,0 +1,100 @@
+> > +/* SPDX-License-Identifier: GPL-2.0-or-later */
+> > +
+> > +     .option norvc
+> > +
+> > +     .text
+> > +     .global _start
+> > +_start:
+> > +     lla     t0, trap
+> > +     csrw    mtvec, t0
+> > +     li      s3, 0
+> > +
+> > +     /*
+> > +      * A pending, locally enabled interrupt wakes WFI even with MIE
+> > +      * clear.
+> > +      */
+> > +     li      t0, 0x8         /* MIE_MSIE */
+> > +     csrw    mie, t0
+> > +     csrci   mstatus, 0x8    /* MSTATUS_MIE */
+> > +     li      t0, 0x2000000   /* MSIP0 */
+> > +     li      t1, 1
+> > +     sw      t1, 0(t0)
+> > +
+> > +     /*
+> > +      * The first CSR read and WFI retire before the second read
+> obtains s1,
+> > +      * so the expected difference is two.
+> > +      */
+> > +     csrr    s0, minstret
+> > +     wfi
+> > +     csrr    s1, minstret
+> > +     sub     s1, s1, s0
+> > +     li      t1, 2
+> > +     beq     s1, t1, 1f
+> > +     ori     s3, s3, 1
+> > +1:
+> > +
+> > +     /* Clear the software interrupt before testing the trap path. */
+> > +     sw      zero, 0(t0)
+> > +     csrw    mie, zero
+> > +
+> > +     /* Schedule a timer interrupt far enough ahead to reach WFI first=
+.
+> */
+> > +     li      t0, 0x200bff8   /* MTIME */
+> > +     ld      t1, 0(t0)
+> > +     addi    t1, t1, 100
+> > +     li      t0, 0x2004000   /* MTIMECMP0 */
+> > +     sd      t1, 0(t0)
+> > +     li      t0, 0x80                /* MIE_MTIE */
+> > +     csrw    mie, t0
+> > +     csrsi   mstatus, 0x8    /* MSTATUS_MIE */
+> > +
+> > +     /*
+> > +      * The first CSR read and WFI retire before the trap handler
+> obtains s1,
+> > +      * so the expected difference is again two.
+> > +      */
+> > +     li      s2, 1
+> > +     csrr    s0, minstret
+> > +     wfi
+> > +     beqz    s2, 1f
+> > +     ori     s3, s3, 2
+> > +1:
+> > +     bnez    s3, fail
+> > +     li      a0, 0
+> > +     j       _exit
+> > +
+> > +fail:
+> > +     mv      a0, s3
+> > +
+> > +_exit:
+> > +     lla     a1, semiargs
+> > +     li      t0, 0x20026     /* ADP_Stopped_ApplicationExit */
+> > +     sd      t0, 0(a1)
+> > +     sd      a0, 8(a1)
+> > +     li      a0, 0x20        /* TARGET_SYS_EXIT_EXTENDED */
+> > +
+> > +     /* Semihosting call sequence */
+> > +     .balign 16
+> > +     slli    zero, zero, 0x1f
+> > +     ebreak
+> > +     srai    zero, zero, 0x7
+> > +     j       .
+> > +
+> > +     .balign 4
+> > +trap:
+> > +     /* Read minstret before retiring an instruction in the handler. *=
+/
+> > +     csrr    s1, minstret
+> > +     sub     s1, s1, s0
+> > +     addi    s1, s1, -2
+> > +     snez    s2, s1
+> > +
+> > +     /* Disable the timer interrupt before returning past WFI. */
+> > +     li      t0, 0x2004000   /* MTIMECMP0 */
+> > +     li      t1, -1
+> > +     sd      t1, 0(t0)
+> > +     li      t0, 0x80                /* MIE_MTIE */
+> > +     csrc    mie, t0
+> > +     mret
+> > +
+> > +     .data
+> > +     .balign 16
+> > +semiargs:
+> > +     .space  16
+>
+>
 
-Thanks,
-Christian
+--0000000000002160d9065b166a01
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Got it, thanks!=C2=A0</div><br><div class=3D"gmail_quote g=
+mail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On Thu, Sep 10,=
+ 2026 at 4:00=E2=80=AFAM Daniel Henrique Barboza &lt;<a href=3D"mailto:dani=
+el.barboza@oss.qualcomm.com">daniel.barboza@oss.qualcomm.com</a>&gt; wrote:=
+<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8=
+ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><br>
+<br>
+On 9/7/2026 11:27 PM, Zephyr Li wrote:<br>
+&gt; helper_wfi() never returns to translated code: it either raises an<br>
+&gt; exception or exits the CPU loop after marking the CPU as halted. Howev=
+er,<br>
+&gt; trans_wfi() leaves the translation state as DISAS_NEXT, so instruction=
+s<br>
+&gt; following WFI can be included in the same TB.<br>
+&gt; <br>
+&gt; With icount enabled, this makes the following instruction part of the =
+TB&#39;s<br>
+&gt; instruction count when WFI exits, causing minstret to be incremented o=
+nce<br>
+&gt; too many. Set DISAS_NORETURN after emitting the helper.<br>
+&gt; <br>
+&gt; Add a TCG test for both reported cases: WFI waking for a locally enabl=
+ed<br>
+&gt; pending interrupt with mstatus.MIE clear, and WFI taking a timer inter=
+rupt.<br>
+&gt; <br>
+&gt; Fixes: 55c2a12cbcd3 (&quot;RISC-V TCG Code Generation&quot;)<br>
+&gt; Resolves: <a href=3D"https://gitlab.com/qemu-project/qemu/-/work_items=
+/4230" rel=3D"noreferrer" target=3D"_blank">https://gitlab.com/qemu-project=
+/qemu/-/work_items/4230</a><br>
+&gt; Signed-off-by: Zephyr Li &lt;<a href=3D"mailto:fritchleybohrer@gmail.c=
+om" target=3D"_blank">fritchleybohrer@gmail.com</a>&gt;<br>
+&gt; ---<br>
+<br>
+Code LGTM.=C2=A0 We just need to use the meson stuff for the new test-minst=
+ret-wfi.S<br>
+test.=C2=A0 Otherwise &#39;check-tcg&#39; won&#39;t execute it.<br>
+<br>
+<br>
+Thanks,<br>
+Daniel<br>
+<br>
+&gt;=C2=A0 =C2=A0.../tcg/insn_trans/trans_privileged.c.inc=C2=A0 =C2=A0 =C2=
+=A0|=C2=A0 =C2=A01 +<br>
+&gt;=C2=A0 =C2=A0tests/tcg/riscv64/Makefile.softmmu-target=C2=A0 =C2=A0 =C2=
+=A0|=C2=A0 =C2=A04 +<br>
+&gt;=C2=A0 =C2=A0tests/tcg/riscv64/test-minstret-wfi.S=C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0| 100 ++++++++++++++++++<br>
+&gt;=C2=A0 =C2=A03 files changed, 105 insertions(+)<br>
+&gt;=C2=A0 =C2=A0create mode 100644 tests/tcg/riscv64/test-minstret-wfi.S<b=
+r>
+&gt; <br>
+&gt; diff --git a/target/riscv/tcg/insn_trans/trans_privileged.c.inc b/targ=
+et/riscv/tcg/insn_trans/trans_privileged.c.inc<br>
+&gt; index a8eaccef67..ebbbb01179 100644<br>
+&gt; --- a/target/riscv/tcg/insn_trans/trans_privileged.c.inc<br>
+&gt; +++ b/target/riscv/tcg/insn_trans/trans_privileged.c.inc<br>
+&gt; @@ -145,6 +145,7 @@ static bool trans_wfi(DisasContext *ctx, arg_wfi *=
+a)<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0decode_save_opc(ctx, 0);<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0gen_update_pc(ctx, ctx-&gt;cur_insn_len);<br=
+>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0gen_helper_wfi(tcg_env);<br>
+&gt; +=C2=A0 =C2=A0 ctx-&gt;base.is_jmp =3D DISAS_NORETURN;<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0return true;<br>
+&gt;=C2=A0 =C2=A0#else<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0return false;<br>
+&gt; diff --git a/tests/tcg/riscv64/Makefile.softmmu-target b/tests/tcg/ris=
+cv64/Makefile.softmmu-target<br>
+&gt; index 6a219c306c..96a3ab32c9 100644<br>
+&gt; --- a/tests/tcg/riscv64/Makefile.softmmu-target<br>
+&gt; +++ b/tests/tcg/riscv64/Makefile.softmmu-target<br>
+&gt; @@ -28,6 +28,10 @@ EXTRA_RUNS +=3D run-test-minstret-ecall<br>
+&gt;=C2=A0 =C2=A0run-test-minstret-ecall: test-minstret-ecall<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0$(call run-test, $&lt;, $(QEMU) -icount shif=
+t=3D1 $(QEMU_OPTS)$&lt;)<br>
+&gt;=C2=A0 =C2=A0<br>
+&gt; +EXTRA_RUNS +=3D run-test-minstret-wfi<br>
+&gt; +run-test-minstret-wfi: test-minstret-wfi<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0$(call run-test, $&lt;, $(QEMU) -icount shift=3D1=
+ $(QEMU_OPTS)$&lt;)<br>
+&gt; +<br>
+&gt;=C2=A0 =C2=A0EXTRA_RUNS +=3D run-plugin-doubletrap<br>
+&gt;=C2=A0 =C2=A0run-plugin-doubletrap: doubletrap<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0$(call run-test, $&lt;, \<br>
+&gt; diff --git a/tests/tcg/riscv64/test-minstret-wfi.S b/tests/tcg/riscv64=
+/test-minstret-wfi.S<br>
+&gt; new file mode 100644<br>
+&gt; index 0000000000..0fd0158d5b<br>
+&gt; --- /dev/null<br>
+&gt; +++ b/tests/tcg/riscv64/test-minstret-wfi.S<br>
+&gt; @@ -0,0 +1,100 @@<br>
+&gt; +/* SPDX-License-Identifier: GPL-2.0-or-later */<br>
+&gt; +<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0.option norvc<br>
+&gt; +<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0.text<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0.global _start<br>
+&gt; +_start:<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0lla=C2=A0 =C2=A0 =C2=A0t0, trap<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0csrw=C2=A0 =C2=A0 mtvec, t0<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0li=C2=A0 =C2=A0 =C2=A0 s3, 0<br>
+&gt; +<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0/*<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 * A pending, locally enabled interrupt wakes WFI=
+ even with MIE<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 * clear.<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 */<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0li=C2=A0 =C2=A0 =C2=A0 t0, 0x8=C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0/* MIE_MSIE */<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0csrw=C2=A0 =C2=A0 mie, t0<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0csrci=C2=A0 =C2=A0mstatus, 0x8=C2=A0 =C2=A0 /* MS=
+TATUS_MIE */<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0li=C2=A0 =C2=A0 =C2=A0 t0, 0x2000000=C2=A0 =C2=A0=
+/* MSIP0 */<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0li=C2=A0 =C2=A0 =C2=A0 t1, 1<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0sw=C2=A0 =C2=A0 =C2=A0 t1, 0(t0)<br>
+&gt; +<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0/*<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 * The first CSR read and WFI retire before the s=
+econd read obtains s1,<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 * so the expected difference is two.<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 */<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0csrr=C2=A0 =C2=A0 s0, minstret<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0wfi<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0csrr=C2=A0 =C2=A0 s1, minstret<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0sub=C2=A0 =C2=A0 =C2=A0s1, s1, s0<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0li=C2=A0 =C2=A0 =C2=A0 t1, 2<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0beq=C2=A0 =C2=A0 =C2=A0s1, t1, 1f<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0ori=C2=A0 =C2=A0 =C2=A0s3, s3, 1<br>
+&gt; +1:<br>
+&gt; +<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0/* Clear the software interrupt before testing th=
+e trap path. */<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0sw=C2=A0 =C2=A0 =C2=A0 zero, 0(t0)<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0csrw=C2=A0 =C2=A0 mie, zero<br>
+&gt; +<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0/* Schedule a timer interrupt far enough ahead to=
+ reach WFI first. */<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0li=C2=A0 =C2=A0 =C2=A0 t0, 0x200bff8=C2=A0 =C2=A0=
+/* MTIME */<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0ld=C2=A0 =C2=A0 =C2=A0 t1, 0(t0)<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0addi=C2=A0 =C2=A0 t1, t1, 100<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0li=C2=A0 =C2=A0 =C2=A0 t0, 0x2004000=C2=A0 =C2=A0=
+/* MTIMECMP0 */<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0sd=C2=A0 =C2=A0 =C2=A0 t1, 0(t0)<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0li=C2=A0 =C2=A0 =C2=A0 t0, 0x80=C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 /* MIE_MTIE */<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0csrw=C2=A0 =C2=A0 mie, t0<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0csrsi=C2=A0 =C2=A0mstatus, 0x8=C2=A0 =C2=A0 /* MS=
+TATUS_MIE */<br>
+&gt; +<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0/*<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 * The first CSR read and WFI retire before the t=
+rap handler obtains s1,<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 * so the expected difference is again two.<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 */<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0li=C2=A0 =C2=A0 =C2=A0 s2, 1<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0csrr=C2=A0 =C2=A0 s0, minstret<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0wfi<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0beqz=C2=A0 =C2=A0 s2, 1f<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0ori=C2=A0 =C2=A0 =C2=A0s3, s3, 2<br>
+&gt; +1:<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0bnez=C2=A0 =C2=A0 s3, fail<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0li=C2=A0 =C2=A0 =C2=A0 a0, 0<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0j=C2=A0 =C2=A0 =C2=A0 =C2=A0_exit<br>
+&gt; +<br>
+&gt; +fail:<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0mv=C2=A0 =C2=A0 =C2=A0 a0, s3<br>
+&gt; +<br>
+&gt; +_exit:<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0lla=C2=A0 =C2=A0 =C2=A0a1, semiargs<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0li=C2=A0 =C2=A0 =C2=A0 t0, 0x20026=C2=A0 =C2=A0 =
+=C2=A0/* ADP_Stopped_ApplicationExit */<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0sd=C2=A0 =C2=A0 =C2=A0 t0, 0(a1)<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0sd=C2=A0 =C2=A0 =C2=A0 a0, 8(a1)<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0li=C2=A0 =C2=A0 =C2=A0 a0, 0x20=C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 /* TARGET_SYS_EXIT_EXTENDED */<br>
+&gt; +<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0/* Semihosting call sequence */<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0.balign 16<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0slli=C2=A0 =C2=A0 zero, zero, 0x1f<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0ebreak<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0srai=C2=A0 =C2=A0 zero, zero, 0x7<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0j=C2=A0 =C2=A0 =C2=A0 =C2=A0.<br>
+&gt; +<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0.balign 4<br>
+&gt; +trap:<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0/* Read minstret before retiring an instruction i=
+n the handler. */<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0csrr=C2=A0 =C2=A0 s1, minstret<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0sub=C2=A0 =C2=A0 =C2=A0s1, s1, s0<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0addi=C2=A0 =C2=A0 s1, s1, -2<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0snez=C2=A0 =C2=A0 s2, s1<br>
+&gt; +<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0/* Disable the timer interrupt before returning p=
+ast WFI. */<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0li=C2=A0 =C2=A0 =C2=A0 t0, 0x2004000=C2=A0 =C2=A0=
+/* MTIMECMP0 */<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0li=C2=A0 =C2=A0 =C2=A0 t1, -1<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0sd=C2=A0 =C2=A0 =C2=A0 t1, 0(t0)<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0li=C2=A0 =C2=A0 =C2=A0 t0, 0x80=C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 /* MIE_MTIE */<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0csrc=C2=A0 =C2=A0 mie, t0<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0mret<br>
+&gt; +<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0.data<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0.balign 16<br>
+&gt; +semiargs:<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0.space=C2=A0 16<br>
+<br>
+</blockquote></div>
+
+--0000000000002160d9065b166a01--
 
