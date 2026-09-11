@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29AFFC88E45
-	for <qemu-riscv@archiver.kernel.org>; Fri, 11 Sep 2026 14:42:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 112BAC88E50
+	for <qemu-riscv@archiver.kernel.org>; Fri, 11 Sep 2026 14:42:47 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x52QW-0004xR-GM; Fri, 11 Sep 2026 10:40:28 -0400
+	id 1x52QR-0004jo-Ld; Fri, 11 Sep 2026 10:40:23 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1x52NM-0002iG-HP
- for qemu-riscv@nongnu.org; Fri, 11 Sep 2026 10:37:12 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ id 1x52N8-0002Mw-SF
+ for qemu-riscv@nongnu.org; Fri, 11 Sep 2026 10:37:01 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1x52NA-0007yd-Jw
- for qemu-riscv@nongnu.org; Fri, 11 Sep 2026 10:37:12 -0400
+ id 1x52N4-0007rR-C3
+ for qemu-riscv@nongnu.org; Fri, 11 Sep 2026 10:36:57 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1789137419;
+ s=mimecast20190719; t=1789137403;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=PkE3LclKvU9GiqQKtRj7Fj+wyH19sYMsxkpF53QZWX4=;
- b=cpxhf7gfgXFn4Efkb16ajdue9XumKN0DeDqBM7z0/IUDEVHiNkIZT4BCHUj5a4w+ozzJv+
- h7Ar42Qi7M8dbK/I2Upf61phujUWvAt63Pt1rzQ9AtEOADc+ItEK+dH03ByUBfGjPbZM+E
- 1grfwVLgoRiEA7oqrN4h3CDA57ZIpN4=
-Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
+ bh=mS2d1sWvkJvfrpBNzSThHFJjRCwDwl0JUnHIN1+hoNI=;
+ b=XcIEL0xSE4U7JkVzKH6S+449uCQFeaDc0aXYXNrkT6IHDoTQ8TrFrnhSqRlOcJsu0oRv/V
+ cwqsg3SNBSH0Zh8jcu7NnKHB1pLEs9UE3nCFA8aoVBxFVQasSoWiSPWaWVJoG61KYTwGo6
+ MG6tN7B8LhwZLxvTRDqmWKze4I/cCbg=
+Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-531-wrbZ1KXtOUmB-87brWnyCw-1; Fri,
- 11 Sep 2026 10:36:56 -0400
-X-MC-Unique: wrbZ1KXtOUmB-87brWnyCw-1
-X-Mimecast-MFC-AGG-ID: wrbZ1KXtOUmB-87brWnyCw_1789137415
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-126-jsyPwnXzMwa2-qmFeiK4Mg-1; Fri,
+ 11 Sep 2026 10:36:36 -0400
+X-MC-Unique: jsyPwnXzMwa2-qmFeiK4Mg-1
+X-Mimecast-MFC-AGG-ID: jsyPwnXzMwa2-qmFeiK4Mg_1789137395
 Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
  (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 2FA881955BF8; Fri, 11 Sep 2026 14:36:55 +0000 (UTC)
+ by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 4400F195399C; Fri, 11 Sep 2026 14:36:35 +0000 (UTC)
 Received: from berrange.csb (headnet05.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.117])
  by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 5989F3000229; Fri, 11 Sep 2026 14:36:53 +0000 (UTC)
+ id 52E2B3000229; Fri, 11 Sep 2026 14:36:33 +0000 (UTC)
 From: =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: xen-devel@lists.xenproject.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
  qemu-block@nongnu.org, qemu-s390x@nongnu.org, qemu-arm@nongnu.org,
  =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
-Subject: [PATCH 11/28] hw/watchdog: mark some watchdog devices as secure
-Date: Fri, 11 Sep 2026 15:36:10 +0100
-Message-ID: <20260911143627.2743803-12-berrange@redhat.com>
+Subject: [PATCH 02/28] accel: mark kvm and xen accelerators as secure
+Date: Fri, 11 Sep 2026 15:36:01 +0100
+Message-ID: <20260911143627.2743803-3-berrange@redhat.com>
 In-Reply-To: <20260911143627.2743803-1-berrange@redhat.com>
 References: <20260911143627.2743803-1-berrange@redhat.com>
 MIME-Version: 1.0
 X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
-X-Mimecast-MFC-PROC-ID: ovV4z29_LNCgLpCBMk1-il3h252S3BrMfTEED7jRAeM_1789137415
+X-Mimecast-MFC-PROC-ID: 4Ddc7yDW5eW0ReR5SDiC2VQWYCoK10dJg4753GTNBi0_1789137395
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=berrange@redhat.com;
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=berrange@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: 12
 X-Spam_score: 1.2
 X-Spam_bar: +
 X-Spam_report: (1.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=0.001, RCVD_IN_SBL_CSS=3.335,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=no autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ RCVD_IN_SBL_CSS=3.335, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -88,80 +89,101 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The ib700, i6300esb, gwdt, spapr and diag288 watchdog devices are marked
-as secure since they have traditionally been, or are intended to be,
-used in virtualization use cases on x86, arm, ppc and s390x architectures
-respectively. Other watchdogs are primarily for emulation.
+TCG is too complex to be considered to provide a security boundary
+for malicious guest workloads. QTest is only used for functional
+testing and thus is not relevant to mark secure.
+
+KVM and Xen are servicing virtualization use cases which must
+provide security and actively maintained.
+
+While HVF would be in scope conceptually, it is not sufficiently
+mature or maintained to claim a security boundary at this time.
 
 Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
 ---
- hw/watchdog/sbsa_gwdt.c      | 1 +
- hw/watchdog/spapr_watchdog.c | 1 +
- hw/watchdog/wdt_diag288.c    | 1 +
- hw/watchdog/wdt_i6300esb.c   | 1 +
- hw/watchdog/wdt_ib700.c      | 1 +
- 5 files changed, 5 insertions(+)
+ accel/accel-common.c      | 2 ++
+ accel/accel-system.c      | 1 +
+ accel/kvm/kvm-accel-ops.c | 1 +
+ accel/kvm/kvm-all.c       | 1 +
+ accel/xen/xen-all.c       | 2 ++
+ 5 files changed, 7 insertions(+)
 
-diff --git a/hw/watchdog/sbsa_gwdt.c b/hw/watchdog/sbsa_gwdt.c
-index 330a74798a..8a05b02c4f 100644
---- a/hw/watchdog/sbsa_gwdt.c
-+++ b/hw/watchdog/sbsa_gwdt.c
-@@ -307,6 +307,7 @@ static const TypeInfo wdt_sbsa_gwdt_info = {
-     .parent = TYPE_SYS_BUS_DEVICE,
-     .name  = TYPE_WDT_SBSA,
-     .instance_size  = sizeof(SBSA_GWDTState),
+diff --git a/accel/accel-common.c b/accel/accel-common.c
+index 00a400243f..1d993f0ad8 100644
+--- a/accel/accel-common.c
++++ b/accel/accel-common.c
+@@ -125,6 +125,7 @@ static const TypeInfo accel_types[] = {
+         .class_size     = sizeof(AccelClass),
+         .instance_size  = sizeof(AccelState),
+         .abstract       = true,
++        .secure         = true,
+     },
+ };
+ 
+@@ -137,6 +138,7 @@ static void register_accel_target_type(void)
+         .name = name,
+         .parent = TYPE_OBJECT,
+         .abstract = true,
++        .secure = true,
+         .class_size = sizeof(AccelCPUClass),
+     };
+ 
+diff --git a/accel/accel-system.c b/accel/accel-system.c
+index 1325b23864..f3f31bc666 100644
+--- a/accel/accel-system.c
++++ b/accel/accel-system.c
+@@ -118,6 +118,7 @@ static const TypeInfo accel_ops_type_info = {
+     .name = TYPE_ACCEL_OPS,
+     .parent = TYPE_OBJECT,
+     .abstract = true,
++    .secure = true,
+     .class_size = sizeof(AccelOpsClass),
+     .class_init = accel_ops_class_init,
+ };
+diff --git a/accel/kvm/kvm-accel-ops.c b/accel/kvm/kvm-accel-ops.c
+index c8e7aa3870..f05d41a837 100644
+--- a/accel/kvm/kvm-accel-ops.c
++++ b/accel/kvm/kvm-accel-ops.c
+@@ -119,6 +119,7 @@ static const TypeInfo kvm_accel_ops_type = {
+     .parent = TYPE_ACCEL_OPS,
+     .class_init = kvm_accel_ops_class_init,
+     .abstract = true,
 +    .secure = true,
  };
  
- static void wdt_sbsa_gwdt_register_types(void)
-diff --git a/hw/watchdog/spapr_watchdog.c b/hw/watchdog/spapr_watchdog.c
-index 5a72896066..0e45e9b4a6 100644
---- a/hw/watchdog/spapr_watchdog.c
-+++ b/hw/watchdog/spapr_watchdog.c
-@@ -269,6 +269,7 @@ static const TypeInfo spapr_wdt_info = {
-     .parent        = TYPE_DEVICE,
-     .instance_size = sizeof(SpaprWatchdog),
-     .class_init    = spapr_wdt_class_init,
-+    .secure        = true,
- };
- 
- static void spapr_watchdog_register_types(void)
-diff --git a/hw/watchdog/wdt_diag288.c b/hw/watchdog/wdt_diag288.c
-index 1275353e8e..85e4f56e1d 100644
---- a/hw/watchdog/wdt_diag288.c
-+++ b/hw/watchdog/wdt_diag288.c
-@@ -129,6 +129,7 @@ static const TypeInfo wdt_diag288_info = {
-     .name  = TYPE_WDT_DIAG288,
-     .instance_size  = sizeof(DIAG288State),
-     .class_size = sizeof(DIAG288Class),
+ static void kvm_accel_ops_register_types(void)
+diff --git a/accel/kvm/kvm-all.c b/accel/kvm/kvm-all.c
+index 83cbd120a8..af886aa28c 100644
+--- a/accel/kvm/kvm-all.c
++++ b/accel/kvm/kvm-all.c
+@@ -4328,6 +4328,7 @@ static const TypeInfo kvm_accel_type = {
+     .instance_finalize = kvm_accel_finalize,
+     .class_init = kvm_accel_class_init,
+     .instance_size = sizeof(KVMState),
 +    .secure = true,
  };
  
- static void wdt_diag288_register_types(void)
-diff --git a/hw/watchdog/wdt_i6300esb.c b/hw/watchdog/wdt_i6300esb.c
-index 3aa01b8d68..05aa20fab1 100644
---- a/hw/watchdog/wdt_i6300esb.c
-+++ b/hw/watchdog/wdt_i6300esb.c
-@@ -480,6 +480,7 @@ static const TypeInfo i6300esb_info = {
-     .parent        = TYPE_PCI_DEVICE,
-     .instance_size = sizeof(I6300State),
-     .class_init    = i6300esb_class_init,
-+    .secure        = true,
-     .interfaces = (const InterfaceInfo[]) {
-         { INTERFACE_CONVENTIONAL_PCI_DEVICE },
-         { },
-diff --git a/hw/watchdog/wdt_ib700.c b/hw/watchdog/wdt_ib700.c
-index 51a26a4cbb..8bf2b2fbf9 100644
---- a/hw/watchdog/wdt_ib700.c
-+++ b/hw/watchdog/wdt_ib700.c
-@@ -144,6 +144,7 @@ static const TypeInfo wdt_ib700_info = {
-     .parent        = TYPE_ISA_DEVICE,
-     .instance_size = sizeof(IB700State),
-     .class_init    = wdt_ib700_class_init,
-+    .secure        = true,
+ static void kvm_type_init(void)
+diff --git a/accel/xen/xen-all.c b/accel/xen/xen-all.c
+index bb2d02cb22..937e0e947d 100644
+--- a/accel/xen/xen-all.c
++++ b/accel/xen/xen-all.c
+@@ -147,6 +147,7 @@ static const TypeInfo xen_accel_type = {
+     .name = TYPE_XEN_ACCEL,
+     .parent = TYPE_ACCEL,
+     .class_init = xen_accel_class_init,
++    .secure = true,
  };
  
- static void wdt_ib700_register_types(void)
+ static void xen_accel_ops_class_init(ObjectClass *oc, const void *data)
+@@ -163,6 +164,7 @@ static const TypeInfo xen_accel_ops_type = {
+     .parent = TYPE_ACCEL_OPS,
+     .class_init = xen_accel_ops_class_init,
+     .abstract = true,
++    .secure = true,
+ };
+ 
+ static void xen_type_init(void)
 -- 
 2.55.0
 
