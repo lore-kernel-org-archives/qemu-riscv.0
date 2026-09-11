@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0AAAC88E50
-	for <qemu-riscv@archiver.kernel.org>; Fri, 11 Sep 2026 14:43:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42DDBC88E50
+	for <qemu-riscv@archiver.kernel.org>; Fri, 11 Sep 2026 14:44:06 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x52So-0007yK-SY; Fri, 11 Sep 2026 10:42:51 -0400
+	id 1x52TQ-0000Nu-JH; Fri, 11 Sep 2026 10:43:28 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1x52NJ-0002cy-HM
- for qemu-riscv@nongnu.org; Fri, 11 Sep 2026 10:37:09 -0400
+ id 1x52NP-0002l6-GC
+ for qemu-riscv@nongnu.org; Fri, 11 Sep 2026 10:37:15 -0400
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1x52NA-0007wv-6p
- for qemu-riscv@nongnu.org; Fri, 11 Sep 2026 10:37:09 -0400
+ id 1x52ND-00080b-Em
+ for qemu-riscv@nongnu.org; Fri, 11 Sep 2026 10:37:15 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1789137417;
+ s=mimecast20190719; t=1789137422;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=m7+eb5JfGTqk31BVerDj3cabnDcqZzH0Cz7nFGxKH54=;
- b=V173gYvimKrFl352BnzcuE8Ae8XlNmgCu92t/RBBpL7quNYDZ4PW/HsW+id22Ji4uVb43Y
- 6mxuMbPUnZttf10XGgQxklQzoesLXwvFKKl41Kc9j00HY570hcywzsf0lDCJPonDG8RrBb
- 8RKJenB7NXcHDv993h4iA1RLdeadUUE=
-Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ bh=LU2oz7xA3+OY2WcVfZSc+OLR7VAsrbJYBWSzg698kcA=;
+ b=ekU8hAz+1Jt1RY0Yw+bB4wQpukmYfNasr3lB+opilGURCPEp1WTFTwXxwDPJHmfrMD3nIh
+ h3BHoM/Ojv8jWxTjnMOCfNNS+V7yY9DNZdW8BIaoJBwerJuJi4YMDbvNTkgkFwxNoi+uYR
+ fd21R4Blm5QhXdK4TUB7mLJb6dqVtmk=
+Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-349-qBu9J0pJONqD0PZySyKfFg-1; Fri,
- 11 Sep 2026 10:36:52 -0400
-X-MC-Unique: qBu9J0pJONqD0PZySyKfFg-1
-X-Mimecast-MFC-AGG-ID: qBu9J0pJONqD0PZySyKfFg_1789137410
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-649-xHo6mdTZMTKAVWBSvC2yUw-1; Fri,
+ 11 Sep 2026 10:36:59 -0400
+X-MC-Unique: xHo6mdTZMTKAVWBSvC2yUw-1
+X-Mimecast-MFC-AGG-ID: xHo6mdTZMTKAVWBSvC2yUw_1789137418
 Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
  (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id C8F771955DD4; Fri, 11 Sep 2026 14:36:50 +0000 (UTC)
+ by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id D7F641801352; Fri, 11 Sep 2026 14:36:57 +0000 (UTC)
 Received: from berrange.csb (headnet05.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.117])
  by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id DA2B53000229; Fri, 11 Sep 2026 14:36:48 +0000 (UTC)
+ id 82D103000229; Fri, 11 Sep 2026 14:36:55 +0000 (UTC)
 From: =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: xen-devel@lists.xenproject.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
  qemu-block@nongnu.org, qemu-s390x@nongnu.org, qemu-arm@nongnu.org,
  =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
-Subject: [PATCH 09/28] hw/net: mark e1000, e1000e, IGB,
- rtl8139 & sPAPR VLAN as secure
-Date: Fri, 11 Sep 2026 15:36:08 +0100
-Message-ID: <20260911143627.2743803-10-berrange@redhat.com>
+Subject: [PATCH 12/28] hw/scsi: mark spapr and vmware SCSI controllers as
+ secure
+Date: Fri, 11 Sep 2026 15:36:11 +0100
+Message-ID: <20260911143627.2743803-13-berrange@redhat.com>
 In-Reply-To: <20260911143627.2743803-1-berrange@redhat.com>
 References: <20260911143627.2743803-1-berrange@redhat.com>
 MIME-Version: 1.0
 X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
-X-Mimecast-MFC-PROC-ID: jS4N81rlH4yLKcDlv2XOJ1u1dgHxE4Aw2uKTnG--Ta8_1789137410
+X-Mimecast-MFC-PROC-ID: 981i8YnOd9ApIoZkytpHC8vsAffSxBzTQa2jepEvUoI_1789137418
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=170.10.129.124; envelope-from=berrange@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: 12
-X-Spam_score: 1.2
-X-Spam_bar: +
-X-Spam_report: (1.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=0.001, RCVD_IN_SBL_CSS=3.335,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=no autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=0.001, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -89,90 +89,40 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Historically most NICs are only interesting for non-virtualization
-use cases and have not been written with malicious guests in mind.
-
-As a general rule either virtio-net or xen-net should be used in
-all virtualized guests requiring a security boundary.
-
-There are a handful of exceptions resulting from historical usage
-in the x86 world, to support virtualized guests lacking virtio
-support.
-
-Thus the rtl8139, e1000, e1000e & IGB NICs are declared to provide
-a security boundary.
-
-The PPC sPAPR Virutal LAN device is also marked secure.
+The spapr vscsi controller is used by default with spapr machines
+in a virtualization use case. The vmware SCSI controller supports
+a virtualization use case.
 
 Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
 ---
- hw/net/e1000.c      | 1 +
- hw/net/e1000e.c     | 1 +
- hw/net/igb.c        | 1 +
- hw/net/rtl8139.c    | 1 +
- hw/net/spapr_llan.c | 1 +
- 5 files changed, 5 insertions(+)
+ hw/scsi/spapr_vscsi.c | 1 +
+ hw/scsi/vmw_pvscsi.c  | 1 +
+ 2 files changed, 2 insertions(+)
 
-diff --git a/hw/net/e1000.c b/hw/net/e1000.c
-index 202ad40401..da0667c40e 100644
---- a/hw/net/e1000.c
-+++ b/hw/net/e1000.c
-@@ -1759,6 +1759,7 @@ static void e1000_register_types(void)
-         type_info.parent = TYPE_E1000_BASE;
-         type_info.class_data = info;
-         type_info.class_init = e1000_class_init;
-+        type_info.secure = true,
- 
-         type_register_static(&type_info);
-     }
-diff --git a/hw/net/e1000e.c b/hw/net/e1000e.c
-index 9faf0c74c3..96737ddb51 100644
---- a/hw/net/e1000e.c
-+++ b/hw/net/e1000e.c
-@@ -721,6 +721,7 @@ static const TypeInfo e1000e_info = {
-     .instance_size = sizeof(E1000EState),
-     .class_init = e1000e_class_init,
-     .instance_init = e1000e_instance_init,
-+    .secure = true,
-     .interfaces = (const InterfaceInfo[]) {
-         { INTERFACE_PCIE_DEVICE },
-         { }
-diff --git a/hw/net/igb.c b/hw/net/igb.c
-index c076807e71..0bd03efea0 100644
---- a/hw/net/igb.c
-+++ b/hw/net/igb.c
-@@ -635,6 +635,7 @@ static const TypeInfo igb_info = {
-     .instance_size = sizeof(IGBState),
-     .class_init = igb_class_init,
-     .instance_init = igb_instance_init,
-+    .secure = true,
-     .interfaces = (const InterfaceInfo[]) {
-         { INTERFACE_PCIE_DEVICE },
-         { }
-diff --git a/hw/net/rtl8139.c b/hw/net/rtl8139.c
-index 16479284ee..38bc16f312 100644
---- a/hw/net/rtl8139.c
-+++ b/hw/net/rtl8139.c
-@@ -3450,6 +3450,7 @@ static const TypeInfo rtl8139_info = {
-     .instance_size = sizeof(RTL8139State),
-     .class_init    = rtl8139_class_init,
-     .instance_init = rtl8139_instance_init,
-+    .secure        = true,
-     .interfaces = (const InterfaceInfo[]) {
-         { INTERFACE_CONVENTIONAL_PCI_DEVICE },
-         { },
-diff --git a/hw/net/spapr_llan.c b/hw/net/spapr_llan.c
-index 550848307d..c7ac58273c 100644
---- a/hw/net/spapr_llan.c
-+++ b/hw/net/spapr_llan.c
-@@ -873,6 +873,7 @@ static const TypeInfo spapr_vlan_info = {
-     .class_init    = spapr_vlan_class_init,
-     .instance_init = spapr_vlan_instance_init,
-     .instance_finalize = spapr_vlan_instance_finalize,
+diff --git a/hw/scsi/spapr_vscsi.c b/hw/scsi/spapr_vscsi.c
+index b4c8f94d22..f029a7da93 100644
+--- a/hw/scsi/spapr_vscsi.c
++++ b/hw/scsi/spapr_vscsi.c
+@@ -1298,6 +1298,7 @@ static const TypeInfo spapr_vscsi_info = {
+     .parent        = TYPE_VIO_SPAPR_DEVICE,
+     .instance_size = sizeof(VSCSIState),
+     .class_init    = spapr_vscsi_class_init,
 +    .secure        = true,
  };
  
- static void spapr_vlan_register_types(void)
+ static void spapr_vscsi_register_types(void)
+diff --git a/hw/scsi/vmw_pvscsi.c b/hw/scsi/vmw_pvscsi.c
+index 05f93171cd..9974930634 100644
+--- a/hw/scsi/vmw_pvscsi.c
++++ b/hw/scsi/vmw_pvscsi.c
+@@ -1355,6 +1355,7 @@ static const TypeInfo pvscsi_info = {
+     .instance_size = sizeof(PVSCSIState),
+     .class_init    = pvscsi_class_init,
+     .instance_init = pvscsi_instance_init,
++    .secure        = true,
+     .interfaces = (const InterfaceInfo[]) {
+         { TYPE_HOTPLUG_HANDLER },
+         { INTERFACE_PCIE_DEVICE },
 -- 
 2.55.0
 
