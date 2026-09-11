@@ -4,76 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51D6EC88E45
-	for <qemu-riscv@archiver.kernel.org>; Fri, 11 Sep 2026 14:49:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E090C88E45
+	for <qemu-riscv@archiver.kernel.org>; Fri, 11 Sep 2026 14:51:48 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x52U3-00037B-Vq; Fri, 11 Sep 2026 10:44:08 -0400
+	id 1x52UK-0004CF-7G; Fri, 11 Sep 2026 10:44:24 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1x52Ns-0002uN-Gx
- for qemu-riscv@nongnu.org; Fri, 11 Sep 2026 10:37:50 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ id 1x52OH-000393-Ik
+ for qemu-riscv@nongnu.org; Fri, 11 Sep 2026 10:38:10 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1x52Nn-0008Fc-3A
- for qemu-riscv@nongnu.org; Fri, 11 Sep 2026 10:37:44 -0400
+ id 1x52OC-0008Ts-V9
+ for qemu-riscv@nongnu.org; Fri, 11 Sep 2026 10:38:05 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1789137452;
+ s=mimecast20190719; t=1789137484;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=Ty7jgU/VRH/YaPH0fwHwHbb1p4FYEmeRhPcsE2aO8tg=;
- b=CHGFcVDoX/S2g6lM1KEIxJ/ym1j1p/QgHCIFbE9TkzUTWaVThDGpkOEkOH0ARLH5RMhJ0J
- uvKZUskZDnU+ZRLeWDhD5i2MHbNe2/S+b6J1jNUm4DEshbs1PADnVbt+/1cyRSarbNPduC
- l4CEJOCXSv5ho8/+NNsNdjQufvnktkw=
-Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
+ bh=N4kE0kwvfDbuBRKymnLbUvEO8flRNgMjBGhpmSiGsh0=;
+ b=WfAG/Gc4hh5sW86UmGnypDJmLpmUnsNQ/SBR5R1DgQaTLmKQz3QZwX9inGPc9SjbzNsTyV
+ Bc1Y+vAARaB6YG4jLFy+UHW9n3pZ6jwyQQJ4RAo/65PzOlsnVL5/00NvUHytDHT2TyU7Jj
+ gBDyxxlx4imc4ziVa9/g2jnIsD3RrvE=
+Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-318-pyBOGgksO1SEGyquYx9xNw-1; Fri,
- 11 Sep 2026 10:37:27 -0400
-X-MC-Unique: pyBOGgksO1SEGyquYx9xNw-1
-X-Mimecast-MFC-AGG-ID: pyBOGgksO1SEGyquYx9xNw_1789137446
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-33-Woi66CdzNE63mR1L80XvTw-1; Fri,
+ 11 Sep 2026 10:37:58 -0400
+X-MC-Unique: Woi66CdzNE63mR1L80XvTw-1
+X-Mimecast-MFC-AGG-ID: Woi66CdzNE63mR1L80XvTw_1789137476
 Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
  (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 727321955DCD; Fri, 11 Sep 2026 14:37:26 +0000 (UTC)
+ by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 2F99F195395E; Fri, 11 Sep 2026 14:37:33 +0000 (UTC)
 Received: from berrange.csb (headnet05.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.117])
  by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 899033000229; Fri, 11 Sep 2026 14:37:24 +0000 (UTC)
+ id 42B0C3000229; Fri, 11 Sep 2026 14:37:31 +0000 (UTC)
 From: =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: xen-devel@lists.xenproject.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
  qemu-block@nongnu.org, qemu-s390x@nongnu.org, qemu-arm@nongnu.org,
  =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
-Subject: [PATCH 25/28] hw: mark KVM clock and RTC devices as secure
-Date: Fri, 11 Sep 2026 15:36:24 +0100
-Message-ID: <20260911143627.2743803-26-berrange@redhat.com>
+Subject: [PATCH 28/28] hw/i386: mark vmmouse / vmport as secure
+Date: Fri, 11 Sep 2026 15:36:27 +0100
+Message-ID: <20260911143627.2743803-29-berrange@redhat.com>
 In-Reply-To: <20260911143627.2743803-1-berrange@redhat.com>
 References: <20260911143627.2743803-1-berrange@redhat.com>
 MIME-Version: 1.0
 X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
-X-Mimecast-MFC-PROC-ID: x4_WDhnLI-WTiP_bEysyLUSvptJ8qwPWsBdyI15cACA_1789137446
+X-Mimecast-MFC-PROC-ID: FnxrQU50wQOO5a570V9VdEyAPmGjd2bLD5yBlthq83Q_1789137476
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=berrange@redhat.com;
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=berrange@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: 12
 X-Spam_score: 1.2
 X-Spam_bar: +
 X-Spam_report: (1.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
- RCVD_IN_SBL_CSS=3.335, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=0.001, RCVD_IN_SBL_CSS=3.335,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -89,39 +88,39 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-These are core infrastructure in virtualization cases so must
-provide a security boundary.
+These paravirtualized devices are relevant to virtualization
+use cases.
 
 Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
 ---
- hw/i386/kvm/clock.c  | 1 +
- hw/rtc/mc146818rtc.c | 1 +
+ hw/i386/vmmouse.c | 1 +
+ hw/i386/vmport.c  | 1 +
  2 files changed, 2 insertions(+)
 
-diff --git a/hw/i386/kvm/clock.c b/hw/i386/kvm/clock.c
-index e3dad136d3..d3e2301311 100644
---- a/hw/i386/kvm/clock.c
-+++ b/hw/i386/kvm/clock.c
-@@ -366,6 +366,7 @@ static const TypeInfo kvmclock_info = {
-     .parent        = TYPE_SYS_BUS_DEVICE,
-     .instance_size = sizeof(KVMClockState),
-     .class_init    = kvmclock_class_init,
+diff --git a/hw/i386/vmmouse.c b/hw/i386/vmmouse.c
+index e289bce8e2..612e7f7d3b 100644
+--- a/hw/i386/vmmouse.c
++++ b/hw/i386/vmmouse.c
+@@ -390,6 +390,7 @@ static const TypeInfo vmmouse_info = {
+     .parent        = TYPE_ISA_DEVICE,
+     .instance_size = sizeof(VMMouseState),
+     .class_init    = vmmouse_class_initfn,
 +    .secure        = true,
  };
  
- /* Note: Must be called after VCPU initialization. */
-diff --git a/hw/rtc/mc146818rtc.c b/hw/rtc/mc146818rtc.c
-index ba396435d1..66f8b177e7 100644
---- a/hw/rtc/mc146818rtc.c
-+++ b/hw/rtc/mc146818rtc.c
-@@ -1027,6 +1027,7 @@ static const TypeInfo mc146818rtc_info = {
+ static void vmmouse_register_types(void)
+diff --git a/hw/i386/vmport.c b/hw/i386/vmport.c
+index 865e0e70db..24c4fb27a3 100644
+--- a/hw/i386/vmport.c
++++ b/hw/i386/vmport.c
+@@ -301,6 +301,7 @@ static const TypeInfo vmport_info = {
      .parent        = TYPE_ISA_DEVICE,
-     .instance_size = sizeof(MC146818RtcState),
-     .class_init    = rtc_class_initfn,
+     .instance_size = sizeof(VMPortState),
+     .class_init    = vmport_class_initfn,
 +    .secure        = true,
-     .interfaces = (const InterfaceInfo[]) {
-         { TYPE_ACPI_DEV_AML_IF },
-         { },
+ };
+ 
+ static void vmport_register_types(void)
 -- 
 2.55.0
 
