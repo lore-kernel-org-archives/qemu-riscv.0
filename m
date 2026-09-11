@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91B37C88E5A
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 231F9C88E50
 	for <qemu-riscv@archiver.kernel.org>; Fri, 11 Sep 2026 12:29:38 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x50MI-0007QB-7x; Fri, 11 Sep 2026 08:27:58 -0400
+	id 1x50ML-0007UV-Qs; Fri, 11 Sep 2026 08:28:01 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1x50MH-0007O3-4Y
- for qemu-riscv@nongnu.org; Fri, 11 Sep 2026 08:27:57 -0400
+ id 1x50MK-0007SB-Bt
+ for qemu-riscv@nongnu.org; Fri, 11 Sep 2026 08:28:00 -0400
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1x50ME-000717-U5
- for qemu-riscv@nongnu.org; Fri, 11 Sep 2026 08:27:56 -0400
+ id 1x50MH-00072B-Vi
+ for qemu-riscv@nongnu.org; Fri, 11 Sep 2026 08:28:00 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1789129674;
+ s=mimecast20190719; t=1789129677;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=HqWC4E/c16S9/+MLB6SLnQfOu+B+Hw2yLwBbSSQj1Gc=;
- b=KJYnMZbsdNEpWD7CgjWw44WlPj+aCZvcJV2xfhna+EuzcbIpdCKLxcKrNC6xX2raX08b8S
- 6hj+UW42c7tk+OqD9a7q3YWKbvH6iOzgR5U64xQJKtx0jw0E5QwUvBxNFasW+ZUrNxzmbT
- fUj0y4zi7Ub6oMIXrkKh3OXwvsdkGVE=
-Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ bh=RSV179CYlMk4apANymrXDlo4+QHBU8truxJljiJOWhI=;
+ b=CwFjMd3g/k9Ssvkn+p3Y2Nq/2dfEXrdVp6eWeR0WhBRzRbs9PEDhoig+AMxnGBYQfdOtjV
+ gH/KvzSGJDD49c4IsM0NT7bLFfy4TjNM62xwkoFiKXTJLlloKTfUF7pAFIdNHreBk3aL0Y
+ B/n7qa8feYjqc+ARqd3FO6utngu0Txc=
+Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-407-7nTTvDciMZaSbB4ISdZxIA-1; Fri,
- 11 Sep 2026 08:27:49 -0400
-X-MC-Unique: 7nTTvDciMZaSbB4ISdZxIA-1
-X-Mimecast-MFC-AGG-ID: 7nTTvDciMZaSbB4ISdZxIA_1789129666
-Received: from mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.17])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-287-BEieVi_JNweRXvrSV0Uhpw-1; Fri,
+ 11 Sep 2026 08:27:52 -0400
+X-MC-Unique: BEieVi_JNweRXvrSV0Uhpw-1
+X-Mimecast-MFC-AGG-ID: BEieVi_JNweRXvrSV0Uhpw_1789129669
+Received: from mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.12])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 0EBFD19540DB; Fri, 11 Sep 2026 12:27:46 +0000 (UTC)
+ by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 7CA58180009B; Fri, 11 Sep 2026 12:27:49 +0000 (UTC)
 Received: from localhost (headnet05.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.117])
- by mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id E038A1956042; Fri, 11 Sep 2026 12:27:43 +0000 (UTC)
+ by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id A2C691956088; Fri, 11 Sep 2026 12:27:48 +0000 (UTC)
 From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-Date: Fri, 11 Sep 2026 16:27:26 +0400
-Subject: [PATCH 03/10] gdbstub: set feature->base_reg for dynamic features
+Date: Fri, 11 Sep 2026 16:27:27 +0400
+Subject: [PATCH 04/10] target/i386: expose segment limits via GDB
 MIME-Version: 1.0
-Message-Id: <20260911-query-reg-v1-3-0c04f0c02cf3@redhat.com>
+Message-Id: <20260911-query-reg-v1-4-0c04f0c02cf3@redhat.com>
 References: <20260911-query-reg-v1-0-0c04f0c02cf3@redhat.com>
 In-Reply-To: <20260911-query-reg-v1-0-0c04f0c02cf3@redhat.com>
 To: qemu-devel@nongnu.org
@@ -76,38 +76,38 @@ Cc: "Dr. David Alan Gilbert" <dave@treblig.org>,
  Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, 
  Warner Losh <imp@bsdimp.com>, Kyle Evans <kevans@freebsd.org>, 
  =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1027;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3992;
  i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=kqhJAQgP0IhPa8w0kge5ZBoIAHiwJHN65r8HJVeY8Fs=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBqo/OuB+pKOjc3VULyffQ2RAnuYKhnJ2OL5zwL3
- EenlVOGCLuJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCaqPzrgAKCRDa6OEJdZac
- 5QgHD/0V+UQQCOBslFtXfVDt88sirmYbd7ZM5TrCV+rnU37FX1LdFWaGl5G/50R5WrxbruoYoV2
- xLM7Jcwxl06nIjW0TR1KEZ0ZqDZR3VGS9y2Bp6ls6arfAY4rIgdw2oF0YRaTXhXYlE9UvCNyR3E
- SV6Tq7hMvWaUy2GrlE37YPDOh2DI3bUY69sJmFfH79R+ESlufQnV+uUJBPGQyXamvOhdQtz5dl7
- DVuE2MXeH54ujTNzEUFzXOE0SGU+E0N2DV9GmNe3KxJHXA8isMZrsrm70dP+P3L6Vxj9//wWbrn
- WztAeVmV/62fFqly6opmE0HFYzOrp704+EhTEqzkG+9DVHlHd3Hn6S1qHvz+4D9SsmwFcEUBkIA
- enWR8P1BWq5AzDfBMX9XCAnLpYu8B2zULg93s0lyqsmt3M7Wsrj5U4xWaFefhz3QJhX1nqXe9Ge
- 6gVHmP9Vn3sCjl2KxpkwgZgrWacZ/KlnTSwu9FPhp+1eUyLtarEs4AGTLtOV4we435BamJi+LQJ
- N4EmGqDWuOSwk9LZUrj1Bk8emGlAIaXEgzBMulM1KOgvUF+q2feYWGqlfza0fWs4Xa9bz4LuJBy
- UXFSbMTP+bza3DD3Pacy2kz5jueNi+NV+hv0ctImTnl95IkUHz6ATN1IA4PSzrsZZmvwlkpDvvK
- T+o23qHpjqLBoyQ==
+ bh=Vp8UoC2veESS4o6uyQDmraCrkpJSMrWyPNULyjdIVbM=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBqo/Ou1gJ0wcVo5a3HiQJvESm0jxMVQBxfsrU/P
+ +49B8MVxqSJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCaqPzrgAKCRDa6OEJdZac
+ 5SCyD/4wbd/xMotnQVOQqy8wHhO5+wyioSbOkYOMGoMf35Z73dpfNStYQ1e4zZT16QaDpOoOsG2
+ Mcz0PSGVGE6szOz77FCCEK/aNadB1EipnBNZkkCVIJzBOfCqeVhIHKKR8pt+DEAji+alJYEgybk
+ H77LuOV6B8MkDJ1L8glZYQdLSDPsqTwn8uxpLo5TV/AJV9vqY+U49ydiV2MgGtZn1YP4GVNqkxL
+ lsmnzM0WQ6Q8peinRjmq5OAE24ZCCmYjAJbQqlue4+VGa1OvgVd85YMdJdbXC1MagunA3+2gi+G
+ GhaZT5Dm3ErV9O6YtHmSlbXCjtuR84TivqANtMRai0XG/opFwU70PHe5ekEpuishPC34tPI2z+F
+ AwC15qifO6e3KbHlbCrlkl6Wr3a2QqaGd6zJqlzohKh7ZAaHBPahB2m7YrW68Gx0rZ6s/D6dA5a
+ QUxorxAbt1CEhtEcUkP7wvAuYTK/+ZHbQ2pG7fHhqGMqwYJ4QTLgqRv0BHVbhKq9sX8u+fLjJ7w
+ XXE2i3gjKbWNpxDdcZA3MmTGtCf4T89/qqn0PZis4beuVKW+aFBSzgMVawd4OSxE44tJSLvmdmB
+ f7QbQxwgRyh3+1N8F7MJMvLQclmMymYnzw5Cuchu4cXY3NAbmYERXBixPAuZjVWCUPpOa7qccRB
+ nyKDhU/BkEjpD+w==
 X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
  fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.17
-X-Mimecast-MFC-PROC-ID: h0ZRYcti_Vmx6SuKzTTYsFdBZYk6AghcRItSc4KsSHg_1789129666
+X-Scanned-By: MIMEDefang 3.0 on 10.30.177.12
+X-Mimecast-MFC-PROC-ID: Zdx1eZTtR08Ed1v8DigfuekXSrv0Fnco_uG-tyv77ag_1789129669
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=170.10.129.124;
  envelope-from=marcandre.lureau@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: 12
-X-Spam_score: 1.2
-X-Spam_bar: +
-X-Spam_report: (1.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=0.001, RCVD_IN_SBL_CSS=3.335,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=no autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=0.001, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -123,31 +123,104 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-gdb_feature_builder_end() never propagated builder->base_reg into
-feature->base_reg, leaving it at 0 for all dynamically-built features.
-This made the trace log at gdb_get_register_list() report an incorrect
-base_reg for dynamic features.
-
-GDBRegisterState::base_reg was correctly set, so this doesn't fix
-an actual issue.
+Add an i386-segments.xml GDB feature that exposes the six segment
+limit registers (cs, ds, es, ss, fs, gs) as read-only system
+registers through the GDB coprocessor interface. This makes them
+accessible to both GDB and HMP without relying on the legacy
+MonitorDef table, which will be removed in a subsequent commit.
 
 Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 ---
- gdbstub/gdbstub.c | 1 +
- 1 file changed, 1 insertion(+)
+ configs/targets/i386-softmmu.mak   |  2 +-
+ configs/targets/x86_64-softmmu.mak |  2 +-
+ gdbstub/gdb-xml/i386-segments.xml  | 14 ++++++++++++++
+ target/i386/gdbstub.c              | 24 ++++++++++++++++++++++++
+ 4 files changed, 40 insertions(+), 2 deletions(-)
 
-diff --git a/gdbstub/gdbstub.c b/gdbstub/gdbstub.c
-index 0ce871d74929..912e31b66744 100644
---- a/gdbstub/gdbstub.c
-+++ b/gdbstub/gdbstub.c
-@@ -476,6 +476,7 @@ void gdb_feature_builder_end(const GDBFeatureBuilder *builder)
+diff --git a/configs/targets/i386-softmmu.mak b/configs/targets/i386-softmmu.mak
+index 38a8f85201f9..89cdaa072ef7 100644
+--- a/configs/targets/i386-softmmu.mak
++++ b/configs/targets/i386-softmmu.mak
+@@ -1,6 +1,6 @@
+ TARGET_ARCH=i386
+ TARGET_KVM_HAVE_GUEST_DEBUG=y
+ TARGET_KVM_HAVE_RESET_PARKED_VCPU=y
+-TARGET_XML_FILES= i386-32bit.xml
++TARGET_XML_FILES= i386-32bit.xml i386-segments.xml
+ TARGET_LONG_BITS=32
+ TARGET_NOT_USING_LEGACY_LDST_PHYS_API=y
+diff --git a/configs/targets/x86_64-softmmu.mak b/configs/targets/x86_64-softmmu.mak
+index c7f8746b4f58..0af699971de0 100644
+--- a/configs/targets/x86_64-softmmu.mak
++++ b/configs/targets/x86_64-softmmu.mak
+@@ -2,6 +2,6 @@ TARGET_ARCH=x86_64
+ TARGET_BASE_ARCH=i386
+ TARGET_KVM_HAVE_GUEST_DEBUG=y
+ TARGET_KVM_HAVE_RESET_PARKED_VCPU=y
+-TARGET_XML_FILES= i386-64bit.xml i386-64bit-apx.xml
++TARGET_XML_FILES= i386-64bit.xml i386-64bit-apx.xml i386-segments.xml
+ TARGET_LONG_BITS=64
+ TARGET_NOT_USING_LEGACY_LDST_PHYS_API=y
+diff --git a/gdbstub/gdb-xml/i386-segments.xml b/gdbstub/gdb-xml/i386-segments.xml
+new file mode 100644
+index 000000000000..6fbf3f91957e
+--- /dev/null
++++ b/gdbstub/gdb-xml/i386-segments.xml
+@@ -0,0 +1,14 @@
++<?xml version="1.0"?>
++<!--
++  SPDX-License-Identifier: GPL-2.0-or-later
++-->
++<!DOCTYPE feature SYSTEM "gdb-target.dtd">
++<!-- Segment-cache values are read-only; writes are ignored. -->
++<feature name="org.qemu.gdb.i386.segments">
++  <reg name="cs.limit" bitsize="32" type="uint32" group="qemu-debug" save-restore="no"/>
++  <reg name="ds.limit" bitsize="32" type="uint32" group="qemu-debug" save-restore="no"/>
++  <reg name="es.limit" bitsize="32" type="uint32" group="qemu-debug" save-restore="no"/>
++  <reg name="ss.limit" bitsize="32" type="uint32" group="qemu-debug" save-restore="no"/>
++  <reg name="fs.limit" bitsize="32" type="uint32" group="qemu-debug" save-restore="no"/>
++  <reg name="gs.limit" bitsize="32" type="uint32" group="qemu-debug" save-restore="no"/>
++</feature>
+diff --git a/target/i386/gdbstub.c b/target/i386/gdbstub.c
+index 5c5fa7272163..2729b0f5bc1e 100644
+--- a/target/i386/gdbstub.c
++++ b/target/i386/gdbstub.c
+@@ -493,6 +493,25 @@ static int i386_cpu_gdb_set_egprs(CPUState *cs, uint8_t *mem_buf, int n)
+ }
+ #endif
  
-     g_ptr_array_free(builder->xml, TRUE);
- 
-+    builder->feature->base_reg = builder->base_reg;
-     builder->feature->num_regs = builder->regs->len;
-     builder->feature->regs = (void *)g_ptr_array_free(builder->regs, FALSE);
-     trace_gdbxml_feature_builder_header(builder->feature->name,
++#ifndef CONFIG_USER_ONLY
++static int x86_gdb_read_segment_limit(CPUState *cs, GByteArray *buf, int n)
++{
++    CPUX86State *env = cpu_env(cs);
++    static const int segments[] = { R_CS, R_DS, R_ES, R_SS, R_FS, R_GS };
++
++    if (n < 0 || n >= ARRAY_SIZE(segments)) {
++        return 0;
++    }
++    return gdb_get_reg32(buf, env->segs[segments[n]].limit);
++}
++
++static int x86_gdb_write_segment_limit(CPUState *cs, uint8_t *buf, int n)
++{
++    /* Segment caches are exposed for inspection only. Ignore writes. */
++    return 4;
++}
++#endif
++
+ void x86_cpu_gdb_init(CPUState *cs)
+ {
+ #ifdef TARGET_X86_64
+@@ -514,4 +533,9 @@ void x86_cpu_gdb_init(CPUState *cs)
+                              gdb_find_static_feature("i386-32bit-linux.xml"));
+ #endif
+ #endif
++#ifndef CONFIG_USER_ONLY
++    gdb_register_coprocessor(cs, x86_gdb_read_segment_limit,
++                             x86_gdb_write_segment_limit,
++                             gdb_find_static_feature("i386-segments.xml"));
++#endif
+ }
 
 -- 
 2.55.0.543.g5ebe2ebe4ea8
