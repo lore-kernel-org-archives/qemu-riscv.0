@@ -4,63 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12A17C88E50
-	for <qemu-riscv@archiver.kernel.org>; Fri, 11 Sep 2026 14:52:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3131DC88E50
+	for <qemu-riscv@archiver.kernel.org>; Fri, 11 Sep 2026 14:52:17 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x52UB-0003fQ-OQ; Fri, 11 Sep 2026 10:44:15 -0400
+	id 1x52Xp-0008BD-5K; Fri, 11 Sep 2026 10:48:01 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1x52Nu-0002uj-BF
+ id 1x52Nu-0002ui-2A
  for qemu-riscv@nongnu.org; Fri, 11 Sep 2026 10:37:52 -0400
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1x52Np-0008Gt-Gt
+ id 1x52Np-0008FB-HW
  for qemu-riscv@nongnu.org; Fri, 11 Sep 2026 10:37:45 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1789137455;
+ s=mimecast20190719; t=1789137451;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=yxYKHi5v7tz+GMZ37WJGGk/4FLpJ0TR7q5S8Sx5LFw0=;
- b=RcPS72rlfbLFZL15dVZqA7sbNAYXd60cB3DvIoztrJOlFMgfsD4GA64fy1tvMSmTLuxMj5
- emh6BKBm0OOPIA5LxBEWNWVrGgg1nyqUw7L6to7gfeGwapkotHJPCQPQfmlaqW1uNs+cyv
- 2SeDqMF7D0JDnXQ7i4JsNi07ZrdijJU=
-Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
+ bh=cNbkkFHCYKpbxfWO4D+I7H8XxjKgGoTqJimeW8ycrfY=;
+ b=Cqf5cwpvfgcBqTxcRKy47Q5URJI89fC08ikz4A7ZvmoGDPcgp/W20aMiWwekm0yWFUWAC5
+ yvh58jsXuJtdptvrzqafkz10LOBcnXWID3uh6Z1m6WPRCSj4WsBFZXENZeuhG1Mhb2dnqF
+ 09cbLrLdmb7y5dPnnPlsiAp3bOzXERo=
+Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-179-i4RerftSO0aK-nu0DOj5Rw-1; Fri,
- 11 Sep 2026 10:37:16 -0400
-X-MC-Unique: i4RerftSO0aK-nu0DOj5Rw-1
-X-Mimecast-MFC-AGG-ID: i4RerftSO0aK-nu0DOj5Rw_1789137435
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-517-snL57JxmM_i6WZC-vCI9tQ-1; Fri,
+ 11 Sep 2026 10:37:26 -0400
+X-MC-Unique: snL57JxmM_i6WZC-vCI9tQ-1
+X-Mimecast-MFC-AGG-ID: snL57JxmM_i6WZC-vCI9tQ_1789137444
 Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
  (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 757F7195396B; Fri, 11 Sep 2026 14:37:15 +0000 (UTC)
+ by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 398031955DD1; Fri, 11 Sep 2026 14:37:24 +0000 (UTC)
 Received: from berrange.csb (headnet05.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.117])
  by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 69BE13000229; Fri, 11 Sep 2026 14:37:13 +0000 (UTC)
+ id 69BE23000229; Fri, 11 Sep 2026 14:37:22 +0000 (UTC)
 From: =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: xen-devel@lists.xenproject.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
  qemu-block@nongnu.org, qemu-s390x@nongnu.org, qemu-arm@nongnu.org,
  =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
-Subject: [PATCH 20/28] hw/audio: mark Intel HDA devices & codecs as secure
-Date: Fri, 11 Sep 2026 15:36:19 +0100
-Message-ID: <20260911143627.2743803-21-berrange@redhat.com>
+Subject: [PATCH 24/28] hw/acpi: mark erst,
+ vmclock and vmgenid devices as secure
+Date: Fri, 11 Sep 2026 15:36:23 +0100
+Message-ID: <20260911143627.2743803-25-berrange@redhat.com>
 In-Reply-To: <20260911143627.2743803-1-berrange@redhat.com>
 References: <20260911143627.2743803-1-berrange@redhat.com>
 MIME-Version: 1.0
 X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
-X-Mimecast-MFC-PROC-ID: e9sMjobRw71lwfdVpH7mMzq6nZTxQ3lkB22U8MNyXm4_1789137435
+X-Mimecast-MFC-PROC-ID: xMzcbxN_rsElG2kPBR2aH1CTW8Q-SbkHH9Up0aLLIcc_1789137444
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -88,94 +89,52 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This is traditionally the primary audio backend for x86 as
-virtio-snd is a relatively new invention.
+These are all used in virtualization scenarios so must be
+declare to provide a security boundary
 
 Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
 ---
- hw/audio/hda-codec.c | 4 ++++
- hw/audio/intel-hda.c | 5 +++++
- 2 files changed, 9 insertions(+)
+ hw/acpi/erst.c    | 1 +
+ hw/acpi/vmclock.c | 1 +
+ hw/acpi/vmgenid.c | 1 +
+ 3 files changed, 3 insertions(+)
 
-diff --git a/hw/audio/hda-codec.c b/hw/audio/hda-codec.c
-index 173fe56bea..05bd35700f 100644
---- a/hw/audio/hda-codec.c
-+++ b/hw/audio/hda-codec.c
-@@ -858,6 +858,7 @@ static const TypeInfo hda_audio_info = {
-     .instance_size = sizeof(HDAAudioState),
-     .class_init    = hda_audio_base_class_init,
-     .abstract      = true,
-+    .secure        = true,
- };
- 
- static void hda_audio_output_class_init(ObjectClass *klass, const void *data)
-@@ -873,6 +874,7 @@ static const TypeInfo hda_audio_output_info = {
-     .name          = "hda-output",
-     .parent        = TYPE_HDA_AUDIO,
-     .class_init    = hda_audio_output_class_init,
-+    .secure        = true,
- };
- 
- static void hda_audio_duplex_class_init(ObjectClass *klass, const void *data)
-@@ -888,6 +890,7 @@ static const TypeInfo hda_audio_duplex_info = {
-     .name          = "hda-duplex",
-     .parent        = TYPE_HDA_AUDIO,
-     .class_init    = hda_audio_duplex_class_init,
-+    .secure        = true,
- };
- 
- static void hda_audio_micro_class_init(ObjectClass *klass, const void *data)
-@@ -903,6 +906,7 @@ static const TypeInfo hda_audio_micro_info = {
-     .name          = "hda-micro",
-     .parent        = TYPE_HDA_AUDIO,
-     .class_init    = hda_audio_micro_class_init,
-+    .secure        = true,
- };
- 
- static void hda_audio_register_types(void)
-diff --git a/hw/audio/intel-hda.c b/hw/audio/intel-hda.c
-index 3d361a4976..34ca1e713c 100644
---- a/hw/audio/intel-hda.c
-+++ b/hw/audio/intel-hda.c
-@@ -45,6 +45,7 @@ static const TypeInfo hda_codec_bus_info = {
-     .name = TYPE_HDA_BUS,
-     .parent = TYPE_BUS,
-     .instance_size = sizeof(HDACodecBus),
-+    .secure = true,
- };
- 
- void hda_codec_bus_init(DeviceState *dev, HDACodecBus *bus, size_t bus_size,
-@@ -1265,6 +1266,7 @@ static const TypeInfo intel_hda_info = {
-     .instance_size = sizeof(IntelHDAState),
-     .class_init    = intel_hda_class_init,
-     .abstract      = true,
+diff --git a/hw/acpi/erst.c b/hw/acpi/erst.c
+index b6c1942e30..44560004a5 100644
+--- a/hw/acpi/erst.c
++++ b/hw/acpi/erst.c
+@@ -1044,6 +1044,7 @@ static const TypeInfo erst_type_info = {
+     .parent        = TYPE_PCI_DEVICE,
+     .class_init    = erst_class_init,
+     .instance_size = sizeof(ERSTDeviceState),
 +    .secure        = true,
      .interfaces = (const InterfaceInfo[]) {
          { INTERFACE_CONVENTIONAL_PCI_DEVICE },
-         { },
-@@ -1275,12 +1277,14 @@ static const TypeInfo intel_hda_info_ich6 = {
-     .name          = "intel-hda",
-     .parent        = TYPE_INTEL_HDA_GENERIC,
-     .class_init    = intel_hda_class_init_ich6,
+         { }
+diff --git a/hw/acpi/vmclock.c b/hw/acpi/vmclock.c
+index d51cab2e20..b545354600 100644
+--- a/hw/acpi/vmclock.c
++++ b/hw/acpi/vmclock.c
+@@ -169,6 +169,7 @@ static const TypeInfo vmclock_device_info = {
+     .parent        = TYPE_DEVICE,
+     .instance_size = sizeof(VmclockState),
+     .class_init    = vmclock_device_class_init,
 +    .secure        = true,
  };
  
- static const TypeInfo intel_hda_info_ich9 = {
-     .name          = "ich9-intel-hda",
-     .parent        = TYPE_INTEL_HDA_GENERIC,
-     .class_init    = intel_hda_class_init_ich9,
+ static void vmclock_register_types(void)
+diff --git a/hw/acpi/vmgenid.c b/hw/acpi/vmgenid.c
+index 27cc0128d1..67f815d8a1 100644
+--- a/hw/acpi/vmgenid.c
++++ b/hw/acpi/vmgenid.c
+@@ -236,6 +236,7 @@ static const TypeInfo vmgenid_device_info = {
+     .parent        = TYPE_DEVICE,
+     .instance_size = sizeof(VmGenIdState),
+     .class_init    = vmgenid_device_class_init,
 +    .secure        = true,
  };
  
- static void hda_codec_device_class_init(ObjectClass *klass, const void *data)
-@@ -1298,6 +1302,7 @@ static const TypeInfo hda_codec_device_type_info = {
-     .parent = TYPE_DEVICE,
-     .instance_size = sizeof(HDACodecDevice),
-     .abstract = true,
-+    .secure = true,
-     .class_size = sizeof(HDACodecDeviceClass),
-     .class_init = hda_codec_device_class_init,
- };
+ static void vmgenid_register_types(void)
 -- 
 2.55.0
 
