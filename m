@@ -4,110 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 231F9C88E50
-	for <qemu-riscv@archiver.kernel.org>; Fri, 11 Sep 2026 12:29:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AECBEC88E45
+	for <qemu-riscv@archiver.kernel.org>; Fri, 11 Sep 2026 14:33:46 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x50ML-0007UV-Qs; Fri, 11 Sep 2026 08:28:01 -0400
+	id 1x52J2-0000mq-Ii; Fri, 11 Sep 2026 10:32:44 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1x50MK-0007SB-Bt
- for qemu-riscv@nongnu.org; Fri, 11 Sep 2026 08:28:00 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
+ id 1x52Ic-0000do-0q
+ for qemu-riscv@nongnu.org; Fri, 11 Sep 2026 10:32:21 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1x50MH-00072B-Vi
- for qemu-riscv@nongnu.org; Fri, 11 Sep 2026 08:28:00 -0400
+ (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
+ id 1x52IZ-0006jz-3l
+ for qemu-riscv@nongnu.org; Fri, 11 Sep 2026 10:32:17 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1789129677;
+ s=mimecast20190719; t=1789137134;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=RSV179CYlMk4apANymrXDlo4+QHBU8truxJljiJOWhI=;
- b=CwFjMd3g/k9Ssvkn+p3Y2Nq/2dfEXrdVp6eWeR0WhBRzRbs9PEDhoig+AMxnGBYQfdOtjV
- gH/KvzSGJDD49c4IsM0NT7bLFfy4TjNM62xwkoFiKXTJLlloKTfUF7pAFIdNHreBk3aL0Y
- B/n7qa8feYjqc+ARqd3FO6utngu0Txc=
-Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
+ content-transfer-encoding:content-transfer-encoding;
+ bh=FgcxXaX7vV4QKY5AmHCuTifN6aisrzplu/ekuc9/1QQ=;
+ b=FWdaLovsynpqnzfEmETFrGaL8iwsNRswSE/GQK1bLpjf979HjU6EhSO2nGgAsxtYsrfz7r
+ O9VNkUnF9s1c3X9pkKf4+TkqnHgMMkffX1moM2fl9LptUYF3Vm6JuCWYwUBfN6uaNyLndo
+ 0VaA/9dG4HKBmjZcW01fuQWLHaYO5gY=
+Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-287-BEieVi_JNweRXvrSV0Uhpw-1; Fri,
- 11 Sep 2026 08:27:52 -0400
-X-MC-Unique: BEieVi_JNweRXvrSV0Uhpw-1
-X-Mimecast-MFC-AGG-ID: BEieVi_JNweRXvrSV0Uhpw_1789129669
-Received: from mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.12])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-278-kouePLKLNBuFsDVFxTXoEg-1; Fri,
+ 11 Sep 2026 10:32:10 -0400
+X-MC-Unique: kouePLKLNBuFsDVFxTXoEg-1
+X-Mimecast-MFC-AGG-ID: kouePLKLNBuFsDVFxTXoEg_1789137129
+Received: from mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.93])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 7CA58180009B; Fri, 11 Sep 2026 12:27:49 +0000 (UTC)
-Received: from localhost (headnet05.pony-001.prod.iad2.dc.redhat.com
+ by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 2B1131801352; Fri, 11 Sep 2026 14:32:09 +0000 (UTC)
+Received: from berrange.csb (headnet05.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.117])
- by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id A2C691956088; Fri, 11 Sep 2026 12:27:48 +0000 (UTC)
-From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-Date: Fri, 11 Sep 2026 16:27:27 +0400
-Subject: [PATCH 04/10] target/i386: expose segment limits via GDB
-MIME-Version: 1.0
-Message-Id: <20260911-query-reg-v1-4-0c04f0c02cf3@redhat.com>
-References: <20260911-query-reg-v1-0-0c04f0c02cf3@redhat.com>
-In-Reply-To: <20260911-query-reg-v1-0-0c04f0c02cf3@redhat.com>
+ by mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id E12F718002B7; Fri, 11 Sep 2026 14:32:06 +0000 (UTC)
+From: =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
 To: qemu-devel@nongnu.org
-Cc: "Dr. David Alan Gilbert" <dave@treblig.org>, 
- =?utf-8?q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>, 
- =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>, 
- Zhao Liu <zhao1.liu@intel.com>, Peter Maydell <peter.maydell@linaro.org>, 
- Chinmay Rath <rathc@linux.ibm.com>, Nicholas Piggin <npiggin@gmail.com>, 
- Glenn Miles <milesg@linux.ibm.com>, 
- Harsh Prateek Bora <harshpb@linux.ibm.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, 
- Weiwei Li <liwei1518@gmail.com>, 
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Chao Liu <chao.liu@processmission.com>, Max Filippov <jcmvbkbc@gmail.com>, 
- qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, 
- Paolo Bonzini <pbonzini@redhat.com>, Laurent Vivier <laurent@vivier.eu>, 
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>, 
- Artyom Tarasenko <atar4qemu@gmail.com>, Helge Deller <deller@gmx.de>, 
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, 
- Warner Losh <imp@bsdimp.com>, Kyle Evans <kevans@freebsd.org>, 
- =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3992;
- i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=Vp8UoC2veESS4o6uyQDmraCrkpJSMrWyPNULyjdIVbM=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBqo/Ou1gJ0wcVo5a3HiQJvESm0jxMVQBxfsrU/P
- +49B8MVxqSJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCaqPzrgAKCRDa6OEJdZac
- 5SCyD/4wbd/xMotnQVOQqy8wHhO5+wyioSbOkYOMGoMf35Z73dpfNStYQ1e4zZT16QaDpOoOsG2
- Mcz0PSGVGE6szOz77FCCEK/aNadB1EipnBNZkkCVIJzBOfCqeVhIHKKR8pt+DEAji+alJYEgybk
- H77LuOV6B8MkDJ1L8glZYQdLSDPsqTwn8uxpLo5TV/AJV9vqY+U49ydiV2MgGtZn1YP4GVNqkxL
- lsmnzM0WQ6Q8peinRjmq5OAE24ZCCmYjAJbQqlue4+VGa1OvgVd85YMdJdbXC1MagunA3+2gi+G
- GhaZT5Dm3ErV9O6YtHmSlbXCjtuR84TivqANtMRai0XG/opFwU70PHe5ekEpuishPC34tPI2z+F
- AwC15qifO6e3KbHlbCrlkl6Wr3a2QqaGd6zJqlzohKh7ZAaHBPahB2m7YrW68Gx0rZ6s/D6dA5a
- QUxorxAbt1CEhtEcUkP7wvAuYTK/+ZHbQ2pG7fHhqGMqwYJ4QTLgqRv0BHVbhKq9sX8u+fLjJ7w
- XXE2i3gjKbWNpxDdcZA3MmTGtCf4T89/qqn0PZis4beuVKW+aFBSzgMVawd4OSxE44tJSLvmdmB
- f7QbQxwgRyh3+1N8F7MJMvLQclmMymYnzw5Cuchu4cXY3NAbmYERXBixPAuZjVWCUPpOa7qccRB
- nyKDhU/BkEjpD+w==
-X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
- fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.12
-X-Mimecast-MFC-PROC-ID: Zdx1eZTtR08Ed1v8DigfuekXSrv0Fnco_uG-tyv77ag_1789129669
+Cc: qemu-s390x@nongnu.org, qemu-ppc@nongnu.org, qemu-block@nongnu.org,
+ qemu-arm@nongnu.org, xen-devel@lists.xenproject.org, qemu-riscv@nongnu.org,
+ =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
+Subject: [PATCH 00/29] Mark user creatable devices for secure for virt use case
+Date: Fri, 11 Sep 2026 15:31:36 +0100
+Message-ID: <20260911143205.2736968-1-berrange@redhat.com>
+MIME-Version: 1.0
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.93
+X-Mimecast-MFC-PROC-ID: oMYaTpUIDggNpvAkfKa0dAaWNMwYi9qmceHD_KRiYOA_1789137129
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.129.124;
- envelope-from=marcandre.lureau@redhat.com;
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=berrange@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=0.001, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -123,106 +85,305 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Add an i386-segments.xml GDB feature that exposes the six segment
-limit registers (cs, ds, es, ss, fs, gs) as read-only system
-registers through the GDB coprocessor interface. This makes them
-accessible to both GDB and HMP without relying on the legacy
-MonitorDef table, which will be removed in a subsequent commit.
+This (largish) series undertakes the task of marking devices
+secure, if they are intended to be used a virtualization
+use case.
 
-Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
----
- configs/targets/i386-softmmu.mak   |  2 +-
- configs/targets/x86_64-softmmu.mak |  2 +-
- gdbstub/gdb-xml/i386-segments.xml  | 14 ++++++++++++++
- target/i386/gdbstub.c              | 24 ++++++++++++++++++++++++
- 4 files changed, 40 insertions(+), 2 deletions(-)
+NB, the maintainer CC list was way too huge to include every
+individual, so I've trimmed to just the mailing list CCs.
 
-diff --git a/configs/targets/i386-softmmu.mak b/configs/targets/i386-softmmu.mak
-index 38a8f85201f9..89cdaa072ef7 100644
---- a/configs/targets/i386-softmmu.mak
-+++ b/configs/targets/i386-softmmu.mak
-@@ -1,6 +1,6 @@
- TARGET_ARCH=i386
- TARGET_KVM_HAVE_GUEST_DEBUG=y
- TARGET_KVM_HAVE_RESET_PARKED_VCPU=y
--TARGET_XML_FILES= i386-32bit.xml
-+TARGET_XML_FILES= i386-32bit.xml i386-segments.xml
- TARGET_LONG_BITS=32
- TARGET_NOT_USING_LEGACY_LDST_PHYS_API=y
-diff --git a/configs/targets/x86_64-softmmu.mak b/configs/targets/x86_64-softmmu.mak
-index c7f8746b4f58..0af699971de0 100644
---- a/configs/targets/x86_64-softmmu.mak
-+++ b/configs/targets/x86_64-softmmu.mak
-@@ -2,6 +2,6 @@ TARGET_ARCH=x86_64
- TARGET_BASE_ARCH=i386
- TARGET_KVM_HAVE_GUEST_DEBUG=y
- TARGET_KVM_HAVE_RESET_PARKED_VCPU=y
--TARGET_XML_FILES= i386-64bit.xml i386-64bit-apx.xml
-+TARGET_XML_FILES= i386-64bit.xml i386-64bit-apx.xml i386-segments.xml
- TARGET_LONG_BITS=64
- TARGET_NOT_USING_LEGACY_LDST_PHYS_API=y
-diff --git a/gdbstub/gdb-xml/i386-segments.xml b/gdbstub/gdb-xml/i386-segments.xml
-new file mode 100644
-index 000000000000..6fbf3f91957e
---- /dev/null
-+++ b/gdbstub/gdb-xml/i386-segments.xml
-@@ -0,0 +1,14 @@
-+<?xml version="1.0"?>
-+<!--
-+  SPDX-License-Identifier: GPL-2.0-or-later
-+-->
-+<!DOCTYPE feature SYSTEM "gdb-target.dtd">
-+<!-- Segment-cache values are read-only; writes are ignored. -->
-+<feature name="org.qemu.gdb.i386.segments">
-+  <reg name="cs.limit" bitsize="32" type="uint32" group="qemu-debug" save-restore="no"/>
-+  <reg name="ds.limit" bitsize="32" type="uint32" group="qemu-debug" save-restore="no"/>
-+  <reg name="es.limit" bitsize="32" type="uint32" group="qemu-debug" save-restore="no"/>
-+  <reg name="ss.limit" bitsize="32" type="uint32" group="qemu-debug" save-restore="no"/>
-+  <reg name="fs.limit" bitsize="32" type="uint32" group="qemu-debug" save-restore="no"/>
-+  <reg name="gs.limit" bitsize="32" type="uint32" group="qemu-debug" save-restore="no"/>
-+</feature>
-diff --git a/target/i386/gdbstub.c b/target/i386/gdbstub.c
-index 5c5fa7272163..2729b0f5bc1e 100644
---- a/target/i386/gdbstub.c
-+++ b/target/i386/gdbstub.c
-@@ -493,6 +493,25 @@ static int i386_cpu_gdb_set_egprs(CPUState *cs, uint8_t *mem_buf, int n)
- }
- #endif
- 
-+#ifndef CONFIG_USER_ONLY
-+static int x86_gdb_read_segment_limit(CPUState *cs, GByteArray *buf, int n)
-+{
-+    CPUX86State *env = cpu_env(cs);
-+    static const int segments[] = { R_CS, R_DS, R_ES, R_SS, R_FS, R_GS };
-+
-+    if (n < 0 || n >= ARRAY_SIZE(segments)) {
-+        return 0;
-+    }
-+    return gdb_get_reg32(buf, env->segs[segments[n]].limit);
-+}
-+
-+static int x86_gdb_write_segment_limit(CPUState *cs, uint8_t *buf, int n)
-+{
-+    /* Segment caches are exposed for inspection only. Ignore writes. */
-+    return 4;
-+}
-+#endif
-+
- void x86_cpu_gdb_init(CPUState *cs)
- {
- #ifdef TARGET_X86_64
-@@ -514,4 +533,9 @@ void x86_cpu_gdb_init(CPUState *cs)
-                              gdb_find_static_feature("i386-32bit-linux.xml"));
- #endif
- #endif
-+#ifndef CONFIG_USER_ONLY
-+    gdb_register_coprocessor(cs, x86_gdb_read_segment_limit,
-+                             x86_gdb_write_segment_limit,
-+                             gdb_find_static_feature("i386-segments.xml"));
-+#endif
- }
+The approach taken was iterative as follows
+
+ * Machines listed in
+
+    https://www.qemu.org/docs/master/system/security.html#virtualization-use-case
+
+ * All virtio/vhost/vfio/xen related devices
+
+ * Most PCI related devices/controllers/bridges
+
+I then used the RHEL builds of QEMU as an approximation for
+what should be considered "virtualization use case", since
+they cut out a huge pile of devices from the build. IOW,
+more or less everything that RHEL builds for x86_64, ppc64,
+aarch64, s390x gets included. Notably since RHEL does not
+yet ship riscv or loongarch, I've possibly missed some
+devices that ought to be in scope.
+
+Devices are marked secure *regardless* of their maintainer
+status, if they are relevant to virt. Notably all the USB
+stuff is included despite USB being orphaned. An exception
+is CXL which is arguably relevant to virt, but maintainers
+agreed it is too immature to include so far.
+
+IOW, the "secure" flag as set in this series mostly avoids
+saying anything about the support status of the object types.
+
+Over the long term, IMHO, the set of devices we declare as
+providing a security boundary needs to be stable. We should
+not declare a device out of scope for the virt use case simply
+because a maintainer steps aside. The device doesn't become
+instantly less secure. It does mean bug fixes may not be
+timely enough, and rely on the goodwill of other contributors
+or maintainers to step up and fix.
+
+Or to put it another way. "secure = true" does not guarantee
+that the device is secure, but it states our intent that we
+*want* it to be secure, as opposed to "secure = false" which
+indicates we just don't care either way.
+
+The intersection of (secure, orphaned) highlights to QEMU
+contributors or corporate sponsors, where they might step
+up their effort / investment.
+
+Finally this is just user creatable devices. Use of these
+devices implies use of many more non-user creatable devices.
+
+I don't have a good way to enumerate those yet, and while
+the end user doesn't care at runtime, as maintainers we
+want to be clear if all devices are in scope for CVE
+handling or not.
+
+Based-on: <20260910103628.2326622-1-berrange@redhat.com>
+
+Daniel P. Berrangé (29):
+  hw: mark secure machines for x86, s390, ppc, arm, loonarch, riscv
+  accel: mark kvm and xen accelerators as secure
+  hw: mark all virtio PCI devices as secure
+  hw: mark all virtio CCW devices as secure
+  hw: mark all vhost devices a secure
+  hw: mark all remaining virtio object types as secure
+  hw/vfio: mark all VFIO object classes as secure
+  hw/xen: mark all Xen related object types as being secure
+  hw/net: mark e1000, e1000e, IGB, rtl8139 & sPAPR VLAN as secure
+  hw/usb: mark commonly used USB devices/hosts as secure
+  hw/watchdog: mark some watchdog devices as secure
+  hw/scsi: mark spapr and vmware SCSI controllers as secure
+  hw/scsi: mark SCSI disk endpoint devices as secure
+  hw/ide: mark ICH9 and ide-hd/ide-cd as secure
+  hw: define most common PCI types as secure
+  hw/pci-host: mark common x86, ppc, arm and s390 PCI hosts as secure
+  hw/display: mark bochs, cirrus, qxl, VGA, ramfb as secure
+  hw/tpm: mark all TPM implementations as secure
+  hw/misc: mark pvpanic, vmcoreinfo as secure
+  hw/audio: mark Intel HDA devices & codecs as secure
+  hw/char: mark common serial / console devicess a secure
+  hw/mem: mark nvdimm, pc-dimm & spapr-nvdimm devices as secure
+  hw/uefi: mark the EFI vars service as secure
+  hw/acpi: mark erst, vmclock and vmgenid devices as secure
+  hw: mark KVM clock and RTC devices as secure
+  hw: device AMD, Intel and ARM IOMMUs as secure
+  hw/input: mark PS/2 and PC Keyboard devices as secure
+  hw/i386: mark vmmouse / vmport as secure
+  tests/tcg: improve check for working cross compilers
+
+ accel/accel-common.c                 | 2 ++
+ accel/accel-system.c                 | 1 +
+ accel/kvm/kvm-accel-ops.c            | 1 +
+ accel/kvm/kvm-all.c                  | 1 +
+ accel/xen/xen-all.c                  | 2 ++
+ hw/9pfs/virtio-9p-device.c           | 1 +
+ hw/acpi/erst.c                       | 1 +
+ hw/acpi/vmclock.c                    | 1 +
+ hw/acpi/vmgenid.c                    | 1 +
+ hw/arm/smmu-common.c                 | 1 +
+ hw/arm/smmuv3.c                      | 2 ++
+ hw/arm/virt.c                        | 1 +
+ hw/arm/xen-pvh.c                     | 1 +
+ hw/audio/hda-codec.c                 | 4 ++++
+ hw/audio/intel-hda.c                 | 5 +++++
+ hw/audio/virtio-snd.c                | 1 +
+ hw/block/vhost-user-blk.c            | 1 +
+ hw/block/virtio-blk.c                | 1 +
+ hw/block/xen-block.c                 | 3 +++
+ hw/char/debugcon.c                   | 1 +
+ hw/char/sclpconsole-lm.c             | 1 +
+ hw/char/sclpconsole.c                | 1 +
+ hw/char/serial-isa.c                 | 1 +
+ hw/char/serial-pci.c                 | 1 +
+ hw/char/serial.c                     | 1 +
+ hw/char/spapr_vty.c                  | 1 +
+ hw/char/virtio-console.c             | 2 ++
+ hw/char/virtio-serial-bus.c          | 3 +++
+ hw/char/xen_console.c                | 1 +
+ hw/display/bochs-display.c           | 1 +
+ hw/display/cirrus_vga.c              | 1 +
+ hw/display/qxl.c                     | 3 +++
+ hw/display/ramfb-standalone.c        | 1 +
+ hw/display/vga-mmio.c                | 1 +
+ hw/display/vga-pci.c                 | 3 +++
+ hw/display/vhost-user-gpu.c          | 1 +
+ hw/display/virtio-gpu-base.c         | 3 ++-
+ hw/display/virtio-gpu-gl.c           | 1 +
+ hw/display/virtio-gpu-pci-rutabaga.c | 1 +
+ hw/display/virtio-gpu-pci.c          | 3 ++-
+ hw/display/virtio-gpu-rutabaga.c     | 1 +
+ hw/display/virtio-gpu.c              | 1 +
+ hw/i386/amd_iommu.c                  | 4 +++-
+ hw/i386/intel_iommu.c                | 1 +
+ hw/i386/kvm/clock.c                  | 1 +
+ hw/i386/microvm.c                    | 1 +
+ hw/i386/pc_piix.c                    | 4 ++--
+ hw/i386/vmmouse.c                    | 1 +
+ hw/i386/vmport.c                     | 1 +
+ hw/i386/xen/xen-pvh.c                | 1 +
+ hw/i386/xen/xen_platform.c           | 1 +
+ hw/i386/xen/xen_pvdevice.c           | 1 +
+ hw/ide/ich.c                         | 1 +
+ hw/ide/ide-dev.c                     | 3 +++
+ hw/ide/piix.c                        | 2 ++
+ hw/input/pckbd.c                     | 3 ++-
+ hw/input/ps2.c                       | 9 ++++++---
+ hw/input/virtio-input-hid.c          | 5 +++++
+ hw/input/virtio-input-host.c         | 1 +
+ hw/input/virtio-input.c              | 1 +
+ hw/loongarch/virt.c                  | 2 ++
+ hw/mem/nvdimm.c                      | 1 +
+ hw/mem/pc-dimm.c                     | 1 +
+ hw/misc/pvpanic-isa.c                | 1 +
+ hw/misc/pvpanic-mmio.c               | 1 +
+ hw/misc/pvpanic-pci.c                | 1 +
+ hw/misc/vmcoreinfo.c                 | 1 +
+ hw/net/e1000.c                       | 1 +
+ hw/net/e1000e.c                      | 1 +
+ hw/net/igb.c                         | 1 +
+ hw/net/rtl8139.c                     | 1 +
+ hw/net/spapr_llan.c                  | 1 +
+ hw/net/virtio-net.c                  | 1 +
+ hw/net/xen_nic.c                     | 1 +
+ hw/pci-bridge/gen_pcie_root_port.c   | 1 +
+ hw/pci-bridge/i82801b11.c            | 1 +
+ hw/pci-bridge/ioh3420.c              | 1 +
+ hw/pci-bridge/pci_bridge_dev.c       | 2 ++
+ hw/pci-bridge/pci_expander_bridge.c  | 8 ++++++++
+ hw/pci-bridge/pcie_pci_bridge.c      | 1 +
+ hw/pci-bridge/pcie_root_port.c       | 1 +
+ hw/pci-bridge/xio3130_downstream.c   | 1 +
+ hw/pci-bridge/xio3130_upstream.c     | 1 +
+ hw/pci-host/gpex.c                   | 2 ++
+ hw/pci-host/i440fx.c                 | 2 ++
+ hw/pci-host/pnv_phb.c                | 2 ++
+ hw/pci-host/pnv_phb3.c               | 3 +++
+ hw/pci-host/pnv_phb3_msi.c           | 1 +
+ hw/pci-host/pnv_phb3_pbcq.c          | 1 +
+ hw/pci-host/pnv_phb4.c               | 4 +++-
+ hw/pci-host/pnv_phb4_pec.c           | 1 +
+ hw/pci-host/q35.c                    | 2 ++
+ hw/pci-host/remote.c                 | 1 +
+ hw/pci-host/xen_igd_pt.c             | 1 +
+ hw/pci/pci.c                         | 7 +++++++
+ hw/pci/pci_bridge.c                  | 1 +
+ hw/pci/pci_host.c                    | 1 +
+ hw/pci/pcie_host.c                   | 1 +
+ hw/pci/pcie_port.c                   | 1 +
+ hw/ppc/spapr.c                       | 1 +
+ hw/ppc/spapr_nvdimm.c                | 1 +
+ hw/ppc/spapr_pci.c                   | 1 +
+ hw/ppc/spapr_tpm_proxy.c             | 1 +
+ hw/riscv/virt.c                      | 1 +
+ hw/rtc/mc146818rtc.c                 | 1 +
+ hw/s390x/s390-pci-bus.c              | 4 ++++
+ hw/s390x/s390-virtio-ccw.c           | 1 +
+ hw/s390x/vhost-scsi-ccw.c            | 1 +
+ hw/s390x/vhost-user-fs-ccw.c         | 1 +
+ hw/s390x/vhost-vsock-ccw.c           | 1 +
+ hw/s390x/virtio-ccw-9p.c             | 1 +
+ hw/s390x/virtio-ccw-balloon.c        | 1 +
+ hw/s390x/virtio-ccw-blk.c            | 1 +
+ hw/s390x/virtio-ccw-crypto.c         | 1 +
+ hw/s390x/virtio-ccw-gpu.c            | 1 +
+ hw/s390x/virtio-ccw-input.c          | 5 +++++
+ hw/s390x/virtio-ccw-md.c             | 1 +
+ hw/s390x/virtio-ccw-mem.c            | 1 +
+ hw/s390x/virtio-ccw-net.c            | 1 +
+ hw/s390x/virtio-ccw-rng.c            | 1 +
+ hw/s390x/virtio-ccw-scsi.c           | 1 +
+ hw/s390x/virtio-ccw-serial.c         | 1 +
+ hw/s390x/virtio-ccw.c                | 1 +
+ hw/scsi/scsi-disk.c                  | 4 ++++
+ hw/scsi/scsi-generic.c               | 1 +
+ hw/scsi/spapr_vscsi.c                | 1 +
+ hw/scsi/vhost-scsi-common.c          | 1 +
+ hw/scsi/vhost-scsi.c                 | 1 +
+ hw/scsi/vhost-user-scsi.c            | 1 +
+ hw/scsi/virtio-scsi.c                | 2 ++
+ hw/scsi/vmw_pvscsi.c                 | 1 +
+ hw/tpm/tpm_crb.c                     | 1 +
+ hw/tpm/tpm_spapr.c                   | 1 +
+ hw/tpm/tpm_tis_i2c.c                 | 1 +
+ hw/tpm/tpm_tis_isa.c                 | 1 +
+ hw/tpm/tpm_tis_sysbus.c              | 1 +
+ hw/uefi/var-service-sysbus.c         | 2 ++
+ hw/usb/ccid-card-emulated.c          | 1 +
+ hw/usb/ccid-card-passthru.c          | 1 +
+ hw/usb/dev-hid.c                     | 4 ++++
+ hw/usb/dev-hub.c                     | 1 +
+ hw/usb/dev-smartcard-reader.c        | 3 +++
+ hw/usb/dev-storage-bot.c             | 1 +
+ hw/usb/dev-storage-classic.c         | 1 +
+ hw/usb/dev-storage.c                 | 1 +
+ hw/usb/hcd-ehci-pci.c                | 2 ++
+ hw/usb/hcd-ehci-sysbus.c             | 8 ++++++++
+ hw/usb/hcd-ohci-pci.c                | 1 +
+ hw/usb/hcd-ohci-sysbus.c             | 1 +
+ hw/usb/hcd-uhci.c                    | 2 ++
+ hw/usb/hcd-xhci-nec.c                | 1 +
+ hw/usb/hcd-xhci-pci.c                | 2 ++
+ hw/usb/hcd-xhci-sysbus.c             | 3 ++-
+ hw/usb/hcd-xhci.c                    | 1 +
+ hw/usb/host-libusb.c                 | 1 +
+ hw/usb/redirect.c                    | 1 +
+ hw/vfio-user/pci.c                   | 1 +
+ hw/vfio/ap.c                         | 1 +
+ hw/vfio/ccw.c                        | 1 +
+ hw/vfio/container.c                  | 1 +
+ hw/vfio/igd.c                        | 1 +
+ hw/vfio/iommufd.c                    | 2 ++
+ hw/vfio/pci.c                        | 3 +++
+ hw/vfio/spapr.c                      | 1 +
+ hw/virtio/vdpa-dev.c                 | 1 +
+ hw/virtio/vhost-user-base.c          | 3 ++-
+ hw/virtio/vhost-user-fs.c            | 1 +
+ hw/virtio/vhost-user-gpio.c          | 1 +
+ hw/virtio/vhost-user-i2c.c           | 1 +
+ hw/virtio/vhost-user-input.c         | 1 +
+ hw/virtio/vhost-user-rng.c           | 1 +
+ hw/virtio/vhost-user-rtc.c           | 1 +
+ hw/virtio/vhost-user-scmi.c          | 1 +
+ hw/virtio/vhost-user-snd.c           | 1 +
+ hw/virtio/vhost-user-spi.c           | 1 +
+ hw/virtio/vhost-user-test-device.c   | 1 +
+ hw/virtio/vhost-user-vsock.c         | 1 +
+ hw/virtio/vhost-vsock-common.c       | 1 +
+ hw/virtio/vhost-vsock.c              | 1 +
+ hw/virtio/virtio-balloon.c           | 1 +
+ hw/virtio/virtio-bus.c               | 1 +
+ hw/virtio/virtio-crypto.c            | 1 +
+ hw/virtio/virtio-input-pci.c         | 2 ++
+ hw/virtio/virtio-iommu.c             | 2 ++
+ hw/virtio/virtio-md-pci.c            | 1 +
+ hw/virtio/virtio-mem.c               | 1 +
+ hw/virtio/virtio-mmio.c              | 2 ++
+ hw/virtio/virtio-nsm.c               | 1 +
+ hw/virtio/virtio-pci.c               | 3 +++
+ hw/virtio/virtio-pmem.c              | 1 +
+ hw/virtio/virtio-rng.c               | 1 +
+ hw/virtio/virtio-rtc.c               | 1 +
+ hw/watchdog/sbsa_gwdt.c              | 1 +
+ hw/watchdog/spapr_watchdog.c         | 1 +
+ hw/watchdog/wdt_diag288.c            | 1 +
+ hw/watchdog/wdt_i6300esb.c           | 1 +
+ hw/watchdog/wdt_ib700.c              | 1 +
+ hw/xen/xen-bus.c                     | 3 +++
+ hw/xen/xen-legacy-backend.c          | 3 +++
+ hw/xen/xen-pvh-common.c              | 1 +
+ hw/xen/xen_pt.c                      | 1 +
+ hw/xenpv/xen_machine_pv.c            | 2 +-
+ include/hw/i386/pc.h                 | 1 +
+ tests/tcg/test_cc.c                  | 6 +++++-
+ 204 files changed, 309 insertions(+), 14 deletions(-)
 
 -- 
-2.55.0.543.g5ebe2ebe4ea8
+2.55.0
 
 
