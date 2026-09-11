@@ -4,111 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2971C88E50
-	for <qemu-riscv@archiver.kernel.org>; Fri, 11 Sep 2026 15:29:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 445CBC88E53
+	for <qemu-riscv@archiver.kernel.org>; Fri, 11 Sep 2026 16:39:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x53Bd-00084r-IE; Fri, 11 Sep 2026 11:29:09 -0400
+	id 1x54HC-0002DW-PB; Fri, 11 Sep 2026 12:38:59 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1x53Bb-00082d-4s
- for qemu-riscv@nongnu.org; Fri, 11 Sep 2026 11:29:07 -0400
-Received: from mail-wm1-x336.google.com ([2a00:1450:4864:20::336])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1x53BZ-00078S-0a
- for qemu-riscv@nongnu.org; Fri, 11 Sep 2026 11:29:06 -0400
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-49cf4f81d86so8234445e9.2
- for <qemu-riscv@nongnu.org>; Fri, 11 Sep 2026 08:29:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1789140543; x=1789745343; darn=nongnu.org;
- h=content-transfer-encoding:content-type:mime-version:message-id:date
- :user-agent:references:in-reply-to:subject:cc:to:from:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=Wktg2NIF1Fa70Y3y2YTMPvNs4JtDueHegwGtUlwhlYU=;
- b=Qy9QGXNEEiS0KPdL9mzw0oXh2fNx/ZyGfK16elitb08UczZhrSczDAzcyItYgk/o3m
- BbVclYwSK1Sv14l/qErk1Lz84/i6yfapTYvtX8r57T8WrOiEwIwSJo+VUCkaIbs6eBIC
- MWYHethVtltQhtxJ59qixl1ffnMe0HxwUH6ApqHx79Iv5z8+l/aBvQ2boA4JDu9jvMyZ
- g2ODOZKmo1mxTCN/D2TIM6OY6khQ2P2hbez4By9AyxSpglWVZHeT2ln3b5n3pEif7smI
- 1fekH0DaCbnzFJZ4n5qV4IrJgh+aZqK1Emt4K/QLmzQuCtjjkDstv0pCO99sVJGtlCTa
- hZ5g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1789140543; x=1789745343;
- h=content-transfer-encoding:content-type:mime-version:message-id:date
- :user-agent:references:in-reply-to:subject:cc:to:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=Wktg2NIF1Fa70Y3y2YTMPvNs4JtDueHegwGtUlwhlYU=;
- b=MEqPj6bUkKIW/rrTAXISloWC9r4ZBHd1UQPzEFbN2vB0YmZsrFmStf8GYpFifzKKxS
- T/gFxcFtI/ueMsiZHofiZ07Ql1rqu7gSK70bjGIYJFXEpWLL//hTzcQzot3OTXWG4TQK
- AKNvbVQ1M9sNwXGiv9aSbOqfCTdPA5HDqtuu5rt+C5xB5FX8+ESexacXKJ4nViYDGHg9
- 4Ee/fMi31LMJ1Jp7nD6b8mB2AebLN0TVwXqt6YzyoZQInPORRciHmI9mp/NP7lt+JVLm
- 7oavDCkP7Lidy9E/6YJqpyYvKMYjRw3vLABV/xwQ+sO3WrDnUx5k/LwCYPT5LTrf3VEo
- sUow==
-X-Forwarded-Encrypted: i=1;
- AKwUvBzqgPkufzEus8tVjkyuuSQNCWyYtTLZIvUIMdmOTo1O3LM3FWwTFdmCYFGW6UHUFKlA/s5Wha/lt540@nongnu.org
-X-Gm-Message-State: AFuF++ni/aLaTMrTX5CvhfI77o2m7lVrF4a41CxnacEyAb9mcwMDAdCi
- k3GeNyVlU49Ul2J7yNg+MynItr/D04aGLAku7RWJQJLXS9SXz3ni4EcAFz4cFUuN7Q8=
-X-Gm-Gg: AYBFou36HyM54GrfmpHq33ZNxuCTRt80QJZQ1dOuERW0gy0uAfFowxy/+e/utLiL/tV
- iplnLpJvUB7+SQ1lzVqEIS0p1R9pNEO8ZA1ouz2IWX79jvZ8Xgs1GPVmZn2VROMpNR4lITGP/zk
- /RJTdKT/9NB9qShue6NPhPYUxFDFBsiPVb3ClOEpIcEe/8F1UDC1kI4c6VAPl+qxpGj1a6YvAT1
- mbiPktJN/ONpfqCWp+Bfs3VtjEWlan4VpAQ6ubCeglWi/mWABS/TItxni38kfyCAacMi4xRP0z5
- Xu4/0nYnC9HE2uUpelGHLAgUXEa+53IcMOr3CvgVeQcJxZbWSh/S6FfCve+vaNA7fOk406lhvN1
- GxZgP3xY+/6Xc7RWh5LtKLNkPLrz6XPuFgWzRqHyR1sAq06SE/LbDBTVrhhVyu0ycsBfg4f5MSF
- +ee8YWkTPVPztgx1pC+TnvCo5thMVyHl8oArbriAxS4BzGH4FucWW5fU38RGVMmFRyVQNDoLo=
-X-Received: by 2002:a05:600c:3104:b0:49c:eb16:9fd with SMTP id
- 5b1f17b1804b1-49e6197f6f6mr58755395e9.3.1789140542646; 
- Fri, 11 Sep 2026 08:29:02 -0700 (PDT)
-Received: from draig.lan ([185.124.0.156]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49e62232cb7sm57280125e9.4.2026.09.11.08.29.01
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 11 Sep 2026 08:29:01 -0700 (PDT)
-Received: from draig (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 79ACE5F856;
- Fri, 11 Sep 2026 16:29:00 +0100 (BST)
-From: =?utf-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: =?utf-8?Q?Marc-Andr=C3=A9?= Lureau <marcandre.lureau@redhat.com>
-Cc: qemu-devel@nongnu.org,  "Dr. David Alan Gilbert" <dave@treblig.org>,
- Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,  Zhao
- Liu
- <zhao1.liu@intel.com>,  Peter Maydell <peter.maydell@linaro.org>,  Chinmay
- Rath <rathc@linux.ibm.com>,  Nicholas Piggin <npiggin@gmail.com>,  Glenn
- Miles <milesg@linux.ibm.com>,  Harsh Prateek Bora <harshpb@linux.ibm.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,  Alistair Francis
- <alistair.francis@wdc.com>,  Weiwei Li <liwei1518@gmail.com>,  Daniel
- Henrique Barboza <daniel.barboza@oss.qualcomm.com>,  Liu Zhiwei
- <zhiwei_liu@linux.alibaba.com>,  Chao Liu <chao.liu@processmission.com>,
- Max Filippov <jcmvbkbc@gmail.com>,  qemu-arm@nongnu.org,
- qemu-ppc@nongnu.org,  qemu-riscv@nongnu.org,  Paolo Bonzini
- <pbonzini@redhat.com>,  Laurent Vivier <laurent@vivier.eu>,  Mark
- Cave-Ayland <mark.cave-ayland@ilande.co.uk>,  Artyom Tarasenko
- <atar4qemu@gmail.com>,  Helge Deller <deller@gmx.de>,  Pierrick Bouvier
- <pierrick.bouvier@oss.qualcomm.com>,  Warner Losh <imp@bsdimp.com>,  Kyle
- Evans <kevans@freebsd.org>
-Subject: Re: [PATCH 02/10] gdbstub: fix next register base after register gaps
-In-Reply-To: <20260911-query-reg-v1-2-0c04f0c02cf3@redhat.com>
- (=?utf-8?Q?=22Marc-Andr=C3=A9?=
- Lureau"'s message of "Fri, 11 Sep 2026 16:27:25 +0400")
-References: <20260911-query-reg-v1-0-0c04f0c02cf3@redhat.com>
- <20260911-query-reg-v1-2-0c04f0c02cf3@redhat.com>
-User-Agent: mu4e 1.14.4-pre2; emacs 30.1
-Date: Fri, 11 Sep 2026 16:29:00 +0100
-Message-ID: <87fqzf958j.fsf@draig.linaro.org>
+ (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
+ id 1x54HA-0001xC-2y
+ for qemu-riscv@nongnu.org; Fri, 11 Sep 2026 12:38:56 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
+ id 1x54H8-0006Zg-8p
+ for qemu-riscv@nongnu.org; Fri, 11 Sep 2026 12:38:55 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1789144733;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=19eU8BkbUT5yPnSB94y+jaPCOhQJnzr2y1t5c/eQStM=;
+ b=CcwPt8YvXLisnCnFr125CgIO+ki1PJh4bUsZmyhVziOoTGlpbDGfzGjAc97oA+EGYMN8qS
+ DcsIp6D6UmPIcAHNcVyg4HnDn1SU5FtKqunndKz8K08EoUTup0JYkPbS1J5kChyg0ZcVN0
+ S43m8cV0csB8RTziRq7+txgmG0EPFw4=
+Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-617-wA26IdLwMUGcGxU7dGNe7Q-1; Fri,
+ 11 Sep 2026 12:38:50 -0400
+X-MC-Unique: wA26IdLwMUGcGxU7dGNe7Q-1
+X-Mimecast-MFC-AGG-ID: wA26IdLwMUGcGxU7dGNe7Q_1789144728
+Received: from mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.17])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 2BA72195394F; Fri, 11 Sep 2026 16:38:48 +0000 (UTC)
+Received: from localhost (headnet05.pony-001.prod.iad2.dc.redhat.com
+ [10.2.32.117])
+ by mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id 3FF601956095; Fri, 11 Sep 2026 16:38:46 +0000 (UTC)
+From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
+Date: Fri, 11 Sep 2026 20:34:56 +0400
+Subject: [PATCH v5 22/62] riscv/virt: convert OnOffAuto properties to
+ QAPI-aware registration
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::336;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x336.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Message-Id: <20260911-qom-qapi-v5-22-7732a55b7760@redhat.com>
+References: <20260911-qom-qapi-v5-0-7732a55b7760@redhat.com>
+In-Reply-To: <20260911-qom-qapi-v5-0-7732a55b7760@redhat.com>
+To: qemu-devel@nongnu.org
+Cc: Markus Armbruster <armbru@redhat.com>, 
+ Paolo Bonzini <pbonzini@redhat.com>, 
+ =?utf-8?q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
+ =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>, 
+ Michael Roth <michael.roth@amd.com>, 
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, 
+ =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3984;
+ i=marcandre.lureau@redhat.com; h=from:subject:message-id;
+ bh=gJqAR7C1ceK/clyg5x7Xek2bQLsqUAtpTSiuYb1BSc4=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBqpC24yzqUZ3EHbMnlCeQ9GOXJ/XMe8gvIBIoot
+ 0K75RJFVkeJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCaqQtuAAKCRDa6OEJdZac
+ 5WE9D/42hinWD4kXRYlhmTcygrq7jkdDpOi3LBx0VMFHZqMvK+VlECWtzuhy3SEwZibLJqPVnet
+ 8WgQob7iV0/YJZ3n65yHYD8i6pSNBiX7rOOuAnIeXQNo40DR6lIfCRpb/PwS5vBs2Y/uP/RjrEO
+ 8l07Miglv4HcZ0FaAjhprcQ9mRrhdYTxFay1CDt1UTNWJ9egUZfV17LAghY29PfbHsUfmBFQeVP
+ SgKf9vn1CZmRkrfvVa27dPBqNRY0ie3GeT4ByByJvFb5Xr7bM4D2ej+CPMLhLXI0hXmUZBHACsW
+ EpFozP2BjbArNtx9U1mlK44uFqEjL5W+NjanAR9MzeifvAwi+i/fRMBuqbqJsjNGRNy2kgZkA2y
+ B7ioondUHh+tJzQnPggQGV7Md529VSriwpEGj5nsjo9ck/nCDVLogQLo9vuGPVRizOAjQmSPxUR
+ jbbFNJozsmWPXlHRmR/GwuWqKPDHbXCwadryyFTfgiSTXl9yYCeAzxhpejwkJmOGPf9BvIzXeoS
+ uhY0z01eJqmOrORmxf1+oVrzvY0V6aWe4vig54YSBTFRAv4mqdyXIB84RJHo/meeiIkHFSRhJFB
+ VcGQ3ep687BBHQuUyDdIwVV8ZtfKeFTmRlAuzM+S8/obq23Ne/0ggKUHtF+qtPFClx8OzbK88a2
+ 6QAieOzHyDnFrtQ==
+X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
+ fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
+X-Scanned-By: MIMEDefang 3.0 on 10.30.177.17
+X-Mimecast-MFC-PROC-ID: 3zWuVPvaNZWXZDkg5n5-tpdR5Wes5riiiMPz-B2MGW8_1789144728
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=170.10.129.124;
+ envelope-from=marcandre.lureau@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: 12
+X-Spam_score: 1.2
+X-Spam_bar: +
+X-Spam_report: (1.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=0.001, RCVD_IN_SBL_CSS=3.335,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -124,236 +118,114 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com> writes:
+Convert the acpi and iommu-sys OnOffAuto properties from manual
+visitor-based callbacks to property_add_qapi_enum().
 
-> Commit b3e88abb200c ("gdbstub: Consider GDBFeature::base_reg in
-> gdb_register_coprocessor()") identified that register numbers may
-> have gaps. We also need to adjust the next base_reg correctly
-> to avoid overlapping registers. Rename the field to be more
-> explicit about its usage.
->
-> Signed-off-by: Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com>
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
+---
+ hw/riscv/virt.c | 52 +++++++++++++++++++++++-----------------------------
+ 1 file changed, 23 insertions(+), 29 deletions(-)
 
-Acked-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index f3a1cc5ba33e..5e407a069db8 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -57,7 +57,7 @@
+ #include "hw/pci-host/gpex.h"
+ #include "hw/display/ramfb.h"
+ #include "hw/acpi/aml-build.h"
+-#include "qapi/qapi-visit-common.h"
++#include "qapi/qapi-type-infos-common.h"
+ #include "hw/virtio/virtio-iommu.h"
+ #include "hw/uefi/var-service-api.h"
+ 
+@@ -1049,21 +1049,16 @@ bool virt_is_iommu_sys_enabled(RISCVVirtState *s)
+     return s->iommu_sys == ON_OFF_AUTO_ON;
+ }
+ 
+-static void virt_get_iommu_sys(Object *obj, Visitor *v, const char *name,
+-                               void *opaque, Error **errp)
++static int virt_get_iommu_sys(Object *obj, Error **errp)
+ {
+     RISCVVirtState *s = RISCV_VIRT_MACHINE(obj);
+-    OnOffAuto iommu_sys = s->iommu_sys;
+-
+-    visit_type_OnOffAuto(v, name, &iommu_sys, errp);
++    return s->iommu_sys;
+ }
+ 
+-static void virt_set_iommu_sys(Object *obj, Visitor *v, const char *name,
+-                               void *opaque, Error **errp)
++static void virt_set_iommu_sys(Object *obj, int value, Error **errp)
+ {
+     RISCVVirtState *s = RISCV_VIRT_MACHINE(obj);
+-
+-    visit_type_OnOffAuto(v, name, &s->iommu_sys, errp);
++    s->iommu_sys = value;
+ }
+ 
+ bool virt_is_acpi_enabled(RISCVVirtState *s)
+@@ -1071,21 +1066,16 @@ bool virt_is_acpi_enabled(RISCVVirtState *s)
+     return s->acpi != ON_OFF_AUTO_OFF;
+ }
+ 
+-static void virt_get_acpi(Object *obj, Visitor *v, const char *name,
+-                          void *opaque, Error **errp)
++static int virt_get_acpi(Object *obj, Error **errp)
+ {
+     RISCVVirtState *s = RISCV_VIRT_MACHINE(obj);
+-    OnOffAuto acpi = s->acpi;
+-
+-    visit_type_OnOffAuto(v, name, &acpi, errp);
++    return s->acpi;
+ }
+ 
+-static void virt_set_acpi(Object *obj, Visitor *v, const char *name,
+-                          void *opaque, Error **errp)
++static void virt_set_acpi(Object *obj, int value, Error **errp)
+ {
+     RISCVVirtState *s = RISCV_VIRT_MACHINE(obj);
+-
+-    visit_type_OnOffAuto(v, name, &s->acpi, errp);
++    s->acpi = value;
+ }
+ 
+ static HotplugHandler *virt_machine_get_hotplug_handler(MachineState *machine,
+@@ -1183,17 +1173,21 @@ static void virt_machine_class_init(ObjectClass *oc, const void *data)
+         object_class_property_set_description(oc, "aia-guests", str);
+     }
+ 
+-    object_class_property_add(oc, "acpi", "OnOffAuto",
+-                              virt_get_acpi, virt_set_acpi,
+-                              NULL, NULL);
+-    object_class_property_set_description(oc, "acpi",
+-                                          "Enable ACPI");
++    object_class_property_add_qapi_enum(oc, QAPI_ENUM_PROP(
++        .name = "acpi",
++        .description = "Enable ACPI",
++        .qapi_type = &OnOffAuto_type_info,
++        .get = virt_get_acpi,
++        .set = virt_set_acpi,
++    ));
+ 
+-    object_class_property_add(oc, "iommu-sys", "OnOffAuto",
+-                              virt_get_iommu_sys, virt_set_iommu_sys,
+-                              NULL, NULL);
+-    object_class_property_set_description(oc, "iommu-sys",
+-                                          "Enable IOMMU platform device");
++    object_class_property_add_qapi_enum(oc, QAPI_ENUM_PROP(
++        .name = "iommu-sys",
++        .description = "Enable IOMMU platform device",
++        .qapi_type = &OnOffAuto_type_info,
++        .get = virt_get_iommu_sys,
++        .set = virt_set_iommu_sys,
++    ));
+ }
+ 
+ static const TypeInfo virt_machine_typeinfo = {
 
-> ---
->  gdbstub/gdbstub.c      | 13 ++++++-------
->  include/hw/core/cpu.h  |  2 +-
->  target/arm/gdbstub.c   |  8 +++++---
->  target/arm/gdbstub64.c | 10 ++++++----
->  target/ppc/gdbstub.c   |  2 +-
->  target/riscv/gdbstub.c |  9 ++++++---
->  target/xtensa/cpu.c    |  2 +-
->  7 files changed, 26 insertions(+), 20 deletions(-)
->
-> diff --git a/gdbstub/gdbstub.c b/gdbstub/gdbstub.c
-> index 0a328b0dd488..0ce871d74929 100644
-> --- a/gdbstub/gdbstub.c
-> +++ b/gdbstub/gdbstub.c
-> @@ -605,13 +605,13 @@ void gdb_init_cpu(CPUState *cpu)
->          gdb_register_feature(cpu, 0,
->                               cc->gdb_read_register, cc->gdb_write_regist=
-er,
->                               feature);
-> -        cpu->gdb_num_regs =3D cpu->gdb_num_g_regs =3D feature->num_regs;
-> +        cpu->gdb_next_base_reg =3D cpu->gdb_num_g_regs =3D feature->num_=
-regs;
->      } else {
-> -        cpu->gdb_num_regs =3D cpu->gdb_num_g_regs =3D cc->gdb_num_core_r=
-egs;
-> +        cpu->gdb_next_base_reg =3D cpu->gdb_num_g_regs =3D cc->gdb_num_c=
-ore_regs;
->      }
->=20=20
->      trace_gdbxml_init_cpu(object_get_typename(OBJECT(cpu)), cpu->cpu_ind=
-ex,
-> -                          cpu->gdb_num_regs, cpu->gdb_num_g_regs,
-> +                          cpu->gdb_next_base_reg, cpu->gdb_num_g_regs,
->                            cc->gdb_num_core_regs);
->  }
->=20=20
-> @@ -621,7 +621,7 @@ void gdb_register_coprocessor(CPUState *cpu,
->  {
->      GDBRegisterState *s;
->      guint i;
-> -    int base_reg =3D cpu->gdb_num_regs;
-> +    int base_reg =3D cpu->gdb_next_base_reg;
->=20=20
->      for (i =3D 0; i < cpu->gdb_regs->len; i++) {
->          /* Check for duplicates.  */
-> @@ -639,7 +639,7 @@ void gdb_register_coprocessor(CPUState *cpu,
->      gdb_register_feature(cpu, base_reg, get_reg, set_reg, feature);
->=20=20
->      /* Add to end of list.  */
-> -    cpu->gdb_num_regs +=3D feature->num_regs;
-> +    cpu->gdb_next_base_reg =3D base_reg + feature->num_regs;
->  }
->=20=20
->  void gdb_unregister_coprocessor_all(CPUState *cpu)
-> @@ -651,7 +651,7 @@ void gdb_unregister_coprocessor_all(CPUState *cpu)
->      g_array_free(cpu->gdb_regs, true);
->=20=20
->      cpu->gdb_regs =3D NULL;
-> -    cpu->gdb_num_regs =3D 0;
-> +    cpu->gdb_next_base_reg =3D 0;
->      cpu->gdb_num_g_regs =3D 0;
->  }
->=20=20
-> @@ -2522,4 +2522,3 @@ void gdb_create_default_process(GDBState *s)
->      process->attached =3D false;
->      process->target_xml =3D NULL;
->  }
-> -
-> diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
-> index 328e30045ce1..02212f555c2e 100644
-> --- a/include/hw/core/cpu.h
-> +++ b/include/hw/core/cpu.h
-> @@ -521,7 +521,7 @@ struct CPUState {
->      struct CPUJumpCache *tb_jmp_cache;
->=20=20
->      GArray *gdb_regs;
-> -    int gdb_num_regs;
-> +    int gdb_next_base_reg;
->      int gdb_num_g_regs;
->      QTAILQ_ENTRY(CPUState) node;
->=20=20
-> diff --git a/target/arm/gdbstub.c b/target/arm/gdbstub.c
-> index d6e29c4cf467..e5cbe4d951ef 100644
-> --- a/target/arm/gdbstub.c
-> +++ b/target/arm/gdbstub.c
-> @@ -555,19 +555,21 @@ void arm_cpu_register_gdb_regs_for_features(ARMCPU =
-*cpu)
->          gdb_register_coprocessor(cs, mve_gdb_get_reg, mve_gdb_set_reg,
->                                   gdb_find_static_feature("arm-m-profile-=
-mve.xml"));
->      }
-> +    GDBFeature *feature =3D
-> +        arm_gen_dynamic_sysreg_feature(cs, cs->gdb_next_base_reg);
->      gdb_register_coprocessor(cs, arm_gdb_get_sysreg, arm_gdb_set_sysreg,
-> -                             arm_gen_dynamic_sysreg_feature(cs, cs->gdb_=
-num_regs));
-> +                             feature);
->=20=20
->  #ifdef CONFIG_TCG
->      if (arm_feature(env, ARM_FEATURE_M) && tcg_enabled()) {
->          gdb_register_coprocessor(cs,
->              arm_gdb_get_m_systemreg, arm_gdb_set_m_systemreg,
-> -            arm_gen_dynamic_m_systemreg_feature(cs, cs->gdb_num_regs));
-> +            arm_gen_dynamic_m_systemreg_feature(cs, cs->gdb_next_base_re=
-g));
->  #ifndef CONFIG_USER_ONLY
->          if (arm_feature(env, ARM_FEATURE_M_SECURITY)) {
->              gdb_register_coprocessor(cs,
->                  arm_gdb_get_m_secextreg, arm_gdb_set_m_secextreg,
-> -                arm_gen_dynamic_m_secextreg_feature(cs, cs->gdb_num_regs=
-));
-> +                arm_gen_dynamic_m_secextreg_feature(cs, cs->gdb_next_bas=
-e_reg));
->          }
->  #endif
->      }
-> diff --git a/target/arm/gdbstub64.c b/target/arm/gdbstub64.c
-> index 0c3e5b30bd6a..cf5b95b54641 100644
-> --- a/target/arm/gdbstub64.c
-> +++ b/target/arm/gdbstub64.c
-> @@ -885,7 +885,8 @@ void aarch64_cpu_register_gdb_regs_for_features(ARMCP=
-U *cpu)
->      CPUState *cs =3D CPU(cpu);
->      if (isar_feature_aa64_sve(&cpu->isar) ||
->          isar_feature_aa64_sme(&cpu->isar)) {
-> -        GDBFeature *feature =3D arm_gen_dynamic_svereg_feature(cs, cs->g=
-db_num_regs);
-> +        GDBFeature *feature =3D
-> +            arm_gen_dynamic_svereg_feature(cs, cs->gdb_next_base_reg);
->          gdb_register_coprocessor(cs, aarch64_gdb_get_sve_reg,
->                                   aarch64_gdb_set_sve_reg, feature);
->      } else {
-> @@ -896,7 +897,7 @@ void aarch64_cpu_register_gdb_regs_for_features(ARMCP=
-U *cpu)
->=20=20
->      if (isar_feature_aa64_sme(&cpu->isar)) {
->          GDBFeature *sme_feature =3D
-> -            arm_gen_dynamic_smereg_feature(cs, cs->gdb_num_regs);
-> +            arm_gen_dynamic_smereg_feature(cs, cs->gdb_next_base_reg);
->          gdb_register_coprocessor(cs, aarch64_gdb_get_sme_reg,
->                                   aarch64_gdb_set_sme_reg, sme_feature);
->          if (isar_feature_aa64_sme2(&cpu->isar)) {
-> @@ -927,7 +928,8 @@ void aarch64_cpu_register_gdb_regs_for_features(ARMCP=
-U *cpu)
->  #endif
->=20=20
->      /* All AArch64 CPUs have at least TPIDR */
-> +    GDBFeature *tls_feature =3D
-> +        arm_gen_dynamic_tls_feature(cs, cs->gdb_next_base_reg);
->      gdb_register_coprocessor(cs, aarch64_gdb_get_tls_reg,
-> -                             aarch64_gdb_set_tls_reg,
-> -                             arm_gen_dynamic_tls_feature(cs, cs->gdb_num=
-_regs));
-> +                             aarch64_gdb_set_tls_reg, tls_feature);
->  }
-> diff --git a/target/ppc/gdbstub.c b/target/ppc/gdbstub.c
-> index 4d622c5cad59..ec25c541c685 100644
-> --- a/target/ppc/gdbstub.c
-> +++ b/target/ppc/gdbstub.c
-> @@ -206,7 +206,7 @@ static void gdb_gen_spr_feature(CPUState *cs)
->=20=20
->      gdb_feature_builder_init(&builder, &pcc->gdb_spr,
->                               "org.qemu.power.spr", "power-spr.xml",
-> -                             cs->gdb_num_regs);
-> +                             cs->gdb_next_base_reg);
->=20=20
->      for (i =3D 0; i < ARRAY_SIZE(env->spr_cb); i++) {
->          ppc_spr_t *spr =3D &env->spr_cb[i];
-> diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
-> index 9abbf5bcdf0e..f279f4ab2461 100644
-> --- a/target/riscv/gdbstub.c
-> +++ b/target/riscv/gdbstub.c
-> @@ -348,9 +348,10 @@ void riscv_cpu_register_gdb_regs_for_features(CPUSta=
-te *cs)
->                                   gdb_find_static_feature("riscv-32bit-fp=
-u.xml"));
->      }
->      if (cpu->cfg.ext_zve32x) {
-> +        GDBFeature *feature =3D
-> +            ricsv_gen_dynamic_vector_feature(cs, cs->gdb_next_base_reg);
->          gdb_register_coprocessor(cs, riscv_gdb_get_vector,
-> -                                 riscv_gdb_set_vector,
-> -                                 ricsv_gen_dynamic_vector_feature(cs, cs=
-->gdb_num_regs));
-> +                                 riscv_gdb_set_vector, feature);
->      }
->=20=20
->  #ifdef CONFIG_TCG
-> @@ -373,8 +374,10 @@ void riscv_cpu_register_gdb_regs_for_features(CPUSta=
-te *cs)
->      }
->=20=20
->      if (cpu->cfg.ext_zicsr) {
-> +        GDBFeature *feature =3D
-> +            riscv_gen_dynamic_csr_feature(cs, cs->gdb_next_base_reg);
->          gdb_register_coprocessor(cs, riscv_gdb_get_csr, riscv_gdb_set_cs=
-r,
-> -                                 riscv_gen_dynamic_csr_feature(cs, cs->g=
-db_num_regs));
-> +                                 feature);
->      }
->  #endif
->  }
-> diff --git a/target/xtensa/cpu.c b/target/xtensa/cpu.c
-> index 7c25b9ab707a..48863a1859d4 100644
-> --- a/target/xtensa/cpu.c
-> +++ b/target/xtensa/cpu.c
-> @@ -263,7 +263,7 @@ static void xtensa_cpu_realizefn(DeviceState *dev, Er=
-ror **errp)
->          return;
->      }
->=20=20
-> -    cs->gdb_num_regs =3D xcc->config->gdb_regmap.num_regs;
-> +    cs->gdb_next_base_reg =3D xcc->config->gdb_regmap.num_regs;
->=20=20
->      qemu_init_vcpu(cs);
+-- 
+2.55.0.543.g5ebe2ebe4ea8
 
---=20
-Alex Benn=C3=A9e
-Virtualisation Tech Lead @ Linaro
 
