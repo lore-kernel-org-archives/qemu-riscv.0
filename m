@@ -4,131 +4,116 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D5F1C88E41
-	for <qemu-riscv@archiver.kernel.org>; Fri, 11 Sep 2026 05:49:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED17CC88E54
+	for <qemu-riscv@archiver.kernel.org>; Fri, 11 Sep 2026 09:03:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x4u8s-0000nQ-9U; Fri, 11 Sep 2026 01:49:42 -0400
+	id 1x4x8v-0001xX-Rl; Fri, 11 Sep 2026 05:01:57 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <chao.liu@processmission.com>)
- id 1x4u8q-0000mf-ER; Fri, 11 Sep 2026 01:49:40 -0400
-Received: from mail-japaneastazlp170120005.outbound.protection.outlook.com
- ([2a01:111:f403:c405::5] helo=TYPPR03CU001.outbound.protection.outlook.com)
+ (Exim 4.90_1) (envelope-from <mst@redhat.com>) id 1x4x8s-0001tQ-6i
+ for qemu-riscv@nongnu.org; Fri, 11 Sep 2026 05:01:54 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <chao.liu@processmission.com>)
- id 1x4u8n-0007X6-6x; Fri, 11 Sep 2026 01:49:40 -0400
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=WT/iGfxvP7vpbgN4JbD6a1E8lrhh3BHonRdqyZkkB0ANoqPp9BZTEQJGtgoj71N6SbfwZP2ZudqT2j+T3M+LZ571IiImIzbsMmh1IUdjUikGUlIxkoURZuNsZXuiY8nFr9yT3LGJvMurX0942jX9rH3aMMtPyTrGz/yvWdXNudd5s06F1L6jYAuYF2673ajQUi1oAeD7gkisZOK+Lrj6tcLz0LpHK97clvuHMj+84OJ7wVYESDc50GUoRPI6Rx4NRqXuggSy+n1LKHnIEt+/O2QZfm00qWp16bJ6lDgl5c4/6JzN/0jUrNCiQ87r05eGEaNgg+674KDUHRkvMfuQDg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=fxRTNYPoVUQ7l52tFQGiSnpSL9BZpXe9reOzXeH3IWQ=;
- b=LBG3crKjnAsXP7tRA3mAiUWnhSS8fNYCnn0e+QRN8k0E5KfYABszz7TC49ayN4mFwyuDRacw60QImjroN6FrQnoNouA23sR+STXMu0PgdCMJNr3BB3hkZCBkBMyl9LSH+rycyr06RT+7N3HlG6tJ02mFg39Yl6DuvbCfM7dUroUkDuTUltJ3fr38oUiW8FRB9H07/dSYCm+NRZcZzTBj0PJQZ0UAeNPpTOgYYixFqK1IZ8ZIc6ByL7W7bKJRORmCJawGX/ctVD9v42mLkqKYK3+O7xV+ezYZENquJYEvN+1tHy1u63hSy3WvkWweEFyp284PHxAUmI8jaglZMzsVvQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=processmission.com; dmarc=pass action=none
- header.from=processmission.com; dkim=pass header.d=processmission.com;
- arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=processmission.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=fxRTNYPoVUQ7l52tFQGiSnpSL9BZpXe9reOzXeH3IWQ=;
- b=penTdBXbSio5LAVt8mFQwi8qAPSMCzdj/VpRqhOlocyrZVdu1rQeMKesK5/qNAOqw5mw0hSOxC1Mmh4FXgMjnGMR8ASqkFP2uuzRmSi8ybWFRtOqfAfnNWsYwxH+gS4Ia1m+HltCuTgmHmkmqtTsBAApU7dPg0QJBw8k9ufU9s/KUNU9yxyiXKFujnknFc0PwaNWm2mn5Js6jHonNdrmlYa4xaCavwQyMNb60EqMaN4LCmXd7T4gZldqJYdYOziXIIgLjiJhdsrHGQ6HaTdTcTkFoCpPG2bBIHk+NbcIsVA7mijPcVuMkjPsl7/O+LP5LJyRUjRZCZoGzAJUORXC7w==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=processmission.com;
-Received: from TYNPR02MB9351.apcprd02.prod.outlook.com (2603:1096:405:3d0::15)
- by SEYPR02MB9063.apcprd02.prod.outlook.com (2603:1096:101:301::18)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.9; Fri, 11 Sep
- 2026 05:49:29 +0000
-Received: from TYNPR02MB9351.apcprd02.prod.outlook.com
- ([fe80::e5f3:5fb7:3d29:5934]) by TYNPR02MB9351.apcprd02.prod.outlook.com
- ([fe80::e5f3:5fb7:3d29:5934%6]) with mapi id 15.21.0406.007; Fri, 11 Sep 2026
- 05:49:28 +0000
-Date: Fri, 11 Sep 2026 13:49:23 +0800
-From: Chao Liu <chao.liu@processmission.com>
-To: Max Chou <max.chou@sifive.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
- richard.henderson@linaro.org, Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, Weiwei Li <liwei1518@gmail.com>, 
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Subject: Re: [PATCH 3/6] tests/tcg/riscv64: Add vector masked
- fault-only-first PMP test
-Message-ID: <aqOSwMCX5UsGJA79@MacBook-Pro-4.local>
-References: <20260909084154.223529-1-max.chou@sifive.com>
- <20260909084154.223529-4-max.chou@sifive.com>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260909084154.223529-4-max.chou@sifive.com>
-X-ClientProxiedBy: PH7PR03CA0003.namprd03.prod.outlook.com
- (2603:10b6:510:339::8) To TYNPR02MB9351.apcprd02.prod.outlook.com
- (2603:1096:405:3d0::15)
+ (Exim 4.90_1) (envelope-from <mst@redhat.com>) id 1x4x8p-000857-N1
+ for qemu-riscv@nongnu.org; Fri, 11 Sep 2026 05:01:53 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1789117311;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=g9mLgS0ybrUUaTMFusFVuyMEvSQGJ2PNYaEiCYholds=;
+ b=MrnoMjsHUlYsqWHFrTSNH9BhPKreOvr7PF4+tuXlDPKCP7JV9q3TWD8I8EHSolZE3HGL4M
+ Uk0H3n4p9LkAAx62gdScdZs0Lys9lUeCHAmHyx6btG1gvHgU+zHYSwALzpaTvmSDW1n8Ut
+ WX1zc+VIgdDgMKCZwMHx5RE67NtFM4U=
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-465-YHCRE1aIOzSOiYsclIdJLQ-1; Fri, 11 Sep 2026 05:01:47 -0400
+X-MC-Unique: YHCRE1aIOzSOiYsclIdJLQ-1
+X-Mimecast-MFC-AGG-ID: YHCRE1aIOzSOiYsclIdJLQ_1789117306
+Received: by mail-wm1-f72.google.com with SMTP id
+ 5b1f17b1804b1-49e661c6440so975315e9.3
+ for <qemu-riscv@nongnu.org>; Fri, 11 Sep 2026 02:01:47 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1789117306; x=1789722106;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :content-type:mime-version:references:message-id:subject:cc:to:from
+ :date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=g9mLgS0ybrUUaTMFusFVuyMEvSQGJ2PNYaEiCYholds=;
+ b=WQDK1gjIz7A3yPXU7K2gu4uPFfzqNpxxUMhMTe6NAxifpEKGPsgquzjiYcbCEKy7dQ
+ qHjNODg29tuaiNklrNYTKtHtCSlduUsC6F8bRFvCSFK0aKx2CTmIOxhcBFanudI65Y+q
+ GFDE2iW7adt03XpC9EYeuzB/x0kSvkR06VCrvJrtzHrwpVOp3fZEMEl2NxJZNJlHd6dj
+ iLHj7zKyvIutgWYM5WSnhPv6ZBRBlPwZlIpdRbR0So5vVRYR2YLaAIpgQCWGxZ7yDQpm
+ WfeQcE6RvsYkZK7n/BdiTdjuYOjZg9obIZn1N54z1pB9N7ICfmm5SYOa8wxaZVUXnAwz
+ 8Pxw==
+X-Forwarded-Encrypted: i=1;
+ AKwUvByJo4FNznjfIZxbXgLS9+TgSb8g4LUeq6sbdkqLlj4QcB1TPdkCejje4DdnDw3IqHboldB20GwafBDZ@nongnu.org
+X-Gm-Message-State: AFuF++l34hmnE+/gWlj5n/Ql/AjA8fbhjuDrS/Gb4WFEnkP8aJjVBLen
+ 3dHhG7Sskd2lMJoP0TxmKJZyWKIIAeLaD42v0eDvEN/uOUA4wXRklfCyxe4iEL7ssEpW+sd62wg
+ rmiBecWsL209m7aFej82y/bVneB8vs+6gLlMHZbNsBJsckPf0tST2vJex5xKViajw
+X-Gm-Gg: AYBFou2wcCC4P6KV1tH14Lq6pwbs/sM1atdsgKkvUqNpoI+NoiV16jJD3X6Yq35i/XK
+ g1TT8ZV0WiGoziKD4esaXC2nTMzTnjTNyxW46ddVvBiDEPNqFn5SU1KmJ2g/QHIuGKc/Rgis0KT
+ lm1Ch9RdFtic/OHnx94kg5dAYVaGekYaoW+kkhdSEXhc8fW8q9opvYA9Rl0tnFRRzYz3q0gyP7x
+ 7dk3VH6T8jGpbp/gA/T6qPA1b6O0M24p28HRljddHfn1bbahV//V3CQrYvGTPtwHij03hZxh3Rf
+ Aklovysa9Fiizs+T+hO4vSTLI0kWQRwV1FDq/reKTAJ50nXXQcBgFm/sP+Gds40wMFBp9SJXo13
+ MH1LNZeWf3QAYemfaF7SYFwA=
+X-Received: by 2002:a05:600c:6289:b0:49c:de80:b833 with SMTP id
+ 5b1f17b1804b1-49e61983067mr32623685e9.2.1789117306119; 
+ Fri, 11 Sep 2026 02:01:46 -0700 (PDT)
+X-Received: by 2002:a05:600c:6289:b0:49c:de80:b833 with SMTP id
+ 5b1f17b1804b1-49e61983067mr32623015e9.2.1789117305570; 
+ Fri, 11 Sep 2026 02:01:45 -0700 (PDT)
+Received: from redhat.com (IGLD-80-230-79-236.inter.net.il. [80.230.79.236])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-49e61a32803sm43926005e9.0.2026.09.11.02.01.42
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 11 Sep 2026 02:01:45 -0700 (PDT)
+Date: Fri, 11 Sep 2026 05:01:42 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: qemu-devel@nongnu.org
+Cc: Peter Maydell <peter.maydell@linaro.org>,
+ Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>,
+ Ben Chaney <bchaney@akamai.com>, Markus Armbruster <armbru@redhat.com>,
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+ Sergio Lopez <slp@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
+ Zhao Liu <zhao1.liu@intel.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Anthony PERARD <anthony@xenproject.org>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Bernhard Beschow <shentey@gmail.com>, Conor Dooley <conor@kernel.org>,
+ Sebastian Huber <sebastian.huber@embedded-brains.de>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Jason Wang <jasowangio@gmail.com>, Eric Blake <eblake@redhat.com>,
+ devel@lists.libvirt.org, xen-devel@lists.xenproject.org,
+ qemu-ppc@nongnu.org, qemu-riscv@nongnu.org
+Subject: [PULL v2 11/75] net/tap: deprecate "no" as special value for
+ script/downscript
+Message-ID: <3e4c54739a7e3409a477197fa300104202eb3570.1789117222.git.mst@redhat.com>
+References: <cover.1789117222.git.mst@redhat.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: TYNPR02MB9351:EE_|SEYPR02MB9063:EE_
-X-MS-Office365-Filtering-Correlation-Id: 88973151-3d12-4859-5759-08df0fc8719e
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|23010399003|1800799024|366016|376014|6133799003|18002099003|22082099003|56012099006|3023799007|4143699003|10067099003;
-X-Microsoft-Antispam-Message-Info: 3lHRLpEjo0J/rhla/XtBORDhHTEciJM37cHrN6tdN4qQm7iGZ178NPEKwoGo4Cph/Sc/ZpGnwEM9oCgr9MsSodvTKSGnHLyY47e7ZtWepZ4dlm7ToUplVrCBW9sbW26xcQSSWFKKyE8Y2QsoYhsYu6I6K7svGbJca9NjV20j2wbbAulvQP6vebHBu0OooESSCJ4uBJEFrtIijBvC7sMVl0jFgDWs1Jwo/QKFMt7ulN80yP61rdvEPydEDEMvYMf9YVYsLthWARX68pTLA1cdvv1zg28KiXth8NxJ8XwsGfmYU+FQs33DbYemqkMMUjh+tqjiWW7vRiGS3p/60pbxIyMj7utabll+5k4duNEV+qHfr3+L5GjFT7C4Dm6tOoHA715gUFSRrVUhsnugmOoyH7fNSu0+4s2qkD1qXwps3hZbOeOX1E5L5eotDRrSyAc8M4RYQu+oZgX6yqdeYlpUrU8XOh2PxbFmps7zXM8RaQu9HK7JtXz80FjR7kttI2twzaB+Ezz2K1oALCVxXvZEswVXn6IaKA+a0qfou2FA3D20LoytOQra8Jf5c6PjnFaxpbDZeOVVgyVvDYYbOhOw35j7Bg0B43R1Weje6rKN24PlJldsU1U0MNnbfNZFnrJMjR2zp9HF3NGIqschzdHGFbk1RGzbBIzR2qINuRhzr94=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:TYNPR02MB9351.apcprd02.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(23010399003)(1800799024)(366016)(376014)(6133799003)(18002099003)(22082099003)(56012099006)(3023799007)(4143699003)(10067099003);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?MY4Z4ZbFGWIfrgVmtjoZlptsSjbJ9qNZf8vJIXDKwPghCgdmY2urEQ7krqnu?=
- =?us-ascii?Q?BQrYhkLzkIaBlyNHbSJIwNrHuV0EctDn4JHiYlyGLlKwLfz7C4RZjedtOTGU?=
- =?us-ascii?Q?TfrP0XUMwII//67LfW43DZrY54IoMayHwcx9OpMnU/iWFoyM3VwixYsCnn8H?=
- =?us-ascii?Q?jYTIW0pFFyo63MRlLvCshSjOgkzV9Phw4Yod5IAKlt4k9IkUiOL8OUAyghHD?=
- =?us-ascii?Q?u4sbE48Yzp3DgeV8xvMrDKbQSNaCN2qQF9vqDHQW0/IsGncg6xSKlo76YxOO?=
- =?us-ascii?Q?Q5kfIXpm1TCeFphYpo2Tx8Z9vA3ki61UCvmS9oAmdQWPmV201rJVYJvnv+2K?=
- =?us-ascii?Q?P8mu1MR2DbNcLT4013WJ6piyNpo90uP2uFOEqGYvYcXAhwsszBVgxzlmpcFo?=
- =?us-ascii?Q?K5Yh/BxMBB/idroasJVMRosAl0ePjU7YbCd2yOvObmVG4u8RB2DkeCRBqeUN?=
- =?us-ascii?Q?+Rzbcjys7LP14QCLNiqFBCUFf3qR7I9Q8Gwqoo6T90UF7WBZjPDYRBK2FDp1?=
- =?us-ascii?Q?udgMzVt+pywRriQ9ukZQsfdxDtXaKJHiV0I8UAdUUyn4nproug09nj5+qpr2?=
- =?us-ascii?Q?JvbXOtBbssm9yP+Hd5NDMIX5Wlm2mG2flMa/DITQRiT/JfEqskZqBTc8AWE8?=
- =?us-ascii?Q?SyrCCFWpyeqBH3MOCaZ9Nfeidjc3PXLiP+5wQROz9VZTi4w+G+AcvEmt9a3E?=
- =?us-ascii?Q?NHBH2xAo6bmOjn++H7+FRBOh7PxReO+G/EbJtX77Hub7wk3RoxSlzzFFh/oR?=
- =?us-ascii?Q?NQMOhVojClBsEi4jmnotxNn1OH4yMb/e/e2RRvE7mIyb5cfchjR97qdR5OdR?=
- =?us-ascii?Q?dkYw6w5l4x0RVd+wkhzkxXy3WstfAQUp3dj46Fo0WPyVRitPUxZtE2eauQFX?=
- =?us-ascii?Q?qgXvA7vuadXLNW1O0eYNTX0WqngWbk3QnQgDvBQ30HLrXmWFxPKgzZG2nwlt?=
- =?us-ascii?Q?8q0lMRomdO/pFOuEjIw+IEqg1GNLrKSzCDL9/Akpakjdo/4oC/QRvKNySo6N?=
- =?us-ascii?Q?nVq+VLvtuZQtuHRBOgR5t5ioqh0GVcrkkqJPuWJuCy4x+MHdPxBOxtKdGuVO?=
- =?us-ascii?Q?wkqIRysNUv1LtIWSxpxOBUMiTyg9oKhMzfH5krl/o9X4aMWCCLVpan42lN9M?=
- =?us-ascii?Q?/FgPnhnoVqbM5qlEAfEjlrD+wsSki4hleKp5PuF1dv0IL/ZMhDJmzxlf5qrh?=
- =?us-ascii?Q?Ri5jKT9D/MgoXaPY2lLqMtBnt0OM39aF0UO1swL2Sn45d+vE7x/3Zb28A4EA?=
- =?us-ascii?Q?hmp2NcB8DlYv8GyQikpMg9lMIbhtIClILyPicXZydzv99nFcJTjVxjT/oSWg?=
- =?us-ascii?Q?S9gDpV13k7Jq0Fm6kw10yf0Nq+83TwPJBQ9xUM/LmeN08xKTg2y1N4ZOCjy+?=
- =?us-ascii?Q?G7Q4EBv7TeDk7+CSL6PsGR+MtOXJnORPCluRW2+z4Y9ad9OTNDOH5E1CkVRn?=
- =?us-ascii?Q?YZEmN3DmZUczUCPxdHIveITDh80DbcIe8A2xkq3CC5tXM8znuf5Wz6y18LNv?=
- =?us-ascii?Q?ru4LmRdB4xfCORGPSHFeXzuQJPfkiMDWusLxjJHJ4S7FO9wYUIGD21DFQvn8?=
- =?us-ascii?Q?M9L5QpX9lGJmEOCAvvDvfUByqQ7UBqpi0wTe2hOX1frAimLQLHPe+9gO6veM?=
- =?us-ascii?Q?V0DzIr3INM95OG4njof/7JJFgkTT8A5G5UxTE/jf2RQumPMnPkSYWGjbnxi3?=
- =?us-ascii?Q?rbEo7f8dt2lL+0b2V0ixwQlIMs62/3j9p1Sj1WsSZV1UT/UAbKLNpilj+5LR?=
- =?us-ascii?Q?iHPpzOkc0qKCzQpk1y9CHRJfl6tK1BU=3D?=
-X-OriginatorOrg: processmission.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 88973151-3d12-4859-5759-08df0fc8719e
-X-MS-Exchange-CrossTenant-AuthSource: TYNPR02MB9351.apcprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Sep 2026 05:49:28.5990 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: e0544bf7-9765-4630-ab69-0b266dc2169c
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: kS09Sr+OtU7WZJjNKrgmes8Jw39l3fxnWS/L7EDoArtBklDLRS5WmmtSjNJbOljVu7tLDgUVHwZEyCf2BtGfKucFqAkR13l8HABGtUsInrA=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SEYPR02MB9063
-Received-SPF: pass client-ip=2a01:111:f403:c405::5;
- envelope-from=chao.liu@processmission.com;
- helo=TYPPR03CU001.outbound.protection.outlook.com
+In-Reply-To: <cover.1789117222.git.mst@redhat.com>
+X-Mailer: git-send-email 2.51.2.2891.g4157995a80.dirty
+X-Mutt-Fcc: =sent
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: 6b147PgrEO1NNVl8ofrV8hoW8qbrRCmi2k_z5Kzgoec_1789117306
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=mst@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=0.001, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -144,417 +129,270 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Max,
+From: Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>
 
-On Wed, Sep 09, 2026 at 04:41:50PM +0800, Max Chou wrote:
-> Add a bare-metal test for masked vector fault-only-first loads across
-> locked NA4 PMP regions inside one page. The test covers masked-off
-> elements, a faulting active element 0, and later active faults that
-> shorten vl.
-> 
-> Signed-off-by: Max Chou <max.chou@sifive.com>
-> ---
->  tests/tcg/riscv64/Makefile.softmmu-target |  13 ++
->  tests/tcg/riscv64/rvv-ldst.inc            |  91 ++++++++
->  tests/tcg/riscv64/test-rvv-ldst-ff-pmp.S  | 259 ++++++++++++++++++++++
->  3 files changed, 363 insertions(+)
->  create mode 100644 tests/tcg/riscv64/rvv-ldst.inc
->  create mode 100644 tests/tcg/riscv64/test-rvv-ldst-ff-pmp.S
-> 
-> diff --git a/tests/tcg/riscv64/Makefile.softmmu-target b/tests/tcg/riscv64/Makefile.softmmu-target
-> index f2c75abd57a..0fdf242f735 100644
-> --- a/tests/tcg/riscv64/Makefile.softmmu-target
-> +++ b/tests/tcg/riscv64/Makefile.softmmu-target
-> @@ -85,5 +85,18 @@ run-test-vle32ff: test-vle32ff
->  	$(call run-test, $<, $(QEMU) -cpu rv64$(comma)v=true $(QEMU_OPTS)$<)
->  test-vle32ff: CFLAGS += -march=rv64gcv
->  
-> +RVV_LDST_MARCH = -march=rv64gcv
-> +RVV_LDST_TESTS = test-rvv-ldst-ff-pmp
-> +CLEANFILES += $(RVV_LDST_TESTS)
-> +
-> +$(RVV_LDST_TESTS): %: %.S rvv-ldst.inc $(LINK_SCRIPT)
-> +	$(CC) $(CFLAGS) $(RVV_LDST_MARCH) $< -Wa,--noexecstack -c -o $@.o
-> +	$(LD) $(LDFLAGS) $@.o -o $@
-> +
-> +EXTRA_RUNS += run-test-rvv-ldst-ff-pmp
-> +
-> +run-test-rvv-ldst-ff-pmp: test-rvv-ldst-ff-pmp
-> +	$(call run-test, $<, $(QEMU) -cpu rv64$(comma)v=true$(comma)vlen=128$(comma)elen=64$(comma)vext_spec=v1.0$(comma)rvv_ta_all_1s=true$(comma)rvv_ma_all_1s=true $(QEMU_OPTS)$<)
-> +
-Just a heads-up, TCG tests are moving to Meson build, so this needs to be
-based on:
+The interface is ambiguous, as "no" is valid file name. So,
+using "no" as a special value to disable script is deprecated.
+Use an empty string ("script=" / "downscript=") instead.
 
-https://lore.kernel.org/qemu-devel/20260818192309.22169-1-pierrick.bouvier@oss.qualcomm.com/
+In a future version, "no" will be treated as a plain file name, just
+like any other non-empty value.
 
-Thanks,
-Chao
+Document the deprecation in docs/about/deprecated.rst, qapi/net.json,
+and qemu-options.hx. Update other docs to use empty string instead of
+"no". Add a warning.
 
->  # We don't currently support the multiarch system tests
->  undefine MULTIARCH_TESTS
-> diff --git a/tests/tcg/riscv64/rvv-ldst.inc b/tests/tcg/riscv64/rvv-ldst.inc
-> new file mode 100644
-> index 00000000000..061f330abef
-> --- /dev/null
-> +++ b/tests/tcg/riscv64/rvv-ldst.inc
-> @@ -0,0 +1,91 @@
-> +/*
-> + * Common support for bare-metal RVV load/store regressions
-> + *
-> + * Register contract: these macros use t0, t1, t5 and t6 as scratch and
-> + * keep the current case number in s11.  ASSERT_EQ and CHECK_VELEM hold
-> + * their expected value in t6 across a branch, so a trap handler that can
-> + * run in between must leave t6 alone; use t5 and s5 for that instead.
-> + *
-> + * SPDX-License-Identifier: GPL-2.0-or-later
-> + */
-> +
-> +    .option    norelax
-> +    .option    norvc
-> +
-> +    .macro          RVV_ENABLE
-> +    li              t0, 0x6600
-> +    csrs            mstatus, t0
-> +    csrw            vcsr, zero
-> +    .endm
-> +
-> +    .macro          ASSERT_EQ actual, expected
-> +    li              t6, \expected
-> +    bne             \actual, t6, fail
-> +    .endm
-> +
-> +    .macro          CASE number
-> +    li              s11, \number
-> +    .endm
-> +
-> +    .macro          SEMI_EXIT
-> +    lla             a1, semiargs
-> +    li              t0, 0x20026
-> +    sd              t0, 0(a1)
-> +    sd              a0, 8(a1)
-> +    li              a0, 0x20
-> +    .balign         16
-> +    slli            zero, zero, 0x1f
-> +    ebreak
-> +    srai            zero, zero, 0x7
-> +    j    .
-> +    .endm
-> +
-> +    .macro          FAIL
-> +fail:
-> +    mv              a0, s11
-> +    bnez            a0, 1f
-> +    li              a0, 1
-> +1:
-> +    j               exit
-> +    .endm
-> +
-> +    /* Pre-fill selected registers with a sentinel neither data nor 1s. */
-> +    .macro          PREFILL vd=, vl=4, sew=e32, value=0x05050505
-> +    vsetivli        zero, \vl, \sew, m1, ta, ma
-> +    li              t0, \value
-> +    .ifb            \vd
-> +    vmv.v.x         v2, t0
-> +    vmv.v.x         v3, t0
-> +    .else
-> +    vmv.v.x         \vd, t0
-> +    .endif
-> +    .endm
-> +
-> +    /* Set the low mask bits of v0 to \val. */
-> +    .macro          SET_MASK val
-> +    vsetivli        zero, 1, e8, m1, ta, ma
-> +    li              t0, \val
-> +    vmv.s.x         v0, t0
-> +    .endm
-> +
-> +    /* Assert element \idx of \vsrc (e32) equals \expected. */
-> +    .macro          CHECK_VELEM vsrc, idx, expected
-> +    vsetivli        zero, 4, e32, m1, ta, ma
-> +    vslidedown.vi   v8, \vsrc, \idx
-> +    vmv.x.s         t0, v8
-> +    li              t6, \expected
-> +    bne             t0, t6, fail
-> +    .endm
-> +
-> +    /* Assert that no trap has been taken since the last check. */
-> +    .macro          CHECK_NO_TRAP
-> +    bne             s2, s4, fail
-> +    .endm
-> +
-> +    /* Assert that exactly one expected trap has been taken. */
-> +    .macro          CHECK_TRAP
-> +    addi            s4, s4, 1
-> +    bne             s2, s4, fail
-> +    li              s0, 0
-> +    li              s1, 0
-> +    .endm
-> diff --git a/tests/tcg/riscv64/test-rvv-ldst-ff-pmp.S b/tests/tcg/riscv64/test-rvv-ldst-ff-pmp.S
-> new file mode 100644
-> index 00000000000..80b48965625
-> --- /dev/null
-> +++ b/tests/tcg/riscv64/test-rvv-ldst-ff-pmp.S
-> @@ -0,0 +1,259 @@
-> +/*
-> + * RISC-V vector masked fault-only-first with PMP tests
-> + *
-> + * PMP permissions may change at NA4 (4-byte) granularity inside one
-> + * target page, matching one e32 element exactly. A masked-off body
-> + * element performs no memory access, so a read-denied PMP region under
-> + * a masked-off element must not fault.
-> + *
-> + * Runs with rvv_ta_all_1s=true and rvv_ma_all_1s=true so that with a
-> + * "ta, ma" vtype every masked-off and tail element must read back as
-> + * all-1s, distinct from the 0x05050505 sentinel and the loaded data.
-> + *
-> + * PMP layout (locked entries, lowest number wins; everything outside
-> + * the test page is unmatched and so fully accessible from M-mode):
-> + *   pmp0: NA4   buf_a+4,   L, ---   deny element 1 of buf_a
-> + *   pmp1: NA4   buf_b+0,   L, ---   deny element 0 of buf_b
-> + *   pmp2: NA4   buf_c+8,   L, ---   deny element 2 of buf_c
-> + *   pmp3: NAPOT test page, L, R     lower-priority page allow
-> + *
-> + * SPDX-License-Identifier: GPL-2.0-or-later
-> + */
-> +    #include "rvv-ldst.inc"
-> +
-> +    .text
-> +    .global _start
-> +_start:
-> +    RVV_ENABLE
-> +    lla     t0, trap_handler
-> +    csrw    mtvec, t0
-> +
-> +    /*
-> +     * Trap handler protocol:
-> +     *   s0: expected mcause (0: no trap expected)
-> +     *   s1: expected mtval (-1 accepts any value)
-> +     *   s2: traps taken
-> +     *   s3: vstart seen at last trap
-> +     *   s4: traps expected
-> +     *   s5: mtval seen at last trap
-> +     */
-> +    li      s0, 0
-> +    li      s1, 0
-> +    li      s2, 0
-> +    li      s3, -1
-> +    li      s4, 0
-> +
-> +    /* Program the locked PMP entries; single locking cfg write last. */
-> +    lla     t0, buf_a + 4
-> +    srli    t0, t0, 2
-> +    csrw    pmpaddr0, t0
-> +    lla     t0, buf_b
-> +    srli    t0, t0, 2
-> +    csrw    pmpaddr1, t0
-> +    lla     t0, buf_c + 8
-> +    srli    t0, t0, 2
-> +    csrw    pmpaddr2, t0
-> +    lla     t0, pmp_page
-> +    srli    t0, t0, 2
-> +    ori     t0, t0, 0x1ff
-> +    csrw    pmpaddr3, t0
-> +    li      t0, 0x99909090
-> +    csrw    pmpcfg0, t0
-> +
-> +    /*
-> +     * Case 1: sanity: the NA4 deny is in effect for a scalar load.
-> +     */
-> +    CASE    1
-> +    li              s0, 5
-> +    li              s1, -1
-> +    lla             t1, buf_a
-> +    lw              t0, 4(t1)
-> +    CHECK_TRAP
-> +
-> +    /*
-> +     * Case 2: denied bytes lie only under masked-off element 1: no trap.
-> +     * QEMU retains vl at 3 for this successful access.
-> +     */
-> +    CASE    2
-> +    PREFILL
-> +    SET_MASK        0b101
-> +    vsetivli        zero, 3, e32, m1, ta, ma
-> +    lla             a0, buf_a
-> +    vle32ff.v       v2, (a0), v0.t
-> +    CHECK_NO_TRAP
-> +    csrr            t0, vl
-> +    ASSERT_EQ       t0, 3
-> +    csrr            t0, vstart
-> +    bnez            t0, fail
-> +    CHECK_VELEM     v2, 0, 0x00aa0000
-> +    CHECK_VELEM     v2, 1, -1
-> +    CHECK_VELEM     v2, 2, 0x00aa0002
-> +    CHECK_VELEM     v2, 3, -1
-> +
-> +    /*
-> +     * Case 3: active element 0 denied: trap, vstart 0.
-> +     */
-> +    CASE    3
-> +    PREFILL
-> +    li              s0, 5
-> +    li              s1, -1
-> +    vsetivli        zero, 3, e32, m1, ta, ma
-> +    lla             a0, buf_b
-> +    vle32ff.v       v2, (a0)
-> +    CHECK_TRAP
-> +    bnez            s3, fail
-> +
-> +    /*
-> +     * Case 4: masked-off element 0 over denied bytes: no trap.
-> +     * retains vl at 3 and loads elements 1 and 2.
-> +     */
-> +    CASE    4
-> +    PREFILL
-> +    SET_MASK        0b110
-> +    vsetivli        zero, 3, e32, m1, ta, ma
-> +    lla             a0, buf_b
-> +    vle32ff.v       v2, (a0), v0.t
-> +    CHECK_NO_TRAP
-> +    csrr            t0, vl
-> +    ASSERT_EQ       t0, 3
-> +    CHECK_VELEM     v2, 0, -1
-> +    CHECK_VELEM     v2, 1, 0x00bb0001
-> +    CHECK_VELEM     v2, 2, 0x00bb0002
-> +    CHECK_VELEM     v2, 3, -1
-> +
-> +    /*
-> +     * Case 5: active element 2 denied, unmasked: no trap, vl 2.
-> +     */
-> +    CASE    5
-> +    PREFILL
-> +    vsetivli        zero, 3, e32, m1, ta, ma
-> +    lla             a0, buf_c
-> +    vle32ff.v       v2, (a0)
-> +    CHECK_NO_TRAP
-> +    csrr            t0, vl
-> +    ASSERT_EQ       t0, 2
-> +    CHECK_VELEM     v2, 0, 0x00cc0000
-> +    CHECK_VELEM     v2, 1, 0x00cc0001
-> +    CHECK_VELEM     v2, 2, -1
-> +    CHECK_VELEM     v2, 3, -1
-> +
-> +    /*
-> +     * Case 6: masked-off element 0, active element 2 denied: vl 2.
-> +     */
-> +    CASE    6
-> +    PREFILL
-> +    SET_MASK        0b110
-> +    vsetivli        zero, 3, e32, m1, ta, ma
-> +    lla             a0, buf_c
-> +    vle32ff.v       v2, (a0), v0.t
-> +    CHECK_NO_TRAP
-> +    csrr            t0, vl
-> +    ASSERT_EQ       t0, 2
-> +    CHECK_VELEM     v2, 0, -1
-> +    CHECK_VELEM     v2, 1, 0x00cc0001
-> +    CHECK_VELEM     v2, 2, -1
-> +    CHECK_VELEM     v2, 3, -1
-> +
-> +    /*
-> +     * Case 7: nf=2 segments, masked-off segment 0 covers the denied bytes at
-> +     * buf_b: no trap. retains vl at 3 and loads segments 1 and 2.
-> +     */
-> +    CASE    7
-> +    PREFILL
-> +    SET_MASK        0b110
-> +    vsetivli        zero, 3, e32, m1, ta, ma
-> +    lla             a0, buf_b
-> +    vlseg2e32ff.v   v2, (a0), v0.t
-> +    CHECK_NO_TRAP
-> +    csrr            t0, vl
-> +    ASSERT_EQ       t0, 3
-> +    CHECK_VELEM     v2, 0, -1
-> +    CHECK_VELEM     v3, 0, -1
-> +    CHECK_VELEM     v2, 1, 0x00bb0002
-> +    CHECK_VELEM     v3, 1, 0x00bb0003
-> +    CHECK_VELEM     v2, 2, 0x00bb0004
-> +    CHECK_VELEM     v3, 2, 0x00bb0005
-> +    CHECK_VELEM     v2, 3, -1
-> +    CHECK_VELEM     v3, 3, -1
-> +
-> +    /*
-> +     * Case 8: nf=2 segments, unmasked, field 0 of segment 1 denied
-> +     * at buf_c+8: no trap, vl truncates to 1, segment 0 loaded.
-> +     */
-> +    CASE    8
-> +    PREFILL
-> +    vsetivli        zero, 3, e32, m1, ta, ma
-> +    lla             a0, buf_c
-> +    vlseg2e32ff.v   v2, (a0)
-> +    CHECK_NO_TRAP
-> +    csrr            t0, vl
-> +    ASSERT_EQ       t0, 1
-> +    CHECK_VELEM     v2, 0, 0x00cc0000
-> +    CHECK_VELEM     v3, 0, 0x00cc0001
-> +    CHECK_VELEM     v2, 1, -1
-> +    CHECK_VELEM     v3, 1, -1
-> +    CHECK_VELEM     v2, 2, -1
-> +    CHECK_VELEM     v3, 2, -1
-> +    CHECK_VELEM     v2, 3, -1
-> +    CHECK_VELEM     v3, 3, -1
-> +
-> +    /*
-> +     * Case 9: the denied masked-off element is the last element of the
-> +     * accessed range, so a range probe cannot miss it as an interior
-> +     * region: no trap. retains vl at 2.
-> +     */
-> +    CASE    9
-> +    PREFILL
-> +    SET_MASK        0b01
-> +    vsetivli        zero, 2, e32, m1, ta, ma
-> +    lla             a0, buf_a
-> +    vle32ff.v       v2, (a0), v0.t
-> +    CHECK_NO_TRAP
-> +    csrr            t0, vl
-> +    ASSERT_EQ       t0, 2
-> +    CHECK_VELEM     v2, 0, 0x00aa0000
-> +    CHECK_VELEM     v2, 1, -1
-> +    CHECK_VELEM     v2, 2, -1
-> +    CHECK_VELEM     v2, 3, -1
-> +
-> +    li    a0, 0
-> +exit:
-> +    SEMI_EXIT
-> +    FAIL
-> +
-> +    .balign    4
-> +trap_handler:
-> +    csrr   t5, mcause
-> +    bne    t5, s0, fail
-> +    csrr   s5, mtval
-> +    li     t5, -1
-> +    beq    s1, t5, 1f
-> +    bne    s5, s1, fail
-> +1:
-> +    csrr    s3, vstart
-> +    addi    s2, s2, 1
-> +    csrw    vstart, zero
-> +    csrr    t5, mepc
-> +    addi    t5, t5, 4
-> +    csrw    mepc, t5
-> +    mret
-> +
-> +    .data
-> +    .balign    16
-> +semiargs: .space 16
-> +
-> +    /* One dedicated page; the locked NAPOT entry grants R only. */
-> +    .balign    4096
-> +pmp_page:
-> +buf_a:
-> +    .word    0x00aa0000, 0x00aa0001, 0x00aa0002, 0x00aa0003
-> +    .word    0x00aa0004, 0x00aa0005
-> +    .skip    40
-> +buf_b:
-> +    .word    0x00bb0000, 0x00bb0001, 0x00bb0002, 0x00bb0003
-> +    .word    0x00bb0004, 0x00bb0005
-> +    .skip    40
-> +buf_c:
-> +    .word    0x00cc0000, 0x00cc0001, 0x00cc0002, 0x00cc0003
-> +    .word    0x00cc0004, 0x00cc0005
-> +    .skip    3944
-> -- 
-> 2.43.0
-> 
+Signed-off-by: Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>
+Reviewed-by: Ben Chaney <bchaney@akamai.com>
+Reviewed-by: Markus Armbruster <armbru@redhat.com>
+Reviewed-by: Michael S. Tsirkin <mst@redhat.com>
+Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
+Message-ID: <20260819180201.1970193-4-vsementsov@yandex-team.ru>
+---
+ docs/about/deprecated.rst                  | 18 ++++++++++++++++++
+ docs/system/i386/microvm.rst               |  4 ++--
+ docs/system/i386/xenpvh.rst                |  2 +-
+ docs/system/ppc/ppce500.rst                |  4 ++--
+ docs/system/riscv/microchip-icicle-kit.rst |  2 +-
+ docs/system/riscv/sifive_u.rst             |  2 +-
+ qapi/net.json                              | 14 ++++++++++----
+ net/tap.c                                  | 17 +++++++++++------
+ qemu-options.hx                            |  8 ++++++--
+ 9 files changed, 52 insertions(+), 19 deletions(-)
+
+diff --git a/docs/about/deprecated.rst b/docs/about/deprecated.rst
+index 98c32991c9..61e775373d 100644
+--- a/docs/about/deprecated.rst
++++ b/docs/about/deprecated.rst
+@@ -71,6 +71,15 @@ flexible enough. The monitor objects have been converted to QOM, so
+ ``-mon mode=control`` is replaced by ``-object monitor-qmp``. The
+ short convenience options are not deprecated, only ``-mon``.
+ 
++``script=no`` and ``downscript=no`` for ``-netdev tap`` (since 11.2)
++'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
++
++The special value ``"no"`` for the ``script`` and ``downscript``
++parameters of ``-netdev tap`` disables script execution.  This special
++treatment of ``"no"`` is deprecated.  Use an empty string (``script=``
++or ``downscript=``) to disable script execution instead.  In a future
++version, ``"no"`` will be treated as a plain file name.
++
+ QEMU Machine Protocol (QMP) commands
+ ------------------------------------
+ 
+@@ -164,6 +173,15 @@ Use ``job-finalize`` instead.
+ 
+ Use ``query-accelerators`` instead.
+ 
++``"no"`` as value of ``script``/``downscript`` for tap in ``netdev_add`` (since 11.2)
++'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
++
++The special value ``"no"`` for the ``script`` and ``downscript``
++parameters of ``netdev_add`` with ``type=tap`` disables script
++execution.  This special treatment of ``"no"`` is deprecated.  Use an
++empty string instead.  In a future version, ``"no"`` will be treated as
++a plain file name.
++
+ Human Machine Protocol (HMP) commands
+ -------------------------------------
+ 
+diff --git a/docs/system/i386/microvm.rst b/docs/system/i386/microvm.rst
+index 1675e37d3e..077ea15751 100644
+--- a/docs/system/i386/microvm.rst
++++ b/docs/system/i386/microvm.rst
+@@ -79,7 +79,7 @@ legacy ``ISA serial`` device as console::
+      -serial stdio \
+      -drive id=test,file=test.img,format=raw,if=none \
+      -device virtio-blk-device,drive=test \
+-     -netdev tap,id=tap0,script=no,downscript=no \
++     -netdev tap,id=tap0,script=,downscript= \
+      -device virtio-net-device,netdev=tap0
+ 
+ While the example above works, you might be interested in reducing the
+@@ -103,7 +103,7 @@ disabled::
+      -device virtconsole,chardev=virtiocon0 \
+      -drive id=test,file=test.img,format=raw,if=none \
+      -device virtio-blk-device,drive=test \
+-     -netdev tap,id=tap0,script=no,downscript=no \
++     -netdev tap,id=tap0,script=,downscript= \
+      -device virtio-net-device,netdev=tap0
+ 
+ 
+diff --git a/docs/system/i386/xenpvh.rst b/docs/system/i386/xenpvh.rst
+index 904778e3f5..862f38830b 100644
+--- a/docs/system/i386/xenpvh.rst
++++ b/docs/system/i386/xenpvh.rst
+@@ -42,7 +42,7 @@ case you need to construct one manually:
+       -vnc none                                       \
+       -display none                                   \
+       -device virtio-net-pci,id=nic0,netdev=net0,mac=00:16:3e:5c:81:78 \
+-      -netdev type=tap,id=net0,ifname=vif3.0-emu,br=xenbr0,script=no,downscript=no \
++      -netdev type=tap,id=net0,ifname=vif3.0-emu,br=xenbr0,script=,downscript= \
+       -smp 4,maxcpus=4                                \
+       -nographic                                      \
+       -machine xenpvh,ram-low-base=0,ram-low-size=2147483648,ram-high-base=4294967296,ram-high-size=2147483648,pci-ecam-base=824633720832,pci-ecam-size=268435456,pci-mmio-base=4026531840,pci-mmio-size=33554432,pci-mmio-high-base=824902156288,pci-mmio-high-size=68719476736 \
+diff --git a/docs/system/ppc/ppce500.rst b/docs/system/ppc/ppce500.rst
+index c9fe0915dc..ec5aaf14fd 100644
+--- a/docs/system/ppc/ppce500.rst
++++ b/docs/system/ppc/ppce500.rst
+@@ -158,14 +158,14 @@ interface at PCI address 0.1.0, but we can switch that to an e1000 NIC by:
+   $ qemu-system-ppc64 -M ppce500 -smp 4 -m 2G \
+                       -display none -serial stdio \
+                       -bios u-boot \
+-                      -nic tap,ifname=tap0,script=no,downscript=no,model=e1000
++                      -nic tap,ifname=tap0,script=,downscript=,model=e1000
+ 
+ The QEMU ``ppce500`` machine can also dynamically instantiate an eTSEC device
+ if “-device eTSEC” is given to QEMU:
+ 
+ .. code-block:: bash
+ 
+-  -netdev tap,ifname=tap0,script=no,downscript=no,id=net0 -device eTSEC,netdev=net0
++  -netdev tap,ifname=tap0,script=,downscript=,id=net0 -device eTSEC,netdev=net0
+ 
+ Root file system on flash drive
+ -------------------------------
+diff --git a/docs/system/riscv/microchip-icicle-kit.rst b/docs/system/riscv/microchip-icicle-kit.rst
+index 9809e94b84..7fdb96601a 100644
+--- a/docs/system/riscv/microchip-icicle-kit.rst
++++ b/docs/system/riscv/microchip-icicle-kit.rst
+@@ -84,7 +84,7 @@ Then we can boot the machine by:
+   $ qemu-system-riscv64 -M microchip-icicle-kit -smp 5 -m 2G \
+       -sd path/to/sdcard.img \
+       -nic user,model=cadence_gem \
+-      -nic tap,ifname=tap,model=cadence_gem,script=no \
++      -nic tap,ifname=tap,model=cadence_gem,script= \
+       -display none -serial stdio \
+       -kernel path/to/u-boot/build/dir/u-boot.bin \
+       -dtb path/to/u-boot/build/dir/u-boot.dtb
+diff --git a/docs/system/riscv/sifive_u.rst b/docs/system/riscv/sifive_u.rst
+index 8f55ae8e31..0e4dcf3e70 100644
+--- a/docs/system/riscv/sifive_u.rst
++++ b/docs/system/riscv/sifive_u.rst
+@@ -199,7 +199,7 @@ To boot the VxWorks kernel in QEMU with the ``sifive_u`` machine, use:
+ 
+   $ qemu-system-riscv64 -M sifive_u -smp 5 -m 2G \
+       -display none -serial stdio \
+-      -nic tap,ifname=tap0,script=no,downscript=no \
++      -nic tap,ifname=tap0,script=,downscript= \
+       -kernel /path/to/vxWorks \
+       -append "gem(0,0)host:vxWorks h=192.168.200.1 e=192.168.200.2:ffffff00 u=target pw=vxTarget f=0x01"
+ 
+diff --git a/qapi/net.json b/qapi/net.json
+index ab8ed9c086..dccf95bbbc 100644
+--- a/qapi/net.json
++++ b/qapi/net.json
+@@ -399,15 +399,21 @@
+ # @fds: multiple file descriptors of already opened multiqueue capable
+ #     tap
+ #
+-# @script: script to initialize the interface.  An empty string or
+-#     "no" disables script execution.  Defaults to
++# @script: script to initialize the interface.  An empty string
++#     disables script execution.  Defaults to
+ #     ``<sysconfdir>/qemu-ifup``, where ``<sysconfdir>`` is the
+ #     system configuration directory at build time (typically /etc).
++#     Using "no" to disable script execution is deprecated (since
++#     11.2); use an empty string instead.  In a future version, "no"
++#     will be treated as a plain file name.
+ #
+-# @downscript: script to shut down the interface.  An empty string or
+-#     "no" disables script execution.  Defaults to
++# @downscript: script to shut down the interface.  An empty string
++#     disables script execution.  Defaults to
+ #     ``<sysconfdir>/qemu-ifdown``, where ``<sysconfdir>`` is the
+ #     system configuration directory at build time (typically /etc).
++#     Using "no" to disable script execution is deprecated (since
++#     11.2); use an empty string instead.  In a future version, "no"
++#     will be treated as a plain file name.
+ #
+ # @br: bridge name (since 2.8)
+ #
+diff --git a/net/tap.c b/net/tap.c
+index 2076f5b780..f4051e8d4b 100644
+--- a/net/tap.c
++++ b/net/tap.c
+@@ -92,7 +92,8 @@ static void launch_script(const char *setup_script, const char *ifname,
+ static void tap_send(void *opaque);
+ static void tap_writable(void *opaque);
+ 
+-static bool tap_is_explicit_no_script(const char *script_arg_value)
++static bool tap_is_explicit_no_script(const char *script_arg_name,
++                                      const char *script_arg_value)
+ {
+     if (!script_arg_value) {
+         return false;
+@@ -103,16 +104,19 @@ static bool tap_is_explicit_no_script(const char *script_arg_value)
+     }
+ 
+     if (strcmp(script_arg_value, "no") == 0) {
++        warn_report("'%s=no' is deprecated; use '%s=' instead",
++                    script_arg_name, script_arg_name);
+         return true;
+     }
+ 
+     return false;
+ }
+ 
+-static char *tap_parse_script(const char *script_arg_value,
++static char *tap_parse_script(const char *script_arg_name,
++                              const char *script_arg_value,
+                               const char *default_path)
+ {
+-    if (tap_is_explicit_no_script(script_arg_value)) {
++    if (tap_is_explicit_no_script(script_arg_name, script_arg_value)) {
+         return NULL;
+     }
+ 
+@@ -741,7 +745,7 @@ static bool net_init_tap_one(const NetdevTapOptions *tap, NetClientState *peer,
+         qemu_set_info_str(&s->nc, "helper=%s", tap->helper);
+     } else {
+         qemu_set_info_str(&s->nc, "ifname=%s,script=%s,downscript=%s", ifname,
+-                          script ?: "no", downscript ?: "no");
++                          script ?: "", downscript ?: "");
+ 
+         if (downscript) {
+             snprintf(s->down_script, sizeof(s->down_script), "%s", downscript);
+@@ -947,9 +951,10 @@ int net_init_tap(const Netdev *netdev, const char *name,
+         }
+     } else {
+         g_autofree char *script =
+-            tap_parse_script(tap->script, DEFAULT_NETWORK_SCRIPT);
++            tap_parse_script("script", tap->script, DEFAULT_NETWORK_SCRIPT);
+         g_autofree char *downscript =
+-            tap_parse_script(tap->downscript, DEFAULT_NETWORK_DOWN_SCRIPT);
++            tap_parse_script("downscript", tap->downscript,
++                             DEFAULT_NETWORK_DOWN_SCRIPT);
+ 
+         if (tap->ifname) {
+             pstrcpy(ifname, sizeof ifname, tap->ifname);
+diff --git a/qemu-options.hx b/qemu-options.hx
+index 16ef7d5455..2f6863180b 100644
+--- a/qemu-options.hx
++++ b/qemu-options.hx
+@@ -3022,7 +3022,8 @@ DEF("netdev", HAS_ARG, QEMU_OPTION_netdev,
+     "                use network scripts 'file' (default=" DEFAULT_NETWORK_SCRIPT ")\n"
+     "                to configure it and 'dfile' (default=" DEFAULT_NETWORK_DOWN_SCRIPT ")\n"
+     "                to deconfigure it\n"
+-    "                use '[down]script=no' or '[down]script=' to disable script execution\n"
++    "                use '[down]script=' to disable script execution\n"
++    "                ('[down]script=no' is deprecated and will be treated as a file name in future)\n"
+     "                use network helper 'helper' (default=" DEFAULT_BRIDGE_HELPER ") to\n"
+     "                configure it\n"
+     "                use 'fd=h' to connect to an already opened TAP interface\n"
+@@ -3561,7 +3562,10 @@ SRST
+     ``<sysconfdir>/qemu-ifup`` and the default network deconfigure script is
+     ``<sysconfdir>/qemu-ifdown``, where ``<sysconfdir>`` is the system
+     configuration directory at build time (typically ``/etc``).
+-    Use ``[down]script=no`` or ``[down]script=`` to disable script execution.
++    Use ``[down]script=`` to disable script execution.
++    Using ``[down]script=no`` is deprecated; it disables script
++    execution now, but in a future version it will be treated as a
++    plain file name.
+ 
+     If running QEMU as an unprivileged user, use the network helper
+     to configure the TAP interface and attach it to the bridge.
+-- 
+MST
+
 
