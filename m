@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF817C88E41
-	for <qemu-riscv@archiver.kernel.org>; Fri, 11 Sep 2026 04:45:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0D54C88E41
+	for <qemu-riscv@archiver.kernel.org>; Fri, 11 Sep 2026 05:23:20 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x4t8C-0001QX-A8; Fri, 11 Sep 2026 00:44:56 -0400
+	id 1x4tjD-0006OZ-KQ; Fri, 11 Sep 2026 01:23:12 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <chao.liu@processmission.com>)
- id 1x4t89-0001Pu-Ug; Fri, 11 Sep 2026 00:44:53 -0400
-Received: from mail-koreacentralazlp170130006.outbound.protection.outlook.com
- ([2a01:111:f403:c40f::6] helo=SEYPR02CU001.outbound.protection.outlook.com)
+ id 1x4tit-0006Mq-7m; Fri, 11 Sep 2026 01:22:52 -0400
+Received: from mail-japaneastazlp170120005.outbound.protection.outlook.com
+ ([2a01:111:f403:c405::5] helo=TYPPR03CU001.outbound.protection.outlook.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <chao.liu@processmission.com>)
- id 1x4t87-00059K-8v; Fri, 11 Sep 2026 00:44:53 -0400
+ id 1x4til-0007cH-3H; Fri, 11 Sep 2026 01:22:50 -0400
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=s9a1MVQWXs579jn5lyKPUzLKQICp8ivqDGOZLxU/4C2FHh6GKliNyXNsjzlOaqGktRDkzt656F/GlET/JdfP0AGxSLX1xGkBfQu3l/jMNmDOgi4jaRR7Up8haVo2q8Nz8OVPf8MB6XKcSq9c9Abvrd7oSFyCbwS1gqel15V4GU6S1wE3ELuGdaB9XInPf80ILdtjz6iCeIE4D2VRIsh50b5VXOHXBLFamKFeo/YuZvUetezdTXWrtE2ydxvq0+/xrUeMur2/fgTCv9tOp5h9FxDY+tgDT230l02my+u5CvzfsY3a9Cmasf2EniRebeAqLnvE4+wrXgPsp/idWXekow==
+ b=WXmgupDIkxrxMJ8PYmwg+5DVTytAdqYyibYj+vqhIwZ0ZVuAo/lMD2YOG0JuBBEeWs7Q09ntiZvNwCiDaMYtAiE0nacxKqzuvUpwu0c3Z2xwqO0VC5ROkQao4ODePi1/JN1pC23FTZ7lWBcl3IPy3ts5amtjyO0dkkfxmvsDOoP/qD9SMmz37gPfxKJZoZkRjVuGuiOkpVoiVoBhIvIGluyAmrqAVTnC3u93iUnsclwKpnG3ME60eqWEJp+tZhleMO/nOQSXqS22VWd+aEhOgz3pQsRXmVmX7dvn0YdAi3QNAcI8OFvSbzbmvzoEWyhXnIL4tvLYa5TZzUyt8+GoaQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=CPMaZyxn66NanZam7WVD+eGYJncttcFLzeIYaRsUck8=;
- b=Z2lg+hvnURBEgz+Ia/GfuDeRFMR20H7GH7YZl2VRY7cX9CjnAQmajGBpFj/97Y37L7nGmxMEKoJ4SDugHAEbP+Q9lNz+LeR6LNlaNDn9RhhxG/a9xkK+oAIujIavZSpH0r67wI9YlAGRcPZxednfTf08DGj+JkqQJYFxCYApsAFfDlFskcBGbVRy+/QzSc5utwNlHvVPFz0e1geP6rlPiIZh8XcFjxJxl7flMos0xC2oPw73giuslguXMh3R92CLd2aL4t6InhVEh/eaadOTBWNef0pjkNbjww2yDgkBQ3ZWbbLK8f6XQH9efNFxSp7XSEUflWJySh4VbzUZTkJYAw==
+ bh=vKl9UD/jJMUPmWMg6ph36r7ATMbRiMXMHuyX75rC4EI=;
+ b=LyB5U7npoZCrd3SdazcuahAcIl7Z8pE0KiJFsOQsSkJ1nTDqekT1fQLTuHx24MeWMKnVZl3Xe8p27Kp7R13xFFhXF6wrF0jEjYGiwbZPQ6MZx05Bas8SFQ7xSy5t3GRt89vMsURmdNgeAYJdAWne3CdtNY2i0ewDESSzTSxDwxw7Fl3pGOpoJCcISiXk+UISrxtsCq7OEChOj2B70Ce81lbkdY87zgTcc0el+3yOOY+MdsXn7GESnbzP5BsHKq5KHhkhqrHLtTgScbzuJ/hp/vkAelB+1gbDwMJweDYw4N88OqOr2Q0P5pqMQraw1/Op452ESebs+wjwvyl8NAps5w==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=processmission.com; dmarc=pass action=none
  header.from=processmission.com; dkim=pass header.d=processmission.com;
@@ -33,98 +33,111 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=processmission.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=CPMaZyxn66NanZam7WVD+eGYJncttcFLzeIYaRsUck8=;
- b=DUgGntrmZdEC4GsfUB/ZvMzaWeo41c5mD5htWgoMDn0B/i996ZNnWAIcntkry9rNWU6bJ5lc1SDjLvr+pd3OFCl6fcLVb/z2DzrsshtK3LqpPqXTat+l6dkgujddkt6IGdSZIOdcpSlaC7Mb0/0XsdXejvXZa6X04QMb8DmJCqwY9uOKT29ru68X7Khqnm5Fx67j41mTJ1fYzC7F5ThFnmnSC5qXcj15rZilqPWQJP6eS9VYkAB4BXSrfAU7VtecJDPh56qRq8xyiTNmqe4TwXeES149kAnODA7CJuf8enG48Cy21TrMgl20tbB3SadWkiBxgHsOUp32Qpyr3JKMfw==
+ bh=vKl9UD/jJMUPmWMg6ph36r7ATMbRiMXMHuyX75rC4EI=;
+ b=v9bhrxXbujY96ofTnc+9Ft4nyLQ+0mQPDo98g/npn8jBxWgNhMWXwoGqfkAk8X3u85r4Up9ySxydm1Ih4wtHvrP2Wjztrpsf4leUQkFcDNwH0yplvjpd733txvtapbSTaIFAO1i2r3GORHc4EKlpccsU9cozMMVG0xp424R2NpZfO7A02o8qPwMMhh9WLvQ/cOK6PtHj0Y6/K01soCjLpvb+Mtq2g2/MOoO+/0a1GvUrft/Ophfu4XrTYOp7yZ6rbKYuOhET7TYPF2keRWEuibRXZbTIME4cr+pHP1eHcCus5l8XE0iLLWCUgyhz1xRo1fM3n3nnIQlr3paBB13cIg==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=processmission.com;
 Received: from TYNPR02MB9351.apcprd02.prod.outlook.com (2603:1096:405:3d0::15)
- by SEZPR02MB7871.apcprd02.prod.outlook.com (2603:1096:101:216::11)
+ by TY1PPF25A2BC0BA.apcprd02.prod.outlook.com (2603:1096:408::94e)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.9; Fri, 11 Sep
- 2026 04:44:42 +0000
+ 2026 05:22:36 +0000
 Received: from TYNPR02MB9351.apcprd02.prod.outlook.com
  ([fe80::e5f3:5fb7:3d29:5934]) by TYNPR02MB9351.apcprd02.prod.outlook.com
  ([fe80::e5f3:5fb7:3d29:5934%6]) with mapi id 15.21.0406.007; Fri, 11 Sep 2026
- 04:44:42 +0000
-Date: Fri, 11 Sep 2026 12:44:37 +0800
+ 05:22:35 +0000
+Date: Fri, 11 Sep 2026 13:22:29 +0800
 From: Chao Liu <chao.liu@processmission.com>
-To: Zephyr Li <fritchleybohrer@gmail.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-stable@nongnu.org, 
- pbonzini@redhat.com, marcandre.lureau@redhat.com, berrange@redhat.com, 
- pierrick.bouvier@oss.qualcomm.com, alex.bennee@linaro.org, palmer@dabbelt.com, 
- alistair.francis@wdc.com, liwei1518@gmail.com, daniel.barboza@oss.qualcomm.com,
- zhiwei_liu@linux.alibaba.com
-Subject: Re: [PATCH v2] target/riscv: fix RV32 fixed counter accesses
-Message-ID: <aqOHF2QVtK0UWM-e@MacBook-Pro-4.local>
-References: <20260909072356.42784-1-fritchleybohrer@gmail.com>
-Content-Type: text/plain; charset=us-ascii
+To: wangyang <wangyang25@otcaix.iscas.ac.cn>
+Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org
+Subject: Re: [PATCH v3 2/5] target/riscv: mask RV32 XTheadBb th.srri shift
+ amount
+Message-ID: <aqOKQ0WfB0vTTFMG@MacBook-Pro-4.local>
+References: <20260908124755-v3-0-wangyang25@otcaix.iscas.ac.cn>
+ <20260908124755-v3-2-wangyang25@otcaix.iscas.ac.cn>
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <20260909072356.42784-1-fritchleybohrer@gmail.com>
-X-ClientProxiedBy: PH8P221CA0063.NAMP221.PROD.OUTLOOK.COM
- (2603:10b6:510:349::15) To TYNPR02MB9351.apcprd02.prod.outlook.com
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20260908124755-v3-2-wangyang25@otcaix.iscas.ac.cn>
+X-ClientProxiedBy: PH8P220CA0034.NAMP220.PROD.OUTLOOK.COM
+ (2603:10b6:510:348::17) To TYNPR02MB9351.apcprd02.prod.outlook.com
  (2603:1096:405:3d0::15)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: TYNPR02MB9351:EE_|SEZPR02MB7871:EE_
-X-MS-Office365-Filtering-Correlation-Id: e4f9401d-a84a-4186-b895-08df0fbf6575
+X-MS-TrafficTypeDiagnostic: TYNPR02MB9351:EE_|TY1PPF25A2BC0BA:EE_
+X-MS-Office365-Filtering-Correlation-Id: d2a12f69-9b52-4391-5c1e-08df0fc4b05d
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|7416014|376014|23010399003|1800799024|18002099003|5023799004|10067099003|56012099006|3023799007|22082099003;
-X-Microsoft-Antispam-Message-Info: sJ+JCZYmcNES41LbDMeLkWbylU1gPl1MahZpC2/3JyiCK6nu4cbUlVxeKHD1tq/AJAiHGdKLLroIF4S4JsSUcyYDML3vxGjqLAKJVHu8Fwlaa6Cs0n+OMI7+1fGyoCjlCgnFe5eh8WUSRM9DLzKAFkr2vpIKKgAzZdaP1hU0UQdVjOMcj1QUb3xBfV/QaBx17dp2Mp13jBLsVLkNTMVm83j5eU0vTkY0zjOB28uERSK5EBzD9vuCcHmPjX0efq2jdcc0A+kFrOF4YHGiTD225uIrOilPxU9hbMdKTuYCjvPbNXs9qJr9YF7lx8jWYkSnLwfoHOx2hbesqOfyrJLhqQKmIFPSxMEDaS9m4j8IW5lYXkCuZWMOb3HaYHgOWGxJ3bSyNvwRCPbKpE4r4tUW2ad7hjHxO++R6Ez6MJ9ixGMc1I+vrF41K2BYBSmFIqUywg1w9fPFxe4GYyxIDuiI5tgU9+ILrvAwwbR9gmhm1u8XpBp7vONSX3coQKwG6YOsewGyRi2oIdGgY29IUtrwy1ZqrsI6/yfmTyqJxJUuUvibj/8HYG8KzOoFbnKJyyP/62nSbCdHclyWlY2cyaeK/VLwPDtlkd23QAZMsHy5EOxL9Q3suMO/eX8guYj1a5NJ+jm4rmy36zXasZnSNDAhSuGw5sPlNti73HBLMcUaWpo=
+ ARA:13230040|366016|376014|23010399003|1800799024|3023799007|10067099003|56012099006|4143699003|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info: qMf/7vwALPpww3XPgDaZXpnMyuKMw9r0RihLPKk+SQCMinRV8Y/2fdQH8aXvQa35TEn2t/Mle2IwFdv2nJDNrAXicIQMqmHqjQE617VmygcWe/u10QDvCdbU7kPdH9L7udkHepiGcrlfwFX5Hjm8y/fRBkpwP+QNQcVg2cqVnI//x5uSKqW7jFHS93dZeGr6wCo2iEPMQYNxukWK446E9qvGXD1dV9MCcUhOQeAfwQQ8S4uY+G5Rwl3ra6LwhdHSqyHSY0TrRTfnCVGlVdE2MBhbJ5LJBXWBU3v1v9p8UtC20kwmgriDt7rGr0sp43qWq+QvEiIxMGuK2dorRhF57NtoAAX5t6isvXz+aaL/Hef9RIJ7x2Voc6IGikCTe6784BnFtCGDcfAhXDxop/aK7G9sEqXuv4fA6ymWyRYqOPS8t2jW7KpTHeb08kmZ2Yw3cakT4x9GGn4N/Iv+hL8Qph2f8eenJhsFElwjyGc+JrqEQvIW8yw/BATQEhn6vac8Ds4e5pmbaqzq/pYAlojDyYRqiC4MVjQCMpzQv4IrtR+Se+wtB3/W16uh2OIU2wgeJ80IF6ubr0yUKB3p7K/dmYpqwY2lp3Z3A0Kd+Roj0BYrTTU3R0gdhnxm4c5VFwyqXXEM3e7gYyvnNbd72++LyMiys6RCLpJNxccXH/2PoPs=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:TYNPR02MB9351.apcprd02.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(7416014)(376014)(23010399003)(1800799024)(18002099003)(5023799004)(10067099003)(56012099006)(3023799007)(22082099003);
+ SFS:(13230040)(366016)(376014)(23010399003)(1800799024)(3023799007)(10067099003)(56012099006)(4143699003)(22082099003)(18002099003);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?LTUsQkPKcMAigO9Yg9f9A0+zaXwhXysZQJW4MRs7TJ+Ved4POEm9IsEtjmye?=
- =?us-ascii?Q?ZQTjqjJBnaNYOzJanmw5+ciekYMFy26bY/1p+kve4mlbi9eYIIc8JM8TxfI6?=
- =?us-ascii?Q?q/b/tsAvY5Hhlwrtt4Zu8OIStCYmoTQa1epUXAvdH/E76V/omJWE+m0DHNku?=
- =?us-ascii?Q?YqNf7XsdRvfxT2BkoeMZ231SL1BVwyYhbXhHViE0/Tkfyn7ZFDHhNJ6iB+MH?=
- =?us-ascii?Q?CuOcEM08Y5EZX1SSI8AIfoIX6xoI6RnXfTQZmbnUv3vlb877W5Rk7pNW9NXt?=
- =?us-ascii?Q?l3EudOXtqcoNTbLJyRl2qtsmexcERvyGtnxADprmK4eOV11WfVddFB6o8VMa?=
- =?us-ascii?Q?Y+R1+5vm87+6iX/Bkko+ePAd/S1BnFE9VM5dC2kNyIlMwcpnVbRWXRXnnkcH?=
- =?us-ascii?Q?1Xfhhqw6NkQNnKM6nzU+P7+DKzFGIIvtECnidynfc6PVPqGi8Jhhk5o2BSfY?=
- =?us-ascii?Q?Ft3FZam8uZl4vOPy9yy0d++RyNOG9bbg/F5HsaqsSTOMJ64CRGVvI5GieAot?=
- =?us-ascii?Q?JnH7Q/UZ7XBJmH3ivMa5TtOoYvYmLqAQmhqN9hnWWI072GC4jo/QVddVeMUe?=
- =?us-ascii?Q?jUvyDlxGf4B09lNuQIN2E1+OIdBbPG9LNdAGKWMS5/qSCT873ncixEhrIWu/?=
- =?us-ascii?Q?i7Fs4379c7CHDthoCnGNLF+QcOemL3Z4QM/piw/eJD/zrmmxXeWy3aPIoEcD?=
- =?us-ascii?Q?5wpSpzhiZGEXsI10g182tKp5WngNHOuqDsnshKLcjVu/9txPaowzmZQhcW4C?=
- =?us-ascii?Q?vtzu2RAyrOplqEg4Dpu3YWvEAEmfTuIYhV8Ipx7LJ+PLXHtxDBdDzReFGTzZ?=
- =?us-ascii?Q?aFKbDtpvFbABc5pjHDtl0dMn/5dKCypF7O7t6OWmVw7S4ttaUBrr0LrH5+A9?=
- =?us-ascii?Q?VTjMRRfpOa5d67Fw0gsvnWokXr0L3uHJrSbBuRZujXo9ORNqlFB4gut0+bK6?=
- =?us-ascii?Q?MiU1d6QwlSuuwSurx6CFvHDhCw2WGUm9FxZeAPuZglu20ZNaT7D12ZthEtrS?=
- =?us-ascii?Q?lQ9CxrbdhBcJByNNwqnYze87dj4tGrplxAgnO4+bHS1Oh8MFIpzaxbmcm+Sq?=
- =?us-ascii?Q?7sPLdfJqRsA132Yk4wUpsP1kiwNNjPoWBqVEJdKaKQWsFCdGTVulaDmUJv8v?=
- =?us-ascii?Q?GI9WQl3Fe8OQQkgzb2siC2vDoD17NbzeIn19UdM5/9XDsSMiwm2rOpUkfN3g?=
- =?us-ascii?Q?MgnNX/R+RHuzbwhnBxLPfArqngFns4tqqJ+vnYBCoHlDkEU4HeZPhwGFCqj/?=
- =?us-ascii?Q?J9IdDbvF3O45ekFwLNctIUiZ42YJXmGXDePfc5pEGCK1kDI9RRFd6oJYJjGr?=
- =?us-ascii?Q?8XvxnaGRHjeq85YdnBzTWdPqVJONWwb/nS50/B/ARDs7dHK4DeYAbxaoyY7A?=
- =?us-ascii?Q?3AVnd5IuTlBA7fl+IF9EKo87rniiciIk+NH3EnBsHdpvzi3fjheQE8izLZUi?=
- =?us-ascii?Q?KprylHB7CkYftYml41hxQuup59nY7IrF7PPWrxaoPvUWhKz2HTP6iE5nTfnN?=
- =?us-ascii?Q?h9H0ZdFBtu2rAaxQrGMcdFcLPm7Tt5J0+c2+jiQMHDc1W4fumNkYk2j4uJ+q?=
- =?us-ascii?Q?tHw8nKs8vQSMVa+RaHPgxC9qrHLHaBhRx1WlFmP7kCdSrVAMMgUINBtyx2L2?=
- =?us-ascii?Q?4a2D5Nj+RXQ7bFhQei1qXvBDLyb6QTxDYciFG0A0LpKQs9zPZvlj8YN9U225?=
- =?us-ascii?Q?VH8JRz5XhPslXSYWQtnshYj2fMXKFu720iKeBEbfvtIzAgXV9Tdaom9RdZ4r?=
- =?us-ascii?Q?L2necZ2HgyOMeQ45nKix4EMPLwdmShk=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?bk1aVjVaaTk3TmFYeTBFV2ZlbEdrVEo4b3lJbTV3ajZRMVV5NVBtbWFRVC8v?=
+ =?utf-8?B?S1NPYjROamJENFZGcEFybGZneHRWVkVHL2x0Zm82TlRlZWxJaVRVS3ZzaG5y?=
+ =?utf-8?B?UGtmOGIzUWpGcG9SeTQxK2ZCdWdGaTdacmEyRE4yVzhLNnBvZjlkYThLQVFy?=
+ =?utf-8?B?RW9oSEtueFJZWGpDVWVtNVpzRDFyOHFWOHRWeXdFZ2tZVTBkYjNCY0toY24z?=
+ =?utf-8?B?azZaeHUwOW85QlNVK2h5RGtxMEZJMGw2TjhxbjBLUFdrUTJFNVA1WjU2bVNv?=
+ =?utf-8?B?ajlsT2R5WWEyMGZ1SVJVVE1OaUlGZHIrTlhHSkNwTVRKYTB2TVVaRUlqdFJH?=
+ =?utf-8?B?ZW90S09QUHNMcWpzS05PTFViOXZQN0J0TjZ6VERFNHdjZi9hVnZxRnVHM3JH?=
+ =?utf-8?B?czVzdDZIb1daSzF4K0FNU0EwVmRFbUVkZGFkQ1djNjQ2VGE2UmN3VDE1NWhU?=
+ =?utf-8?B?RVBpbEE2VG5OYVBKNUFVNktxRTl6dGoxeDA4N3J2bmxncTdpYlVoakI0d1VQ?=
+ =?utf-8?B?Wi8wM3VjcnB3N2drRWdET3lRVUdmYTQwNExFMWw0alJWTkxnZlgyZDJnM3FB?=
+ =?utf-8?B?QjVPak0yWVpxWFM4a0JpR2tqWlhPWEozL3JBak42bHJ0L0lBbWcvbWxXQkNR?=
+ =?utf-8?B?VCtiQWtHOXhqdU9FVG11U2NRWDBFL1V4b2lLWmk1SzRtRHFxZ3V5eFNUeWdn?=
+ =?utf-8?B?U0FoYVdCOXp0YnVLNklHT2R6MjlSU3JDaXBFeHlBQm5GZ3YxeDE1bkNqTys5?=
+ =?utf-8?B?ZENmMVo4aFhuWU5Na3ljd05CdU9kL3owenVBYk5QMzFHNXlUQm9xRlIrLysz?=
+ =?utf-8?B?RGlCZTg1QkRkeVpVYmg2L0hYSzhHYnV2cFJ0aWttd2tIYzdqcXJhb3FVY2FQ?=
+ =?utf-8?B?b3JuS1Q0N2FoYzRVSmwreUh1YklscllQOVNFN3dEYThhVTd4S05Vd1VzTkVQ?=
+ =?utf-8?B?UWE2QUpmTlVqYlJGUXhNb3hNOHZhVUtoc3ltSitBMFVVcHU0eFJKZWdkdVRn?=
+ =?utf-8?B?TXF6QjdCQ0FoUEo5WXhIOVRjUWZZY2pNaGpWcTlSOXRjOTQ4RG1HemtOMzlY?=
+ =?utf-8?B?bUc2L2EyVlY4T2JOYkl3dzhNT25rS0VubDlXeEZtOE9NVHIvSmkvT3VOd2t2?=
+ =?utf-8?B?WmZITEdmdytlbVJBSjA0QW5GMzc0Q0JVdnFWOW9jZUpxMm9EcXR4WVhkUVBh?=
+ =?utf-8?B?UFptSzEyUURIUnBWR29CYzZzQTJ3NTNuQ2liMlZXS1RuMms2VmlMQmZsd2Vt?=
+ =?utf-8?B?WmpzQ1QwK3JNNkxTM0U0TnVIckRSR2IyalpxVFkzc2JtWWNkcjhZOTcvUDAx?=
+ =?utf-8?B?SnE0TExGUENmaktuRVRWRzhVNkh3UTZCMXVodklXNDNkYnVKS3Q4V2JUeklh?=
+ =?utf-8?B?NSt1dEdocDZNSjVncTRCQitCSUEzZ1U4aFRkUWJ5bEFMT1l2WWVwazlTY29j?=
+ =?utf-8?B?KzNxMTI0UzVPcHVJKzRXWSs4cFpRdzVodm1vM1dyb3o1TytDeUszV0JEMkpr?=
+ =?utf-8?B?ZUpmQTVJWXZWYTg4WHd2aVJOeGFjdXIzQnRxKy9CYmZYMmFmUGZDRzRlRVpo?=
+ =?utf-8?B?azQwZk93V1N1WUMrT3Z2QVlZV2pObVM0OWU4a2JnMGRvOWNHN2tkZmhWaENN?=
+ =?utf-8?B?WUNTNjI2SkV4eUVuUHg1L0ZlSlVVN1BMUTcxY2lwcC90V1dLN2haK214Z2xa?=
+ =?utf-8?B?ci9lZHBGR0R1MDZMYnhkY1NPdTFqT0taZkZvUVV0Q0tEQ1ZHQ3c1dmQ0YmQ4?=
+ =?utf-8?B?bjlxMElQRytkSVBvTGUzYVBXSXhtRTM3UHhXeWVWVkNJN3hCNjBreG1uL0Z3?=
+ =?utf-8?B?VWVPZEFPaVBHUm52M25lTVBpWjA3V3ArSXFsZ0NBcXZjTDI3RGZWVUNyV1ZL?=
+ =?utf-8?B?enE4ZzJOVU51ZFdETHFIR01ISHVIL2ZVc0xSd3YxSUJJc0xWWVdBY2tRa3NZ?=
+ =?utf-8?B?K1ZkTU0vUWgwaVJZS3JVeU9lcjc4Q3A0WUNPeW9HcWYyZVdLVEZ5ZGsyN01y?=
+ =?utf-8?B?TjczK0p2ZnBPdndscldGRHo2cXlRR3FQUms1WnhleE1hY3IwdHd4NUt3MnNV?=
+ =?utf-8?B?cW5mR0VQNVdBejF2aldhMDgvSmFhb2liZnpJWGNNaVgyTWgwaElXR1RkS3Az?=
+ =?utf-8?B?V3g4dk51bkZkN2pzZjgrSkZTMmprVjZ4N0psNmFHVDc4d0JYOUlpUkF3cElt?=
+ =?utf-8?B?QVBqVjlNMmptUnVQS2FUMVdnRFRlY3dSUlduK21aWXVSTnRSU3RjSjVkaUUw?=
+ =?utf-8?B?MDl2aGczQ1AxbVNacTFEaE5Fc1lSM21uYlFkVGszR0JkK1pLeWErcURScmFk?=
+ =?utf-8?B?WTUzTTJDVnNoSW9WQ1BEaUNoSmxVTVFIVUw0OTI4WkJDZG5DcWtVN0JSQnRy?=
+ =?utf-8?Q?ViKgaZZWUFOXRKio=3D?=
 X-OriginatorOrg: processmission.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: e4f9401d-a84a-4186-b895-08df0fbf6575
+X-MS-Exchange-CrossTenant-Network-Message-Id: d2a12f69-9b52-4391-5c1e-08df0fc4b05d
 X-MS-Exchange-CrossTenant-AuthSource: TYNPR02MB9351.apcprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Sep 2026 04:44:42.7366 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Sep 2026 05:22:35.7447 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: e0544bf7-9765-4630-ab69-0b266dc2169c
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: qrP0q7M2vHA+wHMVJGH9cQgYJYX9yqO0sChFf1N00X32mFrnXOY5bHKTttuGfkVJa0oVq5jcrlkZBekOG+TG38lWr0IlzEKhhVHfWFwPeKc=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SEZPR02MB7871
-Received-SPF: pass client-ip=2a01:111:f403:c40f::6;
+X-MS-Exchange-CrossTenant-UserPrincipalName: b6wdae7jkn/U91Ny+Iet6sTgtl1rmKIiFcJs5QlxZUCy8/qOlVKc51dmRdHO004ZQZZbOCzIuSsSRsTuBT97r3LyrwIk6X+P+AOSo+C86M8=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: TY1PPF25A2BC0BA
+Received-SPF: pass client-ip=2a01:111:f403:c405::5;
  envelope-from=chao.liu@processmission.com;
- helo=SEYPR02CU001.outbound.protection.outlook.com
+ helo=TYPPR03CU001.outbound.protection.outlook.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_PASS=-0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_PASS=-0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -141,308 +154,49 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Sep 09, 2026 at 03:23:55PM +0800, Zephyr Li wrote:
-> Since commit cfc96df65e01, riscv_pmu_ctr_get_fixed_counters_val()
-> returns the complete 64-bit fixed-counter value. The RV32 counter
-> access paths, however, still perform parts of the offset calculation
-> on separately extracted 32-bit halves.
+On Tue, Sep 08, 2026 at 12:47:55PM +0800, wangyang wrote:
+> The XTheadBb th.srri instruction uses the low log2(XLEN) bits of
+> imm6. The generic shift helper rejects values greater than or equal to
+> XLEN, which incorrectly rejects imm6 values 32 through 63 on RV32.
+> Normalize the operand before calling the helper.
 > 
-> In particular, riscv_pmu_write_ctrh() deposits the low 32 bits of the
-> complete fixed-counter value into the high half of mhpmcounter_prev.
-> riscv_pmu_read_ctr() also subtracts a 32-bit half of the previous value
-> from the complete 64-bit fixed-counter value. Consequently, writes to
-> mcycleh can be lost and carries between the low and high halves are not
-> handled correctly.
+> Tested: RV32 imm6 0, 31, 32, and 63 witnesses with XTheadBb
+> enabled and disabled.
+> Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/4413
+> Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 > 
-> Keep the fixed-counter offset calculation entirely in 64 bits. Before
-> a running counter is partially written, materialize its current
-> architectural value and reset the fixed-counter baseline. On reads,
-> calculate the complete 64-bit counter value before extracting the half
-> requested by RV32.
+> Signed-off-by: wangyang <wangyang25@otcaix.iscas.ac.cn>
+> ---
+>  target/riscv/tcg/insn_trans/trans_xthead.c.inc | 1 +
+>  1 file changed, 1 insertion(+)
 > 
-> Register RV32 system TCG tests with the Meson build. Add a test for
-> high-half writes, low-to-high carry, and preserving the carried high
-> half across a subsequent low-half write.
-> 
-> Fixes: cfc96df65e01 ("target/riscv: Remove upper_half from riscv_pmu_ctr_get_fixed_counters_val")
-> Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/4219
-> Signed-off-by: Zephyr Li <fritchleybohrer@gmail.com>
-Reviewed-by: Chao Liu <chao.liu@processmission.com>
+> diff --git a/target/riscv/tcg/insn_trans/trans_xthead.c.inc b/target/riscv/tcg/insn_trans/trans_xthead.c.inc
+> index 681f70e5bc..34226b1be5 100644
+> --- a/target/riscv/tcg/insn_trans/trans_xthead.c.inc
+> +++ b/target/riscv/tcg/insn_trans/trans_xthead.c.inc
+> @@ -141,6 +141,7 @@ GEN_TRANS_TH_ADDSL(3)
+>  static bool trans_th_srri(DisasContext *ctx, arg_th_srri * a)
+>  {
+>      REQUIRE_XTHEADBB(ctx);
+> +    a->shamt &= get_olen(ctx) - 1;
+Looks right, but usually we handle this in decodetree. We don't
+normally modify the decoded arguments directly, so could you move
+the normalization into decodetree instead—e.g. a dedicated RV32
+pattern/trans like zext_h_32/pack?
+
+just like:
+
+{
+  th_srri_rv32  000100 -..... ..... 001 ..... 0001011 @sh5
+  th_srri       000100 ...... ..... 001 ..... 0001011 @sh6
+}
 
 Thanks,
 Chao
-
-> 
-> ---
-> Changes in v2:
-> - Move the test to a new tests/tcg/riscv32 directory.
-> - Convert the test registration to the Meson TCG test framework.
-> - Add RV32 TCG cross-compiler options and cover the test directory in
->   MAINTAINERS.
-> - Add a riscv32-local semihosting linker script.
-> 
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 7183babd6a..5f75b2684f 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -377,6 +377,7 @@ F: include/hw/riscv/
->  F: common-user/host/riscv*
->  F: tests/functional/riscv32
->  F: tests/functional/riscv64
-> +F: tests/tcg/riscv32/
->  F: tests/tcg/riscv64/
->  F: tests/qtest/iommu-riscv-test.c
->  
-> diff --git a/meson_options.txt b/meson_options.txt
-> index 292625af08..2ceebe7a44 100644
-> --- a/meson_options.txt
-> +++ b/meson_options.txt
-> @@ -452,6 +452,10 @@ option('tcg_tests_cross_cc_ppc64le', type: 'string',
->         description: 'cc for ppc64le tcg tests')
->  option('tcg_tests_cross_cflags_ppc64le', type: 'string',
->         description: 'cflags for ppc64le tcg tests')
-> +option('tcg_tests_cross_cc_riscv32', type: 'string',
-> +       description: 'cc for riscv32 tcg tests')
-> +option('tcg_tests_cross_cflags_riscv32', type: 'string',
-> +       description: 'cflags for riscv32 tcg tests')
->  option('tcg_tests_cross_cc_riscv64', type: 'string',
->         description: 'cc for riscv64 tcg tests')
->  option('tcg_tests_cross_cflags_riscv64', type: 'string',
-> diff --git a/target/riscv/tcg/csr.c b/target/riscv/tcg/csr.c
-> index bd4b6dc114..65985efb22 100644
-> --- a/target/riscv/tcg/csr.c
-> +++ b/target/riscv/tcg/csr.c
-> @@ -1337,23 +1337,23 @@ static RISCVException riscv_pmu_write_ctr(CPURISCVState *env, target_ulong val,
->      int deposit_size = rv32 ? 32 : 64;
->      uint64_t ctr;
->  
-> -    counter->mhpmcounter_val = deposit64(counter->mhpmcounter_val,
-> -                                         0, deposit_size, val);
-> -
->      if (!get_field(env->mcountinhibit, BIT(ctr_idx)) &&
->          (riscv_pmu_ctr_monitor_cycles(env, ctr_idx) ||
->           riscv_pmu_ctr_monitor_instructions(env, ctr_idx))) {
->          ctr = riscv_pmu_ctr_get_fixed_counters_val(env, ctr_idx);
-> -        counter->mhpmcounter_prev = deposit64(counter->mhpmcounter_prev,
-> -                                              0, deposit_size, ctr);
-> +        counter->mhpmcounter_val += ctr - counter->mhpmcounter_prev;
-> +        counter->mhpmcounter_val = deposit64(counter->mhpmcounter_val,
-> +                                             0, deposit_size, val);
-> +        counter->mhpmcounter_prev = ctr;
->          if (ctr_idx > 2) {
->              riscv_pmu_setup_timer(env, counter->mhpmcounter_val, ctr_idx);
->          }
->       } else {
-> +        counter->mhpmcounter_val = deposit64(counter->mhpmcounter_val,
-> +                                             0, deposit_size, val);
->          /* Other counters can keep incrementing from the given value */
->          counter->mhpmcounter_prev = deposit64(counter->mhpmcounter_prev,
->                                                0, deposit_size, val);
-> -
->      }
->  
->      return RISCV_EXCP_NONE;
-> @@ -1363,20 +1363,22 @@ static RISCVException riscv_pmu_write_ctrh(CPURISCVState *env, target_ulong val,
->                                            uint32_t ctr_idx)
->  {
->      PMUCTRState *counter = &env->pmu_ctrs[ctr_idx];
-> -    uint64_t ctrh;
-> +    uint64_t ctr;
->  
-> -    counter->mhpmcounter_val = deposit64(counter->mhpmcounter_val,
-> -                                         32, 32, val);
->      if (!get_field(env->mcountinhibit, BIT(ctr_idx)) &&
->          (riscv_pmu_ctr_monitor_cycles(env, ctr_idx) ||
->           riscv_pmu_ctr_monitor_instructions(env, ctr_idx))) {
-> -        ctrh = riscv_pmu_ctr_get_fixed_counters_val(env, ctr_idx);
-> -        counter->mhpmcounter_prev = deposit64(counter->mhpmcounter_prev,
-> -                                              32, 32, ctrh);
-> +        ctr = riscv_pmu_ctr_get_fixed_counters_val(env, ctr_idx);
-> +        counter->mhpmcounter_val += ctr - counter->mhpmcounter_prev;
-> +        counter->mhpmcounter_val = deposit64(counter->mhpmcounter_val,
-> +                                             32, 32, val);
-> +        counter->mhpmcounter_prev = ctr;
->          if (ctr_idx > 2) {
->              riscv_pmu_setup_timer(env, counter->mhpmcounter_val, ctr_idx);
->          }
->      } else {
-> +        counter->mhpmcounter_val = deposit64(counter->mhpmcounter_val,
-> +                                             32, 32, val);
->          counter->mhpmcounter_prev = deposit64(counter->mhpmcounter_prev,
->                                                32, 32, val);
->      }
-> @@ -1407,12 +1409,11 @@ RISCVException riscv_pmu_read_ctr(CPURISCVState *env, target_ulong *val,
->      bool rv32 = riscv_cpu_mxl(env) == MXL_RV32;
->      int start = upper_half ? 32 : 0;
->      int length = rv32 ? 32 : 64;
-> -    uint64_t ctr_prev, ctr_val;
-> +    uint64_t ctr_val;
->  
->      /* Ensure upper_half is only set for XLEN == 32 */
->      g_assert(rv32 || !upper_half);
->  
-> -    ctr_prev = extract64(counter->mhpmcounter_prev, start, length);
->      ctr_val  = extract64(counter->mhpmcounter_val, start, length);
->  
->      if (get_field(env->mcountinhibit, BIT(ctr_idx))) {
-> @@ -1431,7 +1432,8 @@ RISCVException riscv_pmu_read_ctr(CPURISCVState *env, target_ulong *val,
->      if (riscv_pmu_ctr_monitor_cycles(env, ctr_idx) ||
->          riscv_pmu_ctr_monitor_instructions(env, ctr_idx)) {
->          uint64_t cntr = riscv_pmu_ctr_get_fixed_counters_val(env, ctr_idx) -
-> -                                                             ctr_prev + ctr_val;
-> +                        counter->mhpmcounter_prev +
-> +                        counter->mhpmcounter_val;
->          *val = extract64(cntr, start, length);
->      } else {
->          *val = ctr_val;
-> diff --git a/tests/tcg/meson.build b/tests/tcg/meson.build
-> index d41a228fb3..60b5ce2529 100644
-> --- a/tests/tcg/meson.build
-> +++ b/tests/tcg/meson.build
-> @@ -169,6 +169,7 @@ subdir('mips64el')
->  subdir('or1k')
->  subdir('ppc64')
->  subdir('ppc64le')
-> +subdir('riscv32')
->  subdir('riscv64')
->  subdir('s390x')
->  subdir('sh4')
-> diff --git a/tests/tcg/riscv32/meson.build b/tests/tcg/riscv32/meson.build
-> new file mode 100644
-> index 0000000000..c08dfd772d
-> --- /dev/null
-> +++ b/tests/tcg/riscv32/meson.build
-> @@ -0,0 +1,7 @@
-> +# SPDX-License-Identifier: GPL-2.0-or-later
-> +
-> +cc = 'riscv64-linux-gnu-gcc'
-> +cc_dockerfile = 'debian-all-test-cross'
-> +cc_docker_host_arch = ['aarch64', 'x86_64']
-> +
-> +subdir('system')
-> diff --git a/tests/tcg/riscv32/semihost.ld b/tests/tcg/riscv32/semihost.ld
-> new file mode 100644
-> index 0000000000..874838a865
-> --- /dev/null
-> +++ b/tests/tcg/riscv32/semihost.ld
-> @@ -0,0 +1,23 @@
-> +/* SPDX-License-Identifier: GPL-2.0-or-later */
-> +
-> +ENTRY(_start)
-> +
-> +SECTIONS
-> +{
-> +    /* virt machine, RAM starts at 2gb */
-> +    . = 0x80000000;
-> +    .text : {
-> +        *(.text)
-> +    }
-> +    .rodata : {
-> +        *(.rodata)
-> +    }
-> +    /* align r/w section to next 2mb */
-> +    . = ALIGN(1 << 21);
-> +    .data : {
-> +        *(.data)
-> +    }
-> +    .bss : {
-> +        *(.bss)
-> +    }
-> +}
-> diff --git a/tests/tcg/riscv32/system/meson.build b/tests/tcg/riscv32/system/meson.build
-> new file mode 100644
-> index 0000000000..16f9a06c94
-> --- /dev/null
-> +++ b/tests/tcg/riscv32/system/meson.build
-> @@ -0,0 +1,37 @@
-> +# SPDX-License-Identifier: GPL-2.0-or-later
-> +
-> +tests = []
-> +
-> +link_script = files('../semihost.ld')[0]
-> +cflags = ['-march=rv32im_zicsr',
-> +          '-mabi=ilp32',
-> +          '-nostdlib',
-> +          '-ffreestanding',
-> +          '-Wa,--noexecstack',
-> +          '-Wl,-T', link_script]
-> +qemu_args = ['-M', 'virt',
-> +             '-display', 'none',
-> +             '-serial', 'stdio',
-> +             '-semihosting',
-> +             '-bios']
-> +
-> +tests += {
-> +  'test-mcycle.S': {
-> +    'cflags': cflags,
-> +    'qemu_args': ['-icount', 'shift=1', qemu_args],
-> +  },
-> +}
-> +
-> +if 'qemu-system-riscv32' in emulators
-> +  tcg_tests += {
-> +    'riscv32-softmmu': {
-> +      'cc': cc,
-> +      'cc_dockerfile': cc_dockerfile,
-> +      'cc_docker_host_arch': cc_docker_host_arch,
-> +      'folder': 'riscv32',
-> +      'gdb_arch': 'riscv32',
-> +      'qemu': emulators['qemu-system-riscv32'],
-> +      'tests': tests,
-> +    }
-> +  }
-> +endif
-> diff --git a/tests/tcg/riscv32/test-mcycle.S b/tests/tcg/riscv32/test-mcycle.S
-> new file mode 100644
-> index 0000000000..189d1e13a2
-> --- /dev/null
-> +++ b/tests/tcg/riscv32/test-mcycle.S
-> @@ -0,0 +1,45 @@
-> +/* SPDX-License-Identifier: GPL-2.0-or-later */
-> +
-> +	.option	norvc
-> +
-> +	.text
-> +	.global	_start
-> +_start:
-> +	/* Exercise writes while mcycle is running. */
-> +	csrw	mcountinhibit, zero
-> +	csrw	mcycle, zero
-> +
-> +	/* A write to the high half must be immediately observable. */
-> +	li	s0, 0x1234ffff
-> +	csrw	mcycleh, s0
-> +	csrr	t0, mcycleh
-> +	bne	t0, s0, fail
-> +
-> +	/* Check carry from the low half into the high half. */
-> +	li	s0, 0x12345678
-> +	csrw	mcycleh, s0
-> +	li	t0, 0xfffffff0
-> +	csrw	mcycle, t0
-> +	.rept	32
-> +	nop
-> +	.endr
-> +	csrr	t0, mcycleh
-> +	addi	s0, s0, 1
-> +	bne	t0, s0, fail
-> +
-> +	/* A low-half write must preserve the carried high half. */
-> +	li	t0, 0x22222222
-> +	csrw	mcycle, t0
-> +	csrr	t0, mcycleh
-> +	bne	t0, s0, fail
-> +
-> +	li	t0, 0x100000
-> +	li	t1, 0x5555	/* FINISHER_PASS */
-> +	sw	t1, 0(t0)
-> +	j	.
-> +
-> +fail:
-> +	li	t0, 0x100000
-> +	li	t1, 0x13333	/* status = FINISHER_FAIL, code = 1 */
-> +	sw	t1, 0(t0)
-> +	j	.
+>      return gen_shift_imm_fn_per_ol(ctx, a, EXT_NONE,
+>                                     tcg_gen_rotri_tl, gen_roriw, NULL);
+>  }
 > -- 
-> 2.43.0
+> 2.55.0.windows.2
+> 
 
