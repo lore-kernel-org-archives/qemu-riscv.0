@@ -4,92 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 769C8C88E64
-	for <qemu-riscv@archiver.kernel.org>; Mon, 14 Sep 2026 01:15:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12A3CC88E5C
+	for <qemu-riscv@archiver.kernel.org>; Mon, 14 Sep 2026 01:53:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x5vHi-0007MG-BR; Sun, 13 Sep 2026 21:15:02 -0400
+	id 1x5vsy-0003x5-CK; Sun, 13 Sep 2026 21:53:32 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1x5vHg-0007LW-UM
- for qemu-riscv@nongnu.org; Sun, 13 Sep 2026 21:15:00 -0400
-Received: from mail-pj2-x10.google.com ([2607:f8b0:4864:39::10])
+ id 1x5vso-0003w6-IT
+ for qemu-riscv@nongnu.org; Sun, 13 Sep 2026 21:53:23 -0400
+Received: from mail-pj1-x102e.google.com ([2607:f8b0:4864:20::102e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1x5vHf-0006VR-Dp
- for qemu-riscv@nongnu.org; Sun, 13 Sep 2026 21:15:00 -0400
-Received: by mail-pj2-x10.google.com with SMTP id
- 98e67ed59e1d1-39b31b4281eso1626673a91.2
- for <qemu-riscv@nongnu.org>; Sun, 13 Sep 2026 18:14:58 -0700 (PDT)
+ id 1x5vsm-0005Bb-PS
+ for qemu-riscv@nongnu.org; Sun, 13 Sep 2026 21:53:22 -0400
+Received: by mail-pj1-x102e.google.com with SMTP id
+ 98e67ed59e1d1-38ea87caafeso2746283a91.3
+ for <qemu-riscv@nongnu.org>; Sun, 13 Sep 2026 18:53:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1789348498; x=1789953298; darn=nongnu.org;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=Qha8O7fIOACIdoDr+4f8rnJzFRtc1DQGdGU3sMCG/uA=;
- b=dGelAsmSfuWkidfDddWI78X2+JTD2AE8etn9Fo+qgrgAJNd0OHDfXYTkjWiUrffTjE
- rAebs+RLp4EjPJE8+zUjJCXrH/rvtFOi2xci3MTpoCUaUAxaUKn60WjthI2FRY9JCrtR
- DoaJZbbk8Tsggg3FTgodx9cX+UKUCLsRt1xFQlo0CeKiXKaMrsRMB6lBnJIFfd2ZyERB
- fMkdJ621TSKyQMDTEWJxGJKe6TUz/LwyANyNPIdr0qBe2GSbbOc6tggJ8+nmNQqueLwI
- WRvn0VbpBiWgOsebKk/g8YAODr4s+ydSYdGH5wVxykHCrb1NYWIn+ZynMhajhA+aCxQG
- WF4g==
+ d=linaro.org; s=google; t=1789350799; x=1789955599; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=jNZOvUK8o3EJEk6F6/4jpgOYEq/Vbqy/CIwqaCtwpbY=;
+ b=G5SkqK92WnW1T67vqt2KRQhgrg4aHqHWPIcuZojUg97c6wusJgqvT66HhtlDr00DVK
+ phxTB0Kp71YP5jFRPijG0Vv2b/IYBiFLZg/BTCKZT18G7yfopRSCrAiGwHRUZZHISLC+
+ 2GUeA0roXF7HEzjy6SXcfADy9b0vD9J795hz9x1wXLo5VMkgNy6SFjIA119Ny9tKyErT
+ GL/yTrZUt0ZJRwDA4+kRXxtlo/EFTTXYCxZKuMTg1v7GgG5pzBSmXHR6it7F/vRg/bIa
+ Ha+RxUOfwX4xUlvou6FI986yoHtFu3F4LU/q/81xQlmJDe1TZWt8BaSrlkr6605gcMEA
+ PQzg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1789348498; x=1789953298;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20251104; t=1789350799; x=1789955599;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=Qha8O7fIOACIdoDr+4f8rnJzFRtc1DQGdGU3sMCG/uA=;
- b=NSae/XEPtu99T5hNQT7aCI1BHhaq5TQrf0D5j7e6fjBekYZxCGDLZdrm4W5Rc/Yu8G
- Vf6VSqm+7wYoYeQ8Tt+gSobGsAFUdCcHNcO4KzNu3Ft6ExT/UxkD8Ab+IqKuF4fl0bM7
- 1l9lMolkU4Da5QQYqMSLX5YPsR1u5l8Vpp4XOa6U7S2+13kUM9k659l3YaO7BE7xDC6X
- dyOh8g5qNb1ElBLNiUjHMmUEkruieqYIOdiM8uJE5r6gbyn33Py2sLQm0zFwXQ9p87vp
- baqOOeDeyPewnHmOcBQPp079cxQKYMj1ybQD06selimt72J9RJiqkmAVu9S6ftcuVSYa
- oZjA==
+ bh=jNZOvUK8o3EJEk6F6/4jpgOYEq/Vbqy/CIwqaCtwpbY=;
+ b=pWrRZWiQfswZN9+j1kGtHeU4k0tksgA8M58ckw1V50aMzmz7/s6vZkOZHV+r3yuIxe
+ Y7tuAULAhd2h8DBmhBvyeE1rMPJXhwP8QCbflLXQ4pUudnWQBERoYuYL0jJC/F060vLp
+ QG/8fWvtVyjG2sYUzaEtKstOFWewrqqQhjoR0W4rPrTe24KIYO4Z6V1Me7czeJg3khKT
+ vkNIgxO/adKDUEiVJYosuX1WAiurRfxXRA02VK1AGPAvcw8Skf1qfJS6eRC2DogT7wsj
+ 8dXq+PCRJqAycAgAP7YzzizIoo37675ZGgV+cn+WqxFY7BgnByAt7+urrO74GIpSQXW5
+ ziLQ==
 X-Forwarded-Encrypted: i=1;
- AKwUvBzAYv672ZjYXBZj55EFKZRi8tZhMFmgweo1nW2lShSBXDbiDl/uCNGBj4FQd+VYh+1Ae6zBaHc7QkRZ@nongnu.org
-X-Gm-Message-State: AFuF++knTu3lMdrhjRoFvILejspVSjnyiR1G76hFej1VwNnh5R91743x
- NsNdSSGOEhQu7n+BsTytaqcA0ILRXa60rMza9rW8BlLGJaNiv0iUsUCMFKXdVEE03z8=
-X-Gm-Gg: AYBFou0YDJdWEOrM80nrt4rlvMqMhRCBbGbHlZoeiS8xWKTnTfd1Op9L6uH/maCnuUu
- 5eKLN/rsiZFeF6vXqwBnvj7Ni2vSvAVTYIIwNkdnRTmIkNXJ4r/ZQr6luaNcX169ZCqghaYkOIp
- trc6Hc1FUEVa4RZKiaoNde+axx7vU7lZ8r5QsrBDmMSGgoZxAT80zCqsqnF2uMJlWAExZ++65gy
- MpIn+RMdIfLW0KsPTmoskm0soFCoNvZVFK7ptl0HCCASqamxK3kMZ83nOKgLYlwsnnQMmJ43lUk
- E6gZ1O4bK1ZPjqzzu9B8KLBgJ4YQCMMJ2ny9S2lqc80+PuIaaPgEAFd09BKmxkegjcp3z4Dw+nU
- 29Iu5Cpgrx6PMk38lSP6qmyt47lpuo3GhUWYAClIKk8fw4TgZ6U+qjLXCIlkIM9EJniPUfNM3yB
- zQB/zYfh60s6fKcMrAP8zWUf0piCAMEUAl/RpYrXxCs0FvIKZEOEn7VGZWnkOHNxS6eu1VSlLMk
- /2zWo96zDebUByyBqA33aRhMUMXHu8V29MMQ4FRJcujM6KSP5jEBEv0TXrZ9A==
-X-Received: by 2002:a17:90a:1c8f:b0:39d:ec24:5ffe with SMTP id
- 98e67ed59e1d1-39dec2460a2mr586188a91.9.1789348497592; 
- Sun, 13 Sep 2026 18:14:57 -0700 (PDT)
-Received: from ?IPV6:2603:800c:7900:ed00:1665:91c0:9a80:f870?
- ([2603:800c:7900:ed00:1665:91c0:9a80:f870])
+ AKwUvByQT61fwqSQs9BiZGh8HRBUM97ob0doxW9qGUbeLpy/gr6toSNdddINbvdZHExdULappH3hZw1syx8l@nongnu.org
+X-Gm-Message-State: AFuF++nimLVnabFM4/YNOP7VvlrQMdI9ZO1dyE0/Z/WB3O9VJmhPcaIl
+ +2ztTZd2MRNew1WxLMs8rgWLxJnDrTsN+v1PJn6G3+TPC4+U5Ue4urKeMZdAGocFqLk=
+X-Gm-Gg: AYBFou1MyeolxExZIzoFBW3AzYY0feh9j4i386nTCpkMFwWsm90nCppvV/1xKTH3ez5
+ 5uDGvSFGJj6EaItgEEyoqdHWfqgDKU52i9or1Xl910aVfwW91XI/t65aDz0gDQ6H4RToDbLHN/w
+ Y9ctLVJSlDuEhO92Ht70shI1wDvMdDnq8vGUo4ANJrwvrKcGIUTy1TiGAeJ+3TeFIVkQzztu3S0
+ msgeQAA+UlGJsbfUbSNXVFPJ7TbVuJAmeJR1IfAOg691Ym0CpH9lC4EmnJRukgriEuOl6rfOL81
+ nsuuGF0j23BX+SEeNKGnMvyJsGvCf0xft6gCKkyi6Ou7NDM+YIb8DWFXsEGXxTG/EZK/A/kuR/4
+ sFv4uc8zqA2bv9FENMIF4keUSWIOJ2cHzjERYrCc8DHWCWG8m0qKCKWAS+I1XD5SnsS9cbz0MYn
+ c4WiQmI9EEGUwgWJ00XSUtlc2XJnOjdPldPHz9WWHdsFf/GVriGn9YTmNHlVMImFavesG7wkOq5
+ JahS0k=
+X-Received: by 2002:a17:90b:4c41:b0:398:9c39:520f with SMTP id
+ 98e67ed59e1d1-39dec05d384mr1091834a91.15.1789350799016; 
+ Sun, 13 Sep 2026 18:53:19 -0700 (PDT)
+Received: from stoup ([2603:800c:7900:ed00:1665:91c0:9a80:f870])
  by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-33ba4efc398sm26937961eec.19.2026.09.13.18.14.56
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 13 Sep 2026 18:14:57 -0700 (PDT)
-Message-ID: <19735ac2-9357-4d17-847e-672781539b0f@linaro.org>
-Date: Sun, 13 Sep 2026 15:14:54 -1000
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 0/2] target: riscv: support TLB page flush for
- sfence.vma
-To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Trevor Gamblin <tgamblin@baylibre.com>, qemu-devel@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
- <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org
-References: <20260904-riscv_tlb_page_flush-v2-0-defec3f29312@baylibre.com>
- <165fb72b-3cf2-4693-88e4-f9d36c5c498d@oss.qualcomm.com>
+ a92af1059eb24-14365b8137fsm22323467c88.9.2026.09.13.18.53.17
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 13 Sep 2026 18:53:18 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
-Content-Language: en-US
-In-Reply-To: <165fb72b-3cf2-4693-88e4-f9d36c5c498d@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+To: qemu-devel@nongnu.org
+Cc: Alistair.Francis@wdc.com, qemu-riscv@nongnu.org, peter.maydell@linaro.org
+Subject: [PATCH] disas/riscv: Fix csrrs decode
+Date: Sun, 13 Sep 2026 15:53:16 -1000
+Message-ID: <20260914015316.792751-1-richard.henderson@linaro.org>
+X-Mailer: git-send-email 2.53.0
+MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:39::10;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj2-x10.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102e;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x102e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -112,40 +99,35 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 9/7/26 03:14, Daniel Henrique Barboza wrote:
-> Richard,
-> 
-> 
-> This tlb_flush change is giving a +20% performance boost in riscv64- 
-> tuxrun.  From
-> this:
-> 
-> 23/23 func-thorough+func-riscv64-thorough+thorough - qemu:func-riscv64- 
-> tuxrun  OK   92.71s   4 subtests passed
-> 
-> To this:
-> 
-> 23/23 func-thorough+func-riscv64-thorough+thorough - qemu:func-riscv64- 
-> tuxrun  OK   73.45s   4 subtests passed
-> 
-> Other tests weren't that affected - I take it has to do with the amount of
-> sfence.vma being issued.  They look fine in my own testing with an emulated
-> Ubuntu host as well.
-> 
-> This is all fantastic but I wonder if we're missing something.  If you 
-> could
-> please take a look at these 2 patches and see if we're handling the tlb 
-> flushes
-> according that would be terrific.
-It looks good.
+Resolves: Coverity CID 1685513
+Fixes: 4fec981f18fd ("disas/riscv: Split rvi_opcode_data")
+Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+---
+ disas/riscv.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-The only possible improvement would be to avoid flushing the PRV_M 1-1 
-tlb, using tlb_flush_by_mmuidx / tlb_flush_page_by_mmuidx.
+diff --git a/disas/riscv.c b/disas/riscv.c
+index e85dbac0351..ef8b7ff20f9 100644
+--- a/disas/riscv.c
++++ b/disas/riscv.c
+@@ -2560,7 +2560,6 @@ static const rv_opcode_data *decode_inst_opcode(rv_decode *dec, rv_isa isa)
+                 }
+                 break;
+             case 2:
+-                return &op_csrrs;
+                 if (operand_rs1(inst) == 0) {
+                     switch (operand_csr12(inst)) {
+                     case 0x001: return &op_frflags;
+@@ -2574,7 +2573,7 @@ static const rv_opcode_data *decode_inst_opcode(rv_decode *dec, rv_isa isa)
+                     case 0xc82: return &op_rdinstreth;
+                     }
+                 }
+-                break;
++                return &op_csrrs;
+             case 3: return &op_csrrc;
+             case 4:
+                 if (dec->cfg && dec->cfg->ext_zimop) {
+-- 
+2.53.0
 
-You could also rename MMUIdx_M to MMUIdx_PHYS and use it in modes other 
-than PRV_M when the mmu is disabled, simplifying the test at the start 
-of get_physical_address.
-
-
-r~
 
