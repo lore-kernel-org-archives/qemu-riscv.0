@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3C0EC88E77
-	for <qemu-riscv@archiver.kernel.org>; Tue, 15 Sep 2026 19:28:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA5D2C88E77
+	for <qemu-riscv@archiver.kernel.org>; Tue, 15 Sep 2026 19:28:43 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x6YpP-0008Fd-Aw; Tue, 15 Sep 2026 15:28:27 -0400
+	id 1x6YpZ-0008KZ-1U; Tue, 15 Sep 2026 15:28:37 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jic23@kernel.org>)
- id 1x6XLL-0005y6-KT; Tue, 15 Sep 2026 13:53:20 -0400
-Received: from tor.source.kernel.org ([172.105.4.254])
+ id 1x6XNl-0006zD-8i; Tue, 15 Sep 2026 13:55:58 -0400
+Received: from sea.source.kernel.org ([2600:3c0a:e001:78e:0:1991:8:25])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jic23@kernel.org>)
- id 1x6XLK-0003S6-7X; Tue, 15 Sep 2026 13:53:19 -0400
+ id 1x6XNh-00042r-5Z; Tue, 15 Sep 2026 13:55:47 -0400
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id 4A85860142;
- Tue, 15 Sep 2026 17:53:17 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E38E31F000FF;
- Tue, 15 Sep 2026 17:53:15 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 0936B40599;
+ Tue, 15 Sep 2026 17:55:42 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4E9A81F000FF;
+ Tue, 15 Sep 2026 17:55:40 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1789494797;
- bh=EDg2lbS9FxueOTc0OmiHtUQtfNsIvgIeTNuEARoespI=;
+ s=k20260515; t=1789494941;
+ bh=CfFwWgtl+eibAQ5fpOdX+5AtdE11X/LWsJ9WbQHfDiY=;
  h=Date:From:To:Cc:Subject:In-Reply-To:References;
- b=CdhlOSlbpttVGy84O4uFXV4oqNG9WLZTkedirtWQhq/IGhK5rsW/OOoOlK3H7PbT/
- iGkdJSxbjuMrlUxr6GUyUVG9k34URDKZ7KT81+QdLHlsHpk96d6Qfv27jBij2Rhwcn
- bLJRgs9tDAjWT39A31I+TRpfSUGsFjrUSxbIwglwW+aq27PESlJKKBsNh+sjh33m29
- xKSxgk5w+5W4sc8vwj/l0LOSg9mRkfUfyybGEQygoENeHO1Mfn5yLwhLkbofmkgCrC
- 15z6jidU/ZJRTtrDrdPKa6wplSGjUCO8N2aIk2/J9iMRyYlP8GqW6vLSHYJTbhGVz5
- 38I/aowXoYmhA==
-Date: Tue, 15 Sep 2026 18:53:12 +0100
+ b=AfTMvzD7PiM80+hUHUu4fUIuPoZOK2mTmLvGj/ejAnfuET5O1Slpl4dyAR+Z1Ra58
+ cU1IBTVLAwrbTQan9ht5X5UCdYGPcgaJaP0NkvvCpShhriEf0AejyqKkKP0J2zGuaw
+ f7C69KAfcnzqAbj29k64F/3o+WbCTGJCMjPM7/8LzWqkkYYtYgqu3cp81h7AOT/l1G
+ veI0F7mvOjUIASJvpx0pUhw22O6Tsk/U4750xn5h1e5gqSU5HSiArtuhdz0Esxewml
+ eS74sfUdG2xQxgmpCohzpuhVvDoYdDHeewHEBbRofeTNFZlTwRh1id0licX2eJUdrE
+ KBi9aXQ7bsTlQ==
+Date: Tue, 15 Sep 2026 18:55:38 +0100
 From: Jonathan Cameron <jic23@kernel.org>
 To: Chen Pei <cp0613@linux.alibaba.com>
 Cc: palmer@dabbelt.com, alistair.francis@wdc.com, mst@redhat.com,
@@ -43,18 +43,18 @@ Cc: palmer@dabbelt.com, alistair.francis@wdc.com, mst@redhat.com,
  anisinha@redhat.com, dave.jiang@intel.com, alison.schofield@intel.com,
  junjie.cao@intel.com, guoren@kernel.org, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org, linux-cxl@vger.kernel.org
-Subject: Re: [PATCH v6 4/6] tests/qtest: Prepare golden files for the RISC-V
- CXL ACPI test
-Message-ID: <20260915185312.3af64924@jic23-hlaptop>
-In-Reply-To: <20260907093735.2753-5-cp0613@linux.alibaba.com>
+Subject: Re: [PATCH v6 5/6] tests/qtest: Add RISC-V ACPI bios tables test
+ for CXL
+Message-ID: <20260915185538.18e5526a@jic23-hlaptop>
+In-Reply-To: <20260907093735.2753-6-cp0613@linux.alibaba.com>
 References: <20260907093735.2753-1-cp0613@linux.alibaba.com>
- <20260907093735.2753-5-cp0613@linux.alibaba.com>
+ <20260907093735.2753-6-cp0613@linux.alibaba.com>
 X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=172.105.4.254; envelope-from=jic23@kernel.org;
- helo=tor.source.kernel.org
+Received-SPF: pass client-ip=2600:3c0a:e001:78e:0:1991:8:25;
+ envelope-from=jic23@kernel.org; helo=sea.source.kernel.org
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -62,7 +62,7 @@ X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Tue, 15 Sep 2026 15:27:21 -0400
+X-Mailman-Approved-At: Tue, 15 Sep 2026 15:27:24 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -77,17 +77,118 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon,  7 Sep 2026 17:37:31 +0800
+On Mon,  7 Sep 2026 17:37:32 +0800
 Chen Pei <cp0613@linux.alibaba.com> wrote:
 
-> Add empty DSDT.cxl and CEDT.cxl golden files and list them in
-> bios-tables-test-allowed-diff.h, in preparation for the RISC-V CXL
-> bios-tables test added in the following patch.  The populated golden
-> master binaries are committed separately in a final patch, following
-> the bios-tables-test update process.
+> Add test_acpi_riscv64_virt_tcg_cxl() to verify that enabling CXL on
+> the RISC-V virt machine produces correct ACPI tables, including the
+> ACPI0017 CXLM device with _DEP in the DSDT and the CEDT table.
 > 
+> The test boots with cxl=on, one pxb-cxl bus (bus_nr=12), a CXL root
+> port, a cxl-type3 device and a fixed memory window, mirroring the
+> existing x86 q35 CXL test pattern.
+> 
+> Since pxb-cxl is a root bus, using -cdrom causes QEMU to auto-plug the
+> cdrom drive into pxb-cxl, triggering "Only PCI/PCIe bridges can be
+> plugged into pxb-cxl".  The ISO is instead attached explicitly via a
+> virtio-scsi-pci controller on pcie.0, following the same approach as
+> test_acpi_aarch64_virt_tcg_pxb().
+> 
+> Acked-by: Alistair Francis <alistair.francis@wdc.com>
 > Reviewed-by: Junjie Cao <junjie.cao@intel.com>
+> Tested-by: Junjie Cao <junjie.cao@intel.com>
 > Signed-off-by: Chen Pei <cp0613@linux.alibaba.com>
-boilerplate but for completeness
+
+One possible extra thing below and a general comment. This does the job
+though so no need to change anything.
+
 Reviewed-by: Jonathan Cameron <jonathan.cameron@oss.qualcomm.com>
+
+
+> ---
+>  tests/qtest/bios-tables-test.c | 54 ++++++++++++++++++++++++++++++++++
+>  1 file changed, 54 insertions(+)
+> 
+> diff --git a/tests/qtest/bios-tables-test.c b/tests/qtest/bios-tables-test.c
+> index f6dfa4131b..41c0d6a295 100644
+> --- a/tests/qtest/bios-tables-test.c
+> +++ b/tests/qtest/bios-tables-test.c
+> @@ -2214,6 +2214,56 @@ static void test_acpi_riscv64_virt_tcg(void)
+>      free_test_data(&data);
+>  }
+>  
+> +#ifdef CONFIG_POSIX
+> +static void test_acpi_riscv64_virt_tcg_cxl(void)
+> +{
+> +    gchar *tmp_path = g_dir_make_tmp("qemu-test-cxl.XXXXXX", NULL);
+> +    gchar *params;
+> +
+> +    test_data data = {
+> +        .machine = "virt",
+> +        .arch = "riscv64",
+> +        .tcg_only = true,
+> +        .uefi_fl1 = "pc-bios/edk2-riscv64-code.fd",
+> +        .uefi_fl2 = "pc-bios/edk2-riscv64-vars.fd",
+> +        .ram_start = 0x80000000ULL,
+> +        .scan_len = 128ULL * MiB,
+> +        .variant = ".cxl",
+> +    };
+> +
+> +    /*
+> +     * While using -cdrom, the cdrom would auto-plug into pxb-cxl because
+> +     * its bus is also a root bus, triggering "Only PCI/PCIe bridges can be
+> +     * plugged into pxb-cxl".  Attach the ISO explicitly to a scsi controller
+> +     * on pcie.0 instead, following the same pattern as
+> +     * test_acpi_aarch64_virt_tcg_pxb().
+> +     */
+> +    params = g_strdup_printf("-cpu rva22s64"
+> +                             " -machine cxl=on"
+> +                             " -device pcie-root-port,chassis=1,id=pci.1,bus=pcie.0"
+> +                             " -device virtio-scsi-pci,id=scsi0,bus=pci.1"
+> +                             " -drive file=tests/data/uefi-boot-images/"
+> +                             "bios-tables-test.riscv64.iso.qcow2,"
+> +                             "if=none,media=cdrom,id=drive-scsi0-0-0-1,readonly=on"
+> +                             " -device scsi-cd,bus=scsi0.0,scsi-id=0,"
+> +                             "drive=drive-scsi0-0-0-1,id=scsi0-0-0-1,bootindex=1"
+> +                             " -object memory-backend-file,id=cxl-mem1,mem-path=%s,size=256M"
+> +                             " -object memory-backend-file,id=lsa1,mem-path=%s,size=256M"
+> +                             " -device pxb-cxl,bus_nr=12,bus=pcie.0,id=cxl.1"
+> +                             " -device cxl-rp,port=0,bus=cxl.1,id=rp1,chassis=0,slot=2"
+> +                             " -device cxl-type3,bus=rp1,persistent-memdev=cxl-mem1,lsa=lsa1"
+
+Only thing maybe to consider adding is the serial number given the problems we've had with
+that in the past and that persistent mem is basically unuseable without one (it ends
+up as part of the stuff stored in LSA).
+
+I am a bit curious if you actually care enough about persistent for that to be better to
+test than volatile, but doesn't really matter wrt to what is being tested in practice
+which is the arch integration.
+
+> +                             " -M cxl-fmw.0.targets.0=cxl.1,cxl-fmw.0.size=4G,"
+> +                             "cxl-fmw.0.interleave-granularity=8k",
+> +                             tmp_path, tmp_path);
+> +    test_acpi_one(params, &data);
+> +
+> +    g_free(params);
+> +    g_assert(g_rmdir(tmp_path) == 0);
+> +    g_free(tmp_path);
+> +    free_test_data(&data);
+> +}
+> +#endif /* CONFIG_POSIX */
+> +
+>  static void test_acpi_aarch64_virt_tcg(void)
+>  {
+>      test_data data = {
+> @@ -2971,6 +3021,10 @@ int main(int argc, char *argv[])
+>                             test_acpi_riscv64_virt_tcg_numamem);
+>              qtest_add_func("acpi/virt/acpispcr",
+>                             test_acpi_riscv64_virt_tcg_acpi_spcr);
+> +#ifdef CONFIG_POSIX
+> +            qtest_add_func("acpi/virt/cxl",
+> +                           test_acpi_riscv64_virt_tcg_cxl);
+> +#endif
+>          }
+>      } else if (strcmp(arch, "loongarch64") == 0) {
+>          if (has_tcg && qtest_has_machine("virt")) {
+
 
