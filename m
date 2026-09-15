@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA5D2C88E77
-	for <qemu-riscv@archiver.kernel.org>; Tue, 15 Sep 2026 19:28:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C82F6C88E75
+	for <qemu-riscv@archiver.kernel.org>; Tue, 15 Sep 2026 19:28:50 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x6YpZ-0008KZ-1U; Tue, 15 Sep 2026 15:28:37 -0400
+	id 1x6YpO-0008D4-Dy; Tue, 15 Sep 2026 15:28:26 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jic23@kernel.org>)
- id 1x6XNl-0006zD-8i; Tue, 15 Sep 2026 13:55:58 -0400
-Received: from sea.source.kernel.org ([2600:3c0a:e001:78e:0:1991:8:25])
+ id 1x6XKn-0005pV-FN; Tue, 15 Sep 2026 13:52:45 -0400
+Received: from tor.source.kernel.org ([2600:3c04:e001:324:0:1991:8:25])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jic23@kernel.org>)
- id 1x6XNh-00042r-5Z; Tue, 15 Sep 2026 13:55:47 -0400
+ id 1x6XKl-0003Hf-SF; Tue, 15 Sep 2026 13:52:45 -0400
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id 0936B40599;
- Tue, 15 Sep 2026 17:55:42 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4E9A81F000FF;
- Tue, 15 Sep 2026 17:55:40 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 68733600D1;
+ Tue, 15 Sep 2026 17:52:42 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1F14E1F000FF;
+ Tue, 15 Sep 2026 17:52:41 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1789494941;
- bh=CfFwWgtl+eibAQ5fpOdX+5AtdE11X/LWsJ9WbQHfDiY=;
+ s=k20260515; t=1789494762;
+ bh=uodPxlgBecGq4pzVFqjxaJw1KTwHptSdfwPzXkSyiuw=;
  h=Date:From:To:Cc:Subject:In-Reply-To:References;
- b=AfTMvzD7PiM80+hUHUu4fUIuPoZOK2mTmLvGj/ejAnfuET5O1Slpl4dyAR+Z1Ra58
- cU1IBTVLAwrbTQan9ht5X5UCdYGPcgaJaP0NkvvCpShhriEf0AejyqKkKP0J2zGuaw
- f7C69KAfcnzqAbj29k64F/3o+WbCTGJCMjPM7/8LzWqkkYYtYgqu3cp81h7AOT/l1G
- veI0F7mvOjUIASJvpx0pUhw22O6Tsk/U4750xn5h1e5gqSU5HSiArtuhdz0Esxewml
- eS74sfUdG2xQxgmpCohzpuhVvDoYdDHeewHEBbRofeTNFZlTwRh1id0licX2eJUdrE
- KBi9aXQ7bsTlQ==
-Date: Tue, 15 Sep 2026 18:55:38 +0100
+ b=YlVCiFBaRvrGblGKhXWX0PxF5kcleH4rh9Y0lxfn0a0Mz7zGL4jdPdqKnZ0WFSk9N
+ 7aPkCOAmh6DKccghtpgJEGfw+hH3HObZmGsryJmRpX+fQpWP8hbk7zdqlctelNeoue
+ o4durAKKYs3rOPIOalli+DFCv1i/9EVpGIUY6t+L1Mt/ILbNqufHFuLXu0kg0ixQbv
+ mZQwOkYR/mgqF+uYd8qyjbT2MZ01AyCniFWZnu3kuKj/VQMGAaLjYC9ZPNMgcmi1A+
+ jwM16nUQmJsLz2b7kyKxlSYugeES1y7cWm+ezjIO7Ktv+HBywktaZ/Z9SVEggNokv9
+ saR39xa7TzoYQ==
+Date: Tue, 15 Sep 2026 18:52:39 +0100
 From: Jonathan Cameron <jic23@kernel.org>
 To: Chen Pei <cp0613@linux.alibaba.com>
 Cc: palmer@dabbelt.com, alistair.francis@wdc.com, mst@redhat.com,
@@ -43,18 +43,18 @@ Cc: palmer@dabbelt.com, alistair.francis@wdc.com, mst@redhat.com,
  anisinha@redhat.com, dave.jiang@intel.com, alison.schofield@intel.com,
  junjie.cao@intel.com, guoren@kernel.org, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org, linux-cxl@vger.kernel.org
-Subject: Re: [PATCH v6 5/6] tests/qtest: Add RISC-V ACPI bios tables test
- for CXL
-Message-ID: <20260915185538.18e5526a@jic23-hlaptop>
-In-Reply-To: <20260907093735.2753-6-cp0613@linux.alibaba.com>
+Subject: Re: [PATCH v6 3/6] hw/riscv/virt: Advertise the CXL host bridge to
+ firmware via extra-pci-roots
+Message-ID: <20260915185239.2c79393a@jic23-hlaptop>
+In-Reply-To: <20260907093735.2753-4-cp0613@linux.alibaba.com>
 References: <20260907093735.2753-1-cp0613@linux.alibaba.com>
- <20260907093735.2753-6-cp0613@linux.alibaba.com>
+ <20260907093735.2753-4-cp0613@linux.alibaba.com>
 X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2600:3c0a:e001:78e:0:1991:8:25;
- envelope-from=jic23@kernel.org; helo=sea.source.kernel.org
+Received-SPF: pass client-ip=2600:3c04:e001:324:0:1991:8:25;
+ envelope-from=jic23@kernel.org; helo=tor.source.kernel.org
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -62,7 +62,7 @@ X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Tue, 15 Sep 2026 15:27:24 -0400
+X-Mailman-Approved-At: Tue, 15 Sep 2026 15:27:17 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -77,118 +77,40 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon,  7 Sep 2026 17:37:32 +0800
+On Mon,  7 Sep 2026 17:37:30 +0800
 Chen Pei <cp0613@linux.alibaba.com> wrote:
 
-> Add test_acpi_riscv64_virt_tcg_cxl() to verify that enabling CXL on
-> the RISC-V virt machine produces correct ACPI tables, including the
-> ACPI0017 CXLM device with _DEP in the DSDT and the CEDT table.
+> The pxb-cxl expander bridge presents as a class 0x0600 host bridge with
+> a type-0 header, so EDK2's PciBusDxe never recurses into it and never
+> assigns the CXL root port a memory window or bus numbers.  As a result
+> build_crs() produces an empty _CRS for the ACPI0016 host bridge and the
+> CXL devices behind it are not enumerated by the OS.
 > 
-> The test boots with cxl=on, one pxb-cxl bus (bus_nr=12), a CXL root
-> port, a cxl-type3 device and a fixed memory window, mirroring the
-> existing x86 q35 CXL test pattern.
+> Advertise the pxb-cxl expander root buses to firmware via the
+> etc/extra-pci-roots fw_cfg file, the same way arm/virt and x86 do, by
+> calling pci_bus_add_fw_cfg_extra_pci_roots() from virt_machine_done().
+> EDK2's PciBusDxe then enumerates behind the CXL host bridge and assigns
+> the root-port window and bus numbers.  The ACPI tables are rebuilt when
+> the guest reads them (after that firmware enumeration), so build_crs()
+> then emits a correct _CRS for the ACPI0016 host bridge.
 > 
-> Since pxb-cxl is a root bus, using -cdrom causes QEMU to auto-plug the
-> cdrom drive into pxb-cxl, triggering "Only PCI/PCIe bridges can be
-> plugged into pxb-cxl".  The ISO is instead attached explicitly via a
-> virtio-scsi-pci controller on pcie.0, following the same approach as
-> test_acpi_aarch64_virt_tcg_pxb().
+> The call is made unconditionally, in line with arm/virt, pc and hppa,
+> so plain pxb-pcie expander bridges, which likewise depend on
+> etc/extra-pci-roots, are advertised as well; the generator simply
+> returns nothing when there is no expander root bus.
 > 
-> Acked-by: Alistair Francis <alistair.francis@wdc.com>
+> This approach also scales to multiple pxb-cxl host bridges (each gets
+> its own window from the shared aperture) and lets firmware size the
+> window to what is actually behind the bridge, rather than reserving a
+> fixed carve-out.
+> 
+> Verified by booting an RVA22 guest: the CXL root port and Type3 device
+> enumerate, and 'cxl enable-memdev' / 'cxl create-region' /
+> 'daxctl online-memory' bring the CXL memory online as system RAM.
+> 
 > Reviewed-by: Junjie Cao <junjie.cao@intel.com>
 > Tested-by: Junjie Cao <junjie.cao@intel.com>
 > Signed-off-by: Chen Pei <cp0613@linux.alibaba.com>
-
-One possible extra thing below and a general comment. This does the job
-though so no need to change anything.
-
+Aligns with other arch, so makes sense.
 Reviewed-by: Jonathan Cameron <jonathan.cameron@oss.qualcomm.com>
-
-
-> ---
->  tests/qtest/bios-tables-test.c | 54 ++++++++++++++++++++++++++++++++++
->  1 file changed, 54 insertions(+)
-> 
-> diff --git a/tests/qtest/bios-tables-test.c b/tests/qtest/bios-tables-test.c
-> index f6dfa4131b..41c0d6a295 100644
-> --- a/tests/qtest/bios-tables-test.c
-> +++ b/tests/qtest/bios-tables-test.c
-> @@ -2214,6 +2214,56 @@ static void test_acpi_riscv64_virt_tcg(void)
->      free_test_data(&data);
->  }
->  
-> +#ifdef CONFIG_POSIX
-> +static void test_acpi_riscv64_virt_tcg_cxl(void)
-> +{
-> +    gchar *tmp_path = g_dir_make_tmp("qemu-test-cxl.XXXXXX", NULL);
-> +    gchar *params;
-> +
-> +    test_data data = {
-> +        .machine = "virt",
-> +        .arch = "riscv64",
-> +        .tcg_only = true,
-> +        .uefi_fl1 = "pc-bios/edk2-riscv64-code.fd",
-> +        .uefi_fl2 = "pc-bios/edk2-riscv64-vars.fd",
-> +        .ram_start = 0x80000000ULL,
-> +        .scan_len = 128ULL * MiB,
-> +        .variant = ".cxl",
-> +    };
-> +
-> +    /*
-> +     * While using -cdrom, the cdrom would auto-plug into pxb-cxl because
-> +     * its bus is also a root bus, triggering "Only PCI/PCIe bridges can be
-> +     * plugged into pxb-cxl".  Attach the ISO explicitly to a scsi controller
-> +     * on pcie.0 instead, following the same pattern as
-> +     * test_acpi_aarch64_virt_tcg_pxb().
-> +     */
-> +    params = g_strdup_printf("-cpu rva22s64"
-> +                             " -machine cxl=on"
-> +                             " -device pcie-root-port,chassis=1,id=pci.1,bus=pcie.0"
-> +                             " -device virtio-scsi-pci,id=scsi0,bus=pci.1"
-> +                             " -drive file=tests/data/uefi-boot-images/"
-> +                             "bios-tables-test.riscv64.iso.qcow2,"
-> +                             "if=none,media=cdrom,id=drive-scsi0-0-0-1,readonly=on"
-> +                             " -device scsi-cd,bus=scsi0.0,scsi-id=0,"
-> +                             "drive=drive-scsi0-0-0-1,id=scsi0-0-0-1,bootindex=1"
-> +                             " -object memory-backend-file,id=cxl-mem1,mem-path=%s,size=256M"
-> +                             " -object memory-backend-file,id=lsa1,mem-path=%s,size=256M"
-> +                             " -device pxb-cxl,bus_nr=12,bus=pcie.0,id=cxl.1"
-> +                             " -device cxl-rp,port=0,bus=cxl.1,id=rp1,chassis=0,slot=2"
-> +                             " -device cxl-type3,bus=rp1,persistent-memdev=cxl-mem1,lsa=lsa1"
-
-Only thing maybe to consider adding is the serial number given the problems we've had with
-that in the past and that persistent mem is basically unuseable without one (it ends
-up as part of the stuff stored in LSA).
-
-I am a bit curious if you actually care enough about persistent for that to be better to
-test than volatile, but doesn't really matter wrt to what is being tested in practice
-which is the arch integration.
-
-> +                             " -M cxl-fmw.0.targets.0=cxl.1,cxl-fmw.0.size=4G,"
-> +                             "cxl-fmw.0.interleave-granularity=8k",
-> +                             tmp_path, tmp_path);
-> +    test_acpi_one(params, &data);
-> +
-> +    g_free(params);
-> +    g_assert(g_rmdir(tmp_path) == 0);
-> +    g_free(tmp_path);
-> +    free_test_data(&data);
-> +}
-> +#endif /* CONFIG_POSIX */
-> +
->  static void test_acpi_aarch64_virt_tcg(void)
->  {
->      test_data data = {
-> @@ -2971,6 +3021,10 @@ int main(int argc, char *argv[])
->                             test_acpi_riscv64_virt_tcg_numamem);
->              qtest_add_func("acpi/virt/acpispcr",
->                             test_acpi_riscv64_virt_tcg_acpi_spcr);
-> +#ifdef CONFIG_POSIX
-> +            qtest_add_func("acpi/virt/cxl",
-> +                           test_acpi_riscv64_virt_tcg_cxl);
-> +#endif
->          }
->      } else if (strcmp(arch, "loongarch64") == 0) {
->          if (has_tcg && qtest_has_machine("virt")) {
-
 
