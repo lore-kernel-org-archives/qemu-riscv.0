@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8101DC88E7D
-	for <qemu-riscv@archiver.kernel.org>; Tue, 15 Sep 2026 19:27:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68E46C88E77
+	for <qemu-riscv@archiver.kernel.org>; Tue, 15 Sep 2026 19:28:07 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x6Yof-00084T-Tx; Tue, 15 Sep 2026 15:27:44 -0400
+	id 1x6Yod-00083H-IW; Tue, 15 Sep 2026 15:27:41 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jic23@kernel.org>)
- id 1x6XOu-0007Wg-8H; Tue, 15 Sep 2026 13:57:00 -0400
-Received: from sea.source.kernel.org ([172.234.252.31])
+ id 1x6XGx-0004Q4-KX; Tue, 15 Sep 2026 13:48:47 -0400
+Received: from tor.source.kernel.org ([172.105.4.254])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jic23@kernel.org>)
- id 1x6XOs-0004Fr-8M; Tue, 15 Sep 2026 13:56:59 -0400
+ id 1x6XGv-0002Vd-FS; Tue, 15 Sep 2026 13:48:47 -0400
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id D837440AF7;
- Tue, 15 Sep 2026 17:56:56 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3DC321F000FF;
- Tue, 15 Sep 2026 17:56:54 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id DC4CB600CB;
+ Tue, 15 Sep 2026 17:48:43 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C3F8E1F000FF;
+ Tue, 15 Sep 2026 17:48:41 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1789495016;
- bh=XseWBq8izn0Nrmc0zn5blFXPCwaM4UJNp8e2A5vqhqc=;
+ s=k20260515; t=1789494523;
+ bh=iCjZ2yNGguw/kFBX7DMQal9LkVgh2UHx++IDVyxVlYY=;
  h=Date:From:To:Cc:Subject:In-Reply-To:References;
- b=B6AEoLYwWfv/YjRFBn2qURpPFo3w3W+OStjkg9O1CWS1UA/0IQ+pT+wFdsVv0k/6T
- FQZ5SPAseZhnW3ZWVbtjKeHnIWOffVIjRQ2/nGv9cavrIaC/zUly45ixakynQuWq2P
- xHq/vWRr6bIw/s2Pp+wRnAS+u31Aawq/ku69hCJ8lY4cCBapotlPP0JUZrqncA8pGk
- v9EOhqV5PGu2XzS/kHMnHIGT7yaJg05tDyvE+l59f2USnNJPo0YsXiR1G3eEVKuhc/
- J3HVr/7dMU2uccy29uQLppCZVznlxih2iCLFJCpTCM1TIOoOadMqImkiB5iSKTcZ7M
- y7VTP2P/qwhgQ==
-Date: Tue, 15 Sep 2026 18:56:50 +0100
+ b=LTuZdhMW4kbH/UQVWptd4WnzbZB+r6Qk3d+rZv1HOLmBGZbX+taAjk9G7ePOT0pWi
+ 19zlJ59+PRvljVf4MuxK1DdgwPK0V6wM0lFZzbqDcq83I+7oXL4twv0dm5DFUyoWLX
+ 1nsrdV274L5+f98lRjtZTxapvNrNV8r4SfLlDToM0h3TC9YtzzbnMs67MX99CNjPHe
+ JY7FNN4jnEiV9TXcAzAtQIumPCUvYAttEvwrQ7zpuVg/BbknhjJlvzsQyIR4ZZLgGn
+ 01sno4bFPtwYfjpF+4wx9T5AHV+EIl5rQ6Kisd7lZ7Md9QkShQzB+eVrK1coSt2uoG
+ JV08HhdJD3ZBQ==
+Date: Tue, 15 Sep 2026 18:48:38 +0100
 From: Jonathan Cameron <jic23@kernel.org>
 To: Chen Pei <cp0613@linux.alibaba.com>
 Cc: palmer@dabbelt.com, alistair.francis@wdc.com, mst@redhat.com,
@@ -43,18 +43,18 @@ Cc: palmer@dabbelt.com, alistair.francis@wdc.com, mst@redhat.com,
  anisinha@redhat.com, dave.jiang@intel.com, alison.schofield@intel.com,
  junjie.cao@intel.com, guoren@kernel.org, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org, linux-cxl@vger.kernel.org
-Subject: Re: [PATCH v6 6/6] tests/qtest: Update RISC-V CXL ACPI golden
- master binaries
-Message-ID: <20260915185650.272825f6@jic23-hlaptop>
-In-Reply-To: <20260907093735.2753-7-cp0613@linux.alibaba.com>
+Subject: Re: [PATCH v6 1/6] hw/riscv/virt: Add CXL support to the RISC-V
+ virt machine
+Message-ID: <20260915184838.6011cf41@jic23-hlaptop>
+In-Reply-To: <20260907093735.2753-2-cp0613@linux.alibaba.com>
 References: <20260907093735.2753-1-cp0613@linux.alibaba.com>
- <20260907093735.2753-7-cp0613@linux.alibaba.com>
+ <20260907093735.2753-2-cp0613@linux.alibaba.com>
 X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=172.234.252.31; envelope-from=jic23@kernel.org;
- helo=sea.source.kernel.org
+Received-SPF: pass client-ip=172.105.4.254; envelope-from=jic23@kernel.org;
+ helo=tor.source.kernel.org
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -62,7 +62,7 @@ X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Tue, 15 Sep 2026 15:27:26 -0400
+X-Mailman-Approved-At: Tue, 15 Sep 2026 15:27:15 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -77,35 +77,220 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon,  7 Sep 2026 17:37:33 +0800
+On Mon,  7 Sep 2026 17:37:28 +0800
 Chen Pei <cp0613@linux.alibaba.com> wrote:
 
-> Populate the DSDT.cxl and CEDT.cxl golden master binaries for the
-> RISC-V CXL bios-tables test and empty
-> bios-tables-test-allowed-diff.h, following the bios-tables-test update
-> process.
-> 
-> The expected AML added by this series is:
-> 
-> DSDT.cxl:
->   Device (PC0C)        // ACPI0016 CXL host bridge (pxb-cxl, bus 0x0C)
->     Name (_CRS, ResourceTemplate () {
->         DWordMemory (... 0x40400000 .. 0x405FFFFF ...)   // 32-bit MMIO
->         QWordMemory (... 0x400100000 .. 0x40010FFFF ...) // 64-bit MMIO
->         WordBusNumber (... 0x000C .. 0x000D ...)
->     })
->     Method (_OSC, ...)   // PCI host bridge + CXL UUIDs
->   Device (CXLM)        // ACPI0017 CXL memory controller
->     Name (_HID, "ACPI0017")
->     Name (_DEP, Package () { \_SB.PC0C })
->     Method (_STA, ...) / Method (_DSM, ...)
-> 
-> CEDT.cxl:
->   CHBS : CXL Host Bridge Structure, Register base 0x800000000
->   CFMWS: CXL Fixed Memory Window, base 0x810000000, size 4G
+> Enable CXL support on the RISC-V virt machine following the same
+> approach used by the ARM virt machine:
+> - Add PXB and ACPI_CXL Kconfig selections
+> - Add CXLState and PCIBus pointer to RISCVVirtState
+> - Register CXL machine properties via cxl_machine_init()
+> - Create CXL host register region above the PCIe high MMIO region
+> - Call cxl_hook_up_pxb_registers() and cxl_fmws_link_targets() at
+>   machine_done time
+> - Map Fixed Memory Windows above the CXL host register region
+> - Add ACPI0017 device in DSDT and build CEDT table in virt-acpi-build.c
 > 
 > Reviewed-by: Junjie Cao <junjie.cao@intel.com>
 > Tested-by: Junjie Cao <junjie.cao@intel.com>
 > Signed-off-by: Chen Pei <cp0613@linux.alibaba.com>
+
+Sorry for delay. LGTM
 Reviewed-by: Jonathan Cameron <jonathan.cameron@oss.qualcomm.com>
+
+> ---
+>  hw/riscv/Kconfig           |  2 ++
+>  hw/riscv/virt-acpi-build.c | 20 ++++++++++++++++
+>  hw/riscv/virt.c            | 47 ++++++++++++++++++++++++++++++++++----
+>  include/hw/riscv/virt.h    |  3 +++
+>  4 files changed, 68 insertions(+), 4 deletions(-)
+> 
+> diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
+> index d06ac26648..c2f8c5d2da 100644
+> --- a/hw/riscv/Kconfig
+> +++ b/hw/riscv/Kconfig
+> @@ -66,8 +66,10 @@ config RISCV_VIRT
+>      select VIRTIO_MMIO
+>      select FW_CFG_DMA
+>      select PLATFORM_BUS
+> +    select PXB
+>      select ACPI
+>      select ACPI_PCI
+> +    select ACPI_CXL
+>  
+>  config SHAKTI_C
+>      bool
+> diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
+> index 8e516ec114..2be8c6d572 100644
+> --- a/hw/riscv/virt-acpi-build.c
+> +++ b/hw/riscv/virt-acpi-build.c
+> @@ -29,12 +29,16 @@
+>  #include "hw/acpi/aml-build.h"
+>  #include "hw/acpi/pci.h"
+>  #include "hw/acpi/utils.h"
+> +#include "hw/acpi/cxl.h"
+>  #include "hw/intc/riscv_aclint.h"
+>  #include "hw/nvram/fw_cfg_acpi.h"
+>  #include "hw/pci-host/gpex.h"
+> +#include "hw/pci/pci_bus.h"
+>  #include "hw/riscv/virt.h"
+>  #include "hw/riscv/numa.h"
+>  #include "hw/virtio/virtio-acpi.h"
+> +#include "hw/cxl/cxl.h"
+> +#include "hw/cxl/cxl_host.h"
+>  #include "kvm/kvm_riscv.h"
+>  #include "migration/vmstate.h"
+>  #include "qapi/error.h"
+> @@ -518,6 +522,17 @@ static void build_dsdt(GArray *table_data,
+>          acpi_dsdt_add_gpex_host(scope, PCIE_IRQ + s->num_sources * 2);
+>      }
+>  
+> +    if (s->cxl_devices_state.is_enabled) {
+> +        Aml *cxl_dev = aml_device("CXLM");
+> +        aml_append(cxl_dev, aml_name_decl("_HID", aml_string("ACPI0017")));
+> +        Aml *method = aml_method("_STA", 0, AML_NOTSERIALIZED);
+> +        aml_append(method, aml_return(aml_int(0x0B)));
+> +        aml_append(cxl_dev, method);
+> +        build_cxl_dsm_method(cxl_dev);
+> +
+> +        aml_append(scope, cxl_dev);
+> +    }
+> +
+>      aml_append(dsdt, scope);
+>  
+>      /* copy AML table into ACPI tables blob and patch header there */
+> @@ -925,6 +940,11 @@ static void virt_acpi_build(RISCVVirtState *s, AcpiBuildTables *tables)
+>                     s->oem_table_id);
+>      }
+>  
+> +    if (s->cxl_devices_state.is_enabled) {
+> +        cxl_build_cedt(table_offsets, tables_blob, tables->linker,
+> +                       s->oem_id, s->oem_table_id, &s->cxl_devices_state);
+> +    }
+> +
+>      if (ms->numa_state->num_nodes > 0) {
+>          acpi_add_table(table_offsets, tables_blob);
+>          build_srat(tables_blob, tables->linker, s);
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index f3a1cc5ba3..70090ca70a 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -56,6 +56,8 @@
+>  #include "hw/pci/pci.h"
+>  #include "hw/pci-host/gpex.h"
+>  #include "hw/display/ramfb.h"
+> +#include "hw/cxl/cxl.h"
+> +#include "hw/cxl/cxl_host.h"
+>  #include "hw/acpi/aml-build.h"
+>  #include "qapi/qapi-visit-common.h"
+>  #include "hw/virtio/virtio-iommu.h"
+> @@ -540,6 +542,29 @@ static void create_fdt(RISCVVirtState *s)
+>      create_fdt_pmu(s);
+>  }
+>  
+> +static void cxl_host_state_init(RISCVVirtState *s)
+> +{
+> +    MemoryRegion *sysmem = get_system_memory();
+> +    MemoryRegion *mr = &s->cxl_devices_state.host_mr;
+> +    hwaddr base;
+> +
+> +    if (!s->cxl_devices_state.is_enabled) {
+> +        return;
+> +    }
+> +
+> +    base = virt_high_pcie_memmap.base + virt_high_pcie_memmap.size;
+> +    base = ROUND_UP(base, 64 * KiB);
+> +
+> +    memory_region_init(mr, OBJECT(s), "cxl_host_reg", 64 * KiB * 16);
+> +    memory_region_add_subregion(sysmem, base, mr);
+> +
+> +    /* Map the Fixed Memory Windows above the CXL host register region. */
+> +    base += memory_region_size(mr);
+> +    base = ROUND_UP(base, 256 * MiB);
+> +    cxl_fmws_set_memmap(base, UINT64_MAX);
+> +    cxl_fmws_update_mmio();
+> +}
+> +
+>  static FWCfgState *create_fw_cfg(const MachineState *ms, hwaddr base)
+>  {
+>      FWCfgState *fw_cfg;
+> @@ -625,6 +650,13 @@ static void virt_machine_done(Notifier *notifier, void *data)
+>      BlockBackend *pflash_blk0;
+>      RISCVBootInfo boot_info;
+>  
+> +    cxl_hook_up_pxb_registers(s->pci_bus, &s->cxl_devices_state,
+> +                              &error_fatal);
+> +
+> +    if (s->cxl_devices_state.is_enabled) {
+> +        cxl_fmws_link_targets(&error_fatal);
+> +    }
+> +
+>      /*
+>       * An user provided dtb must include everything, including
+>       * dynamic sysbus devices. Our FDT needs to be finalized.
+> @@ -716,6 +748,7 @@ static void virt_machine_init(MachineState *machine)
+>      MemoryRegion *system_memory = get_system_memory();
+>      MemoryRegion *mask_rom = g_new(MemoryRegion, 1);
+>      DeviceState *mmio_irqchip, *virtio_irqchip, *pcie_irqchip;
+> +    DeviceState *gpex_dev;
+>      int i, base_hartid, hart_count;
+>      int socket_count = riscv_socket_count(machine);
+>  
+> @@ -871,6 +904,8 @@ static void virt_machine_init(MachineState *machine)
+>              ROUND_UP(virt_high_pcie_memmap.base, virt_high_pcie_memmap.size);
+>      }
+>  
+> +    cxl_host_state_init(s);
+> +
+>      /* register system main memory (actual RAM) */
+>      memory_region_add_subregion(system_memory, s->memmap[VIRT_DRAM].base,
+>                                  machine->ram);
+> @@ -898,10 +933,12 @@ static void virt_machine_init(MachineState *machine)
+>              qdev_get_gpio_in(virtio_irqchip, VIRTIO_IRQ + i));
+>      }
+>  
+> -    riscv_gpex_pcie_init(system_memory, pcie_irqchip,
+> -                   &s->memmap[VIRT_PCIE_ECAM], &s->memmap[VIRT_PCIE_MMIO],
+> -                   &virt_high_pcie_memmap, &s->memmap[VIRT_PCIE_PIO],
+> -                   PCIE_IRQ);
+> +    gpex_dev = riscv_gpex_pcie_init(system_memory, pcie_irqchip,
+> +                                    &s->memmap[VIRT_PCIE_ECAM],
+> +                                    &s->memmap[VIRT_PCIE_MMIO],
+> +                                    &virt_high_pcie_memmap,
+> +                                    &s->memmap[VIRT_PCIE_PIO], PCIE_IRQ);
+> +    s->pci_bus = PCI_HOST_BRIDGE(gpex_dev)->bus;
+>  
+>      s->platform_bus_dev = riscv_create_platform_bus(mmio_irqchip,
+>          &s->memmap[VIRT_PLATFORM_BUS], VIRT_PLATFORM_BUS_IRQ,
+> @@ -972,6 +1009,8 @@ static void virt_machine_instance_init(Object *obj)
+>      s->acpi = ON_OFF_AUTO_AUTO;
+>      s->iommu_sys = ON_OFF_AUTO_AUTO;
+>      s->num_sources = VIRT_IRQCHIP_NUM_SOURCES;
+> +
+> +    cxl_machine_init(obj, &s->cxl_devices_state);
+>  }
+>  
+>  static char *virt_get_aia_guests(Object *obj, Error **errp)
+> diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
+> index e516898f9a..a7b74d10c6 100644
+> --- a/include/hw/riscv/virt.h
+> +++ b/include/hw/riscv/virt.h
+> @@ -24,6 +24,7 @@
+>  #include "hw/core/sysbus.h"
+>  #include "hw/block/flash.h"
+>  #include "hw/intc/riscv_imsic.h"
+> +#include "hw/cxl/cxl.h"
+>  
+>  #define VIRT_CPUS_MAX_BITS             9
+>  #define VIRT_CPUS_MAX                  (1 << VIRT_CPUS_MAX_BITS)
+> @@ -66,6 +67,8 @@ struct RISCVVirtState {
+>      OnOffAuto iommu_sys;
+>      uint16_t pci_iommu_bdf;
+>      uint16_t num_sources;
+> +    CXLState cxl_devices_state;
+> +    PCIBus *pci_bus;
+>  };
+>  
+>  enum {
+
 
