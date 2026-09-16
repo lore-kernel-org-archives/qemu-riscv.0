@@ -4,37 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA55BC88E77
-	for <qemu-riscv@archiver.kernel.org>; Wed, 16 Sep 2026 09:16:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7AEEEC88E5C
+	for <qemu-riscv@archiver.kernel.org>; Wed, 16 Sep 2026 09:16:44 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x6liq-0001Zd-HC; Wed, 16 Sep 2026 05:14:32 -0400
+	id 1x6lis-0001fC-Cl; Wed, 16 Sep 2026 05:14:35 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <anjo@rev.ng>)
- id 1x6li8-0001D4-8V; Wed, 16 Sep 2026 05:13:48 -0400
+ id 1x6liO-0001H2-T0; Wed, 16 Sep 2026 05:14:05 -0400
 Received: from rev.ng ([94.130.142.21])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <anjo@rev.ng>)
- id 1x6li6-00088N-Od; Wed, 16 Sep 2026 05:13:48 -0400
+ id 1x6liN-00088r-9I; Wed, 16 Sep 2026 05:14:04 -0400
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=rev.ng;
  s=dkim; h=Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:
  Content-Type:MIME-Version:Subject:Date:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive:List-Unsubscribe:List-Unsubscribe-Post:
- List-Help; bh=c5o4tGOyOoWMVjs8wMdbgBWBYQiz0qqSiNJACKcuT3I=; b=gGt/v/pp4GtAHgZ
- iSPLk8rjchkBMIR0pVB7D0wKEF7lwtyArPGUTg2WI/07YNIo0iDRGXbPIfXXsOikMDsw2CsTUDE9Y
- DsRvy/druYfGnsGZ/gF1SRNig+iiaf4yusBiVG5HJ0FJ36V7K2u4FP6tu/E8KneSxwhVFLlBDxmzT
- t0=;
-Date: Wed, 16 Sep 2026 11:19:01 +0200
-Subject: [PATCH v4 06/12] target/riscv: Move target_long.h inclusion away
- from cpu.h
+ List-Help; bh=/5cKPTcNrENGYNboJ9Xh49xTMf7WRAhH+qgJvCNmrqI=; b=mSbjvPHg5SDRHRO
+ kn2sxmhzgbH6Zp5ymOJCnXwXTDBwV9agBgF4ETNs1ellQkOyC8yFClnBumswBbX9aUFavGNSLE2eE
+ Eln25UagM+ih9WZWp3nWT83dxN37czgwfHijTWyIT0V0iSQ+i5+uQGN6I89kDn1oYy6zStkHXcWHB
+ 0I=;
+Date: Wed, 16 Sep 2026 11:19:05 +0200
+Subject: [PATCH v4 10/12] target-info: Introduce target_riscv32
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260916-hw-riscv-cpu-int-v4-6-babc367b60f5@rev.ng>
+Message-Id: <20260916-hw-riscv-cpu-int-v4-10-babc367b60f5@rev.ng>
 References: <20260916-hw-riscv-cpu-int-v4-0-babc367b60f5@rev.ng>
 In-Reply-To: <20260916-hw-riscv-cpu-int-v4-0-babc367b60f5@rev.ng>
 To: qemu-devel@nongnu.org
@@ -42,11 +41,11 @@ Cc: Anton Johansson <anjo@rev.ng>, qemu-riscv@nongnu.org,
  daniel.barboza@oss.qualcomm.com, philmd@oss.qualcomm.com, 
  pierrick.bouvier@oss.qualcomm.com, palmer@dabbelt.com, 
  alistair.francis@wdc.com
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1789550353; l=1891;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1789550353; l=1142;
  i=anjo@rev.ng; s=20260210; h=from:subject:message-id;
- bh=F0eu78YQitKke1fI9k2BY2J9Hs0kvtBirbAu/KUbG2I=;
- b=d1ToUZxyu3bPI6WHrjIW4DQZwp1E6lVU0Qmt4W3eppvm6wKXREjMsIa0gzPNVRhPb2sE+t5yv
- ydahavROKkyBN/mpcaUFePOw3F5y7dHhxe/d+kdvms6FNpjD61uB15z
+ bh=N+uEQZeAwfEqPvdkiOEOcw+Pf2L9CiSssjU+9HTIlpI=;
+ b=c/O1yoqTEOmrrvX1e13ZwzhumATIaWK4Lg85Se5VMHqWOQBuEC48MI5TUMX9w1kEYBS668ed4
+ jEnzOK/TrxoC0hXY1q/UchNXy04/UwEkSIKydEEbkArYR3FmV89vV18
 X-Developer-Key: i=anjo@rev.ng; a=ed25519;
  pk=dKsZvj/g3kgDxnV1/SWg8a0YNGSpWtFGNsWIepQYKow=
 Received-SPF: pass client-ip=94.130.142.21; envelope-from=anjo@rev.ng;
@@ -74,63 +73,49 @@ From:  Anton Johansson via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Reviewed-by: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
+Will be used in the following commit to filter machines using
+TypeInfo::is_available, so a simple !target_riscv64() is not sufficient.
+
 Signed-off-by: Anton Johansson <anjo@rev.ng>
 ---
- target/riscv/cpu.h         | 1 -
- target/riscv/internals.h   | 1 +
- target/riscv/tcg/pmu.h     | 1 +
- target/riscv/kvm/kvm-cpu.c | 1 +
- 4 files changed, 3 insertions(+), 1 deletion(-)
+ include/qemu/target-info.h | 7 +++++++
+ target-info.c              | 5 +++++
+ 2 files changed, 12 insertions(+)
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index a5fb75b990..3fa322a8a9 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -26,7 +26,6 @@
- #include "exec/cpu-common.h"
- #include "exec/cpu-interrupt.h"
- #include "exec/gdbstub.h"
--#include "exec/target_long.h"
- #include "qemu/cpu-float.h"
- #include "qom/object.h"
- #include "qemu/int128.h"
-diff --git a/target/riscv/internals.h b/target/riscv/internals.h
-index 5d84e4de96..1ee7e99e98 100644
---- a/target/riscv/internals.h
-+++ b/target/riscv/internals.h
-@@ -20,6 +20,7 @@
- #define RISCV_CPU_INTERNALS_H
+diff --git a/include/qemu/target-info.h b/include/qemu/target-info.h
+index b23e5bc586..c09e5d2a3e 100644
+--- a/include/qemu/target-info.h
++++ b/include/qemu/target-info.h
+@@ -91,6 +91,13 @@ bool target_ppc64(void);
+  */
+ bool target_s390x(void);
  
- #include "exec/cpu-common.h"
-+#include "exec/target_long.h"
- #include "hw/core/registerfields.h"
- #include "fpu/softfloat-types.h"
- #include "target/riscv/cpu_bits.h"
-diff --git a/target/riscv/tcg/pmu.h b/target/riscv/tcg/pmu.h
-index 2429c01b77..fbdbfe7600 100644
---- a/target/riscv/tcg/pmu.h
-+++ b/target/riscv/tcg/pmu.h
-@@ -21,6 +21,7 @@
++/**
++ * target_riscv32:
++ *
++ * Returns whether the target architecture is riscv32
++ */
++bool target_riscv32(void);
++
+ /**
+  * target_riscv64:
+  *
+diff --git a/target-info.c b/target-info.c
+index 012b384036..bba4503151 100644
+--- a/target-info.c
++++ b/target-info.c
+@@ -89,6 +89,11 @@ bool target_s390x(void)
+     return target_arch() == SYS_EMU_TARGET_S390X;
+ }
  
- #include "cpu.h"
- #include "qapi/error.h"
-+#include "exec/target_long.h"
- 
- bool riscv_pmu_ctr_monitor_instructions(CPURISCVState *env,
-                                         uint32_t target_ctr);
-diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-index 68e1501b21..a5879d8d6d 100644
---- a/target/riscv/kvm/kvm-cpu.c
-+++ b/target/riscv/kvm/kvm-cpu.c
-@@ -35,6 +35,7 @@
- #include "accel/accel-cpu-target.h"
- #include "hw/pci/pci.h"
- #include "exec/memattrs.h"
-+#include "exec/target_long.h"
- #include "system/address-spaces.h"
- #include "system/memory.h"
- #include "hw/core/boards.h"
++bool target_riscv32(void)
++{
++    return target_arch() == SYS_EMU_TARGET_RISCV32;
++}
++
+ bool target_riscv64(void)
+ {
+     return target_arch() == SYS_EMU_TARGET_RISCV64;
 
 -- 
 2.52.0
