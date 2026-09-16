@@ -4,91 +4,141 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95030C88E77
-	for <qemu-riscv@archiver.kernel.org>; Wed, 16 Sep 2026 10:11:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73ECBC982C1
+	for <qemu-riscv@archiver.kernel.org>; Wed, 16 Sep 2026 17:00:39 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x6mbc-0007Mr-73; Wed, 16 Sep 2026 06:11:08 -0400
+	id 1x6szA-0005LZ-N0; Wed, 16 Sep 2026 12:59:54 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1x6mbV-0007MY-7R
- for qemu-riscv@nongnu.org; Wed, 16 Sep 2026 06:11:01 -0400
-Received: from mail-pj2-x0f.google.com ([2607:f8b0:4864:39::f])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1x6mbT-0006RY-Bc
- for qemu-riscv@nongnu.org; Wed, 16 Sep 2026 06:11:00 -0400
-Received: by mail-pj2-x0f.google.com with SMTP id
- 98e67ed59e1d1-39b31b4281eso657040a91.2
- for <qemu-riscv@nongnu.org>; Wed, 16 Sep 2026 03:10:58 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <pierrick.bouvier@oss.qualcomm.com>)
+ id 1x6syp-0005K9-IJ
+ for qemu-riscv@nongnu.org; Wed, 16 Sep 2026 12:59:34 -0400
+Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <pierrick.bouvier@oss.qualcomm.com>)
+ id 1x6syn-0003s5-UI
+ for qemu-riscv@nongnu.org; Wed, 16 Sep 2026 12:59:31 -0400
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 68GFeNv63709116
+ for <qemu-riscv@nongnu.org>; Wed, 16 Sep 2026 16:59:28 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ Ax1se0gNN/3xADnjjnXr8VaFvJQk4FnZpZLtXPqOqRc=; b=ZVuqH+h6vEsFKFs1
+ 6vrK4hLCVW4SID4Ko8jqDUz7qtOPnxUWIcSJy7fVYVyhEc8lttmCcqGDD9OIbzod
+ J9i57DIc17Mf3EPuMvEIKv5laygV06AzqSG7APoP7PFHr4wL0l/jiHxxWEEvJm/a
+ xQUjG/xHXPYMnZ6VVqAT74P3+LKRC6LswQ1TArpbruq0+LSygMwzI4xyenBsEsiO
+ H0Potsp/jku9sN6vimY0Z67k4erc6f0d6QEGUJEpGPQvagZuEFb2vMc/dOvG6Xqc
+ hl6JUBgDVHFdF4Zz64MuUl3xQozd7+rgdjVPdE5JJPBagp5fhPc2Sr+/5Vr+UBZm
+ wXZS9A==
+Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com
+ [209.85.216.70])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gqfvfm1f6-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Wed, 16 Sep 2026 16:59:28 +0000 (GMT)
+Received: by mail-pj1-f70.google.com with SMTP id
+ 98e67ed59e1d1-38e7ff7b375so7074484a91.1
+ for <qemu-riscv@nongnu.org>; Wed, 16 Sep 2026 09:59:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1789553457; x=1790158257; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1789577968; x=1790182768; darn=nongnu.org;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=reXyOkWf+wcGli+dRwlPWqNmFDYbagokc/fUO/uANLQ=;
- b=s/VjV441XssQphWpgBu891mJ2L+PX7sOHrQrPG9oBFuoCdROiZsC7BTUd/XsAWSKwr
- IwMt81ATrU13NsNNMkXcjUkYUBQlqt2ANfKkDXnKfuq/lnATAVzc1tceiooPrvAe4qsS
- gEJRUsHNMwKJEIAhxrRXX8Bb31xf3MrZHHbw1Y1a+N9tXlYCTZaULkxzS9Tc+YVSDvdO
- 8CyZNaVW3yLbFEGhGQPTp/zqy1cT/gZXUnZtwkvoRjcFkfAjTNfal3rgMvGvN0hQIC5o
- BO8qU/w9k56M2YgFZLMRp6MGX+b4nb3aCdAY7szDmzHm4JPS9Mj7U2iz3GuT2DlUANiX
- cxnw==
+ bh=Ax1se0gNN/3xADnjjnXr8VaFvJQk4FnZpZLtXPqOqRc=;
+ b=VFLaa0WQ1XEsUpSwA389/S1kjTJUo7YDWPLpi2lzfK/LB7IOi5PyFl355oSc5/Qg34
+ hsMduPM6vmErCHnhh2For3weCI0pQdGAstzKXCsHnPabujOD2cE0vYhvKkg/XhXYSZym
+ tB0JBQDxOWMSIVlDswIcJw0BKd43180Qbx63lqyWCnc+r7LooVnezAnAg24pEc15Bhnm
+ YaCt0Ioo+jUcg+XIetTGE3slbHyfF8qtySl4AeOHnkPwwOEnaApUSYiL/3b9rugyWRZp
+ +dezx7TysvCr776QbbK1HC1eK/rppvt9p+TtZDyCQUXfL3thK25ez24qS7MBP+7vXldZ
+ I3dg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1789553457; x=1790158257;
+ d=1e100.net; s=20260707; t=1789577968; x=1790182768;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=reXyOkWf+wcGli+dRwlPWqNmFDYbagokc/fUO/uANLQ=;
- b=zaqH1/QcfSOACdPfzYHORfdTlazgqdI8uOw5G/45N9W4d5bNCpCWIJQo1bnmLf1Vl+
- ksCo7j6uiqhCycHdj7Bi4yFB/wQjJ1ZDZ71FfEb0dOmGQhPSyqyNVQC36bbv/mANr1/V
- pfDkZAZrIlSWNBrKTlZ9N91iMjzcPfRYJWw1sA/qVgCnnatxaHrlxtPEPcqdN0sYwag3
- k1oVaj/r52WvCksae4mn/kI7JkdqRIzqywfGWhw3wiDQn+1fTmFYkIucAnjk73OcjxOy
- D1t+1h57IbjGwk/YMA9wmnrvtWNmJtK1RE1T2Sxwv+c1Pur4a3IPqahld41zBPvDcWsu
- XDOQ==
-X-Gm-Message-State: AFuF++n2+xYgsEw5joY0frETpehHtxwWa4kMe56y++INh+aDvzg52/S2
- dt+IKN5qI/bU4KQWzKvCfoUrQQXq96nnYVe1X7J8P7MDObh1Uo4uPPtmLBD1aqj7S44=
-X-Gm-Gg: AYBFou1C1dQMbWxtQeJdj0IPuKYH6IxWfdYKI9pHZDHKlD5rHSj2dUUj9ZUMUamkAI2
- XUexzGLu/vDFOgNeUX3I8sSfeFLcc/EuTyc88jVZv65/UcxQiX4EtuuOJ/R332e5BUAGFvuOMnz
- CrytmMiLsOW4vw8lg591FyAAqHhIYxH5IGUL/engf5g8fefDy4V5fm3Bi11POZTZywm9ER+mJHc
- KvXyWK1A4Ux2Jn9Cc0BAqCePvrYQ2Jup5L7CMNzFBNCjXCWb3vphOevzqcZ/DJ8HLWyVeRzqFOe
- dMfh4dFSShCWKaN1K/D9J2mhqx9H1cjLBMog9seV38qnB4hqHom2kNSWqHfmK7QkS6m60w7aymw
- 8v/FZy6KdiRnlmkFxh3k1LCWX12ejBrNo8MtFkeSQTZQZOnKAka1ac9dlR+slZYyxcsdQzMPWcK
- PpLUogzPdtoZhyI3u9Os1Tbvlp6u0rx/tpigNHKxky2gpk/CpvSPAiNeoMy2sTnkODKgh8lccWO
- 2m/rp5MHtVbxN5Jn7JhmPWVqv/MnsRcwulxes75QnlIGy2JS+gcwAtNyjHt0A==
-X-Received: by 2002:a17:90b:2f50:b0:39e:2c5c:a69a with SMTP id
- 98e67ed59e1d1-39e2c5cac47mr424076a91.5.1789553457320; 
- Wed, 16 Sep 2026 03:10:57 -0700 (PDT)
-Received: from ?IPV6:2603:800c:7900:ed00:845c:f507:397b:9b72?
- ([2603:800c:7900:ed00:845c:f507:397b:9b72])
- by smtp.gmail.com with ESMTPSA id
- a92af1059eb24-14397197dc8sm4917957c88.3.2026.09.16.03.10.56
+ bh=Ax1se0gNN/3xADnjjnXr8VaFvJQk4FnZpZLtXPqOqRc=;
+ b=C2w825W8VRj9oPIUg2mb+nBm7TxN1Y3V5ASuhAm8uwpzkzc59fM+Dbzu0TLMbZoqsz
+ dwvXSejP7CAml4TP/+LlB623sC74aPZUzY9b/uwAEOzJHWwLWRMrffLOSAeuRRsU33/u
+ Nu2DKiuapsMHi5IcxleIJ7RqMW8KW9NTlS+1cia2ytye0zGa8KEMn13n8zz3g0WwCIea
+ GM7Ux1PaELXEzdFnjHxifNNoff1/5vC08+RQs0uCa2ryI6pVufgB1wwAC8wcmsjzjMox
+ 7vVkMiIGtzu1XkMiEKxgtGWv3T0gSXzppAJ8XmCXC7QFnPHTTnved53ddvU6mzPb/IlV
+ 1IHw==
+X-Gm-Message-State: AFuF++k6qqsiIY2QZY9Zms0i48SgyQeJECqll5P9FgJduaBgK36QTsrK
+ FTIUJxYFyusbCHssDUKRdVFaWHjD5ee1AcfxVYXmfOl/Rfiv5EujYEjFZbIte/GAmijDvyKZ9iY
+ DCVP+OI6PGYq7O8AxGBqdf+//c0yWQ5zr0e1wH1r4Osrs8xDnWt5tx2k/eQ==
+X-Gm-Gg: AYBFou2lLrry6QXPJ7h7K4e43LWM5ECBGEtGLN2F3SbANt/v1Hrd600iPbDkVbjHzUW
+ x9+4yDX+YdCCaZ6CvQx7ybEqW3ATv+VIylprYOvhWR2vA+/74izw9G5rd0/51v585Yysb7Pyjn0
+ 0trlktiGW2laemO9Hg+ZcI8zkPzN5xvg/R6/Dm+JFhsGSgdDjg2t0NF6yKSQMhblsqsKenC70KD
+ IB3FLHUJ3LwvglKKgvuZn1wtqfMm3gxqCgERb6L4SVjn1/M24G3YL13qkmAm1cRAuUhwf17tvpo
+ eljQnedcYS7mPd8KQjJji1Zyc6DoHyWvFa+FRbftllaZNMBLC+2/AdodigrRGBrfOGEVQfR3dz/
+ FSbcElDt4mN2aSgiGjWaJI+UcRk7+yJla4iQSmxXN6IqudXfyx2As4s5XJnW6dXnehgry
+X-Received: by 2002:a17:90b:280a:b0:39d:fcbe:fdcf with SMTP id
+ 98e67ed59e1d1-39e1e2659a8mr8229134a91.1.1789577967619; 
+ Wed, 16 Sep 2026 09:59:27 -0700 (PDT)
+X-Received: by 2002:a17:90b:280a:b0:39d:fcbe:fdcf with SMTP id
+ 98e67ed59e1d1-39e1e2659a8mr8229085a91.1.1789577967153; 
+ Wed, 16 Sep 2026 09:59:27 -0700 (PDT)
+Received: from [192.168.1.199] (216-71-219-44.dyn.novuscom.net.
+ [216.71.219.44]) by smtp.gmail.com with ESMTPSA id
+ 5a478bee46e88-33bf5af4f0bsm10051395eec.24.2026.09.16.09.59.25
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 16 Sep 2026 03:10:56 -0700 (PDT)
-Message-ID: <0ebf4cdd-d5be-41f0-adaf-d540f3dd0793@linaro.org>
-Date: Wed, 16 Sep 2026 00:10:53 -1000
+ Wed, 16 Sep 2026 09:59:26 -0700 (PDT)
+Message-ID: <d2fe7c6b-6f63-4db1-be78-e529130710f4@oss.qualcomm.com>
+Date: Wed, 16 Sep 2026 09:59:24 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] target/riscv/pmp: unlock all PMP entries on reset
-To: Sebastian Alba Vives <sebasjosue84@gmail.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com,
- daniel.barboza@oss.qualcomm.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, palmer@dabbelt.com
-References: <20260916034331.2390427-1-sebasjosue84@gmail.com>
-From: Richard Henderson <richard.henderson@linaro.org>
+Subject: Re: [PATCH v4 04/12] target/riscv: Widen riscv_new_csr_seed()
+To: Anton Johansson <anjo@rev.ng>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, daniel.barboza@oss.qualcomm.com,
+ philmd@oss.qualcomm.com, palmer@dabbelt.com, alistair.francis@wdc.com
+References: <20260916-hw-riscv-cpu-int-v4-0-babc367b60f5@rev.ng>
+ <20260916-hw-riscv-cpu-int-v4-4-babc367b60f5@rev.ng>
+From: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
 Content-Language: en-US
-In-Reply-To: <20260916034331.2390427-1-sebasjosue84@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+In-Reply-To: <20260916-hw-riscv-cpu-int-v4-4-babc367b60f5@rev.ng>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:39::f;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj2-x0f.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+X-Authority-Analysis: v=2.4 cv=JYkpPkKV c=1 sm=1 tr=0 ts=6aaacaf0 cx=c_pps
+ a=0uOsjrqzRL749jD1oC5vDA==:117 a=iLqgmErQAxjCjdq5jj1Aqg==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
+ a=EUspDBNiAAAA:8 a=SDCjXxXI95NSL3v6CPIA:9 a=QEXdDO2ut3YA:10
+ a=mQ_c8vxmzFEMiUWkPHU9:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE2MDIzMyBTYWx0ZWRfX9nwDqvnIWyRi
+ +rMWF87vwNI1U1Kz4CZIyFUQlEBVvkaGXnv/c+6S1Nd6V2DDiOISm/PRUT1ZAnJh1u+24I/Lb6r
+ RHy4HU9agoCMBLzrG+SEyeFLe6bjM2v9nNKNVPsU2o4jbz2Cxdyq3A7NNkdjIZ0ToWywfpTK0Er
+ fSbheZg4xQb+IJp4a3xHntDUi90/3F6TvAGn30D7/mJSUEZibRqztEd2a60Ns7U+rYN+CO/DFXu
+ UhgedeiW9jE4+/aW865j80kOduK0jZkUqPtgofdW7d5mUMAAp+HX1Zd0/181jaK/xmhR25AwTAE
+ 31zKM6eVeROftHXZdWbJPgIeR2Xob/4gDzZi4N5/J5639ilHuR6zIn/ZeK0p+TcYIXdMMFc4A/i
+ KNjRgslOeMfE0BfL7ZBp0D+KocACSxPeHIpXjC7eYBzd4q/CXotvW7qjm5uvOs1JgvOAjJAcBWk
+ qbQh62LBrA0bUafvh0w==
+X-Proofpoint-GUID: RfftdEx_tbHjXh6x5B0w4TQ0xYRkdm2G
+X-Proofpoint-ORIG-GUID: RfftdEx_tbHjXh6x5B0w4TQ0xYRkdm2G
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE2MDIzMyBTYWx0ZWRfX5hzASUQOAaSq
+ CyI3xbKbFLUzqVHWdK4yby0RSPkBq+omhljBE1fmlGMKoTIq2lpCfJpBdpgpAejFDkGoJz7CwYN
+ 6UkQjeR72LxkeBoOxcd/NcS2R6MEoWA=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-16_03,2026-09-16_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ lowpriorityscore=0 phishscore=0 impostorscore=0 priorityscore=1501
+ spamscore=0 malwarescore=0 adultscore=0 clxscore=1015 bulkscore=0
+ suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
+ definitions=main-2609160233
+Received-SPF: pass client-ip=205.220.180.131;
+ envelope-from=pierrick.bouvier@oss.qualcomm.com;
+ helo=mx0b-0031df01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -105,54 +155,18 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 9/15/26 17:43, Sebastian Alba Vives wrote:
-> pmp_unlock_entries() bounds its loop with pmp_get_num_rules(), which is
-> the count of entries whose A field is not OFF, not the number of
-> implemented PMP entries. When the active rules are not contiguous from
-> index 0, every entry at an index greater than or equal to num_rules
-> keeps its lock bit across a CPU reset.
+On 9/16/2026 2:18 AM, Anton Johansson wrote:
+> Since the function is exposed through the cpu.h header, make sure it's
+> rv32/rv64 agnostic.  Note return type could be made uint32_t and arguments
+> dropped, but I chose to follow the existing CSR OP style of functions,
+> in case there are other plans for this one.
 > 
-> Those entries stay locked after the reset has cleared mseccfg, so
-> mseccfg.RLB is no longer set and pmp_is_readonly() silently discards
-> subsequent pmpcfg writes. Firmware started after the reset finds PMP
-> entries it did not configure and cannot clear.
-> 
-> Reproduced on -machine virt -cpu rv64,smepmp=true with a bare-metal
-> payload that sets pmpcfg0 = 0x99990000 (entries 2 and 3 as
-> L | NAPOT | R, entries 0 and 1 left OFF) and then resets through the
-> sifive_test device. On the second boot pmpcfg0 reads back 0x99990000
-> and writing 0 to it leaves the value unchanged. With this patch the
-> same payload reads 0x01010000 on the second boot and clearing pmpcfg0
-> succeeds.
-> 
-> Iterate over the implemented entries instead.
-> 
-> Fixes: 4bf501dc0118 ("target/riscv: pmp: Clear pmp/smepmp bits on reset")
-> Signed-off-by: Sebastian Alba Vives <sebasjosue84@gmail.com>
+> Signed-off-by: Anton Johansson <anjo@rev.ng>
 > ---
->   target/riscv/tcg/pmp.c | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
+>  target/riscv/cpu.h | 4 ++--
+>  target/riscv/cpu.c | 6 +++---
+>  2 files changed, 5 insertions(+), 5 deletions(-)
 > 
-> diff --git a/target/riscv/tcg/pmp.c b/target/riscv/tcg/pmp.c
-> index 41b55519a8..5286c6aa90 100644
-> --- a/target/riscv/tcg/pmp.c
-> +++ b/target/riscv/tcg/pmp.c
-> @@ -201,10 +201,10 @@ static bool pmp_write_cfg(CPURISCVState *env, uint32_t pmp_index, uint8_t val)
->   
->   void pmp_unlock_entries(CPURISCVState *env)
->   {
-> -    uint32_t pmp_num = pmp_get_num_rules(env);
-> +    uint8_t pmp_regions = riscv_cpu_cfg(env)->pmp_regions;
->       int i;
->   
-> -    for (i = 0; i < pmp_num; i++) {
-> +    for (i = 0; i < pmp_regions; i++) {
->           env->pmp_state.pmp[i].cfg_reg &= ~(PMP_LOCK | PMP_AMATCH);
->       }
->   }
 
-Why is the entire env->pmp_state not zeroed instead?
-
-
-r~
+Reviewed-by: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
 
