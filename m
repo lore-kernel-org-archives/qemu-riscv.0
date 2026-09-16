@@ -4,58 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56350C982C4
-	for <qemu-riscv@archiver.kernel.org>; Wed, 16 Sep 2026 07:10:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15FE3C88E5C
+	for <qemu-riscv@archiver.kernel.org>; Wed, 16 Sep 2026 07:10:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x6jkf-0005ea-4j; Wed, 16 Sep 2026 03:08:17 -0400
+	id 1x6jl4-00062j-RN; Wed, 16 Sep 2026 03:08:42 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <xiaoou@iscas.ac.cn>)
- id 1x6jkX-0005bk-Mb; Wed, 16 Sep 2026 03:08:09 -0400
+ id 1x6jkt-0005qA-Qt; Wed, 16 Sep 2026 03:08:33 -0400
 Received: from smtp21.cstnet.cn ([159.226.251.21] helo=cstnet.cn)
  by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
  (Exim 4.90_1) (envelope-from <xiaoou@iscas.ac.cn>)
- id 1x6jkT-0008J2-RH; Wed, 16 Sep 2026 03:08:09 -0400
+ id 1x6jkp-0008JX-Hi; Wed, 16 Sep 2026 03:08:31 -0400
 Received: from xiaoou-ubuntu-02.home.arpa (unknown [36.110.52.2])
- by APP-01 (Coremail) with SMTP id qwCowACXaOxHQKpq3zYkCA--.4143S3;
- Wed, 16 Sep 2026 15:08:00 +0800 (CST)
+ by APP-01 (Coremail) with SMTP id qwCowACXaOxHQKpq3zYkCA--.4143S11;
+ Wed, 16 Sep 2026 15:08:02 +0800 (CST)
 From: Molly Chen <xiaoou@iscas.ac.cn>
 To: palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com,
  daniel.barboza@oss.qualcomm.com, zhiwei_liu@linux.alibaba.com,
  chao.liu.zevorn@gmail.com, Chao Liu <chao.liu@processmission.com>
 Cc: nutty.liu@hotmail.com, max.chou@sifive.com, xiaoou@iscas.ac.cn,
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
- Yin Zhang <zhangyin2018@iscas.ac.cn>,
- Dajun Huang <djhuang_1@std.uestc.edu.cn>,
- Zhiyuan Yang <zhiyuan.plct@isrc.iscas.ac.cn>
-Subject: [PATCH v3 01/19] target/riscv: Add packed SIMD extension state
-Date: Wed, 16 Sep 2026 07:07:03 +0000
-Message-Id: <20260916070721.3279229-2-xiaoou@iscas.ac.cn>
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Subject: [PATCH v3 09/19] target/riscv: Add packed SIMD pack,
+ merge and count-leading instructions
+Date: Wed, 16 Sep 2026 07:07:11 +0000
+Message-Id: <20260916070721.3279229-10-xiaoou@iscas.ac.cn>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260916070721.3279229-1-xiaoou@iscas.ac.cn>
 References: <20260916070721.3279229-1-xiaoou@iscas.ac.cn>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: qwCowACXaOxHQKpq3zYkCA--.4143S3
-X-Coremail-Antispam: 1UD129KBjvJXoW3Ar4xtryfWry8Jw1DAFW3GFg_yoWDGry7pr
- 4DG39xG3y8Jas7Za93tF1UWF15Ww4kG3ySkws7Ww4IqFW5JrW5GFn7t3y7ZFn8GFZ5Zr43
- uF48CryDZr4UAFDanT9S1TB71UUUUUJqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUQj14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_Jr4l82xGYIkIc2
- x26xkF7I0E14v26r4j6ryUM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2z4x0
- Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr1j6F4UJw
- A2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwVC2z280aVCY1x0267AKxVW0oVCq3wAa
- w2AFwI0_Jrv_JF1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrV
- C2j2WlYx0E2Ix0cI8IcVAFwI0_JF0_Jw1lYx0Ex4A2jsIE14v26F4j6r4UJwAm72CE4IkC
- 6x0Yz7v_Jr0_Gr1lF7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7M4IIrI
- 8v6xkF7I0E8cxan2IY04v7MxkF7I0En4kS14v26r4a6rW5MxAIw28IcxkI7VAKI48JMxC2
- 0s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI
- 0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE
- 14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVW8JVWxJwCI42IY6xAIw20EY4v20x
- vaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Cr0_Gr1UMIIF0xvEx4A2jsIEc7CjxVAFwI0_
- Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0pR0oG9UUUUU=
+X-CM-TRANSID: qwCowACXaOxHQKpq3zYkCA--.4143S11
+X-Coremail-Antispam: 1UD129KBjvAXoW3CrWkJF17Aw48uryUJrWrXwb_yoW8JF43Go
+ Z3Cr15ZryrGry5X343Cw48Xwn7ZrWIvan5Gr4rZw17Was7Xr1xWr1Dt34UZw1xXry5trW3
+ Xa9ak3WYy3WSgwnrn29KB7ZKAUJUUUUr529EdanIXcx71UUUUU7v73VFW2AGmfu7bjvjm3
+ AaLaJ3UjIYCTnIWjp_UUUO97AC8VAFwI0_Wr0E3s1l1xkIjI8I6I8E6xAIw20EY4v20xva
+ j40_Wr0E3s1l1IIY67AEw4v_Jr0_Jr4l82xGYIkIc2x26280x7IE14v26r126s0DM28Irc
+ Ia0xkI8VCY1x0267AKxVW5JVCq3wA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK021l
+ 84ACjcxK6xIIjxv20xvE14v26ryj6F1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4UJV
+ WxJr1l84ACjcxK6I8E87Iv67AKxVW0oVCq3wA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_GcCE
+ 3s1ln4kS14v26r1Y6r17M2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c
+ 02F40Ex7xfMcIj6xIIjxv20xvE14v26r126r1DMcIj6I8E87Iv67AKxVWxJVW8Jr1lOx8S
+ 6xCaFVCjc4AY6r1j6r4UM4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxw
+ ACI402YVCY1x02628vn2kIc2xKxwCY1x0262kKe7AKxVWUtVW8ZwCF04k20xvY0x0EwIxG
+ rwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v26r1j6r18MI8I3I0E7480Y4
+ vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2Ij64vIr41lIxAIcVC0I7IY
+ x2IY67AKxVWUCVW8JwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Gr1j6F4UJwCI42IY6xAIw2
+ 0EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Cr0_Gr1UMIIF0xvEx4A2jsIEc7Cj
+ xVAFwI0_Gr1j6F4UJbIYCTnIWIevJa73UjIFyTuYvjfUoBTYUUUUU
 X-Originating-IP: [36.110.52.2]
 X-CM-SenderInfo: 50ld003x6l2u1dvotugofq/
 Received-SPF: pass client-ip=159.226.251.21; envelope-from=xiaoou@iscas.ac.cn;
@@ -81,302 +79,347 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Model vxsat with separate Vector/Zve and P-only control paths.  When
-Zve* is present, vxsat follows mstatus.VS/vsstatus.VS; when P is
-implemented without Zve*, stateen0.VXSAT controls access instead.
+Implement packed pairing, sign-extension, reversal, zip and unzip,
+shift-and-merge, narrowing clipping, and count-leading-sign operations.
+Cover the supported element widths and signed and unsigned clipping
+variants. Add the associated decode entries, translators and helpers.
 
-Record the P-only stateen result in TB flags so cached translations
-preserve both instruction legality and the illegal-vs-virtual exception
-class.
-
-Co-authored-by: Yin Zhang <zhangyin2018@iscas.ac.cn>
-Co-authored-by: Dajun Huang <djhuang_1@std.uestc.edu.cn>
-Co-authored-by: Zhiyuan Yang <zhiyuan.plct@isrc.iscas.ac.cn>
+Note that the narrowing clipping instructions combine elements from two
+source registers and clamp each result to the destination element range.
+They set vxsat when saturation occurs.
 
 Signed-off-by: Molly Chen <xiaoou@iscas.ac.cn>
-Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Reviewed-by: Nutty Liu <nutty.liu@hotmail.com>
-Reviewed-by: Chao Liu <chao.liu@processmission.com>
 ---
- target/riscv/cpu.c         |  5 ++--
- target/riscv/cpu.h         |  8 +++++++
- target/riscv/cpu_bits.h    |  2 ++
- target/riscv/machine.c     | 19 +++++++++++++++
- target/riscv/tcg/csr.c     | 39 +++++++++++++++++++++++++++++--
- target/riscv/tcg/tcg-cpu.c | 48 ++++++++++++++++++++++++++++++++++++++
- 6 files changed, 117 insertions(+), 4 deletions(-)
+ target/riscv/helper.h                       |  41 ++++++
+ target/riscv/insn32.decode                  |  42 ++++++
+ target/riscv/tcg/insn_trans/trans_rvp.c.inc |  57 ++++++++
+ target/riscv/tcg/psimd_helper.c             | 152 ++++++++++++++++++++
+ 4 files changed, 292 insertions(+)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 652311ddef2..ea771ac9167 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -47,7 +47,7 @@
- /* RISC-V CPU definitions */
- static const char riscv_single_letter_exts[] = "IEMAFDQCBPVH";
- const uint32_t misa_bits[] = {RVI, RVE, RVM, RVA, RVF, RVD, RVV,
--                              RVC, RVS, RVU, RVH, RVG, RVB, 0};
-+                              RVC, RVS, RVU, RVH, RVG, RVB, RVP, 0};
- #define RISCV_CPU_MVENDORID 0
- #define RISCV_CPU_MIMPID 0
- /*
-@@ -1579,7 +1579,8 @@ static const MISAExtInfo misa_ext_info_arr[] = {
-     MISA_EXT_INFO(RVH, "h", "Hypervisor"),
-     MISA_EXT_INFO(RVV, "v", "Vector operations"),
-     MISA_EXT_INFO(RVG, "g", "General purpose (IMAFD_Zicsr_Zifencei)"),
--    MISA_EXT_INFO(RVB, "b", "Bit manipulation (Zba_Zbb_Zbs)")
-+    MISA_EXT_INFO(RVB, "b", "Bit manipulation (Zba_Zbb_Zbs)"),
-+    MISA_EXT_INFO(RVP, "x-p", "Packed-SIMD instructions")
- };
- 
- static void riscv_cpu_validate_misa_mxl(RISCVCPUClass *mcc)
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index c2138dbd4ba..23235b4cefb 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -70,6 +70,7 @@ typedef struct CPUArchState CPURISCVState;
- #define RVG RV('G')
- #define RVB RV('B')
- #define RVX RV('X')
-+#define RVP RV('P')
- 
- extern const uint32_t misa_bits[];
- const char *riscv_get_misa_ext_name(uint32_t bit);
-@@ -748,6 +749,13 @@ FIELD(TB_FLAGS, PM_SIGNEXTEND, 31, 1)
- FIELD(EXT_TB_FLAGS, MISA_EXT, 0, 32)
- FIELD(EXT_TB_FLAGS, ALTFMT, 32, 1)
- FIELD(EXT_TB_FLAGS, BIG_ENDIAN, 33, 1)
-+FIELD(EXT_TB_FLAGS, P_VXSAT_EXCP, 34, 2)
+diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+index 824779f05d0..55d95c6eb6d 100644
+--- a/target/riscv/helper.h
++++ b/target/riscv/helper.h
+@@ -1519,3 +1519,44 @@ DEF_HELPER_3(predsum_hs, tl, env, tl, tl)
+ DEF_HELPER_3(predsumu_hs, tl, env, tl, tl)
+ DEF_HELPER_3(predsum_ws, i64, env, i64, i64)
+ DEF_HELPER_3(predsumu_ws, i64, env, i64, i64)
 +
-+enum {
-+    P_VXSAT_EXCP_NONE,
-+    P_VXSAT_EXCP_ILLEGAL,
-+    P_VXSAT_EXCP_VIRTUAL,
-+};
- 
- #ifdef TARGET_RISCV32
- #define riscv_cpu_mxl(env)  ((void)(env), MXL_RV32)
-diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index c01050ce2b6..22774a3ec36 100644
---- a/target/riscv/cpu_bits.h
-+++ b/target/riscv/cpu_bits.h
-@@ -355,6 +355,8 @@
- #define SMSTATEEN0_CS       (1ULL << 0)
- #define SMSTATEEN0_FCSR     (1ULL << 1)
- #define SMSTATEEN0_JVT      (1ULL << 2)
-+/* Packed-SIMD draft: enable access to vxsat when misa.V = 0. */
-+#define SMSTATEEN0_VXSAT    (1ULL << 3)
- #define SMSTATEEN0_CTR      (1ULL << 54)
- #define SMSTATEEN0_P1P13    (1ULL << 56)
- #define SMSTATEEN0_HSCONTXT (1ULL << 57)
-diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-index bf203bffcef..9d01236dd5d 100644
---- a/target/riscv/machine.c
-+++ b/target/riscv/machine.c
-@@ -160,6 +160,24 @@ static const VMStateDescription vmstate_vector = {
-     }
- };
- 
-+static bool p_vxsat_needed(void *opaque)
++/* Packed SIMD - Pack, Unpack, and Merge Operations */
++DEF_HELPER_3(ppaire_b, tl, env, tl, tl)
++DEF_HELPER_3(ppaireo_b, tl, env, tl, tl)
++DEF_HELPER_3(ppairoe_b, tl, env, tl, tl)
++DEF_HELPER_3(ppairo_b, tl, env, tl, tl)
++DEF_HELPER_3(ppaire_h, i64, env, i64, i64)
++DEF_HELPER_3(ppaireo_h, tl, env, tl, tl)
++DEF_HELPER_3(ppairoe_h, tl, env, tl, tl)
++DEF_HELPER_3(ppairo_h, tl, env, tl, tl)
++DEF_HELPER_3(ppaireo_w, i64, env, i64, i64)
++DEF_HELPER_3(ppairoe_w, i64, env, i64, i64)
++DEF_HELPER_3(ppairo_w, i64, env, i64, i64)
++DEF_HELPER_2(psext_h_b, tl, env, tl)
++DEF_HELPER_2(psext_w_b, i64, env, i64)
++DEF_HELPER_2(psext_w_h, i64, env, i64)
++DEF_HELPER_2(rev, tl, env, tl)
++DEF_HELPER_2(rev16, i64, env, i64)
++DEF_HELPER_3(zip8p, i64, env, i64, i64)
++DEF_HELPER_3(zip8hp, i64, env, i64, i64)
++DEF_HELPER_3(unzip8p, i64, env, i64, i64)
++DEF_HELPER_3(unzip8hp, i64, env, i64, i64)
++DEF_HELPER_3(zip16p, i64, env, i64, i64)
++DEF_HELPER_3(zip16hp, i64, env, i64, i64)
++DEF_HELPER_3(unzip16p, i64, env, i64, i64)
++DEF_HELPER_3(unzip16hp, i64, env, i64, i64)
++DEF_HELPER_4(slx, tl, env, tl, tl, tl)
++DEF_HELPER_4(srx, tl, env, tl, tl, tl)
++DEF_HELPER_4(mvm, tl, env, tl, tl, tl)
++DEF_HELPER_4(mvmn, tl, env, tl, tl, tl)
++DEF_HELPER_4(merge, tl, env, tl, tl, tl)
++DEF_HELPER_3(pnclipp_b, i64, env, i64, i64)
++DEF_HELPER_3(pnclipup_b, i64, env, i64, i64)
++DEF_HELPER_3(pnclipp_h, i64, env, i64, i64)
++DEF_HELPER_3(pnclipup_h, i64, env, i64, i64)
++DEF_HELPER_3(pnclipp_w, i64, env, i64, i64)
++DEF_HELPER_3(pnclipup_w, i64, env, i64, i64)
++
++/* Packed SIMD - Count Leading Operations */
++DEF_HELPER_2(cls, tl, env, tl)
++DEF_HELPER_2(clsw, i64, env, i64)
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index 3f8314d382b..38210bb4934 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -1298,3 +1298,45 @@ predsum_hs   1001100 ..... ..... 100 ..... 0011011 @r
+ predsumu_hs  1011100 ..... ..... 100 ..... 0011011 @r
+ predsum_ws   1001101 ..... ..... 100 ..... 0011011 @r
+ predsumu_ws  1011101 ..... ..... 100 ..... 0011011 @r
++
++# Packed SIMD - Pack, Unpack, and Merge Operations
++ppaire_b    1000000 ..... ..... 100 ..... 0111011 @r
++ppaireo_b   1001000 ..... ..... 100 ..... 0111011 @r
++ppairoe_b   1010000 ..... ..... 100 ..... 0111011 @r
++ppairo_b    1011000 ..... ..... 100 ..... 0111011 @r
++ppaireo_h   1001001 ..... ..... 100 ..... 0111011 @r
++ppairoe_h   1010001 ..... ..... 100 ..... 0111011 @r
++ppairo_h    1011001 ..... ..... 100 ..... 0111011 @r
++ppaire_h    1000001 ..... ..... 100 ..... 0111011 @r
++ppaireo_w   1001011 ..... ..... 100 ..... 0111011 @r
++ppairoe_w   1010011 ..... ..... 100 ..... 0111011 @r
++ppairo_w    1011011 ..... ..... 100 ..... 0111011 @r
++psext_h_b   1110000 00100 ..... 010 ..... 0011011 @r2
++psext_w_b   1110001 00100 ..... 010 ..... 0011011 @r2
++psext_w_h   1110001 00101 ..... 010 ..... 0011011 @r2
++rev_32      01101 0011111 ..... 101 ..... 0010011 @r2
++rev_64      01101 0111111 ..... 101 ..... 0010011 @r2
++rev16       01101 0110000 ..... 101 ..... 0010011 @r2
++zip8p       1111000 ..... ..... 010 ..... 0111011 @r
++zip8hp      1111010 ..... ..... 010 ..... 0111011 @r
++unzip8p     1110000 ..... ..... 010 ..... 0111011 @r
++unzip8hp    1110010 ..... ..... 010 ..... 0111011 @r
++zip16p      1111001 ..... ..... 010 ..... 0111011 @r
++zip16hp     1111011 ..... ..... 010 ..... 0111011 @r
++unzip16p    1110001 ..... ..... 010 ..... 0111011 @r
++unzip16hp   1110011 ..... ..... 010 ..... 0111011 @r
++slx         1000111 ..... ..... 001 ..... 0111011 @r
++srx         1010111 ..... ..... 001 ..... 0111011 @r
++mvm         1010100 ..... ..... 001 ..... 0111011 @r
++mvmn        1010101 ..... ..... 001 ..... 0111011 @r
++merge       1010110 ..... ..... 001 ..... 0111011 @r
++pnclipp_b   1100000 ..... ..... 010 ..... 0111011 @r
++pnclipup_b  1000000 ..... ..... 010 ..... 0111011 @r
++pnclipp_h   1100001 ..... ..... 010 ..... 0111011 @r
++pnclipup_h  1000001 ..... ..... 010 ..... 0111011 @r
++pnclipp_w   1100011 ..... ..... 010 ..... 0111011 @r
++pnclipup_w  1000011 ..... ..... 010 ..... 0111011 @r
++
++# Packed SIMD - Count Leading Operations
++cls    01100 0000011 ..... 001 ..... 0010011 @r2
++clsw   01100 0000011 ..... 001 ..... 0011011 @r2
+diff --git a/target/riscv/tcg/insn_trans/trans_rvp.c.inc b/target/riscv/tcg/insn_trans/trans_rvp.c.inc
+index 726707b2956..2c9a34b9a7e 100644
+--- a/target/riscv/tcg/insn_trans/trans_rvp.c.inc
++++ b/target/riscv/tcg/insn_trans/trans_rvp.c.inc
+@@ -672,3 +672,60 @@ GEN_SIMD_TRANS(predsum_hs)
+ GEN_SIMD_TRANS(predsumu_hs)
+ GEN_SIMD_TRANS_64(predsum_ws)
+ GEN_SIMD_TRANS_64(predsumu_ws)
++
++/* Packed SIMD - Pack, Unpack, and Merge Operations */
++GEN_SIMD_TRANS(ppaire_b)
++GEN_SIMD_TRANS(ppaireo_b)
++GEN_SIMD_TRANS(ppairoe_b)
++GEN_SIMD_TRANS(ppairo_b)
++GEN_SIMD_TRANS_64(ppaire_h)
++GEN_SIMD_TRANS(ppaireo_h)
++GEN_SIMD_TRANS(ppairoe_h)
++GEN_SIMD_TRANS(ppairo_h)
++GEN_SIMD_TRANS_64(ppaireo_w)
++GEN_SIMD_TRANS_64(ppairoe_w)
++GEN_SIMD_TRANS_64(ppairo_w)
++GEN_SIMD_TRANS_R1(psext_h_b)
++GEN_SIMD_TRANS_R1_64(psext_w_b)
++GEN_SIMD_TRANS_R1_64(psext_w_h)
++#if defined(TARGET_RISCV32)
++static bool trans_rev_32(DisasContext *ctx, arg_rev_32 * a)
 +{
-+    RISCVCPU *cpu = opaque;
-+
-+    return riscv_has_ext(&cpu->env, RVP) && !cpu->cfg.ext_zve32x;
++    REQUIRE_32BIT(ctx);
++    GEN_SIMD_TRANS_R1_BODY(rev, false);
 +}
 +
-+static const VMStateDescription vmstate_p_vxsat = {
-+    .name = "cpu/p-vxsat",
-+    .version_id = 1,
-+    .minimum_version_id = 1,
-+    .needed = p_vxsat_needed,
-+    .fields = (const VMStateField[]) {
-+        VMSTATE_UINT8(env.vxsat, RISCVCPU),
-+        VMSTATE_END_OF_LIST()
-+    }
-+};
-+
- static bool pointermasking_needed(void *opaque)
- {
-     return false;
-@@ -561,6 +579,7 @@ const VMStateDescription vmstate_riscv_cpu = {
-         &vmstate_pmp,
-         &vmstate_hyper,
-         &vmstate_vector,
-+        &vmstate_p_vxsat,
-         &vmstate_pointermasking,
-         &vmstate_rv128,
- #ifdef CONFIG_KVM
-diff --git a/target/riscv/tcg/csr.c b/target/riscv/tcg/csr.c
-index bd4b6dc114b..eefb487ca21 100644
---- a/target/riscv/tcg/csr.c
-+++ b/target/riscv/tcg/csr.c
-@@ -109,6 +109,24 @@ static RISCVException vs(CPURISCVState *env, int csrno)
-     return RISCV_EXCP_ILLEGAL_INST;
- }
- 
-+/* vxsat is also architectural state when P is implemented without Zve*. */
-+static RISCVException vxsat(CPURISCVState *env, int csrno)
-+{
-+    if (riscv_cpu_cfg(env)->ext_zve32x) {
-+        return vs(env, csrno);
-+    }
-+
-+    if (riscv_has_ext(env, RVP)) {
-+#if !defined(CONFIG_USER_ONLY)
-+        return smstateen_acc_ok(env, 0, SMSTATEEN0_VXSAT);
++GEN_SIMD_TRANS_UNAVAILABLE_64(rev_64)
 +#else
-+        return RISCV_EXCP_NONE;
-+#endif
-+    }
++GEN_SIMD_TRANS_UNAVAILABLE_32(rev_32)
 +
-+    return RISCV_EXCP_ILLEGAL_INST;
-+}
-+
- static RISCVException ctr(CPURISCVState *env, int csrno)
- {
- #if !defined(CONFIG_USER_ONLY)
-@@ -1013,7 +1031,12 @@ static RISCVException write_vxsat(CPURISCVState *env, int csrno,
-                                   target_ulong val, uintptr_t ra)
- {
- #if !defined(CONFIG_USER_ONLY)
--    env->mstatus |= MSTATUS_VS;
-+    if (riscv_cpu_cfg(env)->ext_zve32x) {
-+        env->mstatus |= MSTATUS_VS;
-+        if (env->virt_enabled) {
-+            env->mstatus_hs |= MSTATUS_VS;
-+        }
-+    }
- #endif
-     env->vxsat = val & BIT(0);
-     return RISCV_EXCP_NONE;
-@@ -3512,6 +3535,10 @@ static RISCVException write_mstateen0(CPURISCVState *env, int csrno,
-                                       target_ulong new_val, uintptr_t ra)
- {
-     uint64_t wr_mask = SMSTATEEN_STATEEN | SMSTATEEN0_HSENVCFG;
-+
-+    if (riscv_has_ext(env, RVP) && !riscv_cpu_cfg(env)->ext_zve32x) {
-+        wr_mask |= SMSTATEEN0_VXSAT;
-+    }
-     if (!riscv_has_ext(env, RVF)) {
-         wr_mask |= SMSTATEEN0_FCSR;
-     }
-@@ -3635,6 +3662,10 @@ static RISCVException write_hstateen0(CPURISCVState *env, int csrno,
- {
-     uint64_t wr_mask = SMSTATEEN_STATEEN | SMSTATEEN0_HSENVCFG;
- 
-+    if (riscv_has_ext(env, RVP) && !riscv_cpu_cfg(env)->ext_zve32x) {
-+        wr_mask |= SMSTATEEN0_VXSAT;
-+    }
-+
-     if (!riscv_has_ext(env, RVF)) {
-         wr_mask |= SMSTATEEN0_FCSR;
-     }
-@@ -3764,6 +3795,10 @@ static RISCVException write_sstateen0(CPURISCVState *env, int csrno,
- {
-     uint64_t wr_mask = 0;
- 
-+    if (riscv_has_ext(env, RVP) && !riscv_cpu_cfg(env)->ext_zve32x) {
-+        wr_mask |= SMSTATEEN0_VXSAT;
-+    }
-+
-     if (!riscv_has_ext(env, RVF)) {
-         wr_mask |= SMSTATEEN0_FCSR;
-     }
-@@ -5934,7 +5969,7 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
-     [CSR_FCSR]     = { "fcsr",     fs,     read_fcsr,    write_fcsr   },
-     /* Vector CSRs */
-     [CSR_VSTART]   = { "vstart",   vs,     read_vstart,  write_vstart },
--    [CSR_VXSAT]    = { "vxsat",    vs,     read_vxsat,   write_vxsat  },
-+    [CSR_VXSAT]    = { "vxsat",    vxsat,  read_vxsat,   write_vxsat  },
-     [CSR_VXRM]     = { "vxrm",     vs,     read_vxrm,    write_vxrm   },
-     [CSR_VCSR]     = { "vcsr",     vs,     read_vcsr,    write_vcsr   },
-     [CSR_VL]       = { "vl",       vs,     read_vl                    },
-diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-index b68160af830..3e72e2ffd7f 100644
---- a/target/riscv/tcg/tcg-cpu.c
-+++ b/target/riscv/tcg/tcg-cpu.c
-@@ -158,6 +158,8 @@ static TCGTBCPUState riscv_get_tb_cpu_state(CPUState *cs)
-     fs = EXT_STATUS_DIRTY;
-     vs = EXT_STATUS_DIRTY;
- #else
-+    RISCVException p_vxsat_excp;
-+
-     flags = FIELD_DP32(flags, TB_FLAGS, PRIV, env->priv);
- 
-     flags |= riscv_env_mmu_index(env, 0);
-@@ -180,6 +182,23 @@ static TCGTBCPUState riscv_get_tb_cpu_state(CPUState *cs)
-              ? EXT_STATUS_DIRTY : EXT_STATUS_DISABLED;
-     }
- 
-+    /*
-+     * Without Zve*, all P instructions in the OP-32 and OP-IMM-32
-+     * spaces are controlled by stateen0.VXSAT.  Preserve the exception
-+     * class in the TB flags so translated code can distinguish an illegal
-+     * instruction from a virtual-instruction exception.
-+     */
-+    p_vxsat_excp = smstateen_acc_ok(env, 0, SMSTATEEN0_VXSAT);
-+    if (riscv_has_ext(env, RVP) && !riscv_cpu_cfg(env)->ext_zve32x) {
-+        if (p_vxsat_excp == RISCV_EXCP_VIRT_INSTRUCTION_FAULT) {
-+            ext_flags = FIELD_DP64(ext_flags, EXT_TB_FLAGS, P_VXSAT_EXCP,
-+                                   P_VXSAT_EXCP_VIRTUAL);
-+        } else if (p_vxsat_excp != RISCV_EXCP_NONE) {
-+            ext_flags = FIELD_DP64(ext_flags, EXT_TB_FLAGS, P_VXSAT_EXCP,
-+                                   P_VXSAT_EXCP_ILLEGAL);
-+        }
-+    }
-+
-     if ((cpu->cfg.debug || cpu->cfg.ext_sdtrig)
-         && !icount_enabled()) {
-         flags = FIELD_DP32(flags, TB_FLAGS, ITRIGGER, env->itrigger_enabled);
-@@ -529,6 +548,28 @@ static void riscv_cpu_validate_b(RISCVCPU *cpu)
-     }
- }
- 
-+static void riscv_cpu_validate_p(RISCVCPU *cpu, Error **errp)
++static bool trans_rev_64(DisasContext *ctx, arg_rev_64 * a)
 +{
-+    CPURISCVState *env = &cpu->env;
++    REQUIRE_64BIT(ctx);
++    GEN_SIMD_TRANS_R1_BODY(rev, false);
++}
++#endif
++GEN_SIMD_TRANS_R1_64(rev16)
++GEN_SIMD_TRANS_64(zip8p)
++GEN_SIMD_TRANS_64(zip8hp)
++GEN_SIMD_TRANS_64(unzip8p)
++GEN_SIMD_TRANS_64(unzip8hp)
++GEN_SIMD_TRANS_64(zip16p)
++GEN_SIMD_TRANS_64(zip16hp)
++GEN_SIMD_TRANS_64(unzip16p)
++GEN_SIMD_TRANS_64(unzip16hp)
++GEN_SIMD_TRANS_ACC(slx)
++GEN_SIMD_TRANS_ACC(srx)
++GEN_SIMD_TRANS_ACC(mvm)
++GEN_SIMD_TRANS_ACC(mvmn)
++GEN_SIMD_TRANS_ACC(merge)
++GEN_SIMD_TRANS_64_VXSAT(pnclipp_b)
++GEN_SIMD_TRANS_64_VXSAT(pnclipup_b)
++GEN_SIMD_TRANS_64_VXSAT(pnclipp_h)
++GEN_SIMD_TRANS_64_VXSAT(pnclipup_h)
++GEN_SIMD_TRANS_64_VXSAT(pnclipp_w)
++GEN_SIMD_TRANS_64_VXSAT(pnclipup_w)
 +
-+    if (!riscv_has_ext(env, RVP)) {
-+        return;
++/* Packed SIMD - Count Leading Operations */
++GEN_SIMD_TRANS_R1(cls)
++GEN_SIMD_TRANS_R1_64(clsw)
+diff --git a/target/riscv/tcg/psimd_helper.c b/target/riscv/tcg/psimd_helper.c
+index 397efa66aeb..f883596fe49 100644
+--- a/target/riscv/tcg/psimd_helper.c
++++ b/target/riscv/tcg/psimd_helper.c
+@@ -2477,3 +2477,155 @@ GEN_PSIMD_REDSUM(predsum_ws, uint64_t, int64_t, int32_t,
+                  EXTRACT32, ELEMS_W, (int64_t)rs2)
+ GEN_PSIMD_REDSUM(predsumu_ws, uint64_t, uint64_t, uint32_t,
+                  EXTRACT32, ELEMS_W, rs2)
++
++/* Packing/unpacking operations */
++
++GEN_PSIMD_PAIR_PACK(ppaire_b, target_ulong, uint16_t,
++                    EXTRACT16, INSERT16, ELEMS_H, 0x00ff, 8,
++                    PSIMD_PAIR_LO, PSIMD_PAIR_LO)
++GEN_PSIMD_PAIR_PACK(ppaireo_b, target_ulong, uint16_t,
++                    EXTRACT16, INSERT16, ELEMS_H, 0x00ff, 8,
++                    PSIMD_PAIR_HI, PSIMD_PAIR_LO)
++GEN_PSIMD_PAIR_PACK(ppairoe_b, target_ulong, uint16_t,
++                    EXTRACT16, INSERT16, ELEMS_H, 0x00ff, 8,
++                    PSIMD_PAIR_LO, PSIMD_PAIR_HI)
++GEN_PSIMD_PAIR_PACK(ppairo_b, target_ulong, uint16_t,
++                    EXTRACT16, INSERT16, ELEMS_H, 0x00ff, 8,
++                    PSIMD_PAIR_HI, PSIMD_PAIR_HI)
++
++GEN_PSIMD_PAIR_PACK(ppaire_h, uint64_t, uint32_t,
++                    EXTRACT32, INSERT32, ELEMS_W, 0x0000ffff, 16,
++                    PSIMD_PAIR_LO, PSIMD_PAIR_LO)
++GEN_PSIMD_PAIR_PACK(ppaireo_h, target_ulong, uint32_t,
++                    EXTRACT32, INSERT32, ELEMS_W, 0x0000ffff, 16,
++                    PSIMD_PAIR_HI, PSIMD_PAIR_LO)
++GEN_PSIMD_PAIR_PACK(ppairoe_h, target_ulong, uint32_t,
++                    EXTRACT32, INSERT32, ELEMS_W, 0x0000ffff, 16,
++                    PSIMD_PAIR_LO, PSIMD_PAIR_HI)
++GEN_PSIMD_PAIR_PACK(ppairo_h, target_ulong, uint32_t,
++                    EXTRACT32, INSERT32, ELEMS_W, 0x0000ffff, 16,
++                    PSIMD_PAIR_HI, PSIMD_PAIR_HI)
++
++GEN_PSIMD_PAIR_WORD(ppaireo_w, 0, 1)
++GEN_PSIMD_PAIR_WORD(ppairoe_w, 1, 0)
++GEN_PSIMD_PAIR_WORD(ppairo_w, 1, 1)
++
++GEN_PSIMD_SIGN_EXTEND(psext_h_b, target_ulong, int8_t, int16_t,
++                      EXTRACT8, INSERT16, ELEMS_H, 2)
++GEN_PSIMD_SIGN_EXTEND(psext_w_b, uint64_t, int8_t, int32_t,
++                      EXTRACT8, INSERT32, ELEMS_W, 4)
++GEN_PSIMD_SIGN_EXTEND(psext_w_h, uint64_t, int16_t, int32_t,
++                      EXTRACT16, INSERT32, ELEMS_W, 2)
++
++/**
++ * REV - Reverse the bit order of the full XLEN-wide value
++ */
++target_ulong HELPER(rev)(CPURISCVState *env, target_ulong rs1)
++{
++    target_ulong rd = 0;
++
++    for (int i = 0; i < TARGET_LONG_BITS; i++) {
++        rd = (rd << 1) | (rs1 & 1);
++        rs1 >>= 1;
 +    }
 +
-+    if (riscv_cpu_mxl(env) != MXL_RV32 &&
-+        riscv_cpu_mxl(env) != MXL_RV64) {
-+        error_setg(errp, "P extension requires RV32 or RV64");
-+        return;
-+    }
-+
-+    if (!(cpu->cfg.ext_zmmul && cpu->cfg.ext_zba && cpu->cfg.ext_zbb &&
-+          cpu->cfg.ext_zbkb)) {
-+        error_setg(errp, "P extension requires zmmul, zba, zbb and zbkb "
-+                         "extensions");
-+        return;
-+    }
++    return rd;
 +}
 +
- /*
-  * Check consistency between chosen extensions while setting
-  * cpu->cfg accordingly.
-@@ -611,6 +652,12 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
-         return;
-     }
- 
-+    riscv_cpu_validate_p(cpu, &local_err);
-+    if (local_err != NULL) {
-+        error_propagate(errp, local_err);
-+        return;
++/**
++ * REV16 - Reverse the order of 16-bit chunks (RV64 only)
++ */
++uint64_t HELPER(rev16)(CPURISCVState *env, uint64_t rs1)
++{
++    uint64_t rd = 0;
++
++    for (int i = 0; i < 4; i++) {
++        uint16_t chunk = EXTRACT16(rs1, i);
++        rd = (rd << 16) | chunk;
 +    }
 +
-     riscv_cpu_validate_v(env, &cpu->cfg, &local_err);
-     if (local_err != NULL) {
-         error_propagate(errp, local_err);
-@@ -1413,6 +1460,7 @@ static const RISCVCPUMisaExtConfig misa_ext_cfgs[] = {
-     MISA_CFG(RVV, false),
-     MISA_CFG(RVG, false),
-     MISA_CFG(RVB, false),
-+    MISA_CFG(RVP, false),
- };
- 
- /*
++    return rd;
++}
++
++GEN_PSIMD_ZIP(zip8p, uint8_t, EXTRACT8, 4, 8, 3)
++GEN_PSIMD_ZIP(zip8hp, uint8_t, EXTRACT8, 4, 8, 7)
++GEN_PSIMD_UNZIP(unzip8p, EXTRACT8, 4, 8, 0)
++GEN_PSIMD_UNZIP(unzip8hp, EXTRACT8, 4, 8, 1)
++
++GEN_PSIMD_ZIP(zip16p, uint16_t, EXTRACT16, 2, 16, 1)
++GEN_PSIMD_ZIP(zip16hp, uint16_t, EXTRACT16, 2, 16, 3)
++GEN_PSIMD_UNZIP(unzip16p, EXTRACT16, 2, 16, 0)
++GEN_PSIMD_UNZIP(unzip16hp, EXTRACT16, 2, 16, 1)
++
++/* Merge and mask operations */
++
++/**
++ * SLX - Shift left extended (concatenate rd and rs1, shift left, take upper)
++ */
++target_ulong HELPER(slx)(CPURISCVState *env, target_ulong rs1,
++                         target_ulong rs2, target_ulong rd)
++{
++    int shamt = (TARGET_LONG_BITS == 32) ? (rs2 & 0x1F) : (rs2 & 0x3F);
++    target_ulong xrs1 = 0;
++    target_ulong xrd = 0;
++
++    if (shamt == 0) {
++        xrd = rd;
++    } else if (shamt <= TARGET_LONG_BITS) {
++        xrs1 = rs1 >> (TARGET_LONG_BITS - shamt);
++        xrd = (rd << shamt) + xrs1;
++    } else {
++        xrd = rs1 << (shamt - TARGET_LONG_BITS);
++    }
++
++    return xrd;
++}
++
++/**
++ * SRX - Shift right extended (concatenate rs1 and rd, shift right, take lower)
++ */
++target_ulong HELPER(srx)(CPURISCVState *env, target_ulong rs1,
++                         target_ulong rs2, target_ulong rd)
++{
++    int shamt = (TARGET_LONG_BITS == 32) ? (rs2 & 0x1F) : (rs2 & 0x3F);
++    target_ulong xrs1 = 0;
++    target_ulong xrd = 0;
++
++    if (shamt == 0) {
++        xrd = rd;
++    } else if (shamt <= TARGET_LONG_BITS) {
++        xrs1 = rs1 << (TARGET_LONG_BITS - shamt);
++        xrd = (rd >> shamt) + xrs1;
++    } else {
++        xrd = rs1 >> (shamt - TARGET_LONG_BITS);
++    }
++
++    return xrd;
++}
++
++GEN_PSIMD_BIT_SELECT(mvm, rs2, rs1, rd)
++GEN_PSIMD_BIT_SELECT(mvmn, rs2, rd, rs1)
++GEN_PSIMD_BIT_SELECT(merge, rd, rs2, rs1)
++
++GEN_PSIMD_NCLIP_PACK(pnclipp_b, int16_t, int8_t,
++                     EXTRACT16, INSERT8, 4, signed_saturate_b)
++GEN_PSIMD_NCLIP_PACK(pnclipup_b, uint16_t, uint8_t,
++                     EXTRACT16, INSERT8, 4, unsigned_saturate_b)
++GEN_PSIMD_NCLIP_PACK(pnclipp_h, int32_t, int16_t,
++                     EXTRACT32, INSERT16, 2, signed_saturate_h)
++GEN_PSIMD_NCLIP_PACK(pnclipup_h, uint32_t, uint16_t,
++                     EXTRACT32, INSERT16, 2, unsigned_saturate_h)
++GEN_PSIMD_NCLIP_PACK(pnclipp_w, int64_t, int32_t,
++                     EXTRACT64, INSERT32_64, 1, signed_saturate_w)
++GEN_PSIMD_NCLIP_PACK(pnclipup_w, uint64_t, uint32_t,
++                     EXTRACT64, INSERT32_64, 1, unsigned_saturate_w)
++
++/* Count leading operations */
++
++#if TARGET_LONG_BITS == 64
++GEN_PSIMD_CLS(cls, target_ulong, uint64_t, clrsb64)
++#else
++GEN_PSIMD_CLS(cls, target_ulong, uint32_t, clrsb32)
++#endif
++
++GEN_PSIMD_CLS(clsw, uint64_t, uint32_t, clrsb32)
 -- 
 2.34.1
 
