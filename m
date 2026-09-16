@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE519C88E5C
-	for <qemu-riscv@archiver.kernel.org>; Wed, 16 Sep 2026 07:15:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C0CFC982C1
+	for <qemu-riscv@archiver.kernel.org>; Wed, 16 Sep 2026 07:15:20 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x6jr2-0005cU-U2; Wed, 16 Sep 2026 03:14:57 -0400
+	id 1x6jrH-0005eH-JT; Wed, 16 Sep 2026 03:15:07 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <xiaoou@iscas.ac.cn>)
- id 1x6jqv-0005ak-6W; Wed, 16 Sep 2026 03:14:45 -0400
+ id 1x6jqv-0005aj-54; Wed, 16 Sep 2026 03:14:45 -0400
 Received: from smtp21.cstnet.cn ([159.226.251.21] helo=cstnet.cn)
  by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
  (Exim 4.90_1) (envelope-from <xiaoou@iscas.ac.cn>)
- id 1x6jqs-0000zS-04; Wed, 16 Sep 2026 03:14:44 -0400
+ id 1x6jqs-0000zU-13; Wed, 16 Sep 2026 03:14:44 -0400
 Received: from xiaoou-ubuntu-02.home.arpa (unknown [36.110.52.2])
- by APP-01 (Coremail) with SMTP id qwCowACXaOxHQKpq3zYkCA--.4143S20;
- Wed, 16 Sep 2026 15:08:05 +0800 (CST)
+ by APP-01 (Coremail) with SMTP id qwCowACXaOxHQKpq3zYkCA--.4143S14;
+ Wed, 16 Sep 2026 15:08:03 +0800 (CST)
 From: Molly Chen <xiaoou@iscas.ac.cn>
 To: palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com,
  daniel.barboza@oss.qualcomm.com, zhiwei_liu@linux.alibaba.com,
  chao.liu.zevorn@gmail.com, Chao Liu <chao.liu@processmission.com>
 Cc: nutty.liu@hotmail.com, max.chou@sifive.com, xiaoou@iscas.ac.cn,
  qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Subject: [PATCH v3 18/19] target/riscv: Remove Zbkb dependency from P
- extension to align with the spec
-Date: Wed, 16 Sep 2026 07:07:20 +0000
-Message-Id: <20260916070721.3279229-19-xiaoou@iscas.ac.cn>
+Subject: [PATCH v3 12/19] target/riscv: Add packed SIMD Q-format
+ multiplication instructions
+Date: Wed, 16 Sep 2026 07:07:14 +0000
+Message-Id: <20260916070721.3279229-13-xiaoou@iscas.ac.cn>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260916070721.3279229-1-xiaoou@iscas.ac.cn>
 References: <20260916070721.3279229-1-xiaoou@iscas.ac.cn>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: qwCowACXaOxHQKpq3zYkCA--.4143S20
-X-Coremail-Antispam: 1UD129KBjvJXoW7tw48Wr4xCryDXrWUWF1rZwb_yoW8tr1xpr
- 48C3yYkrWDXFyrA3yftF4UAF1UWa1Sga1Iga92qwn5uF45ArW3Xr4q9w43KF1UJF1kWw42
- 9F1vy3s8uFW8Xa7anT9S1TB71UUUUUJqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+X-CM-TRANSID: qwCowACXaOxHQKpq3zYkCA--.4143S14
+X-Coremail-Antispam: 1UD129KBjvJXoWxXrW7Zw4UGFW7trWruw4kZwb_yoWrur43pF
+ s5G343GrW8JrWfJas3tr4Yyr13Ww4Fkw4Durs3tF1rZay5XFZxZr12vw42kF47XF9rXr1Y
+ 9ayjyr98Aay8t3JanT9S1TB71UUUUUJqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
  9KBjDU0xBIdaVrnRJUUUQa14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
  rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
  kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
- z4x0Y4vE2Ix0cI8IcVAFwI0_Ar0_tr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr1j6F
+ z4x0Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr1j6F
  4UJwA2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwVC2z280aVCY1x0267AKxVW0oVCq
  3wAaw2AFwI0_Jrv_JF1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I
  8CrVC2j2WlYx0E2Ix0cI8IcVAFwI0_JF0_Jw1lYx0Ex4A2jsIE14v26F4j6r4UJwAm72CE
@@ -79,56 +79,103 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Signed-off-by: Molly Chen <xiaoou@iscas.ac.cn>
-Reviewed-by: Chao Liu <chao.liu@processmission.com>
----
- target/riscv/tcg/insn_trans/trans_rvb.c.inc | 4 +++-
- target/riscv/tcg/insn_trans/trans_rvp.c.inc | 2 +-
- target/riscv/tcg/tcg-cpu.c                  | 6 ++----
- 3 files changed, 6 insertions(+), 6 deletions(-)
+Implement Q-format multiplication operations.  Cover packed halfword
+and word elements, RV32 scalar forms, and rounded and non-rounded variants.
+Add the associated decode entries, translators and helpers.
 
-diff --git a/target/riscv/tcg/insn_trans/trans_rvb.c.inc b/target/riscv/tcg/insn_trans/trans_rvb.c.inc
-index 3e74be223b0..48bc5df0378 100644
---- a/target/riscv/tcg/insn_trans/trans_rvb.c.inc
-+++ b/target/riscv/tcg/insn_trans/trans_rvb.c.inc
-@@ -527,7 +527,9 @@ static bool trans_brev8(DisasContext *ctx, arg_brev8 *a)
- 
- static bool trans_pack(DisasContext *ctx, arg_pack *a)
- {
--    REQUIRE_ZBKB(ctx);
-+    if (!has_ext(ctx, RVP) && !ctx->cfg_ptr->ext_zbkb) {
-+        return false;
-+    }
-     return gen_arith(ctx, a, EXT_NONE, gen_pack, NULL);
- }
- 
+Note that these instructions double each signed full-width product and
+extract a result in the original element width.  Rounded variants add
+the required rounding value before extracting the result.  When both
+source elements are the minimum signed value, the Q-format product
+cannot be represented in the signed destination range, so saturate it
+to the maximum signed value and set vxsat.
+
+Signed-off-by: Molly Chen <xiaoou@iscas.ac.cn>
+---
+ target/riscv/helper.h                       |  8 ++++++++
+ target/riscv/insn32.decode                  | 12 ++++++++++++
+ target/riscv/tcg/insn_trans/trans_rvp.c.inc |  8 ++++++++
+ target/riscv/tcg/psimd_helper.c             | 18 ++++++++++++++++++
+ 4 files changed, 46 insertions(+)
+
+diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+index e90e01373ed..40cb4f3825e 100644
+--- a/target/riscv/helper.h
++++ b/target/riscv/helper.h
+@@ -1677,3 +1677,11 @@ DEF_HELPER_4(maccsu_w11, i64, env, i64, i64, i64)
+ DEF_HELPER_4(maccu_w00, i64, env, i64, i64, i64)
+ DEF_HELPER_4(maccu_w01, i64, env, i64, i64, i64)
+ DEF_HELPER_4(maccu_w11, i64, env, i64, i64, i64)
++
++/* Packed SIMD - Q-Format Multiplication Operations */
++DEF_HELPER_3(pmulq_h, tl, env, tl, tl)
++DEF_HELPER_3(pmulqr_h, tl, env, tl, tl)
++DEF_HELPER_3(pmulq_w, i64, env, i64, i64)
++DEF_HELPER_3(pmulqr_w, i64, env, i64, i64)
++DEF_HELPER_3(mulq, i32, env, i32, i32)
++DEF_HELPER_3(mulqr, i32, env, i32, i32)
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index 2bf26ec1563..6f9c40f2db7 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -1523,3 +1523,15 @@ maccsu_w11      11111 11 ..... ..... 011 ..... 0111011 @r
+ maccu_w00       10101 11 ..... ..... 011 ..... 0111011 @r
+ maccu_w01       10111 11 ..... ..... 001 ..... 0111011 @r
+ maccu_w11       10111 11 ..... ..... 011 ..... 0111011 @r
++
++# Packed SIMD - Q-Format Multiplication Operations
++pmulq_h     11010 00 ..... ..... 111 ..... 0111011 @r
++pmulqr_h    11010 10 ..... ..... 111 ..... 0111011 @r
++{
++  mulq      11010 01 ..... ..... 111 ..... 0111011 @r
++  pmulq_w   11010 01 ..... ..... 111 ..... 0111011 @r
++}
++{
++  mulqr     11010 11 ..... ..... 111 ..... 0111011 @r
++  pmulqr_w  11010 11 ..... ..... 111 ..... 0111011 @r
++}
 diff --git a/target/riscv/tcg/insn_trans/trans_rvp.c.inc b/target/riscv/tcg/insn_trans/trans_rvp.c.inc
-index bec44e98f7c..8c8c6ba3a6f 100644
+index 5aaa3c6ffa5..5eff8031885 100644
 --- a/target/riscv/tcg/insn_trans/trans_rvp.c.inc
 +++ b/target/riscv/tcg/insn_trans/trans_rvp.c.inc
-@@ -1436,4 +1436,4 @@ GEN_DWS_REG_OP(psll_dws, EXT_NONE, true, tcg_gen_shl_tl)
- GEN_DWS_REG_OP(psrl_dws, EXT_ZERO, true, tcg_gen_shr_tl)
- GEN_DWS_REG_OP(psra_dws, EXT_SIGN, true, tcg_gen_sar_tl)
- 
--GEN_DW_PAIR_ARITH(ppaire_dh, REQUIRE_ZBKB(ctx); , EXT_NONE, gen_pack)
-+GEN_DW_PAIR_ARITH(ppaire_dh, , EXT_NONE, gen_pack)
-diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-index 3e72e2ffd7f..4d57192d1e1 100644
---- a/target/riscv/tcg/tcg-cpu.c
-+++ b/target/riscv/tcg/tcg-cpu.c
-@@ -562,10 +562,8 @@ static void riscv_cpu_validate_p(RISCVCPU *cpu, Error **errp)
-         return;
-     }
- 
--    if (!(cpu->cfg.ext_zmmul && cpu->cfg.ext_zba && cpu->cfg.ext_zbb &&
--          cpu->cfg.ext_zbkb)) {
--        error_setg(errp, "P extension requires zmmul, zba, zbb and zbkb "
--                         "extensions");
-+    if (!(cpu->cfg.ext_zmmul && cpu->cfg.ext_zba && cpu->cfg.ext_zbb)) {
-+        error_setg(errp, "P extension requires zmmul, zba and zbb extensions");
-         return;
-     }
- }
+@@ -846,3 +846,11 @@ GEN_SIMD_TRANS_ACC_64(maccsu_w11)
+ GEN_SIMD_TRANS_ACC_64(maccu_w00)
+ GEN_SIMD_TRANS_ACC_64(maccu_w01)
+ GEN_SIMD_TRANS_ACC_64(maccu_w11)
++
++/* Packed SIMD - Q-Format Multiplication Operations */
++GEN_SIMD_TRANS_VXSAT(pmulq_h)
++GEN_SIMD_TRANS_VXSAT(pmulqr_h)
++GEN_SIMD_TRANS_64_VXSAT(pmulq_w)
++GEN_SIMD_TRANS_64_VXSAT(pmulqr_w)
++GEN_SIMD_TRANS_32_VXSAT(mulq)
++GEN_SIMD_TRANS_32_VXSAT(mulqr)
+diff --git a/target/riscv/tcg/psimd_helper.c b/target/riscv/tcg/psimd_helper.c
+index b9bb7d497fc..52df992b462 100644
+--- a/target/riscv/tcg/psimd_helper.c
++++ b/target/riscv/tcg/psimd_helper.c
+@@ -3005,3 +3005,21 @@ GEN_PSIMD_MUL_ACC_INDEXED(maccu_w11, uint64_t, uint32_t, uint32_t,
+                           uint64_t, uint64_t, uint64_t, EXTRACT32,
+                           EXTRACT64, INSERT64, ELEMS_D, 0, 1, 1,
+                           PSIMD_MUL_U64)
++
++/* Q-Format Multiplication Operations */
++
++GEN_PSIMD_QMUL(pmulq_h, target_ulong, int16_t, int32_t, uint16_t,
++               EXTRACT16, INSERT16, ELEMS_H, 15, 0, INT16_MIN, INT16_MAX)
++GEN_PSIMD_QMUL(pmulqr_h, target_ulong, int16_t, int32_t, uint16_t,
++               EXTRACT16, INSERT16, ELEMS_H, 15, 1 << 14, INT16_MIN,
++               INT16_MAX)
++GEN_PSIMD_QMUL(pmulq_w, uint64_t, int32_t, int64_t, uint32_t,
++               EXTRACT32, INSERT32, ELEMS_W, 31, 0, INT32_MIN, INT32_MAX)
++GEN_PSIMD_QMUL(pmulqr_w, uint64_t, int32_t, int64_t, uint32_t,
++               EXTRACT32, INSERT32, ELEMS_W, 31, 1LL << 30, INT32_MIN,
++               INT32_MAX)
++GEN_PSIMD_QMUL(mulq, uint32_t, int32_t, int64_t, uint32_t,
++               EXTRACT32, INSERT32, ELEMS_W, 31, 0, INT32_MIN, INT32_MAX)
++GEN_PSIMD_QMUL(mulqr, uint32_t, int32_t, int64_t, uint32_t,
++               EXTRACT32, INSERT32, ELEMS_W, 31, 1LL << 30, INT32_MIN,
++               INT32_MAX)
 -- 
 2.34.1
 
