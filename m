@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18ED0C982C4
-	for <qemu-riscv@archiver.kernel.org>; Wed, 16 Sep 2026 09:16:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04BE6C88E5C
+	for <qemu-riscv@archiver.kernel.org>; Wed, 16 Sep 2026 09:16:48 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x6liu-0001l9-JD; Wed, 16 Sep 2026 05:14:36 -0400
+	id 1x6liQ-0001H3-RG; Wed, 16 Sep 2026 05:14:07 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <anjo@rev.ng>)
- id 1x6liQ-0001HH-DC; Wed, 16 Sep 2026 05:14:07 -0400
+ id 1x6li7-0001C3-5P; Wed, 16 Sep 2026 05:13:47 -0400
 Received: from rev.ng ([94.130.142.21])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <anjo@rev.ng>)
- id 1x6liO-00089B-O6; Wed, 16 Sep 2026 05:14:06 -0400
+ id 1x6li5-00088K-Kt; Wed, 16 Sep 2026 05:13:46 -0400
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=rev.ng;
  s=dkim; h=Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:
  Content-Type:MIME-Version:Subject:Date:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive:List-Unsubscribe:List-Unsubscribe-Post:
- List-Help; bh=TbZb94MuWzbziXvToTjwlOx61+5F1jk2mxBbl666i1Y=; b=nEBnGsVIlEqHNkh
- qLlYlCQhOMXM+o5/z2sXyWJzaZDOpcOyvx9eTHJV3VN6rpO1bCXDfCh3RcjxJazLhB+25JvmW82AY
- eDzmi1j/VPNs0uSa/yDBA47Yx6a+Te+ze459JDG0+HNp+cNg/sz3+F0Cz9sy/6Ogx16S8VZUnhSE+
- 3g=;
-Date: Wed, 16 Sep 2026 11:19:07 +0200
-Subject: [PATCH v4 12/12] hw/riscv: Compile once
+ List-Help; bh=0vAoNB/3VWSS/2euNZcCeW3I/VqyUnURpiUkZYBy9gs=; b=wbSnWq1KNaHY/sp
+ qa3snS27ILUd1sXEecYxpuH7vHwE/BPYKSVFGn+43JfUTV0DvQY3UCgqtHSeLdg+U19HCAd4JAckH
+ fMN7Fj2YBu9EKWhHHkF2XMEcpkWiq21k0NQ8ODeqCdCDV4FzNICeE7VxY50S3D8PZkwNMWQpVh/72
+ HI=;
+Date: Wed, 16 Sep 2026 11:19:00 +0200
+Subject: [PATCH v4 05/12] target/riscv: Stub out kvm functions
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Message-Id: <20260916-hw-riscv-cpu-int-v4-12-babc367b60f5@rev.ng>
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260916-hw-riscv-cpu-int-v4-5-babc367b60f5@rev.ng>
 References: <20260916-hw-riscv-cpu-int-v4-0-babc367b60f5@rev.ng>
 In-Reply-To: <20260916-hw-riscv-cpu-int-v4-0-babc367b60f5@rev.ng>
 To: qemu-devel@nongnu.org
@@ -41,11 +41,11 @@ Cc: Anton Johansson <anjo@rev.ng>, qemu-riscv@nongnu.org,
  daniel.barboza@oss.qualcomm.com, philmd@oss.qualcomm.com, 
  pierrick.bouvier@oss.qualcomm.com, palmer@dabbelt.com, 
  alistair.francis@wdc.com
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1789550353; l=3555;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1789550353; l=2075;
  i=anjo@rev.ng; s=20260210; h=from:subject:message-id;
- bh=9j6u0VO1MNm6eSXRDfR+CmzXxXhtVlrF3pwysoMdPag=;
- b=uLv0kr7Bf6QgPKi0S654IAPVe1xY0YN6FEcsO8SGh9/Igjm90s9J3qtThQCUBVRjuvTiq9K0s
- 3iRxviG6BXiA7zBJGz91r/QhL1DWFm8AD04GM9EI6B4qGWKsDXgug92
+ bh=SmQC4q0Y5o0T40JGR8Ackm0oNwRh0OgKntILAQviVXI=;
+ b=C6zPo9LibXrs4d9Ekz51CZtCiiNEKVwDsO8uhstbDBV3n0qpgUq17PGDakCzp9fKesz9KPQVP
+ 2mHDtu30sd4Crd88oUXtSYhrR0adXg8S8Punfy69CNE6YXQG//xsiu8
 X-Developer-Key: i=anjo@rev.ng; a=ed25519;
  pk=dKsZvj/g3kgDxnV1/SWg8a0YNGSpWtFGNsWIepQYKow=
 Received-SPF: pass client-ip=94.130.142.21; envelope-from=anjo@rev.ng;
@@ -73,67 +73,71 @@ From:  Anton Johansson via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
+Functions used externally by hw/riscv are stubbed out for non-kvm
+configurations, allowing a single compilation of hw/riscv.
+
 Reviewed-by: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
 Signed-off-by: Anton Johansson <anjo@rev.ng>
 ---
- hw/riscv/meson.build | 47 ++++++++++++++++++++++++-----------------------
- 1 file changed, 24 insertions(+), 23 deletions(-)
+ target/riscv/kvm/kvm-stub.c  | 23 +++++++++++++++++++++++
+ target/riscv/kvm/meson.build |  1 +
+ target/riscv/meson.build     |  3 +++
+ 3 files changed, 27 insertions(+)
 
-diff --git a/hw/riscv/meson.build b/hw/riscv/meson.build
-index 7aa3c1578d..b53661cf31 100644
---- a/hw/riscv/meson.build
-+++ b/hw/riscv/meson.build
-@@ -1,25 +1,26 @@
--riscv_ss = ss.source_set()
--riscv_ss.add(files('aia.c'))
--riscv_ss.add(files('boot.c'))
--riscv_ss.add(files('device-common.c'))
--riscv_ss.add(files('fdt-common.c'))
--riscv_ss.add(when: 'CONFIG_RISCV_NUMA', if_true: files('numa.c'))
--riscv_ss.add(files('riscv_hart.c'))
--riscv_ss.add(when: 'CONFIG_OPENTITAN', if_true: files('opentitan.c'))
--riscv_ss.add(when: 'CONFIG_RISCV_VIRT', if_true: files('virt.c'))
--riscv_ss.add(when: 'CONFIG_SHAKTI_C', if_true: files('shakti_c.c'))
--riscv_ss.add(when: 'CONFIG_SIFIVE_E', if_true: files('sifive_e.c'))
--riscv_ss.add(when: 'CONFIG_SIFIVE_U', if_true: files('sifive_u.c'))
--riscv_ss.add(when: 'CONFIG_SPIKE', if_true: files('spike.c'))
--riscv_ss.add(when: 'CONFIG_MICROCHIP_PFSOC', if_true: files('microchip_pfsoc.c'))
--riscv_ss.add(when: 'CONFIG_TENSTORRENT', if_true: files('tt_atlantis.c'))
--riscv_ss.add(when: 'CONFIG_ACPI', if_true: files('virt-acpi-build.c'))
--riscv_ss.add(when: 'CONFIG_RISCV_IOMMU', if_true: files(
-+riscv_common_ss = ss.source_set()
-+riscv_common_ss.add(files('aia.c'))
-+riscv_common_ss.add(files('boot.c'))
-+riscv_common_ss.add(files('device-common.c'))
-+riscv_common_ss.add(files('fdt-common.c'))
-+riscv_common_ss.add(when: 'CONFIG_RISCV_NUMA', if_true: files('numa.c'))
-+riscv_common_ss.add(files('riscv_hart.c'))
-+riscv_common_ss.add(when: 'CONFIG_OPENTITAN', if_true: files('opentitan.c'))
-+riscv_common_ss.add(when: 'CONFIG_RISCV_VIRT', if_true: files('virt.c'))
-+riscv_common_ss.add(when: 'CONFIG_SHAKTI_C', if_true: files('shakti_c.c'))
-+riscv_common_ss.add(when: 'CONFIG_SIFIVE_E', if_true: files('sifive_e.c'))
-+riscv_common_ss.add(when: 'CONFIG_SIFIVE_U', if_true: files('sifive_u.c'))
-+riscv_common_ss.add(when: 'CONFIG_SPIKE', if_true: files('spike.c'))
-+riscv_common_ss.add(when: 'CONFIG_MICROCHIP_PFSOC', if_true: files('microchip_pfsoc.c'))
-+riscv_common_ss.add(when: 'CONFIG_TENSTORRENT', if_true: files('tt_atlantis.c'))
-+riscv_common_ss.add(when: 'CONFIG_ACPI', if_true: files('virt-acpi-build.c'))
-+riscv_common_ss.add(when: 'CONFIG_RISCV_IOMMU', if_true: files(
- 	'riscv-iommu.c', 'riscv-iommu-pci.c', 'riscv-iommu-sys.c', 'riscv-iommu-hpm.c'))
--riscv_ss.add(when: 'CONFIG_MICROBLAZE_V', if_true: files('microblaze-v-generic.c'))
--riscv_ss.add(when: 'CONFIG_XIANGSHAN_KUNMINGHU', if_true: files('xiangshan_kmh.c'))
--riscv_ss.add(when: 'CONFIG_RISCV_MIPS_CPS', if_true: files('cps.c'))
--riscv_ss.add(when: 'CONFIG_MIPS_BOSTON_AIA', if_true: files('boston-aia.c'))
--riscv_ss.add(when: 'CONFIG_K230', if_true: files('k230.c'))
-+riscv_common_ss.add(when: 'CONFIG_MICROBLAZE_V', if_true: files('microblaze-v-generic.c'))
-+riscv_common_ss.add(when: 'CONFIG_XIANGSHAN_KUNMINGHU', if_true: files('xiangshan_kmh.c'))
- 
--hw_arch += {'riscv': riscv_ss}
-+riscv_common_ss.add(when: 'CONFIG_RISCV_MIPS_CPS', if_true: files('cps.c'))
-+riscv_common_ss.add(when: 'CONFIG_MIPS_BOSTON_AIA', if_true: files('boston-aia.c'))
-+riscv_common_ss.add(when: 'CONFIG_K230', if_true: files('k230.c'))
+diff --git a/target/riscv/kvm/kvm-stub.c b/target/riscv/kvm/kvm-stub.c
+new file mode 100644
+index 0000000000..64e39c96d8
+--- /dev/null
++++ b/target/riscv/kvm/kvm-stub.c
+@@ -0,0 +1,23 @@
++/*
++ * QEMU RISCV specific KVM stubs
++ *
++ *  Copyright (c) rev.ng Labs Srl.
++ *
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ */
 +
-+hw_common_arch += {'riscv': riscv_common_ss}
++#include "qemu/osdep.h"
++#include "target/riscv/kvm/kvm_riscv.h"
++
++void kvm_riscv_aia_create(MachineState *machine, uint64_t group_shift,
++                          uint64_t aia_irq_num, uint64_t aia_msi_num,
++                          uint64_t aplic_base, uint64_t imsic_base,
++                          uint64_t guest_num)
++{
++    g_assert_not_reached();
++}
++
++uint64_t kvm_riscv_get_timebase_frequency(RISCVCPU *cpu)
++{
++    g_assert_not_reached();
++}
+diff --git a/target/riscv/kvm/meson.build b/target/riscv/kvm/meson.build
+index 7e92415091..75e35b2150 100644
+--- a/target/riscv/kvm/meson.build
++++ b/target/riscv/kvm/meson.build
+@@ -1 +1,2 @@
+ riscv_ss.add(when: 'CONFIG_KVM', if_true: files('kvm-cpu.c'))
++riscv_stubs_ss.add(files('kvm-stub.c'))
+diff --git a/target/riscv/meson.build b/target/riscv/meson.build
+index 42d0f6d538..e1b51d2bd4 100644
+--- a/target/riscv/meson.build
++++ b/target/riscv/meson.build
+@@ -19,6 +19,8 @@ riscv_ss.add(files(
+   'gdbstub.c',
+ ))
+ 
++riscv_stubs_ss = ss.source_set()
++
+ riscv_system_ss = ss.source_set()
+ riscv_system_ss.add(files(
+   'arch_dump.c',
+@@ -33,3 +35,4 @@ subdir('kvm')
+ 
+ target_arch += {'riscv': riscv_ss}
+ target_system_arch += {'riscv': riscv_system_ss}
++target_stubs_arch += {'riscv': riscv_stubs_ss}
 
 -- 
 2.52.0
