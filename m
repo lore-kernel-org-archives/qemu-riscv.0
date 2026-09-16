@@ -4,89 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52F93C88E77
-	for <qemu-riscv@archiver.kernel.org>; Wed, 16 Sep 2026 06:28:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23149C88E77
+	for <qemu-riscv@archiver.kernel.org>; Wed, 16 Sep 2026 06:36:22 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x6j8N-00060i-TW; Wed, 16 Sep 2026 02:28:45 -0400
+	id 1x6jF2-0008JT-9X; Wed, 16 Sep 2026 02:35:36 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <sebasjosue84@gmail.com>)
- id 1x6gYr-0005Hu-GH
- for qemu-riscv@nongnu.org; Tue, 15 Sep 2026 23:43:53 -0400
-Received: from mail-ua2-x10.google.com ([2a00:1450:4864:39::10])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <sebasjosue84@gmail.com>)
- id 1x6gYp-00031n-Nv
- for qemu-riscv@nongnu.org; Tue, 15 Sep 2026 23:43:53 -0400
-Received: by mail-ua2-x10.google.com with SMTP id
- a1e0cc1a2514c-97e7c796e3aso130798241.1
- for <qemu-riscv@nongnu.org>; Tue, 15 Sep 2026 20:43:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1789530230; x=1790135030; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=5oHA943d8ACzMVOJprq1KS/7rfZnroShoKqBibdtbZY=;
- b=NdLL3KH/KJWpLBy0VIbHAKAViDa5RVK0D6Kp9B+dBpG5xmFxzYxIGbsScdmpD9Lh4Q
- BANZb3pX28WEy5o1psbwhKfklNSRXTDSpncte3uCjM351rXeamxsHlATVka/Ftqiah8w
- aUWQ7eu0ryNhdUv2Z3F9FGUBJ4jzYzsFFgsn1/wxaBgA7cFWcbz/ilX5G7vbIde2U3NM
- rZnxfzLvfa6wVv/Uh2Fy2GnaFZoC2983j3NSyZgEiMYwyikQe15VhjPNqNMJvgj8JdN+
- u1HRxDrC33PqXvQsqqMcngGMCdbmXSGuIUMyTfB7ifRCwww3bWF2NEn1SCYy5eP6IuSd
- v0GQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1789530230; x=1790135030;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=5oHA943d8ACzMVOJprq1KS/7rfZnroShoKqBibdtbZY=;
- b=NL2TjoOd696wvD6XDu/zdlURYP+BmgmWrRRWavqaIWxCOoJGmJMqGsPxQCTFszKeOK
- nn33KxRaAYP8FUOL8Tp6oAUeKw3M8K+DaBMiQLtqfG0E/laNEphCX0sbbFh0MjQwf8fF
- rdhog0aggqbAzbps20Ah84xY7w8HUM1j2Cppsch2f471Ou2VFm7b973lPJo173FECggc
- mmwBmAwVyQL1zFGeBs4hbKE+wwz89ztOybjchsLqzxv2VL+a0562eZ7rIsWtgHH+tGiH
- r01hxxE0y+F1rH4Gqo9oDWy/SEKYVGKDoGf4yeWjpQzlDVH4NapiGVmQ4njz2bu6BpBj
- FsKQ==
-X-Gm-Message-State: AFuF++lPF1hCRZgirXxOiyBcoxp1x0xZWv0EDquy8UcU5UVDWiPhJxu3
- MPs7MiRDB8Wq2z2k8dUgeVrANZEKjU81p4w25Km3IwSQtsF9NMy1KnBk
-X-Gm-Gg: AYBFou3sLj2HO7jX8XrZ5BzeERxU5TeaR12wjgyH9XXKOBDwXKMkQYSyYQPMSYb7i0f
- p9FViy6GuAtHqAy2pJpAK6OButiQHTCCqBkrhvtcyIwQFBDg0Zk+xsMhqVOCTwuxKH1tWEaVoqv
- JLUx1q3inpyrHXtB2TKFAWYBO/+R1BrbLUfztFV0zAz0CPIs5rIZI3xumf76hdTjLUQFT1G1+Tl
- QTftpNAeg506y35Kwf9DlAX9LD0Xyu/zgaRG5A9fmLSWG39nPojrboz4fJQmqvj/LoGvtT4IOJK
- XwFREEzb6U3qAUbY6w3WEemxfd50IprgvknXGu4/BrLuO/ZPE0Ir8nxaI/z2aExOBVYOQQFdBSC
- xGlb1cTU5lxokI1wKoDfO3/yRMbzpsHSGije7VNYXZoAcYNl4JxTniZSC/zgYz+qMJnemeMO+IM
- Uu9p5ZvaZ4xp/L/PqPuRZQvl2eDUrNl4xXlNxWTY/O034x09Ozf83lcTIxRaB+W47ySsNwum5u7
- 3nOJrTDz53szR7nYQqnd0qyCXtktt3A+LpePWJhTB73c7tMuqOYdNHq9eArHrtRc43JVq6H2jM=
-X-Received: by 2002:a05:6102:4b09:b0:79e:221f:705 with SMTP id
- ada2fe7eead31-7a0251b53b2mr1049581137.3.1789530229614; 
- Tue, 15 Sep 2026 20:43:49 -0700 (PDT)
-Received: from localhost.localdomain ([186.151.100.62])
- by smtp.gmail.com with ESMTPSA id
- ada2fe7eead31-79facbaa2f0sm1776961137.1.2026.09.15.20.43.46
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 15 Sep 2026 20:43:49 -0700 (PDT)
-From: Sebastian Alba Vives <sebasjosue84@gmail.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com,
- daniel.barboza@oss.qualcomm.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, palmer@dabbelt.com,
- Sebastian Alba Vives <sebasjosue84@gmail.com>
-Subject: [PATCH] target/riscv/pmp: unlock all PMP entries on reset
-Date: Tue, 15 Sep 2026 21:43:31 -0600
-Message-ID: <20260916034331.2390427-1-sebasjosue84@gmail.com>
-X-Mailer: git-send-email 2.43.0
+ (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
+ id 1x6jEs-0008Ap-Gv; Wed, 16 Sep 2026 02:35:27 -0400
+Received: from isrv.corpit.ru ([212.248.84.144])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
+ id 1x6jEp-0004u2-RN; Wed, 16 Sep 2026 02:35:26 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=tls.msk.ru; s=202602;
+ t=1789540477; bh=YuRHpvnkrTWzoVNdwUwxBcaKOpAXO6ds+f3NOnPAiEA=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To;
+ b=T/6Mb1GSpvyd+xWwvw18jhMIss2joWtCKIP8I8k2CJg5GY6zN+aT7uXV5hrEg5Xii
+ bQtbuZj7UjcOQDrIISmBuBLv5grTeptk65XOb3aItfewZ5E4DSys9eFjQosvyxlEdu
+ LDc+xRqOg0T8coLlxC5j1IBZbi2Um6p0xdcON8BLCm4BsQhAMhrL21Qfg67YkxBq8c
+ WdbZ65ptiebmgBV0O20IrKSDAdXB1aGshGBxyCf5sWtuxoYWB9npvapA1vfnWn6Jnj
+ Z5B/f5ARCMq5vFYeAsNxHxGHLviK8hZC2VYrq+Ja+2VpZVADwg9xDJa5SfIJEouWz8
+ FKR8mAcg4vjLw==
+Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
+ by isrv.corpit.ru (Postfix) with ESMTP id 472371D552E;
+ Wed, 16 Sep 2026 09:34:37 +0300 (MSK)
+Received: from [192.168.177.130] (mjt.wg.tls.msk.ru [192.168.177.130])
+ by tsrv.corpit.ru (Postfix) with ESMTP id 9C91D4299EB;
+ Wed, 16 Sep 2026 09:35:19 +0300 (MSK)
+Message-ID: <725cf200-8a28-4fc9-8d96-4d705213505d@tls.msk.ru>
+Date: Wed, 16 Sep 2026 09:35:19 +0300
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:39::10;
- envelope-from=sebasjosue84@gmail.com; helo=mail-ua2-x10.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+User-Agent: Betterbird (Linux)
+Subject: Re: [PATCH v5 08/15] hw/riscv/virt.c: fix aclint soc/mtimer nodename
+To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
+ qemu-stable@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>
+References: <20260828203918.350131-1-daniel.barboza@oss.qualcomm.com>
+ <20260828203918.350131-9-daniel.barboza@oss.qualcomm.com>
+Content-Language: en-US, ru-RU
+From: Michael Tokarev <mjt@tls.msk.ru>
+In-Reply-To: <20260828203918.350131-9-daniel.barboza@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=212.248.84.144; envelope-from=mjt@tls.msk.ru;
+ helo=isrv.corpit.ru
+X-Spam_score_int: -19
+X-Spam_score: -2.0
+X-Spam_bar: --
+X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Wed, 16 Sep 2026 02:28:10 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -101,51 +73,87 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-pmp_unlock_entries() bounds its loop with pmp_get_num_rules(), which is
-the count of entries whose A field is not OFF, not the number of
-implemented PMP entries. When the active rules are not contiguous from
-index 0, every entry at an index greater than or equal to num_rules
-keeps its lock bit across a CPU reset.
+On 8/28/26 23:39, Daniel Henrique Barboza wrote:
+> Running 'dtc' to generate a readable fdt for the virt machine produce
+> warnings:
+> 
+>   $ dtc -I dtb -O dts virt.dtb > virt.dts
+> <stdout>: Warning (simple_bus_reg): /soc/mtimer@2000000: simple-bus unit address format error, expected "2007ff8"
+> <stdout>: Warning (simple_bus_reg): /soc/mtimer@2008000: simple-bus unit address format error, expected "200fff8"
+> 
+> This happens because the 'reg' field does not match the address in the
+> nodename.  The right fix, pointed out by Chao in [1], is to make the
+> nodename match the reg value:
+> 
+> "In the current QEMU implement, `addr` is the MTIMECMP base address,
+> while the MTIME register is located at addr + RISCV_ACLINT_DEFAULT_MTIME."
+> 
+> In other words, the 'reg' value is correct but the nodename isn't.
+> 
+> We'll make the fix now, allowing the next patch to move the fixed version
+> of aclint FDT to fdt-common.
+> 
+> [1] https://lore.kernel.org/qemu-devel/apHH1upnh8udUUT-@ChaodeMacBook-Pro.local/
+> 
+> Cc: qemu-stable@nongnu.org
+> Suggested-by: Chao Liu <chao.liu@processmission.com>
+> Fixes: 954886ea6d ("hw/riscv: virt: Add optional ACLINT support to virt machine")
+> Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+> ---
+>   hw/riscv/virt.c | 3 ++-
+>   1 file changed, 2 insertions(+), 1 deletion(-)
 
-Those entries stay locked after the reset has cleared mseccfg, so
-mseccfg.RLB is no longer set and pmp_is_readonly() silently discards
-subsequent pmpcfg writes. Firmware started after the reset finds PMP
-entries it did not configure and cannot clear.
+This patch is Cc'd to qemu-stable, but there's an interesting rebase twist here,
+it looks like.  This is commit v11.1.0-1035-g9d6ac47d318 in the master branch.
 
-Reproduced on -machine virt -cpu rv64,smepmp=true with a bare-metal
-payload that sets pmpcfg0 = 0x99990000 (entries 2 and 3 as
-L | NAPOT | R, entries 0 and 1 left OFF) and then resets through the
-sifive_test device. On the second boot pmpcfg0 reads back 0x99990000
-and writing 0 to it leaves the value unchanged. With this patch the
-same payload reads 0x01010000 on the second boot and clearing pmpcfg0
-succeeds.
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index a6ec9def16..83a4b7710d 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -234,7 +234,8 @@ static void create_fdt_socket_aclint(RISCVVirtState *s,
+>                  (s->memmap[VIRT_CLINT].size * socket);
+>           size = s->memmap[VIRT_CLINT].size - RISCV_ACLINT_SWI_SIZE;
+>       }
+> -    name = g_strdup_printf("/soc/mtimer@%lx", addr);
+> +    name = g_strdup_printf("/soc/mtimer@%"HWADDR_PRIx,
+> +                           addr + RISCV_ACLINT_DEFAULT_MTIME);
 
-Iterate over the implemented entries instead.
+Before this commit, `add` variable is declared in this function as
+unsigned long.  So this particular change is wrong, because now the
+format string does not match its argument:
 
-Fixes: 4bf501dc0118 ("target/riscv: pmp: Clear pmp/smepmp bits on reset")
-Signed-off-by: Sebastian Alba Vives <sebasjosue84@gmail.com>
----
- target/riscv/tcg/pmp.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+../hw/riscv/virt.c: In function 'create_fdt_socket_aclint':
+../hw/riscv/virt.c:408:28: error: format '%llx' expects argument of type 'long long unsigned int', but argument 2 has type 'long unsigned int' 
+[-Werror=format=]
+   408 |     name = g_strdup_printf("/soc/mtimer@%"HWADDR_PRIx,
+       |                            ^~~~~~~~~~~~~~~
+   409 |                            addr + RISCV_ACLINT_DEFAULT_MTIME);
+       |                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+       |                                 |
+       |                                 long unsigned int
+In file included from ../include/qemu/osdep.h:118,
+                  from ../hw/riscv/virt.c:21:
+/usr/x86_64-w64-mingw32/sys-root/mingw/include/inttypes.h:38:19: note: format string is defined here
+    38 | #define PRIx64 "llx"
 
-diff --git a/target/riscv/tcg/pmp.c b/target/riscv/tcg/pmp.c
-index 41b55519a8..5286c6aa90 100644
---- a/target/riscv/tcg/pmp.c
-+++ b/target/riscv/tcg/pmp.c
-@@ -201,10 +201,10 @@ static bool pmp_write_cfg(CPURISCVState *env, uint32_t pmp_index, uint8_t val)
- 
- void pmp_unlock_entries(CPURISCVState *env)
- {
--    uint32_t pmp_num = pmp_get_num_rules(env);
-+    uint8_t pmp_regions = riscv_cpu_cfg(env)->pmp_regions;
-     int i;
- 
--    for (i = 0; i < pmp_num; i++) {
-+    for (i = 0; i < pmp_regions; i++) {
-         env->pmp_state.pmp[i].cfg_reg &= ~(PMP_LOCK | PMP_AMATCH);
-     }
- }
--- 
-2.43.0
+However, the very next commit, v11.1.0-1036-ge6ea6bec5a3
+"hw/riscv/fdt-common, virt.c: add riscv_create_fdt_socket_aclint()",
+moves this whole function to another file, *and* changes the type of
+`addr` variable to hwaddr.  So now, everything fits.
 
+But this single patch alone does not work.
+
+Note also there's no mentions of this type change anywhere.
+
+So, what was the actual issue ere?
+
+I'm dropping this patch from the stable series for now, it is definitely
+wrong.
+
+It is also interesting that only win64 build of qemu detected this, all
+other went just fine.
+
+Thanks,
+
+/mjt
 
