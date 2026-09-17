@@ -4,141 +4,127 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C4CCC982D2
-	for <qemu-riscv@archiver.kernel.org>; Thu, 17 Sep 2026 17:11:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E6D2C982D2
+	for <qemu-riscv@archiver.kernel.org>; Thu, 17 Sep 2026 17:44:40 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x7Fe0-0002Hf-TB; Thu, 17 Sep 2026 13:11:35 -0400
+	id 1x7G9v-0002Wv-Oz; Thu, 17 Sep 2026 13:44:32 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <pierrick.bouvier@oss.qualcomm.com>)
- id 1x7Fdf-0002G2-9x
- for qemu-riscv@nongnu.org; Thu, 17 Sep 2026 13:11:16 -0400
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1x7G9p-0002T2-Nw
+ for qemu-riscv@nongnu.org; Thu, 17 Sep 2026 13:44:26 -0400
 Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <pierrick.bouvier@oss.qualcomm.com>)
- id 1x7Fda-0003W2-Ve
- for qemu-riscv@nongnu.org; Thu, 17 Sep 2026 13:11:10 -0400
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1x7G9g-0001aa-3f
+ for qemu-riscv@nongnu.org; Thu, 17 Sep 2026 13:44:20 -0400
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 68HH5Z9Z3437483
- for <qemu-riscv@nongnu.org>; Thu, 17 Sep 2026 17:11:03 GMT
+ 68HH5T3l1765952
+ for <qemu-riscv@nongnu.org>; Thu, 17 Sep 2026 17:44:11 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- X/qzGqqmFA9h9uBfZY89IhzbfuoCEb26SKcQvVBkvb0=; b=n5FcacdanXFmckrn
- hEWigGIhKl1tY2U8l66pXuZr9iql1iaa1yaKnHc33PsfQnFNd3hcA3wbXA1icQrW
- HAt9aLowpDOe8MNfEjjmZT7bjiq0zFtgCu6J5AGt/2Xh08u9edzEaNT6o3AnmvLu
- Txw6Ub43JifQ06TI13SdkU9xLG1h7YGoezwYo1hFfi7cwtXDDUTszgeeqGHl0aRo
- fl29TbxWs0CcqkQPZGoyeYrQs0U+/34XUy2FqBzwCNxFzEVplbgJbPhCNTmNLsGm
- XT9MV8aM23ZnMXNcE9kOhKldqm+oOvY/Zi+rnf4lBcVMTTVdbic6e+TRuKOZgeRJ
- +WPMnQ==
-Received: from mail-pg1-f197.google.com (mail-pg1-f197.google.com
- [209.85.215.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4grdd6j6d9-1
+ cc:content-transfer-encoding:date:from:message-id:mime-version
+ :subject:to; s=qcppdkim1; bh=PA+pyKUKmRRRuQbzqiu/nMXMQb6umpeCVcM
+ e+qD/HOw=; b=i2b7BlUml6EXKz8MStRMJE7bkvQNtQiZamlixGuGmSUXvNJNKmO
+ 3vnL8PBcSBxxbHPQWM3Aiaj6hME7zIloZRBb3Go/Anwa001XYK9yV5jq+PXA9Cye
+ Ghd3ygQ8RrwNPIO9QPGTSp2gx91WIMPjSnL4CNnuDXr+xesCiwAJt0YyvPOTSFBz
+ uw05xz40oT/y3jiW5CgQ49DU/B5NEn1/tRug2TgAo0m5lRo75lQPkVZZI8qhwkRi
+ Jnf2UxXdVzuLPPHJpUwYLVpKBzqZzGW7w9upvKbJnn+rKRkNfSfan4HqaAilTf1I
+ a5d5SZnLIh+9M1kOoy0ALXli5+I7Y/eLxPA==
+Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com
+ [209.85.219.72])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4grcraajsf-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Thu, 17 Sep 2026 17:11:03 +0000 (GMT)
-Received: by mail-pg1-f197.google.com with SMTP id
- 41be03b00d2f7-cc1bbd7d6e6so1027574a12.3
- for <qemu-riscv@nongnu.org>; Thu, 17 Sep 2026 10:11:03 -0700 (PDT)
+ for <qemu-riscv@nongnu.org>; Thu, 17 Sep 2026 17:44:10 +0000 (GMT)
+Received: by mail-qv1-f72.google.com with SMTP id
+ 6a1803df08f44-90e8135d7eeso19009126d6.1
+ for <qemu-riscv@nongnu.org>; Thu, 17 Sep 2026 10:44:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1789665063; x=1790269863; darn=nongnu.org;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :references:cc:to:from:subject:user-agent:mime-version:date
- :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=X/qzGqqmFA9h9uBfZY89IhzbfuoCEb26SKcQvVBkvb0=;
- b=FicqhjHLBtoY0c08wHtAZKljuj3aV19AGsIWREcAqLncd9DyVaEvLezToludXtgjo6
- a4+VX+7dz3+RW6PzdWNiFG9dHUKgdxvD/Clt1AAA4HO089xCMFhhalx8MIPO5MfDTXu2
- O46eOzzyZ1iqCCzmLAH/cw7u9/1FMHhpP6A8BlIktRovYgvqnW65E8LLGCnp+metJ/iV
- baMt6SSgRBJR/FEJxa75MuZmN95guQZMd6kplKBagb2QTyVxQ4HcvDumxkFMtusD4SjI
- JElEeIHma4p1holNTPdET9NzwgKHp3XAW17WlkyEQ/WHV+VnNUQ08W+51XwAoIf8Lzcu
- 9z6w==
+ d=oss.qualcomm.com; s=google; t=1789667050; x=1790271850; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=PA+pyKUKmRRRuQbzqiu/nMXMQb6umpeCVcMe+qD/HOw=;
+ b=GRwk6OKcFefRlVtUk8lec1W8WFMXcJAqmepRCdyqSQ+EQwqgl5nm0UWeXa+h+bJRSM
+ 3GPljINqi4zPSOsFpD04zaSur0r8A7bRYNj36wjIpFAPw1+ZCYX6wipZxiYyncBboOL2
+ Ouwrk+VaL90fDguOb2iNp3lLfAuafj+mD/V6zPevCJ7TAW/jplyLw3/QJ1jTaMt+Y1MR
+ omEFzHISP5xqG+i95UEEodzHQalOEno45v1ykeEOCm7iaX/ILV7f5325kLDeYRiNsSDG
+ jyV7dyFYaMRurvj0BT6gRx8nwnCherqyAI/zT10XRC7sLc/mJzbh7Pw7V9M45IQPUoGs
+ i0/g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1789665063; x=1790269863;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :references:cc:to:from:subject:user-agent:mime-version:date
- :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20260707; t=1789667050; x=1790271850;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=X/qzGqqmFA9h9uBfZY89IhzbfuoCEb26SKcQvVBkvb0=;
- b=SbTiW/59bGJTW9fTiLT/mpVezw/DQM18J/WiSxKn+ziu6MtEBJa/13ye0tyufIVbB6
- jq7N41b9uTytSO/fVRrAu7Kd1i1pA0HtdpN09TYHMy/YVE1Rcu54FWTR7Ap12blQJmBV
- yOuYrD68Mowgc14YwEtQJCn1ofr+q0Ui1E348e52UL2tQ90b+5AsxlhskV0/t39zHVw6
- 5ZShDk9Pv/xlx+DYYi2TCOGFg4LpQMEDCOnan8eoE8c8Xq1HD4QdWhA3YF3yq4DtUr/y
- YMoZqNFfi9Gd98ESQpGvh9EfrQf5PlWiKQU6LF7pHJAKV+384rQkxrXQ2fjjGSd63+Oi
- Lvgw==
-X-Forwarded-Encrypted: i=1;
- AKwUvByG2vssF48MVYT2lI16MzfszZBqhai/VgMFcAoLX2XalBgCUEYn+Pxkk/wDBrRMzsQXld1ZYBXruhu3@nongnu.org
-X-Gm-Message-State: AFuF++mVTJkrYoj+sbPQpQ9HREGJpnFxbiSjHQr78OLf8oxdAWVoEYwq
- +aAwih4biXG6OsgouSAC4r6TMxZ1/EVMKt0RVaF6fwesIkZvKvKQsKPOk48dsli/XtPZgrFJbx1
- 2O5N2D7oCCxNVXJqLCW22isDgaWKldCrTK6OWNOODf/aU6Ks5ntFzHeIOUg==
-X-Gm-Gg: AYBFou1E0s2Ozf0QBmamw7j/QexONJcnr0Bek5nBDQoY2US9fvUhFemws+cVslPAz0A
- i4uGMsofulDy0c6tMW84BS+EUw/+1jQBp7JVUuw0ZBzgUlIo726RZaiZmcJJNH1cb9vNbzV5az4
- OKvlZzZcsT6uX/jUWAjyRyMs8yiyebkBjOPYa0urNQm8icsXL1KzqGLhmzYEawt2Akl4HclLt6m
- 1pR+/KWNAXDS54U/GzwWToKVrKkd/1JDGokeYzCSlxMor91UqNNTox+n1Fdg6tp2SDRhTK2RM9s
- UAo8IlyXkvgJYQHRZViHIVmW6Dk7TjK1mJgEU9lNsqLQQgik4tZ7wvIY3HOZ+ONRJ+m62yEzBOq
- shZAuXYkSWSpMbICXUtOgo3IHQEr7CJCKKDghnbMBpLXds+HEGuZJV6jBMk9swXEEZlSw
-X-Received: by 2002:a05:6a20:6a0b:b0:3d3:ae1f:d7f3 with SMTP id
- adf61e73a8af0-3dd5f73ef30mr18598222637.19.1789665062809; 
- Thu, 17 Sep 2026 10:11:02 -0700 (PDT)
-X-Received: by 2002:a05:6a20:6a0b:b0:3d3:ae1f:d7f3 with SMTP id
- adf61e73a8af0-3dd5f73ef30mr18598161637.19.1789665062239; 
- Thu, 17 Sep 2026 10:11:02 -0700 (PDT)
-Received: from [192.168.1.199] (216-71-219-44.dyn.novuscom.net.
- [216.71.219.44]) by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-33bf596e1f6sm19371296eec.1.2026.09.17.10.11.01
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 17 Sep 2026 10:11:01 -0700 (PDT)
-Message-ID: <686611d2-d6ca-4022-adbd-49cb7b0b943a@oss.qualcomm.com>
-Date: Thu, 17 Sep 2026 10:11:00 -0700
+ bh=PA+pyKUKmRRRuQbzqiu/nMXMQb6umpeCVcMe+qD/HOw=;
+ b=Uca78tkc03i5iW95PR+F7EAt/vZeC+EZA8kPuh8Fqv98w9AkmZ/onTvhZP15H1Ol7+
+ 8mycwkKKjbBJsQ7hW9eeAuy0GWdwPFZFb+iG2Z6DfUkooTLxt+dUt7+Ga7ZHRkQDncL2
+ H4JuAdgiYrGk3uH6mAMyhiW+9t8kNFKIDDTVz8TLDw1VzjMH0uRSxMF2CytafV7d7XP8
+ oGWEOz+xOxOu1/O+MFuzqUtEsY4X5XqPvFxG3Y581LcTmEUnw3NBFO6ODHshbkNu+0Zi
+ ZpO4UjEpesq9urrvPpolbvVWPcGW32FCb2k1eX9mR1erLt6vGeOfe9JEcaoamokVhvFn
+ kqww==
+X-Gm-Message-State: AFuF++m77X5QGnik2hPMeOrQR+80JhzzHSv9wAGiy/I6uX+bvKWrMOjz
+ y9p9sPHsadvaIDxmQcXNeQjg74Ecgrrs0LysJDBb6+fPQeNkkVSOptQFdXeFfuuOdmQ0Bgsapia
+ 5m3pGIQ3+/tX/+taOPaVzctYpKtODm4/WzThWMg4+JZiqHkdFZEzaG29daA==
+X-Gm-Gg: AYBFou04BY8duqtYioelfndz5Hiqs2GPLDiFHePfNvVWFCV807A9x/+VrR7Otkl7sxR
+ g0F+3NAgL574Uph4ftx0BWCgoTblVd6jTv3MDwcb4uFczBcGECGxJIQG4uzPkWaaeG23exUBnSJ
+ PAWEr7ElqRxl4hQnwdziEcdPQbWr7DHZQpg27U978RdXg50Ks6jhSptQbgtzfIy927yYtHUHpBz
+ bW7Vg8J3Ig6/V4T5N/OIDjrmDiuLDrZWds34BhrY0vYFhDrq5iD/6NxicIeoJ//YZd0RPXKhjQ2
+ LBG3CrzhHnZjUPjRTe8pjvwrRkzRFnSOzHHaKsTyf7egZxNkakj/RQlpdmjxdgN0nfbiUo5fmq9
+ poR6I0DKTA6Zp5OADJ1moSoSUQO1SGPOMQG2+a4Y=
+X-Received: by 2002:a05:6214:634b:b0:912:40b6:d591 with SMTP id
+ 6a1803df08f44-91240b6d75fmr84321856d6.34.1789667049922; 
+ Thu, 17 Sep 2026 10:44:09 -0700 (PDT)
+X-Received: by 2002:a05:6214:634b:b0:912:40b6:d591 with SMTP id
+ 6a1803df08f44-91240b6d75fmr84321426d6.34.1789667049526; 
+ Thu, 17 Sep 2026 10:44:09 -0700 (PDT)
+Received: from QCOM-UWl2o8bcGT.qualcomm.com ([189.110.107.170])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-91252c56d73sm3118136d6.13.2026.09.17.10.44.07
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 17 Sep 2026 10:44:08 -0700 (PDT)
+From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
+ andrew.jones@oss.qualcomm.com, leif.lindholm@oss.qualcomm.com,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Subject: [PATCH v12 0/5] hw/riscv: Server Platform Reference Board
+Date: Thu, 17 Sep 2026 14:43:59 -0300
+Message-ID: <20260917174405.3471736-1-daniel.barboza@oss.qualcomm.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 10/12] target-info: Introduce target_riscv32
-From: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
-To: luoyonggang@gmail.com
-Cc: Anton Johansson <anjo@rev.ng>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org, daniel.barboza@oss.qualcomm.com,
- philmd@oss.qualcomm.com, palmer@dabbelt.com, alistair.francis@wdc.com
-References: <20260916-hw-riscv-cpu-int-v4-0-babc367b60f5@rev.ng>
- <20260916-hw-riscv-cpu-int-v4-10-babc367b60f5@rev.ng>
- <f692f936-550b-4e5b-90ee-399edf21de73@oss.qualcomm.com>
- <CAE2XoE9KkW+WPWL1g4hzT6OtkQhfYvaMAopBW4NfFMkXn9hjzQ@mail.gmail.com>
- <ef62c7fc-9db5-43f2-adbc-e86a805757b4@oss.qualcomm.com>
-Content-Language: en-US
-In-Reply-To: <ef62c7fc-9db5-43f2-adbc-e86a805757b4@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: NFtRQKjOrUZpHtWkRVgTjIv_6Df5hKIN
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE3MDI0NSBTYWx0ZWRfX2bgRjeNr1EvN
- jU5+WQzqxHzgrPhthOt3kMQNErzssYKtlLoQJXLfCk76gSNl6ntgVDrJy7Zr7jY1t3kBOODNiE7
- d2I7RNof2q6REEHJ5rmnzFP9bLppqVUQMtLMl3Om1T23xGzZ2Ul4TyariWTHctBXj7ECvYov2AL
- THl4h51XcLogRorri1QlFclfzp/BHsrdtCRBdX/14fUt1RbVupJ995B1B0no/P7qYMc1e4vUI/I
- 1NZPQMCfIS9A4Va2ynRpV7ewPEQr1mn02E2H5rPp8kq0W4ZnRWqm2q67EenhffeDgBqB++URc84
- g9kdkEf1T/XTVkmm5uvUr9wJa38JaGNnSvCgb/qFVMhLOSIrcfkC57XD1Ef+QL1SGyPvNcYkD/Q
- iB3ESwTgaN3VB+X76/gFguNfcpLwPz5+aGA23Mzqv4i1pDWep3yQF/1iOtV4pXpxq1Sh8VzlzSz
- 1iSBRaegJvR/2ZHddfg==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE3MDI0NSBTYWx0ZWRfXyC+WvahXgqy9
- 0HT5+8VXZmznxzDJF9o5tK0ij6ORUcyZDQTD1S9U9EHDN43ZYDDJC0IvUtM9fnJJaF6JPnAvH7Q
- pnhH5QSSrk4b7oQFYFrOyUeVNHoDD3Q=
-X-Authority-Analysis: v=2.4 cv=GeOCDgXL c=1 sm=1 tr=0 ts=6aac1f27 cx=c_pps
- a=rz3CxIlbcmazkYymdCej/Q==:117 a=iLqgmErQAxjCjdq5jj1Aqg==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
- a=EUspDBNiAAAA:8 a=UNydBOIn-IAKdUVdJZ8A:9 a=lqcHg5cX4UMA:10 a=3ZKOabzyN94A:10
- a=QEXdDO2ut3YA:10 a=bFCP_H2QrGi7Okbo017w:22
-X-Proofpoint-ORIG-GUID: NFtRQKjOrUZpHtWkRVgTjIv_6Df5hKIN
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE3MDI1MyBTYWx0ZWRfX6pBqVmqe9sKL
+ J4f8hZrRcpmnvwMvj2xwJ+ZidnpvoXm2jEFtGH6fzsb+9P35GEdPW1IwqrAagt9tyhoFp8s37kX
+ XbOSOTacIZh1dopU8Tihuqyx0cCZmb4=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE3MDI1MyBTYWx0ZWRfX8xenKEEJD8m2
+ laVhQ7tn0dcKPUbVnsWLey4owZULmYhrBu38eQEVxW48UsZjrlQtcgp+ZhySeHcyFcpF8xBC4vP
+ HARcdkYLlSgip/AlrvgARbs1fYRXD0os6xK3DmKN8n3FR6+2EvkVqzgXycHDlUneYjXxIP9p3Eu
+ FQSqRUifGXOyQjHG1lGe7/FMTjJqob2DDeR1IDnCT6kGmxIEEIDBMusCDfxLS4l0q7YX+/vftly
+ cx8C0/ifbeRFnzbiRHXLrMXvhRZZVS5q1rPeXOcN1ym6O7WAh7I6zwSYG6BUunhzhvKneNOlahJ
+ geczn9N//l34kOi5woh+9Y2MPHhmdutBOK58AeLW7mqxKaidGutuKf1xwfYLq5B8DHqP+OMNt0v
+ g5AL40tdD5t4Ng5sC0HPdYJcC8J+VZM0vlQAQCgT6U0sPr5wJJHaNAMDS0W0xzJiqgZx6h4xlje
+ ooCgN8woy4G2jmLv14g==
+X-Authority-Analysis: v=2.4 cv=WL/qzXsR c=1 sm=1 tr=0 ts=6aac26ea cx=c_pps
+ a=7E5Bxpl4vBhpaufnMqZlrw==:117 a=arNgJ3JLhM/z8Vk/iMOFgQ==:17
+ a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22 a=VwQbUJbxAAAA:8
+ a=EUspDBNiAAAA:8 a=k5snQTODxFSaQZLrqV8A:9 a=pJ04lnu7RYOZP9TFuWaZ:22
+X-Proofpoint-GUID: RW8oIs-T6m1Dtz2ct-PiZdW6TiVDSfNP
+X-Proofpoint-ORIG-GUID: RW8oIs-T6m1Dtz2ct-PiZdW6TiVDSfNP
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-17_04,2026-09-16_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 priorityscore=1501 lowpriorityscore=0 clxscore=1015
- phishscore=0 bulkscore=0 spamscore=0 suspectscore=0 adultscore=0
- malwarescore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ impostorscore=0 suspectscore=0 lowpriorityscore=0 clxscore=1015
+ malwarescore=0 bulkscore=0 phishscore=0 priorityscore=1501 spamscore=0
+ adultscore=0 classifier=typeunknown authscore=0 authtc= authcc=
  route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
- definitions=main-2609170245
+ definitions=main-2609170253
 Received-SPF: pass client-ip=205.220.168.131;
- envelope-from=pierrick.bouvier@oss.qualcomm.com;
- helo=mx0a-0031df01.pphosted.com
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
 X-Spam_score_int: -27
 X-Spam_score: -2.8
 X-Spam_bar: --
@@ -161,162 +147,75 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 9/17/2026 10:05 AM, Pierrick Bouvier wrote:
-> On 9/16/2026 6:00 PM, Yonggang Luo wrote:
->> As I said before, we need the `const TargetInfo*` parameter to for
->> is_avaiable.  I've get all accelerator and i386/x86_64/aarch64/arm/
->> risv32/riscv64/
->>
-> 
-> In general, on QEMU dev, we can't block other series to do a change
-> compatible with a current work in progress. In other words, the first
-> merged wins, and the second has to solve the conflicts. That's sometimes
-> frustrating, and having worked on single-binary for more than a year,
-> yes I confirm it's not always fun to "cleanup" behind people patches.
-> That's part of the work though.
->
+Hi,
 
-I should say "request changes" instead of "block", because I know you're
-kindly asking for it.
+In this new version we have lots of changes suggested by Drew on v11.
 
-> In this case, this series is based on upstream, which doesn't have or
-> need this parameter yet.
-> 
-> Also, in the series where you introduced this parameter, the usage was
-> object.c: is_available(target_info()), which is strictly equivalent to
-> what we have today. We asked what was the goal but didn't get an answer.
-> 
->>
->>  single_binary_supported_targets = [
->>    'aarch64-softmmu',
->>    'arm-softmmu',
->> +  'i386-softmmu',
->>    'microblaze-softmmu',
->>    'riscv32-softmmu',
->>    'riscv64-softmmu',
->> +  'x86_64-softmmu',
->>  ]
->>  
->>
->> On Thu, Sep 17, 2026 at 1:03 AM Pierrick Bouvier
->> <pierrick.bouvier@oss.qualcomm.com
->> <mailto:pierrick.bouvier@oss.qualcomm.com>> wrote:
->>>
->>> On 9/16/2026 2:19 AM, Anton Johansson wrote:
->>>> Will be used in the following commit to filter machines using
->>>> TypeInfo::is_available, so a simple !target_riscv64() is not sufficient.
->>>>
->>>> Signed-off-by: Anton Johansson <anjo@rev.ng <mailto:anjo@rev.ng>>
->>>> ---
->>>>  include/qemu/target-info.h | 7 +++++++
->>>>  target-info.c              | 5 +++++
->>>>  2 files changed, 12 insertions(+)
->>>>
->>>
->>> Reviewed-by: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com
->> <mailto:pierrick.bouvier@oss.qualcomm.com>>
->>>
->>
->>
->>  include/qemu/target-info.h | 30 ++++++++++++++++++++++++++++++
->>  target-info.c              | 26 ++++++++++++++++++++++++++
->>  2 files changed, 56 insertions(+)
->>
->> diff --git a/include/qemu/target-info.h b/include/qemu/target-info.h
->> index 0620a3db84..560d589bcf 100644
->> --- a/include/qemu/target-info.h
->> +++ b/include/qemu/target-info.h
->> @@ -239,6 +239,36 @@ bool target_is_s390x(const TargetInfo *ti);
->>   */
->>  bool target_s390x(void);
->>  
->> +/**
->> + * target_is_base_riscv:
->> + * @ti: TargetInfo to inspect
->> + *
->> + * Returns whether @ti is RISC-V 32-bit or 64-bit.
->> + */
->> +bool target_is_base_riscv(const TargetInfo *ti);
->> +
->> +/**
->> + * target_base_riscv:
->> + *
->> + * Returns whether the target architecture is RISC-V 32-bit or 64-bit.
->> + */
->> +bool target_base_riscv(void);
->> +
->> +/**
->> + * target_is_riscv32:
->> + * @ti: TargetInfo to inspect
->> + *
->> + * Returns whether @ti is RISC-V 32-bit.
->> + */
->> +bool target_is_riscv32(const TargetInfo *ti);
->> +
->> +/**
->> + * target_riscv32:
->> + *
->> + * Returns whether the target architecture is RISC-V 32-bit.
->> + */
->> +bool target_riscv32(void);
->> +
->>  /**
->>   * target_is_riscv64:
->>   * @ti: TargetInfo to inspect
->> diff --git a/target-info.c b/target-info.c
->> index 9083b7bca6..a9fcd1c07b 100644
->> --- a/target-info.c
->> +++ b/target-info.c
->> @@ -250,6 +250,32 @@ bool target_s390x(void)
->>      return target_is_s390x(target_info());
->>  }
->>  
->> +bool target_is_base_riscv(const TargetInfo *ti)
->> +{
->> +    switch (ti->target_arch) {
->> +    case SYS_EMU_TARGET_RISCV32:
->> +    case SYS_EMU_TARGET_RISCV64:
->> +        return true;
->> +    default:
->> +        return false;
->> +    }
->> +}
->> +
->> +bool target_base_riscv(void)
->> +{
->> +    return target_is_base_riscv(target_info());
->> +}
->> +
->> +bool target_is_riscv32(const TargetInfo *ti)
->> +{
->> +    return ti->target_arch == SYS_EMU_TARGET_RISCV32;
->> +}
->> +
->> +bool target_riscv32(void)
->> +{
->> +    return target_is_riscv32(target_info());
->> +}
->> +
->>  bool target_is_riscv64(const TargetInfo *ti)
->>  {
->>      return ti->target_arch == SYS_EMU_TARGET_RISCV64;
->>
->>
->> These are the helpers I needed, that are very important.for subsequent
->> work, otherwise the latter work will be repeated again. and split 
->> target_is_* out again.
->>
->> Those is_avaiable should use target_is_*, that's differ from 
->> target_riscv32 and so on.
->> --
->>          此致
->> 礼
->> 罗勇刚
->> Yours
->>     sincerely,
->> Yonggang Luo
-> 
-> Regards,
-> Pierrick
+The most notable change is the removal of default e1000e NIC and default
+AHCI ich9 bus, following the idea where the board should be as minimalist
+as possible w.r.t default features.  Note that both can be added again
+with:
+
+-device ich9-ahci,id=ahci0 -device ide-hd,drive=hd0,bus=ahci0.0
+-netdev user,id=net0 -device e1000e,netdev=net0
+
+So I feel comfortable removing them from the default design since it's
+just a matter of adding them in the command line.
+
+Patches are based on top of sdext-v9 patches:
+
+"[PATCH v9 0/7] riscv: add initial sdext support"
+
+
+Changes from v11:
+- patch 2:
+  - commit msg: s/trigger-count/num-triggers
+  - removed the "N < 128" num-trigger bit from commit msg
+  - added an explicit "PRIV_VERSION_1_13_0" val in RVServerRef1_0 description
+  - default pmu_mask is now set to MAKE_64BIT_MASK(3, 6) (i.e. 6 counters)
+- patch 3:
+  - Kconfig changes:
+    - changed PCI_DEVICES to PCIE_DEVICES
+    - changed SERIAL to SERIAL_MM
+    - added PLATFORM_BUS
+  - removed duplicated "system/qtest.h" header
+  - aligned macros names and values
+  - fixed "accommodate" typo
+  - removed default NIC and AHCI bus by removing rvserver_init_pci_devices()
+  - removed RVSERVER_DEBUG memmap
+  - added RVSERVER_ACLINT_TIMEBASE_FREQ 1Ghz macro
+  - added .instance_finalize() to clean up the s->flash[] objects
+  - added NULL at the end of valid_cpu_types[] declaration
+- patch 4:
+  - added ahci bus and e1000e command line in do_test_boot_linux_test()
+- patch 5:
+  - fixed nvme disk command line example
+- v11 link: https://lore.kernel.org/qemu-devel/20260909210756.1767711-1-daniel.barboza@oss.qualcomm.com/  
+
+Daniel Henrique Barboza (5):
+  target/riscv/cpu.c: remove 'bare' condition for .profile
+  target/riscv: add riscv-server-ref CPU
+  hw/riscv: server platform reference machine
+  tests/functional/riscv64: add riscv-server-ref tests
+  docs: add riscv-server-ref.rst
+
+ configs/devices/riscv64-softmmu/default.mak |   1 +
+ docs/system/riscv/riscv-server-ref.rst      |  64 ++
+ docs/system/target-riscv.rst                |   1 +
+ hw/riscv/Kconfig                            |  17 +
+ hw/riscv/meson.build                        |   1 +
+ hw/riscv/server_platform_ref.c              | 776 ++++++++++++++++++++
+ target/riscv/cpu-qom.h                      |   1 +
+ target/riscv/cpu.c                          |  35 +-
+ tests/functional/riscv64/meson.build        |   2 +
+ tests/functional/riscv64/test_opensbi.py    |   4 +
+ tests/functional/riscv64/test_server_ref.py |  90 +++
+ 11 files changed, 991 insertions(+), 1 deletion(-)
+ create mode 100644 docs/system/riscv/riscv-server-ref.rst
+ create mode 100644 hw/riscv/server_platform_ref.c
+ create mode 100755 tests/functional/riscv64/test_server_ref.py
+
+-- 
+2.43.0
 
 
