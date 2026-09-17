@@ -4,48 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DE6BC982D0
-	for <qemu-riscv@archiver.kernel.org>; Thu, 17 Sep 2026 22:02:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F9B1C982D0
+	for <qemu-riscv@archiver.kernel.org>; Thu, 17 Sep 2026 22:03:05 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x7K9x-0004Cm-O1; Thu, 17 Sep 2026 18:00:51 -0400
+	id 1x7KBQ-0005Qb-5K; Thu, 17 Sep 2026 18:02:20 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <anjo@rev.ng>)
- id 1x7K9K-00040J-8p; Thu, 17 Sep 2026 18:00:11 -0400
+ id 1x7K9k-000494-63; Thu, 17 Sep 2026 18:00:37 -0400
 Received: from rev.ng ([94.130.142.21])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <anjo@rev.ng>)
- id 1x7K9G-0004ID-N2; Thu, 17 Sep 2026 18:00:09 -0400
+ id 1x7K9g-0004LZ-5h; Thu, 17 Sep 2026 18:00:35 -0400
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=rev.ng;
  s=dkim; h=Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:
  Content-Type:MIME-Version:Subject:Date:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive:List-Unsubscribe:List-Unsubscribe-Post:
- List-Help; bh=nwLwQgR42J7eKkcK5W6JtsjBjSmohEpkHacQMA24HDk=; b=FZDDZnoZF989F8c
- EQqK5c7QcnhceXa8IxVVYvlrRDanlDHr0lpRlZDa9OQnshRS3+gGJnco46gCq2/SDBS/LZz8HAJyh
- CepgY6nCU4mlRMMauGu4IBvEaEEqLQto0C0mQfi0Fivfomr6E9mBXVPgcuS4JuOHvnhuq0CQEZ0FQ
- 9I=;
-Date: Fri, 18 Sep 2026 00:04:55 +0200
-Subject: [PATCH v5 01/11] target/riscv: Replace TYPE_RISCV_CPU_BASE
+ List-Help; bh=mMRpVMSst98vUE1cTbcc1vWeWwbqgmyfGyzpZB5Y+BQ=; b=Das+0dYTzD/fB3K
+ YFyqy5p0g1w2ERVLPo18lUCHfpoDUBTiPHI9j50mr4INpNryey8ejGnhWXVZA4Y/lOIE1dEcbXn8l
+ D48UGuVrDAnqaDsSx+6d50uhT/AAc21Ik4BMJtigDUUqHwJsgw0Nhav9kCU7R03ap/SUUjGp/GVJD
+ vk=;
+Date: Fri, 18 Sep 2026 00:05:04 +0200
+Subject: [PATCH v5 10/11] hw/riscv: Filter for 32- or 64-bit machine types
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260918-hw-riscv-cpu-int-v5-1-f98c5a244636@rev.ng>
+Message-Id: <20260918-hw-riscv-cpu-int-v5-10-f98c5a244636@rev.ng>
 References: <20260918-hw-riscv-cpu-int-v5-0-f98c5a244636@rev.ng>
 In-Reply-To: <20260918-hw-riscv-cpu-int-v5-0-f98c5a244636@rev.ng>
 To: qemu-devel@nongnu.org
 Cc: Anton Johansson <anjo@rev.ng>, qemu-riscv@nongnu.org, 
  daniel.barboza@oss.qualcomm.com, philmd@oss.qualcomm.com, 
  pierrick.bouvier@oss.qualcomm.com, palmer@dabbelt.com, 
- alistair.francis@wdc.com, Chao Liu <chao.liu.zevorn@gmail.com>
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1789682743; l=2759;
+ alistair.francis@wdc.com
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1789682744; l=8455;
  i=anjo@rev.ng; s=20260210; h=from:subject:message-id;
- bh=UBOkEAVcELBmELPjY92jS8lwx3tbFIEInyLiERUp3yM=;
- b=F01t1nZ613cFVmKsfUez8ILnFOyWb0OGxkzmARE8FTQnbqMbawCQPBJyfzN+fmTaO3LGczLCm
- f2U+MxkDeSRD5zq9jspAKrAjCTzFLVT9sRBmvmlzNsHBKIP5tvfdGn0
+ bh=UBmbIKF8k5MDtsnP+GDSom1GqHBRktVVsp7PYnJ2xtY=;
+ b=jJ+DyBf0llhQcjtOTOHGWjaQ/PDf/nSqL8Ry+P/ELYtZXZe6KSF8/MjRfL/5rGemILOviKb9Z
+ 2rTITjiFZGiDiCwusB49MUrmYL7hJMOaFkNun9Zei51Ti33jDBJcGWT
 X-Developer-Key: i=anjo@rev.ng; a=ed25519;
  pk=dKsZvj/g3kgDxnV1/SWg8a0YNGSpWtFGNsWIepQYKow=
 Received-SPF: pass client-ip=94.130.142.21; envelope-from=anjo@rev.ng;
@@ -73,81 +73,250 @@ From:  Anton Johansson via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-TYPE_RISCV_CPU_BASE is used only to initialize the correct default
-machine for 2 machines. Replace it with a runtime check.
+Filters for 32- or 64-bit machine types using TypeInfo::is_available,
+machines available for both 32-bit and 64-bit (amd-microblaze-v-generic,
+sifive-[e|u], spike, virt) leave the field unset.  For boston-aia,
+DEFINE_MACHINE() has been inlined to set is_available.
 
-Reviewed-by: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
-Reviewed-by: Chao Liu <chao.liu.zevorn@gmail.com>
 Signed-off-by: Anton Johansson <anjo@rev.ng>
---
-Note, this patch is to be replaced by: 20260526095731.63525-1-philmd@linaro.org
 ---
- target/riscv/cpu.h              | 6 ------
- hw/riscv/microblaze-v-generic.c | 4 +++-
- hw/riscv/virt.c                 | 4 +++-
- 3 files changed, 6 insertions(+), 8 deletions(-)
+ hw/riscv/boston-aia.c      | 34 ++++++++++++++++++++--------------
+ hw/riscv/k230.c            |  3 +++
+ hw/riscv/microchip_pfsoc.c |  3 +++
+ hw/riscv/opentitan.c       |  3 +++
+ hw/riscv/shakti_c.c        |  3 +++
+ hw/riscv/tt_atlantis.c     |  3 +++
+ hw/riscv/xiangshan_kmh.c   |  3 +++
+ 7 files changed, 38 insertions(+), 14 deletions(-)
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index c2138dbd4b..aee1dcaaf9 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -39,12 +39,6 @@ typedef struct CPUArchState CPURISCVState;
- 
- #define CPU_RESOLVING_TYPE TYPE_RISCV_CPU
- 
--#if defined(TARGET_RISCV32)
--# define TYPE_RISCV_CPU_BASE            TYPE_RISCV_CPU_BASE32
--#elif defined(TARGET_RISCV64)
--# define TYPE_RISCV_CPU_BASE            TYPE_RISCV_CPU_BASE64
--#endif
--
- /*
-  * b0: Whether a instruction always raise a store AMO or not.
+diff --git a/hw/riscv/boston-aia.c b/hw/riscv/boston-aia.c
+index b90da096ea..ba16b7dbc6 100644
+--- a/hw/riscv/boston-aia.c
++++ b/hw/riscv/boston-aia.c
+@@ -10,6 +10,7 @@
   */
-diff --git a/hw/riscv/microblaze-v-generic.c b/hw/riscv/microblaze-v-generic.c
-index b0494b1ac5..3f07ab2132 100644
---- a/hw/riscv/microblaze-v-generic.c
-+++ b/hw/riscv/microblaze-v-generic.c
-@@ -15,6 +15,7 @@
  
  #include "qemu/osdep.h"
- #include "qemu/units.h"
 +#include "qemu/target-info.h"
- #include "qapi/error.h"
- #include "target/riscv/cpu.h"
- #include "hw/core/sysbus.h"
-@@ -182,7 +183,8 @@ static void mb_v_generic_machine_init(MachineClass *mc)
-     mc->init = mb_v_generic_init;
-     mc->min_cpus = 1;
-     mc->max_cpus = 1;
--    mc->default_cpu_type = TYPE_RISCV_CPU_BASE;
-+    mc->default_cpu_type = (target_riscv64()) ? TYPE_RISCV_CPU_BASE64
-+                                              : TYPE_RISCV_CPU_BASE32;
-     mc->default_cpus = 1;
+ #include "qemu/units.h"
+ 
+ #include "hw/core/boards.h"
+@@ -263,18 +264,6 @@ static const MemoryRegionOps boston_platreg_ops = {
+     },
+ };
+ 
+-static const TypeInfo boston_device = {
+-    .name          = TYPE_MIPS_BOSTON_AIA,
+-    .parent        = TYPE_SYS_BUS_DEVICE,
+-    .instance_size = sizeof(BostonState),
+-};
+-
+-static void boston_register_types(void)
+-{
+-    type_register_static(&boston_device);
+-}
+-type_init(boston_register_types)
+-
+ #define NUM_INSNS 6
+ static void gen_firmware(uint32_t *p)
+ {
+@@ -462,8 +451,9 @@ static void boston_mach_init(MachineState *machine)
+     }
  }
  
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index d4b501802f..4da11db8b9 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -22,6 +22,7 @@
+-static void boston_mach_class_init(MachineClass *mc)
++static void boston_mach_class_init(ObjectClass *oc, const void *data)
+ {
++    MachineClass *mc = MACHINE_CLASS(oc);
+     mc->desc = "MIPS Boston-aia";
+     mc->init = boston_mach_init;
+     mc->block_default_type = IF_IDE;
+@@ -473,4 +463,20 @@ static void boston_mach_class_init(MachineClass *mc)
+     mc->default_cpu_type = TYPE_RISCV_CPU_MIPS_P8700;
+ }
+ 
+-DEFINE_MACHINE("boston-aia", boston_mach_class_init)
++static const TypeInfo boston_types[] = {
++    {
++        .name          = TYPE_MIPS_BOSTON_AIA,
++        .parent        = TYPE_SYS_BUS_DEVICE,
++        .instance_size = sizeof(BostonState),
++        .is_available  = target_riscv64,
++    },
++    {
++        .name          = MACHINE_TYPE_NAME("boston-aia"),
++        .parent        = TYPE_MACHINE,
++        .class_init    = boston_mach_class_init,
++        .instance_size = sizeof(MachineState),
++        .is_available  = target_riscv64,
++    },
++};
++
++DEFINE_TYPES(boston_types)
+diff --git a/hw/riscv/k230.c b/hw/riscv/k230.c
+index 1e4ca38579..43b6ae6d2f 100644
+--- a/hw/riscv/k230.c
++++ b/hw/riscv/k230.c
+@@ -17,6 +17,7 @@
+ #include "cpu-qom.h"
+ #include "qemu/cutils.h"
+ #include "qemu/error-report.h"
++#include "qemu/target-info.h"
+ #include "qapi/error.h"
+ #include "system/device_tree.h"
+ #include "system/system.h"
+@@ -420,6 +421,7 @@ static const TypeInfo k230_soc_type_info = {
+     .instance_size = sizeof(K230SoCState),
+     .instance_init = k230_soc_init,
+     .class_init = k230_soc_class_init,
++    .is_available = target_riscv64,
+ };
+ 
+ static void k230_soc_register_types(void)
+@@ -558,6 +560,7 @@ static const TypeInfo k230_machine_typeinfo = {
+     .class_init = k230_machine_class_init,
+     .instance_init = k230_machine_instance_init,
+     .instance_size = sizeof(K230MachineState),
++    .is_available = target_riscv64,
+ };
+ 
+ static void k230_machine_init_register_types(void)
+diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
+index edd29626fa..b2991e5a71 100644
+--- a/hw/riscv/microchip_pfsoc.c
++++ b/hw/riscv/microchip_pfsoc.c
+@@ -38,6 +38,7 @@
+ #include "qemu/error-report.h"
  #include "qemu/units.h"
+ #include "qemu/cutils.h"
++#include "qemu/target-info.h"
+ #include "qapi/error.h"
+ #include "qapi/visitor.h"
+ #include "hw/core/boards.h"
+@@ -504,6 +505,7 @@ static const TypeInfo microchip_pfsoc_soc_type_info = {
+     .instance_size = sizeof(MicrochipPFSoCState),
+     .instance_init = microchip_pfsoc_soc_instance_init,
+     .class_init = microchip_pfsoc_soc_class_init,
++    .is_available = target_riscv64,
+ };
+ 
+ static void microchip_pfsoc_soc_register_types(void)
+@@ -757,6 +759,7 @@ static const TypeInfo microchip_icicle_kit_machine_typeinfo = {
+     .class_init = microchip_icicle_kit_machine_class_init,
+     .instance_init = microchip_icicle_kit_machine_instance_init,
+     .instance_size = sizeof(MicrochipIcicleKitState),
++    .is_available = target_riscv64,
+ };
+ 
+ static void microchip_icicle_kit_machine_init_register_types(void)
+diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
+index 8cd660dd41..c3a563db92 100644
+--- a/hw/riscv/opentitan.c
++++ b/hw/riscv/opentitan.c
+@@ -20,6 +20,7 @@
+ 
+ #include "qemu/osdep.h"
+ #include "qemu/cutils.h"
++#include "qemu/target-info.h"
+ #include "hw/riscv/opentitan.h"
+ #include "qapi/error.h"
+ #include "qemu/error-report.h"
+@@ -332,11 +333,13 @@ static const TypeInfo open_titan_types[] = {
+         .instance_size  = sizeof(LowRISCIbexSoCState),
+         .instance_init  = lowrisc_ibex_soc_init,
+         .class_init     = lowrisc_ibex_soc_class_init,
++        .is_available   = target_riscv32,
+     }, {
+         .name           = TYPE_OPENTITAN_MACHINE,
+         .parent         = TYPE_MACHINE,
+         .instance_size  = sizeof(OpenTitanState),
+         .class_init     = opentitan_machine_class_init,
++        .is_available   = target_riscv32,
+     }
+ };
+ 
+diff --git a/hw/riscv/shakti_c.c b/hw/riscv/shakti_c.c
+index 3b6efd25be..76cfe30918 100644
+--- a/hw/riscv/shakti_c.c
++++ b/hw/riscv/shakti_c.c
+@@ -21,6 +21,7 @@
+ #include "hw/riscv/shakti_c.h"
+ #include "qapi/error.h"
+ #include "qemu/error-report.h"
++#include "qemu/target-info.h"
+ #include "hw/intc/sifive_plic.h"
+ #include "hw/intc/riscv_aclint.h"
+ #include "system/system.h"
+@@ -97,6 +98,7 @@ static const TypeInfo shakti_c_machine_type_info = {
+     .class_init = shakti_c_machine_class_init,
+     .instance_init = shakti_c_machine_instance_init,
+     .instance_size = sizeof(ShaktiCMachineState),
++    .is_available = target_riscv64,
+ };
+ 
+ static void shakti_c_machine_type_info_register(void)
+@@ -186,6 +188,7 @@ static const TypeInfo shakti_c_type_info = {
+     .class_init = shakti_c_soc_class_init,
+     .instance_init = shakti_c_soc_instance_init,
+     .instance_size = sizeof(ShaktiCSoCState),
++    .is_available = target_riscv64,
+ };
+ 
+ static void shakti_c_type_info_register(void)
+diff --git a/hw/riscv/tt_atlantis.c b/hw/riscv/tt_atlantis.c
+index b2333e7f6a..f54eb942f3 100644
+--- a/hw/riscv/tt_atlantis.c
++++ b/hw/riscv/tt_atlantis.c
+@@ -11,6 +11,7 @@
+ #include "qemu/cutils.h"
  #include "qemu/error-report.h"
  #include "qemu/guest-random.h"
 +#include "qemu/target-info.h"
- #include "qapi/error.h"
+ #include "qemu/units.h"
+ 
  #include "hw/core/boards.h"
- #include "hw/core/loader.h"
-@@ -1136,7 +1137,8 @@ static void virt_machine_class_init(ObjectClass *oc, const void *data)
-     mc->desc = "RISC-V VirtIO board";
-     mc->init = virt_machine_init;
-     mc->max_cpus = VIRT_CPUS_MAX;
--    mc->default_cpu_type = TYPE_RISCV_CPU_BASE;
-+    mc->default_cpu_type = (target_riscv64()) ? TYPE_RISCV_CPU_BASE64
-+                                              : TYPE_RISCV_CPU_BASE32;
-     mc->block_default_type = IF_VIRTIO;
-     mc->no_cdrom = 1;
-     mc->pci_allow_0_address = true;
+@@ -694,11 +695,13 @@ static const TypeInfo tt_atlantis_types[] = {
+         .instance_size = sizeof(TTAtlantisSoCState),
+         .instance_init = tt_atlantis_soc_init,
+         .class_init = tt_atlantis_soc_class_init,
++        .is_available = target_riscv64,
+     }, {
+         .name       = MACHINE_TYPE_NAME("tt-atlantis"),
+         .parent     = TYPE_MACHINE,
+         .class_init = tt_atlantis_machine_class_init,
+         .instance_size = sizeof(TTAtlantisState),
++        .is_available = target_riscv64,
+     },
+ };
+ 
+diff --git a/hw/riscv/xiangshan_kmh.c b/hw/riscv/xiangshan_kmh.c
+index a234c5f352..f2383c5399 100644
+--- a/hw/riscv/xiangshan_kmh.c
++++ b/hw/riscv/xiangshan_kmh.c
+@@ -30,6 +30,7 @@
+  */
+ 
+ #include "qemu/osdep.h"
++#include "qemu/target-info.h"
+ #include "qapi/error.h"
+ #include "system/address-spaces.h"
+ #include "hw/core/boards.h"
+@@ -157,6 +158,7 @@ static const TypeInfo xiangshan_kmh_soc_info = {
+     .instance_size = sizeof(XiangshanKmhSoCState),
+     .instance_init = xiangshan_kmh_soc_instance_init,
+     .class_init = xiangshan_kmh_soc_class_init,
++    .is_available = target_riscv64,
+ };
+ 
+ static void xiangshan_kmh_soc_register_types(void)
+@@ -220,6 +222,7 @@ static const TypeInfo xiangshan_kmh_machine_info = {
+     .parent = TYPE_MACHINE,
+     .instance_size = sizeof(XiangshanKmhState),
+     .class_init = xiangshan_kmh_machine_class_init,
++    .is_available = target_riscv64,
+ };
+ 
+ static void xiangshan_kmh_machine_register_types(void)
 
 -- 
 2.52.0
