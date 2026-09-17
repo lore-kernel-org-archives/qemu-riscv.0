@@ -4,148 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22B6AC982CF
-	for <qemu-riscv@archiver.kernel.org>; Thu, 17 Sep 2026 12:56:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 087DEC982CF
+	for <qemu-riscv@archiver.kernel.org>; Thu, 17 Sep 2026 13:39:10 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x7Bf4-0006Ng-Vk; Thu, 17 Sep 2026 08:56:23 -0400
+	id 1x7CJj-0003CT-TH; Thu, 17 Sep 2026 09:38:24 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1x7Bf0-0006N7-Sl
- for qemu-riscv@nongnu.org; Thu, 17 Sep 2026 08:56:18 -0400
-Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1x7Bey-00059W-9K
- for qemu-riscv@nongnu.org; Thu, 17 Sep 2026 08:56:18 -0400
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 68H9Zg1j1150496
- for <qemu-riscv@nongnu.org>; Thu, 17 Sep 2026 12:56:13 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- 8WQmZyVtliJQwYqNrz5u75N1ri7IqDeS4AuUXNM6twg=; b=KOZQbexylRu+g0NQ
- Gk1hY1lw0bbLBM8Vi+dVQd1cN2ENGl1IgbFD8LVfucefqZkLv4RseuKDPZUL2C/v
- XoQBgMAYG22/Q50RTjy4H2jHhDUQiGAwgriOcF/NKxmfChuwM9c6FNTGX7tXSQ0o
- x8RF+WuX3c99hi2a/oLU/VwmOq8Lb0xaAdKPh6YUe8+I5W/9vKx50PZcUyRZ39wl
- lYLVKOCswZilLvqb8e8oSbv6jtWeBbgdH02uDvWF96UVkmd5rBShMcLqLCQDvBp3
- 1WogufgTi+pfMDWCqoohWAkwq97u68prYTRcY/QA3K6Amb0rVcRTVdGwG4/J5yy1
- TaqWOg==
-Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com
- [209.85.160.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4grc9w94n9-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Thu, 17 Sep 2026 12:56:12 +0000 (GMT)
-Received: by mail-qt1-f198.google.com with SMTP id
- d75a77b69052e-5328412a7aaso16186971cf.1
- for <qemu-riscv@nongnu.org>; Thu, 17 Sep 2026 05:56:12 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
+ id 1x7CJT-0003BV-N8
+ for qemu-riscv@nongnu.org; Thu, 17 Sep 2026 09:38:11 -0400
+Received: from mail-pj2-x11.google.com ([2607:f8b0:4864:39::11])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
+ id 1x7CJR-00044Y-H9
+ for qemu-riscv@nongnu.org; Thu, 17 Sep 2026 09:38:07 -0400
+Received: by mail-pj2-x11.google.com with SMTP id
+ d9443c01a7336-2d747f05ffdso6705095ad.1
+ for <qemu-riscv@nongnu.org>; Thu, 17 Sep 2026 06:38:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1789649772; x=1790254572; darn=nongnu.org;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=8WQmZyVtliJQwYqNrz5u75N1ri7IqDeS4AuUXNM6twg=;
- b=EsaZFb5BkxLb2tMxilRYkUc65GTV8a2k+lCujBndYVDgisKiJmWplyMPqiHs+sf2y4
- NLh8H7xZSq0vr6rAPX1WeZm+76Vy5zQ2t/X32vWdFYkpqhLKvcDwHSvsXthKQaLospW4
- W+y1tfJHjhC5x3xbQm9ypQjMHOO6dZPV4CaSAy9FQYromTue0N7UK8Uu5vnMRV+TvNGE
- x8FJA4818HZ/7E1F6sh2XSFkHdCdULrigGb9EylUnPo5cMKf/urSLJhIIrj0+emvI7Pt
- g1ctbEw/Q0VplHy+3qcL0qKZafhr2pIr6jwn4RW04fGXY27KcdvAnFYtVzEkXrK+M4Ki
- tC7A==
+ d=sifive.com; s=google; t=1789652283; x=1790257083; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=zwzFyyvJC39ZPVbt9izsra+Ht73D68ICAZtqoph7Sq0=;
+ b=SIzxwZERFxmgivJ11h0m/bsIfTUTjICy6bSxb8xklwDbPUW26qe1ddr/FDaa69srMf
+ Y1l1EDJDKZo0UjDUWxSUup9AiZMnx1VeSkZ5ZOzx7LznK5nX5f9rj9NYCVLmkrhJZWbi
+ w4fw29gB0YRx40cypN0N2EwoNQyl/Q9+vZkDdUVmzFYIFDWCl8/3M1a/xxx/LViGVnB2
+ DuV9OQ3F2el62k0+p6xfbW1f1JMPPXDgOc/TdPs24D6H5JZ02ETKdZe2KVZ48SqRBX5Q
+ zDeiYgHq9mZEOEbPQzJ5x/c8pZRiF85hiAm8G1g9ep1bOX5B4bT4WTebnM48h++1U1tY
+ cBaw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1789649772; x=1790254572;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20260707; t=1789652283; x=1790257083;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=8WQmZyVtliJQwYqNrz5u75N1ri7IqDeS4AuUXNM6twg=;
- b=DrMa/Z6g8DJoJsANH/3PrjKQOUyv/x0YaGhRyM9AYesdOYmHnTFJf2z3AG57+FCstF
- ZxzxT24qkJmsD+5azWaJcF5+gqs8wqXHsN4D/vTEPXsmlO926vdgFK2c5n1N5MXdtFrS
- nMrje5oQgXhhi+4AEaYkatuF/rHwhIAG+9O7esfiEe92swSwikzITRYNc3jGxtmeX3fm
- d0JIBz+TCZ/EejxIrIz6i7P7oVlVKj/OH1ssfiBncqvX4tYGmw50aeQZGp5GGz16srbT
- HKDt5K8GrKBV1BXIITsWhzKAvGFf0HQU6JAeWWhqZnI+Jlio80UGBAc0u+0b3n54fAg8
- gXqQ==
+ bh=zwzFyyvJC39ZPVbt9izsra+Ht73D68ICAZtqoph7Sq0=;
+ b=XJgt7fsdMi0vlHHuMCFrty2zBktt0yMlYDK6fbCTxeUu9jC9pHzenixepgEIP462kB
+ 7K79WPKntM9d9TnzEFQLex0LNVWePow3ndjWaVTJcnuSQgodPdLdU5uSTvEy53T2dabw
+ dwvSaqNiaQPx3VvUhBAKGOIDJhafSQvYeadtg9pvDJ357xyoNTwIUrZ9H57Wypku0G5V
+ YHZGoXiMgiU24GLsJpfj5M86XkG2tgVGCaHTnn9nCyZHIqe74rPms33+AZYH13X+Dg1f
+ w+mlby0cPxFr/M6pVeioV/YENGh4M6z6JaqcT1pvauUHdfAHsWcd7fdpSXtZaQJ7zN+w
+ cCWg==
 X-Forwarded-Encrypted: i=1;
- AKwUvByDFYOM0cSD0eA5TAsvnBsjpEmHIxSiPW/y9kcLrVn2ZoQ6aFYCgKxjhpxTyz8QHQwV06Oj+iK2fjQJ@nongnu.org
-X-Gm-Message-State: AFuF++nPsWS39mx4HZOcztj3B2NrVyZRkx5XFI4L2fy6+1L5bAWebpC8
- 4gKnHnmK2CB8BtSbps27cgxO5hvY9AA4s9aNPFjm2NFmhek3GImv/3C7wGdTUvLHh7j66Pro8X4
- DOxqkVyHa4/7eDaudE4RlOQ7DdF0W8WOhNlpf4035c08VLUAFYIzp19JdJ+VW4xnRTA==
-X-Gm-Gg: AYBFou2QwM7JziBAkdRJ/t+/fNQiYeNhqsBM/ldZu1X3lrPuRcKKoXxCF8p9sqSCEvl
- iNSRnGALewAj07+DeNlVRf5l6kPvizjZMGFgQ7I/8d4yBVmmMrSD1gFFGUA62Bih1GMBbTB9F+2
- jUoYKbyuOqEBByTrb7+mD9dDdoiWioJfTizbjXH+IYuNtjxtjJL/z9mNcSj+qTVJyt48Lm1Xhrp
- zVArH4BQwHT/i3OT9fJVjvgOxb7tqII9+SQW4Qy2BrOORypER+wfh+Y6VOBxYDf3hd/0d20XOJP
- 7P3iGzZjKA8mUWxXF3CklZnztyaCE8F+uvTi5H38Tzw0e29rG8KO+hVGGtJs3KkOftwlUY8d0Nj
- gVaksfMRKVNtcgCegT7daTWRp8VlwTOuHWRfvEg==
-X-Received: by 2002:ac8:5a16:0:b0:532:9ade:b6d9 with SMTP id
- d75a77b69052e-5329adec539mr2757371cf.66.1789649772274; 
- Thu, 17 Sep 2026 05:56:12 -0700 (PDT)
-X-Received: by 2002:ac8:5a16:0:b0:532:9ade:b6d9 with SMTP id
- d75a77b69052e-5329adec539mr2756891cf.66.1789649771674; 
- Thu, 17 Sep 2026 05:56:11 -0700 (PDT)
-Received: from [192.168.68.102] ([189.110.107.170])
- by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-5326208ea78sm51190681cf.24.2026.09.17.05.56.07
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 17 Sep 2026 05:56:10 -0700 (PDT)
-Message-ID: <355f95fc-9957-40b6-a7b2-bfdbd049a797@oss.qualcomm.com>
-Date: Thu, 17 Sep 2026 09:56:05 -0300
+ AKwUvByZwU/FGuBYJ1L0je/uAgizo3kSiF2Bkg06kAAukNPVq7lZVJGRcSOR7tg3ENlhnLHjuQQ9LD4rmX+F@nongnu.org
+X-Gm-Message-State: AFuF++kfujXaYKxOFFwNut0VTHcPXUavIUVMBL+OhTOREKLpHSGEj3h+
+ 43uonXqlOgzRr6Yku2+emc8Sa3q2+7Qx0qUWb06vDpqr3txfCHvwWZwfnHD6MYAF78ck3NE3jZK
+ fO5Jf
+X-Gm-Gg: AYBFou2DD8i9avJD7oEXdBlKXyEURR4RRv3w8tNZWvPju47FQUxOGssVH5ralJHFGxt
+ dQNB40AAQyESORQFu0t0ZbpcP5riFAn32TijVHcE96rwm+w2mT9fbWlzNzT0s+BGK1z/+lr+4hR
+ CfjEk24MLxiF5A6eejUb2iXxCO2vpkEGyqSMMQ3w2tY8UpRjxOuPQDFuQNYx5J0SEbNI5KfMkN3
+ 5cbQitVLA/5LkCzkwvsna3xzVTEbYtF99oy2RYfzuXwJL9ZeDb4uxV1azjkkH5JYYsTeD/Xycri
+ RpmNmS/zpniDZOpNjR937LGeKkH9XWOCBu+6Q0jHHrmhMa67/gK8f1jOvmrULCu0w/TDqxCPH9v
+ J6LVOkplKl3ylbamLxPmdV1BQpDO3B5vWykPpGM44XZlaBUDRwefwdr+icMzuFBa8n1bh4eLdts
+ z8vi0d4Gxmb/eUXf6Lw0VqSFvmR8L/HmEuJxReooMc2LRpBMLW2i/Jq+sbE5Y1jdJyHaNf5zk04
+ dwCPltJyFLC3cmWAn9NVchRMvsoLzOK00z/Aecv0LTflYXGZMz++5pst9MrfbDw6YaidP62C6+1
+ NihLyE6d
+X-Received: by 2002:a17:902:da47:b0:2dd:40cb:a054 with SMTP id
+ d9443c01a7336-2dd8e73f743mr145968945ad.19.1789652283172; 
+ Thu, 17 Sep 2026 06:38:03 -0700 (PDT)
+Received: from duncan.localdomain (114-35-142-126.hinet-ip.hinet.net.
+ [114.35.142.126]) by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2dd89ebe71bsm26539585ad.40.2026.09.17.06.38.01
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 17 Sep 2026 06:38:02 -0700 (PDT)
+From: Max Chou <max.chou@sifive.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Max Chou <max.chou@sifive.com>, Joel Stanley <joel@jms.id.au>
+Subject: [PATCH v2] tcg/riscv64: Set vtype before whole-register vector moves
+Date: Thu, 17 Sep 2026 21:37:55 +0800
+Message-ID: <20260917133755.1049697-1-max.chou@sifive.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 08/15] hw/riscv/virt.c: fix aclint soc/mtimer nodename
-To: Chao Liu <chao.liu@processmission.com>
-Cc: Michael Tokarev <mjt@tls.msk.ru>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, qemu-stable@nongnu.org,
- Palmer Dabbelt <palmer@dabbelt.com>
-References: <20260828203918.350131-1-daniel.barboza@oss.qualcomm.com>
- <20260828203918.350131-9-daniel.barboza@oss.qualcomm.com>
- <725cf200-8a28-4fc9-8d96-4d705213505d@tls.msk.ru>
- <8594dca6-0af0-41a1-878b-1e7847b5f043@oss.qualcomm.com>
- <aqt_QMsRDWG7ojXk@MacBook-Pro-4.local>
-From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Content-Language: en-US
-In-Reply-To: <aqt_QMsRDWG7ojXk@MacBook-Pro-4.local>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE3MDE4MSBTYWx0ZWRfXyFMuFKNkOUiN
- /H5vz99eqJhoWIayAJQ6htCT+jRU8B1lcJt9TxQrOgWivGHC0nZbrRziaSrg3zFwaV8Ljxd5/W3
- Er/mk42O5mSPKgBhIxDPHThTvz6xcyHxTW/Bnu/LfSU8l95d7OAB7XrNABzl7gb/Vqw+A8vqxfl
- N2YpPMzwiHyQSFgp5JNlK5udolnN6E0TYdih3/OJwzue4pExzIrflQLjUL8DlBi5/+HPheTRNNz
- cV00nDNvITF5YoUdh6oR8l9zhuD3BHqhcAMqdUVDNxUsX86u4dy+VMQGvoHZEZhPazk3+/sRC1z
- k7cF33QvVqnXDhBe4ErYwJmrQEu8zeUYRNfoPeCpQQXbX0olbi9G5zDOpVHk8eIxVQYs5NTlPMP
- Tkc0NeaI6S5WC3XzwgWutP5C0oOfohngnF4/12gwly1ctw3luZdn3OgZXnG5lBUZW+v+aYPeAPB
- TCklaz3R6axAEWQr/fg==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE3MDE4MSBTYWx0ZWRfX7vcSVfRiOwbn
- 3sl0UD/C6/bHIssE6bxq9p18EOp3DfawPKSGB+jNRLO+1Rp7J9Fz2JFdF9xFRoPE57+4I/Wg1th
- XiDxDuLUy35Y/zuurHnblgnuoA34OHY=
-X-Proofpoint-GUID: 8F_8279srNOJsv38yWuNLmlb2TbqUS4P
-X-Proofpoint-ORIG-GUID: 8F_8279srNOJsv38yWuNLmlb2TbqUS4P
-X-Authority-Analysis: v=2.4 cv=EsZHPicA c=1 sm=1 tr=0 ts=6aabe36d cx=c_pps
- a=mPf7EqFMSY9/WdsSgAYMbA==:117 a=arNgJ3JLhM/z8Vk/iMOFgQ==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
- a=VwQbUJbxAAAA:8 a=69wJf7TsAAAA:8 a=FRSEYCzRAAAA:8 a=EUspDBNiAAAA:8
- a=gek8CpJ8HlS4fbe9-CoA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=dawVfQjAaf238kedN5IG:22 a=Fg1AiH1G6rFz08G2ETeA:22 a=H4N_Y-AU75W7NKDNhZlT:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-17_02,2026-09-16_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 suspectscore=0 bulkscore=0 lowpriorityscore=0 spamscore=0
- malwarescore=0 adultscore=0 priorityscore=1501 impostorscore=0 phishscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609170181
-Received-SPF: pass client-ip=205.220.180.131;
- envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
+Received-SPF: pass client-ip=2607:f8b0:4864:39::11;
+ envelope-from=max.chou@sifive.com; helo=mail-pj2-x11.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -161,138 +105,39 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+According to the RISC-V unpriviledge spec,
+  "vset{i}vl{i} and whole register loads and stores do not depend upon
+   vtype."
+The whole-register vector move instructions reuqire legal vtype that
+trap when VILL is set.
 
+The tcg_out_mov in tcg/riscv64 missed the vtype setup before emitting the
+OPC_VMVNR_V.
 
-On 9/17/2026 2:58 AM, Chao Liu wrote:
-> On Wed, Sep 16, 2026 at 02:10:38PM +0800, Daniel Henrique Barboza wrote:
->> Hi Michael!
->>
->> On 9/16/2026 3:35 AM, Michael Tokarev wrote:
->>> On 8/28/26 23:39, Daniel Henrique Barboza wrote:
->>>> Running 'dtc' to generate a readable fdt for the virt machine produce
->>>> warnings:
->>>>
->>>>    $ dtc -I dtb -O dts virt.dtb > virt.dts
->>>> <stdout>: Warning (simple_bus_reg): /soc/mtimer@2000000: simple-bus unit address format error, expected "2007ff8"
->>>> <stdout>: Warning (simple_bus_reg): /soc/mtimer@2008000: simple-bus unit address format error, expected "200fff8"
->>>>
->>>> This happens because the 'reg' field does not match the address in the
->>>> nodename.  The right fix, pointed out by Chao in [1], is to make the
->>>> nodename match the reg value:
->>>>
->>>> "In the current QEMU implement, `addr` is the MTIMECMP base address,
->>>> while the MTIME register is located at addr + RISCV_ACLINT_DEFAULT_MTIME."
->>>>
->>>> In other words, the 'reg' value is correct but the nodename isn't.
->>>>
->>>> We'll make the fix now, allowing the next patch to move the fixed version
->>>> of aclint FDT to fdt-common.
->>>>
->>>> [1] https://lore.kernel.org/qemu-devel/apHH1upnh8udUUT-@ChaodeMacBook-Pro.local/
->>>>
->>>> Cc: qemu-stable@nongnu.org
->>>> Suggested-by: Chao Liu <chao.liu@processmission.com>
->>>> Fixes: 954886ea6d ("hw/riscv: virt: Add optional ACLINT support to virt machine")
->>>> Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
->>>> ---
->>>>    hw/riscv/virt.c | 3 ++-
->>>>    1 file changed, 2 insertions(+), 1 deletion(-)
->>>
->>> This patch is Cc'd to qemu-stable, but there's an interesting rebase twist here,
->>> it looks like.  This is commit v11.1.0-1035-g9d6ac47d318 in the master branch.
->>>
->>>> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
->>>> index a6ec9def16..83a4b7710d 100644
->>>> --- a/hw/riscv/virt.c
->>>> +++ b/hw/riscv/virt.c
->>>> @@ -234,7 +234,8 @@ static void create_fdt_socket_aclint(RISCVVirtState *s,
->>>>                   (s->memmap[VIRT_CLINT].size * socket);
->>>>            size = s->memmap[VIRT_CLINT].size - RISCV_ACLINT_SWI_SIZE;
->>>>        }
->>>> -    name = g_strdup_printf("/soc/mtimer@%lx", addr);
->>>> +    name = g_strdup_printf("/soc/mtimer@%"HWADDR_PRIx,
->>>> +                           addr + RISCV_ACLINT_DEFAULT_MTIME);
->>>
->>> Before this commit, `add` variable is declared in this function as
->>> unsigned long.  So this particular change is wrong, because now the
->>> format string does not match its argument:
->>>
->>> ../hw/riscv/virt.c: In function 'create_fdt_socket_aclint':
->>> ../hw/riscv/virt.c:408:28: error: format '%llx' expects argument of type 'long long unsigned int', but argument 2 has type 'long unsigned int' [-Werror=format=]
->>>     408 |     name = g_strdup_printf("/soc/mtimer@%"HWADDR_PRIx,
->>>         |                            ^~~~~~~~~~~~~~~
->>>     409 |                            addr + RISCV_ACLINT_DEFAULT_MTIME);
->>>         |                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
->>>         |                                 |
->>>         |                                 long unsigned int
->>> In file included from ../include/qemu/osdep.h:118,
->>>                    from ../hw/riscv/virt.c:21:
->>> /usr/x86_64-w64-mingw32/sys-root/mingw/include/inttypes.h:38:19: note: format string is defined here
->>>      38 | #define PRIx64 "llx"
->>>
->>> However, the very next commit, v11.1.0-1036-ge6ea6bec5a3
->>> "hw/riscv/fdt-common, virt.c: add riscv_create_fdt_socket_aclint()",
->>> moves this whole function to another file, *and* changes the type of
->>> `addr` variable to hwaddr.  So now, everything fits.
->>>
->>> But this single patch alone does not work.
->>>
->>> Note also there's no mentions of this type change anywhere.
->>>
->>> So, what was the actual issue ere?
->>>
->>> I'm dropping this patch from the stable series for now, it is definitely
->>> wrong.
->>
->> It is ok to drop this.  This is a FDT issue that has been around for several
->> years at this point and no one noticed.
->>
->> In case you want to port it anyway the right fix would be this:
->>
->>
->> name = g_strdup_printf("/soc/mtimer@%lx", addr + RISCV_ACLINT_DEFAULT_MTIME);
->>
->>
->> This would fix the FDT nodename without messing with the format string.
->>
->>
->>>
->>> It is also interesting that only win64 build of qemu detected this, all
->>> other went just fine.
->>
->> Yep, this went unnoticed on my end since it didn't break on Linux during my
->> testing ...
->>
-> I also run into build failures somtimes. Just share my idea, QEMU's gitlab CI
-> is very useful! But be careful when choosing the base commit or branch.
+Fixes: d4be6ee1111 ("tcg/riscv: Implement vector mov/dup{m/i}")
+Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Reviewed-by: Joel Stanley <joel@jms.id.au>
+Signed-off-by: Max Chou <max.chou@sifive.com>
+---
+ tcg/riscv64/tcg-target.c.inc | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-I usually run Gitlab CI before submitting big series like this.  The thing here is
-that we would need to do a full Gitlab CI run for every single patch to catch
-something like this - it was a particular Windows runner that complained about it,
-and just with this patch standalone (applying patch 9 fixes the issue for it).
-
-The silver lining here is that it's only a single Windows runner, so hopefully the
-overall impact when bisecting code is contained.
-
-
-Thanks,
-Daniel
-
-
-
-> 
-> If you just use the latest master branch, CI may fail..
-> 
-> Thanks,
-> Chao
->>
->> Cheers,
->> Daniel
->>
->>>
->>> Thanks,
->>>
->>> /mjt
->>
+diff --git a/tcg/riscv64/tcg-target.c.inc b/tcg/riscv64/tcg-target.c.inc
+index 2ce9d47a633..e3cfedb579d 100644
+--- a/tcg/riscv64/tcg-target.c.inc
++++ b/tcg/riscv64/tcg-target.c.inc
+@@ -778,6 +778,10 @@ static bool tcg_out_mov(TCGContext *s, TCGType type, TCGReg ret, TCGReg arg)
+         {
+             int lmul = type - riscv_lg2_vlenb;
+             int nf = 1 << MAX(lmul, 0);
++
++            if (s->riscv_cur_type == TCG_TYPE_COUNT) {
++                set_vtype_len(s, type);
++            }
+             tcg_out_opc_vi(s, OPC_VMVNR_V, ret, arg, nf - 1);
+         }
+         break;
+-- 
+2.43.0
 
 
