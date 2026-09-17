@@ -4,37 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 683CBC982D0
-	for <qemu-riscv@archiver.kernel.org>; Thu, 17 Sep 2026 22:00:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 752C2C982D2
+	for <qemu-riscv@archiver.kernel.org>; Thu, 17 Sep 2026 22:01:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x7K9d-00044f-Tj; Thu, 17 Sep 2026 18:00:29 -0400
+	id 1x7KA1-0004DB-1i; Thu, 17 Sep 2026 18:00:55 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <anjo@rev.ng>)
- id 1x7K9J-0003yZ-6s; Thu, 17 Sep 2026 18:00:09 -0400
+ id 1x7K9N-00045T-Mg; Thu, 17 Sep 2026 18:00:27 -0400
 Received: from rev.ng ([94.130.142.21])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <anjo@rev.ng>)
- id 1x7K9G-0004J4-TJ; Thu, 17 Sep 2026 18:00:08 -0400
+ id 1x7K9L-0004Kt-C7; Thu, 17 Sep 2026 18:00:13 -0400
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=rev.ng;
  s=dkim; h=Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:
  Content-Type:MIME-Version:Subject:Date:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive:List-Unsubscribe:List-Unsubscribe-Post:
- List-Help; bh=hHlTPVKBpcV70GoIK5oq1wvEu2STKnhlvWYVKvr1ZZc=; b=J7Pw8N/lQDNGPX5
- xKN/Ks+GX/TNY4aDecFwbYFY30ZZoMhQc3VaLc7N/kJZUNmipkscgi5efY5/s6IkQdfA2yiR2cKs3
- tvjcsK3rAmcVkmQNRyBT5GzxP/04ao2Fdb/TQyt1ycLoEN5l16fWMkKk6oRNcXIbjRyjivSWgNbze
- HU=;
-Date: Fri, 18 Sep 2026 00:04:57 +0200
-Subject: [PATCH v5 03/11] target/riscv: Replace TARGET_LONG_BITS in header
- exposed to common code
+ List-Help; bh=X0coV+oi3hvoEbKAiwh+e4SUhuLgaoL2aJO66pAXpEo=; b=I9CXymp5pFXjXOV
+ Z7ryk/lehJ81WbAeJwcExePPWfG56L6qH3IWrNEowkoP5PLXGiq2vscXjFS7I+zNRaSplFrZt2l70
+ dc5Pygan3Vv52X11H8fLpzU33X1UPosq5LL2u5HYhfFkR9JzkqBL1zMrM4tTNvqpQID9mk5qDtkyh
+ ec=;
+Date: Fri, 18 Sep 2026 00:05:03 +0200
+Subject: [PATCH v5 09/11] target-info: Introduce target_riscv32
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260918-hw-riscv-cpu-int-v5-3-f98c5a244636@rev.ng>
+Message-Id: <20260918-hw-riscv-cpu-int-v5-9-f98c5a244636@rev.ng>
 References: <20260918-hw-riscv-cpu-int-v5-0-f98c5a244636@rev.ng>
 In-Reply-To: <20260918-hw-riscv-cpu-int-v5-0-f98c5a244636@rev.ng>
 To: qemu-devel@nongnu.org
@@ -42,11 +41,11 @@ Cc: Anton Johansson <anjo@rev.ng>, qemu-riscv@nongnu.org,
  daniel.barboza@oss.qualcomm.com, philmd@oss.qualcomm.com, 
  pierrick.bouvier@oss.qualcomm.com, palmer@dabbelt.com, 
  alistair.francis@wdc.com
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1789682743; l=4286;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1789682744; l=1209;
  i=anjo@rev.ng; s=20260210; h=from:subject:message-id;
- bh=7tERnw+SXhf71aJjBnCLDRIC3GDPPki6F9zqTdNAZ24=;
- b=a2jmHSArrYWc2TwJuj0NT31Xs8VHzHwh7Ykq/BI5/mXbx5sETW+bNLxv3RpCBSX4IVzYma21N
- F9ddWyFl0pDBYi9kO3EGi0/1lj85aGgNYjhahs30u188w5K8Crv1GEm
+ bh=7XxnFUSw4Is9LNbqT940ttli+604jlutDoDE238ejgI=;
+ b=xgmERrU1cPIloEDkD5qymm4yWg1/Kjwgc56D/ucdC34PFZyNopIuO+elEyYb4gcE7JrhylQij
+ 94aU8KZcsQxCQ+cl3zQfp/VqC7cJFUaOUnYR9vt/RNFsP6NdobhBAYO
 X-Developer-Key: i=anjo@rev.ng; a=ed25519;
  pk=dKsZvj/g3kgDxnV1/SWg8a0YNGSpWtFGNsWIepQYKow=
 Received-SPF: pass client-ip=94.130.142.21; envelope-from=anjo@rev.ng;
@@ -74,118 +73,50 @@ From:  Anton Johansson via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-IRQ_LOCAL_GUEST_MAX depends on TARGET_LONG_BITS and is used in
-hw/intc/riscv_imsic.c.  The macro is replaced by a field in RISCVCPUDef
-initialized in riscv_cpu_class_base_init().
+Will be used in the following commit to filter machines using
+TypeInfo::is_available, so a simple !target_riscv64() is not sufficient.
 
 Reviewed-by: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
 Signed-off-by: Anton Johansson <anjo@rev.ng>
 ---
- target/riscv/cpu.h      |  5 ++++-
- target/riscv/cpu_bits.h |  2 --
- hw/intc/riscv_imsic.c   |  4 +++-
- target/riscv/cpu.c      | 16 ++++++++++++++--
- 4 files changed, 21 insertions(+), 6 deletions(-)
+ include/qemu/target-info.h | 7 +++++++
+ target-info.c              | 5 +++++
+ 2 files changed, 12 insertions(+)
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index e2e0547eef..a820ec2f6e 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -589,8 +589,11 @@ typedef struct RISCVCPUDef {
-     int32_t vext_spec;
-     RISCVCPUConfig cfg;
-     bool bare;
--#if defined(CONFIG_TCG) && !defined(CONFIG_USER_ONLY)
-+#if !defined(CONFIG_USER_ONLY)
-+#if defined(CONFIG_TCG)
-     const RISCVCSR *custom_csrs;
-+#endif
-+    uint8_t irq_local_guest_max;
- #endif
-     /* This is just a setter for env->num_triggers.  */
-     uint32_t num_triggers;
-diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index c01050ce2b..9c499e33f2 100644
---- a/target/riscv/cpu_bits.h
-+++ b/target/riscv/cpu_bits.h
-@@ -811,8 +811,6 @@ typedef enum RISCVException {
- #define IRQ_S_GEXT                         12
- #define IRQ_PMU_OVF                        13
- #define IRQ_LOCAL_MAX                      64
--/* -1 is due to bit zero of hgeip and hgeie being ROZ. */
--#define IRQ_LOCAL_GUEST_MAX                (TARGET_LONG_BITS - 1)
+diff --git a/include/qemu/target-info.h b/include/qemu/target-info.h
+index b23e5bc586..c09e5d2a3e 100644
+--- a/include/qemu/target-info.h
++++ b/include/qemu/target-info.h
+@@ -91,6 +91,13 @@ bool target_ppc64(void);
+  */
+ bool target_s390x(void);
  
- /* RNMI causes */
- #define RNMI_MAX                           16
-diff --git a/hw/intc/riscv_imsic.c b/hw/intc/riscv_imsic.c
-index cb9ce9612c..bf0434e96f 100644
---- a/hw/intc/riscv_imsic.c
-+++ b/hw/intc/riscv_imsic.c
-@@ -501,13 +501,15 @@ DeviceState *riscv_imsic_create(MemoryRegion *container, hwaddr addr,
- {
-     DeviceState *dev = qdev_new(TYPE_RISCV_IMSIC);
-     CPUState *cpu = cpu_by_arch_id(hartid);
-+    RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(RISCV_CPU(cpu));
-     uint32_t i;
- 
-     assert(!(addr & (IMSIC_MMIO_PAGE_SZ - 1)));
-     if (mmode) {
-         assert(num_pages == 1);
-     } else {
--        assert(num_pages >= 1 && num_pages <= (IRQ_LOCAL_GUEST_MAX + 1));
-+        assert(num_pages >= 1 &&
-+               num_pages <= (mcc->def->irq_local_guest_max + 1));
-     }
-     assert(IMSIC_MIN_ID <= num_ids);
-     assert(num_ids <= IMSIC_MAX_ID);
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 5fff9d745e..4f58e91b62 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -1416,6 +1416,7 @@ void riscv_add_satp_mode_properties(Object *obj)
- 
- static void riscv_cpu_set_irq(void *opaque, int irq, int level)
- {
-+    RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(opaque);
-     RISCVCPU *cpu = RISCV_CPU(opaque);
-     CPURISCVState *env = &cpu->env;
- 
-@@ -1454,7 +1455,7 @@ static void riscv_cpu_set_irq(void *opaque, int irq, int level)
-         default:
-             g_assert_not_reached();
-         }
--    } else if (irq < (IRQ_LOCAL_MAX + IRQ_LOCAL_GUEST_MAX)) {
-+    } else if (irq < (IRQ_LOCAL_MAX + mcc->def->irq_local_guest_max)) {
-         /* Require H-extension for handling guest local interrupts */
-         if (!riscv_has_ext(env, RVH)) {
-             g_assert_not_reached();
-@@ -1501,7 +1502,7 @@ static void riscv_cpu_init(Object *obj)
- 
- #ifndef CONFIG_USER_ONLY
-     qdev_init_gpio_in(DEVICE(obj), riscv_cpu_set_irq,
--                      IRQ_LOCAL_MAX + IRQ_LOCAL_GUEST_MAX);
-+                      IRQ_LOCAL_MAX + mcc->def->irq_local_guest_max);
-     if (mcc->def->num_triggers) {
-         env->num_triggers = mcc->def->num_triggers;
-     }
-@@ -3092,6 +3093,17 @@ static void riscv_cpu_class_base_init(ObjectClass *c, const void *data)
-         mcc->def = g_new0(RISCVCPUDef, 1);
-     }
- 
-+#ifndef CONFIG_USER_ONLY
-+    /*
-+     * RISCVCPUDef::irq_local_guest_max is initialized to
-+     * `target_long_bits()-1` due to bit zero of hgeip and hgeie
-+     * being ROZ.
-+     *
-+     * This value does not vary between CPU types.
-+     */
-+    mcc->def->irq_local_guest_max = target_long_bits() - 1;
-+#endif
++/**
++ * target_riscv32:
++ *
++ * Returns whether the target architecture is riscv32
++ */
++bool target_riscv32(void);
 +
-     if (data) {
-         const RISCVCPUDef *def = data;
-         mcc->def->bare |= def->bare;
+ /**
+  * target_riscv64:
+  *
+diff --git a/target-info.c b/target-info.c
+index 012b384036..bba4503151 100644
+--- a/target-info.c
++++ b/target-info.c
+@@ -89,6 +89,11 @@ bool target_s390x(void)
+     return target_arch() == SYS_EMU_TARGET_S390X;
+ }
+ 
++bool target_riscv32(void)
++{
++    return target_arch() == SYS_EMU_TARGET_RISCV32;
++}
++
+ bool target_riscv64(void)
+ {
+     return target_arch() == SYS_EMU_TARGET_RISCV64;
 
 -- 
 2.52.0
