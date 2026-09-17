@@ -4,92 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 087DEC982CF
-	for <qemu-riscv@archiver.kernel.org>; Thu, 17 Sep 2026 13:39:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43590C88E72
+	for <qemu-riscv@archiver.kernel.org>; Thu, 17 Sep 2026 15:08:42 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x7CJj-0003CT-TH; Thu, 17 Sep 2026 09:38:24 -0400
+	id 1x7Din-0001u5-Mj; Thu, 17 Sep 2026 11:08:23 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1x7CJT-0003BV-N8
- for qemu-riscv@nongnu.org; Thu, 17 Sep 2026 09:38:11 -0400
-Received: from mail-pj2-x11.google.com ([2607:f8b0:4864:39::11])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1x7CJR-00044Y-H9
- for qemu-riscv@nongnu.org; Thu, 17 Sep 2026 09:38:07 -0400
-Received: by mail-pj2-x11.google.com with SMTP id
- d9443c01a7336-2d747f05ffdso6705095ad.1
- for <qemu-riscv@nongnu.org>; Thu, 17 Sep 2026 06:38:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1789652283; x=1790257083; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=zwzFyyvJC39ZPVbt9izsra+Ht73D68ICAZtqoph7Sq0=;
- b=SIzxwZERFxmgivJ11h0m/bsIfTUTjICy6bSxb8xklwDbPUW26qe1ddr/FDaa69srMf
- Y1l1EDJDKZo0UjDUWxSUup9AiZMnx1VeSkZ5ZOzx7LznK5nX5f9rj9NYCVLmkrhJZWbi
- w4fw29gB0YRx40cypN0N2EwoNQyl/Q9+vZkDdUVmzFYIFDWCl8/3M1a/xxx/LViGVnB2
- DuV9OQ3F2el62k0+p6xfbW1f1JMPPXDgOc/TdPs24D6H5JZ02ETKdZe2KVZ48SqRBX5Q
- zDeiYgHq9mZEOEbPQzJ5x/c8pZRiF85hiAm8G1g9ep1bOX5B4bT4WTebnM48h++1U1tY
- cBaw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1789652283; x=1790257083;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=zwzFyyvJC39ZPVbt9izsra+Ht73D68ICAZtqoph7Sq0=;
- b=XJgt7fsdMi0vlHHuMCFrty2zBktt0yMlYDK6fbCTxeUu9jC9pHzenixepgEIP462kB
- 7K79WPKntM9d9TnzEFQLex0LNVWePow3ndjWaVTJcnuSQgodPdLdU5uSTvEy53T2dabw
- dwvSaqNiaQPx3VvUhBAKGOIDJhafSQvYeadtg9pvDJ357xyoNTwIUrZ9H57Wypku0G5V
- YHZGoXiMgiU24GLsJpfj5M86XkG2tgVGCaHTnn9nCyZHIqe74rPms33+AZYH13X+Dg1f
- w+mlby0cPxFr/M6pVeioV/YENGh4M6z6JaqcT1pvauUHdfAHsWcd7fdpSXtZaQJ7zN+w
- cCWg==
-X-Forwarded-Encrypted: i=1;
- AKwUvByZwU/FGuBYJ1L0je/uAgizo3kSiF2Bkg06kAAukNPVq7lZVJGRcSOR7tg3ENlhnLHjuQQ9LD4rmX+F@nongnu.org
-X-Gm-Message-State: AFuF++kfujXaYKxOFFwNut0VTHcPXUavIUVMBL+OhTOREKLpHSGEj3h+
- 43uonXqlOgzRr6Yku2+emc8Sa3q2+7Qx0qUWb06vDpqr3txfCHvwWZwfnHD6MYAF78ck3NE3jZK
- fO5Jf
-X-Gm-Gg: AYBFou2DD8i9avJD7oEXdBlKXyEURR4RRv3w8tNZWvPju47FQUxOGssVH5ralJHFGxt
- dQNB40AAQyESORQFu0t0ZbpcP5riFAn32TijVHcE96rwm+w2mT9fbWlzNzT0s+BGK1z/+lr+4hR
- CfjEk24MLxiF5A6eejUb2iXxCO2vpkEGyqSMMQ3w2tY8UpRjxOuPQDFuQNYx5J0SEbNI5KfMkN3
- 5cbQitVLA/5LkCzkwvsna3xzVTEbYtF99oy2RYfzuXwJL9ZeDb4uxV1azjkkH5JYYsTeD/Xycri
- RpmNmS/zpniDZOpNjR937LGeKkH9XWOCBu+6Q0jHHrmhMa67/gK8f1jOvmrULCu0w/TDqxCPH9v
- J6LVOkplKl3ylbamLxPmdV1BQpDO3B5vWykPpGM44XZlaBUDRwefwdr+icMzuFBa8n1bh4eLdts
- z8vi0d4Gxmb/eUXf6Lw0VqSFvmR8L/HmEuJxReooMc2LRpBMLW2i/Jq+sbE5Y1jdJyHaNf5zk04
- dwCPltJyFLC3cmWAn9NVchRMvsoLzOK00z/Aecv0LTflYXGZMz++5pst9MrfbDw6YaidP62C6+1
- NihLyE6d
-X-Received: by 2002:a17:902:da47:b0:2dd:40cb:a054 with SMTP id
- d9443c01a7336-2dd8e73f743mr145968945ad.19.1789652283172; 
- Thu, 17 Sep 2026 06:38:03 -0700 (PDT)
-Received: from duncan.localdomain (114-35-142-126.hinet-ip.hinet.net.
- [114.35.142.126]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2dd89ebe71bsm26539585ad.40.2026.09.17.06.38.01
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 17 Sep 2026 06:38:02 -0700 (PDT)
-From: Max Chou <max.chou@sifive.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Max Chou <max.chou@sifive.com>, Joel Stanley <joel@jms.id.au>
-Subject: [PATCH v2] tcg/riscv64: Set vtype before whole-register vector moves
-Date: Thu, 17 Sep 2026 21:37:55 +0800
-Message-ID: <20260917133755.1049697-1-max.chou@sifive.com>
-X-Mailer: git-send-email 2.43.0
+ (Exim 4.90_1) (envelope-from <anjo@rev.ng>)
+ id 1x7Dih-0001tU-6x; Thu, 17 Sep 2026 11:08:15 -0400
+Received: from rev.ng ([94.130.142.21])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <anjo@rev.ng>)
+ id 1x7Dif-0008Oh-4c; Thu, 17 Sep 2026 11:08:14 -0400
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=rev.ng;
+ s=dkim; h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject
+ :Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive:List-Unsubscribe:List-Unsubscribe-Post:
+ List-Help; bh=xeY90yYXCyV+tfZgTInv2vgxn0qcluL7JSw3wAYZHPE=; b=w8qCGbkaatCIFb3
+ al4sEproQ91gcUoCx8wI6pzmXgcM4lbqI89jlUiF0vQG4OS5Mk+r0CLuae3KRWM0VGJ3TmJLUtOAP
+ tjpGFTf1OyzB0xW/XIe55iUFJDjCbiJdVzdwU6+gG6bLCZ+NxanVhpiciL24RecMjEXcGxB6/82V+
+ C4=;
+Date: Thu, 17 Sep 2026 17:13:36 +0200
+To: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ daniel.barboza@oss.qualcomm.com, philmd@oss.qualcomm.com, palmer@dabbelt.com, 
+ alistair.francis@wdc.com
+Subject: Re: [PATCH v4 09/12] hw: Add availfn arg to DEFINE_MACHINE_EXTENDED()
+Message-ID: <aqwDX2AySxBGf7VE@hive.localdomain>
+References: <20260916-hw-riscv-cpu-int-v4-0-babc367b60f5@rev.ng>
+ <20260916-hw-riscv-cpu-int-v4-9-babc367b60f5@rev.ng>
+ <22c1ad3a-c5ed-4ab0-be1f-c5b043bd67e5@oss.qualcomm.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:39::11;
- envelope-from=max.chou@sifive.com; helo=mail-pj2-x11.google.com
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <22c1ad3a-c5ed-4ab0-be1f-c5b043bd67e5@oss.qualcomm.com>
+Received-SPF: pass client-ip=94.130.142.21; envelope-from=anjo@rev.ng;
+ helo=rev.ng
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -102,42 +62,160 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
+Reply-to:  Anton Johansson <anjo@rev.ng>
+From:  Anton Johansson via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-According to the RISC-V unpriviledge spec,
-  "vset{i}vl{i} and whole register loads and stores do not depend upon
-   vtype."
-The whole-register vector move instructions reuqire legal vtype that
-trap when VILL is set.
+On 16/09/26, Pierrick Bouvier wrote:
+> On 9/16/2026 2:19 AM, Anton Johansson wrote:
+> > Allows specifying is_available when defining machines using convenience
+> > macros.  Also introduces DEFINE_MACHINE_WITH_GUARD() replacing
+> > DEFINE_MACHINE() for machines that need to specify is_available.
+> > 
+> > Signed-off-by: Anton Johansson <anjo@rev.ng>
+> > ---
+> >  include/hw/core/boards.h | 11 ++++++++---
+> >  hw/arm/bananapi_m2u.c    |  2 +-
+> >  hw/arm/cubieboard.c      |  2 +-
+> >  hw/arm/imx8mm-evk.c      |  2 +-
+> >  hw/arm/integratorcp.c    |  2 +-
+> >  hw/arm/mcimx7d-sabre.c   |  2 +-
+> >  hw/arm/orangepi.c        |  2 +-
+> >  hw/ppc/pegasos.c         |  3 ++-
+> >  8 files changed, 16 insertions(+), 10 deletions(-)
+> > 
+> > diff --git a/include/hw/core/boards.h b/include/hw/core/boards.h
+> > index dba465efc2..8c35516622 100644
+> > --- a/include/hw/core/boards.h
+> > +++ b/include/hw/core/boards.h
+> > @@ -514,7 +514,7 @@ struct MachineState {
+> >   */
+> >  
+> >  #define DEFINE_MACHINE_EXTENDED(namestr, PARENT_NAME, InstanceName, \
+> > -                                machine_initfn, ABSTRACT, ifaces...) \
+> > +                                machine_initfn, ABSTRACT, availfn, ifaces...) \
+> >      static void machine_initfn##_class_init(ObjectClass *oc, const void *data) \
+> >      { \
+> >          MachineClass *mc = MACHINE_CLASS(oc); \
+> > @@ -526,6 +526,7 @@ struct MachineState {
+> >          .class_init = machine_initfn##_class_init, \
+> >          .instance_size = sizeof(InstanceName), \
+> >          .abstract = ABSTRACT, \
+> > +        .is_available = availfn, \
+> >          .interfaces = ifaces, \
+> >      }; \
+> >      static void machine_initfn##_register_types(void) \
+> > @@ -536,11 +537,15 @@ struct MachineState {
+> >  
+> >  #define DEFINE_MACHINE(namestr, machine_initfn) \
+> >      DEFINE_MACHINE_EXTENDED(namestr, MACHINE, MachineState, machine_initfn, \
+> > -                            false, NULL)
+> > +                            false, NULL, NULL)
+> > +
+> > +#define DEFINE_MACHINE_WITH_GUARD(namestr, machine_initfn, availfn) \
+> > +    DEFINE_MACHINE_EXTENDED(namestr, MACHINE, MachineState, machine_initfn, \
+> > +                            false, availfn, NULL)
+> >  
+> >  #define DEFINE_MACHINE_WITH_INTERFACE_ARRAY(namestr, machine_initfn, ifaces...)\
+> >      DEFINE_MACHINE_EXTENDED(namestr, MACHINE, MachineState, machine_initfn, \
+> > -                            false, ifaces)
+> > +                            false, NULL, ifaces)
+> >  
+> >  #define DEFINE_MACHINE_WITH_INTERFACES(namestr, machine_initfn, ...) \
+> >      DEFINE_MACHINE_WITH_INTERFACE_ARRAY(namestr, machine_initfn, \
+> > diff --git a/hw/arm/bananapi_m2u.c b/hw/arm/bananapi_m2u.c
+> > index 8f59111fd4..7b86986efb 100644
+> > --- a/hw/arm/bananapi_m2u.c
+> > +++ b/hw/arm/bananapi_m2u.c
+> > @@ -153,4 +153,4 @@ static void bpim2u_machine_init(MachineClass *mc)
+> >  }
+> >  
+> >  DEFINE_MACHINE_EXTENDED("bpim2u", MACHINE, Bpim2uMachineState,
+> > -                        bpim2u_machine_init, false, NULL)
+> > +                        bpim2u_machine_init, false, NULL, NULL)
+> > diff --git a/hw/arm/cubieboard.c b/hw/arm/cubieboard.c
+> > index ae27056938..da45bb2be5 100644
+> > --- a/hw/arm/cubieboard.c
+> > +++ b/hw/arm/cubieboard.c
+> > @@ -134,4 +134,4 @@ static void cubieboard_machine_init(MachineClass *mc)
+> >  
+> >  DEFINE_MACHINE_EXTENDED("cubieboard", MACHINE, CubieboardMachineState,
+> >                          cubieboard_machine_init, false,
+> > -                        NULL)
+> > +                        NULL, NULL)
+> > diff --git a/hw/arm/imx8mm-evk.c b/hw/arm/imx8mm-evk.c
+> > index 8a5737502f..68526c0e43 100644
+> > --- a/hw/arm/imx8mm-evk.c
+> > +++ b/hw/arm/imx8mm-evk.c
+> > @@ -135,4 +135,4 @@ static void imx8mm_evk_machine_init(MachineClass *mc)
+> >  
+> >  DEFINE_MACHINE_EXTENDED("imx8mm-evk", MACHINE, Imx8mmEvkMachineState,
+> >                          imx8mm_evk_machine_init, false,
+> > -                        NULL)
+> > +                        NULL, NULL)
+> > diff --git a/hw/arm/integratorcp.c b/hw/arm/integratorcp.c
+> > index 382ea7850d..6314bbb6c1 100644
+> > --- a/hw/arm/integratorcp.c
+> > +++ b/hw/arm/integratorcp.c
+> > @@ -705,7 +705,7 @@ static void integratorcp_machine_init(MachineClass *mc)
+> >  
+> >  DEFINE_MACHINE_EXTENDED("integratorcp", MACHINE, IntegratorcpMachineState,
+> >                          integratorcp_machine_init, false,
+> > -                        NULL)
+> > +                        NULL, NULL)
+> >  
+> >  static const Property core_properties[] = {
+> >      DEFINE_PROP_UINT32("memsz", IntegratorCMState, memsz, 0),
+> > diff --git a/hw/arm/mcimx7d-sabre.c b/hw/arm/mcimx7d-sabre.c
+> > index db8a62e5f6..2c884b5c78 100644
+> > --- a/hw/arm/mcimx7d-sabre.c
+> > +++ b/hw/arm/mcimx7d-sabre.c
+> > @@ -87,4 +87,4 @@ static void mcimx7d_sabre_machine_init(MachineClass *mc)
+> >  
+> >  DEFINE_MACHINE_EXTENDED("mcimx7d-sabre", MACHINE, Mcimx7dSabreMachineState,
+> >                          mcimx7d_sabre_machine_init, false,
+> > -                        NULL)
+> > +                        NULL, NULL)
+> > diff --git a/hw/arm/orangepi.c b/hw/arm/orangepi.c
+> > index 7a19732f5d..87ed2ef4b6 100644
+> > --- a/hw/arm/orangepi.c
+> > +++ b/hw/arm/orangepi.c
+> > @@ -134,4 +134,4 @@ static void orangepi_machine_init(MachineClass *mc)
+> >  
+> >  DEFINE_MACHINE_EXTENDED("orangepi-pc", MACHINE, OrangePiMachineState,
+> >                          orangepi_machine_init, false,
+> > -                        NULL)
+> > +                        NULL, NULL)
+> > diff --git a/hw/ppc/pegasos.c b/hw/ppc/pegasos.c
+> > index 9d7e279123..cbff8bb59d 100644
+> > --- a/hw/ppc/pegasos.c
+> > +++ b/hw/ppc/pegasos.c
+> > @@ -788,7 +788,8 @@ static void pegasos2_machine_class_init(ObjectClass *oc, const void *data)
+> >  }
+> >  
+> >  DEFINE_MACHINE_EXTENDED("pegasos", MACHINE, PegasosMachineState,
+> > -                        pegasos_machine_init, true, (const InterfaceInfo[]) {
+> > +                        pegasos_machine_init, true, NULL,
+> > +                        (const InterfaceInfo[]) {
+> >                          { TYPE_PPC_VIRTUAL_HYPERVISOR },
+> >                          { TYPE_VOF_MACHINE_IF }, { } })
+> >  
+> > 
+> 
+> Since full filtering concept was dropped for now, and since
+> there are not so many usage of DEFINE_MACHINE in the codebase, maybe we
+> can simply do a full declaration when a guard need to be set.
+> 
+> In current series, only one occurence would need this: boston-aia.
+> 
+> Regards,
+> Pierrick
 
-The tcg_out_mov in tcg/riscv64 missed the vtype setup before emitting the
-OPC_VMVNR_V.
+Good point I'll drop this patch then and just expand fully for
+boston-aia then, similar to other targets, thanks!:)
 
-Fixes: d4be6ee1111 ("tcg/riscv: Implement vector mov/dup{m/i}")
-Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Reviewed-by: Joel Stanley <joel@jms.id.au>
-Signed-off-by: Max Chou <max.chou@sifive.com>
----
- tcg/riscv64/tcg-target.c.inc | 4 ++++
- 1 file changed, 4 insertions(+)
-
-diff --git a/tcg/riscv64/tcg-target.c.inc b/tcg/riscv64/tcg-target.c.inc
-index 2ce9d47a633..e3cfedb579d 100644
---- a/tcg/riscv64/tcg-target.c.inc
-+++ b/tcg/riscv64/tcg-target.c.inc
-@@ -778,6 +778,10 @@ static bool tcg_out_mov(TCGContext *s, TCGType type, TCGReg ret, TCGReg arg)
-         {
-             int lmul = type - riscv_lg2_vlenb;
-             int nf = 1 << MAX(lmul, 0);
-+
-+            if (s->riscv_cur_type == TCG_TYPE_COUNT) {
-+                set_vtype_len(s, type);
-+            }
-             tcg_out_opc_vi(s, OPC_VMVNR_V, ret, arg, nf - 1);
-         }
-         break;
 -- 
-2.43.0
-
+Anton Johansson
+rev.ng Labs Srl.
 
