@@ -4,49 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6FE4C982D2
-	for <qemu-riscv@archiver.kernel.org>; Thu, 17 Sep 2026 22:02:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C520C982D0
+	for <qemu-riscv@archiver.kernel.org>; Thu, 17 Sep 2026 22:02:54 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x7KAZ-0004Td-HG; Thu, 17 Sep 2026 18:01:27 -0400
+	id 1x7KAb-0004Uq-4U; Thu, 17 Sep 2026 18:01:29 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <anjo@rev.ng>)
- id 1x7K9M-00044g-4c; Thu, 17 Sep 2026 18:00:20 -0400
+ id 1x7K9K-00040f-Fk; Thu, 17 Sep 2026 18:00:11 -0400
 Received: from rev.ng ([94.130.142.21])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <anjo@rev.ng>)
- id 1x7K9J-0004Jz-1F; Thu, 17 Sep 2026 18:00:11 -0400
+ id 1x7K9G-0004I4-Bg; Thu, 17 Sep 2026 18:00:10 -0400
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=rev.ng;
- s=dkim; h=Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:
- Content-Type:MIME-Version:Subject:Date:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ s=dkim; h=Cc:To:Content-Transfer-Encoding:Content-Type:MIME-Version:
+ Message-Id:Date:Subject:From:Sender:Reply-To:Content-ID:Content-Description:
+ Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+ In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive:List-Unsubscribe:List-Unsubscribe-Post:
- List-Help; bh=c5o4tGOyOoWMVjs8wMdbgBWBYQiz0qqSiNJACKcuT3I=; b=Wm02ZqdzmmIz6E/
- xvDYbCKAKW5qNTWouDAWRnoHRib0ks9KEvet5XdnsbvquJsp+hUFlQeIMRgySO9G+7sxEhe1is9hT
- hMclrlD9X+p0GuL+Y6DZ9lRBBiAhhi/PRO67WjFBucVt+p3Ehm5eN1ySUelI8RYN+9hXO0o71rhF5
- gI=;
-Date: Fri, 18 Sep 2026 00:05:00 +0200
-Subject: [PATCH v5 06/11] target/riscv: Move target_long.h inclusion away
- from cpu.h
+ List-Help; bh=bL8mChqkfJ0gDMnIY5BhcP85L2IOzP0Cims2Z2f/f3E=; b=btTnECc2ANTEiPx
+ e7DuKn3k5ajWFanKUIrqKgnfSx1piRzjHdWqGjbmsWeTWqe1DvWrTgdmGmvgU57RUHdp1wGJd9iRn
+ BV2r989C4UbPluTxOjQE6g5rGhrhpXdPG+ob7cFQb4Y3T8uG4Q7FOfDwlMa103vlBNBz4UjStYDzI
+ 9s=;
+Subject: [PATCH v5 00/11] single-binary: Compile hw/riscv once
+Date: Fri, 18 Sep 2026 00:04:54 +0200
+Message-Id: <20260918-hw-riscv-cpu-int-v5-0-f98c5a244636@rev.ng>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260918-hw-riscv-cpu-int-v5-6-f98c5a244636@rev.ng>
-References: <20260918-hw-riscv-cpu-int-v5-0-f98c5a244636@rev.ng>
-In-Reply-To: <20260918-hw-riscv-cpu-int-v5-0-f98c5a244636@rev.ng>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/23Py27CMBAF0F9BXuPKM34Es+p/oC78mBBvArJTA
+ 0L59zpItEVkeUc6d2burFBOVNh+c2eZairpNLagtxsWBjceiafYMkOBGhAEHy48pxIqD+dvnsa
+ JC0M7IrBkpWCNnTP16fqoPHy1PKQynfLtsaHCMn2Wde9lFbjgEZVTQu2idO6zHfUxHtnSVPGfR
+ ljR2DR5ZWOHQXvsX7R8aiM0rjxS5bIbACU5I6MNL1r9aQtmRaumvfNBms4b0etfPc/zD5PB+KF
+ nAQAA
+X-Change-ID: 20251210-hw-riscv-cpu-int-06e8ee19e930
 To: qemu-devel@nongnu.org
 Cc: Anton Johansson <anjo@rev.ng>, qemu-riscv@nongnu.org, 
  daniel.barboza@oss.qualcomm.com, philmd@oss.qualcomm.com, 
  pierrick.bouvier@oss.qualcomm.com, palmer@dabbelt.com, 
- alistair.francis@wdc.com
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1789682743; l=1891;
+ alistair.francis@wdc.com, Chao Liu <chao.liu.zevorn@gmail.com>
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1789682743; l=4643;
  i=anjo@rev.ng; s=20260210; h=from:subject:message-id;
- bh=F0eu78YQitKke1fI9k2BY2J9Hs0kvtBirbAu/KUbG2I=;
- b=aZ9JojLX3E3LEfivZrN1MZ/E6LYCVoylOnm22N0OfatQRgb2piiT6OWe0ZQ+4qw1+imySvJLW
- YdyYylA3H0lDUgxViqRWdrvs/dWY2gzNZjvKVs9yWRPm/9LaFkky8GM
+ bh=w05bafBLwWomOhoiLbqFGBxWWxoMlp9eTVxGGzjAZMY=;
+ b=XXFi72ANNOfEgeqXL/RKUTgP6on/3IGblqY/v7kBMxU8KS09Dkg6SkEDp4Os1OmDsOlm7ISf+
+ OdRd7cAsyRPCa0oHzoOoZWScQcgPsMRo6cArE+feGWPDuYp/r/UZLNC
 X-Developer-Key: i=anjo@rev.ng; a=ed25519;
  pk=dKsZvj/g3kgDxnV1/SWg8a0YNGSpWtFGNsWIepQYKow=
 Received-SPF: pass client-ip=94.130.142.21; envelope-from=anjo@rev.ng;
@@ -74,65 +77,102 @@ From:  Anton Johansson via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Reviewed-by: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
+Compiles hw/riscv a single time for both qemu-system-riscv32 and
+qemu-system-riscv64 by adopting the TargetInfo API.
+
+All in all, the number of compilation units when building both
+riscv[32|64]-softmmu is reduced by 11, and the binary size of
+qemu-system-riscv[32|64] is increased by 0.11% and 0.026% respectively
+(corresponding to 65k and 14k bytes). (data from v3).
+
 Signed-off-by: Anton Johansson <anjo@rev.ng>
 ---
- target/riscv/cpu.h         | 1 -
- target/riscv/internals.h   | 1 +
- target/riscv/tcg/pmu.h     | 1 +
- target/riscv/kvm/kvm-cpu.c | 1 +
- 4 files changed, 3 insertions(+), 1 deletion(-)
+Changes in v5:
+- Dropped DEFINE_MACHINE_*() patch
+- Inlined DEFINE_MACHINE() for boston-aia
+- Link to v4: https://lore.kernel.org/qemu-devel/20260916-hw-riscv-cpu-int-v4-0-babc367b60f5@rev.ng
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index a5fb75b990..3fa322a8a9 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -26,7 +26,6 @@
- #include "exec/cpu-common.h"
- #include "exec/cpu-interrupt.h"
- #include "exec/gdbstub.h"
--#include "exec/target_long.h"
- #include "qemu/cpu-float.h"
- #include "qom/object.h"
- #include "qemu/int128.h"
-diff --git a/target/riscv/internals.h b/target/riscv/internals.h
-index 5d84e4de96..1ee7e99e98 100644
---- a/target/riscv/internals.h
-+++ b/target/riscv/internals.h
-@@ -20,6 +20,7 @@
- #define RISCV_CPU_INTERNALS_H
- 
- #include "exec/cpu-common.h"
-+#include "exec/target_long.h"
- #include "hw/core/registerfields.h"
- #include "fpu/softfloat-types.h"
- #include "target/riscv/cpu_bits.h"
-diff --git a/target/riscv/tcg/pmu.h b/target/riscv/tcg/pmu.h
-index 2429c01b77..fbdbfe7600 100644
---- a/target/riscv/tcg/pmu.h
-+++ b/target/riscv/tcg/pmu.h
-@@ -21,6 +21,7 @@
- 
- #include "cpu.h"
- #include "qapi/error.h"
-+#include "exec/target_long.h"
- 
- bool riscv_pmu_ctr_monitor_instructions(CPURISCVState *env,
-                                         uint32_t target_ctr);
-diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-index 68e1501b21..a5879d8d6d 100644
---- a/target/riscv/kvm/kvm-cpu.c
-+++ b/target/riscv/kvm/kvm-cpu.c
-@@ -35,6 +35,7 @@
- #include "accel/accel-cpu-target.h"
- #include "hw/pci/pci.h"
- #include "exec/memattrs.h"
-+#include "exec/target_long.h"
- #include "system/address-spaces.h"
- #include "system/memory.h"
- #include "hw/core/boards.h"
+Changes in v4:
+- Drop merged patches.
+- Added reviewed-bys.
+- `target/riscv: Replace TYPE_RISCV_CPU_BASE`, inlined replacement
+  ternary and dropped machines-qom.h function, file has since been
+  removed.
+- `target/riscv: Replace TARGET_LONG_BITS in header exposed to common
+  code`, #ifdef irq_local_guest_max to system-mode.
+- `target/riscv: Widen riscv_new_csr_seed()`, new patch added to handle
+  function introduced since last version.
+- `target/riscv: Move riscv_pmu_read_ctr() to internal csr.h header`,
+  dropped and moved to a follow up patchset.
+- `target/riscv: Stub out kvm functions`, use a separate stub library
+  (Philippe).
+- `hw/riscv: Tenstorrent Atlantis, use hwaddr/vaddr over target_ulong`,
+  new patch handling new cpu.
+- 3 New patches added to filter targets with is_available.
+- Link to v3: https://lore.kernel.org/qemu-devel/20260520-hw-riscv-cpu-int-v3-0-d1123ea63d9c@rev.ng
 
--- 
-2.52.0
+Changes in v3:
+- Dropped merged prequisite patchsets.
+- patch 5/14 "configs/target: Implement per-binary TargetInfo structure
+  for riscv": Use new target_info_init() TargetInfo registration.
+- patch 7/14 "target/riscv: Replace TYPE_RISCV_CPU_BASE": Rename
+  virt_default_cpu_type() -> riscv_default_cpu_type() and define in
+  machines-qom.h.
+- Dropped patch "[PATCH v2 11/14] target/riscv: Make pmu.h target-agnostic":
+  This patch replaced target_ulongs with privilege_mode_t and has been folded
+  into the prerequisite patchset introducing the typedef. 
+- Added patch 12/14 "target/riscv: Move target_long.h inclusion
+  away from cpu.h": Moves target_long.h inclusion to target specific
+  header. 
+- Link to v2: https://lore.kernel.org/qemu-devel/20251221-hw-riscv-cpu-int-v2-0-eb49d72c5b2f@rev.ng
+
+Changes in v2:
+- Inlined sifive_cpu.h runtime functions and removed header (Philippe);
+- Moved IRQ_LOCAL_GUEST_MAX macro to field in RISCVCPUDef (Philippe);
+- Added reviewed-bys;
+- Link to v1: https://lore.kernel.org/qemu-devel/20251217-hw-riscv-cpu-int-v1-0-d24a4048d3aa@rev.ng.
+
+---
+Anton Johansson (11):
+      target/riscv: Replace TYPE_RISCV_CPU_BASE
+      target/riscv: Remove ifdefs in cpu.h
+      target/riscv: Replace TARGET_LONG_BITS in header exposed to common code
+      target/riscv: Widen riscv_new_csr_seed()
+      target/riscv: Stub out kvm functions
+      target/riscv: Move target_long.h inclusion away from cpu.h
+      hw/riscv: Define SiFive E/U CPUs using runtime conditions
+      hw/riscv: Tenstorrent Atlantis, use hwaddr/vaddr over target_ulong
+      target-info: Introduce target_riscv32
+      hw/riscv: Filter for 32- or 64-bit machine types
+      hw/riscv: Compile once
+
+ include/hw/riscv/sifive_cpu.h   | 31 ------------------------
+ include/hw/riscv/sifive_e.h     |  1 -
+ include/hw/riscv/sifive_u.h     |  1 -
+ include/qemu/target-info.h      |  7 ++++++
+ target/riscv/cpu.h              | 52 +++++++++++------------------------------
+ target/riscv/cpu_bits.h         |  2 --
+ target/riscv/internals.h        |  1 +
+ target/riscv/tcg/pmu.h          |  1 +
+ hw/intc/riscv_imsic.c           |  4 +++-
+ hw/riscv/boston-aia.c           | 34 ++++++++++++++++-----------
+ hw/riscv/k230.c                 |  3 +++
+ hw/riscv/microblaze-v-generic.c |  4 +++-
+ hw/riscv/microchip_pfsoc.c      |  3 +++
+ hw/riscv/opentitan.c            |  3 +++
+ hw/riscv/shakti_c.c             |  3 +++
+ hw/riscv/sifive_e.c             |  3 ++-
+ hw/riscv/sifive_u.c             |  7 ++++--
+ hw/riscv/tt_atlantis.c          |  6 ++++-
+ hw/riscv/virt.c                 |  4 +++-
+ hw/riscv/xiangshan_kmh.c        |  3 +++
+ target-info.c                   |  5 ++++
+ target/riscv/cpu.c              | 22 +++++++++++++----
+ target/riscv/kvm/kvm-cpu.c      |  1 +
+ target/riscv/kvm/kvm-stub.c     | 23 ++++++++++++++++++
+ hw/riscv/meson.build            | 47 +++++++++++++++++++------------------
+ target/riscv/kvm/meson.build    |  1 +
+ target/riscv/meson.build        |  3 +++
+ 27 files changed, 153 insertions(+), 122 deletions(-)
 
 
