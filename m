@@ -4,36 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B72AEC982D2
-	for <qemu-riscv@archiver.kernel.org>; Thu, 17 Sep 2026 22:01:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A48E3C982D8
+	for <qemu-riscv@archiver.kernel.org>; Thu, 17 Sep 2026 22:01:33 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x7K9l-000486-IZ; Thu, 17 Sep 2026 18:00:39 -0400
+	id 1x7KAG-0004GR-FZ; Thu, 17 Sep 2026 18:01:10 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <anjo@rev.ng>)
- id 1x7K9K-00040I-84; Thu, 17 Sep 2026 18:00:11 -0400
+ id 1x7K9M-00044v-8q; Thu, 17 Sep 2026 18:00:20 -0400
 Received: from rev.ng ([94.130.142.21])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <anjo@rev.ng>)
- id 1x7K9H-0004Iq-5N; Thu, 17 Sep 2026 18:00:09 -0400
+ id 1x7K9K-0004KY-CC; Thu, 17 Sep 2026 18:00:11 -0400
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=rev.ng;
  s=dkim; h=Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:
  Content-Type:MIME-Version:Subject:Date:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive:List-Unsubscribe:List-Unsubscribe-Post:
- List-Help; bh=BFvmJlG3e3ljXi1N4bQQxZzgYqIiDydG3zszEMou+Gs=; b=PiScklNGF5O4eP/
- gwTQVhPyPXwAoAcAmkyoEhMUlASLK5DQJqEmKy8Yu3AtCPG7AmxKaKRhJxp694SMnUSqDmJ1Mtrfz
- vJ748cra2ZOQyvmxlJicAw0fnuPx6Iy2l1NTI2loc2tqt/IFnfltVV6UFfUJaUuJL9quSC49xTAL6
- TE=;
-Date: Fri, 18 Sep 2026 00:04:56 +0200
-Subject: [PATCH v5 02/11] target/riscv: Remove ifdefs in cpu.h
+ List-Help; bh=8nJcvvqd+Hg+FjZrfe3++opvD9OVCxHnuP26Jht2yAY=; b=XlL6nGKmT5qVhVX
+ uwtuZ6Xyww0jj0fzwGCKKZIeLSvI+QG5JiaF8JBWqdb9PzPmIGsnt7olJW9t9phdfIDnXk4lBd7PP
+ sZMzt2mWswJf5d6sOURlm5hyQq8OaHpO/ef547RARYoOTT5c50YJIvyzlGZHia2aDGcJG2uJIcUO9
+ dY=;
+Date: Fri, 18 Sep 2026 00:05:02 +0200
+Subject: [PATCH v5 08/11] hw/riscv: Tenstorrent Atlantis, use hwaddr/vaddr
+ over target_ulong
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260918-hw-riscv-cpu-int-v5-2-f98c5a244636@rev.ng>
+Message-Id: <20260918-hw-riscv-cpu-int-v5-8-f98c5a244636@rev.ng>
 References: <20260918-hw-riscv-cpu-int-v5-0-f98c5a244636@rev.ng>
 In-Reply-To: <20260918-hw-riscv-cpu-int-v5-0-f98c5a244636@rev.ng>
 To: qemu-devel@nongnu.org
@@ -41,11 +42,11 @@ Cc: Anton Johansson <anjo@rev.ng>, qemu-riscv@nongnu.org,
  daniel.barboza@oss.qualcomm.com, philmd@oss.qualcomm.com, 
  pierrick.bouvier@oss.qualcomm.com, palmer@dabbelt.com, 
  alistair.francis@wdc.com
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1789682743; l=3291;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1789682743; l=999;
  i=anjo@rev.ng; s=20260210; h=from:subject:message-id;
- bh=367gC5i9cTxYMUQLiZ7x404bFso1ulNo3mGxqF0oJzI=;
- b=KH7fQbY3VUbi7lCHCS9uPYJyrGHpirLUQZPvq5tEWn4xsxtAE8YBqEyJzg/6NrEl45MmPid1q
- AQh2ArB/QJyDq6OAmLYoLOxWF4Waun9dUyxcQDYbCAL4x+1UFNZt0Qk
+ bh=f2Ng0h49pq1ktTNS5/7JFSoKMmoWzjr68AjcVaZ2T7Y=;
+ b=zuA5/QTeggrUhb3zuu1HgI3k3GGTk6MGrS08qnPgRFrS6G+zNJop9fznT2xz4N9vALsh4RFye
+ +OUNcHH1ragARpbxucjeaoHlqt7WWPfiAUa2+emPwIr4W8cOpm7ZkLZ
 X-Developer-Key: i=anjo@rev.ng; a=ed25519;
  pk=dKsZvj/g3kgDxnV1/SWg8a0YNGSpWtFGNsWIepQYKow=
 Received-SPF: pass client-ip=94.130.142.21; envelope-from=anjo@rev.ng;
@@ -73,120 +74,30 @@ From:  Anton Johansson via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-KVM fields of CPURISCVState are now always exposed as CONFIG_KVM cannot
-be used in common code.
-
-riscv_cpu_mxl() is changed to return CPURISCVState::misa_mxl
-unconditionally, as use of target_riscv64() would result in an extra
-load and compare with TargetInfo::target_arch.  We might as well just
-perform a single load.  Likewise, for cpu_recompute_xl(),
-cpu_address_xl(), and riscv_cpu_sxl(), we opt for returning the
-corresponding CPURISCVState field with ifdefs for system mode adding
-extra conditions.
+Along with making the compilation rv32/rv64 agnostic, this also
+matches the return types of riscv_find_and_load_firmware() and
+riscv_calc_kernel_start_addr().
 
 Reviewed-by: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
 Signed-off-by: Anton Johansson <anjo@rev.ng>
 ---
- target/riscv/cpu.h | 36 ++++++++----------------------------
- 1 file changed, 8 insertions(+), 28 deletions(-)
+ hw/riscv/tt_atlantis.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index aee1dcaaf9..e2e0547eef 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -525,7 +525,6 @@ struct CPUArchState {
-     hwaddr kernel_addr;
-     hwaddr fdt_addr;
- 
--#ifdef CONFIG_KVM
-     /* kvm timer */
-     bool kvm_timer_dirty;
-     uint64_t kvm_timer_time;
-@@ -536,7 +535,6 @@ struct CPUArchState {
-     /* KVM multiprocessor state */
-     uint32_t kvm_mp_state;
-     bool kvm_mp_state_loaded;
--#endif /* CONFIG_KVM */
- };
- 
- /*
-@@ -743,14 +741,10 @@ FIELD(EXT_TB_FLAGS, MISA_EXT, 0, 32)
- FIELD(EXT_TB_FLAGS, ALTFMT, 32, 1)
- FIELD(EXT_TB_FLAGS, BIG_ENDIAN, 33, 1)
- 
--#ifdef TARGET_RISCV32
--#define riscv_cpu_mxl(env)  ((void)(env), MXL_RV32)
--#else
- static inline RISCVMXL riscv_cpu_mxl(CPURISCVState *env)
- {
-     return env->misa_mxl;
- }
--#endif
- #define riscv_cpu_mxl_bits(env) (1UL << (4 + riscv_cpu_mxl(env)))
- 
- static inline const RISCVCPUConfig *riscv_cpu_cfg(CPURISCVState *env)
-@@ -794,9 +788,6 @@ static inline RISCVMXL cpu_get_xl(CPURISCVState *env, privilege_mode_t mode)
- }
- #endif
- 
--#if defined(TARGET_RISCV32)
--#define cpu_recompute_xl(env)  ((void)(env), MXL_RV32)
--#else
- static inline RISCVMXL cpu_recompute_xl(CPURISCVState *env)
- {
- #if !defined(CONFIG_USER_ONLY)
-@@ -805,43 +796,32 @@ static inline RISCVMXL cpu_recompute_xl(CPURISCVState *env)
-     return env->misa_mxl;
- #endif
- }
--#endif
- 
--#if defined(TARGET_RISCV32)
--#define cpu_address_xl(env)  ((void)(env), MXL_RV32)
--#else
- static inline RISCVMXL cpu_address_xl(CPURISCVState *env)
- {
--#ifdef CONFIG_USER_ONLY
--    return env->xl;
--#else
--    privilege_mode_t mode = cpu_address_mode(env);
--
--    return cpu_get_xl(env, mode);
-+#ifndef CONFIG_USER_ONLY
-+    if (target_riscv64()) {
-+        privilege_mode_t mode = cpu_address_mode(env);
-+        return cpu_get_xl(env, mode);
-+    }
- #endif
-+    return env->xl;
- }
--#endif
- 
- static inline uint16_t riscv_cpu_xlen(CPURISCVState *env)
- {
-     return 16 << env->xl;
- }
- 
--#ifdef TARGET_RISCV32
--#define riscv_cpu_sxl(env)  ((void)(env), MXL_RV32)
--#else
- static inline RISCVMXL riscv_cpu_sxl(CPURISCVState *env)
- {
--#ifdef CONFIG_USER_ONLY
--    return env->misa_mxl;
--#else
-+#ifndef CONFIG_USER_ONLY
-     if (env->misa_mxl != MXL_RV32) {
-         return get_field(env->mstatus, MSTATUS64_SXL);
-     }
- #endif
--    return MXL_RV32;
-+    return env->misa_mxl;
- }
--#endif
- 
- /*
-  * Returns the current effective privilege mode.
+diff --git a/hw/riscv/tt_atlantis.c b/hw/riscv/tt_atlantis.c
+index 8a219afef7..b2333e7f6a 100644
+--- a/hw/riscv/tt_atlantis.c
++++ b/hw/riscv/tt_atlantis.c
+@@ -427,7 +427,8 @@ static void tt_atlantis_machine_done(Notifier *n, void *data)
+     MachineState *machine = MACHINE(ams);
+     hwaddr start_addr = s->memmap[TT_ATL_DDR_LO].base;
+     hwaddr mem_size;
+-    target_ulong firmware_end_addr, kernel_start_addr;
++    hwaddr firmware_end_addr;
++    vaddr kernel_start_addr;
+     const char *firmware_name = riscv_default_firmware_name(&s->cpus);
+     uint64_t fdt_load_addr;
+     uint64_t kernel_entry;
 
 -- 
 2.52.0
