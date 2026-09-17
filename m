@@ -4,57 +4,141 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A4EDC982D0
-	for <qemu-riscv@archiver.kernel.org>; Thu, 17 Sep 2026 22:02:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1AEBC982D8
+	for <qemu-riscv@archiver.kernel.org>; Thu, 17 Sep 2026 22:02:51 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x7KAb-0004Xf-Dh; Thu, 17 Sep 2026 18:01:29 -0400
+	id 1x7KBl-0005xQ-Tq; Thu, 17 Sep 2026 18:02:42 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <anjo@rev.ng>)
- id 1x7K9k-000492-4i; Thu, 17 Sep 2026 18:00:37 -0400
-Received: from rev.ng ([94.130.142.21])
+ (Exim 4.90_1) (envelope-from <pierrick.bouvier@oss.qualcomm.com>)
+ id 1x7KAo-0004hA-BV
+ for qemu-riscv@nongnu.org; Thu, 17 Sep 2026 18:01:48 -0400
+Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <anjo@rev.ng>)
- id 1x7K9g-0004Om-V7; Thu, 17 Sep 2026 18:00:35 -0400
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=rev.ng;
- s=dkim; h=Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:
- Content-Type:MIME-Version:Subject:Date:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive:List-Unsubscribe:List-Unsubscribe-Post:
- List-Help; bh=TbZb94MuWzbziXvToTjwlOx61+5F1jk2mxBbl666i1Y=; b=r0sjr1PKrzivcLH
- JYgm3iDtY/Wtozb9X1DUYOkq2G4vZVWB7C8Jw3hbplV3ldulK4++GUvBcv9HlAm6ayaW37JCu0CFF
- PDg46eSnnN7+BM6/864t9MYfQzouKXsgrhqQKSSfW/23qikrJ5eTk3diyYDH5pgRwKqg9XW5UywmO
- Uc=;
-Date: Fri, 18 Sep 2026 00:05:05 +0200
-Subject: [PATCH v5 11/11] hw/riscv: Compile once
+ (Exim 4.90_1) (envelope-from <pierrick.bouvier@oss.qualcomm.com>)
+ id 1x7KAh-0004t0-9o
+ for qemu-riscv@nongnu.org; Thu, 17 Sep 2026 18:01:39 -0400
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 68HLFij22137196
+ for <qemu-riscv@nongnu.org>; Thu, 17 Sep 2026 22:01:32 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ tWmzpp2zEJxnSeVgLpcbQYlgia5NuIPweGhpAKKUhlc=; b=UJaJf14Qk5uUKEBI
+ Pk1kYJeELrGPcz6KmXAOpTl5LdQ/XVFDVpPd31viGwY+GuhSW2tumUTbST1bgRBO
+ 3DhUWN9wRIkXgcMZA3CHOe7JZ+Dta2HoEGq/d56yHxJ89FFKIzIZI4S1inK/XF9o
+ k7kmmL90N2RT1aWDhLAzQYBguOtrfoMEs2AxNKjffLrEldB18n1A4dHpAHS0AmlT
+ WLqT+OGuV6QskMW9OEK2fLm6SQHwFl4re7f6fUSkCQ39Fj0N1KeY/8NDopTqotsV
+ wVp6d0jVhytDuH8VJBCAYx+rdAp6xFU5ecPDy+i9VJ0fzc8ofpWOJuCEveTJVII4
+ UYa3uw==
+Received: from mail-pg1-f198.google.com (mail-pg1-f198.google.com
+ [209.85.215.198])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4grmv5h1fm-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Thu, 17 Sep 2026 22:01:32 +0000 (GMT)
+Received: by mail-pg1-f198.google.com with SMTP id
+ 41be03b00d2f7-cc4b524ce78so12449a12.2
+ for <qemu-riscv@nongnu.org>; Thu, 17 Sep 2026 15:01:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1789682491; x=1790287291; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=tWmzpp2zEJxnSeVgLpcbQYlgia5NuIPweGhpAKKUhlc=;
+ b=AbO9ZY60g2aDlaLpFL9vZi+dj8jony3VeeQBy3tl8J9ILxSr/3tUqNtJdNT64hZbsh
+ rLp9Aij6B8dAISAbJVxs9WqwrdwXUDSNUUo2ecGmtkcsbHbCJrLIm0qe0UI7DC4ANGv9
+ mvgzOYBav9u+UTvJQ+VyqlAKIw5uzXoBLjLcZkLKgT/vSBca5/xuYztu72adQea+SLuG
+ uctJwLbUP+Pjimjq5bPKvDRgQYiPS++oA9EaCKf/6l+qUVecqKUhxFnH3SmJbJ8NVF+J
+ /y/XmZyjq1+kv/WAb2mbJrsu20smYRYq6myGC/uIagmY8vtwbvQxp8mO5rIuIiHseqrz
+ pi4g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1789682491; x=1790287291;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=tWmzpp2zEJxnSeVgLpcbQYlgia5NuIPweGhpAKKUhlc=;
+ b=apccNvlJKACKoeXoq1Kp1gOH6JOf2SVn0EzLkgy830kHmKlw8S9x1wDjfZW4N/Rqd5
+ hypuZVl3VL3t314xQBPlVYiqsyM2/OF4frd/tZOuwelM/tmaG9JtdESR/JXYvsPp4PbM
+ 4+qlCqha807yMZb/A7vrKwbJZtmw71fBBh35jHlcpgtWsvmrYO/9VxyevdmQA8pKB3yR
+ a5n4bTH15LHTl98tgb1q9dsubrR+jtc5Ho/S+LDz6wTAJlML617ElQxd5fR1nNT+Db8A
+ nB73CMENujBT0v5L26ZpWohe6AdjxtTN+56Qfp66TXiZzsUR24X3Kj+iWRf/6R2wx9Dg
+ HChQ==
+X-Gm-Message-State: AFuF++nI9HIiGyl6tGf0+vdpUruYSDdHPWk76JxBkLR2N5mSPFfeDSpN
+ vCt0fyB80udXTwxVf3383GhvQh5erTi89VpB2GE8pn2cDTb+K/CTelz/K8ONDZR+K6VRwyL2gJq
+ 7j+1GuAkfvNnkLpmpcFAG2IUv7dNaNljv7us+3EtXdWEWwQtVbycBWlwQSA==
+X-Gm-Gg: AYBFou2I/N40hAH0J7qIFsDJ/J48JxMgKH84PXHBc3iTAez4J4uVKVxoFSBl3H94zQA
+ Nw63SMOVzAiTbvnkwlWjjHtZqLAeRPuSxEmTEk6nQrSWx89rWruz5QwmZJ4o0Rh1fYfhp+ttbw5
+ m1Bsiq5y1fknqjLzsyxSR7IAzzSNK/bAc14uv/2B9ZrpOo3RSLOvzRha+jk8zKxnXHijvj+puGT
+ 6OHtsRGdOtG34mMII1u3/3my+AmONfgiUo+S6uvTrDvg7yUcGcw5jOmPCwHVYmxxmkpNm9tg6Hd
+ 4rUiTE4j4RsITTCHXBWKx999PfF6pusMbzloLcXV1o6qxjAemVsX2udZcfrW9dz8IQNYprETB0P
+ ZKK3prKFKRP+gTzZKS5JgDC6aTjVOHWNHrEg8qWE8sbOPcl/0LtztbveqSqMXpRRrZtGf
+X-Received: by 2002:a05:6a21:1690:b0:3da:7140:da35 with SMTP id
+ adf61e73a8af0-3dd8c39ad61mr717464637.15.1789682491426; 
+ Thu, 17 Sep 2026 15:01:31 -0700 (PDT)
+X-Received: by 2002:a05:6a21:1690:b0:3da:7140:da35 with SMTP id
+ adf61e73a8af0-3dd8c39ad61mr717329637.15.1789682490269; 
+ Thu, 17 Sep 2026 15:01:30 -0700 (PDT)
+Received: from [192.168.1.199] (216-71-219-44.dyn.novuscom.net.
+ [216.71.219.44]) by smtp.gmail.com with ESMTPSA id
+ 5a478bee46e88-33bf5aee8b0sm35831938eec.23.2026.09.17.15.01.29
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 17 Sep 2026 15:01:29 -0700 (PDT)
+Message-ID: <7048c675-0a02-41b7-bfc0-ac700a53d7ac@oss.qualcomm.com>
+Date: Thu, 17 Sep 2026 15:01:28 -0700
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Message-Id: <20260918-hw-riscv-cpu-int-v5-11-f98c5a244636@rev.ng>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 10/11] hw/riscv: Filter for 32- or 64-bit machine types
+To: Anton Johansson <anjo@rev.ng>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, daniel.barboza@oss.qualcomm.com,
+ philmd@oss.qualcomm.com, palmer@dabbelt.com, alistair.francis@wdc.com
 References: <20260918-hw-riscv-cpu-int-v5-0-f98c5a244636@rev.ng>
-In-Reply-To: <20260918-hw-riscv-cpu-int-v5-0-f98c5a244636@rev.ng>
-To: qemu-devel@nongnu.org
-Cc: Anton Johansson <anjo@rev.ng>, qemu-riscv@nongnu.org, 
- daniel.barboza@oss.qualcomm.com, philmd@oss.qualcomm.com, 
- pierrick.bouvier@oss.qualcomm.com, palmer@dabbelt.com, 
- alistair.francis@wdc.com
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1789682744; l=3555;
- i=anjo@rev.ng; s=20260210; h=from:subject:message-id;
- bh=9j6u0VO1MNm6eSXRDfR+CmzXxXhtVlrF3pwysoMdPag=;
- b=GTZP2z3FZuQe1QsF83JwnY0QSoja0HiLRegCeWZC37Cjuf1Fs1oE97f7lz8JOdatnBEN3TpTq
- O+gEJcWoFUvDjF6JO5QO/7i+7Hut/MKKcyiwku64hSRGFH0fmHKrvQf
-X-Developer-Key: i=anjo@rev.ng; a=ed25519;
- pk=dKsZvj/g3kgDxnV1/SWg8a0YNGSpWtFGNsWIepQYKow=
-Received-SPF: pass client-ip=94.130.142.21; envelope-from=anjo@rev.ng;
- helo=rev.ng
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+ <20260918-hw-riscv-cpu-int-v5-10-f98c5a244636@rev.ng>
+From: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
+Content-Language: en-US
+In-Reply-To: <20260918-hw-riscv-cpu-int-v5-10-f98c5a244636@rev.ng>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE3MDMxNiBTYWx0ZWRfX48D9XYNQ8bvX
+ M38knM2FuTMq8B0El5MZHJog2D0o6owB9HoWOAFIP6UvkFuF+/21P/E1NmgRMqWSKSlVWiIINBV
+ BCUapvHfEugqyNLrxHQyCnmNcG3BlYDCV4pG8AWFh9h0y9mQmM/YV/VTB1dJ7dm8VgwfGKofPUG
+ l3+kcB1sHHGzwiDm2+elo2Ik7bZPUFq+SSB75m2oiWzJAljcX+wBwgOeDiRX/uhI16VEm0sCSvV
+ +/q/5l5+i8pTcpR0/oFcG3iOOtkBgV3M9yNlDM59YmrMe4Oe5cbBsDLQ2BnVIy4MHglfeYJ1fnw
+ CUSta32y4EKn4MSLrytF0G1uw2EhfOe+OolEc8hi98513zxoxpY9BIFE9+whxey/0WW9hVKsp2b
+ Ffbkc/ikPRfGYvHZHjJPNtW1/bnCfO5knDXP/LwFlkajbIo01dO2uyCBdLojwYMq779WUpJ/SVU
+ +2ew3CspJ4VF/05zigA==
+X-Authority-Analysis: v=2.4 cv=E+5YNqdl c=1 sm=1 tr=0 ts=6aac633c cx=c_pps
+ a=Qgeoaf8Lrialg5Z894R3/Q==:117 a=iLqgmErQAxjCjdq5jj1Aqg==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
+ a=EUspDBNiAAAA:8 a=rINQn6dFpA74SCEH0q0A:9 a=QEXdDO2ut3YA:10
+ a=x9snwWr2DeNwDh03kgHS:22
+X-Proofpoint-ORIG-GUID: 2GfEsS-59CHoBPD91F7LHBBZWm7BYDUl
+X-Proofpoint-GUID: 2GfEsS-59CHoBPD91F7LHBBZWm7BYDUl
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE3MDMxNiBTYWx0ZWRfX7PUrmx4brlH3
+ JTQt8gUHEisUTIGhUCTCPbdURfO7Nlcnkm7DOE/AHMa5HN52GOfB43uMZrDgFit9Pq/nG5gYDw+
+ YiQ5CA+/c7tLP1p/bG08xYmVtZaGZPI=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-17_05,2026-09-16_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ lowpriorityscore=0 malwarescore=0 priorityscore=1501 clxscore=1015
+ impostorscore=0 spamscore=0 phishscore=0 adultscore=0 bulkscore=0
+ suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
+ definitions=main-2609170316
+Received-SPF: pass client-ip=205.220.168.131;
+ envelope-from=pierrick.bouvier@oss.qualcomm.com;
+ helo=mx0a-0031df01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_PASS=-0.001,
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -68,74 +152,26 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Reply-to:  Anton Johansson <anjo@rev.ng>
-From:  Anton Johansson via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
+On 9/17/2026 3:05 PM, Anton Johansson wrote:
+> Filters for 32- or 64-bit machine types using TypeInfo::is_available,
+> machines available for both 32-bit and 64-bit (amd-microblaze-v-generic,
+> sifive-[e|u], spike, virt) leave the field unset.  For boston-aia,
+> DEFINE_MACHINE() has been inlined to set is_available.
+> 
+> Signed-off-by: Anton Johansson <anjo@rev.ng>
+> ---
+>  hw/riscv/boston-aia.c      | 34 ++++++++++++++++++++--------------
+>  hw/riscv/k230.c            |  3 +++
+>  hw/riscv/microchip_pfsoc.c |  3 +++
+>  hw/riscv/opentitan.c       |  3 +++
+>  hw/riscv/shakti_c.c        |  3 +++
+>  hw/riscv/tt_atlantis.c     |  3 +++
+>  hw/riscv/xiangshan_kmh.c   |  3 +++
+>  7 files changed, 38 insertions(+), 14 deletions(-)
+> 
+
 Reviewed-by: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
-Signed-off-by: Anton Johansson <anjo@rev.ng>
----
- hw/riscv/meson.build | 47 ++++++++++++++++++++++++-----------------------
- 1 file changed, 24 insertions(+), 23 deletions(-)
-
-diff --git a/hw/riscv/meson.build b/hw/riscv/meson.build
-index 7aa3c1578d..b53661cf31 100644
---- a/hw/riscv/meson.build
-+++ b/hw/riscv/meson.build
-@@ -1,25 +1,26 @@
--riscv_ss = ss.source_set()
--riscv_ss.add(files('aia.c'))
--riscv_ss.add(files('boot.c'))
--riscv_ss.add(files('device-common.c'))
--riscv_ss.add(files('fdt-common.c'))
--riscv_ss.add(when: 'CONFIG_RISCV_NUMA', if_true: files('numa.c'))
--riscv_ss.add(files('riscv_hart.c'))
--riscv_ss.add(when: 'CONFIG_OPENTITAN', if_true: files('opentitan.c'))
--riscv_ss.add(when: 'CONFIG_RISCV_VIRT', if_true: files('virt.c'))
--riscv_ss.add(when: 'CONFIG_SHAKTI_C', if_true: files('shakti_c.c'))
--riscv_ss.add(when: 'CONFIG_SIFIVE_E', if_true: files('sifive_e.c'))
--riscv_ss.add(when: 'CONFIG_SIFIVE_U', if_true: files('sifive_u.c'))
--riscv_ss.add(when: 'CONFIG_SPIKE', if_true: files('spike.c'))
--riscv_ss.add(when: 'CONFIG_MICROCHIP_PFSOC', if_true: files('microchip_pfsoc.c'))
--riscv_ss.add(when: 'CONFIG_TENSTORRENT', if_true: files('tt_atlantis.c'))
--riscv_ss.add(when: 'CONFIG_ACPI', if_true: files('virt-acpi-build.c'))
--riscv_ss.add(when: 'CONFIG_RISCV_IOMMU', if_true: files(
-+riscv_common_ss = ss.source_set()
-+riscv_common_ss.add(files('aia.c'))
-+riscv_common_ss.add(files('boot.c'))
-+riscv_common_ss.add(files('device-common.c'))
-+riscv_common_ss.add(files('fdt-common.c'))
-+riscv_common_ss.add(when: 'CONFIG_RISCV_NUMA', if_true: files('numa.c'))
-+riscv_common_ss.add(files('riscv_hart.c'))
-+riscv_common_ss.add(when: 'CONFIG_OPENTITAN', if_true: files('opentitan.c'))
-+riscv_common_ss.add(when: 'CONFIG_RISCV_VIRT', if_true: files('virt.c'))
-+riscv_common_ss.add(when: 'CONFIG_SHAKTI_C', if_true: files('shakti_c.c'))
-+riscv_common_ss.add(when: 'CONFIG_SIFIVE_E', if_true: files('sifive_e.c'))
-+riscv_common_ss.add(when: 'CONFIG_SIFIVE_U', if_true: files('sifive_u.c'))
-+riscv_common_ss.add(when: 'CONFIG_SPIKE', if_true: files('spike.c'))
-+riscv_common_ss.add(when: 'CONFIG_MICROCHIP_PFSOC', if_true: files('microchip_pfsoc.c'))
-+riscv_common_ss.add(when: 'CONFIG_TENSTORRENT', if_true: files('tt_atlantis.c'))
-+riscv_common_ss.add(when: 'CONFIG_ACPI', if_true: files('virt-acpi-build.c'))
-+riscv_common_ss.add(when: 'CONFIG_RISCV_IOMMU', if_true: files(
- 	'riscv-iommu.c', 'riscv-iommu-pci.c', 'riscv-iommu-sys.c', 'riscv-iommu-hpm.c'))
--riscv_ss.add(when: 'CONFIG_MICROBLAZE_V', if_true: files('microblaze-v-generic.c'))
--riscv_ss.add(when: 'CONFIG_XIANGSHAN_KUNMINGHU', if_true: files('xiangshan_kmh.c'))
--riscv_ss.add(when: 'CONFIG_RISCV_MIPS_CPS', if_true: files('cps.c'))
--riscv_ss.add(when: 'CONFIG_MIPS_BOSTON_AIA', if_true: files('boston-aia.c'))
--riscv_ss.add(when: 'CONFIG_K230', if_true: files('k230.c'))
-+riscv_common_ss.add(when: 'CONFIG_MICROBLAZE_V', if_true: files('microblaze-v-generic.c'))
-+riscv_common_ss.add(when: 'CONFIG_XIANGSHAN_KUNMINGHU', if_true: files('xiangshan_kmh.c'))
- 
--hw_arch += {'riscv': riscv_ss}
-+riscv_common_ss.add(when: 'CONFIG_RISCV_MIPS_CPS', if_true: files('cps.c'))
-+riscv_common_ss.add(when: 'CONFIG_MIPS_BOSTON_AIA', if_true: files('boston-aia.c'))
-+riscv_common_ss.add(when: 'CONFIG_K230', if_true: files('k230.c'))
-+
-+hw_common_arch += {'riscv': riscv_common_ss}
-
--- 
-2.52.0
-
 
