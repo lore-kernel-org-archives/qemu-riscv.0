@@ -4,94 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E48BC982D7
-	for <qemu-riscv@archiver.kernel.org>; Fri, 18 Sep 2026 18:10:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3321DC982D7
+	for <qemu-riscv@archiver.kernel.org>; Fri, 18 Sep 2026 19:16:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x7d2s-0002Xc-21; Fri, 18 Sep 2026 14:10:46 -0400
+	id 1x7e3k-0005YE-I9; Fri, 18 Sep 2026 15:15:44 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1x7d2S-0002Ls-GP
- for qemu-riscv@nongnu.org; Fri, 18 Sep 2026 14:10:31 -0400
-Received: from mail-pz2-x10.google.com ([2607:f8b0:4864:3b::10])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1x7e3i-0005Xh-Cy
+ for qemu-riscv@nongnu.org; Fri, 18 Sep 2026 15:15:42 -0400
+Received: from mail-pj2-x11.google.com ([2607:f8b0:4864:39::11])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1x7d2O-0000hD-S0
- for qemu-riscv@nongnu.org; Fri, 18 Sep 2026 14:10:20 -0400
-Received: by mail-pz2-x10.google.com with SMTP id
- d2e1a72fcca58-85469a34907so1273195b3a.1
- for <qemu-riscv@nongnu.org>; Fri, 18 Sep 2026 11:10:14 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1x7e3f-0003yX-TB
+ for qemu-riscv@nongnu.org; Fri, 18 Sep 2026 15:15:42 -0400
+Received: by mail-pj2-x11.google.com with SMTP id
+ 98e67ed59e1d1-396ccd66bb4so1047377a91.1
+ for <qemu-riscv@nongnu.org>; Fri, 18 Sep 2026 12:15:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1789755014; x=1790359814; darn=nongnu.org;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :content-type:mime-version:references:message-id:subject:cc:to:from
- :date:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=/Hfpy/x3gmRurkqv60Bg2/RIVF22wanQR3zYhofeKyo=;
- b=B4BnCvOTMP5kTv01wnoWSNYbaLa+JzAiuqsN/QyuuarqVzZ+TtGPr/uJ6uePPFMbKR
- PWFn9cE2bMz2+bCKXGvrQiXhPxdNjLkyWMb9h+EPsj25ieeLnI0wv8p/2mH+MVvWyLrK
- FUPbpLp3QF4F+XVB3JGQCTP3RMNlIFN4Dl0DkBhDkCWanKo236rO2l2JnSBfvtYw0+4e
- gJNd/YN8KRWtgOtVo1aMNUVHPypieisC4mHd0Td0RdUOaAQkrECIAyhP2xBwIhMAdHUb
- f6pHf2LV+ZkHxOfJTZ1En1fUQ6kCou7095ZkhW05o1zQruyS3gZD8mBhYy0FzGI3FYQa
- DlUw==
+ d=linaro.org; s=google; t=1789758938; x=1790363738; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=d/RY1i/cVRZf0y0jqibpZU8KI3rY0URS4V+/Dy5KJ1o=;
+ b=U5xTQkosmJMFGZkxV21Hv5fZiOC37cOTy5V0++W+HEJB6JEe4LcfSymUouAByQ/dNq
+ dK6ydCKPFDr47nRzNuRvYJZbqlD7umMhmWkcMrltdHfpIwi0HAN4agKokR/Hj6cxdn/H
+ DrcsiD3zQaBvfgUxcBQ1DD92+gCrCz9Z/WQFlwrdUecWvW6tS90SodzcLWLePM/agcyO
+ 18cb62M6oRdQVvR61PgwGfdteBWsv/k4rDepmgZV4UECxA4wNlJG77pg10g8dazgy9r1
+ GcHREYe+hHqfCC59p/pflykkKP8zt4iICBLY48oE2nw9Up+yBXL8Ek941/t7OXSHKHHC
+ mtSQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1789755014; x=1790359814;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :content-type:mime-version:references:message-id:subject:cc:to:from
- :date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=/Hfpy/x3gmRurkqv60Bg2/RIVF22wanQR3zYhofeKyo=;
- b=SzNMyq3q7MW8KagvKSwdVeVypFERyHLcYhJ7SO2//0gAvhyf1UnxvgSFOKYsjoN170
- jpSIs24VXfxt9OwAsKulFBb55UEAF+A/FM9Xvpg+RHL+ARvCyte1/wSKm0qs8yVZUiB1
- CGsa0iIS2tWIRHZT9CSfvBOsSJVt5qbw/C28dSJH1Z3H55PJ/r2oV4wj0YeoMA4D6wL9
- jp/Jjgc8uUQgtyp7bKzNsLdm6r/YzWvkOpO2u+omFWTv3eexDQDIRJm+4viUnZdl0M8J
- HnrR/6p/M4wkHw+TR3Eb4OeFBEDGJzMdOgFhie4StHKCM615InxkZm7ccVCHhoGoNFQY
- 0ogg==
+ d=1e100.net; s=20260707; t=1789758938; x=1790363738;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=d/RY1i/cVRZf0y0jqibpZU8KI3rY0URS4V+/Dy5KJ1o=;
+ b=ysNVnP2gFvlPN2ZHiBPwQUVvCW2FJitYJp2OlSps6sUR7Ti8P+lhM1BokM1/iat8Zg
+ KvNDeoFIJE8OV83yGZAEp48LASlJ7HWC3i+3J/WRHwmnSZawHRZ2Me9xa6Py5joc+q6t
+ k4r3fpZDv/mxU6xk5TSlchAeK2yyS3Jhsi/z/Cl1UyZmBhZ0NnDiwSUTuId8NvWsGTLX
+ o/mQQRmVnQeSeJyXojj4zg1vMSxmFHqNHiOsl9iGUrZS75JCh//RrIsRkpPKUo0HmD3x
+ yggFGobJQPFPyUmHO1STWZQ+CXtrPg2LHYUvb8x5ttzf/rSxZe4AuVKhlWGGwCd+82zg
+ /9Gw==
 X-Forwarded-Encrypted: i=1;
- AKwUvBwZvwgb0XC7zJ19XD83zXEkSAKhYumiduAXcvm+E7LIhpRAjzevK0wjwSE8DdyL4z6HqTw8KT907QAz@nongnu.org
-X-Gm-Message-State: AFuF++kItD+bWiF1U8Mcr2+PBj9fe35Qj390WaW8I+TbXZS5ZyYYj7G+
- l8IQULeR/33eM4PUvmH/5w56Sev+nJN7u4/RERvuDYIWZAoW/Y5hLtEyuvXwWYlqgfo=
-X-Gm-Gg: AYBFou0dHeQoznbbrIsKAjVrAd5b8B6sXkapfIXztz31EWlf4Vlgg3C5nf9tg3Mob+T
- 8czZWp/Z66Jc8FKxtx5OefE6MynFePrRHVOh3906OFr5CiwIWTMLfcg+JEWhCA0QZ8PPsIHgsIs
- sKM6GZhWB9iooITn/4sscR0HWmvp31zLmIKQI/6zKMei1ieJfmFLSK6pEme8/Q4diqOPyoTvrtF
- SmqpxO6wJdcTbDHHl4nJG4qTGPUuEaBGJtgIScas4V0FKNpf5VJSuDG+tB4E/3m7rrctR2Ri3dP
- 7lPv5WUoz8pbQLCYqSYcTFQ5A+k98Gi/Ascv6gofIiiTNkl9Kq2XJszSftt67oGT1vALHPcRaYg
- CD0c1Epj4tq3JSMHTBv1tANQ7ivkDrLy1+vp/21GXQKXftTPalGkCP/gUm3RBjhkNIu1g7umVXB
- meNIKXoS8VdNiccb+rrpznsYpK/W1D7t2s0zcVY/01OQUfEYFQ3uKUzfFtW8TvfqLN25vBAFiHD
- hkr1ouOx9DWjs/9sjzVCth8j+xwKh8SrBKvFaKBgcFh
-X-Received: by 2002:a05:6a00:ad89:b0:847:77e9:acbb with SMTP id
- d2e1a72fcca58-874dc3f65a8mr6628507b3a.13.1789755013712; 
- Fri, 18 Sep 2026 11:10:13 -0700 (PDT)
-Received: from sifive.com ([136.226.240.165]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-877a94f4fefsm157029b3a.25.2026.09.18.11.10.10
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 18 Sep 2026 11:10:13 -0700 (PDT)
-Date: Sat, 19 Sep 2026 02:10:09 +0800
-From: Max Chou <max.chou@sifive.com>
-To: Palmer Dabbelt <palmer@dabbelt.com>, richard.henderson@linaro.org
-Cc: Richard Henderson <richard.henderson@linaro.org>, 
- qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
- Alistair Francis <Alistair.Francis@wdc.com>, daniel.barboza@oss.qualcomm.com,
- joel@jms.id.au
+ AKwUvBzFMS02riHRkefbv4FUuOYk9qLEL3dk1dR7Z7E9b3JB+32jKoxX9RZob0eUg83wKybgcDCoeKTc1nIl@nongnu.org
+X-Gm-Message-State: AFuF++l5iHkFpjXppKt/4y8Oihy57U47P5k2prMetNEfwekTqfQ4x/MQ
+ jxy8G5w25J51knQdVzETQFR6TligCoZ5Oz/ksUox/jtBRHElsfkAyNNvM3uGxpALjrQ=
+X-Gm-Gg: AYBFou1BADxehGDqn4flhP/5banSqMef1UAmxzeBUPFSQlVVvxF7KCM3eGWsAwqqhyL
+ AIkWpwGoC49DC3L4Nd23WHSePO3i6JvDuOBOZmatiDs+lNpcQtSghsI5Z9Oll5ZMMq75QH08Tlz
+ aJz2JE8MgbjHZIJdYUq4ssEepvkAYMqDJTzBhnIFbnJsB9oZBKSyXC0ty31t7tgFJvIf3lqnXA6
+ lJPovFRaosMU8Q9e9fcaHG2RiutlgTku2RcUgEGrFtiDFMs02rNsz0ZQ6VdvzWHM+bWWwHi0Vxh
+ 8N4Oa/n9S6KAyoYBjYspg9aGNa+zy6KezroTGIEj+xkGuJn8VrdxBEVHITDYGIpoQ8ltiAmr3qw
+ Y5rsF8d8S5cVwMBxWEuWgA6UcrqIZMb2w1vt/w9vWyVA97YCRt313hpucGCBKWu4/7lumiIFgMn
+ ik6CCSTKdyIfylAYB666oQhC8bc71gsootrymfyCOOSXyDPJh8nKPa+Jw9itQfjXRS8YeZlXMyI
+ iEmQejNPu1obSnwamUiAO8ocYVxuB2LmAopkp40nnUk6S/PVggIptTqNaV8vQ==
+X-Received: by 2002:a17:90b:4a11:b0:39e:6c69:34d4 with SMTP id
+ 98e67ed59e1d1-39e6c69367cmr853870a91.56.1789758937665; 
+ Fri, 18 Sep 2026 12:15:37 -0700 (PDT)
+Received: from ?IPV6:2603:800c:7900:ed00:317e:3514:d7db:974c?
+ ([2603:800c:7900:ed00:317e:3514:d7db:974c])
+ by smtp.gmail.com with ESMTPSA id
+ a92af1059eb24-144d55bfec0sm716947c88.7.2026.09.18.12.15.36
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 18 Sep 2026 12:15:37 -0700 (PDT)
+Message-ID: <5c8411db-981c-4222-9b53-7ab9a199cf2f@linaro.org>
+Date: Fri, 18 Sep 2026 09:15:34 -1000
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v2] tcg/riscv64: Set vtype before whole-register vector
  moves
-Message-ID: <aq184D2BedTg-Jjc@sifive.com>
+To: Max Chou <max.chou@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ daniel.barboza@oss.qualcomm.com, joel@jms.id.au
 References: <1f02f0fc-fee2-4722-9798-97bb0132561d@linaro.org>
  <mhng-2ECF390B-6BDB-4DF3-8133-18F4AC3A4DD2@Palmers-Mini.rwc.dabbelt.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+ <aq184D2BedTg-Jjc@sifive.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+Content-Language: en-US
+In-Reply-To: <aq184D2BedTg-Jjc@sifive.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <mhng-2ECF390B-6BDB-4DF3-8133-18F4AC3A4DD2@Palmers-Mini.rwc.dabbelt.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:3b::10;
- envelope-from=max.chou@sifive.com; helo=mail-pz2-x10.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:39::11;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pj2-x11.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -108,139 +110,36 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 2026-09-17 17:21, Palmer Dabbelt wrote:
-> On Thu, 17 Sep 2026 14:49:07 PDT (-0700), Richard Henderson wrote:
-> > On 9/17/26 10:59, Palmer Dabbelt wrote:
-> > > On Thu, 17 Sep 2026 13:51:10 PDT (-0700), Richard Henderson wrote:
-> > > > On 9/17/26 03:37, Max Chou wrote:
-> > > > > According to the RISC-V unpriviledge spec,
-> > > > >    "vset{i}vl{i} and whole register loads and stores do not depend upon
-> > > > >     vtype."
-> > > > > The whole-register vector move instructions reuqire legal vtype that
-> > > > > trap when VILL is set.
-> > > > > 
-> > > > > The tcg_out_mov in tcg/riscv64 missed the vtype setup before emitting
-> > > > > the
-> > > > > OPC_VMVNR_V.
-> > > > > 
-> > > > > Fixes: d4be6ee1111 ("tcg/riscv: Implement vector mov/dup{m/i}")
-> > > > > Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-> > > > > Reviewed-by: Joel Stanley <joel@jms.id.au>
-> > > > > Signed-off-by: Max Chou <max.chou@sifive.com>
-> > > > > ---
-> > > > >   tcg/riscv64/tcg-target.c.inc | 4 ++++
-> > > > >   1 file changed, 4 insertions(+)
-> > > > > 
-> > > > > diff --git a/tcg/riscv64/tcg-target.c.inc b/tcg/riscv64/tcg-target.c.inc
-> > > > > index 2ce9d47a633..e3cfedb579d 100644
-> > > > > --- a/tcg/riscv64/tcg-target.c.inc
-> > > > > +++ b/tcg/riscv64/tcg-target.c.inc
-> > > > > @@ -778,6 +778,10 @@ static bool tcg_out_mov(TCGContext *s, TCGType
-> > > > > type, TCGReg ret, TCGReg arg)
-> > > > >           {
-> > > > >               int lmul = type - riscv_lg2_vlenb;
-> > > > >               int nf = 1 << MAX(lmul, 0);
-> > > > > +
-> > > > > +            if (s->riscv_cur_type == TCG_TYPE_COUNT) {
-> > > > > +                set_vtype_len(s, type);
-> > > > > +            }
-> > > > >               tcg_out_opc_vi(s, OPC_VMVNR_V, ret, arg, nf - 1);
-> > > > >           }
-> > > > >           break;
-> > > > 
-> > > > Do you have a reproducer for this?  I ask because I still wonder how
-> > > > this can occur.
-> > > > 
-> > > > Given that
-> > > > 
-> > > > (1) all vector registers are call-clobbered, there should be none live
-> > > > across tcg_out_call_int (which clears the remembered vtype),
-> > > > 
-> > > > (2) the first vector action with no vector registers live must be a load
-> > > > or movi (which will initialize vtype).
-> > > > 
-> > > > Performing a move between vector registers when all such registers must
-> > > > be dead is... wrong.  It indicates that there's a bug elsewhere.
-> > > 
-> > > I'm not quite sure the commit message is right here, but this whole area
-> > > is a bit of a landmine: one of the post-ratification changes to V was
-> > > either this (or very close to this), so we've been through it for every
-> > > project.
-> > > 
-> > > Here's the LLVM thread, which I think has links to everything else:
-> > > https://github.com/llvm/llvm-project/issues/114518 (there's a GCC change
-> > > as well).  IIRC hardware is a bit all over the place on this one, for
-> > > the compilers we decided to just emit the code that's safe either way --
-> > > that's not really an option for QEMU, though, so we'll have to pick one
-> > > side or the other.
-> > Yes, I get that.  But my point stands that after a function call (which
-> > can set VILL), all vector registers should be dead.  A move of a dead
-> > register is itself a bug.
+On 9/18/26 08:10, Max Chou wrote:
+> Richard, I have a reproducer for this issue listed below:
 > 
-> That's true for standard ABI functions, but there's a variant for vector-ABI
-> functions that allows some registers to be saved and that variant doesn't
-> preserve vtype.  That's basically how we ended up in the mess with
-> whole-register moves: pre-change vector-1.0 versions didn't trap
-> whole-vector moves on vtype=VILL, so variant functions could use
-> whole-register moves to save/restore registers and it was legal.  It was
-> only when Linux started clobbering with VILL on implementations that
-> respected the post-change ISA that we ended up with the traps.
+> —
+> The reproducer follows this flow:
 > 
-> That said, in GCC we just had a proper bug in there where we treated vytpe
-> as saved over calls, so it was pretty easy to roll it up into that fix.
-> Here's the GCC bug, if you're interested:
-> <https://gcc.gnu.org/bugzilla/show_bug.cgi?id=117544>.  IIUC it was a little
-> different in LLVM because they didn't have that bug and were thus actually
-> correct for the pre-change ISA, but they also decided to just emit the code
-> that's safe for both cases.
+> x86_64 `ls` executable -> qemu_x86-64 -> qemu-system-riscv64
 > 
-> > There should have been *something* that brought the source vector
-> > register back to life: a load or a movi.  Both of which reinitialize vtype.
-> > 
-> > That's why I'd like to see a reproducer, or if there isn't one,
-> > 
-> >      tcg_debug_assert(s->riscv_cur_type != TCG_TYPE_COUNT);
-> > 
-> > I'm currently running the assert through the testsuite to make sure I've
-> > not gone loopy.
-> 
-> Ya, seems reasonable.  It's certainly pretty likely this is masking some
-> other bug as it was in GCC.
+> 1. Get x86_64 sysroot and `ls` executable from x86_64 host
+> ```
+> $ podman create --name x86_64_container ubuntu:24.04
+> $ podman cp x86_64_container:/ {x86_64_sysroot}
+> ```
+> 2. Cross build qemu-x86_64
+> 3. Obtain the riscv64 images (I built it using buildroot with
+> `qemu_riscv64_virt_defconfig` config).
+> 4. Boot up riscv64 Linux on qemu-system-riscv64 and mount the
+> {x86_64_sysroot} (and the qemu-x86_64) directory.
+> 5. Execute the x86_64 ls executable on qemu-x86_64 in
+> qemu-system-riscv64
+> ```
+> # qemu-x86_64 -cpu max -L {x86_64_sysroot} {x86_64_sysroot}/usr/bin/ls
+> qemu-x86_64: QEMU internal SIGILL {code=ILLOPC, addr=0x7fff8c076450}
+> Illegal instruction
+> ```
+Whee!  Thanks.  An ubuntu 26.04 x86_64 ls triggers the aforementioned 
+assert on a riscv64 host.  So, thankfully, no double containers required.
 
-Hi Palmer and Richard,
+I'll report back...
 
-Thanks Palmer for providing the toolchain discussion information and
-links.
 
-Richard, I have a reproducer for this issue listed below:
-
-—
-The reproducer follows this flow:
-
-x86_64 `ls` executable -> qemu_x86-64 -> qemu-system-riscv64
-
-1. Get x86_64 sysroot and `ls` executable from x86_64 host
-```
-$ podman create --name x86_64_container ubuntu:24.04
-$ podman cp x86_64_container:/ {x86_64_sysroot}
-```
-2. Cross build qemu-x86_64
-3. Obtain the riscv64 images (I built it using buildroot with
-`qemu_riscv64_virt_defconfig` config).
-4. Boot up riscv64 Linux on qemu-system-riscv64 and mount the
-{x86_64_sysroot} (and the qemu-x86_64) directory.
-5. Execute the x86_64 ls executable on qemu-x86_64 in
-qemu-system-riscv64
-```
-# qemu-x86_64 -cpu max -L {x86_64_sysroot} {x86_64_sysroot}/usr/bin/ls
-qemu-x86_64: QEMU internal SIGILL {code=ILLOPC, addr=0x7fff8c076450}
-Illegal instruction
-```
-—
-
-I understand that this reproducer could be simplified by building a
-standalone executable without copying from the x86_64 container. I’ll
-try to make it simpler.
-
-rnax
+r~
 
