@@ -4,118 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97C10C982DA
-	for <qemu-riscv@archiver.kernel.org>; Fri, 18 Sep 2026 00:46:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4111AC982D2
+	for <qemu-riscv@archiver.kernel.org>; Fri, 18 Sep 2026 00:47:37 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x7MiW-0008Sv-MC; Thu, 17 Sep 2026 20:44:40 -0400
+	id 1x7Mkb-00079I-0p; Thu, 17 Sep 2026 20:46:49 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1x7Mhs-0007qn-Io
- for qemu-riscv@nongnu.org; Thu, 17 Sep 2026 20:44:02 -0400
-Received: from mail-pj2-x10.google.com ([2607:f8b0:4864:39::10])
+ id 1x7MkZ-000752-Ef
+ for qemu-riscv@nongnu.org; Thu, 17 Sep 2026 20:46:47 -0400
+Received: from mail-ej2-x10.google.com ([2a00:1450:4864:34::10])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1x7Mho-0001jF-VP
- for qemu-riscv@nongnu.org; Thu, 17 Sep 2026 20:43:59 -0400
-Received: by mail-pj2-x10.google.com with SMTP id
- 98e67ed59e1d1-398a1676000so174868a91.2
- for <qemu-riscv@nongnu.org>; Thu, 17 Sep 2026 17:43:56 -0700 (PDT)
+ id 1x7MkX-0002Sa-Mu
+ for qemu-riscv@nongnu.org; Thu, 17 Sep 2026 20:46:47 -0400
+Received: by mail-ej2-x10.google.com with SMTP id
+ a640c23a62f3a-c294af0caa8so26751566b.1
+ for <qemu-riscv@nongnu.org>; Thu, 17 Sep 2026 17:46:45 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1789692403; cv=none;
+ d=google.com; s=arc-20260327;
+ b=ZQMyD7yvyTc5sO7grKsnLiPcQyVTowTbeyek2sc4b14J2vateT93Gdgm0rInAvnMmt
+ wsD/5dT3lbNGXrxmLMxtztcKuAyYIeETKw84rB5xh7USfClpTSsCquIVROPJb4pHbbmu
+ QxJHZ9Q4v1hbo5ABi24VLxXYVgHap2Ooo1fid6GP5SdNM/9y50/oAzkWr3K3eUT8nCJT
+ 9ASjP+X95jQLiqtqRl0xpHNwJfRTKid3tqrivbUO+4ZXDCWWwsuyDO5TJYm1ERLpKA1c
+ 55bSed21l/1s+bbM/aWWjLjMWB6peOe1GzA+z7XGmi4vJ/K7PElvPz2SwOeK7teNyRh5
+ 1PFw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=cc:to:subject:message-id:date:from:reply-to:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=wo2dRSj5s2sDzZX3oIY5xn/mBZ82RAL94GNRiW1+pwk=;
+ fh=Xt3AEo5pm6qDIByPbg815IKPshM61Akl5ijzMvDeQlk=;
+ b=SDv6Jaw3ZMVnki4HSuSVVpoBC8EJkQS84eOqRWXFl/7+UGthE9lhJfenTFwA3fOmK5
+ hTV+y4PmBymVXF4dP/HQ4h6Mt0LiPqnLXuvWEzKhVopm5TJP1+aL630MvaZCpQPhvfRm
+ 0FpfdiJuA4Ldta3M0WEH5qwanNwtSBEI1/Q3gQJZE2svBd+SZ8Mzptac8FNebu9x0xwo
+ QK8vUFH8v4dCcFLUGhNEPmoGjz/X856WOpw95XhhjsHE9GFV1E3ejCc8nhqcWPBoGC5I
+ f+uxPKi5475iNrqINCVT2oy+Xp9duripru0VCkSyeEOsU87FeO/wcTlEXQ8T+ebnK8ey
+ FphA==; darn=nongnu.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1789692236; x=1790297036; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=gmail.com; s=20251104; t=1789692403; x=1790297203; darn=nongnu.org;
+ h=content-type:cc:to:subject:message-id:date:from:reply-to
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=7UFceSXCS3RPlb3lAXyqQ273MCixivvVOLwpnsOeXhk=;
- b=qvcSQJoosFLjh6CrHn1zbzAYg1UVZJtrefvO7QF2rAug6LjzSDR0w1dP8cw56AuF/b
- GxTSpMOmOAtjd8H1PUl3t/JDC6reD4pDrzXDBTTFP6TDFeHRRsnMfK/4etHnMR5qpvqw
- kT93SlUZW4q7fAkt7939UiZg0bCZGHLbZ1Sw8sHjEihDWNvQuAm8nB4b64fWK7zOpvTF
- 84BUZbyj6Bow9Xq2wjx0FJCd0OY09as4MxRxEkv9kwFq64LSJsnS3rbHpdeCanOH9W8s
- icF455NVcFdZ7VCX5GWqbzUYw7Kgz4OIuKi2jjbQHX/HZpoaj5yGUwcY+qF/8RC+QQDh
- eLIw==
+ bh=wo2dRSj5s2sDzZX3oIY5xn/mBZ82RAL94GNRiW1+pwk=;
+ b=R5ydsLgAmB+jmyDno6yPiZ5L6eAHtIHxAsIQ6nd3aVK3VK2ere5SOW2xfq8jKxf6c5
+ E3SggP6KB82MlRevPcX4YtLuWWonw15nghCLQC8sZI6kxnKyAfN3gCjvJMbRQS4JAgNX
+ j9+X2Etxtwi09oDaNLig4JUtZ/c/nwEKk4W3O5RZc9kmsP4FTiYmMj6+ncBdkZhYcXpF
+ DrsqOohin5wU6X0X2hTyMQCQurgghDef9aFmQKyykrm5HPQWYoL4mEa+hpUel0FCPUAV
+ 6lGtFd5i7pXxOQLM0cndWJm4jqaHA+eu1gXq8nkpuYKG2no3HrNjrFunWA+iCVjxjwTl
+ EsuQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1789692236; x=1790297036;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ d=1e100.net; s=20260707; t=1789692403; x=1790297203;
+ h=content-type:cc:to:subject:message-id:date:from:reply-to
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=7UFceSXCS3RPlb3lAXyqQ273MCixivvVOLwpnsOeXhk=;
- b=q6O+7ZxQmWkMYV6g0MkQhJ4KiFrQj3q32GTFyxNJMDTsD/orK6WRgiCFmM/gFNobI7
- jjHvwcxFjYUyOy+YOqKB5/ipT1nLtrSbovlbbxsd7Hvoxikg5G/VNaO4c9UdbvS4jO8/
- /c98PZMbJ40peJjcQ/FZ2RK2SQ9jqGstqR/WpxnZdJBEK/z+7DNWzUFvwUM7VUwZxPv/
- B95mNPcoV47a0o/eKIgpT/jk+JWORmLJv69ZHVwlGqH25UMQzT2niHfVWjvTTHtPBhuw
- IBZRbjLinTtGb93OGU09uLcbxctTK+Gpl2nxEXpFVF3vfoviepbG/lQ0KwoMGmGdSSZL
- 9quw==
+ bh=wo2dRSj5s2sDzZX3oIY5xn/mBZ82RAL94GNRiW1+pwk=;
+ b=Dtk6sFi09qnbr5qM2dB2IC2a1pVPG8O9t/hBTBrw3YDS3ICmFb1jj3+Qmn/lHv43f6
+ DCfPlBT4Ccc14016CdrxOrwnER0o36Qaf8z28nVaLLPxiD656dx7yUAou6D0ZtnsZ2sl
+ Sr3N316X+alqRnHy480w8Z7m/ZiFUP+QaMfdbi+Qvr10UiYJ5H2pgfG3VbNIYwgYR6ol
+ 9t9FsVu4cFYuy9cWjbPp5NhK1Fl1xzyvBJgUbjaRseZvtwl9HCeUKj0nQAsrCqzvSz/D
+ rvY6w0G14ZP6dpXPvlagRa/qMY0KUUnx9SeueZPCUjAfh5ofviFfq+dXroFX99CK+2U8
+ c98A==
 X-Forwarded-Encrypted: i=1;
- AKwUvBxeo0B54YCrgsqqKCpRw3AdFUIRuhSPpTtSl/rSrHV9ZQLttjOGn+Wwi/6vi33M0/lPldXJBCrHSDTo@nongnu.org
-X-Gm-Message-State: AFuF++ntC3QY17RaKQQRBNCnkAp6lXrEazDeFr8Uw9HLGejjkZqJHyWL
- w+UIOU5MleveCWnFU8MV8KWAq+DoXjGXVHo09Xt/bOGETNI8mMuyKV4U
-X-Gm-Gg: AYBFou2CLL3UsMhesu5+IqpKFKRBe6t6DRtWxhv/9Ch8/bRBfTGWP81Cufl+zKblAxC
- PiPrf+N3NiTHaQKZ51T53uMhViwEIiSwFlRXHyZekbFgmyIvVqiA5GMfa/qmd0U4VlCYnnEuvGz
- PepndnlspGUppi8wkT9tx79K7yxDoGvpJy6/iOVLvOPDikccvl97mi4TLMIv+n8dxCuW9zJTztj
- 3lvh2zWG7BKxRfRTcwAnD3G47LYfJXsR6+EBs5kbBNqLwA2SIgzhynaRK+P/Z4PmZqZ1h8yt0EW
- l9ilHovZd8XPrdNrrgBpZfImXoJ2NNyMP3VO7Q1TLnAJAnhFqo+WtKVPGDSl6BXWe4z6f5C/r4S
- RmckMFw+4hqFyzbmMdW/lGl/OAUNykAnhyNsN3tf06la5BIuNEcy6AGk49i7z2aaulEaWlLwHU5
- Z0VT0ev211dOoUkzdWRQXwVy2hgvvNBfPSLV07IATAKig8G1kOIqGFueGsgkczoHBTEh7NtcFAk
- VwJIGWhAB7JPIr3BUdZ51FkTnZaqnpZLE4+6HW6/FQ=
-X-Received: by 2002:a17:90b:53c3:b0:39d:f130:8f13 with SMTP id
- 98e67ed59e1d1-39e54e3c624mr1735699a91.21.1789692235617; 
- Thu, 17 Sep 2026 17:43:55 -0700 (PDT)
-Received: from WIN-BH9M8FJACR9 ([103.94.185.75])
- by smtp.googlemail.com with ESMTPSA id
- a92af1059eb24-144cdfc3df2sm600286c88.5.2026.09.17.17.43.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 17 Sep 2026 17:43:54 -0700 (PDT)
-From: Yonggang Luo <luoyonggang@gmail.com>
-To: qemu-devel@nongnu.org
-Cc: Xianglai Li <lixianglai@loongson.cn>, qemu-s390x@nongnu.org,
- David Hildenbrand <david@kernel.org>,
- Richard Henderson <richard.henderson@linaro.org>, qemu-ppc@nongnu.org,
- Laurent Vivier <laurent@vivier.eu>,
- Yoshinori Sato <yoshinori.sato@nifty.com>,
- Nicholas Piggin <npiggin@gmail.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Stafford Horne <shorne@gmail.com>, Weiwei Li <liwei1518@gmail.com>,
- Cornelia Huck <cohuck@redhat.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Chinmay Rath <rathc@linux.ibm.com>,
- Harsh Prateek Bora <harshpb@linux.ibm.com>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Aleksandar Rikalo <arikalo@gmail.com>,
- Brian Cain <brian.cain@oss.qualcomm.com>,
- Artyom Tarasenko <atar4qemu@gmail.com>, Max Filippov <jcmvbkbc@gmail.com>,
- Eric Farman <farman@linux.ibm.com>,
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
- Michael Rolnik <mrolnik@gmail.com>, Aurelien Jarno <aurelien@aurel32.net>,
- qemu-arm@nongnu.org, Bibo Mao <maobibo@loongson.cn>,
- Chao Liu <chao.liu@processmission.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
- Ilya Leoshkevich <iii@linux.ibm.com>, Helge Deller <deller@gmx.de>,
- Glenn Miles <milesg@linux.ibm.com>, Zhao Liu <zhao1.liu@intel.com>,
- Philippe Mathieu-Daude <philmd@mailo.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Paolo Bonzini <pbonzini@redhat.com>,
- Peter Maydell <peter.maydell@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org,
- Song Gao <17746591750@163.com>, Matthew Rosato <mjrosato@linux.ibm.com>
-Subject: [PATCH 09/21] target/sparc: convert raise_exception to raise_excp
-Date: Fri, 18 Sep 2026 08:42:11 +0800
-Message-ID: <20260918004225.827-10-luoyonggang@gmail.com>
-X-Mailer: git-send-email 2.52.0.windows.1
-In-Reply-To: <20260918004225.827-1-luoyonggang@gmail.com>
-References: <20260918004225.827-1-luoyonggang@gmail.com>
+ AKwUvBzNC1suTDgYWGPNBigkP7lnkQ/maccXT09g1YnlRu5pKIsjSrwiQH+RbzxfVCKgzpLt49WBusfC8gwR@nongnu.org
+X-Gm-Message-State: AFuF++mgc3swdCovESKmBmZv6u6y5z9VO+W2FMRJ9rD72l5xSFaHZfFe
+ nJUEMBV2vKEFpkB6ZreEd+TD8Opr+x8Zx1qCPJZym7IVJm4gIAN3wUFRAQZcuFk0quaDbUGcjv5
+ nXLk7RBNXGhRB/0LPnNZBoIx3XrSpvMs=
+X-Gm-Gg: AYBFou2ZuqIvPBy3z0+tpJnkMw/+5GcME7jRftyozugHSFC4dm+ulWgnsAdLnvzbuRr
+ vxaye7LAhyV2mkOk4AlGfedz/l18sUQ/1lQ4G7+CUnHnqJxoyZ3kwxi5RhOHF0SPKlVNSzgk27U
+ 5c5nsWUc7TGw+EXC2rMZ4s6SL9/L2za+HZZQoPqODR9VR01KzGCGt2L0wPOkh3vfgZzzy71c1S+
+ Ch+fUJitmUUZRXToJtHoZtCJyWmw7zlh6rzTFdaVtukj5vyTOvzhFTqxaVgESFODzIZ6hnLUJ7K
+ BzOjmouXk/uGqO3Y0oJ8N3u0k1/ue4BQ4S2K9Js++1d3FAUm2VGQ9po=
+X-Received: by 2002:a17:907:3f1e:b0:c29:5340:1837 with SMTP id
+ a640c23a62f3a-c2a156d703cmr89272366b.16.1789692403256; Thu, 17 Sep 2026
+ 17:46:43 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:39::10;
- envelope-from=luoyonggang@gmail.com; helo=mail-pj2-x10.google.com
+References: <20260916-hw-riscv-cpu-int-v4-0-babc367b60f5@rev.ng>
+ <20260916-hw-riscv-cpu-int-v4-10-babc367b60f5@rev.ng>
+ <f692f936-550b-4e5b-90ee-399edf21de73@oss.qualcomm.com>
+ <CAE2XoE9KkW+WPWL1g4hzT6OtkQhfYvaMAopBW4NfFMkXn9hjzQ@mail.gmail.com>
+ <ef62c7fc-9db5-43f2-adbc-e86a805757b4@oss.qualcomm.com>
+ <686611d2-d6ca-4022-adbd-49cb7b0b943a@oss.qualcomm.com>
+In-Reply-To: <686611d2-d6ca-4022-adbd-49cb7b0b943a@oss.qualcomm.com>
+From: Yonggang Luo <luoyonggang@gmail.com>
+Date: Fri, 18 Sep 2026 08:46:29 +0800
+X-Gm-Features: AcwNN1UsY21CNqDUgQt07opHhdSRSGJtkOky72ouFDFT_bknCveTS_ROtVVk0nU
+Message-ID: <CAE2XoE-Nn9rj8Ejc-dsHoY3KRUb5kRPhQSOfxx8MpMMdmhmXUg@mail.gmail.com>
+Subject: Re: [PATCH v4 10/12] target-info: Introduce target_riscv32
+To: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
+Cc: Anton Johansson <anjo@rev.ng>, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
+ daniel.barboza@oss.qualcomm.com, philmd@oss.qualcomm.com, palmer@dabbelt.com, 
+ alistair.francis@wdc.com
+Content-Type: multipart/alternative; boundary="000000000000f4120f065bb73bbe"
+Received-SPF: pass client-ip=2a00:1450:4864:34::10;
+ envelope-from=luoyonggang@gmail.com; helo=mail-ej2-x10.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -129,111 +120,70 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
+Reply-To: luoyonggang@gmail.com
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Translate through gen_helper_raise_excp with restore 0 after
-save_state. Drop TCG raise_exception. Keep C cpu_raise_exception_ra.
-Exit DEBUG and HLT through cpu_loop_exit_excp.
+--000000000000f4120f065bb73bbe
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
----
- target/sparc/helper.c    | 21 +++------------------
- target/sparc/helper.h    |  2 --
- target/sparc/translate.c |  7 ++++---
- 3 files changed, 7 insertions(+), 23 deletions(-)
+On Fri, Sep 18, 2026 at 1:11=E2=80=AFAM Pierrick Bouvier <
+pierrick.bouvier@oss.qualcomm.com> wrote:
+>
+> On 9/17/2026 10:05 AM, Pierrick Bouvier wrote:
+> > On 9/16/2026 6:00 PM, Yonggang Luo wrote:
+> >> As I said before, we need the `const TargetInfo*` parameter to for
+> >> is_avaiable.  I've get all accelerator and i386/x86_64/aarch64/arm/
+> >> risv32/riscv64/
+> >>
+> >
+> > In general, on QEMU dev, we can't block other series to do a change
+> > compatible with a current work in progress. In other words, the first
+> > merged wins, and the second has to solve the conflicts. That's sometime=
+s
+> > frustrating, and having worked on single-binary for more than a year,
+> > yes I confirm it's not always fun to "cleanup" behind people patches.
+> > That's part of the work though.
+> >
+>
+> I should say "request changes" instead of "block", because I know you're
+> kindly asking for it.
 
-diff --git a/target/sparc/helper.c b/target/sparc/helper.c
-index 8de261b0e30..411a8dfe359 100644
---- a/target/sparc/helper.c
-+++ b/target/sparc/helper.c
-@@ -27,26 +27,12 @@
- 
- void cpu_raise_exception_ra(CPUSPARCState *env, int tt, uintptr_t ra)
- {
--    CPUState *cs = env_cpu(env);
--
--    cs->exception_index = tt;
--    cpu_loop_exit_restore(cs, ra);
--}
--
--void helper_raise_exception(CPUSPARCState *env, int tt)
--{
--    CPUState *cs = env_cpu(env);
--
--    cs->exception_index = tt;
--    cpu_loop_exit(cs);
-+    cpu_loop_exit_excp(env_cpu(env), tt, ra);
- }
- 
- void helper_debug(CPUSPARCState *env)
- {
--    CPUState *cs = env_cpu(env);
--
--    cs->exception_index = EXCP_DEBUG;
--    cpu_loop_exit(cs);
-+    cpu_loop_exit_excp(env_cpu(env), EXCP_DEBUG, 0);
- }
- 
- #ifdef TARGET_SPARC64
-@@ -208,10 +194,9 @@ void helper_power_down(CPUSPARCState *env)
-     CPUState *cs = env_cpu(env);
- 
-     cs->halted = 1;
--    cs->exception_index = EXCP_HLT;
-     env->pc = env->npc;
-     env->npc = env->pc + 4;
--    cpu_loop_exit(cs);
-+    cpu_loop_exit_excp(cs, EXCP_HLT, 0);
- }
- 
- target_ulong helper_rdasr17(CPUSPARCState *env)
-diff --git a/target/sparc/helper.h b/target/sparc/helper.h
-index 3a7f7dc1296..9fc38f5706a 100644
---- a/target/sparc/helper.h
-+++ b/target/sparc/helper.h
-@@ -53,8 +53,6 @@ DEF_HELPER_FLAGS_3(fcmpq, TCG_CALL_NO_WG, i32, env, i128, i128)
- DEF_HELPER_FLAGS_3(fcmpeq, TCG_CALL_NO_WG, i32, env, i128, i128)
- DEF_HELPER_FLAGS_3(flcmps, TCG_CALL_NO_RWG_SE, i32, env, f32, f32)
- DEF_HELPER_FLAGS_3(flcmpd, TCG_CALL_NO_RWG_SE, i32, env, f64, f64)
--DEF_HELPER_2(raise_exception, noreturn, env, int)
--
- DEF_HELPER_FLAGS_3(faddd, TCG_CALL_NO_WG, f64, env, f64, f64)
- DEF_HELPER_FLAGS_3(fsubd, TCG_CALL_NO_WG, f64, env, f64, f64)
- DEF_HELPER_FLAGS_3(fmuld, TCG_CALL_NO_WG, f64, env, f64, f64)
-diff --git a/target/sparc/translate.c b/target/sparc/translate.c
-index 3156be6a94c..8b22b8e54db 100644
---- a/target/sparc/translate.c
-+++ b/target/sparc/translate.c
-@@ -1048,7 +1048,8 @@ static void gen_exception(DisasContext *dc, int which)
- {
-     finishing_insn(dc);
-     save_state(dc);
--    gen_helper_raise_exception(tcg_env, tcg_constant_i32(which));
-+    gen_helper_raise_excp(tcg_env, tcg_constant_i32(which),
-+                          tcg_constant_i32(0));
-     dc->base.is_jmp = DISAS_NORETURN;
- }
- 
-@@ -2811,7 +2812,7 @@ static bool do_tcc(DisasContext *dc, int cond, int cc,
-     /* Trap always.  */
-     if (cond == 8) {
-         save_state(dc);
--        gen_helper_raise_exception(tcg_env, trap);
-+        gen_helper_raise_excp(tcg_env, trap, tcg_constant_i32(0));
-         dc->base.is_jmp = DISAS_NORETURN;
-         return true;
-     }
-@@ -5833,7 +5834,7 @@ static void sparc_tr_tb_stop(DisasContextBase *dcbase, CPUState *cs)
-         if (e->npc % 4 == 0) {
-             tcg_gen_movi_tl(cpu_npc, e->npc);
-         }
--        gen_helper_raise_exception(tcg_env, e->excp);
-+        gen_helper_raise_excp(tcg_env, e->excp, tcg_constant_i32(0));
- 
-         e_next = e->next;
-         g_free(e);
--- 
-2.52.0.windows.1
+Yeap, I'll wait for this merged first. thanks.
 
+
+--
+         =E6=AD=A4=E8=87=B4
+=E7=A4=BC
+=E7=BD=97=E5=8B=87=E5=88=9A
+Yours
+    sincerely,
+Yonggang Luo
+
+--000000000000f4120f065bb73bbe
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><br><br>On Fri, Sep 18, 2026 at 1:11=E2=80=AFAM Pierrick B=
+ouvier &lt;<a href=3D"mailto:pierrick.bouvier@oss.qualcomm.com">pierrick.bo=
+uvier@oss.qualcomm.com</a>&gt; wrote:<br>&gt;<br>&gt; On 9/17/2026 10:05 AM=
+, Pierrick Bouvier wrote:<br>&gt; &gt; On 9/16/2026 6:00 PM, Yonggang Luo w=
+rote:<br>&gt; &gt;&gt; As I said before, we need the `const TargetInfo*` pa=
+rameter to for<br>&gt; &gt;&gt; is_avaiable.=C2=A0 I&#39;ve get all acceler=
+ator and i386/x86_64/aarch64/arm/<br>&gt; &gt;&gt; risv32/riscv64/<br>&gt; =
+&gt;&gt;<br>&gt; &gt;<br>&gt; &gt; In general, on QEMU dev, we can&#39;t bl=
+ock other series to do a change<br>&gt; &gt; compatible with a current work=
+ in progress. In other words, the first<br>&gt; &gt; merged wins, and the s=
+econd has to solve the conflicts. That&#39;s sometimes<br>&gt; &gt; frustra=
+ting, and having worked on single-binary for more than a year,<br>&gt; &gt;=
+ yes I confirm it&#39;s not always fun to &quot;cleanup&quot; behind people=
+ patches.<br>&gt; &gt; That&#39;s part of the work though.<br>&gt; &gt;<br>=
+&gt;<br>&gt; I should say &quot;request changes&quot; instead of &quot;bloc=
+k&quot;, because I know you&#39;re<br>&gt; kindly asking for it.<br><br>Yea=
+p, I&#39;ll wait for this merged first. thanks.<br><br><br>--<br>=C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0=E6=AD=A4=E8=87=B4<br>=E7=A4=BC<br>=E7=BD=97=E5=8B=
+=87=E5=88=9A<br>Yours<br>=C2=A0 =C2=A0 sincerely,<br>Yonggang Luo</div>
+
+--000000000000f4120f065bb73bbe--
 
