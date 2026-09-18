@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C987C982D0
-	for <qemu-riscv@archiver.kernel.org>; Fri, 18 Sep 2026 00:45:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92DA4C982D6
+	for <qemu-riscv@archiver.kernel.org>; Fri, 18 Sep 2026 00:45:06 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x7Mic-0000RZ-Ef; Thu, 17 Sep 2026 20:44:46 -0400
+	id 1x7MiY-00008X-Kh; Thu, 17 Sep 2026 20:44:42 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1x7Mi0-0007vT-Kj
- for qemu-riscv@nongnu.org; Thu, 17 Sep 2026 20:44:09 -0400
-Received: from mail-pz2-x0e.google.com ([2607:f8b0:4864:3b::e])
+ id 1x7Mi9-00082Y-Op
+ for qemu-riscv@nongnu.org; Thu, 17 Sep 2026 20:44:21 -0400
+Received: from mail-pj2-x11.google.com ([2607:f8b0:4864:39::11])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1x7Mhx-0001kd-HG
- for qemu-riscv@nongnu.org; Thu, 17 Sep 2026 20:44:08 -0400
-Received: by mail-pz2-x0e.google.com with SMTP id
- 41be03b00d2f7-cc1cea50dc1so62462a12.0
- for <qemu-riscv@nongnu.org>; Thu, 17 Sep 2026 17:44:05 -0700 (PDT)
+ id 1x7Mi7-0001mQ-Fp
+ for qemu-riscv@nongnu.org; Thu, 17 Sep 2026 20:44:17 -0400
+Received: by mail-pj2-x11.google.com with SMTP id
+ d9443c01a7336-2d747ee1f38so1612045ad.2
+ for <qemu-riscv@nongnu.org>; Thu, 17 Sep 2026 17:44:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1789692244; x=1790297044; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1789692253; x=1790297053; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=lulph+1uLiSsZprj2WnOvAAVxiVP07eJais76hf0yd8=;
- b=dNm/fQlj0DvQHlDCIxoqLggwufXm/0metJBY+I8/lA0Nvdt+a5eFnmloumiehIq49A
- 76ff0TkFWbfqgyzTKECacVdXduna3w1V5wpdD924kVFaNTnf+ETGS/GjwV8KQD8qKgFE
- jouB88FeW/KiGKqNgg0U0W9zAbHyJpOY0oyw76N24HWQ1f9sxDzE9ZbzOZveC14lC5/d
- HaCKxjQfZ0M63sl7jWaoQ207br5G8uiC3bHXIBqbnBE0PtEG6sCH4xmT0XyXhLpK9HcT
- yjKuLAr6P/88z+7ndHNlCbOrlTV9MYwoGBwdL+F/577LMGOMt0Q8ysGdX8bQJDeK7nLq
- j6Ww==
+ bh=1gnL1JyC3NjkayeZ4obve1TRdpMg5uqR4VfKbNdZA00=;
+ b=BYsiRIJltqBhOc9w/VKe4aej12c+M9T0CEBP55yKua71gVi/F+D4g8U4M3w0LKGtCx
+ CCxPKDP9Rm2n4zTagD7F0sosSRzPH7pznJO2xaDGUrncj+9UBUV+kH5tSt/yfev8uK4U
+ KYvjtFGi8EtJxVwMZDwhu7mq6hsEdMKcweX5nAatWkMM2xivt4Kr32fBMMAOY0jWP+UK
+ 0n2GPGJjOsclXjXWvClE8bxTSZ/cxYXRfEjruCDtnU4csy0fWK/clbsgUfmmAIIVr7Zs
+ X6QggROAQEQAij8269A20y0GR8Q8A4TfIpwRBtVly1KLWE0oZoMqdhceAb2X9RUh1ugO
+ 3rIw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1789692244; x=1790297044;
+ d=1e100.net; s=20260707; t=1789692253; x=1790297053;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=lulph+1uLiSsZprj2WnOvAAVxiVP07eJais76hf0yd8=;
- b=ap7lF4nHN8RraKgke3enYpZLyr6SFFd0/FUcM5HgBKutv4KJa/v2SZPSpKxaOxBvBd
- Av4jInHPpgE4mnzkgIQla4EqXJ9zkfHQv+TLtGTcgc//6IsUs8FY6N8loB3yiNw6Fkwz
- sRKJyybhxpYHFzZ7HQOinaSDn7EMn759rS4ohSpn4OrzyOBrwsQVc3nJJEMvD+2p4dmz
- 0OFKi7jIwix/K74oKhDvopQZBP6WOFdVfAD19rKtV0npwPZsoXTrX49AByZeT8aGKmav
- 5JWLW3/6HlWuR9/tcXpLWLkBrafqz+ny0OPtUjPc61vaqyU7mYRGVPzs1kB5GS4Hr/uv
- qXtw==
+ bh=1gnL1JyC3NjkayeZ4obve1TRdpMg5uqR4VfKbNdZA00=;
+ b=OhuBJ3j8nzK21BaoEtzPnC+4iGf2l/bxsB5esuUBgnUx/dBku3VZz2sMrjI5HD5ZRt
+ J/QYJ5BDojA19RpjbNUSKXtM7Mt55UjRnAwjEjLiVqOMf5AtXYs31g/fXlLbRJOXZ7zb
+ jIMtOuR9M9I7mKfcpAp6b9K9NJGBaUnu00K84gKf2qLPOZXMKJgaAah36YIPLo7CY5cw
+ OOg5de/uJdsG3p+VPltiUL2O7rfX0aONQHoxxITWgr9hooFsvV+X4s/nL4ZK+cP2mVIY
+ WppvewODWTUg+ReV09VVCYcUQFWMbsbi1yKkT9ILpsk8uogXZu/RnqXyskb0jW8ZUk13
+ SZIg==
 X-Forwarded-Encrypted: i=1;
- AKwUvBzFRtgZNGswLeCHVb0HnBSioWaROu0B/ac+/K52G/pZjGW40lsnPnC5cfF7J2x3478F5I2gWe+0wHUc@nongnu.org
-X-Gm-Message-State: AFuF++nuf+29zQMtnbhiBkrHK/08s6qpHcWcZYvbzD+cdNgb/gpWI6Av
- AZDmRJtgMn57PKXojCurLyc9YjFJODUNYpU6QxX+6Tf7D8EHKF91w8lX
-X-Gm-Gg: AYBFou2GZgK5ld1Tu9YA3TbpchAOcSzB9shSj5q4SYOLAu4xiAayyiEQPUdgwiFF15o
- 0pLMfls00kPXe+n57Nd0SsgFH9LWuuHMUwbghYPKQNkqAVSibewoWIl6M/OVmodrYQ/vDGGR/6G
- v+JEaLRFvr9ylO36H+bPOdYTSQSEdTYGDlmZ497OFus67Qy9xz9iwYHLlsv+21yvU2qIlXj47z2
- MdlyJV3pW3PddPVegDcY/ybdPGVNpDO/X2nu+NgMRz0PWMeelF8UZ7vQ4B3sv30Ln8yJFiwGVf6
- yZu7ayMkaYeHooG2F9xz09/y0nd96QBIQ27pcMQZdzAw/5xXwXlxnlrEiHA7K2Bzx3qSuZL4iqH
- x/Oh1COR6T9f2+a2FQXlQYfR2D8JKYT7Oe5RjplzrmcqHhBYqMcExJGNMzntCM4FgX/uaqNW8Xw
- cBJm7fW1eez+SNcyt/TVI6AUe0NmREF0vt/0MIW1oyUz/sJqunoGAZC/PE9Q9uOHQmAY8Azk/Fu
- aCdgtB4GkxIDE1wUfcQ9Jh+me/iPrr7
-X-Received: by 2002:a05:6a20:3d8d:b0:3d3:ad3c:49a9 with SMTP id
- adf61e73a8af0-3dd8c516adbmr1396998637.23.1789692244095; 
- Thu, 17 Sep 2026 17:44:04 -0700 (PDT)
+ AKwUvBzgI8WjTMR7p8UqJjIpK06KU7GQ0cNw3NKiQL3HbMveuL+JhkBCI3m9MU//cg+8hoapMiuVZo5rFGpK@nongnu.org
+X-Gm-Message-State: AFuF++kLz2bEIO0aRHjxdWOgAKTsLSXzK0VTw1JqJ1isf5Az6HXjxocX
+ tKfeRsAVrj6WNEk6G58m/kjSwmd1gWyWY4k/NacoryRF49CNwD0o4B8t
+X-Gm-Gg: AYBFou3rQaQuqiuAnuLpMcL6zPMQWGt/Tc5kIPpI/iQYT6hsBBM4hjeSOLarjaukjAv
+ 1GHuIVcZcbYfV1U+2XRs+qO5A+t+zID/Foc9INKiN8DNyQt06XlfliIcNjJ3hgnmfQQ3aVzbS+V
+ QviD8mUvuqgKzqCZLbJhZvHWbLFkILUif5eW5ey4jii51+e3ClROHfNTAw96NoN+dxGJBGVsZCl
+ Eos1+KNlWlmm0ioCKoPt0SHZBpQ0GbeBwE3aG0/IU58HKL4jNKTvAJ15ZNhhFvIuZcHVzircmzE
+ vVRI2s2nHcfjd1E/2w+Hf2AeE6gYqm77/rmW0RbVMdq6rSPEaWHgDmAYEzvanRbiH075MXrqu83
+ 8BeCQcdfdqB1nm7ORpZzOIIUKkICY/R6mxfhHGdt52iI55qksjGAr+riMR6bgv+bejSuPl0mu0+
+ t0yuDRRZnaVGK0cgin+fvELRBokGavueMVOH0pV3EE/2eE3nNu653aCYtuyI1piod2P/T8RHpQE
+ gJ8d8godk14PPT5Yow/G+u8ff9H796b
+X-Received: by 2002:a17:90b:3c05:b0:39e:218c:d47c with SMTP id
+ 98e67ed59e1d1-39e54f42eddmr2733876a91.9.1789692252589; 
+ Thu, 17 Sep 2026 17:44:12 -0700 (PDT)
 Received: from WIN-BH9M8FJACR9 ([103.94.185.75])
  by smtp.googlemail.com with ESMTPSA id
- a92af1059eb24-144cdfc3df2sm600286c88.5.2026.09.17.17.43.56
+ a92af1059eb24-144cdfc3df2sm600286c88.5.2026.09.17.17.44.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 17 Sep 2026 17:44:03 -0700 (PDT)
+ Thu, 17 Sep 2026 17:44:11 -0700 (PDT)
 From: Yonggang Luo <luoyonggang@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: Xianglai Li <lixianglai@loongson.cn>, qemu-s390x@nongnu.org,
@@ -100,22 +100,23 @@ Cc: Xianglai Li <lixianglai@loongson.cn>, qemu-s390x@nongnu.org,
  Peter Maydell <peter.maydell@linaro.org>,
  Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org,
  Song Gao <17746591750@163.com>, Matthew Rosato <mjrosato@linux.ibm.com>
-Subject: [PATCH 10/21] target/loongarch: convert raise_exception to raise_excp
-Date: Fri, 18 Sep 2026 08:42:12 +0800
-Message-ID: <20260918004225.827-11-luoyonggang@gmail.com>
+Subject: [PATCH 11/21] target/hexagon: convert raise_exception to
+ hexagon_raise_exception
+Date: Fri, 18 Sep 2026 08:42:13 +0800
+Message-ID: <20260918004225.827-12-luoyonggang@gmail.com>
 X-Mailer: git-send-email 2.52.0.windows.1
 In-Reply-To: <20260918004225.827-1-luoyonggang@gmail.com>
 References: <20260918004225.827-1-luoyonggang@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:3b::e;
- envelope-from=luoyonggang@gmail.com; helo=mail-pz2-x0e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:39::11;
+ envelope-from=luoyonggang@gmail.com; helo=mail-pj2-x11.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -131,77 +132,259 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Translate through gen_helper_raise_excp with restore 1 after
-storing PC. Drop TCG raise_exception. Keep C do_raise_exception
-and use cpu_loop_exit_excp.
+Fold C do_raise_exception into hexagon_raise_exception_err with
+vaddr pc and a retaddr parameter, and exit via cpu_loop_exit_excp.
+Prefix leftover TCG raise_exception to hexagon_raise_exception so
+translate keeps the CPU_LOG_INT log and ASSERT_DIRECT_TO_GUEST_UNSET.
+Prefix leftover TCG wait to hexagon_wait with vaddr pc.
 
 Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
 ---
- target/loongarch/tcg/helper.h    | 2 --
- target/loongarch/tcg/op_helper.c | 6 ------
- target/loongarch/tcg/tcg_cpu.c   | 4 +---
- target/loongarch/tcg/translate.c | 3 ++-
- 4 files changed, 3 insertions(+), 12 deletions(-)
+ target/hexagon/cpu.c         | 13 +++++++------
+ target/hexagon/cpu.h         |  2 +-
+ target/hexagon/gen_tcg_sys.h |  2 +-
+ target/hexagon/helper.h      |  5 +++--
+ target/hexagon/internal.h    |  5 -----
+ target/hexagon/macros.h      |  2 +-
+ target/hexagon/op_helper.c   | 37 +++++++++++++++---------------------
+ target/hexagon/translate.c   | 11 ++++++-----
+ 8 files changed, 34 insertions(+), 43 deletions(-)
 
-diff --git a/target/loongarch/tcg/helper.h b/target/loongarch/tcg/helper.h
-index e76c73c7755..e3a7bc9e9da 100644
---- a/target/loongarch/tcg/helper.h
-+++ b/target/loongarch/tcg/helper.h
-@@ -3,8 +3,6 @@
-  * Copyright (c) 2021 Loongson Technology Corporation Limited
-  */
+diff --git a/target/hexagon/cpu.c b/target/hexagon/cpu.c
+index fad526ccfb5..0d2441b1671 100644
+--- a/target/hexagon/cpu.c
++++ b/target/hexagon/cpu.c
+@@ -333,7 +333,7 @@ static TCGTBCPUState hexagon_get_tb_cpu_state(CPUState *cs)
+     }
+     if (pc & PCALIGN_MASK) {
+         env->cause_code = HEX_CAUSE_PC_NOT_ALIGNED;
+-        hexagon_raise_exception_err(env, HEX_EVENT_PRECISE, pc);
++        hexagon_raise_exception_err(env, HEX_EVENT_PRECISE, pc, 0);
+     }
  
--DEF_HELPER_2(raise_exception, noreturn, env, i32)
+ #ifndef CONFIG_USER_ONLY
+@@ -711,14 +711,15 @@ static bool hexagon_tlb_fill(CPUState *cs, vaddr address, int size,
+             return false;
+         }
+         raise_perm_exception(cs, address, slot, access_type, excp);
+-        do_raise_exception(env, cs->exception_index, env->gpr[HEX_REG_PC],
+-                           retaddr);
++        hexagon_raise_exception_err(env, cs->exception_index,
++                                    env->gpr[HEX_REG_PC], retaddr);
+     }
+     if (probe) {
+         return false;
+     }
+     raise_tlbmiss_exception(cs, address, slot, access_type);
+-    do_raise_exception(env, cs->exception_index, env->gpr[HEX_REG_PC], retaddr);
++    hexagon_raise_exception_err(env, cs->exception_index,
++                                env->gpr[HEX_REG_PC], retaddr);
+ }
+ 
+ #include "hw/core/sysemu-cpu-ops.h"
+@@ -761,8 +762,8 @@ void hexagon_cpu_do_unaligned_access(CPUState *cs, vaddr addr,
+     CPUHexagonState *env = cpu_env(cs);
+ 
+     raise_misaligned_exception(cs, addr, 0, access_type);
+-    do_raise_exception(env, cs->exception_index, env->gpr[HEX_REG_PC],
+-                       retaddr);
++    hexagon_raise_exception_err(env, cs->exception_index,
++                                env->gpr[HEX_REG_PC], retaddr);
+ }
+ 
+ #endif
+diff --git a/target/hexagon/cpu.h b/target/hexagon/cpu.h
+index b1533680bd7..e79d8000304 100644
+--- a/target/hexagon/cpu.h
++++ b/target/hexagon/cpu.h
+@@ -210,7 +210,7 @@ FIELD(TB_FLAGS, PCYCLE_ENABLED, 4, 1)
+ 
+ G_NORETURN void hexagon_raise_exception_err(CPUHexagonState *env,
+                                             uint32_t exception,
+-                                            uintptr_t pc);
++                                            vaddr pc, uintptr_t retaddr);
+ 
+ #ifndef CONFIG_USER_ONLY
+ /*
+diff --git a/target/hexagon/gen_tcg_sys.h b/target/hexagon/gen_tcg_sys.h
+index af5032214c4..489d2780470 100644
+--- a/target/hexagon/gen_tcg_sys.h
++++ b/target/hexagon/gen_tcg_sys.h
+@@ -80,7 +80,7 @@
+ #define fGEN_TCG_Y2_wait(SHORTCODE) \
+     do { \
+         RsV = RsV; \
+-        gen_helper_wait(tcg_env, tcg_constant_tl(ctx->pkt.pc)); \
++        gen_helper_hexagon_wait(tcg_env, tcg_constant_vaddr(ctx->pkt.pc)); \
+     } while (0)
+ 
+ #define fGEN_TCG_Y2_resume(SHORTCODE) \
+diff --git a/target/hexagon/helper.h b/target/hexagon/helper.h
+index 71c8da4c46d..cf1b977f33c 100644
+--- a/target/hexagon/helper.h
++++ b/target/hexagon/helper.h
+@@ -18,7 +18,8 @@
+ #include "internal.h"
+ #include "helper_protos_generated.h.inc"
+ 
+-DEF_HELPER_FLAGS_3(raise_exception, TCG_CALL_NO_RETURN, noreturn, env, i32, i32)
++DEF_HELPER_FLAGS_3(hexagon_raise_exception, TCG_CALL_NO_RETURN, noreturn,
++                   env, i32, vaddr)
+ DEF_HELPER_2(commit_store, void, env, int)
+ DEF_HELPER_3(gather_store, void, env, i32, int)
+ DEF_HELPER_1(commit_hvx_stores, void, env)
+@@ -136,7 +137,7 @@ DEF_HELPER_3(sreg_write_masked, void, env, i32, i32)
+ DEF_HELPER_3(setprio, void, env, i32, i32)
+ DEF_HELPER_2(start, void, env, i32)
+ DEF_HELPER_1(stop, void, env)
+-DEF_HELPER_2(wait, void, env, i32)
++DEF_HELPER_2(hexagon_wait, void, env, vaddr)
+ DEF_HELPER_2(resume, void, env, i32)
+ DEF_HELPER_1(resched, void, env)
+ DEF_HELPER_3(modify_ssr, void, env, i32, i32)
+diff --git a/target/hexagon/internal.h b/target/hexagon/internal.h
+index 05d1129916e..4b7a784fbc7 100644
+--- a/target/hexagon/internal.h
++++ b/target/hexagon/internal.h
+@@ -36,11 +36,6 @@ extern const char * const hexagon_sregnames[];
+ extern const char * const hexagon_gregnames[];
+ #endif
+ 
+-void G_NORETURN do_raise_exception(CPUHexagonState *env,
+-        uint32_t exception,
+-        uint32_t PC,
+-        uintptr_t retaddr);
 -
- DEF_HELPER_FLAGS_3(asrtle_d, TCG_CALL_NO_WG, void, env, tl, tl)
- DEF_HELPER_FLAGS_3(asrtgt_d, TCG_CALL_NO_WG, void, env, tl, tl)
+ #define hexagon_cpu_mmu_enabled(env) ({ \
+     HexagonCPU *cpu = env_archcpu(env); \
+     cpu->globalregs ? \
+diff --git a/target/hexagon/macros.h b/target/hexagon/macros.h
+index a5b9c24c6bb..4a87f6d72f1 100644
+--- a/target/hexagon/macros.h
++++ b/target/hexagon/macros.h
+@@ -637,7 +637,7 @@ static inline TCGv gen_read_ireg(TCGv result, TCGv val, int shift)
+ #ifdef CONFIG_USER_ONLY
+ #define fTRAP(TRAPTYPE, IMM) \
+     do { \
+-        hexagon_raise_exception_err(env, HEX_EVENT_TRAP0, PC); \
++        hexagon_raise_exception_err(env, HEX_EVENT_TRAP0, PC, 0); \
+     } while (0)
+ #endif
  
-diff --git a/target/loongarch/tcg/op_helper.c b/target/loongarch/tcg/op_helper.c
-index f41f0cb1e6e..36719617b85 100644
---- a/target/loongarch/tcg/op_helper.c
-+++ b/target/loongarch/tcg/op_helper.c
-@@ -16,12 +16,6 @@
- #include <zlib.h> /* for crc32 */
- #include "cpu-csr.h"
+diff --git a/target/hexagon/op_helper.c b/target/hexagon/op_helper.c
+index 0d08ac77361..715dfd3ce13 100644
+--- a/target/hexagon/op_helper.c
++++ b/target/hexagon/op_helper.c
+@@ -72,31 +72,24 @@ uint64_t HELPER(utimer)(void)
+ #define SF_MANTBITS    23
  
--/* Exceptions helpers */
--void helper_raise_exception(CPULoongArchState *env, uint32_t exception)
--{
--    do_raise_exception(env, exception, GETPC());
+ /* Exceptions processing helpers */
+-G_NORETURN
+-void do_raise_exception(CPUHexagonState *env, uint32_t exception,
+-                        uint32_t PC, uintptr_t retaddr)
++G_NORETURN void hexagon_raise_exception_err(CPUHexagonState *env,
++                                            uint32_t exception,
++                                            vaddr pc, uintptr_t retaddr)
+ {
+     CPUState *cs = env_cpu(env);
+-    qemu_log_mask(CPU_LOG_INT, "%s: 0x%08" PRIx32 ", @ %08" PRIx32 "\n",
+-                  __func__, exception, PC);
++    qemu_log_mask(CPU_LOG_INT, "%s: 0x%08" PRIx32 ", @ %08" VADDR_PRIx "\n",
++                  __func__, exception, pc);
+     ASSERT_DIRECT_TO_GUEST_UNSET(env, exception);
+ 
+-    env->gpr[HEX_REG_PC] = PC;
+-    cs->exception_index = exception;
+-    cpu_loop_exit_restore(cs, retaddr);
 -}
 -
- /* loongarch assert op */
- void helper_asrtle_d(CPULoongArchState *env, target_ulong rj, target_ulong rk)
+-G_NORETURN void hexagon_raise_exception_err(CPUHexagonState *env,
+-                                            uint32_t exception,
+-                                            uintptr_t pc)
+-{
+-    do_raise_exception(env, exception, pc, 0);
++    env->gpr[HEX_REG_PC] = pc;
++    cpu_loop_exit_excp(cs, exception, retaddr);
+ }
+ 
+-G_NORETURN void HELPER(raise_exception)(CPUHexagonState *env, uint32_t excp,
+-                                        uint32_t PC)
++G_NORETURN void HELPER(hexagon_raise_exception)(CPUHexagonState *env,
++                                                uint32_t exception,
++                                                vaddr pc)
  {
-diff --git a/target/loongarch/tcg/tcg_cpu.c b/target/loongarch/tcg/tcg_cpu.c
-index 4b1d44a1644..56ef0d912cc 100644
---- a/target/loongarch/tcg/tcg_cpu.c
-+++ b/target/loongarch/tcg/tcg_cpu.c
-@@ -69,9 +69,7 @@ void G_NORETURN do_raise_exception(CPULoongArchState *env,
-                   __func__,
-                   exception,
-                   loongarch_exception_name(exception));
--    cs->exception_index = exception;
--
--    cpu_loop_exit_restore(cs, pc);
-+    cpu_loop_exit_excp(cs, exception, pc);
+-    hexagon_raise_exception_err(env, excp, PC);
++    hexagon_raise_exception_err(env, exception, pc, 0);
+ }
+ 
+ void log_store32(CPUHexagonState *env, target_ulong addr,
+@@ -1733,7 +1726,7 @@ static void set_wait_mode(CPUHexagonState *env)
+     SET_SYSTEM_FIELD(env, HEX_SREG_MODECTL, MODECTL_W, thread_wait_mask);
+ }
+ 
+-static void hexagon_wait_thread(CPUHexagonState *env, uint32_t PC)
++static void hexagon_wait_thread(CPUHexagonState *env, vaddr pc)
+ {
+     CPUState *cs;
+ 
+@@ -1760,7 +1753,7 @@ static void hexagon_wait_thread(CPUHexagonState *env, uint32_t PC)
+         return;
+     }
+     set_wait_mode(env);
+-    env->wait_next_pc = PC + 4;
++    env->wait_next_pc = pc + 4;
+ 
+     cpu_interrupt(cs, CPU_INTERRUPT_HALT);
+ }
+@@ -1828,12 +1821,12 @@ void HELPER(resched)(CPUHexagonState *env)
+     resched(env);
+ }
+ 
+-void HELPER(wait)(CPUHexagonState *env, uint32_t PC)
++void HELPER(hexagon_wait)(CPUHexagonState *env, vaddr pc)
+ {
+     BQL_LOCK_GUARD();
+ 
+     if (!fIN_DEBUG_MODE(env->threadId)) {
+-        hexagon_wait_thread(env, PC);
++        hexagon_wait_thread(env, pc);
+     }
+ }
+ 
+diff --git a/target/hexagon/translate.c b/target/hexagon/translate.c
+index fd1de87405c..2774a01a47c 100644
+--- a/target/hexagon/translate.c
++++ b/target/hexagon/translate.c
+@@ -129,11 +129,12 @@ intptr_t ctx_tmp_vreg_off(DisasContext *ctx, int regnum,
+     return offset;
+ }
+ 
+-static void gen_precise_exception(int cause, uint32_t PC)
++static void gen_precise_exception(int cause, vaddr pc)
+ {
+     tcg_gen_movi_i32(hex_cause_code, cause);
+-    gen_helper_raise_exception(tcg_env, tcg_constant_i32(HEX_EVENT_PRECISE),
+-                               tcg_constant_i32(PC));
++    gen_helper_hexagon_raise_exception(tcg_env,
++                                       tcg_constant_i32(HEX_EVENT_PRECISE),
++                                       tcg_constant_vaddr(pc));
  }
  
  #ifndef CONFIG_USER_ONLY
-diff --git a/target/loongarch/tcg/translate.c b/target/loongarch/tcg/translate.c
-index 124dce62695..ddadfb84285 100644
---- a/target/loongarch/tcg/translate.c
-+++ b/target/loongarch/tcg/translate.c
-@@ -95,7 +95,8 @@ static void gen_nanbox_s(TCGv_i64 out, TCGv_i64 in)
- void generate_exception(DisasContext *ctx, int excp)
+@@ -1071,11 +1072,11 @@ static void update_exec_counters(DisasContext *ctx)
+  */
+ static void check_imprecise_exception(DisasContext *ctx)
  {
-     tcg_gen_movi_tl(cpu_pc, ctx->base.pc_next);
--    gen_helper_raise_exception(tcg_env, tcg_constant_i32(excp));
-+    gen_helper_raise_excp(tcg_env, tcg_constant_i32(excp),
-+                          tcg_constant_i32(1));
-     ctx->base.is_jmp = DISAS_NORETURN;
- }
+-    TCGv PC = tcg_constant_tl(ctx->pkt.pc);
+     TCGLabel *label = gen_new_label();
  
+     tcg_gen_brcondi_tl(TCG_COND_EQ, hex_imprecise_exception, 0, label);
+-    gen_helper_raise_exception(tcg_env, hex_imprecise_exception, PC);
++    gen_helper_hexagon_raise_exception(tcg_env, hex_imprecise_exception,
++                                       tcg_constant_vaddr(ctx->pkt.pc));
+     gen_set_label(label);
+ }
+ #endif
 -- 
 2.52.0.windows.1
 
