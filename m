@@ -4,92 +4,118 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D089EC982D2
-	for <qemu-riscv@archiver.kernel.org>; Fri, 18 Sep 2026 00:21:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFD98C982D2
+	for <qemu-riscv@archiver.kernel.org>; Fri, 18 Sep 2026 00:43:11 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x7MMJ-0004Os-1v; Thu, 17 Sep 2026 20:21:43 -0400
+	id 1x7Mgm-0006iC-Tw; Thu, 17 Sep 2026 20:42:52 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <palmer@dabbelt.com>)
- id 1x7MMH-0004OY-IT
- for qemu-riscv@nongnu.org; Thu, 17 Sep 2026 20:21:41 -0400
-Received: from mail-pj2-x0e.google.com ([2607:f8b0:4864:39::e])
+ (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
+ id 1x7Mgj-0006f1-Uq
+ for qemu-riscv@nongnu.org; Thu, 17 Sep 2026 20:42:50 -0400
+Received: from mail-pj2-x11.google.com ([2607:f8b0:4864:39::11])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <palmer@dabbelt.com>)
- id 1x7MME-0006sx-Rq
- for qemu-riscv@nongnu.org; Thu, 17 Sep 2026 20:21:41 -0400
-Received: by mail-pj2-x0e.google.com with SMTP id
- d9443c01a7336-2ddb44ad1c1so872095ad.3
- for <qemu-riscv@nongnu.org>; Thu, 17 Sep 2026 17:21:38 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
+ id 1x7Mgh-0001PB-0M
+ for qemu-riscv@nongnu.org; Thu, 17 Sep 2026 20:42:49 -0400
+Received: by mail-pj2-x11.google.com with SMTP id
+ d9443c01a7336-2d747f0b25dso2028805ad.2
+ for <qemu-riscv@nongnu.org>; Thu, 17 Sep 2026 17:42:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=dabbelt-com.20251104.gappssmtp.com; s=20251104; t=1789690897; x=1790295697;
- darn=nongnu.org; 
- h=content-transfer-encoding:content-type:mime-version:message-id:to
- :from:cc:in-reply-to:subject:date:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=97TDR70D9CUjsZCdV4r40XKTc/2M9oFwzn6aISGw0JU=;
- b=G2T1HgwA2KOJ7rCDZjyr9NZIKUkX5msnT/2jyICJZMDfp4afL9F8BK9euDiAO8ngA1
- gmGMTLWkmoSmU4ExFjeZbDs2r2rlPLFQfXvsoBlxfXbei/7Qhp5O/3unYcDsltmc6giN
- JI7lRvJVJQSTKPEFFBJBTGcIKQus/6t9zAlO3vO3QXayZs7JVjwpwW9a84Sxmg3N1AYp
- li79CKMHTdXwU2O4IqlUqrqI4Hzl/Q8bQSikrzEWZDLgrrawh4cBCOL8GdJJ6NAmwPD5
- lpmyfwCpfBivnEE2sPYDczkUMmQDqTqLG3ag8lZllpgww0LycTkePNtC9koQMQwsdsBR
- kfbg==
+ d=gmail.com; s=20251104; t=1789692165; x=1790296965; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=wIZSbkvaEy6mXK2aVNYREGi8JRqUA4yskA/TpdLSFIk=;
+ b=Kv3ls4KZW+fmoqjtJgOdI7TXBNvLxAzip0UFL8w3LZTU301yZj62RJCxB1wS4AZRhk
+ ZgWEp7BZnbHom5WAZt7jhaKHGEJ24uoqp6ibf5D0D7NscVxU3yzsAvZlnybZmJ3Xu5vt
+ 6vRD++twMkR9wFDi5xykils1aLXsUxVOGJOTIfxhp1TGXTIamXbTzb9wCj8XIy4zP1oh
+ nPgL/G5JZ1ErD9bUqBcXC1MzLnKb+viTIw7Dkpy/tjdr/rTqFKVnM4xXOFAakDXZSMfq
+ +1ml62d44Ylo21zwcyHxbfSfobDtVMfPGQSghBnbqdncsCRruT7QmXcNmYsUq9k7hOKm
+ cENQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1789690897; x=1790295697;
- h=content-transfer-encoding:content-type:mime-version:message-id:to
- :from:cc:in-reply-to:subject:date:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to:content-type;
- bh=97TDR70D9CUjsZCdV4r40XKTc/2M9oFwzn6aISGw0JU=;
- b=kt6h8YWGzaJWzkMz2LMbyWp68/y0NvFYeXAILbTWoANS71dCOXaKF/nAQQNRoI/FlQ
- CLawzdtr3GjAScN+FbNcPyzTJvPwmopNCUhQKe+mFi1hThf58/5iq7c98IQPN7+6uo6z
- KBJZHsJIOHIxAa7ELGUo0WlvTqv46mD20Kdzlv9KiFKwT7U6ccsj7YQQLx9oZPqom5ZG
- CiTrHWlY0tvNQ8KkJC34ras3CqmdnHZS3NPcFrX515mFM5/IFrLEsVPn9YLusCQdR85g
- kNHfloNT6yTHMvNnxfg+HchXSc3BEKNp+FiuZXscDCP/VW+26/H274j/5hbxg6eijuOm
- qASw==
+ d=1e100.net; s=20260707; t=1789692165; x=1790296965;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=wIZSbkvaEy6mXK2aVNYREGi8JRqUA4yskA/TpdLSFIk=;
+ b=z7iB7Ed0tnb9bWLgoR0JmVhRJo/Y55C4VB1BKjc+RlvuGQbFz3ygjAlP63ea9stYLJ
+ DWJVswCBJGMQ0iCrBpdAfSvL5+7+o/NdUhoVZiUlmPNIthH1bmmRT186RmbwMEdpqge5
+ NjFYMcrIDRqy13cabE5LrKxVa//IepTwmTfttecfRHD1xVuKl7Q1wdO10AqMOK//2eav
+ xtAItkSSyagI2ZOZwLoGa8nsIXpHXRg4DAkfxvvPDiNjlyXcCL0fRLbtU+lTYoc/UOsg
+ czoTEzsXH3p65RoTP7M3WVb1ZmHJiRmspWn8ffnRFnDGvGJiD69Wqf7yJJxKXNnkdNjd
+ Otig==
 X-Forwarded-Encrypted: i=1;
- AKwUvBwjYAiNh1rVnaaq6YTrbJxaaCd4tM+leDfK5EBVahWWDRib/4yLvFOY+PbU650z/JIkg7ZliGcWmh/t@nongnu.org
-X-Gm-Message-State: AFuF++nElXAc+9NuvAyA3ZKKPCCH01Lnzq6bPynAol6dSFA7RWWaJRfH
- 3/22dJhmvg/BUI27Vn8QaIvI9wHvkCNaXvQaBTw3StNICsIufT0tUpbMH1lT3zxuvKE=
-X-Gm-Gg: AYBFou1mWQ/WjrW53A0vPmsgOiC6ej+jVD2Y2Qjg4qWBXqD9RyeZfQoco6lydJp6kEd
- lDCBuO1I+D6SZX0qN1U04m3ZGsmQUbYZUJAKHpWjLIHAc1BLcZFSOgy+axG5eyEl54PWgLlP2tD
- JTAosbWUDK+a1JLu6vxR5mQnp1ltWyBd/Yds6mw2uM9bBN7oM4GfBZ+6Z4f8DRJayX/UseB77/O
- s1KtkU27P1MwbdJXR7yhKLSzSMBSZbM4binE5X+HJMtNnjv9mn5k6mHGJ+c4JudZNq8oOjuywdl
- kH/T8ZL91G2wjFc0zu9hCMioSie78Xh+NkDRrj2c0WdjQjnrWJDN25WahqZkE79H7urELXcs2xZ
- 1/vVj28AuJmJNKDNDnYdO23ssFVpRFVZwC69xqkAOfAmHxk04XnZL4S5qhBrHnbX74/9TLi7xZe
- g3yCrAqPF+PnI4VrhREdJl61eUnYHKu/aniv63xfP/m+mMlBT6PzZkVvEIbEluCO9Pp8LBXAzXD
- XjgI/QnHZ1Sr6Wxr98TupT/1sN4UA==
-X-Received: by 2002:a17:903:2f84:b0:2cf:8131:75e8 with SMTP id
- d9443c01a7336-2ddb1af51a9mr14384985ad.13.1789690896524; 
- Thu, 17 Sep 2026 17:21:36 -0700 (PDT)
-Received: from localhost ([2001:5a8:4687:d600:a432:5959:dbd9:36fd])
- by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-33bf5a93f1fsm18873823eec.11.2026.09.17.17.21.35
+ AKwUvBxney4TazRz74VlbgzFAGx1h9TJRZnOHz1Cs058/P92BxYFrnKF2wrAoDWtgMplUgFi1ki9FjKOnZG+@nongnu.org
+X-Gm-Message-State: AFuF++nATXkrXTv6wSIK3kKdY7EqaqTKszNbIYutPnY8aJsIdquFVV3H
+ LEfmFhRViArh1M3Ud4c/oYgFfMpWtCSHf7F7W5FZvzfHS667DX9uWjcx
+X-Gm-Gg: AYBFou11q4+Msabm8YbBgQEammAiVSXoOj8Nj86zlYqrVEga2jEKNciXvLeX7WZyRgh
+ L6yZCqksGAFyj0xhhXAByQNIO1C76cDKG74G2kf1EDYOgzX6i/0IyNhpQq6EUpzXNcEgu/Z9bSi
+ K3foO5hkvEqa3f37zaeM/uNIJlTM0kHhjslELcA1Twpd9mjjzw4T3zDcvfDdGudf8k0+btKrz7O
+ PTEhUQdRiOUgLDE0QD1wGW8Ppmq5GxMcNST1f6bdswrAbHNBodra4OobE1pxvdcA1rSRuRa6qbw
+ VqQsQW+V5K4Q2iR3xrWxec0J2BnvnDhpCBSgJO3ZmQZYg5UQU0iuh59WFzaJCFcJQS4Gjvt26Mm
+ KKn4oLqlMcSqshmZr7TLb4mtyKocE1AeH6gCdoiDMWL4UNPU+G3BOF3cMTd65dWmobn9Kt2xsFM
+ St3LfTqqegEI4n7t0MqfC11BRFnpfyjdwVlhPfQD9O0VWYugdbB8eDt3ZQDAVEpouIUSDd42LIu
+ ZGpKB4nBy0+TppO4EHa7ltkcpUJPyM7
+X-Received: by 2002:a17:90b:17c5:b0:39e:1633:d29e with SMTP id
+ 98e67ed59e1d1-39e54cc6ef6mr1830117a91.5.1789692165578; 
+ Thu, 17 Sep 2026 17:42:45 -0700 (PDT)
+Received: from WIN-BH9M8FJACR9 ([103.94.185.75])
+ by smtp.googlemail.com with ESMTPSA id
+ a92af1059eb24-144cdfc3df2sm600286c88.5.2026.09.17.17.42.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 17 Sep 2026 17:21:35 -0700 (PDT)
-Date: Thu, 17 Sep 2026 17:21:35 -0700 (PDT)
-X-Google-Original-Date: Thu, 17 Sep 2026 17:21:34 PDT (-0700)
-Subject: Re: [PATCH v2] tcg/riscv64: Set vtype before whole-register vector
- moves
-In-Reply-To: <1f02f0fc-fee2-4722-9798-97bb0132561d@linaro.org>
-CC: max.chou@sifive.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- Alistair Francis <Alistair.Francis@wdc.com>, daniel.barboza@oss.qualcomm.com,
- joel@jms.id.au
-From: Palmer Dabbelt <palmer@dabbelt.com>
-To: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <mhng-2ECF390B-6BDB-4DF3-8133-18F4AC3A4DD2@Palmers-Mini.rwc.dabbelt.com>
-Mime-Version: 1.0 (MHng)
-Content-Type: text/plain; charset=utf-8; format=flowed
+ Thu, 17 Sep 2026 17:42:44 -0700 (PDT)
+From: Yonggang Luo <luoyonggang@gmail.com>
+To: qemu-devel@nongnu.org
+Cc: Xianglai Li <lixianglai@loongson.cn>, qemu-s390x@nongnu.org,
+ David Hildenbrand <david@kernel.org>,
+ Richard Henderson <richard.henderson@linaro.org>, qemu-ppc@nongnu.org,
+ Laurent Vivier <laurent@vivier.eu>,
+ Yoshinori Sato <yoshinori.sato@nifty.com>,
+ Nicholas Piggin <npiggin@gmail.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Stafford Horne <shorne@gmail.com>, Weiwei Li <liwei1518@gmail.com>,
+ Cornelia Huck <cohuck@redhat.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Chinmay Rath <rathc@linux.ibm.com>,
+ Harsh Prateek Bora <harshpb@linux.ibm.com>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Aleksandar Rikalo <arikalo@gmail.com>,
+ Brian Cain <brian.cain@oss.qualcomm.com>,
+ Artyom Tarasenko <atar4qemu@gmail.com>, Max Filippov <jcmvbkbc@gmail.com>,
+ Eric Farman <farman@linux.ibm.com>,
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+ Michael Rolnik <mrolnik@gmail.com>, Aurelien Jarno <aurelien@aurel32.net>,
+ qemu-arm@nongnu.org, Bibo Mao <maobibo@loongson.cn>,
+ Chao Liu <chao.liu@processmission.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
+ Ilya Leoshkevich <iii@linux.ibm.com>, Helge Deller <deller@gmx.de>,
+ Glenn Miles <milesg@linux.ibm.com>, Zhao Liu <zhao1.liu@intel.com>,
+ Philippe Mathieu-Daude <philmd@mailo.com>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org,
+ Song Gao <17746591750@163.com>, Matthew Rosato <mjrosato@linux.ibm.com>
+Subject: [PATCH 01/21] accel/tcg: add cpu_loop_exit_excp
+Date: Fri, 18 Sep 2026 08:42:03 +0800
+Message-ID: <20260918004225.827-2-luoyonggang@gmail.com>
+X-Mailer: git-send-email 2.52.0.windows.1
+In-Reply-To: <20260918004225.827-1-luoyonggang@gmail.com>
+References: <20260918004225.827-1-luoyonggang@gmail.com>
+MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:39::e;
- envelope-from=palmer@dabbelt.com; helo=mail-pj2-x0e.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=2607:f8b0:4864:39::11;
+ envelope-from=luoyonggang@gmail.com; helo=mail-pj2-x11.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -105,101 +131,58 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, 17 Sep 2026 14:49:07 PDT (-0700), Richard Henderson wrote:
-> On 9/17/26 10:59, Palmer Dabbelt wrote:
->> On Thu, 17 Sep 2026 13:51:10 PDT (-0700), Richard Henderson wrote:
->>> On 9/17/26 03:37, Max Chou wrote:
->>>> According to the RISC-V unpriviledge spec,
->>>>    "vset{i}vl{i} and whole register loads and stores do not depend upon
->>>>     vtype."
->>>> The whole-register vector move instructions reuqire legal vtype that
->>>> trap when VILL is set.
->>>>
->>>> The tcg_out_mov in tcg/riscv64 missed the vtype setup before emitting
->>>> the
->>>> OPC_VMVNR_V.
->>>>
->>>> Fixes: d4be6ee1111 ("tcg/riscv: Implement vector mov/dup{m/i}")
->>>> Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
->>>> Reviewed-by: Joel Stanley <joel@jms.id.au>
->>>> Signed-off-by: Max Chou <max.chou@sifive.com>
->>>> ---
->>>>   tcg/riscv64/tcg-target.c.inc | 4 ++++
->>>>   1 file changed, 4 insertions(+)
->>>>
->>>> diff --git a/tcg/riscv64/tcg-target.c.inc b/tcg/riscv64/tcg-target.c.inc
->>>> index 2ce9d47a633..e3cfedb579d 100644
->>>> --- a/tcg/riscv64/tcg-target.c.inc
->>>> +++ b/tcg/riscv64/tcg-target.c.inc
->>>> @@ -778,6 +778,10 @@ static bool tcg_out_mov(TCGContext *s, TCGType
->>>> type, TCGReg ret, TCGReg arg)
->>>>           {
->>>>               int lmul = type - riscv_lg2_vlenb;
->>>>               int nf = 1 << MAX(lmul, 0);
->>>> +
->>>> +            if (s->riscv_cur_type == TCG_TYPE_COUNT) {
->>>> +                set_vtype_len(s, type);
->>>> +            }
->>>>               tcg_out_opc_vi(s, OPC_VMVNR_V, ret, arg, nf - 1);
->>>>           }
->>>>           break;
->>>
->>> Do you have a reproducer for this?  I ask because I still wonder how
->>> this can occur.
->>>
->>> Given that
->>>
->>> (1) all vector registers are call-clobbered, there should be none live
->>> across tcg_out_call_int (which clears the remembered vtype),
->>>
->>> (2) the first vector action with no vector registers live must be a load
->>> or movi (which will initialize vtype).
->>>
->>> Performing a move between vector registers when all such registers must
->>> be dead is... wrong.  It indicates that there's a bug elsewhere.
->>
->> I'm not quite sure the commit message is right here, but this whole area
->> is a bit of a landmine: one of the post-ratification changes to V was
->> either this (or very close to this), so we've been through it for every
->> project.
->>
->> Here's the LLVM thread, which I think has links to everything else:
->> https://github.com/llvm/llvm-project/issues/114518 (there's a GCC change
->> as well).  IIRC hardware is a bit all over the place on this one, for
->> the compilers we decided to just emit the code that's safe either way --
->> that's not really an option for QEMU, though, so we'll have to pick one
->> side or the other.
-> Yes, I get that.  But my point stands that after a function call (which
-> can set VILL), all vector registers should be dead.  A move of a dead
-> register is itself a bug.
+Add cpu_loop_exit_excp next to cpu_loop_exit_restore. Set
+cpu->exception_index then restore and exit the TB. host_pc == 0
+skips restore, matching existing wrappers.
 
-That's true for standard ABI functions, but there's a variant for 
-vector-ABI functions that allows some registers to be saved and that 
-variant doesn't preserve vtype.  That's basically how we ended up in the 
-mess with whole-register moves: pre-change vector-1.0 versions didn't 
-trap whole-vector moves on vtype=VILL, so variant functions could use 
-whole-register moves to save/restore registers and it was legal.  It was 
-only when Linux started clobbering with VILL on implementations that 
-respected the post-change ISA that we ended up with the traps.
+Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
+---
+ accel/tcg/cpu-exec-common.c  |  6 ++++++
+ include/accel/tcg/cpu-loop.h | 13 +++++++++++++
+ 2 files changed, 19 insertions(+)
 
-That said, in GCC we just had a proper bug in there where we treated 
-vytpe as saved over calls, so it was pretty easy to roll it up into that 
-fix.  Here's the GCC bug, if you're interested: 
-<https://gcc.gnu.org/bugzilla/show_bug.cgi?id=117544>.  IIUC it was a 
-little different in LLVM because they didn't have that bug and were thus 
-actually correct for the pre-change ISA, but they also decided to just 
-emit the code that's safe for both cases.
+diff --git a/accel/tcg/cpu-exec-common.c b/accel/tcg/cpu-exec-common.c
+index 44e84344f3b..a33ec922745 100644
+--- a/accel/tcg/cpu-exec-common.c
++++ b/accel/tcg/cpu-exec-common.c
+@@ -82,6 +82,12 @@ void cpu_loop_exit_restore(CPUState *cpu, uintptr_t pc)
+     cpu_loop_exit(cpu);
+ }
+ 
++void cpu_loop_exit_excp(CPUState *cpu, int exception_index, uintptr_t pc)
++{
++    cpu->exception_index = exception_index;
++    cpu_loop_exit_restore(cpu, pc);
++}
++
+ void cpu_loop_exit_atomic(CPUState *cpu, uintptr_t pc)
+ {
+     /* Prevent looping if already executing in a serial context. */
+diff --git a/include/accel/tcg/cpu-loop.h b/include/accel/tcg/cpu-loop.h
+index f4d38bc2bca..04c14396d93 100644
+--- a/include/accel/tcg/cpu-loop.h
++++ b/include/accel/tcg/cpu-loop.h
+@@ -65,6 +65,19 @@ G_NORETURN void cpu_loop_exit_noexc(CPUState *cpu);
+ G_NORETURN void cpu_loop_exit_restore(CPUState *cpu, uintptr_t host_pc);
+ G_NORETURN void cpu_loop_exit_atomic(CPUState *cpu, uintptr_t host_pc);
+ 
++/**
++ * cpu_loop_exit_excp:
++ * @cpu: the cpu context
++ * @exception_index: EXCP_* or target trap number
++ * @host_pc: the host pc within the translation, or 0
++ *
++ * Set cpu->exception_index and exit the TB. If @host_pc is in
++ * translated code, restore guest state first (same as
++ * cpu_loop_exit_restore). @host_pc == 0 skips restore.
++ */
++G_NORETURN void cpu_loop_exit_excp(CPUState *cpu, int exception_index,
++                                   uintptr_t host_pc);
++
+ /**
+  * cpu_loop_exit:
+  * @cpu: the cpu context
+-- 
+2.52.0.windows.1
 
-> There should have been *something* that brought the source vector
-> register back to life: a load or a movi.  Both of which reinitialize vtype.
->
-> That's why I'd like to see a reproducer, or if there isn't one,
->
->      tcg_debug_assert(s->riscv_cur_type != TCG_TYPE_COUNT);
->
-> I'm currently running the assert through the testsuite to make sure I've
-> not gone loopy.
-
-Ya, seems reasonable.  It's certainly pretty likely this is masking some 
-other bug as it was in GCC.
 
