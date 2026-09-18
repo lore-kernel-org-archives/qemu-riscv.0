@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03C52C982DA
-	for <qemu-riscv@archiver.kernel.org>; Fri, 18 Sep 2026 15:39:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9009C982DA
+	for <qemu-riscv@archiver.kernel.org>; Fri, 18 Sep 2026 15:40:21 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x7afg-0006SW-L1; Fri, 18 Sep 2026 11:38:40 -0400
+	id 1x7afo-0006Ui-Ei; Fri, 18 Sep 2026 11:38:48 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <antikostya2@gmail.com>)
- id 1x7afe-0006SA-Cb
- for qemu-riscv@nongnu.org; Fri, 18 Sep 2026 11:38:38 -0400
-Received: from mail-lf2-x11.google.com ([2a00:1450:4864:36::11])
+ id 1x7afm-0006U8-Rv
+ for qemu-riscv@nongnu.org; Fri, 18 Sep 2026 11:38:47 -0400
+Received: from mail-lf1-x136.google.com ([2a00:1450:4864:20::136])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <antikostya2@gmail.com>)
- id 1x7afc-0003Dr-7w
- for qemu-riscv@nongnu.org; Fri, 18 Sep 2026 11:38:38 -0400
-Received: by mail-lf2-x11.google.com with SMTP id
- 2adb3069b0e04-5b5e4f1801fso960928e87.2
- for <qemu-riscv@nongnu.org>; Fri, 18 Sep 2026 08:38:32 -0700 (PDT)
+ id 1x7afl-0003Ey-0y
+ for qemu-riscv@nongnu.org; Fri, 18 Sep 2026 11:38:46 -0400
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-5b76694fb7aso739427e87.0
+ for <qemu-riscv@nongnu.org>; Fri, 18 Sep 2026 08:38:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1789745911; x=1790350711; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1789745923; x=1790350723; darn=nongnu.org;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=YSjf2f/gOB65KFXRp3HsadUImFPA7gBnvrBCS70UBu8=;
- b=MO/ocZnwUbhNqewGLPgJurIfx3zuUOXLjNiJS/l22kz2kndM1TteEVndlSvlxh0v46
- aFZka/kmkzgiztxpTDMvuIlvqaQWiHFM2GqCChekXrzaSysmv5DPVuctiuZHOo2kD3vN
- MejQkI2x/NPzucYe1SAdPNxZhTmuZy9+CXbkcMCEyZ/ld4tYJNE6JwO//xxoGQDj9R1O
- y6W1lQ3F2TFsWqbgIZnSddUMq0/HYlelfXVw+lFhtVOhbw/3up4X1rvGT5UU47YMluLF
- AyS9WWa5p1bXTGurslPB4+UssvKreChBCb3x+9VDNaNWKsxduGNTKo5HrsnJ/I9VP4g3
- 9P1A==
+ bh=xtk6b3LqF8Alhgz5DsecTwmL5JMHV3Z0f7W0hoiRnUs=;
+ b=C+G7XhpaIpT6ENyPid4yMuBk5SA59efGREsKMBPtYW3KTtjSTiau8T0EHFNDBzPNc2
+ HCK0Nr+h1/ZlCFCfSSrFbyD5tdujSRyXV07/GZ8v2uVHx4Xwes9oMqfCbh8VH1uUHf4L
+ 1bRHHrpxfl0sixD/+NNdGRD5uRneFMuCiesJBEZHkCKdiz3SGo0Egj2urcMNX415reMU
+ +fu5lUJleC/J1iLQkhqCK5MrslN8Z9K4b/EbG+6DkDnI9GQatFGhxqaFjSJkoLIlIbi4
+ MrstBJ+mZIR7QuJ4OQ3+P+PcsCM7oLt/ckvN5BxIoVgrklh82CmLODnEyGSnP4sq1CUj
+ ER2g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1789745911; x=1790350711;
+ d=1e100.net; s=20260707; t=1789745923; x=1790350723;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=YSjf2f/gOB65KFXRp3HsadUImFPA7gBnvrBCS70UBu8=;
- b=IzLECJRhbfLBprmPTfD1Pdb0iheIxwi+X9hs06OfUK4U93ffDuOxDc2Gke5MOUyBkj
- 48iOc3B4vGfz6thK7gW+OC7NSDM8BjbEalWaUZjgoRqwxCwUb0Y5M4mmT5KXQc4d0kBk
- LsiwF87uzHZlD8QYAJfGswATnUgGDpX0QxeNJ4ydEDgPmssXvI/sU2HhVhwL4E22vFoE
- x+2uUb6V14fkjufnZ/6y8qsIMI8256+BmJ+tX+pMYX8b73hgsjS9RBbcLK3YZqXWlyGH
- XDYeo7UPMltJvLjgR1RJeP/R9eeDeUgmXKkMci5Uk0wP6kANGbQFAwgUbQemCeM4s4Wd
- XExA==
+ bh=xtk6b3LqF8Alhgz5DsecTwmL5JMHV3Z0f7W0hoiRnUs=;
+ b=o3czPHUM4us7dgnd22O29VvNQiR40FiZ+bO0sYOWEZSmdh0JP1llrzpmTf8ePP8IgK
+ quQBwMqQ3QFX/88cy3tLL+Lq+HHKYJy7Wdbg6BCbRHFwUWJ8+g0qLUBGOeQwt+Lz2kaG
+ wgvM5JDTblmiseOVILBAc6BXIoh0Ty4laIGUvd6M+O/hzqQWYKbQqsg09OOJPRRNWesp
+ CKocLibilCrN6s8tebg0aFNt/9jTwTs2sZbCC8nS3MHb6SdWzQ73x77W86xTQdjBm4Lh
+ lnCcmSZ0OuO9PyslG+E8yI/L6pXgyTidesRt1dKqEVvgxU2rBWZXyPU+XD4vAkvtsuRb
+ /kmw==
 X-Forwarded-Encrypted: i=1;
- AKwUvBzhc2y/yMFDTwk/LcFp2VqvMFmpe62OW1YBVYoqBV7iKtLoRiKXA5k9N35r3W0O43EOxBdLyINbhI4U@nongnu.org
-X-Gm-Message-State: AFuF++kuzHlFyY6wb3om/F8ahlFBzb4AbELY29MRUclSdiWSHfd5NbcU
- tInfI79G9KL9IZQZQ80gBwTEb0x+0+ReOH7mYL4KAI4ucrAn0EUm07bb
-X-Gm-Gg: AYBFou3gABG70NuYF0ZOuU9vPsyUwF2RBj+Oc6m2JKWCbGGPI/vN8EuimokdZpXLt7b
- HHcQP9IVmv/l63ANAoBz2t77f0oVi01/Nnaz9G6JGrzXJv/Kn1BH9ViLQ5zr+RyHu9711TSToqx
- NKv7OhLXSxhya+GQiuN0KY4ondYohHpk4TMRkrRjfaT1Mbx/3whJSEWIeWAlecCCa/8SetBfriV
- wjYPSlfIjmY2xuHixjYxVzZMgozoeZ5hcegbFJuW59UGU8HzoWcIQBotAZ9g+ypX2VCsZ3gzEET
- 2tjDANZMM1zu/UBtlKld/5kVvZpCRbvoyh1s8HOaNLHvyFGzpIYyIZuREKX1sRWjFtnE+XcmdZd
- egOVaPPk57YQk4eKEGRv3bMVQoWhpQgmjEm9D7M69iSoUbZXsxgKClkE2ynQkyH7ueV1tSBBu56
- h/kvNybT3hH8a2lpCu0g4VN/N22K++Oa5aB2vm5NUZGPZ+WTRXQuTDXyoCUYJ0mNmvre1h
-X-Received: by 2002:a05:6512:1384:b0:5b6:183b:d20d with SMTP id
- 2adb3069b0e04-5b8c194e06emr1091047e87.52.1789745910496; 
- Fri, 18 Sep 2026 08:38:30 -0700 (PDT)
+ AKwUvBwxDD8z+8tCW5twocnZZMNiQWxLSAd1x+wZ0QLLx7MXzyHygpEfiElWOnIHvPAvKQHos6AzWJvybPnS@nongnu.org
+X-Gm-Message-State: AFuF++l+C0h4tISVq3wQdCBYY3p4txl92iyzpVJ59vuFanCSPbJAgs08
+ sjidRxBf4zeTapM+V9gsBPHeM4Yo9zj0AkpL3Be9/1r4MDmCs0px4mqZ
+X-Gm-Gg: AYBFou2xBOGT3L+KiSk+x6TX3Q3j+cWB+ICUEaQkgF/8HpAPy+0iIdw3LbBTLIdz2u8
+ 1CobXgyAnOMrAgJlA/Gto4M++VxyaKEIyMTadwiGZ7qAs9INADtf1NXy5BF5vm5wFMWQL0YVzr6
+ 7VlwtBx2veoYM99CsxOdU+73feXKxdV+9dIRY5132YwAOgHuZUmsKxZkqnWh3k7xM5ThtF5Vx/w
+ cyq6abmYGPratB+owV8zWKzoB5J7OsLgstwFu9kBGUMcA9RoYceuqlP8fmh3j7jaofwY0ur8HU9
+ C684joUi4L06Etvb+xw9HvwjnUlEKtxIs/GAcDLp6jJ+Lbl7UyrDe1Bj0m0Q9+X08cF7hutgi8s
+ xiZh4R+AfGplovQ0iQE5a0rZydQfTcxdgMJcO870IiD4m+i2bJFVPB64P6gMoADUB3nhBFneLm8
+ P1oOgI5+gzEX1jRQJROA3ujdOAVTttvkueadFUgAeVlB2Dlk2tG7aXGYBtnIJm6DDTnGHhJWPbq
+ AxjgGk=
+X-Received: by 2002:a05:6512:138d:b0:5b8:c64a:57d1 with SMTP id
+ 2adb3069b0e04-5b8c64a5bfcmr93981e87.42.1789745923014; 
+ Fri, 18 Sep 2026 08:38:43 -0700 (PDT)
 Received: from localhost ([213.79.119.14]) by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-5b8c274ed00sm578432e87.19.2026.09.18.08.38.29
+ 2adb3069b0e04-5b8c274e53bsm554108e87.27.2026.09.18.08.38.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 18 Sep 2026 08:38:29 -0700 (PDT)
+ Fri, 18 Sep 2026 08:38:42 -0700 (PDT)
 From: Konstantin Semichastnov <antikostya2@gmail.com>
-Date: Fri, 18 Sep 2026 18:34:38 +0300
-Subject: [PATCH 2/6] hw/riscv/trace-encoder.c: Support sync messages for
- N-trace
+Date: Fri, 18 Sep 2026 18:34:40 +0300
+Subject: [PATCH 4/6] hw/riscv/ntrace: emit PPCCD and Ownership on priv change
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260918-upstream-ntrace_msg-v1-2-16a56ad8e0ef@gmail.com>
+Message-Id: <20260918-upstream-ntrace_msg-v1-4-16a56ad8e0ef@gmail.com>
 References: <20260918-upstream-ntrace_msg-v1-0-16a56ad8e0ef@gmail.com>
 In-Reply-To: <20260918-upstream-ntrace_msg-v1-0-16a56ad8e0ef@gmail.com>
 To: qemu-devel@nongnu.org
@@ -84,34 +84,36 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Fabiano Rosas <farosas@suse.de>, 
  Laurent Vivier <lvivier@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>, 
  qemu-riscv@nongnu.org, Alexei Filippov <halip0503@gmail.com>, 
- Arseniy Semenov <ar.semenov@outlook.com>
+ Arseniy Semenov <ar.semenov@outlook.com>, 
+ Konstantin Semichastnov <antikostya2@gmail.com>
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=10698;
- i=antikostya2@gmail.com; h=from:subject:message-id;
- bh=VN2bbM0YE1ruvE0c02QgtVkI1IUhi2SCwlVI3u2+YQU=;
- b=owEBbQKS/ZANAwAKAUiKpW6lUN52AcsmYgBqrVoN5pi/CBm0iKgFwS4ja5hvJY6xx4k5iUfd8
- Br8kNAy0ASJAjMEAAEKAB0WIQRMBWLx2o+linEPEBhIiqVupVDedgUCaq1aDQAKCRBIiqVupVDe
- dnhtD/4zFxVVwmTD6s/jgL1V4aMgnwCuqXD5WC15CU6vq1iWyJzeTnT6ZHTIUU1KG2OJZNHKosF
- 3rRrvKGwM9guFm9WZhHDqH2kKs75YB5zZoZ0PQ1X7HOTp8cG3JbeCg+3fnyziuygXEsvQRNt8ze
- NMPJp9dTE2DWym0TFaoE4/oC0+5DyXYKJYHWedE4bJV43j+YjGwsWRU/xiY+cjs3piDrVR6GFDB
- 9SBY1BobYbq9i/Fx2qIEVrYPzURssLWbcwak5zgj7zYNEgngt4p/fZeLrYp+eLD3bJD3te/SuUC
- C4nXgZ1+c8OczS4++RruQ82FlNXREdyGYXXCXhzXIh8WtLtDO2fz4fMQ9RK3rC8fhcP9xTzOhbb
- foYS+f5JQOfqPbHUyLO+cgJrZiPr1eJlnlKCXm8/OWMPGrhgbBREkpR6arntlS72yhNbpH1JVna
- K9MteMphmSvxYxrDbc33WPwQZxt/SwHiyyUu2jnJJITAVFPNd8khw72jK4+XO+EMSno3zc8AsWB
- 4JdctZqBjWon4GqLOjtzvuWhAq4DAUEHsWIoPGQa+RVjL2D+ybOP+gAjdKa7s3YvsplPG+PYvNh
- t7ZRDw2AQHh/L13Vrez8JlqbgumSFrHR8iWt3q1vwKA8QpfaixPspfV2TFJ1UI+0X6uK32lqINe
- ZBbe5OJnFZouDOQ==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5455; i=antikostya2@gmail.com; 
+ h=from:subject:message-id;
+ bh=Ql9XhGC59YQRAF2d1m24g1XJo9BhDV997HVghtOXinw=; 
+ b=owEBbQKS/ZANAwAKAUiKpW6lUN52AcsmYgBqrVoNJc0tLJLigSJK8+SDMzBXW68KS+TnV5rZe
+ BPSOSzpD9OJAjMEAAEKAB0WIQRMBWLx2o+linEPEBhIiqVupVDedgUCaq1aDQAKCRBIiqVupVDe
+ dgxXD/93dUR0HjLbhmKyCBjxSQr+bhI/napVqz4Y/4UfeJapckbcd1oeVNGdPBXknetIkp+x7XY
+ CphjQBXattn/SJcTFAUc3oCTzSf90AcGwEfuweGQPmIsg7wm3D04vnOiTbRGEDqNafge3skFB2h
+ qEoemtsDQd59QkX6p5vbz+JClYbRcYwJ1x4MmM/IHPHm5Ly/llr6N26JZqi/L7lXaJxGd7n5i2Z
+ ZjkOP4dePJl7twhKKJeAidEUENzFkHR2de2YGhlL4eaLYGKc84ooHUX8gW4UrjQYYaRx2UTtuo7
+ xt5ddtYcyhei2SnnRSke7NKz5i4qOKYVRSGGYYQm3lULfkIKvT6Bu7fbLrC8aXBv1Wacc9GkiOj
+ 3Jx5kAWqYtD/czLze/KKs0risNR+lTKAiYj7sTX17g7D2bZBLer5WBgQaRv/sVL1Nhv6c3h6b3c
+ GtrMqq7ySaNTbqk5t+9XZLnmbHWQRXSS/nnrDmaTqCN1xWPtsd7szO8n07GPMnS9zsYC0JIVGY9
+ PhZpQDyndz5me6J4Zl4h4rVcHuJVg4JQPIZF1qkm1XD3jfQIYQc6AMMkYIgHGL9sKQXulFLmUvf
+ RrY6cCQW75JjUnUyO4PHRy0Wps4R+t3ilW3E0QmHf33JR42h+Q7WkjRxSxK4t7jwOSk4l3lk//b
+ 2Lu1kxggEbsw/Gw==
 X-Developer-Key: i=antikostya2@gmail.com; a=openpgp;
  fpr=4C0562F1DA8FA58A710F1018488AA56EA550DE76
-Received-SPF: pass client-ip=2a00:1450:4864:36::11;
- envelope-from=antikostya2@gmail.com; helo=mail-lf2-x11.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::136;
+ envelope-from=antikostya2@gmail.com; helo=mail-lf1-x136.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
 X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -127,267 +129,147 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Add support of trTeInstSyncMode (with mods 0, 1 and 2) and trTeInstSyncMax
+According to "RISC-V N-Trace (Nexus-based Trace) Specification" 1.0 and
+"Efficient Trace for RISC-V Version 2.0" we should emit
+Ownership and ppccd messages, if it's change of privilege mode,
+on next instruction after mode change
 
 Signed-off-by: Alexei Filippov <halip0503@gmail.com>
+Signed-off-by: Konstantin Semichastnov <antikostya2@gmail.com>
 ---
- hw/riscv/rv-trace-messages.c | 28 ++++++++++++++---
- hw/riscv/rv-trace-messages.h |  3 ++
- hw/riscv/trace-encoder.c     | 75 ++++++++++++++++++++++++++++++++++++++++----
- hw/riscv/trace-encoder.h     |  9 ++++++
- 4 files changed, 105 insertions(+), 10 deletions(-)
+ hw/riscv/trace-encoder.c  | 13 +++++++++++--
+ hw/riscv/trace-encoder.h  |  2 +-
+ target/riscv/cpu_helper.c | 11 ++---------
+ target/riscv/op_helper.c  |  8 ++++++++
+ 4 files changed, 22 insertions(+), 12 deletions(-)
 
-diff --git a/hw/riscv/rv-trace-messages.c b/hw/riscv/rv-trace-messages.c
-index 708e48bbed..507c5fb7bf 100644
---- a/hw/riscv/rv-trace-messages.c
-+++ b/hw/riscv/rv-trace-messages.c
-@@ -365,10 +365,11 @@ typedef enum {
- } NTraceFieldWidth;
- 
- typedef enum {
--    TCODE_PROG_TRACE_SYNC        = 0x9,
--    TCODE_PROG_TRACE_CORRELATION = 0x21,
--    TCODE_RESOURCE_FULL          = 0x1b,
--    TCODE_INDIRECT_BRANCH_HIST   = 0x1c,
-+    TCODE_PROG_TRACE_SYNC           = 0x9,
-+    TCODE_PROG_TRACE_CORRELATION    = 0x21,
-+    TCODE_RESOURCE_FULL             = 0x1b,
-+    TCODE_INDIRECT_BRANCH_HIST      = 0x1c,
-+    TCODE_INDIRECT_BRANCH_HIST_SYNC = 0x1d,
- } NTraceTcodeFieldValues;
- 
- typedef enum {
-@@ -586,6 +587,25 @@ size_t rv_ntrace_gen_encoded_resource_full_msg(uint8_t *buf, uint32_t hist)
-     return rv_ntrace_gen_encoded_msg(buf, msg_fields);
- }
- 
-+size_t rv_ntrace_gen_indirect_branch_hist_sync_msg(uint8_t *buf, uint8_t btype,
-+                                                   uint32_t icnt, uint64_t faddr,
-+                                                   uint32_t hist)
-+{
-+     const NTraceFieldPayload msg_fields[] = {
-+        PAYLOAD_TCODE(TCODE_INDIRECT_BRANCH_HIST_SYNC),
-+        /* SRC field is not supported for now */
-+        PAYLOAD_SYNC(SYNC_PERIODIC),
-+        PAYLOAD_BTYPE(btype),
-+        PAYLOAD_ICNT(icnt),
-+        PAYLOAD_FADDR(faddr),
-+        PAYLOAD_HIST(hist),
-+        /* TSTAMP field is not supported for now */
-+        PAYLOAD_END(),
-+    };
-+
-+    return rv_ntrace_gen_encoded_msg(buf, msg_fields);
-+}
-+
- size_t rv_ntrace_gen_indirect_branch_hist_msg(uint8_t *buf, uint8_t btype,
-                                               uint32_t icnt, uint64_t uaddr,
-                                               uint32_t hist)
-diff --git a/hw/riscv/rv-trace-messages.h b/hw/riscv/rv-trace-messages.h
-index a4d14de59a..c237e6b57c 100644
---- a/hw/riscv/rv-trace-messages.h
-+++ b/hw/riscv/rv-trace-messages.h
-@@ -43,6 +43,9 @@ size_t rv_ntrace_gen_encoded_prog_trace_correlation_msg(uint8_t *buf,
-                                                         uint32_t icnt,
-                                                         uint32_t hist);
- size_t rv_ntrace_gen_encoded_resource_full_msg(uint8_t *buf, uint32_t hist);
-+size_t rv_ntrace_gen_indirect_branch_hist_sync_msg(uint8_t *buf, uint8_t btype,
-+                                                   uint32_t icnt, uint64_t faddr,
-+                                                   uint32_t hist);
- size_t rv_ntrace_gen_indirect_branch_hist_msg(uint8_t *buf, uint8_t btype,
-                                               uint32_t icnt, uint64_t uaddr,
-                                               uint32_t hist);
 diff --git a/hw/riscv/trace-encoder.c b/hw/riscv/trace-encoder.c
-index 41bb750043..dfe04781e2 100644
+index 1d04ab0668..a2a030bb83 100644
 --- a/hw/riscv/trace-encoder.c
 +++ b/hw/riscv/trace-encoder.c
-@@ -34,9 +34,13 @@
- #define TRACE_MAX_BRANCHES 31
+@@ -943,15 +943,24 @@ static void trencoder_trace_ppccd(Object *trencoder_obj, uint64_t pc)
+     trencoder_send_sync_msg(trencoder_obj, pc);
+ }
  
- static uint64_t rv_ntrace_encode_uaddr(TraceEncoder *trencoder, uint64_t target_pc);
-+static uint64_t rv_ntrace_encode_faddr(uint64_t target_pc);
- static uint32_t rv_ntrace_encode_and_reset_branch_map(TraceEncoder *trencoder);
-+static uint64_t rv_ntrace_get_sync_max_cnt(TraceEncoder *trencoder);
- static uint32_t rv_ntrace_get_and_reset_icnt(TraceEncoder *trencoder,
-                                              uint64_t pc, uint32_t inst_len);
-+static void rv_ntrace_update_sync_msg_cnt(TraceEncoder *trencoder);
-+static void rv_ntrace_update_sync_icnt(TraceEncoder *trencoder, uint64_t icnt);
- 
- static TracePrivLevel trencoder_get_curr_priv_level(TraceEncoder *te)
+-void trencoder_trace_priv_change(Object *trencoder_obj, uint64_t pc,
++void trencoder_trace_priv_change(Object *trencoder_obj, hwaddr curr_pc,
+                                  uint8_t newpiv)
  {
-@@ -181,10 +185,6 @@ static uint64_t trencoder_te_ctrl_set_hardwire_vals(uint64_t input)
-     input = FIELD_DP32(input, TR_TE_CONTROL, INST_STALL_ENA, 0);
-     input = FIELD_DP32(input, TR_TE_CONTROL, INHIBIT_SRC, 1);
++    if (!trencoder_obj) {
++        return;
++    }
++
+     TraceEncoder *trencoder = TRACE_ENCODER(trencoder_obj);
++    uint8_t prev_priv = trencoder->cpu->env.priv;
++
++    if (!trencoder->trace_running || newpiv == prev_priv) {
++        return;
++    }
  
--    /* SYNC_MODE and SYNC_MAX will be revisited */
--    input = FIELD_DP32(input, TR_TE_CONTROL, INST_SYNC_MODE, 0);
--    input = FIELD_DP32(input, TR_TE_CONTROL, INST_SYNC_MAX, 0);
--
-     return input;
- }
- 
-@@ -196,6 +196,10 @@ static uint64_t trencoder_te_ctrl_prew(RegisterInfo *reg, uint64_t val)
-     uint32_t trTeInstTracing = ARRAY_FIELD_EX32(te->regs, TR_TE_CONTROL,
-                                                 INST_TRACING);
-     uint32_t trTeFormat = ARRAY_FIELD_EX32(te->regs, TR_TE_CONTROL, FORMAT);
-+    uint32_t trTeInstSyncMode = ARRAY_FIELD_EX32(te->regs, TR_TE_CONTROL,
-+                                                 INST_SYNC_MODE);
-+    uint32_t trTeInstSyncMax = ARRAY_FIELD_EX32(te->regs, TR_TE_CONTROL,
-+                                                INST_SYNC_MAX);
-     uint32_t temp;
- 
-     val = trencoder_te_ctrl_set_hardwire_vals(val);
-@@ -245,6 +249,21 @@ static uint64_t trencoder_te_ctrl_prew(RegisterInfo *reg, uint64_t val)
-         val = FIELD_DP32(val, TR_TE_CONTROL, INST_TRACING, 0);
+     if (trencoder->ntrace && ARRAY_FIELD_EX32(trencoder->regs, TR_TE_CONTROL, CONTEXT)) {
+         trencoder_send_ownership_msg(trencoder, FORMAT_PRIV_CHANGE, newpiv);
+     } else if (!trencoder->ntrace) {
+-        trencoder_trace_ppccd(trencoder_obj, pc);
++        trencoder_trace_ppccd(trencoder_obj, curr_pc);
      }
- 
-+    temp = FIELD_EX32(val, TR_TE_CONTROL, INST_SYNC_MODE);
-+    if (temp != TR_TE_INST_SYNC_MODE_OFF &&
-+        temp != TR_TE_INST_SYNC_MODE_MSG &&
-+        temp != TR_TE_INST_SYNC_MODE_INST) {
-+        /* Only sync mods 0, 1 and 3 are supported */
-+        val = FIELD_DP32(val, TR_TE_CONTROL, INST_SYNC_MODE, trTeInstSyncMode);
-+    } else if (temp != trTeInstSyncMode) {
-+        te->sync_cnt = 0;
-+    }
-+
-+    temp = FIELD_EX32(val, TR_TE_CONTROL, INST_SYNC_MAX);
-+    if (temp != trTeInstSyncMax) {
-+        te->sync_cnt = 0;
-+    }
-+
-     return val;
  }
  
-@@ -389,6 +408,7 @@ static void trencoder_reset(DeviceState *dev)
- 
-     te->branch_map = 0;
-     te->branches = 0;
-+    te->sync_cnt = 0;
- }
- 
- static void trencoder_realize(DeviceState *dev, Error **errp)
-@@ -480,6 +500,7 @@ static void trencoder_send_message_smem(TraceEncoder *trencoder,
-     cpu_physical_memory_write(dest, msg, msg_size);
-     dest += msg_size;
- 
-+    rv_ntrace_update_sync_msg_cnt(trencoder);
-     trencoder_update_ramsink_writep(trencoder, dest, wrapped);
- }
- 
-@@ -532,11 +553,21 @@ void trencoder_send_indirect_branch_hist(TraceEncoder *trencoder,
- 
-     uint32_t icnt = rv_ntrace_get_and_reset_icnt(trencoder, curr_pc, curr_inst_len);
-     uint64_t uaddr = rv_ntrace_encode_uaddr(trencoder, target_pc);
-+    uint64_t faddr = rv_ntrace_encode_faddr(target_pc);
-     uint32_t hist = rv_ntrace_encode_and_reset_branch_map(trencoder);
-+    uint64_t sync_max = rv_ntrace_get_sync_max_cnt(trencoder);
-+    uint32_t sync = ARRAY_FIELD_EX32(trencoder->regs, TR_TE_CONTROL, INST_SYNC_MODE);
- 
-     g_assert(trencoder->ntrace);
- 
--    msg_size = rv_ntrace_gen_indirect_branch_hist_msg(msg, btype, icnt, uaddr, hist);
-+    if (sync && trencoder->sync_cnt >= sync_max) {
-+        msg_size = rv_ntrace_gen_indirect_branch_hist_sync_msg(msg, btype, icnt,
-+                                                               faddr, hist);
-+        trencoder->sync_cnt = 0;
-+    } else {
-+        msg_size = rv_ntrace_gen_indirect_branch_hist_msg(msg, btype, icnt, uaddr,
-+                                                          hist);
-+    }
-     trencoder->last_addr_reported = target_pc;
-     trencoder->last_icnt_reset = target_pc;
- 
-@@ -621,6 +652,14 @@ static uint64_t rv_ntrace_encode_uaddr(TraceEncoder *trencoder, uint64_t target_
-     return trencoder->last_addr_reported ^ target_pc;
- }
- 
-+static uint64_t rv_ntrace_get_sync_max_cnt(TraceEncoder *trencoder)
-+{
-+    uint32_t sync_max_f = ARRAY_FIELD_EX32(trencoder->regs, TR_TE_CONTROL,
-+                                           INST_SYNC_MAX);
-+
-+    return 1 << (sync_max_f + 4);
-+}
-+
- static uint32_t rv_ntrace_encode_and_reset_branch_map(TraceEncoder *trencoder)
- {
-     const uint32_t stop_bit = 1;
-@@ -660,6 +699,26 @@ static uint32_t rv_ntrace_encode_and_reset_branch_map(TraceEncoder *trencoder)
-     return hist;
- }
- 
-+static void rv_ntrace_update_sync_msg_cnt(TraceEncoder *trencoder)
-+{
-+    uint64_t sync_mode = ARRAY_FIELD_EX32(trencoder->regs, TR_TE_CONTROL,
-+                                          INST_SYNC_MODE);
-+
-+    if (sync_mode == TR_TE_INST_SYNC_MODE_MSG) {
-+        trencoder->sync_cnt++;
-+    }
-+}
-+
-+static void rv_ntrace_update_sync_icnt(TraceEncoder *trencoder, uint64_t icnt)
-+{
-+    uint64_t sync_mode = ARRAY_FIELD_EX32(trencoder->regs, TR_TE_CONTROL,
-+                                          INST_SYNC_MODE);
-+
-+    if (sync_mode == TR_TE_INST_SYNC_MODE_INST) {
-+        trencoder->sync_cnt += icnt;
-+    }
-+}
-+
- static uint32_t rv_ntrace_get_and_reset_icnt(TraceEncoder *trencoder,
-                                              uint64_t pc, uint32_t inst_len)
- {
-@@ -674,6 +733,8 @@ static uint32_t rv_ntrace_get_and_reset_icnt(TraceEncoder *trencoder,
-         error_setg(&error_fatal, "N-Trace icnt overflowed");
-     }
- 
-+    rv_ntrace_update_sync_icnt(trencoder, icnt);
-+
-     return icnt;
- }
- 
-@@ -750,8 +811,10 @@ void trencoder_report_branch(Object *trencoder_obj, uint64_t pc,
-     TraceEncoder *te = TRACE_ENCODER(trencoder_obj);
- 
-     if (te->ntrace && taken != BRANCH_NOT_TAKEN) {
--            te->icnt_accumulated += (pc + insn_len - te->last_icnt_reset) / 2;
-+            uint64_t icnt = (pc + insn_len - te->last_icnt_reset) / 2;
-+            te->icnt_accumulated += icnt;
-             te->last_icnt_reset = pc + offset;
-+            rv_ntrace_update_sync_icnt(te, icnt);
-     }
- 
-     if (taken == BRANCH_TAKEN_UNCONDITIONAL) {
 diff --git a/hw/riscv/trace-encoder.h b/hw/riscv/trace-encoder.h
-index b3cdbf9374..4cfdb47ecf 100644
+index 34177a64bd..9d2f1c162e 100644
 --- a/hw/riscv/trace-encoder.h
 +++ b/hw/riscv/trace-encoder.h
-@@ -50,6 +50,8 @@ struct TraceEncoder {
-     uint64_t last_addr_reported;
-     uint64_t last_icnt_reset;
-     uint64_t icnt_accumulated;
+@@ -101,7 +101,7 @@ void trencoder_send_indirect_branch_hist(TraceEncoder *trencoder,
+ void trencoder_trace_trap_insn(Object *trencoder_obj, uint64_t curr_pc,
+                                uint64_t target_pc, uint32_t ecause,
+                                bool is_interrupt, uint64_t tval);
+-void trencoder_trace_priv_change(Object *trencoder_obj, uint64_t pc,
++void trencoder_trace_priv_change(Object *trencoder_obj, hwaddr curr_pc,
+                                  uint8_t newpiv);
+ void trencoder_report_updiscon(Object *trencoder_obj);
+ void trencoder_report_branch(Object *trencoder_obj, uint64_t pc,
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 912aa24f54..8aac23b400 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -1043,15 +1043,6 @@ void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv, bool virt_en)
+             riscv_itrigger_update_priv(env);
+         }
+ 
+-        if (newpriv != env->priv) {
+-            RISCVCPU *cpu = RISCV_CPU(cs);
+-
+-            if (cpu->trencoder &&
+-                TRACE_ENCODER(cpu->trencoder)->trace_running) {
+-                trencoder_trace_priv_change(cpu->trencoder, env->pc, newpriv);
+-            }
+-        }
+-
+         riscv_pmu_update_fixed_ctrs(env, newpriv, virt_en);
+     }
+ 
+@@ -2388,6 +2379,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+                                       env->scause, async, env->stval);
+         }
+ 
++        trencoder_trace_priv_change(cpu->trencoder, env->sepc, PRV_S);
+         riscv_cpu_set_mode(env, PRV_S, virt);
+ 
+         src = env->sepc;
+@@ -2480,6 +2472,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+                                       env->mcause, async, env->mtval);
+         }
+ 
++        trencoder_trace_priv_change(cpu->trencoder, env->mepc, PRV_M);
+         riscv_cpu_set_mode(env, PRV_M, virt);
+         src = env->mepc;
+     }
+diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+index 6ccc127c30..12fb0209f6 100644
+--- a/target/riscv/op_helper.c
++++ b/target/riscv/op_helper.c
+@@ -29,6 +29,8 @@
+ #include "trace.h"
+ 
+ #ifndef CONFIG_USER_ONLY
++#include "hw/riscv/trace-encoder.h"
 +
-+    uint64_t sync_cnt;
- };
+ static inline MemOp mo_endian_env(CPURISCVState *env)
+ {
+     /*
+@@ -289,6 +291,8 @@ target_ulong helper_sret(CPURISCVState *env)
+     target_ulong prev_priv, prev_virt = env->virt_enabled;
+     const target_ulong src_priv = env->priv;
+     const bool src_virt = env->virt_enabled;
++    CPUState *cs = env_cpu(env);
++    RISCVCPU *cpu = RISCV_CPU(cs);
  
- typedef enum {
-@@ -68,6 +70,13 @@ typedef enum {
-     CORRELATION_TRACE_DISABLED = 4,
- } TraceStopReason;
+     if (!(env->priv >= PRV_S)) {
+         riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
+@@ -349,6 +353,7 @@ target_ulong helper_sret(CPURISCVState *env)
+         }
+     }
  
-+typedef enum {
-+    TR_TE_INST_SYNC_MODE_OFF    = 0,
-+    TR_TE_INST_SYNC_MODE_MSG    = 1,
-+    /* Mode 2(Count hart clock cycles) is not supported. */
-+    TR_TE_INST_SYNC_MODE_INST   = 3,
-+} TraceSyncMode;
-+
- #define TYPE_TRACE_ENCODER "trace-encoder"
++    trencoder_trace_priv_change(cpu->trencoder, env->pc, prev_priv);
+     riscv_cpu_set_mode(env, prev_priv, prev_virt);
  
- OBJECT_DECLARE_SIMPLE_TYPE(TraceEncoder, TRACE_ENCODER)
+     /*
+@@ -410,6 +415,8 @@ target_ulong helper_mret(CPURISCVState *env)
+     uint64_t mstatus = env->mstatus;
+     target_ulong prev_priv = get_field(mstatus, MSTATUS_MPP);
+     uintptr_t ra = GETPC();
++    CPUState *cs = env_cpu(env);
++    RISCVCPU *cpu = RISCV_CPU(cs);
+ 
+     check_ret_from_m_mode(env, retpc, prev_priv, ra);
+ 
+@@ -436,6 +443,7 @@ target_ulong helper_mret(CPURISCVState *env)
+         riscv_cpu_swap_hypervisor_regs(env);
+     }
+ 
++    trencoder_trace_priv_change(cpu->trencoder, env->pc, prev_priv);
+     riscv_cpu_set_mode(env, prev_priv, prev_virt);
+     /*
+      * If forward cfi enabled for new priv, restore elp status
 
 -- 
 2.43.0
