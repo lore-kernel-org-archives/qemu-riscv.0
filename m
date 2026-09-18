@@ -4,58 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FED3C982D2
-	for <qemu-riscv@archiver.kernel.org>; Thu, 17 Sep 2026 22:03:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAD65C982D0
+	for <qemu-riscv@archiver.kernel.org>; Fri, 18 Sep 2026 00:07:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x7K9v-0004CD-Bw; Thu, 17 Sep 2026 18:00:49 -0400
+	id 1x7M7z-0006bi-6n; Thu, 17 Sep 2026 20:06:55 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <anjo@rev.ng>)
- id 1x7K9M-00045M-Oo; Thu, 17 Sep 2026 18:00:27 -0400
-Received: from rev.ng ([94.130.142.21])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <anjo@rev.ng>)
- id 1x7K9K-0004KE-C7; Thu, 17 Sep 2026 18:00:12 -0400
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=rev.ng;
- s=dkim; h=Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:
- Content-Type:MIME-Version:Subject:Date:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive:List-Unsubscribe:List-Unsubscribe-Post:
- List-Help; bh=RrRRTM+hKW9E9aukXzHv56EvBVfkTulUw32ij3Vb0sg=; b=Fi3GqhACVHQ6hzB
- DcSkT5nBWJ1iEnzkRHKesYfe2JpMB55oILEIOzwatFFkkX6WLwFc3JKbhqlKnU5h2f5mXzKepqC8e
- YRnC2MMEyxNPTuQRnTcOePtAQeNHnD0orzZuA7cQe3GeXvXmoeI0IoHIcitHcGSminRbVr6HP/79x
- go=;
-Date: Fri, 18 Sep 2026 00:05:01 +0200
-Subject: [PATCH v5 07/11] hw/riscv: Define SiFive E/U CPUs using runtime
- conditions
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Message-Id: <20260918-hw-riscv-cpu-int-v5-7-f98c5a244636@rev.ng>
-References: <20260918-hw-riscv-cpu-int-v5-0-f98c5a244636@rev.ng>
-In-Reply-To: <20260918-hw-riscv-cpu-int-v5-0-f98c5a244636@rev.ng>
+ (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
+ id 1x7M7w-0006au-Ir
+ for qemu-riscv@nongnu.org; Thu, 17 Sep 2026 20:06:52 -0400
+Received: from mail-pl1-x62f.google.com ([2607:f8b0:4864:20::62f])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
+ id 1x7M7u-0004qj-Ty
+ for qemu-riscv@nongnu.org; Thu, 17 Sep 2026 20:06:52 -0400
+Received: by mail-pl1-x62f.google.com with SMTP id
+ d9443c01a7336-2db710396ffso10655245ad.1
+ for <qemu-riscv@nongnu.org>; Thu, 17 Sep 2026 17:06:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1789690009; x=1790294809; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:content-type:message-id:date
+ :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=dSdxLTVBDZLas3mi12fziPFTxITSX7k0t06YRU4w+ds=;
+ b=MDrf+QI/ziY56Bn6Syi4l6c3mD6gvhTks3wsfNMexkAMPvxwVyqfKrpnqYeRiEeRGN
+ KTR4lPljQwrzLBxXYhBNL0tWfZi0qmKtYmpo+0xcstDCx8DuVz2E4Q1ChAxSmMw18IM5
+ XZqg1c/HD7rqfBvBnC2gL9ELNV/TOrzEvbhsrH2ql/SNV9FAhI3HK+jDEJBxwKEcEpd+
+ h9hv7oaq6+EnaYh14WRpZWI/iFvj1siM/g16MRt/GRFoj8NslqttXdCrB5PurRHakeAe
+ vR6hVaZQB8FQX7iGlvInbF25HuHvu688+grZLtXKzPnYVH1Q2tnrYKivJu472ylovnPv
+ ne4w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1789690009; x=1790294809;
+ h=content-transfer-encoding:mime-version:content-type:message-id:date
+ :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=dSdxLTVBDZLas3mi12fziPFTxITSX7k0t06YRU4w+ds=;
+ b=0sMaHnJnl5monBvMeprGPChNA6wkaCNDsW5/wJtJJbF9/IOth3jktOz3I4YDG2c07Y
+ xguIbBpbL2WQDJloj7dZtd9Y5aSQc4/AJaDKymCIJBFSGtnK9c0CSuO3IbXvu1T8Mr7b
+ xgW6qoIomQHzUH525H9qo9OkoHbhx25Oiu9XXycdeqpmnJy32lzXKGBY+69qrJdVJQiI
+ J+iLoc73Ae6nYL1QaESLLirwnQ1V3fLFb4LjR2m3jrEDX6Eh4o67SURISuevV7eSlC5D
+ QSDAIAjC/saa0LQatPTNMGT5IKLQVRa2ljutCadCrvzB2vtlHmbATyRVSwnXoalx/YN4
+ +mfw==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBwIWA6LStONdmW1MTpi+U0o72dhNEtVbBA/ydSKtwnoDrnHkVGA09bt2VkTiV4DxxuQFw0V1hqZehmJ@nongnu.org
+X-Gm-Message-State: AFuF++mXQ1ny72Is0uPzMg4L6+n71f9NoB3L258Wz6ORgiMBy4zZhJNi
+ PjlCzGDswB9yNTQ4mA6m/bgLOFIaKMPQuy4+cD3Pr6tXIe36TDEdxzHt
+X-Gm-Gg: AYBFou0zQz3bGuAEMlDvObhAlOAGTtlYenet2PYakOthLOfcfV/ODYrD7WKVGkOuqN7
+ fNGO15o8uOB7q755NRzp4m6U68BtN9TZ1MnWE1fsnXZ0XnfquYatSi6P+VpExN/HMQWIPaKSUyd
+ 6GtS1ZY6gWAAkgLBzvUHcczeDeTw2BphcnWUBUexmirJwTe7OBva3lefDCrgRCwNJj9Ldcb6Zlq
+ dmMQQBmzNzKioWqnvOE5SMESeG91rHnNrRpmAMGRwVvGfTHwOpa6Gtfy4xhx8+QJ+tkXkRTPyAj
+ n+kP4umX9vZclk2U4uRYfRlui7B84Nd2tWZz5YP0ScXolnY1mAOvi4NyTt3VNeoL2eQhhFi91zz
+ ou80QVVBPTGc5AJUOYKwo+IK3CV4wE9y16Ez18X1mCDo5LjNLP2Not/uiTc23EULfI93EhODOU8
+ jZFQOT+KoeRM6IK6ws/4uMsmBnHv8WPLyT1zO7aveG/0w4Nf/GYyTr1Jy4Fu52vaMN7wpdP0wpN
+ 60Bia7dK30dYXm7pWHG26KDu/Q6TavK
+X-Received: by 2002:a17:90b:58c4:b0:39d:e445:1d44 with SMTP id
+ 98e67ed59e1d1-39e361afbe1mr7537456a91.31.1789690009222; 
+ Thu, 17 Sep 2026 17:06:49 -0700 (PDT)
+Received: from WIN-BH9M8FJACR9 ([103.94.185.75])
+ by smtp.googlemail.com with ESMTPSA id
+ 5a478bee46e88-33bf5b1d335sm20328212eec.28.2026.09.17.17.06.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 17 Sep 2026 17:06:48 -0700 (PDT)
+From: Yonggang Luo <luoyonggang@gmail.com>
 To: qemu-devel@nongnu.org
-Cc: Anton Johansson <anjo@rev.ng>, qemu-riscv@nongnu.org, 
- daniel.barboza@oss.qualcomm.com, philmd@oss.qualcomm.com, 
- pierrick.bouvier@oss.qualcomm.com, palmer@dabbelt.com, 
- alistair.francis@wdc.com, Chao Liu <chao.liu.zevorn@gmail.com>
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1789682743; l=5281;
- i=anjo@rev.ng; s=20260210; h=from:subject:message-id;
- bh=Q90V/MFI44KOgxihm0cIMXrVnnoPikfVf+Znrq0exHg=;
- b=/ZjopVeLZBgZegKRQ0XOq92kpGM/lqTXGvX+J0DQNJ41jM0pEtitm2zbQBk4Q/citLReQo53M
- t77pdFwyPX0AYIazUcssDQ8glYFuUmBtZAdopa6aqp/NviT+KaVZZnX
-X-Developer-Key: i=anjo@rev.ng; a=ed25519;
- pk=dKsZvj/g3kgDxnV1/SWg8a0YNGSpWtFGNsWIepQYKow=
-Received-SPF: pass client-ip=94.130.142.21; envelope-from=anjo@rev.ng;
- helo=rev.ng
+Cc: Xianglai Li <lixianglai@loongson.cn>, Weiwei Li <liwei1518@gmail.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Stafford Horne <shorne@gmail.com>, qemu-riscv@nongnu.org,
+ qemu-arm@nongnu.org, Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Zhao Liu <zhao1.liu@intel.com>, Brian Cain <brian.cain@oss.qualcomm.com>,
+ Laurent Vivier <laurent@vivier.eu>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, Song Gao <17746591750@163.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Bibo Mao <maobibo@loongson.cn>, Chao Liu <chao.liu@processmission.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Philippe Mathieu-Daude <philmd@mailo.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Max Filippov <jcmvbkbc@gmail.com>
+Subject: [PATCH 0/8] machine: uniquify virt QOM names
+Date: Fri, 18 Sep 2026 08:06:31 +0800
+Message-ID: <20260918000640.1001-1-luoyonggang@gmail.com>
+X-Mailer: git-send-email 2.52.0.windows.1
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62f;
+ envelope-from=luoyonggang@gmail.com; helo=mail-pl1-x62f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_PASS=-0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -69,135 +112,54 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Reply-to:  Anton Johansson <anjo@rev.ng>
-From:  Anton Johansson via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Macros are removed and replaced with inlined ternary statements.  The
-now empty sifive_cpu.h header is then removed.
+Multiple targets register a virt board as MACHINE_TYPE_NAME("virt").
+Those QOM types collide if more than one board is linked into one
+qemu-system process. This series splits the QOM type from the -M name
+so each virt board can keep a unique type while -M virt, help, and
+migration stay the same.
 
-Reviewed-by: Chao Liu <chao.liu.zevorn@gmail.com>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
-Reviewed-by: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
-Signed-off-by: Anton Johansson <anjo@rev.ng>
----
- include/hw/riscv/sifive_cpu.h | 31 -------------------------------
- include/hw/riscv/sifive_e.h   |  1 -
- include/hw/riscv/sifive_u.h   |  1 -
- hw/riscv/sifive_e.c           |  3 ++-
- hw/riscv/sifive_u.c           |  7 +++++--
- 5 files changed, 7 insertions(+), 36 deletions(-)
+- Add machine_class_set_name() so boards can set MachineClass::name
+  when it must differ from the QOM type. machine_class_base_init still
+  defaults the name to the QOM type without -machine. Document that
+  MachineClass::name is the -M name, not the QOM type. Sort -M help
+  by that name so order matches the printed names after types are
+  prefixed (arm-virt-11.1-machine vs virt-11.1).
+- Give each colliding virt board a unique QOM type and keep the
+  existing -M name via machine_class_set_name(): riscv-virt, arm-virt,
+  or1k-virt, hexagon-virt, loongarch-virt, m68k-virt, and xtensa-virt.
+  Versioned ARM, LoongArch, and M68K boards keep virt-<ver>. Latest
+  ARM virt still sets mc->alias to virt.
 
-diff --git a/include/hw/riscv/sifive_cpu.h b/include/hw/riscv/sifive_cpu.h
-deleted file mode 100644
-index 136799633a..0000000000
---- a/include/hw/riscv/sifive_cpu.h
-+++ /dev/null
-@@ -1,31 +0,0 @@
--/*
-- * SiFive CPU types
-- *
-- * Copyright (c) 2017 SiFive, Inc.
-- * Copyright (c) 2019 Bin Meng <bmeng.cn@gmail.com>
-- *
-- * This program is free software; you can redistribute it and/or modify it
-- * under the terms and conditions of the GNU General Public License,
-- * version 2 or later, as published by the Free Software Foundation.
-- *
-- * This program is distributed in the hope it will be useful, but WITHOUT
-- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-- * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-- * more details.
-- *
-- * You should have received a copy of the GNU General Public License along with
-- * this program.  If not, see <http://www.gnu.org/licenses/>.
-- */
--
--#ifndef HW_SIFIVE_CPU_H
--#define HW_SIFIVE_CPU_H
--
--#if defined(TARGET_RISCV32)
--#define SIFIVE_E_CPU TYPE_RISCV_CPU_SIFIVE_E31
--#define SIFIVE_U_CPU TYPE_RISCV_CPU_SIFIVE_U34
--#elif defined(TARGET_RISCV64)
--#define SIFIVE_E_CPU TYPE_RISCV_CPU_SIFIVE_E51
--#define SIFIVE_U_CPU TYPE_RISCV_CPU_SIFIVE_U54
--#endif
--
--#endif /* HW_SIFIVE_CPU_H */
-diff --git a/include/hw/riscv/sifive_e.h b/include/hw/riscv/sifive_e.h
-index 4cf902ebc0..0f0d407d5d 100644
---- a/include/hw/riscv/sifive_e.h
-+++ b/include/hw/riscv/sifive_e.h
-@@ -20,7 +20,6 @@
- #define HW_SIFIVE_E_H
- 
- #include "hw/riscv/riscv_hart.h"
--#include "hw/riscv/sifive_cpu.h"
- #include "hw/gpio/sifive_gpio.h"
- #include "hw/misc/sifive_e_aon.h"
- #include "hw/core/boards.h"
-diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
-index aed966a62d..c12cf22b41 100644
---- a/include/hw/riscv/sifive_u.h
-+++ b/include/hw/riscv/sifive_u.h
-@@ -24,7 +24,6 @@
- #include "hw/dma/sifive_pdma.h"
- #include "hw/net/cadence_gem.h"
- #include "hw/riscv/riscv_hart.h"
--#include "hw/riscv/sifive_cpu.h"
- #include "hw/gpio/sifive_gpio.h"
- #include "hw/misc/sifive_u_otp.h"
- #include "hw/misc/sifive_u_prci.h"
-diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
-index 35ed7f42a4..1b6f9ab4fe 100644
---- a/hw/riscv/sifive_e.c
-+++ b/hw/riscv/sifive_e.c
-@@ -150,7 +150,8 @@ static void sifive_e_machine_class_init(ObjectClass *oc, const void *data)
-     mc->desc = "RISC-V Board compatible with SiFive E SDK";
-     mc->init = sifive_e_machine_init;
-     mc->max_cpus = 1;
--    mc->default_cpu_type = SIFIVE_E_CPU;
-+    mc->default_cpu_type = (target_riscv64()) ? TYPE_RISCV_CPU_SIFIVE_E51
-+                                              : TYPE_RISCV_CPU_SIFIVE_E31;
-     mc->default_ram_id = "riscv.sifive.e.ram";
-     mc->default_ram_size = sifive_e_memmap[SIFIVE_E_DEV_DTIM].size;
- 
-diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-index b7d5e7b4da..344f3d915d 100644
---- a/hw/riscv/sifive_u.c
-+++ b/hw/riscv/sifive_u.c
-@@ -661,7 +661,8 @@ static void sifive_u_machine_class_init(ObjectClass *oc, const void *data)
-     mc->init = sifive_u_machine_init;
-     mc->max_cpus = SIFIVE_U_MANAGEMENT_CPU_COUNT + SIFIVE_U_COMPUTE_CPU_COUNT;
-     mc->min_cpus = SIFIVE_U_MANAGEMENT_CPU_COUNT + 1;
--    mc->default_cpu_type = SIFIVE_U_CPU;
-+    mc->default_cpu_type = (target_riscv64()) ? TYPE_RISCV_CPU_SIFIVE_U54
-+                                              : TYPE_RISCV_CPU_SIFIVE_U34;
-     mc->default_cpus = mc->min_cpus;
-     mc->default_ram_id = "riscv.sifive.u.ram";
-     mc->auto_create_sdcard = true;
-@@ -693,6 +694,8 @@ type_init(sifive_u_machine_init_register_types)
- static void sifive_u_soc_instance_init(Object *obj)
- {
-     SiFiveUSoCState *s = RISCV_U_SOC(obj);
-+    const char *e_cpu_type = (target_riscv64()) ? TYPE_RISCV_CPU_SIFIVE_E51
-+                                                : TYPE_RISCV_CPU_SIFIVE_E31;
- 
-     object_initialize_child(obj, "e-cluster", &s->e_cluster, TYPE_CPU_CLUSTER);
-     qdev_prop_set_uint32(DEVICE(&s->e_cluster), "cluster-id", 0);
-@@ -701,7 +704,7 @@ static void sifive_u_soc_instance_init(Object *obj)
-                             TYPE_RISCV_HART_ARRAY);
-     qdev_prop_set_uint32(DEVICE(&s->e_cpus), "num-harts", 1);
-     qdev_prop_set_uint32(DEVICE(&s->e_cpus), "hartid-base", 0);
--    qdev_prop_set_string(DEVICE(&s->e_cpus), "cpu-type", SIFIVE_E_CPU);
-+    qdev_prop_set_string(DEVICE(&s->e_cpus), "cpu-type", e_cpu_type);
-     qdev_prop_set_uint64(DEVICE(&s->e_cpus), "resetvec", 0x1004);
- 
-     object_initialize_child(obj, "u-cluster", &s->u_cluster, TYPE_CPU_CLUSTER);
+Yonggang Luo (8):
+  machine: allow -M name to differ from QOM type
+  hw/riscv/virt: use unique QOM name
+  hw/arm/virt: use unique QOM name
+  hw/or1k/virt: use unique QOM name
+  hw/hexagon/virt: use unique QOM name
+  hw/loongarch/virt: use unique QOM name
+  hw/m68k/virt: use unique QOM name
+  hw/xtensa/virt: use unique QOM name
+
+ hw/arm/virt.c               |  3 ++-
+ hw/core/machine.c           |  6 ++++++
+ hw/hexagon/virt.c           |  1 +
+ hw/loongarch/virt.c         |  3 ++-
+ hw/m68k/virt.c              |  7 ++++---
+ hw/or1k/virt.c              |  3 ++-
+ hw/riscv/virt.c             |  3 ++-
+ hw/xtensa/virt.c            |  3 ++-
+ include/hw/arm/virt.h       |  2 +-
+ include/hw/core/boards.h    | 12 +++++++++++-
+ include/hw/hexagon/virt.h   |  2 +-
+ include/hw/loongarch/virt.h |  2 +-
+ include/hw/riscv/virt.h     |  2 +-
+ system/vl.c                 |  8 +++-----
+ 14 files changed, 39 insertions(+), 18 deletions(-)
 
 -- 
-2.52.0
+2.52.0.windows.1
 
 
