@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD46DC982D8
-	for <qemu-riscv@archiver.kernel.org>; Fri, 18 Sep 2026 20:51:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B62DC982D7
+	for <qemu-riscv@archiver.kernel.org>; Fri, 18 Sep 2026 20:52:02 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x7fYG-000593-8V; Fri, 18 Sep 2026 16:51:20 -0400
+	id 1x7fYG-000594-A0; Fri, 18 Sep 2026 16:51:20 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <deller@kernel.org>)
- id 1x7fDZ-0001Jd-DX; Fri, 18 Sep 2026 16:29:57 -0400
+ id 1x7fDX-0001J5-8E; Fri, 18 Sep 2026 16:29:55 -0400
 Received: from sea.source.kernel.org ([172.234.252.31])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <deller@kernel.org>)
- id 1x7fDX-0003D1-Q7; Fri, 18 Sep 2026 16:29:57 -0400
+ id 1x7fDV-0003Ci-KZ; Fri, 18 Sep 2026 16:29:55 -0400
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id 9EEB440A20;
- Fri, 18 Sep 2026 20:29:54 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 378FC1F000FF;
- Fri, 18 Sep 2026 20:29:52 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id D7AA24160C;
+ Fri, 18 Sep 2026 20:29:51 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 676751F000FF;
+ Fri, 18 Sep 2026 20:29:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1789763394;
- bh=/QkkhWti4U0cgjOq7ipLejpbLll6u8Vh1wDZGs+1W40=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References;
- b=lLQV1yy3OYKOHLzBsvL1MICLItq7E3PkEtygISaB9UwlQnt2bJzenWb5RmFCHxYt8
- V0p2GwyXBjWUfssUPrBztGA85UiCK4cKhOPISiB4YZ3bvfxrale9anJi5cnetM3J0l
- cQm4GMw1XO0sIN9KOqttPDM11j5FoS/+T9diGGGoFs3CJWw3uP3vAzQMCVshmJCLYJ
- B/wfm2NuA75n/hp6mpUfZcLzyFXs6SWjKWBuBMhAGo80WjID9yam8fmZ0H5GdPpMQn
- +SQTYboNZlvDOJ85MfK8/5wPrwk0Yc5V6aAgPQGydtX8SI3a5Pf9vRkUg35DZaAR8g
- WKlmSBTUTrabA==
+ s=k20260515; t=1789763391;
+ bh=d9b45h+0PbT+j+W7nwklXtvP6ReaP2gu+9ivmyVlqs0=;
+ h=From:To:Cc:Subject:Date;
+ b=nQ/7hA+q1OIYdUuCUbtJs/z02PH5jUkm2idRcY6OdSzeTkACTPCb6J5Qctp7OhvMT
+ HH3+5xaEYkqFPn2QgkqAYhoeGArtPt2ot1cgoi4+LMtfRLUWYGwmf3OMrCuiv3x41O
+ 9G13yOF1uExNQizX1mNA5Uq3bRjwdz+2pKxmEIyntCG0lhelZsoHUpgEBJgdeTUclU
+ mRa94WSkStPTaMcvC8iTMxdTIOm8ytPj0XUvz0Eaf58IIFV2cjypQOul5Zw3nklaH5
+ MUyNIvQHmPLwY6x/q2zI/HDanj2N2D59FhhRj/YcRJrcAHKwPk3Neudv66+EOUbeQP
+ HGcJAo0u8cq5A==
 From: Helge Deller <deller@kernel.org>
 To: qemu-devel@nongnu.org
 Cc: Weiwei Li <liwei1518@gmail.com>, Helge Deller <deller@gmx.de>,
@@ -43,12 +43,11 @@ Cc: Weiwei Li <liwei1518@gmail.com>, Helge Deller <deller@gmx.de>,
  Alistair Francis <alistair.francis@wdc.com>,
  Chao Liu <chao.liu@processmission.com>,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Subject: [PULL 1/4] linux-user/riscv: honor zicntr=false for base counterCSRs
-Date: Fri, 18 Sep 2026 22:29:44 +0200
-Message-ID: <20260918202947.5322-2-deller@kernel.org>
+Subject: [PULL 0/4] Linux user patches
+Date: Fri, 18 Sep 2026 22:29:43 +0200
+Message-ID: <20260918202947.5322-1-deller@kernel.org>
 X-Mailer: git-send-email 2.54.0
-In-Reply-To: <20260918202947.5322-1-deller@kernel.org>
-References: <20260918202947.5322-1-deller@kernel.org>
+Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=172.234.252.31; envelope-from=deller@kernel.org;
@@ -60,7 +59,7 @@ X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Fri, 18 Sep 2026 16:51:18 -0400
+X-Mailman-Approved-At: Fri, 18 Sep 2026 16:51:16 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -75,51 +74,52 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: wangyang <wangyang25@otcaix.iscas.ac.cn>
+From: Helge Deller <deller@gmx.de>
 
-In user-only builds, the base cycle and instret CSRs bypass the zicntr
-feature gate because the check is inside the system-mode block. Move the
-check before the conditional block so an explicitly disabled zicntr
-extension makes the CSRs illegal in linux-user mode.
+The following changes since commit e8dca265c91b45f4cde746e5094d7b763444eb6a:
 
-Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/4148
+  Merge tag 'pull-11.1-more-check-tcg-docker-meson-180926-1' of https://gitlab.com/stsquad/qemu into staging (2026-09-18 07:52:24 -1000)
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-Signed-off-by: wangyang <wangyang25@otcaix.iscas.ac.cn>
-Signed-off-by: Helge Deller <deller@gmx.de>
----
- target/riscv/tcg/csr.c | 11 +++++++----
- 1 file changed, 7 insertions(+), 4 deletions(-)
+are available in the Git repository at:
 
-diff --git a/target/riscv/tcg/csr.c b/target/riscv/tcg/csr.c
-index bd4b6dc114..061bc9db77 100644
---- a/target/riscv/tcg/csr.c
-+++ b/target/riscv/tcg/csr.c
-@@ -111,6 +111,13 @@ static RISCVException vs(CPURISCVState *env, int csrno)
- 
- static RISCVException ctr(CPURISCVState *env, int csrno)
- {
-+    if ((csrno >= CSR_CYCLE && csrno <= CSR_INSTRET) ||
-+        (csrno >= CSR_CYCLEH && csrno <= CSR_INSTRETH)) {
-+        if (!riscv_cpu_cfg(env)->ext_zicntr) {
-+            return RISCV_EXCP_ILLEGAL_INST;
-+        }
-+    }
-+
- #if !defined(CONFIG_USER_ONLY)
-     RISCVCPU *cpu = env_archcpu(env);
-     int ctr_index;
-@@ -127,10 +134,6 @@ static RISCVException ctr(CPURISCVState *env, int csrno)
- 
-     if ((csrno >= CSR_CYCLE && csrno <= CSR_INSTRET) ||
-         (csrno >= CSR_CYCLEH && csrno <= CSR_INSTRETH)) {
--        if (!riscv_cpu_cfg(env)->ext_zicntr) {
--            return RISCV_EXCP_ILLEGAL_INST;
--        }
--
-         goto skip_ext_pmu_check;
-     }
- 
+  https://github.com/hdeller/qemu-hppa.git tags/linux-user-pull-request
+
+for you to fetch changes up to e95f53e30be7935d98e38eb09cd6360fe2886249:
+
+  linux-user/loongarch64: Detect vector stores in host_signal_write() (2026-09-18 22:20:21 +0200)
+
+----------------------------------------------------------------
+linux-user patches for mlock syscall and loongarch64 and riscv fixes
+
+Add support for the mlock syscall, and some fixes for loongarch64 and riscv.
+
+----------------------------------------------------------------
+
+Michael Morrell (1):
+  linux-user: implement mlock2(2) syscall
+
+SignKirigami (1):
+  linux-user/loongarch64: Detect vector stores in host_signal_write()
+
+wangyang (2):
+  linux-user/riscv: honor zicntr=false for base counterCSRs
+  linux-user/riscv: invalidate reservations after stores
+
+ .../include/host/loongarch64/host-signal.h    |  6 +++
+ linux-user/riscv/target_cpu.h                 |  2 +
+ linux-user/syscall.c                          |  9 +++++
+ linux-user/syscall_defs.h                     |  4 ++
+ target/riscv/cpu.c                            |  3 ++
+ target/riscv/cpu.h                            |  3 ++
+ target/riscv/helper.h                         |  5 +++
+ target/riscv/tcg/csr.c                        | 11 ++++--
+ target/riscv/tcg/insn_trans/trans_rva.c.inc   | 24 ++++++++++++
+ target/riscv/tcg/insn_trans/trans_rvi.c.inc   | 11 ++++++
+ .../riscv/tcg/insn_trans/trans_rvzawrs.c.inc  |  3 ++
+ target/riscv/tcg/op_helper.c                  | 35 +++++++++++++++++
+ target/riscv/tcg/translate.c                  | 38 +++++++++++++++++++
+ 13 files changed, 150 insertions(+), 4 deletions(-)
+
 -- 
 2.54.0
 
