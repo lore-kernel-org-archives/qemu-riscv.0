@@ -4,37 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07304C982D8
-	for <qemu-riscv@archiver.kernel.org>; Fri, 18 Sep 2026 20:52:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5A3DC982CC
+	for <qemu-riscv@archiver.kernel.org>; Sat, 19 Sep 2026 20:41:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x7fYH-00059g-Gc; Fri, 18 Sep 2026 16:51:21 -0400
+	id 1x81sM-0003M7-R1; Sat, 19 Sep 2026 16:41:34 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <deller@kernel.org>)
- id 1x7fDf-0001L7-27; Fri, 18 Sep 2026 16:30:04 -0400
-Received: from tor.source.kernel.org ([2600:3c04:e001:324:0:1991:8:25])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <deller@kernel.org>)
- id 1x7fDd-0003E9-8f; Fri, 18 Sep 2026 16:30:02 -0400
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id 5E6436053B;
- Fri, 18 Sep 2026 20:30:00 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BAE7D1F000FF;
- Fri, 18 Sep 2026 20:29:57 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1789763400;
- bh=Df2nNEkPeb+r6J6ucH1JvlVX0AQgSLBybIOjF2SuXKs=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References;
- b=B1u88lClFGO8kCubF3hGXJtJ/bsagAhrzTPILbwzVIu7m5Gr0dNwIq2jEMKfdAAmU
- dQzX5FQP1m3a/lJrXMWZ6k2bmx+EuesjeV9KMwfKPbEmSKj5x4xkWRXlxPRjoH820P
- fqTV7HgKLUB1vddiENo5FVUH2Ou4ovSAwF9xMO3ZaGMZRYohvEqjzwnus9dNXmo9+y
- GFV5z8vyPUN7dwJl3t9PS5PDnxCpd1auC9ABH/L0YdhZbKVfd2/5MYbNIg2SUJO5NX
- /jCv3Btiz8R3kTc0yqzIcgocIhHOSa7TR83PZNPN611uL7KrUmfZYmC8pNQnYlu7zB
- dFlDWlvYRdrzw==
-From: Helge Deller <deller@kernel.org>
-To: qemu-devel@nongnu.org
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1x81sH-0003LI-AB
+ for qemu-riscv@nongnu.org; Sat, 19 Sep 2026 16:41:31 -0400
+Received: from mail-pz2-x10.google.com ([2607:f8b0:4864:3b::10])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1x81sF-0001di-Ky
+ for qemu-riscv@nongnu.org; Sat, 19 Sep 2026 16:41:29 -0400
+Received: by mail-pz2-x10.google.com with SMTP id
+ 41be03b00d2f7-cc1cea50dc3so1242174a12.3
+ for <qemu-riscv@nongnu.org>; Sat, 19 Sep 2026 13:41:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1789850485; x=1790455285; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=fAZsEpTHiGYJL5KYPpHtWXBBE86l9Q2N2rzvxUsW6sw=;
+ b=zkP1Qo95wqz48p8L44ye/vA2ceWlduznNkSf1dKLVD6llZqlaK618PJe54+XrF3eW+
+ yxqx6TfYh7o+1E8bm2/oC3xRac4mT8S5iDALcAsej5Af+lCH/j54/JkAKoUT9twYAcul
+ EjDBXwTf8JUN3lraWBAnv//hrueuGk0yzMBxvBU0y4oKytt/fbonzDJ5QL7q+RNOhaA2
+ w6qW//ys+1jXjqw4Tu3ZMEyjY6eigwQlRr41Wkqd2Y3N6v4L8FjxG5/HIRvkgiWGWOVH
+ LUE2c48jzQ7uimVOyplh4vY3KhrX1Lyyc/vE8FO2L9nnjne8WatWyjo9hG3eKwL61nNC
+ cCGA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1789850485; x=1790455285;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=fAZsEpTHiGYJL5KYPpHtWXBBE86l9Q2N2rzvxUsW6sw=;
+ b=BekN5zxuwlqswA6FbCqad7Q7uhOothCkxqHUni4hsaBGwFjIjSXGwpFPO/6h6o9WLx
+ MW4PoD/Yrf7Dek9eWD4GKtRWgbgK1OTZEWHY8kfm3VSxmHpbEkaHm8x/G1rWeG5/4ZEV
+ r6aODRzGXPj4nClwyWUmf71BqIqD008ykoAvMB9jMVx6TTve3FgmQqxF4HRY7Ceoy0bv
+ VkeQDCMqNMrwzPa4sU1uqnRgkyz1JOFb+01FYbl0cJAkppvDQsbEACxqak6tnJ8AYeN6
+ 6WCMuRFFYDb7BDvvbQUb+ZEt7HkVqY7LiU0vPOKetvt/nAH9BENm3CP5mKzetm/noYg4
+ UFbg==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBzoItC1d/4dNot/8Zd84YQAawKA/VIW7SBpP7CdXGnURhfQTPRm7/3vhePD0T0q+/0TpySfA/Rp5H6z@nongnu.org
+X-Gm-Message-State: AFuF++lsQQ6VYj+DarUipuIf6njfmeIflg91OHnHHPAXcb8sM3wcnZMy
+ bmG/pib0391BuZO3NteuUvGEtDm19/69Lp9OlToK8rvh5Z2OI50J87LrDTlHWka47ss=
+X-Gm-Gg: AYBFou0dLzxheLQgsJ9FT9XqPbBq/ihN3XOJQw/8C+eVUuxM7tIxRQj4igwGDUkMzGt
+ Y97TcQ/YtUoC43KXq4Wq7NX7Bzbc5nQmKCFTje0fhr4XU0H41XggPRYZ5RMmJJkgHDS4qsjGoxV
+ WsqraCfxRotbR4yLRUWBQVmj2hkEO2tzHlpaEQGbV44LGD4mUYJhJQ6Xn2tGH6OzX9lJ8PHE8My
+ SQIs8FGW5rNrLOy7KOHdN09U4Yo1feFeUY5C9ZuvFuon9wEsQp2qXqHr0Gz/lZTd8V/rjmLvSB6
+ hcIav/cOupzVEvolqddJsFbE8+QZCT6WEtXt9V5Ce72Bl4mklzdUiRHPWsQf+8pqnBcQeoX7Oet
+ XDW5Yaqq/UR+cOInrnjUK5eIly0OkeurLx3hCNfeXDngN68tZk0HYqaAaoNqRS2UFtBkAjU7tUy
+ ICGWBq0XjxPg9slO/7mFvxNJjEuW0qGZWIR9QikYutrPTZaBcQXs6i/OClOvJrXxyI5FnzZ5svg
+ 2MIxQxa9VyXBdVXRM5bli4bPBLhrmuDamfJ9LiXhsJikI8R6hSODdmWg7qGQw==
+X-Received: by 2002:a05:6a21:a344:b0:3dd:85a9:559c with SMTP id
+ adf61e73a8af0-3dd8c577aaamr12326656637.30.1789850485345; 
+ Sat, 19 Sep 2026 13:41:25 -0700 (PDT)
+Received: from ?IPV6:2603:800c:7900:ed00:126b:fa43:b140:ff23?
+ ([2603:800c:7900:ed00:126b:fa43:b140:ff23])
+ by smtp.gmail.com with ESMTPSA id
+ 5a478bee46e88-33e3f17288dsm1830546eec.29.2026.09.19.13.41.23
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sat, 19 Sep 2026 13:41:24 -0700 (PDT)
+Message-ID: <0f0d3936-d594-44fd-b82d-37c779fdf1a0@linaro.org>
+Date: Sat, 19 Sep 2026 10:41:21 -1000
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PULL 0/4] Linux user patches
+To: Helge Deller <deller@kernel.org>, qemu-devel@nongnu.org
 Cc: Weiwei Li <liwei1518@gmail.com>, Helge Deller <deller@gmx.de>,
  qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
@@ -43,24 +83,22 @@ Cc: Weiwei Li <liwei1518@gmail.com>, Helge Deller <deller@gmx.de>,
  Alistair Francis <alistair.francis@wdc.com>,
  Chao Liu <chao.liu@processmission.com>,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Subject: [PULL 3/4] linux-user: implement mlock2(2) syscall
-Date: Fri, 18 Sep 2026 22:29:46 +0200
-Message-ID: <20260918202947.5322-4-deller@kernel.org>
-X-Mailer: git-send-email 2.54.0
-In-Reply-To: <20260918202947.5322-1-deller@kernel.org>
 References: <20260918202947.5322-1-deller@kernel.org>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2600:3c04:e001:324:0:1991:8:25;
- envelope-from=deller@kernel.org; helo=tor.source.kernel.org
+From: Richard Henderson <richard.henderson@linaro.org>
+Content-Language: en-US
+In-Reply-To: <20260918202947.5322-1-deller@kernel.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:3b::10;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pz2-x10.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Fri, 18 Sep 2026 16:51:18 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -75,63 +113,27 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Michael Morrell <mmorrell@tachyum.com>
+On 9/18/26 10:29, Helge Deller wrote:
+> From: Helge Deller<deller@gmx.de>
+> 
+> The following changes since commit e8dca265c91b45f4cde746e5094d7b763444eb6a:
+> 
+>    Merge tag 'pull-11.1-more-check-tcg-docker-meson-180926-1' ofhttps://gitlab.com/stsquad/qemu into staging (2026-09-18 07:52:24 -1000)
+> 
+> are available in the Git repository at:
+> 
+>    https://github.com/hdeller/qemu-hppa.git tags/linux-user-pull-request
+> 
+> for you to fetch changes up to e95f53e30be7935d98e38eb09cd6360fe2886249:
+> 
+>    linux-user/loongarch64: Detect vector stores in host_signal_write() (2026-09-18 22:20:21 +0200)
+> 
+> ----------------------------------------------------------------
+> linux-user patches for mlock syscall and loongarch64 and riscv fixes
+> 
+> Add support for the mlock syscall, and some fixes for loongarch64 and riscv.
 
-TARGET_NR_mlock2 is defined for every target's syscall table (it has
-been available on all Linux architectures since it was added in
-kernel 4.4), and linux-user/strace.list already has an entry for it,
-but linux-user/syscall.c has no case handler for it. A guest mlock2()
-call therefore falls through to the default case and gets -ENOSYS
-instead of being emulated, on every target.
+Applied, thanks.
 
-mlock2() differs from mlock() only by a third `flags` argument
-(MLOCK_ONFAULT). Add TARGET_MLOCK_ONFAULT and a case that validates
-the flags argument and forwards to the host mlock2(), mirroring the
-existing TARGET_NR_mlock case immediately above it.
-
-Signed-off-by: Michael Morrell <mmorrell@tachyum.com>
-Signed-off-by: Helge Deller <deller@gmx.de>
----
- linux-user/syscall.c      | 9 +++++++++
- linux-user/syscall_defs.h | 4 ++++
- 2 files changed, 13 insertions(+)
-
-diff --git a/linux-user/syscall.c b/linux-user/syscall.c
-index cfa68dfbdb..9f454502cb 100644
---- a/linux-user/syscall.c
-+++ b/linux-user/syscall.c
-@@ -11230,6 +11230,15 @@ static abi_long do_syscall1(CPUArchState *cpu_env, int num, abi_long arg1,
-     case TARGET_NR_mlock:
-         return get_errno(mlock(g2h(cpu, arg1), arg2));
- #endif
-+#ifdef TARGET_NR_mlock2
-+    case TARGET_NR_mlock2:
-+        if (arg3 & ~TARGET_MLOCK_ONFAULT) {
-+            return -TARGET_EINVAL;
-+        }
-+        return get_errno(mlock2(g2h(cpu, arg1), arg2,
-+                                 (arg3 & TARGET_MLOCK_ONFAULT) ?
-+                                 MLOCK_ONFAULT : 0));
-+#endif
- #ifdef TARGET_NR_munlock
-     case TARGET_NR_munlock:
-         return get_errno(munlock(g2h(cpu, arg1), arg2));
-diff --git a/linux-user/syscall_defs.h b/linux-user/syscall_defs.h
-index e28853c93b..f5831a6bad 100644
---- a/linux-user/syscall_defs.h
-+++ b/linux-user/syscall_defs.h
-@@ -2795,6 +2795,10 @@ struct target_mount_attr_ver0 {
- #ifndef RESOLVE_IN_ROOT
- #define RESOLVE_IN_ROOT         0x10
- #endif
-+
-+/* flags for mlock2() */
-+#define TARGET_MLOCK_ONFAULT    0x01
-+
- #if (defined(TARGET_I386) && defined(TARGET_ABI32)) || \
-     (defined(TARGET_ARM) && defined(TARGET_ABI32)) || \
-     defined(TARGET_M68K) || defined(TARGET_MICROBLAZE) || \
--- 
-2.54.0
-
+r~
 
