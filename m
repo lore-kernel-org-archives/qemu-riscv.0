@@ -4,132 +4,134 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1ABDCC98302
-	for <qemu-riscv@archiver.kernel.org>; Tue, 22 Sep 2026 17:07:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FE3EC982FA
+	for <qemu-riscv@archiver.kernel.org>; Tue, 22 Sep 2026 17:28:11 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x93y9-0007hl-5N; Tue, 22 Sep 2026 13:07:49 -0400
+	id 1x94Hh-0004Wa-5D; Tue, 22 Sep 2026 13:28:01 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1x93y7-0007hZ-MQ
- for qemu-riscv@nongnu.org; Tue, 22 Sep 2026 13:07:47 -0400
+ id 1x94He-0004VU-Qb
+ for qemu-riscv@nongnu.org; Tue, 22 Sep 2026 13:27:58 -0400
 Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1x93y5-0004GN-Na
- for qemu-riscv@nongnu.org; Tue, 22 Sep 2026 13:07:47 -0400
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+ id 1x94Hc-00064Y-Q1
+ for qemu-riscv@nongnu.org; Tue, 22 Sep 2026 13:27:58 -0400
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 68MEjdbX898318
- for <qemu-riscv@nongnu.org>; Tue, 22 Sep 2026 17:07:44 GMT
+ 68MEjU6k1058303
+ for <qemu-riscv@nongnu.org>; Tue, 22 Sep 2026 17:27:54 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- Yodo8FKkLRDwokUgHAxXrm1Z7rgg6LvvkpERUUT2ukQ=; b=oHTtLTC+XBIgZsZa
- hkFoDJsPkln/vP/E32ceTtvyIEyxlgfu/8YclSrtagWb6D3FZyKR1xDpwj5QK/3g
- vy2k5q7+7fu7iUv4FYqw27wlErAE8Y+6GG5OeFPxO7gKkHupyc2A+rDKsYpO2VUD
- Os1mcQe51r98K05fhAU9wlmvDWZx7KlqDXC/u9qwvzXknO7pTG2gRGFptSfCOJvT
- eFLgEfCUpUtcaYoNyH34Ms4JDIddR898Gz+Ed/jDgl3O2UPzjdpR7QmEkcWAVjJb
- 0CSfPicwmI+Y74GvGuH5Uzy+Ff+hvwWcbyoWlLH4VY50IyC2MXdsMZzUWidyu6xc
- eo7eXg==
-Received: from mail-ua1-f71.google.com (mail-ua1-f71.google.com
- [209.85.222.71])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gueybkyh4-1
+ Z8nCiQLGCTSnO9dfl3DrE94+L4gIHuzodyxC11PT1rU=; b=nAxFaG0Daxe86/pe
+ ZGKNLcInlFdexIPqkitZsUutwE7sIIDF96KmGSzHqBTwabWkcjMUQyr/aFsXlxfC
+ hAqntJOQqO9wToB+tLbubNwPfbT76+yshAMk2nfM+nl9qzxoS/hasgdSMR9gkY7r
+ rQ3/21hIMGNUhPTEIG8UDdx/U875/IIBD8niUBaY1kgfZzI+97s00v3IkqVQCCND
+ MN23eixMCN2JP5nE8N6Bqn7gt24EaHe50Hk8shmEtgNmoWz8T3WQy0lbPItnZDJk
+ pGOOS4DotkyrPKhgLbCvwSiDyp8jaU2qHuWJm1XMMauwWKuPCHIjkhAGsexZSHOn
+ UkUx7Q==
+Received: from mail-ua1-f72.google.com (mail-ua1-f72.google.com
+ [209.85.222.72])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4guha5uq7w-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Tue, 22 Sep 2026 17:07:44 +0000 (GMT)
-Received: by mail-ua1-f71.google.com with SMTP id
- a1e0cc1a2514c-97e8d95121cso85187241.0
- for <qemu-riscv@nongnu.org>; Tue, 22 Sep 2026 10:07:43 -0700 (PDT)
+ for <qemu-riscv@nongnu.org>; Tue, 22 Sep 2026 17:27:54 +0000 (GMT)
+Received: by mail-ua1-f72.google.com with SMTP id
+ a1e0cc1a2514c-97c7e1d8bbeso31788241.1
+ for <qemu-riscv@nongnu.org>; Tue, 22 Sep 2026 10:27:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1790096863; x=1790701663; darn=nongnu.org;
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=Yodo8FKkLRDwokUgHAxXrm1Z7rgg6LvvkpERUUT2ukQ=;
- b=BmN5/FmSyNuEl0KkrrF0T3LvDm+Lvf5ODeTdm5DgeZ0OO0EpT3VPTBZQAL+wCAV4NP
- a4X7ux3639k9a4EnDr6n9VMpS78f08iAucS+vL3A1f1XnYBYjVVaQnlzMR7hQ2Qc2TzA
- RpZu52ifaXZiHMg5Mar6Ze2k7MdgcVdPW9cGHfREZ0dzY8sKozkJ9mQy7KsPY8p5+gWT
- /ReSNrqJL/gkMi1EO0tAX/qr262vbsr5/9LWM7j61JXhuXyGiSCeAQVueYC/3bOTjaP/
- ovAoITK9v4WCq04k0JgsLKacW2NqlKINuzj+JoHDi2ute/7+SgA0rhUtQw/Zy/KFr7LH
- dHZw==
+ d=oss.qualcomm.com; s=google; t=1790098074; x=1790702874; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:references:cc:to
+ :from:content-language:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=Z8nCiQLGCTSnO9dfl3DrE94+L4gIHuzodyxC11PT1rU=;
+ b=W8sNqNmu+1vOUiJjslpPmbBBY22QwUWv3k+urMyVJD2Uj+e2pVcCdFZ0/2c1h3QUro
+ 03Q2eU99fAK6P2AW49qJqd1KfHPi2Js7IH2G+sTqPJCflUJMsogULNbxvc5tHprJvn3d
+ aRxc17yK5XTeKaHWUQv4n7DsRK+qygSfqJsx0NxHPMA3HJ/P3GGl03FArqE5fe/n1/C4
+ 4gsBNXVBQsEzWALimMX6JH0wIlmKdkQolPXJlBhRV60BG7PJtRLbv1Pt79gAd5hspFwE
+ Oj+BYU+W3FejPSmsjV4D4p79up+qoHARkwOHhrUNy5sFY+h8WYtlkiXbwIjcwWyY/6uK
+ gENw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790096863; x=1790701663;
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20260707; t=1790098074; x=1790702874;
+ h=content-transfer-encoding:content-type:in-reply-to:references:cc:to
+ :from:content-language:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=Yodo8FKkLRDwokUgHAxXrm1Z7rgg6LvvkpERUUT2ukQ=;
- b=ArePfRXsa5S0J5empxYGxCdaRVxIdCcI880BNe5vhAoY+v0mG6RbJBDyvyBjX98bjk
- 6R9qLFtWF/jooivnDVsxJlAGfBfZOEl+Q6sl3TSj8JlAhZ7BD7dYHbh0MR3JjCkx5V7m
- PeuvOFbNvVeyvqlxl6w0x5riGFE7V+1xrYeveT+nTm0/NTtftrqI+j9SJ8/+iOGnCbmq
- Pq3OkhvjkiuuOxjCpsmlhSt0MiWX3RBiMj29NMibgcS3I1LUGUJqU0z7l0I6mmFCa1JK
- XwvgphVcNh+ElUtw2+h0SwwtWtm7Ztm06wHwioyrP6ijEEOG5V9cfOhO86l48wK8HY5h
- xYlA==
-X-Gm-Message-State: AFuF++nI9JHAZlJk7Ds5iG+WdOTQJQO37wsdj+N4vUCmwJGF7Rkyfqms
- q6c7V4HMtcVmuyOs5qejSzJYxsSUwvcZzrbdyGU/wPk+Zs80Jvo7MRKYuD6NBkFdtx+ZhhNPaKM
- 7gI/EF7tmC9pJtTkrBnXaNbIcZTXbOPq9r/tw8sA5aIpBCdYjTAzCCLdo03US6tXgW1c8
-X-Gm-Gg: AYBFou0FwuHKm4d/+fy3tE/JO0c8ZL+AOpS3YBabO1nEr6jfWxyfUZjP89xA5GZOTDk
- NrBb5Lr9Z0B5Ald6rpmgzNIUcsVU7hJtbAY6kh9e3W6iNlsFnvYx+/mQslE/Zf+5vHYdks3ydfX
- Hm9r3r2nvMBy4fLLnjZBHLtkj1o6JdEoEA/HMUsLgb6z2+ocfUV6jBZfrGSG+ircr2Yc2z4x7yK
- pdSjljeyTo0yq3brYqZNKdwFJKZbOVUH9VHetK4JhoGwe7dG3qt0rh8tlpAl797EgYjKLpltnRm
- 82wZ8nt20MqcYwph0FfUaCiqfR9HjvpY09JjlLgLNonUT3kTEB2wahnuLn4i5nY/Z+AfrJ3Bgxh
- URiJ9Hfpn7a03r4qsOLLo
-X-Received: by 2002:a05:6102:b0a:b0:7a7:198a:c2c4 with SMTP id
- ada2fe7eead31-7a7198ad402mr7413714137.34.1790096863366; 
- Tue, 22 Sep 2026 10:07:43 -0700 (PDT)
-X-Received: by 2002:a05:6102:b0a:b0:7a7:198a:c2c4 with SMTP id
- ada2fe7eead31-7a7198ad402mr7413676137.34.1790096862921; 
- Tue, 22 Sep 2026 10:07:42 -0700 (PDT)
-Received: from [10.251.40.67] ([212.136.9.21])
+ bh=Z8nCiQLGCTSnO9dfl3DrE94+L4gIHuzodyxC11PT1rU=;
+ b=LEa5+sQF21lJhWdQPNf3qElE+xdkrCqOE4SCY+WXMRt4ZWYWls5olxHcrmL5QyysNr
+ HYAR+xmvBykIKS3dpudmFOXnLSS/fjTmftK8d/pShla00XTbvc33q4y3b3A72cvRHH25
+ AhugykC1nQsFLLVtrDLfl5+JgYUclGoIAxVwLR9qOyhzTQjvBw66Xt4dsmJA/LEA10L8
+ PHTGzAyXC/IMoKZun5E7au30W/hi+DGbYZ9MrE0Zlp0fpZq6l7qzmEc0rS5sm5M1E3Kq
+ WJqzOZ4gVSbFBgfsQO3I3CEb2EHhq//Q5cGTuYPLaf/6wxMLWk0zztX3JL/zXFz9DDX4
+ DSiQ==
+X-Gm-Message-State: AFuF++lMFB3dPvC84Wa3ty7tDWCvFPzYxznhYRx8X2D1rio3eb7mcv1y
+ vqAl/rwCzCBFplbnANUbf/IMAqLbEM2jJS8mg1S8UnrvR3LtQCixAs9BFvDL+cJ3WtgiBHibL8C
+ yhzAloCIlgk9czc6lhU013Lg31ARZI95ceX45nyoNtYoF9NyTKSFu7fioPg==
+X-Gm-Gg: AYBFou2hJ4v2kG5ay11cJHwl9A1PLP5KEZbclDM605Hhsy4eitg+sN4W/I257xRKlhF
+ aL12B4iZa5092TOUCy+E5d/QCjGKH3ndCcdX6hhLqwNrTHK99MHfclxla5OHoJ/T3MiK7ydIn+1
+ qPLyURPWS1XDzkEX6TbXXfvkII924OGyLNXmgySg0YKLObzPuE6dzAjim/6RN8t+got3nxq/ObQ
+ P64nxeDwqG/202TWuajNXBtA7/4sm989SUhzdk5wluMb991YUOO4iLJCyaHDMYoGVo+t+nTwn73
+ 6y2G/4pR7/LAvB6sy0tMg4rHPhsvJrWf3NKGBFj3ewQUgpO1d7H88k1rZVYfdr3dqnMTimkyRTa
+ eJlYo4CjD8MgecxdCG5tZycFYYnnDYvlo5w==
+X-Received: by 2002:a05:6102:a47:b0:7a6:e302:e24f with SMTP id
+ ada2fe7eead31-7a6e31243femr6903197137.24.1790098073958; 
+ Tue, 22 Sep 2026 10:27:53 -0700 (PDT)
+X-Received: by 2002:a05:6102:a47:b0:7a6:e302:e24f with SMTP id
+ ada2fe7eead31-7a6e31243femr6903148137.24.1790098073395; 
+ Tue, 22 Sep 2026 10:27:53 -0700 (PDT)
+Received: from [192.168.69.225] (pmd666.hd.free.fr. [88.187.86.199])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49fde18093csm6008625e9.3.2026.09.22.10.07.41
+ 5b1f17b1804b1-49fdaada7b6sm43664425e9.2.2026.09.22.10.27.51
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 22 Sep 2026 10:07:42 -0700 (PDT)
-Message-ID: <65c2d2dc-2282-43bd-86b2-476730039915@oss.qualcomm.com>
-Date: Tue, 22 Sep 2026 19:07:40 +0200
+ Tue, 22 Sep 2026 10:27:52 -0700 (PDT)
+Message-ID: <5957fc53-99eb-4cad-89b6-0dae6e2a6d85@oss.qualcomm.com>
+Date: Tue, 22 Sep 2026 19:27:50 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 00/17] accel/tcg: Make halt-to-exec transition explicit
- and remove cpu_exec_halt
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, Peter Maydell <peter.maydell@linaro.org>,
- qemu-ppc@nongnu.org, Paolo Bonzini <pbonzini@redhat.com>,
- qemu-s390x@nongnu.org, Richard Henderson <richard.henderson@linaro.org>
-References: <20260922164936.15189-1-philmd@oss.qualcomm.com>
+Subject: Re: [PATCH v5 03/11] target/riscv: Replace TARGET_LONG_BITS in header
+ exposed to common code
 Content-Language: en-US
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
-In-Reply-To: <20260922164936.15189-1-philmd@oss.qualcomm.com>
+To: Anton Johansson <anjo@rev.ng>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, daniel.barboza@oss.qualcomm.com,
+ pierrick.bouvier@oss.qualcomm.com, palmer@dabbelt.com,
+ alistair.francis@wdc.com
+References: <20260918-hw-riscv-cpu-int-v5-0-f98c5a244636@rev.ng>
+ <20260918-hw-riscv-cpu-int-v5-3-f98c5a244636@rev.ng>
+ <3539b4ac-aeda-4c90-935a-1c5e105713e7@oss.qualcomm.com>
+In-Reply-To: <3539b4ac-aeda-4c90-935a-1c5e105713e7@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=bP6Ds/+Z c=1 sm=1 tr=0 ts=6ab2b5e0 cx=c_pps
- a=KB4UBwrhAZV1kjiGHFQexw==:117 a=/bviTfK1dmy+WGcHzWQ0gg==:17
+X-Proofpoint-GUID: xLPr-6XLUHdDTCCHFxyd7tLMXtZBmv8R
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIyMDI1NSBTYWx0ZWRfX7VBGzERbIxdH
+ xyqh5yAH4BlPmOKU/Yx9hhBp9NMq3yxzk5shrisKhKQHZoMmiIKnSXBi9lipZpdvJ0MywIVg29C
+ iBDLseOXp0AVPgHdvg4WSfeTRsU+oDg=
+X-Authority-Analysis: v=2.4 cv=U+4Hnuru c=1 sm=1 tr=0 ts=6ab2ba9a cx=c_pps
+ a=ULNsgckmlI/WJG3HAyAuOQ==:117 a=4s3hRJSeHn4rkQlkrse1kQ==:17
  a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=M51BFTxLslgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
- a=VwQbUJbxAAAA:8 a=pGLkceISAAAA:8 a=cA1g0hb8xVe5bm8CQ20A:9 a=3ZKOabzyN94A:10
- a=QEXdDO2ut3YA:10 a=o1xkdb1NAhiiM49bd1HK:22
-X-Proofpoint-ORIG-GUID: 7UlBo1Z8Bo48xDjc_eN2V5JUUBsKCRjY
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIyMDI1MCBTYWx0ZWRfX75wuNh9z34R5
- 14P5PRGEurnP84PJ9OIRsgLHReDC3ftf0dvWDwCtfIARvPHJTgupdtUVI7/QtgDsi7viRW/VE6t
- xw3OfY3cZoX5q998ViBsQb3r+IibOStCYKVzWzk4QXmlp8xT/j8bt5k5xMzqdZzGc2C8OHTFNoB
- a3SWsW71PM4bBp4InB57kmS4oo/8PRu4BRAMkdF8UcsQinW5XJErg5lKuNu6pDDLaUVqV1Ti29h
- Xayon1e08aLtzI0CKE3s7fwL+fbcp57/xiZXWbr075xYLhbNgEm0GFPd9M7uNbFIDUYbCrLw7Q1
- DzyNYu8Sys9ankb65HWIYUrTw0RDfhzv4jTAGfw59Z2uXjgCDCgSxT2TOR76gg3G/NF3tqpuejo
- woyITpBlX50QATQvBypqGKv+D8mvKlmWS38kcU1H2jjiUW5AW5oOwACNdpeaIWYTr5J3fl83m7K
- fpgMKnkYUwND2pzW28A==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIyMDI1MCBTYWx0ZWRfX9QkP2MgqSL3o
- z8Z10z0P3tHWs/tzPRf8ukjL1qWQCYmEjRr4DCtGxvKNWoTMAZRPPLGPP4EGQOYAVTroeFsfCQP
- Nkl2lxuosTZredjQxkNevK8B8QfoZZM=
-X-Proofpoint-GUID: 7UlBo1Z8Bo48xDjc_eN2V5JUUBsKCRjY
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
+ a=EUspDBNiAAAA:8 a=aztJ6Iox8fokGBo3vNgA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=1WsBpfsz9X-RYQiigVTh:22
+X-Proofpoint-ORIG-GUID: xLPr-6XLUHdDTCCHFxyd7tLMXtZBmv8R
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIyMDI1NSBTYWx0ZWRfX4gWjAZVCPcCb
+ nuv0gzKMWnkZKGChG/PbMZMiJJA4xhJFfq4dEfnuFk9pxV4fwfJNiBrqvEoScqe/F6gVcaA7URi
+ sWLOZl0FKJhMDf5jGGZ0IIuIFsuljZAkUeduPN53H8pgukiH3CLpv8FF89IiWm4cE8VkpsALFCw
+ 20ouO4zvSCJvJO5XyqXQnj2TNr0B8lFrzjlVVrGzYQb1F4pu9I0oG/4ztWwjvbqtqT8itT+CY9S
+ X644ifAXgtS1jgxKRWabI1joxhA9231C8yfQaw33cqqV4d2la6bzuWpJQzkeQHDRl5Qn8m/P4Gv
+ GvVFE8yzM5CPcltskH4q6nxvAJxOqOt1eLXeWsn/vO0iwYCF4c4nSRQ/jNnDLwzLfksxjMGvy9s
+ y2qot46yb/3PtHaGsmAA6GDilxOW++ATkaRjeqKbNWlbrrtAY84XeQycmP/Vf/3NYJ5sdrI9Ktn
+ soMupTXMtoR/Dgy5pIw==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-22_02,2026-09-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 malwarescore=0 priorityscore=1501 spamscore=0 bulkscore=0
- suspectscore=0 adultscore=0 phishscore=0 lowpriorityscore=0 impostorscore=0
+ clxscore=1015 impostorscore=0 adultscore=0 phishscore=0 lowpriorityscore=0
+ priorityscore=1501 suspectscore=0 bulkscore=0 spamscore=0 malwarescore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609220250
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609220255
 Received-SPF: pass client-ip=205.220.180.131;
  envelope-from=philmd@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
 X-Spam_score_int: -27
@@ -154,25 +156,146 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 2026-09-22 18:49, Philippe Mathieu-DaudÃ© wrote:
-> Since v1:
-> - Collected Richard R-b tags (sometimes commit description updated).
-> - Documented the BQL and synchronization requirements of has_work().
-> - Renamed the callbacks to poll_during_halt() and leaving_halt().
-> - Addressed Peter's comments by removing racy halt-work assertions,
->    documenting the BQL contract, and explaining why x86 #DB delivery
->    through do_interrupt_all() is safe without the BQL.
-> - Addressed Paolo's comments by making ARM PSCI state updates atomic,
->    kicking remote vCPUs after power-state changes, and ensuring x86
->    APIC polling runs before cpu_has_work() with the BQL held only
->    around APIC access.
-> - Sanitized s390_cpu_get_state() for atomic accesses without BQL.
+On 21/9/26 16:02, Philippe Mathieu-DaudÃ© wrote:
+> Hi Anton,
 > 
-> This series was inspired by a previous thread on the list [*].
+> On 2026-09-18 0:04, Anton Johansson wrote:
+>> IRQ_LOCAL_GUEST_MAX depends on TARGET_LONG_BITS and is used in
+>> hw/intc/riscv_imsic.c.  The macro is replaced by a field in RISCVCPUDef
+>> initialized in riscv_cpu_class_base_init().
+>>
+>> Reviewed-by: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
+>> Signed-off-by: Anton Johansson <anjo@rev.ng>
+>> ---
+>>   target/riscv/cpu.h      |  5 ++++-
+>>   target/riscv/cpu_bits.h |  2 --
+>>   hw/intc/riscv_imsic.c   |  4 +++-
+>>   target/riscv/cpu.c      | 16 ++++++++++++++--
+>>   4 files changed, 21 insertions(+), 6 deletions(-)
+>>
+>> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+>> index e2e0547eef..a820ec2f6e 100644
+>> --- a/target/riscv/cpu.h
+>> +++ b/target/riscv/cpu.h
+>> @@ -589,8 +589,11 @@ typedef struct RISCVCPUDef {
+>>       int32_t vext_spec;
+>>       RISCVCPUConfig cfg;
+>>       bool bare;
+>> -#if defined(CONFIG_TCG) && !defined(CONFIG_USER_ONLY)
+>> +#if !defined(CONFIG_USER_ONLY)
+>> +#if defined(CONFIG_TCG)
+>>       const RISCVCSR *custom_csrs;
+>> +#endif
+>> +    uint8_t irq_local_guest_max;
+> 
+> If it is variable, we shouldn't have it in the def. IMO we
+> simply want a helper on the CPU class:
+> 
+>    uint8_t riscv_imsic_irq_local_guest_max(RISCVCPUClass *rcc);
 
-I just realized I missed Paolo's comment on riscv :( Depending on
-how this series review goes I'll amend or respin.
-https://lore.kernel.org/qemu-devel/CABgObfZQb8FwDubg=pZk6nRSrUgdMxoDpRwG3Kd=GwpQeccLhg@mail.gmail.com/
+Even uint8_t riscv_imsic_irq_local_guest_max(const RISCVCPUClass *rcc).
 
-> [*] https://lore.kernel.org/qemu-devel/CABgObfaDAhrpnVqQaKgG6uxPQe1YDu77YOsUEx9nqrN=3M2cGw@mail.gmail.com/
+> 
+> WDYT?
+
+Pierrick told me this suggestion is not clear. See below...
+
+> 
+>>   #endif
+>>       /* This is just a setter for env->num_triggers.  */
+>>       uint32_t num_triggers;
+>> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+>> index c01050ce2b..9c499e33f2 100644
+>> --- a/target/riscv/cpu_bits.h
+>> +++ b/target/riscv/cpu_bits.h
+>> @@ -811,8 +811,6 @@ typedef enum RISCVException {
+>>   #define IRQ_S_GEXT                         12
+>>   #define IRQ_PMU_OVF                        13
+>>   #define IRQ_LOCAL_MAX                      64
+>> -/* -1 is due to bit zero of hgeip and hgeie being ROZ. */
+>> -#define IRQ_LOCAL_GUEST_MAX                (TARGET_LONG_BITS - 1)
+>>   /* RNMI causes */
+>>   #define RNMI_MAX                           16
+>> diff --git a/hw/intc/riscv_imsic.c b/hw/intc/riscv_imsic.c
+>> index cb9ce9612c..bf0434e96f 100644
+>> --- a/hw/intc/riscv_imsic.c
+>> +++ b/hw/intc/riscv_imsic.c
+>> @@ -501,13 +501,15 @@ DeviceState *riscv_imsic_create(MemoryRegion 
+>> *container, hwaddr addr,
+>>   {
+>>       DeviceState *dev = qdev_new(TYPE_RISCV_IMSIC);
+>>       CPUState *cpu = cpu_by_arch_id(hartid);
+>> +    RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(RISCV_CPU(cpu));
+>>       uint32_t i;
+>>       assert(!(addr & (IMSIC_MMIO_PAGE_SZ - 1)));
+>>       if (mmode) {
+>>           assert(num_pages == 1);
+>>       } else {
+>> -        assert(num_pages >= 1 && num_pages <= (IRQ_LOCAL_GUEST_MAX + 
+>> 1));
+>> +        assert(num_pages >= 1 &&
+>> +               num_pages <= (mcc->def->irq_local_guest_max + 1));
+>>       }
+>>       assert(IMSIC_MIN_ID <= num_ids);
+>>       assert(num_ids <= IMSIC_MAX_ID);
+>> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+>> index 5fff9d745e..4f58e91b62 100644
+>> --- a/target/riscv/cpu.c
+>> +++ b/target/riscv/cpu.c
+>> @@ -1416,6 +1416,7 @@ void riscv_add_satp_mode_properties(Object *obj)
+>>   static void riscv_cpu_set_irq(void *opaque, int irq, int level)
+>>   {
+>> +    RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(opaque);
+>>       RISCVCPU *cpu = RISCV_CPU(opaque);
+>>       CPURISCVState *env = &cpu->env;
+>> @@ -1454,7 +1455,7 @@ static void riscv_cpu_set_irq(void *opaque, int 
+>> irq, int level)
+>>           default:
+>>               g_assert_not_reached();
+>>           }
+>> -    } else if (irq < (IRQ_LOCAL_MAX + IRQ_LOCAL_GUEST_MAX)) {
+>> +    } else if (irq < (IRQ_LOCAL_MAX + mcc->def->irq_local_guest_max)) {
+>>           /* Require H-extension for handling guest local interrupts */
+>>           if (!riscv_has_ext(env, RVH)) {
+>>               g_assert_not_reached();
+>> @@ -1501,7 +1502,7 @@ static void riscv_cpu_init(Object *obj)
+>>   #ifndef CONFIG_USER_ONLY
+>>       qdev_init_gpio_in(DEVICE(obj), riscv_cpu_set_irq,
+>> -                      IRQ_LOCAL_MAX + IRQ_LOCAL_GUEST_MAX);
+>> +                      IRQ_LOCAL_MAX + mcc->def->irq_local_guest_max);
+>>       if (mcc->def->num_triggers) {
+>>           env->num_triggers = mcc->def->num_triggers;
+>>       }
+>> @@ -3092,6 +3093,17 @@ static void 
+>> riscv_cpu_class_base_init(ObjectClass *c, const void *data)
+>>           mcc->def = g_new0(RISCVCPUDef, 1);
+>>       }
+>> +#ifndef CONFIG_USER_ONLY
+>> +    /*
+>> +     * RISCVCPUDef::irq_local_guest_max is initialized to
+>> +     * `target_long_bits()-1` due to bit zero of hgeip and hgeie
+>> +     * being ROZ.
+>> +     *
+>> +     * This value does not vary between CPU types.
+>> +     */
+>> +    mcc->def->irq_local_guest_max = target_long_bits() - 1;
+
+... here I'm worried this change the behavior of qemu-system-riscv32
+vs qemu-system-riscv64, in particular when instantiating a RV32 with
+the qemu-system-riscv64 binary. Maybe the change doesn't trigger any
+bug, but this is a change and we committed to not do any when
+introducing the single binary. Or at least we should mention the
+change in the commit description. But again, introducing
+riscv_imsic_irq_local_guest_max() then we don't need this RISCVCPUDef
+field and no behavioral change at all.
+
+>> +#endif
+>> +
+>>       if (data) {
+>>           const RISCVCPUDef *def = data;
+>>           mcc->def->bare |= def->bare;
+>>
+> 
+> 
+
 
