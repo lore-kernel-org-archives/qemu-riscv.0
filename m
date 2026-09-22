@@ -4,55 +4,106 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDDFDC982FA
-	for <qemu-riscv@archiver.kernel.org>; Tue, 22 Sep 2026 21:06:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5E01C982FA
+	for <qemu-riscv@archiver.kernel.org>; Tue, 22 Sep 2026 21:56:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x97hM-0007D3-Pu; Tue, 22 Sep 2026 17:06:44 -0400
+	id 1x98T4-0003EF-J3; Tue, 22 Sep 2026 17:56:02 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <anjo@rev.ng>)
- id 1x97hD-0007Bn-6I; Tue, 22 Sep 2026 17:06:36 -0400
-Received: from rev.ng ([94.130.142.21])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <anjo@rev.ng>)
- id 1x97hA-0005EO-Vs; Tue, 22 Sep 2026 17:06:34 -0400
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=rev.ng;
- s=dkim; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:
- References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive:List-Unsubscribe:List-Unsubscribe-Post:
- List-Help; bh=oCHdUhMh/QnUw6msFQr9ApVOKEaCtkEr0e5fKB06hjw=; b=AX5TC6fDds9WMsH
- QVKrYDoliT2quA6mpytsksZGc9HRrKCIRTYpKjxumu3msNNoAvqzlUnCll1gJa0V8aQx4noDEPRk8
- eZsiIPU5zRcJ4XMQOeb/gdkyERBNxprgi0s01qZrPjHA2OkxSiJq9udLuVWJEuWV4g9KKGd9Dus+U
- mg=;
-Date: Tue, 22 Sep 2026 23:12:00 +0200
-To: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
- daniel.barboza@oss.qualcomm.com, pierrick.bouvier@oss.qualcomm.com,
- palmer@dabbelt.com, alistair.francis@wdc.com
-Subject: Re: [PATCH v5 03/11] target/riscv: Replace TARGET_LONG_BITS in
- header exposed to common code
-Message-ID: <arLsea9pWtG-DQGG@hive.localdomain>
-References: <20260918-hw-riscv-cpu-int-v5-0-f98c5a244636@rev.ng>
- <20260918-hw-riscv-cpu-int-v5-3-f98c5a244636@rev.ng>
- <3539b4ac-aeda-4c90-935a-1c5e105713e7@oss.qualcomm.com>
- <5957fc53-99eb-4cad-89b6-0dae6e2a6d85@oss.qualcomm.com>
+ (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
+ id 1x98T1-0003Dg-OJ
+ for qemu-riscv@nongnu.org; Tue, 22 Sep 2026 17:55:59 -0400
+Received: from mail-dy2-x10.google.com ([2607:f8b0:4864:36::10])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
+ id 1x98T0-0000v4-2f
+ for qemu-riscv@nongnu.org; Tue, 22 Sep 2026 17:55:59 -0400
+Received: by mail-dy2-x10.google.com with SMTP id
+ 5a478bee46e88-328664e061cso264297eec.2
+ for <qemu-riscv@nongnu.org>; Tue, 22 Sep 2026 14:55:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1790114157; x=1790718957; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=uW6FZ1Hr/xnFGp6V/UXuRySYDmLzTaOM2yV3AYLNlL4=;
+ b=o0YWaVJOTLCEe8y2ytCr4vTvRZfhOIQgJYvw9+iZcUWhPTl4w0tzb0lH/HAJsMhnoa
+ B91HEcChC5khdpZ8R8XYjNK4/3fDZsMM/x7qR7c07rxzhokQ4Xq5yGwC1rxw2SgYnPb6
+ GYecQE+ypGblA8KH98YSFsppCmQiJl+OZZxL1btIF+dVWKB4OOBVqFvB37GkC2Nwktyv
+ Vv8vOoyTeOGa0YK89rPGDg8iMMTlVwTUoOdlA4q2S/DrdFomv5ZOf3m6l2ShHUrBJ+56
+ UE2N9jsP8Jv22UvfAheat0ppWNJCsL3xWCPTpMGZQpsBLjwNCjqOpLaYdmRqZGgbjvrC
+ J+mQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1790114157; x=1790718957;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=uW6FZ1Hr/xnFGp6V/UXuRySYDmLzTaOM2yV3AYLNlL4=;
+ b=wFkI1EfUcR/VcBIA6DQE2XuExuRJzjgMXLiyzurgSdy5bU1ubIwG+u6t3XwRH4OYYW
+ 1MwCZeuYUNDdwn/WIBo2cOqMtaHYvrHmNhdqJtlx+4VCWDRXklzMUt/0lTSsII3hBrap
+ oNbXyhm7LDUdCxWlx4R944Uqp4EKJ6VQ1UoWvVKahe7bumqXmeZ8XorTDUBripu+fOuD
+ jAYzdN1ymImXVryujwRVI2qfVm3xvREYj46cZ0Oej/73Gq9YETVYZ/fgkGiAPdCRok6c
+ EUzB7owbZXYrtWtNEmItEiobTwzxievTTaSB4YJylbP+K57gVeKLIToySVSXUJknghcI
+ sVQA==
+X-Forwarded-Encrypted: i=1;
+ AKwUvByacnbXlH3i2+2iyRzPo7XDtBA0nSlTMOEXPZK80jfdt/8rv6+IysdMcUl2vsegGf5dXA1oGGKj2qaL@nongnu.org
+X-Gm-Message-State: AFuF++l08Mpdp5jAK+bhFk49fKBp2yuOWbZOW/fTHA2UbOCfl8CXtkB6
+ I5UlGDQ171iY8SrJhvEymiKaFh984VPcwiOacyZYHm1LyGsWK4zJUqZQ
+X-Gm-Gg: AYBFou0cAgxbBFReecwOmtqTM71KlQy0I9HeiTytPyT0xSjkpZmS0N22S31w2H0quA2
+ Ca120pUzcwQb1iD1wA1+ZmjDaDbR9uatYpXerSZfmEVTt2JE/q3FEDQMA2URXhS1uAVd3HpIQxR
+ 7u4CwvVUmWd2HdJcaiQFGHOSLMByDmKQxWh0dj8IpCv34CzpE4c6AqtGPQqu6IqEyDMu4lNBctj
+ Nx5o9HLHo1FXdve384Ru4m28Qls4oEGQipuNO+sDOzPwRYlaZPuZNuZFQ8LkCX8sk9VZ7PByUSj
+ JnauYCEWqAU0O/wqCZhrGfKE36X5t7FK65qnL64sUnkkV2dPCmijOgFBz9/9xHX0cIz9BZytysA
+ X3GXUEgd8T5U0XnVn5qkD3SzO3grrxXTKud5keko2yeGFpRkHX+OpKscgVEzUCTXqojN7+aTdI7
+ SjfQy3i4NSaLomgKdItizCL3XOxMPVcZs9Q7XiwJNUlNUb/Z8gXr2qtpArC9PFyzXyDybDVEM+R
+ 0gUIg9ThvNFetA6SuBoYwjHX7VgMJDmMNGTa4U2sQ==
+X-Received: by 2002:a05:7022:7e02:b0:143:296a:c860 with SMTP id
+ a92af1059eb24-144f92e1efcmr810525c88.26.1790114156590; 
+ Tue, 22 Sep 2026 14:55:56 -0700 (PDT)
+Received: from WIN-BH9M8FJACR9 ([103.94.185.75])
+ by smtp.googlemail.com with ESMTPSA id
+ a92af1059eb24-144f949e60dsm1001153c88.2.2026.09.22.14.55.50
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 22 Sep 2026 14:55:55 -0700 (PDT)
+From: Yonggang Luo <luoyonggang@gmail.com>
+To: qemu-devel@nongnu.org
+Cc: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
+ Bibo Mao <maobibo@loongson.cn>, Xianglai Li <lixianglai@loongson.cn>,
+ Laurent Vivier <laurent@vivier.eu>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Chao Liu <chao.liu@processmission.com>, qemu-arm@nongnu.org,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Laurent Vivier <lvivier@redhat.com>,
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Zhao Liu <zhao1.liu@intel.com>, Peter Maydell <peter.maydell@linaro.org>,
+ Fabiano Rosas <farosas@suse.de>, Song Gao <17746591750@163.com>,
+ Markus Armbruster <armbru@redhat.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org,
+ Stafford Horne <shorne@gmail.com>,
+ Brian Cain <brian.cain@oss.qualcomm.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Max Filippov <jcmvbkbc@gmail.com>,
+ Philippe Mathieu-Daude <philmd@mailo.com>,
+ =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, Eric Blake <eblake@redhat.com>
+Subject: [PATCH v2 2/9] hw/riscv/virt: use unique QOM name
+Date: Wed, 23 Sep 2026 05:55:25 +0800
+Message-ID: <20260922215533.641-3-luoyonggang@gmail.com>
+X-Mailer: git-send-email 2.52.0.windows.1
+In-Reply-To: <20260922215533.641-1-luoyonggang@gmail.com>
+References: <20260922215533.641-1-luoyonggang@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <5957fc53-99eb-4cad-89b6-0dae6e2a6d85@oss.qualcomm.com>
-Received-SPF: pass client-ip=94.130.142.21; envelope-from=anjo@rev.ng;
- helo=rev.ng
+Received-SPF: pass client-ip=2607:f8b0:4864:36::10;
+ envelope-from=luoyonggang@gmail.com; helo=mail-dy2-x10.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -65,160 +116,54 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Reply-to:  Anton Johansson <anjo@rev.ng>
-From:  Anton Johansson via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 22/09/26, Philippe Mathieu-Daudé wrote:
-> On 21/9/26 16:02, Philippe Mathieu-DaudÃ© wrote:
-> > Hi Anton,
-> > 
-> > On 2026-09-18 0:04, Anton Johansson wrote:
-> > > IRQ_LOCAL_GUEST_MAX depends on TARGET_LONG_BITS and is used in
-> > > hw/intc/riscv_imsic.c.  The macro is replaced by a field in RISCVCPUDef
-> > > initialized in riscv_cpu_class_base_init().
-> > > 
-> > > Reviewed-by: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
-> > > Signed-off-by: Anton Johansson <anjo@rev.ng>
-> > > ---
-> > >   target/riscv/cpu.h      |  5 ++++-
-> > >   target/riscv/cpu_bits.h |  2 --
-> > >   hw/intc/riscv_imsic.c   |  4 +++-
-> > >   target/riscv/cpu.c      | 16 ++++++++++++++--
-> > >   4 files changed, 21 insertions(+), 6 deletions(-)
-> > > 
-> > > diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> > > index e2e0547eef..a820ec2f6e 100644
-> > > --- a/target/riscv/cpu.h
-> > > +++ b/target/riscv/cpu.h
-> > > @@ -589,8 +589,11 @@ typedef struct RISCVCPUDef {
-> > >       int32_t vext_spec;
-> > >       RISCVCPUConfig cfg;
-> > >       bool bare;
-> > > -#if defined(CONFIG_TCG) && !defined(CONFIG_USER_ONLY)
-> > > +#if !defined(CONFIG_USER_ONLY)
-> > > +#if defined(CONFIG_TCG)
-> > >       const RISCVCSR *custom_csrs;
-> > > +#endif
-> > > +    uint8_t irq_local_guest_max;
-> > 
-> > If it is variable, we shouldn't have it in the def. IMO we
-> > simply want a helper on the CPU class:
-> > 
-> >    uint8_t riscv_imsic_irq_local_guest_max(RISCVCPUClass *rcc);
-> 
-> Even uint8_t riscv_imsic_irq_local_guest_max(const RISCVCPUClass *rcc).
-> 
-> > 
-> > WDYT?
-> 
-> Pierrick told me this suggestion is not clear. See below...
-> 
-> > 
-> > >   #endif
-> > >       /* This is just a setter for env->num_triggers.  */
-> > >       uint32_t num_triggers;
-> > > diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> > > index c01050ce2b..9c499e33f2 100644
-> > > --- a/target/riscv/cpu_bits.h
-> > > +++ b/target/riscv/cpu_bits.h
-> > > @@ -811,8 +811,6 @@ typedef enum RISCVException {
-> > >   #define IRQ_S_GEXT                         12
-> > >   #define IRQ_PMU_OVF                        13
-> > >   #define IRQ_LOCAL_MAX                      64
-> > > -/* -1 is due to bit zero of hgeip and hgeie being ROZ. */
-> > > -#define IRQ_LOCAL_GUEST_MAX                (TARGET_LONG_BITS - 1)
-> > >   /* RNMI causes */
-> > >   #define RNMI_MAX                           16
-> > > diff --git a/hw/intc/riscv_imsic.c b/hw/intc/riscv_imsic.c
-> > > index cb9ce9612c..bf0434e96f 100644
-> > > --- a/hw/intc/riscv_imsic.c
-> > > +++ b/hw/intc/riscv_imsic.c
-> > > @@ -501,13 +501,15 @@ DeviceState *riscv_imsic_create(MemoryRegion
-> > > *container, hwaddr addr,
-> > >   {
-> > >       DeviceState *dev = qdev_new(TYPE_RISCV_IMSIC);
-> > >       CPUState *cpu = cpu_by_arch_id(hartid);
-> > > +    RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(RISCV_CPU(cpu));
-> > >       uint32_t i;
-> > >       assert(!(addr & (IMSIC_MMIO_PAGE_SZ - 1)));
-> > >       if (mmode) {
-> > >           assert(num_pages == 1);
-> > >       } else {
-> > > -        assert(num_pages >= 1 && num_pages <= (IRQ_LOCAL_GUEST_MAX
-> > > + 1));
-> > > +        assert(num_pages >= 1 &&
-> > > +               num_pages <= (mcc->def->irq_local_guest_max + 1));
-> > >       }
-> > >       assert(IMSIC_MIN_ID <= num_ids);
-> > >       assert(num_ids <= IMSIC_MAX_ID);
-> > > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> > > index 5fff9d745e..4f58e91b62 100644
-> > > --- a/target/riscv/cpu.c
-> > > +++ b/target/riscv/cpu.c
-> > > @@ -1416,6 +1416,7 @@ void riscv_add_satp_mode_properties(Object *obj)
-> > >   static void riscv_cpu_set_irq(void *opaque, int irq, int level)
-> > >   {
-> > > +    RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(opaque);
-> > >       RISCVCPU *cpu = RISCV_CPU(opaque);
-> > >       CPURISCVState *env = &cpu->env;
-> > > @@ -1454,7 +1455,7 @@ static void riscv_cpu_set_irq(void *opaque,
-> > > int irq, int level)
-> > >           default:
-> > >               g_assert_not_reached();
-> > >           }
-> > > -    } else if (irq < (IRQ_LOCAL_MAX + IRQ_LOCAL_GUEST_MAX)) {
-> > > +    } else if (irq < (IRQ_LOCAL_MAX + mcc->def->irq_local_guest_max)) {
-> > >           /* Require H-extension for handling guest local interrupts */
-> > >           if (!riscv_has_ext(env, RVH)) {
-> > >               g_assert_not_reached();
-> > > @@ -1501,7 +1502,7 @@ static void riscv_cpu_init(Object *obj)
-> > >   #ifndef CONFIG_USER_ONLY
-> > >       qdev_init_gpio_in(DEVICE(obj), riscv_cpu_set_irq,
-> > > -                      IRQ_LOCAL_MAX + IRQ_LOCAL_GUEST_MAX);
-> > > +                      IRQ_LOCAL_MAX + mcc->def->irq_local_guest_max);
-> > >       if (mcc->def->num_triggers) {
-> > >           env->num_triggers = mcc->def->num_triggers;
-> > >       }
-> > > @@ -3092,6 +3093,17 @@ static void
-> > > riscv_cpu_class_base_init(ObjectClass *c, const void *data)
-> > >           mcc->def = g_new0(RISCVCPUDef, 1);
-> > >       }
-> > > +#ifndef CONFIG_USER_ONLY
-> > > +    /*
-> > > +     * RISCVCPUDef::irq_local_guest_max is initialized to
-> > > +     * `target_long_bits()-1` due to bit zero of hgeip and hgeie
-> > > +     * being ROZ.
-> > > +     *
-> > > +     * This value does not vary between CPU types.
-> > > +     */
-> > > +    mcc->def->irq_local_guest_max = target_long_bits() - 1;
-> 
-> ... here I'm worried this change the behavior of qemu-system-riscv32
-> vs qemu-system-riscv64, in particular when instantiating a RV32 with
-> the qemu-system-riscv64 binary. Maybe the change doesn't trigger any
-> bug, but this is a change and we committed to not do any when
-> introducing the single binary. Or at least we should mention the
-> change in the commit description. But again, introducing
-> riscv_imsic_irq_local_guest_max() then we don't need this RISCVCPUDef
-> field and no behavioral change at all.
+Use TYPE_RISCV_VIRT_MACHINE so the RISC-V virt QOM type does not
+collide with ARM virt in a combined qemu-system binary. Keep the
+-M / help / migration name as virt via machine_class_set_name().
 
-Hmm I'm not against introducing a helper function but I'm not 100% sure
-I see the problem.  The current patch retains irq_local_guest_max == 31
-for rv32 on qemu-riscv32, and irq_local_guest_max == 63 for rv32/64 on
-qemu-riscv64.  If we e.g. instead derive the field from def->misa_mxl_max,
-that would introduce a behavioural change.  Am I missing something
-here?
+Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
+---
+ hw/riscv/virt.c         | 3 ++-
+ include/hw/riscv/virt.h | 2 +-
+ 2 files changed, 3 insertions(+), 2 deletions(-)
 
-> 
-> > > +#endif
-> > > +
-> > >       if (data) {
-> > >           const RISCVCPUDef *def = data;
-> > >           mcc->def->bare |= def->bare;
-> > > 
-> > 
-> > 
-> 
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index d4b501802f6..b29182cb39b 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -1134,6 +1134,7 @@ static void virt_machine_class_init(ObjectClass *oc, const void *data)
+     HotplugHandlerClass *hc = HOTPLUG_HANDLER_CLASS(oc);
+ 
+     mc->desc = "RISC-V VirtIO board";
++    machine_class_set_name(mc, "virt");
+     mc->init = virt_machine_init;
+     mc->max_cpus = VIRT_CPUS_MAX;
+     mc->default_cpu_type = TYPE_RISCV_CPU_BASE;
+@@ -1197,7 +1198,7 @@ static void virt_machine_class_init(ObjectClass *oc, const void *data)
+ }
+ 
+ static const TypeInfo virt_machine_typeinfo = {
+-    .name       = MACHINE_TYPE_NAME("virt"),
++    .name       = TYPE_RISCV_VIRT_MACHINE,
+     .parent     = TYPE_MACHINE,
+     .class_init = virt_machine_class_init,
+     .instance_init = virt_machine_instance_init,
+diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
+index e516898f9ad..969aa5866ee 100644
+--- a/include/hw/riscv/virt.h
++++ b/include/hw/riscv/virt.h
+@@ -30,7 +30,7 @@
+ #define VIRT_SOCKETS_MAX_BITS          2
+ #define VIRT_SOCKETS_MAX               (1 << VIRT_SOCKETS_MAX_BITS)
+ 
+-#define TYPE_RISCV_VIRT_MACHINE MACHINE_TYPE_NAME("virt")
++#define TYPE_RISCV_VIRT_MACHINE MACHINE_TYPE_NAME("riscv-virt")
+ typedef struct RISCVVirtState RISCVVirtState;
+ DECLARE_INSTANCE_CHECKER(RISCVVirtState, RISCV_VIRT_MACHINE,
+                          TYPE_RISCV_VIRT_MACHINE)
+-- 
+2.52.0.windows.1
+
 
