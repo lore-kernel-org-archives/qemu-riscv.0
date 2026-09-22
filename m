@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60A5DC982FA
-	for <qemu-riscv@archiver.kernel.org>; Tue, 22 Sep 2026 19:37:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1739BC98308
+	for <qemu-riscv@archiver.kernel.org>; Tue, 22 Sep 2026 20:28:44 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x96Iy-0000jW-Nb; Tue, 22 Sep 2026 15:37:28 -0400
+	id 1x976L-0008D2-3C; Tue, 22 Sep 2026 16:28:29 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <farman@linux.ibm.com>)
- id 1x96Iv-0000if-4j; Tue, 22 Sep 2026 15:37:25 -0400
+ id 1x974H-0004WR-0B; Tue, 22 Sep 2026 16:26:22 -0400
 Received: from mx0a-001b2d01.pphosted.com ([148.163.156.1])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <farman@linux.ibm.com>)
- id 1x96Ir-0003w1-GA; Tue, 22 Sep 2026 15:37:24 -0400
-Received: from pps.filterd (m0356517.ppops.net [127.0.0.1])
+ id 1x974F-0000vG-FH; Tue, 22 Sep 2026 16:26:20 -0400
+Received: from pps.filterd (m0360083.ppops.net [127.0.0.1])
  by mx0a-001b2d01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 68MI6vML1128351; Tue, 22 Sep 2026 19:37:14 GMT
+ 68MI76FI1129513; Tue, 22 Sep 2026 20:26:14 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
  :content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=pp1; bh=6Kx8yJ
- ZEXKQVd9qPjvg9toIPH5CGY2BJzNY8KwIkreY=; b=pFUwt9sy0Sc+W+3smLYcRU
- pNLlz1BXEeD4FKsmDUaDma3R53DuDlB8YJVNBJoM+a9XYS1DJk4EgYHYP8XFwNGM
- e+m8gSO7R9xLW4C4Q47qqPWss4upllWh5uf5ilbZjCdMlQzi7SA2LGaOzCJEnCoB
- FAaVQRm0Kkr644ZpGA2JJnaUZm4fjlzMnd0RtvdaWyjVRF2bdUGHKEsUu/kk9fH0
- zV5gyjkEBIZhSB4lnQlCPvYkvhTsGAsVeoILVOUf0EQgRmHDfnuQuEjRe4j1d0eQ
- OMJrSXLxg44lSXn4tbIWpnVTKiyX39xB9cJqkMP6bXpqTaNzwKMOx3f/q1WhKrYQ
+ :message-id:mime-version:references:subject:to; s=pp1; bh=bW0Ekf
+ 0lWBuK50ZbUQZJei6dGBwAs437N7cXEcccyd8=; b=qpUPgNZ21ioQ6Oa8oimNc3
+ NEhFUlZgJs0U6BMKgkom/XNif7jFAO0KtxIyeXTZbdJl8htNEeKb8jWc+Mfn55lj
+ hm2s6ZTiiqA4XqvfkHAvlmvjpQcH/bpkjCcVr9W3Owh87qeJczD+/gQhYOD+u3JD
+ fDV+H4yBJwTm5xqxVTYnt4W/8WiF32xtU0oWvaQdKVPZduEXHNb0CTwx6dwKvW2V
+ oY6ebr8AWgNa45FdQL3vYvOQjeS4A5gbBbKeYeiU6S0uUy0Pl8JyilJxmhBwLZ9i
+ PLFbBPo04H15G68gyTQMFTH+xIz1CAU3A5QNoz441F4Z9ENUtJhLsO0XGmsrcGqQ
  ==
 Received: from ppma23.wdc07v.mail.ibm.com
  (5d.69.3da9.ip4.static.sl-reverse.com [169.61.105.93])
- by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4gskgs7n35-1
+ by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4gskg2fv77-1
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
- Tue, 22 Sep 2026 19:37:14 +0000 (GMT)
+ Tue, 22 Sep 2026 20:26:13 +0000 (GMT)
 Received: from pps.filterd (ppma23.wdc07v.mail.ibm.com [127.0.0.1])
  by ppma23.wdc07v.mail.ibm.com (8.18.1.11/8.18.1.11) with ESMTP id
- 68MIHcCN3240060; Tue, 22 Sep 2026 19:37:13 GMT
-Received: from smtprelay05.dal12v.mail.ibm.com ([172.16.1.7])
- by ppma23.wdc07v.mail.ibm.com (PPS) with ESMTPS id 4gt67gu4wh-1
+ 68MIHXCg3239748; Tue, 22 Sep 2026 20:26:12 GMT
+Received: from smtprelay07.dal12v.mail.ibm.com ([172.16.1.9])
+ by ppma23.wdc07v.mail.ibm.com (PPS) with ESMTPS id 4gt67guaby-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 22 Sep 2026 19:37:13 +0000 (GMT)
+ Tue, 22 Sep 2026 20:26:12 +0000 (GMT)
 Received: from smtpav01.wdc07v.mail.ibm.com (smtpav01.wdc07v.mail.ibm.com
  [10.39.53.228])
- by smtprelay05.dal12v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
- 68MJbBwe15794906
+ by smtprelay07.dal12v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
+ 68MKQBXY22807042
  (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 22 Sep 2026 19:37:12 GMT
+ Tue, 22 Sep 2026 20:26:11 GMT
 Received: from smtpav01.wdc07v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id ABD7358059;
- Tue, 22 Sep 2026 19:37:11 +0000 (GMT)
+ by IMSVA (Postfix) with ESMTP id 3F9DC58065;
+ Tue, 22 Sep 2026 20:26:11 +0000 (GMT)
 Received: from smtpav01.wdc07v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 37DB058055;
- Tue, 22 Sep 2026 19:37:10 +0000 (GMT)
+ by IMSVA (Postfix) with ESMTP id EAEBE58059;
+ Tue, 22 Sep 2026 20:26:09 +0000 (GMT)
 Received: from [9.61.145.93] (unknown [9.61.145.93])
  by smtpav01.wdc07v.mail.ibm.com (Postfix) with ESMTP;
- Tue, 22 Sep 2026 19:37:10 +0000 (GMT)
-Message-ID: <3fce93ae-2623-4675-8052-654d26c35cf4@linux.ibm.com>
-Date: Tue, 22 Sep 2026 15:37:09 -0400
+ Tue, 22 Sep 2026 20:26:09 +0000 (GMT)
+Message-ID: <d68f6e17-11b2-4029-959b-39706b7200d4@linux.ibm.com>
+Date: Tue, 22 Sep 2026 16:26:09 -0400
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 02/17] target/s390x: Use s390_cpu_get_state()
- consistently
+Subject: Re: [PATCH v2 03/17] target/s390x: Make s390_cpu_set_state() return
+ void
 To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
  qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, Peter Maydell <peter.maydell@linaro.org>,
@@ -74,7 +74,7 @@ Cc: qemu-riscv@nongnu.org, Peter Maydell <peter.maydell@linaro.org>,
  Halil Pasic <pasic@linux.ibm.com>,
  Christian Borntraeger <borntraeger@linux.ibm.com>
 References: <20260922164936.15189-1-philmd@oss.qualcomm.com>
- <20260922164936.15189-3-philmd@oss.qualcomm.com>
+ <20260922164936.15189-4-philmd@oss.qualcomm.com>
 Content-Language: en-US
 From: Eric Farman <farman@linux.ibm.com>
 Autocrypt: addr=farman@linux.ibm.com; keydata=
@@ -121,36 +121,36 @@ Autocrypt: addr=farman@linux.ibm.com; keydata=
  4HX/6RAR4Dbzry6/epWTTji+7ApzePzmJzPcuzD31ICsgT2dJ6ydxyxxXikBFJqx6BPOF+u+
  1BtKcTz1ek3I2sWvBM1V5CKaFw7iNXxS6HgS2scuAT2awKq+BQlt778/GfBWpXonfqixMvit
  y8m0x6unNti2MZIUMy0m2gcE
-In-Reply-To: <20260922164936.15189-3-philmd@oss.qualcomm.com>
+In-Reply-To: <20260922164936.15189-4-philmd@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-TM-AS-GCONF: 00
-X-Authority-Analysis: v=2.4 cv=V/XoQuni c=1 sm=1 tr=0 ts=6ab2d8ea cx=c_pps
+X-Proofpoint-ORIG-GUID: gJDYCE6IQwKE5J0B2f-wufvT72cXBcX3
+X-Authority-Analysis: v=2.4 cv=I43w19gg c=1 sm=1 tr=0 ts=6ab2e465 cx=c_pps
  a=3Bg1Hr4SwmMryq2xdFQyZA==:117 a=3Bg1Hr4SwmMryq2xdFQyZA==:17
  a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=RnoormkPH1_aCDwRdu11:22 a=U7nrCbtTmkRpXpFmAIza:22 a=EUspDBNiAAAA:8
- a=VnNF1IyMAAAA:8 a=uzQzD8XDcWILtCPewv0A:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
-X-Proofpoint-ORIG-GUID: PCBasGHnwCpwhllFzefUPGgkUNHAMUlw
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIyMDI4NyBTYWx0ZWRfX32XG/JqM2SMA
- 0eZginOGtrN0WFqPfjHFTOJfG2Wkvh+lOPFYRD2Pyc7bgLFkdQeQnCycPFT9mpAtYIu93Ca8rKP
- m+G9OmATBw54jp+/oszwTTdVobleo8WOb0N93CiEc1uajPIBTeMErOzzb5+pCki5VvhOlK9x+jC
- ck2X2+MdD8GH7ymprBhDBlfpPDLOcU+94EJAh64OVg/PrJXJx4qSCeU7UShS6zqP2+YR/9ctfoK
- NDgQ8AA/uQmM878gdQQeg1NccMM2rrwFazUqNaTLpb3+H6rINEqnxE6MOLjuygp19k/6z2Wic8h
- Qy2UWkTeAZvhwet3Jpk6xuNISIr1HAsVysM1yd1KstjZ4RXWUbknE6pVMsqD3pyAGH+U47l6ugU
- cFDsBPV1pPxLUv+4hBzsXdJQ8PGJfMiN+0M9xx8lzOYYuoL1NBT91rmY7MpPaK4rE+qfrq9kQ8y
- jkFoQGO+nR8ujhSChwQ==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIyMDI4NyBTYWx0ZWRfX11eB6jek9Ynx
- J4kuJZywpFOuGWbDIkG+dkkgXg5xyvmjyNtVAzgY0zzDMCGcF23RXcDiGBUOg30d0J7SsQ88+q7
- sFPC3hdoyyPITDk3bjV66A/dXEeMGaM=
-X-Proofpoint-GUID: PCBasGHnwCpwhllFzefUPGgkUNHAMUlw
+ a=RnoormkPH1_aCDwRdu11:22 a=iQ6ETzBq9ecOQQE5vZCe:22 a=EUspDBNiAAAA:8
+ a=VnNF1IyMAAAA:8 a=m3-XfGE76G9waS810j8A:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIyMDI5MyBTYWx0ZWRfX0AtB4/EGUgh+
+ GwMpRSEJUId4dYpENRLWUU7RsoUwFtdlecCO7r3VwqXh3s/lk+iINyB452YKFmaz3KZMFVCQ50L
+ DdNr7EIS/5MhzX9gzzBEB4wZbjOqkaYPE/Ec2EPFN4OWbrj/m4XO2H0h2PL19R3xG07EzpG6VaS
+ qbA/ualbhSDiNEmHCJE8gPE/LdG7oBGCtadqTfGF1yE4jnI6xGwqEhQYNZxU1K0/VQ3fyFD+1+v
+ CSHAYea/IaYSllSYnfBhlBg2O+U5x18GF0oV8xGXi6swhdNT6/CrKgzLypuNdajbxh7ceMcPeza
+ /UU7NlpIOTAC5bzoE2FDGXlDyHVCLFpSzMdEhUtYCIznu6Qr7dbDojNjS54hdR+ksY9+GFCfuua
+ Yf6RALyKvq5dXIYH7RTUscB6LXLQsoxMlcgsGiS33ga5A7KhTCR7G+tcmNuQ0LBZuQ3PzrGer3X
+ raLGS7cfIb3I1AxGFzg==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIyMDI5MyBTYWx0ZWRfX2QszQO11C2lc
+ oVYO49uYpZZe/8C9NWyaPhvPZgqIXSvn4zVSO90aN8U15FOftO3JRFeLB7pseJ+lCah1WH+A5Cb
+ y0WYQDti97H2gwXlSuTixak9WtjdDtU=
+X-Proofpoint-GUID: gJDYCE6IQwKE5J0B2f-wufvT72cXBcX3
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-22_03,2026-09-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 spamscore=0 malwarescore=0 clxscore=1015 phishscore=0
- bulkscore=0 adultscore=0 lowpriorityscore=0 impostorscore=0 suspectscore=0
+ spamscore=0 clxscore=1015 adultscore=0 suspectscore=0 impostorscore=0
+ lowpriorityscore=0 bulkscore=0 phishscore=0 priorityscore=1501 malwarescore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609220287
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609220293
 Received-SPF: pass client-ip=148.163.156.1; envelope-from=farman@linux.ibm.com;
  helo=mx0a-001b2d01.pphosted.com
 X-Spam_score_int: -26
@@ -178,16 +178,16 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 On 9/22/26 12:49 PM, Philippe Mathieu-Daudé wrote:
-> Replace direct reads of env::cpu_state with s390_cpu_get_state().
-> This keeps CPU state reads consistent across CPU transitions.
+> The return value of s390_cpu_set_state() is only used by the STOP
+> interrupt handler. Make the setter return void and count running
+> CPUs directly at that call site.
 > 
 > Signed-off-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
 > ---
->   target/s390x/cpu-system.c | 2 +-
->   target/s390x/cpu.c        | 2 +-
->   target/s390x/kvm/kvm.c    | 2 +-
->   target/s390x/machine.c    | 2 +-
->   4 files changed, 4 insertions(+), 4 deletions(-)
+>   target/s390x/cpu.h        | 5 ++---
+>   target/s390x/cpu-system.c | 4 +---
+>   target/s390x/sigp.c       | 3 ++-
+>   3 files changed, 5 insertions(+), 7 deletions(-)
 
 Reviewed-by: Eric Farman <farman@linux.ibm.com>
 
