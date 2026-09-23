@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A665C98307
-	for <qemu-riscv@archiver.kernel.org>; Wed, 23 Sep 2026 10:59:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAF0BC98307
+	for <qemu-riscv@archiver.kernel.org>; Wed, 23 Sep 2026 10:59:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x9Kff-0004as-L7; Wed, 23 Sep 2026 06:57:51 -0400
+	id 1x9Kfg-0004bl-Np; Wed, 23 Sep 2026 06:57:52 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1x9KfN-0004WT-0V
+ id 1x9KfM-0004WP-Te
  for qemu-riscv@nongnu.org; Wed, 23 Sep 2026 06:57:36 -0400
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1x9KfH-0002MV-FH
+ id 1x9KfH-0002Nj-Hn
  for qemu-riscv@nongnu.org; Wed, 23 Sep 2026 06:57:31 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1790161036;
+ s=mimecast20190719; t=1790161045;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=HHUjMfAp7Vt+VQeII9fRYcKtGzZ8TVh4zPfDFi2sJCY=;
- b=U6BzE9YN730Cp9IxjgUX8N0xkEbPJxj7zR8gTXh25k8ngpRXJX3vU3zY6Eru5E/MGw9Yv2
- wANxekIz4eU8vWjq3EGRrDSmtebCRZ9Ut/A9lDsA/XO6sqMfQjwyBWoXkqOpqMCRYf/x91
- p0ZZcFePenvW8Y415bpq3AnUdoa6PPs=
+ bh=K7sxbCLPYjCGc+vT8TBpOiTfp6JTc9Z0uSN7ivbU46c=;
+ b=AJWCn0ecogKQoN3imHu52PUlxG1Zs1FykxmUNUHSJSqb4oNzPC8aQ5bvrB4B2migtM7xcT
+ uDchBQ8Cr4Pwm5b8wCzKEmz1M0NXeV3jlrea3Dw+I0cfJwtPvdK0nzrvrQN9/CcJZlQfG6
+ Ef3mDUmWaJYuxObb6Dgy2O5vQrOplcU=
 Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-191-hXHzcdYNNQeKyXazoNewAQ-1; Wed,
- 23 Sep 2026 06:57:15 -0400
-X-MC-Unique: hXHzcdYNNQeKyXazoNewAQ-1
-X-Mimecast-MFC-AGG-ID: hXHzcdYNNQeKyXazoNewAQ_1790161032
-Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-393-2C63sN-BNUG8mW2WBwSVCQ-1; Wed,
+ 23 Sep 2026 06:57:22 -0400
+X-MC-Unique: 2C63sN-BNUG8mW2WBwSVCQ-1
+X-Mimecast-MFC-AGG-ID: 2C63sN-BNUG8mW2WBwSVCQ_1790161039
+Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
  by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 423AE1945102; Wed, 23 Sep 2026 10:57:12 +0000 (UTC)
+ id 97AC0195DBB1; Wed, 23 Sep 2026 10:57:19 +0000 (UTC)
 Received: from localhost (headnet03.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.114])
- by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 98BE11800261; Wed, 23 Sep 2026 10:57:10 +0000 (UTC)
+ by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id 6E9AE300106E; Wed, 23 Sep 2026 10:57:18 +0000 (UTC)
 MIME-Version: 1.0
-Subject: Re: [PATCH v2 5/9] hw/hexagon/virt: use unique QOM name
+Subject: Re: [PATCH v2 7/9] hw/m68k/virt: use unique QOM name
 From: marcandre.lureau@redhat.com
 To: Yonggang Luo <luoyonggang@gmail.com>
 Cc: qemu-devel@nongnu.org, 
@@ -71,30 +71,30 @@ Cc: qemu-devel@nongnu.org,
  Philippe Mathieu-Daude <philmd@mailo.com>, 
  =?utf-8?q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
  Paolo Bonzini <pbonzini@redhat.com>, Eric Blake <eblake@redhat.com>
-In-Reply-To: <20260922215533.641-6-luoyonggang@gmail.com>
+In-Reply-To: <20260922215533.641-8-luoyonggang@gmail.com>
 References: <20260922215533.641-1-luoyonggang@gmail.com>
- <20260922215533.641-6-luoyonggang@gmail.com>
+ <20260922215533.641-8-luoyonggang@gmail.com>
 Date: Wed, 23 Sep 2026 14:56:45 +0400
-Message-Id: <179016100544.1396491.7027342796637781071.b4-review@b4>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=437;
+Message-Id: <179016100547.1396491.3279653117271344611.b4-review@b4>
+X-Developer-Signature: v=1; a=openpgp-sha256; l=421;
  i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=5T6ENy54y80K/pB9kfZYq0bbSZ9F/4mwbmxTC1ebs6Q=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBqs7BxR40rtIXfreG2etUCo0KGQuX2phUBPpRn8
- HenVVVgOimJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCarOwcQAKCRDa6OEJdZac
- 5VSbD/9MAMK78cgK2KNHc0L6wURlxc0qh6FsnWV9/kNIc2yiL5HLbWdbsTDaWijsWsn2CiB41g4
- D8lIZEARBlvjFuXxPgm+k+tIMApcvQpmV3+PV/eQhs6xXIbFb9MKCtvLEgBmnuzIXZuq8Tf55ZB
- 1KTBAJv01zzMil93Lvh3JakWrHDd7rliDJIcmWSFHEkVkA+LtTlC5QB/lETum97zrUicVGxE5Df
- hIX7pUcqciP+GwLCIUFLf9Ekm9avJ6ovVOcrCXR5WoxdAy70+PztHBQih1qsHTXqoOOfJ5qRInZ
- LDVghYARtFKpYb7XIEabBMFAJi6axvfYNOsYa+/xf0oPioJolInN3AA1YkbA6AAzLEd3ESG8Qsh
- mpZxigd+qRNvY2bRvajx3u3dUba/sZS6V1xo3XOfMRFlG/QxE+lwTdZ9Yia592J61TKYPpXWpk9
- 8Q7AGBixKE+GFlAJ6y+Kau2TEorQ2hBJ0XOrAtecGdXYhUHi+eQnZEsPE2F/tTBOD87BSObVszk
- KgHOYzaZciwc2teCZQk2tS2+IjP3HCk34Yvaxm6ePZAs/Y0IIl1ErlsHpeRwEDG88kc5aw12wLB
- 5BM4KzWNY7WvGAj/3qc6vyMvS4TtEC2PhDpN0wQGAisMlaTHbOAX14Elp6DWpCit/KtdXUZw6xr
- CJZ0X7q12LkLjhA==
+ bh=7ireRDcN/WoctDlcufuabiOnZSde9lm6lXDMY7uUTxo=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBqs7BxeCPTncp/ahsNrabb54cvxUeyKgf/v59rs
+ 0YE3MgeRaSJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCarOwcQAKCRDa6OEJdZac
+ 5d1AEACZE9CRq6c2O5EP1mfQN2qxd2OSKSWeEFevCeqrgVkzT8J+qmrYgpxooeefSuZjSEx9Gk0
+ 9TYQJQRW8n4dC5uET0M2PAmWwWHD4ZoqifIeydQtJ9ue8jUE45T1VwEAG4KvB0SUkNml2x96A2Y
+ cLg8OZ8l6wtPB++CoQCSYkoQLsAZcYNOmyy1guo/RPJB9Wp7hGn7f8NAplHxsjUi6dusj7lqhFS
+ hrSS9/7/EWofF4wP/LLEstUqSVn/XrxYeJGjlmTB3DQraDzf8yNBmEKiUXqgHiO7iM1WK++cRNP
+ XcMd3VP72kaRLGduOuWRX0SOMhNPny/VfIpMgw1cExVUvClFH/W3dlz09kmGtJDk/ZWB5kySIrv
+ sekigB+p+A9DInn4mmkbkSXNSD5nmZnVzE/8ou5q0CoJqWTZRT6/ul4vx45nBhLqhHQj09XcscS
+ ZqP7Afqpzbios6ifxdpVFMkKQlDofenHQhbqUWNPMec1Lq7VmTCeHxG+l2i7saqpUj2A7f9AV5H
+ 4TL0VX6uA1hh0ZPNWdkMq4ne7nhsGUa3QwWcUz8QMBVET/VHUGkn8rQ58bLD+8F14fbc8HFkVLo
+ V/Kr/D8IkPYtgVK2XdG1XUDMGAJt96UWRv/CQvRCXzdNoTXH8m0yKeC41j83Avnl6y/brjYlcnM
+ OoQmS7ml/juUvqw==
 X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
  fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
-X-Mimecast-MFC-PROC-ID: eI32ccuvFWeSN5Xd0KHO_pzLU31zzCqM-IuwH7JbBF0_1790161032
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
+X-Mimecast-MFC-PROC-ID: 2xZJWjNGf5WOc_2pPXJzT9wq1dcEwWOYFhb58sjwwxM_1790161039
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
@@ -123,10 +123,10 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, 23 Sep 2026 05:55:28 +0800, Yonggang Luo <luoyonggang@gmail.com> wrote:
-> Set TYPE_HEXAGON_VIRT_MACHINE to MACHINE_TYPE_NAME("hexagon-virt") so
-> Hexagon virt no longer collides with other virt-machine types in one
-> process. Keep the -M / help / migration name as virt via
+On Wed, 23 Sep 2026 05:55:30 +0800, Yonggang Luo <luoyonggang@gmail.com> wrote:
+> Set the parent and versioned QOM types to m68k-virt so M68K virt no
+> longer collides with other virt-machine types in one process. Keep
+> the -M / help / migration name as virt-* via
 > machine_class_set_name().
 
 Reviewed-by: Marc-André Lureau <marcandre.lureau@redhat.com>
