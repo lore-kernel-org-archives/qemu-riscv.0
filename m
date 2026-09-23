@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F79EC9830C
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F7F7C9830D
 	for <qemu-riscv@archiver.kernel.org>; Wed, 23 Sep 2026 13:34:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x9Mzw-0003iF-OC; Wed, 23 Sep 2026 09:26:56 -0400
+	id 1x9Mxw-0001f8-KI; Wed, 23 Sep 2026 09:24:52 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1x9Muw-000316-NJ
- for qemu-riscv@nongnu.org; Wed, 23 Sep 2026 09:21:52 -0400
-Received: from mail-dl2-x0f.google.com ([2607:f8b0:4864:38::f])
+ id 1x9Mub-0002Z1-VI
+ for qemu-riscv@nongnu.org; Wed, 23 Sep 2026 09:21:28 -0400
+Received: from mail-dy2-x0f.google.com ([2607:f8b0:4864:36::f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1x9Muu-0007bO-6T
- for qemu-riscv@nongnu.org; Wed, 23 Sep 2026 09:21:46 -0400
-Received: by mail-dl2-x0f.google.com with SMTP id
- a92af1059eb24-142dd04edb5so1438926c88.2
- for <qemu-riscv@nongnu.org>; Wed, 23 Sep 2026 06:21:43 -0700 (PDT)
+ id 1x9MuZ-0007Wk-7S
+ for qemu-riscv@nongnu.org; Wed, 23 Sep 2026 09:21:25 -0400
+Received: by mail-dy2-x0f.google.com with SMTP id
+ 5a478bee46e88-33e630052ebso1068561eec.0
+ for <qemu-riscv@nongnu.org>; Wed, 23 Sep 2026 06:21:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1790169702; x=1790774502; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1790169682; x=1790774482; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=BQcT2TCunpJ4XJOGDsLRORw+wafc2yMdlkK9/vuTXoQ=;
- b=hovb+UG123yJ0iFy8hYjDlL42a9rfNrNMpr4VKTPi2epP/sZ2RkJcV2DasIOh2Lpxj
- fELlPhSL2hI50esjfO3GnkZMsFolxNUv2sIBe/4aJpWLrQ6HtuzkvGD+kXOvSfYoX4nl
- pP5b7d+iEJwXysHl6tCkxmj+UBdyUzN5nf5gYfDB6ffZz/cR8gK6kbOCGUUGMlCI/00p
- TL8XBYNBjK4hzVcXRsGw57ldrMdmRCQVZJgPUEn+xPiNcnYTgcj2XEzqyAaDiPyB93vC
- YPOdaXs9hqN15lAlzrYpLJd9a9jeyTqpaZ2zHj/dPVu0fkiHPTmBX5hEvj5fycw2XZsF
- 0kuQ==
+ bh=Xe2eD+AiZP/2qt9dfiB6B/fVlOtPvZaEy5H5CusisPI=;
+ b=ISDxkOYTPDaASlcP4zOcoY8de5QeJmxKf5mMO5xam3lfBn1l6QnVf3iCD6zpj1xyS0
+ yrGM/jRk3xhG4WijwB9og7rluwDNea8y1P2YHaeHIaKXQhdQoCHEWUdKdJlAURP1U0aq
+ MDg7unAAPYKEB4dyoFZxO5D1/jKIKPsqfZKQgQn8DQWsm78PnTkuadNkcFM+VoJXtyIs
+ sIVlLhx46jKpA5YvD7rAs+AsD9WSqd8xuIP4UVTzueVQZHEOkw0MpzJIyfKL6yM3Cl3M
+ v2NtDt+nFeo4VzqpZBFGzqy2tANC8cFYmAbI96fzYPwZup7pPcddpC3sNxWztwrmnYsH
+ B3Tg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790169702; x=1790774502;
+ d=1e100.net; s=20260707; t=1790169682; x=1790774482;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=BQcT2TCunpJ4XJOGDsLRORw+wafc2yMdlkK9/vuTXoQ=;
- b=vHUsfGIc1TROySFlwY3+WIpsebakGenZpuFxsmBbQdQyixuif3cN5oV0aCnDzdCoj8
- U+NEw+ZpIvZH7k5YiNg6PKwcGWMpqc1YQdCQV7MPYmX5BkkXoWqzCd6k7enVvUM/+Hl5
- eg4NWt0+Ut7fezbUUgFgUQn3e12+b1/PWhcn1+Gk+bioa7lSaKdbDucQDFGKo5c+bXwW
- uNXs9W24D4bCKp5v/+3+D4Dj9lKZs64eqnv1h36kOM6VidoAd69DtnzadpwZqGxa44Pk
- zQEI+MP6sfyI4F3XXt68srZVncW3kJKH4sJUILJsAIQiDaIs0Ygp+/wLDOjSrw43t9Fp
- +U5Q==
+ bh=Xe2eD+AiZP/2qt9dfiB6B/fVlOtPvZaEy5H5CusisPI=;
+ b=E8X75EWaBIm1NYyktAev7kvFPjOImSZ4/gfDe3GgV+sQ50dxYnogS79Vc0Y+q7ctLx
+ aAk6nm/q4nL5KxAhhTTHEH7eqLBYoZBWcXf5GO7mXq+7+MRCeZabFaFwynQyZ5N+HLxA
+ KsJ0eDjO5oNpEejYlcz3bNhzguNOTPLeDADUDNXSThVTGQKW6ouBkBzhFmJcN8BCdjHX
+ Ru3FSzo8JHC+/xhfO3Tt51cug/mzp0Nyy4T7LKW9qSw9lauSKXYHryK7LCJMB5w470zG
+ RJ7C5I+aTVrV+iwMwHJgOVhkG16Ix/ydFjgn8RHfbTRP0Ro203vkR+BVPB8K6qFxrTk3
+ X+ew==
 X-Forwarded-Encrypted: i=1;
- AKwUvBy7Blrse2LVeiuubZIzk5EjTjoPKjdIDrarSTzfr974qHEkJmN549c44hRt0K8JTSWWPfRmULZX94oJ@nongnu.org
-X-Gm-Message-State: AFuF++nYRVnByXPny2iZidFvUjBcrRVRKhRVx5ZpAfBZuqPGVgg9PsyR
- omBfsXKj8l5IzOjHpL5rCdISo7O8fIghmjsgHtpwmzRPVjKUtVwNLo7I
-X-Gm-Gg: AYBFou24Ec10uDKTtsTwLwS+2Z39mOaibkKgNeV1owORCdZqe/APr0fbQTCvUmHgl7Y
- lMWO2wXuMbY1L639xpYpDRrucr4rES5v1vuaDatbxh8A9KpR+C7zDCaGO6SbN1vxjN3BEHn3A40
- gkBCoFzy+lP8I+dWCKztKMckcCoRRGc+plYkDQuqtQ342/tE7rIfsXsR+5SogunAnyHAF6IVKza
- FbSR4KmiFKx/jKLnEbfu1EYQunTVbd6RsYPTSGssR6H8DnKexhI/PZ84vFCYBgKCenVfKJJDSQt
- VbBdqj1MHTUZU4pFPgj7M+5ahl66p4GmXV8BwBxVs4JdSZ5GNrfeJmSMczc7DCNBRrLrHOsYdxm
- lUOkS5rGiHA9BJZ3ayaOPhZeDbjHN/RUx/MIeTIvgstx9BxLTBTM7O9RuZAzJWYcI2L2aYI1/Tg
- ER0EaxWJ0xrFFUmCNUxwDS033wD5kMREhlBYi/55NqcuQyGdNQ5VeQtmRnvrYuAly6QS3YWr3Uz
- 0Xe2PsPo9bSf5yVUBUZktyM/EFS/P2GisjZT2GNngE=
-X-Received: by 2002:a05:701b:4551:10b0:144:fd7c:84f4 with SMTP id
- a92af1059eb24-144fd7c8641mr1564469c88.5.1790169700288; 
- Wed, 23 Sep 2026 06:21:40 -0700 (PDT)
+ AKwUvBwS2qTuCzqxLcl6Oo5Ap4+OvOrPtIrABYcbOlJ8ShdaLfdSZf86qa4fER6L2LlqMwbuj3vLThohCJcx@nongnu.org
+X-Gm-Message-State: AFuF++n04q5mzDuspl3r2gd4a+UJqfGObPT9jcHk1t5yK475QWsluzVr
+ I0TENfQI8+qJeVJeyo8mqaeaPtOzLWImqKJZwkEg44kDaoBjiomN50vR
+X-Gm-Gg: AYBFou2eMTGEGegCvvcw8By7NKfjAR7vhbOHUIc5GtwB4pFhsk4qoq9zztxkiZzPRTE
+ C6tIVG6kCQm12k5qOPN4fOUeHoWqE/ZWDq4VMivdpPS5BkVDkGgrvQ9bJAp0tRwaoUNJJ/3e0SQ
+ 9/DNptgP1IDIRXFVU4PT5o2lDuQUN+9873IeJ4JWqt+MVbmcadkIDCKP3vJ5UE7IJ5uljiV/A0v
+ yUtv8pfEoCVA3TpEwcUad/7EyUp67v2bcjvfPFIShLWTOXxdEG6RyWTSX5nQ+SU0Za7RYTwGzqa
+ wfSDqrd7zzNnomfUSuTYxZmP/xB7vK8A1VFktajMbzNBLb2cmXxqSzWrtsEhNvym9ApuDBO96MC
+ dDS2uYyyMtGKJwv1EN6GLVTTVbW1No0ynFUQ026/XU3Bff+I5Xfe50+J/whdqtjUgp8owyvSLBE
+ MN3Kisp5ZPlXgCK7Kwm0OwtlBfHIsnVzEAqNqVyx1+jTQZXl+VAebSQ/utoKjtzzi1VHLxBDubi
+ 5Nf5eZHYqYBTZQ2kRLX8qYDrmiup6sK9OBHiqReKA==
+X-Received: by 2002:a05:7300:8242:b0:339:7909:9782 with SMTP id
+ 5a478bee46e88-33e8d9ce7f9mr2561360eec.21.1790169681656; 
+ Wed, 23 Sep 2026 06:21:21 -0700 (PDT)
 Received: from WIN-BH9M8FJACR9 ([103.94.185.75])
  by smtp.googlemail.com with ESMTPSA id
- 5a478bee46e88-33e97236754sm5553695eec.29.2026.09.23.06.21.32
+ 5a478bee46e88-33e97236754sm5553695eec.29.2026.09.23.06.21.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Sep 2026 06:21:39 -0700 (PDT)
+ Wed, 23 Sep 2026 06:21:19 -0700 (PDT)
 From: Yonggang Luo <luoyonggang@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: Cornelia Huck <cohuck@redhat.com>, xen-devel@lists.xenproject.org,
@@ -97,16 +97,16 @@ Cc: Cornelia Huck <cohuck@redhat.com>, xen-devel@lists.xenproject.org,
  Markus Armbruster <armbru@redhat.com>, Weiwei Li <liwei1518@gmail.com>,
  Song Gao <17746591750@163.com>, qemu-arm@nongnu.org, qemu-s390x@nongnu.org,
  Brian Cain <brian.cain@oss.qualcomm.com>
-Subject: [PATCH v3 028/114] hw/intc: use kvm_enabled() in APLIC AIA helpers
-Date: Wed, 23 Sep 2026 21:15:02 +0800
-Message-ID: <20260923131635.1894-29-luoyonggang@gmail.com>
+Subject: [PATCH v3 026/114] hw/intc: use target_long_bits in IMSIC geilen
+Date: Wed, 23 Sep 2026 21:15:00 +0800
+Message-ID: <20260923131635.1894-27-luoyonggang@gmail.com>
 X-Mailer: git-send-email 2.52.0.windows.1
 In-Reply-To: <20260923131635.1894-1-luoyonggang@gmail.com>
 References: <20260923131635.1894-1-luoyonggang@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:38::f;
- envelope-from=luoyonggang@gmail.com; helo=mail-dl2-x0f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:36::f;
+ envelope-from=luoyonggang@gmail.com; helo=mail-dy2-x0f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -128,54 +128,25 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-- Replace CONFIG_KVM ifdefs in riscv_use_emulated_aplic and
-  riscv_aplic_set_kvm_msicfgaddr with kvm_enabled().
+- Compare geilen to target_long_bits() instead of TARGET_LONG_BITS so
+  the check works when TARGET_* is poisoned.
 ---
- hw/intc/riscv_aplic.c | 14 ++++++++------
- 1 file changed, 8 insertions(+), 6 deletions(-)
+ hw/intc/riscv_imsic.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/hw/intc/riscv_aplic.c b/hw/intc/riscv_aplic.c
-index d8e25bfda14..03a0852b8b8 100644
---- a/hw/intc/riscv_aplic.c
-+++ b/hw/intc/riscv_aplic.c
-@@ -167,7 +167,10 @@ bool riscv_is_kvm_aia_aplic_imsic(bool msimode)
- 
- bool riscv_use_emulated_aplic(bool msimode)
- {
--#ifdef CONFIG_KVM
-+    if (!kvm_enabled()) {
-+        return true;
-+    }
-+
-     if (tcg_enabled()) {
-         return true;
-     }
-@@ -177,21 +180,20 @@ bool riscv_use_emulated_aplic(bool msimode)
+diff --git a/hw/intc/riscv_imsic.c b/hw/intc/riscv_imsic.c
+index bf0434e96fd..30fb60cc312 100644
+--- a/hw/intc/riscv_imsic.c
++++ b/hw/intc/riscv_imsic.c
+@@ -52,7 +52,7 @@ static void riscv_cpu_set_geilen(CPURISCVState *env, uint8_t geilen)
+         return;
      }
  
-     return kvm_kernel_irqchip_split();
--#else
--    return true;
--#endif
- }
- 
- void riscv_aplic_set_kvm_msicfgaddr(RISCVAPLICState *aplic, hwaddr addr)
- {
--#ifdef CONFIG_KVM
-+    if (!kvm_enabled()) {
-+        return;
-+    }
-+
-     if (riscv_use_emulated_aplic(aplic->msimode)) {
-         addr >>= APLIC_xMSICFGADDR_PPN_SHIFT;
-         aplic->kvm_msicfgaddr = extract64(addr, 0, 32);
-         aplic->kvm_msicfgaddrH = extract64(addr, 32, 32) &
-                                  APLIC_MMSICFGADDRH_VALID_MASK;
+-    if (geilen > (TARGET_LONG_BITS - 1)) {
++    if (geilen > (target_long_bits() - 1)) {
+         return;
      }
--#endif
- }
  
- /*
 -- 
 2.52.0.windows.1
 
