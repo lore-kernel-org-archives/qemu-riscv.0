@@ -4,69 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B1FCC9830B
-	for <qemu-riscv@archiver.kernel.org>; Wed, 23 Sep 2026 13:26:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 115E1C982FA
+	for <qemu-riscv@archiver.kernel.org>; Wed, 23 Sep 2026 13:27:00 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x9Mxq-0000wY-9V; Wed, 23 Sep 2026 09:24:46 -0400
+	id 1x9My7-0002Qm-BY; Wed, 23 Sep 2026 09:25:03 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1x9Mtn-00023A-F9
- for qemu-riscv@nongnu.org; Wed, 23 Sep 2026 09:20:48 -0400
-Received: from mail-dl2-x0e.google.com ([2607:f8b0:4864:38::e])
+ id 1x9Mu9-00028h-Dv
+ for qemu-riscv@nongnu.org; Wed, 23 Sep 2026 09:21:01 -0400
+Received: from mail-dl2-x10.google.com ([2607:f8b0:4864:38::10])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1x9Mtf-0007O4-BM
- for qemu-riscv@nongnu.org; Wed, 23 Sep 2026 09:20:31 -0400
-Received: by mail-dl2-x0e.google.com with SMTP id
- a92af1059eb24-144d60be6b0so399423c88.0
- for <qemu-riscv@nongnu.org>; Wed, 23 Sep 2026 06:20:25 -0700 (PDT)
+ id 1x9Mu5-0007Re-Vc
+ for qemu-riscv@nongnu.org; Wed, 23 Sep 2026 09:20:57 -0400
+Received: by mail-dl2-x10.google.com with SMTP id
+ a92af1059eb24-142dd046b85so492433c88.3
+ for <qemu-riscv@nongnu.org>; Wed, 23 Sep 2026 06:20:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1790169624; x=1790774424; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=MggXP4Uti4XPPjQvDWGWmS5irh6Dnb5s6/0zImLVthk=;
- b=YbRdB5NDRMiAg9sxJp9vOhvk+h43PrZFfxkmFYRZQFa1zORhpiaZ7vw29DAcF70t+4
- Mm9BhewJePXKD93hNsMB2yrmbXUuDyNWBP7cE/azYbGZdKggTkg3+rr2zRTt8F/p0ecu
- npuWNjvHwqbJRy/SiTKMz7lzzlaLbUJ81/a20jynvO1qNrNBCFsRhMvO3IX48rY2F1V0
- 3rRJW9nUoN6DNNfqWiitnR//RO8ZtreTJB1gU4IKk8ns5nsNyMtaiDk86hc7SelxGZ+b
- lY4K9by0zeozrlfBE5GlB4vBAjCdnzAi5GyHYSsHCETGKT+47vFU7FFrfcnFpM9UDPjh
- 40sA==
+ d=gmail.com; s=20251104; t=1790169652; x=1790774452; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:mime-version:references
+ :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=eK1WJJTOKN3JQC4zjqi0U64pp0hPplv7AhkYIkHOF98=;
+ b=bQUWmPETdp8Y4na2U/SqSL8T7Anrvojw5CgCa1ao7w7XP/7OTqm+UEL37XrPL95LHV
+ i7vjCAsRkKR6ap8dPQcAQDjzl6Q0LtxA8aWI77PKsPEsrBwQJrz3daq5AnP+dmEU1pN0
+ IkBjQjwpPcal6wgUer+RPb+g4r2RDDcqeZfgv3H4a8kbk0+Nd+TIL6a0JW99C8Mw6VZ1
+ U6yFoOlLHrWnrFVq+ShIsU0uvRaMANDavm370BTr3EpnXv24KTOMdRDcqah27z/M416X
+ Xd53q6fFGqN24sJKEQBLzeuL+wgtqzZR13b3y+J2sY1Ur6rzegZwCTDdCxi8/6e3FUxF
+ Aq5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790169624; x=1790774424;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=MggXP4Uti4XPPjQvDWGWmS5irh6Dnb5s6/0zImLVthk=;
- b=M8JDSeP1yuGNuSCnDPh/XlyeFtCuKCQUPr9pVDwQxYk56Q04G0s1qdRK1l8I+NsIOZ
- +/SnlvPkozN0KmfXTaRH2bPwe+ok+9c/jEBdqNDVtdXRW2AtiHUuPm4+6Mdh8Fgulati
- 7h7t3slb1UiW2gs4B4JGxq3CfwJ2HjaXs82kzdxrRjMsyeDYkavqFWkCc5/qu3Kx4Zop
- O+mz/PICAs34nby1AXY09yyb5IFzBTE4O/Ev9Th4/Hg5bvFuj49U0GySlhbFAd9cgSTs
- Jt4vvmooR6D5SucVgNk52TMq9kMC08DFJQuCK7Myf42+AUXeyZgF9fr7o5fmi0h/x5eJ
- rGYQ==
+ d=1e100.net; s=20260707; t=1790169652; x=1790774452;
+ h=content-transfer-encoding:content-type:mime-version:references
+ :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=eK1WJJTOKN3JQC4zjqi0U64pp0hPplv7AhkYIkHOF98=;
+ b=kBUPx2nj+TAYetHN6Idu9kAi80Xdu6+zSwfBLxTpY+EE285D+ipB6bw/BXbxMJYjzt
+ ecHc+md2nT4xGT0vcWXH7kx0q7Q1mTapa6mA6NVvHFlqRflyzY9kSsmBOhTPR9UVqF5Q
+ DSSlDOqIGl7q16OXMO7O2hvtj1+8fFdzJZuCIKPQ8rWx4t2PSU7SsRndlcuL2TlUWPzd
+ bGlBPnUQhJrNxc40AZoQYHSoE9ZdYbAM+4kFGD13GfWwH6COY/Dpx8VDaPQNDML2tQcY
+ XqtzOBN7+IyPhm1wRMEVi8ST8pcuZZpuOQeDb1XLhvD2xOxZqMY6Aj6xkqp/6wAvF2I0
+ Dqog==
 X-Forwarded-Encrypted: i=1;
- AKwUvBxVVRLMjDwSZQdpd2mK4bV2ypMFExhMdrhQmF3CeEp9yQCWymmxyfTwCuSP34LWa0s8KzL47oY0p+sT@nongnu.org
-X-Gm-Message-State: AFuF++mOBS2cd6k+gtnEY2XITzHWF3R42sq9smdXXGuGyZOwM714vMkD
- OpJHyxK9c+2f4oRQzZ2KfMwU3qar+uG5ZPtZ7sKkEE34eYw7ItBHrm20
-X-Gm-Gg: AYBFou1iscZfwH3j5AbSZ7uAqf6kF3P2rhWdUyxugxrxscnfjJvQtzZTq9+EgdNIT/8
- 2SdvawBNmnQrvxVfwtWgceUMzsMIjdaZCYW2Muv6gdR85n2FTNctSBOTEP+sAfaQM1bW47kkAYd
- 5Lj5D3c/f5dmBd5UUilw+gfrvYxIfFak9oR6NLlUU7pEcfWGgAjfMWNGGfKuzJHrq8BoaMUg4Qq
- 39UT5vF51G0qGd8lodghmIdPOFybgGVqrppwviSfawLj/r2LEZ1cdsJp7/OEMHZpjHqGwYeDTDx
- GKl29cXqrhe4AF0tkxWOuAek4WftLKEfXYUMGe4PfaaNIq2kAR9navCQSX7xhAcXMkrGJqumDYH
- ZblIbJcs6E2EWpEf0O1RA9lJdHdxVZZotQj9XRv3WCIM/XTs2MJ5/54fVw4KALldyk2y4IsJ91K
- 7kqWd2zPCGm4718B1bu+dynoiHF1H/z+ZCAeXn2NaSaxgsIXp+CWWrxvOJpV139leR9jixk2+Vm
- D91waS9DKOpRvCvuoefG6zA2QSk89r+USKBm9FSOQ==
-X-Received: by 2002:a05:7301:7bc4:b0:333:f481:2252 with SMTP id
- 5a478bee46e88-33e8ddc490amr4023550eec.34.1790169623518; 
- Wed, 23 Sep 2026 06:20:23 -0700 (PDT)
+ AKwUvBy64F3PII9rtbRz1wTeSIu43kr9aJU5OuR6ptYgupM9D6xP7de8+QiTUGFxRyFqIzATtOV7cz3X2LqT@nongnu.org
+X-Gm-Message-State: AFuF++n7YCOPio+cR9DXDoqvmp3IRJj1stCE78tra2zMAq4+CQuzD97B
+ 0cnVBCgTJo77OWDYEKZWZ18OGtS5aPQf+3N6DQJf8yHcULONcxhYgVXp
+X-Gm-Gg: AYBFou1O/75k+kyO126MtU/XjtZqbdx7s6IAwWbNI26JkEmAPtQsswBK24r3HPqa1CW
+ hQ3qcU+4ktKNSNEjBBeNqTFc3IubiwUPpzgJqC9d4w6nBHy5gSCZeoNZAxlIYY2+GPt0FZjp7fs
+ mdm3VeCEP11KcuWTe9RWa1LeidOIBEkprRikrCMU9qD+hEEZBWTZCSBW6HJSJogzRgVTgnMCSjb
+ uw4KXySzSWkZ9tRPEphCX2KyLMuEC6TcYjfe5gieAm9RmCSS6EapxoFnWhInc00tGglD4M1gfbL
+ G/OIZdvgi+46IWQfQxzjhS2eP5TKnO3UzIvKjUEd+M8MVnf/WMpayDAN+2z/7bCK22KhBn2e014
+ DaL3LG+JM/JQW+3+j7cW8jcVXAdI86x9xHgHM+wl1bTDL1V9clExassYQwEz0tjEochMtfnj2iL
+ lg5XuHm2d+a0fvcAJF3BU/yGVT8IdAwNdLjpqE3LkduzeKB0ce7zrI4hqUe/MgUsvpV12lrruG/
+ jRaSfV1Nk6tR4VRgYQun/dYVVg7MVR6xvDaDqY/oA==
+X-Received: by 2002:a05:701b:42d3:10b0:143:5c2a:e488 with SMTP id
+ a92af1059eb24-144f8fc7b95mr2889651c88.0.1790169652322; 
+ Wed, 23 Sep 2026 06:20:52 -0700 (PDT)
 Received: from WIN-BH9M8FJACR9 ([103.94.185.75])
  by smtp.googlemail.com with ESMTPSA id
- 5a478bee46e88-33e97236754sm5553695eec.29.2026.09.23.06.20.09
+ 5a478bee46e88-33e97236754sm5553695eec.29.2026.09.23.06.20.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Sep 2026 06:20:16 -0700 (PDT)
+ Wed, 23 Sep 2026 06:20:50 -0700 (PDT)
 From: Yonggang Luo <luoyonggang@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: Cornelia Huck <cohuck@redhat.com>, xen-devel@lists.xenproject.org,
@@ -97,17 +98,18 @@ Cc: Cornelia Huck <cohuck@redhat.com>, xen-devel@lists.xenproject.org,
  Markus Armbruster <armbru@redhat.com>, Weiwei Li <liwei1518@gmail.com>,
  Song Gao <17746591750@163.com>, qemu-arm@nongnu.org, qemu-s390x@nongnu.org,
  Brian Cain <brian.cain@oss.qualcomm.com>
-Subject: [PATCH v3 020/114] tests/unit: add module-init and qom is-available
- tests
-Date: Wed, 23 Sep 2026 21:14:54 +0800
-Message-ID: <20260923131635.1894-21-luoyonggang@gmail.com>
+Subject: [PATCH v3 023/114] hw/loongarch/virt: prefix ACPI helper with
+ loongarch_virt_
+Date: Wed, 23 Sep 2026 21:14:57 +0800
+Message-ID: <20260923131635.1894-24-luoyonggang@gmail.com>
 X-Mailer: git-send-email 2.52.0.windows.1
 In-Reply-To: <20260923131635.1894-1-luoyonggang@gmail.com>
 References: <20260923131635.1894-1-luoyonggang@gmail.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:38::e;
- envelope-from=luoyonggang@gmail.com; helo=mail-dl2-x0e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:38::10;
+ envelope-from=luoyonggang@gmail.com; helo=mail-dl2-x10.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -129,494 +131,78 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The hook phases and QOM inherit/filter path have no unit coverage.
-Add test-module-init for before/after hooks and module_call_init_fn,
-and test-qom-is-available for inherit, filter, and late register
-when x86_64-softmmu is present.
+- virt_acpi_setup is the same C symbol used by ARM and RISC-V virt.
+  Rename it now so a later combined binary does not need meson -D
+  prefixes for LoongArch.
+- Rename the file-local virt_is_acpi_enabled to
+  loongarch_virt_is_acpi_enabled to match.
 
 Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
+Reviewed-by: Song Gao <gaosong@loongson.cn>
 ---
- tests/unit/meson.build             |   8 +
- tests/unit/test-module-init.c      | 186 +++++++++++++++++++++
- tests/unit/test-qom-is-available.c | 250 +++++++++++++++++++++++++++++
- 3 files changed, 444 insertions(+)
- create mode 100644 tests/unit/test-module-init.c
- create mode 100644 tests/unit/test-qom-is-available.c
+ hw/loongarch/virt-acpi-build.c | 6 +++---
+ hw/loongarch/virt.c            | 2 +-
+ include/hw/loongarch/virt.h    | 2 +-
+ 3 files changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/tests/unit/meson.build b/tests/unit/meson.build
-index c806dbc4ffa..9387d2c34e6 100644
---- a/tests/unit/meson.build
-+++ b/tests/unit/meson.build
-@@ -2,6 +2,7 @@
- testblock = declare_dependency(dependencies: [block], sources: 'iothread.c')
+diff --git a/hw/loongarch/virt-acpi-build.c b/hw/loongarch/virt-acpi-build.c
+index 600ef60fc58..b9df9b3a127 100644
+--- a/hw/loongarch/virt-acpi-build.c
++++ b/hw/loongarch/virt-acpi-build.c
+@@ -674,7 +674,7 @@ static const VMStateDescription vmstate_acpi_build = {
+     },
+ };
  
- tests = {
-+  'test-module-init': [],
-   'check-block-qdict': [],
-   'check-qdict': [],
-   'check-qnum': [],
-@@ -57,6 +58,13 @@ tests = {
-   'test-envlist': [],
+-static bool virt_is_acpi_enabled(LoongArchVirtMachineState *lvms)
++static bool loongarch_virt_is_acpi_enabled(LoongArchVirtMachineState *lvms)
+ {
+     if (lvms->acpi == ON_OFF_AUTO_OFF) {
+         return false;
+@@ -682,7 +682,7 @@ static bool virt_is_acpi_enabled(LoongArchVirtMachineState *lvms)
+     return true;
  }
  
-+if 'x86_64-softmmu' in target_info_def_objects
-+  tests += {
-+    'test-qom-is-available': [qom, declare_dependency(
-+      objects: target_info_def_objects['x86_64-softmmu'])],
-+  }
-+endif
-+
- if have_system or have_tools
-   tests += {
-     'test-qmp-event': [testqapi],
-diff --git a/tests/unit/test-module-init.c b/tests/unit/test-module-init.c
-new file mode 100644
-index 00000000000..85fa3ba3d54
---- /dev/null
-+++ b/tests/unit/test-module-init.c
-@@ -0,0 +1,186 @@
-+/*
-+ * Module before/after hooks, static ModuleEntry, and module_call_init_fn
-+ *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ */
-+
-+#include "qemu/osdep.h"
-+#include "qapi/error.h"
-+#include "qemu/module.h"
-+
-+#define SEQ_BEFORE 1
-+#define SEQ_INIT_A 2
-+#define SEQ_INIT_B 3
-+#define SEQ_AFTER 4
-+#define SEQ_FN 5
-+
-+static int seq[16];
-+static int seq_n;
-+static int first_seq[16];
-+static int first_seq_n;
-+static ModuleInitPhase last_phase;
-+static ModuleInitPhase first_phase;
-+static bool fail_before;
-+static bool fail_after;
-+static int fn_ran;
-+static int dso_ran;
-+
-+static void seq_add(int id)
-+{
-+    g_assert_cmpint(seq_n, <, (int)ARRAY_SIZE(seq));
-+    seq[seq_n++] = id;
-+}
-+
-+static bool test_before(ModuleInitPhase phase, Error **errp)
-+{
-+    last_phase = phase;
-+    seq_add(SEQ_BEFORE);
-+    if (fail_before) {
-+        error_setg(errp, "before failed");
-+        return false;
-+    }
-+    return true;
-+}
-+
-+static bool test_after(ModuleInitPhase phase, Error **errp)
-+{
-+    last_phase = phase;
-+    seq_add(SEQ_AFTER);
-+    if (fail_after) {
-+        error_setg(errp, "after failed");
-+        return false;
-+    }
-+    return true;
-+}
-+
-+static void init_a(void)
-+{
-+    seq_add(SEQ_INIT_A);
-+}
-+
-+static void init_b(void)
-+{
-+    seq_add(SEQ_INIT_B);
-+}
-+
-+static void init_fn(void)
-+{
-+    fn_ran++;
-+    seq_add(SEQ_FN);
-+}
-+
-+static void init_dso(void)
-+{
-+    dso_ran++;
-+}
-+
-+static ModuleEntry entry_a = {
-+    .init = init_a,
-+};
-+
-+static ModuleEntry entry_b = {
-+    .init = init_b,
-+};
-+
-+static ModuleEntry entry_dso = {
-+    .init = init_dso,
-+};
-+
-+static void reset_seq(void)
-+{
-+    seq_n = 0;
-+    memset(seq, 0, sizeof(seq));
-+}
-+
-+static void test_builtin_order(void)
-+{
-+    g_assert_cmpint(first_phase, ==, MODULE_INIT_PHASE_ON);
-+    g_assert_cmpint(first_seq_n, ==, 4);
-+    g_assert_cmpint(first_seq[0], ==, SEQ_BEFORE);
-+    g_assert_cmpint(first_seq[1], ==, SEQ_INIT_A);
-+    g_assert_cmpint(first_seq[2], ==, SEQ_INIT_B);
-+    g_assert_cmpint(first_seq[3], ==, SEQ_AFTER);
-+    g_assert_cmpint(dso_ran, ==, 0);
-+}
-+
-+static void test_call_init_idempotent(void)
-+{
-+    reset_seq();
-+    module_call_init(MODULE_INIT_FUZZ_TARGET);
-+    g_assert_cmpint(seq_n, ==, 0);
-+}
-+
-+static void test_call_init_fn(void)
-+{
-+    int old_fn = fn_ran;
-+
-+    reset_seq();
-+    module_call_init_fn(MODULE_INIT_FUZZ_TARGET, init_fn, &error_abort);
-+    g_assert_cmpint(last_phase, ==, MODULE_INIT_PHASE_DSO_AFTER);
-+    g_assert_cmpint(fn_ran, ==, old_fn + 1);
-+    g_assert_cmpint(seq_n, ==, 3);
-+    g_assert_cmpint(seq[0], ==, SEQ_BEFORE);
-+    g_assert_cmpint(seq[1], ==, SEQ_FN);
-+    g_assert_cmpint(seq[2], ==, SEQ_AFTER);
-+}
-+
-+static void test_before_fail(void)
-+{
-+    Error *err = NULL;
-+    int old_fn = fn_ran;
-+
-+    reset_seq();
-+    fail_before = true;
-+    module_call_init_fn(MODULE_INIT_FUZZ_TARGET, init_fn, &err);
-+    fail_before = false;
-+    g_assert_nonnull(err);
-+    g_assert_cmpstr(error_get_pretty(err), ==, "before failed");
-+    g_assert_cmpint(fn_ran, ==, old_fn);
-+    g_assert_cmpint(seq_n, ==, 1);
-+    g_assert_cmpint(seq[0], ==, SEQ_BEFORE);
-+    error_free(err);
-+}
-+
-+static void test_after_fail(void)
-+{
-+    Error *err = NULL;
-+    int old_fn = fn_ran;
-+
-+    reset_seq();
-+    fail_after = true;
-+    module_call_init_fn(MODULE_INIT_FUZZ_TARGET, init_fn, &err);
-+    fail_after = false;
-+    g_assert_nonnull(err);
-+    g_assert_cmpstr(error_get_pretty(err), ==, "after failed");
-+    g_assert_cmpint(fn_ran, ==, old_fn + 1);
-+    g_assert_cmpint(seq_n, ==, 3);
-+    g_assert_cmpint(seq[0], ==, SEQ_BEFORE);
-+    g_assert_cmpint(seq[1], ==, SEQ_FN);
-+    g_assert_cmpint(seq[2], ==, SEQ_AFTER);
-+    error_free(err);
-+}
-+
-+int main(int argc, char **argv)
-+{
-+    g_test_init(&argc, &argv, NULL);
-+
-+    register_module_hooks(MODULE_INIT_FUZZ_TARGET, test_before, test_after);
-+    register_module_init(&entry_a, MODULE_INIT_FUZZ_TARGET);
-+    register_module_init(&entry_b, MODULE_INIT_FUZZ_TARGET);
-+    register_dso_module_init(&entry_dso, MODULE_INIT_FUZZ_TARGET);
-+
-+    reset_seq();
-+    module_call_init(MODULE_INIT_FUZZ_TARGET);
-+    first_seq_n = seq_n;
-+    memcpy(first_seq, seq, sizeof(seq));
-+    first_phase = last_phase;
-+
-+    g_test_add_func("/module/init/builtin-order", test_builtin_order);
-+    g_test_add_func("/module/init/call-init-idempotent",
-+                    test_call_init_idempotent);
-+    g_test_add_func("/module/init/call-init-fn", test_call_init_fn);
-+    g_test_add_func("/module/init/before-fail", test_before_fail);
-+    g_test_add_func("/module/init/after-fail", test_after_fail);
-+
-+    return g_test_run();
-+}
-diff --git a/tests/unit/test-qom-is-available.c b/tests/unit/test-qom-is-available.c
-new file mode 100644
-index 00000000000..641f0cf1bb4
---- /dev/null
-+++ b/tests/unit/test-qom-is-available.c
-@@ -0,0 +1,250 @@
-+/*
-+ * QOM is_available inherit and filter after MODULE_INIT_QOM
-+ *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ */
-+
-+#include "qemu/osdep.h"
-+#include "qapi/error.h"
-+#include "qemu/module.h"
-+#include "qemu/target-info-def.h"
-+#include "qom/object.h"
-+
-+#define TYPE_I386_PARENT "test-avail-i386-parent"
-+#define TYPE_I386_CHILD "test-avail-i386-child"
-+#define TYPE_NEVER "test-avail-never"
-+#define TYPE_NEVER_CHILD "test-avail-never-child"
-+#define TYPE_DROP_CHILD "test-avail-drop-child"
-+#define TYPE_TEST_IF "test-avail-if"
-+#define TYPE_LATE_KEEP "test-avail-late-keep"
-+#define TYPE_LATE_DROP "test-avail-late-drop"
-+#define TYPE_ORPHAN_PARENT "test-avail-orphan-parent"
-+#define TYPE_ORPHAN "test-avail-orphan"
-+#define TYPE_CYCLE_A "test-avail-cycle-a"
-+#define TYPE_CYCLE_B "test-avail-cycle-b"
-+
-+static bool test_never(const TargetInfo *ti)
-+{
-+    (void)ti;
-+    return false;
-+}
-+
-+static const TypeInfo i386_parent_info = {
-+    .name = TYPE_I386_PARENT,
-+    .parent = TYPE_OBJECT,
-+    .is_available = target_is_base_i386,
-+};
-+
-+static const TypeInfo i386_child_info = {
-+    .name = TYPE_I386_CHILD,
-+    .parent = TYPE_I386_PARENT,
-+};
-+
-+static const TypeInfo never_info = {
-+    .name = TYPE_NEVER,
-+    .parent = TYPE_OBJECT,
-+    .is_available = test_never,
-+};
-+
-+static const TypeInfo never_child_info = {
-+    .name = TYPE_NEVER_CHILD,
-+    .parent = TYPE_NEVER,
-+};
-+
-+static const TypeInfo drop_child_info = {
-+    .name = TYPE_DROP_CHILD,
-+    .parent = TYPE_OBJECT,
-+    .is_available = test_never,
-+};
-+
-+static const TypeInfo test_if_info = {
-+    .name = TYPE_TEST_IF,
-+    .parent = TYPE_INTERFACE,
-+};
-+
-+static void register_kept_types(void)
-+{
-+    /* Child before parent: inherit is a list walk, not register order. */
-+    type_register_static(&i386_child_info);
-+    type_register_static(&i386_parent_info);
-+    type_register_static(&never_child_info);
-+    type_register_static(&never_info);
-+    type_register_static(&drop_child_info);
-+    type_register_static(&test_if_info);
-+}
-+
-+static void test_roots(void)
-+{
-+    ObjectClass *obj = object_class_by_name(TYPE_OBJECT);
-+    ObjectClass *iface = object_class_by_name(TYPE_INTERFACE);
-+
-+    g_assert_nonnull(obj);
-+    g_assert_nonnull(iface);
-+    g_assert(object_class_get_is_available(obj) == target_is_any);
-+    g_assert(object_class_get_is_available(iface) == target_is_any);
-+    g_assert_true(object_class_get_is_available(obj)(target_info()));
-+}
-+
-+static void test_inherit_family(void)
-+{
-+    ObjectClass *parent = object_class_by_name(TYPE_I386_PARENT);
-+    ObjectClass *child = object_class_by_name(TYPE_I386_CHILD);
-+
-+    if (target_is_base_i386(target_info())) {
-+        g_assert_nonnull(parent);
-+        g_assert_nonnull(child);
-+        g_assert(object_class_get_is_available(parent) == target_is_base_i386);
-+        g_assert(object_class_get_is_available(child) == target_is_base_i386);
-+    } else {
-+        g_assert_null(parent);
-+        g_assert_null(child);
-+    }
-+}
-+
-+static void test_filter_never(void)
-+{
-+    g_assert_null(object_class_by_name(TYPE_NEVER));
-+    g_assert_null(object_class_by_name(TYPE_NEVER_CHILD));
-+    g_assert_null(object_class_by_name(TYPE_DROP_CHILD));
-+}
-+
-+static void test_interface_inherit(void)
-+{
-+    ObjectClass *klass = object_class_by_name(TYPE_TEST_IF);
-+
-+    g_assert_nonnull(klass);
-+    g_assert(object_class_get_is_available(klass) == target_is_any);
-+}
-+
-+static void register_late_keep(void)
-+{
-+    static const TypeInfo late_keep_info = {
-+        .name = TYPE_LATE_KEEP,
-+        .parent = TYPE_OBJECT,
-+    };
-+
-+    type_register_static(&late_keep_info);
-+}
-+
-+static void register_late_drop(void)
-+{
-+    static const TypeInfo late_drop_info = {
-+        .name = TYPE_LATE_DROP,
-+        .parent = TYPE_OBJECT,
-+        .is_available = test_never,
-+    };
-+
-+    type_register_static(&late_drop_info);
-+}
-+
-+static void test_late_keep(void)
-+{
-+    ObjectClass *klass;
-+
-+    module_call_init_fn(MODULE_INIT_QOM, register_late_keep, &error_abort);
-+    klass = object_class_by_name(TYPE_LATE_KEEP);
-+    g_assert_nonnull(klass);
-+    g_assert(object_class_get_is_available(klass) == target_is_any);
-+}
-+
-+static void test_late_drop(void)
-+{
-+    module_call_init_fn(MODULE_INIT_QOM, register_late_drop, &error_abort);
-+    g_assert_null(object_class_by_name(TYPE_LATE_DROP));
-+}
-+
-+static void register_orphan(void)
-+{
-+    static const TypeInfo parent_info = {
-+        .name = TYPE_ORPHAN_PARENT,
-+        .parent = TYPE_OBJECT,
-+        .is_available = test_never,
-+    };
-+    static const TypeInfo child_info = {
-+        .name = TYPE_ORPHAN,
-+        .parent = TYPE_ORPHAN_PARENT,
-+        .is_available = target_is_any,
-+    };
-+
-+    type_register_static(&parent_info);
-+    type_register_static(&child_info);
-+}
-+
-+static void test_orphan_parent(void)
-+{
-+    Error *err = NULL;
-+
-+    module_call_init_fn(MODULE_INIT_QOM, register_orphan, &err);
-+    g_assert_nonnull(err);
-+    g_assert_cmpstr(error_get_pretty(err), ==,
-+                    "Type '" TYPE_ORPHAN "' is missing its parent '"
-+                    TYPE_ORPHAN_PARENT "'");
-+    error_free(err);
-+}
-+
-+static void register_cycle(void)
-+{
-+    static const TypeInfo a_info = {
-+        .name = TYPE_CYCLE_A,
-+        .parent = TYPE_CYCLE_B,
-+    };
-+    static const TypeInfo b_info = {
-+        .name = TYPE_CYCLE_B,
-+        .parent = TYPE_CYCLE_A,
-+    };
-+
-+    type_register_static(&a_info);
-+    type_register_static(&b_info);
-+}
-+
-+static void test_cycle(void)
-+{
-+    Error *err = NULL;
-+
-+    module_call_init_fn(MODULE_INIT_QOM, register_cycle, &err);
-+    g_assert_nonnull(err);
-+    g_assert_true(strstr(error_get_pretty(err), "cyclic parent chain") != NULL);
-+    error_free(err);
-+}
-+
-+static void test_init_fn_before_call_init(void)
-+{
-+    if (g_test_subprocess()) {
-+        test_roots();
-+        test_inherit_family();
-+        test_filter_never();
-+        test_interface_inherit();
-+        return;
-+    }
-+    g_test_trap_subprocess(NULL, 0, 0);
-+    g_test_trap_assert_passed();
-+}
-+
-+int main(int argc, char **argv)
-+{
-+    g_test_init(&argc, &argv, NULL);
-+
-+    g_assert_nonnull(target_info());
-+
-+    if (g_test_subprocess()) {
-+        module_call_init_fn(MODULE_INIT_QOM, register_kept_types, &error_abort);
-+        module_call_init(MODULE_INIT_QOM);
-+    } else {
-+        module_call_init(MODULE_INIT_QOM);
-+        module_call_init_fn(MODULE_INIT_QOM, register_kept_types, &error_abort);
-+    }
-+
-+    g_test_add_func("/qom/is-available/roots", test_roots);
-+    g_test_add_func("/qom/is-available/inherit-family", test_inherit_family);
-+    g_test_add_func("/qom/is-available/filter-never", test_filter_never);
-+    g_test_add_func("/qom/is-available/interface-inherit",
-+                    test_interface_inherit);
-+    g_test_add_func("/qom/is-available/late-keep", test_late_keep);
-+    g_test_add_func("/qom/is-available/late-drop", test_late_drop);
-+    g_test_add_func("/qom/is-available/orphan-parent", test_orphan_parent);
-+    g_test_add_func("/qom/is-available/cycle", test_cycle);
-+    g_test_add_func("/qom/is-available/init-fn-before-call-init",
-+                    test_init_fn_before_call_init);
-+
-+    return g_test_run();
-+}
+-void virt_acpi_setup(LoongArchVirtMachineState *lvms)
++void loongarch_virt_acpi_setup(LoongArchVirtMachineState *lvms)
+ {
+     AcpiBuildTables tables;
+     AcpiBuildState *build_state;
+@@ -692,7 +692,7 @@ void virt_acpi_setup(LoongArchVirtMachineState *lvms)
+         return;
+     }
+ 
+-    if (!virt_is_acpi_enabled(lvms)) {
++    if (!loongarch_virt_is_acpi_enabled(lvms)) {
+         ACPI_BUILD_DPRINTF("ACPI disabled. Bailing out.\n");
+         return;
+     }
+diff --git a/hw/loongarch/virt.c b/hw/loongarch/virt.c
+index 2b003443eb0..18923500fc2 100644
+--- a/hw/loongarch/virt.c
++++ b/hw/loongarch/virt.c
+@@ -242,7 +242,7 @@ static void virt_done(Notifier *notifier, void *data)
+     LoongArchVirtMachineState *lvms = container_of(notifier,
+                                       LoongArchVirtMachineState, machine_done);
+     virt_build_smbios(lvms);
+-    virt_acpi_setup(lvms);
++    loongarch_virt_acpi_setup(lvms);
+     virt_fdt_setup(lvms);
+ }
+ 
+diff --git a/include/hw/loongarch/virt.h b/include/hw/loongarch/virt.h
+index 09529de48bd..4316a414f44 100644
+--- a/include/hw/loongarch/virt.h
++++ b/include/hw/loongarch/virt.h
+@@ -132,7 +132,7 @@ struct LoongArchVirtMachineState {
+ 
+ #define TYPE_LOONGARCH_VIRT_MACHINE  MACHINE_TYPE_NAME("loongarch-virt")
+ OBJECT_DECLARE_SIMPLE_TYPE(LoongArchVirtMachineState, LOONGARCH_VIRT_MACHINE)
+-void virt_acpi_setup(LoongArchVirtMachineState *lvms);
++void loongarch_virt_acpi_setup(LoongArchVirtMachineState *lvms);
+ void virt_fdt_setup(LoongArchVirtMachineState *lvms);
+ 
+ static inline bool virt_has_dmsi(LoongArchVirtMachineState *lvms)
 -- 
 2.52.0.windows.1
 
