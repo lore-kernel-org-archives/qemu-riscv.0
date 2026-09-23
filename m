@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D281AC98310
-	for <qemu-riscv@archiver.kernel.org>; Wed, 23 Sep 2026 13:29:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB318C9830C
+	for <qemu-riscv@archiver.kernel.org>; Wed, 23 Sep 2026 13:30:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x9N0i-000591-Mw; Wed, 23 Sep 2026 09:27:44 -0400
+	id 1x9Mxm-0000e5-VW; Wed, 23 Sep 2026 09:24:43 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1x9MwR-0005uG-Qd
- for qemu-riscv@nongnu.org; Wed, 23 Sep 2026 09:23:23 -0400
-Received: from mail-dy2-x0f.google.com ([2607:f8b0:4864:36::f])
+ id 1x9MtT-0001Z0-Gq
+ for qemu-riscv@nongnu.org; Wed, 23 Sep 2026 09:20:15 -0400
+Received: from mail-dl2-x2b.google.com ([2607:f8b0:4864:38::2b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1x9MwP-0007ul-8o
- for qemu-riscv@nongnu.org; Wed, 23 Sep 2026 09:23:19 -0400
-Received: by mail-dy2-x0f.google.com with SMTP id
- 5a478bee46e88-33e62211987so1029786eec.2
- for <qemu-riscv@nongnu.org>; Wed, 23 Sep 2026 06:23:16 -0700 (PDT)
+ id 1x9MtP-0007AP-19
+ for qemu-riscv@nongnu.org; Wed, 23 Sep 2026 09:20:15 -0400
+Received: by mail-dl2-x2b.google.com with SMTP id
+ a92af1059eb24-1438cb9b3a3so940070c88.2
+ for <qemu-riscv@nongnu.org>; Wed, 23 Sep 2026 06:20:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1790169795; x=1790774595; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1790169609; x=1790774409; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=a+vM4VKx04YtiIcob+lp3bwuPAlEC1anahMCoo6i89k=;
- b=hUVd2xzydDzZHMiF2wGcOHjZynU5VMul64i/lszEqQDBc6dOD/vXHpibCbHVpSzNvi
- xe2cG2U3lbRATZvJbRgShNZinAwYK/Dunuf3fIrRbx7lC4qpxZi9XmwCRQyjmXa6Ze7s
- 1na1bxjhmlpWiTXdIAVd+15SFJhbNjG11Ds6Xot93C+R4HeSj5NvCDIfZRgk9odV74qI
- LfZ7DUTzySGgp+NAoGZ3rLeDojjNBYlNxRcRGgsPqVX/jZHAyuh2X6Rpu7aj9EMKZONd
- m1dBWK/WNmAbXtt54Jp1BO2a6pc2puaxwh9w3MZ2S89KeQpYgIAQBNTZwtHcGlN/9MRr
- 14gA==
+ bh=R0NEODEUKGZurnafAxCJE2mvY+onJpkfc8axTrsuyg4=;
+ b=N4PgMxnHCgixIYJ1dOhVrAeLsx8E4uF1+xPqxwkY/8p5VhxuBqCjOqEhIzKseDSep6
+ gaSzfu0ecTfbzVILJD4ZnfD+5vJBd7/wQDmfFrG5nKrlqB6+cuBtRWTvdvxM0sgCsOiM
+ 6eSMnz3chuHJAH0seal+HhqONwinWbZSVDn280OnLVXWQoIDgQIsRvFVc0W1RjU8wNFH
+ royAG8Cvwks901A6hQoLjfVLn0C1K0Vs3/eLmEkJFdL9DT61YldOYHx5YWp9evQN0L8F
+ bv/GEEomE/YMTzX2EPOqUVZUIaIFtyp6DLvwLy+eh1IG9OFJWt90j9Yv5rbagSMmECOh
+ Ye5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790169795; x=1790774595;
+ d=1e100.net; s=20260707; t=1790169609; x=1790774409;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=a+vM4VKx04YtiIcob+lp3bwuPAlEC1anahMCoo6i89k=;
- b=Q3/jlN3WivYfNGP6rMwGGDnjJFUxJiA8ZwGB0C9+PLYdAU6Zems7eF0VH40cVeh0r1
- eIpp77W03fCgKPF8ECvd6/OJNFDgBiwDBEDVWy6gDWlsRFxpMO4wpf/pjCL9Qf/ZNMRu
- 38vjOoO92gCFGGuqsZVTpfSAG+6If8280eSQrlF0plRRZwjf0q0bUvHw5FkreJK2nzRc
- gJZjcSWhqXp26/Giy+3EmzjJ196kmIck059BC1RAuAlOum0Mot4h81VGvwwUXx0kYp26
- CQhfrxfZf7z82nPzjGN3PpSWy6+FqCcMUb9Oi+1nfT2Feyqw4uxf2gfyDKE3NCbyEJTD
- 3o4g==
+ bh=R0NEODEUKGZurnafAxCJE2mvY+onJpkfc8axTrsuyg4=;
+ b=dYVtjUaNnHqiPM6huUJfHL11teF0hi4u2MOESMT4OwIYNKdET+axAQV032bqSMYBUt
+ lixN54fzWMi0uKNNXMtvDYBSZO9g2jBj5/YlhBmF4e/YpSRFr3lMkGSdDwj8CiiHtZeH
+ ik11QIvI6edHC9iit2KWw65EEFlxZqMDfdMbI256ESNcMTxN9DGhXNwfejLIKps5+UhQ
+ ejY1jf+WMb6guSQHZ2JRaC2NvXNQlKLUUT7dNy1lZeVUO21MSheU8tdQsoZE0OKx5f+4
+ J0nRtb9jP8SYaX+Gpsm2ABuKBPiIFp7XveiRn8CMSZuGelSBwldRHcXa2Q2eNUeaD5qw
+ yUig==
 X-Forwarded-Encrypted: i=1;
- AKwUvBz+1V2bTUwmGk1+i1vQmT0+e6xvJxrxJ3TLbjeUrekQAtiMNP0SVP3FuuStMyUC9u5NVhJUfRjWfRUc@nongnu.org
-X-Gm-Message-State: AFuF++lkZUKYN1JcNPrnxGQKqviCDxkAIcphRP/2U4keEmT82wWQzIYX
- FmYaZ+xm4D6j3RmWBYkIU4i5cmMn+tN5UKwB63Uc0FCIVaQC/Hy8hnoQ
-X-Gm-Gg: AYBFou2Jw32vh4WzjwgKCwka77S4zxNURh7jg8iCgP+HztbNjyLRBzGFGLttQ7gGBeR
- +bUJJkHke3lfpRn/Fq/31D92HdJsUFZLToj2aKVJj15kYppJCDeP7LJ0zIPP/XSyCV3aHaHrV0R
- WvplTlu6z6rz+t6ODqqA5LsOWbQTL5PBNqjepvlW6OCtwXy+4KJIWhHkkyFTvOcYlX5dNOZx3Yu
- qzcbCXt8+kH81wVX0SMRtaWp/RqBJGmFJgkSBqd4tHyVn8nnIQV5TshqahvT+DY+XNp9FJxx8/l
- 0YQtsJ9AGPS5rmIIOkQDpbI1wgRi7M8hfOzs+UsdTdsYZt2iMfd5E8z+zuNjpuCwBH97juu8RQH
- k8x8JnI3DcOeJHuyht8BYV6+nHvEqCB72XUKurPe+S2YwYfq5+rMs9KOR1aY1LQlzXa/xzY1cUb
- Y7ma1d4BYQEprZ4PKL8eQQmimfEFH5APia3Sbqmq2l6CS9i1dFoK76fXBTFlm9WKsZGs6s3huOc
- K1zV9oYoS+/v8ekW+iAru/+TLlbaBvKhSBBv1dPxQ==
-X-Received: by 2002:a05:7300:3e91:b0:327:affc:b506 with SMTP id
- 5a478bee46e88-33e8c72c478mr2326450eec.15.1790169794702; 
- Wed, 23 Sep 2026 06:23:14 -0700 (PDT)
+ AKwUvBxLnkH2L3xWAMSye0z6/5LgW3rPfbbSt/icWBJHqXYcYrYSjQEy0Iofh/6JD6I3UY03vWcX9AxhKN9A@nongnu.org
+X-Gm-Message-State: AFuF++mSCrJ3NowpQXalmWtwcc/wdUeaOBRfVTTvv+zBg4WYv55v9YX8
+ TwFpVcGHixrnrfqBFy5or69ciAHojKHebe1o7q0BeP73scDc+PbK69Sv
+X-Gm-Gg: AYBFou3yrVxTgV4h5nfMwP/291lESZuY0q64jRJ9M04WKMbcazllqwJJitExjZhcIKC
+ 4RANKg6RCawFXpEhLwi1L1Wx8bMK9kLQmPdne+Bu+f4L+uGyXRrv/B82ioBfoAIW3vv9bui3e1l
+ NAu3vwYexZX4ERMen0B+7vVX0vwWRxJNxum+YsKunNen43mG+lQh6b+wWWVFh4o347RFeFUvsEY
+ 35NLyb4RKCJYsMMhQAOpXX9HrddGBawHiw2iparEzfkVGDyjUO0a8UhknEXRpLqobOluCcB9iZI
+ RNtRHqq1VL5VxWPiOSRTF/kplccpwh3fvpJgz+5Q0nzSoNNCnj0GW11RUKoboYbptl8Sqy930dX
+ s3aPnksKFFXJRo5mFtTeQd/vZ6+17oXc3RzQGScke64+PJrw2BluxLp5yTiK2h8dFU2LBWDvciC
+ eUF34jbms9YX68NxApMFMk+MV9trTUoGuHmphugoATNgBeKoTOwPrnnRrSizxYMlcRQTLlVekun
+ n27Zmvh89cINMdbSxmHkbkWwXe+uh0=
+X-Received: by 2002:a05:693c:60cd:b0:33b:e306:2e27 with SMTP id
+ 5a478bee46e88-33ea3eb055bmr2839410eec.5.1790169609054; 
+ Wed, 23 Sep 2026 06:20:09 -0700 (PDT)
 Received: from WIN-BH9M8FJACR9 ([103.94.185.75])
  by smtp.googlemail.com with ESMTPSA id
- 5a478bee46e88-33e97236754sm5553695eec.29.2026.09.23.06.23.07
+ 5a478bee46e88-33e97236754sm5553695eec.29.2026.09.23.06.19.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Sep 2026 06:23:13 -0700 (PDT)
+ Wed, 23 Sep 2026 06:20:06 -0700 (PDT)
 From: Yonggang Luo <luoyonggang@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: Cornelia Huck <cohuck@redhat.com>, xen-devel@lists.xenproject.org,
@@ -97,17 +97,17 @@ Cc: Cornelia Huck <cohuck@redhat.com>, xen-devel@lists.xenproject.org,
  Markus Armbruster <armbru@redhat.com>, Weiwei Li <liwei1518@gmail.com>,
  Song Gao <17746591750@163.com>, qemu-arm@nongnu.org, qemu-s390x@nongnu.org,
  Brian Cain <brian.cain@oss.qualcomm.com>
-Subject: [PATCH v3 039/114] target/riscv: preserve signed XLEN semantics
- without target_long
-Date: Wed, 23 Sep 2026 21:15:13 +0800
-Message-ID: <20260923131635.1894-40-luoyonggang@gmail.com>
+Subject: [PATCH v3 019/114] qom: inherit is_available and filter after
+ MODULE_INIT_QOM
+Date: Wed, 23 Sep 2026 21:14:53 +0800
+Message-ID: <20260923131635.1894-20-luoyonggang@gmail.com>
 X-Mailer: git-send-email 2.52.0.windows.1
 In-Reply-To: <20260923131635.1894-1-luoyonggang@gmail.com>
 References: <20260923131635.1894-1-luoyonggang@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:36::f;
- envelope-from=luoyonggang@gmail.com; helo=mail-dy2-x0f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:38::2b;
+ envelope-from=luoyonggang@gmail.com; helo=mail-dl2-x2b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -129,196 +129,284 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-- Mask pointer-masked addresses with extract64/sextract64 at
-  runtime XLEN instead of a target_long arithmetic shift.
-- Pass vector vx scalars as int64_t after sextract64 from the
-  helper tl slot so RV32 keeps bit 31 as the sign bit.
-- Leave every target_ulong helper argument unchanged.
+Parents are not all registered at type_register time, so a type
+cannot inherit is_available then.
+
+After MODULE_INIT_QOM, and after a late DSO, inherit the callback
+from the parent, drop types that fail target_info(), and report a
+missing parent. Skip that filter for MODULE_INIT_PHASE_DSO_BEFORE.
+The inherit walk colors each type once, so it is O(N) in the number
+of types. TYPE_INTERFACE and TYPE_OBJECT use target_is_any().
+type_register_static aborts if it runs outside the QOM before/after
+hooks.
 
 Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
 ---
- target/riscv/internals.h            | 12 ++++++++----
- target/riscv/tcg/vector_helper.c    | 21 +++++++++++----------
- target/riscv/tcg/vector_internals.c |  2 +-
- target/riscv/tcg/vector_internals.h |  9 +++++----
- 4 files changed, 25 insertions(+), 19 deletions(-)
+ include/qemu/target-info.h |   9 +++
+ qom/object.c               | 134 +++++++++++++++++++++++++++++++++++--
+ target-info.c              |   6 ++
+ 3 files changed, 145 insertions(+), 4 deletions(-)
 
-diff --git a/target/riscv/internals.h b/target/riscv/internals.h
-index 1ee7e99e988..0844867246d 100644
---- a/target/riscv/internals.h
-+++ b/target/riscv/internals.h
-@@ -214,6 +214,7 @@ static inline target_ulong adjust_addr_body(CPURISCVState *env,
+diff --git a/include/qemu/target-info.h b/include/qemu/target-info.h
+index 440da63e6cf..790fc74e9d3 100644
+--- a/include/qemu/target-info.h
++++ b/include/qemu/target-info.h
+@@ -53,6 +53,15 @@ const char *target_cpu_type(void);
+  */
+ bool target_big_endian(void);
+ 
++/**
++ * target_is_any:
++ * @ti: TargetInfo to inspect
++ *
++ * Returns true for every TargetInfo. Usable as TypeInfo.is_available
++ * for types that are not target-scoped (TYPE_OBJECT).
++ */
++bool target_is_any(const TargetInfo *ti);
++
+ /**
+  * target_is_base_arm:
+  * @ti: TargetInfo to inspect
+diff --git a/qom/object.c b/qom/object.c
+index a3e75927e82..d0f9242ac99 100644
+--- a/qom/object.c
++++ b/qom/object.c
+@@ -14,6 +14,7 @@
+ #include "qapi/error.h"
+ #include "qom/compat-properties.h"
+ #include "qom/object.h"
++#include "qemu/module.h"
+ #include "qom/object_interfaces.h"
+ #include "qemu/target-info-qapi.h"
+ #include "qemu/cutils.h"
+@@ -40,6 +41,7 @@
+ #include "qobject/qnum.h"
+ #include "qobject/qstring.h"
+ #include "qemu/error-report.h"
++#include "qemu/queue.h"
+ 
+ #define MAX_INTERFACES 32
+ 
+@@ -81,11 +83,16 @@ struct TypeImpl
+ 
+     int num_interfaces;
+     InterfaceImpl interfaces[MAX_INTERFACES];
++
++    QTAILQ_ENTRY(TypeImpl) register_node;
+ };
+ 
+ static Type type_interface;
+ 
+ static GHashTable *type_table;
++static QTAILQ_HEAD(, TypeImpl) type_register_list =
++    QTAILQ_HEAD_INITIALIZER(type_register_list);
++static bool type_qom_registering;
+ 
+ static bool enumerating_types;
+ 
+@@ -95,6 +102,21 @@ static void type_table_add(TypeImpl *ti)
+     g_hash_table_insert(type_table, (void *)ti->name, ti);
+ }
+ 
++static void type_table_remove(TypeImpl *ti)
++{
++    int i;
++
++    assert(!enumerating_types);
++    g_hash_table_remove(type_table, (void *)ti->name);
++    QTAILQ_REMOVE(&type_register_list, ti, register_node);
++    g_free((char *)ti->name);
++    g_free((char *)ti->parent);
++    for (i = 0; i < ti->num_interfaces; i++) {
++        g_free((char *)ti->interfaces[i].typename);
++    }
++    g_free(ti);
++}
++
+ static TypeImpl *type_table_lookup(const char *name)
  {
-     RISCVPmPmm pmm = PMM_FIELD_DISABLED;
-     uint32_t pmlen = 0;
-+    unsigned kept;
-     bool signext = false;
- 
-     /* do nothing for rv32 mode */
-@@ -235,13 +236,16 @@ static inline target_ulong adjust_addr_body(CPURISCVState *env,
- 
-     signext = riscv_cpu_virt_mem_enabled(env, is_virt_addr);
-     pmlen = riscv_pm_get_pmlen(pmm);
--    addr = addr << pmlen;
- 
--    /* sign/zero extend masked address by N-1 bit */
-+    /*
-+     * Drop the top pmlen bits of XLEN. Do not rely on target_ulong
-+     * shift wrap; common-system target_ulong is always 64 bits.
-+     */
-+    kept = target_long_bits() - pmlen;
-     if (signext) {
--        addr = (target_long)addr >> pmlen;
-+        addr = sextract64(addr, 0, kept);
-     } else {
--        addr = addr >> pmlen;
-+        addr = extract64(addr, 0, kept);
+     return g_hash_table_lookup(type_table, name);
+@@ -171,18 +193,20 @@ static TypeImpl *type_register_internal(const TypeInfo *info)
+         abort();
      }
  
-     return addr;
-diff --git a/target/riscv/tcg/vector_helper.c b/target/riscv/tcg/vector_helper.c
-index 0d1e4e09646..0b78a733ce4 100644
---- a/target/riscv/tcg/vector_helper.c
-+++ b/target/riscv/tcg/vector_helper.c
-@@ -1248,7 +1248,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2,        \
-         ETYPE s2 = *((ETYPE *)vs2 + H(i));                               \
-         ETYPE carry = vext_elem_mask(v0, i);                             \
-                                                                          \
--        *((ETYPE *)vd + H(i)) = DO_OP(s2, (ETYPE)(target_long)s1, carry);\
-+        *((ETYPE *)vd + H(i)) = DO_OP(s2, (ETYPE)sextract64(s1, 0, target_long_bits()), carry);\
-     }                                                                    \
-     env->vstart = 0;                                                     \
-     /* set tail elements to 1s */                                        \
-@@ -1325,7 +1325,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1,          \
-         ETYPE s2 = *((ETYPE *)vs2 + H(i));                      \
-         ETYPE carry = !vm && vext_elem_mask(v0, i);             \
-         vext_set_elem_mask(vd, i,                               \
--                DO_OP(s2, (ETYPE)(target_long)s1, carry));      \
-+                DO_OP(s2, (ETYPE)sextract64(s1, 0, target_long_bits()), carry));      \
-     }                                                           \
-     env->vstart = 0;                                            \
-     /*
-@@ -1609,7 +1609,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2,   \
-             continue;                                               \
-         }                                                           \
-         vext_set_elem_mask(vd, i,                                   \
--                DO_OP(s2, (ETYPE)(target_long)s1));                 \
-+                DO_OP(s2, (ETYPE)sextract64(s1, 0, target_long_bits())));                 \
-     }                                                               \
-     env->vstart = 0;                                                \
-     /*
-@@ -2050,7 +2050,7 @@ GEN_VEXT_VV(vnmsub_vv_w, 4)
- GEN_VEXT_VV(vnmsub_vv_d, 8)
+-    if (info->is_available && !info->is_available(target_info())) {
+-        return NULL;
+-    }
+-
+     ti = type_new(info);
  
- #define OPIVX3(NAME, TD, T1, T2, TX1, TX2, HD, HS2, OP)             \
--static void do_##NAME(void *vd, target_long s1, void *vs2, int i)   \
-+static void do_##NAME(void *vd, int64_t s1, void *vs2, int i)   \
- {                                                                   \
-     TX2 s2 = *((T2 *)vs2 + HS2(i));                                 \
-     TD d = *((TD *)vd + HD(i));                                     \
-@@ -2246,7 +2246,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1,               \
-     for (i = env->vstart; i < vl; i++) {                             \
-         ETYPE s2 = *((ETYPE *)vs2 + H(i));                           \
-         ETYPE d = (!vext_elem_mask(v0, i) ? s2 :                     \
--                   (ETYPE)(target_long)s1);                          \
-+                   (ETYPE)sextract64(s1, 0, target_long_bits()));                          \
-         *((ETYPE *)vd + H(i)) = d;                                   \
-     }                                                                \
-     env->vstart = 0;                                                 \
-@@ -2397,12 +2397,12 @@ GEN_VEXT_VV_RM(vsaddu_vv_h, 2)
- GEN_VEXT_VV_RM(vsaddu_vv_w, 4)
- GEN_VEXT_VV_RM(vsaddu_vv_d, 8)
- 
--typedef void opivx2_rm_fn(void *vd, target_long s1, void *vs2, int i,
-+typedef void opivx2_rm_fn(void *vd, int64_t s1, void *vs2, int i,
-                           CPURISCVState *env, uint8_t vxrm);
- 
- #define OPIVX2_RM(NAME, TD, T1, T2, TX1, TX2, HD, HS2, OP)          \
- static inline void                                                  \
--do_##NAME(void *vd, target_long s1, void *vs2, int i,               \
-+do_##NAME(void *vd, int64_t s1, void *vs2, int i,               \
-           CPURISCVState *env, uint8_t vxrm)                         \
- {                                                                   \
-     TX2 s2 = *((T2 *)vs2 + HS2(i));                                 \
-@@ -2410,7 +2410,7 @@ do_##NAME(void *vd, target_long s1, void *vs2, int i,               \
+     type_table_add(ti);
++    QTAILQ_INSERT_TAIL(&type_register_list, ti, register_node);
+     return ti;
  }
  
- static inline void
--vext_vx_rm_1(void *vd, void *v0, target_long s1, void *vs2,
-+vext_vx_rm_1(void *vd, void *v0, int64_t s1, void *vs2,
-              CPURISCVState *env,
-              uint32_t vl, uint32_t vm, uint8_t vxrm,
-              opivx2_rm_fn *fn, uint32_t vma, uint32_t esz)
-@@ -2427,7 +2427,7 @@ vext_vx_rm_1(void *vd, void *v0, target_long s1, void *vs2,
- }
- 
- static inline void
--vext_vx_rm_2(void *vd, void *v0, target_long s1, void *vs2,
-+vext_vx_rm_2(void *vd, void *v0, int64_t s1, void *vs2,
-              CPURISCVState *env,
-              uint32_t desc,
-              opivx2_rm_fn *fn, uint32_t esz)
-@@ -2468,7 +2468,8 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1,    \
-                   void *vs2, CPURISCVState *env,          \
-                   uint32_t desc)                          \
- {                                                         \
--    vext_vx_rm_2(vd, v0, s1, vs2, env, desc,              \
-+    vext_vx_rm_2(vd, v0, sextract64(s1, 0, target_long_bits()), \
-+                 vs2, env, desc,                          \
-                  do_##NAME, ESZ);                         \
- }
- 
-diff --git a/target/riscv/tcg/vector_internals.c b/target/riscv/tcg/vector_internals.c
-index b490b1d3989..95327052666 100644
---- a/target/riscv/tcg/vector_internals.c
-+++ b/target/riscv/tcg/vector_internals.c
-@@ -81,7 +81,7 @@ void do_vext_vv(void *vd, void *v0, void *vs1, void *vs2,
-     vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);
- }
- 
--void do_vext_vx(void *vd, void *v0, target_long s1, void *vs2,
-+void do_vext_vx(void *vd, void *v0, int64_t s1, void *vs2,
-                 CPURISCVState *env, uint32_t desc,
-                 opivx2_fn fn, uint32_t esz)
+ TypeImpl *type_register_static(const TypeInfo *info)
  {
-diff --git a/target/riscv/tcg/vector_internals.h b/target/riscv/tcg/vector_internals.h
-index 5681b818153..da093d561eb 100644
---- a/target/riscv/tcg/vector_internals.h
-+++ b/target/riscv/tcg/vector_internals.h
-@@ -201,20 +201,20 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1,          \
-                do_##NAME, ESZ);                           \
++    if (!type_qom_registering) {
++        fprintf(stderr, "Registering '%s' outside QOM before/after\n",
++                info->name);
++        abort();
++    }
+     assert(info->parent);
+     return type_register_internal(info);
+ }
+@@ -316,6 +340,8 @@ static void type_initialize_interface(TypeImpl *ti, TypeImpl *interface_type,
+ 
+     iface_impl = type_new(&info);
+     iface_impl->parent_type = parent_type;
++    g_assert(interface_type->is_available);
++    iface_impl->is_available = interface_type->is_available;
+     type_initialize(iface_impl);
+     g_free((char *)info.name);
+ 
+@@ -1159,6 +1185,7 @@ bool object_class_is_secure(ObjectClass *klass)
+ 
+ TypeIsAvailable *object_class_get_is_available(ObjectClass *klass)
+ {
++    g_assert(klass->type->is_available);
+     return klass->type->is_available;
  }
  
--typedef void opivx2_fn(void *vd, target_long s1, void *vs2, int i);
-+typedef void opivx2_fn(void *vd, int64_t s1, void *vs2, int i);
- 
- /*
-  * (T1)s1 gives the real operator type.
-  * (TX1)(T1)s1 expands the operator type of widen or narrow operations.
-  */
- #define OPIVX2(NAME, TD, T1, T2, TX1, TX2, HD, HS2, OP)             \
--static void do_##NAME(void *vd, target_long s1, void *vs2, int i)   \
-+static void do_##NAME(void *vd, int64_t s1, void *vs2, int i)       \
- {                                                                   \
-     TX2 s2 = *((T2 *)vs2 + HS2(i));                                 \
-     *((TD *)vd + HD(i)) = OP(s2, (TX1)(T1)s1);                      \
+@@ -3297,12 +3324,109 @@ static void object_class_init(ObjectClass *klass, const void *data)
+                                   NULL);
  }
  
--void do_vext_vx(void *vd, void *v0, target_long s1, void *vs2,
-+void do_vext_vx(void *vd, void *v0, int64_t s1, void *vs2,
-                 CPURISCVState *env, uint32_t desc,
-                 opivx2_fn fn, uint32_t esz);
++static bool type_qom_before(ModuleInitPhase phase, Error **errp)
++{
++    (void)errp;
++    (void)phase;
++
++    type_qom_registering = true;
++    return true;
++}
++
++enum TypeVisitColor {
++    TYPE_VISIT_GRAY = 1,
++    TYPE_VISIT_BLACK,
++};
++
++static bool type_update_is_available(TypeImpl *type, GHashTable *visit,
++                                     Error **errp)
++{
++    TypeImpl *parent;
++    gpointer color;
++
++    color = g_hash_table_lookup(visit, type);
++    if (color == GINT_TO_POINTER(TYPE_VISIT_BLACK)) {
++        return true;
++    }
++    if (color == GINT_TO_POINTER(TYPE_VISIT_GRAY)) {
++        error_setg(errp, "Type '%s' has a cyclic parent chain",
++                   type->name);
++        return false;
++    }
++
++    g_hash_table_insert(visit, type, GINT_TO_POINTER(TYPE_VISIT_GRAY));
++
++    parent = type_get_parent(type);
++    if (!parent) {
++        if (strcmp(type->name, TYPE_OBJECT) != 0 &&
++            strcmp(type->name, TYPE_INTERFACE) != 0) {
++            error_setg(errp,
++                       "Type '%s' does not inherit from %s or %s",
++                       type->name, TYPE_OBJECT, TYPE_INTERFACE);
++            return false;
++        }
++    } else {
++        if (!type_update_is_available(parent, visit, errp)) {
++            return false;
++        }
++        if (!type->is_available) {
++            type->is_available = parent->is_available;
++        }
++    }
++
++    g_hash_table_insert(visit, type, GINT_TO_POINTER(TYPE_VISIT_BLACK));
++    return true;
++}
++
++static bool type_qom_after(ModuleInitPhase phase, Error **errp)
++{
++    TypeImpl *type, *next;
++    GHashTable *visit;
++    Error *local_err = NULL;
++
++    type_qom_registering = false;
++    if (phase == MODULE_INIT_PHASE_DSO_BEFORE) {
++        return true;
++    }
++
++    visit = g_hash_table_new(NULL, NULL);
++    QTAILQ_FOREACH(type, &type_register_list, register_node) {
++        if (!type_update_is_available(type, visit, &local_err)) {
++            break;
++        }
++    }
++    g_hash_table_destroy(visit);
++
++    if (local_err) {
++        error_propagate(errp, local_err);
++        return false;
++    }
++
++    QTAILQ_FOREACH_SAFE(type, &type_register_list, register_node, next) {
++        g_assert(type->is_available);
++        if (!type->is_available(target_info())) {
++            type_table_remove(type);
++        }
++    }
++
++    QTAILQ_FOREACH(type, &type_register_list, register_node) {
++        if (type->parent && !type_table_lookup(type->parent)) {
++            error_setg(errp, "Type '%s' is missing its parent '%s'",
++                       type->name, type->parent);
++            return false;
++        }
++    }
++
++    return true;
++}
++
+ static void __attribute__((constructor)) register_types(void)
+ {
+     static const TypeInfo interface_info = {
+         .name = TYPE_INTERFACE,
+         .class_size = sizeof(InterfaceClass),
+         .abstract = true,
++        .is_available = target_is_any,
+     };
  
-@@ -224,7 +224,8 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1,    \
-                   void *vs2, CPURISCVState *env,          \
-                   uint32_t desc)                          \
- {                                                         \
--    do_vext_vx(vd, v0, s1, vs2, env, desc,                \
-+    do_vext_vx(vd, v0, sextract64(s1, 0, target_long_bits()), \
-+               vs2, env, desc,                            \
-                do_##NAME, ESZ);                           \
+     static const TypeInfo object_info = {
+@@ -3310,9 +3434,11 @@ static void __attribute__((constructor)) register_types(void)
+         .instance_size = sizeof(Object),
+         .class_init = object_class_init,
+         .abstract = true,
++        .is_available = target_is_any,
+     };
+ 
+     type_table = g_hash_table_new(g_str_hash, g_str_equal);
+     type_interface = type_register_internal(&interface_info);
+     type_register_internal(&object_info);
++    register_module_hooks(MODULE_INIT_QOM, type_qom_before, type_qom_after);
+ }
+diff --git a/target-info.c b/target-info.c
+index 36f75ece36f..a9ab4b465d3 100644
+--- a/target-info.c
++++ b/target-info.c
+@@ -96,6 +96,12 @@ bool target_big_endian(void)
+     return target_endian_mode() == ENDIAN_MODE_BIG;
  }
  
++bool target_is_any(const TargetInfo *ti)
++{
++    (void)ti;
++    return true;
++}
++
+ bool target_is_base_arm(const TargetInfo *ti)
+ {
+     switch (ti->target_arch) {
 -- 
 2.52.0.windows.1
 
