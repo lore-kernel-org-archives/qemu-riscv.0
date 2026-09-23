@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7CCCC9830C
-	for <qemu-riscv@archiver.kernel.org>; Wed, 23 Sep 2026 13:28:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5ABF2C9830C
+	for <qemu-riscv@archiver.kernel.org>; Wed, 23 Sep 2026 13:28:58 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x9MzA-00034R-Ve; Wed, 23 Sep 2026 09:26:15 -0400
+	id 1x9N03-0004IE-FO; Wed, 23 Sep 2026 09:27:03 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1x9MvJ-0003fQ-N4
- for qemu-riscv@nongnu.org; Wed, 23 Sep 2026 09:22:10 -0400
-Received: from mail-dy2-x29.google.com ([2607:f8b0:4864:36::29])
+ id 1x9MwB-0004l6-Dt
+ for qemu-riscv@nongnu.org; Wed, 23 Sep 2026 09:23:03 -0400
+Received: from mail-dy2-x10.google.com ([2607:f8b0:4864:36::10])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1x9MvH-0007gl-VN
- for qemu-riscv@nongnu.org; Wed, 23 Sep 2026 09:22:09 -0400
-Received: by mail-dy2-x29.google.com with SMTP id
- 5a478bee46e88-328664b752eso570745eec.1
- for <qemu-riscv@nongnu.org>; Wed, 23 Sep 2026 06:22:07 -0700 (PDT)
+ id 1x9Mw9-0007nV-JG
+ for qemu-riscv@nongnu.org; Wed, 23 Sep 2026 09:23:03 -0400
+Received: by mail-dy2-x10.google.com with SMTP id
+ 5a478bee46e88-328664e051fso1024535eec.1
+ for <qemu-riscv@nongnu.org>; Wed, 23 Sep 2026 06:22:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1790169726; x=1790774526; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1790169768; x=1790774568; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=4msTpp+vR3Q9A3d1BOVyjzK5nl0nVEODWOwLdHYYFFk=;
- b=oRShycYaQIBjNVeL1tE336Am0PG1OYDrYg9UQIgxlr4/HwFELCpXppIeAEI3uMyuc5
- 244H7SLPslaCLLvIE1KfLWvYeQ5NkdcK2P1Wx6KhkDUwsDPPjcJRGXWDYaIIgqccZJwy
- TzzyqLj0Ia9Mnk2Y2MISK3qYNFTDfOygu65cjNC9SHNACoOoq8u3U1f2m8FSxJznFKqp
- zB6lzRjEFWTpVJy3UU10S01tgBZOcIA7YKm/L5OrwCCUJ1/Jx2DgrE8aywRUvSkhfdw+
- KXz1uFItxCIQCatdwfaKUWR52Cb4nE8vO2xrO8mNZl/vcmSvqDkahnF84ukn93oqTrWc
- QeQA==
+ bh=qFqvsxy7L8PH7M6DU9x+2jtR9XBAWYnvWHhVICE/SQI=;
+ b=sxM8CpsWquPzIjedB3QiXVZhy4Pu3ZnkZXhL8yO39m+S5H3R7TJ9Qzssp4VrHxUVvX
+ fSiohiPuzER28QEKGqK13vTVypGvS3HhP7lHA28F+vsTSBUg5R29DbtK98Q9vF11fTV0
+ N3+Yzk7LoUVem/v46FsVN8CVeQ+Pq3sheLwptbtwhjq5RBitgxpPjvhk5WNTtdSKk0/J
+ zRDsP3KboC2SMiQNpi0Xway6NEqSB1EyJEad0fl1ytgb3S91eAOGkcJwM+f3ei0bZPgB
+ AI6JrXJGXYHT9PhJbCUSrzdGTVMTkJygC4ZvfXKvJ0fqwf9XvLJ3F8OQsMW8p4jEXBjw
+ MsQQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790169726; x=1790774526;
+ d=1e100.net; s=20260707; t=1790169768; x=1790774568;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=4msTpp+vR3Q9A3d1BOVyjzK5nl0nVEODWOwLdHYYFFk=;
- b=WerQkF3vLXc1gk6Ihv+DEV04/BZxfBQA8eJv4UjNVH61iy1h1/4ql6VcBJzdnNJS+e
- L966it2uC6ZcEjctinyUpHhM9WdDlvePBFV18AO6zYZEnHpMilELKqHFvjjS1LhqOJBb
- u7eohtZNTyOBbfmTey2B5U+Efz+Vy7MS1Yrf2bVc/Lg4aB4CCUdS5RrHItoEBrDgOxeY
- tQMh8JkyZUU57yPxegL2Vb3QYwK06X+XueByFnT8BtmW86V6JN7QtX/ee+MIzaH4tlZb
- Bwz6PSngBPtKzhTmDo5DDM8zvoCGq7fXM5i99dWaO2jcQBGBw71hj3RHnUhcHibR4btf
- E4FQ==
+ bh=qFqvsxy7L8PH7M6DU9x+2jtR9XBAWYnvWHhVICE/SQI=;
+ b=Tp59VbqBVNVYz7lth+DImVX/FuGUZwcDn7TM7YpLori20kNEHmHRHA1q43carXWMSj
+ vCACXhfA6I5767kfSN+klkvVk+QnFzmdukO0Qf9pvXorqgKMxiPYYJgChhnZSkl7PFps
+ UDI7Mktrg8T3apq0G0D2iPyOPKIuPRJGqWhTc0TR7y8u0gMBKlc6o4bC61yWX/bWGUcm
+ yMqcwICYH40XyKmmEzHBRf0ii+OHPKmyRqUl8mIeAc6m1hahP+1g1u/oxES44qP516j/
+ R32LZvbOAA7sL7cRXUT70/8IQfisbD3DheO5mgUO1NRptAoA3A0KZiUZbrCdgMNla+Px
+ YoOA==
 X-Forwarded-Encrypted: i=1;
- AKwUvBx2FpL8rc8alltZwtcXVDlo/tsbVvI6rBJegchPJIAS0sRPFL1jrWY0e8GVRp3jzOl33RYi/vjkzsH+@nongnu.org
-X-Gm-Message-State: AFuF++k+xndPHst84+oWjW1QwKa+ryJkwHcY0iI5lv8IrawYYBmxqkKL
- VmvLJOgp5TLMyndvV7n2Xz6iaCKguWv0cZQiI5kGz3kwKeSh4Tsj/qZ9
-X-Gm-Gg: AYBFou1wEPCHMu9M4PUM4oCp+DNrQhkNW8YfVfBiREv53kG8dy0aTfTUHkF0lxvF57k
- xIrMjl7F6/fI5+tH88Hgzhols/OPdNuQgha3qlGm2JHK8nPKRffnIPzHianR2Vat/DXYE726n8c
- MIHKB6E+HtSwRHbUTJTumL9wCZhtcS4eEF6gQ755YBD4H8XRb0DhBuTghBZh6QEa2ZyB5yLnUKq
- 6eHJwqkd50oy5Qqu5rSpnYAVrorP76oN73qVpa1AahTOitTkS0vekvPRSFPxZ+BOLi+5e/g+EcY
- BppfQr1vz+n8hh8vZSt72S64xR37Cf/w4UxH7IhcLh9pYs2zahqjFKfBlhnC29cjedqRy9TAegI
- bo8+YIxlWSC4euX0wn+PmgcD7Y8523PhVoUpUhde/y8lzs64QWV5fvdFcPCXPb11BgKo+Kp9Ulx
- SutJFx8V2sx1cTp5HyTKfwI3rOagAza7IJMUnOpkHsN8nv+Imzly9ux6i63UsYTsifPPq3tfrzI
- lq4VFwJo2Ooeb6vBFOyRjjtjvICvuI=
-X-Received: by 2002:a05:7301:d595:b0:33b:e55f:68c8 with SMTP id
- 5a478bee46e88-33e8d8d21e3mr2659104eec.26.1790169725708; 
- Wed, 23 Sep 2026 06:22:05 -0700 (PDT)
+ AKwUvBx6sG7A1u/WmJowg3XRW2LUIROXI0MGYWpKUyybaXSBH51PzMqVVQh4glKwLKRV44PTvD+N6eIaUNMr@nongnu.org
+X-Gm-Message-State: AFuF++lM458ed+OT2hQzOb91U6RRoR4vsX54r+KNhJsOJn38FH4mmRyO
+ nE1mLWBv7TbZ//9U/hVgeMnoOEZVJxMHlsLOT/ReTPRT5CCFmNt7si3e
+X-Gm-Gg: AYBFou3L4xCALNGYZMZpKq0M0a+ObvfF4f4pHHPY9la8GK9lprtL5b+O5qzh8eKpdPR
+ NwxQW3LixmH/haO8WIGMId9YO1jFgTtswE3IdYEPJlRGdsOiTgdko3yCBRrUkwVoOIdhz4vXe+4
+ R+5cgybqB48qt99c0sUAqi//+Xe/3P9BQzGI1dtFQi4z/Y31lwCxh1gXZOAcm026xpxAfvtRbTU
+ AebWFnDnBtQjA/nfH8G/yjjTej4pdcvoKklDC3jAHDX9CDKAS1AODI9OyYkV8dT3dLjJuC5263f
+ +3sp3Otge7hkhWoHxpesYt5aWCZuGMmcg0HbA8/Qr+25MPQF7ayg9Bz+NDSAQPZlfSKe7MVXGQ+
+ EduKXV5UFV8u6cp+5MZCfBXMtSPXCy279MeotCbkw38umMD7Mp1ONZ7b1dFyb0QBC/uytCLFIer
+ cM+ExArDTZ2zjEP9d/jjmdKnSut0jvePCL+rILuWb73CdyjfOWXw1E3Qp82ZNasldeuOAs6ibAG
+ Thl4hM9AbBsHLxBDbj3nqCUAxcOCaY=
+X-Received: by 2002:a05:7300:59a1:b0:33b:e842:d272 with SMTP id
+ 5a478bee46e88-33e8be6c06bmr2642017eec.5.1790169767812; 
+ Wed, 23 Sep 2026 06:22:47 -0700 (PDT)
 Received: from WIN-BH9M8FJACR9 ([103.94.185.75])
  by smtp.googlemail.com with ESMTPSA id
- 5a478bee46e88-33e97236754sm5553695eec.29.2026.09.23.06.21.58
+ 5a478bee46e88-33e97236754sm5553695eec.29.2026.09.23.06.22.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Sep 2026 06:22:04 -0700 (PDT)
+ Wed, 23 Sep 2026 06:22:47 -0700 (PDT)
 From: Yonggang Luo <luoyonggang@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: Cornelia Huck <cohuck@redhat.com>, xen-devel@lists.xenproject.org,
@@ -97,16 +97,17 @@ Cc: Cornelia Huck <cohuck@redhat.com>, xen-devel@lists.xenproject.org,
  Markus Armbruster <armbru@redhat.com>, Weiwei Li <liwei1518@gmail.com>,
  Song Gao <17746591750@163.com>, qemu-arm@nongnu.org, qemu-s390x@nongnu.org,
  Brian Cain <brian.cain@oss.qualcomm.com>
-Subject: [PATCH v3 031/114] tcg: fix off-by-one in helper extend-free assert
-Date: Wed, 23 Sep 2026 21:15:05 +0800
-Message-ID: <20260923131635.1894-32-luoyonggang@gmail.com>
+Subject: [PATCH v3 036/114] target/riscv: select ELF dump class from
+ target_riscv64
+Date: Wed, 23 Sep 2026 21:15:10 +0800
+Message-ID: <20260923131635.1894-37-luoyonggang@gmail.com>
 X-Mailer: git-send-email 2.52.0.windows.1
 In-Reply-To: <20260923131635.1894-1-luoyonggang@gmail.com>
 References: <20260923131635.1894-1-luoyonggang@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:36::29;
- envelope-from=luoyonggang@gmail.com; helo=mail-dy2-x29.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:36::10;
+ envelope-from=luoyonggang@gmail.com; helo=mail-dy2-x10.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -128,27 +129,35 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-- Allow n_extend == MAX_CALL_IARGS after filling extend_free.
-- The old < check fired on a valid seven-argument extend.
+- Replace TARGET_RISCV64 with target_riscv64() so dump class still
+  follows the QEMU target, not guest MXL.
 
 Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
 ---
- tcg/tcg.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ target/riscv/arch_dump.c | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/tcg/tcg.c b/tcg/tcg.c
-index 489df0e7386..6d55cc284df 100644
---- a/tcg/tcg.c
-+++ b/tcg/tcg.c
-@@ -2599,7 +2599,7 @@ static void tcg_gen_callN(void *func, TCGHelperInfo *info,
-         QTAILQ_INSERT_TAIL(&tcg_ctx->ops, op, link);
-     }
+diff --git a/target/riscv/arch_dump.c b/target/riscv/arch_dump.c
+index 12b68799070..2704bd8d94e 100644
+--- a/target/riscv/arch_dump.c
++++ b/target/riscv/arch_dump.c
+@@ -175,11 +175,11 @@ int cpu_get_dump_info(ArchDumpInfo *info,
  
--    tcg_debug_assert(n_extend < ARRAY_SIZE(extend_free));
-+    tcg_debug_assert(n_extend <= ARRAY_SIZE(extend_free));
-     for (i = 0; i < n_extend; ++i) {
-         tcg_temp_free_i64(extend_free[i]);
-     }
+     info->d_machine = EM_RISCV;
+ 
+-#if defined(TARGET_RISCV64)
+-    info->d_class = ELFCLASS64;
+-#else
+-    info->d_class = ELFCLASS32;
+-#endif
++    if (target_riscv64()) {
++        info->d_class = ELFCLASS64;
++    } else {
++        info->d_class = ELFCLASS32;
++    }
+ 
+     info->d_endian = (env->mstatus & MSTATUS_UBE) != 0 ?
+                      ELFDATA2MSB : ELFDATA2LSB;
 -- 
 2.52.0.windows.1
 
