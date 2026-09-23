@@ -4,112 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA87EC982FA
-	for <qemu-riscv@archiver.kernel.org>; Wed, 23 Sep 2026 11:00:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E252C982EA
+	for <qemu-riscv@archiver.kernel.org>; Wed, 23 Sep 2026 11:47:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x9Kfi-0004dU-V5; Wed, 23 Sep 2026 06:57:54 -0400
+	id 1x9LRt-00046G-7c; Wed, 23 Sep 2026 07:47:44 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1x9KfW-0004Xu-4A
- for qemu-riscv@nongnu.org; Wed, 23 Sep 2026 06:57:43 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ (Exim 4.90_1) (envelope-from <anjo@rev.ng>)
+ id 1x9LRN-00044g-MN; Wed, 23 Sep 2026 07:47:11 -0400
+Received: from rev.ng ([94.130.142.21])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1x9KfO-0002Se-Nc
- for qemu-riscv@nongnu.org; Wed, 23 Sep 2026 06:57:41 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1790161054;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=hxicqioWmuQg+baYszlp6jsKoKgPYZCrMhZcR0Bx8+E=;
- b=JTI6CMRsyAZhjHzWuvNAfDB9YvEfAycWA7V42X/l7GQH2qSgjiK62IXAJf/0fY2hK4KEbG
- gajThk3gqkRZqsKMDGcieR4L9tuicBv8vRW1biHamVklYFqdWFXEKm3/MJeIOsBqQfmVXB
- 7JcUTXWKekHGHW2Y0kwrnPkipS7kDNg=
-Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-316-AML_iXOlOo24fa8RcNvzMA-1; Wed,
- 23 Sep 2026 06:57:29 -0400
-X-MC-Unique: AML_iXOlOo24fa8RcNvzMA-1
-X-Mimecast-MFC-AGG-ID: AML_iXOlOo24fa8RcNvzMA_1790161046
-Received: from mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.12])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 8689B1944DDB; Wed, 23 Sep 2026 10:57:26 +0000 (UTC)
-Received: from localhost (headnet03.pony-001.prod.iad2.dc.redhat.com
- [10.2.32.114])
- by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id A3CFE1956042; Wed, 23 Sep 2026 10:57:25 +0000 (UTC)
+ (Exim 4.90_1) (envelope-from <anjo@rev.ng>)
+ id 1x9LRK-0002Ns-Oq; Wed, 23 Sep 2026 07:47:09 -0400
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=rev.ng;
+ s=dkim; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive:List-Unsubscribe:List-Unsubscribe-Post:
+ List-Help; bh=6GnjRlmf2e18XObWxLVlw/bfiPGdR7DecSb4FuWUfT4=; b=GVktuz/Ok8NJYgf
+ 03Qz4O0U5NK8WoKFDsavOlnvOkwHB3U4E+gMTznWPM9YXwBt9tZytMwIkCdadqhmuuoW7dAqjCF+/
+ RTAkDGraNKPt2HN9fXz7NnfWUsVJmRwIiH2HqURVCjKATrsUaKdIo53faq/HiAERxI9VxifEineYu
+ 1I=;
+Date: Wed, 23 Sep 2026 13:52:34 +0200
+To: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ daniel.barboza@oss.qualcomm.com, pierrick.bouvier@oss.qualcomm.com,
+ palmer@dabbelt.com, 
+ alistair.francis@wdc.com, Chao Liu <chao.liu.zevorn@gmail.com>
+Subject: Re: [PATCH v5 01/11] target/riscv: Replace TYPE_RISCV_CPU_BASE
+Message-ID: <arO88UKvkxwKn28B@hive.localdomain>
+References: <20260918-hw-riscv-cpu-int-v5-0-f98c5a244636@rev.ng>
+ <20260918-hw-riscv-cpu-int-v5-1-f98c5a244636@rev.ng>
+ <3c8a82f3-6f48-416a-94d7-64f4f65d12b5@oss.qualcomm.com>
 MIME-Version: 1.0
-Subject: Re: [PATCH v2 9/9] qapi: return MachineInfo typename from
- query-machines
-From: marcandre.lureau@redhat.com
-To: Yonggang Luo <luoyonggang@gmail.com>
-Cc: qemu-devel@nongnu.org, 
- =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>, 
- Bibo Mao <maobibo@loongson.cn>, Xianglai Li <lixianglai@loongson.cn>, 
- Laurent Vivier <laurent@vivier.eu>, Palmer Dabbelt <palmer@dabbelt.com>, 
- Chao Liu <chao.liu@processmission.com>, qemu-arm@nongnu.org, 
- Alistair Francis <alistair.francis@wdc.com>, 
- Laurent Vivier <lvivier@redhat.com>, 
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, 
- Weiwei Li <liwei1518@gmail.com>, 
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
- Zhao Liu <zhao1.liu@intel.com>, Peter Maydell <peter.maydell@linaro.org>, 
- Fabiano Rosas <farosas@suse.de>, Song Gao <17746591750@163.com>, 
- Markus Armbruster <armbru@redhat.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org, 
- Stafford Horne <shorne@gmail.com>, Brian Cain <brian.cain@oss.qualcomm.com>, 
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Max Filippov <jcmvbkbc@gmail.com>, 
- Philippe Mathieu-Daude <philmd@mailo.com>, 
- =?utf-8?q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
- Paolo Bonzini <pbonzini@redhat.com>, Eric Blake <eblake@redhat.com>
-In-Reply-To: <20260922215533.641-10-luoyonggang@gmail.com>
-References: <20260922215533.641-1-luoyonggang@gmail.com>
- <20260922215533.641-10-luoyonggang@gmail.com>
-Date: Wed, 23 Sep 2026 14:56:45 +0400
-Message-Id: <179016100553.1396491.8874451102810485078.b4-review@b4>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=596;
- i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=QQpPdMVl0ZoxtZTqY6VPFLAsJs28xRpi3eIBdEeke70=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBqs7Bx7dELfa1iV+ZEG2mGA9YHlK1g8Hx3M2Yod
- GiFrMqmCV2JAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCarOwcQAKCRDa6OEJdZac
- 5ZbVD/wLO4qMwJ/0x8f7ytLn+MndrUxZ/HeI6qLQ+dnzNPBCx9evr4WOSyqNAOLvLovzoRS8oGR
- 8v5RbbPCUBimLmcGXa1Llyb0uo/FLheDl+OhPn8XVLuBioq9tDRCeY1fRtWy/NZMcru6cLifJFK
- 9WwOGbdmbxYTnR7D1/irbMIf7bExet1sbQ8WdgkbWTUA0yOp1Qiz+1G3Qca7c7wXcEx0z9DCLet
- lUCVjqQ7y0FZrSM9Tbm71KhwKKvXag0KCyCcmL/nDH2Gh69LjC74/GFbLcfv85nqXrnJVGH+PRX
- EBjmamvjWPfNAoxpOsCH+wR5q92ZGrL6FsmoLOCYZk+YLqBYaR2z0ILowPMwF4e1W65IIJ8wzE0
- t4D0Of/BTJiUEYTRLWf3/FZF0Aa0eQjL9gTSHnv9B2oct94w+gxR1+NOaPr6gOL+QZHPsLP2HWy
- yAwa/8mY5ozKi315oBvwrLEEH20oLXj3fqVbTdPTegglDFWYJu57HyC6zD+oA+t1CidNk0DB7ds
- ivmku8CgGgMB+YIwkUy7EILhxpBmBmHwiD1S6q3ScN1Xq/frChBBmn6y/K/dTtpmjo2ZzHJws3G
- MuxNDvvnoirO3GUTbEy02dTBZMhoZoLjrtlwLT5zfy9xIYl06vMf4TK4pY6jjpDpPI03k2jgrU9
- tmLyntmFW7hlspg==
-X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
- fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.12
-X-Mimecast-MFC-PROC-ID: gxBTtW7Y4s4E7zdhJD2qF0Agf1bMO8la7ntr8m1d4hk_1790161046
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.133.124;
- envelope-from=marcandre.lureau@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: 12
-X-Spam_score: 1.2
-X-Spam_bar: +
-X-Spam_report: (1.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
- RCVD_IN_SBL_CSS=3.335, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+In-Reply-To: <3c8a82f3-6f48-416a-94d7-64f4f65d12b5@oss.qualcomm.com>
+Received-SPF: pass client-ip=94.130.142.21; envelope-from=anjo@rev.ng;
+ helo=rev.ng
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -122,22 +64,29 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
+Reply-to:  Anton Johansson <anjo@rev.ng>
+From:  Anton Johansson via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, 23 Sep 2026 05:55:32 +0800, Yonggang Luo <luoyonggang@gmail.com> wrote:
-> query-machines returned only the -M name, so management apps inferred
-> the QOM type as that name plus "-machine". A prefixed type such as
-> arm-virt-11.1-machine no longer matches -M virt-11.1. Return the QOM
-> type in MachineInfo typename from object_class_get_name() in
-> qmp_query_machines(). test_query_machines_typename checks that
-> qom-list-properties accepts it.
+On 21/09/26, Philippe Mathieu-Daudé wrote:
+> On 2026-09-18 0:04, Anton Johansson wrote:
+> > TYPE_RISCV_CPU_BASE is used only to initialize the correct default
+> > machine for 2 machines. Replace it with a runtime check.
+> > 
+> > Reviewed-by: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
+> > Reviewed-by: Chao Liu <chao.liu.zevorn@gmail.com>
+> > Signed-off-by: Anton Johansson <anjo@rev.ng>
+> > --
+> > Note, this patch is to be replaced by: 20260526095731.63525-1-philmd@linaro.org
 > 
-> [...]
+> I don't remember, do we need the whole series or only
+> https://lore.kernel.org/qemu-devel/20260526095731.63525-5-philmd@linaro.org/
 
-Reviewed-by: Marc-André Lureau <marcandre.lureau@redhat.com>
+We need the microblaze patch as well
 
--- 
-Marc-André Lureau <marcandre.lureau@redhat.com>
+  https://lore.kernel.org/qemu-devel/20260526095731.63525-4-philmd@linaro.org/
 
+the only real change between the remaining patches in your series and
+this one, is that in yours microblaze defaults to TYPE_RISCV_CPU_RV[32|64]I.
 
