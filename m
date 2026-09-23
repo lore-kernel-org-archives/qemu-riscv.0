@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CA20C9830C
-	for <qemu-riscv@archiver.kernel.org>; Wed, 23 Sep 2026 13:24:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99D38C9830D
+	for <qemu-riscv@archiver.kernel.org>; Wed, 23 Sep 2026 13:24:12 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x9Mwf-0006Cr-27; Wed, 23 Sep 2026 09:23:33 -0400
+	id 1x9Mx4-0006g1-6N; Wed, 23 Sep 2026 09:23:59 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1x9Ms3-0000YA-1R
- for qemu-riscv@nongnu.org; Wed, 23 Sep 2026 09:18:49 -0400
-Received: from mail-dy2-x0f.google.com ([2607:f8b0:4864:36::f])
+ id 1x9MsS-0000iY-Ky
+ for qemu-riscv@nongnu.org; Wed, 23 Sep 2026 09:19:21 -0400
+Received: from mail-dl2-x10.google.com ([2607:f8b0:4864:38::10])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1x9Mrz-0006ym-VL
- for qemu-riscv@nongnu.org; Wed, 23 Sep 2026 09:18:45 -0400
-Received: by mail-dy2-x0f.google.com with SMTP id
- 5a478bee46e88-33c24422d4dso1025632eec.2
- for <qemu-riscv@nongnu.org>; Wed, 23 Sep 2026 06:18:43 -0700 (PDT)
+ id 1x9MsK-00070a-A8
+ for qemu-riscv@nongnu.org; Wed, 23 Sep 2026 09:19:07 -0400
+Received: by mail-dl2-x10.google.com with SMTP id
+ a92af1059eb24-142dd046b87so729343c88.2
+ for <qemu-riscv@nongnu.org>; Wed, 23 Sep 2026 06:19:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1790169522; x=1790774322; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1790169540; x=1790774340; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=gvdLUze2sQ9rH6tf9YWuWP18ipAcGMhXKG5e40lFeJk=;
- b=Wkekr3xBTMb/tlyRiVFgD6YewEU+fcWEHeoOJ5mTTwWDdGd5JeEXIJAhTP7AmzCs7b
- +gVUeziw2Dtw2cp5WdYKuDj2BFVSRlZuQhPvM86tSNYfdlvLvSxTMV7XUNRUHdV1K5mJ
- GWKI2fAHx3c2aLzeTrOfaiXTp5nJgXM6R38S5aXESu5FopYgTefUlVVtEsxQlrfEj6FI
- wWJv2MH5tYkj+uEvPWKAAauukc09fjQovqNnCaUTC0taJnONHC9AXoSCCadkKjQ5M2xX
- Caj/mI0yIlZmze0a4h0iOQnpLzWzlgbP3nWbCcooqyAYzwGK8IQglTtgMG6YVjlFtY7/
- 3f7g==
+ bh=/Pnb4009fcr63720pQihUF6v8EokAjQS6rcfppqNlzc=;
+ b=Qf380Vfr2w4rMB7+dY2+twG5ws1iWd4bY4AaRN+xIOmdX+dBGxwMDDMOpx6W5j0dbZ
+ JyyOZbVPjEj0+uff1JeeZgMMgTuduP3ZBflrKdz7XGJ+lBRO6drcoPcug3lsxBrk89NF
+ bUrSa+Vt97BWmH+KKVcPh+QyuoZ5nNWh0zfC0fm5cqCYf6p/TmCkmhJb6b9+CefITJPs
+ 04W23XzdvAn3EZWUVXkjFcU7BM39HKebR5iClDjSxHr1ZPYBMUuwf83/RIWJA+hZa9cA
+ okb6FNXsYU5dhwaT2iVLZTIPFTY8xy5KQtVpPvcr6Tb9hrMmQdSPVRsalU9A9FPykzjB
+ xypQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790169522; x=1790774322;
+ d=1e100.net; s=20260707; t=1790169540; x=1790774340;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=gvdLUze2sQ9rH6tf9YWuWP18ipAcGMhXKG5e40lFeJk=;
- b=c6lfi3UksUv2oHPTrWLJGFixSKaGXabtL3dINlcySGAcudDZlHO317JrQtBLPyGdvR
- u6smbnui2FdXjzg3c073qYBQeZX7/HdEpj/E0h9vV2n0ihkpF7hxKtmd/Aic2lH/1zz9
- FBfnw3EziNeseikjMi7NCjbiM9Uw391aj0EW44nQkuwm7pd9eyDsRMR7ISRR5+tpt7Fd
- nVBvtwgBnpfCiNmTqUcWKYoNMYZf1GTvVGJpSKaTTZQaoGCfpUat7J4Tahe6g7ZMnPfo
- +ZEAZ/aZBtVgk6+1ssdgRmuMADy238cE+pBYUEtRenrVKp1n26mqVQd4Wk0V6dtvIyH3
- 7z2w==
+ bh=/Pnb4009fcr63720pQihUF6v8EokAjQS6rcfppqNlzc=;
+ b=b2X3++k/UP+s6O4ETND9U4kKgWPlnov7OC241evxKFDtYm2GVW7gkBs4ve7kQoloc6
+ HNE+rtaXu2xvh5xNbdpKleEjT0qUwk7MBM64MU3pWsOyqSlRDzK2Zj0m2I+EBSks8H2C
+ OswiEwQykRuXk8eIoOQ90jJ97ypy4UEjlzgS7rNAlCAsjD9pfMZW2WPm0Ja8NNmTg26R
+ x+otuvxXPdW3nbQTPmeUbayyDRMPrJ27D/yGY3mrk9gWhGp2zmhou2QF0Dg5q4aRV/pM
+ l1Hh5mkZadqvhBSlHmjqcw2KR709e6bqC2ClKy1y9Gtc7+E25sQfXenuv1co83Pj879U
+ wT+A==
 X-Forwarded-Encrypted: i=1;
- AKwUvByfsumDTFEpxuAdaxJm87/Dpcd558NsY7TdK0YUdtvkMRxvo5XbBp+RbWx88HyC1THcUX8dsGUXY/ES@nongnu.org
-X-Gm-Message-State: AFuF++l1cs0KG/1GW4pHAkGpnuaIy/R09IdbqZYu8zl62WgkqjalLRpn
- Ec0wvGSHhXx6YXNkIvqJUvesJ9NYvz/Dyy7L9HJjpPFh/hUhYj+r8tXN
-X-Gm-Gg: AYBFou33FXCLipCkfIOaBqDfMsfwtf5thGXPhrqx77R4g79cwIUnjIMHk4VHMTCiLQl
- rcpRHKbi+1/a5IlKhPirxuWZgzuTjQ/ubdBfioPTZD9fGEwbZGOKmse8+eMfOUnYT1QGQ2wxkbH
- NabOTQwuwaPapaxHegCbCg8bTLo4c1Y9zaEdTeETwOWR8xCaCIxUF4Auymqo2npDjW8vv2WmVq3
- R9f79kZ4MwiM3LWzmWHKZ5GX4XSC/u2RhIuelhNbw/6yPI+aUnw1f9Z1msfNCRzbQ4bbu8+nWcO
- gxSjqdBb8qoi9gUwFX3qqTBqBH9JgB3ilJGuLnPNNGY3308Ua9aIMu3aWMaMc+pSwtihNNgIuoL
- nOdoPoZwE3hnB6maum/gens6XbfY73LvEgQt7Ajce76AxWwV28PbHlf3FYl4A29vuOaYBVLw2mK
- FbAO/NML64D/8vKTCCVMhZjPTOzTzyUZCbScs0Vts4/9vBQfKhImUewL5xk7HJRG8gBb1uzH4eJ
- x+jBtrSd0ng1LRycF0fco+lsLv1qoM=
-X-Received: by 2002:a05:7301:3a99:b0:30f:1e28:fb5d with SMTP id
- 5a478bee46e88-33e8d6d03a4mr2458825eec.20.1790169522434; 
- Wed, 23 Sep 2026 06:18:42 -0700 (PDT)
+ AKwUvBy4vCU5PGEpJMTfnuTcNE7xVIhnaGB5Fl6t9DBUqpzlGreU9ele+IeBorfmPGLWwT2TdvYjkyzWkZNJ@nongnu.org
+X-Gm-Message-State: AFuF++mhgncMhdMye7aMQv5DxPu9SGZ7ZFxmayGtn0LAC521BoH09lAE
+ K3Cq6YVxEgM6c3NSBOW0Kjmu6EUs+wnFqlgoMsVNtJGQqLWGcu/jIDIQ
+X-Gm-Gg: AYBFou2cz9AHFO5GSZwJ4mIncyt/i2xWmG91Bryvyku6aZoCNKZCIlQggXbk/ZPqM2U
+ MOPRU2I72XjAD01axcdsSOx/5rH6d39xgU66pd6u4duQPLMQzEHk1Y+J4oEjCfGRshIixg2r4He
+ xKHX3fcPbu+woGXj8suB3n+c8XAlEV+GotGbS27t4//E/iibWF7TQIKNQkQVYQqcoySas7P+T3y
+ YjAbnlcdMj89Wshda34twKLBKrQ9dDAUxFdhLzGq9+cmH+Mx7odpJ5x7H6VLru6plyLwBWcVgq9
+ Erb6FAfX8tDs4oU4BNkPy7wxn+cDVyS8MFx0BFKHZGAxlGE3amuKqU1ItzrW4h7V8xkOFc4/WRb
+ N54EnZuqvzQcZnYW4xmlYhNYHZXtd9hJJQIA/0JQ7PNMN6crjsyIDdfPFIZg9M/VmxNQwz15WF5
+ yZvgXoSiyPyAINDhFg6HYO9NMm5qCwicEicA+kRY17XTp5GsNZDRpTKy5jcdAROgCcfx4aSTvnm
+ yVKr371LYFMpC+BJSdEa1W+DO6cxvE=
+X-Received: by 2002:a05:7022:fa9:b0:143:2973:3240 with SMTP id
+ a92af1059eb24-144f91551e9mr4241198c88.29.1790169539996; 
+ Wed, 23 Sep 2026 06:18:59 -0700 (PDT)
 Received: from WIN-BH9M8FJACR9 ([103.94.185.75])
  by smtp.googlemail.com with ESMTPSA id
- 5a478bee46e88-33e97236754sm5553695eec.29.2026.09.23.06.18.32
+ 5a478bee46e88-33e97236754sm5553695eec.29.2026.09.23.06.18.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Sep 2026 06:18:38 -0700 (PDT)
+ Wed, 23 Sep 2026 06:18:58 -0700 (PDT)
 From: Yonggang Luo <luoyonggang@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: Cornelia Huck <cohuck@redhat.com>, xen-devel@lists.xenproject.org,
@@ -97,22 +97,23 @@ Cc: Cornelia Huck <cohuck@redhat.com>, xen-devel@lists.xenproject.org,
  Markus Armbruster <armbru@redhat.com>, Weiwei Li <liwei1518@gmail.com>,
  Song Gao <17746591750@163.com>, qemu-arm@nongnu.org, qemu-s390x@nongnu.org,
  Brian Cain <brian.cain@oss.qualcomm.com>
-Subject: [PATCH v3 011/114] kconfig: rename REGISTER to HW_REGISTER
-Date: Wed, 23 Sep 2026 21:14:45 +0800
-Message-ID: <20260923131635.1894-12-luoyonggang@gmail.com>
+Subject: [PATCH v3 013/114] target-info: add target_is_* helpers for each
+ architecture
+Date: Wed, 23 Sep 2026 21:14:47 +0800
+Message-ID: <20260923131635.1894-14-luoyonggang@gmail.com>
 X-Mailer: git-send-email 2.52.0.windows.1
 In-Reply-To: <20260923131635.1894-1-luoyonggang@gmail.com>
 References: <20260923131635.1894-1-luoyonggang@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:36::f;
- envelope-from=luoyonggang@gmail.com; helo=mail-dy2-x0f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:38::10;
+ envelope-from=luoyonggang@gmail.com; helo=mail-dl2-x10.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -128,107 +129,308 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Rename config REGISTER to HW_REGISTER. register is a C keyword, and a
-later TargetKconfig commit will use it as a struct member.
+This is added for latter use with is_available.
 
 Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
 ---
- hw/Kconfig          | 2 +-
- hw/core/Kconfig     | 2 +-
- hw/core/meson.build | 2 +-
- hw/dma/Kconfig      | 4 ++--
- hw/i2c/Kconfig      | 2 +-
- hw/usb/Kconfig      | 2 +-
- 6 files changed, 7 insertions(+), 7 deletions(-)
+ include/qemu/target-info.h | 91 +++++++++++++++++++++++++++++++++++++-
+ target-info.c              | 83 +++++++++++++++++++++++++++++-----
+ 2 files changed, 161 insertions(+), 13 deletions(-)
 
-diff --git a/hw/Kconfig b/hw/Kconfig
-index c92ca2b13a3..94f963f2944 100644
---- a/hw/Kconfig
-+++ b/hw/Kconfig
-@@ -85,7 +85,7 @@ config XILINX_AXI
+diff --git a/include/qemu/target-info.h b/include/qemu/target-info.h
+index c48973f20be..89656da1ca4 100644
+--- a/include/qemu/target-info.h
++++ b/include/qemu/target-info.h
+@@ -53,6 +53,14 @@ const char *target_cpu_type(void);
+  */
+ bool target_big_endian(void);
  
- config XLNX_ZYNQMP
-     bool
--    select REGISTER
-+    select HW_REGISTER
-     select CAN_BUS
-     select PTIMER
-     select XLNX_BBRAM
-diff --git a/hw/core/Kconfig b/hw/core/Kconfig
-index d1bdf765ee8..839e249b9d0 100644
---- a/hw/core/Kconfig
-+++ b/hw/core/Kconfig
-@@ -29,7 +29,7 @@ config PLATFORM_BUS
-     bool
-     depends on DEVICE_TREE
++/**
++ * target_is_base_arm:
++ * @ti: TargetInfo to inspect
++ *
++ * Returns whether @ti is ARM or Aarch64.
++ */
++bool target_is_base_arm(const TargetInfo *ti);
++
+ /**
+  * target_base_arm:
+  *
+@@ -60,6 +68,14 @@ bool target_big_endian(void);
+  */
+ bool target_base_arm(void);
  
--config REGISTER
-+config HW_REGISTER
-     bool
++/**
++ * target_is_arm:
++ * @ti: TargetInfo to inspect
++ *
++ * Returns whether @ti is ARM (32-bit, not Aarch64).
++ */
++bool target_is_arm(const TargetInfo *ti);
++
+ /**
+  * target_arm:
+  *
+@@ -67,6 +83,14 @@ bool target_base_arm(void);
+  */
+ bool target_arm(void);
  
- config SPLIT_IRQ
-diff --git a/hw/core/meson.build b/hw/core/meson.build
-index 8fe776d2c86..1c645d7041d 100644
---- a/hw/core/meson.build
-+++ b/hw/core/meson.build
-@@ -21,7 +21,7 @@ system_ss.add(when: 'CONFIG_GUEST_LOADER', if_true: files('guest-loader.c'))
- system_ss.add(when: 'CONFIG_OR_IRQ', if_true: files('or-irq.c'))
- system_ss.add(when: 'CONFIG_PLATFORM_BUS', if_true: files('platform-bus.c'))
- system_ss.add(when: 'CONFIG_PTIMER', if_true: files('ptimer.c'))
--system_ss.add(when: 'CONFIG_REGISTER', if_true: files('register.c'))
-+system_ss.add(when: 'CONFIG_HW_REGISTER', if_true: files('register.c'))
- system_ss.add(when: 'CONFIG_SPLIT_IRQ', if_true: files('split-irq.c'))
- system_ss.add(when: 'CONFIG_XILINX_AXI', if_true: files('stream.c'))
- system_ss.add(when: 'CONFIG_PLATFORM_BUS', if_true: files('sysbus-fdt.c'))
-diff --git a/hw/dma/Kconfig b/hw/dma/Kconfig
-index 0a23e7d7b87..8f221b20634 100644
---- a/hw/dma/Kconfig
-+++ b/hw/dma/Kconfig
-@@ -16,7 +16,7 @@ config I8257
++/**
++ * target_is_aarch64:
++ * @ti: TargetInfo to inspect
++ *
++ * Returns whether @ti is Aarch64.
++ */
++bool target_is_aarch64(const TargetInfo *ti);
++
+ /**
+  * target_aarch64:
+  *
+@@ -74,6 +98,14 @@ bool target_arm(void);
+  */
+ bool target_aarch64(void);
  
- config ZYNQ_DEVCFG
-     bool
--    select REGISTER
-+    select HW_REGISTER
++/**
++ * target_is_base_ppc:
++ * @ti: TargetInfo to inspect
++ *
++ * Returns whether @ti is PowerPC 32-bit or 64-bit.
++ */
++bool target_is_base_ppc(const TargetInfo *ti);
++
+ /**
+  * target_base_ppc:
+  *
+@@ -81,6 +113,14 @@ bool target_aarch64(void);
+  */
+ bool target_base_ppc(void);
  
- config XLNX_ZDMA
-     bool
-@@ -29,7 +29,7 @@ config SIFIVE_PDMA
++/**
++ * target_is_ppc:
++ * @ti: TargetInfo to inspect
++ *
++ * Returns whether @ti is PowerPC 32-bit.
++ */
++bool target_is_ppc(const TargetInfo *ti);
++
+ /**
+  * target_ppc:
+  *
+@@ -88,6 +128,14 @@ bool target_base_ppc(void);
+  */
+ bool target_ppc(void);
  
- config XLNX_CSU_DMA
-     bool
--    select REGISTER
-+    select HW_REGISTER
++/**
++ * target_is_ppc64:
++ * @ti: TargetInfo to inspect
++ *
++ * Returns whether @ti is PowerPC 64-bit.
++ */
++bool target_is_ppc64(const TargetInfo *ti);
++
+ /**
+  * target_ppc64:
+  *
+@@ -95,6 +143,14 @@ bool target_ppc(void);
+  */
+ bool target_ppc64(void);
  
- config K230_GSDMA
-     bool
-\ No newline at end of file
-diff --git a/hw/i2c/Kconfig b/hw/i2c/Kconfig
-index 0766130b596..3482f475cf9 100644
---- a/hw/i2c/Kconfig
-+++ b/hw/i2c/Kconfig
-@@ -20,7 +20,7 @@ config ARM_SBCON_I2C
++/**
++ * target_is_s390x:
++ * @ti: TargetInfo to inspect
++ *
++ * Returns whether @ti is S390x.
++ */
++bool target_is_s390x(const TargetInfo *ti);
++
+ /**
+  * target_s390x:
+  *
+@@ -102,17 +158,48 @@ bool target_ppc64(void);
+  */
+ bool target_s390x(void);
  
- config DESIGNWARE_I2C
-     bool
--    select REGISTER
-+    select HW_REGISTER
-     select I2C
++/**
++ * target_is_base_riscv:
++ * @ti: TargetInfo to inspect
++ *
++ * Returns whether @ti is RISC-V 32-bit or 64-bit.
++ */
++bool target_is_base_riscv(const TargetInfo *ti);
++
++/**
++ * target_base_riscv:
++ *
++ * Returns whether the target architecture is RISC-V 32-bit or 64-bit.
++ */
++bool target_base_riscv(void);
++
++/**
++ * target_is_riscv32:
++ * @ti: TargetInfo to inspect
++ *
++ * Returns whether @ti is RISC-V 32-bit.
++ */
++bool target_is_riscv32(const TargetInfo *ti);
++
+ /**
+  * target_riscv32:
+  *
+- * Returns whether the target architecture is riscv32
++ * Returns whether the target architecture is RISC-V 32-bit.
+  */
+ bool target_riscv32(void);
  
- config ACPI_SMBUS
-diff --git a/hw/usb/Kconfig b/hw/usb/Kconfig
-index e8c00f813a6..43771291a06 100644
---- a/hw/usb/Kconfig
-+++ b/hw/usb/Kconfig
-@@ -137,7 +137,7 @@ config IMX_USBPHY
- config USB_DWC3
-     bool
-     select USB_XHCI_SYSBUS
--    select REGISTER
-+    select HW_REGISTER
++/**
++ * target_is_riscv64:
++ * @ti: TargetInfo to inspect
++ *
++ * Returns whether @ti is RISC-V 64-bit.
++ */
++bool target_is_riscv64(const TargetInfo *ti);
++
+ /**
+  * target_riscv64:
+  *
+- * Returns whether the target architecture is riscv64
++ * Returns whether the target architecture is RISC-V 64-bit.
+  */
+ bool target_riscv64(void);
  
- config XLNX_USB_SUBSYS
-     bool
+diff --git a/target-info.c b/target-info.c
+index 6e66f48e1ff..6d57cad5d33 100644
+--- a/target-info.c
++++ b/target-info.c
+@@ -96,9 +96,9 @@ bool target_big_endian(void)
+     return target_endian_mode() == ENDIAN_MODE_BIG;
+ }
+ 
+-bool target_base_arm(void)
++bool target_is_base_arm(const TargetInfo *ti)
+ {
+-    switch (target_arch()) {
++    switch (ti->target_arch) {
+     case SYS_EMU_TARGET_ARM:
+     case SYS_EMU_TARGET_AARCH64:
+         return true;
+@@ -107,19 +107,34 @@ bool target_base_arm(void)
+     }
+ }
+ 
++bool target_base_arm(void)
++{
++    return target_is_base_arm(target_info());
++}
++
++bool target_is_arm(const TargetInfo *ti)
++{
++    return ti->target_arch == SYS_EMU_TARGET_ARM;
++}
++
+ bool target_arm(void)
+ {
+-    return target_arch() == SYS_EMU_TARGET_ARM;
++    return target_is_arm(target_info());
++}
++
++bool target_is_aarch64(const TargetInfo *ti)
++{
++    return ti->target_arch == SYS_EMU_TARGET_AARCH64;
+ }
+ 
+ bool target_aarch64(void)
+ {
+-    return target_arch() == SYS_EMU_TARGET_AARCH64;
++    return target_is_aarch64(target_info());
+ }
+ 
+-bool target_base_ppc(void)
++bool target_is_base_ppc(const TargetInfo *ti)
+ {
+-    switch (target_arch()) {
++    switch (ti->target_arch) {
+     case SYS_EMU_TARGET_PPC:
+     case SYS_EMU_TARGET_PPC64:
+         return true;
+@@ -128,27 +143,73 @@ bool target_base_ppc(void)
+     }
+ }
+ 
++bool target_base_ppc(void)
++{
++    return target_is_base_ppc(target_info());
++}
++
++bool target_is_ppc(const TargetInfo *ti)
++{
++    return ti->target_arch == SYS_EMU_TARGET_PPC;
++}
++
+ bool target_ppc(void)
+ {
+-    return target_arch() == SYS_EMU_TARGET_PPC;
++    return target_is_ppc(target_info());
++}
++
++bool target_is_ppc64(const TargetInfo *ti)
++{
++    return ti->target_arch == SYS_EMU_TARGET_PPC64;
+ }
+ 
+ bool target_ppc64(void)
+ {
+-    return target_arch() == SYS_EMU_TARGET_PPC64;
++    return target_is_ppc64(target_info());
++}
++
++bool target_is_s390x(const TargetInfo *ti)
++{
++    return ti->target_arch == SYS_EMU_TARGET_S390X;
+ }
+ 
+ bool target_s390x(void)
+ {
+-    return target_arch() == SYS_EMU_TARGET_S390X;
++    return target_is_s390x(target_info());
++}
++
++bool target_is_base_riscv(const TargetInfo *ti)
++{
++    switch (ti->target_arch) {
++    case SYS_EMU_TARGET_RISCV32:
++    case SYS_EMU_TARGET_RISCV64:
++        return true;
++    default:
++        return false;
++    }
++}
++
++bool target_base_riscv(void)
++{
++    return target_is_base_riscv(target_info());
++}
++
++bool target_is_riscv32(const TargetInfo *ti)
++{
++    return ti->target_arch == SYS_EMU_TARGET_RISCV32;
+ }
+ 
+ bool target_riscv32(void)
+ {
+-    return target_arch() == SYS_EMU_TARGET_RISCV32;
++    return target_is_riscv32(target_info());
++}
++
++bool target_is_riscv64(const TargetInfo *ti)
++{
++    return ti->target_arch == SYS_EMU_TARGET_RISCV64;
+ }
+ 
+ bool target_riscv64(void)
+ {
+-    return target_arch() == SYS_EMU_TARGET_RISCV64;
++    return target_is_riscv64(target_info());
+ }
 -- 
 2.52.0.windows.1
 
