@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCC71C98311
-	for <qemu-riscv@archiver.kernel.org>; Wed, 23 Sep 2026 13:35:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A172C98302
+	for <qemu-riscv@archiver.kernel.org>; Wed, 23 Sep 2026 13:35:39 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x9Mzx-0003lo-9V; Wed, 23 Sep 2026 09:26:57 -0400
+	id 1x9Mzx-0003mD-Be; Wed, 23 Sep 2026 09:26:57 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1x9Mv4-00037i-JK
- for qemu-riscv@nongnu.org; Wed, 23 Sep 2026 09:22:00 -0400
-Received: from mail-dy2-x0f.google.com ([2607:f8b0:4864:36::f])
+ id 1x9Mvs-0004K2-Kz
+ for qemu-riscv@nongnu.org; Wed, 23 Sep 2026 09:22:48 -0400
+Received: from mail-dy2-x10.google.com ([2607:f8b0:4864:36::10])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1x9Mv2-0007d6-Ed
- for qemu-riscv@nongnu.org; Wed, 23 Sep 2026 09:21:53 -0400
-Received: by mail-dy2-x0f.google.com with SMTP id
- 5a478bee46e88-33bfb26865fso752660eec.2
- for <qemu-riscv@nongnu.org>; Wed, 23 Sep 2026 06:21:50 -0700 (PDT)
+ id 1x9Mvr-0007km-7i
+ for qemu-riscv@nongnu.org; Wed, 23 Sep 2026 09:22:44 -0400
+Received: by mail-dy2-x10.google.com with SMTP id
+ 5a478bee46e88-328664dbe2dso384604eec.0
+ for <qemu-riscv@nongnu.org>; Wed, 23 Sep 2026 06:22:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1790169710; x=1790774510; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1790169752; x=1790774552; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=RGdh00utr6Q+OpO6+8fa0s0hS8SKHylDK/Tx/Y6cmu0=;
- b=cDDfpBCySBH32oiRMbbc3wET7+qAmSUbgRgPbREKfLnwc8Zx+7WVgGLof5BQPPrZxI
- eU98aNmX3P9/z5jzjdUjnfMB60sSF2uu1Wb4jmf0xj+7zPNuVdKKqspWUc+JSvIDvk7n
- dDlZHS8+M/3PLQNkysmhzIB0QL/dODTpTWZJdNgV1OQ2hrBaq/mvYR90hcSKPQK6vGV+
- YcQsaQVj+V3o6z8TdOlxBj8M0GGDZjvocOA50pZA/X0XVA89hHcVrCvX/SKVzZflQQCf
- BuG8y1akNEzv4pHoJAJz52vSR4ESpsNwTlj9ij/W4FWKI/EGG2s+GeecRznq2642U1XX
- GlQw==
+ bh=WqXX4SX3rjdHTToJvg98g4i7PWcyKUf7129uvkL7/uk=;
+ b=A3ubRTPFXn+gaF+WSe23G+iYOx5xI/zlN5xfU4teR70rvQOHq/duPa3UbtUTW0IoHY
+ Cy/1p0ON+FfPJFB/qgcq7JMvBH+kbIDivYLDMvM+5XYqttpmsLCbOE01aumu3DHlenB2
+ ICwOlcNFBowwrymRCKZ0E5Nn8f431qOR+0dhnGwaLM9tWuANjDFC5rdTl8UM2G22Oyrv
+ VurbRj11+9Q/VTJS1w3KYe3ayywUNpVmB7nepsj5xy3ll4is4RecC7J/NXMLKILOIdm8
+ HLNmBNmuJBpDA5igCK2Gyhce8Xtsx70iiWP2CNoo3qmODGg0tnS4qiHuUclg17aHYyqM
+ p77A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790169710; x=1790774510;
+ d=1e100.net; s=20260707; t=1790169752; x=1790774552;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=RGdh00utr6Q+OpO6+8fa0s0hS8SKHylDK/Tx/Y6cmu0=;
- b=OqokAd6+N2dQ5xlcDvmJ2x+RiC2oXpi/uBCq+ay80o4zOkghCgU45zX4sPXVtTOonv
- CT6uHk42r4TYGYfF/9d5Vso/2GlbPHoz3ZC/9Y/pk7b/QLRUZT5VsH0RJqx6vUC+q1RR
- HeDauaKMf7Ggw8EEsNW9oyTq8MasqCgzPcUDoTr69vwy6QtdCsCQu0j+0q4+IhwHm6Xq
- 2kwg0v3G+V8wzvUJ5O+mtuD/6IkwetfWgj0bn6tZ50rAkP/eBZ2OBFMYiZcPiNnYKXDt
- 72Sb1X8o+g9Oc2f6tLtXRon3931aJoGUUZvEYN4m6ZpHYArWWnjI9REM1pcPzzKsg9Ux
- UYOw==
+ bh=WqXX4SX3rjdHTToJvg98g4i7PWcyKUf7129uvkL7/uk=;
+ b=sUGPE7+THkT2tISmSz0NVbh33hpDnanGfN9MkazZWphHaeAbBcQN3Bh0J5S819EiGK
+ eS/so+y1kDDzAGfj0XV4oGCr1sfWUhIm6peTrMbf4fqtkpsturavgROykOvwNlpTxfna
+ MxgrdWn+imesxbNnaGjVbbrX/oGYeWxebiNUZsdlWNABT3EjLXE/gK4IwtbmbY6O2ibw
+ SBH5AH4ubsijMhAahjkdS+bgts6CUNHm/reQQgTJIquuwFmjr3puUFFidunXFh0Oie4s
+ ZXuSb8U0dGsxLISG2hmJRuUkzuJNeQLgQa0cD6/MVLZfBF+1LyhI+xrCZjBA8wf2FKmH
+ eghg==
 X-Forwarded-Encrypted: i=1;
- AKwUvBxaHDslHvc+mqWLY9m6/iwBQxO7uCmOYBOIGc8RcBkuf8jCeaozq8+IQDnyv58B5onp0/EDaBY6IoIb@nongnu.org
-X-Gm-Message-State: AFuF++m7wVQ5leO0BS5bahiDROQlXYt171yrpDVcqrDUuc7NWKhFQXKY
- H6G5et34t1IY8IWf3FFV/rbixZyk+ZybDp8X2h/kxKiqpTbBv2eCeeXC
-X-Gm-Gg: AYBFou1jJT9y9Nr2P6ko56OVteRXHAml2Dptvsmk3Vl4f5ZpVNG7y/Qu6sluU0DOuBC
- w/0J5B5xia43q9oHCKmsUxUfp1QvLFG0CbjNfmahuHN7Vfv9Gvy49Vd+/jng23LQQYtCG0AY9oR
- CdmJj8oC2eJjO/4M3rYscZynfq+zZDzePw0o0fdIyHQfsZaebU0/k+5AbTlNr0y5eM7EsXn93BR
- 1C8s9IeCSl1adhDaym8hfG2jt0QspHA+OQJvRxtfWgjxPWhvikN+jt/zLshOzvE2aRDi30/fCH6
- RTbBAsGlR8/VzSXbg4HHLnR3JiMxxqOM59Zg7ZOZ5aUZ9NY8tRbH2Q9sEPd4D3pqtKFpqtBhMoJ
- I7T5wor+r3p3cYt+z95Zgu8PAKFAp2aF5tgqRmhkNCxw6/9E4i7hZPNCbAuk+LFwd3iS/sm5Fur
- GgMI2QgS/MUQ58fzcygAutmDl79olWN/l4G1qRODSSN80bcUQKT+GWRNOP8sDXRUnjoq9v736i3
- mOFfIka9RmVlmWkd/1QcrD+LCgkpnA=
-X-Received: by 2002:a05:693c:88d4:10b0:33b:dcbc:6046 with SMTP id
- 5a478bee46e88-33e8bc70ee6mr2596067eec.7.1790169709341; 
- Wed, 23 Sep 2026 06:21:49 -0700 (PDT)
+ AKwUvBzMIAHkAog1sjj+ktg8x+jDsS8aK7BZujjVfV4qOQQSALitrSPlYWt5kwpax8xP6vgJOSG1iJXmxxcp@nongnu.org
+X-Gm-Message-State: AFuF++nfl+3DcsF+WwHXYKM0SVu+FWkppn4JtdIj+1vC8zevPv3j8XyZ
+ 8W3Sjqt2enNEkONtCDDlt/ONk+c87Fcc982c28P3a87aubg6I70XfRVO
+X-Gm-Gg: AYBFou0R5lIxbwA37R05st5FjGISlrHQLSS4TQY13xrSYAgt4wkWhj+7BKXMFz+zYTz
+ mly48ks1VR3JFbibu9lRToDFBBxNax+SKZJmBU3RTeAgEXRw6B82tbqYMyfyy9eWoj8WzMDAslX
+ 1TfGj8pt0YxdMpjxuD7iq01tK92HorYQQtrHde1JsKPdGxXabRWDsZq35BMtIYMmVasnlVDFWdi
+ b4LhvMYeK6G3XmoeAwWZkq+8RrdoX9Zjc7zIeKSoq8/MW1zBPAFZ/EdPTRXXKlNqLvHnf3exC1K
+ 3Q+op691whcze+E7Lz8XCl5WWoRXAfjKJy+i/GvZSPrzhI9mOUFlDJ5c1UOOpXNogNR0z85YHwZ
+ 2Fbpi0gsbvdPgV1w/owIcVPPTZAEy/lzi1susQJ7P60meqHUzRoEoDRAkqWlorLMVddEYfeK5MY
+ S+UcBgJFvA6aaGpmUb3qS3AvmoYKpELBSvjFnt1pWz90pi08H6YgS09XW0YS5FVGRkx98UdhkC+
+ oqXNjJiIYeuZrog
+X-Received: by 2002:a05:693c:8814:20b0:33e:5e42:e0f9 with SMTP id
+ 5a478bee46e88-33e7a4d6cd5mr2603893eec.6.1790169751387; 
+ Wed, 23 Sep 2026 06:22:31 -0700 (PDT)
 Received: from WIN-BH9M8FJACR9 ([103.94.185.75])
  by smtp.googlemail.com with ESMTPSA id
- 5a478bee46e88-33e97236754sm5553695eec.29.2026.09.23.06.21.41
+ 5a478bee46e88-33e97236754sm5553695eec.29.2026.09.23.06.22.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Sep 2026 06:21:48 -0700 (PDT)
+ Wed, 23 Sep 2026 06:22:30 -0700 (PDT)
 From: Yonggang Luo <luoyonggang@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: Cornelia Huck <cohuck@redhat.com>, xen-devel@lists.xenproject.org,
@@ -97,22 +97,23 @@ Cc: Cornelia Huck <cohuck@redhat.com>, xen-devel@lists.xenproject.org,
  Markus Armbruster <armbru@redhat.com>, Weiwei Li <liwei1518@gmail.com>,
  Song Gao <17746591750@163.com>, qemu-arm@nongnu.org, qemu-s390x@nongnu.org,
  Brian Cain <brian.cain@oss.qualcomm.com>
-Subject: [PATCH v3 029/114] hw/intc: send IMSIC MSI via kvm_irqchip_send_msi()
-Date: Wed, 23 Sep 2026 21:15:03 +0800
-Message-ID: <20260923131635.1894-30-luoyonggang@gmail.com>
+Subject: [PATCH v3 034/114] target/riscv: Include migration/vmstate.h instead
+ of migration/cpu.h in machine.c
+Date: Wed, 23 Sep 2026 21:15:08 +0800
+Message-ID: <20260923131635.1894-35-luoyonggang@gmail.com>
 X-Mailer: git-send-email 2.52.0.windows.1
 In-Reply-To: <20260923131635.1894-1-luoyonggang@gmail.com>
 References: <20260923131635.1894-1-luoyonggang@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:36::f;
- envelope-from=luoyonggang@gmail.com; helo=mail-dy2-x0f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:36::10;
+ envelope-from=luoyonggang@gmail.com; helo=mail-dy2-x10.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -128,42 +129,26 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-- Drop the CONFIG_KVM ioctl path and call kvm_irqchip_send_msi() when
-  KVM and an in-kernel irqchip are enabled.
----
- hw/intc/riscv_imsic.c | 16 ++++++----------
- 1 file changed, 6 insertions(+), 10 deletions(-)
+already uses fixed-width VMSTATE_* macros and does not need TARGET_LONG_BITS UINTTL helpers.
 
-diff --git a/hw/intc/riscv_imsic.c b/hw/intc/riscv_imsic.c
-index 30fb60cc312..033b7813060 100644
---- a/hw/intc/riscv_imsic.c
-+++ b/hw/intc/riscv_imsic.c
-@@ -311,19 +311,15 @@ static void riscv_imsic_write(void *opaque, hwaddr addr, uint64_t value,
-         goto err;
-     }
- 
--#if defined(CONFIG_KVM)
--    if (kvm_irqchip_in_kernel()) {
--        struct kvm_msi msi;
--
--        msi.address_lo = extract64(imsic->mmio.addr + addr, 0, 32);
--        msi.address_hi = extract64(imsic->mmio.addr + addr, 32, 32);
--        msi.data = le32_to_cpu(value);
--
--        kvm_vm_ioctl(kvm_state, KVM_SIGNAL_MSI, &msi);
-+    if (kvm_enabled() && kvm_irqchip_in_kernel()) {
-+        MSIMessage msg = {
-+            .address = imsic->mmio.addr + addr,
-+            .data = (uint32_t)value,
-+        };
- 
-+        kvm_irqchip_send_msi(kvm_state, msg);
-         return;
-     }
--#endif
- 
-     /* Writes only supported for MSI little-endian registers */
-     page = addr >> IMSIC_MMIO_PAGE_SHIFT;
+Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
+---
+ target/riscv/machine.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+index bf203bffcef..00805745fbf 100644
+--- a/target/riscv/machine.c
++++ b/target/riscv/machine.c
+@@ -21,7 +21,7 @@
+ #include "qemu/error-report.h"
+ #include "system/kvm.h"
+ #include "system/tcg.h"
+-#include "migration/cpu.h"
++#include "migration/vmstate.h"
+ #include "exec/icount.h"
+ #include "target/riscv/tcg/debug.h"
+ #ifdef CONFIG_KVM
 -- 
 2.52.0.windows.1
 
