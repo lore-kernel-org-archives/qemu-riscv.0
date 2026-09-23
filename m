@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41CE2C9830C
-	for <qemu-riscv@archiver.kernel.org>; Wed, 23 Sep 2026 13:20:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD107C982FA
+	for <qemu-riscv@archiver.kernel.org>; Wed, 23 Sep 2026 13:20:20 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x9MtQ-0001Nt-BF; Wed, 23 Sep 2026 09:20:12 -0400
+	id 1x9MtM-0001CN-QC; Wed, 23 Sep 2026 09:20:08 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1x9Mr9-00008S-7Q
- for qemu-riscv@nongnu.org; Wed, 23 Sep 2026 09:17:56 -0400
-Received: from mail-dy2-x24.google.com ([2607:f8b0:4864:36::24])
+ id 1x9Mqf-0008QM-HJ
+ for qemu-riscv@nongnu.org; Wed, 23 Sep 2026 09:17:24 -0400
+Received: from mail-dy2-x10.google.com ([2607:f8b0:4864:36::10])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1x9Mqv-0006on-1D
- for qemu-riscv@nongnu.org; Wed, 23 Sep 2026 09:17:46 -0400
-Received: by mail-dy2-x24.google.com with SMTP id
- 5a478bee46e88-33b9e805130so667922eec.1
- for <qemu-riscv@nongnu.org>; Wed, 23 Sep 2026 06:17:36 -0700 (PDT)
+ id 1x9Mqc-0006mY-MO
+ for qemu-riscv@nongnu.org; Wed, 23 Sep 2026 09:17:21 -0400
+Received: by mail-dy2-x10.google.com with SMTP id
+ 5a478bee46e88-33b9e805130so667671eec.1
+ for <qemu-riscv@nongnu.org>; Wed, 23 Sep 2026 06:17:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1790169456; x=1790774256; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1790169436; x=1790774236; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=ElUpYvhknnIwSPfbcSK8wY490g/9t35RPhM2WyomKNg=;
- b=lbK/NVRk36tdEvYYVWBEm6GNOgkZwMj1jUVOI86Dl51L3KyvNgcfAwaoLc6tetQ3pG
- C4AobTIEw4yciB9FakFGgaMLUboVuAUClB1H2psQiOywZDw43gxeoa9xyGWFm5H69jif
- YnYwT1qqR1JBKkBcRL74V8vUNT99LwIhMhDfV5XrJOk0VbjUC+/Yog+M8t8vnzvmzQva
- fy+ydk174CoezTBHL5knhCXmPpWcmYscIaQLtWRynfomf/fLFl9cY2ehPTWNH7hlw/Nz
- qUBaeUZUqOvqUuq76gbaUq4DfVlP9ViB60JIe2dRWfa7MKFP++jxMBgpOz+Hbx8BpoD1
- +qbw==
+ bh=t43puSbRZc523NBj9nQXSYWDHrWaj0cvHGn4qE6n+xk=;
+ b=NNPybJImWWpGcZ+N5Vgr6S6xsqUFSat7rC4pyXEkZbsxeLBAOVgpV8BxXTv8Up8LHy
+ OEp2g85FciNmtOFOfe2BRU72Dno3k+D4zi6cDIdwplDtJu6Ywj50NWlKMu8EeGAocVm+
+ C9W9Nfsb1FrztQggYk6qeS52D5v1AnrfcsB/y1/4/tMWHcbn6jhXnqxi1v+/xX3wkuj4
+ cUHhr3d2oBoj8KkA/6Uc4R/FbDfrQimPnkGweNLZjHG+8MtkY8Se42dxkmai1xWsmUDp
+ 9Je+gdzEpkh+EuoJLSR1sh868Ft+mkYzjz0LN+24f4KsXsuJc7FniE9OEALSDucwZrzA
+ HqJQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790169456; x=1790774256;
+ d=1e100.net; s=20260707; t=1790169436; x=1790774236;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=ElUpYvhknnIwSPfbcSK8wY490g/9t35RPhM2WyomKNg=;
- b=Zw6PytcicMqgt5dbFYAJWMZxs7osxGXRDsS+IkPYHDmSkg/tX7P5KAh2va8bI/SYLt
- fmgT30xJVGP4QIAoO+aCgkUxIQf5EZU4MniWddVzCEsPNa3hIH5I7DRxfJK9zMDKWzuz
- DQYrKzsiV25+ZmjyeBKwBYnA9TazhtkTgOTIt5J0acxbsESbB24/x7i1o/0gyYBT8emg
- n8s/ka4Cfjh7Edi4xBVaKy/6l6WYNBensZkzH0/LF2Yuz8yrjsxI6Y1JC0BPyObKWTFY
- oC3oDlKa3sopEhtbIvWih2papP6E0oa5ckmLMGAIJThoH9TtcYrLpg4htisasOSMpd3+
- /HoQ==
+ bh=t43puSbRZc523NBj9nQXSYWDHrWaj0cvHGn4qE6n+xk=;
+ b=n1r7XsyUdUxssIfbsaMt14O9gkQqlqkmke6DB05qB6DOpcOn4rE8UyGNKqC79BCW8u
+ D2LyZOB/mfcE66NvgZw79lFAiuYCRUcbD5r6zxYFhJCVgw1UmA8bHECD5qroLzVwJC42
+ z/5eXULijqXaB4L9RsPGeq0na6E7SBgB9TE4fR658xGli4gGun5Sv4hYEzwKaRVQiTQl
+ qYA18l0e5Y0loRRg96pCqizu1xmvWvTW+4+MUFxlc0Cg3KcndfZiInlvQs4aQNbjrelO
+ ZwOQaLq5YZ2r4hm11E2mKyKO82yXNgd6+FxqpNEOmTnQi9fRuwL4gpjYBxWhGTZhDPyL
+ H1Vg==
 X-Forwarded-Encrypted: i=1;
- AKwUvByCJfnwceOgp4sszPAhxas+f4Pgvk2ErFxA3pcwWRIcNIfK2Fm4jluasVoVMVfkqbhHJ+fZoNkNwp3Y@nongnu.org
-X-Gm-Message-State: AFuF++kIvOu2iyIfTUveHIYwp0E8IIr5H6hDsTlo9dHLoVBRgQsj9CPP
- GIWpaIl4BKpLO2SV5h+AUEH57ugaxs5CiYRCa+rCTVUCuEfQb6GSTTXp
-X-Gm-Gg: AYBFou2CAU6ePxhv4zcKsBWXhq9JePhrzNnUdGya4amHmr2g8nem3qv4954oXMNKFg2
- MYfQ9MAqdk/sVXRVmj832r6VKDA2HxU9RUQAuBq0Is72sVZPMrqEkFCpBt+MzXGxd2D8Ejff05c
- kNxyfijfW8sdFz9Hjt39tjTc3vey5ST4Nl9RZP0Z98xoW03RM4Rm4+OKFLJRfOM0hpSUWQ/+AM8
- N1nkATZ0Y3fXGdZPdWC6yRSOzdvwri3SwfCX1R5lOMYRVd857aTYr4B8bchU1u/RmbVMrwBfOxi
- EZNfW6sZ/oKZ4rlAkEqX5CH6pDnXFMPXYEBEmcif82csMdab94EavJ/tH6Fvj97DtqVUJtYACjj
- AEttAqvw1ApineFNmn5ZooH1q9CYViNSjmE0q/SHPIjtZspf9dVv+29GaL17GW66wt0y6O5yD1K
- R3MdHMtj3eZCDaAUoKRpGoHru6dwTlGFmyk+1OqvzIJe67h9o/KX+HUCnmva3Mioe4iYPGMPMGv
- imTBCLtYW7skcFIrmdYMFTW9LP//iJF4S7BxOZtyA==
-X-Received: by 2002:a05:7300:b286:b0:30e:f0a5:8762 with SMTP id
- 5a478bee46e88-33e8d9ca3c8mr2607807eec.19.1790169455486; 
- Wed, 23 Sep 2026 06:17:35 -0700 (PDT)
+ AKwUvBy5p/FN1LvuDHuaKcsQRh/xkECN7v6jK/ixRTU6YJERCdpgAUdu/X0g5Dg8WVjlP3r72QFNHoZrL+UQ@nongnu.org
+X-Gm-Message-State: AFuF++l7NMzEtLv3B6ps1M4JH7d/m1aOlRss8HHRhVBm3+xrhVMloNuu
+ kB5tMO0GksrriOuVHZpcDqhyH40KjLDnJ3hJRLLILPPmy6Yll2wcSq5n
+X-Gm-Gg: AYBFou2WF01R1n1aWbK1wm5HIbjhDQ0fzNRu6RdAIhkQvnrq+RO+IywgDDA2Y9YnWUv
+ GU71CNSxAcsgkbfH1kY6yANn8M1+IR3dA/EbZ2Pze9DNwkmfnaKEbDw6+WGH6417GaYfEKUAF8z
+ /+uWaT/DOmMVuYo+BBSOUc36K9LS+Tu27ty08ed5f3XZi9Hf3j21c5wUftI+5RCvPmzcexuDW9t
+ feoooR4vuGGK8/1SZPeKB3e3sfh3r27dmgMAf0Pl7Q0TF/i5YHLmpZnqKJ4DZg9MQ208xB08q3K
+ 3xhsmc5U4A06DEocA46Iv4ax24qeB4emSm5HwMUDgrbB0umjIeTBeq0zyRirwmk/HPdVwEYVp9N
+ wMmTDReKi6ERETSPuIf+pDdZAAnSjlUTNOX/HTUwY1GQJOJvjIgYeYwii2FuHb0HyEwfW2lYDpW
+ gs46gh08wQEI53S9GTTsr05q8JItV01ATuRzxV71jHlRuUWWQdgc4MJtBszRlULqXUAWj3IwWmO
+ XH6uiMC0vsmw/5q0Aol2ma6vkfqtqc=
+X-Received: by 2002:a05:7300:8818:b0:338:2485:ad03 with SMTP id
+ 5a478bee46e88-33e8c53c0d4mr2821124eec.16.1790169436068; 
+ Wed, 23 Sep 2026 06:17:16 -0700 (PDT)
 Received: from WIN-BH9M8FJACR9 ([103.94.185.75])
  by smtp.googlemail.com with ESMTPSA id
- 5a478bee46e88-33e97236754sm5553695eec.29.2026.09.23.06.17.27
+ 5a478bee46e88-33e97236754sm5553695eec.29.2026.09.23.06.17.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Sep 2026 06:17:33 -0700 (PDT)
+ Wed, 23 Sep 2026 06:17:14 -0700 (PDT)
 From: Yonggang Luo <luoyonggang@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: Cornelia Huck <cohuck@redhat.com>, xen-devel@lists.xenproject.org,
@@ -97,16 +97,17 @@ Cc: Cornelia Huck <cohuck@redhat.com>, xen-devel@lists.xenproject.org,
  Markus Armbruster <armbru@redhat.com>, Weiwei Li <liwei1518@gmail.com>,
  Song Gao <17746591750@163.com>, qemu-arm@nongnu.org, qemu-s390x@nongnu.org,
  Brian Cain <brian.cain@oss.qualcomm.com>
-Subject: [PATCH v3 005/114] target-info: set cpu_type from TARGET_BASE_ARCH
-Date: Wed, 23 Sep 2026 21:14:39 +0800
-Message-ID: <20260923131635.1894-6-luoyonggang@gmail.com>
+Subject: [PATCH v3 003/114] target-info: rename target-info-stub.c in
+ target-info-def.c
+Date: Wed, 23 Sep 2026 21:14:37 +0800
+Message-ID: <20260923131635.1894-4-luoyonggang@gmail.com>
 X-Mailer: git-send-email 2.52.0.windows.1
 In-Reply-To: <20260923131635.1894-1-luoyonggang@gmail.com>
 References: <20260923131635.1894-1-luoyonggang@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:36::24;
- envelope-from=luoyonggang@gmail.com; helo=mail-dy2-x24.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:36::10;
+ envelope-from=luoyonggang@gmail.com; helo=mail-dy2-x10.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -128,144 +129,36 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-target-info-def.c no longer includes cpu.h, so CPU_RESOLVING_TYPE
-is unavailable. Emit TARGET_BASE_ARCH as an uppercase identifier in
-config-target.h and set cpu_type to TYPE_${TARGET_BASE_ARCH}_CPU.
+From: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
 
-Alias the base-arch tokens whose QOM name differs: TYPE_I386_CPU,
-TYPE_OR1K_CPU, TYPE_PPC_CPU, TYPE_S390X_CPU, and TYPE_SH4_CPU.
+Now it's the only file left to define target info, we call it def to
+make the intent more clear.
 
-Drop the ArchCPU parent_obj and env offsetof checks with the cpu.h
-include. Page-size checks stay, via cpu-param.h.
-
+Signed-off-by: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
 Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
 ---
- include/qemu/target-info-def.h |  2 +-
- meson.build                    |  1 +
- target-info-def.c              | 11 +++--------
- target/i386/cpu-qom.h          |  1 +
- target/or1k/cpu-qom.h          |  1 +
- target/ppc/cpu-qom.h           |  1 +
- target/s390x/cpu-qom.h         |  1 +
- target/sh4/cpu-qom.h           |  1 +
- 8 files changed, 10 insertions(+), 9 deletions(-)
+ meson.build                             | 2 +-
+ target-info-stub.c => target-info-def.c | 0
+ 2 files changed, 1 insertion(+), 1 deletion(-)
+ rename target-info-stub.c => target-info-def.c (100%)
 
-diff --git a/include/qemu/target-info-def.h b/include/qemu/target-info-def.h
-index 8019d2c7196..ebd88463aea 100644
---- a/include/qemu/target-info-def.h
-+++ b/include/qemu/target-info-def.h
-@@ -19,7 +19,7 @@ typedef struct TargetInfo {
-     SysEmuTarget target_arch;
-     /* runtime equivalent of TARGET_LONG_BITS definition */
-     unsigned long_bits;
--    /* runtime equivalent of CPU_RESOLVING_TYPE definition */
-+    /* runtime equivalent of TYPE_${TARGET_BASE_ARCH}_CPU definition */
-     const char *cpu_type;
-     /* related to TARGET_BIG_ENDIAN definition */
-     EndianMode endianness;
 diff --git a/meson.build b/meson.build
-index 8bd2d725ca0..20345860c9f 100644
+index f412d917d94..8bd2d725ca0 100644
 --- a/meson.build
 +++ b/meson.build
-@@ -3378,6 +3378,7 @@ foreach target : target_dirs
-       # Note that TARGET_BASE_ARCH ends up in config-target.h but it is
-       # not used to select files from sourcesets.
-       config_target_data.set('TARGET_' + v.to_upper(), 1)
-+      config_target_data.set(k, v.to_upper())
-     elif k == 'TARGET_NAME' or k == 'CONFIG_QEMU_INTERP_PREFIX'
-       config_target_data.set_quoted(k, v)
-     elif v == 'y'
-diff --git a/target-info-def.c b/target-info-def.c
-index fa19cabc55f..f167f5f2ac1 100644
---- a/target-info-def.c
-+++ b/target-info-def.c
-@@ -10,15 +10,10 @@
- #include "qemu/target-info.h"
- #include "qemu/target-info-def.h"
- #include "qemu/target-info-init.h"
--#include "hw/core/boards.h"
--#include "cpu.h"
--#include "exec/cpu-defs.h"
-+#include "cpu-qom.h"
-+#include "cpu-param.h"
- #include "exec/page-vary.h"
+@@ -4330,7 +4330,7 @@ foreach target : target_dirs
+     endif
+   endif
  
--/* Validate correct placement of CPUArchState. */
--QEMU_BUILD_BUG_ON(offsetof(ArchCPU, parent_obj) != 0);
--QEMU_BUILD_BUG_ON(offsetof(ArchCPU, env) != sizeof(CPUState));
--
- /* Validate target page size, if invariant. */
- #ifndef TARGET_PAGE_BITS_VARY
- QEMU_BUILD_BUG_ON(TARGET_PAGE_BITS < TARGET_PAGE_BITS_MIN);
-@@ -28,7 +23,7 @@ static const TargetInfo target_info_stub = {
-     .target_name = TARGET_NAME,
-     .target_arch = glue(SYS_EMU_TARGET_, TARGET_ARCH),
-     .long_bits = TARGET_LONG_BITS,
--    .cpu_type = CPU_RESOLVING_TYPE,
-+    .cpu_type = glue(TYPE_, glue(TARGET_BASE_ARCH, _CPU)),
-     .endianness = TARGET_BIG_ENDIAN ? ENDIAN_MODE_BIG : ENDIAN_MODE_LITTLE,
- #ifdef TARGET_PAGE_BITS_VARY
-     .page_bits_vary = true,
-diff --git a/target/i386/cpu-qom.h b/target/i386/cpu-qom.h
-index d4e216d000c..7619c4a4826 100644
---- a/target/i386/cpu-qom.h
-+++ b/target/i386/cpu-qom.h
-@@ -27,6 +27,7 @@
- #else
- #define TYPE_X86_CPU "i386-cpu"
- #endif
-+#define TYPE_I386_CPU TYPE_X86_CPU
+-  arch_srcs += files('target-info-stub.c')
++  arch_srcs += files('target-info-def.c')
  
- OBJECT_DECLARE_CPU_TYPE(X86CPU, X86CPUClass, X86_CPU)
- 
-diff --git a/target/or1k/cpu-qom.h b/target/or1k/cpu-qom.h
-index 14bac33312e..c0d5e9e81ba 100644
---- a/target/or1k/cpu-qom.h
-+++ b/target/or1k/cpu-qom.h
-@@ -12,6 +12,7 @@
- #include "hw/core/cpu.h"
- 
- #define TYPE_OPENRISC_CPU "or1k-cpu"
-+#define TYPE_OR1K_CPU TYPE_OPENRISC_CPU
- 
- OBJECT_DECLARE_CPU_TYPE(OpenRISCCPU, OpenRISCCPUClass, OPENRISC_CPU)
- 
-diff --git a/target/ppc/cpu-qom.h b/target/ppc/cpu-qom.h
-index 8247fa23367..428cdc85488 100644
---- a/target/ppc/cpu-qom.h
-+++ b/target/ppc/cpu-qom.h
-@@ -28,6 +28,7 @@
- #else
- #define TYPE_POWERPC_CPU "powerpc-cpu"
- #endif
-+#define TYPE_PPC_CPU TYPE_POWERPC_CPU
- 
- OBJECT_DECLARE_CPU_TYPE(PowerPCCPU, PowerPCCPUClass, POWERPC_CPU)
- 
-diff --git a/target/s390x/cpu-qom.h b/target/s390x/cpu-qom.h
-index c59bb1eab15..07a8c881fe5 100644
---- a/target/s390x/cpu-qom.h
-+++ b/target/s390x/cpu-qom.h
-@@ -23,6 +23,7 @@
- #include "hw/core/cpu.h"
- 
- #define TYPE_S390_CPU "s390x-cpu"
-+#define TYPE_S390X_CPU TYPE_S390_CPU
- 
- OBJECT_DECLARE_CPU_TYPE(S390CPU, S390CPUClass, S390_CPU)
- 
-diff --git a/target/sh4/cpu-qom.h b/target/sh4/cpu-qom.h
-index 6cf5fbb0745..08fa92106e9 100644
---- a/target/sh4/cpu-qom.h
-+++ b/target/sh4/cpu-qom.h
-@@ -23,6 +23,7 @@
- #include "hw/core/cpu.h"
- 
- #define TYPE_SUPERH_CPU "superh-cpu"
-+#define TYPE_SH4_CPU TYPE_SUPERH_CPU
- 
- #define TYPE_SH7750R_CPU SUPERH_CPU_TYPE_NAME("sh7750r")
- #define TYPE_SH7751R_CPU SUPERH_CPU_TYPE_NAME("sh7751r")
+   if target_base_arch in target_arch
+     t = target_arch[target_base_arch].apply(config_target, strict: false)
+diff --git a/target-info-stub.c b/target-info-def.c
+similarity index 100%
+rename from target-info-stub.c
+rename to target-info-def.c
 -- 
 2.52.0.windows.1
 
