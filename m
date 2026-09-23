@@ -4,132 +4,157 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9207C9830E
-	for <qemu-riscv@archiver.kernel.org>; Wed, 23 Sep 2026 17:19:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76410C98302
+	for <qemu-riscv@archiver.kernel.org>; Wed, 23 Sep 2026 17:19:58 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x9QWZ-0004ct-Vt; Wed, 23 Sep 2026 13:12:52 -0400
+	id 1x9Qav-0002Rn-9f; Wed, 23 Sep 2026 13:17:21 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1x9QWQ-0004Rs-5L
- for qemu-riscv@nongnu.org; Wed, 23 Sep 2026 13:12:42 -0400
+ id 1x9QXu-0006pN-3E
+ for qemu-riscv@nongnu.org; Wed, 23 Sep 2026 13:14:14 -0400
 Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1x9QWM-00019n-2h
- for qemu-riscv@nongnu.org; Wed, 23 Sep 2026 13:12:41 -0400
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+ id 1x9QXr-0001Qe-FH
+ for qemu-riscv@nongnu.org; Wed, 23 Sep 2026 13:14:13 -0400
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 68NGTlNq3665811
- for <qemu-riscv@nongnu.org>; Wed, 23 Sep 2026 17:12:27 GMT
+ 68NGU23T064335
+ for <qemu-riscv@nongnu.org>; Wed, 23 Sep 2026 17:14:00 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- J/A1qo79auMktV306/mjb70NRnck9MYGHu4ee3LXFWo=; b=Q4rneli9ZFElyNQE
- KnJ81vlgx8945zrENznprdXF6mXBVd+A6of0lMapYP2cseC1PFUw3vwYHhr/G1q3
- VcU9hekHBmvGnqQHaA+yyWPZri3pY2gi42EvHuHujswzOKelXXxxXOr80vpp/+pT
- 2HCl7xLUQJtmQzvZllW7HVRLQB6EFI8ivh3FDAgbUh0BCGpfbu5HBAZSeB3r1DWF
- vuHPQhaEDWLq4QyVxUMtSKGMJk3+lio6+t/cEnQkEzWFXc0saPcABmI4sEIUTvIX
- X28XNjmTU2D08fT0ImHXKBWdRpTwxZHah+tvL6tmc4YL8QSCm4blueMTzUHOPA7L
- QrCtoQ==
-Received: from mail-ua1-f71.google.com (mail-ua1-f71.google.com
- [209.85.222.71])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gvbwat1an-1
+ lW+1jiRUBpF2NHL9D17Hw5Js0SG7MzZxs3ZLjhXtYFI=; b=iPqV/t7AdrwnPZ+Q
+ P4hJxuSTrEhHP5iNgbTlnDpY+1roRzT+n9Sn/IzewNZmXn/rN/tF5V4197F9Mk5c
+ VIgqt/TxLfEb8UJyrPR7ldY1+kGKOcNPjxK4kuS1gz0FiUyjjFjY1cuQ9zcQSP0T
+ Iy5QbmuzBOO9GYdhc9js1GoUIuVivyGtlhGBVEgxJK9EWuAL4r2AxNTSfx5y7fSa
+ 0qOfZNWS19H9X63Dwf/NL9d8qU+lL6GlVjY4PZYYJ7Vrm4wf3KF+xMqmVNeEeydC
+ sl53VHgzLOPYWX+4bVLSWzdJ5AwCJ2sJlQQj6T32hF8GKvBg6SmHdHB1jV6r9vaE
+ wKs6Nw==
+Received: from mail-ua1-f69.google.com (mail-ua1-f69.google.com
+ [209.85.222.69])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gvfkbh1dx-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Wed, 23 Sep 2026 17:12:26 +0000 (GMT)
-Received: by mail-ua1-f71.google.com with SMTP id
- a1e0cc1a2514c-97e99aaaa6fso225377241.3
- for <qemu-riscv@nongnu.org>; Wed, 23 Sep 2026 10:12:26 -0700 (PDT)
+ for <qemu-riscv@nongnu.org>; Wed, 23 Sep 2026 17:14:00 +0000 (GMT)
+Received: by mail-ua1-f69.google.com with SMTP id
+ a1e0cc1a2514c-97e9cc5ac86so274650241.1
+ for <qemu-riscv@nongnu.org>; Wed, 23 Sep 2026 10:14:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1790183546; x=1790788346; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1790183640; x=1790788440; darn=nongnu.org;
  h=content-transfer-encoding:content-type:mime-version:references
  :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=J/A1qo79auMktV306/mjb70NRnck9MYGHu4ee3LXFWo=;
- b=S6Sb7Ya8dPOSWVEClZgRZB9jnfxQOe0MRkYC5oF5ym2S8+DlL6Y9JL/5pKtNcyr2JV
- aGr8HV4xbZtNXiQlOcsh68P77DkH7TwAeWtZfHcHAEieznf2pwR4q1gep8vMXtxzF4UJ
- gpex8bfk9G0qC6cwDMdxHO0or6GLDr3n1OntnM86JsSbYJNW2mio6LTB9pu0dGdov6H8
- nmUa1W/1txqk2S2hHJ1B6fcfDq+gCFaf72caABVvBoEoeCvAhM0NAYAIwUkjYJd/KtLk
- 9pTIUd1xbbyrvc2yEBnB3O5/gNZqhMO1rvlUTy1jTQ9z+tF9RyzKIRF2ygXr7zPYaddL
- mqrg==
+ bh=lW+1jiRUBpF2NHL9D17Hw5Js0SG7MzZxs3ZLjhXtYFI=;
+ b=SLpVPjjsYCDW0T0EbCzMMNcb0a7gPXzgExi5V6CjhsN2fjVmi8vu8V0iynKIwjMrGL
+ EX+NMHjnyUxCcD5q2+i5bxyXsHRVXz1NqhfY1Xm6exB5zsLfbzOA1xgDjl+4k3WOPUoV
+ uCE9Y2Fc4x8R8jY028LwqS38kygnr+0cIXWlb2j4WkubQYcdMam3zYSSttY4CEfwkGqU
+ qC8KWMr4Zw9+r6JFKoQz1JdFS3bPy98NNBsSDwXF0L9N42YBDuyz8PLUfOT2JYTc36/M
+ ATzj8SCnLMiGeOu1oFKWiChXp0+80HEmXAVLCZ9+h7H3VdOPs69HxAuZyub75tz0PXvS
+ o8Kg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790183546; x=1790788346;
+ d=1e100.net; s=20260707; t=1790183640; x=1790788440;
  h=content-transfer-encoding:content-type:mime-version:references
  :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=J/A1qo79auMktV306/mjb70NRnck9MYGHu4ee3LXFWo=;
- b=xjRQTY2YVZlbl5iQ+ttzQ0t2hH8YozmPUmRfQt4jjJt6wCa+kbI5e1wYdQ5rVoYjGF
- BKQTN936JhtrF2rS0p1LpZxe7icl0mVJNCL3OoimJRLJllgaVllVFA02+6OogpLAcK6C
- +EP3MrRd1Q99WUYa5Ob5gMa1OVMwG2voZJn7A2t40K0Gr0eNCJuM3nv0bt4CNeDmDPN8
- 3dff3sDb2AFKZMp0XmJ5m4KsHTnJYAvfWRLuUliJPIKiTimP3VG02T+oVU7hOLMrOX+7
- nbFPM8Slv0exRYXu8FdGXZcyGEUtx4d8a1wfO5J6LEjhyhi/Dx8ifyBr9WLXI3S+T6qH
- Az/g==
+ bh=lW+1jiRUBpF2NHL9D17Hw5Js0SG7MzZxs3ZLjhXtYFI=;
+ b=dSn2j3RSj/GHEbrGdBeb7YPMQ9goXICRpasQI/y4dC4GNgPx3KzPqI8RszlC+CmZV6
+ ghhIcNqza7zWZeoOGLRue/dEEy2TLcAGbUIErE2tbWLAPuc+jmpzpjUgn2JdlRvqr23/
+ 4jw5obYJ31TEBwiOR7OqaiJNFnSnxslRAGUucxsNyQmSO55jW2Fhaw6NLVrc6pDWX+BO
+ vPCqUD3LMKGAhZlM1jRUO5WXdnek3lwUxpW2GdhJOWn8jVKdPnpmzxVpbfE5T7+W6O+I
+ h4mOSmfrpGH4zLPDJBea1x3GSMCAfz/HJrf5JEJ/Qekpe4+bbUSABhbphTx/ZBCIpJKv
+ 99KQ==
 X-Forwarded-Encrypted: i=1;
- AKwUvBxGovZ/R2KNc9LfQqwxtgbNE+V6ut7n2xpos+Sjv/EE+KxmFtZjKw7LAOkTDJc9QNPqyPGt6lfiJPoH@nongnu.org
-X-Gm-Message-State: AFuF++n1sJ86AScuQF7TcUXhM9yQpEw/JqoBn4pRcA70wYnPs5Wr6oSw
- 9lbuNJ8Am7uJiw6f7vQhzWQteN2WpfWuQ9IRScbwklrCfIUER9jyYZ29UgUYZqoT+pZCPkAH0ZL
- AbOudQsjFdzK72exU13ONC2hfxmMPcfo0C2ANOVzk4p9yE42vcbS7ZVO1tw==
-X-Gm-Gg: AYBFou3m5C1+cIIEbzFg9b3kUENa8CDlOIse6j9qjHa44TJNjsQSLsWBvTRUnq1onUQ
- TFJp7hMdWJb3a/zQ/EFbTLXzLXfAL5qggzLdJ84Y0u0OCgcJhGTrBEz+psAXIRGmifXLhOUKuZi
- RL5g88WtvCiCgo4PrV8UmPBVfgl7euFd6Mhmj7zW4eqJgbzmDUB4tDMoAMvKYjb8StMVIbraXMk
- N9TW1kkjAhOF+YNRkugrgjnpOAcbPaPY3P3JdiHA5h/jBDv1fbKW+qb91IZqJbJEnCoI+BE8+86
- 27YckVyXmJpznHQ1YHltCDjtT/kFvkoJvr0pMTyz/mbY0DSDac0YTLhnsfcnCDCDcAgbAirfQoN
- mQ2G8CnDKdkRS5H7lqTO4e1V5JUJO17tbnpKkAGN4nNPi/HfLIoQ=
-X-Received: by 2002:a05:6102:dc6:b0:7a8:10eb:96cc with SMTP id
- ada2fe7eead31-7ac1b1f54d5mr3038149137.8.1790183546098; 
- Wed, 23 Sep 2026 10:12:26 -0700 (PDT)
-X-Received: by 2002:a05:6102:dc6:b0:7a8:10eb:96cc with SMTP id
- ada2fe7eead31-7ac1b1f54d5mr3038122137.8.1790183545708; 
- Wed, 23 Sep 2026 10:12:25 -0700 (PDT)
+ AKwUvBxoQEASFzd5adTNbvngtexY+lZpRXYbwd96JRMQcN7ncRMI2OyEI54l+UUXDYlnU+qAcsJa9Xwk7SwV@nongnu.org
+X-Gm-Message-State: AFuF++lw+ESe337qEjEthvw8QLCNcJHORR3ev9nEbxZU+wHb3/kb371a
+ hsmkZXQVVybpvm8wvwIZshfo9V4Jo7LwrjDTvc8DGylh6Rb1ah//qSpv8s3ZCUXjr+ht1+Nv6Li
+ SYH3UwEKaob7thoZNaX56/K0iO6eLfU5SkdCYRemxEAZ29QrorFW7qr+DBQ==
+X-Gm-Gg: AYBFou28I9J88ptPPjIhL0bkZEZrFoOjb7SWdBFV63Kyb5CW6fyJNSC8WhqfAgn7ZGs
+ J6Oe6hQ7VLSwEI22XtXDsICT9dPjiXlNckXwSoT3/NvmMZ/NWrWDDKjhKPCW/F4CJITCjmDopuk
+ Qd0gTnsNVPi53yuOBdAdsAPYeoRS8+ZIQ8XmdOj3WbDM48cJ4v9V3WOGUTnzBeeBbwb37ziZl3y
+ hIogSf2FrdDA/2T+oHQ26MFw2yUUhsApX9PMg44t6IJ04Bw4Cvd72PfUTSACtccqVOma7A3unKk
+ JOinTZjM2FS0TGA2IOeosydlo8u0TGDBO6aIk0NWS8ibm9rOO/tT/okJysb8F62fC/dOPkQNw4r
+ h7RcvJhoFMklqosgZ0VeIOp6cHey7yd3nN4zgZ0n+
+X-Received: by 2002:a05:6102:8083:b0:79e:221f:708 with SMTP id
+ ada2fe7eead31-7ac1aad3128mr2913375137.5.1790183639651; 
+ Wed, 23 Sep 2026 10:13:59 -0700 (PDT)
+X-Received: by 2002:a05:6102:8083:b0:79e:221f:708 with SMTP id
+ ada2fe7eead31-7ac1aad3128mr2913334137.5.1790183638951; 
+ Wed, 23 Sep 2026 10:13:58 -0700 (PDT)
 Received: from localhost.localdomain (pmd666.hd.free.fr. [88.187.86.199])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49fe5cc9a37sm608385e9.11.2026.09.23.10.12.24
+ 5b1f17b1804b1-49fe5ded2b7sm235525e9.10.2026.09.23.10.13.55
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Wed, 23 Sep 2026 10:12:25 -0700 (PDT)
+ Wed, 23 Sep 2026 10:13:58 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-s390x@nongnu.org, qemu-ppc@nongnu.org, qemu-arm@nongnu.org,
  Paolo Bonzini <pbonzini@redhat.com>, qemu-riscv@nongnu.org,
  Richard Henderson <richard.henderson@linaro.org>,
  Peter Maydell <peter.maydell@linaro.org>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
-Subject: [PATCH v3 09/21] target/arm: Access halt state atomically
-Date: Wed, 23 Sep 2026 19:11:03 +0200
-Message-ID: <20260923171116.31276-10-philmd@oss.qualcomm.com>
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
+ Michael Rolnik <mrolnik@gmail.com>,
+ Brian Cain <brian.cain@oss.qualcomm.com>,
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+ Helge Deller <deller@gmx.de>, Song Gao <17746591750@163.com>,
+ Bibo Mao <maobibo@loongson.cn>, Xianglai Li <lixianglai@loongson.cn>,
+ Laurent Vivier <laurent@vivier.eu>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Aurelien Jarno <aurelien@aurel32.net>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Aleksandar Rikalo <arikalo@gmail.com>,
+ Stafford Horne <shorne@gmail.com>, Chinmay Rath <rathc@linux.ibm.com>,
+ Nicholas Piggin <npiggin@gmail.com>, Glenn Miles <milesg@linux.ibm.com>,
+ Harsh Prateek Bora <harshpb@linux.ibm.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Chao Liu <chao.liu@processmission.com>,
+ Yoshinori Sato <yoshinori.sato@nifty.com>,
+ Cornelia Huck <cohuck@redhat.com>, Eric Farman <farman@linux.ibm.com>,
+ Matthew Rosato <mjrosato@linux.ibm.com>,
+ Ilya Leoshkevich <iii@linux.ibm.com>, David Hildenbrand <david@kernel.org>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Artyom Tarasenko <atar4qemu@gmail.com>, Max Filippov <jcmvbkbc@gmail.com>
+Subject: [PATCH v3 21/21] accel/tcg: Remove the redundant cpu_exec_halt() hook
+Date: Wed, 23 Sep 2026 19:11:15 +0200
+Message-ID: <20260923171116.31276-22-philmd@oss.qualcomm.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260923171116.31276-1-philmd@oss.qualcomm.com>
 References: <20260923171116.31276-1-philmd@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIzMDA2OCBTYWx0ZWRfX90K7yph/ZOqk
- Ud0INgjMTzMWfRhNTBA50wgMFWaIEKdfYky8BS/G0hPk8944GupOPuJjB8Cj7bj7+k2RSNFb1Dj
- VQYwQD727IE467TPdtMvKX55ucjZcMW/NrscAxTisAf5GfK9FFkN9VyPHO3r8kH5sgTB0TkQwV7
- JtykZ7Mu0H+1hhyQHeFOpyJRjxcwqdM0bImwg/4gPMX/2EVgUTRcW1Qj9t3yrw0cxhCR1TyDL30
- X54y0ASetfDFfzFw5W7uQK7N83XNpF0x5jm3/XZqKoVluazXhuY6Yivxx02gXAOMhW5pXK2ge7G
- LIcwOT3y6GUG06sN2Ga8qCwI9fk0LJlF+MWUxP2Wg8h74TwjU0UhYVLBn8LdGMx26CENsGJZb3l
- 5aS/xGdkAE/uk+5c8sHi2GV4yCYOed7sR1/W/C0yTwwCbc+HCt/he4gTZGOFIb04bgvmXdP6fq6
- 2ztr5Qqvs95257IH4/g==
-X-Authority-Analysis: v=2.4 cv=HfuB3SE8 c=1 sm=1 tr=0 ts=6ab4087a cx=c_pps
- a=KB4UBwrhAZV1kjiGHFQexw==:117 a=4s3hRJSeHn4rkQlkrse1kQ==:17
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIzMDA2OCBTYWx0ZWRfX8yas8iMNbMSE
+ DD6BrhamBsc6gVYNAqC07ZcpJ0m+SMCRcDPpW5NwcjoDqbgtRfPzYzkvq94nINKRDM0600QdHGX
+ mZt6amIgfnndHJYB+6CW8E29MLNweh4=
+X-Proofpoint-GUID: uLGSZ6WBysyD_e9L0ibo9riw4TgMZgEI
+X-Authority-Analysis: v=2.4 cv=RYMFmFtv c=1 sm=1 tr=0 ts=6ab408d8 cx=c_pps
+ a=UbhLPJ621ZpgOD2l3yZY1w==:117 a=4s3hRJSeHn4rkQlkrse1kQ==:17
  a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=M51BFTxLslgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
- a=EUspDBNiAAAA:8 a=BUppp-h3xPyjPovRqvQA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=o1xkdb1NAhiiM49bd1HK:22
-X-Proofpoint-GUID: PIOL5UnKDgWT36uFaG8FpO0o7uydcwfX
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIzMDA2OCBTYWx0ZWRfX2XgI5Arh4EaQ
- 9s8/5T5KdJp1B17xJgjhE0NAZdgGgYPb+VhaZkQtH62+ju2v2LQgRL4MOEQiK1yucAN4Z9GP1Em
- lEj4r9pq34ynmRx9tReY/degjaUwZJA=
-X-Proofpoint-ORIG-GUID: PIOL5UnKDgWT36uFaG8FpO0o7uydcwfX
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
+ a=EUspDBNiAAAA:8 a=KKAkSRfTAAAA:8 a=Fma_We6Em7EAR7gKL-MA:9 a=3ZKOabzyN94A:10
+ a=QEXdDO2ut3YA:10 a=TOPH6uDL9cOC6tEoww4z:22 a=cvBusfyB2V15izCimMoJ:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIzMDA2OCBTYWx0ZWRfXwR109nZNLTnA
+ 6mve74bNX0oUyI6WxjM34JozxpDrpahKvvNmV0UzZEiPIYSOS0AN4GWbCoGxwFp+q5AePWnMm5l
+ dNlwV9QdpyZFgmp++O4HA9Nc8AQnBvIjGIG8isLh/UJOhHJqUlH6BIaNEI6/klSaXLqJ818b+K4
+ RW2td6hLXzDDYl5zMCp5P+xTUL8S2L4VQatca/PpVm6Y+3b5Kul/OIrlC/EVjRIIk3ySGiDUJaW
+ A1SjNiyKfbGgCzkA5flDPO+Bzh6xQNfPAX5Ws0rKaDMnA5FYG7hSkmJAwtHGrFG+imArjuzJKAB
+ cn5pPD+Osd9obqmXJsopUjd4BF+21Fni0lt+W0j9WtzdaQ+sHYMk2vQM4JCf3x6ykIRCZ6eh5MZ
+ VE1ccn4Ktmwyz8F06XTbgurwiKsiKr+EJyz7bvsGD8VPkBUNtn4KyEBgEdjBynTXIRtW68YSvKw
+ WjSdW4Bmi/4G0nPpUTw==
+X-Proofpoint-ORIG-GUID: uLGSZ6WBysyD_e9L0ibo9riw4TgMZgEI
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-23_06,2026-09-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 impostorscore=0 suspectscore=0 spamscore=0 clxscore=1015
- lowpriorityscore=0 bulkscore=0 adultscore=0 priorityscore=1501 phishscore=0
+ spamscore=0 suspectscore=0 clxscore=1015 priorityscore=1501 phishscore=0
+ adultscore=0 impostorscore=0 lowpriorityscore=0 bulkscore=0 malwarescore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609230068
 Received-SPF: pass client-ip=205.220.180.131;
@@ -140,7 +165,7 @@ X-Spam_bar: --
 X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -156,100 +181,411 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-arm_cpu_has_work() runs without the BQL held and can inspect
-halt_reason and event_register while other CPU contexts update
-them. The WFxT timer may also consume HALT_WFE asynchronously.
+All remaining users of cpu_exec_halt simply alias cpu_has_work().
+Call cpu_has_work() directly from the generic halt flow and remove
+the redundant hook registrations and interface definition.
 
-Use atomic accesses for the halt state, including the WFI/WFE
-and halt-exit stores. This keeps the halt/wakeup protocol
-race-free and matches the atomic state transitions used by the
-asynchronous wake-up paths.
+Make affected cpu_has_work() helpers private where possible.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
-v3: Dropped rth's R-b because of HELPER()s call also updated
----
- target/arm/cpu.c           | 7 ++++---
- target/arm/tcg/op_helper.c | 8 ++++----
- 2 files changed, 8 insertions(+), 7 deletions(-)
+ include/accel/tcg/cpu-ops.h    | 18 ------------------
+ target/loongarch/internals.h   |  1 -
+ target/riscv/internals.h       |  5 -----
+ target/s390x/s390x-internal.h  |  1 -
+ accel/tcg/cpu-exec.c           | 23 ++++++++---------------
+ target/alpha/cpu.c             |  1 -
+ target/avr/cpu.c               |  1 -
+ target/hexagon/cpu.c           |  1 -
+ target/hppa/cpu.c              |  1 -
+ target/loongarch/cpu.c         |  2 +-
+ target/loongarch/tcg/tcg_cpu.c |  1 -
+ target/m68k/cpu.c              |  1 -
+ target/microblaze/cpu.c        |  1 -
+ target/mips/cpu.c              |  1 -
+ target/or1k/cpu.c              |  1 -
+ target/ppc/cpu_init.c          |  1 -
+ target/riscv/cpu.c             |  2 +-
+ target/riscv/tcg/tcg-cpu.c     |  1 -
+ target/rx/cpu.c                |  1 -
+ target/s390x/cpu-system.c      |  2 +-
+ target/s390x/cpu.c             |  1 -
+ target/sh4/cpu.c               |  1 -
+ target/sparc/cpu.c             |  1 -
+ target/tricore/cpu.c           |  1 -
+ target/xtensa/cpu.c            |  1 -
+ 25 files changed, 11 insertions(+), 60 deletions(-)
 
-diff --git a/target/arm/cpu.c b/target/arm/cpu.c
-index 5cfd3bcfc8e..090470da40a 100644
---- a/target/arm/cpu.c
-+++ b/target/arm/cpu.c
-@@ -144,20 +144,21 @@ int arm_cpu_mmu_index(CPUState *cs, bool ifetch)
- static bool arm_cpu_has_work(CPUState *cs)
- {
-     ARMCPU *cpu = ARM_CPU(cs);
-+    ARMHaltReason halt_reason = qatomic_read(&cpu->env.halt_reason);
- 
-     /*
-      * Only another PSCI call can wake the CPU up in which case the
-      * power_state would be set by arm_set_cpu_on_and_reset_async_work()
+diff --git a/include/accel/tcg/cpu-ops.h b/include/accel/tcg/cpu-ops.h
+index 1ee5d3d8bdb..4195a29e1e4 100644
+--- a/include/accel/tcg/cpu-ops.h
++++ b/include/accel/tcg/cpu-ops.h
+@@ -187,7 +187,6 @@ struct TCGCPUOps {
+      * resume execution from the halted state. This callback performs any
+      * necessary target-specific state transitions or synchronization before
+      * instruction execution resumes. The caller does not hold the BQL.
+-     * Either this callback or @cpu_exec_halt must be provided (but not both).
       */
-     if (qatomic_read(&cpu->power_state) == PSCI_OFF) {
--        g_assert(cpu->env.halt_reason == HALT_PSCI);
-+        g_assert(halt_reason == HALT_PSCI);
-         return false;
-     }
+     void (*leaving_halt)(CPUState *cpu);
+     /** @do_interrupt: Callback for interrupt handling.  */
+@@ -196,23 +195,6 @@ struct TCGCPUOps {
+     bool (*cpu_exec_interrupt)(CPUState *cpu, int interrupt_request);
+     /** @cpu_exec_reset: Callback for reset in cpu_exec.  */
+     void (*cpu_exec_reset)(CPUState *cpu);
+-    /**
+-     * @cpu_exec_halt: Callback for handling halt in cpu_exec.
+-     *
+-     * The target CPU should do any special processing here that it needs
+-     * to do when the CPU is in the halted state.
+-     *
+-     * Return true to indicate that the CPU should now leave halt, false
+-     * if it should remain in the halted state. (This should generally
+-     * be the same value that cpu_has_work() would return.)
+-     *
+-     * Either @leaving_halt or this method must be provided, but not both.
+-     * If the target does not need to
+-     * do anything special for halt, the same function used for its
+-     * SysemuCPUOps::has_work method can be used here, as they have the
+-     * same function signature.
+-     */
+-    bool (*cpu_exec_halt)(CPUState *cpu);
+     /**
+      * @tlb_fill_align: Handle a softmmu tlb miss
+      * @cpu: cpu context
+diff --git a/target/loongarch/internals.h b/target/loongarch/internals.h
+index f9a0680fe0f..2e31442453e 100644
+--- a/target/loongarch/internals.h
++++ b/target/loongarch/internals.h
+@@ -38,7 +38,6 @@ void cpu_loongarch_timer_cb(void *opaque);
+ uint64_t cpu_loongarch_get_timer_counter(CPUTimerState *timer);
+ uint64_t cpu_loongarch_get_timer_ticks(CPUTimerState *timer);
+ void cpu_loongarch_set_timer_config(CPUTimerState *timer, uint64_t value);
+-bool loongarch_cpu_has_work(CPUState *cs);
+ bool cpu_loongarch_hw_interrupts_pending(CPULoongArchState *env);
+ #endif /* !CONFIG_USER_ONLY */
  
-     /*
-      * A wake-up event should only wake us if we are halted on a WFE
-      */
--    if (cpu->env.halt_reason == HALT_WFE && cpu->env.event_register) {
-+    if (halt_reason == HALT_WFE && qatomic_read(&cpu->env.event_register)) {
-         return true;
+diff --git a/target/riscv/internals.h b/target/riscv/internals.h
+index 5d84e4de960..fb2d8b3e17a 100644
+--- a/target/riscv/internals.h
++++ b/target/riscv/internals.h
+@@ -201,11 +201,6 @@ static inline target_ulong get_xepc_mask(CPURISCVState *env)
      }
- 
-@@ -882,7 +883,7 @@ bool arm_cpu_exec_halt(CPUState *cs)
-             timer_del(cpu->wfxt_timer);
-         }
-         /* clear the halt reason */
--        cpu->env.halt_reason = NOT_HALTED;
-+        qatomic_set(&cpu->env.halt_reason, NOT_HALTED);
-     }
-     return leave_halt;
  }
-diff --git a/target/arm/tcg/op_helper.c b/target/arm/tcg/op_helper.c
-index c2b09176cb1..643b1482523 100644
---- a/target/arm/tcg/op_helper.c
-+++ b/target/arm/tcg/op_helper.c
-@@ -398,7 +398,7 @@ void HELPER(wfi)(CPUARMState *env, uint32_t insn_len)
-                         target_el);
+ 
+-#ifndef CONFIG_USER_ONLY
+-/* Our implementation of SysemuCPUOps::has_work */
+-bool riscv_cpu_has_work(CPUState *cs);
+-#endif
+-
+ /* Zjpm addr masking routine */
+ static inline target_ulong adjust_addr_body(CPURISCVState *env,
+                                             target_ulong addr,
+diff --git a/target/s390x/s390x-internal.h b/target/s390x/s390x-internal.h
+index da60b2b1fd4..df1297b5c67 100644
+--- a/target/s390x/s390x-internal.h
++++ b/target/s390x/s390x-internal.h
+@@ -248,7 +248,6 @@ bool s390_cpu_system_realize(DeviceState *dev, Error **errp);
+ void s390_cpu_finalize(Object *obj);
+ void s390_cpu_system_class_init(CPUClass *cc);
+ void s390_cpu_machine_reset_cb(void *opaque);
+-bool s390_cpu_has_work(CPUState *cs);
+ #endif /* CONFIG_USER_ONLY */
+ 
+ 
+diff --git a/accel/tcg/cpu-exec.c b/accel/tcg/cpu-exec.c
+index edb719b0d10..30a9a8aed42 100644
+--- a/accel/tcg/cpu-exec.c
++++ b/accel/tcg/cpu-exec.c
+@@ -48,7 +48,6 @@
+ #include "internal-common.h"
+ #if !defined(CONFIG_USER_ONLY)
+ #include "accel/tcg/iommu.h"
+-#include "hw/core/sysemu-cpu-ops.h"
+ #endif
+ 
+ /* -icount align implementation. */
+@@ -659,21 +658,16 @@ static bool cpu_poll_while_halted(CPUState *cpu)
+ {
+     const TCGCPUOps *tcg_ops = cpu->cc->tcg_ops;
+ 
++    if (tcg_ops->poll_during_halt) {
++        tcg_ops->poll_during_halt(cpu);
++    }
++
++    if (!cpu_has_work(cpu)) {
++        return false;
++    }
++
+     if (tcg_ops->leaving_halt) {
+-        assert(!tcg_ops->cpu_exec_halt);
+-        if (tcg_ops->poll_during_halt) {
+-            tcg_ops->poll_during_halt(cpu);
+-        }
+-        if (!cpu_has_work(cpu)) {
+-            return false;
+-        }
+         tcg_ops->leaving_halt(cpu);
+-    } else {
+-        assert(!tcg_ops->poll_during_halt);
+-        assert(cpu->cc->sysemu_ops->has_work == tcg_ops->cpu_exec_halt);
+-        if (!tcg_ops->cpu_exec_halt(cpu)) {
+-            return false;
+-        }
      }
  
--    env->halt_reason = HALT_WFI;
-+    qatomic_set(&env->halt_reason, HALT_WFI);
-     cs->exception_index = EXCP_HLT;
-     cs->halted = 1;
-     cpu_loop_exit(cs);
-@@ -460,7 +460,7 @@ void HELPER(wfit)(CPUARMState *env, uint32_t rd)
-     } else {
-         timer_mod(cpu->wfxt_timer, nexttick);
-     }
--    env->halt_reason = HALT_WFI;
-+    qatomic_set(&env->halt_reason, HALT_WFI);
-     cs->exception_index = EXCP_HLT;
-     cs->halted = 1;
-     cpu_loop_exit(cs);
-@@ -629,7 +629,7 @@ void HELPER(wfe)(CPUARMState *env, uint32_t insn_len)
-         }
-     }
+     cpu->halted = 0; /* allow execution */
+@@ -1072,7 +1066,6 @@ bool tcg_exec_realizefn(CPUState *cpu, Error **errp)
+         /* Check mandatory TCGCPUOps handlers */
+         const TCGCPUOps *tcg_ops = cpu->cc->tcg_ops;
+ #ifndef CONFIG_USER_ONLY
+-        assert(tcg_ops->cpu_exec_halt || tcg_ops->leaving_halt);
+         assert(tcg_ops->cpu_exec_interrupt);
+         assert(tcg_ops->cpu_exec_reset);
+         assert(tcg_ops->pointer_wrap);
+diff --git a/target/alpha/cpu.c b/target/alpha/cpu.c
+index 12e86021663..7d1d036e1d3 100644
+--- a/target/alpha/cpu.c
++++ b/target/alpha/cpu.c
+@@ -265,7 +265,6 @@ static const TCGCPUOps alpha_tcg_ops = {
+     .tlb_fill = alpha_cpu_tlb_fill,
+     .pointer_wrap = cpu_pointer_wrap_notreached,
+     .cpu_exec_interrupt = alpha_cpu_exec_interrupt,
+-    .cpu_exec_halt = alpha_cpu_has_work,
+     .cpu_exec_reset = cpu_reset,
+     .do_interrupt = alpha_cpu_do_interrupt,
+     .do_transaction_failed = alpha_cpu_do_transaction_failed,
+diff --git a/target/avr/cpu.c b/target/avr/cpu.c
+index f8409f32ab9..a01e6fa4751 100644
+--- a/target/avr/cpu.c
++++ b/target/avr/cpu.c
+@@ -246,7 +246,6 @@ static const TCGCPUOps avr_tcg_ops = {
+     .restore_state_to_opc = avr_restore_state_to_opc,
+     .mmu_index = avr_cpu_mmu_index,
+     .cpu_exec_interrupt = avr_cpu_exec_interrupt,
+-    .cpu_exec_halt = avr_cpu_has_work,
+     .cpu_exec_reset = cpu_reset,
+     .tlb_fill = avr_cpu_tlb_fill,
+     .do_interrupt = avr_cpu_do_interrupt,
+diff --git a/target/hexagon/cpu.c b/target/hexagon/cpu.c
+index fad526ccfb5..e7defcca8a7 100644
+--- a/target/hexagon/cpu.c
++++ b/target/hexagon/cpu.c
+@@ -783,7 +783,6 @@ static const TCGCPUOps hexagon_tcg_ops = {
+     .cpu_exec_reset = cpu_reset,
+     .tlb_fill = hexagon_tlb_fill,
+     .do_unaligned_access = hexagon_cpu_do_unaligned_access,
+-    .cpu_exec_halt = hexagon_cpu_has_work,
+     .do_interrupt = hexagon_cpu_do_interrupt,
+ #endif /* !CONFIG_USER_ONLY */
+ };
+diff --git a/target/hppa/cpu.c b/target/hppa/cpu.c
+index 07b49e51326..7b1309a7c38 100644
+--- a/target/hppa/cpu.c
++++ b/target/hppa/cpu.c
+@@ -270,7 +270,6 @@ static const TCGCPUOps hppa_tcg_ops = {
+     .tlb_fill_align = hppa_cpu_tlb_fill_align,
+     .pointer_wrap = cpu_pointer_wrap_notreached,
+     .cpu_exec_interrupt = hppa_cpu_exec_interrupt,
+-    .cpu_exec_halt = hppa_cpu_has_work,
+     .cpu_exec_reset = cpu_reset,
+     .do_interrupt = hppa_cpu_do_interrupt,
+     .do_unaligned_access = hppa_cpu_do_unaligned_access,
+diff --git a/target/loongarch/cpu.c b/target/loongarch/cpu.c
+index f22f64efb80..6b765797393 100644
+--- a/target/loongarch/cpu.c
++++ b/target/loongarch/cpu.c
+@@ -123,7 +123,7 @@ bool cpu_loongarch_hw_interrupts_pending(CPULoongArchState *env)
+ #endif
  
--    env->halt_reason = HALT_WFE;
-+    qatomic_set(&env->halt_reason, HALT_WFE);
-     cs->exception_index = EXCP_HLT;
-     cs->halted = 1;
-     cpu_loop_exit(cs);
-@@ -723,7 +723,7 @@ void HELPER(wfet)(CPUARMState *env, uint32_t rd)
-         }
-     }
+ #ifndef CONFIG_USER_ONLY
+-bool loongarch_cpu_has_work(CPUState *cs)
++static bool loongarch_cpu_has_work(CPUState *cs)
+ {
+     bool has_work = false;
  
--    env->halt_reason = HALT_WFE;
-+    qatomic_set(&env->halt_reason, HALT_WFE);
-     cs->exception_index = EXCP_HLT;
-     cs->halted = 1;
-     cpu_loop_exit(cs);
+diff --git a/target/loongarch/tcg/tcg_cpu.c b/target/loongarch/tcg/tcg_cpu.c
+index 4b1d44a1644..7ea2a1eb933 100644
+--- a/target/loongarch/tcg/tcg_cpu.c
++++ b/target/loongarch/tcg/tcg_cpu.c
+@@ -327,7 +327,6 @@ const TCGCPUOps loongarch_tcg_ops = {
+     .tlb_fill = loongarch_cpu_tlb_fill,
+     .pointer_wrap = loongarch_pointer_wrap,
+     .cpu_exec_interrupt = loongarch_cpu_exec_interrupt,
+-    .cpu_exec_halt = loongarch_cpu_has_work,
+     .cpu_exec_reset = cpu_reset,
+     .do_interrupt = loongarch_cpu_do_interrupt,
+     .do_transaction_failed = loongarch_cpu_do_transaction_failed,
+diff --git a/target/m68k/cpu.c b/target/m68k/cpu.c
+index 9b52ad5fc23..c7771cbf643 100644
+--- a/target/m68k/cpu.c
++++ b/target/m68k/cpu.c
+@@ -710,7 +710,6 @@ static const TCGCPUOps m68k_tcg_ops = {
+     .tlb_fill = m68k_cpu_tlb_fill,
+     .pointer_wrap = cpu_pointer_wrap_uint32,
+     .cpu_exec_interrupt = m68k_cpu_exec_interrupt,
+-    .cpu_exec_halt = m68k_cpu_has_work,
+     .cpu_exec_reset = cpu_reset,
+     .do_interrupt = m68k_cpu_do_interrupt,
+     .do_transaction_failed = m68k_cpu_transaction_failed,
+diff --git a/target/microblaze/cpu.c b/target/microblaze/cpu.c
+index 389a5124b12..6013a8def8e 100644
+--- a/target/microblaze/cpu.c
++++ b/target/microblaze/cpu.c
+@@ -448,7 +448,6 @@ static const TCGCPUOps mb_tcg_ops = {
+     .tlb_fill = mb_cpu_tlb_fill,
+     .pointer_wrap = cpu_pointer_wrap_uint32,
+     .cpu_exec_interrupt = mb_cpu_exec_interrupt,
+-    .cpu_exec_halt = mb_cpu_has_work,
+     .cpu_exec_reset = cpu_reset,
+     .do_interrupt = mb_cpu_do_interrupt,
+     .do_transaction_failed = mb_cpu_transaction_failed,
+diff --git a/target/mips/cpu.c b/target/mips/cpu.c
+index 0fead20d651..c069aa1c0b7 100644
+--- a/target/mips/cpu.c
++++ b/target/mips/cpu.c
+@@ -716,7 +716,6 @@ static const TCGCPUOps mips_tcg_ops = {
+     .tlb_fill = mips_cpu_tlb_fill,
+     .pointer_wrap = mips_pointer_wrap,
+     .cpu_exec_interrupt = mips_cpu_exec_interrupt,
+-    .cpu_exec_halt = mips_cpu_has_work,
+     .cpu_exec_reset = cpu_reset,
+     .do_interrupt = mips_cpu_do_interrupt,
+     .do_transaction_failed = mips_cpu_do_transaction_failed,
+diff --git a/target/or1k/cpu.c b/target/or1k/cpu.c
+index 66c00c0930c..42d9351b6d7 100644
+--- a/target/or1k/cpu.c
++++ b/target/or1k/cpu.c
+@@ -266,7 +266,6 @@ static const TCGCPUOps openrisc_tcg_ops = {
+     .tlb_fill = openrisc_cpu_tlb_fill,
+     .pointer_wrap = cpu_pointer_wrap_uint32,
+     .cpu_exec_interrupt = openrisc_cpu_exec_interrupt,
+-    .cpu_exec_halt = openrisc_cpu_has_work,
+     .cpu_exec_reset = cpu_reset,
+     .do_interrupt = openrisc_cpu_do_interrupt,
+ #endif /* !CONFIG_USER_ONLY */
+diff --git a/target/ppc/cpu_init.c b/target/ppc/cpu_init.c
+index 6c626843c93..ef59c56f416 100644
+--- a/target/ppc/cpu_init.c
++++ b/target/ppc/cpu_init.c
+@@ -7496,7 +7496,6 @@ static const TCGCPUOps ppc_tcg_ops = {
+   .tlb_fill = ppc_cpu_tlb_fill,
+   .pointer_wrap = ppc_pointer_wrap,
+   .cpu_exec_interrupt = ppc_cpu_exec_interrupt,
+-  .cpu_exec_halt = ppc_cpu_has_work,
+   .cpu_exec_reset = cpu_reset,
+   .do_interrupt = ppc_cpu_do_interrupt,
+   .cpu_exec_enter = ppc_cpu_exec_enter,
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 62ac4507ed5..c0ce7eceb2d 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -954,7 +954,7 @@ int riscv_cpu_vsirq_pending(CPURISCVState *env)
+                                     (irqs | irqs_f_vs), env->hviprio);
+ }
+ 
+-bool riscv_cpu_has_work(CPUState *cs)
++static bool riscv_cpu_has_work(CPUState *cs)
+ {
+     RISCVCPU *cpu = RISCV_CPU(cs);
+     CPURISCVState *env = &cpu->env;
+diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+index b68160af830..260ac6d89e7 100644
+--- a/target/riscv/tcg/tcg-cpu.c
++++ b/target/riscv/tcg/tcg-cpu.c
+@@ -286,7 +286,6 @@ const TCGCPUOps riscv_tcg_ops = {
+     .tlb_fill = riscv_cpu_tlb_fill,
+     .pointer_wrap = riscv_pointer_wrap,
+     .cpu_exec_interrupt = riscv_cpu_exec_interrupt,
+-    .cpu_exec_halt = riscv_cpu_has_work,
+     .cpu_exec_reset = cpu_reset,
+     .do_interrupt = riscv_cpu_do_interrupt,
+     .do_transaction_failed = riscv_cpu_do_transaction_failed,
+diff --git a/target/rx/cpu.c b/target/rx/cpu.c
+index 9b8473d71cf..69946928995 100644
+--- a/target/rx/cpu.c
++++ b/target/rx/cpu.c
+@@ -227,7 +227,6 @@ static const TCGCPUOps rx_tcg_ops = {
+     .pointer_wrap = cpu_pointer_wrap_uint32,
+ 
+     .cpu_exec_interrupt = rx_cpu_exec_interrupt,
+-    .cpu_exec_halt = rx_cpu_has_work,
+     .cpu_exec_reset = cpu_reset,
+     .do_interrupt = rx_cpu_do_interrupt,
+ };
+diff --git a/target/s390x/cpu-system.c b/target/s390x/cpu-system.c
+index d38de4fea2b..82c89080a17 100644
+--- a/target/s390x/cpu-system.c
++++ b/target/s390x/cpu-system.c
+@@ -39,7 +39,7 @@
+ #include "system/tcg.h"
+ #include "hw/core/sysemu-cpu-ops.h"
+ 
+-bool s390_cpu_has_work(CPUState *cs)
++static bool s390_cpu_has_work(CPUState *cs)
+ {
+     S390CPU *cpu = S390_CPU(cs);
+ 
+diff --git a/target/s390x/cpu.c b/target/s390x/cpu.c
+index 85afc5dec9a..e7f81fabff6 100644
+--- a/target/s390x/cpu.c
++++ b/target/s390x/cpu.c
+@@ -384,7 +384,6 @@ static const TCGCPUOps s390_tcg_ops = {
+     .tlb_fill = s390_cpu_tlb_fill,
+     .pointer_wrap = s390_pointer_wrap,
+     .cpu_exec_interrupt = s390_cpu_exec_interrupt,
+-    .cpu_exec_halt = s390_cpu_has_work,
+     .cpu_exec_reset = cpu_reset,
+     .do_interrupt = s390_cpu_do_interrupt,
+     .debug_excp_handler = s390x_cpu_debug_excp_handler,
+diff --git a/target/sh4/cpu.c b/target/sh4/cpu.c
+index 3bbdee301d5..55c73a1da35 100644
+--- a/target/sh4/cpu.c
++++ b/target/sh4/cpu.c
+@@ -312,7 +312,6 @@ static const TCGCPUOps superh_tcg_ops = {
+     .tlb_fill = superh_cpu_tlb_fill,
+     .pointer_wrap = cpu_pointer_wrap_notreached,
+     .cpu_exec_interrupt = superh_cpu_exec_interrupt,
+-    .cpu_exec_halt = superh_cpu_has_work,
+     .cpu_exec_reset = cpu_reset,
+     .do_interrupt = superh_cpu_do_interrupt,
+     .do_unaligned_access = superh_cpu_do_unaligned_access,
+diff --git a/target/sparc/cpu.c b/target/sparc/cpu.c
+index ae9bdca9df8..1529f9570da 100644
+--- a/target/sparc/cpu.c
++++ b/target/sparc/cpu.c
+@@ -1074,7 +1074,6 @@ static const TCGCPUOps sparc_tcg_ops = {
+     .tlb_fill = sparc_cpu_tlb_fill,
+     .pointer_wrap = sparc_pointer_wrap,
+     .cpu_exec_interrupt = sparc_cpu_exec_interrupt,
+-    .cpu_exec_halt = sparc_cpu_has_work,
+     .cpu_exec_reset = cpu_reset,
+     .do_interrupt = sparc_cpu_do_interrupt,
+     .do_transaction_failed = sparc_cpu_do_transaction_failed,
+diff --git a/target/tricore/cpu.c b/target/tricore/cpu.c
+index 84a05e3d363..82b56c3cd56 100644
+--- a/target/tricore/cpu.c
++++ b/target/tricore/cpu.c
+@@ -223,7 +223,6 @@ static const TCGCPUOps tricore_tcg_ops = {
+     .tlb_fill = tricore_cpu_tlb_fill,
+     .pointer_wrap = cpu_pointer_wrap_uint32,
+     .cpu_exec_interrupt = tricore_cpu_exec_interrupt,
+-    .cpu_exec_halt = tricore_cpu_has_work,
+     .cpu_exec_reset = cpu_reset,
+ };
+ 
+diff --git a/target/xtensa/cpu.c b/target/xtensa/cpu.c
+index 7c25b9ab707..99c8bd4b5fb 100644
+--- a/target/xtensa/cpu.c
++++ b/target/xtensa/cpu.c
+@@ -325,7 +325,6 @@ static const TCGCPUOps xtensa_tcg_ops = {
+     .tlb_fill = xtensa_cpu_tlb_fill,
+     .pointer_wrap = cpu_pointer_wrap_uint32,
+     .cpu_exec_interrupt = xtensa_cpu_exec_interrupt,
+-    .cpu_exec_halt = xtensa_cpu_has_work,
+     .cpu_exec_reset = cpu_reset,
+     .do_interrupt = xtensa_cpu_do_interrupt,
+     .do_transaction_failed = xtensa_cpu_do_transaction_failed,
 -- 
 2.53.0
 
