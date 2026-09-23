@@ -4,117 +4,145 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 410F9C98304
-	for <qemu-riscv@archiver.kernel.org>; Wed, 23 Sep 2026 14:14:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2267C9830B
+	for <qemu-riscv@archiver.kernel.org>; Wed, 23 Sep 2026 14:39:35 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x9Njn-0007MJ-Hs; Wed, 23 Sep 2026 10:14:19 -0400
+	id 1x9O7u-0001rv-5C; Wed, 23 Sep 2026 10:39:14 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jbeulich@suse.com>) id 1x9NAE-0007tl-R7
- for qemu-riscv@nongnu.org; Wed, 23 Sep 2026 09:37:35 -0400
-Received: from mail-wm2-x11.google.com ([2a00:1450:4864:31::11])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <jbeulich@suse.com>) id 1x9NAB-0001c8-87
- for qemu-riscv@nongnu.org; Wed, 23 Sep 2026 09:37:34 -0400
-Received: by mail-wm2-x11.google.com with SMTP id
- 5b1f17b1804b1-49e7bcb94d3so6362325e9.2
- for <qemu-riscv@nongnu.org>; Wed, 23 Sep 2026 06:37:29 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
+ id 1x9O7o-0001rG-Vy
+ for qemu-riscv@nongnu.org; Wed, 23 Sep 2026 10:39:11 -0400
+Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
+ id 1x9O7k-0008Nq-BW
+ for qemu-riscv@nongnu.org; Wed, 23 Sep 2026 10:39:06 -0400
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 68NBbVVX2443351
+ for <qemu-riscv@nongnu.org>; Wed, 23 Sep 2026 14:38:55 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ QAPNeVaRXknRyms4HxR2TnjgMeCvlo5g9U21YYAAeco=; b=DiXhunMos4Mm+QMd
+ vDYmQB2k8FlbBj9hbq4d39Hl7D/YYq1zHCwarWmtfticPsx4U7rMuu+USwj/RN2I
+ r9Dsm4zns3S+QyMmlhJyWnX06WlKMIwAxVRcyJ3jMhpxBg7hLuvg27hqLC1tpWrc
+ lx42PDWopGo7cuCaPDmg5ieC3TkSbMp0KCM9k1xivJiSzAUSER6ld7BbR4NadH+7
+ 5+nXS4WlE0k5yVlMhWaF9PCoM3twESyeRayvYzhua/6/FLnKmtvsnP32gRJKggRI
+ zzjNoU2qe9CD8ZIL0+71jeOs10xDf7LK36mSUVN/CIx9EEi6N9Of5U3lgIQ9IysW
+ XvMggQ==
+Received: from mail-vs1-f71.google.com (mail-vs1-f71.google.com
+ [209.85.217.71])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gvbx7haya-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Wed, 23 Sep 2026 14:38:55 +0000 (GMT)
+Received: by mail-vs1-f71.google.com with SMTP id
+ ada2fe7eead31-7a8a773db4eso346792137.0
+ for <qemu-riscv@nongnu.org>; Wed, 23 Sep 2026 07:38:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=suse.com; s=google; t=1790170648; x=1790775448; darn=nongnu.org;
- h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=fcrUh4n9/+wLrzrrVFpgROhaQUP011P1zLKET1PjOsk=;
- b=g4zVMhG8zY3D3hz2ofeOJXecGhUbXwbR338JZ4WPTe/2a6sRCMFXiuouUEUaNCLWpi
- hga3pKacU95B9BQPBUDynQ6Hv3h4VVqRH8mfUpBmx0vNCSw5/fGboM9devDBBBJpnpkT
- ntgxMcsn2eYr2NgFo8XHRPbkblD3JjuLyp16aN0n8uVDhOEwQ2p+jLUqELILyDnt9P8t
- oivl3rV0pVtdW+zHHEindR7rFEiQXusoJVHJK85UPJfT0jC8QOWw3AYWTMEAEbFzqM2q
- UPOJm2uVWTCXm155e4JAliV5283Juu/G5o+oYC4upGPciBhdI5gv8vc/AZoJmp+Dy2WK
- sOtA==
+ d=oss.qualcomm.com; s=google; t=1790174334; x=1790779134; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:from:references
+ :cc:to:content-language:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=QAPNeVaRXknRyms4HxR2TnjgMeCvlo5g9U21YYAAeco=;
+ b=IMPlptOaOFphAmr3RmMbQShGx00+1iQOcczEIXCLbLvojdZk1UcSmrJT4PlGMn9V1r
+ u3j9gAeH7ISEtMX289t475YVryDxuWqI/VJfVMkcs7QzbYl4aza6cBIU7kSX82hKeNRn
+ jPJ2KK16zQKX/71ptyyR1CsnxeMvDFMmzky5NKT9eslycSibej7ZiLn+XIZ0LxN0qftZ
+ TR0Uq18cfgebAorq+g3t+67yW5Ri+o0GCKbJIHyapj/2QoXHXWsXlcgDuMj+FhX311f8
+ cWn8LLOk1qKnc3fqIZpPQLFlVwvr+9gleclvSYyTLhfQkf9BwYwCZCvY16G1I7nxIz6R
+ aBAQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790170648; x=1790775448;
- h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20260707; t=1790174334; x=1790779134;
+ h=content-transfer-encoding:content-type:in-reply-to:from:references
+ :cc:to:content-language:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=fcrUh4n9/+wLrzrrVFpgROhaQUP011P1zLKET1PjOsk=;
- b=gfCRSFBhz0BeU7lgIuCqBLmvgBwfiXnsrxvLvbVvOvrolN2QyQk2suoURwdoPg0T4A
- klIuLyUvdxNghYt5pAugzo4qNbUde3Ampf7OEUFKv0JPSM28p3KeRYDvdTQUduXpjTcf
- rirWxyamVDTXp//tG4U629ijXB46cjjcRBhk8wslWKfGpzBJ8K7fqplfnJxbgFahq971
- kwGIToncnze7tdgKqngh0Afzn6Y7te9s9krYWvy5wX1M641TV2lb4mxnTMFJO1lpFQOI
- m8djLb8fgdD1hp23gS0mBoL+4+6/4rpz8GAnKOCisI8nTBS56cdeudOckKXoa26FCIM0
- 0S+A==
+ bh=QAPNeVaRXknRyms4HxR2TnjgMeCvlo5g9U21YYAAeco=;
+ b=17DiX7yID7UAuHmMegl4W5Y01FSV/pZg6Ogb1AHSPyHEspfFbEeMlI2UjHKQT4MY/6
+ aay0eQp6Pk1k4yiIgu9v0fWWfbLO4qCoUgVVrvMGuirjdKfUB3fvJq7QlIRUXP7RWBN/
+ 0ATgtO+duerug5DLuOdVqSeiG3KNZbLiER4dy4qo5jx4hrSiGeAVq0ywdZ/UllaWPT4W
+ DHAkqlW8fL/HW+ZyMA+Gc2pHWMG8KRjYW5t+SIyJAE7aGdgWvZXWN5w47pbEG3JXTNcW
+ P8sRbPJvJqtjqfWS8e530fWwNs1TuVwdB5oO4JgF4VODj1llDJD8tnYwz5rL8nEDO3a/
+ 4QJw==
 X-Forwarded-Encrypted: i=1;
- AKwUvBwP83MY1/mXXbrzI6yah74+0DS1lZP9me4M3oZxlt7RqvkNXkLnh9+BvMtiP39z539NT3i2smwiR+mr@nongnu.org
-X-Gm-Message-State: AFuF++leczXzKK3XDcXZ/dH5YSrxJNPu3LjXOyO4Yy+HRRx6w5OCpIlF
- 3XML+jDkawqUIOwkc9GKkoGepphVUfK9/gT5YVR8U/NDAUFuYavFy9twrmieckyGCA==
-X-Gm-Gg: AYBFou1WXQCmZh2n6KjS0FUG9UbEG5e4lMHXzdMo+utg7uBn7j7L0j9RaEafuL+xiXU
- gOw7hUsO7HxP6PvgWQHeQCoNMwEaOyqCvphfSigP3EZ7S+A428a02qy4CKwEDwHBOQ6xu1pdYk1
- P6Er7j03gagYH8uExCEf35PB43WeqlFab60WMX7x9XarIEBY59c0um84QHrGgEMPkRApC3CVLVJ
- 0TiY6VWu+QIwtt3gznpkFwit6NapotlXFWTo1EW75c07DHpmBr8/OvTil4L4AioTZjBrmChunZq
- 22NxletTetExv9rscbzOdm+mtQDDBsxAtx7swyT9uzpuHd5ZzpwuFUcBxQKyquitagY9SVfY/Uf
- hMd5ZSkWrn2IkZqbDRHWbLMxgiW4NuZsyLWSFf8LAlVAaAyKCOf6tYv900ABbHO2D0Q41UDdpqk
- AfqItL3TVC84YzUW9cm+1hzxhIKfxXR1oW7bY6OARuPm7zlUzM2bgMcdpM8wJkKmow11DvQNV7a
- s3yNF9/H1Q9x1ShMXqoCT3wZQnKH+qq/8BtOEk66gdiSu/5UBT/C9+rBjOyVhXa6lGVRoth+w==
-X-Received: by 2002:a05:600c:8b88:b0:49c:fc6e:8cbd with SMTP id
- 5b1f17b1804b1-49fdf152e3fmr34515245e9.33.1790170647957; 
- Wed, 23 Sep 2026 06:37:27 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49fde198f85sm82730105e9.8.2026.09.23.06.37.25
+ AKwUvBwTFJouQPy/V0CihevdCehKbwqpAThABMbmzP7URSJY04ZxKTjJ0BvTW3sFG81MRYqQdrBkulsszGq5@nongnu.org
+X-Gm-Message-State: AFuF++kTx1RwqF/6u5ml0dFlD31xTChbVb+f0KOFMvvtl0IN6oge/mIV
+ YHj0N26m5W57SGGcQRe3uaRSShqg+/25Ou8iFEpJp6SkYxIoKyIXj7WiIBOPnJe2UeIqCzGMbY2
+ dKhd5g7U7eT+Kvl9uYg3yc0I5DgvjcPkc3C9jYLvbMwPOkzp8YQywUkWgZA==
+X-Gm-Gg: AYBFou0K/HN6QIyT3JdFlsq1cttQ38ImxdmwhEIXjX/Zg7uVTEVf1rcYIVf3k91GbeP
+ SEgJqefGrwJWo4pZSZmhCgXRoPYchR4uKY6QcgWmFVrfmzxhHi0+UjkftCzi+KIak3G2zuVULcK
+ edYfexjPlvGSlbnEHoXxSupJ7DU8AVmbApSaZR6A0vC5qsCUKbUGGD/eNiuq8t74t1oZInm7fHG
+ NOgO4wwNA4EQ3tFChAcTV0Te/FgR8sgVZj3V4AhWJ07rTR762JGk03XG+GRLj12NebjJnwYYp3g
+ pKylCA4r7pTHqDGXcildEcZCVx8a1NvywC9twfRRmBIHsGieGfkGpupchnPh6O5T3oM46Sg7iAC
+ 1T9SKlT6+WHP/cwuOwNkvnoLiKquSrzc4OcvRN3xYV9YBqlQ=
+X-Received: by 2002:a05:6102:f85:b0:7a7:198a:c2c4 with SMTP id
+ ada2fe7eead31-7ac1ea9919bmr2646815137.34.1790174333635; 
+ Wed, 23 Sep 2026 07:38:53 -0700 (PDT)
+X-Received: by 2002:a05:6102:f85:b0:7a7:198a:c2c4 with SMTP id
+ ada2fe7eead31-7ac1ea9919bmr2646789137.34.1790174333130; 
+ Wed, 23 Sep 2026 07:38:53 -0700 (PDT)
+Received: from [10.21.17.122] (161.170.88.92.rev.sfr.net. [92.88.170.161])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-488684863d9sm7433840f8f.12.2026.09.23.07.38.51
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 23 Sep 2026 06:37:26 -0700 (PDT)
-Message-ID: <b7d1510e-ce88-4e1f-8ac2-f9c33eed0c67@suse.com>
-Date: Wed, 23 Sep 2026 15:37:24 +0200
+ Wed, 23 Sep 2026 07:38:52 -0700 (PDT)
+Message-ID: <f890177a-4322-4207-93a0-7f690cae6b2d@oss.qualcomm.com>
+Date: Wed, 23 Sep 2026 16:38:50 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 000/114] single-binary: link multi-targets into
- qemu-system
-To: Yonggang Luo <luoyonggang@gmail.com>
-Cc: xen-devel@lists.xenproject.org, qemu-ppc@nongnu.org,
- qemu-riscv@nongnu.org, kvm@vger.kernel.org, qemu-arm@nongnu.org,
- qemu-s390x@nongnu.org, qemu-devel@nongnu.org
-References: <20260923131635.1894-1-luoyonggang@gmail.com>
+Subject: Re: [PATCH v10 3/3] target/riscv: Add vstimecmp support
 Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20260923131635.1894-1-luoyonggang@gmail.com>
-Content-Type: text/plain; charset=UTF-8
+To: Atish Patra <atishp@rivosinc.com>, qemu-devel@nongnu.org
+Cc: Alistair Francis <alistair.francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org,
+ Bin Meng <bin.meng@processmission.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+References: <20220824221357.41070-1-atishp@rivosinc.com>
+ <20220824221357.41070-4-atishp@rivosinc.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
+In-Reply-To: <20220824221357.41070-4-atishp@rivosinc.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2a00:1450:4864:31::11;
- envelope-from=jbeulich@suse.com; helo=mail-wm2-x11.google.com
-X-Spam_score_int: -4
-X-Spam_score: -0.5
-X-Spam_bar: /
-X-Spam_report: (-0.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, URIBL_SBL=1.623 autolearn=no autolearn_force=no
+X-Proofpoint-ORIG-GUID: 6xaw316AgX8pM8mkmAmlielEcIPm4660
+X-Authority-Analysis: v=2.4 cv=J4s/fwnS c=1 sm=1 tr=0 ts=6ab3e47f cx=c_pps
+ a=P2rfLEam3zuxRRdjJWA2cw==:117 a=XFFLIW5kwC1urAZS/mNkYQ==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=M51BFTxLslgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
+ a=JF9118EUAAAA:8 a=h0uksLzaAAAA:8 a=8eR_iU2aUeOL-paLwokA:9 a=QEXdDO2ut3YA:10
+ a=ODZdjJIeia2B_SHc_B0f:22 a=xVlTc564ipvMDusKsbsT:22 a=MSi_79tMYmZZG2gvAgS0:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIzMDA1OCBTYWx0ZWRfXwstdW3WngFiE
+ h5vvnU4GXr6MBgMuQidw5tgboKyIq/6sVU8FnwcVugPJ4YGCbIkhTe7nE95hChRusl6l1w6A4ut
+ hI9KaE96V9o6MGI3c+t/cUchJBpq/9sejqNImZfB7ao6uoTCeGlJ3ToCzPIyIdtgzfnAD5H51Yj
+ 9Jq0S0B8E0vKYZYjAImfXAALuidE60I0/vYbB5C6iBSmyT8bLObMR4gdImav01U2iPJVIfqvp+v
+ cqrSrPqea526XEHwUiNC51m+n2tQ1vZOUXl2vBe0m0igga5rMCUuOEb7oy+rAxsGMrfc40InHcw
+ 8N4dIoYexPUfoCjZ8+dflgDr2NB9gN7XWqoBC5SSFXfLTJt3mXk3SYTTcAgxNKHCj4sH27qZ55G
+ n/yymr0UCSlhcc6yQp5bn6XU/rpSWqRpvO/7hfyZjN9KsJ5CJu7bP3XfFzeHgQZUeIuwB6ATsQ8
+ +85s8/ZuSDtq8xl8bAg==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIzMDA1OCBTYWx0ZWRfXw33pPvAGGLbV
+ SDHIDuSoG8J8ltJ8NjtgXOtnXLrDCdHJRNkIfYsg+I+fsJbSEFhXyJFvQJP5PDPsNlipgVuaRPH
+ F60G/vtl8M/qUDmhH/2ek3VU3l7ePtc=
+X-Proofpoint-GUID: 6xaw316AgX8pM8mkmAmlielEcIPm4660
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-23_04,2026-09-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 malwarescore=0 spamscore=0 impostorscore=0 priorityscore=1501
+ phishscore=0 bulkscore=0 lowpriorityscore=0 adultscore=0 clxscore=1015
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609230058
+Received-SPF: pass client-ip=205.220.168.131;
+ envelope-from=philmd@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
+X-Spam_bar: --
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Wed, 23 Sep 2026 10:14:16 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -129,234 +157,53 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-(reducing Cc list to mailing lists)
+Hi,
 
-On 23.09.2026 15:14, Yonggang Luo wrote:
-> This series produces one qemu-system binary that can run ARM (32 and
-> 64), RISC-V (32 and 64), and MicroBlaze.
-> Upstream filters machines with TypeInfo.is_available. This series
-> passes a TargetInfo into that callback, uniquifies QOM names that
-> collide in one process, and compiles those targets once so they can
-> share qemu-system.
-> 
-> A combined link cannot keep C symbols or QOM type names that were
-> unique only because each qemu-system-$arch was a separate binary.
-> These patches remove those collisions:
-> 
-> - TYPE_ACCEL_CPU is the fixed abstract type accel-cpu, registered
->   once next to TYPE_ACCEL. Leaf names still encode the CPU type so
->   accel_init_cpu_interfaces() can look up "<accel>-" plus
->   target_cpu_type() (tcg-accel-arm-cpu).
-> - virt QOM names are prefixed: arm-virt, riscv-virt, and the same
->   for or1k, hexagon, loongarch, m68k, and xtensa. Boards keep
->   -machine virt via machine_class_set_name(). query-machines returns
->   the QOM type in MachineInfo typename.
-> - virt ACPI helpers and RISC-V TCG crc32/crc32c/wfi helpers get an
->   arch prefix so the combined link does not need meson -D name
->   mangling. LoongArch virt_acpi_setup is renamed in the same pass.
-> 
-> Target selection has to work with more than one TargetInfo:
-> 
-> - The combined binary takes arch:name on -M/-machine and in a
->   [machine] type (aarch64:virt). arch: binds the target. microblaze:
->   runs that target's default machine. arm, aarch64, riscv32, and
->   riscv64 have no default. No -M leaves target none and the empty
->   none machine. qemu-system-$arch keeps the historic -M name.
->   -M help lists every target; arch:help lists one. query-targets
->   lists each linked target, including none.
-> - TargetInfo is a constructor list. target_info_select() picks the
->   entry, including SYS_EMU_TARGET_NONE. is_available takes const
->   TargetInfo *. While the target is still none, QOM skips the
->   unavailable filter so grouped -M help can list every machine.
-> - query-cpu-definitions, dump notes, and Angel semihosting sit on
->   TargetCpuOps indexed by target_arch(). Registration uses a
->   QEMU_ARCH_* bitmask so one object can fill ARM and AARCH64. The
->   table is target-ops.h / target-ops.c.
-> 
-> qemu-system-$TARGET is still built, including the Windows *w twin.
-> qemu-system is extra. It links each target whose arch sources are
-> only target-info-def.c: arm, aarch64, riscv32, riscv64, and
-> microblaze. Do not add qemu-systemw for that binary. A GUI
-> twin would keep QEMU exporting data from the .exe into DLLs, and
-> those data exports cannot be delay-loaded (qdev_prop_array and
-> other qdev_prop_*). That would block enabling modules globally on
-> Windows.
-> 
-> Examples:
-> 
->   qemu-system -M aarch64:virt ...
->   qemu-system -M microblaze:petalogix-s3adsp1800 ...
->   qemu-system-riscv64 -M virt ...
-> 
-> A bare machine name on qemu-system needs an arch: prefix. An unknown
-> target fails with "target '...' is not available".
-> 
-> Prerequisites:
->   [PATCH v2 0/9] machine: uniquify virt QOM names
->   https://patchew.org/QEMU/20260922215533.641-1-luoyonggang@gmail.com/
->   [PATCH 00/21] accel/tcg: share raise_excp across TCG targets
->   https://patchew.org/QEMU/20260918004225.827-1-luoyonggang@gmail.com/
->   [PATCH v5 00/11] single-binary: Compile hw/riscv once
->   https://patchew.org/QEMU/20260918-hw-riscv-cpu-int-v5-0-f98c5a244636@rev.ng/
-> 
-> v1: https://patchew.org/QEMU/20260823150731.896-1-luoyonggang@gmail.com/
-> v2: https://patchew.org/QEMU/20260826184229.1145-1-luoyonggang@gmail.com/
-> branch: https://gitlab.com/lygstate-qemu/qemu/-/tree/single-binary-arm-riscv?ref_type=heads
-> x86_64 and i386: https://gitlab.com/lygstate-qemu/qemu/-/tree/combined-binary-multi-targets?ref_type=heads
-> 
-> Changes v2 -> v3:
-> - Drop -target. v2 parsed a target_name token and required it on
->   bare qemu-system, with -target ? to list names. v3 selects the
->   target with arch:name on -M. No -M leaves target none. -M help
->   and arch:help list machines.
-> - Rebased onto current master. Upstream is_available(void) replaces
->   TYPE_TARGET_SPECIFIC. v3 passes const TargetInfo * into
->   is_available. The v2 patches that registered TYPE_TARGET_SPECIFIC
->   on ARM and RISC-V virt are dropped.
-> - TargetInfo is a constructor list, not chosen from argv[0].
->   target_info_select() sets the current entry. Add SysEmuTarget
->   none. A single-target binary does not switch TargetInfo; arch:
->   must match that binary or the machine is rejected.
-> - Drop -Dsingle_binary. qemu-system is built from
->   single_binary_supported_targets once arch_srcs are only
->   target-info-def.c. microblaze joins ARM and RISC-V. Per-target
->   binaries stay. Still no qemu-systemw for the combined binary.
-> - Unique virt QOM names extend past ARM and RISC-V to or1k,
->   hexagon, loongarch, m68k, and xtensa. query-machines returns
->   MachineInfo typename.
-> - TargetCpuOps is an array indexed by target_arch(), registered
->   with a QEMU_ARCH_* bitmask. The header moves from
->   target-info-qom.h to target-ops.h.
-> - Those targets are compiled once: ARM, RISC-V, and MicroBlaze fold
->   into common source sets, TARGET_* ifdefs become runtime checks, and
->   KVM moves to system_ss.
-> 
-> Pierrick Bouvier (2):
->   configs/targets: remove target info definitions
->   target-info: rename target-info-stub.c in target-info-def.c
-> 
-> Yonggang Luo (112):
->   meson: stale qemu-version.h only when .git exists
->   target-info: rename target-info-impl.h to target-info-def.h
->   target-info: set cpu_type from TARGET_BASE_ARCH
->   target: remove CPU_RESOLVING_TYPE
->   vl: parse early options before target-info init
->   target-info: replace QOM registration with a constructor list
->   tests/unit: add test-target-info
->   tests/qtest: prepare machine-list-test for combined qemu-system
->   kconfig: rename REGISTER to HW_REGISTER
->   target-info: add TargetKconfig
->   target-info: add target_is_* helpers for each architecture
->   target-info: add i386 and x86_64 helpers
->   qom: pass TargetInfo to is_available
->   module: use static ModuleEntry and per-type DSO lists
->   module: add before/after hooks and module_call_init_fn
->   qom: register late types through module_call_init_fn
->   qom: inherit is_available and filter after MODULE_INIT_QOM
->   tests/unit: add module-init and qom is-available tests
->   hw/arm/virt: prefix ACPI helpers with arm_virt_
->   hw/riscv/virt: prefix ACPI helpers with riscv_virt_
->   hw/loongarch/virt: prefix ACPI helper with loongarch_virt_
->   target/riscv: uniquify TCG crc32, crc32c, and wfi helper names
->   hw/riscv: gate boards with target_is_base_riscv
->   hw/intc: use target_long_bits in IMSIC geilen
->   hw/misc/riscv_cmgcr: replace target_ulong with uint64_t
->   hw/intc: use kvm_enabled() in APLIC AIA helpers
->   hw/intc: send IMSIC MSI via kvm_irqchip_send_msi()
->   target/riscv: add kvm stubs source set
->   tcg: fix off-by-one in helper extend-free assert
->   gdbstub: drop per-target cpu-param.h from helpers.h
->   hw/riscv: expand boston-aia and microblaze-v-generic to TypeInfo
->   target/riscv: Include migration/vmstate.h instead of migration/cpu.h
->     in machine.c
->   target/riscv: gate CPU types with TargetInfo
->   target/riscv: select ELF dump class from target_riscv64
->   target/riscv: replace TARGET_* macros in CSR helpers
->   target/riscv: use target_long_bits in pmpaddr granule checks
->   target/riscv: preserve signed XLEN semantics without target_long
->   target/riscv: replace leftover TARGET_LONG_BITS
->   target/riscv: select monitor width at runtime
->   target/riscv: replace target-width format macros
->   target/riscv: replace TARGET_LONG_BITS in translate
->   target-info: add tl_is_64() and target_is_tl32/64 helpers
->   target-info: dispatch CPU QMP, dump, and Angel semihosting
->   tcg: give TCGv its own type and runtime tl ops
->   exec: allow target_long.h, abi_ptr.h and cpu-ldst.h from common code
->   migration: add TargetInfo-gated vmstate fields
->   target/i386: always compile XMM, YMMH, and Hi16 VMSD
->   target/i386: replace VMSTATE_UINTTL with 32/64 TI fields
->   target/ppc: replace VMSTATE_UINTTL with 32/64 TI fields
->   target/sparc: replace VMSTATE_UINTTL with 32/64 TI fields
->   target/mips: replace VMSTATE_UINTTL with 32/64 TI fields
->   hw/hexagon: drop unused migration/cpu.h include
->   migration: remove unused cpu.h
->   target/riscv: gate KVM CPU VMSDs with target_has_kconfig_kvm
->   target/riscv: use tcg_imm_tl in translate
->   target/riscv: select FP and amocas width at runtime
->   target/riscv: drop TARGET_RISCV XL shortcuts in translate
->   target/riscv: select KVM host CPU width at runtime
->   accel: use a shared TYPE_ACCEL_CPU parent
->   kvm: always compile guest debug
->   hw/i386: move APIC_DEFAULT_ADDRESS to apic.h
->   kvm: stop including cpu.h from kvm.h
->   kvm: default kvm_arch_reset_parked_vcpu in stubs
->   kvm: drop COMPILING_PER_TARGET wrap around kvm_arch APIs
->   kvm: add split irqchip and send_msi stubs
->   kvm: replace TARGET_S390X and TARGET_PPC hints
->   kvm: move kvm_ss to system_ss
->   system: add qemu_host_arch() and reject unavailable -accel
->   kvm: add AccelClass is_available for host/guest pairing
->   hvf: add AccelClass is_available for host/guest pairing
->   xen: add AccelClass is_available for host/guest pairing
->   nitro: add AccelClass is_available for host/guest pairing
->   mshv: add AccelClass is_available for host/guest pairing
->   whpx: add AccelClass is_available for host/guest pairing
->   target/i386/nvmm: add AccelClass is_available for host/guest pairing
->   accel: replace ACCEL_CPU_NAME with accel_cpu_register_type
->   whpx: move whpx_ss to system_ss
->   hw/riscv: move boards and irqchip onto hw_common_arch
->   target/riscv: include target_long.h in TCG helpers
->   target/riscv: compile CPU and TCG once
->   target/arm: replace target_long in A64 translate
->   target/arm: use 64-bit TCG addresses in A64 translate
->   target/arm: move kvm_arm_set_cpreg_mig_tolerances to kvm.c
->   target/arm: allow -cpu host with Nitro
->   target/arm: gate -cpu host with TypeIsAvailable
->   target/arm: fix family-common KVM compile
->   tests/qtest: raise aspeed_smc-test timeout to 12 minutes
->   hw/intc: move ARM GIC kvm/hvf/whpx onto arm_common_ss
->   target/arm: fold arm_ss into common source sets
->   meson: link shared objects into qemu-system
->   target/microblaze: fold system sources into common source sets
->   meson: add microblaze-softmmu to the combined qemu-system list
->   boards: remove unused DEFINE_MACHINE_WITH_INTERFACES
->   hw/arm: set virt TypeInfo.is_available
->   hw/arm: set remaining 32-bit machine TypeInfo.is_available
->   hw/arm: set aarch64-only machine TypeInfo.is_available
->   hw/microblaze: set petalogix-s3adsp1800 TypeInfo.is_available
->   hw/arm: expand leftover 32-bit DEFINE_MACHINE to TypeInfo
->   hw/arm: expand imx8mm-evk DEFINE_MACHINE to TypeInfo
->   hw/microblaze: expand petalogix-ml605 and xlnx-zynqmp-pmu to TypeInfo
->   hw/i386: set TYPE_X86_MACHINE TypeInfo.is_available
->   hw/block/dataplane: move xen-block onto system_ss
->   hw/remote: move multiprocess memory onto remote_ss
->   hw/remote: set x-remote TypeInfo.is_available
->   target-info: add SysEmuTarget none
->   accel/tcg: tolerate NULL target_cpu_type for -M none
->   qom: skip unavailable filter when target_none()
->   module: load every arch-tagged module when target is none
->   target-info: select combined qemu-system target by name
->   vl: parse arch: machine types on combined qemu-system
->   qapi: add query-targets
->   tests/qtest: cover combined qemu-system machines and accel-cpu
+(now committed as 3ec0fe18a31fabfe999b480e4c21847ac0d51560)
 
-Now this is really excessive: You mail out a huge series (a fair part
-of which apparently still needs to make it through), cross posting to
-lists covering components which are touched only in very few places of
-the series. I consider such rude already for much smaller series; here
-you definitely should have made per-patch Cc lists. I wouldn't be
-surprised if xen-devel@ isn't the only list which is being spammed for
-no good reason.
+On 25/8/22 00:13, Atish Patra wrote:
+> vstimecmp CSR allows the guest OS or to program the next guest timer
+> interrupt directly. Thus, hypervisor no longer need to inject the
+> timer interrupt to the guest if vstimecmp is used. This was ratified
+> as a part of the Sstc extension.
+> 
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+> Signed-off-by: Atish Patra <atishp@rivosinc.com>
+> ---
+>   target/riscv/cpu.h         |  4 ++
+>   target/riscv/cpu_bits.h    |  4 ++
+>   target/riscv/cpu_helper.c  | 11 +++--
+>   target/riscv/csr.c         | 88 ++++++++++++++++++++++++++++++++++++--
+>   target/riscv/machine.c     |  1 +
+>   target/riscv/time_helper.c | 16 +++++++
+>   6 files changed, 118 insertions(+), 6 deletions(-)
+> 
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index d2529b757aab..d895a0af2c6d 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -311,6 +311,8 @@ struct CPUArchState {
+>       /* Sstc CSRs */
+>       uint64_t stimecmp;
+>   
+> +    uint64_t vstimecmp;
+> +
+>       /* physical memory protection */
+>       pmp_table_t pmp_state;
+>       target_ulong mseccfg;
+> @@ -365,6 +367,8 @@ struct CPUArchState {
+>   
+>       /* Fields from here on are preserved across CPU reset. */
 
-Jan
+         ^^^
+
+>       QEMUTimer *stimer; /* Internal timer for S-mode interrupt */
+> +    QEMUTimer *vstimer; /* Internal timer for VS-mode interrupt */
+> +    bool vstime_irq;
+
+Shouldn't vstime_irq be reset upon vCPU reset?
+
+>   
+>       hwaddr kernel_addr;
+>       hwaddr fdt_addr;
 
