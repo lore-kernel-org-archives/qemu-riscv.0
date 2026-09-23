@@ -4,70 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 115E1C982FA
-	for <qemu-riscv@archiver.kernel.org>; Wed, 23 Sep 2026 13:27:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02E62C9830E
+	for <qemu-riscv@archiver.kernel.org>; Wed, 23 Sep 2026 13:27:49 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x9My7-0002Qm-BY; Wed, 23 Sep 2026 09:25:03 -0400
+	id 1x9Mxy-0001ow-Vf; Wed, 23 Sep 2026 09:24:55 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1x9Mu9-00028h-Dv
- for qemu-riscv@nongnu.org; Wed, 23 Sep 2026 09:21:01 -0400
-Received: from mail-dl2-x10.google.com ([2607:f8b0:4864:38::10])
+ id 1x9Mud-0002Zq-Hn
+ for qemu-riscv@nongnu.org; Wed, 23 Sep 2026 09:21:29 -0400
+Received: from mail-dy2-x10.google.com ([2607:f8b0:4864:36::10])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1x9Mu5-0007Re-Vc
- for qemu-riscv@nongnu.org; Wed, 23 Sep 2026 09:20:57 -0400
-Received: by mail-dl2-x10.google.com with SMTP id
- a92af1059eb24-142dd046b85so492433c88.3
- for <qemu-riscv@nongnu.org>; Wed, 23 Sep 2026 06:20:53 -0700 (PDT)
+ id 1x9Mua-0007V2-G0
+ for qemu-riscv@nongnu.org; Wed, 23 Sep 2026 09:21:27 -0400
+Received: by mail-dy2-x10.google.com with SMTP id
+ 5a478bee46e88-32dbbe82e13so794112eec.0
+ for <qemu-riscv@nongnu.org>; Wed, 23 Sep 2026 06:21:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1790169652; x=1790774452; darn=nongnu.org;
- h=content-transfer-encoding:content-type:mime-version:references
- :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=eK1WJJTOKN3JQC4zjqi0U64pp0hPplv7AhkYIkHOF98=;
- b=bQUWmPETdp8Y4na2U/SqSL8T7Anrvojw5CgCa1ao7w7XP/7OTqm+UEL37XrPL95LHV
- i7vjCAsRkKR6ap8dPQcAQDjzl6Q0LtxA8aWI77PKsPEsrBwQJrz3daq5AnP+dmEU1pN0
- IkBjQjwpPcal6wgUer+RPb+g4r2RDDcqeZfgv3H4a8kbk0+Nd+TIL6a0JW99C8Mw6VZ1
- U6yFoOlLHrWnrFVq+ShIsU0uvRaMANDavm370BTr3EpnXv24KTOMdRDcqah27z/M416X
- Xd53q6fFGqN24sJKEQBLzeuL+wgtqzZR13b3y+J2sY1Ur6rzegZwCTDdCxi8/6e3FUxF
- Aq5Q==
+ d=gmail.com; s=20251104; t=1790169673; x=1790774473; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=aW7Q/4+ozQSDE0PZQ7E9tHZoVUU6eb45JG6HfJcLS94=;
+ b=lYS7Niy7JqOrK6SObE++GGfz5/X8m3M8bU9O7/F8HPunnJPDIVLbBXWY9U+igMNC3Y
+ +E0EA4hQpFa2TuS/V1vwVNQ6Ojghmcru1gbfJ3YdXFS/a8B5Ebe9a45w9QDo1cu8ADTA
+ is+yz4i9B24gY43nqkLB0f4O6ycP6hhKLzLfQUjJ5qq+Mx0/KrmjlL1ADx0y/q50+Rvd
+ 7tu29sUvy9TzfiIlNMwXnOp2kRnR1j1+0DpW1lplArKhmMrivNM4aS4+95qkeECGCNhg
+ uXApdUjYebKXPFz0Jo0SIKdRX1F2RobV8M7oraOZa6BI2exIjjk1hix93eZs00J+Erll
+ OrUQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790169652; x=1790774452;
- h=content-transfer-encoding:content-type:mime-version:references
- :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=eK1WJJTOKN3JQC4zjqi0U64pp0hPplv7AhkYIkHOF98=;
- b=kBUPx2nj+TAYetHN6Idu9kAi80Xdu6+zSwfBLxTpY+EE285D+ipB6bw/BXbxMJYjzt
- ecHc+md2nT4xGT0vcWXH7kx0q7Q1mTapa6mA6NVvHFlqRflyzY9kSsmBOhTPR9UVqF5Q
- DSSlDOqIGl7q16OXMO7O2hvtj1+8fFdzJZuCIKPQ8rWx4t2PSU7SsRndlcuL2TlUWPzd
- bGlBPnUQhJrNxc40AZoQYHSoE9ZdYbAM+4kFGD13GfWwH6COY/Dpx8VDaPQNDML2tQcY
- XqtzOBN7+IyPhm1wRMEVi8ST8pcuZZpuOQeDb1XLhvD2xOxZqMY6Aj6xkqp/6wAvF2I0
- Dqog==
+ d=1e100.net; s=20260707; t=1790169673; x=1790774473;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=aW7Q/4+ozQSDE0PZQ7E9tHZoVUU6eb45JG6HfJcLS94=;
+ b=agJfLqKbTYKM1BRdCsR0tXasqFQqf7aR8EfOXyLtWKvHvBU5j2TGmmpcq3HZjmU1ae
+ N9bOD3+cqmbudsDx2ZjH1GwShwROj+dfC7c7VFPLN4a0croVdG1eIOH9lu6kNWk0/NeL
+ vt5coOivH6x641dWw38Ts0OP/NXBL342nsJ6UdXXGWvC+t5EBP5ceHl0oUo233fmiRG+
+ NasPshBiOT5DirN3IKTmSk9I1fuotijDRvXW+OxHjM2ijKBEP+VV9E0lGwjG2jDayABH
+ J7hjlieV+8dDcgPDX8eUZpQdi591Zp/iPqvPnPHSS6Fataw1ctypYPnohMupv2bigZRu
+ KZfA==
 X-Forwarded-Encrypted: i=1;
- AKwUvBy64F3PII9rtbRz1wTeSIu43kr9aJU5OuR6ptYgupM9D6xP7de8+QiTUGFxRyFqIzATtOV7cz3X2LqT@nongnu.org
-X-Gm-Message-State: AFuF++n7YCOPio+cR9DXDoqvmp3IRJj1stCE78tra2zMAq4+CQuzD97B
- 0cnVBCgTJo77OWDYEKZWZ18OGtS5aPQf+3N6DQJf8yHcULONcxhYgVXp
-X-Gm-Gg: AYBFou1O/75k+kyO126MtU/XjtZqbdx7s6IAwWbNI26JkEmAPtQsswBK24r3HPqa1CW
- hQ3qcU+4ktKNSNEjBBeNqTFc3IubiwUPpzgJqC9d4w6nBHy5gSCZeoNZAxlIYY2+GPt0FZjp7fs
- mdm3VeCEP11KcuWTe9RWa1LeidOIBEkprRikrCMU9qD+hEEZBWTZCSBW6HJSJogzRgVTgnMCSjb
- uw4KXySzSWkZ9tRPEphCX2KyLMuEC6TcYjfe5gieAm9RmCSS6EapxoFnWhInc00tGglD4M1gfbL
- G/OIZdvgi+46IWQfQxzjhS2eP5TKnO3UzIvKjUEd+M8MVnf/WMpayDAN+2z/7bCK22KhBn2e014
- DaL3LG+JM/JQW+3+j7cW8jcVXAdI86x9xHgHM+wl1bTDL1V9clExassYQwEz0tjEochMtfnj2iL
- lg5XuHm2d+a0fvcAJF3BU/yGVT8IdAwNdLjpqE3LkduzeKB0ce7zrI4hqUe/MgUsvpV12lrruG/
- jRaSfV1Nk6tR4VRgYQun/dYVVg7MVR6xvDaDqY/oA==
-X-Received: by 2002:a05:701b:42d3:10b0:143:5c2a:e488 with SMTP id
- a92af1059eb24-144f8fc7b95mr2889651c88.0.1790169652322; 
- Wed, 23 Sep 2026 06:20:52 -0700 (PDT)
+ AKwUvBz3fnncr5u/mj8cQoTdmST/QGhhUBhSg8r1VDcLhBTs+rXk+aF/h0JgwCdlPBsTrae+AlI92XcEdbPf@nongnu.org
+X-Gm-Message-State: AFuF++nLQXE4C+vUCpQDdBc7NTR9AlbljfRjiGIENkbNq6m7ht1wp4g4
+ hRWKUzB0OSdOSVWUTiawuD54RZ0MEkiCVy6ganYjdVOJEOZCFh/1e5+B
+X-Gm-Gg: AYBFou0PVgwlz95eROFW3exGDJA0SaUYyvplNb7xDFBaas1svhvZDno5IlgG6dw/gKh
+ zw0NTYxZFFU9kUSf+qYHjCBtqNLPGCGYGhPjXY898nUnZ/3M7phui+cnQsLZdPVy9XiCvc8QkO/
+ g6rVBERExVSHtXGCJrv6o86zB4jk6/y0wmOgKe08m60w/MepkqJVGtKVOzbhv1C3kW47FLzOoK3
+ Gkebp283QLeC32yh6b5udQNQpY0mUJotFa//XAsdiOzAZCC+n1FNxihaneQ7mVpW8lx2nbJi6tl
+ MQno2OX56Xjdqsb5LMIzUYIOViPm3PFWe515FfUhomPCSdIQDE6rm6Fgrvx9yS8YY4zX3czvxgi
+ UA1taF7thZYG9tCtFqGSRRgTKBF30RnLECNqvj6bne3zv4lqRCIRHBF42G84RihYjFZz9qxjsBC
+ qd8vSwDOxyX9N+DjitiI1ldCumwYjwUrwmTV463c1l3Sq1iZREFqFQwd6ZR9Nyq1o7n91LzmRc6
+ phgiKt7FXXoGCTvs38+bFw8q/eRFKQR2wjlNaIWnUYue/Kwz3Qcww==
+X-Received: by 2002:a05:7300:cca4:b0:33b:fc68:9790 with SMTP id
+ 5a478bee46e88-33e8d2ebd99mr2512374eec.21.1790169672443; 
+ Wed, 23 Sep 2026 06:21:12 -0700 (PDT)
 Received: from WIN-BH9M8FJACR9 ([103.94.185.75])
  by smtp.googlemail.com with ESMTPSA id
- 5a478bee46e88-33e97236754sm5553695eec.29.2026.09.23.06.20.42
+ 5a478bee46e88-33e97236754sm5553695eec.29.2026.09.23.06.21.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Sep 2026 06:20:50 -0700 (PDT)
+ Wed, 23 Sep 2026 06:21:09 -0700 (PDT)
 From: Yonggang Luo <luoyonggang@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: Cornelia Huck <cohuck@redhat.com>, xen-devel@lists.xenproject.org,
@@ -98,18 +97,16 @@ Cc: Cornelia Huck <cohuck@redhat.com>, xen-devel@lists.xenproject.org,
  Markus Armbruster <armbru@redhat.com>, Weiwei Li <liwei1518@gmail.com>,
  Song Gao <17746591750@163.com>, qemu-arm@nongnu.org, qemu-s390x@nongnu.org,
  Brian Cain <brian.cain@oss.qualcomm.com>
-Subject: [PATCH v3 023/114] hw/loongarch/virt: prefix ACPI helper with
- loongarch_virt_
-Date: Wed, 23 Sep 2026 21:14:57 +0800
-Message-ID: <20260923131635.1894-24-luoyonggang@gmail.com>
+Subject: [PATCH v3 025/114] hw/riscv: gate boards with target_is_base_riscv
+Date: Wed, 23 Sep 2026 21:14:59 +0800
+Message-ID: <20260923131635.1894-26-luoyonggang@gmail.com>
 X-Mailer: git-send-email 2.52.0.windows.1
 In-Reply-To: <20260923131635.1894-1-luoyonggang@gmail.com>
 References: <20260923131635.1894-1-luoyonggang@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:38::10;
- envelope-from=luoyonggang@gmail.com; helo=mail-dl2-x10.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:36::10;
+ envelope-from=luoyonggang@gmail.com; helo=mail-dy2-x10.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -131,78 +128,141 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-- virt_acpi_setup is the same C symbol used by ARM and RISC-V virt.
-  Rename it now so a later combined binary does not need meson -D
-  prefixes for LoongArch.
-- Rename the file-local virt_is_acpi_enabled to
-  loongarch_virt_is_acpi_enabled to match.
-
-Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
-Reviewed-by: Song Gao <gaosong@loongson.cn>
+- Set TypeInfo.is_available to target_is_base_riscv on RISC-V machines
+  so a combined qemu-system lists them only for riscv32/riscv64.
 ---
- hw/loongarch/virt-acpi-build.c | 6 +++---
- hw/loongarch/virt.c            | 2 +-
- include/hw/loongarch/virt.h    | 2 +-
- 3 files changed, 5 insertions(+), 5 deletions(-)
+ hw/riscv/k230.c            | 1 +
+ hw/riscv/microchip_pfsoc.c | 1 +
+ hw/riscv/opentitan.c       | 1 +
+ hw/riscv/shakti_c.c        | 1 +
+ hw/riscv/sifive_e.c        | 1 +
+ hw/riscv/sifive_u.c        | 1 +
+ hw/riscv/spike.c           | 1 +
+ hw/riscv/tt_atlantis.c     | 1 +
+ hw/riscv/virt.c            | 1 +
+ hw/riscv/xiangshan_kmh.c   | 1 +
+ 10 files changed, 10 insertions(+)
 
-diff --git a/hw/loongarch/virt-acpi-build.c b/hw/loongarch/virt-acpi-build.c
-index 600ef60fc58..b9df9b3a127 100644
---- a/hw/loongarch/virt-acpi-build.c
-+++ b/hw/loongarch/virt-acpi-build.c
-@@ -674,7 +674,7 @@ static const VMStateDescription vmstate_acpi_build = {
-     },
- };
- 
--static bool virt_is_acpi_enabled(LoongArchVirtMachineState *lvms)
-+static bool loongarch_virt_is_acpi_enabled(LoongArchVirtMachineState *lvms)
- {
-     if (lvms->acpi == ON_OFF_AUTO_OFF) {
-         return false;
-@@ -682,7 +682,7 @@ static bool virt_is_acpi_enabled(LoongArchVirtMachineState *lvms)
-     return true;
- }
- 
--void virt_acpi_setup(LoongArchVirtMachineState *lvms)
-+void loongarch_virt_acpi_setup(LoongArchVirtMachineState *lvms)
- {
-     AcpiBuildTables tables;
-     AcpiBuildState *build_state;
-@@ -692,7 +692,7 @@ void virt_acpi_setup(LoongArchVirtMachineState *lvms)
-         return;
-     }
- 
--    if (!virt_is_acpi_enabled(lvms)) {
-+    if (!loongarch_virt_is_acpi_enabled(lvms)) {
-         ACPI_BUILD_DPRINTF("ACPI disabled. Bailing out.\n");
-         return;
-     }
-diff --git a/hw/loongarch/virt.c b/hw/loongarch/virt.c
-index 2b003443eb0..18923500fc2 100644
---- a/hw/loongarch/virt.c
-+++ b/hw/loongarch/virt.c
-@@ -242,7 +242,7 @@ static void virt_done(Notifier *notifier, void *data)
-     LoongArchVirtMachineState *lvms = container_of(notifier,
-                                       LoongArchVirtMachineState, machine_done);
-     virt_build_smbios(lvms);
--    virt_acpi_setup(lvms);
-+    loongarch_virt_acpi_setup(lvms);
-     virt_fdt_setup(lvms);
- }
- 
-diff --git a/include/hw/loongarch/virt.h b/include/hw/loongarch/virt.h
-index 09529de48bd..4316a414f44 100644
---- a/include/hw/loongarch/virt.h
-+++ b/include/hw/loongarch/virt.h
-@@ -132,7 +132,7 @@ struct LoongArchVirtMachineState {
- 
- #define TYPE_LOONGARCH_VIRT_MACHINE  MACHINE_TYPE_NAME("loongarch-virt")
- OBJECT_DECLARE_SIMPLE_TYPE(LoongArchVirtMachineState, LOONGARCH_VIRT_MACHINE)
--void virt_acpi_setup(LoongArchVirtMachineState *lvms);
-+void loongarch_virt_acpi_setup(LoongArchVirtMachineState *lvms);
- void virt_fdt_setup(LoongArchVirtMachineState *lvms);
- 
- static inline bool virt_has_dmsi(LoongArchVirtMachineState *lvms)
+diff --git a/hw/riscv/k230.c b/hw/riscv/k230.c
+index 79715265da6..3890cb6357d 100644
+--- a/hw/riscv/k230.c
++++ b/hw/riscv/k230.c
+@@ -557,6 +557,7 @@ static void k230_machine_class_init(ObjectClass *oc, const void *data)
+ static const TypeInfo k230_machine_typeinfo = {
+     .name       = TYPE_RISCV_K230_MACHINE,
+     .parent     = TYPE_MACHINE,
++    .is_available = target_is_base_riscv,
+     .class_init = k230_machine_class_init,
+     .instance_init = k230_machine_instance_init,
+     .instance_size = sizeof(K230MachineState),
+diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
+index cc4b6bc3529..103c0d7f7ca 100644
+--- a/hw/riscv/microchip_pfsoc.c
++++ b/hw/riscv/microchip_pfsoc.c
+@@ -756,6 +756,7 @@ static void microchip_icicle_kit_machine_class_init(ObjectClass *oc,
+ static const TypeInfo microchip_icicle_kit_machine_typeinfo = {
+     .name       = MACHINE_TYPE_NAME("microchip-icicle-kit"),
+     .parent     = TYPE_MACHINE,
++    .is_available = target_is_base_riscv,
+     .class_init = microchip_icicle_kit_machine_class_init,
+     .instance_init = microchip_icicle_kit_machine_instance_init,
+     .instance_size = sizeof(MicrochipIcicleKitState),
+diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
+index 9e3db34eed9..db1fb3e3347 100644
+--- a/hw/riscv/opentitan.c
++++ b/hw/riscv/opentitan.c
+@@ -337,6 +337,7 @@ static const TypeInfo open_titan_types[] = {
+     }, {
+         .name           = TYPE_OPENTITAN_MACHINE,
+         .parent         = TYPE_MACHINE,
++        .is_available   = target_is_base_riscv,
+         .instance_size  = sizeof(OpenTitanState),
+         .class_init     = opentitan_machine_class_init,
+         .is_available   = target_is_riscv32,
+diff --git a/hw/riscv/shakti_c.c b/hw/riscv/shakti_c.c
+index 0f96258b764..e8ae770f7ca 100644
+--- a/hw/riscv/shakti_c.c
++++ b/hw/riscv/shakti_c.c
+@@ -95,6 +95,7 @@ static void shakti_c_machine_class_init(ObjectClass *klass, const void *data)
+ static const TypeInfo shakti_c_machine_type_info = {
+     .name = TYPE_RISCV_SHAKTI_MACHINE,
+     .parent = TYPE_MACHINE,
++    .is_available = target_is_base_riscv,
+     .class_init = shakti_c_machine_class_init,
+     .instance_init = shakti_c_machine_instance_init,
+     .instance_size = sizeof(ShaktiCMachineState),
+diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
+index 1b6f9ab4fee..087d0c48e1e 100644
+--- a/hw/riscv/sifive_e.c
++++ b/hw/riscv/sifive_e.c
+@@ -165,6 +165,7 @@ static void sifive_e_machine_class_init(ObjectClass *oc, const void *data)
+ static const TypeInfo sifive_e_machine_typeinfo = {
+     .name       = MACHINE_TYPE_NAME("sifive_e"),
+     .parent     = TYPE_MACHINE,
++    .is_available = target_is_base_riscv,
+     .class_init = sifive_e_machine_class_init,
+     .instance_init = sifive_e_machine_instance_init,
+     .instance_size = sizeof(SiFiveEState),
+diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+index 344f3d915d7..d5cc9255da6 100644
+--- a/hw/riscv/sifive_u.c
++++ b/hw/riscv/sifive_u.c
+@@ -679,6 +679,7 @@ static void sifive_u_machine_class_init(ObjectClass *oc, const void *data)
+ static const TypeInfo sifive_u_machine_typeinfo = {
+     .name       = MACHINE_TYPE_NAME("sifive_u"),
+     .parent     = TYPE_MACHINE,
++    .is_available = target_is_base_riscv,
+     .class_init = sifive_u_machine_class_init,
+     .instance_init = sifive_u_machine_instance_init,
+     .instance_size = sizeof(SiFiveUState),
+diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
+index 63cf77e1de3..4bb58ec6203 100644
+--- a/hw/riscv/spike.c
++++ b/hw/riscv/spike.c
+@@ -292,6 +292,7 @@ static void spike_machine_class_init(ObjectClass *oc, const void *data)
+ static const TypeInfo spike_machine_typeinfo = {
+     .name       = MACHINE_TYPE_NAME("spike"),
+     .parent     = TYPE_MACHINE,
++    .is_available = target_is_base_riscv,
+     .class_init = spike_machine_class_init,
+     .instance_init = spike_machine_instance_init,
+     .instance_size = sizeof(SpikeState),
+diff --git a/hw/riscv/tt_atlantis.c b/hw/riscv/tt_atlantis.c
+index 086e95bd2d1..6e7272d705c 100644
+--- a/hw/riscv/tt_atlantis.c
++++ b/hw/riscv/tt_atlantis.c
+@@ -699,6 +699,7 @@ static const TypeInfo tt_atlantis_types[] = {
+     }, {
+         .name       = MACHINE_TYPE_NAME("tt-atlantis"),
+         .parent     = TYPE_MACHINE,
++        .is_available = target_is_base_riscv,
+         .class_init = tt_atlantis_machine_class_init,
+         .instance_size = sizeof(TTAtlantisState),
+         .is_available = target_is_riscv64,
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index 0edf75fefc3..2240a516d85 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -1202,6 +1202,7 @@ static void virt_machine_class_init(ObjectClass *oc, const void *data)
+ static const TypeInfo virt_machine_typeinfo = {
+     .name       = TYPE_RISCV_VIRT_MACHINE,
+     .parent     = TYPE_MACHINE,
++    .is_available = target_is_base_riscv,
+     .class_init = virt_machine_class_init,
+     .instance_init = virt_machine_instance_init,
+     .instance_finalize = virt_machine_instance_finalize,
+diff --git a/hw/riscv/xiangshan_kmh.c b/hw/riscv/xiangshan_kmh.c
+index 6bc669421fe..9578a11aee6 100644
+--- a/hw/riscv/xiangshan_kmh.c
++++ b/hw/riscv/xiangshan_kmh.c
+@@ -220,6 +220,7 @@ static void xiangshan_kmh_machine_class_init(ObjectClass *klass, const void *dat
+ static const TypeInfo xiangshan_kmh_machine_info = {
+     .name = TYPE_XIANGSHAN_KMH_MACHINE,
+     .parent = TYPE_MACHINE,
++    .is_available = target_is_base_riscv,
+     .instance_size = sizeof(XiangshanKmhState),
+     .class_init = xiangshan_kmh_machine_class_init,
+     .is_available = target_is_riscv64,
 -- 
 2.52.0.windows.1
 
