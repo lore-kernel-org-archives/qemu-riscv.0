@@ -4,69 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E76BBC9830D
-	for <qemu-riscv@archiver.kernel.org>; Wed, 23 Sep 2026 13:33:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D660DC98302
+	for <qemu-riscv@archiver.kernel.org>; Wed, 23 Sep 2026 13:33:40 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x9Mxs-0001Dz-Bb; Wed, 23 Sep 2026 09:24:48 -0400
+	id 1x9Mxw-0001i9-VV; Wed, 23 Sep 2026 09:24:53 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1x9MuT-0002TJ-NN
- for qemu-riscv@nongnu.org; Wed, 23 Sep 2026 09:21:20 -0400
+ id 1x9MuB-0002Cn-I9
+ for qemu-riscv@nongnu.org; Wed, 23 Sep 2026 09:21:01 -0400
 Received: from mail-dy2-x10.google.com ([2607:f8b0:4864:36::10])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1x9MuP-0007TB-UJ
- for qemu-riscv@nongnu.org; Wed, 23 Sep 2026 09:21:17 -0400
+ id 1x9Mu9-0007Qk-Hp
+ for qemu-riscv@nongnu.org; Wed, 23 Sep 2026 09:20:58 -0400
 Received: by mail-dy2-x10.google.com with SMTP id
- 5a478bee46e88-32dbbe82e13so793915eec.0
- for <qemu-riscv@nongnu.org>; Wed, 23 Sep 2026 06:21:03 -0700 (PDT)
+ 5a478bee46e88-33be7dfcfc1so1002990eec.1
+ for <qemu-riscv@nongnu.org>; Wed, 23 Sep 2026 06:20:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1790169662; x=1790774462; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=qin3vLUrrbcXuVdau3Ouu4JIt8wWynB3TLlDqfsVk5s=;
- b=UvZBdVDSD9qID4uLwUWOatbnXX27H0jp6J0XPmnzymuA5CvP1PEch/c6WxdAZRN1/O
- 51wZ+PgsnMgjWJ9xPe9wCIKryy/uN5HPBN+fkSkUn4Dk84BywPL+BkJEkAPSZBZcv2Ei
- h9WaduJktVpXNN3jK7WbuR1S1toQlIqTiGa1xSkDPdVHZ/1qLL5Nty0nHy1Uhw6a62Aw
- oBBLLlSDaGtt/KA2J6YmsiO6q3+rS2YNzWNaoYdD6i65VOqzi/VzxwE7W/8eKdA1burU
- NDt9SQq1yPqYzSeSMGAxW6G4CkwTRr2D00LLOmOPFkA2vQWSqjNtwgSB48YhB1QO7QRc
- 2O2Q==
+ d=gmail.com; s=20251104; t=1790169642; x=1790774442; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:mime-version:references
+ :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=F3AfQfrqvQe4UOX8IvAjiJQ3WGlTiTKTbcrqm5A18SE=;
+ b=B173eR+Hp7JKa1Q+OFMwg+IK02VOp4eeSmM+IrbkRsypVf/lADy81PqlodI02v+SvY
+ F+90RaKCRhdFQc62JSP3cS0AQ8MQX+8Cw72lmYR/d8og/lX8AHPFXVNtg3/aq9tHRzo0
+ 3WG6UxlxQoqhWU1Y090nKTtP9MMAHEAhGHojxA8DUroszximtArEGofjtbqtde+52Wdu
+ D+YUhhUBLrKD6xK98332ts6UyLZeME8Eoxho0bWfjpQEWHCVzN7Yi4nSD0EkKdYH24AX
+ Tgm9sdHc/lCbm7/p68NALeofjbmD+zPR0tPXM7XAW35VQ6iMJOj0uKcSCEDcF2swhV+a
+ yDJw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790169662; x=1790774462;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=qin3vLUrrbcXuVdau3Ouu4JIt8wWynB3TLlDqfsVk5s=;
- b=D958SiRabQ4F9Ur/G6KvKQk6FjXH5LoXvm50GCGP9Ke5vzly7UuZDkuwC5wj/x+ffJ
- c+ZcXhLQJRwkb+RCAEBQiu6ECo1JrfipxhBbqlgGu6Jyaf7IYw+w5rtUmeNo5/cJ4a2d
- u91Mc93EVCo2MzExNOcz4Bk2oHj0VZtQd5l3cuEd78gxWl3pWJOBfzD2UGsCfyF6y97g
- cN9jTQ9x5+QmAM599TTCKG6Lgi+t0vxX8t4XcN0RkalpT0BjizW3RX2b5MEL8FR0hbOn
- p9bS60F7yQxMDtCPJXxquPaoHSUzkiFHVnzkj2XA5NwCTKoIx4/tRYPXOYVt/Ix93oXL
- YyXQ==
+ d=1e100.net; s=20260707; t=1790169642; x=1790774442;
+ h=content-transfer-encoding:content-type:mime-version:references
+ :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=F3AfQfrqvQe4UOX8IvAjiJQ3WGlTiTKTbcrqm5A18SE=;
+ b=G2SyKoDsUeg7MKrSqeuSXbqqviqCbF1jyiKv1OtXUxgacXap2SO2H0pvvpU5wSUSqb
+ hwh2jR94X++6ksCUE/6sshXOU2GFDyvoQx39omRtjSG3QbzqDmiB4OYb6jgrX5BsMQoL
+ aPEiWVHUwsOn++lCh1fDgN95Yl+08lijDGS5xoxVeMfcngavNmNdMsdg5ala8y9JjKXs
+ OEnku+TLN7Guhj++FOUUhZWFp9NOMyNj0ypyHMCt/TpdSRRvSS5FwJq8eFz0SwPyrUlg
+ ZUzG3hj0VZqc1X2xdWg/zXXBhkFWaRyEQj4jUCs0vHenfStVCbBiaeiXIv7MSI0ydrpT
+ 78Sg==
 X-Forwarded-Encrypted: i=1;
- AKwUvByz1kbY8yInsgzmxBlR1vypHgg1afnvl6WPhADsQyiCCxy/+rXigd9eXi+elYev+Ktg+YF6lIgSmsum@nongnu.org
-X-Gm-Message-State: AFuF++leGZr2bvLW4/n4uZ5rjEW+kJw23rZKTZvW0L5Z+FSVJH9AZAYa
- wITtpz+j3bKggFdczXLRql4g6R+5kQvAmcgXvfzPbQ/V4L2x63KLt8Nw
-X-Gm-Gg: AYBFou0jihykbWRffNBNMxFWN8LYyaCi9qvaSjKtmOAKMtlTmqGpkdERwm7tEU0iNzq
- W3hKr0LFfUShI133U8TKFoyF7Hc7zoI/cLHp26nRqr0rcZYfFRE05K+KMZNwqbPrNS5NhqtuMg6
- ytdmk0Vm8MxMZhGL4ct0Texc8OoVW735Upz+9D1K/DjWk13fWhh8OA28Qc4AV7iktj+GEX4KPLW
- ikpQEVRjK77Zf203Hn+uV4giTNOVE9YUSwRZj9uoq+m/BnQga32GLGJHtdmBwsfYbS/tePaveXC
- B4+fy0IHKdChhaqLUPLf1rfAshNQlcjnAWlEOCIvmFJYVqb4ZGqpcQJ68RThWa4XxgHwVUHhBhX
- Fqeu60/dLrmB/hFeCGLarEZ+RfJxlwjXsYAROh4cHETnkAOO6qXdeOaQkepRpFwU0PjUpRCXSsZ
- iLe+Ji+heIRH2SpfAT0dk1/8+vGY87NKX7NEInInQ5/Xz9DloCt092iv64X/TMtlbb8wS5F4Grw
- ZubmytOpt9wTwC8u4BVecX0JQqdYxkBrs5J9O+Jaw==
-X-Received: by 2002:a05:7300:a224:b0:33c:141b:73a5 with SMTP id
- 5a478bee46e88-33e8e1afe12mr2620027eec.41.1790169661766; 
- Wed, 23 Sep 2026 06:21:01 -0700 (PDT)
+ AKwUvBwaPEll/nEbgaxzyvqI30d8toDLxi1vWOMEPbc86P0h45gFeGYP249h6z+qgkPeo1VLnd6FsYpPVHM1@nongnu.org
+X-Gm-Message-State: AFuF++k6uGKkUsWvF4lw1XeD31gOspuPqh1980/WDdmuETXXmS8txRvw
+ e2iai1XgPFlHHMDTh3BVp1jjupJr9+/hbpZ/jQFN/r0m73f9aETPCakx
+X-Gm-Gg: AYBFou39m7j61J4qGkNSqSWTX8itJLpD3Zv5Z7+YYXaLjoyDTcVnGR4NpgbOdW2qQMT
+ enknMmXeKXsKB4l8s6aex98sieYekGZ+YOXShhIHa8yeftrusQbx2daiPg9XlG+/kzhe3i4WU2O
+ WDOjR5bH3PY1Ide6tDv7NeeAeUmIlsJ/EQ3xI2xrWFKGLbKzoj5aSvsKeo1AmFkX0nNdPKiXzoW
+ udwbTfUZ481Myrxq3gQ3wJ8gwrdRMFDfNf/5jtobC8nb19LaL75M9CiL7TCgm6GIucVC3Jhtb2v
+ bv2QNQjftYXCjNa41itlcQuUycKlldEjgzzmLRF0UD/1NJ5sGaIcAJm+7LzpijXcxMAF1WxS6YZ
+ HBGaIK6wgiVbDEDFa0na7emMmns82nPlbewDKkKyn6WeI2VanMSsUgEb4CX7MJb0Zud6rwtu+T6
+ PKoZUr/a04kGWD3YhaA8x8fQg2gMG098ydiJ5yauraF6oXzqGVFsFp/S6hsXXxMoB+JuCXy6++l
+ nC/cxiTOgShiZTHLnJfjB2yiHLwUqT1K9/3Ejj9Lw==
+X-Received: by 2002:a05:693c:638c:20b0:339:7da3:a4f8 with SMTP id
+ 5a478bee46e88-33e8d6d1242mr2659932eec.19.1790169641572; 
+ Wed, 23 Sep 2026 06:20:41 -0700 (PDT)
 Received: from WIN-BH9M8FJACR9 ([103.94.185.75])
  by smtp.googlemail.com with ESMTPSA id
- 5a478bee46e88-33e97236754sm5553695eec.29.2026.09.23.06.20.53
+ 5a478bee46e88-33e97236754sm5553695eec.29.2026.09.23.06.20.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Sep 2026 06:20:59 -0700 (PDT)
+ Wed, 23 Sep 2026 06:20:39 -0700 (PDT)
 From: Yonggang Luo <luoyonggang@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: Cornelia Huck <cohuck@redhat.com>, xen-devel@lists.xenproject.org,
@@ -97,14 +98,14 @@ Cc: Cornelia Huck <cohuck@redhat.com>, xen-devel@lists.xenproject.org,
  Markus Armbruster <armbru@redhat.com>, Weiwei Li <liwei1518@gmail.com>,
  Song Gao <17746591750@163.com>, qemu-arm@nongnu.org, qemu-s390x@nongnu.org,
  Brian Cain <brian.cain@oss.qualcomm.com>
-Subject: [PATCH v3 024/114] target/riscv: uniquify TCG crc32, crc32c,
- and wfi helper names
-Date: Wed, 23 Sep 2026 21:14:58 +0800
-Message-ID: <20260923131635.1894-25-luoyonggang@gmail.com>
+Subject: [PATCH v3 022/114] hw/riscv/virt: prefix ACPI helpers with riscv_virt_
+Date: Wed, 23 Sep 2026 21:14:56 +0800
+Message-ID: <20260923131635.1894-23-luoyonggang@gmail.com>
 X-Mailer: git-send-email 2.52.0.windows.1
 In-Reply-To: <20260923131635.1894-1-luoyonggang@gmail.com>
 References: <20260923131635.1894-1-luoyonggang@gmail.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=2607:f8b0:4864:36::10;
  envelope-from=luoyonggang@gmail.com; helo=mail-dy2-x10.google.com
@@ -129,111 +130,73 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-- ARM already exports helper_crc32, helper_crc32c, helper_wfi, and the
-  matching helper_info_* objects. RISC-V used the same DEF_HELPER names,
-  which collide in a combined qemu-system link.
-- Rename the RISC-V helpers to riscv_crc32, riscv_crc32c, and riscv_wfi
-  so the generated C symbols are unique without meson -D prefixes.
+- virt_acpi_setup and virt_is_acpi_enabled collide with ARM virt when
+  both architectures are linked into one qemu-system binary.
+- Rename the RISC-V helpers to riscv_virt_acpi_setup and
+  riscv_virt_is_acpi_enabled. Leave file-local virt_acpi_build* names
+  unchanged.
 
 Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
 ---
- target/riscv/helper.h                              | 6 +++---
- target/riscv/tcg/bitmanip_helper.c                 | 4 ++--
- target/riscv/tcg/insn_trans/trans_privileged.c.inc | 2 +-
- target/riscv/tcg/insn_trans/trans_xlrbr.c.inc      | 4 ++--
- target/riscv/tcg/op_helper.c                       | 2 +-
- 5 files changed, 9 insertions(+), 9 deletions(-)
+ hw/riscv/virt-acpi-build.c | 2 +-
+ hw/riscv/virt.c            | 6 +++---
+ include/hw/riscv/virt.h    | 4 ++--
+ 3 files changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-index 9458a5152be..ef629b3c650 100644
---- a/target/riscv/helper.h
-+++ b/target/riscv/helper.h
-@@ -83,8 +83,8 @@ DEF_HELPER_FLAGS_1(unzip, TCG_CALL_NO_RWG_SE, tl, tl)
- DEF_HELPER_FLAGS_1(zip, TCG_CALL_NO_RWG_SE, tl, tl)
- DEF_HELPER_FLAGS_2(xperm4, TCG_CALL_NO_RWG_SE, tl, tl, tl)
- DEF_HELPER_FLAGS_2(xperm8, TCG_CALL_NO_RWG_SE, tl, tl, tl)
--DEF_HELPER_FLAGS_2(crc32, TCG_CALL_NO_RWG_SE, tl, tl, tl)
--DEF_HELPER_FLAGS_2(crc32c, TCG_CALL_NO_RWG_SE, tl, tl, tl)
-+DEF_HELPER_FLAGS_2(riscv_crc32, TCG_CALL_NO_RWG_SE, tl, tl, tl)
-+DEF_HELPER_FLAGS_2(riscv_crc32c, TCG_CALL_NO_RWG_SE, tl, tl, tl)
+diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
+index 8e516ec1148..de47631852f 100644
+--- a/hw/riscv/virt-acpi-build.c
++++ b/hw/riscv/virt-acpi-build.c
+@@ -1021,7 +1021,7 @@ static const VMStateDescription vmstate_virt_acpi_build = {
+     },
+ };
  
- /* Floating Point - Half Precision */
- DEF_HELPER_FLAGS_3(fadd_h, TCG_CALL_NO_RWG, i64, env, i64, i64)
-@@ -134,7 +134,7 @@ DEF_HELPER_1(sret, tl, env)
- DEF_HELPER_1(mret, tl, env)
- DEF_HELPER_1(mnret, tl, env)
- DEF_HELPER_1(ctr_clear, void, env)
--DEF_HELPER_1(wfi, void, env)
-+DEF_HELPER_1(riscv_wfi, void, env)
- DEF_HELPER_1(wrs_nto, void, env)
- DEF_HELPER_1(tlb_flush, void, env)
- DEF_HELPER_1(tlb_flush_all, void, env)
-diff --git a/target/riscv/tcg/bitmanip_helper.c b/target/riscv/tcg/bitmanip_helper.c
-index d8d94bca7ba..5af3efe194d 100644
---- a/target/riscv/tcg/bitmanip_helper.c
-+++ b/target/riscv/tcg/bitmanip_helper.c
-@@ -117,7 +117,7 @@ target_ulong HELPER(xperm8)(target_ulong rs1, target_ulong rs2)
-     return do_xperm(rs1, rs2, 3);
+-void virt_acpi_setup(RISCVVirtState *s)
++void riscv_virt_acpi_setup(RISCVVirtState *s)
+ {
+     AcpiBuildTables tables;
+     AcpiBuildState *build_state;
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index 686222fa0da..0edf75fefc3 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -706,8 +706,8 @@ static void virt_machine_done(Notifier *notifier, void *data)
+ 
+     virt_build_smbios(s);
+ 
+-    if (virt_is_acpi_enabled(s)) {
+-        virt_acpi_setup(s);
++    if (riscv_virt_is_acpi_enabled(s)) {
++        riscv_virt_acpi_setup(s);
+     }
  }
  
--target_ulong HELPER(crc32)(target_ulong rs1, target_ulong sz)
-+target_ulong HELPER(riscv_crc32)(target_ulong rs1, target_ulong sz)
- {
-     for (target_ulong i = 0; i < sz; i++) {
-         rs1 = crc32_table[rs1 & 0xFF] ^ (rs1 >> 8);
-@@ -126,7 +126,7 @@ target_ulong HELPER(crc32)(target_ulong rs1, target_ulong sz)
-     return rs1;
+@@ -1067,7 +1067,7 @@ static void virt_set_iommu_sys(Object *obj, Visitor *v, const char *name,
+     visit_type_OnOffAuto(v, name, &s->iommu_sys, errp);
  }
  
--target_ulong HELPER(crc32c)(target_ulong rs1, target_ulong sz)
-+target_ulong HELPER(riscv_crc32c)(target_ulong rs1, target_ulong sz)
+-bool virt_is_acpi_enabled(RISCVVirtState *s)
++bool riscv_virt_is_acpi_enabled(RISCVVirtState *s)
  {
-     for (target_ulong i = 0; i < sz; i++) {
-         rs1 = crc32c_table[rs1 & 0xFF] ^ (rs1 >> 8);
-diff --git a/target/riscv/tcg/insn_trans/trans_privileged.c.inc b/target/riscv/tcg/insn_trans/trans_privileged.c.inc
-index a8eaccef67e..0df78e89745 100644
---- a/target/riscv/tcg/insn_trans/trans_privileged.c.inc
-+++ b/target/riscv/tcg/insn_trans/trans_privileged.c.inc
-@@ -144,7 +144,7 @@ static bool trans_wfi(DisasContext *ctx, arg_wfi *a)
- #ifndef CONFIG_USER_ONLY
-     decode_save_opc(ctx, 0);
-     gen_update_pc(ctx, ctx->cur_insn_len);
--    gen_helper_wfi(tcg_env);
-+    gen_helper_riscv_wfi(tcg_env);
-     return true;
- #else
-     return false;
-diff --git a/target/riscv/tcg/insn_trans/trans_xlrbr.c.inc b/target/riscv/tcg/insn_trans/trans_xlrbr.c.inc
-index 01da2b6ce1d..795231f0839 100644
---- a/target/riscv/tcg/insn_trans/trans_xlrbr.c.inc
-+++ b/target/riscv/tcg/insn_trans/trans_xlrbr.c.inc
-@@ -29,11 +29,11 @@ static bool gen_crc(DisasContext *ctx, arg_r2 *a,
- #define TRANS_CRC32(NAME, SIZE) \
-     static bool trans_crc32_##NAME(DisasContext *ctx, arg_r2 *a) \
-     { if (SIZE == 8) { REQUIRE_64BIT(ctx); }; \
--      return gen_crc(ctx, a, gen_helper_crc32, tcg_constant_tl(SIZE)); }
-+      return gen_crc(ctx, a, gen_helper_riscv_crc32, tcg_constant_tl(SIZE)); }
- #define TRANS_CRC32C(NAME, SIZE) \
-     static bool trans_crc32c_##NAME(DisasContext *ctx, arg_r2 *a) \
-     { if (SIZE == 8) { REQUIRE_64BIT(ctx); }; \
--      return gen_crc(ctx, a, gen_helper_crc32c, tcg_constant_tl(SIZE)); }
-+      return gen_crc(ctx, a, gen_helper_riscv_crc32c, tcg_constant_tl(SIZE)); }
- 
- TRANS_CRC32(b, 1);
- TRANS_CRC32(h, 2);
-diff --git a/target/riscv/tcg/op_helper.c b/target/riscv/tcg/op_helper.c
-index a00370a7973..4f4932614f1 100644
---- a/target/riscv/tcg/op_helper.c
-+++ b/target/riscv/tcg/op_helper.c
-@@ -591,7 +591,7 @@ void helper_ctr_clear(CPURISCVState *env)
-     riscv_ctr_clear(env);
+     return s->acpi != ON_OFF_AUTO_OFF;
  }
+diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
+index 969aa5866ee..1cdc5840b7a 100644
+--- a/include/hw/riscv/virt.h
++++ b/include/hw/riscv/virt.h
+@@ -121,9 +121,9 @@ enum {
+ #define VIRT_PLIC_SIZE(__num_context) \
+     (VIRT_PLIC_CONTEXT_BASE + (__num_context) * VIRT_PLIC_CONTEXT_STRIDE)
  
--void helper_wfi(CPURISCVState *env)
-+void HELPER(riscv_wfi)(CPURISCVState *env)
- {
-     CPUState *cs = env_cpu(env);
-     bool rvs = riscv_has_ext(env, RVS);
+-bool virt_is_acpi_enabled(RISCVVirtState *s);
++bool riscv_virt_is_acpi_enabled(RISCVVirtState *s);
+ bool virt_is_iommu_sys_enabled(RISCVVirtState *s);
+-void virt_acpi_setup(RISCVVirtState *vms);
++void riscv_virt_acpi_setup(RISCVVirtState *vms);
+ 
+ /*
+  * The virt machine physical address space used by some of the devices
 -- 
 2.52.0.windows.1
 
