@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6935C9830B
-	for <qemu-riscv@archiver.kernel.org>; Wed, 23 Sep 2026 13:24:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B1FCC9830B
+	for <qemu-riscv@archiver.kernel.org>; Wed, 23 Sep 2026 13:26:10 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x9Mxh-0008SG-1t; Wed, 23 Sep 2026 09:24:38 -0400
+	id 1x9Mxq-0000wY-9V; Wed, 23 Sep 2026 09:24:46 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1x9Msv-0000yv-NB
- for qemu-riscv@nongnu.org; Wed, 23 Sep 2026 09:19:45 -0400
-Received: from mail-dy2-x10.google.com ([2607:f8b0:4864:36::10])
+ id 1x9Mtn-00023A-F9
+ for qemu-riscv@nongnu.org; Wed, 23 Sep 2026 09:20:48 -0400
+Received: from mail-dl2-x0e.google.com ([2607:f8b0:4864:38::e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1x9Msr-00074d-8Q
- for qemu-riscv@nongnu.org; Wed, 23 Sep 2026 09:19:41 -0400
-Received: by mail-dy2-x10.google.com with SMTP id
- 5a478bee46e88-328664c2da6so544679eec.1
- for <qemu-riscv@nongnu.org>; Wed, 23 Sep 2026 06:19:26 -0700 (PDT)
+ id 1x9Mtf-0007O4-BM
+ for qemu-riscv@nongnu.org; Wed, 23 Sep 2026 09:20:31 -0400
+Received: by mail-dl2-x0e.google.com with SMTP id
+ a92af1059eb24-144d60be6b0so399423c88.0
+ for <qemu-riscv@nongnu.org>; Wed, 23 Sep 2026 06:20:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1790169566; x=1790774366; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1790169624; x=1790774424; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=wwD9DuwZG4f9q5/deLy+Fa9fAvUmV5QMi6qQxOTBcxg=;
- b=JNC0dUK0+rX5/zmFOGxabz/hUcn0C/M+wreq+GZKFOZhMvB2pOs99IpKPLF9a7u1dI
- peLulM9uYxuF5Xb2OVglPTVCfSJ3K9yEe1dIt+2VxhlLkTadespWdRiEhtm/37hQEavX
- vEQrpvEMnBuv3PJXPZw5HOCwx3OQvyumPw6QIzjwuhDB6CeHPuQPxf+9Nc80x0YI+9DR
- ysDj7AowAt+Im2sTxwwyVD+7pt4d/LH4++LEVETnkqIoITKZ/dKqwAgZ7ZtFHPaUJo64
- RSb2g8Qj4/RW8mjzv1VZg0kP+Zi4cFt+F+ZNs700uYc3fnvv7kouo6p6hsjnVBzSH+03
- 8S8g==
+ bh=MggXP4Uti4XPPjQvDWGWmS5irh6Dnb5s6/0zImLVthk=;
+ b=YbRdB5NDRMiAg9sxJp9vOhvk+h43PrZFfxkmFYRZQFa1zORhpiaZ7vw29DAcF70t+4
+ Mm9BhewJePXKD93hNsMB2yrmbXUuDyNWBP7cE/azYbGZdKggTkg3+rr2zRTt8F/p0ecu
+ npuWNjvHwqbJRy/SiTKMz7lzzlaLbUJ81/a20jynvO1qNrNBCFsRhMvO3IX48rY2F1V0
+ 3rRJW9nUoN6DNNfqWiitnR//RO8ZtreTJB1gU4IKk8ns5nsNyMtaiDk86hc7SelxGZ+b
+ lY4K9by0zeozrlfBE5GlB4vBAjCdnzAi5GyHYSsHCETGKT+47vFU7FFrfcnFpM9UDPjh
+ 40sA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790169566; x=1790774366;
+ d=1e100.net; s=20260707; t=1790169624; x=1790774424;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=wwD9DuwZG4f9q5/deLy+Fa9fAvUmV5QMi6qQxOTBcxg=;
- b=T8KVVsKqg77CEPUdF4+QDFJkyO1POfdEGvyLNG64qvt+2dUds/hAwqzxXMBc0NkjE1
- t4Lp47eoXUh2HgnCcYm27OmVnuDWPARIB0dZuudSwR0yKvGhUuOmnLukkDg88Eu30cjk
- mtEAHSZUV2/UbXqgWG6wm1zEKWSPkjm90GQu9n7pNqf2PNL7g0AwDAMHWtj8t2sBLhHr
- f3N3hd9m/jPXNXSN+FeAIl0Ta5j7h4vF07S/skkhs0MPpNXNMitiOxWXJ+vW5GHDwbfx
- GReYiG0YWqGKl1k7DnLA3JlUxxh+xZX2XzeLK3Ptw1TMiuW5cMCEucPl9/VTDnV6Uo7E
- Jaqg==
+ bh=MggXP4Uti4XPPjQvDWGWmS5irh6Dnb5s6/0zImLVthk=;
+ b=M8JDSeP1yuGNuSCnDPh/XlyeFtCuKCQUPr9pVDwQxYk56Q04G0s1qdRK1l8I+NsIOZ
+ +/SnlvPkozN0KmfXTaRH2bPwe+ok+9c/jEBdqNDVtdXRW2AtiHUuPm4+6Mdh8Fgulati
+ 7h7t3slb1UiW2gs4B4JGxq3CfwJ2HjaXs82kzdxrRjMsyeDYkavqFWkCc5/qu3Kx4Zop
+ O+mz/PICAs34nby1AXY09yyb5IFzBTE4O/Ev9Th4/Hg5bvFuj49U0GySlhbFAd9cgSTs
+ Jt4vvmooR6D5SucVgNk52TMq9kMC08DFJQuCK7Myf42+AUXeyZgF9fr7o5fmi0h/x5eJ
+ rGYQ==
 X-Forwarded-Encrypted: i=1;
- AKwUvBxAwpT6VO2oyRW69oUrU8LRBq8XL9WtbfLtvSwTrwjjyk2ehlFDC/P3bewzeEyjDEBOv3nMlLjLTIaU@nongnu.org
-X-Gm-Message-State: AFuF++mNnY7pLf3XEhB+bUVU/+TqOa4sxlx62DOKqcdQ82y5OahRpmO9
- RWq5m9sikzFEPEY/oqjG5lM4IP2EY8WZko+8VLznStcrymRqCfA8XcXYtbyUBJU6Pvw=
-X-Gm-Gg: AYBFou0Z1H9ZHD0H1BlQiwggEq9AnJZY3+tcJrFbPXzHYqBteIY7X4Mf7+t2TsixvZP
- j73CcLu74RB30POuTbf9ayEMkjdyYmRd3cchKLl3+ABKTaUg7SWcrWbRYpJwIL0vDo/DpwbqUbA
- w5nrJNOtOIF+fFjLaumxP3weAWets1igzzToV62EMN1JGFVXBfK89HDqIoeydZRRiJF+9LF4nQW
- kQ9r1q+XRlpmB6mjVvRjhx1Ic20A8rb0TnM5qIpXdNRPEtxHRbgx8k8nDl7UWnVc29ef7MwswB1
- xEiF0ftFDuvweGiKeiWvKN1tNBWhqxVvz8fQhkEBk97toDTR0csNzZxBmV+caq4EJzExJWESMaz
- xEKZhAewXdgQckIWvJQx589nfzvltU1wDsKYs0RFFxov8MmlrvmrqyWTi9ONC98YN92hukiHkOp
- sK+U99zuSLKXyx69D++m7OG550zgGmMo3h8qhw511C197Sq1bxbY9pU99/u6VVnrRJLPRaAF7oF
- XaSpdK8x36O/tiO11Xws+n9WNJHBJY=
-X-Received: by 2002:a05:693c:638c:10b0:33e:6a54:b3ef with SMTP id
- 5a478bee46e88-33e8c05f69amr2514746eec.18.1790169565697; 
- Wed, 23 Sep 2026 06:19:25 -0700 (PDT)
+ AKwUvBxVVRLMjDwSZQdpd2mK4bV2ypMFExhMdrhQmF3CeEp9yQCWymmxyfTwCuSP34LWa0s8KzL47oY0p+sT@nongnu.org
+X-Gm-Message-State: AFuF++mOBS2cd6k+gtnEY2XITzHWF3R42sq9smdXXGuGyZOwM714vMkD
+ OpJHyxK9c+2f4oRQzZ2KfMwU3qar+uG5ZPtZ7sKkEE34eYw7ItBHrm20
+X-Gm-Gg: AYBFou1iscZfwH3j5AbSZ7uAqf6kF3P2rhWdUyxugxrxscnfjJvQtzZTq9+EgdNIT/8
+ 2SdvawBNmnQrvxVfwtWgceUMzsMIjdaZCYW2Muv6gdR85n2FTNctSBOTEP+sAfaQM1bW47kkAYd
+ 5Lj5D3c/f5dmBd5UUilw+gfrvYxIfFak9oR6NLlUU7pEcfWGgAjfMWNGGfKuzJHrq8BoaMUg4Qq
+ 39UT5vF51G0qGd8lodghmIdPOFybgGVqrppwviSfawLj/r2LEZ1cdsJp7/OEMHZpjHqGwYeDTDx
+ GKl29cXqrhe4AF0tkxWOuAek4WftLKEfXYUMGe4PfaaNIq2kAR9navCQSX7xhAcXMkrGJqumDYH
+ ZblIbJcs6E2EWpEf0O1RA9lJdHdxVZZotQj9XRv3WCIM/XTs2MJ5/54fVw4KALldyk2y4IsJ91K
+ 7kqWd2zPCGm4718B1bu+dynoiHF1H/z+ZCAeXn2NaSaxgsIXp+CWWrxvOJpV139leR9jixk2+Vm
+ D91waS9DKOpRvCvuoefG6zA2QSk89r+USKBm9FSOQ==
+X-Received: by 2002:a05:7301:7bc4:b0:333:f481:2252 with SMTP id
+ 5a478bee46e88-33e8ddc490amr4023550eec.34.1790169623518; 
+ Wed, 23 Sep 2026 06:20:23 -0700 (PDT)
 Received: from WIN-BH9M8FJACR9 ([103.94.185.75])
  by smtp.googlemail.com with ESMTPSA id
- 5a478bee46e88-33e97236754sm5553695eec.29.2026.09.23.06.19.17
+ 5a478bee46e88-33e97236754sm5553695eec.29.2026.09.23.06.20.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Sep 2026 06:19:24 -0700 (PDT)
+ Wed, 23 Sep 2026 06:20:16 -0700 (PDT)
 From: Yonggang Luo <luoyonggang@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: Cornelia Huck <cohuck@redhat.com>, xen-devel@lists.xenproject.org,
@@ -97,16 +97,17 @@ Cc: Cornelia Huck <cohuck@redhat.com>, xen-devel@lists.xenproject.org,
  Markus Armbruster <armbru@redhat.com>, Weiwei Li <liwei1518@gmail.com>,
  Song Gao <17746591750@163.com>, qemu-arm@nongnu.org, qemu-s390x@nongnu.org,
  Brian Cain <brian.cain@oss.qualcomm.com>
-Subject: [PATCH v3 015/114] qom: pass TargetInfo to is_available
-Date: Wed, 23 Sep 2026 21:14:49 +0800
-Message-ID: <20260923131635.1894-16-luoyonggang@gmail.com>
+Subject: [PATCH v3 020/114] tests/unit: add module-init and qom is-available
+ tests
+Date: Wed, 23 Sep 2026 21:14:54 +0800
+Message-ID: <20260923131635.1894-21-luoyonggang@gmail.com>
 X-Mailer: git-send-email 2.52.0.windows.1
 In-Reply-To: <20260923131635.1894-1-luoyonggang@gmail.com>
 References: <20260923131635.1894-1-luoyonggang@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:36::10;
- envelope-from=luoyonggang@gmail.com; helo=mail-dy2-x10.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:38::e;
+ envelope-from=luoyonggang@gmail.com; helo=mail-dl2-x0e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -128,359 +129,494 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Change TypeInfo.is_available to TypeIsAvailable taking const
-TargetInfo *. Store the callback on TypeImpl and add
-object_class_get_is_available. ARM and RISC-V machines use
-target_is_aarch64(), target_is_riscv32(), and target_is_riscv64().
-object.h includes target-info.h.
+The hook phases and QOM inherit/filter path have no unit coverage.
+Add test-module-init for before/after hooks and module_call_init_fn,
+and test-qom-is-available for inherit, filter, and late register
+when x86_64-softmmu is present.
 
 Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
 ---
- hw/arm/aspeed_ast27x0-fc.c  |  2 +-
- hw/arm/aspeed_ast27x0_evb.c |  4 ++--
- hw/arm/raspi.c              |  4 ++--
- hw/arm/raspi4b.c            |  2 +-
- hw/riscv/boston-aia.c       |  4 ++--
- hw/riscv/k230.c             |  4 ++--
- hw/riscv/microchip_pfsoc.c  |  4 ++--
- hw/riscv/opentitan.c        |  4 ++--
- hw/riscv/shakti_c.c         |  4 ++--
- hw/riscv/tt_atlantis.c      |  4 ++--
- hw/riscv/xiangshan_kmh.c    |  4 ++--
- include/qom/object.h        | 27 ++++++++++++++++++++++++---
- qom/object.c                | 11 ++++++++++-
- 13 files changed, 54 insertions(+), 24 deletions(-)
+ tests/unit/meson.build             |   8 +
+ tests/unit/test-module-init.c      | 186 +++++++++++++++++++++
+ tests/unit/test-qom-is-available.c | 250 +++++++++++++++++++++++++++++
+ 3 files changed, 444 insertions(+)
+ create mode 100644 tests/unit/test-module-init.c
+ create mode 100644 tests/unit/test-qom-is-available.c
 
-diff --git a/hw/arm/aspeed_ast27x0-fc.c b/hw/arm/aspeed_ast27x0-fc.c
-index 73362b60d2a..8a7c6a116ac 100644
---- a/hw/arm/aspeed_ast27x0-fc.c
-+++ b/hw/arm/aspeed_ast27x0-fc.c
-@@ -234,7 +234,7 @@ static const TypeInfo ast2700fc_types[] = {
-         .parent         = TYPE_MACHINE,
-         .class_init     = ast2700fc_class_init,
-         .instance_size  = sizeof(Ast2700FCState),
--        .is_available   = target_aarch64,
-+        .is_available   = target_is_aarch64,
-     },
- };
+diff --git a/tests/unit/meson.build b/tests/unit/meson.build
+index c806dbc4ffa..9387d2c34e6 100644
+--- a/tests/unit/meson.build
++++ b/tests/unit/meson.build
+@@ -2,6 +2,7 @@
+ testblock = declare_dependency(dependencies: [block], sources: 'iothread.c')
  
-diff --git a/hw/arm/aspeed_ast27x0_evb.c b/hw/arm/aspeed_ast27x0_evb.c
-index 460c9ff0d2e..02a8cff1d9d 100644
---- a/hw/arm/aspeed_ast27x0_evb.c
-+++ b/hw/arm/aspeed_ast27x0_evb.c
-@@ -75,13 +75,13 @@ static const TypeInfo aspeed_ast27x0_evb_types[] = {
-         .name          = MACHINE_TYPE_NAME("ast2700a1-evb"),
-         .parent        = TYPE_ASPEED_MACHINE,
-         .class_init    = aspeed_machine_ast2700a1_evb_class_init,
--        .is_available  = target_aarch64,
-+        .is_available  = target_is_aarch64,
-     },
-     {
-         .name          = MACHINE_TYPE_NAME("ast2700a2-evb"),
-         .parent        = TYPE_ASPEED_MACHINE,
-         .class_init    = aspeed_machine_ast2700a2_evb_class_init,
--        .is_available  = target_aarch64,
-+        .is_available  = target_is_aarch64,
-     }
- };
- 
-diff --git a/hw/arm/raspi.c b/hw/arm/raspi.c
-index fadbacb2534..22b06c6ca22 100644
---- a/hw/arm/raspi.c
-+++ b/hw/arm/raspi.c
-@@ -403,12 +403,12 @@ static const TypeInfo raspi_machine_types[] = {
-         .name           = MACHINE_TYPE_NAME("raspi3ap"),
-         .parent         = TYPE_RASPI_MACHINE,
-         .class_init     = raspi3ap_machine_class_init,
--        .is_available   = target_aarch64,
-+        .is_available   = target_is_aarch64,
-     }, {
-         .name           = MACHINE_TYPE_NAME("raspi3b"),
-         .parent         = TYPE_RASPI_MACHINE,
-         .class_init     = raspi3b_machine_class_init,
--        .is_available   = target_aarch64,
-+        .is_available   = target_is_aarch64,
-     }, {
-         .name           = TYPE_RASPI_MACHINE,
-         .parent         = TYPE_RASPI_BASE_MACHINE,
-diff --git a/hw/arm/raspi4b.c b/hw/arm/raspi4b.c
-index 566d64572db..a1dc477f25e 100644
---- a/hw/arm/raspi4b.c
-+++ b/hw/arm/raspi4b.c
-@@ -121,7 +121,7 @@ static const TypeInfo raspi4b_machine_type = {
-     .parent         = TYPE_RASPI_BASE_MACHINE,
-     .instance_size  = sizeof(Raspi4bMachineState),
-     .class_init     = raspi4b_machine_class_init,
--    .is_available   = target_aarch64,
-+    .is_available   = target_is_aarch64,
- };
- 
- static void raspi4b_machine_register_type(void)
-diff --git a/hw/riscv/boston-aia.c b/hw/riscv/boston-aia.c
-index ba16b7dbc69..2618b424efe 100644
---- a/hw/riscv/boston-aia.c
-+++ b/hw/riscv/boston-aia.c
-@@ -468,14 +468,14 @@ static const TypeInfo boston_types[] = {
-         .name          = TYPE_MIPS_BOSTON_AIA,
-         .parent        = TYPE_SYS_BUS_DEVICE,
-         .instance_size = sizeof(BostonState),
--        .is_available  = target_riscv64,
-+        .is_available  = target_is_riscv64,
-     },
-     {
-         .name          = MACHINE_TYPE_NAME("boston-aia"),
-         .parent        = TYPE_MACHINE,
-         .class_init    = boston_mach_class_init,
-         .instance_size = sizeof(MachineState),
--        .is_available  = target_riscv64,
-+        .is_available  = target_is_riscv64,
-     },
- };
- 
-diff --git a/hw/riscv/k230.c b/hw/riscv/k230.c
-index 43b6ae6d2f2..79715265da6 100644
---- a/hw/riscv/k230.c
-+++ b/hw/riscv/k230.c
-@@ -421,7 +421,7 @@ static const TypeInfo k230_soc_type_info = {
-     .instance_size = sizeof(K230SoCState),
-     .instance_init = k230_soc_init,
-     .class_init = k230_soc_class_init,
--    .is_available = target_riscv64,
-+    .is_available = target_is_riscv64,
- };
- 
- static void k230_soc_register_types(void)
-@@ -560,7 +560,7 @@ static const TypeInfo k230_machine_typeinfo = {
-     .class_init = k230_machine_class_init,
-     .instance_init = k230_machine_instance_init,
-     .instance_size = sizeof(K230MachineState),
--    .is_available = target_riscv64,
-+    .is_available = target_is_riscv64,
- };
- 
- static void k230_machine_init_register_types(void)
-diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
-index b2991e5a710..cc4b6bc3529 100644
---- a/hw/riscv/microchip_pfsoc.c
-+++ b/hw/riscv/microchip_pfsoc.c
-@@ -505,7 +505,7 @@ static const TypeInfo microchip_pfsoc_soc_type_info = {
-     .instance_size = sizeof(MicrochipPFSoCState),
-     .instance_init = microchip_pfsoc_soc_instance_init,
-     .class_init = microchip_pfsoc_soc_class_init,
--    .is_available = target_riscv64,
-+    .is_available = target_is_riscv64,
- };
- 
- static void microchip_pfsoc_soc_register_types(void)
-@@ -759,7 +759,7 @@ static const TypeInfo microchip_icicle_kit_machine_typeinfo = {
-     .class_init = microchip_icicle_kit_machine_class_init,
-     .instance_init = microchip_icicle_kit_machine_instance_init,
-     .instance_size = sizeof(MicrochipIcicleKitState),
--    .is_available = target_riscv64,
-+    .is_available = target_is_riscv64,
- };
- 
- static void microchip_icicle_kit_machine_init_register_types(void)
-diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
-index c3a563db926..9e3db34eed9 100644
---- a/hw/riscv/opentitan.c
-+++ b/hw/riscv/opentitan.c
-@@ -333,13 +333,13 @@ static const TypeInfo open_titan_types[] = {
-         .instance_size  = sizeof(LowRISCIbexSoCState),
-         .instance_init  = lowrisc_ibex_soc_init,
-         .class_init     = lowrisc_ibex_soc_class_init,
--        .is_available   = target_riscv32,
-+        .is_available   = target_is_riscv32,
-     }, {
-         .name           = TYPE_OPENTITAN_MACHINE,
-         .parent         = TYPE_MACHINE,
-         .instance_size  = sizeof(OpenTitanState),
-         .class_init     = opentitan_machine_class_init,
--        .is_available   = target_riscv32,
-+        .is_available   = target_is_riscv32,
-     }
- };
- 
-diff --git a/hw/riscv/shakti_c.c b/hw/riscv/shakti_c.c
-index 76cfe30918a..0f96258b764 100644
---- a/hw/riscv/shakti_c.c
-+++ b/hw/riscv/shakti_c.c
-@@ -98,7 +98,7 @@ static const TypeInfo shakti_c_machine_type_info = {
-     .class_init = shakti_c_machine_class_init,
-     .instance_init = shakti_c_machine_instance_init,
-     .instance_size = sizeof(ShaktiCMachineState),
--    .is_available = target_riscv64,
-+    .is_available = target_is_riscv64,
- };
- 
- static void shakti_c_machine_type_info_register(void)
-@@ -188,7 +188,7 @@ static const TypeInfo shakti_c_type_info = {
-     .class_init = shakti_c_soc_class_init,
-     .instance_init = shakti_c_soc_instance_init,
-     .instance_size = sizeof(ShaktiCSoCState),
--    .is_available = target_riscv64,
-+    .is_available = target_is_riscv64,
- };
- 
- static void shakti_c_type_info_register(void)
-diff --git a/hw/riscv/tt_atlantis.c b/hw/riscv/tt_atlantis.c
-index f54eb942f37..086e95bd2d1 100644
---- a/hw/riscv/tt_atlantis.c
-+++ b/hw/riscv/tt_atlantis.c
-@@ -695,13 +695,13 @@ static const TypeInfo tt_atlantis_types[] = {
-         .instance_size = sizeof(TTAtlantisSoCState),
-         .instance_init = tt_atlantis_soc_init,
-         .class_init = tt_atlantis_soc_class_init,
--        .is_available = target_riscv64,
-+        .is_available = target_is_riscv64,
-     }, {
-         .name       = MACHINE_TYPE_NAME("tt-atlantis"),
-         .parent     = TYPE_MACHINE,
-         .class_init = tt_atlantis_machine_class_init,
-         .instance_size = sizeof(TTAtlantisState),
--        .is_available = target_riscv64,
-+        .is_available = target_is_riscv64,
-     },
- };
- 
-diff --git a/hw/riscv/xiangshan_kmh.c b/hw/riscv/xiangshan_kmh.c
-index f2383c53993..6bc669421fe 100644
---- a/hw/riscv/xiangshan_kmh.c
-+++ b/hw/riscv/xiangshan_kmh.c
-@@ -158,7 +158,7 @@ static const TypeInfo xiangshan_kmh_soc_info = {
-     .instance_size = sizeof(XiangshanKmhSoCState),
-     .instance_init = xiangshan_kmh_soc_instance_init,
-     .class_init = xiangshan_kmh_soc_class_init,
--    .is_available = target_riscv64,
-+    .is_available = target_is_riscv64,
- };
- 
- static void xiangshan_kmh_soc_register_types(void)
-@@ -222,7 +222,7 @@ static const TypeInfo xiangshan_kmh_machine_info = {
-     .parent = TYPE_MACHINE,
-     .instance_size = sizeof(XiangshanKmhState),
-     .class_init = xiangshan_kmh_machine_class_init,
--    .is_available = target_riscv64,
-+    .is_available = target_is_riscv64,
- };
- 
- static void xiangshan_kmh_machine_register_types(void)
-diff --git a/include/qom/object.h b/include/qom/object.h
-index 4c0645817a5..f2dc22f0eb0 100644
---- a/include/qom/object.h
-+++ b/include/qom/object.h
-@@ -16,6 +16,7 @@
- 
- #include "qapi/qapi-builtin-types.h"
- #include "qemu/module.h"
-+#include "qemu/target-info.h"
- 
- struct TypeImpl;
- typedef struct TypeImpl *Type;
-@@ -117,6 +118,15 @@ typedef void (ObjectUnparent)(Object *obj);
-  */
- typedef void (ObjectFree)(void *obj);
- 
-+/**
-+ * typedef TypeIsAvailable:
-+ * @ti: TargetInfo to test.
-+ *
-+ * Returns whether a type is available for @ti. Typical implementations
-+ * are target_is_*().
-+ */
-+typedef bool (TypeIsAvailable)(const TargetInfo *ti);
-+
- #define OBJECT_CLASS_CAST_CACHE 4
- 
- /**
-@@ -473,8 +483,10 @@ struct Object
-  * @class_data: Data to pass to the @class_init,
-  *   @class_base_init. This can be useful when building dynamic
-  *   classes.
-- * @is_available: callback invoked at registration time, to dynamically check if
-- *   this type should be available or not.
-+ * @is_available: Optional callback. Unset inherits the parent type's
-+ *   callback in the MODULE_INIT_QOM after pass (parents are not all
-+ *   registered at type_register time). After inherit the callback is
-+ *   never NULL. Callers may also invoke it with a chosen TargetInfo.
-  * @interfaces: The list of interfaces associated with this type.  This
-  *   should point to a static array that's terminated with a zero filled
-  *   element.
-@@ -498,7 +510,7 @@ struct TypeInfo
-     void (*class_base_init)(ObjectClass *klass, const void *data);
-     const void *class_data;
- 
--    bool (*is_available)(void);
-+    TypeIsAvailable *is_available;
-     const InterfaceInfo *interfaces;
- };
- 
-@@ -1087,6 +1099,15 @@ bool object_class_is_abstract(ObjectClass *klass);
-  */
- bool object_class_is_secure(ObjectClass *klass);
- 
-+/**
-+ * object_class_get_is_available:
-+ * @klass: The class to obtain TypeInfo.is_available for.
-+ *
-+ * Returns: The availability callback (own or inherited from a parent).
-+ * Never %NULL after MODULE_INIT_QOM inherit.
-+ */
-+TypeIsAvailable *object_class_get_is_available(ObjectClass *klass);
-+
- /**
-  * object_class_by_name:
-  * @typename: The QOM typename to obtain the class for.
-diff --git a/qom/object.c b/qom/object.c
-index 96498f3d001..a3e75927e82 100644
---- a/qom/object.c
-+++ b/qom/object.c
-@@ -15,6 +15,7 @@
- #include "qom/compat-properties.h"
- #include "qom/object.h"
- #include "qom/object_interfaces.h"
-+#include "qemu/target-info-qapi.h"
- #include "qemu/cutils.h"
- #include "qemu/memalign.h"
- #include "qapi/visitor.h"
-@@ -71,6 +72,8 @@ struct TypeImpl
-     bool abstract;
-     bool secure;
- 
-+    TypeIsAvailable *is_available;
-+
-     const char *parent;
-     TypeImpl *parent_type;
- 
-@@ -126,6 +129,7 @@ static TypeImpl *type_new(const TypeInfo *info)
- 
-     ti->abstract = info->abstract;
-     ti->secure = info->secure;
-+    ti->is_available = info->is_available;
- 
-     for (i = 0; info->interfaces && info->interfaces[i].type; i++) {
-         ti->interfaces[i].typename = g_strdup(info->interfaces[i].type);
-@@ -167,7 +171,7 @@ static TypeImpl *type_register_internal(const TypeInfo *info)
-         abort();
-     }
- 
--    if (info->is_available && !info->is_available()) {
-+    if (info->is_available && !info->is_available(target_info())) {
-         return NULL;
-     }
- 
-@@ -1153,6 +1157,11 @@ bool object_class_is_secure(ObjectClass *klass)
-     return klass->type->secure;
+ tests = {
++  'test-module-init': [],
+   'check-block-qdict': [],
+   'check-qdict': [],
+   'check-qnum': [],
+@@ -57,6 +58,13 @@ tests = {
+   'test-envlist': [],
  }
  
-+TypeIsAvailable *object_class_get_is_available(ObjectClass *klass)
++if 'x86_64-softmmu' in target_info_def_objects
++  tests += {
++    'test-qom-is-available': [qom, declare_dependency(
++      objects: target_info_def_objects['x86_64-softmmu'])],
++  }
++endif
++
+ if have_system or have_tools
+   tests += {
+     'test-qmp-event': [testqapi],
+diff --git a/tests/unit/test-module-init.c b/tests/unit/test-module-init.c
+new file mode 100644
+index 00000000000..85fa3ba3d54
+--- /dev/null
++++ b/tests/unit/test-module-init.c
+@@ -0,0 +1,186 @@
++/*
++ * Module before/after hooks, static ModuleEntry, and module_call_init_fn
++ *
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ */
++
++#include "qemu/osdep.h"
++#include "qapi/error.h"
++#include "qemu/module.h"
++
++#define SEQ_BEFORE 1
++#define SEQ_INIT_A 2
++#define SEQ_INIT_B 3
++#define SEQ_AFTER 4
++#define SEQ_FN 5
++
++static int seq[16];
++static int seq_n;
++static int first_seq[16];
++static int first_seq_n;
++static ModuleInitPhase last_phase;
++static ModuleInitPhase first_phase;
++static bool fail_before;
++static bool fail_after;
++static int fn_ran;
++static int dso_ran;
++
++static void seq_add(int id)
 +{
-+    return klass->type->is_available;
++    g_assert_cmpint(seq_n, <, (int)ARRAY_SIZE(seq));
++    seq[seq_n++] = id;
 +}
 +
- const char *object_class_get_name(ObjectClass *klass)
- {
-     return klass->type->name;
++static bool test_before(ModuleInitPhase phase, Error **errp)
++{
++    last_phase = phase;
++    seq_add(SEQ_BEFORE);
++    if (fail_before) {
++        error_setg(errp, "before failed");
++        return false;
++    }
++    return true;
++}
++
++static bool test_after(ModuleInitPhase phase, Error **errp)
++{
++    last_phase = phase;
++    seq_add(SEQ_AFTER);
++    if (fail_after) {
++        error_setg(errp, "after failed");
++        return false;
++    }
++    return true;
++}
++
++static void init_a(void)
++{
++    seq_add(SEQ_INIT_A);
++}
++
++static void init_b(void)
++{
++    seq_add(SEQ_INIT_B);
++}
++
++static void init_fn(void)
++{
++    fn_ran++;
++    seq_add(SEQ_FN);
++}
++
++static void init_dso(void)
++{
++    dso_ran++;
++}
++
++static ModuleEntry entry_a = {
++    .init = init_a,
++};
++
++static ModuleEntry entry_b = {
++    .init = init_b,
++};
++
++static ModuleEntry entry_dso = {
++    .init = init_dso,
++};
++
++static void reset_seq(void)
++{
++    seq_n = 0;
++    memset(seq, 0, sizeof(seq));
++}
++
++static void test_builtin_order(void)
++{
++    g_assert_cmpint(first_phase, ==, MODULE_INIT_PHASE_ON);
++    g_assert_cmpint(first_seq_n, ==, 4);
++    g_assert_cmpint(first_seq[0], ==, SEQ_BEFORE);
++    g_assert_cmpint(first_seq[1], ==, SEQ_INIT_A);
++    g_assert_cmpint(first_seq[2], ==, SEQ_INIT_B);
++    g_assert_cmpint(first_seq[3], ==, SEQ_AFTER);
++    g_assert_cmpint(dso_ran, ==, 0);
++}
++
++static void test_call_init_idempotent(void)
++{
++    reset_seq();
++    module_call_init(MODULE_INIT_FUZZ_TARGET);
++    g_assert_cmpint(seq_n, ==, 0);
++}
++
++static void test_call_init_fn(void)
++{
++    int old_fn = fn_ran;
++
++    reset_seq();
++    module_call_init_fn(MODULE_INIT_FUZZ_TARGET, init_fn, &error_abort);
++    g_assert_cmpint(last_phase, ==, MODULE_INIT_PHASE_DSO_AFTER);
++    g_assert_cmpint(fn_ran, ==, old_fn + 1);
++    g_assert_cmpint(seq_n, ==, 3);
++    g_assert_cmpint(seq[0], ==, SEQ_BEFORE);
++    g_assert_cmpint(seq[1], ==, SEQ_FN);
++    g_assert_cmpint(seq[2], ==, SEQ_AFTER);
++}
++
++static void test_before_fail(void)
++{
++    Error *err = NULL;
++    int old_fn = fn_ran;
++
++    reset_seq();
++    fail_before = true;
++    module_call_init_fn(MODULE_INIT_FUZZ_TARGET, init_fn, &err);
++    fail_before = false;
++    g_assert_nonnull(err);
++    g_assert_cmpstr(error_get_pretty(err), ==, "before failed");
++    g_assert_cmpint(fn_ran, ==, old_fn);
++    g_assert_cmpint(seq_n, ==, 1);
++    g_assert_cmpint(seq[0], ==, SEQ_BEFORE);
++    error_free(err);
++}
++
++static void test_after_fail(void)
++{
++    Error *err = NULL;
++    int old_fn = fn_ran;
++
++    reset_seq();
++    fail_after = true;
++    module_call_init_fn(MODULE_INIT_FUZZ_TARGET, init_fn, &err);
++    fail_after = false;
++    g_assert_nonnull(err);
++    g_assert_cmpstr(error_get_pretty(err), ==, "after failed");
++    g_assert_cmpint(fn_ran, ==, old_fn + 1);
++    g_assert_cmpint(seq_n, ==, 3);
++    g_assert_cmpint(seq[0], ==, SEQ_BEFORE);
++    g_assert_cmpint(seq[1], ==, SEQ_FN);
++    g_assert_cmpint(seq[2], ==, SEQ_AFTER);
++    error_free(err);
++}
++
++int main(int argc, char **argv)
++{
++    g_test_init(&argc, &argv, NULL);
++
++    register_module_hooks(MODULE_INIT_FUZZ_TARGET, test_before, test_after);
++    register_module_init(&entry_a, MODULE_INIT_FUZZ_TARGET);
++    register_module_init(&entry_b, MODULE_INIT_FUZZ_TARGET);
++    register_dso_module_init(&entry_dso, MODULE_INIT_FUZZ_TARGET);
++
++    reset_seq();
++    module_call_init(MODULE_INIT_FUZZ_TARGET);
++    first_seq_n = seq_n;
++    memcpy(first_seq, seq, sizeof(seq));
++    first_phase = last_phase;
++
++    g_test_add_func("/module/init/builtin-order", test_builtin_order);
++    g_test_add_func("/module/init/call-init-idempotent",
++                    test_call_init_idempotent);
++    g_test_add_func("/module/init/call-init-fn", test_call_init_fn);
++    g_test_add_func("/module/init/before-fail", test_before_fail);
++    g_test_add_func("/module/init/after-fail", test_after_fail);
++
++    return g_test_run();
++}
+diff --git a/tests/unit/test-qom-is-available.c b/tests/unit/test-qom-is-available.c
+new file mode 100644
+index 00000000000..641f0cf1bb4
+--- /dev/null
++++ b/tests/unit/test-qom-is-available.c
+@@ -0,0 +1,250 @@
++/*
++ * QOM is_available inherit and filter after MODULE_INIT_QOM
++ *
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ */
++
++#include "qemu/osdep.h"
++#include "qapi/error.h"
++#include "qemu/module.h"
++#include "qemu/target-info-def.h"
++#include "qom/object.h"
++
++#define TYPE_I386_PARENT "test-avail-i386-parent"
++#define TYPE_I386_CHILD "test-avail-i386-child"
++#define TYPE_NEVER "test-avail-never"
++#define TYPE_NEVER_CHILD "test-avail-never-child"
++#define TYPE_DROP_CHILD "test-avail-drop-child"
++#define TYPE_TEST_IF "test-avail-if"
++#define TYPE_LATE_KEEP "test-avail-late-keep"
++#define TYPE_LATE_DROP "test-avail-late-drop"
++#define TYPE_ORPHAN_PARENT "test-avail-orphan-parent"
++#define TYPE_ORPHAN "test-avail-orphan"
++#define TYPE_CYCLE_A "test-avail-cycle-a"
++#define TYPE_CYCLE_B "test-avail-cycle-b"
++
++static bool test_never(const TargetInfo *ti)
++{
++    (void)ti;
++    return false;
++}
++
++static const TypeInfo i386_parent_info = {
++    .name = TYPE_I386_PARENT,
++    .parent = TYPE_OBJECT,
++    .is_available = target_is_base_i386,
++};
++
++static const TypeInfo i386_child_info = {
++    .name = TYPE_I386_CHILD,
++    .parent = TYPE_I386_PARENT,
++};
++
++static const TypeInfo never_info = {
++    .name = TYPE_NEVER,
++    .parent = TYPE_OBJECT,
++    .is_available = test_never,
++};
++
++static const TypeInfo never_child_info = {
++    .name = TYPE_NEVER_CHILD,
++    .parent = TYPE_NEVER,
++};
++
++static const TypeInfo drop_child_info = {
++    .name = TYPE_DROP_CHILD,
++    .parent = TYPE_OBJECT,
++    .is_available = test_never,
++};
++
++static const TypeInfo test_if_info = {
++    .name = TYPE_TEST_IF,
++    .parent = TYPE_INTERFACE,
++};
++
++static void register_kept_types(void)
++{
++    /* Child before parent: inherit is a list walk, not register order. */
++    type_register_static(&i386_child_info);
++    type_register_static(&i386_parent_info);
++    type_register_static(&never_child_info);
++    type_register_static(&never_info);
++    type_register_static(&drop_child_info);
++    type_register_static(&test_if_info);
++}
++
++static void test_roots(void)
++{
++    ObjectClass *obj = object_class_by_name(TYPE_OBJECT);
++    ObjectClass *iface = object_class_by_name(TYPE_INTERFACE);
++
++    g_assert_nonnull(obj);
++    g_assert_nonnull(iface);
++    g_assert(object_class_get_is_available(obj) == target_is_any);
++    g_assert(object_class_get_is_available(iface) == target_is_any);
++    g_assert_true(object_class_get_is_available(obj)(target_info()));
++}
++
++static void test_inherit_family(void)
++{
++    ObjectClass *parent = object_class_by_name(TYPE_I386_PARENT);
++    ObjectClass *child = object_class_by_name(TYPE_I386_CHILD);
++
++    if (target_is_base_i386(target_info())) {
++        g_assert_nonnull(parent);
++        g_assert_nonnull(child);
++        g_assert(object_class_get_is_available(parent) == target_is_base_i386);
++        g_assert(object_class_get_is_available(child) == target_is_base_i386);
++    } else {
++        g_assert_null(parent);
++        g_assert_null(child);
++    }
++}
++
++static void test_filter_never(void)
++{
++    g_assert_null(object_class_by_name(TYPE_NEVER));
++    g_assert_null(object_class_by_name(TYPE_NEVER_CHILD));
++    g_assert_null(object_class_by_name(TYPE_DROP_CHILD));
++}
++
++static void test_interface_inherit(void)
++{
++    ObjectClass *klass = object_class_by_name(TYPE_TEST_IF);
++
++    g_assert_nonnull(klass);
++    g_assert(object_class_get_is_available(klass) == target_is_any);
++}
++
++static void register_late_keep(void)
++{
++    static const TypeInfo late_keep_info = {
++        .name = TYPE_LATE_KEEP,
++        .parent = TYPE_OBJECT,
++    };
++
++    type_register_static(&late_keep_info);
++}
++
++static void register_late_drop(void)
++{
++    static const TypeInfo late_drop_info = {
++        .name = TYPE_LATE_DROP,
++        .parent = TYPE_OBJECT,
++        .is_available = test_never,
++    };
++
++    type_register_static(&late_drop_info);
++}
++
++static void test_late_keep(void)
++{
++    ObjectClass *klass;
++
++    module_call_init_fn(MODULE_INIT_QOM, register_late_keep, &error_abort);
++    klass = object_class_by_name(TYPE_LATE_KEEP);
++    g_assert_nonnull(klass);
++    g_assert(object_class_get_is_available(klass) == target_is_any);
++}
++
++static void test_late_drop(void)
++{
++    module_call_init_fn(MODULE_INIT_QOM, register_late_drop, &error_abort);
++    g_assert_null(object_class_by_name(TYPE_LATE_DROP));
++}
++
++static void register_orphan(void)
++{
++    static const TypeInfo parent_info = {
++        .name = TYPE_ORPHAN_PARENT,
++        .parent = TYPE_OBJECT,
++        .is_available = test_never,
++    };
++    static const TypeInfo child_info = {
++        .name = TYPE_ORPHAN,
++        .parent = TYPE_ORPHAN_PARENT,
++        .is_available = target_is_any,
++    };
++
++    type_register_static(&parent_info);
++    type_register_static(&child_info);
++}
++
++static void test_orphan_parent(void)
++{
++    Error *err = NULL;
++
++    module_call_init_fn(MODULE_INIT_QOM, register_orphan, &err);
++    g_assert_nonnull(err);
++    g_assert_cmpstr(error_get_pretty(err), ==,
++                    "Type '" TYPE_ORPHAN "' is missing its parent '"
++                    TYPE_ORPHAN_PARENT "'");
++    error_free(err);
++}
++
++static void register_cycle(void)
++{
++    static const TypeInfo a_info = {
++        .name = TYPE_CYCLE_A,
++        .parent = TYPE_CYCLE_B,
++    };
++    static const TypeInfo b_info = {
++        .name = TYPE_CYCLE_B,
++        .parent = TYPE_CYCLE_A,
++    };
++
++    type_register_static(&a_info);
++    type_register_static(&b_info);
++}
++
++static void test_cycle(void)
++{
++    Error *err = NULL;
++
++    module_call_init_fn(MODULE_INIT_QOM, register_cycle, &err);
++    g_assert_nonnull(err);
++    g_assert_true(strstr(error_get_pretty(err), "cyclic parent chain") != NULL);
++    error_free(err);
++}
++
++static void test_init_fn_before_call_init(void)
++{
++    if (g_test_subprocess()) {
++        test_roots();
++        test_inherit_family();
++        test_filter_never();
++        test_interface_inherit();
++        return;
++    }
++    g_test_trap_subprocess(NULL, 0, 0);
++    g_test_trap_assert_passed();
++}
++
++int main(int argc, char **argv)
++{
++    g_test_init(&argc, &argv, NULL);
++
++    g_assert_nonnull(target_info());
++
++    if (g_test_subprocess()) {
++        module_call_init_fn(MODULE_INIT_QOM, register_kept_types, &error_abort);
++        module_call_init(MODULE_INIT_QOM);
++    } else {
++        module_call_init(MODULE_INIT_QOM);
++        module_call_init_fn(MODULE_INIT_QOM, register_kept_types, &error_abort);
++    }
++
++    g_test_add_func("/qom/is-available/roots", test_roots);
++    g_test_add_func("/qom/is-available/inherit-family", test_inherit_family);
++    g_test_add_func("/qom/is-available/filter-never", test_filter_never);
++    g_test_add_func("/qom/is-available/interface-inherit",
++                    test_interface_inherit);
++    g_test_add_func("/qom/is-available/late-keep", test_late_keep);
++    g_test_add_func("/qom/is-available/late-drop", test_late_drop);
++    g_test_add_func("/qom/is-available/orphan-parent", test_orphan_parent);
++    g_test_add_func("/qom/is-available/cycle", test_cycle);
++    g_test_add_func("/qom/is-available/init-fn-before-call-init",
++                    test_init_fn_before_call_init);
++
++    return g_test_run();
++}
 -- 
 2.52.0.windows.1
 
