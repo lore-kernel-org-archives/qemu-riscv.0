@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4FF8C9830B
-	for <qemu-riscv@archiver.kernel.org>; Wed, 23 Sep 2026 13:23:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87D2BC982FA
+	for <qemu-riscv@archiver.kernel.org>; Wed, 23 Sep 2026 13:24:01 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1x9MwC-0004s3-AX; Wed, 23 Sep 2026 09:23:04 -0400
+	id 1x9Mwi-0006IU-Ge; Wed, 23 Sep 2026 09:23:40 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1x9Mra-0000NX-9A
- for qemu-riscv@nongnu.org; Wed, 23 Sep 2026 09:18:29 -0400
+ id 1x9MsE-0000eV-3b
+ for qemu-riscv@nongnu.org; Wed, 23 Sep 2026 09:19:14 -0400
 Received: from mail-dy2-x10.google.com ([2607:f8b0:4864:36::10])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1x9MrO-0006t9-Et
- for qemu-riscv@nongnu.org; Wed, 23 Sep 2026 09:18:11 -0400
+ id 1x9Ms9-0006zb-9Y
+ for qemu-riscv@nongnu.org; Wed, 23 Sep 2026 09:18:57 -0400
 Received: by mail-dy2-x10.google.com with SMTP id
- 5a478bee46e88-32ba4885063so576387eec.0
- for <qemu-riscv@nongnu.org>; Wed, 23 Sep 2026 06:18:06 -0700 (PDT)
+ 5a478bee46e88-328664ef791so585142eec.3
+ for <qemu-riscv@nongnu.org>; Wed, 23 Sep 2026 06:18:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1790169485; x=1790774285; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1790169531; x=1790774331; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=7lw/MEkkV81N3qqf95gz4M3o+mzY0GwXwXNmVRKHabY=;
- b=naedkdcOnsPkGYsA0SNzFgS5o2smygNC1rVk2RIhqsNCnoXov/v7CaBS5F6+P7kXdY
- OuPV6H0/3teTpPJcBDjkOlwvSkbJOu9TKog/Wekakv63WL2aMOyLPYRtKUdPm3ZEPnY+
- jORst9kq85ZGokU6kHy2Zj4YCsQMsioBzjSNZg3UI4siJ64T0+cSq/N8KdZxR7V2Fp9a
- ry90T7yCM6nG7e4ldcAanRH6rAAc+YEuAn8ot8kofk1pRNByU2X6wBkp9l7w1PEpEQ7m
- 37e9w/Wdw2FWsntC27wP7mNiObMRDtFcTJ6053HaUbld1NzREi1i7XkZfkfiI5R7Sj9v
- OuGw==
+ bh=LmGgEVLgs7KsvhNFrBIpJWDBtYOselCCUrcKIvn6Xxs=;
+ b=RqIgBshW6LLKYsU47OyUpxhlBUam1cW2338P+p60M3jEehwArOs1v75eLhpV3Xeagd
+ WzvUnTDYyzXR2W+kDJwcduXYfuylG1OJxOY81zCcNVLuSwwBg86th6c+J9fDglr5x66l
+ oU6GWWlrzFIG5S+HUnZ/BsddkmAgqAjrKq3NEwYaxLDSCN26eKeBlY0gFQ3BIVofnC01
+ UmDYZYmcDpuQOIPix/EhM8MMXyZgQMfUGvCSU5nA5V00TElfvxJT6Blfzy2T8QJ6YPIb
+ bVjCiWbPricIZ8VCfCOFzVzy4ALUw4O6s6PzNpUkDCPuJ8GNBPy65NIinCAm0/0+3+TD
+ PtqQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790169485; x=1790774285;
+ d=1e100.net; s=20260707; t=1790169531; x=1790774331;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=7lw/MEkkV81N3qqf95gz4M3o+mzY0GwXwXNmVRKHabY=;
- b=QpS88Ne+Un9hGYX+/mFZiv5QwWXda1/mmFnPqacIfFQDpCemRijnXsLOUij5kpUH6C
- DxpeHp2lizqQhRbA3EfIj4dj7zhOKi2Bi3Bd0vBBOJiAQkmgz52EWCgtJLlaxDQFMgfk
- cc/y1zKzQOvm2nVjddhTEFoIE3uNE5VO61100ClxVrI0+ZbETlUQjvAHF/C17U4h2+Jm
- hez7MddpMkwUJ4jiclvcPbs+F6zCt5KIGa+XX/CzkseglZBODO5mefmuyl8jiU3rj1X1
- ITY5P0drbyNz2sW3Guu6trVhacIZ+V+KKLA+X5gAesUqoZr1jk88W/JunEJpos2ajchq
- SSpQ==
+ bh=LmGgEVLgs7KsvhNFrBIpJWDBtYOselCCUrcKIvn6Xxs=;
+ b=mw2L3WmZMhocsm5a+n6XUHT8JGkzIdnS264fmShRGbvusF8I7vnh0fqhIifDxKA6bh
+ bEF5uAiwHORqBgjD1+lakVVMZ8/1779ACqkAQmaZtM1Gsnxtp4KfuvzNIB6QM0iFwPiB
+ lCsLQ2ij9reVemkNpHrbNMq6edeJ4i/naUnCymWEeNn0q/wBCYP/iI9jVfZARtjm2K5g
+ 4+1nBEYLrifpBX5n/UX/z7JinR97reK++eM++Puh/1wqvaPozsOZA7rrEZuVnZVmvfIN
+ cuG7abzeT4VxM9oJV9sVJ0lpSEtb3m7sW/oYqGn0YGr9kNUTcE3bnR/+7SW//t4/ilu1
+ 1swQ==
 X-Forwarded-Encrypted: i=1;
- AKwUvBzSXc03GT4WOLEPLny+OlcUykALWXnB0s1ndiPx/mVU3PAag3JymASiKepGnrSZeKs7mYJzTLZVbQRP@nongnu.org
-X-Gm-Message-State: AFuF++m5BYZl/ZrcVpxDpGOiO/M3p3W84g+HdxcgLxJ6IYqtYuHN7UMs
- iDFRmabLHulkyGuwUrtFRwh4bW9TvLFAln1R2kqbQbD2TSihyeK/DuRs
-X-Gm-Gg: AYBFou3ex91y0HY4zMYaEzxSY1632YL7lvkwFkMX+bHUNhTyYKF6pqE/FEA5C/U2PJV
- 7MOrDuQR2dmxCjtq6+OvXo8OxSnGDtdMy3PUGGblV6WbULzhLQ8W0hsiF4k+Ib2P0Wx4eh8d3kd
- sqEGaIi2qCkh5JBFrFwjkjNyO6kHb5SRVEMwqXIm/bAUgaKArGNx+MyaukJdLbYe/ZD3LiCnh5K
- +EVCqV9xS2HoGuo1b+tZsllD0t4gymdHsXqgJivTpCrhETv2E4O17QB6PX2CDCTv7XCyRaGThQV
- KLAqaw/X57vo70KSeadGLz7KpuV/2U9j/KIvWHbfYNgl+bZlceMm8ckDIcWBcOFrS9qdGJEobgG
- 1in+DvuB8jy2erd2EZ6oBZdsOD+kk1irZo2mgU+/D0fXpcp3gV3FuoJ2QG5nznOG0hv51VeQY/T
- wkcxHRdtm0wEhZYcMLdqZIS4rJbgj1K8cTfMWeZp6jpavlk7L2qiHaNko9J2CHsKZs3vxg1C9mN
- nId/SnQ+QWytoErwS0HUNM3eLqXouv2
-X-Received: by 2002:a05:693c:83c3:10b0:33b:e842:c0ff with SMTP id
- 5a478bee46e88-33e88b2f9cemr2522418eec.0.1790169484806; 
- Wed, 23 Sep 2026 06:18:04 -0700 (PDT)
+ AKwUvBzMTRDNu8Sax9TpfBYxpOu/v7hRV8ZTd0JzsbaETdBdIdXmmGUyaaTojHbEmqKLJGRdFiOm08CtBTU4@nongnu.org
+X-Gm-Message-State: AFuF++lcNDgq7qBtcVm5JC/waZo60LBssHysd0NrN1qxmYMpsK6/Gt+u
+ nMMqq7uCETdNyDOGx3cCj/jNhlmK6xHAs2c2MseHLKokeiHtWUTXNN5m
+X-Gm-Gg: AYBFou2/WHBSyo0wEgzJr4K0qRe/VRbgYGJL1E5Jw5d2xREmb8JcYwQBPd55tyHMAYg
+ X3MOqCzjRORL8CMfJCfwakCf9xv1dHuvf5TYdBcqTzD8x7EjHVO4VGRGiMR60zmhd47xTtvTjoW
+ laKY9xRSobhmjuPjKBuAGez+JaaUal/WPMBc4XYoX3Kq7OPl73OtCFXpzuJKtNG6eeotJfX7c2a
+ 5mpTSKBlrQZLHwNIzh5xfVjEvN4xmGnd5E7gvMTJOcoGvgGAPgwS+cnGKaGb3lCujAULOWTMNvL
+ 2qmD7Gnnq7gqXIpZHt0wB3+JljDq5JwmjGRb/xqM1TWjqrjxddzQpwoxTF0GFaRYhZKbSjxum/a
+ 1STNcb4E+ZJt2gKcgob+UOh9eWefMUsjZpX8X+k37SWJpAl+vYfHenvC1ORpgHAuos4g+K4YZlu
+ 810tPd6BrJ97ziYulxLAMioJW+6RcK9XYjhzTW+VEb6r3Y76Af8mqqHRDaNi6ApU6MxU7BSmYFG
+ iazRBLiUSUBx8oJoa0lQpBSmqcQ6Ik=
+X-Received: by 2002:a05:7300:dd05:b0:33b:eea2:cbfe with SMTP id
+ 5a478bee46e88-33e8dec5b02mr2369589eec.32.1790169531303; 
+ Wed, 23 Sep 2026 06:18:51 -0700 (PDT)
 Received: from WIN-BH9M8FJACR9 ([103.94.185.75])
  by smtp.googlemail.com with ESMTPSA id
- 5a478bee46e88-33e97236754sm5553695eec.29.2026.09.23.06.17.56
+ 5a478bee46e88-33e97236754sm5553695eec.29.2026.09.23.06.18.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Sep 2026 06:18:03 -0700 (PDT)
+ Wed, 23 Sep 2026 06:18:49 -0700 (PDT)
 From: Yonggang Luo <luoyonggang@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: Cornelia Huck <cohuck@redhat.com>, xen-devel@lists.xenproject.org,
@@ -97,10 +97,9 @@ Cc: Cornelia Huck <cohuck@redhat.com>, xen-devel@lists.xenproject.org,
  Markus Armbruster <armbru@redhat.com>, Weiwei Li <liwei1518@gmail.com>,
  Song Gao <17746591750@163.com>, qemu-arm@nongnu.org, qemu-s390x@nongnu.org,
  Brian Cain <brian.cain@oss.qualcomm.com>
-Subject: [PATCH v3 008/114] target-info: replace QOM registration with a
- constructor list
-Date: Wed, 23 Sep 2026 21:14:42 +0800
-Message-ID: <20260923131635.1894-9-luoyonggang@gmail.com>
+Subject: [PATCH v3 012/114] target-info: add TargetKconfig
+Date: Wed, 23 Sep 2026 21:14:46 +0800
+Message-ID: <20260923131635.1894-13-luoyonggang@gmail.com>
 X-Mailer: git-send-email 2.52.0.windows.1
 In-Reply-To: <20260923131635.1894-1-luoyonggang@gmail.com>
 References: <20260923131635.1894-1-luoyonggang@gmail.com>
@@ -129,444 +128,393 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Replace MODULE_INIT_TARGET_INFO and target_info_qom_set_target with a
-constructor list. target_info_init builds a TargetInfoNode;
-target_info_list_add inserts it, sorted by target_arch, before main().
-target_info() starts as an "unknown" TargetInfo and target_info_select
-sets the current entry. target-info.c moves into libqom.
+Add a packed TargetKconfig of device and accel CONFIG_* bits,
+generated from the Kconfig tree, and attach it to TargetInfo.
+target_kconfig() returns the current bits, and
+target_has_kconfig_<name>() tests them. Initialize
+target_info_stub.kconfig from CONFIG_DEVICES.
 
 Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
 ---
- include/qemu/module.h           |  1 -
- include/qemu/target-info-def.h  | 56 ++++++++++++++++++++++++++++++---
- include/qemu/target-info-init.h | 53 -------------------------------
- include/qemu/target-info-qom.h  | 30 ------------------
- include/qemu/target-info.h      | 11 +++++++
- meson.build                     |  6 ++--
- system/vl.c                     |  4 ---
- target-info-def.c               |  1 -
- target-info-qom.c               | 55 --------------------------------
- target-info.c                   | 56 ++++++++++++++++++++++++++++++++-
- tests/qtest/fuzz/fuzz.c         |  3 --
- 11 files changed, 120 insertions(+), 156 deletions(-)
- delete mode 100644 include/qemu/target-info-init.h
- delete mode 100644 include/qemu/target-info-qom.h
- delete mode 100644 target-info-qom.c
+ include/qemu/target-info-def.h       |   2 +
+ include/qemu/target-kconfig-has.h    |   7 ++
+ include/qemu/target-kconfig.h        |  34 ++++++
+ meson.build                          |  14 +++
+ scripts/gen-target-kconfig.py        | 162 +++++++++++++++++++++++++++
+ target-info-def.c                    |   6 +
+ target-kconfig.c                     |  20 ++++
+ tests/unit/meson.build               |   1 +
+ tests/unit/test-target-kconfig-has.c |  22 ++++
+ 9 files changed, 268 insertions(+)
+ create mode 100644 include/qemu/target-kconfig-has.h
+ create mode 100644 include/qemu/target-kconfig.h
+ create mode 100644 scripts/gen-target-kconfig.py
+ create mode 100644 target-kconfig.c
+ create mode 100644 tests/unit/test-target-kconfig-has.c
 
-diff --git a/include/qemu/module.h b/include/qemu/module.h
-index fccf017bf9e..9885ac9afb3 100644
---- a/include/qemu/module.h
-+++ b/include/qemu/module.h
-@@ -43,7 +43,6 @@ typedef enum {
-     MODULE_INIT_MIGRATION,
-     MODULE_INIT_BLOCK,
-     MODULE_INIT_OPTS,
--    MODULE_INIT_TARGET_INFO,
-     MODULE_INIT_QOM,
-     MODULE_INIT_TRACE,
-     MODULE_INIT_XEN_BACKEND,
 diff --git a/include/qemu/target-info-def.h b/include/qemu/target-info-def.h
-index ebd88463aea..25dc7c508d3 100644
+index 25dc7c508d3..615596ed468 100644
 --- a/include/qemu/target-info-def.h
 +++ b/include/qemu/target-info-def.h
-@@ -11,8 +11,10 @@
- 
- #include "qapi/qapi-types-common.h"
+@@ -13,6 +13,7 @@
  #include "qapi/qapi-types-machine.h"
-+#include "qemu/queue.h"
-+#include "qemu/target-info.h"
+ #include "qemu/queue.h"
+ #include "qemu/target-info.h"
++#include "qemu/target-kconfig.h"
  
--typedef struct TargetInfo {
-+struct TargetInfo {
+ struct TargetInfo {
      /* runtime equivalent of TARGET_NAME definition */
-     const char *target_name;
-     /* related to TARGET_ARCH definition */
-@@ -30,13 +32,57 @@ typedef struct TargetInfo {
+@@ -32,6 +33,7 @@ struct TargetInfo {
      unsigned page_bits_init;
      /* runtime equivalent of TARGET_PAGE_BITS_VARY definition */
      bool page_bits_vary;
--} TargetInfo;
-+};
-+
-+typedef struct TargetInfoNode TargetInfoNode;
-+typedef QLIST_HEAD(, TargetInfoNode) TargetInfoList;
-+
-+struct TargetInfoNode {
-+    const TargetInfo *info;
-+    QLIST_ENTRY(TargetInfoNode) next;
-+};
-+
-+/**
-+ * target_info_list:
-+ *
-+ * TargetInfo is a static list, not a QOM type. Constructors insert
-+ * entries before main(), so type_init can use it.
-+ *
-+ * Returns: registered TargetInfoNode list head, sorted by
-+ *          info->target_arch. The list is owned by target-info
-+ *          and must not be modified. Iterate with
-+ *          QLIST_FOREACH(..., next) and use node->info.
-+ */
-+const TargetInfoList *target_info_list(void);
++    TargetKconfig kconfig;
+ };
  
- /**
-- * target_info:
-+ * target_info_select:
-+ * @ti: TargetInfo to make current
-  *
-- * Returns: The TargetInfo structure definition for this target binary.
-+ * Sets target_info() to @ti.
-+ */
-+void target_info_select(const TargetInfo *ti);
-+
-+/**
-+ * target_info_list_add:
-+ * @node: static TargetInfoNode whose info points at a const TargetInfo
-+ *
-+ * Inserts @node into target_info_list(), sorted by info->target_arch.
-+ * Sets target_info() to the first list entry.
-+ */
-+void target_info_list_add(TargetInfoNode *node);
-+
+ typedef struct TargetInfoNode TargetInfoNode;
+diff --git a/include/qemu/target-kconfig-has.h b/include/qemu/target-kconfig-has.h
+new file mode 100644
+index 00000000000..6616f75845a
+--- /dev/null
++++ b/include/qemu/target-kconfig-has.h
+@@ -0,0 +1,7 @@
 +/*
-+ * Register @ti before main(). Linked into the executable, not a DSO.
-+ * @ti is a unique identifier in this translation unit.
-  */
--const TargetInfo *target_info(void);
-+#define target_info_init(ti)                                            \
-+    static TargetInfoNode ti##_node = {                                 \
-+        .info = &(ti),                                                  \
-+    };                                                                  \
-+    static void __attribute__((constructor)) do_qemu_init_##ti(void)    \
-+    {                                                                   \
-+        target_info_list_add(&ti##_node);                               \
-+    }
- 
- #endif
-diff --git a/include/qemu/target-info-init.h b/include/qemu/target-info-init.h
-deleted file mode 100644
-index b7024c9faef..00000000000
---- a/include/qemu/target-info-init.h
-+++ /dev/null
-@@ -1,53 +0,0 @@
--/*
-- * QEMU target info initialization
-- *
-- * Copyright (c) Qualcomm
-- *
-- * SPDX-License-Identifier: GPL-2.0-or-later
-- *
-- * This file is included by each file defining a TargetInfo structure and is
-- * responsible for registering it.
-- */
--
--#ifndef QEMU_TARGET_INFO_INIT_H
--#define QEMU_TARGET_INFO_INIT_H
--
--#define DEFINE_TARGET_INFO_TYPE(info)                                       \
--static void do_qemu_init_target_info(void)                                  \
--{                                                                           \
--    type_register_static(&info);                                            \
--}                                                                           \
--module_init(do_qemu_init_target_info, MODULE_INIT_TARGET_INFO)
--
--#ifdef COMPILING_PER_TARGET
--#ifdef CONFIG_USER_ONLY
--
--/*
-- * User mode does not support multiple targets in the same binary, so just
-- * define target_info().
-- */
--#define target_info_init(ti_var)        \
--const TargetInfo *target_info(void)     \
--{                                       \
--    return &ti_var;                     \
--}
--
--#else /* CONFIG_USER_ONLY */
--
--#include "qemu/target-info-qom.h"
--#include "qom/object.h"
--
--#define target_info_init(ti_var)                                            \
--static const TypeInfo target_info_qom_target_type_info = {                  \
--    .name =  TYPE_TARGET_INFO"-"TARGET_NAME,                                \
--    .parent = TYPE_TARGET_INFO,                                             \
--    .instance_size = sizeof(TargetInfoQom),                                 \
--    .class_size = sizeof(TargetInfoQomClass),                               \
--    .class_data = &ti_var,                                                  \
--};                                                                          \
--DEFINE_TARGET_INFO_TYPE(target_info_qom_target_type_info)
--
--#endif /* CONFIG_USER_ONLY */
--#endif /* COMPILING_PER_TARGET */
--
--#endif /* QEMU_TARGET_INFO_INIT_H */
-diff --git a/include/qemu/target-info-qom.h b/include/qemu/target-info-qom.h
-deleted file mode 100644
-index 0f6772e65c3..00000000000
---- a/include/qemu/target-info-qom.h
-+++ /dev/null
-@@ -1,30 +0,0 @@
--/*
-- * QEMU target info QOM types
-- *
-- * Copyright (c) Qualcomm
-- *
-- * SPDX-License-Identifier: GPL-2.0-or-later
-- */
--
--#ifndef QEMU_TARGET_INFO_QOM_H
--#define QEMU_TARGET_INFO_QOM_H
--
--#include "qemu/target-info-def.h"
--#include "qom/object.h"
--
--#define TYPE_TARGET_INFO "target-info"
--
--typedef struct TargetInfoQom {
--    Object parent_obj;
--} TargetInfoQom;
--
--typedef struct TargetInfoQomClass {
--    ObjectClass parent_class;
--    const TargetInfo *target_info;
--} TargetInfoQomClass;
--
--OBJECT_DECLARE_TYPE(TargetInfoQom, TargetInfoQomClass, TARGET_INFO)
--
--void target_info_qom_set_target(void);
--
--#endif /* QEMU_TARGET_INFO_QOM_H */
-diff --git a/include/qemu/target-info.h b/include/qemu/target-info.h
-index c09e5d2a3ec..c48973f20be 100644
---- a/include/qemu/target-info.h
-+++ b/include/qemu/target-info.h
-@@ -9,6 +9,17 @@
- #ifndef QEMU_TARGET_INFO_H
- #define QEMU_TARGET_INFO_H
- 
-+#include <stdbool.h>
++ * QEMU target_has_kconfig_* helpers
++ *
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ */
 +
-+typedef struct TargetInfo TargetInfo;
++#include "target-kconfig-has-gen.h"
+diff --git a/include/qemu/target-kconfig.h b/include/qemu/target-kconfig.h
+new file mode 100644
+index 00000000000..21b2ba576ec
+--- /dev/null
++++ b/include/qemu/target-kconfig.h
+@@ -0,0 +1,34 @@
++/*
++ * QEMU target kconfig API
++ *
++ *  Copyright (c) Yonggang Luo
++ *
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ */
++
++#ifndef QEMU_TARGET_KCONFIG_H
++#define QEMU_TARGET_KCONFIG_H
++
++#include "qemu/compiler.h"
 +
 +/**
-+ * target_info:
++ * struct TargetKconfig:
 + *
-+ * Returns: The TargetInfo structure definition for the selected target.
++ * Compile-time device and accel CONFIG_* bits. Not Kconfig.host
++ * or target/Kconfig. Target identity is TargetInfo, not these
++ * bits. Not kvm_enabled() etc. Fields and
++ * target_has_kconfig_<name>() are generated by
++ * scripts/gen-target-kconfig.py.
 + */
-+const TargetInfo *target_info(void);
++typedef struct TargetKconfig {
++#include "target-kconfig-fields.h"
++} QEMU_PACKED TargetKconfig;
 +
- /**
-  * target_name:
-  *
++/**
++ * target_kconfig:
++ *
++ * Returns: The current TargetKconfig (target_info()->kconfig).
++ */
++const TargetKconfig *target_kconfig(void);
++
++#endif
 diff --git a/meson.build b/meson.build
-index 20345860c9f..9a6a80fd0c8 100644
+index 776d38c5afd..8a017faaa74 100644
 --- a/meson.build
 +++ b/meson.build
-@@ -3777,6 +3777,9 @@ if enable_modules
-   modulecommon = declare_dependency(objects: libmodulecommon.extract_all_objects(recursive: false), compile_args: '-DBUILD_DSO')
- endif
+@@ -3445,6 +3445,19 @@ genh += custom_target('config-poison.h',
+                       capture: true,
+                       command: [find_program('scripts/make-config-poison.sh'),
+                                 target_configs_h])
++genh += custom_target('target-kconfig',
++                      output: ['target-kconfig-fields.h',
++                               'target-kconfig-init.h',
++                               'target-kconfig-has-gen.h',
++                               'target-kconfig-has.c.inc'],
++                      depfile: 'target-kconfig.d',
++                      command: [python, files('scripts/gen-target-kconfig.py'),
++                                '--kconfig', meson.current_source_dir() / 'Kconfig',
++                                '--depfile', '@DEPFILE@',
++                                '--fields', '@OUTPUT0@',
++                                '--init', '@OUTPUT1@',
++                                '--has', '@OUTPUT2@',
++                                '--has-c', '@OUTPUT3@'])
  
-+qom_ss.add(files(
-+  'target-info.c',
-+))
+ if fdt_required.length() > 0
+   error('fdt disabled but required by targets ' + ', '.join(fdt_required))
+@@ -3779,6 +3792,7 @@ endif
+ 
+ qom_ss.add(files(
+   'target-info.c',
++  'target-kconfig.c',
+ ))
  qom_ss = qom_ss.apply({})
  libqom = static_library('qom', qom_ss.sources() + genh,
-                         dependencies: [qom_ss.dependencies()],
-@@ -3871,9 +3874,6 @@ endif
- common_ss.add(pagevary)
- system_ss.add(files('page-vary-system.c'))
- 
--common_ss.add(files('target-info.c'))
--system_ss.add(files('target-info-qom.c'))
--
- if 'CONFIG_TCG' in config_all_accel
-   subdir('contrib/plugins')
- endif
-diff --git a/system/vl.c b/system/vl.c
-index dc883de8274..37cb4838188 100644
---- a/system/vl.c
-+++ b/system/vl.c
-@@ -28,7 +28,6 @@
- #include "qemu/units.h"
- #include "qemu/module.h"
- #include "qemu/target-info.h"
--#include "qemu/target-info-qom.h"
- #include "exec/cpu-common.h"
- #include "exec/page-vary.h"
- #include "hw/core/qdev-properties.h"
-@@ -2930,9 +2929,6 @@ void qemu_init(int argc, char **argv)
- 
-     os_setup_limits();
- 
--    module_call_init(MODULE_INIT_TARGET_INFO);
--    target_info_qom_set_target();
--
-     module_init_info(qemu_modinfo);
-     module_allow_arch(target_name());
- 
+diff --git a/scripts/gen-target-kconfig.py b/scripts/gen-target-kconfig.py
+new file mode 100644
+index 00000000000..afeffc75ca0
+--- /dev/null
++++ b/scripts/gen-target-kconfig.py
+@@ -0,0 +1,162 @@
++#!/usr/bin/env python3
++# SPDX-License-Identifier: GPL-2.0-or-later
++"""Generate TargetKconfig CONFIG_* field, initializer, and has headers.
++
++The field list is every `config FOO` from the QEMU Kconfig tree,
++parsed with scripts/minikconf.py (including accel/Kconfig: KVM,
++XEN, HVF, TCG, ...). Host proxies in Kconfig.host and the
++target/Kconfig tree (arch tokens and TARGET_BIG_ENDIAN) are
++omitted. Target identity is TargetInfo, not TargetKconfig.
++
++Each field also gets target_has_kconfig_<name>(const TargetInfo *).
++"""
++
++import argparse
++import os
++import sys
++
++sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
++from minikconf import KconfigData, KconfigParser
++
++
++def field_name(config: str) -> str:
++    return config[len("CONFIG_"):].lower()
++
++
++def collect_from_kconfig(root: str) -> tuple[set[str], list[str]]:
++    data = KconfigData()
++    with open(root, "rt", encoding="utf-8") as fp:
++        KconfigParser.parse(fp, data)
++    names = {"CONFIG_" + name for name in data.defined_vars}
++    return names, list(data.previously_included)
++
++
++def collect_kconfig_names(path: str) -> set[str]:
++    data = KconfigData()
++    with open(path, "rt", encoding="utf-8") as fp:
++        KconfigParser.parse(fp, data)
++    return {"CONFIG_" + name for name in data.defined_vars}
++
++
++def collect_host_kconfig_names(kconfig_root: str) -> set[str]:
++    host = os.path.join(os.path.dirname(os.path.abspath(kconfig_root)),
++                        "Kconfig.host")
++    return collect_kconfig_names(host)
++
++
++def collect_target_kconfig_names(kconfig_root: str) -> set[str]:
++    target = os.path.join(os.path.dirname(os.path.abspath(kconfig_root)),
++                          "target", "Kconfig")
++    return collect_kconfig_names(target)
++
++
++def write_fields(path: str, configs: list[str]) -> None:
++    lines = [
++        "/* Generated by scripts/gen-target-kconfig.py. Do not edit. */",
++        "",
++    ]
++    for name in configs:
++        lines.append(f"    uint32_t {field_name(name)} : 1;")
++    lines.append("")
++    with open(path, "w", encoding="utf-8", newline="\n") as fh:
++        fh.write("\n".join(lines))
++
++
++def write_init(path: str, configs: list[str]) -> None:
++    lines = [
++        "/* Generated by scripts/gen-target-kconfig.py. Do not edit. */",
++        "",
++    ]
++    for name in configs:
++        field = field_name(name)
++        lines.append(f"#if defined({name})")
++        lines.append(f"    .{field} = true,")
++        lines.append("#endif")
++    lines.append("")
++    with open(path, "w", encoding="utf-8", newline="\n") as fh:
++        fh.write("\n".join(lines))
++
++
++def has_fn(config: str) -> str:
++    return "target_has_kconfig_" + field_name(config)
++
++
++def write_has_h(path: str, configs: list[str]) -> None:
++    lines = [
++        "/* Generated by scripts/gen-target-kconfig.py. Do not edit. */",
++        "",
++        "#ifndef TARGET_KCONFIG_HAS_GEN_H",
++        "#define TARGET_KCONFIG_HAS_GEN_H",
++        "",
++        "#include <stdbool.h>",
++        "",
++        "typedef struct TargetInfo TargetInfo;",
++        "",
++    ]
++    for name in configs:
++        lines.append(f"bool {has_fn(name)}(const TargetInfo *ti);")
++    lines.append("")
++    lines.append("#endif")
++    lines.append("")
++    with open(path, "w", encoding="utf-8", newline="\n") as fh:
++        fh.write("\n".join(lines))
++
++
++def write_has_c(path: str, configs: list[str]) -> None:
++    lines = [
++        "/* Generated by scripts/gen-target-kconfig.py. Do not edit. */",
++        "",
++    ]
++    for name in configs:
++        fn = has_fn(name)
++        field = field_name(name)
++        lines.append(f"bool {fn}(const TargetInfo *ti)")
++        lines.append("{")
++        lines.append(f"    return ti->kconfig.{field};")
++        lines.append("}")
++        lines.append("")
++    with open(path, "w", encoding="utf-8", newline="\n") as fh:
++        fh.write("\n".join(lines))
++
++
++def write_depfile(path: str, outputs: list[str], deps: list[str]) -> None:
++    lines = [" ".join(outputs) + ":" ]
++    for dep in deps:
++        lines.append(f"  {dep} \\")
++    if len(lines) > 1:
++        lines[-1] = lines[-1][:-2]
++    lines.append("")
++    with open(path, "w", encoding="utf-8", newline="\n") as fh:
++        fh.write("\n".join(lines))
++
++
++def main(argv: list[str]) -> int:
++    parser = argparse.ArgumentParser(
++        description="Generate TargetKconfig CONFIG_* include headers"
++    )
++    parser.add_argument("--fields", required=True, help="output fields header")
++    parser.add_argument("--init", required=True, help="output initializer header")
++    parser.add_argument("--has", required=True, help="output has-function header")
++    parser.add_argument("--has-c", required=True, help="output has-function bodies")
++    parser.add_argument("--kconfig", required=True, help="root Kconfig")
++    parser.add_argument("--depfile", help="ninja depfile of walked Kconfig files")
++    args = parser.parse_args(argv)
++
++    names, kconfig_files = collect_from_kconfig(args.kconfig)
++    names -= collect_host_kconfig_names(args.kconfig)
++    names -= collect_target_kconfig_names(args.kconfig)
++    configs = sorted(names)
++
++    write_fields(args.fields, configs)
++    write_init(args.init, configs)
++    write_has_h(args.has, configs)
++    write_has_c(args.has_c, configs)
++    if args.depfile:
++        write_depfile(args.depfile,
++                      [args.fields, args.init, args.has, args.has_c],
++                      kconfig_files)
++    return 0
++
++
++if __name__ == "__main__":
++    sys.exit(main(sys.argv[1:]))
 diff --git a/target-info-def.c b/target-info-def.c
-index f167f5f2ac1..954298b56d0 100644
+index 954298b56d0..44d153cefbc 100644
 --- a/target-info-def.c
 +++ b/target-info-def.c
-@@ -9,7 +9,6 @@
+@@ -7,6 +7,9 @@
+  */
+ 
  #include "qemu/osdep.h"
++#ifdef CONFIG_DEVICES
++#include CONFIG_DEVICES
++#endif
  #include "qemu/target-info.h"
  #include "qemu/target-info-def.h"
--#include "qemu/target-info-init.h"
  #include "cpu-qom.h"
- #include "cpu-param.h"
- #include "exec/page-vary.h"
-diff --git a/target-info-qom.c b/target-info-qom.c
-deleted file mode 100644
-index 2b38673a3f8..00000000000
---- a/target-info-qom.c
-+++ /dev/null
-@@ -1,55 +0,0 @@
--/*
-- * QEMU binary/target API (QOM types)
-- *
-- *  Copyright (c) Linaro
-- *
-- * SPDX-License-Identifier: GPL-2.0-or-later
-- */
--
--#include "qemu/osdep.h"
--#include "qapi/error.h"
--#include "qom/object.h"
--#include "qemu/target-info-def.h"
--#include "qemu/target-info-init.h"
--#include "qemu/target-info-qom.h"
--
--static void target_info_qom_class_init(ObjectClass *oc, const void * data)
--{
--    TargetInfoQomClass *klass = TARGET_INFO_CLASS(oc);
--    klass->target_info = data;
--}
--
--static const TypeInfo target_info_parent_type = {
--    .name = TYPE_TARGET_INFO,
--    .parent = TYPE_OBJECT,
--    .instance_size = sizeof(TargetInfoQom),
--    .class_size = sizeof(TargetInfoQomClass),
--    /* use class_base_init so children classes can set class_data accordingly */
--    .class_base_init = target_info_qom_class_init,
--    /* children classes will be concrete, which allows to easily query them
--     * without listing this parent class also */
--    .abstract = true,
--};
--
--DEFINE_TARGET_INFO_TYPE(target_info_parent_type)
--
--static const TargetInfo *target_info_ptr;
--
--const TargetInfo *target_info(void)
--{
--    return target_info_ptr;
--}
--
--void target_info_qom_set_target(void)
--{
--    g_autoptr(GSList) targets = object_class_get_list(TYPE_TARGET_INFO, false);
--
--    size_t num_found = g_slist_length(targets);
--    if (num_found != 1) {
--        error_setg(&error_fatal, num_found == 0 ?
--                                 "no target-info is available" :
--                                 "more than one target-info is available");
--    }
--
--    target_info_ptr = TARGET_INFO_CLASS(targets->data)->target_info;
--}
-diff --git a/target-info.c b/target-info.c
-index 9abe72b1f55..6e66f48e1ff 100644
---- a/target-info.c
-+++ b/target-info.c
-@@ -10,7 +10,61 @@
- #include "qemu/target-info.h"
- #include "qemu/target-info-qapi.h"
- #include "qemu/target-info-def.h"
--#include "qapi/error.h"
-+#include "exec/page-vary.h"
-+
-+static const TargetInfo target_info_default = {
-+    .target_arch = SYS_EMU_TARGET__MAX,
-+    .target_name = "unknown",
-+    .long_bits = 64,
-+    .endianness = ENDIAN_MODE_LITTLE,
-+    .page_bits_init = TARGET_PAGE_BITS_MIN,
-+};
-+
-+static const TargetInfo *target_info_ptr = &target_info_default;
-+static TargetInfoList target_infos = QLIST_HEAD_INITIALIZER(target_infos);
-+
-+const TargetInfo *target_info(void)
-+{
-+    g_assert(target_info_ptr != NULL);
-+    return target_info_ptr;
-+}
-+
-+const TargetInfoList *target_info_list(void)
-+{
-+    return &target_infos;
-+}
-+
-+void target_info_select(const TargetInfo *ti)
-+{
-+    g_assert(ti != NULL);
-+    target_info_ptr = ti;
-+}
-+
-+void target_info_list_add(TargetInfoNode *node)
-+{
-+    const TargetInfo *info;
-+    TargetInfoNode *cur, *prev = NULL;
-+
-+    g_assert(node && node->info);
-+    info = node->info;
-+    QLIST_FOREACH(cur, &target_infos, next) {
-+        if (info->target_arch < cur->info->target_arch) {
-+            QLIST_INSERT_BEFORE(cur, node, next);
-+            break;
-+        }
-+        prev = cur;
-+    }
-+    if (!cur) {
-+        if (prev) {
-+            QLIST_INSERT_AFTER(prev, node, next);
-+        } else {
-+            QLIST_INSERT_HEAD(&target_infos, node, next);
-+        }
-+    }
-+
-+    /* Single-target default: the first list entry. */
-+    target_info_select(QLIST_FIRST(&target_infos)->info);
-+}
+@@ -33,6 +36,9 @@ static const TargetInfo target_info_stub = {
+     .page_bits_vary = false,
+     .page_bits_init = TARGET_PAGE_BITS,
+ #endif
++    .kconfig = {
++#include "target-kconfig-init.h"
++    },
+ };
  
- const char *target_name(void)
- {
-diff --git a/tests/qtest/fuzz/fuzz.c b/tests/qtest/fuzz/fuzz.c
-index a3a131c80f8..d2355989616 100644
---- a/tests/qtest/fuzz/fuzz.c
-+++ b/tests/qtest/fuzz/fuzz.c
-@@ -22,7 +22,6 @@
- #include "system/runstate.h"
- #include "qemu/main-loop.h"
- #include "qemu/rcu.h"
--#include "qemu/target-info-qom.h"
- #include "tests/qtest/libqtest.h"
- #include "tests/qtest/libqos/qgraph.h"
- #include "fuzz.h"
-@@ -173,8 +172,6 @@ int LLVMFuzzerInitialize(int *argc, char ***argv, char ***envp)
- 
-     /* Initialize qgraph and modules */
-     qos_graph_init();
--    module_call_init(MODULE_INIT_TARGET_INFO);
--    target_info_qom_set_target();
-     module_call_init(MODULE_INIT_FUZZ_TARGET);
-     module_call_init(MODULE_INIT_QOM);
-     module_call_init(MODULE_INIT_LIBQOS);
+ target_info_init(target_info_stub)
+diff --git a/target-kconfig.c b/target-kconfig.c
+new file mode 100644
+index 00000000000..078c0d8e7f3
+--- /dev/null
++++ b/target-kconfig.c
+@@ -0,0 +1,20 @@
++/*
++ * QEMU target kconfig helpers
++ *
++ *  Copyright (c) Yonggang Luo
++ *
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ */
++
++#include "qemu/osdep.h"
++#include "qemu/target-info.h"
++#include "qemu/target-info-def.h"
++#include "qemu/target-kconfig.h"
++#include "qemu/target-kconfig-has.h"
++
++const TargetKconfig *target_kconfig(void)
++{
++    return &target_info()->kconfig;
++}
++
++#include "target-kconfig-has.c.inc"
+diff --git a/tests/unit/meson.build b/tests/unit/meson.build
+index dc980a35955..c806dbc4ffa 100644
+--- a/tests/unit/meson.build
++++ b/tests/unit/meson.build
+@@ -47,6 +47,7 @@ tests = {
+     objects: target_info_def_objects.values(),
+     compile_args: ['-DTARGET_INFO_DEF_COUNT=@0@'.format(
+       target_info_def_objects.values().length())])],
++  'test-target-kconfig-has': [qom],
+   'test-qemu-opts': [],
+   'test-keyval': [testqapi],
+   'test-logging': [],
+diff --git a/tests/unit/test-target-kconfig-has.c b/tests/unit/test-target-kconfig-has.c
+new file mode 100644
+index 00000000000..289ed89b854
+--- /dev/null
++++ b/tests/unit/test-target-kconfig-has.c
+@@ -0,0 +1,22 @@
++/*
++ * target-kconfig-has.h include path test
++ *
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ */
++
++#include "qemu/osdep.h"
++#include "qemu/target-kconfig-has.h"
++
++static void test_include(void)
++{
++    bool (*fn)(const TargetInfo *ti) = target_has_kconfig_tcg;
++
++    g_assert_nonnull(fn);
++}
++
++int main(int argc, char **argv)
++{
++    g_test_init(&argc, &argv, NULL);
++    g_test_add_func("/target-kconfig-has/include", test_include);
++    return g_test_run();
++}
 -- 
 2.52.0.windows.1
 
