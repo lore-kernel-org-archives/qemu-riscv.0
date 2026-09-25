@@ -4,146 +4,128 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC1D5C98321
-	for <qemu-riscv@archiver.kernel.org>; Fri, 25 Sep 2026 19:56:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E4ECC9832A
+	for <qemu-riscv@archiver.kernel.org>; Fri, 25 Sep 2026 23:14:39 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xAC2P-0000wI-8H; Fri, 25 Sep 2026 15:56:53 -0400
+	id 1xAF7Z-0006tf-UL; Fri, 25 Sep 2026 19:14:25 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xAC2M-0000vk-23
- for qemu-riscv@nongnu.org; Fri, 25 Sep 2026 15:56:50 -0400
-Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
+ (Exim 4.90_1) (envelope-from <chao.liu@processmission.com>)
+ id 1xAF7X-0006tR-OZ; Fri, 25 Sep 2026 19:14:23 -0400
+Received: from mail-japaneastazlp170130007.outbound.protection.outlook.com
+ ([2a01:111:f403:c405::7] helo=TYDPR03CU002.outbound.protection.outlook.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xAC2J-0003Tl-93
- for qemu-riscv@nongnu.org; Fri, 25 Sep 2026 15:56:49 -0400
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 68PInlfO3014545
- for <qemu-riscv@nongnu.org>; Fri, 25 Sep 2026 19:56:45 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- BCnZYfxhogtoATPQ7SM8rwlR0+mC5MxE+eOp6L7J8Q4=; b=KQKO7LSWDpZiYAlV
- A2Go2lom6OlI/27Fbtx5NVdmb1QBQzUApSaJhdYRWo7klVVaFRVONCgpo2NRc/4G
- nmp7rX4MlFphhgxEbco8KfvATzjy9M8qBllntRla9kRh7bXrs5LlUSkfJPTKtxaW
- 3w0OGav4EAUQkhiWzvTAuy8n2npuKlFV0AhGGwnTON045hj6EvkeZ+zoAK0qXhR8
- n513zJw4Abea7x737e4Sy8RkpVRpH4JlOEFZAJs635mqujB/nIWXwgkEKV4ncGY/
- WCOXWxJ68hWmDMNftglT/d7RJdBZimhzZtW1GimnvdzZMgVqkk9yN4jHh01PNmee
- WLr1gA==
-Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com
- [209.85.160.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gwufk12mw-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Fri, 25 Sep 2026 19:56:44 +0000 (GMT)
-Received: by mail-qt1-f198.google.com with SMTP id
- d75a77b69052e-532e0dd7d9bso30702421cf.0
- for <qemu-riscv@nongnu.org>; Fri, 25 Sep 2026 12:56:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1790366204; x=1790971004; darn=nongnu.org;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=BCnZYfxhogtoATPQ7SM8rwlR0+mC5MxE+eOp6L7J8Q4=;
- b=G2ZXmkhbyt9CKKG6m16LM53dVCdmOwvv0UBFhdInXA55OGMoWKCCJ4yFjhdxWBm17B
- FqZDE93QKhJOuSdQl1sZRpbE3bS96zClOSnqNrSwirAGk/QEYk3vYocGqZp+4b59IOlO
- k+1RBAGMYA0UvwKX6UGFtGXo2ZM5ePlRLrqFVxAKhMn1EAvl9yB30YGxhggQwLfe3YaY
- 34qU03ZgqzhCi5J6mBiN0Ue4CCURChJ8Ae177K8EZ/PjBZTclNlx1V3W2EK9QBoks0vp
- /KOexrfrzdOrVR71oxmM6s5jUIGb3pBaLxHoWNAer9Y1BdQQ+kIVEQiwloaYnFnINl4a
- tCFA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790366204; x=1790971004;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=BCnZYfxhogtoATPQ7SM8rwlR0+mC5MxE+eOp6L7J8Q4=;
- b=TdUUNyPa7KKT+sQc5aR8NZBi5Wnu57gYvZG0B/hNpUNIiNGLloESWhp6V9p0Crbifs
- IbEsu7VRnU/x85AFVK5jmeTHD7/FiTJqNdJr0j0dtQiz90MnMMEPvWRY870BI7/URsyb
- 5NKVqLSWOIJcrv3ry5/0UW9MKyw6Cu0uhQiOqyIrAeROYuy192vq0yyVeeCp7/9dq7A8
- NRiMKspyEcSQ1sF5AHTonTDHEihyGOnKWOJGdcS0qRXyQ5FAvstgay/LP8ZnBr1Cwe9j
- Or1HIOPCPl+tLcx5Q1MVsBVEy7StPCzxE0NMbgyPFZXe/XbqpPlBKq8btQWY7vOhPjzJ
- f6UA==
-X-Forwarded-Encrypted: i=1;
- AKwUvByy/RdHdOzzH2hZBlrVJdgj9SNDkU+j7JRYJtMogqqDAREDedGPZqW8+NkUH5N04zBtg4NLvUr7Mk8g@nongnu.org
-X-Gm-Message-State: AFuF++lQHrBinQOk/eZ9oJW+ymT20UjG7CdLNzPQu26/lZY+MU4kmA4j
- jbqWiPAXMgfCwkxR4YUih924tXecRylZcosMTaE1rqxR80Nk9rRFr5ya2x+gJSfx0xAjkcTbfT3
- 1K/XoquSWlsKrvWk7uHKlZzGMqTkAL7VTjLQNoKTZBxo0iAxWMkpGPz52XQ==
-X-Gm-Gg: AYBFou2OfNmZ+YwEbNlO9RZaUlqxLDx/oo6w4nztRhCsXUkmZK4yCDaExPrQGDdlqOK
- 8xTCFP/Z6DXUSWP4foKu6iHeH98xU5wnUCf12Wfu6M8mW3R8zNXUY1IGtJFepuBxCCAgaccezRg
- mbsWqtqXhs011wJzlylfX5bvCaBG8jwNXOZk2TNPQMHWtWYINZwjT6XTP5XORq7iN0DWvsw0K9Q
- J6VEIETLz3iFgaglFzH4nqmyZPhOJKtmbHcUzzCq99kC6ZJ1j/lFBYFltDb0bbrbGrADa9FRAUo
- y0N1BtchKXsrcGCZC7eKNz2frWQf5n5VJsWHWLU4P/vac2PQ0mEqWapPPT8B6d+QHouy+jKX10U
- PRLgFnnlgPOGfM4stQaAYjHLegHPFGvo9Pg==
-X-Received: by 2002:ac8:588d:0:b0:530:fd30:834c with SMTP id
- d75a77b69052e-5330b68d60amr65467511cf.34.1790366202922; 
- Fri, 25 Sep 2026 12:56:42 -0700 (PDT)
-X-Received: by 2002:ac8:588d:0:b0:530:fd30:834c with SMTP id
- d75a77b69052e-5330b68d60amr65467151cf.34.1790366202456; 
- Fri, 25 Sep 2026 12:56:42 -0700 (PDT)
-Received: from [192.168.68.102] ([177.94.15.187])
- by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-5332238c585sm756691cf.20.2026.09.25.12.56.39
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 25 Sep 2026 12:56:41 -0700 (PDT)
-Message-ID: <e8abec5a-9f69-4218-a0b1-81890d009896@oss.qualcomm.com>
-Date: Fri, 25 Sep 2026 16:56:38 -0300
+ (Exim 4.90_1) (envelope-from <chao.liu@processmission.com>)
+ id 1xAF7V-0006bb-Ao; Fri, 25 Sep 2026 19:14:23 -0400
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=B6ja7TxnWi0Y0GRLlEKt0o9wIrvUWL/SnVC3+sKGlepC1UKaZRlnokBfxwEGFFkK2xW9+C6GgIBIyt7BlUUy4qSjEEuJwJfwPu65pI3QaGMRX4KqCGatOwn3XMi5CtgDy3xsJUndC0HUXT+pVrUiC5HfqcLt6bl5px3LZ9iaG+blbFlfCS+fDj+eTSwX83fmwIzaPo2flZ+SbXv9QmZRTBRalVnrM5EnnKfaVZGewFZqXwI9ef33Op9MOP/gf74d09htOXCbgnxixW2ukMKnfOjgSnno+PJNVt5NQmRNLDGLBAO/8euQLPSfcPOyhB11DsvKzcEesxeYNBgR0vaacQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=nJUMRwWkOCq7rf+irJn9o9t56bu0EonyEJOhK+by66E=;
+ b=bZWmWTLLZAxLf/yF3gJ8uzWfNsP7e/AjKQjlklP5my7dRvv7+9ODPZ1L8gcUUC5tG+jP0ex/CmcTmZOjLG7niicQ4yKXYFl+yGkBNr8jHZ9hI0bN8YFOfdRz6JmmzvFfW9pjw8gvIkCdC7prP0AJ/3nyTFY1ZXjxke9EfRu0wT4hrXskz5NfxOTPwrG9ZXO0voY7ZZdx1NftLv/SRPWpx79cELBo5uwVVBB4j08b5FGG9vg1YaoyBHcdA8FwDvn2xhNfxIJoRRm/RtAtmYtJ0ezNACC3QaxMsEh6tvjx9aGu7fChNH1B3vuSwLdGTYfJzH/9Ro6ko+HSH0hg/718JA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=processmission.com; dmarc=pass action=none
+ header.from=processmission.com; dkim=pass header.d=processmission.com;
+ arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=processmission.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=nJUMRwWkOCq7rf+irJn9o9t56bu0EonyEJOhK+by66E=;
+ b=XXGB3fsb+ABGuL14r30hELf57XAnJrRmVvrbKV3ze+nb8ts1eaDuZpsltEynNyHHhuqQR38DE7RZlAsxVaXBiOQ5ZOe+906AWfYQ285CU3CkNaWE6oE+oJc6ApZjIZNCWfJhCtCwzEbWeMAh3SxNbhWQOGq5AmD2PyNkdCrva8jkK4MSae/HjGt7CI90dSVdsUgoqxqz3hVuBe/pTR+3QUvfGM7DIZLSZVF9voXP4BgTAKW2B2bIzR4JUqb40LV4wL77iGeF2HMq1yS7vw2EQdfeBs8F5zxHC1hoX8j29IlTcqb+DQUPXd2jj8e8hGpuxlfFO21ckFHHli7uIV+w1Q==
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=processmission.com;
+Received: from TYNPR02MB9351.apcprd02.prod.outlook.com (2603:1096:405:3d0::15)
+ by SE3PR02MB9745.apcprd02.prod.outlook.com (2603:1096:101:322::8)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.451.19; Fri, 25 Sep
+ 2026 23:14:11 +0000
+Received: from TYNPR02MB9351.apcprd02.prod.outlook.com
+ ([fe80::e5f3:5fb7:3d29:5934]) by TYNPR02MB9351.apcprd02.prod.outlook.com
+ ([fe80::e5f3:5fb7:3d29:5934%6]) with mapi id 15.21.0451.014; Fri, 25 Sep 2026
+ 23:14:11 +0000
+Date: Sat, 26 Sep 2026 07:14:06 +0800
+From: Chao Liu <chao.liu@processmission.com>
+To: Shunchao Hu <hushunchao@bosc.ac.cn>
+Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org, 
+ Tianze Wu <wutianze@ict.ac.cn>
+Subject: Re: [PATCH v2] target/riscv: add hgatp-specific WARL legalization
+Message-ID: <arcAIT4Y9xdc3Dx0@MacBook-Pro-4.local>
+References: <20260925-riscv-hgatp-warl-v2-1-2aa9aa7718cd@bosc.ac.cn>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260925-riscv-hgatp-warl-v2-1-2aa9aa7718cd@bosc.ac.cn>
+X-ClientProxiedBy: SJ2P220CA0013.NAMP220.PROD.OUTLOOK.COM
+ (2603:10b6:a03:5da::16) To TYNPR02MB9351.apcprd02.prod.outlook.com
+ (2603:1096:405:3d0::15)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v10 3/3] target/riscv: Add vstimecmp support
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
- Atish Patra <atishp@rivosinc.com>, qemu-devel@nongnu.org
-Cc: Alistair Francis <alistair.francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org,
- Bin Meng <bin.meng@processmission.com>
-References: <20220824221357.41070-1-atishp@rivosinc.com>
- <20220824221357.41070-4-atishp@rivosinc.com>
- <f890177a-4322-4207-93a0-7f690cae6b2d@oss.qualcomm.com>
-From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Content-Language: en-US
-In-Reply-To: <f890177a-4322-4207-93a0-7f690cae6b2d@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: KNu53ozGLHp1AQoiUPZEVhH755bmtNVA
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI1MDA3OSBTYWx0ZWRfX2SSoYlokviYs
- eh3ZmqqunHjxJOJLxjcAcsdI1D8jQ7Et1UkIcp93NotEN/vbt9aDu6SgVN1KsvqvKMn+AB9Hqcn
- A4BMl6ql/ufVg2GreQqyKsoqNcMxrN8=
-X-Proofpoint-ORIG-GUID: KNu53ozGLHp1AQoiUPZEVhH755bmtNVA
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI1MDA3OSBTYWx0ZWRfX/uQzXTiG9Rhd
- +3Rt4mOZzPQxqcWTHhpGttKowk1+Tru3byjn+1WAC9cnP13KVDUQIjv0ATHVvMNuGrNIob8sfvE
- +11YRRih3CphrvCcwIccVL42+VtIbJEzDsPEWvmyQrfRs1Jh3PgHBRv8kLOHJn5ZgLiwvhyj2hB
- pRvz/kV4SmznuRruuAu/c6DdKdCUHM2xLL/vbqYK3yviyky25AP71Qwxwyz5K2Wd8c9L8y3F3hg
- tNET5zcgj14VeycyUct5zajU06WrsbX3TD8F6B/EAiRaH2BfQ56m96JHIYfuXTeav87dOo3pf1z
- NGN8beafGs0Rap6fTFHaMZVjnbrz2liSyjb5TrbfFVf85LmaFuRFrkTLUzAXw7ZpwePhe+KyyWf
- vvr30zkXAF+XLhfPF49MsTqUjVjI7C7zskhSnm9JCvansANxCghso9R5Wtt0Zv85eZBot+P2sjD
- QUCySLieMFOBaCBF4JQ==
-X-Authority-Analysis: v=2.4 cv=B+wsQ+tM c=1 sm=1 tr=0 ts=6ab6d1fc cx=c_pps
- a=mPf7EqFMSY9/WdsSgAYMbA==:117 a=0kFmPUMe/4ewoYCJjrGTNA==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
- a=JF9118EUAAAA:8 a=h0uksLzaAAAA:8 a=a-3ul52hziEg8PtNN30A:9 a=3ZKOabzyN94A:10
- a=QEXdDO2ut3YA:10 a=dawVfQjAaf238kedN5IG:22 a=xVlTc564ipvMDusKsbsT:22
- a=MSi_79tMYmZZG2gvAgS0:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-25_04,2026-09-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 clxscore=1015 bulkscore=0 spamscore=0 adultscore=0
- priorityscore=1501 impostorscore=0 lowpriorityscore=0 malwarescore=0
- suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
- definitions=main-2609250079
-Received-SPF: pass client-ip=205.220.168.131;
- envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: TYNPR02MB9351:EE_|SE3PR02MB9745:EE_
+X-MS-Office365-Filtering-Correlation-Id: 90556d68-aec9-4302-65a6-08df1b5ab556
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|23010399003|366016|376014|56012099006|10067099003|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: 99laHp6ooiq00R2laEDmRT5FUsNSZwL7Dhqs6xMVjinHWkBy+sEeqCCU5gnxTuH2+2sn20bBS0EMkIE1Tc2getQ+I5NvM2GRdpT2KIAU1FJrY2+QTWNF0u/J9pJ9NT27UIZg3Yu3ANjqIy1IqwiRKj4DvvX/krvT4a4P7U3kDumLFgHxM9BGP6Hb2X8qkGVC0gbxkDfRjXZX7NutFmTZID9irN4toTN9SNIQgU4ks4fBwfScYXcvGo8oF6buOUpcdJrVoB1bwpfwxs5MTS46x2r6XOuANIHZxP5DT9jMS/S4w4sl45UK4mhEmCuogM+FxEAA+rVxW/tZowC7ET9u1iQNpe7uxz71giwaR91EDJudyg+XNBdysMBq3dr5DM85e6XzITzZNdOcdERgByepyU94qyDxHXKy/ld1Ws0jzzs5URulhMMbNJg2k+55PuUPKKMCjkLEtN/5Zb+5Sysv0GoDTMDGYCI0xaSoxYOne9TcL2azOMT8xkoO6J/hxBGaf/WlMcC8WnoUQNT9hz0SEhT0x/WwZcHKn9SmmU5PEYYIGlv+DV2pcBd1p4NTykosNcf7iKRuU85VdaA0L1R0hHz1nvHeWU0ws7e21xHYC+0SjmtuJLauItLzDMEjqXAS
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:TYNPR02MB9351.apcprd02.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(23010399003)(366016)(376014)(56012099006)(10067099003)(18002099003)(22082099003);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?87M8nw3QDpixodOyLRFxgqEc1ZUQHg76liPzukaI30BOqOh1iLwZO7F1GF0+?=
+ =?us-ascii?Q?ilkUUUc2k8d/IVeJYN/VKXMjsYe8klFfNp7SSvC+tYylDFyVhi8zcIKiZVyg?=
+ =?us-ascii?Q?p8k62PYDkkWcHT3jN0zaw02rzvnlwRK+S2ayYGWTKIBlrPp4Qq4iEmgxVnsx?=
+ =?us-ascii?Q?GpZoaJQQi3uz/OPdtcclJ8Cp/u7t2WEf9uIKJzE7ot23yNgnDTSIrqeMuKcx?=
+ =?us-ascii?Q?pjEzQBlwSUrfPOGY11cW9Q289uk2e3CJY1gtqVGZEJhLGXWpQ67WCIk9rgnb?=
+ =?us-ascii?Q?qarAg2wzIQ8ANIViL/HQCpahEPwjoVLzuctjDZxPlU7/fDoxvfT9x5x6sfzO?=
+ =?us-ascii?Q?2hEG/YvCoTf2gX+jIgC9BU3I+0SeMOpVwlah+3YE2jk4jZRoFjE6zgga87q6?=
+ =?us-ascii?Q?13Ui4HKifuJTEJPZb0F/89v5U5UNyb5BEmXCjYoOoYfrLlh9zI+yMrVPwKGo?=
+ =?us-ascii?Q?uXRUDy9tzqVXBWbsAN18S9R1zvhlF07/273hniorXHe3+Pr+/JaSwffJPPow?=
+ =?us-ascii?Q?W+rQmrcHB0W6uIo0RL1wjL6VxK9YOaNNVkLJxY4/HSpCYQMnLNPTuNRBtnAu?=
+ =?us-ascii?Q?iT+qN6MRcLyIhP1bJzZZL+uV7bK/9R32X84XYNjonWKzlkn3usDI/WyGjpev?=
+ =?us-ascii?Q?bG3L8gf6jhMAgqhMNAolKBkzwt/VSuut6TmUDHui4r5hOzTCwDpvlyf7Syex?=
+ =?us-ascii?Q?B2guDKmdEClFXDLuP2xWNne++doG3n/JELVf6fF1wLA6RUZr8gN7/HNnvuor?=
+ =?us-ascii?Q?ZO2tlT8WXUv0Ch3NsYGumd57B5bi4xc0VmFSkf7qzvKLNwV2gaZJF/wtX3RR?=
+ =?us-ascii?Q?Sxa3iDodJrdKaXNjLT6Zi8VldhVqfq9vgyaG5H35aIIS0XeT9nS3VCZ63Qx8?=
+ =?us-ascii?Q?2wEU6PZeGPel8z0u3GDUfSNzXvAC4y6gYYm7H4DjHlGrOdzu25sdbG3Y2UWY?=
+ =?us-ascii?Q?G6Bk6LW8qyuT8sVno5m8rSSHGbC/PAuKc+FlVRxRCIxRcRcKA2XP29JptCVQ?=
+ =?us-ascii?Q?q9alW2ryAq6KJA9kHhAvLNpuPyIehxuQg+kAXXMpt6D2TbcnbEVqIhQK3YYC?=
+ =?us-ascii?Q?Na+Oodd3DNtYw2I7s1k0+6nqeQ8U6myprxkYFRtogUZcNQF80NfUewuaLzPj?=
+ =?us-ascii?Q?QDwZZMnCjUgV2StyHtqTxPo5yrvLP64unt+WO85cJPHx/RI0WqFl7qIsjoAp?=
+ =?us-ascii?Q?yf2GQ6o5N7ReaokQGQbenZOrg9M2EvmrHtIUJJ5DsQOg0cf0BORyYa8I9O28?=
+ =?us-ascii?Q?BICa+rBFo5wKsLK9lB6xUFf+4noHxebTZD+o/TyCMVWZZPHcWDQyfdjUw7iH?=
+ =?us-ascii?Q?4fLoCLE+pcjgQR5hJt0FyIOstljIUmdxIQOajdh+rJRbq6FrQUCStrdcRbOb?=
+ =?us-ascii?Q?Lyks3haCcy+t9xZgZvYMw5O3Xx6y1UqNSvDziPR0ZapYDXLYZM2+uGuwx93N?=
+ =?us-ascii?Q?ZMyoQoqdj0w8woECMr3W6eIIUOP7lSAM9VWGWZ4onzUKN3aYHwPWumqCNUMn?=
+ =?us-ascii?Q?7ooRVADDdmZIzzOIygxPnhxG28uYxS4feFtuA+UPvxiERTHZ9b4wlKCifpxT?=
+ =?us-ascii?Q?8o3ENAuq+2UBDUY+bpXONnmvHpKxAyOa2HHMTmWXo4KdV2XbRoJrOGHD1VWz?=
+ =?us-ascii?Q?X7M7y1XvrfopIgQKDbJiQCMFO92deo+ymV1aDswtqeAwD8nCjl803hI6ojcm?=
+ =?us-ascii?Q?DkQg0LIvO/D+sBoQ6dgmA6xFBkqtJZTqycpt/6VQ/0DGtaxrM9TJvLpqWcfJ?=
+ =?us-ascii?Q?Rr54wzyrwnFYbQQod/Dv+sR5u9+jgM8=3D?=
+X-OriginatorOrg: processmission.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 90556d68-aec9-4302-65a6-08df1b5ab556
+X-MS-Exchange-CrossTenant-AuthSource: TYNPR02MB9351.apcprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Sep 2026 23:14:11.5069 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: e0544bf7-9765-4630-ab69-0b266dc2169c
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: YsfRCeUXrXnS9OBAmMVTali9HhFFOsBzn7jVVFbTVQ1VawRBUAT1M63uwGfiteeEWBfNXqsz3x1sSWzUzCBDYaoYP6bkCDh2qYpomRJUlsk=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SE3PR02MB9745
+Received-SPF: pass client-ip=2a01:111:f403:c405::7;
+ envelope-from=chao.liu@processmission.com;
+ helo=TYDPR03CU002.outbound.protection.outlook.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -160,76 +142,140 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-
-
-On 9/23/2026 11:38 AM, Philippe Mathieu-Daudé wrote:
-> Hi,
+Hi Shunchao,
+On Fri, Sep 25, 2026 at 10:07:09PM +0800, Shunchao Hu wrote:
+> According to the Hypervisor Extension in RISC-V spec:
+> - VMIDMAX is 7 bits for RV32 and 14 bits for RV64
+> - the fields of hgatp are WARL in the normal way
+> - the lowest two bits of the physical page number
+>   (PPN) in hgatp always read as zeros
 > 
-> (now committed as 3ec0fe18a31fabfe999b480e4c21847ac0d51560)
+> These behaviors differ from those of the satp CSR,
+> so hgatp cannot reuse legalize_xatp(). Add a dedicated
+> legalize_hgatp() helper to implement the hgatp-specific
+> WARL semantics.
 > 
-> On 25/8/22 00:13, Atish Patra wrote:
->> vstimecmp CSR allows the guest OS or to program the next guest timer
->> interrupt directly. Thus, hypervisor no longer need to inject the
->> timer interrupt to the guest if vstimecmp is used. This was ratified
->> as a part of the Sstc extension.
->>
->> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
->> Signed-off-by: Atish Patra <atishp@rivosinc.com>
->> ---
->>   target/riscv/cpu.h         |  4 ++
->>   target/riscv/cpu_bits.h    |  4 ++
->>   target/riscv/cpu_helper.c  | 11 +++--
->>   target/riscv/csr.c         | 88 ++++++++++++++++++++++++++++++++++++--
->>   target/riscv/machine.c     |  1 +
->>   target/riscv/time_helper.c | 16 +++++++
->>   6 files changed, 118 insertions(+), 6 deletions(-)
->>
->> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
->> index d2529b757aab..d895a0af2c6d 100644
->> --- a/target/riscv/cpu.h
->> +++ b/target/riscv/cpu.h
->> @@ -311,6 +311,8 @@ struct CPUArchState {
->>       /* Sstc CSRs */
->>       uint64_t stimecmp;
->> +    uint64_t vstimecmp;
->> +
->>       /* physical memory protection */
->>       pmp_table_t pmp_state;
->>       target_ulong mseccfg;
->> @@ -365,6 +367,8 @@ struct CPUArchState {
->>       /* Fields from here on are preserved across CPU reset. */
+> Co-authored-by: Tianze Wu <wutianze@ict.ac.cn>
+> Signed-off-by: Tianze Wu <wutianze@ict.ac.cn>
+> Signed-off-by: Shunchao Hu <hushunchao@bosc.ac.cn>
+LGTM.
+
+Reviewed-by: Chao Liu <chao.liu@processmission.com>
+
+Thanks,
+Chao
+
+> ---
+> Changes in v2:
+> - Reword the comment to clarify that retaining the previous MODE is
+>   QEMU's WARL legalization choice, not a requirement of the spec.
+> - Link to v1: https://lore.kernel.org/qemu-devel/20260920-riscv-hgatp-warl-v1-1-2e52f78c8027@bosc.ac.cn
 > 
->          ^^^
+> To: qemu-devel@nongnu.org
+> Cc: Palmer Dabbelt <palmer@dabbelt.com>
+> Cc: Alistair Francis <alistair.francis@wdc.com>
+> Cc: Weiwei Li <liwei1518@gmail.com>
+> Cc: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+> Cc: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+> Cc: Chao Liu <chao.liu@processmission.com>
+> Cc: qemu-riscv@nongnu.org
+> ---
+>  target/riscv/cpu_bits.h |  8 ++++++++
+>  target/riscv/tcg/csr.c  | 46 ++++++++++++++++++++++++++++++++++++++++++++--
+>  2 files changed, 52 insertions(+), 2 deletions(-)
 > 
->>       QEMUTimer *stimer; /* Internal timer for S-mode interrupt */
->> +    QEMUTimer *vstimer; /* Internal timer for VS-mode interrupt */
->> +    bool vstime_irq;
+> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+> index c01050ce2b..c4a914411b 100644
+> --- a/target/riscv/cpu_bits.h
+> +++ b/target/riscv/cpu_bits.h
+> @@ -711,6 +711,14 @@ typedef enum {
+>  #define SATP64_ASID         0x0FFFF00000000000ULL
+>  #define SATP64_PPN          0x00000FFFFFFFFFFFULL
+>  
+> +/* hgatp CSR field masks */
+> +#define HGATP32_MODE        SATP32_MODE
+> +#define HGATP32_VMID        0x1FC00000
+> +#define HGATP32_PPN         SATP32_PPN
+> +#define HGATP64_MODE        SATP64_MODE
+> +#define HGATP64_VMID        0x03FFF00000000000ULL
+> +#define HGATP64_PPN         SATP64_PPN
+> +
+>  /* RNMI mnstatus CSR mask */
+>  #define MNSTATUS_NMIE       0x00000008
+>  #define MNSTATUS_MNPV       0x00000080
+> diff --git a/target/riscv/tcg/csr.c b/target/riscv/tcg/csr.c
+> index 061bc9db77..fc7bd61073 100644
+> --- a/target/riscv/tcg/csr.c
+> +++ b/target/riscv/tcg/csr.c
+> @@ -5050,17 +5050,59 @@ static RISCVException read_hgeip(CPURISCVState *env, int csrno,
+>      return RISCV_EXCP_NONE;
+>  }
+>  
+> +static target_ulong hgatp_mask(CPURISCVState *env)
+> +{
+> +    target_ulong mask;
+> +
+> +    if (riscv_cpu_mxl(env) == MXL_RV32) {
+> +        mask = HGATP32_MODE | HGATP32_VMID | HGATP32_PPN;
+> +    } else {
+> +        mask = HGATP64_MODE | HGATP64_VMID | HGATP64_PPN;
+> +    }
+> +
+> +    /* G-stage x4 root page tables are always 16 KiB aligned. */
+> +    return mask & ~(target_ulong)3;
+> +}
+> +
+> +static target_ulong legalize_hgatp(CPURISCVState *env,
+> +                                   target_ulong old_hgatp,
+> +                                   target_ulong val)
+> +{
+> +    target_ulong mode_mask = riscv_cpu_mxl(env) == MXL_RV32 ?
+> +                             HGATP32_MODE : HGATP64_MODE;
+> +    target_ulong hgatp = val & hgatp_mask(env);
+> +    target_ulong mode = get_field(hgatp, mode_mask);
+> +
+> +    /*
+> +     * hgatp.MODE is a WARL field, so an unsupported value must be
+> +     * legalized rather than causing the entire write to be ignored.
+> +     * The specification does not require a particular legal value,
+> +     * QEMU here chooses to keep the previous mode while accepting
+> +     * writes to the remaining WARL fields.
+> +     */
+> +    if (!validate_vm(env, mode)) {
+> +        hgatp = set_field(hgatp, mode_mask,
+> +                          get_field(old_hgatp, mode_mask));
+> +    }
+> +
+> +    if (hgatp != old_hgatp) {
+> +        tlb_flush(env_cpu(env));
+> +    }
+> +
+> +    return hgatp;
+> +}
+> +
+>  static RISCVException read_hgatp(CPURISCVState *env, int csrno,
+>                                   target_ulong *val)
+>  {
+> -    *val = env->hgatp;
+> +    *val = env->hgatp & hgatp_mask(env);
+>      return RISCV_EXCP_NONE;
+>  }
+>  
+>  static RISCVException write_hgatp(CPURISCVState *env, int csrno,
+>                                    target_ulong val, uintptr_t ra)
+>  {
+> -    env->hgatp = legalize_xatp(env, env->hgatp, val);
+> +    env->hgatp = legalize_hgatp(env, env->hgatp, val);
+>      return RISCV_EXCP_NONE;
+>  }
+>  
 > 
-> Shouldn't vstime_irq be reset upon vCPU reset?
-
-It's not needed ... I guess.  If you check riscv_cpu_reset_hold():
-
-     env->menvcfg = (cpu->cfg.ext_svpbmt ? MENVCFG_PBMTE : 0) |
-                    (!cpu->cfg.ext_svade && cpu->cfg.ext_svadu ?
-                     MENVCFG_ADUE : 0);
-
-The bit that enables these timers (STCE) is zeroed.  So as far as the CPU goes there's
-no sstc extension and no timers, and vstime_irq is ignored.
-
-When SSTC is set during reset (write_menvcfg() in csr.c) we'll go to riscv_timer_stce_changed(),
-and then we'll enable or disable the timer (i.e. set env->vstime_irq) accordingly.
-
-
-At least this is what I understood reading the code.  Hopefully Alistair can correct
-me if I'm talking nonsense.
-
-
-Cheers,
-Daniel
-
-
+> ---
+> base-commit: c1c18d1e640b64292859ce9f30f3c344edfb0294
+> change-id: 20260920-riscv-hgatp-warl-1e48fd321188
 > 
->>       hwaddr kernel_addr;
->>       hwaddr fdt_addr;
-
+> Best regards,
+> --  
+> Shunchao Hu <hushunchao@bosc.ac.cn>
+> 
 
