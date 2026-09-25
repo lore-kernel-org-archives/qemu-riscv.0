@@ -4,97 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7ED30C98321
-	for <qemu-riscv@archiver.kernel.org>; Fri, 25 Sep 2026 16:32:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB558C98321
+	for <qemu-riscv@archiver.kernel.org>; Fri, 25 Sep 2026 16:35:12 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xA8py-00064b-EL; Fri, 25 Sep 2026 12:31:50 -0400
+	id 1xA8t5-00079E-Hd; Fri, 25 Sep 2026 12:35:03 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xA8pb-000617-9J
- for qemu-riscv@nongnu.org; Fri, 25 Sep 2026 12:31:28 -0400
+ id 1xA8sy-000781-NS
+ for qemu-riscv@nongnu.org; Fri, 25 Sep 2026 12:34:56 -0400
 Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xA8pZ-0001gX-0r
- for qemu-riscv@nongnu.org; Fri, 25 Sep 2026 12:31:26 -0400
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+ id 1xA8sx-0001pT-30
+ for qemu-riscv@nongnu.org; Fri, 25 Sep 2026 12:34:56 -0400
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 68PGKbxO1711506
- for <qemu-riscv@nongnu.org>; Fri, 25 Sep 2026 16:31:21 GMT
+ 68PG3okN801673
+ for <qemu-riscv@nongnu.org>; Fri, 25 Sep 2026 16:34:53 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- wBI3IGXFWyol4HJyolejM/zmrxcgSQd6w1OEhCOKrwo=; b=W9l9d6eX4Rrcwjuh
- /uVgfvBKJpFBQ+TooqURm67XwXIhkUXMfDW76zvlCiEJfKguINSQHok3Wytll1gB
- 38tZRU+LrQDbBLNhtiSaXO9CyzhWLaXWIsWdqK8M+bFimh/6WYcijIBKbXJ8Mypc
- FkUBCpSL26YnJpO7iLkqCtTJLumuYtjy5WCM4XevETW83Lk+6ddYm91nx7ofi8tk
- IGHDWrvkS/Un6Y63M13IAk44zU4qqR45x86/VhoosQUazeUmnbo0YTURFq4ykIJB
- tsyU553laCvdGVDvCA6ZCWBf7xSwpmzp6v+vyFIp1HaSIqD0+vCsMiUS5JOC6GZ1
- XJ8BEQ==
-Received: from mail-qv1-f71.google.com (mail-qv1-f71.google.com
- [209.85.219.71])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gwvd3r181-1
+ pnkjJ6iJd7jmbHtPLg5O2ybsJ6JSuZtDibMHamcaJ0c=; b=KBe3yFnXFAClZAWN
+ r3iYKJVUHF2VJi1B1gus63C0QVQjVQEO6HjL1uXh2C4xpWz8qgMaJa9L4zSzu+Qf
+ N/ebOtjbMC/LBPtp8W1nX1YkHz/zWFlUXbugTjj+crJrYZoFlp6XQ2bWq+0864Zi
+ aYonsYS+8llRnFxQmB+GKT9WUY357K/wWKKecgTG8farVoQ4MDsF91a7XDCczsk6
+ Coia/DC+FiKRixQ76f8SieT5Bbpj0JL+zlcuQxLh1oSb4NxOf/nYAWD8RrWcfFXZ
+ 93NQ3Cn3/iB1g15LdNllGOaMrlIkPh3cSxKVh38h+1fxvWY0EzqVspz6eGBkuA6l
+ ZO/FFQ==
+Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com
+ [209.85.160.197])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gwv57g4bj-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Fri, 25 Sep 2026 16:31:20 +0000 (GMT)
-Received: by mail-qv1-f71.google.com with SMTP id
- 6a1803df08f44-90e8472ee1eso18655286d6.0
- for <qemu-riscv@nongnu.org>; Fri, 25 Sep 2026 09:31:20 -0700 (PDT)
+ for <qemu-riscv@nongnu.org>; Fri, 25 Sep 2026 16:34:53 +0000 (GMT)
+Received: by mail-qt1-f197.google.com with SMTP id
+ d75a77b69052e-530ef845909so22612591cf.1
+ for <qemu-riscv@nongnu.org>; Fri, 25 Sep 2026 09:34:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1790353880; x=1790958680; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1790354093; x=1790958893; darn=nongnu.org;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=wBI3IGXFWyol4HJyolejM/zmrxcgSQd6w1OEhCOKrwo=;
- b=E9QPJOKgB24T/qU0FIK7Vo8TohRDchASjHZZ4IGXsSEtdMGPpLhHvQ+ODbDXPcu6KW
- +uwqdJ1jevEUrkhb6DwKvIQ/sez69rUZm9qFE8VYbfpfc8ewofDFIr5Mc33jn5EYrT3h
- 2n/LQLONpENjyoI26C1Brle36nmNO/rrsW3Wlo1hjm9kEptPY+oemkjXZvhtUAK6pp0R
- EkKhk0VwP5VPQi89rHJQJWpAvZj3EvIieHkDiOWDvuBxnouIDeoQ8rWoCOptsr7G/9TM
- l2l/N0ZoT2MKzi199WYOeESc/yeDqtqijuVQnRaPGsGbv+jc3Cw6I8tHXqj5AiA6PoV1
- pxEg==
+ bh=pnkjJ6iJd7jmbHtPLg5O2ybsJ6JSuZtDibMHamcaJ0c=;
+ b=kPc35jMbXZ44CGuXLs6aQTyK6IZhaSi0xWgnz2+5y8lXBwK8TtTtI/a4pNzickMsUt
+ acavfmV7+beWFRE37Ha0bDwCHaG570+TrMXr1G3wchGxLsxK7oege1S1oFYmjmlvYkaO
+ OIRsMOFhpdvmCPSSSYpPOfBs3NJ8p3LNRTFQBhJylNG1hc8AKcklDCBWJsEizD6vfQg8
+ K9iLFYhfLjZPg6HU9UdL+dztLWp0ELpfzKst9alrew85F6vZUnpyxvyT36hkTjRVpgKC
+ BR/ZxMCuRRP5+QND324fhLMcv/WLSzDz6hqF0w7fi55bTYNadxALH+KPeVABtG/SBhdb
+ PYvQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790353880; x=1790958680;
+ d=1e100.net; s=20260707; t=1790354093; x=1790958893;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=wBI3IGXFWyol4HJyolejM/zmrxcgSQd6w1OEhCOKrwo=;
- b=WdOdwHvu0RQ1M2wa5ogGNd4juloSGhzpta8z4ybS+Rv5MfwekxCEP1nAhgCFnXIDVh
- kBJ3hwjyfetaoCVD6JksjhNk9Nu0e2JKTQmRhGTkma3ZJ4+B+cIADOmVtzj/3R9DwBWC
- WCsteWkuwQLl3g+JVNSnkZMegggQ9ck98eVDp8+cv8HahkRzMIo/U5m8/sqeunaOJqoq
- cYDv5OY4F7Nf3xe0wQNXrCnSiSScVjS8NNuzo4gL8Wyfm3ZrMg3b035ZIf0+e9tYw1rm
- QZvPjCn/EZTTFcXgOShELBO71y9w3HMGCrDnhxJlJ88C5dZqWD2wGnH+9lTO9lbp5zV0
- 04tQ==
+ bh=pnkjJ6iJd7jmbHtPLg5O2ybsJ6JSuZtDibMHamcaJ0c=;
+ b=YO0H0R6uDXqmjtg74ao+xgQKY0PS0/As7iS3aQOAdwZsSxpx8dzFaAHomguRYX30HE
+ g+okAXmelItp5ECXT+uymsxRlpZYnabkLmzgD5YQf01RuELBU4SzRRw3Rmm46lFvDuIN
+ fViKwA7/O8rrephvbaxsKIO064OzLDWQFMzMxb+Gdh6UvFFP/rF/x+Eti5+UCwJzlHU8
+ fpIv6nlO6diG1ePCHr+rZTSVgILpcMC95J0mk2khwef9gBX2JZ7zSerhNzCEVnQ/2kLg
+ CjlBsYZWwfk9pH7a4wgCI7erXDU9r8JL1EkVPDGVD7/U/H2yjQ5ecq+jrZybNXtJV4bL
+ e2TA==
 X-Forwarded-Encrypted: i=1;
- AKwUvBwYmfk+4ZYS/8uP6sYO8ocTEZw33sb1jhs0BmbSNp1YxYv5mh9tIKkAtSab6BH+AUSrEaMOahjoQy8h@nongnu.org
-X-Gm-Message-State: AFuF++n/ewHycKKDhBWM40FuYLfVNhViWQvQ4fazqq5mQiy+YOzy3Fks
- fRgjhOQ9vKx8ydiqJNuPFmC4FCdo7s2JdyZ7W2j9C1wA6pmGkimm4/1g3KyntBFyGlTnELhdaQ8
- dYCMHVQdrT7wfXQQ79jnsbmxoiwZNmgeVQ+9uhZ4OUTPgUSzl8poUf/vmYw==
-X-Gm-Gg: AYBFou2Hfqa7I7yI8jbcQokpc2P22he1JerY5MKtoGa9pzKvJpx4dvxdgZzS0+FNwBY
- psLA43RXi1Oy735grbbzD0hwKCBk7yZ26k7ZvVvWke4i+yUSA2enDlbptOiuF8p+CzT5Ce39IpS
- FiRLeNQxIP/FsFGZ6YlEYcmrkLTtQ26ebr/xsPZHlcEGh/ds8ld4PVskpAee8Vt106xJs3ctaYB
- PYGtUkUWkIw5WxQg28FSOXH2W4TnJMeGo9XY0WZ5z2E/Rd3OnxbFq8Zs1yUjHzFxnUIeSC3zBrM
- 8UiMHZ734RnJ/mmkSvg7pSTkZ7rnnWAyaEliCqmORZ0ozfD4FqdsUpvP8y1jN+92pDmk0xWktwC
- sVVADMFx1h0vy/Lyej22O7ayyMgWUeL/zUw==
-X-Received: by 2002:a05:620a:4050:b0:93b:ec83:80ee with SMTP id
- af79cd13be357-93c43e0ee3bmr558343685a.57.1790353879523; 
- Fri, 25 Sep 2026 09:31:19 -0700 (PDT)
-X-Received: by 2002:a05:620a:4050:b0:93b:ec83:80ee with SMTP id
- af79cd13be357-93c43e0ee3bmr558338685a.57.1790353879009; 
- Fri, 25 Sep 2026 09:31:19 -0700 (PDT)
+ AKwUvBw6RLCpSRvhjtv9ftLinUnYpzjMWN2Tf3aOAyuuHqV1X5v77RW/FW2u/WnJiQ3VRly3ZJdP/Fw1A4Cf@nongnu.org
+X-Gm-Message-State: AFuF++ld4eA86r5lRwVJckP/1vbf7nnlm/DMIQZmx1HjtSaigZ7r+nTl
+ PWGKtErTpcygbJ5KOhdLxX2sJ94CGjTqe+T5vXFVAVWCxN8VCWv1/PQa/S2zJVHBTrlXxoCmwTD
+ W/BOkV2bPAtFtFuT2TT103zo/JZWKxAfQlwVlfICFC1fs4b8T7akSINgAWA==
+X-Gm-Gg: AYBFou2AHcXqSYh7PSOlrhOfLi7aTdavzLUEd30dH1vj5sJngpgpMHNLsP7tqCX9u4q
+ +eSbZOxlEvNjR9lPXfiSHn3N24msoyZXVMClIz08dJvINzvYeAj1eKAPyKAFPQbPOxpM4aodpqb
+ 402GVyfNf4GJ7AQ4XPwZ/adwy+k701d8dAO7XIdWxwCiZZEkVsOpyc89HWyUxJUjLLJ9eAcr2Yv
+ zzQehDwmgFnr7qNxsFjLbRcyLuMSjs9Tbt04bad+StQGgNjw/vj5QeB94e4uOLA76ygtY2SRStF
+ 3nm9Xx7B+UFdU307awciITEyu4KTfnP9hANW3Z2ATIEIOHk/t9/Vb1vDIBTy5b0QguZ8srWUSWk
+ Ojpc/Wup/+EUCbWSLA0jj36/+NM/mRTyikQ==
+X-Received: by 2002:ac8:5d4e:0:b0:532:c82e:7481 with SMTP id
+ d75a77b69052e-5330b6d2c68mr56815671cf.51.1790354092539; 
+ Fri, 25 Sep 2026 09:34:52 -0700 (PDT)
+X-Received: by 2002:ac8:5d4e:0:b0:532:c82e:7481 with SMTP id
+ d75a77b69052e-5330b6d2c68mr56815081cf.51.1790354092042; 
+ Fri, 25 Sep 2026 09:34:52 -0700 (PDT)
 Received: from [192.168.68.102] ([177.94.15.187])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-93c4497ca93sm219118585a.44.2026.09.25.09.31.16
+ d75a77b69052e-5330beb3a81sm18546511cf.5.2026.09.25.09.34.49
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 25 Sep 2026 09:31:18 -0700 (PDT)
-Message-ID: <cb85596b-485b-4380-9f67-2a8348a57eb5@oss.qualcomm.com>
-Date: Fri, 25 Sep 2026 13:31:15 -0300
+ Fri, 25 Sep 2026 09:34:51 -0700 (PDT)
+Message-ID: <ac765b6b-15bc-4063-972a-33698f1fdb79@oss.qualcomm.com>
+Date: Fri, 25 Sep 2026 13:34:48 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 10/14] target/riscv: Apply minstret exception
- accounting to HPM counters
+Subject: Re: [PATCH v2 11/14] target/riscv: Process PMU timer expiry on the
+ owner vCPU
 To: TANG Tiancheng <lyndra@linux.alibaba.com>, qemu-devel@nongnu.org
 Cc: Zephyr Li <fritchleybohrer@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
@@ -104,39 +104,39 @@ Cc: Zephyr Li <fritchleybohrer@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Paolo Bonzini <pbonzini@redhat.com>,
  =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
 References: <20260910-riscv-pmu-correctness-v2-0-5da5159a0c64@linux.alibaba.com>
- <20260910-riscv-pmu-correctness-v2-10-5da5159a0c64@linux.alibaba.com>
+ <20260910-riscv-pmu-correctness-v2-11-5da5159a0c64@linux.alibaba.com>
 From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Content-Language: en-US
-In-Reply-To: <20260910-riscv-pmu-correctness-v2-10-5da5159a0c64@linux.alibaba.com>
+In-Reply-To: <20260910-riscv-pmu-correctness-v2-11-5da5159a0c64@linux.alibaba.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-GUID: 5ziofOmpfNCO8cpE8Q-pje2ogRI5Xgqs
-X-Proofpoint-ORIG-GUID: 5ziofOmpfNCO8cpE8Q-pje2ogRI5Xgqs
-X-Authority-Analysis: v=2.4 cv=YL4KWhGx c=1 sm=1 tr=0 ts=6ab6a1d8 cx=c_pps
- a=UgVkIMxJMSkC9lv97toC5g==:117 a=0kFmPUMe/4ewoYCJjrGTNA==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI1MDA2NiBTYWx0ZWRfX8mZDbrqaL2bG
+ +tXG8wCx6pn4oqDbZqHRL9eCKXMKQg3D4acnTg+F64QPWE8kf1eINOVMrEDoWfDiEdmnY6Vn5JA
+ aLkLeZnTzyhj+t5462EBkPvUI6BjtGEMGTZnYEwAl0GTA04p62mZJ1UTUtfUNryeEuoBprj65St
+ msciOl6wA0u74n4evtsi/pSgyJFcniCgWoIAEK8c/ofkQlyC/hGdE6WUiGpWuFnswV456+0BNsE
+ I07birZObnBJzfl0NeyFM1faYX/tZNA8AIs/4HKfcyVi++X4GVxWy4YLA9kHR+XcyC7SGxXhFh6
+ HOb4RWvAefmC9YnaA7Gl60VvIE098t2Rxm37eZd4Rpit5TIybiuljICldbf1o0pKIwtBpWHV56U
+ MXDRKjI+xFWd1ScaEn4bSTUjWjMGHlfTjsLTnbEkjWaa2hLpQzpgO3nXuhgNb4msDtCLb0yCY3Q
+ vHJwrA/8eBl3FMGMwlA==
+X-Proofpoint-GUID: a1Qw74EndM8tPhUw5T-UygcdYRiy2G5S
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI1MDA2NiBTYWx0ZWRfX2i2gU1vlKuLx
+ 3bvstK/so96MjmW9GfEtqXKzHk/+znK4kNoSoE+4cxSXPDwAhzX5pZ+3uYIcBivuz64xhLWs6Z2
+ Nn5kZ+/sddi9h2hYjo8xg3Qk7GTLLOs=
+X-Authority-Analysis: v=2.4 cv=S4dMU4sP c=1 sm=1 tr=0 ts=6ab6a2ad cx=c_pps
+ a=EVbN6Ke/fEF3bsl7X48z0g==:117 a=0kFmPUMe/4ewoYCJjrGTNA==:17
  a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
- a=SRrdq9N9AAAA:8 a=EUspDBNiAAAA:8 a=HLlE97lRRq6cRs4FlAoA:9 a=QEXdDO2ut3YA:10
- a=1HOtulTD9v-eNWfpl4qZ:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI1MDA2NSBTYWx0ZWRfX64uabCY80Jt4
- NK58MD9ZYSBHmqgz4ob3WZKoyQoUbObMvMf9glMLPuJej+7PK2WaI2nyfUjW5xitj1AQU2nMrYm
- I7FwDF4Fj3f7Lf35pCrpSFRYJNQweLm7d970774KIsW4/iaQQdRY6Sc/GLLPBeSTQ6iHasQiM7t
- VVo6utQ5gHhg6/uThSkeYjzb1nhnVQP8AT94PrjHEbeAygqYUH678STVoJ8XL476BYyJ/FayOrF
- 9xCehT3Bh1vwEXtrr3YNRY5pXU3oju9UMHvnip1wtiKd8B05iifWPrJy1y88XsfRDtzPelMi2UM
- ZukDZI4yQFZ4MduiOw6zmGuayoFlmANm+0tMnMXOBLDy1C/2t1SWwdqDNoS9bcSReesz2H53oNK
- 2Y/FNsFWQFH5vFWWyC0jEEh/SII7LIbklUeTo0Xt2Dr0fkzIkfaLNYzufC73LrNdbLAIyqQBAwv
- qhfOa57jirvYsYKv4Dw==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI1MDA2NSBTYWx0ZWRfX2twHIqux/KpZ
- pu2SDrABfPW+2TBaWrIj0MgPVIkoP0G4RjnJC3n4fnxloZO6y6IPVIgyT25H1toWYaOyessma6f
- bAUcIXFeqw4EDUBx6LGG+tvrpnpc8k4=
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
+ a=SRrdq9N9AAAA:8 a=EUspDBNiAAAA:8 a=VsVoKZ9dl8H_e5NpkdEA:9 a=QEXdDO2ut3YA:10
+ a=a_PwQJl-kcHnX1M80qC6:22
+X-Proofpoint-ORIG-GUID: a1Qw74EndM8tPhUw5T-UygcdYRiy2G5S
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-25_03,2026-09-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 adultscore=0 malwarescore=0 bulkscore=0 lowpriorityscore=0
- spamscore=0 priorityscore=1501 clxscore=1015 phishscore=0 impostorscore=0
+ bulkscore=0 phishscore=0 lowpriorityscore=0 clxscore=1015 adultscore=0
+ priorityscore=1501 malwarescore=0 spamscore=0 suspectscore=0 impostorscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609250065
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609250066
 Received-SPF: pass client-ip=205.220.168.131;
  envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
 X-Spam_score_int: -27
@@ -164,218 +164,79 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 On 9/10/2026 11:39 AM, TANG Tiancheng wrote:
-> With icount, helper_raise_exception() excludes faulting instructions from
-> minstret but not HPM counters selecting HW_INSTRUCTIONS.
+> The PMU timer callback can race MTTCG execution and CSR writes while
+> reading the event map and updating counters, OF and MIP.
 > 
-> Adjust the baseline of every running instruction counter that counts the
-> current privilege mode. Do not read icount here: the helper can run inside
-> a TB. Keep the existing timer, since excluding an instruction can only
-> postpone overflow and expiry checks for an actual wrap.
+> Queue counter checks on the owning vCPU. The callback atomically sets
+> pmu_timer_work_pending and queues work only if it was previously false.
+> The vCPU clears the flag before checking counters and rebuilding the
+> timer. Earlier expiries are covered by that check; the first later expiry
+> queues another check.
+
+In case a v3 is needed:  s/expiries/expires or even "Earlier expired counters"
+
+
+Otherwise Alistair can amend it in-tree.
+
 > 
-> Extend the ECALL regression to compare both counters and add an LPAD
-> fault test covering an exception inside a multi-instruction TB.
-> 
-> Fixes: 14664483457b ("target/riscv: Add sscofpmf extension support")
 > Signed-off-by: TANG Tiancheng <lyndra@linux.alibaba.com>
 > ---
 
 Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 
->   target/riscv/tcg/pmu.c                  | 35 ++++++++++++----
->   tests/tcg/riscv64/pmu-lpad.S            | 72 +++++++++++++++++++++++++++++++++
->   tests/tcg/riscv64/system/meson.build    |  7 ++++
->   tests/tcg/riscv64/test-minstret-ecall.S | 26 ++++++++++++
->   4 files changed, 133 insertions(+), 7 deletions(-)
+
+>   target/riscv/cpu.h     |  1 +
+>   target/riscv/tcg/pmu.c | 18 ++++++++++++++++--
+>   2 files changed, 17 insertions(+), 2 deletions(-)
 > 
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 17b9929785f668487d2ec851b736d588e025fd91..a4d33f55c4e5cb6052cea6bee4c0afa46372b5c5 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -583,6 +583,7 @@ struct ArchCPU {
+>       QEMUTimer *pmu_timer;
+>       uint64_t pmu_timer_instret_snapshot;
+>       bool pmu_timer_stalled;
+> +    bool pmu_timer_work_pending;
+>       /* A bitmask of Available programmable counters */
+>       uint32_t pmu_avail_ctrs;
+>       /* Mapping of events to counters */
 > diff --git a/target/riscv/tcg/pmu.c b/target/riscv/tcg/pmu.c
-> index f88f6ae671d877ed874d22c9d4b840edb6f433a5..08298010b6d06f5792fa14ff81fe2f7a28c6476f 100644
+> index 08298010b6d06f5792fa14ff81fe2f7a28c6476f..6286552a4ebf614df0252f84ddfadbc25d8d2258 100644
 > --- a/target/riscv/tcg/pmu.c
 > +++ b/target/riscv/tcg/pmu.c
-> @@ -387,18 +387,39 @@ void riscv_pmu_write_inhibit(CPURISCVState *env, uint32_t value)
+> @@ -663,15 +663,29 @@ void riscv_pmu_rebuild_timer(CPURISCVState *env)
+>       riscv_pmu_rebuild_timer_internal(env, false);
+>   }
 >   
->   void riscv_pmu_decr_instret(CPURISCVState *env)
+> +static void riscv_pmu_timer_work(CPUState *cs, run_on_cpu_data data)
+> +{
+> +    RISCVCPU *cpu = RISCV_CPU(cs);
+> +
+> +    /*
+> +     * An expiry before this exchange is covered by the following counter
+> +     * check. The first expiry after it sets pmu_timer_work_pending and queues
+> +     * another check.
+> +     */
+> +    qatomic_xchg(&cpu->pmu_timer_work_pending, false);
+> +    riscv_pmu_rebuild_timer_internal(&cpu->env, true);
+> +}
+> +
+>   /* Timer callback for instret and cycle counter overflow */
+>   void riscv_pmu_timer_cb(void *priv)
 >   {
-> -    if (!icount_enabled() ||
-> -        (env->mcountinhibit & COUNTEREN_IR) ||
-> -        riscv_pmu_counter_filtered(env, env->minstretcfg)) {
-> +    RISCVCPU *cpu = env_archcpu(env);
-> +    uint32_t ctr_mask;
-> +
-> +    if (!icount_enabled()) {
->           return;
->       }
+>       RISCVCPU *cpu = priv;
 >   
->       /*
-> -     * minstret is derived from icount, which includes the current
-> -     * instruction.  Move the baseline forward to exclude an instruction
-> -     * that raises an exception and therefore does not retire.
-> +     * Fixed instruction events are derived from icount, which includes the
-> +     * current instruction.  Move the baseline of each running
-> +     * instruction-source counter that counts the current privilege mode to
-> +     * exclude an instruction that raises an exception and does not retire.
-> +     *
-> +     * Do not read icount here: this helper can run in the middle of a TB.
-> +     * Excluding an instruction only postpones overflow, so keep the current
-> +     * timer deadline. The expiry handler checks for an actual counter wrap.
->        */
-> -    env->pmu_ctrs[2].mhpmcounter_prev++;
-> +    ctr_mask = COUNTEREN_IR |
-> +               riscv_pmu_event_counter_mask(
-> +                   cpu, RISCV_PMU_EVENT_HW_INSTRUCTIONS);
-> +    while (ctr_mask) {
-> +        uint32_t ctr_idx = ctz32(ctr_mask);
-> +        uint64_t cfg = ctr_idx == 2 ? env->minstretcfg :
-> +                                      env->mhpmevent_val[ctr_idx];
-> +
-> +        ctr_mask &= ~BIT(ctr_idx);
-> +        if (!riscv_pmu_fixed_ctr_running(env, ctr_idx) ||
-> +            riscv_pmu_counter_filtered(env, cfg)) {
-> +            continue;
-> +        }
-> +
-> +        env->pmu_ctrs[ctr_idx].mhpmcounter_prev++;
+> -    riscv_pmu_rebuild_timer_internal(&cpu->env, true);
+> +    if (!qatomic_xchg(&cpu->pmu_timer_work_pending, true)) {
+> +        async_run_on_cpu(CPU(cpu), riscv_pmu_timer_work, RUN_ON_CPU_NULL);
 > +    }
 >   }
 >   
->   int riscv_pmu_incr_ctr(RISCVCPU *cpu, enum riscv_pmu_event_idx event_idx)
-> diff --git a/tests/tcg/riscv64/pmu-lpad.S b/tests/tcg/riscv64/pmu-lpad.S
-> new file mode 100644
-> index 0000000000000000000000000000000000000000..40a6b34b7c2b71dd42e78b6873d72df4d508289d
-> --- /dev/null
-> +++ b/tests/tcg/riscv64/pmu-lpad.S
-> @@ -0,0 +1,72 @@
-> +/* SPDX-License-Identifier: GPL-2.0-or-later */
-> +
-> +/* CSR number for older assemblers. */
-> +#define CSR_MSECCFG          0x747
-> +
-> +/* An LPAD fault must be deliverable with HPM instruction counting enabled. */
-> +
-> +	.option	norvc
-> +	.option	norelax
-> +
-> +	.text
-> +	.global	_start
-> +_start:
-> +	lla	t0, trap
-> +	csrw	mtvec, t0
-> +	li	t0, 2		/* HW_INSTRUCTIONS */
-> +	csrw	mhpmevent3, t0
-> +	li	t0, 1 << 10	/* mseccfg.MLPE */
-> +	csrs	CSR_MSECCFG, t0
-> +
-> +	/* x7[31:12] = 0 does not match the nonzero LPAD label. */
-> +	li	t2, 0
-> +	lla	a0, target
-> +	jalr	ra, a0, 0
-> +	j	fail
-> +
-> +	.balign	4
-> +target:
-> +	.word	0x00001017	/* lpad 1 */
-> +	/*
-> +	 * Keep the LPAD check inside a multi-instruction TB. Its exception
-> +	 * helper must not read icount before leaving generated code.
-> +	 */
-> +	.rept	16
-> +	nop
-> +	.endr
-> +	j	fail
-> +
-> +trap:
-> +	csrr	t0, mcause
-> +	li	t1, 18		/* Software-check exception */
-> +	bne	t0, t1, fail
-> +	csrr	t0, mtval
-> +	li	t1, 2		/* Landing-pad fault */
-> +	bne	t0, t1, fail
-> +	csrr	t0, mepc
-> +	lla	t1, target
-> +	bne	t0, t1, fail
-> +	li	a0, 0
-> +	j	exit
-> +
-> +fail:
-> +	li	a0, 1
-> +
-> +exit:
-> +	lla	a1, semiargs
-> +	li	t0, 0x20026	/* ADP_Stopped_ApplicationExit */
-> +	sd	t0, 0(a1)
-> +	sd	a0, 8(a1)
-> +	li	a0, 0x20	/* TARGET_SYS_EXIT_EXTENDED */
-> +
-> +	/* Semihosting call sequence. */
-> +	.balign	16
-> +	slli	zero, zero, 0x1f
-> +	ebreak
-> +	srai	zero, zero, 0x7
-> +	j	.
-> +
-> +	.data
-> +	.balign	16
-> +semiargs:
-> +	.space	16
-> diff --git a/tests/tcg/riscv64/system/meson.build b/tests/tcg/riscv64/system/meson.build
-> index 13ee7954ef4f09559a02a3730fb017ccf2cfd882..d2355090121ba7a7d0046c1fc1824d6a89c1267f 100644
-> --- a/tests/tcg/riscv64/system/meson.build
-> +++ b/tests/tcg/riscv64/system/meson.build
-> @@ -61,6 +61,13 @@ tests += {
->     }
->   }
->   
-> +tests += {
-> +  'pmu-lpad.S': {
-> +    'cflags': cflags,
-> +    'qemu_args': ['-cpu', 'max', '-icount', 'shift=0', qemu_args],
-> +  },
-> +}
-> +
->   # Exercise RV32 CSRs with the RV64 emulator's 64-bit target_ulong.
->   tests += {
->     '../riscv32/smcdeleg-rv32.S': {
-> diff --git a/tests/tcg/riscv64/test-minstret-ecall.S b/tests/tcg/riscv64/test-minstret-ecall.S
-> index ab268f7f22985820f19bde353215385608643f3a..b1857543d488df984b923ad1c135edb35cb948c7 100644
-> --- a/tests/tcg/riscv64/test-minstret-ecall.S
-> +++ b/tests/tcg/riscv64/test-minstret-ecall.S
-> @@ -18,11 +18,37 @@ _start:
->   	li	t1, 1
->   	bne	t0, t1, fail
->   
-> +	/*
-> +	 * minstret and a counter selecting HW_INSTRUCTIONS must both exclude
-> +	 * ECALL, so they must contain the same number of retired instructions.
-> +	 */
-> +	li	t0, 12		/* mcountinhibit.IR | mcountinhibit.HPM3 */
-> +	csrs	mcountinhibit, t0
-> +	csrw	minstret, zero
-> +	csrw	mhpmcounter3, zero
-> +	li	t0, 2		/* RISCV_PMU_EVENT_HW_INSTRUCTIONS */
-> +	csrw	mhpmevent3, t0
-> +	lla	t0, trap_hpm
-> +	csrw	mtvec, t0
-> +	li	t0, 12
-> +	csrc	mcountinhibit, t0
-> +	ecall
-> +	bne	s3, s4, fail
-> +
->   	li	a0, 0
->   	j	_exit
->   
->   trap:
->   	csrr	s1, minstret
-> +	j	trap_check
-> +
-> +trap_hpm:
-> +	li	t0, 12
-> +	csrs	mcountinhibit, t0
-> +	csrr	s3, minstret
-> +	csrr	s4, mhpmcounter3
-> +
-> +trap_check:
->   	csrr	t0, mcause
->   	li	t1, 11		/* Environment call from M-mode */
->   	bne	t0, t1, fail
+> -
+>   void riscv_pmu_init(RISCVCPU *cpu, Error **errp)
+>   {
+>       if (cpu->cfg.pmu_mask & (COUNTEREN_CY | COUNTEREN_TM | COUNTEREN_IR)) {
 > 
 
 
