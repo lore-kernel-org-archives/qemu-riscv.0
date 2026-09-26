@@ -4,104 +4,167 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 120E6C98335
-	for <qemu-riscv@archiver.kernel.org>; Sat, 26 Sep 2026 08:19:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1221FC98318
+	for <qemu-riscv@archiver.kernel.org>; Sat, 26 Sep 2026 09:35:51 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xANbO-0000oS-BI; Sat, 26 Sep 2026 04:17:46 -0400
+	id 1xAOoR-00050n-E9; Sat, 26 Sep 2026 05:35:19 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xANah-0008N7-07
- for qemu-riscv@nongnu.org; Sat, 26 Sep 2026 04:17:04 -0400
-Received: from mail-dy2-x0d.google.com ([2607:f8b0:4864:36::d])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xANae-0006s7-7m
- for qemu-riscv@nongnu.org; Sat, 26 Sep 2026 04:17:02 -0400
-Received: by mail-dy2-x0d.google.com with SMTP id
- 5a478bee46e88-3437a48f386so111599eec.3
- for <qemu-riscv@nongnu.org>; Sat, 26 Sep 2026 01:16:59 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
+ id 1xAOoN-0004z4-1Z
+ for qemu-riscv@nongnu.org; Sat, 26 Sep 2026 05:35:15 -0400
+Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
+ id 1xAOoK-00006n-SU
+ for qemu-riscv@nongnu.org; Sat, 26 Sep 2026 05:35:14 -0400
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 68Q6OZO22574038
+ for <qemu-riscv@nongnu.org>; Sat, 26 Sep 2026 09:35:11 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ +0a8ywQTFMp/tnfN3u+xSfg3xISyQdBYzxdRITV/pVU=; b=K/EFsaZb3ia4TC7h
+ 0CdSFJrJQywIJgZwzaAlar7S6kWwmJhtj0v1QHHfozIZQxO1Xc3xiqLZ09bhYqJ0
+ 2irG1g8DE/6LijO5sjpFs6At5he3iXbO7vrvrYrD0g/QT2hEnZ/a8BlMyiYtyKJq
+ Hhj1Jzw09P4xSvZFUcrkzbrC9KoqzeTGJs+Gx49iUSvmG4BmP/11qglZzhFSiwKW
+ jxSxZms/lG89a7Ly5w9xoMQ7xMl89+Zu4YY0Q2+yRy8StDnc0NY6u0KzWk1WQEKR
+ wqkitPEEiPjTunPGaNvioYd199ypiFOf1wTvuR1szy9Suf0c9NTM9qbOM0mcv9EW
+ 3bzwqw==
+Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com
+ [209.85.222.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gx7b9rdg9-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Sat, 26 Sep 2026 09:35:11 +0000 (GMT)
+Received: by mail-qk1-f199.google.com with SMTP id
+ af79cd13be357-939062ecda9so317511785a.1
+ for <qemu-riscv@nongnu.org>; Sat, 26 Sep 2026 02:35:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1790410618; x=1791015418; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=cCl7EmMMifN3N+FB2ZvvZtho7z8V+PKCogBoxHLSQOM=;
- b=ewJ3SO1Rgvijo1aJoKbvnzODbCby+SvRcu2Gir5U5946mIdLlWhe489L97BNzCHZv7
- JXpIVTO3A/O/fpsV7jip41BYhlmMPoNOTajUEdPxMd36bR+89nmf7lYf8p076G3/9vuP
- 5McLQfRZOFTZIykrAjhmtpLuQPo28lw/43ozdiyYznqSjzEJZHNdFImDv7Gkvw9RTtA1
- z6Aha16hHpWqfeEiBYVJBtSpwFUB6WXZnFAYZE2W8kimHsaC+0VDQVGfHRGSyA60tBW1
- kA7HETCjGwPIosU9LiI5QvwQqxvKNrntggxa01GbB3OkLh8jmkHU9G5wYeoVdMub1kZm
- xOgQ==
+ d=oss.qualcomm.com; s=google; t=1790415310; x=1791020110; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:from:references
+ :cc:to:content-language:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=+0a8ywQTFMp/tnfN3u+xSfg3xISyQdBYzxdRITV/pVU=;
+ b=g7RYzomNcS4ZSIkG5mihyZhAzxXiH2IUWocgarWOIF16ZFLNjF4sDp/3mCMgofZmGP
+ l4wKUAloTsEvcgI8RR87wzmgEGo0Rr4oa53qsQb+ZF+jishODFnCUuX/hYDr0zLPOu9g
+ 2NffOJ/ynqAQkcw0OImvQ/eRdqyk8Ijxq1ljfRXAAUd6bLtUfyEqiOa7WpL566X09WWs
+ 6kdV4Kmd3dQqw11ZyDn4Sw/y9qiLovZla3sLptfqO2Al9aRSrMb7uH3UUAv9W7s0aChr
+ Z18+wqOYglvI2asrtxeSGuo8FH1uRBQP9LHxb+y3Ag1JWy7KiGASc5Uk3a+V7w9EfWjW
+ XeMw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790410618; x=1791015418;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=cCl7EmMMifN3N+FB2ZvvZtho7z8V+PKCogBoxHLSQOM=;
- b=jK6BRZkQ1OVcXyWPQFQSCSsN/dKEE+tCpWdLxCKy9In1Yf6IdG+BeKv5PTAXlmxPIE
- oLJsFbXZ0RJiEtBx7u1Cxyvash1hnOjtcSfH84MYsWszcz0yXT4SDoRWnCp/CwAkFT+p
- oiJBRlR46HBoPvB2GD3HufXQLlUnRigxKYfi/OxhdIiDPL06wfs5gRpSm8DF4WjqNjRb
- 4e14zCi6vt9UcVTmpNNEJCSKkJyOJD8gveA6kkXgcmouBiijrnXd0VgV4R5YnOXIeDDA
- VY8D/YrznR1YGrqOFmuKOb8H9I873WUDXvEu8e97Oi+5u/2iLOvM0+daX6emVmg5t0d3
- g2tA==
+ d=1e100.net; s=20260707; t=1790415310; x=1791020110;
+ h=content-transfer-encoding:content-type:in-reply-to:from:references
+ :cc:to:content-language:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=+0a8ywQTFMp/tnfN3u+xSfg3xISyQdBYzxdRITV/pVU=;
+ b=WRIkg3WTjEjwO7UL73s3nxL0BYF6MtDJCd8MU+mKEvwBw71EA9/BP51a4Zv6kcAT/j
+ SuqxhQpxhIb+T/teAFNQl4dBP3UAtetyD9txoMwfgD3wdzzc6CKC0lYvfQGSgdPP8S5u
+ NnrgzMfdgpSJulaM7eGmALbIFG3HFGS/+B5ZqxtMhptO7tTjj1tx/0QkT+i1CIS9gMKo
+ kBguiHUr+3cpBwmmp2fid7cgTvnIaj7tRNXF8FJJHKSyBRUdARAuu85qrjetNQY2cPVu
+ /lgKEDTDMwnrMimAb0zFgyqJ6LQ3A8A/lox5ipWt3DIprwugaRxPmFrNwL9XDB6QrvG8
+ yz3w==
 X-Forwarded-Encrypted: i=1;
- AKwUvByVrXShu1TvXwz1asvXu1JxPt3TK2SzsOdjNJssNtgAxBQHY4xmsVM8nEetjrAJvqEkEqC6fPFsEzr5@nongnu.org
-X-Gm-Message-State: AFuF++lGvLQ9dLZfZaCYuJkXUAt2F9kx47cge6FOqx5dlezEuMbxtrKv
- v66MfZ6Lfs8W5CjyyOD5cKOdIQ/rwQOzcGKT8tf6ye8QPTj5dF1FIwRs
-X-Gm-Gg: AYBFou3kEFVtfo4amiYsM8kxM/SIALdeInOgyPbikNHFYFZTvSnbjRuMPZuEZ6RannU
- JaaPja8fvuPC+gWpJz2ZFFrKl1g7OhFX31s1ii7saIa4Andq6BifBI4yAAywcbaTzUBvkNWfrYY
- A5OFPlNfz34E7KkOi0FXsd5Yw107N46kBlqSYC4sbmNcTOs5riODDLiHSokGLbRehqGUkhogpWK
- hJTxL/PCFXREXS4dPJmjjV5PgY2+VchgqruUTO7pBGJRiVlbrM6rKcH58yXX3YwUjy9u7hsBgDy
- 12R0TnHTX6OtHKZ4CDMqA3gEdFMwsmxJCyclxUCRnJzFOebFA0zUBqGEkZc9AbgnioD3Pd94qZB
- JXIzRlqwyOUotIVn+kFTVQsPJy2qaqrV3rSytTPVj5Q7RS0HjDRAVtF3Q4tgybMF2cxfZy9p5hY
- 03cRM9D3omELt/n6/BOVGVVvoMF8KYGZt5voCCdzYj/pqwDhKMnFZsRuNdXY83igmABUSKHttGU
- eCrv18wBGT0EY9hTPEYXanuCrQbJHU=
-X-Received: by 2002:a05:693c:65cd:b0:33f:3878:8e18 with SMTP id
- 5a478bee46e88-3426c6f4d95mr2251214eec.0.1790410617991; 
- Sat, 26 Sep 2026 01:16:57 -0700 (PDT)
-Received: from WIN-BH9M8FJACR9 ([103.94.185.75])
- by smtp.googlemail.com with ESMTPSA id
- 5a478bee46e88-34144f4eb9esm11970568eec.19.2026.09.26.01.16.52
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 26 Sep 2026 01:16:57 -0700 (PDT)
-From: Yonggang Luo <luoyonggang@gmail.com>
-To: qemu-devel@nongnu.org
-Cc: Chao Liu <chao.liu@processmission.com>, Eric Blake <eblake@redhat.com>,
- qemu-arm@nongnu.org, Paolo Bonzini <pbonzini@redhat.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
- Markus Armbruster <armbru@redhat.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Brian Cain <brian.cain@oss.qualcomm.com>,
- Stafford Horne <shorne@gmail.com>,
- =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
- Peter Maydell <peter.maydell@linaro.org>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Fabiano Rosas <farosas@suse.de>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
- qemu-riscv@nongnu.org, Laurent Vivier <lvivier@redhat.com>,
- Max Filippov <jcmvbkbc@gmail.com>, Song Gao <17746591750@163.com>,
- Philippe Mathieu-Daude <philmd@mailo.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Laurent Vivier <laurent@vivier.eu>,
- Weiwei Li <liwei1518@gmail.com>, Zhao Liu <zhao1.liu@intel.com>
-Subject: [PATCH v3 10/10] machine: match the versioned virt example to arm virt
-Date: Sat, 26 Sep 2026 16:15:50 +0800
-Message-ID: <20260926081551.29-11-luoyonggang@gmail.com>
-X-Mailer: git-send-email 2.52.0.windows.1
-In-Reply-To: <20260926081551.29-1-luoyonggang@gmail.com>
-References: <20260926081551.29-1-luoyonggang@gmail.com>
+ AKwUvBwGkvrgLMGKgf/Ja06LNr9b7VuCA+MtRuX4bDUu+CF1dtsyIyIU6ZsbclgtzGo/6ichofetcwNnvDcH@nongnu.org
+X-Gm-Message-State: AFuF++nT940/ABWVN38gB8pwQ00hCJS1pZ1YWLMKvilYDVuX3qR3ArWe
+ 6gxRqcfvCz/tXeGsUgDxDXbldAJwKDoV01F7ATouRb87cCUYMM7+I/kKX4hrin5FEBSD4KndpFD
+ sqlJAD5mdM6jPNoPtegEbrAGefLu0buMLS2ce4atUTg1Od7K5Etb9+TYp6Q==
+X-Gm-Gg: AYBFou2SoOpQOoXE1dMBmaUJa4komofromcGLtLW+XoD0TrQYHR2eAc6H29doBy2o1K
+ IlPh/lOhEgo91WDkNc7EBa+aoquRN5MDi/sOdCA/4F/zDBEX3cG1TYtXmXxqR8/OFxEF0NU1dZ7
+ CGR7CSx/argyIxUFKaXlIKv/dDcAMA+aSSXGZd+jH9Gz5t+6WpW+Uw7eJ/ItWF0I0I0uoC+Ayac
+ 6f3J82x2F4Vm0rDqcd8MN2SQ+gGOvetDFVIrnzWYzKysYAQTPiu7FN+CEmAtf/l1k4UAKtaJ1wV
+ Z/eF5iXEa6v96hRbmUY2FzV2l8mPSQXz7KOzbheb6G4Q23fCCj7lAxzbgIiTEbexF2yX1XGwy9I
+ AkbAaEN99jeY8jBZOMriBqQKt1g1hr9BBcA==
+X-Received: by 2002:a05:620a:3912:b0:93a:2d2b:a5ed with SMTP id
+ af79cd13be357-93c43dccd3dmr935999385a.47.1790415310079; 
+ Sat, 26 Sep 2026 02:35:10 -0700 (PDT)
+X-Received: by 2002:a05:620a:3912:b0:93a:2d2b:a5ed with SMTP id
+ af79cd13be357-93c43dccd3dmr935994385a.47.1790415309590; 
+ Sat, 26 Sep 2026 02:35:09 -0700 (PDT)
+Received: from [192.168.69.225] (pmd666.hd.free.fr. [88.187.86.199])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-49fef4fc959sm110478295e9.2.2026.09.26.02.35.07
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sat, 26 Sep 2026 02:35:08 -0700 (PDT)
+Message-ID: <5687f0f3-052a-4e16-9747-0be60296e07a@oss.qualcomm.com>
+Date: Sat, 26 Sep 2026 11:35:06 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:36::d;
- envelope-from=luoyonggang@gmail.com; helo=mail-dy2-x0d.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 028/114] hw/intc: use kvm_enabled() in APLIC AIA helpers
+Content-Language: en-US
+To: Yonggang Luo <luoyonggang@gmail.com>, qemu-devel@nongnu.org
+Cc: Cornelia Huck <cohuck@redhat.com>, xen-devel@lists.xenproject.org,
+ Chao Liu <chao.liu@processmission.com>,
+ Igor Mammedov <imammedo@redhat.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Peter Xu <peterx@redhat.com>, Eric Blake <eblake@redhat.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Sunil V L <sunilvl@ventanamicro.com>,
+ Stefan Hajnoczi <stefanha@redhat.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Fabiano Rosas <farosas@suse.de>,
+ Xianglai Li <lixianglai@loongson.cn>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Max Filippov <jcmvbkbc@gmail.com>, qemu-ppc@nongnu.org,
+ Zhao Liu <zhao1.liu@intel.com>, Paolo Bonzini <pbonzini@redhat.com>,
+ Bibo Mao <maobibo@loongson.cn>, "Michael S. Tsirkin" <mst@redhat.com>,
+ Laurent Vivier <laurent@vivier.eu>, David Hildenbrand <david@kernel.org>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>,
+ Nicholas Piggin <npiggin@gmail.com>, qemu-riscv@nongnu.org,
+ kvm@vger.kernel.org, "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Stafford Horne <shorne@gmail.com>,
+ =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
+ Markus Armbruster <armbru@redhat.com>, Weiwei Li <liwei1518@gmail.com>,
+ Song Gao <17746591750@163.com>, qemu-arm@nongnu.org,
+ qemu-s390x@nongnu.org, Brian Cain <brian.cain@oss.qualcomm.com>
+References: <20260923131635.1894-1-luoyonggang@gmail.com>
+ <20260923131635.1894-29-luoyonggang@gmail.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
+In-Reply-To: <20260923131635.1894-29-luoyonggang@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI2MDAzOCBTYWx0ZWRfX3qUh/DhoSGuE
+ hQytr+4OY5xAn3VhK35Y9dvnm1TyMwt3+X6Sb7s32nP0C/P6Z7N4l8GeXdR9+eNhEAxNL38DH4H
+ D2WBUsU1iRzgTDAp1TJOdQW0Jospfr8=
+X-Authority-Analysis: v=2.4 cv=d8FgWhjE c=1 sm=1 tr=0 ts=6ab791cf cx=c_pps
+ a=HLyN3IcIa5EE8TELMZ618Q==:117 a=4s3hRJSeHn4rkQlkrse1kQ==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=M51BFTxLslgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
+ a=gis2z1_H4pcAoy-0X7kA:9 a=QEXdDO2ut3YA:10 a=bTQJ7kPSJx9SKPbeHEYW:22
+X-Proofpoint-GUID: QuZ4PZDW6CXDOs5NNahGicD2VEs5hyEQ
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI2MDAzOCBTYWx0ZWRfXw2c/zHL2Rsig
+ ngJTx+C9BgIzMmWTGeymDaRzeLq5PAfsw90m73xdrMNhRYg39JBjkHphBQ9by8Kis+H1atsqLu6
+ l1oCfxeex6lO9PX1/SHqit7LImDrQZGqR/V3l0E9dBVQn3z3ESqufn5Wn3zE9mvkXcV1Q0ltzF5
+ 5X3H9Oh0TAibamj5Muog04N7+SL2upqY+S/xDBqSQ80/gniUX6WZHvVZXXdkzSA160IFClwk0u3
+ J/FSKKgkFu6U5Ex+QY/TLlwZK2CrrmuD6Wfwgd+LpgpFr+mloBPoY9XsJZClrzAAPTd+PxunP9q
+ oOQP/MGKm8LsvG/tpdJMNOWfhhL7u2237O6sYDPgkxlL/CkVv2qQZdxLASQtNhYWmb+oEC6DJZL
+ rNqLGBpD8rlmdiE0lj5TxK1nbNuuAHFs2prwWUyhPaP+pgodaIiOAJjkH+dk+HarPxFBzKzHYZF
+ gxixSEe+JOT6RchbF8g==
+X-Proofpoint-ORIG-GUID: QuZ4PZDW6CXDOs5NNahGicD2VEs5hyEQ
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-26_02,2026-09-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 malwarescore=0 lowpriorityscore=0 adultscore=0 clxscore=1015
+ spamscore=0 priorityscore=1501 phishscore=0 bulkscore=0 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609260038
+Received-SPF: pass client-ip=205.220.168.131;
+ envelope-from=philmd@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -117,60 +180,57 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The comment still showed MACHINE_VER_TYPE_NAME("virt") and left out
-machine_class_set_name(). Show the arm-virt QOM type, keep the -M name
-as virt-<version>, and name the latest helper
-DEFINE_VIRT_MACHINE_AS_LATEST.
+On 23/9/26 15:15, Yonggang Luo wrote:
+> - Replace CONFIG_KVM ifdefs in riscv_use_emulated_aplic and
+>    riscv_aplic_set_kvm_msicfgaddr with kvm_enabled().
 
-Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
----
- include/hw/core/boards.h | 14 +++++++++-----
- 1 file changed, 9 insertions(+), 5 deletions(-)
+Can you provide your S-o-b tag please?
 
-diff --git a/include/hw/core/boards.h b/include/hw/core/boards.h
-index 851140ad052..8525e1f2288 100644
---- a/include/hw/core/boards.h
-+++ b/include/hw/core/boards.h
-@@ -474,21 +474,25 @@ struct MachineState {
-  * For example, a macro that can be used to define versioned
-  * 'virt' machine types would look like:
-  *
-+ *  #define TYPE_VIRT_MACHINE MACHINE_TYPE_NAME("arm-virt")
-+ *
-  *  #define DEFINE_VIRT_MACHINE_IMPL(latest, ...) \
-  *      static void MACHINE_VER_SYM(class_init, virt, __VA_ARGS__)( \
-  *          ObjectClass *oc, \
-- *          void *data) \
-+ *          const void *data) \
-  *      { \
-  *          MachineClass *mc = MACHINE_CLASS(oc); \
-  *          MACHINE_VER_SYM(options, virt, __VA_ARGS__)(mc); \
-- *          mc->desc = "QEMU " MACHINE_VER_STR(__VA_ARGS__) " Virtual Machine"; \
-+ *          mc->desc = "QEMU " MACHINE_VER_STR(__VA_ARGS__) " ARM Virtual Machine"; \
-  *          MACHINE_VER_DEPRECATION(__VA_ARGS__); \
-+ *          machine_class_set_name(mc, "virt-" MACHINE_VER_STR(__VA_ARGS__)); \
-  *          if (latest) { \
-  *              mc->alias = "virt"; \
-  *          } \
-  *      } \
-- *      static const TypeInfo MACHINE_VER_SYM(info, virt, __VA_ARGS__) = { \
-- *          .name = MACHINE_VER_TYPE_NAME("virt", __VA_ARGS__), \
-+ *      static const TypeInfo MACHINE_VER_SYM(info, virt, __VA_ARGS__) = \
-+ *      { \
-+ *          .name = MACHINE_VER_TYPE_NAME("arm-virt", __VA_ARGS__), \
-  *          .parent = TYPE_VIRT_MACHINE, \
-  *          .class_init = MACHINE_VER_SYM(class_init, virt, __VA_ARGS__), \
-  *      }; \
-@@ -503,7 +507,7 @@ struct MachineState {
-  * whichever scenarios need to be catered for with a machine:
-  *
-  *  // Normal 2 digit, marked as latest e.g. 'virt-9.0'
-- *  #define DEFINE_VIRT_MACHINE_LATEST(major, minor) \
-+ *  #define DEFINE_VIRT_MACHINE_AS_LATEST(major, minor) \
-  *      DEFINE_VIRT_MACHINE_IMPL(true, major, minor)
-  *
-  *  // Normal 2 digit e.g. 'virt-9.0'
--- 
-2.52.0.windows.1
+> ---
+>   hw/intc/riscv_aplic.c | 14 ++++++++------
+>   1 file changed, 8 insertions(+), 6 deletions(-)
+> 
+> diff --git a/hw/intc/riscv_aplic.c b/hw/intc/riscv_aplic.c
+> index d8e25bfda14..03a0852b8b8 100644
+> --- a/hw/intc/riscv_aplic.c
+> +++ b/hw/intc/riscv_aplic.c
+> @@ -167,7 +167,10 @@ bool riscv_is_kvm_aia_aplic_imsic(bool msimode)
+>   
+>   bool riscv_use_emulated_aplic(bool msimode)
+>   {
+> -#ifdef CONFIG_KVM
+> +    if (!kvm_enabled()) {
+> +        return true;
+> +    }
+> +
+>       if (tcg_enabled()) {
+>           return true;
+>       }
+> @@ -177,21 +180,20 @@ bool riscv_use_emulated_aplic(bool msimode)
+>       }
+>   
+>       return kvm_kernel_irqchip_split();
+> -#else
+> -    return true;
+> -#endif
+>   }
+>   
+>   void riscv_aplic_set_kvm_msicfgaddr(RISCVAPLICState *aplic, hwaddr addr)
+>   {
+> -#ifdef CONFIG_KVM
+> +    if (!kvm_enabled()) {
+> +        return;
+> +    }
+> +
+>       if (riscv_use_emulated_aplic(aplic->msimode)) {
+>           addr >>= APLIC_xMSICFGADDR_PPN_SHIFT;
+>           aplic->kvm_msicfgaddr = extract64(addr, 0, 32);
+>           aplic->kvm_msicfgaddrH = extract64(addr, 32, 32) &
+>                                    APLIC_MMSICFGADDRH_VALID_MASK;
+>       }
+> -#endif
+>   }
+>   
+>   /*
 
 
