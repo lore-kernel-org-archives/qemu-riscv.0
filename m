@@ -4,129 +4,119 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E4ECC9832A
-	for <qemu-riscv@archiver.kernel.org>; Fri, 25 Sep 2026 23:14:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C923EC9830E
+	for <qemu-riscv@archiver.kernel.org>; Sat, 26 Sep 2026 03:15:48 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xAF7Z-0006tf-UL; Fri, 25 Sep 2026 19:14:25 -0400
+	id 1xAIrz-0004WU-37; Fri, 25 Sep 2026 23:14:35 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <chao.liu@processmission.com>)
- id 1xAF7X-0006tR-OZ; Fri, 25 Sep 2026 19:14:23 -0400
-Received: from mail-japaneastazlp170130007.outbound.protection.outlook.com
- ([2a01:111:f403:c405::7] helo=TYDPR03CU002.outbound.protection.outlook.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <chao.liu@processmission.com>)
- id 1xAF7V-0006bb-Ao; Fri, 25 Sep 2026 19:14:23 -0400
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=B6ja7TxnWi0Y0GRLlEKt0o9wIrvUWL/SnVC3+sKGlepC1UKaZRlnokBfxwEGFFkK2xW9+C6GgIBIyt7BlUUy4qSjEEuJwJfwPu65pI3QaGMRX4KqCGatOwn3XMi5CtgDy3xsJUndC0HUXT+pVrUiC5HfqcLt6bl5px3LZ9iaG+blbFlfCS+fDj+eTSwX83fmwIzaPo2flZ+SbXv9QmZRTBRalVnrM5EnnKfaVZGewFZqXwI9ef33Op9MOP/gf74d09htOXCbgnxixW2ukMKnfOjgSnno+PJNVt5NQmRNLDGLBAO/8euQLPSfcPOyhB11DsvKzcEesxeYNBgR0vaacQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=nJUMRwWkOCq7rf+irJn9o9t56bu0EonyEJOhK+by66E=;
- b=bZWmWTLLZAxLf/yF3gJ8uzWfNsP7e/AjKQjlklP5my7dRvv7+9ODPZ1L8gcUUC5tG+jP0ex/CmcTmZOjLG7niicQ4yKXYFl+yGkBNr8jHZ9hI0bN8YFOfdRz6JmmzvFfW9pjw8gvIkCdC7prP0AJ/3nyTFY1ZXjxke9EfRu0wT4hrXskz5NfxOTPwrG9ZXO0voY7ZZdx1NftLv/SRPWpx79cELBo5uwVVBB4j08b5FGG9vg1YaoyBHcdA8FwDvn2xhNfxIJoRRm/RtAtmYtJ0ezNACC3QaxMsEh6tvjx9aGu7fChNH1B3vuSwLdGTYfJzH/9Ro6ko+HSH0hg/718JA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=processmission.com; dmarc=pass action=none
- header.from=processmission.com; dkim=pass header.d=processmission.com;
- arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=processmission.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=nJUMRwWkOCq7rf+irJn9o9t56bu0EonyEJOhK+by66E=;
- b=XXGB3fsb+ABGuL14r30hELf57XAnJrRmVvrbKV3ze+nb8ts1eaDuZpsltEynNyHHhuqQR38DE7RZlAsxVaXBiOQ5ZOe+906AWfYQ285CU3CkNaWE6oE+oJc6ApZjIZNCWfJhCtCwzEbWeMAh3SxNbhWQOGq5AmD2PyNkdCrva8jkK4MSae/HjGt7CI90dSVdsUgoqxqz3hVuBe/pTR+3QUvfGM7DIZLSZVF9voXP4BgTAKW2B2bIzR4JUqb40LV4wL77iGeF2HMq1yS7vw2EQdfeBs8F5zxHC1hoX8j29IlTcqb+DQUPXd2jj8e8hGpuxlfFO21ckFHHli7uIV+w1Q==
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=processmission.com;
-Received: from TYNPR02MB9351.apcprd02.prod.outlook.com (2603:1096:405:3d0::15)
- by SE3PR02MB9745.apcprd02.prod.outlook.com (2603:1096:101:322::8)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.451.19; Fri, 25 Sep
- 2026 23:14:11 +0000
-Received: from TYNPR02MB9351.apcprd02.prod.outlook.com
- ([fe80::e5f3:5fb7:3d29:5934]) by TYNPR02MB9351.apcprd02.prod.outlook.com
- ([fe80::e5f3:5fb7:3d29:5934%6]) with mapi id 15.21.0451.014; Fri, 25 Sep 2026
- 23:14:11 +0000
-Date: Sat, 26 Sep 2026 07:14:06 +0800
-From: Chao Liu <chao.liu@processmission.com>
-To: Shunchao Hu <hushunchao@bosc.ac.cn>
-Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, Weiwei Li <liwei1518@gmail.com>, 
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org, 
- Tianze Wu <wutianze@ict.ac.cn>
-Subject: Re: [PATCH v2] target/riscv: add hgatp-specific WARL legalization
-Message-ID: <arcAIT4Y9xdc3Dx0@MacBook-Pro-4.local>
-References: <20260925-riscv-hgatp-warl-v2-1-2aa9aa7718cd@bosc.ac.cn>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260925-riscv-hgatp-warl-v2-1-2aa9aa7718cd@bosc.ac.cn>
-X-ClientProxiedBy: SJ2P220CA0013.NAMP220.PROD.OUTLOOK.COM
- (2603:10b6:a03:5da::16) To TYNPR02MB9351.apcprd02.prod.outlook.com
- (2603:1096:405:3d0::15)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1xAIrw-0004Uv-UX
+ for qemu-riscv@nongnu.org; Fri, 25 Sep 2026 23:14:33 -0400
+Received: from mail-yx2-x0c.google.com ([2607:f8b0:4864:41::c])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1xAIru-0007Oq-SV
+ for qemu-riscv@nongnu.org; Fri, 25 Sep 2026 23:14:32 -0400
+Received: by mail-yx2-x0c.google.com with SMTP id
+ 956f58d0204a3-67453dc240fso338022d50.1
+ for <qemu-riscv@nongnu.org>; Fri, 25 Sep 2026 20:14:30 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1790392469; cv=none;
+ d=google.com; s=arc-20260327;
+ b=cBuifmw586DV7P7wFM+hzTgHabLDhfGBFl4fub8ri52rDdDPq0VqArpn+cNt/PaG+0
+ qNlgCwHlBsgh3RL+sVyLOsg7up9w2jNjfJ7nqxgIprnl5vlW/EBP/ukhGskf/QYGWHA+
+ alnFV0V61XF6jYSBj52TfOpWAs6irypaQ6MjhhPPezgwoPA4U7Pnr6QEyCPR0waX6Maa
+ sQiyJRlSIZPlBzYUYvkQzZo74C2V0jI8Qn6Pm9LRayQcgX0um8Gh0gGVdxPtCjWnpulu
+ GeUXKXKWbP4o6BAvwO7cq0oUKq1OoIcCRuWeXw+jy+WCErhJHna85jOYJiv8meLkDPfA
+ TUug==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=9ZLU6BIDOq8PheYVMT28Ujfq8XdsjeNPyBZPVFCs2Dg=;
+ fh=r8HgF7ttEYRXHvM5rOImN+iCMBhsoRIyAZ8cBn8jrWg=;
+ b=d4kV7udCNS++I0UhqF8V/imddkRSoArw2Qef8teRsX0mhvaJo5NqVmej4pO/W4A1B2
+ cGZFUZ5ep2TvSoBHO1FWygx0zPSOkIFvmjU5VMRnhnAC2sPSVh60ltwSfD2ioa/lGk3M
+ 52yLpmtX0A4tTKyUuTHPOtKbNgjuzLIGNDNcwEt2Q4Tf4JlR2qlxvBgdZDKDl5J0OB4k
+ I6TcMmL+w6yscsh5PU+AeXs2qw+IUDnfa2v0PUgUgoOA4XahZfXj2/HfRtZ1vzX7ie4k
+ RtUeQDAAfBLRewaFWsQyP8JXf79zuMHFUjpnzEPFvKp5PuRFKUE26FexwsBZI/BDGsv4
+ QcsQ==; darn=nongnu.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1790392469; x=1790997269; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=9ZLU6BIDOq8PheYVMT28Ujfq8XdsjeNPyBZPVFCs2Dg=;
+ b=BXEDj7Wd4asHlIwelHT1BsGZfUAVKaqqbbYkHVtLXSj7m/BqUnyswbsCLTERcICrUm
+ jKFEio+ujDRcSKSBmGJPCwfT3H8UgRayemDfnWblEvN1yP5QkY8sD40BJFl9txDrd2au
+ 371v+xS6KkEjyILj7abiv9Gz/2vwwnx+fJUwS8jWP8w7jRidoZwotsKbCiKes6pQaWoP
+ ePaxdVRL0RUZfr11ynP1KKv9aO1KpPOHxxD69cE9A/ZoEGDm/rQuJpMjej81zBJOxMAE
+ YuN1uwc1VixQs7u6vYw/var5kHorIlMoZSv2WdzVtyfxIi/fHCd45HrVL9KcDNqmJmjp
+ AR1g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1790392469; x=1790997269;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=9ZLU6BIDOq8PheYVMT28Ujfq8XdsjeNPyBZPVFCs2Dg=;
+ b=U+QWNT30VBIwWtcoqfYIvcvboqgd5WtVy3NsknMc0+aYnCbkZjXCHeVNnh+Ujmy1VO
+ Z65byNi+6kZ5Iu4Kh3dZ3ltfdlT0C8/uA04faZSMv3Y7kAxP0VRaQvRrdacKT/FJ0Scm
+ xnMro0C0EpQDW/PiKm1gJ0awRkpaL5oaX/SSWLMFDP7YdfYhT6gpDZXjHF/7tIgMn8dk
+ 2hDRS/idAt2V51981tY3dQGC+/4qkjHUacCsqEODgRV+kxbKCJA5VeiY7S6HJ5HCcitL
+ CL7OAvRYLdi2nbTBZueNgsRGQ6LMW2ciMfvK3t5xv4Dn5duExUNC2X5KTeeWFpf3UjO/
+ lDKg==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBxwnQnrNivlO6zri3BtRefXb7aTV2eGuAvKB5U7e75xp5/PWJ/ccakXQ1q2wvrcdYn90XK4fH8GYlzT@nongnu.org
+X-Gm-Message-State: AFq9FYLkRwYbg/CLvZBbDQBGQEGqQ/fY/G6wbRfzKtB1LvW4Ol+CYPEO
+ 6EHSS73MaGlGqSpJsQTN4XtEVDZxYyHlnWmGQBJbYvWGh5N/Ed2GOsZ2izaAryjRVwpmIcTTN+I
+ 7jKQGwyD3vJg979VvJHa7Zd04Fud4wrA=
+X-Gm-Gg: AYBFou2j7nVFsXce56VYjFDjkFW/iNON2LJUT5h+NBSPHrXep3aWgarvp1vL8Dxniqr
+ hTmyJgA6dPrFUcXp869bFt3uUk5Li2/6IJgdDo1gApX14mbtDbRd3FSic9cGWvS8b7sRBwOSl+o
+ V28gKNXSfrYCIt83rAs6mqNWJKhsifeNpT78fg4D1TpWpAvOgkYCbt59eqk8TEa3hDvMavXCRWI
+ Ff/yUA5p5V8Qh78nuX2ODM1BdmHCrihiVbWVcGxCOWtjzZFmS/uzJJbVEatJC5iKWwOOa3+rTPq
+ CL0kW2hcw9Pa2KxvfElUkfcB1TsmKXaatKdKe52UyfIGib3emf9og6qY8J+3Ly4Pz/dyQ1Kvmp2
+ ZWPa0YM4P+xAZcOM=
+X-Received: by 2002:a05:690e:d0d:b0:674:139f:243e with SMTP id
+ 956f58d0204a3-674139f2b18mr1571563d50.84.1790392469420; Fri, 25 Sep 2026
+ 20:14:29 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: TYNPR02MB9351:EE_|SE3PR02MB9745:EE_
-X-MS-Office365-Filtering-Correlation-Id: 90556d68-aec9-4302-65a6-08df1b5ab556
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|23010399003|366016|376014|56012099006|10067099003|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: 99laHp6ooiq00R2laEDmRT5FUsNSZwL7Dhqs6xMVjinHWkBy+sEeqCCU5gnxTuH2+2sn20bBS0EMkIE1Tc2getQ+I5NvM2GRdpT2KIAU1FJrY2+QTWNF0u/J9pJ9NT27UIZg3Yu3ANjqIy1IqwiRKj4DvvX/krvT4a4P7U3kDumLFgHxM9BGP6Hb2X8qkGVC0gbxkDfRjXZX7NutFmTZID9irN4toTN9SNIQgU4ks4fBwfScYXcvGo8oF6buOUpcdJrVoB1bwpfwxs5MTS46x2r6XOuANIHZxP5DT9jMS/S4w4sl45UK4mhEmCuogM+FxEAA+rVxW/tZowC7ET9u1iQNpe7uxz71giwaR91EDJudyg+XNBdysMBq3dr5DM85e6XzITzZNdOcdERgByepyU94qyDxHXKy/ld1Ws0jzzs5URulhMMbNJg2k+55PuUPKKMCjkLEtN/5Zb+5Sysv0GoDTMDGYCI0xaSoxYOne9TcL2azOMT8xkoO6J/hxBGaf/WlMcC8WnoUQNT9hz0SEhT0x/WwZcHKn9SmmU5PEYYIGlv+DV2pcBd1p4NTykosNcf7iKRuU85VdaA0L1R0hHz1nvHeWU0ws7e21xHYC+0SjmtuJLauItLzDMEjqXAS
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:TYNPR02MB9351.apcprd02.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(23010399003)(366016)(376014)(56012099006)(10067099003)(18002099003)(22082099003);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?87M8nw3QDpixodOyLRFxgqEc1ZUQHg76liPzukaI30BOqOh1iLwZO7F1GF0+?=
- =?us-ascii?Q?ilkUUUc2k8d/IVeJYN/VKXMjsYe8klFfNp7SSvC+tYylDFyVhi8zcIKiZVyg?=
- =?us-ascii?Q?p8k62PYDkkWcHT3jN0zaw02rzvnlwRK+S2ayYGWTKIBlrPp4Qq4iEmgxVnsx?=
- =?us-ascii?Q?GpZoaJQQi3uz/OPdtcclJ8Cp/u7t2WEf9uIKJzE7ot23yNgnDTSIrqeMuKcx?=
- =?us-ascii?Q?pjEzQBlwSUrfPOGY11cW9Q289uk2e3CJY1gtqVGZEJhLGXWpQ67WCIk9rgnb?=
- =?us-ascii?Q?qarAg2wzIQ8ANIViL/HQCpahEPwjoVLzuctjDZxPlU7/fDoxvfT9x5x6sfzO?=
- =?us-ascii?Q?2hEG/YvCoTf2gX+jIgC9BU3I+0SeMOpVwlah+3YE2jk4jZRoFjE6zgga87q6?=
- =?us-ascii?Q?13Ui4HKifuJTEJPZb0F/89v5U5UNyb5BEmXCjYoOoYfrLlh9zI+yMrVPwKGo?=
- =?us-ascii?Q?uXRUDy9tzqVXBWbsAN18S9R1zvhlF07/273hniorXHe3+Pr+/JaSwffJPPow?=
- =?us-ascii?Q?W+rQmrcHB0W6uIo0RL1wjL6VxK9YOaNNVkLJxY4/HSpCYQMnLNPTuNRBtnAu?=
- =?us-ascii?Q?iT+qN6MRcLyIhP1bJzZZL+uV7bK/9R32X84XYNjonWKzlkn3usDI/WyGjpev?=
- =?us-ascii?Q?bG3L8gf6jhMAgqhMNAolKBkzwt/VSuut6TmUDHui4r5hOzTCwDpvlyf7Syex?=
- =?us-ascii?Q?B2guDKmdEClFXDLuP2xWNne++doG3n/JELVf6fF1wLA6RUZr8gN7/HNnvuor?=
- =?us-ascii?Q?ZO2tlT8WXUv0Ch3NsYGumd57B5bi4xc0VmFSkf7qzvKLNwV2gaZJF/wtX3RR?=
- =?us-ascii?Q?Sxa3iDodJrdKaXNjLT6Zi8VldhVqfq9vgyaG5H35aIIS0XeT9nS3VCZ63Qx8?=
- =?us-ascii?Q?2wEU6PZeGPel8z0u3GDUfSNzXvAC4y6gYYm7H4DjHlGrOdzu25sdbG3Y2UWY?=
- =?us-ascii?Q?G6Bk6LW8qyuT8sVno5m8rSSHGbC/PAuKc+FlVRxRCIxRcRcKA2XP29JptCVQ?=
- =?us-ascii?Q?q9alW2ryAq6KJA9kHhAvLNpuPyIehxuQg+kAXXMpt6D2TbcnbEVqIhQK3YYC?=
- =?us-ascii?Q?Na+Oodd3DNtYw2I7s1k0+6nqeQ8U6myprxkYFRtogUZcNQF80NfUewuaLzPj?=
- =?us-ascii?Q?QDwZZMnCjUgV2StyHtqTxPo5yrvLP64unt+WO85cJPHx/RI0WqFl7qIsjoAp?=
- =?us-ascii?Q?yf2GQ6o5N7ReaokQGQbenZOrg9M2EvmrHtIUJJ5DsQOg0cf0BORyYa8I9O28?=
- =?us-ascii?Q?BICa+rBFo5wKsLK9lB6xUFf+4noHxebTZD+o/TyCMVWZZPHcWDQyfdjUw7iH?=
- =?us-ascii?Q?4fLoCLE+pcjgQR5hJt0FyIOstljIUmdxIQOajdh+rJRbq6FrQUCStrdcRbOb?=
- =?us-ascii?Q?Lyks3haCcy+t9xZgZvYMw5O3Xx6y1UqNSvDziPR0ZapYDXLYZM2+uGuwx93N?=
- =?us-ascii?Q?ZMyoQoqdj0w8woECMr3W6eIIUOP7lSAM9VWGWZ4onzUKN3aYHwPWumqCNUMn?=
- =?us-ascii?Q?7ooRVADDdmZIzzOIygxPnhxG28uYxS4feFtuA+UPvxiERTHZ9b4wlKCifpxT?=
- =?us-ascii?Q?8o3ENAuq+2UBDUY+bpXONnmvHpKxAyOa2HHMTmWXo4KdV2XbRoJrOGHD1VWz?=
- =?us-ascii?Q?X7M7y1XvrfopIgQKDbJiQCMFO92deo+ymV1aDswtqeAwD8nCjl803hI6ojcm?=
- =?us-ascii?Q?DkQg0LIvO/D+sBoQ6dgmA6xFBkqtJZTqycpt/6VQ/0DGtaxrM9TJvLpqWcfJ?=
- =?us-ascii?Q?Rr54wzyrwnFYbQQod/Dv+sR5u9+jgM8=3D?=
-X-OriginatorOrg: processmission.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 90556d68-aec9-4302-65a6-08df1b5ab556
-X-MS-Exchange-CrossTenant-AuthSource: TYNPR02MB9351.apcprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Sep 2026 23:14:11.5069 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: e0544bf7-9765-4630-ab69-0b266dc2169c
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: YsfRCeUXrXnS9OBAmMVTali9HhFFOsBzn7jVVFbTVQ1VawRBUAT1M63uwGfiteeEWBfNXqsz3x1sSWzUzCBDYaoYP6bkCDh2qYpomRJUlsk=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SE3PR02MB9745
-Received-SPF: pass client-ip=2a01:111:f403:c405::7;
- envelope-from=chao.liu@processmission.com;
- helo=TYDPR03CU002.outbound.protection.outlook.com
+References: <20260904155758.3833179-1-bin.meng@processmission.com>
+In-Reply-To: <20260904155758.3833179-1-bin.meng@processmission.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Sat, 26 Sep 2026 11:14:16 +0800
+X-Gm-Features: AclHuK_diIzqWCiekyHK1DG-C3IIiXE-DxP_nr_BKr9utJCSJ-dEZlOv1BAW5CU
+Message-ID: <CAEUhbmVjC0JWk+LdM-Cy5mwppg_oZG2AQ_EC7Re=qzJ4XDebyA@mail.gmail.com>
+Subject: Re: [PATCH v2 00/24] hw/riscv: Restore Microchip PolarFire SoC Icicle
+ Kit firmware boot
+To: Bin Meng <bin.meng@processmission.com>
+Cc: QEMU <qemu-devel@nongnu.org>, Alistair Francis <alistair.francis@wdc.com>, 
+ Alistair Francis <alistair@alistair23.me>,
+ Chao Liu <chao.liu@processmission.com>, Conor Dooley <conor@kernel.org>, 
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, Fabiano Rosas <farosas@suse.de>,
+ Laurent Vivier <lvivier@redhat.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Markus Armbruster <armbru@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Paolo Bonzini <pbonzini@redhat.com>, Peter Maydell <peter.maydell@linaro.org>, 
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@oss.qualcomm.com>, 
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, 
+ Sebastian Huber <sebastian.huber@embedded-brains.de>,
+ Thomas Huth <thuth@redhat.com>, 
+ Weiwei Li <liwei1518@gmail.com>, qemu-arm@nongnu.org, qemu-block@nongnu.org, 
+ qemu-riscv@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:41::c;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yx2-x0c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -142,140 +132,155 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Shunchao,
-On Fri, Sep 25, 2026 at 10:07:09PM +0800, Shunchao Hu wrote:
-> According to the Hypervisor Extension in RISC-V spec:
-> - VMIDMAX is 7 bits for RV32 and 14 bits for RV64
-> - the fields of hgatp are WARL in the normal way
-> - the lowest two bits of the physical page number
->   (PPN) in hgatp always read as zeros
-> 
-> These behaviors differ from those of the satp CSR,
-> so hgatp cannot reuse legalize_xatp(). Add a dedicated
-> legalize_hgatp() helper to implement the hgatp-specific
-> WARL semantics.
-> 
-> Co-authored-by: Tianze Wu <wutianze@ict.ac.cn>
-> Signed-off-by: Tianze Wu <wutianze@ict.ac.cn>
-> Signed-off-by: Shunchao Hu <hushunchao@bosc.ac.cn>
-LGTM.
-
-Reviewed-by: Chao Liu <chao.liu@processmission.com>
-
-Thanks,
-Chao
-
-> ---
+On Fri, Sep 4, 2026 at 11:58=E2=80=AFPM Bin Meng <bin.meng@processmission.c=
+om> wrote:
+>
+>
+> The microchip-icicle-kit machine was originally validated with an older
+> Hart Software Services (HSS) firmware stack. HSS v2024.06 cannot boot
+> through U-Boot to Linux because several firmware-visible parts of the
+> PolarFire SoC are missing or incomplete.
+>
+> The first failure occurs before the UART is initialized because the L2
+> zero window is not mapped. HSS then needs additional L2 cache controller
+> and DDR training behavior. Later boot stages exercise system services,
+> the RTC, SDHC version 4 DMA, and high-capacity SD card block sizing,
+> along with the complete DDR aliases. The existing models ither reject
+> these accesses or expose behavior that does not match the hardware
+> specifications.
+>
+> This series restores the complete firmware boot flow. With these
+> changes, QEMU boots the HSS v2024.06 eNVM image, loads its U-Boot
+> payload from an SD card, and reaches the Buildroot 2026.05 Linux
+> login prompt.
+>
+> The changes are organized around the firmware boot sequence:
+>
+> * Correct the L2-LIM size, map the L2 zero window, and provide the DMC
+>   status transitions required by HSS DDR initialization.
+> * Model the documented L2CC Config, WayEnable, and WayMask registers,
+>   and resize L2-LIM as cache ways are enabled.
+> * Complete SDHCI version 4 support used by the Cadence controller,
+>   including Host Control 2, SDMA system addressing, 64-bit ADMA2
+>   descriptors, and SDMA boundary continuation.
+> * Run ADMA from a bounded timer-driven engine instead of performing work
+>   from command or unrelated MMIO accesses.  This keeps DMA progress
+>   independent of guest register traffic and avoids consuming a polling
+>   deadline inside the command write.
+> * Keep SDHC and SDXC memory transfers at their fixed 512-byte block
+>   size, and advertise the Cadence controller's 64-bit system bus
+>   support.
+> * Add the PolarFire SoC serial-number system service and RTC, and honor
+>   the system-service notification control bit.
+> * Correct the DDR aliases and fix the board topology at its physical
+>   configuration of 2 GiB of RAM and five harts.
+> * Document direct and HSS boot, add focused qtests and a full firmware
+>   functional test, and restore the machine's Supported maintainer
+>   status.
+>
+> Testing performed:
+>
+> * Built qemu-system-riscv64 and the documentation.
+> * Passed various newly added qtests.
+> * Booted HSS v2024.06, U-Boot, and Buildroot 2026.05 Linux to the login
+>   prompt using the functional-test image.
+>
+> The functional test downloads this versioned image archive:
+>
+> https://github.com/processmission/qemu-machine-images/releases/download/
+> v1.0.0/riscv64-microchip-icicle-kit-v1.0.0.tar.zst
+>
+> When restoring the HSS boot support, 3 potential bugs were identified in
+> the upstream HSS source codes that either blocks the DDR training from
+> succeed or traps in a multi-core race at the very beginning or after
+> a succesfully DDR training but stuck at OpenSBI/U-Boot hand-off. There
+> are already bug reports filed aginst various upstream projects.
+>
 > Changes in v2:
-> - Reword the comment to clarify that retaining the previous MODE is
->   QEMU's WARL legalization choice, not a requirement of the spec.
-> - Link to v1: https://lore.kernel.org/qemu-devel/20260920-riscv-hgatp-warl-v1-1-2e52f78c8027@bosc.ac.cn
-> 
-> To: qemu-devel@nongnu.org
-> Cc: Palmer Dabbelt <palmer@dabbelt.com>
-> Cc: Alistair Francis <alistair.francis@wdc.com>
-> Cc: Weiwei Li <liwei1518@gmail.com>
-> Cc: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-> Cc: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-> Cc: Chao Liu <chao.liu@processmission.com>
-> Cc: qemu-riscv@nongnu.org
+> - Use the Resettable API instead of a legacy reset handler
+> - tests/qtest: add Cadence SDHCI ADMA pacing/MMIO reproducer
+> - Assert bounded ADMA pacing and MMIO-independent progress
+> - Reuse existing SDHCI definitions and command helpers
+> - Verify transferred data against a known image pattern
+> - Make 64-bit system bus support a device property
+> - hw/riscv: pfsoc: Enable 64-bit SDHCI system bus support
+> - Reset the RTC to the documented hardware values
+> - Expect the documented hardware state after RTC reset
+> - MAINTAINERS: Move Conor Dooley to PolarFire SoC reviewer
+> - Drop sdhci patches that are already merged
+>
+> Bin Meng (23):
+>   hw/riscv: pfsoc: Correct the L2LIM maximum mapped size
+>   hw/riscv: pfsoc: Map the L2 zero device window
+>   hw/misc: pfsoc: Support DDR training with newer HSS
+>   hw/misc: pfsoc: Model L2 cache controller registers
+>   hw/riscv: pfsoc: Couple L2CC to L2-LIM
+>   tests/qtest: Add PolarFire SoC L2CC coverage
+>   hw/sd: sdhci: Run ADMA independently of MMIO
+>   hw/sd: sd: Keep high-capacity memory blocks at 512 bytes
+>   hw/sd: cadence: Add 64-bit system bus property
+>   hw/riscv: pfsoc: Enable 64-bit SDHCI system bus support
+>   hw/misc: pfsoc: Model PolarFire SoC serial number service
+>   hw/rtc: Add PolarFire SoC RTC model
+>   hw/riscv: pfsoc: Add PolarFire SoC RTC to Icicle Kit
+>   tests/qtest: Add PolarFire SoC RTC coverage
+>   hw/misc: pfsoc: Honor PolarFire service notification requests
+>   hw/riscv: pfsoc: Correct PolarFire SoC DDR aliases
+>   hw/riscv: pfsoc: Fix Icicle Kit RAM size at 2 GiB
+>   hw/riscv: pfsoc: Fix Icicle Kit hart count at five
+>   docs/system/riscv: Document Icicle Kit HSS boot
+>   docs/system/riscv: pfsoc: Document CLINT topology for direct Linux
+>     boot
+>   tests/functional/riscv64: Add Icicle Kit firmware boot test
+>   MAINTAINERS: Add PolarFire SoC Icicle Kit maintainer
+>   MAINTAINERS: Move Conor Dooley to PolarFire SoC reviewer
+>
+> Wadim Mueller (1):
+>   tests/qtest: add Cadence SDHCI ADMA pacing/MMIO reproducer
+>
+>  MAINTAINERS                                   |  13 +-
+>  docs/system/riscv/microchip-icicle-kit.rst    | 129 ++++-
+>  include/hw/misc/mchp_pfsoc_dmc.h              |   6 +
+>  include/hw/misc/mchp_pfsoc_ioscb.h            |   8 +
+>  include/hw/misc/mchp_pfsoc_l2cc.h             |  31 ++
+>  include/hw/riscv/microchip_pfsoc.h            |   7 +
+>  include/hw/rtc/mchp_pfsoc_rtc.h               |  46 ++
+>  include/hw/sd/cadence_sdhci.h                 |   1 +
+>  hw/misc/mchp_pfsoc_dmc.c                      | 273 +++++++++-
+>  hw/misc/mchp_pfsoc_ioscb.c                    | 174 ++++++-
+>  hw/misc/mchp_pfsoc_l2cc.c                     | 231 +++++++++
+>  hw/misc/mchp_pfsoc_sysreg.c                   |   9 +-
+>  hw/riscv/microchip_pfsoc.c                    |  94 ++--
+>  hw/rtc/mchp_pfsoc_rtc.c                       | 477 ++++++++++++++++++
+>  hw/sd/cadence_sdhci.c                         |  11 +
+>  hw/sd/sd.c                                    |  43 +-
+>  hw/sd/sdhci.c                                 | 143 ++++--
+>  tests/qtest/cadence-sdhci-test.c              | 282 +++++++++++
+>  tests/qtest/mchp_pfsoc_l2cc_test.c            | 221 ++++++++
+>  tests/qtest/mchp_pfsoc_rtc_test.c             | 315 ++++++++++++
+>  hw/misc/Kconfig                               |   3 +
+>  hw/misc/meson.build                           |   1 +
+>  hw/riscv/Kconfig                              |   2 +
+>  hw/rtc/Kconfig                                |   3 +
+>  hw/rtc/meson.build                            |   1 +
+>  tests/functional/riscv64/meson.build          |   2 +
+>  .../riscv64/test_microchip_icicle_kit.py      |  56 ++
+>  tests/qtest/meson.build                       |   6 +
+>  28 files changed, 2429 insertions(+), 159 deletions(-)
+>  create mode 100644 include/hw/misc/mchp_pfsoc_l2cc.h
+>  create mode 100644 include/hw/rtc/mchp_pfsoc_rtc.h
+>  create mode 100644 hw/misc/mchp_pfsoc_l2cc.c
+>  create mode 100644 hw/rtc/mchp_pfsoc_rtc.c
+>  create mode 100644 tests/qtest/cadence-sdhci-test.c
+>  create mode 100644 tests/qtest/mchp_pfsoc_l2cc_test.c
+>  create mode 100644 tests/qtest/mchp_pfsoc_rtc_test.c
+>  create mode 100644 tests/functional/riscv64/test_microchip_icicle_kit.py
+>
 > ---
->  target/riscv/cpu_bits.h |  8 ++++++++
->  target/riscv/tcg/csr.c  | 46 ++++++++++++++++++++++++++++++++++++++++++++--
->  2 files changed, 52 insertions(+), 2 deletions(-)
-> 
-> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> index c01050ce2b..c4a914411b 100644
-> --- a/target/riscv/cpu_bits.h
-> +++ b/target/riscv/cpu_bits.h
-> @@ -711,6 +711,14 @@ typedef enum {
->  #define SATP64_ASID         0x0FFFF00000000000ULL
->  #define SATP64_PPN          0x00000FFFFFFFFFFFULL
->  
-> +/* hgatp CSR field masks */
-> +#define HGATP32_MODE        SATP32_MODE
-> +#define HGATP32_VMID        0x1FC00000
-> +#define HGATP32_PPN         SATP32_PPN
-> +#define HGATP64_MODE        SATP64_MODE
-> +#define HGATP64_VMID        0x03FFF00000000000ULL
-> +#define HGATP64_PPN         SATP64_PPN
-> +
->  /* RNMI mnstatus CSR mask */
->  #define MNSTATUS_NMIE       0x00000008
->  #define MNSTATUS_MNPV       0x00000080
-> diff --git a/target/riscv/tcg/csr.c b/target/riscv/tcg/csr.c
-> index 061bc9db77..fc7bd61073 100644
-> --- a/target/riscv/tcg/csr.c
-> +++ b/target/riscv/tcg/csr.c
-> @@ -5050,17 +5050,59 @@ static RISCVException read_hgeip(CPURISCVState *env, int csrno,
->      return RISCV_EXCP_NONE;
->  }
->  
-> +static target_ulong hgatp_mask(CPURISCVState *env)
-> +{
-> +    target_ulong mask;
-> +
-> +    if (riscv_cpu_mxl(env) == MXL_RV32) {
-> +        mask = HGATP32_MODE | HGATP32_VMID | HGATP32_PPN;
-> +    } else {
-> +        mask = HGATP64_MODE | HGATP64_VMID | HGATP64_PPN;
-> +    }
-> +
-> +    /* G-stage x4 root page tables are always 16 KiB aligned. */
-> +    return mask & ~(target_ulong)3;
-> +}
-> +
-> +static target_ulong legalize_hgatp(CPURISCVState *env,
-> +                                   target_ulong old_hgatp,
-> +                                   target_ulong val)
-> +{
-> +    target_ulong mode_mask = riscv_cpu_mxl(env) == MXL_RV32 ?
-> +                             HGATP32_MODE : HGATP64_MODE;
-> +    target_ulong hgatp = val & hgatp_mask(env);
-> +    target_ulong mode = get_field(hgatp, mode_mask);
-> +
-> +    /*
-> +     * hgatp.MODE is a WARL field, so an unsupported value must be
-> +     * legalized rather than causing the entire write to be ignored.
-> +     * The specification does not require a particular legal value,
-> +     * QEMU here chooses to keep the previous mode while accepting
-> +     * writes to the remaining WARL fields.
-> +     */
-> +    if (!validate_vm(env, mode)) {
-> +        hgatp = set_field(hgatp, mode_mask,
-> +                          get_field(old_hgatp, mode_mask));
-> +    }
-> +
-> +    if (hgatp != old_hgatp) {
-> +        tlb_flush(env_cpu(env));
-> +    }
-> +
-> +    return hgatp;
-> +}
-> +
->  static RISCVException read_hgatp(CPURISCVState *env, int csrno,
->                                   target_ulong *val)
->  {
-> -    *val = env->hgatp;
-> +    *val = env->hgatp & hgatp_mask(env);
->      return RISCV_EXCP_NONE;
->  }
->  
->  static RISCVException write_hgatp(CPURISCVState *env, int csrno,
->                                    target_ulong val, uintptr_t ra)
->  {
-> -    env->hgatp = legalize_xatp(env, env->hgatp, val);
-> +    env->hgatp = legalize_hgatp(env, env->hgatp, val);
->      return RISCV_EXCP_NONE;
->  }
->  
-> 
-> ---
-> base-commit: c1c18d1e640b64292859ce9f30f3c344edfb0294
-> change-id: 20260920-riscv-hgatp-warl-1e48fd321188
-> 
-> Best regards,
-> --  
-> Shunchao Hu <hushunchao@bosc.ac.cn>
-> 
+> base-commit: d2843fbf80260e4346c856819e8cea11768c9d0e
+> branch: icicle-kit
+>
+> --
+
+Ping for review?
 
