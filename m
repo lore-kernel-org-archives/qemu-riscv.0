@@ -4,70 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44EB1C98324
-	for <qemu-riscv@archiver.kernel.org>; Sun, 27 Sep 2026 08:26:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7A9CC98324
+	for <qemu-riscv@archiver.kernel.org>; Sun, 27 Sep 2026 08:26:32 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xAkDB-00048i-6p; Sun, 27 Sep 2026 04:26:17 -0400
+	id 1xAkCn-00041K-Ec; Sun, 27 Sep 2026 04:25:53 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1xAkCv-00044p-3w
- for qemu-riscv@nongnu.org; Sun, 27 Sep 2026 04:26:02 -0400
-Received: from mail-pj2-x0c.google.com ([2607:f8b0:4864:39::c])
+ id 1xAkCk-0003xH-GC
+ for qemu-riscv@nongnu.org; Sun, 27 Sep 2026 04:25:50 -0400
+Received: from mail-pz2-x0e.google.com ([2607:f8b0:4864:3b::e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1xAkCq-0004j3-W8
- for qemu-riscv@nongnu.org; Sun, 27 Sep 2026 04:26:00 -0400
-Received: by mail-pj2-x0c.google.com with SMTP id
- 98e67ed59e1d1-3a0d2c37b0bso555346a91.0
- for <qemu-riscv@nongnu.org>; Sun, 27 Sep 2026 01:25:56 -0700 (PDT)
+ id 1xAkCi-0004fb-TY
+ for qemu-riscv@nongnu.org; Sun, 27 Sep 2026 04:25:50 -0400
+Received: by mail-pz2-x0e.google.com with SMTP id
+ 41be03b00d2f7-cc797656e69so440687a12.0
+ for <qemu-riscv@nongnu.org>; Sun, 27 Sep 2026 01:25:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1790497555; x=1791102355; darn=nongnu.org;
+ d=sifive.com; s=google; t=1790497547; x=1791102347; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=RQKjrCAqJCbcZUhefsSNpJKpjiFLd4C1A1Hz/kr1i7w=;
- b=Ae16CM5BUBasIeIC99swLnEqX1XC9g+z/BIaIHioh+llDe6gdX9OQbb7pO6PdfrQMr
- OMIRK/sirLmWIZTtiwZL/JTV7TxqGsSKcoHOEjEMfezKzBDFP8ymYCxF4VIIDgZcXcM/
- Or+veAqtp7ITQ2IcqAiRrPpbohMOMQ0fS/+mtPhXX3OFwHVlPQVWQfIrbt0sUsugLC4P
- td67X0dO8uy11dzKMSDgwmxpkkdKHtbm/tx/v6BJ0dm8Bb5OeCwHmEkOTyjpwiM0AnqX
- YQvMQP6Dv6DiVY0QCopchR1riwuZ0cM1ppSYAA/LoJSGFN5IKdw2GA4fnd6JV/PwMPdn
- 3L5Q==
+ bh=pX81RubxJXGeHk2Ek4qy67Lkkg8XYA6a/IolSvKf1EQ=;
+ b=dC8+uGXKGDIyGzWGKbvaNU1s0bcNLufwqsUcbEKFaj6skI0eXCK9jw5abHqROK7YZX
+ 2i6oIImmbllC5qP+bCfanB5NgN0MQgzYjATYunGUee/wM1ce5kXUGPXYocahIqvReUUL
+ FZf7n1hQeI7Lth+GXSBsw0QIH8RPMaGbBg+e081SqlXzA+8yXwWcn4AjiQ1pWUoE0dxh
+ MpU2H99Fbv3wfyv6fiuGwZEtLmKMdtLQvAY1zRU010yjijSqlp0BnvjkKzjw51xGZc39
+ pk1Q5TSOj0+O7/mL5JzyEqrpAxzsNZW1LUxifEltuIaIrKi3yiSJWgMppIuzFBoJmua0
+ qV3A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790497555; x=1791102355;
+ d=1e100.net; s=20260707; t=1790497547; x=1791102347;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=RQKjrCAqJCbcZUhefsSNpJKpjiFLd4C1A1Hz/kr1i7w=;
- b=Q8XmpbiGegZmJTKIHvxdrgJs7+emlUvC7dybnOIxSVzD0Wf+1O/p/0wfYnuaFpBJ35
- Uk1KA6ROIxvx2jmK1+sTeq8qp4lvOVa2SbdE40hPwSaKDD5Tr/wR7dhuho4JUhE8MmgC
- l8b311yubvPyZHN+Y+eK8iFVPjHqABhHh+519KrKWlq7qPhpYuodaEauAjPRRpAbLHPM
- tAABDTZztUb7AAtAZ2DqFxMe8sQAQ39cjHSBxKOk5gzHhfm45zGYEgZqLD3Bkmz5DaV2
- BCyFHPu/dNxKW7QOX7nCia9MlkRMHG4k0XYPzOuAIQvn8LoZBamGQGsqPo6UWQuQiCUL
- OUAg==
+ bh=pX81RubxJXGeHk2Ek4qy67Lkkg8XYA6a/IolSvKf1EQ=;
+ b=PYeVROyn8wYD/qW5CeNF9xqv+4tsZdQFfUEqLSEemIqFBDd/UiGtNAs9Pa2OWoGMp0
+ 8IguDAKO5h2IUa7isb6CVgTrHce4mV78FyI7A8+jGPjvnAbkZ8xbsOoW9CfXyDUF6vqW
+ woUcZL5vjm5M2c7S6X5AWHW2IsIDQXwsiaUBI0/p31TJXDS0LHw1FpCzxWmCcHUVgIW/
+ b7GHmAiBZs0k9lP/qwXKoKub8/oa03TTosICin+y/dkF3WTt7QV+SCoAUQTT80qbetpx
+ T4Ewm2zYxaprP9W1xQKbtLBbczeT0BJCGJJby37YXI5jJ7/PfnigUPUMhRpSC+MkNmXS
+ uDIw==
 X-Forwarded-Encrypted: i=1;
- AKwUvBwwineey+n/kIit7RIY+ZBXzXMzOeqQ3Z3CqmzyFjWY6oJOAtCxH6si02tuD03eCEFqkhrOWf9mDH/l@nongnu.org
-X-Gm-Message-State: AFq9FYJlq5jQrSFD8eCxpuy4243AHiP2kHA6DY+cZOKsLDfu9wV51Eal
- BDEYB1Ess4cCCISvivsWnlPqDWT343AIYGJ/bVpBdVq1ILjP4lpd3UCtBiDczwmQTNO8bbf7qXX
- HND6OR0E=
-X-Gm-Gg: AYBFou2+mH9ijRYURa6moxxtR9uMWryxTH07dJ+1M4PY2gsv6stzdaplXhFzihWDd6j
- go2rcfZtcnEgfi0ttzKz7rSMuVqGj4yV+Nsss8KyNuCPcJ9Kgb/FM//pzxQ3Aq/RzL6+U55wS1P
- PBuCqZhVCFE0EieNu237522R0gjcNKDO+ozjVVa7kJ9P8XrqDuJnfe+HqTqXq33dMvCjogAFFvg
- wg3uc3dWOjgvDNYIgXQ/e4Q7xW0Wl8uEBFXteY1QeVHvoiNzmEQe+/9MpwBEKokZrmg32r7k7yA
- 68ig4zbrQUiPqOskkpO6nuFkHceNzCEXhtn7MPu6q5ZFNcua74le5Od+akHwwWqekjkcY6IO63Y
- Thgm5JAiJ/YtgybM4Gxh4dJ7liDl9OjXEIAcxzjI0rOLc1iOl7yVEWDmLFBQFbiHP3UH3FWTQIr
- M3R0vHpPDMDFdyQpV9LcvmZKr9Z26/rbymNFlXPY+5qka4UemmaliKv6Toel9TImjNHIPEbNwc9
- 4oYcrQaZm47DUBOhTC3iQVbbK+WiH5n1EIy3u2qwGYIQmgwSAPA5ntWvlCAbvL1qOmmGuPYpw==
-X-Received: by 2002:a17:90b:35c4:b0:3a2:b16d:928b with SMTP id
- 98e67ed59e1d1-3a2b16da167mr488623a91.46.1790497555227; 
- Sun, 27 Sep 2026 01:25:55 -0700 (PDT)
+ AKwUvBxyK6Z4fXUYjFp9bbNnY3B1ca0x30RnNVusJP97ZAliNdwvFowOvHOOi0aGgPmQyhKgOSdqQV13Pnp1@nongnu.org
+X-Gm-Message-State: AFq9FYIp4PtyT/blnBdFRQwC+u3EKCUKuGC+SS63xFKhxz53ry0PkDKm
+ wXUUwNRVgCkdmYSWsNDFOnOlwo1G5C+23jY6RiL3hh40K7sv0xv+62AXVha6zoHwd3E=
+X-Gm-Gg: AYBFou1jdfftNbIVMONQfLagUcAUDli33ZfM+Mh8ubi6RlHtLH0pNtzdcwhz1WMyLFw
+ 65gyzJYtDpZC9xt2HcwVdY5FJ9IBditbnadw/zNDq+ym98bv27+wprVdH2PKuOJIOjDbwsphwRq
+ YUAGMO0Hw3g7FTwaBY6bufczg+o+21pl0SBUTtvCO9PzGzfkSFiuflCzAab/zeuz2bcmySGOt6k
+ WHIftc9kg8m1EgkS0YNs7Uh6EA35sCHHdb9pLYpkVmSZEQQ974YtoB4Ii0WNWYC9UK78v/ax8ES
+ MqFOtDLRoW+X+cTmlajNlkZbBIO51XTzuxlj+XNhQJScUMBtZch7v1bOI6lvmtwpwb3y9sY7Jec
+ QKq4PYTk/KiWPBtHts2No0zqRzYCqO7Smqt//r0kyiIS2TiFxITzdQbpnTbCprSwPqF0vFn81II
+ a+HSGAuzebrpFdunGLRYZm4U0QLJaa7qul9+D4G6VKmq9eVD4Amah0n0PICMyiT5RVO2OXyuS70
+ NqsUO2ZJwUYeBu7LJB6DR4sZkRKw8APNfYfWrnYJzqQyggubzK7lsm5aiK4QhHO/CQH6pXSug==
+X-Received: by 2002:a17:90b:2748:b0:3a0:7dea:6dd4 with SMTP id
+ 98e67ed59e1d1-3a098570051mr8166539a91.7.1790497547621; 
+ Sun, 27 Sep 2026 01:25:47 -0700 (PDT)
 Received: from duncan.localdomain (114-35-142-126.hinet-ip.hinet.net.
  [114.35.142.126]) by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3a0b9357f64sm14498871a91.3.2026.09.27.01.25.53
+ 98e67ed59e1d1-3a0b9357f64sm14498871a91.3.2026.09.27.01.25.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 27 Sep 2026 01:25:54 -0700 (PDT)
+ Sun, 27 Sep 2026 01:25:47 -0700 (PDT)
 From: Max Chou <max.chou@sifive.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -77,18 +76,19 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Max Chou <max.chou@sifive.com>, Weiwei Li <liwei1518@gmail.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Chao Liu <chao.liu@processmission.com>,
+ Frank Chang <frank.chang@sifive.com>,
  Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH v4 6/6] tests/tcg/riscv64: Add tests for SiFive int8 matmul
- extensions
-Date: Sun, 27 Sep 2026 16:25:34 +0800
-Message-ID: <20260927082534.3228237-7-max.chou@sifive.com>
+Subject: [PATCH v4 3/6] target/riscv/cpu: Add SiFive custom int8 matmul
+ extension implied rules
+Date: Sun, 27 Sep 2026 16:25:31 +0800
+Message-ID: <20260927082534.3228237-4-max.chou@sifive.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260927082534.3228237-1-max.chou@sifive.com>
 References: <20260927082534.3228237-1-max.chou@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:39::c;
- envelope-from=max.chou@sifive.com; helo=mail-pj2-x0c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:3b::e;
+ envelope-from=max.chou@sifive.com; helo=mail-pz2-x0e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -110,320 +110,57 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Add a test that exercises all SiFive int8 matrix-multiply instructions
-from the Xsfvqmaccqoq and Xsfvqmaccdod extensions.
+From: Frank Chang <frank.chang@sifive.com>
 
-For each tile shape the test covers the four signedness variants
-(sf.vqmaccu / sf.vqmacc / sf.vqmaccus / sf.vqmaccsu) and the
-reserved-encoding path: with vl set to a value that is not a multiple
-of the tile size the helper raises an illegal-instruction exception.
+Add SiFive custom int8 matmul extension implied rules to enable the
+implied extensions of SiFive custom int8 matmul extension recursively.
 
+Signed-off-by: Frank Chang <frank.chang@sifive.com>
 Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Signed-off-by: Max Chou <max.chou@sifive.com>
 ---
- MAINTAINERS                          |   1 +
- tests/tcg/riscv64/system/meson.build |   7 +
- tests/tcg/riscv64/test-xsfvqmacc.S   | 260 +++++++++++++++++++++++++++
- 3 files changed, 268 insertions(+)
- create mode 100644 tests/tcg/riscv64/test-xsfvqmacc.S
+ target/riscv/cpu.c | 20 ++++++++++++++++++++
+ 1 file changed, 20 insertions(+)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index be1c505ac20..9bf7f46fc24 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -407,6 +407,7 @@ F: target/riscv/xsf.decode
- F: target/riscv/tcg/insn_trans/trans_xsf.c.inc
- F: target/riscv/tcg/xsf_helper.c
- F: disas/riscv-xsf*
-+F: tests/tcg/riscv64/test-xsfvqmacc.S
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 90fa1d714c7..714697c66cf 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -2906,6 +2906,24 @@ static RISCVCPUImpliedExtsRule ZVFBFA_IMPLIED = {
+     },
+ };
  
- RENESAS RX CPUs
- R: Yoshinori Sato <yoshinori.sato@nifty.com>
-diff --git a/tests/tcg/riscv64/system/meson.build b/tests/tcg/riscv64/system/meson.build
-index 2aca68e0782..7f861212366 100644
---- a/tests/tcg/riscv64/system/meson.build
-+++ b/tests/tcg/riscv64/system/meson.build
-@@ -62,6 +62,13 @@ tests += {
-   }
- }
++static RISCVCPUImpliedExtsRule XSFVQMACCDOD_IMPLIED = {
++    .ext = CPU_CFG_OFFSET(ext_xsfvqmaccdod),
++    .implied_multi_exts = {
++        CPU_CFG_OFFSET(ext_zve32x),
++
++        RISCV_IMPLIED_EXTS_RULE_END
++    },
++};
++
++static RISCVCPUImpliedExtsRule XSFVQMACCQOQ_IMPLIED = {
++    .ext = CPU_CFG_OFFSET(ext_xsfvqmaccqoq),
++    .implied_multi_exts = {
++        CPU_CFG_OFFSET(ext_zve32x),
++
++        RISCV_IMPLIED_EXTS_RULE_END
++    },
++};
++
+ RISCVCPUImpliedExtsRule *riscv_misa_ext_implied_rules[] = {
+     &RVA_IMPLIED, &RVD_IMPLIED, &RVF_IMPLIED,
+     &RVM_IMPLIED, &RVV_IMPLIED, &RVG_IMPLIED,
+@@ -2957,6 +2975,8 @@ RISCVCPUImpliedExtsRule *riscv_multi_ext_implied_rules[] = {
+     &SMCTR_IMPLIED,
+     &SSCTR_IMPLIED,
+     &SSSTATEEN_IMPLIED,
++    &XSFVQMACCDOD_IMPLIED,
++    &XSFVQMACCQOQ_IMPLIED,
+     NULL
+ };
  
-+tests += {
-+  'test-xsfvqmacc.S': {
-+    'cflags': cflags,
-+    'qemu_args': ['-cpu', 'rv64,v=true,vlen=256,xsfvqmaccdod=true,xsfvqmaccqoq=true', qemu_args],
-+  }
-+}
-+
- if 'qemu-system-riscv64' in emulators
-   tcg_tests += {
-     'riscv64-softmmu': {
-diff --git a/tests/tcg/riscv64/test-xsfvqmacc.S b/tests/tcg/riscv64/test-xsfvqmacc.S
-new file mode 100644
-index 00000000000..a116712e502
---- /dev/null
-+++ b/tests/tcg/riscv64/test-xsfvqmacc.S
-@@ -0,0 +1,260 @@
-+/*
-+ * Test the SiFive Xsfvqmaccqoq/Xsfvqmaccdod custom int8 matrix-multiply
-+ * extensions.
-+ *
-+ * The eight instructions widen 8-bit integer inputs to 32 bits and perform
-+ * a matrix-multiply-accumulate into a vector of int32 accumulators:
-+ *
-+ *   C[j] += A * B[j]
-+ *
-+ * Xsfvqmaccqoq (4x8x4): A is 4x8, B[j] is 8x4, C[j] is 4x4 int32. One matrix
-+ * operation is performed per 32 elements of vl (TILE_SIZE = 32).
-+ * Xsfvqmaccdod (2x8x2): A is 2x8, B[j] is 8x2, C[j] is 2x2 int32. One matrix
-+ * operation is performed per 16 elements of vl (TILE_SIZE = 16).
-+ *
-+ * The input tiles below contain bytes >= 0x80 so that each signedness
-+ * variant produces a distinct result; the expected int32 tiles were computed
-+ * with an independent reference model of the specification. The accumulators
-+ * are cleared before every operation, so the expected value is the pure
-+ * matrix product.
-+ *
-+ * Test exits via semihosting with status 0 on success, or the 1-based index
-+ * of the first failing operation.
-+ *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ */
-+
-+	.option arch, +v
-+	.option norvc
-+
-+	.text
-+
-+/*
-+ * Run one 4x8x4 operation: load the 32-byte A and B tiles, clear the 4x4
-+ * int32 accumulator (vd = v4:v5, EMUL = 2), execute the op, then compare the
-+ * 16 int32 results against the expected tile.
-+ */
-+.macro RUN_QOQ id, word, exp
-+	li	a2, 32
-+	vsetvli	t0, a2, e8, m1, ta, ma
-+	la	t1, a_qoq
-+	vle8.v	v1, (t1)
-+	la	t1, b_qoq
-+	vle8.v	v2, (t1)
-+	vsetvli	t0, x0, e32, m2, ta, ma
-+	vmv.v.i	v4, 0
-+	li	a2, 32
-+	vsetvli	t0, a2, e8, m1, ta, ma
-+	.word	\word
-+	vsetvli	t0, x0, e32, m2, ta, ma
-+	la	t1, result
-+	vse32.v	v4, (t1)
-+	la	a0, result
-+	la	a1, \exp
-+	li	a2, 16
-+	li	t6, \id
-+	call	check_words
-+.endm
-+
-+/*
-+ * Run one 2x8x2 operation: load the 16-byte A and B tiles, clear the 2x2
-+ * int32 accumulator (vd = v4, EMUL = 1), execute the op, then compare the
-+ * 4 int32 results against the expected tile.
-+ */
-+.macro RUN_DOD id, word, exp
-+	li	a2, 16
-+	vsetvli	t0, a2, e8, m1, ta, ma
-+	la	t1, a_dod
-+	vle8.v	v1, (t1)
-+	la	t1, b_dod
-+	vle8.v	v2, (t1)
-+	vsetvli	t0, x0, e32, m1, ta, ma
-+	vmv.v.i	v4, 0
-+	li	a2, 16
-+	vsetvli	t0, a2, e8, m1, ta, ma
-+	.word	\word
-+	vsetvli	t0, x0, e32, m1, ta, ma
-+	la	t1, result
-+	vse32.v	v4, (t1)
-+	la	a0, result
-+	la	a1, \exp
-+	li	a2, 4
-+	li	t6, \id
-+	call	check_words
-+.endm
-+
-+	.global _start
-+_start:
-+	/* Enable the vector unit (mstatus.VS = Initial). */
-+	li	t0, 1 << 9
-+	csrs	mstatus, t0
-+
-+	/* Route synchronous traps to trap_handler (mtvec direct mode). */
-+	la	t0, trap_handler
-+	csrw	mtvec, t0
-+
-+	RUN_QOQ	1, 0xF220A25B, exp_qoq_u	/* sf.vqmaccu.4x8x4  */
-+	RUN_QOQ	2, 0xF620A25B, exp_qoq_s	/* sf.vqmacc.4x8x4   */
-+	RUN_QOQ	3, 0xFA20A25B, exp_qoq_us	/* sf.vqmaccus.4x8x4 */
-+	RUN_QOQ	4, 0xFE20A25B, exp_qoq_su	/* sf.vqmaccsu.4x8x4 */
-+	RUN_DOD	5, 0xB220A25B, exp_dod_u	/* sf.vqmaccu.2x8x2  */
-+	RUN_DOD	6, 0xB620A25B, exp_dod_s	/* sf.vqmacc.2x8x2   */
-+	RUN_DOD	7, 0xBA20A25B, exp_dod_us	/* sf.vqmaccus.2x8x2 */
-+	RUN_DOD	8, 0xBE20A25B, exp_dod_su	/* sf.vqmaccsu.2x8x2 */
-+
-+	/*
-+	 * Illegal-instruction reporting test (op 9).
-+	 *
-+	 * When vl is not a multiple of the tile size the instruction is
-+	 * reserved and the helper raises an illegal-instruction exception at
-+	 * runtime.
-+	 */
-+	la	t1, trap_mtval
-+	sd	zero, 0(t1)
-+	la	t1, trap_mcause
-+	sd	zero, 0(t1)
-+	/* vl = 16 is not a multiple of the 4x8x4 tile size (32 elements). */
-+	li	a2, 16
-+	vsetvli	t0, a2, e8, m1, ta, ma
-+	.word	0xF220A25B		/* sf.vqmaccu.4x8x4, traps */
-+	/* The handler skips the faulting insn, so control resumes here. */
-+	li	a0, 9			/* fail code for this check */
-+	la	t1, trap_mcause
-+	ld	t2, 0(t1)
-+	li	t3, 2			/* RISCV_EXCP_ILLEGAL_INST */
-+	bne	t2, t3, _exit
-+	la	t1, trap_mtval
-+	ld	t2, 0(t1)
-+	li	t3, 0xF220A25B
-+	bne	t2, t3, _exit
-+
-+	li	a0, 0
-+	j	_exit
-+
-+/*
-+ * Machine-mode trap handler: record mcause and mtval, then advance mepc
-+ * past the 4-byte faulting instruction and return.
-+ */
-+	.balign	4
-+trap_handler:
-+	csrr	t4, mcause
-+	la	t5, trap_mcause
-+	sd	t4, 0(t5)
-+	csrr	t4, mtval
-+	la	t5, trap_mtval
-+	sd	t4, 0(t5)
-+	csrr	t4, mepc
-+	addi	t4, t4, 4
-+	csrw	mepc, t4
-+	mret
-+
-+/*
-+ * check_words(a0 = result, a1 = expected, a2 = word count).
-+ * Returns to the caller if every word matches; otherwise exits with the
-+ * operation index held in t6.
-+ */
-+check_words:
-+1:	beqz	a2, 2f
-+	lw	t2, 0(a0)
-+	lw	t3, 0(a1)
-+	bne	t2, t3, 3f
-+	addi	a0, a0, 4
-+	addi	a1, a1, 4
-+	addi	a2, a2, -1
-+	j	1b
-+2:	ret
-+3:	mv	a0, t6
-+	j	_exit
-+
-+/* Exit through the semihosting SYS_EXIT_EXTENDED call with a0 as the code. */
-+_exit:
-+	la	a1, semiargs
-+	li	t0, 0x20026	/* ADP_Stopped_ApplicationExit */
-+	sd	t0, 0(a1)
-+	sd	a0, 8(a1)
-+	li	a0, 0x20	/* TARGET_SYS_EXIT_EXTENDED */
-+	.balign	16
-+	slli	zero, zero, 0x1f
-+	ebreak
-+	srai	zero, zero, 0x7
-+	j	.
-+
-+	.data
-+	.balign	8
-+semiargs:
-+	.space	16
-+result:
-+	.space	64
-+trap_mcause:
-+	.space	8
-+trap_mtval:
-+	.space	8
-+
-+/*
-+ * A (4x8, row-major) in bytes [0, 32) of vs1.
-+ */
-+a_qoq:
-+	.byte	0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x80
-+	.byte	0xFF, 0x01, 0x00, 0x02, 0x7F, 0x03, 0x04, 0x05
-+	.byte	0x10, 0x20, 0x30, 0x40, 0x50, 0x60, 0x70, 0x08
-+	.byte	0x00, 0x00, 0x81, 0x00, 0x00, 0x02, 0x00, 0x03
-+/*
-+ * B (8x4, row-major) in bytes [0, 32) of vs2.
-+ */
-+b_qoq:
-+	.byte	0x01, 0x02, 0x03, 0x04
-+	.byte	0x05, 0x06, 0x07, 0x08
-+	.byte	0x80, 0x7F, 0xFF, 0x01
-+	.byte	0x00, 0x10, 0x20, 0x30
-+	.byte	0x02, 0x02, 0x02, 0x02
-+	.byte	0xFE, 0x01, 0x00, 0x7F
-+	.byte	0x03, 0x00, 0x81, 0x04
-+	.byte	0x40, 0x50, 0x60, 0x70
-+/*
-+ * A (2x8, row-major) in bytes [0, 16) of vs1.
-+ */
-+a_dod:
-+	.byte	0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x80
-+	.byte	0xFF, 0x7F, 0x00, 0x02, 0x81, 0x03, 0x04, 0x05
-+/*
-+ * B (8x2, row-major) in bytes [0, 16) of vs2.
-+ */
-+b_dod:
-+	.byte	0x01, 0x02
-+	.byte	0x80, 0x7F
-+	.byte	0x03, 0xFF
-+	.byte	0x00, 0x10
-+	.byte	0x02, 0xFE
-+	.byte	0x7F, 0x01
-+	.byte	0x81, 0x04
-+	.byte	0x40, 0x50
-+
-+	.balign	4
-+exp_qoq_u:
-+	.word	0x0000279e, 0x000029db, 0x0000371f, 0x00003bf7
-+	.word	0x00000648, 0x000004b5, 0x00000826, 0x0000091f
-+	.word	0x00007be0, 0x00002030, 0x000074f0, 0x000042f0
-+	.word	0x0000433c, 0x000040f1, 0x0000819f, 0x000002cf
-+exp_qoq_s:
-+	.word	0xffffde9e, 0xffffd9db, 0xffffcd1f, 0xffffcbf7
-+	.word	0x00000248, 0x000002b5, 0x00000126, 0x0000051f
-+	.word	0xffffebe0, 0x00002030, 0xffffd4f0, 0x000042f0
-+	.word	0x0000403c, 0xffffc1f1, 0x0000019f, 0x000001cf
-+exp_qoq_us:
-+	.word	0x00001e9e, 0x000029db, 0x00002d1f, 0x00003bf7
-+	.word	0x00000348, 0x000004b5, 0x00000426, 0x0000091f
-+	.word	0xffffebe0, 0x00002030, 0xffffd4f0, 0x000042f0
-+	.word	0xffffc03c, 0x000040f1, 0x0000009f, 0x000002cf
-+exp_qoq_su:
-+	.word	0xffffe79e, 0xffffd9db, 0xffffd71f, 0xffffcbf7
-+	.word	0x00000548, 0x000002b5, 0x00000526, 0x0000051f
-+	.word	0x00007be0, 0x00002030, 0x000074f0, 0x000042f0
-+	.word	0xffffc33c, 0xffffc1f1, 0xffff829f, 0x000001cf
-+exp_dod_u:
-+	.word	0x00002795, 0x00003155, 0x00004642, 0x0000c2c0
-+exp_dod_s:
-+	.word	0xffffde95, 0xffffd955, 0xffffc042, 0x000041c0
-+exp_dod_us:
-+	.word	0x00001e95, 0x00002955, 0xffffc342, 0x000041c0
-+exp_dod_su:
-+	.word	0xffffe795, 0xffffe155, 0x00004342, 0xffffc2c0
 -- 
 2.43.0
 
