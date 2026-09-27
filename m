@@ -4,155 +4,106 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E7A8C9832F
-	for <qemu-riscv@archiver.kernel.org>; Sun, 27 Sep 2026 16:06:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA424C9832F
+	for <qemu-riscv@archiver.kernel.org>; Sun, 27 Sep 2026 18:32:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xArOZ-00039K-Bf; Sun, 27 Sep 2026 12:06:31 -0400
+	id 1xAtfl-00050n-5N; Sun, 27 Sep 2026 14:32:25 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1xArOL-00037z-FS
- for qemu-riscv@nongnu.org; Sun, 27 Sep 2026 12:06:17 -0400
-Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1xArOJ-00050d-Oc
- for qemu-riscv@nongnu.org; Sun, 27 Sep 2026 12:06:17 -0400
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 68QNeb9F2253515
- for <qemu-riscv@nongnu.org>; Sun, 27 Sep 2026 16:06:13 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- STka7TvZ3SFCtm1cvQf3w/kR1WUAaBnj0hlnNXXJZkU=; b=jOsxDaayTKMoQsxY
- 44JWugiDE6hd1LgQ8iw9EoV/ylXtWYHVM8qWn1bEQeN4pEuhMuQ6IH1Ag9HGGpFI
- ejPkh96SNi1lUzEumi3X+WU6klXbG9IuFzFhsQlVbLYv0otzxfAsIdeYatAyZn2R
- q+N1uL5ZMutzwmxcAOr1szUPMXT1ZxaEhmyRmOKuxMl/L2wlLFqAKF9WoNz4RPK1
- Ghso22pXJtFwQaoq/ABYlF0Yb29e4vDXR70EsLrk8pfU7cvlDh6uHrJ1ui7TG4VZ
- +l0HPcQDXnD/JLnk28CaBTcfdDhIjanA45FtP24psTn6QI32GL7hq6V4XBt1rMFZ
- bBigzQ==
-Received: from mail-vk1-f200.google.com (mail-vk1-f200.google.com
- [209.85.221.200])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gx3rfujse-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Sun, 27 Sep 2026 16:06:13 +0000 (GMT)
-Received: by mail-vk1-f200.google.com with SMTP id
- 71dfb90a1353d-5c82c79466cso2906132e0c.2
- for <qemu-riscv@nongnu.org>; Sun, 27 Sep 2026 09:06:13 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <visitorckw@gmail.com>)
+ id 1xAtfa-0004zl-TC
+ for qemu-riscv@nongnu.org; Sun, 27 Sep 2026 14:32:15 -0400
+Received: from mail-pj2-x0c.google.com ([2607:f8b0:4864:39::c])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <visitorckw@gmail.com>)
+ id 1xAtfZ-0001bU-4w
+ for qemu-riscv@nongnu.org; Sun, 27 Sep 2026 14:32:14 -0400
+Received: by mail-pj2-x0c.google.com with SMTP id
+ 98e67ed59e1d1-3a0eeda3e03so420588a91.1
+ for <qemu-riscv@nongnu.org>; Sun, 27 Sep 2026 11:32:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1790525172; x=1791129972; darn=nongnu.org;
- h=content-transfer-encoding:content-type:in-reply-to:from:references
- :cc:to:content-language:subject:user-agent:mime-version:date
- :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=STka7TvZ3SFCtm1cvQf3w/kR1WUAaBnj0hlnNXXJZkU=;
- b=MiGSg9z13jDi0Z1kLrmukDDFJxfcOgJa9zB+8h222RQbHq7HJASi+X8uGwDB6E9xSM
- mCOR5M02EzYVGS+4PaJ+qrUYApQtG5uXzkr0gl2H1Ox58Qwki2aCP9aGWP1sw7ev2ypE
- kKXTVUyJIxXL5bG4IBdJOpu+P+8szq+hg8QDmgLxnHnHz6BRvOn8a8M2PWR7fnm1g+Z1
- gmGSHg3ghELIEUScMK6MHzS5l+Fzqvbpdt5LyClI0+90Uj/zAtTSVuHAjZdAEKoZFIHM
- iBB6LXxfRYA2XgVQS4+1FBBvKKFKDiIEfuIQcLpEDmJaCApqgUVcx8wmhTi+T12fgMrV
- 9etQ==
+ d=gmail.com; s=20251104; t=1790533931; x=1791138731; darn=nongnu.org;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :content-type:mime-version:references:message-id:subject:cc:to:from
+ :date:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=cb97crgsQr+aLgUxmLs9iL7y2lpF1mcB8yK9mFA1qyQ=;
+ b=EiLRygBrx6tJ7U6k3DrJQ4XZYLrw3vdrb4vESJC/avA5p8iJUGaN4mcKYpSbYkenF0
+ llWQl0zFAYyCLOF97c61wIpXx+xfZeu+qx0tfZh0B8JoI9Cx3OTfBnjbswEOvxk/IsSf
+ UNpSYgoBbHgPHbcKIqFhD37DwxxfXYplmWrkCRWUSIFZpWWuvHJIGehcY5bn3w+1J0LN
+ UeWN3zVJHSAOZPluhVwr3h8qvTsGM2cZw8Vs/3SxxSonxahNt0BCnV6VF+0l8igNX5NS
+ CTtq4nSuaNpPkSbC2PN+bUUYWpvp1kmWrX+OjWUTxrietu9/GaTyHnqBdIszlnF403nR
+ WJqg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790525172; x=1791129972;
- h=content-transfer-encoding:content-type:in-reply-to:from:references
- :cc:to:content-language:subject:user-agent:mime-version:date
- :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=STka7TvZ3SFCtm1cvQf3w/kR1WUAaBnj0hlnNXXJZkU=;
- b=AyYmrxhySlH82w/RJmLQFPgfOZWG/SpJUQ9zcUu9Cm/TKU+ymo1noIzMZ8UX/jp5Xv
- eXaWt3ulFP2I+iar3QMelXNPK8dIMl7406jmWySa0XBG8ui1yeEpvmSUWcpccDkjSUYV
- OyNDkNJDik6vN9X9iuyiN8hRAV7wADslLmHoVInHXVvFcnZC4xMSHeiOnZYZ97Jgg7Y/
- Pf/hGV/4vcLjrvAq2d+Kfro5XcySNuz4uu9RFHaC5kgxgBsAcD3eDWh+aTh5WvhTK3JS
- zlcYmVfW6chuDCyC2HiCvnZ8z1xVGi447RryqRBn8nix8WcPRnV0DNJmyM5zLBL0eWL2
- NFkg==
+ d=1e100.net; s=20260707; t=1790533931; x=1791138731;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :content-type:mime-version:references:message-id:subject:cc:to:from
+ :date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=cb97crgsQr+aLgUxmLs9iL7y2lpF1mcB8yK9mFA1qyQ=;
+ b=t1q0VP/AbZOBE2O3Y9R6pvFba5IjemIqiMs80+qGUH9hb8oyRkX3VnEhrY+8s+xgM7
+ flA7ccI2se/q+sUylmbpE496MieLa3gTTD0r8OkW9PfXT1WYtWa7G7XY0vVBVT323GLX
+ lOAIV8QgK3pCOBFTBUiZOwj2VSiJUsljeehlb0yonqr3zbDiXSiHzMSthfAutftnSDJR
+ Pm3EIhWosK6TsO96W1NtONQMamynCoWmUFbRYdEDQiEQyx9N+mup445sxYqoEb7kyAjj
+ M7+vKz0Jk6TlmjjXzcDIOv+hT8fVWJX9v+jl/w5sbOarWb/NqYFkKjHUL1G0UsLCceKN
+ Q8OQ==
 X-Forwarded-Encrypted: i=1;
- AKwUvBzfLAsJzTBfop/EpDb7WQHYlbS3qOXAdSfylvI4wY3+9EEarxh3OoqB9SMuQ49XFMbkw/5kSJWZZZYB@nongnu.org
-X-Gm-Message-State: AFq9FYJnalXNr2o+mMHYyGVELw4d2DIgpgqG4xZTAqb+jvkUZfyjKKQr
- WWmSS6BBrmtjiS21jW1m71TI8RfLuGriDq9Uu9KnDmS1M4U7nB5PZTN8u3AVjkeJ4s1ykJp1m1a
- lcW7RqNZOeU1YEBrhZInqRlHRuZIoogMmWQVpP8/17B4NHU1hzppFdMEToA==
-X-Gm-Gg: AYBFou0tJXlm6YmuT4R9wdzEoKErpA8A9FggbiNVpwbXGZqiMYSVH6rIxsky3fHGN53
- f//N0K4rO3Dh6ZbQOJgMpiXKPHB6x9y+F43fEAt1q/x4nJjCajICTwBJJ0hYUTVgKDYw4n/CEQN
- 6PiN36m06ZeRfLW5dUdz2zmejc9EmjL4n87QlXhzU4DLysrptisBi1uSW0IAfgJedcMhbHbxrLu
- dGOUY0uFkY8DdjYxJS2PblZOftP+ymzr316wF2Zw2EQAwcBF1Z2kufMo4Fo8bSco3hYL8Jum/da
- TTXK6xphO/hETajANwGGTc8S/guWJ6tB41qJb4EFXij0QHt5qjasQ9NDW7EszkdwD9zF74D0lMS
- EF98yTsqXj1h3NerJKM5onvDrCQb2fIxK3g==
-X-Received: by 2002:a05:6102:148f:b0:7b5:b51:63ca with SMTP id
- ada2fe7eead31-7b50b516fe7mr457666137.32.1790525172128; 
- Sun, 27 Sep 2026 09:06:12 -0700 (PDT)
-X-Received: by 2002:a05:6102:148f:b0:7b5:b51:63ca with SMTP id
- ada2fe7eead31-7b50b516fe7mr457641137.32.1790525171635; 
- Sun, 27 Sep 2026 09:06:11 -0700 (PDT)
-Received: from [192.168.69.225] (pmd666.hd.free.fr. [88.187.86.199])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4887a744fb5sm19415139f8f.33.2026.09.27.09.06.09
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 27 Sep 2026 09:06:10 -0700 (PDT)
-Message-ID: <816d8db4-ef58-4eab-be12-6d239300ffe4@oss.qualcomm.com>
-Date: Sun, 27 Sep 2026 18:06:09 +0200
+ AKwUvByVU/a3/Su2Bc6NLQuAJmzhucN7VqIVgHsleQykx/UZXDm69NEva3pYMEts2NRnXrCAaWgNCOL3V8mz@nongnu.org
+X-Gm-Message-State: AFq9FYKIclN71jOGbOYgfEzNcloxZADxY9gJnOdpPl+Tg782L1Z9CW+K
+ ENUPYpj8qs9bq7UVVj+ZDM261QjufDeG+D73OgnQ74Af8NVP6PboZgfq
+X-Gm-Gg: AYBFou2Q48cB1HMTJlWDLFZsapdMlGR8Ny4K0ZY7IQNh5LLDS82GosENJLd0P4+n6s0
+ l3XEV9pbbPZaRO4Sq9ZM569nWlLbALi8A9pNON57X1TBmVE3eQeJsozYKZ5rq/aABokxMFLpYE0
+ 5Dvj4fu98OqUTR5+O+D99OQ/cewadjcZKeoNjjK+6z74QTz9eoiIdJArB1Xu6yponnsiKDoTnbW
+ 7EXqKtI39NiPWzooulsXYUTdMlKMwBthJmUoMHilVgwr4j2//GPRMgzGRdDk1M+yMZMX7i/T3cO
+ IQHHyhC7kSYnh5ufpx61zu92lo0Vp+kwgYK6JJyAgC6Savo5pkgOkh+kz3X+uGLX0KaMpRobypq
+ FVO/YsluGpuJHS5TGFmZQW29fy/3FVfb0nHJaOmzFqJYo3yBfdV+TSgHxifabGGbTeHy7N9aolJ
+ v70qf+cossAKv8R6pgvAcRIkiWiuQNdUAB72YtAKn1bVEHua2NsCrtZ38VMwFX+NbjsAIyJ2w=
+X-Received: by 2002:a17:90b:53d0:b0:3a2:590c:a85f with SMTP id
+ 98e67ed59e1d1-3a2590cb587mr1609679a91.21.1790533931274; 
+ Sun, 27 Sep 2026 11:32:11 -0700 (PDT)
+Received: from google.com ([118.150.148.19]) by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-3a0b9589f7esm15980365a91.10.2026.09.27.11.32.07
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 27 Sep 2026 11:32:10 -0700 (PDT)
+Date: Mon, 28 Sep 2026 02:32:05 +0800
+From: Kuan-Wei Chiu <visitorckw@gmail.com>
+To: Alistair Francis <Alistair.Francis@wdc.com>
+Cc: "marcandre.lureau@redhat.com" <marcandre.lureau@redhat.com>,
+ "pbonzini@redhat.com" <pbonzini@redhat.com>,
+ "farosas@suse.de" <farosas@suse.de>,
+ "pierrick.bouvier@oss.qualcomm.com" <pierrick.bouvier@oss.qualcomm.com>,
+ "almer@dabbelt.com" <almer@dabbelt.com>,
+ "lvivier@redhat.com" <lvivier@redhat.com>,
+ "wxchen0913@gmail.com" <wxchen0913@gmail.com>,
+ "marscheng@google.com" <marscheng@google.com>,
+ "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
+ "daniel.barboza@oss.qualcomm.com" <daniel.barboza@oss.qualcomm.com>,
+ "jserv@ccns.ncku.edu.tw" <jserv@ccns.ncku.edu.tw>,
+ "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
+ "chao.liu@processmission.com" <chao.liu@processmission.com>,
+ "zhiwei_liu@linux.alibaba.com" <zhiwei_liu@linux.alibaba.com>,
+ "eleanor15x@gmail.com" <eleanor15x@gmail.com>,
+ "liwei1518@gmail.com" <liwei1518@gmail.com>
+Subject: Re: [PATCH v4 6/7] tests/functional/riscv64: Add boot test for
+ Milk-V Duo board
+Message-ID: <arlhCzaJLNneiU3Q@google.com>
+References: <20260822194315.2550260-1-visitorckw@gmail.com>
+ <20260822194315.2550260-7-visitorckw@gmail.com>
+ <66512e37ad227defe5d5512b2694ea0fe5f0a21a.camel@wdc.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/9] treewide: uniquify colliding helper symbols
-Content-Language: en-US
-To: Yonggang Luo <luoyonggang@gmail.com>, qemu-devel@nongnu.org
-Cc: Brian Cain <brian.cain@oss.qualcomm.com>,
- Igor Mammedov <imammedo@redhat.com>, Aurelien Jarno <aurelien@aurel32.net>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Sunil V L <sunilvl@ventanamicro.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Song Gao <17746591750@163.com>,
- Aleksandar Rikalo <arikalo@gmail.com>,
- Peter Maydell <peter.maydell@linaro.org>, qemu-arm@nongnu.org,
- Yoshinori Sato <yoshinori.sato@nifty.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- "Michael S. Tsirkin" <mst@redhat.com>, qemu-riscv@nongnu.org,
- Philippe Mathieu-Daude <philmd@mailo.com>,
- Ani Sinha <anisinha@redhat.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Chao Liu <chao.liu@processmission.com>,
- Weiwei Li <liwei1518@gmail.com>, Zhao Liu <zhao1.liu@intel.com>,
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
-References: <20260926110818.1912-1-luoyonggang@gmail.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
-In-Reply-To: <20260926110818.1912-1-luoyonggang@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI3MDA2NCBTYWx0ZWRfX1lTbLy+i8EYh
- EVPIFa8PxMWlyMwz79A1xYovxcAe0Z6uzmTHaVh98+8ZjHMOgtYXok6WUWRn9b95d79yyouP9BR
- dRwRSAtM+zl+y30sJ1FZbUf1UNHd6wI=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI3MDA2NCBTYWx0ZWRfX/T231nwLYZXf
- BFsDduvXKVKWkDblpe5GyR3OXcHuVuuVoL5BhehRW/QQSu48zJFpBFG+sBwIj8ATzLSxvH70e5v
- SSAL1eJbvfFSASkDDURNQdhfuKiZ4HyV0BX6k3f32yqOt/RU9jzOzfOToOUMHvmI5TZb3KoniHb
- oCVPL+rx9Um8iqfcs4zDE1MqSLVY9Zm0v/5X4o0P2d02VlnGxJnbjmA8DshYwsa6W1bYvX4G75P
- Fi/0f5Fq0mS6w4vrDyWJSDW0zninElhdqd+6JfcCs8DrjJEgNBRGihe+ef3uKdmAhZqSuhuiUFV
- fmNtI5JdlHpwb+P4qw4jJ1hlvRmPqD/9ecIXyoZSDeGtOpJebsvxV1uQzN740a70RduHVGm6Dic
- i7ICAECLdPp7jwG8ehc13/lYx1S30Rn92ZmL2o8reaFIB7lXK4iihmffMmfxAIjAuxZ1RdSMj95
- 3sGhvLqnhBMJ/2dCOPQ==
-X-Proofpoint-GUID: H1mKT-la5l3yd4z2sVDNjN4YAid5LdM8
-X-Proofpoint-ORIG-GUID: H1mKT-la5l3yd4z2sVDNjN4YAid5LdM8
-X-Authority-Analysis: v=2.4 cv=K6G3jCWI c=1 sm=1 tr=0 ts=6ab93ef5 cx=c_pps
- a=wuOIiItHwq1biOnFUQQHKA==:117 a=4s3hRJSeHn4rkQlkrse1kQ==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=M51BFTxLslgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
- a=JQRrnVlyEpPTD-euPisA:9 a=QEXdDO2ut3YA:10 a=XD7yVLdPMpWraOa8Un9W:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-26_05,2026-09-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 suspectscore=0 clxscore=1015 lowpriorityscore=0 bulkscore=0
- adultscore=0 priorityscore=1501 impostorscore=0 phishscore=0 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609270064
-Received-SPF: pass client-ip=205.220.168.131;
- envelope-from=philmd@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <66512e37ad227defe5d5512b2694ea0fe5f0a21a.camel@wdc.com>
+Received-SPF: pass client-ip=2607:f8b0:4864:39::c;
+ envelope-from=visitorckw@gmail.com; helo=mail-pj2-x0c.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -168,40 +119,107 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Yonggang,
-
-On 26/9/26 13:08, Yonggang Luo wrote:
-> A combined qemu-system binary cannot export the same C symbol from two targets.
-> This series prefixes TCG helpers and virt ACPI setup functions that still use a
-> short name another target already exports.
+On Fri, Sep 25, 2026 at 04:02:45AM +0000, Alistair Francis wrote:
+> On Sat, 2026-08-22 at 19:43 +0000, Kuan-Wei Chiu wrote:
+> > Add a functional boot test for the Milk-V Duo board to validate the
+> > end-to-end boot flow.
+> > 
+> > $ ./build/run ./tests/functional/riscv64/test_milkv_duo.py
+> > TAP version 13
+> > ok 1 test_milkv_duo.MilkvDuoMachine.test_riscv64_milkv_duo
+> > 1..1
+> > 
+> > Signed-off-by: Kuan-Wei Chiu <visitorckw@gmail.com>
+> > ---
+> >  MAINTAINERS                                |  1 +
+> >  tests/functional/riscv64/meson.build       |  1 +
+> >  tests/functional/riscv64/test_milkv_duo.py | 50
+> > ++++++++++++++++++++++
+> >  3 files changed, 52 insertions(+)
+> >  create mode 100755 tests/functional/riscv64/test_milkv_duo.py
+> > 
+> > diff --git a/MAINTAINERS b/MAINTAINERS
+> > index 245eb7bb58..3f79334c59 100644
+> > --- a/MAINTAINERS
+> > +++ b/MAINTAINERS
+> > @@ -1861,6 +1861,7 @@ F: hw/riscv/milkv_duo.c
+> >  F: include/hw/char/dw8250.h
+> >  F: include/hw/misc/cv1800b_clk.h
+> >  F: include/hw/riscv/cv1800b.h
+> > +F: tests/functional/riscv64/test_milkv_duo.py
+> >  F: tests/qtest/milkv-duo-test.c
+> >  
+> >  RX Machines
+> > diff --git a/tests/functional/riscv64/meson.build
+> > b/tests/functional/riscv64/meson.build
+> > index d1a3e6c2bf..8a4f1d00f9 100644
+> > --- a/tests/functional/riscv64/meson.build
+> > +++ b/tests/functional/riscv64/meson.build
+> > @@ -18,4 +18,5 @@ tests_riscv64_system_thorough = [
+> >    'sifive_u',
+> >    'tt_atlantis',
+> >    'tuxrun',
+> > +  'milkv_duo',
+> >  ]
+> > diff --git a/tests/functional/riscv64/test_milkv_duo.py
+> > b/tests/functional/riscv64/test_milkv_duo.py
+> > new file mode 100755
+> > index 0000000000..aff247e61f
+> > --- /dev/null
+> > +++ b/tests/functional/riscv64/test_milkv_duo.py
+> > @@ -0,0 +1,50 @@
+> > +#!/usr/bin/env python3
+> > +#
+> > +# Functional test that boots a Linux kernel on a Milk-V Duo machine
+> > +#
+> > +# Copyright (c) 2026 Kuan-Wei Chiu <visitorckw@gmail.com>
+> > +#
+> > +# SPDX-License-Identifier: GPL-2.0-or-later
+> > +
+> > +from qemu_test import LinuxKernelTest, Asset
+> > +from qemu_test import wait_for_console_pattern
+> > +
+> > +class MilkvDuoMachine(LinuxKernelTest):
+> > +
+> > +    timeout = 120
+> > +
+> > +    ASSET_KERNEL = Asset(
+> > +       
+> > 'https://github.com/visitorckw/milkv-duo-qemu-assets/releases/downloa
+> > d/v1.0/Image',
+> > +       
+> > '3f157ecfcb86d28bfcff9fd3c1a43f60a8513b1919739fdc9a4d946aba35b2af'
+> > +    )
+> > +    ASSET_DTB = Asset(
+> > +       
+> > 'https://github.com/visitorckw/milkv-duo-qemu-assets/releases/downloa
+> > d/v1.0/cv1800b-milkv-duo.dtb',
+> > +       
+> > '2a5d165f64c4b2d55bba282b2974941ab223f6f5220c2e7721e35ab81311c098'
+> > +    )
+> > +    ASSET_ROOTFS = Asset(
+> > +       
+> > 'https://github.com/visitorckw/milkv-duo-qemu-assets/releases/downloa
+> > d/v1.0/rootfs.ext4',
+> > +       
+> > '9e7de9222ab4a79d1291866453aa47cd67a543216df6159bf9b42d055240a676'
+> > +    )
 > 
-> - Prefix leftover i386 TCG raise_exception to i386_raise_exception. Rename the C
->    raise_exception family globals to i386_raise_exception*, and keep the short
->    names as static inline wrappers in helper-tcg.h. Wrappers still call
->    raise_interrupt2.
-> - Prefix helper_wait on RX, Hexagon, and MIPS. Hexagon also takes the resume PC
->    as vaddr.
-> - Prefix ARM raise_exception to arm_raise_exception and keep the short name as a
->    static inline wrapper.
-> - Prefix virt_acpi_setup and virt_is_acpi_enabled on ARM, RISC-V, and LoongArch
->    virt. Leave the ARM trace event virt_acpi_setup unchanged. Leave RISC-V
->    file-local virt_acpi_build* names unchanged.
-> - Rename RISC-V TCG crc32, crc32c, and wfi to riscv_crc32, riscv_crc32c, and
->    riscv_wfi. ARM already exports helper_crc32, helper_crc32c, and helper_wfi.
+> Is there a more official source we could use?
+> 
+I initially tried booting the board using milk-v duo's buildroot SDK
+release. It failed to boot probably because their downstream device
+tree and kernel rely on many custom out oftree bindings that differ
+from mainline Linux. This is why I originally hosted my own mainline
+compiled images on my personal github.
 
-This was our first quick-and-dirty approach to link a proof-of-concept
-binary, but doesn't scale.
+However, I just experimented with switching to tuxboot assets similar
+to how sifive_u is tested, and I can confirm that booting with the
+tuxboot kernel, dtb, and rootfs works perfectly all the way to the
+shell.
 
-Our idea is to modify the macro expanded by the various DEF_HELPER_x()
-(helper-gen.h.inc, helper-info.c.inc and helper-proto.h.inc in
-include/exec/) to prepend the target name to the function name with
-the glue() macro. Core TCG helpers (i.e. when TARGET_NAME is not
-defined) would use "core" or "common" prefix.
-
-Since you are motivated and keen in getting that binary linked, are
-you interested to look at this?
+I'll update the test to fetch these assets from tuxboot.
 
 Regards,
-
-Phil.
+Kuan-Wei
 
