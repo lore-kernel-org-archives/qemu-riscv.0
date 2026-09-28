@@ -4,67 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 062DEC9833F
-	for <qemu-riscv@archiver.kernel.org>; Mon, 28 Sep 2026 12:11:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF5FCCA5FA5
+	for <qemu-riscv@archiver.kernel.org>; Mon, 28 Sep 2026 12:12:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xBACN-0002hX-6D; Mon, 28 Sep 2026 08:11:11 -0400
+	id 1xBACP-0002tP-HO; Mon, 28 Sep 2026 08:11:13 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <stefan260699@gmail.com>)
- id 1xB4W7-0005Lf-9n
+ id 1xB4W7-0005Ld-8k
  for qemu-riscv@nongnu.org; Mon, 28 Sep 2026 02:07:12 -0400
-Received: from mail-wr2-f35.google.com ([74.125.225.99])
+Received: from mail-wr2-f34.google.com ([74.125.225.98])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <stefan260699@gmail.com>)
- id 1xB4W4-0004OW-6A
- for qemu-riscv@nongnu.org; Mon, 28 Sep 2026 02:07:11 -0400
-Received: by mail-wr2-f35.google.com with SMTP id
- ffacd0b85a97d-482f63546c5so2310244f8f.2
+ id 1xB4W4-0004Ok-69
+ for qemu-riscv@nongnu.org; Mon, 28 Sep 2026 02:07:10 -0400
+Received: by mail-wr2-f34.google.com with SMTP id
+ ffacd0b85a97d-48aec508fe0so38631f8f.0
  for <qemu-riscv@nongnu.org>; Sun, 27 Sep 2026 23:07:06 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20260707; t=1790575625; x=1791180425;
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=qS8ezzWFVOvpfx9rGdzUHxPwUSgmD7kLfiptrKQ5c4k=;
- b=dypsWUHwqIXqkHpXIho0bW2iWPcZMEPK5Le0iqLlsQzQXdb2RDpcMZDgSGmllNfTRk
- ZizL/eyX1KZyl0Wy+/Wavlu9A0J4ToP7xxHieGPoN0lLBpiWVfPwRokgLnAf2QkBNf7G
- XIFtIj545HDc4ZPjnQri1LnYrCewnrL/9IOEb7svMq1g0S1pg9442Xy1Ikn4OL+2h8Ed
- 4Nmr7GHB0slsmNFmg2oGNzL2XSK1ZKQ0H+ImpGPo1Z8q7P5MKDf8QDaXDAZiOIL6Yj2a
- cKbX0PEbxmzRIVd5jhfJ8/F8+cSvekCDdX1G8u63Q0BQZGv6H+iaNdwyaUTUTDXWPwSJ
- +cAg==
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=YvbufSJ8de3jLwpO62dY2tmldsGbWsZ+fJKLfQ7LzTc=;
+ b=rEfk5wSFtdz5vpDFN/jaGT+nqv7wg3qSEOZ1EuXGHDEWzbPtGjRB/c+JRb/VkDpFUD
+ zcjPxkA7Pbf70euAuI254crgaY9s3vzOoBMoO4UKx83tZqziUl96GuPmGRwMUOEjg6m+
+ 2wfWGFe6t+9YJRwIyoKFy+0/WKKbD+2RIJqEI26F5EvNS4nY741P9Aqj1pngwnqxkpW9
+ qnQ1aE8ObbA3ie7DHdzw7+v/bXsioieHJEpwVJfnO62Tv3mzK8NIpaxpKRHYdhiEu6/i
+ z+kiP4EOqf898Qpp349S9/sbnGxmiTHuI0fwH4DK6aYDV8bPEObwQ8wJu74GOMhuwMxw
+ AIMQ==
 X-Forwarded-Encrypted: i=1;
- AKwUvBw+M+rukC7YqyJC9I7hIfh5mnKzKK9lB1T+IStmT8uqSAHNrjlYdF77VFQBz+MxBrDIYZPncqmqqpZR@nongnu.org
-X-Gm-Message-State: AFuF++kYkFQcJeUM3rFL2oXzPL0HJbFoVjhbLC9P+DtQKpcj7ax7KCO4
- 5MjcE5BVujM1v+9GCI/DiVPT8lhJaE0kx2O+jR1PP36Z/ZJ2MGtHEzo+
-X-Gm-Gg: AYBFou1q+eAtNIrLScPgsz0TPQo3+IiG5cPLj1FKlWEvArVVxgfwyucfuRvaQw/pGkZ
- PXHDpAXvIv5VTwYmUqzPjVXeDhcTiQ7AH0lpAqI0QeofkHKjRdJ3vrCX98s7eFW9/l2RAAbFKBA
- X0+zPNQnIx1CE6zHcKK9yvmdokk7cQKe5kuYEPVq9fZ1Yes0xasbqf3WylEY0vk65SN8r5Efw1y
- KggdNoIn/UYTBtnYV4OKA6a+51+6Ne02dPpKwIQ2ufxhUuKHbz8YKbwhGhjOLQJ5PaREBylkqgp
- ccjE/PTvyNWLX0YAZoxc7E1KyQaI2ncjff8zeXJsqE3Mbs1nNO7uZkAgLQbVBL5qSYJaBav8XIZ
- xV+OET0MWBeM0fhV1A0saVmGetOWULopAmHqVKTLMNfZzWbMc+lSNEO/NiQg0aJ04xBpNlSPwIw
- wiiqFrjPooctb+EdgpFNzMxxTLBNu27QIIbSR2vQlXdc6cS7WfjF7WHnD8XQ/CgkDJJxyigBRWg
- dgDGauhrN0yG9U5kA==
-X-Received: by 2002:a05:600c:4e53:b0:49f:d58f:1f8b with SMTP id
- 5b1f17b1804b1-49fe66d807bmr200474825e9.18.1790575624542; 
- Sun, 27 Sep 2026 23:07:04 -0700 (PDT)
+ AKwUvBxnE3ak7nsNhf73tG3rG+iZai1HfdyBRVcdbonSDgfieeD/+F2YE7Ebj1y6yOOsUjXSd1rZLv9xRoxB@nongnu.org
+X-Gm-Message-State: AFuF++kZhVPfsgOl4hTbmyv70R8zIhY+i6PlLNwIb8/TjLJET3CxdE/c
+ rUgwx9jTJRQlsSCfGLBPMuBOkx8k86RPQ9SRMUc8SzJpBDTskVGLrm6z3IjKk0ic
+X-Gm-Gg: AYBFou0KEai05qqkCnGxzEmzRu5W4m55F87SA4XUeWMmHeFVsQ4+KpzuEWKxUXA0Ndn
+ rCHlOzZr45oj1Ntt8xT8CWcSr9fwPhu8sYwFqCYATtIPdEHePHF7Luw+3IE/yDNqBbgqKmyR5Tj
+ BSxH0m/tLAUNjY0Otc9OW/iqaus9H5XdWfkVgZ8MtP9iYqUnsUuhZE7Cqr11dMHoL7bxH/QLwB0
+ c6ii8ELVHIbs5hgTARGECPPio56Gx5rPQYWZO3UR87yjBLFaYWpQrHIUFQqQJsVBRjYWNwHvUQi
+ yQBMORAxuxvpCUoTc+DQ60MaMMAobmxK+RtanGoKthsNAp9icQRN2lWXPFJUqQm3XwMvMMl9ZkW
+ pX93iTOAa0O0LWa64Y/uFTZkfH/vTe30tDghVZVQmTS6ZLI7QSLk/6B3Rd8F7guLTKQrEHq6nsM
+ 45ukiA1D3NCLFtQ5d56MvvYQGRKxGuel3ryu4x/355LgGgIEtVqDe3tTCleNvM1mTFWzsvXx8im
+ gK2Sd0ng8Pg8DADcg==
+X-Received: by 2002:a05:600c:5394:b0:4a0:25c:8ad2 with SMTP id
+ 5b1f17b1804b1-4a0025c8c52mr56865615e9.9.1790575625341; 
+ Sun, 27 Sep 2026 23:07:05 -0700 (PDT)
 Received: from mac.fritz.box ([2a05:fa40:300:1a00:d105:6a41:99ee:cbff])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a008f7f1c2sm1325775e9.1.2026.09.27.23.07.03
+ 5b1f17b1804b1-4a008f7f1c2sm1325775e9.1.2026.09.27.23.07.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 27 Sep 2026 23:07:04 -0700 (PDT)
-Subject: [PATCH 0/4] Support KVM on real RISC-V HW
-Date: Mon, 28 Sep 2026 08:06:35 +0200
-Message-Id: <20260928-spacemit-k3-v1-0-8c57d0596b87@butz.st>
+ Sun, 27 Sep 2026 23:07:05 -0700 (PDT)
+Date: Mon, 28 Sep 2026 08:06:36 +0200
+Subject: [PATCH 1/4] hw/riscv/virt: Provide number of interrupt identities
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMTQ5AMBBA4avIrDVhGoKriAU1GOInnRKJuLti+
- S3eu0DIMgkUwQWWDhZeF484DMAM9dKT4tYbMMI0yjFTstWGZnZq0krHGrHNkyxBBF9sljo+v1t
- Z/Za9Gcm4dwH3/QAvOd4ObwAAAA==
-X-Change-ID: 20260928-spacemit-k3-31322d958522
+Message-Id: <20260928-spacemit-k3-v1-1-8c57d0596b87@butz.st>
+References: <20260928-spacemit-k3-v1-0-8c57d0596b87@butz.st>
+In-Reply-To: <20260928-spacemit-k3-v1-0-8c57d0596b87@butz.st>
 To: qemu-devel@nongnu.org
 Cc: Sunil V L <sunilvl@ventanamicro.com>, 
  Palmer Dabbelt <palmer@dabbelt.com>, 
@@ -75,9 +74,9 @@ Cc: Sunil V L <sunilvl@ventanamicro.com>,
  Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org, 
  Stefan Butz <mail@butz.st>
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=openssh-sha256; t=1790575623; l=1250;
+X-Developer-Signature: v=1; a=openssh-sha256; t=1790575623; l=3599;
  i=mail@butz.st; h=from:subject:message-id;
- bh=moyUaNoT4PA8AUiDYhio+FEJb2hIfugcIHLlwA93DIo=;
+ bh=w2OjWKCaO3jaHKzDKRqYUmo5SBU5u8jG3s//MB19DZY=;
  b=U1NIU0lHAAAAAQAAAZcAAAAHc3NoLXJzYQAAAAMBAAEAAAGBAOJW8yHG2FdKcC8jiWoQyd2Z6
  SNHh+aJB0RLkH7BFF7Yy7MymfE5UJE2mmoucIa3HiNQdlVZjgqLY7wph/VSM4kniDO57IG9Q9jN
  x96oOAzzWWJEVrh8vlxRGXatNy8ywcO9WExvzLop5s2ddP08f0Wrzn/55mpqoLJyoKaIbk10kxz
@@ -86,18 +85,18 @@ X-Developer-Signature: v=1; a=openssh-sha256; t=1790575623; l=1250;
  FGHdG/OimvbT/GseVmWjiw7WV9HUOJJawVmfoTEJynX9BbV+VNMKZVpW5YaAaps6/KOC7V2bM7P
  hvORUmj3b8eUr418GYC3M4rLJtrj6Vu2cUyTV9Q5dvq9Lg2TIj/jpbEWpOqn2FSGkQcLvcDksNk
  jOSGmdG4h+OJ3vbGrva5UCJF/KIyuV4ozlSU7awAAAAZwYXRhdHQAAAAAAAAABnNoYTUxMgAAAZ
- QAAAAMcnNhLXNoYTItNTEyAAABgJrI3Iu3wbR68WbEbuVAwZ6unthAkEYtErzzv1o6sN+NjCrdm
- r4H6v/Is+ZL7r1a1vqkpUvC3pLVl7npKYb+HAdN3i2KEGelxTsnTzwnPCv7UHUnVXx+rx54hmLd
- aEGhLCyeJTvaKjsYbxhmXVcXWC0cPaD8kUHaJuixWrQW1t0/4vHJaCT8RyXes+nPgHny20A844y
- Id4bbTJjSV9t9KwQwZeIJzKfXOh/4Aae9jmLdk8du0qj8RZV2nz4I8S4TnJDUqPt3hpJpeNiFDF
- GjuurziK589mvN4A1zq7gxNXBIDwoo6m3NNkE6VZvGKRwxeEwb0dXHVCm96KijtynMKKvgCA2V2
- rxvfe+GvEQQNDqhDRb6mQM2O3gUnmv4628gshrGDS+OtNNKZ/155cC8At0v54IVkYo+/9vyHVZU
- 1gceTWi/WTXM/WNJ+hqHhORtFUGl9uG746QYvyHm8rYnjPKUOlpXOx2xiyhz+br8dy+DG9umXTC
- AlYs56CxEZeBVXw==
+ QAAAAMcnNhLXNoYTItNTEyAAABgAwWtm/L/IcJjewD14QlBPATSiL5yGh982s4fUA7odc/Qsmxx
+ EjuLRojyTXVh1Fb+GsymXFV43YUaIKgj22vgFq2Q8GfuxXmo2XM6JHZU8lAkR3aA9DcjVBPB8VT
+ REXL3tRtaWGV+CMtp2lEGZdomw4F2Mh+RynyQm1WqpMCCbaGpVassDlOrG1ZHMWq/a2m+F8O2ig
+ 35WJSe3HiBX2gGScOFjmS1IfwVq+iZfu3kIQeLtZpDZ589S4xuhM3Rowrg3+Kx/mPqQAtbwJ9sd
+ IpIARwy6MRJsMt1XSpnzl9bOwLX2WBBE5uGFntcLVq2nczI7dTBPiuK9LdA1IHOBL06FKitiexX
+ hSxCFFNqUcXeiuxqBLQyc4lN+LTIWiBLQCbhLNVRgTimQEoU10CA/fwKYY3XhY/Ihrn1Mtrb7Tf
+ as51w/C8hH+U4NR8SxrkGdRg2tYVtgajq2lNjYODr1Mp1v1QZ1U2FFX9K/ZHgbS2sg+1mvWUY0F
+ 5+znUOfsEItlPJw==
 X-Developer-Key: i=mail@butz.st; a=openssh;
  fpr=SHA256:jcZFBs39daoQJIontO/rJaVachWp/oqTbhNpQk8+REQ
-Received-SPF: pass client-ip=74.125.225.99;
- envelope-from=stefan260699@gmail.com; helo=mail-wr2-f35.google.com
+Received-SPF: pass client-ip=74.125.225.98;
+ envelope-from=stefan260699@gmail.com; helo=mail-wr2-f34.google.com
 X-Spam_score_int: -13
 X-Spam_score: -1.4
 X-Spam_bar: -
@@ -124,35 +123,88 @@ From:  Stefan Butz via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Spacemit K3 and Tenstorrent Atlantis support only 64 guest interrupt
-identities. QEMU virt machine always requests 255.
-This patchset queries the hw limits from the KVM AIA device to avoid
-requesting more interrupt identities than supported.
-Without this patchet QEMU KVM crashes on those platforms.
+Instead of hard coding the number interrrupt identities used by the IMSIC
+pass it in as a parameter. This allows other machines to configure this as
+required.
 
-Bug Ticket: https://gitlab.com/qemu-project/qemu/-/work_items/4599
+No functional change.
 
 Signed-off-by: Stefan Butz <mail@butz.st>
 ---
-Stefan Butz (4):
-      hw/riscv/virt: Provide number of interrupt identities
-      hw/riscv/virt: Move platform bus interrupts below 64
-      target/riscv/kvm: Create KVM AIA device before configuring it
-      hw/riscv/virt: Limit interrupt identities to what KVM AIA supports
+ hw/riscv/virt-acpi-build.c | 4 ++--
+ hw/riscv/virt.c            | 7 ++++---
+ include/hw/riscv/virt.h    | 1 +
+ 3 files changed, 7 insertions(+), 5 deletions(-)
 
- hw/riscv/virt-acpi-build.c   |  4 ++--
- hw/riscv/virt.c              | 29 ++++++++++++++++++++++-------
- include/hw/riscv/virt.h      |  5 +++--
- target/riscv/kvm/kvm-cpu.c   | 43 ++++++++++++++++++++++++++++++++-----------
- target/riscv/kvm/kvm-stub.c  | 18 ++++++++++++++----
- target/riscv/kvm/kvm_riscv.h | 10 ++++++----
- 6 files changed, 79 insertions(+), 30 deletions(-)
----
-base-commit: efa3b9d5ac8024078225e1ab434411fdfe53b457
-change-id: 20260928-spacemit-k3-31322d958522
+diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
+index 8e516ec114..0ebfa10a02 100644
+--- a/hw/riscv/virt-acpi-build.c
++++ b/hw/riscv/virt-acpi-build.c
+@@ -576,9 +576,9 @@ static void build_madt(GArray *table_data,
+         build_append_int_noprefix(table_data, 0, 1);        /* Reserved */
+         build_append_int_noprefix(table_data, 0, 4);        /* Flags */
+         /* Number of supervisor mode Interrupt Identities */
+-        build_append_int_noprefix(table_data, VIRT_IRQCHIP_NUM_MSIS, 2);
++        build_append_int_noprefix(table_data, s->num_msis, 2);
+         /* Number of guest mode Interrupt Identities */
+-        build_append_int_noprefix(table_data, VIRT_IRQCHIP_NUM_MSIS, 2);
++        build_append_int_noprefix(table_data, s->num_msis, 2);
+         /* Guest Index Bits */
+         build_append_int_noprefix(table_data, guest_index_bits, 1);
+         /* Hart Index Bits */
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index d4b501802f..0ee726b4c0 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -277,7 +277,7 @@ static void create_fdt_sockets(RISCVVirtState *s,
+             .imsic_m_base = !kvm_enabled() ? s->memmap[VIRT_IMSIC_M].base : 0,
+             .imsic_s_base = s->memmap[VIRT_IMSIC_S].base,
+             .imsic_group_max_size = VIRT_IMSIC_GROUP_MAX_SIZE,
+-            .irqchip_num_msis = VIRT_IRQCHIP_NUM_MSIS,
++            .irqchip_num_msis = s->num_msis,
+             .aia_guests = s->aia_guests
+         };
+ 
+@@ -826,7 +826,7 @@ static void virt_machine_init(MachineState *machine)
+                                              &s->memmap[VIRT_IMSIC_M],
+                                              &s->memmap[VIRT_IMSIC_S],
+                                              i, base_hartid, hart_count,
+-                                             VIRT_IRQCHIP_NUM_MSIS,
++                                             s->num_msis,
+                                              VIRT_IRQCHIP_NUM_PRIO_BITS);
+         }
+ 
+@@ -847,7 +847,7 @@ static void virt_machine_init(MachineState *machine)
+ 
+     if (kvm_enabled() && virt_use_kvm_aia_aplic_imsic(s->aia_type)) {
+         kvm_riscv_aia_create(machine, IMSIC_MMIO_GROUP_MIN_SHIFT,
+-                             VIRT_IRQCHIP_NUM_SOURCES, VIRT_IRQCHIP_NUM_MSIS,
++                             s->num_sources, s->num_msis,
+                              s->memmap[VIRT_APLIC_S].base,
+                              s->memmap[VIRT_IMSIC_S].base,
+                              s->aia_guests);
+@@ -972,6 +972,7 @@ static void virt_machine_instance_init(Object *obj)
+     s->acpi = ON_OFF_AUTO_AUTO;
+     s->iommu_sys = ON_OFF_AUTO_AUTO;
+     s->num_sources = VIRT_IRQCHIP_NUM_SOURCES;
++    s->num_msis = VIRT_IRQCHIP_NUM_MSIS;
+ }
+ 
+ static char *virt_get_aia_guests(Object *obj, Error **errp)
+diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
+index e516898f9a..98e48ac894 100644
+--- a/include/hw/riscv/virt.h
++++ b/include/hw/riscv/virt.h
+@@ -66,6 +66,7 @@ struct RISCVVirtState {
+     OnOffAuto iommu_sys;
+     uint16_t pci_iommu_bdf;
+     uint16_t num_sources;
++    uint16_t num_msis;
+ };
+ 
+ enum {
 
-Best regards,
---  
-Stefan Butz <mail@butz.st>
+-- 
+Git-157)
 
 
