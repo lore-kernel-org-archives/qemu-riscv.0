@@ -4,116 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A10F7C98328
-	for <qemu-riscv@archiver.kernel.org>; Mon, 28 Sep 2026 05:29:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DEB4C9833E
+	for <qemu-riscv@archiver.kernel.org>; Mon, 28 Sep 2026 06:27:58 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xB3tv-0002lm-Bf; Mon, 28 Sep 2026 01:27:43 -0400
+	id 1xB4pY-00031n-O9; Mon, 28 Sep 2026 02:27:16 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xB3qe-0007O8-1r
- for qemu-riscv@nongnu.org; Mon, 28 Sep 2026 01:24:23 -0400
-Received: from mail-dl2-x0e.google.com ([2607:f8b0:4864:38::e])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xB3qb-0008Di-BL
- for qemu-riscv@nongnu.org; Mon, 28 Sep 2026 01:24:19 -0400
-Received: by mail-dl2-x0e.google.com with SMTP id
- a92af1059eb24-144ecebb6cbso756658c88.3
- for <qemu-riscv@nongnu.org>; Sun, 27 Sep 2026 22:24:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1790573041; x=1791177841; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=xRhjFf72VMP1IXC5iIuXu+o23aKg88Zy2a17bYh8Llk=;
- b=Li8b3jA6sxwpIlPlczgO+sVYm5Vsi6WsrhNV6RKfgdi3583V17RgRxbVkifPP70VSx
- 1azG7M6eHUfnnN+EMn7YiR+OiR/EpPjWvTdiAaHvPpyWd4qpoCqGnQZChDI83lv0ssfn
- +hATd6lpZUt9IY4/XIcuKhVQOQSlBavvU1W089nHwWNOxXnl1ID2I0strYoOfRN1nDtm
- QbPV3Ilprqr9ywnFVLUU1FRZBVPVzksJzU2P9iKAyePsVHq9YIVlJvyHczr84W1HM75S
- IQ3WsL79RlDNLvTn2hekXSikavsq26d/rr6xzX46itBIcyQGXjw6CBXXZuXRLpPGsUcG
- zWdw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790573041; x=1791177841;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=xRhjFf72VMP1IXC5iIuXu+o23aKg88Zy2a17bYh8Llk=;
- b=Wc8G3zI4BhPfHkdRQVkhP7T8M1ImFgFi1k1HGekQZGKbd61ijkXNUCcswcTKhARsCR
- +rHREZtTmUS9auM1kwklCvF97w/GoieuVCtfzEngkvQQA/mMHH6WWmPxweNqSlaHKZZR
- NG6YYwmKStw3iz/g9ieRd357NRyc5hkPLXAkijR5fiBd2s5u2+0Kgs/D3we070z8r7RM
- emN1h93uFCYI/E88h3IUh0oWGZpT/8tcmOdakfCuXgBoYTZXBg8GwDKVzzr2KArrb4qv
- RB5YzLncjq25jkzEta2d+AD5PyxJwoyT36YLbPA5h/kjWIfJcSrazclOVSx1zhauMHBj
- JBWg==
-X-Forwarded-Encrypted: i=1;
- AKwUvByuWqSo/DWBUl4gGLIdxR/IcD0t28qpwVi25od8KdmiJGV+cEKwFYpWt9AoEdJh/X5iiL4p5BniBC0X@nongnu.org
-X-Gm-Message-State: AFuF++kj/XXL6u9qtaZCAAMy6cCBs+Nq6OgipyC73ZsmhzPVGSGvtMzL
- IaBc9SzkvZTxkSn2u83qeheL0Svi4cmhE4EXYfJOMTaw79IP7g9qWAld
-X-Gm-Gg: AYBFou0fJD7EPASF+/6VNRfILAb0rEd/OYHpFOkL2GpGu+IMbodKDL/RIvGd/g4OHaY
- DCmLlbomrbPhkkTGKOHinTT3zKhagFDUTLx8MiKHZ/tN33MQUPR+nO5pNxCi5dlZz/d7OpDLi/+
- JFeCpX4pPlmd/4Lq9DARP3lF4p7nB+IEeD08FOftsPInbWIT+e91gQANBpce9WQOGoJ7De4ZiGG
- vkwerYC1DIth2+5JiLMzQa8nfjUTooUsRUtVjeblLG3k5iVsNhJfStKE8BeGe+D6BNUl3ebgHke
- UhxfoMFJayuUZeNjSeFBXPy1Car0q5Kl0O0uVeDvzpXJWpYKXCYEtt+PwiSgsE6rrMG+5rV658j
- L4MNIKfOjYOcLIknNn5JiIS+71ENASbkXoEGCZFANtYp5Iszwk5kdeFnMLe5adfeJXNxlQddLhA
- zY7WMZV3AzV+c9EK5aT7DauxqgwDLL4d3y1pGEDDgbV/vRX5Vzb53h4mXdc2WDpw0wmMbzolkqt
- uFNIxA+nixWKcBpCUoo/vIoLHQYyXuWhVFGoVBCTg==
-X-Received: by 2002:a05:701b:241a:b0:146:6755:ff08 with SMTP id
- a92af1059eb24-146ce1a818emr8357405c88.9.1790573041389; 
- Sun, 27 Sep 2026 22:24:01 -0700 (PDT)
-Received: from WIN-BH9M8FJACR9 ([103.94.185.75])
- by smtp.googlemail.com with ESMTPSA id
- a92af1059eb24-146bb6551d9sm14726248c88.9.2026.09.27.22.23.54
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 27 Sep 2026 22:24:00 -0700 (PDT)
-From: Yonggang Luo <luoyonggang@gmail.com>
-To: qemu-devel@nongnu.org
-Cc: Helge Deller <deller@gmx.de>, Harsh Prateek Bora <harshpb@linux.ibm.com>,
- Weiwei Li <liwei1518@gmail.com>, Brian Cain <brian.cain@oss.qualcomm.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Max Filippov <jcmvbkbc@gmail.com>, Chao Liu <chao.liu@processmission.com>,
- Aleksandar Rikalo <arikalo@gmail.com>,
- Philippe Mathieu-Daude <philmd@mailo.com>,
- Matthew Rosato <mjrosato@linux.ibm.com>,
- Ilya Leoshkevich <iii@linux.ibm.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Stafford Horne <shorne@gmail.com>, Chinmay Rath <rathc@linux.ibm.com>,
- Nicholas Piggin <npiggin@gmail.com>,
- Yoshinori Sato <yoshinori.sato@nifty.com>,
- Peter Maydell <peter.maydell@linaro.org>,
- Artyom Tarasenko <atar4qemu@gmail.com>, Laurent Vivier <laurent@vivier.eu>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Aurelien Jarno <aurelien@aurel32.net>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
- Eric Farman <farman@linux.ibm.com>, qemu-riscv@nongnu.org,
- Richard Henderson <richard.henderson@linaro.org>,
- David Hildenbrand <david@kernel.org>, Glenn Miles <milesg@linux.ibm.com>,
- Cornelia Huck <cohuck@redhat.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Song Gao <17746591750@163.com>, qemu-ppc@nongnu.org, qemu-arm@nongnu.org,
- Michael Rolnik <mrolnik@gmail.com>,
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
- Paolo Bonzini <pbonzini@redhat.com>, qemu-s390x@nongnu.org
-Subject: [PATCH v2 23/24] target/ppc: fold gen_exception_nip into
- gen_exception_err_nip
-Date: Mon, 28 Sep 2026 13:20:49 +0800
-Message-ID: <20260928052051.251-24-luoyonggang@gmail.com>
-X-Mailer: git-send-email 2.52.0.windows.1
-In-Reply-To: <20260928052051.251-1-luoyonggang@gmail.com>
-References: <20260928052051.251-1-luoyonggang@gmail.com>
+ (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
+ id 1xB4pU-000300-Ow; Mon, 28 Sep 2026 02:27:12 -0400
+Received: from mgamail.intel.com ([192.198.163.10])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
+ id 1xB4pR-000619-Os; Mon, 28 Sep 2026 02:27:11 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1790576830; x=1822112830;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:content-transfer-encoding:in-reply-to;
+ bh=Aza63WU/5csk9n4J8JDPlFxyZoeVVVisOoh9N2U7Zp0=;
+ b=Q3cu+I8NeyXYH7vSqmoETlnP2cSbN3E7cgfd0MTtPnVU9+hfXhlon2BT
+ a+Do7jab3OUBl8gIcoPQEgFv7ZOq96U+HWi+ehDr6uI3XNvSqcP60Xk81
+ dduhtIuHogNWPgrdj/fIOzbpYQ6zH6E6/HpSMAkGFPHHNhIOPYpRFKj68
+ JBakGRL9/39RZV8evghvJZ43t3js5sYiFPag55TnhI9hIzeh0k4uiLwDD
+ +4xyEt2ZRFdjIdhcanWvuPbsfsWeNtV57BzQWOoh99sprhrjSKCgmSTg0
+ WwNXV6h9m65ViFVYMen9/GkGuWfUL6NbOYAs2bFIsMKxNuEOJeYySNTsl A==;
+X-CSE-ConnectionGUID: 39R5vK+KSSSTi3wgJMLutQ==
+X-CSE-MsgGUID: HuCVjhOMTXmEHLlZECpF+w==
+X-IronPort-AV: E=McAfee;i="6800,10657,11918"; a="102638288"
+X-IronPort-AV: E=Sophos;i="6.27,128,1787036400"; d="scan'208";a="102638288"
+Received: from fmviesa010.fm.intel.com ([10.60.135.150])
+ by fmvoesa104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 27 Sep 2026 23:27:03 -0700
+X-CSE-ConnectionGUID: 4XqZDyeAQHWIlFcLahsrkQ==
+X-CSE-MsgGUID: TUEMGebASdaKayeTzv2I5w==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.27,128,1787036400"; d="scan'208";a="274202506"
+Received: from zhaoliu1-desk.sh.intel.com (HELO localhost) ([10.238.208.118])
+ by fmviesa010.fm.intel.com with ESMTP; 27 Sep 2026 23:27:01 -0700
+Date: Mon, 28 Sep 2026 14:26:59 +0800
+From: Zhao Liu <zhao1.liu@intel.com>
+To: Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@oss.qualcomm.com>
+Cc: qemu-devel@nongnu.org, qemu-s390x@nongnu.org, qemu-ppc@nongnu.org,
+ qemu-arm@nongnu.org, Paolo Bonzini <pbonzini@redhat.com>,
+ qemu-riscv@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
+ Peter Maydell <peter.maydell@linaro.org>
+Subject: Re: [PATCH v3 17/21] target/i386: Use an acquire load for
+ interrupt_request
+Message-ID: <aroIs/s9lhoqUrlS@intel.com>
+References: <20260923171116.31276-1-philmd@oss.qualcomm.com>
+ <20260923171116.31276-18-philmd@oss.qualcomm.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:38::e;
- envelope-from=luoyonggang@gmail.com; helo=mail-dl2-x0e.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+In-Reply-To: <20260923171116.31276-18-philmd@oss.qualcomm.com>
+Received-SPF: pass client-ip=192.198.163.10; envelope-from=zhao1.liu@intel.com;
+ helo=mgamail.intel.com
+X-Spam_score_int: -46
+X-Spam_score: -4.7
+X-Spam_bar: ----
+X-Spam_report: (-4.7 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.34,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001,
+ SPF_NONE=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -129,33 +84,33 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-gen_exception_nip is gen_exception_err_nip with error_code 0. Call
-that function instead of raising on its own.
+On Wed, Sep 23, 2026 at 07:11:11PM +0200, Philippe Mathieu-Daudé wrote:
+> Date: Wed, 23 Sep 2026 19:11:11 +0200
+> From: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
+> Subject: [PATCH v3 17/21] target/i386: Use an acquire load for
+>  interrupt_request
+> X-Mailer: git-send-email 2.53.0
+> 
+> x86_cpu_has_work() may run without the BQL, but currently reads
+> CPUState::interrupt_request directly. Other threads update this
+> field with qatomic_or() in cpu_set_interrupt(), so the direct
+> read races with an atomic access.
+> 
+> Load the interrupt request with qatomic_load_acquire(), matching
+> cpu_test_interrupt(). This provides the acquire ordering required
+> before x86_cpu_pending_interrupt() inspects the CPU state.
+> 
+> Suggested-by: Paolo Bonzini <pbonzini@redhat.com>
+> Signed-off-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
+> ---
+>  target/i386/cpu.c | 5 ++++-
+>  1 file changed, 4 insertions(+), 1 deletion(-)
 
-Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
----
- target/ppc/translate.c | 7 +------
- 1 file changed, 1 insertion(+), 6 deletions(-)
+Reviewed-by: Zhao Liu <zhao1.liu@intel.com>
 
-diff --git a/target/ppc/translate.c b/target/ppc/translate.c
-index 467b8f3d4ec..f1a7039a325 100644
---- a/target/ppc/translate.c
-+++ b/target/ppc/translate.c
-@@ -330,12 +330,7 @@ static inline void gen_exception_err(DisasContext *ctx, uint32_t excp,
- static void gen_exception_nip(DisasContext *ctx, uint32_t excp,
-                               target_ulong nip)
- {
--    TCGv_i32 t0;
--
--    gen_update_nip(ctx, nip);
--    t0 = tcg_constant_i32(excp);
--    gen_helper_raise_exception(tcg_env, t0);
--    ctx->base.is_jmp = DISAS_NORETURN;
-+    gen_exception_err_nip(ctx, excp, 0, nip);
- }
- 
- static inline void gen_exception(DisasContext *ctx, uint32_t excp)
--- 
-2.52.0.windows.1
+(and I agree with Richard's comment :-))
+
+Regards,
+Zhao
 
 
