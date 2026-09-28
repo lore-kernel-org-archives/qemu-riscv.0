@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D52CCCA5FA1
-	for <qemu-riscv@archiver.kernel.org>; Mon, 28 Sep 2026 05:22:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA2E6C9833E
+	for <qemu-riscv@archiver.kernel.org>; Mon, 28 Sep 2026 05:22:37 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xB3oJ-0003gy-Qh; Mon, 28 Sep 2026 01:21:56 -0400
+	id 1xB3o5-0003QR-7m; Mon, 28 Sep 2026 01:21:41 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xB3oH-0003fO-FT
- for qemu-riscv@nongnu.org; Mon, 28 Sep 2026 01:21:53 -0400
-Received: from mail-dl2-x10.google.com ([2607:f8b0:4864:38::10])
+ id 1xB3nn-0003KK-KV
+ for qemu-riscv@nongnu.org; Mon, 28 Sep 2026 01:21:26 -0400
+Received: from mail-dl2-x2b.google.com ([2607:f8b0:4864:38::2b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xB3oF-0007sU-Rr
- for qemu-riscv@nongnu.org; Mon, 28 Sep 2026 01:21:53 -0400
-Received: by mail-dl2-x10.google.com with SMTP id
- a92af1059eb24-142dd04edb5so4395683c88.2
- for <qemu-riscv@nongnu.org>; Sun, 27 Sep 2026 22:21:51 -0700 (PDT)
+ id 1xB3nl-0007ln-02
+ for qemu-riscv@nongnu.org; Mon, 28 Sep 2026 01:21:23 -0400
+Received: by mail-dl2-x2b.google.com with SMTP id
+ a92af1059eb24-1438cb9b3a3so1408913c88.2
+ for <qemu-riscv@nongnu.org>; Sun, 27 Sep 2026 22:21:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1790572910; x=1791177710; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1790572880; x=1791177680; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=wGGpYIGUwqf5eEqjLL692CNUimMFgXlpwa4vAy3AFKs=;
- b=f1qDJ6sDvT6RCiFBNKzW1gj+wAqdDr9eZFb8wUVkY38cOguf6fxZXPtGhpinKQNlC6
- yxsmYEUOrzDhSIlCSiLzdxL/5TRBERn0T8YOUPW7BfoHXwolulyYYe7AtJ95Cl950Yo6
- z0tQPmxwBsP+g9arjHVnZmt8cgqvQmnszhGdttbswGOCfp28GpOFLb8yDT4RBKIAClP1
- OBliImBCa99qEMk+N2fP/TILWsvyNxkVomkL3Bvh/5bN89w+ZWM+z3kWe3Y0WqL3s+Hu
- U7ZgINozF+NLvXju6IRGPuR04FIVNXjhFwlBJVFFXxEOim5faoiF5pU/3jsxqvgv7Qc4
- I9pw==
+ bh=Q9Wafx0aXX2Ni1bBJzRLIBOxNOLdNJdd9ggXabMSVEY=;
+ b=BnV6i6kFt8Y+JqHVKVHuMvivV4ql/mOt78oHBBtf3DNHyGfbm8UoTjoTd8MYIU4wuF
+ PLs5kI6BTnEGKgK+9uuqzu5El39S5OUUw2C4VYYipTEpvaWnk8svqnS+UvFXXB8TTldB
+ +2k7H07vkixAlSemFjmRSt+gxgh+QoCmHuNWyLIr5HpneghpJ4kPWYkEq7nHxXo4xxOX
+ J4Fk3Ly47pG5Vd/AgoDDgtC9ePWNSiGsTjQoYiABQSSXmIfkpngno0foMLi5comdOofl
+ dzqeKdvcPg3H4koo21L8U6AaQbLkuf44zdkNJVQuPe4nRhNsRjVmn715CcALCh704+8u
+ 6GXg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790572910; x=1791177710;
+ d=1e100.net; s=20260707; t=1790572880; x=1791177680;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=wGGpYIGUwqf5eEqjLL692CNUimMFgXlpwa4vAy3AFKs=;
- b=rOH59DgFngrhKz7ALk2EgvdgT5PMjzY0Z7uBCxTPkBTHxgPiUTvfFuLArKiXVDBFGK
- Rn34eth2cEKE7lq8qePTLgqt8eHatDQ8ekiqOJOUbuMmhF4F7e8x12omf/UIl1f1ca9p
- rZCf7phwtc2/iT5q+P6uJ6QKbIWgNhn0od62cA/9AIwTIe+dKgx8C05rYroHKKFQotKo
- CfzZfY2Aq/2VtWcPEErqzUM6G4rcmeiHuwbQG3mX1ufQUFrGFAKXsQ1MYLi+QRNtshWw
- 0sIjLi7Kp20zUGIlGw598UFJABlni2x+Ptnw6CpwmvMXDM5LJi0d+MpLAdZj8vY5v2nx
- pxFQ==
+ bh=Q9Wafx0aXX2Ni1bBJzRLIBOxNOLdNJdd9ggXabMSVEY=;
+ b=eGAXPxv14vmKB11lJqHEdVWgASi0GXXwxKS+8X8Cku4/Ysi5p46aXJUkGd4H75obBj
+ 7LL+QyVETJnCtUoDS4tcBNg2/d4xpbLMnALIqVHd4bnggxoCLK++NAQXyjc9JBXIzS5I
+ fGR523WQXFS3H6HW1kGyeivFB5o1gQ01SWGld/G51/96U9gg+ylM/2UzmMxf3yxl5mxm
+ VClBnI/xrpuzzhcRIxGicF3J0tWNifbDbZ3SDMSJJ5+UppRI1tTDKfUouAN9BAErCpvX
+ TlEQ8B6QKp3ngo4hR+xCGze+KCnZiLiLhAP5KjLk5mY9NwsqOrF0jRkVssCkg/i6wn2U
+ Ca+A==
 X-Forwarded-Encrypted: i=1;
- AKwUvBylwS7rEndnzB4MkvXl59NPAEwn15bRyaD+lcnZYHpC7BEsRG80eh8tgNxQUW9rSwVS5sZ4BeB8nDWo@nongnu.org
-X-Gm-Message-State: AFuF++nmV7j307L7svIvAdIUthPULRZibQwU4H3yMJugT/II5VjjaqM0
- +qL5S2n9K8sXoge16NwANds/iagjVjoc4ceplvttCKwc25hXMIQ42fFw
-X-Gm-Gg: AYBFou3mC9fbL5a9/9LVYxiJYggIOmq7bGWK+VQpQYTKdIp2gACaaLOeX+rPFAn7GZE
- 9AMtHvqAAPXbjGpCkbLzJhnHSFmlSJotAPx5LrBAYUi8MPC2ltUUEy2qvXCTWgtr5ZkPA7/d0GF
- ERHWO1Jfw/1MzNFclfWyB32grDD5WPphl4V0asShagS7deqmzPRLP4tWUFfuXETNsy9pO5LTGKr
- RDAPGq27E/Q1GyUQXbqW7pSFswBzV5bFbZdLCKq1jFdxgF6JxH+uDQ+Ir9iXCCIk7aEORMwy/fJ
- B5et8OpEml61UfxIl1FAW7cc6FNesOkZ2zJ13YjCP1quU2v8LDMmvcl9zUguzWlzNpbRFcGPe7I
- RjxBTZrhT4HEzO7viQ9mb7r28TlXMYs8yeMkiBRAbdl1ROLrysCzMzEtd5iDubVNIRwr+UU9BqM
- HZcTyUYG3Xc74Ip9f01SdHBVlOvFunrH+GKK7TIhqhfjQKIAKOAbgWg9orI+JzCLV+K0isZQmFy
- wQ6r/HbSdti0H0+rQufqRvJKBAw2s8=
-X-Received: by 2002:a05:701b:281c:b0:143:7330:7fbc with SMTP id
- a92af1059eb24-146cee37b69mr8056469c88.21.1790572910280; 
- Sun, 27 Sep 2026 22:21:50 -0700 (PDT)
+ AKwUvByYYvf6YEec7YCqpvIM4LtfdjURPCnKINK0Ohjm48hFLaoQc3cvcM6r0VYAriNYLX5jS7i3ujzHmNM6@nongnu.org
+X-Gm-Message-State: AFuF++na9IVz4wwZbZwZfeRKGe1smP04bvTttwdHybzZvVooQEppgWF/
+ AiCX1Q1BCNd+AWVtlxd3YO+ylIpNzFQIW8ijvVk7mQSCPsg1zN6Scv15
+X-Gm-Gg: AYBFou1kQjE13pJbzccd6776y9J9OxFtGBqqAwEK4IEmET942NYYW95IpTY2Tg2okoB
+ 6MDAroi8hlF9KQJ4NgFVpTF7D+VVn1Kw6Ur4Qo8q6RRrp5BfMLNpbFFQE/K/AGlmtoMeJKMTnhu
+ PY63txlOCI3/l1eN9H49A4l0MtcxZE86NPu1NkKXXERhU9nNKECgs5S/zNWAW5jDOWhQYkL31wZ
+ 7TXWf0vFBnOnKD0i19wPkhvAktWHcFCpwY7/W7pDuroLobTIBF31nse0m5g3ZwKP6xoGVdOLalu
+ uvSyycHUKww0pkYpqB6SzhTzxrgqOdlN/jny6P56j6CS92HTF/rhjYGAbX8kImDtfT5bS7Vb0fl
+ mCVpbzSlde7T61rX+88TiMPcyq0g2oGZHEftUSxbmoUKLmi+JliPQiEI4IiHf9/UmFNKnHLho2r
+ m5LfFAn+TdvRirQVHg6ngfQXL0x9OMojxcDnaauWn7S+4uDIsRa/RzI6NxJeQIK2BYpZ2zktwjw
+ YpGaX07gP8OoY2fvaN51Z3+oOuunss=
+X-Received: by 2002:a05:7022:1588:b0:147:5149:d108 with SMTP id
+ a92af1059eb24-1475149db52mr8939208c88.43.1790572879456; 
+ Sun, 27 Sep 2026 22:21:19 -0700 (PDT)
 Received: from WIN-BH9M8FJACR9 ([103.94.185.75])
  by smtp.googlemail.com with ESMTPSA id
- a92af1059eb24-146bb6551d9sm14726248c88.9.2026.09.27.22.21.43
+ a92af1059eb24-146bb6551d9sm14726248c88.9.2026.09.27.22.21.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 27 Sep 2026 22:21:49 -0700 (PDT)
+ Sun, 27 Sep 2026 22:21:18 -0700 (PDT)
 From: Yonggang Luo <luoyonggang@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: Helge Deller <deller@gmx.de>, Harsh Prateek Bora <harshpb@linux.ibm.com>,
@@ -96,16 +96,16 @@ Cc: Helge Deller <deller@gmx.de>, Harsh Prateek Bora <harshpb@linux.ibm.com>,
  Michael Rolnik <mrolnik@gmail.com>,
  Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
  Paolo Bonzini <pbonzini@redhat.com>, qemu-s390x@nongnu.org
-Subject: [PATCH v2 06/24] target/sh4: name guest trap numbers SH4_EXCP_*
-Date: Mon, 28 Sep 2026 13:20:32 +0800
-Message-ID: <20260928052051.251-7-luoyonggang@gmail.com>
+Subject: [PATCH v2 02/24] accel/tcg: add cpu_loop_exit_excp
+Date: Mon, 28 Sep 2026 13:20:28 +0800
+Message-ID: <20260928052051.251-3-luoyonggang@gmail.com>
 X-Mailer: git-send-email 2.52.0.windows.1
 In-Reply-To: <20260928052051.251-1-luoyonggang@gmail.com>
 References: <20260928052051.251-1-luoyonggang@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:38::10;
- envelope-from=luoyonggang@gmail.com; helo=mail-dl2-x10.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:38::2b;
+ envelope-from=luoyonggang@gmail.com; helo=mail-dl2-x2b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -127,46 +127,56 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Add SH4_EXCP_* in cpu.h for the guest trap numbers stored in
-cs->exception_index.
+Add cpu_loop_exit_excp next to cpu_loop_exit_restore. Set
+cpu->exception_index, then restore and exit the current TB the same
+way as cpu_loop_exit_restore.
 
 Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
 ---
- target/sh4/cpu.h | 21 +++++++++++++++++++++
- 1 file changed, 21 insertions(+)
+ accel/tcg/cpu-exec-common.c  |  6 ++++++
+ include/accel/tcg/cpu-loop.h | 12 ++++++++++++
+ 2 files changed, 18 insertions(+)
 
-diff --git a/target/sh4/cpu.h b/target/sh4/cpu.h
-index 6984bb462fb..a1e9049b7be 100644
---- a/target/sh4/cpu.h
-+++ b/target/sh4/cpu.h
-@@ -135,6 +135,27 @@ typedef struct memory_content {
-     struct memory_content *next;
- } memory_content;
+diff --git a/accel/tcg/cpu-exec-common.c b/accel/tcg/cpu-exec-common.c
+index d20cece1c5f..31fed8e497f 100644
+--- a/accel/tcg/cpu-exec-common.c
++++ b/accel/tcg/cpu-exec-common.c
+@@ -118,6 +118,12 @@ void cpu_loop_exit_restore(CPUState *cpu, uintptr_t pc)
+     cpu_loop_exit(cpu);
+ }
  
-+/* Guest trap numbers. */
-+enum {
-+    SH4_EXCP_RESET = 0x000,
-+    SH4_EXCP_MANUAL_RESET = 0x020,
-+    SH4_EXCP_TLB_MISS = 0x040,
-+    SH4_EXCP_DTLB_MISS_WRITE = 0x060,
-+    SH4_EXCP_INITIAL_PAGE_WRITE = 0x080,
-+    SH4_EXCP_TLB_VIOLATION = 0x0a0,
-+    SH4_EXCP_DTLB_VIOLATION_WRITE = 0x0c0,
-+    SH4_EXCP_ADDR_ERROR = 0x0e0,
-+    SH4_EXCP_DATA_WRITE = 0x100,
-+    SH4_EXCP_FPU = 0x120,
-+    SH4_EXCP_TLB_MULTIPLE = 0x140,
-+    SH4_EXCP_TRAPA = 0x160,
-+    SH4_EXCP_ILLEGAL_INSTRUCTION = 0x180,
-+    SH4_EXCP_SLOT_ILLEGAL_INSTRUCTION = 0x1a0,
-+    SH4_EXCP_USER_BREAK = 0x1e0,
-+    SH4_EXCP_FPU_DISABLE = 0x800,
-+    SH4_EXCP_SLOT_FPU_DISABLE = 0x820,
-+};
++void cpu_loop_exit_excp(CPUState *cpu, int exception_index, uintptr_t pc)
++{
++    cpu->exception_index = exception_index;
++    cpu_loop_exit_restore(cpu, pc);
++}
 +
- typedef struct CPUArchState {
-     uint32_t flags;             /* general execution flags */
-     uint32_t gregs[24];         /* general registers */
+ void cpu_loop_exit_atomic(CPUState *cpu, uintptr_t pc)
+ {
+     /* Prevent looping if already executing in a serial context. */
+diff --git a/include/accel/tcg/cpu-loop.h b/include/accel/tcg/cpu-loop.h
+index f4d38bc2bca..856091020f2 100644
+--- a/include/accel/tcg/cpu-loop.h
++++ b/include/accel/tcg/cpu-loop.h
+@@ -65,6 +65,18 @@ G_NORETURN void cpu_loop_exit_noexc(CPUState *cpu);
+ G_NORETURN void cpu_loop_exit_restore(CPUState *cpu, uintptr_t host_pc);
+ G_NORETURN void cpu_loop_exit_atomic(CPUState *cpu, uintptr_t host_pc);
+ 
++/**
++ * cpu_loop_exit_excp:
++ * @cpu: the cpu context
++ * @exception_index: EXCP_* or target trap number
++ * @host_pc: the host pc within the translation
++ *
++ * Set cpu->exception_index and exit the current TB, restoring
++ * guest state from @host_pc the same way as cpu_loop_exit_restore.
++ */
++G_NORETURN void cpu_loop_exit_excp(CPUState *cpu, int exception_index,
++                                   uintptr_t host_pc);
++
+ /**
+  * cpu_loop_exit:
+  * @cpu: the cpu context
 -- 
 2.52.0.windows.1
 
