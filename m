@@ -4,110 +4,152 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BAB98CA5FA6
-	for <qemu-riscv@archiver.kernel.org>; Mon, 28 Sep 2026 12:12:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A68B5CA5FA2
+	for <qemu-riscv@archiver.kernel.org>; Mon, 28 Sep 2026 12:35:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xBACP-0002u6-SX; Mon, 28 Sep 2026 08:11:13 -0400
+	id 1xBAZ7-0005qC-JO; Mon, 28 Sep 2026 08:34:41 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <stefan260699@gmail.com>)
- id 1xB4W8-0005Lm-OO
- for qemu-riscv@nongnu.org; Mon, 28 Sep 2026 02:07:14 -0400
-Received: from mail-wr2-f35.google.com ([74.125.225.99])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <stefan260699@gmail.com>)
- id 1xB4W5-0004Pb-EH
- for qemu-riscv@nongnu.org; Mon, 28 Sep 2026 02:07:12 -0400
-Received: by mail-wr2-f35.google.com with SMTP id
- ffacd0b85a97d-4888129c46eso1276368f8f.1
- for <qemu-riscv@nongnu.org>; Sun, 27 Sep 2026 23:07:09 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790575628; x=1791180428;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=+pW1EFE25rYVVX/ykHFItI/J/UlMh+qjOL7y5z0hrqM=;
- b=B7h47Kjul7PsT27RLp86We4qmlY0DgoIY1jjPJSU3CyONK0qZLx07S/Vcftk8hXW5q
- fna3LhJbuQ5yB9/eerBREZVZC9EOx99VnUZi36nv0qINviBO/FtZMXe8OhA9qG0R/hzi
- QXYQMd96ZPEoNp9LsCFdzY58HwuAs4Wv7X5WBgCmkbdAY3xQrROBZ/d6wfe4Nmxek/wO
- q5a7kD+2J+ssVt6u441bVU/yAy4FBDDMmRd5iu5lX7DRSWOGYdSF7CnLHyHL/bI2Yrhe
- 7mrN22/1/BIkR3opWOV0X8GhwHzqWKHB2l4VDPSRXjWmO1DyYqWOeRjRMPQtCRp87Bhy
- 3g2w==
-X-Forwarded-Encrypted: i=1;
- AKwUvBznlevfRLq+j2JgDs6UyEq4LgwiAvTvkR8ojgTaluUWO7TrfwgnWLTRVg2WFQReWnDN2vakJPIUElqc@nongnu.org
-X-Gm-Message-State: AFuF++lrjZJ7cJJBJV3E8I9m/1hjvi3D/aqgUeEvycvf8t4z/M/bqU4n
- 7wn2BNWWXjSkeE21vMG2+8rQj+m2am6vVmiRIaAwbDC4vz6kM11U1dor
-X-Gm-Gg: AYBFou2TRVjeF4SCq1N+2OxUl3J/RyRyppjIbGe/9x3wJiHjfzHO2D6VGYBOKw+qkX/
- AicPQnuxqge3zfFHiy4lklgtrMefylI4RvtCi72TZUU2s8PrQTRWJuilb1rerOVIr1mNqCS1CDI
- W4gqd1t7l0+x6TLo4/WYLBVGKjSiLSsWT38xdQ1KaI3NjOieE3IcJgyir5Sm24jzh+Rq2ZSYICO
- rfEoDVTHfhU23DsucZX9qSGzSf2ETChOCOMtJLu8tfOlN13Q+GyujiejT8dp/Ch9ThCZtYbVzB0
- 2bx+KtQLNhTsCb10pItNC+C90XoV1R3BcyviWP5WRiGZc1W4z7U4rGjbcwzoYiizEaG5Vdd3WT9
- FdXuANe7bkpT+7ET2XOug6qkPy7EX5B14ZrUBESIoS4pn38A+GlshsXbsNYxZT39MKO84zLw9HN
- NCC/PVBw1Y91J+nzUtfjUNYE3HlvbWUFkFaloPe+zNe27Xdv8wOOkI6KgJFiTY1QRapoUzJ1fAZ
- vHryClzgz011pDjLnuIVMKPoeTk
-X-Received: by 2002:a05:600c:3494:b0:49f:ff73:9971 with SMTP id
- 5b1f17b1804b1-49fff7399f4mr63284515e9.18.1790575627904; 
- Sun, 27 Sep 2026 23:07:07 -0700 (PDT)
-Received: from mac.fritz.box ([2a05:fa40:300:1a00:d105:6a41:99ee:cbff])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a008f7f1c2sm1325775e9.1.2026.09.27.23.07.07
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 27 Sep 2026 23:07:07 -0700 (PDT)
-Date: Mon, 28 Sep 2026 08:06:39 +0200
-Subject: [PATCH 4/4] hw/riscv/virt: Limit interrupt identities to what KVM
- AIA supports
+ (Exim 4.90_1) (envelope-from <nutty.liu@hotmail.com>)
+ id 1xBAYs-0005ma-Hh; Mon, 28 Sep 2026 08:34:27 -0400
+Received: from mail-koreacentralazolkn190130003.outbound.protection.outlook.com
+ ([2a01:111:f403:d40f::3] helo=SEYPR02CU001.outbound.protection.outlook.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <nutty.liu@hotmail.com>)
+ id 1xBAYp-00011K-N3; Mon, 28 Sep 2026 08:34:25 -0400
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=veO9J2ykLbmkbbxkUMSNDmuu8klQqizdf5mPo3zWHOd8oORn5WQhkIXln4ty3BnpLmUxpXeqhOhr/yQ1hfTcpcssaTMLgHuIyOogoS1SiHpwFI1AtzPM4EvADlNfw8G5R66VcKcCG1zz51c6aeY5Ud5biydezJSbVP2Rab0JFgA3jRH9pK0cWestHZS4duCx+0mK2l6AnueUqrVUGKx59bA3Fj+Vm41X8KJsEBG1MPxGRbBjt1nMVhO2oQDqK/rYhCTwLVEYIHQIWpbZa59p3H1mIk6WAeniq6s4VW0hhyGIViuIORr9AXsFUuUgIM6jJAeL3drMzGnTJzV0bZxkcA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=uHYwxWO54h0ZM42s25isGTMwTeD4/o19qJ2K77fZotg=;
+ b=VWe+a1Wf/V24VJy0hDXdaITiziWarTP2NwHfD77dWoqBkPWNigoNgj9B1JnfitOieoOJ/inXFWoRWk34l7StRk1wP+j0f67c8qtHAE0TjJmptS17RwJF55DoGgMiuEpMFOh5L3xCOOvWjlkfTPj8nFEyfrvRQCHWg2PBh5MNg8IL0fMcUnQujIwloTucu6vAJ73v6LNYDi/epY+bgoy1z2kBBxSd5ibjPQJv99Vjo4XP60qD+dZPYr/lJlOAjAyZOw8cIz4bv9jsoVCkZJNu1zDV+bzBPF+jYo864i2TIQTTdb1LdoLkAgvhYwBf6SCkDakfccuSsdPy2ZVm/RHTRQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hotmail.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=uHYwxWO54h0ZM42s25isGTMwTeD4/o19qJ2K77fZotg=;
+ b=GgLVXSwZvUHm281g+X2mRSECyZ3r9pdukZ8taE8jHZtg9TzRTkVzmHdxUJeTF/K3dVQeEYW8RKCQoK3trAWkKB37tvFVVK/VbQ68NVeDEaPqQjzPFVx3zT5z+BgWF9VcR0mo0KDtQZzCppu596pjCu2tlLfQYEbVz/hjP0BGp4AYlCFmFk9QU8j476lVgF7IC+/JPCXZhwN+BaIH7PPQ+7ICACqPnjgy4IZdxpzI+pgYP4AKx5NXkNVU3q51YwNxwobl/MwW/mY4xCEIbjWuOQSFOmB7fJ03qDGQWDXGDFeOBjKiF4cpdppIcTrQmAQCX8R60lZEt0XXTEchUDsBqg==
+Received: from SE3PR04MB8922.apcprd04.prod.outlook.com (2603:1096:101:2e9::7)
+ by SI4PR04MB9355.apcprd04.prod.outlook.com (2603:1096:4:29b::18) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.451.23; Mon, 28 Sep
+ 2026 12:34:14 +0000
+Received: from SE3PR04MB8922.apcprd04.prod.outlook.com
+ ([fe80::3450:f139:5238:8f58]) by SE3PR04MB8922.apcprd04.prod.outlook.com
+ ([fe80::3450:f139:5238:8f58%5]) with mapi id 15.21.0451.022; Mon, 28 Sep 2026
+ 12:34:14 +0000
+Message-ID: <SE3PR04MB89225BDC90FFD239745421B7F38D2@SE3PR04MB8922.apcprd04.prod.outlook.com>
+Date: Mon, 28 Sep 2026 20:34:06 +0800
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v9 3/7] target/riscv: add dret instruction
+To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
+ Chao Liu <chao.liu.zevorn@gmail.com>, Tao Tang <tangtao1634@phytium.com.cn>,
+ Palmer Dabbelt <palmer@dabbelt.com>
+References: <20260909144841.1766921-1-daniel.barboza@oss.qualcomm.com>
+ <20260909144841.1766921-4-daniel.barboza@oss.qualcomm.com>
+Content-Language: en-US
+From: "Nutty.Liu" <nutty.liu@hotmail.com>
+In-Reply-To: <20260909144841.1766921-4-daniel.barboza@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: TP0P295CA0007.TWNP295.PROD.OUTLOOK.COM (2603:1096:910:2::7)
+ To SE3PR04MB8922.apcprd04.prod.outlook.com
+ (2603:1096:101:2e9::7)
+X-Microsoft-Original-Message-ID: <927ecc69-5731-4267-a173-4879737135ad@hotmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260928-spacemit-k3-v1-4-8c57d0596b87@butz.st>
-References: <20260928-spacemit-k3-v1-0-8c57d0596b87@butz.st>
-In-Reply-To: <20260928-spacemit-k3-v1-0-8c57d0596b87@butz.st>
-To: qemu-devel@nongnu.org
-Cc: Sunil V L <sunilvl@ventanamicro.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, 
- Weiwei Li <liwei1518@gmail.com>, 
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org, 
- Stefan Butz <mail@butz.st>
-X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=openssh-sha256; t=1790575623; l=3577;
- i=mail@butz.st; h=from:subject:message-id;
- bh=zco9IcETS7x9MDnAKzoLsHBGgCpQ+QrZXh6rm0qqZlc=;
- b=U1NIU0lHAAAAAQAAAZcAAAAHc3NoLXJzYQAAAAMBAAEAAAGBAOJW8yHG2FdKcC8jiWoQyd2Z6
- SNHh+aJB0RLkH7BFF7Yy7MymfE5UJE2mmoucIa3HiNQdlVZjgqLY7wph/VSM4kniDO57IG9Q9jN
- x96oOAzzWWJEVrh8vlxRGXatNy8ywcO9WExvzLop5s2ddP08f0Wrzn/55mpqoLJyoKaIbk10kxz
- JW1GONHT8nsNvBpVB2lnzA2jhv7DC79UlHzA98+sp8eX6kmUips+9LpTJLDeVna8f/vwkU708PI
- Qxt/5nhmFXKj/su/CMFivCLHckdmMOem/4UNoTyRcAbcoFQ9WWyYHvAD/bRuYZVEA2hfoBEQVu2
- FGHdG/OimvbT/GseVmWjiw7WV9HUOJJawVmfoTEJynX9BbV+VNMKZVpW5YaAaps6/KOC7V2bM7P
- hvORUmj3b8eUr418GYC3M4rLJtrj6Vu2cUyTV9Q5dvq9Lg2TIj/jpbEWpOqn2FSGkQcLvcDksNk
- jOSGmdG4h+OJ3vbGrva5UCJF/KIyuV4ozlSU7awAAAAZwYXRhdHQAAAAAAAAABnNoYTUxMgAAAZ
- QAAAAMcnNhLXNoYTItNTEyAAABgCvOxGyd1iT/JPJIDrH6VyKGSxzkgZ7WMRUVlXj9yKL5Wx3JI
- UsaxcuYaGcl/GjEUbVSp48bD7dqN1jAbjEsqURvO1MVxK8+vvfn3o6nBe/8UQAShKJ6aKuI1arz
- 8BjuL//smisUCq8m2q42fkFAiE/5bPDzMzIkkO17dMGwXMWGF1k2c9fqCbIsCZPSqkW3GvSiDFb
- wLLOBzqhp/IoC1H5HWmLiMUUW5fdA8kaQFDF6ChoXP8ndkiQA8C+lNP+PLAxnfHm9PwHILgClx7
- Zvnck0IX+VVq5tm3JJjxUXYktLxrZWO7JvVPGAGKtEO/Pn8d1EgJweae/GPGzmDJtXTdldxgig1
- uZWgSrD+WGj/rJUAvZq68cXz7JwkJyLnPmMgXF9/q+6DbZ+xuZ5ETfFytEO/vZNS+bf9OSiiH9y
- bhPp94+qhnTxqi72wnggHmaxZ1dbe/xtZq6Dn2tExsftxiZI2Q77yeHPOKyrVG10RJ3icmonRui
- 9xzo/WXym3QiWGQ==
-X-Developer-Key: i=mail@butz.st; a=openssh;
- fpr=SHA256:jcZFBs39daoQJIontO/rJaVachWp/oqTbhNpQk8+REQ
-Received-SPF: pass client-ip=74.125.225.99;
- envelope-from=stefan260699@gmail.com; helo=mail-wr2-f35.google.com
-X-Spam_score_int: -13
-X-Spam_score: -1.4
-X-Spam_bar: -
-X-Spam_report: (-1.4 / 5.0 requ) BAYES_00=-1.9, FREEMAIL_ENVFROM_END_DIGIT=0.25,
- FREEMAIL_FORGED_FROMDOMAIN=0.001, FREEMAIL_FROM=0.001,
- HEADER_FROM_DIFFERENT_DOMAINS=0.25, RCVD_IN_DNSWL_NONE=-0.0001,
- RCVD_IN_MSPIKE_H2=-0.01, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SE3PR04MB8922:EE_|SI4PR04MB9355:EE_
+X-MS-Office365-Filtering-Correlation-Id: 6a849c00-7cf7-40e7-5271-08df1d5ccd96
+X-Microsoft-Antispam: BCL:0;
+ ARA:14566002|6090799003|15080799012|41001999006|55001999006|19101099003|5072599009|23021999003|22091999003|24121999003|25010399006|8060799015|19110799012|4140399003|51005399006|440099028|3412199025|12091999003|40105399003|2607281247196008|10035399007;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?UDU0Qnd0MVdrQXpKM1o5UGRqeFFGcE5ZaEw1TnZnNzFnTmlyRHlvdFlMbE1L?=
+ =?utf-8?B?RGF3ejZSa0RlY0NqU09XTXVWRVBGYXp4YnEvSFh0eVFPN2NmZkk2b3FYWUNv?=
+ =?utf-8?B?M1BKcHpQNHpUdHp2QUlyWFp4WkZsbkRxemJ3di9WKzR5SmY5TEEyV3hKZkpn?=
+ =?utf-8?B?WnNwSURaSVZCNnA2aU16S2psUk8rNlQwYTJ1SWFPODUrMGhkbUFsNUk4VkZW?=
+ =?utf-8?B?eXdqT0J0am9XZDdWclpjMnVreEZuUkhLa0xFdml6Zm5KemlUY0crb04zSlBK?=
+ =?utf-8?B?a0gxMmhTMkg3RlB6VkVvclZ6SmF3R1BhRHJVbkw0RGp5UjE0dFhPUUp4QTll?=
+ =?utf-8?B?ekkvNmhMcGt4bUdzRGlXMmlLTCtPT3RESHhMWXo1MmdpZjhDem50bkV0cmho?=
+ =?utf-8?B?ZzNMQ2RtZGhNMEJ1cU5GUXZjVmtraldkTXFvZzVrNTNtdjQ5Q3B2OCs4bjFr?=
+ =?utf-8?B?MnNORSsxQWI3Tk8xYUpXelMyL2FHWm1LN3F4bzVCR1pybnBCTVNpWjFWenN0?=
+ =?utf-8?B?aW5YclZzWGdrYWYrQzlyMXlrTHdBdzlzTml6UWZQS29tVk9oMlRKcm9LWWFz?=
+ =?utf-8?B?Qjl1VGF6UWNzUldseVRSYkFsV1dmRmtpZGk2ME1xTmhDTk9WU1Z3Z254eVd5?=
+ =?utf-8?B?bEJpODliQmtuR2JVNGp1aEx0SVJLM1YrUVVUaStIdm9EYzYvSjV5K1JtaFkr?=
+ =?utf-8?B?R2QxZzUzZ202ZEpJZFoyd2tJOEQrMUdyQ2xpVmVGbzBZRTBmajRqNmVxN1Z2?=
+ =?utf-8?B?QUt2OS9EWEMvU28wNFU5Yk1DbVBQbFJTd09xTjQ5dzl1YnBWZzR4NC9FY3Ex?=
+ =?utf-8?B?SndwNkRtOG1WMWMxamhjMEVGeHJ2V012RTQ3cFRMc3k4V3hzWEFWUHZRNHNl?=
+ =?utf-8?B?SDB5RFZuMFpTTDlsNG9hcFJYZUxpUkQxZWoxNVRZcmowenpMaWp2ZzNhTm9k?=
+ =?utf-8?B?MW9TdSsyTGM4WTc3YVlRVmU5aStPYnZGWjcxTGtNK3JEaDBSUzlqWlhKK3lV?=
+ =?utf-8?B?VVdTa2pqZytTLzRnUFU4bGxtcHdoSlA2cVpNaCs5VkxrT3NDbWZocVhLUFRi?=
+ =?utf-8?B?bDZMZjBWM2JtS1pNWTNla0FnNUFrTHF1ZXJXd0x3NzBKemZEV0p6UUxEMmV4?=
+ =?utf-8?B?bkZ5MlZFNHE2eUZnZWlzTlhSZXRzYThBTVRVYlF2ZWVoSWdEeElzV2lOZEJ6?=
+ =?utf-8?B?S055NW9BdXFRQVNjT0ExaFRZWU5TK2ZhU1ZhMjFRUU1wZ1Ztb0UvS0N1RHp2?=
+ =?utf-8?B?Y1A4SnpJUHo0WmloRjArRVVBb2tJYjdHQ1NmdGx6em9sZHpCTy9iS2htTFdE?=
+ =?utf-8?B?eTlYaExKd0hKZmhYUUlPaGZtckxqOG9UQjU2dGNuNDhyWEFmSU9CblEvSlRT?=
+ =?utf-8?B?N0VVUWlZaGZoT0xKQlgrdWx1ZDZRTzR0OG5QRWZ1Z1BmZ1hwMFJxWDdZS1Jj?=
+ =?utf-8?B?OW8yMGhTOGFMNDMza2J2K0tkbHVTS0YwRlE0MUpjOEpoMzcrcjVpMm1iVExv?=
+ =?utf-8?B?V2JmT1JxeUR6bG8zalhDb0g5YzlROVFRcHBKUDl5dzJCcktzaWhqeUplWCtq?=
+ =?utf-8?Q?fm9NW4UOwF8GJS03rr88OE+RE=3D?=
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?dWxMK2RSOVVCTjZnRTZCalArc050Y1NHaS9Gb29UaTNUYlo3Y25kaXhiaGNm?=
+ =?utf-8?B?WXhGMXJET01sQVFJYjNtb2lQZHFpMFAvRG42dEZyRVQwRmNXQXRLL0ZkYzFk?=
+ =?utf-8?B?Zm1PdC80RFRnY2x3dzZCdGNvWXFPTlBVWFBxWGUzQWdHejJjR3NhaG1YVG1m?=
+ =?utf-8?B?MWhRSDFLUDg4aDlobCtSWGxVd0NUcnBVVmR3YmtkekczTFJiZGNLMWpQSHJT?=
+ =?utf-8?B?d0FxbzJ6MHRZTUV1aGd2Z0RZWS9ZYUNDZ1gvajlDQUdteU9iNVFJL09vZ21O?=
+ =?utf-8?B?TGJUYWkvSHNLTzYyUXFWM0lKTE40U0k3TFpYcWhENnFjNGpMUnlzd2NiZkZt?=
+ =?utf-8?B?aXR4d1E3RUwvK3gxN0xEU2wzUjFJdndoV1RhR3FRTS9BbVFlUWU4QnVYcWxn?=
+ =?utf-8?B?VDIwMUJMUXIzVnFCRGFLYnB1Vm1XbHZQbHMvSE0rTUx1RVRDRHpQN0FEdGk0?=
+ =?utf-8?B?NmdGVjZxTDBYSnFZRVI1a28xUFpTVVp5SDJGR3JCUjIxc1Z1UDVGOFFtUE5V?=
+ =?utf-8?B?WDM0VUp6SHFaK1M3MWNwMENsbHN1cWN1S0VWdUplSkp5b0tjM1BWSDB3Rkxx?=
+ =?utf-8?B?anh0Qjd2SEl1YWhIRTVJQWtKMlF2S2dtV3ZuRkNPa2tBY0s3bDFuOGxjK1pt?=
+ =?utf-8?B?cFhLaE1KNjA0eWdta0FYaW1GZ2M4b3AxVnpIZ0JRMlgwbkFMWXh6Ry9nMFRK?=
+ =?utf-8?B?ZEgvMlJCUENEemFQaVlDWEw3RUlFSEFIRlE2Nm9YUHpJL1ZPUmxYZ2diZCsx?=
+ =?utf-8?B?YXhrRS92Y0toRUlGUnN5SnBEejcxeWNVU2Z1czcrNDI2K3FGVWFyS1h2eXpn?=
+ =?utf-8?B?WFFLVHo4K1oxZzNQUUNsbUFOby8xNFBtV1BSSk1qMDlOdHVNV2szaVB5QjE3?=
+ =?utf-8?B?VW5hOWpvejkxY3RRMEtHd2hqQU5uYkI4aDkxVXNPaTJaMXMrM1lYNlQ1dlZz?=
+ =?utf-8?B?VWRLbDliVzZWcTllblY1N1gzbWtPamtIaUlZc0VZZHJIRVZIMEJ1VnlEQUQ0?=
+ =?utf-8?B?V0ovSDRrSzVCU3BkUyttOUlEYk5XSHdMUDRVZWxGNndrWUswTlYvMkNMSnZB?=
+ =?utf-8?B?dnU1UHZqQTA3ZmQ3RVdhdHZxaGd5S09HRFdYRTRGbmVFZitjaCt3TXNUeW5i?=
+ =?utf-8?B?ZzdlS3dIMzZvWUlCUmVTbXpqcDVNSGlEam9PME1XNDZ0T0poWGVJUW9DYk14?=
+ =?utf-8?B?elZ5azVveFNkbE01cXVKUStyS3VadlBwUDlVei8ybEtpQXNWNDZXVDg0MHhi?=
+ =?utf-8?B?bEhtUUxsejVVbndUajBzL0lhS0J2bFVwOFBudlA4NVh4UWRxZGdUYjkxRkQx?=
+ =?utf-8?B?UU5YcDM5VzUxTENRVk1Nb2c4T0VQbnhtRmt3Sm9SMS83dEFKZlk1ZEx3ZGsz?=
+ =?utf-8?B?d00zSlVjR2NMSGdDZjJ0Zk9Ka0xpbU4wMlkrZUVYY2xKS29jQkJRUXZYN3dp?=
+ =?utf-8?B?OWZGSkptbkNiaWxBREU4elVCVXlFZDk1dHUxeXY1czNFT1U3b0t5SVpkSzZv?=
+ =?utf-8?B?Q09QZkk5QzA4S1V2dnZiZTZIc3hyb3d0MDVSWUxES3ZFZ0k5UTB1OCtJcys3?=
+ =?utf-8?B?VnIxbTRNV3hFQWVQeUhKK2ZlUGd1RTdLN2ZlWDF1d0dBV250ZlpWZFlaWWdM?=
+ =?utf-8?B?Y2ptM2dIcmt1cXBNNm9jWSs3TW5jRU00MEpVRU9obFJocVA2YWZPU3VxbWd3?=
+ =?utf-8?B?OTVVRWozNzRHRVpGWERncWZKLzdWRTY2RWZJV3hVbis1Tnh6M2JvZjdWcTI1?=
+ =?utf-8?B?TURyR052aDdaeFdWcjRZc3hFYXFNSjBhN1NTbkZvOVp2TXVBaWdhRUVyZlJH?=
+ =?utf-8?B?VW1WM0dLS2NNNS9VQjludHR2TG9zM2k1OFY2NkxrY1VtYzB3WFc0cWxmU3U1?=
+ =?utf-8?Q?upX7uqHSDBREk?=
+X-OriginatorOrg: sct-15-20-9412-4-msonline-outlook-c3e7a.templateTenant
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6a849c00-7cf7-40e7-5271-08df1d5ccd96
+X-MS-Exchange-CrossTenant-AuthSource: SE3PR04MB8922.apcprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Sep 2026 12:34:14.2260 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SI4PR04MB9355
+Received-SPF: pass client-ip=2a01:111:f403:d40f::3;
+ envelope-from=nutty.liu@hotmail.com;
+ helo=SEYPR02CU001.outbound.protection.outlook.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Mon, 28 Sep 2026 08:11:08 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -119,115 +161,117 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Reply-to:  Stefan Butz <mail@butz.st>
-From:  Stefan Butz via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The number of interrupt identities supported by the host's KVM AIA
-is limited. On Spacemit K3 and Tenstorrent Atlantis to 63.
-virt machine alwayas aks for 255 identities, so it fails if on those
-platforms.
 
-Read and apply host limit from KVM AIA device and apply.
+On 9/9/2026 10:48 PM, Daniel Henrique Barboza wrote:
+> From: Chao Liu <chao.liu.zevorn@gmail.com>
+>
+> RISC-V Debug Specification:
+> https://github.com/riscv/riscv-debug-spec/releases/tag/1.0
+>
+> Add DRET decode/translate and a helper to leave Debug Mode and return
+> to dpc. Executing DRET outside Debug Mode raises illegal instruction.
+>
+> Signed-off-by: Chao Liu <chao.liu.zevorn@gmail.com>
+> Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+> Tested-by: Tao Tang <tangtao1634@phytium.com.cn>
+> Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+> ---
+>   target/riscv/helper.h                          |  1 +
+>   target/riscv/insn32.decode                     |  1 +
+>   .../tcg/insn_trans/trans_privileged.c.inc      | 18 ++++++++++++++++++
+>   target/riscv/tcg/op_helper.c                   | 16 ++++++++++++++++
+>   4 files changed, 36 insertions(+)
+>
+> diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+> index 4fc2d3a155..b4c47d0738 100644
+> --- a/target/riscv/helper.h
+> +++ b/target/riscv/helper.h
+> @@ -132,6 +132,7 @@ DEF_HELPER_6(csrrw_i128, tl, env, int, tl, tl, tl, tl)
+>   #ifndef CONFIG_USER_ONLY
+>   DEF_HELPER_1(sret, tl, env)
+>   DEF_HELPER_1(mret, tl, env)
+> +DEF_HELPER_1(dret, tl, env)
+>   DEF_HELPER_1(mnret, tl, env)
+>   DEF_HELPER_1(ctr_clear, void, env)
+>   DEF_HELPER_1(wfi, void, env)
+> diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+> index aa02dae3c9..46b00411ff 100644
+> --- a/target/riscv/insn32.decode
+> +++ b/target/riscv/insn32.decode
+> @@ -118,6 +118,7 @@ sctrclr     000100000100     00000 000 00000 1110011
+>   uret        0000000    00010 00000 000 00000 1110011
+>   sret        0001000    00010 00000 000 00000 1110011
+>   mret        0011000    00010 00000 000 00000 1110011
+> +dret        0111101    10010 00000 000 00000 1110011
+>   wfi         0001000    00101 00000 000 00000 1110011
+>   sfence_vma  0001001    ..... ..... 000 00000 1110011 @sfence_vma
+>   
+> diff --git a/target/riscv/tcg/insn_trans/trans_privileged.c.inc b/target/riscv/tcg/insn_trans/trans_privileged.c.inc
+> index a8eaccef67..4e57901880 100644
+> --- a/target/riscv/tcg/insn_trans/trans_privileged.c.inc
+> +++ b/target/riscv/tcg/insn_trans/trans_privileged.c.inc
+> @@ -125,6 +125,24 @@ static bool trans_mret(DisasContext *ctx, arg_mret *a)
+>   #endif
+>   }
+>   
+> +static bool trans_dret(DisasContext *ctx, arg_dret *a)
+> +{
+> +#ifndef CONFIG_USER_ONLY
+> +    if (!ctx->cfg_ptr->ext_sdext) {
+> +        return false;
+> +    }
+> +    decode_save_opc(ctx, 0);
+> +    translator_io_start(&ctx->base);
+> +    gen_update_pc(ctx, 0);
+> +    gen_helper_dret(cpu_pc, tcg_env);
+> +    exit_tb(ctx); /* no chaining */
+> +    ctx->base.is_jmp = DISAS_NORETURN;
+> +    return true;
+> +#else
+> +    return false;
+> +#endif
+> +}
+> +
+>   static bool trans_mnret(DisasContext *ctx, arg_mnret *a)
+>   {
+>   #ifndef CONFIG_USER_ONLY
+> diff --git a/target/riscv/tcg/op_helper.c b/target/riscv/tcg/op_helper.c
+> index 3e94005d2b..54269efee1 100644
+> --- a/target/riscv/tcg/op_helper.c
+> +++ b/target/riscv/tcg/op_helper.c
+> @@ -473,6 +473,22 @@ target_ulong helper_mret(CPURISCVState *env)
+>       return retpc;
+>   }
+>   
+> +target_ulong helper_dret(CPURISCVState *env)
+> +{
+> +    uintptr_t ra = GETPC();
+> +#ifdef CONFIG_USER_ONLY
+> +    riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, ra);
+> +    return 0;
+> +#else
+> +    if (!riscv_cpu_cfg(env)->ext_sdext || !env->debug_mode) {
+> +        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, ra);
+> +    }
+> +    target_ulong retpc = env->dpc & get_xepc_mask(env);
+Seems it should be at the top of the function as below:
++#else
++    target_ulong retpc = env->dpc & get_xepc_mask(env);
 
-Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/4599
+Otherwise,
+Reviewed-by: Nutty Liu <nutty.liu@hotmail.com>
 
-Signed-off-by: Stefan Butz <mail@butz.st>
----
- hw/riscv/virt.c              | 12 +++++++++++-
- target/riscv/kvm/kvm-cpu.c   | 16 ++++++++++++++++
- target/riscv/kvm/kvm-stub.c  |  5 +++++
- target/riscv/kvm/kvm_riscv.h |  1 +
- 4 files changed, 33 insertions(+), 1 deletion(-)
-
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 28fa31d538..2af85ec5c3 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -78,6 +78,16 @@ static bool virt_use_emulated_aplic(RISCVVirtAIAType aia_type)
-     return riscv_use_emulated_aplic(msimode);
- }
- 
-+static void virt_kvm_aia_create(RISCVVirtState *s)
-+{
-+    kvm_riscv_aia_create();
-+
-+    s->num_msis = MIN(s->num_msis, kvm_riscv_aia_get_num_ids());
-+    if (!virt_use_emulated_aplic(s->aia_type)) {
-+        s->num_sources = MIN(s->num_sources, s->num_msis);
-+    }
-+}
-+
- static bool virt_aclint_allowed(void)
- {
-     return tcg_enabled() || qtest_enabled();
-@@ -734,7 +744,7 @@ static void virt_machine_init(MachineState *machine)
-     }
- 
-     if (kvm_enabled() && virt_use_kvm_aia_aplic_imsic(s->aia_type)) {
--        kvm_riscv_aia_create();
-+        virt_kvm_aia_create(s);
-     }
- 
-     /* Initialize sockets */
-diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-index 1098581e7a..0409af3255 100644
---- a/target/riscv/kvm/kvm-cpu.c
-+++ b/target/riscv/kvm/kvm-cpu.c
-@@ -1870,6 +1870,22 @@ void kvm_riscv_aia_create(void)
-     }
- }
- 
-+uint64_t kvm_riscv_aia_get_num_ids(void)
-+{
-+    uint64_t num_ids;
-+    int ret;
-+
-+    ret = kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_CONFIG,
-+                            KVM_DEV_RISCV_AIA_CONFIG_IDS,
-+                            &num_ids, false, NULL);
-+    if (ret < 0) {
-+        error_report("KVM AIA: failed to get number of msi");
-+        exit(1);
-+    }
-+
-+    return num_ids;
-+}
-+
- void kvm_riscv_aia_init(MachineState *machine, uint64_t group_shift,
-                         uint64_t aia_irq_num, uint64_t aia_msi_num,
-                         uint64_t aplic_base, uint64_t imsic_base,
-diff --git a/target/riscv/kvm/kvm-stub.c b/target/riscv/kvm/kvm-stub.c
-index 672f635b08..f5f5418b3c 100644
---- a/target/riscv/kvm/kvm-stub.c
-+++ b/target/riscv/kvm/kvm-stub.c
-@@ -14,6 +14,11 @@ void kvm_riscv_aia_create(void)
-     g_assert_not_reached();
- }
- 
-+uint64_t kvm_riscv_aia_get_num_ids(void)
-+{
-+    g_assert_not_reached();
-+}
-+
- void kvm_riscv_aia_init(MachineState *machine, uint64_t group_shift,
-                         uint64_t aia_irq_num, uint64_t aia_msi_num,
-                         uint64_t aplic_base, uint64_t imsic_base,
-diff --git a/target/riscv/kvm/kvm_riscv.h b/target/riscv/kvm/kvm_riscv.h
-index 532e42b0df..d8ae73fa1e 100644
---- a/target/riscv/kvm/kvm_riscv.h
-+++ b/target/riscv/kvm/kvm_riscv.h
-@@ -24,6 +24,7 @@
- void kvm_riscv_reset_vcpu(RISCVCPU *cpu);
- void kvm_riscv_set_irq(RISCVCPU *cpu, int irq, int level);
- void kvm_riscv_aia_create(void);
-+uint64_t kvm_riscv_aia_get_num_ids(void);
- void kvm_riscv_aia_init(MachineState *machine, uint64_t group_shift,
-                         uint64_t aia_irq_num, uint64_t aia_msi_num,
-                         uint64_t aplic_base, uint64_t imsic_base,
-
--- 
-Git-157)
-
+Thanks,
+Nutty
+> +    riscv_cpu_leave_debug_mode(env);
+> +    return retpc;
+> +#endif
+> +}
+> +
+>   target_ulong helper_mnret(CPURISCVState *env)
+>   {
+>       target_ulong retpc = env->mnepc;
 
