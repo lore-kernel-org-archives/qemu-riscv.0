@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA2E6C9833E
-	for <qemu-riscv@archiver.kernel.org>; Mon, 28 Sep 2026 05:22:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 135B8C98328
+	for <qemu-riscv@archiver.kernel.org>; Mon, 28 Sep 2026 05:22:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xB3o5-0003QR-7m; Mon, 28 Sep 2026 01:21:41 -0400
+	id 1xB3oB-0003ZU-F6; Mon, 28 Sep 2026 01:21:47 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xB3nn-0003KK-KV
- for qemu-riscv@nongnu.org; Mon, 28 Sep 2026 01:21:26 -0400
-Received: from mail-dl2-x2b.google.com ([2607:f8b0:4864:38::2b])
+ id 1xB3o9-0003Yd-UK
+ for qemu-riscv@nongnu.org; Mon, 28 Sep 2026 01:21:45 -0400
+Received: from mail-dl2-x0f.google.com ([2607:f8b0:4864:38::f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xB3nl-0007ln-02
- for qemu-riscv@nongnu.org; Mon, 28 Sep 2026 01:21:23 -0400
-Received: by mail-dl2-x2b.google.com with SMTP id
- a92af1059eb24-1438cb9b3a3so1408913c88.2
- for <qemu-riscv@nongnu.org>; Sun, 27 Sep 2026 22:21:20 -0700 (PDT)
+ id 1xB3o8-0007os-0Z
+ for qemu-riscv@nongnu.org; Mon, 28 Sep 2026 01:21:45 -0400
+Received: by mail-dl2-x0f.google.com with SMTP id
+ a92af1059eb24-142dd04edb5so4395498c88.2
+ for <qemu-riscv@nongnu.org>; Sun, 27 Sep 2026 22:21:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1790572880; x=1791177680; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1790572903; x=1791177703; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=Q9Wafx0aXX2Ni1bBJzRLIBOxNOLdNJdd9ggXabMSVEY=;
- b=BnV6i6kFt8Y+JqHVKVHuMvivV4ql/mOt78oHBBtf3DNHyGfbm8UoTjoTd8MYIU4wuF
- PLs5kI6BTnEGKgK+9uuqzu5El39S5OUUw2C4VYYipTEpvaWnk8svqnS+UvFXXB8TTldB
- +2k7H07vkixAlSemFjmRSt+gxgh+QoCmHuNWyLIr5HpneghpJ4kPWYkEq7nHxXo4xxOX
- J4Fk3Ly47pG5Vd/AgoDDgtC9ePWNSiGsTjQoYiABQSSXmIfkpngno0foMLi5comdOofl
- dzqeKdvcPg3H4koo21L8U6AaQbLkuf44zdkNJVQuPe4nRhNsRjVmn715CcALCh704+8u
- 6GXg==
+ bh=DgWmlss43hYhAX+MCcVQvB7s8zaZj6PJ12LbT80sSKA=;
+ b=iFmxfMH+jupD1tVnQQTH+iM+7t+KiK4MCxqB9ja2jIgvIZFgyf+BxTytlPu8UT+D/E
+ avl2yw3bJc0rExzoy1R9gABc+T+de1Hye2pWBYLYvjFvhIDTXPqiBjRMyrsbZnwmjuBq
+ WFRG6Z1MobdAwMMMhd7sFA1g25fcZxWpUPayoi99Iqxqu8R2HzAeRFR0AtRW/zdYEbi+
+ mdvvhFb/2+MSTCtBT70GsTb2Oq9MwaoJIaCCYpz+4wabeYl8HDuKn5MAtJf7lhrofQiz
+ T69oG04WfQ8Djlh8j+T6yiJZAetlrZSu8AlPGVyC6qZxjdfXuR7KZx49xdptJi/ouFLO
+ S3aQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790572880; x=1791177680;
+ d=1e100.net; s=20260707; t=1790572903; x=1791177703;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=Q9Wafx0aXX2Ni1bBJzRLIBOxNOLdNJdd9ggXabMSVEY=;
- b=eGAXPxv14vmKB11lJqHEdVWgASi0GXXwxKS+8X8Cku4/Ysi5p46aXJUkGd4H75obBj
- 7LL+QyVETJnCtUoDS4tcBNg2/d4xpbLMnALIqVHd4bnggxoCLK++NAQXyjc9JBXIzS5I
- fGR523WQXFS3H6HW1kGyeivFB5o1gQ01SWGld/G51/96U9gg+ylM/2UzmMxf3yxl5mxm
- VClBnI/xrpuzzhcRIxGicF3J0tWNifbDbZ3SDMSJJ5+UppRI1tTDKfUouAN9BAErCpvX
- TlEQ8B6QKp3ngo4hR+xCGze+KCnZiLiLhAP5KjLk5mY9NwsqOrF0jRkVssCkg/i6wn2U
- Ca+A==
+ bh=DgWmlss43hYhAX+MCcVQvB7s8zaZj6PJ12LbT80sSKA=;
+ b=CYK5m8qElINVeRq8gHi6Oz3by/JimkEWt1X0IA/B45IGS20fi7RI0n4+8QrgTFBqnC
+ SZ5FFQtnGqx4cZo16d4CmbxCNJaw7SP8l32nL5ZvpxgEaXZAO12vLIlVlH5YfNRlpX0n
+ BD4AdZTnA6a6yX3zhLpbKE6qmWhryp8JSI+vEwBKJgbPOS9GwLy6bPGv1q0vXuEXLM/k
+ EnNqYHMVk2Lh1SSE2UY93N79tn5hT2u51MUc/dQX9PUsxgbnKFWqYJrPZp7tkWkOXLfz
+ RiLiXrXw1wXY9eJb/MfLCltHaSMttCqlKWRM4w9Bp0jUsZS/21kCxNELPkzCAydLNfXy
+ M+Eg==
 X-Forwarded-Encrypted: i=1;
- AKwUvByYYvf6YEec7YCqpvIM4LtfdjURPCnKINK0Ohjm48hFLaoQc3cvcM6r0VYAriNYLX5jS7i3ujzHmNM6@nongnu.org
-X-Gm-Message-State: AFuF++na9IVz4wwZbZwZfeRKGe1smP04bvTttwdHybzZvVooQEppgWF/
- AiCX1Q1BCNd+AWVtlxd3YO+ylIpNzFQIW8ijvVk7mQSCPsg1zN6Scv15
-X-Gm-Gg: AYBFou1kQjE13pJbzccd6776y9J9OxFtGBqqAwEK4IEmET942NYYW95IpTY2Tg2okoB
- 6MDAroi8hlF9KQJ4NgFVpTF7D+VVn1Kw6Ur4Qo8q6RRrp5BfMLNpbFFQE/K/AGlmtoMeJKMTnhu
- PY63txlOCI3/l1eN9H49A4l0MtcxZE86NPu1NkKXXERhU9nNKECgs5S/zNWAW5jDOWhQYkL31wZ
- 7TXWf0vFBnOnKD0i19wPkhvAktWHcFCpwY7/W7pDuroLobTIBF31nse0m5g3ZwKP6xoGVdOLalu
- uvSyycHUKww0pkYpqB6SzhTzxrgqOdlN/jny6P56j6CS92HTF/rhjYGAbX8kImDtfT5bS7Vb0fl
- mCVpbzSlde7T61rX+88TiMPcyq0g2oGZHEftUSxbmoUKLmi+JliPQiEI4IiHf9/UmFNKnHLho2r
- m5LfFAn+TdvRirQVHg6ngfQXL0x9OMojxcDnaauWn7S+4uDIsRa/RzI6NxJeQIK2BYpZ2zktwjw
- YpGaX07gP8OoY2fvaN51Z3+oOuunss=
-X-Received: by 2002:a05:7022:1588:b0:147:5149:d108 with SMTP id
- a92af1059eb24-1475149db52mr8939208c88.43.1790572879456; 
- Sun, 27 Sep 2026 22:21:19 -0700 (PDT)
+ AKwUvByTi9nn2Hn+oAFYAKVXMEnwlt1AUhB2jLjMWI9Atvrm5bQadUwFyGqaecgDE3ZnJNqpOwjdRrYhbHbW@nongnu.org
+X-Gm-Message-State: AFuF++n9jrShF6DMg9/B262hptjh394S7I653AUBMYQ3cp5nOMBwwwZ1
+ 3slgtAPlt/I2pqQnnfYCeWABZCm5Q3Yb2HBklqnhSIdGK4ya55k537SM
+X-Gm-Gg: AYBFou1cbEV3hLe+YtAfNAYt7AigBQbdfKAIr/7fVJuOgRRtX77n2qJ1ubr+WAUMR8h
+ Dc1vE561ug6MWShzlLSSbGleNvwRLNgoMFwfvOqVrtdOofxrm1Hn/1Uhs/IOtuUTvFx+xv+LuXo
+ yfrFX+jP3tXenpBmgkvRiniwYyHmy3lGVoGGEQjAQoDMScI+6txMJNfV/XBMNtibYzgAoixQGo8
+ pXqAwR0+Ah8feA3MflXqfUjxuG4J3bPf/4jau1yzH8O2jg7DvlCFCgKtku8GKHs02CtASIxEg8P
+ YFkexMnw991hDxOAO81P/VIF+1Otl+V4WcFEjrRqdQqhPUgiibFHIkaZep9cJ5GBucyKFQCixZp
+ 5KQDkNIhSf5yzzEKkNBs8be9QfW9aLUp9Al5usb3f5lWFzmmrRB+snB4G+NA2rt34psbRjOUUEp
+ SiO6CcGKm1Y0BMpXg+2haeVF2d69btZSWcYEW7BpGIyAgI9oi+vgyQtp568HmoK12hJHwvRqYac
+ UXtRT6tBm7RkNpY5I6ytU4S8rYgcdM=
+X-Received: by 2002:a05:701b:21c5:b0:144:e0cd:76ad with SMTP id
+ a92af1059eb24-146d06820d9mr8413866c88.36.1790572902572; 
+ Sun, 27 Sep 2026 22:21:42 -0700 (PDT)
 Received: from WIN-BH9M8FJACR9 ([103.94.185.75])
  by smtp.googlemail.com with ESMTPSA id
- a92af1059eb24-146bb6551d9sm14726248c88.9.2026.09.27.22.21.12
+ a92af1059eb24-146bb6551d9sm14726248c88.9.2026.09.27.22.21.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 27 Sep 2026 22:21:18 -0700 (PDT)
+ Sun, 27 Sep 2026 22:21:41 -0700 (PDT)
 From: Yonggang Luo <luoyonggang@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: Helge Deller <deller@gmx.de>, Harsh Prateek Bora <harshpb@linux.ibm.com>,
@@ -96,22 +96,23 @@ Cc: Helge Deller <deller@gmx.de>, Harsh Prateek Bora <harshpb@linux.ibm.com>,
  Michael Rolnik <mrolnik@gmail.com>,
  Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
  Paolo Bonzini <pbonzini@redhat.com>, qemu-s390x@nongnu.org
-Subject: [PATCH v2 02/24] accel/tcg: add cpu_loop_exit_excp
-Date: Mon, 28 Sep 2026 13:20:28 +0800
-Message-ID: <20260928052051.251-3-luoyonggang@gmail.com>
+Subject: [PATCH v2 05/24] target/rx: convert raises to raise_excp
+Date: Mon, 28 Sep 2026 13:20:31 +0800
+Message-ID: <20260928052051.251-6-luoyonggang@gmail.com>
 X-Mailer: git-send-email 2.52.0.windows.1
 In-Reply-To: <20260928052051.251-1-luoyonggang@gmail.com>
 References: <20260928052051.251-1-luoyonggang@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:38::2b;
- envelope-from=luoyonggang@gmail.com; helo=mail-dl2-x2b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:38::f;
+ envelope-from=luoyonggang@gmail.com; helo=mail-dl2-x0f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -127,56 +128,203 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Add cpu_loop_exit_excp next to cpu_loop_exit_restore. Set
-cpu->exception_index, then restore and exit the current TB the same
-way as cpu_loop_exit_restore.
+Translate privilege and illegal through raise_excp_restore, and BRK
+and INT through raise_excp. Drop unused raise_access_fault and the
+one-line raise_exception wrapper. FPSW still exits with
+RX_EXCP_ACCESS.
 
 Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
 ---
- accel/tcg/cpu-exec-common.c  |  6 ++++++
- include/accel/tcg/cpu-loop.h | 12 ++++++++++++
- 2 files changed, 18 insertions(+)
+ target/rx/helper.c    | 16 ++++++++--------
+ target/rx/helper.h    |  5 -----
+ target/rx/op_helper.c | 44 ++-----------------------------------------
+ target/rx/translate.c | 13 ++++++-------
+ 4 files changed, 16 insertions(+), 62 deletions(-)
 
-diff --git a/accel/tcg/cpu-exec-common.c b/accel/tcg/cpu-exec-common.c
-index d20cece1c5f..31fed8e497f 100644
---- a/accel/tcg/cpu-exec-common.c
-+++ b/accel/tcg/cpu-exec-common.c
-@@ -118,6 +118,12 @@ void cpu_loop_exit_restore(CPUState *cpu, uintptr_t pc)
-     cpu_loop_exit(cpu);
+diff --git a/target/rx/helper.c b/target/rx/helper.c
+index 0f99279bbaa..2ebda733489 100644
+--- a/target/rx/helper.c
++++ b/target/rx/helper.c
+@@ -86,13 +86,13 @@ void rx_cpu_do_interrupt(CPUState *cs)
+         env->isp -= 4;
+         cpu_stl_le_data(env, env->isp, env->pc);
+ 
+-        if (vec < 0x100) {
++        if (vec < RX_EXCP_INT) {
+             env->pc = cpu_ldl_le_data(env, 0xffffff80 + vec * 4);
+         } else {
+             env->pc = cpu_ldl_le_data(env, env->intb + (vec & 0xff) * 4);
+         }
+ 
+-        if (vec == 30) {
++        if (vec == RX_EXCP_NMI) {
+             /* Non-maskable interrupt */
+             qemu_plugin_vcpu_interrupt_cb(cs, last_pc);
+         } else {
+@@ -100,22 +100,22 @@ void rx_cpu_do_interrupt(CPUState *cs)
+         }
+ 
+         switch (vec) {
+-        case 20:
++        case RX_EXCP_PRIVILEGE_VIOLATION:
+             expname = "privilege violation";
+             break;
+-        case 21:
++        case RX_EXCP_ACCESS:
+             expname = "access exception";
+             break;
+-        case 23:
++        case RX_EXCP_ILLEGAL_INSTRUCTION:
+             expname = "illegal instruction";
+             break;
+-        case 25:
++        case RX_EXCP_FPU:
+             expname = "fpu exception";
+             break;
+-        case 30:
++        case RX_EXCP_NMI:
+             expname = "non-maskable interrupt";
+             break;
+-        case 0x100 ... 0x1ff:
++        case RX_EXCP_INT ... RX_EXCP_INT + 0xff:
+             expname = "unconditional trap";
+         }
+         qemu_log_mask(CPU_LOG_INT, "exception 0x%02x [%s] raised\n",
+diff --git a/target/rx/helper.h b/target/rx/helper.h
+index 8cc38b0cb71..c6a85e968d9 100644
+--- a/target/rx/helper.h
++++ b/target/rx/helper.h
+@@ -1,9 +1,4 @@
+-DEF_HELPER_1(raise_illegal_instruction, noreturn, env)
+-DEF_HELPER_1(raise_access_fault, noreturn, env)
+-DEF_HELPER_1(raise_privilege_violation, noreturn, env)
+ DEF_HELPER_1(wait, noreturn, env)
+-DEF_HELPER_2(rxint, noreturn, env, i32)
+-DEF_HELPER_1(rxbrk, noreturn, env)
+ DEF_HELPER_3(fadd, f32, env, f32, f32)
+ DEF_HELPER_3(fsub, f32, env, f32, f32)
+ DEF_HELPER_3(fmul, f32, env, f32, f32)
+diff --git a/target/rx/op_helper.c b/target/rx/op_helper.c
+index 36df7d377e5..f73aeae6326 100644
+--- a/target/rx/op_helper.c
++++ b/target/rx/op_helper.c
+@@ -25,10 +25,6 @@
+ #include "fpu/softfloat.h"
+ #include "tcg/debug-assert.h"
+ 
+-static inline G_NORETURN
+-void raise_exception(CPURXState *env, int index,
+-                     uintptr_t retaddr);
+-
+ static void _set_psw(CPURXState *env, uint32_t psw, uint32_t rte)
+ {
+     uint32_t prev_u;
+@@ -115,7 +111,7 @@ static void update_fpsw(CPURXState *env, float32 ret, uintptr_t retaddr)
+         enable = FIELD_EX32(env->fpsw, FPSW, ENABLE);
+         enable |= 1 << 5; /* CE always enabled */
+         if (cause & enable) {
+-            raise_exception(env, 21, retaddr);
++            cpu_loop_exit_excp(env_cpu(env), RX_EXCP_ACCESS, retaddr);
+         }
+     }
+ }
+@@ -419,32 +415,6 @@ uint32_t helper_divu(CPURXState *env, uint32_t num, uint32_t den)
+     return ret;
  }
  
-+void cpu_loop_exit_excp(CPUState *cpu, int exception_index, uintptr_t pc)
-+{
-+    cpu->exception_index = exception_index;
-+    cpu_loop_exit_restore(cpu, pc);
-+}
-+
- void cpu_loop_exit_atomic(CPUState *cpu, uintptr_t pc)
+-/* exception */
+-static inline G_NORETURN
+-void raise_exception(CPURXState *env, int index,
+-                     uintptr_t retaddr)
+-{
+-    CPUState *cs = env_cpu(env);
+-
+-    cs->exception_index = index;
+-    cpu_loop_exit_restore(cs, retaddr);
+-}
+-
+-G_NORETURN void helper_raise_privilege_violation(CPURXState *env)
+-{
+-    raise_exception(env, 20, GETPC());
+-}
+-
+-G_NORETURN void helper_raise_access_fault(CPURXState *env)
+-{
+-    raise_exception(env, 21, GETPC());
+-}
+-
+-G_NORETURN void helper_raise_illegal_instruction(CPURXState *env)
+-{
+-    raise_exception(env, 23, GETPC());
+-}
+-
+ G_NORETURN void helper_wait(CPURXState *env)
  {
-     /* Prevent looping if already executing in a serial context. */
-diff --git a/include/accel/tcg/cpu-loop.h b/include/accel/tcg/cpu-loop.h
-index f4d38bc2bca..856091020f2 100644
---- a/include/accel/tcg/cpu-loop.h
-+++ b/include/accel/tcg/cpu-loop.h
-@@ -65,6 +65,18 @@ G_NORETURN void cpu_loop_exit_noexc(CPUState *cpu);
- G_NORETURN void cpu_loop_exit_restore(CPUState *cpu, uintptr_t host_pc);
- G_NORETURN void cpu_loop_exit_atomic(CPUState *cpu, uintptr_t host_pc);
+     CPUState *cs = env_cpu(env);
+@@ -452,15 +422,5 @@ G_NORETURN void helper_wait(CPURXState *env)
+     cs->halted = 1;
+     env->in_sleep = 1;
+     env->psw_i = 1;
+-    raise_exception(env, EXCP_HLT, 0);
+-}
+-
+-G_NORETURN void helper_rxint(CPURXState *env, uint32_t vec)
+-{
+-    raise_exception(env, 0x100 + vec, 0);
+-}
+-
+-G_NORETURN void helper_rxbrk(CPURXState *env)
+-{
+-    raise_exception(env, 0x100, 0);
++    cpu_loop_exit_excp(cs, EXCP_HLT, 0);
+ }
+diff --git a/target/rx/translate.c b/target/rx/translate.c
+index 132d495710c..43efdb6af0e 100644
+--- a/target/rx/translate.c
++++ b/target/rx/translate.c
+@@ -245,7 +245,8 @@ static int is_privileged(DisasContext *ctx, int is_exception)
+ {
+     if (FIELD_EX32(ctx->tb_flags, PSW, PM)) {
+         if (is_exception) {
+-            gen_helper_raise_privilege_violation(tcg_env);
++            gen_helper_raise_excp_restore(
++                tcg_env, tcg_constant_i32(RX_EXCP_PRIVILEGE_VIOLATION));
+         }
+         return 0;
+     } else {
+@@ -2174,7 +2175,7 @@ static bool trans_RTE(DisasContext *ctx, arg_RTE *a)
+ static bool trans_BRK(DisasContext *ctx, arg_BRK *a)
+ {
+     tcg_gen_movi_i32(cpu_pc, ctx->base.pc_next);
+-    gen_helper_rxbrk(tcg_env);
++    gen_helper_raise_excp(tcg_env, tcg_constant_i32(RX_EXCP_INT));
+     ctx->base.is_jmp = DISAS_NORETURN;
+     return true;
+ }
+@@ -2182,12 +2183,9 @@ static bool trans_BRK(DisasContext *ctx, arg_BRK *a)
+ /* int #imm */
+ static bool trans_INT(DisasContext *ctx, arg_INT *a)
+ {
+-    TCGv_i32 vec;
+-
+     tcg_debug_assert(a->imm < 0x100);
+-    vec = tcg_constant_i32(a->imm);
+     tcg_gen_movi_i32(cpu_pc, ctx->base.pc_next);
+-    gen_helper_rxint(tcg_env, vec);
++    gen_helper_raise_excp(tcg_env, tcg_constant_i32(RX_EXCP_INT + a->imm));
+     ctx->base.is_jmp = DISAS_NORETURN;
+     return true;
+ }
+@@ -2228,7 +2226,8 @@ static void rx_tr_translate_insn(DisasContextBase *dcbase, CPUState *cs)
+     ctx->pc = ctx->base.pc_next;
+     insn = decode_load(ctx);
+     if (!decode(ctx, insn)) {
+-        gen_helper_raise_illegal_instruction(tcg_env);
++        gen_helper_raise_excp_restore(
++            tcg_env, tcg_constant_i32(RX_EXCP_ILLEGAL_INSTRUCTION));
+     }
+ }
  
-+/**
-+ * cpu_loop_exit_excp:
-+ * @cpu: the cpu context
-+ * @exception_index: EXCP_* or target trap number
-+ * @host_pc: the host pc within the translation
-+ *
-+ * Set cpu->exception_index and exit the current TB, restoring
-+ * guest state from @host_pc the same way as cpu_loop_exit_restore.
-+ */
-+G_NORETURN void cpu_loop_exit_excp(CPUState *cpu, int exception_index,
-+                                   uintptr_t host_pc);
-+
- /**
-  * cpu_loop_exit:
-  * @cpu: the cpu context
 -- 
 2.52.0.windows.1
 
