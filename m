@@ -4,150 +4,149 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56227C9833F
-	for <qemu-riscv@archiver.kernel.org>; Mon, 28 Sep 2026 12:37:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5539CA5FA5
+	for <qemu-riscv@archiver.kernel.org>; Mon, 28 Sep 2026 15:22:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xBAbe-0007XG-1x; Mon, 28 Sep 2026 08:37:18 -0400
+	id 1xBDBX-0000Ki-BK; Mon, 28 Sep 2026 11:22:31 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <nutty.liu@hotmail.com>)
- id 1xBAbS-0007Uk-Me; Mon, 28 Sep 2026 08:37:06 -0400
-Received: from mail-japaneastazolkn190130003.outbound.protection.outlook.com
- ([2a01:111:f403:d405::3] helo=TYDPR03CU002.outbound.protection.outlook.com)
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1xBDBR-0000Jq-SZ
+ for qemu-riscv@nongnu.org; Mon, 28 Sep 2026 11:22:25 -0400
+Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <nutty.liu@hotmail.com>)
- id 1xBAbP-0001Qn-3w; Mon, 28 Sep 2026 08:37:06 -0400
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=SKa55jyK9e/EqwIVja5JuLpuVOdJXktSKWFN7QspD/bKckCp5sUMiXQFLjWcmIxkONnZaKO+/+cD1cjhWu/lnxv63aGbw8zfNZtF9CLYx9mHJklw3NK+FxNunpLXuhbOtCbDCtF1xXDHiLoHxQPgjrhC3rdVMq3abUKXUiybO7mz0Nnmn61ehsBsAflij2u1Mdh4qJElcuyx+9ys4zsK4YUAVoCX2/RKbrJcGodj8uJgu+ZP0C511arpDJDl735cBCULO2dXRSxKZaav2T7NLFbQ4UbxoRo3mhtqPmm6Cm1Rjc5GXTxpAjZUIwD3G9r3yBv4m9j1I24cIKtviGMoFw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=9hxFpRwRvIkMohLU1te4dJ9W9dtCDwuA6Xcox7Kg+mE=;
- b=Vgedmh0Qd5Vy2I9Dt+phmm8XUwQ3Sz1OFlB5mdzkN7b1H/4xjoxCv3Yef1oI1QiAtp7RIXdKLWEqOGSy2dOgXDTwZw++h5AopTZFL/8FX5KUklx8ZHGX6DeTlg+cbBpewtHiBioSNkSyLsH6f9ZagqW7FrFAxgN4BlEreYdfVJjr7MitunRoXjvdI4sshMyC9E6vWK2dNTG84TdVgWwjzH1TMAsK5qPR0zxVubVJUVyFV5jXxmqCXobHs9pr4hBYJ7hUWWk5ac99CRzEVEqbXR6xzFEAzx4fNCqD2aMnhHp7k6cx5q0qgkxTSMO2fR0jWY4sB6sycxtudVVvkrnzVg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hotmail.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=9hxFpRwRvIkMohLU1te4dJ9W9dtCDwuA6Xcox7Kg+mE=;
- b=l5zeNhRq7Jyp+uGhBJAVZpEJtZfEaAPnwZ5Kx+GzmvZhD5dVPCRd2RmUez4mhRKzmEiNOawFc+ofOfeBz54YD/Aon62P35UlQHZ+TSO1Q6/Y5n+MDBFuaT/s0CJ7pCM4qUWVH5vhQ6GTLiiGCgSsyC95rWt9Z+baQADU6UIRbC4e11EbgSpkVjxa7h1mHeQ6SzUow/zPvJ7Frh0u5AktbLoQb2Bx2pEuBOtZPrEchQ3bTV8DUvXagDfyLcw5MQ1P2AhCt60gMGPXWQNqn9iLaNXuJ6rX3PPNaYrkzQEKM2KAG7ZNB6gzBLg6D7TMC2r3i4XrLS1fXTYxh+2BKld87A==
-Received: from SE3PR04MB8922.apcprd04.prod.outlook.com (2603:1096:101:2e9::7)
- by SI4PR04MB9355.apcprd04.prod.outlook.com (2603:1096:4:29b::18) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.451.23; Mon, 28 Sep
- 2026 12:36:56 +0000
-Received: from SE3PR04MB8922.apcprd04.prod.outlook.com
- ([fe80::3450:f139:5238:8f58]) by SE3PR04MB8922.apcprd04.prod.outlook.com
- ([fe80::3450:f139:5238:8f58%5]) with mapi id 15.21.0451.022; Mon, 28 Sep 2026
- 12:36:56 +0000
-Message-ID: <SE3PR04MB89227B8BA71911FD9DAC95FDF38D2@SE3PR04MB8922.apcprd04.prod.outlook.com>
-Date: Mon, 28 Sep 2026 20:36:31 +0800
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1xBDBQ-0002dC-48
+ for qemu-riscv@nongnu.org; Mon, 28 Sep 2026 11:22:25 -0400
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 68SEe1Yp1498400
+ for <qemu-riscv@nongnu.org>; Mon, 28 Sep 2026 15:22:20 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ vqeueA5Dwdg+0bPoxFwzCulXHUqlvv8BKEZ0XdYkxOE=; b=didemMwdE77M6p0q
+ WtiwDYc/HmaKD1X/Ke7/EsYHZEMrJLsN/eLI0TGjaE0q5iY19tYM8/bx2E/Praep
+ d2YebbHuIxR9eniZw3EX8+4I99Lq2+cSDOj7tBE7ix+kVWWCG60ZFM2jY5r9y+KD
+ W0iF8RzpPmO7V9MDWk9pSSJqrEUXxh/Wf3JxHT+jArih/JwE3ord26rlolDoVa68
+ qSVbQF8C90YChxQIUOzELa1LY+dH6w65rXiOtFxBYrejEY1Aw6HNkCtpuShEjxL5
+ 7uLlL0guMJp44FLsz4zTfiqe7A5z72cmyxbCPfAS+H0TkatlmNpagY/AGuhcRKgG
+ jXiRpA==
+Received: from mail-yw1-f200.google.com (mail-yw1-f200.google.com
+ [209.85.128.200])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gyk5msykg-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Mon, 28 Sep 2026 15:22:20 +0000 (GMT)
+Received: by mail-yw1-f200.google.com with SMTP id
+ 00721157ae682-8a7d69f4204so44888727b3.2
+ for <qemu-riscv@nongnu.org>; Mon, 28 Sep 2026 08:22:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1790608940; x=1791213740; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=vqeueA5Dwdg+0bPoxFwzCulXHUqlvv8BKEZ0XdYkxOE=;
+ b=OFicUQf+D2YK2eB872Cb7h3UXExqNLNV/y11iaIJXxqxWRQCgRpZ8Mngbt6BIbHAfE
+ s2tA7R0F7iUSKlRyAl24PR8E9TaG/GKyBD8AbexPLc9Ga7Q9skwg4l8P63Z1rYgcGMNn
+ gKBznkFOMGpX43pRyjjF3d2IkK47MLSfPyeKMHY8aRopnlSceuoG0pur5HrRdzZ+0s+x
+ Cnpjp2MxgHMKS7umXjE+zdwm4XCzecC4uusv2H6e/lZQQlaXmMu9J31+ods2DD1JC/NQ
+ Y4zvvqWNEFiB2hWVH/5TizZeUaFjTMHf7hYq4VRhZ4KgiUjU3n0ja5PJfdC/5w3qyxlS
+ 7ujQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1790608940; x=1791213740;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=vqeueA5Dwdg+0bPoxFwzCulXHUqlvv8BKEZ0XdYkxOE=;
+ b=f6MDNxl9m24lfCFAvCGS/6+uYl9tqJ3xXBJQw9211UZ0UUq8F6mMQejune0uYa1dqK
+ 8jB9RwcW8luqPWWGrkV4kZVj3Oym0MQICzzP4O90JxGAuk7h4HmnB/8bvh9lOM/wTc6f
+ TOpnF41oL9sVfpBDWRr4oV4peAX+mvObt278e9VxLrK/NaIu5FNkvHCkOvsSe5CiQq73
+ Dz0lyYKCRalXRsgS8ykKQwjHp8smW/DL4sNFmn2zM0I9y0+3p7pwCGaIgrkFdGPjgA1M
+ jLknhhmPJFGPy7I0WtOBDhzCqg/6r258KBr7sBNt59yD4qKz3EHpnbUWwN/VYE8O+3FE
+ mtnw==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBzuJCHwoVsaf1+gJhZBE0g7RoaAbuOiBLDJkjEpSPeDIV0gcJHowgunMTIsjfeBy26KMkB77SbxVZY6@nongnu.org
+X-Gm-Message-State: AFq9FYL1bCIDSO0+KlKw+Pmqjgg7jqcjrwuZ4Bx9iAG+DVh6cY/VHKdN
+ GUX/nwb+AdzaUiqH8ds5HQGEQCJCg3yhYu009DJjgLQpaQY+/JMrKW/73SGKEyIx40eBO3Nn3aq
+ Ikb4jyZtQ5QZkwVGPqEGZfCns0zYDD9ryeXZ/O2TBBTMCuIGyLCxYE/xVHw==
+X-Gm-Gg: AYBFou2LYPiyYVIoS5B9LDVnhseanpUD8iXHE24Q2nzn0ohQksK48LH5VnofawtC3tT
+ 3LWnPthTa9fPR/iQlrDB+DOrBrS1Jhjxko6zBxeY6qx+yG41udEP6AFjV22BXFyL7vDxaUUMpqH
+ ztCgGjRUeQO8UTeIIatzZnxabTy/5rcCtdP+bqUM6eA4aVUnpzxO+fmMjibvGVxi1KQb0669O9J
+ 6346YzsFMAi6CzhVlG0V6MWFX0fz8auCvPD1eJNmk8KDXzkY2iIX24DgBeo/bCPx4zk1XxjUGSZ
+ /BITMDHwi+pS6tYdoLmM11gOhbKgG7qcGx6CHEK3XraLNoj6iBhUoiDO+L7kPy4VYACOZbZxRd8
+ j2dXrlTfVQ1OAK3QqF9Bg21HOJ391yDMbXA==
+X-Received: by 2002:a05:690c:83:b0:87f:bf8d:3377 with SMTP id
+ 00721157ae682-8a64e4b9525mr64414887b3.63.1790608940097; 
+ Mon, 28 Sep 2026 08:22:20 -0700 (PDT)
+X-Received: by 2002:a05:690c:83:b0:87f:bf8d:3377 with SMTP id
+ 00721157ae682-8a64e4b9525mr64414597b3.63.1790608939607; 
+ Mon, 28 Sep 2026 08:22:19 -0700 (PDT)
+Received: from [192.168.68.102] ([177.94.15.187])
+ by smtp.gmail.com with ESMTPSA id
+ 00721157ae682-8ab391acfb0sm2879967b3.48.2026.09.28.08.22.15
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 28 Sep 2026 08:22:19 -0700 (PDT)
+Message-ID: <2e837af6-720c-4ac5-9e5b-5750f45f23e8@oss.qualcomm.com>
+Date: Mon, 28 Sep 2026 12:22:13 -0300
+MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v9 5/7] target/riscv: add sdext single-step support
-To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
- Chao Liu <chao.liu.zevorn@gmail.com>, Tao Tang <tangtao1634@phytium.com.cn>,
+Subject: Re: [PATCH v12 5/5] docs: add riscv-server-ref.rst
+To: Andrew Jones <andrew.jones@oss.qualcomm.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com,
+ chao.liu@processmission.com, leif.lindholm@oss.qualcomm.com,
+ Sunil V L <sunilvl@oss.qualcomm.com>,
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
  Palmer Dabbelt <palmer@dabbelt.com>
-References: <20260909144841.1766921-1-daniel.barboza@oss.qualcomm.com>
- <20260909144841.1766921-6-daniel.barboza@oss.qualcomm.com>
+References: <20260917174405.3471736-1-daniel.barboza@oss.qualcomm.com>
+ <20260917174405.3471736-6-daniel.barboza@oss.qualcomm.com>
+ <spgwi4uj47tgyscqpda2xpvrndgtydejudicqwdcltabxiyjje@bgv52z7nhuf7>
+From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Content-Language: en-US
-From: "Nutty.Liu" <nutty.liu@hotmail.com>
-In-Reply-To: <20260909144841.1766921-6-daniel.barboza@oss.qualcomm.com>
+In-Reply-To: <spgwi4uj47tgyscqpda2xpvrndgtydejudicqwdcltabxiyjje@bgv52z7nhuf7>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: TP0P295CA0009.TWNP295.PROD.OUTLOOK.COM
- (2603:1096:910:2::19) To SE3PR04MB8922.apcprd04.prod.outlook.com
- (2603:1096:101:2e9::7)
-X-Microsoft-Original-Message-ID: <43b05938-34dc-48c5-b9bf-a7fe7a025194@hotmail.com>
-MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SE3PR04MB8922:EE_|SI4PR04MB9355:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3918fff7-d97b-4341-eebd-08df1d5d2ec8
-X-Microsoft-Antispam: BCL:0;
- ARA:14566002|6090799003|15080799012|41001999006|55001999006|19101099003|5072599009|2604032031799003|23021999003|22091999003|24121999003|25010399006|8060799015|19110799012|4140399003|51005399006|440099028|4302099013|3412199025|1602099012|40105399003|2607281247196008|10035399007;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?em95YXZXcW1rNHFEZTJ4MlQwTHl1NWJUNWlLUTQxNHFlemErVXFPcDJwZHVE?=
- =?utf-8?B?ODQ4Z0M3aTBsZEFIRGtqS1NhTEN4dTVKQTl1ek84R3RvTEJLcVQxYUhyT3Uw?=
- =?utf-8?B?YWFYYmVaNkJjV2ovbFhzK0Z3YzRFQ0lHM1V6QkFKWVAxUHZweU1sTWYwNFU1?=
- =?utf-8?B?RmE2Q29FdlNSVXVjRWFmbytueThjODJKTDBGenVzNElna3FPbUNDTlhKZFdr?=
- =?utf-8?B?K1dXMjMxMG1Ka3hkQUpacVFCL2tjd3lncVNWRGEyYlpSRTJhT0lLZkNWM0x5?=
- =?utf-8?B?M3kxR2NHSUJ2bFprZW9vcFNCcmU3NlJKSHlUTWZCYVhHbDRoTWRITHFLdWxw?=
- =?utf-8?B?cUN6NGs0aFFjeW1ldVR5R3JxT3dndU05VXpOMDYzVzJlbndrVUp1aXBCaEZh?=
- =?utf-8?B?Uk5pblVvQVdQWjBGUUppbXd6TDdxcmREd08wbUJaMWNhK1lrQm5Jd3FLQjRX?=
- =?utf-8?B?VGdXUHR5ZmZjaDY3ODIvZmJ6M1l6NGRSZmFJd3R1S1ZmVkMyZ2RlRzdQMDFq?=
- =?utf-8?B?SlphMmdET3BXQ01RUE9mZFNVTDFWN3lKTzQ4ZlAya0h4ZzdTSFh3THZaZVlz?=
- =?utf-8?B?ZmlCc1JSTzZOQWZrTmlwZVMwQ2dBcTNjNXBrdmhMSmRuMTZqQVp2NXBhZERX?=
- =?utf-8?B?S0RyeWM1dFhKaktTOGdLb1JiY3RkVTlkZEFJWTRjZ3dQZkVXR0liY3J0Z0x1?=
- =?utf-8?B?MUhKYSt0dHJvSEI5VmhETzI3VWdrRzRCUnM4UjBjb0RUNDRDT2p4Qy9wRVQw?=
- =?utf-8?B?aDBXL3gzaGRLZGEyV2NVdXVXdlA0dWFEcUVGVmRwbERKaHRLR0piWUFOdGdu?=
- =?utf-8?B?ZXBGSzJ2TkZHUTUweGtCRVA5Z3huUFJGVStaQnVod1pqYmVZVyt4VWhhS0lU?=
- =?utf-8?B?TlhwdUFnWEVVYndMaFZtdVZVb0pMUC9zcXpOdFdESkRXbm5FczdhcVNxTk9I?=
- =?utf-8?B?RDdrQmJZbmhLMnppa3h5ZVZ2a1h3QzBwRG1MOTMvaXB5Nk1DZlBJR3JOTzky?=
- =?utf-8?B?V0trOW9ZdG5YTkdCNi9oa2J4UEthTjRST0RJOTBFMVNINTFLUlpKNEJiYlMw?=
- =?utf-8?B?UXlRVHRJOUhseTgzWmF5YWdMTnhMMGthYVpySkhyVWtlVTlER0QwS0l5ei9x?=
- =?utf-8?B?cHNpL0lnZlh0ZXQ3clpPa3BxM3RibUVOeDNmb2JkOFpoVm1hWUhwQXFWalAy?=
- =?utf-8?B?eU10c2s1VXljM1dvbG5KcjNtR214NzVzbFVCUFlHTlhUaW1EWnhoRnVLRVNn?=
- =?utf-8?B?aWN1U3lmTDZ1RVYzNlRQZ2s3Y2ttUUYvbUZrT2JOUVBZc0pTOFpTK2ZLWThn?=
- =?utf-8?B?NEFuUlptbzRkSHhWNDdNR1J4MmdXOEg1RmhsUjdBN0twY3QwSkJhenRleXBy?=
- =?utf-8?B?ZFRpWDdxS2hMNzdUSWNqRnk0ZFBsbUlTOUphclFzMFlVYmNhNVdpcVhLV2F1?=
- =?utf-8?B?ZVpQOHNnemo5dkFwaFcrM0VGUWRwRWl6QmZOdlRCSUpSbHgvMW45VTNXdjBH?=
- =?utf-8?B?U1ZRMDlyVXB5dHlYc0hvQlRUNVZ0bmNRQ0RTRGFNVkU4TWFXUFBZdXo2MFhG?=
- =?utf-8?Q?WFF2WHVNoMIK90HIPXOkMM9sa1ofsVF675c0c9zD+K964e?=
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?d05nd1ZkaURZWFU5b1NMOUZYMFNiMHdFUFVMRmZoVFVVampUeHJ5NSsrUWJ0?=
- =?utf-8?B?TXhQcFkwWm94NTNUa0E1d1ppS2laclJpNTRkSVZaczNCbkVKV0NNS3NZNVVQ?=
- =?utf-8?B?VkFNd2J2NlI4THNHTWFnUkNXalhpZWRHeDBtVjEzMnRxUFE5N0hpcXpaWVpq?=
- =?utf-8?B?d1I1KzY2MkM0VmkyQURQUXBZWm1iMXJYakdaVW9PTnQ1TTNUOVRnellURllU?=
- =?utf-8?B?MkNtazU2UnhjMEI5Z2VGNWo1NC8rOGV4QzNVQVVBbVc1dHFRRllOdFVCamc1?=
- =?utf-8?B?eDFQbUZ4QkFYOExXZzNuaHplYXQ5dmltZjM1WEQ3TDltbEFiV3A4WWZGWnBt?=
- =?utf-8?B?Mkl0eXpwQUZhT0UrZWdkTzliSHVqYURNd2xyakdKb2hMZ3EzbXJUVmdObTRI?=
- =?utf-8?B?WExOaGJ1TnQyRmprNlBoSGJtTU95ZU4wNGI0N0NuN3d0ZDQyOU5iQTlTTG0z?=
- =?utf-8?B?blVTWXVDUjFrVGM1cjgzVzZ0YU9IbG9OVUJnUzM3Z1o4QXNiOXhjUC90VnF6?=
- =?utf-8?B?L3c3UnBLa0Y3Q001ZHRxTFdTc0JhUkNIYVNSQ1E5V3BQcGZRSjk0K29VVUxC?=
- =?utf-8?B?T2ZnUmV1Q0ZyM3cxdXJ2WnlHY2lOK1puc3dLV25INGJCcU12cTBtVjRwc2ZY?=
- =?utf-8?B?Q1FQdU9aRytoNW9kNVRsZnJPVlFRam1jSXFPMk5DZTlGWlUydmEvaHNZNlpG?=
- =?utf-8?B?L1hLTFN0akF0dnVReHFaRTFMS2gvakVsNm54WWtqbWIwVGNqV3p1YnhNNldh?=
- =?utf-8?B?d2UvS1Q3Tnp2NW5Sa3NaQnVrMDBOaUp5WEcwNmhQcG9od0ZFS1lQZ3FqWlNV?=
- =?utf-8?B?UmNFM1lhZnloNzI2UEMrcEdhRDBaT2xWcVNhbnlzOG55c1M1VjY0SjZyQXRs?=
- =?utf-8?B?QnJHS1l6bysxMmxtTUM0R1FVeEpDb3ZGU0h6M2ZPY0FCUCtTN3pVa1ZDenBt?=
- =?utf-8?B?TWZnV0hhN1Y0SmlUc05leUZJZERvcjlDT1dYN2NBdFYrVi9jSHJHNzNGSVpw?=
- =?utf-8?B?cFhvUjVxNjdPWTJveFB2M2xEbllRN05PRGRJRzBzMzZ2eW4vZmRDL3l6a2ky?=
- =?utf-8?B?dDJUQzdvd1RDT0dHZlcvQVZtNlh4RDBwa1FUdGt3c1hYTDdNZlBjVVJVeDQw?=
- =?utf-8?B?M0lBL1lYL2IvK1RmUE5Tdy9hOEVuZ1JnK1lTcVczamNIb1A4aEVSandmTGcw?=
- =?utf-8?B?TnQ4WEo1VkpoeG9pbVVDc1NrTzM4aXpmblVBNHBQN04wOXJXQlNZNkNLSWlu?=
- =?utf-8?B?L0lBKzFTVm1TNmpNWDAySXB3RHpuK2lTNFp5Q1ZMZ09LakxJUzZJSUZvWHVx?=
- =?utf-8?B?STQ3L0pMOGhXQmdvSkxEeDVkUVRWdXFNUkl6MmVWUHBZZDMvbmNlc3BYQVh2?=
- =?utf-8?B?SjcrNzA3V0ZUSmlPeHhteHZyc0NUdXZGOWFGOGNIbGFtdkJ0MWhLWjJSMnRi?=
- =?utf-8?B?Zi9NenNoMTI1QmpFNjJrUkwrZEJKM3NnRXZCV1NzYlZTZWUyTXFOTUcvYngv?=
- =?utf-8?B?eFI1dEVKTnI0T08yL2JPR01zb0JMY2lZWDkvU2t2VmU3NXFadHVnOU1PUkdU?=
- =?utf-8?B?bjNUeFBGWmk3Y0tVcEVQS3ltaVFaWWF2Nks0RmV2UWxHbTgxVHI0a0JEcXU2?=
- =?utf-8?B?UUJqZGJzdnNweGNJSTdyZU9SMGhselI4WTBQaVZOcEtERlJzREdWYnhvNVJa?=
- =?utf-8?B?d05KaFdHc1dyQlZqOWFRZWVDSlIwd044QVo5TFFHQTU1ZXZ4eXkvbTEvRGx5?=
- =?utf-8?B?TC9FbkxiWVlpb2MzKzh1M0ZWMDgxWW9qRkY0K0dodUtBTkZIcWo4ZlFzUHcw?=
- =?utf-8?B?eG1QMlRiQUFLZmZYRVRCWGNoRVNNeXJYS3Fibys3eUZ4NWxnNXQ5KzRXaDVT?=
- =?utf-8?Q?X0lbCImFM2Cze?=
-X-OriginatorOrg: sct-15-20-9412-4-msonline-outlook-c3e7a.templateTenant
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3918fff7-d97b-4341-eebd-08df1d5d2ec8
-X-MS-Exchange-CrossTenant-AuthSource: SE3PR04MB8922.apcprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Sep 2026 12:36:56.6586 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
-X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SI4PR04MB9355
-Received-SPF: pass client-ip=2a01:111:f403:d405::3;
- envelope-from=nutty.liu@hotmail.com;
- helo=TYDPR03CU002.outbound.protection.outlook.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+X-Proofpoint-ORIG-GUID: ikPvEw_dOp0AZDpAQfp9WcRNTwSB4G-6
+X-Proofpoint-GUID: ikPvEw_dOp0AZDpAQfp9WcRNTwSB4G-6
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI4MDA2MSBTYWx0ZWRfX8sKh3LCcEaQU
+ oVvXdbuC0KcC04Dwq6v3Ia+n9Awwmwc1PPOQDGe1hWJUTQrwlEmJw+7f8C1CmXLOXEINMRIWQ+M
+ cF3YOfotpCNakt3pqxHlhUZU2V0p1rSNDaEczKizAfUpvJ04g0q3Z9R3kOSzk23w+Q+szlELFlP
+ yCiyz4S6LULOB5fccJ6XlmJFTsKu+88KQ9gBFRDfxEopwpy5M31rKTK/bWNouqaJmu8qKZULx8f
+ Kx/DhdCMC4mx1P8ZhocIhlnoGwxDgDA/6Z63Zmu1h5eMj5khWjH8rGeXLJBi4uT6YoK9iAGFy9v
+ XPBivMcFhU1FsmCiqAy3l2qvcdmM6vNze0LHUys3kWyGq4cDJGa+OR0EbxC2Fsww1I+7pgyKcy8
+ 9gbMT+Ib7zXCbmwpvjEqYD3n1Z+h8Vcd/9R0xLuaTqnEMbpp2Y4uPKdjK13PfpS+eC4MNO470Ud
+ NbBLG4rSrCRi7mubfQA==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI4MDA2MSBTYWx0ZWRfXy2jjuvUlwfQo
+ 83RqSqzT+IYYyiql36mSIWVIaqF3u6Dt8sZGkooNW/AmXU5AaUPZ3qhvoK2UMsamfp0ervJ3KKG
+ Pvx04b/tQGH5LLED2kjplhwXYEh052s=
+X-Authority-Analysis: v=2.4 cv=asYnmiZV c=1 sm=1 tr=0 ts=6aba862c cx=c_pps
+ a=NMvoxGxYzVyQPkMeJjVPKg==:117 a=0kFmPUMe/4ewoYCJjrGTNA==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
+ a=EUspDBNiAAAA:8 a=JF9118EUAAAA:8 a=FRSEYCzRAAAA:8 a=AbjpwKpZfJmGdCkLGqQA:9
+ a=QEXdDO2ut3YA:10 a=kLokIza1BN8a-hAJ3hfR:22 a=xVlTc564ipvMDusKsbsT:22
+ a=H4N_Y-AU75W7NKDNhZlT:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-28_04,2026-09-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ phishscore=0 suspectscore=0 priorityscore=1501 impostorscore=0
+ lowpriorityscore=0 clxscore=1015 adultscore=0 bulkscore=0 malwarescore=0
+ spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
+ definitions=main-2609280061
+Received-SPF: pass client-ip=205.220.180.131;
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -164,211 +163,99 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
-On 9/9/2026 10:48 PM, Daniel Henrique Barboza wrote:
-> From: Chao Liu <chao.liu.zevorn@gmail.com>
->
-> RISC-V Debug Specification:
-> https://github.com/riscv/riscv-debug-spec/releases/tag/1.0
->
-> Use a TB flag when dcsr.step is set (and we are not in Debug Mode).
-> When the flag is on, build 1-insn TBs and do not chain to the next TB.
-> Add a TB-exit helper that enters Debug Mode with cause=step and sets
-> dpc to the next pc, then stops with EXCP_DEBUG.
->
-> If dcsr.stepie is 0, do not take interrupts while stepping. Treat WFI
-> as a nop so the hart does not sleep during a step.
->
-> PS: This patch references Max Chou's handling of ext_tb_flags.
-> https://lore.kernel.org/qemu-devel/20260108132631.9429-6-max.chou@sifive.com/
->
-> Signed-off-by: Chao Liu <chao.liu.zevorn@gmail.com>
-> Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-> Tested-by: Tao Tang <tangtao1634@phytium.com.cn>
-> Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Reviewed-by: Nutty Liu <nutty.liu@hotmail.com>
+
+On 9/28/2026 7:47 AM, Andrew Jones wrote:
+> On Thu, Sep 17, 2026 at 02:44:04PM -0300, Daniel Henrique Barboza wrote:
+>> Add documentation for the new riscv-server-ref board.
+>>
+>> Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+>> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+>> Reviewed-by: Chao Liu <chao.liu@processmission.com>
+>> Reviewed-by: Sunil V L <sunilvl@oss.qualcomm.com>
+>> ---
+>>   docs/system/riscv/riscv-server-ref.rst | 64 ++++++++++++++++++++++++++
+>>   docs/system/target-riscv.rst           |  1 +
+>>   2 files changed, 65 insertions(+)
+>>   create mode 100644 docs/system/riscv/riscv-server-ref.rst
+>>
+>> diff --git a/docs/system/riscv/riscv-server-ref.rst b/docs/system/riscv/riscv-server-ref.rst
+>> new file mode 100644
+>> index 0000000000..5b23122f19
+>> --- /dev/null
+>> +++ b/docs/system/riscv/riscv-server-ref.rst
+>> @@ -0,0 +1,64 @@
+>> +.. SPDX-License-Identifier: GPL-2.0-or-later
+>> +
+>> +RISC-V Server Platform Reference board (``riscv-server-ref``)
+>> +=============================================================
+>> +
+>> +The RISC-V Server Platform specification `spec`_ defines a standardized
+>> +set of hardware and software capabilities that portable system software,
+>> +such as OS and hypervisors, can rely on being present in a RISC-V server
+>> +platform.  This machine aims to emulate this specification, providing
+>> +an environment for firmware/OS development and testing.
+>> +
+>> +`spec`_ is version 1.0 at the introduction of this board.  For each new
+>> +supported spec version a new versioned board will be added, keeping
+>> +"riscv-server-ref" as an alias for the newest version supported.  E.g.
+>> +for spec version 2.0:
+>> +
+>> +* riscv-server-ref-1.0 - board that complies with spec version 1.0
+>> +* riscv-server-ref-2.0 - board that complies with spec version 2.0
+>> +* riscv-server-ref - alias for riscv-server-ref-2.0
+>> +
+>> +The main features included in the riscv-server-ref board are:
+>> +
+>> +* IOMMU platform device (riscv-iommu-sys)
+>> +* AIA
+>> +* No AHCI (can be added via command line)
+>> +* No NIC (can be added via command line)
+>> +* No virtio mmio bus
+>> +* No fw_cfg device
+>> +* No ACPI table
+>> +* Minimal device tree nodes
+>> +
+>> +There are multiple ways of using this reference board.  The spec compliant way
+>> +is using an EDK2 image and a TPM device.  The board was tested with the TPM
+>> +device ``tpm-tis`` that uses the external ``swtpm`` emulator.  More info on how
+>> +to use this device can be found in `tpm`_.
+>> +
+>> +To use this board coupled with the tpm-tis device, first start the ``swtpm``
+>> +process in a shell (the ``log`` parameter is optional):
+>> +
+>> +.. code-block:: bash
+>> +
+>> +    $ mkdir /tmp/mytpm1
+>> +    $ swtpm socket --tpmstate dir=/tmp/mytpm1 \
+>> +            --ctrl type=unixio,path=/tmp/mytpm1/swtpm-sock \
+>> +            --tpm2 \
+>> +            --log level=20
+>> +
+>> +And then start QEMU with:
+>> +
+>> +.. code-block:: bash
+>> +
+>> + qemu-system-riscv64 -M riscv-server-ref \
+>> +     -bios fw_dynamic.bin \
+>> +     -kernel EDK2.fd \
+>> +     -drive file=nvme_disk.ext2,format=raw,id=hd0,if=none \
+>> +     -device nvme,drive=hd0,serial=ddaaddaa \
+>> +     -chardev socket,id=chrtpm,path=/tmp/mytpm1/swtpm-sock \
+>> +     -tpmdev emulator,id=tpm0,chardev=chrtpm \
+>> +     -device tpm-tis-device,tpmdev=tpm0 \
+>> +     -nographic
+> 
+> Should we add the e1000e to this example command line?
+
+I'll have to re-send sdext, which will imply in another rebase and re-test of these patches,
+so might as well add an e1000e example in these docs.  I.e. I'll send a v13.
+
 
 Thanks,
-Nutty
-> ---
->   include/exec/translation-block.h |  4 ++--
->   target/riscv/cpu.h               |  2 ++
->   target/riscv/helper.h            |  1 +
->   target/riscv/tcg/cpu_helper.c    |  6 ++++++
->   target/riscv/tcg/op_helper.c     | 20 ++++++++++++++++++++
->   target/riscv/tcg/tcg-cpu.c       |  5 +++++
->   target/riscv/tcg/translate.c     | 15 +++++++++++++--
->   7 files changed, 49 insertions(+), 4 deletions(-)
->
-> diff --git a/include/exec/translation-block.h b/include/exec/translation-block.h
-> index 40cc699031..ee15608c89 100644
-> --- a/include/exec/translation-block.h
-> +++ b/include/exec/translation-block.h
-> @@ -64,8 +64,8 @@ struct TranslationBlock {
->        * x86: the original user, the Code Segment virtual base,
->        * arm: an extension of tb->flags,
->        * s390x: instruction data for EXECUTE,
-> -     * sparc: the next pc of the instruction queue (for delay slots).
-> -     * riscv: an extension of tb->flags,
-> +     * sparc: the next pc of the instruction queue (for delay slots),
-> +     * riscv: an extension of tb->flags.
->        */
->       uint64_t cs_base;
->   
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 82eb61a18c..db49ad7682 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -755,6 +755,8 @@ FIELD(TB_FLAGS, PM_SIGNEXTEND, 31, 1)
->   FIELD(EXT_TB_FLAGS, MISA_EXT, 0, 32)
->   FIELD(EXT_TB_FLAGS, ALTFMT, 32, 1)
->   FIELD(EXT_TB_FLAGS, BIG_ENDIAN, 33, 1)
-> +/* sdext single-step needs a TB flag to build 1-insn TBs */
-> +FIELD(EXT_TB_FLAGS, SDEXT_STEP, 34, 1)
->   
->   #ifdef TARGET_RISCV32
->   #define riscv_cpu_mxl(env)  ((void)(env), MXL_RV32)
-> diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-> index 0d9ae15e3e..5193440e1c 100644
-> --- a/target/riscv/helper.h
-> +++ b/target/riscv/helper.h
-> @@ -142,6 +142,7 @@ DEF_HELPER_1(tlb_flush_all, void, env)
->   DEF_HELPER_4(ctr_add_entry, void, env, tl, tl, tl)
->   /* Native Debug */
->   DEF_HELPER_1(itrigger_match, void, env)
-> +DEF_HELPER_1(sdext_step, void, env)
->   DEF_HELPER_2(sdext_ebreak, void, env, tl)
->   #endif
->   
-> diff --git a/target/riscv/tcg/cpu_helper.c b/target/riscv/tcg/cpu_helper.c
-> index e6d948991c..a7344b1be2 100644
-> --- a/target/riscv/tcg/cpu_helper.c
-> +++ b/target/riscv/tcg/cpu_helper.c
-> @@ -500,6 +500,12 @@ bool riscv_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
->       if (interrupt_request & mask) {
->           RISCVCPU *cpu = RISCV_CPU(cs);
->           CPURISCVState *env = &cpu->env;
-> +
-> +        if (cpu->cfg.ext_sdext && !env->debug_mode &&
-> +            (env->dcsr & DCSR_STEP) && !(env->dcsr & DCSR_STEPIE)) {
-> +            return false;
-> +        }
-> +
->           int interruptno = riscv_cpu_local_irq_pending(env);
->           if (interruptno >= 0) {
->               cs->exception_index = RISCV_EXCP_INT_FLAG | interruptno;
-> diff --git a/target/riscv/tcg/op_helper.c b/target/riscv/tcg/op_helper.c
-> index 5db4f6aacd..489aac28e7 100644
-> --- a/target/riscv/tcg/op_helper.c
-> +++ b/target/riscv/tcg/op_helper.c
-> @@ -489,6 +489,22 @@ target_ulong helper_dret(CPURISCVState *env)
->   #endif
->   }
->   
-> +void helper_sdext_step(CPURISCVState *env)
-> +{
-> +#ifndef CONFIG_USER_ONLY
-> +    CPUState *cs = env_cpu(env);
-> +
-> +    if (!riscv_cpu_cfg(env)->ext_sdext || env->debug_mode ||
-> +        !(env->dcsr & DCSR_STEP)) {
-> +        return;
-> +    }
-> +
-> +    riscv_cpu_enter_debug_mode(env, env->pc, DCSR_CAUSE_STEP);
-> +    cs->exception_index = EXCP_DEBUG;
-> +    cpu_loop_exit_restore(cs, GETPC());
-> +#endif
-> +}
-> +
->   void helper_sdext_ebreak(CPURISCVState *env, target_ulong pc)
->   {
->       CPUState *cs = env_cpu(env);
-> @@ -621,6 +637,10 @@ void helper_wfi(CPURISCVState *env)
->                  (prv_u || (prv_s && get_field(env->hstatus, HSTATUS_VTW)))) {
->           riscv_raise_exception(env, RISCV_EXCP_VIRT_INSTRUCTION_FAULT, GETPC());
->       } else {
-> +        if (riscv_cpu_cfg(env)->ext_sdext && !env->debug_mode &&
-> +            (env->dcsr & DCSR_STEP)) {
-> +            return;
-> +        }
->           cs->halted = 1;
->           cs->exception_index = EXCP_HLT;
->           cpu_loop_exit(cs);
-> diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-> index 959a1e89c8..16d26cee5c 100644
-> --- a/target/riscv/tcg/tcg-cpu.c
-> +++ b/target/riscv/tcg/tcg-cpu.c
-> @@ -196,6 +196,11 @@ static TCGTBCPUState riscv_get_tb_cpu_state(CPUState *cs)
->       ext_flags = FIELD_DP64(ext_flags, EXT_TB_FLAGS, MISA_EXT, env->misa_ext);
->       ext_flags = FIELD_DP64(ext_flags, EXT_TB_FLAGS, BIG_ENDIAN,
->                              mo_endian_env(env) == MO_BE);
-> +#ifndef CONFIG_USER_ONLY
-> +    if (cpu->cfg.ext_sdext && !env->debug_mode && (env->dcsr & DCSR_STEP)) {
-> +        ext_flags = FIELD_DP64(ext_flags, EXT_TB_FLAGS, SDEXT_STEP, 1);
-> +    }
-> +#endif
->   
->       return (TCGTBCPUState){
->           .pc = env->xl == MXL_RV32 ? env->pc & UINT32_MAX : env->pc,
-> diff --git a/target/riscv/tcg/translate.c b/target/riscv/tcg/translate.c
-> index 9684dbe752..1a38d6aeb5 100644
-> --- a/target/riscv/tcg/translate.c
-> +++ b/target/riscv/tcg/translate.c
-> @@ -112,6 +112,8 @@ typedef struct DisasContext {
->       bool ztso;
->       /* Use icount trigger for native debug */
->       bool itrigger;
-> +    /* Enter Debug Mode after next instruction (sdext single-step). */
-> +    bool sdext_step;
->       /* FRM is known to contain a valid value. */
->       bool frm_valid;
->       bool insn_start_updated;
-> @@ -286,6 +288,9 @@ static void lookup_and_goto_ptr(DisasContext *ctx)
->       if (ctx->itrigger) {
->           gen_helper_itrigger_match(tcg_env);
->       }
-> +    if (ctx->sdext_step) {
-> +        gen_helper_sdext_step(tcg_env);
-> +    }
->   #endif
->       tcg_gen_lookup_and_goto_ptr();
->   }
-> @@ -296,6 +301,9 @@ static void exit_tb(DisasContext *ctx)
->       if (ctx->itrigger) {
->           gen_helper_itrigger_match(tcg_env);
->       }
-> +    if (ctx->sdext_step) {
-> +        gen_helper_sdext_step(tcg_env);
-> +    }
->   #endif
->       tcg_gen_exit_tb(NULL, 0);
->   }
-> @@ -309,7 +317,8 @@ static void gen_goto_tb(DisasContext *ctx, unsigned tb_slot_idx,
->         * Under itrigger, instruction executes one by one like singlestep,
->         * direct block chain benefits will be small.
->         */
-> -    if (translator_use_goto_tb(&ctx->base, dest) && !ctx->itrigger) {
-> +    if (translator_use_goto_tb(&ctx->base, dest) &&
-> +        !ctx->itrigger && !ctx->sdext_step) {
->           /*
->            * For pcrel, the pc must always be up-to-date on entry to
->            * the linked TB, so that it can use simple additions for all
-> @@ -1350,6 +1359,7 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
->       ctx->bcfi_enabled = FIELD_EX32(tb_flags, TB_FLAGS, BCFI_ENABLED);
->       ctx->fcfi_lp_expected = FIELD_EX32(tb_flags, TB_FLAGS, FCFI_LP_EXPECTED);
->       ctx->fcfi_enabled = FIELD_EX32(tb_flags, TB_FLAGS, FCFI_ENABLED);
-> +    ctx->sdext_step = FIELD_EX64(ext_tb_flags, EXT_TB_FLAGS, SDEXT_STEP);
->       ctx->zero = tcg_constant_tl(0);
->       ctx->virt_inst_excp = false;
->       ctx->decoders = cpu->decoders;
-> @@ -1402,7 +1412,8 @@ static void riscv_tr_translate_insn(DisasContextBase *dcbase, CPUState *cpu)
->   
->       /* Only the first insn within a TB is allowed to cross a page boundary. */
->       if (ctx->base.is_jmp == DISAS_NEXT) {
-> -        if (ctx->itrigger || !translator_is_same_page(&ctx->base, ctx->base.pc_next)) {
-> +        if (ctx->itrigger || ctx->sdext_step ||
-> +            !translator_is_same_page(&ctx->base, ctx->base.pc_next)) {
->               ctx->base.is_jmp = DISAS_TOO_MANY;
->           } else {
->               unsigned page_ofs = ctx->base.pc_next & ~TARGET_PAGE_MASK;
+Daniel
+
+> 
+> Thanks,
+> drew
+
 
