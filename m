@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBB9AC98328
-	for <qemu-riscv@archiver.kernel.org>; Mon, 28 Sep 2026 05:25:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA30EC9833E
+	for <qemu-riscv@archiver.kernel.org>; Mon, 28 Sep 2026 05:25:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xB3q0-0005Tj-5Y; Mon, 28 Sep 2026 01:23:42 -0400
+	id 1xB3ru-0007ws-9l; Mon, 28 Sep 2026 01:25:40 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xB3p3-0004Ji-7v
- for qemu-riscv@nongnu.org; Mon, 28 Sep 2026 01:22:42 -0400
-Received: from mail-dl1-x1232.google.com ([2607:f8b0:4864:20::1232])
+ id 1xB3pe-00059e-Bz
+ for qemu-riscv@nongnu.org; Mon, 28 Sep 2026 01:23:21 -0400
+Received: from mail-dl2-x0f.google.com ([2607:f8b0:4864:38::f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xB3p1-0007y2-0X
- for qemu-riscv@nongnu.org; Mon, 28 Sep 2026 01:22:40 -0400
-Received: by mail-dl1-x1232.google.com with SMTP id
- a92af1059eb24-144f79153f5so1389298c88.0
- for <qemu-riscv@nongnu.org>; Sun, 27 Sep 2026 22:22:37 -0700 (PDT)
+ id 1xB3pc-00085Q-If
+ for qemu-riscv@nongnu.org; Mon, 28 Sep 2026 01:23:18 -0400
+Received: by mail-dl2-x0f.google.com with SMTP id
+ a92af1059eb24-142dd04be84so3187795c88.3
+ for <qemu-riscv@nongnu.org>; Sun, 27 Sep 2026 22:23:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1790572957; x=1791177757; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1790572995; x=1791177795; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=V7+TSeCs1OkWi/fweWHWaqMKw8c/A0ZiNHA+KMl1mwg=;
- b=Vn0NeLPBMnSS52QqrhG38ARaNza6N1yPkj1WMQHKQTb9dQDAotGMCOW+iYv6Utq+al
- ebmdFjKPZ5vtZpEhm50fHFUF5wH9fLrqBi5cRiIkLhjA2m2V3owLvI6lzvjLqNHKMSDy
- XiteJ/NAHUQyhhLgVk1cPIHTEvr54LyJDpTu3U2elDfQDtyO7hmFhKc4AXhOCp/y6NA0
- 5rwb+niHzcrfQMvvsrwhUhPu43XYqfkT1lAjZrM+f/otkaWffmnk9uA5xv7fZrVIscZM
- O7eUbVS+PKlMLisk0M5q12D12+GN8r3jkXhw6kaQchCSrmk1g25Rdi8LnsyOmHthBCoO
- Gb7Q==
+ bh=BWMlA1NXCzJLFH2JlbJbQuxfT3OYvSZI8xbaoVuKaUQ=;
+ b=doSKapxJUHDXm7Sc7ktjtIyKeynFK5wuFqCueqtSy5CS0ZPHghZinwqMB1C27m5W0E
+ k4WVLsu8uSoJV0uG1xbbIWPHBetNjW5SeXExLrXRhlh8IN5uUX6vTfyX+I2YUO0zkGSd
+ 9bgPYiAMKAjI0tsxnVKbiNZfTsoLry/SYPl5fKxzqEP7yyTQcTiaVQCKlIol2Y5LhZQt
+ MqavsF5HZ8I8VhouVHjdPPWXgiJ+W05e5za2IXw5/iNZ0OGaV31XhV8B2bLkFbqdBnDi
+ Fs5ZDBH6nPcXhltx7NoPAXiOaHMxrEPi6CqmMt1eglAeOwlCotTIgkrP4OOdQzZXQdE8
+ LHKQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790572957; x=1791177757;
+ d=1e100.net; s=20260707; t=1790572995; x=1791177795;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=V7+TSeCs1OkWi/fweWHWaqMKw8c/A0ZiNHA+KMl1mwg=;
- b=XHCRMBXQVyZDH8l4zzTQ/5e8IWZn/DpmKgkJVNl9dj0ttz50oMx8jGJfpHIVTG+QPJ
- G2RN2cYtbOJxICNzRIiOY1VRgi/Y/Vt/EOy9VDg5sA4lQy/KYZr9Jm+MQNx6By6aDZEv
- uiT9goGx1tJHh06UUazO8giqETkHYvT7X94JTBF5wYph28m4DVNQr2/cQ796V5bhPsva
- 3OYMya5oFRkGlIQzydJdBmvdQXHe3cXvyVO94yZ5gAfIPxdjj2ONYJWwoVske9kx8SKq
- osqW2TYh3KN79xKQzsAp+1/o0P6OfkQrXq9wnjDY8ihP30ODpuyAgQYz+GT87nwI59JJ
- c6LA==
+ bh=BWMlA1NXCzJLFH2JlbJbQuxfT3OYvSZI8xbaoVuKaUQ=;
+ b=xCAo2Dsg3ZGBjGmb+iCTEUDLE4E+jvIvxm0ataO3riM5Vjru0Mp9j7/6C1fbMBEJCC
+ dCaE5/heUiwHVSDYC7WoLCUaZRu/D1aRp4EZ2YvXGlJsRu3F4D108Q0xTZB1Ja5Sv5Yy
+ zhrNApcSWlQcChfLl9ZRdQH6ife/8qloUnG7tKrZb2r84TPs+tmtWVnTiW8l06o3zU25
+ w61nOsbtVXbK9Aaj9f22XxhGwxh9TvrZ2ecxFddnA5zWwdiXKJCn8omDvoyfG8Rj4C3z
+ l+0jaWD6Yk1ahEikYI+7XlH5zTKYvGanCbS1GlKMVO0ok+z/5YawSMsjENqnO3I5yw/y
+ l6cg==
 X-Forwarded-Encrypted: i=1;
- AKwUvBwxWuXUZCB7bUjC8i81dYjgSHPrbHgDpMMxlyTKL8KQoYe9naeKVvQtNt7UsDTXEEg0UMCvweBIf5tN@nongnu.org
-X-Gm-Message-State: AFuF++nOxylLl8Qe1Irsa/oaJKjQYD280MLUs1zyjw1ztanIqqiqLAIA
- C8o+uXJV97Qz9HgAvSq7Y2b/4gvqN3NcRdFxjU/hZs6fD8B08TREDop9
-X-Gm-Gg: AYBFou0HhH4pf6PcepnhvqK1FWrn8W/Oq98eoQRx8zqaT1vHuajEIluVnVpuW7uLbAB
- gU9gxQMAcDUBsJovwyiexE7X9WVNgXTwTtuFAsT88Ycnir/XWYECNvbvoXUyz0k/lo3ktj2lggU
- Dmzh9nQxbxpN5QF2c8NP51AmxCl+0Cxyn1fhjDvqNyV7BSb7D1p+ds0cV9I+edsw45KR2fODkLY
- CmZUVk5AAaejgDTf1PuOFwlKBieLTCnoiod2myaJn/Gdgi1dJ9caPhNPj/xPIAo9D6EfIv6WO6e
- bdeSnk1yGxloz0rshPmC0UIGWPco07k+G050dmLd8pVQzqGP8fx7H8fZz3J/LwpF29lxJ2oSgMl
- vTMQRrB8G6A6y1frUPYQFGYnEHxYErLC7PXH2XtF01ZMW6iGz9h1oG68m7nOFM06eucigWGtSzm
- d7oLKKNNC19bQn7WuZzA/LdPNYSFltGPEBtmnlbIGz6w6KysZjvkGYqcMyAiYUR8G37Ge0GaLO8
- wWvCVyVa6xhBCfD4G0OSnAv/GYJhXY=
-X-Received: by 2002:a05:7022:f508:b0:143:3769:c680 with SMTP id
- a92af1059eb24-146d0d46e43mr6412033c88.25.1790572956658; 
- Sun, 27 Sep 2026 22:22:36 -0700 (PDT)
+ AKwUvBwMEVHWuCsCUCO7/eexJIrJ+BmYjmrnsulgkq+w2CpT/ky5y3bnhb8V3QWAAD+/TP8J/0YxTs1YezaG@nongnu.org
+X-Gm-Message-State: AFuF++l8AMsRpsVz79uKKG5XG7hk7sAISDExK6zKZOc+eTOkG+Qatfep
+ YKiemnvPHfwf3uzZmEYtYF8Q1hEMgAgV0+6AYrLGgARbjlHtVhjYaKkg
+X-Gm-Gg: AYBFou3Ojxpc8RyM4KD9wuB7BC3AotPBoqsLJYplDFQKZjG/ZpoxU/14u1Gq+045Abr
+ TbajoY0ZzL+y0CeeXvCsV3clVgw+rLXv2UGvti8uDAp2EPJ+7MMJPhQdZ2azxi4WdiyUUHlnpom
+ zAdZUmjAgsMcD26o9gBfe04mrtjbO1dnvX/7ZGPDFr/ROQtT7v7FF4qrceN3HL/b9GaL+6RDyx8
+ s6wIUVoDfK9iDcndW85FXoLt5peFCfnnd95xDjK9sUxcbBEFTzaFsNjEcKZE817rTGnC1gYalem
+ 6kzTRUFEvPagO8T9kaUrMeP6XvAVlWR0KlZ+V/s8OP+xy4iFH9DjEfyemiLX6KkNRBgDYS0grf6
+ bQxODhayHIWHRVvENrX/75qprh+lv0qq6c/Z7FJo7uc6FMl3+RGS04zrxRRlG84X2PBvij2FFye
+ swMk8XMXb/OYHFT92xNv996pvgs4fiiqTm/Esdq3qu2ix6LS7/a3PXlhbgFL2gLwfJY6WKLqVmT
+ 1MK/jfV4zYkwVDJkF8kaI0pBrFhViQ=
+X-Received: by 2002:a05:7022:b04b:20b0:144:c127:dd19 with SMTP id
+ a92af1059eb24-146d01afcb2mr8924541c88.37.1790572995057; 
+ Sun, 27 Sep 2026 22:23:15 -0700 (PDT)
 Received: from WIN-BH9M8FJACR9 ([103.94.185.75])
  by smtp.googlemail.com with ESMTPSA id
- a92af1059eb24-146bb6551d9sm14726248c88.9.2026.09.27.22.22.29
+ a92af1059eb24-146bb6551d9sm14726248c88.9.2026.09.27.22.23.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 27 Sep 2026 22:22:35 -0700 (PDT)
+ Sun, 27 Sep 2026 22:23:14 -0700 (PDT)
 From: Yonggang Luo <luoyonggang@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: Helge Deller <deller@gmx.de>, Harsh Prateek Bora <harshpb@linux.ibm.com>,
@@ -96,24 +96,23 @@ Cc: Helge Deller <deller@gmx.de>, Harsh Prateek Bora <harshpb@linux.ibm.com>,
  Michael Rolnik <mrolnik@gmail.com>,
  Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
  Paolo Bonzini <pbonzini@redhat.com>, qemu-s390x@nongnu.org
-Subject: [PATCH v2 12/24] target/loongarch: convert raise_exception to
- raise_excp
-Date: Mon, 28 Sep 2026 13:20:38 +0800
-Message-ID: <20260928052051.251-13-luoyonggang@gmail.com>
+Subject: [PATCH v2 17/24] target/xtensa: add gen_yield for EXCP_YIELD
+Date: Mon, 28 Sep 2026 13:20:43 +0800
+Message-ID: <20260928052051.251-18-luoyonggang@gmail.com>
 X-Mailer: git-send-email 2.52.0.windows.1
 In-Reply-To: <20260928052051.251-1-luoyonggang@gmail.com>
 References: <20260928052051.251-1-luoyonggang@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1232;
- envelope-from=luoyonggang@gmail.com; helo=mail-dl1-x1232.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:38::f;
+ envelope-from=luoyonggang@gmail.com; helo=mail-dl2-x0f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -129,76 +128,42 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Translate through raise_excp_restore after storing PC. Drop TCG
-raise_exception. Keep C do_raise_exception and use
-cpu_loop_exit_excp.
+gen_exception has one caller, and that caller always passes
+EXCP_YIELD. Rename the path to gen_yield and clear yield_needed
+there.
 
 Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
 ---
- target/loongarch/tcg/helper.h    | 2 --
- target/loongarch/tcg/op_helper.c | 6 ------
- target/loongarch/tcg/tcg_cpu.c   | 4 +---
- target/loongarch/tcg/translate.c | 2 +-
- 4 files changed, 2 insertions(+), 12 deletions(-)
+ target/xtensa/translate.c | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
 
-diff --git a/target/loongarch/tcg/helper.h b/target/loongarch/tcg/helper.h
-index e76c73c7755..e3a7bc9e9da 100644
---- a/target/loongarch/tcg/helper.h
-+++ b/target/loongarch/tcg/helper.h
-@@ -3,8 +3,6 @@
-  * Copyright (c) 2021 Loongson Technology Corporation Limited
-  */
- 
--DEF_HELPER_2(raise_exception, noreturn, env, i32)
--
- DEF_HELPER_FLAGS_3(asrtle_d, TCG_CALL_NO_WG, void, env, tl, tl)
- DEF_HELPER_FLAGS_3(asrtgt_d, TCG_CALL_NO_WG, void, env, tl, tl)
- 
-diff --git a/target/loongarch/tcg/op_helper.c b/target/loongarch/tcg/op_helper.c
-index f98fe4d4a16..109417b7503 100644
---- a/target/loongarch/tcg/op_helper.c
-+++ b/target/loongarch/tcg/op_helper.c
-@@ -16,12 +16,6 @@
- #include <zlib.h> /* for crc32 */
- #include "cpu-csr.h"
- 
--/* Exceptions helpers */
--void helper_raise_exception(CPULoongArchState *env, uint32_t exception)
--{
--    do_raise_exception(env, exception, GETPC());
--}
--
- /* loongarch assert op */
- void helper_asrtle_d(CPULoongArchState *env, target_ulong rj, target_ulong rk)
- {
-diff --git a/target/loongarch/tcg/tcg_cpu.c b/target/loongarch/tcg/tcg_cpu.c
-index 4b1d44a1644..56ef0d912cc 100644
---- a/target/loongarch/tcg/tcg_cpu.c
-+++ b/target/loongarch/tcg/tcg_cpu.c
-@@ -69,9 +69,7 @@ void G_NORETURN do_raise_exception(CPULoongArchState *env,
-                   __func__,
-                   exception,
-                   loongarch_exception_name(exception));
--    cs->exception_index = exception;
--
--    cpu_loop_exit_restore(cs, pc);
-+    cpu_loop_exit_excp(cs, exception, pc);
+diff --git a/target/xtensa/translate.c b/target/xtensa/translate.c
+index 175fd4b5cfc..db48f0c562a 100644
+--- a/target/xtensa/translate.c
++++ b/target/xtensa/translate.c
+@@ -303,9 +303,11 @@ static void gen_left_shift_sar(DisasContext *dc, TCGv_i32 sa)
+     dc->sar_m32_5bit = true;
  }
  
- #ifndef CONFIG_USER_ONLY
-diff --git a/target/loongarch/tcg/translate.c b/target/loongarch/tcg/translate.c
-index 124dce62695..b7e8ce8a653 100644
---- a/target/loongarch/tcg/translate.c
-+++ b/target/loongarch/tcg/translate.c
-@@ -95,7 +95,7 @@ static void gen_nanbox_s(TCGv_i64 out, TCGv_i64 in)
- void generate_exception(DisasContext *ctx, int excp)
+-static void gen_exception(DisasContext *dc, int excp)
++static void gen_yield(DisasContext *dc)
  {
-     tcg_gen_movi_tl(cpu_pc, ctx->base.pc_next);
--    gen_helper_raise_exception(tcg_env, tcg_constant_i32(excp));
-+    gen_helper_raise_excp_restore(tcg_env, tcg_constant_i32(excp));
-     ctx->base.is_jmp = DISAS_NORETURN;
+-    gen_helper_exception(tcg_env, tcg_constant_i32(excp));
++    tcg_gen_st_i32(tcg_constant_i32(0), tcg_env,
++                   offsetof(CPUXtensaState, yield_needed));
++    gen_helper_exception(tcg_env, tcg_constant_i32(EXCP_YIELD));
  }
  
+ static void gen_exception_cause(DisasContext *dc, uint32_t cause)
+@@ -1167,7 +1169,7 @@ static void xtensa_tr_translate_insn(DisasContextBase *dcbase, CPUState *cpu)
+        but this is the first TranslateOps hook that allows exiting.  */
+     if ((tb_cflags(dc->base.tb) & CF_USE_ICOUNT)
+         && (dc->base.tb->flags & XTENSA_TBFLAG_YIELD)) {
+-        gen_exception(dc, EXCP_YIELD);
++        gen_yield(dc);
+         dc->base.pc_next = dc->pc + 1;
+         dc->base.is_jmp = DISAS_NORETURN;
+         return;
 -- 
 2.52.0.windows.1
 
