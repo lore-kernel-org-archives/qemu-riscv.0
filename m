@@ -4,68 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93863CA5FA1
-	for <qemu-riscv@archiver.kernel.org>; Tue, 29 Sep 2026 03:17:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FD03CA5FAD
+	for <qemu-riscv@archiver.kernel.org>; Tue, 29 Sep 2026 03:18:39 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xBOKx-0004ew-6o; Mon, 28 Sep 2026 23:16:59 -0400
+	id 1xBOLP-00050a-KI; Mon, 28 Sep 2026 23:17:29 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <portias@tenstorrent.com>)
- id 1xBOKs-0004cp-MX
- for qemu-riscv@nongnu.org; Mon, 28 Sep 2026 23:16:55 -0400
+ id 1xBOLH-0004t9-Th
+ for qemu-riscv@nongnu.org; Mon, 28 Sep 2026 23:17:20 -0400
 Received: from mail-pj2-x2b.google.com ([2607:f8b0:4864:39::2b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <portias@tenstorrent.com>)
- id 1xBOKr-0006u8-4a
- for qemu-riscv@nongnu.org; Mon, 28 Sep 2026 23:16:54 -0400
+ id 1xBOLG-0006xY-3Q
+ for qemu-riscv@nongnu.org; Mon, 28 Sep 2026 23:17:19 -0400
 Received: by mail-pj2-x2b.google.com with SMTP id
- 98e67ed59e1d1-3a49902b698so73016a91.1
- for <qemu-riscv@nongnu.org>; Mon, 28 Sep 2026 20:16:52 -0700 (PDT)
+ 98e67ed59e1d1-3a49b3e7bc3so88188a91.2
+ for <qemu-riscv@nongnu.org>; Mon, 28 Sep 2026 20:17:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=tenstorrent.com; s=google; t=1790651811; x=1791256611; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:content-type:message-id:date
- :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=wQRpqb30JdS927aEFmUSHnoj4SoVnjZFUmdr6PiqntE=;
- b=OmOOnhrrVO4dRFCneSbl59C+RFH79Sw8GTnOXkB8OHJwK/L22kIoYg4trnuqy2XMYC
- 9Le6CLv/bZzPsbM1UGuO0TB2ZAtxBKpZvhm8J0PFUpPusPDnkz9pYQaxJgGIq0zysZIC
- nXDAM2pU9b3uLylQ8Q92Aaj6s2aQyKrzI3QmjBY1rTix5LfT78FQLfTHEddokieiRgQF
- I2kkwP7YW3d/TDU8yWBXbLxeFFYM57Z/EPN0lhKDIhoejjYf1pCR5EHFPwFNCf8x5Lxl
- x38Wuv340rjCYT3y7x9sg5cTJhqGL3DD8l7kDhxNgrndfO0i/G3bF03gOF6Y1MGtIqYE
- ojMw==
+ d=tenstorrent.com; s=google; t=1790651836; x=1791256636; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=zozyAcbZ1VUQydZR7vvEW52sN1AndGrBgYH/TN5JD7o=;
+ b=PH9JkYZUKeHJk4A6EmXZwQEXCMKOrO643b0LixbDo26G3wdQ2xMS+Y/x61q3T6fkAM
+ zWjsnwF4btJRbrkuCI/CnYswxORxkk0TgAyVRWxIRLj0J8+bDNEGpTSJ3VL+YLnYfAiS
+ wACbOHmX6dVDXBB8SxVdawPlIGvN4/YslXoKyOE//0xsR4i5kbjYabMbD33WBdHU/TLe
+ yY1ym9HVLYoxfgem5r1kgevp7jgV4nWib+DRkTcJzrDdQIWiclWcvuzarHr70MniZ1YY
+ l5AjvY3SXfocS+BMk8Fyi9h9iw1pzse5x0XAw5d+DwUsXqMdgMq+JXqWn5HfOJp/qGEk
+ HoXw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790651811; x=1791256611;
- h=content-transfer-encoding:mime-version:content-type:message-id:date
- :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=wQRpqb30JdS927aEFmUSHnoj4SoVnjZFUmdr6PiqntE=;
- b=KEVQnkkuCRaHvv+SxtYEkMxCs/jnhpX5/nazCfkytN6UstL8yi4BBEiZTHIY57spTM
- U+X8Wwy4CtR9lKhWFmaSTweyzbEikT0nrP998g6ug8TGN9IUK4rxl5SCOS3VsoHOhmKX
- uNnky/+WCUytNSRyhCqkHudAZMp+X9qzkQ42aa1fLCPSk5WimKuXqyeAdGV+p4v8J6wl
- oKVlleV3w+TZS4cM5OWIuBKsBUW86tsuZPGEeMRIj6rPuzKuklquOCFD+K/PAu8Uluwy
- ED4AAK0Of5A4skxAo6ASk2xw8fZd35nYJu+WsBPlB0Q0eobd7LhQc1mvpj4RDe3sONan
- 0Zbg==
+ d=1e100.net; s=20260707; t=1790651836; x=1791256636;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=zozyAcbZ1VUQydZR7vvEW52sN1AndGrBgYH/TN5JD7o=;
+ b=GbxPJGTi1yM0H1t/HtUF0m3hG7dc6TmUug80zF7E3M9fuvAWQmh7ZyqY98TqU9QOo1
+ hC6c2HD1LA/w/+BKM5gZCEo+X+0Kypg48FpQozMDatWAbdWp9fIN/1+gZMRttOS/Ex5T
+ btIN5TLkDW9kp4aN5fC0f2J0PWldurf45CuNBcERj/XIaZ2AvfvAhh7KAi92CdPkv4IX
+ ISYg/8F2REQVn9NkvWA6rCl39coaJp1MwDcvWx5Z9HJ1kJCndJL0aZM5uQzmsJjkTgQm
+ cQYFmc3itToOnIQvHrZiV91xK4D+k+K2o03OEWGbGvQ2CAJF+VAvDYvtxsLZkUzMCftr
+ /4yA==
 X-Forwarded-Encrypted: i=1;
- AKwUvBw50dlqaEIRInnIVxSJzXJ0L6BTm9dUXEr8dmRU+6P+4XtCmgIjFUvHjk03CSBJNddJpjeqzIjJgryo@nongnu.org
-X-Gm-Message-State: AFq9FYKmW8J8xFRzX7b0glClzMO9l1o88MwwTcR8yX3/eyy5t8U13kUJ
- Py/wfQx9uevLt3sOK62kbMohRI6SrNDFYKNpTvCodtcmeidlsi9Jf32p0pu0I/VAbqE=
-X-Gm-Gg: AYBFou2azXwJaIj55E7GHIZMxANcan45A3PeNmxQosoCoXb2YkN7lqz2NZbhh3o0NS0
- DAN3O8eIuZF4mMLvFz/Q3rfnbjCKFgeDwS5M0ZNMMoj3WxWYHjIckC0z5jeYjkLEKFgHsRNgS9+
- SIWh4jlS80JG56o3vvch1wRXSAoEdZO2px2g3xOOFojPr0RbxAhzC5/gzv36H5+/JOwT36YYpTN
- MadUcju7Miq6Vnk60wji4uei5XTfhuKTRJfFsMwM/xR0rD9499ZqWiYHHI9vWHBZUyBZ6uctW+O
- wNcsDo3jMWdDzTK6L/lE6C84ITlHgut7jsBjcc3yYWLOJG77EgpxSEa8aIlUWVy+2E7BVh2y0Ku
- 2OiGwBVbri2A9JG7koglIaZX9VqIcdKHAyVRkD4h2qupENwBqaRcJcx5sqMmWedes1/UwZQvcSR
- OT1f1SF+Dk7uxB+iN4oFrzPR7VbQqBcBjzWocAx7abRrnhL4mm9AzpHY+PUD3pgAPv0sCogTjOj
- n53Jm/Kn8QrRaQOJUWm9EZQvwGN50J1rJI9zGbHqDMVdA0=
-X-Received: by 2002:a17:90b:4c81:b0:39e:3728:3b11 with SMTP id
- 98e67ed59e1d1-3a0b2507f4cmr17299719a91.3.1790651811235; 
- Mon, 28 Sep 2026 20:16:51 -0700 (PDT)
+ AKwUvBy3wMJdWw2sJ1GVvmi/ArQcWE5mlbw2urYhD+JWBi/4c62k9kJBNuP6WENhHvTBW0Bl5ljzmmzXGTAf@nongnu.org
+X-Gm-Message-State: AFq9FYKfEU5H4NJYZCP1wcffWZLkfZq+XrD5RZse/WxkzYWZ3AlGhKNM
+ /MPzthLGJ5Vi4ogDmkRgHu+bugAO0OMBDoFfbdlOHz0ER+dqmFTUp+U0PPyg2zpjTXw=
+X-Gm-Gg: AYBFou21AtfXnG3xoGoJcwpmzSek4ugQDiz2wXE5UKZlZXZxvUIpiAotcInTK4nFLcT
+ 3z9UW/MPZmXhTlgYzJcVtm/0jYcTeFV6TUQSMAFaqhKjmNZlTqMH//r8lYcS7oe6Hmm1FWojM28
+ 41D0Q1QHtCX1cx0szdqZ79jnpxx24oAO3F4QOYL0FLns0NLxd89cVzN9V4F7XFCporxUcNnPmgQ
+ xZMdIuSeoanbAtT99rRY2pd9SDkNx/LmMnZVptT5bhtrvY9fqVkzP/lANguG8ptInGqFEcBFdMF
+ mMxdbtlQyC0O6JjKeUkAK6Licrj1cawQ2vyzffvmjZb3aQt+R6sJEQMCCk7MK+M4XRhFGh1wEBE
+ Fm6PwWcmsyhjCZBI8UATIzMzlLOgeV7L+KjM0cXKMCRzJpbbweT0CTrlffIKgzy2s8mHlXLx15b
+ H3fREIFsjyfI74CB/TnPL+YnGPqtu3sf/N53iyK5KnqKRBiKgowbJ0Ggc8rMxDW6oUiqejej6/k
+ HNiQNlQNEaK5uvwoWXhY9sk5y9sFeb1ViFcc93Sb8jFOr0=
+X-Received: by 2002:a17:90b:3c8d:b0:3a0:8001:7d11 with SMTP id
+ 98e67ed59e1d1-3a0b2617800mr17665004a91.6.1790651836141; 
+ Mon, 28 Sep 2026 20:17:16 -0700 (PDT)
 Received: from lima-default.tail89d63.ts.net ([159.196.41.205])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3a492dfc5absm1563641a91.3.2026.09.28.20.16.46
+ 98e67ed59e1d1-3a492dfc5absm1563641a91.3.2026.09.28.20.17.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 28 Sep 2026 20:16:50 -0700 (PDT)
+ Mon, 28 Sep 2026 20:17:15 -0700 (PDT)
 From: portias@oss.tenstorrent.com
 To: qemu-devel@nongnu.org
 Cc: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
@@ -81,11 +82,12 @@ Cc: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  qemu-riscv@nongnu.org,
  Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
  Paolo Bonzini <pbonzini@redhat.com>
-Subject: [PATCH 0/5] Improve modeling of the Atlantis UART
-Date: Tue, 29 Sep 2026 13:16:39 +1000
-Message-ID: <20260929031644.1016354-1-portias@oss.tenstorrent.com>
+Subject: [PATCH 5/5] docs/atlantis: Update Atlantis UART documentation
+Date: Tue, 29 Sep 2026 13:16:44 +1000
+Message-ID: <20260929031644.1016354-6-portias@oss.tenstorrent.com>
 X-Mailer: git-send-email 2.43.0
-Content-Type: text/plain; charset="utf-8"
+In-Reply-To: <20260929031644.1016354-1-portias@oss.tenstorrent.com>
+References: <20260929031644.1016354-1-portias@oss.tenstorrent.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=2607:f8b0:4864:39::2b;
@@ -113,31 +115,49 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: Portia Stephens <portias@oss.tenstorrent.com>
 
-The Atlantis SoC has a DesignWare UART compatible with DW8250. Previously
-the Atlantis machine had used the ns16550 UART with an unimplemented memory
-region backing the DesignWare specific register space. This updates the Atlantis
-model to use the now modeled DW8250.
+Add documentation describing how to use the console machine property to
+control the console.
 
-It also adds the remaining 4 UARTs that were not originally included in the
-machine along with a machine property, console. console allows the user to
-which uart is being used at the console and will be mapped to the first
-serial interface.
+Signed-off-by: Portia Stephens <portias@oss.tenstorrent.com>
+---
+ docs/system/riscv/tt_atlantis.rst | 17 ++++++++++++++---
+ 1 file changed, 14 insertions(+), 3 deletions(-)
 
-Portia Stephens (5):
-  hw/char/dw8250: Fix leak when creating child device
-  hw/riscv/atlantis: Use dw8250 UART model
-  hw/riscv/atlantis: Add all UARTs for Atlantis SoC
-  hw/riscv/atlantis: Add machine property to select default uart
-  docs/atlantis: Update Atlantis UART documentation
-
- docs/system/riscv/tt_atlantis.rst |  17 +++-
- hw/char/dw8250.c                  |  11 ++-
- hw/riscv/Kconfig                  |   2 +-
- hw/riscv/tt_atlantis.c            | 130 ++++++++++++++++++++++--------
- include/hw/char/dw8250.h          |   3 +-
- include/hw/riscv/tt_atlantis.h    |  14 +++-
- 6 files changed, 132 insertions(+), 45 deletions(-)
-
+diff --git a/docs/system/riscv/tt_atlantis.rst b/docs/system/riscv/tt_atlantis.rst
+index 1f2880d617..167cd57c27 100644
+--- a/docs/system/riscv/tt_atlantis.rst
++++ b/docs/system/riscv/tt_atlantis.rst
+@@ -15,6 +15,20 @@ tt-atlantis QEMU model features
+ * RISC-V compliant Advanced Interrupt Architecture
+ * 16550A compatible UART
+ 
++Boot options
++----------------
++
++ * ``console`` to change the default console device. Most of the
++   machines use the ``UART1`` device for a boot console, which is
++   mapped on ``/dev/ttyS0`` under Linux, but it is not always the
++   case.
++
++To change the boot console and use device ``UART3``
++
++.. code-block:: bash
++
++  -M tt-atlantis,console=uart3
++
+ Known limitations
+ -----------------
+ 
+@@ -24,9 +38,6 @@ real platform. Notably:
+ * There is no PCI host bridge, so virtio-pci devices cannot be
+   attached. Boots that need block storage must use ``-initrd`` with
+   an initramfs.
+-* The DesignWare UART is modelled with QEMU's ns16550-compatible
+-  ``serial_mm`` device; DesignWare-specific registers beyond that
+-  set return 0.
+ 
+ Supported software
+ ------------------
 -- 
 2.43.0
 
