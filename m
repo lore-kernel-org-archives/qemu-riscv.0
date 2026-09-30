@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B9F3CA5FB1
-	for <qemu-riscv@archiver.kernel.org>; Wed, 30 Sep 2026 09:45:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A8BFCA5FB1
+	for <qemu-riscv@archiver.kernel.org>; Wed, 30 Sep 2026 10:17:11 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xBqsI-0005gt-8L; Wed, 30 Sep 2026 05:45:18 -0400
+	id 1xBrN5-0006Vy-NK; Wed, 30 Sep 2026 06:17:08 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=7264c68bd=Conor.Dooley@microchip.com>)
- id 1xBqsE-0005cz-V7; Wed, 30 Sep 2026 05:45:14 -0400
-Received: from esa.microchip.iphmx.com ([68.232.154.123])
+ id 1xBrMy-0006DV-L0; Wed, 30 Sep 2026 06:17:00 -0400
+Received: from esa.microchip.iphmx.com ([68.232.153.233])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=7264c68bd=Conor.Dooley@microchip.com>)
- id 1xBqsC-0000P7-CE; Wed, 30 Sep 2026 05:45:14 -0400
+ id 1xBrMw-0004Zl-Em; Wed, 30 Sep 2026 06:17:00 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
- t=1790761517; x=1822297517;
+ t=1790763418; x=1822299418;
  h=date:from:to:cc:subject:message-id:references:
  mime-version:in-reply-to;
- bh=vihpjmE4h1hX9ySVqSCiPK4iltXLecgAM/ABuVOEyu0=;
- b=WS+Y8nQV/qoK37of8al4sMV5dbbODW/2Af8Eqkkwu2gEOenBkhCqeU4w
- Mwheo/NGMTlURjScW2S21l828/CosrE2CDDX4OOBxFwYjDgNLA0xTYWoL
- BQiV2osh6C1H7DflnNopJ8Rr570m5E0nNHVPzUAgu71ufAuomyb/Qy796
- sZT2E4fK9a6XGNXwPpeAlmsEdaSlNcVWjzvXib6BMiWEEx6S4xcxo2jNc
- 3iKAqSQCLjj1F8AogZa8DKaaMe/9vCI9aTdWBBVfeZKvVYcAcQItTpFVn
- ajJCdtvQTWC/naSnqy/cOK1XAONhI+dxGDoMhY7JqF7NbXhP824EYXZJF Q==;
-X-CSE-ConnectionGUID: 5+hqIzzJRju7+8Dayzcc/g==
-X-CSE-MsgGUID: b2db1p6mTle/lPmhsYjJIQ==
+ bh=9boqTe+v2aXKx3hXyi1/nG06GNAD1Rknp4JzZk2sWQk=;
+ b=baVf6QOoruNUxQyP8yul8Tr3hMz/SMgaFRymFjM5tpe1XnFsItFyRy5K
+ lQCwnhEC4R9i+/EA0vbxFU/+gFYC93asNXG52AnL1TyICkDdVY1QAHjwY
+ DPFerWdYrpEcyoG080T1pEzB4fYgdN/iVykEPGcMICjM72LbKErdv7VlZ
+ dV+P6s6fszRubQzS1+iZSL2h44D5DXoifkv51SkB9DietrCc7bZlLd09Y
+ YcJUW4CGRcGxxt7UVf3hImsoYOpd+GEfp0ssqG5DKtn9byYUV1q6/FUwk
+ k/z6ROzfNTjx5lEgTcWOgsZeEZ77bH3J2xDsWsSplzZAXlA23XPAYFoEA w==;
+X-CSE-ConnectionGUID: 0qD2XlbCSD2RCZqZFsAkDQ==
+X-CSE-MsgGUID: Yx18vnZJR/m2cQ4c3xtDYA==
 X-IronPort-AV: E=Sophos;i="6.27,132,1787036400"; 
- d="asc'?scan'208";a="231475179"
+ d="asc'?scan'208";a="74573421"
 X-Amp-Result: UNKNOWN
 X-Amp-Original-Verdict: FILE UNKNOWN
 Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
- by esa6.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 30 Sep 2026 02:45:15 -0700
-Received: from chn-vm-ex02.mchp-main.com (10.10.87.72) by
- chn-vm-ex02.mchp-main.com (10.10.87.72) with Microsoft SMTP Server
+ by esa1.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 30 Sep 2026 03:16:55 -0700
+Received: from chn-vm-ex04.mchp-main.com (10.10.87.151) by
+ chn-vm-ex3.mchp-main.com (10.10.87.32) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.58; Wed, 30 Sep 2026 02:45:09 -0700
-Received: from wendy (10.10.85.11) by chn-vm-ex02.mchp-main.com (10.10.85.144)
+ 15.2.2562.49; Wed, 30 Sep 2026 03:16:55 -0700
+Received: from wendy (10.10.85.11) by chn-vm-ex04.mchp-main.com (10.10.85.152)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.58 via Frontend
- Transport; Wed, 30 Sep 2026 02:45:08 -0700
-Date: Wed, 30 Sep 2026 10:43:49 +0100
+ Transport; Wed, 30 Sep 2026 03:16:54 -0700
+Date: Wed, 30 Sep 2026 11:15:35 +0100
 From: Conor Dooley <conor.dooley@microchip.com>
 To: Bin Meng <bin.meng@processmission.com>
 CC: QEMU <qemu-devel@nongnu.org>, Conor Dooley <conor@kernel.org>, Pierrick
  Bouvier <pierrick.bouvier@oss.qualcomm.com>, Sebastian Huber
  <sebastian.huber@embedded-brains.de>, <qemu-riscv@nongnu.org>
 Subject: Re: [PATCH v2 20/24] docs/system/riscv: Document Icicle Kit HSS boot
-Message-ID: <20260930-railing-carving-18e0ea44025a@wendy>
+Message-ID: <20260930-disparity-announcer-a6bc30a7084c@wendy>
 References: <20260904155758.3833179-1-bin.meng@processmission.com>
  <20260904155758.3833179-21-bin.meng@processmission.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="Cj+FJ313DfCiWZ6K"
+ protocol="application/pgp-signature"; boundary="NwE48z+lYfehFyqX"
 Content-Disposition: inline
 In-Reply-To: <20260904155758.3833179-21-bin.meng@processmission.com>
-Received-SPF: pass client-ip=68.232.154.123;
+Received-SPF: pass client-ip=68.232.153.233;
  envelope-from=prvs=7264c68bd=Conor.Dooley@microchip.com;
  helo=esa.microchip.iphmx.com
 X-Spam_score_int: -46
@@ -89,7 +89,7 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---Cj+FJ313DfCiWZ6K
+--NwE48z+lYfehFyqX
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
@@ -158,6 +158,10 @@ istic
 > +it does not model the electrical properties of DDR training. HSS requires
 > +the RISC-V bare-metal toolchain supplied by Microchip SoftConsole to be
 > +available in ``PATH``.  Build the tested HSS version with:
+
+What's the reason that this is using 2024.06 by the way? Why not use the
+most recent release of the HSS?
+
 > +
 > +.. code-block:: bash
 > +
@@ -185,103 +189,17 @@ tarts
 > +at eNVM offset 0x100 and does not contain the boot header with the image=
  size
 > +and per-hart reset vectors.
-> +
-> +Build the SD card image with the tested Buildroot version:
-> +
-> +.. code-block:: bash
-> +
-> +  $ git clone https://gitlab.com/buildroot.org/buildroot.git
-> +  $ cd buildroot
-> +  $ git checkout 2026.05
-> +  $ make microchip_mpfs_icicle_defconfig
-> +  $ make
-> +
-> +This produces ``output/images/sdcard.img`` with three GPT partitions:
-> +
-> +* An HSS ``payload.bin`` containing U-Boot.
-> +* A FAT partition containing ``boot.scr`` and the kernel FIT image.
-> +* An ext4 Linux root filesystem.
-> +
-> +The QEMU SD card model requires a power-of-two image size. Make a sparse
-> +4 GiB working copy and relocate its backup GPT to the new end of the ima=
-ge:
-> +
-> +.. code-block:: bash
-> +
-> +  $ cp --reflink=3Dauto output/images/sdcard.img sdcard.img
-> +  $ truncate -s 4G sdcard.img
-> +  $ sgdisk -e sdcard.img
-> +  $ sgdisk -v sdcard.img
-> +
-> +The Icicle Kit firmware device tree in the FIT image describes 2 GiB of =
-RAM,
-> +matching the machine's fixed RAM size. The command below keeps ``-m 2G``
-> +explicit.  Attach the image as an SD card and route both board serial po=
-rts:
-> +
-> +.. code-block:: bash
-> +
-> +  $ qemu-system-riscv64 \
-> +      -M microchip-icicle-kit -smp 5 -m 2G \
-> +      -bios path/to/hss/build/hss.bin \
-> +      -drive if=3Dsd,file=3Dpath/to/sdcard.img,format=3Draw \
-> +      -display none \
-> +      -serial file:hss.log \
-> +      -serial stdio \
-> +      -no-reboot
-> +
-> +HSS writes to MMUART0, which the command records in ``hss.log``. U-Boot =
-and
-> +Linux use MMUART1, which remains connected to the terminal. A successful
-> +boot proceeds through HSS payload loading, U-Boot, the Linux kernel, and=
- the
-> +login prompt from the root filesystem on the third partition.
-> +
-> +Known limitations
-> +-----------------
-> +
-> +* The tested HSS v2024.06 flow contains 2 separate multi-hart startup ra=
-ces
-> +  issues which is still not fixed as of the latest v2026.04 release. A b=
-oot
-> +  may therefore stall at the very beginning or after successful DDR trai=
-ning
-> +  during the OpenSBI/U-Boot handoff.
 
-Some symptoms would be nice, so as to differentiate between the known
-issues and other potential problems.
-
-> +* The SD card model requires the raw image size to be a power of two. Ke=
-ep
-> +  the backup GPT header at the end when resizing the image.
-> +* The machine does not generate an Icicle Kit device tree. Firmware boot=
- must
-> +  provide one in its payload or FIT image;
-
-There's 3 options actually. Either the HSS has one itself, there's one
-in the HSS payload or the software brings it - be that in a fit
-image or part of a U-Boot binary.
-
-
-> direct kernel boot must use
-> +  ``-dtb`` as described above.
-> =20
->  .. _HSS: https://github.com/polarfire-soc/hart-software-services
-> --=20
-> 2.53.0
->=20
->=20
-
---Cj+FJ313DfCiWZ6K
+--NwE48z+lYfehFyqX
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCarzZ1QAKCRB4tDGHoIJi
-0vaoAQCiN06kRaC+dPe7L3EvEOLOBPA+pyr6mofq1c/CfedYoAD7B0rmzvICAawy
-WIcKXfIO9w4HXZzydQOQNGS1yhvasQ8=
-=Wdik
+iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCarzhRwAKCRB4tDGHoIJi
+0hzkAQCGX39jFeBVpyaXqTy8FjRkJYHrQOj+KwY3Zg09wmWzSgD+LaPWevV3cxko
+/1woODrxW845rb+81YHlSMjFPntOwQ4=
+=Jwnx
 -----END PGP SIGNATURE-----
 
---Cj+FJ313DfCiWZ6K--
+--NwE48z+lYfehFyqX--
 
