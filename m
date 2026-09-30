@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3207CA5FC1
-	for <qemu-riscv@archiver.kernel.org>; Wed, 30 Sep 2026 08:44:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF288CA5FC3
+	for <qemu-riscv@archiver.kernel.org>; Wed, 30 Sep 2026 08:45:08 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xBpvF-0002kY-6Z; Wed, 30 Sep 2026 04:44:17 -0400
+	id 1xBpvr-00030T-RW; Wed, 30 Sep 2026 04:44:55 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
- id 1xBpvC-0002jG-0B; Wed, 30 Sep 2026 04:44:14 -0400
-Received: from mgamail.intel.com ([198.175.65.17])
+ id 1xBpvg-0002u3-C7; Wed, 30 Sep 2026 04:44:45 -0400
+Received: from mgamail.intel.com ([198.175.65.9])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
- id 1xBpvA-0001k4-EQ; Wed, 30 Sep 2026 04:44:13 -0400
+ id 1xBpve-0001lZ-ST; Wed, 30 Sep 2026 04:44:44 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1790757852; x=1822293852;
+ t=1790757883; x=1822293883;
  h=date:from:to:cc:subject:message-id:references:
  mime-version:content-transfer-encoding:in-reply-to;
- bh=21Vq33Ujyd0x0lL76DGV9qDfEt4z+KPcnZdMqv8cOzU=;
- b=DVfxUGz6DIglsSjy+l1o36lmrvV4o66BBHCc0tP+aTdS+1V/ycmhpyke
- wGPddwxOaDde6EtLJuyjFPMSO22Q3stFSgX9f/lFgTIVjukmVLO21D85H
- MRcGrgUlSDPIPHqSnuLpq1wM1V/b2SuSQqP6BVArjPQaap130aF6/hWtP
- f6Zvc4o+yK1qrZWxq+ILkL/0a7x3+kOi5Bwek/iwaVtXngEyddlgvwp1p
- OazPtIj0D6K/12T/hGa2nhVDbDhqDORSvKyZrmuoS9I2T7lu56EWaySfI
- oCI7S+/a5AZo3s5Nr3P5qiIRBnwlHdWs4JJtwRERhC6dkVh2Jio5g0mHT w==;
-X-CSE-ConnectionGUID: 5UpkBPkBTNeBeisVnt0Oog==
-X-CSE-MsgGUID: tWX32FMYTi2YwkcpiCyZfg==
-X-IronPort-AV: E=McAfee;i="6800,10657,11920"; a="90531999"
-X-IronPort-AV: E=Sophos;i="6.27,132,1787036400"; d="scan'208";a="90531999"
-Received: from fmviesa007.fm.intel.com ([10.60.135.147])
- by orvoesa109.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 30 Sep 2026 01:44:08 -0700
-X-CSE-ConnectionGUID: ifvxWTVaT2K1EUp+PptNyw==
-X-CSE-MsgGUID: 5YiOmoCFTtWZ3cMk/t3shw==
+ bh=sCFvZU+QykBuj5xURzlEa9sa84uvTjF8QpETF3rNXtw=;
+ b=Kh05Y9bt5pm//zVImVkiyvmIDs1CdXV8R1GA/cyChdZei6CnMBb0CoQH
+ Lhn0pUMgTjkGB+/YlOyeGoe8BEbSqAXVT2VaxJdk0Q9ziX1cNhphJ5Sih
+ caa5GSAXVmVFcpxtWI7gm/B6ns4rZGUmANCSlLs65g4EhC5oizCvs36At
+ z1rT+pLugXO39ZakuCBOe+UOGW1E5uWsahBEdJ6ZwlQKYap0+6f1oHZw3
+ fXLDT3oTM7pjqYsMR/u3SnO1mduZUNQjeI7C8N/88PXMIENEGTwOmEqKt
+ 75J/fvzEUIug5vCeBmYohnugqjl92cXaF2RaVI3OmyXKNrQb/c5pOaT+x A==;
+X-CSE-ConnectionGUID: evWKgOvDSrykK3MrU0RzuA==
+X-CSE-MsgGUID: T9yHX2MpS5ic52RHM9d1bQ==
+X-IronPort-AV: E=McAfee;i="6800,10657,11920"; a="113276787"
+X-IronPort-AV: E=Sophos;i="6.27,132,1787036400"; d="scan'208";a="113276787"
+Received: from fmviesa004.fm.intel.com ([10.60.135.144])
+ by orvoesa101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 30 Sep 2026 01:44:40 -0700
+X-CSE-ConnectionGUID: ga0I9O0/Q6+TNpxGrXNldQ==
+X-CSE-MsgGUID: gGt3LBVYT4mrE6ZFwYJ4EA==
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.27,132,1787036400"; d="scan'208";a="275185911"
+X-IronPort-AV: E=Sophos;i="6.27,132,1787036400"; d="scan'208";a="280372835"
 Received: from zhaoliu1-desk.sh.intel.com (HELO localhost) ([10.112.226.173])
- by fmviesa007.fm.intel.com with ESMTP; 30 Sep 2026 01:44:03 -0700
-Date: Wed, 30 Sep 2026 16:44:02 +0800
+ by fmviesa004.fm.intel.com with ESMTP; 30 Sep 2026 01:44:35 -0700
+Date: Wed, 30 Sep 2026 16:44:34 +0800
 From: Zhao Liu <zhao1.liu@intel.com>
 To: Yonggang Luo <luoyonggang@gmail.com>
 Cc: qemu-devel@nongnu.org, Chao Liu <chao.liu@processmission.com>,
@@ -64,16 +64,16 @@ Cc: qemu-devel@nongnu.org, Chao Liu <chao.liu@processmission.com>,
  Philippe Mathieu-Daude <philmd@mailo.com>,
  Palmer Dabbelt <palmer@dabbelt.com>,
  Laurent Vivier <laurent@vivier.eu>, Weiwei Li <liwei1518@gmail.com>
-Subject: Re: [PATCH v3 01/10] machine: allow -M name to differ from QOM type
-Message-ID: <arzL0lS6kAnoctY5@intel.com>
+Subject: Re: [PATCH v3 03/10] hw/arm/virt: use unique QOM name
+Message-ID: <arzL8qe9xQxiz/EA@intel.com>
 References: <20260926081551.29-1-luoyonggang@gmail.com>
- <20260926081551.29-2-luoyonggang@gmail.com>
+ <20260926081551.29-4-luoyonggang@gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20260926081551.29-2-luoyonggang@gmail.com>
-Received-SPF: pass client-ip=198.175.65.17; envelope-from=zhao1.liu@intel.com;
+In-Reply-To: <20260926081551.29-4-luoyonggang@gmail.com>
+Received-SPF: pass client-ip=198.175.65.9; envelope-from=zhao1.liu@intel.com;
  helo=mgamail.intel.com
 X-Spam_score_int: -46
 X-Spam_score: -4.7
@@ -97,26 +97,23 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Sat, Sep 26, 2026 at 04:15:41PM +0800, Yonggang Luo wrote:
-> Date: Sat, 26 Sep 2026 16:15:41 +0800
+On Sat, Sep 26, 2026 at 04:15:43PM +0800, Yonggang Luo wrote:
+> Date: Sat, 26 Sep 2026 16:15:43 +0800
 > From: Yonggang Luo <luoyonggang@gmail.com>
-> Subject: [PATCH v3 01/10] machine: allow -M name to differ from QOM type
+> Subject: [PATCH v3 03/10] hw/arm/virt: use unique QOM name
 > X-Mailer: git-send-email 2.52.0.windows.1
 > 
-> - Add machine_class_set_name() so boards can keep a stable -M name
->   when the QOM type is uniquified. machine_class_base_init still
->   defaults the name to the QOM type without -machine.
-> - Document that MachineClass::name is the -M name, not the QOM type.
-> - Sort -M help by MachineClass::name so order matches the printed names
->   when QOM types are prefixed (arm-virt-11.1-machine vs virt-11.1).
+> Set TYPE_VIRT_MACHINE to MACHINE_TYPE_NAME("arm-virt") so ARM virt
+> no longer collides with other virt-machine types in one process.
+> Keep the -M / help / migration name as virt-* via
+> machine_class_set_name().
 > 
 > Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
-> Reviewed-by: Daniel P. Berrangé <berrange@redhat.com>
+> Reviewed-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 > ---
->  hw/core/machine.c        |  6 ++++++
->  include/hw/core/boards.h | 12 +++++++++++-
->  system/vl.c              |  8 +++-----
->  3 files changed, 20 insertions(+), 6 deletions(-)
+>  hw/arm/virt.c         | 3 ++-
+>  include/hw/arm/virt.h | 2 +-
+>  2 files changed, 3 insertions(+), 2 deletions(-)
 
 Reviewed-by: Zhao Liu <zhao1.liu@intel.com>
 
