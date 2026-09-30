@@ -4,158 +4,119 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B20D0C9832A
-	for <qemu-riscv@archiver.kernel.org>; Tue, 29 Sep 2026 14:21:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55EC3CA5FA5
+	for <qemu-riscv@archiver.kernel.org>; Wed, 30 Sep 2026 02:51:42 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xBYhT-0003Lo-Om; Tue, 29 Sep 2026 10:20:55 -0400
+	id 1xBkPW-00051Y-1h; Tue, 29 Sep 2026 22:51:10 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <brian.cain@oss.qualcomm.com>)
- id 1xBYhR-0003JR-QP
- for qemu-riscv@nongnu.org; Tue, 29 Sep 2026 10:20:54 -0400
-Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <brian.cain@oss.qualcomm.com>)
- id 1xBYhP-0000h3-Iy
- for qemu-riscv@nongnu.org; Tue, 29 Sep 2026 10:20:53 -0400
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 68TCqe541577176
- for <qemu-riscv@nongnu.org>; Tue, 29 Sep 2026 14:20:50 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- PyBF7lcf4SrKSJZNnkSrBzHyYZWIKwO07PoT2Rls1FE=; b=dgmLft6ruWIO4ZLR
- 4MTlugGqxz2bPeQWVFF3pKRcirTM7DeTiWDfTVg1/CVPhiHnHa4pEY2ztL0iSVMi
- lwenY6abDCFSYlYtTJ5mV9F9m2lxzk0+5u0+MitcTZwPPM1e9+UmdbGzGzq4EjoI
- y7tQvByoTruyfOx5GXMkIoTnts+EYaH/ig9QeYH44C2LaLi3WmBvWrKRyxogqqqi
- oDbv0gHvCn8sjbObdY57aQMtFwGJfzDZ0UD9tGaywE0tl8Tms4aR4Dl8GEC7FOvP
- A60ZqcfxQg3SQeNbP+cQ1rLOlyKZkZ6BoqvjeiiEDvMJbqm82sv09BXrmvQ5SreZ
- oaXP3w==
-Received: from mail-qv1-f71.google.com (mail-qv1-f71.google.com
- [209.85.219.71])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h09x4sfgt-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Tue, 29 Sep 2026 14:20:49 +0000 (GMT)
-Received: by mail-qv1-f71.google.com with SMTP id
- 6a1803df08f44-9145530f7d3so37399416d6.1
- for <qemu-riscv@nongnu.org>; Tue, 29 Sep 2026 07:20:49 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
+ id 1xBkPU-000514-0k
+ for qemu-riscv@nongnu.org; Tue, 29 Sep 2026 22:51:08 -0400
+Received: from mail-ed2-x0e.google.com ([2a00:1450:4864:33::e])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
+ id 1xBkPS-00084i-Am
+ for qemu-riscv@nongnu.org; Tue, 29 Sep 2026 22:51:07 -0400
+Received: by mail-ed2-x0e.google.com with SMTP id
+ 4fb4d7f45d1cf-6aae359e2c0so7253203a12.3
+ for <qemu-riscv@nongnu.org>; Tue, 29 Sep 2026 19:51:05 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1790736664; cv=none;
+ d=google.com; s=arc-20260327;
+ b=I8VOrgH0juB38w4ioBpTYFeAGDqAOzJdp1nVhSHq2WQu/3p/kmdRz+69MZfhz940ZH
+ +gZRm2A4RCnO6XgftGkcyUqB/+zdL/czU8Yx7RFA269YAdZ8je1599dJgxk8kNQbr9vo
+ q1m49mGoA5JwCx+hBixtrE2uM6A76C4IugaQbtIlQliYVqm78be8rJ0SE+TZzIgVOwxe
+ DUhikxuTj4+jeR4sHaD2CwQOIykNVSrKm3Stbj5lgNuQfRI5z/iRzasmZpwtGPzXATrH
+ 4TKepjUR6h5CnRJ1hpmcs8k+a/48YtUkOmpM7aW0SQl4sv9KBDzA9wXoXH95rkAu3pXh
+ kZYw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :reply-to:in-reply-to:references:mime-version:dkim-signature;
+ bh=EV6mrJxfEd7WOTTvXqOmWWny2bOcZB0m95vhp6g828E=;
+ fh=MK9NXAv8nSEKv2aQ9JWKWTk6CpDsux3SCMuYTo1vQoo=;
+ b=bM8b3acxnxjyP59UerhzN2Bj/2Mg4J+Wx2XUG8FEO+P3fddO+vroNci4QOJN+KtgYq
+ EohC1b7T1Cc4sIDuCV1HyhqOsDGE0ybictQVpKNUtjXjNYUaTbnc5Y1TDbUskrJK+XzW
+ v4j0Y/xV0BUjDSIeigQ3V6q6Go/W+NyuJYjxBQ+h5zFQlJQs3PnsMeIiiI3EeOS1hHsy
+ x7BhfYVGGt2AjHWDJ/9DqMuICdmsXkRCor3J5qc1qL7+Dy1FfQRpU4mfdy6FZEs7jvo0
+ AtTSg4ZMp+cc8i6i1+5C/3cNBrNL+zdEZAfnu9Fg90zrEysCp1HgKypb6H9SdgkUGfId
+ LK3g==; darn=nongnu.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1790691649; x=1791296449; darn=nongnu.org;
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=PyBF7lcf4SrKSJZNnkSrBzHyYZWIKwO07PoT2Rls1FE=;
- b=C1A2ZBAy8namGx/idxvqwO1Tq9mku6jxyvSGa7Q8Fg8rzWuEwpZ8HRmE1zdGBw3RYw
- qq4lg5eofhpCC/6JVfQog5PabfQQqj+WWqbCyKA6QS0ITSKh4Sw/GVye4neZ2MGHuR1+
- z8u3BL5q8+RRFbKNVBzBEsK6mpK2LxYq2izE2dYwKXz3o7DNRCYoFqU9InBDM2IjDOog
- ULbmQLcKHOq0rrlugqhNWlGBdX/OiB4hZqHSBJzfRHQbhOt4sh/ErpY0z+81ILOCm8k5
- A++Or/eNVUjK04Zg513RbSvgfNTFWsCyxoPHH16dpBUhntvDvVDMLtMGK1fU/EOPeKOs
- flcg==
+ d=gmail.com; s=20251104; t=1790736664; x=1791341464; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:reply-to:in-reply-to:references:mime-version:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=EV6mrJxfEd7WOTTvXqOmWWny2bOcZB0m95vhp6g828E=;
+ b=VMYByi8VCMZ1cYIgG275mu4P0V2YB/XAXXTkRCgQlfQGSCuo55jZOi266deaDFXd2j
+ GfLCpEi+nbtktdO0vg2epBd54mKweEflTOU6dPUoftajSUyoeiQcSOWmFHjif+y/2UNn
+ alop0CrT9MfGyTaRuTrZK54iyxvwrYAwgurR/50NmnyDXuxa0OCUQj/osw5Eg5b5Fi+o
+ 6VctPS3yg85GxozvOjz7xXQ+34UnjcpoKmNX21lXtHJFGJOH8aJfVxIHVcnDbKMEwG1J
+ HoC9+zViYZAEmUSM/WxlCoZ3iun1N5LLEEnlgXhqURY3f9n9fkrGHKm3YjeGR+6CJvLB
+ TxAg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790691649; x=1791296449;
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=PyBF7lcf4SrKSJZNnkSrBzHyYZWIKwO07PoT2Rls1FE=;
- b=cZ0JItMheKJTtulZoE3s4wOgR3cGdV9dFQRd/Fk6zREJCjVNAF7hxL/33yGgOOTyEv
- adt7xbdytQtWJjkFddOBVBq6/oNEM8g5ucD1GLRQ7UrGCASU5qKA6A6++18nQIhD75pf
- X+I46OW3YxrkNCfGyipw2UbYqi//rNOXf7+t/c9DEemcHCVsNcLBrRq6xjmXUCkfdtZW
- Tb9RoolBk5Ku3NhEuljVUcGzXUhX48zDsW+9OTzRRGx6X7qU+yB7BDzLD4UiWal/61np
- FI68d5oNuM+XpcMwVNoGTwrkaxdBhSZIBUzJDI0QhA4zWS7dEyHUAqelRC2O7XaCFnpW
- T/kg==
+ d=1e100.net; s=20260707; t=1790736664; x=1791341464;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:reply-to:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=EV6mrJxfEd7WOTTvXqOmWWny2bOcZB0m95vhp6g828E=;
+ b=r6eOxGAKMOUsrqPjiqWuH/1AS14TbtXcVl7Y8XeDV/7KrNk3ZNTw4WYVEuEXFbs2EC
+ IN2ufGKbBRAWkB3zr9UA3LIb24dimdssfiw+K4WmtgV2PYlscaZ6pLSm0sZdWSD4Hmnw
+ lCEWEqmBLtBwxrGRoyT9lSAko17EF7aQ6mdNaFbcBoXYxCdRA2uY3sivPWHTJpxNkBOS
+ pBYZD/URLilolZvimaO8VsPohPHmQ8jUi2y+7fq55LcJJgNErxxqXXtSuj2eGlxFGMe/
+ BgeRU739DSS6Rb3l1uu3pUKCIJry8k4lORV4G1yOX9g097ZbyKEKw2uFx//hfNdqTHjV
+ vQUw==
 X-Forwarded-Encrypted: i=1;
- AKwUvByWyeBVWUS0hBkJIT0yXLPOfBg5XsIKQc+3M9k9xwHKqJbYCtpAZfpfQCmPebGhrfSjDQohZ5wh0jiO@nongnu.org
-X-Gm-Message-State: AFq9FYI3zldV723AgZoqybENjtqGL3DJxbpO1AmH3gDfx7fdDtFlEOdH
- hIwiw9R68rmidmq9wOPOLDVleA+Bml+Wd/uC96vrjSI6P4R1poRl1uCJN+8b0eCSGBi2r5sSHcd
- iD6B2a5edMLoMEMb3G+FPv8R+dTiaUzE9tSiLt/MLGUJTAGz7LIVpcycagg==
-X-Gm-Gg: AYBFou1jce4PADn+H2NPEyn4mI6qG94E+Q+PjV13G6WRsQwIqUhGmih+LwzUbKOKqg+
- cyUwEGS43CBe3EdNdDyOEoZhgGgtsgDa5PmZfN0DeGNCtC4ALnvUL+v9ZfrmS94vE8kmo7Lw2hb
- 2RxXAjQ0Re8/LYdzRdAYVELewhOIOozL9yA3MVgA+++zoh1iE+zt1CY6Ur9nM+jflFC+Z7+Zjbj
- hEkj9das6mhtyb5kMLl7n72sJsFVGFoQGAc0J4A8ccySXEf05FuYTEPJIlRiNw9uzTqrEanOPMv
- 4Kb4e233cW9pMYzj4F2WQ+EeAYBu6Aelx/1e9bM0yHfToKuGjekU7I+ADTheY4Wpjf5ItTOYYSM
- Kg0HggiHVkUIxJSybn9nuWTRAOTAFDXpu5XypgGkscvAo6AlrCKJohSTtw/v7bADP
-X-Received: by 2002:a05:6214:411a:b0:914:4bd3:d984 with SMTP id
- 6a1803df08f44-9144bd3dc1cmr192166776d6.34.1790691648509; 
- Tue, 29 Sep 2026 07:20:48 -0700 (PDT)
-X-Received: by 2002:a05:6214:411a:b0:914:4bd3:d984 with SMTP id
- 6a1803df08f44-9144bd3dc1cmr192165996d6.34.1790691647761; 
- Tue, 29 Sep 2026 07:20:47 -0700 (PDT)
-Received: from [10.222.168.219] (Global_NAT1_IAD_FW.qualcomm.com.
- [129.46.232.65]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-9178d34bf62sm11218666d6.28.2026.09.29.07.20.42
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 29 Sep 2026 07:20:45 -0700 (PDT)
-Message-ID: <8e5a5acb-e4d3-4bd4-aad7-a744499c8526@oss.qualcomm.com>
-Date: Tue, 29 Sep 2026 09:20:41 -0500
+ AKwUvBxZNfqXMApl63ap5l0Jc1yo2SdxgVofyFEYNNtbM6Aw7gj7cJjrPbMOVAsKKHIWEXfGu/vtZCQdG3Ud@nongnu.org
+X-Gm-Message-State: AFq9FYI7NulDReDM5WJIDlCPJnXW6Jfnh48MNA0glnCBFZlzAAS+ii95
+ wQsAV5wS1hZ2GB//ZB/vP7bbD9Y4Q/sPSYmoKCHJ6UU8Sw2ur1lecYqR2VHbf2oNeqT7GUR4zj7
+ kGhNJvmic5lw0vMoT+rowxEyRj9d4jQM=
+X-Gm-Gg: AYBFou3BuIOEcPmHyXzypqXWDoYygoVjjt0oLZSZ5St24P/UwUYgvArsBqrJrp8qsQI
+ qf1D7gpXuajTK4id9UW6PwtmiBQz2JklpOg3ZpPhxqcpAoqGf/2Hhyn6w3hq4d00wximvYZDNIA
+ SNPni5kIBcF1FrhMrkxpau/LQFC3MKIEF8+gXktYXT7Im68/wnI0Dhmzbxwgcs0p4iVW+4OhXpb
+ HB/jiKLH0XBme2UP9QLwThRX6TY3RFVy3eBm56+nBR+EDW+Bmbhstya2j22qnEjjqv3gq33d8JH
+ O87JfaM4EhOd+bLF++raada/pE+My023MoFkeY4GhiD9/V4z3ypz4/w=
+X-Received: by 2002:a05:6402:3785:b0:6ac:9a44:d412 with SMTP id
+ 4fb4d7f45d1cf-6ad4fd0b503mr556197a12.7.1790736663388; Tue, 29 Sep 2026
+ 19:51:03 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/9] target/hexagon: rename helper_wait to
- helper_hexagon_wait
-To: Yonggang Luo <luoyonggang@gmail.com>, qemu-devel@nongnu.org
-Cc: Igor Mammedov <imammedo@redhat.com>, Aurelien Jarno <aurelien@aurel32.net>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Sunil V L <sunilvl@ventanamicro.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Song Gao <17746591750@163.com>,
- =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
- Aleksandar Rikalo <arikalo@gmail.com>,
- Peter Maydell <peter.maydell@linaro.org>, qemu-arm@nongnu.org,
- Yoshinori Sato <yoshinori.sato@nifty.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- "Michael S. Tsirkin" <mst@redhat.com>, qemu-riscv@nongnu.org,
- Philippe Mathieu-Daude <philmd@mailo.com>,
- Ani Sinha <anisinha@redhat.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Chao Liu <chao.liu@processmission.com>,
- Weiwei Li <liwei1518@gmail.com>, Zhao Liu <zhao1.liu@intel.com>,
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
-References: <20260926110818.1912-1-luoyonggang@gmail.com>
- <20260926110818.1912-4-luoyonggang@gmail.com>
-Content-Language: en-US
-From: Brian Cain <brian.cain@oss.qualcomm.com>
-In-Reply-To: <20260926110818.1912-4-luoyonggang@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI5MDA1NyBTYWx0ZWRfX5LHIwmcnEHiP
- oPbDZsYtHoqWwYYNES9TbjYYR50YtJwMQOVE09CsHBcO6SlMhrz70qeDmLS4N9e6/UmP4pSLcmg
- GE8vB3psyG7hcz38KqKGhG+SmWZ0oYg=
-X-Proofpoint-GUID: 62dBF7OLmgPaNQZxZ8E-J1B1cCWe1imv
-X-Authority-Analysis: v=2.4 cv=I5Hw19gg c=1 sm=1 tr=0 ts=6abbc941 cx=c_pps
- a=UgVkIMxJMSkC9lv97toC5g==:117 a=C3Dk8TwHQYyIj7nOf9RCJw==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
- a=pGLkceISAAAA:8 a=EUspDBNiAAAA:8 a=rQifD2TXtPwWjqCNY9UA:9
- a=HBa1ZSjM1EYUQL3W:21 a=QEXdDO2ut3YA:10 a=1HOtulTD9v-eNWfpl4qZ:22
-X-Proofpoint-ORIG-GUID: 62dBF7OLmgPaNQZxZ8E-J1B1cCWe1imv
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI5MDA1NyBTYWx0ZWRfXy0HtaKBz7mnz
- +ZPIexFVBssH/UbMcL90nMrdUHqOsuEgPgk75GLbkljw2Juz2cHEuRoIIUcT2WjILbm9D/wxBae
- PdvtbEUAWxWljeffdDMDeQ2rZxgop6STvo71B+9rkLnbESNkp9zanS/U6lzGguu/TNckqCf6YSg
- SncRk09uDX3iL2GFvrGgUiwx7ib1X7JQfd4iMSp//3mV9BXYJt1R7k3YBYQYxKhpS9+QVJbPwQN
- ieR2Hh0sLnEZSckdNrYyZ0Oxh0jIxHwFK2KG2GLuSlOS7NTVtARaPV88wt2/6+/RnYJ1qElrCi7
- xjMcaoYIsbRnutHoFUesVh70Q9Tb/GXGkNKlPYrUHCNsrqPdS3vEjGAQGTfR7zlgDV1nk/6pF+y
- R5t4ZhR3d8DcPEQUds3vzW6SOpZPIuF2sZMAqlikqSSi+o0J+XL+n4+//VFijz92F0KJ6p8qFtn
- 1HJm63kWHNbckb2iuBQ==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-29_04,2026-09-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 lowpriorityscore=0 bulkscore=0 clxscore=1015
- impostorscore=0 suspectscore=0 adultscore=0 spamscore=0 malwarescore=0
- phishscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
- definitions=main-2609290057
-Received-SPF: pass client-ip=205.220.168.131;
- envelope-from=brian.cain@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
+References: <20260926081551.29-1-luoyonggang@gmail.com>
+In-Reply-To: <20260926081551.29-1-luoyonggang@gmail.com>
+From: Yonggang Luo <luoyonggang@gmail.com>
+Date: Wed, 30 Sep 2026 10:50:49 +0800
+X-Gm-Features: AclHuK9fFP4b14helAoNXT3RwjpHnY1xuNl-fP9dsY21rLTwrOXFbzbzU_PGXH8
+Message-ID: <CAE2XoE9tVCwQE0Mv-KPin+evQM4qh0mzj=sw-S1au2=uupM9ww@mail.gmail.com>
+Subject: Re: [PATCH v3 00/10] machine: uniquify virt QOM names
+To: qemu-devel@nongnu.org
+Cc: Chao Liu <chao.liu@processmission.com>, Eric Blake <eblake@redhat.com>,
+ qemu-arm@nongnu.org, Paolo Bonzini <pbonzini@redhat.com>,
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@oss.qualcomm.com>, 
+ Markus Armbruster <armbru@redhat.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Brian Cain <brian.cain@oss.qualcomm.com>, Stafford Horne <shorne@gmail.com>, 
+ =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
+ Peter Maydell <peter.maydell@linaro.org>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Fabiano Rosas <farosas@suse.de>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, qemu-riscv@nongnu.org, 
+ Laurent Vivier <lvivier@redhat.com>, Max Filippov <jcmvbkbc@gmail.com>,
+ Song Gao <17746591750@163.com>, 
+ Philippe Mathieu-Daude <philmd@mailo.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Laurent Vivier <laurent@vivier.eu>, Weiwei Li <liwei1518@gmail.com>,
+ Zhao Liu <zhao1.liu@intel.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:33::e;
+ envelope-from=luoyonggang@gmail.com; helo=mail-ed2-x0e.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -169,86 +130,90 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
+Reply-To: luoyonggang@gmail.com
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+Can this be queued now?
 
-On 9/26/2026 6:08 AM, Yonggang Luo wrote:
-> helper_wait is a global C symbol. Prefix it and take the resume PC
-> as vaddr.
+On Sat, Sep 26, 2026 at 4:15=E2=80=AFPM Yonggang Luo <luoyonggang@gmail.com=
+> wrote:
 >
-> Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
-> ---
-
-Reviewed-by: Brian Cain <brian.cain@oss.qualcomm.com>
-
-
->   target/hexagon/gen_tcg_sys.h | 2 +-
->   target/hexagon/helper.h      | 2 +-
->   target/hexagon/op_helper.c   | 8 ++++----
->   3 files changed, 6 insertions(+), 6 deletions(-)
+> Multiple targets register a virt board as MACHINE_TYPE_NAME("virt").
+> Those QOM types collide if more than one board is linked into one
+> qemu-system process. This series splits the QOM type from the -M name
+> so each virt board can keep a unique type while -M virt, help, and
+> migration stay the same.
 >
-> diff --git a/target/hexagon/gen_tcg_sys.h b/target/hexagon/gen_tcg_sys.h
-> index af5032214c4..489d2780470 100644
-> --- a/target/hexagon/gen_tcg_sys.h
-> +++ b/target/hexagon/gen_tcg_sys.h
-> @@ -80,7 +80,7 @@
->   #define fGEN_TCG_Y2_wait(SHORTCODE) \
->       do { \
->           RsV = RsV; \
-> -        gen_helper_wait(tcg_env, tcg_constant_tl(ctx->pkt.pc)); \
-> +        gen_helper_hexagon_wait(tcg_env, tcg_constant_vaddr(ctx->pkt.pc)); \
->       } while (0)
->   
->   #define fGEN_TCG_Y2_resume(SHORTCODE) \
-> diff --git a/target/hexagon/helper.h b/target/hexagon/helper.h
-> index 71c8da4c46d..030ed6dcef5 100644
-> --- a/target/hexagon/helper.h
-> +++ b/target/hexagon/helper.h
-> @@ -136,7 +136,7 @@ DEF_HELPER_3(sreg_write_masked, void, env, i32, i32)
->   DEF_HELPER_3(setprio, void, env, i32, i32)
->   DEF_HELPER_2(start, void, env, i32)
->   DEF_HELPER_1(stop, void, env)
-> -DEF_HELPER_2(wait, void, env, i32)
-> +DEF_HELPER_2(hexagon_wait, void, env, vaddr)
->   DEF_HELPER_2(resume, void, env, i32)
->   DEF_HELPER_1(resched, void, env)
->   DEF_HELPER_3(modify_ssr, void, env, i32, i32)
-> diff --git a/target/hexagon/op_helper.c b/target/hexagon/op_helper.c
-> index 4f00ca773f3..7f026292ce8 100644
-> --- a/target/hexagon/op_helper.c
-> +++ b/target/hexagon/op_helper.c
-> @@ -1741,7 +1741,7 @@ static void set_wait_mode(CPUHexagonState *env)
->       SET_SYSTEM_FIELD(env, HEX_SREG_MODECTL, MODECTL_W, thread_wait_mask);
->   }
->   
-> -static void hexagon_wait_thread(CPUHexagonState *env, uint32_t PC)
-> +static void hexagon_wait_thread(CPUHexagonState *env, vaddr pc)
->   {
->       CPUState *cs;
->   
-> @@ -1768,7 +1768,7 @@ static void hexagon_wait_thread(CPUHexagonState *env, uint32_t PC)
->           return;
->       }
->       set_wait_mode(env);
-> -    env->wait_next_pc = PC + 4;
-> +    env->wait_next_pc = pc + 4;
->   
->       cpu_interrupt(cs, CPU_INTERRUPT_HALT);
->   }
-> @@ -1836,12 +1836,12 @@ void HELPER(resched)(CPUHexagonState *env)
->       resched(env);
->   }
->   
-> -void HELPER(wait)(CPUHexagonState *env, uint32_t PC)
-> +void HELPER(hexagon_wait)(CPUHexagonState *env, vaddr pc)
->   {
->       BQL_LOCK_GUARD();
->   
->       if (!fIN_DEBUG_MODE(env->threadId)) {
-> -        hexagon_wait_thread(env, PC);
-> +        hexagon_wait_thread(env, pc);
->       }
->   }
->   
+> - Add machine_class_set_name() so boards can set MachineClass::name
+>   when it must differ from the QOM type. machine_class_base_init still
+>   defaults the name to the QOM type without -machine. Document that
+>   MachineClass::name is the -M name, not the QOM type. Sort -M help
+>   by that name so order matches the printed names after types are
+>   prefixed (arm-virt-11.1-machine vs virt-11.1).
+> - Give each colliding virt board a unique QOM type and keep the
+>   existing -M name via machine_class_set_name(): riscv-virt, arm-virt,
+>   or1k-virt, hexagon-virt, loongarch-virt, m68k-virt, and xtensa-virt.
+>   Versioned ARM, LoongArch, and M68K boards keep virt-<ver>. Latest
+>   ARM virt still sets mc->alias to virt.
+> - query-machines returns MachineInfo typename, the QOM type from
+>   object_class_get_name(), for qom-list-properties. The -M name alone
+>   is not that type once virt boards are prefixed.
+>
+> Changes v2 -> v3:
+> The versioned-machine example in boards.h now follows hw/arm/virt.c.
+> machine_class_set_name() keeps the -M name as virt-<version>, the QOM typ=
+e in
+> the example is arm-virt, and the latest helper is DEFINE_VIRT_MACHINE_AS_=
+LATEST.
+>
+> Changes v1 -> v2:
+> - query-machines returns MachineInfo typename. v1 returned only the
+>   -M name, so a client that appended "-machine" looked up the wrong
+>   type for a prefixed board such as arm-virt-11.1-machine versus
+>   -M virt-11.1.
+>
+> Yonggang Luo (10):
+>   machine: allow -M name to differ from QOM type
+>   hw/riscv/virt: use unique QOM name
+>   hw/arm/virt: use unique QOM name
+>   hw/or1k/virt: use unique QOM name
+>   hw/hexagon/virt: use unique QOM name
+>   hw/loongarch/virt: use unique QOM name
+>   hw/m68k/virt: use unique QOM name
+>   hw/xtensa/virt: use unique QOM name
+>   qapi: return MachineInfo typename from query-machines
+>   machine: match the versioned virt example to arm virt
+>
+>  hw/arm/virt.c               |  3 +-
+>  hw/core/machine-qmp-cmds.c  |  1 +
+>  hw/core/machine.c           |  6 ++++
+>  hw/hexagon/virt.c           |  1 +
+>  hw/loongarch/virt.c         |  3 +-
+>  hw/m68k/virt.c              |  7 ++--
+>  hw/or1k/virt.c              |  3 +-
+>  hw/riscv/virt.c             |  3 +-
+>  hw/xtensa/virt.c            |  3 +-
+>  include/hw/arm/virt.h       |  2 +-
+>  include/hw/core/boards.h    | 26 +++++++++++----
+>  include/hw/hexagon/virt.h   |  2 +-
+>  include/hw/loongarch/virt.h |  2 +-
+>  include/hw/riscv/virt.h     |  2 +-
+>  qapi/machine.json           |  6 +++-
+>  system/vl.c                 |  8 ++---
+>  tests/qtest/qom-test.c      | 65 +++++++++++++++++++++++++++++++++----
+>  17 files changed, 113 insertions(+), 30 deletions(-)
+>
+> --
+> 2.52.0.windows.1
+>
+
+
+--=20
+         =E6=AD=A4=E8=87=B4
+=E7=A4=BC
+=E7=BD=97=E5=8B=87=E5=88=9A
+Yours
+    sincerely,
+Yonggang Luo
 
