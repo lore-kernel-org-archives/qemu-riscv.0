@@ -4,112 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AEF73CA5FB1
-	for <qemu-riscv@archiver.kernel.org>; Wed, 30 Sep 2026 07:08:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59E12CA5FB1
+	for <qemu-riscv@archiver.kernel.org>; Wed, 30 Sep 2026 07:39:55 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xBoQ5-0004Su-Ib; Wed, 30 Sep 2026 03:08:01 -0400
+	id 1xBour-00015z-8U; Wed, 30 Sep 2026 03:39:49 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1xBoQ1-0004Rg-Ti
- for qemu-riscv@nongnu.org; Wed, 30 Sep 2026 03:07:58 -0400
-Received: from mail-pl1-x62d.google.com ([2607:f8b0:4864:20::62d])
+ (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
+ id 1xBoup-00015n-Uz
+ for qemu-riscv@nongnu.org; Wed, 30 Sep 2026 03:39:47 -0400
+Received: from mail-dy2-x0e.google.com ([2607:f8b0:4864:36::e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1xBoQ0-0007o3-4p
- for qemu-riscv@nongnu.org; Wed, 30 Sep 2026 03:07:57 -0400
-Received: by mail-pl1-x62d.google.com with SMTP id
- d9443c01a7336-2caced6038eso9995835ad.0
- for <qemu-riscv@nongnu.org>; Wed, 30 Sep 2026 00:07:55 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1790752074; cv=none;
- d=google.com; s=arc-20260327;
- b=P+WzUyPd0GRi8npLirh4fdYoj3MZ7y+ecp6HJ919vi9fOiQJT1iY8/qZli/Vk/4aHG
- wseRue4aoHdJqe2UPRY6Nghk2KhSjdue9lisXBoZtLjzR7KfLLm/BosQkhIDJifQdVUy
- GiluAFAGphMxCXa1IEb3dPdlLOGFA3j9szu2a7xb3Niq1t3cu+zE3q6wMKxuG2XV3eSN
- n7fL3YddJb1aHbJoPTdDZAqteKIvGQmE1ElC4AgrFAhx6e+kl64CaNvv60m3oQ4MfoeH
- iuJJ0LvTNp7ky2sP+zyOfpAhaCC/uCwmEgkrYPhjWkZOOIyDm7X1cfPoaSTR2rp3UjqE
- 8+Cg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=ukO4CFAglzrAB8cj2AtxF/LB6a6g0sWqPUGZ9/MwH7U=;
- fh=dCZG/8TR4bHcY/H9CKfTHDPfaOhjDjagiru7NDFx7v0=;
- b=dO1talRnUxgjibpwyQrP/knGeOhbGqwIvK8wIJxCVsNeR3OXSfN82R722wbHSBEQ/j
- GHAI5QpMyz3e5Ajj9XkCgtH6We2RdCiKkZUIcfJYy8ItZPrC+CiJQfgt0PawVFs2otMz
- 7rihMvTu0icZuascBl+0HxI8B+LA9+itx+PA41BFfmOjv9lWtovBAFFThEquLGE5mXz7
- C9dUXJD8oQYtEw+ruTr57tfq4lFfnrLIrsxvdznt9qOKGyxtYGxMk1DkBlDBUPcKgyhQ
- d7qAMMr8MaYSuS6GWFMDYCTJ5x3VX/BnjAgMi8/SKI5RDc7JbLjYvOy42KlMKmEDXhTJ
- tTbA==; darn=nongnu.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
+ id 1xBouo-0003pe-0P
+ for qemu-riscv@nongnu.org; Wed, 30 Sep 2026 03:39:47 -0400
+Received: by mail-dy2-x0e.google.com with SMTP id
+ 5a478bee46e88-341d0522b4dso7721213eec.1
+ for <qemu-riscv@nongnu.org>; Wed, 30 Sep 2026 00:39:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=jms.id.au; s=google; t=1790752074; x=1791356874; darn=nongnu.org;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=ukO4CFAglzrAB8cj2AtxF/LB6a6g0sWqPUGZ9/MwH7U=;
- b=ZeA/+g1EGNirPbLX8ATMtFIgGSpe1c+fES6WfQk/MEEUmHC+/7W496iirWru0EzFJB
- gB5DONBZX0Q30CDqC2ZcxPvFPEEIoszu/rX65jt2FLW6VFXR+rkv9gBjsGqsPAJj8hSb
- +T9tk5lT9MTkpQyVytrxQey/+WzjGeHF8Mdsk=
+ d=gmail.com; s=20251104; t=1790753984; x=1791358784; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:mime-version:message-id:date
+ :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=bPrjtbYzmeEJemPPRkZ4crVJ0qzXGov83O1lfy6nOkA=;
+ b=lFiL5R1WUOANM3rvdYKKe05ff4wYkZUv6WEDUHd+W5cQPti6N6WhPuC2buMqaXczD/
+ DyfzbzqIP6K8F7K5yxga7uHPEqYiryz4/+EG9YhE4kpRTnsjYzcU9syrEtJuumezVrje
+ 2NELcb4YyxSHOwVpyJvTOJlIqDlsvMI+z8gQGQJaIdbzKQ3pN3pgG7KIfuluxFvGNJbS
+ kpLaYPv3MONukP8kgr8nKMRXZKfyushQLsBUhIZYfG0J0I3oyPMfSLnO506b+cfNaf65
+ TPYlqUzC4ApFU6wFIQsIpLfGl2leGOiuBz+j4S7WtK8aZGpyKyXdkOpCsVWbxkg0XsQQ
+ bmYg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790752074; x=1791356874;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=ukO4CFAglzrAB8cj2AtxF/LB6a6g0sWqPUGZ9/MwH7U=;
- b=ECH6yPePc8nt7et5aBauXHZ24xdCBZb6m4PLEc11n029OAUnlX5NqvlvUg2WHmZm6b
- Ss5l5f6BZqH06zSwW/B46J9AMD/eZA6jbz8TydM5YB51ICGZsgZvfo7cS3EDFOF8r1VW
- t3vD0va2pcLKbvIjiWJYX5shm0jFHeIbbV5EVjoKIyca75gbbp3fkbGyQUMQyDquqi9R
- yNNk6JBxs+XEMON2NtFo4Nz1xRr2QWoE8PexrbgKSlw37HumYVa9jmpQHs7hoMXCqMHH
- hW1soEbwB3y8E6GNKz3mDxfPD/B/lY3wEmBE/2f/gQo2gTuAMpnVlAenvw6fnmMsD+R2
- DcFQ==
+ d=1e100.net; s=20260707; t=1790753984; x=1791358784;
+ h=content-transfer-encoding:content-type:mime-version:message-id:date
+ :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=bPrjtbYzmeEJemPPRkZ4crVJ0qzXGov83O1lfy6nOkA=;
+ b=wOEYp9STFl6RWDdkR9IXlTRTCOaVgUbFkAW7qnXXBiwAwXY81roR8H0+55dwTXx0W+
+ ghuTU0ihXumOFQ7p4U0sUXTq4o26HaWevA8V52WsKYLbnFoSk0PnY2DvFzsnnopDPs3b
+ LOHhmv2ocrjxTElOlUevp6kXrlBnTUoln63mu01sPqWM5e7vnCNHIMHZJPZjQ1N+Q36v
+ UZcQLMHyKE6kSerSAktZZKVUBMTJjiy7gKA05dzkBeYCm400azcEphrtJe3VT5LlW6+Q
+ sf9NexllkJFUiquC9CDtEinGUWUbiQig2gz75MTPp0g3u3KyyOUMELvc6aQG3JDRIMpG
+ 0jrw==
 X-Forwarded-Encrypted: i=1;
- AKwUvBxVpZnh5XR/J7yn3dO0o9pWn52jtyCo1p+qw9QaW4lleXzw6VDAhIPUkaTNAJzPr3sNXJOBBcWRjfyO@nongnu.org
-X-Gm-Message-State: AFq9FYLgzQAdw9lgACPf5F0dtEIfJLgHS6JTp0icfSudPXy23xCX/3pm
- Z9AYGbLlO6LR8KqwY/CHKQU48p0i8vhmu5SseskxuRAcQ2pPtjcl8CfbE4I7IYSuJtJCDwH8xJ1
- x/BOBrpHgMpI9ArZ/dc13AmBs6hZcbz4=
-X-Gm-Gg: AYBFou1rxAhLHnZL2J5FxN4JLeok0W/pu3ELVfq4j7CoqW6LpO5V1WbOhfonT2XscJE
- BHlsJF1GvRtAKeLYvX65/8uHyiFESJrKG9iAtA9ZD5rGIbD+o2UE8w/vflvra36o2JAKhprv6pK
- DSegv4X01DHCy8gowRokxcFsVZx+ncfgV2lgUf+P67VaFBJaDLOCB1jIrsUVx7pnHHz66MikjAT
- IdHmNCI/Wmsorv8HLrTUgrPal5quUsIZ5D47+Imlv65N3vLmrFkmawFC0IxXhwcahiF9BW5xBTd
- hhhNEvLTqHmvzpcTApXRi6ccj+KPkxKZEiip2XDC1pLvRitqF/vQcl4EXl25/19ABUb0HHGh/xv
- +b/qR6CUyLscS+PVUVf/NsNWT1mP7D9OYTDtHXWPWKGTfwVGRjEHdx3AYj8HTdPwW3YsqvMjmq/
- y7CLcUEP4No39PQ52NyPkNQmRyLGfj2cYUJmUzmw==
-X-Received: by 2002:a17:903:384d:b0:2d7:1cbd:9ceb with SMTP id
- d9443c01a7336-2e2e4b30efcmr3613865ad.12.1790752074534; Wed, 30 Sep 2026
- 00:07:54 -0700 (PDT)
-MIME-Version: 1.0
-References: <20260904-atlantis_prcm-v3-0-8bf20795a381@oss.tenstorrent.com>
- <20260904-atlantis_prcm-v3-3-8bf20795a381@oss.tenstorrent.com>
-In-Reply-To: <20260904-atlantis_prcm-v3-3-8bf20795a381@oss.tenstorrent.com>
-From: Joel Stanley <joel@jms.id.au>
-Date: Wed, 30 Sep 2026 16:37:41 +0930
-X-Gm-Features: AclHuK9chH5waVJqh_hz7nXatLen0x7bQ7ExXdRTsbxvPF7s54vTRXxSQjWdGKc
-Message-ID: <CACPK8Xdyg7ZsXzDTAGz6u2wSDPRSsW8mE5yu3+ze_X-Zqiju7g@mail.gmail.com>
-Subject: Re: [PATCH v3 3/3] hw/riscv/tt-atlantis: Update UART and I2C to use
- clk from PRCM
-To: Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
-Cc: qemu-devel@nongnu.org, Nicholas Piggin <npiggin@gmail.com>, 
- Michael Ellerman <mpe@kernel.org>,
- Portia Stephens <portias@oss.tenstorrent.com>, qemu-riscv@nongnu.org, 
+ AKwUvBxy0nV11lAx5NYTc6B6WkSONHO3QjFFnQ9Z1S+nsOj44EeOzlbKNOyjwv9A/ihpNELuWJ9L4sK3dtBx@nongnu.org
+X-Gm-Message-State: AFq9FYI/vvsf7p6SPgqDOcvz4jLAT6xENfMeJWsMvOnsklpHYWvlfH01
+ n8Qfyv7uvE1OSro+9/Cu+uPV20Z+CUI6XFMnsgjm8KGCVUhu8EW6VmDq
+X-Gm-Gg: AYBFou1PbqTJYlCsGXXdtXY7GrFMX5LH3CXKzYGGv19aKXSM0PNdRBwLGCkXSKN9hIi
+ EO5K+38LyhWzZxPKkD2Bu/QZu8ZBiMfQkGUlFy8fJEEKgj9MVHGMTeZSmXhPYimj5yjcOMzrUY7
+ Lyrwt+uCnMo/ns0Edf7Wxqe4VrMjcJ/77tDxIrjwxYAvofJsqL5VqSXYUuKEArlE1adgqQ9Mflb
+ 6D0+R0hiUBnp0eEYr43HRoRerB43TmSaPYfjbeCTAXKsN4XaLOy4ugBz+n/RWSkVZeESYOcqZfH
+ C7Cung8S69OewKo0mC2ZxYwRdVl95vASTsDRovfi+vowiqJe/nD7MMRxmHfIPCEo3GSnsbH6sIJ
+ g68E6c4dzr7Zeu+hHpC9HoZ/wJTJVKoi6BkbWeos0s8kFwgWU550YUQFf5xRVB9DiVuidCXSirC
+ wM99pEYcvLrTQKtCmk0fzFgtP+vzkn2RDOJGYoWpUOmQl9Hpc44wO/pXeCj2lIhWaqs/Y4/PkqK
+ +UE3GOBYjQVuyKSJQ==
+X-Received: by 2002:a05:7301:2624:b0:34c:7d49:35cd with SMTP id
+ 5a478bee46e88-34cdbbd5d9dmr1003981eec.11.1790753984370; 
+ Wed, 30 Sep 2026 00:39:44 -0700 (PDT)
+Received: from DESKTOP-Q716RM7 ([103.94.185.75])
+ by smtp.googlemail.com with ESMTPSA id
+ 5a478bee46e88-34cf5b4349bsm1825773eec.25.2026.09.30.00.39.40
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 30 Sep 2026 00:39:43 -0700 (PDT)
+From: Yonggang Luo <luoyonggang@gmail.com>
+To: qemu-devel@nongnu.org
+Cc: Song Gao <17746591750@163.com>,
+ =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Paolo Bonzini <pbonzini@redhat.com>, Weiwei Li <liwei1518@gmail.com>,
+ Sunil V L <sunilvl@ventanamicro.com>,
+ Philippe Mathieu-Daude <philmd@mailo.com>,
  Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, Weiwei Li <liwei1518@gmail.com>, 
+ =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, qemu-riscv@nongnu.org,
+ Palmer Dabbelt <palmer@dabbelt.com>,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Chao Liu <chao.liu@processmission.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62d;
- envelope-from=joel.stan@gmail.com; helo=mail-pl1-x62d.google.com
-X-Spam_score_int: -16
-X-Spam_score: -1.7
-X-Spam_bar: -
-X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.001,
- FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.249,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+ Chao Liu <chao.liu@processmission.com>,
+ Igor Mammedov <imammedo@redhat.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Ani Sinha <anisinha@redhat.com>, qemu-arm@nongnu.org,
+ "Michael S. Tsirkin" <mst@redhat.com>
+Subject: [PATCH v2 0/6] treewide: uniquify colliding helper symbols
+Date: Wed, 30 Sep 2026 15:39:27 +0800
+Message-ID: <20260930073935.712-1-luoyonggang@gmail.com>
+X-Mailer: git-send-email 2.55.0.windows.3
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:36::e;
+ envelope-from=luoyonggang@gmail.com; helo=mail-dy2-x0e.google.com
+X-Spam_score_int: -4
+X-Spam_score: -0.5
+X-Spam_bar: /
+X-Spam_report: (-0.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ URIBL_SBL=1.623 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -125,63 +116,62 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Sat, 5 Sept 2026 at 00:18, Anirudh Srinivasan
-<asrinivasan@oss.tenstorrent.com> wrote:
-> @@ -265,7 +265,8 @@ static void create_fdt_cpu(void *fdt, TTAtlantisSoCState *s,
->  }
->
->  static void create_fdt_uart(void *fdt, const MemMapEntry *mem, int irq,
-> -                            int irqchip_phandle)
-> +                            int irqchip_phandle, uint32_t clk_parent_phandle,
-> +                            uint32_t clk_phandle)
->  {
->      g_autofree char *name = g_strdup_printf("/soc/serial@%"HWADDR_PRIX,
->                                              mem->base);
-> @@ -275,7 +276,8 @@ static void create_fdt_uart(void *fdt, const MemMapEntry *mem, int irq,
->      qemu_fdt_setprop_sized_cells(fdt, name, "reg", 2, mem->base, 2, mem->size);
->      qemu_fdt_setprop_cell(fdt, name, "reg-shift", 2);
->      qemu_fdt_setprop_cell(fdt, name, "reg-io-width", 4);
-> -    qemu_fdt_setprop_cell(fdt, name, "clock-frequency", 3686400);
+A combined qemu-system binary cannot export the same C symbol from two targets.
+This revision addresses the review of the original series.
 
-The downside of this is we no longer boot with a Linux build that
-lacks the PRCM driver, like the old build that is used for functional
-testing in the tree.
+Generated TCG helper symbols are namespaced centrally in the DEF_HELPER
+expansions. C helper names remain generic, while target linker symbols and
+metadata get a prefix; core helpers keep their existing linker names.
 
-I suggest we keep clock-frequency along side the clocks node. New
-kernels with the PRCM driver use the clock phandle and calculate the
-clock. Old kernels keep booting.
+- Set TCG_HELPER_PREFIX per target and use it to namespace generated helper
+  linker symbols and metadata
+- Retain explicit i386 and ARM raise_exception implementation prefixes, with
+  static inline wrappers preserving the short names
+- Prefix virt_acpi_setup and virt_is_acpi_enabled on ARM, RISC-V, and LoongArch
+  virt. Leave the ARM trace event virt_acpi_setup unchanged
 
-The other option is to drop this patch entirely for now, and revisit
-later. I'd prefer keeping clock-frequency along side.
+v1: https://patchew.org/QEMU/20260926110818.1912-1-luoyonggang@gmail.com/
+branch: https://gitlab.com/lygstate-qemu/qemu/-/tree/global_symbol_conflict_resolve?ref_type=heads
 
-> +    qemu_fdt_setprop_cells(fdt, name, "clocks", clk_parent_phandle,
-> +                           clk_phandle);
->      qemu_fdt_setprop_cell(fdt, name, "interrupt-parent", irqchip_phandle);
->      qemu_fdt_setprop_cells(fdt, name, "interrupts", irq, 0x4);
+Changes v1 -> v2:
 
-> @@ -314,8 +318,8 @@ static void create_fdt_i2c(void *fdt, const MemMapEntry *mem, uint32_t irq,
->      qemu_fdt_setprop_sized_cells(fdt, name, "reg", 2, mem->base, 2, mem->size);
->      qemu_fdt_setprop_cell(fdt, name, "interrupt-parent", irqchip_phandle);
->      qemu_fdt_setprop_cells(fdt, name, "interrupts", irq, 0x4);
-> -    qemu_fdt_setprop_cell(fdt, name, "clocks", clk_phandle);
-> -    qemu_fdt_setprop_cell(fdt, name, "clock-frequency", 100000);
+- Drop individual helper_wait renames on RX, Hexagon, and MIPS and RISC-V
+  crc32, crc32c, and wfi renames; generated helpers are namespaced centrally
+- Add target-prefixed linker symbols and metadata in DEF_HELPER expansions,
+  with TCG_HELPER_PREFIX; common helpers keep their existing linker names
 
-This should stay, it's the bus frequency.
+Yonggang Luo (6):
+  hw/arm/virt: prefix ACPI helpers with arm_virt_
+  hw/riscv/virt: prefix ACPI helpers with riscv_virt_
+  hw/loongarch/virt: prefix ACPI helper with loongarch_virt_
+  tcg: namespace target helper symbols for combined builds
+  target/i386: prefix exception helper implementations
+  target/arm: rename raise_exception to arm_raise_exception
 
+ hw/arm/virt-acpi-build.c           |  4 +--
+ hw/arm/virt.c                      | 12 ++++----
+ hw/loongarch/virt-acpi-build.c     |  6 ++--
+ hw/loongarch/virt.c                |  2 +-
+ hw/riscv/virt-acpi-build.c         |  2 +-
+ hw/riscv/virt.c                    |  6 ++--
+ include/exec/helper-gen-common.h   | 26 ++++++++++++++++
+ include/exec/helper-gen.h.inc      | 48 +++++++++++++++---------------
+ include/exec/helper-head.h.inc     | 25 ++++++++++++++++
+ include/exec/helper-info.c.inc     | 24 ++++++++++-----
+ include/exec/helper-proto-common.h | 26 ++++++++++++++++
+ include/exec/helper-proto.h.inc    | 18 ++++++-----
+ include/hw/arm/virt.h              |  4 +--
+ include/hw/loongarch/virt.h        |  2 +-
+ include/hw/riscv/virt.h            |  4 +--
+ meson.build                        |  6 +++-
+ target/arm/internals.h             | 27 ++++++++++++-----
+ target/arm/tcg-stubs.c             |  4 +--
+ target/arm/tcg/op_helper.c         | 10 +++----
+ target/i386/tcg/excp_helper.c      | 17 ++++++-----
+ target/i386/tcg/helper-tcg.h       | 42 +++++++++++++++++++++-----
+ 21 files changed, 224 insertions(+), 91 deletions(-)
 
-  clock-frequency:
-    description: Desired I2C bus clock frequency in Hz
-    enum: [100000, 400000, 1000000, 3400000]
-    default: 400000
+-- 
+2.55.0.windows.3
 
-(or we omit it, and default to 400kHz. Your call).
-
-> +    qemu_fdt_setprop_cells(fdt, name, "clocks", clk_parent_phandle,
-> +                           clk_phandle);
-
-This looks good.
-
->      qemu_fdt_setprop_cell(fdt, name, "#address-cells", 1);
->      qemu_fdt_setprop_cell(fdt, name, "#size-cells", 0);
->  }
 
