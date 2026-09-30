@@ -4,115 +4,145 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19C63CA5FC5
-	for <qemu-riscv@archiver.kernel.org>; Wed, 30 Sep 2026 18:41:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3459CA5FC4
+	for <qemu-riscv@archiver.kernel.org>; Wed, 30 Sep 2026 21:19:23 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xBzFC-00088m-Lw; Wed, 30 Sep 2026 14:41:30 -0400
+	id 1xC1hf-0000ao-2x; Wed, 30 Sep 2026 17:19:03 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <asrinivasan@tenstorrent.com>)
- id 1xBzF8-00088Q-PC
- for qemu-riscv@nongnu.org; Wed, 30 Sep 2026 14:41:26 -0400
-Received: from mail-yx2-x0d.google.com ([2607:f8b0:4864:41::d])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <asrinivasan@tenstorrent.com>)
- id 1xBzF5-0007JB-P4
- for qemu-riscv@nongnu.org; Wed, 30 Sep 2026 14:41:26 -0400
-Received: by mail-yx2-x0d.google.com with SMTP id
- 00721157ae682-8a8496fd8c3so61007317b3.0
- for <qemu-riscv@nongnu.org>; Wed, 30 Sep 2026 11:41:22 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1790793682; cv=none;
- d=google.com; s=arc-20260327;
- b=JZF+m4hDyR1iVBPT1ZAbSFTSmhurBvRNqx7bKtqNlMoOusk3bBWkVJ7/svR358g9VK
- YJj/hBqFihc81fkBqTz9iOG0U7L6fXBzqctJcjHby8ck1Z1N9r/sF0UpaF9p3iYrhJRJ
- R9u8aEUjYw36n3BT4sjYBwPHgXZKMF9OF+VaJnqnG7wD+t1Topd48j+DF5dtLbJ8opEp
- 5F8GQBP/pN8zoTlvmSUseQitEr32WgcDUfh/z3VSpnhHncXwAjdz+WoRvV1+hSZkHVjq
- mLi4OpBoTefHFtUPB0dgoq1fuwG7drZvGARJMgmiIgV5rx/QkRGrDZk72SRcJbV8LtN/
- B3zg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=m2LIEofa18e0nuYlpMhnJ2HO/g2bNMXpoqe8ALR0tSE=;
- fh=oHdUm5XhEibu5DbQGacdqU/d9J4zBMS389xwj4zmKNg=;
- b=rlKrhHtOxITtcZ4RZ/kOA/cVJBsfq63npzh3fy5qgdqZZUbH8mTULRle3eaCf+l5uD
- LRWfOUjJ6ivuc3X1wkK+yneGXUjkNRnoRVg1/o1HE4iOZ0J8im2fVTkWhgPT3SSsq8Xp
- yspmcSMRRIlINiA7QbwU7r1njM9o/IFCGuo2l7w92yT6U+sZbXEws+0WkptCZRpChyL1
- s5TPL2jIKLeES8E+W7sr9evaqwNH3ZS/FJeD685b9GN+iYqudFYr0WmCp2ie8ofQt2oI
- OBvx2Udh6AGB4yc57WusgKmsJ0fAEaI6vGBorlOVq+dznO/AwjfcdoVCvjuCQxwkB5Y/
- kEng==; darn=nongnu.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1xC1hU-0000ZN-8y
+ for qemu-riscv@nongnu.org; Wed, 30 Sep 2026 17:18:52 -0400
+Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1xC1hS-0000Wg-0v
+ for qemu-riscv@nongnu.org; Wed, 30 Sep 2026 17:18:52 -0400
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 68UIPFa23881728
+ for <qemu-riscv@nongnu.org>; Wed, 30 Sep 2026 21:18:48 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ UyDhz7kmP9qBlEDAjfkJDfc+P44sGwTwscBdz4N2QTw=; b=iYrVHNcbImlFl6t0
+ bsOjbiaIpdjLa3qyxj772leTgC5v/ZX0uAYbYEzqmEIgVjJTJwFze0wWDC4VFm9B
+ SXHP+aOBCJ1YwYSdizJD9LtRb3GxsPH+d7BCGIUKJLicLA6ZKOuXXDTivz7wh5lr
+ mfv62I+YSHhLS3ZCK/h/at/sVYuo0mR4KbExJTvv90KUKRUeTvQurvmgCNC3bRj0
+ 6H10twoYjzU5j6CbSnWz+cVVrovthKDNuReJkb1Q7wzc8HoAzD5r8aL77W/YTox9
+ +66CwJTe6gziB7gtf9uzv5x/2iPEk/KNTagoxvkQENKmpNhWgWrBPfG7qOjyDwY5
+ g3KHCw==
+Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com
+ [209.85.222.198])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h17pj8n4h-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Wed, 30 Sep 2026 21:18:48 +0000 (GMT)
+Received: by mail-qk1-f198.google.com with SMTP id
+ af79cd13be357-9308eafb465so1445947585a.2
+ for <qemu-riscv@nongnu.org>; Wed, 30 Sep 2026 14:18:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=tenstorrent.com; s=google; t=1790793682; x=1791398482; darn=nongnu.org;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=m2LIEofa18e0nuYlpMhnJ2HO/g2bNMXpoqe8ALR0tSE=;
- b=SEdXCcrBAmzbenFYqZpuUr/Mn4PSbf5ddbpJzv1YZ04YxK11P4OFIGAxlC8dp8PHnh
- 3wqrJVPpnu4o20i8S9joE82zvT6J41Gm7KON+8SySLOvfuwy3a0IB9baob/EhaBcovOP
- zaVdIGoBSPEcTQK9IlWW7Uwkgr36vgcSVHT9OOuQdiwK/w4Hi9H5mP8CIbqvOaHRnGmM
- HBgHLeYNfKMhZbGHqLvTMTh9Uwfeya0EMBCG5HIv0HJmMLwafLpQ5LdxyuKSSPhUyt+y
- seKSZgUUgXsB+5KGZqU3A+dPwF5mCpVGEHEqp3PPtAS3tcyFU2mqAp38P+lDlsVGzYi2
- T3/Q==
+ d=oss.qualcomm.com; s=google; t=1790803127; x=1791407927; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=UyDhz7kmP9qBlEDAjfkJDfc+P44sGwTwscBdz4N2QTw=;
+ b=fBdNbxIUdCjcNOYhMfdzdfTxwVeSi2bxS9CFmaj4Zh0n87zznXl17jGFYq8nouAKXJ
+ Nk6tZKT3+Dyd6BieLta4zexMV3rJgF0LySXXlZrq3HOW71RoooO/rXXyTvgMTWO3djgx
+ H2OGA69/jDZ0JTz1QbexrD9rSGwT/oUMqXAWzc2x+MCUTiwaiZSuKrE9+kYu8caEzjbm
+ +tZYP19D2d1fMiCvNa/RgB50b6OlYuqLe8sCvNqQ2IQ32rDEDegV1xw3vUi4c1dGUnJr
+ +7dF+WIkRG5LT7l1ZVDHXPchIuCswOW2cK8PF4aoeapEIl9wopiiiMK5YQB1xQyI/2vT
+ lDZw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790793682; x=1791398482;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=m2LIEofa18e0nuYlpMhnJ2HO/g2bNMXpoqe8ALR0tSE=;
- b=xi3kZ1RIhiiFvVE4MKLjJxo7ar6Uig9EF0Qyq6PvharYeOW31iYWqozWxCcJIdD61Y
- 45nb0CMiGDof8tJ28Hqmrik6ZNG5/uQ94AlUyU+X8aTU+0olsRwuYtFgX0lkyM7412jb
- qZZr+qQtGxMUEPB5eMMqIBFW8KDW4gLZPO703n2bCZ302/7fc6Difzfs3fvI1H8WNHh6
- eqZLHdE8utj7fHvT8/CSh0e0R6GR74DOm5+wXHUmdSzMMedxQydAbtQLqMKucQYZ+zY7
- 2qjWpYV6DfO1MKptdw2+eP8ope0503w+UteZdxm4AEY4fzxCCpOhlzbQcu3U2UCtv6On
- iBMw==
-X-Forwarded-Encrypted: i=1;
- AKwUvBzsWUSbGBd3Z28jpYyKEef3sdkKahWeGdMjWVS/vfFbDU8BZ2limWuL40gq52/9KBYlMq1vVTS8dy/+@nongnu.org
-X-Gm-Message-State: AFq9FYJlOviApO0xpg80MX7uHQegKWieLqaXfhXhSoCJCW/CK2GlX+L7
- 7WUuv1GdhYN9DhIojEYqfmchZWi6IxkXFgfcsBU/s7ViOcELaTDS1+l5YT/9NfLmVt9VW2dZWWZ
- c+YMgo35iwJQ0zRIApQkP2OwgFbMZ5tZJFjn2n2MZxQ==
-X-Gm-Gg: AYBFou3G5RyJ6c02rhFDcIycvkkaQQl9TftcCmArfcBb2dLGnCb/5RYW4EkBm1ASigx
- 5O+x2PSVhxCgzzncHt2g9G+Q1QJqYR9oHozRztHIBBhPYWvxlA/2+H2+CMFvqzNfPCFZIneehTk
- tjztMYRl8ORlUIdElQjnAtKG7dKWmmYQMSj0DLIgAuk8ZYRoQWJllqDLpvCBMRGX9SbCqa3j/Mt
- 45RyXu0q0tAz7OY+pCYGIc4kKfZxpzNrBHGkgk1v8M7MTiyrbwuNZ3t92Lq4w5hZ6TYw8GcvJEj
- laLp6YhzApWxiLIDRn0C94zV4Ba///YCh4qq20uXK2XaDi+mRtw2WMMEA2K3sf1t3jhDKpUfIVv
- WMZ4E72j0hA==
-X-Received: by 2002:a05:690c:39c:b0:8a8:e0c7:dc3f with SMTP id
- 00721157ae682-8ac922869f9mr10134787b3.18.1790793681821; Wed, 30 Sep 2026
- 11:41:21 -0700 (PDT)
+ d=1e100.net; s=20260707; t=1790803127; x=1791407927;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=UyDhz7kmP9qBlEDAjfkJDfc+P44sGwTwscBdz4N2QTw=;
+ b=g/tfIfHBm8u6wbCdCTdo+Idt4EbNUaIbiD5cEOUvvEzDmMswsQmuNTOYb06tJe9UaS
+ mfDRY8MwUF1UzjFBulPN4oaoIg/FtbvinElPUHivZTEDSAEtABCI5R/5/Z8ydZM9xfL6
+ P+WYMsm4PI7ELAwORt8+7c1aTuU5p8bVZgH+TVD/2EHSw8YpR7J+wGz2H2CMdqDkx8pM
+ VsRVRDcgTNsGvt8Z99Q4hvj6gIZO/ddgnlGdckn2zLT9unVWKU4SRJ4xgaRGRj0S3kKC
+ oqD30Q8GAQjaEjveth6mCnx+TSquvStIL4pRg52lSpFmPD/kKNPktcUthlnZJPQNgnEJ
+ f5bg==
+X-Gm-Message-State: AFuF++kXsju94ouY6tGc8h72QMAay8edi8G7ECfdRjpL6/2c2eFw5RGc
+ erEo8N9AXiR1HarXGZzdBkIpJQDDIo0O+HuoXkTL57toS5TOTuG6CbfQ2GGxvHmFtapPkguJVP6
+ bKijVQvMSsL2Kw53XqeaUSQw+cYDpyGG12C2PMPI3ch+TYGKiyh5Ye0Pb0w==
+X-Gm-Gg: AYBFou2HVF/IpuY2G9wNfgwQAFwh5yAFO1vRgHryD3KZ5kH1gwtBkctK1vcWISurAdo
+ ljo8vcrDOTnCvcAszF/1fq7SdDOrCssgfzSptaH6F8r9m3iG47jkogtt3aqsNXUG4eWDTaOy2PE
+ SVQag12UOz+KxjbtceVmiyJkqNnEkskWHwwVLj5xN/8gzgnYrfctt3lyZ2j+dW7uSO8FLA2t5Ee
+ SfZaCv3zo8EpW/VR4KHJi+FbIAJubgh9RFU8zwkE0AFRHZpd+CghlF6RNPUlUhD3JyZ/fO8/XyK
+ nFaoSNNMkYDFjyOf9uKgoRryuTMi9sV4+gdhuJ+ZPM0jZY0wAvguom8wsQcUTc4PhSHlqneWFj7
+ g2j3RkPPw00rYHIhF9T/BeVcD/3gjjn+PMQ==
+X-Received: by 2002:a05:620a:27c3:b0:937:1097:feb8 with SMTP id
+ af79cd13be357-93ca96c5f73mr443318585a.24.1790803127187; 
+ Wed, 30 Sep 2026 14:18:47 -0700 (PDT)
+X-Received: by 2002:a05:620a:27c3:b0:937:1097:feb8 with SMTP id
+ af79cd13be357-93ca96c5f73mr443313285a.24.1790803126410; 
+ Wed, 30 Sep 2026 14:18:46 -0700 (PDT)
+Received: from [192.168.68.100] ([187.10.234.20])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-917a8a2feedsm9077566d6.33.2026.09.30.14.18.44
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 30 Sep 2026 14:18:45 -0700 (PDT)
+Message-ID: <19ec18d8-548e-469c-ad03-6d47380cb6dc@oss.qualcomm.com>
+Date: Wed, 30 Sep 2026 18:18:42 -0300
 MIME-Version: 1.0
-References: <20260904-atlantis_prcm-v3-0-8bf20795a381@oss.tenstorrent.com>
- <20260904-atlantis_prcm-v3-1-8bf20795a381@oss.tenstorrent.com>
- <CACPK8Xdfq5_tTqCfQfwi3tLimbG5YNO8_H39TY67TArPV1Ls1w@mail.gmail.com>
-In-Reply-To: <CACPK8Xdfq5_tTqCfQfwi3tLimbG5YNO8_H39TY67TArPV1Ls1w@mail.gmail.com>
-From: Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
-Date: Wed, 30 Sep 2026 13:41:10 -0500
-X-Gm-Features: AclHuK8Hco7PyBpljy-rP0UrYe4i4MkSAj5cvssdjSDmmTBO6sgYCPakPpH_5tU
-Message-ID: <CAEev2e-m1JU6qFQ71xHLxGEo1ju4RTEHZG7zGOmB+EWZN3kQWg@mail.gmail.com>
-Subject: Re: [PATCH v3 1/3] hw/misc: Add Tenstorrent Atlantis PRCM model
-To: Joel Stanley <joel@jms.id.au>
-Cc: qemu-devel@nongnu.org, Nicholas Piggin <npiggin@gmail.com>, 
- Michael Ellerman <mpe@kernel.org>,
- Portia Stephens <portias@oss.tenstorrent.com>, qemu-riscv@nongnu.org, 
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, Weiwei Li <liwei1518@gmail.com>, 
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Chao Liu <chao.liu@processmission.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:41::d;
- envelope-from=asrinivasan@tenstorrent.com; helo=mail-yx2-x0d.google.com
-X-Spam_score_int: -19
-X-Spam_score: -2.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 16/24] target/riscv: gate riscv_cpu_update_mip with
+ tcg_enabled()
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
+ qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com,
+ Palmer Dabbelt <palmer@dabbelt.com>, Paolo Bonzini <pbonzini@redhat.com>
+References: <20260703180538.3346781-1-daniel.barboza@oss.qualcomm.com>
+ <20260703180538.3346781-17-daniel.barboza@oss.qualcomm.com>
+ <fa90ae0b-3846-45e0-beba-269fc2423f6b@oss.qualcomm.com>
+ <0d4948b7-21f7-498d-b198-66ce4b7c51f1@oss.qualcomm.com>
+From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Content-Language: en-US
+In-Reply-To: <0d4948b7-21f7-498d-b198-66ce4b7c51f1@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Authority-Analysis: v=2.4 cv=eqpKXYpX c=1 sm=1 tr=0 ts=6abd7cb8 cx=c_pps
+ a=qKBjSQ1v91RyAK45QCPf5w==:117 a=jbqyKmyYbxlRs/MVMa3Ccg==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
+ a=EUspDBNiAAAA:8 a=JF9118EUAAAA:8 a=qJD6E9i2tIaHFd1jSFQA:9 a=3ZKOabzyN94A:10
+ a=QEXdDO2ut3YA:10 a=NFOGd7dJGGMPyQGDc5-O:22 a=xVlTc564ipvMDusKsbsT:22
+X-Proofpoint-GUID: k0x1NuluV3ladifBc1-O9lWijpyknVLs
+X-Proofpoint-ORIG-GUID: k0x1NuluV3ladifBc1-O9lWijpyknVLs
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTMwMDA4NiBTYWx0ZWRfX+VCIyNDVy37r
+ jhnDIDom5NlnvxTUv8w/IR13B7Y8NGnTK7nOoD8sjyFBAbrrSOSsq4p2mVfbk6P70kZMyYI7Th6
+ f+cWXOC3K6H/nAZFQVoh5bajdbPvqcg=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTMwMDA4NiBTYWx0ZWRfX+XvK5EeZcDkp
+ OerLIsWue2egREpfR0RGFCZSVKeygRVGf2fJtoPOwxlq4aXjKGSFuhY0QNfa2oHEa0OmLs2IyUt
+ exsOS5PikzE1cVuv+zdtBsimWeDfcScmHfa0GBHtGGKjWRSb3ZG33X9YgHFam7+OPa5pKv8V7/N
+ A30PWkzV64VZM6UANDmiPe8DPKR0RJzAGEq1vyQ9Z6NLzibO1qrxGmoBpx5s+tJlsocszRk0SU/
+ WFfUJOeuCLXCTGwbEKxdk76+rOxofTpYhYWh6sZB3Jil3/r212tCNFh+QrhDl+BRMoDprXggy/Z
+ F7G6e8pqDUsFGYyfiQFBt7bh/Zm8YWEFD1uTxoBjjoL9HFN3/Kw/HEQPchIZeegeVWfJdKsCYj7
+ sgo5MG4pUCMhwoOl+zb9GWllumvsoOxh2cDjoSfjvuGTZh2zwD9EwCGnO80unK8QLWdJIjqlqAn
+ KUW18i59lThkqpb34Hw==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-30_04,2026-09-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 spamscore=0 clxscore=1015 malwarescore=0 adultscore=0
+ lowpriorityscore=0 phishscore=0 bulkscore=0 priorityscore=1501 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609300086
+Received-SPF: pass client-ip=205.220.168.131;
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
 X-Spam_bar: --
-X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_NONE=-0.0001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -128,431 +158,244 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Sep 30, 2026 at 1:59=E2=80=AFAM Joel Stanley <joel@jms.id.au> wrote=
-:
->
-> On Sat, 5 Sept 2026 at 00:18, Anirudh Srinivasan
-> <asrinivasan@oss.tenstorrent.com> wrote:
-> >
-> > This device present in Tenstorrent Atlantis has registers that control
-> > clocks, reset and other misc functionality in the SoC. This commit adds
-> > models for the RCPU, HSIO, PCIE, MM and 2 DDR PRCMs.
-> >
-> > Co-developed-by: Portia Stephens <portias@oss.tenstorrent.com>
-> > Signed-off-by: Portia Stephens <portias@oss.tenstorrent.com>
-> > Signed-off-by: Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
->
-> Reviewed-by: Joel Stanley <joel@jms.id.au>
->
-> > ---
-> >  MAINTAINERS                        |   2 +
-> >  hw/misc/meson.build                |   1 +
-> >  hw/misc/trace-events               |   4 +
-> >  hw/misc/tt_atlantis_prcm.c         | 446 +++++++++++++++++++++++++++++=
-++++++++
-> >  include/hw/misc/tt_atlantis_prcm.h |  51 +++++
-> >  5 files changed, 504 insertions(+)
-> >
-> > diff --git a/MAINTAINERS b/MAINTAINERS
-> > index f524d90523..b6cc077602 100644
-> > --- a/MAINTAINERS
-> > +++ b/MAINTAINERS
-> > @@ -1830,7 +1830,9 @@ R: Portia Stephens <portias@oss.tenstorrent.com>
-> >  L: qemu-riscv@nongnu.org
-> >  S: Supported
-> >  F: docs/system/riscv/tt_*.rst
-> > +F: hw/misc/tt_*.c
-> >  F: hw/riscv/tt_*.c
-> > +F: include/hw/misc/tt_*.h
-> >  F: include/hw/riscv/tt_*.h
-> >  F: tests/functional/riscv64/test_tt_*.py
-> >
-> > diff --git a/hw/misc/meson.build b/hw/misc/meson.build
-> > index 54e07aacda..11b9593e03 100644
-> > --- a/hw/misc/meson.build
-> > +++ b/hw/misc/meson.build
-> > @@ -39,6 +39,7 @@ system_ss.add(when: 'CONFIG_SIFIVE_E_AON', if_true: f=
-iles('sifive_e_aon.c'))
-> >  system_ss.add(when: 'CONFIG_SIFIVE_U_OTP', if_true: files('sifive_u_ot=
-p.c'))
-> >  system_ss.add(when: 'CONFIG_SIFIVE_U_PRCI', if_true: files('sifive_u_p=
-rci.c'))
-> >  system_ss.add(when: 'CONFIG_K230_DECOMP_GZIP', if_true: files('k230_de=
-comp_gzip.c'))
-> > +system_ss.add(when: 'CONFIG_TENSTORRENT', if_true: files('tt_atlantis_=
-prcm.c'))
-> >
-> >  subdir('macio')
-> >
-> > diff --git a/hw/misc/trace-events b/hw/misc/trace-events
-> > index 0b8be3d0f2..8b80b71107 100644
-> > --- a/hw/misc/trace-events
-> > +++ b/hw/misc/trace-events
-> > @@ -452,3 +452,7 @@ launch_update_write(void) ""
-> >  vmlaunch_reset_enter(void) ""
-> >  vm_launchupdate_finalize(void) ""
-> >  restore_host_x86_igvm(void) ""
-> > +
-> > +# tt_atlantis_prcm.c
-> > +tt_atlantis_prcm_read(uint32_t domain, uint64_t offset, uint64_t data)=
- "domain 0x%02x offset 0x%" PRIx64 " data 0x%" PRIx64
-> > +tt_atlantis_prcm_write(uint32_t domain, uint64_t offset, uint64_t data=
-) "domain 0x%02x offset 0x%" PRIx64 " data 0x%" PRIx64
-> > diff --git a/hw/misc/tt_atlantis_prcm.c b/hw/misc/tt_atlantis_prcm.c
-> > new file mode 100644
-> > index 0000000000..392d7da7f4
-> > --- /dev/null
-> > +++ b/hw/misc/tt_atlantis_prcm.c
-> > @@ -0,0 +1,446 @@
-> > +/*
-> > + * PRCM (Clock and Reset Controller) in Tenstorrent Atlantis SoC
-> > + *
-> > + * SPDX-License-Identifier: GPL-2.0-or-later
-> > + *
-> > + * Copyright 2026 Tenstorrent
-> > + */
-> > +
-> > +#include "qemu/osdep.h"
-> > +#include "qemu/bitops.h"
-> > +#include "qapi/error.h"
-> > +#include "qemu/log.h"
-> > +#include "hw/misc/tt_atlantis_prcm.h"
-> > +#include "hw/core/qdev-properties.h"
-> > +#include "hw/core/registerfields.h"
-> > +#include "hw/core/irq.h"
->
-> The three above are unused.
->
-> > +#include "trace.h"
-> > +
-> > +#define TO_REG(offset) ((offset) >> 2)
-> > +
-> > +#define PLL_LOCK_BIT        31
-> > +#define PLL_FBDIV_LSB       14
-> > +#define PLL_POSTDIV2_LSB    11
-> > +#define PLL_POSTDIV1_LSB    8
-> > +#define PLL_REFDIV_LSB      2
-> > +#define PLL_BYPASS_BIT      1
-> > +
-> > +#define PLL_RESET_VAL(BYPASS, REFDIV, POSTDIV1, POSTDIV2, FBDIV, LOCK)=
-         \
-> > +  ((LOCK << PLL_LOCK_BIT) | (FBDIV << PLL_FBDIV_LSB) |                =
-         \
-> > +   (POSTDIV2 << PLL_POSTDIV2_LSB) | (POSTDIV1 << PLL_POSTDIV1_LSB) |  =
-         \
-> > +   (REFDIV << PLL_REFDIV_LSB) | (BYPASS << PLL_BYPASS_BIT))
-> > +
-> > +#define RCPU_PLL_RCPU_CFG   TO_REG(0)
-> > +#define RCPU_PLL_NOCC_CFG   TO_REG(0x4)
-> > +#define RCPU_NOCC_CLK_CFG   TO_REG(0x8)
-> > +#define RCPU_RCPU_DIV_CFG   TO_REG(0xc)
-> > +#define RCPU_RCPU_BLK_CG    TO_REG(0x14)
-> > +#define RCPU_LSIO_BLK_CG    TO_REG(0x18)
-> > +#define RCPU_RCPU_BLK_RST   TO_REG(0x1c)
-> > +#define RCPU_LSIO_BLK_RST   TO_REG(0x20)
-> > +#define RCPU_PLL_RCPU_EN    TO_REG(0x11c)
-> > +#define RCPU_PLL_NOCC_EN    TO_REG(0x120)
-> > +#define RCPU_PLL_MM_EN      TO_REG(0x0124)
-> > +#define RCPU_PLL1_MM_EN     TO_REG(0x0128)
-> > +#define RCPU_PLL_HSIO_EN    TO_REG(0x12c)
-> > +#define RCPU_PLL_PCIE_EN    TO_REG(0x138)
-> > +#define RCPU_PLL_I2S_EN     TO_REG(0x13C)
->
-> Nit: make the 0x case and leading zeros uniform.
->
-> > +#define RCPU_PLL_MM_CFG     TO_REG(0x19c)
-> > +#define RCPU_PLL_HSIO_CFG   TO_REG(0x1a0)
-> > +#define RCPU_PLL_PCIE_CFG   TO_REG(0x1ac)
-> > +#define RCPU_BOOT_MODE_CFG  TO_REG(0x1b0)
-> > +#define RCPU_PLL_I2S_CFG    TO_REG(0x1f4)
-> > +#define RCPU_I2S_DIV_CFG    TO_REG(0x1f8)
-> > +#define RCPU_BUS_CFG        TO_REG(0x1fc)
-> > +#define RCPU_PLL1_MM_CFG    TO_REG(0x2a4)
->
-> > +
-> > +static void tt_atlantis_prcm_write(void *opaque, hwaddr offset,
-> > +                                   uint64_t data, unsigned size)
-> > +{
-> > +    TTAtlantisPRCMState *s =3D TT_ATLANTIS_PRCM(opaque);
-> > +    TTAtlantisPRCMClass *c =3D TT_ATLANTIS_PRCM_GET_CLASS(s);
-> > +
-> > +    if (offset >=3D c->regs_size) {
-> > +        qemu_log_mask(LOG_GUEST_ERROR,
-> > +                      "%s: Out-of-bounds write at offset 0x%" HWADDR_P=
-RIx "\n",
-> > +                      __func__, offset);
-> > +        return;
-> > +    }
-> > +
-> > +    trace_tt_atlantis_prcm_write(c->domain, offset, data);
-> > +
-> > +    s->regs[TO_REG(offset)] =3D data;
->
-> Are there any fields that should be read only? The PLL lock bits?
 
-Yes, but our driver isn't gonna try writing to them. Not sure if it is
-really worth modeling it to that extent.
 
->
-> >
-> > +    }
-> > +
-> > +    if (data & PLL_EN) {
-> > +        s->regs[pll_reg_offset] |=3D BIT(PLL_LOCK_BIT);
-> > +    } else {
-> > +        s->regs[pll_reg_offset] &=3D ~BIT(PLL_LOCK_BIT);
-> > +    }
-> > +}
-> > +
-> > +static const MemoryRegionOps tt_atlantis_prcm_ops =3D {
-> > +    .read =3D tt_atlantis_prcm_read,
-> > +    .write =3D tt_atlantis_prcm_write,
-> > +    .endianness =3D DEVICE_LITTLE_ENDIAN,
-> > +    .valid.min_access_size =3D 4,
-> > +    .valid.max_access_size =3D 4,
-> > +};
-> > +
-> > +static const MemoryRegionOps tt_atlantis_prcm_rcpu_ops =3D {
-> > +    .read =3D tt_atlantis_prcm_read,
-> > +    .write =3D tt_atlantis_prcm_rcpu_write,
-> > +    .endianness =3D DEVICE_LITTLE_ENDIAN,
-> > +    .valid.min_access_size =3D 4,
->
-> Are we sure? Do byte accesses trap on hardware?
+On 9/30/2026 10:32 AM, Philippe Mathieu-Daudé wrote:
+> On 30/9/26 15:16, Philippe Mathieu-DaudÃ© wrote:
+>> Hi Daniel,
+>>
+>> (committed as 6c91b423a9a4dac2a22629491f2a3059aa40b954)
+>>
+>> On 3/7/26 20:05, Daniel Henrique Barboza wrote:
+>>> riscv_cpu_update_mip() is a TCG only call.  Its KVM equivalent is
+>>> kvm_riscv_set_irq().  cpu.c gates the KVM only function with a
+>>> kvm_enabled() check, making it unavailable for TCG only builds.  We need
+>>> to do the same for riscv_cpu_update_mip() otherwise a KVM only build
+>>> will fail because it doesn't know what this function is.
+>>>
+>>> Use tcg_enabled() for the couple of riscv_cpu_update_mip() calls we have
+>>> unguarded in cpu.c.
+>>>
+>>> We have way more calls to deal with in time_helper.c which isn't using
+>>> kvm_riscv_set_irq() at all, so create a riscv_accel_set_irq() local
+>>> helper that will choose whether to use the KVM or TCG API.
+>>>
+>>> The reason we're going through all this hassle in time_helper.c is
+>>> because hw/int/riscv_aclint.c uses it, and if we don't do something
+>>> about we won't have riscv_aclint working for KVM.  Whether this is a
+>>> real problem or not and we should remove aclint support for KVM is
+>>> question for another day.
+>>>
+>>> Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+>>> Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
+>>> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+>>> ---
+>>>   target/riscv/cpu.c         | 19 ++++++++++++++-----
+>>>   target/riscv/time_helper.c | 33 +++++++++++++++++++++++++--------
+>>>   2 files changed, 39 insertions(+), 13 deletions(-)
+>>>
+>>> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+>>> index db18c52656..6b79dcc5ee 100644
+>>> --- a/target/riscv/cpu.c
+>>> +++ b/target/riscv/cpu.c
+>>> @@ -1343,14 +1343,18 @@ static void riscv_cpu_set_irq(void *opaque, int irq, int level)
+>>>           case IRQ_M_EXT:
+>>>               if (kvm_enabled()) {
+>>>                   kvm_riscv_set_irq(cpu, irq, level);
+>>> -            } else {
+>>> +            }
+>>> +
+>>> +            if (tcg_enabled()) {
+>>>                   riscv_cpu_update_mip(env, 1 << irq, BOOL_TO_MASK(level));
+>>>               }
+>>>                break;
+>>>           case IRQ_S_EXT:
+>>>               if (kvm_enabled()) {
+>>>                   kvm_riscv_set_irq(cpu, irq, level);
+>>> -            } else {
+>>> +            }
+>>> +
+>>> +            if (tcg_enabled()) {
+>>>                   env->external_seip = level;
+>>>                   riscv_cpu_update_mip(env, 1 << irq,
+>>>                                        BOOL_TO_MASK(level | env- >software_seip));
+>>> @@ -1377,9 +1381,14 @@ static void riscv_cpu_set_irq(void *opaque, int irq, int level)
+>>>               env->hgeip |= 1ULL << irq;
+>>>           }
+>>> -        /* Update mip.SGEIP bit */
+>>> -        riscv_cpu_update_mip(env, MIP_SGEIP,
+>>> -                             BOOL_TO_MASK(!!(env->hgeie & env->hgeip)));
+>>> +        if (kvm_enabled()) {
+>>> +            kvm_riscv_set_irq(cpu, irq, level);
+>>> +        }
+>>> +        if (tcg_enabled()) {
+>>> +            /* Update mip.SGEIP bit */
+>>> +            riscv_cpu_update_mip(env, MIP_SGEIP,
+>>> +                                 BOOL_TO_MASK(!!(env->hgeie & env- >hgeip)));
+>>> +        }
+>>>       } else {
+>>>           g_assert_not_reached();
+>>>       }
+>>> diff --git a/target/riscv/time_helper.c b/target/riscv/time_helper.c
+>>> index 400e917354..ede1a4c2a3 100644
+>>> --- a/target/riscv/time_helper.c
+>>> +++ b/target/riscv/time_helper.c
+>>> @@ -21,19 +21,34 @@
+>>>   #include "cpu_bits.h"
+>>>   #include "time_helper.h"
+>>>   #include "hw/intc/riscv_aclint.h"
+>>> +#include "kvm/kvm_riscv.h"
+>>> +#include "system/kvm.h"
+>>> +#include "system/tcg.h"
+>>> +
+>>> +static void riscv_accel_set_irq(RISCVCPU *cpu, int irq, int level)
+>>
+>> Revisiting this change, riscv_accel_set_irq() is confusing.
+>>
+>>> +{
+>>> +    if (kvm_enabled()) {
+>>> +        kvm_riscv_set_irq(cpu, irq, level);
+>>
+>> kvm_riscv_set_irq() expects IRQ number and level,
+>>
+>>> +    }
+>>> +
+>>> +    if (tcg_enabled()) {
+>>> +        riscv_cpu_update_mip(&cpu->env, irq, level);
+>>
+>> riscv_cpu_update_mip() expects a MIP bitmask and a value.
+>>
+>>> +    }
+>>> +}
+> 
+> For now self-documented as:
+> 
+> -- >8 --
+> Author: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
+> Date:   Wed Sep 30 15:22:48 2026 +0200
+> 
+>      target/riscv: Clarify riscv_accel_set_irq() arguments
+> 
+>      Use per-accelerator locals to make the differing conventions
+>      explicit: TCG takes a MIP bitmask and value, KVM takes an IRQ
+>      number and a level.
 
-The spec defines that all the registers are 32-bit wide and uses word
-addressing. All software that's gonna be using this region also assume
-so and do read words only. Don't think it's worth accounting for this
-weird edge case.
+Yep, that's a fair description.  The logic was withdrew from existing code
+in cpu.c and other places ... back then we were doing TCG code first and then
+sprinkling KVM bits on the top.  Ideally this common IRQ helper that translates
+between KVM and TCG would be used since the beginning, but yeah.
 
->
-> > +    .valid.max_access_size =3D 4,
-> > +};
-> > +
-> > +static void tt_atlantis_prcm_realize(DeviceState *dev, Error **errp)
-> > +{
-> > +    TTAtlantisPRCMState *s =3D TT_ATLANTIS_PRCM(dev);
-> > +    SysBusDevice *sbd =3D SYS_BUS_DEVICE(dev);
-> > +    TTAtlantisPRCMClass *c =3D TT_ATLANTIS_PRCM_GET_CLASS(s);
-> > +
-> > +    if (c->domain >=3D PRCM_DOMAIN_COUNT) {
->
-> This is set in this file, so it's not going to change at runtime. Do
-> we make it an assert?
 
-Ack.
 
->
-> > +        error_setg(errp,
-> > +                   "domain %d is larger than max number of possible do=
-mains %d",
-> > +                   c->domain, PRCM_DOMAIN_COUNT);
-> > +        return;
-> > +    }
-> > +    s->regs =3D g_new0(uint32_t, TO_REG(c->regs_size));
-> > +
-> > +    memory_region_init_io(&s->mmio, OBJECT(s), c->ops, s,
-> > +                          TYPE_TT_ATLANTIS_PRCM, c->regs_size);
-> > +    sysbus_init_mmio(sbd, &s->mmio);
-> > +}
-> > +
-> > +static void tt_atlantis_prcm_reset_hold(Object *obj, ResetType type)
-> > +{
-> > +    TTAtlantisPRCMState *s =3D TT_ATLANTIS_PRCM(obj);
-> > +    TTAtlantisPRCMClass *c =3D TT_ATLANTIS_PRCM_GET_CLASS(s);
-> > +
-> > +    memset(s->regs, 0, c->regs_size);
-> > +}
->
-> > +static void tt_atlantis_prcm_class_init(ObjectClass *klass,
-> > +                                        const void *data)
-> > +{
-> > +    DeviceClass *dc =3D DEVICE_CLASS(klass);
-> > +    ResettableClass *rc =3D RESETTABLE_CLASS(klass);
-> > +    TTAtlantisPRCMClass *c =3D TT_ATLANTIS_PRCM_CLASS(klass);
-> > +
-> > +    dc->realize =3D tt_atlantis_prcm_realize;
-> > +    dc->unrealize =3D tt_atlantis_prcm_unrealize;
-> > +    dc->desc =3D "Tenstorrent Atlantis PRCM Controller";
-> > +    rc->phases.hold =3D tt_atlantis_prcm_reset_hold;
-> > +    c->ops =3D &tt_atlantis_prcm_ops;
-> > +}
-> > +
-> > +static void tt_atlantis_prcm_rcpu_class_init(ObjectClass *klass,
-> > +                                             const void *data)
-> > +{
-> > +    DeviceClass *dc =3D DEVICE_CLASS(klass);
-> > +    ResettableClass *rc =3D RESETTABLE_CLASS(klass);
-> > +    TTAtlantisPRCMClass *c =3D TT_ATLANTIS_PRCM_CLASS(klass);
-> > +
-> > +    dc->realize =3D tt_atlantis_prcm_realize;
->
-> The parent has already set this, so I think you can drop it from all
-> of the tt_atlantis_prcm_*_class_init
 
-Ack
+> 
+>      Signed-off-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
+> 
 
->
-> > +    dc->desc =3D "Tenstorrent Atlantis RCPU PRCM Controller";
-> > +    rc->phases.hold =3D tt_atlantis_prcm_rcpu_reset_hold;
-> > +    c->domain =3D PRCM_DOMAIN_RCPU;
-> > +    c->regs_size =3D RCPU_DOMAIN_SIZE;
-> > +    c->ops =3D &tt_atlantis_prcm_rcpu_ops;
-> > +}
-> > +
-> > +static void tt_atlantis_prcm_hsio_class_init(ObjectClass *klass,
-> > +                                             const void *data)
-> > +{
-> > +    DeviceClass *dc =3D DEVICE_CLASS(klass);
-> > +    ResettableClass *rc =3D RESETTABLE_CLASS(klass);
-> > +    TTAtlantisPRCMClass *c =3D TT_ATLANTIS_PRCM_CLASS(klass);
-> > +
-> > +    dc->realize =3D tt_atlantis_prcm_realize;
->
-> Same.
->
-> > +    dc->desc =3D "Tenstorrent Atlantis HSIO PRCM Controller";
-> > +    rc->phases.hold =3D tt_atlantis_prcm_hsio_reset_hold;
-> > +    c->domain =3D PRCM_DOMAIN_HSIO;
-> > +    c->regs_size =3D HSIO_DOMAIN_SIZE;
-> > +    c->ops =3D &tt_atlantis_prcm_ops;
->
-> These are the same for all but the rpcu too. I wonder if we should set
-> it in tt_atlantis_prcm_class_init and only override in
-> tt_atlantis_prcm_rcpu_class_init?
+In case you want to push this via your tree:
 
-Ack.
 
->
-> > +}
-> > +
-> > +static void tt_atlantis_prcm_pcie_class_init(ObjectClass *klass,
-> > +                                             const void *data)
-> > +{
-> > +    DeviceClass *dc =3D DEVICE_CLASS(klass);
-> > +    ResettableClass *rc =3D RESETTABLE_CLASS(klass);
-> > +    TTAtlantisPRCMClass *c =3D TT_ATLANTIS_PRCM_CLASS(klass);
-> > +
-> > +    dc->realize =3D tt_atlantis_prcm_realize;
->
-> Same.
->
-> > +    dc->desc =3D "Tenstorrent Atlantis PCIE PRCM Controller";
-> > +    rc->phases.hold =3D tt_atlantis_prcm_pcie_reset_hold;
-> > +    c->domain =3D PRCM_DOMAIN_PCIE;
-> > +    c->regs_size =3D PCIE_DOMAIN_SIZE;
-> > +    c->ops =3D &tt_atlantis_prcm_ops;
-> > +}
-> > +
-> > +static void tt_atlantis_prcm_mm_class_init(ObjectClass *klass,
-> > +                                           const void *data)
-> > +{
-> > +    DeviceClass *dc =3D DEVICE_CLASS(klass);
-> > +    ResettableClass *rc =3D RESETTABLE_CLASS(klass);
-> > +    TTAtlantisPRCMClass *c =3D TT_ATLANTIS_PRCM_CLASS(klass);
-> > +
-> > +    dc->realize =3D tt_atlantis_prcm_realize;
->
-> Same.
->
-> > +    dc->desc =3D "Tenstorrent Atlantis MM PRCM Controller";
-> > +    rc->phases.hold =3D tt_atlantis_prcm_mm_reset_hold;
-> > +    c->domain =3D PRCM_DOMAIN_MM;
-> > +    c->regs_size =3D MM_DOMAIN_SIZE;
-> > +    c->ops =3D &tt_atlantis_prcm_ops;
-> > +}
-> > +
-> > +static void tt_atlantis_prcm_ddrc0_class_init(ObjectClass *klass,
-> > +                                              const void *data)
-> > +{
-> > +    DeviceClass *dc =3D DEVICE_CLASS(klass);
-> > +    ResettableClass *rc =3D RESETTABLE_CLASS(klass);
-> > +    TTAtlantisPRCMClass *c =3D TT_ATLANTIS_PRCM_CLASS(klass);
-> > +
-> > +    dc->realize =3D tt_atlantis_prcm_realize;
->
-> Same.
->
-> > +    dc->desc =3D "Tenstorrent Atlantis DDR Memory Controller 0 PRCM";
-> > +    rc->phases.hold =3D tt_atlantis_prcm_ddrc_reset_hold;
-> > +    c->domain =3D PRCM_DOMAIN_DDRC0;
-> > +    c->regs_size =3D DDRC0_DOMAIN_SIZE;
-> > +    c->ops =3D &tt_atlantis_prcm_ops;
-> > +}
-> > +
-> > +static void tt_atlantis_prcm_ddrc1_class_init(ObjectClass *klass,
-> > +                                              const void *data)
-> > +{
-> > +    DeviceClass *dc =3D DEVICE_CLASS(klass);
-> > +    ResettableClass *rc =3D RESETTABLE_CLASS(klass);
-> > +    TTAtlantisPRCMClass *c =3D TT_ATLANTIS_PRCM_CLASS(klass);
-> > +
-> > +    dc->realize =3D tt_atlantis_prcm_realize;
->
-> Same.
->
-> > +    dc->desc =3D "Tenstorrent Atlantis DDR Memory Controller 1 PRCM";
-> > +    rc->phases.hold =3D tt_atlantis_prcm_ddrc_reset_hold;
-> > +    c->domain =3D PRCM_DOMAIN_DDRC1;
-> > +    c->regs_size =3D DDRC1_DOMAIN_SIZE;
-> > +    c->ops =3D &tt_atlantis_prcm_ops;
-> > +}
->
-> > diff --git a/include/hw/misc/tt_atlantis_prcm.h b/include/hw/misc/tt_at=
-lantis_prcm.h
-> > new file mode 100644
-> > index 0000000000..dc7938433a
-> > --- /dev/null
-> > +++ b/include/hw/misc/tt_atlantis_prcm.h
->
-> > +
-> > +enum {
-> > +    PRCM_DOMAIN_RCPU =3D 0,
-> > +    PRCM_DOMAIN_HSIO =3D 1,
-> > +    PRCM_DOMAIN_PCIE =3D 2,
-> > +    PRCM_DOMAIN_MM =3D 3,
-> > +    PRCM_DOMAIN_DDRC0 =3D 4,
-> > +    PRCM_DOMAIN_DDRC1 =3D 5,
-> > +    PRCM_DOMAIN_COUNT =3D 6
-> > +};
->
-> Given these are in the "public" header, give them a prefix. TT_,
-> TT_ATLANTIS_PRCM_, whatever you think is sensible.
->
-> Or move them out. I think they are only used by the machine to index
-> into it's array of devices, so they're not really part of the model,
-> and could live in tt_atlantis.c.
+Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 
-These are used in both tt_atlantis.c and tt_atlantis_prcm.c Will add a
-TT_ATLANTIS_ prefix to it.
+> diff --git a/target/riscv/time_helper.c b/target/riscv/time_helper.c
+> index ede1a4c2a34..85f3f2760b5 100644
+> --- a/target/riscv/time_helper.c
+> +++ b/target/riscv/time_helper.c
+> @@ -27,5 +27,9 @@
+> 
+> -static void riscv_accel_set_irq(RISCVCPU *cpu, int irq, int level)
+> +static void riscv_accel_set_irq(RISCVCPU *cpu,
+> +                                int irq_or_mask, int level_or_value)
+>   {
+>       if (kvm_enabled()) {
+> +        int irq = irq_or_mask;
+> +        int level = level_or_value;
+> +
+>           kvm_riscv_set_irq(cpu, irq, level);
+> @@ -34,3 +38,6 @@ static void riscv_accel_set_irq(RISCVCPU *cpu, int irq, int level)
+>       if (tcg_enabled()) {
+> -        riscv_cpu_update_mip(&cpu->env, irq, level);
+> +        uint64_t mask = irq_or_mask;
+> +        uint64_t value = level_or_value;
+> +
+> +        riscv_cpu_update_mip(&cpu->env, mask, value);
+>       }
+> ---
+> 
+>>>   static void riscv_vstimer_cb(void *opaque)
+>>>   {
+>>>       RISCVCPU *cpu = opaque;
+>>>       CPURISCVState *env = &cpu->env;
+>>>       env->vstime_irq = 1;
+>>> -    riscv_cpu_update_mip(env, 0, BOOL_TO_MASK(1));
+>>> +    riscv_accel_set_irq(cpu, 0, BOOL_TO_MASK(1));
+>>
+>> In particular I don't follow what irq=0 is here, IRQ or mask?
+>>
+>>>   }
+>>>   static void riscv_stimer_cb(void *opaque)
+>>>   {
+>>>       RISCVCPU *cpu = opaque;
+>>> -    riscv_cpu_update_mip(&cpu->env, MIP_STIP, BOOL_TO_MASK(1));
+>>> +    riscv_accel_set_irq(cpu, MIP_STIP, BOOL_TO_MASK(1));
+>>>   }
+>>>   /*
+>>> @@ -48,6 +63,7 @@ void riscv_timer_write_timecmp(CPURISCVState *env, QEMUTimer *timer,
+>>>       RISCVAclintMTimerState *mtimer = env->rdtime_fn_arg;
+>>>       uint32_t timebase_freq;
+>>>       uint64_t rtc_r;
+>>> +    RISCVCPU *cpu;
+>>>       if (!riscv_cpu_cfg(env)->ext_sstc || !env->rdtime_fn ||
+>>>           !env->rdtime_fn_arg || !get_field(env->menvcfg, MENVCFG_STCE)) {
+>>> @@ -63,6 +79,7 @@ void riscv_timer_write_timecmp(CPURISCVState *env, QEMUTimer *timer,
+>>>       timebase_freq = mtimer->timebase_freq;
+>>>       rtc_r = env->rdtime_fn(env->rdtime_fn_arg) + delta;
+>>> +    cpu = env_archcpu(env);
+>>>       if (timecmp <= rtc_r) {
+>>>           /*
+>>> @@ -71,9 +88,9 @@ void riscv_timer_write_timecmp(CPURISCVState *env, QEMUTimer *timer,
+>>>            */
+>>>           if (timer_irq == MIP_VSTIP) {
+>>>               env->vstime_irq = 1;
+>>> -            riscv_cpu_update_mip(env, 0, BOOL_TO_MASK(1));
+>>> +            riscv_accel_set_irq(cpu, 0, BOOL_TO_MASK(1));
+>>>           } else {
+>>> -            riscv_cpu_update_mip(env, MIP_STIP, BOOL_TO_MASK(1));
+>>> +            riscv_accel_set_irq(cpu, MIP_STIP, BOOL_TO_MASK(1));
+>>>           }
+>>>           return;
+>>>       }
+>>> @@ -81,9 +98,9 @@ void riscv_timer_write_timecmp(CPURISCVState *env, QEMUTimer *timer,
+>>>       /* Clear the [VS|S]TIP bit in mip */
+>>>       if (timer_irq == MIP_VSTIP) {
+>>>           env->vstime_irq = 0;
+>>> -        riscv_cpu_update_mip(env, 0, BOOL_TO_MASK(0));
+>>> +        riscv_accel_set_irq(cpu, 0, BOOL_TO_MASK(0));
+>>>       } else {
+>>> -        riscv_cpu_update_mip(env, timer_irq, BOOL_TO_MASK(0));
+>>> +        riscv_accel_set_irq(cpu, timer_irq, BOOL_TO_MASK(0));
+>>>       }
+>>>       /*
+>>> @@ -151,7 +168,7 @@ static void riscv_timer_disable_timecmp(CPURISCVState *env, QEMUTimer *timer,
+>>>   {
+>>>       /* Disable S-mode Timer IRQ and HW-based STIP */
+>>>       if ((timer_irq == MIP_STIP) && !get_field(env->menvcfg, MENVCFG_STCE)) {
+>>> -        riscv_cpu_update_mip(env, timer_irq, BOOL_TO_MASK(0));
+>>> +        riscv_accel_set_irq(env_archcpu(env), timer_irq, BOOL_TO_MASK(0));
+>>>           timer_del(timer);
+>>>           return;
+>>>       }
+>>> @@ -161,7 +178,7 @@ static void riscv_timer_disable_timecmp(CPURISCVState *env, QEMUTimer *timer,
+>>>           (!get_field(env->menvcfg, MENVCFG_STCE) ||
+>>>            !get_field(env->henvcfg, HENVCFG_STCE))) {
+>>>           env->vstime_irq = 0;
+>>> -        riscv_cpu_update_mip(env, 0, BOOL_TO_MASK(0));
+>>> +        riscv_accel_set_irq(env_archcpu(env), 0, BOOL_TO_MASK(0));
+>>>           timer_del(timer);
+>>>           return;
+>>>       }
+>>
+>>
+> 
 
->
->
->
-> > +
-> > +struct TTAtlantisPRCMState {
-> > +    SysBusDevice parent;
-> > +
-> > +    MemoryRegion mmio;
-> > +
-> > +    uint32_t *regs;
-> > +};
-> > +
-> > +struct TTAtlantisPRCMClass {
-> > +    SysBusDeviceClass parent_class;
-> > +
-> > +    uint32_t domain;
-> > +    uint32_t regs_size;
-> > +    const MemoryRegionOps *ops;
-> > +};
-> > +
-> > +#endif
-> >
-> > --
-> > 2.43.0
-> >
-
-Regards
-
-Anirudh Srinivasan
 
