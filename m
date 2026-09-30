@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D325DCA5FC1
-	for <qemu-riscv@archiver.kernel.org>; Wed, 30 Sep 2026 08:45:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12386CA5FC1
+	for <qemu-riscv@archiver.kernel.org>; Wed, 30 Sep 2026 08:46:38 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xBpwS-0004st-Hh; Wed, 30 Sep 2026 04:45:32 -0400
+	id 1xBpxI-0006Yv-UV; Wed, 30 Sep 2026 04:46:24 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
- id 1xBpwP-0004h4-Hq; Wed, 30 Sep 2026 04:45:29 -0400
-Received: from mgamail.intel.com ([192.198.163.11])
+ id 1xBpxD-0006LY-Rt; Wed, 30 Sep 2026 04:46:19 -0400
+Received: from mgamail.intel.com ([192.198.163.7])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
- id 1xBpwO-00020F-22; Wed, 30 Sep 2026 04:45:29 -0400
+ id 1xBpxC-0002Bf-BD; Wed, 30 Sep 2026 04:46:19 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1790757928; x=1822293928;
+ t=1790757979; x=1822293979;
  h=date:from:to:cc:subject:message-id:references:
  mime-version:content-transfer-encoding:in-reply-to;
- bh=r4cQIDtOW490g8hA1O3RVU86YVCtU4OcrSXfgeh0oy0=;
- b=LOVe9pGmJYCpFhBBHraAsXJAJUUoPRhG/nJsFR48T3D6PGCB3zAZGAKT
- wwGlGzgBI3gCI0jcEIv5oA53bG5FisyiXUr5lpR9fOefnuBL46wt6lg2L
- zuQU/DXez19DlkmOJtxUjepwxMTSCifpfJpWM2bLAxc9+AhJRlqIMJnNA
- GUmkh6gnV4VTFuD25Ez6hUB8X8whEnMBrVV5Pz5HuCD1yBZDEUrr5FJ9S
- mmKjlye/6dOO83fLLH7pAj0RNzJMinrtJ5yJhn/El2GbJLCT23vxBqdjn
- vsvnwVdD3hSvBKe7kty0oCBc4CgW1f0lxxw2qJfLf2M8a7j+huEYGt6Uh Q==;
-X-CSE-ConnectionGUID: pnszqJjAS0asQIfl5Fy0LA==
-X-CSE-MsgGUID: GT7Agv4oRtybs9T8pNqrhQ==
-X-IronPort-AV: E=McAfee;i="6800,10657,11920"; a="102061602"
-X-IronPort-AV: E=Sophos;i="6.27,132,1787036400"; d="scan'208";a="102061602"
-Received: from fmviesa006.fm.intel.com ([10.60.135.146])
- by fmvoesa105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 30 Sep 2026 01:45:25 -0700
-X-CSE-ConnectionGUID: e/5ifFn3Q824RY7FCyUj7A==
-X-CSE-MsgGUID: wAHwF0tNS+yQ6GQZxDqiBA==
+ bh=NOxBgaUnrEGTQE60DnuzHbH2WNTh8m+/9HpPQr1x03Q=;
+ b=G9wEfALR2h32G2mqmk0dWkH1yoi+tpMXK53QGSjG791FzwP10C4me+u/
+ czwXMjD36ep8tzWhYW7oCpjE0bPm/vpALGPYVwsE3ppB/6hEGil9AobLN
+ N+t/cmc/n5hjzXMHuy1ut98AuEJYfIVIu2jPHheTPB1nnV7XAuuXODEn4
+ Jgx9/evqA0gmCwjgt1NaewL2zjWhazIC9IAmYlTrGiEK6mJ1vnPGIc+F4
+ ZvWKk5EX28e4jroHYoza/ai4SfHAhtY/27m+0PgTjpgWPjQI39Let1rlW
+ P9Vpb9q0vemeTfFQ1PRbRw8I70jwo3+PnzffP2/g89MTWiA6E8cPx5sK+ w==;
+X-CSE-ConnectionGUID: /MJCgldgSnCeO1QDFIqNcw==
+X-CSE-MsgGUID: D22eeywzQjuht1HTjM8dXA==
+X-IronPort-AV: E=McAfee;i="6800,10657,11920"; a="117019326"
+X-IronPort-AV: E=Sophos;i="6.27,132,1787036400"; d="scan'208";a="117019326"
+Received: from orviesa004.jf.intel.com ([10.64.159.144])
+ by fmvoesa101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 30 Sep 2026 01:46:16 -0700
+X-CSE-ConnectionGUID: fjt43QKHS2eGt58TLBY+iQ==
+X-CSE-MsgGUID: kwhjjp+zQseO+uov0N5/ZQ==
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.27,132,1787036400"; d="scan'208";a="274236165"
+X-IronPort-AV: E=Sophos;i="6.27,132,1787036400"; d="scan'208";a="278972858"
 Received: from zhaoliu1-desk.sh.intel.com (HELO localhost) ([10.112.226.173])
- by fmviesa006.fm.intel.com with ESMTP; 30 Sep 2026 01:45:20 -0700
-Date: Wed, 30 Sep 2026 16:45:19 +0800
+ by orviesa004.jf.intel.com with ESMTP; 30 Sep 2026 01:46:10 -0700
+Date: Wed, 30 Sep 2026 16:46:09 +0800
 From: Zhao Liu <zhao1.liu@intel.com>
 To: Yonggang Luo <luoyonggang@gmail.com>
 Cc: qemu-devel@nongnu.org, Chao Liu <chao.liu@processmission.com>,
@@ -64,16 +64,16 @@ Cc: qemu-devel@nongnu.org, Chao Liu <chao.liu@processmission.com>,
  Philippe Mathieu-Daude <philmd@mailo.com>,
  Palmer Dabbelt <palmer@dabbelt.com>,
  Laurent Vivier <laurent@vivier.eu>, Weiwei Li <liwei1518@gmail.com>
-Subject: Re: [PATCH v3 05/10] hw/hexagon/virt: use unique QOM name
-Message-ID: <arzMH4Tiwv8Dwp08@intel.com>
+Subject: Re: [PATCH v3 08/10] hw/xtensa/virt: use unique QOM name
+Message-ID: <arzMUcRExAMtLRI7@intel.com>
 References: <20260926081551.29-1-luoyonggang@gmail.com>
- <20260926081551.29-6-luoyonggang@gmail.com>
+ <20260926081551.29-9-luoyonggang@gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20260926081551.29-6-luoyonggang@gmail.com>
-Received-SPF: pass client-ip=192.198.163.11; envelope-from=zhao1.liu@intel.com;
+In-Reply-To: <20260926081551.29-9-luoyonggang@gmail.com>
+Received-SPF: pass client-ip=192.198.163.7; envelope-from=zhao1.liu@intel.com;
  helo=mgamail.intel.com
 X-Spam_score_int: -46
 X-Spam_score: -4.7
@@ -97,24 +97,21 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Sat, Sep 26, 2026 at 04:15:45PM +0800, Yonggang Luo wrote:
-> Date: Sat, 26 Sep 2026 16:15:45 +0800
+On Sat, Sep 26, 2026 at 04:15:48PM +0800, Yonggang Luo wrote:
+> Date: Sat, 26 Sep 2026 16:15:48 +0800
 > From: Yonggang Luo <luoyonggang@gmail.com>
-> Subject: [PATCH v3 05/10] hw/hexagon/virt: use unique QOM name
+> Subject: [PATCH v3 08/10] hw/xtensa/virt: use unique QOM name
 > X-Mailer: git-send-email 2.52.0.windows.1
 > 
-> Set TYPE_HEXAGON_VIRT_MACHINE to MACHINE_TYPE_NAME("hexagon-virt") so
-> Hexagon virt no longer collides with other virt-machine types in one
-> process. Keep the -M / help / migration name as virt via
-> machine_class_set_name().
+> Register the board as xtensa-virt so Xtensa virt no longer collides
+> with other virt-machine types in one process. Keep the -M / help /
+> migration name as virt via machine_class_set_name().
 > 
 > Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
-> Reviewed-by: Brian Cain <brian.cain@oss.qualcomm.com>
 > Reviewed-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 > ---
->  hw/hexagon/virt.c         | 1 +
->  include/hw/hexagon/virt.h | 2 +-
->  2 files changed, 2 insertions(+), 1 deletion(-)
+>  hw/xtensa/virt.c | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
 
 Reviewed-by: Zhao Liu <zhao1.liu@intel.com>
 
