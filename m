@@ -4,69 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF13DCA5FB1
-	for <qemu-riscv@archiver.kernel.org>; Wed, 30 Sep 2026 07:41:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B90A2CA5FC1
+	for <qemu-riscv@archiver.kernel.org>; Wed, 30 Sep 2026 07:41:42 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xBovG-0001FU-4k; Wed, 30 Sep 2026 03:40:14 -0400
+	id 1xBov7-0001CW-Vs; Wed, 30 Sep 2026 03:40:06 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xBovE-0001Dt-OD
- for qemu-riscv@nongnu.org; Wed, 30 Sep 2026 03:40:12 -0400
-Received: from mail-dy2-x23.google.com ([2607:f8b0:4864:36::23])
+ id 1xBov6-0001Be-1t
+ for qemu-riscv@nongnu.org; Wed, 30 Sep 2026 03:40:04 -0400
+Received: from mail-dy1-x1336.google.com ([2607:f8b0:4864:20::1336])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xBovA-00044h-6A
- for qemu-riscv@nongnu.org; Wed, 30 Sep 2026 03:40:12 -0400
-Received: by mail-dy2-x23.google.com with SMTP id
- 5a478bee46e88-33c11ef641aso5326271eec.1
- for <qemu-riscv@nongnu.org>; Wed, 30 Sep 2026 00:40:07 -0700 (PDT)
+ id 1xBov4-0003s8-9k
+ for qemu-riscv@nongnu.org; Wed, 30 Sep 2026 03:40:03 -0400
+Received: by mail-dy1-x1336.google.com with SMTP id
+ 5a478bee46e88-3115c4451c8so1442793eec.1
+ for <qemu-riscv@nongnu.org>; Wed, 30 Sep 2026 00:40:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1790754006; x=1791358806; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=gXWytQPSY63O+H3Zo7OGSmhs7ShNPj29uTpiJdgR7J8=;
- b=KoO1ZkeHN4LAo8id1s+OAq257rZlt+Gg108KZAe8GiF7fp5f7Pk4TnVEBsIa80SVJ6
- 3pqrm3iB3T75o6Oya01uiNqbtc/vt8V5+FUr2oAOvJhQAf2/DOaOVQbPpl0u9vDRPNlq
- 65OehWPAJDYvTr7sZCcVfBlAFLDUjwu+1Qsv6gtGbw0wiB7JlOvPYpYhDRLAM65W4w/e
- cYh8vbodKVl1ftZkxgh3r4qr9Sa4oGXHdsRMuq0CwQmMQclzTTZ2MoRIrEak5CxXYnGW
- iCwTdtnAl8+PEPh8slU0Ua9GSTCAmTCrgf+MYQ3GCreBJjm4njR+xPU9qZcb2+HCKgYJ
- xEMg==
+ d=gmail.com; s=20251104; t=1790754001; x=1791358801; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:mime-version:references
+ :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=36QMi8FkTHqsIRvQCfr3lK3cpL1UxEN1MbLX8HWDnMA=;
+ b=jAoBV9hp/ny2v1ne+Z6FkCsUip89WFCEWxdC0rzPZ+MxqTW+rUkFhAIRwGfw8faLjp
+ C5sHnyQO5X+wwCZnF+ZeoJe1isucHbdgNcInzLXvu1njpBAaZ0mdBhIFW/0HQ/cp8M6p
+ BQja61fg8ppq/3OQ2N8eKULA6AFes7dZUijzpv41Ym3oVbu1OwdCGna0ilxTCAdVO+m0
+ fTlVMSzQ1KYoME4CTbdpxu0w6gua6X9pONuanGu/f1Rdbgw97Xe8HI08etUkheKQDsUy
+ Qm7cG6Q+Rxc6WTWWZibKBTW/ikz+azdRSb+Qyphtn7dVN2Xe5f1PjXBA/oZOjlKgIiAt
+ e6Eg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790754006; x=1791358806;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=gXWytQPSY63O+H3Zo7OGSmhs7ShNPj29uTpiJdgR7J8=;
- b=kHzfrYMqKfJaGmxUSkoQxjOV7feJmKytPvJ8kwWrUkJFRPiVZ7UDW1RyKH/OgtNxA9
- CB3Ehnl9SIyHZwTg2QLvh+SOTT6k7/PdXEGSZvV4L7fPXAwHJts9kqzGvYg0DJ4kngQX
- pnYNcxKF2ObgwLhQHsxZoa22ol0JnfdDhmmp6xZxsq3WPWL5MosCCcpJEXO8pASebJeP
- 3JBfpNpUcCcRl8oESP4rSkeN+0KUzvmOvWjcVjEdIXb90XKJyPK3GhL9ffuvgDm2uCSO
- ptxPHo+EcqTyMNx5r6zeNd2lbsLsAaKrbfrwvkwJAa8X3mYU/Jfoxk6P+1d/kOoqAggs
- tMxQ==
+ d=1e100.net; s=20260707; t=1790754001; x=1791358801;
+ h=content-transfer-encoding:content-type:mime-version:references
+ :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=36QMi8FkTHqsIRvQCfr3lK3cpL1UxEN1MbLX8HWDnMA=;
+ b=OCndyCVSJkSewXmOVqb485dNWNdApLzSI+V52xRI4lDapwlovQmfkNluvLZkPZcWpd
+ VRPcmcBNJgbi2UKQyETrBlzDFA7fV0+JIvVPG1bkcOtJocBjU8kptVCjksOrzrCmKwDc
+ YRPPRd7Rn/HFRyoMs4Vl2xNI0wxpOM5gOQa9cDKBirJz5gISdP541k18q2eXVH8AfImd
+ i0GadSTDKuApzg0gi3uAAYCxbTBJ3A9I4+1JKJn80KWShr9iaQt1+uRi3UvBLH58kR4u
+ fmx/x+iWxvQB/od+DIKJG3eCwBAj4OqttNT7xXWns6N4wlGPhPYkwvwJfiNnUeNRDZWX
+ 03Rg==
 X-Forwarded-Encrypted: i=1;
- AKwUvBz5DjDRIuDUKhlkavPxsz/kWVsCsJvbVdp2Qu3vYf8PH7nOnhA6Oate7YYVdATw5SmoH2kIHmVi4oN5@nongnu.org
-X-Gm-Message-State: AFq9FYLLoJRnsbtl3rD8pG8fjj3Ih36gSz03XiT9MRZcz/SSG3QKuSWH
- 6E2Vu5vkMqGlqpPCvClJp4Em9dJJsTzp+rMaOoou+MCblhn4mBYJltqr
-X-Gm-Gg: AYBFou10XW3K2yNHoScNvHpVWWcU9izPX8Smzfa657O0RFjcg3W94tyup1CobYJ61zk
- sxvb1XknkrlDgbwoP+jwbEBiq3VSfOoAIG6r0cMQ+UDlkmZOWyOfCahqIhZDlLnq2vQJ9JKC8Fi
- OiHfL4yLS3vxAv2B7npKUeqRvpv1RdriXG68xX8BVO9X+FJHGMp59geRvOgXsmy6xEOEUrenoTu
- q/fmSd0FEQB9V+SF2N8KQYlEuLv7FlOj5TzOovsL3OjapkTwrnZMXMxpJW0eYaTRkgqmpvrT0NN
- MB4olDxDVz2WDxvQAa0bAu9PNn21AIzJ4/5GtEpvihVenJypYrBjhr8vc+/RZ4ml/NhPvFN2E1c
- /q7RDxV02Gx7aBjeY/1F8ijX5yK+DRYBtzAN/RRWYcXOaEkgOoSlp0dANfaDkjjy+HMNNN3Z5gI
- POErSvLtjQFQ6E9EbXb4aKLVIr13cmrFu3FBWyc/T934Dg47XeTloKr9WycPqaObFZkZ6zeF8mt
- IkxAxOF5nQ3XbFqAQ==
-X-Received: by 2002:a05:693c:864e:10b0:347:8d01:164f with SMTP id
- 5a478bee46e88-34cdbadaa6cmr1001593eec.19.1790754006225; 
- Wed, 30 Sep 2026 00:40:06 -0700 (PDT)
+ AKwUvBzQgsLASz141vQrhNiD07NWVIlCpH46HV24j1dyOrhn0S7rAbkv7hmnW4xx/unEwqK5Gu8F9yXcX9Lf@nongnu.org
+X-Gm-Message-State: AFuF++nq1NvSiw7aNHWTdfNRHB/nALd59S26q5/Si7ylc9PnJ8TP9xgB
+ bljfe2SBJQXpoLFrs0Z7rwnmJ2+lX8tURwJekOBXkt+R4pHRd8pBd5Gr
+X-Gm-Gg: AYBFou2zt8yeNYy0oHdF6c6PTFwv8hrzXXBxRLws3ahHxBMNgNDfb30bleZODKu3FK+
+ bzLCMM9L22YIH0TptQT5y/5YJmIOvbWT3A5WyvACbKcNKDpFhEZMhbdgHjjL2HIkF85Gp+XMhg1
+ UM+JQ4uSvWhOOrk1A7GrvReBgZw6h5BwqsHg3OdnHUG4Pm0R9dVzRzH6Cuqrd4fybypuG8ib6I8
+ lEMuH+Gd4D5EXvfK/KvbzNjUICghiTquJzqiqg6eoFM4hjN1LTa8jPKRv83KsRDNwQc6QoWCUKE
+ LWK2s4gqWunZGuFWmr3Udpovb3ih5N/MYOh+pgCa33LabN0KERGo9akWcbjm13gMetd03LMBbXK
+ nQoOrAeVq+YpoyrA8HUM+cEnj8QUqsAnPAs/1cYBWSzm95Ar76W0rRAWl0Zfhq6KT1bFaQ3m0hB
+ jdb/PIZVYDxUa5RQeFWVXrZ9QrOLDR3vvBDYOMJ7RCcHlH3a47ysfLZMNtIPatj1Ltx/tsvu/u7
+ yRgUqsuTrh0xlKHQg==
+X-Received: by 2002:a05:7300:ce8c:b0:341:c383:9afb with SMTP id
+ 5a478bee46e88-34cde86989amr881911eec.20.1790754000611; 
+ Wed, 30 Sep 2026 00:40:00 -0700 (PDT)
 Received: from DESKTOP-Q716RM7 ([103.94.185.75])
  by smtp.googlemail.com with ESMTPSA id
- 5a478bee46e88-34cf5b4349bsm1825773eec.25.2026.09.30.00.40.01
+ 5a478bee46e88-34cf5b4349bsm1825773eec.25.2026.09.30.00.39.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 30 Sep 2026 00:40:05 -0700 (PDT)
+ Wed, 30 Sep 2026 00:39:59 -0700 (PDT)
 From: Yonggang Luo <luoyonggang@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: Song Gao <17746591750@163.com>,
@@ -86,23 +87,25 @@ Cc: Song Gao <17746591750@163.com>,
  Richard Henderson <richard.henderson@linaro.org>,
  Ani Sinha <anisinha@redhat.com>, qemu-arm@nongnu.org,
  "Michael S. Tsirkin" <mst@redhat.com>
-Subject: [PATCH v2 4/6] tcg: namespace target helper symbols for combined
- builds
-Date: Wed, 30 Sep 2026 15:39:31 +0800
-Message-ID: <20260930073935.712-5-luoyonggang@gmail.com>
+Subject: [PATCH v2 3/6] hw/loongarch/virt: prefix ACPI helper with
+ loongarch_virt_
+Date: Wed, 30 Sep 2026 15:39:30 +0800
+Message-ID: <20260930073935.712-4-luoyonggang@gmail.com>
 X-Mailer: git-send-email 2.55.0.windows.3
 In-Reply-To: <20260930073935.712-1-luoyonggang@gmail.com>
 References: <20260930073935.712-1-luoyonggang@gmail.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:36::23;
- envelope-from=luoyonggang@gmail.com; helo=mail-dy2-x23.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1336;
+ envelope-from=luoyonggang@gmail.com; helo=mail-dy1-x1336.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -118,417 +121,78 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Use target-specific assembler names and helper metadata for TCG helpers
-when multiple targets share a binary. The generated prototype maps the
-generic C helper name to a target-specific linker symbol, for example:
-
-    helper_raise_exception
-        __asm__("helper_i386_raise_exception")
-
-This lets target helper definitions keep generic C names while avoiding
-linker symbol collisions between targets.
+- virt_acpi_setup is the same C symbol used by ARM and RISC-V virt.
+  Rename it now so a later combined binary does not need meson -D
+  prefixes for LoongArch.
+- Rename the file-local virt_is_acpi_enabled to
+  loongarch_virt_is_acpi_enabled to match.
 
 Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
+Reviewed-by: Song Gao <gaosong@loongson.cn>
 ---
- include/exec/helper-gen-common.h   | 26 ++++++++++++++++
- include/exec/helper-gen.h.inc      | 48 +++++++++++++++---------------
- include/exec/helper-head.h.inc     | 25 ++++++++++++++++
- include/exec/helper-info.c.inc     | 24 ++++++++++-----
- include/exec/helper-proto-common.h | 26 ++++++++++++++++
- include/exec/helper-proto.h.inc    | 18 ++++++-----
- meson.build                        |  6 +++-
- 7 files changed, 132 insertions(+), 41 deletions(-)
+ hw/loongarch/virt-acpi-build.c | 6 +++---
+ hw/loongarch/virt.c            | 2 +-
+ include/hw/loongarch/virt.h    | 2 +-
+ 3 files changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/include/exec/helper-gen-common.h b/include/exec/helper-gen-common.h
-index 834590dc4e..c05edb5f3e 100644
---- a/include/exec/helper-gen-common.h
-+++ b/include/exec/helper-gen-common.h
-@@ -7,8 +7,34 @@
- #ifndef HELPER_GEN_COMMON_H
- #define HELPER_GEN_COMMON_H
+diff --git a/hw/loongarch/virt-acpi-build.c b/hw/loongarch/virt-acpi-build.c
+index 600ef60fc5..b9df9b3a12 100644
+--- a/hw/loongarch/virt-acpi-build.c
++++ b/hw/loongarch/virt-acpi-build.c
+@@ -674,7 +674,7 @@ static const VMStateDescription vmstate_acpi_build = {
+     },
+ };
  
-+#undef HELPER_INFO
-+#define HELPER_INFO(name) CORE_HELPER_INFO(name)
-+
-+#define HELPER_H "accel/tcg/cpu-exec-common.h"
-+#include "exec/helper-gen.h.inc"
-+#undef  HELPER_H
-+
-+#define HELPER_H "accel/tcg/cpu-exec.h"
-+#include "exec/helper-gen.h.inc"
-+#undef  HELPER_H
-+
- #define HELPER_H "accel/tcg/tcg-runtime.h"
- #include "exec/helper-gen.h.inc"
- #undef  HELPER_H
- 
-+#define HELPER_H "accel/tcg/ldst_common.h"
-+#include "exec/helper-gen.h.inc"
-+#undef  HELPER_H
-+
-+#define HELPER_H "accel/tcg/atomic_common.h"
-+#include "exec/helper-gen.h.inc"
-+#undef  HELPER_H
-+
-+#define HELPER_H "accel/tcg/tcg-runtime-gvec.h"
-+#include "exec/helper-gen.h.inc"
-+#undef  HELPER_H
-+
-+#undef HELPER_INFO
-+#define HELPER_INFO(name) TARGET_HELPER_INFO(name)
-+
- #endif /* HELPER_GEN_COMMON_H */
-diff --git a/include/exec/helper-gen.h.inc b/include/exec/helper-gen.h.inc
-index dabe138e20..95715bde1e 100644
---- a/include/exec/helper-gen.h.inc
-+++ b/include/exec/helper-gen.h.inc
-@@ -11,88 +11,88 @@
- #include "exec/helper-head.h.inc"
- 
- #define DEF_HELPER_FLAGS_0(name, flags, ret)                            \
--extern TCGHelperInfo glue(helper_info_, name);                          \
-+extern TCGHelperInfo HELPER_INFO(name);                                 \
- static inline void glue(gen_helper_, name)(dh_retvar_decl0(ret))        \
- {                                                                       \
--    tcg_gen_call0(glue(helper_info_,name).func,                         \
--                  &glue(helper_info_,name), dh_retvar(ret));            \
-+    tcg_gen_call0(HELPER_INFO(name).func,                               \
-+                  &HELPER_INFO(name), dh_retvar(ret));                  \
+-static bool virt_is_acpi_enabled(LoongArchVirtMachineState *lvms)
++static bool loongarch_virt_is_acpi_enabled(LoongArchVirtMachineState *lvms)
+ {
+     if (lvms->acpi == ON_OFF_AUTO_OFF) {
+         return false;
+@@ -682,7 +682,7 @@ static bool virt_is_acpi_enabled(LoongArchVirtMachineState *lvms)
+     return true;
  }
  
- #define DEF_HELPER_FLAGS_1(name, flags, ret, t1)                        \
--extern TCGHelperInfo glue(helper_info_, name);                          \
-+extern TCGHelperInfo HELPER_INFO(name);                                 \
- static inline void glue(gen_helper_, name)(dh_retvar_decl(ret)          \
-     dh_arg_decl(t1, 1))                                                 \
- {                                                                       \
--    tcg_gen_call1(glue(helper_info_,name).func,                         \
--                  &glue(helper_info_,name), dh_retvar(ret),             \
-+    tcg_gen_call1(HELPER_INFO(name).func,                               \
-+                  &HELPER_INFO(name), dh_retvar(ret),                   \
-                   dh_arg(t1, 1));                                       \
+-void virt_acpi_setup(LoongArchVirtMachineState *lvms)
++void loongarch_virt_acpi_setup(LoongArchVirtMachineState *lvms)
+ {
+     AcpiBuildTables tables;
+     AcpiBuildState *build_state;
+@@ -692,7 +692,7 @@ void virt_acpi_setup(LoongArchVirtMachineState *lvms)
+         return;
+     }
+ 
+-    if (!virt_is_acpi_enabled(lvms)) {
++    if (!loongarch_virt_is_acpi_enabled(lvms)) {
+         ACPI_BUILD_DPRINTF("ACPI disabled. Bailing out.\n");
+         return;
+     }
+diff --git a/hw/loongarch/virt.c b/hw/loongarch/virt.c
+index 9c5371af9d..19fbf6db0d 100644
+--- a/hw/loongarch/virt.c
++++ b/hw/loongarch/virt.c
+@@ -242,7 +242,7 @@ static void virt_done(Notifier *notifier, void *data)
+     LoongArchVirtMachineState *lvms = container_of(notifier,
+                                       LoongArchVirtMachineState, machine_done);
+     virt_build_smbios(lvms);
+-    virt_acpi_setup(lvms);
++    loongarch_virt_acpi_setup(lvms);
+     virt_fdt_setup(lvms);
  }
  
- #define DEF_HELPER_FLAGS_2(name, flags, ret, t1, t2)                    \
--extern TCGHelperInfo glue(helper_info_, name);                          \
-+extern TCGHelperInfo HELPER_INFO(name);                                 \
- static inline void glue(gen_helper_, name)(dh_retvar_decl(ret)          \
-     dh_arg_decl(t1, 1), dh_arg_decl(t2, 2))                             \
- {                                                                       \
--    tcg_gen_call2(glue(helper_info_,name).func,                         \
--                  &glue(helper_info_,name), dh_retvar(ret),             \
-+    tcg_gen_call2(HELPER_INFO(name).func,                               \
-+                  &HELPER_INFO(name), dh_retvar(ret),                   \
-                   dh_arg(t1, 1), dh_arg(t2, 2));                        \
- }
+diff --git a/include/hw/loongarch/virt.h b/include/hw/loongarch/virt.h
+index d39a9bbf5d..72268466de 100644
+--- a/include/hw/loongarch/virt.h
++++ b/include/hw/loongarch/virt.h
+@@ -132,7 +132,7 @@ struct LoongArchVirtMachineState {
  
- #define DEF_HELPER_FLAGS_3(name, flags, ret, t1, t2, t3)                \
--extern TCGHelperInfo glue(helper_info_, name);                          \
-+extern TCGHelperInfo HELPER_INFO(name);                                 \
- static inline void glue(gen_helper_, name)(dh_retvar_decl(ret)          \
-     dh_arg_decl(t1, 1), dh_arg_decl(t2, 2), dh_arg_decl(t3, 3))         \
- {                                                                       \
--    tcg_gen_call3(glue(helper_info_,name).func,                         \
--                  &glue(helper_info_,name), dh_retvar(ret),             \
-+    tcg_gen_call3(HELPER_INFO(name).func,                               \
-+                  &HELPER_INFO(name), dh_retvar(ret),                   \
-                   dh_arg(t1, 1), dh_arg(t2, 2), dh_arg(t3, 3));         \
- }
+ #define TYPE_LOONGARCH_VIRT_MACHINE  MACHINE_TYPE_NAME("virt")
+ OBJECT_DECLARE_SIMPLE_TYPE(LoongArchVirtMachineState, LOONGARCH_VIRT_MACHINE)
+-void virt_acpi_setup(LoongArchVirtMachineState *lvms);
++void loongarch_virt_acpi_setup(LoongArchVirtMachineState *lvms);
+ void virt_fdt_setup(LoongArchVirtMachineState *lvms);
  
- #define DEF_HELPER_FLAGS_4(name, flags, ret, t1, t2, t3, t4)            \
--extern TCGHelperInfo glue(helper_info_, name);                          \
-+extern TCGHelperInfo HELPER_INFO(name);                                 \
- static inline void glue(gen_helper_, name)(dh_retvar_decl(ret)          \
-     dh_arg_decl(t1, 1), dh_arg_decl(t2, 2),                             \
-     dh_arg_decl(t3, 3), dh_arg_decl(t4, 4))                             \
- {                                                                       \
--    tcg_gen_call4(glue(helper_info_,name).func,                         \
--                  &glue(helper_info_,name), dh_retvar(ret),             \
-+    tcg_gen_call4(HELPER_INFO(name).func,                               \
-+                  &HELPER_INFO(name), dh_retvar(ret),                   \
-                   dh_arg(t1, 1), dh_arg(t2, 2),                         \
-                   dh_arg(t3, 3), dh_arg(t4, 4));                        \
- }
- 
- #define DEF_HELPER_FLAGS_5(name, flags, ret, t1, t2, t3, t4, t5)        \
--extern TCGHelperInfo glue(helper_info_, name);                          \
-+extern TCGHelperInfo HELPER_INFO(name);                                 \
- static inline void glue(gen_helper_, name)(dh_retvar_decl(ret)          \
-     dh_arg_decl(t1, 1), dh_arg_decl(t2, 2), dh_arg_decl(t3, 3),         \
-     dh_arg_decl(t4, 4), dh_arg_decl(t5, 5))                             \
- {                                                                       \
--    tcg_gen_call5(glue(helper_info_,name).func,                         \
--                  &glue(helper_info_,name), dh_retvar(ret),             \
-+    tcg_gen_call5(HELPER_INFO(name).func,                               \
-+                  &HELPER_INFO(name), dh_retvar(ret),                   \
-                   dh_arg(t1, 1), dh_arg(t2, 2), dh_arg(t3, 3),          \
-                   dh_arg(t4, 4), dh_arg(t5, 5));                        \
- }
- 
- #define DEF_HELPER_FLAGS_6(name, flags, ret, t1, t2, t3, t4, t5, t6)    \
--extern TCGHelperInfo glue(helper_info_, name);                          \
-+extern TCGHelperInfo HELPER_INFO(name);                                 \
- static inline void glue(gen_helper_, name)(dh_retvar_decl(ret)          \
-     dh_arg_decl(t1, 1), dh_arg_decl(t2, 2), dh_arg_decl(t3, 3),         \
-     dh_arg_decl(t4, 4), dh_arg_decl(t5, 5), dh_arg_decl(t6, 6))         \
- {                                                                       \
--    tcg_gen_call6(glue(helper_info_,name).func,                         \
--                  &glue(helper_info_,name), dh_retvar(ret),             \
-+    tcg_gen_call6(HELPER_INFO(name).func,                               \
-+                  &HELPER_INFO(name), dh_retvar(ret),                   \
-                   dh_arg(t1, 1), dh_arg(t2, 2), dh_arg(t3, 3),          \
-                   dh_arg(t4, 4), dh_arg(t5, 5), dh_arg(t6, 6));         \
- }
- 
- #define DEF_HELPER_FLAGS_7(name, flags, ret, t1, t2, t3, t4, t5, t6, t7)\
--extern TCGHelperInfo glue(helper_info_, name);                          \
-+extern TCGHelperInfo HELPER_INFO(name);                                 \
- static inline void glue(gen_helper_, name)(dh_retvar_decl(ret)          \
-     dh_arg_decl(t1, 1), dh_arg_decl(t2, 2), dh_arg_decl(t3, 3),         \
-     dh_arg_decl(t4, 4), dh_arg_decl(t5, 5), dh_arg_decl(t6, 6),         \
-     dh_arg_decl(t7, 7))                                                 \
- {                                                                       \
--    tcg_gen_call7(glue(helper_info_,name).func,                         \
--                  &glue(helper_info_,name), dh_retvar(ret),             \
-+    tcg_gen_call7(HELPER_INFO(name).func,                               \
-+                  &HELPER_INFO(name), dh_retvar(ret),                   \
-                   dh_arg(t1, 1), dh_arg(t2, 2), dh_arg(t3, 3),          \
-                   dh_arg(t4, 4), dh_arg(t5, 5), dh_arg(t6, 6),          \
-                   dh_arg(t7, 7));                                       \
-diff --git a/include/exec/helper-head.h.inc b/include/exec/helper-head.h.inc
-index 7dec5f5b06..61e106cd56 100644
---- a/include/exec/helper-head.h.inc
-+++ b/include/exec/helper-head.h.inc
-@@ -8,7 +8,32 @@
- 
- #include "fpu/softfloat-types.h"
- 
-+#define TCG_TARGET_HELPER_INFO_I(prefix, name) helper_info_##prefix##_##name
-+#define TCG_TARGET_HELPER_INFO(prefix, name) \
-+    TCG_TARGET_HELPER_INFO_I(prefix, name)
-+#define TCG_HELPER_STRINGIFY_I(value) #value
-+#define TCG_HELPER_STRINGIFY(value) TCG_HELPER_STRINGIFY_I(value)
-+
-+#ifdef TCG_HELPER_PREFIX
-+#define TARGET_HELPER_INFO(name) \
-+    TCG_TARGET_HELPER_INFO(TCG_HELPER_PREFIX, name)
-+#define TARGET_HELPER_ASM(name) \
-+    __asm__("helper_" TCG_HELPER_STRINGIFY(TCG_HELPER_PREFIX) "_" #name)
-+#else
-+#define TARGET_HELPER_INFO(name) glue(helper_info_, name)
-+#define TARGET_HELPER_ASM(name)
-+#endif
-+
-+#define CORE_HELPER_INFO(name) glue(helper_info_, name)
-+#define CORE_HELPER_ASM(name)
-+
- #define HELPER(name) glue(helper_, name)
-+#ifndef HELPER_INFO
-+#define HELPER_INFO(name) TARGET_HELPER_INFO(name)
-+#endif
-+#ifndef HELPER_ASM
-+#define HELPER_ASM(name) TARGET_HELPER_ASM(name)
-+#endif
- 
- /* Some types that make sense in C, but not for TCG.  */
- #define dh_alias_i32 i32
-diff --git a/include/exec/helper-info.c.inc b/include/exec/helper-info.c.inc
-index c551736d49..815546c818 100644
---- a/include/exec/helper-info.c.inc
-+++ b/include/exec/helper-info.c.inc
-@@ -16,21 +16,24 @@
- #define str(s) #s
- 
- #define DEF_HELPER_FLAGS_0(NAME, FLAGS, RET)                            \
--    TCGHelperInfo glue(helper_info_, NAME) = {                          \
-+    TCGHelperInfo HELPER_INFO(NAME) =                                   \
-+    {                                                                   \
-         .func = HELPER(NAME), .name = str(NAME),                        \
-         .flags = FLAGS | dh_callflag(RET),                              \
-         .typemask = dh_typemask(RET, 0)                                 \
-     };
- 
- #define DEF_HELPER_FLAGS_1(NAME, FLAGS, RET, T1)                        \
--    TCGHelperInfo glue(helper_info_, NAME) = {                          \
-+    TCGHelperInfo HELPER_INFO(NAME) =                                   \
-+    {                                                                   \
-         .func = HELPER(NAME), .name = str(NAME),                        \
-         .flags = FLAGS | dh_callflag(RET),                              \
-         .typemask = dh_typemask(RET, 0) | dh_typemask(T1, 1)            \
-     };
- 
- #define DEF_HELPER_FLAGS_2(NAME, FLAGS, RET, T1, T2)                    \
--    TCGHelperInfo glue(helper_info_, NAME) = {                          \
-+    TCGHelperInfo HELPER_INFO(NAME) =                                   \
-+    {                                                                   \
-         .func = HELPER(NAME), .name = str(NAME),                        \
-         .flags = FLAGS | dh_callflag(RET),                              \
-         .typemask = dh_typemask(RET, 0) | dh_typemask(T1, 1)            \
-@@ -38,7 +41,8 @@
-     };
- 
- #define DEF_HELPER_FLAGS_3(NAME, FLAGS, RET, T1, T2, T3)                \
--    TCGHelperInfo glue(helper_info_, NAME) = {                          \
-+    TCGHelperInfo HELPER_INFO(NAME) =                                   \
-+    {                                                                   \
-         .func = HELPER(NAME), .name = str(NAME),                        \
-         .flags = FLAGS | dh_callflag(RET),                              \
-         .typemask = dh_typemask(RET, 0) | dh_typemask(T1, 1)            \
-@@ -46,7 +50,8 @@
-     };
- 
- #define DEF_HELPER_FLAGS_4(NAME, FLAGS, RET, T1, T2, T3, T4)            \
--    TCGHelperInfo glue(helper_info_, NAME) = {                          \
-+    TCGHelperInfo HELPER_INFO(NAME) =                                   \
-+    {                                                                   \
-         .func = HELPER(NAME), .name = str(NAME),                        \
-         .flags = FLAGS | dh_callflag(RET),                              \
-         .typemask = dh_typemask(RET, 0) | dh_typemask(T1, 1)            \
-@@ -55,7 +60,8 @@
-     };
- 
- #define DEF_HELPER_FLAGS_5(NAME, FLAGS, RET, T1, T2, T3, T4, T5)        \
--    TCGHelperInfo glue(helper_info_, NAME) = {                          \
-+    TCGHelperInfo HELPER_INFO(NAME) =                                   \
-+    {                                                                   \
-         .func = HELPER(NAME), .name = str(NAME),                        \
-         .flags = FLAGS | dh_callflag(RET),                              \
-         .typemask = dh_typemask(RET, 0) | dh_typemask(T1, 1)            \
-@@ -64,7 +70,8 @@
-     };
- 
- #define DEF_HELPER_FLAGS_6(NAME, FLAGS, RET, T1, T2, T3, T4, T5, T6)    \
--    TCGHelperInfo glue(helper_info_, NAME) = {                          \
-+    TCGHelperInfo HELPER_INFO(NAME) =                                   \
-+    {                                                                   \
-         .func = HELPER(NAME), .name = str(NAME),                        \
-         .flags = FLAGS | dh_callflag(RET),                              \
-         .typemask = dh_typemask(RET, 0) | dh_typemask(T1, 1)            \
-@@ -74,7 +81,8 @@
-     };
- 
- #define DEF_HELPER_FLAGS_7(NAME, FLAGS, RET, T1, T2, T3, T4, T5, T6, T7) \
--    TCGHelperInfo glue(helper_info_, NAME) = {                          \
-+    TCGHelperInfo HELPER_INFO(NAME) =                                   \
-+    {                                                                   \
-         .func = HELPER(NAME), .name = str(NAME),                        \
-         .flags = FLAGS | dh_callflag(RET),                              \
-         .typemask = dh_typemask(RET, 0) | dh_typemask(T1, 1)            \
-diff --git a/include/exec/helper-proto-common.h b/include/exec/helper-proto-common.h
-index 76e6c25bec..01a0be10c6 100644
---- a/include/exec/helper-proto-common.h
-+++ b/include/exec/helper-proto-common.h
-@@ -9,10 +9,36 @@
- 
- #include "qemu/atomic128.h"  /* for HAVE_CMPXCHG128 */
- 
-+#undef HELPER_ASM
-+#define HELPER_ASM(name) CORE_HELPER_ASM(name)
-+
-+#define HELPER_H "accel/tcg/cpu-exec-common.h"
-+#include "exec/helper-proto.h.inc"
-+#undef  HELPER_H
-+
-+#define HELPER_H "accel/tcg/cpu-exec.h"
-+#include "exec/helper-proto.h.inc"
-+#undef  HELPER_H
-+
- #define HELPER_H "accel/tcg/tcg-runtime.h"
- #include "exec/helper-proto.h.inc"
- #undef  HELPER_H
- 
-+#define HELPER_H "accel/tcg/ldst_common.h"
-+#include "exec/helper-proto.h.inc"
-+#undef  HELPER_H
-+
-+#define HELPER_H "accel/tcg/atomic_common.h"
-+#include "exec/helper-proto.h.inc"
-+#undef  HELPER_H
-+
-+#define HELPER_H "accel/tcg/tcg-runtime-gvec.h"
-+#include "exec/helper-proto.h.inc"
-+#undef  HELPER_H
-+
-+#undef HELPER_ASM
-+#define HELPER_ASM(name) TARGET_HELPER_ASM(name)
-+
- #include "accel/tcg/getpc.h"
- 
- #endif /* HELPER_PROTO_COMMON_H */
-diff --git a/include/exec/helper-proto.h.inc b/include/exec/helper-proto.h.inc
-index f8e57e43ce..b7e3b10ed7 100644
---- a/include/exec/helper-proto.h.inc
-+++ b/include/exec/helper-proto.h.inc
-@@ -21,35 +21,37 @@
- #define DEF_HELPER_ATTR  __attribute__((noinline))
- 
- #define DEF_HELPER_FLAGS_0(name, flags, ret) \
--dh_ctype(ret) HELPER(name) (void) DEF_HELPER_ATTR;
-+dh_ctype(ret) HELPER(name) (void) HELPER_ASM(name) DEF_HELPER_ATTR;
- 
- #define DEF_HELPER_FLAGS_1(name, flags, ret, t1) \
--dh_ctype(ret) HELPER(name) (dh_ctype(t1)) DEF_HELPER_ATTR;
-+dh_ctype(ret) HELPER(name) (dh_ctype(t1)) HELPER_ASM(name) DEF_HELPER_ATTR;
- 
- #define DEF_HELPER_FLAGS_2(name, flags, ret, t1, t2) \
--dh_ctype(ret) HELPER(name) (dh_ctype(t1), dh_ctype(t2)) DEF_HELPER_ATTR;
-+dh_ctype(ret) HELPER(name) (dh_ctype(t1), dh_ctype(t2)) \
-+    HELPER_ASM(name) DEF_HELPER_ATTR;
- 
- #define DEF_HELPER_FLAGS_3(name, flags, ret, t1, t2, t3) \
- dh_ctype(ret) HELPER(name) (dh_ctype(t1), dh_ctype(t2), \
--                            dh_ctype(t3)) DEF_HELPER_ATTR;
-+                            dh_ctype(t3)) HELPER_ASM(name) DEF_HELPER_ATTR;
- 
- #define DEF_HELPER_FLAGS_4(name, flags, ret, t1, t2, t3, t4) \
- dh_ctype(ret) HELPER(name) (dh_ctype(t1), dh_ctype(t2), dh_ctype(t3), \
--                            dh_ctype(t4)) DEF_HELPER_ATTR;
-+                            dh_ctype(t4)) HELPER_ASM(name) DEF_HELPER_ATTR;
- 
- #define DEF_HELPER_FLAGS_5(name, flags, ret, t1, t2, t3, t4, t5) \
- dh_ctype(ret) HELPER(name) (dh_ctype(t1), dh_ctype(t2), dh_ctype(t3), \
--                            dh_ctype(t4), dh_ctype(t5)) DEF_HELPER_ATTR;
-+                            dh_ctype(t4), dh_ctype(t5)) \
-+    HELPER_ASM(name) DEF_HELPER_ATTR;
- 
- #define DEF_HELPER_FLAGS_6(name, flags, ret, t1, t2, t3, t4, t5, t6) \
- dh_ctype(ret) HELPER(name) (dh_ctype(t1), dh_ctype(t2), dh_ctype(t3), \
-                             dh_ctype(t4), dh_ctype(t5), \
--                            dh_ctype(t6)) DEF_HELPER_ATTR;
-+                            dh_ctype(t6)) HELPER_ASM(name) DEF_HELPER_ATTR;
- 
- #define DEF_HELPER_FLAGS_7(name, flags, ret, t1, t2, t3, t4, t5, t6, t7) \
- dh_ctype(ret) HELPER(name) (dh_ctype(t1), dh_ctype(t2), dh_ctype(t3), \
-                             dh_ctype(t4), dh_ctype(t5), dh_ctype(t6), \
--                            dh_ctype(t7)) DEF_HELPER_ATTR;
-+                            dh_ctype(t7)) HELPER_ASM(name) DEF_HELPER_ATTR;
- 
- #define IN_HELPER_PROTO
- 
-diff --git a/meson.build b/meson.build
-index cae1591cd2..3cadf5b215 100644
---- a/meson.build
-+++ b/meson.build
-@@ -4161,7 +4161,10 @@ foreach target_base_arch, config_base_arch : config_base_arch_mak
- 
-   # prevent common code to access cpu compile time definition,
-   # but still allow access to cpu.h
--  target_c_args = ['-DCPU_DEFS_H']
-+  target_c_args = [
-+    '-DCPU_DEFS_H',
-+    '-DTCG_HELPER_PREFIX=' + target_base_arch.to_lower()
-+  ]
-   target_system_c_args = target_c_args + ['-DCOMPILING_SYSTEM_VS_USER', '-DCONFIG_SOFTMMU']
- 
-   if target_base_arch in target_common_arch
-@@ -4277,6 +4280,7 @@ foreach target : target_dirs
-   arch_deps = []
-   c_args = ['-DCOMPILING_PER_TARGET',
-             '-DCONFIG_TARGET="@0@-config-target.h"'.format(target),
-+            '-DTCG_HELPER_PREFIX=' + target_base_arch.to_lower()
-   ]
-   link_args = emulator_link_args
- 
+ static inline bool virt_has_dmsi(LoongArchVirtMachineState *lvms)
 -- 
 2.55.0.windows.3
 
