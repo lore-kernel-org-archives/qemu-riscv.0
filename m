@@ -4,144 +4,175 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3459CA5FC4
-	for <qemu-riscv@archiver.kernel.org>; Wed, 30 Sep 2026 21:19:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EA55CA5FC4
+	for <qemu-riscv@archiver.kernel.org>; Wed, 30 Sep 2026 23:53:39 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xC1hf-0000ao-2x; Wed, 30 Sep 2026 17:19:03 -0400
+	id 1xC46r-0005Qb-7F; Wed, 30 Sep 2026 19:53:13 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xC1hU-0000ZN-8y
- for qemu-riscv@nongnu.org; Wed, 30 Sep 2026 17:18:52 -0400
-Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
+ (Exim 4.90_1)
+ (envelope-from <prvs=726c96411=Alistair.Francis@wdc.com>)
+ id 1xC46e-0005Pz-Rl; Wed, 30 Sep 2026 19:53:01 -0400
+Received: from esa4.hgst.iphmx.com ([216.71.154.42])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xC1hS-0000Wg-0v
- for qemu-riscv@nongnu.org; Wed, 30 Sep 2026 17:18:52 -0400
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 68UIPFa23881728
- for <qemu-riscv@nongnu.org>; Wed, 30 Sep 2026 21:18:48 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- UyDhz7kmP9qBlEDAjfkJDfc+P44sGwTwscBdz4N2QTw=; b=iYrVHNcbImlFl6t0
- bsOjbiaIpdjLa3qyxj772leTgC5v/ZX0uAYbYEzqmEIgVjJTJwFze0wWDC4VFm9B
- SXHP+aOBCJ1YwYSdizJD9LtRb3GxsPH+d7BCGIUKJLicLA6ZKOuXXDTivz7wh5lr
- mfv62I+YSHhLS3ZCK/h/at/sVYuo0mR4KbExJTvv90KUKRUeTvQurvmgCNC3bRj0
- 6H10twoYjzU5j6CbSnWz+cVVrovthKDNuReJkb1Q7wzc8HoAzD5r8aL77W/YTox9
- +66CwJTe6gziB7gtf9uzv5x/2iPEk/KNTagoxvkQENKmpNhWgWrBPfG7qOjyDwY5
- g3KHCw==
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com
- [209.85.222.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h17pj8n4h-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Wed, 30 Sep 2026 21:18:48 +0000 (GMT)
-Received: by mail-qk1-f198.google.com with SMTP id
- af79cd13be357-9308eafb465so1445947585a.2
- for <qemu-riscv@nongnu.org>; Wed, 30 Sep 2026 14:18:48 -0700 (PDT)
+ (Exim 4.90_1)
+ (envelope-from <prvs=726c96411=Alistair.Francis@wdc.com>)
+ id 1xC46c-0005dE-Py; Wed, 30 Sep 2026 19:53:00 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1790812378; x=1822348378;
+ h=from:to:cc:subject:date:message-id:references:
+ in-reply-to:content-id:content-transfer-encoding: mime-version;
+ bh=RWxDyfGMUl3KRgPpXJniOLuW8bXGkSVonucISv1Av7w=;
+ b=dMEGT484MO7htVHmNOJh0ahq8eVfwjPzOmijh/QrC+8MMGg8yBGJmvNR
+ VWiax5/YX7yyctMtTe5LuCv2fvuTYeo04SymNigt5V88xKwvc7Z1Sdkw+
+ QTMfJ/f+B/1uaJnTUBPecPcCN2iHANm4wXnXqexJoPjuuDzL/qoVQMgB+
+ ovQhpeoKJNr5gWdysyFRFukjU8NNGLrVIQt7QRFgf2tG6hrquuehzrZT3
+ WtFeaFWUfAEFxwu/xYt73i66jydXX1uSdMzwy0ICJHhpUQ66LLf80ZRIt
+ DZwTIuL0Wet73yWlai8nwI9KvWHOd5VS/3RUEm7qZ/XcRTFxZgD/mkXVS Q==;
+X-CSE-ConnectionGUID: HudtFXmGRGamGV3ReBufOw==
+X-CSE-MsgGUID: 2yWFAcCeSFaHFfDkIplchw==
+X-IronPort-AV: E=Sophos;i="6.27,133,1786982400"; d="scan'208";a="152761591"
+Received: from mail-southcentralusazon11012012.outbound.protection.outlook.com
+ (HELO SN4PR2101CU001.outbound.protection.outlook.com) ([40.93.195.12])
+ by ob1.hgst.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
+ 01 Oct 2026 07:52:51 +0800
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Z8TvfliLO0uDlq/zVKRIMBJpf94aToT6EB/oFZtI//X+GExr9JAkKBZ9JoZzOnYNAPdnULcX5DxDT51ENTiSchwLIsBR49G6IET8UVd7VzjyGUOSzVVtkY7Ndaqqr2Lf65TRU/oqw9DufN7cVk923+Ksb8xDB5DFb/whX7JSW1VBoqimiSxtpC7wKba+R7+inAqO4kOMiZcJzpLpw4jziWZGMuIloLTP5wD6G4dYSXrD+m3bdoJGY99WBlXXlv3jrPMqpCkQL754A4jXA8dYzghRabva26WGG7p/OECcksKWorgltHV9unyAlqJ3OxHF6HkO4nCN4mE+6iWKoMfAVA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=RWxDyfGMUl3KRgPpXJniOLuW8bXGkSVonucISv1Av7w=;
+ b=ENHk/kPCdlM9/GkEfiEo/ZqAhh9aNoVmVXBKe8f2k+xIbClUZ16F6w14NyYaQp3HHNYhZ2SGMyN//VOLCNLz5iDYXsGJklivTCuSWwkJaIRizyWu65INthtqGhZpSpunBDrG0SixQYe0G4163kOKnXINWh6l22PdweaaypYAB6ehcYKP8Z1DPfrwQy4kFCMm2EZsaJXYbIFzMspOEi3HP7zq1bCwd4E4R0BQYX0qwmS54vXOO6GD6tvRyImiv58Vy2rp+2moj9OK7MU35HG0HgNYc3Ue/numF0WTr+xDYQ8ZxwCY4JC2lXNKv0bgfiBJytKxOZsrFtUwCS8fXRtekw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
+ header.d=wdc.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1790803127; x=1791407927; darn=nongnu.org;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=UyDhz7kmP9qBlEDAjfkJDfc+P44sGwTwscBdz4N2QTw=;
- b=fBdNbxIUdCjcNOYhMfdzdfTxwVeSi2bxS9CFmaj4Zh0n87zznXl17jGFYq8nouAKXJ
- Nk6tZKT3+Dyd6BieLta4zexMV3rJgF0LySXXlZrq3HOW71RoooO/rXXyTvgMTWO3djgx
- H2OGA69/jDZ0JTz1QbexrD9rSGwT/oUMqXAWzc2x+MCUTiwaiZSuKrE9+kYu8caEzjbm
- +tZYP19D2d1fMiCvNa/RgB50b6OlYuqLe8sCvNqQ2IQ32rDEDegV1xw3vUi4c1dGUnJr
- +7dF+WIkRG5LT7l1ZVDHXPchIuCswOW2cK8PF4aoeapEIl9wopiiiMK5YQB1xQyI/2vT
- lDZw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790803127; x=1791407927;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=UyDhz7kmP9qBlEDAjfkJDfc+P44sGwTwscBdz4N2QTw=;
- b=g/tfIfHBm8u6wbCdCTdo+Idt4EbNUaIbiD5cEOUvvEzDmMswsQmuNTOYb06tJe9UaS
- mfDRY8MwUF1UzjFBulPN4oaoIg/FtbvinElPUHivZTEDSAEtABCI5R/5/Z8ydZM9xfL6
- P+WYMsm4PI7ELAwORt8+7c1aTuU5p8bVZgH+TVD/2EHSw8YpR7J+wGz2H2CMdqDkx8pM
- VsRVRDcgTNsGvt8Z99Q4hvj6gIZO/ddgnlGdckn2zLT9unVWKU4SRJ4xgaRGRj0S3kKC
- oqD30Q8GAQjaEjveth6mCnx+TSquvStIL4pRg52lSpFmPD/kKNPktcUthlnZJPQNgnEJ
- f5bg==
-X-Gm-Message-State: AFuF++kXsju94ouY6tGc8h72QMAay8edi8G7ECfdRjpL6/2c2eFw5RGc
- erEo8N9AXiR1HarXGZzdBkIpJQDDIo0O+HuoXkTL57toS5TOTuG6CbfQ2GGxvHmFtapPkguJVP6
- bKijVQvMSsL2Kw53XqeaUSQw+cYDpyGG12C2PMPI3ch+TYGKiyh5Ye0Pb0w==
-X-Gm-Gg: AYBFou2HVF/IpuY2G9wNfgwQAFwh5yAFO1vRgHryD3KZ5kH1gwtBkctK1vcWISurAdo
- ljo8vcrDOTnCvcAszF/1fq7SdDOrCssgfzSptaH6F8r9m3iG47jkogtt3aqsNXUG4eWDTaOy2PE
- SVQag12UOz+KxjbtceVmiyJkqNnEkskWHwwVLj5xN/8gzgnYrfctt3lyZ2j+dW7uSO8FLA2t5Ee
- SfZaCv3zo8EpW/VR4KHJi+FbIAJubgh9RFU8zwkE0AFRHZpd+CghlF6RNPUlUhD3JyZ/fO8/XyK
- nFaoSNNMkYDFjyOf9uKgoRryuTMi9sV4+gdhuJ+ZPM0jZY0wAvguom8wsQcUTc4PhSHlqneWFj7
- g2j3RkPPw00rYHIhF9T/BeVcD/3gjjn+PMQ==
-X-Received: by 2002:a05:620a:27c3:b0:937:1097:feb8 with SMTP id
- af79cd13be357-93ca96c5f73mr443318585a.24.1790803127187; 
- Wed, 30 Sep 2026 14:18:47 -0700 (PDT)
-X-Received: by 2002:a05:620a:27c3:b0:937:1097:feb8 with SMTP id
- af79cd13be357-93ca96c5f73mr443313285a.24.1790803126410; 
- Wed, 30 Sep 2026 14:18:46 -0700 (PDT)
-Received: from [192.168.68.100] ([187.10.234.20])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-917a8a2feedsm9077566d6.33.2026.09.30.14.18.44
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 30 Sep 2026 14:18:45 -0700 (PDT)
-Message-ID: <19ec18d8-548e-469c-ad03-6d47380cb6dc@oss.qualcomm.com>
-Date: Wed, 30 Sep 2026 18:18:42 -0300
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 16/24] target/riscv: gate riscv_cpu_update_mip with
- tcg_enabled()
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
- qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com,
- Palmer Dabbelt <palmer@dabbelt.com>, Paolo Bonzini <pbonzini@redhat.com>
-References: <20260703180538.3346781-1-daniel.barboza@oss.qualcomm.com>
- <20260703180538.3346781-17-daniel.barboza@oss.qualcomm.com>
- <fa90ae0b-3846-45e0-beba-269fc2423f6b@oss.qualcomm.com>
- <0d4948b7-21f7-498d-b198-66ce4b7c51f1@oss.qualcomm.com>
-From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+ d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=RWxDyfGMUl3KRgPpXJniOLuW8bXGkSVonucISv1Av7w=;
+ b=BWjIkGf4MPsTz9TQiRU1TK9s2fEw7apumIHO/1aIE2zCofe2e8KPA+lXq5VJn/eSPxtAzUmvh35c5cU52daYj4ai6uyGqegIb68dlEGlp3P78FsdwAM4F0UhO7vLncfsqBu0F/PIkq4ZM69lEfbCId2IEZvJLEN4MMqTFTdV10c=
+Received: from BY1PR04MB9561.namprd04.prod.outlook.com (2603:10b6:a03:5b6::11)
+ by BL0PR04MB6564.namprd04.prod.outlook.com (2603:10b6:208:17d::11)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.472.15; Wed, 30 Sep
+ 2026 23:52:49 +0000
+Received: from BY1PR04MB9561.namprd04.prod.outlook.com
+ ([fe80::3869:e494:2fa8:9888]) by BY1PR04MB9561.namprd04.prod.outlook.com
+ ([fe80::3869:e494:2fa8:9888%6]) with mapi id 15.21.0451.026; Wed, 30 Sep 2026
+ 23:52:48 +0000
+From: Alistair Francis <Alistair.Francis@wdc.com>
+To: "portias@oss.tenstorrent.com" <portias@oss.tenstorrent.com>,
+ "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>
+CC: "joel@jms.id.au" <joel@jms.id.au>, "npiggin@gmail.com"
+ <npiggin@gmail.com>, "mpe@kernel.org" <mpe@kernel.org>,
+ "marcandre.lureau@redhat.com" <marcandre.lureau@redhat.com>,
+ "daniel.barboza@oss.qualcomm.com" <daniel.barboza@oss.qualcomm.com>,
+ "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>, "palmer@dabbelt.com"
+ <palmer@dabbelt.com>, "chao.liu@processmission.com"
+ <chao.liu@processmission.com>, "asrinivasan@oss.tenstorrent.com"
+ <asrinivasan@oss.tenstorrent.com>, "zhiwei_liu@linux.alibaba.com"
+ <zhiwei_liu@linux.alibaba.com>, "liwei1518@gmail.com" <liwei1518@gmail.com>,
+ "pierrick.bouvier@oss.qualcomm.com" <pierrick.bouvier@oss.qualcomm.com>,
+ "pbonzini@redhat.com" <pbonzini@redhat.com>
+Subject: Re: [PATCH 1/5] hw/char/dw8250: Fix leak when creating child device
+Thread-Topic: [PATCH 1/5] hw/char/dw8250: Fix leak when creating child device
+Thread-Index: AQHdT8D/GPf9WDWcgU6okvflWIweyrbnzhSA
+Date: Wed, 30 Sep 2026 23:52:48 +0000
+Message-ID: <072840f1db0162a7468f86509ff3cb0723a237f4.camel@wdc.com>
+References: <20260929031644.1016354-1-portias@oss.tenstorrent.com>
+ <20260929031644.1016354-2-portias@oss.tenstorrent.com>
+In-Reply-To: <20260929031644.1016354-2-portias@oss.tenstorrent.com>
+Accept-Language: en-US
 Content-Language: en-US
-In-Reply-To: <0d4948b7-21f7-498d-b198-66ce4b7c51f1@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=eqpKXYpX c=1 sm=1 tr=0 ts=6abd7cb8 cx=c_pps
- a=qKBjSQ1v91RyAK45QCPf5w==:117 a=jbqyKmyYbxlRs/MVMa3Ccg==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
- a=EUspDBNiAAAA:8 a=JF9118EUAAAA:8 a=qJD6E9i2tIaHFd1jSFQA:9 a=3ZKOabzyN94A:10
- a=QEXdDO2ut3YA:10 a=NFOGd7dJGGMPyQGDc5-O:22 a=xVlTc564ipvMDusKsbsT:22
-X-Proofpoint-GUID: k0x1NuluV3ladifBc1-O9lWijpyknVLs
-X-Proofpoint-ORIG-GUID: k0x1NuluV3ladifBc1-O9lWijpyknVLs
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTMwMDA4NiBTYWx0ZWRfX+VCIyNDVy37r
- jhnDIDom5NlnvxTUv8w/IR13B7Y8NGnTK7nOoD8sjyFBAbrrSOSsq4p2mVfbk6P70kZMyYI7Th6
- f+cWXOC3K6H/nAZFQVoh5bajdbPvqcg=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTMwMDA4NiBTYWx0ZWRfX+XvK5EeZcDkp
- OerLIsWue2egREpfR0RGFCZSVKeygRVGf2fJtoPOwxlq4aXjKGSFuhY0QNfa2oHEa0OmLs2IyUt
- exsOS5PikzE1cVuv+zdtBsimWeDfcScmHfa0GBHtGGKjWRSb3ZG33X9YgHFam7+OPa5pKv8V7/N
- A30PWkzV64VZM6UANDmiPe8DPKR0RJzAGEq1vyQ9Z6NLzibO1qrxGmoBpx5s+tJlsocszRk0SU/
- WFfUJOeuCLXCTGwbEKxdk76+rOxofTpYhYWh6sZB3Jil3/r212tCNFh+QrhDl+BRMoDprXggy/Z
- F7G6e8pqDUsFGYyfiQFBt7bh/Zm8YWEFD1uTxoBjjoL9HFN3/Kw/HEQPchIZeegeVWfJdKsCYj7
- sgo5MG4pUCMhwoOl+zb9GWllumvsoOxh2cDjoSfjvuGTZh2zwD9EwCGnO80unK8QLWdJIjqlqAn
- KUW18i59lThkqpb34Hw==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-30_04,2026-09-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 spamscore=0 clxscore=1015 malwarescore=0 adultscore=0
- lowpriorityscore=0 phishscore=0 bulkscore=0 priorityscore=1501 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609300086
-Received-SPF: pass client-ip=205.220.168.131;
- envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
-X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+user-agent: Evolution 3.62.0 (by Flathub.org) 
+authentication-results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=wdc.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: BY1PR04MB9561:EE_|BL0PR04MB6564:EE_
+x-ms-office365-filtering-correlation-id: 99195b77-09c6-43ea-0af6-08df1f4deeb2
+wdcipoutbound: EOP-TRUE
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+ ARA:13230040|376014|10070799003|7416014|366016|19092799006|23010399003|1800799024|22082099003|18002099003|38070700021|4143699003|10067099003|56012099006|11063799006;
+x-microsoft-antispam-message-info: 0Ja74xc4eklN1dzBzaMMbXLCSZDi9V/vVog9lK5cCSXNqsjYj4oL58zbK8a5yES3yOhRkgBJ+Rh3ejb0p2ZiD3RNVqDVTUsZvR+P14djN5Htws75uRGtqvhf2+2LgmD3DMGE6B697jd2YWwpPQC6AFlRB0BmCgL5ysuDfeNEafAxOR12OLbgMYATHgRq8pBWItF9ROSnuYZTBC/piXo3JwcStbAkCiXKSVeCXvN9KeqdhFJYIM5KdS2/lsPJ/ilQwdoheqwHbBy8zEPOgWrsFA8M/RExNMOx7uQ64S7w29fSpv+Uh/kbUFrS3/ounmFDVe8X32L7PZltHKm/zG71TIaocI+wOGDOj/hZtQXcpJ8Ekvw4v0XcaApEy1OsUDeNmuLYSR6u1RE6TsPuuQQ4NbWrjZBvjIR8wQB/sWnhGotBB3JDzAB0bc1t/qBaEKL20zqAJKn3JcVe0HQ+YcGHoFi9Fu/kml3S7yfdJuMYx5lAB+ASXrAmnRn7DCGT9QdL08BbbN8as48HxVHtFklx73xzm1iMmoMc9MlhceqQGtgaDVqhIuKuBVzcW1tzbaYEmLgxbTFz6qiNPRcvrE5HCIuD2mdTduKS54gBgtBOohvvQYGiJAl0guqrePu9meki6d4nXXH08T5X8KVX+onzrsOo5DUCXEdLr9uzMvngKXOsgQ17dkbMMwaSqM7g2rY3CetcX80tx7BUK6CfPd+gp6E0UeJsTmw/0jCHLN5THqw=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:BY1PR04MB9561.namprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(10070799003)(7416014)(366016)(19092799006)(23010399003)(1800799024)(22082099003)(18002099003)(38070700021)(4143699003)(10067099003)(56012099006)(11063799006);
+ DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 2
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?bU5uTERkN3dsa2ltdXc4S0JldEtQVjRzM0V3ZXdQTXJjUXF4UWdhdTd2V3Ny?=
+ =?utf-8?B?R3J5eXhyNHBURkViZkoySHZuSUVmZjlrOGFSZE9tQ3I5NExRcFk4eXpXMm1J?=
+ =?utf-8?B?b3lKd1lKb0wzT3M1VmUxQlhkZDNkTmZtTHRHY3RUekl0MXJxQ04zSnZXVzd2?=
+ =?utf-8?B?aTdzNE12L1lPWmJjOTR6U3VFOCtGV01vajJBN1JVRE5MM1ExWjIxZ0pFeXJm?=
+ =?utf-8?B?WlFmNHVKcytGeTdqcWc5eWZyaE1BK2J6cWpsWDBuV3E2bTZZNWhCRFIxVk9F?=
+ =?utf-8?B?bHlFdnJCMmtvUGErTXRySWJlWVpuNUJ4YTI2eGVsWHNuSXVNVFpydVcvTmd6?=
+ =?utf-8?B?NUw3VUVQVFB1cW5uKzczalpEUFFwdDJpL1p6aFVDeXFpTTRHb0N3SWNHR0RG?=
+ =?utf-8?B?ZDFBZ2JtMnRhRW05ZGMxNXdiMGFXMTJPc2YvbDVKZjBtdFk2QjJ0T3c3Wkox?=
+ =?utf-8?B?YzZMZldrNDhGek9tM01GNGw5OFZmYkhmZTFSKzdrRHJNcFdJT05ROVJkMFhq?=
+ =?utf-8?B?c2xrbzVTNWFmd3JtY1pTdEt1dUpVVmlpQUowbnB3eWNObmhweGdKdGV4M0Zu?=
+ =?utf-8?B?Uk91eVlhNTJIQkVtZXFlMm1IVS9FeXpMbGNwZEt3SGptVmhZZmZoMWVtKzRs?=
+ =?utf-8?B?MEhpSG4yOE1yczczWFpkUGFnYllkdVJSb205VnJjaExPYlRSYXAwQmlzckxZ?=
+ =?utf-8?B?OFdqNTUrZXdta0hnMGU0YTVXZGt5enhOWmsvMVpXZ1BVZTdJK2ZIcXErYjJJ?=
+ =?utf-8?B?NENRMTJzbXFDV1ZjWWRxOVNQYXYxanhvQ25kUnAwdkNVbS8rUHhCb0JVS3V2?=
+ =?utf-8?B?a0RaODkxaWs3ODRVSFhHYUt2cE5yeU5Nd2huQ3hYK2JwK0R0M2NFMzZxeHFT?=
+ =?utf-8?B?T1EvOW85VGFJNVEwUHFsOGtSSWFXODVqWE5wRTk1L1JpVVF2dHRkWDFkejFN?=
+ =?utf-8?B?WEs5MVprcWYwQlJQZWQzWnpHQ0EzVnA3d0dGOHRrMHYwbWJob0c4OTRub3RO?=
+ =?utf-8?B?QTFQRTcwdzZjNTBWeU4wUzJWUUFFTWYwak4rNm1uK1IwUTNYOTFGWW9BZGFO?=
+ =?utf-8?B?NDJpNnVSOVN2WWI0YzVzaHVNRFpvc2tRQzlYNGowanIvSXhhdC96OWtNWitp?=
+ =?utf-8?B?SUNNckt4SHRocGJTRVd3TTJDS05wYzI2YmtSR2c3VjFwRGhLWHJ5dmVhcUlK?=
+ =?utf-8?B?YmV6VjIwNG03S3pKTXN5bXIxdTJZeFVFZ0NVc3VkSGsyeWJobWRlZ0VEeDVx?=
+ =?utf-8?B?K0VVVkdubmtMZXFiRFFPVitBNUNSbkE5ZjJnd1V5RGlVbTJHWWVjcERTaHk4?=
+ =?utf-8?B?Z2NZSW15T3B1ZnFXUVhSR3BVRlRIZ1IxNEZPYm1aV2JMcnlSaXdYOUNnOFJM?=
+ =?utf-8?B?R0RGTGJvMVBrTHBmVVBVMEJqN1h2T3BQVEEwb1BGR0tQZ2htQ0h0UnlHb0lG?=
+ =?utf-8?B?L2VPMUJyTUh3V0IvTnhDNTNzTVNFTWF4dXlBNitlbnVKaGFmSGhjK0ZMZWVZ?=
+ =?utf-8?B?N1RlaEFpSncwUDBSZTlpdWZzaGhxazJRWGFsMm9ObjY1UDN2SnZhbDVxK2Ex?=
+ =?utf-8?B?cTZaQmREdnBCdFhBbG8yN3ZycnpnVTl4S0xaMkg4ZVY2a09KekNwK2h6alVh?=
+ =?utf-8?B?WUpvNGpENFZDYXllRy82eVk4NzFpclg3bzcvMFJuUkJSZjZMbUdmNXpQeTND?=
+ =?utf-8?B?NGNHWlc2T09RU3FuYXF4OXh1US9uYTl3WlVHK3NDSVc1UGgxS1ZSc0lvVU1L?=
+ =?utf-8?B?V3MzdFRGd2FGTjIrV1dqU2U0TVZlRTFlQk0reWhVWFA5MzgwVkIzMjl5THll?=
+ =?utf-8?B?Q0JrRjlYZmtmMVBuWm1Od05FZklaNmhROHZMcHgrVXd4ZzkvZGRTYTg1Y2xF?=
+ =?utf-8?B?RnhHNmR0LzNMbWF6QVhiR3BPYVJHaUUvbHg4ZjZ3cVRkZjVjUVNKbnNOVFRW?=
+ =?utf-8?B?MUpReWR4bTE0VzBkMDlCRWIxL1hZMG1nUkNqSVRXY1pMTlNwOTJaRC9hTnJ1?=
+ =?utf-8?B?RFhkS2c4ZFhLQWxFa1lMWm0zSnJXWVU0SDhEanpxbERxZGJ6TGFKUHluVnNL?=
+ =?utf-8?B?dlFhbElySXZ5cXEyY2puQ0hHYXpIRWdtMkhVUmh4cGtkK2lMQm16K1JQWkgx?=
+ =?utf-8?B?OXFzbUhoc3RrWDlTdVd0SDlzR2M0SDh1ZC9URnh4UXgzb2czdmNOWWtmbXNG?=
+ =?utf-8?B?akk5UE83MERkMG5IdlM0NUV3QlprZDM0RVFwOEdaWWI4aVYxNEx2SjRxQWgv?=
+ =?utf-8?B?R29pYWJZK3JpZjVoV2w1THJnOUtwTDFFNE5hYkwwVDU1NGFDTmJHK3kvbFM5?=
+ =?utf-8?B?aStQeElIeHBhUTk0aFdid3JxUVl3V0M5YndVQW9WcTEyNUwydmVESWRlRXV4?=
+ =?utf-8?Q?U+yYkCfKwdKPM4L8xV5Z/PkC9eMKy+7ci4ARKKSUwlaTI?=
+x-ms-exchange-antispam-messagedata-1: EQEN2TEbApdF585qCp3fpwhUfXvbtiWb3DM=
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <E593C04DB2E04A49ABE5A3344F902CFE@namprd04.prod.outlook.com>
+Content-Transfer-Encoding: base64
+MIME-Version: 1.0
+X-Exchange-RoutingPolicyChecked: DRKOJK11BYEOp0GFS1ZM3CyeXwbimAdV9NYczg3fCxNipxoIQcr6TGajosdMMK9FZLRo35CgJLDeDTm+vE/AD4WYvQqYPHlVESD1RzdVjgK8JLzcvVHc25jid7TJA/xZG14VxihnP0o0GqDkLP8e13G4ceQn8zuOQE8TCRuaWNDv0fRtYtCQQKMlJHCZEWKl7ExO2kMZI2Bl4ZoH5ZDHno27u60MHsXIUw3WAOQl9cKQkjDUxlptpA/MlkP6sFDVmy2YRs0tipA5f3u4wXeuTesO2u8SwN2CR8jzxoniVET7r339HU19j07JTgKZYZ+xAIXSpGrQzN7oV80BCjOFpg==
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: Vv6NoW0g0rYek6cbXmci6P29Sl4S4Y1IS091K8RY1c6MGIA5d/aefIdQ2ADvF9GWQzA0+j1cm0p/cSd171RqJWN3dDJ0+fNrPpc2k03SZZF8Wat8Wit+3buwntPtxgrdaIx1I4SiHu2SwyGukOY3cL7cF+QHfqgZj13avMtUgzfRh4Vwt2kTUiFfJTbpHPR7Psc24sCIGnQfmqgPScz+XTkEELVWx7N03rFssg8K3ctRjgtlwLO412EYDPUWRxY+UoIU20o4Ce527duX4Ie9NwJosfmLd8yrVLvmLPhDhaRRfspLXm7qt1AsBRZZOk5VVmofTTQbOxdfDCYypF98PWeOvS+uqkqS1peDWa6bkFpMgAsEbdHJkySMzPrIXn/biw0M25btSJb9X+1sYyhGaQaNlYy/tLtbyp9G+toVOmBQBYCfWClILOyBuoGl5bhbhoZ7lO46itDouF4IsHKYlFSZtg5uPlUcf1q8CHfRaP+1oYScUM/NB3AjZCZetb8QbvEOG5Cgu69xq0U69XBQJIsJ11GDd1o5qm5Myaq4OcL++HDHtW59zeKAzYJQplYRP4BK2I9pqLUZWfBWkMSjpZg/IG/6Jgf2i7WtSQCsf31zX4syU+oxHCl+Uiv+TayN
+X-OriginatorOrg: wdc.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: BY1PR04MB9561.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 99195b77-09c6-43ea-0af6-08df1f4deeb2
+X-MS-Exchange-CrossTenant-originalarrivaltime: 30 Sep 2026 23:52:48.7248 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: E/Pdv0AasDqbAMm9BvqWx9d21TSLTiZ5t4OKdaFWGzae76G2wFS5t8fikzVODdWeuftX+nKJM53xTIB06gEYiH+JGNdf5vtvAM+1MBUaoUc=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL0PR04MB6564
+Received-SPF: pass client-ip=216.71.154.42;
+ envelope-from=prvs=726c96411=Alistair.Francis@wdc.com;
+ helo=esa4.hgst.iphmx.com
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -158,244 +189,55 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-
-
-On 9/30/2026 10:32 AM, Philippe Mathieu-Daudé wrote:
-> On 30/9/26 15:16, Philippe Mathieu-DaudÃ© wrote:
->> Hi Daniel,
->>
->> (committed as 6c91b423a9a4dac2a22629491f2a3059aa40b954)
->>
->> On 3/7/26 20:05, Daniel Henrique Barboza wrote:
->>> riscv_cpu_update_mip() is a TCG only call.  Its KVM equivalent is
->>> kvm_riscv_set_irq().  cpu.c gates the KVM only function with a
->>> kvm_enabled() check, making it unavailable for TCG only builds.  We need
->>> to do the same for riscv_cpu_update_mip() otherwise a KVM only build
->>> will fail because it doesn't know what this function is.
->>>
->>> Use tcg_enabled() for the couple of riscv_cpu_update_mip() calls we have
->>> unguarded in cpu.c.
->>>
->>> We have way more calls to deal with in time_helper.c which isn't using
->>> kvm_riscv_set_irq() at all, so create a riscv_accel_set_irq() local
->>> helper that will choose whether to use the KVM or TCG API.
->>>
->>> The reason we're going through all this hassle in time_helper.c is
->>> because hw/int/riscv_aclint.c uses it, and if we don't do something
->>> about we won't have riscv_aclint working for KVM.  Whether this is a
->>> real problem or not and we should remove aclint support for KVM is
->>> question for another day.
->>>
->>> Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
->>> Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
->>> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
->>> ---
->>>   target/riscv/cpu.c         | 19 ++++++++++++++-----
->>>   target/riscv/time_helper.c | 33 +++++++++++++++++++++++++--------
->>>   2 files changed, 39 insertions(+), 13 deletions(-)
->>>
->>> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
->>> index db18c52656..6b79dcc5ee 100644
->>> --- a/target/riscv/cpu.c
->>> +++ b/target/riscv/cpu.c
->>> @@ -1343,14 +1343,18 @@ static void riscv_cpu_set_irq(void *opaque, int irq, int level)
->>>           case IRQ_M_EXT:
->>>               if (kvm_enabled()) {
->>>                   kvm_riscv_set_irq(cpu, irq, level);
->>> -            } else {
->>> +            }
->>> +
->>> +            if (tcg_enabled()) {
->>>                   riscv_cpu_update_mip(env, 1 << irq, BOOL_TO_MASK(level));
->>>               }
->>>                break;
->>>           case IRQ_S_EXT:
->>>               if (kvm_enabled()) {
->>>                   kvm_riscv_set_irq(cpu, irq, level);
->>> -            } else {
->>> +            }
->>> +
->>> +            if (tcg_enabled()) {
->>>                   env->external_seip = level;
->>>                   riscv_cpu_update_mip(env, 1 << irq,
->>>                                        BOOL_TO_MASK(level | env- >software_seip));
->>> @@ -1377,9 +1381,14 @@ static void riscv_cpu_set_irq(void *opaque, int irq, int level)
->>>               env->hgeip |= 1ULL << irq;
->>>           }
->>> -        /* Update mip.SGEIP bit */
->>> -        riscv_cpu_update_mip(env, MIP_SGEIP,
->>> -                             BOOL_TO_MASK(!!(env->hgeie & env->hgeip)));
->>> +        if (kvm_enabled()) {
->>> +            kvm_riscv_set_irq(cpu, irq, level);
->>> +        }
->>> +        if (tcg_enabled()) {
->>> +            /* Update mip.SGEIP bit */
->>> +            riscv_cpu_update_mip(env, MIP_SGEIP,
->>> +                                 BOOL_TO_MASK(!!(env->hgeie & env- >hgeip)));
->>> +        }
->>>       } else {
->>>           g_assert_not_reached();
->>>       }
->>> diff --git a/target/riscv/time_helper.c b/target/riscv/time_helper.c
->>> index 400e917354..ede1a4c2a3 100644
->>> --- a/target/riscv/time_helper.c
->>> +++ b/target/riscv/time_helper.c
->>> @@ -21,19 +21,34 @@
->>>   #include "cpu_bits.h"
->>>   #include "time_helper.h"
->>>   #include "hw/intc/riscv_aclint.h"
->>> +#include "kvm/kvm_riscv.h"
->>> +#include "system/kvm.h"
->>> +#include "system/tcg.h"
->>> +
->>> +static void riscv_accel_set_irq(RISCVCPU *cpu, int irq, int level)
->>
->> Revisiting this change, riscv_accel_set_irq() is confusing.
->>
->>> +{
->>> +    if (kvm_enabled()) {
->>> +        kvm_riscv_set_irq(cpu, irq, level);
->>
->> kvm_riscv_set_irq() expects IRQ number and level,
->>
->>> +    }
->>> +
->>> +    if (tcg_enabled()) {
->>> +        riscv_cpu_update_mip(&cpu->env, irq, level);
->>
->> riscv_cpu_update_mip() expects a MIP bitmask and a value.
->>
->>> +    }
->>> +}
-> 
-> For now self-documented as:
-> 
-> -- >8 --
-> Author: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
-> Date:   Wed Sep 30 15:22:48 2026 +0200
-> 
->      target/riscv: Clarify riscv_accel_set_irq() arguments
-> 
->      Use per-accelerator locals to make the differing conventions
->      explicit: TCG takes a MIP bitmask and value, KVM takes an IRQ
->      number and a level.
-
-Yep, that's a fair description.  The logic was withdrew from existing code
-in cpu.c and other places ... back then we were doing TCG code first and then
-sprinkling KVM bits on the top.  Ideally this common IRQ helper that translates
-between KVM and TCG would be used since the beginning, but yeah.
-
-
-
-
-> 
->      Signed-off-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
-> 
-
-In case you want to push this via your tree:
-
-
-Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-
-> diff --git a/target/riscv/time_helper.c b/target/riscv/time_helper.c
-> index ede1a4c2a34..85f3f2760b5 100644
-> --- a/target/riscv/time_helper.c
-> +++ b/target/riscv/time_helper.c
-> @@ -27,5 +27,9 @@
-> 
-> -static void riscv_accel_set_irq(RISCVCPU *cpu, int irq, int level)
-> +static void riscv_accel_set_irq(RISCVCPU *cpu,
-> +                                int irq_or_mask, int level_or_value)
->   {
->       if (kvm_enabled()) {
-> +        int irq = irq_or_mask;
-> +        int level = level_or_value;
-> +
->           kvm_riscv_set_irq(cpu, irq, level);
-> @@ -34,3 +38,6 @@ static void riscv_accel_set_irq(RISCVCPU *cpu, int irq, int level)
->       if (tcg_enabled()) {
-> -        riscv_cpu_update_mip(&cpu->env, irq, level);
-> +        uint64_t mask = irq_or_mask;
-> +        uint64_t value = level_or_value;
-> +
-> +        riscv_cpu_update_mip(&cpu->env, mask, value);
->       }
-> ---
-> 
->>>   static void riscv_vstimer_cb(void *opaque)
->>>   {
->>>       RISCVCPU *cpu = opaque;
->>>       CPURISCVState *env = &cpu->env;
->>>       env->vstime_irq = 1;
->>> -    riscv_cpu_update_mip(env, 0, BOOL_TO_MASK(1));
->>> +    riscv_accel_set_irq(cpu, 0, BOOL_TO_MASK(1));
->>
->> In particular I don't follow what irq=0 is here, IRQ or mask?
->>
->>>   }
->>>   static void riscv_stimer_cb(void *opaque)
->>>   {
->>>       RISCVCPU *cpu = opaque;
->>> -    riscv_cpu_update_mip(&cpu->env, MIP_STIP, BOOL_TO_MASK(1));
->>> +    riscv_accel_set_irq(cpu, MIP_STIP, BOOL_TO_MASK(1));
->>>   }
->>>   /*
->>> @@ -48,6 +63,7 @@ void riscv_timer_write_timecmp(CPURISCVState *env, QEMUTimer *timer,
->>>       RISCVAclintMTimerState *mtimer = env->rdtime_fn_arg;
->>>       uint32_t timebase_freq;
->>>       uint64_t rtc_r;
->>> +    RISCVCPU *cpu;
->>>       if (!riscv_cpu_cfg(env)->ext_sstc || !env->rdtime_fn ||
->>>           !env->rdtime_fn_arg || !get_field(env->menvcfg, MENVCFG_STCE)) {
->>> @@ -63,6 +79,7 @@ void riscv_timer_write_timecmp(CPURISCVState *env, QEMUTimer *timer,
->>>       timebase_freq = mtimer->timebase_freq;
->>>       rtc_r = env->rdtime_fn(env->rdtime_fn_arg) + delta;
->>> +    cpu = env_archcpu(env);
->>>       if (timecmp <= rtc_r) {
->>>           /*
->>> @@ -71,9 +88,9 @@ void riscv_timer_write_timecmp(CPURISCVState *env, QEMUTimer *timer,
->>>            */
->>>           if (timer_irq == MIP_VSTIP) {
->>>               env->vstime_irq = 1;
->>> -            riscv_cpu_update_mip(env, 0, BOOL_TO_MASK(1));
->>> +            riscv_accel_set_irq(cpu, 0, BOOL_TO_MASK(1));
->>>           } else {
->>> -            riscv_cpu_update_mip(env, MIP_STIP, BOOL_TO_MASK(1));
->>> +            riscv_accel_set_irq(cpu, MIP_STIP, BOOL_TO_MASK(1));
->>>           }
->>>           return;
->>>       }
->>> @@ -81,9 +98,9 @@ void riscv_timer_write_timecmp(CPURISCVState *env, QEMUTimer *timer,
->>>       /* Clear the [VS|S]TIP bit in mip */
->>>       if (timer_irq == MIP_VSTIP) {
->>>           env->vstime_irq = 0;
->>> -        riscv_cpu_update_mip(env, 0, BOOL_TO_MASK(0));
->>> +        riscv_accel_set_irq(cpu, 0, BOOL_TO_MASK(0));
->>>       } else {
->>> -        riscv_cpu_update_mip(env, timer_irq, BOOL_TO_MASK(0));
->>> +        riscv_accel_set_irq(cpu, timer_irq, BOOL_TO_MASK(0));
->>>       }
->>>       /*
->>> @@ -151,7 +168,7 @@ static void riscv_timer_disable_timecmp(CPURISCVState *env, QEMUTimer *timer,
->>>   {
->>>       /* Disable S-mode Timer IRQ and HW-based STIP */
->>>       if ((timer_irq == MIP_STIP) && !get_field(env->menvcfg, MENVCFG_STCE)) {
->>> -        riscv_cpu_update_mip(env, timer_irq, BOOL_TO_MASK(0));
->>> +        riscv_accel_set_irq(env_archcpu(env), timer_irq, BOOL_TO_MASK(0));
->>>           timer_del(timer);
->>>           return;
->>>       }
->>> @@ -161,7 +178,7 @@ static void riscv_timer_disable_timecmp(CPURISCVState *env, QEMUTimer *timer,
->>>           (!get_field(env->menvcfg, MENVCFG_STCE) ||
->>>            !get_field(env->henvcfg, HENVCFG_STCE))) {
->>>           env->vstime_irq = 0;
->>> -        riscv_cpu_update_mip(env, 0, BOOL_TO_MASK(0));
->>> +        riscv_accel_set_irq(env_archcpu(env), 0, BOOL_TO_MASK(0));
->>>           timer_del(timer);
->>>           return;
->>>       }
->>
->>
-> 
-
+T24gVHVlLCAyMDI2LTA5LTI5IGF0IDEzOjE2ICsxMDAwLCBwb3J0aWFzQG9zcy50ZW5zdG9ycmVu
+dC5jb20gd3JvdGU6DQo+IEZyb206IFBvcnRpYSBTdGVwaGVucyA8cG9ydGlhc0Bvc3MudGVuc3Rv
+cnJlbnQuY29tPg0KPiANCj4gZHc4MjUwX2luc3RhbmNlX2luaXQoKSBjcmVhdGVzIHR3byByZWZl
+cmVuY2VzIGZvciBzZXJpYWxfbW0sIG9uZSBmcm9tDQo+IHFkZXZfbmV3KCkgYW5kIG9uZSBmcm9t
+IG9iamVjdF9wcm9wZXJ0eV9hZGRfY2hpbGQoKSB3aGljaCBsZWFrcyB0aGUNCj4gc2VyaWFsX21t
+IG9iamVjdC4gRml4IGVtYmVkZGluZyB0aGUgU2VyaWFsTU0gc3RydWN0IGluIHRoZQ0KPiBEVzgy
+NTBTdGF0ZS4NCj4gDQo+IFNpZ25lZC1vZmYtYnk6IFBvcnRpYSBTdGVwaGVucyA8cG9ydGlhc0Bv
+c3MudGVuc3RvcnJlbnQuY29tPg0KDQpUaGFua3MsIEkgc3F1YXNoZWQgdGhpcyBpbiB3aXRoIHRo
+ZSBvcmlnaW5hbCBjb21taXQNCg0KQWxpc3RhaXINCg0KPiAtLS0NCj4gwqBody9jaGFyL2R3ODI1
+MC5jwqDCoMKgwqDCoMKgwqDCoCB8IDExICsrKysrLS0tLS0tDQo+IMKgaW5jbHVkZS9ody9jaGFy
+L2R3ODI1MC5oIHzCoCAzICsrLQ0KPiDCoDIgZmlsZXMgY2hhbmdlZCwgNyBpbnNlcnRpb25zKCsp
+LCA3IGRlbGV0aW9ucygtKQ0KPiANCj4gZGlmZiAtLWdpdCBhL2h3L2NoYXIvZHc4MjUwLmMgYi9o
+dy9jaGFyL2R3ODI1MC5jDQo+IGluZGV4IGNjZjA1ZGQ5YWQuLjUwYmFlYWU2MmMgMTAwNjQ0DQo+
+IC0tLSBhL2h3L2NoYXIvZHc4MjUwLmMNCj4gKysrIGIvaHcvY2hhci9kdzgyNTAuYw0KPiBAQCAt
+NzIsMjMgKzcyLDIyIEBAIHN0YXRpYyB2b2lkIGR3ODI1MF9pbnN0YW5jZV9pbml0KE9iamVjdCAq
+b2JqKQ0KPiDCoHsNCj4gwqDCoMKgwqAgRFc4MjUwU3RhdGUgKnMgPSBEVzgyNTAob2JqKTsNCj4g
+wqANCj4gLcKgwqDCoCBzLT5zZXJpYWxfbW0gPSBxZGV2X25ldygic2VyaWFsLW1tIik7DQo+IC3C
+oMKgwqAgb2JqZWN0X3Byb3BlcnR5X2FkZF9jaGlsZChvYmosICJzZXJpYWwtbW0iLCBPQkpFQ1Qo
+cy0NCj4gPnNlcmlhbF9tbSkpOw0KPiAtwqDCoMKgIG9iamVjdF9wcm9wZXJ0eV9hZGRfYWxpYXMo
+b2JqLCAiY2hhcmRldiIsIE9CSkVDVChzLT5zZXJpYWxfbW0pLA0KPiAiY2hhcmRldiIpOw0KPiAr
+wqDCoMKgIG9iamVjdF9pbml0aWFsaXplX2NoaWxkKG9iaiwgInNlcmlhbC1tbSIsICZzLT5zZXJp
+YWxfbW0sDQo+IFRZUEVfU0VSSUFMX01NKTsNCj4gK8KgwqDCoCBvYmplY3RfcHJvcGVydHlfYWRk
+X2FsaWFzKG9iaiwgImNoYXJkZXYiLCBPQkpFQ1QoJnMtPnNlcmlhbF9tbSksDQo+ICJjaGFyZGV2
+Iik7DQo+IMKgfQ0KPiDCoA0KPiDCoHN0YXRpYyB2b2lkIGR3ODI1MF9yZWFsaXplKERldmljZVN0
+YXRlICpkZXYsIEVycm9yICoqZXJycCkNCj4gwqB7DQo+IMKgwqDCoMKgIERXODI1MFN0YXRlICpz
+ID0gRFc4MjUwKGRldik7DQo+IMKgwqDCoMKgIFN5c0J1c0RldmljZSAqc2JkID0gU1lTX0JVU19E
+RVZJQ0UoZGV2KTsNCj4gLcKgwqDCoCBTeXNCdXNEZXZpY2UgKnNlcmlhbF9zYmQgPSBTWVNfQlVT
+X0RFVklDRShzLT5zZXJpYWxfbW0pOw0KPiArwqDCoMKgIFN5c0J1c0RldmljZSAqc2VyaWFsX3Ni
+ZCA9IFNZU19CVVNfREVWSUNFKCZzLT5zZXJpYWxfbW0pOw0KPiDCoA0KPiDCoMKgwqDCoCBtZW1v
+cnlfcmVnaW9uX2luaXQoJnMtPmNvbnRhaW5lciwgT0JKRUNUKGRldiksICJkdzgyNTAtDQo+IGNv
+bnRhaW5lciIsDQo+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqAgRFdfVUFSVF9SRUdJT05fU0laRSk7DQo+IMKgwqDCoMKgIHN5c2J1c19pbml0X21taW8oc2Jk
+LCAmcy0+Y29udGFpbmVyKTsNCj4gwqANCj4gLcKgwqDCoCBxZGV2X3Byb3Bfc2V0X3VpbnQ4KHMt
+PnNlcmlhbF9tbSwgInJlZ3NoaWZ0Iiwgcy0+cmVnc2hpZnQpOw0KPiAtwqDCoMKgIHFkZXZfcHJv
+cF9zZXRfdWludDgocy0+c2VyaWFsX21tLCAiZW5kaWFubmVzcyIsDQo+IERFVklDRV9MSVRUTEVf
+RU5ESUFOKTsNCj4gK8KgwqDCoCBxZGV2X3Byb3Bfc2V0X3VpbnQ4KERFVklDRSgmcy0+c2VyaWFs
+X21tKSwgInJlZ3NoaWZ0Iiwgcy0NCj4gPnJlZ3NoaWZ0KTsNCj4gK8KgwqDCoCBxZGV2X3Byb3Bf
+c2V0X3VpbnQ4KERFVklDRSgmcy0+c2VyaWFsX21tKSwgImVuZGlhbm5lc3MiLA0KPiBERVZJQ0Vf
+TElUVExFX0VORElBTik7DQo+IMKgwqDCoMKgIGlmICghc3lzYnVzX3JlYWxpemUoc2VyaWFsX3Ni
+ZCwgZXJycCkpIHsNCj4gwqDCoMKgwqDCoMKgwqDCoCByZXR1cm47DQo+IMKgwqDCoMKgIH0NCj4g
+ZGlmZiAtLWdpdCBhL2luY2x1ZGUvaHcvY2hhci9kdzgyNTAuaCBiL2luY2x1ZGUvaHcvY2hhci9k
+dzgyNTAuaA0KPiBpbmRleCA1OTM5NmFkMjAyLi5jZTBiOTc3MTViIDEwMDY0NA0KPiAtLS0gYS9p
+bmNsdWRlL2h3L2NoYXIvZHc4MjUwLmgNCj4gKysrIGIvaW5jbHVkZS9ody9jaGFyL2R3ODI1MC5o
+DQo+IEBAIC0xMCw2ICsxMCw3IEBADQo+IMKgDQo+IMKgI2luY2x1ZGUgImh3L2NvcmUvc3lzYnVz
+LmgiDQo+IMKgI2luY2x1ZGUgInFvbS9vYmplY3QuaCINCj4gKyNpbmNsdWRlICJody9jaGFyL3Nl
+cmlhbC1tbS5oIg0KPiDCoA0KPiDCoCNkZWZpbmUgVFlQRV9EVzgyNTAgImR3ODI1MCINCj4gwqBP
+QkpFQ1RfREVDTEFSRV9TSU1QTEVfVFlQRShEVzgyNTBTdGF0ZSwgRFc4MjUwKQ0KPiBAQCAtMTks
+NyArMjAsNyBAQCBzdHJ1Y3QgRFc4MjUwU3RhdGUgew0KPiDCoA0KPiDCoMKgwqDCoCBNZW1vcnlS
+ZWdpb24gY29udGFpbmVyOw0KPiDCoMKgwqDCoCBNZW1vcnlSZWdpb24gZXh0X2lvbWVtOw0KPiAt
+wqDCoMKgIERldmljZVN0YXRlICpzZXJpYWxfbW07DQo+ICvCoMKgwqAgU2VyaWFsTU0gc2VyaWFs
+X21tOw0KPiDCoA0KPiDCoMKgwqDCoCB1aW50OF90IHJlZ3NoaWZ0Ow0KPiDCoH07DQo=
 
