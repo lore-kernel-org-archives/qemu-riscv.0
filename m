@@ -4,70 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B90A2CA5FC1
-	for <qemu-riscv@archiver.kernel.org>; Wed, 30 Sep 2026 07:41:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63DABCA5FC1
+	for <qemu-riscv@archiver.kernel.org>; Wed, 30 Sep 2026 07:41:45 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xBov7-0001CW-Vs; Wed, 30 Sep 2026 03:40:06 -0400
+	id 1xBovI-0001PW-NK; Wed, 30 Sep 2026 03:40:16 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xBov6-0001Be-1t
- for qemu-riscv@nongnu.org; Wed, 30 Sep 2026 03:40:04 -0400
-Received: from mail-dy1-x1336.google.com ([2607:f8b0:4864:20::1336])
+ id 1xBovH-0001IB-0N
+ for qemu-riscv@nongnu.org; Wed, 30 Sep 2026 03:40:15 -0400
+Received: from mail-dy2-x0f.google.com ([2607:f8b0:4864:36::f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xBov4-0003s8-9k
- for qemu-riscv@nongnu.org; Wed, 30 Sep 2026 03:40:03 -0400
-Received: by mail-dy1-x1336.google.com with SMTP id
- 5a478bee46e88-3115c4451c8so1442793eec.1
- for <qemu-riscv@nongnu.org>; Wed, 30 Sep 2026 00:40:01 -0700 (PDT)
+ id 1xBovF-00045B-9F
+ for qemu-riscv@nongnu.org; Wed, 30 Sep 2026 03:40:14 -0400
+Received: by mail-dy2-x0f.google.com with SMTP id
+ 5a478bee46e88-33e46a15703so4810653eec.0
+ for <qemu-riscv@nongnu.org>; Wed, 30 Sep 2026 00:40:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1790754001; x=1791358801; darn=nongnu.org;
- h=content-transfer-encoding:content-type:mime-version:references
- :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=36QMi8FkTHqsIRvQCfr3lK3cpL1UxEN1MbLX8HWDnMA=;
- b=jAoBV9hp/ny2v1ne+Z6FkCsUip89WFCEWxdC0rzPZ+MxqTW+rUkFhAIRwGfw8faLjp
- C5sHnyQO5X+wwCZnF+ZeoJe1isucHbdgNcInzLXvu1njpBAaZ0mdBhIFW/0HQ/cp8M6p
- BQja61fg8ppq/3OQ2N8eKULA6AFes7dZUijzpv41Ym3oVbu1OwdCGna0ilxTCAdVO+m0
- fTlVMSzQ1KYoME4CTbdpxu0w6gua6X9pONuanGu/f1Rdbgw97Xe8HI08etUkheKQDsUy
- Qm7cG6Q+Rxc6WTWWZibKBTW/ikz+azdRSb+Qyphtn7dVN2Xe5f1PjXBA/oZOjlKgIiAt
- e6Eg==
+ d=gmail.com; s=20251104; t=1790754012; x=1791358812; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=ZWtYZozaGxQ3WyjiR/l/7DZHyDwU7S1l8IMnTPOhVhU=;
+ b=ZlA5tjfzKzYiHZB+xAVkVNfqbAr/+nvPp5L4QFa/TueO9FpU7L1S2UQagAVVZlhbme
+ IM5Xl5sT1/FGB8cj9malYZCzVyVfVzE67ml746l42D2o9LKM83k0ykqGRdPKH3827o44
+ EG/qxu3Ti1EzIJ6qDtb2OX6bWEa2KAMpqCrVzPGN5whUfSr+2ntfu3pJzh+606cb2Lnk
+ Key10Ms5FlrjLbv00mw60cD/NEiaZuhfS+HEAd/tU5twhuN0OwTHH+Uqd0eZylRjL6ab
+ OAmkjo3mOeVE6t/gtsz7BspZSyTPALzf7FdNcqY4dyyd0ezNZVWoTRHnz939RXHoEooG
+ hoUA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790754001; x=1791358801;
- h=content-transfer-encoding:content-type:mime-version:references
- :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=36QMi8FkTHqsIRvQCfr3lK3cpL1UxEN1MbLX8HWDnMA=;
- b=OCndyCVSJkSewXmOVqb485dNWNdApLzSI+V52xRI4lDapwlovQmfkNluvLZkPZcWpd
- VRPcmcBNJgbi2UKQyETrBlzDFA7fV0+JIvVPG1bkcOtJocBjU8kptVCjksOrzrCmKwDc
- YRPPRd7Rn/HFRyoMs4Vl2xNI0wxpOM5gOQa9cDKBirJz5gISdP541k18q2eXVH8AfImd
- i0GadSTDKuApzg0gi3uAAYCxbTBJ3A9I4+1JKJn80KWShr9iaQt1+uRi3UvBLH58kR4u
- fmx/x+iWxvQB/od+DIKJG3eCwBAj4OqttNT7xXWns6N4wlGPhPYkwvwJfiNnUeNRDZWX
- 03Rg==
+ d=1e100.net; s=20260707; t=1790754012; x=1791358812;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=ZWtYZozaGxQ3WyjiR/l/7DZHyDwU7S1l8IMnTPOhVhU=;
+ b=MTqmTUf8Q48BUDjSj5CtyJrLWOaJZydihpXJaej9v6boTq44fbwEs9xfkn+nsf6wCQ
+ q1WjISFBTpPu1ceAjfIa84S690AhJ4PR1ojd9tqnD84AVTbeTIveLqW3oVsnX9+nC32y
+ +YhM1OefBPwD6rAwnqmEUeQcS0qBdCds9caK78Bjg2mQqX8l76+IiNGbgHiNBabG9euC
+ 2btLgoNC76td3ssDbNO1jbC9RxPJNxiAsnpx1zZO+4oTmEvGcRJI9snLQMP6F55j8IjO
+ tONsEcCTaQyXlpV80faNlevknWBCXOmpweRnD1Axoygke2cz/96qoT1odZR6qeWTpF9A
+ 5brg==
 X-Forwarded-Encrypted: i=1;
- AKwUvBzQgsLASz141vQrhNiD07NWVIlCpH46HV24j1dyOrhn0S7rAbkv7hmnW4xx/unEwqK5Gu8F9yXcX9Lf@nongnu.org
-X-Gm-Message-State: AFuF++nq1NvSiw7aNHWTdfNRHB/nALd59S26q5/Si7ylc9PnJ8TP9xgB
- bljfe2SBJQXpoLFrs0Z7rwnmJ2+lX8tURwJekOBXkt+R4pHRd8pBd5Gr
-X-Gm-Gg: AYBFou2zt8yeNYy0oHdF6c6PTFwv8hrzXXBxRLws3ahHxBMNgNDfb30bleZODKu3FK+
- bzLCMM9L22YIH0TptQT5y/5YJmIOvbWT3A5WyvACbKcNKDpFhEZMhbdgHjjL2HIkF85Gp+XMhg1
- UM+JQ4uSvWhOOrk1A7GrvReBgZw6h5BwqsHg3OdnHUG4Pm0R9dVzRzH6Cuqrd4fybypuG8ib6I8
- lEMuH+Gd4D5EXvfK/KvbzNjUICghiTquJzqiqg6eoFM4hjN1LTa8jPKRv83KsRDNwQc6QoWCUKE
- LWK2s4gqWunZGuFWmr3Udpovb3ih5N/MYOh+pgCa33LabN0KERGo9akWcbjm13gMetd03LMBbXK
- nQoOrAeVq+YpoyrA8HUM+cEnj8QUqsAnPAs/1cYBWSzm95Ar76W0rRAWl0Zfhq6KT1bFaQ3m0hB
- jdb/PIZVYDxUa5RQeFWVXrZ9QrOLDR3vvBDYOMJ7RCcHlH3a47ysfLZMNtIPatj1Ltx/tsvu/u7
- yRgUqsuTrh0xlKHQg==
-X-Received: by 2002:a05:7300:ce8c:b0:341:c383:9afb with SMTP id
- 5a478bee46e88-34cde86989amr881911eec.20.1790754000611; 
- Wed, 30 Sep 2026 00:40:00 -0700 (PDT)
+ AKwUvBz+c49U5lktXgI5V7Lqa9J3ihj4H9voD2lx7I4IDF1t2qVRE2V4d+JM4X8j0usHwEFaTMP/4u0gVgCr@nongnu.org
+X-Gm-Message-State: AFq9FYJlDIQwXJP5vQBAVtKTbhlbhL+IkdEvDcmw28TxZFs8ki5ylEDj
+ F5Yb75wpuhnVsA9B85+P1dAlarg4/Fyb83ilyMnx2F6PUNWuzdRjZkyz
+X-Gm-Gg: AYBFou3WAknHS13OR0pLIviGaEjiAFEQrf135zOmufnbnadPL6HMsExnQDzhtOC8dZO
+ Rt1b8Bhs2lcHFaksVZ9p3yzB7RBt1wGgLabRgB6lKT5v1oKBOL0hUAzgryiYxRx1L0/tn48IMR0
+ XXPxvC15sHSa6xt5aDxDhY9dZqDrT6LeHJxXB+pAaU7sxZJ0018oGnlMQ6mhCLkcJHK6BOoing/
+ ES3sHyPbuMr4e/vfiw6a1GzLE2ZpQ2UWUdX+XiXpJ97f1smMEYLRKDtB4+n9tkcUvd1a3pfbsYy
+ EbMwq0a1Dy4SW1gkWtvS727GcD43SzRA1RG0DbCrY/9cA4e63V7qAoVjPonkYp3uxfnDu/nIExf
+ 0/8YIXyu/OPtnIRpjo1s63oqJIpaWWRF8G0Q/4Y6LFVMS9y/Mltj7i3Thtx/9QAeHCWtr5NaHvh
+ a98fLX6gL2Kjh/Zi+qcNJa1uVbTJ/RyTbpw/ReMlNwKn1XlFe9db6BISeELbg+WHEki6YxWZa6a
+ KIOftEDmTBcHElB3Q==
+X-Received: by 2002:a05:7300:cd46:b0:33b:e77f:8a3c with SMTP id
+ 5a478bee46e88-34cdcfae6a7mr1325792eec.33.1790754011728; 
+ Wed, 30 Sep 2026 00:40:11 -0700 (PDT)
 Received: from DESKTOP-Q716RM7 ([103.94.185.75])
  by smtp.googlemail.com with ESMTPSA id
- 5a478bee46e88-34cf5b4349bsm1825773eec.25.2026.09.30.00.39.56
+ 5a478bee46e88-34cf5b4349bsm1825773eec.25.2026.09.30.00.40.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 30 Sep 2026 00:39:59 -0700 (PDT)
+ Wed, 30 Sep 2026 00:40:11 -0700 (PDT)
 From: Yonggang Luo <luoyonggang@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: Song Gao <17746591750@163.com>,
@@ -87,18 +86,16 @@ Cc: Song Gao <17746591750@163.com>,
  Richard Henderson <richard.henderson@linaro.org>,
  Ani Sinha <anisinha@redhat.com>, qemu-arm@nongnu.org,
  "Michael S. Tsirkin" <mst@redhat.com>
-Subject: [PATCH v2 3/6] hw/loongarch/virt: prefix ACPI helper with
- loongarch_virt_
-Date: Wed, 30 Sep 2026 15:39:30 +0800
-Message-ID: <20260930073935.712-4-luoyonggang@gmail.com>
+Subject: [PATCH v2 5/6] target/i386: prefix exception helper implementations
+Date: Wed, 30 Sep 2026 15:39:32 +0800
+Message-ID: <20260930073935.712-6-luoyonggang@gmail.com>
 X-Mailer: git-send-email 2.55.0.windows.3
 In-Reply-To: <20260930073935.712-1-luoyonggang@gmail.com>
 References: <20260930073935.712-1-luoyonggang@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1336;
- envelope-from=luoyonggang@gmail.com; helo=mail-dy1-x1336.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:36::f;
+ envelope-from=luoyonggang@gmail.com; helo=mail-dy2-x0f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -121,78 +118,115 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-- virt_acpi_setup is the same C symbol used by ARM and RISC-V virt.
-  Rename it now so a later combined binary does not need meson -D
-  prefixes for LoongArch.
-- Rename the file-local virt_is_acpi_enabled to
-  loongarch_virt_is_acpi_enabled to match.
+Rename the i386 exception helper implementations to
+i386_raise_exception* to avoid collisions with common helpers.
 
 Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
-Reviewed-by: Song Gao <gaosong@loongson.cn>
 ---
- hw/loongarch/virt-acpi-build.c | 6 +++---
- hw/loongarch/virt.c            | 2 +-
- include/hw/loongarch/virt.h    | 2 +-
- 3 files changed, 5 insertions(+), 5 deletions(-)
+ target/i386/tcg/excp_helper.c | 17 +++++++-------
+ target/i386/tcg/helper-tcg.h  | 42 +++++++++++++++++++++++++++++------
+ 2 files changed, 44 insertions(+), 15 deletions(-)
 
-diff --git a/hw/loongarch/virt-acpi-build.c b/hw/loongarch/virt-acpi-build.c
-index 600ef60fc5..b9df9b3a12 100644
---- a/hw/loongarch/virt-acpi-build.c
-+++ b/hw/loongarch/virt-acpi-build.c
-@@ -674,7 +674,7 @@ static const VMStateDescription vmstate_acpi_build = {
-     },
- };
+diff --git a/target/i386/tcg/excp_helper.c b/target/i386/tcg/excp_helper.c
+index 1eaa602c91..0576d64390 100644
+--- a/target/i386/tcg/excp_helper.c
++++ b/target/i386/tcg/excp_helper.c
+@@ -34,7 +34,7 @@ G_NORETURN void helper_raise_interrupt(CPUX86State *env, int intno,
  
--static bool virt_is_acpi_enabled(LoongArchVirtMachineState *lvms)
-+static bool loongarch_virt_is_acpi_enabled(LoongArchVirtMachineState *lvms)
+ G_NORETURN void helper_raise_exception(CPUX86State *env, int exception_index)
  {
-     if (lvms->acpi == ON_OFF_AUTO_OFF) {
-         return false;
-@@ -682,7 +682,7 @@ static bool virt_is_acpi_enabled(LoongArchVirtMachineState *lvms)
-     return true;
+-    raise_exception(env, exception_index);
++    i386_raise_exception(env, exception_index);
  }
  
--void virt_acpi_setup(LoongArchVirtMachineState *lvms)
-+void loongarch_virt_acpi_setup(LoongArchVirtMachineState *lvms)
- {
-     AcpiBuildTables tables;
-     AcpiBuildState *build_state;
-@@ -692,7 +692,7 @@ void virt_acpi_setup(LoongArchVirtMachineState *lvms)
-         return;
-     }
- 
--    if (!virt_is_acpi_enabled(lvms)) {
-+    if (!loongarch_virt_is_acpi_enabled(lvms)) {
-         ACPI_BUILD_DPRINTF("ACPI disabled. Bailing out.\n");
-         return;
-     }
-diff --git a/hw/loongarch/virt.c b/hw/loongarch/virt.c
-index 9c5371af9d..19fbf6db0d 100644
---- a/hw/loongarch/virt.c
-+++ b/hw/loongarch/virt.c
-@@ -242,7 +242,7 @@ static void virt_done(Notifier *notifier, void *data)
-     LoongArchVirtMachineState *lvms = container_of(notifier,
-                                       LoongArchVirtMachineState, machine_done);
-     virt_build_smbios(lvms);
--    virt_acpi_setup(lvms);
-+    loongarch_virt_acpi_setup(lvms);
-     virt_fdt_setup(lvms);
+ /*
+@@ -120,25 +120,26 @@ G_NORETURN void raise_interrupt(CPUX86State *env, int intno, int next_eip_addend
+     raise_interrupt2(env, intno, 1, 0, next_eip_addend, 0);
  }
  
-diff --git a/include/hw/loongarch/virt.h b/include/hw/loongarch/virt.h
-index d39a9bbf5d..72268466de 100644
---- a/include/hw/loongarch/virt.h
-+++ b/include/hw/loongarch/virt.h
-@@ -132,7 +132,7 @@ struct LoongArchVirtMachineState {
+-G_NORETURN void raise_exception_err(CPUX86State *env, int exception_index,
+-                                    int error_code)
++G_NORETURN void i386_raise_exception_err(CPUX86State *env, int exception_index,
++                                         int error_code)
+ {
+     raise_interrupt2(env, exception_index, 0, error_code, 0, 0);
+ }
  
- #define TYPE_LOONGARCH_VIRT_MACHINE  MACHINE_TYPE_NAME("virt")
- OBJECT_DECLARE_SIMPLE_TYPE(LoongArchVirtMachineState, LOONGARCH_VIRT_MACHINE)
--void virt_acpi_setup(LoongArchVirtMachineState *lvms);
-+void loongarch_virt_acpi_setup(LoongArchVirtMachineState *lvms);
- void virt_fdt_setup(LoongArchVirtMachineState *lvms);
+-G_NORETURN void raise_exception_err_ra(CPUX86State *env, int exception_index,
+-                                       int error_code, uintptr_t retaddr)
++G_NORETURN void i386_raise_exception_err_ra(CPUX86State *env,
++                                            int exception_index,
++                                            int error_code, uintptr_t retaddr)
+ {
+     raise_interrupt2(env, exception_index, 0, error_code, 0, retaddr);
+ }
  
- static inline bool virt_has_dmsi(LoongArchVirtMachineState *lvms)
+-G_NORETURN void raise_exception(CPUX86State *env, int exception_index)
++G_NORETURN void i386_raise_exception(CPUX86State *env, int exception_index)
+ {
+     raise_interrupt2(env, exception_index, 0, 0, 0, 0);
+ }
+ 
+-G_NORETURN void raise_exception_ra(CPUX86State *env, int exception_index,
+-                                   uintptr_t retaddr)
++G_NORETURN void i386_raise_exception_ra(CPUX86State *env, int exception_index,
++                                        uintptr_t retaddr)
+ {
+     raise_interrupt2(env, exception_index, 0, 0, 0, retaddr);
+ }
+diff --git a/target/i386/tcg/helper-tcg.h b/target/i386/tcg/helper-tcg.h
+index f4b2ff740d..430e49efe0 100644
+--- a/target/i386/tcg/helper-tcg.h
++++ b/target/i386/tcg/helper-tcg.h
+@@ -60,13 +60,41 @@ void x86_translate_code(CPUState *cs, TranslationBlock *tb,
+                         int *max_insns, vaddr pc, void *host_pc);
+ 
+ /* excp_helper.c */
+-G_NORETURN void raise_exception(CPUX86State *env, int exception_index);
+-G_NORETURN void raise_exception_ra(CPUX86State *env, int exception_index,
+-                                   uintptr_t retaddr);
+-G_NORETURN void raise_exception_err(CPUX86State *env, int exception_index,
+-                                    int error_code);
+-G_NORETURN void raise_exception_err_ra(CPUX86State *env, int exception_index,
+-                                       int error_code, uintptr_t retaddr);
++G_NORETURN void i386_raise_exception(CPUX86State *env, int exception_index);
++G_NORETURN void i386_raise_exception_ra(CPUX86State *env, int exception_index,
++                                        uintptr_t retaddr);
++G_NORETURN void i386_raise_exception_err(CPUX86State *env, int exception_index,
++                                         int error_code);
++G_NORETURN void i386_raise_exception_err_ra(CPUX86State *env,
++                                            int exception_index,
++                                            int error_code, uintptr_t retaddr);
++
++static inline G_NORETURN
++void raise_exception(CPUX86State *env, int exception_index)
++{
++    i386_raise_exception(env, exception_index);
++}
++
++static inline G_NORETURN
++void raise_exception_ra(CPUX86State *env, int exception_index,
++                        uintptr_t retaddr)
++{
++    i386_raise_exception_ra(env, exception_index, retaddr);
++}
++
++static inline G_NORETURN
++void raise_exception_err(CPUX86State *env, int exception_index,
++                         int error_code)
++{
++    i386_raise_exception_err(env, exception_index, error_code);
++}
++
++static inline G_NORETURN
++void raise_exception_err_ra(CPUX86State *env, int exception_index,
++                            int error_code, uintptr_t retaddr)
++{
++    i386_raise_exception_err_ra(env, exception_index, error_code, retaddr);
++}
+ G_NORETURN void raise_interrupt(CPUX86State *nenv, int intno, int next_eip_addend);
+ G_NORETURN void handle_unaligned_access(CPUX86State *env, vaddr vaddr,
+                                         MMUAccessType access_type,
 -- 
 2.55.0.windows.3
 
