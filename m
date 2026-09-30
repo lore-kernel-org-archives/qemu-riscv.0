@@ -4,136 +4,144 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30164CA5FC5
-	for <qemu-riscv@archiver.kernel.org>; Wed, 30 Sep 2026 13:16:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 394EACA5FC5
+	for <qemu-riscv@archiver.kernel.org>; Wed, 30 Sep 2026 13:28:54 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xBuAq-0004we-M4; Wed, 30 Sep 2026 09:16:40 -0400
+	id 1xBuMW-0001Vy-Di; Wed, 30 Sep 2026 09:28:44 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1xBuAh-0004w8-84
- for qemu-riscv@nongnu.org; Wed, 30 Sep 2026 09:16:35 -0400
-Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1xBuMV-0001V8-26
+ for qemu-riscv@nongnu.org; Wed, 30 Sep 2026 09:28:43 -0400
+Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1xBuAf-00039Q-Bt
- for qemu-riscv@nongnu.org; Wed, 30 Sep 2026 09:16:31 -0400
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1xBuMT-0005Ei-0s
+ for qemu-riscv@nongnu.org; Wed, 30 Sep 2026 09:28:42 -0400
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 68UB7ox53955025
- for <qemu-riscv@nongnu.org>; Wed, 30 Sep 2026 13:16:28 GMT
+ 68UDIiR4615175
+ for <qemu-riscv@nongnu.org>; Wed, 30 Sep 2026 13:28:39 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- tK78fsl6wePWyA43qhexR80/gBvlggxK9VgAz9KuCyE=; b=nT/B3gufagMvM0zv
- umcODrrMT08XNECFJ3OypQKsb3YR6jCGlYwTDe97xi0pupEE99lMxmo+q19sM7SI
- n6AffYON57MLKlYu4dfVEwBwjfHp1x8B8/Clvg8AEWwN93em9XfHB0C+TBHNmTGj
- lFTawkpJlNaqms1usOdFDNC12uHucIkg6IxLmK9b0NhNUelY9jC3MHk9AnxIt8DH
- 1vs6XNO555zYr7HFGjmL4QwQmiHEUVwdDlpXlyboA30njNNa2bblW7pS3Nc8qaQA
- 7CK8t21YX9ERJHstGJmOCbN2UU2hjdHq49wDkjh82JvvJlMdcNLZxMBFTLn2ZfxF
- knYRqA==
-Received: from mail-vk1-f197.google.com (mail-vk1-f197.google.com
- [209.85.221.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h0j97vgap-1
+ Ux+Un8La7SMWUwwEVlRIyK8IC8A+J44ndr4b1g+IhtQ=; b=FckE+va+kou/Dn54
+ dCeZ/rt4Ub8VQiPSNGcrRk2Nw4zZ5UBvCIpGQa1QrXVHXKvmJQ+le3odkvnY7Kn0
+ SeyHTMqBcxb92rxzTgcXj1G5/sKZnYXWQZaBubCY7tdES5SPLW9RNk50CPRGD1n/
+ P46KeUUeL/WYrKeocEwU3ZbMYqCPf5hvbEP/oY+KogedLg6VdVcYHOOJ8NBX3ZI1
+ cK75vJ4AciEgnSU/gYYPSTUNYeVwJWYt0Wmnvz+m/DiZj+bdEec53EpLFrQuKlfr
+ iynX6rVMkp88pACkaUgseVI5tegPrzDDk5avJ+8xKnbruFAuZzkDSb2ByJjbFLX6
+ 1b1nBw==
+Received: from mail-ua1-f69.google.com (mail-ua1-f69.google.com
+ [209.85.222.69])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h136tg17x-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Wed, 30 Sep 2026 13:16:27 +0000 (GMT)
-Received: by mail-vk1-f197.google.com with SMTP id
- 71dfb90a1353d-5c98fd65daaso6311005e0c.0
- for <qemu-riscv@nongnu.org>; Wed, 30 Sep 2026 06:16:27 -0700 (PDT)
+ for <qemu-riscv@nongnu.org>; Wed, 30 Sep 2026 13:28:38 +0000 (GMT)
+Received: by mail-ua1-f69.google.com with SMTP id
+ a1e0cc1a2514c-98513b850f1so305229241.2
+ for <qemu-riscv@nongnu.org>; Wed, 30 Sep 2026 06:28:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1790774187; x=1791378987; darn=nongnu.org;
- h=content-transfer-encoding:content-type:in-reply-to:from:references
- :cc:to:content-language:subject:user-agent:mime-version:date
+ d=oss.qualcomm.com; s=google; t=1790774918; x=1791379718; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=tK78fsl6wePWyA43qhexR80/gBvlggxK9VgAz9KuCyE=;
- b=FRR1XT92mgRIg6sgnu6hLERs/921r9LZULKEP/1U7AZLfRFVX4/wNpKYF1NMNtzzQ4
- fX2gVNkRNpB/R2NhWafueqFqHTazZJ+2iodXnhDcAOH/ncNVFc9042MsvrKtfCZm1aJY
- gvzjUkOfEcx8It6UVRZqUUZmlxdkLARkjfvq7036yFyJbAsqf18AMx05xJ5zGg86KC4W
- c+YIgaeeeZCIfAGbkUVZ/xpc53JtgH8v3LYDGVT6Sfjw6tuJg3oWvp/ATSZOK/jmczqU
- WngNmRaVIRBjubwZ0T634yQh09u0Cv4jPfJljJM5RA0r4p6W5wxWhFY5WKF1vYpDdX6n
- KnrQ==
+ bh=Ux+Un8La7SMWUwwEVlRIyK8IC8A+J44ndr4b1g+IhtQ=;
+ b=P5RlMJ2tZfys66GCQKmqMpFqpFtrYX/TVoItgN796nIZNuwBqT1ru4cobXq5mB3kc6
+ zL1k3dxRCx0IU5y0A3xqTQPK8U9tUyDkg29LPgdACcgLoqVHn8pKh7tNy+Az6+LEopBG
+ dB0lm+SWvfHkHoRySN5cBNRwzbBkRg2O0M6uzLQuA2Jkne0R9ZStMlb/2KaI/csmBG6j
+ vW8rW1uPyaihcszzIBgzfJ+hplj6+feteCy0G/T1K0HpDJr8VYCjkFhiWQGhS9ZpqEaH
+ feEhz0Mk7z2ouS+xAEMzAr2z/Cg6J77UouOa/rrtEbAf9rixvGS1XZgcP5Cs33JSlggL
+ r21Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790774187; x=1791378987;
- h=content-transfer-encoding:content-type:in-reply-to:from:references
- :cc:to:content-language:subject:user-agent:mime-version:date
+ d=1e100.net; s=20260707; t=1790774918; x=1791379718;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=tK78fsl6wePWyA43qhexR80/gBvlggxK9VgAz9KuCyE=;
- b=gRURDmACAmdXFO1zkF3TpAnVotm3X0PTp2wMWzxPyEbTC24UWKVVWXMSsVhho7BmwZ
- fmTyNg8FpSss2h0t1S/+v0ptN7UCBGSIyIPWLeCEJO3e2+guJlx0K5Ahigk+gFW9MdPI
- wAVfcLiCRTj1nwcSqZt+g2uEVuY6KgpchwKCOIf8UsTkyfYP747ekQgxsP+n+TstpFyQ
- bTyFqIeu+/VZxahTdeVIhtUTgvHi/ErhOoi9oJwYytcMiSgVSQ7qkaPfRrl8zvsJDsOI
- dMpNhQkVPxuBelgmjYRz40M4wifVacYRUeanqvQti8PIvHUiGyL3F/lFesRYE0OFPV3J
- ktxg==
-X-Gm-Message-State: AFq9FYLvIF1mJfyd82UJeQgJ5ZxtAqCfkI1Qp4PofS8XknR51Wl7ER3a
- wZPpHXAa+IpqHH3IbVcBmPhHerDJjp6/o0I9P5KY4PLxyH01TkS2ALnYlAYMrmk1B3m/EsEsHwS
- IMlzSMfwjpEmDmpa2BihDoiPk1UOU+DDzQY1W9TZQuz/nNIRT2WpFq+tpCQ==
-X-Gm-Gg: AYBFou3a1bphw9YOsB0ZgB/dYeTW95N6kX5Fvc8GH5TEl/7zET3DnTi7cwK19kpDNF5
- pfkYzw0WeeKZZCxU3qVD5MnjxH9vlIWmGPavgnjWH6HlNtkwXYaot5jv/hjwrRBIs2P2rvDlqO2
- Wvia+08AqnoyuSPaOVGObRBt38Dsn6ntsNAHxfQtXsrSXRkI1YGYwEPgKcujKrpB96qZjlYeIVR
- F8MSLUKPLNxafCpIB9sP8+SdfGUBWQqn5m+N8VOC226f8Y9KDxO68bq6e5OdAJwHQ8PdEUq9oW5
- hvI974ByffqdkRrqRWhiIHp7GoRAosRrvhelj4J3dcmwB5i83rr/SvD9wlJ9aZLa9x7dlqIBWeL
- 8elZF5zS162iJ13OGg4nIKvR9oLfqn6FM8g==
-X-Received: by 2002:a05:6102:38c6:b0:7a7:ad9f:53b4 with SMTP id
- ada2fe7eead31-7be72ab7845mr406274137.7.1790774186956; 
- Wed, 30 Sep 2026 06:16:26 -0700 (PDT)
-X-Received: by 2002:a05:6102:38c6:b0:7a7:ad9f:53b4 with SMTP id
- ada2fe7eead31-7be72ab7845mr406254137.7.1790774186317; 
- Wed, 30 Sep 2026 06:16:26 -0700 (PDT)
-Received: from [192.168.69.225] (pmd666.hd.free.fr. [88.187.86.199])
+ bh=Ux+Un8La7SMWUwwEVlRIyK8IC8A+J44ndr4b1g+IhtQ=;
+ b=wM/GAASP0UnNZKmfL/atabisxangQLIVvIY2FvMu5pWPcL2G0/VPGo++pPXF5/ASrP
+ mR8WDSzEEio0P8Zymdm7uzgxUEiHX4awfJrMLpK9Y0JfMRmX9fXypKn5RoH6NZMrUPAc
+ cAvxELnAoPd6GmvPg0FUYFTGGiRAApDL5kA7/iJJ22LB6Kk7tB/urFbMVvE8i5/EFHCi
+ OX8LkRhgqfRPcI+QbXoowCtWdRqOQbIMXV6r4lvhf6qdG3AcQHHBDbz48noyCcL0A/W5
+ 25PNkzS0lGL9ehQnIb/ahZrgVAkOMjkgy1Y9feKUO3hWMg59/a1/yg2u2jsqJrPogvBc
+ Ewdw==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBzXxzgMJHQCgVxcEnEVK5nAnVKuIgROmcor8ucuGSgMPWp6/DAoR3xYyBkhTexEV+QKvkwQGguAc0mg@nongnu.org
+X-Gm-Message-State: AFq9FYIgXVleZj/sfIUxEM9J/An+XYOFUzMGTdGngfc3JB1hyS2IvGZv
+ 09tlAAvP/RLZfWV3L8VnyfwYU8wgEvbn5RDduBdEeZn8a9lfby5/LZ3tu3ZLNb87gXGIp1GXOoU
+ +zcAg/prS7JFnQn8Zq4jiWujs4ofqJwcEBqViiU6NdmokzTFCJeEfdZJ5Sg==
+X-Gm-Gg: AYBFou0V91+yWxX+bp2sLautN5MlDIZA3ZvaEB06A1IFcwR286IfYzAAhh1iOcQoE/S
+ AJ4dtAuLuvwjCYTigqTLmUTjOMUlZwDu4J7nQxITLqDeXykxXw1ijMjcF16gM2lneHi9v3WZJwK
+ p5ESyt43XJDDQIY8rs+xg6dZOwmTAqfkuVxhP1yAQUhK28R0nnhHiURQzbAA57OTc9/ifkS5UGG
+ XflY8QI9po9uYaoTGryEr1eIcP4qOlRabaxFzsTuSwt6e8HlfMvqTMeZtWEJtQwPhz2NV3qZcX0
+ WBFX3El1BF/QH+A3zAGrfHtCiZ5Widm3AdGPEPlDUtJmgtDLMaoRX5zYDKjzseij2gGn6OIXMZp
+ Qk2cDZy+yyEWoQdGYFVpImlFtdJZvH6wE5w==
+X-Received: by 2002:a05:6102:6a91:b0:7a1:f7d2:e846 with SMTP id
+ ada2fe7eead31-7be7319bd53mr251434137.22.1790774917590; 
+ Wed, 30 Sep 2026 06:28:37 -0700 (PDT)
+X-Received: by 2002:a05:6102:6a91:b0:7a1:f7d2:e846 with SMTP id
+ ada2fe7eead31-7be7319bd53mr251400137.22.1790774917086; 
+ Wed, 30 Sep 2026 06:28:37 -0700 (PDT)
+Received: from [192.168.68.100] ([187.10.234.20])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a01cd67d57sm3813805e9.2.2026.09.30.06.16.24
+ a640c23a62f3a-c2e31d80d24sm789566b.52.2026.09.30.06.28.31
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 30 Sep 2026 06:16:25 -0700 (PDT)
-Message-ID: <fa90ae0b-3846-45e0-beba-269fc2423f6b@oss.qualcomm.com>
-Date: Wed, 30 Sep 2026 15:16:24 +0200
+ Wed, 30 Sep 2026 06:28:35 -0700 (PDT)
+Message-ID: <238b1bf5-c7a4-4103-9e70-c5bf9efc3691@oss.qualcomm.com>
+Date: Wed, 30 Sep 2026 10:28:29 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 16/24] target/riscv: gate riscv_cpu_update_mip with
- tcg_enabled()
+Subject: Re: [PATCH 1/5] hw/char/dw8250: Fix leak when creating child device
+To: portias@oss.tenstorrent.com, qemu-devel@nongnu.org
+Cc: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Chao Liu <chao.liu@processmission.com>, Joel Stanley <joel@jms.id.au>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Weiwei Li <liwei1518@gmail.com>,
+ Michael Ellerman <mpe@kernel.org>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
+ Nicholas Piggin <npiggin@gmail.com>,
+ Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>,
+ qemu-riscv@nongnu.org,
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+ Paolo Bonzini <pbonzini@redhat.com>
+References: <20260929031644.1016354-1-portias@oss.tenstorrent.com>
+ <20260929031644.1016354-2-portias@oss.tenstorrent.com>
+From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Content-Language: en-US
-To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com,
- Palmer Dabbelt <palmer@dabbelt.com>, Paolo Bonzini <pbonzini@redhat.com>
-References: <20260703180538.3346781-1-daniel.barboza@oss.qualcomm.com>
- <20260703180538.3346781-17-daniel.barboza@oss.qualcomm.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
-In-Reply-To: <20260703180538.3346781-17-daniel.barboza@oss.qualcomm.com>
+In-Reply-To: <20260929031644.1016354-2-portias@oss.tenstorrent.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: mMegqB5F7vrU4Dw12iEHBe_OHhGRTdAn
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTMwMDA1MiBTYWx0ZWRfX8pUPxEzzRkgP
- nNPwk1vN+k1cdYKODZqyxLqfRMBFd6RkW0tbTU0x43kTHo7OvpkxuMEW6MIILCLB716JsNErLZV
- 7Qd2ducPevY/RfA3oJAwUpR06U5vF0ekC25jVcYBhkOfdxj+Gmu8m3VvEQmcixIW3wMIxnGIn15
- k6B4a2Goeco/kse/9ahRDf9n6JOOthUANwLEVGGiNw9xdHGzvPRm2Rt6j44HnseXwoLaFdOu+xc
- 3X1lfhd5VE611/gQ3CGBlDuUOjmj99QR7WHorUIwFQkxpTB42UIw3M+XR58OoZ6xCBWvj2EjOWQ
- NxdIxLykziRiadUdO/0BGFv/Sv8wg3Nqm40Jw1WiJhRokHB4AUIZNqJudvDACRc90nWAK0eh9sl
- wDXLTxXZOk7aCar9p1FyX0v/Hh7RcvFWkBbr7sm4mFHt/rduymfGhOKGsRAtqXGXuBsU6Dswz4f
- tBNEfrHTxEENf8V1xgQ==
-X-Proofpoint-ORIG-GUID: mMegqB5F7vrU4Dw12iEHBe_OHhGRTdAn
-X-Authority-Analysis: v=2.4 cv=BPImP1QG c=1 sm=1 tr=0 ts=6abd0bab cx=c_pps
- a=JIY1xp/sjQ9K5JH4t62bdg==:117 a=4s3hRJSeHn4rkQlkrse1kQ==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=M51BFTxLslgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
- a=EUspDBNiAAAA:8 a=JF9118EUAAAA:8 a=tpsF0DDknoKtsVgG9ZQA:9 a=3ZKOabzyN94A:10
- a=QEXdDO2ut3YA:10 a=tNoRWFLymzeba-QzToBc:22 a=xVlTc564ipvMDusKsbsT:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTMwMDA1MiBTYWx0ZWRfX0JstXvC6Hsfq
- mgaHww+dF6M9JbvGt/aS66gKZXy1t6G98za0T9aqzUfRcpZKJiuLeYG4SwWwiAxoU/Ow34DLtZM
- TMVyxN1ly3iNoI5FjeBPjrQBkr3Arts=
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTMwMDA1MiBTYWx0ZWRfXzb7a26S3Vn9m
+ 9eFy5D7xe0Bz0Bcuj7jHZGltMLapVffH4myFmjGZSeWmw/v83h42YerB9ZV/qqoJ9LRAa1usg7K
+ r4fqfoV5UNnmXHZQM8CiUrXMhbVuvLU=
+X-Authority-Analysis: v=2.4 cv=aPFlOr9m c=1 sm=1 tr=0 ts=6abd0e86 cx=c_pps
+ a=UbhLPJ621ZpgOD2l3yZY1w==:117 a=jbqyKmyYbxlRs/MVMa3Ccg==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
+ a=VwQbUJbxAAAA:8 a=pGLkceISAAAA:8 a=t9496tuAAAAA:8 a=jjHZSQ1sJ0xQOcU6r5sA:9
+ a=QEXdDO2ut3YA:10 a=TOPH6uDL9cOC6tEoww4z:22 a=4wQ91nGE5lQcD7eh5OX0:22
+X-Proofpoint-ORIG-GUID: 9hCdt-Oap2VziyLcCv52sKW93-8Hi4MO
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTMwMDA1MiBTYWx0ZWRfX03D/ay23TGyw
+ ne/Zwi9hmjuSaWUcRQ2MlajWnSoRatUlW7jQXO7b39lWgG24UCptlIpl/kDrXxP7+wrT0jOiqJx
+ kleG8qkodCX84sDRVgr9N3vMvK8AUyqpaDJozbnLgIqhTFwdd4goNWy8efrBnrYXxlB6Je2iNaE
+ xUKzeHcyjv4FqoXDqQqWFNJY57yFdisbIu4BOza+PYtHQZFpz8wPA1JVWsmLrHBqFqelGWJvTZJ
+ OxkjRWFjyY37A3fDN5/0SJIaU4nB4ayKHIYEONUd4h403Mfovl97DiWFj0UxHXK5xj1sFrqnAY3
+ 6cSufixEs4QJo8/f49JC6FWE82+GkCFcHfijey4E26RJQCxWjbfoSi2qjaOTNSOun643/t3OiMw
+ N9xApWUy2DuI1bNr/Zgj1eB8sZj+ykxB+xWgyV9dQy08tCntY1ySrXfzUpTmMiSIgNvyK2iswXe
+ eRLAVq0G2jwBtVnjywA==
+X-Proofpoint-GUID: 9hCdt-Oap2VziyLcCv52sKW93-8Hi4MO
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-30_02,2026-09-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 adultscore=0 phishscore=0 malwarescore=0 lowpriorityscore=0
- bulkscore=0 priorityscore=1501 suspectscore=0 impostorscore=0 spamscore=0
+ priorityscore=1501 suspectscore=0 adultscore=0 phishscore=0 spamscore=0
+ malwarescore=0 impostorscore=0 bulkscore=0 lowpriorityscore=0 clxscore=1015
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609300052
-Received-SPF: pass client-ip=205.220.180.131;
- envelope-from=philmd@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
+Received-SPF: pass client-ip=205.220.168.131;
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
 X-Spam_score_int: -27
 X-Spam_score: -2.8
 X-Spam_bar: --
@@ -156,191 +164,84 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Daniel,
+Hi Portia,
 
-(committed as 6c91b423a9a4dac2a22629491f2a3059aa40b954)
+I believe this fix should be made by the original patch that introduces the device,
+which isn't upstreamed yet:
 
-On 3/7/26 20:05, Daniel Henrique Barboza wrote:
-> riscv_cpu_update_mip() is a TCG only call.  Its KVM equivalent is
-> kvm_riscv_set_irq().  cpu.c gates the KVM only function with a
-> kvm_enabled() check, making it unavailable for TCG only builds.  We need
-> to do the same for riscv_cpu_update_mip() otherwise a KVM only build
-> will fail because it doesn't know what this function is.
+[PATCH v5 1/7] hw/char: Add dw8250 UART
+https://lore.kernel.org/qemu-devel/20260927201326.650943-2-visitorckw@gmail.com/
+
+
+Thanks,
+Daniel
+
+On 9/29/2026 12:16 AM, portias@oss.tenstorrent.com wrote:
+> From: Portia Stephens <portias@oss.tenstorrent.com>
 > 
-> Use tcg_enabled() for the couple of riscv_cpu_update_mip() calls we have
-> unguarded in cpu.c.
+> dw8250_instance_init() creates two references for serial_mm, one from
+> qdev_new() and one from object_property_add_child() which leaks the
+> serial_mm object. Fix embedding the SerialMM struct in the DW8250State.
 > 
-> We have way more calls to deal with in time_helper.c which isn't using
-> kvm_riscv_set_irq() at all, so create a riscv_accel_set_irq() local
-> helper that will choose whether to use the KVM or TCG API.
-> 
-> The reason we're going through all this hassle in time_helper.c is
-> because hw/int/riscv_aclint.c uses it, and if we don't do something
-> about we won't have riscv_aclint working for KVM.  Whether this is a
-> real problem or not and we should remove aclint support for KVM is
-> question for another day.
-> 
-> Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-> Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
-> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+> Signed-off-by: Portia Stephens <portias@oss.tenstorrent.com>
 > ---
->   target/riscv/cpu.c         | 19 ++++++++++++++-----
->   target/riscv/time_helper.c | 33 +++++++++++++++++++++++++--------
->   2 files changed, 39 insertions(+), 13 deletions(-)
+>   hw/char/dw8250.c         | 11 +++++------
+>   include/hw/char/dw8250.h |  3 ++-
+>   2 files changed, 7 insertions(+), 7 deletions(-)
 > 
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index db18c52656..6b79dcc5ee 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -1343,14 +1343,18 @@ static void riscv_cpu_set_irq(void *opaque, int irq, int level)
->           case IRQ_M_EXT:
->               if (kvm_enabled()) {
->                   kvm_riscv_set_irq(cpu, irq, level);
-> -            } else {
-> +            }
-> +
-> +            if (tcg_enabled()) {
->                   riscv_cpu_update_mip(env, 1 << irq, BOOL_TO_MASK(level));
->               }
->                break;
->           case IRQ_S_EXT:
->               if (kvm_enabled()) {
->                   kvm_riscv_set_irq(cpu, irq, level);
-> -            } else {
-> +            }
-> +
-> +            if (tcg_enabled()) {
->                   env->external_seip = level;
->                   riscv_cpu_update_mip(env, 1 << irq,
->                                        BOOL_TO_MASK(level | env->software_seip));
-> @@ -1377,9 +1381,14 @@ static void riscv_cpu_set_irq(void *opaque, int irq, int level)
->               env->hgeip |= 1ULL << irq;
->           }
->   
-> -        /* Update mip.SGEIP bit */
-> -        riscv_cpu_update_mip(env, MIP_SGEIP,
-> -                             BOOL_TO_MASK(!!(env->hgeie & env->hgeip)));
-> +        if (kvm_enabled()) {
-> +            kvm_riscv_set_irq(cpu, irq, level);
-> +        }
-> +        if (tcg_enabled()) {
-> +            /* Update mip.SGEIP bit */
-> +            riscv_cpu_update_mip(env, MIP_SGEIP,
-> +                                 BOOL_TO_MASK(!!(env->hgeie & env->hgeip)));
-> +        }
->       } else {
->           g_assert_not_reached();
->       }
-> diff --git a/target/riscv/time_helper.c b/target/riscv/time_helper.c
-> index 400e917354..ede1a4c2a3 100644
-> --- a/target/riscv/time_helper.c
-> +++ b/target/riscv/time_helper.c
-> @@ -21,19 +21,34 @@
->   #include "cpu_bits.h"
->   #include "time_helper.h"
->   #include "hw/intc/riscv_aclint.h"
-> +#include "kvm/kvm_riscv.h"
-> +#include "system/kvm.h"
-> +#include "system/tcg.h"
-> +
-> +static void riscv_accel_set_irq(RISCVCPU *cpu, int irq, int level)
-
-Revisiting this change, riscv_accel_set_irq() is confusing.
-
-> +{
-> +    if (kvm_enabled()) {
-> +        kvm_riscv_set_irq(cpu, irq, level);
-
-kvm_riscv_set_irq() expects IRQ number and level,
-
-> +    }
-> +
-> +    if (tcg_enabled()) {
-> +        riscv_cpu_update_mip(&cpu->env, irq, level);
-
-riscv_cpu_update_mip() expects a MIP bitmask and a value.
-
-> +    }
-> +}
-> +
->   
->   static void riscv_vstimer_cb(void *opaque)
+> diff --git a/hw/char/dw8250.c b/hw/char/dw8250.c
+> index ccf05dd9ad..50baeae62c 100644
+> --- a/hw/char/dw8250.c
+> +++ b/hw/char/dw8250.c
+> @@ -72,23 +72,22 @@ static void dw8250_instance_init(Object *obj)
 >   {
->       RISCVCPU *cpu = opaque;
->       CPURISCVState *env = &cpu->env;
->       env->vstime_irq = 1;
-> -    riscv_cpu_update_mip(env, 0, BOOL_TO_MASK(1));
-> +    riscv_accel_set_irq(cpu, 0, BOOL_TO_MASK(1));
-
-In particular I don't follow what irq=0 is here, IRQ or mask?
-
+>       DW8250State *s = DW8250(obj);
+>   
+> -    s->serial_mm = qdev_new("serial-mm");
+> -    object_property_add_child(obj, "serial-mm", OBJECT(s->serial_mm));
+> -    object_property_add_alias(obj, "chardev", OBJECT(s->serial_mm), "chardev");
+> +    object_initialize_child(obj, "serial-mm", &s->serial_mm, TYPE_SERIAL_MM);
+> +    object_property_add_alias(obj, "chardev", OBJECT(&s->serial_mm), "chardev");
 >   }
 >   
->   static void riscv_stimer_cb(void *opaque)
+>   static void dw8250_realize(DeviceState *dev, Error **errp)
 >   {
->       RISCVCPU *cpu = opaque;
-> -    riscv_cpu_update_mip(&cpu->env, MIP_STIP, BOOL_TO_MASK(1));
-> +    riscv_accel_set_irq(cpu, MIP_STIP, BOOL_TO_MASK(1));
->   }
+>       DW8250State *s = DW8250(dev);
+>       SysBusDevice *sbd = SYS_BUS_DEVICE(dev);
+> -    SysBusDevice *serial_sbd = SYS_BUS_DEVICE(s->serial_mm);
+> +    SysBusDevice *serial_sbd = SYS_BUS_DEVICE(&s->serial_mm);
 >   
->   /*
-> @@ -48,6 +63,7 @@ void riscv_timer_write_timecmp(CPURISCVState *env, QEMUTimer *timer,
->       RISCVAclintMTimerState *mtimer = env->rdtime_fn_arg;
->       uint32_t timebase_freq;
->       uint64_t rtc_r;
-> +    RISCVCPU *cpu;
+>       memory_region_init(&s->container, OBJECT(dev), "dw8250-container",
+>                          DW_UART_REGION_SIZE);
+>       sysbus_init_mmio(sbd, &s->container);
 >   
->       if (!riscv_cpu_cfg(env)->ext_sstc || !env->rdtime_fn ||
->           !env->rdtime_fn_arg || !get_field(env->menvcfg, MENVCFG_STCE)) {
-> @@ -63,6 +79,7 @@ void riscv_timer_write_timecmp(CPURISCVState *env, QEMUTimer *timer,
->   
->       timebase_freq = mtimer->timebase_freq;
->       rtc_r = env->rdtime_fn(env->rdtime_fn_arg) + delta;
-> +    cpu = env_archcpu(env);
->   
->       if (timecmp <= rtc_r) {
->           /*
-> @@ -71,9 +88,9 @@ void riscv_timer_write_timecmp(CPURISCVState *env, QEMUTimer *timer,
->            */
->           if (timer_irq == MIP_VSTIP) {
->               env->vstime_irq = 1;
-> -            riscv_cpu_update_mip(env, 0, BOOL_TO_MASK(1));
-> +            riscv_accel_set_irq(cpu, 0, BOOL_TO_MASK(1));
->           } else {
-> -            riscv_cpu_update_mip(env, MIP_STIP, BOOL_TO_MASK(1));
-> +            riscv_accel_set_irq(cpu, MIP_STIP, BOOL_TO_MASK(1));
->           }
+> -    qdev_prop_set_uint8(s->serial_mm, "regshift", s->regshift);
+> -    qdev_prop_set_uint8(s->serial_mm, "endianness", DEVICE_LITTLE_ENDIAN);
+> +    qdev_prop_set_uint8(DEVICE(&s->serial_mm), "regshift", s->regshift);
+> +    qdev_prop_set_uint8(DEVICE(&s->serial_mm), "endianness", DEVICE_LITTLE_ENDIAN);
+>       if (!sysbus_realize(serial_sbd, errp)) {
 >           return;
 >       }
-> @@ -81,9 +98,9 @@ void riscv_timer_write_timecmp(CPURISCVState *env, QEMUTimer *timer,
->       /* Clear the [VS|S]TIP bit in mip */
->       if (timer_irq == MIP_VSTIP) {
->           env->vstime_irq = 0;
-> -        riscv_cpu_update_mip(env, 0, BOOL_TO_MASK(0));
-> +        riscv_accel_set_irq(cpu, 0, BOOL_TO_MASK(0));
->       } else {
-> -        riscv_cpu_update_mip(env, timer_irq, BOOL_TO_MASK(0));
-> +        riscv_accel_set_irq(cpu, timer_irq, BOOL_TO_MASK(0));
->       }
+> diff --git a/include/hw/char/dw8250.h b/include/hw/char/dw8250.h
+> index 59396ad202..ce0b97715b 100644
+> --- a/include/hw/char/dw8250.h
+> +++ b/include/hw/char/dw8250.h
+> @@ -10,6 +10,7 @@
 >   
->       /*
-> @@ -151,7 +168,7 @@ static void riscv_timer_disable_timecmp(CPURISCVState *env, QEMUTimer *timer,
->   {
->       /* Disable S-mode Timer IRQ and HW-based STIP */
->       if ((timer_irq == MIP_STIP) && !get_field(env->menvcfg, MENVCFG_STCE)) {
-> -        riscv_cpu_update_mip(env, timer_irq, BOOL_TO_MASK(0));
-> +        riscv_accel_set_irq(env_archcpu(env), timer_irq, BOOL_TO_MASK(0));
->           timer_del(timer);
->           return;
->       }
-> @@ -161,7 +178,7 @@ static void riscv_timer_disable_timecmp(CPURISCVState *env, QEMUTimer *timer,
->           (!get_field(env->menvcfg, MENVCFG_STCE) ||
->            !get_field(env->henvcfg, HENVCFG_STCE))) {
->           env->vstime_irq = 0;
-> -        riscv_cpu_update_mip(env, 0, BOOL_TO_MASK(0));
-> +        riscv_accel_set_irq(env_archcpu(env), 0, BOOL_TO_MASK(0));
->           timer_del(timer);
->           return;
->       }
+>   #include "hw/core/sysbus.h"
+>   #include "qom/object.h"
+> +#include "hw/char/serial-mm.h"
+>   
+>   #define TYPE_DW8250 "dw8250"
+>   OBJECT_DECLARE_SIMPLE_TYPE(DW8250State, DW8250)
+> @@ -19,7 +20,7 @@ struct DW8250State {
+>   
+>       MemoryRegion container;
+>       MemoryRegion ext_iomem;
+> -    DeviceState *serial_mm;
+> +    SerialMM serial_mm;
+>   
+>       uint8_t regshift;
+>   };
 
 
