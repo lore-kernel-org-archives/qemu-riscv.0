@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C97AECA5FC1
-	for <qemu-riscv@archiver.kernel.org>; Wed, 30 Sep 2026 08:46:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B980CA5FB1
+	for <qemu-riscv@archiver.kernel.org>; Wed, 30 Sep 2026 08:46:59 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xBpx6-0005tw-SJ; Wed, 30 Sep 2026 04:46:13 -0400
+	id 1xBpx6-0005r1-0X; Wed, 30 Sep 2026 04:46:12 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
- id 1xBpwg-0005Rd-5z; Wed, 30 Sep 2026 04:45:46 -0400
+ id 1xBpwt-0005YW-5K; Wed, 30 Sep 2026 04:46:00 -0400
 Received: from mgamail.intel.com ([192.198.163.10])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
- id 1xBpwe-00025m-LF; Wed, 30 Sep 2026 04:45:45 -0400
+ id 1xBpwr-0002Ai-Me; Wed, 30 Sep 2026 04:45:58 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1790757945; x=1822293945;
+ t=1790757958; x=1822293958;
  h=date:from:to:cc:subject:message-id:references:
  mime-version:content-transfer-encoding:in-reply-to;
- bh=L1phOJm8VSMhu7OdDyZKMcBFFvXYaaBNhHxWoBt7nJI=;
- b=mwBoQ0lqgc+SAb8xfT6K+X5C4EiQwHtk4QldSCM5636DLQsIEi137jtd
- RoQM48IPAc82gw44VLYjiB899WLvES9jDJWB5A+m/9/O63NauC4PnkPQn
- JJvYoPHownbzGeAduzq0MDM4/m04scvairXDvKAIAFmD1SAeewCf9a2v6
- WAjU2jrKYpkLBeo/8ufTvY2NsQ7XfmjoSoRs06tC0waceVw1sPqs1eowK
- Hi3TLxZrbFl/079ccYlfIYBadLCnQjTAwRqi/qEd/QjziaVfJzSwNT2GE
- C00M9ePxJc/TcUB9at8mtTfxX7vmOHb0PG42zOwtNN4skn1nhzoTJLarU A==;
-X-CSE-ConnectionGUID: WX4DvYMNRMGE5ouoNC+Mog==
-X-CSE-MsgGUID: CC4jvx9cSAemMxk2ZzPRgw==
-X-IronPort-AV: E=McAfee;i="6800,10657,11920"; a="102862623"
-X-IronPort-AV: E=Sophos;i="6.27,132,1787036400"; d="scan'208";a="102862623"
+ bh=0QdU4iZi1j7TNJ3E/njqzQJuxxNfpGAQk4q9Qj3biCM=;
+ b=BBKe3fRh85WLPV//vdZn1Fgjtu6MC655DiFCZjB33iaG/We307NsPW7Q
+ uQ09unEkL1SlYkA0z7XgCgu/fk/9LnIr6FRLHTAnd/bpe5Bsw8W6boUwB
+ KhhMbExuQDDGRYbXMeuMPnloirDuRrbLMPmhxYmUESYRab5/7oqJFVmC7
+ C+cTECSibtTBX4BVzzcreXSZ+rBScBS61MHWSgsQ+8rQqHDB0i9jB0TN2
+ VIJkY5NHu7XB5ldSsz9Z9wuFJkA0zKnXziiFhd397WydYgRws1k4JKdRt
+ 4b+7VXGAASClujzL5wv8wb23zow3wzUQn9RxS08huk9UzwsHruGlaKEyE w==;
+X-CSE-ConnectionGUID: NBmupsLmRSynbHBQ7Xj9Tg==
+X-CSE-MsgGUID: kICj8QPNQquLXM7NBD/o2g==
+X-IronPort-AV: E=McAfee;i="6800,10657,11920"; a="102862656"
+X-IronPort-AV: E=Sophos;i="6.27,132,1787036400"; d="scan'208";a="102862656"
 Received: from fmviesa001.fm.intel.com ([10.60.135.141])
  by fmvoesa104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 30 Sep 2026 01:45:42 -0700
-X-CSE-ConnectionGUID: eoCcQ4M+RTmZzKJ3CatAuQ==
-X-CSE-MsgGUID: Hom7PTedTYmL1CE2VtlIug==
+ 30 Sep 2026 01:45:55 -0700
+X-CSE-ConnectionGUID: BaVziWSeS2qhgUZVWktvAQ==
+X-CSE-MsgGUID: 4aDxNCSbTByTTVotgSxkUw==
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.27,132,1787036400"; d="scan'208";a="303563209"
+X-IronPort-AV: E=Sophos;i="6.27,132,1787036400"; d="scan'208";a="303563251"
 Received: from zhaoliu1-desk.sh.intel.com (HELO localhost) ([10.112.226.173])
- by fmviesa001.fm.intel.com with ESMTP; 30 Sep 2026 01:45:37 -0700
-Date: Wed, 30 Sep 2026 16:45:35 +0800
+ by fmviesa001.fm.intel.com with ESMTP; 30 Sep 2026 01:45:50 -0700
+Date: Wed, 30 Sep 2026 16:45:49 +0800
 From: Zhao Liu <zhao1.liu@intel.com>
 To: Yonggang Luo <luoyonggang@gmail.com>
 Cc: qemu-devel@nongnu.org, Chao Liu <chao.liu@processmission.com>,
@@ -64,15 +64,15 @@ Cc: qemu-devel@nongnu.org, Chao Liu <chao.liu@processmission.com>,
  Philippe Mathieu-Daude <philmd@mailo.com>,
  Palmer Dabbelt <palmer@dabbelt.com>,
  Laurent Vivier <laurent@vivier.eu>, Weiwei Li <liwei1518@gmail.com>
-Subject: Re: [PATCH v3 06/10] hw/loongarch/virt: use unique QOM name
-Message-ID: <arzML/MIBf3NuDdV@intel.com>
+Subject: Re: [PATCH v3 07/10] hw/m68k/virt: use unique QOM name
+Message-ID: <arzMPcfjVDjaCFfA@intel.com>
 References: <20260926081551.29-1-luoyonggang@gmail.com>
- <20260926081551.29-7-luoyonggang@gmail.com>
+ <20260926081551.29-8-luoyonggang@gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20260926081551.29-7-luoyonggang@gmail.com>
+In-Reply-To: <20260926081551.29-8-luoyonggang@gmail.com>
 Received-SPF: pass client-ip=192.198.163.10; envelope-from=zhao1.liu@intel.com;
  helo=mgamail.intel.com
 X-Spam_score_int: -46
@@ -97,23 +97,22 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Sat, Sep 26, 2026 at 04:15:46PM +0800, Yonggang Luo wrote:
-> Date: Sat, 26 Sep 2026 16:15:46 +0800
+On Sat, Sep 26, 2026 at 04:15:47PM +0800, Yonggang Luo wrote:
+> Date: Sat, 26 Sep 2026 16:15:47 +0800
 > From: Yonggang Luo <luoyonggang@gmail.com>
-> Subject: [PATCH v3 06/10] hw/loongarch/virt: use unique QOM name
+> Subject: [PATCH v3 07/10] hw/m68k/virt: use unique QOM name
 > X-Mailer: git-send-email 2.52.0.windows.1
 > 
-> Set TYPE_LOONGARCH_VIRT_MACHINE to MACHINE_TYPE_NAME("loongarch-virt")
-> so LoongArch virt no longer collides with other virt-machine types in
-> one process. Keep the -M / help / migration name as virt-* via
+> Set the parent and versioned QOM types to m68k-virt so M68K virt no
+> longer collides with other virt-machine types in one process. Keep
+> the -M / help / migration name as virt-* via
 > machine_class_set_name().
 > 
 > Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
 > Reviewed-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 > ---
->  hw/loongarch/virt.c         | 3 ++-
->  include/hw/loongarch/virt.h | 2 +-
->  2 files changed, 3 insertions(+), 2 deletions(-)
+>  hw/m68k/virt.c | 7 ++++---
+>  1 file changed, 4 insertions(+), 3 deletions(-)
 
 Reviewed-by: Zhao Liu <zhao1.liu@intel.com>
 
