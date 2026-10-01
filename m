@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A34A9CA5FD4
-	for <qemu-riscv@archiver.kernel.org>; Thu,  1 Oct 2026 15:55:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CE08CA5FD2
+	for <qemu-riscv@archiver.kernel.org>; Thu,  1 Oct 2026 15:55:17 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xCJ7a-0004sw-0l; Thu, 01 Oct 2026 11:54:58 -0400
+	id 1xCJ7j-0004uB-Oh; Thu, 01 Oct 2026 11:55:10 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <anjo@rev.ng>)
- id 1xCJ6w-0004ih-HP; Thu, 01 Oct 2026 11:54:19 -0400
+ id 1xCJ6w-0004ig-Gf; Thu, 01 Oct 2026 11:54:19 -0400
 Received: from rev.ng ([94.130.142.21])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <anjo@rev.ng>)
- id 1xCJ6u-0005Z9-K7; Thu, 01 Oct 2026 11:54:18 -0400
+ id 1xCJ6t-0005YR-9U; Thu, 01 Oct 2026 11:54:18 -0400
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=rev.ng;
  s=dkim; h=Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:
  Content-Type:MIME-Version:Subject:Date:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive:List-Unsubscribe:List-Unsubscribe-Post:
- List-Help; bh=NUHHc5ZomslGBV5I5MZMn1xgMJmKcqAgUIGY3h0FmEk=; b=aTzE2RJoLxKT8bo
- fRRQcUwUinEqJLcekFXHI8kDVEWawtENtX5povlKlyiHy0kbHjp2mCNENpul0L9zlOUXebLCDpwHl
- tkNhB+f2dLVpLJjISgJL9LH4OisodbA1MRHEZBmwqLfPZ1M3YkFpsA4SGgIgt4jws40ZoY83J2os+
- lg=;
-Date: Thu, 01 Oct 2026 17:59:30 +0200
-Subject: [PATCH 07/18] target/riscv: Runtime register MAX and BARE CPUs
+ List-Help; bh=hGWoViV00Bm57TuGPpRExzfwcZ6Z9V+t0pKW6gnwClE=; b=v8c4ox0nFFDzV6H
+ 562Jg7z/FTutIJ/ywUlTNdkBfifbrYXEq4tKZu+xxIjRVTl56HvM/qlkpbB+gsS/VaFVIPrMHlNUG
+ 7hYQPZzrVA5vGv/Y0CkQLm4qsg/WdD37QZnrjssgcQ3veHrXa/+eohbhEQsDRpDPaE+HCJv0e+IyE
+ DE=;
+Date: Thu, 01 Oct 2026 17:59:24 +0200
+Subject: [PATCH 01/18] target/riscv: Make internals.h target agnostic
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261001-rv-dedup-v1-7-ea69b07afd31@rev.ng>
+Message-Id: <20261001-rv-dedup-v1-1-ea69b07afd31@rev.ng>
 References: <20261001-rv-dedup-v1-0-ea69b07afd31@rev.ng>
 In-Reply-To: <20261001-rv-dedup-v1-0-ea69b07afd31@rev.ng>
 To: qemu-devel@nongnu.org
@@ -41,11 +41,11 @@ Cc: Anton Johansson <anjo@rev.ng>, qemu-riscv@nongnu.org,
  daniel.barboza@oss.qualcomm.com, philmd@oss.qualcomm.com, 
  pierrick.bouvier@oss.qualcomm.com, palmer@dabbelt.com, 
  alistair.francis@wdc.com
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1790870392; l=5745;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1790870392; l=9194;
  i=anjo@rev.ng; s=20260210; h=from:subject:message-id;
- bh=YEQdylvAOODD493ZI2iW6OK+1PHKMr6Acd6Ak0yuQNk=;
- b=mHL9kglJB1GtgfSnNt3jrS/fnkaLBDMpmcrsT3wc1DO9nJHhnnAWslSaoNHrmjKjbdvPUUUqe
- LkmZzwK1X/EDyRbflLZbv/so96aUmnjxQ7tmM+8sC4TKBHH4Sn5PW50
+ bh=d2hModeAxZYOsNSkYJeEBbXcuaoOWKyVzMpwpV6lD1Q=;
+ b=ccD3U14SD2dVd+ElCY+pXoeNXpa6CRAUfbDWbQvpQ3UHbaO5FNLS9Qp1ZcLTQchigxOJhFA6+
+ gMb3y/SagGrA0181Vd79u/Wb9OmHbjYpLW8e2JMiwiOItQLC5qx0TyT
 X-Developer-Key: i=anjo@rev.ng; a=ed25519;
  pk=dKsZvj/g3kgDxnV1/SWg8a0YNGSpWtFGNsWIepQYKow=
 Received-SPF: pass client-ip=94.130.142.21; envelope-from=anjo@rev.ng;
@@ -73,159 +73,264 @@ From:  Anton Johansson via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Moves initialization of satp and mxl fields to a class initialization
-function that checks target_riscv64().
+Replaces uses of target_ulong with fixed-size integers, this is a
+prerequisite step to compiling cpu.c once for system-mode.
 
-Note: I'm aware the current iteration of this patch is rather hacky, I
-don't like the introduction of runtime_misa_mxl_max, but I'm keeping
-this in to get the series out there and collect feedback.
+Note: the widening of target_long to int64_t in adjust_addr_body() is
+safe as rv32 is ruled out earlier in the function via the check
+
+  /* do nothing for rv32 mode */
+  if (riscv_cpu_mxl(env) == MXL_RV32) {
+      return addr;
+  }
+
+meaning target_long must be equal to int64_t anyway.
+
+Duplicate includes between vector_helper.c and vector_internals.h are
+removed.
 
 Signed-off-by: Anton Johansson <anjo@rev.ng>
 ---
- target/riscv/cpu.h |  1 +
- target/riscv/cpu.c | 90 +++++++++++++++++++++++++++++++++++-------------------
- 2 files changed, 59 insertions(+), 32 deletions(-)
+ target/riscv/internals.h            | 31 +++++++++---------
+ target/riscv/tcg/vector_internals.h |  5 +--
+ target/riscv/tcg/vector_helper.c    | 64 +++++++++++++++++--------------------
+ 3 files changed, 47 insertions(+), 53 deletions(-)
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 3fa322a8a9..0b17fd3db1 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -590,6 +590,7 @@ typedef struct RISCVCPUDef {
-     bool bare;
- #if !defined(CONFIG_USER_ONLY)
- #if defined(CONFIG_TCG)
-+    bool runtime_misa_mxl_max; /* Skip max mxl base class validation */
-     const RISCVCSR *custom_csrs;
- #endif
-     uint8_t irq_local_guest_max;
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index cfc80aaaf1..39501c6c9f 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -3062,6 +3062,27 @@ static void riscv_cpu_common_class_init(ObjectClass *c, const void *data)
-     device_class_set_props(dc, riscv_cpu_properties);
+diff --git a/target/riscv/internals.h b/target/riscv/internals.h
+index 1ee7e99e98..c963fae321 100644
+--- a/target/riscv/internals.h
++++ b/target/riscv/internals.h
+@@ -20,7 +20,6 @@
+ #define RISCV_CPU_INTERNALS_H
+ 
+ #include "exec/cpu-common.h"
+-#include "exec/target_long.h"
+ #include "hw/core/registerfields.h"
+ #include "fpu/softfloat-types.h"
+ #include "target/riscv/cpu_bits.h"
+@@ -98,10 +97,10 @@ FIELD(VDATA, NF, 7, 4)
+ FIELD(VDATA, WD, 7, 1)
+ 
+ /* float point classify helpers */
+-target_ulong fclass_h_bf16(uint64_t frs1);
+-target_ulong fclass_h(uint64_t frs1);
+-target_ulong fclass_s(uint64_t frs1);
+-target_ulong fclass_d(uint64_t frs1);
++uint16_t fclass_h_bf16(bfloat16 frs1);
++uint16_t fclass_h(float16 frs1);
++uint16_t fclass_s(float32 frs1);
++uint16_t fclass_d(float64 frs1);
+ 
+ #ifndef CONFIG_USER_ONLY
+ extern const VMStateDescription vmstate_riscv_cpu;
+@@ -185,7 +184,7 @@ static inline float16 check_nanbox_bf16(CPURISCVState *env, uint64_t f)
+     }
  }
  
-+static void riscv_cpu_max_class_init(ObjectClass *c, const void *data)
-+{
-+    RISCVCPUClass *mcc = RISCV_CPU_CLASS(c);
-+    bool rv64 = target_riscv64();
-+    mcc->def->misa_mxl_max = (rv64) ? MXL_RV64 : MXL_RV32;
-+    mcc->def->cfg.max_satp_mode = (rv64) ? VM_1_10_SV57 : VM_1_10_SV32;
-+    riscv_cpu_validate_misa_mxl(mcc);
-+}
-+
-+static void riscv_cpu_bare_class_init(ObjectClass *c, const void *data)
-+{
-+    RISCVCPUClass *mcc = RISCV_CPU_CLASS(c);
-+    bool rv64 = target_riscv64();
-+    /*
-+     * Support all available satp_mode settings. By default
-+     * only MBARE will be available if the user doesn't enable
-+     * a mode manually (see riscv_cpu_satp_mode_finalize()).
-+     */
-+    mcc->def->cfg.max_satp_mode = (rv64) ? VM_1_10_SV57 : VM_1_10_SV32;
-+}
-+
- static bool profile_extends(RISCVCPUProfile *trial, RISCVCPUProfile *parent)
+-static inline target_ulong get_xepc_mask(CPURISCVState *env)
++static inline uint64_t get_xepc_mask(CPURISCVState *env)
  {
-     RISCVCPUProfile *curr;
-@@ -3113,6 +3134,9 @@ static void riscv_cpu_class_base_init(ObjectClass *c, const void *data)
-     if (data) {
-         const RISCVCPUDef *def = data;
-         mcc->def->bare |= def->bare;
-+#if defined(CONFIG_TCG) && !defined(CONFIG_USER_ONLY)
-+        mcc->def->runtime_misa_mxl_max |= def->runtime_misa_mxl_max;
-+#endif
-         if (def->profile) {
-             assert(profile_extends(def->profile, mcc->def->profile));
-             assert(mcc->def->bare);
-@@ -3157,9 +3181,11 @@ static void riscv_cpu_class_base_init(ObjectClass *c, const void *data)
- #endif
-     }
+     RISCVCPU *cpu = env_archcpu(env);
  
--    if (!object_class_is_abstract(c)) {
-+#if defined(CONFIG_TCG) && !defined(CONFIG_USER_ONLY)
-+    if (!object_class_is_abstract(c) && !mcc->def->runtime_misa_mxl_max) {
-         riscv_cpu_validate_misa_mxl(mcc);
+@@ -196,9 +195,9 @@ static inline target_ulong get_xepc_mask(CPURISCVState *env)
+     if (riscv_has_ext(env, RVC) || cpu->cfg.ext_zca ||
+         cpu->cfg.ext_zcb || cpu->cfg.ext_zcd || cpu->cfg.ext_zce ||
+         cpu->cfg.ext_zcf || cpu->cfg.ext_zcmp || cpu->cfg.ext_zcmt) {
+-        return ~(target_ulong)1;
++        return ~1ull;
+     } else {
+-        return ~(target_ulong)3;
++        return ~3ull;
      }
-+#endif
  }
  
- static void riscv_isa_string_ext(RISCVCPU *cpu, char **isa_str,
-@@ -3365,41 +3391,41 @@ static const TypeInfo riscv_cpu_type_infos[] = {
-     ),
- 
-     DEFINE_ABSTRACT_RISCV_CPU(TYPE_RISCV_VENDOR_CPU, TYPE_RISCV_CPU),
--    DEFINE_ABSTRACT_RISCV_CPU(TYPE_RISCV_BARE_CPU, TYPE_RISCV_CPU,
--        /*
--         * Bare CPUs do not inherit the timer and performance
--         * counters from the parent class (see riscv_cpu_init()
--         * for info on why the parent enables them).
--         *
--         * Users have to explicitly enable these counters for
--         * bare CPUs.
--         */
--        .bare = true,
- 
--        /* Set to QEMU's first supported priv version */
--        .priv_spec = PRIV_VERSION_1_10_0,
-+    {
-+        .name = TYPE_RISCV_BARE_CPU,
-+        .parent = TYPE_RISCV_CPU,
-+        .abstract = true,
-+        .class_data = &(const RISCVCPUDef) {
-+            /* Set to QEMU's first supported priv version */
-+            .priv_spec = PRIV_VERSION_1_10_0,
-+            .vext_spec = RISCV_PROFILE_ATTR_UNUSED,
- 
--        /*
--         * Support all available satp_mode settings. By default
--         * only MBARE will be available if the user doesn't enable
--         * a mode manually (see riscv_cpu_satp_mode_finalize()).
--         */
--#ifdef TARGET_RISCV32
--        .cfg.max_satp_mode = VM_1_10_SV32,
--#else
--        .cfg.max_satp_mode = VM_1_10_SV57,
--#endif
--    ),
-+            /*
-+             * Bare CPUs do not inherit the timer and performance
-+             * counters from the parent class (see riscv_cpu_init()
-+             * for info on why the parent enables them).
-+             *
-+             * Users have to explicitly enable these counters for
-+             * bare CPUs.
-+             */
-+            .bare = true,
-+        },
-+        .class_init = riscv_cpu_bare_class_init,
-+    },
- 
--    DEFINE_RISCV_CPU(TYPE_RISCV_CPU_MAX, TYPE_RISCV_DYNAMIC_CPU,
--#if defined(TARGET_RISCV32)
--        .misa_mxl_max = MXL_RV32,
--        .cfg.max_satp_mode = VM_1_10_SV32,
--#elif defined(TARGET_RISCV64)
--        .misa_mxl_max = MXL_RV64,
--        .cfg.max_satp_mode = VM_1_10_SV57,
-+    {
-+        .name = TYPE_RISCV_CPU_MAX,
-+        .parent = TYPE_RISCV_DYNAMIC_CPU,
-+        .class_data = &(const RISCVCPUDef) {
-+            .priv_spec = RISCV_PROFILE_ATTR_UNUSED,
-+            .vext_spec = RISCV_PROFILE_ATTR_UNUSED,
-+#if defined(CONFIG_TCG) && !defined(CONFIG_USER_ONLY)
-+            .runtime_misa_mxl_max = true,
+@@ -208,9 +207,9 @@ bool riscv_cpu_has_work(CPUState *cs);
  #endif
--    ),
-+        },
-+        .class_init = riscv_cpu_max_class_init,
-+    },
  
-     DEFINE_ABSTRACT_RISCV_CPU(TYPE_RISCV_CPU_SIFIVE_E, TYPE_RISCV_VENDOR_CPU,
-         .misa_ext = RVI | RVM | RVA | RVC | RVU,
+ /* Zjpm addr masking routine */
+-static inline target_ulong adjust_addr_body(CPURISCVState *env,
+-                                            target_ulong addr,
+-                                            bool is_virt_addr)
++static inline uint64_t adjust_addr_body(CPURISCVState *env,
++                                        uint64_t addr,
++                                        bool is_virt_addr)
+ {
+     RISCVPmPmm pmm = PMM_FIELD_DISABLED;
+     uint32_t pmlen = 0;
+@@ -239,7 +238,7 @@ static inline target_ulong adjust_addr_body(CPURISCVState *env,
+ 
+     /* sign/zero extend masked address by N-1 bit */
+     if (signext) {
+-        addr = (target_long)addr >> pmlen;
++        addr = (int64_t)addr >> pmlen;
+     } else {
+         addr = addr >> pmlen;
+     }
+@@ -247,14 +246,14 @@ static inline target_ulong adjust_addr_body(CPURISCVState *env,
+     return addr;
+ }
+ 
+-static inline target_ulong adjust_addr(CPURISCVState *env,
+-                                       target_ulong addr)
++static inline uint64_t adjust_addr(CPURISCVState *env,
++                                   uint64_t addr)
+ {
+     return adjust_addr_body(env, addr, false);
+ }
+ 
+-static inline target_ulong adjust_addr_virt(CPURISCVState *env,
+-                                            target_ulong addr)
++static inline uint64_t adjust_addr_virt(CPURISCVState *env,
++                                        uint64_t addr)
+ {
+     return adjust_addr_body(env, addr, true);
+ }
+diff --git a/target/riscv/tcg/vector_internals.h b/target/riscv/tcg/vector_internals.h
+index 5681b81815..7e186add2d 100644
+--- a/target/riscv/tcg/vector_internals.h
++++ b/target/riscv/tcg/vector_internals.h
+@@ -20,10 +20,11 @@
+ #define TARGET_RISCV_VECTOR_INTERNALS_H
+ 
+ #include "qemu/bitops.h"
++#include "exec/target_long.h"
+ #include "hw/core/registerfields.h"
+-#include "cpu.h"
++#include "target/riscv/cpu.h"
++#include "target/riscv/internals.h"
+ #include "tcg/tcg-gvec-desc.h"
+-#include "internals.h"
+ 
+ #define VSTART_CHECK_EARLY_EXIT(env, vl) do { \
+     if (env->vstart >= vl) {                  \
+diff --git a/target/riscv/tcg/vector_helper.c b/target/riscv/tcg/vector_helper.c
+index 0d1e4e0964..b4a07dbe13 100644
+--- a/target/riscv/tcg/vector_helper.c
++++ b/target/riscv/tcg/vector_helper.c
+@@ -19,7 +19,7 @@
+ #include "qemu/osdep.h"
+ #include "qemu/host-utils.h"
+ #include "qemu/bitops.h"
+-#include "cpu.h"
++#include "target/riscv/tcg/vector_internals.h"
+ #include "exec/memop.h"
+ #include "accel/tcg/cpu-ldst.h"
+ #include "accel/tcg/probe.h"
+@@ -29,8 +29,6 @@
+ #include "exec/target_page.h"
+ #include "fpu/softfloat.h"
+ #include "tcg/tcg-gvec-desc.h"
+-#include "internals.h"
+-#include "vector_internals.h"
+ #include <math.h>
+ 
+ static target_ulong vtype_reserved(CPURISCVState *env, target_ulong vtype)
+@@ -4852,77 +4850,73 @@ GEN_VEXT_CMP_VF(vmfge_vf_w, uint32_t, H4, vmfge32)
+ GEN_VEXT_CMP_VF(vmfge_vf_d, uint64_t, H8, vmfge64)
+ 
+ /* Vector Floating-Point Classify Instruction */
+-target_ulong fclass_h_bf16(uint64_t frs1)
++uint16_t fclass_h_bf16(bfloat16 frs1)
+ {
+-    bfloat16 f = frs1;
+-    bool sign = bfloat16_is_neg(f);
++    bool sign = bfloat16_is_neg(frs1);
+ 
+-    if (bfloat16_is_infinity(f)) {
++    if (bfloat16_is_infinity(frs1)) {
+         return sign ? 1 << 0 : 1 << 7;
+-    } else if (bfloat16_is_zero(f)) {
++    } else if (bfloat16_is_zero(frs1)) {
+         return sign ? 1 << 3 : 1 << 4;
+-    } else if (bfloat16_is_zero_or_denormal(f)) {
++    } else if (bfloat16_is_zero_or_denormal(frs1)) {
+         return sign ? 1 << 2 : 1 << 5;
+-    } else if (bfloat16_is_any_nan(f)) {
++    } else if (bfloat16_is_any_nan(frs1)) {
+         float_status s = { }; /* for snan_bit_is_one */
+-        return bfloat16_is_quiet_nan(f, &s) ? 1 << 9 : 1 << 8;
++        return bfloat16_is_quiet_nan(frs1, &s) ? 1 << 9 : 1 << 8;
+     } else {
+         return sign ? 1 << 1 : 1 << 6;
+     }
+ }
+ 
+-target_ulong fclass_h(uint64_t frs1)
++uint16_t fclass_h(float16 frs1)
+ {
+-    float16 f = frs1;
+-    bool sign = float16_is_neg(f);
++    bool sign = float16_is_neg(frs1);
+ 
+-    if (float16_is_infinity(f)) {
++    if (float16_is_infinity(frs1)) {
+         return sign ? 1 << 0 : 1 << 7;
+-    } else if (float16_is_zero(f)) {
++    } else if (float16_is_zero(frs1)) {
+         return sign ? 1 << 3 : 1 << 4;
+-    } else if (float16_is_zero_or_denormal(f)) {
++    } else if (float16_is_zero_or_denormal(frs1)) {
+         return sign ? 1 << 2 : 1 << 5;
+-    } else if (float16_is_any_nan(f)) {
++    } else if (float16_is_any_nan(frs1)) {
+         float_status s = { }; /* for snan_bit_is_one */
+-        return float16_is_quiet_nan(f, &s) ? 1 << 9 : 1 << 8;
++        return float16_is_quiet_nan(frs1, &s) ? 1 << 9 : 1 << 8;
+     } else {
+         return sign ? 1 << 1 : 1 << 6;
+     }
+ }
+ 
+-target_ulong fclass_s(uint64_t frs1)
++uint16_t fclass_s(float32 frs1)
+ {
+-    float32 f = frs1;
+-    bool sign = float32_is_neg(f);
++    bool sign = float32_is_neg(frs1);
+ 
+-    if (float32_is_infinity(f)) {
++    if (float32_is_infinity(frs1)) {
+         return sign ? 1 << 0 : 1 << 7;
+-    } else if (float32_is_zero(f)) {
++    } else if (float32_is_zero(frs1)) {
+         return sign ? 1 << 3 : 1 << 4;
+-    } else if (float32_is_zero_or_denormal(f)) {
++    } else if (float32_is_zero_or_denormal(frs1)) {
+         return sign ? 1 << 2 : 1 << 5;
+-    } else if (float32_is_any_nan(f)) {
++    } else if (float32_is_any_nan(frs1)) {
+         float_status s = { }; /* for snan_bit_is_one */
+-        return float32_is_quiet_nan(f, &s) ? 1 << 9 : 1 << 8;
++        return float32_is_quiet_nan(frs1, &s) ? 1 << 9 : 1 << 8;
+     } else {
+         return sign ? 1 << 1 : 1 << 6;
+     }
+ }
+ 
+-target_ulong fclass_d(uint64_t frs1)
++uint16_t fclass_d(float64 frs1)
+ {
+-    float64 f = frs1;
+-    bool sign = float64_is_neg(f);
++    bool sign = float64_is_neg(frs1);
+ 
+-    if (float64_is_infinity(f)) {
++    if (float64_is_infinity(frs1)) {
+         return sign ? 1 << 0 : 1 << 7;
+-    } else if (float64_is_zero(f)) {
++    } else if (float64_is_zero(frs1)) {
+         return sign ? 1 << 3 : 1 << 4;
+-    } else if (float64_is_zero_or_denormal(f)) {
++    } else if (float64_is_zero_or_denormal(frs1)) {
+         return sign ? 1 << 2 : 1 << 5;
+-    } else if (float64_is_any_nan(f)) {
++    } else if (float64_is_any_nan(frs1)) {
+         float_status s = { }; /* for snan_bit_is_one */
+-        return float64_is_quiet_nan(f, &s) ? 1 << 9 : 1 << 8;
++        return float64_is_quiet_nan(frs1, &s) ? 1 << 9 : 1 << 8;
+     } else {
+         return sign ? 1 << 1 : 1 << 6;
+     }
 
 -- 
 2.52.0
