@@ -4,101 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EE22CA5FC4
-	for <qemu-riscv@archiver.kernel.org>; Thu,  1 Oct 2026 03:18:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C360CA5FC4
+	for <qemu-riscv@archiver.kernel.org>; Thu,  1 Oct 2026 03:44:31 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xC7Is-0005pi-9z; Wed, 30 Sep 2026 23:17:50 -0400
+	id 1xC7iF-0001qF-3q; Wed, 30 Sep 2026 23:44:03 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <portias@tenstorrent.com>)
- id 1xC7Iq-0005n0-D0
- for qemu-riscv@nongnu.org; Wed, 30 Sep 2026 23:17:48 -0400
-Received: from mail-pj2-x2b.google.com ([2607:f8b0:4864:39::2b])
+ (Exim 4.90_1) (envelope-from <dingtaodtdt@gmail.com>)
+ id 1xC6S3-00063W-HB
+ for qemu-riscv@nongnu.org; Wed, 30 Sep 2026 22:23:15 -0400
+Received: from mail-pj2-x10.google.com ([2607:f8b0:4864:39::10])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <portias@tenstorrent.com>)
- id 1xC7Io-00078Q-If
- for qemu-riscv@nongnu.org; Wed, 30 Sep 2026 23:17:48 -0400
-Received: by mail-pj2-x2b.google.com with SMTP id
- 98e67ed59e1d1-3a49902b698so379405a91.1
- for <qemu-riscv@nongnu.org>; Wed, 30 Sep 2026 20:17:46 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dingtaodtdt@gmail.com>)
+ id 1xC6S0-0002Pz-S2
+ for qemu-riscv@nongnu.org; Wed, 30 Sep 2026 22:23:14 -0400
+Received: by mail-pj2-x10.google.com with SMTP id
+ d9443c01a7336-2d90ba1d807so47025295ad.3
+ for <qemu-riscv@nongnu.org>; Wed, 30 Sep 2026 19:23:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=tenstorrent.com; s=google; t=1790824665; x=1791429465; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1790821391; x=1791426191; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=4c5FfX5EP1m/8GM0Bx9eKe2xi/9IKqhmT/IEJvJNlUo=;
- b=E7c3FUFtjKGfgKyXu0adBkVYvR7f1L2xNwmLSUfP41MCa9DbMPXkzym0F0bfUr+H0j
- rMM8mD0GoyTBCLFV3OT5m0HQMM+sWu69yxy6eZVNM1nrzKGe21LINALS/SNyZnw/QFaZ
- X+O1MGpsqLJ0+ABf0yxSKa4HgmHVPtMs+bncYCF1RBTetlQJF1h93vHaLjdgCqiqRBuC
- dOHPZGBiDaGaO2mJrbaKVrRKXZMzOxM1Ln2yUbU6jX2wdZITMFsREsGMaGlqq/JM0PxI
- CuYvctM924suSg16dYQbPYUQriRwAfGMRJu2q0BnBBTyYIW76i8XiSATReWunfouJ8yR
- iHLA==
+ bh=BhUe709SE/yREJSv4luWIhgYYagp305FisiQ5h0HuUs=;
+ b=SmMQShdo9V23ihXKv08wvg8u6X7gY6UYaOUJUTYNZpfnffiNOb31gf44fpvO8tn7gW
+ K1xMid2Dc71tr0K3MIK9IhQAvK0cwkghgo0fSCgnNLYGd1Bdb1zwjGHgtxQaUcviKys3
+ 1bvu7wPjZtqGWtId2u8LChURxsPDRYhrdee6D/5YgXGBckatVZkw7w1tCAD48CxhOjPd
+ IniCuZ3txltWlGAb7uSRpAPj9YEtMVeC+qK8wdPgq1VsQkZxdPIs2lICVce6DrRiZHyN
+ 7jL8bPYzoUfqvkLdh2VO3f1pOl4dBrkMkSXAD0n9YI2iOA+EKGJY5dEH0NLAeYrR+24q
+ jKQQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790824665; x=1791429465;
+ d=1e100.net; s=20260707; t=1790821391; x=1791426191;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=4c5FfX5EP1m/8GM0Bx9eKe2xi/9IKqhmT/IEJvJNlUo=;
- b=rSkupZe4kDcr12VAV8I/Lo617irJt4PVCoKxXiZb6u0/ZRrHmRp6RQuFcPXJl1/VDg
- 9MHHUSe3FVQXDJqANB1kAZUPq5h1Z0vtSw2LYycdJ6GRVX0PTzZNw5dRw4Z1Xa1iTUC4
- a2+77pSM1ln7HnIXG/UdXsyjCBwZkWM6hrrwkTRtElgRw0Nqn2s14Zyez1cpO06xzItj
- kULJn1ImCSoqf2hbNwHDkgMAvtUmNizEKG9mJgUxZFoTyLxTAPTffHoOatZZNNeeerzp
- 0Aj9E03K6c0HthAY0zOR853xNYZjrBDmKw7+LcWgrz2F2m30AYiTznUtCz4FMK5/qkti
- 0d5g==
-X-Forwarded-Encrypted: i=1;
- AKwUvBxvxj4dLW1nyNPtVkzWhHgXtR/bDTICOBRHLWrirr+IEBCFaqY3kOMPrfIXpv744eps0ImYsPxy2sR7@nongnu.org
-X-Gm-Message-State: AFq9FYJUmVCaZcvhUnZ97sK3p9hIrBxqsSMK9nWhqSO7kN/oWhOda3rF
- K4aeshLiKORGwmX+msVVnlnpx14Kh1Zlsuvx7/X2h8UaoNASfZ5iG6DA+cZ1gH6EhNo=
-X-Gm-Gg: AYBFou0kOq/TAAEofQU2SXOGf0hKdUHXgqc2wAdjv8tJaj2D5Gv5eJzVUvQqLzUA6b3
- 1WC4qbBK/adpojSJIc0WzLYTPbOJfUoydVfS8lKE5O9oVpubryvMlMBRAiblPHvIuy+kupZQT3P
- yx36b0Qz4u9iOy29OaZOUb80FAbhLE5p0dtgnBYFRKs8wgnDE0TmH0VSoxpAbYaLOyPHJtgtnU+
- uC/XVLLJr9/MZPa0Gqe2eU5y/Dm5XqOxTvzP7Widw0eNSA62K8AC1V/TPRpffstsLBciAzJm/pB
- HcRuMY6gTvFEqHql9/D5IGAdXlHR0/Yk+rKvRZc2jtSR9FnRdtImdXsaFJ7Qgk9PJ7esY2Goln9
- gMasDl07Wu25VxQQF9zMxwlniPNK9J13UQz4Fvb8GdryxRV/hBET79Tz+ZfZt6fCn1WnXoFgovj
- qRfSZz9crb9u+23u3J7cNCGlHzOHXdkL8FMa/3l9vGVVbsedXL2iY/Pn7dTZrQtOoeibVCckYgq
- RuuQxnIIqxI+p++NwGin5YwE8h3TMsfx1DM5ye87CZCfYm2H0EupyVk4w==
-X-Received: by 2002:a17:90b:5890:b0:39e:2f57:67c0 with SMTP id
- 98e67ed59e1d1-3a4d05a57famr4289384a91.0.1790824665267; 
- Wed, 30 Sep 2026 20:17:45 -0700 (PDT)
-Received: from lima-default.tail89d63.ts.net ([159.196.41.205])
+ bh=BhUe709SE/yREJSv4luWIhgYYagp305FisiQ5h0HuUs=;
+ b=IiSsStqIlDMT6vXjHzXdyhEvL5XG7AwfZN6+Cm5QGQU0m1KO6/RLOkFROOYCX+CaIB
+ UgLM1BAhd0BLIOm5egmz5qnGLSPhnrckW172vRu9Vl7zbyui6ipW5PUPogpQSNe8SvsS
+ YfvpOscYGvwcu2C1jcPcKmW0ZlehWBBv4GXFgzL+0zCckG3vxYIMl5wbgOkWT5w/pZDH
+ BXnCDdOBSVOTIDwqNQe9LB3QEjSymdCfFqbBeq6Z7PvVvhw07FLBPVxa3Z6PBHI6A495
+ ZdRZl6GbPUXhlYSlh+CdIr/JrHd/kLjrvNK67NRRoy/q1meg1IlH8k0OvNqEvHZfG1Zg
+ bH9A==
+X-Gm-Message-State: AFq9FYKdoD0PbiZkP1+/z5MMIG+2K19vh7ZouuzbbvNWdb7S/TS7NyJq
+ ZHX7zDB5CEpW43k11Ppw1NHAhUGZwx7Eqqqv9wG9z9x4dDlxs129vB9m
+X-Gm-Gg: AYBFou1H/wtnrTshA7cRcb0Lohf8EnBueTvs5FCDRHvSQfOQ2zHCNIFt+OHQNQhkRC6
+ aN1ARTTrS14ovQLlUN8feSsnOsd4DeFWNxKnO8pvcIOkCIL6kFcnz7EHnK8NWrmTQGKIwFGD5/i
+ a0zCedg31CD0xEE8q+hMM6pMStopzALxgZ8f+wxPBsDREcvN6ZmKor9Bdv12dCbtUbHR5ydZD0x
+ 2R/4LqQpBOfS9GwB1UlrsodIUhVkz+ngbZvcdQW0MVCx/QdLMUOYRXTPeI7N4xY9+lb3bduuPwU
+ TZZGrrK+atyHDwoTHRSt/PXsSYNIHmSJv8ZCl3MtWlMBX+PUS2EFAiV9A85LViiCmfNs7knxt4V
+ BihWsl6V7PyHWNZNhq/4F3vPQDAMKltMJ9sY99tM1v32Ouqx3on1l1mBQ6U7qi2nUsiUUHW4HH4
+ ZqDlpoeAXUxRRBIlVPyD0IPA06DrkDFpd/hXzWFIZuhhNTcwJqRtRECzCPrBax2ibthHzp8KKll
+ E3D2s95g8mTPEpy3Qm/iQgLRKA=
+X-Received: by 2002:a17:903:2283:b0:2dd:c100:a5de with SMTP id
+ d9443c01a7336-2e2e4b9ea03mr26256215ad.50.1790821390656; 
+ Wed, 30 Sep 2026 19:23:10 -0700 (PDT)
+Received: from dt-VM.localdomain ([175.152.37.254])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3a4f43f833asm2255552a91.6.2026.09.30.20.17.40
+ d9443c01a7336-2e300b8fd4csm3943635ad.80.2026.09.30.19.23.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 30 Sep 2026 20:17:44 -0700 (PDT)
-From: 'Portia Stephens <portias@oss.tenstorrent.com>
+ Wed, 30 Sep 2026 19:23:10 -0700 (PDT)
+From: Tao Ding <dingtaodtdt@gmail.com>
+X-Google-Original-From: Tao Ding <dingtao0430@163.com>
 To: qemu-devel@nongnu.org
-Cc: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
- Portia Stephens <portias@oss.tenstorrent.com>,
- Nicholas Piggin <npiggin@gmail.com>, Michael Ellerman <mpe@kernel.org>,
- =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
- Chao Liu <chao.liu@processmission.com>,
- Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Joel Stanley <joel@jms.id.au>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- qemu-riscv@nongnu.org, Weiwei Li <liwei1518@gmail.com>
-Subject: [PATCH v2 3/4] hw/riscv/atlantis: Add machine property to select
- default uart
-Date: Thu,  1 Oct 2026 13:17:19 +1000
-Message-ID: <20261001031720.2334056-4-portias@oss.tenstorrent.com>
+Cc: qemu-riscv@nongnu.org, chao.liu@processmission.com, farosas@suse.de,
+ lvivier@redhat.com, pbonzini@redhat.com, Tao Ding <dingtao0430@163.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>
+Subject: [PATCH 1/3] hw/misc: fix k230_decomp_gzip integer handling issues
+Date: Thu,  1 Oct 2026 10:22:21 +0800
+Message-ID: <20261001022223.8633-2-dingtao0430@163.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20261001031720.2334056-1-portias@oss.tenstorrent.com>
-References: <20261001031720.2334056-1-portias@oss.tenstorrent.com>
+In-Reply-To: <20261001022223.8633-1-dingtao0430@163.com>
+References: <20261001022223.8633-1-dingtao0430@163.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:39::2b;
- envelope-from=portias@tenstorrent.com; helo=mail-pj2-x2b.google.com
-X-Spam_score_int: -19
-X-Spam_score: -2.0
+Received-SPF: pass client-ip=2607:f8b0:4864:39::10;
+ envelope-from=dingtaodtdt@gmail.com; helo=mail-pj2-x10.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Wed, 30 Sep 2026 23:44:02 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -113,163 +104,46 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Portia Stephens <portias@oss.tenstorrent.com>
+Use hwaddr for address calculations to avoid 32-bit overflow and
+address truncation.
 
-The Atlantis SoC has 5 UARTs. This adds a machine property to set
-which uart is on the first serial interface. This is the same pattern
-that is used by aspeed. The rest of the uart's will be added in
-sequential order starting at serial interface 1.
+Resolves: Coverity CID 1685515, 1685517
 
-The default value is uart1 which means the Ascalon console will be on
-serial interface 0 by default.
-
-Signed-off-by: Portia Stephens <portias@oss.tenstorrent.com>
+Reported-by: Alistair Francis <Alistair.Francis@wdc.com>
+Signed-off-by: Tao Ding <dingtao0430@163.com>
 ---
- hw/riscv/tt_atlantis.c         | 76 ++++++++++++++++++++++++++++++----
- include/hw/riscv/tt_atlantis.h |  1 +
- 2 files changed, 68 insertions(+), 9 deletions(-)
+ hw/misc/k230_decomp_gzip.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/hw/riscv/tt_atlantis.c b/hw/riscv/tt_atlantis.c
-index 2342edce93..9534ce0031 100644
---- a/hw/riscv/tt_atlantis.c
-+++ b/hw/riscv/tt_atlantis.c
-@@ -12,6 +12,7 @@
- #include "qemu/error-report.h"
- #include "qemu/guest-random.h"
- #include "qemu/units.h"
-+#include "qapi/visitor.h"
- 
- #include "hw/core/boards.h"
- #include "hw/core/loader.h"
-@@ -422,6 +423,26 @@ static void load_fdt(TTAtlantisState *ams)
-     create_fdt_memory(ms->fdt, &ams->soc);
- }
- 
-+static inline int tt_atlantis_uart_index(int uart_dev)
-+{
-+    return uart_dev - TT_ATL_UART0;
-+}
-+
-+static void tt_atlantis_connect_serial_hds_to_uarts(TTAtlantisState *ams)
-+{
-+    TTAtlantisSoCState *s = &ams->soc;
-+    int uart_index = tt_atlantis_uart_index(ams->uart_chosen);
-+
-+    qdev_prop_set_chr(DEVICE(&s->uart[uart_index]), "chardev", serial_hd(0));
-+
-+    for (int i = 1, uart = 0; i < TT_ATL_NUM_UARTS; uart++) {
-+        if (uart == uart_index) {
-+            continue;
-+        }
-+        qdev_prop_set_chr(DEVICE(&s->uart[uart]), "chardev", serial_hd(i++));
-+    }
-+}
-+
- static void tt_atlantis_machine_done(Notifier *n, void *data)
+diff --git a/hw/misc/k230_decomp_gzip.c b/hw/misc/k230_decomp_gzip.c
+index 0d8a3b2d2e..54303c0e7f 100644
+--- a/hw/misc/k230_decomp_gzip.c
++++ b/hw/misc/k230_decomp_gzip.c
+@@ -53,13 +53,13 @@ static bool k230_decomp_gzip_write_mem(K230DecompGzipState *s, hwaddr addr,
+ static hwaddr k230_decomp_gzip_output_addr(K230DecompGzipState *s)
  {
-     TTAtlantisState *ams = container_of(n, TTAtlantisState, machine_done);
-@@ -484,11 +505,6 @@ static void tt_atlantis_machine_done(Notifier *n, void *data)
-                               fdt_load_addr);
+     return K230_DECOMP_GZIP_SRAM_OUT_BASE +
+-           s->output.slot * K230_DECOMP_GZIP_BLOCK_SIZE +
++           (hwaddr) s->output.slot * K230_DECOMP_GZIP_BLOCK_SIZE +
+            s->output.current_offset;
  }
  
--static inline int tt_atlantis_uart_index(int uart_dev)
--{
--    return uart_dev - TT_ATL_UART0;
--}
--
- static void tt_atlantis_soc_init(Object *obj)
+ static hwaddr k230_decomp_gzip_input_addr(K230DecompGzipState *s)
  {
-     TTAtlantisSoCState *s = TT_ATLANTIS_SOC(obj);
-@@ -592,10 +608,6 @@ static void tt_atlantis_soc_realize(DeviceState *dev, Error **errp)
-     memory_region_add_subregion(s->memory, s->memmap[TT_ATL_BOOTROM].base,
-                                 &s->bootrom);
- 
--    /* UART1, the soc console (UART0 is for the boot microcontroller */
--    qdev_prop_set_chr(DEVICE(&s->uart[tt_atlantis_uart_index(TT_ATL_UART1)]),
--                      "chardev", serial_hd(0));
--
-     for (int i = 0; i < TT_ATL_NUM_UARTS; i++) {
-         SysBusDevice *sbd = SYS_BUS_DEVICE(&s->uart[i]);
-         if (!sysbus_realize(sbd, errp)) {
-@@ -663,6 +675,10 @@ static void tt_atlantis_machine_init(MachineState *machine)
-                              OBJECT(&ams->soc_memory), &error_abort);
-     object_property_set_link(OBJECT(&ams->soc), "dram", OBJECT(machine->ram),
-                              &error_abort);
-+
-+    /* Map serial interfaces to uart */
-+    tt_atlantis_connect_serial_hds_to_uarts(ams);
-+
-     qdev_realize(DEVICE(&ams->soc), NULL, &error_fatal);
- 
-     /* I2C peripherals: qemu specific */
-@@ -680,6 +696,46 @@ static void tt_atlantis_machine_init(MachineState *machine)
-     qemu_add_machine_init_done_notifier(&ams->machine_done);
+-    return s->input.slot * K230_DECOMP_GZIP_BLOCK_SIZE +
++    return (hwaddr) s->input.slot * K230_DECOMP_GZIP_BLOCK_SIZE +
+            K230_DECOMP_GZIP_SRAM_IN_BASE;
  }
  
-+static void tt_atlantis_get_console(Object *obj, Visitor *v, const char *name,
-+                                    void *opaque, Error **errp)
-+{
-+    TTAtlantisState *ams = TT_ATLANTIS_MACHINE(obj);
-+    uint32_t uart_index = tt_atlantis_uart_index(ams->uart_chosen);
-+
-+    visit_type_uint32(v, name, &uart_index, errp);
-+}
-+
-+static void tt_atlantis_set_console(Object *obj, Visitor *v, const char *name,
-+                                    void *opaque, Error **errp)
-+{
-+    TTAtlantisState *ams = TT_ATLANTIS_MACHINE(obj);
-+    uint32_t value;
-+
-+    if (!visit_type_uint32(v, name, &value, errp)) {
-+        return;
-+    }
-+
-+    if (value >= TT_ATL_NUM_UARTS) {
-+        error_setg(errp, "\"console\" should be in range [%d - %d]",
-+                   0, TT_ATL_NUM_UARTS - 1);
-+        return;
-+    }
-+    ams->uart_chosen = value + TT_ATL_UART0;
-+}
-+
-+static void tt_atlantis_machine_class_props_init(ObjectClass *oc)
-+{
-+    ObjectProperty *console;
-+
-+    console = object_class_property_add(oc, "console", "uint32_t", tt_atlantis_get_console,
-+                                  tt_atlantis_set_console, NULL, NULL);
-+    object_class_property_set_description(oc, "console",
-+            "Change the default UART index on -serial. Valid values are 0 \
-+            through 4 (default: 1, the Ascalon console. 0 for the RCPU console");
-+    /* Default to UART1, the Ascalon console */
-+    object_property_set_default_uint(console, 1);
-+}
-+
- static void tt_atlantis_machine_class_init(ObjectClass *oc, const void *data)
+@@ -102,7 +102,7 @@ static void k230_decomp_gzip_finish(K230DecompGzipState *s, bool crc_ok)
+ }
+ 
+ static bool k230_decomp_gzip_load_input(K230DecompGzipState *s,
+-                                        uint32_t addr, uint32_t size)
++                                        hwaddr addr, uint32_t size)
  {
-     MachineClass *mc = MACHINE_CLASS(oc);
-@@ -693,6 +749,8 @@ static void tt_atlantis_machine_class_init(ObjectClass *oc, const void *data)
-     mc->block_default_type = IF_VIRTIO;
-     mc->no_cdrom = 1;
-     mc->default_ram_id = "tt_atlantis.ram";
-+
-+    tt_atlantis_machine_class_props_init(oc);
- }
+     s->input.current_offset = 0;
  
- static const TypeInfo tt_atlantis_types[] = {
-diff --git a/include/hw/riscv/tt_atlantis.h b/include/hw/riscv/tt_atlantis.h
-index b81b7c8abd..7bd46e9c9b 100644
---- a/include/hw/riscv/tt_atlantis.h
-+++ b/include/hw/riscv/tt_atlantis.h
-@@ -56,6 +56,7 @@ struct TTAtlantisState {
- 
-     MemoryRegion soc_memory;
-     TTAtlantisSoCState soc;
-+    uint32_t uart_chosen;
- };
- 
- enum {
 -- 
 2.43.0
 
