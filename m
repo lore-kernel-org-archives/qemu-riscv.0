@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C97BCA5FD6
-	for <qemu-riscv@archiver.kernel.org>; Thu,  1 Oct 2026 15:56:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA3EACA5FD4
+	for <qemu-riscv@archiver.kernel.org>; Thu,  1 Oct 2026 15:57:08 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xCJ86-0005fx-HL; Thu, 01 Oct 2026 11:55:30 -0400
+	id 1xCJ86-0005h0-UI; Thu, 01 Oct 2026 11:55:30 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <anjo@rev.ng>)
- id 1xCJ7G-0004lu-L8; Thu, 01 Oct 2026 11:54:40 -0400
+ id 1xCJ7J-0004mY-AB; Thu, 01 Oct 2026 11:54:46 -0400
 Received: from rev.ng ([94.130.142.21])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <anjo@rev.ng>)
- id 1xCJ7D-0005aZ-U4; Thu, 01 Oct 2026 11:54:37 -0400
+ id 1xCJ7H-0005bV-0l; Thu, 01 Oct 2026 11:54:41 -0400
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=rev.ng;
  s=dkim; h=Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:
  Content-Type:MIME-Version:Subject:Date:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive:List-Unsubscribe:List-Unsubscribe-Post:
- List-Help; bh=67urEZrrLZLfxiSUP4cCvhaGfeO+QbGGD4yUuNMHKck=; b=TrHtYbq7uo62uPU
- 1UvaeCRQpv0jN8NxdwMWcUSnxdLbN0pe0nDJngIAMzCxFYqZ2fxVKUXlTM3cUG501kf+mpf+r1uEh
- Z1vD3Drn2DKDrmbuG/tSKy/WN/gSQFOSzquXXdo7n1kY02OWo0tMg7muST1Dod9xjlyR+ZCB5t7Fs
- NU=;
-Date: Thu, 01 Oct 2026 17:59:37 +0200
-Subject: [PATCH 14/18] target/riscv: Compile pmp.c once
+ List-Help; bh=iG0fQF51w5ZWZRWimGboqXPu9U3cxcuBpucNtLD9zcc=; b=xDlE78UQnNt2/0m
+ RqkJIDa0tvhn7LZv+zjy2IaSDfMrbyKU3siFPk7NRAQ1xL+EUFfdtzyA14UqfgwKBF7myaAjYCXFz
+ U3rKUrAE9ImGUmvrZoZnyt/rKFfbO7HeUpGCgC+ZkMJUibhhHHH4lcl4QygI3XRQgNPnlP1ynPOFB
+ e8=;
+Date: Thu, 01 Oct 2026 17:59:41 +0200
+Subject: [PATCH 18/18] target/riscv: Compile monitor.c once
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261001-rv-dedup-v1-14-ea69b07afd31@rev.ng>
+Message-Id: <20261001-rv-dedup-v1-18-ea69b07afd31@rev.ng>
 References: <20261001-rv-dedup-v1-0-ea69b07afd31@rev.ng>
 In-Reply-To: <20261001-rv-dedup-v1-0-ea69b07afd31@rev.ng>
 To: qemu-devel@nongnu.org
@@ -41,11 +41,11 @@ Cc: Anton Johansson <anjo@rev.ng>, qemu-riscv@nongnu.org,
  daniel.barboza@oss.qualcomm.com, philmd@oss.qualcomm.com, 
  pierrick.bouvier@oss.qualcomm.com, palmer@dabbelt.com, 
  alistair.francis@wdc.com
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1790870392; l=1773;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1790870392; l=4812;
  i=anjo@rev.ng; s=20260210; h=from:subject:message-id;
- bh=46laoFS2O1FEmGvazfOrBL5i7heNu+O4jHIx/CRLZMI=;
- b=AT909Gd+cR/v49Nb688zi+PGRD0Xm2e+zQFJGDIdiwJSPL+krKIgsZNI6gaYzUvPne1kuIRiM
- UccIMkreMUECtdFdmxqJEMVkwBXaFH8TnF8Q43f9elja7EJy7CahOzU
+ bh=dIE/q6sNlwcAnKeJGD9CkZ7k/7Mps5NP2Vp2sm0wBGg=;
+ b=Gc8/Ssxdwj4FCLaQ+3avP28e7dQ65eUo7j8aubI+cLWzljlGBtQHKg3FFcq+QSZnl/rVsAXz3
+ 3jFubumcPXiBEVsuPJDTNh9LZd7TO3TtcX4xHm/AiSNVHiupYsHRXPy
 X-Developer-Key: i=anjo@rev.ng; a=ed25519;
  pk=dKsZvj/g3kgDxnV1/SWg8a0YNGSpWtFGNsWIepQYKow=
 Received-SPF: pass client-ip=94.130.142.21; envelope-from=anjo@rev.ng;
@@ -73,56 +73,143 @@ From:  Anton Johansson via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+Replaces uses of target_ulong with vaddr/hwaddr/uint64_t where
+appropriate.
+
+Note: This commit will print all addresses as 64-bit values, even for a
+32-bit target. If breaking this interface is not an option we can
+instead opt for more runtime branching, as done by Joel Stanley
+in commit 409c7d8682a.
+
 Signed-off-by: Anton Johansson <anjo@rev.ng>
 ---
- target/riscv/tcg/pmp.c       | 5 +++--
- target/riscv/tcg/meson.build | 2 +-
- 2 files changed, 4 insertions(+), 3 deletions(-)
+ target/riscv/monitor.c   | 42 ++++++++++++++++++------------------------
+ target/riscv/meson.build |  2 +-
+ 2 files changed, 19 insertions(+), 25 deletions(-)
 
-diff --git a/target/riscv/tcg/pmp.c b/target/riscv/tcg/pmp.c
-index 99345d63dc..2d7194de10 100644
---- a/target/riscv/tcg/pmp.c
-+++ b/target/riscv/tcg/pmp.c
-@@ -638,19 +638,20 @@ uint64_t pmpaddr_csr_read(CPURISCVState *env, uint32_t addr_index)
-     if (addr_index < pmp_regions) {
-         val = env->pmp_state.pmp[addr_index].addr_reg;
-         int g = pmp_get_granularity_g(env);
-+        const unsigned long_bits = target_long_bits();
-         switch (pmp_get_a_field(env->pmp_state.pmp[addr_index].cfg_reg)) {
-         case PMP_AMATCH_OFF:
-             /* fallthrough */
-         case PMP_AMATCH_TOR:
-             /* Bit [g-1:0] read all zero */
--            if (g >= 1 && g < TARGET_LONG_BITS) {
-+            if (g >= 1 && g < long_bits) {
-                 uint64_t granule = 1ULL << g;
-                 val = ROUND_DOWN(val, granule);
-             }
-             break;
-         case PMP_AMATCH_NAPOT:
-             /* Bit [g-2:0] read all one */
--            if (g >= 2 && g < TARGET_LONG_BITS) {
-+            if (g >= 2 && g < long_bits) {
-                 val = deposit64(val, 0, g - 1, -1ULL);
-             }
-             break;
-diff --git a/target/riscv/tcg/meson.build b/target/riscv/tcg/meson.build
-index 69dadfd662..0aaba9cf34 100644
---- a/target/riscv/tcg/meson.build
-+++ b/target/riscv/tcg/meson.build
-@@ -17,7 +17,6 @@ riscv_ss.add(files(
+diff --git a/target/riscv/monitor.c b/target/riscv/monitor.c
+index fc61638702..24c5244c36 100644
+--- a/target/riscv/monitor.c
++++ b/target/riscv/monitor.c
+@@ -21,35 +21,29 @@
+ #include "qemu/osdep.h"
+ #include "qemu/ctype.h"
+ #include "qemu/qemu-print.h"
+-#include "exec/target_long.h"
+-#include "cpu.h"
++#include "target/riscv/cpu.h"
++#include "target/riscv/cpu_bits.h"
+ #include "target/riscv/tcg/csr.h"
+-#include "cpu_bits.h"
+ #include "monitor/monitor.h"
+ #include "monitor/hmp.h"
+ #include "system/memory.h"
+ #include "internals.h"
  
+-#ifdef TARGET_RISCV64
+ #define PTE_HEADER_FIELDS       "vaddr            paddr            "\
+                                 "size             attr\n"
+ #define PTE_HEADER_DELIMITER    "---------------- ---------------- "\
+                                 "---------------- -------\n"
+-#else
+-#define PTE_HEADER_FIELDS       "vaddr    paddr            size     attr\n"
+-#define PTE_HEADER_DELIMITER    "-------- ---------------- -------- -------\n"
+-#endif
+ 
+ #ifdef CONFIG_HMP
+ 
+ /* Perform linear address sign extension */
+-static target_ulong addr_canonical(int va_bits, target_ulong addr)
++static vaddr addr_canonical(int va_bits, vaddr addr)
+ {
+-#ifdef TARGET_RISCV64
+-    if (addr & (1UL << (va_bits - 1))) {
+-        addr |= (hwaddr)-(1L << va_bits);
++    if (target_riscv64()) {
++        if (addr & (1UL << (va_bits - 1))) {
++            addr |= (hwaddr)-(1L << va_bits);
++        }
+     }
+-#endif
+ 
+     return addr;
+ }
+@@ -60,8 +54,8 @@ static void print_pte_header(MonitorHMP *hmp)
+     monitor_hmp_printf(hmp, PTE_HEADER_DELIMITER);
+ }
+ 
+-static void print_pte(MonitorHMP *hmp, int va_bits, target_ulong vaddr,
+-                      hwaddr paddr, target_ulong size, int attr)
++static void print_pte(MonitorHMP *hmp, int va_bits, vaddr vaddr,
++                      hwaddr paddr, uint64_t size, int attr)
+ {
+     /* sanity check on vaddr */
+     if (vaddr >= (1UL << va_bits)) {
+@@ -72,7 +66,7 @@ static void print_pte(MonitorHMP *hmp, int va_bits, target_ulong vaddr,
+         return;
+     }
+ 
+-    monitor_hmp_printf(hmp, TARGET_FMT_lx " " HWADDR_FMT_plx " " TARGET_FMT_lx
++    monitor_hmp_printf(hmp, "%016" VADDR_PRIx " " HWADDR_FMT_plx " %016" PRIx64
+                        " %c%c%c%c%c%c%c\n",
+                        addr_canonical(va_bits, vaddr),
+                        paddr, size,
+@@ -86,17 +80,17 @@ static void print_pte(MonitorHMP *hmp, int va_bits, target_ulong vaddr,
+ }
+ 
+ static void walk_pte(MonitorHMP *hmp, AddressSpace *as,
+-                     hwaddr base, target_ulong start,
++                     hwaddr base, uint64_t start,
+                      int level, int ptidxbits, int ptesize, int va_bits,
+-                     target_ulong *vbase, hwaddr *pbase, hwaddr *last_paddr,
+-                     target_ulong *last_size, int *last_attr)
++                     vaddr *vbase, hwaddr *pbase, hwaddr *last_paddr,
++                     uint64_t *last_size, int *last_attr)
+ {
+     const MemTxAttrs attrs = MEMTXATTRS_UNSPECIFIED;
+     hwaddr pte_addr;
+     hwaddr paddr;
+-    target_ulong last_start = -1;
+-    target_ulong pgsize;
+-    target_ulong pte;
++    uint64_t last_start = -1;
++    uint64_t pgsize;
++    uint64_t pte;
+     int ptshift;
+     int attr;
+     int idx;
+@@ -158,10 +152,10 @@ static void mem_info_svxx(MonitorHMP *hmp, CPUArchState *env)
+     AddressSpace *as = env_cpu(env)->as;
+     int levels, ptidxbits, ptesize, vm, va_bits;
+     hwaddr base;
+-    target_ulong vbase;
++    vaddr vbase;
+     hwaddr pbase;
+     hwaddr last_paddr;
+-    target_ulong last_size;
++    uint64_t last_size;
+     int last_attr;
+ 
+     if (riscv_cpu_mxl(env) == MXL_RV32) {
+diff --git a/target/riscv/meson.build b/target/riscv/meson.build
+index d20eaa2269..a28466515e 100644
+--- a/target/riscv/meson.build
++++ b/target/riscv/meson.build
+@@ -22,7 +22,6 @@ riscv_stubs_ss = ss.source_set()
+ 
+ riscv_system_ss = ss.source_set()
  riscv_system_ss.add(files(
-   'debug.c',
--  'pmp.c',
+-  'monitor.c',
  ))
  
- 
-@@ -35,4 +34,5 @@ riscv_common_system_ss.add(files(
-   'pmu.c',
-   'tcg-cpu.c',
-   'th_csr.c',
-+  'pmp.c',
+ riscv_user_ss = ss.source_set()
+@@ -36,6 +35,7 @@ riscv_common_system_ss.add(files(
+   'arch_dump.c',
+   'cpu.c',
+   'machine.c',
++  'monitor.c',
+   'riscv-qmp-cmds.c',
+   'time_helper.c',
  ))
 
 -- 
