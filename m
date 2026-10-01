@@ -4,154 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D59D9CA5FCF
-	for <qemu-riscv@archiver.kernel.org>; Thu,  1 Oct 2026 16:51:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7B1CCA5FD2
+	for <qemu-riscv@archiver.kernel.org>; Thu,  1 Oct 2026 17:02:54 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xCK05-00017T-FJ; Thu, 01 Oct 2026 12:51:17 -0400
+	id 1xCKB7-0003oP-5t; Thu, 01 Oct 2026 13:02:41 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <pierrick.bouvier@oss.qualcomm.com>)
- id 1xCK04-000174-Ce
- for qemu-riscv@nongnu.org; Thu, 01 Oct 2026 12:51:16 -0400
-Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <pierrick.bouvier@oss.qualcomm.com>)
- id 1xCK01-0003cH-96
- for qemu-riscv@nongnu.org; Thu, 01 Oct 2026 12:51:15 -0400
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 691FstU72139632
- for <qemu-riscv@nongnu.org>; Thu, 1 Oct 2026 16:51:11 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- 1EC1Zmm9ffg5+j3mLvgjjCqQBv9SUjaEWLtb4hTneL8=; b=mj6/1HHlzzR1Bd3x
- lf6T5Nr0ZL/V56pK4C3H8oHPVz9EUDLl+WT6fpe5ioLFiZlGwCKHNLJKlpgwNkb3
- GibrIOMpu5EreBoLiv7ejQmx1q33Vl+cXedXYs8toxYqivxz/gFEHg5+uI+NDirW
- TOFlZPoGS70J08R8UHkWn+eA30igGxo1KFpaPQsFiM3MjzTS3jPzv57FHGUdvte4
- 8HDs6/uagPUZ0rsUKsVLGYVkuckZapFvRKMgMrx0alq9CVEG9N6XJuJSU527LhPa
- 67+veKxAB/yQGzw7/HtFyzk6mb1Gg9AQPNrQ8be8gGdMbcZVL411IW1Hc58FPhnm
- cAHt0Q==
-Received: from mail-dl1-f72.google.com (mail-dl1-f72.google.com [74.125.82.72])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h16wcwcdm-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Thu, 01 Oct 2026 16:51:11 +0000 (GMT)
-Received: by mail-dl1-f72.google.com with SMTP id
- a92af1059eb24-14383177746so15579783c88.1
- for <qemu-riscv@nongnu.org>; Thu, 01 Oct 2026 09:51:10 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <tgamblin@baylibre.com>)
+ id 1xCKB4-0003nR-QZ
+ for qemu-riscv@nongnu.org; Thu, 01 Oct 2026 13:02:38 -0400
+Received: from mail-lr2-x0d.google.com ([2a00:1450:4864:38::d])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <tgamblin@baylibre.com>)
+ id 1xCKB3-0004mR-1T
+ for qemu-riscv@nongnu.org; Thu, 01 Oct 2026 13:02:38 -0400
+Received: by mail-lr2-x0d.google.com with SMTP id
+ 38308e7fff4ca-3a7be75eb9bso7991251fa.1
+ for <qemu-riscv@nongnu.org>; Thu, 01 Oct 2026 10:02:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1790873470; x=1791478270; darn=nongnu.org;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=1EC1Zmm9ffg5+j3mLvgjjCqQBv9SUjaEWLtb4hTneL8=;
- b=cMxShBAW+Wzy0j6NV8YJUc6VEmZfqiQHwSzco2kHPtibEpfGkL3l5coEiwU6E6PRId
- zGRTDK2VZHq1A3weft2RA7dIQ69l07a3e1AjOzyUVEftEna93oUrE22Bx0YgNHH3Yu7l
- 1UMr+dW0EulunC+IF9UEFbq6A7UzSYtsTPYFEZk3U64ahWuBIDhLHzfMY7ZqhqAs1j+5
- lOGUj7xAOSgeZEc9xkchFGvs8IsfSTIzYH6yRtxpVmGL6Yd26dIgOpEJ5T+54WpCHsvp
- GpqCU2aibaixC5Th6drItU3Byk6NaG3zUpiGH7/xGs0oJEGkh3xsrPwFRYfD2KqDFStV
- aMpQ==
+ d=baylibre.com; s=google; t=1790874153; x=1791478953; darn=nongnu.org;
+ h=in-reply-to:references:cc:subject:from:to:message-id:date
+ :content-type:content-transfer-encoding:mime-version:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=+Uim3iXrs9ptxuIhoMLTn8RI7K3gzSqP7VAadz6nUvA=;
+ b=LS6DnaU3jIzDVUymuT9DNMKZU+2EqyiRggXac/66jbVZ3dAZmjypbISsWAskdl9859
+ hXq+sSg+wze3G33DCgEc9og71umr9on9aLx9C95NvAtbLCVk99+ybiS2aZCD+1T3MEC9
+ 0Y9tBecMY9iXrjkoIsNZxMrjqz9mNPEPI33SemjbG2tgNIUaLY/7spDcaS1fghSDPEjn
+ rf9M+BjUXelo/Ji8FIcl6iuq3LQIB96JLVl7bx6LOMEEDHGDmwmgWoghm2usmxuo/Odl
+ SoR+hJUj2smxRoVtrNHsuaEY5rGXfiuCpFWDCBmid2iJjggSOYE8TaYAvybCyiQebnOh
+ LOxg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790873470; x=1791478270;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=1EC1Zmm9ffg5+j3mLvgjjCqQBv9SUjaEWLtb4hTneL8=;
- b=2Ax2KVB8ztTtd0p9r5znm7f9SOrBGthJKnJGk5gogLWJJY+RAZQczR8/pQFBnSp4gH
- YKNyH+CPhAPgmsnc9j/a8h6w5jupS3BLKLXPPa/43cM3TZ26pqO9xcHsCBvwPoY2Fz6f
- sTWjO7IV9XNRu0zwvsi9oVDJU3PZCinINuCL2+bkY64pkOsmjOTcqdPLZDMzO6CQ5csu
- KlPvATc+X7sKn7EVL4OPWjckz8IdOsMKDkPV4ZCalgrXbUhVxbREfMHIrIQCuTHPJNzE
- b+ZmQnAPF5qDn5uXpmpJOh40hqSP2kEIPfZWs2e2lCkVgUvdIpPDM8pN/5Ae/LfDjkMC
- yRtQ==
+ d=1e100.net; s=20260707; t=1790874153; x=1791478953;
+ h=in-reply-to:references:cc:subject:from:to:message-id:date
+ :content-type:content-transfer-encoding:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=+Uim3iXrs9ptxuIhoMLTn8RI7K3gzSqP7VAadz6nUvA=;
+ b=XqBf93fPE1I10i61rjaET0H/XCH+jchF7VZgR9ew9rIQWzlw4unWo9uuN3gC2p6xFm
+ KfcF9AeYxusPnU63hKmSALiLIa7TuW/lxo8hng8EZnARhbGe9+xUpzTfHhE8crS1sZJY
+ KK8q0wzJ5MDZ7AndYaolkZ6ib1oaODBWQS4m5lJ+O8+ki9K8LRc4D5Z0SnzsCpxJoV0R
+ xH2lxq45bTn4g2EGqLjle9ok3PUcHpi6r3YkVCcYfL0GLyUu0rbDxlUVF2XALcMKHXg6
+ DrP4QLFQojB1KZWxbVefJ9E5vVXSx3ymj06ZIXf1izit8hoEQpjFoUrLqEwNmx2V+0EJ
+ Q5JQ==
 X-Forwarded-Encrypted: i=1;
- AKwUvBy7jI8GqDHlXx7PPYMhOz4AgCIODnzWZw8depzErrIIZ2K8+9L6UhOhbt/1z9t5j5sTrNweODM0SNNw@nongnu.org
-X-Gm-Message-State: AFuF++kxyveBrbCiOwTI5h5BdW/O69cVUlKUAf1+za9r+By23CJt42vs
- iAdESduGc/ijVyhjHT4JPXXytLebkI98s0ydwFciOfhUAmGz8FJHWh1IROGvi8KbaXTb8wcWRb8
- CBXjzdAZjteInOaSHgaGu6vuZGjI1HvQZVx+9J69Hxd7Zy8/O5ob+WcPIQA==
-X-Gm-Gg: AYBFou0otXQhGy3O5BexOIF8zNd1wYb9nvp163ZmjoIIuQ9G51Mb0VEeOSvBJLpBpMP
- MnRSc+cY29Fq+LlwEDM/GvPVKGd9PJPI+e3uI5jljh5+KvKSf8nQkSUdWILlYWqbPAk9CjySx93
- YXafYkLRnlCcQN5VrWRgAmSm9FrVSOIW9BnDxl9iw51QpL2xavb5yaxDzSuGp+y5W2n3SZYGX2h
- ZAl3aOsxbGeRhE5OaYsbdixnxI1TwFfrQwtweSKZUbu6R7gTGVajDZaU2Xuo8UTVhFX17O7m3fd
- ZD6YMx8sumyse5ro9San5haVOv3nkrryhVSXRa/UoT0Z5BxhhahHFaFnwIQafjSx0zWBgDBPJ1M
- jw2sLrdwuAtmc3F1z7vzmPsR2iMlFFD99oMG8nlQe3QSXXvpWo8ljxR3btEvEDRAZrOcELQ==
-X-Received: by 2002:a05:701b:2712:b0:13e:5a50:1e17 with SMTP id
- a92af1059eb24-14d31a7d13bmr6469349c88.3.1790873470023; 
- Thu, 01 Oct 2026 09:51:10 -0700 (PDT)
-X-Received: by 2002:a05:701b:2712:b0:13e:5a50:1e17 with SMTP id
- a92af1059eb24-14d31a7d13bmr6469309c88.3.1790873469323; 
- Thu, 01 Oct 2026 09:51:09 -0700 (PDT)
-Received: from [192.168.1.199] (192-80-163-190.dyn.novuscom.net.
- [192.80.163.190]) by smtp.gmail.com with ESMTPSA id
- a92af1059eb24-14f26bb14cbsm432639c88.7.2026.10.01.09.51.07
+ AKwUvBwAtnTeU1yLrv9HNGtE08TvAMF5oFJSO37KFFTAbP9v9B+sz08TY1R9jjulopXEMs3hlOrYn2kpTi5m@nongnu.org
+X-Gm-Message-State: AFq9FYKEvTW0APaYBEFId/u8tNbpZpK0XNAyG0wc3SiYE79Dns9Zsslw
+ A91K5Ggj3jghrzr9AT30f5/3pYkFS9HJYt0d2fPW0dOMw6fvRBgxyB0rwiIunB2DGxU=
+X-Gm-Gg: AYBFou2RmigjbgRJe7Kvb+6U34wW64yY6Tq+Fppiealor8kcQ8nJYueo2dLcW5M7OV7
+ Wx75CjGLUz6VOLh3Gslp5Ti6sjZpRRpx9XSVnZ8HTv7ql64qAtrj3CabGLn3K4Rp24ZIFvmxp3e
+ MC39INl2W0k6TdOwU1wEoJLP8gMFYwoqU3KCqTUOb8AtzHM9cJQJkyvtZ/U3KZtBRr1sitm2laY
+ TZ4dM540qf+5IfKmAFTCPHTXp1ADUIaqToPgTbOLDWqWwFyKtE+N756t9jSirBdwz1C05wrCJDi
+ baCRLzCZ2wIEhODak+eH7kw1Y/S3g97AcpYNhBU4Zwn7xYkLkO0GwG4kiCCqd1uVH8xZ1MXt82p
+ JrwWasj35vPdM60Oh2PLzxF8Tgvf9/tB2cclnmnhG3adF5lwx6hthlhcB28Rq+vOUXOGtOu/q8O
+ T3xDux34dsoOALA7n969I/bSKmVpmz2gAKeTFvNRlVBU1xJcneaXY3tJlOweiaUgcZI0qgFBW/4
+ ePGIoaGlPShJfNH7U1ZrUvpZ98Xo3Sb9w==
+X-Received: by 2002:a2e:a989:0:b0:3a8:7db9:3b28 with SMTP id
+ 38308e7fff4ca-3a87db93f65mr769791fa.20.1790874153635; 
+ Thu, 01 Oct 2026 10:02:33 -0700 (PDT)
+Received: from localhost ([2001:1970:3847:e000:1977:be2f:4a71:2892])
+ by smtp.gmail.com with ESMTPSA id
+ 38308e7fff4ca-3a87e32c6ccsm470601fa.38.2026.10.01.10.02.27
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 01 Oct 2026 09:51:08 -0700 (PDT)
-Message-ID: <374ba010-b530-4310-b20f-65ada56cda6b@oss.qualcomm.com>
-Date: Thu, 1 Oct 2026 09:51:06 -0700
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 4/6] tcg: namespace target helper symbols for combined
- builds
-To: Yonggang Luo <luoyonggang@gmail.com>, qemu-devel@nongnu.org
-Cc: Song Gao <17746591750@163.com>, =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?=
- <berrange@redhat.com>, Alistair Francis <alistair.francis@wdc.com>,
- Peter Maydell <peter.maydell@linaro.org>, Paolo Bonzini
- <pbonzini@redhat.com>, Weiwei Li <liwei1518@gmail.com>,
- Sunil V L <sunilvl@ventanamicro.com>,
- Philippe Mathieu-Daude <philmd@mailo.com>,
- =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, qemu-riscv@nongnu.org,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Chao Liu <chao.liu@processmission.com>,
- Igor Mammedov <imammedo@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Ani Sinha <anisinha@redhat.com>, qemu-arm@nongnu.org,
- "Michael S. Tsirkin" <mst@redhat.com>
-References: <20260930073935.712-1-luoyonggang@gmail.com>
- <20260930073935.712-5-luoyonggang@gmail.com>
-From: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
-Content-Language: en-US
-In-Reply-To: <20260930073935.712-5-luoyonggang@gmail.com>
+ Thu, 01 Oct 2026 10:02:29 -0700 (PDT)
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDAxMDA2NyBTYWx0ZWRfX7pGMeihvJqBi
- 8k4DaihUWSC9x0BsxzVIXEZ0muup9ck/wvHITTrSmfTEWNd1v7UBUw2YJbiBS3aQzvCLlVqAx9K
- rXrVcSQO8eGaveF59w2cTg8Gvo5kxwBIQZrZv8kdSwdM7rS4lJ6toKE8+BimB+REVciXlm1NKlL
- bnfpUmbH1kI7Loa+wvDjh/vl3zahq6VR35TkDmcrIU6CFySixt2zduspyS8Uo5o4raVfmsGhZKk
- 8jMcDX+s2pzIhSrn5d5CL1K7jleyWcKcwdDa3zbKWtvdmVFj3IV/JLn5F9qpyyhXpLv6wYwmjou
- WmW9Mpskr+S5ZlSte3IjuSCxt/3M/Db09TJB1HgBVLONdpZAtrjmRsWL8yp56+K+jsKA9dQQ062
- tLWU+YZ5vVwcwVM8qpShFOx9KWKil7M0PmXApIHVe9hGjwg/EWJsnRhKq+olq3cc/gA+8jMz3i3
- 4EIrzJWfOdjMvjvyvIg==
-X-Proofpoint-GUID: Hj1XDowimYImQ9letSRU8safJDKpjkHG
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDAxMDA2NyBTYWx0ZWRfXwwkXhd38krTn
- rc6Fw6y+CORhh1LzMjhDVbhnyBm74mbCqN/NkjuYjAayQm4SGFWLbmJgNbWBfICwJBKAhRq56ce
- 5lEwm7Yb+KaCCecx7vamCztuRpHGbPE=
-X-Authority-Analysis: v=2.4 cv=S51MU4sP c=1 sm=1 tr=0 ts=6abe8f7f cx=c_pps
- a=bS7HVuBVfinNPG3f6cIo3Q==:117 a=9852oil1ID9t5xBSyQ/BEA==:17
- a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
- a=ZidyKko-PBEqLHQ7VRUA:9 a=QEXdDO2ut3YA:10 a=vBUdepa8ALXHeOFLBtFW:22
-X-Proofpoint-ORIG-GUID: Hj1XDowimYImQ9letSRU8safJDKpjkHG
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-01_04,2026-10-01_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 phishscore=0 priorityscore=1501 clxscore=1015 impostorscore=0
- lowpriorityscore=0 spamscore=0 adultscore=0 bulkscore=0 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2610010067
-Received-SPF: pass client-ip=205.220.180.131;
- envelope-from=pierrick.bouvier@oss.qualcomm.com;
- helo=mx0b-0031df01.pphosted.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
+Date: Thu, 01 Oct 2026 13:02:25 -0400
+Message-Id: <DLTNWGSL7L7F.LNM2NJ62JNLJ@baylibre.com>
+To: "Alistair Francis" <Alistair.Francis@wdc.com>, "tgamblin@baylibre.com"
+ <tgamblin@baylibre.com>, "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>
+From: "Trevor Gamblin" <tgamblin@baylibre.com>
+Subject: Re: [PATCH v2 2/2] target/riscv: add helper_tlb_flush_page(), use
+ for sfence.vma with vaddr operand
+Cc: "palmer@dabbelt.com" <palmer@dabbelt.com>, "qemu-riscv@nongnu.org"
+ <qemu-riscv@nongnu.org>, "daniel.barboza@oss.qualcomm.com"
+ <daniel.barboza@oss.qualcomm.com>, "chao.liu@processmission.com"
+ <chao.liu@processmission.com>, "liwei1518@gmail.com" <liwei1518@gmail.com>,
+ "zhiwei_liu@linux.alibaba.com" <zhiwei_liu@linux.alibaba.com>,
+ <qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org>
+X-Mailer: aerc 0.22.0
+References: <20260904-riscv_tlb_page_flush-v2-0-defec3f29312@baylibre.com>
+ <20260904-riscv_tlb_page_flush-v2-2-defec3f29312@baylibre.com>
+ <322f18f233ae985970ba75eede7d3623110b13f3.camel@wdc.com>
+In-Reply-To: <322f18f233ae985970ba75eede7d3623110b13f3.camel@wdc.com>
+Received-SPF: pass client-ip=2a00:1450:4864:38::d;
+ envelope-from=tgamblin@baylibre.com; helo=mail-lr2-x0d.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -168,24 +113,104 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 9/30/2026 12:39 AM, Yonggang Luo wrote:
-> Use target-specific assembler names and helper metadata for TCG helpers
-> when multiple targets share a binary. The generated prototype maps the
-> generic C helper name to a target-specific linker symbol, for example:
-> 
->     helper_raise_exception
->         __asm__("helper_i386_raise_exception")
-> 
-> This lets target helper definitions keep generic C names while avoiding
-> linker symbol collisions between targets.
+On Thu Oct 1, 2026 at 1:14 AM EDT, Alistair Francis wrote:
+> On Fri, 2026-09-04 at 14:43 -0400, Trevor Gamblin wrote:
+>> sfence.vma unconditionally called helper_tlb_flush(), regardless of
+>> the
+>> rs1 (vaddr) and rs2 (asid) operands, forcing a page-table walk on the
+>> next access. Create a page-level counterpart to helper_tlb_flush()
+>> called helper_tlb_flush_page(), and use it whenever rs1 !=3D 0, falling
+>> back to the existing full flush for rs1 =3D=3D 0. This makes RISC-V
+>> behaviour more similar to ARM's equivalent (tlbi_aa64_vae1_write),
+>> which
+>> already does tlb_flush_page_by_mmuidx() instead of a full flush.
+>>=20
+>> Pass get_address(ctx, a->rs1, 0) to gen_helper_tlb_flush_page()
+>> rather
+>> than get_gpr(), so that the address being passed matches the current
+>> addr_xl width regardless of '-cpu' input. Otherwise, the raw register
+>> value can carry garbage above that width and never match the address
+>> the
+>> TLB entry was actually filled under, so the flush silently misses and
+>> a
+>> stale mapping survives.
+>>=20
+>> Signed-off-by: Trevor Gamblin <tgamblin@baylibre.com>
 >
-Hi Richard, do you have an opinion on this patch?
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+>
+> Can you fixup sinval.vma and hinval.* as well please?
 
-We are trying to see if we do renaming per helper, or if we introduce a
-"generic" way to deal with it. I don't have a strong opinion, renaming
-things or adding more macros and build system soup are both ok on my
-side, so direction would depend on your culinary taste.
+Sure! I'm travelling next week, but I'll see if I can get patches written i=
+n
+downtime or right afterward.
 
-Regards,
-Pierrick
+Trevor
+>
+> Alistair
+>
+>> ---
+>> =C2=A0target/riscv/helper.h=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | 1 +
+>> =C2=A0target/riscv/tcg/insn_trans/trans_privileged.c.inc | 6 +++++-
+>> =C2=A0target/riscv/tcg/op_helper.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0 | 6 ++++++
+>> =C2=A03 files changed, 12 insertions(+), 1 deletion(-)
+>>=20
+>> diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+>> index 4fc2d3a155..652f85a5c7 100644
+>> --- a/target/riscv/helper.h
+>> +++ b/target/riscv/helper.h
+>> @@ -137,6 +137,7 @@ DEF_HELPER_1(ctr_clear, void, env)
+>> =C2=A0DEF_HELPER_1(wfi, void, env)
+>> =C2=A0DEF_HELPER_1(wrs_nto, void, env)
+>> =C2=A0DEF_HELPER_1(tlb_flush, void, env)
+>> +DEF_HELPER_2(tlb_flush_page, void, env, tl)
+>> =C2=A0DEF_HELPER_1(tlb_flush_all, void, env)
+>> =C2=A0DEF_HELPER_4(ctr_add_entry, void, env, tl, tl, tl)
+>> =C2=A0/* Native Debug */
+>> diff --git a/target/riscv/tcg/insn_trans/trans_privileged.c.inc
+>> b/target/riscv/tcg/insn_trans/trans_privileged.c.inc
+>> index a8eaccef67..8655fa332e 100644
+>> --- a/target/riscv/tcg/insn_trans/trans_privileged.c.inc
+>> +++ b/target/riscv/tcg/insn_trans/trans_privileged.c.inc
+>> @@ -155,7 +155,11 @@ static bool trans_sfence_vma(DisasContext *ctx,
+>> arg_sfence_vma *a)
+>> =C2=A0{
+>> =C2=A0#ifndef CONFIG_USER_ONLY
+>> =C2=A0=C2=A0=C2=A0=C2=A0 decode_save_opc(ctx, 0);
+>> -=C2=A0=C2=A0=C2=A0 gen_helper_tlb_flush(tcg_env);
+>> +=C2=A0=C2=A0=C2=A0 if (a->rs1 =3D=3D 0) {
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 gen_helper_tlb_flush(tcg_env=
+);
+>> +=C2=A0=C2=A0=C2=A0 } else {
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 gen_helper_tlb_flush_page(tc=
+g_env, get_address(ctx, a->rs1,
+>> 0));
+>> +=C2=A0=C2=A0=C2=A0 }
+>> =C2=A0=C2=A0=C2=A0=C2=A0 return true;
+>> =C2=A0#endif
+>> =C2=A0=C2=A0=C2=A0=C2=A0 return false;
+>> diff --git a/target/riscv/tcg/op_helper.c
+>> b/target/riscv/tcg/op_helper.c
+>> index 7f63f3ada5..178b4d271b 100644
+>> --- a/target/riscv/tcg/op_helper.c
+>> +++ b/target/riscv/tcg/op_helper.c
+>> @@ -607,6 +607,12 @@ void helper_tlb_flush(CPURISCVState *env)
+>> =C2=A0=C2=A0=C2=A0=C2=A0 tlb_flush(cs);
+>> =C2=A0}
+>> =C2=A0
+>> +void helper_tlb_flush_page(CPURISCVState *env, target_ulong addr)
+>> +{
+>> +=C2=A0=C2=A0=C2=A0 check_sfence_vma(env, GETPC());
+>> +=C2=A0=C2=A0=C2=A0 tlb_flush_page(env_cpu(env), addr);
+>> +}
+>> +
+>> =C2=A0void helper_tlb_flush_all(CPURISCVState *env)
+>> =C2=A0{
+>> =C2=A0=C2=A0=C2=A0=C2=A0 CPUState *cs =3D env_cpu(env);
+
+
 
