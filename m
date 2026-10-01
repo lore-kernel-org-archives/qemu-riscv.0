@@ -4,100 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7B1CCA5FD2
-	for <qemu-riscv@archiver.kernel.org>; Thu,  1 Oct 2026 17:02:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 821A2CA5FCF
+	for <qemu-riscv@archiver.kernel.org>; Thu,  1 Oct 2026 17:40:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xCKB7-0003oP-5t; Thu, 01 Oct 2026 13:02:41 -0400
+	id 1xCKls-0006ME-Sb; Thu, 01 Oct 2026 13:40:40 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <tgamblin@baylibre.com>)
- id 1xCKB4-0003nR-QZ
- for qemu-riscv@nongnu.org; Thu, 01 Oct 2026 13:02:38 -0400
-Received: from mail-lr2-x0d.google.com ([2a00:1450:4864:38::d])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <tgamblin@baylibre.com>)
- id 1xCKB3-0004mR-1T
- for qemu-riscv@nongnu.org; Thu, 01 Oct 2026 13:02:38 -0400
-Received: by mail-lr2-x0d.google.com with SMTP id
- 38308e7fff4ca-3a7be75eb9bso7991251fa.1
- for <qemu-riscv@nongnu.org>; Thu, 01 Oct 2026 10:02:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1790874153; x=1791478953; darn=nongnu.org;
- h=in-reply-to:references:cc:subject:from:to:message-id:date
- :content-type:content-transfer-encoding:mime-version:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=+Uim3iXrs9ptxuIhoMLTn8RI7K3gzSqP7VAadz6nUvA=;
- b=LS6DnaU3jIzDVUymuT9DNMKZU+2EqyiRggXac/66jbVZ3dAZmjypbISsWAskdl9859
- hXq+sSg+wze3G33DCgEc9og71umr9on9aLx9C95NvAtbLCVk99+ybiS2aZCD+1T3MEC9
- 0Y9tBecMY9iXrjkoIsNZxMrjqz9mNPEPI33SemjbG2tgNIUaLY/7spDcaS1fghSDPEjn
- rf9M+BjUXelo/Ji8FIcl6iuq3LQIB96JLVl7bx6LOMEEDHGDmwmgWoghm2usmxuo/Odl
- SoR+hJUj2smxRoVtrNHsuaEY5rGXfiuCpFWDCBmid2iJjggSOYE8TaYAvybCyiQebnOh
- LOxg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790874153; x=1791478953;
- h=in-reply-to:references:cc:subject:from:to:message-id:date
- :content-type:content-transfer-encoding:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=+Uim3iXrs9ptxuIhoMLTn8RI7K3gzSqP7VAadz6nUvA=;
- b=XqBf93fPE1I10i61rjaET0H/XCH+jchF7VZgR9ew9rIQWzlw4unWo9uuN3gC2p6xFm
- KfcF9AeYxusPnU63hKmSALiLIa7TuW/lxo8hng8EZnARhbGe9+xUpzTfHhE8crS1sZJY
- KK8q0wzJ5MDZ7AndYaolkZ6ib1oaODBWQS4m5lJ+O8+ki9K8LRc4D5Z0SnzsCpxJoV0R
- xH2lxq45bTn4g2EGqLjle9ok3PUcHpi6r3YkVCcYfL0GLyUu0rbDxlUVF2XALcMKHXg6
- DrP4QLFQojB1KZWxbVefJ9E5vVXSx3ymj06ZIXf1izit8hoEQpjFoUrLqEwNmx2V+0EJ
- Q5JQ==
-X-Forwarded-Encrypted: i=1;
- AKwUvBwAtnTeU1yLrv9HNGtE08TvAMF5oFJSO37KFFTAbP9v9B+sz08TY1R9jjulopXEMs3hlOrYn2kpTi5m@nongnu.org
-X-Gm-Message-State: AFq9FYKEvTW0APaYBEFId/u8tNbpZpK0XNAyG0wc3SiYE79Dns9Zsslw
- A91K5Ggj3jghrzr9AT30f5/3pYkFS9HJYt0d2fPW0dOMw6fvRBgxyB0rwiIunB2DGxU=
-X-Gm-Gg: AYBFou2RmigjbgRJe7Kvb+6U34wW64yY6Tq+Fppiealor8kcQ8nJYueo2dLcW5M7OV7
- Wx75CjGLUz6VOLh3Gslp5Ti6sjZpRRpx9XSVnZ8HTv7ql64qAtrj3CabGLn3K4Rp24ZIFvmxp3e
- MC39INl2W0k6TdOwU1wEoJLP8gMFYwoqU3KCqTUOb8AtzHM9cJQJkyvtZ/U3KZtBRr1sitm2laY
- TZ4dM540qf+5IfKmAFTCPHTXp1ADUIaqToPgTbOLDWqWwFyKtE+N756t9jSirBdwz1C05wrCJDi
- baCRLzCZ2wIEhODak+eH7kw1Y/S3g97AcpYNhBU4Zwn7xYkLkO0GwG4kiCCqd1uVH8xZ1MXt82p
- JrwWasj35vPdM60Oh2PLzxF8Tgvf9/tB2cclnmnhG3adF5lwx6hthlhcB28Rq+vOUXOGtOu/q8O
- T3xDux34dsoOALA7n969I/bSKmVpmz2gAKeTFvNRlVBU1xJcneaXY3tJlOweiaUgcZI0qgFBW/4
- ePGIoaGlPShJfNH7U1ZrUvpZ98Xo3Sb9w==
-X-Received: by 2002:a2e:a989:0:b0:3a8:7db9:3b28 with SMTP id
- 38308e7fff4ca-3a87db93f65mr769791fa.20.1790874153635; 
- Thu, 01 Oct 2026 10:02:33 -0700 (PDT)
-Received: from localhost ([2001:1970:3847:e000:1977:be2f:4a71:2892])
- by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-3a87e32c6ccsm470601fa.38.2026.10.01.10.02.27
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 01 Oct 2026 10:02:29 -0700 (PDT)
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Thu, 01 Oct 2026 13:02:25 -0400
-Message-Id: <DLTNWGSL7L7F.LNM2NJ62JNLJ@baylibre.com>
-To: "Alistair Francis" <Alistair.Francis@wdc.com>, "tgamblin@baylibre.com"
- <tgamblin@baylibre.com>, "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>
-From: "Trevor Gamblin" <tgamblin@baylibre.com>
-Subject: Re: [PATCH v2 2/2] target/riscv: add helper_tlb_flush_page(), use
- for sfence.vma with vaddr operand
-Cc: "palmer@dabbelt.com" <palmer@dabbelt.com>, "qemu-riscv@nongnu.org"
- <qemu-riscv@nongnu.org>, "daniel.barboza@oss.qualcomm.com"
- <daniel.barboza@oss.qualcomm.com>, "chao.liu@processmission.com"
- <chao.liu@processmission.com>, "liwei1518@gmail.com" <liwei1518@gmail.com>,
- "zhiwei_liu@linux.alibaba.com" <zhiwei_liu@linux.alibaba.com>,
- <qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org>
-X-Mailer: aerc 0.22.0
-References: <20260904-riscv_tlb_page_flush-v2-0-defec3f29312@baylibre.com>
- <20260904-riscv_tlb_page_flush-v2-2-defec3f29312@baylibre.com>
- <322f18f233ae985970ba75eede7d3623110b13f3.camel@wdc.com>
-In-Reply-To: <322f18f233ae985970ba75eede7d3623110b13f3.camel@wdc.com>
-Received-SPF: pass client-ip=2a00:1450:4864:38::d;
- envelope-from=tgamblin@baylibre.com; helo=mail-lr2-x0d.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
+ id 1xCKlm-0006Lj-SZ
+ for qemu-riscv@nongnu.org; Thu, 01 Oct 2026 13:40:34 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
+ id 1xCKlk-0000Wl-2t
+ for qemu-riscv@nongnu.org; Thu, 01 Oct 2026 13:40:34 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1790876430;
+ h=from:from:reply-to:reply-to:subject:subject:date:date:
+ message-id:message-id:to:to:cc:cc:mime-version:mime-version:
+ content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=hQteB3kBMoO7KsS+Tc28DxMqgveZesjJsm/gNAhL+xM=;
+ b=MJddEV/E+pm+u340ew7Pw55zQ9uY44+Z/lXCA3tnmOSrJuLHtc6E9L8sRk55A2S1vqLNYT
+ NswKq1QYKpuIpZEiR+NUufl4LVdnCHlqbC3hlrjXy4v/PytgW/ExVGlJVuXgLSjrQuyT6T
+ Mk3vKSStnkfeVVWclWAsUpdB05n7Xi0=
+Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-128-5alCn65zPlab27ND3B_pLQ-1; Thu,
+ 01 Oct 2026 13:40:27 -0400
+X-MC-Unique: 5alCn65zPlab27ND3B_pLQ-1
+X-Mimecast-MFC-AGG-ID: 5alCn65zPlab27ND3B_pLQ_1790876424
+Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 7AB5E1955EAC; Thu,  1 Oct 2026 17:40:23 +0000 (UTC)
+Received: from redhat.com (headnet04.pony-001.prod.iad2.dc.redhat.com
+ [10.2.32.116])
+ by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 5238030000E4; Thu,  1 Oct 2026 17:40:17 +0000 (UTC)
+Date: Thu, 1 Oct 2026 18:40:14 +0100
+From: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
+To: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
+Cc: luoyonggang@gmail.com,
+ Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
+ qemu-devel@nongnu.org, Chao Liu <chao.liu@processmission.com>,
+ Eric Blake <eblake@redhat.com>, qemu-arm@nongnu.org,
+ Paolo Bonzini <pbonzini@redhat.com>, Markus Armbruster <armbru@redhat.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Brian Cain <brian.cain@oss.qualcomm.com>,
+ Stafford Horne <shorne@gmail.com>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Fabiano Rosas <farosas@suse.de>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ qemu-riscv@nongnu.org, Laurent Vivier <lvivier@redhat.com>,
+ Max Filippov <jcmvbkbc@gmail.com>, Song Gao <17746591750@163.com>,
+ Philippe Mathieu-Daude <philmd@mailo.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Laurent Vivier <laurent@vivier.eu>, Weiwei Li <liwei1518@gmail.com>,
+ Zhao Liu <zhao1.liu@intel.com>
+Subject: Re: [PATCH v3 01/10] machine: allow -M name to differ from QOM type
+Message-ID: <ar6a_uDw9OeLng6c@redhat.com>
+References: <20260926081551.29-1-luoyonggang@gmail.com>
+ <20260926081551.29-2-luoyonggang@gmail.com>
+ <82250296-78bc-4345-9e57-1fcac485d18a@oss.qualcomm.com>
+ <CAE2XoE_+nhj58M9_yx6wf532qCSVcERpTw7F4AU7PXN7prhpzg@mail.gmail.com>
+ <74853ef8-7315-466a-99ac-41c8182f9b13@oss.qualcomm.com>
+ <ar4TQtKqfXX5Ul9O@redhat.com>
+ <CAE2XoE8q3LYJ-JCTbRBk4iPdUQdRE8zzmOgiZ=HEXDL78iw8UQ@mail.gmail.com>
+ <26b0d44d-0322-4ceb-a47b-747fc52c61b7@oss.qualcomm.com>
+ <CAE2XoE8VyCpPCqRVFArBn_dDsyMw8vrSJxWMhKq17btZvO2n6A@mail.gmail.com>
+ <b02db9e2-b348-4011-a98d-122e9d9f17e5@oss.qualcomm.com>
+MIME-Version: 1.0
+In-Reply-To: <b02db9e2-b348-4011-a98d-122e9d9f17e5@oss.qualcomm.com>
+User-Agent: Mutt/2.4.2 (2026-08-30)
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
+X-Mimecast-MFC-PROC-ID: jOq0ZqB3dWF62aCGU6Xq2xJkixvU7Cn762VQetepkts_1790876424
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=berrange@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: 36
+X-Spam_score: 3.6
+X-Spam_bar: +++
+X-Spam_report: (3.6 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.331,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ RCVD_IN_SBL_CSS=3.335, SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
+ THIS_AD=2.699 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -110,107 +112,192 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
+Reply-To: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu Oct 1, 2026 at 1:14 AM EDT, Alistair Francis wrote:
-> On Fri, 2026-09-04 at 14:43 -0400, Trevor Gamblin wrote:
->> sfence.vma unconditionally called helper_tlb_flush(), regardless of
->> the
->> rs1 (vaddr) and rs2 (asid) operands, forcing a page-table walk on the
->> next access. Create a page-level counterpart to helper_tlb_flush()
->> called helper_tlb_flush_page(), and use it whenever rs1 !=3D 0, falling
->> back to the existing full flush for rs1 =3D=3D 0. This makes RISC-V
->> behaviour more similar to ARM's equivalent (tlbi_aa64_vae1_write),
->> which
->> already does tlb_flush_page_by_mmuidx() instead of a full flush.
->>=20
->> Pass get_address(ctx, a->rs1, 0) to gen_helper_tlb_flush_page()
->> rather
->> than get_gpr(), so that the address being passed matches the current
->> addr_xl width regardless of '-cpu' input. Otherwise, the raw register
->> value can carry garbage above that width and never match the address
->> the
->> TLB entry was actually filled under, so the flush silently misses and
->> a
->> stale mapping survives.
->>=20
->> Signed-off-by: Trevor Gamblin <tgamblin@baylibre.com>
->
-> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
->
-> Can you fixup sinval.vma and hinval.* as well please?
+On Thu, Oct 01, 2026 at 09:19:48AM -0700, Pierrick Bouvier wrote:
+> On 10/1/2026 9:14 AM, Yonggang Luo wrote:
+> > On Thu, Oct 1, 2026 at 4:44 PM Philippe Mathieu-Daudé
+> > <philmd@oss.qualcomm.com> wrote:
+> >>
+> >> On 1/10/26 10:13, Yonggang Luo wrote:
+> >>> On Thu, Oct 1, 2026 at 4:01 PM Daniel P. Berrangé <berrange@redhat.com> wrote:
+> >>>>
+> >>>> On Wed, Sep 30, 2026 at 09:23:50PM -0700, Pierrick Bouvier wrote:
+> >>>>> On 9/30/26 6:55 PM, Yonggang Luo wrote:
+> >>>>>> On Thu, Oct 1, 2026 at 2:19 AM Pierrick Bouvier
+> >>>>>> <pierrick.bouvier@oss.qualcomm.com> wrote:
+> >>>>>>>
+> >>>>>>> On 9/26/26 1:15 AM, Yonggang Luo wrote:
+> >>>>>>>> - Add machine_class_set_name() so boards can keep a stable -M name
+> >>>>>>>>      when the QOM type is uniquified. machine_class_base_init still
+> >>>>>>>>      defaults the name to the QOM type without -machine.
+> >>>>>>>> - Document that MachineClass::name is the -M name, not the QOM type.
+> >>>>>>>> - Sort -M help by MachineClass::name so order matches the printed names
+> >>>>>>>>      when QOM types are prefixed (arm-virt-11.1-machine vs virt-11.1).
+> >>>>>>>>
+> >>>>>>>> Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
+> >>>>>>>> Reviewed-by: Daniel P. Berrangé <berrange@redhat.com>
+> >>>>>>>> ---
+> >>>>>>>>     hw/core/machine.c        |  6 ++++++
+> >>>>>>>>     include/hw/core/boards.h | 12 +++++++++++-
+> >>>>>>>>     system/vl.c              |  8 +++-----
+> >>>>>>>>     3 files changed, 20 insertions(+), 6 deletions(-)
+> >>>>>>>>
+> >>>>>>>
+> >>>>>>> First, I'm not opposed to this series, and if anyone wants to pull this,
+> >>>>>>> I'm ok with that decision. It's just unclear for me what will be
+> >>>>>>> direction after this step.
+> >>>>>>>
+> >>>>>>> If I understand correctly, the goal here is to allow to register
+> >>>>>>> multiple "virt" machines, while still having distinct QOM types behind
+> >>>>>>> the hood, which does no affect behavior of current binaries who have
+> >>>>>>> only a single "virt" type at most.
+> >>>>>>>
+> >>>>>>> That said, if we project in the future where we have a binary with
+> >>>>>>> multiple of those "virt" machines, how will the current series help? The
+> >>>>>>> situation we'll have is distinct QOM types, that all answer to the name
+> >>>>>>> "virt", so we have no way to select them individually.
+> >>>>>>>
+> >>>>>>> Slightly worse, find_machine() will just pick the first machine name
+> >>>>>>> virt, which is a non-deterministic order at the moment.
+> >>>>>>> https://gitlab.com/qemu-project/qemu/-/blob/master/system/vl.c?ref_type=heads#L846
+> >>>>>>
+> >>>>>> That will handle it properly. For single-target binary qemu-system-$arch.exe,
+> >>>>>> this won't be an issue, as there is no conflict as they won't be compiled in.
+> >>>>>> For multi-target binary qemu-system.exe, we will choose the target through
+> >>>>>> -M $arch:$machine, and when no $arch is specified, the default to arch
+> >>>>>> to be "none",
+> >>>>>> so still won't be non-deterministic.
+> >>>>>>
+> >>>>>
+> >>>>>> "when no $arch is specified, the default to arch to be "none",so still >
+> >>>>> won't be non-deterministic.
+> >>>>>
+> >>>>> That's my point, the current abstraction will create something ambiguous by
+> >>>>> design. When people will specify -M virt, without $arch:, a random machine
+> >>>>> will be selected. At least, maybe this series should ensure there is only
+> >>>>> one virt alias, or make it forbidden and uses unambiguous names only.
+> >>>>
+> >>>> Yes, if there are multiple choices, we should not pick an arbitrary one
+> >>>> non-deterministically, we must require the user to narrow the choice
+> >>>> explicitly in some manner.
+> >>>>
+> >>>>> "$arch:" is just a workaround to not add -target option, except that it
+> >>>>> comes with additional problems, creating inconsistent command lines.
+> >>>>> I already expressed my skepticism about the "machine prefix" based approach,
+> >>>>> being more in favor to strongly filter types per target with an unambiguous
+> >>>>> -target option. I'll accept the community's choice on this, but just wanted
+> >>>>> to see this explained before someone hits the pull button on this series, so
+> >>>>> they know what will come down the road.
+> >>>>
+> >>>> Historically, QEMU do alot of things like this where we invented magic
+> >>>> syntax that needed custom parsing of the command line. Over time we
+> >>>> came to the conclusion this ad-hoc parsing was a bad idea, and we
+> >>>> should always explicitly model things, even if it is more verbose.
+> >>>>
+> >>>> Thus I would not want to see "$target:$machine" as something that is
+> >>>> parsed into two pieces.
+> >>>>
+> >>>> IOW, "aarch64-virt" would be OK as a unique name which treated as an
+> >>>> opaque string, but "aarch64:virt" as something split into "aarch64"
+> >>>> (target) and "virt" (machine) would be a bad idea.
+> >>>>
+> >>>> An acceptable way of modelling the latter would be to use
+> >>>>
+> >>>>    '-machine name=virt,target=aarch64'
+> >>
+> >> Why mix target information parsing at machine level when the
+> >> machine already know it is target specific? People wanting to
+> >> use the ARM virt machine don't want to know (and don't care)
+> >> about the M68k virt machine.
+> >>
+> >>>
+> >>>>
+> >>>> or
+> >>>>
+> >>>>    -machine virt -target aarch64
+> >>>
+> >>>
+> >>> That's made me confused, as different people propose different ways to
+> >>> handle it.
+> >>> Can we just choose one first?
+> >>> '-machine name=virt,target=aarch64' is introducing new options, so is
+> >>> '-machine virt -target aarch64'
+> >>> I can not argue which is better, my suggestion may land one first. Both
+> >>> "-machine virt -target aarch64" and "-machine $arch:$name" I have
+> >>> already implemented. And currently I chose
+> >>> "-machine $arch:$name" according to
+> >>> https://patchwork.ozlabs.org/project/qemu-devel/cover/20260828225901.367438-1-pierrick.bouvier@oss.qualcomm.com/#3749257
+> >>
+> >> You still did not explained what you are trying to achieve
+> >> with all your contributions, so my view is surely biased by
+> >> what we envisioned 3 years ago when we started to pave our
+> >> way for heterogenous emulation.
+> >>
+> >> My options so far for a single binary:
+> >>
+> >> - infer from argv[]
+> > This can be easy to implement and can be defer till the qemu-system-$arch
+> > is symbolic link to qemu-system.
+> > 
+> >> - enforce with CLI -target
+> > 
+> > I want to post my personal options, I'll prefer the -target options as
+> > it's far easier to implement than "-machine $arch:$machine".
+> > -machine $arch:$machine is very complicated to implement correct.
+> > 
+> >> - not expose any machine
+> > 
+> > I think not exposing any machine in the command line is a good option,
+> > as it's easier to
+> > implement and clean for the user. But I think this series is still needed.
+> > As we want the means to inspect all machines and devices for all
+> > targets(that need all of them
+> > to be registered into the QOM type hash table).
+> 
+> It's not strictly needed to expose all types. -target can be parsed
+> first, and influence what is visible from help (including -M help) also.
+> 
+> Also, if we go down the -target option, we should decide if we expose
+> all types or not, which means if we implement filtering or not. If we
+> expose all the types, I'm not sure what -target is supposed to choose.
+> 
+> Daniel, what do you think about this one?
 
-Sure! I'm travelling next week, but I'll see if I can get patches written i=
-n
-downtime or right afterward.
+*If* we take the starting assumption that the new multi-target
+binary does not need to be a perfect replica of the existing
+binaries, then filtering devices is creating extra work for
+ourselves, to solve a problem that isn't especially important.
 
-Trevor
->
-> Alistair
->
->> ---
->> =C2=A0target/riscv/helper.h=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | 1 +
->> =C2=A0target/riscv/tcg/insn_trans/trans_privileged.c.inc | 6 +++++-
->> =C2=A0target/riscv/tcg/op_helper.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0 | 6 ++++++
->> =C2=A03 files changed, 12 insertions(+), 1 deletion(-)
->>=20
->> diff --git a/target/riscv/helper.h b/target/riscv/helper.h
->> index 4fc2d3a155..652f85a5c7 100644
->> --- a/target/riscv/helper.h
->> +++ b/target/riscv/helper.h
->> @@ -137,6 +137,7 @@ DEF_HELPER_1(ctr_clear, void, env)
->> =C2=A0DEF_HELPER_1(wfi, void, env)
->> =C2=A0DEF_HELPER_1(wrs_nto, void, env)
->> =C2=A0DEF_HELPER_1(tlb_flush, void, env)
->> +DEF_HELPER_2(tlb_flush_page, void, env, tl)
->> =C2=A0DEF_HELPER_1(tlb_flush_all, void, env)
->> =C2=A0DEF_HELPER_4(ctr_add_entry, void, env, tl, tl, tl)
->> =C2=A0/* Native Debug */
->> diff --git a/target/riscv/tcg/insn_trans/trans_privileged.c.inc
->> b/target/riscv/tcg/insn_trans/trans_privileged.c.inc
->> index a8eaccef67..8655fa332e 100644
->> --- a/target/riscv/tcg/insn_trans/trans_privileged.c.inc
->> +++ b/target/riscv/tcg/insn_trans/trans_privileged.c.inc
->> @@ -155,7 +155,11 @@ static bool trans_sfence_vma(DisasContext *ctx,
->> arg_sfence_vma *a)
->> =C2=A0{
->> =C2=A0#ifndef CONFIG_USER_ONLY
->> =C2=A0=C2=A0=C2=A0=C2=A0 decode_save_opc(ctx, 0);
->> -=C2=A0=C2=A0=C2=A0 gen_helper_tlb_flush(tcg_env);
->> +=C2=A0=C2=A0=C2=A0 if (a->rs1 =3D=3D 0) {
->> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 gen_helper_tlb_flush(tcg_env=
-);
->> +=C2=A0=C2=A0=C2=A0 } else {
->> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 gen_helper_tlb_flush_page(tc=
-g_env, get_address(ctx, a->rs1,
->> 0));
->> +=C2=A0=C2=A0=C2=A0 }
->> =C2=A0=C2=A0=C2=A0=C2=A0 return true;
->> =C2=A0#endif
->> =C2=A0=C2=A0=C2=A0=C2=A0 return false;
->> diff --git a/target/riscv/tcg/op_helper.c
->> b/target/riscv/tcg/op_helper.c
->> index 7f63f3ada5..178b4d271b 100644
->> --- a/target/riscv/tcg/op_helper.c
->> +++ b/target/riscv/tcg/op_helper.c
->> @@ -607,6 +607,12 @@ void helper_tlb_flush(CPURISCVState *env)
->> =C2=A0=C2=A0=C2=A0=C2=A0 tlb_flush(cs);
->> =C2=A0}
->> =C2=A0
->> +void helper_tlb_flush_page(CPURISCVState *env, target_ulong addr)
->> +{
->> +=C2=A0=C2=A0=C2=A0 check_sfence_vma(env, GETPC());
->> +=C2=A0=C2=A0=C2=A0 tlb_flush_page(env_cpu(env), addr);
->> +}
->> +
->> =C2=A0void helper_tlb_flush_all(CPURISCVState *env)
->> =C2=A0{
->> =C2=A0=C2=A0=C2=A0=C2=A0 CPUState *cs =3D env_cpu(env);
+Even with the current per-target binaries there are countless
+devices linked in which are incompatible / not usable with
+certain machine types. A new multi-target binary with a union
+of all devices will just be a bigger example of a scenario that
+already has to be dealt with for today's binaries.
 
+So if we have that assumption that we don't need to do device
+filtering, at that point, a --target option doesn't have as
+big of a role to play. The machine type code knows what target(s)
+it wants (1 or 2 targets depending on if there are 32 + 64 bit
+varaints. The CPU model the user requests (if the CPU is not
+hardcoded by the machine), determines 32 bit vs 64 bit.
+
+A --target option (or similar -machine name,target=xxx) could
+be used to dis-ambiguate between 'virt' machines if keeping
+their user facing machine names as-is, or it could be used as
+a way to be more explicit about the 32-bit vs 64-bit choice
+and sanity checked against the CPU model choice.
+
+So overall "device filtering" or not is the key question to
+decide IMHO.
+
+With regards,
+Daniel
+-- 
+|: https://berrange.com       ~~        https://hachyderm.io/@berrange :|
+|: https://libvirt.org          ~~          https://entangle-photo.org :|
+|: https://pixelfed.art/berrange   ~~    https://fstop138.berrange.com :|
 
 
