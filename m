@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CF8CCA5FD4
-	for <qemu-riscv@archiver.kernel.org>; Thu,  1 Oct 2026 15:56:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0474CCA5FD4
+	for <qemu-riscv@archiver.kernel.org>; Thu,  1 Oct 2026 15:56:49 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xCJ86-0005gQ-Kh; Thu, 01 Oct 2026 11:55:30 -0400
+	id 1xCJ8B-0005pt-8m; Thu, 01 Oct 2026 11:55:35 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <anjo@rev.ng>)
- id 1xCJ7H-0004m2-Q9; Thu, 01 Oct 2026 11:54:40 -0400
+ id 1xCJ7G-0004lr-Jw; Thu, 01 Oct 2026 11:54:40 -0400
 Received: from rev.ng ([94.130.142.21])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <anjo@rev.ng>)
- id 1xCJ7F-0005at-9K; Thu, 01 Oct 2026 11:54:39 -0400
+ id 1xCJ7C-0005Zw-IC; Thu, 01 Oct 2026 11:54:37 -0400
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=rev.ng;
  s=dkim; h=Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:
  Content-Type:MIME-Version:Subject:Date:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive:List-Unsubscribe:List-Unsubscribe-Post:
- List-Help; bh=A7CeWrsNA8pyRSdSq1+gpPp1/rjdMIXk702xiv35vZo=; b=nzSnVPyik6xzxrC
- z3aoZS9g+mA1V3pKXyO1zlJmHZJxRr/nuhT7+SFyf5ih8uPMZjdcH7LfuDqGpl7pDLuZBngRaLNfG
- o3xv3qGv/PQ1SjcOFXC2SMTw/Ztfbw3bIJAMdSZjygPJe3w/aRGD74KpD1hSPhYDquJx2NZyS9QN+
- Fw=;
-Date: Thu, 01 Oct 2026 17:59:39 +0200
-Subject: [PATCH 16/18] target/riscv: Compile machine.c once
+ List-Help; bh=sdnI3TFz/3m06XRoraU3ySSc9XBq+So7QUOceUHZ/zU=; b=TtHiah9KVMwFKGs
+ VegjDn/KkCcHsAa8qvuU13t2mII++FVMFSWgUJR4ceRAJq8ZYobah5K8bksPFRtzO11BXVw+KyZjr
+ bWBUBqtJwlajrFrqDB6fkEbpmfgWaGWqp+iFasAUfFCMd+HFD0HkxSfOX4aYpB4UgGsmkgba6jkDo
+ 1M=;
+Date: Thu, 01 Oct 2026 17:59:35 +0200
+Subject: [PATCH 12/18] target/riscv: Compile tcg-cpu.c once for system-mode
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261001-rv-dedup-v1-16-ea69b07afd31@rev.ng>
+Message-Id: <20261001-rv-dedup-v1-12-ea69b07afd31@rev.ng>
 References: <20261001-rv-dedup-v1-0-ea69b07afd31@rev.ng>
 In-Reply-To: <20261001-rv-dedup-v1-0-ea69b07afd31@rev.ng>
 To: qemu-devel@nongnu.org
@@ -41,11 +41,11 @@ Cc: Anton Johansson <anjo@rev.ng>, qemu-riscv@nongnu.org,
  daniel.barboza@oss.qualcomm.com, philmd@oss.qualcomm.com, 
  pierrick.bouvier@oss.qualcomm.com, palmer@dabbelt.com, 
  alistair.francis@wdc.com
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1790870392; l=2381;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1790870392; l=2558;
  i=anjo@rev.ng; s=20260210; h=from:subject:message-id;
- bh=A0NlapjIRuspzIT9ZHanNRNvnq7mLdql2wlLPJXVZxo=;
- b=9s1FXKUt1SGkbnkFDcDlnTu6sEHGGD/WdA9Ou4LLNBedJqQ9kk6YV/hjvVZfWWFTpxLTM8Oep
- 9rau0+7SxKDCwEJ8QSl2Q21b3QVt5xKKZ16MsLgF7o6SFglX6zPRlMZ
+ bh=Xrbw5IbdCt/qBBo2cmR5rAtOIXOMQQ+KuL21f3+RRwg=;
+ b=itYysQT+8MMSozHexCilo1h8eizakqwMEA18R8X9JpnirXicB8r4kaSX7WxQT513NjXWmjsbU
+ FUyIr2NzOBaBpBFn3NzhkpDK9t1LAAMZedDG5+qa5v8ryxg3pBWjvbf
 X-Developer-Key: i=anjo@rev.ng; a=ed25519;
  pk=dKsZvj/g3kgDxnV1/SWg8a0YNGSpWtFGNsWIepQYKow=
 Received-SPF: pass client-ip=94.130.142.21; envelope-from=anjo@rev.ng;
@@ -73,90 +73,82 @@ From:  Anton Johansson via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-There's now also no change in migration stream between KVM/non-KVM
-configurations, KVM fields are filtered out via .is_needed().
+Remaining target_ulongs are replaced by their corresponding type in
+CPUArchState.
 
 Signed-off-by: Anton Johansson <anjo@rev.ng>
 ---
- target/riscv/machine.c   | 10 +---------
- target/riscv/meson.build |  2 +-
- 2 files changed, 2 insertions(+), 10 deletions(-)
+ target/riscv/tcg/tcg-cpu.c   | 8 ++++----
+ target/riscv/tcg/meson.build | 3 ++-
+ 2 files changed, 6 insertions(+), 5 deletions(-)
 
-diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-index bf203bffce..ddcab8a667 100644
---- a/target/riscv/machine.c
-+++ b/target/riscv/machine.c
-@@ -21,12 +21,10 @@
- #include "qemu/error-report.h"
- #include "system/kvm.h"
- #include "system/tcg.h"
--#include "migration/cpu.h"
-+#include "migration/vmstate.h"
- #include "exec/icount.h"
- #include "target/riscv/tcg/debug.h"
--#ifdef CONFIG_KVM
- #include "kvm/kvm_riscv.h"
--#endif
+diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+index b68160af83..91b2e128ea 100644
+--- a/target/riscv/tcg/tcg-cpu.c
++++ b/target/riscv/tcg/tcg-cpu.c
+@@ -229,7 +229,7 @@ static void riscv_restore_state_to_opc(CPUState *cs,
+     RISCVCPU *cpu = RISCV_CPU(cs);
+     CPURISCVState *env = &cpu->env;
+     RISCVMXL xl = FIELD_EX32(tb->flags, TB_FLAGS, XL);
+-    target_ulong pc;
++    uint64_t pc;
  
- static bool pmp_needed(void *opaque)
- {
-@@ -196,7 +194,6 @@ static const VMStateDescription vmstate_rv128 = {
-     }
- };
+     if (tb_cflags(tb) & CF_PCREL) {
+         pc = (env->pc & TARGET_PAGE_MASK) | data[0];
+@@ -1336,7 +1336,7 @@ static bool riscv_tcg_cpu_realize(CPUState *cs, Error **errp)
+ }
  
--#ifdef CONFIG_KVM
- static bool kvmtimer_needed(void *opaque)
- {
-     return kvm_enabled();
-@@ -262,7 +259,6 @@ static const VMStateDescription vmstate_kvm_mp_state = {
-         VMSTATE_END_OF_LIST()
-     }
- };
--#endif
+ typedef struct RISCVCPUMisaExtConfig {
+-    target_ulong misa_bit;
++    uint32_t misa_bit;
+     bool enabled;
+ } RISCVCPUMisaExtConfig;
  
- static bool debug_needed(void *opaque)
+@@ -1344,7 +1344,7 @@ static void cpu_set_misa_ext_cfg(Object *obj, Visitor *v, const char *name,
+                                  void *opaque, Error **errp)
  {
-@@ -499,9 +495,7 @@ const VMStateDescription vmstate_riscv_cpu = {
-     .name = "cpu",
-     .version_id = 12,
-     .minimum_version_id = 12,
--#ifdef CONFIG_KVM
-     .pre_load = riscv_cpu_kvm_pre_load,
--#endif
-     .post_load = riscv_cpu_post_load,
-     .fields = (const VMStateField[]) {
-         VMSTATE_UINT64_ARRAY(env.gpr, RISCVCPU, 32),
-@@ -563,10 +557,8 @@ const VMStateDescription vmstate_riscv_cpu = {
-         &vmstate_vector,
-         &vmstate_pointermasking,
-         &vmstate_rv128,
--#ifdef CONFIG_KVM
-         &vmstate_kvmtimer,
-         &vmstate_kvm_mp_state,
--#endif
-         &vmstate_envcfg,
-         &vmstate_debug,
-         &vmstate_smstateen,
-diff --git a/target/riscv/meson.build b/target/riscv/meson.build
-index 28a6ff8553..b5ec6cdcd8 100644
---- a/target/riscv/meson.build
-+++ b/target/riscv/meson.build
-@@ -23,7 +23,6 @@ riscv_stubs_ss = ss.source_set()
- riscv_system_ss = ss.source_set()
- riscv_system_ss.add(files(
-   'monitor.c',
--  'machine.c',
-   'time_helper.c',
+     const RISCVCPUMisaExtConfig *misa_ext_cfg = opaque;
+-    target_ulong misa_bit = misa_ext_cfg->misa_bit;
++    uint32_t misa_bit = misa_ext_cfg->misa_bit;
+     RISCVCPU *cpu = RISCV_CPU(obj);
+     CPURISCVState *env = &cpu->env;
+     bool vendor_cpu = riscv_cpu_is_vendor(obj);
+@@ -1386,7 +1386,7 @@ static void cpu_get_misa_ext_cfg(Object *obj, Visitor *v, const char *name,
+                                  void *opaque, Error **errp)
+ {
+     const RISCVCPUMisaExtConfig *misa_ext_cfg = opaque;
+-    target_ulong misa_bit = misa_ext_cfg->misa_bit;
++    uint32_t misa_bit = misa_ext_cfg->misa_bit;
+     RISCVCPU *cpu = RISCV_CPU(obj);
+     CPURISCVState *env = &cpu->env;
+     bool value;
+diff --git a/target/riscv/tcg/meson.build b/target/riscv/tcg/meson.build
+index cc50f3764c..69dadfd662 100644
+--- a/target/riscv/tcg/meson.build
++++ b/target/riscv/tcg/meson.build
+@@ -9,7 +9,6 @@ riscv_ss.add(files(
+   'm128_helper.c',
+   'op_helper.c',
+   'translate.c',
+-  'tcg-cpu.c',
+   'vcrypto_helper.c',
+   'vector_helper.c',
+   'vector_internals.c',
+@@ -25,6 +24,7 @@ riscv_system_ss.add(files(
+ riscv_user_ss.add(files(
+   'cpu_helper.c',
+   'csr.c',
++  'tcg-cpu.c',
  ))
  
-@@ -37,6 +36,7 @@ riscv_user_ss.add(files(
- riscv_common_system_ss.add(files(
-   'arch_dump.c',
-   'cpu.c',
-+  'machine.c',
-   'riscv-qmp-cmds.c',
- ))
  
+@@ -33,5 +33,6 @@ riscv_common_system_ss.add(files(
+   'csr.c',
+   'mips_csr.c',
+   'pmu.c',
++  'tcg-cpu.c',
+   'th_csr.c',
+ ))
 
 -- 
 2.52.0
