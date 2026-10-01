@@ -4,130 +4,133 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6232CA5FCB
-	for <qemu-riscv@archiver.kernel.org>; Thu,  1 Oct 2026 12:04:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B23ACCA5FD2
+	for <qemu-riscv@archiver.kernel.org>; Thu,  1 Oct 2026 13:21:00 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xCFWE-0002Uj-Tc; Thu, 01 Oct 2026 08:04:11 -0400
+	id 1xCGiE-00055p-9b; Thu, 01 Oct 2026 09:20:38 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1xCFVw-0002NC-02
- for qemu-riscv@nongnu.org; Thu, 01 Oct 2026 08:03:53 -0400
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1xCGiB-00055f-Lv
+ for qemu-riscv@nongnu.org; Thu, 01 Oct 2026 09:20:35 -0400
 Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1xCFVt-0003JW-UM
- for qemu-riscv@nongnu.org; Thu, 01 Oct 2026 08:03:51 -0400
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1xCGi9-0004g8-OP
+ for qemu-riscv@nongnu.org; Thu, 01 Oct 2026 09:20:35 -0400
 Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6916xK7i2805837
- for <qemu-riscv@nongnu.org>; Thu, 1 Oct 2026 12:03:42 GMT
+ 691Cmdp32806447
+ for <qemu-riscv@nongnu.org>; Thu, 1 Oct 2026 13:20:30 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- FyWQZBIDMMX0sgWn/UaLxEh8Xnt9Yh8i1P6UdPwFnwk=; b=Kk1Xc7+g/HKFpQrV
- ZCGuELGWT+QDxYOC2vTN8QIi1FF3D6dtvG9JcETtyKN17/WqtH1qbsFGvvckY/mP
- D6zAGTs9LNSUJXS6cZDx/hkViuoRMPOthrd76kkE4gIo+Y4IU7B8mKqg5ZwcHrCi
- jfEzPr4l/Tgw2e5HWbMNsk7n2mz/S9ASKN3Z/j56lrsGDYVMzuMldjifBAW3uhtz
- Xi/cKth7XQmC0uK+k+vb4jjgjO0ckkbWpVrm+EZCFziTsffk4I7pLtXc26sZMu0h
- obft9NRpTVYQqPTgSpV+QFcR+6tZfUCppqT/DTYW9l+Z6PKdiCTr6DSFTxHLpXqr
- PND0Qw==
-Received: from mail-vs1-f71.google.com (mail-vs1-f71.google.com
- [209.85.217.71])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h1hvkhhm0-1
+ aevunFh2VR3OoiMZUjBR7R6IVa6O/WCam1NH2fHd7HY=; b=ocUcGTxZP5obctKL
+ cXZrOF5e9Szchbi9HN9zQhr/bSc7GHnLyvpUPlOlun+vaIOvRzPimd1l0mPlweT2
+ Os2Jk+LbbNig3FDNujVBXzN1homjO0b4gj8D67xI4QCDJ9Mqh7ogBWeR7ZHJXRLv
+ Y59rRP4GPil033QjfuYCGrBTVMoE//zNJDy1rCQPnyMHqIzdjgO9L4xho+/spv2r
+ EwI3Wl/fKTtXwxp+JNZNzfa+2XXQYmuB6JRVhz7977gBvC4TVoM+rWTdLebB1nph
+ D7VSxrHPekRz9pcw3QCYccAWDMjS10iyNcGQN7Lq20E0SUMLy7JyHGRPo1eqfd1h
+ yL+2pg==
+Received: from mail-yw1-f198.google.com (mail-yw1-f198.google.com
+ [209.85.128.198])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h1hvkhurr-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Thu, 01 Oct 2026 12:03:42 +0000 (GMT)
-Received: by mail-vs1-f71.google.com with SMTP id
- ada2fe7eead31-7bf586522d4so862975137.1
- for <qemu-riscv@nongnu.org>; Thu, 01 Oct 2026 05:03:42 -0700 (PDT)
+ for <qemu-riscv@nongnu.org>; Thu, 01 Oct 2026 13:20:29 +0000 (GMT)
+Received: by mail-yw1-f198.google.com with SMTP id
+ 00721157ae682-8881abf79a4so92403337b3.3
+ for <qemu-riscv@nongnu.org>; Thu, 01 Oct 2026 06:20:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1790856218; x=1791461018; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1790860829; x=1791465629; darn=nongnu.org;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=FyWQZBIDMMX0sgWn/UaLxEh8Xnt9Yh8i1P6UdPwFnwk=;
- b=e3GqNzaqODrrv+Skk9dvIOlL3j4ibkmlveD2RaZzz8rTg0deK/NIJeeEWk07NuA21S
- iS9ogg9H3HHBSjVEkMJtZcQ8Efj7ZRco/1btnEESlPZC5Lpxem2vYgvMEUVC8Ie/SMaT
- lRlptGkMgIRPde+573wK9WSjyqnf7sqGT6ezfEur4iFSUerVagdgn8O7LJ0/AXxq93pc
- FBg7+rUYFufAnwGKo88y6zztAUYlpP8RzgyICWYGpyCtt0JSapvDvWffHRB0TYHuA4RP
- d+mphG4gXtZUx1XMDqem7qszMIrzXdkyTnOxAm/SrzuDSMQILjKOhIJjkCV7osGdb79q
- c9Ig==
+ bh=aevunFh2VR3OoiMZUjBR7R6IVa6O/WCam1NH2fHd7HY=;
+ b=fSYwtrviNfDKazWKIVMTiL33rnZO/t7h54vkPfnXrV3PuMTvJLrv7ouKNtkfN1Csn5
+ zaedbZDNiLwu0NQzpQ2U/RGhpBERM/MAlVEYd1V+CcyLb+o8kCdD/7Ab6S26uo3H1e07
+ +xE5QpJpXpXd3hRxofQmtuYcEqTOByl6PpEDT6i6Aq4hn85AgDcLZ01JGLt8KkC+FEhO
+ FgMb0N7CjRcAoRn2vUcTX37iNiObea7AidLW7L2tzzhnHSBt5d5QK/ZzYV2Fi8E/CTtA
+ rEg7TRlVnGZbOzkYZJRKmKIFDrBjHiNKAlamK/xx1Nu6hbYSWCS8m8at+FSTQUjRbyaq
+ x1+Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790856218; x=1791461018;
+ d=1e100.net; s=20260707; t=1790860829; x=1791465629;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=FyWQZBIDMMX0sgWn/UaLxEh8Xnt9Yh8i1P6UdPwFnwk=;
- b=1j0YLDraE/IM4BqVXQfG0BEeKlIE9Fkcdw/+MQUanmvIIGsYKQyxYg6JqJVyk74dA4
- wnoEoNfmdzfj6SQndCtYDJK88J0GeOJlCkYGf+fQI95wqYJnToq+zemftZ4X5H0hGVDq
- Hl2Uh6TZ02OzlWuscO1zP1ZMoj1yrrQeoczwnuw7axI/nkz6yLisIQdQMo98AaQ5k8wf
- kPMz/8c+jnX4+X3nGw+a/oXqhOm0ulAYLsCCMPfpr5LN5GFwPO8+yDyJ1BA34N+q927/
- ILusXkIe9Fzt2tNdZTeEGPzdQq1a/oHHRMyR7YiYGGwyVm41XxbHo8At8FbfPbK+9CIp
- UqIw==
+ bh=aevunFh2VR3OoiMZUjBR7R6IVa6O/WCam1NH2fHd7HY=;
+ b=B4kfNhhyIyJ4oQgGusMXquveumhCBvWWJMkWKWkl8ihT5kga9xKNumPzxhluIZKjGs
+ 20qXC9S+aSYkqaDH4LVyLraAbE/Zh9wqaWoshlNYTcbJeNRWEzMT+PBdqFz62CHrxmx2
+ M1mqI5LpkaJFJfGRT97VyYm94Dstn6082wi3dON35+IlpSItJRLNqnkRtce7xYIaEN9a
+ 7QtM+Iq+NSiYvxEeWgH1q037P9ymOXpBV4P2YYWtHH8eOnvOO+wrnWEpv39v5wP2Yr6C
+ QKt+xSp3MIsldBZuno3Ozojqxa/J2QBOZhpfosLwZ9igJrjJm4LWc8Y4r429242/Z0qU
+ Vw0w==
 X-Forwarded-Encrypted: i=1;
- AKwUvBxySJBIl6xKMnPctkY1fZSSqeTY+zBLOsuxEtggDhGWJOvtO7/uNwpRxMf0c9h25cmfie3MQR8JAV+Q@nongnu.org
-X-Gm-Message-State: AFq9FYJgbeveRDXC+VscC4WDwFH6TRAulenFBDfFJUsJ/sYYZiTVIWGL
- obL8vd7W6tolDw9op/RmFVJn6VkAmKtgf/UY3H5/aVmKo61jLZagkHGWpEOTiWUJAnJxe6tzCH0
- 4GjiEk11DPxiQHTQC7Qe8LNuVEULgYfoVQVIuUYZsSdNWrcJFUGZh/yDYWw==
-X-Gm-Gg: AYBFou2/hxGaMIJ6Gt2Q8mja/TpQhhX16XbElHot3Hh3gY+s3gptmYwweQtyPRzpfuT
- R5dPF9t6W8JIclzUdA9cuBB4URhm4lg/4AaBXQtCy1jlr+XvIxdwDjgndsM9ByoPknOVO8/wMph
- jH3unzjS1mtko/GhcTCX6qEkPUlZgTEhwKOyvv6vTDj8HJAGLeexmSMeVVKSXZ3+qp9LFg/yvSp
- K8sxO81fT/kIlVM4GOsvtW8AjwEiQ1nrPRetYI05rfyQPib3Bel32Z3AI/j5Qel7cSzKhtvUah1
- LBnRyM09LHhaj2nYk2th4LlkPS+N6IPZuDdbLwC4sT7967A6uXUkodsWT69fUU3+cximTDBNbFt
- Yu8wlAXTyPdYsvQkooWV3LQ==
-X-Received: by 2002:a05:6102:2ad0:b0:7ba:5d33:7ff6 with SMTP id
- ada2fe7eead31-7be72ab783amr1422826137.11.1790856218342; 
- Thu, 01 Oct 2026 05:03:38 -0700 (PDT)
-X-Received: by 2002:a05:6102:2ad0:b0:7ba:5d33:7ff6 with SMTP id
- ada2fe7eead31-7be72ab783amr1422815137.11.1790856217750; 
- Thu, 01 Oct 2026 05:03:37 -0700 (PDT)
-Received: from [10.111.137.66] ([212.136.9.21])
+ AKwUvBygQ5e1ig3Mxpzf7Ft3Ybt2FvWKEtx1udgjRKCDUS640EXbOXrw8to+hC4IE0Pa/Ti55cq4+jcoLPnh@nongnu.org
+X-Gm-Message-State: AFq9FYIzPubFOau/r9Oe/C6UPCNdQ7RlAPmeDr7+O81c9kykHT1PzQ/4
+ xrl3BbknZfbTGZ6kgEXAuXDpsDEgQ2SJz0VGvkHmdL6U7tw14QA8SN900BrFXvM6+g5J6/W2bWz
+ DPLgapYLokpxW9huTt8rdy1h2x2dYWEcuj6Sya0VMrlN/NkAESsO9fOCr1Q==
+X-Gm-Gg: AYBFou2N24tnroKAc2Loczz9wSlBn06o69gaYX2K6yebe1YHfL5+aDCFQbxg0hQUDYG
+ FoEgrVIErEeyJeXZvBVp1Z9SjLG+vEL4jEMR0BPybQmECt2CizEzVjJZ3gFZmcyAvcemQ7vW7cY
+ GdLjIb/F+5LlRhH3796r6+PnIbYbPmi6jGL2XDsnANShkjbgVFhoi9ifqvq+xAItY8PqDogJwVI
+ bAXQuihkjCWOTVPdx5Y/8cKtSwroLgA18S49eJNqIV09jNLN3gkmCY59DiiAmADHso+Lq1cyRRb
+ VmIAr7ckDXWEtq0DN9pplZOkehyj0QSkrD1vdl8CBZmzuIOTkEun+BYCPikg3iY+GXSt5hMPzHK
+ jnDfmSkUG7t5Xsrx5vO0qphsDIak19I09eQ==
+X-Received: by 2002:a05:690e:4411:b0:671:471d:c3b8 with SMTP id
+ 956f58d0204a3-676834473e3mr1925501d50.17.1790860828331; 
+ Thu, 01 Oct 2026 06:20:28 -0700 (PDT)
+X-Received: by 2002:a05:690e:4411:b0:671:471d:c3b8 with SMTP id
+ 956f58d0204a3-676834473e3mr1925473d50.17.1790860827684; 
+ Thu, 01 Oct 2026 06:20:27 -0700 (PDT)
+Received: from [192.168.68.100] ([187.10.234.20])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a01fdfcacdsm74245e9.1.2026.10.01.05.03.34
+ 6a1803df08f44-917a89a52e1sm26474366d6.13.2026.10.01.06.20.24
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 01 Oct 2026 05:03:36 -0700 (PDT)
-Message-ID: <4d1e3aa2-f725-405b-88a7-d2ad47e054d8@oss.qualcomm.com>
-Date: Thu, 1 Oct 2026 14:03:33 +0200
+ Thu, 01 Oct 2026 06:20:27 -0700 (PDT)
+Message-ID: <369a6f46-65f5-4aa5-a9f6-d60f10b266e7@oss.qualcomm.com>
+Date: Thu, 1 Oct 2026 10:20:22 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 01/11] target/arm: Call arm*_cpu_do_interrupt directly
- instead of via TCGCPUOps
-To: Peter Maydell <peter.maydell@linaro.org>
-Cc: qemu-devel@nongnu.org, Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Paolo Bonzini <pbonzini@redhat.com>, qemu-ppc@nongnu.org,
- qemu-s390x@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
- qemu-riscv@nongnu.org, qemu-arm@nongnu.org
-References: <20260902152044.31291-1-philmd@oss.qualcomm.com>
- <20260902152044.31291-2-philmd@oss.qualcomm.com>
- <CAFEAcA-w24c71SHh1Sr7JkO5RTVK7THH8GP_ixVvnWiBXWQMdg@mail.gmail.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
+Subject: Re: [PATCH v2 1/4] hw/riscv/atlantis: Use dw8250 UART model
+To: 'Portia Stephens <portias@oss.tenstorrent.com>, qemu-devel@nongnu.org
+Cc: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+ Nicholas Piggin <npiggin@gmail.com>, Michael Ellerman <mpe@kernel.org>,
+ =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
+ Chao Liu <chao.liu@processmission.com>,
+ Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, Joel Stanley <joel@jms.id.au>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org,
+ Weiwei Li <liwei1518@gmail.com>
+References: <20261001031720.2334056-1-portias@oss.tenstorrent.com>
+ <20261001031720.2334056-2-portias@oss.tenstorrent.com>
+From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Content-Language: en-US
-In-Reply-To: <CAFEAcA-w24c71SHh1Sr7JkO5RTVK7THH8GP_ixVvnWiBXWQMdg@mail.gmail.com>
+In-Reply-To: <20261001031720.2334056-2-portias@oss.tenstorrent.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDAxMDA0NyBTYWx0ZWRfX0DddoPLNQKJW
- 9RUWox6ZhZNnxD+aSgFBf3ueqhnEgW+58uUPoiLT37pTPSCsIFtrs9DkrsRSwajwhFlH932coEP
- iMSawbLK+m73IZgIHwrA6FaMqBMqYuc=
-X-Proofpoint-ORIG-GUID: PLAqQHhgiYgxjyNNHFvkwOrQCn6_nh5i
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDAxMDA0NyBTYWx0ZWRfXxyJa1fH0ozdd
- RqblfuUr1HHHufwGXKHo5jBmizMW8JtNAmlfUWie5AdVuWcnblzy+tInfqQn1T9ZC7PMUX0x/1q
- LHf3jd+7C/rtkTNPLvlXQi3CSM8snspW7tsgbhDLwzPi7PHB4fLeYnSHoXKEzbB9ES+PLPSED08
- a0JKSqo0giuOi/1wzlzvr6Dig/jAifwdVO0aodokGdGdXo3MJHfvx2ThbGT7JNAdJsrIlp+6LFQ
- kkPPhTYVzOuATVP/ITuiMP9bkj4fciDFPhvxHDV+rzNuJJXnWovcKEghCy//WMD9Em4twY/j30H
- Lq2Ffr8b/cd+S5QfcOm1TQGsIaa2JFvCLsnD9jz8aT3HHWvh8G/5pl5TrUiQ1E30M6nvsPOoP4Y
- XcbAmBK7QBI6G/uc0jj8EVWLzHFsYdng2/ofVw6cHevgHrEqOGhQjYF8AgFDs2J6aje5skbotT1
- IykcDIfTEykcTH0jSgg==
-X-Authority-Analysis: v=2.4 cv=IY8Symqa c=1 sm=1 tr=0 ts=6abe4c1e cx=c_pps
- a=P2rfLEam3zuxRRdjJWA2cw==:117 a=/bviTfK1dmy+WGcHzWQ0gg==:17
- a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=M51BFTxLslgA:10 a=s4-Qcg_JpJYA:10
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDAxMDA1MyBTYWx0ZWRfX5D6Dwm35OnR6
+ Yif9E6Cj20FayCFSIPziIpAp/Ujie2H3oumdN7XOC5qb/WCRN/8Ez9VNR8fo50Pou9+ZKCeXbmJ
+ yfGhg9VNixZWZ+G4gAehzhRpegM7ebc=
+X-Proofpoint-ORIG-GUID: Nzyo7kDBlgJiLWrjhK_IzHcjaeot08oj
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDAxMDA1MyBTYWx0ZWRfX8Ayx5KZhaF0H
+ hbLFkpgJJgyuqj7IF7E4y3ml79dtFKDcxLxXPGdriMXVy5u5Zb5Dq8rfPyxa4minfnCURqBXMrR
+ /w3n9u7ytyUqaFCCvx4kUvQEJF25ONWbOFe/vlZH8O8mmCOvcFWXkQRShkdx0ErruShTgEe0+Q1
+ FCFvIvSRJT4jIZ0/E1sVoncRBxhGw+qM/p21pmdYsFOH3EIvZJRw+Gmapd2i8HQsPI7w3Or7ioT
+ b7Gw+Slra7KE2/tHT23ISguZeQPYHVFB+NT4em9l6xYCB4CAnJgUgP4xuX25RytwxTEy32Avbvz
+ PXfUsh3qlxx62WhKvtsbHnPRj1VJ98LOgcvOfYRcCxBYusvq6UgzCqeenmuLwT4/il55jkm0S2b
+ PqHGcN348GnEKTfnqXQi3t184EEPlECz8UA5Ea3xDj2cpTIfFZuZwwgQWM0CgqclpZvDtYDyjUW
+ qHHvmYAkw4mfTSUi0ZQ==
+X-Authority-Analysis: v=2.4 cv=IY8Symqa c=1 sm=1 tr=0 ts=6abe5e1d cx=c_pps
+ a=g1v0Z557R90hA0UpD/5Yag==:117 a=jbqyKmyYbxlRs/MVMa3Ccg==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
  a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
- a=EUspDBNiAAAA:8 a=KKAkSRfTAAAA:8 a=PwczH0WBcc6DY_pivE8A:9 a=3ZKOabzyN94A:10
- a=QEXdDO2ut3YA:10 a=ODZdjJIeia2B_SHc_B0f:22 a=cvBusfyB2V15izCimMoJ:22
-X-Proofpoint-GUID: PLAqQHhgiYgxjyNNHFvkwOrQCn6_nh5i
+ a=t9496tuAAAAA:8 a=EUspDBNiAAAA:8 a=xQOczflb7_0DwEsGZi4A:9 a=QEXdDO2ut3YA:10
+ a=MFSWADHSvvjO3QEy5MdX:22 a=4wQ91nGE5lQcD7eh5OX0:22
+X-Proofpoint-GUID: Nzyo7kDBlgJiLWrjhK_IzHcjaeot08oj
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-01_03,2026-09-21_02,2025-10-01_01
@@ -135,16 +138,16 @@ X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
  adultscore=0 phishscore=0 malwarescore=0 lowpriorityscore=0 spamscore=0
  bulkscore=0 impostorscore=0 priorityscore=1501 clxscore=1015 suspectscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2610010047
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2610010053
 Received-SPF: pass client-ip=205.220.168.131;
- envelope-from=philmd@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
 X-Spam_score_int: -27
 X-Spam_score: -2.8
 X-Spam_bar: --
 X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -160,64 +163,148 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 2026-09-08 18:09, Peter Maydell wrote:
-> On Wed, 2 Sept 2026 at 16:20, Philippe Mathieu-Daudé
-> <philmd@oss.qualcomm.com> wrote:
->>
->> The TCGCPUOps.do_interrupt handler is a target-specific
->> callback installed for use by target-agnostic TCG core methods.
->> Target-specific code should not dispatch through this indirection;
->> call the ARM implementation directly instead.
->>
->> Reported-by: Richard Henderson <richard.henderson@linaro.org>
->> Signed-off-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
->> ---
->>   target/arm/cpu-irq.c     | 2 +-
->>   target/arm/tcg/cpu-v7m.c | 2 +-
->>   2 files changed, 2 insertions(+), 2 deletions(-)
->>
->> diff --git a/target/arm/cpu-irq.c b/target/arm/cpu-irq.c
->> index 883e8a176c3..e8a6520e5ca 100644
->> --- a/target/arm/cpu-irq.c
->> +++ b/target/arm/cpu-irq.c
->> @@ -270,7 +270,7 @@ bool arm_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
->>    found:
->>       cs->exception_index = excp_idx;
->>       env->exception.target_el = target_el;
->> -    cs->cc->tcg_ops->do_interrupt(cs);
->> +    arm_cpu_do_interrupt(cs);
->>       return true;
->>   }
->>   #endif /* CONFIG_TCG */
->> diff --git a/target/arm/tcg/cpu-v7m.c b/target/arm/tcg/cpu-v7m.c
->> index 48b31d5eac8..502998dbd1c 100644
->> --- a/target/arm/tcg/cpu-v7m.c
->> +++ b/target/arm/tcg/cpu-v7m.c
->> @@ -34,7 +34,7 @@ static bool arm_v7m_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
->>       if (interrupt_request & CPU_INTERRUPT_HARD
->>           && (armv7m_nvic_can_take_pending_exception(env->nvic))) {
->>           cs->exception_index = EXCP_IRQ;
->> -        cs->cc->tcg_ops->do_interrupt(cs);
->> +        arm_v7m_cpu_do_interrupt(cs);
->>           ret = true;
->>       }
+
+
+On 10/1/2026 12:17 AM, 'Portia Stephens wrote:
+> From: Portia Stephens <portias@oss.tenstorrent.com>
 > 
-> This works because we have separate cpu_exec_interrupt
-> methods for M-profile and A/R-profile, so we can drop the
-> indirection. If we had anywhere where we were trying to
-> do "call the appropriate do_interrupt function" from
-> code that's agnostic to M vs A/R this wouldn't work, but
-> happily we don't.
+> Replace the ns16550 UART with a Designware UART now that a model is
+> available. The hack which sets the rest of the UART register space as
+> unimplemented can be removed.
 > 
-> Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
-Thanks for the clarification, I amended:
+> Signed-off-by: Portia Stephens <portias@oss.tenstorrent.com>
+> ---
 
-   This is valid because M-profile and A/R-profile have separate
-   cpu_exec_interrupt() implementations. Code agnostic to these
-   profiles would still require an appropriate dispatch mechanism,
-   but no such caller exists here.
+Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 
-Regards,
+>   hw/riscv/Kconfig               |  2 +-
+>   hw/riscv/tt_atlantis.c         | 45 +++++++++++-----------------------
+>   include/hw/riscv/tt_atlantis.h |  4 +--
+>   3 files changed, 17 insertions(+), 34 deletions(-)
+> 
+> diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
+> index d06ac26648..5d2abdbb67 100644
+> --- a/hw/riscv/Kconfig
+> +++ b/hw/riscv/Kconfig
+> @@ -127,7 +127,7 @@ config TENSTORRENT
+>       select RISCV_ACLINT
+>       select RISCV_APLIC
+>       select RISCV_IMSIC
+> -    select SERIAL_MM
+> +    select DW8250
+>       select DEVICE_TREE
+>       select DESIGNWARE_I2C
+>       select DS1338
+> diff --git a/hw/riscv/tt_atlantis.c b/hw/riscv/tt_atlantis.c
+> index 8a219afef7..70815e12ef 100644
+> --- a/hw/riscv/tt_atlantis.c
+> +++ b/hw/riscv/tt_atlantis.c
+> @@ -24,9 +24,8 @@
+>   #include "hw/riscv/fdt-common.h"
+>   #include "hw/riscv/riscv_hart.h"
+>   
+> -#include "hw/char/serial-mm.h"
+> +#include "hw/char/dw8250.h"
+>   #include "hw/intc/riscv_aclint.h"
+> -#include "hw/misc/unimp.h"
+>   
+>   #include "system/system.h"
+>   #include "system/device_tree.h"
+> @@ -262,11 +261,15 @@ static void create_fdt_cpu(void *fdt, TTAtlantisSoCState *s,
+>   static void create_fdt_uart(void *fdt, const MemMapEntry *mem, int irq,
+>                               int irqchip_phandle)
+>   {
+> +    static const char * const compat[2] = {
+> +        "snps,dw-apb-uart", "ns16550a"
+> +    };
+>       g_autofree char *name = g_strdup_printf("/soc/serial@%"HWADDR_PRIX,
+>                                               mem->base);
+>   
+>       qemu_fdt_add_subnode(fdt, name);
+> -    qemu_fdt_setprop_string(fdt, name, "compatible", "ns16550a");
+> +    qemu_fdt_setprop_string_array(fdt, name, "compatible",
+> +                                 (char **)&compat, ARRAY_SIZE(compat));
+>       qemu_fdt_setprop_sized_cells(fdt, name, "reg", 2, mem->base, 2, mem->size);
+>       qemu_fdt_setprop_cell(fdt, name, "reg-shift", 2);
+>       qemu_fdt_setprop_cell(fdt, name, "reg-io-width", 4);
+> @@ -409,17 +412,6 @@ static void load_fdt(TTAtlantisState *ams)
+>       create_fdt_memory(ms->fdt, &ams->soc);
+>   }
+>   
+> -static void mmio_map_unimplemented(MemoryRegion *memory, SysBusDevice *dev,
+> -                                   const char *name, hwaddr addr, uint64_t size)
+> -{
+> -    qdev_prop_set_string(DEVICE(dev), "name", name);
+> -    qdev_prop_set_uint64(DEVICE(dev), "size", size);
+> -    sysbus_realize(dev, &error_abort);
+> -
+> -    memory_region_add_subregion_overlap(memory, addr,
+> -                                        sysbus_mmio_get_region(dev, 0), -1000);
+> -}
+> -
+>   static void tt_atlantis_machine_done(Notifier *n, void *data)
+>   {
+>       TTAtlantisState *ams = container_of(n, TTAtlantisState, machine_done);
+> @@ -488,8 +480,7 @@ static void tt_atlantis_soc_init(Object *obj)
+>   
+>       object_initialize_child(obj, "cpus", &s->cpus, TYPE_RISCV_HART_ARRAY);
+>   
+> -    object_initialize_child(obj, "uart1", &s->uart1,
+> -                            TYPE_UNIMPLEMENTED_DEVICE);
+> +    object_initialize_child(obj, "uart1", &s->uart1, TYPE_DW8250);
+>   
+>       for (int i = 0; i < TT_ATL_NUM_I2C; i++) {
+>           object_initialize_child(obj, "i2c[*]", &s->i2c[i],
+> @@ -584,21 +575,13 @@ static void tt_atlantis_soc_realize(DeviceState *dev, Error **errp)
+>                                   &s->bootrom);
+>   
+>       /* UART1, the soc console (UART0 is for the boot microcontroller) */
+> -    serial_mm_init(s->memory, s->memmap[TT_ATL_UART1].base, 2,
+> -                   qdev_get_gpio_in(s->irqchip, TT_ATL_UART1_IRQ),
+> -                   115200, serial_hd(0), DEVICE_LITTLE_ENDIAN);
+> -    /*
+> -     * Atlantis contains a DesignWare uart while the QEMU machine
+> -     * uses the serial_mm model with the base ns16550 register set.
+> -     * Linux's dw driver writes outside of serial_mm's 0x20 sized
+> -     * mapping and faults.
+> -     *
+> -     * Create an unimplemented device region so writes don't fault
+> -     * and reads return zero, which keeps Linux happy.
+> -     */
+> -    mmio_map_unimplemented(s->memory, SYS_BUS_DEVICE(&s->uart1),
+> -                           "tt-atlantis.uart1", s->memmap[TT_ATL_UART1].base,
+> -                           s->memmap[TT_ATL_UART1].size);
+> +    qdev_prop_set_chr(DEVICE(&s->uart1), "chardev", serial_hd(0));
+> +    sysbus_realize(SYS_BUS_DEVICE(&s->uart1), &error_fatal);
+> +    memory_region_add_subregion(s->memory,
+> +                                s->memmap[TT_ATL_UART1].base,
+> +                                sysbus_mmio_get_region(SYS_BUS_DEVICE(&s->uart1), 0));
+> +    sysbus_connect_irq(SYS_BUS_DEVICE(&s->uart1), 0,
+> +                       qdev_get_gpio_in(s->irqchip, TT_ATL_UART1_IRQ));
+>   
+>       /* I2C */
+>       for (int i = 0; i < TT_ATL_NUM_I2C; i++) {
+> diff --git a/include/hw/riscv/tt_atlantis.h b/include/hw/riscv/tt_atlantis.h
+> index 3923308b7c..000988c037 100644
+> --- a/include/hw/riscv/tt_atlantis.h
+> +++ b/include/hw/riscv/tt_atlantis.h
+> @@ -13,7 +13,7 @@
+>   #include "hw/core/sysbus.h"
+>   #include "hw/i2c/designware_i2c.h"
+>   #include "hw/intc/riscv_imsic.h"
+> -#include "hw/misc/unimp.h"
+> +#include "hw/char/dw8250.h"
+>   #include "hw/riscv/riscv_hart.h"
+>   
+>   #define TYPE_TT_ATLANTIS_MACHINE MACHINE_TYPE_NAME("tt-atlantis")
+> @@ -39,7 +39,7 @@ struct TTAtlantisSoCState {
+>       RISCVHartArrayState cpus;
+>       DeviceState *irqchip;
+>       DesignWareI2CState i2c[TT_ATL_NUM_I2C];
+> -    UnimplementedDeviceState uart1;
+> +    DW8250State uart1;
+>       MemoryRegion bootrom;
+>   
+>       uint32_t num_harts;
 
-Phil.
 
