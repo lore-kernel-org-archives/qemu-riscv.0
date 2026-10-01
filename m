@@ -4,171 +4,153 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA8E8CA5FB3
-	for <qemu-riscv@archiver.kernel.org>; Thu,  1 Oct 2026 05:14:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2B05CA5FC5
+	for <qemu-riscv@archiver.kernel.org>; Thu,  1 Oct 2026 07:53:39 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xC980-0006Vb-FP; Thu, 01 Oct 2026 01:14:44 -0400
+	id 1xCBbQ-0003sp-QM; Thu, 01 Oct 2026 03:53:16 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=727d860e1=Alistair.Francis@wdc.com>)
- id 1xC97o-0006TG-IR; Thu, 01 Oct 2026 01:14:33 -0400
-Received: from esa6.hgst.iphmx.com ([216.71.154.45])
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1xCBbO-0003sI-Mq
+ for qemu-riscv@nongnu.org; Thu, 01 Oct 2026 03:53:14 -0400
+Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=727d860e1=Alistair.Francis@wdc.com>)
- id 1xC97m-0000s5-KP; Thu, 01 Oct 2026 01:14:32 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1790831670; x=1822367670;
- h=from:to:cc:subject:date:message-id:references:
- in-reply-to:content-id:content-transfer-encoding: mime-version;
- bh=E0AHV5HchqGsdfQ1mHSkf03vX45uugOu/Csv3XAAuXo=;
- b=NNLTEOqhsYPpCmAnVXEr20DPQi5CfL9MPF9EcA/TSEaYWiIJwOT/Q0Xh
- RGbEK3Au74DDXhTDLuu8M5+xTCB3U9CjwJxh2KexmN+tBxVibglVu9nQS
- 01RhtF+KvXlRwbSl/yaHrO2Rzt+9cykKUOmyU/ZbD93/MCIymFYENk5r4
- RrHeVveu6AUNJ0wNC0rr/aHJzRPGwwRZjh1DZuR5l9NEOwJIeE38xcsyw
- Ypw1ctJ18b/er5BMKKYE8oDKFqPeawowgX3jFD+UJP2gGRuED6ImP0dpb
- GF4jl6YP0I45AA6Ps5uJjuXroGQ5g//RY72jeB9c1Zxd9V2cvrYj2/f9F g==;
-X-CSE-ConnectionGUID: YhFr0xebRRKOaIEMpyF+eQ==
-X-CSE-MsgGUID: 5fXr1i0QRIuu2/Sl/berwQ==
-X-IronPort-AV: E=Sophos;i="6.27,134,1786982400"; d="scan'208";a="155408327"
-Received: from mail-centralusazon11011061.outbound.protection.outlook.com
- (HELO DM5PR21CU001.outbound.protection.outlook.com) ([52.101.62.61])
- by ob1.hgst.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 01 Oct 2026 13:14:27 +0800
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Zn8f4H7CT7fNIe3TY/orHnTTKVb5vdE7jj2o2F2o18+f/OkmaqbrvaSMVWbjynYF67+gwWpxw752xDIJIbMlKgkmvoaKJjzbqD3mMgJQhlKRvk4p2STr7ZPolbdWckyojJKliGgEu/4oN3yIW/wYuCnnncPbSK8YcY1/Rs3DVGcUSxrGFkTixwQxCYQsSanH7+I3Cwar60Hpz8VNzzG1mXZxuMMcPSBT16qKXvmSsq57lLTzOtBhk/PmSGBpJ0+lTawS1faz78Wt57VzEOVeJqi/SrnLvJZPNaxknpibkY/GCs873Qep4Tuycw/7UIBbP0bJW2R9kL1GEVgovIH5Pg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=E0AHV5HchqGsdfQ1mHSkf03vX45uugOu/Csv3XAAuXo=;
- b=QZXMC0Nmq0O3A3OOUkeLY1E06a+EDFzu0h3Ow7P3SGeElNJCXGJM+HhXPS7id8qRKrm74hWg543YMTtc/79cE9U5PPpstqX7HrCzayU9ffcUQBXwLHlC2HX7OS7ZxD1KmRwgAQYwT8ZjnbjYoilSj5hn+HT9rd0lNZZiPBr4IU3t5mv2F7w2SqO23KZiUaV6OtnYy4FgVeBUrNXOmU1yeVVIqtOMjwggzrYJIcF/me8OyLyFWeLMSaQAx3+BRJachRj6QJDgyz9V+2TVuMbxX0Quj2t9bElde1pmpan7YtQJGVJLqkPfHTNH2WuPDpK2jVCDdDPjubanthh5hRMjMg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
- header.d=wdc.com; arc=none
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1xCBbM-0007xk-DC
+ for qemu-riscv@nongnu.org; Thu, 01 Oct 2026 03:53:14 -0400
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 6916xma8396299
+ for <qemu-riscv@nongnu.org>; Thu, 1 Oct 2026 07:53:10 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ jobQL0NL7gyPfwCx0thkR7MpsCc51neupv1GL6WP+4U=; b=Qas5SBj5qkPbPjtv
+ OCfWfyH9ey9nACVVjS01eqDdaEHHKgXEsstRNtggMZtvtnHX/8ipcXYci/TdijNh
+ b8ZWZMbmQVian7SQ9i14VL9Isc8KluqcqvPWJF9BOX6LDARZem92jhuNzM/iUWN3
+ WEnKBuvJtSofygJnEylSMr/pvEY/4quVXMGmsJpTClA1D5y4gNnVS4451oiuqTc2
+ wVlhk/ZsvsaYtYyTzTMKl5mQYTv4m1nW9wYhkFcuO0N/vx4RfcREFlbZ4hL0Aqfo
+ 3StcRYMUWDDjpziwq29hygogT2PrafW5xxFrLkAv5VDFS7GFl58XP+xuvy2HXUrD
+ DvWH9w==
+Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com
+ [209.85.222.200])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h1bh59nb2-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Thu, 01 Oct 2026 07:53:09 +0000 (GMT)
+Received: by mail-qk1-f200.google.com with SMTP id
+ af79cd13be357-936708f129aso1255933185a.0
+ for <qemu-riscv@nongnu.org>; Thu, 01 Oct 2026 00:53:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=E0AHV5HchqGsdfQ1mHSkf03vX45uugOu/Csv3XAAuXo=;
- b=xA2KadiKzko26h6Y7Pbx4+HUWG5XieVJPT1JvOyxkmobGjf9BQNSihAPFhI8ZpOOKPlhYSK1JWdOUTe+oaDly0r95Dg+PQqe8fomaxS3cGzfLaQWUenX/qefcadpTaaCG333Nc/DBkHLqUNG3xn8giCbag4KR/ENpIPvduksJn4=
-Received: from BY1PR04MB9561.namprd04.prod.outlook.com (2603:10b6:a03:5b6::11)
- by DM6PR04MB7114.namprd04.prod.outlook.com (2603:10b6:5:243::18) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.472.16; Thu, 1 Oct
- 2026 05:14:14 +0000
-Received: from BY1PR04MB9561.namprd04.prod.outlook.com
- ([fe80::3869:e494:2fa8:9888]) by BY1PR04MB9561.namprd04.prod.outlook.com
- ([fe80::3869:e494:2fa8:9888%6]) with mapi id 15.21.0451.026; Thu, 1 Oct 2026
- 05:14:13 +0000
-From: Alistair Francis <Alistair.Francis@wdc.com>
-To: "tgamblin@baylibre.com" <tgamblin@baylibre.com>, "qemu-devel@nongnu.org"
- <qemu-devel@nongnu.org>
-CC: "palmer@dabbelt.com" <palmer@dabbelt.com>, "qemu-riscv@nongnu.org"
- <qemu-riscv@nongnu.org>, "daniel.barboza@oss.qualcomm.com"
- <daniel.barboza@oss.qualcomm.com>, "chao.liu@processmission.com"
- <chao.liu@processmission.com>, "liwei1518@gmail.com" <liwei1518@gmail.com>,
- "zhiwei_liu@linux.alibaba.com" <zhiwei_liu@linux.alibaba.com>
-Subject: Re: [PATCH v2 2/2] target/riscv: add helper_tlb_flush_page(), use for
- sfence.vma with vaddr operand
-Thread-Topic: [PATCH v2 2/2] target/riscv: add helper_tlb_flush_page(), use
- for sfence.vma with vaddr operand
-Thread-Index: AQHdPJ0/NTWw/O/ViUWHJDX1b0jXTrboTiqA
-Date: Thu, 1 Oct 2026 05:14:13 +0000
-Message-ID: <322f18f233ae985970ba75eede7d3623110b13f3.camel@wdc.com>
-References: <20260904-riscv_tlb_page_flush-v2-0-defec3f29312@baylibre.com>
- <20260904-riscv_tlb_page_flush-v2-2-defec3f29312@baylibre.com>
-In-Reply-To: <20260904-riscv_tlb_page_flush-v2-2-defec3f29312@baylibre.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-user-agent: Evolution 3.62.0 (by Flathub.org) 
-authentication-results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=wdc.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: BY1PR04MB9561:EE_|DM6PR04MB7114:EE_
-x-ms-office365-filtering-correlation-id: 456f117f-a39f-4e58-b426-08df1f7ad593
-wdcipoutbound: EOP-TRUE
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
- ARA:13230040|10070799003|366016|23010399003|376014|19092799006|1800799024|10067099003|56012099006|11063799006|4143699003|22082099003|18002099003|38070700021;
-x-microsoft-antispam-message-info: J+qUcwVD8tcMA9y5b8GsRXM/c+FB8/LVuzhD0yhTwBOFS57JobeImKDf29mfhFGq+UjM3JvZISBSOE7VglJcN81I35WQ7S2qzcdCi0S2urEOfesjJijjJsME8LsL5Ng7br7rLgAk8LW+Y80gx9zfKXFQq9zFI2hk7Yc3QF8BQ73lyGP9VbbblsJfgZXXth8t2TQnqvBtT98lhvy8xIs5QCfgYUVKb30LZgZQVuFAIyNqY0gNIFHVcZ/Os2BbS0We3Qxj2+k0rUSufxS/S/3spJgozGunQDBVn7CvQT2nRrBAwBr2rt+bBeeh9q1ZFdxwIlRJJrwF98SdBi/sYct+wM5PVqCUXWbms9TW2hCjQYYcQBPqbUnb2V5Yjqibyte8tnb8MyY2hJIG/cQVlva8S9ljDt25lYdjIio9oqOwWz1/nNvjEsDE0MITudw8zQCNAslb2QMd0VSd68F8Ep8EPc3VISclo6lGH7wVLEy9u8n1CRiKiHMB0R/Gsjg91f8915j5KbJfE/tXZvJdG/UJw86+LpoMZq1DDSJ3vKQa3VQV+awThQ/sF929oH6QlYStfzqB5hhw13xF0Y1iQR4qwH64K5y9izC23fnX+upHtGrQKs2Og27h3ajFDynSsjSjgTcGdY/jpSVdwejjAyJgjThogi/dmr0B/r40kEI2crIeHWMTXc+vt6TiDVZVf4KK9mriZzts6A4KKFqBfJ6K+4eUeuYhRLxKRQ2nmVdkyBI=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:BY1PR04MB9561.namprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(10070799003)(366016)(23010399003)(376014)(19092799006)(1800799024)(10067099003)(56012099006)(11063799006)(4143699003)(22082099003)(18002099003)(38070700021);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 2
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?WEdIR2VHYWVOMzhjNWt4OEF0ZGhHanZ5VWR0NmovSmc2cDI5Z2ZsZXJTdGti?=
- =?utf-8?B?aU9obCt3dXBtSTNCalZ1RWNpb2hyM3oveW55SFAvR0pMWE8wVVgzVjF5eGo4?=
- =?utf-8?B?WkZUNUVVT0pQcSs0SjZicExDcXZKZ3l5VnVhNWIxZStlY3pVQlNJVnJlMDdZ?=
- =?utf-8?B?WDBWV0NSQzA5VHpwWmlPZnVXeXhicWNhbkR1TDB0RU51TTIrT2Q4MWFLM3NF?=
- =?utf-8?B?dlZMZm9DTkFlSmZXTTFXVnI4VzEyWUpFcDcwZUN2RjAwcjV2aUJTcHFMajRj?=
- =?utf-8?B?Q2pRTjZGdjN3RkFwYkkxejV0OW80NW4rUUV2N21XVVVMQnk4ZWtGKzkybG4r?=
- =?utf-8?B?SGhYdHQzT1N3K2cyMzdjSk5MWkpKbmU0YlNKSXZwTzNIZzNRVzRLN3RSTmJt?=
- =?utf-8?B?OUQ0T0k1MmNPOVo3VGc0c0o2M0x1dUE5QzRuWjEzbzhEVjYrRi92ZVpaL3ZI?=
- =?utf-8?B?ZGFjMS9kY09ZYXNDenBSTHlxb1grczJwb0hPdFdicVhGcHhhVHdpTkxYUGI4?=
- =?utf-8?B?UVNLa05xSDRtRGdyRE9YTStQTStlVmpPU1M4emx0R1ZDVzFkdnVVWVU4amtX?=
- =?utf-8?B?TTVKTGQ3Sk9yWGNiRjkwNlNTK1BHODNiYksrTHR4ZmlRdHFPM3dRWm8yM1No?=
- =?utf-8?B?cEpSN1FvVWU5VnJSRHdjbktET3U2RHJac3NhRGJEZy9JNnVreDlXVGtya2hR?=
- =?utf-8?B?NDVPb2t1SnlQc1dKOEJ4YWl3TGlwTmVlanNjSHNRYkVKcHRIT3BZcThuZUVn?=
- =?utf-8?B?eC9BTlhOc2w1MVVGclhWOWZ5ekllbkRGTlR2RlNTN0MwMVlmZDY5czhqNWhy?=
- =?utf-8?B?WGRmVlBRbHczSFBtQzhYWGRUaEpmNnhvanFiV2tVdVlQMDVqU09GTHlCRXpK?=
- =?utf-8?B?a2U1UWg4UzZzVzRLeDBYV3M2eXlWb28xaXhBNVdjZ1owQ1B4TUhZVElSU3A3?=
- =?utf-8?B?bDZHVU8xQ0NGYWgwUXV5VzE0SHVZeEpKak1NSzZyTHFaYnJPL2ZzR1NLd2tQ?=
- =?utf-8?B?SkgyVllvRk55bGpPNlh0ZGJXNEdxaFNYeEhOalhNczMyT2ZPWTd2QXRqWFdl?=
- =?utf-8?B?R2VFbU1JMHFoMmFpSXgyUHRxSk1ITkpXNGFoNy95QVV3VEVSZHJHOGhGV1Jm?=
- =?utf-8?B?alE1U1VDSjZWUWVHRlZqSUdYL2dJZ1FsaEJFMkRoUTdzTEdla3BjcjhFTUFD?=
- =?utf-8?B?RHh4bTZRTU1BclZmV1VZaDVHTHc0YjJqLzFEYktrQXh5by9xRnJVUkhkSnNW?=
- =?utf-8?B?SEhjKzg2WmFtMERUbW00MlFNdlRRT054Z29ZMWZnNXVWNlBLaTRYSEV3aVJa?=
- =?utf-8?B?N3RjMVMreE91NEJuUFFXZWZCeVJVVUVuOFRpSU9xV0haU0htZ2tHQVVTR3RK?=
- =?utf-8?B?eGpRS1BvYXNGamNqQUliZytlK2kzRlBDbW1oRVhXYkV5eko0SGpwa0xTZVNO?=
- =?utf-8?B?cHpjL3ZnVjhGVC9mdkJ6TC8wZzYxM3hYcUgrOXQzdm5yYVErdUJWM3BvN0pR?=
- =?utf-8?B?Y3JWVFVsR2pGYndydVJLVDFXYVVSWUFtOXUxL205dHRDZjlwaGp1bHVIMGx3?=
- =?utf-8?B?V2M3Vkh1djVPYkJHNSs2alFISE5MUWgyQ21TYVcyUlZNN0VHSzh5dXA5ZVVP?=
- =?utf-8?B?SjRzZGhwRVJoTHNaK1lSN2ZVOFc2enNWNVlKaWswZm1Tdkc4dFJuK2NmbDZm?=
- =?utf-8?B?MCtVSlV6eWQ2dlJTeStwUTIyR3ROdVo3cmJ5bmVQbktWcTJTOEdlcnFyajlD?=
- =?utf-8?B?VWYvKzNsRUU5L1BmN1RmWU9FY0NhWDlNTzZwSm94ZGZnQjZmY3grYlRPYTQ1?=
- =?utf-8?B?NFNSMkdDOUVaS3ozSmRzSW9rS1Y2ZHVlSzRDeVhHN1psWUJZUzhSOCtwem5s?=
- =?utf-8?B?U3ppVXpuaHRGejIwL1pJcklFaTBPNFhRVmN3TlhYdyszamtaM3pRZnFtalNk?=
- =?utf-8?B?UWloQXl4YmFwemJ1N1UvMG1QSGt3NVgwNFVPOWFQWVhpOTlac1dyUU8zNnQr?=
- =?utf-8?B?bFlBQzlBbXJWdzZVM2diZ1h3SVppRzBuMTVIcnJNSnRaeWpoTk0xc0RMWmxH?=
- =?utf-8?B?SHN5NkZnRlNiOEsrY1IzRG1BY1R5VitHZG93R25tamxSTE9UYkJSdVZ6a2Iv?=
- =?utf-8?B?UGpBRFJqbHdOdFlQZWhZYXZJbW5ON1hZSitpSnRqaGpjdFpGOU51cDl1VG5G?=
- =?utf-8?B?NzROVkxmbGZuMlpBbDgzeEgyWFZDckxuaFgvdkllbFFnZzliYW5raTFqemdj?=
- =?utf-8?B?TnROSkI2Nmcwak5rd0cxODI5S0RER0F5ZGowTDUzdE11akxFdlN5ajdBbDEv?=
- =?utf-8?B?YjhDZzIyN0kyRE56b3ZtMVc5Y0ZxUWRnbFNKbXp4WW5XYktUTi9TakM5b2lj?=
- =?utf-8?Q?VTIOp6Xek0HLGmMk7JsT7qhJCdiHmaQibvMw/B6O/Qe1t?=
-x-ms-exchange-antispam-messagedata-1: AtZd3XJWJdOv8mBeeOyHB2e8gT4OsvEw62g=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <0DB986AD0012EA4B821BD8562249BB7E@namprd04.prod.outlook.com>
-Content-Transfer-Encoding: base64
+ d=oss.qualcomm.com; s=google; t=1790841189; x=1791445989; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=jobQL0NL7gyPfwCx0thkR7MpsCc51neupv1GL6WP+4U=;
+ b=bBD8dadXvEg+WiX41CxGizgrIXoB5j2YEgxPQKZM6CCcP2X9SBI9aL0rJ6mvZGf793
+ 21JbrkLn4H5p53PQxyRvLxpTX1ksQExcytgWrrNnyhpn8rlisy4G5pC7dIYDA3PiGQ6U
+ rrdKct0/6gGw/Y+lp35baRQgj7KyPv+bLuEmupmBeUEjL53suzou/cWk1CxUxeYbXUTb
+ 2b/dA5+sOza81qjSd+zwLW93synkrQXDM9VUxFkvxUvS67rx409hDxgyfMNwT++ixM1s
+ sfXOrlIgv66r8maOkx8VdnFv+sgBHh8Ld7qqYrDDWbqrG4GHUNtyfV/+474CtZJrqVPg
+ 9IsA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1790841189; x=1791445989;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=jobQL0NL7gyPfwCx0thkR7MpsCc51neupv1GL6WP+4U=;
+ b=UTWxVTEZikIAX7G3TRYULf2pgBw+sF1tGDTK2oAUnudKlwQ4Nv8fzSNEY9NJvAaZ7f
+ PnUhzjt+bMV2Qjx7TU+77KO54DhFdVmi7K2BEfRxu+G6zapTH9cM8rDGfDXhBLSyhAcP
+ N8Mz0TUom5hGJ2mP/7TdpDQv4A6FwDWIeFfZMni+pUji28O7F1PhXWgWOMLPrQYu5fQ1
+ y7SNOqAGGHIXmgRatjhC+3J+HuxxQuoTxIt+KqFW0rCbom/BcjovivHpBdxfljYmF/J8
+ MNDLBTjNMO3CatBwwchHmlH7x+7kv3VtZQu8kiGZ5HS/6nN9oktFRx5yl80G6WR35BPo
+ J5fw==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBzeZue+uNJl6/UcMaN08gkSGe6LNy1hPZ0ZWJ7M/1a7j2Z8CpgE3rsiyNVIf0AzSdE0YFj2pnh7QHKW@nongnu.org
+X-Gm-Message-State: AFuF++m53j1BpZ2Pr9FJp3TiAKhm8wOrvn2qwLEPJDHWtj2B1QZmbOh4
+ wNxHLwUTkILPLsaWtSyTDMkwKB4TI6OQTAKvAaNkK2DHHDKhlCtIzQn0M+o3LWZ/bavirvW/TI3
+ ULz39jL2Aj4/8QXFpS9a1OoPCGfxy2AX7gJxlVQSENU1FlsY1kNFHcVOlNQ==
+X-Gm-Gg: AYBFou3vJsPTFxGstWDfyXUvQSggfUWdu/lzdgpxTaRJ+MRUm8VfW504jN9YPJvS4oi
+ 5/OA0rdjwyaXq9AbBpanUVTtDgRpUALg+7fbVJTUnpQSLKSqfoVqGE2+Ocqkd2B3g2aFO5f7KAz
+ s0RlVVRx7s+7OFKMCRoeJftY0ITJt1T/jRo3KyPDLRTdVBXq273VXNiq6Svc2Tv//w4gMqJWFVp
+ 4QuPpDK7tqh6SyL0zcBqoTF/P0DhUkx60codfDkN+A+0ws2WQn0Zm3XLNTaC9zm5fOKkfVNnBcq
+ EHXWRMptL/u0J6JT7F0rEWJg/HOTCHA30olMbGsbutzKKEtxaNCREAmof3u1yFSpJTSeTyawf/R
+ DVzFiE1ZtXz0NB+MOF/9ZKROyCW9fvxj5TA==
+X-Received: by 2002:a05:620a:6413:b0:93c:2356:4e21 with SMTP id
+ af79cd13be357-93cac1ab15emr599015285a.41.1790841188336; 
+ Thu, 01 Oct 2026 00:53:08 -0700 (PDT)
+X-Received: by 2002:a05:620a:6413:b0:93c:2356:4e21 with SMTP id
+ af79cd13be357-93cac1ab15emr599012585a.41.1790841187775; 
+ Thu, 01 Oct 2026 00:53:07 -0700 (PDT)
+Received: from [192.168.68.100] ([187.10.234.20])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-93cb65c1705sm160673385a.47.2026.10.01.00.53.04
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 01 Oct 2026 00:53:07 -0700 (PDT)
+Message-ID: <ba7078a2-2252-4c11-a820-535848551ab9@oss.qualcomm.com>
+Date: Thu, 1 Oct 2026 04:53:02 -0300
 MIME-Version: 1.0
-X-Exchange-RoutingPolicyChecked: kcSmWex58HEhoMX4FLr1GIQkIKbQzmO8r2vPS37TEoSaNaZ7Lqr+GBgWrsmsZXg+ICOqbQFb0elv5FFeqeePS3MttVyXh073NLiqIhLSrTGxG8Of7N1Dk6miclEIqW1XSe8+lh4v0dNeQzoPqw6R2CgY7H0zF/FEIVmRqbWOyQSXBhVhshyqqAZW9fiPDMu1cpLA2BjjBJlCOsCwIQB7xmkqqbtngWXr8ZUgci1IKw5mwZt68vODl278SpGLesqPH6oU217YpYLtas9W4JpPuMnH4dXNRqDK7hEbtwIPKo+96TSkn4NYhS7JRHnFtWQfJVu9Kz5x2AvWR6oAsStEnw==
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: /JWEy7yGyj4pbhpEZGx6/tRG+gRlLyhRk3aesPIxG1BM94RMMGYX7tHofLskUvidQyNdl5eeO/7NCqsSpl6zD50WoiDq25Cv2wF9GCB/U1WVBlleoMyZLTGpTNhXSKLxbipogYD3KtVB4vJo/R+XT0EgBvAMUJ4RiXptomt1Sn78q2o52njleVgxMGhiLX0HbZ8fxpulc2kBk3AqUp/iLifCSmN14ZM2vsSa4rYOY0u1G3owQg9hGGHHylnqYUkvByf7zDN5a+Rusy4WJ96j+Hnucx7hVrXFCWVdYEibMgBqygviMxG4GMCR6n0hwczCePkNjGY/KAVhhXUPg8OBy7eyWk+xpK3kQNwh24F05y9uVdO8NpP9Klvb0wkgblyBi+dhJc0MpKxGZP5FBFJGv/EGSZmP5Ac/cY6iIzDnjZ3ONswaFM5IQeCwpbWJ40w6SLl4qC3qe/p00VPhZlij8zIniJfQ4uaQInQEfw9V5QnCILp2p7rQ+jVt6IukcDKVZGr6OKbYsZ0TUynjBcEFQy81Bh83BOT9dygBKdE2T1u1w7owdqqwwqsqdI7V/Xuoz0xHJ+xnk4CDNRL0B6+AlCu0cbnqQcbF20Kd/R0KICvE3TBVVsy7UwketTMzAtJG
-X-OriginatorOrg: wdc.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: BY1PR04MB9561.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 456f117f-a39f-4e58-b426-08df1f7ad593
-X-MS-Exchange-CrossTenant-originalarrivaltime: 01 Oct 2026 05:14:13.9326 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: EsGextW2NUdtTqYcNCfT00fa3nJqiZnVwfDfmzTUXSv0eWlr/JdhwrFgLslj/7FNroE3Q9Wls2GE1A2yBDx0cnS5fqR+FB1kWOpsJSA0ld8=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR04MB7114
-Received-SPF: pass client-ip=216.71.154.45;
- envelope-from=prvs=727d860e1=Alistair.Francis@wdc.com;
- helo=esa6.hgst.iphmx.com
-X-Spam_score_int: -43
-X-Spam_score: -4.4
-X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 4/5] hw/riscv/atlantis: Add machine property to select
+ default uart
+To: Portia Stephens <portias@oss.tenstorrent.com>, qemu-devel@nongnu.org
+Cc: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Chao Liu <chao.liu@processmission.com>, Joel Stanley <joel@jms.id.au>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Weiwei Li <liwei1518@gmail.com>,
+ Michael Ellerman <mpe@kernel.org>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
+ Nicholas Piggin <npiggin@gmail.com>,
+ Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>,
+ qemu-riscv@nongnu.org,
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+ Paolo Bonzini <pbonzini@redhat.com>
+References: <20260929031644.1016354-1-portias@oss.tenstorrent.com>
+ <20260929031644.1016354-5-portias@oss.tenstorrent.com>
+ <706bc560-ee8d-4529-8ece-c849fa8a4602@oss.qualcomm.com>
+ <74c91fe7-c3cc-4cb8-af4c-d406851a3690@oss.tenstorrent.com>
+From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Content-Language: en-US
+In-Reply-To: <74c91fe7-c3cc-4cb8-af4c-d406851a3690@oss.tenstorrent.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDAxMDAzMSBTYWx0ZWRfX6efU7n7n3gGO
+ v+jNc5gCR/UZHdrgsP0SBJaptYZ26F+pc+oLeXLBvMScg9/uohl/xx8VIPQwW6yHnXtItc8U/z/
+ w/DeZpBbuePqCkf12WS9xYvxz1fNup+m6wTyfHynz1NmzRwy8YU/ANUerr3ptQEzkxlxAivXoNw
+ iE9Z56mwJZ/LCCEKBlfKrkTalnJ/tOdaJoGx6bz/qIToWAqQQswLJ6F7q+lOUr6HI9M0bpzaVGg
+ zXJHBniFnMEgtze9xooCLulSnJEp+LVwgfpXFsLYnk11pcHgLu2g8U30kbkoX0c4mpBBOr5h5da
+ jTSJKyjv2WfJQ1AjpqnUHYOMAcrFTULcnECUaW3EqdRb8fKVEoFtTGI+JczYE00tDqQ3ynwzAKD
+ XdLMV74vooZ4fEJuLwN3FQY6cztLr4Tm9sRtyd2vSgO+VE+Ag1aVOdouQ4TP7pp09xV4foDZ3Bx
+ yAI9VmDeQFnwuYBBqlw==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDAxMDAzMSBTYWx0ZWRfX50KcuJN4DCa4
+ CQy1cc95kHnY2599OEh9Gyn9CWSmF2zDLXKbnM3d1V3Or6NOB1WpZE5Goy6249e07wm/mA/A88G
+ N30+2Xf17BzyqdJII+1Fd3dAZHXsqYQ=
+X-Proofpoint-ORIG-GUID: 7V6wmm2GahVNzaH5wdfb4C7eMNlr5gtU
+X-Proofpoint-GUID: 7V6wmm2GahVNzaH5wdfb4C7eMNlr5gtU
+X-Authority-Analysis: v=2.4 cv=NrJE4MdJ c=1 sm=1 tr=0 ts=6abe1165 cx=c_pps
+ a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=jbqyKmyYbxlRs/MVMa3Ccg==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
+ a=t9496tuAAAAA:8 a=lgtMTc-wgasgzdguBScA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=PEH46H7Ffwr30OY-TuGO:22 a=4wQ91nGE5lQcD7eh5OX0:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-01_03,2026-09-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ adultscore=0 priorityscore=1501 impostorscore=0 clxscore=1015 bulkscore=0
+ lowpriorityscore=0 suspectscore=0 malwarescore=0 spamscore=0 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2610010031
+Received-SPF: pass client-ip=205.220.168.131;
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
+X-Spam_bar: --
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -185,63 +167,202 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-T24gRnJpLCAyMDI2LTA5LTA0IGF0IDE0OjQzIC0wNDAwLCBUcmV2b3IgR2FtYmxpbiB3cm90ZToN
-Cj4gc2ZlbmNlLnZtYSB1bmNvbmRpdGlvbmFsbHkgY2FsbGVkIGhlbHBlcl90bGJfZmx1c2goKSwg
-cmVnYXJkbGVzcyBvZg0KPiB0aGUNCj4gcnMxICh2YWRkcikgYW5kIHJzMiAoYXNpZCkgb3BlcmFu
-ZHMsIGZvcmNpbmcgYSBwYWdlLXRhYmxlIHdhbGsgb24gdGhlDQo+IG5leHQgYWNjZXNzLiBDcmVh
-dGUgYSBwYWdlLWxldmVsIGNvdW50ZXJwYXJ0IHRvIGhlbHBlcl90bGJfZmx1c2goKQ0KPiBjYWxs
-ZWQgaGVscGVyX3RsYl9mbHVzaF9wYWdlKCksIGFuZCB1c2UgaXQgd2hlbmV2ZXIgcnMxICE9IDAs
-IGZhbGxpbmcNCj4gYmFjayB0byB0aGUgZXhpc3RpbmcgZnVsbCBmbHVzaCBmb3IgcnMxID09IDAu
-IFRoaXMgbWFrZXMgUklTQy1WDQo+IGJlaGF2aW91ciBtb3JlIHNpbWlsYXIgdG8gQVJNJ3MgZXF1
-aXZhbGVudCAodGxiaV9hYTY0X3ZhZTFfd3JpdGUpLA0KPiB3aGljaA0KPiBhbHJlYWR5IGRvZXMg
-dGxiX2ZsdXNoX3BhZ2VfYnlfbW11aWR4KCkgaW5zdGVhZCBvZiBhIGZ1bGwgZmx1c2guDQo+IA0K
-PiBQYXNzIGdldF9hZGRyZXNzKGN0eCwgYS0+cnMxLCAwKSB0byBnZW5faGVscGVyX3RsYl9mbHVz
-aF9wYWdlKCkNCj4gcmF0aGVyDQo+IHRoYW4gZ2V0X2dwcigpLCBzbyB0aGF0IHRoZSBhZGRyZXNz
-IGJlaW5nIHBhc3NlZCBtYXRjaGVzIHRoZSBjdXJyZW50DQo+IGFkZHJfeGwgd2lkdGggcmVnYXJk
-bGVzcyBvZiAnLWNwdScgaW5wdXQuIE90aGVyd2lzZSwgdGhlIHJhdyByZWdpc3Rlcg0KPiB2YWx1
-ZSBjYW4gY2FycnkgZ2FyYmFnZSBhYm92ZSB0aGF0IHdpZHRoIGFuZCBuZXZlciBtYXRjaCB0aGUg
-YWRkcmVzcw0KPiB0aGUNCj4gVExCIGVudHJ5IHdhcyBhY3R1YWxseSBmaWxsZWQgdW5kZXIsIHNv
-IHRoZSBmbHVzaCBzaWxlbnRseSBtaXNzZXMgYW5kDQo+IGENCj4gc3RhbGUgbWFwcGluZyBzdXJ2
-aXZlcy4NCj4gDQo+IFNpZ25lZC1vZmYtYnk6IFRyZXZvciBHYW1ibGluIDx0Z2FtYmxpbkBiYXls
-aWJyZS5jb20+DQoNClJldmlld2VkLWJ5OiBBbGlzdGFpciBGcmFuY2lzIDxhbGlzdGFpci5mcmFu
-Y2lzQHdkYy5jb20+DQoNCkNhbiB5b3UgZml4dXAgc2ludmFsLnZtYSBhbmQgaGludmFsLiogYXMg
-d2VsbCBwbGVhc2U/DQoNCkFsaXN0YWlyDQoNCj4gLS0tDQo+IMKgdGFyZ2V0L3Jpc2N2L2hlbHBl
-ci5owqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoCB8IDEgKw0KPiDCoHRhcmdldC9yaXNjdi90Y2cvaW5zbl90cmFucy90cmFuc19wcml2aWxl
-Z2VkLmMuaW5jIHwgNiArKysrKy0NCj4gwqB0YXJnZXQvcmlzY3YvdGNnL29wX2hlbHBlci5jwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfCA2ICsrKysrKw0KPiDC
-oDMgZmlsZXMgY2hhbmdlZCwgMTIgaW5zZXJ0aW9ucygrKSwgMSBkZWxldGlvbigtKQ0KPiANCj4g
-ZGlmZiAtLWdpdCBhL3RhcmdldC9yaXNjdi9oZWxwZXIuaCBiL3RhcmdldC9yaXNjdi9oZWxwZXIu
-aA0KPiBpbmRleCA0ZmMyZDNhMTU1Li42NTJmODVhNWM3IDEwMDY0NA0KPiAtLS0gYS90YXJnZXQv
-cmlzY3YvaGVscGVyLmgNCj4gKysrIGIvdGFyZ2V0L3Jpc2N2L2hlbHBlci5oDQo+IEBAIC0xMzcs
-NiArMTM3LDcgQEAgREVGX0hFTFBFUl8xKGN0cl9jbGVhciwgdm9pZCwgZW52KQ0KPiDCoERFRl9I
-RUxQRVJfMSh3ZmksIHZvaWQsIGVudikNCj4gwqBERUZfSEVMUEVSXzEod3JzX250bywgdm9pZCwg
-ZW52KQ0KPiDCoERFRl9IRUxQRVJfMSh0bGJfZmx1c2gsIHZvaWQsIGVudikNCj4gK0RFRl9IRUxQ
-RVJfMih0bGJfZmx1c2hfcGFnZSwgdm9pZCwgZW52LCB0bCkNCj4gwqBERUZfSEVMUEVSXzEodGxi
-X2ZsdXNoX2FsbCwgdm9pZCwgZW52KQ0KPiDCoERFRl9IRUxQRVJfNChjdHJfYWRkX2VudHJ5LCB2
-b2lkLCBlbnYsIHRsLCB0bCwgdGwpDQo+IMKgLyogTmF0aXZlIERlYnVnICovDQo+IGRpZmYgLS1n
-aXQgYS90YXJnZXQvcmlzY3YvdGNnL2luc25fdHJhbnMvdHJhbnNfcHJpdmlsZWdlZC5jLmluYw0K
-PiBiL3RhcmdldC9yaXNjdi90Y2cvaW5zbl90cmFucy90cmFuc19wcml2aWxlZ2VkLmMuaW5jDQo+
-IGluZGV4IGE4ZWFjY2VmNjcuLjg2NTVmYTMzMmUgMTAwNjQ0DQo+IC0tLSBhL3RhcmdldC9yaXNj
-di90Y2cvaW5zbl90cmFucy90cmFuc19wcml2aWxlZ2VkLmMuaW5jDQo+ICsrKyBiL3RhcmdldC9y
-aXNjdi90Y2cvaW5zbl90cmFucy90cmFuc19wcml2aWxlZ2VkLmMuaW5jDQo+IEBAIC0xNTUsNyAr
-MTU1LDExIEBAIHN0YXRpYyBib29sIHRyYW5zX3NmZW5jZV92bWEoRGlzYXNDb250ZXh0ICpjdHgs
-DQo+IGFyZ19zZmVuY2Vfdm1hICphKQ0KPiDCoHsNCj4gwqAjaWZuZGVmIENPTkZJR19VU0VSX09O
-TFkNCj4gwqDCoMKgwqAgZGVjb2RlX3NhdmVfb3BjKGN0eCwgMCk7DQo+IC3CoMKgwqAgZ2VuX2hl
-bHBlcl90bGJfZmx1c2godGNnX2Vudik7DQo+ICvCoMKgwqAgaWYgKGEtPnJzMSA9PSAwKSB7DQo+
-ICvCoMKgwqDCoMKgwqDCoCBnZW5faGVscGVyX3RsYl9mbHVzaCh0Y2dfZW52KTsNCj4gK8KgwqDC
-oCB9IGVsc2Ugew0KPiArwqDCoMKgwqDCoMKgwqAgZ2VuX2hlbHBlcl90bGJfZmx1c2hfcGFnZSh0
-Y2dfZW52LCBnZXRfYWRkcmVzcyhjdHgsIGEtPnJzMSwNCj4gMCkpOw0KPiArwqDCoMKgIH0NCj4g
-wqDCoMKgwqAgcmV0dXJuIHRydWU7DQo+IMKgI2VuZGlmDQo+IMKgwqDCoMKgIHJldHVybiBmYWxz
-ZTsNCj4gZGlmZiAtLWdpdCBhL3RhcmdldC9yaXNjdi90Y2cvb3BfaGVscGVyLmMNCj4gYi90YXJn
-ZXQvcmlzY3YvdGNnL29wX2hlbHBlci5jDQo+IGluZGV4IDdmNjNmM2FkYTUuLjE3OGI0ZDI3MWIg
-MTAwNjQ0DQo+IC0tLSBhL3RhcmdldC9yaXNjdi90Y2cvb3BfaGVscGVyLmMNCj4gKysrIGIvdGFy
-Z2V0L3Jpc2N2L3RjZy9vcF9oZWxwZXIuYw0KPiBAQCAtNjA3LDYgKzYwNywxMiBAQCB2b2lkIGhl
-bHBlcl90bGJfZmx1c2goQ1BVUklTQ1ZTdGF0ZSAqZW52KQ0KPiDCoMKgwqDCoCB0bGJfZmx1c2go
-Y3MpOw0KPiDCoH0NCj4gwqANCj4gK3ZvaWQgaGVscGVyX3RsYl9mbHVzaF9wYWdlKENQVVJJU0NW
-U3RhdGUgKmVudiwgdGFyZ2V0X3Vsb25nIGFkZHIpDQo+ICt7DQo+ICvCoMKgwqAgY2hlY2tfc2Zl
-bmNlX3ZtYShlbnYsIEdFVFBDKCkpOw0KPiArwqDCoMKgIHRsYl9mbHVzaF9wYWdlKGVudl9jcHUo
-ZW52KSwgYWRkcik7DQo+ICt9DQo+ICsNCj4gwqB2b2lkIGhlbHBlcl90bGJfZmx1c2hfYWxsKENQ
-VVJJU0NWU3RhdGUgKmVudikNCj4gwqB7DQo+IMKgwqDCoMKgIENQVVN0YXRlICpjcyA9IGVudl9j
-cHUoZW52KTsNCg==
+
+
+On 10/1/2026 12:14 AM, Portia Stephens wrote:
+> 
+> On 1/10/2026 12:48 AM, Daniel Henrique Barboza wrote:
+>>
+>>
+>> On 9/29/2026 12:16 AM, portias@oss.tenstorrent.com wrote:
+>>> From: Portia Stephens <portias@oss.tenstorrent.com>
+>>>
+>>> The Atlantis SoC has 5 UARTs. This adds a machine property to set
+>>> which uart is on the first serial interface. This is the same pattern
+>>> that is used by aspeed. The rest of the uart's will be added in
+>>> sequential order starting at serial interface 1.
+>>>
+>>> The default value is uart1 which means the Ascalon console will be on
+>>> serial interface 0 by default.
+>>>
+>>> Signed-off-by: Portia Stephens <portias@oss.tenstorrent.com>
+>>> ---
+>>
+>> The code LGTM but I wonder if we can make it simpler.
+>>
+>> IIUC there is a new ams->uart_chosen being added that holds the numeric ID of
+>> the first UART.  Then there's a new string property called "console" that needs
+>> to be on the format "uartN".  To do that there's a string parsing code in
+>> tt_atlantis_set_console() to guarantee it.  And there's code to guarantee that
+>> N is also in an acceptable range.  Aside from parsing N the 'console' string is
+>> not being used.
+>>
+>> I believe there's a good case here to make "console" an uint32_t property instead,
+>> receiving N, getting rid of all the string parsing code.
+>>
+>> Also, there's a couple of instances of this:
+>>
+>>
+>> int uart_chosen = ams->uart_chosen ? ams->uart_chosen : TT_ATL_UART1;
+>>
+>>
+>> You can avoid this ternary by initializing ams->uart_chosen  = TT_ATL_UART1; during
+>> tt_atlantis_soc_init().  Coupled with the parsing code from the "console" property
+>> there is a guarantee that ams->uart_chosen will always be an acceptable value.
+> 
+> 
+> uart_chosen is part of the machine class, so it would need to be initialized in the machine_init.  The machine property is set from user inputs prior to the machine_init being called.  Initializing uart_chosen in the machine_init will just overwrite the user input value. There is a object_property_set_default_uint() which allows setting a default value for a machine property , I have used this instead in v2 which has the same end result.
+
+I guess I forgot I was talking about a machine property in the middle of my reply
+:D
+
+Yes, using set_default_uint() will have the desired effect (set a default value for
+uart_chosen that users can overwrite later) and you should use that.
+
+
+Cheers,
+Daniel
+
+> 
+> 
+>>
+>>
+>>
+>> Thanks,
+>> Daniel
+>>
+>>
+>>>   hw/riscv/tt_atlantis.c         | 77 ++++++++++++++++++++++++++++++----
+>>>   include/hw/riscv/tt_atlantis.h |  1 +
+>>>   2 files changed, 69 insertions(+), 9 deletions(-)
+>>>
+>>> diff --git a/hw/riscv/tt_atlantis.c b/hw/riscv/tt_atlantis.c
+>>> index d567ec1155..32ba755bbf 100644
+>>> --- a/hw/riscv/tt_atlantis.c
+>>> +++ b/hw/riscv/tt_atlantis.c
+>>> @@ -420,6 +420,29 @@ static void load_fdt(TTAtlantisState *ams)
+>>>       create_fdt_memory(ms->fdt, &ams->soc);
+>>>   }
+>>>   +static inline int tt_atlantis_uart_index(int uart_dev)
+>>> +{
+>>> +    return uart_dev - TT_ATL_UART0;
+>>> +}
+>>> +
+>>> +static void tt_atlantis_connect_serial_hds_to_uarts(TTAtlantisState *ams)
+>>> +{
+>>> +    TTAtlantisSoCState *s = &ams->soc;
+>>> +
+>>> +    int uart_chosen = ams->uart_chosen ? ams->uart_chosen : TT_ATL_UART1;
+>>> +    int uart_index = tt_atlantis_uart_index(uart_chosen);
+>>> +
+>>> +    qdev_prop_set_chr(DEVICE(&s->uart[uart_index]), "chardev", serial_hd(0));
+>>> +
+>>> +    for (int i = 1, uart = 0; i < TT_ATL_NUM_UARTS; uart++) {
+>>> +        if (uart == uart_index) {
+>>> +            continue;
+>>> +        }
+>>> +        qdev_prop_set_chr(DEVICE(&s->uart[uart]), "chardev", serial_hd(i++));
+>>> +    }
+>>> +}
+>>> +
+>>> +
+>>>   static void tt_atlantis_machine_done(Notifier *n, void *data)
+>>>   {
+>>>       TTAtlantisState *ams = container_of(n, TTAtlantisState, machine_done);
+>>> @@ -482,11 +505,6 @@ static void tt_atlantis_machine_done(Notifier *n, void *data)
+>>>                                 fdt_load_addr);
+>>>   }
+>>>   -static inline int tt_atlantis_uart_index(int uart_dev)
+>>> -{
+>>> -    return uart_dev - TT_ATL_UART0;
+>>> -}
+>>> -
+>>>   static void tt_atlantis_soc_init(Object *obj)
+>>>   {
+>>>       TTAtlantisSoCState *s = TT_ATLANTIS_SOC(obj);
+>>> @@ -590,10 +608,6 @@ static void tt_atlantis_soc_realize(DeviceState *dev, Error **errp)
+>>>       memory_region_add_subregion(s->memory, s->memmap[TT_ATL_BOOTROM].base,
+>>>                                   &s->bootrom);
+>>>   -    /* UART1, the soc console (UART0 is for the boot microcontroller */
+>>> - qdev_prop_set_chr(DEVICE(&s->uart[tt_atlantis_uart_index(TT_ATL_UART1)]),
+>>> -                      "chardev", serial_hd(0));
+>>> -
+>>>       for (int i = 0; i < TT_ATL_NUM_UARTS; i++) {
+>>>           SysBusDevice *sbd = SYS_BUS_DEVICE(&s->uart[i]);
+>>>           if (!sysbus_realize(sbd, errp)) {
+>>> @@ -661,6 +675,10 @@ static void tt_atlantis_machine_init(MachineState *machine)
+>>>                                OBJECT(&ams->soc_memory), &error_abort);
+>>>       object_property_set_link(OBJECT(&ams->soc), "dram", OBJECT(machine->ram),
+>>>                                &error_abort);
+>>> +
+>>> +    /* Map serial interfaces to uart */
+>>> +    tt_atlantis_connect_serial_hds_to_uarts(ams);
+>>> +
+>>>       qdev_realize(DEVICE(&ams->soc), NULL, &error_fatal);
+>>>         /* I2C peripherals: qemu specific */
+>>> @@ -678,6 +696,45 @@ static void tt_atlantis_machine_init(MachineState *machine)
+>>> qemu_add_machine_init_done_notifier(&ams->machine_done);
+>>>   }
+>>>   +static char *tt_atlantis_get_console(Object *obj, Error **errp)
+>>> +{
+>>> +    TTAtlantisState *ams = TT_ATLANTIS_MACHINE(obj);
+>>> +
+>>> +    /* Default to Ascalon console */
+>>> +    int uart_chosen = ams->uart_chosen ? ams->uart_chosen : TT_ATL_UART1;
+>>> +
+>>> +    return g_strdup_printf("uart%d", tt_atlantis_uart_index(uart_chosen));
+>>> +}
+>>> +
+>>> +static void tt_atlantis_set_console(Object *obj, const char *value, Error **errp)
+>>> +{
+>>> +    TTAtlantisState *ams = TT_ATLANTIS_MACHINE(obj);
+>>> +
+>>> +    int val;
+>>> +    int uart_first = tt_atlantis_uart_index(TT_ATL_UART0);
+>>> +    int uart_last = tt_atlantis_uart_index(TT_ATL_UART4);
+>>> +
+>>> +    if (sscanf(value, "uart%d", &val) != 1 || val < 0) {
+>>> +        error_setg(errp, "Bad value for \"uart\" property");
+>>> +        return;
+>>> +    }
+>>> +
+>>> +    if (val < uart_first || val > uart_last) {
+>>> +        error_setg(errp, "\"uart\" should be in range [%d - %d]",
+>>> +                   uart_first, uart_last);
+>>> +        return;
+>>> +    }
+>>> +    ams->uart_chosen = val + TT_ATL_UART0;
+>>> +}
+>>> +
+>>> +static void tt_atlantis_machine_class_props_init(ObjectClass *oc)
+>>> +{
+>>> +    object_class_property_add_str(oc, "console", tt_atlantis_get_console,
+>>> +                                  tt_atlantis_set_console);
+>>> +    object_class_property_set_description(oc, "console",
+>>> +                           "Change the default UART to \"uartX\"");
+>>> +}
+>>> +
+>>>   static void tt_atlantis_machine_class_init(ObjectClass *oc, const void *data)
+>>>   {
+>>>       MachineClass *mc = MACHINE_CLASS(oc);
+>>> @@ -691,6 +748,8 @@ static void tt_atlantis_machine_class_init(ObjectClass *oc, const void *data)
+>>>       mc->block_default_type = IF_VIRTIO;
+>>>       mc->no_cdrom = 1;
+>>>       mc->default_ram_id = "tt_atlantis.ram";
+>>> +
+>>> +    tt_atlantis_machine_class_props_init(oc);
+>>>   }
+>>>     static const TypeInfo tt_atlantis_types[] = {
+>>> diff --git a/include/hw/riscv/tt_atlantis.h b/include/hw/riscv/tt_atlantis.h
+>>> index b81b7c8abd..7bd46e9c9b 100644
+>>> --- a/include/hw/riscv/tt_atlantis.h
+>>> +++ b/include/hw/riscv/tt_atlantis.h
+>>> @@ -56,6 +56,7 @@ struct TTAtlantisState {
+>>>         MemoryRegion soc_memory;
+>>>       TTAtlantisSoCState soc;
+>>> +    uint32_t uart_chosen;
+>>>   };
+>>>     enum {
+>>
+
 
