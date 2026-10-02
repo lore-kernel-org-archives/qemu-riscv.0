@@ -4,95 +4,117 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC8D5CA5FD4
-	for <qemu-riscv@archiver.kernel.org>; Fri,  2 Oct 2026 17:29:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57678CA5FDD
+	for <qemu-riscv@archiver.kernel.org>; Fri,  2 Oct 2026 17:51:38 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xCgzA-00024V-8U; Fri, 02 Oct 2026 13:23:54 -0400
+	id 1xChPn-0003qr-E3; Fri, 02 Oct 2026 13:51:25 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1xCgxH-0008Uy-IO
- for qemu-riscv@nongnu.org; Fri, 02 Oct 2026 13:21:59 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1xCgxF-0003Xu-EN
- for qemu-riscv@nongnu.org; Fri, 02 Oct 2026 13:21:55 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1790961712;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=Hue97jH25PL9Fu7HwzO2FuDAiS35DDowtfLLJwWj3E4=;
- b=cVU3FJlWcetouO4P7f8A8X7fZeB6chQL0Hhae63hGAKG1vlOy+UtsDJ07JRMsiOKhiSy1i
- ezpBB9xxc9W0ftjmY5AQ0+JYsc4v9r7EkMJY4U0Dj6+nUY2Ln0rnpA8KlD8i/OJYK3S96L
- 9Vyyyvnttkd+sERVg56oFt1U+ClFbdM=
-Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-449-z4Du8iPnOfuwp-zbMAcwmQ-1; Fri,
- 02 Oct 2026 13:21:49 -0400
-X-MC-Unique: z4Du8iPnOfuwp-zbMAcwmQ-1
-X-Mimecast-MFC-AGG-ID: z4Du8iPnOfuwp-zbMAcwmQ_1790961708
-Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 3F6211955E90; Fri,  2 Oct 2026 17:21:48 +0000 (UTC)
-Received: from localhost (headnet03.pony-001.prod.iad2.dc.redhat.com
- [10.2.32.114])
- by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 7389E1800351; Fri,  2 Oct 2026 17:21:47 +0000 (UTC)
+ (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
+ id 1xChPa-0003hh-9R
+ for qemu-riscv@nongnu.org; Fri, 02 Oct 2026 13:51:11 -0400
+Received: from mail-dy2-x0d.google.com ([2607:f8b0:4864:36::d])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
+ id 1xChPX-0007If-4I
+ for qemu-riscv@nongnu.org; Fri, 02 Oct 2026 13:51:09 -0400
+Received: by mail-dy2-x0d.google.com with SMTP id
+ 5a478bee46e88-34daf1b9a1fso1685829eec.2
+ for <qemu-riscv@nongnu.org>; Fri, 02 Oct 2026 10:51:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1790963465; x=1791568265; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=oEyujAwpsRaAxwTHH646nyJUYrC5y703ZAv6Bnw+1fA=;
+ b=bOVnEl2txH0efrZPUoRziRjUAWG+AK1niWwZdXztHT53TZP4bfw0RUDDHLBpYp3/Ud
+ noCSUB0yfAro2NbI5ANjp5m5HCO733mj3FCd2HAi4fMf7VRusmmnloNXWghrt5mUFYWc
+ +hr3XHsf/Ni1DN9xEGyYo44bv32Y95gtlpXH6msATbD820o62nBaje7B6VXCdy+5Tw6H
+ m1NQhx+iOI3tTfHFw4hPGc6hg4QlOu+5zDXz7qRudCzwYPP0JE1jDnhBKZ5AmNXlSFzu
+ YlPvVkE4B6XjjlUardtLhEENQqDxxdTw2FMGUt+ALNDQfj5fp1lBfsV+fsDjEt6+wMlY
+ 2PXA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1790963465; x=1791568265;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=oEyujAwpsRaAxwTHH646nyJUYrC5y703ZAv6Bnw+1fA=;
+ b=S1Sa85iPYZuZ06jLeXpiHCHSQVx2da0tt1C+t9mMCiUhNh2OoRK986c3FGpDgY+XF9
+ Rn75G6HgL6NSEFKMMXVKYQdR+PQZKBbbtYwbMlWMMgzCe+5qMdjhl53KV48mhLXcqGnx
+ y8HRZ22mRIJac/fHADLPm8vfmgxhlRRlh/w8+zvRz7FvoLk39L0bkRaHQVHAw8dHkNRP
+ uI87w00hXYnfhDLn8HIAmzxy7T4LNyEnnyPcTXLvZpg+L+rJhq1ihIVzQEBl4jgSfWI4
+ IRenlcJWMCIMUH3RjUeFw7eGYV/9RoL0XDSHj1uOD2F/69jwBFRmRPs1S+WeolBnr8L5
+ kPiw==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBxeSWol9Zqwbdu0Tep5lu2t73pLhXaCxPvfI716yn13jCX9lMBHEycmwQE51sDricjbRn7OuzBUIneA@nongnu.org
+X-Gm-Message-State: AFq9FYLstiqJmo3nmH/U4o08LwrE/IakKM/ofQP9wVFh4spjMUA5WFlQ
+ /Hq+Vw9EwgyEDajwvXfRPCytZd8MqwrNXKnr0kPSePR+2QX3EkY5kbeS
+X-Gm-Gg: AYBFou3F36v0dj/MR4ucwH0afT8nsYgK6IjYbGg6qM/KtislUN4dey+0JKgTJPd+bhz
+ Hpk6YWrQsY8G9X/vsTJLVGJWREIO8xPpTrypexzaaZkiXS8dKUqDb4j4erVPQiig1AasN6yd5Zb
+ GDTgVEJSnBzEohYPEYw+y/fjkzg+J62S6XpzyfMm9wd2ksVATTh3oJjHIWdStJpx79dvaV6OKVv
+ cmo588N5TtZU5yLfSG8XyacRVKTVGBS6gZQM8YGAfu1Sx45xSeJ+4OJPe0TXq3oMmi/S3BYJLz7
+ GrGZNHvaTV1Im+mFEkd8zO4HX3bZymB3Fl1+p/5fcHCfPAPVo8SttkrCcXeBjdjOhz1YU5CSZH4
+ cKWo6bJjtaDnQzJ+weHlfUBu4/FA9ENK0gwcKbvvRcU8ndz4eAgcY9sNWcWWv2ud444rHJxFY2f
+ 3nlgJ7lW4eKtISSMT5BOmbTxnzLHpu0QYSKq2OCF4pEyq5eIWL/SYBlsU7gRbCmfvtRIkuaUmcw
+ QhrtAGS3KVMGmvPYDYOgobHjPgzFyE=
+X-Received: by 2002:a05:7301:707:b0:34a:e4f6:4a4b with SMTP id
+ 5a478bee46e88-34f150c3c64mr3357679eec.21.1790963465441; 
+ Fri, 02 Oct 2026 10:51:05 -0700 (PDT)
+Received: from WIN-BH9M8FJACR9 ([103.94.185.75])
+ by smtp.googlemail.com with ESMTPSA id
+ 5a478bee46e88-34f14f9f2afsm18027361eec.18.2026.10.02.10.50.58
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 02 Oct 2026 10:51:04 -0700 (PDT)
+From: Yonggang Luo <luoyonggang@gmail.com>
+To: qemu-devel@nongnu.org
+Cc: Max Filippov <jcmvbkbc@gmail.com>, Stafford Horne <shorne@gmail.com>,
+ Brian Cain <brian.cain@oss.qualcomm.com>,
+ Eric Farman <farman@linux.ibm.com>, Song Gao <17746591750@163.com>,
+ qemu-riscv@nongnu.org,
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+ Aleksandar Rikalo <arikalo@gmail.com>, qemu-s390x@nongnu.org,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Philippe Mathieu-Daude <philmd@mailo.com>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Michael Rolnik <mrolnik@gmail.com>,
+ Harsh Prateek Bora <harshpb@linux.ibm.com>,
+ Nicholas Piggin <npiggin@gmail.com>, Cornelia Huck <cohuck@redhat.com>,
+ Helge Deller <deller@gmx.de>, Chinmay Rath <rathc@linux.ibm.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
+ qemu-ppc@nongnu.org, Peter Maydell <peter.maydell@linaro.org>,
+ Chao Liu <chao.liu@processmission.com>,
+ Aurelien Jarno <aurelien@aurel32.net>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ David Hildenbrand <david@kernel.org>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Weiwei Li <liwei1518@gmail.com>, Yoshinori Sato <yoshinori.sato@nifty.com>,
+ Artyom Tarasenko <atar4qemu@gmail.com>,
+ Matthew Rosato <mjrosato@linux.ibm.com>,
+ Laurent Vivier <laurent@vivier.eu>, qemu-arm@nongnu.org,
+ Paolo Bonzini <pbonzini@redhat.com>, Glenn Miles <milesg@linux.ibm.com>,
+ Ilya Leoshkevich <iii@linux.ibm.com>
+Subject: [PATCH v3 02/27] accel/tcg: add cpu_raise_excp and
+ cpu_raise_excp_restore helpers
+Date: Sat,  3 Oct 2026 01:50:10 +0800
+Message-ID: <20261002175037.1747-3-luoyonggang@gmail.com>
+X-Mailer: git-send-email 2.52.0.windows.1
+In-Reply-To: <20261002175037.1747-1-luoyonggang@gmail.com>
+References: <20261002175037.1747-1-luoyonggang@gmail.com>
 MIME-Version: 1.0
-Subject: Re: [PATCH 11/28] hw/watchdog: mark some watchdog devices as
- secure
-From: marcandre.lureau@redhat.com
-To: =?utf-8?q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>
-Cc: qemu-devel@nongnu.org, xen-devel@lists.xenproject.org, 
- qemu-riscv@nongnu.org, qemu-ppc@nongnu.org, qemu-block@nongnu.org, 
- qemu-s390x@nongnu.org, qemu-arm@nongnu.org
-In-Reply-To: <20260911143627.2743803-12-berrange@redhat.com>
-References: <20260911143627.2743803-1-berrange@redhat.com>
- <20260911143627.2743803-12-berrange@redhat.com>
-Date: Fri, 02 Oct 2026 21:21:01 +0400
-Message-Id: <179096166119.3025252.2496453573519063960.b4-review@b4>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=492;
- i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=KNbJ1woWSzxxfZwd7GZw+aqcvsmuZGYhsDdISMTGzjI=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBqv+gBvrET4+5dsYi7lFkC//cHNBhosHJu0lBRN
- ggAr3rPqauJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCar/oAQAKCRDa6OEJdZac
- 5UPFD/sH9PB9QicrrlwiihP8UOYHRt3rotgC4OeBD8agVZ/Tx5Bv3TEeH8R0sTWKWsdSpMvl9ZP
- y3p18Xwk0PXnMVCnQ91gD7Jf10O0m8R5RwHtWwaGalfpk/HIneYBEUPAHt1UKrtMZaixmMrvler
- tYU7qNeKNDlEv0G0y/gMt6/7g/gWtBz9O4QUtT7vyHy0lGSaI8FcFujlxsGdefqNTNh1kr4jiiy
- 6SXRdbKcFdjbeZxGaJglhoBimunIpbXzc8vCj03r8GMNuKVRyEbCF9jCljJFvK6qWdgXKDopGoR
- JE6IHrDlwhY0ADqZPvphJsylKUiff9ZLflN19GYC9fAKgma32ADNeY8dKX/1t42OV1ZevIzajF/
- M0VL3YJWuvMKvXJwOlM6Rc489O64fXuANNgAlec/WFDz1jfEjZTbFGHuPpwpraEFqXZ5u90NORo
- M1nAYRpJtdK2pfU++QvAj6qNSkXjLZt4TLrkQN+qQXuT84krTr1TqrlqRC3Bsg7TD77Avy9d34n
- fYRpYDLlr4p3ngtqwK6JNrh4FcbSs99KDHwM2A7M+SdQYaW4XVBaa9g1rVfdf39/a298zFKpmh7
- ZQXh17l4KZ7SUCRfJoXSlDz7JIqYGpYW2B6mtOgbNUIREoHz6ertwswBq9hL4uvOZyi7Nat7Ls8
- 6+c/7s2ywX8vPrA==
-X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
- fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
-X-Mimecast-MFC-PROC-ID: aUCVE9R1D-qliPEWNITwZj_8IU9Ubcr687je_QsEP8U_1790961708
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.129.124;
- envelope-from=marcandre.lureau@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: 9
-X-Spam_score: 0.9
-X-Spam_bar: /
-X-Spam_report: (0.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.336,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=0.001, RCVD_IN_SBL_CSS=3.335,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=no autolearn_force=no
+Received-SPF: pass client-ip=2607:f8b0:4864:36::d;
+ envelope-from=luoyonggang@gmail.com; helo=mail-dy2-x0d.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -108,15 +130,73 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, 11 Sep 2026 15:36:10 +0100, Daniel P. Berrangé <berrange@redhat.com> wrote:
-> The ib700, i6300esb, gwdt, spapr and diag288 watchdog devices are marked
-> as secure since they have traditionally been, or are intended to be,
-> used in virtualization use cases on x86, arm, ppc and s390x architectures
-> respectively. Other watchdogs are primarily for emulation.
+Add cpu_raise_excp without host state restoration and
+cpu_raise_excp_restore with explicit state restoration.
 
-Acked-by: Marc-André Lureau <marcandre.lureau@redhat.com>
+Signed-off-by: Yonggang Luo <yonggang@gmail.com>
+---
+ accel/tcg/cpu-exec-common.c  | 13 +++++++++++++
+ include/accel/tcg/cpu-loop.h | 22 ++++++++++++++++++++++
+ 2 files changed, 35 insertions(+)
 
+diff --git a/accel/tcg/cpu-exec-common.c b/accel/tcg/cpu-exec-common.c
+index d20cece1c5f..b551c1439ec 100644
+--- a/accel/tcg/cpu-exec-common.c
++++ b/accel/tcg/cpu-exec-common.c
+@@ -118,6 +118,19 @@ void cpu_loop_exit_restore(CPUState *cpu, uintptr_t pc)
+     cpu_loop_exit(cpu);
+ }
+ 
++void cpu_raise_excp(CPUState *cpu, int exception_index)
++{
++    cpu->exception_index = exception_index;
++    cpu_loop_exit(cpu);
++}
++
++void cpu_raise_excp_restore(CPUState *cpu, int exception_index,
++                            uintptr_t retaddr)
++{
++    cpu->exception_index = exception_index;
++    cpu_loop_exit_restore(cpu, retaddr);
++}
++
+ void cpu_loop_exit_atomic(CPUState *cpu, uintptr_t pc)
+ {
+     /* Prevent looping if already executing in a serial context. */
+diff --git a/include/accel/tcg/cpu-loop.h b/include/accel/tcg/cpu-loop.h
+index f4d38bc2bca..5282c70d5e4 100644
+--- a/include/accel/tcg/cpu-loop.h
++++ b/include/accel/tcg/cpu-loop.h
+@@ -65,6 +65,28 @@ G_NORETURN void cpu_loop_exit_noexc(CPUState *cpu);
+ G_NORETURN void cpu_loop_exit_restore(CPUState *cpu, uintptr_t host_pc);
+ G_NORETURN void cpu_loop_exit_atomic(CPUState *cpu, uintptr_t host_pc);
+ 
++/**
++ * cpu_raise_excp:
++ * @cpu: the cpu context
++ * @exception_index: EXCP_* or target trap number
++ *
++ * Raise @exception_index and exit the current TB without restoring guest
++ * state.
++ */
++G_NORETURN void cpu_raise_excp(CPUState *cpu, int exception_index);
++
++/**
++ * cpu_raise_excp_restore:
++ * @cpu: the cpu context
++ * @exception_index: EXCP_* or target trap number
++ * @retaddr: the host pc within the translation
++ *
++ * Raise @exception_index and exit the current TB. Restore guest state from
++ * @retaddr when nonzero; otherwise, behave like cpu_raise_excp().
++ */
++G_NORETURN void cpu_raise_excp_restore(CPUState *cpu, int exception_index,
++                                       uintptr_t retaddr);
++
+ /**
+  * cpu_loop_exit:
+  * @cpu: the cpu context
 -- 
-Marc-André Lureau <marcandre.lureau@redhat.com>
+2.52.0.windows.1
 
 
