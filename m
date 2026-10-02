@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90A98CA5FD9
-	for <qemu-riscv@archiver.kernel.org>; Fri,  2 Oct 2026 07:33:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DBD5CA5FC4
+	for <qemu-riscv@archiver.kernel.org>; Fri,  2 Oct 2026 07:49:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xCXm6-0000yP-Vu; Fri, 02 Oct 2026 03:33:47 -0400
+	id 1xCY0l-0003v3-PP; Fri, 02 Oct 2026 03:48:55 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dingtaodtdt@gmail.com>)
- id 1xCXm5-0000y5-Ss
- for qemu-riscv@nongnu.org; Fri, 02 Oct 2026 03:33:45 -0400
-Received: from mail-pz2-x10.google.com ([2607:f8b0:4864:3b::10])
+ id 1xCY0i-0003uj-5W
+ for qemu-riscv@nongnu.org; Fri, 02 Oct 2026 03:48:53 -0400
+Received: from mail-pj2-x0f.google.com ([2607:f8b0:4864:39::f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dingtaodtdt@gmail.com>)
- id 1xCXm4-0002EO-62
- for qemu-riscv@nongnu.org; Fri, 02 Oct 2026 03:33:45 -0400
-Received: by mail-pz2-x10.google.com with SMTP id
- 41be03b00d2f7-cc4c3304833so2920477a12.3
- for <qemu-riscv@nongnu.org>; Fri, 02 Oct 2026 00:33:43 -0700 (PDT)
+ id 1xCY0g-0003t6-JR
+ for qemu-riscv@nongnu.org; Fri, 02 Oct 2026 03:48:51 -0400
+Received: by mail-pj2-x0f.google.com with SMTP id
+ 98e67ed59e1d1-39dacf053eeso3841408a91.2
+ for <qemu-riscv@nongnu.org>; Fri, 02 Oct 2026 00:48:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1790926422; x=1791531222; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1790927329; x=1791532129; darn=nongnu.org;
  h=in-reply-to:from:references:cc:to:subject:user-agent:mime-version
  :date:message-id:content-type:from:to:cc:subject:date:message-id
  :reply-to:content-type;
- bh=CLucR6FTSXL97CnIA3BLOwq/lXtjzSeRWKfGw+LqHmI=;
- b=nRUejGtyG4NOSTzCF2Ey3mvK6Txx7MQMKWdZ64dvUKeQ7Rh83tIOKZ4zPrUvDWlwLj
- LFD0JfPYYDgbSld6R1C2LJwQxhxDswKxcMHJBGBGArKFGCC6imY5TkiLd9GX7C7Jwl17
- gQAX5v2V4pXF558ANSdvLnixHsglHzBgqgHEJGajO67/4DK4SoiyHkrL8ogSH4oIe1y/
- EeKWXLscL3uScgSAmiAq/OLSoqoS6LOvwQnmmNOeYDal7s06Q4zxCyuwEpr+VIUYvkI6
- MJMY8oQky/G1UxdrLRPQvUvngQsLAK4nhz9a3vGpTQR785fV2F29w8rpEMAibyyQccZO
- KjAw==
+ bh=ZfPdg4X3nsFjeE/mDg76P8zumypw4P9E11GjXkN/2uY=;
+ b=GAAFxQI3e2yO67OITmSoy13B5nneZToMpbXrX0+InArxnA7mQXHlA8eMtMrSTXYLaa
+ DrIcgcGL9g38DxIdvFH+jsFvizrmFHs4pR61cGMP0rzuuehvYRZohvzRltz5xjWIuDG5
+ uwU/h+tTszR5eul9xvkEfX6Qey5CC8Bys99dvnpmUY4Sp5Quamm+yOXtKvdlbMVzZM4e
+ 7qjQqEZT5AnRubeFufn8NsXghwJPSqVVpSqmrxf5v8M3rgAR9mCifsk3M68zMzGe37I2
+ eDj/K1O96LZP97DlzzteIIu062JLz9UYgblLChHSrNhddCQSUi6emzWfBS8/wUsccXdG
+ pxIg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790926422; x=1791531222;
+ d=1e100.net; s=20260707; t=1790927329; x=1791532129;
  h=in-reply-to:from:references:cc:to:subject:user-agent:mime-version
  :date:message-id:content-type:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=CLucR6FTSXL97CnIA3BLOwq/lXtjzSeRWKfGw+LqHmI=;
- b=x+Tq0mdSI1zZFZBY6kO209ccK/GbLbEgjYkgIWixo6dTy7c6FfwI2ccYnRar0lqJ+J
- 3PnY0dlTvCXYqoAG8XT3kq6UiAygkUW8gr1P+B1Rz+tHDEL6slMMqYfNRidO5iD5dieY
- O9MTIGUueq6ujWLVwdPMj/j7m7Eq2ehSmr0qIX6COLRxuJhDGkmMmalRQJpRR9/dGHZ9
- TooT/wH+sjmsQKTw/bRaUoJpn/RXo6aJ0TjrtQKisV0BshNY56w02imPOxA1GMBPHi7k
- kCCpM7UeXYtfcmzQhs9chKRRdYftRLfoP6h2nfFo3gYggsgfbfXxD/Xk6PoqlhPFl1MV
- njgw==
+ bh=ZfPdg4X3nsFjeE/mDg76P8zumypw4P9E11GjXkN/2uY=;
+ b=no+qM4bTFERPhTGTMJNXWFeQ7Q25znjJ4H/AZkx7qm3Dm2PapJSOK4RK16n6a3ZlgV
+ OqCeX9605AEyfdkMwrX+k/2rZ7Y1uGrl138vs9t0NtseEUXQmAwgMtx52xVYcoZO1r2g
+ YgXLITCD+2PgfabXCgoAhH4GCNZ7q4iyd2nF0LRVIA9wgn6ezPGbac2HMDaK815oSSUJ
+ 6F6ETXWc5zAMb6ED0CPkVinr9WB8ByNif8yylJgx3NBrMywNSQkm7Cu0yB0IAapcMKwM
+ ArLW9kEx6A11jtwqpXYt3al5jlgPcOCHj3FMjZpArySbdYCfPubmrSmOD6eUCqxclctN
+ /TVw==
 X-Forwarded-Encrypted: i=1;
- AKwUvBy26RPCCnBkJwlW+zcJWOTuSYwmEGi8xvuL7AY5HUbXhuk7l2yclbEZ51eW/2LDUZ01fQLeX+AMc8XJ@nongnu.org
-X-Gm-Message-State: AFq9FYJ0KXo8Bsgc1Nkys8+Y1m274GQJ9/d5r6zPYwVQyQRVQt13Rxwp
- TvWUKgWSnqZPTtqTc4BhdMLvjkIFnhTjSUn4DIcgaCx7o6cpCacA8pRY
-X-Gm-Gg: AYBFou3T1pnT92Z0l0pfqsh6mjUSauDqWz2zdtWHJ7kxOfmFGgu1qX9dYhiTiv9xjXQ
- 7Zho/X9Q5QQ6PPh/ovsLxMl9R1xI9Gx92m0tuOlZcoBknziwRVJJ3D2XyMMGkrHdM+tj2qIdspk
- AHKUp5MAA+rFgdgdKI08hIS7JaNllu+TJU/oxx8YsBZ5LpwcAuRlQF5a76Ca9VWzjRkOxTQjb6H
- cyNf7nwyLuA2TblaG4M5FdgE61HhH12pAKuM8Jshx3M1aMB7H4EgM93Ea68pH+M1tO81nyaPwtE
- 06CynjavKqJ4CJaJifA+C9plD99FEP4dUDs6VjNlRsmgJ6UjsgSdSac75HLbpGQRTEjUHzg2bT0
- xKW0ihZwUURSmhbR48ysEfadhbqoweWjuVt/ApHYBlMghrcoRwIl6N2TX6VWDUp49nLgnWdNEfk
- GapbNrUVeZ3HXSAPUIlX74Ld9elTyyAd1ZC3Xnn9qsEsnkM73e92+HqxEdEfdyr/al8c/OLcOM7
- G1ZuAXuoUKx+Z3MEhc6/we1JQ==
-X-Received: by 2002:a17:90b:1fc8:b0:39e:6a81:5a98 with SMTP id
- 98e67ed59e1d1-3a6f9166840mr176736a91.44.1790926422098; 
- Fri, 02 Oct 2026 00:33:42 -0700 (PDT)
+ AKwUvBx6u5kCXzCH50cOa8cU2JZCGiLPDJn3H+rhSy7wds7ACuI55msd9WIKz9ocXjhil4f5q6P570Bkudfs@nongnu.org
+X-Gm-Message-State: AFq9FYIq+KpYkjKZjVK1iF3qsH/CUDizSkaVlIuMSQJU6lQzOOvvGOfF
+ unj7k0QWiLTKicM+77j1jls2XAgu2QLcJaMVXh61bD4XtYBy6X4GTmfnqmFJD3Wf
+X-Gm-Gg: AYBFou17PAYaoJGQP0ixQU9nbsOCoJ8LHRL7TwLPFhQamOTOS/NooDhfHDT22jhFwUF
+ g+IKVZ0/5RB3wJR4+ySOH+vf5s7FcfI7UJrc0Z2RXaCyoZoqkLV4Vf5ekbcrIcgxst3JVqMnDBH
+ B7/T8lYA0h/ted3vzEn+pG4PR2jw4mGKISvL1kjtIOwiZdB0/NIXLMAVRC95gv+/1S74nrVwn1Y
+ q/KwEvEWKtS/ktIukSlo+NIkDbb3gb9FTCjpfZu9+lKNPI2fjgSU7mlJJjlSn3sAv7/jfAYx5lm
+ Zl/DjwgINRgAEx88wLeB+le+2sr74PLjBchQ48dP78KlTy7vXwQeEeBslvQBkK+FbKXMUzM/7+w
+ krThncRUpJkEVU0fJV8yci1ZW4dJrG7cxFKUnUTJhC76Hc361Z14SEnteBelI9XpfcFlMgeIb5G
+ RZSL/e4XywJdj5pvOL3+ck9EYu/J7knytvR5ryyLm7H6zwn7MMfYlm4VvQ/k5Xvlx+ndlotnWA/
+ IOu6QSXLRUKyW4=
+X-Received: by 2002:a17:90b:3809:b0:3a6:fe14:4790 with SMTP id
+ 98e67ed59e1d1-3a6fe144812mr11964a91.28.1790927328958; 
+ Fri, 02 Oct 2026 00:48:48 -0700 (PDT)
 Received: from [192.168.3.23] ([175.152.37.254])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3a4f402dfbbsm7917664a91.0.2026.10.02.00.33.39
+ 98e67ed59e1d1-3a6dd3962f0sm865085a91.3.2026.10.02.00.48.45
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 02 Oct 2026 00:33:41 -0700 (PDT)
+ Fri, 02 Oct 2026 00:48:47 -0700 (PDT)
 Content-Type: multipart/alternative;
- boundary="------------zyJtQkxNoWDT0xv60slmSsww"
-Message-ID: <756e5b29-49e7-4086-bb38-59a62e180d67@gmail.com>
-Date: Fri, 2 Oct 2026 15:33:37 +0800
+ boundary="------------DTA1OiDyLbSWjkcFQDh3fJul"
+Message-ID: <50ab5588-97bd-4f6c-9f69-042dcc6363a6@gmail.com>
+Date: Fri, 2 Oct 2026 15:48:44 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/3] hw/misc: fix k230_decomp_gzip integer handling issues
+Subject: Re: [PATCH 2/3] qtest: fix k230_decomp_gzip test integer handling
+ issues
 To: Alistair Francis <Alistair.Francis@wdc.com>,
  "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>
 Cc: "dingtao0430@163.com" <dingtao0430@163.com>,
@@ -83,18 +84,18 @@ Cc: "dingtao0430@163.com" <dingtao0430@163.com>,
  "chao.liu@processmission.com" <chao.liu@processmission.com>,
  "lvivier@redhat.com" <lvivier@redhat.com>
 References: <20261001022223.8633-1-dingtao0430@163.com>
- <20261001022223.8633-2-dingtao0430@163.com>
- <35b8af2703f942f608f419fef23be6f6429d342b.camel@wdc.com>
+ <20261001022223.8633-3-dingtao0430@163.com>
+ <f75dc58c63d02fac89f3b4940ade9fe54d41ec15.camel@wdc.com>
 From: Tao Ding <dingtaodtdt@gmail.com>
-In-Reply-To: <35b8af2703f942f608f419fef23be6f6429d342b.camel@wdc.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:3b::10;
- envelope-from=dingtaodtdt@gmail.com; helo=mail-pz2-x10.google.com
+In-Reply-To: <f75dc58c63d02fac89f3b4940ade9fe54d41ec15.camel@wdc.com>
+Received-SPF: pass client-ip=2607:f8b0:4864:39::f;
+ envelope-from=dingtaodtdt@gmail.com; helo=mail-pj2-x0f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ HTML_MESSAGE=0.001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -112,70 +113,49 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 This is a multi-part message in MIME format.
---------------zyJtQkxNoWDT0xv60slmSsww
+--------------DTA1OiDyLbSWjkcFQDh3fJul
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 
 
-On 10/2/2026 7:27 AM, Alistair Francis wrote:
-
+On 10/2/2026 7:28 AM, Alistair Francis wrote:
 > On Thu, 2026-10-01 at 10:22 +0800, Tao Ding wrote:
->> Use hwaddr for address calculations to avoid 32-bit overflow and
->> address truncation.
+>> Cast slot to hwaddr before multiplication to prevent 32-bit overflow
+>> when
+>> calculating the SRAM input address.
 >>
->> Resolves: Coverity CID 1685515, 1685517
+>> Resolves: Coverity CID 1685514
 >>
 >> Reported-by: Alistair Francis<Alistair.Francis@wdc.com>
 >> Signed-off-by: Tao Ding<dingtao0430@163.com>
 >> ---
->>   hw/misc/k230_decomp_gzip.c | 6 +++---
->>   1 file changed, 3 insertions(+), 3 deletions(-)
+>>   tests/qtest/k230-decomp-gzip-test.c | 2 +-
+>>   1 file changed, 1 insertion(+), 1 deletion(-)
 >>
->> diff --git a/hw/misc/k230_decomp_gzip.c b/hw/misc/k230_decomp_gzip.c
->> index 0d8a3b2d2e..54303c0e7f 100644
->> --- a/hw/misc/k230_decomp_gzip.c
->> +++ b/hw/misc/k230_decomp_gzip.c
->> @@ -53,13 +53,13 @@ static bool
->> k230_decomp_gzip_write_mem(K230DecompGzipState *s, hwaddr addr,
->>   static hwaddr k230_decomp_gzip_output_addr(K230DecompGzipState *s)
+>> diff --git a/tests/qtest/k230-decomp-gzip-test.c b/tests/qtest/k230-
+>> decomp-gzip-test.c
+>> index e80113fd28..249c8ae82c 100644
+>> --- a/tests/qtest/k230-decomp-gzip-test.c
+>> +++ b/tests/qtest/k230-decomp-gzip-test.c
+>> @@ -46,7 +46,7 @@ static inline hwaddr k230_sram_addr(hwaddr off)
+>>   static inline hwaddr k230_sram_input_addr(unsigned int slot)
 >>   {
->>       return K230_DECOMP_GZIP_SRAM_OUT_BASE +
->> -           s->output.slot * K230_DECOMP_GZIP_BLOCK_SIZE +
->> +           (hwaddr) s->output.slot * K230_DECOMP_GZIP_BLOCK_SIZE +
-> Isn't K230_DECOMP_GZIP_BLOCK_SIZE still a 32-bit value, should it be a
-> ULL?
->
-The cast of |s->output.slot|to |hwaddr|causes the multiplication to be performed as |hwaddr|, so |K230_DECOMP_GZIP_BLOCK_SIZE|does not need a |ULL|suffix.
+>>       return k230_sram_addr(K230_DECOMP_GZIP_SRAM_IN_BASE +
+>> -                          slot * K230_DECOMP_GZIP_BLOCK_SIZE);
+>> +                          (hwaddr) slot *
+>> K230_DECOMP_GZIP_BLOCK_SIZE);
+> What is the point of this function? It's only ever passed 0
 
->>              s->output.current_offset;
->>   }
->>   
->>   static hwaddr k230_decomp_gzip_input_addr(K230DecompGzipState *s)
->>   {
->> -    return s->input.slot * K230_DECOMP_GZIP_BLOCK_SIZE +
->> +    return (hwaddr) s->input.slot * K230_DECOMP_GZIP_BLOCK_SIZE +
->>              K230_DECOMP_GZIP_SRAM_IN_BASE;
->>   }
->>   
->> @@ -102,7 +102,7 @@ static void
->> k230_decomp_gzip_finish(K230DecompGzipState *s, bool crc_ok)
->>   }
->>   
->>   static bool k230_decomp_gzip_load_input(K230DecompGzipState *s,
->> -                                        uint32_t addr, uint32_t
->> size)
->> +                                        hwaddr addr, uint32_t size)
-> This should probably be it's own patch
-
-|Agreed. I'll split the k230_decomp_gzip_load_input() parameter type 
-change into a separate patch in v2.|
+The hardware has two input SRAM slots (|K230_DECOMP_GZIP_INPUT_SLOTS| is 2).
+This helper is intended to calculate the address for either slot.
+The current test only uses slot 0 because its input in a single block.
 
 > Alistair
 >
->>   {
->>       s->input.current_offset = 0;
+>>   }
 >>   
---------------zyJtQkxNoWDT0xv60slmSsww
+>>   /*
+--------------DTA1OiDyLbSWjkcFQDh3fJul
 Content-Type: text/html; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
@@ -187,95 +167,62 @@ Content-Transfer-Encoding: 8bit
   <body>
     <p><br>
     </p>
-    <pre class="moz-cite-prefix">On 10/2/2026 7:27 AM, Alistair Francis wrote:
-</pre>
+    <div class="moz-cite-prefix">On 10/2/2026 7:28 AM, Alistair Francis
+      wrote:<br>
+    </div>
     <blockquote type="cite"
-      cite="mid:35b8af2703f942f608f419fef23be6f6429d342b.camel@wdc.com">
+      cite="mid:f75dc58c63d02fac89f3b4940ade9fe54d41ec15.camel@wdc.com">
       <pre wrap="" class="moz-quote-pre">On Thu, 2026-10-01 at 10:22 +0800, Tao Ding wrote:
 </pre>
       <blockquote type="cite">
-        <pre wrap="" class="moz-quote-pre">Use hwaddr for address calculations to avoid 32-bit overflow and
-address truncation.
+        <pre wrap="" class="moz-quote-pre">Cast slot to hwaddr before multiplication to prevent 32-bit overflow
+when 
+calculating the SRAM input address. 
 
-Resolves: Coverity CID 1685515, 1685517
+Resolves: Coverity CID 1685514
 
 Reported-by: Alistair Francis <a class="moz-txt-link-rfc2396E" href="mailto:Alistair.Francis@wdc.com">&lt;Alistair.Francis@wdc.com&gt;</a>
 Signed-off-by: Tao Ding <a class="moz-txt-link-rfc2396E" href="mailto:dingtao0430@163.com">&lt;dingtao0430@163.com&gt;</a>
 ---
- hw/misc/k230_decomp_gzip.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ tests/qtest/k230-decomp-gzip-test.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/hw/misc/k230_decomp_gzip.c b/hw/misc/k230_decomp_gzip.c
-index 0d8a3b2d2e..54303c0e7f 100644
---- a/hw/misc/k230_decomp_gzip.c
-+++ b/hw/misc/k230_decomp_gzip.c
-@@ -53,13 +53,13 @@ static bool
-k230_decomp_gzip_write_mem(K230DecompGzipState *s, hwaddr addr,
- static hwaddr k230_decomp_gzip_output_addr(K230DecompGzipState *s)
+diff --git a/tests/qtest/k230-decomp-gzip-test.c b/tests/qtest/k230-
+decomp-gzip-test.c
+index e80113fd28..249c8ae82c 100644
+--- a/tests/qtest/k230-decomp-gzip-test.c
++++ b/tests/qtest/k230-decomp-gzip-test.c
+@@ -46,7 +46,7 @@ static inline hwaddr k230_sram_addr(hwaddr off)
+ static inline hwaddr k230_sram_input_addr(unsigned int slot)
  {
-     return K230_DECOMP_GZIP_SRAM_OUT_BASE +
--           s-&gt;output.slot * K230_DECOMP_GZIP_BLOCK_SIZE +
-+           (hwaddr) s-&gt;output.slot * K230_DECOMP_GZIP_BLOCK_SIZE +
+     return k230_sram_addr(K230_DECOMP_GZIP_SRAM_IN_BASE +
+-                          slot * K230_DECOMP_GZIP_BLOCK_SIZE);
++                          (hwaddr) slot *
+K230_DECOMP_GZIP_BLOCK_SIZE);
 </pre>
       </blockquote>
       <pre wrap="" class="moz-quote-pre">
-Isn't K230_DECOMP_GZIP_BLOCK_SIZE still a 32-bit value, should it be a
-ULL?
-
+What is the point of this function? It's only ever passed 0
 </pre>
     </blockquote>
-    <pre><span>The cast of </span><code dir="ltr">s-&gt;output.slot</code><span> to </span><code
-    dir="ltr">hwaddr</code><span> causes the multiplication to be performed as </span><code
-    dir="ltr">hwaddr</code><span>, 
-so </span><code dir="ltr">K230_DECOMP_GZIP_BLOCK_SIZE</code><span> does not need a </span><code
-    dir="ltr">ULL</code><span> suffix.</span></pre>
+    <pre>The hardware has two input SRAM slots (<code dir="ltr">K230_DECOMP_GZIP_INPUT_SLOTS</code> is 2). 
+This helper is intended to calculate the address for either slot. 
+The current test only uses slot 0 because its input in a single block.</pre>
     <blockquote type="cite"
-      cite="mid:35b8af2703f942f608f419fef23be6f6429d342b.camel@wdc.com">
-      <pre wrap="" class="moz-quote-pre">
-</pre>
-      <blockquote type="cite">
-        <pre wrap="" class="moz-quote-pre">            s-&gt;output.current_offset;
- }
- 
- static hwaddr k230_decomp_gzip_input_addr(K230DecompGzipState *s)
- {
--    return s-&gt;input.slot * K230_DECOMP_GZIP_BLOCK_SIZE +
-+    return (hwaddr) s-&gt;input.slot * K230_DECOMP_GZIP_BLOCK_SIZE +
-            K230_DECOMP_GZIP_SRAM_IN_BASE;
- }
- 
-@@ -102,7 +102,7 @@ static void
-k230_decomp_gzip_finish(K230DecompGzipState *s, bool crc_ok)
- }
- 
- static bool k230_decomp_gzip_load_input(K230DecompGzipState *s,
--                                        uint32_t addr, uint32_t
-size)
-+                                        hwaddr addr, uint32_t size)
-</pre>
-      </blockquote>
-      <pre wrap="" class="moz-quote-pre">
-This should probably be it's own patch
-</pre>
-    </blockquote>
-    <br>
-    <pre dir="ltr"><code>Agreed. I'll split the k230_decomp_gzip_load_input() parameter type
-change into a separate patch in v2.</code></pre>
-    <blockquote type="cite"
-      cite="mid:35b8af2703f942f608f419fef23be6f6429d342b.camel@wdc.com">
+      cite="mid:f75dc58c63d02fac89f3b4940ade9fe54d41ec15.camel@wdc.com">
       <pre wrap="" class="moz-quote-pre">
 Alistair
 
 </pre>
       <blockquote type="cite">
-        <pre wrap="" class="moz-quote-pre"> {
-     s-&gt;input.current_offset = 0;
+        <pre wrap="" class="moz-quote-pre"> }
  
+ /*
 </pre>
       </blockquote>
     </blockquote>
   </body>
 </html>
 
---------------zyJtQkxNoWDT0xv60slmSsww--
+--------------DTA1OiDyLbSWjkcFQDh3fJul--
 
