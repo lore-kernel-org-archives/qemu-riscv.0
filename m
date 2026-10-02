@@ -4,77 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A23CCCA5FD4
-	for <qemu-riscv@archiver.kernel.org>; Fri,  2 Oct 2026 14:04:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C295CA5FE2
+	for <qemu-riscv@archiver.kernel.org>; Fri,  2 Oct 2026 14:04:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xCdrb-0004Cn-5I; Fri, 02 Oct 2026 10:03:53 -0400
+	id 1xCdrv-0004Xr-9p; Fri, 02 Oct 2026 10:04:11 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dingtaodtdt@gmail.com>)
- id 1xCdr7-00046a-0e
+ id 1xCdr7-00046d-M9
  for qemu-riscv@nongnu.org; Fri, 02 Oct 2026 10:03:39 -0400
 Received: from mail-pj2-x2a.google.com ([2607:f8b0:4864:39::2a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dingtaodtdt@gmail.com>)
- id 1xCdr4-00086A-7c
- for qemu-riscv@nongnu.org; Fri, 02 Oct 2026 10:03:20 -0400
+ id 1xCdr5-00086L-T3
+ for qemu-riscv@nongnu.org; Fri, 02 Oct 2026 10:03:21 -0400
 Received: by mail-pj2-x2a.google.com with SMTP id
- d9443c01a7336-2e2d58a3b05so32440675ad.0
- for <qemu-riscv@nongnu.org>; Fri, 02 Oct 2026 07:03:14 -0700 (PDT)
+ d9443c01a7336-2e2db9f927cso19545915ad.1
+ for <qemu-riscv@nongnu.org>; Fri, 02 Oct 2026 07:03:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1790949793; x=1791554593; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1790949797; x=1791554597; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=rdntiJw+i8aSECp89xSpKJRa35ej9a/hc4nosI/BmRw=;
- b=eoMXfUqFgtQFS8bTu54GRZgksVZpc2Nw5nrclq+zQiNMPEd3cqSncHrrUszztPKdAe
- NAz6m4FtmDHIXGDTREFssXGT1Ldhry3sPIwmr30KgUhRs5DNM+uhrr3ZlI0L6cnGbX6K
- GHHA2573b4JELZvOy2F896M9PACFO/sLvphkZgHT291ORuaD2v2BSN8g4xWJKHV+OuED
- TeLTlM4LHRYMsakFWOkyM4E0CV8v+V94rl62epOtFMSSYOnLoypZZ2MM7Q5cPst5Nb2N
- +mYnFSXfA6ECcWlv3LzSigLmNSWywD9cPgPTfkDVdOaFqdMn7Ww3NV2l0iWUoB2mB2fW
- AeeA==
+ bh=KKj70xiMz7h/gagRNUkAOOkov58WG1YJeesJ3q/MfEY=;
+ b=csnofDTGo/HQTHy/FlgASnxCHSdUuV5XUKRTAB1NNxndvbIbm9bIv57gQvchK/dnp7
+ N/OT1IvyZg3ujLn+/u685BKtIBDuDK1A6enTRyI2gkBwIuIL0cGgiXMtCLCdx3/Q9GDq
+ EiPDxZd00nMIqfGoSKo3j6VOtchF3qEpzKd6lzFETwmPAtBNRDHf1Z5hpBUmgBXbPM9Y
+ ozF8Czj12Ld3z3daf8KHMZgyNctN8ZGvp71rakCJu4rneO12HwriMy7De/bAS9mhbqaE
+ DJeRR9DmhO4wj4kqERd386rWWixlxB+vAYFFpFRe7meUsTVtPQrmVygx7zuoD0kAhQao
+ 74ZA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790949793; x=1791554593;
+ d=1e100.net; s=20260707; t=1790949797; x=1791554597;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=rdntiJw+i8aSECp89xSpKJRa35ej9a/hc4nosI/BmRw=;
- b=JfRXflMrRWhizStcgNghjO/qG7s7WsIg8Hkh9RXwznAqbnxoOP6kCeu7CIeKjbqzs6
- wc+s7cXUU+bSRKdMzQLHp0c/K7Qw5qbgJZy8h8Ys++ggSqeijzaACL5/iOAOe7B2nmS4
- /LHXn5dShH7yjMqMokD2pD4OgZ5peeu6Uj62msw+ylUUQ+63D3ImlNnMoPTiQf8xfeTe
- XG4j7MYgDCgWhxcUYY8dIHz8TvE8srVl0Rx9nK68kRc53w0rH/P5Eu7PdFLYEemwubsY
- Hsg8U5Q2yvuC0jx0kIen5mVC6b7UaCmrVJ+v5+27SuBniVXc7Wxk/3YEHF96AEmHV4G8
- HyUQ==
-X-Gm-Message-State: AFq9FYIkbaqdt7esXWr6XQxW3wt4JgQuUG9prGEin6HtkIUptWbp5/15
- 78Ic2IDJGxjRGbMYBUyCuVzWctMyGbthhWsmSlScbERut3afBOggwV+1
-X-Gm-Gg: AYBFou3GGAV/SvaHSK5SFirOyE3wDlhn1jERkSomOiu/YhPD2jSlzcEJK4tWL/gIPeg
- oF1p0Q45RR3ZFzZDFBCsrc0wngVErrrahmtSAftT0ZoWLlSCOyM7JVCVkIuMB7evQIi0r2AL4j8
- LQrx/nO/YJnrKSVnytnGyZC1rF6HtMxnr4a77UBCdhvSK0X3h5F42lvU73spr4wBdKcjI+zMEBn
- Zi7GCUVMBsy6hTsk2e2cijXieUyyYmbG+xeCO8ZPbvaXhoGDCt20fQHLrPENYcwXwA9MgahdnLq
- 8ifgACKirTfwc3iFM2v5hjA2UD5+4CdmIweG5zvsKbpeY8BoQp7x/YMZ565aRjmKAGDwTge3xhn
- Q9lW4ZzAkBSqzx+i0zy8hUFiaqqdkj8dY5Vv6q+Btv+9x5fTdOm2nXq5WCvvlfm28myMmKZpP4m
- IOGD0Xu13sRgoAxLIM8mCfUgQrH1L3zTLgNn8xOGVXmRPsUaztMxrowVfLrvkWL/10M33B3ImZ/
- GtnnOezstAsBuym
-X-Received: by 2002:a17:903:186:b0:2dd:ad74:ac7c with SMTP id
- d9443c01a7336-2e49b67da5dmr26511775ad.23.1790949792627; 
- Fri, 02 Oct 2026 07:03:12 -0700 (PDT)
+ bh=KKj70xiMz7h/gagRNUkAOOkov58WG1YJeesJ3q/MfEY=;
+ b=LL0uQrFsFDoI8Tp5V008Xt9JBzU1wS7AjPSiUO2vYddpwgCdiAGlSYvsUn5fx4p14c
+ WgY4qjxJT+JidOTNZMJlT0ky7gWQHrWctlx9ydprJinZn7DwK9fL0KXu3a5pPFHX7+Bi
+ GFsU2C3JtzlB2gXXjyt278F/Bh3fqSd0LlIO2waLHUaixCKPGSmCWVMNgy11HUUDN8Hr
+ kEdrHLGtiL+O7M4xfQOo/IOU05AOuKKnboPKwJRH+KNl7OXz+0YUJPzNuRxQLTYNe0qf
+ df+RQ/CLXSX+AfCap8f4YgRu5x/jIz/UawvXV29ZN6vZTasNQCpyHVCNApuFU1Hr8Bvm
+ dhug==
+X-Gm-Message-State: AFq9FYLGn6GhczJigesal9Ba1js5fPRe5Bf7d5/kEfrbSsxJeHZBKjy/
+ z/f3xUEbkSGj/jPW1ZdqCqCksYiSS0yi/W/kSlfeP8A7lz4CJMaCiH4H
+X-Gm-Gg: AYBFou0Y4GfXHhAhVCpG679wobvxcNREIgaqHKWMbwHhJhTJtvh525eGc9SI664OYHS
+ stGS2iw7P8Oo42C0MChbPf2v0zF4ZT3LmcXiGsbz7Sb54DRlKrSQH1EDSHd9zyX786lOPy05PD3
+ g3xYKw8u7G2IdidialpQgEsxcddhrNbk+Vsd9ZcbbVkt8js/K/8W3ojzFJYXnKn1wPzjLQFMVHG
+ VaPe9Nz8fKIeQM1Ex0me3Gjn168dBzl+Vn4//gj3lkBafPj7kDOAQT6FpLqQmkGOVguX7pB6AAS
+ 9IhoUl79u6BJOMkKJNpb/LQToGj4DLJhZBO2H8mQhdT3gY5nh2LquvX35z1X1xUg2lhD7fcSIjb
+ algmE8HGzp7vG0S99yNHhdFVM2Sln8D6covBglUwzcdIWcOIWKEBHwos/ScjMMVt9xeyT3O0pvc
+ phLHa6UtvCkU8t7pbsi0SOWjdH51J5/0FptsN3LKopXl6EDv0VyJOj6AeQIcHX+xdeGKJuQUMcJ
+ RzEIbNS0TJEWqhUVezf0LTmz7I=
+X-Received: by 2002:a17:903:3d0e:b0:2dd:c100:4b82 with SMTP id
+ d9443c01a7336-2e49b6dee89mr26152415ad.57.1790949797429; 
+ Fri, 02 Oct 2026 07:03:17 -0700 (PDT)
 Received: from dt-VM.localdomain ([101.207.27.235])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2e49f723a77sm7996165ad.71.2026.10.02.07.03.08
+ d9443c01a7336-2e49f723a77sm7996165ad.71.2026.10.02.07.03.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 02 Oct 2026 07:03:12 -0700 (PDT)
+ Fri, 02 Oct 2026 07:03:16 -0700 (PDT)
 From: Tao Ding <dingtaodtdt@gmail.com>
 X-Google-Original-From: Tao Ding <dingtao0430@163.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, chao.liu@processmission.com, farosas@suse.de,
  lvivier@redhat.com, pbonzini@redhat.com, Alistair.Francis@wdc.com,
  Tao Ding <dingtao0430@163.com>
-Subject: [PATCH v2 4/5] qtest: fix k230_decomp_gzip test integer handling
- issues
-Date: Fri,  2 Oct 2026 22:02:44 +0800
-Message-ID: <20261002140245.30214-5-dingtao0430@163.com>
+Subject: [PATCH v2 5/5] hw/dma: fix k230_gsdma integer handling issues
+Date: Fri,  2 Oct 2026 22:02:45 +0800
+Message-ID: <20261002140245.30214-6-dingtao0430@163.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261002140245.30214-1-dingtao0430@163.com>
 References: <20261002140245.30214-1-dingtao0430@163.com>
@@ -104,30 +103,42 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Cast slot to hwaddr before multiplication to prevent 32-bit overflow when 
-calculating the SRAM input address. 
+Validate the address before subtracting the channel base and use hwaddr 
+for channel calculations to prevent unsigned underflow and truncation.
 
-Resolves: Coverity CID 1685516
+Resolves: Coverity CID 1685514
 
 Reported-by: Alistair Francis <Alistair.Francis@wdc.com>
 Signed-off-by: Tao Ding <dingtao0430@163.com>
 ---
- tests/qtest/k230-decomp-gzip-test.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Compared to patchv1, the modification of ch has been removed. 
+Because ch is an unsigned int, it is sufficient.
 
-diff --git a/tests/qtest/k230-decomp-gzip-test.c b/tests/qtest/k230-decomp-gzip-test.c
-index e80113fd28..249c8ae82c 100644
---- a/tests/qtest/k230-decomp-gzip-test.c
-+++ b/tests/qtest/k230-decomp-gzip-test.c
-@@ -46,7 +46,7 @@ static inline hwaddr k230_sram_addr(hwaddr off)
- static inline hwaddr k230_sram_input_addr(unsigned int slot)
- {
-     return k230_sram_addr(K230_DECOMP_GZIP_SRAM_IN_BASE +
--                          slot * K230_DECOMP_GZIP_BLOCK_SIZE);
-+                          (hwaddr) slot * K230_DECOMP_GZIP_BLOCK_SIZE);
- }
+ hw/dma/k230_gsdma.c | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/hw/dma/k230_gsdma.c b/hw/dma/k230_gsdma.c
+index 7635cd19e8..e422b436a2 100644
+--- a/hw/dma/k230_gsdma.c
++++ b/hw/dma/k230_gsdma.c
+@@ -329,6 +329,9 @@ static uint64_t k230_gsdma_read(void *opaque, hwaddr addr, unsigned int size)
+         break;
+     }
  
- /*
++    if (addr < K230_GSDMA_CH_BASE) {
++        goto out;
++    }
+     ch = (addr - K230_GSDMA_CH_BASE) / K230_GSDMA_CH_STRIDE;
+     ch_off = (addr - K230_GSDMA_CH_BASE) % K230_GSDMA_CH_STRIDE;
+     if (ch < K230_GSDMA_NUM_SDMA_CHANNELS) {
+@@ -355,6 +358,7 @@ static uint64_t k230_gsdma_read(void *opaque, hwaddr addr, unsigned int size)
+         }
+     }
+ 
++out:
+     trace_k230_gsdma_read(addr, size, ret);
+     return ret;
+ }
 -- 
 2.43.0
 
