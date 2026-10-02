@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3600FCA5FDD
-	for <qemu-riscv@archiver.kernel.org>; Fri,  2 Oct 2026 17:52:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35237CA5FC4
+	for <qemu-riscv@archiver.kernel.org>; Fri,  2 Oct 2026 17:52:36 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xChPc-0003jf-W9; Fri, 02 Oct 2026 13:51:13 -0400
+	id 1xChPq-0003rm-G6; Fri, 02 Oct 2026 13:51:26 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xChPV-0003gJ-9P
- for qemu-riscv@nongnu.org; Fri, 02 Oct 2026 13:51:06 -0400
-Received: from mail-dy1-x1334.google.com ([2607:f8b0:4864:20::1334])
+ id 1xChPh-0003ng-IB
+ for qemu-riscv@nongnu.org; Fri, 02 Oct 2026 13:51:17 -0400
+Received: from mail-dy2-x0e.google.com ([2607:f8b0:4864:36::e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xChPR-0007Hd-BX
- for qemu-riscv@nongnu.org; Fri, 02 Oct 2026 13:51:04 -0400
-Received: by mail-dy1-x1334.google.com with SMTP id
- 5a478bee46e88-3510f00d974so243001eec.1
- for <qemu-riscv@nongnu.org>; Fri, 02 Oct 2026 10:50:59 -0700 (PDT)
+ id 1xChPe-0007Jh-RK
+ for qemu-riscv@nongnu.org; Fri, 02 Oct 2026 13:51:17 -0400
+Received: by mail-dy2-x0e.google.com with SMTP id
+ 5a478bee46e88-3510b42f4e3so597906eec.2
+ for <qemu-riscv@nongnu.org>; Fri, 02 Oct 2026 10:51:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1790963458; x=1791568258; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1790963473; x=1791568273; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=D+6+qn+yh1OD1CvirI1XQx+kYJP3uEKSWNOVrm/1f1s=;
- b=DIYuJAQOtA5cbT8MtlSYXuKjmHVmeW3gXJJLeFZNVwBPNaQOeZe9feYkivA3Icbd5/
- DmV+RDDKWo1fJ4ll41Mh5yx2uj0oVfWy7goy0TsbLZcQ+udutz/eMzS33DkOvEOcHhhx
- SDrU1ih9kDv3uw7KCwvybJth5ijzhHvR2rHMOjz07p+MnxKU/yt8jUIqUV2tNPzFT3Ba
- hVWd0rbgZ7j/VmJZtoQ0HcEMVMjp3kKzZdnqfC7f/O4kFw87NKgcsGTzC1Idk5qAnErb
- /ECmYjbJmrpGKRICi68PjTO6jRzSWFaJm7k7QQJE5TfcHRgraIq22J5wevL7CQefkR2y
- xXTg==
+ bh=kLOBJyItJ1+wNCmx4Q5Z29VyAFIZnj6HoQfSvPthpZk=;
+ b=ET9WTKKNOsAYEA+HuRudT08kUE8vVbVJxBXLVf6gzjoFDQ1XhmkZU1rA9wbIzvrmnV
+ H0CCu0KJfSewgJOr1D/OUU5qTHHY0PRD6sScrNFnTYCkGTBSp3GjX+QfoE8ROETVM75E
+ PDXxCXBglB3NimuXAjIMRLCoQTzdGxWRFSO98Mf2ns9Tuy6iCq3l2AQAWoC2ji4vOFp5
+ T45McXq1mqe8spVRN0NqXcnxtNTo1VtiJxm+Fa5xx6CkeWfQ8Ya5p22afIuIgnpqsYu0
+ g1YKQtiJUBgudC9jbOcQ5ea8+2GydZzrij5murSKr7v6xr4wXGDXxizsLftUCLIKVfnJ
+ qhzQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790963458; x=1791568258;
+ d=1e100.net; s=20260707; t=1790963473; x=1791568273;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=D+6+qn+yh1OD1CvirI1XQx+kYJP3uEKSWNOVrm/1f1s=;
- b=iNsVO+94qbl9+U9UYHX9ut/s+csmkRpcVrgRAvx51axC6mRMtC0chKNW3Ri7+SGCs4
- iUBK5CNjX3BEETQnH1sS3AER5cBSJ+myXqp5v55j4hMqRiYWzcjS7aU4+FEiFru9VZBA
- eDsqQQhrYrbNzZHTSg+p6O9N6m9kOZNPFg0EyPU9Uf4/WNTDwZN1xxLtr1X6giHOx/4a
- wn6cXUAbbNvN+HXM4fnGYEO6OphxM7gAqema18ASNy+iJpbwGcdlReAKwH17LL3e6SHw
- Ih7JPbBivlND4DcPIw+KEUuNg790GKhsTPCm8KEUmIotRoIcCqpqckTONKesMYgWukwI
- Z56Q==
+ bh=kLOBJyItJ1+wNCmx4Q5Z29VyAFIZnj6HoQfSvPthpZk=;
+ b=fFRVHjx8JBzzHsGx09qGK+ynOUSxFuWS5V2ALri6hb9jYYyAOmZeIHMu+z90WoghZ4
+ xl9HWINg3s3gliLIcBKhm4T/Xr8xtB/XdfSqRAeWUj0M9Zgmp/ma9ueyoMqYfc2jP9Jj
+ SEFmIWJLv2doiPqGCySDf+kDZi/VFfS8zmMN2xGT0NpWVc8uUaFb8HYEUEf8bqniozmL
+ CVHpGwHmxsiNpOVZbhqXsrA8LhxXmagMF+LkygpMUbTJ9UYip95KUwdxIaZRuyQclFBL
+ 2vNNQoQ4XB83NZbW2ll5Xo3KKTXRDUGi11OR7U6sE1xPJENoiHVJKJ/60klogjisCPzt
+ TkVA==
 X-Forwarded-Encrypted: i=1;
- AKwUvBySALaHh6GAgKjazdH3sys1IWeHxX9/bKHDm3Stblfp3sp17y21qlBbY1kfQHPDkaT5Zzf8nqsl3aMJ@nongnu.org
-X-Gm-Message-State: AFq9FYJipbWwE4mb50nnc/F7UTV8absOWlops3u1/wXitgecadhONPia
- JNsJSe0mQdQMIY/JcZbj7dFFrpn9Lzh1x0oK6F5PIj98n/w70goLecjn
-X-Gm-Gg: AYBFou32bh4kk/AUVPTiLkGzAjRyNKFz369/Gfx3CpCFjbUQuewtOernuKXlCyDIvM/
- M7H0tj1lqy7FfhVajkD9I3kx1D/ewdVGEG3q+LCbCB+eBLnsBuQ7/tARl/9u2k7XRT+WJS1TrJB
- aLSotmrC6pApTPIVuoK3uf3uOKi+GNxwLVTxQJ+fip4VYt4Osl8wf98XtW2sQQ21vWuG7nPwljC
- iV+9HZh9jLLGOJ3GtyVyOGtBC8DgCzVw4duwLPgM8c6GUn4ZHJr2HWiyYJi/cB+q3h+X5CGAjjR
- 3PuPnazYIs+tV/vwU0O8QE2u86hFXARwe6E4rd7weNqc7ALlm9uAJJ3DSk9L/YaJDtx2vURZc2T
- 3eN2PaycA08xVni0BlnwXmAL6chAIrd64ezenwGnEflAQxc56Yefhwdn+rosldhDmPNgAjo/mQA
- iIozHXFWtWzAZZo5CN8HkCVfCeiAtDnWiQ6r0hH7oEcVm3GT7D0xxwlAJTsHpxfsQXF3ZWwpw9w
- MGsKbJU68+V2tbfsYQyPURMa6XP4FM=
-X-Received: by 2002:a05:7300:8248:b0:34b:f031:be93 with SMTP id
- 5a478bee46e88-35111502821mr391268eec.31.1790963457884; 
- Fri, 02 Oct 2026 10:50:57 -0700 (PDT)
+ AKwUvBzGevMsARrukvbSrUI5VBjUokLhXzE2cHLUGz3ZSd4Wrf5UlLoxk+2wXh4l0aUHdN+RWst3SnqFkmfx@nongnu.org
+X-Gm-Message-State: AFq9FYK3clP5m0RKSd2+U+dqOUsr+GtBhQLJupXiZe9g/C4DPUHCnZug
+ 3VX8hgSk69Ih4umbUIhof7dQFNiFCQj3Sim9RzdGGctGZSbJaw/m1n5U
+X-Gm-Gg: AYBFou3ZUvqRyvxqB+Sbc1tDjBEKiAXUqcXi36hAvhxLy3hKhKAH+yXfUh0FpfdPbkJ
+ UfVfeXrviBWqvHtT50kbmgu1IqQNKUYwklQPgRdiH7wMMZLGpDglAhcVVuFaCGQK09tMtBY4weI
+ zXfv3J6irPcOWXOmESuvNemsh5Hz6GXVV5pBQRRS5J3v8dHsaUE4wK1ijRJHF5o9y/jLXHFXEWW
+ 38DH7r63lAPjecjoExzrV0rKVWAtsDO8y+efg8KpGYXu6H4NM3OEscFXFf6GTP8mY0fpGtzp/Ek
+ idugDYxoV7SP/lJYDIvvYE+ZxDqehnAsArkptHyxXgi2cauIjTL94RI+XBSQ482S1+zCkW7KB0k
+ zvBoBz9ZokjVZj7vOwpVIXpIAgVYi2bNTUhWMYRhPpuuUC8U7vP7+ZYa9B3lIgAaPBhQCA6IXnc
+ mgBjUCJpWLawjJ87OixEij/G1wXHo3xdLP9YvvZB2GJBnD407X8YBAOf5I5q7RFo4Sg5mq7UzMd
+ An95q4UZjg5zqEqb9PZC4uKXboZA+g=
+X-Received: by 2002:a05:7301:b0a:b0:344:1bd9:1f0d with SMTP id
+ 5a478bee46e88-34f150d42e6mr3480798eec.21.1790963473082; 
+ Fri, 02 Oct 2026 10:51:13 -0700 (PDT)
 Received: from WIN-BH9M8FJACR9 ([103.94.185.75])
  by smtp.googlemail.com with ESMTPSA id
- 5a478bee46e88-34f14f9f2afsm18027361eec.18.2026.10.02.10.50.50
+ 5a478bee46e88-34f14f9f2afsm18027361eec.18.2026.10.02.10.51.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 02 Oct 2026 10:50:56 -0700 (PDT)
+ Fri, 02 Oct 2026 10:51:12 -0700 (PDT)
 From: Yonggang Luo <luoyonggang@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: Max Filippov <jcmvbkbc@gmail.com>, Stafford Horne <shorne@gmail.com>,
@@ -98,24 +98,24 @@ Cc: Max Filippov <jcmvbkbc@gmail.com>, Stafford Horne <shorne@gmail.com>,
  Laurent Vivier <laurent@vivier.eu>, qemu-arm@nongnu.org,
  Paolo Bonzini <pbonzini@redhat.com>, Glenn Miles <milesg@linux.ibm.com>,
  Ilya Leoshkevich <iii@linux.ibm.com>
-Subject: [PATCH v3 01/27] accel/tcg: move helper_exit_atomic next to
- cpu_loop_exit_atomic
-Date: Sat,  3 Oct 2026 01:50:09 +0800
-Message-ID: <20261002175037.1747-2-luoyonggang@gmail.com>
+Subject: [PATCH v3 03/27] accel/tcg: add raise_excp and raise_excp_restore
+ generator helpers
+Date: Sat,  3 Oct 2026 01:50:11 +0800
+Message-ID: <20261002175037.1747-4-luoyonggang@gmail.com>
 X-Mailer: git-send-email 2.52.0.windows.1
 In-Reply-To: <20261002175037.1747-1-luoyonggang@gmail.com>
 References: <20261002175037.1747-1-luoyonggang@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1334;
- envelope-from=luoyonggang@gmail.com; helo=mail-dy1-x1334.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:36::e;
+ envelope-from=luoyonggang@gmail.com; helo=mail-dy2-x0e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -131,124 +131,44 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-helper_exit_atomic only forwards to cpu_loop_exit_atomic. Define it
-in cpu-exec-common.c with that function, and move its DEF_HELPER line
-to cpu-exec-common.h. That file emits helper_info_exit_atomic.
-tcg-runtime.c keeps the integer helpers.
-
 Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
 ---
- accel/tcg/cpu-exec-common.c        | 10 ++++++++++
- accel/tcg/cpu-exec-common.h        |  2 ++
- accel/tcg/tcg-runtime.c            |  8 --------
- accel/tcg/tcg-runtime.h            |  2 --
- include/exec/helper-gen-common.h   |  4 ++++
- include/exec/helper-proto-common.h |  4 ++++
- 6 files changed, 20 insertions(+), 10 deletions(-)
- create mode 100644 accel/tcg/cpu-exec-common.h
+ accel/tcg/cpu-exec-common.c | 12 ++++++++++++
+ accel/tcg/cpu-exec-common.h |  2 ++
+ 2 files changed, 14 insertions(+)
 
 diff --git a/accel/tcg/cpu-exec-common.c b/accel/tcg/cpu-exec-common.c
-index 68077c8fd9d..d20cece1c5f 100644
+index b551c1439ec..715e3cb327c 100644
 --- a/accel/tcg/cpu-exec-common.c
 +++ b/accel/tcg/cpu-exec-common.c
-@@ -23,8 +23,13 @@
- #include "qemu/plugin.h"
- #include "qemu/main-loop.h"
- #include "accel/tcg/cpu-loop.h"
-+#include "exec/helper-proto-common.h"
- #include "internal-common.h"
- 
-+#define HELPER_H "accel/tcg/cpu-exec-common.h"
-+#include "exec/helper-info.c.inc"
-+#undef  HELPER_H
-+
- bool tcg_allowed;
- 
- /*
-@@ -120,3 +125,8 @@ void cpu_loop_exit_atomic(CPUState *cpu, uintptr_t pc)
-     cpu->exception_index = EXCP_ATOMIC;
-     cpu_loop_exit_restore(cpu, pc);
+@@ -131,6 +131,18 @@ void cpu_raise_excp_restore(CPUState *cpu, int exception_index,
+     cpu_loop_exit_restore(cpu, retaddr);
  }
-+
-+void HELPER(exit_atomic)(CPUArchState *env)
+ 
++/* Raise exception and exit the TB without restoring guest state. */
++void HELPER(raise_excp)(CPUArchState *env, uint32_t exception)
 +{
-+    cpu_loop_exit_atomic(env_cpu(env), GETPC());
++    cpu_raise_excp(env_cpu(env), exception);
 +}
-diff --git a/accel/tcg/cpu-exec-common.h b/accel/tcg/cpu-exec-common.h
-new file mode 100644
-index 00000000000..19359a97bae
---- /dev/null
-+++ b/accel/tcg/cpu-exec-common.h
-@@ -0,0 +1,2 @@
-+/* SPDX-License-Identifier: GPL-2.0-or-later */
-+DEF_HELPER_FLAGS_1(exit_atomic, TCG_CALL_NO_WG, noreturn, env)
-diff --git a/accel/tcg/tcg-runtime.c b/accel/tcg/tcg-runtime.c
-index 7c0aab98a80..764c62c684d 100644
---- a/accel/tcg/tcg-runtime.c
-+++ b/accel/tcg/tcg-runtime.c
-@@ -23,10 +23,7 @@
-  */
- #include "qemu/osdep.h"
- #include "qemu/host-utils.h"
--#include "exec/cpu-common.h"
- #include "exec/helper-proto-common.h"
--#include "accel/tcg/cpu-loop.h"
--#include "accel/tcg/getpc.h"
- 
- #define HELPER_H  "accel/tcg/tcg-runtime.h"
- #include "exec/helper-info.c.inc"
-@@ -129,8 +126,3 @@ uint64_t HELPER(ctpop_i64)(uint64_t arg)
++
++/* Raise exception and exit the TB, restoring state from GETPC(). */
++void HELPER(raise_excp_restore)(CPUArchState *env, uint32_t exception)
++{
++    cpu_raise_excp_restore(env_cpu(env), exception, GETPC());
++}
++
+ void cpu_loop_exit_atomic(CPUState *cpu, uintptr_t pc)
  {
-     return ctpop64(arg);
- }
--
--void HELPER(exit_atomic)(CPUArchState *env)
--{
--    cpu_loop_exit_atomic(env_cpu(env), GETPC());
--}
-diff --git a/accel/tcg/tcg-runtime.h b/accel/tcg/tcg-runtime.h
-index 0b832176b33..9b4c1c24916 100644
---- a/accel/tcg/tcg-runtime.h
-+++ b/accel/tcg/tcg-runtime.h
-@@ -22,8 +22,6 @@ DEF_HELPER_FLAGS_1(ctpop_i64, TCG_CALL_NO_RWG_SE, i64, i64)
- 
- DEF_HELPER_FLAGS_1(lookup_tb_ptr, TCG_CALL_NO_WG_SE, cptr, env)
- 
--DEF_HELPER_FLAGS_1(exit_atomic, TCG_CALL_NO_WG, noreturn, env)
--
- #ifndef IN_HELPER_PROTO
- /*
-  * Pass calls to memset directly to libc, without a thunk in qemu.
-diff --git a/include/exec/helper-gen-common.h b/include/exec/helper-gen-common.h
-index 834590dc4e5..ed5521ad881 100644
---- a/include/exec/helper-gen-common.h
-+++ b/include/exec/helper-gen-common.h
-@@ -7,6 +7,10 @@
- #ifndef HELPER_GEN_COMMON_H
- #define HELPER_GEN_COMMON_H
- 
-+#define HELPER_H "accel/tcg/cpu-exec-common.h"
-+#include "exec/helper-gen.h.inc"
-+#undef  HELPER_H
-+
- #define HELPER_H "accel/tcg/tcg-runtime.h"
- #include "exec/helper-gen.h.inc"
- #undef  HELPER_H
-diff --git a/include/exec/helper-proto-common.h b/include/exec/helper-proto-common.h
-index 76e6c25becb..28afa7782d0 100644
---- a/include/exec/helper-proto-common.h
-+++ b/include/exec/helper-proto-common.h
-@@ -9,6 +9,10 @@
- 
- #include "qemu/atomic128.h"  /* for HAVE_CMPXCHG128 */
- 
-+#define HELPER_H "accel/tcg/cpu-exec-common.h"
-+#include "exec/helper-proto.h.inc"
-+#undef  HELPER_H
-+
- #define HELPER_H "accel/tcg/tcg-runtime.h"
- #include "exec/helper-proto.h.inc"
- #undef  HELPER_H
+     /* Prevent looping if already executing in a serial context. */
+diff --git a/accel/tcg/cpu-exec-common.h b/accel/tcg/cpu-exec-common.h
+index 19359a97bae..1e82f3b14d3 100644
+--- a/accel/tcg/cpu-exec-common.h
++++ b/accel/tcg/cpu-exec-common.h
+@@ -1,2 +1,4 @@
+ /* SPDX-License-Identifier: GPL-2.0-or-later */
+ DEF_HELPER_FLAGS_1(exit_atomic, TCG_CALL_NO_WG, noreturn, env)
++DEF_HELPER_FLAGS_2(raise_excp, TCG_CALL_NO_WG, noreturn, env, i32)
++DEF_HELPER_FLAGS_2(raise_excp_restore, TCG_CALL_NO_WG, noreturn, env, i32)
 -- 
 2.52.0.windows.1
 
