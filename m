@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1E1CCA5FDD
-	for <qemu-riscv@archiver.kernel.org>; Fri,  2 Oct 2026 17:59:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F436CA5FC4
+	for <qemu-riscv@archiver.kernel.org>; Fri,  2 Oct 2026 17:59:20 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xChWo-0003gh-W0; Fri, 02 Oct 2026 13:58:39 -0400
+	id 1xChWp-0003hh-Jc; Fri, 02 Oct 2026 13:58:39 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xChRp-0005cf-Ur
- for qemu-riscv@nongnu.org; Fri, 02 Oct 2026 13:53:37 -0400
+ id 1xChRO-00057b-Ty
+ for qemu-riscv@nongnu.org; Fri, 02 Oct 2026 13:53:03 -0400
 Received: from mail-dy2-x0d.google.com ([2607:f8b0:4864:36::d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xChRo-0007kQ-BU
- for qemu-riscv@nongnu.org; Fri, 02 Oct 2026 13:53:29 -0400
+ id 1xChRB-0007Yg-Ci
+ for qemu-riscv@nongnu.org; Fri, 02 Oct 2026 13:52:51 -0400
 Received: by mail-dy2-x0d.google.com with SMTP id
- 5a478bee46e88-344447f9c3dso4777537eec.0
- for <qemu-riscv@nongnu.org>; Fri, 02 Oct 2026 10:53:16 -0700 (PDT)
+ 5a478bee46e88-346c612c7a8so4171191eec.1
+ for <qemu-riscv@nongnu.org>; Fri, 02 Oct 2026 10:52:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1790963596; x=1791568396; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1790963558; x=1791568358; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=oqWBynXG48ziNIxkSUIKa6qk7Q6YVsPFUYwmt+pO3lo=;
- b=AKzboN9sK8xAD4cqOy/bCmZdw5epqdQ9+dN47Sxkf+wllNolxRp1KpOn1X3xhQo48p
- Q+Eb+zS1ssg4vuyHs+7+ELJzicWaMg1p2JBKMn31xYyC1pmGpORN1I4E2eVFrvzrkfRW
- gVCgVMVHFnauLgBhqHw6c5mLkhbBy1W9cabfHyiX78Z+1+Vv1kNzwM0Vw02JnmEiDRPx
- TPa6XlOV+3Nt/Q1tVP6XLcdG538F1wsMnVzfCdLmHxEOGWBH26P2bSGs0GUBhngggxoE
- HnXn/Ol5WnnqMxW1qzXPZD6liViAcGNqklRmrb90cSf0kihuvMP8WgAstMqaGCzvDI24
- PbJA==
+ bh=C60WimnL9SSW7LAxTDiiRt6rrJtccQkGf4ZasbM1n6Q=;
+ b=VVW+CxTm2dW7C60OpiOuQElo9whgO3Jgp/bu2x6+mbTjUcFLU1tv2rqCdB1keoc6Cp
+ IOte1oDRQZNXCr/UdW+fvP4/yXP0+cY31/AbV+5KSS46ZZz9jlpWB8vUI/UFoqP/sfLo
+ Cm4REO9HgHsNFt1sPod7v3eok++Gt6kATnQ8BoTXLZAsoufIzEOyVsnZ3ed1RY8LZlAN
+ AOcNFmIuFYeQ89WQGe80eUoHGWvYAsqx1HL0gh7mooVR6m52W8ghbMpad3Ww4o+28eDC
+ np9si8MjkVDiTB4DYV9nYVJfO41LkyXU0bHI1RMhj3kCmCV0D+iCVWihrBuSK5XFlu6o
+ HQhA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790963596; x=1791568396;
+ d=1e100.net; s=20260707; t=1790963558; x=1791568358;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=oqWBynXG48ziNIxkSUIKa6qk7Q6YVsPFUYwmt+pO3lo=;
- b=WB4nov7K4OsLrBymTEeI5R0ofDCMwal5KcwQc9nK9UlvciKPpZ4rT1Pc0roCZk3+Sn
- oknRk+lDjLH296mvP8TCTHFeI25k/aPajv7b2/Qgv4/8XhxqECuNt1YVTTpV2w1gr6Rp
- Q6BXyReLh1pFmTqdBFTdbYa7u2YwdC/0y0jwci0OtosBhlXmN7dvBU4pDSHNyILDcvOc
- EBGB1av2EYyyOAby92bAYG31XtXWS//PgyQSIOcQ/JlcE0MWjDaOF7iEeBUwUL+kGkBT
- tWIZrj/+lNbJNY47Ca7aaIOCt74G+GY/GR/ZnDYyc4peIP75Wn5+5HjOoij3obFi1oi+
- Wk2A==
+ bh=C60WimnL9SSW7LAxTDiiRt6rrJtccQkGf4ZasbM1n6Q=;
+ b=LfkVQ9TvpNPHRM70lGAIiB4IQUQo+egHejV12HLGsstnRvurO2C7ZvhZ9lQ0wfjruv
+ Vc26TxfHPz6OHGNtyI2qbESjfhkwG2XGzn5iQyvhMm5UXWVIL8QIFB/8qvvC6add0LtB
+ WPTWkFlkQIU12Qjy0GuoMo5FOEKmlLOUbPxo3iJej23vICEcaIgTJ1o7t6LS6W/ouDMm
+ 1A2lwZLuu9g2jCFsmZ0NN5sf4sa0luHYvAQCI9v7dKhdi1WkEWrUVMrXPBEKKrwfGX3f
+ sJCjHKzimsnyaWRdmHP7QYlP1RGdDoVptlVFC2K+rm3jf7G0mzV4/+wNu3PRIFsCtvE+
+ WhLw==
 X-Forwarded-Encrypted: i=1;
- AKwUvBzBKls+A5ZzLs9HOzqx4B6LDyJJ/DjtwScqsCjVJyxqbzfLGkIKiz2ClQWNbkb+WZiimN6blMT6PKMe@nongnu.org
-X-Gm-Message-State: AFq9FYKhk8JfGB68P1YO2B6LFcpFRbdFGb4q5DTCvcV9u+VVPW9U8L4R
- 1UxN/2RVj8g04nqEjXkqukomuQdt1ZqiJBGS0Yf4MfVA6LZMSKKpsNq1
-X-Gm-Gg: AYBFou3YjWEBlWbyAJZmoaQRqIG4wHBbBSxh/4nCgnZwcYLElyQAFWYa+GkwRY81DRH
- 4AozB+HSsPZzmNyXgAQ9CsSzL6Afx+R9k3WWXhTFBVapr7Wur1hmJXISUfXXweE8jsZ4ECrPNWN
- R47VzB+Rhy6V513vaqmMKcCEh0LOEaAXObIK1ydxCWEoraDprxuctDnU+cI79HWPg0fdwiZtnxL
- 2PJVaBny3ayeTSH0siM6ZJ53LHj2BCcBMnisQ1BUaxRDWB9L+tMutvGWixvqPt3Nu6U91BnYTtO
- GIwsnSWr7jxXE0Ras0oO3sO8wTErVw9oiLl5lwnw03u6/M7HnnBQ50gRSDgNmtRxMJUiOZpsqfa
- ytm5Ozg5TT2/mWlfmEruhHFgtIU9Iyb4xrCzcdvOw/aekj8Aeodj9IswEXYG/1bjeiCbU5VRl58
- krgaEK/7fEYC7uKgfyH/QLElF7BozGLcRrnV5Hpdih8gpyHV2GG9PbCEJgR3iDTqScVmVya8yRU
- topxjFSJUiZXTlrb5NYMnmKvw9QaRXG8VQUpWLvIQ==
-X-Received: by 2002:a05:7301:fd82:b0:350:1d30:6c0f with SMTP id
- 5a478bee46e88-3501d3072admr2819520eec.9.1790963595669; 
- Fri, 02 Oct 2026 10:53:15 -0700 (PDT)
+ AKwUvByo6i9gujcHvMtnQmmixnO6wqts3blUTDKmhuJ5dURMBuNoCtYYUtiRDrQx4aRnSU0nZoP8FKdDY9IT@nongnu.org
+X-Gm-Message-State: AFq9FYJyz1KDGI0M75HWCJKnbtsPXxkGzQOdtgTmLmqA9k80bmmP/v7D
+ wod3+esXGgk5JXJwzUv6gwcMa3tiSKprXLbZRjSRi24hlhIqSUg0DpLo0ZSpX9dqi/s=
+X-Gm-Gg: AYBFou1DXx4aFb9GNbIHQtRlmdxxMkFRg6GgrQEmVGdYJ8HutMwrsBD30A9FXHGjiun
+ tmICirfpfs4oIVoyCzSAvZtftqUN9z+Ys9SME0AId+so7O+Owh0w3W/k4GFQTRnFML9HVkwBhls
+ j9dxRpLByPeZmbV5qOsgQ7BYEU6fQca0jfUKp9tda+8BeiNSwm9yTCoC0eV6MwwhIYnvuD2YigP
+ +0F6QQYvI02tJxvxfhPzoVUqfckAwgh0Pe+NJ9kyjuqlJASZC4hNU0XA3mXhN8T6y3cgRquSqDc
+ JpVqRfQgnIjvoGFLVcRe0/oyRqyYvc+xp8tkZ8Rex5dkAhSFiT6PQIFkcLehI4MiZcTnEXuvwiC
+ Hy0LUNjhw1VKfaqd8+GSpQRB/AdCxHa8kfAnGXLOowjMtYr8Y3Jb5ozuuow6wfkxnbz90pbP7AN
+ uGZVUrOF55PaZSPjxUtRfPo+f/uZyS5S/QX0U0Zv70e2OgY3qSE8bNpweH6RVhNnHg0IC0D/tdt
+ sZh7mO0iLKXC7LEnfbocC/0d1mDcHs=
+X-Received: by 2002:a05:693c:4154:20b0:351:853:54a4 with SMTP id
+ 5a478bee46e88-35108535aa9mr2020614eec.33.1790963557732; 
+ Fri, 02 Oct 2026 10:52:37 -0700 (PDT)
 Received: from WIN-BH9M8FJACR9 ([103.94.185.75])
  by smtp.googlemail.com with ESMTPSA id
- 5a478bee46e88-34f14f9f2afsm18027361eec.18.2026.10.02.10.53.08
+ 5a478bee46e88-34f14f9f2afsm18027361eec.18.2026.10.02.10.52.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 02 Oct 2026 10:53:15 -0700 (PDT)
+ Fri, 02 Oct 2026 10:52:37 -0700 (PDT)
 From: Yonggang Luo <luoyonggang@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: Max Filippov <jcmvbkbc@gmail.com>, Stafford Horne <shorne@gmail.com>,
@@ -98,9 +98,9 @@ Cc: Max Filippov <jcmvbkbc@gmail.com>, Stafford Horne <shorne@gmail.com>,
  Laurent Vivier <laurent@vivier.eu>, qemu-arm@nongnu.org,
  Paolo Bonzini <pbonzini@redhat.com>, Glenn Miles <milesg@linux.ibm.com>,
  Ilya Leoshkevich <iii@linux.ibm.com>
-Subject: [PATCH v3 19/27] target/xtensa: reset yield state in the icount path
-Date: Sat,  3 Oct 2026 01:50:27 +0800
-Message-ID: <20261002175037.1747-20-luoyonggang@gmail.com>
+Subject: [PATCH v3 14/27] target/or1k: convert exception to raise_excp
+Date: Sat,  3 Oct 2026 01:50:22 +0800
+Message-ID: <20261002175037.1747-15-luoyonggang@gmail.com>
 X-Mailer: git-send-email 2.52.0.windows.1
 In-Reply-To: <20261002175037.1747-1-luoyonggang@gmail.com>
 References: <20261002175037.1747-1-luoyonggang@gmail.com>
@@ -129,72 +129,141 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Emit the yield_needed reset from gen_yield() before calling
-gen_helper_exception() for EXCP_YIELD. This keeps the state change at
-the Xtensa icount-yield call site instead of adding EXCP_YIELD-specific
-behavior to the generic exception helper.
+Use the shared raise_excp helper for translated exceptions. Use
+cpu_raise_excp_restore() for overflow helpers with GETPC() and
+cpu_raise_excp() for the zero-PC C wrapper.
 
 Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
 ---
- target/xtensa/cpu.h        | 2 +-
- target/xtensa/exc_helper.c | 3 ---
- target/xtensa/translate.c  | 8 +++++---
- 3 files changed, 6 insertions(+), 7 deletions(-)
+ target/or1k/exception.c        | 31 -------------------------------
+ target/or1k/exception.h        |  7 ++++++-
+ target/or1k/exception_helper.c | 13 +------------
+ target/or1k/helper.h           |  1 -
+ target/or1k/meson.build        |  1 -
+ target/or1k/translate.c        |  2 +-
+ 6 files changed, 8 insertions(+), 47 deletions(-)
+ delete mode 100644 target/or1k/exception.c
 
-diff --git a/target/xtensa/cpu.h b/target/xtensa/cpu.h
-index 49d6ad9083d..cab2df43709 100644
---- a/target/xtensa/cpu.h
-+++ b/target/xtensa/cpu.h
-@@ -541,7 +541,7 @@ struct CPUArchState {
-     uint32_t ccount_base;
- #endif
+diff --git a/target/or1k/exception.c b/target/or1k/exception.c
+deleted file mode 100644
+index 0479a069592..00000000000
+--- a/target/or1k/exception.c
++++ /dev/null
+@@ -1,31 +0,0 @@
+-/*
+- * OpenRISC exception.
+- *
+- * Copyright (c) 2011-2012 Jia Liu <proljc@gmail.com>
+- *
+- * This library is free software; you can redistribute it and/or
+- * modify it under the terms of the GNU Lesser General Public
+- * License as published by the Free Software Foundation; either
+- * version 2.1 of the License, or (at your option) any later version.
+- *
+- * This library is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+- * Lesser General Public License for more details.
+- *
+- * You should have received a copy of the GNU Lesser General Public
+- * License along with this library; if not, see <http://www.gnu.org/licenses/>.
+- */
+-
+-#include "qemu/osdep.h"
+-#include "accel/tcg/cpu-loop.h"
+-#include "cpu.h"
+-#include "exception.h"
+-
+-G_NORETURN void raise_exception(OpenRISCCPU *cpu, uint32_t excp)
+-{
+-    CPUState *cs = CPU(cpu);
+-
+-    cs->exception_index = excp;
+-    cpu_loop_exit(cs);
+-}
+diff --git a/target/or1k/exception.h b/target/or1k/exception.h
+index f62fc314c1f..a206816d4d7 100644
+--- a/target/or1k/exception.h
++++ b/target/or1k/exception.h
+@@ -21,7 +21,12 @@
+ #define TARGET_OPENRISC_EXCEPTION_H
  
--    int yield_needed;
-+    int32_t yield_needed;
-     unsigned static_vectors;
+ #include "cpu.h"
++#include "accel/tcg/cpu-loop.h"
  
-     /* Watchpoints for DBREAK registers */
-diff --git a/target/xtensa/exc_helper.c b/target/xtensa/exc_helper.c
-index 7cb67d179a8..793761a698f 100644
---- a/target/xtensa/exc_helper.c
-+++ b/target/xtensa/exc_helper.c
-@@ -40,9 +40,6 @@ void HELPER(exception)(CPUXtensaState *env, uint32_t excp)
-     CPUState *cs = env_cpu(env);
+-G_NORETURN void raise_exception(OpenRISCCPU *cpu, uint32_t excp);
++static inline G_NORETURN
++void raise_exception(OpenRISCCPU *cpu, uint32_t excp)
++{
++    cpu_raise_excp(CPU(cpu), excp);
++}
  
-     cs->exception_index = excp;
--    if (excp == EXCP_YIELD) {
--        env->yield_needed = 0;
--    }
-     cpu_loop_exit(cs);
+ #endif /* TARGET_OPENRISC_EXCEPTION_H */
+diff --git a/target/or1k/exception_helper.c b/target/or1k/exception_helper.c
+index 3bd82b29719..113012439c8 100644
+--- a/target/or1k/exception_helper.c
++++ b/target/or1k/exception_helper.c
+@@ -21,22 +21,11 @@
+ #include "cpu.h"
+ #include "accel/tcg/cpu-loop.h"
+ #include "exec/helper-proto.h"
+-#include "exception.h"
+-
+-void HELPER(exception)(CPUOpenRISCState *env, uint32_t excp)
+-{
+-    OpenRISCCPU *cpu = env_archcpu(env);
+-
+-    raise_exception(cpu, excp);
+-}
+ 
+ static G_NORETURN
+ void do_range(CPUOpenRISCState *env, uintptr_t pc)
+ {
+-    CPUState *cs = env_cpu(env);
+-
+-    cs->exception_index = EXCP_RANGE;
+-    cpu_loop_exit_restore(cs, pc);
++    cpu_raise_excp_restore(env_cpu(env), EXCP_RANGE, pc);
  }
  
-diff --git a/target/xtensa/translate.c b/target/xtensa/translate.c
-index 175fd4b5cfc..db48f0c562a 100644
---- a/target/xtensa/translate.c
-+++ b/target/xtensa/translate.c
-@@ -303,9 +303,11 @@ static void gen_left_shift_sar(DisasContext *dc, TCGv_i32 sa)
-     dc->sar_m32_5bit = true;
- }
+ void HELPER(ove_cy)(CPUOpenRISCState *env)
+diff --git a/target/or1k/helper.h b/target/or1k/helper.h
+index e0a8d402271..d6e6bd4ffbc 100644
+--- a/target/or1k/helper.h
++++ b/target/or1k/helper.h
+@@ -18,7 +18,6 @@
+  */
  
--static void gen_exception(DisasContext *dc, int excp)
-+static void gen_yield(DisasContext *dc)
+ /* exception */
+-DEF_HELPER_FLAGS_2(exception, TCG_CALL_NO_WG, void, env, i32)
+ DEF_HELPER_FLAGS_1(ove_cy, TCG_CALL_NO_WG, void, env)
+ DEF_HELPER_FLAGS_1(ove_ov, TCG_CALL_NO_WG, void, env)
+ DEF_HELPER_FLAGS_1(ove_cyov, TCG_CALL_NO_WG, void, env)
+diff --git a/target/or1k/meson.build b/target/or1k/meson.build
+index 7cea45287a2..dba5044b655 100644
+--- a/target/or1k/meson.build
++++ b/target/or1k/meson.build
+@@ -5,7 +5,6 @@ or1k_ss.add(gen)
+ or1k_ss.add(files(
+   'cpu.c',
+   'disas.c',
+-  'exception.c',
+   'exception_helper.c',
+   'fpu_helper.c',
+   'interrupt_helper.c',
+diff --git a/target/or1k/translate.c b/target/or1k/translate.c
+index e00ef45b9b7..243a8eede23 100644
+--- a/target/or1k/translate.c
++++ b/target/or1k/translate.c
+@@ -140,7 +140,7 @@ void openrisc_translate_init(void)
+ 
+ static void gen_exception(DisasContext *dc, unsigned int excp)
  {
 -    gen_helper_exception(tcg_env, tcg_constant_i32(excp));
-+    tcg_gen_st_i32(tcg_constant_i32(0), tcg_env,
-+                   offsetof(CPUXtensaState, yield_needed));
-+    gen_helper_exception(tcg_env, tcg_constant_i32(EXCP_YIELD));
++    gen_helper_raise_excp(tcg_env, tcg_constant_i32(excp));
  }
  
- static void gen_exception_cause(DisasContext *dc, uint32_t cause)
-@@ -1167,7 +1169,7 @@ static void xtensa_tr_translate_insn(DisasContextBase *dcbase, CPUState *cpu)
-        but this is the first TranslateOps hook that allows exiting.  */
-     if ((tb_cflags(dc->base.tb) & CF_USE_ICOUNT)
-         && (dc->base.tb->flags & XTENSA_TBFLAG_YIELD)) {
--        gen_exception(dc, EXCP_YIELD);
-+        gen_yield(dc);
-         dc->base.pc_next = dc->pc + 1;
-         dc->base.is_jmp = DISAS_NORETURN;
-         return;
+ static void gen_illegal_exception(DisasContext *dc)
 -- 
 2.52.0.windows.1
 
