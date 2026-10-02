@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65A70CA5FC4
-	for <qemu-riscv@archiver.kernel.org>; Fri,  2 Oct 2026 18:06:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 732C0CA5FC4
+	for <qemu-riscv@archiver.kernel.org>; Fri,  2 Oct 2026 18:06:16 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xChWv-0004MY-9d; Fri, 02 Oct 2026 13:58:45 -0400
+	id 1xChb7-0008VK-4r; Fri, 02 Oct 2026 14:03:08 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xChSI-0006Cy-Ir
- for qemu-riscv@nongnu.org; Fri, 02 Oct 2026 13:54:03 -0400
-Received: from mail-dy2-x19.google.com ([2607:f8b0:4864:36::19])
+ id 1xChSb-0006OI-Np
+ for qemu-riscv@nongnu.org; Fri, 02 Oct 2026 13:54:30 -0400
+Received: from mail-dl2-x0f.google.com ([2607:f8b0:4864:38::f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xChSF-0007qD-Jk
- for qemu-riscv@nongnu.org; Fri, 02 Oct 2026 13:53:58 -0400
-Received: by mail-dy2-x19.google.com with SMTP id
- 5a478bee46e88-33e46a156f4so4908140eec.0
- for <qemu-riscv@nongnu.org>; Fri, 02 Oct 2026 10:53:55 -0700 (PDT)
+ id 1xChSU-0007sA-Ir
+ for qemu-riscv@nongnu.org; Fri, 02 Oct 2026 13:54:13 -0400
+Received: by mail-dl2-x0f.google.com with SMTP id
+ a92af1059eb24-1460bcc512eso4887420c88.1
+ for <qemu-riscv@nongnu.org>; Fri, 02 Oct 2026 10:54:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1790963634; x=1791568434; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1790963649; x=1791568449; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=be9pR789RqOevAubKubuImhGiaujKFqfN5I1ORufONw=;
- b=b+8iTlAwP7weAATpLPOjkzTGqqkEGlIxc9bRbBZa/0x8WuTFOFPSHwhTpctVF1ZY9e
- yPoTpukEIV8Ktpnwr25+lN+SwjNhTRB+nl3bkrNC7vM9SwshKADY+l0sOrlo4Sq50upg
- GG+i5+ooqTXTP1m3v7T7+wTcLkXLJvDyeoNgGexBwWQMOwEX0fbt+XoLXzVjcMCbMnK3
- kJXz7j62+dzUVob93wCBRyeUcrKoyZ/j2PbzLjTYEYkpy7XdQraTWbfTx3YmBUCINlqs
- RdAlRipVR8SPS+c9OWLou+PKQJsquBSDmZH+BkT0sXkc/eJXl8UCKb5J+18cyIim1K6C
- nTzw==
+ bh=yKl9yArNq3w173PSahK6ICbfpEDWkJ6jn3RpCMJdn7U=;
+ b=f7Wb45arpAD5m4bYFQjl3p90IWp83VfJi8BlSXC5fW14dBTsT6+uscBDddcBSIQPs5
+ +60zb0vv4fod/fPgObr5iVAJYRXA1h1ynimj35werdAKiAOImehutw7OwR/BUv8Z1rUG
+ acvYddCwwcrVmrtyVtuAgIBbiY2JNBAStN1LlyW55vQVUAg9GvFNSbm0MDOaZNd0Z4Cv
+ dmZWXfKBQcWwG+PE9ttFoxdjrnxrJogKJPI/qmk0hsukZhdNx4etQGEsQrirH7uOa6b0
+ PMsYHjUY67/3avD5Cv70b/oJDuo92hZodMtvpa8js23Y4ZEg1FELImN5XQ3SLQd6YBYa
+ bYHA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790963634; x=1791568434;
+ d=1e100.net; s=20260707; t=1790963649; x=1791568449;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=be9pR789RqOevAubKubuImhGiaujKFqfN5I1ORufONw=;
- b=fxzeDNLCePIwM9ZYrCZdqixgqck9mMkcGdpJLj9H1nDkPQ2S3H84eV9Eyurirx8zrR
- w5fyVsRcQPKBAKob4zdxzROG7VvMZCMhBPbqjJpC7Z1BzjhZ9dn13g3Bgel9BH30eO8f
- 63K2ILKz9mBNYm2nmwrrlmZ6XkAKB9AMHYiCLI+v7//mns+y6OWtjACci1wpbB5LyIAG
- VMNcD+8IpnsciS0zc1AsLRfsdM7nqlnn/FQYpw/jccfaK8N3QIQzfz2/c2WgB/IO+jKr
- HGORQSMYQmIKIojrNx9An7s4uEUfchBxlEh8bXHQoXzX5ITznTp/R4S4kp4pb6eWuYwC
- fopg==
+ bh=yKl9yArNq3w173PSahK6ICbfpEDWkJ6jn3RpCMJdn7U=;
+ b=jhl7VIz8npjHWh3n0t+yywNhT5/qI/Xlo9D4lPCoypQW6ubtXmNseD17fzrVDRgW5Z
+ 9cEz2JCorLN+KreQNMFhTkj45x0JR5aOLLiU9IHdgzEV+gWbRm6nFqannXzHsjbzf6oY
+ 3oD+BBrQQHT70qqtr8u3AeuLTiqK0bDJi01jM3PRiTDnm/bHN+QpL5GpdyrZBv5w0y/H
+ ZjNRRcp2sUtRAs+1eZLg0/2ZeTiJaj855TDxXMuR7lBb4b+U9X+GuKma/r3Lc6KWbgmJ
+ bBOWHxbSoF1rKmFqxqQ8VVHdMTzLT15GdtlIR4wxwT3T4P2rTlXLL8lCVS/qChW+VUlT
+ 0YHg==
 X-Forwarded-Encrypted: i=1;
- AKwUvBxRXV9l8Ie2SRqDkWQWC9ijjUcAkW6Pxzo7oHaQO5ZLULDS02nRXGx8rkoq1cuF515HFL33owfnLbl1@nongnu.org
-X-Gm-Message-State: AFq9FYKpZknEDA67GbFi7r9C0YWsxL0yhJsJUBt2vK3dtq0Vit6qp658
- 7EUsPvCfckPi1L9wTqq7yvo21pMazGtZyC+fdFacDK/VKPMvGR13zSDB
-X-Gm-Gg: AYBFou0/8Gk5EFNi25YpaUAFgJqkduP6GdJTmoeQeoTY/VqQ+eSsfz1gjHiDS6wXapN
- 3YSVjWXWsme3D65vltxhZwX3uzuwYI91HxbUjCpuQdQgRrtQEmEGtbtYvBLPIfbAbqG0I20iHLs
- ixZsBTTNoW/yaum7CIEX57GEpLL6kmX7KyB8c3i0DOJYuu7wWsndSYNxrZBliahb2m6Dge1f/jK
- lNkqobNtrbaH6mX7x4iQilIotZXjotQggOYqrL5rXf/2l/ZWixOkTT//szH5DRAFo0pgc4sJndq
- mJjuoI4zvbcSJtVzz5Qtqjkme+409q+a8BXTp3TfGVoJa6LTgKU468Wkasjz4znE15WihkAjIYj
- L/AgwlKkAACfxIAoh1iqvkysqGOKX+2CrBMs/AcYwVW14UII3I5N10wgc3mAZ7VwyGrL+NX6v2H
- EkDE3A1tzd0JT4oxOE1NOtNBBggc0NnIKFXTye/yCYd5ab1BcSzOTgWmQy8jYHji974SZsqqrbE
- ogGTbjvFVeUSMm4xFFYyNGBFnCOlnI=
-X-Received: by 2002:a05:7301:1526:b0:34e:f8bb:4e23 with SMTP id
- 5a478bee46e88-34f150b0142mr3668009eec.19.1790963634017; 
- Fri, 02 Oct 2026 10:53:54 -0700 (PDT)
+ AKwUvBxQOpJzzLxbCgCzBD3g+onqJ9Q+pd90p8Pj2jQ10m5EO5WrwXSZns/NWLB4D74K5JHrsRgGXP9HO6Rz@nongnu.org
+X-Gm-Message-State: AFq9FYLA/4bZLRMUNKy6N6yj+bhrFcyxFoCa+O1hoyLeGOK9Sof1Ap/c
+ d/MhdppIO5FPo89W5Xnz9Fl+9OjT9McS0CJziDODgMo35v9BQqGHW6Nu
+X-Gm-Gg: AYBFou2zwpex/FBF1byTs5nDcMz7WbkNogCiQuzbee4JOQ2cYpFD5ek7EvU3Wl3G0Qb
+ aCTvj3DiHsCjQoMxzCOoFmISjs3DeoMVUz5AqJOWKw+C+6us614vsPQHPtcaGQFa6yds4zDsGKG
+ IbqAvx0u07q5hcENgAKCQQEq0FSU/4Y+fgTCSPQ6a0AqN0tFCDi8mUMaHzczCPMHAXtGc4qjzVu
+ jWqG44DOUR9/F/8KjyHtZJaX/VbeIPmsxM4woaQL9c4JZwcrD43Xa29dnvC+tgL0UFh7AvE/znR
+ kfaglQmwRQ17smrEawAVG/wdYmktGWO/LfC/JT9cPE5qeVRxp+ai5Z5UpiD7nzr+iJ20zc+RbvA
+ ttIt7zypJXt1FrS62qp8TLODDBwRDGa67fJS/KDLDNFxtppQiA2dFmwGuSoa1y1Oboz0oDw3VuV
+ oOgFtM/qdlzj6pdPRXDuHIcH1xO6M/nI2CQNc4bB3DL8eisqrI7nM9GKUUwNuezLVAyRdF4ppQW
+ HWIHWv3Nq4/CMTGpC150Iu4p80BTQ6S
+X-Received: by 2002:a05:7301:4547:b0:33b:e75b:cc42 with SMTP id
+ 5a478bee46e88-34f150c2f6amr3129500eec.19.1790963649062; 
+ Fri, 02 Oct 2026 10:54:09 -0700 (PDT)
 Received: from WIN-BH9M8FJACR9 ([103.94.185.75])
  by smtp.googlemail.com with ESMTPSA id
- 5a478bee46e88-34f14f9f2afsm18027361eec.18.2026.10.02.10.53.47
+ 5a478bee46e88-34f14f9f2afsm18027361eec.18.2026.10.02.10.54.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 02 Oct 2026 10:53:53 -0700 (PDT)
+ Fri, 02 Oct 2026 10:54:08 -0700 (PDT)
 From: Yonggang Luo <luoyonggang@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: Max Filippov <jcmvbkbc@gmail.com>, Stafford Horne <shorne@gmail.com>,
@@ -98,22 +98,23 @@ Cc: Max Filippov <jcmvbkbc@gmail.com>, Stafford Horne <shorne@gmail.com>,
  Laurent Vivier <laurent@vivier.eu>, qemu-arm@nongnu.org,
  Paolo Bonzini <pbonzini@redhat.com>, Glenn Miles <milesg@linux.ibm.com>,
  Ilya Leoshkevich <iii@linux.ibm.com>
-Subject: [PATCH v3 24/27] target/mips: call do_raise_exception directly
-Date: Sat,  3 Oct 2026 01:50:32 +0800
-Message-ID: <20261002175037.1747-25-luoyonggang@gmail.com>
+Subject: [PATCH v3 26/27] target/ppc: reuse the error-aware NIP exception path
+Date: Sat,  3 Oct 2026 01:50:34 +0800
+Message-ID: <20261002175037.1747-27-luoyonggang@gmail.com>
 X-Mailer: git-send-email 2.52.0.windows.1
 In-Reply-To: <20261002175037.1747-1-luoyonggang@gmail.com>
 References: <20261002175037.1747-1-luoyonggang@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:36::19;
- envelope-from=luoyonggang@gmail.com; helo=mail-dy2-x19.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:38::f;
+ envelope-from=luoyonggang@gmail.com; helo=mail-dl2-x0f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -129,72 +130,32 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Use do_raise_exception() directly for reserved-instruction traps in the
-FPU helpers, passing GETPC() to restore guest state. Keep helper_wait() on
-the zero-PC path, where the guest PC was already updated.
+Route gen_exception_nip() through gen_exception_err_nip() with a zero
+error code, reusing its NIP update and exception-generation path.
 
 Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
 ---
- target/mips/tcg/exception.c  | 7 +------
- target/mips/tcg/fpu_helper.c | 6 +++---
- 2 files changed, 4 insertions(+), 9 deletions(-)
+ target/ppc/translate.c | 7 +------
+ 1 file changed, 1 insertion(+), 6 deletions(-)
 
-diff --git a/target/mips/tcg/exception.c b/target/mips/tcg/exception.c
-index 630b8b809fa..514880ccba8 100644
---- a/target/mips/tcg/exception.c
-+++ b/target/mips/tcg/exception.c
-@@ -60,11 +60,6 @@ void helper_raise_exception_debug(CPUMIPSState *env)
-     do_raise_exception(env, EXCP_DEBUG, 0);
- }
- 
--static void raise_exception(CPUMIPSState *env, uint32_t exception)
--{
--    do_raise_exception(env, exception, 0);
--}
--
- void helper_wait(CPUMIPSState *env)
+diff --git a/target/ppc/translate.c b/target/ppc/translate.c
+index 467b8f3d4ec..f1a7039a325 100644
+--- a/target/ppc/translate.c
++++ b/target/ppc/translate.c
+@@ -330,12 +330,7 @@ static inline void gen_exception_err(DisasContext *ctx, uint32_t excp,
+ static void gen_exception_nip(DisasContext *ctx, uint32_t excp,
+                               target_ulong nip)
  {
-     CPUState *cs = env_cpu(env);
-@@ -75,7 +70,7 @@ void helper_wait(CPUMIPSState *env)
-      * Last instruction in the block, PC was updated before
-      * - no need to recover PC and icount.
-      */
--    raise_exception(env, EXCP_HLT);
-+    do_raise_exception(env, EXCP_HLT, 0);
+-    TCGv_i32 t0;
+-
+-    gen_update_nip(ctx, nip);
+-    t0 = tcg_constant_i32(excp);
+-    gen_helper_raise_exception(tcg_env, t0);
+-    ctx->base.is_jmp = DISAS_NORETURN;
++    gen_exception_err_nip(ctx, excp, 0, nip);
  }
  
- void mips_cpu_synchronize_from_tb(CPUState *cs, const TranslationBlock *tb)
-diff --git a/target/mips/tcg/fpu_helper.c b/target/mips/tcg/fpu_helper.c
-index 36af9808025..ce68cda1e43 100644
---- a/target/mips/tcg/fpu_helper.c
-+++ b/target/mips/tcg/fpu_helper.c
-@@ -61,7 +61,7 @@ target_ulong helper_cfc1(CPUMIPSState *env, uint32_t reg)
-             if (env->CP0_Config5 & (1 << CP0C5_UFE)) {
-                 arg1 = (env->CP0_Config5 >> CP0C5_FRE) & 1;
-             } else {
--                helper_raise_exception(env, EXCP_RI);
-+                do_raise_exception(env, EXCP_RI, GETPC());
-             }
-         }
-         break;
-@@ -120,7 +120,7 @@ void helper_ctc1(CPUMIPSState *env, target_ulong arg1, uint32_t fs, uint32_t rt)
-             env->CP0_Config5 &= ~(1 << CP0C5_FRE);
-             compute_hflags(env);
-         } else {
--            helper_raise_exception(env, EXCP_RI);
-+            do_raise_exception(env, EXCP_RI, GETPC());
-         }
-         break;
-     case 6:
-@@ -132,7 +132,7 @@ void helper_ctc1(CPUMIPSState *env, target_ulong arg1, uint32_t fs, uint32_t rt)
-             env->CP0_Config5 |= (1 << CP0C5_FRE);
-             compute_hflags(env);
-         } else {
--            helper_raise_exception(env, EXCP_RI);
-+            do_raise_exception(env, EXCP_RI, GETPC());
-         }
-         break;
-     case 25:
+ static inline void gen_exception(DisasContext *ctx, uint32_t excp)
 -- 
 2.52.0.windows.1
 
