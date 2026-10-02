@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 464E1CA5FDD
-	for <qemu-riscv@archiver.kernel.org>; Fri,  2 Oct 2026 18:04:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C153FCA5FDD
+	for <qemu-riscv@archiver.kernel.org>; Fri,  2 Oct 2026 18:04:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xChWu-0004LI-Sk; Fri, 02 Oct 2026 13:58:44 -0400
+	id 1xChYr-0006pD-Dn; Fri, 02 Oct 2026 14:00:45 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xChRT-0005KT-3X
- for qemu-riscv@nongnu.org; Fri, 02 Oct 2026 13:53:07 -0400
-Received: from mail-dy1-x1333.google.com ([2607:f8b0:4864:20::1333])
+ id 1xChS5-0005ra-4a
+ for qemu-riscv@nongnu.org; Fri, 02 Oct 2026 13:53:45 -0400
+Received: from mail-dy2-x1d.google.com ([2607:f8b0:4864:36::1d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xChRO-0007ch-KG
- for qemu-riscv@nongnu.org; Fri, 02 Oct 2026 13:53:06 -0400
-Received: by mail-dy1-x1333.google.com with SMTP id
- 5a478bee46e88-32efd24b2aeso429625eec.1
- for <qemu-riscv@nongnu.org>; Fri, 02 Oct 2026 10:53:02 -0700 (PDT)
+ id 1xChS0-0007ni-3p
+ for qemu-riscv@nongnu.org; Fri, 02 Oct 2026 13:53:43 -0400
+Received: by mail-dy2-x1d.google.com with SMTP id
+ 5a478bee46e88-346c612c7a8so4171766eec.1
+ for <qemu-riscv@nongnu.org>; Fri, 02 Oct 2026 10:53:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1790963581; x=1791568381; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1790963618; x=1791568418; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=ZNU4PHC3hnUAQwnMHFav3xH/N5F8DnZib4Be85nEsJE=;
- b=WO1z/3b58eD7oxWYuAGjtApyj0b8M4InXR4bYmTAWEJ/6KFHE5xEiWTbqryHP4zjcA
- N/rEapXak+ybaqfRg0/AAYRIQtqRBzZJQYSAO4hltjdI+6K4xbA4Chej5oUomhd0thEO
- 7fLjbCHUN5HQ8PcMu332SeLQhtuJy2J6CgX9ozyQ6h+saNhkTu0cZIp4W4za5Ms5j729
- j0Kj6EvwYMmW6OYtdMPw5FB3WB78YYa6Vdawr4bYRhGVrqiwo+yery3+t8GVZRzE+lv8
- 8RJc1cUK+MOW4qidBxPX6JfanU0eJDR0uW7+hQRpYYerMYyrb4/b5Q1JkI8kW6g7vHa0
- 7FQA==
+ bh=3djPD4lrHihRA2K/7/0xbymzaT+DB/5oE6KY6UCln9k=;
+ b=EQ8ebtFwuJuYt4OZht3NJ7eNBlDcPW80r7tog4jrv10Z0N7efMsVtfbHQvaG7vpMWa
+ mti59e5MsLmyuVY12cI2S9Vi1t9YG4kQ6dom7mOsfuDALjkwUkHtbp2hbg67HldZzX6/
+ 85taTbamY1TCqiWv1bz3vWNIbeiwdtnBwiq1Dh2EKr+21Gc0TY4cbaLANS0i8DIeGn3E
+ ezUfe3veHAaVs5k3d9GH76GJ+ZV+U0LRTETaGnPoe+zEM9lXeckOg3kFqiFRhE3YKW8j
+ dGi6mG0N6qoEKxFsOkYIfF5dCJviXBfofnfJVr5MWvvOdQfUCM6sAJZo7n+7kg5PnTTf
+ uoiw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790963581; x=1791568381;
+ d=1e100.net; s=20260707; t=1790963618; x=1791568418;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=ZNU4PHC3hnUAQwnMHFav3xH/N5F8DnZib4Be85nEsJE=;
- b=dvj5MZKYt6mBdy8c2CofuNey3L99bW5vgw24sxxktJppDWGXHZ2DEf0gqlVCNQ5+Ww
- doAHpfbMHRDcy536p4O9xvSLdSQeMjhbfrQUMkGXFsEKyTlFe9sVKkKS0atEbVn0zj32
- TBqbDJaIxIxNfrGSoLx40WNlDkNhaqKXlv+bwWJ3y5VaMclSnyGHheHLhOv9VkksLbzY
- Gvw6krKRkvYhX7NtMRLTRX3fVwcejovNTqhI8873YRBqUyVGr5e6r11owK85dOsCRZJx
- f7X8LnxIcbFncEiQaVLTT3aGxvp2N5YVSiFplBG22vCYqhguzJnsjIof4HFl17lSvRu/
- G/7w==
+ bh=3djPD4lrHihRA2K/7/0xbymzaT+DB/5oE6KY6UCln9k=;
+ b=la8GUBwwLmGgSIea609DbIPO9n49bQaZoN4iLJkVEvLTyH36e//JNSAS3+4nc3HJ7/
+ weHoDXrysvCMYxlKsq/CCsmz7oRDcceiz5TtXuq97dS/HLOHuoHO7tU86sueYwdC/+0V
+ nIzsCveO+GXn0MpxLsQ6jDWxV9gnY5BwhgrryvWbjdu9XtZ/rJToKNZJRKJ2PJTzSA4S
+ +qlsU8wDapVgLYqNDhSje8SrcX/Iny6o7h3lECWyU6XG0nUCygK3qRXbOYU7cdhqhCd1
+ FdaY+7JdYp++8JUUFiBj8Tht05ZbYtrVtFOCQViBuLlbSU+BL4pEIJ/UwVoeZvovDb+s
+ 1TCg==
 X-Forwarded-Encrypted: i=1;
- AKwUvByhTfa5mqV73MSJIKBFkigS6C/Nt83Tec87VWlquzekIqqOV3t4p0wHJMLy47HvZuLPt6YP9/wdv8Pu@nongnu.org
-X-Gm-Message-State: AFuF++lK2Pu/gMHwtdoEKWcS+AON26ZLk7E+l8AKL5NscEMd0XGVdF+c
- ZDZSUdReDcp8YI57gsjPGGXIbA098azgqHOarPGNfDnPg9R7A5V3wBIL
-X-Gm-Gg: AYBFou0PMeegtg9oH/13rYEfbfG9DKR28+To4mrlVzmaeYQ9zMly515948IojHhNvlm
- 2WaM3rM79ncAgrsJaGtxK4W8Fa2Ocph1Xckp2XuLn+ecL7LwVIYj5KsfW8iRmN0I1D8ROjaOoTO
- QXcaWajMriMvURyCdj+b9e0d3QXVCkwU3JDMjBnhxwcuzwLMkU1I5I3DXj9RkcW6vxoTFuseOy0
- br9TCZivlQNSxJXbffWSTcCl+3SnSrdG64NZkyh7ycAKfW7fuJC8XSeAs/YvpdQkbjBI/wxeSJf
- tG1bvwJ+xoidu8pNRMAhpR6JxCNpJjR85hmAvanVgPjIUGuOHwudo0sF2FZsKXk9BHdiZGlekdr
- P1LlFcZ1Uhf+9uGRcf51lzzevNP7Ei10Vhg54egzVPbE+zVukgrvMEpytMGVkv+xazAAEiF5Q/f
- 5CcAQ11R5Rzzw/NSKus3g1xddTfFQYFomwcuFwTI1cOs25PtmbJNdDUBmMWctb+iQxzsPZc7/J0
- X69uPDeN93fg0wL+e1c140DDY2KA3PVAxKfkJrbDA==
-X-Received: by 2002:a05:693c:638f:10b0:34b:dde6:29c7 with SMTP id
- 5a478bee46e88-351114568a1mr356247eec.19.1790963580723; 
- Fri, 02 Oct 2026 10:53:00 -0700 (PDT)
+ AKwUvBxhPI/7MGAWbNCycSgJUFUdQJHkp4YdD1cTiZ/57zQMmDc+MvkOHVckbck1Qx6cV7FElGzb+uol9iHB@nongnu.org
+X-Gm-Message-State: AFq9FYK2P2sc1V+PWY8CTl5ACEHyWoll9W6CboEtEwykwtMia0JNTyKI
+ CXzJZtXbmYAde2uKAGCpPBz6p5xlTyUvhHmOCf2fHJCq+1Go6uqOGff+
+X-Gm-Gg: AYBFou2bUz0c0snF/iMp/80HIcREfzwVn4+2nOt3ZjCR6uUNGcgi7lpD8mXiRzXz4U0
+ jDEze+b9JyLTCEx+MgwXFbR1dfKNtP4c2zDFX0ZJ0tcD1/yIvwqOJg9fSSSjEXY8HxCYJ+cx+8o
+ +zEtw1DfcvtiUCNtQ4DZoNr6e5GQmzMeWjg65f8LOvmqGF7SH2x9BZG2tbgtrQOr+th40WiK1Sj
+ GTIzpjWTk5IcJc7eVcmg+6VJx76+JdxMz5jughDVUGXYXKP1OZM4flWBkSrQi2o+T7WVqbSEHhg
+ SHb3jGZjIir56XuLWrpBW8UrQOXGOsiGpWn8Waq33s/7lPyS1aIF6IaZJLd3XzJnpH+0Yh2189u
+ DwAmEGveM0N0DNJh839AJ3lOj9btpIGSISUKjDWTOWLlr5SwG0Ihx3FuglB9552xbGwtbU3FVBg
+ IDI5LMgOvH5SgKUm53hWKyTnQRhtWLNeuvk/EkrxkxSodyMpRbK+gmrzl5U136RtbXiuBjhl7n0
+ kO1r7HZdzxXo4yZXIm/c+oYM7mJbno=
+X-Received: by 2002:a05:7300:c00e:10b0:34e:f85d:63fc with SMTP id
+ 5a478bee46e88-34f219bf1e3mr4350001eec.39.1790963618351; 
+ Fri, 02 Oct 2026 10:53:38 -0700 (PDT)
 Received: from WIN-BH9M8FJACR9 ([103.94.185.75])
  by smtp.googlemail.com with ESMTPSA id
- 5a478bee46e88-34f14f9f2afsm18027361eec.18.2026.10.02.10.52.53
+ 5a478bee46e88-34f14f9f2afsm18027361eec.18.2026.10.02.10.53.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 02 Oct 2026 10:53:00 -0700 (PDT)
+ Fri, 02 Oct 2026 10:53:37 -0700 (PDT)
 From: Yonggang Luo <luoyonggang@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: Max Filippov <jcmvbkbc@gmail.com>, Stafford Horne <shorne@gmail.com>,
@@ -98,17 +98,16 @@ Cc: Max Filippov <jcmvbkbc@gmail.com>, Stafford Horne <shorne@gmail.com>,
  Laurent Vivier <laurent@vivier.eu>, qemu-arm@nongnu.org,
  Paolo Bonzini <pbonzini@redhat.com>, Glenn Miles <milesg@linux.ibm.com>,
  Ilya Leoshkevich <iii@linux.ibm.com>
-Subject: [PATCH v3 17/27] target/loongarch: convert raise_exception to
- raise_excp
-Date: Sat,  3 Oct 2026 01:50:25 +0800
-Message-ID: <20261002175037.1747-18-luoyonggang@gmail.com>
+Subject: [PATCH v3 22/27] target/arm: convert exception_internal to raise_excp
+Date: Sat,  3 Oct 2026 01:50:30 +0800
+Message-ID: <20261002175037.1747-23-luoyonggang@gmail.com>
 X-Mailer: git-send-email 2.52.0.windows.1
 In-Reply-To: <20261002175037.1747-1-luoyonggang@gmail.com>
 References: <20261002175037.1747-1-luoyonggang@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1333;
- envelope-from=luoyonggang@gmail.com; helo=mail-dy1-x1333.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:36::1d;
+ envelope-from=luoyonggang@gmail.com; helo=mail-dy2-x1d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -131,115 +130,149 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Inline do_raise_exception as it's used by other arch.
-
-Use the shared raise_excp_restore helper for translated exceptions and
-adapt the logging C exception path to cpu_raise_excp() or
-cpu_raise_excp_restore() according to the return-address contract.
+Use the shared raise_excp helper for exception_internal and adapt zero-PC
+C exception exits to cpu_raise_excp(). Preserve ARM-specific exception
+helpers that carry additional state.
 
 Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
 ---
- target/loongarch/internals.h     | 12 +++++++++---
- target/loongarch/tcg/helper.h    |  2 --
- target/loongarch/tcg/op_helper.c |  6 ------
- target/loongarch/tcg/tcg_cpu.c   | 10 ++++------
- target/loongarch/tcg/translate.c |  2 +-
- 5 files changed, 14 insertions(+), 18 deletions(-)
+ target/arm/tcg/helper-defs.h |  1 -
+ target/arm/tcg/m_helper.c    |  3 ++-
+ target/arm/tcg/op_helper.c   | 33 ++++++---------------------------
+ target/arm/tcg/translate.c   |  2 +-
+ 4 files changed, 9 insertions(+), 30 deletions(-)
 
-diff --git a/target/loongarch/internals.h b/target/loongarch/internals.h
-index ff956823fd7..885d516fe52 100644
---- a/target/loongarch/internals.h
-+++ b/target/loongarch/internals.h
-@@ -19,9 +19,15 @@ void loongarch_translate_init(void);
- void loongarch_translate_code(CPUState *cs, TranslationBlock *tb,
-                               int *max_insns, vaddr pc, void *host_pc);
+diff --git a/target/arm/tcg/helper-defs.h b/target/arm/tcg/helper-defs.h
+index 269ac515065..14ef3120373 100644
+--- a/target/arm/tcg/helper-defs.h
++++ b/target/arm/tcg/helper-defs.h
+@@ -45,7 +45,6 @@ DEF_HELPER_FLAGS_2(usad8, TCG_CALL_NO_RWG_SE, i32, i32, i32)
  
--void G_NORETURN do_raise_exception(CPULoongArchState *env,
--                                   uint32_t exception,
--                                   uintptr_t pc);
-+void G_NORETURN loongarch_do_raise_exception(CPULoongArchState *env,
-+                                             uint32_t exception,
-+                                             uintptr_t pc);
-+static inline void G_NORETURN do_raise_exception(CPULoongArchState *env,
-+                                                 uint32_t exception,
-+                                                 uintptr_t pc)
-+{
-+    loongarch_do_raise_exception(env, exception, pc);
-+}
- 
+ DEF_HELPER_FLAGS_3(sel_flags, TCG_CALL_NO_RWG_SE,
+                    i32, i32, i32, i32)
+-DEF_HELPER_2(exception_internal, noreturn, env, i32)
+ DEF_HELPER_3(exception_with_syndrome, noreturn, env, i32, i32)
+ DEF_HELPER_4(exception_with_syndrome_el, noreturn, env, i32, i32, i32)
+ DEF_HELPER_2(exception_bkpt_insn, noreturn, env, i32)
+diff --git a/target/arm/tcg/m_helper.c b/target/arm/tcg/m_helper.c
+index 65dcf97adef..9c21df772ab 100644
+--- a/target/arm/tcg/m_helper.c
++++ b/target/arm/tcg/m_helper.c
+@@ -18,6 +18,7 @@
+ #include "exec/page-protection.h"
  #ifdef CONFIG_TCG
- int ieee_ex_to_loongarch(int xcpt);
-diff --git a/target/loongarch/tcg/helper.h b/target/loongarch/tcg/helper.h
-index e76c73c7755..e3a7bc9e9da 100644
---- a/target/loongarch/tcg/helper.h
-+++ b/target/loongarch/tcg/helper.h
-@@ -3,8 +3,6 @@
-  * Copyright (c) 2021 Loongson Technology Corporation Limited
-  */
+ #include "accel/tcg/cpu-ldst-common.h"
++#include "accel/tcg/cpu-loop.h"
+ #include "semihosting/common-semi.h"
+ #endif
+ #if !defined(CONFIG_USER_ONLY)
+@@ -575,7 +576,7 @@ void HELPER(v7m_bxns)(CPUARMState *env, uint32_t dest)
+          */
+         env->regs[15] = dest & ~1;
+         env->thumb = dest & 1;
+-        HELPER(exception_internal)(env, EXCP_EXCEPTION_EXIT);
++        cpu_raise_excp(env_cpu(env), EXCP_EXCEPTION_EXIT);
+         /* notreached */
+     }
  
--DEF_HELPER_2(raise_exception, noreturn, env, i32)
--
- DEF_HELPER_FLAGS_3(asrtle_d, TCG_CALL_NO_WG, void, env, tl, tl)
- DEF_HELPER_FLAGS_3(asrtgt_d, TCG_CALL_NO_WG, void, env, tl, tl)
+diff --git a/target/arm/tcg/op_helper.c b/target/arm/tcg/op_helper.c
+index af56eff9f18..522c309fa39 100644
+--- a/target/arm/tcg/op_helper.c
++++ b/target/arm/tcg/op_helper.c
+@@ -64,10 +64,9 @@ void raise_exception(CPUARMState *env, uint32_t excp,
+     }
  
-diff --git a/target/loongarch/tcg/op_helper.c b/target/loongarch/tcg/op_helper.c
-index f98fe4d4a16..109417b7503 100644
---- a/target/loongarch/tcg/op_helper.c
-+++ b/target/loongarch/tcg/op_helper.c
-@@ -16,12 +16,6 @@
- #include <zlib.h> /* for crc32 */
- #include "cpu-csr.h"
+     assert(!excp_is_internal(excp));
+-    cs->exception_index = excp;
+     env->exception.syndrome = syndrome;
+     env->exception.target_el = target_el;
+-    cpu_loop_exit(cs);
++    cpu_raise_excp(cs, excp);
+ }
  
--/* Exceptions helpers */
--void helper_raise_exception(CPULoongArchState *env, uint32_t exception)
--{
--    do_raise_exception(env, exception, GETPC());
+ void raise_exception_ra(CPUARMState *env, uint32_t excp, uint64_t syndrome,
+@@ -399,9 +398,8 @@ void HELPER(wfi)(CPUARMState *env, uint32_t insn_len)
+     }
+ 
+     qatomic_set(&env->halt_reason, HALT_WFI);
+-    cs->exception_index = EXCP_HLT;
+     cs->halted = 1;
+-    cpu_loop_exit(cs);
++    cpu_raise_excp(cs, EXCP_HLT);
+ #endif
+ }
+ 
+@@ -462,9 +460,8 @@ void HELPER(wfit)(CPUARMState *env, uint32_t rd)
+         timer_mod(cpu->wfxt_timer, nexttick);
+     }
+     qatomic_set(&env->halt_reason, HALT_WFI);
+-    cs->exception_index = EXCP_HLT;
+     cs->halted = 1;
+-    cpu_loop_exit(cs);
++    cpu_raise_excp(cs, EXCP_HLT);
+ #endif
+ }
+ 
+@@ -631,9 +628,8 @@ void HELPER(wfe)(CPUARMState *env, uint32_t insn_len)
+     }
+ 
+     qatomic_set(&env->halt_reason, HALT_WFE);
+-    cs->exception_index = EXCP_HLT;
+     cs->halted = 1;
+-    cpu_loop_exit(cs);
++    cpu_raise_excp(cs, EXCP_HLT);
+ #endif
+ }
+ 
+@@ -726,9 +722,8 @@ void HELPER(wfet)(CPUARMState *env, uint32_t rd)
+     }
+ 
+     qatomic_set(&env->halt_reason, HALT_WFE);
+-    cs->exception_index = EXCP_HLT;
+     cs->halted = 1;
+-    cpu_loop_exit(cs);
++    cpu_raise_excp(cs, EXCP_HLT);
+ #endif
+ }
+ 
+@@ -740,23 +735,7 @@ void HELPER(yield)(CPUARMState *env)
+      * that the guest is currently busy-looping. Yield control back to the
+      * top level loop so that a more deserving VCPU has a chance to run.
+      */
+-    cs->exception_index = EXCP_YIELD;
+-    cpu_loop_exit(cs);
 -}
 -
- /* loongarch assert op */
- void helper_asrtle_d(CPULoongArchState *env, target_ulong rj, target_ulong rk)
- {
-diff --git a/target/loongarch/tcg/tcg_cpu.c b/target/loongarch/tcg/tcg_cpu.c
-index 4b1d44a1644..0a1115721c0 100644
---- a/target/loongarch/tcg/tcg_cpu.c
-+++ b/target/loongarch/tcg/tcg_cpu.c
-@@ -59,9 +59,9 @@ static const char *loongarch_exception_name(int32_t exception)
-     return "Unknown";
- }
- 
--void G_NORETURN do_raise_exception(CPULoongArchState *env,
--                                   uint32_t exception,
--                                   uintptr_t pc)
-+void G_NORETURN loongarch_do_raise_exception(CPULoongArchState *env,
-+                                             uint32_t exception,
-+                                             uintptr_t pc)
- {
-     CPUState *cs = env_cpu(env);
- 
-@@ -69,9 +69,7 @@ void G_NORETURN do_raise_exception(CPULoongArchState *env,
-                   __func__,
-                   exception,
-                   loongarch_exception_name(exception));
--    cs->exception_index = exception;
+-/* Raise an internal-to-QEMU exception. This is limited to only
+- * those EXCP values which are special cases for QEMU to interrupt
+- * execution and not to be used for exceptions which are passed to
+- * the guest (those must all have syndrome information and thus should
+- * use exception_with_syndrome*).
+- */
+-void HELPER(exception_internal)(CPUARMState *env, uint32_t excp)
+-{
+-    CPUState *cs = env_cpu(env);
 -
--    cpu_loop_exit_restore(cs, pc);
-+    cpu_raise_excp_restore(cs, exception, pc);
+-    assert(excp_is_internal(excp));
+-    cs->exception_index = excp;
+-    cpu_loop_exit(cs);
++    cpu_raise_excp(cs, EXCP_YIELD);
  }
  
- #ifndef CONFIG_USER_ONLY
-diff --git a/target/loongarch/tcg/translate.c b/target/loongarch/tcg/translate.c
-index 124dce62695..b7e8ce8a653 100644
---- a/target/loongarch/tcg/translate.c
-+++ b/target/loongarch/tcg/translate.c
-@@ -95,7 +95,7 @@ static void gen_nanbox_s(TCGv_i64 out, TCGv_i64 in)
- void generate_exception(DisasContext *ctx, int excp)
+ /* Raise an exception with the specified syndrome register value */
+diff --git a/target/arm/tcg/translate.c b/target/arm/tcg/translate.c
+index 6983153ffc6..ad73813fe53 100644
+--- a/target/arm/tcg/translate.c
++++ b/target/arm/tcg/translate.c
+@@ -379,7 +379,7 @@ static void gen_rebuild_hflags(DisasContext *s, bool new_el)
+ void gen_exception_internal(int excp)
  {
-     tcg_gen_movi_tl(cpu_pc, ctx->base.pc_next);
--    gen_helper_raise_exception(tcg_env, tcg_constant_i32(excp));
-+    gen_helper_raise_excp_restore(tcg_env, tcg_constant_i32(excp));
-     ctx->base.is_jmp = DISAS_NORETURN;
+     assert(excp_is_internal(excp));
+-    gen_helper_exception_internal(tcg_env, tcg_constant_i32(excp));
++    gen_helper_raise_excp(tcg_env, tcg_constant_i32(excp));
  }
  
+ static void gen_singlestep_exception(DisasContext *s)
 -- 
 2.52.0.windows.1
 
