@@ -4,84 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D5A7CA5FDD
-	for <qemu-riscv@archiver.kernel.org>; Fri,  2 Oct 2026 14:04:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A23CCCA5FD4
+	for <qemu-riscv@archiver.kernel.org>; Fri,  2 Oct 2026 14:04:03 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xCdrc-0004Cv-VQ; Fri, 02 Oct 2026 10:03:55 -0400
+	id 1xCdrb-0004Cn-5I; Fri, 02 Oct 2026 10:03:53 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dingtaodtdt@gmail.com>)
- id 1xCdqt-00044a-Rz
- for qemu-riscv@nongnu.org; Fri, 02 Oct 2026 10:03:09 -0400
-Received: from mail-pj2-x11.google.com ([2607:f8b0:4864:39::11])
+ id 1xCdr7-00046a-0e
+ for qemu-riscv@nongnu.org; Fri, 02 Oct 2026 10:03:39 -0400
+Received: from mail-pj2-x2a.google.com ([2607:f8b0:4864:39::2a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dingtaodtdt@gmail.com>)
- id 1xCdqs-00085P-8R
- for qemu-riscv@nongnu.org; Fri, 02 Oct 2026 10:03:07 -0400
-Received: by mail-pj2-x11.google.com with SMTP id
- d9443c01a7336-2d747ed9866so52745195ad.2
- for <qemu-riscv@nongnu.org>; Fri, 02 Oct 2026 07:03:05 -0700 (PDT)
+ id 1xCdr4-00086A-7c
+ for qemu-riscv@nongnu.org; Fri, 02 Oct 2026 10:03:20 -0400
+Received: by mail-pj2-x2a.google.com with SMTP id
+ d9443c01a7336-2e2d58a3b05so32440675ad.0
+ for <qemu-riscv@nongnu.org>; Fri, 02 Oct 2026 07:03:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1790949785; x=1791554585; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1790949793; x=1791554593; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=Lvy3IrBhamz9amZ2f3O3x+9agIBxUCBT8qgB7MqI9iY=;
- b=oUxUiyA2GiqZX1CrOZFZ/hKPbGCo2X8JBMTs/ffSTRg+qICiZXLZC8rZB4YLEZVHMf
- Z4p6xUGWGqX1p7NEl0FcyfEa4hAFT9edg4ZCNw3NK9eFgFTGfT0lCSXfhLYSDwJUT0V9
- 8/oxkCw3KHj0w5QNs33ftJdZP3FbdveI8lj1Y1bOqazhiiOO1D6FZFnqg7OumCNyzOaW
- YvF6pnpg21OfSeq1SQxol9kI7moJAk5aYPnI1I536ARFOopWn3yqZ5Y9DsZhmPlRkedh
- lBe+RXvCxTTn6tlIfKLoaK+h5wn14le6+Ws7DouTV3r6sIgVPQNEoFJPzhHAP1pT54nH
- d6BA==
+ bh=rdntiJw+i8aSECp89xSpKJRa35ej9a/hc4nosI/BmRw=;
+ b=eoMXfUqFgtQFS8bTu54GRZgksVZpc2Nw5nrclq+zQiNMPEd3cqSncHrrUszztPKdAe
+ NAz6m4FtmDHIXGDTREFssXGT1Ldhry3sPIwmr30KgUhRs5DNM+uhrr3ZlI0L6cnGbX6K
+ GHHA2573b4JELZvOy2F896M9PACFO/sLvphkZgHT291ORuaD2v2BSN8g4xWJKHV+OuED
+ TeLTlM4LHRYMsakFWOkyM4E0CV8v+V94rl62epOtFMSSYOnLoypZZ2MM7Q5cPst5Nb2N
+ +mYnFSXfA6ECcWlv3LzSigLmNSWywD9cPgPTfkDVdOaFqdMn7Ww3NV2l0iWUoB2mB2fW
+ AeeA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790949785; x=1791554585;
+ d=1e100.net; s=20260707; t=1790949793; x=1791554593;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=Lvy3IrBhamz9amZ2f3O3x+9agIBxUCBT8qgB7MqI9iY=;
- b=KH/rDg3DFWVHy+zAmE4U6QJ1NvQlP7jdDj+IgyUKr2kYIsVN/dwTT80rNh6D+QvIeI
- DXK6djHZQW8BHaZ/muN/NG30UZXwLL2/owRxnRHcv9UCwSCGz2frQ8QfhTU8hn/mkdok
- uGLw2YwnXeeMIWYy1WipvN5M88hL1s41l4SHhebia/jjseslZliTnSXKTLCLL5JzYf6u
- uLgJa/yUUoXmqyWcN+Jfb31CJ46rtWOqQLwMQ/Disum/X73S8HjeOy4v22SjkfbSjvQ4
- 4mmTCjLbQ9pGDaP0jvGioLmJJHoWeFm8FqPSyhLyK0fwAPoP3Uk8IoFFeabuYzYFSpRp
- E5HQ==
-X-Gm-Message-State: AFq9FYIc3aHkJ5fMV+r1VfJTCvZmGMnXADkBe1JayKU32wiDD8x2Nl5b
- DK5mpOce64EJrRAOKj33GwnPCUfPmAuCB0SCfRXJg/ps+1RZfGDOxu86
-X-Gm-Gg: AYBFou37BCLzXFHvEqjOk0CxcmHOIDhw7f5U5mVLw7ePxBiLY3ZshPLzNBR+Sg/YLZ7
- UYBZOkLPuDeT3sGr2zRW4bjtt+B1rGAFfH1i/jFFy6Bt9RAMRCBb4UG5fH/2liCJkHtFV2SAzdI
- gsrEv8LDPdFHP6N6ZB3kSkpMxD4srNNFTW2Om9Wc8gbarwMmBJYaY3LkWNVAga5GfUauGyPijrL
- ElKJy2ZpDgkeX5xtvoGpWv6fu1fNC5FujRtVx8Zkn1nqzU9pV2up61rB7pfe585yTdBSr3D0Yib
- nHSB/afMufcCwNoS6CLqdfkTX3IFM25u8ctUiV1i5ETZzuQj5C+PZSwyZGo7+nwW1ZlTd6iqXa0
- CUpRZ1Erm4VviO1/LaU+70xAtm3MhV84rBF8OHeD/TX805iIAF4gTwAM3txh64Nyn3CCYvHafEy
- I/y9CUQzRTGhl21l7COsdHQxvaPObaBxb+DNWG3fv6mAfEBTFWmjcP4RzAYC75qi4+IBAKVHHnd
- gIUC27HJqtbVjI5D2F5f0F7tCk=
-X-Received: by 2002:a17:902:d98c:b0:2e1:2f69:b6d4 with SMTP id
- d9443c01a7336-2e49b4e71c0mr26961905ad.15.1790949784618; 
- Fri, 02 Oct 2026 07:03:04 -0700 (PDT)
+ bh=rdntiJw+i8aSECp89xSpKJRa35ej9a/hc4nosI/BmRw=;
+ b=JfRXflMrRWhizStcgNghjO/qG7s7WsIg8Hkh9RXwznAqbnxoOP6kCeu7CIeKjbqzs6
+ wc+s7cXUU+bSRKdMzQLHp0c/K7Qw5qbgJZy8h8Ys++ggSqeijzaACL5/iOAOe7B2nmS4
+ /LHXn5dShH7yjMqMokD2pD4OgZ5peeu6Uj62msw+ylUUQ+63D3ImlNnMoPTiQf8xfeTe
+ XG4j7MYgDCgWhxcUYY8dIHz8TvE8srVl0Rx9nK68kRc53w0rH/P5Eu7PdFLYEemwubsY
+ Hsg8U5Q2yvuC0jx0kIen5mVC6b7UaCmrVJ+v5+27SuBniVXc7Wxk/3YEHF96AEmHV4G8
+ HyUQ==
+X-Gm-Message-State: AFq9FYIkbaqdt7esXWr6XQxW3wt4JgQuUG9prGEin6HtkIUptWbp5/15
+ 78Ic2IDJGxjRGbMYBUyCuVzWctMyGbthhWsmSlScbERut3afBOggwV+1
+X-Gm-Gg: AYBFou3GGAV/SvaHSK5SFirOyE3wDlhn1jERkSomOiu/YhPD2jSlzcEJK4tWL/gIPeg
+ oF1p0Q45RR3ZFzZDFBCsrc0wngVErrrahmtSAftT0ZoWLlSCOyM7JVCVkIuMB7evQIi0r2AL4j8
+ LQrx/nO/YJnrKSVnytnGyZC1rF6HtMxnr4a77UBCdhvSK0X3h5F42lvU73spr4wBdKcjI+zMEBn
+ Zi7GCUVMBsy6hTsk2e2cijXieUyyYmbG+xeCO8ZPbvaXhoGDCt20fQHLrPENYcwXwA9MgahdnLq
+ 8ifgACKirTfwc3iFM2v5hjA2UD5+4CdmIweG5zvsKbpeY8BoQp7x/YMZ565aRjmKAGDwTge3xhn
+ Q9lW4ZzAkBSqzx+i0zy8hUFiaqqdkj8dY5Vv6q+Btv+9x5fTdOm2nXq5WCvvlfm28myMmKZpP4m
+ IOGD0Xu13sRgoAxLIM8mCfUgQrH1L3zTLgNn8xOGVXmRPsUaztMxrowVfLrvkWL/10M33B3ImZ/
+ GtnnOezstAsBuym
+X-Received: by 2002:a17:903:186:b0:2dd:ad74:ac7c with SMTP id
+ d9443c01a7336-2e49b67da5dmr26511775ad.23.1790949792627; 
+ Fri, 02 Oct 2026 07:03:12 -0700 (PDT)
 Received: from dt-VM.localdomain ([101.207.27.235])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2e49f723a77sm7996165ad.71.2026.10.02.07.03.01
+ d9443c01a7336-2e49f723a77sm7996165ad.71.2026.10.02.07.03.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 02 Oct 2026 07:03:04 -0700 (PDT)
+ Fri, 02 Oct 2026 07:03:12 -0700 (PDT)
 From: Tao Ding <dingtaodtdt@gmail.com>
 X-Google-Original-From: Tao Ding <dingtao0430@163.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, chao.liu@processmission.com, farosas@suse.de,
  lvivier@redhat.com, pbonzini@redhat.com, Alistair.Francis@wdc.com,
  Tao Ding <dingtao0430@163.com>
-Subject: [PATCH v2 2/5] hw/misc: fix calculating input address overflow in
- k230_decomp_gzip
-Date: Fri,  2 Oct 2026 22:02:42 +0800
-Message-ID: <20261002140245.30214-3-dingtao0430@163.com>
+Subject: [PATCH v2 4/5] qtest: fix k230_decomp_gzip test integer handling
+ issues
+Date: Fri,  2 Oct 2026 22:02:44 +0800
+Message-ID: <20261002140245.30214-5-dingtao0430@163.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261002140245.30214-1-dingtao0430@163.com>
 References: <20261002140245.30214-1-dingtao0430@163.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:39::11;
- envelope-from=dingtaodtdt@gmail.com; helo=mail-pj2-x11.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:39::2a;
+ envelope-from=dingtaodtdt@gmail.com; helo=mail-pj2-x2a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -104,29 +104,30 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Use hwaddr for address calculations to avoid 32-bit overflow.
+Cast slot to hwaddr before multiplication to prevent 32-bit overflow when 
+calculating the SRAM input address. 
 
-Resolves: Coverity CID 1685517
+Resolves: Coverity CID 1685516
 
 Reported-by: Alistair Francis <Alistair.Francis@wdc.com>
 Signed-off-by: Tao Ding <dingtao0430@163.com>
 ---
- hw/misc/k230_decomp_gzip.c | 2 +-
+ tests/qtest/k230-decomp-gzip-test.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/hw/misc/k230_decomp_gzip.c b/hw/misc/k230_decomp_gzip.c
-index ac06cc1571..da4dc6f954 100644
---- a/hw/misc/k230_decomp_gzip.c
-+++ b/hw/misc/k230_decomp_gzip.c
-@@ -59,7 +59,7 @@ static hwaddr k230_decomp_gzip_output_addr(K230DecompGzipState *s)
- 
- static hwaddr k230_decomp_gzip_input_addr(K230DecompGzipState *s)
+diff --git a/tests/qtest/k230-decomp-gzip-test.c b/tests/qtest/k230-decomp-gzip-test.c
+index e80113fd28..249c8ae82c 100644
+--- a/tests/qtest/k230-decomp-gzip-test.c
++++ b/tests/qtest/k230-decomp-gzip-test.c
+@@ -46,7 +46,7 @@ static inline hwaddr k230_sram_addr(hwaddr off)
+ static inline hwaddr k230_sram_input_addr(unsigned int slot)
  {
--    return s->input.slot * K230_DECOMP_GZIP_BLOCK_SIZE +
-+    return (hwaddr) s->input.slot * K230_DECOMP_GZIP_BLOCK_SIZE +
-            K230_DECOMP_GZIP_SRAM_IN_BASE;
+     return k230_sram_addr(K230_DECOMP_GZIP_SRAM_IN_BASE +
+-                          slot * K230_DECOMP_GZIP_BLOCK_SIZE);
++                          (hwaddr) slot * K230_DECOMP_GZIP_BLOCK_SIZE);
  }
  
+ /*
 -- 
 2.43.0
 
