@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FFB6CA5FDD
-	for <qemu-riscv@archiver.kernel.org>; Fri,  2 Oct 2026 17:28:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EF0ACA5FDD
+	for <qemu-riscv@archiver.kernel.org>; Fri,  2 Oct 2026 17:29:31 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xCgzs-00069z-Nk; Fri, 02 Oct 2026 13:24:36 -0400
+	id 1xCgze-0004oy-D3; Fri, 02 Oct 2026 13:24:22 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1xCgyD-0000aV-MN
- for qemu-riscv@nongnu.org; Fri, 02 Oct 2026 13:22:58 -0400
+ id 1xCgxU-000092-7l
+ for qemu-riscv@nongnu.org; Fri, 02 Oct 2026 13:22:10 -0400
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1xCgy3-0003p3-ES
- for qemu-riscv@nongnu.org; Fri, 02 Oct 2026 13:22:45 -0400
+ id 1xCgxS-0003cx-RG
+ for qemu-riscv@nongnu.org; Fri, 02 Oct 2026 13:22:07 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1790961762;
+ s=mimecast20190719; t=1790961726;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=WGXglyin6o1YnCJq2kD2rscpcytOiPmgHEZgX3OWp/4=;
- b=ZWutAj3YFXDC+19z1ZjXspPtcXTIQRNKzkfYRJ6uv3wgvrEvOPInApjQDYcaBfhb1HSg2d
- Pdb7uai/g6x+SG+7YmcmkDCp4PAMu4KpsxBWeREqNZ0kdRCJK1TPrIVxjj/UkzEqOdtr7d
- eKHjd233ODi81NfIWQ89ZX+pTObHlTM=
-Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
+ bh=1nTk5h441BlUCx/NZYxRViDuR1MPXYhtJViIj4n3aPc=;
+ b=d8y3VlEPSg3AJCuc9rjlyxu5u3MS6lqGhTclv6Lfdr9CkdK8N4NwiDclB01ugViaKjsuTZ
+ jw71b8Gd5ieH8yCmw2EYNdQ7RnlqNzS3vYC7zvp2m6owlbuWrhp8F1x2GLspCXKLhW6aqv
+ BAXfqw3V04plVo7upnFTWX5krMGC7QQ=
+Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-686-9QrLD9LIMqGfKHUCbjL-1g-1; Fri,
- 02 Oct 2026 13:22:39 -0400
-X-MC-Unique: 9QrLD9LIMqGfKHUCbjL-1g-1
-X-Mimecast-MFC-AGG-ID: 9QrLD9LIMqGfKHUCbjL-1g_1790961758
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-8-lVaX_vJSOX6-g8URbd2QEA-1; Fri,
+ 02 Oct 2026 13:22:02 -0400
+X-MC-Unique: lVaX_vJSOX6-g8URbd2QEA-1
+X-Mimecast-MFC-AGG-ID: lVaX_vJSOX6-g8URbd2QEA_1790961721
 Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com
  (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 38F7C1954121; Fri,  2 Oct 2026 17:22:38 +0000 (UTC)
+ by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 851721954B20; Fri,  2 Oct 2026 17:22:01 +0000 (UTC)
 Received: from localhost (headnet03.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.114])
  by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 6CE321800351; Fri,  2 Oct 2026 17:22:37 +0000 (UTC)
+ id A41B01800351; Fri,  2 Oct 2026 17:22:00 +0000 (UTC)
 MIME-Version: 1.0
-Subject: Re: [PATCH 26/28] hw: device AMD, Intel and ARM IOMMUs as secure
+Subject: Re: [PATCH 15/28] hw: define most common PCI types as secure
 From: marcandre.lureau@redhat.com
 To: =?utf-8?q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>
 Cc: qemu-devel@nongnu.org, xen-devel@lists.xenproject.org, 
  qemu-riscv@nongnu.org, qemu-ppc@nongnu.org, qemu-block@nongnu.org, 
  qemu-s390x@nongnu.org, qemu-arm@nongnu.org
-In-Reply-To: <20260911143627.2743803-27-berrange@redhat.com>
+In-Reply-To: <20260911143627.2743803-16-berrange@redhat.com>
 References: <20260911143627.2743803-1-berrange@redhat.com>
- <20260911143627.2743803-27-berrange@redhat.com>
+ <20260911143627.2743803-16-berrange@redhat.com>
 Date: Fri, 02 Oct 2026 21:21:01 +0400
-Message-Id: <179096166136.3025252.292036806890302152.b4-review@b4>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=336;
+Message-Id: <179096166122.3025252.2345560702508398440.b4-review@b4>
+X-Developer-Signature: v=1; a=openpgp-sha256; l=305;
  i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=2w47OdY8X64cy6/RH7KGYjLAQjIW5+wbMAeD8NQNfd0=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBqv+gCGnd+3y0WJKj+OVcxuNWalsPpltzlw8Ly7
- LD1wvDwz5yJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCar/oAgAKCRDa6OEJdZac
- 5SCED/sG8OtKpP2uG4CPl9svS/RoUQ+uIVmWcP1bOuuqWnuuATHdZ3yt06+9qgQLzqx3LG5S7Tn
- c3D/0yUpkLQJpLN/LzPfvVqPDdMPTFnEsefZ4oA+8VhBEE0kcyRhps1+E7uWF7GtOZoK7YZ6VPA
- PjUXDMLZFZf5v5O6/jEBCinlHKn73oIrgO+iCTGEWpMzZEkmEZHXHFOwMd0x+zyA5lPWX5W8tnE
- /x2wXAwufP57iXtPtd8sSuEjBgo1QA/nXSRSUH0ZE69B4BegRm7t5bfF+dhM9cl7ljHr4Sz+J1X
- fXWHCamFfajkPiFrejzV3pXuWP+N0xvfFraaTzACqXAnjj5MJQ+Sx7eYNn8uTHfrhdlJ58qeT9d
- HSzzYalFie75frQMdbaKOAVSOntH0ATLeyLHKgo54Xt7Q4Cpp0rR8KKPRUMsQ+nQwaGXlvmT+0K
- vyOqA+RA6M7SSM7Vl34lMlFVOfQpx+o7o5She3uI535o/qo5AQ+eWu678uEyTWN/PTr5vwOQred
- WRi5q/Uf95+3y0lRd2gi5QGNwrr0iBoNiIhKuq29YQgAONM1XFp5VoWy5966Qx7rxYMMdmOgdVj
- HxtrjoYwBwFcG6aYdy7lwbvUk2SGBybIWIfB7fUfHW3BlIoxZbMiXvRZtELA6l4tAgfk5b4kW38
- XH5VeP5KWbf9MrA==
+ bh=S5LgpxEbmDgv4nz2+w3MAekw+e8ZUjn4pTaaJOhl7I4=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBqv+gClYQc6x9HdvVuTz3orxL5k19B0JWDKbBeO
+ 2UgDlZ3atSJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCar/oAgAKCRDa6OEJdZac
+ 5QCGD/4v3MxlW9xcT2gilvuqgxjpT1DxHwa00sDRs5T+gRudU6o1ntWoLU1qAc7JZwaJ/aqChOd
+ IKsduJD+1Yalyd+onaPKwClZFmIj9njmtkFoJwrqiK0G5YZJDw5Lru0MvY97a1t2EuSQMVZfjim
+ z2F+s4CJm7MsgLBZV4Uvcv7ON+jwC3kLFiMH1rl89BmM/FmVWCPE175WC2mdtLoj5xq6bt3+FY3
+ ZLEMvjIn0YLigHAmkKeWitG8N8SZuCCP8GK4EVxHTj3+b1sTbexIng7XhmDleJlUtMeHJf6gck2
+ BrknT+6fYa9FNDyuoI5kOPwGONw3mbBxpLSTcFWBsAKyAJZyaVjVVAzIk4B6Amki3NFeFde8ZFl
+ 1bnaSYcMCZh7UAnNJDTvWTWWNJZkAJWG+uZVVoHI9YdB1hhkpI4qrz61UNvUy0vgvAz8BgIbSL2
+ fUgE1s76avvtH6uGlnp+tK68m/7haS/kJsSrQNw/03rkPBLsTNEdBVBGX1oF4d2NOOX7eLRkRBT
+ S4kLfXZ/jIK232Bg2hpMqUEWvIxPbemtrDq/ofdByqfw1RiUvhLLH5UKUHjJWgUU7UkbN7taxj3
+ xYthEKHzY5c0A8E0thzpO8xoGF91S61FwW5b+VrOIDC9CycnIJWAuTzg8Ggx0/c70BXc7hzd34R
+ 1AGq6NK7FV7PPiQ==
 X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
  fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
 X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
-X-Mimecast-MFC-PROC-ID: 26YsLssbbNJz5zcg805tZObiPX9IFxoodivVZ5Ug58c_1790961758
+X-Mimecast-MFC-PROC-ID: FF2mB4Rv0Y_1OlSlb3hwqMNdoqnc7jjeTYOHUZSS1a0_1790961721
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
@@ -108,11 +108,13 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, 11 Sep 2026 15:36:25 +0100, Daniel P. Berrangé <berrange@redhat.com> wrote:
-> These are needed in virtualization use cases to support PCI device
-> assignment use cases so must provide a security boundary.
+> Essentially all PCI infrastructure is in scope for the virtualization
+> use case, aside from the niche simba bridge.
+> 
 
-Acked-by: Marc-André Lureau <marcandre.lureau@redhat.com>
+You should exclude the CXL bits though, as stated on cover letter.
+
+Also questionable perhaps: xio3130, pcie_pci, pxb
 
 -- 
 Marc-André Lureau <marcandre.lureau@redhat.com>
