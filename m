@@ -4,105 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F9CACA5FDD
-	for <qemu-riscv@archiver.kernel.org>; Sat,  3 Oct 2026 15:12:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97428CA5FEC
+	for <qemu-riscv@archiver.kernel.org>; Sat,  3 Oct 2026 15:17:02 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xD1O7-0006ue-72; Sat, 03 Oct 2026 11:10:59 -0400
+	id 1xD1Tf-0003KV-6q; Sat, 03 Oct 2026 11:16:43 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1xD1O5-0006uG-To
- for qemu-riscv@nongnu.org; Sat, 03 Oct 2026 11:10:57 -0400
-Received: from mail-yw1-x112a.google.com ([2607:f8b0:4864:20::112a])
+ id 1xD1Te-0003KB-8k
+ for qemu-riscv@nongnu.org; Sat, 03 Oct 2026 11:16:42 -0400
+Received: from mail-yx2-x2b.google.com ([2607:f8b0:4864:41::2b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1xD1O3-0002Q9-H4
- for qemu-riscv@nongnu.org; Sat, 03 Oct 2026 11:10:57 -0400
-Received: by mail-yw1-x112a.google.com with SMTP id
- 00721157ae682-8ace0741488so3787637b3.3
- for <qemu-riscv@nongnu.org>; Sat, 03 Oct 2026 08:10:55 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1791040254; cv=none;
+ id 1xD1Tc-0003UI-Eq
+ for qemu-riscv@nongnu.org; Sat, 03 Oct 2026 11:16:42 -0400
+Received: by mail-yx2-x2b.google.com with SMTP id
+ 00721157ae682-8acf578ba66so938937b3.1
+ for <qemu-riscv@nongnu.org>; Sat, 03 Oct 2026 08:16:40 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1791040599; cv=none;
  d=google.com; s=arc-20260327;
- b=avWcm+y+sW0LtCX0WYb2XPk2Uw/k7z4GqkB92CgBoagyP6sinUrjmxMXGalcl3EdSR
- yitGLDcWDYm2Q3W4E4BE8wqhtxvkLwk9FyoiCAueks2uWRmeAED72W1oVeSg+R+oU4VN
- ffSDExEPXK/jljSq4b2Bv8nzUc2LyCTZCpsk88FuWQGgAaHksvira91q0ZHhLAShkb84
- dPl9vwmfi78LzDa+kVYsf5rsC4o6bBL1edDAgJi0hIEG5aW0XA4yTvQLeC4Vymr3TcEx
- lPD5St3YCLiBBpW/j7F1LnMs0OCxMmNEsldOJSOTS1uXNRHxMGfNsGhqNgo5+5CqrRuk
- dbYQ==
+ b=N3sW4DvV7OycXJq2RsFOY9m00Zj2ACyHwvT+nuo+mkhJA0ahixuklfN0d/DJ/oF0sE
+ EUdPm1KJVhNINO8e7sGjud5z7fLnztBnqoEu58eHTSQrexYUer6S4NuVhOVi2yIcC39S
+ zQsVin1z+jR2nAxqQYJ4cynQARguSZ3+8EkzNDzDsK0q5jZHmagNPZQPvRk9nX0EBqgm
+ 9t/2srjeILb9plmW25eFM82y4ozVXnNBV5EfvkESsJVYBV4GR8Hco/1L5SMQ9HRF8+PD
+ CcZUXIHaACLA3/oAEGZq3WemZ6HOweHgSPGVraEKB+oEcFnxC1ecBiG3Wzc40k9cNDwK
+ ilkg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=daO0yXKPBZz3BYw1XTIfJ1cQU3kkWirfCZRbL0ph5x4=;
- fh=d11xiVOTntHjjgyz92ufYP1N3q8PqY3FVACsApBp4bs=;
- b=KSkbt1On8QGuonDd96PSC5lIQkp59sCAAjTAh47aQj5paG9c8tcw59orMpexk5/AlR
- asZldRpjnzGPlHvWQm16lb/H/Ud+9t+a3R2cNUwR7Xg0ySD2yyujqmKGEKBHMB6c0rO1
- hljbxcrEFMrDFUA+igsKko+9tkk2+JcMfd3QQk+ufQTINmxlDcHVWRxuUJ60ot7Zt0A9
- cxPSy/GDHOu3QvZTo1s9IFyAmmA/eJUlju3kzogDViIiLtgmzsjCrB0X9oC52GENEHgL
- yCsDwbnvmq1AShwU0Jwu24tvX/IsPMRhP8KNFdSKIzm6r8n9d6Xvcr14rg39TMDmldGi
- Hw3A==; darn=nongnu.org
+ bh=jG4fP06KtCkVhnzP9ejS0PCQ44NXt8Tv98QfOTIYTE4=;
+ fh=izW4xJsNON+UEMozk+aaiSgENdHwQrivcdfNGXydCWE=;
+ b=FqdGj+X733D3UaNhQQDRKHX/l9T3fEswMRiphzS8Tzo6ZP01b6yzNsLXGnQPS4OtNp
+ hqnr8xc4DoA9eGfGUOo2+9tx8RJT0la/mI16ofJ0LvlRntvIfMO1oUOJJC2fmMHTFfbd
+ OctHPKO/pfPi6bRBIrWcWfcmiIc+tI9HbNsND8cCdSef/tXXRbzvv5FASkztoRzmzyS1
+ YvcWjC4xuzfqp2n7pnVOdJRIhRQKyi6wBPclNx75ruWhc98/0l+aXZFRWIeo8mAQHepI
+ eIJEnHusYHGordh4uEa6GhyXC+1E/grkytPjfxOUGPP7dG3I4NeWSUngNXkI5Me8lTWp
+ ko5A==; darn=nongnu.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1791040254; x=1791645054; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1791040599; x=1791645399; darn=nongnu.org;
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=daO0yXKPBZz3BYw1XTIfJ1cQU3kkWirfCZRbL0ph5x4=;
- b=UwCsl1WzGOLMN8g6DMCUij8FudlrugmSuCQS3QZEMO1T21QWqZiH6L8h7tIs641v3J
- 00RDKTbnNohvHkBJ7Hq7bslE1F+ZDJ3fi7UEbomh3hYXQ13d2zbsipMcfeV8oWd566qF
- 32Q0AXNlDe4fcuYLlN1/u+FfxiGXpBD3P0hHyJraxkf1i/TX2B71r8UmkhgOfSusKQex
- itlCRW+Mk4d2T7LQJGHzWWq2Bt2q2cSjxjAA34Cjhb6y4eZUP+Gmafg2eOBLCyX4N4CE
- BBaMeUJFvlgIiqAP6VhMBYPtdekDuyQOiq9lXD17CwX0OgxoT+xkzkNRHZR5NiieRWL4
- PhZA==
+ bh=jG4fP06KtCkVhnzP9ejS0PCQ44NXt8Tv98QfOTIYTE4=;
+ b=pYzo4kwU6bxyrO/tXOijI+9ZGFQcPmn7bwsBuAdihI9aAAqKQzak4u3LEl7AGT+z0n
+ AdKsWROpxITREUqky5tFsdIO+R1tBQALhK/XPpDXgpFrCq6w2Sw7E/zhnoYw73QylgXh
+ wSXMykqEKPke47scOCDQdQWm4OS3y1COG0RGDyKOPa/20byg1WhuF7uHabLrh4ilwagv
+ ZkbIkeBn+/CCgGAv4wS12mrvNzOe+4AGgGcgB3MNhhBwjb9unVP/yee7rRP4Zx0w91B0
+ NxW1/iMLNH5UVaoexAtgM1h3oS5E+PhFHmbUhx4hfIOf/0Frm1kvAAaNql3B0RQu97Di
+ j8/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1791040254; x=1791645054;
+ d=1e100.net; s=20260707; t=1791040599; x=1791645399;
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=daO0yXKPBZz3BYw1XTIfJ1cQU3kkWirfCZRbL0ph5x4=;
- b=OvPPfUEumoOKIwA4BTRM1BwkX+UAoBazm7A9Pbot2AL79cc0/b4kQiKMEEloWKcC8I
- B7LmQ9Bq8M7mMyUavWF0ZUg5Iov1HLohPn4t8HrD0EzFrjC25YTjct+dVwpK0hHwypu6
- Q41PNRx/YiXHlgetgAAe2KCz7pwcSn4ZaKJWv/oZGMgYfiKdBCLeVIL7VjsABRS1xRma
- XocBz8DX1Y1phmgmPx9S9uBna2MFgwSxb/o09P8shZ1tqmiP3Nad+PxeGU6Of9Wd/LLQ
- F6b8v5t/RohnGQMHWSsXykgH5hnbU4X91se+wbDFjBU66e8N9E1WeLsU9YDPAGjOn1jx
- pUjQ==
+ bh=jG4fP06KtCkVhnzP9ejS0PCQ44NXt8Tv98QfOTIYTE4=;
+ b=Ya3wTYgeYbTDNd4vtxzZw1tEuRZgkA8S6Z4txVdICKgMxBsaWSko8jq6rkl1uUbvZm
+ aNu64zCmo2+W+/9CF480bxXhMwQc8ttvWbWwGNbOlstJ+D43TjQ/0q0+/NVcGH01y7od
+ CAleadYZvo3IU2Xo8pFu8HzJfKEs/pwmFhgw/X9S0aobluR90TVSr+cKzvh+KG78PN+E
+ BeBMII3Y8FuLTJDABibsBNZx0/GZatD9JXdfMD6rX2ktn0OYZSTY/Fqsac+Yv5mzd1Ft
+ qP77RmIZfc/myF/blWeIAebspjPKIGk23rMh0KS1EOfY9Awo6a3Fqiy3n3c7LxPhMjkE
+ MlRQ==
 X-Forwarded-Encrypted: i=1;
- AKwUvByuoFOdK4yVUaG1G7Mveiw8ZRN61tOo7ptEDHnj1HbcthCzYPw8n6XmHtAPgtsLGSKxNKphS0TeiMWO@nongnu.org
-X-Gm-Message-State: AFq9FYJuYVzqFbGoRY9Rr1QQTjKxxaistXU7WqsQpzra39NxQW/QNq5w
- 8yVAI6caQlOPR7BKPv4tzrtrOp0R0oaWD5evqcnJEUJQVeohUwHnuZkXnEdaEgOx391IqoORqix
- hLRh4XvtmY4PmUFKeDlnhLBem8lppkos=
-X-Gm-Gg: AYBFou335tKgEljQIy7MMsdLVWKrPjyayJagiBVz2uXOPBbuO+D5ifEaqQ28/+UNxYN
- 1DqLBChk8kRsaR5Ie3V48iB0Ppie+5ZrUpizdnBwBITEh+zvQE5yv02qecsKlE7Z4sGxyHMpiGD
- fffQOyZYkUEwOCpupYZaXZcPYT3jPDxIKyEja+QcCR7gmqBdiAJyPH3J3u20rpfcvoBBAhJ6Lk0
- KTMkfeoNTcXNwQiou0pNcSccqQkwNe+dliByldpSIidF8RRi7XU/6kerjDh1xahviKXVBT8lDjH
- g9SDxyI+cdwFvLN+GmvqFROXYx+PPh1gIOdV+Y+Vw5F7QOpBjNOGvP9uJhSswfcdjxvJyNWQTdh
- ZWHBqs0KGgzJ5vQ==
-X-Received: by 2002:a05:690c:e1c9:10b0:872:1e2e:b4c5 with SMTP id
- 00721157ae682-8ae951f63c3mr6388517b3.18.1791040254091; Sat, 03 Oct 2026
- 08:10:54 -0700 (PDT)
+ AKwUvBzGn8fOlRisE2lu4YY2D12LNsh1YI8/O8kL9pLw50cLjnM0At1Wsmn43Or/gSgLl/Lc/vvonjG5r1lt@nongnu.org
+X-Gm-Message-State: AFq9FYJ5PWZ2xdat7SNWyMjLM1dNnPJuB212apZVcklGq9RkhYgO4/V3
+ qKQkVdfZN/TCMT4cPWdOn8iBQyf8fQdL4yZRazLBTC4g5etb6yzKNBUmku/CVUPJpKOYQXxx88I
+ MlhUKCOu1KS4sMGB5pK1iQsPgdWOzUaY=
+X-Gm-Gg: AYBFou3L2RfsoS2x2QalM6KeqT+dzJOjwZSMe6pEg3MEgitCYW2G90sEBvNGPysgLE7
+ 0pTAOjaQUALX4fPFPC+lUYiAdrSGT/P+mG1gnFwkMPZvDjuR507noFSjTgwSw9meHzdaLJVTTXC
+ OWyktHBJI1x3roh4+vVVwxKDBR+sS9j9EsbBeu8fIfk9ai8od+EJTGWExoEhHgl0amxqvxx+QWG
+ Z/hjaUoCXqNq+Pc18+GCdvrqw/Cie8Wy4ElzSYcsDrcNE/3vAecHUsZkddRQCAkpUoOYTwVH/Ea
+ pg0rk32pRXWJg70XQMbr5RPPorOKwqLPSEt9oVeECrs7t3A66eZw5xd2yUm4BqxoydtHPUKWlOD
+ HmyiZoeOdOUsy6y8=
+X-Received: by 2002:a05:690c:386:b0:8a7:d69f:3c31 with SMTP id
+ 00721157ae682-8ae39bbaa1cmr23747337b3.9.1791040598979; Sat, 03 Oct 2026
+ 08:16:38 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260904155758.3833179-1-bin.meng@processmission.com>
- <20260904155758.3833179-13-bin.meng@processmission.com>
- <20260930-attitude-dragging-9c89c9c27c5b@wendy>
-In-Reply-To: <20260930-attitude-dragging-9c89c9c27c5b@wendy>
+ <20260904155758.3833179-21-bin.meng@processmission.com>
+ <20260930-disparity-announcer-a6bc30a7084c@wendy>
+In-Reply-To: <20260930-disparity-announcer-a6bc30a7084c@wendy>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Sat, 3 Oct 2026 23:10:42 +0800
-X-Gm-Features: AclHuK-TkPdTZmamBpQVx-2klP8x7hqaeBtXqy3ZBQMHeqirYiAys6k_1EJoHd4
-Message-ID: <CAEUhbmWKQ0Hky_jMWV7W_BgsQ0TX-uu-O80+UjOnZE3y1EKd8g@mail.gmail.com>
-Subject: Re: [PATCH v2 12/24] hw/misc: pfsoc: Model PolarFire SoC serial
- number service
+Date: Sat, 3 Oct 2026 23:16:27 +0800
+X-Gm-Features: AclHuK_nMolFv8ZiMBiFcHxIAIwGGbH-0hM8MRlVFGGfzgv5fVD1BICvNqlNGbY
+Message-ID: <CAEUhbmXM_ZQSyRpjUmr83WBFLbasAQ410ybm=vR3TmpbP=4V0A@mail.gmail.com>
+Subject: Re: [PATCH v2 20/24] docs/system/riscv: Document Icicle Kit HSS boot
 To: Conor Dooley <conor.dooley@microchip.com>
 Cc: Bin Meng <bin.meng@processmission.com>, QEMU <qemu-devel@nongnu.org>, 
  Conor Dooley <conor@kernel.org>,
- Sebastian Huber <sebastian.huber@embedded-brains.de>, 
- qemu-riscv@nongnu.org
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, 
+ Sebastian Huber <sebastian.huber@embedded-brains.de>, qemu-riscv@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::112a;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yw1-x112a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:41::2b;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yx2-x2b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -127,341 +126,119 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 Hi Conor,
 
-On Wed, Sep 30, 2026 at 4:37=E2=80=AFPM Conor Dooley <conor.dooley@microchi=
+On Wed, Sep 30, 2026 at 6:17=E2=80=AFPM Conor Dooley <conor.dooley@microchi=
 p.com> wrote:
 >
-> On Fri, Sep 04, 2026 at 11:57:31PM +0800, Bin Meng wrote:
-> > U-Boot requests the PolarFire SoC device serial number during board
-> > late initialization. The IOSCB previously rejected every request, so
->
-> This is kinda crazy actually, we probably should change u-boot to not do
-> this since the reason for acquiring the serial number is populating the
-> mac address.
-> I guess it just never actually ever is problematic in hardware, but it
-> does seem a bit mad to reject boot over.
-
-Will prepare a U-Boot patch to correct this upstream.
-
->
-> > board setup could not complete.
+> On Fri, Sep 04, 2026 at 11:57:39PM +0800, Bin Meng wrote:
+> > With all previous changes, the Icicle Kit model is now able to boot
+> > HSS v2024.06 through a Buildroot 2026.05 SD image to U-Boot and Linux.
 > >
-> > Model the System Services control registers and byte-addressable
-> > mailbox. Obtain the 128-bit serial number from an optional device
-> > property, using a deterministic value when it is not configured.
-> > Return an explicit failure for unsupported services and reset the new
-> > runtime state with the rest of the device.
+> > Document the tested source versions and exact commands to build HSS
+> > and Buildroot. Include the sparse resize and GPT relocation steps
+> > needed to make the generated SD image usable by QEMU.
+> >
+> > Also describe the RAM and serial setup, boot stages, and remaining
+> > model limitations.
 > >
 > > Signed-off-by: Bin Meng <bin.meng@processmission.com>
 > > ---
 > >
 > > (no changes since v1)
 > >
-> >  include/hw/misc/mchp_pfsoc_ioscb.h |   6 ++
-> >  hw/misc/mchp_pfsoc_ioscb.c         | 141 +++++++++++++++++++++++++----
-> >  2 files changed, 130 insertions(+), 17 deletions(-)
+> >  docs/system/riscv/microchip-icicle-kit.rst | 101 +++++++++++++++++++--
+> >  1 file changed, 95 insertions(+), 6 deletions(-)
 > >
-> > diff --git a/include/hw/misc/mchp_pfsoc_ioscb.h b/include/hw/misc/mchp_=
-pfsoc_ioscb.h
-> > index 9687ea25b1..fd31427304 100644
-> > --- a/include/hw/misc/mchp_pfsoc_ioscb.h
-> > +++ b/include/hw/misc/mchp_pfsoc_ioscb.h
-> > @@ -25,6 +25,8 @@
+> > diff --git a/docs/system/riscv/microchip-icicle-kit.rst b/docs/system/r=
+iscv/microchip-icicle-kit.rst
+> > index 38352cc62b..eeb4ff938c 100644
+> > --- a/docs/system/riscv/microchip-icicle-kit.rst
+> > +++ b/docs/system/riscv/microchip-icicle-kit.rst
+> > @@ -19,12 +19,15 @@ The ``microchip-icicle-kit`` machine supports the f=
+ollowing devices:
+> >  * 4 U54 cores
+> >  * Core Level Interruptor (CLINT)
+> >  * Platform-Level Interrupt Controller (PLIC)
+> > -* L2 Loosely Integrated Memory (L2-LIM)
+> > +* Loosely Integrated Memory (L2-LIM)
+> > +* L2 cache controller (L2CC)
+> >  * DDR memory controller
+> > +* System controller and system services mailbox
+> >  * 5 MMUARTs
+> >  * 1 DMA controller
+> >  * 2 GEM Ethernet controllers
+> >  * 1 SDHC storage controller
+> > +* 1 Real-Time Clock
 > >
-> >  #include "hw/core/sysbus.h"
+> >  The machine has a fixed 2 GiB of RAM. Other memory sizes are rejected.
+> >  The machine always exposes all five harts. Other CPU counts are reject=
+ed.
+> > @@ -101,10 +104,96 @@ CAVEATS:
+> >  Running HSS
+> >  -----------
 > >
-> > +#define MCHP_PFSOC_IOSCB_MAILBOX_SIZE 0x1000
+> > -The machine ``microchip-icicle-kit`` used to run the Hart Software Ser=
+vices
+> > -(HSS_), however, the HSS development progressed and the QEMU machine
+> > -implementation lacks behind.  Currently, running the HSS no longer wor=
+ks.
+> > -There is missing support in the clock and memory controller devices.  =
+In
+> > -particular, reading from the SD card does not work.
+> > +The ``microchip-icicle-kit`` machine can boot the Hart Software Servic=
+es
+> > +(HSS_), which then loads an HSS payload containing U-Boot from an SD c=
+ard.
+> > +The following flow was tested with HSS v2024.06 and Buildroot 2026.05.
 > > +
-> >  typedef struct MchpPfSoCIoscbState {
-> >      SysBusDevice parent;
-> >      MemoryRegion container;
-> > @@ -47,6 +49,10 @@ typedef struct MchpPfSoCIoscbState {
-> >      MemoryRegion cfm_sgmii;
-> >      MemoryRegion bc_sgmii;
-> >      MemoryRegion io_calib_sgmii;
-> > +    uint32_t services_cr;
-> > +    uint32_t services_sr;
-> > +    uint8_t mailbox_data[MCHP_PFSOC_IOSCB_MAILBOX_SIZE];
-> > +    char *serial_number;
-> >      qemu_irq irq;
-> >  } MchpPfSoCIoscbState;
-> >
-> > diff --git a/hw/misc/mchp_pfsoc_ioscb.c b/hw/misc/mchp_pfsoc_ioscb.c
-> > index 09b702e520..7c82b55986 100644
-> > --- a/hw/misc/mchp_pfsoc_ioscb.c
-> > +++ b/hw/misc/mchp_pfsoc_ioscb.c
-> > @@ -25,6 +25,7 @@
-> >  #include "qemu/log.h"
-> >  #include "qapi/error.h"
-> >  #include "hw/core/irq.h"
-> > +#include "hw/core/qdev-properties.h"
-> >  #include "hw/core/sysbus.h"
-> >  #include "hw/misc/mchp_pfsoc_ioscb.h"
-> >
-> > @@ -37,6 +38,9 @@
-> >  #define IOSCB_CCC_REG_SIZE          0x2000000
-> >  #define IOSCB_CTRL_REG_SIZE         0x800
-> >  #define IOSCB_QSPIXIP_REG_SIZE      0x200
-> > +#define IOSCB_SERIAL_NUMBER_SIZE    16U
-> > +#define IOSCB_DEFAULT_SERIAL_NUMBER "0123456789abcdef"
-> > +#define IOSCB_PROP_SERIAL_NUMBER    "serial-number"
-> >
-> >
-> >  /*
-> > @@ -186,33 +190,71 @@ static const MemoryRegionOps mchp_pfsoc_io_calib_=
-ddr_ops =3D {
-> >      .endianness =3D DEVICE_LITTLE_ENDIAN,
-> >  };
-> >
-> > -#define SERVICES_CR             0x50
-> > -#define SERVICES_SR             0x54
-> > -#define SERVICES_STATUS_SHIFT   16
-> > +#define SERVICES_CR                         0x50
-> > +#define SERVICES_CR_REQUEST                 BIT(0)
-> > +#define SERVICES_CR_COMMAND_SHIFT           16
-> > +#define SERVICES_CR_COMMAND_WIDTH           8
+> > +Configure HSS for the ``mpfs-icicle-kit-es`` board using its default
+> > +configuration. QEMU provides the software-visible registers and determ=
+inistic
+> > +status consumed by the HSS v2024.06 DDR initialization and training fl=
+ow;
+> > +it does not model the electrical properties of DDR training. HSS requi=
+res
+> > +the RISC-V bare-metal toolchain supplied by Microchip SoftConsole to b=
+e
+> > +available in ``PATH``.  Build the tested HSS version with:
 >
-> This I think should actually be 7.
+> What's the reason that this is using 2024.06 by the way? Why not use the
+> most recent release of the HSS?
 
-Will fix in v3.
+This is because the Buildroot v2026.05 release's defconfig for Icicle
+Kit board refers to v2024.06 version of
+'microchip-hss-payload-generator' which is a tool from HSS, so I chose
+to use the same HSS source version to build the HSS to match the tools
+version.
 
 >
-> > +#define SERVICES_CR_COMMAND_MASK            \
-> > +        MAKE_64BIT_MASK(SERVICES_CR_COMMAND_SHIFT, SERVICES_CR_COMMAND=
-_WIDTH)
-> > +#define SERVICES_CR_MASK                    \
-> > +        (SERVICES_CR_REQUEST | SERVICES_CR_COMMAND_MASK)
-> > +#define SERVICES_SR                         0x54
-> > +#define SERVICES_SR_STATUS_SHIFT            16
-> > +#define SERVICES_COMMAND_SERIAL_NUMBER      0
-> > +#define SERVICES_STATUS_SUCCESS             0
-> > +#define SERVICES_STATUS_FAILED              1
-> > +#define SERVICES_MAILBOX_RESPONSE_OFFSET    0
 > > +
-> > +static void services_cr_write(MchpPfSoCIoscbState *s, uint32_t value)
-> > +{
-> > +    uint32_t command;
-> > +    uint32_t status =3D SERVICES_STATUS_FAILED;
+> > +.. code-block:: bash
 > > +
-> > +    if (device_is_in_reset(DEVICE(s)) ||
-> > +        !(value & SERVICES_CR_REQUEST)) {
-> > +        return;
-> > +    }
+> > +  $ git clone https://github.com/polarfire-soc/hart-software-services.=
+git
+> > +  $ cd hart-software-services
+> > +  $ git checkout v2024.06
+> > +  $ make BOARD=3Dmpfs-icicle-kit-es defconfig
+> > +  $ make -j$(nproc) BOARD=3Dmpfs-icicle-kit-es
 > > +
-> > +    /*
-> > +     * System services complete synchronously in this model, so clear =
-the
-> > +     * request bit before exposing the response to the guest.
-> > +     */
-> > +    s->services_cr &=3D ~SERVICES_CR_REQUEST;
+> > +The HSS build creates both the raw wrapper and an eNVM programming ima=
+ge.  QEMU
+> > +needs the complete eNVM image, including the 256-byte boot header adde=
+d by the
+> > +Microchip boot mode programmer. Convert the generated Intel HEX file t=
+o a raw
+> > +binary image, for example:
 > > +
-> > +    command =3D (value & SERVICES_CR_COMMAND_MASK) >>
-> > +              SERVICES_CR_COMMAND_SHIFT;
-> > +    if (command =3D=3D SERVICES_COMMAND_SERIAL_NUMBER) {
-> > +        /*
-> > +         * The serial-number service returns a 128-bit response starti=
-ng at
-> > +         * the beginning of the mailbox.
->
-> That's not actually strictly true, bits 15:7 of the command actually
-> determine the location in the mailbox. I'm not actually aware of any user=
-s
-> of this feature, Linux and U-Boot both leave this at 0, so it doesn't rea=
-lly
-> matter for functionality, but the comment is wrong.
-> See section 3 of the document in the comment you're removing below for
-> how this works.
-
-Will fix the comment in v3.
-
->
-> > +         */
-> > +        memset(&s->mailbox_data[SERVICES_MAILBOX_RESPONSE_OFFSET], 0,
-> > +               IOSCB_SERIAL_NUMBER_SIZE);
-> > +        memcpy(&s->mailbox_data[SERVICES_MAILBOX_RESPONSE_OFFSET],
-> > +               s->serial_number, strlen(s->serial_number));
-> > +        status =3D SERVICES_STATUS_SUCCESS;
-> > +    }
+> > +.. code-block:: bash
 > > +
-> > +    s->services_sr =3D status << SERVICES_SR_STATUS_SHIFT;
-> > +    qemu_irq_raise(s->irq);
-> > +}
-> >
-> >  static uint64_t mchp_pfsoc_ctrl_read(void *opaque, hwaddr offset,
-> >                                       unsigned size)
-> >  {
-> > -    uint32_t val =3D 0;
-> > +    MchpPfSoCIoscbState *s =3D opaque;
-> >
-> >      switch (offset) {
-> > +    case SERVICES_CR:
-> > +        return s->services_cr;
-> >      case SERVICES_SR:
-> > -        /*
-> > -         * Although some services have no error codes, most do. All se=
-rvices
-> > -         * that do implement errors, begin their error codes at 1. Tre=
-at all
-> > -         * service requests as failures & return 1.
-> > -         * See the "PolarFire=C2=AE FPGA and PolarFire SoC FPGA System=
- Services"
->                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^=
-^^^^
->
-> > -         * user guide for more information on service error codes.
-> > -         */
-> > -        val =3D 1u << SERVICES_STATUS_SHIFT;
-> > -        break;
-> > +        return s->services_sr;
-> >      default:
-> >          qemu_log_mask(LOG_UNIMP, "%s: unimplemented device read "
-> >                        "(size %d, offset 0x%" HWADDR_PRIx ")\n",
-> >                        __func__, size, offset);
-> > +        return 0;
-> >      }
-> > -
-> > -    return val;
-> >  }
-> >
-> >  static void mchp_pfsoc_ctrl_write(void *opaque, hwaddr offset,
-> > @@ -222,13 +264,17 @@ static void mchp_pfsoc_ctrl_write(void *opaque, h=
-waddr offset,
-> >
-> >      switch (offset) {
-> >      case SERVICES_CR:
-> > -        qemu_irq_raise(s->irq);
-> > +        s->services_cr =3D value & SERVICES_CR_MASK;
-> > +        services_cr_write(s, value);
-> > +        break;
-> > +    case SERVICES_SR:
-> >          break;
-> >      default:
-> >          qemu_log_mask(LOG_UNIMP, "%s: unimplemented device write "
-> >                        "(size %d, value 0x%" PRIx64
-> >                        ", offset 0x%" HWADDR_PRIx ")\n",
-> >                        __func__, size, value, offset);
-> > +        break;
-> >      }
-> >  }
-> >
-> > @@ -236,6 +282,55 @@ static const MemoryRegionOps mchp_pfsoc_ctrl_ops =
-=3D {
-> >      .read =3D mchp_pfsoc_ctrl_read,
-> >      .write =3D mchp_pfsoc_ctrl_write,
-> >      .endianness =3D DEVICE_LITTLE_ENDIAN,
-> > +    .valid =3D {
-> > +        .min_access_size =3D sizeof(uint32_t),
->
-> I'm not au fait enough with qemu to know, but does this mean that
-> accessing these registers with an 8 or 16 bit accessor will fail
-> somehow?
-> If so, that's not how the hardware behaves, and below...
-
-This was added during debugging. Checked the doc and found no clear
-clue about the access limitation. Testing showed that dropping these
-does not prevent the firmware from booting. Will drop this in v3.
-
->
-> > +        .max_access_size =3D sizeof(uint32_t),
-> > +    },
-> > +};
+> > +  $ riscv64-unknown-elf-objcopy -I ihex -O binary \
+> > +      build/hss-envm-wrapper.mpfs-icicle-kit-es.hex build/hss.bin
 > > +
-> > +/*
-> > + * The System Controller uses the mailbox as a byte-addressable shared=
- buffer
-> > + * for service command payloads and responses.
-> > + */
-> > +static uint64_t mchp_pfsoc_mailbox_read(void *opaque, hwaddr offset,
-> > +                                        unsigned size)
-> > +{
-> > +    MchpPfSoCIoscbState *s =3D opaque;
-> > +
-> > +    return ldn_le_p(&s->mailbox_data[offset], size);
-> > +}
-> > +
-> > +static void mchp_pfsoc_mailbox_write(void *opaque, hwaddr offset,
-> > +                                     uint64_t value, unsigned size)
-> > +{
-> > +    MchpPfSoCIoscbState *s =3D opaque;
-> > +
-> > +    stn_le_p(&s->mailbox_data[offset], size, value);
-> > +}
-> > +
-> > +static const MemoryRegionOps mchp_pfsoc_mailbox_ops =3D {
-> > +    .read =3D mchp_pfsoc_mailbox_read,
-> > +    .write =3D mchp_pfsoc_mailbox_write,
-> > +    .endianness =3D DEVICE_LITTLE_ENDIAN,
-> > +    .valid =3D {
-> > +        .min_access_size =3D sizeof(uint8_t),
->
-> ...you have the more expected 8.
->
-> > +        .max_access_size =3D sizeof(uint32_t),
-> > +    },
-> > +};
-> > +
-> > +static void mchp_pfsoc_ioscb_reset(DeviceState *dev)
-> > +{
-> > +    MchpPfSoCIoscbState *s =3D MCHP_PFSOC_IOSCB(dev);
-> > +
-> > +    s->services_cr =3D 0;
-> > +    s->services_sr =3D 0;
-> > +    memset(s->mailbox_data, 0, sizeof(s->mailbox_data));
-> > +    qemu_irq_lower(s->irq);
-> > +}
-> > +
-> > +static const Property mchp_pfsoc_ioscb_properties[] =3D {
-> > +    DEFINE_PROP_STRING(IOSCB_PROP_SERIAL_NUMBER,
-> > +                       MchpPfSoCIoscbState, serial_number),
-> >  };
-> >
-> >  static void mchp_pfsoc_ioscb_realize(DeviceState *dev, Error **errp)
-> > @@ -243,6 +338,16 @@ static void mchp_pfsoc_ioscb_realize(DeviceState *=
-dev, Error **errp)
-> >      MchpPfSoCIoscbState *s =3D MCHP_PFSOC_IOSCB(dev);
-> >      SysBusDevice *sbd =3D SYS_BUS_DEVICE(dev);
-> >
-> > +    /* Use a deterministic identity when no serial number is configure=
-d */
-> > +    if (!s->serial_number) {
-> > +        s->serial_number =3D g_strdup(IOSCB_DEFAULT_SERIAL_NUMBER);
-> > +    }
-> > +    if (strlen(s->serial_number) > IOSCB_SERIAL_NUMBER_SIZE) {
-> > +        error_setg(errp, "The serial number can't be longer than %u by=
-tes",
-> > +                   IOSCB_SERIAL_NUMBER_SIZE);
-> > +        return;
-> > +    }
-> > +
-> >      memory_region_init(&s->container, OBJECT(s),
-> >                         "mchp.pfsoc.ioscb", IOSCB_WHOLE_REG_SIZE);
-> >      sysbus_init_mmio(sbd, &s->container);
-> > @@ -265,7 +370,7 @@ static void mchp_pfsoc_ioscb_realize(DeviceState *d=
-ev, Error **errp)
-> >                            "mchp.pfsoc.ioscb.qspixip", IOSCB_QSPIXIP_RE=
-G_SIZE);
-> >      memory_region_add_subregion(&s->container, IOSCB_QSPIXIP_BASE, &s-=
->qspixip);
-> >
-> > -    memory_region_init_io(&s->mailbox, OBJECT(s), &mchp_pfsoc_dummy_op=
-s, s,
-> > +    memory_region_init_io(&s->mailbox, OBJECT(s), &mchp_pfsoc_mailbox_=
-ops, s,
-> >                            "mchp.pfsoc.ioscb.mailbox", IOSCB_SUBMOD_REG=
-_SIZE);
-> >      memory_region_add_subregion(&s->container, IOSCB_MAILBOX_BASE, &s-=
->mailbox);
-> >
-> > @@ -343,6 +448,8 @@ static void mchp_pfsoc_ioscb_class_init(ObjectClass=
- *klass, const void *data)
-> >
-> >      dc->desc =3D "Microchip PolarFire SoC IOSCB modules";
-> >      dc->realize =3D mchp_pfsoc_ioscb_realize;
-> > +    device_class_set_legacy_reset(dc, mchp_pfsoc_ioscb_reset);
-> > +    device_class_set_props(dc, mchp_pfsoc_ioscb_properties);
-> >  }
-> >
-> >  static const TypeInfo mchp_pfsoc_ioscb_info =3D {
-> > --
+> > +Do not pass ``build/hss-envm-wrapper.bin`` directly to QEMU. That file=
+ starts
+> > +at eNVM offset 0x100 and does not contain the boot header with the ima=
+ge size
+> > +and per-hart reset vectors.
 
 Regards,
 Bin
