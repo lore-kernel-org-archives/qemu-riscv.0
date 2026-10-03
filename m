@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C8F5CA5FED
-	for <qemu-riscv@archiver.kernel.org>; Sat,  3 Oct 2026 17:07:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06F2ACA5FED
+	for <qemu-riscv@archiver.kernel.org>; Sat,  3 Oct 2026 17:07:34 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xD3As-0000LB-3x; Sat, 03 Oct 2026 13:05:26 -0400
+	id 1xD3Bn-0002mH-Fq; Sat, 03 Oct 2026 13:06:24 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bin.meng@processmission.com>)
- id 1xD39M-0007JD-BC; Sat, 03 Oct 2026 13:03:57 -0400
+ id 1xD39K-0007J1-26; Sat, 03 Oct 2026 13:03:55 -0400
 Received: from mail-japaneastazlp170130007.outbound.protection.outlook.com
  ([2a01:111:f403:c405::7] helo=TYDPR03CU002.outbound.protection.outlook.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bin.meng@processmission.com>)
- id 1xD39K-0007Ds-Sy; Sat, 03 Oct 2026 13:03:52 -0400
+ id 1xD39H-0007Ds-3a; Sat, 03 Oct 2026 13:03:49 -0400
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=RiAZgdldMcS32RB6dwWX2wcyi+9ijDFuP3PwUksq/WeznXFTWGR+7baDxfRiteV0tYh/sx/sV776isOQ2+DB0r6rax2sZP5Pj3w/60BYMdZsI/A/lP+sQDxdj7+yK7X84z9dFxMq4JMbs1HJq0cDvD8Etfk5pxpJOQdQLnIXk+/Xw2ETXeKUGNjqmozeVTZDRFmOqzP7lPnwfaNQQcIeefU472RFZXMZR0afMPxvqS8WoXzb1c4a2HAcEy2x+vpVKJSIJhQQwQqeZgrKFpvGQZGxdkTYFw2pAd2zxcfXszVIyTGX4+cSCtBR0j6HLbOZGklEzJVzklLtLYbRv33KUA==
+ b=lQVfVQwHUlyWbZQ6rX+ChuPo0V/Wqg7JCr4hDilrOny9X6jewFqduAGL61jJjXkvHwDismM7maNN1GhezdYceYfT7mtohl2QJdpSAd7VimKXTtgSfBJRcntf47INB9GNKHXdxF3VVoR7+ANz1Yky6dEIqim8IcybcAYf0z6x8rN19W2iJP/F8wewfixfvINYk3pxOdCtduSAzxqudpDLQMw0qtZqSVoaRkIIk2LYcQQy816M/3970n6PWlmPNIwhGHfnKnRIkmg3XsVktIS4zJMqLCEuErx3p/FvmlYzMd1hGvJ58r57aBdtnaWSZ4JqtA1k1+0wLVDt6BIJ3N5pLw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=jhS/fFdjwqmRcQp0JDNHwkK4SiImM83ZLq1a+oQkVCg=;
- b=Y9dHS+w2Uppgqw+uVSpa7XNW6I66K7BBOCxPIzClWU1d2dxCRg4FhguMQschF/t+sVcN4msHv4cnZqHlh1oOajBFEp4M1Rw3qirkpqoCCUm+K0+nahPCl2pKeIPOTJP2u9D96gfGiy4VYGfIu0YmZet4flDDDQg7yYgQNypiKySUlbctCHshAT8hwH79TrneTuP20C/BEZLzToR1Xr8nJc4FQTxobtu5fxG92lO1kFYiQl+5foAj+KnqR8e/ERZOTRTtlEsx4cMOJHQit1H0X/RQQiRq4cpaiXNYmL3BeslghK4AnnMWwV6Uk7gllVyiyZMTM7RyquZOf2MTca7Qcw==
+ bh=KgTSjuotx5OAydQiFIgVXtnNwk9gtuVfKleNV4zPH1s=;
+ b=yR+/cUPrFnRVKB6o4c6F9IL1o31IN3a+2X1y613NQVzqt4NLGJp9qu33CyESYkB07uYhVHOApAaOifpXLvKgZ/z3RTmOYjmBcdvN9YnsVzmCzmL/I9VmixbNGEHbTieDs+0TF1Xm9NZqarPR7PSj4a2abl12J+zsMTn0KuiLkB7QRR5CiOdpSIsYr7CM6RAitTZSTOJGWAQeD6beGLeuZ/kaGtE9DPk+FD9XCtK78cNVB426CpAvyrLVl6iebeLGUPFMD9PEpba3KoYa2YCVqtIkZO1l/SSdVXJirL/ei3UYW6pIrgkJYGhyRryEAxTHZPtFWiDCXGR5gvcJJfBO6A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=processmission.com; dmarc=pass action=none
  header.from=processmission.com; dkim=pass header.d=processmission.com;
@@ -33,87 +33,98 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=processmission.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=jhS/fFdjwqmRcQp0JDNHwkK4SiImM83ZLq1a+oQkVCg=;
- b=qtVbU3eN321ma4EteI+/lfHrfxB6i9ywN6egFhjq3U3L1fhSt0cBb/P7nenjNlVgIUw0of6tef4444TvwnHPXP+X657kSipzjNxKXxAJRBEk1kEjMdTkT1+HaxdyLXWyNpTwIPb3+itt6OL8qT5jMqFOHIPxS6tjbKSTI7xsVte3Gcw9wT98bdeYqlYOoDqbjX8m37tRsNQz0IyCP82Fruf9NH5ND5hmUSmQGi3oQYGcn6Fe/CvhhbSh9wezuWugAJqDJiua6Hl659nCKl+YDGTvc2b2zW/xSf7yieR6bSMipKfU97rmY+1X9km3I7drqMvl7DcnOVSzyhrlme9oWg==
+ bh=KgTSjuotx5OAydQiFIgVXtnNwk9gtuVfKleNV4zPH1s=;
+ b=MLMMRfENCtFzObVE7LPuBofiVRv1OrqkkSadhxf4CS2HRmfUgqCoSEpb620O3XHgB+LuX84vwv4ziYSFAWDA/hpdtSAq+QvfwPnyyT51A9X7VuGo4+tuPFFqaj2+TgPZvmXQ/T3kk9TxYco4ITXUwl4TekkZqjGY9dl/gq3qL110pJWQ0FS9gXN/vJcf5osfwb8+6nvLT5lkeuVaX6YqnGPzyepI3uMLIbUOlSW4NkUVw2EGHiY8Ng9PrQl8ZtHABJ5n5LLWZb5dMZtNfga5zg/qC9VGJyUhZNjly2/QUt6v2xL+7fjGKe8OLILvVVgeega2do3TdzzBnOE6a+qDNw==
 Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=processmission.com;
 Received: from KL1PR02MB6257.apcprd02.prod.outlook.com (2603:1096:820:da::11)
  by TYZPR02MB6993.apcprd02.prod.outlook.com (2603:1096:405:29::11)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.472.20; Sat, 3 Oct
- 2026 17:03:43 +0000
+ 2026 17:03:40 +0000
 Received: from KL1PR02MB6257.apcprd02.prod.outlook.com
  ([fe80::ecf9:e832:8196:215]) by KL1PR02MB6257.apcprd02.prod.outlook.com
  ([fe80::ecf9:e832:8196:215%6]) with mapi id 15.21.0472.016; Sat, 3 Oct 2026
- 17:03:42 +0000
+ 17:03:40 +0000
 From: Bin Meng <bin.meng@processmission.com>
 To: QEMU <qemu-devel@nongnu.org>
 Cc: Conor Dooley <conor@kernel.org>,
  Sebastian Huber <sebastian.huber@embedded-brains.de>, qemu-riscv@nongnu.org
-Subject: [PATCH v3 18/27] hw/misc: pfsoc: Honor service notification requests
-Date: Sun,  4 Oct 2026 01:02:08 +0800
-Message-ID: <20261003170232.2450916-19-bin.meng@processmission.com>
+Subject: [PATCH v3 17/27] hw/misc: pfsoc: Model PolarFire SoC serial number
+ service
+Date: Sun,  4 Oct 2026 01:02:07 +0800
+Message-ID: <20261003170232.2450916-18-bin.meng@processmission.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20261003170232.2450916-1-bin.meng@processmission.com>
 References: <20261003170232.2450916-1-bin.meng@processmission.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 X-ClientProxiedBy: TY4P301CA0100.JPNP301.PROD.OUTLOOK.COM
  (2603:1096:405:37b::14) To KL1PR02MB6257.apcprd02.prod.outlook.com
  (2603:1096:820:da::11)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: KL1PR02MB6257:EE_|TYZPR02MB6993:EE_
-X-MS-Office365-Filtering-Correlation-Id: 93b77f93-af1a-42ab-204b-08df2170475f
+X-MS-Office365-Filtering-Correlation-Id: 7e118267-f1e0-423a-ed90-08df21704624
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|23010399003|366016|1800799024|376014|18002099003|22082099003|10067099003|56012099006;
-X-Microsoft-Antispam-Message-Info: P+wV2iRWH+aP7TSPLMSKifo05blcpphonio/H7ddJEefZHolvg6BP06NDpv9vYWJbX8EceY8EXbbu/3TzQaQBiI2BdS1KYfkQW1sUvZqxkowIC3cmgh8/tX9AkSM6Uxxscshr5nDe6+kJpH1w6ZJr1GpspXKYPOuTFtRsZaecxA89FdPlScNfa8boA+Xs/b03aL9hUv/h/ODv88l4k0uNDMvUVfKgk9BHiO+Yis3n84QBaEpijts+7wEHpPskkO3CfaXDVdjlBBnmdnYuglFswkWHH3sisuKu22DCR3mEPa3I9tA3RtLHj97YXdPWYMpnDwJO2JhnruDRy9GUJl/YiNe3YJYVS7d7li43VU9PQXqLj4EePwtn6mUhtCmsGdROseiD1DAeDCBPhFRW6GPaUrhFxIlUQw3d/NN1EblfU9tEbqDtc1tPeHpyWqraYi+WWhylGkMUKpnIV/Fo6ftz8pr8m6nFn1qVdo6CDLO/x2+evacGKkX/2pumdGUdeJWPbbJIk85uW6a733dVW1w/ccNR3kDCHfIDIuXAaYsiLTzAy+Rj9IOxZOeZlMR5tRHEB+hk2NNAAfAkJ1/7R1ihbY+0F9/WcNN+qvujU+uDXF6K0yAt3OXIcwqoRyMoyvY3RDmi0K1eOgSGQZ3VYyb+vadZnJhWF7i48gock7Dhs4=
+ ARA:13230040|23010399003|366016|1800799024|376014|18002099003|22082099003|6133799003|10067099003|260925022911599003|260925021911599003|260925021311599003|56012099006;
+X-Microsoft-Antispam-Message-Info: kVrFgZ7PHweLQbZ0kFkZJ6M46BeVkeJPvpjwk6P2lkxLp3JcKATLhfhME7mmU7KnpftsxlFYL2EeUeIJvwh4w1TO3B9fPvxvDQyFoW9tP9WIbZd52icpYBFjEkc9wXC1M6yES1IMHv2G0XAMGRI+Vm9fqPAP73ZjBLzAt0L2xTmhrx2Ge/sYPEQ7MrsuupCKUYKqwPAxhnP/VIu8Hz/LUmu8TxJFDKqNNadlQ/K09N71TbzjHlODiNQSyHKbaKXbwOgGTHYWqoWkHy0TmuuocRgBRIq2jfLvvEl0zK2muYNkktTItxB+TdyTI0WMN011wLGB0LI61XMksBhaSKbGEQ4TDQ/C1Y7pmrGwTxkdQ4YYurm9rgUDgAqUG8fJvfLjU6cPBV8Ax9KX7n7UTubQzX/IQ2EnMiDbwW+pX4LiFfkyWIOQBp7mn3SXKNMYJgaPt9+l7sB86Ckiy+/Kjh7Uj73Il8AoJLxayRdVDGEC/J0NSGONQoyhmWR7Ypuns8m7hLNPl7z0rwt+XERzomAcWu2T5iiODnmyPfeRaiOF35w73MoRRzqI6ikj93NDVjPlVVOqPj9DValuFzNpDK0x5JRXTC0C3r2IFWoBjlgrhAINKQKqhEjTH/ZEMpVHYXvu0cyzp3H86RftW5Trzg4tCjnSVG4kz/wJPoGz0oF1/T8=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:KL1PR02MB6257.apcprd02.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(23010399003)(366016)(1800799024)(376014)(18002099003)(22082099003)(10067099003)(56012099006);
+ SFS:(13230040)(23010399003)(366016)(1800799024)(376014)(18002099003)(22082099003)(6133799003)(10067099003)(260925022911599003)(260925021911599003)(260925021311599003)(56012099006);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?sfv2jUA/KmLneHUGy53iuqiCXIUbr5lqHtXPlNVkIvd3nCgv8vi8eUZlQxwv?=
- =?us-ascii?Q?hEkpn2VsKLazVCwVw8iqRk3p/36Lb8n8XaX+KkgzAWlAhIgVk83atTHwdCJw?=
- =?us-ascii?Q?oKOmAaWZFiSZ5nEKAQj3EhShNTZbhjknEYVlGeeGCVeH4RhfT8nKOlrCZEMa?=
- =?us-ascii?Q?plBAqa4wjFxM25Qo1dB9TMKekXT9c9qHy+2SGW0ulnwqI/Z1i83GVsv9Z+nK?=
- =?us-ascii?Q?fFwxYVQiGx/HHlpE/o1gXHOj+dGxCH1BGZbJfBvXdhmr3TlYOpTOpFkhFIpf?=
- =?us-ascii?Q?kXEvZ/15F/I44hcfa9IwxBxXLFmIQCSuqo6cYUBmyZOWkMx9IDIGa6F1Wa0T?=
- =?us-ascii?Q?W6V4Hz8tvkHtzL59l7f2u0akXylhWmaDyjAwrcVuuwpDwJEN7aRwYRHXk5tY?=
- =?us-ascii?Q?LkcaKK2gdn3GLl8RNtbIh6MIYnmyRPmr6WzKJaYL1qHcLw3die2H0YGKYis2?=
- =?us-ascii?Q?gbiVRULlDcHjM54vA5NDmuXKsKqSOy0I/uupbuy/irwbMvuYS5cad7S1elR8?=
- =?us-ascii?Q?snTlGs6X51hebDBPUbvVRe+UiLrC0l5s9/1GDnqlToUlcgFMrFKWYGNLqKbb?=
- =?us-ascii?Q?5gfKtK8xClosHy4o52Bm1nkSkIEiybWmCn550H1kp/p+oG8yTP24JicIJPb9?=
- =?us-ascii?Q?rRoQuScnXD3+KfAPF1GX/F5nDdzfYkRLCgkM000dOxl2UyWwLhyX3/deRz74?=
- =?us-ascii?Q?HwZLeCbsO75JEN4aFkzXl+1H6M+0XGcNOp/Notxw8ngic6cTwLjX35mlb08R?=
- =?us-ascii?Q?w0yt80g9hxIziW4ASdtG3Zv23pepzzDD3KrSDqcni/fAYlajtpD9uQmayzF5?=
- =?us-ascii?Q?BRBvruLS+hqUHSVBW9ZQ6gYbsMbPQljv1e+maglKaBFKTZWhH9f96efHtIjP?=
- =?us-ascii?Q?G4rxqRqZJDZPm+n8Ov+a31Moum5lPxzrX+uEYghwKBu4W6Eyg503pqbcaH6v?=
- =?us-ascii?Q?gOXfnRpsfZ4TV4JIGdHA1cxeab2KiEAlVxKuKrfHJyxP6RteBzhmLEFT6wPO?=
- =?us-ascii?Q?e2BhvzOP927jVDICawWLuoMFpRwLkY5qdg3d9mqH1A+Xp9SZtoX/jRFjDkhk?=
- =?us-ascii?Q?e3NnamhUZ56tnQ8YSMY0mQWgy25b/v1aUGDzH5SpX9sku5XKX7GlhUk+03oi?=
- =?us-ascii?Q?4UJ+x1eJP3qKpk+TalJ+V3e9X6vNogDZtJVrjS2Wzuf9hHqt3r3y1owTgakN?=
- =?us-ascii?Q?jX9+Mi7HbbmpGwRViJ299Vt1gDcozMVRYQX7jBOI096fOmOJZbPwcn0SzSiM?=
- =?us-ascii?Q?UDXZ/Yp4+aAIuyt2TKP8+7F2u2OuBYtWNwBUNTlzjS30rQqlDvIBedM4+UPQ?=
- =?us-ascii?Q?iR0HzmwYpNXv4hxp93Nm9Y0m8AUZRexerMitCamWorEnFmh2wOIrikhLbs5z?=
- =?us-ascii?Q?GAtTHbH7uXBKtVHGrT3SIuQDXSyrOmy/9u4cQsTH7KBdY9oQY4h0/lP337o5?=
- =?us-ascii?Q?EMj+3YbEclISZekgaT2yZpxEfBNiIm33vHyDTFox7a/Gz2tQWFC+aEcHpNeT?=
- =?us-ascii?Q?Ewu/YfqUmyfcr4+Cja5CmC2UIQHut22q23pc4Fm4hchVk2Kl69/LH2kWVmLS?=
- =?us-ascii?Q?WKNmw6i3TN+g7hxj7SZFJFWnpjfYXAOu5fGVmabWKPQ+tPO9Q6jDcydi9Jq/?=
- =?us-ascii?Q?8TVU+fFHkZON+XVkppCo1gcpsUXr3ZElOfwcdvQ3oN2hv8y8LZ28AdJNVUQ+?=
- =?us-ascii?Q?p4sGuirSUyWSm120Fe3cFQcrDCl0CuNwEjFR3+hmoZCHlmqAv/vW0/6dckRe?=
- =?us-ascii?Q?fS7bziKEN1UYkTRbYZghvBjlSURMcfw=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?UzVocG1UVTJ5c3p1TXFTc3BWVDlNb003eElCYll1d2ZmcFZZS1hXMUxWWDJw?=
+ =?utf-8?B?Y3FtRndRVGNpQlBld2lJZGRmTVhwaWJwcFlPTXdjYVlJMUthZkMyeFVEb2lo?=
+ =?utf-8?B?RWJoby91eHE4UW5UUSs1WjNBdGk0R1RJUEFPV004WFE3VkJucjhuT1gvWURX?=
+ =?utf-8?B?MkVjRGtHR3kvVU44L2JJNXlaL3NqeHk5bHltV1F6ZjZrUkdSelNMeXgzK2No?=
+ =?utf-8?B?czAyVnFsVzhERXpUSkJDVUlQdkYrbzBFNG51aVVSb1ROeUFaaWZ0MjVOV0dY?=
+ =?utf-8?B?eFdBWWJVVG5mM0VtUm8xN0EyNVk3MzZnSW1MR3VHVWYydGhuOE52N2ppc2Ez?=
+ =?utf-8?B?RDFaRWZTRmpHajJkalpNMUlGMzhYVWhNM1BOQW5LU1k3azVJOU51WG1KVEw1?=
+ =?utf-8?B?YTErNVVhamhLR0dWdGlkUzFjc0RZU3FRTzM3dFp4bHNwdGlDMEdJQy9hcHlP?=
+ =?utf-8?B?QlBCbzBLMkE1VVA3dUU3TTdnSUx6M0JFbWhNK3JPOWx3RHp3TWY4NGQzZzd6?=
+ =?utf-8?B?anRtSTBjdHJneW42NHVZZ2hxSnJrWTVEYUUrcnBvbWVzdFdNdThrc3p2YVIw?=
+ =?utf-8?B?NFN3ZGdqeElqa0szcE8zU2lQbnNZWWVNQ2E1NHA1Q3VZcG5vSkV6VTF4M0lG?=
+ =?utf-8?B?TWNQYUVnTlhoMXhhaXlPa1ZQL2tDR2FGV1RNMFJVN0EvQVg0N2ZwZ3FOT3pQ?=
+ =?utf-8?B?R2s0YlUzTGZSNy9pOHBWWmNnalNmdGM2OGF0Vm1INUUzRkZVeGdLWHVQTlZR?=
+ =?utf-8?B?YlplQS9nejlGdlFzT2xwc0ZlczNmSW1zTmVUL1p6U25IRzRaamhqdEJhbzl2?=
+ =?utf-8?B?d0ZTU1JpM3V0UWpWanEweFE5UXdreWdTRml1MjJhbTdnNzkzc3UvT3o4ZmNw?=
+ =?utf-8?B?RFhaTE8xTUl1SWF4Z2NhNmVONnpLeHVJTXhNaGlId1NPNzJ3bWR0RW9jMEIv?=
+ =?utf-8?B?TWZDL1dTYnF4Zjd4WjhnU3Z6OExLWU5PaXp0UXdtNU0waWI4VFZ2ZVM0Vk5i?=
+ =?utf-8?B?enhZWGVrVkJoSGpvOStzT0RWaU84bXVoSWE1aVVMZ0c5cldBK0dpUDFRM0pP?=
+ =?utf-8?B?ZWJlZ3lQQ2V2eThFYjVCUFV3bERMRlF6K21NVEd2SHNOalE3OWY0cXk0anZC?=
+ =?utf-8?B?cC9lSnNwY0dxZXVEbnNZZjVxdDAyS0xjS0xMaWlIUTBoN2RHM0hRUHdsbHFo?=
+ =?utf-8?B?L1VDRG96eXBGSEIvZ3E0T3NIaWd3QUFGcnBBTysrVHh2Ym5pTXUyVFVRTXMv?=
+ =?utf-8?B?RFJhNy9EZjFINDc4alpvbnQxVXNTbzlXdExmQmtJWkVDYWN3NU5YbmtseUdu?=
+ =?utf-8?B?OURRNVFmZktIVWZ3c3Y0SWEzU0IvRUlGOTAvOVNYRzBTeXM5ckRFdzVGd2RM?=
+ =?utf-8?B?Q0FnY2VJNEIvREYxK3J0UUNmUW81Sm93YWQ5ek1sd3IrNGZSdTVnTHYxeVhY?=
+ =?utf-8?B?Z3lmU2ROSklFUXBBSm5rUkxucThQRXZRVUZFOXVsM1NCUXBaeS9EV1UyUHkx?=
+ =?utf-8?B?NUlTNTlQVnVpRFp6TFRvK05LUHNrTkZhVkk4WThxck8zb0doQU0rZjhxNGN1?=
+ =?utf-8?B?RzNIVW9qSytuVEVSMzh3K05tUmtZK3NjUjVERFAzeWVmSENWUWhZcUZpdGhF?=
+ =?utf-8?B?RE1LN1UzNjBaZVBjODc5cDgxSW1XbjdCWUtVMkJtWlZ2bE9QU1laNDJZWmo3?=
+ =?utf-8?B?bnpVOEtIY3B1SU00TENIN0x4Skp3ZlV4OGg5ZUZLUHNGeHFlOEZIaEx3NzJJ?=
+ =?utf-8?B?NWNvNS9wTUFxNTFtaUZnR3dGRGpNdlhjQm9wOXFFZ0VTMTd2eGFhbmRMMGd0?=
+ =?utf-8?B?ZVlVT2hMNlc2MXVpYTNGbmVqZ0dTZEFFcUxjdlh2WE90RWR1ajM1dUFBcTF0?=
+ =?utf-8?B?Y1N3Q2VpK1BWYnRiRjlxWm5SeTZRQXJzbzJYVW52a0xVZG5Sa1hjQWxudjlF?=
+ =?utf-8?B?dVM2bGNmMzA1d0VleW1Cb1ZLRzJSRUE4K2FWUFQwSlpxT0l4bDkrNC9ablZs?=
+ =?utf-8?B?QWYxSUp6dnovWTV5VVl6OGRlSWFNNHZNcEpsRkErNUI2WGR2cGV3VVRlT2pt?=
+ =?utf-8?B?NEk4T3VWajQ5Y3dUc2pacHh3bVFxQ3ROTGhsNnppWWFWT3dodTd1SUJIRHNS?=
+ =?utf-8?B?ekFvU3hkVGp6bWRTL2pUQ3BzQWJpTm1xL2hudldOZC9TaGF2VjB6WGFCZVJX?=
+ =?utf-8?B?bHBQVnJrUVFJTlFqeHRPSXZBd3VNakhKY1ozcEVVdmc4V2VGaXlRMmxoeVkv?=
+ =?utf-8?B?QS9hN1lzdXBDSVNZM1FhblJQNmtWdFBSUm5pZDdwdUJTY1pSdWRNM0F6THo4?=
+ =?utf-8?B?c1lrcDlkOEZpbmZSR1dwYnYzLzhlVjlEcC96L25tQUtjMW4wRDVWbC9JSC95?=
+ =?utf-8?Q?NBeBz4/Vujwb0rQk=3D?=
 X-OriginatorOrg: processmission.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 93b77f93-af1a-42ab-204b-08df2170475f
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7e118267-f1e0-423a-ed90-08df21704624
 X-MS-Exchange-CrossTenant-AuthSource: KL1PR02MB6257.apcprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Oct 2026 17:03:42.9031 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Oct 2026 17:03:40.8011 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: e0544bf7-9765-4630-ab69-0b266dc2169c
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: BsLBLPym2//ZI9O/4S/IqxwergocOT7UWbHdEmx27HotwwUpEu1FqSfGVYc1YK6SJSKT544Y7icIDlLtonm1KUV5CjcP7PZ0h9X8czG1VXg=
+X-MS-Exchange-CrossTenant-UserPrincipalName: jAk61ymRCJOuvA5qpTL4pj8S4lz2D7RNEgPPa2Wm0P2TD86NPClEOAEScuWKCwYM6zN2JJMtr4aJNOCUjUvWNkPkZooR4TvdNpZxz/EUo0M=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYZPR02MB6993
 Received-SPF: pass client-ip=2a01:111:f403:c405::7;
  envelope-from=bin.meng@processmission.com;
@@ -140,41 +151,288 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Polling firmware requests system services with REQUEST set and NOTIFY
-clear. Raising PLIC source 96 for those requests leaves an interrupt
-pending that Linux can receive before submitting its first request.
-The mailbox interrupt handler then has no response buffer to fill.
+U-Boot requests the PolarFire SoC device serial number during board
+late initialization. The IOSCB previously rejected every request, so
+board setup could not complete.
 
-Raise the completion interrupt only for requests with NOTIFY set.
-The serial-number service already checks REQUEST before processing a
-command.
+Model the System Services control registers and byte-addressable
+mailbox. Obtain the 128-bit serial number from an optional device
+property, using a deterministic value when it is not configured.
+Return an explicit failure for unsupported services and reset the
+new runtime state with the rest of the device.
 
-Fixes: 592f0a9429b9 ("hw/{misc, riscv}: pfsoc: add system controller as unimplemented")
 Signed-off-by: Bin Meng <bin.meng@processmission.com>
 
 ---
 
 Changes in v3:
-- Split the NOTIFY fix from interrupt acknowledgement wiring
+- Decode the seven-bit opcode and nine-bit mailbox word offset
+- Bound serial-number responses to the documented 2 KiB mailbox
+- Mirror the current control flags in the status register
+- Use default access sizing for the control and mailbox windows
 
- hw/misc/mchp_pfsoc_ioscb.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ include/hw/misc/mchp_pfsoc_ioscb.h |   6 ++
+ hw/misc/mchp_pfsoc_ioscb.c         | 156 +++++++++++++++++++++++++----
+ 2 files changed, 144 insertions(+), 18 deletions(-)
 
+diff --git a/include/hw/misc/mchp_pfsoc_ioscb.h b/include/hw/misc/mchp_pfsoc_ioscb.h
+index 9687ea25b1..aa108d2d88 100644
+--- a/include/hw/misc/mchp_pfsoc_ioscb.h
++++ b/include/hw/misc/mchp_pfsoc_ioscb.h
+@@ -25,6 +25,8 @@
+ 
+ #include "hw/core/sysbus.h"
+ 
++#define MCHP_PFSOC_IOSCB_MAILBOX_SIZE 0x800
++
+ typedef struct MchpPfSoCIoscbState {
+     SysBusDevice parent;
+     MemoryRegion container;
+@@ -47,6 +49,10 @@ typedef struct MchpPfSoCIoscbState {
+     MemoryRegion cfm_sgmii;
+     MemoryRegion bc_sgmii;
+     MemoryRegion io_calib_sgmii;
++    uint32_t services_cr;
++    uint32_t services_sr;
++    uint8_t mailbox_data[MCHP_PFSOC_IOSCB_MAILBOX_SIZE];
++    char *serial_number;
+     qemu_irq irq;
+ } MchpPfSoCIoscbState;
+ 
 diff --git a/hw/misc/mchp_pfsoc_ioscb.c b/hw/misc/mchp_pfsoc_ioscb.c
-index 850125c8b4..bde1917c10 100644
+index 09b702e520..850125c8b4 100644
 --- a/hw/misc/mchp_pfsoc_ioscb.c
 +++ b/hw/misc/mchp_pfsoc_ioscb.c
-@@ -247,7 +247,9 @@ static void services_cr_write(MchpPfSoCIoscbState *s, uint32_t value)
-     }
+@@ -25,6 +25,7 @@
+ #include "qemu/log.h"
+ #include "qapi/error.h"
+ #include "hw/core/irq.h"
++#include "hw/core/qdev-properties.h"
+ #include "hw/core/sysbus.h"
+ #include "hw/misc/mchp_pfsoc_ioscb.h"
  
-     s->services_sr = status << SERVICES_SR_STATUS_SHIFT;
--    qemu_irq_raise(s->irq);
-+    if (value & SERVICES_CR_NOTIFY) {
-+        qemu_irq_raise(s->irq);
+@@ -37,6 +38,9 @@
+ #define IOSCB_CCC_REG_SIZE          0x2000000
+ #define IOSCB_CTRL_REG_SIZE         0x800
+ #define IOSCB_QSPIXIP_REG_SIZE      0x200
++#define IOSCB_SERIAL_NUMBER_SIZE    16U
++#define IOSCB_DEFAULT_SERIAL_NUMBER "0123456789abcdef"
++#define IOSCB_PROP_SERIAL_NUMBER    "serial-number"
+ 
+ 
+ /*
+@@ -186,33 +190,88 @@ static const MemoryRegionOps mchp_pfsoc_io_calib_ddr_ops = {
+     .endianness = DEVICE_LITTLE_ENDIAN,
+ };
+ 
+-#define SERVICES_CR             0x50
+-#define SERVICES_SR             0x54
+-#define SERVICES_STATUS_SHIFT   16
++#define SERVICES_CR                         0x50
++#define SERVICES_CR_REQUEST                 BIT(0)
++#define SERVICES_CR_NOTIFY                  BIT(3)
++#define SERVICES_CR_COMMAND_SHIFT           16
++#define SERVICES_CR_COMMAND_WIDTH           16
++#define SERVICES_CR_COMMAND_MASK            \
++        MAKE_64BIT_MASK(SERVICES_CR_COMMAND_SHIFT, SERVICES_CR_COMMAND_WIDTH)
++#define SERVICES_CR_MASK                    \
++        (SERVICES_CR_REQUEST | SERVICES_CR_NOTIFY | SERVICES_CR_COMMAND_MASK)
++#define SERVICES_SR                         0x54
++#define SERVICES_SR_CONTROL_MASK            0xf
++#define SERVICES_SR_STATUS_SHIFT            16
++#define SERVICES_COMMAND_SERIAL_NUMBER      0
++#define SERVICES_COMMAND_OPCODE_MASK        0x7f
++#define SERVICES_COMMAND_MAILBOX_SHIFT      7
++#define SERVICES_COMMAND_MAILBOX_MASK       0x1ff
++#define SERVICES_STATUS_SUCCESS             0
++#define SERVICES_STATUS_FAILED              1
++
++static void services_cr_write(MchpPfSoCIoscbState *s, uint32_t value)
++{
++    uint32_t command;
++    uint32_t opcode;
++    uint32_t response_offset;
++    uint32_t status = SERVICES_STATUS_FAILED;
++
++    if (device_is_in_reset(DEVICE(s)) ||
++        !(value & SERVICES_CR_REQUEST)) {
++        return;
 +    }
- }
++
++    /*
++     * System services complete synchronously in this model, so clear the
++     * request bit before exposing the response to the guest.
++     */
++    s->services_cr &= ~SERVICES_CR_REQUEST;
++
++    command = (value & SERVICES_CR_COMMAND_MASK) >>
++              SERVICES_CR_COMMAND_SHIFT;
++    opcode = command & SERVICES_COMMAND_OPCODE_MASK;
++    response_offset = ((command >> SERVICES_COMMAND_MAILBOX_SHIFT) &
++                       SERVICES_COMMAND_MAILBOX_MASK) * sizeof(uint32_t);
++    if (opcode == SERVICES_COMMAND_SERIAL_NUMBER &&
++        response_offset <= sizeof(s->mailbox_data) - IOSCB_SERIAL_NUMBER_SIZE) {
++        /*
++         * The descriptor contains a seven-bit opcode and a nine-bit mailbox
++         * word offset. Return the 128-bit serial number at that address.
++         * See section 3 of the PolarFire System Services User Guide.
++         */
++        memset(&s->mailbox_data[response_offset], 0,
++               IOSCB_SERIAL_NUMBER_SIZE);
++        memcpy(&s->mailbox_data[response_offset],
++               s->serial_number, strlen(s->serial_number));
++        status = SERVICES_STATUS_SUCCESS;
++    }
++
++    s->services_sr = status << SERVICES_SR_STATUS_SHIFT;
++    qemu_irq_raise(s->irq);
++}
  
  static uint64_t mchp_pfsoc_ctrl_read(void *opaque, hwaddr offset,
+                                      unsigned size)
+ {
+-    uint32_t val = 0;
++    MchpPfSoCIoscbState *s = opaque;
++    uint32_t value;
+ 
+-    switch (offset) {
++    switch (offset & ~3ULL) {
++    case SERVICES_CR:
++        value = s->services_cr;
++        break;
+     case SERVICES_SR:
+-        /*
+-         * Although some services have no error codes, most do. All services
+-         * that do implement errors, begin their error codes at 1. Treat all
+-         * service requests as failures & return 1.
+-         * See the "PolarFire® FPGA and PolarFire SoC FPGA System Services"
+-         * user guide for more information on service error codes.
+-         */
+-        val = 1u << SERVICES_STATUS_SHIFT;
++        value = s->services_sr |
++                (s->services_cr & SERVICES_SR_CONTROL_MASK);
+         break;
+     default:
+         qemu_log_mask(LOG_UNIMP, "%s: unimplemented device read "
+                       "(size %d, offset 0x%" HWADDR_PRIx ")\n",
+                       __func__, size, offset);
++        return 0;
+     }
+ 
+-    return val;
++    return extract32(value, (offset & 3) * 8, size * 8);
+ }
+ 
+ static void mchp_pfsoc_ctrl_write(void *opaque, hwaddr offset,
+@@ -220,15 +279,22 @@ static void mchp_pfsoc_ctrl_write(void *opaque, hwaddr offset,
+ {
+     MchpPfSoCIoscbState *s = opaque;
+ 
+-    switch (offset) {
++    switch (offset & ~3ULL) {
+     case SERVICES_CR:
+-        qemu_irq_raise(s->irq);
++        s->services_cr = deposit32(s->services_cr, (offset & 3) * 8,
++                                   size * 8, value) & SERVICES_CR_MASK;
++        if (offset == SERVICES_CR) {
++            services_cr_write(s, s->services_cr);
++        }
++        break;
++    case SERVICES_SR:
+         break;
+     default:
+         qemu_log_mask(LOG_UNIMP, "%s: unimplemented device write "
+                       "(size %d, value 0x%" PRIx64
+                       ", offset 0x%" HWADDR_PRIx ")\n",
+                       __func__, size, value, offset);
++        break;
+     }
+ }
+ 
+@@ -238,11 +304,62 @@ static const MemoryRegionOps mchp_pfsoc_ctrl_ops = {
+     .endianness = DEVICE_LITTLE_ENDIAN,
+ };
+ 
++/*
++ * The System Controller uses the mailbox as a byte-addressable shared buffer
++ * for service command payloads and responses.
++ */
++static uint64_t mchp_pfsoc_mailbox_read(void *opaque, hwaddr offset,
++                                        unsigned size)
++{
++    MchpPfSoCIoscbState *s = opaque;
++
++    return ldn_le_p(&s->mailbox_data[offset], size);
++}
++
++static void mchp_pfsoc_mailbox_write(void *opaque, hwaddr offset,
++                                     uint64_t value, unsigned size)
++{
++    MchpPfSoCIoscbState *s = opaque;
++
++    stn_le_p(&s->mailbox_data[offset], size, value);
++}
++
++static const MemoryRegionOps mchp_pfsoc_mailbox_ops = {
++    .read = mchp_pfsoc_mailbox_read,
++    .write = mchp_pfsoc_mailbox_write,
++    .endianness = DEVICE_LITTLE_ENDIAN,
++};
++
++static void mchp_pfsoc_ioscb_reset(DeviceState *dev)
++{
++    MchpPfSoCIoscbState *s = MCHP_PFSOC_IOSCB(dev);
++
++    s->services_cr = 0;
++    s->services_sr = 0;
++    memset(s->mailbox_data, 0, sizeof(s->mailbox_data));
++    qemu_irq_lower(s->irq);
++}
++
++static const Property mchp_pfsoc_ioscb_properties[] = {
++    DEFINE_PROP_STRING(IOSCB_PROP_SERIAL_NUMBER,
++                       MchpPfSoCIoscbState, serial_number),
++};
++
+ static void mchp_pfsoc_ioscb_realize(DeviceState *dev, Error **errp)
+ {
+     MchpPfSoCIoscbState *s = MCHP_PFSOC_IOSCB(dev);
+     SysBusDevice *sbd = SYS_BUS_DEVICE(dev);
+ 
++    /* Use a deterministic identity when no serial number is configured */
++    if (!s->serial_number) {
++        s->serial_number = g_strdup(IOSCB_DEFAULT_SERIAL_NUMBER);
++    }
++    if (strlen(s->serial_number) > IOSCB_SERIAL_NUMBER_SIZE) {
++        error_setg(errp, "The serial number can't be longer than %u bytes",
++                   IOSCB_SERIAL_NUMBER_SIZE);
++        return;
++    }
++
+     memory_region_init(&s->container, OBJECT(s),
+                        "mchp.pfsoc.ioscb", IOSCB_WHOLE_REG_SIZE);
+     sysbus_init_mmio(sbd, &s->container);
+@@ -265,8 +382,9 @@ static void mchp_pfsoc_ioscb_realize(DeviceState *dev, Error **errp)
+                           "mchp.pfsoc.ioscb.qspixip", IOSCB_QSPIXIP_REG_SIZE);
+     memory_region_add_subregion(&s->container, IOSCB_QSPIXIP_BASE, &s->qspixip);
+ 
+-    memory_region_init_io(&s->mailbox, OBJECT(s), &mchp_pfsoc_dummy_ops, s,
+-                          "mchp.pfsoc.ioscb.mailbox", IOSCB_SUBMOD_REG_SIZE);
++    memory_region_init_io(&s->mailbox, OBJECT(s), &mchp_pfsoc_mailbox_ops, s,
++                          "mchp.pfsoc.ioscb.mailbox",
++                          MCHP_PFSOC_IOSCB_MAILBOX_SIZE);
+     memory_region_add_subregion(&s->container, IOSCB_MAILBOX_BASE, &s->mailbox);
+ 
+     memory_region_init_io(&s->cfg, OBJECT(s), &mchp_pfsoc_dummy_ops, s,
+@@ -343,6 +461,8 @@ static void mchp_pfsoc_ioscb_class_init(ObjectClass *klass, const void *data)
+ 
+     dc->desc = "Microchip PolarFire SoC IOSCB modules";
+     dc->realize = mchp_pfsoc_ioscb_realize;
++    device_class_set_legacy_reset(dc, mchp_pfsoc_ioscb_reset);
++    device_class_set_props(dc, mchp_pfsoc_ioscb_properties);
+ }
+ 
+ static const TypeInfo mchp_pfsoc_ioscb_info = {
 -- 
 2.53.0
 
