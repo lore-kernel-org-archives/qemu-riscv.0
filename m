@@ -4,110 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FB0DCA5FDD
-	for <qemu-riscv@archiver.kernel.org>; Sat,  3 Oct 2026 15:12:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F9CACA5FDD
+	for <qemu-riscv@archiver.kernel.org>; Sat,  3 Oct 2026 15:12:31 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xD1OI-0006wL-SV; Sat, 03 Oct 2026 11:11:10 -0400
+	id 1xD1O7-0006ue-72; Sat, 03 Oct 2026 11:10:59 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1xD1OD-0006vZ-HC
- for qemu-riscv@nongnu.org; Sat, 03 Oct 2026 11:11:06 -0400
-Received: from mail-yw1-x112c.google.com ([2607:f8b0:4864:20::112c])
+ id 1xD1O5-0006uG-To
+ for qemu-riscv@nongnu.org; Sat, 03 Oct 2026 11:10:57 -0400
+Received: from mail-yw1-x112a.google.com ([2607:f8b0:4864:20::112a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1xD1OB-0002Rk-N2
- for qemu-riscv@nongnu.org; Sat, 03 Oct 2026 11:11:04 -0400
-Received: by mail-yw1-x112c.google.com with SMTP id
- 00721157ae682-8a08bb1eda2so3622287b3.2
- for <qemu-riscv@nongnu.org>; Sat, 03 Oct 2026 08:11:03 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1791040262; cv=none;
+ id 1xD1O3-0002Q9-H4
+ for qemu-riscv@nongnu.org; Sat, 03 Oct 2026 11:10:57 -0400
+Received: by mail-yw1-x112a.google.com with SMTP id
+ 00721157ae682-8ace0741488so3787637b3.3
+ for <qemu-riscv@nongnu.org>; Sat, 03 Oct 2026 08:10:55 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1791040254; cv=none;
  d=google.com; s=arc-20260327;
- b=PPvb2/KGs+P7zGGwpkE8r3hsY5B+oUrhK+Ll6H0y3Ip/KMlQaSwDhur38jj+b5rDZ2
- I7Uv7lDc2zrDTnkeqQ9Q6JAHsgU/XvDqYnnzaLPCN8+/eKrtQwVEueHEDdqirgsgYbxP
- pOJeQLgfa1wEZhSdsqqTk6kjDBHnCNsy1kUGpDiKchGgbLEz9evSSTQyIgIhJkRQHvsV
- bl5qBLaoA0F4g2WfDOks/Ix15LtvziGyQ75Gsane6hnO3qOWVyNx/xZBa8yDoV85ZCUc
- iTaHWDBUiHg0qq11XZfzIfMTBZFmYV+OKLrNTKky0W1ghHolrZ6OzHhh1XEHmad34kAE
- Buhw==
+ b=avWcm+y+sW0LtCX0WYb2XPk2Uw/k7z4GqkB92CgBoagyP6sinUrjmxMXGalcl3EdSR
+ yitGLDcWDYm2Q3W4E4BE8wqhtxvkLwk9FyoiCAueks2uWRmeAED72W1oVeSg+R+oU4VN
+ ffSDExEPXK/jljSq4b2Bv8nzUc2LyCTZCpsk88FuWQGgAaHksvira91q0ZHhLAShkb84
+ dPl9vwmfi78LzDa+kVYsf5rsC4o6bBL1edDAgJi0hIEG5aW0XA4yTvQLeC4Vymr3TcEx
+ lPD5St3YCLiBBpW/j7F1LnMs0OCxMmNEsldOJSOTS1uXNRHxMGfNsGhqNgo5+5CqrRuk
+ dbYQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=IXMLEeSvrR2sm51qEcoQbJwXKKauC9cXF71YJk1dZxU=;
- fh=WQ+rsz4dfxETIgp8BYnMvE6Og8Msr8VMk9z9CCFVc1Y=;
- b=hrPLm9XVYVLFztW9cxpyrvjoL5/w9t3FZK/h4Kcsxylgm49FHYdnAAWXw2PJ4fpD14
- YbjmkT8HSfKN2iTerRwH9jd9LdsVkkgygBLXZCJgjKYkXy1O8QrgLfBHE9QO/657FG1H
- S2rMvmJj3a4T1/EFVge7b0Zgi3V+PYEFh74CB67WH9fyegLiShNjXAbTPEAcvlZfs+U9
- 9Q7hlo8MDg6LyACpydJfWowDTif7saX5iVD2Qklxq341D1UBV5iKIf0bMT8bMNGJmrh5
- IRWvGgg35+TpFgfjMRYwcydvKsUXFEbjGtREkyASJU9zVzpZAN6SZnL86tRcLfRjLhV8
- +OEw==; darn=nongnu.org
+ bh=daO0yXKPBZz3BYw1XTIfJ1cQU3kkWirfCZRbL0ph5x4=;
+ fh=d11xiVOTntHjjgyz92ufYP1N3q8PqY3FVACsApBp4bs=;
+ b=KSkbt1On8QGuonDd96PSC5lIQkp59sCAAjTAh47aQj5paG9c8tcw59orMpexk5/AlR
+ asZldRpjnzGPlHvWQm16lb/H/Ud+9t+a3R2cNUwR7Xg0ySD2yyujqmKGEKBHMB6c0rO1
+ hljbxcrEFMrDFUA+igsKko+9tkk2+JcMfd3QQk+ufQTINmxlDcHVWRxuUJ60ot7Zt0A9
+ cxPSy/GDHOu3QvZTo1s9IFyAmmA/eJUlju3kzogDViIiLtgmzsjCrB0X9oC52GENEHgL
+ yCsDwbnvmq1AShwU0Jwu24tvX/IsPMRhP8KNFdSKIzm6r8n9d6Xvcr14rg39TMDmldGi
+ Hw3A==; darn=nongnu.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1791040262; x=1791645062; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1791040254; x=1791645054; darn=nongnu.org;
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=IXMLEeSvrR2sm51qEcoQbJwXKKauC9cXF71YJk1dZxU=;
- b=jen2syKAqDoxS774CExEd5P3MfrPn0tIeKZoxyFLqORreq5j0FE7D6+zDSOjqSjbm5
- s8rCuNkehMQR6r5Y9n/qABpLqunrFXO36CoCVbpP8mTa31NwRAsKaYrlt0S9WOnvSOVC
- QTxRV+rM3s2hE45S/sI84bopbbB5Me11+nBpAQO6srKx+JZyneaZIc+JUfauzWs00MOp
- 2vczeCKjT8wof3B2I+tpbkWzKYNBKdxpSbLcWWuJL8UD7JHX8L4v+Q0QQ1JqWfTB0gd/
- Rs7bSvfbp6LkYhYdqyJ1PU/n/pERpB2B50sWM+ghjdPRI62YcnnjfXJTB+ZzgMbyvFe3
- FgKg==
+ bh=daO0yXKPBZz3BYw1XTIfJ1cQU3kkWirfCZRbL0ph5x4=;
+ b=UwCsl1WzGOLMN8g6DMCUij8FudlrugmSuCQS3QZEMO1T21QWqZiH6L8h7tIs641v3J
+ 00RDKTbnNohvHkBJ7Hq7bslE1F+ZDJ3fi7UEbomh3hYXQ13d2zbsipMcfeV8oWd566qF
+ 32Q0AXNlDe4fcuYLlN1/u+FfxiGXpBD3P0hHyJraxkf1i/TX2B71r8UmkhgOfSusKQex
+ itlCRW+Mk4d2T7LQJGHzWWq2Bt2q2cSjxjAA34Cjhb6y4eZUP+Gmafg2eOBLCyX4N4CE
+ BBaMeUJFvlgIiqAP6VhMBYPtdekDuyQOiq9lXD17CwX0OgxoT+xkzkNRHZR5NiieRWL4
+ PhZA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1791040262; x=1791645062;
+ d=1e100.net; s=20260707; t=1791040254; x=1791645054;
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=IXMLEeSvrR2sm51qEcoQbJwXKKauC9cXF71YJk1dZxU=;
- b=wMqesDnLftYltFlbZS6LFDxff7YzkiWpkbDNzKnBiLXRraFfWd7oxqG4cLco9L7Oec
- M8qypzYMclcC6kcZjO4uulYUSUbIgjyXtaO3a+/b4pLDVzmI28cJIsiB/jZU3Z7iqeXU
- dRdF6W4+U2V8l2/9h6QQdlit3G5xaRQOV2aj/hsLlQGriMYOXcFUqfyny7lIYINsFEhE
- Fcnm1Kl1tMwZh7sH8+pbVZAt5ASD1NvUg7yNQgYrKAw7GiCaSBVFX9n10zBn58MELv8c
- g6b80afCNgJl1LUjmzY4BiRh6/FSyOs72n8hsfzk4g5RXLl5kPVYnY8tAt4PCNDy50Di
- 2ZHw==
+ bh=daO0yXKPBZz3BYw1XTIfJ1cQU3kkWirfCZRbL0ph5x4=;
+ b=OvPPfUEumoOKIwA4BTRM1BwkX+UAoBazm7A9Pbot2AL79cc0/b4kQiKMEEloWKcC8I
+ B7LmQ9Bq8M7mMyUavWF0ZUg5Iov1HLohPn4t8HrD0EzFrjC25YTjct+dVwpK0hHwypu6
+ Q41PNRx/YiXHlgetgAAe2KCz7pwcSn4ZaKJWv/oZGMgYfiKdBCLeVIL7VjsABRS1xRma
+ XocBz8DX1Y1phmgmPx9S9uBna2MFgwSxb/o09P8shZ1tqmiP3Nad+PxeGU6Of9Wd/LLQ
+ F6b8v5t/RohnGQMHWSsXykgH5hnbU4X91se+wbDFjBU66e8N9E1WeLsU9YDPAGjOn1jx
+ pUjQ==
 X-Forwarded-Encrypted: i=1;
- AKwUvBxKopxC88ZEdw/TIZHduP2KMF0BEYbZz7TPJGtR4Bh25//QCkatEAoxfazajn1lBOWq2A7RxOY5kz/T@nongnu.org
-X-Gm-Message-State: AFq9FYLx/gLbb6JWs8dS7rA2MJ2V6s2dENO2xEBstsKwmLeYH2NYfLBj
- te/7bO/SkllYRtTi/cPTbHOvbmcG/A0Hvfhlhyi+WKEv718bJLc4vJE3KFa3JQzmAtBIWo8jnKd
- hezI58DonmTVP6+M2dzZoeQ/QpY2PcVPbp6jb
-X-Gm-Gg: AYBFou2F3Dq2g+SLGlXkGWsLZ6/V5Zjf2mL+Bm3nLIJzrQNe/+vPC5IFMWb1XbimipK
- URypHAYn6spKMqFmUAHqkoCS8b0A2JUE4n2L5Gw/i4k7ZBOGaNMvAq4AWCr1xOJN4XLeX/IGDRb
- LLwHlHFuwecTvOzGChj46lqKpuf6d2uiUxxk5pJRU7pRI2L0WW4ovEjJvCFbsLE77N2uS9k1dCc
- nyB0aNSoZFn1DfSJLYm4KVHeuvhLBmQWIZ/nK7TklhwHgC/ZAyNbZDNb5FOQ2GPKu39NBQR6/kb
- sSO4Ar6COivy7Dyi02Zij5CGQonFxe3kk9e9CLPPkKO5kQ0wa6i526pOXLZCrcIA44ysBgSbttS
- f/qlyEoRphBOIWkA=
+ AKwUvByuoFOdK4yVUaG1G7Mveiw8ZRN61tOo7ptEDHnj1HbcthCzYPw8n6XmHtAPgtsLGSKxNKphS0TeiMWO@nongnu.org
+X-Gm-Message-State: AFq9FYJuYVzqFbGoRY9Rr1QQTjKxxaistXU7WqsQpzra39NxQW/QNq5w
+ 8yVAI6caQlOPR7BKPv4tzrtrOp0R0oaWD5evqcnJEUJQVeohUwHnuZkXnEdaEgOx391IqoORqix
+ hLRh4XvtmY4PmUFKeDlnhLBem8lppkos=
+X-Gm-Gg: AYBFou335tKgEljQIy7MMsdLVWKrPjyayJagiBVz2uXOPBbuO+D5ifEaqQ28/+UNxYN
+ 1DqLBChk8kRsaR5Ie3V48iB0Ppie+5ZrUpizdnBwBITEh+zvQE5yv02qecsKlE7Z4sGxyHMpiGD
+ fffQOyZYkUEwOCpupYZaXZcPYT3jPDxIKyEja+QcCR7gmqBdiAJyPH3J3u20rpfcvoBBAhJ6Lk0
+ KTMkfeoNTcXNwQiou0pNcSccqQkwNe+dliByldpSIidF8RRi7XU/6kerjDh1xahviKXVBT8lDjH
+ g9SDxyI+cdwFvLN+GmvqFROXYx+PPh1gIOdV+Y+Vw5F7QOpBjNOGvP9uJhSswfcdjxvJyNWQTdh
+ ZWHBqs0KGgzJ5vQ==
 X-Received: by 2002:a05:690c:e1c9:10b0:872:1e2e:b4c5 with SMTP id
- 00721157ae682-8ae951f63c3mr6389107b3.18.1791040262344; Sat, 03 Oct 2026
- 08:11:02 -0700 (PDT)
+ 00721157ae682-8ae951f63c3mr6388517b3.18.1791040254091; Sat, 03 Oct 2026
+ 08:10:54 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260904155758.3833179-1-bin.meng@processmission.com>
- <20260904155758.3833179-18-bin.meng@processmission.com>
- <20260930-bulgur-dab-28a151f39dc3@wendy>
-In-Reply-To: <20260930-bulgur-dab-28a151f39dc3@wendy>
+ <20260904155758.3833179-13-bin.meng@processmission.com>
+ <20260930-attitude-dragging-9c89c9c27c5b@wendy>
+In-Reply-To: <20260930-attitude-dragging-9c89c9c27c5b@wendy>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Sat, 3 Oct 2026 23:10:50 +0800
-X-Gm-Features: AclHuK9Suxe_RtofqfVpOKWmMH1eiLRatpfqk2q86BAr3GxraXi81gUg1hrJuXA
-Message-ID: <CAEUhbmUofH0+3ymRfoR2Var9X_L_zTr--CLYgWtn1L2p1MuwjA@mail.gmail.com>
-Subject: Re: [PATCH v2 17/24] hw/riscv: pfsoc: Correct PolarFire SoC DDR
- aliases
+Date: Sat, 3 Oct 2026 23:10:42 +0800
+X-Gm-Features: AclHuK-TkPdTZmamBpQVx-2klP8x7hqaeBtXqy3ZBQMHeqirYiAys6k_1EJoHd4
+Message-ID: <CAEUhbmWKQ0Hky_jMWV7W_BgsQ0TX-uu-O80+UjOnZE3y1EKd8g@mail.gmail.com>
+Subject: Re: [PATCH v2 12/24] hw/misc: pfsoc: Model PolarFire SoC serial
+ number service
 To: Conor Dooley <conor.dooley@microchip.com>
 Cc: Bin Meng <bin.meng@processmission.com>, QEMU <qemu-devel@nongnu.org>, 
- Chao Liu <chao.liu@processmission.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Conor Dooley <conor@kernel.org>, 
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>,
+ Conor Dooley <conor@kernel.org>,
  Sebastian Huber <sebastian.huber@embedded-brains.de>, 
- Weiwei Li <liwei1518@gmail.com>, qemu-riscv@nongnu.org
+ qemu-riscv@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::112c;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yw1-x112c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::112a;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yw1-x112a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -130,40 +125,343 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Sep 30, 2026 at 5:31=E2=80=AFPM Conor Dooley <conor.dooley@microchi=
+Hi Conor,
+
+On Wed, Sep 30, 2026 at 4:37=E2=80=AFPM Conor Dooley <conor.dooley@microchi=
 p.com> wrote:
 >
-> On Fri, Sep 04, 2026 at 11:57:36PM +0800, Bin Meng wrote:
-> > The 64-bit cached and non-cached windows alias the complete physical
-> > DDR from offset zero. Treating them as only the portion above 1 GiB
+> On Fri, Sep 04, 2026 at 11:57:31PM +0800, Bin Meng wrote:
+> > U-Boot requests the PolarFire SoC device serial number during board
+> > late initialization. The IOSCB previously rejected every request, so
 >
-> This is not strictly true, how these regions overlap depends on how the
-> FPGA itself is configured. In the past, the regions were set up
-> sequentially and someone may choose to set their device up that way if
-> they want to, provided they change their devicetree to match.
->
-> I think the change is worth making, but the commit doing so should cite
-> reality and explain that this aliasing is the case in the reference
-> designs provided by microchip, not present it as the whole truth.
->
-> Ditto for the comment.
+> This is kinda crazy actually, we probably should change u-boot to not do
+> this since the reason for acquiring the serial number is populating the
+> mac address.
+> I guess it just never actually ever is problematic in hardware, but it
+> does seem a bit mad to reject boot over.
 
-Will update the commit message and comment in v3.
+Will prepare a U-Boot patch to correct this upstream.
 
 >
-> > leaves valid Icicle Kit memory nodes unbacked with the board's 2 GiB.
+> > board setup could not complete.
 > >
-> > Map both high windows over the full machine RAM.
+> > Model the System Services control registers and byte-addressable
+> > mailbox. Obtain the 128-bit serial number from an optional device
+> > property, using a deterministic value when it is not configured.
+> > Return an explicit failure for unsupported services and reset the new
+> > runtime state with the rest of the device.
 > >
 > > Signed-off-by: Bin Meng <bin.meng@processmission.com>
-> > Reviewed-by: Chao Liu <chao.liu@processmission.com>
 > > ---
 > >
 > > (no changes since v1)
 > >
-> >  hw/riscv/microchip_pfsoc.c | 18 +++++++++++++++---
-> >  1 file changed, 15 insertions(+), 3 deletions(-)
+> >  include/hw/misc/mchp_pfsoc_ioscb.h |   6 ++
+> >  hw/misc/mchp_pfsoc_ioscb.c         | 141 +++++++++++++++++++++++++----
+> >  2 files changed, 130 insertions(+), 17 deletions(-)
 > >
+> > diff --git a/include/hw/misc/mchp_pfsoc_ioscb.h b/include/hw/misc/mchp_=
+pfsoc_ioscb.h
+> > index 9687ea25b1..fd31427304 100644
+> > --- a/include/hw/misc/mchp_pfsoc_ioscb.h
+> > +++ b/include/hw/misc/mchp_pfsoc_ioscb.h
+> > @@ -25,6 +25,8 @@
+> >
+> >  #include "hw/core/sysbus.h"
+> >
+> > +#define MCHP_PFSOC_IOSCB_MAILBOX_SIZE 0x1000
+> > +
+> >  typedef struct MchpPfSoCIoscbState {
+> >      SysBusDevice parent;
+> >      MemoryRegion container;
+> > @@ -47,6 +49,10 @@ typedef struct MchpPfSoCIoscbState {
+> >      MemoryRegion cfm_sgmii;
+> >      MemoryRegion bc_sgmii;
+> >      MemoryRegion io_calib_sgmii;
+> > +    uint32_t services_cr;
+> > +    uint32_t services_sr;
+> > +    uint8_t mailbox_data[MCHP_PFSOC_IOSCB_MAILBOX_SIZE];
+> > +    char *serial_number;
+> >      qemu_irq irq;
+> >  } MchpPfSoCIoscbState;
+> >
+> > diff --git a/hw/misc/mchp_pfsoc_ioscb.c b/hw/misc/mchp_pfsoc_ioscb.c
+> > index 09b702e520..7c82b55986 100644
+> > --- a/hw/misc/mchp_pfsoc_ioscb.c
+> > +++ b/hw/misc/mchp_pfsoc_ioscb.c
+> > @@ -25,6 +25,7 @@
+> >  #include "qemu/log.h"
+> >  #include "qapi/error.h"
+> >  #include "hw/core/irq.h"
+> > +#include "hw/core/qdev-properties.h"
+> >  #include "hw/core/sysbus.h"
+> >  #include "hw/misc/mchp_pfsoc_ioscb.h"
+> >
+> > @@ -37,6 +38,9 @@
+> >  #define IOSCB_CCC_REG_SIZE          0x2000000
+> >  #define IOSCB_CTRL_REG_SIZE         0x800
+> >  #define IOSCB_QSPIXIP_REG_SIZE      0x200
+> > +#define IOSCB_SERIAL_NUMBER_SIZE    16U
+> > +#define IOSCB_DEFAULT_SERIAL_NUMBER "0123456789abcdef"
+> > +#define IOSCB_PROP_SERIAL_NUMBER    "serial-number"
+> >
+> >
+> >  /*
+> > @@ -186,33 +190,71 @@ static const MemoryRegionOps mchp_pfsoc_io_calib_=
+ddr_ops =3D {
+> >      .endianness =3D DEVICE_LITTLE_ENDIAN,
+> >  };
+> >
+> > -#define SERVICES_CR             0x50
+> > -#define SERVICES_SR             0x54
+> > -#define SERVICES_STATUS_SHIFT   16
+> > +#define SERVICES_CR                         0x50
+> > +#define SERVICES_CR_REQUEST                 BIT(0)
+> > +#define SERVICES_CR_COMMAND_SHIFT           16
+> > +#define SERVICES_CR_COMMAND_WIDTH           8
+>
+> This I think should actually be 7.
+
+Will fix in v3.
+
+>
+> > +#define SERVICES_CR_COMMAND_MASK            \
+> > +        MAKE_64BIT_MASK(SERVICES_CR_COMMAND_SHIFT, SERVICES_CR_COMMAND=
+_WIDTH)
+> > +#define SERVICES_CR_MASK                    \
+> > +        (SERVICES_CR_REQUEST | SERVICES_CR_COMMAND_MASK)
+> > +#define SERVICES_SR                         0x54
+> > +#define SERVICES_SR_STATUS_SHIFT            16
+> > +#define SERVICES_COMMAND_SERIAL_NUMBER      0
+> > +#define SERVICES_STATUS_SUCCESS             0
+> > +#define SERVICES_STATUS_FAILED              1
+> > +#define SERVICES_MAILBOX_RESPONSE_OFFSET    0
+> > +
+> > +static void services_cr_write(MchpPfSoCIoscbState *s, uint32_t value)
+> > +{
+> > +    uint32_t command;
+> > +    uint32_t status =3D SERVICES_STATUS_FAILED;
+> > +
+> > +    if (device_is_in_reset(DEVICE(s)) ||
+> > +        !(value & SERVICES_CR_REQUEST)) {
+> > +        return;
+> > +    }
+> > +
+> > +    /*
+> > +     * System services complete synchronously in this model, so clear =
+the
+> > +     * request bit before exposing the response to the guest.
+> > +     */
+> > +    s->services_cr &=3D ~SERVICES_CR_REQUEST;
+> > +
+> > +    command =3D (value & SERVICES_CR_COMMAND_MASK) >>
+> > +              SERVICES_CR_COMMAND_SHIFT;
+> > +    if (command =3D=3D SERVICES_COMMAND_SERIAL_NUMBER) {
+> > +        /*
+> > +         * The serial-number service returns a 128-bit response starti=
+ng at
+> > +         * the beginning of the mailbox.
+>
+> That's not actually strictly true, bits 15:7 of the command actually
+> determine the location in the mailbox. I'm not actually aware of any user=
+s
+> of this feature, Linux and U-Boot both leave this at 0, so it doesn't rea=
+lly
+> matter for functionality, but the comment is wrong.
+> See section 3 of the document in the comment you're removing below for
+> how this works.
+
+Will fix the comment in v3.
+
+>
+> > +         */
+> > +        memset(&s->mailbox_data[SERVICES_MAILBOX_RESPONSE_OFFSET], 0,
+> > +               IOSCB_SERIAL_NUMBER_SIZE);
+> > +        memcpy(&s->mailbox_data[SERVICES_MAILBOX_RESPONSE_OFFSET],
+> > +               s->serial_number, strlen(s->serial_number));
+> > +        status =3D SERVICES_STATUS_SUCCESS;
+> > +    }
+> > +
+> > +    s->services_sr =3D status << SERVICES_SR_STATUS_SHIFT;
+> > +    qemu_irq_raise(s->irq);
+> > +}
+> >
+> >  static uint64_t mchp_pfsoc_ctrl_read(void *opaque, hwaddr offset,
+> >                                       unsigned size)
+> >  {
+> > -    uint32_t val =3D 0;
+> > +    MchpPfSoCIoscbState *s =3D opaque;
+> >
+> >      switch (offset) {
+> > +    case SERVICES_CR:
+> > +        return s->services_cr;
+> >      case SERVICES_SR:
+> > -        /*
+> > -         * Although some services have no error codes, most do. All se=
+rvices
+> > -         * that do implement errors, begin their error codes at 1. Tre=
+at all
+> > -         * service requests as failures & return 1.
+> > -         * See the "PolarFire=C2=AE FPGA and PolarFire SoC FPGA System=
+ Services"
+>                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^=
+^^^^
+>
+> > -         * user guide for more information on service error codes.
+> > -         */
+> > -        val =3D 1u << SERVICES_STATUS_SHIFT;
+> > -        break;
+> > +        return s->services_sr;
+> >      default:
+> >          qemu_log_mask(LOG_UNIMP, "%s: unimplemented device read "
+> >                        "(size %d, offset 0x%" HWADDR_PRIx ")\n",
+> >                        __func__, size, offset);
+> > +        return 0;
+> >      }
+> > -
+> > -    return val;
+> >  }
+> >
+> >  static void mchp_pfsoc_ctrl_write(void *opaque, hwaddr offset,
+> > @@ -222,13 +264,17 @@ static void mchp_pfsoc_ctrl_write(void *opaque, h=
+waddr offset,
+> >
+> >      switch (offset) {
+> >      case SERVICES_CR:
+> > -        qemu_irq_raise(s->irq);
+> > +        s->services_cr =3D value & SERVICES_CR_MASK;
+> > +        services_cr_write(s, value);
+> > +        break;
+> > +    case SERVICES_SR:
+> >          break;
+> >      default:
+> >          qemu_log_mask(LOG_UNIMP, "%s: unimplemented device write "
+> >                        "(size %d, value 0x%" PRIx64
+> >                        ", offset 0x%" HWADDR_PRIx ")\n",
+> >                        __func__, size, value, offset);
+> > +        break;
+> >      }
+> >  }
+> >
+> > @@ -236,6 +282,55 @@ static const MemoryRegionOps mchp_pfsoc_ctrl_ops =
+=3D {
+> >      .read =3D mchp_pfsoc_ctrl_read,
+> >      .write =3D mchp_pfsoc_ctrl_write,
+> >      .endianness =3D DEVICE_LITTLE_ENDIAN,
+> > +    .valid =3D {
+> > +        .min_access_size =3D sizeof(uint32_t),
+>
+> I'm not au fait enough with qemu to know, but does this mean that
+> accessing these registers with an 8 or 16 bit accessor will fail
+> somehow?
+> If so, that's not how the hardware behaves, and below...
+
+This was added during debugging. Checked the doc and found no clear
+clue about the access limitation. Testing showed that dropping these
+does not prevent the firmware from booting. Will drop this in v3.
+
+>
+> > +        .max_access_size =3D sizeof(uint32_t),
+> > +    },
+> > +};
+> > +
+> > +/*
+> > + * The System Controller uses the mailbox as a byte-addressable shared=
+ buffer
+> > + * for service command payloads and responses.
+> > + */
+> > +static uint64_t mchp_pfsoc_mailbox_read(void *opaque, hwaddr offset,
+> > +                                        unsigned size)
+> > +{
+> > +    MchpPfSoCIoscbState *s =3D opaque;
+> > +
+> > +    return ldn_le_p(&s->mailbox_data[offset], size);
+> > +}
+> > +
+> > +static void mchp_pfsoc_mailbox_write(void *opaque, hwaddr offset,
+> > +                                     uint64_t value, unsigned size)
+> > +{
+> > +    MchpPfSoCIoscbState *s =3D opaque;
+> > +
+> > +    stn_le_p(&s->mailbox_data[offset], size, value);
+> > +}
+> > +
+> > +static const MemoryRegionOps mchp_pfsoc_mailbox_ops =3D {
+> > +    .read =3D mchp_pfsoc_mailbox_read,
+> > +    .write =3D mchp_pfsoc_mailbox_write,
+> > +    .endianness =3D DEVICE_LITTLE_ENDIAN,
+> > +    .valid =3D {
+> > +        .min_access_size =3D sizeof(uint8_t),
+>
+> ...you have the more expected 8.
+>
+> > +        .max_access_size =3D sizeof(uint32_t),
+> > +    },
+> > +};
+> > +
+> > +static void mchp_pfsoc_ioscb_reset(DeviceState *dev)
+> > +{
+> > +    MchpPfSoCIoscbState *s =3D MCHP_PFSOC_IOSCB(dev);
+> > +
+> > +    s->services_cr =3D 0;
+> > +    s->services_sr =3D 0;
+> > +    memset(s->mailbox_data, 0, sizeof(s->mailbox_data));
+> > +    qemu_irq_lower(s->irq);
+> > +}
+> > +
+> > +static const Property mchp_pfsoc_ioscb_properties[] =3D {
+> > +    DEFINE_PROP_STRING(IOSCB_PROP_SERIAL_NUMBER,
+> > +                       MchpPfSoCIoscbState, serial_number),
+> >  };
+> >
+> >  static void mchp_pfsoc_ioscb_realize(DeviceState *dev, Error **errp)
+> > @@ -243,6 +338,16 @@ static void mchp_pfsoc_ioscb_realize(DeviceState *=
+dev, Error **errp)
+> >      MchpPfSoCIoscbState *s =3D MCHP_PFSOC_IOSCB(dev);
+> >      SysBusDevice *sbd =3D SYS_BUS_DEVICE(dev);
+> >
+> > +    /* Use a deterministic identity when no serial number is configure=
+d */
+> > +    if (!s->serial_number) {
+> > +        s->serial_number =3D g_strdup(IOSCB_DEFAULT_SERIAL_NUMBER);
+> > +    }
+> > +    if (strlen(s->serial_number) > IOSCB_SERIAL_NUMBER_SIZE) {
+> > +        error_setg(errp, "The serial number can't be longer than %u by=
+tes",
+> > +                   IOSCB_SERIAL_NUMBER_SIZE);
+> > +        return;
+> > +    }
+> > +
+> >      memory_region_init(&s->container, OBJECT(s),
+> >                         "mchp.pfsoc.ioscb", IOSCB_WHOLE_REG_SIZE);
+> >      sysbus_init_mmio(sbd, &s->container);
+> > @@ -265,7 +370,7 @@ static void mchp_pfsoc_ioscb_realize(DeviceState *d=
+ev, Error **errp)
+> >                            "mchp.pfsoc.ioscb.qspixip", IOSCB_QSPIXIP_RE=
+G_SIZE);
+> >      memory_region_add_subregion(&s->container, IOSCB_QSPIXIP_BASE, &s-=
+>qspixip);
+> >
+> > -    memory_region_init_io(&s->mailbox, OBJECT(s), &mchp_pfsoc_dummy_op=
+s, s,
+> > +    memory_region_init_io(&s->mailbox, OBJECT(s), &mchp_pfsoc_mailbox_=
+ops, s,
+> >                            "mchp.pfsoc.ioscb.mailbox", IOSCB_SUBMOD_REG=
+_SIZE);
+> >      memory_region_add_subregion(&s->container, IOSCB_MAILBOX_BASE, &s-=
+>mailbox);
+> >
+> > @@ -343,6 +448,8 @@ static void mchp_pfsoc_ioscb_class_init(ObjectClass=
+ *klass, const void *data)
+> >
+> >      dc->desc =3D "Microchip PolarFire SoC IOSCB modules";
+> >      dc->realize =3D mchp_pfsoc_ioscb_realize;
+> > +    device_class_set_legacy_reset(dc, mchp_pfsoc_ioscb_reset);
+> > +    device_class_set_props(dc, mchp_pfsoc_ioscb_properties);
+> >  }
+> >
+> >  static const TypeInfo mchp_pfsoc_ioscb_info =3D {
+> > --
 
 Regards,
 Bin
