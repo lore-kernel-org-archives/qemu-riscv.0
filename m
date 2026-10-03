@@ -4,109 +4,115 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B68FCA5FDD
-	for <qemu-riscv@archiver.kernel.org>; Fri,  2 Oct 2026 18:08:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F38D6CA5FEC
+	for <qemu-riscv@archiver.kernel.org>; Sat,  3 Oct 2026 15:11:08 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xChg0-0002oM-PI; Fri, 02 Oct 2026 14:08:09 -0400
+	id 1xD1Np-0006sV-7r; Sat, 03 Oct 2026 11:10:41 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xChfK-0002Cf-IV
- for qemu-riscv@nongnu.org; Fri, 02 Oct 2026 14:07:36 -0400
-Received: from mail-ed2-x0c.google.com ([2a00:1450:4864:33::c])
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1xD1Nl-0006s2-0I
+ for qemu-riscv@nongnu.org; Sat, 03 Oct 2026 11:10:37 -0400
+Received: from mail-yx2-x2a.google.com ([2607:f8b0:4864:41::2a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xChfI-00015Y-Hw
- for qemu-riscv@nongnu.org; Fri, 02 Oct 2026 14:07:26 -0400
-Received: by mail-ed2-x0c.google.com with SMTP id
- 4fb4d7f45d1cf-6acb88abebdso282478a12.1
- for <qemu-riscv@nongnu.org>; Fri, 02 Oct 2026 11:07:24 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1790964443; cv=none;
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1xD1Ni-0002MR-MG
+ for qemu-riscv@nongnu.org; Sat, 03 Oct 2026 11:10:36 -0400
+Received: by mail-yx2-x2a.google.com with SMTP id
+ 956f58d0204a3-675617094f5so253293d50.1
+ for <qemu-riscv@nongnu.org>; Sat, 03 Oct 2026 08:10:32 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1791040231; cv=none;
  d=google.com; s=arc-20260327;
- b=WOK2JMPVbnFKfkFQfi38rSi/0nY8/daEbji1ndSJm6rRt0EhE7Ix+dGE1meS0U0CQz
- Eew4GCcwH6C3BcHlLxjGM+3jJlwZ8BsQXQh12gkXGYgRPUCXwmb5EFB325lYxNQTiNBE
- Yyz3GG8h1rIfGQtQub5nUVCHd9m/WCYQ7yPhTDnj87EsAwXUQApyKygFSydXjUrwvGiZ
- p0czIOXCOoJuqUj/8nlNI5fsmooKAB1jgAafceHLc0TlDArrk+QtGqQz0MioEel+CiuD
- 2VHEzGGaqfSEmkpv49fL1ZWFprkCp63a5jdU484udtv3UFbnzUGdtVQXt8Olq9WsOrZi
- FT6A==
+ b=r6BufG5LjSq7YnAOeOnnV4yDVBkDyy1s73ZF8oTx/TWxUEIX6CyxLGzY2BSFcWoMm+
+ GGZUJBveZaL/9PyYnojNc6ZsCt77IgjQZY7KnQVhwvXcyAZRzrd6wnKM91dd8IeZegHy
+ 6ZMVp4PAjyqhM9w5rUFfsQbl8tGReqdYsQdf3ZtrGRSWSkMuYDGzqpdSc9POgXUXNHTz
+ FDcdrZ/ucpBPS/U9ZSwyApob3qnp+RIgb+EH2FhCx1zeKoRI3U5eMrVy+11pmR/4WVs/
+ Tt4ItsbJk/cPRb/L7GoUHqcD3x+UT2n+A8UAD73sbDrKBETyvf4mWwq9QbpDE2F+wWeh
+ qjXA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:reply-to:in-reply-to:references
- :mime-version:dkim-signature;
- bh=6QdMYUD3lRG1Bj9A6I+iBn991Jd0ZSPxjiMHO5cGzhU=;
- fh=KPS99xdF2sMZecPj4KARW+V/5prr/alBywRGmPdLGEM=;
- b=e90uzyI01UH6hlGxDcJvqrc+4ujQDMVgr8oc4C2NNi28qq4N9YWsCcCnrw9JLqOPPB
- tE1pzLfXrJsRplze/tN8lgBFvCTItqelbTBVeYPb8AjtAMqPqyo3GJ7izMn0CjgIkt9B
- y3uziBWmXwAbxWEnpi2E4BFwREpgPTXw++zR4FhFY0PJyLOO+GzCw0eAD1PL81R5H8M5
- ITavaU7RfNlJMtjVLMySGMI9p9T0IIYib6PYHEwBbIJc2oaz2PCm5yU8xqXGIOAlHlF3
- ZBZv7V+66Qwe1SIy6ogFOTk2oomKLce0TfRsbwbwrABLkk6tMDNVcV/1NylGekPKFx0S
- 3UFA==; darn=nongnu.org
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=EO5aEciYOyrHFKhcf4X7PqIecTAJNlpISx/y6e6e8sI=;
+ fh=4urVOz6TGGmua7nGRF2lT/AOHWTGdZNDHshZgmYJXwE=;
+ b=F7AW3b6waTDxT2AiyzeIFKS/4euCGwgB3yPkyJFL8d0yu+rfHY4wy1C8mzJl2/PMLZ
+ piKQLC+zhepewDTbKR5qH9siAqChaKa2t2BWND/i2SSDj2TPO9FurnMzKDekB+EroUaO
+ LwPNU4tFiZEhYxhU/JuNkgDnkuIDh8rOC8cgrOTkT5yuOaUaaUPgR0dv6aYCSzkVqQnG
+ IjRgK6ZLu3E1o/j1X613l1PvX8kTJpaNK2G9SxXvbo0XYTvkFUFGdy2h3Yt/EKDXGuoL
+ rXtjLoMDijI/zgPg8uDB4TIpWVrDXasRf+dQJBZdWYmUPzvO0HLDtrTeJ8NWO05Ar4UZ
+ uaUw==; darn=nongnu.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1790964443; x=1791569243; darn=nongnu.org;
- h=content-type:cc:to:subject:message-id:date:from:reply-to
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=6QdMYUD3lRG1Bj9A6I+iBn991Jd0ZSPxjiMHO5cGzhU=;
- b=RTsqA8py81AlAyM/Ey3ZIclm8uPdywPs6pntyg1u+N/yF9YI81kdYYRRBbT9+wjEFF
- YeNkN8AA+vn2LXIXOWUhnABfJJCW3tAhUpitSvI8kmQqNW1DAvG7skSl/xE5R1tx4sRf
- MluPlMK7rWE/dmo8C04Oi/LAUEnQvgkvJ9/ey+hEx41p0k5XuaB2MDhjZ+5/xudxLlcV
- YqSwRXTNY0D/jBY4aEccRpclH8ukTxPZqQwRNApDfSor9II3dbHxxRK4pAnk2mlkY6i4
- UWnrtIA7yXUJj//mbqFsUsYlyg1Y1bYjavARHIIZo4UBbtea0SBQOKnLFnkhRRIe27nx
- S7iQ==
+ d=gmail.com; s=20251104; t=1791040231; x=1791645031; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=EO5aEciYOyrHFKhcf4X7PqIecTAJNlpISx/y6e6e8sI=;
+ b=Q06CEtlCQWvv07Z+I2Cpv72bZlOoIsVYrCvQJ4sr2q94S78BDuntjMA2THjPHvFVn9
+ coLGJwjNZJH3KtpLJpvdJVPDZe0vS4kyB4rqXoNe18haiHYlN15BeCt79XerSDlQXh3M
+ n3aTLAujdaPphY6ijYuggKJpMkei+BQJLLN6RU8GI5lzQztspt/HBi6SE2TemO4MqMwE
+ 79aAyDLNVnXlrwaIZdGKJ6uT/vjcC1m5ekj1c+dTbEsszw3xasDIoCefhdHeQE1BJp+9
+ h5MGuZn3YI5pJSuYgfCGyrKhKqDoxQWPS6WVK5cKlfTN7/DvCXtmDJ2+rWuJlMdSHV6g
+ jFyw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1790964443; x=1791569243;
- h=content-type:cc:to:subject:message-id:date:from:reply-to
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=6QdMYUD3lRG1Bj9A6I+iBn991Jd0ZSPxjiMHO5cGzhU=;
- b=lCv0fcMUsZ1bcEDziwS29sl0XCk15/phrWHmbfjt9nzsdEtykaanu2lS4S8oIAblK8
- jcy42mJRXKdVmjXeckFprj8ZPIK4rDI66e3B9fTx474PPQzg9sXYXzDkzsC5Lbz7U9MT
- +svJ1f0ulh1gcXmVrT6a2rmPdHJg63ZFRI5dHkR+PomQKTDKQFCPI5GmQoGG83Pi6zUL
- 5UmuuTjepNXJoqmg8FyRY+10cZ0spelFL6wsYOzHUPLdhiKGazD9ZukMAkr6pxJAM9ii
- 4Ht1nWiXu3d3V4bOcDtkTLMthXpD8p7eGSRgJGLePj5/68pUeIZvapdiRTeuV+WyunFO
- Jr+Q==
+ d=1e100.net; s=20260707; t=1791040231; x=1791645031;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=EO5aEciYOyrHFKhcf4X7PqIecTAJNlpISx/y6e6e8sI=;
+ b=zsccYVb8z7avTtllS95XgeKOuPOxtFaQZR2b3cx9hmB+LSO04uozBKXEtiYcbXeVvx
+ MHJyKWN+W6GFq0Gg8lUYhGJqgnxgJd7zCabKqtBRTr+66UjxKzIfmhiL79R8OCG1qeG+
+ rQ3CNsK7p7C7LCXAswmT/cLiuNEbft+OmyVTZ96/u0v9V2AQkp+XPcFcsm0d1jsGEPrs
+ NvmRyssN+ze52Oqtjo9YoLg7VH3YdLDlCh3t4Gh7cCFKbYs54jW3MuoBTjgwpJFCFE9U
+ 3pcqqyA0aQOEMObfB0pLv7usrSKVXrgAqhYphiRaBs1hjuT1ILa3ERbdv8GJVwct+gds
+ PZfA==
 X-Forwarded-Encrypted: i=1;
- AKwUvBybWqrolL0+MTaQK0MHsv53LSMFlIM2PJlGHcZswEHBnB2rliIl3yjDDkVhjljx4RL/uoq7oz986NHD@nongnu.org
-X-Gm-Message-State: AFq9FYKkSyAUVFr2QfgUygaKy+2oPGnYYykFBWjqs45wR4xiVsBmsAgJ
- r6dx0XII/39+6alGXu3Hj/TD4A31p4nIK8JLp8eJITmV4BPZTVWUqrR8uItbSybfbpqOikj7MZ3
- oJSc6aHvMs8xBHgjPmMQZqKCgayX3mz8=
-X-Gm-Gg: AYBFou3nyxy1mk+k5bzoj3sAYUFZy6m0sRJnkOrAWnbTlKCyzRWr6VhQVT2H3J9M+Nv
- b7w91DS6owPop/TFH3EbGXNdw64IQeOfnZHdgvI7w8TdjlN/IMfvKThbyJujLe768UBhrOY/UZ7
- jPKBZJ+DdXCWnT0gquzTvk4kKLSqdQOPFQ4EdtVEhoYxvTdnEAFx+nGOPDlgsUb2/nteLsl9LZ9
- hXUUhR/kGBSX4of5E5fuJZGQPQ3U2yQDJjHg8wZSKyKOcw75zJIoGimaSzETZ+A151Hs5O1rqQH
- Uw8aLsPeVrrzi61O9T/YGR2pCPT1U/B/W07bcspRZie32zmOvwqY0cyU+By13jJ24u8=
-X-Received: by 2002:a05:6402:24ce:b0:6aa:734b:1a28 with SMTP id
- 4fb4d7f45d1cf-6af9e2ecaedmr1899769a12.34.1790964442424; Fri, 02 Oct 2026
- 11:07:22 -0700 (PDT)
+ AKwUvByzgF3CvF/8wtVPO983ZwNP5FiivHrlxJzN3w7LZxWi/If6rkb23tFznoikfdC//PyKpQ51Zn81grmm@nongnu.org
+X-Gm-Message-State: AFq9FYJ12nr9zuiqg9HDnFfNS8ragPqrwSrOfcZ/GHO6wTlkQ/aYwcRi
+ RaGsV/u1xQMtN8CS38alDJjWTYk/kFEf3sBoA9U+ZHp/9fldKzFkNMXWc/6CgPY8YsIApAIseXC
+ Ko+88bvEh28AcFB5ifouC4KDwyCj822s=
+X-Gm-Gg: AYBFou2sXMGyCXYpg+9c4dr1ky0USg3rO/85Zt0usG1l5MlmjSgNSYIu4OGQlp0eiA8
+ 1gr5vSji13dzSTd/XEyvccqEWoy7BAsav/xCQps8quY4P6Qmc1PiLAySE4BWyOmCGO8fX+NKGDX
+ OswHiw4J4iYtEO7+KtZiZ+d5x2fapDCw9zMuFYbbntlo97Ktuir35XWUxEPVZTgTd5Xtb1UpFYD
+ 24RWkxEYf0A7W5maj/Yev5FIKSGMhPcnIeVdb85BmdQ3pBPD6TA2gHhlcX16s6qS5Lmvdcu9723
+ zO3LUA8lWuk94qlDfJ1GY5mK8ZdM71YPKlCdZNfblVTg67/yQRi2ev+QThIPFzLIEKIzFf3gdQ7
+ xW2NzT1cXzAU9DA==
+X-Received: by 2002:a05:690e:43d9:b0:675:35bc:d67f with SMTP id
+ 956f58d0204a3-677abde2e2amr2189610d50.2.1791040231336; Sat, 03 Oct 2026
+ 08:10:31 -0700 (PDT)
 MIME-Version: 1.0
-References: <20261001-rv-dedup-v1-0-ea69b07afd31@rev.ng>
- <20261001-rv-dedup-v1-7-ea69b07afd31@rev.ng>
- <CAE2XoE_ag1RR_JFwgcg+9zPed+qpO2skf7W1_kiqvwB=Vf9aAQ@mail.gmail.com>
- <f8f27bc3-83ce-4ccf-ae38-a43188b2ebc5@oss.qualcomm.com>
- <ar_AzEWpF9XDGNdg@hive.localdomain>
-In-Reply-To: <ar_AzEWpF9XDGNdg@hive.localdomain>
-From: Yonggang Luo <luoyonggang@gmail.com>
-Date: Sat, 3 Oct 2026 02:07:08 +0800
-X-Gm-Features: AclHuK8jeeqrBIeLEQk0WzZH3UqzYofOSJR5_ayEbariFLjWbJZZyb52zf4nZho
-Message-ID: <CAE2XoE_vsVDXH2qggECnqHC8dMpo7zyTTg9w64uvjnPeXE9y6A@mail.gmail.com>
-Subject: Re: [PATCH 07/18] target/riscv: Runtime register MAX and BARE CPUs
-To: Anton Johansson <anjo@rev.ng>
-Cc: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org, daniel.barboza@oss.qualcomm.com, 
- philmd@oss.qualcomm.com, palmer@dabbelt.com, alistair.francis@wdc.com
-Content-Type: multipart/mixed; boundary="00000000000065b75f065cdf67bc"
-Received-SPF: pass client-ip=2a00:1450:4864:33::c;
- envelope-from=luoyonggang@gmail.com; helo=mail-ed2-x0c.google.com
+References: <20260904155758.3833179-1-bin.meng@processmission.com>
+ <20260904155758.3833179-6-bin.meng@processmission.com>
+ <64d47ae0-98ab-4570-8711-e2f2f2601b2a@oss.qualcomm.com>
+In-Reply-To: <64d47ae0-98ab-4570-8711-e2f2f2601b2a@oss.qualcomm.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Sat, 3 Oct 2026 23:10:19 +0800
+X-Gm-Features: AclHuK_7u2p2GqYnyFaaOaApJF11EKHe_2Wd3zVx9clyAvcYSV3OZWYuR3n4k1Y
+Message-ID: <CAEUhbmV6=oxxhR1Vohdi_LMzf_3gbOj9FX9LZXYjHOfXDjqdLA@mail.gmail.com>
+Subject: Re: [PATCH v2 05/24] hw/riscv: pfsoc: Couple L2CC to L2-LIM
+To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@oss.qualcomm.com>
+Cc: Bin Meng <bin.meng@processmission.com>, QEMU <qemu-devel@nongnu.org>, 
+ Chao Liu <chao.liu@processmission.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Conor Dooley <conor@kernel.org>, 
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, Paolo Bonzini <pbonzini@redhat.com>, 
+ Sebastian Huber <sebastian.huber@embedded-brains.de>,
+ Weiwei Li <liwei1518@gmail.com>, qemu-riscv@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:41::2a;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yx2-x2a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -119,158 +125,266 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Reply-To: luoyonggang@gmail.com
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---00000000000065b75f065cdf67bc
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Hi Philippe,
 
-target/riscv: resolve target-dependent CPU definition fields
-
-The class-base initializer later reads def->misa_mxl_max and passes
-def->cfg to riscv_cpu_cfg_merge(), which merges max_satp_mode. Resolve
-both chooser results in a mutable copy so those steps use the selected
-values without modifying the const TypeInfo class data.
-
-
-defer riscv_cpu_validate_misa_mxl is not enough, mainly
-def->misa_mxl_max is accessed in
-riscv_cpu_class_base_init, for exactly match previous behavior, add
-two callback for each value
-
-On Fri, Oct 2, 2026 at 11:36=E2=80=AFPM Anton Johansson <anjo@rev.ng> wrote=
-:
+On Wed, Sep 30, 2026 at 5:39=E2=80=AFPM Philippe Mathieu-Daud=C3=A9
+<philmd@oss.qualcomm.com> wrote:
 >
-> On 02/10/26, Pierrick Bouvier wrote:
-> > On 10/1/2026 9:28 AM, Yonggang Luo wrote:
-> > > On Thu, Oct 1, 2026 at 11:55=E2=80=AFPM Anton Johansson via qemu deve=
-lopment
-> > > <qemu-devel@nongnu.org> wrote:
-> > >>
-> > >> Moves initialization of satp and mxl fields to a class initializatio=
-n
-> > >> function that checks target_riscv64().
-> > >>
-> > >> Note: I'm aware the current iteration of this patch is rather hacky,=
- I
-> > >> don't like the introduction of runtime_misa_mxl_max, but I'm keeping
-> > >> this in to get the series out there and collect feedback.
-> > >>
-> > >> Signed-off-by: Anton Johansson <anjo@rev.ng>
-> > >> ---
-> > >>  target/riscv/cpu.h |  1 +
-> > >>  target/riscv/cpu.c | 90 +++++++++++++++++++++++++++++++++++--------=
------------
-> > >>  2 files changed, 59 insertions(+), 32 deletions(-)
-> > >>
-> > >
-> > > This patch is how I handle these, just for reference, not a review.
+> Hi,
+>
+> On 4/9/26 17:57, Bin Meng wrote:
+> > Instantiate the L2CC in the PolarFire SoC machine and connect its
+> > WayEnable register to the L2-LIM MemoryRegion. Back the complete 2 MiB
+> > aperture and shrink it by 128 KiB for each cache way enabled.
 > >
-> > Yonggang approach looks cleaner, I would favor this one.
+> > Keep L2 Zero at its fixed aperture because it represents a cache
+> > allocation window rather than the remaining L2-LIM capacity.
+> >
+> > Signed-off-by: Bin Meng <bin.meng@processmission.com>
+> > Reviewed-by: Chao Liu <chao.liu@processmission.com>
+> > ---
+> >
+> > (no changes since v1)
+> >
+> >   include/hw/misc/mchp_pfsoc_l2cc.h  |  1 +
+> >   include/hw/riscv/microchip_pfsoc.h |  2 ++
+> >   hw/misc/mchp_pfsoc_l2cc.c          | 51 +++++++++++++++++++++++++++++=
++
+> >   hw/riscv/microchip_pfsoc.c         | 23 +++++++-------
+> >   hw/riscv/Kconfig                   |  1 +
+> >   5 files changed, 67 insertions(+), 11 deletions(-)
+> >
+> > diff --git a/include/hw/misc/mchp_pfsoc_l2cc.h b/include/hw/misc/mchp_p=
+fsoc_l2cc.h
+> > index 1b5b3888d5..3a175a6340 100644
+> > --- a/include/hw/misc/mchp_pfsoc_l2cc.h
+> > +++ b/include/hw/misc/mchp_pfsoc_l2cc.h
+> > @@ -22,6 +22,7 @@ typedef struct MchpPfSoCL2ccState {
+> >       SysBusDevice parent;
+> >       uint64_t regs[MCHP_PFSOC_L2CC_REG_NUM];
+> >       RegisterInfo regs_info[MCHP_PFSOC_L2CC_REG_NUM];
+> > +    MemoryRegion *l2lim;
+> >   } MchpPfSoCL2ccState;
+> >
+> >   #define TYPE_MCHP_PFSOC_L2CC "mchp.pfsoc.l2cc"
+> > diff --git a/include/hw/riscv/microchip_pfsoc.h b/include/hw/riscv/micr=
+ochip_pfsoc.h
+> > index 612fd2b69c..0aeccedf77 100644
+> > --- a/include/hw/riscv/microchip_pfsoc.h
+> > +++ b/include/hw/riscv/microchip_pfsoc.h
+> > @@ -27,6 +27,7 @@
+> >   #include "hw/cpu/cluster.h"
+> >   #include "hw/dma/sifive_pdma.h"
+> >   #include "hw/misc/mchp_pfsoc_dmc.h"
+> > +#include "hw/misc/mchp_pfsoc_l2cc.h"
+> >   #include "hw/misc/mchp_pfsoc_ioscb.h"
+> >   #include "hw/misc/mchp_pfsoc_sysreg.h"
+> >   #include "hw/net/cadence_gem.h"
+> > @@ -43,6 +44,7 @@ typedef struct MicrochipPFSoCState {
+> >       RISCVHartArrayState e_cpus;
+> >       RISCVHartArrayState u_cpus;
+> >       DeviceState *plic;
+> > +    MchpPfSoCL2ccState l2cc;
+> >       MchpPfSoCDdrSgmiiPhyState ddr_sgmii_phy;
+> >       MchpPfSoCDdrCfgState ddr_cfg;
+> >       MchpPfSoCIoscbState ioscb;
+> > diff --git a/hw/misc/mchp_pfsoc_l2cc.c b/hw/misc/mchp_pfsoc_l2cc.c
+> > index 979d904676..4b87c963fc 100644
+> > --- a/hw/misc/mchp_pfsoc_l2cc.c
+> > +++ b/hw/misc/mchp_pfsoc_l2cc.c
+> > @@ -11,6 +11,9 @@
+> >
+> >   #include "qemu/osdep.h"
+> >   #include "qemu/log.h"
+> > +#include "qemu/units.h"
+> > +#include "qapi/error.h"
+> > +#include "hw/core/qdev-properties.h"
+> >   #include "hw/core/register.h"
+> >   #include "hw/core/registerfields.h"
+> >   #include "hw/misc/mchp_pfsoc_l2cc.h"
+> > @@ -39,6 +42,25 @@ REG64(L2_WAY_MASK_HART4_DCACHE, 0x868)
+> >   REG64(L2_WAY_MASK_HART4_ICACHE, 0x870)
+> >
+> >   #define L2_CONFIG_RESET         0x06091004
+> > +#define L2_LIM_WAY_COUNT        15
+> > +#define L2_WAY_SIZE             (128 * KiB)
+> > +
+> > +static void mchp_pfsoc_l2cc_update_l2lim(MchpPfSoCL2ccState *s,
+> > +                                         uint64_t way_enable)
+> > +{
+> > +    uint64_t l2lim_size;
+> > +
+> > +    if (way_enable >=3D L2_LIM_WAY_COUNT) {
+> > +        l2lim_size =3D 0;
+> > +    } else {
+> > +        l2lim_size =3D (L2_LIM_WAY_COUNT - way_enable) * L2_WAY_SIZE;
+> > +    }
+> > +
+> > +    memory_region_transaction_begin();
+> > +    memory_region_set_size(s->l2lim, l2lim_size);
+> > +    memory_region_set_enabled(s->l2lim, l2lim_size !=3D 0);
+> > +    memory_region_transaction_commit();
+> > +}
+> >
+> >   static uint64_t mchp_pfsoc_l2cc_way_enable_pre_write(RegisterInfo *re=
+g,
+> >                                                        uint64_t value)
+> > @@ -48,6 +70,14 @@ static uint64_t mchp_pfsoc_l2cc_way_enable_pre_write=
+(RegisterInfo *reg,
+> >       return MAX(current, value);
+> >   }
+> >
+> > +static void mchp_pfsoc_l2cc_way_enable_post_write(RegisterInfo *reg,
+> > +                                                  uint64_t value)
+> > +{
+> > +    MchpPfSoCL2ccState *s =3D MCHP_PFSOC_L2CC(reg->opaque);
+> > +
+> > +    mchp_pfsoc_l2cc_update_l2lim(s, value);
+> > +}
+> > +
+> >   #define WAY_MASK_REGISTER(_name)                \
+> >       {                                           \
+> >           .name =3D "WAY_MASK_" #_name,             \
+> > @@ -66,6 +96,7 @@ static const RegisterAccessInfo mchp_pfsoc_l2cc_regs_=
+info[] =3D {
+> >           .addr =3D A_L2_WAY_ENABLE,
+> >           .rsvd =3D ~R_L2_WAY_ENABLE_VALUE_MASK,
+> >           .pre_write =3D mchp_pfsoc_l2cc_way_enable_pre_write,
+> > +        .post_write =3D mchp_pfsoc_l2cc_way_enable_post_write,
+> >       },
+> >       WAY_MASK_REGISTER(DMA),
+> >       WAY_MASK_REGISTER(AXI4_PORT_0),
+> > @@ -157,11 +188,31 @@ static void mchp_pfsoc_l2cc_init(Object *obj)
+> >       sysbus_init_mmio(SYS_BUS_DEVICE(obj), &reg_array->mem);
+> >   }
+> >
+> > +static void mchp_pfsoc_l2cc_realize(DeviceState *dev, Error **errp)
+> > +{
+> > +    MchpPfSoCL2ccState *s =3D MCHP_PFSOC_L2CC(dev);
+> > +
+> > +    if (!s->l2lim) {
+> > +        error_setg(errp, TYPE_MCHP_PFSOC_L2CC ": 'l2-lim' link not set=
+");
+> > +        return;
+> > +    }
+> > +
+> > +    mchp_pfsoc_l2cc_update_l2lim(s, s->regs[R_L2_WAY_ENABLE]);
+> > +}
+> > +
+> > +static const Property mchp_pfsoc_l2cc_properties[] =3D {
+> > +    DEFINE_PROP_LINK("l2-lim", MchpPfSoCL2ccState, l2lim,
+> > +                     TYPE_MEMORY_REGION, MemoryRegion *),
+> > +};
+> > +
+> >   static void mchp_pfsoc_l2cc_class_init(ObjectClass *klass, const void=
+ *data)
+> >   {
+> > +    DeviceClass *dc =3D DEVICE_CLASS(klass);
+> >       ResettableClass *rc =3D RESETTABLE_CLASS(klass);
+> >
+> >       rc->phases.hold =3D mchp_pfsoc_l2cc_reset_hold;
+> > +    device_class_set_props(dc, mchp_pfsoc_l2cc_properties);
+> > +    dc->realize =3D mchp_pfsoc_l2cc_realize;
+> >   }
+> >
+> >   static const TypeInfo mchp_pfsoc_l2cc_info =3D {
+> > diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
+> > index 8106dbb3ad..114567867b 100644
+> > --- a/hw/riscv/microchip_pfsoc.c
+> > +++ b/hw/riscv/microchip_pfsoc.c
+> > @@ -174,6 +174,9 @@ static void microchip_pfsoc_soc_instance_init(Objec=
+t *obj)
+> >       object_initialize_child(obj, "dma-controller", &s->dma,
+> >                               TYPE_SIFIVE_PDMA);
+> >
+> > +    object_initialize_child(obj, "l2-cache-controller", &s->l2cc,
+> > +                            TYPE_MCHP_PFSOC_L2CC);
 >
-> I'm personally not a huge fan, it still feels rather hacky. Why add a
-> completely new RISCVCPUDef::target_init just to make sure fields are
-> initialized before riscv_cpu_validate_misa_mxl()? Wouldn't moving the
-> check to a later point, maybe .instance_init, be better? Then for
-> riscv_cpu_init() we get
+> Is this the same model used by hw/riscv/sifive_u.c?
+
+From technical reference manual they seem to use the same IP (the IP
+should be from SiFive). The Linux kernel dts file compatible string of
+both machines also supports this. Current QEMU `sifive_u` machine does
+not integrate the L2CC block yet.
+
 >
->   riscv_cpu_validate_misa_mxl(mcc);
->   env->misa_mxl =3D mcc->def->misa_mxl_max;
+> >       object_initialize_child(obj, "sysreg", &s->sysreg,
+> >                               TYPE_MCHP_PFSOC_SYSREG);
+> >
+> > @@ -260,18 +263,9 @@ static void microchip_pfsoc_soc_realize(DeviceStat=
+e *dev, Error **errp)
+> >           RISCV_ACLINT_DEFAULT_MTIMECMP, RISCV_ACLINT_DEFAULT_MTIME,
+> >           iks->clint_timebase_freq, false);
+> >
+> > -    /* L2 cache controller */
+> > -    create_unimplemented_device("microchip.pfsoc.l2cc",
+> > -        memmap[MICROCHIP_PFSOC_L2CC].base, memmap[MICROCHIP_PFSOC_L2CC=
+].size);
+> > -
+> >       /*
+> > -     * Add L2-LIM at reset size.
+> > -     * This should be reduced in size as the L2 Cache Controller WayEn=
+able
+> > -     * register is incremented. Unfortunately I don't see a nice (or a=
+ny) way
+> > -     * to handle reducing or blocking out the L2 LIM while still allow=
+ing it
+> > -     * be re returned to all enabled after a reset. For the time being=
+, just
+> > -     * leave it enabled all the time. This won't break anything, but w=
+ill be
+> > -     * too generous to misbehaving guests.
+> > +     * Back the complete L2-LIM aperture. The L2 cache controller resi=
+zes
+> > +     * this MemoryRegion to 128 KiB for every way assigned to L2-LIM.
+> >        */
+> >       memory_region_init_ram(l2lim_mem, NULL, "microchip.pfsoc.l2lim",
+> >                              memmap[MICROCHIP_PFSOC_L2LIM].size, &error=
+_fatal);
+> > @@ -279,6 +273,13 @@ static void microchip_pfsoc_soc_realize(DeviceStat=
+e *dev, Error **errp)
+> >                                   memmap[MICROCHIP_PFSOC_L2LIM].base,
+> >                                   l2lim_mem);
+> >
+> > +    /* L2 cache controller */
+> > +    object_property_set_link(OBJECT(&s->l2cc), "l2-lim",
+> > +                             OBJECT(l2lim_mem), &error_abort);
 >
-> misa_mxl_max would be verified only during instance rather than
-> class initialization, which seems like a decent tradeoff for a simpler
-> solution.
+> Modelling question (I have no clue with this particular SoC): does
+> 'l2-lim' belong to the SoC layer, consumed by the L2CC or is it
+> internal to the L2CC and exposed to the SoC?
+
+I understand your point. Yeah it's better to model 'l2-lim' and
+'l2-zero' devices under L2CC. Will do it in v3.
+
 >
-> --
-> Anton Johansson
-> rev.ng Labs Srl.
+> > +    sysbus_realize(SYS_BUS_DEVICE(&s->l2cc), errp);
+> > +    sysbus_mmio_map(SYS_BUS_DEVICE(&s->l2cc), 0,
+> > +                    memmap[MICROCHIP_PFSOC_L2CC].base);
+> > +
+> >       /*
+> >        * HSS decompresses into the L2 zero-device window and executes t=
+here.
+> >        * Model it as RAM because QEMU does not model the backing L2 cac=
+he.
+> > diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
+> > index d06ac26648..85b535c7cb 100644
+> > --- a/hw/riscv/Kconfig
+> > +++ b/hw/riscv/Kconfig
+> > @@ -18,6 +18,7 @@ config MICROCHIP_PFSOC
+> >       select DEVICE_TREE
+> >       select MCHP_PFSOC_DMC
+> >       select MCHP_PFSOC_IOSCB
+> > +    select MCHP_PFSOC_L2CC
+> >       select MCHP_PFSOC_MMUART
+> >       select MCHP_PFSOC_SYSREG
+> >       select RISCV_ACLINT
+>
+>
 
-
-
---=20
-         =E6=AD=A4=E8=87=B4
-=E7=A4=BC
-=E7=BD=97=E5=8B=87=E5=88=9A
-Yours
-    sincerely,
-Yonggang Luo
-
---00000000000065b75f065cdf67bc
-Content-Type: text/plain; charset="US-ASCII"; 
-	name="0001-target-riscv-resolve-target-dependent-CPU-definition.patch"
-Content-Disposition: attachment; 
-	filename="0001-target-riscv-resolve-target-dependent-CPU-definition.patch"
-Content-Transfer-Encoding: base64
-Content-ID: <f_mur9xek10>
-X-Attachment-Id: f_mur9xek10
-
-RnJvbSAzMTEzODg5MmZlNWNmODc4ZGE5ODE4Y2Y5MzUzNWNlMTBiMTI1Y2IwIE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBZb25nZ2FuZyBMdW8gPGx1b3lvbmdnYW5nQGdtYWlsLmNvbT4K
-RGF0ZTogU2F0LCAzIE9jdCAyMDI2IDAxOjU0OjUyICswODAwClN1YmplY3Q6IFtQQVRDSF0gdGFy
-Z2V0L3Jpc2N2OiByZXNvbHZlIHRhcmdldC1kZXBlbmRlbnQgQ1BVIGRlZmluaXRpb24gZmllbGRz
-CgpUaGUgY2xhc3MtYmFzZSBpbml0aWFsaXplciBsYXRlciByZWFkcyBkZWYtPm1pc2FfbXhsX21h
-eCBhbmQgcGFzc2VzCmRlZi0+Y2ZnIHRvIHJpc2N2X2NwdV9jZmdfbWVyZ2UoKSwgd2hpY2ggbWVy
-Z2VzIG1heF9zYXRwX21vZGUuIFJlc29sdmUKYm90aCBjaG9vc2VyIHJlc3VsdHMgaW4gYSBtdXRh
-YmxlIGNvcHkgc28gdGhvc2Ugc3RlcHMgdXNlIHRoZSBzZWxlY3RlZAp2YWx1ZXMgd2l0aG91dCBt
-b2RpZnlpbmcgdGhlIGNvbnN0IFR5cGVJbmZvIGNsYXNzIGRhdGEuCgpTaWduZWQtb2ZmLWJ5OiBZ
-b25nZ2FuZyBMdW8gPGx1b3lvbmdnYW5nQGdtYWlsLmNvbT4KLS0tCiB0YXJnZXQvcmlzY3YvY3B1
-LmMgfCA0MCArKysrKysrKysrKysrKysrKysrKysrKysrKystLS0tLS0tLS0tLS0tCiB0YXJnZXQv
-cmlzY3YvY3B1LmggfCAgMiArKwogMiBmaWxlcyBjaGFuZ2VkLCAyOSBpbnNlcnRpb25zKCspLCAx
-MyBkZWxldGlvbnMoLSkKCmRpZmYgLS1naXQgYS90YXJnZXQvcmlzY3YvY3B1LmMgYi90YXJnZXQv
-cmlzY3YvY3B1LmMKaW5kZXggYzZmMTczOTA3NS4uNzU0ZjE1ODI1MCAxMDA2NDQKLS0tIGEvdGFy
-Z2V0L3Jpc2N2L2NwdS5jCisrKyBiL3RhcmdldC9yaXNjdi9jcHUuYwpAQCAtMzA5Miw2ICszMDky
-LDggQEAgc3RhdGljIHZvaWQgcmlzY3ZfY3B1X2NsYXNzX2Jhc2VfaW5pdChPYmplY3RDbGFzcyAq
-YywgY29uc3Qgdm9pZCAqZGF0YSkKIAogICAgIGlmIChwY2MtPmRlZikgewogICAgICAgICBtY2Mt
-PmRlZiA9IGdfbWVtZHVwMihwY2MtPmRlZiwgc2l6ZW9mKCpwY2MtPmRlZikpOworICAgICAgICBt
-Y2MtPmRlZi0+bWF4X3NhdHBfbW9kZV9jaG9vc2UgPSBOVUxMOworICAgICAgICBtY2MtPmRlZi0+
-bWlzYV9teGxfbWF4X2Nob29zZSA9IE5VTEw7CiAgICAgfSBlbHNlIHsKICAgICAgICAgbWNjLT5k
-ZWYgPSBnX25ldzAoUklTQ1ZDUFVEZWYsIDEpOwogICAgIH0KQEAgLTMxMDgsNyArMzExMCwxNiBA
-QCBzdGF0aWMgdm9pZCByaXNjdl9jcHVfY2xhc3NfYmFzZV9pbml0KE9iamVjdENsYXNzICpjLCBj
-b25zdCB2b2lkICpkYXRhKQogI2VuZGlmCiAKICAgICBpZiAoZGF0YSkgewotICAgICAgICBjb25z
-dCBSSVNDVkNQVURlZiAqZGVmID0gZGF0YTsKKyAgICAgICAgUklTQ1ZDUFVEZWYgZGVmX2RhdGEg
-PSAqKGNvbnN0IFJJU0NWQ1BVRGVmICopZGF0YTsKKyAgICAgICAgUklTQ1ZDUFVEZWYgKmRlZiA9
-ICZkZWZfZGF0YTsKKworICAgICAgICBpZiAoZGVmLT5tYXhfc2F0cF9tb2RlX2Nob29zZSkgewor
-ICAgICAgICAgICAgZGVmLT5jZmcubWF4X3NhdHBfbW9kZSA9IGRlZi0+bWF4X3NhdHBfbW9kZV9j
-aG9vc2UoZGVmKTsKKyAgICAgICAgfQorICAgICAgICBpZiAoZGVmLT5taXNhX214bF9tYXhfY2hv
-b3NlKSB7CisgICAgICAgICAgICBkZWYtPm1pc2FfbXhsX21heCA9IGRlZi0+bWlzYV9teGxfbWF4
-X2Nob29zZShkZWYpOworICAgICAgICB9CisKICAgICAgICAgbWNjLT5kZWYtPmJhcmUgfD0gZGVm
-LT5iYXJlOwogICAgICAgICBpZiAoZGVmLT5wcm9maWxlKSB7CiAgICAgICAgICAgICBhc3NlcnQo
-cHJvZmlsZV9leHRlbmRzKGRlZi0+cHJvZmlsZSwgbWNjLT5kZWYtPnByb2ZpbGUpKTsKQEAgLTMy
-OTksNiArMzMxMCwxOCBAQCBzdGF0aWMgdm9pZCByaXNjdl9jcHVfaW5zdGFuY2VfZmluYWxpemUo
-T2JqZWN0ICpvYmopCiAgICAgZ19jbGVhcl9wb2ludGVyKCZjcHUtPm11bHRpX2V4dF91c2VyX29w
-dHMsIGdfaGFzaF90YWJsZV9kZXN0cm95KTsKIH0KIAorc3RhdGljIGludDhfdCByaXNjdl9jcHVf
-bWF4X3NhdHBfbW9kZV9jaG9vc2UoY29uc3QgUklTQ1ZDUFVEZWYgKmRlZikKK3sKKyAgICAodm9p
-ZClkZWY7CisgICAgcmV0dXJuIHRhcmdldF9yaXNjdjMyKCkgPyBWTV8xXzEwX1NWMzIgOiBWTV8x
-XzEwX1NWNTc7Cit9CisKK3N0YXRpYyBSSVNDVk1YTCByaXNjdl9jcHVfbWlzYV9teGxfbWF4X2No
-b29zZShjb25zdCBSSVNDVkNQVURlZiAqZGVmKQoreworICAgICh2b2lkKWRlZjsKKyAgICByZXR1
-cm4gdGFyZ2V0X3Jpc2N2MzIoKSA/IE1YTF9SVjMyIDogTVhMX1JWNjQ7Cit9CisKIHN0YXRpYyBj
-b25zdCBUeXBlSW5mbyByaXNjdl9jcHVfdHlwZV9pbmZvc1tdID0gewogICAgIHsKICAgICAgICAg
-Lm5hbWUgPSBUWVBFX1JJU0NWX0NQVSwKQEAgLTMzMzksMjEgKzMzNjIsMTIgQEAgc3RhdGljIGNv
-bnN0IFR5cGVJbmZvIHJpc2N2X2NwdV90eXBlX2luZm9zW10gPSB7CiAgICAgICAgICAqIG9ubHkg
-TUJBUkUgd2lsbCBiZSBhdmFpbGFibGUgaWYgdGhlIHVzZXIgZG9lc24ndCBlbmFibGUKICAgICAg
-ICAgICogYSBtb2RlIG1hbnVhbGx5IChzZWUgcmlzY3ZfY3B1X3NhdHBfbW9kZV9maW5hbGl6ZSgp
-KS4KICAgICAgICAgICovCi0jaWZkZWYgVEFSR0VUX1JJU0NWMzIKLSAgICAgICAgLmNmZy5tYXhf
-c2F0cF9tb2RlID0gVk1fMV8xMF9TVjMyLAotI2Vsc2UKLSAgICAgICAgLmNmZy5tYXhfc2F0cF9t
-b2RlID0gVk1fMV8xMF9TVjU3LAotI2VuZGlmCisgICAgICAgIC5tYXhfc2F0cF9tb2RlX2Nob29z
-ZSA9IHJpc2N2X2NwdV9tYXhfc2F0cF9tb2RlX2Nob29zZSwKICAgICApLAogCiAgICAgREVGSU5F
-X1JJU0NWX0NQVShUWVBFX1JJU0NWX0NQVV9NQVgsIFRZUEVfUklTQ1ZfRFlOQU1JQ19DUFUsCi0j
-aWYgZGVmaW5lZChUQVJHRVRfUklTQ1YzMikKLSAgICAgICAgLm1pc2FfbXhsX21heCA9IE1YTF9S
-VjMyLAotICAgICAgICAuY2ZnLm1heF9zYXRwX21vZGUgPSBWTV8xXzEwX1NWMzIsCi0jZWxpZiBk
-ZWZpbmVkKFRBUkdFVF9SSVNDVjY0KQotICAgICAgICAubWlzYV9teGxfbWF4ID0gTVhMX1JWNjQs
-Ci0gICAgICAgIC5jZmcubWF4X3NhdHBfbW9kZSA9IFZNXzFfMTBfU1Y1NywKLSNlbmRpZgorICAg
-ICAgICAubWF4X3NhdHBfbW9kZV9jaG9vc2UgPSByaXNjdl9jcHVfbWF4X3NhdHBfbW9kZV9jaG9v
-c2UsCisgICAgICAgIC5taXNhX214bF9tYXhfY2hvb3NlID0gcmlzY3ZfY3B1X21pc2FfbXhsX21h
-eF9jaG9vc2UsCiAgICAgKSwKIAogICAgIERFRklORV9BQlNUUkFDVF9SSVNDVl9DUFUoVFlQRV9S
-SVNDVl9DUFVfU0lGSVZFX0UsIFRZUEVfUklTQ1ZfVkVORE9SX0NQVSwKZGlmZiAtLWdpdCBhL3Rh
-cmdldC9yaXNjdi9jcHUuaCBiL3RhcmdldC9yaXNjdi9jcHUuaAppbmRleCAwMzRkN2U5NmM0Li5i
-NmI1ZjY3OWM5IDEwMDY0NAotLS0gYS90YXJnZXQvcmlzY3YvY3B1LmgKKysrIGIvdGFyZ2V0L3Jp
-c2N2L2NwdS5oCkBAIC01OTcsNiArNTk3LDggQEAgdHlwZWRlZiBzdHJ1Y3QgUklTQ1ZDUFVEZWYg
-ewogI2VuZGlmCiAgICAgLyogVGhpcyBpcyBqdXN0IGEgc2V0dGVyIGZvciBlbnYtPm51bV90cmln
-Z2Vycy4gICovCiAgICAgdWludDMyX3QgbnVtX3RyaWdnZXJzOworICAgIGludDhfdCAoKm1heF9z
-YXRwX21vZGVfY2hvb3NlKShjb25zdCBzdHJ1Y3QgUklTQ1ZDUFVEZWYgKmRlZik7CisgICAgUklT
-Q1ZNWEwgKCptaXNhX214bF9tYXhfY2hvb3NlKShjb25zdCBzdHJ1Y3QgUklTQ1ZDUFVEZWYgKmRl
-Zik7CiB9IFJJU0NWQ1BVRGVmOwogCiAvKioKLS0gCjIuNTUuMC53aW5kb3dzLjMKCg==
---00000000000065b75f065cdf67bc--
+Regards,
+Bin
 
