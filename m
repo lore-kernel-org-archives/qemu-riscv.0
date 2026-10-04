@@ -4,95 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4D0DCA5FEC
-	for <qemu-riscv@archiver.kernel.org>; Sun,  4 Oct 2026 10:28:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3500CA5FEF
+	for <qemu-riscv@archiver.kernel.org>; Sun,  4 Oct 2026 15:26:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xDJQ9-0000s9-Ly; Sun, 04 Oct 2026 06:26:17 -0400
+	id 1xDO6I-0005lK-Fc; Sun, 04 Oct 2026 11:26:06 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1xDJPc-0007Wc-KD
- for qemu-riscv@nongnu.org; Sun, 04 Oct 2026 06:25:48 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1xDJPZ-0003LK-Rq
- for qemu-riscv@nongnu.org; Sun, 04 Oct 2026 06:25:44 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1791109539;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=Dp+eTQQpowvqJbb7n0XlhxLHsD3ScVyNygDug1P+lIw=;
- b=aYDdbo3tq2xpMzAUcUSvCR9ajEZ/PzTPwjKLqCn9MBwiPIacUaLyJcG+BMczrNtXU8OqaC
- siT8d3jPd8XM5QULlRuBzptP4vlWpr6KX1nqA/9/7QDqPb4h+9Rk1xlrMBMfiEpLHJUpBe
- e85rQemGGJVgCqkBkCray9+OGw+u4FQ=
-Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-169-s9x1VG2iOTOu5JWLQfXMlg-1; Sun,
- 04 Oct 2026 06:25:36 -0400
-X-MC-Unique: s9x1VG2iOTOu5JWLQfXMlg-1
-X-Mimecast-MFC-AGG-ID: s9x1VG2iOTOu5JWLQfXMlg_1791109535
-Received: from mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.93])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 2E8071954B01; Sun,  4 Oct 2026 10:25:35 +0000 (UTC)
-Received: from localhost (headnet03.pony-001.prod.iad2.dc.redhat.com
- [10.2.32.114])
- by mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 07CA7180036E; Sun,  4 Oct 2026 10:25:33 +0000 (UTC)
-From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-Date: Sun, 04 Oct 2026 14:23:47 +0400
-Subject: [PATCH 33/63] hw/char/ibex_uart: prevent division by zero on baud
- rate calculation
-MIME-Version: 1.0
-Message-Id: <20261004-issue-4560-v1-33-ccbef537cbeb@redhat.com>
-References: <20261004-issue-4560-v1-0-ccbef537cbeb@redhat.com>
-In-Reply-To: <20261004-issue-4560-v1-0-ccbef537cbeb@redhat.com>
+ (Exim 4.90_1) (envelope-from <tanchi25@mails.ucas.ac.cn>)
+ id 1xDO03-0004IZ-WA; Sun, 04 Oct 2026 11:19:40 -0400
+Received: from smtp21.cstnet.cn ([159.226.251.21] helo=cstnet.cn)
+ by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
+ (Exim 4.90_1) (envelope-from <tanchi25@mails.ucas.ac.cn>)
+ id 1xDO01-0005O6-DA; Sun, 04 Oct 2026 11:19:39 -0400
+Received: from k3-03 (unknown [159.226.43.8])
+ by APP-01 (Coremail) with SMTP id qwCowACXbfFnbsJqG3TaCQ--.526S2;
+ Sun, 04 Oct 2026 23:19:22 +0800 (CST)
+From: Tan Chi <tanchi25@mails.ucas.ac.cn>
 To: qemu-devel@nongnu.org
-Cc: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>, 
- Pavee Hui <phui@google.com>, Alistair Francis <Alistair.Francis@wdc.com>, 
- Paolo Bonzini <pbonzini@redhat.com>, qemu-riscv@nongnu.org
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1490;
- i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=7M1aiGYKZF3529Y7CF3n1zUfXvb5KY5JNB5nTmCnGrQ=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBqwikj5HocxAzSwzcnET54qfbKFE0gI7r6hvX7K
- 8myqQY9xkCJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCasIpIwAKCRDa6OEJdZac
- 5ZLUD/43Yhyuf6+2RNcwhNwYWDxw23rzOIFF8d5NQabzudPrCqLNQNY39dG0bYv1pb34UYaDVGL
- TcDVu/gCdnkPC7U1mwWaH3qp0/ZGBrtSidJlFDf1/Nnl5E8RZpaCY8T6IGX4Du05S3ROHVQMSnQ
- eo/88XPxlH7vbct4mid+ksDrMjp0p480pDrTG8BgF5nbvM5+MCYeCe2oWpu3Pj0XIbFZFoxzdv8
- GxQjosjLJ5wb43SDv11+xwywkf7DDiVLoi2iL9nLT9u5gm4WdwQH0XDzkmi6zfqH4/IO4+vyYnd
- EgVEXtbBCcWIek8qwwD7ajloSy3hirzRWrbIfRoDCOKzJvdXoEbyOB6inlf7d/S2r+tz91LbpAF
- Gp6J8B/GU5g4ysNE3JjcOBWDJctUHQdzqlruhcdUcU7DsDY6Et7DOdIt/cyMox/QgRCOiX8yJBS
- t+xe+GnDJmQuqUX6bO5tDijrzTMCIcLT4/G9fcILZWr/zTsYy6ebniPxWDUzaVuE3iu0zVeRtlZ
- 7Po0w3gOePOFQMLQClAFOBjauq/NFUu6ehxT1IRDAW8C8hvaUbS37nLJ5zxJcCbqYe7ehUKgaFr
- aVbvVMBQsIwTAhFd7L07WG0LIDMZuZhSr1J4EY+C8b6XUscCSB/7Mh98f81D9L73SdnnZJF8i9g
- AQavCIYKM6vQqwQ==
-X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
- fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.93
-X-Mimecast-MFC-PROC-ID: fAKYtRQUEKfUoWjQGaWqX6UT3iPzcWhjNDgioIrYN_M_1791109535
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="utf-8"
+Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
+ liwei1518@gmail.com, daniel.barboza@oss.qualcomm.com,
+ zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
+ Tan Chi <tanchi25@mails.ucas.ac.cn>, qemu-stable@nongnu.org
+Subject: [PATCH] hw/riscv/riscv-iommu: fix entry leak with ioatc-limit=0
+Date: Sun,  4 Oct 2026 23:18:55 +0800
+Message-ID: <20261004151855.201300-1-tanchi25@mails.ucas.ac.cn>
+X-Mailer: git-send-email 2.53.0
+MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.129.124;
- envelope-from=marcandre.lureau@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: 9
-X-Spam_score: 0.9
-X-Spam_bar: /
-X-Spam_report: (0.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.337,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=0.001, RCVD_IN_SBL_CSS=3.335,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=no autolearn_force=no
+X-CM-TRANSID: qwCowACXbfFnbsJqG3TaCQ--.526S2
+X-Coremail-Antispam: 1UD129KBjvdXoWruryktFy5CF4rWr4rKr47twb_yoWkJrb_CF
+ 95Wry2qrWDtanIyFyqyF48GrsIk3yF9ry3t34xGa17W34kWr47C3yjqrs7Xr1UCr4rJFnF
+ 9rn3K343GrsxJjkaLaAFLSUrUUUUbb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+ 9fnUUIcSsGvfJTRUUUbDxFF20E14v26r4j6ryUM7CY07I20VC2zVCF04k26cxKx2IYs7xG
+ 6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8w
+ A2z4x0Y4vE2Ix0cI8IcVAFwI0_JFI_Gr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr0_
+ Cr1l84ACjcxK6I8E87Iv67AKxVWxJr0_GcWl84ACjcxK6I8E87Iv6xkF7I0E14v26F4UJV
+ W0owAac4AC62xK8xCEY4vEwIxC4wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC
+ 0VAKzVAqx4xG6I80ewAv7VC0I7IYx2IY67AKxVWUAVWUtwAv7VC2z280aVAFwI0_Jr0_Gr
+ 1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IE
+ rcIFxwACI402YVCY1x02628vn2kIc2xKxwCY1x0262kKe7AKxVWUtVW8ZwCY02Avz4vE14
+ v_XrWl42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AK
+ xVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrx
+ kI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v2
+ 6r4j6F4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJVW8Jw
+ CI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjfUn5rcUUUU
+ U
+X-Originating-IP: [159.226.43.8]
+X-CM-SenderInfo: pwdquxrlsvqzpdlo2hpxfd2hldfou0/
+Received-SPF: pass client-ip=159.226.251.21;
+ envelope-from=tanchi25@mails.ucas.ac.cn; helo=cstnet.cn
+X-Spam_score_int: -41
+X-Spam_score: -4.2
+X-Spam_bar: ----
+X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Sun, 04 Oct 2026 11:26:04 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -107,46 +76,37 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Guard NANOSECONDS_PER_SECOND / baud with a zero check. The baud rate
-can be zero when the NCO field is zero or the input clock is not yet
-configured.
+riscv_iommu_translate() allocates an IOATC entry before passing it to
+riscv_iommu_iot_update(). The update helper normally transfers ownership
+to the hash table.
 
-Fixes: a7d2d98c5944 ("hw/char: Initial commit of Ibex UART")
-Fixes: 940aabb9f477 ("hw/char: Convert the Ibex UART to use the qdev Clock model")
-Reported-by: Pavee Hui <phui@google.com>
-Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
+When ioatc-limit is zero, however, the helper returns without inserting or
+freeing the entry. Every cacheable non-identity translation therefore leaks
+one RISCVIOMMUEntry.
+
+Free the entry on the disabled-cache path so that
+riscv_iommu_iot_update() consistently consumes the entry passed to it.
+
+Fixes: 9d085a1c3cb2 ("hw/riscv/riscv-iommu: add Address Translation Cache (IOATC)")
+Cc: qemu-stable@nongnu.org
+Signed-off-by: Tan Chi <tanchi25@mails.ucas.ac.cn>
 ---
- hw/char/ibex_uart.c | 8 ++++++--
- 1 file changed, 6 insertions(+), 2 deletions(-)
+ hw/riscv/riscv-iommu.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/hw/char/ibex_uart.c b/hw/char/ibex_uart.c
-index 26ed1aea140b..4c22fb4f58a8 100644
---- a/hw/char/ibex_uart.c
-+++ b/hw/char/ibex_uart.c
-@@ -395,7 +395,9 @@ static void ibex_uart_write(void *opaque, hwaddr addr,
-         if (value & R_CTRL_NCO_MASK) {
-             uint64_t baud = ibex_uart_get_baud(s);
+diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
+index 323a041b4a..ebf8d7006c 100644
+--- a/hw/riscv/riscv-iommu.c
++++ b/hw/riscv/riscv-iommu.c
+@@ -1700,6 +1700,7 @@ static void riscv_iommu_iot_update(RISCVIOMMUState *s,
+     GHashTable *iot_cache, RISCVIOMMUEntry *iot)
+ {
+     if (!s->iot_limit) {
++        g_free(iot);
+         return;
+     }
  
--            s->char_tx_time = (NANOSECONDS_PER_SECOND / baud) * 10;
-+            if (baud) {
-+                s->char_tx_time = (NANOSECONDS_PER_SECOND / baud) * 10;
-+            }
-         }
-         break;
-     case R_STATUS:
-@@ -455,7 +457,9 @@ static void ibex_uart_clk_update(void *opaque, ClockEvent event)
-     /* recompute uart's speed on clock change */
-     uint64_t baud = ibex_uart_get_baud(s);
- 
--    s->char_tx_time = (NANOSECONDS_PER_SECOND / baud) * 10;
-+    if (baud) {
-+        s->char_tx_time = (NANOSECONDS_PER_SECOND / baud) * 10;
-+    }
- }
- 
- static void fifo_trigger_update(void *opaque)
-
 -- 
-2.56.0.rc0.29.g47ce80527c56
+2.53.0
 
 
