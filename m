@@ -4,64 +4,110 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3500CA5FEF
-	for <qemu-riscv@archiver.kernel.org>; Sun,  4 Oct 2026 15:26:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAEC3CA5FEF
+	for <qemu-riscv@archiver.kernel.org>; Sun,  4 Oct 2026 15:38:38 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xDO6I-0005lK-Fc; Sun, 04 Oct 2026 11:26:06 -0400
+	id 1xDOHi-0000vV-Li; Sun, 04 Oct 2026 11:37:54 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <tanchi25@mails.ucas.ac.cn>)
- id 1xDO03-0004IZ-WA; Sun, 04 Oct 2026 11:19:40 -0400
-Received: from smtp21.cstnet.cn ([159.226.251.21] helo=cstnet.cn)
- by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <tanchi25@mails.ucas.ac.cn>)
- id 1xDO01-0005O6-DA; Sun, 04 Oct 2026 11:19:39 -0400
-Received: from k3-03 (unknown [159.226.43.8])
- by APP-01 (Coremail) with SMTP id qwCowACXbfFnbsJqG3TaCQ--.526S2;
- Sun, 04 Oct 2026 23:19:22 +0800 (CST)
-From: Tan Chi <tanchi25@mails.ucas.ac.cn>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
- liwei1518@gmail.com, daniel.barboza@oss.qualcomm.com,
- zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
- Tan Chi <tanchi25@mails.ucas.ac.cn>, qemu-stable@nongnu.org
-Subject: [PATCH] hw/riscv/riscv-iommu: fix entry leak with ioatc-limit=0
-Date: Sun,  4 Oct 2026 23:18:55 +0800
-Message-ID: <20261004151855.201300-1-tanchi25@mails.ucas.ac.cn>
-X-Mailer: git-send-email 2.53.0
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1xDOHh-0000vC-Pq
+ for qemu-riscv@nongnu.org; Sun, 04 Oct 2026 11:37:53 -0400
+Received: from mail-yw1-x112f.google.com ([2607:f8b0:4864:20::112f])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1xDOHg-0006mS-6j
+ for qemu-riscv@nongnu.org; Sun, 04 Oct 2026 11:37:53 -0400
+Received: by mail-yw1-x112f.google.com with SMTP id
+ 00721157ae682-8ab37e44643so6211527b3.0
+ for <qemu-riscv@nongnu.org>; Sun, 04 Oct 2026 08:37:51 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1791128271; cv=none;
+ d=google.com; s=arc-20260327;
+ b=QCKhkMlvb4HmAw0+CFeqXMZYosYhcAIYztfBU0LHiYoZUwEvtG5TPasRovcYePUyUs
+ IFapIipNZMur6LMOJoRDSjtxXzfogYG1mOsIm8RRaay2GWOrMVCEnmIFLM8f/yN3X8du
+ nem6VOkEobgNmaB4o+tlkxCvhkTkhO8SG6May5K6tzZWzTr+EP3iXVkYfO5dVFnaPP2w
+ MPIQQMlElQ4xgiiRG9mAFGiQTFMqv1KJHH+Qvfyq+bz8rL4AU28jtFB7Aq+cme4VgzR+
+ OhDx8EACRP3zfXf22gOrceScQA4/tp1t1YD26Ei8zzi1XhxB+37DvhO9m+DfspDRsxRk
+ KGqw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=RcVUgNfznVI0SNePmkcCKBmBEyIQj+7JsvQtdgF8L8w=;
+ fh=B5HyojOn8oEM0Kfh/I8vsu5AJxFRAPr0TLs3w31Ft+I=;
+ b=W3eWtKhzGP1xvYSC9JBOe1qPzUgJx3ZC5FpuZvZVKGKcP3QunnwSmEhjh0YyIx0OFZ
+ oiIVrtqqZKNlCGWWpmW4dA4RQj7vT+SmqgBjYjfZ7IxN/5oFI849v8An7J2HSDA2c+HZ
+ gZtxIWKq4pVLCH8GeJlWtD+n7Jqtv6WUx2fyqZYcoFFFU+gwPMM0CBb/ktDQSlaeTZ2D
+ y2VH7uG2xJQo2FKOLaoE6NT/BV9JJf81S+pxsnzzGsvZS0plktJcjlIeGiAahh1bF5NM
+ WvFhDxtc+356KFraQLpKHq9kTvwWS1B9CuyOeU/Bv4K2hGM/ruMpMFW43hOVBK0UKoyJ
+ 27Dg==; darn=nongnu.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1791128271; x=1791733071; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=RcVUgNfznVI0SNePmkcCKBmBEyIQj+7JsvQtdgF8L8w=;
+ b=GqIJBZqJI6hglFrCbSX2eOGd4Cy8fI8cBDgktp+6EKC8ChaZje5oRDmIHWhqm95jxZ
+ Uw7dJN1HPYfg74MnHPn4EWAab6WqbB05duYXhOqD4d5h5NFBvw2SPJhcaYY0QYJr4IdQ
+ 95UkDRAcCfaAtVWb69eTCcQx6UpbLQjIqcZqNXk4dWf2qMCCQmmvnFxVQsjVTyV7xolC
+ TH+2qy/kGIFFvXaNq0sacOYQGxfPSJniXl7UD2imyCMscgNHqLL/DBOLUg3a5OaoaGUZ
+ E++8aH2ORq/KvG0YBIOAkaTX4abGW6yDwLCtK4J7zEi/TVqQv/jDJ/sM6P7MdeshSusZ
+ N+eg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1791128271; x=1791733071;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=RcVUgNfznVI0SNePmkcCKBmBEyIQj+7JsvQtdgF8L8w=;
+ b=r+EPkDtj5/c44VwJJLiJyQLR6+uaNd9HGLfsyXKwgcWyXSMyDWJ3QuwUQNtxpWa2uo
+ p0NlVmRMOCuCAC1GuCMX5UJ0dwXltCLEqKEE2oSdhfv49vm92rvKtml1/zHBK8Z56yUC
+ hkYjmibnt+veRpxOPS7tMBrrJMxSAnj2X0UJBpUs6gfrZ1QewGgtoN/mrZkfFIBSm1Gn
+ hAF881C0iRQ5Nu1AnbNWiX+KaN1kPHZuXyQQektHL0gJ/1SFvDydkcrYKUaLzlYOpYil
+ q9NmvXBChZk5IAPYB6X8miYDMSp23fN/9Av4ujdNXfYBa35JUNnPum8AorJ1yQGzPwmr
+ y6Aw==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBx2xti3/cji3+hNyq4RLCEM8gH2vXPMTDE+qySFi9Wsu6e9ULouA4QALcweWnRjMVPZd/xR98S3sjxD@nongnu.org
+X-Gm-Message-State: AFq9FYI3LEnCA07EXXxYZuy+IutOaFfZtiej4DtwYaye4xp9WYpFObsh
+ 5IIBbgSe+nHV4dxVjXZ7kXGWQTimG2fPUKRCx8X7DuRyhIvOBJ6pPQw21uIbKt3XDTbpIyDWt8X
+ mKhy/Ry5KsFD9J3lKSBBR4WownXZCdgI=
+X-Gm-Gg: AYBFou0zQZbhQrLhPjnHbiNs3gaV3q3mqEAMOD1UdJ8rkQYxqVzxH/Tur/dU+vh8uk/
+ jZ6NWHVopa9Fv96z7+A4HGnqp0JoHdzMwXgJP3sAHfPw43eDRRdUdEBfI40ovytxKkksBNxZw7B
+ 59SGMv6KJD5G2sGP64LqDk7GUfHBungS2tDm3ynD1o1xEvQmCOSeBxIq7dN+EySlIVb/MiZQ5/s
+ U0MTHhCQWHAVTXobIOOPkDiUvtdXDbHQ/dKPo+PGVFNIR7U/n4fBa7EFbO8EvWqVPZ80PK48T2p
+ E0NfjsaOoiSfbAMAWPmxFvDHySFO8mJbY9nmeQCOaDd0vYZ5kBwnYBfVISXpOxakBSmtMKggk1h
+ p9wtqeYedoadY7H54ycJFLyslSLo=
+X-Received: by 2002:a05:690c:10:b0:8ad:c78c:2555 with SMTP id
+ 00721157ae682-8ae951f3fc1mr15292367b3.24.1791128270908; Sun, 04 Oct 2026
+ 08:37:50 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: qwCowACXbfFnbsJqG3TaCQ--.526S2
-X-Coremail-Antispam: 1UD129KBjvdXoWruryktFy5CF4rWr4rKr47twb_yoWkJrb_CF
- 95Wry2qrWDtanIyFyqyF48GrsIk3yF9ry3t34xGa17W34kWr47C3yjqrs7Xr1UCr4rJFnF
- 9rn3K343GrsxJjkaLaAFLSUrUUUUbb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
- 9fnUUIcSsGvfJTRUUUbDxFF20E14v26r4j6ryUM7CY07I20VC2zVCF04k26cxKx2IYs7xG
- 6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8w
- A2z4x0Y4vE2Ix0cI8IcVAFwI0_JFI_Gr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr0_
- Cr1l84ACjcxK6I8E87Iv67AKxVWxJr0_GcWl84ACjcxK6I8E87Iv6xkF7I0E14v26F4UJV
- W0owAac4AC62xK8xCEY4vEwIxC4wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC
- 0VAKzVAqx4xG6I80ewAv7VC0I7IYx2IY67AKxVWUAVWUtwAv7VC2z280aVAFwI0_Jr0_Gr
- 1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IE
- rcIFxwACI402YVCY1x02628vn2kIc2xKxwCY1x0262kKe7AKxVWUtVW8ZwCY02Avz4vE14
- v_XrWl42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AK
- xVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrx
- kI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v2
- 6r4j6F4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJVW8Jw
- CI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjfUn5rcUUUU
- U
-X-Originating-IP: [159.226.43.8]
-X-CM-SenderInfo: pwdquxrlsvqzpdlo2hpxfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.21;
- envelope-from=tanchi25@mails.ucas.ac.cn; helo=cstnet.cn
-X-Spam_score_int: -41
-X-Spam_score: -4.2
-X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+References: <20261004151855.201300-1-tanchi25@mails.ucas.ac.cn>
+In-Reply-To: <20261004151855.201300-1-tanchi25@mails.ucas.ac.cn>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Sun, 4 Oct 2026 23:37:39 +0800
+X-Gm-Features: AclHuK-5lptRo7y_hBtVSt2FnOmlFGodLLy8ZefqpvUId3gQT3WUGntomTAkbCg
+Message-ID: <CAEUhbmXi+d-Dfc-VtkmwxMU421DQ=eth0WGSPQa-p4Yp+_grPQ@mail.gmail.com>
+Subject: Re: [PATCH] hw/riscv/riscv-iommu: fix entry leak with ioatc-limit=0
+To: Tan Chi <tanchi25@mails.ucas.ac.cn>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, palmer@dabbelt.com, 
+ alistair.francis@wdc.com, liwei1518@gmail.com, 
+ daniel.barboza@oss.qualcomm.com, zhiwei_liu@linux.alibaba.com, 
+ chao.liu@processmission.com, qemu-stable@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::112f;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yw1-x112f.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Sun, 04 Oct 2026 11:26:04 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -76,37 +122,30 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-riscv_iommu_translate() allocates an IOATC entry before passing it to
-riscv_iommu_iot_update(). The update helper normally transfers ownership
-to the hash table.
+On Sun, Oct 4, 2026 at 11:27=E2=80=AFPM Tan Chi <tanchi25@mails.ucas.ac.cn>=
+ wrote:
+>
+> riscv_iommu_translate() allocates an IOATC entry before passing it to
+> riscv_iommu_iot_update(). The update helper normally transfers ownership
+> to the hash table.
+>
+> When ioatc-limit is zero, however, the helper returns without inserting o=
+r
+> freeing the entry. Every cacheable non-identity translation therefore lea=
+ks
+> one RISCVIOMMUEntry.
+>
+> Free the entry on the disabled-cache path so that
+> riscv_iommu_iot_update() consistently consumes the entry passed to it.
+>
+> Fixes: 9d085a1c3cb2 ("hw/riscv/riscv-iommu: add Address Translation Cache=
+ (IOATC)")
+> Cc: qemu-stable@nongnu.org
+> Signed-off-by: Tan Chi <tanchi25@mails.ucas.ac.cn>
+> ---
+>  hw/riscv/riscv-iommu.c | 1 +
+>  1 file changed, 1 insertion(+)
+>
 
-When ioatc-limit is zero, however, the helper returns without inserting or
-freeing the entry. Every cacheable non-identity translation therefore leaks
-one RISCVIOMMUEntry.
-
-Free the entry on the disabled-cache path so that
-riscv_iommu_iot_update() consistently consumes the entry passed to it.
-
-Fixes: 9d085a1c3cb2 ("hw/riscv/riscv-iommu: add Address Translation Cache (IOATC)")
-Cc: qemu-stable@nongnu.org
-Signed-off-by: Tan Chi <tanchi25@mails.ucas.ac.cn>
----
- hw/riscv/riscv-iommu.c | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
-index 323a041b4a..ebf8d7006c 100644
---- a/hw/riscv/riscv-iommu.c
-+++ b/hw/riscv/riscv-iommu.c
-@@ -1700,6 +1700,7 @@ static void riscv_iommu_iot_update(RISCVIOMMUState *s,
-     GHashTable *iot_cache, RISCVIOMMUEntry *iot)
- {
-     if (!s->iot_limit) {
-+        g_free(iot);
-         return;
-     }
- 
--- 
-2.53.0
-
+Reviewed-by: Bin Meng <bin.meng@processmission.com>
 
