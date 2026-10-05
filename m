@@ -4,78 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28AA1CA5FCE
-	for <qemu-riscv@archiver.kernel.org>; Mon,  5 Oct 2026 09:27:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5571CCA5FCE
+	for <qemu-riscv@archiver.kernel.org>; Mon,  5 Oct 2026 09:29:44 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xDexy-0000zd-7c; Mon, 05 Oct 2026 05:26:38 -0400
+	id 1xDf0d-0002Bp-El; Mon, 05 Oct 2026 05:29:23 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1xDexv-0000yX-33
- for qemu-riscv@nongnu.org; Mon, 05 Oct 2026 05:26:35 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ id 1xDf0Z-00029v-FR
+ for qemu-riscv@nongnu.org; Mon, 05 Oct 2026 05:29:19 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1xDext-0004mT-G6
- for qemu-riscv@nongnu.org; Mon, 05 Oct 2026 05:26:34 -0400
+ id 1xDf0X-0004vw-4L
+ for qemu-riscv@nongnu.org; Mon, 05 Oct 2026 05:29:19 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1791192392;
+ s=mimecast20190719; t=1791192555;
  h=from:from:reply-to:reply-to:subject:subject:date:date:
  message-id:message-id:to:to:cc:cc:mime-version:mime-version:
- content-type:content-type:in-reply-to:in-reply-to:  references:references;
- bh=cCc57hc9JUT01LxypoVVFPFOwLInLi3iRPdYV2t4GiQ=;
- b=ROn4Xtghpf4YKG711hpc32dP9jgulbX7y4ZOAW0yfyXuM3baizM90CupUa0Ab8J0h+vW1z
- 8JbSIopIRgnhuDEXtPTQ0b+CDujwPqQ8AqyWRyRXKeGoHWHq+A2YqKOM5i/SvcthZYOYlM
- bWnoeKDwI9TsFFwLibJQCbETztdgyTQ=
-Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=VWEaBtZdiYhiKz5AQwLJW7nAdhFU5R4j3oWNHV/QcxM=;
+ b=beCl2XsvpbLI/+18Dm9AQSj7neN+iANtlRDiXR6wXEnW8ilmTjK8Cl/4nk0QOPHbDeDvzr
+ 1L1A6Hn1GPrgSg4gGh3rf4topKz+vnYpM1LWsBwFTYVs8nG/qjciBOSl+C+n1hwc7oWL5z
+ Xfel6/6Xcgg780eup2EDvT51kOwvT50=
+Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-578-N6hTJVhvPH-NDifGdYGF_A-1; Mon,
- 05 Oct 2026 05:26:29 -0400
-X-MC-Unique: N6hTJVhvPH-NDifGdYGF_A-1
-X-Mimecast-MFC-AGG-ID: N6hTJVhvPH-NDifGdYGF_A_1791192388
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-453-1ZELo3cIMrCOlbnw_6lU1Q-1; Mon,
+ 05 Oct 2026 05:29:13 -0400
+X-MC-Unique: 1ZELo3cIMrCOlbnw_6lU1Q-1
+X-Mimecast-MFC-AGG-ID: 1ZELo3cIMrCOlbnw_6lU1Q_1791192552
 Received: from mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com
  (mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.12])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id AB15419236B0; Mon,  5 Oct 2026 09:26:27 +0000 (UTC)
+ by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 605A818007E7; Mon,  5 Oct 2026 09:29:12 +0000 (UTC)
 Received: from redhat.com (headnet03.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.114])
  by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 631281956044; Mon,  5 Oct 2026 09:26:25 +0000 (UTC)
-Date: Mon, 5 Oct 2026 10:26:22 +0100
+ id 7F7051956087; Mon,  5 Oct 2026 09:29:10 +0000 (UTC)
+Date: Mon, 5 Oct 2026 10:29:07 +0100
 From: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
 To: marcandre.lureau@redhat.com
 Cc: qemu-devel@nongnu.org, xen-devel@lists.xenproject.org,
  qemu-riscv@nongnu.org, qemu-ppc@nongnu.org, qemu-block@nongnu.org,
  qemu-s390x@nongnu.org, qemu-arm@nongnu.org
-Subject: Re: [PATCH 15/28] hw: define most common PCI types as secure
-Message-ID: <asNtPslm7pT6Uj1J@redhat.com>
+Subject: Re: [PATCH 03/28] hw: mark all virtio PCI devices as secure
+Message-ID: <asNt4xv7ziocHrwq@redhat.com>
 References: <20260911143627.2743803-1-berrange@redhat.com>
- <20260911143627.2743803-16-berrange@redhat.com>
- <179096166122.3025252.2345560702508398440.b4-review@b4>
+ <20260911143627.2743803-4-berrange@redhat.com>
+ <179096166110.3025252.6768256984831473183.b4-review@b4>
 MIME-Version: 1.0
-In-Reply-To: <179096166122.3025252.2345560702508398440.b4-review@b4>
+In-Reply-To: <179096166110.3025252.6768256984831473183.b4-review@b4>
 User-Agent: Mutt/2.4.2 (2026-08-30)
 X-Scanned-By: MIMEDefang 3.0 on 10.30.177.12
-X-Mimecast-MFC-PROC-ID: jcI0LqZBLltWApYJnnbgqZJ1dv82LZ75T6YCi8n2-EU_1791192388
+X-Mimecast-MFC-PROC-ID: i2Xg0zSFMEWcz58mUkxJnK6JhhXB3TPrKDo20d94D3A_1791192552
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=berrange@redhat.com;
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=berrange@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: 10
-X-Spam_score: 1.0
-X-Spam_bar: +
-X-Spam_report: (1.0 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.24,
+X-Spam_score_int: -23
+X-Spam_score: -2.4
+X-Spam_bar: --
+X-Spam_report: (-2.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.24,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=-0.01, RCVD_IN_MSPIKE_WL=-0.01,
- RCVD_IN_SBL_CSS=3.335, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.01, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -93,20 +95,53 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On Fri, Oct 02, 2026 at 09:21:01PM +0400, marcandre.lureau@redhat.com wrote:
-> > Essentially all PCI infrastructure is in scope for the virtualization
-> > use case, aside from the niche simba bridge.
+> > These are all intended for use in a virtualization scenario and must
+> > provide a security boundary. This can be done for almost all virtio
+> > PCI devices by modifying the common type register helper.
 > > 
+> > The virtio-gpu devices are unusual in not using the common
+> > virtio_pci_types_register() method, so need marking directly.
+> > 
+> > Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
+> > Message-ID: <20260911143627.2743803-4-berrange@redhat.com>
+> >
+> > diff --git a/hw/display/virtio-gpu-pci-rutabaga.c b/hw/display/virtio-gpu-pci-rutabaga.c
+> > index 4db77cb868db..a8e5e1d96cf3 100644
+> > --- a/hw/display/virtio-gpu-pci-rutabaga.c
+> > +++ b/hw/display/virtio-gpu-pci-rutabaga.c
+> > @@ -34,6 +34,7 @@ static const TypeInfo virtio_gpu_rutabaga_pci_info[] = {
+> >          .parent = TYPE_VIRTIO_GPU_PCI_BASE,
+> >          .instance_size = sizeof(VirtIOGPURutabagaPCI),
+> >          .instance_init = virtio_gpu_rutabaga_initfn,
+> > +        .secure = true,
 > 
-> You should exclude the CXL bits though, as stated on cover letter.
+> This is unusual, I wonder why it's not using the VirtioPCIDeviceTypeInfo
 
-Yes.
+Yeah, I don't know  the reason for that choice.
 
-> Also questionable perhaps: xio3130, pcie_pci, pxb
+> 
+> >          .interfaces = (const InterfaceInfo[]) {
+> >              { INTERFACE_CONVENTIONAL_PCI_DEVICE },
+> >              { },
+> > diff --git a/hw/display/virtio-gpu-pci.c b/hw/display/virtio-gpu-pci.c
+> > index 22659ca196b5..0b0d926a5b95 100644
+> > --- a/hw/display/virtio-gpu-pci.c
+> > +++ b/hw/display/virtio-gpu-pci.c
+> > @@ -75,7 +75,8 @@ static const TypeInfo virtio_gpu_pci_base_info = {
+> >      .parent = TYPE_VIRTIO_PCI,
+> >      .instance_size = sizeof(VirtIOGPUPCIBase),
+> >      .class_init = virtio_gpu_pci_base_class_init,
+> > -    .abstract = true
+> > +    .abstract = true,
+> > +    .secure = true,
+> 
+> This is a base class, probably doesn't need marking.
 
-The latter two are both reasonable as long as i440fx is around,
-and xio3130 is a core documented part of QEMU's PCI-Express support,
-though I've never understood why one would want it over pcie-pxb.
-Overall, I think all the generic PCI/PCI-E infra is in scope.
+Not /yet/.  I have a follow on series to this, not yet  posted,
+which will enforce that all parent classes are marked secure,
+when any leaf is marked secure.  There will be many more base
+classes to add besides this one, which crept in here.
+
 
 With regards,
 Daniel
