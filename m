@@ -4,78 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA5D8CA5FCE
-	for <qemu-riscv@archiver.kernel.org>; Mon,  5 Oct 2026 09:38:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BEFBECA5FF0
+	for <qemu-riscv@archiver.kernel.org>; Mon,  5 Oct 2026 09:39:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xDf8B-0003SA-T8; Mon, 05 Oct 2026 05:37:12 -0400
+	id 1xDfAD-0004Nn-H0; Mon, 05 Oct 2026 05:39:17 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1xDf81-0003Qi-Qm
- for qemu-riscv@nongnu.org; Mon, 05 Oct 2026 05:37:05 -0400
+ id 1xDfA7-0004Jl-CS
+ for qemu-riscv@nongnu.org; Mon, 05 Oct 2026 05:39:11 -0400
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1xDf7y-0005dW-Lo
- for qemu-riscv@nongnu.org; Mon, 05 Oct 2026 05:37:00 -0400
+ id 1xDfA5-0005l9-8B
+ for qemu-riscv@nongnu.org; Mon, 05 Oct 2026 05:39:10 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1791193017;
+ s=mimecast20190719; t=1791193148;
  h=from:from:reply-to:reply-to:subject:subject:date:date:
  message-id:message-id:to:to:cc:cc:mime-version:mime-version:
  content-type:content-type:in-reply-to:in-reply-to:  references:references;
- bh=unMt6qLPTr1avyGPe2yQEJ/PPmJh/DMbiX+AetxVrf4=;
- b=gwpYoeGLHjFbWizcqBVdAL19IxerlzgxMiGXaZc9UQf6tMSLo4TW2gVlIw16jNH0XAOua+
- ORevsggzu3wR4dRFSQYq9Jc+cCtLVlhZCCLavjhA9+pqLwAaEQoTTsqd98pBTIQVmjDZDc
- awcZ7iK7RqgEV5hvGpkugyRO21KQf+c=
-Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
+ bh=XTD33Ze437RIyD1HN/Z7Ka/Uk5oV0YYG4eEC0r6aeQc=;
+ b=NmD8RtJjATHT8up/yn6n6Hclh72gqQalC60Fis1TT0R/aZXIjvrUxKzEi9zCR9mfUuroMk
+ KqDJScO2Ad7woEZGH+E1HTavaf4XlPamunIiZkI+0Q33kx1RnIwv9tz69TsCeZVIPLW1wh
+ XXd8i4xEGU3rJRdj0ZW7nvFqM3HsZtA=
+Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-664-NDcwWLWuP2eiW956REEg6Q-1; Mon,
- 05 Oct 2026 05:36:56 -0400
-X-MC-Unique: NDcwWLWuP2eiW956REEg6Q-1
-X-Mimecast-MFC-AGG-ID: NDcwWLWuP2eiW956REEg6Q_1791193014
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-574-eIPyz1uXNNe0JUYtKo6Ylw-1; Mon,
+ 05 Oct 2026 05:39:07 -0400
+X-MC-Unique: eIPyz1uXNNe0JUYtKo6Ylw-1
+X-Mimecast-MFC-AGG-ID: eIPyz1uXNNe0JUYtKo6Ylw_1791193146
 Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
  (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 961E61802140; Mon,  5 Oct 2026 09:36:54 +0000 (UTC)
+ by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id BFAF519539BA; Mon,  5 Oct 2026 09:39:05 +0000 (UTC)
 Received: from redhat.com (headnet03.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.114])
  by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 2144930000E4; Mon,  5 Oct 2026 09:36:51 +0000 (UTC)
-Date: Mon, 5 Oct 2026 10:36:49 +0100
+ id CA95C30000E4; Mon,  5 Oct 2026 09:39:03 +0000 (UTC)
+Date: Mon, 5 Oct 2026 10:39:00 +0100
 From: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
 To: marcandre.lureau@redhat.com
 Cc: qemu-devel@nongnu.org, xen-devel@lists.xenproject.org,
  qemu-riscv@nongnu.org, qemu-ppc@nongnu.org, qemu-block@nongnu.org,
  qemu-s390x@nongnu.org, qemu-arm@nongnu.org
-Subject: Re: [PATCH 17/28] hw/display: mark bochs, cirrus, qxl, VGA, ramfb as
+Subject: Re: [PATCH 10/28] hw/usb: mark commonly used USB devices/hosts as
  secure
-Message-ID: <asNvsf98nllmba8v@redhat.com>
+Message-ID: <asNwNM5DgooeSn27@redhat.com>
 References: <20260911143627.2743803-1-berrange@redhat.com>
- <20260911143627.2743803-18-berrange@redhat.com>
- <179096166126.3025252.2006364005625327282.b4-review@b4>
+ <20260911143627.2743803-11-berrange@redhat.com>
+ <179096166117.3025252.2297105460212965387.b4-review@b4>
 MIME-Version: 1.0
-In-Reply-To: <179096166126.3025252.2006364005625327282.b4-review@b4>
+In-Reply-To: <179096166117.3025252.2297105460212965387.b4-review@b4>
 User-Agent: Mutt/2.4.2 (2026-08-30)
 X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
-X-Mimecast-MFC-PROC-ID: -Ogm-L6Qboviz-gWilW_kgvnM519vTQ5N8Pyp2ozgdU_1791193014
+X-Mimecast-MFC-PROC-ID: tZaQo9V8WqLECHUNEEvKkznyF6WL0m9_vWjHpPqc3ao_1791193146
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Received-SPF: pass client-ip=170.10.133.124; envelope-from=berrange@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -23
-X-Spam_score: -2.4
-X-Spam_bar: --
-X-Spam_report: (-2.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.24,
+X-Spam_score_int: 10
+X-Spam_score: 1.0
+X-Spam_bar: +
+X-Spam_report: (1.0 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.24,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=-0.01, RCVD_IN_MSPIKE_WL=-0.01,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_SBL_CSS=3.335, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -93,28 +94,21 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On Fri, Oct 02, 2026 at 09:21:01PM +0400, marcandre.lureau@redhat.com wrote:
-> > Most of the display adapters are emulating old hardware which is not
-> > relevant to virtualization use cases.
+> > Most of the standardized  USB1/2/3 host controllers are relevant
+> > for virtualization use cases, so should be declared secure. The
+> > "NEC" XHCI variant is slightly non-standard, but since it is a
+> > trivial sub-class of the generic XHCI, there's no reason to
+> > exclude it.
 > > 
-> > The exceptions that should be considered secure are Cirrus (PCI, not
-> > ISA), Bochs, QXL, RAMFB, VGA (PCI, MMIO, not ISA) and VMWare VGA.
+> > The set of devices that are expected to be used is HID (mouse,
+> > tablet, keyboard), host passthrough, CCID (smartcard), hub,
+> > storage and the redirect tunnelling.
 > 
-> I don't think we should support all those display devices as security boundaries.
+> Can't we exclude uhci/ehci nowadays?
 
-Opps, this bit of the commit message was not quite right, as I did
-NOT in fact include VMWare VGA.
-
-The Cirrus & QXL is an area where my downstream wishlist conflicts
-with my upstream wishlist, because both were widely used for a long
-time in virt scenarios, and they still exist in supported RHEL
-versions, even if gone from the latest releases.
-
-> I would shorten the list to: bochs, ramfb, vga, and virtio-gpu*
-> (excluding virgl & rutabaga). Anything else has been known to
-> have various risks and is much higher complexity..
-
-NB, anything virtio related is handled elsewhere in this series.a
-
+RHEL-10 still ships both, so there's still a demand from a downstream
+POV, but USB is in an awkward place with its lack of maintainership,
+and arguably these should be considered obsolete.
 
 
 With regards,
