@@ -4,65 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5AF37CA5FCE
-	for <qemu-riscv@archiver.kernel.org>; Mon,  5 Oct 2026 10:41:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B325CA5FCE
+	for <qemu-riscv@archiver.kernel.org>; Mon,  5 Oct 2026 11:16:42 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xDg7n-0003QI-RP; Mon, 05 Oct 2026 06:40:51 -0400
+	id 1xDggB-0001u0-S2; Mon, 05 Oct 2026 07:16:24 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <rick@sloservers.com>)
- id 1xDg7F-0002x4-Ot; Mon, 05 Oct 2026 06:40:19 -0400
-Received: from vps.sloservers.com ([204.109.61.218])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <rick@sloservers.com>)
- id 1xDg7E-0003MC-7q; Mon, 05 Oct 2026 06:40:17 -0400
-Received: from thinking.duckdns.org (unknown [192.168.11.4])
- by vps.sloservers.com (Postfix) with ESMTPS id 830FA24F9A;
- Mon, 05 Oct 2026 10:40:12 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sloservers.com;
- s=mail; t=1791196812;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=C1y5WcMQLB8Xqtizoq+it7umBoA/sk8nUETfPJLI8Kg=;
- b=eATwuZS3b8uC6GyGLsERLvL0mCMWzILUW2NntjwJtQgt26/vTwqB7RTZvCLAVGBbww/o3d
- 9Km+CcPZdI/t93ourz5G6HiQ/+K13Wq6kaFheHqgrTk3ZApKUvfPaPXqqJSGBYD9Pxi23a
- Ek7MG0fUX6V4uTeBfuj/E2d8ZfgMXlS5bVONzDA+46jx/WXK6ZQuH2JGGQ2Vx25laaQW//
- J2Svllr1LeGfSFlmpeVHxoxarG/pj6P6z3ElyTwDhProRdZ6WBv5YIodumfMzELBaTmtjv
- KI7uBqFJyer6rxyp09jIe8HtDsCxh8eqHh0We/0lIbSqcs7WgWwP8y3zD/L5FA==
-Received: from ollopa-pc.thinking.duckdns.org (OPNsense.thinking.duckdns.org
- [192.168.1.5])
- by thinking.duckdns.org (Postfix) with ESMTPSA id DDD5C1002;
- Mon, 05 Oct 2026 03:40:11 -0700 (PDT)
-From: Rick Richard <rick@sloservers.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Sunil V L <sunilvl@ventanamicro.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- "Michael S . Tsirkin" <mst@redhat.com>,
- Igor Mammedov <imammedo@redhat.com>, Ani Sinha <anisinha@redhat.com>
-Subject: [PATCH v2 2/3] hw/riscv/virt-acpi-build: Fix the UART register width
- in SPCR
-Date: Mon,  5 Oct 2026 03:40:07 -0700
-Message-ID: <20261005104008.214588-3-rick@sloservers.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20261005104008.214588-1-rick@sloservers.com>
-References: <20261005104008.214588-1-rick@sloservers.com>
+ (Exim 4.90_1) (envelope-from <tanchi25@mails.ucas.ac.cn>)
+ id 1xDgfo-0001mP-DR; Mon, 05 Oct 2026 07:16:01 -0400
+Received: from smtp81.cstnet.cn ([159.226.251.81] helo=cstnet.cn)
+ by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
+ (Exim 4.90_1) (envelope-from <tanchi25@mails.ucas.ac.cn>)
+ id 1xDgfl-0007Br-M4; Mon, 05 Oct 2026 07:16:00 -0400
+Received: from k3-03 (unknown [159.226.43.8])
+ by APP-03 (Coremail) with SMTP id rQCowABnZjTNhsNqNyGuCQ--.34860S2;
+ Mon, 05 Oct 2026 19:15:48 +0800 (CST)
+From: Tan Chi <tanchi25@mails.ucas.ac.cn>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
+ liwei1518@gmail.com, daniel.barboza@oss.qualcomm.com,
+ zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
+ Tan Chi <tanchi25@mails.ucas.ac.cn>, qemu-stable@nongnu.org
+Subject: [PATCH v2] hw/riscv/riscv-iommu: fix entry leak with ioatc-limit=0
+Date: Mon,  5 Oct 2026 19:15:23 +0800
+Message-ID: <20261005111523.277550-1-tanchi25@mails.ucas.ac.cn>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=204.109.61.218; envelope-from=rick@sloservers.com;
- helo=vps.sloservers.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-CM-TRANSID: rQCowABnZjTNhsNqNyGuCQ--.34860S2
+X-Coremail-Antispam: 1UD129KBjvJXoW7Aw45tF4DGFyrJryfCw48Zwb_yoW8Ar4fpr
+ W3Kr4rA3WrXFn2y3Z2kw48CF409an5Wa4Yvr15uwn5Ar45KrWUCF4Dt3s7ua4DtFs5uF1a
+ vw4j9r1DZF1jyw7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUPj14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+ 1l84ACjcxK6xIIjxv20xvE14v26r1j6r1xM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
+ 6F4UM28EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AKxVWxJr
+ 0_GcWlnxkEFVAIw20F6cxK64vIFxWle2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xv
+ F2IEw4CE5I8CrVC2j2WlYx0E2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r
+ 4UMcvjeVCFs4IE7xkEbVWUJVW8JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I
+ 648v4I1lFIxGxcIEc7CjxVA2Y2ka0xkIwI1lc7CjxVAaw2AFwI0_Jw0_GFylc2xSY4AK67
+ AK6r4kMxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAF
+ wI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc4
+ 0Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AK
+ xVWUJVW8JwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr
+ 1lIxAIcVC2z280aVCY1x0267AKxVWUJVW8JbIYCTnIWIevJa73UjIFyTuYvjfUe_-BDUUU
+ U
+X-Originating-IP: [159.226.43.8]
+X-CM-SenderInfo: pwdquxrlsvqzpdlo2hpxfd2hldfou0/
+Received-SPF: pass client-ip=159.226.251.81;
+ envelope-from=tanchi25@mails.ucas.ac.cn; helo=cstnet.cn
+X-Spam_score_int: -41
+X-Spam_score: -4.2
+X-Spam_bar: ----
+X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -78,32 +75,46 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The riscv virt board uses a 16550 UART with an 8-bit register stride,
-but the SPCR table reports 32, which looks to have been copied from
-arm virt, whose PL011 has a 32-bit stride.  Change it to the correct
-stride for a 16550.
+riscv_iommu_translate() allocates an IOATC entry before passing it to
+riscv_iommu_iot_update(). The update helper normally transfers ownership
+to the hash table.
 
-Fixes: 3e6f1e61b4 ("hw/riscv/virt-acpi-build.c: Generate SPCR table")
-Signed-off-by: Rick Richard <rick@sloservers.com>
-Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+When ioatc-limit is zero, however, the helper returns without inserting or
+freeing the entry. Every cacheable non-identity translation therefore leaks
+one RISCVIOMMUEntry.
+
+Avoid this by disabling caching at the caller when ioatc-limit is zero,
+so riscv_iommu_translate() does not allocate an IOATC entry in the first
+place. This avoids special-casing entry freeing in riscv_iommu_iot_update()
+and keeps the ownership semantics simpler.
+
+Suggested-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Fixes: 9d085a1c3cb2 ("hw/riscv/riscv-iommu: add Address Translation Cache (IOATC)")
+Cc: qemu-stable@nongnu.org
+Signed-off-by: Tan Chi <tanchi25@mails.ucas.ac.cn>
 ---
- hw/riscv/virt-acpi-build.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+v2:
+- Disable caching when ioatc-limit is zero instead of freeing the
+  allocated entry in riscv_iommu_iot_update().
 
-diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
-index 8e516ec1..0475dcb5 100644
---- a/hw/riscv/virt-acpi-build.c
-+++ b/hw/riscv/virt-acpi-build.c
-@@ -246,7 +246,7 @@ spcr_setup(GArray *table_data, BIOSLinker *linker, RISCVVirtState *s)
-     AcpiSpcrData serial = {
-         .interface_type = 0x12,       /* 16550 compatible */
-         .base_addr.id = AML_AS_SYSTEM_MEMORY,
--        .base_addr.width = 32,
-+        .base_addr.width = 8,
-         .base_addr.offset = 0,
-         .base_addr.size = 1,
-         .base_addr.addr = s->memmap[VIRT_UART0].base,
+ hw/riscv/riscv-iommu.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
+index 323a041b4a..866f49cc39 100644
+--- a/hw/riscv/riscv-iommu.c
++++ b/hw/riscv/riscv-iommu.c
+@@ -2919,7 +2919,8 @@ static IOMMUTLBEntry riscv_iommu_memory_region_translate(
+         /* Translation disabled or invalid. */
+         iotlb.addr_mask = 0;
+         iotlb.perm = IOMMU_NONE;
+-    } else if (riscv_iommu_translate(as->iommu, ctx, &iotlb, true)) {
++    } else if (riscv_iommu_translate(as->iommu, ctx, &iotlb,
++                                     as->iommu->iot_limit > 0)) {
+         /* Translation disabled or fault reported. */
+         iotlb.addr_mask = 0;
+         iotlb.perm = IOMMU_NONE;
 -- 
-2.43.0
+2.53.0
 
 
