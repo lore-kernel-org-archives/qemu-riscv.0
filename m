@@ -4,145 +4,157 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A81FCA5FF0
-	for <qemu-riscv@archiver.kernel.org>; Mon,  5 Oct 2026 13:07:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1FD7CA5FF0
+	for <qemu-riscv@archiver.kernel.org>; Mon,  5 Oct 2026 13:16:22 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xDiOp-0001Xt-7U; Mon, 05 Oct 2026 09:06:35 -0400
+	id 1xDiXr-0003nJ-OG; Mon, 05 Oct 2026 09:15:57 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1xDiOa-0001UY-Br
- for qemu-riscv@nongnu.org; Mon, 05 Oct 2026 09:06:20 -0400
-Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
+ (Exim 4.90_1) (envelope-from <farman@linux.ibm.com>)
+ id 1xDiXl-0003mR-Vq; Mon, 05 Oct 2026 09:15:50 -0400
+Received: from mx0a-001b2d01.pphosted.com ([148.163.156.1])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1xDiOX-0002s3-KX
- for qemu-riscv@nongnu.org; Mon, 05 Oct 2026 09:06:20 -0400
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 695CFORh2225503
- for <qemu-riscv@nongnu.org>; Mon, 5 Oct 2026 13:06:16 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- 68/MEj2aCnTszQcG+42MXKwOQtnPqyWZO3EspYwBapY=; b=dpawgZD59/svzDvA
- 5eyEAYiHv2bphtiWRdbm98p0zG4ASH7l9aodoZmPfNdd9tJZXy1OgTlyU/IBuDZI
- HMoU5QtoRKm4WWYYjGkRVIu1onMT3aNaKjFdeORaxQ9KGGWvk7g8jZ5eG9bQcg6l
- Gf3TSvWV7AFgw+CAeYalbTi18XoYO/gSdKTdMkfUR2S0/S8AGWtKTTWzthENpTrd
- LqOcWwW73dMW5+BZ2mOf3MWnIBjri23EfBFOfeg9ZkxvyelGJkDLQekPerJpZoBv
- v7glvw/Dat37P7uQkZJALSWGl7jvLJKVjZetBltp5/j/4JRQq2KXoeQ15N3aX1xq
- ar9oeg==
-Received: from mail-vs1-f71.google.com (mail-vs1-f71.google.com
- [209.85.217.71])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h4bhg06wj-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Mon, 05 Oct 2026 13:06:15 +0000 (GMT)
-Received: by mail-vs1-f71.google.com with SMTP id
- ada2fe7eead31-7bf45382794so1685062137.1
- for <qemu-riscv@nongnu.org>; Mon, 05 Oct 2026 06:06:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1791205573; x=1791810373; darn=nongnu.org;
- h=content-transfer-encoding:content-type:in-reply-to:from:references
- :cc:to:content-language:subject:user-agent:mime-version:date
- :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=68/MEj2aCnTszQcG+42MXKwOQtnPqyWZO3EspYwBapY=;
- b=YNfkTJXuZTltwI3KiK11X8yPOxdvNsvB9Eb/ta55eh1L3M4dZVrvHIPl0xZfoM2KdI
- cDisZbnu0aO1pMTEbN+Ln/02g4OzNROCDlABb8qtDttHfWoTvGtE4rKhz1J1mv8PNpDj
- QO7zeMMDn3BKpS88tJfnMEoz9JRChF4Hc13iR110H80iqc1pay+ZAztcReYlKeZUSmGd
- 46h6DoCso8an85e8zBMZ+Xq7MJp8/Ql8WhaQ1ZmsyolKdhVqT8wNUMSCY0/ksFp24cmc
- n/NWQFQhxt90iFt5IYVwdCfVLxdCC/+FgaOeOFu4pXnSy/DEIlVagR+e9rXRSAi8er+y
- HxYQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1791205573; x=1791810373;
- h=content-transfer-encoding:content-type:in-reply-to:from:references
- :cc:to:content-language:subject:user-agent:mime-version:date
- :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=68/MEj2aCnTszQcG+42MXKwOQtnPqyWZO3EspYwBapY=;
- b=jlu4FJZIuuI2h6eRqqgJDCnHIEUwLRGYF8OFLNnwK3ceT6PK83txwTS4tmY/9DpU7r
- ZWMrsgoWLEWF8N39I5NAJS3bqy6HVOzOC5FXzhE5bJdDhvkGFat9Ac/bEbSCWJVZVx2C
- U3OWh1xILfVzcXs9K225c/WNa4EeTjtzz2cGXpa/KiyoR0FQ7oZdr427vS4Ui7shWdvT
- zKONBMLdSVnkWbezekKs4nlz7Y2WqbaoWaKVRNKYXdRDDTwY9HUUZ7cQevJlTAbvZMlB
- 8bJmCCE50vnDUMFCbLxLj94iv8kUxj/E39xhep8AD8NmmP4Q4At1wy7GdGiQyOScXRhN
- weCw==
-X-Forwarded-Encrypted: i=1;
- AKwUvBzPou4oHQEDtTZpuuBTMHOhlTyjUgwUX6ebIlk4tHJtKh8znTR3ifCvvbXn9UJDk2z5nIOYxY1h2i8W@nongnu.org
-X-Gm-Message-State: AFq9FYLwBLxZye5rXYe1bZ7KbmRF4RmqGK+9oS0Yskrm/75YSLjGh9xs
- JEUQ8qgmg5GOJ38pTsMyJggE+8ymMz3ukp3f7zwq38dAMfBJspt5iBBXFOXEA2TbC3AmcX70b6Q
- HARuUm2Yjgy3Hog/0xFXONa8M7Rmp5EtcZKICWziLwlKyojXuGI2WPDK2BYqqcdxKn7V1
-X-Gm-Gg: AYBFou1zTkv0d+2hQZHEOoVMQC+Tq+9kq0UoCfhjexK2nrto8l+V+fQx0KuXvzjokzy
- KeTbHgbaTS87zZ294xQYn4h2Fyre6bltmGj3gYomwOfMX5HUNfH8/GL7H+EoXZpDXrCgrTz4YiC
- dzbdFktnMU9k9EQ92YX4zDbhOB1RYsjHuECq9s9QakbX2uh9DEucRRhU54z2+H7olUGDcaD0aAk
- 1i6FeXXy7yFDgJE8PaJ1TU1TEuBBm6X5Bd+UP7ps1BuPcNAO6QeLVvl2Ag4MYoBKHBeeOKFb/yK
- q9Z32UYmjOmoqLsrrFHgBGcjfurehCT9M3k6XwXwMD7tFRUGNy0ByoX4BByzV73YShKOEOvEy3b
- sS/VJKfZGbqFIMfL9I2GrmbBPtqXQ3TJSsg==
-X-Received: by 2002:a05:6102:148c:b0:7bc:696f:a5fb with SMTP id
- ada2fe7eead31-7c0f5baadd7mr2929685137.29.1791205572710; 
- Mon, 05 Oct 2026 06:06:12 -0700 (PDT)
-X-Received: by 2002:a05:6102:148c:b0:7bc:696f:a5fb with SMTP id
- ada2fe7eead31-7c0f5baadd7mr2929564137.29.1791205570734; 
- Mon, 05 Oct 2026 06:06:10 -0700 (PDT)
-Received: from [192.168.69.225] (pmd666.hd.free.fr. [88.187.86.199])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48c6229ce17sm3389247f8f.29.2026.10.05.06.06.09
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 05 Oct 2026 06:06:10 -0700 (PDT)
-Message-ID: <f1481bad-4dbb-414c-801e-aa24a6977b18@oss.qualcomm.com>
-Date: Mon, 5 Oct 2026 15:06:08 +0200
+ (Exim 4.90_1) (envelope-from <farman@linux.ibm.com>)
+ id 1xDiXk-0003l4-27; Mon, 05 Oct 2026 09:15:49 -0400
+Received: from pps.filterd (m0356517.ppops.net [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 695CZaVd632447; Mon, 5 Oct 2026 13:15:40 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
+ :content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=pp1; bh=1NqLZ5
+ dwWZAj9RWdXNVN6BhrXdnLPqLMnyjw9/4Hui8=; b=jvt2a2OvWwv/WXwoWJ5t8z
+ pDO7LkSa07W/ARpepjURvqPDHWsp+nUTSupx/AklCyBVpFuchajk02k7J1HOPSp7
+ rFgWY6p4bRWBwojnIADpOu1lYCzMsQ7yjruMka6qvJPqsJ5CWSF8z2DhJZrfaSB3
+ 8oDVk1VtWODbIZKa9MZjTYeFZHPareDI8QRUBc60W9dumzST4AyFiavj7I7bNvST
+ 3jJbZZjyu2Z8axlBnK/z+Syx40fPBaT78sALlTSc4PfsWozdFPkiQ1uKyLVjjkfc
+ GCehSG9HDhXP6OCMs3ZKmDUseX1ayqaF4s6euVomf8XQGnR5XVL71GPR1tP9qF+A
+ ==
+Received: from ppma13.dal12v.mail.ibm.com
+ (dd.9e.1632.ip4.static.sl-reverse.com [50.22.158.221])
+ by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4h2se5abpn-1
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+ Mon, 05 Oct 2026 13:15:40 +0000 (GMT)
+Received: from pps.filterd (ppma13.dal12v.mail.ibm.com [127.0.0.1])
+ by ppma13.dal12v.mail.ibm.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 695CHrxN1637701; Mon, 5 Oct 2026 13:15:39 GMT
+Received: from smtprelay02.dal12v.mail.ibm.com ([172.16.1.4])
+ by ppma13.dal12v.mail.ibm.com (PPS) with ESMTPS id 4h3e8g5cwr-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 05 Oct 2026 13:15:39 +0000 (GMT)
+Received: from smtpav01.wdc07v.mail.ibm.com (smtpav01.wdc07v.mail.ibm.com
+ [10.39.53.228])
+ by smtprelay02.dal12v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
+ 695DFdjB8716960
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Mon, 5 Oct 2026 13:15:39 GMT
+Received: from smtpav01.wdc07v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id E681558103;
+ Mon,  5 Oct 2026 13:15:38 +0000 (GMT)
+Received: from smtpav01.wdc07v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id EC404580FC;
+ Mon,  5 Oct 2026 13:15:37 +0000 (GMT)
+Received: from [9.61.5.156] (unknown [9.61.5.156])
+ by smtpav01.wdc07v.mail.ibm.com (Postfix) with ESMTP;
+ Mon,  5 Oct 2026 13:15:37 +0000 (GMT)
+Message-ID: <8ce35da3-3be6-4164-8ab5-ff606a5affc2@linux.ibm.com>
+Date: Mon, 5 Oct 2026 09:15:37 -0400
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 01/28] hw: mark secure machines for x86, s390, ppc, arm,
- loonarch, riscv
-Content-Language: en-US
+Subject: Re: [PATCH 04/28] hw: mark all virtio CCW devices as secure
 To: =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>,
  qemu-devel@nongnu.org
 Cc: xen-devel@lists.xenproject.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
  qemu-block@nongnu.org, qemu-s390x@nongnu.org, qemu-arm@nongnu.org
 References: <20260911143627.2743803-1-berrange@redhat.com>
- <20260911143627.2743803-2-berrange@redhat.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
-In-Reply-To: <20260911143627.2743803-2-berrange@redhat.com>
+ <20260911143627.2743803-5-berrange@redhat.com>
+Content-Language: en-US
+From: Eric Farman <farman@linux.ibm.com>
+Autocrypt: addr=farman@linux.ibm.com; keydata=
+ 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
+ y8m0x6unNti2MZIUMy0m2gcE
+In-Reply-To: <20260911143627.2743803-5-berrange@redhat.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-ORIG-GUID: j3tPVQiPTbocpuRx614IS1WGPHlbC0Ym
-X-Authority-Analysis: v=2.4 cv=GMGdgeNK c=1 sm=1 tr=0 ts=6ac3a0c7 cx=c_pps
- a=P2rfLEam3zuxRRdjJWA2cw==:117 a=4s3hRJSeHn4rkQlkrse1kQ==:17
- a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=M51BFTxLslgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
- a=20KFwNOVAAAA:8 a=tVdpVsJRxwjYG60tULUA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=ODZdjJIeia2B_SHc_B0f:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDA1MDA1MSBTYWx0ZWRfX3WgokNQtXthx
- sTz9k8Du/OAsPnebH76ThOzOn6kdV7+ifkCXbmv9tt/mpeUz2eLL/jD0l0ZrOI7l3XhyWnaxMlt
- vk4XTV7UhFQjzDUJvbrMH+uvcKqMkYQ=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDA1MDA1MSBTYWx0ZWRfXxLQxVJ76K1jb
- vpIJ/BaLDGD/RpHntlw5tIr8a2t+ny5cctSdjIU0Zu2jbekGapV9Oq/tTPC/pYO4K5LLGfocY0K
- SFH4UyRr+8C+IOJ+EfNb7/4nMKKleVnw5KT4RMWPc4qXcX39YyfG0ABKFHlXnw6moSv2atzGNaR
- APxlo2vMlJ/jkg/TQ1aRoghVpGB2wtpwBunHnFPo1J4wfL4gs6UnOpMnlRpEeKvXbVHm/POmQIf
- IX9QcXFK8m8d8A/9vfiTovtzRqzRpuG8Ushz0sgXq/DncSsEP/1B2qKXtp5zGzG2STO56C/LWWz
- MOEeNluiw66iwgUH7XRr3KwsPaU2zeg703bQVyiBE68TgJE1TesCab6qVapZPukR/abOfP1UQ/u
- NtJ2ZFNGwuNdaD7CM+ujKfQpBByZ5CoLeaW2Dw09r24FYaG66dj9xLNLlD2Uj8J23PaRxvBNt11
- J8pOZaYB7kHURyZkBaQ==
-X-Proofpoint-GUID: j3tPVQiPTbocpuRx614IS1WGPHlbC0Ym
+X-TM-AS-GCONF: 00
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDA1MDA1MSBTYWx0ZWRfX71xG4ZJBIVbr
+ +2BJq9/Qn9Z7Eq3jKV4se9A1DquK6oFxYeSSznhCfLL4lNZ7SdKpX8EyVfq14ZYtsd8Me+4B7Bh
+ r5jQYtM1FkjBu+6RUsQl/8MqlLQnz8s=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDA1MDA1MSBTYWx0ZWRfX5MXI1orFUyP1
+ s7xx6dob93b6AtdPNjuowZAwHwnfwyhH6yrirtu2ms/2spr975AipTN/bEpfTWWUiOv6U2ROi6G
+ iqaefh14WqsNYiqtWuHX2JV/DNUqUtrPulrwRtLEb3w0edx7WjNr6i5giGH1XYO8dknG4kt+EuU
+ hHi8wj4sHUif5HagsKZQlqIhVnCt3xlB+8FJLEofS7FgNcJYlWL3cDp25/BVYvHB8C4f/GP//ip
+ Alq3cBjt33uFWgYoZYXMU+wEbiXxtHQgv2tnwb/T/x8z0I2P5gZYN1uUmrRp0YqplspljQpXqRi
+ RhaP4MD5qksh3omadGC2Kvw0eL3e2AHTqucWdItzaZrloOfOl9iYcOvXVKcQbqK63J4lM6D7LpQ
+ mpn6RahyjeKFA3CuSFow4QPH1LhSvFIoxVJDMRp+dW+sC3UThCWBQL8pBBCfrZORlys1jLScygq
+ fypf+zwdy08HutoDqqQ==
+X-Proofpoint-GUID: bSLXlWEkHqj7ZeiybnpzrhM2MnErRwWi
+X-Authority-Analysis: v=2.4 cv=UNRIjyfy c=1 sm=1 tr=0 ts=6ac3a2fc cx=c_pps
+ a=AfN7/Ok6k8XGzOShvHwTGQ==:117 a=AfN7/Ok6k8XGzOShvHwTGQ==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=RnoormkPH1_aCDwRdu11:22 a=U7nrCbtTmkRpXpFmAIza:22 a=20KFwNOVAAAA:8
+ a=VnNF1IyMAAAA:8 a=Us0OraqUOvBpldwEjHIA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=ZXulRonScM0A:10
+X-Proofpoint-ORIG-GUID: bSLXlWEkHqj7ZeiybnpzrhM2MnErRwWi
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-05_03,2026-10-05_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 suspectscore=0 spamscore=0 adultscore=0 malwarescore=0
- priorityscore=1501 impostorscore=0 lowpriorityscore=0 clxscore=1015
- phishscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
- definitions=main-2610050051
-Received-SPF: pass client-ip=205.220.180.131;
- envelope-from=philmd@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
+ spamscore=0 impostorscore=0 adultscore=0 bulkscore=0 lowpriorityscore=0
+ phishscore=0 clxscore=1011 priorityscore=1501 suspectscore=0 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2610050051
+Received-SPF: pass client-ip=148.163.156.1; envelope-from=farman@linux.ibm.com;
+ helo=mx0a-001b2d01.pphosted.com
+X-Spam_score_int: -26
+X-Spam_score: -2.7
 X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_LOW=-0.7,
+ RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -158,41 +170,31 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi,
 
-On 11/9/26 16:36, Daniel P. BerrangÃ© wrote:
-> The versioned machine types are typically present for use in
-> virtualization use cases and can be expected to provide a security
-> barrier. The only exceptions are the m68k versioned machine types
-> which are only used with TCG. There are also a handful of other
-> machines declared secure in docs/system/security.rst, notably
-> the Xen machine variants and microvm.
+
+On 9/11/26 10:36 AM, Daniel P. Berrangé wrote:
+> These are all intended for use in a virtualization scenario and must
+> provide a security boundary.
 > 
 > Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
 > ---
->   hw/arm/virt.c              | 1 +
->   hw/arm/xen-pvh.c           | 1 +
->   hw/i386/microvm.c          | 1 +
->   hw/i386/pc_piix.c          | 4 ++--
->   hw/i386/xen/xen-pvh.c      | 1 +
->   hw/loongarch/virt.c        | 2 ++
->   hw/ppc/spapr.c             | 1 +
->   hw/riscv/virt.c            | 1 +
->   hw/s390x/s390-virtio-ccw.c | 1 +
->   hw/xen/xen-pvh-common.c    | 1 +
->   hw/xenpv/xen_machine_pv.c  | 2 +-
->   include/hw/i386/pc.h       | 1 +
->   12 files changed, 14 insertions(+), 3 deletions(-)
+>   hw/s390x/vhost-scsi-ccw.c     | 1 +
+>   hw/s390x/vhost-user-fs-ccw.c  | 1 +
+>   hw/s390x/vhost-vsock-ccw.c    | 1 +
+>   hw/s390x/virtio-ccw-9p.c      | 1 +
+>   hw/s390x/virtio-ccw-balloon.c | 1 +
+>   hw/s390x/virtio-ccw-blk.c     | 1 +
+>   hw/s390x/virtio-ccw-crypto.c  | 1 +
+>   hw/s390x/virtio-ccw-gpu.c     | 1 +
+>   hw/s390x/virtio-ccw-input.c   | 5 +++++
+>   hw/s390x/virtio-ccw-md.c      | 1 +
+>   hw/s390x/virtio-ccw-mem.c     | 1 +
+>   hw/s390x/virtio-ccw-net.c     | 1 +
+>   hw/s390x/virtio-ccw-rng.c     | 1 +
+>   hw/s390x/virtio-ccw-scsi.c    | 1 +
+>   hw/s390x/virtio-ccw-serial.c  | 1 +
+>   hw/s390x/virtio-ccw.c         | 1 +
+>   16 files changed, 20 insertions(+)
 
-This patch should be split per machine / area of maintenance,
-so maintainers can officially Ack their commitment to security
-boundary for their machine.
-
-I'm not sure LoongArch / RISCV / PPC are. If this was previously
-discussed, then pointer to the public discussions should be listed
-in the patch description.
-
-Regards,
-
-Phil.
+Acked-by: Eric Farman <farman@linux.ibm.com>
 
