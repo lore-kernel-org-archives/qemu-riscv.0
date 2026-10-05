@@ -4,79 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BEFBECA5FF0
-	for <qemu-riscv@archiver.kernel.org>; Mon,  5 Oct 2026 09:39:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8FA1CA5FF0
+	for <qemu-riscv@archiver.kernel.org>; Mon,  5 Oct 2026 10:41:05 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xDfAD-0004Nn-H0; Mon, 05 Oct 2026 05:39:17 -0400
+	id 1xDg7f-0003Ah-Im; Mon, 05 Oct 2026 06:40:45 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1xDfA7-0004Jl-CS
- for qemu-riscv@nongnu.org; Mon, 05 Oct 2026 05:39:11 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ (Exim 4.90_1) (envelope-from <rick@sloservers.com>)
+ id 1xDg7G-0002x6-HT; Mon, 05 Oct 2026 06:40:19 -0400
+Received: from vps.sloservers.com ([204.109.61.218])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1xDfA5-0005l9-8B
- for qemu-riscv@nongnu.org; Mon, 05 Oct 2026 05:39:10 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1791193148;
- h=from:from:reply-to:reply-to:subject:subject:date:date:
- message-id:message-id:to:to:cc:cc:mime-version:mime-version:
- content-type:content-type:in-reply-to:in-reply-to:  references:references;
- bh=XTD33Ze437RIyD1HN/Z7Ka/Uk5oV0YYG4eEC0r6aeQc=;
- b=NmD8RtJjATHT8up/yn6n6Hclh72gqQalC60Fis1TT0R/aZXIjvrUxKzEi9zCR9mfUuroMk
- KqDJScO2Ad7woEZGH+E1HTavaf4XlPamunIiZkI+0Q33kx1RnIwv9tz69TsCeZVIPLW1wh
- XXd8i4xEGU3rJRdj0ZW7nvFqM3HsZtA=
-Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-574-eIPyz1uXNNe0JUYtKo6Ylw-1; Mon,
- 05 Oct 2026 05:39:07 -0400
-X-MC-Unique: eIPyz1uXNNe0JUYtKo6Ylw-1
-X-Mimecast-MFC-AGG-ID: eIPyz1uXNNe0JUYtKo6Ylw_1791193146
-Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id BFAF519539BA; Mon,  5 Oct 2026 09:39:05 +0000 (UTC)
-Received: from redhat.com (headnet03.pony-001.prod.iad2.dc.redhat.com
- [10.2.32.114])
- by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id CA95C30000E4; Mon,  5 Oct 2026 09:39:03 +0000 (UTC)
-Date: Mon, 5 Oct 2026 10:39:00 +0100
-From: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
-To: marcandre.lureau@redhat.com
-Cc: qemu-devel@nongnu.org, xen-devel@lists.xenproject.org,
- qemu-riscv@nongnu.org, qemu-ppc@nongnu.org, qemu-block@nongnu.org,
- qemu-s390x@nongnu.org, qemu-arm@nongnu.org
-Subject: Re: [PATCH 10/28] hw/usb: mark commonly used USB devices/hosts as
- secure
-Message-ID: <asNwNM5DgooeSn27@redhat.com>
-References: <20260911143627.2743803-1-berrange@redhat.com>
- <20260911143627.2743803-11-berrange@redhat.com>
- <179096166117.3025252.2297105460212965387.b4-review@b4>
+ (Exim 4.90_1) (envelope-from <rick@sloservers.com>)
+ id 1xDg7E-0003MA-9W; Mon, 05 Oct 2026 06:40:18 -0400
+Received: from thinking.duckdns.org (unknown [192.168.11.4])
+ by vps.sloservers.com (Postfix) with ESMTPS id 7196724F56;
+ Mon, 05 Oct 2026 10:40:12 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sloservers.com;
+ s=mail; t=1791196812;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=H7+D0TzjBHqUvSyHQxmy+lF+u8662gGlKQ8JxKTLYnA=;
+ b=DlhdYP3UwS+aiX6CKAIk6KTr7foqW7jSme2NRWOMa0435JEn4cc9ofd7y406CJX3mFqegw
+ aHRRN7ZMfLoCzNzOhQK15rfLmLA4TmBzg5zmegb3tNhU1k5dVBhbYcQHzZoffRrhzjajYB
+ GrmE7uDxlFnp2I7Gsqfl7vGRtaxPM6EHrhWfBkcI+SLxlWotl562wLKgK8YpHTRxMGfTKe
+ iGhlJnpi4PERc71WBPnMJQ/k43TqYKZ9RVehYtC+P2mY99iTluS1gOdK3MOGmH4zG6gqAA
+ Qamxxt9k35QxsPjttReCP085rGEeMPy5Pq1HdFxJcuW8+gCbyIyEhWY8yr3XEA==
+Received: from ollopa-pc.thinking.duckdns.org (OPNsense.thinking.duckdns.org
+ [192.168.1.5])
+ by thinking.duckdns.org (Postfix) with ESMTPSA id C5D721001;
+ Mon, 05 Oct 2026 03:40:11 -0700 (PDT)
+From: Rick Richard <rick@sloservers.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Sunil V L <sunilvl@ventanamicro.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ "Michael S . Tsirkin" <mst@redhat.com>,
+ Igor Mammedov <imammedo@redhat.com>, Ani Sinha <anisinha@redhat.com>
+Subject: [PATCH v2 1/3] tests/qtest/bios-tables-test: Allow changes to riscv64
+ virt SPCR
+Date: Mon,  5 Oct 2026 03:40:06 -0700
+Message-ID: <20261005104008.214588-2-rick@sloservers.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20261005104008.214588-1-rick@sloservers.com>
+References: <20261005104008.214588-1-rick@sloservers.com>
 MIME-Version: 1.0
-In-Reply-To: <179096166117.3025252.2297105460212965387.b4-review@b4>
-User-Agent: Mutt/2.4.2 (2026-08-30)
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
-X-Mimecast-MFC-PROC-ID: tZaQo9V8WqLECHUNEEvKkznyF6WL0m9_vWjHpPqc3ao_1791193146
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=berrange@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: 10
-X-Spam_score: 1.0
-X-Spam_bar: +
-X-Spam_report: (1.0 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.24,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=-0.01, RCVD_IN_MSPIKE_WL=-0.01,
- RCVD_IN_SBL_CSS=3.335, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=204.109.61.218; envelope-from=rick@sloservers.com;
+ helo=vps.sloservers.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -89,33 +75,26 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Reply-To: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Oct 02, 2026 at 09:21:01PM +0400, marcandre.lureau@redhat.com wrote:
-> > Most of the standardized  USB1/2/3 host controllers are relevant
-> > for virtualization use cases, so should be declared secure. The
-> > "NEC" XHCI variant is slightly non-standard, but since it is a
-> > trivial sub-class of the generic XHCI, there's no reason to
-> > exclude it.
-> > 
-> > The set of devices that are expected to be used is HID (mouse,
-> > tablet, keyboard), host passthrough, CCID (smartcard), hub,
-> > storage and the redirect tunnelling.
-> 
-> Can't we exclude uhci/ehci nowadays?
+Allow changes to the riscv64 virt board SPCR -- we are going to fix
+an error in the UART description there.
 
-RHEL-10 still ships both, so there's still a demand from a downstream
-POV, but USB is in an awkward place with its lack of maintainership,
-and arguably these should be considered obsolete.
+Signed-off-by: Rick Richard <rick@sloservers.com>
+Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+---
+ tests/qtest/bios-tables-test-allowed-diff.h | 1 +
+ 1 file changed, 1 insertion(+)
 
-
-With regards,
-Daniel
+diff --git a/tests/qtest/bios-tables-test-allowed-diff.h b/tests/qtest/bios-tables-test-allowed-diff.h
+index dfb8523c..aae97304 100644
+--- a/tests/qtest/bios-tables-test-allowed-diff.h
++++ b/tests/qtest/bios-tables-test-allowed-diff.h
+@@ -1 +1,2 @@
+ /* List of comma-separated changed AML files to ignore */
++"tests/data/acpi/riscv64/virt/SPCR",
 -- 
-|: https://berrange.com       ~~        https://hachyderm.io/@berrange :|
-|: https://libvirt.org          ~~          https://entangle-photo.org :|
-|: https://pixelfed.art/berrange   ~~    https://fstop138.berrange.com :|
+2.43.0
 
 
