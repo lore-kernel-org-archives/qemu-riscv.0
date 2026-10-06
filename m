@@ -4,115 +4,126 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1AA9ACA5FF1
-	for <qemu-riscv@archiver.kernel.org>; Wed,  7 Oct 2026 08:40:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 402F1CA5FFF
+	for <qemu-riscv@archiver.kernel.org>; Wed,  7 Oct 2026 08:46:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xEN5I-0005ta-I3; Wed, 07 Oct 2026 04:33:08 -0400
+	id 1xENFw-0001Zv-F2; Wed, 07 Oct 2026 04:44:08 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair@alistair23.me>)
- id 1xEHns-0006hR-3D
- for qemu-riscv@nongnu.org; Tue, 06 Oct 2026 22:54:51 -0400
-Received: from fout-b3-smtp.messagingengine.com ([202.12.124.146])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair@alistair23.me>)
- id 1xEHnd-00054Z-Kh
- for qemu-riscv@nongnu.org; Tue, 06 Oct 2026 22:54:44 -0400
-Received: from phl-compute-11.internal (phl-compute-11.internal [10.202.2.51])
- by mailfout.stl.internal (Postfix) with ESMTP id 1BDD41D000D5
- for <qemu-riscv@nongnu.org>; Tue,  6 Oct 2026 10:03:06 -0400 (EDT)
-Received: from phl-frontend-03 ([10.202.2.162])
- by phl-compute-11.internal (MEProxy); Tue, 06 Oct 2026 10:03:06 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alistair23.me;
- h=cc:cc:content-transfer-encoding:content-type:content-type
- :date:date:from:from:in-reply-to:in-reply-to:message-id
- :mime-version:references:reply-to:subject:subject:to:to; s=fm2;
- t=1791295385; x=1791381785; bh=kj0vF7HyHKlYzHFRSXtVHdMTIab/Eu9S
- EGt78tLN8NI=; b=ZpXS8M3abxh81NKkZHsGziureG7lJEotXGDFw2PO/B4eOKq6
- 89U0MtqJq/CtT4bH+KHvFndaPOafRWZ94snfWeTHNbbtvrpUEWgYx5Y+ZDvyFflG
- X3YbaZl8do7STRPIX7tTlw4/RcqNX8FQqF0tIXfHJU1Ay5I9rjl6XF7YtAt3rsSX
- bcqLWenBofNryG1sVnv5F422P6VaGEOkZ3brWlDkwA7hu1K9TMSDS5UmoSCsThJT
- YY2m1mBTmnsslMNT7m06PQj5Gs1yUhenhjp4JE41L8It/1p/xHOOPAc5Op/TY1DO
- nlSP6exyHVBJPioxs/U7dj+d5FGLbsnSAQuaNw==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-transfer-encoding
- :content-type:content-type:date:date:feedback-id:feedback-id
- :from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1791295385; x=
- 1791381785; bh=kj0vF7HyHKlYzHFRSXtVHdMTIab/Eu9SEGt78tLN8NI=; b=u
- DA4zE662aen1dvyGGFTg8P+DmoUvve+PeI0/0StZdHBa1RCmMvLMjyNPGUjQ/pur
- XjslftNDlzuju2Xvq3sOK4Ev9lIMr9Xr39Y9jNrhAKAzIHXwbtDMhsc2FrnQO0jy
- KUHEktgOy7TWkNpXfGQKGk/KxZF4DPOijD1Eou7KBCycTjtSKZ2+H77EkteLlGmg
- 4mFQQ2HH+4c8z70AysZ0wpoD9YBuBNQ38E9ln8M5KHJb2+nzAjgOALYtxVAYBNJc
- Tz8KsLL4KFlXV79jK3m6zbsmxs0+tSRHATW+qiqcRl4+B9HNrGK6Ww3u8Qccj1nG
- 7nPN4KLSWhpFIt7pprWDQ==
-X-DKIM2-Info: draft=ietf-dkim-dkim2-spec-06;
- repo=github.com/dkim2wg/interop; date=2026-10-04; sw=lmtpprox;
- action=sign d=alistair23.me a=rsa-sha256;
-DKIM2-Signature: i=1; m=1; t=1791295385; d=alistair23.me;
- mf=PGFsaXN0YWlyQGFsaXN0YWlyMjMubWU+;
- rt=PHFlbXUtcmlzY3ZAbm9uZ251Lm9yZz4=;
- s=fm2:rsa-sha256:l4iyiMo6PN1hv0t8T95jBoTZYjfXBT7/sH95wqayRj6fagd
- nTFqtXlxTHxw28rfm8BuAOU00+MlkSs6LAU8sq+BFOYPCd+3vYi95L/n1UWI8kMq
- wi9EwHf5cScJir35P1MynMjp1FfzOZ8HwK7Mt1oCoES2uIlaL5hX0V5V3PghBiO0
- ii+OVdTiq+XUrcGkhQDtx9CajXU3uTo6EYiOS0lad8eqSYFubYmc9P0V+By3IMoa
- TR3EA7D5duDI3aFS0Ww+HH2gSIzSUPYY/T7swYSq8v7mSXvUd/NBfA8GPQjpxf1g
- PmEvKlA7fmwkedwLJEpy9/z/VkGEtjbFM4PpOVw==;
-X-DKIM2-Info: draft=ietf-dkim-dkim2-spec-06;
- repo=github.com/dkim2wg/interop; date=2026-10-04; sw=lmtpprox;
- action=mi-m=1; hc=13;
- hn=cc,content-transfer-encoding,content-type,date,feedback-id,
- from,in-reply-to,message-id,mime-version,references,subject,to,
- user-agent;
-Message-Instance: m=1;
- h=sha256:nWIIkdVZH2aygXXuyS4lCxmnb7D+RrpDMBMSRiubOEE=:kj0vF7HyHKlYzHFRSXtVHdMTIab/Eu9SEGt78tLN8NI=;
-X-ME-Sender: <xms:mP_EaubaEfSd4f3bshzRkdkbjPZWRf0YudjBy8laq3wHP91-B34Ozw>
- <xme:mP_EamWN2UM6DMfvYGwjyzBWe33v9W5c4yVZlvTBPgp3N-FXJJaowfEm1KbziufdR
- S2q7tfjluRS9aIfOtquUCiJrEue6pEHRK46F8LpP5vqA3GcBsmqBMI>
-X-ME-Received: <xmr:mP_EatMhRsl7TmFlYrV1hxrwFNzHbi_BbT-SH3w9Ewgvh_Pll8cAM0xVFy9KywoO9bO20bstYDkL>
-X-ME-Proxy-Cause: dmFkZTESC8THgcayfet7+y0YbhShFLOGJ/4WN2yz//JBzlHJBKwUQADEGI30eiBWcGCIrc
- 7yVVEKeGC65cFm/3Ck61C3IvTupf/2YmCW+ubuByjShWwSGUCuWQBkwOyr8hy2n6l1uSAX
- Z5UAZTaX+YHz14qO4AtR6HLITOsQnA2+fjMq/BC9qiRfHsIfUdZM5fLUZVmIk/FLRjJCQi
- tROXaVnaksfQx7w2s7FIL3Y6LY9UFqvsYFmngK9R3L8y+8wNWR5puYs8wONWDF3xxcAMer
- UPJv4GWP0milBPWBD6VhgD4M5m3bRZLZqSS0lBZrspozxtvYzKSZlbLz53qoMtZGCM7vZa
- oPgBbAWENkkM7mys+RfZIwhdozhkPkwT1wD+/xdrOpUE9Av7op7yP+Z7JXgDOumSm7RiUf
- OU9jFbiubdZZKDnaJ3ZMGfol1NiQKfH9BlARr1kdoGX15JejapDeDKxnjajEN/JJ1cgafZ
- WfRekIBJrIVHo4kOKF6CYA2jTIAzx9J3RttNjvJ2x/g9rKZzpwgVVTORA5lxJXqR65szgt
- ufciDwEEDyoiedPWmjo2yxRtpx61Ep86IdujJurDei4CyAmPNr/yYfdJ3j18xMPnQvGAH/
- IjGBI6+leMNl4aB+vwxnBqZPujl/fEb/keItVyv33kHV4lCoDNifwF5kg2+g
-X-ME-Proxy: <xmx:mP_EagavZe9EW7U6E1fALKLLaz6fgtAiXnzveepqDNfSqUKXLDOQ8Q>
- <xmx:mf_Eas_lGaDh8lsHC9XXCOQ9XHdttMHsbPrIALw6dXXiXXCmOr6emg>
- <xmx:mf_EahS6HkR2qhMWKap92YJgENfmC_ijyg5GBgnQbN4G6rRswKDPtw>
- <xmx:mf_EamdrWfIdGey5ujZsJvnJ1y_KPHXwMooTLTJX1u8LQreZDCPZ_w>
- <xmx:mf_Eak9Y694K69FdVyyIXXy4a4I5YeEG7AKpoWD7wGxd85l6aYk_g6TW>
-Feedback-ID: ifd214418:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Tue,
- 6 Oct 2026 10:02:57 -0400 (EDT)
-Message-ID: <9e0e12d117ddb5a629437fb48c73ec238faa17a7.camel@alistair23.me>
-Subject: Re: [PATCH] target/riscv: Check Svnapot PTE before updating A/D bits
-From: Alistair <alistair@alistair23.me>
-To: dodochicha <kevincheng60303@gmail.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com, 
- liwei1518@gmail.com, daniel.barboza@oss.qualcomm.com, 
- zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com
-Date: Wed, 07 Oct 2026 00:02:53 +1000
-In-Reply-To: <20261005115916.21196-1-kevincheng60303@gmail.com>
-References: <20261005115916.21196-1-kevincheng60303@gmail.com>
+ (Exim 4.90_1) (envelope-from <marcandre.lureau@gmail.com>)
+ id 1xEJ0T-0001lS-OL
+ for qemu-riscv@nongnu.org; Wed, 07 Oct 2026 00:12:18 -0400
+Received: from mail-qt1-x82a.google.com ([2607:f8b0:4864:20::82a])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <marcandre.lureau@gmail.com>)
+ id 1xEJ0Q-0006pb-LD
+ for qemu-riscv@nongnu.org; Wed, 07 Oct 2026 00:11:53 -0400
+Received: by mail-qt1-x82a.google.com with SMTP id
+ d75a77b69052e-53391786e55so18696551cf.2
+ for <qemu-riscv@nongnu.org>; Tue, 06 Oct 2026 21:11:47 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1791346306; cv=none;
+ d=google.com; s=arc-20260327;
+ b=CWFGxF6VuNfD88nEC2KTl59N3j1E5heYEzTu8PG3H/h6c2IiWAC37EKy30i0Qi3LCJ
+ WuTvrwlY58sQOtUhdGQQaIzcotXQfGOcq6Y109uKmPu3SqWCW00NqemA/SQ6rUKDMZXs
+ bM2u+nF1FLiHi6HF55JJEHGxC87dt6Fpb+AeagGsSxPSY8yP4z9g4VKalYEzhGpZiBOl
+ 8yvAacFFIJmpR8QllYE5ASg6nomG++6QxTvX7ElHRmhcsDIxUX+zPr8NVR8Gx0+lWM9c
+ Qk2Q3VLkZa32DLlJzt188rr+5yAO2kpay5NJVfqyUaLeD8F2KrMTjmaVpb/30ZR5jsPu
+ /jIA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=vCUogBX76A4PNkRqpBF2c8Vgx8g3b73735jcch5yTeY=;
+ fh=w/GsEIGS9ITjR6ZopufzJSrY4KItZGRgKHbImF7msOU=;
+ b=jelBV6Mn2LNCnSYdAtmFQQrzZon6Gcd8lkoBEdXy+p9YTocdOt4WHJfN1a3bTlD92a
+ iR4Ix7jQZ4p8CHgovU+GoPxqjjFl0RCZXypVz8KH6Pj1a9Ium/43Ip9+Z6HtuDRKqqr8
+ aEnU+VqA9ZmRTPswRrPgWLg4Rrkql4jqxB4Se7niy0KkAUPlyYB3vdXG1RlEDf0wwoYe
+ F5NhLOM6vRDzhR3dr+jXS7JSmV8jx8Vzf7xx5xUmkYEgyNejhkrwede8tBs+PVRkWZFM
+ Y0KErZuLcvpLzRZqJJJwrSy8QR8I3vO5r8ssX/J/s3h9DfmUmLAssCeLZDuerZtFR7Xt
+ cTzQ==; darn=nongnu.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=redhat.com; s=google; t=1791346306; x=1791951106; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=vCUogBX76A4PNkRqpBF2c8Vgx8g3b73735jcch5yTeY=;
+ b=bUcC8veWZOGP/DavZgPCt2c2TXqQppMPIfsmPmzVSnNxVW11JboZgqVfAIQtLM5r58
+ jvVGY+n9ci0Xd5+lrxRwGYF+GRo0x7Wf3cxPQgTrlDM1xkSYtoYeJYZ/jy6vso4HIGLi
+ nb6fg6+QTLdqLKAvd7j6RLkHjon/+gKfGklTch8XebGpYGLzadGKF1C6yvDlvsw8s00B
+ sOaYWvtQVnFrmEp6BIjr5MS84vmgD2g+mGSncaaLm9couD1Kp8BoORNS30XtKAVJUrIR
+ 42gr0Zd0Ul85it+u8N1VqYhNhO6vTv5bqyFYmFdv7UIBB3ZjHLdQJW44O7efYDoZaQC7
+ Yh2A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1791346306; x=1791951106;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=vCUogBX76A4PNkRqpBF2c8Vgx8g3b73735jcch5yTeY=;
+ b=bJf8+RSAapk0zoXN72mAfvLlCsgJPXykXdYvOsZZHPPEg1fPx1QD37OcJnQP66E4fM
+ xeaf5c+hchyIi0VITYzv8H7hP8vCCI3Sd52iGJZQoc9XuZIomKu4occMWO3AQJrzZaPJ
+ MLXWsg3de0Bv6OFrYDY8287bKBHBdx0ZSDM+jXUNkusT2LzKlP41ZoQ5qVbAEY7rtmwD
+ zo1Jxp982CuUACIo+E6MSRJ2ly1mYiHtH+E3fVw4FHLBfnZRl2sdfijeOyJBDPDNTU8u
+ 4axXPXgctH3hI+GsK9LWuAhXXT4WfYZgKiA6fQVNIDlC4xf5rrz/aZ9rwCfezuZq80wV
+ Fg1A==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBzVdJx8lBfzNqH9PsG8u57G6+d3EoRAynfSPHfv34c89gsAaxANRLi/mi7Ygzv0FViE7EHpNYdHGUyQ@nongnu.org
+X-Gm-Message-State: AFuF++nE5DZ8MWb//glug9zu+RWwEOGZ7qTQduh8ROmtsZagnHR2Nnxr
+ BbQu+W8yVrFR90AqltDHj4kRpZMiP6JKt8WgGJt+ziniuY639LTjFScpgs2b5O4bbh2SxrShMUi
+ d6uO1Ps/+dGck6L+7FuHRbf3g60JHsULUtE8h
+X-Gm-Gg: AYBFou3FcoiLXaxl92nvOif8FAk8Pf6tQsKG6SFLGsUhbEP4H15O07Zx3IRHdXilXCE
+ PAtk7x4NHMIF9KWGgWYjU4zY87YELsIBxfKir1DH38Y8jt7L+UBRKXBVdQ9vwNBXmESIQIk6QyF
+ n5vUPrv7PKAnbRm7T68z/mJtVp/FuAwbV8BEsZMOV59UBEEUMAS8RvJ8btydwitXWKsoAZfcqvI
+ td0EV50nc98dYDW+EiRbjT/aDGUcqM+6r7GjsARfijK3+z+jcyRYt68vMoN6I8vmL/h7ixxHRAc
+ ccSw5F+er5i1pFpDzrKLVMVIKPmLKjlBndXbt1GC5tYIQ84v0tteloHw7F915nB3Ulj4Q+2U1t/
+ cSr83nqDrEXoE
+X-Received: by 2002:a05:693c:83d9:10b0:343:80af:5ab0 with SMTP id
+ 5a478bee46e88-3514e3285e3mr1583202eec.25.1791297111054; Tue, 06 Oct 2026
+ 07:31:51 -0700 (PDT)
+MIME-Version: 1.0
+References: <20260911-query-reg-v1-0-0c04f0c02cf3@redhat.com>
+ <1b9d9cef-8f65-4e96-9e7b-fd136f64a75d@oss.qualcomm.com>
+ <33ad7803-82ad-49f0-b39d-d3a23807ab75@rsg.ci.i.u-tokyo.ac.jp>
+In-Reply-To: <33ad7803-82ad-49f0-b39d-d3a23807ab75@rsg.ci.i.u-tokyo.ac.jp>
+From: =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>
+Date: Tue, 6 Oct 2026 18:31:38 +0400
+X-Gm-Features: AclHuK-kbtdLOIWlDva4Svd6YVmMvahlYS-c4-tOA45DeYixouliCXuXbbxC1Rc
+Message-ID: <CAJ+F1C+0A4_VU3aNk=fWwvR=MPbe3Zw2zyeFnyCGmJET6fAoKg@mail.gmail.com>
+Subject: Re: [PATCH 00/10] monitor/hmp: replace MonitorDef with GDB registers
+To: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
+Cc: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@oss.qualcomm.com>, 
+ qemu-devel@nongnu.org, "Dr. David Alan Gilbert" <dave@treblig.org>, 
+ =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, 
+ Zhao Liu <zhao1.liu@intel.com>, Peter Maydell <peter.maydell@linaro.org>, 
+ Chinmay Rath <rathc@linux.ibm.com>, Nicholas Piggin <npiggin@gmail.com>, 
+ Glenn Miles <milesg@linux.ibm.com>, Harsh Prateek Bora <harshpb@linux.ibm.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Chao Liu <chao.liu@processmission.com>, Max Filippov <jcmvbkbc@gmail.com>,
+ qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, 
+ Paolo Bonzini <pbonzini@redhat.com>, Laurent Vivier <laurent@vivier.eu>, 
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Artyom Tarasenko <atar4qemu@gmail.com>, Helge Deller <deller@gmx.de>,
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, 
+ Warner Losh <imp@bsdimp.com>, Kyle Evans <kevans@freebsd.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.62.0 (by Flathub.org) 
-MIME-Version: 1.0
-Received-SPF: pass client-ip=202.12.124.146;
- envelope-from=alistair@alistair23.me; helo=fout-b3-smtp.messagingengine.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Received-SPF: pass client-ip=2607:f8b0:4864:20::82a;
+ envelope-from=marcandre.lureau@gmail.com; helo=mail-qt1-x82a.google.com
+X-Spam_score_int: -6
+X-Spam_score: -0.7
+X-Spam_bar: /
+X-Spam_report: (-0.7 / 5.0 requ) BAYES_00=-1.9, DATE_IN_PAST_12_24=1.049,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1,
+ FREEMAIL_FORGED_FROMDOMAIN=0.001, FREEMAIL_FROM=0.001,
+ HEADER_FROM_DIFFERENT_DOMAINS=0.25, RCVD_IN_DNSWL_NONE=-0.0001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -128,74 +139,131 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, 2026-10-05 at 19:59 +0800, dodochicha wrote:
-> Reserved Svnapot PTE encodings must raise a page fault without
-> modifying the PTE. Currently the A/D bits may be updated before the
-> Svnapot encoding is validated.
->=20
-> Move the Svnapot validation before the A/D update so reserved PTEs
-> fault without changing the PTE.
->=20
+Hi Akihiko
 
-In future please wrap your commit messages at around 70 characters.
+On Thu, Oct 1, 2026 at 12:03=E2=80=AFPM Akihiko Odaki
+<odaki@rsg.ci.i.u-tokyo.ac.jp> wrote:
+>
+> On 2026/10/01 2:18, Philippe Mathieu-Daud=C3=A9 wrote:
+> > Cc'ing Akihiko who worked on gdbstub.
+> >
+> > On 11/9/26 14:27, Marc-Andr=C3=83=C2=A9 Lureau wrote:
+> >> Hi,
+> >>
+> >> HMP monitor supports printing $register expression. The lookup
+> >> was done via GDB stub registers, and supplementary MonitorDef
+> >> HMP-specific tables.
+> >>
+> >> Migrate HMP registers to use the GDB infrastructure and remove the
+> >> legacy HMP MonitorDef. Use a "qemu-debug" register group, as they are
+> >> aliases or synthetic registers, but gdb doesn't seem to care.
+>
+> Unfortunately, these aliases and synthetic registers appear to have
+> several problems:
+>
+> - GDB already provides writable pseudo-registers for SPARC64's asi and
+>    pstate. The new QEMU registers shadow them but ignore writes, breaking
+>    previously supported functionality. See:
+>
+> https://sourceware.org/git/?p=3Dbinutils-gdb.git;a=3Dblob;f=3Dgdb/sparc64=
+-tdep.c;h=3D93db3417a2a9f64790acab33288eb05764112e0b;hb=3D6a5e5259790e5a854=
+ddbb69eb486b9245fcfeee8#l976
+>
+> - GDB caches each raw register independently. Updating one alias can
+>    leave another stale, causing incorrect reads or skipped writes.
+>
+> - The new raw aliases do not inherit the original registers' unwind
+>    rules, leading to incorrect register values when selecting older
+>    call frames.
+>
+> The latter two issues also affect the RISC-V aliases and cannot be
+> resolved merely by changing QEMU's register read/write callbacks. I
+> therefore think we need to retain HMP-specific handling for these aliases=
+.
 
-Thanks!
+Thanks for the feedback and findings! Would it be an option to have
+qemu/pseudo registers use a prefixed name like "qemu.", then it
+shouldn't conflict with GDB. HMP would need to try with it if not
+found. Wdyt?
 
-Applied to riscv-to-apply.next
+Alternatively, keep the monitor specific register lookup, as a secondary pa=
+th.
 
-Alistair
-
-
-> Signed-off-by: dodochicha <kevincheng60303@gmail.com>
-> ---
-> =C2=A0target/riscv/tcg/cpu_helper.c | 14 +++++++-------
-> =C2=A01 file changed, 7 insertions(+), 7 deletions(-)
->=20
-> diff --git a/target/riscv/tcg/cpu_helper.c
-> b/target/riscv/tcg/cpu_helper.c
-> index 07d9222652..105f2f1927 100644
-> --- a/target/riscv/tcg/cpu_helper.c
-> +++ b/target/riscv/tcg/cpu_helper.c
-> @@ -1403,6 +1403,13 @@ static int get_physical_address(CPURISCVState
-> *env, hwaddr *physical,
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return sstack_page ? TRA=
-NSLATE_PMP_FAIL : TRANSLATE_FAIL;
-> =C2=A0=C2=A0=C2=A0=C2=A0 }
-> =C2=A0
-> +=C2=A0=C2=A0=C2=A0 if (riscv_cpu_cfg(env)->ext_svnapot && (pte & PTE_N))=
- {
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 napot_bits =3D ctzl(ppn) + 1;
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if ((i !=3D (levels - 1)) || =
-(napot_bits !=3D 4)) {
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 retur=
-n TRANSLATE_FAIL;
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }
-> +=C2=A0=C2=A0=C2=A0 }
-> +
-> =C2=A0=C2=A0=C2=A0=C2=A0 target_ulong updated_pte =3D pte;
-> =C2=A0
-> =C2=A0=C2=A0=C2=A0=C2=A0 /*
-> @@ -1473,13 +1480,6 @@ static int get_physical_address(CPURISCVState
-> *env, hwaddr *physical,
-> =C2=A0=C2=A0=C2=A0=C2=A0 /* For superpage mappings, make a fake leaf PTE =
-for the TLB's
-> benefit. */
-> =C2=A0=C2=A0=C2=A0=C2=A0 target_ulong vpn =3D addr >> PGSHIFT;
-> =C2=A0
-> -=C2=A0=C2=A0=C2=A0 if (riscv_cpu_cfg(env)->ext_svnapot && (pte & PTE_N))=
- {
-> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 napot_bits =3D ctzl(ppn) + 1;
-> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if ((i !=3D (levels - 1)) || =
-(napot_bits !=3D 4)) {
-> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 retur=
-n TRANSLATE_FAIL;
-> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }
-> -=C2=A0=C2=A0=C2=A0 }
-> -
-> =C2=A0=C2=A0=C2=A0=C2=A0 napot_mask =3D (1 << napot_bits) - 1;
-> =C2=A0=C2=A0=C2=A0=C2=A0 *physical =3D (((ppn & ~napot_mask) | (vpn & nap=
-ot_mask) |
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (vpn & (((target_ulong)1 << ptshift) -=
- 1))
+> Regards,
+> Akihiko Odaki
+>
+> >>
+> >> Known behavioural changes on RISC-V: CSR lookup is now case-sensitive
+> >> and vector registers now report "unkown register" instead of a
+> >> target-specific message ("Unable to print the value of vector vreg 'v0=
+'
+> >> from this API")
+> >>
+> >> Signed-off-by: Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com>
+> >> ---
+> >> Marc-Andr=C3=A9 Lureau (10):
+> >>        hmp: don't crash on invalid register
+> >>        gdbstub: fix next register base after register gaps
+> >>        gdbstub: set feature->base_reg for dynamic features
+> >>        target/i386: expose segment limits via GDB
+> >>        monitor/hmp: add CPUClass::get_pc fallback for HMP $pc
+> >>        target/m68k: expose system registers via GDB
+> >>        target/sparc64: expose system registers via GDB
+> >>        target/riscv: bypass smstateen check in debugger mode
+> >>        target/riscv: expose register aliases via GDB
+> >>        monitor/hmp: remove legacy MonitorDef infrastructure
+> >>
+> >>   configs/targets/i386-softmmu.mak          |   2 +-
+> >>   configs/targets/m68k-softmmu.mak          |   2 +-
+> >>   configs/targets/riscv32-linux-user.mak    |   2 +-
+> >>   configs/targets/riscv32-softmmu.mak       |   2 +-
+> >>   configs/targets/riscv64-bsd-user.mak      |   2 +-
+> >>   configs/targets/riscv64-linux-user.mak    |   2 +-
+> >>   configs/targets/riscv64-softmmu.mak       |   2 +-
+> >>   configs/targets/sparc64-softmmu.mak       |   2 +-
+> >>   configs/targets/x86_64-softmmu.mak        |   2 +-
+> >>   gdbstub/gdb-xml/i386-segments.xml         |  14 +++
+> >>   gdbstub/gdb-xml/m68k-system.xml           |  32 +++++++
+> >>   gdbstub/gdb-xml/riscv-32bit-alias.xml     | 105 ++++++++++++++++++++=
+++
+> >>   gdbstub/gdb-xml/riscv-32bit-fpu-alias.xml |  40 +++++++++
+> >>   gdbstub/gdb-xml/riscv-64bit-alias.xml     | 105 ++++++++++++++++++++=
+++
+> >>   gdbstub/gdb-xml/riscv-64bit-fpu-alias.xml |  46 ++++++++++
+> >>   gdbstub/gdb-xml/sparc64-system.xml        |  22 +++++
+> >>   gdbstub/gdbstub.c                         |  14 +--
+> >>   include/hw/core/cpu.h                     |   2 +-
+> >>   include/hw/core/sysemu-cpu-ops.h          |  16 ----
+> >>   include/monitor/hmp.h                     |   6 --
+> >>   include/qemu/typedefs.h                   |   1 -
+> >>   monitor/hmp.c                             |  52 ++---------
+> >>   target/arm/gdbstub.c                      |   8 +-
+> >>   target/arm/gdbstub64.c                    |  10 ++-
+> >>   target/i386/cpu.c                         |  32 -------
+> >>   target/i386/gdbstub.c                     |  24 +++++
+> >>   target/m68k/cpu.c                         |  22 -----
+> >>   target/m68k/helper.c                      |  47 ++++++++++
+> >>   target/ppc/gdbstub.c                      |   2 +-
+> >>   target/riscv/cpu.c                        |   1 -
+> >>   target/riscv/gdbstub.c                    |  52 ++++++++++-
+> >>   target/riscv/internals.h                  |   3 -
+> >>   target/riscv/monitor.c                    | 140
+> >> ------------------------------
+> >>   target/riscv/tcg/csr.c                    |   3 +-
+> >>   target/sparc/cpu.c                        |  19 ----
+> >>   target/sparc/gdbstub.c                    |  38 ++++++++
+> >>   target/xtensa/cpu.c                       |   2 +-
+> >>   37 files changed, 562 insertions(+), 314 deletions(-)
+> >> ---
+> >> base-commit: 209b2afaface001c7d4d981e38f186afe7b24a50
+> >> change-id: 20260910-query-reg-80cd59cf4707
+> >>
+> >> Best regards,
+> >> --
+> >> Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com>
+> >>
+> >>
+> >
+>
+>
 
