@@ -4,63 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74339CA5FF1
-	for <qemu-riscv@archiver.kernel.org>; Wed,  7 Oct 2026 08:34:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA90BCA6002
+	for <qemu-riscv@archiver.kernel.org>; Wed,  7 Oct 2026 08:35:07 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xEN59-0004mS-9r; Wed, 07 Oct 2026 04:32:59 -0400
+	id 1xEN4w-0004DU-Em; Wed, 07 Oct 2026 04:32:49 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair@alistair23.me>)
- id 1xEHr8-00079R-86
- for qemu-riscv@nongnu.org; Tue, 06 Oct 2026 22:58:17 -0400
+ id 1xEHuY-0007gl-5k
+ for qemu-riscv@nongnu.org; Tue, 06 Oct 2026 23:01:57 -0400
 Received: from fout-b3-smtp.messagingengine.com ([202.12.124.146])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair@alistair23.me>)
- id 1xEHqw-0005PI-C5
- for qemu-riscv@nongnu.org; Tue, 06 Oct 2026 22:58:04 -0400
-Received: from phl-compute-01.internal (phl-compute-01.internal [10.202.2.41])
- by mailfout.stl.internal (Postfix) with ESMTP id 99C651D00111
- for <qemu-riscv@nongnu.org>; Tue,  6 Oct 2026 12:02:38 -0400 (EDT)
-Received: from phl-frontend-04 ([10.202.2.163])
- by phl-compute-01.internal (MEProxy); Tue, 06 Oct 2026 12:02:38 -0400
+ by eggs.gnu.org with esmtp (Exim 4.90_1)
+ (envelope-from <alistair@alistair23.me>) id 1xEHuC-0006bI-Jk
+ for qemu-riscv@nongnu.org; Tue, 06 Oct 2026 23:01:30 -0400
+Received: from phl-compute-04.internal (phl-compute-04.internal [10.202.2.44])
+ by mailfout.stl.internal (Postfix) with ESMTP id D9E231D00119
+ for <qemu-riscv@nongnu.org>; Tue,  6 Oct 2026 11:57:11 -0400 (EDT)
+Received: from phl-frontend-03 ([10.202.2.162])
+ by phl-compute-04.internal (MEProxy); Tue, 06 Oct 2026 11:57:11 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alistair23.me;
  h=cc:cc:content-transfer-encoding:content-type:content-type
  :date:date:from:from:in-reply-to:in-reply-to:message-id
  :mime-version:references:reply-to:subject:subject:to:to; s=fm2;
- t=1791302558; x=1791388958; bh=MgC1Xt9XFFFkiebHCYydmvPFVkwsyZgh
- 5ubiBZEKcEg=; b=mnk6QgjsF7dM/4DjmKypaoHn4S1mJ5ffKkGfD0o/ZwaCSxbN
- YNaAEZdQsGZpNaFt3YTVLeMtDs/XhRdYHk8HuUw41fTAOhhwzbUEQUwsdkgCzcLY
- jJVxRvh3o5bgrWgMs1VffIgJhApXRcPX1MbO4uNP9/+naEUKDKVPJOX/ePsW49Gl
- SEByh/uLQeL/YIgOmuodGbu0BNylNPtlj1UNM4K2eJuhVt1JtRZdSBo5dPTPzS1o
- Ueyq0HZUG3GORdY1a3c4C7yV+2Jzjw4NufG+PCJSwrmE1pPPZzFh2CQY5PB508y+
- C4S4M2FhOa+y/IJ5TbHQ06gRpCzgOs4Uqb2ABw==
+ t=1791302231; x=1791388631; bh=VAQKuFpY6oO0Iqg60XoTwhg73sSAjs5k
+ VFpg3qCzTV8=; b=sKBTNlzBu54IZ/P/1wPT74Dw/ZQVqtR7UVjS2qknDVIWN8rH
+ IirtIQKsxyWDsW3OOVwhF2peysrfANyaP/J8bpAYVjj/vheeMmvMytDR7e8IPQI+
+ yRlECONPLgk3MlpDljtYa7SWU61GQNrPXhAQIi2NuRM37N/3Wam/ZFjh7YSbq2FT
+ /pYi9PNUPfmamvIKXFGYHOS5fJkDJUSlGgLsvhFbfGwxOr2SpAJSx8Fa2qNMppnk
+ aJLbsSxONpPjaJ3B6PPveuG4TLkKPn2oz2mmU5093pZPBU5KOj8XQPw6jH5YMJBH
+ boekAXEi4fAt/cOiycjibKy9hvZc6pYxtIgbOQ==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-transfer-encoding
  :content-type:content-type:date:date:feedback-id:feedback-id
  :from:from:in-reply-to:in-reply-to:message-id:mime-version
  :references:reply-to:subject:subject:to:to:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1791302558; x=
- 1791388958; bh=MgC1Xt9XFFFkiebHCYydmvPFVkwsyZgh5ubiBZEKcEg=; b=E
- 6UkkSUaiX6atAlJ+24ypO6qVgOMXLUxbxH1d6OIUejIs6Uf5rvdbY+9inYhpFn31
- BYTq454w8ZoQGN6NtS1DDLfoZOUUavrC7YAxEsj4jTRpZQiTmaFput05nX6cq8fg
- IcQBXWcaBpdKFN4EJKaTi5Bkm3ZwVyQER7SUQA9neYfF423tfgV5jhXUSU5yb2bu
- KmKIF/UoIHt1MuVyxUlaaArJcdbpimJd1q4kVCVeU7orA+w1sOsZbLEdfwSn74AP
- bq9K3YkobsE7bqJPTpsGydA02vFDF0eHgXMARqMC9Ijto1Ck1MRKrVn8Kry1Gg08
- 83C+EQnYa2uAp6jWjD3cA==
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1791302231; x=
+ 1791388631; bh=VAQKuFpY6oO0Iqg60XoTwhg73sSAjs5kVFpg3qCzTV8=; b=n
+ z5xEhQvz+vajoFXzOpEFDondfh2otTGXdKmfQINazIPALLmBcdrr8fSi12httxXU
+ D1ij1DiAT78iQMo3WUrU02xRI9Xowmil1aozFz6D36Wlq1LjjLlMkvkIsfcAOG4Y
+ IWNX4iaWM03u+PtgdvA4EDrMbSMvNhtUVUCD3feN2MYOMkDRhKJDu/wQUtNjVD2i
+ L9Cgjf2Rc4ZuNuqjNJe1gBYzMkIPTPbbrdotOz74Ij1wA+Tl4JcEjuRP0vF2tsXW
+ TBjp5SuzyD54oZ2KzI8t+k6P7X2nUAyeH4hP2zKrpc5JMaqDJUd1PtkH4J9Xjp4y
+ vkwu0pAtL2WbY1Fszc8lQ==
 X-DKIM2-Info: draft=ietf-dkim-dkim2-spec-06;
  repo=github.com/dkim2wg/interop; date=2026-10-04; sw=lmtpprox;
  action=sign d=alistair23.me a=rsa-sha256;
-DKIM2-Signature: i=1; m=1; t=1791302558; d=alistair23.me;
+DKIM2-Signature: i=1; m=1; t=1791302231; d=alistair23.me;
  mf=PGFsaXN0YWlyQGFsaXN0YWlyMjMubWU+;
  rt=PHFlbXUtcmlzY3ZAbm9uZ251Lm9yZz4=;
- s=fm2:rsa-sha256:kI1xEsndL3mE3Ha0cFxClZiOsWx/2/fMfkQ/6MhefpPxQEV
- bzTVxXdg4jKRCmA1vHST5plgRBVdJqVdr+Im2DDJ/oH/Iju3QBqxYPMFuRQAsR5q
- FQpB6V0abj61MHgOAE27gqMfSmZnu0DkKd3yomkw4pychYm+UBtDjIUfEEECt5yG
- +7BYAS1/x6rP4Jf5rEMLSrQ/PMUYUuI9gO081ZAMgBoBiXGmu9H9eXr8OrvcnwL8
- 91wLNm+igcWf+toDiK/c5SCCL1k4mBvLisw0jwlUXx7D5wh9jgho5Ov7FAiJqNtG
- +om2MISOBG56oceNwSv/p+stm0G9bWfzCbn7fIQ==;
+ s=fm2:rsa-sha256:KJolwirrB3WDfL+xOzbCFRAUNe/ZltkecCbWk2ylHyDXw37
+ arPowbCcUD+Wih5xiNB3+dh018U5OJdPyPVfXZzPXQxR+uzB0UlGDbdOY1Yzz4se
+ Nb97ZKtp/UVeyX52L19/4nj3KFlT/7VvDLtIvrScrVLwJVu96PF3ONlWFbKJd/wJ
+ 0oiBUt9FwIsOCKXTt8rAarBftWy86Wo9e0uLzZkxbFa4tUq//fB3TOnUHX8PCS5j
+ j1oNeZhV/iPWIawZMrHpZhcwxH3xUHjEDuIcYGray1GOAyJX5UeInvmZNHpwFuCm
+ YDaFODWchZsF4Vb6eQwmZ4faPSLYC/5lq6CwMBg==;
 X-DKIM2-Info: draft=ietf-dkim-dkim2-spec-06;
  repo=github.com/dkim2wg/interop; date=2026-10-04; sw=lmtpprox;
  action=mi-m=1; hc=13;
@@ -68,38 +67,38 @@ X-DKIM2-Info: draft=ietf-dkim-dkim2-spec-06;
  from,in-reply-to,message-id,mime-version,references,subject,to,
  user-agent;
 Message-Instance: m=1;
- h=sha256:96+KaWRX584EOThj6hUpgidJ5fuKS7OStez5EpFkbpQ=:MgC1Xt9XFFFkiebHCYydmvPFVkwsyZgh5ubiBZEKcEg=;
-X-ME-Sender: <xms:nhvFanCnIaFVPzb5__0g_P95m8dj0uBZQm0_fD7QlBteAARuSXSP_g>
- <xme:nhvFah3WmvB0jPdSSFXGACEXl8HzQtVTd7BpTk1jBIMvyUkyb7RJIlo3SznjMKdKj
- zsX0O_iv_axm_G6sOkQGH_Hk6rbNj2hXcNxIg6BevjXTmv7nbqAsWed>
-X-ME-Received: <xmr:nhvFahvrm_KOJaBEpvMJ8Ed2NO5UAV9RuxRdQXcFMixp39j91WtlUqUVGZofvhl9OYPCqkYoP5i-S1AjMvwglOM>
-X-ME-Proxy-Cause: dmFkZTFw1gHQeph3+U0iVbTgmpkrjOplMu53RIX24qMa8tkDrzBv3YyuWv8IG9k0OKI8bE
- Xlyb0GlafGiXlCnDW0OuAM649lnf1jSFTp4oz8WDdYOqVTpsTxiBavypRMvgPcJ98YfBds
- TeS3vFh19ee3iy7xsS10Tnnthg355PvqrqwC4OrM5Ul/s//p08j0oKyYxZCuw1HChSxnVV
- 5fgGmBEovbQcqZ2r1Z3D1c1uM/wPap+evUgAEGdaFfC8ZJpZjfho9HaOLQPd4SZ1JXTqOP
- 3TFkjN8RDiXqAUj82tJ68HAW2DnlgNl9GQcnCMb0G7ZB4M4PEWXrDx0JyMe6jaNz+AuAkI
- FvYYg4rw3bx4CArRd5OLs9IN+x+3As91KMGpvRgDvL1G8R6rzAbDUqIfUaaozb8o4COnnO
- kvSEwkCvP+srAXgcVYui8Q8mODqNeFO4/3tkVd9wFljmZg8iWmI3g1JsMzkUQtpOyTU0ZD
- hDl0vZ9G9pfHfI8/eG5P7nKb77kRg7V8MtmUIFIyPpYI2eq9oMY7I/zDfE7bdednYwIu8+
- Q54WbehcJnaMW/44rnhANW9rJ8Iw7s3Gxxjd3PrAglW8AmirGTFHmmJcjw9zSwcGg500aJ
- 5rF0tylFiZsz4y6P8ve+mCuFhVRIzvLxWkjcQvwKmMb3yXUMgrh7NAMNlPTQ
-X-ME-Proxy: <xmx:nhvFah5UUzrsUQZoq98iNJEAap0C29zCochmyL0mdKHIySEPeaZ1Lw>
- <xmx:nhvFaiLNM3euMifVyHXn-2cXrh22p7aZYv4jrggRLHPjFYyPdhDsmg>
- <xmx:nhvFah5nfcstoA7F6Jehdw60aHHR4tipboyRnDBBeNT6ZMBxBa7SCw>
- <xmx:nhvFalxXE82tmoS-_-dIhhDwIG1YsPhM7lnCiMCzXUMjJ80LZGT-LQ>
- <xmx:nhvFakW-chuY8ROKnaRDsGK3vk-OevE48Bfn0ztU02TcKck6f6xQjQTz>
+ h=sha256:JOb6urwcj7olowNaYcmjoSv7VecnBzcXoTYG+JCwkOM=:VAQKuFpY6oO0Iqg60XoTwhg73sSAjs5kVFpg3qCzTV8=;
+X-ME-Sender: <xms:VxrFahEFS_OXimBmIFYLcvtgVXjcscLVszDpLtm54ZJw2R-E4_KlKA>
+ <xme:VxrFaqpZwgSwFXpfauyi7ItuaxEqL3_hS2qDJVFudQIlntnvkHyuZSsOdGH0B_bRA
+ mVqWADa9YhtIv1hpitk2EC14i8mAzshlvHwyCEE4Z85raF0vp0OhebEew>
+X-ME-Received: <xmr:VxrFaiScm5MycKhvG6bQ-N4SjB7xd7UrteFXXBkvFEEJtPjtwkopi-FvuXwr7YNoR7TXVNZhskCsZlqGv4WPhy8>
+X-ME-Proxy-Cause: dmFkZTGVRV+e63PprtD5vpKHwuHKu7EnoZFcSlhExN//humW2afUyP5AbamrI+szzDDVJj
+ nPgoDEi2iF7ZTgV8TpGLfK9Q/g6U2fx0D4s2iFPKhZ66XGTJEfAOJQLXniJunukRaSIsYe
+ wOS1Gz0Wt17777ulV5ww9KgKxnSVoVIoZ8UGuhxbng0y88PBq8f98+n0e7Ilia6VT6lKSb
+ pCNNfCI4NkxsxuHujMUnIynP2CAq9DPw5v2ouKTvFPVFo49KUhub0p0OSX7gToEDReP97N
+ NhQ1uE1IiXGB/NL3c82XCHeW2F9LoNo7reXLmtWYGcT9rLJTlDz1+yXW+TjB1Q22uupmXK
+ RFI4L6AO20YYLrZU7/iUuzU6YWnCnSFsTbGKq68era/mLSTI6pQTzi7GJZyLc89Wn741pE
+ ORAP+FZb+/usS2Ix9Tz9z8G9sYBwqHyh/efQDaKpTDyMBv3XfIIWya34bC0p2XmCJJ1188
+ MaNF1rQ48sm/Fd02mW8zQOg3hHeAuoO6tfdizHeJBH7FlpqUo1kzOL0JSI1xuO6qQyjrpg
+ HFTbyGx2O/+/igq98GpeL0XyYDm1oAClSsUsM1huvfpPzvTm8b+YeLEfR+uC2kr66q2WZB
+ 6DtF+KsrihJ8tFZ7wBKU5T9aKq0Pv/LerRz6jjawSk5/jaGT4UOvyqM4bQxQ
+X-ME-Proxy: <xmx:VxrFavPKi4JcGbF_AvAICHNS5EuNdGte6SyW8B8v10j-92yJ3E3EUQ>
+ <xmx:VxrFatPDXTRFYq6f8DccRf5uGBb-bD5IiCtjT_FDh9U8MZMDut445A>
+ <xmx:VxrFant2KvOGe-fdtMchc6dVt2gSauxukMXB4BaMCtPVKP7mwD0jeQ>
+ <xmx:VxrFavVvTP0sFowjKyOmzRBQ8tb0m95rwjcBJYCZgjwetuiUK0YaOw>
+ <xmx:VxrFamraMzHul4J9_3CsxEUShP6mXxkis8m2A_KXORQtTQlQeQuUQmYj>
 Feedback-ID: ifd214418:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Tue,
- 6 Oct 2026 12:02:37 -0400 (EDT)
-Message-ID: <ece1d936a974013f305b4b3c976316686b0fdfd3.camel@alistair23.me>
-Subject: Re: [PATCH v2 16/23] target/riscv: Build MemOpIdx to vext_ldff
+ 6 Oct 2026 11:57:10 -0400 (EDT)
+Message-ID: <09ebf5e24a2b910e70b9906564861fc121c32503.camel@alistair23.me>
+Subject: Re: [PATCH v2 13/23] target/riscv: Remove unused VDATA,WD
 From: Alistair <alistair@alistair23.me>
 To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org
-Date: Wed, 07 Oct 2026 02:02:36 +1000
-In-Reply-To: <20260821040404.268123-17-richard.henderson@linaro.org>
+Date: Wed, 07 Oct 2026 01:57:09 +1000
+In-Reply-To: <20260821040404.268123-14-richard.henderson@linaro.org>
 References: <20260821040404.268123-1-richard.henderson@linaro.org>
- <20260821040404.268123-17-richard.henderson@linaro.org>
+ <20260821040404.268123-14-richard.henderson@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 User-Agent: Evolution 3.62.0 (by Flathub.org) 
@@ -111,7 +110,7 @@ X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -128,8 +127,6 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On Thu, 2026-08-20 at 21:03 -0700, Richard Henderson wrote:
-> Use mmu data passed in with VDATA.
->=20
 > Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
@@ -137,24 +134,19 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
-> =C2=A0target/riscv/tcg/vector_helper.c | 3 ++-
-> =C2=A01 file changed, 2 insertions(+), 1 deletion(-)
+> =C2=A0target/riscv/internals.h | 1 -
+> =C2=A01 file changed, 1 deletion(-)
 >=20
-> diff --git a/target/riscv/tcg/vector_helper.c
-> b/target/riscv/tcg/vector_helper.c
-> index 9b0c3f70c2..98a0a5d025 100644
-> --- a/target/riscv/tcg/vector_helper.c
-> +++ b/target/riscv/tcg/vector_helper.c
-> @@ -711,7 +711,8 @@ vext_ldff(void *vd, void *v0, target_ulong base,
-> CPURISCVState *env,
-> =C2=A0=C2=A0=C2=A0=C2=A0 uint32_t msize =3D nf * esz;
-> =C2=A0=C2=A0=C2=A0=C2=A0 uint32_t vma =3D vext_vma(desc);
-> =C2=A0=C2=A0=C2=A0=C2=A0 target_ulong addr, last, last_in_page, page_spli=
-t, elems;
-> -=C2=A0=C2=A0=C2=A0 int mmu_index =3D riscv_env_mmu_index(env, false);
-> +=C2=A0=C2=A0=C2=A0 MemOpIdx oi =3D vext_oi(desc, log2_esz);
-> +=C2=A0=C2=A0=C2=A0 int mmu_index =3D get_mmuidx(oi);
-> =C2=A0=C2=A0=C2=A0=C2=A0 bool first_active;
-> =C2=A0=C2=A0=C2=A0=C2=A0 int flags;
-> =C2=A0=C2=A0=C2=A0=C2=A0 void *host;
+> diff --git a/target/riscv/internals.h b/target/riscv/internals.h
+> index 5d84e4de96..9e4da39ea0 100644
+> --- a/target/riscv/internals.h
+> +++ b/target/riscv/internals.h
+> @@ -94,7 +94,6 @@ FIELD(VDATA, VTA, 4, 1)
+> =C2=A0FIELD(VDATA, VTA_ALL_1S, 5, 1)
+> =C2=A0FIELD(VDATA, VMA, 6, 1)
+> =C2=A0FIELD(VDATA, NF, 7, 4)
+> -FIELD(VDATA, WD, 7, 1)
+> =C2=A0
+> =C2=A0/* float point classify helpers */
+> =C2=A0target_ulong fclass_h_bf16(uint64_t frs1);
 
