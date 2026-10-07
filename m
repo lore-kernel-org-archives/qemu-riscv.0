@@ -4,161 +4,113 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68BD7CA5FF1
-	for <qemu-riscv@archiver.kernel.org>; Wed,  7 Oct 2026 09:07:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D298FCA5FFF
+	for <qemu-riscv@archiver.kernel.org>; Wed,  7 Oct 2026 09:07:26 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xENIW-0007Ad-KR; Wed, 07 Oct 2026 04:46:48 -0400
+	id 1xENbr-0001Lv-2d; Wed, 07 Oct 2026 05:06:47 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <sunil.laxminarasimha@oss.qualcomm.com>)
- id 1xEJpT-00013W-8r
- for qemu-riscv@nongnu.org; Wed, 07 Oct 2026 01:04:54 -0400
-Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <sunil.laxminarasimha@oss.qualcomm.com>)
- id 1xEJpR-0004po-9M
- for qemu-riscv@nongnu.org; Wed, 07 Oct 2026 01:04:34 -0400
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6974laRr3929966
- for <qemu-riscv@nongnu.org>; Wed, 7 Oct 2026 05:04:27 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:reply-to:subject:to; s=
- qcppdkim1; bh=c1rRqeyH4w0vKFb9+WC0eZ7nYzuws23d/YTa0al83UA=; b=FA
- ymzvjcxoMrJSSBtF3MdX3mU/3uCxindCHzcTIcQeaXvDyRJdcz6X6k9/TCTZQrEI
- B/w68fY3vZkbAm0+CHtczRxGIc016KVzsIGDCA74UknXKeCE3BrkV5mmW57i+3AC
- FtmvbH10nuQG6L5BvAXk62sWXH8J8jwpWQEUwTbs5HrTWyOpowjwNhG3rRBzZuYY
- rGGnuTVaImARsNEGF4X3zNy5Nw77nLp7732QMj7LAPlnujRH8yvmAeKS+lUERjuQ
- L0N0YHpibrC/Ca0YtKR/2rQh/MJ6U/IREXd2N+B1TxHmXT6NmiTP2atYZLo3eBvT
- 9ALYtNDEIsAjgxAGm67w==
-Received: from mail-yx1-f69.google.com (mail-yx1-f69.google.com
- [74.125.224.69])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h5fc581et-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Wed, 07 Oct 2026 05:04:26 +0000 (GMT)
-Received: by mail-yx1-f69.google.com with SMTP id
- 956f58d0204a3-677ada64e84so5849785d50.1
- for <qemu-riscv@nongnu.org>; Tue, 06 Oct 2026 22:04:26 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1791349466; cv=none;
+ (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
+ id 1xEM2d-0001ke-S4
+ for qemu-riscv@nongnu.org; Wed, 07 Oct 2026 03:26:40 -0400
+Received: from mail-ed1-x529.google.com ([2a00:1450:4864:20::529])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
+ id 1xEM2Z-0008MW-C5
+ for qemu-riscv@nongnu.org; Wed, 07 Oct 2026 03:26:19 -0400
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-6af8620a7d2so2282106a12.0
+ for <qemu-riscv@nongnu.org>; Wed, 07 Oct 2026 00:26:12 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1791357971; cv=none;
  d=google.com; s=arc-20260327;
- b=SJEgYHKVY76aF4DCpfTKLiQ6wxTQYDaRaoTnGr7PiAInzmferwIYuL+fdEN7ymz3U7
- qPwFDCAWnJwRWI4SsQOwFIpGeGzat3Px4qmMG+pTMBvZOfHJ+DutUNPqrb4RcSIF8QO/
- Hyod5UHKfvVkq4R3JgJu7X7iuvgZ0bMy01ibpag4ApoeOMhQV8dNIr0vglnoGbbf6lQK
- LNvkWFXGxnDlmphCbN5LK6HWKR7F7t5yjOhFmnF6fi90W45Lik5lWPcGJYoDNpUfRq8H
- I+bkH/qwsVWS8ji4U+nbfpJFALze1/EHVF5SctiOArbseqjOTay1q2iGnI8atszuGXf+
- OIeA==
+ b=stGpDx5PLMDfSKXhcMf1xudXL7quyOnHjb5zFW+zlGaAaBt0g9L4CANNC4rFfphLR9
+ sSlJjZt3JgCFkCpRPFuvZr2Zhu3JnNA6ZbZYgMN2CQv45LKn7AJpZH8I7jUJ+YJ3Tfco
+ r29fRbFPIuDQmNMifDAhJIN+SYUHmNEoCGfATug19mqxNyBljHryBzVbhsXtEM6nzVay
+ Nzhi8A2o26V3YTYLIWs5wqpxoIgEj8/JGglKd28RkKKHxxFmqi6DsBPXS1p+btUihhPw
+ qgtZCMLahfVKjvCyvsX0Wxc2rJoT4PomizlH2HhPJ3udbl9a1KI4DXbDcv4aZtw4hWGc
+ roPw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :reply-to:in-reply-to:references:mime-version:dkim-signature;
- bh=c1rRqeyH4w0vKFb9+WC0eZ7nYzuws23d/YTa0al83UA=;
- fh=ICuPxiZLreGwMRRhOBT87FTqCUOtLimUKvzNFUXmKks=;
- b=Z2j4I3LU6gTytY7hrLVj0PsTTVXzP48oC3sDNSoys/RFVkJRZOqe6rzIaJoOEgUAPI
- dw15sTOC+V2JqfTHDfXfBNs1GbCzsnY2+utQZVabvyurXsdrT9GfEpDFcITdVEKx/MUu
- oL1MGQ3KtdHbChkDnIFZLLq2rqo7+ovA531/el9cPu5vMpcy2aXkVA9B6tHC8Yvz1zg8
- U5G1knc+bEgmUIZ1EB7nbaJ38+Ed49RkfzAQNT2MBJ0S5daV87vmLuPfFIf5m0tw/Gb2
- 1PEPI+m7mExt8CuRFndEe0KzmrNqbmfcRph3kT7GrXas3oFinZzg2AJV4tKLYc02mG6A
- DK7A==; darn=nongnu.org
+ bh=IYJ4GEz8V0Itcmv+R83YQloRwoIsKUUFi4LazpxdnMw=;
+ fh=lZ5hDQNJRpXKlwu1QVQKIM+xUIairs8+hjgOM42x/cA=;
+ b=eCaSqILYhbovMpR5r+SOeXBvHJ7keXTBxMlQFUvV9D+vCcseoy+Rl7b9smoaVuTvOk
+ k8wRoAq6DqfSHP//aOq8jFjVAsoX+9NO8QfMMMjJc88F4YZ4kbLyAh7RCUDPO+7Lz/Px
+ E+PPJJ8586D4Dv7twNnjPLEW3k9Asq3OJosyrG3uBWF8d91mUcu8fx8gclhH+1lXPRE5
+ TXx/UZtxA1AtPXSi7WGlWDg5TybFPX587frw7MEVbEY8pdPrLZ7NHpNJ0BwSjXCktzjb
+ U4qHdh4c9s5otFqCbWXSTgFvGZrT/MahOMkd96v0sqxCLrH7z1w9cSae2IDJnGaYk7PU
+ gXPw==; darn=nongnu.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1791349466; x=1791954266; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1791357971; x=1791962771; darn=nongnu.org;
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:reply-to:in-reply-to:references:mime-version:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=c1rRqeyH4w0vKFb9+WC0eZ7nYzuws23d/YTa0al83UA=;
- b=jqn+LlSujHLFPSoAnyTNrY7LNxBfGL0GSqeGi5eGhec3Nl5v2/kXQSncD3YdBjV5KL
- VX1QUTpVpb8mKjDk/WTT1K0+WEOj8LBcVG6WqnW4fhoRqBxEc1g5b2CO6RYXDit0O9dB
- BWO92DTThbkRF6bkZOqbZhBZQYjDtJ4/bYApNqgLTJwUFvKyrePsBAVsEC3sDSvALE6L
- bTfY7vQTywRIb2/GaR9SsR0UFEOps1s/3MGsbRdZ5EmmlkoktMi29QtIHF1mr+u+l19u
- 5WKShuvew6CHPEo9imTeZNXldrZi2Fb+Yt5UWRMUOcI0mJiQjmaQ4j67gVeaA6Lmmf+s
- 6W1A==
+ bh=IYJ4GEz8V0Itcmv+R83YQloRwoIsKUUFi4LazpxdnMw=;
+ b=ianK6LOcbpECbEbSkThnK2DJ2oa4OFVT53N05U8YY0UyxF3ZXeTxEvG+QiSnYWa3H8
+ ao8UW0p8T0IuTMgIe4SPqOZF2mVsHOROqB6ypz6ciWbNeKIzfcaHQlsEO7HzbgSxacBX
+ tPyB109Ae5V6Y6WDpFXJXwMOu3UDh+Y+SK8hMOFGAC1IOowDXkngGkQPHPcBN4WFqRNx
+ vr/fWd9RsKXiXYC/VJDoJr4cWgRhv4q/61YCDUXp2W1+defR1/Vqmskxn4hyUzFN9gK8
+ MYMKWkXXSCAThVClmsvIjccmJcK/hwRLpRDRx0X3O2vmPcp/zOzdX37tmyQQ9G0Wzz2p
+ GLMA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1791349466; x=1791954266;
+ d=1e100.net; s=20260707; t=1791357971; x=1791962771;
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:reply-to:in-reply-to:references:mime-version:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=c1rRqeyH4w0vKFb9+WC0eZ7nYzuws23d/YTa0al83UA=;
- b=sMlxGmvX2v4oI625ebxMmw3NWXnvGpcNzTPlLn8F5nTseSrAVAQUINP7XzfCj0ghC5
- SHKTvHPD4ZLhFIlCWfaIGBUseZaLDHP/n7BoPfWQq5cq6nzYENT/oj9CSuwTOg9itbio
- HNMKXxw51mm6TupibqWCgt77U8po2As3ncx6HnfH9+Y2ee973JZtNmlZAn8ux0Mz9AV7
- KkaRMy3ZQ2c3Ui+6Q2R5YUWvLJI3Hg0vtqoFNKZYSoc0rEwgSe2C3SyiXeABiBgC8CyK
- Dp5m4f26oLWJwb5RUONuCO2ZZbgVNLrKseWadJikSRSREC9Jb0i5NRpBkoyRj86FvRe2
- EOZQ==
+ bh=IYJ4GEz8V0Itcmv+R83YQloRwoIsKUUFi4LazpxdnMw=;
+ b=bzugohIIcVpzHgh03Stc76DGNOpEwemoAB7TjfNbmOzFGGUOwcWYizqLhd5uuom/1d
+ aM4J3ZntCjSmzQLIs4v09cSNSpQt6LWvo06WWx13MG8MXeZfg2HmuRnAsuXE4ppZzbgr
+ /1pl8N3PhOu/niTV+Pr1w81GtUU1crtmXCCJcJHhUtpp9+gjiMNdyKWvecYb52JFNW49
+ SxvKWTmc6TMoL889pUYXVenD64KqQRFxwUTZi1kxMZiqvSLAXa4zGhedvjhmSig3Fq8x
+ 0vIxQDUgq6QqJFiCVqSy94r/J0KiI2R1nmc1y5G7GstaJ5ZC4h8hTa/a9LEri5RbXpVM
+ hXDg==
 X-Forwarded-Encrypted: i=1;
- AKwUvBw/x8zjJnq7+ESx/m0407kZbiNSVxLO5t1MxSO0M01jvyOTxy7wr4CyK1tz2SQuCfOwlY9g14fzzcTf@nongnu.org
-X-Gm-Message-State: AFq9FYIS7NSB/lKERnwROm3PxpQiKchuSiZojh1NwEDoFocObMkTkbBR
- X9RisxUL8zN1gZc5LIfb+U/zdYEzjr7Nxv61/pLFQbQz6GbyJ5uR83/5OP4c2ug1ubEHd/zXC9Z
- yg3JMV9siJIlsBQhCJYAiOZiTFFXLUyJ/c49Z+VmBLHdmTicj5Fx6mfmvxpr/fbfPQ7MXNAJhJx
- 1VTZSPZfeFGj5FZTGQyh4FyIUxWlNrRmB1
-X-Gm-Gg: AYBFou3yqu0Nzj/NPefzgCXj2RcuB5tGfZek9CMKx7KrUM0V7yIfv/GoV7ykEIgydSG
- H3Vf+D7b+pHKFrzBdcrBj76M7WKt4BTTA30iePUDD+9SyxxuyrsOjZDnDQP6+RjGZ+cmO/Km9Wt
- q6jf/1ZPgfPnGhIuhFhjMjBcOrV33o9zxFC/VYiATDQPTkIHTxGmmlYueGTw==
-X-Received: by 2002:a05:690e:4808:b0:677:d6b1:d993 with SMTP id
- 956f58d0204a3-6790a061729mr562001d50.47.1791349465696; 
- Tue, 06 Oct 2026 22:04:25 -0700 (PDT)
-X-Received: by 2002:a05:690e:4808:b0:677:d6b1:d993 with SMTP id
- 956f58d0204a3-6790a061729mr561997d50.47.1791349465281; Tue, 06 Oct 2026
- 22:04:25 -0700 (PDT)
+ AKwUvBxhAStLvLNuR7bUABqcYcV9x7m7cuAQXCHvF7jfLy+AKB0YtiRzPj7uavvBEi6DwANtgJfazJbBsrZK@nongnu.org
+X-Gm-Message-State: AFq9FYJAenuACxcp3/condNVFkxnufMchwwt6yfaYkPJiktUHFNJcudN
+ NOc2geMHJPEZRpzGnS7wPVC1Mfumbr0BsGmWIHnt8ik9EBb4RJYNslc6yZQDbuY9prQY496SUQE
+ /TI55ZfBSqnXu1ePnwlO9hWSsvatfB1E=
+X-Gm-Gg: AYBFou1lHw1kXVSWrdd1KUo1rbe5fBInIzMYkQCJCbi0SoRgKez96Oaw5sRFSS3NJTz
+ m7fGM8WX5g9Qsxr3P1HyhpyRDDnlfms+Xqq2HLMAI4BBc3cvL+Snthwp2asHy5jB97WNLtX5jL3
+ wg6UmIsr8udcSSUxTptaNSSdjrvxZxGU4ZeBZoQho8tTCIX2Jb2hmUpkTgk1cyiG+Yom6r0oX1f
+ kSz+Foqltk43h52P0dxFeCfIh5IIBmZOvbiM19b/PkHPM+qqJ8Ng+zrB37bC2ZRXnoggDdA8VCm
+ jv5hvYvyVF8w8re8g0NQ6BwjQy5GS6FL0LJSp2Gta9xJVwBGsg9a13vK4k/HVp8CtA==
+X-Received: by 2002:a05:6402:a0d2:b0:6ae:1504:5ba with SMTP id
+ 4fb4d7f45d1cf-6aff47a0e11mr957925a12.30.1791357971342; Wed, 07 Oct 2026
+ 00:26:11 -0700 (PDT)
 MIME-Version: 1.0
-References: <20261005104008.214588-1-rick@sloservers.com>
-In-Reply-To: <20261005104008.214588-1-rick@sloservers.com>
-From: Sunil V L <sunilvl@oss.qualcomm.com>
-Date: Wed, 7 Oct 2026 10:34:14 +0530
-X-Gm-Features: AclHuK9JAPzZ6hSQKUmB7VNqa6_iZP9uHR93vpDxJ3KPpqQ9dSBMR3wZebz221E
-Message-ID: <CAB19ukGxy1ZQpU-HfNaEfcUcQ0e-=OiuR8NcJN5d0pmAg0d=FA@mail.gmail.com>
-Subject: Re: [PATCH v2 0/3] hw/riscv/virt: Fix the UART register width in SPCR
-To: Rick Richard <rick@sloservers.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Sunil V L <sunilvl@ventanamicro.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- "Michael S . Tsirkin" <mst@redhat.com>,
- Igor Mammedov <imammedo@redhat.com>, Ani Sinha <anisinha@redhat.com>
+References: <20261001-rv-dedup-v1-0-ea69b07afd31@rev.ng>
+ <20261001-rv-dedup-v1-7-ea69b07afd31@rev.ng>
+ <CAE2XoE_ag1RR_JFwgcg+9zPed+qpO2skf7W1_kiqvwB=Vf9aAQ@mail.gmail.com>
+ <f8f27bc3-83ce-4ccf-ae38-a43188b2ebc5@oss.qualcomm.com>
+ <ar_AzEWpF9XDGNdg@hive.localdomain>
+ <CAE2XoE_vsVDXH2qggECnqHC8dMpo7zyTTg9w64uvjnPeXE9y6A@mail.gmail.com>
+ <asUMlHlLI7j5MTUf@hive.localdomain>
+In-Reply-To: <asUMlHlLI7j5MTUf@hive.localdomain>
+From: Yonggang Luo <luoyonggang@gmail.com>
+Date: Wed, 7 Oct 2026 15:25:58 +0800
+X-Gm-Features: AclHuK_thFqASHhBOvSen0wo0Vp3n6bY-7YzlPzrdQmxY0HHxzfAPrmlZ2w80LQ
+Message-ID: <CAE2XoE9G1tOrWXcpf240woCF-==a4YcxTZ4pS9o5WxtPExWFjw@mail.gmail.com>
+Subject: Re: [PATCH 07/18] target/riscv: Runtime register MAX and BARE CPUs
+To: Anton Johansson <anjo@rev.ng>
+Cc: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org, daniel.barboza@oss.qualcomm.com, 
+ philmd@oss.qualcomm.com, palmer@dabbelt.com, alistair.francis@wdc.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDA3MDAxOSBTYWx0ZWRfX8A36T+jzEGSA
- y5NiuZjHIl/2JbUyyDgA+O7VYU0Kd8zAZdEmQhZOX8WK93AsUYhvfbHOrYrJpDvLT5EUM3Bi6Vt
- bcosiog/dRb+5gbjESEDvYhq+Y5jHqw=
-X-Proofpoint-GUID: qyOyolvwfQ9RiX3TI6gnc_T68a35jWRi
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDA3MDAxOSBTYWx0ZWRfXyo6pxtkSViMZ
- QwC5DVIszFxQeLIZSyO0NS9FNEkzgTjCA6W08EaYx1Q+NEAP9dtJqZiLLnH6J8WguC8TLuYrnVP
- djks/gkqmMCnV7G7uivuRhWgmHxU527cr+rw6LbVofObyJuJXzY9ik7s3/DScdTJzymmY4C+CzB
- Z9R6w8RymHsBAOOQx1H7yygvZnQepBZ6V4plMZiRAPHtff2XPe02DwE4h1DjH8NcYMPanJcNlVu
- ix1c9KU688KWxk2eZyJaMmsonIReZ2VrFXzFfGzkMEpxSR8XXjp5KhIR7/1pm3858Q18uc2SY4L
- S1pXM8BI5VJrAp4iumJcdL6OaynTcfMeZYv6M8A4MAAoKKiQ6q7bfP1If3FVNo9jB6v2k1mjQmX
- v7JUKhQvWq7eZJT6CDy1Txdzs9qoNcxqX5XOdykZ8MjBS2xO6yXt3eQwmyujDSXyrL/NwufsmqA
- +sAl8BjXyJ+wXOd/EKA==
-X-Proofpoint-ORIG-GUID: qyOyolvwfQ9RiX3TI6gnc_T68a35jWRi
-X-Authority-Analysis: v=2.4 cv=a6+lZkSF c=1 sm=1 tr=0 ts=6ac5d2da cx=c_pps
- a=J+5FMm3BkXb42VdG8aMU9w==:117 a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=Um2Pa8k9VHT-vaBCBUpS:22 a=F-tV29oOAAAA:8 a=EUspDBNiAAAA:8
- a=t6KeD4UUR2y4snKxGncA:9 a=QEXdDO2ut3YA:10 a=Epx66wHExT0cjJnnR-oj:22
- a=Y2dezMJzicAI2PZykhZh:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-07_02,2026-10-06_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 adultscore=0 suspectscore=0 malwarescore=0
- lowpriorityscore=0 bulkscore=0 spamscore=0 clxscore=1015 impostorscore=0
- phishscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
- definitions=main-2610070019
-Received-SPF: pass client-ip=205.220.168.131;
- envelope-from=sunil.laxminarasimha@oss.qualcomm.com;
- helo=mx0a-0031df01.pphosted.com
-X-Spam_score_int: -14
-X-Spam_score: -1.5
-X-Spam_bar: -
-X-Spam_report: (-1.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_BL_SPAMCOP_NET=1.347, RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+Received-SPF: pass client-ip=2a00:1450:4864:20::529;
+ envelope-from=luoyonggang@gmail.com; helo=mail-ed1-x529.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -171,45 +123,218 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Reply-To: sunilvl@oss.qualcomm.com
+Reply-To: luoyonggang@gmail.com
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, Oct 5, 2026 at 4:11=E2=80=AFPM Rick Richard <rick@sloservers.com> w=
+On Wed, Oct 7, 2026 at 7:09=E2=80=AFAM Anton Johansson <anjo@rev.ng> wrote:
+>
+> On 02/10/26, Yonggang Luo wrote:
+> > target/riscv: resolve target-dependent CPU definition fields
+> >
+> > The class-base initializer later reads def->misa_mxl_max and passes
+> > def->cfg to riscv_cpu_cfg_merge(), which merges max_satp_mode. Resolve
+> > both chooser results in a mutable copy so those steps use the selected
+> > values without modifying the const TypeInfo class data.
+> >
+> >
+> > defer riscv_cpu_validate_misa_mxl is not enough, mainly
+> > def->misa_mxl_max is accessed in
+> > riscv_cpu_class_base_init, for exactly match previous behavior, add
+> > two callback for each value
+>
+> Right, we would have to move more stuff to instance init which isn't the
+> best idea.  Personally I'm still not keen on adding more callbacks to
+> initialize two fields for two cpus, surely this is solvable with the
+> current machinery.  I'll submit a v2 and try defining two tables for
+> MAX/BARE instead, similar to ARM.
+
+
+Make sense, thanks
+
+>
+> >
+> > On Fri, Oct 2, 2026 at 11:36=E2=80=AFPM Anton Johansson <anjo@rev.ng> w=
 rote:
+> > >
+> > > On 02/10/26, Pierrick Bouvier wrote:
+> > > > On 10/1/2026 9:28 AM, Yonggang Luo wrote:
+> > > > > On Thu, Oct 1, 2026 at 11:55=E2=80=AFPM Anton Johansson via qemu =
+development
+> > > > > <qemu-devel@nongnu.org> wrote:
+> > > > >>
+> > > > >> Moves initialization of satp and mxl fields to a class initializ=
+ation
+> > > > >> function that checks target_riscv64().
+> > > > >>
+> > > > >> Note: I'm aware the current iteration of this patch is rather ha=
+cky, I
+> > > > >> don't like the introduction of runtime_misa_mxl_max, but I'm kee=
+ping
+> > > > >> this in to get the series out there and collect feedback.
+> > > > >>
+> > > > >> Signed-off-by: Anton Johansson <anjo@rev.ng>
+> > > > >> ---
+> > > > >>  target/riscv/cpu.h |  1 +
+> > > > >>  target/riscv/cpu.c | 90 +++++++++++++++++++++++++++++++++++----=
+---------------
+> > > > >>  2 files changed, 59 insertions(+), 32 deletions(-)
+> > > > >>
+> > > > >
+> > > > > This patch is how I handle these, just for reference, not a revie=
+w.
+> > > >
+> > > > Yonggang approach looks cleaner, I would favor this one.
+> > >
+> > > I'm personally not a huge fan, it still feels rather hacky. Why add a
+> > > completely new RISCVCPUDef::target_init just to make sure fields are
+> > > initialized before riscv_cpu_validate_misa_mxl()? Wouldn't moving the
+> > > check to a later point, maybe .instance_init, be better? Then for
+> > > riscv_cpu_init() we get
+> > >
+> > >   riscv_cpu_validate_misa_mxl(mcc);
+> > >   env->misa_mxl =3D mcc->def->misa_mxl_max;
+> > >
+> > > misa_mxl_max would be verified only during instance rather than
+> > > class initialization, which seems like a decent tradeoff for a simple=
+r
+> > > solution.
+> > >
+> > > --
+> > > Anton Johansson
+> > > rev.ng Labs Srl.
+> >
+> >
+> >
+> > --
+> >          =E6=AD=A4=E8=87=B4
+> > =E7=A4=BC
+> > =E7=BD=97=E5=8B=87=E5=88=9A
+> > Yours
+> >     sincerely,
+> > Yonggang Luo
 >
-> The riscv virt board's SPCR table says its 16550 UART has a 32-bit
-> register stride, but the registers are actually byte spaced.  Linux
-> doesn't use this field to work out the register spacing, but FreeBSD's
-> EFI loader does, and the FreeBSD kernel then crashes on the console
-> UART when booted through EDK2 with ACPI enabled.
->
-> This series fixes the width, plus the usual bios-tables-test patches to
-> update the golden reference so 'make check' keeps passing.
->
-> v2:
-> - Keep the relative file path in the patch 3 iasl diff (Daniel)
-> - Add Reviewed-by tags
->
-> Thanks,
-> Rick
->
-> Rick Richard (3):
->   tests/qtest/bios-tables-test: Allow changes to riscv64 virt SPCR
->   hw/riscv/virt-acpi-build: Fix the UART register width in SPCR
->   tests/qtest/bios-tables-test: Update riscv64 virt SPCR golden
->     reference
->
->  hw/riscv/virt-acpi-build.c        |   2 +-
->  tests/data/acpi/riscv64/virt/SPCR | Bin 90 -> 90 bytes
->  2 files changed, 1 insertion(+), 1 deletion(-)
->
-> --
-> 2.43.0
->
+> > From 31138892fe5cf878da9818cf93535ce10b125cb0 Mon Sep 17 00:00:00 2001
+> > From: Yonggang Luo <luoyonggang@gmail.com>
+> > Date: Sat, 3 Oct 2026 01:54:52 +0800
+> > Subject: [PATCH] target/riscv: resolve target-dependent CPU definition =
+fields
+> >
+> > The class-base initializer later reads def->misa_mxl_max and passes
+> > def->cfg to riscv_cpu_cfg_merge(), which merges max_satp_mode. Resolve
+> > both chooser results in a mutable copy so those steps use the selected
+> > values without modifying the const TypeInfo class data.
+> >
+> > Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
+> > ---
+> >  target/riscv/cpu.c | 40 +++++++++++++++++++++++++++-------------
+> >  target/riscv/cpu.h |  2 ++
+> >  2 files changed, 29 insertions(+), 13 deletions(-)
+> >
+> > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> > index c6f1739075..754f158250 100644
+> > --- a/target/riscv/cpu.c
+> > +++ b/target/riscv/cpu.c
+> > @@ -3092,6 +3092,8 @@ static void riscv_cpu_class_base_init(ObjectClass=
+ *c, const void *data)
+> >
+> >      if (pcc->def) {
+> >          mcc->def =3D g_memdup2(pcc->def, sizeof(*pcc->def));
+> > +        mcc->def->max_satp_mode_choose =3D NULL;
+> > +        mcc->def->misa_mxl_max_choose =3D NULL;
+> >      } else {
+> >          mcc->def =3D g_new0(RISCVCPUDef, 1);
+> >      }
+> > @@ -3108,7 +3110,16 @@ static void riscv_cpu_class_base_init(ObjectClas=
+s *c, const void *data)
+> >  #endif
+> >
+> >      if (data) {
+> > -        const RISCVCPUDef *def =3D data;
+> > +        RISCVCPUDef def_data =3D *(const RISCVCPUDef *)data;
+> > +        RISCVCPUDef *def =3D &def_data;
+> > +
+> > +        if (def->max_satp_mode_choose) {
+> > +            def->cfg.max_satp_mode =3D def->max_satp_mode_choose(def);
+> > +        }
+> > +        if (def->misa_mxl_max_choose) {
+> > +            def->misa_mxl_max =3D def->misa_mxl_max_choose(def);
+> > +        }
+> > +
+> >          mcc->def->bare |=3D def->bare;
+> >          if (def->profile) {
+> >              assert(profile_extends(def->profile, mcc->def->profile));
+> > @@ -3299,6 +3310,18 @@ static void riscv_cpu_instance_finalize(Object *=
+obj)
+> >      g_clear_pointer(&cpu->multi_ext_user_opts, g_hash_table_destroy);
+> >  }
+> >
+> > +static int8_t riscv_cpu_max_satp_mode_choose(const RISCVCPUDef *def)
+> > +{
+> > +    (void)def;
+> > +    return target_riscv32() ? VM_1_10_SV32 : VM_1_10_SV57;
+> > +}
+> > +
+> > +static RISCVMXL riscv_cpu_misa_mxl_max_choose(const RISCVCPUDef *def)
+> > +{
+> > +    (void)def;
+> > +    return target_riscv32() ? MXL_RV32 : MXL_RV64;
+> > +}
+> > +
+> >  static const TypeInfo riscv_cpu_type_infos[] =3D {
+> >      {
+> >          .name =3D TYPE_RISCV_CPU,
+> > @@ -3339,21 +3362,12 @@ static const TypeInfo riscv_cpu_type_infos[] =
+=3D {
+> >           * only MBARE will be available if the user doesn't enable
+> >           * a mode manually (see riscv_cpu_satp_mode_finalize()).
+> >           */
+> > -#ifdef TARGET_RISCV32
+> > -        .cfg.max_satp_mode =3D VM_1_10_SV32,
+> > -#else
+> > -        .cfg.max_satp_mode =3D VM_1_10_SV57,
+> > -#endif
+> > +        .max_satp_mode_choose =3D riscv_cpu_max_satp_mode_choose,
+> >      ),
+> >
+> >      DEFINE_RISCV_CPU(TYPE_RISCV_CPU_MAX, TYPE_RISCV_DYNAMIC_CPU,
+> > -#if defined(TARGET_RISCV32)
+> > -        .misa_mxl_max =3D MXL_RV32,
+> > -        .cfg.max_satp_mode =3D VM_1_10_SV32,
+> > -#elif defined(TARGET_RISCV64)
+> > -        .misa_mxl_max =3D MXL_RV64,
+> > -        .cfg.max_satp_mode =3D VM_1_10_SV57,
+> > -#endif
+> > +        .max_satp_mode_choose =3D riscv_cpu_max_satp_mode_choose,
+> > +        .misa_mxl_max_choose =3D riscv_cpu_misa_mxl_max_choose,
+> >      ),
+> >
+> >      DEFINE_ABSTRACT_RISCV_CPU(TYPE_RISCV_CPU_SIFIVE_E, TYPE_RISCV_VEND=
+OR_CPU,
+> > diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> > index 034d7e96c4..b6b5f679c9 100644
+> > --- a/target/riscv/cpu.h
+> > +++ b/target/riscv/cpu.h
+> > @@ -597,6 +597,8 @@ typedef struct RISCVCPUDef {
+> >  #endif
+> >      /* This is just a setter for env->num_triggers.  */
+> >      uint32_t num_triggers;
+> > +    int8_t (*max_satp_mode_choose)(const struct RISCVCPUDef *def);
+> > +    RISCVMXL (*misa_mxl_max_choose)(const struct RISCVCPUDef *def);
+> >  } RISCVCPUDef;
+> >
+> >  /**
+> > --
+> > 2.55.0.windows.3
+> >
 
-Thanks for the fix!. Looks good to me.
 
-For the series,
-Reviewed-by: Sunil V L <sunilvl@oss.qualcomm.com>
+
+--=20
+         =E6=AD=A4=E8=87=B4
+=E7=A4=BC
+=E7=BD=97=E5=8B=87=E5=88=9A
+Yours
+    sincerely,
+Yonggang Luo
 
