@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9709CA5FFF
-	for <qemu-riscv@archiver.kernel.org>; Wed,  7 Oct 2026 09:29:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AEBC9CA5FF1
+	for <qemu-riscv@archiver.kernel.org>; Wed,  7 Oct 2026 09:31:44 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xENw5-0003BU-7J; Wed, 07 Oct 2026 05:27:41 -0400
+	id 1xENw1-0002rO-3m; Wed, 07 Oct 2026 05:27:37 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <anjo@rev.ng>)
- id 1xENAO-0004Mi-Rx; Wed, 07 Oct 2026 04:38:25 -0400
+ id 1xENAN-0004BZ-IZ; Wed, 07 Oct 2026 04:38:23 -0400
 Received: from rev.ng ([94.130.142.21])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <anjo@rev.ng>)
- id 1xENAN-0006YR-6N; Wed, 07 Oct 2026 04:38:24 -0400
+ id 1xENAL-0006Y4-UN; Wed, 07 Oct 2026 04:38:23 -0400
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=rev.ng;
  s=dkim; h=Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:
  Content-Type:MIME-Version:Subject:Date:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive:List-Unsubscribe:List-Unsubscribe-Post:
- List-Help; bh=P0a9zFb2SfX1jHwRBaCH3Lwwb7Y5dzUIe+rALKpaKvY=; b=FVw7UBis0pzM97k
- 5oCmXDNqOUvoFuCVHUqxjB4mHrWqOCDT35moWJpJ/ZjExi0sFYU6+8/e4bjzZ8dViGJgJATG1YJTI
- +iXI9fG2wIuhfQY7oORiPhTd3j6fwAfmVCfX5PJf6HCgP2uDTFOj1Hogf5WWZyIVHr4JJavGLY4Kw
- z8=;
-Date: Wed, 07 Oct 2026 10:43:19 +0200
-Subject: [PATCH v2 13/18] target/riscv: Compile riscv-qmp-cmds.c once
+ List-Help; bh=4+HdR4WrzU5YXVMzxOKNC182txQYdH17P+SAjAFj/gE=; b=IYCvPeAkGasXqUA
+ kwrRZyq4eaRAHwroK4bRI802HxXwAUZfgEPkAj7HoNklBjEDpHvaa4/X+BEvv405J9gVSusEdkuBG
+ PeKG6GFdNFyxBXoKWDYKJat8eJQz4yLokZUyJsElLD3Sj92+lU6lGh7hzprkXF7cA7zZ8TGaDlAkv
+ Go=;
+Date: Wed, 07 Oct 2026 10:43:18 +0200
+Subject: [PATCH v2 12/18] target/riscv: Compile tcg-cpu.c once for system-mode
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261007-rv-dedup-v2-13-8a2f0f296a7f@rev.ng>
+Message-Id: <20261007-rv-dedup-v2-12-8a2f0f296a7f@rev.ng>
 References: <20261007-rv-dedup-v2-0-8a2f0f296a7f@rev.ng>
 In-Reply-To: <20261007-rv-dedup-v2-0-8a2f0f296a7f@rev.ng>
 To: qemu-devel@nongnu.org
@@ -41,11 +41,11 @@ Cc: Anton Johansson <anjo@rev.ng>, qemu-riscv@nongnu.org,
  daniel.barboza@oss.qualcomm.com, philmd@oss.qualcomm.com, 
  pierrick.bouvier@oss.qualcomm.com, palmer@dabbelt.com, 
  alistair.francis@wdc.com, luoyonggang@gmail.com
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1791362620; l=758;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1791362620; l=2625;
  i=anjo@rev.ng; s=20260210; h=from:subject:message-id;
- bh=9QMsYDR6L2dSPHz7+Hnnqh5du7BeR7t6207ZugFbCFI=;
- b=B/JFuekD6PGew9lrnHiC7x627aWE/4WwCUVUfM1elj8Prl/rG0A5GFcdX9a15d1uURWCm/mI+
- nRyBbj4tCDTArXKjZHsOQiT+25QwJHJ1SRLLJ8NzufPaliIcBVztr1E
+ bh=UtqYIrqBHsTw+J9UsN1S7re1+QqHnWX2oAHps/xEJX8=;
+ b=x+jFhrKoFkHEGRddj52oA34jTDa7C+CR15NHde2dpXYkMTraXnciWlSTOs25dGi2Zkhf90JPs
+ 0LTkWt/czN7BOIXmzOfIARHnfU/h9aVfjNPveflOVAzIZy1TfgGiAC2
 X-Developer-Key: i=anjo@rev.ng; a=ed25519;
  pk=dKsZvj/g3kgDxnV1/SWg8a0YNGSpWtFGNsWIepQYKow=
 Received-SPF: pass client-ip=94.130.142.21; envelope-from=anjo@rev.ng;
@@ -73,34 +73,83 @@ From:  Anton Johansson via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-File is already agnostic to target specifics at this point.
+Remaining target_ulongs are replaced by their corresponding type in
+CPUArchState.
 
 Reviewed-by: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
 Signed-off-by: Anton Johansson <anjo@rev.ng>
 ---
- target/riscv/meson.build | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ target/riscv/tcg/tcg-cpu.c   | 8 ++++----
+ target/riscv/tcg/meson.build | 3 ++-
+ 2 files changed, 6 insertions(+), 5 deletions(-)
 
-diff --git a/target/riscv/meson.build b/target/riscv/meson.build
-index ba38e421c5..8d0b3ed4ce 100644
---- a/target/riscv/meson.build
-+++ b/target/riscv/meson.build
-@@ -26,7 +26,6 @@ riscv_system_ss.add(files(
-   'monitor.c',
-   'machine.c',
-   'time_helper.c',
--  'riscv-qmp-cmds.c',
+diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+index b68160af83..91b2e128ea 100644
+--- a/target/riscv/tcg/tcg-cpu.c
++++ b/target/riscv/tcg/tcg-cpu.c
+@@ -229,7 +229,7 @@ static void riscv_restore_state_to_opc(CPUState *cs,
+     RISCVCPU *cpu = RISCV_CPU(cs);
+     CPURISCVState *env = &cpu->env;
+     RISCVMXL xl = FIELD_EX32(tb->flags, TB_FLAGS, XL);
+-    target_ulong pc;
++    uint64_t pc;
+ 
+     if (tb_cflags(tb) & CF_PCREL) {
+         pc = (env->pc & TARGET_PAGE_MASK) | data[0];
+@@ -1336,7 +1336,7 @@ static bool riscv_tcg_cpu_realize(CPUState *cs, Error **errp)
+ }
+ 
+ typedef struct RISCVCPUMisaExtConfig {
+-    target_ulong misa_bit;
++    uint32_t misa_bit;
+     bool enabled;
+ } RISCVCPUMisaExtConfig;
+ 
+@@ -1344,7 +1344,7 @@ static void cpu_set_misa_ext_cfg(Object *obj, Visitor *v, const char *name,
+                                  void *opaque, Error **errp)
+ {
+     const RISCVCPUMisaExtConfig *misa_ext_cfg = opaque;
+-    target_ulong misa_bit = misa_ext_cfg->misa_bit;
++    uint32_t misa_bit = misa_ext_cfg->misa_bit;
+     RISCVCPU *cpu = RISCV_CPU(obj);
+     CPURISCVState *env = &cpu->env;
+     bool vendor_cpu = riscv_cpu_is_vendor(obj);
+@@ -1386,7 +1386,7 @@ static void cpu_get_misa_ext_cfg(Object *obj, Visitor *v, const char *name,
+                                  void *opaque, Error **errp)
+ {
+     const RISCVCPUMisaExtConfig *misa_ext_cfg = opaque;
+-    target_ulong misa_bit = misa_ext_cfg->misa_bit;
++    uint32_t misa_bit = misa_ext_cfg->misa_bit;
+     RISCVCPU *cpu = RISCV_CPU(obj);
+     CPURISCVState *env = &cpu->env;
+     bool value;
+diff --git a/target/riscv/tcg/meson.build b/target/riscv/tcg/meson.build
+index cc50f3764c..69dadfd662 100644
+--- a/target/riscv/tcg/meson.build
++++ b/target/riscv/tcg/meson.build
+@@ -9,7 +9,6 @@ riscv_ss.add(files(
+   'm128_helper.c',
+   'op_helper.c',
+   'translate.c',
+-  'tcg-cpu.c',
+   'vcrypto_helper.c',
+   'vector_helper.c',
+   'vector_internals.c',
+@@ -25,6 +24,7 @@ riscv_system_ss.add(files(
+ riscv_user_ss.add(files(
+   'cpu_helper.c',
+   'csr.c',
++  'tcg-cpu.c',
  ))
  
- riscv_user_ss = ss.source_set()
-@@ -38,6 +37,7 @@ riscv_user_ss.add(files(
  
- riscv_common_system_ss.add(files(
-   'cpu.c',
-+  'riscv-qmp-cmds.c',
+@@ -33,5 +33,6 @@ riscv_common_system_ss.add(files(
+   'csr.c',
+   'mips_csr.c',
+   'pmu.c',
++  'tcg-cpu.c',
+   'th_csr.c',
  ))
- 
- subdir('tcg')
 
 -- 
 2.52.0
