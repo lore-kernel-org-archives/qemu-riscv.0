@@ -4,112 +4,167 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D298FCA5FFF
-	for <qemu-riscv@archiver.kernel.org>; Wed,  7 Oct 2026 09:07:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F19C6CA5FFF
+	for <qemu-riscv@archiver.kernel.org>; Wed,  7 Oct 2026 09:11:49 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xENbr-0001Lv-2d; Wed, 07 Oct 2026 05:06:47 -0400
+	id 1xENMA-0006Nl-V3; Wed, 07 Oct 2026 04:50:35 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xEM2d-0001ke-S4
- for qemu-riscv@nongnu.org; Wed, 07 Oct 2026 03:26:40 -0400
-Received: from mail-ed1-x529.google.com ([2a00:1450:4864:20::529])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xEM2Z-0008MW-C5
- for qemu-riscv@nongnu.org; Wed, 07 Oct 2026 03:26:19 -0400
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-6af8620a7d2so2282106a12.0
- for <qemu-riscv@nongnu.org>; Wed, 07 Oct 2026 00:26:12 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1791357971; cv=none;
- d=google.com; s=arc-20260327;
- b=stGpDx5PLMDfSKXhcMf1xudXL7quyOnHjb5zFW+zlGaAaBt0g9L4CANNC4rFfphLR9
- sSlJjZt3JgCFkCpRPFuvZr2Zhu3JnNA6ZbZYgMN2CQv45LKn7AJpZH8I7jUJ+YJ3Tfco
- r29fRbFPIuDQmNMifDAhJIN+SYUHmNEoCGfATug19mqxNyBljHryBzVbhsXtEM6nzVay
- Nzhi8A2o26V3YTYLIWs5wqpxoIgEj8/JGglKd28RkKKHxxFmqi6DsBPXS1p+btUihhPw
- qgtZCMLahfVKjvCyvsX0Wxc2rJoT4PomizlH2HhPJ3udbl9a1KI4DXbDcv4aZtw4hWGc
- roPw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :reply-to:in-reply-to:references:mime-version:dkim-signature;
- bh=IYJ4GEz8V0Itcmv+R83YQloRwoIsKUUFi4LazpxdnMw=;
- fh=lZ5hDQNJRpXKlwu1QVQKIM+xUIairs8+hjgOM42x/cA=;
- b=eCaSqILYhbovMpR5r+SOeXBvHJ7keXTBxMlQFUvV9D+vCcseoy+Rl7b9smoaVuTvOk
- k8wRoAq6DqfSHP//aOq8jFjVAsoX+9NO8QfMMMjJc88F4YZ4kbLyAh7RCUDPO+7Lz/Px
- E+PPJJ8586D4Dv7twNnjPLEW3k9Asq3OJosyrG3uBWF8d91mUcu8fx8gclhH+1lXPRE5
- TXx/UZtxA1AtPXSi7WGlWDg5TybFPX587frw7MEVbEY8pdPrLZ7NHpNJ0BwSjXCktzjb
- U4qHdh4c9s5otFqCbWXSTgFvGZrT/MahOMkd96v0sqxCLrH7z1w9cSae2IDJnGaYk7PU
- gXPw==; darn=nongnu.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
+ id 1xEKZ7-0000KQ-8q
+ for qemu-riscv@nongnu.org; Wed, 07 Oct 2026 01:52:24 -0400
+Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
+ id 1xEKYv-0000UZ-EI
+ for qemu-riscv@nongnu.org; Wed, 07 Oct 2026 01:51:37 -0400
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 6974UJdF2551302
+ for <qemu-riscv@nongnu.org>; Wed, 7 Oct 2026 05:51:30 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ jDqU1asXJVNklrJMBXsgkl0awJ724rKzgxqsm1RENOo=; b=bflIWJ6yJghTXTDP
+ Ddaz3kCYbfcAaaE6sjzBi7izrIwz0+7ThU5MGFsDu3V28kL9REJdtiGSXd2U76D/
+ 1Xl4BokxmKXWL0oN556mkqRJXdWt6GhuRv+Zoduxm1BlmpB1v1Yds9nM210Dwvsi
+ YDMcYWEvmO341CoSUdpQcFaOq6+E4Ij46vTxs6pFBSmQWYYjqarNM/03GX2oAJbV
+ fr+qVN4tmPOH7zuqFpWw/R149MK6st/PgvSonRgxhFf1oKKxqJDyADokmn7fqH/a
+ 7Qucu/OM/SrHpD0I1q0zgGZQ7c3uXI0JQkDSJ6p78R8GvJ8VAQetLDNDN+/POrsD
+ HBLmCw==
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com
+ [209.85.222.197])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h5c678rqh-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Wed, 07 Oct 2026 05:51:30 +0000 (GMT)
+Received: by mail-qk1-f197.google.com with SMTP id
+ af79cd13be357-93bf4c0af4eso563256785a.1
+ for <qemu-riscv@nongnu.org>; Tue, 06 Oct 2026 22:51:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1791357971; x=1791962771; darn=nongnu.org;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:reply-to:in-reply-to:references:mime-version:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=IYJ4GEz8V0Itcmv+R83YQloRwoIsKUUFi4LazpxdnMw=;
- b=ianK6LOcbpECbEbSkThnK2DJ2oa4OFVT53N05U8YY0UyxF3ZXeTxEvG+QiSnYWa3H8
- ao8UW0p8T0IuTMgIe4SPqOZF2mVsHOROqB6ypz6ciWbNeKIzfcaHQlsEO7HzbgSxacBX
- tPyB109Ae5V6Y6WDpFXJXwMOu3UDh+Y+SK8hMOFGAC1IOowDXkngGkQPHPcBN4WFqRNx
- vr/fWd9RsKXiXYC/VJDoJr4cWgRhv4q/61YCDUXp2W1+defR1/Vqmskxn4hyUzFN9gK8
- MYMKWkXXSCAThVClmsvIjccmJcK/hwRLpRDRx0X3O2vmPcp/zOzdX37tmyQQ9G0Wzz2p
- GLMA==
+ d=oss.qualcomm.com; s=google; t=1791352290; x=1791957090; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:from:references
+ :cc:to:content-language:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=jDqU1asXJVNklrJMBXsgkl0awJ724rKzgxqsm1RENOo=;
+ b=O1yzfR8pI5iowo0eBNxFNpm5Az6APM7vkzceKFV/Iar3mrL5CbpeKrfLRrGW1u3oBk
+ tgmtGKM+oyb6LN9UB7SgQu+Wt9tstZ4UFSShpKtmWn+n1RBkT3Qc5ceVQLQ2cqH84U0L
+ O7QaPRLZ6ECKLR3UT41MJaj2SK23FUBvBZUAbOjCnhY9MSZadZUx7CWd39iiURf8AfwR
+ wTSU/jJHOtQdi2bfPQinN4OcwjDWoyY8xAaURmXTKvASDJ/ZFEzhQA+1xK0y97bLpFS2
+ 4luOWhbahR/5O61+1BSRMqnasGbtJ5/LQx1RcqsLoL3a1ISF+kiyOj8ACadvBJ4DGdwx
+ thfw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1791357971; x=1791962771;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:reply-to:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=IYJ4GEz8V0Itcmv+R83YQloRwoIsKUUFi4LazpxdnMw=;
- b=bzugohIIcVpzHgh03Stc76DGNOpEwemoAB7TjfNbmOzFGGUOwcWYizqLhd5uuom/1d
- aM4J3ZntCjSmzQLIs4v09cSNSpQt6LWvo06WWx13MG8MXeZfg2HmuRnAsuXE4ppZzbgr
- /1pl8N3PhOu/niTV+Pr1w81GtUU1crtmXCCJcJHhUtpp9+gjiMNdyKWvecYb52JFNW49
- SxvKWTmc6TMoL889pUYXVenD64KqQRFxwUTZi1kxMZiqvSLAXa4zGhedvjhmSig3Fq8x
- 0vIxQDUgq6QqJFiCVqSy94r/J0KiI2R1nmc1y5G7GstaJ5ZC4h8hTa/a9LEri5RbXpVM
- hXDg==
+ d=1e100.net; s=20260707; t=1791352290; x=1791957090;
+ h=content-transfer-encoding:content-type:in-reply-to:from:references
+ :cc:to:content-language:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=jDqU1asXJVNklrJMBXsgkl0awJ724rKzgxqsm1RENOo=;
+ b=gIistG7n86WyeRCO4PU5LV1OriQBzi9o8bah7PMhym8bh4iJPnPNdxVRjYpdCzvQkD
+ kjtOQulI4wGWOOr0UvlMrHwVIwn8EGHdI0hiF3QlsvZBy3xyxK+M+Vota+b2zrnWvVnl
+ 0pHPfluRGeDFgpT7uSTmMuWoDCOCh7X31cGKWrLff1VwW4uCcruGBoL+Z6U/DzcTbRVn
+ ye1B0ao6pCxc+vOgh8GoR2ZYAF1UDG4PHVe+TyUXn+KVFT22OhfIl8LkMSI7RLBVuaF5
+ YUFZs5DuSLQ13ZJX/rFG68XC8Gae5iYLifzTtCNeCMi8sUsXHh2BpE30ltk0p90AMCuH
+ vgVg==
 X-Forwarded-Encrypted: i=1;
- AKwUvBxhAStLvLNuR7bUABqcYcV9x7m7cuAQXCHvF7jfLy+AKB0YtiRzPj7uavvBEi6DwANtgJfazJbBsrZK@nongnu.org
-X-Gm-Message-State: AFq9FYJAenuACxcp3/condNVFkxnufMchwwt6yfaYkPJiktUHFNJcudN
- NOc2geMHJPEZRpzGnS7wPVC1Mfumbr0BsGmWIHnt8ik9EBb4RJYNslc6yZQDbuY9prQY496SUQE
- /TI55ZfBSqnXu1ePnwlO9hWSsvatfB1E=
-X-Gm-Gg: AYBFou1lHw1kXVSWrdd1KUo1rbe5fBInIzMYkQCJCbi0SoRgKez96Oaw5sRFSS3NJTz
- m7fGM8WX5g9Qsxr3P1HyhpyRDDnlfms+Xqq2HLMAI4BBc3cvL+Snthwp2asHy5jB97WNLtX5jL3
- wg6UmIsr8udcSSUxTptaNSSdjrvxZxGU4ZeBZoQho8tTCIX2Jb2hmUpkTgk1cyiG+Yom6r0oX1f
- kSz+Foqltk43h52P0dxFeCfIh5IIBmZOvbiM19b/PkHPM+qqJ8Ng+zrB37bC2ZRXnoggDdA8VCm
- jv5hvYvyVF8w8re8g0NQ6BwjQy5GS6FL0LJSp2Gta9xJVwBGsg9a13vK4k/HVp8CtA==
-X-Received: by 2002:a05:6402:a0d2:b0:6ae:1504:5ba with SMTP id
- 4fb4d7f45d1cf-6aff47a0e11mr957925a12.30.1791357971342; Wed, 07 Oct 2026
- 00:26:11 -0700 (PDT)
+ AKwUvBxCKKEKKbxhQpidOb6x4xyT47bTUsC1tc47Yf5yzhWS39ixBsGJIgF1KO99rvACOLZKhwOMrZ8Qlv81@nongnu.org
+X-Gm-Message-State: AFuF++lrul5SXUvvlGhynY/XltJGOUVUNVowo2IKpb/eqL63gyBtqbwa
+ QkysfrS8qFrMrV3l4PRdL9/0NXaC+436H5xDpvYuwu9lm9gTF4dG2FvG/rYChXeiEr1Pun757nl
+ Bqk9QczWZ+qXeEZs7PSEtT8gtPlSZRSkXQr6XFl+VFiYyJB9yXNcqxA1eYQ==
+X-Gm-Gg: AYBFou1nv7s6MFBSV81h15nYy+J5TNsTjFo9L04SkhlP+ctqc5uoID35AcbsN7M6z2r
+ B8NCnFm9neqQeell6x6pTGSYm/CFJqbz0nq892kYY0vCMkFqNtuCvhtMJxtG4Hatm6AljYfoxv7
+ /uSUcRYEmHfpKPdSw/qo7mLdnP5EqRgBetOW66labuMHlTxWkld/5Lbi+Q1Yc6bECEhMN/rCKa5
+ BD0EwsR1ZcSW872VSB9Q10Y/NV+/hM1AnT9rALPDd7wg46GnGRl29R1HYpY5MiAA/kSwCrGa5i9
+ 8fUVLjWZGFrKJ4901LePL2llvj8wJTkeJWxwwo4q5n4zM5TdTaDGdAjW9JoHjOC3c/MHlcu9leS
+ i+187p98cNiVxKi+m8qR+jxG+oRrsa3m4Fw==
+X-Received: by 2002:a05:620a:394e:b0:93c:290e:9e9c with SMTP id
+ af79cd13be357-93e860404a9mr924134285a.16.1791352289927; 
+ Tue, 06 Oct 2026 22:51:29 -0700 (PDT)
+X-Received: by 2002:a05:620a:394e:b0:93c:290e:9e9c with SMTP id
+ af79cd13be357-93e860404a9mr924128285a.16.1791352289477; 
+ Tue, 06 Oct 2026 22:51:29 -0700 (PDT)
+Received: from [192.168.69.210] (pmd666.hd.free.fr. [88.187.86.199])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4a18044c970sm18616775e9.4.2026.10.06.22.51.27
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 06 Oct 2026 22:51:28 -0700 (PDT)
+Message-ID: <d9f09744-4d92-47dd-a1da-6d20090662cc@oss.qualcomm.com>
+Date: Wed, 7 Oct 2026 07:51:26 +0200
 MIME-Version: 1.0
-References: <20261001-rv-dedup-v1-0-ea69b07afd31@rev.ng>
- <20261001-rv-dedup-v1-7-ea69b07afd31@rev.ng>
- <CAE2XoE_ag1RR_JFwgcg+9zPed+qpO2skf7W1_kiqvwB=Vf9aAQ@mail.gmail.com>
- <f8f27bc3-83ce-4ccf-ae38-a43188b2ebc5@oss.qualcomm.com>
- <ar_AzEWpF9XDGNdg@hive.localdomain>
- <CAE2XoE_vsVDXH2qggECnqHC8dMpo7zyTTg9w64uvjnPeXE9y6A@mail.gmail.com>
- <asUMlHlLI7j5MTUf@hive.localdomain>
-In-Reply-To: <asUMlHlLI7j5MTUf@hive.localdomain>
-From: Yonggang Luo <luoyonggang@gmail.com>
-Date: Wed, 7 Oct 2026 15:25:58 +0800
-X-Gm-Features: AclHuK_thFqASHhBOvSen0wo0Vp3n6bY-7YzlPzrdQmxY0HHxzfAPrmlZ2w80LQ
-Message-ID: <CAE2XoE9G1tOrWXcpf240woCF-==a4YcxTZ4pS9o5WxtPExWFjw@mail.gmail.com>
-Subject: Re: [PATCH 07/18] target/riscv: Runtime register MAX and BARE CPUs
-To: Anton Johansson <anjo@rev.ng>
-Cc: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org, daniel.barboza@oss.qualcomm.com, 
- philmd@oss.qualcomm.com, palmer@dabbelt.com, alistair.francis@wdc.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::529;
- envelope-from=luoyonggang@gmail.com; helo=mail-ed1-x529.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 06/27] target/sh4: Define exception vector constants
+Content-Language: en-US
+To: Yonggang Luo <luoyonggang@gmail.com>, qemu-devel@nongnu.org
+Cc: Max Filippov <jcmvbkbc@gmail.com>, Stafford Horne <shorne@gmail.com>,
+ Brian Cain <brian.cain@oss.qualcomm.com>, Eric Farman
+ <farman@linux.ibm.com>, Song Gao <17746591750@163.com>,
+ qemu-riscv@nongnu.org,
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+ Aleksandar Rikalo <arikalo@gmail.com>, qemu-s390x@nongnu.org,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Philippe Mathieu-Daude <philmd@mailo.com>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Michael Rolnik <mrolnik@gmail.com>,
+ Harsh Prateek Bora <harshpb@linux.ibm.com>,
+ Nicholas Piggin <npiggin@gmail.com>, Cornelia Huck <cohuck@redhat.com>,
+ Helge Deller <deller@gmx.de>, Chinmay Rath <rathc@linux.ibm.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, qemu-ppc@nongnu.org,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Chao Liu <chao.liu@processmission.com>, Aurelien Jarno
+ <aurelien@aurel32.net>, Richard Henderson <richard.henderson@linaro.org>,
+ David Hildenbrand <david@kernel.org>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Weiwei Li <liwei1518@gmail.com>, Yoshinori Sato <yoshinori.sato@nifty.com>,
+ Artyom Tarasenko <atar4qemu@gmail.com>,
+ Matthew Rosato <mjrosato@linux.ibm.com>,
+ Laurent Vivier <laurent@vivier.eu>, qemu-arm@nongnu.org,
+ Paolo Bonzini <pbonzini@redhat.com>, Glenn Miles <milesg@linux.ibm.com>,
+ Ilya Leoshkevich <iii@linux.ibm.com>
+References: <20261002175037.1747-1-luoyonggang@gmail.com>
+ <20261002175037.1747-7-luoyonggang@gmail.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
+In-Reply-To: <20261002175037.1747-7-luoyonggang@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDA3MDAyMyBTYWx0ZWRfX5GVwV2q1xczQ
+ 0bgb6cvlTJiQoplAvMLx9vqpaLahYMwxO4jKLFGwZX8GNwMQs4mK9bszwp9ft2vt2wNu6poj9oI
+ tWEMK+j/g+QFmwyT92pFLy21F89ly7w=
+X-Proofpoint-ORIG-GUID: _g89hdmfRVqkz2rR0v366m9OVCEEcdwm
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDA3MDAyMyBTYWx0ZWRfX1VHi7dFKPMw5
+ qWnMgNliAldM7mk/fEBaETmeyZy0rxeIme7orLwoQB1ZeUV7ekM0AxtgXVDzipHwwOo+wMyph9h
+ juQPb2BlZGbLJBzkqKCaBC8/WRb1vmwLEZr+5roRBlME7mt427fZQo1G3sK/Kyq0RyBW2uwGh/u
+ UL83uh5fG6yqEB/SSN4BKxBUqwikv0MJntCqN5UkZqwdKmI0peTG3xbshQCOtH+R/US1BdNpHIM
+ WEg0ik3MeytV+RolW0PmnAOYZtFRWiVD5JCXeRSWj4bOuWfxxBm4yqgm3kAh0Ov4x7gjiX1PBQ7
+ PWlqLAqHjobdLtaYto2Js4aPXyZROjdPANR+4jBnagsF7GfWvKcPMY3v573qD6nMJ6OVaDo2IFM
+ uzlZRWqkvaF31XW7C5zojqRuMb9KGmFsj24cWP36mlHTg57riWYGEpxDZyGUyXEzda9AsqOayqt
+ jexxcyr2oFrWR/YLm7w==
+X-Authority-Analysis: v=2.4 cv=OfcNnRTY c=1 sm=1 tr=0 ts=6ac5dde2 cx=c_pps
+ a=50t2pK5VMbmlHzFWWp8p/g==:117 a=4s3hRJSeHn4rkQlkrse1kQ==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=M51BFTxLslgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
+ a=pGLkceISAAAA:8 a=EUspDBNiAAAA:8 a=5KkIcTHh3hzyv8iDLVEA:9 a=3ZKOabzyN94A:10
+ a=QEXdDO2ut3YA:10 a=IoWCM6iH3mJn3m4BftBB:22
+X-Proofpoint-GUID: _g89hdmfRVqkz2rR0v366m9OVCEEcdwm
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-07_02,2026-10-06_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ phishscore=0 spamscore=0 malwarescore=0 bulkscore=0 clxscore=1015
+ adultscore=0 lowpriorityscore=0 suspectscore=0 impostorscore=0
+ priorityscore=1501 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
+ definitions=main-2610070023
+Received-SPF: pass client-ip=205.220.180.131;
+ envelope-from=philmd@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -123,218 +178,19 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Reply-To: luoyonggang@gmail.com
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Oct 7, 2026 at 7:09=E2=80=AFAM Anton Johansson <anjo@rev.ng> wrote:
->
-> On 02/10/26, Yonggang Luo wrote:
-> > target/riscv: resolve target-dependent CPU definition fields
-> >
-> > The class-base initializer later reads def->misa_mxl_max and passes
-> > def->cfg to riscv_cpu_cfg_merge(), which merges max_satp_mode. Resolve
-> > both chooser results in a mutable copy so those steps use the selected
-> > values without modifying the const TypeInfo class data.
-> >
-> >
-> > defer riscv_cpu_validate_misa_mxl is not enough, mainly
-> > def->misa_mxl_max is accessed in
-> > riscv_cpu_class_base_init, for exactly match previous behavior, add
-> > two callback for each value
->
-> Right, we would have to move more stuff to instance init which isn't the
-> best idea.  Personally I'm still not keen on adding more callbacks to
-> initialize two fields for two cpus, surely this is solvable with the
-> current machinery.  I'll submit a v2 and try defining two tables for
-> MAX/BARE instead, similar to ARM.
+On 2/10/26 19:50, Yonggang Luo wrote:
+> Name SH4 exception vectors and use the definitions throughout exception
+> handling and exception raising.
+> 
+> Signed-off-by: Yonggang Luo <yonggang@gmail.com>
+> ---
+>   target/sh4/cpu.h       | 21 +++++++++++++++
+>   target/sh4/helper.c    | 60 +++++++++++++++++++++---------------------
+>   target/sh4/op_helper.c | 16 +++++------
+>   3 files changed, 59 insertions(+), 38 deletions(-)
 
-
-Make sense, thanks
-
->
-> >
-> > On Fri, Oct 2, 2026 at 11:36=E2=80=AFPM Anton Johansson <anjo@rev.ng> w=
-rote:
-> > >
-> > > On 02/10/26, Pierrick Bouvier wrote:
-> > > > On 10/1/2026 9:28 AM, Yonggang Luo wrote:
-> > > > > On Thu, Oct 1, 2026 at 11:55=E2=80=AFPM Anton Johansson via qemu =
-development
-> > > > > <qemu-devel@nongnu.org> wrote:
-> > > > >>
-> > > > >> Moves initialization of satp and mxl fields to a class initializ=
-ation
-> > > > >> function that checks target_riscv64().
-> > > > >>
-> > > > >> Note: I'm aware the current iteration of this patch is rather ha=
-cky, I
-> > > > >> don't like the introduction of runtime_misa_mxl_max, but I'm kee=
-ping
-> > > > >> this in to get the series out there and collect feedback.
-> > > > >>
-> > > > >> Signed-off-by: Anton Johansson <anjo@rev.ng>
-> > > > >> ---
-> > > > >>  target/riscv/cpu.h |  1 +
-> > > > >>  target/riscv/cpu.c | 90 +++++++++++++++++++++++++++++++++++----=
----------------
-> > > > >>  2 files changed, 59 insertions(+), 32 deletions(-)
-> > > > >>
-> > > > >
-> > > > > This patch is how I handle these, just for reference, not a revie=
-w.
-> > > >
-> > > > Yonggang approach looks cleaner, I would favor this one.
-> > >
-> > > I'm personally not a huge fan, it still feels rather hacky. Why add a
-> > > completely new RISCVCPUDef::target_init just to make sure fields are
-> > > initialized before riscv_cpu_validate_misa_mxl()? Wouldn't moving the
-> > > check to a later point, maybe .instance_init, be better? Then for
-> > > riscv_cpu_init() we get
-> > >
-> > >   riscv_cpu_validate_misa_mxl(mcc);
-> > >   env->misa_mxl =3D mcc->def->misa_mxl_max;
-> > >
-> > > misa_mxl_max would be verified only during instance rather than
-> > > class initialization, which seems like a decent tradeoff for a simple=
-r
-> > > solution.
-> > >
-> > > --
-> > > Anton Johansson
-> > > rev.ng Labs Srl.
-> >
-> >
-> >
-> > --
-> >          =E6=AD=A4=E8=87=B4
-> > =E7=A4=BC
-> > =E7=BD=97=E5=8B=87=E5=88=9A
-> > Yours
-> >     sincerely,
-> > Yonggang Luo
->
-> > From 31138892fe5cf878da9818cf93535ce10b125cb0 Mon Sep 17 00:00:00 2001
-> > From: Yonggang Luo <luoyonggang@gmail.com>
-> > Date: Sat, 3 Oct 2026 01:54:52 +0800
-> > Subject: [PATCH] target/riscv: resolve target-dependent CPU definition =
-fields
-> >
-> > The class-base initializer later reads def->misa_mxl_max and passes
-> > def->cfg to riscv_cpu_cfg_merge(), which merges max_satp_mode. Resolve
-> > both chooser results in a mutable copy so those steps use the selected
-> > values without modifying the const TypeInfo class data.
-> >
-> > Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
-> > ---
-> >  target/riscv/cpu.c | 40 +++++++++++++++++++++++++++-------------
-> >  target/riscv/cpu.h |  2 ++
-> >  2 files changed, 29 insertions(+), 13 deletions(-)
-> >
-> > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> > index c6f1739075..754f158250 100644
-> > --- a/target/riscv/cpu.c
-> > +++ b/target/riscv/cpu.c
-> > @@ -3092,6 +3092,8 @@ static void riscv_cpu_class_base_init(ObjectClass=
- *c, const void *data)
-> >
-> >      if (pcc->def) {
-> >          mcc->def =3D g_memdup2(pcc->def, sizeof(*pcc->def));
-> > +        mcc->def->max_satp_mode_choose =3D NULL;
-> > +        mcc->def->misa_mxl_max_choose =3D NULL;
-> >      } else {
-> >          mcc->def =3D g_new0(RISCVCPUDef, 1);
-> >      }
-> > @@ -3108,7 +3110,16 @@ static void riscv_cpu_class_base_init(ObjectClas=
-s *c, const void *data)
-> >  #endif
-> >
-> >      if (data) {
-> > -        const RISCVCPUDef *def =3D data;
-> > +        RISCVCPUDef def_data =3D *(const RISCVCPUDef *)data;
-> > +        RISCVCPUDef *def =3D &def_data;
-> > +
-> > +        if (def->max_satp_mode_choose) {
-> > +            def->cfg.max_satp_mode =3D def->max_satp_mode_choose(def);
-> > +        }
-> > +        if (def->misa_mxl_max_choose) {
-> > +            def->misa_mxl_max =3D def->misa_mxl_max_choose(def);
-> > +        }
-> > +
-> >          mcc->def->bare |=3D def->bare;
-> >          if (def->profile) {
-> >              assert(profile_extends(def->profile, mcc->def->profile));
-> > @@ -3299,6 +3310,18 @@ static void riscv_cpu_instance_finalize(Object *=
-obj)
-> >      g_clear_pointer(&cpu->multi_ext_user_opts, g_hash_table_destroy);
-> >  }
-> >
-> > +static int8_t riscv_cpu_max_satp_mode_choose(const RISCVCPUDef *def)
-> > +{
-> > +    (void)def;
-> > +    return target_riscv32() ? VM_1_10_SV32 : VM_1_10_SV57;
-> > +}
-> > +
-> > +static RISCVMXL riscv_cpu_misa_mxl_max_choose(const RISCVCPUDef *def)
-> > +{
-> > +    (void)def;
-> > +    return target_riscv32() ? MXL_RV32 : MXL_RV64;
-> > +}
-> > +
-> >  static const TypeInfo riscv_cpu_type_infos[] =3D {
-> >      {
-> >          .name =3D TYPE_RISCV_CPU,
-> > @@ -3339,21 +3362,12 @@ static const TypeInfo riscv_cpu_type_infos[] =
-=3D {
-> >           * only MBARE will be available if the user doesn't enable
-> >           * a mode manually (see riscv_cpu_satp_mode_finalize()).
-> >           */
-> > -#ifdef TARGET_RISCV32
-> > -        .cfg.max_satp_mode =3D VM_1_10_SV32,
-> > -#else
-> > -        .cfg.max_satp_mode =3D VM_1_10_SV57,
-> > -#endif
-> > +        .max_satp_mode_choose =3D riscv_cpu_max_satp_mode_choose,
-> >      ),
-> >
-> >      DEFINE_RISCV_CPU(TYPE_RISCV_CPU_MAX, TYPE_RISCV_DYNAMIC_CPU,
-> > -#if defined(TARGET_RISCV32)
-> > -        .misa_mxl_max =3D MXL_RV32,
-> > -        .cfg.max_satp_mode =3D VM_1_10_SV32,
-> > -#elif defined(TARGET_RISCV64)
-> > -        .misa_mxl_max =3D MXL_RV64,
-> > -        .cfg.max_satp_mode =3D VM_1_10_SV57,
-> > -#endif
-> > +        .max_satp_mode_choose =3D riscv_cpu_max_satp_mode_choose,
-> > +        .misa_mxl_max_choose =3D riscv_cpu_misa_mxl_max_choose,
-> >      ),
-> >
-> >      DEFINE_ABSTRACT_RISCV_CPU(TYPE_RISCV_CPU_SIFIVE_E, TYPE_RISCV_VEND=
-OR_CPU,
-> > diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> > index 034d7e96c4..b6b5f679c9 100644
-> > --- a/target/riscv/cpu.h
-> > +++ b/target/riscv/cpu.h
-> > @@ -597,6 +597,8 @@ typedef struct RISCVCPUDef {
-> >  #endif
-> >      /* This is just a setter for env->num_triggers.  */
-> >      uint32_t num_triggers;
-> > +    int8_t (*max_satp_mode_choose)(const struct RISCVCPUDef *def);
-> > +    RISCVMXL (*misa_mxl_max_choose)(const struct RISCVCPUDef *def);
-> >  } RISCVCPUDef;
-> >
-> >  /**
-> > --
-> > 2.55.0.windows.3
-> >
-
-
-
---=20
-         =E6=AD=A4=E8=87=B4
-=E7=A4=BC
-=E7=BD=97=E5=8B=87=E5=88=9A
-Yours
-    sincerely,
-Yonggang Luo
+Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
 
