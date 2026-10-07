@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7734FCA5FFF
-	for <qemu-riscv@archiver.kernel.org>; Wed,  7 Oct 2026 09:27:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9F45CA6009
+	for <qemu-riscv@archiver.kernel.org>; Wed,  7 Oct 2026 09:28:27 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xENsD-0003qs-43; Wed, 07 Oct 2026 05:23:41 -0400
+	id 1xENwT-00041g-S9; Wed, 07 Oct 2026 05:28:05 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <anjo@rev.ng>)
- id 1xENAQ-0004ZW-TT; Wed, 07 Oct 2026 04:38:26 -0400
+ id 1xENAM-00044C-98; Wed, 07 Oct 2026 04:38:22 -0400
 Received: from rev.ng ([94.130.142.21])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <anjo@rev.ng>)
- id 1xENAP-0006Yh-9J; Wed, 07 Oct 2026 04:38:26 -0400
+ id 1xENAK-0006Xe-QR; Wed, 07 Oct 2026 04:38:21 -0400
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=rev.ng;
  s=dkim; h=Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:
  Content-Type:MIME-Version:Subject:Date:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive:List-Unsubscribe:List-Unsubscribe-Post:
- List-Help; bh=hJAXKPO1GZMKOhLEQ5kzX/DppAyvRoYENfTXOao/lD8=; b=uNdveiiLu34+D8T
- MjgDunkABOhc6GYfp95av8w0+SgzGgu0/72pKLItWdswuw3fR2oMYKBTT5eWrlWvD7A92k5yJmabQ
- SlscFOkPyw1kk892ny3GTvr3SEGt1V/sbkCQ6qgxwuXR9OKka8/RjXXvkztonz53EpRsuZrHwsZJm
- nQ=;
-Date: Wed, 07 Oct 2026 10:43:22 +0200
-Subject: [PATCH v2 16/18] target/riscv: Compile machine.c once
+ List-Help; bh=4dg6sZmh2ZF2g+ZBJuyqjZFyrYmpiG9IkOwQx70MNoQ=; b=BCClI3IuPJ2Pr4u
+ V/zIE9K6pHGpXl1SVGH9jWU7k/YR6OmG3PzO4/Ykwsz4de5QNtaFqfVy3n//rgz/Eex5mMgYfue26
+ zkTIFpIi4iXTH4H8uk9TBtq+XIEN6dL820IupilWooLk5fpGW6ilKVMm1buXJEMgiGmY4z57eN+MG
+ ik=;
+Date: Wed, 07 Oct 2026 10:43:16 +0200
+Subject: [PATCH v2 10/18] target/riscv: Compile cpu.c once for system-mode
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261007-rv-dedup-v2-16-8a2f0f296a7f@rev.ng>
+Message-Id: <20261007-rv-dedup-v2-10-8a2f0f296a7f@rev.ng>
 References: <20261007-rv-dedup-v2-0-8a2f0f296a7f@rev.ng>
 In-Reply-To: <20261007-rv-dedup-v2-0-8a2f0f296a7f@rev.ng>
 To: qemu-devel@nongnu.org
@@ -41,11 +41,11 @@ Cc: Anton Johansson <anjo@rev.ng>, qemu-riscv@nongnu.org,
  daniel.barboza@oss.qualcomm.com, philmd@oss.qualcomm.com, 
  pierrick.bouvier@oss.qualcomm.com, palmer@dabbelt.com, 
  alistair.francis@wdc.com, luoyonggang@gmail.com
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1791362620; l=2448;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1791362620; l=846;
  i=anjo@rev.ng; s=20260210; h=from:subject:message-id;
- bh=2bAoYSvQaNcTmGOQfwCUHA19jbVkCNWNZVmrqC+7MM8=;
- b=QHpbBbmtTfwnnlnJ1QGqMBWZwkt+NMC1pVOo4kWe/jcdO73FErN0rCBlqIt55vtD7CZvIXy4v
- 8aAqtiNyBArCIiFLcSJTRcXrU/+Mnigr3bPwOUaw7z0GtzOZBCTqqlQ
+ bh=2OSlObJyYQTcNTGdPjP0zfGmZMwI/bCC/83mfmlf2x0=;
+ b=HTx7EW4d3xGxh8CKM3nCVszfri2odAixTIVkRKC1ERX2EauGFOQVwAjXPXfeqc9LFzysPUN/A
+ MGXghTIv0/5DxrKTJrM1ftnZpt3XowHqy3H3Lse1TFf/RN7pIUjEUfS
 X-Developer-Key: i=anjo@rev.ng; a=ed25519;
  pk=dKsZvj/g3kgDxnV1/SWg8a0YNGSpWtFGNsWIepQYKow=
 Received-SPF: pass client-ip=94.130.142.21; envelope-from=anjo@rev.ng;
@@ -73,90 +73,38 @@ From:  Anton Johansson via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-There's now also no change in migration stream between KVM/non-KVM
-configurations, KVM fields are filtered out via .is_needed().
-
 Reviewed-by: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
 Signed-off-by: Anton Johansson <anjo@rev.ng>
 ---
- target/riscv/machine.c   | 10 +---------
- target/riscv/meson.build |  2 +-
- 2 files changed, 2 insertions(+), 10 deletions(-)
+ target/riscv/meson.build | 9 ++++++++-
+ 1 file changed, 8 insertions(+), 1 deletion(-)
 
-diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-index bf203bffce..ddcab8a667 100644
---- a/target/riscv/machine.c
-+++ b/target/riscv/machine.c
-@@ -21,12 +21,10 @@
- #include "qemu/error-report.h"
- #include "system/kvm.h"
- #include "system/tcg.h"
--#include "migration/cpu.h"
-+#include "migration/vmstate.h"
- #include "exec/icount.h"
- #include "target/riscv/tcg/debug.h"
--#ifdef CONFIG_KVM
- #include "kvm/kvm_riscv.h"
--#endif
- 
- static bool pmp_needed(void *opaque)
- {
-@@ -196,7 +194,6 @@ static const VMStateDescription vmstate_rv128 = {
-     }
- };
- 
--#ifdef CONFIG_KVM
- static bool kvmtimer_needed(void *opaque)
- {
-     return kvm_enabled();
-@@ -262,7 +259,6 @@ static const VMStateDescription vmstate_kvm_mp_state = {
-         VMSTATE_END_OF_LIST()
-     }
- };
--#endif
- 
- static bool debug_needed(void *opaque)
- {
-@@ -499,9 +495,7 @@ const VMStateDescription vmstate_riscv_cpu = {
-     .name = "cpu",
-     .version_id = 12,
-     .minimum_version_id = 12,
--#ifdef CONFIG_KVM
-     .pre_load = riscv_cpu_kvm_pre_load,
--#endif
-     .post_load = riscv_cpu_post_load,
-     .fields = (const VMStateField[]) {
-         VMSTATE_UINT64_ARRAY(env.gpr, RISCVCPU, 32),
-@@ -563,10 +557,8 @@ const VMStateDescription vmstate_riscv_cpu = {
-         &vmstate_vector,
-         &vmstate_pointermasking,
-         &vmstate_rv128,
--#ifdef CONFIG_KVM
-         &vmstate_kvmtimer,
-         &vmstate_kvm_mp_state,
--#endif
-         &vmstate_envcfg,
-         &vmstate_debug,
-         &vmstate_smstateen,
 diff --git a/target/riscv/meson.build b/target/riscv/meson.build
-index 28a6ff8553..b5ec6cdcd8 100644
+index 3cdff11f75..ba38e421c5 100644
 --- a/target/riscv/meson.build
 +++ b/target/riscv/meson.build
-@@ -23,7 +23,6 @@ riscv_stubs_ss = ss.source_set()
- riscv_system_ss = ss.source_set()
- riscv_system_ss.add(files(
-   'monitor.c',
--  'machine.c',
-   'time_helper.c',
+@@ -15,7 +15,6 @@ riscv_ss.add(when: 'CONFIG_ARM_COMPATIBLE_SEMIHOSTING',
+ 		     if_true: files('common-semi-target.c'))
+ 
+ riscv_ss.add(files(
+-  'cpu.c',
+   'gdbstub.c',
  ))
  
-@@ -37,6 +36,7 @@ riscv_user_ss.add(files(
- riscv_common_system_ss.add(files(
-   'arch_dump.c',
-   'cpu.c',
-+  'machine.c',
-   'riscv-qmp-cmds.c',
- ))
+@@ -33,6 +32,14 @@ riscv_system_ss.add(files(
+ riscv_user_ss = ss.source_set()
+ riscv_common_system_ss = ss.source_set()
+ 
++riscv_user_ss.add(files(
++  'cpu.c',
++))
++
++riscv_common_system_ss.add(files(
++  'cpu.c',
++))
++
+ subdir('tcg')
+ subdir('kvm')
  
 
 -- 
