@@ -4,122 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70F46CA5FFF
-	for <qemu-riscv@archiver.kernel.org>; Wed,  7 Oct 2026 10:07:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C9E7CA5FFF
+	for <qemu-riscv@archiver.kernel.org>; Wed,  7 Oct 2026 10:19:34 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xEOXj-0005OM-Mo; Wed, 07 Oct 2026 06:06:40 -0400
+	id 1xEOk2-0007k8-Uk; Wed, 07 Oct 2026 06:19:19 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair@alistair23.me>)
- id 1xEOWo-0005Fq-GX
- for qemu-riscv@nongnu.org; Wed, 07 Oct 2026 06:05:45 -0400
-Received: from fhigh-b8-smtp.messagingengine.com ([202.12.124.159])
+ (Exim 4.90_1) (envelope-from <conor@kernel.org>)
+ id 1xEOjw-0007jb-Cj; Wed, 07 Oct 2026 06:19:14 -0400
+Received: from tor.source.kernel.org ([2600:3c04:e001:324:0:1991:8:25])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair@alistair23.me>)
- id 1xEOWi-0003hV-BG
- for qemu-riscv@nongnu.org; Wed, 07 Oct 2026 06:05:35 -0400
-Received: from phl-compute-03.internal (phl-compute-03.internal [10.202.2.43])
- by mailfhigh.stl.internal (Postfix) with ESMTP id 94CFC7A0256
- for <qemu-riscv@nongnu.org>; Wed,  7 Oct 2026 06:05:22 -0400 (EDT)
-Received: from phl-frontend-03 ([10.202.2.162])
- by phl-compute-03.internal (MEProxy); Wed, 07 Oct 2026 06:05:22 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alistair23.me;
- h=cc:cc:content-transfer-encoding:content-type:content-type
- :date:date:from:from:in-reply-to:in-reply-to:message-id
- :mime-version:references:reply-to:subject:subject:to:to; s=fm2;
- t=1791367521; x=1791453921; bh=1ElQgkgTnRrbfU+LPnajfIpKhzbTjZaq
- CVJDX71zB7U=; b=SickJmIefC0g7m5ohcYFV1HPmLZpG7KIYMpTdWrwviQoNjFR
- 7G4UfuEPNf3w2S+QSYQqo27zprHkTUXv9zckr3Hgj1wyAv2zF7NIF6T2oME7uaAL
- j9VofwAdBYq8kiwDb6mmwajkDH8ZTcZLTdFDUoASdRop9k6+v5jh6fDbrqL9B4dg
- kcH4HIDral/9bC0NKDqIXTDzKi3ljyyteSE9G6if1yQNbS5lDUx7b2ompclTnu/9
- RXN7u1dv7Qsif3NicNWTZQsW5A0adqceUmIDgCOxnXGv1hArWI8KBFdGDqa9GExK
- yVEr+Sp9PyUvSjh3mTPlIaKHKqKKgWp/ZRAxNQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-transfer-encoding
- :content-type:content-type:date:date:feedback-id:feedback-id
- :from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1791367521; x=
- 1791453921; bh=1ElQgkgTnRrbfU+LPnajfIpKhzbTjZaqCVJDX71zB7U=; b=X
- p39Wl7rqr2+rl452cbJuSZa86EwjrPzsR82b83zjikayv59GG5Z5APc9rQhRAGDL
- TJ+W6wYGCxEaf9xkQ0BFq+FYrZ1b31spVEgQqoBzVIILgZaCQVpBbGerHvN1alWc
- HH9R0lueyat8b8xDbajwPVx7x+6EYPrXWFA5UUxAgpihDvJnEiLpB/l55KZgfvqa
- w3YkBWjTiRziosAlB2ShHiDKuf2ARGo8jhuogmtU0Hy6MsLlLeRfJYZuLKnfYe9K
- jHv/PAF+coWIMr3kFZ1ocNutckMXF1LrEdxb2oOZw6UxyTQcVUSLIXpFYKaSXLlO
- Qna8pCVDFoscOWkEkUQHw==
-X-DKIM2-Info: draft=ietf-dkim-dkim2-spec-06;
- repo=github.com/dkim2wg/interop; date=2026-10-04; sw=lmtpprox;
- action=sign d=alistair23.me a=rsa-sha256;
-DKIM2-Signature: i=1; m=1; t=1791367521; d=alistair23.me;
- mf=PGFsaXN0YWlyQGFsaXN0YWlyMjMubWU+;
- rt=PHFlbXUtcmlzY3ZAbm9uZ251Lm9yZz4=;
- s=fm2:rsa-sha256:T5aXoU9MQIlqClqHnXeVGIfDOqyBh92PfZDw8FdWg1ClLID
- CQkx38lyTiIdtirPq+jF02OI0QtYuU6LhOLxI+7oQXcdexmpmsTDC/UK5ZenwCUb
- fG7deo9tr4nquIX+y1bYQm97wdsNUDgAlGnodLbpysjUdenbWkV0OOup19N0EpYU
- mjj3JxDxM5B6QbIGL6RNdjngKuSUPtHFqjgLNh0Bb3oO4RJleFb4CmaFo1uUei19
- 7Fea5f13C/sxem1y9990ZhrpRU8lVhJ+XODJ5LCBqIX3lCiqsIWx/tUAvuknfPbK
- 0Prlpkz+FEagVTWt62Vf+zDSMi7VoyglIc9NGyg==;
-X-DKIM2-Info: draft=ietf-dkim-dkim2-spec-06;
- repo=github.com/dkim2wg/interop; date=2026-10-04; sw=lmtpprox;
- action=mi-m=1; hc=13;
- hn=cc,content-transfer-encoding,content-type,date,feedback-id,
- from,in-reply-to,message-id,mime-version,references,subject,to,
- user-agent;
-Message-Instance: m=1;
- h=sha256:uNN55SAwG0HvRWssl5S8vMepdWWS4OnZPp1skukjnQw=:1ElQgkgTnRrbfU+LPnajfIpKhzbTjZaqCVJDX71zB7U=;
-X-ME-Sender: <xms:YBnGavLmZ9joZ_EkvWkw3x1Q700mkiSABfMgO1puoH7j8x41tiOWJA>
- <xme:YBnGaiHG_dTCZucu1-h7YWOJzgv62cFs3rrfW1PDWTTpsHbF0SQ_YQcrPzJ0W28R6
- HdzghwNakfVIsDRwobcVopWS8QzHmbTZp-1P3i5I0wZI1hJA_UZQ1PE>
-X-ME-Received: <xmr:YBnGajx1JShv8Og81AjaJZI6CuTVjKGzYdsCzCQlUUIUInp1zPJK0-hgOtI_-yMRj-x9WC89Hlty>
-X-ME-Proxy-Cause: dmFkZTERQ3z818WTsXAmxJqTaoEOe6PosnZrz+nQYEGtCgjpTZc4BArGD/57VGZGkop1MX
- 0tQKdFAN5py1t4DXITuAG/dyuCZ383bF4v/ee3CpiuPROZKb08IH85guO4KlJe4yGfWs7i
- FzXgNlSCyGJHtaIhfjncoU+2CiUpTNzgl5iiz1orB1kQsAq4ZsE3iXb/rf3aXPsLe37+09
- 09KqYHfVeyzVCZ+HZyy5NE4ixSsuqT5MkVU9s7GjNBEmlgC0kRjzGQWkDhLrtb89JtZu2i
- au64gJ6BkaYREqEDspepFUxwOk/BUwgqArkje2/nA2CFyg8CcYdHj7TpDb61KTo3QiCFpF
- IkQEFVThjkozD8qbg2dA6gtlbKvJtZiJHYk8m//x77ljRpYUZzGcjse8I7pQqZBEle3Wji
- cXollIbvGtUwvrsOz2LnycFuNsXGfZrtDHRXTVkd9gAiSyKhfQI/wNz96dc0jxAgOkb0jw
- dQm/r/7CEEa/O3wTjWwYV4eW4IG21OSzZYLI4U5X+Laz4o0S/+0ZPdk/iEWHbtr55FY2aO
- Qex0qCtBH9YkK7fH8DY1AjOtn0hye1c28EZUkbk+ANbv+zwqpLoWxsvpS7g4g2Z6erno5M
- UmJdzOTLQx1Nx7bbdH1Tkx2HSRDQlpetlP+lRvEpdgXmzIDNyYmmFYSyLMnQ
-X-ME-Proxy: <xmx:YBnGar5Cejt957OCghVb_c5HjqO-Tom8rmIm_W7pNJ6szF9SVgVtiA>
- <xmx:YBnGaofuvswZ2Zr7J2k0UODYpucXK0Rttp074ztMniUOVfZ9YfbC6g>
- <xmx:YBnGaiHkt8gsMaJff4PGGpZkY57lZG11VeW4VTidxMsX86FdDSrVTQ>
- <xmx:YBnGao4nYU0CmRSZBgFK0up35oGhcK_XzFd37uklIx9dCfvycwdvvw>
- <xmx:YRnGauJgNuLZUZ-WPwTxyYcsXltUq5WTl1l2jvfgYt_nbED8wZAKLYCv>
-Feedback-ID: ifd214418:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
- 7 Oct 2026 06:05:10 -0400 (EDT)
-Message-ID: <ca89932e98ad61ca4f4baff2add53558ed6eb712.camel@alistair23.me>
-Subject: Re: [PATCH v4 0/3] Add Model for Tenstorrent Atlantis PRCM
-From: Alistair <alistair@alistair23.me>
-To: Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>, 
- qemu-devel@nongnu.org
-Cc: Joel Stanley <joel@jms.id.au>, Nicholas Piggin <npiggin@gmail.com>, 
- Michael Ellerman	 <mpe@kernel.org>, Portia Stephens
- <portias@oss.tenstorrent.com>, 	qemu-riscv@nongnu.org, Pierrick Bouvier
- <pierrick.bouvier@oss.qualcomm.com>,  Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
- <liwei1518@gmail.com>,  Daniel Henrique Barboza
- <daniel.barboza@oss.qualcomm.com>, Liu Zhiwei
- <zhiwei_liu@linux.alibaba.com>, Chao Liu	 <chao.liu@processmission.com>
-Date: Wed, 07 Oct 2026 20:05:03 +1000
-In-Reply-To: <20261001-atlantis_prcm-v4-0-95d33c470eeb@oss.tenstorrent.com>
-References: <20261001-atlantis_prcm-v4-0-95d33c470eeb@oss.tenstorrent.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.62.0 (by Flathub.org) 
+ (Exim 4.90_1) (envelope-from <conor@kernel.org>)
+ id 1xEOju-0005dC-Fl; Wed, 07 Oct 2026 06:19:12 -0400
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by tor.source.kernel.org (Postfix) with ESMTP id 9E295601FB;
+ Wed,  7 Oct 2026 10:19:07 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 321361F0089B;
+ Wed,  7 Oct 2026 10:19:06 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+ s=k20260515; t=1791368347;
+ bh=gfSmDP0g5TyGmbGURJWb2wAR+xSGMJgUJ6w15j9EBSk=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To;
+ b=EO2MzxS0T/gux4PpEl8i3RGFnWNB3Bqs3KIe6+XWQYBFV23rAVxneiEpxFvTWi6WK
+ 9nNdbL1GMAk/hb3Y8eRd5pUesfH1wrH2UsYYrD7sDQItyhyz3OlqB+cVnzsZKdcAEi
+ X90r984BOJSeDfdRuRHehynq0hBLCzmHAiSTH3wVAnuO0QxeOVAGtVT1VaeM3sisd6
+ LKA+uTy35sLWq7i2LpNUy6jou92WSzCcPbXsbHuLWgbkiqmD5KJ/kBn4Gvfjk0bJeW
+ JnJQLfGF2MT+7R0SdEQPJQsBUYRCnP+F7b/qJMqYfTRPiqh8qMOByz2PCH+pQyf3lQ
+ hktWCiljAp5dg==
+Date: Wed, 7 Oct 2026 11:19:03 +0100
+From: Conor Dooley <conor@kernel.org>
+To: Bin Meng <bin.meng@processmission.com>
+Cc: QEMU <qemu-devel@nongnu.org>,
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+ Sebastian Huber <sebastian.huber@embedded-brains.de>, qemu-riscv@nongnu.org
+Subject: Re: [PATCH v3 23/27] docs/system/riscv: Document Icicle Kit HSS boot
+Message-ID: <20261007-5d77f819ba9b7157c5d9c837@squawk>
+References: <20261003170232.2450916-1-bin.meng@processmission.com>
+ <20261003170232.2450916-24-bin.meng@processmission.com>
 MIME-Version: 1.0
-Received-SPF: pass client-ip=202.12.124.159;
- envelope-from=alistair@alistair23.me; helo=fhigh-b8-smtp.messagingengine.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="SRkHVF/e2R5rUuOv"
+Content-Disposition: inline
+In-Reply-To: <20261003170232.2450916-24-bin.meng@processmission.com>
+Received-SPF: pass client-ip=2600:3c04:e001:324:0:1991:8:25;
+ envelope-from=conor@kernel.org; helo=tor.source.kernel.org
+X-Spam_score_int: -22
+X-Spam_score: -2.3
 X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.3 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.24,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -135,100 +71,94 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, 2026-10-01 at 08:52 -0500, Anirudh Srinivasan wrote:
-> This series adds a qemu model for the PRCM blocks present in
-> Tenstorrent
-> Atlantis. This block controls clock, reset and other misc
-> functionality
-> in the SoC. Linux support for the Clocks/Resets served by the RCPU
-> PRCM
-> was added in [1]. This PRCM model has been tested with a linux DT
-> that
-> enables the PRCM and sets the UART clk to the one provided by the
-> PRCM.
-> This DT will be sent out shortly.
+--SRkHVF/e2R5rUuOv
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Sun, Oct 04, 2026 at 01:02:13AM +0800, Bin Meng wrote:
+> With all previous changes, the Icicle Kit model is now able to boot
+> HSS v2024.06 through a Buildroot 2026.05 SD image to U-Boot and Linux.
 >=20
-> [1]
-> https://lore.kernel.org/linux-riscv/20260306-atlantis-clocks-v8-0-6c9b14a=
-4aa8e@oss.tenstorrent.com/
+> Document the tested source versions and exact commands to build HSS
+> and Buildroot. Include the sparse resize and GPT relocation steps
+> needed to make the generated SD image usable by QEMU.
 >=20
-> Signed-off-by: Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
-
-Thanks!
-
-Applied to riscv-to-apply.next
-
-Alistair
-
+> Explain the pinned firmware baseline and include the DDR pattern-test
+> patch used by the versioned test image. Document the tool check needed
+> for image-only builds and distinguish the DDR training failure from
+> the two investigated multi-hart startup races. Describe their visible
+> symptoms, affected source versions, and all three DTB supply paths.
+>=20
+> Also describe the RAM and serial setup, boot stages, and remaining
+> model limitations. The official HSS v2026.04.1 eNVM image was
+> also verified to reach the Linux login prompt with the same SD
+> image, while the functional test keeps its versioned baseline.
+>=20
+> Signed-off-by: Bin Meng <bin.meng@processmission.com>
+>=20
 > ---
-> Changes in v4:
-> - Addressed style comments from Joel's review
-> - Added error handling for sysbus_realize calls
-> - Dropped redundant realize/ops setting lines for PRCM subclasses
-> - Updated PRCM min_access_size to allow byte accesses
-> - Added back clock-frequency prop to UART node to allow linux boots
-> without clk driver
-> - Added back bus clock-frequency prop to I2C node
-> - Link to v3:
-> https://lore.kernel.org/qemu-devel/20260904-atlantis_prcm-v3-0-8bf20795a3=
-81@oss.tenstorrent.com
 >=20
 > Changes in v3:
-> - Rebase on top of Joel's socify series v3
-> https://lore.kernel.org/qemu-riscv/20260903055131.257903-1-joel@jms.id.au=
-/T/#t
-> - I2C and UART now use clk provided by PRCM, and periph_clk is
-> dropped
-> - Addressed style edit comments from Joel (comment about clk IDs
-> coming from DT bindings,) and Alistair (drop size from trace prints,
-> move decalartions to top of function, use PRCM_DOMAIN enums)
-> - Link to v2:
-> https://lore.kernel.org/qemu-devel/20260817-atlantis_prcm-v2-0-ffba0b9444=
-19@oss.tenstorrent.com
+> - Include the DDR pattern-test patch used by the functional-test image
+> - Document the image-only FPGA programming tool check
+> - Describe startup-race symptoms and link the firmware investigations
 >=20
-> Changes in v2:
-> - Coding style edits based on Chao Liu's feedback
-> - Changed prcm to use Resettable inferface instead of legacy reset
-> - Edits requested by Daniel related to tracing, pll_en logic and
-> unnecessary switch/case statement
-> - Added comments to some of the magic numbers in the reset values for
-> PRCM registers
-> - Link to v1:
-> https://lore.kernel.org/qemu-devel/20260729-atlantis_prcm-v1-0-502882933e=
-51@oss.tenstorrent.com
+>  docs/system/riscv/microchip-icicle-kit.rst | 130 ++++++++++++++++++++-
+>  1 file changed, 124 insertions(+), 6 deletions(-)
 >=20
-> ---
-> Anirudh Srinivasan (3):
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 hw/misc: Add Tenstorrent Atlantis PRCM mod=
-el
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 hw/riscv/tt-atlantis: Add PRCMs to tt-atla=
-ntis model
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 hw/riscv/tt-atlantis: Update UART and I2C =
-to use clk from PRCM
->=20
-> =C2=A0MAINTAINERS=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0 |=C2=A0=C2=A0 2 +
-> =C2=A0docs/system/riscv/tt_atlantis.rst=C2=A0 |=C2=A0=C2=A0 1 +
-> =C2=A0hw/misc/meson.build=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0=C2=A0 1 +
-> =C2=A0hw/misc/trace-events=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0=C2=A0 4 +
-> =C2=A0hw/misc/tt_atlantis_prcm.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0 | 428
-> +++++++++++++++++++++++++++++++++++++
-> =C2=A0hw/riscv/tt_atlantis.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0 | 125 ++++++++++-
-> =C2=A0include/hw/misc/tt_atlantis_prcm.h |=C2=A0 51 +++++
-> =C2=A0include/hw/riscv/tt_atlantis.h=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0 28 +=
-++
-> =C2=A08 files changed, 632 insertions(+), 8 deletions(-)
-> ---
-> base-commit: b23a62773a7856299cbb3782e64968b6a92c792f
-> change-id: 20260727-atlantis_prcm-b642cfb37d57
->=20
-> Best regards,
-> --=C2=A0=20
-> Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
->=20
+> diff --git a/docs/system/riscv/microchip-icicle-kit.rst b/docs/system/ris=
+cv/microchip-icicle-kit.rst
+> index 138289a913..9fde3f1073 100644
+> --- a/docs/system/riscv/microchip-icicle-kit.rst
+> +++ b/docs/system/riscv/microchip-icicle-kit.rst
+> @@ -19,12 +19,14 @@ The ``microchip-icicle-kit`` machine supports the fol=
+lowing devices:
+>  * 4 U54 cores
+>  * Core Level Interruptor (CLINT)
+>  * Platform-Level Interrupt Controller (PLIC)
+> -* L2 Loosely Integrated Memory (L2-LIM)
+> +* L2 cache controller, including L2-LIM and L2-Zero windows
+>  * DDR memory controller
+> +* System controller and system services mailbox
+>  * 5 MMUARTs
+>  * 1 DMA controller
+>  * 2 GEM Ethernet controllers
+>  * 1 SDHC storage controller
+> +* 1 Real-Time Clock
+> =20
+>  The machine has a fixed 2 GiB of RAM. Other memory sizes are rejected.
+>  The machine defaults to all five harts. ``-smp`` may select two to five =
+harts,
+> @@ -103,10 +105,126 @@ CAVEATS:
+>  Running HSS
+>  -----------
+> =20
+> -The machine ``microchip-icicle-kit`` used to run the Hart Software Servi=
+ces
+> -(HSS_), however, the HSS development progressed and the QEMU machine
+> -implementation lacks behind.  Currently, running the HSS no longer works.
+> -There is missing support in the clock and memory controller devices.  In
+> -particular, reading from the SD card does not work.
+> +The ``microchip-icicle-kit`` machine can boot the Hart Software Services
+> +(HSS_), which then loads an HSS payload containing U-Boot from an SD car=
+d.
+> +The following flow was tested with HSS v2024.06 and Buildroot 2026.05.
+
+
+As I said on the v2, I think this should be much more recent, I tried
+2026.04 on top of your series and it seemed to work fine.
+
+--SRkHVF/e2R5rUuOv
+Content-Type: application/pgp-signature; name=signature.asc
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEARYKAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCasYclwAKCRB4tDGHoIJi
+0hbgAP9cuIkXYc6wQSyQ/WM/53IvFd4NiZEqcVFzbhx/YB1+ZAD+LMZpoJJWmmRM
+oLrYAdR6Becner9VPfVTe9Yzf7XjxgQ=
+=INlq
+-----END PGP SIGNATURE-----
+
+--SRkHVF/e2R5rUuOv--
 
