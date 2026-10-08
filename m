@@ -4,142 +4,117 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0132DCA6007
-	for <qemu-riscv@archiver.kernel.org>; Thu,  8 Oct 2026 11:59:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF628CA6007
+	for <qemu-riscv@archiver.kernel.org>; Thu,  8 Oct 2026 15:03:02 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xEmmM-0006ez-2i; Thu, 08 Oct 2026 07:59:19 -0400
+	id 1xEpdh-0006fZ-Vb; Thu, 08 Oct 2026 11:02:34 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jamin_lin@aspeedtech.com>)
- id 1xEk23-00040u-FP; Thu, 08 Oct 2026 05:03:19 -0400
-Received: from mail-japaneastazlp170130007.outbound.protection.outlook.com
- ([2a01:111:f403:c405::7] helo=TYDPR03CU002.outbound.protection.outlook.com)
+ (Exim 4.90_1) (envelope-from <milesg@linux.ibm.com>)
+ id 1xEpdb-0006eS-AU; Thu, 08 Oct 2026 11:02:27 -0400
+Received: from mx0b-001b2d01.pphosted.com ([148.163.158.5])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jamin_lin@aspeedtech.com>)
- id 1xEk20-0000sh-Sa; Thu, 08 Oct 2026 05:03:19 -0400
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=E4vx6I42qxKxP9Hd17K8MdLjKiQnqiWaH7HxH0kXWoL3wPz1A0biEa4LsbUHAL2GsWLdOqP1em0/34xMoaPdlnUQ1o5CmHZA9COtSNFhVHC+730Xq/OeCaeCnC7bI0LtRWRWxJiPGiUas9JNFzwmzPsX6Hl0hN2XwtekQxEnHf8CEdErVmizogbuIJZ3le/n405D8r9AlePcRNL7uDAip9gvE1MaHxXSfduK7Gyzgj5F8LuYSmR8kWGgX/qo6Ljrm/x6LZoIcsDILOiTeMQfyA8fTOrWv4wQP+LJVz8XHVpl2PIficfXzAeEHKaA3eqD1FM5WPDT4UuWjy2b3928gA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=X1iFly5BKK7tHEbVFrAahd4JHRdsJvRaoc8wOLzuqJk=;
- b=KcGuftlMJkMzyEYs8syBamtZ1UlCSUXjg40Btg5HZft498eIivc9lzCnBapU0ZPYghRWyb+GLwmnJzDS6rdZlAcJEhLGcdg3Le8HUfjAqNkognkOdpB01ZJTTRu8C6X8Mrem5yPZSmSd67ou4tx9+82VkwFB579evpgdjhxaGe4D9YbSaSbBSkPSOynRGa6UVjV+JAD20gxKUFkoC+aP6X9IhA6m0QunbRyPdIbZAYnrnfi+zy64WnnCJJfvwEqdz5DEJ3od8SKc7oKZJofxwXv48t7qBM7T+s/pytjz+2skGvsTqu05+ebG9KMKkI1Lj9ZSECdrNI2LB9czOL0bVA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=aspeedtech.com; dmarc=pass action=none
- header.from=aspeedtech.com; dkim=pass header.d=aspeedtech.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aspeedtech.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=X1iFly5BKK7tHEbVFrAahd4JHRdsJvRaoc8wOLzuqJk=;
- b=h+5EXl5e9qljXS8eok/WedrESbtncfmS09fJIc/AlER2sHOKM6l9Tvyfuxl4tD4pmmFPoDcZX/JJZVXvgMA8oW6GRDYZ18PgCEoCIIR9i0xAihF5ZP5qogTVETKNuSNBpzhKC0qMxLGCm2VvVrAati+J+wFBkPNt96r7CH8JmAjzkf06cjTE3k7rAnwVF5av4EBuwYtVwX8FkKG/EPv5TKX3emDe2Mo2W58PPSkH/OAXi9OEB4uQLablXcnrXxW5P8Ruy7YzYAnFevpvoYLm05elv/zY+zuFZOpA2eBbPKyC8Xm7Wrk5pdFxmJvKHAkehX85kdWDFPH02Ge0GhfEhg==
-Received: from SEZPR06MB7362.apcprd06.prod.outlook.com (2603:1096:101:253::10)
- by TYZPR06MB5998.apcprd06.prod.outlook.com (2603:1096:400:33f::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.496.17; Thu, 8 Oct
- 2026 09:03:04 +0000
-Received: from SEZPR06MB7362.apcprd06.prod.outlook.com
- ([fe80::cd2d:35d2:a702:1de6]) by SEZPR06MB7362.apcprd06.prod.outlook.com
- ([fe80::cd2d:35d2:a702:1de6%4]) with mapi id 15.21.0496.015; Thu, 8 Oct 2026
- 09:03:04 +0000
-From: Jamin Lin <jamin_lin@aspeedtech.com>
-To: "open list:All patches CC here" <qemu-devel@nongnu.org>
-CC: Andrew Jeffery <andrew@codeconstruct.com.au>,
- =?iso-8859-1?Q?C=E9dric_Le_Goater?= <clg@kaod.org>, Emmanuel Blot
- <emmanuel.blot@free.fr>, Fabiano Rosas <farosas@suse.de>, Jamin Lin
- <jamin_lin@aspeedtech.com>, Joel Stanley <joel@jms.id.au>, Kane Chen
- <kane_chen@aspeedtech.com>, Troy Lee <leetroy@gmail.com>, Laurent Vivier
- <lvivier@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>, Peter Maydell
- <peter.maydell@linaro.org>, =?iso-8859-1?Q?Philippe_Mathieu-Daud=E9?=
- <philmd@oss.qualcomm.com>, Pierrick Bouvier
- <pierrick.bouvier@oss.qualcomm.com>, "open list:ASPEED BMCs"
- <qemu-arm@nongnu.org>, "qemu-ppc@nongnu.org" <qemu-ppc@nongnu.org>,
- "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>, Steven Lee
- <steven_lee@aspeedtech.com>, Patrick Leis <venture@google.com>
-Subject: Re: [PATCH 48/50] hw/arm: minerva: add Facebook BMC machine
-Thread-Topic: [PATCH 48/50] hw/arm: minerva: add Facebook BMC machine
-Thread-Index: AQHdVwPAdJ2e4S1gnkWFGJsSpdSBKg==
-Date: Thu, 8 Oct 2026 09:03:04 +0000
-Message-ID: <SEZPR06MB736205BB571BC4FA9E89CD7EFC932@SEZPR06MB7362.apcprd06.prod.outlook.com>
-Accept-Language: zh-TW, en-US
-Content-Language: zh-TW
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-msip_labels: 
-authentication-results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=aspeedtech.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: SEZPR06MB7362:EE_|TYZPR06MB5998:EE_
-x-ms-office365-filtering-correlation-id: 090e41f2-fe04-4254-e4a7-08df251af699
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
- ARA:13230040|376014|7416014|23010399003|366016|1800799024|38070700021|56012099006|10067099003|18002099003|8096899003|41080700001;
-x-microsoft-antispam-message-info: Jhb/KDDgJwbnOpuZ9w0SGmCBneQg9X1xtZ188D3qlabtP2ui2fMKkQM2l5IWuCi08XSfWUUAZmgSHAokrn0yzmaQ5MJN4D5Ojvvf8yBA4Gl1uF4k8Rvu/U2NGXUDIw+pO+6mUSk2FYAG5MfzEhYy70aj5oG9wb04zksbrXiWK0ZbWnt0c3FELJgnrzkyYrBBzR4/EJ6M1e3Ud1J0/2DMkbg1LHzDdsdOzSveZTUsjgSLe4C+wp2K6KUC8mbQ2VZU3MZKyo1OYOF0c4SwsGafTDSfW1Yy61j156MX1XvoNpktgY5Q7blDhUHTw7Iar9+jHMOwQXKgLFk+YhUjakA79tWmmRsOTG2pkCGBZy5iZ0C7OWk0ouQBXcJcOQ+BuVumcEL/cyvlDgJopRlOY1mf9K7EYa2hlRi7k7TGpR/XouszSKzldEjvNXNUI49bP6hVp+XvDiDTPzy1n36+35C543sVfGYqU/ssKygB/Zw3AZksdyFvzxiK2+GmHI3WDDT7WVN3HomXTKn2R38VpqpmyVsZviF0RuLXsnXbMLgyVOO6Y5B0WRD9hRGJUBbRoz6Do3tdAArK4INI9EDq4AbKZ1NIhV6y2oTV8Vo1j0i1IjqV9uwiEmUN+mG2LkD2Z0pz46lHefKFBvGEdKgxH32iOZ+B71Qbs2qeU6TBdlGV9VRgqomRarnxg1lH9pFpyjkMPCQvaFg2TRb/tPYKRAyS8MYYytHzsOgRuv+bOGMhZLjoQMBt2Ue2qshuBJG09Q1U
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:zh-tw; SCL:1;
- SRV:; IPV:NLI; SFV:NSPM; H:SEZPR06MB7362.apcprd06.prod.outlook.com; PTR:;
- CAT:NONE;
- SFS:(13230040)(376014)(7416014)(23010399003)(366016)(1800799024)(38070700021)(56012099006)(10067099003)(18002099003)(8096899003)(41080700001);
- DIR:OUT; SFP:1102; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?ChRWOKNAa4eD1n3MrpI39yqPnLueCuhxh+4x+P+8rTgMUadqpjcldFZ4dX?=
- =?iso-8859-1?Q?oOSd6+H5d908LNSf/yNY6LWOGNimJ68pXJIFdulH/w0MxClzc8eDEzDCGI?=
- =?iso-8859-1?Q?juTr0xMLaz0diIDAIhsLAghl4p6AVHOlTthH3gF27c7G8i46Khyq7jz9LM?=
- =?iso-8859-1?Q?9QLXZAVLdEv/BaAY2Pqw9tNd9KyFYx0W+Ek/r0yYBPRtRvmHIZDjibe/0S?=
- =?iso-8859-1?Q?tbr7msbrZ7w8aKc6zpE11FI/8ZRca1Jh6rW/BVgb3+o000Qc/UJ0JL2TkA?=
- =?iso-8859-1?Q?A3Tn1lax+RmJUsU48u6/oLW7ZLlRC/Pzh2vwlZ1pUPsxEnEc8/WyethtQd?=
- =?iso-8859-1?Q?myvrx/6dhZnI4gUozPDzaPyexDsY+4qrYBgJibNFF5GVmmaSKNjDlLhpq/?=
- =?iso-8859-1?Q?1hI3NdKelT+w8CXgkqBl4Rc9rhwnvNsPC1UYwOWOPf1bQCLNEle6XOICx0?=
- =?iso-8859-1?Q?FRSWV/Z7lEFTfaKevFzYt6RnI2MWhwK9Pvt4phONS1uZvARGjZbd9gduhd?=
- =?iso-8859-1?Q?0gmnivvejavcbksK8tpsB0BQNNElLSRuqcItN9LYfyDn6fjPdTNFzm3+tt?=
- =?iso-8859-1?Q?+lMRvIOdUDYuoV1uP9WDZ0ve30Fi2qXd+/Bn3ZD3/HvBTDzdd5fPpc6AmX?=
- =?iso-8859-1?Q?zz07sIv1TZB4QD0ZENzcZ68YdLSdaUqt41GbPhSxUj8TLdK0yL1dqCyzih?=
- =?iso-8859-1?Q?nqifLgjlID4ulCZS/QXme4wWA1qdyNRPW/y0KYlUIoUDpXwzw3YlC7lGLh?=
- =?iso-8859-1?Q?3HGhyMYKvFiUTVy0GUZvH5HbTR7HvmXsRofM6gtgLF1llMpHO4jP5BmVAi?=
- =?iso-8859-1?Q?aaxOSjzqWd8X2O60D1MHVW+K8sztwMntXzLXZxkBxBd2YYb9IlUxDLgcIg?=
- =?iso-8859-1?Q?8gSS/ryY9dP2M9S8Pmat2Lx4o+X0W7TZaOJ+eyVleV1d7Jv0Z9QFDLak6P?=
- =?iso-8859-1?Q?pYpuDsUE1Zw2LNXVwH7KpKG8JvvFa2aJxs3D6MC95hwM4QtNQirdJPGYai?=
- =?iso-8859-1?Q?Y3CzemkklTKakPbQOsrQagrW0mlBrrQEOiQ/9ZeghlMLrzpbQ/suDCPPhX?=
- =?iso-8859-1?Q?qXnaGe2Uge2Yk04oudUynnsg/so+SSkFZ0V/kphsHn+I6iJqt1qAeoHr04?=
- =?iso-8859-1?Q?Hyi2Fp7r9IVj7ScxkQCVNNzRTnjIeEl8y6S5IoFslSeKzOLIz6sBxP81CE?=
- =?iso-8859-1?Q?QmuisD9u+qhdirdelOtFutcdP4RtnEl5I35CHuZUsrxhLogBGMFjKhxFL/?=
- =?iso-8859-1?Q?bNV62LFtC4aUrpJvVlYu6h7uavq8YGreaocXZeH5wiDuvlzSMykkZiG0cb?=
- =?iso-8859-1?Q?SHcKFns0T1wdlmkgfBCNsvOl01U18oDLrK4wt8y0atSKSNvkQIV5/sSB/w?=
- =?iso-8859-1?Q?1ZzsgAwJieZanxDRU493QOcHYppU+RwzLYMunJr5cyVU4mNODPcSgj9FhS?=
- =?iso-8859-1?Q?dmb2SWgPKcKfPKX4vCprinGDnzd6OM2S7H+wcBZCGk7iY3f2ZoXZFZOYxV?=
- =?iso-8859-1?Q?5D0+31mAhHLVLX0NTTXpPrch1tv1qzjzkkd8iLePIjB44qM6WaVrv7ac+M?=
- =?iso-8859-1?Q?xBi7gdo+Z1HqF1DM+ofw8AFk40t9nkuXKo7EGKb9VFYcaVLwA+5b5I7zZa?=
- =?iso-8859-1?Q?xHHMAczwGwb0qPxf+V3rNGHNjzgk4Wm8GNpP907382zVXEoILHBI8IGG6b?=
- =?iso-8859-1?Q?r057FFP5ZIkdhdMw/LWmUqt6GZypz210r6CTwH1v6CKMpPwivFf8C6DUY1?=
- =?iso-8859-1?Q?9WpArFdOab70gnGST/xQm0hfFskTIXwMPjkF7x8aNYzHmkfNkiNMnD7nF6?=
- =?iso-8859-1?Q?gkMMB4sOFQ=3D=3D?=
-Content-Type: multipart/alternative;
- boundary="_000_SEZPR06MB736205BB571BC4FA9E89CD7EFC932SEZPR06MB7362apcp_"
-MIME-Version: 1.0
-X-Exchange-RoutingPolicyChecked: GFafzrYgKauW+Ge4z/PLsG7cM8Tvl0mvb9WEdL2CF9L/aBMmsbYLhT4XwVE5EsQdLBYAoAyifzEFuD3C3aTGwXooTf7HJXuUjyZc11NbUgyEaJGFGVDdAZ/8smXP6ShkyNI1L3iF97Rh5KxMZP0UP128YAo6VlrJh5pZPauEcpwz5Lhn5r0c/QJN7mjgF8dZEmNFQr+1sebBPHepF9MCS35MOv8+ZP187BA703IVRQhhSgpMSkqiNv60bzXuqHgJvgaDKmNV83rCW/Wx4VTWUa3I8b0ZhojcCK7XSas2IyOJY9VXWEo4a7b7a4G3SifFL9ESUYkkoxlGBpor1gxGwg==
-X-OriginatorOrg: aspeedtech.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: SEZPR06MB7362.apcprd06.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 090e41f2-fe04-4254-e4a7-08df251af699
-X-MS-Exchange-CrossTenant-originalarrivaltime: 08 Oct 2026 09:03:04.6016 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 43d4aa98-e35b-4575-8939-080e90d5a249
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 0vhWXV+0dzlvaHRw7RhZFqLPHyVOxHpx1WK1iF/tA9Cin3GC6BV7uWWW9qRqJfJk8Ks1aEmvw3Rv9aOI95Nb9wK4S3f1Of5wOOAvJeTtykU=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYZPR06MB5998
-Received-SPF: pass client-ip=2a01:111:f403:c405::7;
- envelope-from=jamin_lin@aspeedtech.com;
- helo=TYDPR03CU002.outbound.protection.outlook.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+ (Exim 4.90_1) (envelope-from <milesg@linux.ibm.com>)
+ id 1xEpdX-0005kB-Ru; Thu, 08 Oct 2026 11:02:26 -0400
+Received: from pps.filterd (m0360072.ppops.net [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 698EZaFN1614859; Thu, 8 Oct 2026 15:02:19 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
+ :content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:reply-to:subject:to; s=pp1;
+ bh=0OWxaAn9CfZaghcr+qeZbFg/V6ncXwoD7CH4kJPou7s=; b=hnrRykcJnoH6
+ ccQdWS1oE7yf9O4OuO9pW/iK0UL2sN1SdRBUb0IZ39OE+jzj2AFdK8wCppXU8AKG
+ d24Lh6qUOV0qPcJseF7PC3T1cyhdzTCRwiTT87lzZGrmYVygkenIvsPHDnzxgJDG
+ 2RAB5VW/puyDBh6ZVECoxrBT5o9jJr3BBpRb2Ei4mDy+z+MMnopsG1A/+F+9VB1F
+ D391+z4ylk2kkpKNbWpdAi4pOgFkow+ydnHVyRskinC1TSOl2eT6vBiLaneoDjSM
+ lDwg5xlNmWnEgM1fGlS8Izv8YV147VuKBnvj5HMFshaokbULG5+aN+lcujkZFSV+
+ 00h/GDzQ0Q==
+Received: from ppma23.wdc07v.mail.ibm.com
+ (5d.69.3da9.ip4.static.sl-reverse.com [169.61.105.93])
+ by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4h5xjvm67u-1
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+ Thu, 08 Oct 2026 15:02:18 +0000 (GMT)
+Received: from pps.filterd (ppma23.wdc07v.mail.ibm.com [127.0.0.1])
+ by ppma23.wdc07v.mail.ibm.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 698EXf6D3636939; Thu, 8 Oct 2026 15:02:18 GMT
+Received: from smtprelay07.dal12v.mail.ibm.com ([172.16.1.9])
+ by ppma23.wdc07v.mail.ibm.com (PPS) with ESMTPS id 4h3dhh3p46-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Thu, 08 Oct 2026 15:02:18 +0000 (GMT)
+Received: from smtpav03.dal12v.mail.ibm.com (smtpav03.dal12v.mail.ibm.com
+ [10.241.53.102])
+ by smtprelay07.dal12v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
+ 698F2HqP25428630
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Thu, 8 Oct 2026 15:02:17 GMT
+Received: from smtpav03.dal12v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 1039758063;
+ Thu,  8 Oct 2026 15:02:17 +0000 (GMT)
+Received: from smtpav03.dal12v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 6D30A58060;
+ Thu,  8 Oct 2026 15:02:16 +0000 (GMT)
+Received: from mambor8.rchland.ibm.com (unknown [9.10.239.198])
+ by smtpav03.dal12v.mail.ibm.com (Postfix) with ESMTP;
+ Thu,  8 Oct 2026 15:02:16 +0000 (GMT)
+Message-ID: <4e558b6e13f4ab9f3970294911138d6978a1098d.camel@linux.ibm.com>
+Subject: Re: [PATCH 04/10] target/ppc: Factor ppc_env_is_64bit() out
+From: Miles Glenn <milesg@linux.ibm.com>
+To: Philippe =?ISO-8859-1?Q?Mathieu-Daud=E9?= <philmd@oss.qualcomm.com>,
+ qemu-devel@nongnu.org
+Cc: Paolo Bonzini <pbonzini@redhat.com>, qemu-riscv@nongnu.org, Pierrick
+ Bouvier <pierrick.bouvier@oss.qualcomm.com>, Alex =?ISO-8859-1?Q?Benn=E9e?=
+ <alex.bennee@linaro.org>, Richard Henderson <richard.henderson@linaro.org>,
+ Anton Johansson <anjo@rev.ng>, qemu-ppc@nongnu.org, Yonggang Luo
+ <luoyonggang@gmail.com>, Chinmay Rath <rathc@linux.ibm.com>, Nicholas
+ Piggin <npiggin@gmail.com>, Harsh Prateek Bora <harshpb@linux.ibm.com>
+Date: Thu, 08 Oct 2026 10:02:16 -0500
+In-Reply-To: <20261007232326.66240-5-philmd@oss.qualcomm.com>
+References: <20261007232326.66240-1-philmd@oss.qualcomm.com>
+ <20261007232326.66240-5-philmd@oss.qualcomm.com>
+Organization: IBM
+Content-Type: text/plain; charset="UTF-8"
+X-Mailer: Evolution 3.28.5 (3.28.5-27.el8_10) 
+Mime-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-TM-AS-GCONF: 00
+X-Proofpoint-Reinject: loops=2 maxloops=12
+X-Proofpoint-GUID: YyIG5dVCd90lNhUatYeEBZ99Flbxrc8G
+X-Proofpoint-ORIG-GUID: CJbijbOKLpmx2rU93dxAnw6pJyp6-z6I
+X-Authority-Analysis: v=2.4 cv=FoOQbGrq c=1 sm=1 tr=0 ts=6ac7b07b cx=c_pps
+ a=3Bg1Hr4SwmMryq2xdFQyZA==:117 a=3Bg1Hr4SwmMryq2xdFQyZA==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=RnoormkPH1_aCDwRdu11:22 a=RzCfie-kr_QcCd8fBx8p:22 a=VnNF1IyMAAAA:8
+ a=EUspDBNiAAAA:8 a=CoDvO8Mup1ZAVdhail0A:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDA4MDA1OCBTYWx0ZWRfX7p49zveoYX1s
+ Bk0md1ZU8uoNw9GL0fVvKn5uBjcsCabJwje3hO8YpsszhYozT0x3twkoyWsXYLmhv10yT6Vra6P
+ NkI8pWgr5XfSeZOmTH5c/Fh8O6EMYvg=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDA4MDA1OCBTYWx0ZWRfX8uHh0iDPy6Eg
+ grNMqnjZdNeUNwgDe5aoF7XXgMAhrbdu1MORDZU56mjcrWEE9WG6xYrZ+twvt3ImGYm17xnVFiA
+ N+f3lHYwTkaoRHaE6pk/sjoWecM/xJhE9A1kVssqEbJ78qASsTl+lEZesB6u0RrcstDBCCgooyk
+ PSYVxBjtJVyhxTrt3UjJi6tNJ542i7C5SCFx2PqIT5+gmfM0DAsimB5vKL8wgoKDe1kB4FH2Gt2
+ OC+Jdn14Ren0kq/M6HKaWVj9oRP9KZUUbLjhIZnIuQSH0bmn08v6Lu1laNbZN9T4dfR/Qj/MO5x
+ sZBCkcMtBeJcXebucsGGWiLD5EVB/sGip76xbcni4qQPvmAiRIJLgP+1wOEX/chI0QtWg67lE4x
+ +rlmPcYgBqEz1ksHs7HdkUSCAvWQPg==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-08_05,2026-10-08_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 bulkscore=0 lowpriorityscore=0 adultscore=0 spamscore=0
+ phishscore=0 malwarescore=0 classifier=typeunknown authscore=0 authtc=
+ authcc= route=outbound adjust=0 reason=mlx scancount=1
+ engine=8.22.0-2610020000 definitions=main-2610080058
+Received-SPF: pass client-ip=148.163.158.5; envelope-from=milesg@linux.ibm.com;
+ helo=mx0b-001b2d01.pphosted.com
+X-Spam_score_int: -26
+X-Spam_score: -2.7
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+X-Spam_report: (-2.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_LOW=-0.7,
+ RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Thu, 08 Oct 2026 07:59:11 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -151,101 +126,60 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
+Reply-To: milesg@linux.ibm.com
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---_000_SEZPR06MB736205BB571BC4FA9E89CD7EFC932SEZPR06MB7362apcp_
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-
-
-/*
- * Minerva hardware values.
- */
-#define MINERVA_BMC_HW_STRAP1 0x00002002
-#define MINERVA_BMC_HW_STRAP2 0x00000800
-#define MINERVA_BMC_RAM_SIZE ASPEED_RAM_SIZE(2 * GiB)
-
-Please drop ASPEED_RAM_SIZE
-https://github.com/qemu/qemu/commit/c5538ca99dff8b5a000b0e5d639d784eeb0d9f9=
-9
+Reviewed-by: Glenn Miles <milesg@linux.ibm.com>
 
 Thanks,
-Jamin
 
+Glenn
 
---_000_SEZPR06MB736205BB571BC4FA9E89CD7EFC932SEZPR06MB7362apcp_
-Content-Type: text/html; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+On Thu, 2026-10-08 at 01:23 +0200, Philippe Mathieu-Daudé wrote:
+> Replace the open-coded PPC_64B test in register_BookE206_sprs()
+> by a ppc_env_is_64bit() helper for re-use in the next commit.
+> 
+> Signed-off-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
+> ---
+>  target/ppc/internal.h | 11 +++++++++++
+>  target/ppc/cpu_init.c |  2 +-
+>  2 files changed, 12 insertions(+), 1 deletion(-)
+> 
+> diff --git a/target/ppc/internal.h b/target/ppc/internal.h
+> index a20a0f9f7e0..11476692616 100644
+> --- a/target/ppc/internal.h
+> +++ b/target/ppc/internal.h
+> @@ -23,6 +23,17 @@
+>  #include "hw/core/registerfields.h"
+>  #include "exec/page-protection.h"
+>  
+> +/**
+> + * ppc_env_is_64bit:
+> + * @env: the cpu context
+> + *
+> + * Return whether the CPU is a 64-bit implementation.
+> + */
+> +static inline bool ppc_env_is_64bit(const CPUPPCState *env)
+> +{
+> +    return env->insns_flags & PPC_64B;
+> +}
+> +
+>  static inline bool ppc_env_is_little_endian(const CPUPPCState *env)
+>  {
+>      return FIELD_EX64(env->msr, MSR, LE);
+> diff --git a/target/ppc/cpu_init.c b/target/ppc/cpu_init.c
+> index b711f9c0a85..a43ef47acd2 100644
+> --- a/target/ppc/cpu_init.c
+> +++ b/target/ppc/cpu_init.c
+> @@ -869,7 +869,7 @@ static void register_BookE206_sprs(CPUPPCState *env, uint32_t mas_mask,
+>              spr_register(env, mas_sprn[i], mas_names[i],
+>                           SPR_NOACCESS, SPR_NOACCESS,
+>                           &spr_read_generic,
+> -                         (i == 2 && (env->insns_flags & PPC_64B))
+> +                         (i == 2 && ppc_env_is_64bit(env))
+>                           ? &spr_write_generic : &spr_write_generic32,
+>                           0x00000000);
+>          }
 
-<html>
-<head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-8859-=
-1">
-<style type=3D"text/css" style=3D"display:none;"> P {margin-top:0;margin-bo=
-ttom:0;} </style>
-</head>
-<body dir=3D"ltr">
-<div style=3D"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, =
-Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);">
-<br>
-</div>
-<div style=3D"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, =
-Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);">
-/*</div>
-<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
-nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
-olor: rgb(0, 0, 0);">
-&nbsp;* Minerva hardware values.</div>
-<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
-nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
-olor: rgb(0, 0, 0);">
-&nbsp;*/</div>
-<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
-nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
-olor: rgb(0, 0, 0);">
-#define MINERVA_BMC_HW_STRAP1 0x00002002</div>
-<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
-nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
-olor: rgb(0, 0, 0);">
-#define MINERVA_BMC_HW_STRAP2 0x00000800</div>
-<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
-nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
-olor: rgb(0, 0, 0);">
-#define MINERVA_BMC_RAM_SIZE ASPEED_RAM_SIZE(2 * GiB)</div>
-<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
-nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
-olor: rgb(0, 0, 0);">
-<br>
-</div>
-<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
-nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
-olor: rgb(0, 0, 0);">
-Please drop ASPEED_RAM_SIZE</div>
-<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
-nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
-olor: rgb(0, 0, 0);">
-https://github.com/qemu/qemu/commit/c5538ca99dff8b5a000b0e5d639d784eeb0d9f9=
-9</div>
-<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
-nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
-olor: rgb(0, 0, 0);">
-<br>
-</div>
-<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
-nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
-olor: rgb(0, 0, 0);">
-Thanks,</div>
-<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
-nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
-olor: rgb(0, 0, 0);">
-Jamin</div>
-<div style=3D"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, =
-Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);">
-<br>
-</div>
-</body>
-</html>
-
---_000_SEZPR06MB736205BB571BC4FA9E89CD7EFC932SEZPR06MB7362apcp_--
 
