@@ -4,58 +4,118 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E9A3CA6011
-	for <qemu-riscv@archiver.kernel.org>; Thu,  8 Oct 2026 18:17:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75BFDCA600D
+	for <qemu-riscv@archiver.kernel.org>; Thu,  8 Oct 2026 18:41:49 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xEsfn-0007Wo-Nz; Thu, 08 Oct 2026 14:16:55 -0400
+	id 1xEt39-00059r-EF; Thu, 08 Oct 2026 14:41:03 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <aurelien@aurel32.net>)
- id 1xEsfl-0007T5-0S; Thu, 08 Oct 2026 14:16:53 -0400
-Received: from hall.aurel32.net ([2001:bc8:30d7:100::1])
+ (Exim 4.90_1) (envelope-from <milesg@linux.ibm.com>)
+ id 1xEt37-000592-Fv; Thu, 08 Oct 2026 14:41:01 -0400
+Received: from mx0a-001b2d01.pphosted.com ([148.163.156.1])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <aurelien@aurel32.net>)
- id 1xEsfi-0001f1-0b; Thu, 08 Oct 2026 14:16:52 -0400
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=aurel32.net
- ; s=202004.hall;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
- Subject:Cc:To:From:Content-Type:From:Reply-To:Subject:Content-ID:
- Content-Description:In-Reply-To:References:X-Debbugs-Cc;
- bh=evOi33l1/vsZ2w7RUQwB43mEHaQZjfBnSWh0nn4P7ro=; b=pOp5ehxYu8w24c1/o61/3LU6bV
- QqbZuOQTCBgdGkW8Bps3P/oNxPw9bqTm+FeapGr+VHS88IBq1xagA0zPpxynVs888gKIHkBS+1xtH
- qeV1v7oSpT3RV8kePmrTHiaN0R1Y14iTC29dtnHam+fqq0VFyiBNHctHlSe5aYFHR3U69M8wZYaFq
- Mq5bpzFgXxi9kqitU/jlOqu2bd6si6Ez8yL5la23YgpvmLRyogIz7SXjv4akGHdtkobBOQ5LN0Uuz
- L7V6vWrzrBFGnd3+Q1zW1ZxXpc5tkLJhf/qAuDElaNTrj3isPAuY424kVE+H/sxcoY13LckR0QJa0
- r/4QVr5A==;
-Received: from authenticated user by hall.aurel32.net with esmtpsa (TLS1.3) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.98.2)
- (envelope-from <aurelien@aurel32.net>) id 1xEsfW-0000000AwBv-1Efn;
- Thu, 08 Oct 2026 20:16:38 +0200
-From: Aurelien Jarno <aurelien@aurel32.net>
-To: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- qemu-riscv@nongnu.org (open list:RISC-V TCG target),
- qemu-devel@nongnu.org (open list:All patches CC here)
-Cc: Aurelien Jarno <aurelien@aurel32.net>
-Subject: [PATCH] tcg/riscv64: Remove vector min/max ops with immediates
-Date: Thu,  8 Oct 2026 20:16:10 +0200
-Message-ID: <20261008181611.3015838-1-aurelien@aurel32.net>
-X-Mailer: git-send-email 2.53.0
-MIME-Version: 1.0
+ (Exim 4.90_1) (envelope-from <milesg@linux.ibm.com>)
+ id 1xEt34-0004iM-R0; Thu, 08 Oct 2026 14:41:01 -0400
+Received: from pps.filterd (m0356517.ppops.net [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 698HZSb21967373; Thu, 8 Oct 2026 18:40:55 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
+ :content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:reply-to:subject:to; s=pp1;
+ bh=1qCjC7TCnd5Dq5W+iqG95esyxIkmMDl4Wnxxa0cfDRE=; b=YH+pMYklUE6d
+ VhtJmI1gyGXRc+xd96oYS1rTz5o07YhS/kY8yCvz3D/nJ6amhbuHVJVYRStGdH90
+ ixbS+sEq+DQGhNjCCsOZWz3zhpgkWUK7L5DiehV9xhnl4KLZ09rg/dIzUllgOY+x
+ STNEwngstpRWi/AOyntKvyGdiwh65k51Wky5lEPexCSvAX7Biqyo5L0EeRlyPOAg
+ +0gz7KsuebNe3YCM12uWsS2Zmnz96vSZs69U2FDQBopIOriaKq4I7azttbS9JSDL
+ lXoMSksAHkbXXdgu9+TvQswGCKzDlEQe2L64U7Z5vYHC/g+ko47RUyOfJ0fYkdrz
+ loVTQiyCkw==
+Received: from ppma23.wdc07v.mail.ibm.com
+ (5d.69.3da9.ip4.static.sl-reverse.com [169.61.105.93])
+ by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4h5xjvdwac-1
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+ Thu, 08 Oct 2026 18:40:54 +0000 (GMT)
+Received: from pps.filterd (ppma23.wdc07v.mail.ibm.com [127.0.0.1])
+ by ppma23.wdc07v.mail.ibm.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 698HWmDs3846246; Thu, 8 Oct 2026 18:40:53 GMT
+Received: from smtprelay03.dal12v.mail.ibm.com ([172.16.1.5])
+ by ppma23.wdc07v.mail.ibm.com (PPS) with ESMTPS id 4h3dhh4nfd-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Thu, 08 Oct 2026 18:40:53 +0000 (GMT)
+Received: from smtpav05.wdc07v.mail.ibm.com (smtpav05.wdc07v.mail.ibm.com
+ [10.39.53.232])
+ by smtprelay03.dal12v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
+ 698Ieqax31916674
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Thu, 8 Oct 2026 18:40:52 GMT
+Received: from smtpav05.wdc07v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 299FD58059;
+ Thu,  8 Oct 2026 18:40:52 +0000 (GMT)
+Received: from smtpav05.wdc07v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id F0D2258043;
+ Thu,  8 Oct 2026 18:40:50 +0000 (GMT)
+Received: from mambor8.rchland.ibm.com (unknown [9.10.239.198])
+ by smtpav05.wdc07v.mail.ibm.com (Postfix) with ESMTP;
+ Thu,  8 Oct 2026 18:40:50 +0000 (GMT)
+Message-ID: <74feac838fc31a375c4bbadc0edd46bb2f3da6c7.camel@linux.ibm.com>
+Subject: Re: [PATCH 05/10] target/ppc/gdbstub: Replace target_long_bits() by
+ ppc_env_is_64bit()
+From: Miles Glenn <milesg@linux.ibm.com>
+To: Philippe =?ISO-8859-1?Q?Mathieu-Daud=E9?= <philmd@oss.qualcomm.com>,
+ qemu-devel@nongnu.org
+Cc: Paolo Bonzini <pbonzini@redhat.com>, qemu-riscv@nongnu.org, Pierrick
+ Bouvier <pierrick.bouvier@oss.qualcomm.com>, Alex =?ISO-8859-1?Q?Benn=E9e?=
+ <alex.bennee@linaro.org>, Richard Henderson <richard.henderson@linaro.org>,
+ Anton Johansson <anjo@rev.ng>, qemu-ppc@nongnu.org, Yonggang Luo
+ <luoyonggang@gmail.com>, Chinmay Rath <rathc@linux.ibm.com>, Nicholas
+ Piggin <npiggin@gmail.com>, Harsh Prateek Bora <harshpb@linux.ibm.com>
+Date: Thu, 08 Oct 2026 13:40:50 -0500
+In-Reply-To: <20261007232326.66240-6-philmd@oss.qualcomm.com>
+References: <20261007232326.66240-1-philmd@oss.qualcomm.com>
+ <20261007232326.66240-6-philmd@oss.qualcomm.com>
+Organization: IBM
+Content-Type: text/plain; charset="UTF-8"
+X-Mailer: Evolution 3.28.5 (3.28.5-27.el8_10) 
+Mime-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2001:bc8:30d7:100::1;
- envelope-from=aurelien@aurel32.net; helo=hall.aurel32.net
-X-Spam_score_int: -43
-X-Spam_score: -4.4
-X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
- UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
+X-TM-AS-GCONF: 00
+X-Proofpoint-Reinject: loops=2 maxloops=12
+X-Proofpoint-GUID: KehO7_dYfZlQdJjhkjK4FSWgGtAX2j47
+X-Proofpoint-ORIG-GUID: e9g3tFJP0-o835xKX0rumduY8r4KO5dk
+X-Authority-Analysis: v=2.4 cv=H8NOUOYi c=1 sm=1 tr=0 ts=6ac7e3b7 cx=c_pps
+ a=3Bg1Hr4SwmMryq2xdFQyZA==:117 a=3Bg1Hr4SwmMryq2xdFQyZA==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=RnoormkPH1_aCDwRdu11:22 a=U7nrCbtTmkRpXpFmAIza:22 a=VnNF1IyMAAAA:8
+ a=EUspDBNiAAAA:8 a=faDQGt5goccKK3UQXQYA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDA4MDA3NCBTYWx0ZWRfX8xWGXMmgJu7e
+ AwkhOu3FPrQr7ZPZY8vsPFxHd28K3IMMJOesU7orWAhMkBrRyU6JnLYeuIlitbFRlCIyiHbb0g1
+ AxlkMdL7WDJe/bcWGknz4fow9D8d0DoLPclcgbcBIU2o3cKHq1Cx89eY/lrmh6Jv36+QDWf81LW
+ n3LrPbxx+SwXZehp67klSi68AUbutMjoKCPHKtqDY+6oX/8sTheJPWYNH7GMKpnkZgg5NKM/jGy
+ 7+KzIwl7cx/c0TTU2ar0cCaiaD4g/8tsg5C9qa4yRcKblY2DteLwFmNuw4OA6XUFzhh7yxPqiX7
+ QEUQC667OD9IxXEbpHUebCgsgNfjpSRZqD6wSltj6iTjuXk0d6qhjS8vfZth6J5G1s/d6TzUUlU
+ Eck4ODK/0KVYe08CrqspK+Y5+k7/JpSqgNUrmEPFCnWb711wYSPcKTWQ0iV7DT29l6OdkkJMmZ7
+ IctrOZrnGcMRdr1tNrw==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDA4MDA3NCBTYWx0ZWRfX0ic91mx0w+Zv
+ 5wY5LpKlKqrL+iCggthHpY1LCv8PTC8uWLAdcraya0A434Rfoqft45uOcWcJoKO4aR55sQq6VDl
+ 6Rwr7TVdThooocW+0iaJ1shLJIVJKm4=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-08_06,2026-10-08_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ bulkscore=0 adultscore=0 phishscore=0 lowpriorityscore=0 impostorscore=0
+ clxscore=1011 spamscore=0 priorityscore=1501 malwarescore=0 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610020000 definitions=main-2610080074
+Received-SPF: pass client-ip=148.163.156.1; envelope-from=milesg@linux.ibm.com;
+ helo=mx0a-001b2d01.pphosted.com
+X-Spam_score_int: -26
+X-Spam_score: -2.7
+X-Spam_bar: --
+X-Spam_report: (-2.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_LOW=-0.7,
+ RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -68,84 +128,94 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
+Reply-To: milesg@linux.ibm.com
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-RVV 1.0 only defines vmin, vminu, vmax and vmaxu instructions for the
-vector-vector and vector-scalar case, not the for vector-immediate case.
-Remove the immediate variant from TCG code generation.
+Reviewed-by: Glenn Miles <milesg@linux.ibm.com>
 
-Fixes: 1631f19b04fe ("tcg/riscv: Implement vector min/max ops")
-Signed-off-by: Aurelien Jarno <aurelien@aurel32.net>
----
- tcg/riscv64/tcg-target.c.inc | 20 ++++++++------------
- 1 file changed, 8 insertions(+), 12 deletions(-)
+Thanks,
 
-diff --git a/tcg/riscv64/tcg-target.c.inc b/tcg/riscv64/tcg-target.c.inc
-index de9a3570b2..14a397117a 100644
---- a/tcg/riscv64/tcg-target.c.inc
-+++ b/tcg/riscv64/tcg-target.c.inc
-@@ -306,13 +306,9 @@ typedef enum {
-     OPC_VSSUBU_VI = 0x88000057 | V_OPIVI,
- 
-     OPC_VMAX_VV = 0x1c000057 | V_OPIVV,
--    OPC_VMAX_VI = 0x1c000057 | V_OPIVI,
-     OPC_VMAXU_VV = 0x18000057 | V_OPIVV,
--    OPC_VMAXU_VI = 0x18000057 | V_OPIVI,
-     OPC_VMIN_VV = 0x14000057 | V_OPIVV,
--    OPC_VMIN_VI = 0x14000057 | V_OPIVI,
-     OPC_VMINU_VV = 0x10000057 | V_OPIVV,
--    OPC_VMINU_VI = 0x10000057 | V_OPIVI,
- 
-     OPC_VMSEQ_VV = 0x60000057 | V_OPIVV,
-     OPC_VMSEQ_VI = 0x60000057 | V_OPIVI,
-@@ -2810,19 +2806,19 @@ static void tcg_out_vec_op(TCGContext *s, TCGOpcode opc,
-         break;
-     case INDEX_op_smax_vec:
-         set_vtype_len_sew(s, type, vece);
--        tcg_out_opc_vv_vi(s, OPC_VMAX_VV, OPC_VMAX_VI, a0, a1, a2, c2);
-+        tcg_out_opc_vv(s, OPC_VMAX_VV, a0, a1, a2);
-         break;
-     case INDEX_op_smin_vec:
-         set_vtype_len_sew(s, type, vece);
--        tcg_out_opc_vv_vi(s, OPC_VMIN_VV, OPC_VMIN_VI, a0, a1, a2, c2);
-+        tcg_out_opc_vv(s, OPC_VMIN_VV, a0, a1, a2);
-         break;
-     case INDEX_op_umax_vec:
-         set_vtype_len_sew(s, type, vece);
--        tcg_out_opc_vv_vi(s, OPC_VMAXU_VV, OPC_VMAXU_VI, a0, a1, a2, c2);
-+        tcg_out_opc_vv(s, OPC_VMAXU_VV, a0, a1, a2);
-         break;
-     case INDEX_op_umin_vec:
-         set_vtype_len_sew(s, type, vece);
--        tcg_out_opc_vv_vi(s, OPC_VMINU_VV, OPC_VMINU_VI, a0, a1, a2, c2);
-+        tcg_out_opc_vv(s, OPC_VMINU_VV, a0, a1, a2);
-         break;
-     case INDEX_op_shls_vec:
-         set_vtype_len_sew(s, type, vece);
-@@ -2974,10 +2970,6 @@ tcg_target_op_def(TCGOpcode op, TCGType type, unsigned flags)
-     case INDEX_op_sssub_vec:
-     case INDEX_op_usadd_vec:
-     case INDEX_op_ussub_vec:
--    case INDEX_op_smax_vec:
--    case INDEX_op_smin_vec:
--    case INDEX_op_umax_vec:
--    case INDEX_op_umin_vec:
-         return C_O1_I2(v, v, vK);
-     case INDEX_op_sub_vec:
-         return C_O1_I2(v, vK, v);
-@@ -2987,6 +2979,10 @@ tcg_target_op_def(TCGOpcode op, TCGType type, unsigned flags)
-     case INDEX_op_sarv_vec:
-     case INDEX_op_rotlv_vec:
-     case INDEX_op_rotrv_vec:
-+    case INDEX_op_smax_vec:
-+    case INDEX_op_smin_vec:
-+    case INDEX_op_umax_vec:
-+    case INDEX_op_umin_vec:
-         return C_O1_I2(v, v, v);
-     case INDEX_op_shls_vec:
-     case INDEX_op_shrs_vec:
--- 
-2.53.0
+Glenn
+
+On Thu, 2026-10-08 at 01:23 +0200, Philippe Mathieu-Daudé wrote:
+> Add a gdb_get_reg_bits() helper deriving the register width from
+> ppc_env_is_64bit(), and use it instead of target_long_bits() and
+> TARGET_LONG_SIZE.
+> 
+> Signed-off-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
+> ---
+>  target/ppc/gdbstub.c | 19 ++++++++++++-------
+>  1 file changed, 12 insertions(+), 7 deletions(-)
+> 
+> diff --git a/target/ppc/gdbstub.c b/target/ppc/gdbstub.c
+> index 4d622c5cad5..ee02be63ce8 100644
+> --- a/target/ppc/gdbstub.c
+> +++ b/target/ppc/gdbstub.c
+> @@ -23,12 +23,17 @@
+>  #include "gdbstub/helpers.h"
+>  #include "internal.h"
+>  
+> -static unsigned ppc_gdb_register_len(int n)
+> +static int gdb_get_reg_bits(const CPUPPCState *env)
+> +{
+> +    return ppc_env_is_64bit(env) ? 64 : 32;
+> +}
+> +
+> +static unsigned ppc_gdb_register_len(const CPUPPCState *env, int n)
+>  {
+>      switch (n) {
+>      case 0 ... 31:
+>          /* gprs */
+> -        return target_long_bits() / 8;
+> +        return gdb_get_reg_bits(env) / 8;
+>      case 66:
+>          /* cr */
+>      case 69:
+> @@ -42,7 +47,7 @@ static unsigned ppc_gdb_register_len(int n)
+>          /* lr */
+>      case 68:
+>          /* ctr */
+> -        return target_long_bits() / 8;
+> +        return gdb_get_reg_bits(env) / 8;
+>      default:
+>          return 0;
+>      }
+> @@ -85,7 +90,7 @@ int ppc_cpu_gdb_read_register(CPUState *cs, GByteArray *buf, int n)
+>  {
+>      CPUPPCState *env = cpu_env(cs);
+>      uint8_t *mem_buf;
+> -    unsigned r = ppc_gdb_register_len(n);
+> +    unsigned r = ppc_gdb_register_len(env, n);
+>  
+>      if (!r) {
+>          return r;
+> @@ -127,7 +132,7 @@ int ppc_cpu_gdb_read_register(CPUState *cs, GByteArray *buf, int n)
+>  int ppc_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
+>  {
+>      CPUPPCState *env = cpu_env(cs);
+> -    unsigned r = ppc_gdb_register_len(n);
+> +    unsigned r = ppc_gdb_register_len(env, n);
+>  
+>      if (!r) {
+>          return r;
+> @@ -251,7 +256,7 @@ static int gdb_get_spr_reg(CPUState *cs, GByteArray *buf, int n)
+>          return 0;
+>      }
+>  
+> -    len = TARGET_LONG_SIZE;
+> +    len = gdb_get_reg_bits(env) / 8;
+>  
+>      /* Handle those SPRs that are not part of the env->spr[] array */
+>      target_ulong val;
+> @@ -294,7 +299,7 @@ static int gdb_set_spr_reg(CPUState *cs, uint8_t *mem_buf, int n)
+>          return 0;
+>      }
+>  
+> -    len = TARGET_LONG_SIZE;
+> +    len = gdb_get_reg_bits(env) / 8;
+>      ppc_maybe_bswap_register(env, mem_buf, len);
+>  
+>      /* Handle those SPRs that are not part of the env->spr[] array */
 
 
