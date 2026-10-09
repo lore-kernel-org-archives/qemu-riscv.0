@@ -4,90 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8ED38CA601C
-	for <qemu-riscv@archiver.kernel.org>; Fri,  9 Oct 2026 05:06:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3B71CA6012
+	for <qemu-riscv@archiver.kernel.org>; Fri,  9 Oct 2026 07:09:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xF2nf-00060j-SZ; Fri, 09 Oct 2026 01:05:46 -0400
+	id 1xF4jh-0007hf-Gy; Fri, 09 Oct 2026 03:09:45 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1xF2nM-0005zY-6v
- for qemu-riscv@nongnu.org; Fri, 09 Oct 2026 01:05:27 -0400
-Received: from mail-wm1-x336.google.com ([2a00:1450:4864:20::336])
+ (Exim 4.90_1) (envelope-from <qingwei.hu@bytedance.com>)
+ id 1xF4jc-0007gz-5U
+ for qemu-riscv@nongnu.org; Fri, 09 Oct 2026 03:09:40 -0400
+Received: from mail-pl1-x631.google.com ([2607:f8b0:4864:20::631])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1xF2nJ-0003Lm-2M
- for qemu-riscv@nongnu.org; Fri, 09 Oct 2026 01:05:23 -0400
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-4a061a13884so31707435e9.3
- for <qemu-riscv@nongnu.org>; Thu, 08 Oct 2026 22:05:20 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <qingwei.hu@bytedance.com>)
+ id 1xF4jX-0006kt-Sn
+ for qemu-riscv@nongnu.org; Fri, 09 Oct 2026 03:09:39 -0400
+Received: by mail-pl1-x631.google.com with SMTP id
+ d9443c01a7336-2dd9cbb661bso30652855ad.3
+ for <qemu-riscv@nongnu.org>; Fri, 09 Oct 2026 00:09:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1791522318; x=1792127118; darn=nongnu.org;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=bgn3rIQ/UgL3wuGhAg1jpPsos+fR3FomTzHCiwO6Ipk=;
- b=B1z9/sdwFx0dnCl7TrREckSQ/vABhr40rJXiaHnKI4pFmtdiRZhXMINBT/GAZ6Bg5Y
- gpdbcmCHBiupEMLXdXq4+XVvwmfmD3zSCowkZpOqlqCZZfCm3JyThXTJ4UYZgjhtda2l
- hRshiKgWSWV6UuoaazkoP798S0rF0xSc2WxWIqX8lVHJnTTm7smI55R8UJGzEyvDWcnm
- UyYOihxmP80GdASU0b7PNwTf0oSh/bXoUdA2WDboVLveUJmVyvGJvc25EH5ztpbuX3VF
- L/stS8qC8+sIK9Sb/uvxR5dSTrqBhzwZ54ESYLGCG2KR3XBEpFUfp25lOuVEi2o6RmgJ
- lm0Q==
+ d=bytedance.com; s=google; t=1791529769; x=1792134569; darn=nongnu.org;
+ h=to:references:message-id:content-transfer-encoding:cc:date
+ :in-reply-to:from:subject:mime-version:content-type:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=I74h8b9ot9KYn9HZMB8CMOqmHhf4HmjQEg53yZne/j0=;
+ b=Cq2CwHMRHY4+Ta4S+n+i+UkEg5l9fnIVOYz6LTf+ag3VDmvBVRQ4hLq0BOwN5Vx3A3
+ hJ2QkduNyClhyz/gLf+RZDTj5652RTpAFLxHFRq2ecKM6dy2LH6+a1Cll1DNprk1vMG7
+ SjMvbSN6jNnuZE2XOtA0UbsVJEqv4pklG9ea7E6uB2eD39m5bG0Xpq3oVnzo5/LaFm5m
+ 4zAbgtfWHLvqcMnWHChf8ZznAokHiunaJQQI7WEIK9vw7wRsmLOxjFqOGrs3mbJYNZek
+ LwuE7jFXfnyndIJW6l08cLHtai9/T9+vSUgL5+NF+fc1CRkfl12B3lqI/0B+YLvPhkmd
+ Q1tQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1791522318; x=1792127118;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=bgn3rIQ/UgL3wuGhAg1jpPsos+fR3FomTzHCiwO6Ipk=;
- b=TCENOK+MAFn0Y2lUUHq83u0a5fzHbJX7ms1oNmXS6p7zVZYqPbmSRQgX8YhSkZBDVv
- P++gH7s8rG8II1td2VE4NYD1WEC7s8bKWXXRSNLhyFtHenYtxgO8+1owLXIs4ZtmJxUs
- g7IcDDnTp0lOQffE3LxLEKFl84cHCXqzNbbHaxzyzkU5Pwjhcyj5G+XE194ZOBBwefkS
- OBXELdo4sNpgOQe23Vhw4uy9GNLdqzZ7st4Kf6zQ91HEOk5gzXGfOLjRxd8QnLnLtjud
- 9ean1K0sarB2qAf1VXM8t7MYWhsIWmzTya9wSx6xxqY8uQLVfL/VrfVrVau1Lz2EcEnS
- Pw3w==
+ d=1e100.net; s=20260707; t=1791529769; x=1792134569;
+ h=to:references:message-id:content-transfer-encoding:cc:date
+ :in-reply-to:from:subject:mime-version:content-type:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=I74h8b9ot9KYn9HZMB8CMOqmHhf4HmjQEg53yZne/j0=;
+ b=o71oC+EJhIIhfCdkIaRyTeXeBNMgVGG+ux8c2TEpP4+caOByMZFj2CUMUAeWlPxvKs
+ QFCfRcL3zn478lY76x6kn9OCjtRp+qJXkYAWaepxxer1PrrFwOcw72peyFwUOmbT/gLq
+ z/NAOBby54R5NJ4kCwz7p5BRNOUdtOxlbpwCLw4wFIWz8VfjX2GSSizfTl8CCSDVwFMt
+ b7EImqbswhmEgvnu+ezYHbHNLTX0cvhs+3vvShHnR0Hw4fp7c9kgnqMRxPLwSwoTryqW
+ kPMyHiuzX+NmB+x2rUYPefhaGEi09GreP/qupVwpq4JvU4EYR8OU8VYpE37hfaElQrm0
+ X0lg==
 X-Forwarded-Encrypted: i=1;
- AKwUvBzK1W5Ht0ImpWB9Oy/yEf/3ws77q+myVaNoc26xidJKUVIohGg4qgg/dheNDeYOTfynWFgJ61dMZY3m@nongnu.org
-X-Gm-Message-State: AFuF++ki6k12jcJK+ihtzythiw3hVkxGlRyyWfzMpPVCfogK5yqjQ9Pa
- NhTmryFCQV6z98+i3Ua9qAWWBPiH7Xqq5EpK10uEbASsIgeYXf8Z/o+Tp3MKP1GlHNY=
-X-Gm-Gg: AYBFou1tftk/2er1bDvLe2eVrk3oJXfwlZH2YCsDfyILaRT6wnXP2ECDkc7dZT6gOn3
- wTFtTbJOu+2FlpCfXIvnp2gEajjMqL9Ob7kvayIHgOzvvIL421wQjrPz5sHYVYYL0GNKbWqlsL2
- adHS5uRPn7ZUHcSsJ+hniWjuCV3UaKMQok/IJQdT0EDgyGzAiszvHwVffg87MkYR4biOCSC9285
- y5KS47bW8+D6Zq9TWSWwqJhtIOYRaMtoQgTHpNpGCSGPtPWZ8J1iYNHiRjfrQ2ZqKKRTcntGyNj
- qLykrAptqDk80yu0eVh8pqVQEGIFsyCu2jObT767OPzNNszwF09tSzjWJ+Z+GZTZJWOIIJZZfUL
- t2mWwgtroL/DVQlMgFdynFdgEiHTCiyp+STIqtHxD3ApjdhliJS1gvxyMSUFBaDM7A08iqxMaC7
- 0MHVJ+e4tPQqza347j6Mvlai8suljMX40I8bvSmh6LArWvxIurStuBMpKRofVTwWyNmGu6lQ8bi
- qqWIReVigZzdvHtCGjkIrR58jByney/lUn7794+Dazeh4OOxMUHt6I+gzuXrRkpba0QqvfzF5U/
- yw==
-X-Received: by 2002:a05:600c:1e24:b0:4a1:7e77:c382 with SMTP id
- 5b1f17b1804b1-4a18e49310amr10096675e9.5.1791522316298; 
- Thu, 08 Oct 2026 22:05:16 -0700 (PDT)
-Received: from [10.86.151.227]
- (ipservice-092-208-245-012.092.208.pools.vodafone-ip.de. [92.208.245.12])
+ AKwUvBzp7U2qYiDFQUj/DHuVFm7ismZR8zACwTMJXU8sBBLSFRg6ulAE5FLvMq/JD3dy5gUNcbZl2TeTyw1W@nongnu.org
+X-Gm-Message-State: AFq9FYLio9gXdp3MdoeImPQ25XrWaBIZX8fW91mRV6ty6iVLdM0HVAad
+ 2SDDNQg1rQD5kfUeq4lSdg83ZGw6AYRHPlYjLFGLekw/pBoMdiZN8egv+5pjcF2YzqI=
+X-Gm-Gg: AYBFou2JsBvjCV2IOf6Qywar3LpmYs2RXFYYHDR3QVJcG4NgoD0fBwaGqY4aid7OoTe
+ OgmOJG2htdSgygfk5uhKQ4KDJODepWRQuc9RVMVAYrbLGKqx8NlvWiNxmX2NmZtUB78eSZYuwiy
+ deeczJWcnIr/mkm2tI6VjOvPUItP4NvDNxeoUOZmpJvmqr1N9gNZPZ1oak2RNNBqPsNTCodzkWM
+ tfs2OdEOcWYRRiYuBpLJZB485BZR81c7+TEUtRCopBSuTqxAOLDDIgo1p328u4ixHMplWB991ZG
+ bLcem9Ltw0qbAmFl0JZFa56IFF45iaQ8Qb1PEtCxShlxZ5hpYcxYJlnDOrTNYULyklE/rAkp6Ci
+ 4Tg21tKD0VZNw7fICH8lSsGP0tEv9TXOIAQ3ZhyyA38E3QX/jVnLBIaV3+hk7xdRymacQ/F63iB
+ ZewCSb3PN0Fx8V3NfxbGTKn7NaguYzlx05zWeVal0HJSUGsW3NqYPm8FbjurrBF1skZvz40gE64
+ 6223JGKiwoaCGKA+sngvXomkA==
+X-Received: by 2002:a17:903:41c3:b0:2e8:18ca:5f33 with SMTP id
+ d9443c01a7336-2e842ab21f0mr9448555ad.28.1791529768403; 
+ Fri, 09 Oct 2026 00:09:28 -0700 (PDT)
+Received: from smtpclient.apple ([114.94.228.66])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48db9463499sm1744110f8f.3.2026.10.08.22.05.15
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 08 Oct 2026 22:05:15 -0700 (PDT)
-Message-ID: <118805f8-bc4c-4600-b156-5b494a840ef5@linaro.org>
-Date: Fri, 9 Oct 2026 07:05:13 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] tcg/riscv64: Fix vector constant matching for logical ops
-To: Aurelien Jarno <aurelien@aurel32.net>, Palmer Dabbelt
- <palmer@dabbelt.com>, Alistair Francis <Alistair.Francis@wdc.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- "open list:RISC-V TCG target" <qemu-riscv@nongnu.org>,
- "open list:All patches CC here" <qemu-devel@nongnu.org>
-References: <20261008181647.3015949-1-aurelien@aurel32.net>
-From: Richard Henderson <richard.henderson@linaro.org>
-Content-Language: en-US
-In-Reply-To: <20261008181647.3015949-1-aurelien@aurel32.net>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::336;
- envelope-from=richard.henderson@linaro.org; helo=mail-wm1-x336.google.com
+ d9443c01a7336-2e84219e74asm4422805ad.29.2026.10.09.00.09.24
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Fri, 09 Oct 2026 00:09:27 -0700 (PDT)
+Content-Type: text/plain;
+	charset=utf-8
+Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3864.300.41.1.7\))
+Subject: Re: [External] [PATCH] target/riscv/kvm: Use the host AIA MSI ID limit
+From: Qingwei Hu <qingwei.hu@bytedance.com>
+In-Reply-To: <797fa41f-4f74-4228-ac9e-26955b0b32d2@oss.qualcomm.com>
+Date: Fri, 9 Oct 2026 15:09:11 +0800
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, sunilvl@ventanamicro.com,
+ palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
+ yongxuan.wang@sifive.com
+Content-Transfer-Encoding: quoted-printable
+Message-Id: <258D1AC5-4877-49AA-8C9B-3BCBC4580AF2@bytedance.com>
+References: <20260922122215.1619439-1-qingwei.hu@bytedance.com>
+ <797fa41f-4f74-4228-ac9e-26955b0b32d2@oss.qualcomm.com>
+To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+X-Mailer: Apple Mail (2.3864.300.41.1.7)
+Received-SPF: pass client-ip=2607:f8b0:4864:20::631;
+ envelope-from=qingwei.hu@bytedance.com; helo=mail-pl1-x631.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -110,14 +109,420 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 10/8/26 20:16, Aurelien Jarno wrote:
-> +        if ((vece != MO_8) || (val == (uint8_t)val * 0x0101010101010101ull)) {
+Hi Daniel,
 
-Do you really want
+Apologies for the delayed reply; I overlooked your email. Thanks for
+catching the non-KVM build issue. I missed updating kvm-stub.c.
 
-     val = dup_const(vece, val)
+Stefan's patchset also covers hosts that support only 63 guest interrupt
+identities and includes the corresponding non-KVM stub changes. We are
+coordinating on his series, and I have already provided review feedback.
 
-?
+I may follow up with additional changes on top of his series to allow
+configuring more than 255 MSI IDs when the host supports it.
 
-r~
+Best regards,
+Qingwei Hu
+
+> On Sep 26, 2026, at 03:38, Daniel Henrique Barboza =
+<daniel.barboza@oss.qualcomm.com> wrote:
+>=20
+> Hello,
+>=20
+> If we try to build this patch in a non-KVM enviroment we'll have this =
+error:
+>=20
+> FAILED: libstubs_riscv.a.p/target_riscv_kvm_kvm-stub.c.o
+> cc -m64 -Ilibstubs_riscv.a.p -I. -I.. -I../common-user/host/x86_64 =
+-I../linux-user/include/host/x86_64 -I../linux-user/include =
+-Itarget/riscv -I../target/riscv -Iqapi -Itrace -Iui -Iui/shader =
+-I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include =
+-fdiagnostics-color=3Dauto -Wall -Winvalid-pch -Werror -std=3Dgnu11 -O0 =
+-g -mcx16 -msse2 -D_GNU_SOURCE -D_FILE_OFFSET_BITS=3D64 =
+-D_LARGEFILE_SOURCE -fno-strict-aliasing -fno-common -fwrapv =
+-ftrivial-auto-var-init=3Dzero -fzero-call-used-regs=3Dused-gpr =
+-fstack-protector-strong -Wempty-body -Wendif-labels =
+-Wexpansion-to-defined -Wformat-overflow=3D2 -Wformat-security =
+-Wformat-y2k -Wignored-qualifiers -Wimplicit-fallthrough=3D2 -Winit-self =
+-Wmissing-format-attribute -Wmissing-prototypes -Wnested-externs =
+-Wold-style-declaration -Wold-style-definition -Wredundant-decls =
+-Wshadow=3Dlocal -Wstrict-prototypes -Wtype-limits -Wundef -Wvla =
+-Wwrite-strings -Wno-missing-include-dirs -Wno-psabi =
+-Wno-shift-negative-value -isystem =
+/local/mnt/workspace/qemu/linux-headers -isystem linux-headers -iquote . =
+-iquote /local/mnt/workspace/qemu -iquote =
+/local/mnt/workspace/qemu/include -iquote =
+/local/mnt/workspace/qemu/host/include/x86_64 -iquote =
+/local/mnt/workspace/qemu/host/include/generic -iquote =
+/local/mnt/workspace/qemu/tcg/x86_64 -pthread -fPIE -DCPU_DEFS_H =
+-DCOMPILING_SYSTEM_VS_USER -DCONFIG_SOFTMMU -MD -MQ =
+libstubs_riscv.a.p/target_riscv_kvm_kvm-stub.c.o -MF =
+libstubs_riscv.a.p/target_riscv_kvm_kvm-stub.c.o.d -o =
+libstubs_riscv.a.p/target_riscv_kvm_kvm-stub.c.o -c =
+../target/riscv/kvm/kvm-stub.c
+> ../target/riscv/kvm/kvm-stub.c:12:6: error: conflicting types for =
+=E2=80=98kvm_riscv_aia_create=E2=80=99; have =E2=80=98void(MachineState =
+*, uint64_t,  uint64_t,  uint64_t,  uint64_t,  uint64_t,  uint64_t)=E2=80=99=
+ {aka =E2=80=98void(MachineState *, long unsigned int,  long unsigned =
+int,  long unsigned int,  long unsigned int, long unsigned int,  long =
+unsigned int)=E2=80=99}
+>   12 | void kvm_riscv_aia_create(MachineState *machine, uint64_t =
+group_shift,
+>      |      ^~~~~~~~~~~~~~~~~~~~
+> In file included from ../target/riscv/kvm/kvm-stub.c:10:
+> /local/mnt/workspace/qemu/target/riscv/kvm/kvm_riscv.h:26:5: note: =
+previous declaration of =E2=80=98kvm_riscv_aia_create=E2=80=99 with type
+> int(uint64_t,  uint32_t *)=E2=80=99 {aka =E2=80=98int(long unsigned =
+int,  unsigned int *)=E2=80=99}
+>   26 | int kvm_riscv_aia_create(uint64_t aia_irq_num, uint32_t =
+*aia_msi_num);
+>      |     ^~~~~~~~~~~~~~~~~~~~
+> [1958/3154] Compiling C object =
+libqemu-riscv64-softmmu.a.p/target_riscv_tcg_debug.c.o
+>=20
+>=20
+> The reason is, down there ...
+>=20
+>=20
+> On 9/22/2026 9:22 AM, Qingwei Hu wrote:
+>> KVM initializes CONFIG_IDS to the number of guest MSI IDs supported =
+by
+>> the host. The virt machine currently overwrites it with the fixed
+>> VIRT_IRQCHIP_NUM_MSIS value of 255, which can be inconsistent with =
+the
+>> host-supported guest MSI ID count.
+>> Create the KVM AIA device before realizing the per-socket IMSICs and
+>> read the host-provided CONFIG_IDS value. Use it to configure the QEMU
+>> IMSIC devices and the guest-visible DT and ACPI descriptions. =
+Complete
+>> the remaining KVM AIA setup after all vCPUs have been created, as the
+>> IMSIC address configuration depends on them.
+>> Keep VIRT_IRQCHIP_NUM_MSIS as the default for non-KVM machines.
+>> Fixes: 9634ef7eda5f ("target/riscv: Create an KVM AIA irqchip")
+>> Signed-off-by: Qingwei Hu <qingwei.hu@bytedance.com>
+>> ---
+>>  hw/riscv/virt-acpi-build.c   |  4 +--
+>>  hw/riscv/virt.c              | 28 ++++++++++++-----
+>>  include/hw/riscv/virt.h      |  1 +
+>>  target/riscv/kvm/kvm-cpu.c   | 59 =
++++++++++++++++++++++++-------------
+>>  target/riscv/kvm/kvm_riscv.h |  9 +++---
+>>  5 files changed, 66 insertions(+), 35 deletions(-)
+>> diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
+>> index 8e516ec114..0ebfa10a02 100644
+>> --- a/hw/riscv/virt-acpi-build.c
+>> +++ b/hw/riscv/virt-acpi-build.c
+>> @@ -576,9 +576,9 @@ static void build_madt(GArray *table_data,
+>>          build_append_int_noprefix(table_data, 0, 1);        /* =
+Reserved */
+>>          build_append_int_noprefix(table_data, 0, 4);        /* Flags =
+*/
+>>          /* Number of supervisor mode Interrupt Identities */
+>> -        build_append_int_noprefix(table_data, VIRT_IRQCHIP_NUM_MSIS, =
+2);
+>> +        build_append_int_noprefix(table_data, s->num_msis, 2);
+>>          /* Number of guest mode Interrupt Identities */
+>> -        build_append_int_noprefix(table_data, VIRT_IRQCHIP_NUM_MSIS, =
+2);
+>> +        build_append_int_noprefix(table_data, s->num_msis, 2);
+>>          /* Guest Index Bits */
+>>          build_append_int_noprefix(table_data, guest_index_bits, 1);
+>>          /* Hart Index Bits */
+>> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+>> index d4b501802f..ba0e74ce83 100644
+>> --- a/hw/riscv/virt.c
+>> +++ b/hw/riscv/virt.c
+>> @@ -277,7 +277,7 @@ static void create_fdt_sockets(RISCVVirtState *s,
+>>              .imsic_m_base =3D !kvm_enabled() ? =
+s->memmap[VIRT_IMSIC_M].base : 0,
+>>              .imsic_s_base =3D s->memmap[VIRT_IMSIC_S].base,
+>>              .imsic_group_max_size =3D VIRT_IMSIC_GROUP_MAX_SIZE,
+>> -            .irqchip_num_msis =3D VIRT_IRQCHIP_NUM_MSIS,
+>> +            .irqchip_num_msis =3D s->num_msis,
+>>              .aia_guests =3D s->aia_guests
+>>          };
+>>  @@ -718,6 +718,7 @@ static void virt_machine_init(MachineState =
+*machine)
+>>      DeviceState *mmio_irqchip, *virtio_irqchip, *pcie_irqchip;
+>>      int i, base_hartid, hart_count;
+>>      int socket_count =3D riscv_socket_count(machine);
+>> +    int aia_fd =3D -1;
+>>        s->memmap =3D virt_memmap;
+>>  @@ -733,6 +734,16 @@ static void virt_machine_init(MachineState =
+*machine)
+>>          exit(1);
+>>      }
+>>  +    /*
+>> +     * Create the KVM AIA device and query the host MSI ID count =
+before
+>> +     * realizing the per-socket IMSICs. Complete AIA initialization =
+after
+>> +     * all vCPUs have been created.
+>> +     */
+>> +    if (kvm_enabled() && virt_use_kvm_aia_aplic_imsic(s->aia_type)) =
+{
+>> +        aia_fd =3D kvm_riscv_aia_create(VIRT_IRQCHIP_NUM_SOURCES,
+>> +                                      &s->num_msis);
+>> +    }
+>> +
+>>      /* Initialize sockets */
+>>      mmio_irqchip =3D virtio_irqchip =3D pcie_irqchip =3D NULL;
+>>      for (i =3D 0; i < socket_count; i++) {
+>> @@ -826,7 +837,7 @@ static void virt_machine_init(MachineState =
+*machine)
+>>                                               =
+&s->memmap[VIRT_IMSIC_M],
+>>                                               =
+&s->memmap[VIRT_IMSIC_S],
+>>                                               i, base_hartid, =
+hart_count,
+>> -                                             VIRT_IRQCHIP_NUM_MSIS,
+>> +                                             s->num_msis,
+>>                                               =
+VIRT_IRQCHIP_NUM_PRIO_BITS);
+>>          }
+>>  @@ -845,12 +856,12 @@ static void virt_machine_init(MachineState =
+*machine)
+>>          }
+>>      }
+>>  -    if (kvm_enabled() && virt_use_kvm_aia_aplic_imsic(s->aia_type)) =
+{
+>> -        kvm_riscv_aia_create(machine, IMSIC_MMIO_GROUP_MIN_SHIFT,
+>> -                             VIRT_IRQCHIP_NUM_SOURCES, =
+VIRT_IRQCHIP_NUM_MSIS,
+>> -                             s->memmap[VIRT_APLIC_S].base,
+>> -                             s->memmap[VIRT_IMSIC_S].base,
+>> -                             s->aia_guests);
+>=20
+> This call of kvm_riscv_aia_create(), even when guarded with a =
+kvm_enabled(), needs to be
+> visible to the compiler in a TCG only build.  We have a kvm-stub.c =
+file that declares it
+> like so:
+>=20
+> void kvm_riscv_aia_create(MachineState *machine, uint64_t group_shift,
+>                          uint64_t aia_irq_num, uint64_t aia_msi_num,
+>                          uint64_t aplic_base, uint64_t imsic_base,
+>                          uint64_t guest_num)
+> {
+>    g_assert_not_reached();
+> }
+>=20
+> Thus changing kvm_riscv_aia_create() requires a change in its kvm-stub =
+as well.
+>=20
+>> +    if (aia_fd >=3D 0) {
+>> +        kvm_riscv_aia_init(machine, aia_fd, =
+IMSIC_MMIO_GROUP_MIN_SHIFT,
+>> +                           VIRT_IRQCHIP_NUM_SOURCES,
+>> +                           s->memmap[VIRT_APLIC_S].base,
+>> +                           s->memmap[VIRT_IMSIC_S].base,
+>> +                           s->aia_guests);
+>>      }
+>=20
+> And a similar thing is needed here for kvm_riscv_aia_init(). We need a =
+kvm-stub entry and it
+> needs to be guarded with kvm_enabled() as well.
+>=20
+> We need something like this diff:
+>=20
+> $ git diff
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index ba0e74ce83..4df8d7d441 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -856,7 +856,7 @@ static void virt_machine_init(MachineState =
+*machine)
+>         }
+>     }
+>=20
+> -    if (aia_fd >=3D 0) {
+> +    if (kvm_enabled() && aia_fd >=3D 0) {
+>         kvm_riscv_aia_init(machine, aia_fd, =
+IMSIC_MMIO_GROUP_MIN_SHIFT,
+>                            VIRT_IRQCHIP_NUM_SOURCES,
+>                            s->memmap[VIRT_APLIC_S].base,
+> diff --git a/target/riscv/kvm/kvm-stub.c b/target/riscv/kvm/kvm-stub.c
+> index 64e39c96d8..b7e6504f5f 100644
+> --- a/target/riscv/kvm/kvm-stub.c
+> +++ b/target/riscv/kvm/kvm-stub.c
+> @@ -9,10 +9,15 @@
+> #include "qemu/osdep.h"
+> #include "target/riscv/kvm/kvm_riscv.h"
+>=20
+> -void kvm_riscv_aia_create(MachineState *machine, uint64_t =
+group_shift,
+> -                          uint64_t aia_irq_num, uint64_t aia_msi_num,
+> -                          uint64_t aplic_base, uint64_t imsic_base,
+> -                          uint64_t guest_num)
+> +int kvm_riscv_aia_create(uint64_t aia_irq_num, uint32_t *aia_msi_num)
+> +{
+> +    g_assert_not_reached();
+> +}
+> +
+> +void kvm_riscv_aia_init(MachineState *machine, int aia_fd,
+> +                        uint64_t group_shift, uint64_t aia_irq_num,
+> +                        uint64_t aplic_base, uint64_t imsic_base,
+> +                        uint64_t guest_num)
+> {
+>     g_assert_not_reached();
+> }
+>=20
+>=20
+> Code LGTM otherwise.  Booted a KVM aia guest and play with it a little =
+bit
+> without any hicups.
+>=20
+>=20
+> Thanks,
+> Daniel
+> >
+>>      if (riscv_is_32bit(&s->soc[0])) {
+>> @@ -972,6 +983,7 @@ static void virt_machine_instance_init(Object =
+*obj)
+>>      s->acpi =3D ON_OFF_AUTO_AUTO;
+>>      s->iommu_sys =3D ON_OFF_AUTO_AUTO;
+>>      s->num_sources =3D VIRT_IRQCHIP_NUM_SOURCES;
+>> +    s->num_msis =3D VIRT_IRQCHIP_NUM_MSIS;
+>>  }
+>>    static char *virt_get_aia_guests(Object *obj, Error **errp)
+>> diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
+>> index e516898f9a..f64a2a3448 100644
+>> --- a/include/hw/riscv/virt.h
+>> +++ b/include/hw/riscv/virt.h
+>> @@ -66,6 +66,7 @@ struct RISCVVirtState {
+>>      OnOffAuto iommu_sys;
+>>      uint16_t pci_iommu_bdf;
+>>      uint16_t num_sources;
+>> +    uint32_t num_msis;
+>>  };
+>>    enum {
+>> diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
+>> index 68e1501b21..02af4e7723 100644
+>> --- a/target/riscv/kvm/kvm-cpu.c
+>> +++ b/target/riscv/kvm/kvm-cpu.c
+>> @@ -1859,19 +1859,11 @@ void kvm_arch_accel_class_init(ObjectClass =
+*oc)
+>>                                      "auto");
+>>  }
+>>  -void kvm_riscv_aia_create(MachineState *machine, uint64_t =
+group_shift,
+>> -                          uint64_t aia_irq_num, uint64_t =
+aia_msi_num,
+>> -                          uint64_t aplic_base, uint64_t imsic_base,
+>> -                          uint64_t guest_num)
+>> +int kvm_riscv_aia_create(uint64_t aia_irq_num, uint32_t =
+*aia_msi_num)
+>>  {
+>> -    int ret, i;
+>> -    int aia_fd =3D -1;
+>> +    int ret;
+>> +    int aia_fd;
+>>      uint64_t default_aia_mode;
+>> -    uint64_t socket_count =3D riscv_socket_count(machine);
+>> -    uint64_t max_hart_per_socket =3D 0;
+>> -    uint64_t socket, base_hart, hart_count, socket_imsic_base, =
+imsic_addr;
+>> -    uint64_t socket_bits, hart_bits, guest_bits;
+>> -    uint64_t max_group_id;
+>>        aia_fd =3D kvm_create_device(kvm_state, =
+KVM_DEV_TYPE_RISCV_AIA, false);
+>>  @@ -1903,6 +1895,41 @@ void kvm_riscv_aia_create(MachineState =
+*machine, uint64_t group_shift,
+>>          }
+>>      }
+>>  +    /*
+>> +     * Get the maximum MSI ID supported by the host from the =
+CONFIG_IDS
+>> +     * attribute and use it for the guest-visible interrupt =
+controller
+>> +     * configuration.
+>> +     */
+>> +    ret =3D kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_CONFIG,
+>> +                            KVM_DEV_RISCV_AIA_CONFIG_IDS,
+>> +                            aia_msi_num, false, NULL);
+>> +    if (ret < 0) {
+>> +        error_report("KVM AIA: failed to get number of MSI IDs");
+>> +        exit(1);
+>> +    }
+>> +
+>> +    if (!kvm_kernel_irqchip_split() && *aia_msi_num < aia_irq_num) {
+>> +        error_report("KVM AIA: host supports only %" PRIu32 " MSI =
+IDs, "
+>> +                     "but the virt machine requires at least %" =
+PRIu64,
+>> +                     *aia_msi_num, aia_irq_num);
+>> +        exit(1);
+>> +    }
+>> +
+>> +    return aia_fd;
+>> +}
+>> +
+>> +void kvm_riscv_aia_init(MachineState *machine, int aia_fd,
+>> +                        uint64_t group_shift, uint64_t aia_irq_num,
+>> +                        uint64_t aplic_base, uint64_t imsic_base,
+>> +                        uint64_t guest_num)
+>> +{
+>> +    int ret, i;
+>> +    uint64_t socket_count =3D riscv_socket_count(machine);
+>> +    uint64_t max_hart_per_socket =3D 0;
+>> +    uint64_t socket, base_hart, hart_count, socket_imsic_base, =
+imsic_addr;
+>> +    uint64_t socket_bits, hart_bits, guest_bits;
+>> +    uint64_t max_group_id;
+>> +
+>>      /*
+>>       * Skip APLIC creation in KVM if we're running split mode.
+>>       * This is done by leaving KVM_DEV_RISCV_AIA_CONFIG_SRCS
+>> @@ -1927,15 +1954,6 @@ void kvm_riscv_aia_create(MachineState =
+*machine, uint64_t group_shift,
+>>          }
+>>       }
+>>  -    ret =3D kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_CONFIG,
+>> -                            KVM_DEV_RISCV_AIA_CONFIG_IDS,
+>> -                            &aia_msi_num, true, NULL);
+>> -    if (ret < 0) {
+>> -        error_report("KVM AIA: failed to set number of msi");
+>> -        exit(1);
+>> -    }
+>> -
+>> -
+>>      if (socket_count > 1) {
+>>          max_group_id =3D socket_count - 1;
+>>          socket_bits =3D find_last_bit(&max_group_id, BITS_PER_LONG) =
++ 1;
+>> @@ -1987,7 +2005,6 @@ void kvm_riscv_aia_create(MachineState =
+*machine, uint64_t group_shift,
+>>          }
+>>      }
+>>  -
+>>      if (max_hart_per_socket > 1) {
+>>          max_hart_per_socket--;
+>>          hart_bits =3D find_last_bit(&max_hart_per_socket, =
+BITS_PER_LONG) + 1;
+>> diff --git a/target/riscv/kvm/kvm_riscv.h =
+b/target/riscv/kvm/kvm_riscv.h
+>> index 61eaa12443..1499fb4487 100644
+>> --- a/target/riscv/kvm/kvm_riscv.h
+>> +++ b/target/riscv/kvm/kvm_riscv.h
+>> @@ -23,10 +23,11 @@
+>>    void kvm_riscv_reset_vcpu(RISCVCPU *cpu);
+>>  void kvm_riscv_set_irq(RISCVCPU *cpu, int irq, int level);
+>> -void kvm_riscv_aia_create(MachineState *machine, uint64_t =
+group_shift,
+>> -                          uint64_t aia_irq_num, uint64_t =
+aia_msi_num,
+>> -                          uint64_t aplic_base, uint64_t imsic_base,
+>> -                          uint64_t guest_num);
+>> +int kvm_riscv_aia_create(uint64_t aia_irq_num, uint32_t =
+*aia_msi_num);
+>> +void kvm_riscv_aia_init(MachineState *machine, int aia_fd,
+>> +                        uint64_t group_shift, uint64_t aia_irq_num,
+>> +                        uint64_t aplic_base, uint64_t imsic_base,
+>> +                        uint64_t guest_num);
+>>  void riscv_kvm_aplic_request(void *opaque, int irq, int level);
+>>  bool kvm_riscv_has_mp_state(void);
+>>  void riscv_kvm_cpu_finalize_features(RISCVCPU *cpu, Error **errp);
+
+
 
