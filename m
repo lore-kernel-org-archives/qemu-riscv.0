@@ -4,58 +4,159 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F3C2CA9EBE
-	for <qemu-riscv@archiver.kernel.org>; Sat, 10 Oct 2026 17:48:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFF1ACA9EC0
+	for <qemu-riscv@archiver.kernel.org>; Sat, 10 Oct 2026 18:58:18 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xFbBI-0008VR-7T; Sat, 10 Oct 2026 13:48:26 -0400
+	id 1xFcGL-0006d2-HW; Sat, 10 Oct 2026 14:57:41 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <aurelien@aurel32.net>)
- id 1xFbB2-0008V1-5A; Sat, 10 Oct 2026 13:48:08 -0400
-Received: from hall.aurel32.net ([2001:bc8:30d7:100::1])
+ (Exim 4.90_1) (envelope-from <pierrick.bouvier@oss.qualcomm.com>)
+ id 1xFcGJ-0006cf-Se
+ for qemu-riscv@nongnu.org; Sat, 10 Oct 2026 14:57:39 -0400
+Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <aurelien@aurel32.net>)
- id 1xFbAz-00025a-4e; Sat, 10 Oct 2026 13:48:07 -0400
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=aurel32.net
- ; s=202004.hall;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
- Subject:Cc:To:From:Content-Type:From:Reply-To:Subject:Content-ID:
- Content-Description:In-Reply-To:References:X-Debbugs-Cc;
- bh=X/sV+QCHPh6WttKn04ZfRvNXuIvy+Kh7Y9N5OnH/H4o=; b=d8QdobJiXX1S1erIhwDFfz2CFS
- YGYANlSHWq8a54X94kw6jkvsVdzgDpGmtz0WipEPoDM/6eAcr/bqMi9kZR2d+09gTXluuo4ud/biE
- lfUJLbnfL2sUKphJrdZRkwLoyVfJnWVwkaQ6oX7O1XL1dYsEs+H7tp1alYfYwyAXysvErQwl7J8tQ
- pDwm8fuGuZy5WCJqlGFzytdbZeOCk+qNdVaeWBaStCkWPQFBDqo2l3kpoSP2RBCVjTGY+rVGMp+9n
- emiSGIIsiITC1VnhQ61J9DqVCL4rJLEspWt02N/VJrXnpYenfdywK768Ze73kJTAX+POPUloseJc6
- 8U8ip1Gg==;
-Received: from authenticated user by hall.aurel32.net with esmtpsa (TLS1.3) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.98.2)
- (envelope-from <aurelien@aurel32.net>) id 1xFbAm-0000000DYvr-1XuC;
- Sat, 10 Oct 2026 19:47:52 +0200
-From: Aurelien Jarno <aurelien@aurel32.net>
-To: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- qemu-riscv@nongnu.org (open list:RISC-V TCG target),
- qemu-devel@nongnu.org (open list:All patches CC here)
-Cc: Aurelien Jarno <aurelien@aurel32.net>
-Subject: [PATCH v2] tcg/riscv64: Fix vector constant matching for logical ops
-Date: Sat, 10 Oct 2026 19:46:55 +0200
-Message-ID: <20261010174742.3552498-1-aurelien@aurel32.net>
-X-Mailer: git-send-email 2.53.0
+ (Exim 4.90_1) (envelope-from <pierrick.bouvier@oss.qualcomm.com>)
+ id 1xFcGH-0008Ay-W2
+ for qemu-riscv@nongnu.org; Sat, 10 Oct 2026 14:57:39 -0400
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 69AIfCRa1365961
+ for <qemu-riscv@nongnu.org>; Sat, 10 Oct 2026 18:57:35 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ Om86OsmSOnxQ3rMISMcSDlcgHcGTvInzJrDV5Hxbr74=; b=I3HBZeHEGU3ieiUT
+ 110+b/t70gFnuhdX1x1t+xPRfvftN7TyY7Xvwl18mhRN0XDdDQCte3WvaWReWxJi
+ O2CqFNnINjPprFP6+AKLWpQgppWC6u5pfqRj235K7HvioYE9uPwGyxJkCi4zQ75E
+ e/3IUq3sb4eb49U2eNZ6wkGPRv6Zqk7Bd1zuxDsH673+ffk2dYjq8yoNOqpnJ9SB
+ 1WCO+ZsnivsknLCJjEk7leZrwNIpGaEysGh2G5uTChbWmiOF1Ukvvh5ex3CwIIfB
+ xxgUWmaIq0AT+Zux14dVzAzlJMn0J5wYNeXe62M116AcgMNwe5f5FsSDIh3ZhRcn
+ Y7J3bg==
+Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com
+ [209.85.216.70])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h7dk21m45-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Sat, 10 Oct 2026 18:57:35 +0000 (GMT)
+Received: by mail-pj1-f70.google.com with SMTP id
+ 98e67ed59e1d1-3a6d30f66c9so1057941a91.0
+ for <qemu-riscv@nongnu.org>; Sat, 10 Oct 2026 11:57:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1791658654; x=1792263454; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=Om86OsmSOnxQ3rMISMcSDlcgHcGTvInzJrDV5Hxbr74=;
+ b=JKvZOJNh2JwPdKND4cqCrgQv1XoJ1Y35YIbBjgDE+rqA6gbjDzKtXIyX+Nv7UihL8Z
+ Kyp2qZTqoU8waoc6ZhE0ifhOaa8CG1jNFcaabQU9Kuugh88gJV5iVupplsgLsP2c7bBL
+ TCECX8/p9X+5gIP1TWdtT9RJAL3rWZrZROA6xYzrKf9M89BlwtZycGIo9fmmpxC2wzFC
+ 12/wxk4W/8szWfNQGbWx/rkQcQELqf2Ma6q7cyLtUe2cgPOQ3k9Yv8MI2gs8xPaNJenA
+ 72M/vdqhfRbIX1n53zFmSafpeHz95367Y8E+QKVwaZ4/AC76q0Kqx86Zai5sIuea5L/D
+ iUFQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1791658654; x=1792263454;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=Om86OsmSOnxQ3rMISMcSDlcgHcGTvInzJrDV5Hxbr74=;
+ b=wIMHln/gUgElyuc7W5azlsJ3oDtCdlSWnxG8ciVG+uZIrHOes6BtO1kTGB/RdMyZqa
+ sOC3GB66FIAbHe9t/u4hNo3Za0K4xjWEplE/If+IZNnUKzTcYA0Xpo0hByeftkp4HaTL
+ G/XqX0psPyqQwkc1SXPPjC9eUO/r9TDFfQBsGCcFDB/j9GjJzu91nIiaTHnTuRldSou8
+ Fx8u58FTRH/1PiyTP2e9o3SH4nYk4d3RMGqZzG7DitDKrwSTzQc5dRVeXCJjn5N2rOXM
+ jAoaKMStYlzPqAH2crKhsrLM2QtHzzr0c50JZxh0Z3EjvOuXDAshi4RTk4d1zEx6DEpS
+ IeeA==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBysehZKZbmL1fLTsznyBcsXmTjh7BhXZIpIHZCQmwl+DHycFg9qu2kUF/kAS9zi4aNhKr2MIlnVXOdk@nongnu.org
+X-Gm-Message-State: AFq9FYIf3/6jyoJxLt/IuDVaAJnnseEmLuBH9p5g3qj1/0izw0U8qWJr
+ dn/L66ohdNrUO7TFWDvAD509IENoyAVWRjVbMypmd6FOJb02XnSeT7tP9QOldnzc7PE99Mpg3QQ
+ ZD+NJnG6RAufzzpQOfsO6WSdtsXn44lDm2BGCdEWD2K2OKnww7Y7qHtP7VA==
+X-Gm-Gg: AYBFou3+51y+tKVrZd83AVzKsuNOBKToxNlAi4A7g6bc/Mer+/aIH6shc28tMUguTo4
+ Coa57LZALOXzQ0hsxjpMWKiVR6I0M0L9Gfv25hlwq7AIeaa8jQRqYRCgX5hKva7B/5/1OPmlK4j
+ ti/adlto26e4xJ29pJvlYzaJZXV/ioMKSyAbd0FbK2qgseIQ6GoD/yzEERm2vscaiiglDreheCO
+ QZqACUKC4Pc38K4vD06H9UDR3ASW35bCy6VgSY6v5QlDGWC7ClGdWqBTYdsv/F+MIHfjxb78Mvy
+ Z7X/5ubzQtGEJg73ua299JwHvHMxvUwxwu9DT/6Z1+kOBMnTO/yx5+87RIiYEK16S6UgQBjGP/V
+ Ey6qO70vRgDg0wAreuXV6usg0TG/dYMqmduEZClLiLfGKQHP7GQsEES0j
+X-Received: by 2002:a17:90b:1dd1:b0:3a0:c85a:ee12 with SMTP id
+ 98e67ed59e1d1-3ab3aceba09mr3335438a91.41.1791658654424; 
+ Sat, 10 Oct 2026 11:57:34 -0700 (PDT)
+X-Received: by 2002:a17:90b:1dd1:b0:3a0:c85a:ee12 with SMTP id
+ 98e67ed59e1d1-3ab3aceba09mr3335416a91.41.1791658653829; 
+ Sat, 10 Oct 2026 11:57:33 -0700 (PDT)
+Received: from [192.168.1.169] (192-80-163-190.dyn.novuscom.net.
+ [192.80.163.190]) by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-3ab371e2833sm9390660a91.17.2026.10.10.11.57.32
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sat, 10 Oct 2026 11:57:32 -0700 (PDT)
+Message-ID: <79329529-5971-46b1-a8e0-1a6d86f10237@oss.qualcomm.com>
+Date: Sat, 10 Oct 2026 11:57:31 -0700
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 4/6] tcg: namespace target helper symbols for combined
+ builds
+To: luoyonggang@gmail.com, Richard Henderson <richard.henderson@linaro.org>
+Cc: qemu-devel@nongnu.org, Song Gao <17746591750@163.com>,
+ =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Peter Maydell <peter.maydell@linaro.org>, Paolo Bonzini
+ <pbonzini@redhat.com>, Weiwei Li <liwei1518@gmail.com>,
+ Sunil V L <sunilvl@ventanamicro.com>,
+ Philippe Mathieu-Daude <philmd@mailo.com>,
+ =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, qemu-riscv@nongnu.org,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Chao Liu <chao.liu@processmission.com>,
+ Igor Mammedov <imammedo@redhat.com>, Ani Sinha <anisinha@redhat.com>,
+ qemu-arm@nongnu.org, "Michael S. Tsirkin" <mst@redhat.com>
+References: <20260930073935.712-1-luoyonggang@gmail.com>
+ <20260930073935.712-5-luoyonggang@gmail.com>
+ <374ba010-b530-4310-b20f-65ada56cda6b@oss.qualcomm.com>
+ <f8ea6e43-2e6e-48b7-a61c-d9ec2200872c@linaro.org>
+ <CAE2XoE97kuRkF4i2+t=tH0d0dXWjCaNmUjUaVZDPekWimSN3gw@mail.gmail.com>
+From: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
+Content-Language: en-US
+In-Reply-To: <CAE2XoE97kuRkF4i2+t=tH0d0dXWjCaNmUjUaVZDPekWimSN3gw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2001:bc8:30d7:100::1;
- envelope-from=aurelien@aurel32.net; helo=hall.aurel32.net
-X-Spam_score_int: -43
-X-Spam_score: -4.4
-X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+X-Proofpoint-ORIG-GUID: 1uAgSOagXsK7DHPtt6mN3QU7cXDBf1Lw
+X-Proofpoint-GUID: 1uAgSOagXsK7DHPtt6mN3QU7cXDBf1Lw
+X-Authority-Analysis: v=2.4 cv=E6hYNqdl c=1 sm=1 tr=0 ts=6aca8a9f cx=c_pps
+ a=0uOsjrqzRL749jD1oC5vDA==:117 a=9852oil1ID9t5xBSyQ/BEA==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
+ a=NEAV23lmAAAA:8 a=KKAkSRfTAAAA:8 a=daik7hMXr06KtmuEIbsA:9 a=3ZKOabzyN94A:10
+ a=QEXdDO2ut3YA:10 a=mQ_c8vxmzFEMiUWkPHU9:22 a=cvBusfyB2V15izCimMoJ:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEwMDA3NSBTYWx0ZWRfX8sVYm+X/o/xy
+ uPHc/6N5ZVF1ltjUOQyonnguRrw35raOSHV+mJ6pEp88cQpSiyoFHTbCt+ZO3LyfcaVoR05+p4u
+ Gljuf9wtia9NQN7Auf5P6HXbdlX+2AwOH0Kyi8U0WjUkd5dm2cqmHM8a7+LMv/RaBuD/fUCuaF5
+ NRTsbNKyqt4XkaVooHHC7jqssFyUqHBW8K7MBMWp0a3BNjxzNZZSOVU/TRGc9Txdv9s3Jd/mqiS
+ Pq99/JNYzxDAyg3TsMDEZO3aQElbGLolaXSbzVscxLzpLJGclefCZwZ9HNVVvPl93oWZYhr3XJH
+ +bj8DUHk4NMFqrY9KKO2V2jmxnCGsG7ZBsoAslqBS+zurzPpmRLYL1WKzmgZtL7RklZDy8nYZpS
+ NOayIDOXvgwQvJJE20/d/dqzyFoU68Ut5tRvq/cRdhIKps3mkxk8SRaRDmyetsJTJgZ6sMkIy3M
+ fIolTKdfNY2fHCE1Whg==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEwMDA3NSBTYWx0ZWRfX/hm3+9mzf212
+ Ud+Oq/OJUx2Hil/OMwl3ruvNGUuGN9DHpBFsXB3O/KNZ6BmXEXPlV0OjpV6I3Dq8OeNBN0rnQds
+ 1MCnYjxmRPK5gqUOs9mczgcQF7Tc21k=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-10_04,2026-10-09_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ lowpriorityscore=0 malwarescore=0 suspectscore=0 impostorscore=0 phishscore=0
+ bulkscore=0 spamscore=0 adultscore=0 priorityscore=1501 clxscore=1015
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610100075
+Received-SPF: pass client-ip=205.220.168.131;
+ envelope-from=pierrick.bouvier@oss.qualcomm.com;
+ helo=mx0a-0031df01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
+X-Spam_bar: --
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
- UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -71,55 +172,49 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-For logical vector operations (in the case of the RISC-V backend that
-corresponds to and_vec, or_vec and xor_vec), VECE is unused. However,
-tcg_target_const_match() always treat it as an element size to extract
-the corresponding constant element from the whole constant.
+On 10/10/26 1:53 AM, Yonggang Luo wrote:
+> On Sat, Oct 10, 2026 at 3:45 PM Richard Henderson
+> <richard.henderson@linaro.org> wrote:
+>>
+>> On 10/1/26 18:51, Pierrick Bouvier wrote:
+>>> On 9/30/2026 12:39 AM, Yonggang Luo wrote:
+>>>> Use target-specific assembler names and helper metadata for TCG helpers
+>>>> when multiple targets share a binary. The generated prototype maps the
+>>>> generic C helper name to a target-specific linker symbol, for example:
+>>>>
+>>>>       helper_raise_exception
+>>>>           __asm__("helper_i386_raise_exception")
+>>>>
+>>>> This lets target helper definitions keep generic C names while avoiding
+>>>> linker symbol collisions between targets.
+>>>>
+>>> Hi Richard, do you have an opinion on this patch?
+>>>
+>>> We are trying to see if we do renaming per helper, or if we introduce a
+>>> "generic" way to deal with it. I don't have a strong opinion, renaming
+>>> things or adding more macros and build system soup are both ok on my
+>>> side, so direction would depend on your culinary taste.
+>> I think the general direction is good.  Perhaps the specifics need
+>> adjustment.  In particular, using __asm__ to rename symbols is suspect
+>> and likely non-portable to non-ELF hosts like Darwin and Windows.
+> 
+> I have already tested on windows, only not sure about Darwin, let's me
+> create a test on Darwin,
+> because I do not have a CI for Darwin to test it.
+>
 
-This causes the following aarch64 instruction
-  bic v4.8h, #0xf0
-to be translated into the following op:
-  ...
-  and_vec v128,e8,tmp5,tmp4,v128$0xff0fff0fff0fff0f
-  ...
-which is then translated to the following RISC-V instruction:
-  vand.vi v1,v1,15
+You can take a look at (see README):
+https://github.com/p-b-o/qemu-ci#qemu-ci
 
-Fix that by, when VECE is 0 aka MO_8, only extracting the element if the
-it can actually be represented as a duplicated constant.
+It will automatically add a full GitHub CI on top of your repo, 
+including bsd, macos, windows, linux, so it makes easy to ensure things 
+compile correctly on all platforms.
 
-Fixes: 5a63f5998791 ("tcg/riscv: Add support for basic vector opcodes")
-Signed-off-by: Aurelien Jarno <aurelien@aurel32.net>
----
- tcg/riscv64/tcg-target.c.inc | 11 +++++++++--
- 1 file changed, 9 insertions(+), 2 deletions(-)
-
-Changes v1 -> v2:
-- Use dup_const() instead of open coding the constant duplication.
-
-diff --git a/tcg/riscv64/tcg-target.c.inc b/tcg/riscv64/tcg-target.c.inc
-index 14a397117a..1262b71a62 100644
---- a/tcg/riscv64/tcg-target.c.inc
-+++ b/tcg/riscv64/tcg-target.c.inc
-@@ -392,8 +392,15 @@ static bool tcg_target_const_match(int64_t val, int ct,
-         return 1;
-     }
-     if (type >= TCG_TYPE_V64) {
--        /* Val is replicated by VECE; extract the highest element. */
--        val >>= (-8 << vece) & 63;
-+        /*
-+         * For vector logical operations, VECE is unused and equals to 0, so
-+         * we need to check that the constant can properly be represented after
-+         * replication.
-+         */
-+        if ((vece != MO_8) || (val == dup_const(vece, val))) {
-+            /* Val is replicated by VECE; extract the highest element. */
-+            val >>= (-8 << vece) & 63;
-+        }
-     }
-     /*
-      * Sign extended from 12 bits: [-0x800, 0x7ff].
--- 
-2.53.0
+>>
+>>
+>> r~
+> 
+> 
+> 
 
 
