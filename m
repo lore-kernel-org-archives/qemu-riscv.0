@@ -4,46 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2482CA9EBE
-	for <qemu-riscv@archiver.kernel.org>; Sat, 10 Oct 2026 06:08:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F334CA6004
+	for <qemu-riscv@archiver.kernel.org>; Sat, 10 Oct 2026 06:08:27 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xFQCy-0002k7-DA; Sat, 10 Oct 2026 02:05:24 -0400
+	id 1xFQCu-0002iR-Q7; Sat, 10 Oct 2026 02:05:22 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <lyndra@linux.alibaba.com>)
- id 1xFQCn-0002eE-1d; Sat, 10 Oct 2026 02:05:13 -0400
-Received: from [115.124.30.124] (helo=out30-124.freemail.mail.aliyun.com)
+ id 1xFQCo-0002fh-Lr; Sat, 10 Oct 2026 02:05:14 -0400
+Received: from [115.124.30.130] (helo=out30-130.freemail.mail.aliyun.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <lyndra@linux.alibaba.com>)
- id 1xFQCj-00040g-0u; Sat, 10 Oct 2026 02:05:12 -0400
+ id 1xFQCj-00040n-0K; Sat, 10 Oct 2026 02:05:14 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linux.alibaba.com; s=default;
- t=1791612284; h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To;
- bh=vuSlMMWwSFUfzpPAx7aSNr6R6o6NsQjcAOGvvWfOWMU=;
- b=aTzMVW3fIGvYUBD0scuNGpvFf/9eY/2iPKCnUpAQzO+Wu4IXZZJCFrL23hjjLsluLSq23RAYvasTO9PcuSr8eOmqoA9kboD7c/z4PpkwUv0it7PLUkAcKvAfpsnjwsOsPuozvCBG41HOM7ZwMyxvFPfB5uHfvpxMdMOnkN+wtf8=
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R321e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033037009110;
+ t=1791612287; h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To;
+ bh=MELVbowdWiev70Cun12vPpWrPlhqRKU1+hqAi740rCE=;
+ b=AJQExVswiYQ9G9cOn/2D4rTzvXCnSBd8CBP44NlanhnbzNVUxNonurWl4iqg5vhM7YgdYQWr4EyLEThG1glYELjT6/jynV5NXtUyEU3cPhgAF84bnYlpCyQXB9WyvIiK5oO48jO4CIuFleHATypyzWb/IJJit1zsb2fprAsvX8Y=
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R111e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033037026112;
  MF=lyndra@linux.alibaba.com; NM=1; PH=DS; RN=13; SR=0;
- TI=SMTPD_---0XCVKGql_1791612279; 
+ TI=SMTPD_---0XCVKGtk_1791612286; 
 Received: from ea134-sw06.eng.xrvm.cn(mailfrom:lyndra@linux.alibaba.com
- fp:SMTPD_---0XCVKGql_1791612279 cluster:ay36) by smtp.aliyun-inc.com;
- Sat, 10 Oct 2026 14:04:41 +0800
+ fp:SMTPD_---0XCVKGtk_1791612286 cluster:ay36) by smtp.aliyun-inc.com;
+ Sat, 10 Oct 2026 14:04:46 +0800
 From: TANG Tiancheng <lyndra@linux.alibaba.com>
-Subject: [PATCH v3 00/14] RISC-V TCG PMU correctness fixes
-Date: Sat, 10 Oct 2026 14:04:24 +0800
-Message-Id: <20261010-riscv-pmu-correctness-v3-0-712bf814a7be@linux.alibaba.com>
+Date: Sat, 10 Oct 2026 14:04:32 +0800
+Subject: [PATCH v3 08/14] target/riscv: Require Sscofpmf for non-fixed
+ event overflow
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAGnVyWoC/3WPS27DIBRFt2IxLtYDgwNWVGUfVQd8YyR/UrCtR
- JH3XkwmHTQTpIv0zj33iZKLwSXUVU8U3RZSmKccmo8KmV5NV4eDzRlRoC0IesIxJLPh27hiM8f
- ozDK5lLBXQoC30jBhUb69RefDvXC/vl85up8145fXJ9IquYwYx7B0lZdcnCwDxk17MhassEJbY
- 7kFrbludSPz25gDPeY+Vby66nxoEQABDSccakppgwn2MSymH9xDz30uvlxHFYY6l32iQ6YPaZn
- jo2zeSLEp8yS8m7cRDJh74hlhXEghL0OY1nuthqCVVge6kDf6h0bgHY0eNKuyslRgWvYfbd/3X
- 4uACKSdAQAA
-X-Change-ID: 20260827-riscv-pmu-correctness-fa880fd9c48d
+Message-Id: <20261010-riscv-pmu-correctness-v3-8-712bf814a7be@linux.alibaba.com>
+References: <20261010-riscv-pmu-correctness-v3-0-712bf814a7be@linux.alibaba.com>
+In-Reply-To: <20261010-riscv-pmu-correctness-v3-0-712bf814a7be@linux.alibaba.com>
 To: qemu-devel@nongnu.org
 Cc: Zephyr Li <fritchleybohrer@gmail.com>, 
  Palmer Dabbelt <palmer@dabbelt.com>, 
@@ -57,17 +53,17 @@ Cc: Zephyr Li <fritchleybohrer@gmail.com>,
  =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>, 
  TANG Tiancheng <lyndra@linux.alibaba.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1791612280; l=5287;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1791612280; l=4742;
  i=lyndra@linux.alibaba.com; s=20250909; h=from:subject:message-id;
- bh=s2U6pnU34o9MgaAOeQItSKVqqmy7QYZoe00EEGwOHEU=;
- b=24k/+3gcijJmZqCA5lhVDmahjTGLyNJth61cEexL8FADYYElf7tXSAojYdWSnMfoPvMCQvydH
- g56M3qxBRGzAK2PfReQ0Cnxgu2q7bFVLAiZiq7oSI87npPvKg2Ah9rg
+ bh=KJ1kJpiccmMcFfiPhpzaI4VLK1Nhx/C5cSDsw+TFC64=;
+ b=ECSYopXr99AqVMOBxUQfo9W35OB9j1A4jAsCGHS89B+SuhM8LIyz5ZrbpjZK01317afkCh08m
+ LujbH1LCPu1CiGhnofknngVKCvZqfay5AafUGFPxaodANZFP73hrl56
 X-Developer-Key: i=lyndra@linux.alibaba.com; a=ed25519;
  pk=GQh4uOSLVucXGkaZfEuQ956CrYS14cn1TA3N8AiIjBw=
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.124 (deferred)
-Received-SPF: pass client-ip=115.124.30.124;
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.130 (deferred)
+Received-SPF: pass client-ip=115.124.30.130;
  envelope-from=lyndra@linux.alibaba.com;
- helo=out30-124.freemail.mail.aliyun.com
+ helo=out30-130.freemail.mail.aliyun.com
 X-Spam_score_int: -166
 X-Spam_score: -16.7
 X-Spam_bar: ----------------
@@ -91,105 +87,176 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This series fixes RISC-V TCG PMU accounting, overflow notification, and
-migration. It is based on v3 of Zephyr Li's "target/riscv: fix RV32
-fixed counter accesses" [1], which is not included here.
+riscv_pmu_incr_ctr() sets OF and LCOFIP on wrap even when Sscofpmf is
+disabled. Use the shared overflow helper to require Sscofpmf and suppress
+notifications while OF is set without stopping the counter.
 
-The patches allow multiple HPM counters to select the same event and
-preserve counts across selector, privilege-filter, and inhibit writes.
-They use consistent cycle/instruction sources and compute the shared
-overflow deadline from all eligible counters. Timer callbacks queue
-checks on the owner vCPU instead of racing MTTCG execution.
+Test DTLB overflow with Sscofpmf enabled and disabled, including
+notification suppression and continued counting.
 
-Migration saves counter values including pending increments and restores
-destination-local source baselines, event mappings, and overflow
-scheduling. A new cpu/pmu-fixed subsection carries mcyclecfg/minstretcfg
-and identifies this format. All TCG CPUs require the subsection; loading
-older TCG streams without it is rejected. Source and destination still
-need compatible CPU configurations. KVM PMU migration is unchanged.
-
-The reset changes preserve the final counts in the old privilege/V mode
-before entering M-mode with V=0.
-
-TCG tests cover RV32/RV64 counter accesses, delegated registers, selector
-and filter changes, multiple counters per event, overflow notification
-with and without Sscofpmf, instruction exceptions, and reset. The RV32
-HPM tests also cover full-width accesses through the shared counter path.
-
-[1] https://lore.kernel.org/qemu-devel/20261008035150.2223-1-fritchleybohrer@gmail.com/
-Based-on: <20261008035150.2223-1-fritchleybohrer@gmail.com>
-
+Fixes: 14664483457b ("target/riscv: Add sscofpmf extension support")
+Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Signed-off-by: TANG Tiancheng <lyndra@linux.alibaba.com>
 ---
-Changes in v3:
-- Rebase on master f9587d4045c6 and Zephyr Li's RV32 fix v3.
-- Replace "Earlier expiries" with "Timer expirations before the flag
-  is cleared" in patch 11's commit message.
-- Add a Fixes trailer to the virtualization-reset fix (patch 13).
-- Link to v2: https://lore.kernel.org/qemu-devel/20260910-riscv-pmu-correctness-v2-0-5da5159a0c64@linux.alibaba.com
+ target/riscv/tcg/pmu.c                      |   6 +-
+ tests/tcg/riscv64/sscofpmf-event-overflow.S | 103 ++++++++++++++++++++++++++++
+ tests/tcg/riscv64/system/meson.build        |  15 ++++
+ 3 files changed, 119 insertions(+), 5 deletions(-)
 
-Changes in v2:
-- Rebase on current master and Zephyr Li's RV32 fix v2.
-- Register the system TCG tests with Meson and use -bios loading.
-- Merge smcdeleg-counter-rv32.S and smcdeleg-event-rv32.S into
-  smcdeleg-rv32.S (patch 6).
-- Use CSR names or local CSR-number macros in tests.
-- Use UINT32_MAX for delegated high-half write-mask checks (patch 6).
-  The caller already requires XLEN=32.
-- Link to v1: https://lore.kernel.org/qemu-devel/20260907-riscv-pmu-correctness-v1-0-5f1f41458989@linux.alibaba.com
+diff --git a/target/riscv/tcg/pmu.c b/target/riscv/tcg/pmu.c
+index 16942e53489cd5a2d2dd055fdffef07d04d59465..2f600c5a0fc2d7ba380ef34f89af6366e3e27884 100644
+--- a/target/riscv/tcg/pmu.c
++++ b/target/riscv/tcg/pmu.c
+@@ -448,11 +448,7 @@ int riscv_pmu_incr_ctr(RISCVCPU *cpu, enum riscv_pmu_event_idx event_idx)
+         counter = &env->pmu_ctrs[ctr_idx];
+         if (counter->mhpmcounter_val == max_val) {
+             counter->mhpmcounter_val = 0;
+-            /* Generate interrupt only if OF bit is clear */
+-            if (!(env->mhpmevent_val[ctr_idx] & MHPMEVENT_BIT_OF)) {
+-                env->mhpmevent_val[ctr_idx] |= MHPMEVENT_BIT_OF;
+-                riscv_cpu_update_mip(env, MIP_LCOFIP, BOOL_TO_MASK(1));
+-            }
++            riscv_pmu_set_overflow(env, ctr_idx);
+         } else {
+             counter->mhpmcounter_val++;
+         }
+diff --git a/tests/tcg/riscv64/sscofpmf-event-overflow.S b/tests/tcg/riscv64/sscofpmf-event-overflow.S
+new file mode 100644
+index 0000000000000000000000000000000000000000..cce06da10f9c7c20c18c7863b58b6dd724c45182
+--- /dev/null
++++ b/tests/tcg/riscv64/sscofpmf-event-overflow.S
+@@ -0,0 +1,103 @@
++/* SPDX-License-Identifier: GPL-2.0-or-later */
++
++/* Non-fixed event overflow with and without Sscofpmf. */
++
++#ifndef EXPECT_SSCOFPMF
++#define EXPECT_SSCOFPMF 1
++#endif
++
++	.option	norvc
++	.option	norelax
++
++	.text
++	.global _start
++_start:
++	/* Unexpected exceptions report the current check number. */
++	li	t4, 1
++	lla	t0, exit
++	csrw	mtvec, t0
++	csrw	mie, zero
++	csrw	mip, zero
++	csrw	mcountinhibit, zero
++	csrw	mhpmevent3, zero
++	li	t0, -1
++	csrw	mhpmcounter3, t0
++	li	t0, 0x10019		/* DTLB read miss */
++	csrw	mhpmevent3, t0
++
++	/* One load after flushing the TLB must wrap the counter to zero. */
++	sfence.vma
++	lla	t0, first_page
++	lw	t1, 0(t0)
++	csrr	t0, mhpmcounter3
++	bnez	t0, exit
++
++	/* Only Sscofpmf turns that wrap into OF and LCOFIP. */
++	li	t4, 2
++	csrr	t0, mhpmevent3
++	srli	t0, t0, 63
++	li	t1, EXPECT_SSCOFPMF
++	bne	t0, t1, exit
++	li	t4, 3
++	csrr	t0, mip
++	srli	t0, t0, 13
++	andi	t0, t0, 1
++	bne	t0, t1, exit
++
++	/* Clearing LCOFIP alone must not re-enable overflow notification. */
++	li	t0, 1 << 13
++	csrc	mip, t0
++	li	t0, -1
++	csrw	mhpmcounter3, t0
++	sfence.vma
++	lla	t0, second_page
++	lw	t1, 0(t0)
++	li	t4, 4
++	csrr	t0, mhpmcounter3
++	bnez	t0, exit
++	li	t4, 5
++	csrr	t0, mhpmevent3
++	srli	t0, t0, 63
++	li	t1, EXPECT_SSCOFPMF
++	bne	t0, t1, exit
++	li	t4, 6
++	csrr	t0, mip
++	li	t1, 1 << 13
++	and	t0, t0, t1
++	bnez	t0, exit
++
++	/* Overflow notification must not stop event counting. */
++	sfence.vma
++	lla	t0, third_page
++	lw	t1, 0(t0)
++	li	t4, 7
++	csrr	t0, mhpmcounter3
++	li	t1, 1
++	bne	t0, t1, exit
++	li	t4, 0
++
++exit:
++	lla	a1, semiargs
++	li	t0, 0x20026		/* ADP_Stopped_ApplicationExit */
++	sd	t0, 0(a1)
++	sd	t4, 8(a1)
++	li	a0, 0x20		/* TARGET_SYS_EXIT_EXTENDED */
++	.balign	16
++	slli	zero, zero, 0x1f
++	ebreak
++	srai	zero, zero, 0x7
++	j	.
++
++	.data
++	.balign	4096
++first_page:
++	.word	0
++	.balign	4096
++second_page:
++	.word	0
++	.balign	4096
++third_page:
++	.word	0
++	.balign	16
++semiargs:
++	.space	16
+diff --git a/tests/tcg/riscv64/system/meson.build b/tests/tcg/riscv64/system/meson.build
+index 6f13ee95b798250d7b4f8f82344aa550c794888f..3ad251586d11a728ea989859889751bd58198dd2 100644
+--- a/tests/tcg/riscv64/system/meson.build
++++ b/tests/tcg/riscv64/system/meson.build
+@@ -99,6 +99,21 @@ tests += {
+   },
+ }
+ 
++tests += {
++  'sscofpmf-event-overflow.S': {
++    'cflags': cflags,
++    'qemu_args': ['-cpu', 'max', qemu_args],
++  },
++}
++
++tests += {
++  'sscofpmf-event-overflow.S': {
++    'exe_name': 'sscofpmf-event-overflow-off',
++    'cflags': cflags + ['-DEXPECT_SSCOFPMF=0'],
++    'qemu_args': ['-cpu', 'max,sscofpmf=false', qemu_args],
++  },
++}
++
+ tests += {
+   'sscofpmf-cycle-overflow.S': {
+     'cflags': cflags,
 
----
-TANG Tiancheng (14):
-      target/riscv: Preserve PMU state across event selector writes
-      target/riscv: Support multiple counters per PMU event
-      target/riscv: Use VM-elapsed sources for fixed PMU events
-      target/riscv: Preserve MINH on delegated config reads
-      target/riscv: Preserve minstretcfgh on RV32 minstretcfg writes
-      target/riscv: Fix RV32 accesses to delegated PMU registers
-      target/riscv: Preserve fixed counters across PMU state changes
-      target/riscv: Require Sscofpmf for non-fixed event overflow
-      target/riscv: Rebuild fixed-event PMU overflow deadlines
-      target/riscv: Apply minstret exception accounting to HPM counters
-      target/riscv: Process PMU timer expiry on the owner vCPU
-      target/riscv: Migrate fixed PMU counter state
-      target/riscv: Clear virtualization mode on reset
-      target/riscv: Preserve fixed PMU state across reset
-
- system/cpu-timers.c                         |   4 +-
- system/cpus.c                               |   6 +-
- target/riscv/cpu.c                          |  17 +
- target/riscv/cpu.h                          |  14 +-
- target/riscv/machine.c                      |  92 +++-
- target/riscv/tcg/cpu_helper.c               |   2 +
- target/riscv/tcg/csr.c                      | 278 +++-------
- target/riscv/tcg/pmu.c                      | 793 +++++++++++++++++++---------
- target/riscv/tcg/pmu.h                      |  29 +-
- target/riscv/tcg/tcg-cpu.c                  |  10 +
- tests/tcg/riscv32/pmu-fixed-rv32.S          |  90 ++++
- tests/tcg/riscv32/pmu-minstretcfg-rv32.S    |  52 ++
- tests/tcg/riscv32/smcdeleg-minh-rv32.S      |  78 +++
- tests/tcg/riscv32/smcdeleg-rv32.S           | 115 ++++
- tests/tcg/riscv32/sscofpmf-event-rv32.S     |  99 ++++
- tests/tcg/riscv32/system/meson.build        |  35 ++
- tests/tcg/riscv64/pmu-cycle-controls.S      | 107 ++++
- tests/tcg/riscv64/pmu-lpad.S                |  72 +++
- tests/tcg/riscv64/pmu-reset-vs.S            | 105 ++++
- tests/tcg/riscv64/smcdeleg-minh.S           |  78 +++
- tests/tcg/riscv64/smcdeleg-sxl32.S          | 233 ++++++++
- tests/tcg/riscv64/sscofpmf-cycle-overflow.S |  58 ++
- tests/tcg/riscv64/sscofpmf-event-overflow.S | 103 ++++
- tests/tcg/riscv64/sscofpmf-overflow.S       | 134 +++++
- tests/tcg/riscv64/system/meson.build        |  88 +++
- tests/tcg/riscv64/test-minstret-ecall.S     |  26 +
- 26 files changed, 2252 insertions(+), 466 deletions(-)
----
-base-commit: f9587d4045c67cd0d8d8bdcd5d0bb5b6b395b63c
-change-id: 20260827-riscv-pmu-correctness-fa880fd9c48d
-prerequisite-message-id: <20261008035150.2223-1-fritchleybohrer@gmail.com>
-prerequisite-patch-id: fc09febb37e6eff15ef860aa49a5d4f85a0f2ee9
-
-Best regards,
 -- 
-TANG Tiancheng <lyndra@linux.alibaba.com>
+2.43.0
 
 
