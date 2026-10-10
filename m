@@ -4,122 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 567C8CA9EBE
-	for <qemu-riscv@archiver.kernel.org>; Sat, 10 Oct 2026 09:35:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBA3DCA9EBE
+	for <qemu-riscv@archiver.kernel.org>; Sat, 10 Oct 2026 11:51:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xFTU1-0002ew-2G; Sat, 10 Oct 2026 05:35:13 -0400
+	id 1xFVbs-00060O-JJ; Sat, 10 Oct 2026 07:51:28 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xFTTz-0002db-Cl
- for qemu-riscv@nongnu.org; Sat, 10 Oct 2026 05:35:11 -0400
-Received: from mail-ed1-x531.google.com ([2a00:1450:4864:20::531])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1xFVbp-000607-BH
+ for qemu-riscv@nongnu.org; Sat, 10 Oct 2026 07:51:25 -0400
+Received: from mail-wm1-x32d.google.com ([2a00:1450:4864:20::32d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xFTTw-0005np-B3
- for qemu-riscv@nongnu.org; Sat, 10 Oct 2026 05:35:11 -0400
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-6aa9164072cso753614a12.2
- for <qemu-riscv@nongnu.org>; Sat, 10 Oct 2026 02:35:07 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1791624906; cv=none;
- d=google.com; s=arc-20260327;
- b=Y0sn7JH3LI66A+u1cjk0406sGGCia2ZQTw7IUxibbgjuPxEEloJkuZ+P2nmRh7+oNy
- uTof5sDyjETVEsTSBe3GXfNcZtB78r8QXgfIU0rfk1R51E6zrHmf1zDmIEMVP8l+Ylyh
- 90ILL4H3aHS5WmBfA8SJB0rXE6Hqve8lnlRSPo/Wav7K9oXR1PzhiGT4JLDQw9fXe+RM
- DN3Oyr6G7yUg8YP1eQfijveRdkbh9wfhShjec0wEqa4o4weMLvXncI/pJCNdjU+UH1/F
- hQV93mO7u+ASI6IJdAW8T+l48Ij4s98DIjSuejIoWiWqYseVkgMa16Yq7LuLGPxPU+Rk
- Q0kw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :reply-to:in-reply-to:references:mime-version:dkim-signature;
- bh=vxD9FfkU6Xbu8Lutb6s8Zo3WMa+ylUcN6yQWbd4+aLk=;
- fh=6zIxHpST7R0BiLYAZ563PTihkf3WZIoD+u6nwC0LE0Q=;
- b=AAPF5IoDLlKztQCX3LzZzOkVheIF5asY3DLSc8VWr82m3/scOzr3N7MeETKmuH0EHn
- hlsrEeuLjb0bdck6njRhWHLP3CisWWyoTzY71XXSTdb5wzLy7gWXIVhPlEa7VQyqzkA4
- YKAPjUNXiOk8qMfRM0Jj0mHyvt02hDtxXVRSQ5cSQb+QrO6TGjozkobVW2D8xI+kcp0/
- TWGRlJ0mW3z3RloSd+DWnC5/7JUbAXNKSFgUwAnH37fiUYhs0yQ+XYYk7rOPfVEf8yiL
- /6H9X6/eROQSXiGyXHN/Bc6NFHXcI+UMWzHgEEsVwsR0qC0jthhkOB+WRmZtKKysTdb/
- nFiQ==; darn=nongnu.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1xFVbn-00024N-NZ
+ for qemu-riscv@nongnu.org; Sat, 10 Oct 2026 07:51:25 -0400
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-4a16bc2278aso3861915e9.1
+ for <qemu-riscv@nongnu.org>; Sat, 10 Oct 2026 04:51:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1791624906; x=1792229706; darn=nongnu.org;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:reply-to:in-reply-to:references:mime-version:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=vxD9FfkU6Xbu8Lutb6s8Zo3WMa+ylUcN6yQWbd4+aLk=;
- b=UciSj4PJBa4Y2PqJmRbOORTcHVvHf2ARHfLMQ7pCkyN3JCcMWoegOZXc71OKWAico8
- r+pvU5nAEGsFRcK98jb+NOSZ/pM4EtdZRag+NNPQ4+z7FnZpGnikcQIY6sin0sXZVQ3B
- l9+/zTVfYLpXgi4/k1YJh7ievyniyRkdV4ByeLP7KTZLlsiXu5SSPRf5YzCxJvjTGAf7
- 2IUq2cPWBKZXK0xZs+HnaForufMUcxXIStfYe98VOIHF2wtRZTL9msLCf41ktM19zMj2
- 7uNCW9GUvPNHZ1/xCGTKyEdlJympjzREeVE0Wi7Gt5qQxjG4jrg3TVLbVShEoYaQf1P7
- 9lWg==
+ d=linaro.org; s=google; t=1791633081; x=1792237881; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=7wAIcA5lNwzgNhb1RI98AiVDnxNrFm5x/TNXElweJy4=;
+ b=pkTEyKPL2xbmTdW7/PFFbBSODc2LbrqfAza/On5lasA9N7Dt+NSvTsSOjbA4AX5c0Y
+ hCmYXu+6daXQd/rulLRKk3f5hIbB+sqLZQiF8PDA5yr4JVAJVty13EgY+jp1ZCIP0p7b
+ rUh9gjtC/4cFJlyt+QJvgWSor5pZKG+VwdH7iL+SiNSpyWvB/SugoVsl5BdWusSzo7Ci
+ XzWdrgoou5s1rWG/gYE8wkx/33v1ODVzTz7GZZXvsxPeYP5eOJcBzKbghziZ0IJV5Dwl
+ b7QyeljJPoVSavJCdukz1yqDfrUcUlbvLGGHsQ9oiaNBS11JrxlMdzceY1ADOBmi5NQO
+ WsZw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1791624906; x=1792229706;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:reply-to:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=vxD9FfkU6Xbu8Lutb6s8Zo3WMa+ylUcN6yQWbd4+aLk=;
- b=UBi2Fdxq8Jy9P2ey3hpQj60N5etvfMAQdFoGGnoMWzFtn8FY+ot7gFi5cAjiPMHnLh
- jmg+UE79CFLU5iRMQ+snVKXq2d3tPl+jTwzqTlVpGBVWJcyDpEKr1KhNs9kIvoKdHfvt
- kYs67wPTRLrkAV8L7EePWSf8dycN0xph6nDgPxD0QApcLu7AO1GQODcB9oM2JiPU+DEw
- 6YJlTo8gUrzOe2TznN0oFRdw0qOPr3IPuy3U/sjLleW1M5ln8RECybx6i5QA9zDU5M0K
- GG7tZI7ioIuhJ7PMmF92Vpnh/FQXcXjvjaKF5MVg5Zj6lxaK6E4tgKwE/9rum/OStNOK
- ciFw==
+ d=1e100.net; s=20260707; t=1791633081; x=1792237881;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=7wAIcA5lNwzgNhb1RI98AiVDnxNrFm5x/TNXElweJy4=;
+ b=odfD0HExZi/NFCwKJ1eH/4kurgfrASvEil2R04gRHGv1wugauDs0AMBqeVDZB82HhE
+ V3k6Foxn+SiDvlmXGogmiR65j96gy3/Jo91bxUaL0AN007XLnrJzykFi0KuKj7tT6F0a
+ 5PZXrWn1tQX6v5nWQ1P90QClcYF/nBow37GOoZ/RTo6sJTbIYOkJuSJmm1dmM6/5HdpB
+ 56JHeBq63Zs/BKvdwoXJE6cz0P9PX2OAI0unmWEKOaQ3GTpFs9fsxsV13qyfq/eDrR1n
+ Bv1RCo1EKCxYhq/JoBI1/BxwV55vtMowio09+6Hi5Kh5/Lwlj04VpHgQwqS1czkGtFA/
+ LO7Q==
 X-Forwarded-Encrypted: i=1;
- AKwUvBy4wF6RI4hvzzuY4/K+JIif7OpPy2GcgUdFfTFMWyCTNd4xIxalYNrSVbjm0JuQC7eFuPLxGeKuvXfq@nongnu.org
-X-Gm-Message-State: AFq9FYIh/64aYoSvCPBg1zLswBezyj8Pp1Y1MwwG11brbfty7Sn3icxW
- xC+Cd4s8BC2BLZerp7yRYCfy70tpxU3GjY49pSQ8DDq1qrz7zv6sa0zx+hdFOvB589GTbfdaljS
- Kebl2CvIFPIVnVT45+6F/UeGbvj4x7e0=
-X-Gm-Gg: AYBFou10iuKDx+MxIIXqj0OK7WfMaE8BUdEmy2S2Q6PQoZbwmP8Azcf77/giGUmVAj6
- KqRCk08QY/7GNX3q40Ex1pLw5xIIckNqccAaKg31FPaOgWT2BCH6XQtsBGr0sY+mnQ8yVE+Zft/
- rT76oGSGOm5FYDJK7sCXz2BgvlbmxZCgaX8sV7821WG7Xtyk/iLi1indC0IzWvzFyxXAJFmsiJE
- Er0RV5U982ebyzbGPe/pGiQR9epVlCkLCd7ahg8XHwxxqMps+6mX5rcRzeFNpTKwZIeHj7sJ5Uf
- D4lZBbLoG+oyEbQe186eqlVvyM5ClHt+yFynZZBbZ054hs9Iu+zL3kVI
-X-Received: by 2002:a05:6402:4486:b0:6ac:73f8:2e4f with SMTP id
- 4fb4d7f45d1cf-6b17c268e61mr3870711a12.29.1791624905806; Sat, 10 Oct 2026
- 02:35:05 -0700 (PDT)
+ AKwUvBz1CdDSTqoC0NSkVwmwhZE9Vjj9GHMresW2SdXJIalLZNPJbDc3Do/tJAHvF/kRfcJZn2HahlXeXJp7@nongnu.org
+X-Gm-Message-State: AFq9FYKSAXYpAGo/hShttP+flv2ZhRFQnuGeIbcgfbm/BQlpMjUyytbw
+ u6uLFkobKyJkYAhucFGmGv+WoEb5VngHspcrZX2cYsyRdTVqr5ByTHwM3DSjbt1FQgo=
+X-Gm-Gg: AYBFou2MD1Zo/7cq+Fe0/Up7m6h/uRYSM6kh8eMxmWeVMu0wWEBu+d2090FUZ+BJNuo
+ gVXxEedOkucZpWtbilHlnXauZQm4KGZW041hfx+X1NGEz1Nj9cgabMg0ywBS/qP9Fd5GZsiLWN1
+ x7EAwWjLd9059Xo/KGmWNXfiEI+f/jmw5ZyGK5LmYmwJXwcbi79zpIa4s3ctD2x/ymnSg0K7BRK
+ xJnDVJjZwOkD6TLtRTPovyYD0oAs+/YN3tLAvVzIeDyuNMrWqyErPkqg0h73Po9jpy+VUy6b/gT
+ GP5+tAgkWTjBK1jgiO4+UZWrnLiGYxrEj96MugIpwh+Gc5kmtD+Keb2ihpdeIbNVhtjIQvNoE74
+ xqJVKDFSuQFjesAwCucFSRYWkQF6l+ocGu2X8Yh9rZcmQheaW84Zz3yFyqyKLTtrHpi62CTI4UC
+ 1ZkPYr0QEpAdLaqVl6mqjVyk7lZVfi33qERqf+5Y/BIIEGi7bd5m8Lt5h+b7TOyFjorfC6nlVO3
+ BtSekncqF6XGHugtORpeFfjBhmC1KCb9Hojf+hVmyKERFT9DR9pBsY=
+X-Received: by 2002:a05:600c:3e8f:b0:4a0:1c0e:b057 with SMTP id
+ 5b1f17b1804b1-4a18e44653cmr90628935e9.4.1791633081454; 
+ Sat, 10 Oct 2026 04:51:21 -0700 (PDT)
+Received: from ?IPV6:2a00:1e:e082:2901:5ea3:cc86:f483:9740?
+ ([2a00:1e:e082:2901:5ea3:cc86:f483:9740])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4a18be8c5e7sm173620375e9.4.2026.10.10.04.51.20
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sat, 10 Oct 2026 04:51:21 -0700 (PDT)
+Message-ID: <f89fc94b-ef64-4421-b369-4845780077ca@linaro.org>
+Date: Sat, 10 Oct 2026 13:51:18 +0200
 MIME-Version: 1.0
-References: <20260930073935.712-1-luoyonggang@gmail.com>
- <20260930073935.712-5-luoyonggang@gmail.com>
- <374ba010-b530-4310-b20f-65ada56cda6b@oss.qualcomm.com>
- <f8ea6e43-2e6e-48b7-a61c-d9ec2200872c@linaro.org>
- <CAE2XoE97kuRkF4i2+t=tH0d0dXWjCaNmUjUaVZDPekWimSN3gw@mail.gmail.com>
- <e87d9000-6f45-40ec-80e1-f6d0954538f0@linaro.org>
-In-Reply-To: <e87d9000-6f45-40ec-80e1-f6d0954538f0@linaro.org>
-From: Yonggang Luo <luoyonggang@gmail.com>
-Date: Sat, 10 Oct 2026 17:34:53 +0800
-X-Gm-Features: AclHuK9N5U1RFhjLm-C6KKBTbS1R7F2B0-Q6q98mriL4P9vm64FvddRiEl34D_E
-Message-ID: <CAE2XoE-aV8asmUQ+FOZjHBEzf5O4uB2h=iWO-AARqpZemY3-3Q@mail.gmail.com>
-Subject: Re: [PATCH v2 4/6] tcg: namespace target helper symbols for combined
- builds
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, qemu-devel@nongnu.org,
- Song Gao <17746591750@163.com>,
- =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
- Alistair Francis <alistair.francis@wdc.com>,
- Peter Maydell <peter.maydell@linaro.org>, 
- Paolo Bonzini <pbonzini@redhat.com>, Weiwei Li <liwei1518@gmail.com>, 
- Sunil V L <sunilvl@ventanamicro.com>, Philippe Mathieu-Daude <philmd@mailo.com>,
- =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>, 
- Jiaxun Yang <jiaxun.yang@flygoat.com>, qemu-riscv@nongnu.org, 
- Palmer Dabbelt <palmer@dabbelt.com>, 
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] tcg/riscv64: Remove vector min/max ops with immediates
+To: Aurelien Jarno <aurelien@aurel32.net>, Palmer Dabbelt
+ <palmer@dabbelt.com>, Alistair Francis <Alistair.Francis@wdc.com>,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Chao Liu <chao.liu@processmission.com>, 
- Igor Mammedov <imammedo@redhat.com>, Ani Sinha <anisinha@redhat.com>,
- qemu-arm@nongnu.org, "Michael S. Tsirkin" <mst@redhat.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::531;
- envelope-from=luoyonggang@gmail.com; helo=mail-ed1-x531.google.com
+ "open list:RISC-V TCG target" <qemu-riscv@nongnu.org>,
+ "open list:All patches CC here" <qemu-devel@nongnu.org>
+References: <20261008181611.3015838-1-aurelien@aurel32.net>
+From: Richard Henderson <richard.henderson@linaro.org>
+Content-Language: en-US
+In-Reply-To: <20261008181611.3015838-1-aurelien@aurel32.net>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::32d;
+ envelope-from=richard.henderson@linaro.org; helo=mail-wm1-x32d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
@@ -134,66 +106,24 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Reply-To: luoyonggang@gmail.com
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Sat, Oct 10, 2026 at 5:07=E2=80=AFPM Richard Henderson
-<richard.henderson@linaro.org> wrote:
->
-> On 10/10/26 10:53, Yonggang Luo wrote:
-> > On Sat, Oct 10, 2026 at 3:45=E2=80=AFPM Richard Henderson
-> > <richard.henderson@linaro.org> wrote:
-> >>
-> >> On 10/1/26 18:51, Pierrick Bouvier wrote:
-> >>> On 9/30/2026 12:39 AM, Yonggang Luo wrote:
-> >>>> Use target-specific assembler names and helper metadata for TCG help=
-ers
-> >>>> when multiple targets share a binary. The generated prototype maps t=
-he
-> >>>> generic C helper name to a target-specific linker symbol, for exampl=
-e:
-> >>>>
-> >>>>       helper_raise_exception
-> >>>>           __asm__("helper_i386_raise_exception")
-> >>>>
-> >>>> This lets target helper definitions keep generic C names while avoid=
-ing
-> >>>> linker symbol collisions between targets.
-> >>>>
-> >>> Hi Richard, do you have an opinion on this patch?
-> >>>
-> >>> We are trying to see if we do renaming per helper, or if we introduce=
- a
-> >>> "generic" way to deal with it. I don't have a strong opinion, renamin=
-g
-> >>> things or adding more macros and build system soup are both ok on my
-> >>> side, so direction would depend on your culinary taste.
-> >> I think the general direction is good.  Perhaps the specifics need
-> >> adjustment.  In particular, using __asm__ to rename symbols is suspect
-> >> and likely non-portable to non-ELF hosts like Darwin and Windows.
-> >
-> > I have already tested on windows, only not sure about Darwin, let's me
-> > create a test on Darwin,
-> > because I do not have a CI for Darwin to test it.
-> In particular, I saw no use of __USER_LABEL_PREFIX__, which is required
-> for portability.
+On 10/8/26 20:16, Aurelien Jarno wrote:
+> RVV 1.0 only defines vmin, vminu, vmax and vmaxu instructions for the
+> vector-vector and vector-scalar case, not the for vector-immediate case.
+> Remove the immediate variant from TCG code generation.
+> 
+> Fixes: 1631f19b04fe ("tcg/riscv: Implement vector min/max ops")
+> Signed-off-by: Aurelien Jarno<aurelien@aurel32.net>
+> ---
+>   tcg/riscv64/tcg-target.c.inc | 20 ++++++++------------
+>   1 file changed, 8 insertions(+), 12 deletions(-)
 
-What does this mean?
-I am using TCG_HELPER_PREFIX to identify different base_arch
-+            '-DTCG_HELPER_PREFIX=3D' + target_base_arch.to_lower()
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
->
->
-> r~
+Thanks, queued to tcg-next.
 
 
-
---=20
-         =E6=AD=A4=E8=87=B4
-=E7=A4=BC
-=E7=BD=97=E5=8B=87=E5=88=9A
-Yours
-    sincerely,
-Yonggang Luo
+r~
 
