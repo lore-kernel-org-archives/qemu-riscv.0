@@ -4,72 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81C07CA6004
-	for <qemu-riscv@archiver.kernel.org>; Sat, 10 Oct 2026 06:10:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8B5FCA9EBE
+	for <qemu-riscv@archiver.kernel.org>; Sat, 10 Oct 2026 06:44:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xFQDI-0002nR-0a; Sat, 10 Oct 2026 02:05:44 -0400
+	id 1xFQox-0006ze-AE; Sat, 10 Oct 2026 02:44:40 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <lyndra@linux.alibaba.com>)
- id 1xFQCp-0002g4-Ha; Sat, 10 Oct 2026 02:05:16 -0400
-Received: from [115.124.30.131] (helo=out30-131.freemail.mail.aliyun.com)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1xFQot-0006yu-MU; Sat, 10 Oct 2026 02:44:35 -0400
+Received: from [115.124.30.101] (helo=out30-101.freemail.mail.aliyun.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <lyndra@linux.alibaba.com>)
- id 1xFQCj-00040z-JF; Sat, 10 Oct 2026 02:05:15 -0400
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1xFQom-00075i-Sf; Sat, 10 Oct 2026 02:44:35 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linux.alibaba.com; s=default;
- t=1791612291; h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To;
- bh=gX8QLqnW2TXRtibakJdxF3o7Jtgbdv3RBeWGvu7oSnc=;
- b=oted3b02fmpGSdxyTLCipC0OhseJawxLIwkdAdYRbQrNaprzJQRlv+0jx6POG5qbU2I2YHFIiuuDsr3nw0F3IWGNvE94P8PivEdUHluC7KLXB4/498ncGGG1cQdhWbYh0Wlu5r57xhQtCn7J3eHjbaNkmbkozR89og+jubVQQXs=
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R491e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033045133197;
- MF=lyndra@linux.alibaba.com; NM=1; PH=DS; RN=13; SR=0;
- TI=SMTPD_---0XCVKGv7_1791612290; 
-Received: from ea134-sw06.eng.xrvm.cn(mailfrom:lyndra@linux.alibaba.com
- fp:SMTPD_---0XCVKGv7_1791612290 cluster:ay36) by smtp.aliyun-inc.com;
- Sat, 10 Oct 2026 14:04:50 +0800
-From: TANG Tiancheng <lyndra@linux.alibaba.com>
-Date: Sat, 10 Oct 2026 14:04:38 +0800
-Subject: [PATCH v3 14/14] target/riscv: Preserve fixed PMU state across reset
+ t=1791614637; h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type;
+ bh=A5g9krbisREDhfFNFmmtBK3d6maKSzuA9peu80SyIMU=;
+ b=PuUF75Y93EQxfshu4LY4Yl8jvhOqP4/NNcr0BErYMy1E7/42Gz2TiVxQRxMMsmvfhPW73zf8SIsthVLFg9r4Lf9Owyci6BYw2W4hNdfcK8/Rl0hc11vSuBfdmqu+f96YUu/jGR59rggeNO9KAyd/LTpRONZ2LCh/fh7m/l20lMg=
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R301e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033037026112;
+ MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=10; SR=0;
+ TI=SMTPD_---0XCVO9Rr_1791614624; 
+Received: from 30.166.65.54(mailfrom:zhiwei_liu@linux.alibaba.com
+ fp:SMTPD_---0XCVO9Rr_1791614624 cluster:ay36) by smtp.aliyun-inc.com;
+ Sat, 10 Oct 2026 14:43:54 +0800
+Message-ID: <397f4ece-067b-4714-93f3-082e07fad06d@linux.alibaba.com>
+Date: Sat, 10 Oct 2026 14:43:44 +0800
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261010-riscv-pmu-correctness-v3-14-712bf814a7be@linux.alibaba.com>
-References: <20261010-riscv-pmu-correctness-v3-0-712bf814a7be@linux.alibaba.com>
-In-Reply-To: <20261010-riscv-pmu-correctness-v3-0-712bf814a7be@linux.alibaba.com>
-To: qemu-devel@nongnu.org
-Cc: Zephyr Li <fritchleybohrer@gmail.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, 
- Weiwei Li <liwei1518@gmail.com>, 
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org, 
- Richard Henderson <richard.henderson@linaro.org>, 
- Paolo Bonzini <pbonzini@redhat.com>, 
- =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>, 
- TANG Tiancheng <lyndra@linux.alibaba.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1791612281; l=6982;
- i=lyndra@linux.alibaba.com; s=20250909; h=from:subject:message-id;
- bh=TJnrfRQl9h9APvTXXv1oZrDWMh6OEJbODHiPdkwFZFc=;
- b=K1x8teL1H+zTgMQSbl43t/ZEqi9kA6FQooR2EPzKLsEzcbB968JvGjMt324fP4r8SFobanaxX
- WZOgGeIJWjiAKx4XVxOYzVWmnT3bo2sOUcBIl2VKYGQIBgY0Ccli3XK
-X-Developer-Key: i=lyndra@linux.alibaba.com; a=ed25519;
- pk=GQh4uOSLVucXGkaZfEuQ956CrYS14cn1TA3N8AiIjBw=
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.131 (deferred)
-Received-SPF: pass client-ip=115.124.30.131;
- envelope-from=lyndra@linux.alibaba.com;
- helo=out30-131.freemail.mail.aliyun.com
-X-Spam_score_int: -166
-X-Spam_score: -16.7
-X-Spam_bar: ----------------
-X-Spam_report: (-16.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v8 00/11] target/riscv: Implement Smsdid and Smmpt
+ extension
+To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ qemu-devel@nongnu.org
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, chao.liu.zevorn@gmail.com,
+ liwei1518@gmail.com, qemu-riscv@nongnu.org, rahul@summations.net,
+ xiangyi.zeng@linux.alibaba.com, cxx194832@alibaba-inc.com
+References: <20260723200325.24969-1-zhiwei_liu@linux.alibaba.com>
+ <73bc69a4-a3e6-47c8-9c7f-92443706b250@oss.qualcomm.com>
+Content-Language: en-US
+From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+In-Reply-To: <73bc69a4-a3e6-47c8-9c7f-92443706b250@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.101 (deferred)
+Received-SPF: pass client-ip=115.124.30.101;
+ envelope-from=zhiwei_liu@linux.alibaba.com;
+ helo=out30-101.freemail.mail.aliyun.com
+X-Spam_score_int: -150
+X-Spam_score: -15.1
+X-Spam_bar: ---------------
+X-Spam_report: (-15.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
  RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001, USER_IN_DEF_DKIM_WL=-7.5,
+ SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001, URIBL_SBL=1.623,
+ USER_IN_DEF_DKIM_WL=-7.5,
  USER_IN_DEF_SPF_WL=-7.5 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -86,233 +76,177 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Privilege filtering records cycle/instruction increments per mode. Reset
-overwrites privilege/V without adding the final interval to the old
-mode's total, so a counter filtering for that mode loses those counts.
 
-Account for the old mode before entering M-mode with V=0 and rebuild the
-overflow timer after reset. On initial reset, only initialize baselines:
-no guest code has run, so pre-execution QEMU time must not count.
-Preserve architectural counter and selector state, as before.
+On 10/8/26 10:42 AM, Daniel Henrique Barboza wrote:
+> Hi Zhiwei,
+>
+>
+> Sorry from taking this long to take a look at this work.  I am afraid 
+> I'll
+> need to ask you to send a v9 due to the following upstream changes, aside
+> from some review comments I made:
+>
+> - upstream changed how tcg tests are invoked (we use meson now), i.e. you
+> need to add changes in tests/tcg/riscv64/system/meson.build instead of
+> Makefile.softmmu-target;
+>
+> - upstream also changed how we declare things in disas/riscv.c.
+>
+>
+> If you send a v9 I'll prioritize it for review.  We can get this done for
+> 11.2.
+>
+Hi Daniel,
 
-Test that a VS-only cycle counter retains its counts across reset.
+Thank you for taking the time to review this! No worries about the delay.
 
-Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Signed-off-by: TANG Tiancheng <lyndra@linux.alibaba.com>
----
- target/riscv/cpu.c                   |  16 ++++++
- target/riscv/tcg/pmu.c               |  11 ++++
- target/riscv/tcg/pmu.h               |   1 +
- tests/tcg/riscv64/pmu-reset-vs.S     | 105 +++++++++++++++++++++++++++++++++++
- tests/tcg/riscv64/system/meson.build |   7 +++
- 5 files changed, 140 insertions(+)
+I appreciate the heads-up on the upstream changes. I will update the 
+patch accordingly:
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 34422d0204e7c1532c3424626c70d33f805833d5..2a05c91bbe09313c22e4263d6dfa16bb5aca11d5 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -42,6 +42,9 @@
- #include "disas/capstone.h"
- #if !defined(CONFIG_USER_ONLY)
- #include "target/riscv/tcg/debug.h"
-+#ifdef CONFIG_TCG
-+#include "target/riscv/tcg/pmu.h"
-+#endif
- #endif
- 
- /* RISC-V CPU definitions */
-@@ -979,6 +982,16 @@ static void riscv_cpu_reset_hold(Object *obj, ResetType type)
-     }
- #ifndef CONFIG_USER_ONLY
-     env->misa_mxl = mcc->def->misa_mxl_max;
-+#ifdef CONFIG_TCG
-+    /* The initial reset has no guest execution to count. */
-+    if (tcg_enabled()) {
-+        if (qdev_is_realized(DEVICE(cpu))) {
-+            riscv_pmu_update_fixed_ctrs(env, PRV_M, false);
-+        } else {
-+            riscv_pmu_init_fixed_counter_baselines(env);
-+        }
-+    }
-+#endif
-     env->priv = PRV_M;
-     env->virt_enabled = false;
-     env->mstatus &= ~(MSTATUS_MIE | MSTATUS_MPRV);
-@@ -1095,6 +1108,9 @@ static void riscv_cpu_reset_hold(Object *obj, ResetType type)
- 
- #ifndef CONFIG_USER_ONLY
- #ifdef CONFIG_TCG
-+    if (tcg_enabled()) {
-+        riscv_pmu_rebuild_timer(env);
-+    }
-     if (cpu->cfg.debug || cpu->cfg.ext_sdtrig) {
-         riscv_trigger_reset_hold(env);
-     }
-diff --git a/target/riscv/tcg/pmu.c b/target/riscv/tcg/pmu.c
-index df99b572a4c16cb1ac65c2f7cde35c6f8349e681..1d692a0a8e3f7759e033214d579103627d070b5b 100644
---- a/target/riscv/tcg/pmu.c
-+++ b/target/riscv/tcg/pmu.c
-@@ -171,6 +171,17 @@ void riscv_pmu_update_fixed_ctrs(CPURISCVState *env,
-     riscv_pmu_update_fixed_ctrs_snapshot(env, newpriv, new_virt, &snapshot);
- }
- 
-+void riscv_pmu_init_fixed_counter_baselines(CPURISCVState *env)
-+{
-+    RISCVPMUFixedSnapshot snapshot;
-+
-+    riscv_pmu_take_fixed_snapshot(env, &snapshot);
-+    env->pmu_fixed_ctrs[RISCV_PMU_FIXED_DOMAIN_CYCLE]
-+        .counter_prev[PRV_M] = snapshot.cycle;
-+    env->pmu_fixed_ctrs[RISCV_PMU_FIXED_DOMAIN_INSTRET]
-+        .counter_prev[PRV_M] = snapshot.instret;
-+}
-+
- uint64_t
- riscv_pmu_ctr_get_fixed_value(CPURISCVState *env, uint32_t ctr_idx,
-                               const RISCVPMUFixedSnapshot *snapshot)
-diff --git a/target/riscv/tcg/pmu.h b/target/riscv/tcg/pmu.h
-index 1cfe6acf55b5468f5c00c4a136ece88981384341..fac84dbb1a8a6c637f7241ca27910e5e212223e9 100644
---- a/target/riscv/tcg/pmu.h
-+++ b/target/riscv/tcg/pmu.h
-@@ -53,6 +53,7 @@ int riscv_pmu_incr_ctr(RISCVCPU *cpu, enum riscv_pmu_event_idx event_idx);
- void riscv_pmu_generate_fdt_node(void *fdt, uint32_t cmask, char *pmu_name);
- void riscv_pmu_update_fixed_ctrs(CPURISCVState *env, privilege_mode_t newpriv,
-                                  bool new_virt);
-+void riscv_pmu_init_fixed_counter_baselines(CPURISCVState *env);
- void riscv_pmu_decr_instret(CPURISCVState *env);
- RISCVException riscv_pmu_read_ctr(CPURISCVState *env, target_ulong *val,
-                                   bool upper_half, uint32_t ctr_idx,
-diff --git a/tests/tcg/riscv64/pmu-reset-vs.S b/tests/tcg/riscv64/pmu-reset-vs.S
-new file mode 100644
-index 0000000000000000000000000000000000000000..d216faef17a2a395120cb3a71166a821a43dee88
---- /dev/null
-+++ b/tests/tcg/riscv64/pmu-reset-vs.S
-@@ -0,0 +1,105 @@
-+/* SPDX-License-Identifier: GPL-2.0-or-later */
-+
-+/* CSR number for older assemblers. */
-+#define CSR_MCYCLECFG        0x321
-+
-+	.option	norvc
-+	.option	norelax
-+
-+	.equ	MSTATUS_MPP_S,  (1 << 11)
-+	.equ	MSTATUS_MPP,    (3 << 11)
-+	.equ	MSTATUS_SPP,    (1 << 8)
-+	.equ	HSTATUS_SPV,    (1 << 7)
-+	.equ	SIFIVE_TEST,    0x100000
-+	.equ	MTIMECMP,       0x2004000
-+	.equ	FINISHER_RESET, 0x7777
-+
-+	.text
-+	.global _start
-+_start:
-+	/* Preserve the reset marker and saved count in MTIMECMP. */
-+	li	t0, MTIMECMP
-+	ld	t1, 0(t0)
-+	srli	t2, t1, 48
-+	li	t3, 0xa5a5
-+	beq	t2, t3, after_reset
-+
-+	/* Count VS only, then remember the value before entering VS-mode. */
-+	li	t0, 0x1d		/* MINH | SINH | UINH | VUINH */
-+	slli	t0, t0, 58
-+	csrw	CSR_MCYCLECFG, t0
-+	csrr	t1, mcycle
-+	slli	t1, t1, 16
-+	srli	t1, t1, 16
-+	li	t2, 0xa5a5
-+	slli	t2, t2, 48
-+	or	t1, t1, t2
-+	li	t0, MTIMECMP
-+	sd	t1, 0(t0)
-+	li	t0, -1
-+	csrw	pmpaddr0, t0
-+	li	t0, 0x1f		/* RWX, NAPOT */
-+	csrw	pmpcfg0, t0
-+
-+	/* Enter HS-mode first. */
-+	csrr	t0, mstatus
-+	li	t1, MSTATUS_MPP
-+	not	t1, t1
-+	and	t0, t0, t1
-+	li	t1, MSTATUS_MPP_S
-+	or	t0, t0, t1
-+	csrw	mstatus, t0
-+	lla	t0, hs_enter
-+	csrw	mepc, t0
-+	mret
-+
-+hs_enter:
-+	li	t0, HSTATUS_SPV
-+	csrs	hstatus, t0
-+	li	t0, MSTATUS_SPP
-+	csrs	sstatus, t0
-+	lla	t0, vs_reset
-+	csrw	sepc, t0
-+	sret
-+
-+vs_reset:
-+	/* These VS-mode cycles must remain in mcycle after reset. */
-+	li	t0, 128
-+1:
-+	addi	t0, t0, -1
-+	bnez	t0, 1b
-+
-+	li	t0, SIFIVE_TEST
-+	li	t1, FINISHER_RESET
-+	sw	t1, 0(t0)
-+	j	.
-+
-+after_reset:
-+	csrr	t0, mcycle
-+	slli	t1, t1, 16		/* Clear the MTIMECMP marker. */
-+	srli	t1, t1, 16
-+	addi	t1, t1, 128
-+	bgeu	t1, t0, fail
-+	li	t3, 0
-+	j	exit
-+
-+fail:
-+	li	t3, 1
-+
-+exit:
-+	lla	a1, semiargs
-+	li	t0, 0x20026		/* ADP_Stopped_ApplicationExit */
-+	sd	t0, 0(a1)
-+	sd	t3, 8(a1)
-+	li	a0, 0x20		/* TARGET_SYS_EXIT_EXTENDED */
-+
-+	.balign	16
-+	slli	zero, zero, 0x1f
-+	ebreak
-+	srai	zero, zero, 0x7
-+	j	.
-+
-+	.data
-+	.balign	16
-+semiargs:
-+	.space	16
-diff --git a/tests/tcg/riscv64/system/meson.build b/tests/tcg/riscv64/system/meson.build
-index c24468ab560ccf525f7ded98c0dd53a67e0833e2..d89d72ac49a57e87bf6e8ae905c3af6f3550f77c 100644
---- a/tests/tcg/riscv64/system/meson.build
-+++ b/tests/tcg/riscv64/system/meson.build
-@@ -142,6 +142,13 @@ tests += {
-   },
- }
- 
-+tests += {
-+  'pmu-reset-vs.S': {
-+    'cflags': cflags,
-+    'qemu_args': ['-cpu', 'max,smcntrpmf=true', '-icount', 'shift=0', qemu_args],
-+  },
-+}
-+
- if 'qemu-system-riscv64' in emulators
-   tcg_tests += {
-     'riscv64-softmmu': {
+Switch from Makefile.softmmu-target to 
+tests/tcg/riscv64/system/meson.build for the TCG test invocation;
+Update the declarations in disas/riscv.c to align with the latest 
+upstream changes.
+I will send out v9 as soon as possible. Really glad to hear we can 
+target 11.2 for this — I'll make sure to prioritize it on my end as well.
 
--- 
-2.43.0
+Thanks again for the review and for keeping this moving!
 
+Best regards,
+Zhiwei
+>
+> Cheers,
+> Daniel
+>
+> On 7/23/2026 5:03 PM, LIU Zhiwei wrote:
+>> This patch set introduces support for the RISC-V Smsdid and Smmpt
+>> (Supervisor Domain Identifier and Memory Protection Table) extensions
+>> v0.4.9(https://github.com/riscv/riscv-smmtt/releases/tag/v0.4.9).
+>> Smmpt provides a hardware mechanism for fine-grained memory protection,
+>> checked after address translation, which is particularly useful for
+>> supervisor-level sandboxing and security monitoring.
+>>
+>> The rfc patch set:
+>> https://mail.gnu.org/archive/html/qemu-riscv/2025-09/msg00216.html
+>>
+>> Rahul Pathak is working on SMMPT OpenSBI support -
+>> https://lists.infradead.org/pipermail/opensbi/2026-July/010235.html
+>>
+>> based on his QEMU SMMPT branch -
+>> https://github.com/pathakraul/qemu/tree/rpathak_smmpt_v1
+>>
+>> As we all agree -
+>> https://patchew.org/QEMU/20260715145016.17369-1-zhiwei._5Fliu@linux.alibaba.com/ 
+>>
+>> , we will collaborate on this work and not duplicate efforts. Rahul will
+>> focus on OpenSBI upstream and I will update the QEMU patch set to v8.
+>>
+>> Xiangyi will review the OpenSBI SMMPT patch set and may collaborate to
+>> upstream the other parts, such as SMSDIA and IOMPT.
+>>
+>> v7->v8:
+>>      1. Update the mfence.pa and minval.pa instruction encodings to 
+>> match the
+>>         upstream riscv-opcodes definition
+>>         (https://github.com/riscv/riscv-opcodes/pull/389/): mfence.pa 
+>> now uses
+>>         funct7=0b0011001 and minval.pa uses funct7=0b0011011. The 
+>> decoder,
+>>         disassembler and the system test are updated accordingly.
+>>
+>> v6->v7:
+>>      The implementation is updated from the v0.3.4 specification to
+>>      v0.4.9. The main changes are:
+>>      1. Update the mmpt CSR number to 0x382 and msdcfg to 0x74E.
+>>      2. Update the mmpt register layout: the SDID and PPN field 
+>> positions
+>>         changed and the RV64 PPN is now 44 bits.
+>>      3. Rework the MPTE format: the N (NAPOT) bit now lives at bit 2, 
+>> the
+>>         non-leaf NAPOT form is removed, NAPOT leaf entries encode a 
+>> single
+>>         XWR tuple plus a G granularity field, and non-NAPOT leaf entries
+>>         hold per-page XWR tuples.
+>>      4. Treat XWR=000 as "no access" and a non-leaf entry with N=1 as a
+>>         fault.
+>>      5. Enforce the Smmpt64 root-table PPN alignment (low 3 bits zero).
+>>      6. Rename the fence instructions mfence.spa/minval.spa to
+>>         mfence.pa/minval.pa.
+>>      7. Drop stale Reviewed-by tags on the substantially reworked 
+>> patches.
+>>      8. Introduce the configurable "smmpt-sdidlen" CPU property.
+>>      9. Add disassembly support for the Smmpt.
+>>      10. Add bare-metal M-mode system tests.
+>>      11. Rebase to master.
+>>
+>> v5->v6:
+>>      1. Use explicitly bit fields extract instead of mpte_union_t.
+>>      2. Use the same exception behavior for MPT valiation as PMP
+>>         valiation.
+>>      3. Use PAGE_* instead of MPT_ACCESS_* as they have same value.
+>>      4. Use address_space_*_le instead of address_space_* for SMMPT.
+>>      5. Only print SMMPT address check log when SMMPT is enabled.
+>>      6. Add implied rule for SMMPT as it depends on SMSDID.
+>>      7. Rebase to master.
+>>
+>> v4->v5:
+>>      1. Rebase to master.
+>> v3->v4:
+>>      1. Add missing review tags.
+>> v2->v3:
+>>      1. Fix build error in patch 2.
+>>      2. Rebase to master.
+>>
+>> rfc->v2:
+>>      1. When ext_smmpt is false or BARE mode, make other fields in mmpt
+>>         CSR zero.
+>>      2. Add patch 5 to fix smrnmi ISA string order.
+>>      3. Fix patch 6 smmpt and smsdid ISA string order.
+>>      4. Make smmpt and smsdid experiment extensions.
+>>      5. Add review tags.
+>>
+>> LIU Zhiwei (11):
+>>    target/riscv: Add basic definitions and CSRs for SMMPT
+>>    target/riscv: Add smmpt-sdidlen property for the mmpt SDID field
+>>    target/riscv: Implement core SMMPT lookup logic
+>>    target/riscv: Integrate SMMPT checks into MMU and TLB fill
+>>    target/riscv: Implement SMMPT fence instructions
+>>    target/riscv: Fix smrnmi isa alphabetical order
+>>    target/riscv: Add disassembly for Smmpt instructions and CSRs
+>>    target/riscv: Enable SMMPT extension
+>>    target/riscv: Add system test for SMMPT extension
+>>    target/riscv: Add system tests for Smmpt52 and Smmpt64
+>>    target/riscv: Add system test for Smmpt34
+>>
+>>   disas/riscv.c                                 |   9 +-
+>>   target/riscv/cpu.c                            |  60 +++-
+>>   target/riscv/cpu.h                            |   8 +
+>>   target/riscv/cpu_bits.h                       |  27 ++
+>>   target/riscv/cpu_cfg_fields.h.inc             |   3 +
+>>   target/riscv/insn32.decode                    |   2 +
+>>   target/riscv/meson.build                      |   1 +
+>>   target/riscv/riscv_smmpt.c                    | 339 ++++++++++++++++++
+>>   target/riscv/riscv_smmpt.h                    |  26 ++
+>>   target/riscv/tcg/cpu_helper.c                 | 119 +++++-
+>>   target/riscv/tcg/csr.c                        | 106 ++++++
+>>   .../tcg/insn_trans/trans_privileged.c.inc     |  30 ++
+>>   target/riscv/tcg/pmp.h                        |   3 +
+>>   tests/tcg/riscv64/Makefile.softmmu-target     |  12 +
+>>   tests/tcg/riscv64/smmpt-common.S              | 257 +++++++++++++
+>>   tests/tcg/riscv64/test-smmpt.S                |  85 +++++
+>>   tests/tcg/riscv64/test-smmpt34.S              |  97 +++++
+>>   tests/tcg/riscv64/test-smmpt52.S              |  91 +++++
+>>   tests/tcg/riscv64/test-smmpt64.S              |  98 +++++
+>>   19 files changed, 1354 insertions(+), 19 deletions(-)
+>>   create mode 100644 target/riscv/riscv_smmpt.c
+>>   create mode 100644 target/riscv/riscv_smmpt.h
+>>   create mode 100644 tests/tcg/riscv64/smmpt-common.S
+>>   create mode 100644 tests/tcg/riscv64/test-smmpt.S
+>>   create mode 100644 tests/tcg/riscv64/test-smmpt34.S
+>>   create mode 100644 tests/tcg/riscv64/test-smmpt52.S
+>>   create mode 100644 tests/tcg/riscv64/test-smmpt64.S
+>>
+>>
+>> base-commit: 499039798cdad7d86b787fec0eaf1da4151c0f05
+>
 
