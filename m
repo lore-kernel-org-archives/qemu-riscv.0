@@ -4,63 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8B5FCA9EBE
-	for <qemu-riscv@archiver.kernel.org>; Sat, 10 Oct 2026 06:44:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1E9CCA6017
+	for <qemu-riscv@archiver.kernel.org>; Sat, 10 Oct 2026 07:46:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xFQox-0006ze-AE; Sat, 10 Oct 2026 02:44:40 -0400
+	id 1xFRmB-0001Eq-5A; Sat, 10 Oct 2026 03:45:51 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1xFQot-0006yu-MU; Sat, 10 Oct 2026 02:44:35 -0400
-Received: from [115.124.30.101] (helo=out30-101.freemail.mail.aliyun.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1xFQom-00075i-Sf; Sat, 10 Oct 2026 02:44:35 -0400
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1xFRm7-0001E9-Gi
+ for qemu-riscv@nongnu.org; Sat, 10 Oct 2026 03:45:48 -0400
+Received: from mail-wm1-x330.google.com ([2a00:1450:4864:20::330])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1xFRm5-0004rq-RY
+ for qemu-riscv@nongnu.org; Sat, 10 Oct 2026 03:45:47 -0400
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-4a0286c981dso4165435e9.2
+ for <qemu-riscv@nongnu.org>; Sat, 10 Oct 2026 00:45:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linux.alibaba.com; s=default;
- t=1791614637; h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type;
- bh=A5g9krbisREDhfFNFmmtBK3d6maKSzuA9peu80SyIMU=;
- b=PuUF75Y93EQxfshu4LY4Yl8jvhOqP4/NNcr0BErYMy1E7/42Gz2TiVxQRxMMsmvfhPW73zf8SIsthVLFg9r4Lf9Owyci6BYw2W4hNdfcK8/Rl0hc11vSuBfdmqu+f96YUu/jGR59rggeNO9KAyd/LTpRONZ2LCh/fh7m/l20lMg=
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R301e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033037026112;
- MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=10; SR=0;
- TI=SMTPD_---0XCVO9Rr_1791614624; 
-Received: from 30.166.65.54(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0XCVO9Rr_1791614624 cluster:ay36) by smtp.aliyun-inc.com;
- Sat, 10 Oct 2026 14:43:54 +0800
-Message-ID: <397f4ece-067b-4714-93f3-082e07fad06d@linux.alibaba.com>
-Date: Sat, 10 Oct 2026 14:43:44 +0800
+ d=linaro.org; s=google; t=1791618344; x=1792223144; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=6rEbUZT8JrIgjKe9a62xSWCSsdjW4XckhpXsYtq7+MU=;
+ b=h1gM6/ESiDKbG3Z5HZtz3Ig2gmpRW284aDnLGTRWozvU3Gf88GVcnBICcWAlthRAAk
+ lLJazlCwJVwzJtDcKW3Uy2abYlmUJINsS5bHzFiYAXUvEiLn216OHT0qA/zRCqEBl5Zp
+ j8Sv0c+UXS0hfiYOw4XndxxiGOfj966cizJrepiZgDMAAK6MnWFgQCNihB5fD/HMAZJW
+ JUNrljmAPzQA/eIJGXPaaRkqqBYcRGygEhKFXyRudLQLYy2PTqZ5zjg0//2P4mTmMxdt
+ J077tUSp9q/cdPJnGEOlr0ClJO/2wYoJ5FE1fL0UVij+rgwssBh6SwW7by951A0MuqV4
+ Lr3A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1791618344; x=1792223144;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=6rEbUZT8JrIgjKe9a62xSWCSsdjW4XckhpXsYtq7+MU=;
+ b=Ht04I5q3hBgo+yg9YJ/WpPnPD6NOkpUymcbQ3RNTt3ODajOoqGSay0geelAE0peukL
+ Av1WOTcNJHJJHTGkVWkrvmolfulnWInS6th+vDaYeW8c/E6DClz9tz63Lwlws9L8qTfl
+ taYvpHLnKz9CLI1w4teozT6esrUtTXn76VuUGNd9jM4YPr67KmleSHuGycj8Ey74JA9d
+ Ppylr1ldv7vRqhFyjql1n8VBE7QobZr3hBqp/BjmTYwxh+RwcF3Xj239x6p8LNA1w9tr
+ vfLjfHZZLLaIUc7pBiH8IYRV06JUskdwpS+64MzVeUZtLKZMSIllOvDl8FBBag07Mmhr
+ eAHw==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBySooPtYGqQIXlYOM2775UARrGITSFJLKMbrjeAHc3HrL+QGg/TTVb5//n88CtoUIOrgzwekXplVeHT@nongnu.org
+X-Gm-Message-State: AFq9FYKUVE0IeSHpxpKbwGKKdvQFlbraFj9dbtOA/QaMSvdXqrXqz6ps
+ 0r8B6m/JL/kBbuTDkwd885Py7VrUyHJHY+buPMWuGPLDdtVcW/TIfWo4xbWufbYJzP4=
+X-Gm-Gg: AYBFou0J8yHQ2nC3eSNLzAmTzAzO8P+Tu339FX0ipHqMRe3zYKuLTSeqLSVg4kNpPkX
+ 0wx2hdCxL1st0oTduG9kxpdTr/QHWiY6woD6iJPhzgq+DBGI2UmVHAPZbAxDAc1cl1yQ89adSE6
+ 4y2J6EehM26B6C2bIPki/ef65fITI4NQ21jzsYeycKxOs0ZJ4VqNIj9bk4AT8JfHoKG4itDu/dC
+ h02bwJsNFRp2TyUMnAwclerBfiDuukn7Ov6ME4LYQ2JrGrHEIza16bhh6cr1pClkvbBBa2YqSup
+ 1xoVkYUV/qWc7eMeSB3TPwsp1KzCQtXj3/Sz7/tUKrT/9M/dlPQvcbEfIYjLcFCzgow6NC/g2L+
+ hBwffXtRML2+3Z6y/t0yZAgSLOAcEKt4G0ltEfd7MRcFGPw55rJ6TajNNqwDoUTKUZLN2AmImwP
+ NKrIjlyFyYsG1kg5j4iFjGsZGPAnmkgLrFenTE4kuYSUE4mUBOlQENKW45Q2dUZLH1Jtzgp4Pou
+ 8TawGkbMy/NK9moio8SiryqQ77SIT2W++SqOikAwHg40JnKYRC4SX4=
+X-Received: by 2002:a05:600c:4ecb:b0:4a1:6916:798 with SMTP id
+ 5b1f17b1804b1-4a18e4a3f69mr77392505e9.14.1791618343890; 
+ Sat, 10 Oct 2026 00:45:43 -0700 (PDT)
+Received: from ?IPV6:2a00:1e:e082:2901:a2d3:66fa:95e6:7d81?
+ ([2a00:1e:e082:2901:a2d3:66fa:95e6:7d81])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-48db9462ebcsm8451254f8f.8.2026.10.10.00.45.41
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sat, 10 Oct 2026 00:45:42 -0700 (PDT)
+Message-ID: <f8ea6e43-2e6e-48b7-a61c-d9ec2200872c@linaro.org>
+Date: Sat, 10 Oct 2026 09:45:40 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v8 00/11] target/riscv: Implement Smsdid and Smmpt
- extension
-To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- qemu-devel@nongnu.org
-Cc: palmer@dabbelt.com, alistair.francis@wdc.com, chao.liu.zevorn@gmail.com,
- liwei1518@gmail.com, qemu-riscv@nongnu.org, rahul@summations.net,
- xiangyi.zeng@linux.alibaba.com, cxx194832@alibaba-inc.com
-References: <20260723200325.24969-1-zhiwei_liu@linux.alibaba.com>
- <73bc69a4-a3e6-47c8-9c7f-92443706b250@oss.qualcomm.com>
+Subject: Re: [PATCH v2 4/6] tcg: namespace target helper symbols for combined
+ builds
+To: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+ Yonggang Luo <luoyonggang@gmail.com>, qemu-devel@nongnu.org
+Cc: Song Gao <17746591750@163.com>, =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?=
+ <berrange@redhat.com>, Alistair Francis <alistair.francis@wdc.com>,
+ Peter Maydell <peter.maydell@linaro.org>, Paolo Bonzini
+ <pbonzini@redhat.com>, Weiwei Li <liwei1518@gmail.com>,
+ Sunil V L <sunilvl@ventanamicro.com>,
+ Philippe Mathieu-Daude <philmd@mailo.com>,
+ =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, qemu-riscv@nongnu.org,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Chao Liu <chao.liu@processmission.com>, Igor Mammedov <imammedo@redhat.com>,
+ Ani Sinha <anisinha@redhat.com>, qemu-arm@nongnu.org,
+ "Michael S. Tsirkin" <mst@redhat.com>
+References: <20260930073935.712-1-luoyonggang@gmail.com>
+ <20260930073935.712-5-luoyonggang@gmail.com>
+ <374ba010-b530-4310-b20f-65ada56cda6b@oss.qualcomm.com>
+From: Richard Henderson <richard.henderson@linaro.org>
 Content-Language: en-US
-From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <73bc69a4-a3e6-47c8-9c7f-92443706b250@oss.qualcomm.com>
+In-Reply-To: <374ba010-b530-4310-b20f-65ada56cda6b@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.101 (deferred)
-Received-SPF: pass client-ip=115.124.30.101;
- envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-101.freemail.mail.aliyun.com
-X-Spam_score_int: -150
-X-Spam_score: -15.1
-X-Spam_bar: ---------------
-X-Spam_report: (-15.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
- RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001, URIBL_SBL=1.623,
- USER_IN_DEF_DKIM_WL=-7.5,
- USER_IN_DEF_SPF_WL=-7.5 autolearn=no autolearn_force=no
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::330;
+ envelope-from=richard.henderson@linaro.org; helo=mail-wm1-x330.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -76,177 +122,28 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+On 10/1/26 18:51, Pierrick Bouvier wrote:
+> On 9/30/2026 12:39 AM, Yonggang Luo wrote:
+>> Use target-specific assembler names and helper metadata for TCG helpers
+>> when multiple targets share a binary. The generated prototype maps the
+>> generic C helper name to a target-specific linker symbol, for example:
+>>
+>>      helper_raise_exception
+>>          __asm__("helper_i386_raise_exception")
+>>
+>> This lets target helper definitions keep generic C names while avoiding
+>> linker symbol collisions between targets.
+>>
+> Hi Richard, do you have an opinion on this patch?
+> 
+> We are trying to see if we do renaming per helper, or if we introduce a
+> "generic" way to deal with it. I don't have a strong opinion, renaming
+> things or adding more macros and build system soup are both ok on my
+> side, so direction would depend on your culinary taste.
+I think the general direction is good.  Perhaps the specifics need 
+adjustment.  In particular, using __asm__ to rename symbols is suspect 
+and likely non-portable to non-ELF hosts like Darwin and Windows.
 
-On 10/8/26 10:42 AM, Daniel Henrique Barboza wrote:
-> Hi Zhiwei,
->
->
-> Sorry from taking this long to take a look at this work.  I am afraid 
-> I'll
-> need to ask you to send a v9 due to the following upstream changes, aside
-> from some review comments I made:
->
-> - upstream changed how tcg tests are invoked (we use meson now), i.e. you
-> need to add changes in tests/tcg/riscv64/system/meson.build instead of
-> Makefile.softmmu-target;
->
-> - upstream also changed how we declare things in disas/riscv.c.
->
->
-> If you send a v9 I'll prioritize it for review.  We can get this done for
-> 11.2.
->
-Hi Daniel,
 
-Thank you for taking the time to review this! No worries about the delay.
-
-I appreciate the heads-up on the upstream changes. I will update the 
-patch accordingly:
-
-Switch from Makefile.softmmu-target to 
-tests/tcg/riscv64/system/meson.build for the TCG test invocation;
-Update the declarations in disas/riscv.c to align with the latest 
-upstream changes.
-I will send out v9 as soon as possible. Really glad to hear we can 
-target 11.2 for this — I'll make sure to prioritize it on my end as well.
-
-Thanks again for the review and for keeping this moving!
-
-Best regards,
-Zhiwei
->
-> Cheers,
-> Daniel
->
-> On 7/23/2026 5:03 PM, LIU Zhiwei wrote:
->> This patch set introduces support for the RISC-V Smsdid and Smmpt
->> (Supervisor Domain Identifier and Memory Protection Table) extensions
->> v0.4.9(https://github.com/riscv/riscv-smmtt/releases/tag/v0.4.9).
->> Smmpt provides a hardware mechanism for fine-grained memory protection,
->> checked after address translation, which is particularly useful for
->> supervisor-level sandboxing and security monitoring.
->>
->> The rfc patch set:
->> https://mail.gnu.org/archive/html/qemu-riscv/2025-09/msg00216.html
->>
->> Rahul Pathak is working on SMMPT OpenSBI support -
->> https://lists.infradead.org/pipermail/opensbi/2026-July/010235.html
->>
->> based on his QEMU SMMPT branch -
->> https://github.com/pathakraul/qemu/tree/rpathak_smmpt_v1
->>
->> As we all agree -
->> https://patchew.org/QEMU/20260715145016.17369-1-zhiwei._5Fliu@linux.alibaba.com/ 
->>
->> , we will collaborate on this work and not duplicate efforts. Rahul will
->> focus on OpenSBI upstream and I will update the QEMU patch set to v8.
->>
->> Xiangyi will review the OpenSBI SMMPT patch set and may collaborate to
->> upstream the other parts, such as SMSDIA and IOMPT.
->>
->> v7->v8:
->>      1. Update the mfence.pa and minval.pa instruction encodings to 
->> match the
->>         upstream riscv-opcodes definition
->>         (https://github.com/riscv/riscv-opcodes/pull/389/): mfence.pa 
->> now uses
->>         funct7=0b0011001 and minval.pa uses funct7=0b0011011. The 
->> decoder,
->>         disassembler and the system test are updated accordingly.
->>
->> v6->v7:
->>      The implementation is updated from the v0.3.4 specification to
->>      v0.4.9. The main changes are:
->>      1. Update the mmpt CSR number to 0x382 and msdcfg to 0x74E.
->>      2. Update the mmpt register layout: the SDID and PPN field 
->> positions
->>         changed and the RV64 PPN is now 44 bits.
->>      3. Rework the MPTE format: the N (NAPOT) bit now lives at bit 2, 
->> the
->>         non-leaf NAPOT form is removed, NAPOT leaf entries encode a 
->> single
->>         XWR tuple plus a G granularity field, and non-NAPOT leaf entries
->>         hold per-page XWR tuples.
->>      4. Treat XWR=000 as "no access" and a non-leaf entry with N=1 as a
->>         fault.
->>      5. Enforce the Smmpt64 root-table PPN alignment (low 3 bits zero).
->>      6. Rename the fence instructions mfence.spa/minval.spa to
->>         mfence.pa/minval.pa.
->>      7. Drop stale Reviewed-by tags on the substantially reworked 
->> patches.
->>      8. Introduce the configurable "smmpt-sdidlen" CPU property.
->>      9. Add disassembly support for the Smmpt.
->>      10. Add bare-metal M-mode system tests.
->>      11. Rebase to master.
->>
->> v5->v6:
->>      1. Use explicitly bit fields extract instead of mpte_union_t.
->>      2. Use the same exception behavior for MPT valiation as PMP
->>         valiation.
->>      3. Use PAGE_* instead of MPT_ACCESS_* as they have same value.
->>      4. Use address_space_*_le instead of address_space_* for SMMPT.
->>      5. Only print SMMPT address check log when SMMPT is enabled.
->>      6. Add implied rule for SMMPT as it depends on SMSDID.
->>      7. Rebase to master.
->>
->> v4->v5:
->>      1. Rebase to master.
->> v3->v4:
->>      1. Add missing review tags.
->> v2->v3:
->>      1. Fix build error in patch 2.
->>      2. Rebase to master.
->>
->> rfc->v2:
->>      1. When ext_smmpt is false or BARE mode, make other fields in mmpt
->>         CSR zero.
->>      2. Add patch 5 to fix smrnmi ISA string order.
->>      3. Fix patch 6 smmpt and smsdid ISA string order.
->>      4. Make smmpt and smsdid experiment extensions.
->>      5. Add review tags.
->>
->> LIU Zhiwei (11):
->>    target/riscv: Add basic definitions and CSRs for SMMPT
->>    target/riscv: Add smmpt-sdidlen property for the mmpt SDID field
->>    target/riscv: Implement core SMMPT lookup logic
->>    target/riscv: Integrate SMMPT checks into MMU and TLB fill
->>    target/riscv: Implement SMMPT fence instructions
->>    target/riscv: Fix smrnmi isa alphabetical order
->>    target/riscv: Add disassembly for Smmpt instructions and CSRs
->>    target/riscv: Enable SMMPT extension
->>    target/riscv: Add system test for SMMPT extension
->>    target/riscv: Add system tests for Smmpt52 and Smmpt64
->>    target/riscv: Add system test for Smmpt34
->>
->>   disas/riscv.c                                 |   9 +-
->>   target/riscv/cpu.c                            |  60 +++-
->>   target/riscv/cpu.h                            |   8 +
->>   target/riscv/cpu_bits.h                       |  27 ++
->>   target/riscv/cpu_cfg_fields.h.inc             |   3 +
->>   target/riscv/insn32.decode                    |   2 +
->>   target/riscv/meson.build                      |   1 +
->>   target/riscv/riscv_smmpt.c                    | 339 ++++++++++++++++++
->>   target/riscv/riscv_smmpt.h                    |  26 ++
->>   target/riscv/tcg/cpu_helper.c                 | 119 +++++-
->>   target/riscv/tcg/csr.c                        | 106 ++++++
->>   .../tcg/insn_trans/trans_privileged.c.inc     |  30 ++
->>   target/riscv/tcg/pmp.h                        |   3 +
->>   tests/tcg/riscv64/Makefile.softmmu-target     |  12 +
->>   tests/tcg/riscv64/smmpt-common.S              | 257 +++++++++++++
->>   tests/tcg/riscv64/test-smmpt.S                |  85 +++++
->>   tests/tcg/riscv64/test-smmpt34.S              |  97 +++++
->>   tests/tcg/riscv64/test-smmpt52.S              |  91 +++++
->>   tests/tcg/riscv64/test-smmpt64.S              |  98 +++++
->>   19 files changed, 1354 insertions(+), 19 deletions(-)
->>   create mode 100644 target/riscv/riscv_smmpt.c
->>   create mode 100644 target/riscv/riscv_smmpt.h
->>   create mode 100644 tests/tcg/riscv64/smmpt-common.S
->>   create mode 100644 tests/tcg/riscv64/test-smmpt.S
->>   create mode 100644 tests/tcg/riscv64/test-smmpt34.S
->>   create mode 100644 tests/tcg/riscv64/test-smmpt52.S
->>   create mode 100644 tests/tcg/riscv64/test-smmpt64.S
->>
->>
->> base-commit: 499039798cdad7d86b787fec0eaf1da4151c0f05
->
+r~
 
