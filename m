@@ -4,91 +4,144 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58BC8CA9EC7
-	for <qemu-riscv@archiver.kernel.org>; Sun, 11 Oct 2026 04:06:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EA8ECA9ECF
+	for <qemu-riscv@archiver.kernel.org>; Sun, 11 Oct 2026 18:26:22 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xFkpT-0007lL-Tn; Sun, 11 Oct 2026 00:06:31 -0400
+	id 1xFyFP-0002xM-9X; Sun, 11 Oct 2026 14:26:11 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <sebasjosue84@gmail.com>)
- id 1xFkpR-0007l4-Ta
- for qemu-riscv@nongnu.org; Sun, 11 Oct 2026 00:06:30 -0400
-Received: from mail-vk1-xa2d.google.com ([2607:f8b0:4864:20::a2d])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <sebasjosue84@gmail.com>)
- id 1xFkpQ-0002Yz-6K
- for qemu-riscv@nongnu.org; Sun, 11 Oct 2026 00:06:29 -0400
-Received: by mail-vk1-xa2d.google.com with SMTP id
- 71dfb90a1353d-5e4d95e3e55so327740e0c.2
- for <qemu-riscv@nongnu.org>; Sat, 10 Oct 2026 21:06:27 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <sunil.laxminarasimha@oss.qualcomm.com>)
+ id 1xFyFL-0002wL-MU
+ for qemu-riscv@nongnu.org; Sun, 11 Oct 2026 14:26:09 -0400
+Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <sunil.laxminarasimha@oss.qualcomm.com>)
+ id 1xFyFJ-0008S4-IX
+ for qemu-riscv@nongnu.org; Sun, 11 Oct 2026 14:26:07 -0400
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 69BIKlKW419166
+ for <qemu-riscv@nongnu.org>; Sun, 11 Oct 2026 18:26:02 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:date:from:message-id:mime-version
+ :sender:subject:to; s=qcppdkim1; bh=TWLdTDhS4JmE3pn6SzqwIOCVIgBL
+ tj3sk0QeOp6wC2Y=; b=eTBkGfzAYNnzYSYqQFMpA4SR1skG5vhVzEBqZ3uzvgy8
+ vpwtTicJClshU4ZEo45Mu8XXA5Lex0R8DkF41V4wB1yRpJHlUUyBvTsP9SeAyg/C
+ eOU52jTpYyzrqQOs1q1BMl6O8WMDvv0+3frzDAEAVAUmWd5ckFWRXa7wVmb359I8
+ 3itisDS2VZSRNn8ydC9jwf82Is9xlFCH3HpAV5iSikIzNVpHVF0h/2XI16ee+lJc
+ ZZWuc81YMr0b3c6kKFGj2hE9HgobESdqpWF6z4AI7Qws91dEAQcq7u4LioutUbFP
+ M09JZ2qd7xmvyMrgc9zlhFICZBv+l/LhsOEGW4RSfg==
+Received: from mail-dy1-f199.google.com (mail-dy1-f199.google.com
+ [74.125.82.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h7cc6bpxk-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Sun, 11 Oct 2026 18:26:02 +0000 (GMT)
+Received: by mail-dy1-f199.google.com with SMTP id
+ 5a478bee46e88-35a4d2e39acso1232325eec.1
+ for <qemu-riscv@nongnu.org>; Sun, 11 Oct 2026 11:26:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1791691586; x=1792296386; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=D14PHYKTzv+vsB1RTM6RUy2ukdlwKgLV0dDbuBxWFyc=;
- b=jNtd6WH8mVpf2Qeicn70JRnl03gZi4ljrOWMuQ6bAxD1CaFm4okvuO2cp/hGs3uWGp
- G7+fPcc8A9OvsOc9gAqqnxttTElMxtP0EPs+mjTsVFKbEitsQB1wztLYavSr8gI5aT7a
- UsahzkKUxcWvfYhk9dXh3HR6oFjRGQ0uRlaKHur+XNsl8emS6ispuYK3/t+f73ZnbdBK
- u4Q+df4eFeGNDqTHAe+oPo/g9iajDsbBRoRm9b2Y2xAbaSnCJkCkF44+us8yQo6WinCT
- u5Cujy+RrNYgzJS7/fC2zPHwASgNTwT/YfFpk2z2mtG66KiYjklbs7rq9do/0kLfm+Gh
- 1HsQ==
+ d=oss.qualcomm.com; s=google; t=1791743161; x=1792347961; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:sender:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=TWLdTDhS4JmE3pn6SzqwIOCVIgBLtj3sk0QeOp6wC2Y=;
+ b=a9spGxUMG0u38f6cCc5/MsAMBni0wjOM+D7pf6WmtN8T2q3/Nbq1khhKxjoXZG8HYZ
+ TvGGXVZh2lYfn4XDxMp+9XoEM1hBeDAmgKoFRfLrC0WKnnA3rJzYv7ehA6RHHdzpLEFO
+ A7qZUs3Q1eTkWk3IRM86P33BwmKaBeoL96dIF3lP+zDF4UTnZX2T9M1Bs4hGapO9qUxL
+ XOT/Uqu7pxDI2jIFr7em7WzcZXQXOAojCwV/dOpagoEI85reYd3xHofdVyobFGW1fy1I
+ LRTpM3opV+HFwCN2oXQSR+kBkcmTVvzMnVP7Ze7sEyQgGv0Hnl3DKJOjJl9b+nohu6f+
+ Pnuw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1791691586; x=1792296386;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=D14PHYKTzv+vsB1RTM6RUy2ukdlwKgLV0dDbuBxWFyc=;
- b=fwar/GMhblCBm8pNwBJJro7WJp7btr/MtBlpKC7IiMwq+PjpbdRTEyENtq9+KxQXdr
- j5H/H64mMVM/kTHxUNgE1l27JGIW5EyogYfXWQtLN+5HgKHeYvk1+8ZstVFgpE6ZN/Rx
- dDPFGFZEqxRhNMMp84e0ynSh/Xk48apXfoMH5qeUCcRyrlwi4zbZN2OEMpjcxBkIf8EK
- TvdEtkim0DCd4l95O/JtrOb23tgnKfuAXvIjHCK63ftKQHyUzubyf2n68h+hOCkRnb4q
- rlfyfCV35QJSBenX/ZxsBsTyqHxaBx0DWmYWgY4B+rz9CmCzG6uxUuKmH6lyGkBuVCYv
- AMdQ==
-X-Gm-Message-State: AFq9FYIb8/3zC07rPRemT61zE/Z0sH57vy4ZDRlDKhj0RwKaJGJgGTsN
- w81Hq/zDuHp1q1dpnKzoUO+s3yaVZ8zJnUt46EQGYZk1QL4QwKv0DVfF
-X-Gm-Gg: AYBFou3fxL8uT63rSxaUF4MAWa+H4VHD6agTi1Cv7LK3g8I0U3I3G24MqWaL3tT97aV
- w6EkD/rSXkH8M6ATFs97WmTD5KobfzZo1WwxY7PnVbVPUE2xilVKKFgPj3SWp3FWfX8w6k0LU0u
- kxrSFwiPzUAijBhFOZGfbDgyeQqxFPEghVvZJDhuW5/eTwfVYjfKj06nZJymHLdb38drirpwhUj
- Hs4F7XZZ0rJtpLbaj3r/FlNyPlZsSfIgJ5xhfXcJipQ0ngKskP7LbHlPUkFYtCCk4AaUZW0iJ8N
- zYjm82zRKXIziJ79p0CVvd56xUcsgjkiQkiMUrWrLAoqPNWD56s+eA+6MWb/IfiEMGM6iEE5JIO
- zKAyEKX6zauux4eTaD/aC/rJB5keuu5CUkgqOWP2ChVXcwZzHNBVR0Ecex79atk3PZEm6K2AkN9
- jwU5cJ1DDtEzYYvec1fRK4hOrVebKG3sD31qk7FXDM4AOalPZnYalMgLiV/jVHQ87swC7qES2zL
- 7Emfwe/SNVanzgAiOQFr5GGGr5Dy7uNYxymNt0997ThctWsSB9wkfZWno7Eg8g=
-X-Received: by 2002:a05:6102:5cca:b0:7c4:a0e4:1a79 with SMTP id
- ada2fe7eead31-7cb37317ab0mr1312754137.19.1791691586437; 
- Sat, 10 Oct 2026 21:06:26 -0700 (PDT)
-Received: from localhost.localdomain ([186.151.100.62])
+ d=1e100.net; s=20260707; t=1791743161; x=1792347961;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:sender:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=TWLdTDhS4JmE3pn6SzqwIOCVIgBLtj3sk0QeOp6wC2Y=;
+ b=LhpxdOcb1snB2WI/kjqsJFBqU32yZ3udR+W3JAt1z6JfMQeRfGYDqKeaRcnek3QF+V
+ 80b/9XQVhGTsGjDqvNStb25nUKxY1qaaKQ+DU//H3V/TZYfNB/QFpEYBW+NYCHtY24nx
+ 4T0dcTu9cUJ7NrKd90c19BySdgpFVlvpGS1Ida5c9HR8IwxbSerQE6BE/Ww+NbFJzTSL
+ FLBREn3K4bxdFmVpVkdObF0SQK7nsmebprW2lvPkU4AfY0z6rYLysND+wZ/fmbuvQObC
+ YdptqEGfPSwU1ZEGcBkKcV+5GsJuhoc1V+bOD6r9s8NKTKn7/I6KND/MwFBPUCAJSe9b
+ o/pQ==
+X-Forwarded-Encrypted: i=1;
+ AKwUvByELDjN3yooB8trvSFzG1R9vni/ly/NA4LQ5Ne1+ATY9r1qGQqsV3qTvOqC03ol5M73Nxy40gYpgX3L@nongnu.org
+X-Gm-Message-State: AFq9FYKRbSF39hPjs5kf7gBaztFnGilUW94JPxveuf+cp1+WcXvZhD8U
+ LTQkDPSY9nElBSJv8xi5WLAZWDZB/U0+ri+YOdEnVJOB+C1twHBrOR/ZgjAxyAalQwooH11EWFu
+ snJACUcpai+SdKX55oYhSsgE/0mI5U9EIZ3cvcby1vbUw1jzRW4Sa5PVCig==
+X-Gm-Gg: AYBFou0wKBSIPCtLtPjW6syA3ZuQ6MSQVTy06pQwqHSu7SJ7qIF9iHOMLx9A+Zo1/fQ
+ q8P8V2qEjpZ4WimqaJgMpiN43Aaqf/GrA4tNMx9ljFVgo1QjcOfTFG5z138pclT/fDwNz3XgYkR
+ 1vS/NLyxd0cyTIUT/FEL9ZBdas1fHEr5E0Gs8Js5r8lq2OAYErEVb8Y9XicfCqrZBNVcqWcpy2C
+ m7nMk0NRzy5wtfcyR7dNPAmb2M1B9G9SUrqG0V7mwgNxCTPESvU6Uq9T7iDGGod4Pn7upCTzAmB
+ ywaNMrXayg8ktIr9Fsqu2S3QDaSJ4Bw5GIUWD5NzO3kVqTY7J953ks4TZLeZLEvwM83X2RMQanu
+ VNctKknJYmF42cJcqOEjdo9F7cxkk+YRw4F7TU/1zL8JzLQaEXGsXqRc=
+X-Received: by 2002:a05:7022:422:b0:168:3243:c911 with SMTP id
+ a92af1059eb24-16a60ced242mr15662085c88.37.1791743160999; 
+ Sun, 11 Oct 2026 11:26:00 -0700 (PDT)
+X-Received: by 2002:a05:7022:422:b0:168:3243:c911 with SMTP id
+ a92af1059eb24-16a60ced242mr15662034c88.37.1791743160377; 
+ Sun, 11 Oct 2026 11:26:00 -0700 (PDT)
+Received: from hu-sunilvl-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- ada2fe7eead31-7cb354016d6sm4743918137.8.2026.10.10.21.06.23
+ a92af1059eb24-169a5866477sm22505284c88.22.2026.10.11.11.25.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 10 Oct 2026 21:06:24 -0700 (PDT)
-From: Sebastian Alba Vives <sebasjosue84@gmail.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
- liwei1518@gmail.com, daniel.barboza@oss.qualcomm.com,
- zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
- richard.henderson@linaro.org, Sebastian Alba Vives <sebasjosue84@gmail.com>
-Subject: [PATCH v2] target/riscv: pmp: clear the entire PMP state on reset
-Date: Sat, 10 Oct 2026 22:06:17 -0600
-Message-ID: <20261011040617.807504-1-sebasjosue84@gmail.com>
+ Sun, 11 Oct 2026 11:26:00 -0700 (PDT)
+X-Google-Original-From: Sunil V L <sunilvl@oss.qualcomm.com
+To: qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Chao Liu <chao.liu@processmission.com>,
+ "Michael S . Tsirkin" <mst@redhat.com>,
+ Igor Mammedov <imammedo@redhat.com>, Ani Sinha <anisinha@redhat.com>,
+ Anup Patel <anup.patel@oss.qualcomm.com>,
+ Drew Fustini <fustini@kernel.org>, Sunil V L <sunilvl@oss.qualcomm.com>
+Subject: [PATCH 0/4] RISC-V: ACPI: Add PPTT support
+Date: Sun, 11 Oct 2026 23:55:48 +0530
+Message-ID: <20261011182552.1071742-1-sunilvl@oss.qualcomm.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260916034331.2390427-1-sebasjosue84@gmail.com>
-References: <20260916034331.2390427-1-sebasjosue84@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a2d;
- envelope-from=sebasjosue84@gmail.com; helo=mail-vk1-xa2d.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+X-Proofpoint-GUID: JDhtqh181eMdp-opW-bNxYK9pBKo6XqY
+X-Authority-Analysis: v=2.4 cv=XdQcX455 c=1 sm=1 tr=0 ts=6acbd4ba cx=c_pps
+ a=cFYjgdjTJScbgFmBucgdfQ==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22 a=mDV3o1hIAAAA:8
+ a=EUspDBNiAAAA:8 a=Lpe6bjFTOsfE0dEvvBYA:9 a=scEy_gLbYbu1JhEsrz4S:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDExMDA3MyBTYWx0ZWRfX17pwsLFdC5dI
+ 4ylj8ilNWtcu0o8wcu5yRRKFvS/1T2svL6eBhed1U4iyfitHM5ha7YyQaw8+tzgbVyLMtoxRvtj
+ D0/aRM9qwPIt5zBjx9FJk4zdW0S5L24wZWAGMZNtNHfNIU3Kx+PJ1dVRL2vYfqeMtlr39xRoh0q
+ FJKK6NJiObEI4EC7bI6lYO1oiR8RBeg9IPBB3IcwEClhYaoLoc8onG5HrpTJ47ThNq2ZoYBsDJ3
+ aeXUWldxhQaK3cMn7VPsJokTjr9o8YM1nc+OzixMKzNSfADPo0+VfbtLC2nl7F2S26vPZCByDqB
+ u3SPz1s+ezKtwS5ArtBKs6kb8YvA9b20qOyQUTQFQ3g/Fxt/PLkziu/CLC97e6JFnIIaYDQvyoR
+ brDNOuvVg4veqKBBIIjiYprtf6qtTu/7Evbs1QY1KiDCmPyYYOdyGS2VWqusxldP5dE0www2UWr
+ JReZZ7UW7ibemiLWXkw==
+X-Proofpoint-ORIG-GUID: JDhtqh181eMdp-opW-bNxYK9pBKo6XqY
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDExMDA3MyBTYWx0ZWRfX5PeDYhXSSsjt
+ XiMTdVDPi+DYcAQmU2UOx22crmfPJ8IQQsj0OryUmwSs19g8um0MDoR8NLdgCaOs8M0nBIRSuqA
+ IWVeMCgh61NYL88JhchCoZkkt8Hdp1E=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-11_04,2026-10-09_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 malwarescore=0 spamscore=0 adultscore=0 phishscore=0
+ bulkscore=0 lowpriorityscore=0 suspectscore=0 impostorscore=0
+ priorityscore=1501 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610080000
+ definitions=main-2610110073
+Received-SPF: pass client-ip=205.220.180.131;
+ envelope-from=sunil.laxminarasimha@oss.qualcomm.com;
+ helo=mx0b-0031df01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
+X-Spam_bar: --
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -101,110 +154,63 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
+Reply-to:  Sunil V L <sunilvl@oss.qualcomm.com>
+From:  Sunil V L via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-pmp_unlock_entries() bounded its loop with pmp_get_num_rules(), which
-returns the number of entries whose A field is not OFF rather than the
-number of implemented entries. With a sparse configuration the loop
-stops early: with entries 0 and 1 OFF and entries 2 and 3 locked,
-num_rules is 2, the loop covers i = 0 and i = 1, and entries 2 and 3
-keep their lock and address-match bits across reset.
+From: Sunil V L <sunilvl@oss.qualcomm.com>
 
-riscv_cpu_reset_hold() clears mseccfg, and with it RLB, before calling
-this, so pmp_is_readonly() then silently discards every subsequent
-pmpcfg write to those entries. The stale rules survive for the
-lifetime of the machine.
+Hi all,
 
-Clearing only PMP_LOCK and PMP_AMATCH is not enough either. The priv
-spec only mandates that the A and L fields be reset, but QEMU keeps
-derived state next to the architectural registers: pmp_state.addr[]
-and pmp_state.num_rules are recomputed from the pmpaddr and pmpcfg
-write paths only, never at reset. pmp_is_in_range() compares against
-addr[].sa and addr[].ea without consulting the A field, and the
-partially-inside check in pmp_hart_has_privs() runs before the A
-field is tested, so a range left over from before the reset can still
-deny an access that straddles its boundary once the guest configures
-any entry again.
+This series adds ACPI Processor Properties Topology Table (PPTT) support to
+the RISC-V virt machine. PPTT allows the guest to discover the processor and
+cache topology exposed by the machine, which is useful for making better
+scheduling and cache-management decisions.
 
-Zero the whole structure instead. Zero is the correct reset value for
-every field: a cfg_reg of 0 is A=OFF with no permissions, and a
-num_rules of 0 restores the no-rules short cut. Rename the function
-since it no longer only unlocks entries.
+The implementation describes the RISC-V virt cache hierarchy with separate
+L1 instruction and data caches, followed by unified L2 and L3 caches. It also
+enables the corresponding cache and cluster properties in the machine SMP
+description and wires the generated PPTT into the existing ACPI table
+build.
 
-Fixes: 4bf501dc0118 ("target/riscv: pmp: Clear pmp/smepmp bits on reset")
-Suggested-by: Richard Henderson <richard.henderson@linaro.org>
-Signed-off-by: Sebastian Alba Vives <sebasjosue84@gmail.com>
----
-Changes in v2:
-- Zero the whole env->pmp_state instead of masking PMP_LOCK and
-  PMP_AMATCH over a bounded set of entries, as suggested by Richard.
-  v1 also left pmp_state.addr[] and pmp_state.num_rules stale across
-  reset, which the memset covers as well.
+Unlike ARM, RISC-V doesn't have a way to discover the Cache
+topology from registers. Hence, I am hardcoding default values for the
+cache topology structures. These cache topology structures are added in
+virt.c itself so that a future series can add support for DT as well.
 
-v1: https://lore.kernel.org/qemu-devel/20260916034331.2390427-1-sebasjosue84@gmail.com/
+The series also updates the bios-tables-test data and removes the temporary
+PPTT entry from the allowed-diff list. The generated table is 96 bytes and
+describes the package, cluster, and processor hierarchy for the virt machine.
 
- target/riscv/cpu.c     | 4 ++--
- target/riscv/tcg/pmp.c | 9 ++-------
- target/riscv/tcg/pmp.h | 2 +-
- 3 files changed, 5 insertions(+), 10 deletions(-)
+This work follows the discussion and earlier work shared here:
+https://lists.gnu.org/archive/html/qemu-riscv/2024-01/msg00928.html
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index da4c1a090b..0b71196507 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -1048,7 +1048,7 @@ static void riscv_cpu_reset_hold(Object *obj, ResetType type)
-     }
- 
-     /*
--     * Clear mseccfg and unlock all the PMP entries upon reset.
-+     * Clear mseccfg and the PMP state upon reset.
-      * This is required as per the priv, smepmp, and other security
-      * extension specifications that share this CSR, and is needed
-      * to clear stale entries across reboots.
-@@ -1060,7 +1060,7 @@ static void riscv_cpu_reset_hold(Object *obj, ResetType type)
-         env->mseccfg = 0;
-     }
- 
--    pmp_unlock_entries(env);
-+    pmp_reset(env);
- #endif /* ifdef CONFIG_TCG */
- #else
-     env->priv = PRV_U;
-diff --git a/target/riscv/tcg/pmp.c b/target/riscv/tcg/pmp.c
-index 41b55519a8..437e0ff2af 100644
---- a/target/riscv/tcg/pmp.c
-+++ b/target/riscv/tcg/pmp.c
-@@ -199,14 +199,9 @@ static bool pmp_write_cfg(CPURISCVState *env, uint32_t pmp_index, uint8_t val)
-     return false;
- }
- 
--void pmp_unlock_entries(CPURISCVState *env)
-+void pmp_reset(CPURISCVState *env)
- {
--    uint32_t pmp_num = pmp_get_num_rules(env);
--    int i;
--
--    for (i = 0; i < pmp_num; i++) {
--        env->pmp_state.pmp[i].cfg_reg &= ~(PMP_LOCK | PMP_AMATCH);
--    }
-+    memset(&env->pmp_state, 0, sizeof(env->pmp_state));
- }
- 
- static void pmp_decode_napot(hwaddr a, hwaddr *sa, hwaddr *ea)
-diff --git a/target/riscv/tcg/pmp.h b/target/riscv/tcg/pmp.h
-index 4c95c2767a..99546934fc 100644
---- a/target/riscv/tcg/pmp.h
-+++ b/target/riscv/tcg/pmp.h
-@@ -79,7 +79,7 @@ void pmp_update_rule_addr(CPURISCVState *env, uint32_t pmp_index);
- void pmp_update_rule_nums(CPURISCVState *env);
- uint32_t pmp_get_num_rules(CPURISCVState *env);
- int pmp_priv_to_page_prot(pmp_priv_t pmp_priv);
--void pmp_unlock_entries(CPURISCVState *env);
-+void pmp_reset(CPURISCVState *env);
- 
- #define MSECCFG_MML_ISSET(env) get_field(env->mseccfg, MSECCFG_MML)
- #define MSECCFG_MMWP_ISSET(env) get_field(env->mseccfg, MSECCFG_MMWP)
+I have retained the contribution from Sia Jee Heng and added his
+Signed-off-by tag to the relevant patch.
+
+To enable cache structures in the PPTT, one should use similar to below
+command line option.
+
+-M virt,smp-cache.0.cache=l1d,smp-cache.0.topology=core,smp-cache.1.cache=l1i,smp-cache.1.topology=core,smp-cache.2.cache=l2,smp-cache.2.topology=cluster,smp-cache.3.cache=l3,smp-cache.3.topology=socket
+
+lscpu -C in linux can be used to display these cache structures.
+
+Sunil V L (4):
+  tests/qtest/bios-tables-test: Allow PPTT for RISC-V
+  hw/riscv/virt: Add ACPI PPTT table
+  tests/qtest/bios-tables-test: Update riscv64 virt PPTT golden
+    reference
+  MAINTAINERS: Update Sunil's email id
+
+ MAINTAINERS                       |   2 +-
+ hw/riscv/virt-acpi-build.c        |   7 ++++
+ hw/riscv/virt.c                   |  54 ++++++++++++++++++++++++++++++
+ include/hw/riscv/virt.h           |   4 +++
+ tests/data/acpi/riscv64/virt/PPTT | Bin 0 -> 96 bytes
+ 5 files changed, 66 insertions(+), 1 deletion(-)
+ create mode 100644 tests/data/acpi/riscv64/virt/PPTT
+
 -- 
 2.43.0
 
