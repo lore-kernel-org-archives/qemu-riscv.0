@@ -4,70 +4,114 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C7BDCA9ED1
-	for <qemu-riscv@archiver.kernel.org>; Mon, 12 Oct 2026 17:26:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47B6DCA9ED0
+	for <qemu-riscv@archiver.kernel.org>; Mon, 12 Oct 2026 20:34:51 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xGJmG-0000dO-4Q; Mon, 12 Oct 2026 13:25:32 -0400
+	id 1xGMjB-0003BD-7G; Mon, 12 Oct 2026 16:34:33 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <conor@kernel.org>)
- id 1xGJmD-0000cA-2T; Mon, 12 Oct 2026 13:25:29 -0400
-Received: from sea.source.kernel.org ([172.234.252.31])
+ (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
+ id 1xGMj9-0003AW-OS
+ for qemu-riscv@nongnu.org; Mon, 12 Oct 2026 16:34:31 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <conor@kernel.org>)
- id 1xGJmB-0001md-5R; Mon, 12 Oct 2026 13:25:28 -0400
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id 216A043929;
- Mon, 12 Oct 2026 17:25:23 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CFD5C1F0089B;
- Mon, 12 Oct 2026 17:25:18 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1791825923;
- bh=GlgzHk6lBqYRVt9kvsS750ANy+S/ktfzU9rWOqrS8j4=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To;
- b=IqfpQUy+whXAk2uj9jh1nzqavoYFe10o1iw6uzDto4ywooqYIyzocf8ivr4KxdRt+
- yK918O+150msMZGdDbNu2XVT5DSlMbkhkZezUM/kKEeSch47g9DjK/nygS38hOCWEF
- 2+aKZeAvZTP0IH9GXkh39DhreIwiabzeKGqg71YF7UbyLV0VDEznknvE8PP/e5YosD
- 4MgxrYvAGIt9xpBUmHq5hTmiMnaJMplFVZ+x5CBq/Vh9xHXNKivBv9YBoxY3ZCcs99
- SFa7uKe9dwpo4IbE4QuI5CTA/yRUK1wm3XqGIrC29iOh8CbH+QBd0Rlz4c7JM3jnJA
- Ipm5xa2EVNfaA==
-Date: Mon, 12 Oct 2026 18:25:16 +0100
-From: Conor Dooley <conor@kernel.org>
-To: Bin Meng <bin.meng@processmission.com>
-Cc: QEMU <qemu-devel@nongnu.org>, Alistair Francis <Alistair.Francis@wdc.com>,
- Alistair Francis <alistair@alistair23.me>, Bin Meng <bmeng.cn@gmail.com>,
- Chao Liu <chao.liu@processmission.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Fabiano Rosas <farosas@suse.de>, Laurent Vivier <lvivier@redhat.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Markus Armbruster <armbru@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Paolo Bonzini <pbonzini@redhat.com>,
- Peter Maydell <peter.maydell@linaro.org>,
- Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@oss.qualcomm.com>,
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
- Sebastian Huber <sebastian.huber@embedded-brains.de>,
- Thomas Huth <th.huth@posteo.eu>, Weiwei Li <liwei1518@gmail.com>,
- qemu-arm@nongnu.org, qemu-block@nongnu.org, qemu-riscv@nongnu.org
-Subject: Re: [PATCH v3 00/27] hw/riscv: Restore Microchip PolarFire SoC
- Icicle Kit firmware boot
-Message-ID: <20261012-evasive-constant-57bc85edf1d9@spud>
-References: <20261003170232.2450916-1-bin.meng@processmission.com>
+ (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
+ id 1xGMj7-00034L-RH
+ for qemu-riscv@nongnu.org; Mon, 12 Oct 2026 16:34:31 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1791837269;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=b7vn9BqJ6kPiJoiJ6QqSAH339LMoq4dWe7CZ269bMPU=;
+ b=DAkBNgoRGw92HLer2G38I+JMiQZMuxvDUj+q5E7av6RrsicpKC9dPQMWSpgl/fW2jPhnJs
+ BI9nNNivWpzS/BcsU0qqyYgyA7O5KXUiakOlLuqoyBLjHlnuN5dhfSWTuODwez5sw8swbV
+ msYN9iTem3hGVcSJEtv3G/fkb1Cvecw=
+Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-28-_Oc2JoRlOladP8PXb5PQGg-1; Mon,
+ 12 Oct 2026 20:34:18 +0000
+X-MC-Unique: _Oc2JoRlOladP8PXb5PQGg-1
+X-Mimecast-MFC-AGG-ID: _Oc2JoRlOladP8PXb5PQGg_1791837255
+Received: from mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.93])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 68182195395F; Mon, 12 Oct 2026 20:34:14 +0000 (UTC)
+Received: from localhost (headnet03.pony-001.prod.iad2.dc.redhat.com
+ [10.2.32.114])
+ by mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id 495431800473; Mon, 12 Oct 2026 20:34:11 +0000 (UTC)
+From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
+Subject: [PATCH v2 00/10] monitor/hmp: replace MonitorDef with GDB
+ registers
+Date: Tue, 13 Oct 2026 00:34:03 +0400
+Message-Id: <20261013-query-reg-v2-0-6f95a2e139a9@redhat.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="y5BO9IpI+dz1AkEx"
-Content-Disposition: inline
-In-Reply-To: <20261003170232.2450916-1-bin.meng@processmission.com>
-Received-SPF: pass client-ip=172.234.252.31; envelope-from=conor@kernel.org;
- helo=sea.source.kernel.org
-X-Spam_score_int: -22
-X-Spam_score: -2.3
-X-Spam_bar: --
-X-Spam_report: (-2.3 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.24,
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/02N0QqCQBBFf0XmuY3ZzTJ76j/CBxtndYNcm1VJx
+ H9vNYJeLhw4nDtDYHEc4JLMIDy64HwbwewSoKZsa1auigwGzQlzjeo1sExKuFZnpOqYk00zzCD
+ 6nbB17611K74chvuDqV8Dq9G40HuZtrNRr96vq/+6o1aokDC1cQzZw1W4asp+T/4JxbIsHySXQ
+ ge1AAAA
+X-Change-ID: 20260910-query-reg-80cd59cf4707
+To: qemu-devel@nongnu.org
+Cc: "Dr. David Alan Gilbert" <dave@treblig.org>, 
+ =?utf-8?q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>, 
+ =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>, 
+ Zhao Liu <zhao1.liu@intel.com>, Peter Maydell <peter.maydell@linaro.org>, 
+ Chinmay Rath <rathc@linux.ibm.com>, Nicholas Piggin <npiggin@gmail.com>, 
+ Glenn Miles <milesg@linux.ibm.com>, 
+ Harsh Prateek Bora <harshpb@linux.ibm.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Chao Liu <chao.liu@processmission.com>, Max Filippov <jcmvbkbc@gmail.com>, 
+ qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, 
+ Paolo Bonzini <pbonzini@redhat.com>, Laurent Vivier <laurent@vivier.eu>, 
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>, 
+ Artyom Tarasenko <atar4qemu@gmail.com>, Helge Deller <deller@gmx.de>, 
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, 
+ Warner Losh <imp@bsdimp.com>, Kyle Evans <kevans@freebsd.org>, 
+ =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3975;
+ i=marcandre.lureau@redhat.com; h=from:subject:message-id;
+ bh=zG+aaLed+0qtXU8b1NdJUr7sF6B2xEEI2f/D/er7QKw=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBqzURAstRFjuxyF/fd4LEnpy52U6mnXs8UmPQOO
+ W6ZIOyvrPSJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCas1EQAAKCRDa6OEJdZac
+ 5S+cD/9EdythbdtJ73KU2MOtyIyKjQhOCDsWEKZXyKqrKTVrj5RArXDVHyY1shs3xajnWXhHZFA
+ d3q6hiTtBQ7vVJmrvs3K9N8f2YlAbtmpURes7Uuc1Hn8lxfgedx0cpKJuCMeL0NUAtu8LRLWUjG
+ d3ACvIZyTLcfEwaeQQLTxST8NYuHUTLQGOmi3pnzaJAoxY9hC9r4OtmfSjG3rQeRqTUt2y70Jku
+ plnCTSXFZA/JOV3LB9KlolPSiUzu8V1iYP+3LdKcMw64yiF6oTndUf0hIA2b6U/PUHWZ28vZKBt
+ 9YzGrOlwO/5xuatPbjAdPMEPMy1dwTdnHZDXH/U24uSnC2XwX81hov7nRoec8qKv9vMEKNW0gq3
+ hxjo9b8zTpfGbDxNIIfJVN4kgQTbkXcRX9bEnqSYzua7aszMD7Ppoz6ETGwppx7c43nd9xqu7u3
+ ISeulki20AZieMV6kFEsDw/UWNWfEWcdYSD+zP1TP+cZFD4GABJyq0mR5IxfLm3j+DQS99tyeGT
+ tM+Uw/7UMeVgwd4A9XuDsqGDdgooLr7x+yvuXno/XaW766A7k3zRdkjSBYUe93A/dyLl7+E7chU
+ RHozk/wImdZS99yYUcmVoHZJsUQTyDZt/nad4DhzY4LKOh7uky57ifAmUD8VPROtJT/HnxDor9g
+ kVul8N3gxq1erMA==
+X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
+ fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.93
+X-Mimecast-MFC-PROC-ID: r7sfHYOpaAx_gD9Yd2DfClCTzjI5EF60GqTHyybKawU_1791837255
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=170.10.133.124;
+ envelope-from=marcandre.lureau@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: 10
+X-Spam_score: 1.0
+X-Spam_bar: +
+X-Spam_report: (1.0 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.24,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ RCVD_IN_SBL_CSS=3.335, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -83,91 +127,88 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---y5BO9IpI+dz1AkEx
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi,
 
-On Sun, Oct 04, 2026 at 01:01:50AM +0800, Bin Meng wrote:
-> The microchip-icicle-kit machine was originally validated with an older
-> Hart Software Services (HSS) firmware stack. HSS v2024.06 cannot boot
-> through U-Boot to Linux because several firmware-visible parts of the
-> PolarFire SoC are missing or incomplete.
->=20
-> The first failure occurs before the UART is initialized because the L2
-> zero window is not mapped. HSS then needs additional L2 cache controller
-> and DDR training behavior. Later boot stages exercise system services,
-> the RTC, SDHC version 4 DMA, and high-capacity SD card block sizing,
-> along with the complete DDR aliases. The existing models ither reject
-> these accesses or expose behavior that does not match the hardware
-> specifications.
->=20
-> This series restores the complete firmware boot flow. With these
-> changes, QEMU boots the HSS v2024.06 eNVM image, loads its U-Boot
-> payload from an SD card, and reaches the Buildroot 2026.05 Linux
-> login prompt.
->=20
-> The changes are organized around the firmware boot sequence:
->=20
-> * Correct the L2-LIM size, map the L2 zero window, and provide the DMC
->   status transitions required by HSS DDR initialization.
-> * Model the documented L2CC Config, WayEnable, and WayMask registers,
->   and resize L2-LIM as cache ways are enabled.
-> * Complete SDHCI version 4 support used by the Cadence controller,
->   including Host Control 2, SDMA system addressing, 64-bit ADMA2
->   descriptors, and SDMA boundary continuation.
-> * Run ADMA from a bounded timer-driven engine instead of performing work
->   from command or unrelated MMIO accesses.  This keeps DMA progress
->   independent of guest register traffic and avoids consuming a polling
->   deadline inside the command write.
-> * Keep SDHC and SDXC memory transfers at their fixed 512-byte block
->   size, and advertise the Cadence controller's 64-bit system bus
->   support.
-> * Add the PolarFire SoC serial-number system service and RTC, and honor
->   the system-service notification control bit.
-> * Correct the DDR aliases and fix the board topology at its physical
->   configuration of 2 GiB of RAM and five harts.
-> * Document direct and HSS boot, add focused qtests and a full firmware
->   functional test, and restore the machine's Supported maintainer
->   status.
->=20
-> Testing performed:
->=20
-> * Built qemu-system-riscv64 and the documentation.
-> * Passed various newly added qtests.
-> * Booted HSS v2024.06, U-Boot, and Buildroot 2026.05 Linux to the login
->   prompt using the functional-test image.
->=20
-> The functional test uses the processmission/qemu-machine-images release
-> v1.0.0 tarball:
->=20
-> https://github.com/processmission/qemu-machine-images/releases/download/
-> v1.0.0/riscv64-microchip-icicle-kit-v1.0.0.tar.zst
->=20
-> When restoring the HSS boot support, 3 potential bugs were identified in
-> the upstream HSS source codes that either blocks the DDR training from
-> succeed or traps in a multi-core race at the very beginning or after
-> a succesfully DDR training but stuck at OpenSBI/U-Boot hand-off. There
-> are already bug reports filed aginst various upstream projects.
+HMP monitor supports printing $register expression. The lookup
+was done via GDB stub registers, and supplementary MonitorDef
+HMP-specific tables.
 
-Due to post conference busy-ness, I'm not entirely sure when I'll get to
-provide a review on this, but for now
-Tested-by: Conor Dooley <conor.dooley@microchip.com> # with 2026.04.1 HSS +=
- provided sdcard.img
+Migrate HMP registers to use the GDB infrastructure and remove the
+legacy HMP MonitorDef. Internal registers aren't exposed to GDB.
+This also drops HMP $pc x86 fallback (use $eip/$rip instead).
 
-Thanks,
-Conor.
+Known behavioural changes on RISC-V: CSR lookup is now case-sensitive
+and vector registers now report "unkown register" instead of a
+target-specific message ("Unable to print the value of vector vreg 'v0'
+from this API")
 
---y5BO9IpI+dz1AkEx
-Content-Type: application/pgp-signature; name=signature.asc
+Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
+---
+Changes in v2:
+- dropped v1 patch 5 (CPUClass::get_pc fallback for $pc)
+- new patch gdb_register_internal_coprocessor() to hide registers from GDB
+- SPARC64, m68k, RISC-V aliases now use internal registration
+- pickup trailer tags
+- Link to v1: https://lore.kernel.org/qemu-devel/20260911-query-reg-v1-0-0c04f0c02cf3@redhat.com
 
------BEGIN PGP SIGNATURE-----
+---
+Marc-André Lureau (10):
+      hmp: don't crash on invalid register
+      gdbstub: fix next register base after register gaps
+      gdbstub: set feature->base_reg for dynamic features
+      gdbstub: add gdb_register_internal_coprocessor()
+      target/i386: expose segment limits via GDB
+      target/m68k: expose system registers via GDB
+      target/sparc64: expose system registers via GDB
+      target/riscv: bypass smstateen check in debugger mode
+      target/riscv: expose register aliases via GDB
+      monitor/hmp: remove legacy MonitorDef infrastructure
 
-iHUEABYKAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCas0X/AAKCRB4tDGHoIJi
-0rBCAQDKoQPomJWCVV6MNfXvxGBe2r013pdb3CpfnF6aBjYMQwEAgd1aDFlJfewJ
-WdYFIUknMjVc+vFDgXbeDfeeIueXtgA=
-=/dfT
------END PGP SIGNATURE-----
+ configs/targets/i386-softmmu.mak          |   2 +-
+ configs/targets/m68k-softmmu.mak          |   2 +-
+ configs/targets/riscv32-linux-user.mak    |   2 +-
+ configs/targets/riscv32-softmmu.mak       |   2 +-
+ configs/targets/riscv64-bsd-user.mak      |   2 +-
+ configs/targets/riscv64-linux-user.mak    |   2 +-
+ configs/targets/riscv64-softmmu.mak       |   2 +-
+ configs/targets/sparc64-softmmu.mak       |   2 +-
+ configs/targets/x86_64-softmmu.mak        |   2 +-
+ gdbstub/gdb-xml/i386-segments.xml         |  14 +++
+ gdbstub/gdb-xml/m68k-system.xml           |  32 +++++++
+ gdbstub/gdb-xml/riscv-32bit-alias.xml     | 105 ++++++++++++++++++++++
+ gdbstub/gdb-xml/riscv-32bit-fpu-alias.xml |  40 +++++++++
+ gdbstub/gdb-xml/riscv-64bit-alias.xml     | 105 ++++++++++++++++++++++
+ gdbstub/gdb-xml/riscv-64bit-fpu-alias.xml |  46 ++++++++++
+ gdbstub/gdb-xml/sparc64-system.xml        |  22 +++++
+ gdbstub/gdbstub.c                         |  85 ++++++++++++++----
+ include/exec/gdbstub.h                    |  21 +++++
+ include/hw/core/cpu.h                     |   2 +-
+ include/hw/core/sysemu-cpu-ops.h          |  16 ----
+ include/monitor/hmp.h                     |   6 --
+ include/qemu/typedefs.h                   |   1 -
+ monitor/hmp.c                             |  46 +---------
+ target/arm/gdbstub.c                      |   8 +-
+ target/arm/gdbstub64.c                    |  10 ++-
+ target/i386/cpu.c                         |  32 -------
+ target/i386/gdbstub.c                     |  24 +++++
+ target/m68k/cpu.c                         |  22 -----
+ target/m68k/helper.c                      |  47 ++++++++++
+ target/ppc/gdbstub.c                      |   2 +-
+ target/riscv/cpu.c                        |   1 -
+ target/riscv/gdbstub.c                    |  56 +++++++++++-
+ target/riscv/internals.h                  |   3 -
+ target/riscv/monitor.c                    | 140 ------------------------------
+ target/riscv/tcg/csr.c                    |   3 +-
+ target/sparc/cpu.c                        |  19 ----
+ target/sparc/gdbstub.c                    |  38 ++++++++
+ target/xtensa/cpu.c                       |   2 +-
+ 38 files changed, 645 insertions(+), 321 deletions(-)
+---
+base-commit: 615ece3c406b262996e569f29ea6eed0d81c4d8d
+change-id: 20260910-query-reg-80cd59cf4707
 
---y5BO9IpI+dz1AkEx--
+Best regards,
+--  
+Marc-André Lureau <marcandre.lureau@redhat.com>
+
 
