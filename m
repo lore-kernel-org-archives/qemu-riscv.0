@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB109CA9EC5
-	for <qemu-riscv@archiver.kernel.org>; Mon, 12 Oct 2026 15:10:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52331CA9EC5
+	for <qemu-riscv@archiver.kernel.org>; Mon, 12 Oct 2026 15:11:11 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xGHfH-0000Fr-Ml; Mon, 12 Oct 2026 11:10:11 -0400
+	id 1xGHg4-0000ld-R0; Mon, 12 Oct 2026 11:11:01 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <eblot.ml@gmail.com>)
- id 1xGHf9-00006V-An
- for qemu-riscv@nongnu.org; Mon, 12 Oct 2026 11:10:03 -0400
-Received: from mail-wm1-f52.google.com ([209.85.128.52])
+ id 1xGHfy-0000gQ-Hg
+ for qemu-riscv@nongnu.org; Mon, 12 Oct 2026 11:10:55 -0400
+Received: from mail-wr1-f42.google.com ([209.85.221.42])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <eblot.ml@gmail.com>)
- id 1xGHey-0007Q8-Os
- for qemu-riscv@nongnu.org; Mon, 12 Oct 2026 11:10:02 -0400
-Received: by mail-wm1-f52.google.com with SMTP id
- 5b1f17b1804b1-4a1698ea378so16547905e9.2
- for <qemu-riscv@nongnu.org>; Mon, 12 Oct 2026 08:09:50 -0700 (PDT)
+ id 1xGHfw-0007kv-V0
+ for qemu-riscv@nongnu.org; Mon, 12 Oct 2026 11:10:54 -0400
+Received: by mail-wr1-f42.google.com with SMTP id
+ ffacd0b85a97d-48b0584ad71so1079724f8f.0
+ for <qemu-riscv@nongnu.org>; Mon, 12 Oct 2026 08:10:52 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1791817790; x=1792422590;
+ d=1e100.net; s=20260707; t=1791817851; x=1792422651;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=swEPfqBhLhRQqBx1yQ6epg19lZgaV2YVKrysQPpGbtE=;
- b=F2iFbX0CL33/LtxV0KGBpA629iCLXWQhjcSzbGRYiNQ5Em1t4ntNDsQ70YbjEiGGRZ
- a4xXVnVagWRmWKlS99fOlfZb2v3Oim9zg9Ha4ZrehSgSJ7LPxITBe81wKM5ChoiEquox
- C9WolUahBFNzwFyFhLqIgk+/AwxVlsCCkKmageB+eHSfzq0H3GEI8OI+x8uwrpm7R/oN
- rMVaueclWlWh2kAQO69sL2CTDZxZoNAYQnMeARYsgtiCyR9gzGpqszwlonv2QAqdmtcR
- Q1fE9oneBW2t38gobydQsy0WVSqHN1GyF9dAE4wFq/V1wjNaGCCB3AupdFVi3SPlWrNb
- BdkA==
+ bh=9bQz/dpQcTFmknV0ZVNikpRUpVUFhyWc4TFL1C+8fm4=;
+ b=YUmuFaZ6TR3+1mmmvFfrxWCB6AQdN+oSfXQWe2NOMezdT7u8OUwXfJ+fsuQIeuXIer
+ ot11qiRPD0h/z6VqMomCexRn7hb4y37FrKEM4V3El2link6Gh0cHakJAtSDl4/iI7R8d
+ I2InUBnM7oXryI7iaeFLZov1ZyiSXhRjbbgYIKUWddmnjUSQSH2GiCv+oUrn6iVKPnRi
+ UR4BofgrMMzWu9nzlj016gxAo8nnBOQEND9fWlrBp1UbCsW/tCA6TsB3pupsRogH40pL
+ aEawuq5lNAp/rddUnR3F1OtyFxh1kRuX/ibqYQ31NTslssYu5YLQQhFpUEDXNJcQ0CHs
+ 3YcQ==
 X-Forwarded-Encrypted: i=1;
- AKwUvBxDm/Qx2s3hkqcn7MMUQPTQKaQPSYv07fz2TlehxATAbZyZSOaky+V8f03TwHbLLS3qwsrb1lBumDCf@nongnu.org
-X-Gm-Message-State: AFq9FYIa2R3NqjxUD+4lylJPOWeOS7seZw8OpXS38aemj2Lzxn7PoyU1
- 8CqPPTxtLxvMYmyldWfZRYppjIHvkxkX5TgRX816boxDbT/BKrSaQKrJ
-X-Gm-Gg: AYBFou3mOvi9qsCqCL3XmlgFEY2lgOlkegIzYRk7rdhkc1akhedS+WXM4GDWfznxYw2
- Hz2LrpwwalXMr6spwMQOpWjLq31g/4qJXnrUFMKpKVO1EpV5s36X1d9A4qhL5RD58GxEMn0cNiJ
- ButWxXwZSW7hriVDaAdBrhlbnbpJo4JY874GeeqXvIIO6WGnovTbYMUkkd6/hfOeGYo6Hjjy8qx
- /o0+z7mD3hJdzIYdyA6Srceh6xs3au/dPlReYXd1/Je/da/xKm4mMYilPvo+7bDD3TsfNR8R6Zx
- BgSYG/KckK0eCzsjbdCnCJlRDaDAO4pd+Zmi+Po9LDucJW7xL0V2rCYHzhovf5PEaHtGuc0V5r9
- h1VjwuAGrw9Fx988u6Ih8chbHaS1cBnB+sOVT4o7EAqJfuUpA3vcgDT5zlAkHdi975PWHgDtpXX
- zzMUM29lwOqJVxg2gWeKGjTrsFBqVUrM5FI65uPaYHuuUJfWkMF0JMCCrZMJEjJzm/4KlLRDaM0
- fGNt5f1EJdiRiOTKTanGSVe7N1o2cK6I5rYb8of05qn4g==
-X-Received: by 2002:a05:600c:6388:b0:4a1:6f78:8419 with SMTP id
- 5b1f17b1804b1-4a18e3ee8f9mr184492125e9.0.1791817789483; 
- Mon, 12 Oct 2026 08:09:49 -0700 (PDT)
+ AKwUvBzen/b1x0XjkbmhkVLK09d2bnIAYCerTRnQOvBULUAWGDzF+St7N22zBh7Ygdbx/Z5ObxV3zOOUNu16@nongnu.org
+X-Gm-Message-State: AFq9FYLXVFnpANju0exdxWlh9rt1CTNLGhhO64CeSSoOaOvikmNJZQMK
+ qiOKBXo4TCacOy86prTPg3EB+7CBUCIqaayOgfkzpI8g+hZLmfTL/siM
+X-Gm-Gg: AYBFou0gxTr1WvSbdlYqHnZQ3TaKjZY6q6/CanFBxCsG9+2XB9VmeAraTieenJwVfGg
+ bdHydciRQaW9MYZJT3Lfz5eWqFWvKR72b1K6wqLwcMbCIeJ98D5nWt39+G8N+bsY49w0a4u5dPf
+ 3oQAVGYhiXQTffrN5sB+kP1BmsD2yS3tctCKK3+36Id6m0DD2kh/e5ftlS/Da3ZCwegnysMPnzy
+ 4XrBPiCG08qzpu+uGs5fM0BbchRzqx6pFy5UKCqz3h85ar3KmuYfKKRd5OQTiGiosHDtoSkkEEf
+ BGgYt5jDT58fo1PS/UcjI4ysb6Mtn52RKiz8JFgNREubBMptf8tW/wbOzKYmX3lkvJV6c+JZkDd
+ sUYTh0Q+e675hOXg5ubNBOOii6al9nr3ajXaVVrD/rOHuxnObP32dSIY69kRSfkUTCl3sdRgiNa
+ mQpTLOBsVFQV15GC9VpEBuaBzRgXpFOZLQWueBr0Jfv7TDfZ/RW6pgrnQfQ24NOlH0N8v0CcAPw
+ N/cqSVqiye12z5WADbOxH2AwCiqDZPwXNqqKvv1Z4zzzg==
+X-Received: by 2002:a05:6000:29d6:b0:487:40a:5ba8 with SMTP id
+ ffacd0b85a97d-48dbacecc29mr10911946f8f.15.1791817850809; 
+ Mon, 12 Oct 2026 08:10:50 -0700 (PDT)
 Received: from localhost (89-93-216-19.hfc.dyn.abo.bbox.fr. [89.93.216.19])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a1a571294dsm1845815e9.3.2026.10.12.08.09.48
+ ffacd0b85a97d-48db9abd3aasm19361499f8f.32.2026.10.12.08.10.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 12 Oct 2026 08:09:48 -0700 (PDT)
-Date: Mon, 12 Oct 2026 16:32:10 +0200
-Subject: [PATCH v2 17/50] tests/qtest: ds1338: cover the DS1338-specific
- register map
+ Mon, 12 Oct 2026 08:10:50 -0700 (PDT)
+Date: Mon, 12 Oct 2026 16:32:11 +0200
+Subject: [PATCH v2 18/50] tests/qtest: ds1338: cover the power-on register
+ defaults
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261012-bmc-minerva-v2-17-4c3dff084ec9@free.fr>
+Message-Id: <20261012-bmc-minerva-v2-18-4c3dff084ec9@free.fr>
 References: <20261012-bmc-minerva-v2-0-4c3dff084ec9@free.fr>
 In-Reply-To: <20261012-bmc-minerva-v2-0-4c3dff084ec9@free.fr>
 To: qemu-devel@nongnu.org
@@ -78,15 +78,15 @@ Cc: =?utf-8?q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>,
  =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>, 
  Emmanuel Blot <emmanuel.blot@free.fr>
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1791815520; l=4125;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1791815520; l=1856;
  i=emmanuel.blot@free.fr; s=20260602; h=from:subject:message-id;
- bh=f3xwMcybpUuYM4No52iJ5xYNXDYQs4KcmfHzwqwanMw=;
- b=8/Krx+jLDWUoiyTq5575d8wTJCHv2D7IMrOCjBKm+Nwf/aZoJlYmq+tzWNd3P3VgAH1gfTO2d
- QGcbCWT/GecBMwiBCkphCM3WN7RG0Moi4PsoA5RhaQTLXcWn1CsxcWG
+ bh=9nlnuEXuVbr9L6NPGTObkdBzIqjpFAqXLz9Eqo8+gf4=;
+ b=EJka7OBMD+c0KBxDRvlXbDlcNQsODRKuSGgPWLO44rhTjOmICbJOPv7rRbgDjhdmigeBEQo8V
+ 88tDnBOTX2eCk+HxE0JRj6QNbiPu+RHy+uCJpiagxA9hyRs7ktIb/Oy
 X-Developer-Key: i=emmanuel.blot@free.fr; a=ed25519;
  pk=0qFrZ21FAAN8OfVsSoVcCFTk/NMYOWzxJz4paSAVm0g=
-Received-SPF: pass client-ip=209.85.128.52; envelope-from=eblot.ml@gmail.com;
- helo=mail-wm1-f52.google.com
+Received-SPF: pass client-ip=209.85.221.42; envelope-from=eblot.ml@gmail.com;
+ helo=mail-wr1-f42.google.com
 X-Spam_score_int: -15
 X-Spam_score: -1.6
 X-Spam_bar: -
@@ -112,114 +112,49 @@ From:  Emmanuel Blot via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The register map is a set of per-model class properties. Pin the
-values it holds for this part, so a later change cannot alter them
-unnoticed.
+Nothing pinned the reset value of the control register, which is how it
+sat at zero rather than at its documented power-on state.
 
 Signed-off-by: Emmanuel Blot <emmanuel.blot@free.fr>
 ---
- tests/qtest/ds1338-test.c | 67 ++++++++++++++++++++++++++++++++++++++++++++++-
- 1 file changed, 66 insertions(+), 1 deletion(-)
+ tests/qtest/ds1338-test.c | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
 diff --git a/tests/qtest/ds1338-test.c b/tests/qtest/ds1338-test.c
-index b8d0e65ec4..6066a34846 100644
+index 6066a34846..fad0ca53d4 100644
 --- a/tests/qtest/ds1338-test.c
 +++ b/tests/qtest/ds1338-test.c
-@@ -24,6 +24,15 @@
+@@ -31,6 +31,7 @@
+ #define DS1338_NUM_REGS  0x40
  
- #define DS1338_ADDR 0x68
+ #define DS1338_CTRL_OSF  0x20
++#define DS1338_CTRL_POR  0xb3
  
-+/* DS1338 register map */
-+#define DS1338_SECONDS   0x00
-+#define DS1338_CONTROL   0x07
-+#define DS1338_NVRAM     0x08
-+#define DS1338_NUM_REGS  0x40
-+
-+#define DS1338_CTRL_OSF  0x20
-+
-+/* The clock and calendar come up on the host time. */
+ /* The clock and calendar come up on the host time. */
  static void send_and_receive(void *obj, void *data, QGuestAllocator *alloc)
- {
-     QI2CDevice *i2cdev = (QI2CDevice *)obj;
-@@ -32,7 +41,7 @@ static void send_and_receive(void *obj, void *data, QGuestAllocator *alloc)
-     time_t now = time(NULL);
-     struct tm *tm_ptr = gmtime(&now);
- 
--    i2c_read_block(i2cdev, 0, resp, sizeof(resp));
-+    i2c_read_block(i2cdev, DS1338_SECONDS, resp, sizeof(resp));
- 
-     /* check retrieved time against local time */
-     g_assert_cmpuint(from_bcd(resp[4]), == , tm_ptr->tm_mday);
-@@ -40,6 +49,56 @@ static void send_and_receive(void *obj, void *data, QGuestAllocator *alloc)
+@@ -49,6 +50,14 @@ static void send_and_receive(void *obj, void *data, QGuestAllocator *alloc)
      g_assert_cmpuint(2000 + from_bcd(resp[6]), == , 1900 + tm_ptr->tm_year);
  }
  
-+/* Writable control bits round-trip; the reserved ones read back zero. */
-+static void test_control_register(void *obj, void *data,
-+                                  QGuestAllocator *alloc)
++/* The control register comes up in its documented power-on state. */
++static void test_reset_defaults(void *obj, void *data, QGuestAllocator *alloc)
 +{
 +    QI2CDevice *i2cdev = (QI2CDevice *)obj;
 +
-+    i2c_set8(i2cdev, DS1338_CONTROL, 0x93);
-+    g_assert_cmphex(i2c_get8(i2cdev, DS1338_CONTROL), ==, 0x93);
-+
-+    i2c_set8(i2cdev, DS1338_CONTROL, 0x4c);
-+    g_assert_cmphex(i2c_get8(i2cdev, DS1338_CONTROL), ==, 0x00);
++    g_assert_cmphex(i2c_get8(i2cdev, DS1338_CONTROL), ==, DS1338_CTRL_POR);
 +}
 +
-+/* The oscillator-stop flag can only be cleared by a write, never set. */
-+static void test_osf_write_protect(void *obj, void *data,
-+                                   QGuestAllocator *alloc)
-+{
-+    QI2CDevice *i2cdev = (QI2CDevice *)obj;
-+
-+    g_assert_cmphex(i2c_get8(i2cdev, DS1338_CONTROL) & DS1338_CTRL_OSF,
-+                    ==, DS1338_CTRL_OSF);
-+    i2c_set8(i2cdev, DS1338_CONTROL, 0x00);
-+    g_assert_cmphex(i2c_get8(i2cdev, DS1338_CONTROL) & DS1338_CTRL_OSF, ==, 0);
-+    i2c_set8(i2cdev, DS1338_CONTROL, DS1338_CTRL_OSF);
-+    g_assert_cmphex(i2c_get8(i2cdev, DS1338_CONTROL) & DS1338_CTRL_OSF, ==, 0);
-+}
-+
-+/* The user RAM returns what the guest wrote to it. */
-+static void test_nvram(void *obj, void *data, QGuestAllocator *alloc)
-+{
-+    QI2CDevice *i2cdev = (QI2CDevice *)obj;
-+
-+    i2c_set8(i2cdev, 0x08, 0xaa);
-+    i2c_set8(i2cdev, 0x20, 0x55);
-+    i2c_set8(i2cdev, 0x3f, 0xc3);
-+
-+    g_assert_cmphex(i2c_get8(i2cdev, 0x08), ==, 0xaa);
-+    g_assert_cmphex(i2c_get8(i2cdev, 0x20), ==, 0x55);
-+    g_assert_cmphex(i2c_get8(i2cdev, 0x3f), ==, 0xc3);
-+}
-+
-+/* The register pointer wraps at the end of the map. */
-+static void test_address_wrap(void *obj, void *data, QGuestAllocator *alloc)
-+{
-+    QI2CDevice *i2cdev = (QI2CDevice *)obj;
-+
-+    i2c_set8(i2cdev, DS1338_NVRAM, 0x5a);
-+    g_assert_cmphex(i2c_get8(i2cdev, DS1338_NVRAM + DS1338_NUM_REGS), ==, 0x5a);
-+}
-+
- static void ds1338_register_nodes(void)
- {
-     QOSGraphEdgeOptions opts = {
-@@ -49,6 +108,12 @@ static void ds1338_register_nodes(void)
- 
-     qos_node_create_driver("ds1338", i2c_device_create);
+ /* Writable control bits round-trip; the reserved ones read back zero. */
+ static void test_control_register(void *obj, void *data,
+                                   QGuestAllocator *alloc)
+@@ -110,6 +119,7 @@ static void ds1338_register_nodes(void)
      qos_node_consumes("ds1338", "i2c-bus", &opts);
-+
+ 
      qos_add_test("tx-rx", "ds1338", send_and_receive, NULL);
-+    qos_add_test("control-register", "ds1338", test_control_register, NULL);
-+    qos_add_test("osf-write-protect", "ds1338", test_osf_write_protect, NULL);
-+    qos_add_test("nvram", "ds1338", test_nvram, NULL);
-+    qos_add_test("address-wrap", "ds1338", test_address_wrap, NULL);
- }
-+
- libqos_init(ds1338_register_nodes);
++    qos_add_test("reset-defaults", "ds1338", test_reset_defaults, NULL);
+     qos_add_test("control-register", "ds1338", test_control_register, NULL);
+     qos_add_test("osf-write-protect", "ds1338", test_osf_write_protect, NULL);
+     qos_add_test("nvram", "ds1338", test_nvram, NULL);
 
 -- 
 2.50.1
