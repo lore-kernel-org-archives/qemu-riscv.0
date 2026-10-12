@@ -4,110 +4,106 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA34ECA9ED2
-	for <qemu-riscv@archiver.kernel.org>; Mon, 12 Oct 2026 20:37:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C264FCA9ED0
+	for <qemu-riscv@archiver.kernel.org>; Mon, 12 Oct 2026 22:33:51 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xGMkO-0004Tg-1o; Mon, 12 Oct 2026 16:35:48 -0400
+	id 1xGOZr-00014f-Ah; Mon, 12 Oct 2026 18:33:03 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1xGMk5-0003hZ-JW
- for qemu-riscv@nongnu.org; Mon, 12 Oct 2026 16:35:30 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1xGMk2-0003Qa-IA
- for qemu-riscv@nongnu.org; Mon, 12 Oct 2026 16:35:29 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1791837325;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=l5vbtFf72T0N48LuB/QC6JVL+EfNDPldJPgJc3nOj6g=;
- b=YxLtxL0whY6hnyjb4J5jqOc98FeLHtnQvb94NdyQcMYA/XdzyNSzFXDyyNk3Yna1q/nx7g
- 7iTvl9Ziw6Fj7/sGBHAxnxSxo9nexWbz7TaSBJ6EpJR98e1UZ5ItPF2KGPIQhUfqPIcPB3
- OE6ZGkqYS4W0a09ufyz3/h508RN33hE=
-Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-325-FfKfkT6hOaqlaHfmsdpzAw-1; Mon,
- 12 Oct 2026 20:35:20 +0000
-X-MC-Unique: FfKfkT6hOaqlaHfmsdpzAw-1
-X-Mimecast-MFC-AGG-ID: FfKfkT6hOaqlaHfmsdpzAw_1791837317
-Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 0F2381800611; Mon, 12 Oct 2026 20:35:17 +0000 (UTC)
-Received: from localhost (headnet03.pony-001.prod.iad2.dc.redhat.com
- [10.2.32.114])
- by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 8C5D430000E7; Mon, 12 Oct 2026 20:35:15 +0000 (UTC)
-From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-Date: Tue, 13 Oct 2026 00:34:13 +0400
-Subject: [PATCH v2 10/10] monitor/hmp: remove legacy MonitorDef infrastructure
+ (Exim 4.90_1) (envelope-from <sebasjosue84@gmail.com>)
+ id 1xGOZn-000143-M6
+ for qemu-riscv@nongnu.org; Mon, 12 Oct 2026 18:32:59 -0400
+Received: from mail-ed1-x534.google.com ([2a00:1450:4864:20::534])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <sebasjosue84@gmail.com>)
+ id 1xGOZk-0003ke-Aq
+ for qemu-riscv@nongnu.org; Mon, 12 Oct 2026 18:32:59 -0400
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-6a374bea882so3421894a12.1
+ for <qemu-riscv@nongnu.org>; Mon, 12 Oct 2026 15:32:54 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1791844373; cv=none;
+ d=google.com; s=arc-20260327;
+ b=j8OLCh8u+dKJ4RQ3Zq5jGlwQ+5Q5uDdf89zlmiaXkaeAYp6yMYDXHuXcpGiwZ8vf/0
+ 8IdM1LlHsqima885x5kFjM24JTNl56k3/2punCudBiFP5K6KVGg9ABONGmNMbH5g89r7
+ 6pat0INPryrIHyzvnaciMV7I6AXL3UaPnIVoH14lCnlmqnzMKAlKluJGit+C8ARqaIj6
+ hUQIJEgAQ10u+cSJuuyCBNd22bJEiU60HAAz0wDsPg8OpWJqUuQ0MxSX2t8HsvPkAqco
+ 9myIjSdMYzo1FtHL+kCwOmwZd5K8Y9fBOH2S+JUvykgdommEzsGNB4MYh7gQ/LEyieef
+ oN2g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=7sj2j+PKgzRHIhCs0KM7Rd1TZY1lcNEpwetTquNHA5o=;
+ fh=ABU4QYAW007E6VH/N0jiAOEC+cU8Er0JQC4fLuLe3SA=;
+ b=RvJxiA6YtUDshQbHniAVQ2Qv1uuHcoBRJoA2U5i9kzqQ//LQW6ScebZX9z8OY2E/YG
+ FaF0MOLY5XpgXbcqTCM2PVCwcfScK2Ptr11RGRhWsP8Ncx4Gn7/MSo0yhtP8dvntu67l
+ sacjZbJnID/sdfTeyO+IWMGdQ8TI9hpV/tJ2HtSoMs5pckoM7/PFCTX9R5KUAxEVH4IV
+ Mf9mAKNKRz/uIL1rFt7eomid1Z5MKLhI32a8OaiavGyBePuPTARrnQKZoikATrFWSBlO
+ ONiHEKRvTwE4rlwkuUjcaGhb9ntayn/+UDZsc0v0pgWSV4Eb5ivLkZIwG/iZH/tDm0BY
+ bEkw==; darn=nongnu.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1791844373; x=1792449173; darn=nongnu.org;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=7sj2j+PKgzRHIhCs0KM7Rd1TZY1lcNEpwetTquNHA5o=;
+ b=M36pQj215NjfvV+X6kZLy3jTKPXlV1hBW///7XJW6LmCAhRP1eQahVMDJRgiYndX00
+ fv9lRsQCy9ibu3ACDQ/I92NY1MxE+XudTdlbiDmyHU84Q8O8eG16McaFs+WuWUaLpnKn
+ q4iYYjB0LrW2g7IKLlD8DylFloL79EUKTNAg8HcJJFbINDoC8s/La1AhWpqtPHj2wiC8
+ Nle+FTQMGX5FCBdpRYHg26R3+fPpjFwI3IdLh2tbLH1fWlUQRiJwFdrMSYhPgiIzAjLg
+ Ll/rf7VHUw5PzQIOMpN/wx1nFDjTWeo2HWbDxZE9La4ciECa6HH51bCKuTltMRpbrWFb
+ ehTg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1791844373; x=1792449173;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=7sj2j+PKgzRHIhCs0KM7Rd1TZY1lcNEpwetTquNHA5o=;
+ b=snb7Ff5TUVmZ2LYcqQGsxx2RT77bsIqne4D0w0v//Nea1bztutkjsT5sFojnN/mukf
+ tcqMZOdWcR9mfiC6Fn15lmBFLuWRzOJaYHsGXXpqNuko1iCaAVujDSSM2O27ZqYfaeBR
+ 9Cb3CHKRhDuPM8lUu3WkJJPVdMy6Cv2sEyPzQ/fJYT4czmCevlwmEwPutC3S0c8rMzPy
+ FII7zPC3ybYBKImMRBRmkcEB40zXxAN1sU7tnrf6Y57bblaujJ5RiMoPOm7vol2G8gys
+ FcfdFx+BMylDt/c+5HJwteb+xAbsT/VWfj4rrLoUmU9ma56vYrVt5twExgDMll9sklsf
+ TWYw==
+X-Gm-Message-State: AFq9FYIbdqInptlC+sz3cwEFVnk5hrwPBhQ3ZYUe1/YhRir32JVmkkMt
+ ffKn79AIuqTAfObAPuHaavuqqy6o3xkp0dAeEMVRzfa5mo7lXG0V57U8LA78MsSdwUEDT7QOfAx
+ Bdl3ybNJyIi8q7ruwTTm8wB0vRDIgJy0=
+X-Gm-Gg: AYBFou2jot5i02A4mN8hI4ZbKiiMm/UL6h0v5GYmGAd6v90yyMyL87hegBYXIkkEIHk
+ 5kaFOvF8Lih90uFdnyYYVO59cJLv7K73OOIie0zdfEfFyqFF4T8wI131z2cS0SiCnCAlOSQgv+K
+ v3WjMKQwa1Na7oFk1Cr44RQdNHINYEPnXsmPCV0e11FDZluCx4Jxomzi9PA9L5tjyG4Y1RWp1T1
+ 7GYlYu2quLlDdEggrOpfAvPhRqIJf8CsZlViDV+UyR3GdSpdd4wqpb3fKRyFDY02BQ/ONEUKiy9
+ n7AQCoI5OEH96LfDX1s8DOm3vNtVZr8hDwsM32GqICK8MyVeFg6J/i3F68doV8VJdedjxrg6CTo
+ 9AxyH2MSheJd/
+X-Received: by 2002:a17:907:9720:b0:c26:337e:7e05 with SMTP id
+ a640c23a62f3a-c31a9a29d50mr1002992466b.4.1791844373387; Mon, 12 Oct 2026
+ 15:32:53 -0700 (PDT)
 MIME-Version: 1.0
-Message-Id: <20261013-query-reg-v2-10-6f95a2e139a9@redhat.com>
-References: <20261013-query-reg-v2-0-6f95a2e139a9@redhat.com>
-In-Reply-To: <20261013-query-reg-v2-0-6f95a2e139a9@redhat.com>
+References: <20260916034331.2390427-1-sebasjosue84@gmail.com>
+ <20261011040617.807504-1-sebasjosue84@gmail.com>
+In-Reply-To: <20261011040617.807504-1-sebasjosue84@gmail.com>
+From: =?UTF-8?Q?Sebasti=C3=A1n_Alba?= <sebasjosue84@gmail.com>
+Date: Mon, 12 Oct 2026 16:32:41 -0600
+X-Gm-Features: AclHuK_WNHZg6jiQLSqkXTz6bmvZ3MwxP7UDRWziI0LllEuRsM0lhnFtdJM4BtM
+Message-ID: <CAJD=UNcvzM8=k7j84fkCDDO79gNES3o4d=mmV3k+FiCU+y43pA@mail.gmail.com>
+Subject: Re: [PATCH v2] target/riscv: pmp: clear the entire PMP state on reset
 To: qemu-devel@nongnu.org
-Cc: "Dr. David Alan Gilbert" <dave@treblig.org>, 
- =?utf-8?q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>, 
- =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>, 
- Zhao Liu <zhao1.liu@intel.com>, Peter Maydell <peter.maydell@linaro.org>, 
- Chinmay Rath <rathc@linux.ibm.com>, Nicholas Piggin <npiggin@gmail.com>, 
- Glenn Miles <milesg@linux.ibm.com>, 
- Harsh Prateek Bora <harshpb@linux.ibm.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, 
- Weiwei Li <liwei1518@gmail.com>, 
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Chao Liu <chao.liu@processmission.com>, Max Filippov <jcmvbkbc@gmail.com>, 
- qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, 
- Paolo Bonzini <pbonzini@redhat.com>, Laurent Vivier <laurent@vivier.eu>, 
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>, 
- Artyom Tarasenko <atar4qemu@gmail.com>, Helge Deller <deller@gmx.de>, 
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, 
- Warner Losh <imp@bsdimp.com>, Kyle Evans <kevans@freebsd.org>, 
- =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=15612;
- i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=PIz68Lravk3qogWLrBKuIAOtp0uxbqDWrDgGR8VnrQI=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBqzURBCSdbWFJyWXskWBWVdSGtRKG2EMwk/Li5v
- hEI03yhU5aJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCas1EQQAKCRDa6OEJdZac
- 5UExD/9ZSsgcnvgTOQUeAM7B/+SrfPu5iJAO/J6Kf+iwUg4QR5NkCQqJJ/s+cAvLT3CTl6YxDhA
- bVRw4UUMvXvmWpEiMYlsukiL30jDc6zYatVbtkefbSSI06iniegmSf2YUuTpIMuETrOn+Yg6t3B
- zsFMe0AzW+RcDqutWmdAG3D52kouDdcAr7kPeL3tGYPjjfuSokn6CdB7ItNJQbmbAuEfJ4t1sXf
- gfpRgcwpZ028l4vNP9R1BsqAiBuEtQeN5a6pSPzDIF3ahmMmLtnaCIau8X8Xi0MA4/ZvrDr3ctI
- DXYsM7MRCalMMjf9OmLi4nHFeDsb6z2DsK3fpeLio4uwXkh026aj58/fL1sc53s12vtP0R6Rb92
- x2K1dlNFLF3lJGx2rIi75kn6Y6K38T/Dus/Hxi9JqR3OUDDmNk5NReVFLzV0jVq2Sq897bfqcqm
- 16smVuIjn+QLGyj3CQXfijwwI+tObjBVBfBIhGrF691yKy8gM7qdRQj7Ls1L9Edjir5FlBttqRX
- yIo/vJyWw9g38DMoTNfNq1kPjEP2bNQ4QuaZDtAM2fZu994P/+pcxLVDs6pZvyT8npLmgUD2bD8
- unuXKuNeog8gZCcjdEXAxtDjrRJUOjj5EtwXYOFPN484VyjER9DyTqsorUHTJbyvu0boDUQHkBX
- zBWCtwFMZSbO0Hg==
-X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
- fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
-X-Mimecast-MFC-PROC-ID: vTEEvceum329zHj1M1VMtHGSAkXBI1FQQPz-vjj18gE_1791837317
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.129.124;
- envelope-from=marcandre.lureau@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -22
-X-Spam_score: -2.3
-X-Spam_bar: --
-X-Spam_report: (-2.3 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.24,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com, 
+ liwei1518@gmail.com, daniel.barboza@oss.qualcomm.com, 
+ zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com, 
+ richard.henderson@linaro.org
+Content-Type: multipart/alternative; boundary="0000000000005e5cfd065dac4714"
+Received-SPF: pass client-ip=2a00:1450:4864:20::534;
+ envelope-from=sebasjosue84@gmail.com; helo=mail-ed1-x534.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001, HTML_MESSAGE=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -123,494 +119,341 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Now that all targets expose their system registers via internal GDB
-register descriptions (i386 segment limits, m68k, sparc64, RISC-V
-aliases), the legacy MonitorDef table and
-SysemuCPUOps::monitor_get_register callback are no longer needed.
+--0000000000005e5cfd065dac4714
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Remove MonitorDef struct, the per-target monitor_defs arrays (i386,
-m68k, sparc64), riscv_monitor_get_register_legacy(), and the
-get_monitor_def() fallback in expr_unary(). HMP $register expressions
-now use gdb_get_register_list() exclusively.
+Two things, one about reading the test program's output and one about the
+approach.
 
-Known behavioural changes:
+The test program decides which boot it is in by reading pmpcfg0: zero means
+first boot, so it prints 'A', programs entries 2 and 3 as locked NAPOT, and
+resets through sifive_test. The second-boot path prints 'B', dumps pmpcfg0,
+attempts to clear it, dumps it again, and is the only path that signals PAS=
+S
+and exits. On an unpatched build the second boot reads back 0x99990000 and
+the clear attempt is ignored, so the value is printed twice: the entries
+survive the reset and are immutable from then on, since mseccfg is cleared
+before pmp_unlock_entries() runs and RLB is gone with it. With this patch
+pmpcfg0 reads zero after every reset, so the program takes the first-boot
+path every time and prints 'A' indefinitely, never reaching its exit. The
+repeating 'A' is the pass condition, not a hang: it means no PMP state
+survived the reset.
 
-- x86: $pc no longer works; use $eip or $rip instead. The old
-  MonitorDef provided a synthetic $pc alias, but a generic $pc is
-  misleading on x86 and the new GDB-based lookup does not synthesize
-  it.
+On clearing the whole struct rather than individual fields: Spike reaches
+the same post-reset state by a different route. In riscv-isa-sim at
+17e8a69fb755, state_t::reset() calls csr_init() (riscv/processor.cc:132),
+which reallocates mseccfg and every pmpaddr and pmpcfg object
+(riscv/csr_init.cc:328 and 336-342); base_pmpaddr_csr_t's constructor start=
+s
+from val(0), cfg(0) (riscv/csrs.cc:88-93), and processor_t::reset() then
+flushes the TLB (riscv/processor.cc:159). It also keeps no derived PMP stat=
+e
+that could go stale: state_t holds only the pmpaddr CSR objects
+(riscv/processor.h:174) and recomputes the range bounds on every check
+(riscv/csrs.cc:103-116), so there is no counterpart to pmp_state.addr[] or
+num_rules; num_rules does not occur anywhere under riscv/. Its scan is
+bounded by the number of implemented entries (mmu_t::pmp_ok calls
+pmp_lookup(addr, len, 0, proc->n_pmp), riscv/mmu.cc:519), and the A field i=
+s
+tested before any address comparison (base_pmpaddr_csr_t::match4,
+riscv/csrs.cc:124).
 
-- RISC-V: CSR lookup is now case-sensitive (consistent with all other
-  targets). Vector registers report "unknown register" instead of the
-  target-specific "Unable to print the value of vector vreg" message.
+Clearing the whole struct gives QEMU the same reset state, and removes the
+possibility of the architectural fields and the derived bounds disagreeing.
 
-Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
----
- include/hw/core/sysemu-cpu-ops.h |  16 -----
- include/monitor/hmp.h            |   6 --
- include/qemu/typedefs.h          |   1 -
- monitor/hmp.c                    |  44 +-----------
- target/i386/cpu.c                |  32 ---------
- target/m68k/cpu.c                |  22 ------
- target/riscv/cpu.c               |   1 -
- target/riscv/internals.h         |   3 -
- target/riscv/monitor.c           | 140 ---------------------------------------
- target/sparc/cpu.c               |  19 ------
- 10 files changed, 2 insertions(+), 282 deletions(-)
+If you would prefer the bound fix and the state clearing as two separate
+patches, I can respin it that way.
 
-diff --git a/include/hw/core/sysemu-cpu-ops.h b/include/hw/core/sysemu-cpu-ops.h
-index d125540262d2..daac2a3b13b1 100644
---- a/include/hw/core/sysemu-cpu-ops.h
-+++ b/include/hw/core/sysemu-cpu-ops.h
-@@ -103,22 +103,6 @@ typedef struct SysemuCPUOps {
-      */
-     bool (*internal_is_big_endian)(CPUState *cpu);
- 
--    /**
--     * @monitor_get_register: Callback to fill @pval with register @name value.
--     *                        This field is legacy, use @gdb_core_xml_file
--     *                        to dump registers instead.
--     * Returns: 0 on success or negative errno on failure.
--     */
--    int (*monitor_get_register)(CPUState *cs, const char *name, int64_t *pval);
--
--#ifdef CONFIG_HMP
--    /**
--     * @monitor_defs: Array of MonitorDef entries. This field is legacy,
--     *                use @gdb_core_xml_file to dump registers instead.
--     */
--    const MonitorDef *monitor_defs;
--#endif
--
-     /**
-      * @legacy_vmsd: Legacy state for migration.
-      *               Do not use in new targets, use #DeviceClass::vmsd instead.
-diff --git a/include/monitor/hmp.h b/include/monitor/hmp.h
-index ef53e87f7608..950dd931d452 100644
---- a/include/monitor/hmp.h
-+++ b/include/monitor/hmp.h
-@@ -31,12 +31,6 @@ MonitorHMP *monitor_cur_hmp(void);
-         g_assert_not_reached(); \
-     }
- 
--struct MonitorDef {
--    const char *name;
--    int offset;
--    int64_t (*get_value)(MonitorHMP *hmp, const MonitorDef *md, int offset);
--};
--
- void monitor_new_hmp(const char *id, const char *chardev_id,
-                      bool use_readline, Error **errp);
- 
-diff --git a/include/qemu/typedefs.h b/include/qemu/typedefs.h
-index 2344c92182ea..5580e1fc4aba 100644
---- a/include/qemu/typedefs.h
-+++ b/include/qemu/typedefs.h
-@@ -72,7 +72,6 @@ typedef struct MemoryRegionSection MemoryRegionSection;
- typedef struct MigrationIncomingState MigrationIncomingState;
- typedef struct MigrationState MigrationState;
- typedef struct Monitor Monitor;
--typedef struct MonitorDef MonitorDef;
- typedef struct MSIMessage MSIMessage;
- typedef struct NetClientState NetClientState;
- typedef struct NetFilterState NetFilterState;
-diff --git a/monitor/hmp.c b/monitor/hmp.c
-index 10e19e417aba..ab8465ebb0d7 100644
---- a/monitor/hmp.c
-+++ b/monitor/hmp.c
-@@ -24,8 +24,8 @@
- 
- #include "qemu/osdep.h"
- #include <dirent.h>
-+#include "hw/core/cpu.h"
- #include "hw/core/qdev.h"
--#include "hw/core/sysemu-cpu-ops.h"
- #include "monitor-internal.h"
- #include "monitor-hmp-internal.h"
- #include "monitor/hmp.h"
-@@ -443,8 +443,6 @@ static bool gdb_get_register(MonitorHMP *hmp, int64_t *pval, const char *name)
- static const char *pch;
- static sigjmp_buf expr_env;
- 
--static int get_monitor_def(MonitorHMP *mon, int64_t *pval, const char *name);
--
- static G_NORETURN G_GNUC_PRINTF(2, 3)
- void expr_error(MonitorHMP *mon, const char *fmt, ...)
- {
-@@ -526,8 +524,7 @@ static int64_t expr_unary(MonitorHMP *mon)
-                 pch++;
-             }
-             *q = 0;
--            if (!gdb_get_register(mon, &reg, buf)
--                && get_monitor_def(mon, &reg, buf) < 0) {
-+            if (!gdb_get_register(mon, &reg, buf)) {
-                 expr_error(mon, "unknown register");
-             }
-             n = reg;
-@@ -1719,43 +1716,6 @@ void monitor_register_hmp_info_hrt(const char *name,
-     g_assert_not_reached();
- }
- 
--/*
-- * Set @pval to the value in the register identified by @name.
-- * return 0 if OK, -1 if not found
-- */
--static int get_monitor_def(MonitorHMP *hmp, int64_t *pval, const char *name)
--{
--    CPUState *cs = monitor_hmp_get_cpu(hmp);
--    const MonitorDef *md = NULL;
--    void *ptr;
--
--    if (cs == NULL) {
--        return -1;
--    }
--    md = cs->cc->sysemu_ops->monitor_defs;
--    if (md == NULL) {
--        return -1;
--    }
--
--    for (; md->name != NULL; md++) {
--        if (hmp_compare_cmd(name, md->name)) {
--            if (md->get_value) {
--                *pval = md->get_value(hmp, md, md->offset);
--            } else {
--                CPUArchState *env = monitor_hmp_get_cpu_env(hmp);
--                ptr = (uint8_t *)env + md->offset;
--                *pval = *(int32_t *)ptr;
--            }
--            return 0;
--        }
--    }
--
--    if (!cs->cc->sysemu_ops->monitor_get_register) {
--        return -1;
--    }
--    return cs->cc->sysemu_ops->monitor_get_register(cs, name, pval);
--}
--
- int monitor_hmp_vprintf(MonitorHMP *hmp, const char *fmt, va_list ap)
- {
-     g_autofree char *buf = g_strdup_vprintf(fmt, ap);
-diff --git a/target/i386/cpu.c b/target/i386/cpu.c
-index 74eebeabd7a7..191837a586d4 100644
---- a/target/i386/cpu.c
-+++ b/target/i386/cpu.c
-@@ -42,7 +42,6 @@
- #include "exec/watchpoint.h"
- #ifndef CONFIG_USER_ONLY
- #include "confidential-guest.h"
--#include "monitor/hmp.h"
- #include "system/reset.h"
- #include "qapi/qapi-commands-machine.h"
- #include "system/address-spaces.h"
-@@ -10878,34 +10877,6 @@ static const Property x86_cpu_properties[] = {
- 
- #ifndef CONFIG_USER_ONLY
- 
--#ifdef CONFIG_HMP
--static int64_t monitor_get_pc(MonitorHMP *hmp, const struct MonitorDef *md,
--                              int offset)
--{
--    CPUArchState *env = monitor_hmp_get_cpu_env(hmp);
--    int64_t ret = env->eip + env->segs[R_CS].base;
--
--    if (!(env->hflags & HF_CS64_MASK)) {
--        ret = (int32_t)ret;
--    }
--    return ret;
--}
--
--static const MonitorDef x86_monitor_defs[] = {
--#define SEG(name, seg) \
--    { name ".limit", offsetof(CPUX86State, segs[seg].limit) },
--    SEG("cs", R_CS)
--    SEG("ds", R_DS)
--    SEG("es", R_ES)
--    SEG("ss", R_SS)
--    SEG("fs", R_FS)
--    SEG("gs", R_GS)
--    { "pc", 0, monitor_get_pc, },
--    { NULL },
--#undef SEG
--};
--#endif
--
- #include "hw/core/sysemu-cpu-ops.h"
- 
- static const struct SysemuCPUOps i386_sysemu_ops = {
-@@ -10919,9 +10890,6 @@ static const struct SysemuCPUOps i386_sysemu_ops = {
-     .write_elf64_note = x86_cpu_write_elf64_note,
-     .write_elf32_qemunote = x86_cpu_write_elf32_qemunote,
-     .write_elf64_qemunote = x86_cpu_write_elf64_qemunote,
--#ifdef CONFIG_HMP
--    .monitor_defs = x86_monitor_defs,
--#endif
-     .legacy_vmsd = &vmstate_x86_cpu,
- };
- #endif
-diff --git a/target/m68k/cpu.c b/target/m68k/cpu.c
-index 9b52ad5fc234..ad7303305848 100644
---- a/target/m68k/cpu.c
-+++ b/target/m68k/cpu.c
-@@ -25,7 +25,6 @@
- #include "disas/capstone.h"
- #ifndef CONFIG_USER_ONLY
- #include "migration/vmstate.h"
--#include "monitor/hmp.h"
- #endif
- 
- #include "cpu.h"
-@@ -666,32 +665,11 @@ static const VMStateDescription vmstate_m68k_cpu = {
-     },
- };
- 
--#ifdef CONFIG_HMP
--static const MonitorDef m68k_monitor_defs[] = {
--    { "ssp", offsetof(CPUM68KState, sp[0]) },
--    { "usp", offsetof(CPUM68KState, sp[1]) },
--    { "isp", offsetof(CPUM68KState, sp[2]) },
--    { "sfc", offsetof(CPUM68KState, sfc) },
--    { "dfc", offsetof(CPUM68KState, dfc) },
--    { "urp", offsetof(CPUM68KState, mmu.urp) },
--    { "srp", offsetof(CPUM68KState, mmu.srp) },
--    { "dttr0", offsetof(CPUM68KState, mmu.ttr[M68K_DTTR0]) },
--    { "dttr1", offsetof(CPUM68KState, mmu.ttr[M68K_DTTR1]) },
--    { "ittr0", offsetof(CPUM68KState, mmu.ttr[M68K_ITTR0]) },
--    { "ittr1", offsetof(CPUM68KState, mmu.ttr[M68K_ITTR1]) },
--    { "mmusr", offsetof(CPUM68KState, mmu.mmusr) },
--    { NULL },
--};
--#endif
--
- #include "hw/core/sysemu-cpu-ops.h"
- 
- static const struct SysemuCPUOps m68k_sysemu_ops = {
-     .has_work = m68k_cpu_has_work,
-     .get_phys_addr_debug = m68k_cpu_get_phys_addr_debug,
--#ifdef CONFIG_HMP
--    .monitor_defs = m68k_monitor_defs,
--#endif
- };
- #endif /* !CONFIG_USER_ONLY */
- 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index da4c1a090b9b..7c4cadfc44b2 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -3018,7 +3018,6 @@ static const struct SysemuCPUOps riscv_sysemu_ops = {
-     .legacy_vmsd = &vmstate_riscv_cpu,
- #ifdef CONFIG_TCG
-     .translate_for_debug = riscv_cpu_translate_for_debug,
--    .monitor_get_register = riscv_monitor_get_register_legacy,
- #endif
- };
- #endif
-diff --git a/target/riscv/internals.h b/target/riscv/internals.h
-index 5d84e4de960a..09aa2701197e 100644
---- a/target/riscv/internals.h
-+++ b/target/riscv/internals.h
-@@ -263,7 +263,4 @@ static inline int insn_len(uint16_t first_word)
-     return (first_word & 3) == 3 ? 4 : 2;
- }
- 
--int riscv_monitor_get_register_legacy(CPUState *cs, const char *name,
--                                      int64_t *pval);
--
- #endif
-diff --git a/target/riscv/monitor.c b/target/riscv/monitor.c
-index 7e61ae2a4717..20f3ba57ae57 100644
---- a/target/riscv/monitor.c
-+++ b/target/riscv/monitor.c
-@@ -19,10 +19,7 @@
-  */
- 
- #include "qemu/osdep.h"
--#include "qemu/ctype.h"
--#include "qemu/qemu-print.h"
- #include "cpu.h"
--#include "target/riscv/tcg/csr.h"
- #include "cpu_bits.h"
- #include "monitor/monitor.h"
- #include "monitor/hmp.h"
-@@ -247,140 +244,3 @@ void hmp_info_mem(MonitorHMP *hmp, const QDict *qdict)
-     mem_info_svxx(hmp, env);
- }
- #endif /* CONFIG_HMP */
--
--#ifdef CONFIG_TCG
--static bool reg_is_ulong_integer(CPURISCVState *env, const char *name,
--                                 target_ulong *val, bool is_gprh)
--{
--    const char * const *reg_names;
--    uint64_t *vals;
--
--    if (is_gprh) {
--        reg_names = riscv_int_regnamesh;
--        vals = env->gprh;
--    } else {
--        reg_names = riscv_int_regnames;
--        vals = env->gpr;
--    }
--
--    for (int i = 0; i < 32; i++) {
--        g_auto(GStrv) reg_name = g_strsplit(reg_names[i], "/", 2);
--
--        g_assert(reg_name[0]);
--        g_assert(reg_name[1]);
--
--        if (g_ascii_strcasecmp(reg_name[0], name) == 0 ||
--            g_ascii_strcasecmp(reg_name[1], name) == 0) {
--            *val = vals[i];
--            return true;
--        }
--    }
--
--    return false;
--}
--
--static bool reg_is_u64_fpu(CPURISCVState *env, const char *name, uint64_t *val)
--{
--    if (qemu_tolower(name[0]) != 'f') {
--        return false;
--    }
--
--    for (int i = 0; i < 32; i++) {
--        g_auto(GStrv) reg_name = g_strsplit(riscv_fpr_regnames[i], "/", 2);
--
--        g_assert(reg_name[0]);
--        g_assert(reg_name[1]);
--
--        if (g_ascii_strcasecmp(reg_name[0], name) == 0 ||
--            g_ascii_strcasecmp(reg_name[1], name) == 0) {
--            *val = env->fpr[i];
--            return true;
--        }
--    }
--
--    return false;
--}
--
--static bool reg_is_vreg(const char *name)
--{
--    if (qemu_tolower(name[0]) != 'v' || strlen(name) > 3) {
--        return false;
--    }
--
--    for (int i = 0; i < 32; i++) {
--        if (g_ascii_strcasecmp(name, riscv_rvv_regnames[i]) == 0) {
--            return true;
--        }
--    }
--
--    return false;
--}
--
--int riscv_monitor_get_register_legacy(CPUState *cs, const char *name,
--                                      int64_t *pval)
--{
--    RISCVCPU *hart = RISCV_CPU(cs);
--    CPURISCVState *env = cpu_env(cs);
--    target_ulong val = 0;
--    uint64_t val64 = 0;
--    int i;
--
--    if (reg_is_ulong_integer(env, name, &val, false) ||
--        reg_is_ulong_integer(env, name, &val, true)) {
--        *pval = riscv_cpu_is_32bit(hart) ? (int32_t)val : val;
--        return 0;
--    }
--
--    if (reg_is_u64_fpu(env, name, &val64)) {
--        *pval = val64;
--        return 0;
--    }
--
--    if (reg_is_vreg(name)) {
--        if (!riscv_cpu_cfg(env)->ext_zve32x) {
--            return -EINVAL;
--        }
--
--        qemu_printf("Unable to print the value of vector "
--                    "vreg '%s' from this API\n", name);
--
--        /*
--         * We're returning 0 because returning -EINVAL triggers
--         * an 'unknown register' message in exp_unary() later,
--         * which feels ankward after our own error message.
--         */
--        *pval = 0;
--        return 0;
--    }
--
--    for (i = 0; i < ARRAY_SIZE(csr_ops); i++) {
--        RISCVException res;
--        int csrno = i;
--
--        /*
--         * Early skip when possible since we're going
--         * through a lot of NULL entries.
--         */
--        if (csr_ops[csrno].predicate == NULL) {
--            continue;
--        }
--
--        if (g_ascii_strcasecmp(csr_ops[csrno].name, name) != 0) {
--            continue;
--        }
--
--        res = riscv_csrrw_debug(env, csrno, &val, 0, 0);
--
--        /*
--         * Rely on the smode, hmode, etc, predicates within csr.c
--         * to do the filtering of the registers that are present.
--         */
--        if (res == RISCV_EXCP_NONE) {
--            *pval = riscv_cpu_is_32bit(hart) ? (int32_t)val : val;
--            return 0;
--        }
--    }
--
--    return -EINVAL;
--}
--#endif
-diff --git a/target/sparc/cpu.c b/target/sparc/cpu.c
-index ae9bdca9df82..89dfb091ca87 100644
---- a/target/sparc/cpu.c
-+++ b/target/sparc/cpu.c
-@@ -995,31 +995,12 @@ static const Property sparc_cpu_properties[] = {
- 
- #ifndef CONFIG_USER_ONLY
- 
--#ifdef TARGET_SPARC64
--#include "monitor/hmp.h"
--#ifdef CONFIG_HMP
--static const MonitorDef sparc64_monitor_defs[] = {
--    { "asi", offsetof(CPUSPARCState, asi) },
--    { "pstate", offsetof(CPUSPARCState, pstate) },
--    { "cansave", offsetof(CPUSPARCState, cansave) },
--    { "canrestore", offsetof(CPUSPARCState, canrestore) },
--    { "otherwin", offsetof(CPUSPARCState, otherwin) },
--    { "wstate", offsetof(CPUSPARCState, wstate) },
--    { "cleanwin", offsetof(CPUSPARCState, cleanwin) },
--    { NULL },
--};
--#endif
--#endif
--
- #include "hw/core/sysemu-cpu-ops.h"
- 
- static const struct SysemuCPUOps sparc_sysemu_ops = {
-     .has_work = sparc_cpu_has_work,
-     .get_phys_addr_debug = sparc_cpu_get_phys_addr_debug,
-     .legacy_vmsd = &vmstate_sparc_cpu,
--#if defined(TARGET_SPARC64) && defined(CONFIG_HMP)
--    .monitor_defs = sparc64_monitor_defs,
--#endif
- };
- #endif
- 
+El s=C3=A1b, 10 oct 2026 a las 22:06, Sebastian Alba Vives (<
+sebasjosue84@gmail.com>) escribi=C3=B3:
 
--- 
-2.56.0.116.g6de20f6092dc
+> pmp_unlock_entries() bounded its loop with pmp_get_num_rules(), which
+> returns the number of entries whose A field is not OFF rather than the
+> number of implemented entries. With a sparse configuration the loop
+> stops early: with entries 0 and 1 OFF and entries 2 and 3 locked,
+> num_rules is 2, the loop covers i =3D 0 and i =3D 1, and entries 2 and 3
+> keep their lock and address-match bits across reset.
+>
+> riscv_cpu_reset_hold() clears mseccfg, and with it RLB, before calling
+> this, so pmp_is_readonly() then silently discards every subsequent
+> pmpcfg write to those entries. The stale rules survive for the
+> lifetime of the machine.
+>
+> Clearing only PMP_LOCK and PMP_AMATCH is not enough either. The priv
+> spec only mandates that the A and L fields be reset, but QEMU keeps
+> derived state next to the architectural registers: pmp_state.addr[]
+> and pmp_state.num_rules are recomputed from the pmpaddr and pmpcfg
+> write paths only, never at reset. pmp_is_in_range() compares against
+> addr[].sa and addr[].ea without consulting the A field, and the
+> partially-inside check in pmp_hart_has_privs() runs before the A
+> field is tested, so a range left over from before the reset can still
+> deny an access that straddles its boundary once the guest configures
+> any entry again.
+>
+> Zero the whole structure instead. Zero is the correct reset value for
+> every field: a cfg_reg of 0 is A=3DOFF with no permissions, and a
+> num_rules of 0 restores the no-rules short cut. Rename the function
+> since it no longer only unlocks entries.
+>
+> Fixes: 4bf501dc0118 ("target/riscv: pmp: Clear pmp/smepmp bits on reset")
+> Suggested-by: Richard Henderson <richard.henderson@linaro.org>
+> Signed-off-by: Sebastian Alba Vives <sebasjosue84@gmail.com>
+> ---
+> Changes in v2:
+> - Zero the whole env->pmp_state instead of masking PMP_LOCK and
+>   PMP_AMATCH over a bounded set of entries, as suggested by Richard.
+>   v1 also left pmp_state.addr[] and pmp_state.num_rules stale across
+>   reset, which the memset covers as well.
+>
+> v1:
+> https://lore.kernel.org/qemu-devel/20260916034331.2390427-1-sebasjosue84@=
+gmail.com/
+>
+>  target/riscv/cpu.c     | 4 ++--
+>  target/riscv/tcg/pmp.c | 9 ++-------
+>  target/riscv/tcg/pmp.h | 2 +-
+>  3 files changed, 5 insertions(+), 10 deletions(-)
+>
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index da4c1a090b..0b71196507 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -1048,7 +1048,7 @@ static void riscv_cpu_reset_hold(Object *obj,
+> ResetType type)
+>      }
+>
+>      /*
+> -     * Clear mseccfg and unlock all the PMP entries upon reset.
+> +     * Clear mseccfg and the PMP state upon reset.
+>       * This is required as per the priv, smepmp, and other security
+>       * extension specifications that share this CSR, and is needed
+>       * to clear stale entries across reboots.
+> @@ -1060,7 +1060,7 @@ static void riscv_cpu_reset_hold(Object *obj,
+> ResetType type)
+>          env->mseccfg =3D 0;
+>      }
+>
+> -    pmp_unlock_entries(env);
+> +    pmp_reset(env);
+>  #endif /* ifdef CONFIG_TCG */
+>  #else
+>      env->priv =3D PRV_U;
+> diff --git a/target/riscv/tcg/pmp.c b/target/riscv/tcg/pmp.c
+> index 41b55519a8..437e0ff2af 100644
+> --- a/target/riscv/tcg/pmp.c
+> +++ b/target/riscv/tcg/pmp.c
+> @@ -199,14 +199,9 @@ static bool pmp_write_cfg(CPURISCVState *env,
+> uint32_t pmp_index, uint8_t val)
+>      return false;
+>  }
+>
+> -void pmp_unlock_entries(CPURISCVState *env)
+> +void pmp_reset(CPURISCVState *env)
+>  {
+> -    uint32_t pmp_num =3D pmp_get_num_rules(env);
+> -    int i;
+> -
+> -    for (i =3D 0; i < pmp_num; i++) {
+> -        env->pmp_state.pmp[i].cfg_reg &=3D ~(PMP_LOCK | PMP_AMATCH);
+> -    }
+> +    memset(&env->pmp_state, 0, sizeof(env->pmp_state));
+>  }
+>
+>  static void pmp_decode_napot(hwaddr a, hwaddr *sa, hwaddr *ea)
+> diff --git a/target/riscv/tcg/pmp.h b/target/riscv/tcg/pmp.h
+> index 4c95c2767a..99546934fc 100644
+> --- a/target/riscv/tcg/pmp.h
+> +++ b/target/riscv/tcg/pmp.h
+> @@ -79,7 +79,7 @@ void pmp_update_rule_addr(CPURISCVState *env, uint32_t
+> pmp_index);
+>  void pmp_update_rule_nums(CPURISCVState *env);
+>  uint32_t pmp_get_num_rules(CPURISCVState *env);
+>  int pmp_priv_to_page_prot(pmp_priv_t pmp_priv);
+> -void pmp_unlock_entries(CPURISCVState *env);
+> +void pmp_reset(CPURISCVState *env);
+>
+>  #define MSECCFG_MML_ISSET(env) get_field(env->mseccfg, MSECCFG_MML)
+>  #define MSECCFG_MMWP_ISSET(env) get_field(env->mseccfg, MSECCFG_MMWP)
+> --
+> 2.43.0
+>
+>
 
+--=20
+Sebasti=C3=A1n Alba
+
+--0000000000005e5cfd065dac4714
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Two things, one about reading the test program&#39;s outpu=
+t and one about the<br>approach.<br><br>The test program decides which boot=
+ it is in by reading pmpcfg0: zero means<br>first boot, so it prints &#39;A=
+&#39;, programs entries 2 and 3 as locked NAPOT, and<br>resets through sifi=
+ve_test. The second-boot path prints &#39;B&#39;, dumps pmpcfg0,<br>attempt=
+s to clear it, dumps it again, and is the only path that signals PASS<br>an=
+d exits. On an unpatched build the second boot reads back 0x99990000 and<br=
+>the clear attempt is ignored, so the value is printed twice: the entries<b=
+r>survive the reset and are immutable from then on, since mseccfg is cleare=
+d<br>before pmp_unlock_entries() runs and RLB is gone with it. With this pa=
+tch<br>pmpcfg0 reads zero after every reset, so the program takes the first=
+-boot<br>path every time and prints &#39;A&#39; indefinitely, never reachin=
+g its exit. The<br>repeating &#39;A&#39; is the pass condition, not a hang:=
+ it means no PMP state<br>survived the reset.<br><br>On clearing the whole =
+struct rather than individual fields: Spike reaches<br>the same post-reset =
+state by a different route. In riscv-isa-sim at<br>17e8a69fb755, state_t::r=
+eset() calls csr_init() (riscv/processor.cc:132),<br>which reallocates msec=
+cfg and every pmpaddr and pmpcfg object<br>(riscv/csr_init.cc:328 and 336-3=
+42); base_pmpaddr_csr_t&#39;s constructor starts<br>from val(0), cfg(0) (ri=
+scv/csrs.cc:88-93), and processor_t::reset() then<br>flushes the TLB (riscv=
+/processor.cc:159). It also keeps no derived PMP state<br>that could go sta=
+le: state_t holds only the pmpaddr CSR objects<br>(riscv/processor.h:174) a=
+nd recomputes the range bounds on every check<br>(riscv/csrs.cc:103-116), s=
+o there is no counterpart to pmp_state.addr[] or<br>num_rules; num_rules do=
+es not occur anywhere under riscv/. Its scan is<br>bounded by the number of=
+ implemented entries (mmu_t::pmp_ok calls<br>pmp_lookup(addr, len, 0, proc-=
+&gt;n_pmp), riscv/mmu.cc:519), and the A field is<br>tested before any addr=
+ess comparison (base_pmpaddr_csr_t::match4,<br>riscv/csrs.cc:124).<br><br>C=
+learing the whole struct gives QEMU the same reset state, and removes the<b=
+r>possibility of the architectural fields and the derived bounds disagreein=
+g.<br><br>If you would prefer the bound fix and the state clearing as two s=
+eparate<br>patches, I can respin it that way.<br></div><br><div class=3D"gm=
+ail_quote gmail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">El s=
+=C3=A1b, 10 oct 2026 a las 22:06, Sebastian Alba Vives (&lt;<a href=3D"mail=
+to:sebasjosue84@gmail.com">sebasjosue84@gmail.com</a>&gt;) escribi=C3=B3:<b=
+r></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex=
+;border-left-width:1px;border-left-style:solid;border-left-color:rgb(204,20=
+4,204);padding-left:1ex">pmp_unlock_entries() bounded its loop with pmp_get=
+_num_rules(), which<br>
+returns the number of entries whose A field is not OFF rather than the<br>
+number of implemented entries. With a sparse configuration the loop<br>
+stops early: with entries 0 and 1 OFF and entries 2 and 3 locked,<br>
+num_rules is 2, the loop covers i =3D 0 and i =3D 1, and entries 2 and 3<br=
+>
+keep their lock and address-match bits across reset.<br>
+<br>
+riscv_cpu_reset_hold() clears mseccfg, and with it RLB, before calling<br>
+this, so pmp_is_readonly() then silently discards every subsequent<br>
+pmpcfg write to those entries. The stale rules survive for the<br>
+lifetime of the machine.<br>
+<br>
+Clearing only PMP_LOCK and PMP_AMATCH is not enough either. The priv<br>
+spec only mandates that the A and L fields be reset, but QEMU keeps<br>
+derived state next to the architectural registers: pmp_state.addr[]<br>
+and pmp_state.num_rules are recomputed from the pmpaddr and pmpcfg<br>
+write paths only, never at reset. pmp_is_in_range() compares against<br>
+addr[].sa and addr[].ea without consulting the A field, and the<br>
+partially-inside check in pmp_hart_has_privs() runs before the A<br>
+field is tested, so a range left over from before the reset can still<br>
+deny an access that straddles its boundary once the guest configures<br>
+any entry again.<br>
+<br>
+Zero the whole structure instead. Zero is the correct reset value for<br>
+every field: a cfg_reg of 0 is A=3DOFF with no permissions, and a<br>
+num_rules of 0 restores the no-rules short cut. Rename the function<br>
+since it no longer only unlocks entries.<br>
+<br>
+Fixes: 4bf501dc0118 (&quot;target/riscv: pmp: Clear pmp/smepmp bits on rese=
+t&quot;)<br>
+Suggested-by: Richard Henderson &lt;<a href=3D"mailto:richard.henderson@lin=
+aro.org" target=3D"_blank">richard.henderson@linaro.org</a>&gt;<br>
+Signed-off-by: Sebastian Alba Vives &lt;<a href=3D"mailto:sebasjosue84@gmai=
+l.com" target=3D"_blank">sebasjosue84@gmail.com</a>&gt;<br>
+---<br>
+Changes in v2:<br>
+- Zero the whole env-&gt;pmp_state instead of masking PMP_LOCK and<br>
+=C2=A0 PMP_AMATCH over a bounded set of entries, as suggested by Richard.<b=
+r>
+=C2=A0 v1 also left pmp_state.addr[] and pmp_state.num_rules stale across<b=
+r>
+=C2=A0 reset, which the memset covers as well.<br>
+<br>
+v1: <a href=3D"https://lore.kernel.org/qemu-devel/20260916034331.2390427-1-=
+sebasjosue84@gmail.com/" rel=3D"noreferrer" target=3D"_blank">https://lore.=
+kernel.org/qemu-devel/20260916034331.2390427-1-sebasjosue84@gmail.com/</a><=
+br>
+<br>
+=C2=A0target/riscv/cpu.c=C2=A0 =C2=A0 =C2=A0| 4 ++--<br>
+=C2=A0target/riscv/tcg/pmp.c | 9 ++-------<br>
+=C2=A0target/riscv/tcg/pmp.h | 2 +-<br>
+=C2=A03 files changed, 5 insertions(+), 10 deletions(-)<br>
+<br>
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c<br>
+index da4c1a090b..0b71196507 100644<br>
+--- a/target/riscv/cpu.c<br>
++++ b/target/riscv/cpu.c<br>
+@@ -1048,7 +1048,7 @@ static void riscv_cpu_reset_hold(Object *obj, ResetTy=
+pe type)<br>
+=C2=A0 =C2=A0 =C2=A0}<br>
+<br>
+=C2=A0 =C2=A0 =C2=A0/*<br>
+-=C2=A0 =C2=A0 =C2=A0* Clear mseccfg and unlock all the PMP entries upon re=
+set.<br>
++=C2=A0 =C2=A0 =C2=A0* Clear mseccfg and the PMP state upon reset.<br>
+=C2=A0 =C2=A0 =C2=A0 * This is required as per the priv, smepmp, and other =
+security<br>
+=C2=A0 =C2=A0 =C2=A0 * extension specifications that share this CSR, and is=
+ needed<br>
+=C2=A0 =C2=A0 =C2=A0 * to clear stale entries across reboots.<br>
+@@ -1060,7 +1060,7 @@ static void riscv_cpu_reset_hold(Object *obj, ResetTy=
+pe type)<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0env-&gt;mseccfg =3D 0;<br>
+=C2=A0 =C2=A0 =C2=A0}<br>
+<br>
+-=C2=A0 =C2=A0 pmp_unlock_entries(env);<br>
++=C2=A0 =C2=A0 pmp_reset(env);<br>
+=C2=A0#endif /* ifdef CONFIG_TCG */<br>
+=C2=A0#else<br>
+=C2=A0 =C2=A0 =C2=A0env-&gt;priv =3D PRV_U;<br>
+diff --git a/target/riscv/tcg/pmp.c b/target/riscv/tcg/pmp.c<br>
+index 41b55519a8..437e0ff2af 100644<br>
+--- a/target/riscv/tcg/pmp.c<br>
++++ b/target/riscv/tcg/pmp.c<br>
+@@ -199,14 +199,9 @@ static bool pmp_write_cfg(CPURISCVState *env, uint32_t=
+ pmp_index, uint8_t val)<br>
+=C2=A0 =C2=A0 =C2=A0return false;<br>
+=C2=A0}<br>
+<br>
+-void pmp_unlock_entries(CPURISCVState *env)<br>
++void pmp_reset(CPURISCVState *env)<br>
+=C2=A0{<br>
+-=C2=A0 =C2=A0 uint32_t pmp_num =3D pmp_get_num_rules(env);<br>
+-=C2=A0 =C2=A0 int i;<br>
+-<br>
+-=C2=A0 =C2=A0 for (i =3D 0; i &lt; pmp_num; i++) {<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 env-&gt;pmp_state.pmp[i].cfg_reg &amp;=3D ~(PM=
+P_LOCK | PMP_AMATCH);<br>
+-=C2=A0 =C2=A0 }<br>
++=C2=A0 =C2=A0 memset(&amp;env-&gt;pmp_state, 0, sizeof(env-&gt;pmp_state))=
+;<br>
+=C2=A0}<br>
+<br>
+=C2=A0static void pmp_decode_napot(hwaddr a, hwaddr *sa, hwaddr *ea)<br>
+diff --git a/target/riscv/tcg/pmp.h b/target/riscv/tcg/pmp.h<br>
+index 4c95c2767a..99546934fc 100644<br>
+--- a/target/riscv/tcg/pmp.h<br>
++++ b/target/riscv/tcg/pmp.h<br>
+@@ -79,7 +79,7 @@ void pmp_update_rule_addr(CPURISCVState *env, uint32_t pm=
+p_index);<br>
+=C2=A0void pmp_update_rule_nums(CPURISCVState *env);<br>
+=C2=A0uint32_t pmp_get_num_rules(CPURISCVState *env);<br>
+=C2=A0int pmp_priv_to_page_prot(pmp_priv_t pmp_priv);<br>
+-void pmp_unlock_entries(CPURISCVState *env);<br>
++void pmp_reset(CPURISCVState *env);<br>
+<br>
+=C2=A0#define MSECCFG_MML_ISSET(env) get_field(env-&gt;mseccfg, MSECCFG_MML=
+)<br>
+=C2=A0#define MSECCFG_MMWP_ISSET(env) get_field(env-&gt;mseccfg, MSECCFG_MM=
+WP)<br>
+-- <br>
+2.43.0<br>
+<br>
+</blockquote></div><div><br clear=3D"all"></div><div><br></div><span class=
+=3D"gmail_signature_prefix">-- </span><br><div dir=3D"ltr" class=3D"gmail_s=
+ignature"><div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><div style=3D"=
+text-align:left">Sebasti=C3=A1n Alba</div><div style=3D"text-align:center">=
+</div></div></div></div></div>
+
+--0000000000005e5cfd065dac4714--
 
