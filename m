@@ -4,55 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A41F4CA9ED0
-	for <qemu-riscv@archiver.kernel.org>; Mon, 12 Oct 2026 20:37:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00406CA9ED2
+	for <qemu-riscv@archiver.kernel.org>; Mon, 12 Oct 2026 20:37:38 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xGMjY-0003E1-6X; Mon, 12 Oct 2026 16:34:56 -0400
+	id 1xGMkD-0003i8-RN; Mon, 12 Oct 2026 16:35:37 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1xGMjT-0003D7-CD
- for qemu-riscv@nongnu.org; Mon, 12 Oct 2026 16:34:52 -0400
+ id 1xGMjv-0003a7-PH
+ for qemu-riscv@nongnu.org; Mon, 12 Oct 2026 16:35:20 -0400
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1xGMjR-00035j-SR
- for qemu-riscv@nongnu.org; Mon, 12 Oct 2026 16:34:51 -0400
+ id 1xGMjt-0003OO-VD
+ for qemu-riscv@nongnu.org; Mon, 12 Oct 2026 16:35:19 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1791837288;
+ s=mimecast20190719; t=1791837317;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=PTTPkYhZcTXqszlszTcoD/ScoBEHuOmQgrpc/syCHeo=;
- b=HzwCVgGlnibNjHbtCUNy25ruZ7UUZma5UE6VlWxwR1ZEs4ZB/bUwhIxTW0zXyB38iUxA6d
- C3J3UuTlZjMgpvUxU/dxSRaP2WMteS41bndXMtP7K2hUf7ZA7BWDryUkKBBDYxR47Kd38u
- zir5dIND1mqvr80Bsq+U5FommNIu13w=
-Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
+ bh=5H/haMw6tiIt2E7cR+zPeNBh8CmooHi6puFYTBy0SvU=;
+ b=XuPCpGPXgNQxkZ7lnlZ9mD1ptEdJ8HIUfeGNyWReuQlu+lNBtFLkrzUf7atLr8Gzn0Z2ye
+ PdHTB0wMaDGsZNneK0PPJARCfY6UakZvhv7bd1HVT7WNphDRrW0d51Sa4jHqOicEFmIylO
+ PQfgW4lFpvERQ6kBtSt9dzxLLDTzx4o=
+X-MC-Rep: binary re single
+Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-235--cAsVN1APfiYZ8UE1wROng-1; Mon,
- 12 Oct 2026 20:34:46 +0000
-X-MC-Unique: -cAsVN1APfiYZ8UE1wROng-1
-X-Mimecast-MFC-AGG-ID: -cAsVN1APfiYZ8UE1wROng_1791837283
-Received: from mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.93])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-1-_JxoJYqxMjeoRXqwfDpHWA-1; Mon,
+ 12 Oct 2026 20:35:13 +0000
+X-MC-Unique: _JxoJYqxMjeoRXqwfDpHWA-1
+X-Mimecast-MFC-AGG-ID: _JxoJYqxMjeoRXqwfDpHWA_1791837309
+Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 80987193E8B2; Mon, 12 Oct 2026 20:34:42 +0000 (UTC)
+ by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 9541D1955EB9; Mon, 12 Oct 2026 20:35:09 +0000 (UTC)
 Received: from localhost (headnet03.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.114])
- by mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id BA077180057E; Mon, 12 Oct 2026 20:34:16 +0000 (UTC)
+ by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id 6BFDC180034C; Mon, 12 Oct 2026 20:35:08 +0000 (UTC)
 From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-Date: Tue, 13 Oct 2026 00:34:04 +0400
-Subject: [PATCH v2 01/10] hmp: don't crash on invalid register
+Date: Tue, 13 Oct 2026 00:34:11 +0400
+Subject: [PATCH v2 08/10] target/riscv: bypass smstateen check in debugger mode
 MIME-Version: 1.0
-Message-Id: <20261013-query-reg-v2-1-6f95a2e139a9@redhat.com>
+Message-Id: <20261013-query-reg-v2-8-6f95a2e139a9@redhat.com>
 References: <20261013-query-reg-v2-0-6f95a2e139a9@redhat.com>
 In-Reply-To: <20261013-query-reg-v2-0-6f95a2e139a9@redhat.com>
 To: qemu-devel@nongnu.org
@@ -76,25 +77,25 @@ Cc: "Dr. David Alan Gilbert" <dave@treblig.org>,
  Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, 
  Warner Losh <imp@bsdimp.com>, Kyle Evans <kevans@freebsd.org>, 
  =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=916;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=898;
  i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=E5axQ8TcsOtin8JJPhWlfcIJLYtGSyXxmVu6jnqWvwY=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBqzURAbaVLqtPcFOAyQxeabOhS5ZvtdpW/QdlIA
- G2P5tErKRSJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCas1EQAAKCRDa6OEJdZac
- 5cOvD/9iheeLD4/B4Ie0ayW7/9o3wMp0D6+5jaa1I1mi5I4QtJBU1jQUf1xM3fxsxR7Qw0TD8d0
- FOjZXftyQUPYWMYl2e8HAMySJxoX+VlJCQlFL9tzN4Ti8SyhxMDgS/EcYF4kHnmheXmWWL+ONoo
- q6b8tCxOCeFZOa7roKRvgMWdZ0BBUqpM1MbA1El1excFDaRdtRDspo0VGrKoK7mqlh2WuIivbtY
- keZTyNxVaQbQQbTgKbkkbTrHckss/N8HPENY3wj8w9Xd+eHhDzYuGNIVPaJ/fVvbifZyNpLdQjm
- BKvR1u/poMyp/0D7jowaz6845FuVOI2SbKiQOgBYVwp5d5XWGS6ruK/QCzNbF7oYQOThVU5NcAZ
- IGR5/bVMEn0tohnebgBvzoYmC/Bs5pfh5trh/KRv1tg6onmmLneyQVniYcJRt3K6TCyG0cHv7Wp
- ooSyPxHcJHeS6K9hxKGAOIW5ilEdd8A3oQxmnHerummTBJvOYPGOuOLNow+YKsLO9QDYteyOy7A
- Eu7Vc01xq5dsCPd5QAt01+aY8mIjyKZfPTUvFbDqhmfDRIlwuNLGSGVaHWCu6/JLzVKalwsK706
- 4a0tHUDJWDdJVFM/2hdCVJjY1WmwT/blLrfIxNMvNUtIPi6a11jFeB/pDhAcoYIYppu3s+JxLNP
- e6D80+DgYJHilbA==
+ bh=roAD8lZ3bak3GtYlRrCGDQC517ZgrKZMcWsjgpCj3lM=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBqzURBPZi4c03VMIsQ7QXKN83zWjtSrW00UwCAS
+ IWxDK5e/QCJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCas1EQQAKCRDa6OEJdZac
+ 5XgVD/kBaNVNAPd/djIRnyHtGpHUwV4vt7qxOdMWWAQQe8qKHD1XI7y++EkftMEnBOUWrwtmAKI
+ MoE89ox7eBXN/iy+jlTvT/NvU5jieQ1GAUa9qvU62/AFh9Z/s1b3+OAJWKcS7HAiEn0a9A2BJrw
+ kfvCZGCay4kSrDzuNBwCq+r5MlSpV/deXN2mmZfa2UM1nbjnjzi5IMTLis0vVTD2zzCEUQIcP6v
+ hG/1wPJsK+xLbA079JnymTPszy16FS561CmGhFKV60DHeV+MHoFRhv2R7qzt7lE6B52S/y950z0
+ gIGdPtfwFxNhrVV9IU0hDoeUzAqokF5yx6CBVtB55gbiWalWSaOrskZAE6cm+uF9k8ANS0Yr+mq
+ 8X1haxU5VfWvn6+ULBSbyLIjDWtBHBZ9qHXs6Xdr8/Tiw4a9xdCK8CNbdUNINlvwoyncALH1Uqt
+ 7kAEpjUehDs5qEDEEPhIZ7Du4URKH7k3dPtHDWkfjEA4wvF+8DaYVqjkYIT8w83VXWucV8JQK4S
+ QJ65biDJXNawcsjZHEYa+gvKTh+YVmBd6jTqOWZsC+W0DlnFN0PQWmileGYWp5XUNItMj5EBLXU
+ 87KGw4d969576r1KJdeLSCh9ScopqBptn6QNaOJHtIA58wpiomQZHLp94uUAI318pp7RMtEG/kF
+ GLOcGaFJo2p2/8A==
 X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
  fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.93
-X-Mimecast-MFC-PROC-ID: eMEC5WsaTI5RbG6_WLMtELsf7O1uG4Xq0DQAjcCxQa4_1791837283
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
+X-Mimecast-MFC-PROC-ID: JZj8cbLgacp4B7FbR--I_YVKq-8atppGfeL_GRNRaOo_1791837309
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
@@ -123,31 +124,28 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-When printing an invalid/denied register, QEMU crashes with:
-ERROR:include/qemu/bswap.h:488:ldn_le_p: code should not be reached
+Allow to read CSRs gated by Smstateen extension when env->debugger.
 
-(ex: "p $sireg" when siselect=0 on riscv)
-
-Return false instead.
-
-Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
+Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Reviewed-by: Chao Liu <chao.liu@processmission.com>
 Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 ---
- monitor/hmp.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ target/riscv/tcg/csr.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/monitor/hmp.c b/monitor/hmp.c
-index 488ec23937df..10e19e417aba 100644
---- a/monitor/hmp.c
-+++ b/monitor/hmp.c
-@@ -424,7 +424,7 @@ static bool gdb_get_register(MonitorHMP *hmp, int64_t *pval, const char *name)
+diff --git a/target/riscv/tcg/csr.c b/target/riscv/tcg/csr.c
+index 061bc9db77b3..9da05a0507d5 100644
+--- a/target/riscv/tcg/csr.c
++++ b/target/riscv/tcg/csr.c
+@@ -53,7 +53,8 @@ RISCVException smstateen_acc_ok(CPURISCVState *env, int index, uint64_t bit)
+ {
+     bool virt = env->virt_enabled;
  
-         buf = g_byte_array_new();
-         reg_size = gdb_read_register(cs, buf, reg->gdb_reg);
--        if (reg_size > sizeof(*pval)) {
-+        if (reg_size == 0 || reg_size > sizeof(*pval)) {
-             return false;
-         }
+-    if (env->priv == PRV_M || !riscv_cpu_cfg(env)->ext_smstateen) {
++    if (env->debugger || env->priv == PRV_M ||
++        !riscv_cpu_cfg(env)->ext_smstateen) {
+         return RISCV_EXCP_NONE;
+     }
  
 
 -- 
