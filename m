@@ -4,166 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7408DCA9EDF
-	for <qemu-riscv@archiver.kernel.org>; Mon, 12 Oct 2026 14:55:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71A06CA9ED1
+	for <qemu-riscv@archiver.kernel.org>; Mon, 12 Oct 2026 14:56:00 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xGHQX-0006dt-CP; Mon, 12 Oct 2026 10:54:57 -0400
+	id 1xGHRE-00082K-Fj; Mon, 12 Oct 2026 10:55:40 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <sunil.laxminarasimha@oss.qualcomm.com>)
- id 1xGHQJ-0006Jr-Lr
- for qemu-riscv@nongnu.org; Mon, 12 Oct 2026 10:54:43 -0400
-Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <sunil.laxminarasimha@oss.qualcomm.com>)
- id 1xGHQH-0004rR-Vc
- for qemu-riscv@nongnu.org; Mon, 12 Oct 2026 10:54:43 -0400
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 69CC0OFA2088487
- for <qemu-riscv@nongnu.org>; Mon, 12 Oct 2026 14:54:40 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:reply-to:subject:to; s=
- qcppdkim1; bh=qyieATY+92xROrdlPKOWMx6JxrR3KPBPFfw2XlNeY7o=; b=Ah
- +16Nqrj5kjDRnQC55Ur+iE742Q9LvbLZvLsi+N9dZFIR1bT8Q0x5pyTaZGxdpHwR
- r/y9Wij9l3PvGy4F7DMfv6wiUn4K5YJ4eoY9WYvRFmV1PeiWS2xSIGuYa3p4E/cc
- oXtN4J914ySVSOW4+lbSd0g3pFznene1PhhYYF8evHBrlUm+aPVZtaiOHkuFbBJM
- rOYs4/FsHGEdJvpbo4T0gev/r/TtJSWbUDCAsnov546EEiOBvWcrCya1pciNVisH
- 9xtJdIv2HHY8cFzmF9SiIoxjAu7JtiXPUUQlf1ze+0q9zhsleRr05GuCulWnxGYs
- b3tRhKbOfuK9tTbwIePA==
-Received: from mail-yw1-f198.google.com (mail-yw1-f198.google.com
- [209.85.128.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h8sgu2fee-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Mon, 12 Oct 2026 14:54:40 +0000 (GMT)
-Received: by mail-yw1-f198.google.com with SMTP id
- 00721157ae682-837aaa9a3f6so19993297b3.0
- for <qemu-riscv@nongnu.org>; Mon, 12 Oct 2026 07:54:40 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1791816880; cv=none;
- d=google.com; s=arc-20260327;
- b=Us4W2uR/HeujFgkOFtrVdNS13td375XchUOJlbAxVuz2rlyPCsNzfVRskq0kncskGb
- AmQj6aatK2wX80N1g/IfnrPRjZDzN8yqVpM6SpKaELKWwfz18NyXH1vIOVlrY5qZoW9R
- e6Y5Q7SIqEA8oQXYkCHj0wOONl5VSAxq0Tt3xgFA76rjBT0wZLojHv7nVwSjrNOeUNB0
- yZbPGtJGrrW20hRDLKPG92IyxlRRf30rPL3rqnBLnIydrjW/Y8rsilc1cPyirg2edav2
- Ob5TZdUFgkgudiGKrxYk7lvOvmF1juLZWsDQogtOW86sqxa2lVuglMdYDLwMBt2fcGbK
- Nm9g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :reply-to:in-reply-to:references:mime-version:dkim-signature;
- bh=qyieATY+92xROrdlPKOWMx6JxrR3KPBPFfw2XlNeY7o=;
- fh=0++nhiZO56ejGKMlhlf+6kKo7tDzdp3JSeTEFIMPRBw=;
- b=Qos3Q4liH+Ku29iTzMtS8bx2STGfkGPoDkXApjMz4yFJKJ1mIPCalestW8GtBO7Brf
- bjdL6Kycu0CZQZbIShlIfVi6rSSvgC1xK5qxqZWkw27nr3altc6/eFk/Nl7btHtIcr0+
- GS1MRg0r+QMyaNawCyf3Bzv7h0to9ZHtxI8eIq4QN/sXq35byKX0irnYrvELwiDHn7eQ
- pOwjwNt0Jpqv3ZKypcl8hjj8TbpWGuRPk4+u8fu2RAvmlGp9hRECQQxCthEm0fGQtF3v
- MGWL/dsmC9Tyy2qB0SWyCd0wJ1h6u39fc6Day+kFfYPJGTRYEWeOgppum1+T/MQAcX+L
- zIHQ==; darn=nongnu.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1791816880; x=1792421680; darn=nongnu.org;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:reply-to:in-reply-to:references:mime-version:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=qyieATY+92xROrdlPKOWMx6JxrR3KPBPFfw2XlNeY7o=;
- b=H6Z+ZRTFJozF5jbzhoGxz6Tmsw3bIZWSI5+b42IuLu6ocSwlwjhobFF7WVpzJnLpeO
- +ewk6796VwerdSvxinGKBJSDu5YIkudyXshPMgQ1mO1+m0uOHGxTYpxNtdbhSHyRFwXc
- Kd3987NJ/fV0VR3NVMAELoTkuWV1XLOT8Cef/A5cQpvxB61XQLBemW4fDAoWXy366hkg
- /+p3NrwjoN5j03K3nCZS1Aa0jAh+H01qWiV4JWvWa4bs8XTVoHXL3wJZKOH4H89nkdj6
- R6+Gs1RKpNlRwTAGDgg8iMCUrQOUzgpADqTWJDgUkiEEgzlPXR8oOkyHJ3TN9UruiSSE
- e2Bg==
+ (Exim 4.90_1) (envelope-from <eblot.ml@gmail.com>)
+ id 1xGHR5-0007y4-UM
+ for qemu-riscv@nongnu.org; Mon, 12 Oct 2026 10:55:33 -0400
+Received: from mail-wm1-f53.google.com ([209.85.128.53])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <eblot.ml@gmail.com>)
+ id 1xGHR2-0005Ic-Gy
+ for qemu-riscv@nongnu.org; Mon, 12 Oct 2026 10:55:30 -0400
+Received: by mail-wm1-f53.google.com with SMTP id
+ 5b1f17b1804b1-49e73611928so25301265e9.1
+ for <qemu-riscv@nongnu.org>; Mon, 12 Oct 2026 07:55:28 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1791816880; x=1792421680;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:reply-to:in-reply-to:references:mime-version:x-gm-gg
+ d=1e100.net; s=20260707; t=1791816927; x=1792421727;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=qyieATY+92xROrdlPKOWMx6JxrR3KPBPFfw2XlNeY7o=;
- b=hUsqySIq1qfv3S6wYyYtCeAodhKnElgfH3l2jIiHcRkdMNhl+4E0RWBHAUXtT3SWfh
- lFERYMvin9CvGSz4G1zJ66V7bIykVwJfTBP/a9sXI/fgIlngya4isNR+SWyGw2M0VGo/
- z81D5geI2RFd+/ec3XpwvxOgQ36fAH43Bss1PoiqAlSzWXe52pG62uU4iA/EMBBJ+S3O
- WBXpVfa7+AG1qo/dCp2uGAVDYVtOsf/IuzY9jB2kz+n97OnQ9xH1Xadeifsy1OasRvUI
- tfky3j6JSBYDUvRhyQmQUPlhL15oUotGdMs9y7v7o+PUVF6ZMo+EHEby6kLtEGUPKkDD
- gvfA==
+ bh=ImldGJ+S970Bf5OYd6GaXlG8v143fN7qBqQiDylCmP4=;
+ b=j68HsA5QHdiKNylZ7EKF696pCqtT9Sl6+hd+6sz+bGbCTGaKGIqNwIGcg0EhObCRY1
+ EK9EXyjyGhXy5gWSECraZUGSTW3zsTAcEwS22W8H+U5GtLwQxbSDF0QE8GbEsRps6eMk
+ flVZdSiPm1OyzMYuUq/cT4KF6in0K1Twwe41Nm18/rveA/+vCj5Xt/OZNhO0yGZD/8R1
+ KP1Jp5yXO9GE9n4WY3UfbqjiVD3Kr/uBKUASVcbUe6/bfV7G1jHJbd8169iLaLvx01F6
+ fUs7qezpCJ77aVVz8034V/kUUlbmA8y86iFzU6/bRY01QGCH8hFzawViXM2sXK/dXAJ6
+ N1PA==
 X-Forwarded-Encrypted: i=1;
- AKwUvBwy9O6MBWJ/tNXis94K202sWYZ37ltrftgAm9CLNOCP94H+XdGBwH2MOyAX3Q/EBYNnMl3vr0LzjGHq@nongnu.org
-X-Gm-Message-State: AFq9FYKSPzqrR9SUmUFGUq37Q3cbSAqEI2ZnNMlIY63cm6xwfhw0oQ5W
- +fApNdMSfGpl5tHpN5tlZpuwNh/YPbLYJ6a9wxOxqsHY4rSilvJQY+TFDqZIJ6aImKwv/aholhb
- dHIY9SP/YcrK5Mcm+0jBFqDomS1FP93hcs5XQ4si3ccL4jIXiPENRFLbUCA1yf2IQ7NVdqzebij
- bK7se4g7lb7ZjG/6mbBPvPZVZtgwd68l/D
-X-Gm-Gg: AYBFou0991Y8IDCKPrezYr3D2kere6SMwm0zvuiruub2k58Wly7zD5GjeTtB6d7ftOM
- Tz7CcoV0PQs0jtFgObCJ+8CbU+7WrWPB7fNACA9+KGs/aNG0UvfX+4ofCjHmaIhgtWIeTSAYSG9
- 6XM8ZlZOldiKZv0Q1BtUuzQjqunpmlyOphSQueBUvV/1U3N2ciGgo3bSKjpt0=
-X-Received: by 2002:a05:690c:e3c8:b0:8b0:a4f7:7353 with SMTP id
- 00721157ae682-8b0a4f775ffmr10617837b3.13.1791816879762; 
- Mon, 12 Oct 2026 07:54:39 -0700 (PDT)
-X-Received: by 2002:a05:690c:e3c8:b0:8b0:a4f7:7353 with SMTP id
- 00721157ae682-8b0a4f775ffmr10617707b3.13.1791816879301; Mon, 12 Oct 2026
- 07:54:39 -0700 (PDT)
+ AKwUvBzIpnAtWbqmVXp1nWV38H9G3kPoEHNHNwQHxLgP1xqw17bz5yb7iWvSUs4mwoRlrXMiEOcoS85gMfRT@nongnu.org
+X-Gm-Message-State: AFq9FYIBEzm+tCbashFeuKPi1jd9zDnLqrYLrctkH5BcThkhby+1nzRm
+ 190HB0R4gUoHiAi77NyZwCBi9x+wuQfmJY0qTwev6wF+iVwEgvTyRqIf
+X-Gm-Gg: AYBFou2eT6uXFVxP9Nt3rjsEIpJhE4lkmGGW1WvJuZVNhKDZ5ocGq/tLiqCJLjsW/FC
+ K2pDq8WaRSdiUijbHL71NMMUDO4SuysFK07JCbYBAcCsfi++XJoFmah9HOaz4HSd7CKQ86IPock
+ 6t2rzn1IandjuoI2O0OmWVYYhO5V5kVlYNZjf7UNQe08/S5VzqWRVGqab/uR5Bzbvo6m38FBjAn
+ Bxsc28PjgtdBrhgzFO9b19TGDV7Spv66uTQ+SkcY/ew4hioZAsXvOI6FrzkTCQ0n+Gtwp+QKcJT
+ oP8qIinke4Vp7XC3FZELBYkYTyXmgituvoKPlqZm6Dr3bNR8Z2dLxXwCN6rEk0qbtkBQXYdJ7BW
+ sc6N+sHDaLWGoe59kvvJ2Nkvr74khCYN9a8YXCRtAGr3obUh99woPGxMdJZcmypZFWoXTKl+SxZ
+ /MCy/qkAIvYUFK2qYj0zk9NcBMvbg/XSJKZWwVtP9b3Wt/eF3uQpEVRp3CFf79rR/gYKUj3ryUa
+ JIDWz1KOODy4VYrHLHIAoyDgbH0u5ln+fihhO6GCS2QLt2JZO0CeE9Y
+X-Received: by 2002:a05:600c:8b78:b0:49e:65f2:db64 with SMTP id
+ 5b1f17b1804b1-4a18e4837f2mr176377965e9.5.1791816926905; 
+ Mon, 12 Oct 2026 07:55:26 -0700 (PDT)
+Received: from localhost (89-93-216-19.hfc.dyn.abo.bbox.fr. [89.93.216.19])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4a18bf2e0dbsm312212015e9.11.2026.10.12.07.55.26
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 12 Oct 2026 07:55:26 -0700 (PDT)
+Date: Mon, 12 Oct 2026 16:31:56 +0200
+Subject: [PATCH v2 03/50] hw/arm: sanmiguel: remove the second SPI flash
+ controller
 MIME-Version: 1.0
-References: <20261011182552.1071742-1-sunilvl@oss.qualcomm.com>
- <20261011182552.1071742-3-sunilvl@oss.qualcomm.com>
- <3847ee55-78c8-496d-942e-104def334b72@oss.qualcomm.com>
-In-Reply-To: <3847ee55-78c8-496d-942e-104def334b72@oss.qualcomm.com>
-From: Sunil V L <sunilvl@oss.qualcomm.com>
-Date: Mon, 12 Oct 2026 20:24:28 +0530
-X-Gm-Features: AclHuK8e0tPjv5_TbUWC_CP-4zcIPPK3hmQhvkYa7b6gcr2vBon3rc_JVzq2mEU
-Message-ID: <CAB19ukGY_o3E4qzmHRvPHA+5HAUokRp_5CowLR5rQOW+pke-mA@mail.gmail.com>
-Subject: Re: [PATCH 2/4] hw/riscv/virt: Add ACPI PPTT table
-To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu@processmission.com>,
- "Michael S . Tsirkin" <mst@redhat.com>,
- Igor Mammedov <imammedo@redhat.com>, Ani Sinha <anisinha@redhat.com>,
- Anup Patel <anup.patel@oss.qualcomm.com>,
- Drew Fustini <fustini@kernel.org>,
- Sia Jee Heng <jeeheng.sia@starfivetech.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Authority-Analysis: v=2.4 cv=QdzzLcbv c=1 sm=1 tr=0 ts=6accf4b0 cx=c_pps
- a=g1v0Z557R90hA0UpD/5Yag==:117 a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=rJkE3RaqiGZ5pbrm-msn:22 a=EUspDBNiAAAA:8 a=Bq6zwJu1AAAA:8
- a=QGs316aN6dwDMrRK9cwA:9 a=QEXdDO2ut3YA:10 a=MFSWADHSvvjO3QEy5MdX:22
- a=KQ6X2bKhxX7Fj2iT9C4S:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEyMDA1OSBTYWx0ZWRfX1Ke0BfRJN4iN
- JwBP1BSQJzGCuPayNyUye3VBzexwm9OcZal9zyXJ930i9LJ/cgOfawwpV5lN9eTvdG2bKIozZTX
- 4VFdYKXBeNA7GSuAUJgFlW3Lx5TmyS2ekwlAj0yVZRpJR5Zxh2aAeHecbP7iJBnoN5Wdsw21KdN
- u7z6KtIbkShiP6B1cTg16frPgsVRhLoFF07ySVOlLA9iicNdQ1vTJvdKzBlkRjDLrJmkCsX9HVH
- VfbLmi6pxBU/jAYf1tCW5wpmHFzdcllXb1aKlrhN/Mqo+dLQmRuo4uI4me5C8rhYAt8EHIjZxiG
- vR4ilFbKXlzlfgVVhufA2si/ZdcWSWN2vldJWkK8UOUZoSOZTGxdTdj14+cPFLR4mjFYPR7fY/4
- USTD2fh12Xphgb+vERWXhHZTtL+QDvQGZxDtR1Ch1NQEhlGq4HcW4zRm6fOyi3VfyH60M8/+HJ+
- No5XGS2VMjFDI/uutEg==
-X-Proofpoint-ORIG-GUID: xFUKja5_7nyYkwqXpypP3mRUDt9HaGL7
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEyMDA1OSBTYWx0ZWRfX2a39GWqjuBSQ
- e1dNITIb7I/lM7ONkPQPRlf02Ro4AcLxMQwfbNDDMa7m3kukzpeqNSXyHvJLPb+GdeEUK5ZZtA+
- meLjDEvZs4Y7kVeu8CLzhoqyQZbNpjY=
-X-Proofpoint-GUID: xFUKja5_7nyYkwqXpypP3mRUDt9HaGL7
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-12_04,2026-10-09_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 impostorscore=0 phishscore=0 spamscore=0 suspectscore=0
- lowpriorityscore=0 adultscore=0 clxscore=1015 malwarescore=0
- priorityscore=1501 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610080000
- definitions=main-2610120059
-Received-SPF: pass client-ip=205.220.180.131;
- envelope-from=sunil.laxminarasimha@oss.qualcomm.com;
- helo=mx0b-0031df01.pphosted.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
-X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20261012-bmc-minerva-v2-3-4c3dff084ec9@free.fr>
+References: <20261012-bmc-minerva-v2-0-4c3dff084ec9@free.fr>
+In-Reply-To: <20261012-bmc-minerva-v2-0-4c3dff084ec9@free.fr>
+To: qemu-devel@nongnu.org
+Cc: =?utf-8?q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>, 
+ Peter Maydell <peter.maydell@linaro.org>, 
+ Steven Lee <steven_lee@aspeedtech.com>, Troy Lee <leetroy@gmail.com>, 
+ Jamin Lin <jamin_lin@aspeedtech.com>, Kane Chen <kane_chen@aspeedtech.com>, 
+ Andrew Jeffery <andrew@codeconstruct.com.au>, Joel Stanley <joel@jms.id.au>, 
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, qemu-arm@nongnu.org, 
+ Patrick Leis <venture@google.com>, Fabiano Rosas <farosas@suse.de>, 
+ Laurent Vivier <lvivier@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>, 
+ qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, 
+ =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>, 
+ Emmanuel Blot <emmanuel.blot@free.fr>
+X-Mailer: b4 0.16.0
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1791815519; l=1273;
+ i=emmanuel.blot@free.fr; s=20260602; h=from:subject:message-id;
+ bh=d5avXaQSHf6bIfiDvZv67RY5xgd1U3dm0wZh/dvYVAk=;
+ b=M4EuneDWmdSo+VtSiaypHuk5+OfyPHsRFymuYjEK1qqATk/7ayeW0LBEEEiBPYzFJmbzIduyd
+ R3YCUJRus7NCKQNRfHveC+Klhxdd6mCFzXBTgwRcm6g7weRdqcb+h2e
+X-Developer-Key: i=emmanuel.blot@free.fr; a=ed25519;
+ pk=0qFrZ21FAAN8OfVsSoVcCFTk/NMYOWzxJz4paSAVm0g=
+Received-SPF: pass client-ip=209.85.128.53; envelope-from=eblot.ml@gmail.com;
+ helo=mail-wm1-f53.google.com
+X-Spam_score_int: -15
+X-Spam_score: -1.6
+X-Spam_bar: -
+X-Spam_report: (-1.6 / 5.0 requ) BAYES_00=-1.9,
+ FREEMAIL_FORGED_FROMDOMAIN=0.001, FREEMAIL_FROM=0.001,
+ HEADER_FROM_DIFFERENT_DOMAINS=0.25, RCVD_IN_DNSWL_NONE=-0.0001,
+ RCVD_IN_MSPIKE_H2=0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -176,89 +107,47 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Reply-To: sunilvl@oss.qualcomm.com
+Reply-to:  Emmanuel Blot <emmanuel.blot@free.fr>
+From:  Emmanuel Blot via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Daniel,
+The board only populates the flash device attached to the FMC
+controller; the SoC SPI controllers are left unused. Advertising a
+part there presents the guest with a flash device the hardware does
+not have.
 
-On Mon, Oct 12, 2026 at 3:09=E2=80=AFPM Daniel Henrique Barboza
-<daniel.barboza@oss.qualcomm.com> wrote:
->
-> Hi Sunil!
->
-> On 10/11/2026 3:25 PM, Sunil V L wrote:
-> > From: Sunil V L <sunilvl@oss.qualcomm.com>
-> >
-> > Generate the Processor Properties Topology Table (PPTT) for the RISC-V
-> > virt machine.
-> >
-> > Describe the machine using separate L1 data and instruction caches plus
-> > unified L2 and L3 caches, and enable the corresponding cache and cluste=
-r
-> > SMP properties.
-> >
-> > Signed-off-by: Sunil V L <sunilvl@oss.qualcomm.com>
-> > Signed-off-by: Sia Jee Heng <jeeheng.sia@starfivetech.com>
-> > ---
-> >   hw/riscv/virt-acpi-build.c |  7 +++++
-> >   hw/riscv/virt.c            | 54 +++++++++++++++++++++++++++++++++++++=
-+
-> >   include/hw/riscv/virt.h    |  4 +++
-> >   3 files changed, 65 insertions(+)
-> >
-> > diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
-> > index 0475dcb5c601..3c72a03dadb6 100644
-> > --- a/hw/riscv/virt-acpi-build.c
-> > +++ b/hw/riscv/virt-acpi-build.c
-> > @@ -882,7 +882,10 @@ static void virt_acpi_build(RISCVVirtState *s, Acp=
-iBuildTables *tables)
-> >       unsigned dsdt, xsdt;
-> >       GArray *tables_blob =3D tables->table_data;
-> >       MachineState *ms =3D MACHINE(s);
-> > +    CPUCoreCaches caches[CPU_MAX_CACHES];
-> > +    unsigned int num_caches;
-> >
-> > +    num_caches =3D virt_get_caches(caches);
->
-> So if we have virt_get_caches() as:
->
-> unsigned int virt_get_caches(CPUCoreCaches *caches)
-> {
->      for (int i =3D 0; i < ARRAY_SIZE(virt_caches); i++) {
->          caches[i] =3D virt_caches[i];
->      }
->
->      return ARRAY_SIZE(virt_caches);
-> }
->
->
-> And then we do:
->
->
->      CPUCoreCaches caches[CPU_MAX_CACHES];
->      unsigned int num_caches;
->
->      num_caches =3D virt_get_caches(caches);
->
->
-> Isn't that the same as:
->
->
->      CPUCoreCaches caches[CPU_MAX_CACHES];
->      unsigned int num_caches =3D ARRAY_SIZE(virt_caches);
->
->      memcpy(caches, virt_caches, num_caches * sizeof(CPUCoreCaches));
->
->
-> and then we can get rid of virt_get_caches()?  Am I missing something?
->
-Yes, memcpy looks better but I would like to keep the
-virt_get_caches() function.
-I also missed defining the array as static in virt.c. Let me make those cha=
-nges
-and send v2.
+While here, add the missing year to the copyright line.
 
-Thanks,
-Sunil
+Signed-off-by: Emmanuel Blot <emmanuel.blot@free.fr>
+---
+ hw/arm/aspeed_ast2600_sanmiguel.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/hw/arm/aspeed_ast2600_sanmiguel.c b/hw/arm/aspeed_ast2600_sanmiguel.c
+index 345a9c9416..ac2aef740a 100644
+--- a/hw/arm/aspeed_ast2600_sanmiguel.c
++++ b/hw/arm/aspeed_ast2600_sanmiguel.c
+@@ -1,7 +1,7 @@
+ /*
+  * Facebook SanMiguel BMC
+  *
+- * Copyright (c) Meta Platforms, Inc. and affiliates.
++ * Copyright (c) 2026 Meta Platforms, Inc. and affiliates.
+  *
+  * SPDX-License-Identifier: GPL-2.0-or-later
+  */
+@@ -384,7 +384,7 @@ static void aspeed_machine_sanmiguel_class_init(ObjectClass *oc,
+     amc->hw_strap1 = SANMIGUEL_BMC_HW_STRAP1;
+     amc->hw_strap2 = SANMIGUEL_BMC_HW_STRAP2;
+     amc->fmc_model = "mx66l1g45g";
+-    amc->spi_model = "mx66l1g45g";
++    amc->spi_model = NULL;
+     amc->num_cs    = 2;
+     amc->macs_mask = ASPEED_MAC0_ON;
+     amc->i2c_init  = sanmiguel_bmc_i2c_init;
+
+-- 
+2.50.1
+
 
