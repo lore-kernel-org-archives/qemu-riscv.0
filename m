@@ -4,65 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71A06CA9ED1
-	for <qemu-riscv@archiver.kernel.org>; Mon, 12 Oct 2026 14:56:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8A8DCA9ED1
+	for <qemu-riscv@archiver.kernel.org>; Mon, 12 Oct 2026 14:57:06 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xGHRE-00082K-Fj; Mon, 12 Oct 2026 10:55:40 -0400
+	id 1xGHSA-0000O7-7Q; Mon, 12 Oct 2026 10:56:38 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <eblot.ml@gmail.com>)
- id 1xGHR5-0007y4-UM
- for qemu-riscv@nongnu.org; Mon, 12 Oct 2026 10:55:33 -0400
-Received: from mail-wm1-f53.google.com ([209.85.128.53])
+ id 1xGHS4-0000LC-Tw
+ for qemu-riscv@nongnu.org; Mon, 12 Oct 2026 10:56:33 -0400
+Received: from mail-wr1-f43.google.com ([209.85.221.43])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <eblot.ml@gmail.com>)
- id 1xGHR2-0005Ic-Gy
- for qemu-riscv@nongnu.org; Mon, 12 Oct 2026 10:55:30 -0400
-Received: by mail-wm1-f53.google.com with SMTP id
- 5b1f17b1804b1-49e73611928so25301265e9.1
- for <qemu-riscv@nongnu.org>; Mon, 12 Oct 2026 07:55:28 -0700 (PDT)
+ id 1xGHS2-0005S2-1S
+ for qemu-riscv@nongnu.org; Mon, 12 Oct 2026 10:56:32 -0400
+Received: by mail-wr1-f43.google.com with SMTP id
+ ffacd0b85a97d-48af4d4e61fso1387523f8f.2
+ for <qemu-riscv@nongnu.org>; Mon, 12 Oct 2026 07:56:29 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1791816927; x=1792421727;
+ d=1e100.net; s=20260707; t=1791816988; x=1792421788;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=ImldGJ+S970Bf5OYd6GaXlG8v143fN7qBqQiDylCmP4=;
- b=j68HsA5QHdiKNylZ7EKF696pCqtT9Sl6+hd+6sz+bGbCTGaKGIqNwIGcg0EhObCRY1
- EK9EXyjyGhXy5gWSECraZUGSTW3zsTAcEwS22W8H+U5GtLwQxbSDF0QE8GbEsRps6eMk
- flVZdSiPm1OyzMYuUq/cT4KF6in0K1Twwe41Nm18/rveA/+vCj5Xt/OZNhO0yGZD/8R1
- KP1Jp5yXO9GE9n4WY3UfbqjiVD3Kr/uBKUASVcbUe6/bfV7G1jHJbd8169iLaLvx01F6
- fUs7qezpCJ77aVVz8034V/kUUlbmA8y86iFzU6/bRY01QGCH8hFzawViXM2sXK/dXAJ6
- N1PA==
+ bh=MVSG8EzaWLj+Z754/87jnXfWdb4zSMi3q66mrxn3Q8s=;
+ b=Hw9dvL7e3LQZ9jmLSjmMw8uvM2kOJrJbpOso+jD0zfnX3Arvo9qLfg71wFtkee3qb3
+ SBgYr6jrxqBX66ny62iuuzWXvMk57XPx1l+NQwltkE6eKaZbcUHNUauoO1QeX1LcV4E3
+ pKG7w9FXwJheGCkbKAejDO2krNUqVCI/yjlEJ6OxAroGX8gbsTYUp54I/k6uoWt2p1QT
+ 6gnr2S9A1CAweltEVqR/bnWMFLtOXik/FGSnaAJ4/mZ4hRQPEH4GjyvCjy6i+dzXw2OE
+ rEByxQeNuKVT/aZEPyj99yW1JSiXZyi0UJAmfZlq7wIQsYiZE6mayeAFR0wyQH3SoZQd
+ R4NQ==
 X-Forwarded-Encrypted: i=1;
- AKwUvBzIpnAtWbqmVXp1nWV38H9G3kPoEHNHNwQHxLgP1xqw17bz5yb7iWvSUs4mwoRlrXMiEOcoS85gMfRT@nongnu.org
-X-Gm-Message-State: AFq9FYIBEzm+tCbashFeuKPi1jd9zDnLqrYLrctkH5BcThkhby+1nzRm
- 190HB0R4gUoHiAi77NyZwCBi9x+wuQfmJY0qTwev6wF+iVwEgvTyRqIf
-X-Gm-Gg: AYBFou2eT6uXFVxP9Nt3rjsEIpJhE4lkmGGW1WvJuZVNhKDZ5ocGq/tLiqCJLjsW/FC
- K2pDq8WaRSdiUijbHL71NMMUDO4SuysFK07JCbYBAcCsfi++XJoFmah9HOaz4HSd7CKQ86IPock
- 6t2rzn1IandjuoI2O0OmWVYYhO5V5kVlYNZjf7UNQe08/S5VzqWRVGqab/uR5Bzbvo6m38FBjAn
- Bxsc28PjgtdBrhgzFO9b19TGDV7Spv66uTQ+SkcY/ew4hioZAsXvOI6FrzkTCQ0n+Gtwp+QKcJT
- oP8qIinke4Vp7XC3FZELBYkYTyXmgituvoKPlqZm6Dr3bNR8Z2dLxXwCN6rEk0qbtkBQXYdJ7BW
- sc6N+sHDaLWGoe59kvvJ2Nkvr74khCYN9a8YXCRtAGr3obUh99woPGxMdJZcmypZFWoXTKl+SxZ
- /MCy/qkAIvYUFK2qYj0zk9NcBMvbg/XSJKZWwVtP9b3Wt/eF3uQpEVRp3CFf79rR/gYKUj3ryUa
- JIDWz1KOODy4VYrHLHIAoyDgbH0u5ln+fihhO6GCS2QLt2JZO0CeE9Y
-X-Received: by 2002:a05:600c:8b78:b0:49e:65f2:db64 with SMTP id
- 5b1f17b1804b1-4a18e4837f2mr176377965e9.5.1791816926905; 
- Mon, 12 Oct 2026 07:55:26 -0700 (PDT)
+ AKwUvBz6sZQIWHC90Ej+Yyv32feIy/dr7YsyOalNQbycvnOD9NFnFMYyHlxik8bE7qSxbtho4JbDBSERtcr8@nongnu.org
+X-Gm-Message-State: AFq9FYLSQfP0tew+gGS2L9gE6FVgV3jOBXQZZ3CNBnRnVjld3u1FjSjz
+ i5wFpvGJmZRaeqccJLnTFxuXuWzfJbqeN5znI3NpYSEpydnvPoviMYDj
+X-Gm-Gg: AYBFou2xPQ+LP4XBYTPOmfIMfy0ptVirSLnef09Wi63f//5Hi8KqAYoKt+/v0UlqCpU
+ WO4DGBUlD8szeTZhjQsn33jhCI2Z252lvQWl2R4UWlOb1avptMG7HskSbiIPPxqdHFxSSti3NGH
+ MCO0I8M8AUN0sblRgo+joDjptFzWIN8MeKt2TebSm9qcM2o7rCvl4Aq+bxDdaTK6UTfgxWPx+Zi
+ 6yE7EdYog4kGHX/r6ja5eJ12ZfvRbYB8wJVUVrThvMi+jwr1dthr11r/+OzIL5M33vwgmAuDXpX
+ KrV8Fjslj/l0/aEZma0NvTkLn6iSCFo5tE37YF/kbz4AdfcTJplcO2oycDZbkI4abnk/Ud7tRRB
+ REoDOwRhxhnrvD5jDtp9IFAIt+yW6oZ9TNlkjlmdb7AYaiONepGHUDQobyNIdop4aWApboKmBpw
+ SgZc/JKPWV9RgMXVotXsECBJ9vG/qHR8o/FpfArgaZpzm7tDX7Jlu3lWZQ0xppmTrPcXJdxubBr
+ cjQ5eS9pmkt9BmfcbZG/yyzugysP+iU2yvTY8sL2QyuAg==
+X-Received: by 2002:a05:6000:3102:b0:48d:ca32:e90f with SMTP id
+ ffacd0b85a97d-48dca32e9b5mr11121631f8f.55.1791816988226; 
+ Mon, 12 Oct 2026 07:56:28 -0700 (PDT)
 Received: from localhost (89-93-216-19.hfc.dyn.abo.bbox.fr. [89.93.216.19])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a18bf2e0dbsm312212015e9.11.2026.10.12.07.55.26
+ ffacd0b85a97d-48db9abd57fsm19265393f8f.37.2026.10.12.07.56.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 12 Oct 2026 07:55:26 -0700 (PDT)
-Date: Mon, 12 Oct 2026 16:31:56 +0200
-Subject: [PATCH v2 03/50] hw/arm: sanmiguel: remove the second SPI flash
- controller
+ Mon, 12 Oct 2026 07:56:27 -0700 (PDT)
+Date: Mon, 12 Oct 2026 16:31:57 +0200
+Subject: [PATCH v2 04/50] hw/i2c: pca954x: drop unused header inclusions
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261012-bmc-minerva-v2-3-4c3dff084ec9@free.fr>
+Message-Id: <20261012-bmc-minerva-v2-4-4c3dff084ec9@free.fr>
 References: <20261012-bmc-minerva-v2-0-4c3dff084ec9@free.fr>
 In-Reply-To: <20261012-bmc-minerva-v2-0-4c3dff084ec9@free.fr>
 To: qemu-devel@nongnu.org
@@ -78,15 +77,15 @@ Cc: =?utf-8?q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>,
  =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>, 
  Emmanuel Blot <emmanuel.blot@free.fr>
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1791815519; l=1273;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1791815519; l=838;
  i=emmanuel.blot@free.fr; s=20260602; h=from:subject:message-id;
- bh=d5avXaQSHf6bIfiDvZv67RY5xgd1U3dm0wZh/dvYVAk=;
- b=M4EuneDWmdSo+VtSiaypHuk5+OfyPHsRFymuYjEK1qqATk/7ayeW0LBEEEiBPYzFJmbzIduyd
- R3YCUJRus7NCKQNRfHveC+Klhxdd6mCFzXBTgwRcm6g7weRdqcb+h2e
+ bh=b9K700bDZsWgDrz5nZ97CmrXARWhU1wSPXweUqGmEJM=;
+ b=Tl71FE+9JTd2lCFH9MHeRy9QCAflu+bF7+oW1C+qsX1R2DLonL4r/bn1gjB2xxkmFQeDlxpZc
+ +kpBqMhNRD0C6okC3kOgx6cDYO2/aPSPQiSICheFlZcE4sPWrBhIhBS
 X-Developer-Key: i=emmanuel.blot@free.fr; a=ed25519;
  pk=0qFrZ21FAAN8OfVsSoVcCFTk/NMYOWzxJz4paSAVm0g=
-Received-SPF: pass client-ip=209.85.128.53; envelope-from=eblot.ml@gmail.com;
- helo=mail-wm1-f53.google.com
+Received-SPF: pass client-ip=209.85.221.43; envelope-from=eblot.ml@gmail.com;
+ helo=mail-wr1-f43.google.com
 X-Spam_score_int: -15
 X-Spam_score: -1.6
 X-Spam_bar: -
@@ -112,40 +111,34 @@ From:  Emmanuel Blot via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The board only populates the flash device attached to the FMC
-controller; the SoC SPI controllers are left unused. Advertising a
-part there presents the guest with a flash device the hardware does
-not have.
-
-While here, add the missing year to the copyright line.
+The qapi/error.h, hw/core/sysbus.h and qemu/module.h headers are
+included but not used by i2c_mux_pca954x.c. Remove them.
 
 Signed-off-by: Emmanuel Blot <emmanuel.blot@free.fr>
 ---
- hw/arm/aspeed_ast2600_sanmiguel.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ hw/i2c/i2c_mux_pca954x.c | 3 ---
+ 1 file changed, 3 deletions(-)
 
-diff --git a/hw/arm/aspeed_ast2600_sanmiguel.c b/hw/arm/aspeed_ast2600_sanmiguel.c
-index 345a9c9416..ac2aef740a 100644
---- a/hw/arm/aspeed_ast2600_sanmiguel.c
-+++ b/hw/arm/aspeed_ast2600_sanmiguel.c
-@@ -1,7 +1,7 @@
- /*
-  * Facebook SanMiguel BMC
-  *
-- * Copyright (c) Meta Platforms, Inc. and affiliates.
-+ * Copyright (c) 2026 Meta Platforms, Inc. and affiliates.
-  *
-  * SPDX-License-Identifier: GPL-2.0-or-later
+diff --git a/hw/i2c/i2c_mux_pca954x.c b/hw/i2c/i2c_mux_pca954x.c
+index c603446028..c8e75da8b2 100644
+--- a/hw/i2c/i2c_mux_pca954x.c
++++ b/hw/i2c/i2c_mux_pca954x.c
+@@ -15,15 +15,12 @@
   */
-@@ -384,7 +384,7 @@ static void aspeed_machine_sanmiguel_class_init(ObjectClass *oc,
-     amc->hw_strap1 = SANMIGUEL_BMC_HW_STRAP1;
-     amc->hw_strap2 = SANMIGUEL_BMC_HW_STRAP2;
-     amc->fmc_model = "mx66l1g45g";
--    amc->spi_model = "mx66l1g45g";
-+    amc->spi_model = NULL;
-     amc->num_cs    = 2;
-     amc->macs_mask = ASPEED_MAC0_ON;
-     amc->i2c_init  = sanmiguel_bmc_i2c_init;
+ 
+ #include "qemu/osdep.h"
+-#include "qapi/error.h"
+ #include "hw/i2c/i2c.h"
+ #include "hw/i2c/i2c_mux_pca954x.h"
+ #include "hw/i2c/smbus_slave.h"
+ #include "hw/core/qdev.h"
+ #include "hw/core/qdev-properties.h"
+-#include "hw/core/sysbus.h"
+ #include "qemu/log.h"
+-#include "qemu/module.h"
+ #include "qemu/queue.h"
+ #include "qom/object.h"
+ #include "trace.h"
 
 -- 
 2.50.1
