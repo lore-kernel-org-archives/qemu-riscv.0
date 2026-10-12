@@ -4,142 +4,141 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86CE6CA9EC7
-	for <qemu-riscv@archiver.kernel.org>; Sun, 11 Oct 2026 18:27:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA75BCA9ED1
+	for <qemu-riscv@archiver.kernel.org>; Mon, 12 Oct 2026 09:31:55 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xFyGK-0003LY-Ff; Sun, 11 Oct 2026 14:27:08 -0400
+	id 1xGCNi-00023l-Jg; Mon, 12 Oct 2026 05:31:43 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <sunil.laxminarasimha@oss.qualcomm.com>)
- id 1xFyFe-00034O-9K
- for qemu-riscv@nongnu.org; Sun, 11 Oct 2026 14:26:26 -0400
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1xGCNZ-00023J-Gr
+ for qemu-riscv@nongnu.org; Mon, 12 Oct 2026 05:31:33 -0400
 Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <sunil.laxminarasimha@oss.qualcomm.com>)
- id 1xFyFb-0008UN-SU
- for qemu-riscv@nongnu.org; Sun, 11 Oct 2026 14:26:25 -0400
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1xGCNX-0006Mo-Tk
+ for qemu-riscv@nongnu.org; Mon, 12 Oct 2026 05:31:33 -0400
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 69BIMPYm537933
- for <qemu-riscv@nongnu.org>; Sun, 11 Oct 2026 18:26:22 GMT
+ 69C8KmYV1439194
+ for <qemu-riscv@nongnu.org>; Mon, 12 Oct 2026 09:31:28 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:sender:subject:to; s=qcppdkim1; bh=TFbT
- Fpoz4msVzOvA76OFjh3YegaGvX7/iHzSOwQK+jU=; b=iIemfP4fbLcvqlyM4NVx
- wWzW9qc7PbkU8vLEBmh4yGdiPWmWL9YbYnMpJ2E8EJaZQqJKH0pRJMTzre9GTmUT
- x1tDp7DV36EmkxTjjeDYhqd0fZVctG6B18zP5ZcyXc8jYONwomPLgVsctIiWZdWl
- 6ufKTlVuun26iOTSKxFPnulcOwjaO+5z7PFrPLMwmOhCULnziV/NVWsP8Aa5R/ZJ
- B4ow+J9niaXtsJY6soSbu2cLIHc6oDlwFoy2RlC0Xzc3d+EkS7Iks2CXlGGTJEqX
- AGOrjCd+TDkLFBWlQdAQre3DV4logubmuYQFmKWFsa6RI2Nyzepy82DmKpDCRmGc
- fA==
-Received: from mail-dy1-f197.google.com (mail-dy1-f197.google.com
- [74.125.82.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h7cxxkpdv-1
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ TX/7V7xOoiIPdv1vbvtIuRfbrLc4dgAZqSMhUWTu3CI=; b=g4m7BGnTd4wJxui2
+ avPFPBkL+3asLbKK270Dw8BpQGTG4DePkYo5JA5BPriA/ZjTSZzNeKguqs9OI1bm
+ X4wAXYFZW7vfEY7sEWwfiT3D6O6abflC8ioEHI/pguHECG1C+exfLK+e638JDVXh
+ uxhrjo141SqT5CBn4VAApezyGHlGSpN5vPf4vB5fBzkqbPIx7UVgdkerJQhr6cA4
+ kIAIODVjerLzItL4DonyKVo5zktUdWgWGcq1Wk/A41/o9HAlDbT42sm3cQGfCDs9
+ 3q6pGhVrU5gniaSb/VtJWok831m+yX61t2/MgnlP90qDQrZl8yoUmqQTjEdovOUR
+ C1d4xA==
+Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com
+ [209.85.219.72])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h8qtkhb1p-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Sun, 11 Oct 2026 18:26:21 +0000 (GMT)
-Received: by mail-dy1-f197.google.com with SMTP id
- 5a478bee46e88-3592749a017so838188eec.1
- for <qemu-riscv@nongnu.org>; Sun, 11 Oct 2026 11:26:21 -0700 (PDT)
+ for <qemu-riscv@nongnu.org>; Mon, 12 Oct 2026 09:31:28 +0000 (GMT)
+Received: by mail-qv1-f72.google.com with SMTP id
+ 6a1803df08f44-9106fce784dso48627016d6.2
+ for <qemu-riscv@nongnu.org>; Mon, 12 Oct 2026 02:31:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1791743181; x=1792347981; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:sender:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=TFbTFpoz4msVzOvA76OFjh3YegaGvX7/iHzSOwQK+jU=;
- b=CuNGVRQIxPk2QOmfR9HAK8pE1LbqEmEKeUUfWKlL2q1JVEgYk7d9cHqLY4NAgoKtbZ
- 9r63n07OOYrAn6oCGb1vs/MngLIpX27Z3C6vQuyrTHFh2i4LTBoD9TcAFxzZX0FDDD2Y
- vgVd0Ci0mqJVnxPg3pKP638Z9x3ZBMDl9Mwp8CAVkNXxTHlszVnyz5e+hX5P5uPyk5RQ
- aFiaLZcmEnf9qN8l4f4EsP+O3OBvJlRXcRgLTwiLiJqBiMl3cPtdr0yzY/AkYgKCJk4v
- eImwvfHwt6HiFJ4yHYbZgvVYhccjHSwLtgGYeQGi0KbdozW6vgYvBZ5ZuFluF9IiDK+O
- gTvQ==
+ d=oss.qualcomm.com; s=google; t=1791797487; x=1792402287; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=TX/7V7xOoiIPdv1vbvtIuRfbrLc4dgAZqSMhUWTu3CI=;
+ b=OM1Jfvjp3PAUKa6OZl3okongKv1qrjIVyE2tOJ+Fsu9dvWLgzu1nCdV6YoD/RCiih7
+ EvC0ypwyFPQfUxvQepThcGq3Z9vuswoafEF0w5At93micH/vI0l/zCR4L+UoB24zdMm3
+ akVmWvm3RbGGAXHDlNGbX7IL35YwVyzRzOJIBVPjB7hfVlzrf5Y+I5p7obUb0q7S6oTY
+ Q+yO9SipEafMyEmwdNnny8xSPxm9NKmQSiV1KCcCPPlNW2WMlAadXCriYr1s9lK/5cOd
+ X4Y8VRxHcrOfpytORmfooPG8fbEOgi7CR2qSQZc4w/Gh8zhkmYtLGBBkPCo7+deivmR0
+ xqAg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1791743181; x=1792347981;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:sender:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=TFbTFpoz4msVzOvA76OFjh3YegaGvX7/iHzSOwQK+jU=;
- b=zWHliy4ZVjhI+IwAvfjpWSbwhAf1zU05VXTGbaTYez5tSXtdbzuQZo0WAY6alLrHQP
- JKtqHK+eDVcLn0sPynhwwjUUpvBCb9pXtXmV1ey+Pyj2mbgDVjhyr69ujBg2d1/+GwWD
- 7wniSDSv5XZDaWYPBogWdOdJr0UpTB9ERx4IszpleBcU55k97HRKtLG+c0Xn2Mh/JN6q
- 2fN8UjoqDaczfukzSgdK55FkZ//4Q0j6ztcIwvunfsSIEK4zd/NLT1WDnPuVlX7cxYEr
- 5Uj34j4aiMAghws80i94z+spCBfRl1Nc6X4vGDdZm3ALy3R9nbFWS4JZ9ABJR3CC3RD4
- XlgA==
+ d=1e100.net; s=20260707; t=1791797487; x=1792402287;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=TX/7V7xOoiIPdv1vbvtIuRfbrLc4dgAZqSMhUWTu3CI=;
+ b=bJKV5g6vBlLyb4a6xhqsmpTI+tZDBateM7cgq4EsCpMPcvb17+e7Y5151CU0Mmydnr
+ rmLb6Mii3PNXroEooNfP9TkTDJa5GrOFEW1OO49Qk9QNMNPPeF7+ZT2glq7ILR+4GIaU
+ TjtmCR9b2bMutyzSzK1uNbSjjlofjSppFRcpQgV1jdJ6DbiKIgeaR9gOTUBBSKJX/lMa
+ 7R1iYO/eJHGt10hOT8JsUIK7FX4MoqQ0y2CWPhAi+TLjbum3pdOKyziGw0sURBPAelZK
+ 9GJiHd4f+AbEWY6d9sea2S7d/7GVs3igR7KLJcZZt6M4pU2QaMcWPA82gE894waSTlAr
+ zPgA==
 X-Forwarded-Encrypted: i=1;
- AKwUvBzOfVzEFSeShFUXmwen4WJacuUNQaYCO3ZfOQj1e7eG6JBr0OO0FoPiSVg9DGyNsgvYYmVBY4rRETot@nongnu.org
-X-Gm-Message-State: AFq9FYIu9wSzTSsf/um8svQcLvwQAnmvRrMU6AKnXrkt90HZ1ddIhmNq
- QP5HO3JUVx+N3aMrG2o4qRFNtTG+egSf0NKYq1Zny2IxEqHbQa8oDIxpbe2frL/qKmFovec4u0y
- I6czkapYmFIpcn6pJvuKMpU3BRQK0vnhT60rxmPX4Xj0UIsSzZTXIvEKAE1ITEVUprg==
-X-Gm-Gg: AYBFou2LMwtiVPnUDUPitvgZvey+mYtd/ExLE1Ah+zGEhqLz1a/zMWzv+LQ26oiyzc3
- zi+31j7OJgOpOvP7Kz6BBz1ssYF8feC0rAwdPw1E3kXY4XU7MnKKjax4uZGiXADV6xzY5mCZmyA
- vFhjTQC9oVB3N1wVu706OsMurwaugsJKVOhDaB/IgbUkMAboG14XB8xwvnhTdcybipAKkWvvHuF
- gItB7U0+YeLH878r/v/4akEWcGC6PpmDrx6ht757EdNeDgI2rQnYcjOeriq+HUxcl5Ro50dXUUp
- Vi6kaKnvkt0a7gyTxANOhLyQwkiZVDR+11oAvsrXjBUdEVxZ8Z5Xdq8wQ7tERCxe3ezHru1N1K1
- YsVI7QhfjkNTV13EYVIoT8XA5mI1qwq1k6R32Ozt0NXhQ1nNghqTVLmg=
-X-Received: by 2002:a05:7022:c84:b0:146:5f73:d45b with SMTP id
- a92af1059eb24-16a54fab691mr9918450c88.3.1791743180952; 
- Sun, 11 Oct 2026 11:26:20 -0700 (PDT)
-X-Received: by 2002:a05:7022:c84:b0:146:5f73:d45b with SMTP id
- a92af1059eb24-16a54fab691mr9918432c88.3.1791743180475; 
- Sun, 11 Oct 2026 11:26:20 -0700 (PDT)
-Received: from hu-sunilvl-blr.qualcomm.com
- (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ AKwUvBziKpTvgo6XrUh5luPeD8G2+ylGq06QZGjn0fE2hQWtgYpmr+3JgAOHaFgWJc6x0Y6EVPZ3ARqLYHNh@nongnu.org
+X-Gm-Message-State: AFq9FYKAQxRXKup7fIGzX3+Elrmdc98ALJUOa+MLzvQbKdtA/ATh055B
+ 9NN9cKCt8L8tXHhou4tOdxeLcvBT5yPhia1JBACWOnfF0NepRJvcLEEGQz0YphOU5DsAfClfQTk
+ PH3d3+OtW211Lt+odZ1AV06w0dOQ15sPSE4os4TEvhl5Mw8DS7DVmZpFMFQ==
+X-Gm-Gg: AYBFou2OlCUVny7SggZvZG+AVOryNex8XMvPhhdKgrqzQnru7S/5rLtz4+QcJkeon83
+ KwMQII3WuZE2dyuaZY6/8p78Mk+MM9N+IEuw+iWLri1U+KC0XV4UssIQQzdYiG0QtGdOrm2uCj3
+ 4uvvLHTYW5xU0Qgs+corrHy+0zL/znJOldwPo+7VVXFqz3lIfVl6mWRvQfx7SOjHWRL6bRKbOwv
+ 30y1AXVKCaNsQE64dXGsfYS1MLZXUWw6H+OZKlPR3JfQDYBLzxQV7jeT9I9jN/cV5hLCniAwNvS
+ 26x6K+TacvMMKn/5FIlYbrmND4xBRK8lTSbsc3FZ4J0EXmH/pJ+T76M/PozqZSMeO4FE2Rc12K4
+ caUcf3njZ5+Z3iyIkPTW31T/y3ewFzvj9W84=
+X-Received: by 2002:ad4:5943:0:b0:91b:5d3b:4aca with SMTP id
+ 6a1803df08f44-91b5d3b4df8mr157364406d6.51.1791797487512; 
+ Mon, 12 Oct 2026 02:31:27 -0700 (PDT)
+X-Received: by 2002:ad4:5943:0:b0:91b:5d3b:4aca with SMTP id
+ 6a1803df08f44-91b5d3b4df8mr157364256d6.51.1791797487075; 
+ Mon, 12 Oct 2026 02:31:27 -0700 (PDT)
+Received: from [192.168.68.107] ([152.234.126.58])
  by smtp.gmail.com with ESMTPSA id
- a92af1059eb24-169a5866477sm22505284c88.22.2026.10.11.11.26.15
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 11 Oct 2026 11:26:19 -0700 (PDT)
-X-Google-Original-From: Sunil V L <sunilvl@oss.qualcomm.com
-To: qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu@processmission.com>,
- "Michael S . Tsirkin" <mst@redhat.com>,
- Igor Mammedov <imammedo@redhat.com>, Ani Sinha <anisinha@redhat.com>,
- Anup Patel <anup.patel@oss.qualcomm.com>,
- Drew Fustini <fustini@kernel.org>, Sunil V L <sunilvl@oss.qualcomm.com>
-Subject: [PATCH 4/4] MAINTAINERS: Update Sunil's email id
-Date: Sun, 11 Oct 2026 23:55:52 +0530
-Message-ID: <20261011182552.1071742-5-sunilvl@oss.qualcomm.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20261011182552.1071742-1-sunilvl@oss.qualcomm.com>
-References: <20261011182552.1071742-1-sunilvl@oss.qualcomm.com>
+ 6a1803df08f44-91b815fd211sm21655216d6.48.2026.10.12.02.31.23
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 12 Oct 2026 02:31:25 -0700 (PDT)
+Message-ID: <03ec34ad-6dcd-4ac2-aed4-65b03cacc775@oss.qualcomm.com>
+Date: Mon, 12 Oct 2026 06:31:21 -0300
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-ORIG-GUID: 8L-VCQOnecT_Y-4DChU8ZeJaaFTRB9qc
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDExMDA3MyBTYWx0ZWRfX/DWLXfg29bsD
- HH+H14lIwc4FDgv0Lt8wOBzCoW20txvGRIUtS4m2ZEGREtKeF6mpEeJo2i3Xv9eca2SoBxEu1cn
- 1JrPFlVRNifN5X84Hz+I7i64JPTNLc0=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDExMDA3MyBTYWx0ZWRfX7mDttCAllVgZ
- zY1SLThV23dg/O3BOCXcqrZl89at4Qwee6eyqP2lzElUfD9aVcmQMW9JiHfqdefoY+TYUxoNwqu
- HTJHQRBvn634y9UV/D1Mgpab7/3/dutpGtmsORPpDqSfhzIXEu3l2nNBOtQfqCb7ou9xon7ew0g
- +wEEn54n/a4/c1aLQA22NSiWIotsvRSLUud07WZJUQVVN6lIPMQvqaKvFsFGrejbtxuRdB6hCH7
- cDIPTa0Q+Pcmbym3Dor0zBxuSO+96x9c2vQvYmDNEVEnat1zQsRpldFLTe9tDUOLj4V0Iu4Hw81
- GVM4CUFSJxOxfcEEIjittcur+l05mi2v3iJYIzHDYPxmWUc9psM0qG2vQAPmQtjWMwzLegLQUUN
- 9W3QbnRD77ICJJ7RTmVTfNr10Jy6GgyZ5AjHcg3YWrqgPyvm09sBnjAOr+ZmwODDDMykd+5V9rJ
- hcpRv4CGjZdNr4Tm6bA==
-X-Authority-Analysis: v=2.4 cv=AsJ7T+9P c=1 sm=1 tr=0 ts=6acbd4cd cx=c_pps
- a=Uww141gWH0fZj/3QKPojxA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22 a=EUspDBNiAAAA:8
- a=bDdBU3oEAAAA:8 a=69wJf7TsAAAA:8 a=iDT6BKECi1uCQsOPTuAA:9
- a=PxkB5W3o20Ba91AHUih5:22 a=DN7SgORnOiO7RqxRx1GC:22 a=Fg1AiH1G6rFz08G2ETeA:22
-X-Proofpoint-GUID: 8L-VCQOnecT_Y-4DChU8ZeJaaFTRB9qc
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/4] tests/qtest/bios-tables-test: Allow PPTT for RISC-V
+To: Sunil V L <sunilvl@oss.qualcomm.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
+ <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Chao Liu <chao.liu@processmission.com>, "Michael S . Tsirkin"
+ <mst@redhat.com>,
+ Igor Mammedov <imammedo@redhat.com>, Ani Sinha <anisinha@redhat.com>,
+ Anup Patel <anup.patel@oss.qualcomm.com>, Drew Fustini <fustini@kernel.org>
+References: <20261011182552.1071742-1-sunilvl@oss.qualcomm.com>
+ <20261011182552.1071742-2-sunilvl@oss.qualcomm.com>
+From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Content-Language: en-US
+In-Reply-To: <20261011182552.1071742-2-sunilvl@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEyMDAzNyBTYWx0ZWRfX5+413vPrtUhQ
+ ufDLcqw9pkaVNv6m2rdcM4N46ZYV9ZkoIuTNZgoavS7+UyXOOdN7bdCSYXAmG6AuNLawEJdXhTc
+ OJw4umDt+J3ylDZ5qGyn3goUirmZHr483j7jX/9qbqDndhNz0oxcXBpPeuiBj6AAhl42VlhH4pM
+ aImI9mbzWzGjrmR0N3ycADulAsSSUYgLWUiFbj6nIrOMoLlf338LxousAqVXv5tfa0x0wzMyDS9
+ vlRIFQLd5i3vTbzdKsF5FopxXxJSskugcYjjBZV/B7C8+P0bbgp0k5HOxn92Lsubf5aVZRmMTWF
+ E9bM6dRsq0FYYJf5pEGR8+1KaFVL7vhpuAMW7ecfBi8i2A5W09oDBqg0lw9eudwlNjzUxuAExQU
+ Xapu/FQIKvFaa896Jo87GK4g2hlL0T3vd0g9MJHw36XYHlykXheMsqCrzA3/6tNrFaL2OADuy/5
+ uPaqkjy0DrYXW5NFODQ==
+X-Authority-Analysis: v=2.4 cv=c8U+0h9l c=1 sm=1 tr=0 ts=6acca8f0 cx=c_pps
+ a=7E5Bxpl4vBhpaufnMqZlrw==:117 a=XIBTAJF/fpiF5bhQ2IRv1g==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
+ a=EUspDBNiAAAA:8 a=x5d5dAMOWgx-vAMA7G8A:9 a=QEXdDO2ut3YA:10
+ a=pJ04lnu7RYOZP9TFuWaZ:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEyMDAzNyBTYWx0ZWRfX4hDDEZ72+ZCv
+ ravAKjvYksLBX8Cph9c2MkqeHAE5H4B1DAT9dYP09J1ea+dCGmzA4/20/69HBD0f3ogIosneQ7n
+ hUAs5IIL8PkA0cHKqvx0ew3HvBIvOHc=
+X-Proofpoint-ORIG-GUID: f24tRticWTRrnIFTwvqwAxKvf5iTMRVj
+X-Proofpoint-GUID: f24tRticWTRrnIFTwvqwAxKvf5iTMRVj
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-11_04,2026-10-09_01,2025-10-01_01
+ definitions=2026-10-12_03,2026-10-09_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 phishscore=0 lowpriorityscore=0 impostorscore=0 spamscore=0
- adultscore=0 priorityscore=1501 clxscore=1015 bulkscore=0 suspectscore=0
+ phishscore=0 adultscore=0 lowpriorityscore=0 bulkscore=0 malwarescore=0
+ priorityscore=1501 spamscore=0 impostorscore=0 clxscore=1015 suspectscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610110073
+ reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610120037
 Received-SPF: pass client-ip=205.220.180.131;
- envelope-from=sunil.laxminarasimha@oss.qualcomm.com;
- helo=mx0b-0031df01.pphosted.com
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
 X-Spam_score_int: -27
 X-Spam_score: -2.8
 X-Spam_bar: --
@@ -159,34 +158,35 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Reply-to:  Sunil V L <sunilvl@oss.qualcomm.com>
-From:  Sunil V L via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Sunil V L <sunilvl@oss.qualcomm.com>
 
-Update my email ID to qualcomm.
 
-Signed-off-by: Sunil V L <sunilvl@oss.qualcomm.com>
----
- MAINTAINERS | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On 10/11/2026 3:25 PM, Sunil V L wrote:
+> From: Sunil V L <sunilvl@oss.qualcomm.com>
+> 
+> Allow changes to the riscv64 virt board to add PPTT support.
+> 
+> Signed-off-by: Sunil V L <sunilvl@oss.qualcomm.com>
+> ---
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 8cc426451c2f..5c2282088610 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -2335,7 +2335,7 @@ S: Orphan
- F: hw/arm/virt-acpi-build.c
- 
- RISC-V ACPI Subsystem
--M: Sunil V L <sunilvl@ventanamicro.com>
-+M: Sunil V L <sunilvl@oss.qualcomm.com>
- L: qemu-riscv@nongnu.org
- S: Maintained
- F: hw/riscv/virt-acpi-build.c
--- 
-2.43.0
+Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+
+>   tests/data/acpi/riscv64/virt/PPTT           | 0
+>   tests/qtest/bios-tables-test-allowed-diff.h | 1 +
+>   2 files changed, 1 insertion(+)
+>   create mode 100644 tests/data/acpi/riscv64/virt/PPTT
+> 
+> diff --git a/tests/data/acpi/riscv64/virt/PPTT b/tests/data/acpi/riscv64/virt/PPTT
+> new file mode 100644
+> index 000000000000..e69de29bb2d1
+> diff --git a/tests/qtest/bios-tables-test-allowed-diff.h b/tests/qtest/bios-tables-test-allowed-diff.h
+> index dfb8523c8bf4..94be7a69a22e 100644
+> --- a/tests/qtest/bios-tables-test-allowed-diff.h
+> +++ b/tests/qtest/bios-tables-test-allowed-diff.h
+> @@ -1 +1,2 @@
+>   /* List of comma-separated changed AML files to ignore */
+> +"tests/data/acpi/riscv64/virt/PPTT",
 
 
