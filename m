@@ -4,45 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 471A3CC6B19
-	for <qemu-riscv@archiver.kernel.org>; Tue, 13 Oct 2026 16:29:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBDD7CC6B19
+	for <qemu-riscv@archiver.kernel.org>; Tue, 13 Oct 2026 16:29:44 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xGfNI-00088k-F3; Tue, 13 Oct 2026 12:29:12 -0400
+	id 1xGfNE-0007kG-TN; Tue, 13 Oct 2026 12:29:09 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <clg@kaod.org>) id 1xGfM1-0005mm-91
- for qemu-riscv@nongnu.org; Tue, 13 Oct 2026 12:27:59 -0400
-Received: from smtpout3.mo536.mail-out.ovh.net ([51.210.91.12])
+ (Exim 4.90_1) (envelope-from <clg@kaod.org>)
+ id 1xGfLp-0005VY-Kf; Tue, 13 Oct 2026 12:27:41 -0400
+Received: from 6.mo528.mail-out.ovh.net ([178.33.251.179])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <clg@kaod.org>) id 1xGfLx-0005K2-6b
- for qemu-riscv@nongnu.org; Tue, 13 Oct 2026 12:27:52 -0400
-Received: from director3.derp.mail-out.ovh.net
- (director3.derp.mail-out.ovh.net [79.137.60.223])
- by mo536.mail-out.ovh.net (Postfix) with ESMTPS id 4j409s55nkz81Vx;
- Tue, 13 Oct 2026 16:27:45 +0000 (UTC)
-Received: from director3.derp.mail-out.ovh.net
- (director3.derp.mail-out.ovh.net. [127.0.0.1])
- by director3.derp.mail-out.ovh.net (inspect_sender_mail_agent) with SMTP
- for <jamin_lin@aspeedtech.com>; Tue, 13 Oct 2026 16:27:45 +0000 (UTC)
-Received: from mta6.priv.ovhmail-u2.ea.mail.ovh.net (unknown [10.110.178.179])
- by director3.derp.mail-out.ovh.net (Postfix) with ESMTPS id
- 4j409s4Br1z1xrh; Tue, 13 Oct 2026 16:27:45 +0000 (UTC)
-Received: from kaod.org (unknown [10.1.6.3])
+ (Exim 4.90_1) (envelope-from <clg@kaod.org>)
+ id 1xGfLn-0005Hs-DV; Tue, 13 Oct 2026 12:27:41 -0400
+Received: from director4.derp.mail-out.ovh.net
+ (director4.derp.mail-out.ovh.net [79.137.60.37])
+ by mo528.mail-out.ovh.net (Postfix) with ESMTPS id 4j409h6Q8dz6FKS;
+ Tue, 13 Oct 2026 16:27:36 +0000 (UTC)
+Received: from director4.derp.mail-out.ovh.net
+ (director4.derp.mail-out.ovh.net. [127.0.0.1])
+ by director4.derp.mail-out.ovh.net (inspect_sender_mail_agent) with SMTP
+ for <jamin_lin@aspeedtech.com>; Tue, 13 Oct 2026 16:27:36 +0000 (UTC)
+Received: from mta2.priv.ovhmail-u2.ea.mail.ovh.net (unknown [10.110.113.125])
+ by director4.derp.mail-out.ovh.net (Postfix) with ESMTPS id
+ 4j409h5NZGz1xsk; Tue, 13 Oct 2026 16:27:36 +0000 (UTC)
+Received: from kaod.org (unknown [10.1.6.1])
  (Authenticated sender: clg@kaod.org)
- by mta6.priv.ovhmail-u2.ea.mail.ovh.net (Postfix) with ESMTPSA id 0AF891B42CA1;
- Tue, 13 Oct 2026 16:27:42 +0000 (UTC)
+ by mta2.priv.ovhmail-u2.ea.mail.ovh.net (Postfix) with ESMTPSA id 523EF941FD8; 
+ Tue, 13 Oct 2026 16:27:34 +0000 (UTC)
 Authentication-Results: garm.ovh; auth=pass
- (GARM-114S0085ace8e4b-655c-4a6b-adce-0d9c910a13b7,
+ (GARM-110S004522c1746-1d57-4614-a707-bafee614a12d,
  3B5152602AE6D76A7CF2E50DC6ABDDC767F0B630) smtp.auth=clg@kaod.org
 X-OVh-ClientIp: 82.64.250.170
-Message-ID: <1b4a0ea8-5c36-49b9-ba2e-e575bdc49f58@kaod.org>
-Date: Tue, 13 Oct 2026 18:27:42 +0200
+Message-ID: <f7890cff-ac12-4cc6-9278-3bbd80f340ab@kaod.org>
+Date: Tue, 13 Oct 2026 18:27:34 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 11/50] hw/rtc: ds1338: prefix the file-local helpers
- with ds1338_
+Subject: Re: [PATCH v2 10/50] hw/rtc: ds1338: implement Resettable reset
 To: Emmanuel Blot <emmanuel.blot@free.fr>, qemu-devel@nongnu.org
 Cc: Peter Maydell <peter.maydell@linaro.org>,
  Steven Lee <steven_lee@aspeedtech.com>, Troy Lee <leetroy@gmail.com>,
@@ -54,7 +53,7 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
  =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
 References: <20261012-bmc-minerva-v2-0-4c3dff084ec9@free.fr>
- <20261012-bmc-minerva-v2-11-4c3dff084ec9@free.fr>
+ <20261012-bmc-minerva-v2-10-4c3dff084ec9@free.fr>
 From: =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>
 Content-Language: en-US, fr
 Autocrypt: addr=clg@kaod.org; keydata=
@@ -99,29 +98,28 @@ Autocrypt: addr=clg@kaod.org; keydata=
  3GlqivBNkmYsHYSlFsbxc37E1HpTEaSWsGfAHQoPn9qrDJgsgcbBVc1gkUT6hnxShKPp4Pls
  ZVMNjvPAnr5TEBgHkk54HQRhhwcYv1T2QumQizDiU6iOrUzBThaMhZO3i927SG2DwWDVzZlt
  KrCMD1aMPvb3NU8FOYRhNmIFR3fcalYr+9gDuVKe8BVz4atMOoktmt0GWTOC8P4=
-In-Reply-To: <20261012-bmc-minerva-v2-11-4c3dff084ec9@free.fr>
+In-Reply-To: <20261012-bmc-minerva-v2-10-4c3dff084ec9@free.fr>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-x-ovh-tracer-id: 6629580130477190189
+x-ovh-tracer-id: 6627046855325428781
 X-VR-SPAMSTATE: OK
 X-VR-SPAMSCORE: -100
-X-VR-SPAMCAUSE: dmFkZTGR6my3yR3/nvryo3txK0P1kcLJRA/d7vE2mcZt4FU0101Phy0w72x8NaAAitpVOKF90GjzO+qvyH4b9FwTtmpkhfLFjS0l12jss995+1+CSt9dRVdFIQNpyZdw8JMEP2OsUr8kvui2suot0yeCho3mnogfR4OTybzBtjNMkwH6rZtCoqReZ3Xspx71uofptYG14YF6LA5GycHnmvCu/0xVFDe26Q2EQYr+SnIunnR0fmLViQ427J1pKhXw57wm7RCqCjm1N0L8M3POU50m/6Bb5k0XLbMF/HIdLLyBBH69MTzgyhl3rYpvnCPplNoVIxflhu2FB8H46UP+iEogqCYPTusEQil43lR38Xf675RDHS5YbucYOcNy8BbpkTwu1BVbGGa/nKhZU2+jUIG2T78CHXBNsReA0u+cPKVnmV+vpGNOhHg5aDqh8VDdhSACLK7uTdZytGonNKQlv9LF46ypvkgwQ7KehEsRJVrtnxRXJLGpAGUyWLbdM5Zu06IR+WV2t51xf7TPphzeBqxTeugRyTySc3f5NDmgW5S2LXvcKrPgzjkU5Z5v5wQO3ixCB0W+G3l1lxVKOfCkQs+yTJtZiekRJl6R0gi+ZViZ/2lzwfr9ZjuumeZr+FbruXU4/pfcyrVVkvlx2eLm3ehUFrqf0E/GTMjbu6YIPgZ9xpBm+A
-DKIM-Signature: a=rsa-sha256; bh=HNRiRRwq1pmiJdgMoZ0l3oA8GYphZqLM7CyDDGwwetc=; 
+X-VR-SPAMCAUSE: dmFkZTFJAA0Cff5mZHzxjOMf3vpdM/VfvcU3tzZqy3rh935Ggo91wXIdpJWVeOQBh0BtkSvpcDXPndRPnQDJ5NOOH3LTp7Nq6TOnz5gH/2/VElRGGUCKt+RHqpbTAnEaoqBeRCSlmVGALEzjKJy8O9LWHZZjTH8ta/3/Ns1/1dAtkg32q9bqR3JeX4KZeQ1ExBk2Xzh+zVJ5kZP+auzj5MEVRHRs1/p1H1NscUbI9FzfTnG2Wu2R/8O+EDjBsjafLViuNUeh8OdAkwN79Q2U1dqkbzpYq8JzfkLY8NR63te0LErTTbLj6jB1xH/iwK5utVdtxSHGcYHKT6mU1lwv9nag/pmKc/u77sbUum4ofTNB0XJY3e64FTzoFucwU2bQIUzPGScrKrl3XqCiwN9H50x4/3GrziRB60ZUp2bVNR1HVbwt+6F9rQlyJSysNKZwK1ejJ00tNnLRfLvTGCrcrXVdYvpDkbyINoSumQJAYhYOvs+MB/zNoyZk8cCiA26r3FXejj2ukewdpVAPv2Jvc1eLTX3MkcTNBPTkyJBAvalaaUOLHHuTTH2rJRVdu2so7iWQrrxI/mVY3Q8YvDfVqEwiF2ktwHmG+ynUMdGEcw1miYzDyezNHVvv2yyieOiJrg69gFHtbFJ/GSVtHhbZ7qI0FnagtU1VVsPJggVnca5i6ebiXg
+DKIM-Signature: a=rsa-sha256; bh=XxaOowC43oCgsIDl8GNhgCaSkmbvPsTfw86INwduuEk=; 
  c=relaxed/relaxed; d=kaod.org; h=From; s=ovhmo393970-selector1;
- t=1791908865; v=1;
- b=FuHlpZvC1OVAauekxzK6kclLTjdLCE/oIKLHHukZaZ72YLzfvRQWDV/a2486vyKy0q2LT5bs
- Gmm+c2zzLbbnxl9QzLfoE+AFGViFxLPYSl5cGYWHWj9LErABOaHGMWf5OLB/TcL/6EFcWc7btP4
- cpbWlBe7BHvYiQ+/rXiFs3444mg4eQPoctrdO7MMxVXm3aIezZU8x8MuMhFmnG53RcoOA/4LHhB
- HhNRLqRDjLVIyrVlmk14NxmbnKi5XouhRRWABwm+UWr8X3OYdkBAGIsJVQaMZJBRc4huS9+nFs3
- rPqref21xFskVG+Um8GrjhOOuGauKr48r7ymbTs6j/6XA==
-Received-SPF: pass client-ip=51.210.91.12; envelope-from=clg@kaod.org;
- helo=smtpout3.mo536.mail-out.ovh.net
+ t=1791908856; v=1;
+ b=S7I0XoXM5lbk65bGtQ8f48AvyMAL/9zGRDlv+p+nijNhsTBvTi60ngBT/gaXuBdkD5nRoWr/
+ Sgoi+q0oKEne5188xFM14bxiSPyXSFw56GJtMKRWJx/0kvVjf5EdgPQ0uYtX3uXYrvnrWjbqtyS
+ 2dveS2OPJpNjSKtTZGv1KvemQOKSHfiade24DYo+tbRFunCFm9Ia5IovOza1agnRiz2YsUTN02p
+ 7mpp6zPCZMhhLfdYcbeIFe/Jq66lmpJMeH3GBOhGtqJqupEWI8AmtOnlgcad5nHI6kTw+Bdc50N
+ /du9arYruRF/yHwxckXxwZui8ZdOk5mIGVk/aEFmWW2GQ==
+Received-SPF: pass client-ip=178.33.251.179; envelope-from=clg@kaod.org;
+ helo=6.mo528.mail-out.ovh.net
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -139,70 +137,43 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 10/12/26 16:32, Emmanuel Blot wrote:
-> Two static helpers predate the rest of the file and carry no device
-> prefix.
+> The device relied on device_class_set_legacy_reset(), a compatibility
+> shim around the legacy DeviceState reset hook. Convert ds1338_reset()
+> into a proper Resettable hold phase, dropping the legacy shim.
 > 
 > Signed-off-by: Emmanuel Blot <emmanuel.blot@free.fr>
 > ---
->   hw/rtc/ds1338.c | 12 ++++++------
->   1 file changed, 6 insertions(+), 6 deletions(-)
+>   hw/rtc/ds1338.c | 7 ++++---
+>   1 file changed, 4 insertions(+), 3 deletions(-)
 > 
 > diff --git a/hw/rtc/ds1338.c b/hw/rtc/ds1338.c
-> index 74aee6c746..1755a3a37c 100644
+> index f8b3340bf0..74aee6c746 100644
 > --- a/hw/rtc/ds1338.c
 > +++ b/hw/rtc/ds1338.c
-> @@ -57,7 +57,7 @@ static const VMStateDescription vmstate_ds1338 = {
->       }
->   };
->   
-> -static void capture_current_time(DS1338State *s)
-> +static void ds1338_capture_current_time(DS1338State *s)
->   {
->       /* Capture the current time into the secondary registers
->        * which will be actually read by the data transfer operation.
-> @@ -85,7 +85,7 @@ static void capture_current_time(DS1338State *s)
->       s->nvram[6] = to_bcd(now.tm_year - 100);
->   }
->   
-> -static void inc_regptr(DS1338State *s)
-> +static void ds1338_inc_regptr(DS1338State *s)
->   {
->       /* The register pointer wraps around after 0x3F; wraparound
->        * causes the current time/date to be retransferred into
-> @@ -93,7 +93,7 @@ static void inc_regptr(DS1338State *s)
->        */
->       s->ptr = (s->ptr + 1) & (NVRAM_SIZE - 1);
->       if (!s->ptr) {
-> -        capture_current_time(s);
-> +        ds1338_capture_current_time(s);
->       }
->   }
->   
-> @@ -108,7 +108,7 @@ static int ds1338_event(I2CSlave *i2c, enum i2c_event event)
->            * START_SEND, because the guest can't get at that data
->            * without going through a START_RECV which would overwrite it.
->            */
-> -        capture_current_time(s);
-> +        ds1338_capture_current_time(s);
->           break;
->       case I2C_START_SEND:
->           s->addr_byte = true;
-> @@ -129,7 +129,7 @@ static uint8_t ds1338_recv(I2CSlave *i2c)
->   
->       trace_ds1338_recv(s->ptr, res);
->   
-> -    inc_regptr(s);
-> +    ds1338_inc_regptr(s);
->       return res;
->   }
->   
-> @@ -204,7 +204,7 @@ static int ds1338_send(I2CSlave *i2c, uint8_t data)
->       } else {
->           s->nvram[s->ptr] = data;
->       }
-> -    inc_regptr(s);
-> +    ds1338_inc_regptr(s);
+> @@ -208,9 +208,9 @@ static int ds1338_send(I2CSlave *i2c, uint8_t data)
 >       return 0;
+>   }
+>   
+> -static void ds1338_reset(DeviceState *dev)
+> +static void ds1338_reset_hold(Object *obj, ResetType type)
+>   {
+> -    DS1338State *s = DS1338(dev);
+> +    DS1338State *s = DS1338(obj);
+>   
+>       /* The clock is running and synchronized with the host */
+>       s->offset = 0;
+> @@ -224,11 +224,12 @@ static void ds1338_class_init(ObjectClass *klass, const void *data)
+>   {
+>       DeviceClass *dc = DEVICE_CLASS(klass);
+>       I2CSlaveClass *k = I2C_SLAVE_CLASS(klass);
+> +    ResettableClass *rc = RESETTABLE_CLASS(klass);
+>   
+>       k->event = ds1338_event;
+>       k->recv = ds1338_recv;
+>       k->send = ds1338_send;
+> -    device_class_set_legacy_reset(dc, ds1338_reset);
+> +    rc->phases.hold = ds1338_reset_hold;
+>       dc->vmsd = &vmstate_ds1338;
 >   }
 >   
 > 
