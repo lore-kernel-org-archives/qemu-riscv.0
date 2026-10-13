@@ -4,93 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CFBFCC6B19
-	for <qemu-riscv@archiver.kernel.org>; Tue, 13 Oct 2026 16:34:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1AE4CC6B1A
+	for <qemu-riscv@archiver.kernel.org>; Tue, 13 Oct 2026 20:12:37 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xGfSW-0003mu-Uy; Tue, 13 Oct 2026 12:34:36 -0400
+	id 1xGir8-0003NA-H5; Tue, 13 Oct 2026 16:12:14 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <palmer@dabbelt.com>)
- id 1xGfSM-0003lm-1H
- for qemu-riscv@nongnu.org; Tue, 13 Oct 2026 12:34:28 -0400
-Received: from mail-pj1-x102a.google.com ([2607:f8b0:4864:20::102a])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <palmer@dabbelt.com>)
- id 1xGfSJ-0006YQ-N4
- for qemu-riscv@nongnu.org; Tue, 13 Oct 2026 12:34:25 -0400
-Received: by mail-pj1-x102a.google.com with SMTP id
- 98e67ed59e1d1-3ab3260b2cdso1373356a91.1
- for <qemu-riscv@nongnu.org>; Tue, 13 Oct 2026 09:34:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=dabbelt-com.20251104.gappssmtp.com; s=20251104; t=1791909262; x=1792514062;
- darn=nongnu.org; 
- h=content-transfer-encoding:content-type:mime-version:message-id:to
- :from:cc:in-reply-to:subject:date:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=pGc7XlSnnNv/Gs4VKCMJx1WcLuobkHR4JjSxUzcHqhk=;
- b=gNzp2/851m9DfpG30iPjWLBbxRv2xWuSaJjeSDToex0unmuVtunFSFDaMYvJlYFCXe
- wHKeRAUAvU/Ki962bdm/whRdGm7qNBeGIfpAu85o1a7GQrJXgQIdhu09gdOASc/W4E0C
- AGaUh9h6o9HYdKc6CHcxMmDzC0YKYhVS+FBOZ6w3iXp3SNa/YiH/uFV+1tbU7g5Ysf4m
- 2SVi5nwk7EUskh306Ln1x6zRiz6xxpvlsyWeLqayw6+Fieo5bQFgNsjPgMdKyWtx5+cD
- WNfDNLbuMPhjYEwI7pX72xw1tIjRaiODz3I2BscofVC26Ecg89CjlFJM6F/jFAcClx5Z
- 82OQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1791909262; x=1792514062;
- h=content-transfer-encoding:content-type:mime-version:message-id:to
- :from:cc:in-reply-to:subject:date:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to:content-type;
- bh=pGc7XlSnnNv/Gs4VKCMJx1WcLuobkHR4JjSxUzcHqhk=;
- b=pLjGz7PWwmdb5zNMWQUfZrNV0ksHMi02mL/ORlqqb7dSKgX4uQS4DfiOp9O6Tz5QgT
- +2lKMKfoC2h3UUmwNL2KwC4Iq575ucoSuR0Qcqjf4Uucos3CAHBiNAwBHsl2POA6SMco
- qITblC3aebs7gYci2tMhVgjGNCY25jEAHWuH3wPU35eSnbSOD/sf311lH8XI2qi2hevh
- ixZrG5sbg2WaekrzYdJgsYNJlmkmC97kfSEKU7SqgoSZqzEOZ54sYh0QxnEylS3uYZRH
- JuYORl9C4vOXzx436rZl0bsErDQFR/bykQN6fRvgSy2VGWGUDuu7kgssFKhY/qq6v1at
- rtBQ==
-X-Forwarded-Encrypted: i=1;
- AKwUvBxRtZmFXjEiZRPUcg2YzwqggHrO89h6WpNSFytAMo10BGVQgcn+WrU2ycPUhOHsnERdANeP49Odtf4j@nongnu.org
-X-Gm-Message-State: AFq9FYLMz5vRqcnyZyjeeaJtCzVNpHOcrbRpVRwIy0/D9xSLpF810Nfi
- 14fajIydyXBgb2CV2lztsYvBVSJZFMTgJKjSihJRSiWGfI6iWQc7eFFpBIOufWN0Sk0=
-X-Gm-Gg: AYBFou2yaOYrAbKVfg5GJY0TxBwHpfjfz9CmVi8C7MJZgDsRCFpysEEJnYZ7LDD0pjc
- +lSVqSuR2I+Z4ji1eBl8j+FXONwKevKosWzdCshQfR0A27k/G4Ej3FR7/w0x9LaoMoXN8TA4u+1
- pv2wq0ukIJz6/luI1e13j2EEpOrelnRiAGqcfXTUbStxavGvOOF2AgCPByrFL4ormpapk5QvHlQ
- N+7Fky4ja5Uoz2Ski90C2AEWzwoTNGTzWwv2E2irQoHFMs05/Uf6hohmOS46eZISsUBGi8UBEJu
- FmDyKNiUD6O76jZDCeYjVe8J3PN7guOiS5V19rg2aNKPD8hilqUuEy+Y62e63d6/yjYNKc7SaO6
- 8Rt4v/M2TbTe6xwNZ16wgZEUpECau584kYb4nwCKImwU7jhGVqVmO7/dx+SoWM9VdtqVUS9EKID
- Q9IRPMrUo3zNde+XIH4b0FNZ6b0sCmX6eJQllSWOjfArQhneYJ18pQAKOGUgyoDlq2L+fc2DLJz
- E0j0K2rgBgj1L/tUvu1vcUmphqN4A==
-X-Received: by 2002:a17:90a:2cc5:b0:3ab:a188:b896 with SMTP id
- 98e67ed59e1d1-3aba188be47mr4751344a91.10.1791909261507; 
- Tue, 13 Oct 2026 09:34:21 -0700 (PDT)
-Received: from localhost ([2001:5a8:4687:d600:60f5:5a60:a2fe:eaae])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3ac5f2b9769sm346860a91.15.2026.10.13.09.34.20
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 13 Oct 2026 09:34:20 -0700 (PDT)
-Date: Tue, 13 Oct 2026 09:34:20 -0700 (PDT)
-X-Google-Original-Date: Tue, 13 Oct 2026 09:34:19 PDT (-0700)
-Subject: Re: [PATCH] target/riscv: Use TSO barriers instead of full barriers
- for Ztso
-In-Reply-To: <f2600f08-73a0-4259-9175-7f644997c366@oss.qualcomm.com>
-CC: rick@sloservers.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
- Alistair Francis <Alistair.Francis@wdc.com>, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com
-From: Palmer Dabbelt <palmer@dabbelt.com>
-To: daniel.barboza@oss.qualcomm.com
-Message-ID: <mhng-0D33ADEF-8CD5-47F7-B852-CD30B674B87B@Palmers-Mini.rwc.dabbelt.com>
-Mime-Version: 1.0 (MHng)
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102a;
- envelope-from=palmer@dabbelt.com; helo=mail-pj1-x102a.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ (Exim 4.90_1)
+ (envelope-from <prvs=739d2b42f=Charles.Perry@microchip.com>)
+ id 1xGgyx-0005lD-HG; Tue, 13 Oct 2026 14:12:11 -0400
+Received: from esa.microchip.iphmx.com ([68.232.154.123])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1)
+ (envelope-from <prvs=739d2b42f=Charles.Perry@microchip.com>)
+ id 1xGgyv-0000Tm-Hi; Tue, 13 Oct 2026 14:12:11 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
+ t=1791915129; x=1823451129;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:in-reply-to;
+ bh=DE209nhUwT7O02U+siMfkxdoZGtgi0vamOdURx+Havs=;
+ b=hwGGzIfYDNTQQ8A/FSUn5w3QkZcXy5GRpMPyN6ursHYSF+iW2ax8/MAk
+ +mPlITTE/LZOeYAkn9LINV7SECDOeDSbZT7wh783VhfzhXVUwyKrx8KiA
+ 3XKFD9Ng6rAsEQfxB8sNhnybPNHeliPjszvQzr5xwBFRYjYjBuv0KSSvw
+ 3HjfhZkl/a8Ho+Wf1aDw44gpXovxLD6b7MM5EjeEl88oqs7IeC1qU8woi
+ VCX5EPwhjv0DlrB00IChTHqOpUvF8Kx1sBYG/KP2mxggWIZJfyJLsJP4H
+ tU7HlxW/dXL6tW/bNYpod36hxWTNZ4Iy6Cy8MLLJ2XZmZa2k+ZIDFcvL+ A==;
+X-CSE-ConnectionGUID: Q3qy/vD6QvKLPKCE46FH2A==
+X-CSE-MsgGUID: 2b/cbv9SSKyWjmn28lIBEg==
+X-IronPort-AV: E=Sophos;i="6.27,156,1787036400"; d="scan'208";a="232068083"
+X-Amp-Result: SKIPPED(no attachment in message)
+Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
+ by esa6.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
+ 13 Oct 2026 11:12:06 -0700
+Received: from chn-vm-ex04.mchp-main.com (10.10.85.152) by
+ chn-vm-ex02.mchp-main.com (10.10.85.144) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.58; Tue, 13 Oct 2026 11:12:05 -0700
+Received: from MON-LT-C78453.mchp-main.com (10.10.85.11) by
+ chn-vm-ex04.mchp-main.com (10.10.85.152) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.58 via Frontend Transport; Tue, 13 Oct 2026 11:12:04 -0700
+Date: Tue, 13 Oct 2026 14:12:03 -0400
+From: Charles Perry <charles.perry@microchip.com>
+To: Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcomm.com>
+CC: <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>, Daniel Henrique Barboza
+ <daniel.barboza@oss.qualcomm.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Chao Liu
+ <chao.liu@processmission.com>, <charles.perry@microchip.com>
+Subject: Re: [PATCH v11 03/10] hw/riscv: add RPMI FDT helpers
+Message-ID: <as50cyb5yWynlBVc@MON-LT-C78453.mchp-main.com>
+References: <20260917052250.1041262-1-subrahmanya.lingappa@oss.qualcomm.com>
+ <20260917052250.1041262-4-subrahmanya.lingappa@oss.qualcomm.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20260917052250.1041262-4-subrahmanya.lingappa@oss.qualcomm.com>
+Received-SPF: pass client-ip=68.232.154.123;
+ envelope-from=prvs=739d2b42f=Charles.Perry@microchip.com;
+ helo=esa.microchip.iphmx.com
+X-Spam_score_int: -45
+X-Spam_score: -4.6
+X-Spam_bar: ----
+X-Spam_report: (-4.6 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.24,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Tue, 13 Oct 2026 16:12:08 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -105,119 +89,60 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, 13 Oct 2026 09:00:41 PDT (-0700), daniel.barboza@oss.qualcomm.com wrote:
->
->
-> On 10/13/2026 10:14 AM, Palmer Dabbelt wrote:
->> On Tue, 13 Oct 2026 04:57:49 PDT (-0700), daniel.barboza@oss.qualcomm.com wrote:
->>>
->>>
->>> On 10/2/2026 10:47 AM, Rick Richard wrote:
->>>> With Ztso, plain loads and stores follow RVTSO, but the barriers
->>>> around them use TCG_MO_ALL.  That also orders a store before a later
->>>> load, which TSO doesn't require, and is expensive: on x86 hosts it
->>>> adds a locked instruction around every load and store in a
->>>> multi-threaded guest.
->>
->> Thanks.  I'm not quite sure why I had TCG_MO_ALL in there, I think maybe I just misread the TCG_MO_* vs TCG_BAR_* blurb?
->>
->> Reviewed-by: Palmer Dabbelt <palmer@dabbelt.com>
->>
->>>> The barrier after a load now only keeps later loads and stores
->>>> behind it, and the barrier before a store only keeps earlier loads
->>>> and stores ahead of it.  That is all TSO needs.
->>>>
->>>
->>> Fixes: 09c4e88759 ("RISC-V: Add support for Ztso")
->>>
->>>> Signed-off-by: Rick Richard <rick@sloservers.com>
->>>> ---
->>>
->>> Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
->>>
->>>> I found this while looking into why riscv64 guests were so much
->>>> slower than aarch64 ones under bsd-user on FreeBSD.  The default -cpu
->>>> max enables Ztso, and turning it off with ztso=false accounted for
->>>> most of the difference.
->>
->> Maybe we shouldn't default to Ztso, or at least not default to Ztso on host systems that themselves aren't TSO?
->
-> I vote to disable it in the 'max' CPU.  Changing the mem model from RVWMO to
-> RVTSO seems like a decision users have to make in the command line, not
-> something we decided to do because this particular CPU model must have all
-> possible extensions enabled.
->
-> In theory we could enable it depending on the host affinity with TSO, but I'd
-> rather not create a precedent where a TCG CPU model delivers different
-> extensions based on host capabilities.  We have enough of that in the KVM
-> driver.
+On Thu, Sep 17, 2026 at 10:52:42AM +0530, Subrahmanya Lingappa wrote:
+> Add helper routines for describing RPMI shared-memory mailbox transports
+> and service child nodes in the RISC-V virt device tree.
+> 
+> The helpers keep RPMI node construction in one place so the virt machine
+> can add service groups without open-coding compatible strings, channel
+> IDs, interrupts, and shared-memory references at each call site.
+> 
 
-Ya, that seems reasonable.  I think the only issue is that TSO hosts 
-will end up defacto TSO in the guest -- or at least I think they will, 
-IIUC that is basicallly how things used to work because TCG didn't do 
-any interesting memory reordering at compile time and thus the TSO-ness 
-of the host essentially just bled through to the guest.
+Hello Subrahmanya,
 
->
->
-> Thanks,
-> Daniel
->
->>
->>>> On an x86-64 host the patch made xz almost four times faster and cut
->>>> the time of a clang compile by about 30%, the same as running with
->>>> ztso=false.  The output didn't change.
->>>>
->>>> I also tested it on a Raspberry Pi 3B+, which is arm64 and doesn't
->>>> give TSO ordering in hardware, to make sure the weaker barriers still
->>>> hold up there.  Everything ran correctly, and xz was about 12% faster.
->>>>
->>>>   target/riscv/tcg/insn_trans/trans_rvi.c.inc | 4 ++--
->>>>   target/riscv/tcg/insn_trans/trans_rvv.c.inc | 4 ++--
->>>>   2 files changed, 4 insertions(+), 4 deletions(-)
->>>>
->>>> diff --git a/target/riscv/tcg/insn_trans/trans_rvi.c.inc b/target/riscv/tcg/insn_trans/trans_rvi.c.inc
->>>> index 40b4c9aa..d31e4295 100644
->>>> --- a/target/riscv/tcg/insn_trans/trans_rvi.c.inc
->>>> +++ b/target/riscv/tcg/insn_trans/trans_rvi.c.inc
->>>> @@ -424,7 +424,7 @@ static bool gen_load(DisasContext *ctx, arg_lb *a, MemOp memop)
->>>>       }
->>>>
->>>>       if (ctx->ztso) {
->>>> -        tcg_gen_mb(TCG_MO_ALL | TCG_BAR_LDAQ);
->>>> +        tcg_gen_mb(TCG_MO_LD_LD | TCG_MO_LD_ST | TCG_BAR_LDAQ);
->>>>       }
->>>>
->>>>       return out;
->>>> @@ -485,7 +485,7 @@ static bool gen_store_tl(DisasContext *ctx, arg_sb *a, MemOp memop)
->>>>       TCGv data = get_gpr(ctx, a->rs2, EXT_NONE);
->>>>
->>>>       if (ctx->ztso) {
->>>> -        tcg_gen_mb(TCG_MO_ALL | TCG_BAR_STRL);
->>>> +        tcg_gen_mb(TCG_MO_LD_ST | TCG_MO_ST_ST | TCG_BAR_STRL);
->>>>       }
->>>>
->>>>       tcg_gen_qemu_st_tl(data, addr, ctx->mem_idx, memop);
->>>> diff --git a/target/riscv/tcg/insn_trans/trans_rvv.c.inc b/target/riscv/tcg/insn_trans/trans_rvv.c.inc
->>>> index a22e2cae..8c21ab87 100644
->>>> --- a/target/riscv/tcg/insn_trans/trans_rvv.c.inc
->>>> +++ b/target/riscv/tcg/insn_trans/trans_rvv.c.inc
->>>> @@ -731,7 +731,7 @@ static bool ldst_us_trans(uint32_t vd, uint32_t rs1, uint32_t data,
->>>>        * around the loop.
->>>>        */
->>>>       if (is_store && s->ztso) {
->>>> -        tcg_gen_mb(TCG_MO_ALL | TCG_BAR_STRL);
->>>> +        tcg_gen_mb(TCG_MO_LD_ST | TCG_MO_ST_ST | TCG_BAR_STRL);
->>>>       }
->>>>
->>>>       mark_vs_dirty(s);
->>>> @@ -739,7 +739,7 @@ static bool ldst_us_trans(uint32_t vd, uint32_t rs1, uint32_t data,
->>>>       fn(dest, mask, base, tcg_env, desc);
->>>>
->>>>       if (!is_store && s->ztso) {
->>>> -        tcg_gen_mb(TCG_MO_ALL | TCG_BAR_LDAQ);
->>>> +        tcg_gen_mb(TCG_MO_LD_LD | TCG_MO_LD_ST | TCG_BAR_LDAQ);
->>>>       }
->>>>
->>>>       finalize_rvv_inst(s);
+I'm wondering if the services should be siblings of the mailbox nodes
+rather than child. i.e., should we use:
+
+```
+	rpmi: mailbox@10200000 {
+		reg = <0x00 0x10200000 0x00 0x400 0x00 0x10200400 0x00 0x400 0x00 0x10230000 0x00 0x1000>;
+		reg-names = "a2p-req", "p2a-ack", "a2p-doorbell";
+		#mbox-cells = <0x01>;
+		riscv,slot-size = <0x40>;
+		compatible = "riscv,rpmi-shmem-mbox";
+	};
+
+	suspend {
+		mboxes = <&rpmi 0x04>;
+		compatible = "riscv,rpmi-system-suspend";
+	};
+```
+
+instead of what is currently done in this series:
+
+```
+	rpmi: mailbox@10200000 {
+		reg = <0x00 0x10200000 0x00 0x400 0x00 0x10200400 0x00 0x400 0x00 0x10230000 0x00 0x1000>;
+		reg-names = "a2p-req", "p2a-ack", "a2p-doorbell";
+		#mbox-cells = <0x01>;
+		riscv,slot-size = <0x40>;
+		compatible = "riscv,rpmi-shmem-mbox";
+
+		suspend {
+			mboxes = <&rpmi 0x04>;
+			compatible = "riscv,rpmi-system-suspend";
+		};
+	};
+```
+
+It's not clear to me what the correct way of doing this is. I've noted that
+`make CHECK_DTBS=1` yields one more error when the services are child than
+when they are siblings:
+
+virt.dtb: mailbox@10200000 (riscv,rpmi-shmem-mbox): 'hsm', 'suspend', 'sysreset' do not match any of the regexes: '^pinctrl-[0-9]+$'
+	from schema $id: http://devicetree.org/schemas/mailbox/riscv,rpmi-shmem-mbox.yaml
+
+Thanks,
+Charles
+
 
