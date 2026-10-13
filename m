@@ -4,139 +4,111 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EADB4CC6B10
-	for <qemu-riscv@archiver.kernel.org>; Tue, 13 Oct 2026 07:44:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FEAECC6B03
+	for <qemu-riscv@archiver.kernel.org>; Tue, 13 Oct 2026 08:53:58 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xGXAl-0000m8-Hg; Tue, 13 Oct 2026 03:43:43 -0400
+	id 1xGY9Q-0000tV-3Y; Tue, 13 Oct 2026 04:46:24 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jamin_lin@aspeedtech.com>)
- id 1xGXAf-0000ks-5B; Tue, 13 Oct 2026 03:43:39 -0400
-Received: from mail-japanwestazlp170120003.outbound.protection.outlook.com
- ([2a01:111:f403:c406::3] helo=OS8PR02CU002.outbound.protection.outlook.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jamin_lin@aspeedtech.com>)
- id 1xGXAc-0001mw-HH; Tue, 13 Oct 2026 03:43:36 -0400
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=iVFsVk9FYZImNDi4+sxi2WwTm+fPg/L/1cgTRFWmfKoPivCky0USaAm16sxhCF5Qv3K5Bd58HKLvH5cMpJABOaRylvE5ejZSjjnEbnpbfbk1k3bWI4o23sY8+wHakAq/kPPfHbDHKaQVN6GrQEsHThzXKBKOGXmoe02n/QArd4P2wpXugA2AX0n4FJ9gbLnhKARoY4jSD9P+Q1KVhvwch2vozWAn+zKKv00k4k31AxnKyEXaiDjwwqtrGSfnw6Mg7u0zhydnLdbQe8rZGDPMEMDAi+Xx2ma7aI0yVC8P8amFz1bdXCxLRLMOJxTF0QVD26xqDz80Ubg9r+ERTXPCfg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=gQGIM9M0uOSqpP/UmMs0sk45sddLFhPbmjNnw0HE0BA=;
- b=mdD0+7HtnDegnOWTqRFj30pREgGwzLRbp2+hX3T9a6wylNvlgdF8mmMDnjHotgmOW4hCn6pM24KfGsCB0k/f58Agm1J3xmZ8Uyz7pkwEhdSNjNEOg4V0hfos1J3rX7T6XKY//d16aSF9mNdPJXCNHFb2rQhx+le2XXTR6AD6lW8P6cWwqWGWoHlRcQ/520MH2nlV82X5JZcnmvfKZTf5KGEZbiFspMXNm+mqIy3V3Jvt/sI3COl5qj91t3J8oRZzaCznTiOEVAsw+g+3ffXE9wQSwn2TJ11EDaxxwndPDJgXRZCmB6KlZfbJRagn+t26za0olYTzXQDRbwOPcJUE0w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=aspeedtech.com; dmarc=pass action=none
- header.from=aspeedtech.com; dkim=pass header.d=aspeedtech.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aspeedtech.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=gQGIM9M0uOSqpP/UmMs0sk45sddLFhPbmjNnw0HE0BA=;
- b=lCguEMB77p4PjfiH2wmWNZJvBeqqNJd/54wypeTCus4kjAPcqp3EL5xwgFUe8jAsm+b+9/tSUdCrp3YXuJ4gCVKl7R3TXeZc7w++hrvN/KVmrGyKFZww97BNVhBYi8s9O3+T+yBrPBckCMstTRxNUEb5q1WHWsR9k15BW1iLsthJUQoaBFraALfkgdLpfyueC2vg0NcmQ9JjCJugEiPfw3chthUyftvWkee4YqwRKbNj4/0OCIO2S0rPmyahyw0TuaJJvwS0lSZcK/Tka4L/vvnpmA9DC5l+glaU/+NsYmb+8ktEtLdtGReneLrBBl48ZyuxoKjYyYz3nAdbeV7vxA==
-Received: from TYZPR06MB7373.apcprd06.prod.outlook.com (2603:1096:405:a7::14)
- by SG2PR06MB5059.apcprd06.prod.outlook.com (2603:1096:4:1c7::14) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.496.23; Tue, 13 Oct
- 2026 07:43:24 +0000
-Received: from TYZPR06MB7373.apcprd06.prod.outlook.com
- ([fe80::9b90:c4d9:22de:2ac4]) by TYZPR06MB7373.apcprd06.prod.outlook.com
- ([fe80::9b90:c4d9:22de:2ac4%6]) with mapi id 15.21.0496.021; Tue, 13 Oct 2026
- 07:43:23 +0000
-From: Jamin Lin <jamin_lin@aspeedtech.com>
-To: "open list:All patches CC here" <qemu-devel@nongnu.org>
-CC: Andrew Jeffery <andrew@codeconstruct.com.au>,
- =?iso-8859-1?Q?C=E9dric_Le_Goater?= <clg@kaod.org>, Emmanuel Blot
- <emmanuel.blot@free.fr>, Fabiano Rosas <farosas@suse.de>, Jamin Lin
- <jamin_lin@aspeedtech.com>, Joel Stanley <joel@jms.id.au>, Kane Chen
- <kane_chen@aspeedtech.com>, Troy Lee <leetroy@gmail.com>, Laurent Vivier
- <lvivier@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>, Peter Maydell
- <peter.maydell@linaro.org>, =?iso-8859-1?Q?Philippe_Mathieu-Daud=E9?=
- <philmd@oss.qualcomm.com>, Pierrick Bouvier
- <pierrick.bouvier@oss.qualcomm.com>, "open list:ASPEED BMCs"
- <qemu-arm@nongnu.org>, "qemu-ppc@nongnu.org" <qemu-ppc@nongnu.org>,
- "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>, Steven Lee
- <steven_lee@aspeedtech.com>, Patrick Leis <venture@google.com>
-Subject: Re: [PATCH v2 48/50] hw/arm: minerva: add Facebook BMC machine
-Thread-Topic: [PATCH v2 48/50] hw/arm: minerva: add Facebook BMC machine
-Thread-Index: AQHdWuZxsph/f01iJEiWxSk0J6PAhw==
-Date: Tue, 13 Oct 2026 07:43:23 +0000
-Message-ID: <TYZPR06MB73736F77F75E0CEE4765E3D1FC9E2@TYZPR06MB7373.apcprd06.prod.outlook.com>
-Accept-Language: zh-TW, en-US
-Content-Language: zh-TW
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-msip_labels: 
-authentication-results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=aspeedtech.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: TYZPR06MB7373:EE_|SG2PR06MB5059:EE_
-x-ms-office365-filtering-correlation-id: e8009868-97cc-467c-1ca0-08df28fda8f4
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
- ARA:13230040|23010399003|1800799024|376014|366016|7416014|18002099003|10067099003|8096899003|261009223027099003|38070700021|56012099006|41080700001;
-x-microsoft-antispam-message-info: hJPo/AcIR2SYFpQlQAoo45Z70rDvn/fXNAd2bg4cAUhrwQmwZYWOZT6OTayZmaFWAs/JaX8Ze/Qayh0yCJVCMtKbp7r9OIft3GKB3ywkFaRnwcwra6nJzvaq29sqVMzzRdOcHO9cqvH9fgZUO3Qf/7O01QtkggLfX4mrfNUwmIllC4XRI78TGKwCRuZOB3yQ3vmw9B+Na48TO0g/dqOB95juCHZgwzK+nqgwfD/wMIkq4lXUaxhgyWzVIyEoHg6uOR5Kss77h0r8pSoQlS3riRX5f+DzhduP0f53w3kU3z+aIepGvSeVGbAvHOSzpTXoaq6Dg50W8eB/5BxBXe5DwqEBv+//zrLPkEm0Y2hlzg6MyW83H9JP4oJ9GlXyJyQUchCymnlaQswYCj66R9a5dfyroocaJ2z8hwQVEKQIZpIl7ucFuHF2sA9yNsN1QL/EZCyf6Ft90/DNv0gAvn09zE5cCA3uROCll62H2zPgxJyWDY+Y5mQe9RpK3XB5dT1v1CUQ2cL5Lu2hAag1wAYcOW8zE/RTApbUHz3XvFPgHVl1a+wFXWnPZ8Yru1DNUmVe5aHCgYVxQDNEnuIblBvbl/et9zbKEXh1/0njWc5IAhecuYtEJyJUGvVs0OWfY2uUjZPqjU8nPW0WcvkS63/t3LFGw8c+90yBNcNGBQ0azF6+p3PHZV0FfOmK+EhXkazrDoKHTZqj6DX6Fjx8QO4jJ4NxFoDpNF9FO2ZKtS5lB2GmIemt20OoT/1hGoiyPk0m
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:zh-tw; SCL:1;
- SRV:; IPV:NLI; SFV:NSPM; H:TYZPR06MB7373.apcprd06.prod.outlook.com; PTR:;
- CAT:NONE;
- SFS:(13230040)(23010399003)(1800799024)(376014)(366016)(7416014)(18002099003)(10067099003)(8096899003)(261009223027099003)(38070700021)(56012099006)(41080700001);
- DIR:OUT; SFP:1102; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?n6XqgEs586Gi29unefh8iiljGrkUCGKgGG1QBzSAkD+yMerjOG2D7p1NrU?=
- =?iso-8859-1?Q?O4UsaiTNs5Bf+T1+6WYOZgnfHq9UekHQnfbFaAme0fktcrCQtFe2HCTm3l?=
- =?iso-8859-1?Q?HAN7wIhpM26t+LJ/XzM3oqL0KL62QF3FcGe2x16skDoN8p0u3S2LtVet61?=
- =?iso-8859-1?Q?V7q2oCO3OBbsbJZevjfgHqOJdAjMwHQ8VQMr+r7a9bELmJCQ86bwkdWxnC?=
- =?iso-8859-1?Q?fQ+Aia5UJYPDVPwyT4ev2Ns8N+b5HF1MuOxx6Ep4la9+1WAviaBcUTc4dW?=
- =?iso-8859-1?Q?URYXoJILDOWLwnpU7OzrbEAEH0pb7z4RaCs/Iubx115TjbPWLmlVC6re9Q?=
- =?iso-8859-1?Q?udN7vllzF0EG4l4AK/T7h9FLP4Nic1I72tqV+UZdIfWeerFDEtGfDjX7fa?=
- =?iso-8859-1?Q?KZ1jZm9Bgn4yhxL3nLmuhkTl1Li9DWMcV2wkxswmOOODIiaiZcz5TR382R?=
- =?iso-8859-1?Q?tZrJRA3tYXCHzV/DUnt3Slm2/TBV0Fe58evzaisJ+MlS9zMX/jEm2T0BcG?=
- =?iso-8859-1?Q?zTFsYQuKFARXMtIT1+DUJAJww9l+FAzkYJFxQWH3yRWmJmKyFcbwa2TGPF?=
- =?iso-8859-1?Q?/dM6iBX48XUcdnEJ+BfnvBOKGzHbWBdlgN+ci8T/cpcxX9MVOkhWboxzuW?=
- =?iso-8859-1?Q?l8GRmn4c6ICP2YLKrWGIxl59bDgzZNKhhlOK+whrBFDtjSorx9A4RhRyFm?=
- =?iso-8859-1?Q?/NvBjL5/NBi5LhLjGRzzpZemujHnqRaicvuqdufc1nE8p7CbwA5oQG/hGN?=
- =?iso-8859-1?Q?18HztwthfijZJgZ5UwDhuvpKwKxv3Tz0qp1LKBDmd4qoVftOFzDWV+7X4m?=
- =?iso-8859-1?Q?kVjipikYsHBkhRHN5vHo1uq1aQI/PQs72Ud9wS4t+AhkwoSHt6uNZQ31Y+?=
- =?iso-8859-1?Q?aPA4L6XqEeLZihdWv18N+YW7MjHbWro3VSqCzVEtGWwXROWI7oswH3DeCE?=
- =?iso-8859-1?Q?MYj5TQDUAXp5n4/dfMU+hqcpb2XuaP2IEkVvyffvQxeatRP9MWTCS/PPKT?=
- =?iso-8859-1?Q?MnvxWI5MY+a8XqEXo5S0DySSlukDlXJYtgVXnGjRsCvievc+FQLrqRHTD2?=
- =?iso-8859-1?Q?1PvFbfxULL4FHJF4wziAAYpafyExAI0VFEo8Qt/kEipWZE+LWHxsTPtz/s?=
- =?iso-8859-1?Q?wUMXOhHaey3awa2C5ckonYN9PadHSxhXy06NX/k/s5okA2m3NQLyzRt+o8?=
- =?iso-8859-1?Q?Hm75V3yz7O2TxKXSoocLqXleX89jl5Yke22Xmb2n1ttCtPYmUfEnhmE/2B?=
- =?iso-8859-1?Q?gOIZYtMAzrUBESqA503ksBfupLqvEGuGTjC7bx5E9o5R1n7Xq6+XMZn+jn?=
- =?iso-8859-1?Q?F/oeG6bC8o1R5KUbk4MuRoJ1ckDukf4LM8hVG1aMa0UueGVTSMnoivOZax?=
- =?iso-8859-1?Q?zjB+J4Vq/ntTxq1Qu1bBpc5Ub9vaACgolQuNsXzt4dkIk4BsZfx7Fg/1U6?=
- =?iso-8859-1?Q?dRbT/WAeKqfW9z15XpGED5AZacetj9NnYsy8+JpfnbLU4c1cntJ/iGuX9/?=
- =?iso-8859-1?Q?Q0E79J572cjmW89tS+VPJ+BdewCly5gHiXG1OXdOtoDTKjRFO+MlWNM8R6?=
- =?iso-8859-1?Q?g44V9zmldRXJhdiY6xjJ/rwymi52husT5IGUDMPLAEAT8SCyhSZulB5PET?=
- =?iso-8859-1?Q?Nd01KZDbALxQE+z+SJ/tgmwVLewQo1SjYIlxQGPEYX4VUoUzxZVCGHIZ+1?=
- =?iso-8859-1?Q?ZYjMcMDBTarDqRGWMdqUvyJh2cedJUKovR6n0Hl9a11GjiDsfMkGGVVTKy?=
- =?iso-8859-1?Q?sKTc0GhMBHEFDUk+8a0pZEKbVk4qxGm8vRuwGgwJDB76NUI7+5/Kd521EO?=
- =?iso-8859-1?Q?U5avvWudZA=3D=3D?=
-Content-Type: multipart/alternative;
- boundary="_000_TYZPR06MB73736F77F75E0CEE4765E3D1FC9E2TYZPR06MB7373apcp_"
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1xGY6E-0003w4-3J
+ for qemu-riscv@nongnu.org; Tue, 13 Oct 2026 04:43:06 -0400
+Received: from mail-wr1-x42f.google.com ([2a00:1450:4864:20::42f])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1xGY68-0008UZ-QO
+ for qemu-riscv@nongnu.org; Tue, 13 Oct 2026 04:43:04 -0400
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-486e8faff03so1125684f8f.1
+ for <qemu-riscv@nongnu.org>; Tue, 13 Oct 2026 01:43:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1791880979; x=1792485779; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:mime-version:message-id:date
+ :user-agent:references:in-reply-to:subject:cc:to:from:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=mnxj7h7HvIWfwoZQRTFXGU62+t1KiKfVReRxfjWSfds=;
+ b=E6h129X1h/qJ3fjBYxx+iq2eC/rYGIkNrrts6w4Jj33W1j2xp6sgD8JmkejWhdi3BL
+ penAaIDy4sLMxR0k9W4kdO8bJ3wiXk69029XCqHbYTWkXIKjUCz8R7qX7D2T2f8CrqAx
+ MDatoMK0Wg4KhZh8xcdm0cQGH/R9DMX2Q5nwO3429l8Pycnnuty6ewl9ImPG1V18Cmtc
+ MTBZy+jUmxZK7DegmoOHQ0zC0N7bIyuo6ZT+gTQAU89SZt3/Bjz2ebblwcyL1cB2zL93
+ T3azqWDEjZe6hjAYiIgZyq0xQppXiAiOSfrjS/+DuU4tlEWfkLAAF4FM8BC+Qw8cRdZy
+ MipA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1791880979; x=1792485779;
+ h=content-transfer-encoding:content-type:mime-version:message-id:date
+ :user-agent:references:in-reply-to:subject:cc:to:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=mnxj7h7HvIWfwoZQRTFXGU62+t1KiKfVReRxfjWSfds=;
+ b=c65H5yyxbVUp8+9FGYrLTjuOQteZMjyby7Rfn4PiO3vVERCwB6F7Qp4aexgrcRVOt0
+ y7s1XNl0f9QgbLUSDOFya93yV53zfTwUM/8n1TSAkJ+eXpGgI6ovj7sbizMwp03Jcz1G
+ vVTmzjgp40FD7Jul0I8s+3GrXHat8Vk+pOPGXB8R9EXChwyUXm9soc655IAU/OtlO/Ff
+ 1IyL+YzDmryGBgx6vpRvGF1Q+NSo01Tw76lBUVGyf1Ew8AyHtlnWXZYXz5LAQTd4fffm
+ X/sXlY+cmvdkeBVKYMv++CfQmpuGCzGgTLcPC8DwTTbt5grUJUm66x90Q6/IPg6Io3qn
+ 88HQ==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBzknJ7i9xLn1M/Ai1JovHSbw+VGo94ZRx4FX75TbM37Br8eY3kuxJj1k7sIgVJj/4k5CTZcK8B9tJqL@nongnu.org
+X-Gm-Message-State: AFq9FYLvjkHIJU8Obai2MBs1W4XC+9vsUV3r52Bhd1ykq6q01+p0AgPw
+ YTHtkmXpje5y3SIiPnxBOVj0GOvPUzU/1LSsl8K2U3yX+Ds76wqNebNCg2srItcd+ms=
+X-Gm-Gg: AYBFou2Rvq+fgie7JkZrSTZgl0pL8JuIIpwjuZqtXUIJ4jzVEU6MoQwW+L04xLynzYZ
+ QJ4zvcNDy1f4FFEmAm6gPfYCssnSjDcd6KeQVQ8rEoxJNtN/bHfoBjNRb25j56CRoOtFqS5maLA
+ pIOe9W7orSLKtRgioITz8PlvwtAsUeui9pppK18WA0IUxahAs+i4XSyTiQtic0SndChPWBd6GVK
+ RuQstiq4dNvDVw0wVhXpGR2BQ3RIiNRGYMLr83A3DV9Ok/rzQ1Neox/k06lUYduUj0jVsXpwP+e
+ XzcBbvWZjKHBdLu4ttzofk+TWPpo0ERzmP8s0oc2HGNUfLc6212LmFDGRpH1McfGToc+w4oxM7k
+ H8elM6gXMTpPtvUzZggTvm8GJLA9BjGk7A5NjynSKUH+eBbo5Yc/QFT+Qr6JYrwCZSk7sLVN3Vq
+ +FVoOLM/nvMfFDtE3DE1h3QC15hvwLoq16AnPZM99/kZSosd3fI0Y/X4LX5ibvBxML02rEDA==
+X-Received: by 2002:a05:6000:4a14:b0:487:15a3:1cab with SMTP id
+ ffacd0b85a97d-48dbaadb081mr21260264f8f.18.1791880979139; 
+ Tue, 13 Oct 2026 01:42:59 -0700 (PDT)
+Received: from draig.lan ([185.124.0.156]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-48de0ab5262sm3937232f8f.22.2026.10.13.01.42.58
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 13 Oct 2026 01:42:58 -0700 (PDT)
+Received: from draig (localhost [IPv6:::1])
+ by draig.lan (Postfix) with ESMTP id 4098C5F8E5;
+ Tue, 13 Oct 2026 09:42:57 +0100 (BST)
+From: =?utf-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>
+To: =?utf-8?Q?Marc-Andr=C3=A9?= Lureau <marcandre.lureau@redhat.com>
+Cc: qemu-devel@nongnu.org,  "Dr. David Alan Gilbert" <dave@treblig.org>,
+ Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,  Zhao
+ Liu
+ <zhao1.liu@intel.com>,  Peter Maydell <peter.maydell@linaro.org>,  Chinmay
+ Rath <rathc@linux.ibm.com>,  Nicholas Piggin <npiggin@gmail.com>,  Glenn
+ Miles <milesg@linux.ibm.com>,  Harsh Prateek Bora <harshpb@linux.ibm.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,  Alistair Francis
+ <alistair.francis@wdc.com>,  Weiwei Li <liwei1518@gmail.com>,  Daniel
+ Henrique Barboza <daniel.barboza@oss.qualcomm.com>,  Liu Zhiwei
+ <zhiwei_liu@linux.alibaba.com>,  Chao Liu <chao.liu@processmission.com>,
+ Max Filippov <jcmvbkbc@gmail.com>,  qemu-arm@nongnu.org,
+ qemu-ppc@nongnu.org,  qemu-riscv@nongnu.org,  Paolo Bonzini
+ <pbonzini@redhat.com>,  Laurent Vivier <laurent@vivier.eu>,  Mark
+ Cave-Ayland <mark.cave-ayland@ilande.co.uk>,  Artyom Tarasenko
+ <atar4qemu@gmail.com>,  Helge Deller <deller@gmx.de>,  Pierrick Bouvier
+ <pierrick.bouvier@oss.qualcomm.com>,  Warner Losh <imp@bsdimp.com>,  Kyle
+ Evans <kevans@freebsd.org>
+Subject: Re: [PATCH v2 04/10] gdbstub: add gdb_register_internal_coprocessor()
+In-Reply-To: <20261013-query-reg-v2-4-6f95a2e139a9@redhat.com>
+ (=?utf-8?Q?=22Marc-Andr=C3=A9?=
+ Lureau"'s message of "Tue, 13 Oct 2026 00:34:07 +0400")
+References: <20261013-query-reg-v2-0-6f95a2e139a9@redhat.com>
+ <20261013-query-reg-v2-4-6f95a2e139a9@redhat.com>
+User-Agent: mu4e 1.14.4-pre6; emacs 30.1
+Date: Tue, 13 Oct 2026 09:42:57 +0100
+Message-ID: <87ik36gfe6.fsf@draig.linaro.org>
 MIME-Version: 1.0
-X-Exchange-RoutingPolicyChecked: gapkOS5lHmxi2XFFYfaxM9/tRm23a2pnobRwNflyOAP/+V3MimQPYqJszceFjzpmIM4gEe7df3Hyr89/bYBlfQNr9t9qQY4eBQtiQ/VQcKfCY64pToqKirpmIfKQmPOc3HWpKIeoxd2GJKnJdXypH31HXNCHVYHd3X1dZajFUXmr6CEKrlBn7S8cChIR2jbyhfO3VDyIvtDIoMb9o8KsvyWOq/eXqKCCXxcjZTbZUPYCIBmkmNyecpFd9sAv1K9k5pF8WOyxy5w9NYl1hxLuxibKcMw+HfsvjKkdLHbtqkC91GqWrSJqAT4ZAM0jBFsMj/hKayGd0rCEwcOstaS8FQ==
-X-OriginatorOrg: aspeedtech.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: TYZPR06MB7373.apcprd06.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: e8009868-97cc-467c-1ca0-08df28fda8f4
-X-MS-Exchange-CrossTenant-originalarrivaltime: 13 Oct 2026 07:43:23.5907 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 43d4aa98-e35b-4575-8939-080e90d5a249
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: s/rLhoF9umCOOifhE7oGsz46kn+Mn/K68rUU5lo08/lDGcISiKjErpm/gSiAsi6guGbCEbn3QAYIJW4deALOE3NiH6RNSZbkcfVjM/encpg=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SG2PR06MB5059
-Received-SPF: pass client-ip=2a01:111:f403:c406::3;
- envelope-from=jamin_lin@aspeedtech.com;
- helo=OS8PR02CU002.outbound.protection.outlook.com
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::42f;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x42f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -152,99 +124,263 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---_000_TYZPR06MB73736F77F75E0CEE4765E3D1FC9E2TYZPR06MB7373apcp_
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com> writes:
+
+> Add support for registering coprocessor features that are only visible
+> to QEMU's internal APIs (HMP monitor $register expressions, plugins) but
+> hidden from GDB's target description XML.
+>
+> When a feature is registered as internal:
+> - It is excluded from the target.xml sent to GDB
+> - Its XML is not served via qXfer:features:read
+> - 'p'/'P' packets for internal register numbers return E14
+>
+> This is useful for exposing system registers to the HMP monitor without
+> affecting GDB's register namespace. Exposing aliases or synthetic
+> registers through GDB's target description can cause problems: name
+> collisions with GDB's pseudo-registers, independent register caching,
+> and missing DWARF unwind rules.
+
+Hmm are they *that* useful for HMP then?
+
+The front-ends do limit what they export to gdb (see for example
+ARM_CP_NO_GDB) generally because reading them causes side-effects. Those
+restrictions are also a reason to limit them from the HMP interface.
 
 >
-> Add a machine for the Facebook Minerva Chassis Management Module (BMC),
-> an AST2600-based board modelled from its device tree
-> (aspeed-bmc-facebook-minerva.dts).
+> Internal features must be registered after all GDB-visible features to
+> keep remote register numbering consistent. This ordering is enforced
+> with an assertion.
 >
-> The board uses INA230 and INA238 power monitors, TMP75 temperature
-> sensors, PCA9555 IO expanders, PCA9545 and PCA9548 I2C muxes, AT24C
-> EEPROMs and a DS1339 RTC.
+> Signed-off-by: Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com>
+> ---
+>  gdbstub/gdbstub.c      | 71 ++++++++++++++++++++++++++++++++++++++++++++=
+------
+>  include/exec/gdbstub.h | 21 +++++++++++++++
+>  2 files changed, 84 insertions(+), 8 deletions(-)
 >
-> Every device the Minerva device tree describes and QEMU already models
-> is instantiated. The remaining ones (LTC4287, XDP710, MAX31790, PCF8563
-> and IPMB) have no QEMU model and are left documented as comments.
+> diff --git a/gdbstub/gdbstub.c b/gdbstub/gdbstub.c
+> index 912e31b66744..ac0f76d62333 100644
+> --- a/gdbstub/gdbstub.c
+> +++ b/gdbstub/gdbstub.c
+> @@ -54,6 +54,7 @@ typedef struct GDBRegisterState {
+>      gdb_get_reg_cb get_reg;
+>      gdb_set_reg_cb set_reg;
+>      const GDBFeature *feature;
+> +    bool internal; /* hidden from GDB, accessible via API/monitor */
+>  } GDBRegisterState;
+>=20=20
+>  GDBState gdbserver_state;
+> @@ -385,6 +386,11 @@ static const char *get_feature_xml(const char *p, co=
+nst char **newp,
+>              }
+>              for (guint i =3D 0; i < cpu->gdb_regs->len; i++) {
+>                  r =3D &g_array_index(cpu->gdb_regs, GDBRegisterState, i);
+> +                /* The core target.xml feature must never be internal. */
+> +                g_assert(i > 0 || !r->internal);
+> +                if (r->internal) {
+> +                    continue;
+> +                }
+>                  g_ptr_array_add(
+>                      xml,
+>                      g_markup_printf_escaped("<xi:include href=3D\"%s\"/>=
+",
+> @@ -400,6 +406,9 @@ static const char *get_feature_xml(const char *p, con=
+st char **newp,
+>      /* Is it one of the features? */
+>      for (guint i =3D 0; i < cpu->gdb_regs->len; i++) {
+>          r =3D &g_array_index(cpu->gdb_regs, GDBRegisterState, i);
+> +        if (r->internal) {
+> +            continue;
+> +        }
+>          if (strncmp(p, r->feature->xmlname, len) =3D=3D 0) {
+>              return r->feature->xml;
+>          }
+> @@ -563,13 +572,14 @@ int gdb_write_register(CPUState *cpu, uint8_t *mem_=
+buf, int reg)
+>=20=20
+>  static void gdb_register_feature(CPUState *cpu, int base_reg,
+>                                   gdb_get_reg_cb get_reg, gdb_set_reg_cb =
+set_reg,
+> -                                 const GDBFeature *feature)
+> +                                 const GDBFeature *feature, bool interna=
+l)
+>  {
+>      GDBRegisterState s =3D {
+>          .base_reg =3D base_reg,
+>          .get_reg =3D get_reg,
+>          .set_reg =3D set_reg,
+> -        .feature =3D feature
+> +        .feature =3D feature,
+> +        .internal =3D internal
+>      };
+>=20=20
+>      trace_gdbxml_register_feature(feature->name, feature->xmlname,
+> @@ -605,7 +615,7 @@ void gdb_init_cpu(CPUState *cpu)
+>          assert(feature->base_reg =3D=3D 0);
+>          gdb_register_feature(cpu, 0,
+>                               cc->gdb_read_register, cc->gdb_write_regist=
+er,
+> -                             feature);
+> +                             feature, false);
+>          cpu->gdb_next_base_reg =3D cpu->gdb_num_g_regs =3D feature->num_=
+regs;
+>      } else {
+>          cpu->gdb_next_base_reg =3D cpu->gdb_num_g_regs =3D cc->gdb_num_c=
+ore_regs;
+> @@ -616,20 +626,26 @@ void gdb_init_cpu(CPUState *cpu)
+>                            cc->gdb_num_core_regs);
+>  }
+>=20=20
+> -void gdb_register_coprocessor(CPUState *cpu,
+> -                              gdb_get_reg_cb get_reg, gdb_set_reg_cb set=
+_reg,
+> -                              const GDBFeature *feature)
+> +static void do_gdb_register_coprocessor(CPUState *cpu,
+> +                                        gdb_get_reg_cb get_reg,
+> +                                        gdb_set_reg_cb set_reg,
+> +                                        const GDBFeature *feature,
+> +                                        bool internal)
+>  {
+>      GDBRegisterState *s;
+>      guint i;
+>      int base_reg =3D cpu->gdb_next_base_reg;
+>=20=20
+>      for (i =3D 0; i < cpu->gdb_regs->len; i++) {
+> -        /* Check for duplicates.  */
+>          s =3D &g_array_index(cpu->gdb_regs, GDBRegisterState, i);
+> +        /* Check for duplicates.  */
+>          if (s->feature =3D=3D feature) {
+>              return;
+>          }
+> +        /* GDB-visible features must not follow internal ones.  */
+> +        if (!internal) {
+> +            g_assert(!s->internal);
+> +        }
+>      }
+>=20=20
+>      if (base_reg < feature->base_reg) {
+> @@ -637,12 +653,27 @@ void gdb_register_coprocessor(CPUState *cpu,
+>                                                feature->base_reg);
+>          base_reg =3D feature->base_reg;
+>      }
+> -    gdb_register_feature(cpu, base_reg, get_reg, set_reg, feature);
+> +    gdb_register_feature(cpu, base_reg, get_reg, set_reg, feature, inter=
+nal);
+>=20=20
+>      /* Add to end of list.  */
+>      cpu->gdb_next_base_reg =3D base_reg + feature->num_regs;
+>  }
+>=20=20
+> +void gdb_register_coprocessor(CPUState *cpu,
+> +                              gdb_get_reg_cb get_reg, gdb_set_reg_cb set=
+_reg,
+> +                              const GDBFeature *feature)
+> +{
+> +    do_gdb_register_coprocessor(cpu, get_reg, set_reg, feature, false);
+> +}
+> +
+> +void gdb_register_internal_coprocessor(CPUState *cpu,
+> +                                       gdb_get_reg_cb get_reg,
+> +                                       gdb_set_reg_cb set_reg,
+> +                                       const GDBFeature *feature)
+> +{
+> +    do_gdb_register_coprocessor(cpu, get_reg, set_reg, feature, true);
+> +}
+> +
+>  void gdb_unregister_coprocessor_all(CPUState *cpu)
+>  {
+>      /*
+> @@ -1223,6 +1254,18 @@ static void handle_remove_bp(GArray *params, void =
+*user_ctx)
+>   * the remote gdb to fallback to older methods.
+>   */
+>=20=20
+> +static bool gdb_register_is_internal(CPUState *cpu, int reg)
+> +{
+> +    for (guint i =3D 0; i < cpu->gdb_regs->len; i++) {
+> +        GDBRegisterState *r =3D &g_array_index(cpu->gdb_regs, GDBRegiste=
+rState, i);
+> +
+> +        if (r->base_reg <=3D reg && reg < r->base_reg + r->feature->num_=
+regs) {
+> +            return r->internal;
+> +        }
+> +    }
+> +    return false;
+> +}
+> +
+>  static void handle_set_reg(GArray *params, void *user_ctx)
+>  {
+>      int reg_size;
+> @@ -1232,6 +1275,12 @@ static void handle_set_reg(GArray *params, void *u=
+ser_ctx)
+>          return;
+>      }
+>=20=20
+> +    if (gdb_register_is_internal(gdbserver_state.g_cpu,
+> +                                 gdb_get_cmd_param(params, 0)->val_ull))=
+ {
+> +        gdb_put_packet("E14");
+> +        return;
+> +    }
+> +
+>      reg_size =3D strlen(gdb_get_cmd_param(params, 1)->data) / 2;
+>      gdb_hextomem(gdbserver_state.mem_buf, gdb_get_cmd_param(params, 1)->=
+data, reg_size);
+>      gdb_write_register(gdbserver_state.g_cpu, gdbserver_state.mem_buf->d=
+ata,
+> @@ -1248,6 +1297,12 @@ static void handle_get_reg(GArray *params, void *u=
+ser_ctx)
+>          return;
+>      }
+>=20=20
+> +    if (gdb_register_is_internal(gdbserver_state.g_cpu,
+> +                                 gdb_get_cmd_param(params, 0)->val_ull))=
+ {
+> +        gdb_put_packet("E14");
+> +        return;
+> +    }
+> +
+>      reg_size =3D gdb_read_register(gdbserver_state.g_cpu,
+>                                   gdbserver_state.mem_buf,
+>                                   gdb_get_cmd_param(params, 0)->val_ull);
+> diff --git a/include/exec/gdbstub.h b/include/exec/gdbstub.h
+> index 75eb4d9c365e..1bc778324758 100644
+> --- a/include/exec/gdbstub.h
+> +++ b/include/exec/gdbstub.h
+> @@ -40,6 +40,27 @@ void gdb_register_coprocessor(CPUState *cpu,
+>                                gdb_get_reg_cb get_reg, gdb_set_reg_cb set=
+_reg,
+>                                const GDBFeature *feature);
+>=20=20
+> +/**
+> + * gdb_register_internal_coprocessor() - register internal registers
+> + *
+> + * Like gdb_register_coprocessor(), but the feature is NOT exposed to
+> + * GDB via the target description XML. The registers are only
+> + * accessible through QEMU's internal APIs (HMP monitor ``$register``
+> + * expressions via gdb_get_register_list()).
+> + *
+> + * Internal features must be registered after all GDB-visible features
+> + * to avoid register numbering mismatches with GDB.
+> + *
+> + * @cpu - the CPU associated with registers
+> + * @get_reg - get function
+> + * @set_reg - set function
+> + * @feature - the GDBFeature describing the registers
+> + */
+> +void gdb_register_internal_coprocessor(CPUState *cpu,
+> +                                       gdb_get_reg_cb get_reg,
+> +                                       gdb_set_reg_cb set_reg,
+> +                                       const GDBFeature *feature);
+> +
+>  /**
+>   * gdb_unregister_coprocessor_all() - unregisters supplemental set of re=
+gisters
+>   * @cpu - the CPU associated with registers
 
-Reviewed-by: Jamin Lin <jamin_lin@aspeedtech.com>
-
---_000_TYZPR06MB73736F77F75E0CEE4765E3D1FC9E2TYZPR06MB7373apcp_
-Content-Type: text/html; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-
-<html>
-<head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-8859-=
-1">
-<style type=3D"text/css" style=3D"display:none;"> P {margin-top:0;margin-bo=
-ttom:0;} </style>
-</head>
-<body dir=3D"ltr">
-<div style=3D"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, =
-Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);">
-&gt;</div>
-<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
-nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
-olor: rgb(0, 0, 0);">
-&gt; Add a machine for the Facebook Minerva Chassis Management Module (BMC)=
-,</div>
-<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
-nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
-olor: rgb(0, 0, 0);">
-&gt; an AST2600-based board modelled from its device tree</div>
-<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
-nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
-olor: rgb(0, 0, 0);">
-&gt; (aspeed-bmc-facebook-minerva.dts).</div>
-<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
-nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
-olor: rgb(0, 0, 0);">
-&gt;</div>
-<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
-nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
-olor: rgb(0, 0, 0);">
-&gt; The board uses INA230 and INA238 power monitors, TMP75 temperature</di=
-v>
-<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
-nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
-olor: rgb(0, 0, 0);">
-&gt; sensors, PCA9555 IO expanders, PCA9545 and PCA9548 I2C muxes, AT24C</d=
-iv>
-<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
-nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
-olor: rgb(0, 0, 0);">
-&gt; EEPROMs and a DS1339 RTC.</div>
-<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
-nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
-olor: rgb(0, 0, 0);">
-&gt;</div>
-<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
-nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
-olor: rgb(0, 0, 0);">
-&gt; Every device the Minerva device tree describes and QEMU already models=
-</div>
-<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
-nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
-olor: rgb(0, 0, 0);">
-&gt; is instantiated. The remaining ones (LTC4287, XDP710, MAX31790, PCF856=
-3</div>
-<div style=3D"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, =
-Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);">
-&gt; and IPMB) have no QEMU model and are left documented as comments.</div=
->
-<div style=3D"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, =
-Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);">
-<br>
-</div>
-<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
-nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
-olor: rgb(0, 0, 0);">
-Reviewed-by: Jamin Lin &lt;jamin_lin@aspeedtech.com&gt;</div>
-</body>
-</html>
-
---_000_TYZPR06MB73736F77F75E0CEE4765E3D1FC9E2TYZPR06MB7373apcp_--
+--=20
+Alex Benn=C3=A9e
+Virtualisation Tech Lead @ Linaro
 
