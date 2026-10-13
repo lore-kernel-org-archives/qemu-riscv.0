@@ -4,44 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51595CC6B12
-	for <qemu-riscv@archiver.kernel.org>; Tue, 13 Oct 2026 16:28:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70EA6CC6B19
+	for <qemu-riscv@archiver.kernel.org>; Tue, 13 Oct 2026 16:28:11 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xGfLM-0005De-0S; Tue, 13 Oct 2026 12:27:12 -0400
+	id 1xGfLr-0005Vg-CP; Tue, 13 Oct 2026 12:27:43 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <clg@kaod.org>)
- id 1xGfKy-00051f-Sl; Tue, 13 Oct 2026 12:26:52 -0400
-Received: from smtpout7.mo536.mail-out.ovh.net ([51.210.91.16])
+ (Exim 4.90_1) (envelope-from <clg@kaod.org>) id 1xGfLI-0005A6-2j
+ for qemu-riscv@nongnu.org; Tue, 13 Oct 2026 12:27:11 -0400
+Received: from smtpout9.mo537.mail-out.ovh.net ([51.210.91.28])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <clg@kaod.org>)
- id 1xGfKu-00052N-P4; Tue, 13 Oct 2026 12:26:47 -0400
-Received: from director2.derp.mail-out.ovh.net
- (director2.derp.mail-out.ovh.net [79.137.60.36])
- by mo536.mail-out.ovh.net (Postfix) with ESMTPS id 4j408c26nFz821T;
- Tue, 13 Oct 2026 16:26:39 +0000 (UTC)
-Received: from director2.derp.mail-out.ovh.net
- (director2.derp.mail-out.ovh.net. [127.0.0.1])
- by director2.derp.mail-out.ovh.net (inspect_sender_mail_agent) with SMTP
- for <jamin_lin@aspeedtech.com>; Tue, 13 Oct 2026 16:26:39 +0000 (UTC)
-Received: from mta7.priv.ovhmail-u2.ea.mail.ovh.net (unknown [10.110.58.184])
- by director2.derp.mail-out.ovh.net (Postfix) with ESMTPS id
- 4j408b4Wrpz1xp2; Tue, 13 Oct 2026 16:26:39 +0000 (UTC)
-Received: from kaod.org (unknown [10.1.6.4])
+ (Exim 4.90_1) (envelope-from <clg@kaod.org>) id 1xGfLA-00057P-Hk
+ for qemu-riscv@nongnu.org; Tue, 13 Oct 2026 12:27:03 -0400
+Received: from director5.derp.mail-out.ovh.net
+ (director5.derp.mail-out.ovh.net [79.137.60.225])
+ by mo537.mail-out.ovh.net (Postfix) with ESMTPS id 4j408v55X0z3wkL;
+ Tue, 13 Oct 2026 16:26:55 +0000 (UTC)
+Received: from director5.derp.mail-out.ovh.net
+ (director5.derp.mail-out.ovh.net. [127.0.0.1])
+ by director5.derp.mail-out.ovh.net (inspect_sender_mail_agent) with SMTP
+ for <jamin_lin@aspeedtech.com>; Tue, 13 Oct 2026 16:26:55 +0000 (UTC)
+Received: from mta3.priv.ovhmail-u2.ea.mail.ovh.net (unknown [10.109.231.233])
+ by director5.derp.mail-out.ovh.net (Postfix) with ESMTPS id
+ 4j408v0JQkz6MbW; Tue, 13 Oct 2026 16:26:55 +0000 (UTC)
+Received: from kaod.org (unknown [10.1.6.5])
  (Authenticated sender: clg@kaod.org)
- by mta7.priv.ovhmail-u2.ea.mail.ovh.net (Postfix) with ESMTPSA id 5C7E9202CA3; 
- Tue, 13 Oct 2026 16:26:37 +0000 (UTC)
+ by mta3.priv.ovhmail-u2.ea.mail.ovh.net (Postfix) with ESMTPSA id A979212E2CA6;
+ Tue, 13 Oct 2026 16:26:52 +0000 (UTC)
 Authentication-Results: garm.ovh; auth=pass
- (GARM-99G003478d24aa-79d8-42c0-9ce9-5944aa59226e,
+ (GARM-114S008cd285c04-b028-4431-ae67-8a95c5cd409a,
  3B5152602AE6D76A7CF2E50DC6ABDDC767F0B630) smtp.auth=clg@kaod.org
 X-OVh-ClientIp: 82.64.250.170
-Message-ID: <beae2a33-7a72-420c-a82d-6c33f6b2bfda@kaod.org>
-Date: Tue, 13 Oct 2026 18:26:36 +0200
+Message-ID: <7f3eb371-308a-4687-a830-9071bca6a689@kaod.org>
+Date: Tue, 13 Oct 2026 18:26:52 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 06/50] hw/i2c: pca954x: migrate mux state
+Subject: Re: [PATCH v2 08/50] hw/rtc: ds1338: move TYPE_DS1338 to a public
+ header
 To: Emmanuel Blot <emmanuel.blot@free.fr>, qemu-devel@nongnu.org
 Cc: Peter Maydell <peter.maydell@linaro.org>,
  Steven Lee <steven_lee@aspeedtech.com>, Troy Lee <leetroy@gmail.com>,
@@ -53,7 +54,7 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
  =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
 References: <20261012-bmc-minerva-v2-0-4c3dff084ec9@free.fr>
- <20261012-bmc-minerva-v2-6-4c3dff084ec9@free.fr>
+ <20261012-bmc-minerva-v2-8-4c3dff084ec9@free.fr>
 From: =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>
 Content-Language: en-US, fr
 Autocrypt: addr=clg@kaod.org; keydata=
@@ -98,30 +99,30 @@ Autocrypt: addr=clg@kaod.org; keydata=
  3GlqivBNkmYsHYSlFsbxc37E1HpTEaSWsGfAHQoPn9qrDJgsgcbBVc1gkUT6hnxShKPp4Pls
  ZVMNjvPAnr5TEBgHkk54HQRhhwcYv1T2QumQizDiU6iOrUzBThaMhZO3i927SG2DwWDVzZlt
  KrCMD1aMPvb3NU8FOYRhNmIFR3fcalYr+9gDuVKe8BVz4atMOoktmt0GWTOC8P4=
-In-Reply-To: <20261012-bmc-minerva-v2-6-4c3dff084ec9@free.fr>
+In-Reply-To: <20261012-bmc-minerva-v2-8-4c3dff084ec9@free.fr>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-x-ovh-tracer-id: 6611002781404015661
+x-ovh-tracer-id: 6615506377813699629
 X-VR-SPAMSTATE: OK
 X-VR-SPAMSCORE: -100
-X-VR-SPAMCAUSE: dmFkZTEy2TVmIGdJz9wb2lZxs6ZOYk0T6DuDjUbu8/zXGYTH4fUECEqloGjFfQQCwGTA+Qh7f8ykczPwXj/0yRHFk+ke0Oq8cqPzvgWUWqE52q4F8K7KHMRomHayz0KSPI3Kj1OS1RB4ltUXcr9VLwn8YMxu6kumcdPsPn14jLrFeI22oREKqPhMU2SvVrQ8KaXHRxjVPvt64nha3KIPtHpiy9r9K5jkCxjkBrKxyaee8ty7LwZMq0oVcVbO7WlIGgJOp6cyTRlPBQhZa3PdT41/UEK/QPowtMJd7DrnTJlu2XG9nN1MD1oRi9XLbB1T/tzjDKh80+WtaijTeEgascMvqUOAo8wlyyKTE58vv6KdWC3BynA6DoXlQpwBWKjXC6PHsZiFI1iWvgj3Ykgb8hiDVDl+zD1d8hjHIIm3GfXNkG5dnG/juHWFkyygybmMyfrlnpERMoJSZ3m7vdRKt96IZwtGefdGybqWcLi4andx/Fukcw/9osAeaf225phPoJgRhi5c1HnWFg58ETzbY13m9vPF1z3P7hMFAx33fXnZjVNh9FWG5DNKEzWPVoMB88Y/UDqDUOY9tr5eadOKTNum/KKVf6pqbNurNRTTm2fA8yJCSpewNbwkdZ+9eJhWiMJzLhPHEHXN4tezCr4R8AXcU2hFadNsluasUEOqrwrRrNPvVw
-DKIM-Signature: a=rsa-sha256; bh=vFIVezBGVrvD+tdflbN0Ri2lqEKKJxPozYcGL9BLBWQ=; 
+X-VR-SPAMCAUSE: dmFkZTEy2TVmIGdJz9wb2lZxs6ZOYk0T6DuDjUbu8/zXGYTH4fUECEqloGjFfQQCwGTA+Qh7f8ykczPwXj/0yRHFk+ke0Oq8cqPzvgWUWqE52q4F8K7KHMRomHayz0KSPI3Kj1OS1RB4ltUXcr9VLwn8YMxu6kumcdPsPn14jLrFeI22oREKqPhMU2SvVrQ8KaXHRxjVPvt64nha3KIPtHpiy9r9K5jkCxjkBrKxyaee8ty7LwZMq0oVcVbO7WlIGgJOp6cyTRlPBQhZa3PdT41/UEK/QPowtMJd7DrnTJlu2XG9nN1MD1oRi9XLbB1T/tzjDKh80+WtaijTeEgascMvqUOASS318/WW8I689B1/rFpoJS/H8rqU1pa6Ty+1OtkeRI/ueRnVhPBKnAoKvDhEpwPUCAEjaVWuc5QUVF+QjWMVDuoVI/nclOXVhq+YMUuwNsq68/RZ2xiEjk/ugHqtrSPHph9ucCYbEQpPwWyH4v9qCgLRqJQxmvmIMz74fgOvJVRg4yWwFAzq2ZBkW2MR/wZpxJhRdvUsCT/HPM/Z/LqkNNeprg97s/TtcYZL9sDCvXeyeQj4djOkoiHtboSAbjMa264GKp7lN4BkN8S7Njg2z8OWlzTVc6i2DIRurGy4uwY2zb9WUZpbGuk/tOp8V4h1Zz1ncHYII/w6uRY3z540iQ
+DKIM-Signature: a=rsa-sha256; bh=fPWqKdFXIRT/ZBtnTogM/a6xkJorxhRc4FlHXS8GHCI=; 
  c=relaxed/relaxed; d=kaod.org; h=From; s=ovhmo393970-selector1;
- t=1791908801; v=1;
- b=PrWo0i5YEskEY7A3lITyzMHk6MRKR2YTo4aVsU6oNNFzr7LLggTG8LHsX928AjjMuTG3btep
- rjOFRAwuwxlZFVso8UI74aI8U2Akd1ZvH7Oa+y/Jp0l2JkSDUqKbBetAyScN4rBl/p2b1FeWdfh
- zn9NW5FmSfww1QcrleANrEOwJ0eTe39llZwxmYE8Abtc/S/OJ7rlDTe19x57lnNcwshGgXrVzOO
- 6IJ6Zde1DSl4jmrrQ4jG0AfBWi6S8aFBpZ5eeu7ea8rj1CJgiwEDQA0WWVq6JIOVkj8eN7EqJIq
- tcTMu5Y9HFfIEHKlSDXs4mhKiySEfXCBLApptuOcyJ2rg==
-Received-SPF: pass client-ip=51.210.91.16; envelope-from=clg@kaod.org;
- helo=smtpout7.mo536.mail-out.ovh.net
+ t=1791908817; v=1;
+ b=foG+9UwRpaWA5+JwPIswn8/alWXW6bxW+CG7AgMcCcv5N/QpzGjSeoZHb/5NLGBGqIEDVMi4
+ to8BJRUCmCeIeAgDQemd9an4jGbufFeLkM+LlmEunBW84UHrHcZvY0UgsrePxGFr9LfosBpzCTE
+ B7p7Cby1KosqE4+lamdQwN9SlD01FPb9uppPBAOVDYtljyqBNcD6xAlH9tT+yUCiUmDlhPHKQkG
+ +Uct3Q5IpBbkkBkgqdSZKGmmglQvQsCY486pr+ge4cSP7FDEt0OhAZ4+YrxYLnBmOSwjaADrMnu
+ d40SEDzYUkywMOqgdxadTWB/hrk6SSnvDHJrEa3C+VGeQ==
+Received-SPF: pass client-ip=51.210.91.28; envelope-from=clg@kaod.org;
+ helo=smtpout9.mo537.mail-out.ovh.net
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -137,67 +138,63 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 10/12/26 16:31, Emmanuel Blot wrote:
-> The pca954x model had no VMStateDescription, so neither the channel
-> selection nor the PCA9545 interrupt status survived a migration.
-> 
-> This changes the migration stream of the pre-existing PCA9546 and
-> PCA9548, which an older QEMU rejects.
+On 10/12/26 16:32, Emmanuel Blot wrote:
+> Move the TYPE_DS1338 type name definition from ds1338.c into a new
+> include/hw/rtc/ds1338.h header so that boards instantiating the device
+> no longer need to redefine the type name string locally.
 > 
 > Signed-off-by: Emmanuel Blot <emmanuel.blot@free.fr>
 > ---
->   hw/i2c/i2c_mux_pca954x.c | 24 ++++++++++++++++++++++++
->   1 file changed, 24 insertions(+)
+>   hw/rtc/ds1338.c         |  2 +-
+>   include/hw/rtc/ds1338.h | 20 ++++++++++++++++++++
+>   2 files changed, 21 insertions(+), 1 deletion(-)
 > 
-> diff --git a/hw/i2c/i2c_mux_pca954x.c b/hw/i2c/i2c_mux_pca954x.c
-> index 4bb078a03c..597e57d99a 100644
-> --- a/hw/i2c/i2c_mux_pca954x.c
-> +++ b/hw/i2c/i2c_mux_pca954x.c
-> @@ -28,6 +28,7 @@
->   #include "hw/core/irq.h"
->   #include "hw/core/qdev.h"
->   #include "hw/core/qdev-properties.h"
-> +#include "migration/vmstate.h"
->   #include "qemu/log.h"
->   #include "qemu/queue.h"
+> diff --git a/hw/rtc/ds1338.c b/hw/rtc/ds1338.c
+> index 5f1ee2e410..f8b3340bf0 100644
+> --- a/hw/rtc/ds1338.c
+> +++ b/hw/rtc/ds1338.c
+> @@ -12,6 +12,7 @@
+>   
+>   #include "qemu/osdep.h"
+>   #include "hw/i2c/i2c.h"
+> +#include "hw/rtc/ds1338.h"
+>   #include "migration/vmstate.h"
+>   #include "qemu/bcd.h"
 >   #include "qom/object.h"
-> @@ -270,6 +271,28 @@ static void pca954x_init(Object *obj)
->       }
->   }
+> @@ -29,7 +30,6 @@
+>   #define HOURS_PM   0x20
+>   #define CTRL_OSF   0x20
 >   
-> +static int pca954x_post_load(void *opaque, int version_id)
-> +{
-> +    Pca954xState *s = PCA954X(opaque);
-> +
-> +    pca954x_enable_channel(s, s->control);
-> +    qemu_set_irq(s->int_out, s->int_status == 0);
-> +    return 0;
-> +}
-> +
-> +static const VMStateDescription vmstate_pca954x = {
-> +    .name = "pca954x",
-> +    .version_id = 1,
-> +    .minimum_version_id = 1,
-> +    .post_load = pca954x_post_load,
-> +    .fields = (const VMStateField[]) {
-> +        VMSTATE_SMBUS_DEVICE(parent, Pca954xState),
-> +        VMSTATE_UINT8(control, Pca954xState),
-> +        VMSTATE_UINT8(int_status, Pca954xState),
-> +        VMSTATE_END_OF_LIST()
-> +    },
-> +};
-> +
->   static const Property pca954x_props[] = {
->       DEFINE_PROP_STRING("name", Pca954xState, name),
->   };
-> @@ -287,6 +310,7 @@ static void pca954x_class_init(ObjectClass *klass, const void *data)
+> -#define TYPE_DS1338 "ds1338"
+>   OBJECT_DECLARE_SIMPLE_TYPE(DS1338State, DS1338)
 >   
->       dc->desc = "Pca954x i2c-mux";
->       dc->realize = pca954x_realize;
-> +    dc->vmsd = &vmstate_pca954x;
->   
->       k->write_data = pca954x_write_data;
->       k->receive_byte = pca954x_read_byte;
+>   struct DS1338State {
+> diff --git a/include/hw/rtc/ds1338.h b/include/hw/rtc/ds1338.h
+> new file mode 100644
+> index 0000000000..f4cfe6a8e7
+> --- /dev/null
+> +++ b/include/hw/rtc/ds1338.h
+> @@ -0,0 +1,20 @@
+> +/*
+> + * MAXIM DS1338 I2C RTC+NVRAM
+> + *
+> + * Copyright (c) 2009 CodeSourcery.
+> + * Written by Paul Brook
+> + *
+> + * This code is licensed under the GNU GPL v2.
+> + *
+> + * Contributions after 2012-01-13 are licensed under the terms of the
+> + * GNU GPL, version 2 or (at your option) any later version.
+> + *
+> + * SPDX-License-Identifier: GPL-2.0-or-later
+> + */
+> +
+> +#ifndef HW_RTC_DS1338_H
+> +#define HW_RTC_DS1338_H
+> +
+> +#define TYPE_DS1338 "ds1338"
+> +
+> +#endif
 > 
 
 Reviewed-by: Cédric Le Goater <clg@redhat.com>
