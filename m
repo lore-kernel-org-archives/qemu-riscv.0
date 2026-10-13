@@ -4,160 +4,139 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7BEFCC6B0F
-	for <qemu-riscv@archiver.kernel.org>; Tue, 13 Oct 2026 06:58:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EADB4CC6B10
+	for <qemu-riscv@archiver.kernel.org>; Tue, 13 Oct 2026 07:44:30 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xGWS8-0000VU-RZ; Tue, 13 Oct 2026 02:57:36 -0400
+	id 1xGXAl-0000m8-Hg; Tue, 13 Oct 2026 03:43:43 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1xGWS4-0000UM-3j
- for qemu-riscv@nongnu.org; Tue, 13 Oct 2026 02:57:33 -0400
-Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
+ (Exim 4.90_1) (envelope-from <jamin_lin@aspeedtech.com>)
+ id 1xGXAf-0000ks-5B; Tue, 13 Oct 2026 03:43:39 -0400
+Received: from mail-japanwestazlp170120003.outbound.protection.outlook.com
+ ([2a01:111:f403:c406::3] helo=OS8PR02CU002.outbound.protection.outlook.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1xGWS0-0005s5-HV
- for qemu-riscv@nongnu.org; Tue, 13 Oct 2026 02:57:31 -0400
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 69D6CWRo949569
- for <qemu-riscv@nongnu.org>; Tue, 13 Oct 2026 06:57:27 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- 9GdmlAg+r0KBNbesZT5lUmE9s7Gfh3qJj15TaW/3QHM=; b=nVrxRbPNFesXQXte
- z9L5/buQ8gCsPjsFkaFjTfuFG3jkRJtt7fdbqZdpYrLkfvnYeWHEEkWHVrzv2zZv
- 0jnESq7oV8s4WsyrHgjAAJcZgXQIyaysSpdabsSCfcArMaGypraJutNOItiH6qFb
- FU89NpJ1cx/CXX18cjAdNWyCp9FkU+sVQmx4iKISoexNcGWVkWrZvsKf24DTzXis
- bzY3YhM/v6aYGMFHCY4hHbQJtQs4Wv5RXEYHKkw6X2MwxKIaeEfA/YSDveIhx7Dy
- bkn2hMdNCnftdn5xpdOmwbR7m12ISicMQnIfW/4emiiZPpGKHbQ2Inz5UNwt+E8X
- JLFfgw==
-Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com
- [209.85.222.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h9f6285f2-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Tue, 13 Oct 2026 06:57:26 +0000 (GMT)
-Received: by mail-qk1-f197.google.com with SMTP id
- af79cd13be357-93be1861d2dso401693185a.3
- for <qemu-riscv@nongnu.org>; Mon, 12 Oct 2026 23:57:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1791874646; x=1792479446; darn=nongnu.org;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=9GdmlAg+r0KBNbesZT5lUmE9s7Gfh3qJj15TaW/3QHM=;
- b=J7zgfnfKsBO5NWP0VAdeRpyK07fEbgq5y98kGnyNLmB/jRwsHd9ZL2V5JVxi0HSu/3
- dThKOAFxq8+Kb2sAUnP5srmvr4bEvJNYIhh3S12+s3LGZNdKBqit4Ua3aOhEokfCa+Z7
- bL8SofmNJvjwuYdxtEMKnWT/BimpHRV77xMFnlxEGRL8y4sRVDMYha5x4ajKahpTrfbA
- xqn6V3JPE18oj2rJQxqA13AnWVv7/FUgyCN8A40EQGBQXPumFHsMFO/Tl7LIo4wlcC4D
- hvoGhvAbvUpEgUrhfQok92E9RzhF9dBJpbI8IUk5akAd6O+L3Nymf40pGPLnAssNE4x2
- o0xQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1791874646; x=1792479446;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=9GdmlAg+r0KBNbesZT5lUmE9s7Gfh3qJj15TaW/3QHM=;
- b=G+pEj+9n/AsDEiotS0aFHNo7HLOPkcJMx8sxEdf76JNb9mE3XqD1qyZg6RJbQ7j7Q2
- QQZYy4sAhnwwzRx6kHgIFuEOVcbFptGY2Sl6HHdA16a5fWT36omJvQY2z3MVk6B8hGzT
- 2vIk0iYZYmsZ6weHPwBAA9R1opXhauKLuKHqB3vCDR+MJ/qiRCtuWe1mOPzjNtECbPq8
- uGrOqVZ+MgC2rKEG4gRmyUBR4fNYaRMZdQsjb280vcfxzjfzMjds+Uvmg5utwyXw7i7n
- mJabWT24GNKQfgI1+NR5VIUHu7VRY/ocozdzWvs+jdFNNXOj3ol8BQOtP55H6wkNH9ZX
- zVoA==
-X-Forwarded-Encrypted: i=1;
- AKwUvByHH+MLyxYyVOEf30WYqNbNxE3IXuYw0C7kpD0E8CCCxhCY6+hUMkp/qCo4LXkbd0FLEGuskQoj+Y8r@nongnu.org
-X-Gm-Message-State: AFq9FYJ9dLZN20aGy1AgTcBGZMDiow0T4Dw6nV8StzL2j091xJfauMMo
- /3O5/8D/wzqaLUJLbFiImEypOtvkGOGsoqbhDkiNWIM4VEcMJTHRdQpXBiEzLxL8SJjKJn66z99
- sXW79nYDLbaOChCvs00i1FonPHxdhVbBM3ztfYyBY58I+tEGOfLf2U9anAw==
-X-Gm-Gg: AYBFou20WinDkQH+mBKdhRgIplEFL1BS09v65DtlgICUi2h2zWQErVotxPmjVrscgsP
- oYio319z8o82A0LAmPtwLw08Ftjp6zwNnC3CuhTAWiOnPIt15zIeWt0zH8YTcbR1YjNY8vNoNIY
- YdSm4xWNiuKQ7ucPzdzxQMLKGo/H18b+6hAaBTE3xHm+/40jVF9nOf39lT/pDJGbKRl769Jd3sh
- wSsEyro/tNics/eMFWIPk/j9U7g+Xs/LSXZ7vMSyfXRfJwKwPzjkXxSQgzmTe5OuUPwKeIjp65Y
- 38TrSAzcck9xA/DFWxMwH1eB/rSRQ3kUKS5sQFvxdABwGRnsx8Y8jQy+xvSS1NYIUhJ0DDFj/JR
- rrVF4FT7dcl8dRw6VqUVyAN/RoFNhet0DfQ==
-X-Received: by 2002:a05:620a:2a14:b0:93e:4d74:68fd with SMTP id
- af79cd13be357-93ebd2ab63bmr2029142985a.65.1791874643486; 
- Mon, 12 Oct 2026 23:57:23 -0700 (PDT)
-X-Received: by 2002:a05:620a:2a14:b0:93e:4d74:68fd with SMTP id
- af79cd13be357-93ebd2ab63bmr2029138985a.65.1791874642429; 
- Mon, 12 Oct 2026 23:57:22 -0700 (PDT)
-Received: from [192.168.69.210] (pmd666.hd.free.fr. [88.187.86.199])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a18bf15691sm335604325e9.6.2026.10.12.23.57.20
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 12 Oct 2026 23:57:21 -0700 (PDT)
-Message-ID: <e883fd2c-db22-4f29-8df0-acd5a5e9d9d9@oss.qualcomm.com>
-Date: Tue, 13 Oct 2026 08:57:19 +0200
+ (Exim 4.90_1) (envelope-from <jamin_lin@aspeedtech.com>)
+ id 1xGXAc-0001mw-HH; Tue, 13 Oct 2026 03:43:36 -0400
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=iVFsVk9FYZImNDi4+sxi2WwTm+fPg/L/1cgTRFWmfKoPivCky0USaAm16sxhCF5Qv3K5Bd58HKLvH5cMpJABOaRylvE5ejZSjjnEbnpbfbk1k3bWI4o23sY8+wHakAq/kPPfHbDHKaQVN6GrQEsHThzXKBKOGXmoe02n/QArd4P2wpXugA2AX0n4FJ9gbLnhKARoY4jSD9P+Q1KVhvwch2vozWAn+zKKv00k4k31AxnKyEXaiDjwwqtrGSfnw6Mg7u0zhydnLdbQe8rZGDPMEMDAi+Xx2ma7aI0yVC8P8amFz1bdXCxLRLMOJxTF0QVD26xqDz80Ubg9r+ERTXPCfg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=gQGIM9M0uOSqpP/UmMs0sk45sddLFhPbmjNnw0HE0BA=;
+ b=mdD0+7HtnDegnOWTqRFj30pREgGwzLRbp2+hX3T9a6wylNvlgdF8mmMDnjHotgmOW4hCn6pM24KfGsCB0k/f58Agm1J3xmZ8Uyz7pkwEhdSNjNEOg4V0hfos1J3rX7T6XKY//d16aSF9mNdPJXCNHFb2rQhx+le2XXTR6AD6lW8P6cWwqWGWoHlRcQ/520MH2nlV82X5JZcnmvfKZTf5KGEZbiFspMXNm+mqIy3V3Jvt/sI3COl5qj91t3J8oRZzaCznTiOEVAsw+g+3ffXE9wQSwn2TJ11EDaxxwndPDJgXRZCmB6KlZfbJRagn+t26za0olYTzXQDRbwOPcJUE0w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=aspeedtech.com; dmarc=pass action=none
+ header.from=aspeedtech.com; dkim=pass header.d=aspeedtech.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aspeedtech.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=gQGIM9M0uOSqpP/UmMs0sk45sddLFhPbmjNnw0HE0BA=;
+ b=lCguEMB77p4PjfiH2wmWNZJvBeqqNJd/54wypeTCus4kjAPcqp3EL5xwgFUe8jAsm+b+9/tSUdCrp3YXuJ4gCVKl7R3TXeZc7w++hrvN/KVmrGyKFZww97BNVhBYi8s9O3+T+yBrPBckCMstTRxNUEb5q1WHWsR9k15BW1iLsthJUQoaBFraALfkgdLpfyueC2vg0NcmQ9JjCJugEiPfw3chthUyftvWkee4YqwRKbNj4/0OCIO2S0rPmyahyw0TuaJJvwS0lSZcK/Tka4L/vvnpmA9DC5l+glaU/+NsYmb+8ktEtLdtGReneLrBBl48ZyuxoKjYyYz3nAdbeV7vxA==
+Received: from TYZPR06MB7373.apcprd06.prod.outlook.com (2603:1096:405:a7::14)
+ by SG2PR06MB5059.apcprd06.prod.outlook.com (2603:1096:4:1c7::14) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.496.23; Tue, 13 Oct
+ 2026 07:43:24 +0000
+Received: from TYZPR06MB7373.apcprd06.prod.outlook.com
+ ([fe80::9b90:c4d9:22de:2ac4]) by TYZPR06MB7373.apcprd06.prod.outlook.com
+ ([fe80::9b90:c4d9:22de:2ac4%6]) with mapi id 15.21.0496.021; Tue, 13 Oct 2026
+ 07:43:23 +0000
+From: Jamin Lin <jamin_lin@aspeedtech.com>
+To: "open list:All patches CC here" <qemu-devel@nongnu.org>
+CC: Andrew Jeffery <andrew@codeconstruct.com.au>,
+ =?iso-8859-1?Q?C=E9dric_Le_Goater?= <clg@kaod.org>, Emmanuel Blot
+ <emmanuel.blot@free.fr>, Fabiano Rosas <farosas@suse.de>, Jamin Lin
+ <jamin_lin@aspeedtech.com>, Joel Stanley <joel@jms.id.au>, Kane Chen
+ <kane_chen@aspeedtech.com>, Troy Lee <leetroy@gmail.com>, Laurent Vivier
+ <lvivier@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>, Peter Maydell
+ <peter.maydell@linaro.org>, =?iso-8859-1?Q?Philippe_Mathieu-Daud=E9?=
+ <philmd@oss.qualcomm.com>, Pierrick Bouvier
+ <pierrick.bouvier@oss.qualcomm.com>, "open list:ASPEED BMCs"
+ <qemu-arm@nongnu.org>, "qemu-ppc@nongnu.org" <qemu-ppc@nongnu.org>,
+ "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>, Steven Lee
+ <steven_lee@aspeedtech.com>, Patrick Leis <venture@google.com>
+Subject: Re: [PATCH v2 48/50] hw/arm: minerva: add Facebook BMC machine
+Thread-Topic: [PATCH v2 48/50] hw/arm: minerva: add Facebook BMC machine
+Thread-Index: AQHdWuZxsph/f01iJEiWxSk0J6PAhw==
+Date: Tue, 13 Oct 2026 07:43:23 +0000
+Message-ID: <TYZPR06MB73736F77F75E0CEE4765E3D1FC9E2@TYZPR06MB7373.apcprd06.prod.outlook.com>
+Accept-Language: zh-TW, en-US
+Content-Language: zh-TW
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+msip_labels: 
+authentication-results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=aspeedtech.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: TYZPR06MB7373:EE_|SG2PR06MB5059:EE_
+x-ms-office365-filtering-correlation-id: e8009868-97cc-467c-1ca0-08df28fda8f4
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+ ARA:13230040|23010399003|1800799024|376014|366016|7416014|18002099003|10067099003|8096899003|261009223027099003|38070700021|56012099006|41080700001;
+x-microsoft-antispam-message-info: hJPo/AcIR2SYFpQlQAoo45Z70rDvn/fXNAd2bg4cAUhrwQmwZYWOZT6OTayZmaFWAs/JaX8Ze/Qayh0yCJVCMtKbp7r9OIft3GKB3ywkFaRnwcwra6nJzvaq29sqVMzzRdOcHO9cqvH9fgZUO3Qf/7O01QtkggLfX4mrfNUwmIllC4XRI78TGKwCRuZOB3yQ3vmw9B+Na48TO0g/dqOB95juCHZgwzK+nqgwfD/wMIkq4lXUaxhgyWzVIyEoHg6uOR5Kss77h0r8pSoQlS3riRX5f+DzhduP0f53w3kU3z+aIepGvSeVGbAvHOSzpTXoaq6Dg50W8eB/5BxBXe5DwqEBv+//zrLPkEm0Y2hlzg6MyW83H9JP4oJ9GlXyJyQUchCymnlaQswYCj66R9a5dfyroocaJ2z8hwQVEKQIZpIl7ucFuHF2sA9yNsN1QL/EZCyf6Ft90/DNv0gAvn09zE5cCA3uROCll62H2zPgxJyWDY+Y5mQe9RpK3XB5dT1v1CUQ2cL5Lu2hAag1wAYcOW8zE/RTApbUHz3XvFPgHVl1a+wFXWnPZ8Yru1DNUmVe5aHCgYVxQDNEnuIblBvbl/et9zbKEXh1/0njWc5IAhecuYtEJyJUGvVs0OWfY2uUjZPqjU8nPW0WcvkS63/t3LFGw8c+90yBNcNGBQ0azF6+p3PHZV0FfOmK+EhXkazrDoKHTZqj6DX6Fjx8QO4jJ4NxFoDpNF9FO2ZKtS5lB2GmIemt20OoT/1hGoiyPk0m
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:zh-tw; SCL:1;
+ SRV:; IPV:NLI; SFV:NSPM; H:TYZPR06MB7373.apcprd06.prod.outlook.com; PTR:;
+ CAT:NONE;
+ SFS:(13230040)(23010399003)(1800799024)(376014)(366016)(7416014)(18002099003)(10067099003)(8096899003)(261009223027099003)(38070700021)(56012099006)(41080700001);
+ DIR:OUT; SFP:1102; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?n6XqgEs586Gi29unefh8iiljGrkUCGKgGG1QBzSAkD+yMerjOG2D7p1NrU?=
+ =?iso-8859-1?Q?O4UsaiTNs5Bf+T1+6WYOZgnfHq9UekHQnfbFaAme0fktcrCQtFe2HCTm3l?=
+ =?iso-8859-1?Q?HAN7wIhpM26t+LJ/XzM3oqL0KL62QF3FcGe2x16skDoN8p0u3S2LtVet61?=
+ =?iso-8859-1?Q?V7q2oCO3OBbsbJZevjfgHqOJdAjMwHQ8VQMr+r7a9bELmJCQ86bwkdWxnC?=
+ =?iso-8859-1?Q?fQ+Aia5UJYPDVPwyT4ev2Ns8N+b5HF1MuOxx6Ep4la9+1WAviaBcUTc4dW?=
+ =?iso-8859-1?Q?URYXoJILDOWLwnpU7OzrbEAEH0pb7z4RaCs/Iubx115TjbPWLmlVC6re9Q?=
+ =?iso-8859-1?Q?udN7vllzF0EG4l4AK/T7h9FLP4Nic1I72tqV+UZdIfWeerFDEtGfDjX7fa?=
+ =?iso-8859-1?Q?KZ1jZm9Bgn4yhxL3nLmuhkTl1Li9DWMcV2wkxswmOOODIiaiZcz5TR382R?=
+ =?iso-8859-1?Q?tZrJRA3tYXCHzV/DUnt3Slm2/TBV0Fe58evzaisJ+MlS9zMX/jEm2T0BcG?=
+ =?iso-8859-1?Q?zTFsYQuKFARXMtIT1+DUJAJww9l+FAzkYJFxQWH3yRWmJmKyFcbwa2TGPF?=
+ =?iso-8859-1?Q?/dM6iBX48XUcdnEJ+BfnvBOKGzHbWBdlgN+ci8T/cpcxX9MVOkhWboxzuW?=
+ =?iso-8859-1?Q?l8GRmn4c6ICP2YLKrWGIxl59bDgzZNKhhlOK+whrBFDtjSorx9A4RhRyFm?=
+ =?iso-8859-1?Q?/NvBjL5/NBi5LhLjGRzzpZemujHnqRaicvuqdufc1nE8p7CbwA5oQG/hGN?=
+ =?iso-8859-1?Q?18HztwthfijZJgZ5UwDhuvpKwKxv3Tz0qp1LKBDmd4qoVftOFzDWV+7X4m?=
+ =?iso-8859-1?Q?kVjipikYsHBkhRHN5vHo1uq1aQI/PQs72Ud9wS4t+AhkwoSHt6uNZQ31Y+?=
+ =?iso-8859-1?Q?aPA4L6XqEeLZihdWv18N+YW7MjHbWro3VSqCzVEtGWwXROWI7oswH3DeCE?=
+ =?iso-8859-1?Q?MYj5TQDUAXp5n4/dfMU+hqcpb2XuaP2IEkVvyffvQxeatRP9MWTCS/PPKT?=
+ =?iso-8859-1?Q?MnvxWI5MY+a8XqEXo5S0DySSlukDlXJYtgVXnGjRsCvievc+FQLrqRHTD2?=
+ =?iso-8859-1?Q?1PvFbfxULL4FHJF4wziAAYpafyExAI0VFEo8Qt/kEipWZE+LWHxsTPtz/s?=
+ =?iso-8859-1?Q?wUMXOhHaey3awa2C5ckonYN9PadHSxhXy06NX/k/s5okA2m3NQLyzRt+o8?=
+ =?iso-8859-1?Q?Hm75V3yz7O2TxKXSoocLqXleX89jl5Yke22Xmb2n1ttCtPYmUfEnhmE/2B?=
+ =?iso-8859-1?Q?gOIZYtMAzrUBESqA503ksBfupLqvEGuGTjC7bx5E9o5R1n7Xq6+XMZn+jn?=
+ =?iso-8859-1?Q?F/oeG6bC8o1R5KUbk4MuRoJ1ckDukf4LM8hVG1aMa0UueGVTSMnoivOZax?=
+ =?iso-8859-1?Q?zjB+J4Vq/ntTxq1Qu1bBpc5Ub9vaACgolQuNsXzt4dkIk4BsZfx7Fg/1U6?=
+ =?iso-8859-1?Q?dRbT/WAeKqfW9z15XpGED5AZacetj9NnYsy8+JpfnbLU4c1cntJ/iGuX9/?=
+ =?iso-8859-1?Q?Q0E79J572cjmW89tS+VPJ+BdewCly5gHiXG1OXdOtoDTKjRFO+MlWNM8R6?=
+ =?iso-8859-1?Q?g44V9zmldRXJhdiY6xjJ/rwymi52husT5IGUDMPLAEAT8SCyhSZulB5PET?=
+ =?iso-8859-1?Q?Nd01KZDbALxQE+z+SJ/tgmwVLewQo1SjYIlxQGPEYX4VUoUzxZVCGHIZ+1?=
+ =?iso-8859-1?Q?ZYjMcMDBTarDqRGWMdqUvyJh2cedJUKovR6n0Hl9a11GjiDsfMkGGVVTKy?=
+ =?iso-8859-1?Q?sKTc0GhMBHEFDUk+8a0pZEKbVk4qxGm8vRuwGgwJDB76NUI7+5/Kd521EO?=
+ =?iso-8859-1?Q?U5avvWudZA=3D=3D?=
+Content-Type: multipart/alternative;
+ boundary="_000_TYZPR06MB73736F77F75E0CEE4765E3D1FC9E2TYZPR06MB7373apcp_"
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 07/10] target/sparc64: expose system registers via GDB
-To: =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
- qemu-devel@nongnu.org
-Cc: "Dr. David Alan Gilbert" <dave@treblig.org>,
- =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Zhao Liu <zhao1.liu@intel.com>, Peter Maydell <peter.maydell@linaro.org>,
- Chinmay Rath <rathc@linux.ibm.com>, Nicholas Piggin <npiggin@gmail.com>,
- Glenn Miles <milesg@linux.ibm.com>,
- Harsh Prateek Bora <harshpb@linux.ibm.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
- <liwei1518@gmail.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu@processmission.com>,
- Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
- qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
- Paolo Bonzini <pbonzini@redhat.com>, Laurent Vivier <laurent@vivier.eu>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Artyom Tarasenko <atar4qemu@gmail.com>, Helge Deller <deller@gmx.de>,
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
- Warner Losh <imp@bsdimp.com>, Kyle Evans <kevans@freebsd.org>
-References: <20261013-query-reg-v2-0-6f95a2e139a9@redhat.com>
- <20261013-query-reg-v2-7-6f95a2e139a9@redhat.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
-Content-Language: en-US
-In-Reply-To: <20261013-query-reg-v2-7-6f95a2e139a9@redhat.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=FOKOVOos c=1 sm=1 tr=0 ts=6acdd656 cx=c_pps
- a=50t2pK5VMbmlHzFWWp8p/g==:117 a=4s3hRJSeHn4rkQlkrse1kQ==:17
- a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=M51BFTxLslgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
- a=20KFwNOVAAAA:8 a=rB_AC_PIbXsWsa49W_MA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=IoWCM6iH3mJn3m4BftBB:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEzMDAyNyBTYWx0ZWRfXw93Sj6cD4oop
- C9e58Mklkne5+PidWH+W1zQgat974EisL7Mp233IvDghT+4vyZQ/tWs4mtqS/MzUsTFkbSbFFr5
- NJTnVqGhfa0e05pe1X5BliPFJ4e+Btw=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEzMDAyNyBTYWx0ZWRfX4yt4NKEPjczI
- yDgN76hkxE/UsDhW93nZNNduVE2pV+4JpczpdLNmQIwNedu5toLaVZvhpKnj+ZfLc3huObLh3fl
- rEKB7gWK2ubRR0INp4RN8q4XLj/Z4+gmcdY28v79GbwddD655XQAExDhYurvPxbBPIteJ+xCbfP
- KOwEH8YzQdIoLaxM3yjAtCx7IaVuJCYFRX6OHuCIcJf5IIhuU9SboP9Jk1zVf1w1TG+GVbrC9iM
- 9Bn62qDtFQ5phMB7nisyxTOzPHPY5G+H+abEoZLkSJYkljmsweR42JDko3eN5FbXKpOFKCgOhY3
- 5il96hvHpbZSMCTO8NouMcyHyvmgBKMRRwjXVtGW9rEeYIhogCAaoEMulBP2N5PW14ZoZSkhCRc
- Q0Uke0GdkM3bv4oyxYoBh9xRqcxUvgCGNP7ZwNYIaMhftJKVtOEjwcizWy3iVwnh1y+cBefz5M7
- TzsUkCPPn+R3Awul0+g==
-X-Proofpoint-GUID: aiu-4Xx2620k6nuikdmKdI2pGFjikdWR
-X-Proofpoint-ORIG-GUID: aiu-4Xx2620k6nuikdmKdI2pGFjikdWR
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-13_01,2026-10-09_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 phishscore=0 lowpriorityscore=0 impostorscore=0 adultscore=0
- spamscore=0 clxscore=1015 priorityscore=1501 malwarescore=0 bulkscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610130027
-Received-SPF: pass client-ip=205.220.180.131;
- envelope-from=philmd@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
+X-Exchange-RoutingPolicyChecked: gapkOS5lHmxi2XFFYfaxM9/tRm23a2pnobRwNflyOAP/+V3MimQPYqJszceFjzpmIM4gEe7df3Hyr89/bYBlfQNr9t9qQY4eBQtiQ/VQcKfCY64pToqKirpmIfKQmPOc3HWpKIeoxd2GJKnJdXypH31HXNCHVYHd3X1dZajFUXmr6CEKrlBn7S8cChIR2jbyhfO3VDyIvtDIoMb9o8KsvyWOq/eXqKCCXxcjZTbZUPYCIBmkmNyecpFd9sAv1K9k5pF8WOyxy5w9NYl1hxLuxibKcMw+HfsvjKkdLHbtqkC91GqWrSJqAT4ZAM0jBFsMj/hKayGd0rCEwcOstaS8FQ==
+X-OriginatorOrg: aspeedtech.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: TYZPR06MB7373.apcprd06.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: e8009868-97cc-467c-1ca0-08df28fda8f4
+X-MS-Exchange-CrossTenant-originalarrivaltime: 13 Oct 2026 07:43:23.5907 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 43d4aa98-e35b-4575-8939-080e90d5a249
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: s/rLhoF9umCOOifhE7oGsz46kn+Mn/K68rUU5lo08/lDGcISiKjErpm/gSiAsi6guGbCEbn3QAYIJW4deALOE3NiH6RNSZbkcfVjM/encpg=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SG2PR06MB5059
+Received-SPF: pass client-ip=2a01:111:f403:c406::3;
+ envelope-from=jamin_lin@aspeedtech.com;
+ helo=OS8PR02CU002.outbound.protection.outlook.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -173,94 +152,99 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 12/10/26 22:34, Marc-AndrÃ© Lureau wrote:
-> Add a sparc64-system.xml GDB feature that exposes asi, pstate,
-> cansave, canrestore, otherwin, wstate, and cleanwin as read-only
-> system registers through the GDB coprocessor interface.
-> 
-> Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
-> ---
->   configs/targets/sparc64-softmmu.mak |  2 +-
->   gdbstub/gdb-xml/sparc64-system.xml  | 22 +++++++++++++++++++++
->   target/sparc/gdbstub.c              | 38 +++++++++++++++++++++++++++++++++++++
->   3 files changed, 61 insertions(+), 1 deletion(-)
-> 
-> diff --git a/configs/targets/sparc64-softmmu.mak b/configs/targets/sparc64-softmmu.mak
-> index 4e621fb8e39e..7f2789136653 100644
-> --- a/configs/targets/sparc64-softmmu.mak
-> +++ b/configs/targets/sparc64-softmmu.mak
-> @@ -1,7 +1,7 @@
->   TARGET_ARCH=sparc64
->   TARGET_BASE_ARCH=sparc
->   TARGET_BIG_ENDIAN=y
-> -TARGET_XML_FILES=sparc64-cpu.xml sparc64-fpu.xml sparc64-cp0.xml
-> +TARGET_XML_FILES=sparc64-cpu.xml sparc64-fpu.xml sparc64-cp0.xml sparc64-system.xml
->   TARGET_LONG_BITS=64
->   TARGET_NOT_USING_LEGACY_LDST_PHYS_API=y
->   TARGET_NOT_USING_LEGACY_NATIVE_ENDIAN_API=y
-> diff --git a/gdbstub/gdb-xml/sparc64-system.xml b/gdbstub/gdb-xml/sparc64-system.xml
-> new file mode 100644
-> index 000000000000..e00baedb467e
-> --- /dev/null
-> +++ b/gdbstub/gdb-xml/sparc64-system.xml
-> @@ -0,0 +1,22 @@
-> +<?xml version="1.0"?>
-> +<!--
-> +  SPDX-License-Identifier: GPL-2.0-or-later
-> +-->
-> +<!DOCTYPE feature SYSTEM "gdb-target.dtd">
-> +<!-- System-register values are read-only; writes are ignored. -->
-> +<feature name="org.qemu.gdb.sparc.system">
-> +  <reg name="asi" bitsize="32" type="uint32"
-> +       group="qemu-debug" save-restore="no"/>
-> +  <reg name="pstate" bitsize="32" type="uint32"
-> +       group="qemu-debug" save-restore="no"/>
-> +  <reg name="cansave" bitsize="32" type="uint32"
-> +       group="qemu-debug" save-restore="no"/>
-> +  <reg name="canrestore" bitsize="32" type="uint32"
-> +       group="qemu-debug" save-restore="no"/>
-> +  <reg name="otherwin" bitsize="32" type="uint32"
-> +       group="qemu-debug" save-restore="no"/>
-> +  <reg name="wstate" bitsize="32" type="uint32"
-> +       group="qemu-debug" save-restore="no"/>
-> +  <reg name="cleanwin" bitsize="32" type="uint32"
-> +       group="qemu-debug" save-restore="no"/>
-> +</feature>
-> diff --git a/target/sparc/gdbstub.c b/target/sparc/gdbstub.c
-> index 2874ce1b3501..efbe16f38aa9 100644
-> --- a/target/sparc/gdbstub.c
-> +++ b/target/sparc/gdbstub.c
-> @@ -266,6 +266,39 @@ static int sparc_cp0_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
->   #endif
->   }
->   
-> +#if defined(TARGET_SPARC64) && !defined(CONFIG_USER_ONLY)
-> +static int sparc64_gdb_read_system_register(CPUState *cs, GByteArray *buf,
-> +                                           int n)
-> +{
-> +    CPUSPARCState *env = cpu_env(cs);
-> +
-> +    switch (n) {
-> +    case 0:
-> +        return gdb_get_reg32(buf, env->asi);
-> +    case 1:
-> +        return gdb_get_reg32(buf, env->pstate);
-> +    case 2:
-> +        return gdb_get_reg32(buf, env->cansave);
-> +    case 3:
-> +        return gdb_get_reg32(buf, env->canrestore);
-> +    case 4:
-> +        return gdb_get_reg32(buf, env->otherwin);
-> +    case 5:
-> +        return gdb_get_reg32(buf, env->wstate);
-> +    case 6:
-> +        return gdb_get_reg32(buf, env->cleanwin);
-> +    default:
-> +        return 0;
-> +    }
-> +}
+--_000_TYZPR06MB73736F77F75E0CEE4765E3D1FC9E2TYZPR06MB7373apcp_
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-Why not remove the sparc64_monitor_defs[] array at the same time?
-If doable that would ease logical review.
+>
+> Add a machine for the Facebook Minerva Chassis Management Module (BMC),
+> an AST2600-based board modelled from its device tree
+> (aspeed-bmc-facebook-minerva.dts).
+>
+> The board uses INA230 and INA238 power monitors, TMP75 temperature
+> sensors, PCA9555 IO expanders, PCA9545 and PCA9548 I2C muxes, AT24C
+> EEPROMs and a DS1339 RTC.
+>
+> Every device the Minerva device tree describes and QEMU already models
+> is instantiated. The remaining ones (LTC4287, XDP710, MAX31790, PCF8563
+> and IPMB) have no QEMU model and are left documented as comments.
 
+Reviewed-by: Jamin Lin <jamin_lin@aspeedtech.com>
+
+--_000_TYZPR06MB73736F77F75E0CEE4765E3D1FC9E2TYZPR06MB7373apcp_
+Content-Type: text/html; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<html>
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-8859-=
+1">
+<style type=3D"text/css" style=3D"display:none;"> P {margin-top:0;margin-bo=
+ttom:0;} </style>
+</head>
+<body dir=3D"ltr">
+<div style=3D"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, =
+Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);">
+&gt;</div>
+<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
+nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
+olor: rgb(0, 0, 0);">
+&gt; Add a machine for the Facebook Minerva Chassis Management Module (BMC)=
+,</div>
+<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
+nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
+olor: rgb(0, 0, 0);">
+&gt; an AST2600-based board modelled from its device tree</div>
+<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
+nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
+olor: rgb(0, 0, 0);">
+&gt; (aspeed-bmc-facebook-minerva.dts).</div>
+<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
+nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
+olor: rgb(0, 0, 0);">
+&gt;</div>
+<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
+nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
+olor: rgb(0, 0, 0);">
+&gt; The board uses INA230 and INA238 power monitors, TMP75 temperature</di=
+v>
+<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
+nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
+olor: rgb(0, 0, 0);">
+&gt; sensors, PCA9555 IO expanders, PCA9545 and PCA9548 I2C muxes, AT24C</d=
+iv>
+<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
+nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
+olor: rgb(0, 0, 0);">
+&gt; EEPROMs and a DS1339 RTC.</div>
+<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
+nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
+olor: rgb(0, 0, 0);">
+&gt;</div>
+<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
+nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
+olor: rgb(0, 0, 0);">
+&gt; Every device the Minerva device tree describes and QEMU already models=
+</div>
+<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
+nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
+olor: rgb(0, 0, 0);">
+&gt; is instantiated. The remaining ones (LTC4287, XDP710, MAX31790, PCF856=
+3</div>
+<div style=3D"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, =
+Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);">
+&gt; and IPMB) have no QEMU model and are left documented as comments.</div=
+>
+<div style=3D"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, =
+Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);">
+<br>
+</div>
+<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
+nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
+olor: rgb(0, 0, 0);">
+Reviewed-by: Jamin Lin &lt;jamin_lin@aspeedtech.com&gt;</div>
+</body>
+</html>
+
+--_000_TYZPR06MB73736F77F75E0CEE4765E3D1FC9E2TYZPR06MB7373apcp_--
 
