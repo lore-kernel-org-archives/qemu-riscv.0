@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CABDCC6B12
-	for <qemu-riscv@archiver.kernel.org>; Tue, 13 Oct 2026 16:29:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 471A3CC6B19
+	for <qemu-riscv@archiver.kernel.org>; Tue, 13 Oct 2026 16:29:32 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xGfMr-0006zh-9s; Tue, 13 Oct 2026 12:28:45 -0400
+	id 1xGfNI-00088k-F3; Tue, 13 Oct 2026 12:29:12 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <clg@kaod.org>) id 1xGfLa-0005IE-HM
- for qemu-riscv@nongnu.org; Tue, 13 Oct 2026 12:27:27 -0400
-Received: from 3.mo2.mail-out.ovh.net ([46.105.53.56])
+ (Exim 4.90_1) (envelope-from <clg@kaod.org>) id 1xGfM1-0005mm-91
+ for qemu-riscv@nongnu.org; Tue, 13 Oct 2026 12:27:59 -0400
+Received: from smtpout3.mo536.mail-out.ovh.net ([51.210.91.12])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <clg@kaod.org>) id 1xGfLV-0005C3-Nf
- for qemu-riscv@nongnu.org; Tue, 13 Oct 2026 12:27:25 -0400
-Received: from director2.derp.mail-out.ovh.net
- (director2.derp.mail-out.ovh.net [79.137.60.36])
- by mo2.mail-out.ovh.net (Postfix) with ESMTPS id 4j409M6j1Tz441L;
- Tue, 13 Oct 2026 16:27:19 +0000 (UTC)
-Received: from director2.derp.mail-out.ovh.net
- (director2.derp.mail-out.ovh.net. [127.0.0.1])
- by director2.derp.mail-out.ovh.net (inspect_sender_mail_agent) with SMTP
- for <jamin_lin@aspeedtech.com>; Tue, 13 Oct 2026 16:27:19 +0000 (UTC)
-Received: from mta7.priv.ovhmail-u2.ea.mail.ovh.net (unknown [10.110.54.126])
- by director2.derp.mail-out.ovh.net (Postfix) with ESMTPS id
- 4j409M5Lmcz1xtc; Tue, 13 Oct 2026 16:27:19 +0000 (UTC)
+ (Exim 4.90_1) (envelope-from <clg@kaod.org>) id 1xGfLx-0005K2-6b
+ for qemu-riscv@nongnu.org; Tue, 13 Oct 2026 12:27:52 -0400
+Received: from director3.derp.mail-out.ovh.net
+ (director3.derp.mail-out.ovh.net [79.137.60.223])
+ by mo536.mail-out.ovh.net (Postfix) with ESMTPS id 4j409s55nkz81Vx;
+ Tue, 13 Oct 2026 16:27:45 +0000 (UTC)
+Received: from director3.derp.mail-out.ovh.net
+ (director3.derp.mail-out.ovh.net. [127.0.0.1])
+ by director3.derp.mail-out.ovh.net (inspect_sender_mail_agent) with SMTP
+ for <jamin_lin@aspeedtech.com>; Tue, 13 Oct 2026 16:27:45 +0000 (UTC)
+Received: from mta6.priv.ovhmail-u2.ea.mail.ovh.net (unknown [10.110.178.179])
+ by director3.derp.mail-out.ovh.net (Postfix) with ESMTPS id
+ 4j409s4Br1z1xrh; Tue, 13 Oct 2026 16:27:45 +0000 (UTC)
 Received: from kaod.org (unknown [10.1.6.3])
  (Authenticated sender: clg@kaod.org)
- by mta7.priv.ovhmail-u2.ea.mail.ovh.net (Postfix) with ESMTPSA id 0FDE4202CA4; 
- Tue, 13 Oct 2026 16:27:17 +0000 (UTC)
+ by mta6.priv.ovhmail-u2.ea.mail.ovh.net (Postfix) with ESMTPSA id 0AF891B42CA1;
+ Tue, 13 Oct 2026 16:27:42 +0000 (UTC)
 Authentication-Results: garm.ovh; auth=pass
- (GARM-99G003feff8ed5-0ba8-478b-8a52-933f774f0895,
+ (GARM-114S0085ace8e4b-655c-4a6b-adce-0d9c910a13b7,
  3B5152602AE6D76A7CF2E50DC6ABDDC767F0B630) smtp.auth=clg@kaod.org
 X-OVh-ClientIp: 82.64.250.170
-Message-ID: <2cdab39a-08b7-48c3-b8f1-79d56c355dd5@kaod.org>
-Date: Tue, 13 Oct 2026 18:27:15 +0200
+Message-ID: <1b4a0ea8-5c36-49b9-ba2e-e575bdc49f58@kaod.org>
+Date: Tue, 13 Oct 2026 18:27:42 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 01/50] docs/system/arm/aspeed: add the catalina-bmc
- machine
+Subject: Re: [PATCH v2 11/50] hw/rtc: ds1338: prefix the file-local helpers
+ with ds1338_
 To: Emmanuel Blot <emmanuel.blot@free.fr>, qemu-devel@nongnu.org
 Cc: Peter Maydell <peter.maydell@linaro.org>,
  Steven Lee <steven_lee@aspeedtech.com>, Troy Lee <leetroy@gmail.com>,
@@ -54,7 +54,7 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
  =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
 References: <20261012-bmc-minerva-v2-0-4c3dff084ec9@free.fr>
- <20261012-bmc-minerva-v2-1-4c3dff084ec9@free.fr>
+ <20261012-bmc-minerva-v2-11-4c3dff084ec9@free.fr>
 From: =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>
 Content-Language: en-US, fr
 Autocrypt: addr=clg@kaod.org; keydata=
@@ -99,28 +99,29 @@ Autocrypt: addr=clg@kaod.org; keydata=
  3GlqivBNkmYsHYSlFsbxc37E1HpTEaSWsGfAHQoPn9qrDJgsgcbBVc1gkUT6hnxShKPp4Pls
  ZVMNjvPAnr5TEBgHkk54HQRhhwcYv1T2QumQizDiU6iOrUzBThaMhZO3i927SG2DwWDVzZlt
  KrCMD1aMPvb3NU8FOYRhNmIFR3fcalYr+9gDuVKe8BVz4atMOoktmt0GWTOC8P4=
-In-Reply-To: <20261012-bmc-minerva-v2-1-4c3dff084ec9@free.fr>
+In-Reply-To: <20261012-bmc-minerva-v2-11-4c3dff084ec9@free.fr>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-x-ovh-tracer-id: 6622261777485048877
+x-ovh-tracer-id: 6629580130477190189
 X-VR-SPAMSTATE: OK
 X-VR-SPAMSCORE: -100
-X-VR-SPAMCAUSE: dmFkZTG34d8/DCGA0V4UbDaJQmCayESbSVJtAYeKb4T6qfqn6yctmtN8+GjI1a5LaSO4UcBlS8XOwLiGnGYEvAu5WdmbGpqebb+ABY+7b9hkiUIz/GBdqFRSGKWKxULMSqGPvfT/MeB15wLsduNTE1Czh9wqBNGhYXKGXmqBcUqAOaH1Hwm/BX42CwirjgEnU/Cl9F7bY8RDBzXipYJAzLE91nGeVUA5tc96W3hRZE0scWzpdTGWiinaX+acN76RGihF5HmPELee/OrNzoTUcDm7dDKDJDl37zqHvKvqXHh8RQwGGvcjY4bQlQDnrVsik8rISZymzi3MQBYc9J3briVS2pirmhFgWgzaWO1YOJG5IKQiFPcBSCV5rHOfY9csrj9uQOpbH2tNmbB5MDc4NLWMVPpH3c2AQIYGP24Gzw5pD9DEiQ1unH0+NhVjr+t/4nLwDlXyH//KLU/5Dkp+QgujIr2RZsnwtlyOiOISKjxzWShWFnfDM59nb5dD6UUZxM13Fq2vN6CbsMi2KHkp1EbqP/+1EElMj2G2NKKM7/D8gFHxAekBhINmrmrS26PoetwJj42b5NAdhfE5loU/V2D7Nxsl5mpkXPvlz7YTizgtWKABgMPcO13vJvFZp2SKe6QMKlARNpPtGAOUEG54scIUgQoaCK454X3T4Koo7xwVIHAlwQ
-DKIM-Signature: a=rsa-sha256; bh=0wRYDojipcMZietJmLkdTyX+sKrGzkBGMuafc2+gB6I=; 
+X-VR-SPAMCAUSE: dmFkZTGR6my3yR3/nvryo3txK0P1kcLJRA/d7vE2mcZt4FU0101Phy0w72x8NaAAitpVOKF90GjzO+qvyH4b9FwTtmpkhfLFjS0l12jss995+1+CSt9dRVdFIQNpyZdw8JMEP2OsUr8kvui2suot0yeCho3mnogfR4OTybzBtjNMkwH6rZtCoqReZ3Xspx71uofptYG14YF6LA5GycHnmvCu/0xVFDe26Q2EQYr+SnIunnR0fmLViQ427J1pKhXw57wm7RCqCjm1N0L8M3POU50m/6Bb5k0XLbMF/HIdLLyBBH69MTzgyhl3rYpvnCPplNoVIxflhu2FB8H46UP+iEogqCYPTusEQil43lR38Xf675RDHS5YbucYOcNy8BbpkTwu1BVbGGa/nKhZU2+jUIG2T78CHXBNsReA0u+cPKVnmV+vpGNOhHg5aDqh8VDdhSACLK7uTdZytGonNKQlv9LF46ypvkgwQ7KehEsRJVrtnxRXJLGpAGUyWLbdM5Zu06IR+WV2t51xf7TPphzeBqxTeugRyTySc3f5NDmgW5S2LXvcKrPgzjkU5Z5v5wQO3ixCB0W+G3l1lxVKOfCkQs+yTJtZiekRJl6R0gi+ZViZ/2lzwfr9ZjuumeZr+FbruXU4/pfcyrVVkvlx2eLm3ehUFrqf0E/GTMjbu6YIPgZ9xpBm+A
+DKIM-Signature: a=rsa-sha256; bh=HNRiRRwq1pmiJdgMoZ0l3oA8GYphZqLM7CyDDGwwetc=; 
  c=relaxed/relaxed; d=kaod.org; h=From; s=ovhmo393970-selector1;
- t=1791908840; v=1;
- b=Ut0TY6xOv577Cpo6nWbVmWgTWcVCgtVW0YdJLGyMDSRxYN1ieyk+q/1aGjIfDPH/kqBxiLEl
- MR0Ofo2StamODrk8H5SNqbjLag6XhiU0zkSwN3W/+BVDZIsEilQ39v1wRAM756TfNaF1uHrs+ag
- ABmYXVC3fCm9D7+h3dvSoeeCQYvODavB9gjk5nmf6YWU7zfPt28dWwXcj434TqjfdoKv5nGWMU6
- EwYSVSWMd7qXzOFcMUfmaPhpKaASM/iCETNkLvQLBE7s9jL47NUpP6QSMD1Ffj2gtiINxj+nBgy
- +fa7er/5sg5gl2PxQIX/pUk0jwD8cuPZAC8/5qfF5tZIw==
-Received-SPF: pass client-ip=46.105.53.56; envelope-from=clg@kaod.org;
- helo=3.mo2.mail-out.ovh.net
+ t=1791908865; v=1;
+ b=FuHlpZvC1OVAauekxzK6kclLTjdLCE/oIKLHHukZaZ72YLzfvRQWDV/a2486vyKy0q2LT5bs
+ Gmm+c2zzLbbnxl9QzLfoE+AFGViFxLPYSl5cGYWHWj9LErABOaHGMWf5OLB/TcL/6EFcWc7btP4
+ cpbWlBe7BHvYiQ+/rXiFs3444mg4eQPoctrdO7MMxVXm3aIezZU8x8MuMhFmnG53RcoOA/4LHhB
+ HhNRLqRDjLVIyrVlmk14NxmbnKi5XouhRRWABwm+UWr8X3OYdkBAGIsJVQaMZJBRc4huS9+nFs3
+ rPqref21xFskVG+Um8GrjhOOuGauKr48r7ymbTs6j/6XA==
+Received-SPF: pass client-ip=51.210.91.12; envelope-from=clg@kaod.org;
+ helo=smtpout3.mo536.mail-out.ovh.net
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -137,40 +138,72 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 10/12/26 16:31, Emmanuel Blot wrote:
-> The Facebook Catalina BMC machine is supported by hw/arm but has never
-> been listed in the Aspeed documentation. Add it to the AST2600 machine
-> table.
-> 
-> While at it, shorten the document title. Listing every machine name in
-> the title duplicates the tables right below it, and made the title (and
-> its underline) grow past 350 columns. The machine list stays available
-> where it is readable, in the per-SoC tables.
+On 10/12/26 16:32, Emmanuel Blot wrote:
+> Two static helpers predate the rest of the file and carry no device
+> prefix.
 > 
 > Signed-off-by: Emmanuel Blot <emmanuel.blot@free.fr>
 > ---
->   docs/system/arm/aspeed.rst | 5 +++--
->   1 file changed, 3 insertions(+), 2 deletions(-)
+>   hw/rtc/ds1338.c | 12 ++++++------
+>   1 file changed, 6 insertions(+), 6 deletions(-)
 > 
-> diff --git a/docs/system/arm/aspeed.rst b/docs/system/arm/aspeed.rst
-> index 2d51ceeb84..933df41f96 100644
-> --- a/docs/system/arm/aspeed.rst
-> +++ b/docs/system/arm/aspeed.rst
-> @@ -1,5 +1,5 @@
-> -Aspeed family boards (``anacapa-bmc``, ``ast2500-evb``, ``ast2600-evb``, ``bletchley-bmc``, ``fuji-bmc``, ``gb200nvl-bmc``, ``fby35-bmc``, ``g220a-bmc``, ``palmetto-bmc``, ``quanta-q71l-bmc``, ``rainier-bmc``, ``romulus-bmc``, ``supermicrox11-bmc``, ``supermicrox11spi-bmc``, ``tiogapass-bmc``, ``witherspoon-bmc``, ``yosemitev2-bmc``)
-> -===============================================================================================================================================================================================================================================================================================================================================
-> +Aspeed family boards
-> +====================
+> diff --git a/hw/rtc/ds1338.c b/hw/rtc/ds1338.c
+> index 74aee6c746..1755a3a37c 100644
+> --- a/hw/rtc/ds1338.c
+> +++ b/hw/rtc/ds1338.c
+> @@ -57,7 +57,7 @@ static const VMStateDescription vmstate_ds1338 = {
+>       }
+>   };
 >   
->   The QEMU Aspeed machines model BMCs of various OpenPOWER systems and
->   Aspeed evaluation boards. They are based on different releases of the
-> @@ -33,6 +33,7 @@ AST2600 SoC based machines :
->   - ``fuji-bmc``             Facebook Fuji BMC
->   - ``bletchley-bmc``        Facebook Bletchley BMC
->   - ``fby35-bmc``            Facebook fby35 BMC
-> +- ``catalina-bmc``         Facebook Catalina BMC
->   - ``anacapa-bmc``          Facebook Anacapa BMC
->   - ``gb200nvl-bmc``         Nvidia GB200nvl BMC
+> -static void capture_current_time(DS1338State *s)
+> +static void ds1338_capture_current_time(DS1338State *s)
+>   {
+>       /* Capture the current time into the secondary registers
+>        * which will be actually read by the data transfer operation.
+> @@ -85,7 +85,7 @@ static void capture_current_time(DS1338State *s)
+>       s->nvram[6] = to_bcd(now.tm_year - 100);
+>   }
+>   
+> -static void inc_regptr(DS1338State *s)
+> +static void ds1338_inc_regptr(DS1338State *s)
+>   {
+>       /* The register pointer wraps around after 0x3F; wraparound
+>        * causes the current time/date to be retransferred into
+> @@ -93,7 +93,7 @@ static void inc_regptr(DS1338State *s)
+>        */
+>       s->ptr = (s->ptr + 1) & (NVRAM_SIZE - 1);
+>       if (!s->ptr) {
+> -        capture_current_time(s);
+> +        ds1338_capture_current_time(s);
+>       }
+>   }
+>   
+> @@ -108,7 +108,7 @@ static int ds1338_event(I2CSlave *i2c, enum i2c_event event)
+>            * START_SEND, because the guest can't get at that data
+>            * without going through a START_RECV which would overwrite it.
+>            */
+> -        capture_current_time(s);
+> +        ds1338_capture_current_time(s);
+>           break;
+>       case I2C_START_SEND:
+>           s->addr_byte = true;
+> @@ -129,7 +129,7 @@ static uint8_t ds1338_recv(I2CSlave *i2c)
+>   
+>       trace_ds1338_recv(s->ptr, res);
+>   
+> -    inc_regptr(s);
+> +    ds1338_inc_regptr(s);
+>       return res;
+>   }
+>   
+> @@ -204,7 +204,7 @@ static int ds1338_send(I2CSlave *i2c, uint8_t data)
+>       } else {
+>           s->nvram[s->ptr] = data;
+>       }
+> -    inc_regptr(s);
+> +    ds1338_inc_regptr(s);
+>       return 0;
+>   }
 >   
 > 
 
