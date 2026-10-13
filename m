@@ -4,121 +4,126 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13BA2CC6B03
-	for <qemu-riscv@archiver.kernel.org>; Tue, 13 Oct 2026 12:11:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE0E0CA9ED2
+	for <qemu-riscv@archiver.kernel.org>; Tue, 13 Oct 2026 13:02:28 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xGbLw-0007Xa-LW; Tue, 13 Oct 2026 08:11:36 -0400
+	id 1xGc8s-0002W5-Kr; Tue, 13 Oct 2026 09:02:08 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jaminlin1207@gmail.com>)
- id 1xGWRi-0000Ro-JH
- for qemu-riscv@nongnu.org; Tue, 13 Oct 2026 02:57:10 -0400
-Received: from mail-ej1-x62b.google.com ([2a00:1450:4864:20::62b])
+ (Exim 4.90_1) (envelope-from <marcandre.lureau@gmail.com>)
+ id 1xGc87-0002QJ-6p
+ for qemu-riscv@nongnu.org; Tue, 13 Oct 2026 09:01:28 -0400
+Received: from mail-dy1-x1331.google.com ([2607:f8b0:4864:20::1331])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <jaminlin1207@gmail.com>)
- id 1xGWRg-0005qp-TS
- for qemu-riscv@nongnu.org; Tue, 13 Oct 2026 02:57:10 -0400
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-c2e7496f947so410008566b.1
- for <qemu-riscv@nongnu.org>; Mon, 12 Oct 2026 23:57:08 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1791874627; cv=none;
+ (Exim 4.90_1) (envelope-from <marcandre.lureau@gmail.com>)
+ id 1xGc83-0001rn-1x
+ for qemu-riscv@nongnu.org; Tue, 13 Oct 2026 09:01:16 -0400
+Received: by mail-dy1-x1331.google.com with SMTP id
+ 5a478bee46e88-35943f55c06so2456886eec.0
+ for <qemu-riscv@nongnu.org>; Tue, 13 Oct 2026 06:01:14 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1791896473; cv=none;
  d=google.com; s=arc-20260327;
- b=p994DsFt14LQ4aNQpvDimvqxvN2OibK7VfcODx7+ZjDWmfrbIiwLXXZEvkiX6gwwSU
- utArEqcP92RpOP06IG47mEHsd2BwaaFW1BH+JkiFhGGlEiKppOms18GbqyZiw947Pkf1
- rI5iIYK33gv70EWjt8I/fU420eOtZjOP4zmnbg69q6EvjLyllyA10r5QVXzS6g8QvgRP
- ZdoPmphf0TCUSgIFtBfi1Fp3RS3SD3NPebn5/2KIucJq9WXPFQLUp/s/t/G8wfqGZXGB
- tJu/lF/3UCSlMU4aEY4e4lp3zIfFbeY5/MTxDEvzpQILYMnWP0jCmHIbOJzodFu6BCPK
- 0zSw==
+ b=gq1B9g5Lip8Cotn/CAw2aHOl4Iq2IG5PB9+V7kBq5V7T12tWne9XP76443RGK0lYhB
+ eB7dCK0XjJl680l2u6hodP2RvfrLZJlVy1T/Dz7s9TvudoveZDJVIl8Hww0IIMu3pjf5
+ Kz45LsNL4y2QfNLWT2Id2OalAbYeB4zGVNsKF4NX/0TXlWXEqUSvnyiyLHMZsNG6eKB0
+ JCxFYU0qLfILXXb5T/lZswb10kHqSgeE3hcgkLAx7/Tv9X/9LUovM3XS5LyETP3ATAW1
+ ycE0ykpS0jQK5vRcixV6LKdhhqOxWF7Ii1x434gyyNBJJZq+aulcAHnc/abLHEOn+ddR
+ 8c9A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=yAF65vIl+Pcsu3zOYkkdhrkunAFE6hSr8dy/8TmbRZs=;
- fh=hL2S0AR3PoOGKCaB5vzD7dHvqizU6XiOwqLE49dh4OE=;
- b=Yp4KUUgl3nXSCwo4rHMuyMiAf9ABMeXGDN+8G9KTbzhU4yQUPIR90/G7ScWz0GC6E/
- OJG/OaNqhGXwpsm7JNozuQ3oyLcTCaI9HlEPx+T+ls/tMPoijwtoWB5L/zyYc+UiojhP
- qoDS1O+hzKrrHE+/dcqiws+l3XaMUTacMOEkTTLtJG7egE6uhHunkRPPuqUolvnj5NPX
- DYA1u9KcpHUKKnDDrLDxbJpWItTVeykiirorsZKDkgDbydgpS05lyb3M89macR2HbcN6
- 7DiyNVnyFrxZlmtsBqqmSYKXLBmlGrXKYbdsEsRei9Fw/Mb0SIDXzWSL40GliG+F32x1
- x9Pw==; darn=nongnu.org
+ bh=PGY+6jZg5SqUd4l7AQTPRlEv3Ac2ljFgLNWX6rF802E=;
+ fh=ud5oTax22CaTZUZeDefi1ymhoMZ4cJKmAdzwdVNO2Qo=;
+ b=AlVRSYEBNah2kIRnpugJKL5ChwhnnwOCJLe2gJ0S+ZfoRqWBYdQfP6JOPHInBVxfHy
+ 45exRW1N9kSFlEnIxmX+vIsQoLyVKVZT9+Svb4MZySAt0d392r4uBlrRmbMJZV+/pxfj
+ foDQ6Uwp/90nH9zgfI2bATzQjkqSn1XaDlnXkVecdm671lXaz5dwnmm74tK0ToyGN3bJ
+ a3CMyttLB5plp2246jTmLOFyGbUQvfsSiEbu0DGXZojTQA4zSXGQjXbOc1fzEfYB16Z+
+ xehQHpV8VAuPmYsuIrM7NC35v1A69IPExsqDLsQkEp1ijzO6g56KkV3sD5kTU5h+Ykph
+ O/bg==; darn=nongnu.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1791874627; x=1792479427; darn=nongnu.org;
+ d=redhat.com; s=google; t=1791896473; x=1792501273; darn=nongnu.org;
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=yAF65vIl+Pcsu3zOYkkdhrkunAFE6hSr8dy/8TmbRZs=;
- b=SbUpZxRGXh34TjbnwxhaaSFhwh0IdOBvEuwRW8DkOLXo61K6CMOLZzY6ODxJEV14cG
- hckbGgRONLVd2+ibUtY30VXXfR7qY1jjGEHaMnRhju64qv83pQzJ2UIYfOTwREX2PNNA
- njT3KJsywZnjB/GgroIb8Bq94RSg//IgO9qAsA+nZL5P6raIpzKFcu+MeiiaveWAPDhu
- kqsQO1IG1OlivcdnS5tq9wGayLE/pXaXJS+S+BIN/7pMhVQ/Ygmt2KXk7gVFWTVkFuY/
- dTWGd/8z3EqWZyg2x83KwkhLvrWyISMT5XDcjoMUk4Ywg43rE3vBxdijkTYjr/ic+fBj
- tOEg==
+ bh=PGY+6jZg5SqUd4l7AQTPRlEv3Ac2ljFgLNWX6rF802E=;
+ b=LSuu6ve0vPwQb/oQjwAPPXgPmACPFsusqMi4Gj0Egcen9WUS7bp3tiFyWP68JpBDEB
+ VtLWgV25QeqjikqIc9MYhQKuN8jOilt6FF0g3tBcQSyNADCg5TzlFyj4DQr793sZJypv
+ sFwjdieXJaijYj1BNe1lO6NXNAY7//MNDFVkyU1wWYAbpjWvi3NkKEbWxEZJ2/wJAiUt
+ xxiNf7LT6Zr8gfkb62s1ipLdZuZ0CD2W+6WI7Mg2NHO+SoOE5KmCda6O9tIz8kPF+uMR
+ 4GKyUPJbLBlkZ0r9M/n2jaRtMZMh8N8jb9amXtLpsGy34wh6zt4xbO5TU+c9cGIC6Dkh
+ 3JYQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1791874627; x=1792479427;
+ d=1e100.net; s=20260707; t=1791896473; x=1792501273;
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=yAF65vIl+Pcsu3zOYkkdhrkunAFE6hSr8dy/8TmbRZs=;
- b=lcGaWdmDmLVlSiihf+TBIJrmcqP4RWg7by4xCv4jEUFkFrcqPX942qjF2o1zkzAPet
- Ze+1cVZXI+arehXBzyM85S2IcYo7OziKxeRyYlIaJHedzPoBIviyYHBol6MFdKlhXjnm
- L6+het3WmdWDrA3Qk7Ua9Xd/Y3u4OUm1FWYSgKL6LwRh11wmc8HDvrjhnrKt7wlvhN1y
- hQpoqBzh4lvtmJshtCNkbv1pB/ol31FvsRdc/n8rykQ36gMLHzT/0L2eZFHX+xrHPBq7
- TXag4L8qUxLpxaDLf+TXAXZzxrwuGbIFbLpFB91Mj9wX/fRUgmEZWhYnSZDfTNKd3yDg
- MBmQ==
+ bh=PGY+6jZg5SqUd4l7AQTPRlEv3Ac2ljFgLNWX6rF802E=;
+ b=ib8kw2s1PloNkEwZrepFg0h1ngThgauhW/603zblm5+79ISAQ5s70sQXmAWUAOfB4H
+ QXVH+uNFPaSN60ps/K43wnxsxnLoI6YC3h2Za+d1U3qY1tKJjZOQqmLLy3X0PbrVD5nU
+ WmiGNlWpNMBpyAogurEEVYcSQi3PU6MF3AszfwfL4Bh7IQCvC2YbG2AbmHzZt5u/Q1ys
+ wg8WMUyU5KBc9Sc8ARuUpapnfD+4zd/o+eKjRNDgwhvIXjEW2u6mVqB2ZU0QzAbjjDrh
+ lmPi+3q8rw2CleM6tCMJ9ohqtmqfUe49kTS/nW80oBrjE69rHh4EBCR8bdVR7F+gZpDf
+ j6GQ==
 X-Forwarded-Encrypted: i=1;
- AKwUvBy1SPFQimJpjuBjXbN2d2QK+t6xaoEZjiIWtwEsESAgm+pM2YqAiTiV0xkjcY2TAD2JNy1eRvciCYW2@nongnu.org
-X-Gm-Message-State: AFq9FYKLKqolH7gVJpZUr/sIwJl84e8Q3kF4LHb3Mnf9B4OjvEnfICnJ
- bYGeLLsLCSVAg/WYhhdq3hhOD6m5aE+zkbHejBZ5fb7dVqMgJjPas6G28NhtVUlNmCuU0wAxqve
- JrNaIWyRuZ9nRDGSEDIsTZS/MAWdbzgc=
-X-Gm-Gg: AYBFou0IOgbuoXShl+2MQJnnyl7BDokTqHxb9Jc8cV54Z1oUnoPpxN2eIvA8DGq5UYA
- ZTWoJT6wFXIj4c7Z+QuEUoFBMyDt3WXfVL53ZyOh/YqpqYJ1t5AoxkDO9gPjQnrSSKYQk01ZUM2
- K3k44V7zioR1JJSTfRMeJQQRvgAhuW6jLQQdmjF5v23WdGNOpAw2bZ6X4A8VSypg1iAZcTuWzFQ
- r9O5pNWwr505bI4nfrcy/WHqUvNrhsOQvxWkuPwYv8fYdbdgEhN0kIT+4kwuhjZDAd7ERdlJ3Vu
- xkaAwaSN2cm7TJaHhpzuFFHj677Mom2BDp2HWur6zDO3LmCo3K/fc/eb
-X-Received: by 2002:a17:906:4fc9:b0:c35:d261:636e with SMTP id
- a640c23a62f3a-c3667073d72mr183803166b.18.1791874626719; Mon, 12 Oct 2026
- 23:57:06 -0700 (PDT)
+ AKwUvBzi7Rj4uwZxNtLZvDgU8CulMdBr4MfKlvCIFRHYHsjGnnt0JCU4QaptoPy/iT2iEAYHrW8CF2rKfYci@nongnu.org
+X-Gm-Message-State: AFq9FYJ+zpghloGJpRKUnCHArhsMVjKohZ3AFOHyriY+iAVMHHw5Mn1L
+ b95XpUKhnmzEHkw0M66vlPphNT//rxACwWWuCPJpA5eUdUMRuUjNnDC2z5mjghkdG++A6KWyJ/G
+ NxAPLQJ+H51Si6ZD66j5/drzIX1aM0h4=
+X-Gm-Gg: AYBFou1X9hXgidxINABgklGlkKlRKALBIhmw7r9zuXKAwpWj2TYruQ6uxQebKNuSvnl
+ j50PJchHYand9vaA/VgFIrsSt2YRGqyMAzTYi9i7YC+icOlzvrukIPmNl0TsGWFw9eN+HeoO5xO
+ q3N5ET2vwHUmBwpb1zVovOIzpXSfmHavVRH/zU3r1JnrxP3P7aICX19EvzIuJ7eYPZeXyNgTa6D
+ 33WnW3U6lpN/WHt8GYBkpKY06ULbe2B0CHs1fzxu73L5p6GFkhMJDFNOU0USpl2lZCBbmpIn4og
+ 1aS+Io0fmDGHZK3ZfyMSoIuXo0R2RqD+0l4KhHoMeDWauN0t5eVP+oNjp1/7+lfK0h+c3Y8WX8w
+ GjbVi3BE/dLg=
+X-Received: by 2002:a05:693c:811a:b0:351:7e5d:3caf with SMTP id
+ 5a478bee46e88-3537dfb8c44mr17683397eec.7.1791896472825; Tue, 13 Oct 2026
+ 06:01:12 -0700 (PDT)
 MIME-Version: 1.0
-References: <20261012-bmc-minerva-v2-0-4c3dff084ec9@free.fr>
- <20261012-bmc-minerva-v2-1-4c3dff084ec9@free.fr>
-In-Reply-To: <20261012-bmc-minerva-v2-1-4c3dff084ec9@free.fr>
-From: =?UTF-8?B?5p6X5bu65piO?= <jaminlin1207@gmail.com>
-Date: Tue, 13 Oct 2026 14:56:56 +0800
-X-Gm-Features: AclHuK-iO7GDPciJLqtJlVfRWCT89sEuQ5uPrEZdf-6ZUjsaLdfAwzuvIe1aHyA
-Message-ID: <CA+8rw5ySLv3XbwcNwr2Rjj+6aSbAh_QX18O9ibr1iA1fUe=k1Q@mail.gmail.com>
-Subject: Re: [PATCH v2 01/50] docs/system/arm/aspeed: add the catalina-bmc
- machine
-To: Emmanuel Blot <emmanuel.blot@free.fr>
-Cc: qemu-devel@nongnu.org, =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>, 
- Peter Maydell <peter.maydell@linaro.org>,
- Steven Lee <steven_lee@aspeedtech.com>, 
- Troy Lee <leetroy@gmail.com>, Jamin Lin <jamin_lin@aspeedtech.com>, 
- Kane Chen <kane_chen@aspeedtech.com>,
- Andrew Jeffery <andrew@codeconstruct.com.au>, 
- Joel Stanley <joel@jms.id.au>,
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, qemu-arm@nongnu.org, 
- Patrick Leis <venture@google.com>, Fabiano Rosas <farosas@suse.de>, 
- Laurent Vivier <lvivier@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
- qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@oss.qualcomm.com>
+References: <20261013-query-reg-v2-0-6f95a2e139a9@redhat.com>
+ <20261013-query-reg-v2-4-6f95a2e139a9@redhat.com>
+ <87ik36gfe6.fsf@draig.linaro.org>
+In-Reply-To: <87ik36gfe6.fsf@draig.linaro.org>
+From: =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>
+Date: Tue, 13 Oct 2026 17:00:59 +0400
+X-Gm-Features: AclHuK_blaIwYzH5KQnLuLReYYXS7Ov9FVamAZSe3X0WjS8D3Um413MnIE6moeg
+Message-ID: <CAJ+F1CK938-GciwPJj_KjtvKZ04fvKhi8UcSHHORmoboVURzeQ@mail.gmail.com>
+Subject: Re: [PATCH v2 04/10] gdbstub: add gdb_register_internal_coprocessor()
+To: =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>
+Cc: qemu-devel@nongnu.org, "Dr. David Alan Gilbert" <dave@treblig.org>, 
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@oss.qualcomm.com>, 
+ Zhao Liu <zhao1.liu@intel.com>, Peter Maydell <peter.maydell@linaro.org>, 
+ Chinmay Rath <rathc@linux.ibm.com>, Nicholas Piggin <npiggin@gmail.com>, 
+ Glenn Miles <milesg@linux.ibm.com>, Harsh Prateek Bora <harshpb@linux.ibm.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Chao Liu <chao.liu@processmission.com>, Max Filippov <jcmvbkbc@gmail.com>,
+ qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, 
+ Paolo Bonzini <pbonzini@redhat.com>, Laurent Vivier <laurent@vivier.eu>, 
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Artyom Tarasenko <atar4qemu@gmail.com>, Helge Deller <deller@gmx.de>,
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, 
+ Warner Losh <imp@bsdimp.com>, Kyle Evans <kevans@freebsd.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::62b;
- envelope-from=jaminlin1207@gmail.com; helo=mail-ej1-x62b.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1331;
+ envelope-from=marcandre.lureau@gmail.com; helo=mail-dy1-x1331.google.com
+X-Spam_score_int: -16
+X-Spam_score: -1.7
 X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.001,
+ FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.25,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Tue, 13 Oct 2026 08:10:02 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -133,66 +138,280 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Emmanuel Blot via qemu development <qemu-devel@nongnu.org> =E6=96=BC
-2026=E5=B9=B410=E6=9C=8812=E6=97=A5=E9=80=B1=E4=B8=80 =E4=B8=8B=E5=8D=8810:=
-55=E5=AF=AB=E9=81=93=EF=BC=9A
+Hi
+
+On Tue, Oct 13, 2026 at 12:51=E2=80=AFPM Alex Benn=C3=A9e <alex.bennee@lina=
+ro.org> wrote:
 >
-> The Facebook Catalina BMC machine is supported by hw/arm but has never
-> been listed in the Aspeed documentation. Add it to the AST2600 machine
-> table.
+> Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com> writes:
 >
-> While at it, shorten the document title. Listing every machine name in
-> the title duplicates the tables right below it, and made the title (and
-> its underline) grow past 350 columns. The machine list stays available
-> where it is readable, in the per-SoC tables.
+> > Add support for registering coprocessor features that are only visible
+> > to QEMU's internal APIs (HMP monitor $register expressions, plugins) bu=
+t
+> > hidden from GDB's target description XML.
+> >
+> > When a feature is registered as internal:
+> > - It is excluded from the target.xml sent to GDB
+> > - Its XML is not served via qXfer:features:read
+> > - 'p'/'P' packets for internal register numbers return E14
+> >
+> > This is useful for exposing system registers to the HMP monitor without
+> > affecting GDB's register namespace. Exposing aliases or synthetic
+> > registers through GDB's target description can cause problems: name
+> > collisions with GDB's pseudo-registers, independent register caching,
+> > and missing DWARF unwind rules.
 >
-> Signed-off-by: Emmanuel Blot <emmanuel.blot@free.fr>
-> ---
->  docs/system/arm/aspeed.rst | 5 +++--
->  1 file changed, 3 insertions(+), 2 deletions(-)
+> Hmm are they *that* useful for HMP then?
 >
-> diff --git a/docs/system/arm/aspeed.rst b/docs/system/arm/aspeed.rst
-> index 2d51ceeb84..933df41f96 100644
-> --- a/docs/system/arm/aspeed.rst
-> +++ b/docs/system/arm/aspeed.rst
-> @@ -1,5 +1,5 @@
-> -Aspeed family boards (``anacapa-bmc``, ``ast2500-evb``, ``ast2600-evb``,=
- ``bletchley-bmc``, ``fuji-bmc``, ``gb200nvl-bmc``, ``fby35-bmc``, ``g220a-=
-bmc``, ``palmetto-bmc``, ``quanta-q71l-bmc``, ``rainier-bmc``, ``romulus-bm=
-c``, ``supermicrox11-bmc``, ``supermicrox11spi-bmc``, ``tiogapass-bmc``, ``=
-witherspoon-bmc``, ``yosemitev2-bmc``)
-> -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +Aspeed family boards
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> The front-ends do limit what they export to gdb (see for example
+> ARM_CP_NO_GDB) generally because reading them causes side-effects. Those
+> restrictions are also a reason to limit them from the HMP interface.
+
+I am not a user, but I can imagine they are useful for developers.
+
+I would like to be able to implement "info registers" purely based on
+QMP for ex.
+
 >
->  The QEMU Aspeed machines model BMCs of various OpenPOWER systems and
->  Aspeed evaluation boards. They are based on different releases of the
-> @@ -33,6 +33,7 @@ AST2600 SoC based machines :
->  - ``fuji-bmc``             Facebook Fuji BMC
->  - ``bletchley-bmc``        Facebook Bletchley BMC
->  - ``fby35-bmc``            Facebook fby35 BMC
-> +- ``catalina-bmc``         Facebook Catalina BMC
->  - ``anacapa-bmc``          Facebook Anacapa BMC
->  - ``gb200nvl-bmc``         Nvidia GB200nvl BMC
->
+> >
+> > Internal features must be registered after all GDB-visible features to
+> > keep remote register numbering consistent. This ordering is enforced
+> > with an assertion.
+> >
+> > Signed-off-by: Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com>
+> > ---
+> >  gdbstub/gdbstub.c      | 71 ++++++++++++++++++++++++++++++++++++++++++=
+++------
+> >  include/exec/gdbstub.h | 21 +++++++++++++++
+> >  2 files changed, 84 insertions(+), 8 deletions(-)
+> >
+> > diff --git a/gdbstub/gdbstub.c b/gdbstub/gdbstub.c
+> > index 912e31b66744..ac0f76d62333 100644
+> > --- a/gdbstub/gdbstub.c
+> > +++ b/gdbstub/gdbstub.c
+> > @@ -54,6 +54,7 @@ typedef struct GDBRegisterState {
+> >      gdb_get_reg_cb get_reg;
+> >      gdb_set_reg_cb set_reg;
+> >      const GDBFeature *feature;
+> > +    bool internal; /* hidden from GDB, accessible via API/monitor */
+> >  } GDBRegisterState;
+> >
+> >  GDBState gdbserver_state;
+> > @@ -385,6 +386,11 @@ static const char *get_feature_xml(const char *p, =
+const char **newp,
+> >              }
+> >              for (guint i =3D 0; i < cpu->gdb_regs->len; i++) {
+> >                  r =3D &g_array_index(cpu->gdb_regs, GDBRegisterState, =
+i);
+> > +                /* The core target.xml feature must never be internal.=
+ */
+> > +                g_assert(i > 0 || !r->internal);
+> > +                if (r->internal) {
+> > +                    continue;
+> > +                }
+> >                  g_ptr_array_add(
+> >                      xml,
+> >                      g_markup_printf_escaped("<xi:include href=3D\"%s\"=
+/>",
+> > @@ -400,6 +406,9 @@ static const char *get_feature_xml(const char *p, c=
+onst char **newp,
+> >      /* Is it one of the features? */
+> >      for (guint i =3D 0; i < cpu->gdb_regs->len; i++) {
+> >          r =3D &g_array_index(cpu->gdb_regs, GDBRegisterState, i);
+> > +        if (r->internal) {
+> > +            continue;
+> > +        }
+> >          if (strncmp(p, r->feature->xmlname, len) =3D=3D 0) {
+> >              return r->feature->xml;
+> >          }
+> > @@ -563,13 +572,14 @@ int gdb_write_register(CPUState *cpu, uint8_t *me=
+m_buf, int reg)
+> >
+> >  static void gdb_register_feature(CPUState *cpu, int base_reg,
+> >                                   gdb_get_reg_cb get_reg, gdb_set_reg_c=
+b set_reg,
+> > -                                 const GDBFeature *feature)
+> > +                                 const GDBFeature *feature, bool inter=
+nal)
+> >  {
+> >      GDBRegisterState s =3D {
+> >          .base_reg =3D base_reg,
+> >          .get_reg =3D get_reg,
+> >          .set_reg =3D set_reg,
+> > -        .feature =3D feature
+> > +        .feature =3D feature,
+> > +        .internal =3D internal
+> >      };
+> >
+> >      trace_gdbxml_register_feature(feature->name, feature->xmlname,
+> > @@ -605,7 +615,7 @@ void gdb_init_cpu(CPUState *cpu)
+> >          assert(feature->base_reg =3D=3D 0);
+> >          gdb_register_feature(cpu, 0,
+> >                               cc->gdb_read_register, cc->gdb_write_regi=
+ster,
+> > -                             feature);
+> > +                             feature, false);
+> >          cpu->gdb_next_base_reg =3D cpu->gdb_num_g_regs =3D feature->nu=
+m_regs;
+> >      } else {
+> >          cpu->gdb_next_base_reg =3D cpu->gdb_num_g_regs =3D cc->gdb_num=
+_core_regs;
+> > @@ -616,20 +626,26 @@ void gdb_init_cpu(CPUState *cpu)
+> >                            cc->gdb_num_core_regs);
+> >  }
+> >
+> > -void gdb_register_coprocessor(CPUState *cpu,
+> > -                              gdb_get_reg_cb get_reg, gdb_set_reg_cb s=
+et_reg,
+> > -                              const GDBFeature *feature)
+> > +static void do_gdb_register_coprocessor(CPUState *cpu,
+> > +                                        gdb_get_reg_cb get_reg,
+> > +                                        gdb_set_reg_cb set_reg,
+> > +                                        const GDBFeature *feature,
+> > +                                        bool internal)
+> >  {
+> >      GDBRegisterState *s;
+> >      guint i;
+> >      int base_reg =3D cpu->gdb_next_base_reg;
+> >
+> >      for (i =3D 0; i < cpu->gdb_regs->len; i++) {
+> > -        /* Check for duplicates.  */
+> >          s =3D &g_array_index(cpu->gdb_regs, GDBRegisterState, i);
+> > +        /* Check for duplicates.  */
+> >          if (s->feature =3D=3D feature) {
+> >              return;
+> >          }
+> > +        /* GDB-visible features must not follow internal ones.  */
+> > +        if (!internal) {
+> > +            g_assert(!s->internal);
+> > +        }
+> >      }
+> >
+> >      if (base_reg < feature->base_reg) {
+> > @@ -637,12 +653,27 @@ void gdb_register_coprocessor(CPUState *cpu,
+> >                                                feature->base_reg);
+> >          base_reg =3D feature->base_reg;
+> >      }
+> > -    gdb_register_feature(cpu, base_reg, get_reg, set_reg, feature);
+> > +    gdb_register_feature(cpu, base_reg, get_reg, set_reg, feature, int=
+ernal);
+> >
+> >      /* Add to end of list.  */
+> >      cpu->gdb_next_base_reg =3D base_reg + feature->num_regs;
+> >  }
+> >
+> > +void gdb_register_coprocessor(CPUState *cpu,
+> > +                              gdb_get_reg_cb get_reg, gdb_set_reg_cb s=
+et_reg,
+> > +                              const GDBFeature *feature)
+> > +{
+> > +    do_gdb_register_coprocessor(cpu, get_reg, set_reg, feature, false)=
+;
+> > +}
+> > +
+> > +void gdb_register_internal_coprocessor(CPUState *cpu,
+> > +                                       gdb_get_reg_cb get_reg,
+> > +                                       gdb_set_reg_cb set_reg,
+> > +                                       const GDBFeature *feature)
+> > +{
+> > +    do_gdb_register_coprocessor(cpu, get_reg, set_reg, feature, true);
+> > +}
+> > +
+> >  void gdb_unregister_coprocessor_all(CPUState *cpu)
+> >  {
+> >      /*
+> > @@ -1223,6 +1254,18 @@ static void handle_remove_bp(GArray *params, voi=
+d *user_ctx)
+> >   * the remote gdb to fallback to older methods.
+> >   */
+> >
+> > +static bool gdb_register_is_internal(CPUState *cpu, int reg)
+> > +{
+> > +    for (guint i =3D 0; i < cpu->gdb_regs->len; i++) {
+> > +        GDBRegisterState *r =3D &g_array_index(cpu->gdb_regs, GDBRegis=
+terState, i);
+> > +
+> > +        if (r->base_reg <=3D reg && reg < r->base_reg + r->feature->nu=
+m_regs) {
+> > +            return r->internal;
+> > +        }
+> > +    }
+> > +    return false;
+> > +}
+> > +
+> >  static void handle_set_reg(GArray *params, void *user_ctx)
+> >  {
+> >      int reg_size;
+> > @@ -1232,6 +1275,12 @@ static void handle_set_reg(GArray *params, void =
+*user_ctx)
+> >          return;
+> >      }
+> >
+> > +    if (gdb_register_is_internal(gdbserver_state.g_cpu,
+> > +                                 gdb_get_cmd_param(params, 0)->val_ull=
+)) {
+> > +        gdb_put_packet("E14");
+> > +        return;
+> > +    }
+> > +
+> >      reg_size =3D strlen(gdb_get_cmd_param(params, 1)->data) / 2;
+> >      gdb_hextomem(gdbserver_state.mem_buf, gdb_get_cmd_param(params, 1)=
+->data, reg_size);
+> >      gdb_write_register(gdbserver_state.g_cpu, gdbserver_state.mem_buf-=
+>data,
+> > @@ -1248,6 +1297,12 @@ static void handle_get_reg(GArray *params, void =
+*user_ctx)
+> >          return;
+> >      }
+> >
+> > +    if (gdb_register_is_internal(gdbserver_state.g_cpu,
+> > +                                 gdb_get_cmd_param(params, 0)->val_ull=
+)) {
+> > +        gdb_put_packet("E14");
+> > +        return;
+> > +    }
+> > +
+> >      reg_size =3D gdb_read_register(gdbserver_state.g_cpu,
+> >                                   gdbserver_state.mem_buf,
+> >                                   gdb_get_cmd_param(params, 0)->val_ull=
+);
+> > diff --git a/include/exec/gdbstub.h b/include/exec/gdbstub.h
+> > index 75eb4d9c365e..1bc778324758 100644
+> > --- a/include/exec/gdbstub.h
+> > +++ b/include/exec/gdbstub.h
+> > @@ -40,6 +40,27 @@ void gdb_register_coprocessor(CPUState *cpu,
+> >                                gdb_get_reg_cb get_reg, gdb_set_reg_cb s=
+et_reg,
+> >                                const GDBFeature *feature);
+> >
+> > +/**
+> > + * gdb_register_internal_coprocessor() - register internal registers
+> > + *
+> > + * Like gdb_register_coprocessor(), but the feature is NOT exposed to
+> > + * GDB via the target description XML. The registers are only
+> > + * accessible through QEMU's internal APIs (HMP monitor ``$register``
+> > + * expressions via gdb_get_register_list()).
+> > + *
+> > + * Internal features must be registered after all GDB-visible features
+> > + * to avoid register numbering mismatches with GDB.
+> > + *
+> > + * @cpu - the CPU associated with registers
+> > + * @get_reg - get function
+> > + * @set_reg - set function
+> > + * @feature - the GDBFeature describing the registers
+> > + */
+> > +void gdb_register_internal_coprocessor(CPUState *cpu,
+> > +                                       gdb_get_reg_cb get_reg,
+> > +                                       gdb_set_reg_cb set_reg,
+> > +                                       const GDBFeature *feature);
+> > +
+> >  /**
+> >   * gdb_unregister_coprocessor_all() - unregisters supplemental set of =
+registers
+> >   * @cpu - the CPU associated with registers
 >
 > --
-> 2.50.1
+> Alex Benn=C3=A9e
+> Virtualisation Tech Lead @ Linaro
 >
->
-
-Reviewed-by: Jamin Lin <jaminlin1207@gmail.com>
 
