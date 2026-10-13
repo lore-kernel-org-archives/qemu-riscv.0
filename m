@@ -4,79 +4,144 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 091D9CC6B08
-	for <qemu-riscv@archiver.kernel.org>; Tue, 13 Oct 2026 14:35:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 878C6CC6B12
+	for <qemu-riscv@archiver.kernel.org>; Tue, 13 Oct 2026 16:02:39 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xGdad-0000eu-56; Tue, 13 Oct 2026 10:34:51 -0400
+	id 1xGexW-00028i-Ol; Tue, 13 Oct 2026 12:02:35 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dg@treblig.org>)
- id 1xGdaZ-0000cm-2W; Tue, 13 Oct 2026 10:34:47 -0400
-Received: from mx.treblig.org ([2a00:1098:5b::1])
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1xGevs-0001Db-To
+ for qemu-riscv@nongnu.org; Tue, 13 Oct 2026 12:00:57 -0400
+Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dg@treblig.org>)
- id 1xGdaW-0004AY-6j; Tue, 13 Oct 2026 10:34:46 -0400
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=treblig.org
- ; s=bytemarkmx;
- h=Content-Type:MIME-Version:Message-ID:Subject:From:Date:From
- :Subject; bh=iggU6xo52j7UG5f89Bng/0Pyh6G/SqJ/YSGM/n8n/nc=; b=ILI3HUbMwaiTNmXt
- 4MVkZAkzrVh7f42Z7Oedb0nzJydEHlwYOZpVXGkvzLq03Wd5VeEUcxaBINq211n78SwzoLjqfxWbm
- 4rIEQy/8XkGxTObDppvF+O40NInOuiKoEpljXwPwjU3yuMBr5Cq1QdkPq9gvQLPA4cW0QvP9EIrjl
- V5W2ZhKdlP2oQySUS2NJEquEyGx9neFfH00aDhsmsVkmLd+Mk4z5M7ecApZ88PCTKJ6ZFSbHiWjeW
- QfSLwjwNtkuzpGLLxspPQIvTxK+0nneYo1FDNfwXrGITejs/z57T2qV4sd5yXSFOLNwl3QCaxmqcs
- QfQruF+0+a9iaedscQ==;
-Received: from dg by mx.treblig.org with local (Exim 4.98.2)
- (envelope-from <dg@treblig.org>) id 1xGdaK-00000003l3Q-2nef;
- Tue, 13 Oct 2026 14:34:32 +0000
-Date: Tue, 13 Oct 2026 14:34:32 +0000
-From: "Dr. David Alan Gilbert" <dave@treblig.org>
-To: Peter Maydell <peter.maydell@linaro.org>
-Cc: =?iso-8859-1?Q?Marc-Andr=E9?= Lureau <marcandre.lureau@redhat.com>,
- Alex =?iso-8859-1?Q?Benn=E9e?= <alex.bennee@linaro.org>,
- qemu-devel@nongnu.org,
- Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@oss.qualcomm.com>,
- Zhao Liu <zhao1.liu@intel.com>, Chinmay Rath <rathc@linux.ibm.com>,
- Nicholas Piggin <npiggin@gmail.com>, Glenn Miles <milesg@linux.ibm.com>,
- Harsh Prateek Bora <harshpb@linux.ibm.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu@processmission.com>,
- Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
- qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
- Paolo Bonzini <pbonzini@redhat.com>, Laurent Vivier <laurent@vivier.eu>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Artyom Tarasenko <atar4qemu@gmail.com>, Helge Deller <deller@gmx.de>,
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
- Warner Losh <imp@bsdimp.com>, Kyle Evans <kevans@freebsd.org>
-Subject: Re: [PATCH v2 04/10] gdbstub: add gdb_register_internal_coprocessor()
-Message-ID: <as5BeHc6uCyYynwz@gallifrey>
-References: <20261013-query-reg-v2-0-6f95a2e139a9@redhat.com>
- <20261013-query-reg-v2-4-6f95a2e139a9@redhat.com>
- <87ik36gfe6.fsf@draig.linaro.org>
- <CAJ+F1CK938-GciwPJj_KjtvKZ04fvKhi8UcSHHORmoboVURzeQ@mail.gmail.com>
- <CAFEAcA-sKfp-1u_UaPbv=SCbDNYrdc69NZdVPT8RTTXgwXYSZQ@mail.gmail.com>
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1xGevq-0007wi-MI
+ for qemu-riscv@nongnu.org; Tue, 13 Oct 2026 12:00:52 -0400
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 69DE3tMU1460089
+ for <qemu-riscv@nongnu.org>; Tue, 13 Oct 2026 16:00:48 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ 65iobGMBDsqCGXa4pUiVkbK1NL/dB12YHS0tcG5CZts=; b=nqhXRlrIlynwSjQD
+ SdWvqEzhNZTqKCuJLcm6y1N/RgctxPZPHI1ZyrvwmnWMAkIS9hwDiQj2QwMKBUU9
+ 335dn6aB14/F6J4LYtwdJK/b3Ix/Nb2/4fy9hZUXC0euS0fyiw70eQxufn9NoipI
+ CIh22ozfNVMUVpuYMhsVtOSUEr2VnwYEFd9izMWCleCZnXa0DGHIAW31o1oRkY1b
+ m6wMXuFGjrBv3zEe9gNtQmUDieOZjWFyeeMiuN9U8dhLhP3GYnT0MOPc2TwV7HJQ
+ VZI82NOyptTmIyxM0KWwA3VHAU6VXTwVC9ddQLm7slHo4kPqcbLuiI89XrKDf5ES
+ Acdx+A==
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com
+ [209.85.222.197])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h9hmjssef-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Tue, 13 Oct 2026 16:00:47 +0000 (GMT)
+Received: by mail-qk1-f197.google.com with SMTP id
+ af79cd13be357-936aa34873bso644919885a.3
+ for <qemu-riscv@nongnu.org>; Tue, 13 Oct 2026 09:00:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1791907247; x=1792512047; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=65iobGMBDsqCGXa4pUiVkbK1NL/dB12YHS0tcG5CZts=;
+ b=bO827PZEqD/1KzbPiNBjGrOcjfB0EIO1f7Q15XRs7Ysi55CUKobGeU6Q+krxnt14AX
+ ojDW7GfEjnwA5MmxG/ZhVgrUIzPQMWy0ojfpp5mSp7ALRei1Yewd1HKsyK0iw4Mlf0id
+ XlgoIExXAksSGvri9Bnguq08PuU86QO3PZB15smrIe1tk7E89//OUlV7SAduEjJM3k5m
+ PGkRglnBMA8hBqWEMcd2ljDgfV0jC98jWlr+OmMWycbBMmTW+WIzp0cT3MjYm50erDP4
+ 88EXxc8rPcKoCX9vCMI6wZcdCR61SUcY59usGX0tOTLKQoKqDWkgedj/3oO7EV81xxCv
+ 1gcQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1791907247; x=1792512047;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=65iobGMBDsqCGXa4pUiVkbK1NL/dB12YHS0tcG5CZts=;
+ b=0nzTrfCC6g+EvWS8WmPJtUcXlPyx6HIktffraNmtfjdGWpOC6O2ZM3pI7nI0jiFQRh
+ WHdAr6ck1fFMnO61J349l/W5KnQb6mlDNgVoXaSVt6dsjX+Kw0DevaBJV5vdqBW4nHVb
+ 9DIHULZFYgsDbHKVkgHb5c5ciPyxxEVQRjEbU7acz6Ncm12nJP5TVXVagKoXx5Nh7jzM
+ e2ja0jC+VvW8/QR3NypxPy99kjz4kRXSQnD6jXtjHcCvcwwbnGsX6KwxzHckG4nJ8OJd
+ JiUpLyowsi7CAQqMohKCZFHWOiynT9hQTm3ngfpUVFftLxVPsygGheG2Wjha2Bds2ToJ
+ Th2w==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBx7+PhR1fNi8lFg7NDhx/BZl6P5imKRDtv9XOLQHFt13jykum2GodHA1YgdW9fQp2AdNC7o3PJuX99L@nongnu.org
+X-Gm-Message-State: AFq9FYJ1NAZX2a71dQgzC+pOF7dOIxt8curs+vENdZ2qgaLShACQtphR
+ vngeX2w/qcUQfl4zF88+OOjN4MiNhu1OUlKwbmK/VfJZVdz9mn02MEKTw/WXo75/pAzm82rWSwk
+ cV9KW9H60LPtyrSfreJFiTPGR9+LGKH9WqPm3YZU9fNtCnaBl6C37yaQehA==
+X-Gm-Gg: AYBFou0pQaPV1/oMjPhC2WI2SFUXpj42N8UJONs/6XNuV6osK3fB4ttObKPYZ5U3Z00
+ FYmtdHimbDPhK/Bbj7BD9j0wSjZHQyDcVw1PSGFJMmex+IlIiQiQIIIlLjm1A9k7uFsURsiwfbP
+ S0uRdZOUn8Gtq/YhoVjQV6/liNJYArYPmvnZwjWsBwksMdlJt97Ej78u1gG3wUC0p7uxHHw9pwf
+ 7pdaTs66nqxmQKHzlhj1fIAVkr75UPAKsV58ubkm5oz6zOkr2D8SEsWewOkSIx7Tc7RVPh8AH9J
+ FqcFyPld7tIK0YyhNWPh8dzxLUUY0O7DAieU5jNfYTGUSpQxoHKZDvxaGXMrdeUpeihW0qEgNW8
+ mW/DRBFx7/C8NAo3+0wJn5JfEoYwUUDy21Ko=
+X-Received: by 2002:a05:620a:371b:b0:93e:6c4f:bdfb with SMTP id
+ af79cd13be357-93ebd22ab17mr2267548285a.48.1791907246225; 
+ Tue, 13 Oct 2026 09:00:46 -0700 (PDT)
+X-Received: by 2002:a05:620a:371b:b0:93e:6c4f:bdfb with SMTP id
+ af79cd13be357-93ebd22ab17mr2267538185a.48.1791907245610; 
+ Tue, 13 Oct 2026 09:00:45 -0700 (PDT)
+Received: from [192.168.68.107] ([152.234.126.58])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-93ef502608bsm269171285a.25.2026.10.13.09.00.43
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 13 Oct 2026 09:00:44 -0700 (PDT)
+Message-ID: <f2600f08-73a0-4259-9175-7f644997c366@oss.qualcomm.com>
+Date: Tue, 13 Oct 2026 13:00:41 -0300
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] target/riscv: Use TSO barriers instead of full barriers
+ for Ztso
+To: Palmer Dabbelt <palmer@dabbelt.com>
+Cc: rick@sloservers.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
+ Alistair Francis <Alistair.Francis@wdc.com>, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com
+References: <mhng-29CE4AFA-6FA7-4BFC-8C6F-F6719A684302@Palmers-Mini.rwc.dabbelt.com>
+From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Content-Language: en-US
+In-Reply-To: <mhng-29CE4AFA-6FA7-4BFC-8C6F-F6719A684302@Palmers-Mini.rwc.dabbelt.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAFEAcA-sKfp-1u_UaPbv=SCbDNYrdc69NZdVPT8RTTXgwXYSZQ@mail.gmail.com>
-X-Chocolate: 70 percent or better cocoa solids preferably
-X-Operating-System: Linux/6.12.111+deb13-amd64 (x86_64)
-X-Uptime: 14:32:12 up 13 days, 23:53,  2 users,  load average: 0.00, 0.02, 0.00
-User-Agent: Mutt/2.2.13 (2024-03-09)
-Received-SPF: pass client-ip=2a00:1098:5b::1; envelope-from=dg@treblig.org;
- helo=mx.treblig.org
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEzMDA2MyBTYWx0ZWRfX/m5xbu/iOH/c
+ 5RxqBlsLvI8JIELD0R0OhAvX0adOONPL7i6hQhwuXwJ1nVnfb9BAKuGQUjG0x5kGY4d7shjuIto
+ +XzE2s1tlxgQSUzLHIu3YKcjvJMQFbU=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEzMDA2MyBTYWx0ZWRfX8x+RapHtF4Y3
+ lJVC6+cqW//c4tnhGwwC4+tzRzOqCqSUkizqBv2oX7Sq3sEFfQxCR4HAcQhDOyXrp9n5gcbSAcI
+ jJRvWEZpl3kcIbpHVKNpKNqdlj6XogGm+sXm/XDGwCgD2rLSBPNNMy4VEE8Qdz6boHkwIQeB1w3
+ O8I5FcDcgUi0lUhbo7HD37vuidJsed4iE7GG6wvmdX3a3JA2WRte2TCGa7jDFttUgs+2F0tm5Jr
+ bKLR+JTDyOcZKMakRc5t4Fmwx0dDQ+1gQDbEfjJ6upa4Pp5ZYtNJR+3H7MN2wBQY1ufQxlAwVzs
+ XvdGwP0ePJwFVHzDluahM9VfYS48/w2IyA6J+ZwTMat794wkWUe5pDAAJGgcnpO74bcXEvDbIzY
+ cIwM1QOX2R9ZVN0xohtDitUwe1zlHakSrpL/u4vBbOAsh0bPxEUqY2EKw/PYbAyybHzcXn2Zgak
+ tSIYBe8AJXg/ZqX1E5Q==
+X-Proofpoint-ORIG-GUID: Wo7YJPHp2o9V3gOkd3I5Tg9__WK-N-iP
+X-Authority-Analysis: v=2.4 cv=O5+sLx9W c=1 sm=1 tr=0 ts=6ace55af cx=c_pps
+ a=50t2pK5VMbmlHzFWWp8p/g==:117 a=XIBTAJF/fpiF5bhQ2IRv1g==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
+ a=EUspDBNiAAAA:8 a=_O3DOGVWAAAA:8 a=F-tV29oOAAAA:8 a=k__Iyt3_JXw3inKg9pMA:9
+ a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10 a=IoWCM6iH3mJn3m4BftBB:22
+ a=2TKV-7w1aU1AVAwN0oqT:22 a=Y2dezMJzicAI2PZykhZh:22
+X-Proofpoint-GUID: Wo7YJPHp2o9V3gOkd3I5Tg9__WK-N-iP
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-13_01,2026-10-09_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 impostorscore=0 adultscore=0 spamscore=0 priorityscore=1501
+ bulkscore=0 malwarescore=0 lowpriorityscore=0 phishscore=0 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610130063
+Received-SPF: pass client-ip=205.220.180.131;
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -92,75 +157,112 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-* Peter Maydell (peter.maydell@linaro.org) wrote:
-> On Tue, 13 Oct 2026 at 14:01, Marc-André Lureau
-> <marcandre.lureau@redhat.com> wrote:
-> >
-> > Hi
-> >
-> > On Tue, Oct 13, 2026 at 12:51 PM Alex Bennée <alex.bennee@linaro.org> wrote:
-> > >
-> > > Marc-André Lureau <marcandre.lureau@redhat.com> writes:
-> > >
-> > > > Add support for registering coprocessor features that are only visible
-> > > > to QEMU's internal APIs (HMP monitor $register expressions, plugins) but
-> > > > hidden from GDB's target description XML.
-> > > >
-> > > > When a feature is registered as internal:
-> > > > - It is excluded from the target.xml sent to GDB
-> > > > - Its XML is not served via qXfer:features:read
-> > > > - 'p'/'P' packets for internal register numbers return E14
-> > > >
-> > > > This is useful for exposing system registers to the HMP monitor without
-> > > > affecting GDB's register namespace. Exposing aliases or synthetic
-> > > > registers through GDB's target description can cause problems: name
-> > > > collisions with GDB's pseudo-registers, independent register caching,
-> > > > and missing DWARF unwind rules.
-> > >
-> > > Hmm are they *that* useful for HMP then?
-> > >
-> > > The front-ends do limit what they export to gdb (see for example
-> > > ARM_CP_NO_GDB) generally because reading them causes side-effects. Those
-> > > restrictions are also a reason to limit them from the HMP interface.
-> >
-> > I am not a user, but I can imagine they are useful for developers.
-> >
-> > I would like to be able to implement "info registers" purely based on
-> > QMP for ex.
-> 
-> Yes, getting rid of the current hacks that "info registers" does will
-> be a very nice cleanup.
-> 
-> I think that the reason we get this internal-only interface is
-> that gdb itself sets up pseudo-registers for various things that
-> are nice for a human to have but are not directly exposed that
-> way in the XML. So for HMP we can either:
->  (a) not expose that human-facing convenience at all
->  (b) reimplement the equivalent of the pseudo-registers and
->      aliases, to the extent that we care to do so, in a way
->      that they don't appear in the XML we expose to gdb
-> 
-> Personally I'm sceptical of the utility of the "info registers"
-> interface -- if you want to see what the guest CPU is doing then
-> you're going to have a much better time connecting gdb to the debug
-> stub rather than using the extremely rudimentary monitor commands --
-> but "preserve the existing functionality" is a much easier path
-> towards getting this cleaned up than trying to get agreement that
-> we can drop some aspects of it, so I support doing that.
 
-It's useful for getting hints on hung VMs;  getting a gdb into a container
-on some cluster of hosts and someone letting you poke with it is
-often pretty hard.
-Getting an admin to run one command when they find a hung VM is more doable.
-(Similarly in cases where they wont send you a full vm dump)
 
-Dave
+On 10/13/2026 10:14 AM, Palmer Dabbelt wrote:
+> On Tue, 13 Oct 2026 04:57:49 PDT (-0700), daniel.barboza@oss.qualcomm.com wrote:
+>>
+>>
+>> On 10/2/2026 10:47 AM, Rick Richard wrote:
+>>> With Ztso, plain loads and stores follow RVTSO, but the barriers
+>>> around them use TCG_MO_ALL.  That also orders a store before a later
+>>> load, which TSO doesn't require, and is expensive: on x86 hosts it
+>>> adds a locked instruction around every load and store in a
+>>> multi-threaded guest.
+> 
+> Thanks.  I'm not quite sure why I had TCG_MO_ALL in there, I think maybe I just misread the TCG_MO_* vs TCG_BAR_* blurb?
+> 
+> Reviewed-by: Palmer Dabbelt <palmer@dabbelt.com>
+> 
+>>> The barrier after a load now only keeps later loads and stores
+>>> behind it, and the barrier before a store only keeps earlier loads
+>>> and stores ahead of it.  That is all TSO needs.
+>>>
+>>
+>> Fixes: 09c4e88759 ("RISC-V: Add support for Ztso")
+>>
+>>> Signed-off-by: Rick Richard <rick@sloservers.com>
+>>> ---
+>>
+>> Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+>>
+>>> I found this while looking into why riscv64 guests were so much
+>>> slower than aarch64 ones under bsd-user on FreeBSD.  The default -cpu
+>>> max enables Ztso, and turning it off with ztso=false accounted for
+>>> most of the difference.
+> 
+> Maybe we shouldn't default to Ztso, or at least not default to Ztso on host systems that themselves aren't TSO?
 
-> thanks
-> -- PMM
--- 
- -----Open up your eyes, open up your mind, open up your code -------   
-/ Dr. David Alan Gilbert    |       Running GNU/Linux       | Happy  \ 
-\        dave @ treblig.org |                               | In Hex /
- \ _________________________|_____ http://www.treblig.org   |_______/
+I vote to disable it in the 'max' CPU.  Changing the mem model from RVWMO to
+RVTSO seems like a decision users have to make in the command line, not
+something we decided to do because this particular CPU model must have all
+possible extensions enabled.
+
+In theory we could enable it depending on the host affinity with TSO, but I'd
+rather not create a precedent where a TCG CPU model delivers different
+extensions based on host capabilities.  We have enough of that in the KVM
+driver.
+
+
+Thanks,
+Daniel
+
+> 
+>>> On an x86-64 host the patch made xz almost four times faster and cut
+>>> the time of a clang compile by about 30%, the same as running with
+>>> ztso=false.  The output didn't change.
+>>>
+>>> I also tested it on a Raspberry Pi 3B+, which is arm64 and doesn't
+>>> give TSO ordering in hardware, to make sure the weaker barriers still
+>>> hold up there.  Everything ran correctly, and xz was about 12% faster.
+>>>
+>>>   target/riscv/tcg/insn_trans/trans_rvi.c.inc | 4 ++--
+>>>   target/riscv/tcg/insn_trans/trans_rvv.c.inc | 4 ++--
+>>>   2 files changed, 4 insertions(+), 4 deletions(-)
+>>>
+>>> diff --git a/target/riscv/tcg/insn_trans/trans_rvi.c.inc b/target/riscv/tcg/insn_trans/trans_rvi.c.inc
+>>> index 40b4c9aa..d31e4295 100644
+>>> --- a/target/riscv/tcg/insn_trans/trans_rvi.c.inc
+>>> +++ b/target/riscv/tcg/insn_trans/trans_rvi.c.inc
+>>> @@ -424,7 +424,7 @@ static bool gen_load(DisasContext *ctx, arg_lb *a, MemOp memop)
+>>>       }
+>>>
+>>>       if (ctx->ztso) {
+>>> -        tcg_gen_mb(TCG_MO_ALL | TCG_BAR_LDAQ);
+>>> +        tcg_gen_mb(TCG_MO_LD_LD | TCG_MO_LD_ST | TCG_BAR_LDAQ);
+>>>       }
+>>>
+>>>       return out;
+>>> @@ -485,7 +485,7 @@ static bool gen_store_tl(DisasContext *ctx, arg_sb *a, MemOp memop)
+>>>       TCGv data = get_gpr(ctx, a->rs2, EXT_NONE);
+>>>
+>>>       if (ctx->ztso) {
+>>> -        tcg_gen_mb(TCG_MO_ALL | TCG_BAR_STRL);
+>>> +        tcg_gen_mb(TCG_MO_LD_ST | TCG_MO_ST_ST | TCG_BAR_STRL);
+>>>       }
+>>>
+>>>       tcg_gen_qemu_st_tl(data, addr, ctx->mem_idx, memop);
+>>> diff --git a/target/riscv/tcg/insn_trans/trans_rvv.c.inc b/target/riscv/tcg/insn_trans/trans_rvv.c.inc
+>>> index a22e2cae..8c21ab87 100644
+>>> --- a/target/riscv/tcg/insn_trans/trans_rvv.c.inc
+>>> +++ b/target/riscv/tcg/insn_trans/trans_rvv.c.inc
+>>> @@ -731,7 +731,7 @@ static bool ldst_us_trans(uint32_t vd, uint32_t rs1, uint32_t data,
+>>>        * around the loop.
+>>>        */
+>>>       if (is_store && s->ztso) {
+>>> -        tcg_gen_mb(TCG_MO_ALL | TCG_BAR_STRL);
+>>> +        tcg_gen_mb(TCG_MO_LD_ST | TCG_MO_ST_ST | TCG_BAR_STRL);
+>>>       }
+>>>
+>>>       mark_vs_dirty(s);
+>>> @@ -739,7 +739,7 @@ static bool ldst_us_trans(uint32_t vd, uint32_t rs1, uint32_t data,
+>>>       fn(dest, mask, base, tcg_env, desc);
+>>>
+>>>       if (!is_store && s->ztso) {
+>>> -        tcg_gen_mb(TCG_MO_ALL | TCG_BAR_LDAQ);
+>>> +        tcg_gen_mb(TCG_MO_LD_LD | TCG_MO_LD_ST | TCG_BAR_LDAQ);
+>>>       }
+>>>
+>>>       finalize_rvv_inst(s);
+
 
