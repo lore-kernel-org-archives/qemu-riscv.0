@@ -4,167 +4,144 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97E6FCC6B08
-	for <qemu-riscv@archiver.kernel.org>; Tue, 13 Oct 2026 09:07:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E83E2CC6B08
+	for <qemu-riscv@archiver.kernel.org>; Tue, 13 Oct 2026 11:58:48 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xGYTq-0004yU-9a; Tue, 13 Oct 2026 05:07:30 -0400
+	id 1xGb8t-0001lB-4k; Tue, 13 Oct 2026 07:58:03 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xGYTo-0004xE-PF
- for qemu-riscv@nongnu.org; Tue, 13 Oct 2026 05:07:28 -0400
-Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
+ id 1xGb8q-0001kF-Bg
+ for qemu-riscv@nongnu.org; Tue, 13 Oct 2026 07:58:00 -0400
+Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xGYTl-0002lt-94
- for qemu-riscv@nongnu.org; Tue, 13 Oct 2026 05:07:28 -0400
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+ id 1xGb8n-0000qH-Pv
+ for qemu-riscv@nongnu.org; Tue, 13 Oct 2026 07:58:00 -0400
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 69D7Oak7015566
- for <qemu-riscv@nongnu.org>; Tue, 13 Oct 2026 09:07:23 GMT
+ 69D8PC893054908
+ for <qemu-riscv@nongnu.org>; Tue, 13 Oct 2026 11:57:55 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- HnhHh2q40F/pYXLwsoEn7F3HhkIZrVH/+TKkpJanqpI=; b=VmGHwf2VKdGuDZzi
- pp7NsLfW/Ppxxmdr6RhQcw2egdNPiV6oYLev2pzMOXwi5Zg8TWd7M48fVIRXmFMz
- nEn08EfIQYrOUuX+hD6wZk3cU36KtwGpfufovrS+E2DVDxhLLGiLSnHC9Sv/iLw4
- QparaPLPQX9Qfs0Uen47GiI3ihA7qjRkMz50H4TMSRPyeuMA4M7ri7GAvDha0Hgg
- +8dViO9wYElRR5WSjXKPqjMuBcCzT2A3BE2mB0jReU8okK/rJhKqfO50nHFaeMc7
- VZMUJPIsvsMjsLRTR1hTBL/ODikjeJIZpS9AIih2TBrixeIUfZ22BNxzgXoHyyVt
- Ye9PJQ==
-Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com
- [209.85.219.72])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h9g7ugdq0-1
+ +XfwQ0Ih8XUc1K7dyYvKIaSNXqQJz7OjBqS0OBqSsf8=; b=b2H2J2wA41DQy4Cf
+ GEYF5cKU7+W0tBgYyCZq3UjAlj8bKyRumC8vNKZbhSP98NwmelLF0J+NXM6bRRE7
+ cVDgmsL8iCLu689JfB/JIEEw5YWpuy6VF6Wd/kaH6pdA55F24tN0kitZqAYV/sRl
+ P40DWG+j+T0N4acGPy8shK9xnG087/XRFSQ/3OimaB9U01259y0rMs7lImTSU4AM
+ zRRwtQDLpvNlBHDq3AOJwI2SbYykIIz9e20yKbJ3uJwNQnFVTajjTjI/ie+/t6no
+ uABs2itqdTxspf6R/OLYfWUKZEuBwSVWKL5CP+N7ferWeN+Oc+MHOvPVRb4rXqlQ
+ Zqm3nw==
+Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com
+ [209.85.160.198])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h93aev5bx-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Tue, 13 Oct 2026 09:07:22 +0000 (GMT)
-Received: by mail-qv1-f72.google.com with SMTP id
- 6a1803df08f44-9104eedb5b0so102546436d6.0
- for <qemu-riscv@nongnu.org>; Tue, 13 Oct 2026 02:07:22 -0700 (PDT)
+ for <qemu-riscv@nongnu.org>; Tue, 13 Oct 2026 11:57:54 +0000 (GMT)
+Received: by mail-qt1-f198.google.com with SMTP id
+ d75a77b69052e-5350bf63ba3so85482001cf.3
+ for <qemu-riscv@nongnu.org>; Tue, 13 Oct 2026 04:57:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1791882442; x=1792487242; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1791892674; x=1792497474; darn=nongnu.org;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=HnhHh2q40F/pYXLwsoEn7F3HhkIZrVH/+TKkpJanqpI=;
- b=G47hsEutcnV74X+ZAhMyCn+Pi/dCNr/7wEP8qRzdjp2HxJnRsYBmoiZVyip95/ZMdS
- v9UDC6BlYxraDZq9dKywfWOr9B9Gk7tzxMqGkbR5sACF+OBCGBiiUAdAgbpnh/vFyWk3
- TygeLGjqPkO3Gi82KiRsTSNcQ1pouGgik1Z4jZk53nWJH8MvU1sFMrnubp+2P6o3qj/d
- msci7/1Y2V5VL8IUayGUEKWWZbhlOXQUl+GSaqryLkXQBxAn6bT/ud5Fh+b984hUU5Jq
- N5tpyP5X9ZafXIvncD/iPuvhmcpE8OxO/a3nAD4P6yASmgKHq/LiYGjIp0Limng5Omnc
- nxKg==
+ bh=+XfwQ0Ih8XUc1K7dyYvKIaSNXqQJz7OjBqS0OBqSsf8=;
+ b=XVOOWPqbmXWU15SOxmiykXiNSQ9BHZGFKhgupHkpLFIhj3bV+sJuGRAARjpQERxD0U
+ vulmtuThM3UePl36OVsL1AcSsTzAPdkgSTdoK0ehsB4FQ24S8fuY0tUHBbxMXNVXmV2J
+ t0v5DuDFoMN67V9JiwInVXfWfb7A9VANhGQ2WaAnSBUo2Kfk6HrpLoBfU2YwNTapL+k3
+ th1PzxJg0Vr6gc240iDOM0YBrJDs65QG/doPbvdKJXFUBJr/0V0GaYfU+gynyTOoLreY
+ Q8yTc7+T381PR3aRqm2YFWImxajhi52+U33Hs6FRtmPDUWMRhkKizmo3v9N/Fx1MQ50c
+ XjJg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1791882442; x=1792487242;
+ d=1e100.net; s=20260707; t=1791892674; x=1792497474;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=HnhHh2q40F/pYXLwsoEn7F3HhkIZrVH/+TKkpJanqpI=;
- b=P+HON/J6RGvfMvykWxybH79XvUKNeeA1nipx3p7/RW/z4+7nyH8TQcUeAggx8d7guS
- erSleanq0rD8b7eWL0BsPcve8oWI9rBmR20DTZopYAZx5x712gQknHLO5Nt05zhoyQn8
- kSJYL6AODp5cDGwb0xtVgsU3mLA4i4hrTmfAS1ysCLcb/PT85+R01nzbvza2UXX8/7Nb
- nNEzz0e09ljB+7Y53/p0vatPrwqdTtkKbHw59rN1mxgVs3PaiJZmG2LsBjbsfUbuKc1k
- gMrp2Tsy3QWUYiJKzLrEf7QiYaZnvVW/5KWWcQLAYsoUAIOtGKCVb4JpONN/alwbiWQi
- dDAA==
+ bh=+XfwQ0Ih8XUc1K7dyYvKIaSNXqQJz7OjBqS0OBqSsf8=;
+ b=LwJm+vcFO+e7XbrcbFOsxbgUwdhgUg5C3vhuK1qlHh+eEn/kH2kqPfwV2FfUPXeXUI
+ zCHQxr1pWAfJv/YnLmS3zbLPzs3usDo3U7SyEoOEal+XWBCO0Gwj1pgYA41TlKYguf5n
+ of1kpqtHpku/aZbUgGe0F7RVMFqwXwddHMFxP6bunYNMwS+B7APpvHCt5LM69zfUt7RP
+ LxzRj2zBZ9OUu0xtbOZYhOAN21jg3glZee1/kUKw78e12Guh262Yg78POVxk/CNoUblj
+ eTnnzZZ2XZbLezk2VMWfimwQfIEwWWjZOMUGsdawYYNP5dUfpTwDOVWRNfExjAllnNHT
+ PF9A==
 X-Forwarded-Encrypted: i=1;
- AKwUvBzzB5yc6fpFKLYuRD8/uKrZqBDHYT7jw2Zw5fQSAD/PnugB2oyHrj/o4YrWdJeSJvw2If8ysjdb0rCX@nongnu.org
-X-Gm-Message-State: AFq9FYLE1aMaLwuJOY45iv5kF84kRZb4MvuUWMLom9F7HW5WKIx0j+bZ
- pwNczP0ReugwuovhYQhFrFlKZbe/T40ob67RRp3B2sYRoj9mjO7cHZfi0BpxbvZBD37p1ydm6np
- ZGo/BpEE8sho72VU+E7AHxL2x3Kz7j60IGdRd2sOBiE/4VNlt8BXTjBSEnw==
-X-Gm-Gg: AYBFou0Yxmp7M2R+hIlS8rgv98qyD3D23cpLF/aQ98ePSc79FZvg3D1y9tQkvX0Cw2W
- CKQXBMS44DQ1JJgQaTaoih+VYTsMqJ/z5JpC5UQd7clGNwMsk92wmjBdXt+k1ONGWbwbfAw9DAA
- mtmZb13gxSaXmLvkOVVklHJCwxMKOIKrR95HjJpc5MCVbfGDmpHwqpiER3jZtG2zHBm3D0dJuqi
- lw4lE3Uow7lYPylJNLmhTWjKZPFKJypdLUJEkBrGn/sQ+NJ4Au0vocoZVX17KUM9NSET5CvXE2L
- lbeNzWRH6S77OJRKBsIWgCiy7npwFUVzK6DCz7AWWfs+xA+c7St6IG4h4N9Lbij3s00s/VfBjO6
- QZBU8/5fwRuqWrDwE2UrV3ab/fNwrnVMkaBE=
-X-Received: by 2002:a05:6214:3111:b0:91b:81d5:f8f6 with SMTP id
- 6a1803df08f44-91b81d5fa0fmr76021706d6.10.1791882441636; 
- Tue, 13 Oct 2026 02:07:21 -0700 (PDT)
-X-Received: by 2002:a05:6214:3111:b0:91b:81d5:f8f6 with SMTP id
- 6a1803df08f44-91b81d5fa0fmr76021046d6.10.1791882440934; 
- Tue, 13 Oct 2026 02:07:20 -0700 (PDT)
+ AKwUvBwYXLJrSxRDqrDr/VcO5A4bYlPDfeHbRgkcOUrQC4kxmxvW50aFi001CpogVk3yuC0Y9M8TzCnfqnEV@nongnu.org
+X-Gm-Message-State: AFq9FYLK7zs57ab1mqpnXhau5UPPQ95vZdurRxrccLmV3KYJUckvXAH+
+ W+x2NIS0FxeKhQPEJV0DBvkeSFvzt0DAP8bCeUG3VEi9dvXLuOoks7iwcyeJhntX3XHQ2IkcJsX
+ OfwKepWKThisa0dY7v3GgcauUKEw/ki/bFXSAlkEn7Z+v+tiGZKc3COX6Zg==
+X-Gm-Gg: AYBFou1Ur1cDIlYH7Mfqp43K7i5eGJdv7wBMkfeB8WyvQWgdAc4KKWJxNXiXm/mcFSf
+ 6UscTuww8H8tTVnEvHntnWA8qhImSx4nXlt3NGo0EnLFsNJnAoHLyxqd21TouqeEY5YWdg1xid7
+ RnGYQeUKKzvN2pCKANR+DQ42eIM76uaOMqtB2Ym4h5UoGQ10yWNZ/LJVcvADdqZfW710CefUFKG
+ cyFWfk0a4jbjoGL+YY9kz4oOIOyVmoGlFhjtNTr12m/I3qS15yTRwCXiu3xxThC2uqEQZrDdSGq
+ KJKm0u3ePjoIX/vOj4XoJBuncxsbJdw5psfQ/1sN9Valv4c/624zl/6LyKG6ebAsqyKlVAbE6Z8
+ Txug5qxNAO59SbvY5cz2PJf74wgGOdr3Ii8M=
+X-Received: by 2002:a05:622a:2445:b0:535:a5f7:d58c with SMTP id
+ d75a77b69052e-535a5f7ddb2mr191570671cf.70.1791892674082; 
+ Tue, 13 Oct 2026 04:57:54 -0700 (PDT)
+X-Received: by 2002:a05:622a:2445:b0:535:a5f7:d58c with SMTP id
+ d75a77b69052e-535a5f7ddb2mr191570391cf.70.1791892673587; 
+ Tue, 13 Oct 2026 04:57:53 -0700 (PDT)
 Received: from [192.168.68.107] ([152.234.126.58])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-91b97178de2sm20900406d6.0.2026.10.13.02.07.12
+ d75a77b69052e-5359b7324c9sm102113781cf.12.2026.10.13.04.57.51
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 13 Oct 2026 02:07:20 -0700 (PDT)
-Message-ID: <28f20f77-077e-4cfc-8b42-62c894a5fcec@oss.qualcomm.com>
-Date: Tue, 13 Oct 2026 06:07:11 -0300
+ Tue, 13 Oct 2026 04:57:52 -0700 (PDT)
+Message-ID: <96294abc-af49-433d-99ec-9376b7b78091@oss.qualcomm.com>
+Date: Tue, 13 Oct 2026 08:57:49 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 0/5] Defer the IOMMU translation in the CPU path and
- support access_type
-To: Jim Shu <jim.shu@sifive.com>, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Cc: Richard Henderson <richard.henderson@linaro.org>,
- Paolo Bonzini <pbonzini@redhat.com>,
- =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Zhao Liu <zhao1.liu@intel.com>, Peter Xu <peterx@redhat.com>,
- Michael Rolnik <mrolnik@gmail.com>, Song Gao <gaosong@loongson.cn>,
- Laurent Vivier <laurent@vivier.eu>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Aurelien Jarno <aurelien@aurel32.net>, Jiaxun Yang
- <jiaxun.yang@flygoat.com>, Aleksandar Rikalo <arikalo@gmail.com>,
- Stafford Horne <shorne@gmail.com>, Nicholas Piggin <npiggin@gmail.com>,
- Chinmay Rath <rathc@linux.ibm.com>, Glenn Miles <milesg@linux.ibm.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
- <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu.zevorn@gmail.com>,
- Yoshinori Sato <yoshinori.sato@nifty.com>,
- Ilya Leoshkevich <iii@linux.ibm.com>, David Hildenbrand <david@kernel.org>,
- Cornelia Huck <cohuck@redhat.com>, Eric Farman <farman@linux.ibm.com>,
- Matthew Rosato <mjrosato@linux.ibm.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Artyom Tarasenko <atar4qemu@gmail.com>, Max Filippov <jcmvbkbc@gmail.com>,
- "open list:PowerPC TCG CPUs" <qemu-ppc@nongnu.org>,
- "open list:S390 TCG CPUs" <qemu-s390x@nongnu.org>,
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
- Mark Burton <mburton@qti.qualcomm.com>,
- Peter Maydell <peter.maydell@linaro.org>
-References: <20260506033642.3641390-1-jim.shu@sifive.com>
+Subject: Re: [PATCH] target/riscv: Use TSO barriers instead of full barriers
+ for Ztso
+To: Rick Richard <rick@sloservers.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com
+References: <d6db9f89-36d6-436d-a915-407cd28e1778@sloservers.com>
 From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Content-Language: en-US
-In-Reply-To: <20260506033642.3641390-1-jim.shu@sifive.com>
+In-Reply-To: <d6db9f89-36d6-436d-a915-407cd28e1778@sloservers.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEzMDAzNiBTYWx0ZWRfX5SuRTZ057Du9
- h1nSo4hYwpefUab93IX64IajoYNiXt9brN1tohyFOyWmqHqvmBJrv6Oxjn7OonsrSqY5PGjT14m
- btxCKmH2cTruozApSfD+BZpjUWqpLsYbGSoEU3raTzd9hW8jbNrizor2w3vujIY7VE0eECYtYpN
- ISnKaNSOP6JEFQXtNi1+KzmfS6lOmMXC8qG+hcIPDlOmR5HenwjnUgFXpYlIM7/Azg+I4GcFJrz
- Sy+wcBDR1jUHzYfilXjIWYOCHoZHaSel+qbT4RpWm3Kd1hQii1TQZuMpRphwsmY5wZmjc4i8aoW
- jxuLH9w5FTgCVO7PJ3jBswCy8AkYn0hBg3/Xc5ARNPlVVUO/8kfV7GTnFnvkDCjwbJEAJVVv279
- UrD30sUShme0NTzMpY23v3h8Y78gciphXLzqv5XsVDvBGHnymZMsu2LxQ4ExzqHTmsOYMpi06dw
- ecHiaTR9NDWFWFrLnIg==
-X-Authority-Analysis: v=2.4 cv=Z495j3RA c=1 sm=1 tr=0 ts=6acdf4ca cx=c_pps
- a=7E5Bxpl4vBhpaufnMqZlrw==:117 a=XIBTAJF/fpiF5bhQ2IRv1g==:17
+X-Proofpoint-GUID: i_pDRBglkWlugaunmCDAxQYs-cEt35qR
+X-Authority-Analysis: v=2.4 cv=JJuuIMKb c=1 sm=1 tr=0 ts=6ace1cc2 cx=c_pps
+ a=mPf7EqFMSY9/WdsSgAYMbA==:117 a=XIBTAJF/fpiF5bhQ2IRv1g==:17
  a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
- a=GaQpPoNlAAAA:8 a=pFyQfRViAAAA:8 a=ZT-azI6cAAAA:8 a=skmqWCM_iL4kibtHDDcA:9
- a=QEXdDO2ut3YA:10 a=pJ04lnu7RYOZP9TFuWaZ:22 a=xF5q_uoM5gZT5J3czcBi:22
- a=oJz5jJLG1JtSoe7EL652:22 a=MMnepr4wVL9Sz6vaZzge:22
-X-Proofpoint-ORIG-GUID: VhVQh6rDPofN4YN70Rg_b1VqBMzKOOG0
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEzMDAzNiBTYWx0ZWRfX0PgXYpABMWZk
- Q9bhosIVKXsq8QgUPybZGGynYBFcz7nfik5XPgNcTFdG62E7GyMLb3KCQQS5mfCsbEUexUTaxGR
- 6IU05oCS9NVBlBD8zxg90w4oDr3JNpo=
-X-Proofpoint-GUID: VhVQh6rDPofN4YN70Rg_b1VqBMzKOOG0
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
+ a=F-tV29oOAAAA:8 a=EUspDBNiAAAA:8 a=8i7eK1leYjGsEoUvArQA:9 a=QEXdDO2ut3YA:10
+ a=dawVfQjAaf238kedN5IG:22 a=Y2dezMJzicAI2PZykhZh:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEzMDA0NyBTYWx0ZWRfX8w1f1Bor3zRc
+ BW5UOVyb7AYvtodLU8aUdFxoN3LITkwr/1U4v/fPYvF3Y+I4bfWbNA4W0u+pcrmpcmiS+cQh2pf
+ OGsgTH5oI7tHolBm0J1ZdsD862JksdQ=
+X-Proofpoint-ORIG-GUID: i_pDRBglkWlugaunmCDAxQYs-cEt35qR
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEzMDA0NyBTYWx0ZWRfX6sVfyLuxOUOx
+ w9sjgEta4JTslpRcpUCRwXPZ84GxeCtHZD4mTQbfPjKgCuttWii/Os52AxpQxkxoKMK1/rn4wZy
+ /BJjTD8hRYTG495vQGkHY2m9POvHQBa6Qpl77C/CJ23V0rclv1qJS5WlEhc3e+2hTFa5WvqzoXH
+ wlQYjnBq6zoeBf0LbsFvljjaXNz7qLJjZdNI8AgZ6wnqEyDoBHA7TDjY9RJznqzslZE1BV66vgj
+ Q8FHlvzsiIuPeoRsRPIam3DzYRZH4KWWbqRmOH8v3UqnZzJbjlc6q2nVRxvAsIVPK+/O2i22ACJ
+ nnxiX0SCDZa/7BQSoZjPoFwmlPUbhUUNhhc2bo1LL+OgymdjKStPXGUqqzifh2SGEwAY/aX7YTf
+ qqseUheejZ25cRofaUoIMgU9TXeuJV1Vr27x3QKKVx8o3DXBG05CYrWkkN+3aIaXbPJpAfY6s8d
+ pinCIRuFlYsxG65d7YA==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-13_01,2026-10-09_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 lowpriorityscore=0 bulkscore=0 adultscore=0 clxscore=1015
- malwarescore=0 priorityscore=1501 phishscore=0 suspectscore=0 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610130036
-Received-SPF: pass client-ip=205.220.168.131;
- envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
-X-Spam_score_int: -11
-X-Spam_score: -1.2
-X-Spam_bar: -
-X-Spam_report: (-1.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ suspectscore=0 clxscore=1015 malwarescore=0 lowpriorityscore=0
+ impostorscore=0 adultscore=0 phishscore=0 priorityscore=1501 spamscore=0
+ bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2610080000
+ definitions=main-2610130047
+Received-SPF: pass client-ip=205.220.180.131;
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
+X-Spam_bar: --
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- URIBL_SBL=1.623 autolearn=unavailable autolearn_force=no
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -180,117 +157,87 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi everyone,
-
-Seems like this series is fully acked, so ... can someone queue this up?  This work
-is a prerequisite for a qemu-riscv feature (WorldGuard support) that we want to
-get merged.  We have some reviews on the RISC-V bits already but without these
-accel/tcg bits merged we can't do much progress since any change here will
-affect the RV parts too.
 
 
-Thanks,
-Daniel
+On 10/2/2026 10:47 AM, Rick Richard wrote:
+> With Ztso, plain loads and stores follow RVTSO, but the barriers
+> around them use TCG_MO_ALL.  That also orders a store before a later
+> load, which TSO doesn't require, and is expensive: on x86 hosts it
+> adds a locked instruction around every load and store in a
+> multi-threaded guest.
+> 
+> The barrier after a load now only keeps later loads and stores
+> behind it, and the barrier before a store only keeps earlier loads
+> and stores ahead of it.  That is all TSO needs.
+> 
 
+Fixes: 09c4e88759 ("RISC-V: Add support for Ztso")
 
-On 5/6/2026 12:36 AM, Jim Shu wrote:
-> Incoming security protection devices feature more complex IOMMUMemoryRegion
-> implementation in the CPU path than ARM MPC device. For example,
-> RISC-V wgChecker [1] may permit the access with only RO/WO permissions.
-> Consequently, the IOMMUMemoryRegion could return different sections for
-> read & write access.
+> Signed-off-by: Rick Richard <rick@sloservers.com>
+> ---
+
+Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+
+> I found this while looking into why riscv64 guests were so much
+> slower than aarch64 ones under bsd-user on FreeBSD.  The default -cpu
+> max enables Ztso, and turning it off with ztso=false accounted for
+> most of the difference.
 > 
-> To support such IOMMUMemoryRegion behavior in the CPU path, the design
-> of IOMMU translation must be updated:
+> On an x86-64 host the patch made xz almost four times faster and cut
+> the time of a clang compile by about 30%, the same as running with
+> ztso=false.  The output didn't change.
 > 
-> 1. address_space_translate*() must now pass the access_type to
->     IOMMUMemoryRegion.
-> 2. Since IOMMU translation results are too complex to be fully stored
->     in the CPU TLB. we will defer the translation until the actual access
->     occurs. Also, TLB is allowed to store the untranslated IOMMU region.
+> I also tested it on a Raspberry Pi 3B+, which is arm64 and doesn't
+> give TSO ordering in hardware, to make sure the weaker barriers still
+> hold up there.  Everything ran correctly, and xz was about 12% faster.
 > 
-> To implement deferred IOMMU translation, this patchset introduces the
-> following changes:
+>   target/riscv/tcg/insn_trans/trans_rvi.c.inc | 4 ++--
+>   target/riscv/tcg/insn_trans/trans_rvv.c.inc | 4 ++--
+>   2 files changed, 4 insertions(+), 4 deletions(-)
 > 
-> 1. tlb_set_page_full() no longer translates the IOMMU region
->     immediately. Instead, it stores the untranslated region directly in
->     the TLB. A new slow-path flag, TLB_IOMMU, is introduced to force
->     access into the slow path when a region has not yet been translated
->     in the TLB entry.
-> 
-> 2. When the CPU utilizes a TLB entry in the slow path, it should perform
->     the lazy IOMMU translation of the access_type first. The resulting
->     translated region and access type are stored in CPUTLBEntryFull.
->     Since the slow path always performs lazy translation first, we can
->     switch the CPUTLBEntryFull content to the correct access type before
->     use.
-> 
-> 3. To accelerate memory access in the fast path, lazy translation can
->     update the addend of the CPUTLBEntry when translating the region to a
->     host memory region. We restrict the IOMMU region to have a single
->     non-zero 'addend' across all permissions. If a second 'addend' is
->     present for a CPUTLBEntry, QEMU will trigger an assertion. This
->     limitation is sufficient for security devices, as their "secondary"
->     region is typically an IO region used to emulate device error
->     handling when access is rejected.
-> 
-> 4. To support non-slow TLB flags, lazy translation can update the TLB
->     flags in the 'addr_idx' of the CPUTLBEntry. Lazy translation only
->     updates the flags for the permissions specified in @prot. This
->     ensures that each access_type of a translated region to maintains
->     independent TLB flags. For example, TLB_DIRTY of memory region will
->     not be "polluted" from other permission that translated to different
->     region.
-> 
-> Both RISC-V wgChecker [1] and RISC-V IOPMP [2] devices require this
-> feature.
-> 
-> [1] RISC-V WG:
-> https://patchew.org/QEMU/20251021155548.584543-1-jim.shu@sifive.com/
-> [2] RISC-V IOPMP:
-> https://patchew.org/QEMU/20250312093735.1517740-1-ethan84@andestech.com/
-> 
-> Changed since v2:
-> - Fix unused initialized memory error
-> 
-> Changed since v1:
-> - Remove the ping-pong TLB entry behavior. Instead, defer the IOMMU
->    translation until actual access in the CPU path. Provide a IOMMU
->    lazy translation function with the special handling of 'addend'
->    and 'addr_idx' fields of CPUTLBEntry.
-> - Fix the checkpatch warning.
-> 
-> Jim Shu (5):
->    accel/tcg: Pass access_type as an argument of tlb_set_page*()
->    accel/tcg: address_space_translate*() will pass the correct
->      iommu_flags
->    accel/tcg: Provide early AS translate function
->    accel/tcg: Add IOMMU lazy translation function
->    accel/tcg: Support IOMMU lazy translation in CPU TLB
-> 
->   accel/tcg/cputlb.c                   | 247 +++++++++++++++++++++++++--
->   include/accel/tcg/iommu.h            |  17 +-
->   include/exec/cputlb.h                |  11 +-
->   include/exec/tlb-flags.h             |   4 +-
->   include/hw/core/cpu.h                |  15 ++
->   system/physmem.c                     |  60 ++++++-
->   target/alpha/helper.c                |   2 +-
->   target/avr/helper.c                  |   3 +-
->   target/i386/tcg/system/excp_helper.c |   3 +-
->   target/loongarch/tcg/tlb_helper.c    |   2 +-
->   target/m68k/helper.c                 |  10 +-
->   target/microblaze/helper.c           |   8 +-
->   target/mips/tcg/system/tlb_helper.c  |   4 +-
->   target/or1k/mmu.c                    |   2 +-
->   target/ppc/mmu_helper.c              |   2 +-
->   target/riscv/cpu_helper.c            |   2 +-
->   target/rx/cpu.c                      |   3 +-
->   target/s390x/tcg/excp_helper.c       |   2 +-
->   target/sh4/helper.c                  |   3 +-
->   target/sparc/mmu_helper.c            |   6 +-
->   target/tricore/helper.c              |   2 +-
->   target/xtensa/helper.c               |   3 +-
->   22 files changed, 354 insertions(+), 57 deletions(-)
-> 
+> diff --git a/target/riscv/tcg/insn_trans/trans_rvi.c.inc b/target/riscv/tcg/insn_trans/trans_rvi.c.inc
+> index 40b4c9aa..d31e4295 100644
+> --- a/target/riscv/tcg/insn_trans/trans_rvi.c.inc
+> +++ b/target/riscv/tcg/insn_trans/trans_rvi.c.inc
+> @@ -424,7 +424,7 @@ static bool gen_load(DisasContext *ctx, arg_lb *a, MemOp memop)
+>       }
+>   
+>       if (ctx->ztso) {
+> -        tcg_gen_mb(TCG_MO_ALL | TCG_BAR_LDAQ);
+> +        tcg_gen_mb(TCG_MO_LD_LD | TCG_MO_LD_ST | TCG_BAR_LDAQ);
+>       }
+>   
+>       return out;
+> @@ -485,7 +485,7 @@ static bool gen_store_tl(DisasContext *ctx, arg_sb *a, MemOp memop)
+>       TCGv data = get_gpr(ctx, a->rs2, EXT_NONE);
+>   
+>       if (ctx->ztso) {
+> -        tcg_gen_mb(TCG_MO_ALL | TCG_BAR_STRL);
+> +        tcg_gen_mb(TCG_MO_LD_ST | TCG_MO_ST_ST | TCG_BAR_STRL);
+>       }
+>   
+>       tcg_gen_qemu_st_tl(data, addr, ctx->mem_idx, memop);
+> diff --git a/target/riscv/tcg/insn_trans/trans_rvv.c.inc b/target/riscv/tcg/insn_trans/trans_rvv.c.inc
+> index a22e2cae..8c21ab87 100644
+> --- a/target/riscv/tcg/insn_trans/trans_rvv.c.inc
+> +++ b/target/riscv/tcg/insn_trans/trans_rvv.c.inc
+> @@ -731,7 +731,7 @@ static bool ldst_us_trans(uint32_t vd, uint32_t rs1, uint32_t data,
+>        * around the loop.
+>        */
+>       if (is_store && s->ztso) {
+> -        tcg_gen_mb(TCG_MO_ALL | TCG_BAR_STRL);
+> +        tcg_gen_mb(TCG_MO_LD_ST | TCG_MO_ST_ST | TCG_BAR_STRL);
+>       }
+>   
+>       mark_vs_dirty(s);
+> @@ -739,7 +739,7 @@ static bool ldst_us_trans(uint32_t vd, uint32_t rs1, uint32_t data,
+>       fn(dest, mask, base, tcg_env, desc);
+>   
+>       if (!is_store && s->ztso) {
+> -        tcg_gen_mb(TCG_MO_ALL | TCG_BAR_LDAQ);
+> +        tcg_gen_mb(TCG_MO_LD_LD | TCG_MO_LD_ST | TCG_BAR_LDAQ);
+>       }
+>   
+>       finalize_rvv_inst(s);
 
 
