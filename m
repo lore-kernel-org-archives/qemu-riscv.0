@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2279ACC6B1A
-	for <qemu-riscv@archiver.kernel.org>; Wed, 14 Oct 2026 12:57:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB3C2CC6B1A
+	for <qemu-riscv@archiver.kernel.org>; Wed, 14 Oct 2026 12:57:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xGyWb-0007Pk-1j; Wed, 14 Oct 2026 08:56:06 -0400
+	id 1xGyWc-0007QE-4H; Wed, 14 Oct 2026 08:56:06 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <gong.shuai@sanechips.com.cn>)
- id 1xGu7V-0006UZ-69; Wed, 14 Oct 2026 04:13:53 -0400
+ id 1xGu7F-0006Sa-FS; Wed, 14 Oct 2026 04:13:37 -0400
 Received: from mxhk.zte.com.cn ([160.30.148.35])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <gong.shuai@sanechips.com.cn>)
- id 1xGu7P-000176-Ix; Wed, 14 Oct 2026 04:13:50 -0400
+ id 1xGu7D-00015Z-Jj; Wed, 14 Oct 2026 04:13:37 -0400
 Received: from mse-fl2.zte.com.cn (unknown [10.5.228.133])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mxhk.zte.com.cn (FangMail) with ESMTPS id 4j4P9M66tQz8Xrrt;
- Wed, 14 Oct 2026 16:13:43 +0800 (CST)
-Received: (from root@localhost) by mse-fl2.zte.com.cn id 69E8DfQi005943;
- Wed, 14 Oct 2026 16:13:41 +0800 (+08)
+ by mxhk.zte.com.cn (FangMail) with ESMTPS id 4j4P99024Wz8Xrrc;
+ Wed, 14 Oct 2026 16:13:33 +0800 (CST)
+Received: (from root@localhost) by mse-fl2.zte.com.cn id 69E8DUrV005788;
+ Wed, 14 Oct 2026 16:13:30 +0800 (+08)
  (envelope-from gong.shuai@sanechips.com.cn)
-Message-Id: <202610140813.69E8DfQi005943@mse-fl2.zte.com.cn>
+Message-Id: <202610140813.69E8DUrV005788@mse-fl2.zte.com.cn>
 Received: from szxl2zmapp06.zte.com.cn ([10.1.32.108])
- by mse-fl1.zte.com.cn with SMTP id 69E80LlK093687;
- Wed, 14 Oct 2026 16:00:21 +0800 (+08)
+ by mse-fl1.zte.com.cn with SMTP id 69E80N3K093763;
+ Wed, 14 Oct 2026 16:00:23 +0800 (+08)
  (envelope-from gong.shuai@sanechips.com.cn)
 Received: from ubuntu-35-gs (unknown [10.230.214.35])
- by smtp (Zmail) with SMTP; Wed, 14 Oct 2026 16:00:24 +0800
-X-Zmail-TransId: 3e816acf3697024-0e2a1
+ by smtp (Zmail) with SMTP; Wed, 14 Oct 2026 16:00:25 +0800
+X-Zmail-TransId: 3e816acf3699024-0e2d0
 X-Zmail-LocalSMTP: 1
 X-Zmail-RealSender: gong.shuai@sanechips.com.cn
 From: Gong Shuai <gong.shuai@sanechips.com.cn>
@@ -48,23 +48,23 @@ Cc: Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  "Michael S. Tsirkin" <mst@redhat.com>,
  Cornelia Huck <cohuck@redhat.com>, Wu Fei <wu.fei9@sanechips.com.cn>,
  Gong Shuai <gong.shuai@sanechips.com.cn>, Gong Shuai <gsh517025@gmail.com>
-Subject: [RFC PATCH 09/14] hw/riscv/riscv-iommu-accel: Implement
- get_viommu_flags() callback
-Date: Wed, 14 Oct 2026 16:00:00 +0800
+Subject: [RFC PATCH 12/14] hw/riscv/riscv-iommu-accel: Add support to issue
+ invalidation cmd to host
+Date: Wed, 14 Oct 2026 16:00:03 +0800
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20261014080005.548066-1-gong.shuai@sanechips.com.cn>
 References: <20261014080005.548066-1-gong.shuai@sanechips.com.cn>
 MIME-Version: 1.0
 X-ZMAIL-USEORIGINALEMLTOOUTBOUND: 1
 Content-Transfer-Encoding: 8bit
-X-MAIL: mse-fl2.zte.com.cn 69E8DfQi005943
+X-MAIL: mse-fl2.zte.com.cn 69E8DUrV005788
 X-MSS: AUDITRELEASE@mse-fl2.zte.com.cn
 X-TLS: YES
 X-ENVELOPE-SENDER: gong.shuai@sanechips.com.cn
-X-SOURCE-IP: 10.5.228.133 unknown Wed, 14 Oct 2026 16:13:43 +0800
+X-SOURCE-IP: 10.5.228.133 unknown Wed, 14 Oct 2026 16:13:33 +0800
 X-CLEAN: YES
 X-Fangmail-Anti-Spam-Filtered: true
-X-Fangmail-MID-QID: 6ACF39B7.001/4j4P9M66tQz8Xrrt
+X-Fangmail-MID-QID: 6ACF39AC.000/4j4P99024Wz8Xrrc
 Received-SPF: pass client-ip=160.30.148.35;
  envelope-from=gong.shuai@sanechips.com.cn; helo=mxhk.zte.com.cn
 X-Spam_score_int: -18
@@ -91,51 +91,121 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: Wu Fei <wu.fei9@sanechips.com.cn>
 
-For accelerated IOMMU, we need nested parent domain creation. Add the
-callback support so that VFIO can create a nested parent.
-
-This follows the approach of the ARM SMMUv3.
+Provide a helper to forward guest IOTLB invalidations to the host
+RISC-V IOMMU, and use it in the IOTINVAL command path so the
+accelerated translation caches stay in sync with the guest. Only
+one command is issued at a time for now.
 
 Signed-off-by: Wu Fei <wu.fei9@sanechips.com.cn>
 Signed-off-by: Gong Shuai <gong.shuai@sanechips.com.cn>
 ---
- hw/riscv/riscv-iommu-accel.c | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
+ hw/riscv/riscv-iommu-accel.c | 44 ++++++++++++++++++++++++++++++++++++
+ hw/riscv/riscv-iommu-accel.h |  8 +++++++
+ hw/riscv/riscv-iommu.c       |  3 +++
+ 3 files changed, 55 insertions(+)
 
 diff --git a/hw/riscv/riscv-iommu-accel.c b/hw/riscv/riscv-iommu-accel.c
-index 7bb725d957..2bafbfa5e0 100644
+index 9846374468..1bfdad8dcb 100644
 --- a/hw/riscv/riscv-iommu-accel.c
 +++ b/hw/riscv/riscv-iommu-accel.c
-@@ -10,6 +10,7 @@
- #include "hw/pci/pci_bridge.h"
- #include "hw/pci-host/gpex.h"
- #include "hw/vfio/pci.h"
-+#include "hw/core/iommu.h"
+@@ -5,6 +5,7 @@
+  */
  
- #include "riscv-iommu.h"
- #include "riscv-iommu-accel.h"
-@@ -134,9 +135,21 @@ static AddressSpace *riscv_iommu_accel_find_as(PCIBus *bus, void *opaque,
-     }
+ #include "qemu/osdep.h"
++#include "qemu/bswap.h"
+ #include "qemu/error-report.h"
+ #include "trace.h"
+ 
+@@ -161,6 +162,49 @@ static uint32_t riscv_iommu_accel_ddtp_hwpt(RISCVIOMMUState *s,
+                accel->abort_hwpt_id : accel->bypass_hwpt_id;
  }
  
-+static uint64_t riscv_iommu_accel_get_viommu_flags(void *opaque)
++/*
++ * Issue the invalidation command to the host RISC-V IOMMU.
++ *
++ * The RISC-V IOTINVAL command carries no device (like ARM's SID)
++ * information, only (addr, gscid, pscid), so no per-device filtering
++ * is needed here.
++ */
++bool riscv_iommu_accel_issue_inv_cmd(RISCVIOMMUState *s,
++                                     const struct riscv_iommu_command *cmd)
 +{
++    RISCVIOMMUAccelState *accel = s->accel_state;
++    struct iommu_viommu_riscv_invalidate inv = {
++        .cmd = { cpu_to_le64(cmd->dword0), cpu_to_le64(cmd->dword1) },
++    };
++    uint32_t entry_num = 1;
++    bool ret;
++    Error *local_err = NULL;
++
++    /* The uAPI entry must stay exactly one hardware command word */
++    QEMU_BUILD_BUG_ON(sizeof(inv) != sizeof(*cmd));
++
 +    /*
-+     * We return VIOMMU_FLAG_WANT_NESTING_PARENT to inform VFIO core to create a
-+     * nesting parent which is required for accelerated riscv iommu support.
-+     * The real HW nested support should be reported from host riscv iommu and if
-+     * it doesn't, the nesting parent allocation will fail anyway in VFIO core.
++     * No accel or viommu means no VFIO/IOMMUFD devices, nothing to
++     * invalidate.
 +     */
-+    return VIOMMU_FLAG_WANT_NESTING_PARENT;
++    if (!accel || !accel->viommu) {
++        return true;
++    }
++
++    /* Single command (entry_num = 1); no need to check returned entry_num */
++    ret = iommufd_backend_invalidate_cache(accel->viommu->iommufd,
++                                           accel->viommu->viommu_id,
++                                           IOMMU_VIOMMU_INVALIDATE_DATA_RISCV,
++                                           sizeof(inv), &entry_num, &inv,
++                                           &local_err);
++
++    if (local_err) {
++        error_report_err(local_err);
++    }
++
++    return ret;
 +}
 +
- static const PCIIOMMUOps riscv_iommu_accel_ops = {
-     .supports_address_space = riscv_iommu_accel_supports_as,
-     .get_address_space = riscv_iommu_accel_find_as,
-+    .get_viommu_flags = riscv_iommu_accel_get_viommu_flags,
- };
+ static bool riscv_iommu_accel_alloc_viommu(RISCVIOMMUState *s,
+                                            HostIOMMUDeviceIOMMUFD *idev,
+                                            Error **errp)
+diff --git a/hw/riscv/riscv-iommu-accel.h b/hw/riscv/riscv-iommu-accel.h
+index 85a1ab6d42..55d3c0dc62 100644
+--- a/hw/riscv/riscv-iommu-accel.h
++++ b/hw/riscv/riscv-iommu-accel.h
+@@ -42,6 +42,8 @@ typedef struct RISCVIOMMUAccelDevice {
+ void riscv_iommu_accel_init(RISCVIOMMUState *s);
+ bool riscv_iommu_accel_install_dc(RISCVIOMMUState *s, int devid);
+ bool riscv_iommu_accel_install_dc_all(RISCVIOMMUState *s);
++bool riscv_iommu_accel_issue_inv_cmd(RISCVIOMMUState *s,
++                                     const struct riscv_iommu_command *cmd);
+ #else
+ static inline void riscv_iommu_accel_init(RISCVIOMMUState *s)
+ {
+@@ -56,6 +58,12 @@ riscv_iommu_accel_install_dc_all(RISCVIOMMUState *s)
+ {
+     return true;
+ }
++static inline bool
++riscv_iommu_accel_issue_inv_cmd(RISCVIOMMUState *s,
++                                const struct riscv_iommu_command *cmd)
++{
++    return true;
++}
+ #endif
  
- static void riscv_iommu_accel_as_init(RISCVIOMMUState *s)
+ #endif /* HW_RISCV_RISCV_IOMMU_ACCEL_H */
+diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
+index 55cabc4f45..baec21390c 100644
+--- a/hw/riscv/riscv-iommu.c
++++ b/hw/riscv/riscv-iommu.c
+@@ -2098,6 +2098,9 @@ static void riscv_iommu_process_cq_tail(RISCVIOMMUState *s)
+             }
+ 
+             riscv_iommu_iot_inval(s, func, gscid, pscid, iova, transtag);
++            if (!riscv_iommu_accel_issue_inv_cmd(s, &cmd)) {
++                goto cmd_ill;
++            }
+             break;
+         }
+ 
 -- 
 2.53.0
 
