@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD3B2CC6B2A
-	for <qemu-riscv@archiver.kernel.org>; Wed, 14 Oct 2026 09:46:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F582CC6B1A
+	for <qemu-riscv@archiver.kernel.org>; Wed, 14 Oct 2026 09:46:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xGvYr-00083W-64; Wed, 14 Oct 2026 05:46:13 -0400
+	id 1xGvYr-00084T-Ib; Wed, 14 Oct 2026 05:46:14 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xGvXp-0006nK-4d
- for qemu-riscv@nongnu.org; Wed, 14 Oct 2026 05:45:12 -0400
-Received: from mail-dl1-x1230.google.com ([2607:f8b0:4864:20::1230])
+ id 1xGvYB-0007Ed-JB
+ for qemu-riscv@nongnu.org; Wed, 14 Oct 2026 05:45:32 -0400
+Received: from mail-dl1-x1231.google.com ([2607:f8b0:4864:20::1231])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xGvXm-0002SI-Un
- for qemu-riscv@nongnu.org; Wed, 14 Oct 2026 05:45:08 -0400
-Received: by mail-dl1-x1230.google.com with SMTP id
- a92af1059eb24-1419d3416ceso1195610c88.0
- for <qemu-riscv@nongnu.org>; Wed, 14 Oct 2026 02:45:06 -0700 (PDT)
+ id 1xGvY7-0002WP-0P
+ for qemu-riscv@nongnu.org; Wed, 14 Oct 2026 05:45:29 -0400
+Received: by mail-dl1-x1231.google.com with SMTP id
+ a92af1059eb24-15ea896ddc8so1090556c88.0
+ for <qemu-riscv@nongnu.org>; Wed, 14 Oct 2026 02:45:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1791971105; x=1792575905; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1791971125; x=1792575925; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=lWFJW68tgkxCtQcIzjppGsjAMqUe5y9plX0JR/pSP1U=;
- b=VTAVvL6KU0XOuI3pP6jBqQUB8Jisj6pZI04Fej6g+8gCBN/QlTlo7xS32PwZPwRYTH
- BqFlO/F2hu32XT5xz0zgEWPneBPa6II665y3ThZOFLflUtARIYD5Vcgk7NNIl287baVM
- q0g8RmAxy/JjYEehQw4kAGP9U6v27hM/6G0vJfumhrig3i+uQOZQQ2jN/FbLYClpyVG3
- p/AvesMJsjBVUxElYNEsKgSqrhzcpgXOz3fXlSAJZGEM9lREAYK1qO4pp9J9gO43Nhzl
- Jn5+n3kV8kqCu2gv+XQQ2JAsh2rN/29TqZ9xKh/4IwXYxiPb+tpVwIDwngx0o241jLLB
- PeHg==
+ bh=Y4OgtMU5Mx05ssteaqTUflD+z1U1FSvhSEKiWvjqqcY=;
+ b=NoBwbN4gBHqq/aLOwNaCQqVrZ5Z60QSRCb8UIa4i8uazmvMlwRla0U+aeW9idYhPjj
+ bkPuxgkCqHOataIj7IPTyPVlHarkqwRnpUsce58eDBaCbB5jIKsACpMlwQuLdhxpoepN
+ onlWu0tIJp/b08CwZqniyPFZjch/0eWKPUSJ2JeOMqQzEFxKkoppHnJMF6Mh+0q5DpJf
+ xg3VrlcSHj8gI5AeDUz2yYEsndSHPqPKYR0vp2ClXnFDpYvqGrAV9GjGeCr55+4AUPXt
+ CyyWscQZ4W3M7LfRUwL6ugie9YBzS8762WVqwMHBlcmoFIjPBZgjopbJ/Bul2Qx2QAZ4
+ qKlA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1791971105; x=1792575905;
+ d=1e100.net; s=20260707; t=1791971125; x=1792575925;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=lWFJW68tgkxCtQcIzjppGsjAMqUe5y9plX0JR/pSP1U=;
- b=a91XslruFW35NZhYrzZkl2vAprQgzSYoBzeszg9xw7c2K74AXH2T3BuZqdwETn0QzX
- lE/7V3rbGMeLsygE6zRCAhAq/HtUhcBEqEhdbgz/yfWKFADoEkh77VP8D9z67TVhzXmV
- UFAXpmUQ9zfuItBmRzgw9VtrB7aJfyqKdzEL3glMFvdVsgSHddv1xj+rWyzSWA8NqLTO
- A3DHOLmLBlXGew8aZMRhed1c6FUG3GMvzggfhsJMX4yk3pyoXnW6i8vqZkPy1ATWm6q3
- jRjZJ6ts6U+whzKIaasI/LbvNjKrgmAt5edwdZtRiuIFiSxDw/OvM372E5vPt4k6XbuM
- gFoA==
+ bh=Y4OgtMU5Mx05ssteaqTUflD+z1U1FSvhSEKiWvjqqcY=;
+ b=LYEojaZS7O2yo0zG6MHUNDJyhkqNsjXCQIXbPou0+nFz8PieNLDyjzqD3WJFR7wMWE
+ URkEJBJW5IQl9iEE2lKwqJIgZkBETHcOUJ7pAqyYpx3IJfGBfJnfBiNp7tcrbTLCA/x+
+ cRIUNdSRdUgmNbB2cH9eVdg5lr7+9oktMLUX7XrnrlUUv4cG/wGpMW5IdWECfifRPFXQ
+ o7hsm+OASpDSa/lnVuA+JQ46rw1QziQ9GOmawcWtyycUIrjCAaZZ+rSvYtHN9XB3NcCm
+ kL7vQQsVjmFZJ3tjjaamgcD6nbkroqNnWDMdNDT90V8jf2SLUw3sKaSMK/ZQGxJT3FwR
+ HWag==
 X-Forwarded-Encrypted: i=1;
- AKwUvByzghaOom1SYpR8skTCwbsI6a5MtTNg0uFIkz8tRjoCYe49HmWjPypc3RrVZi670K5PvZCZSE/R+KQk@nongnu.org
-X-Gm-Message-State: AFq9FYKumd/i1olETDS3hYlCPLviZ8zwFW1/Rnw7bA4RPSe2SuvooHmS
- T7FKnblaogHbHmgBc+D9aZiklFwn/osPbAe0JB8PMLeqCe39FMIhWvPx
-X-Gm-Gg: AYBFou2HA1Nj3rEqD8AFQvYBKZO+s6jkYeEwA7DwCpE1tKgGvPw6rBO3GXPsqR1xHHT
- V7ZViWh4JybecGpZ4nf1GAq3XsiszvVexIZHIQa5HwdUJlwRxCwECOaMLwg6cCPa/ZeNQxts0/i
- jORYP+ouUZx6ZRnnzfLIRrK24YLSELhYX6C3m4l8paSHEKm0ij4+KHp3bKiBroagU4+ANyXfNWC
- +2dm2kbVUC63HPc2F8K/D6/cqqCQPGQPpMtunoZ+mVswXkDhZje4pEikSt6a0/yui879J+JTz7B
- ZbCbsyl00tOeU/zHHNcL33HzEgmhHWV/EjOFgTaoXsEoYukfgWdOJoXcYT8k8+TL/OA5pJPBwxB
- vOZKgMWPG/KvDIFya8Ifycw9PMWvwaLkGvA+Ium4wfLR3p952KwlcgOC4QnBkvOxisELVEmxM4R
- VpF8T+WdkAYFOgyYSWBLQ4+W7tASA9sCjliPI9MaSUk5gOgPtSyJ9Y8ukLqS6MsIm8/yj2LKWS7
- l1FTOPhsF0pY2TwGw==
-X-Received: by 2002:a05:7022:ea8b:b0:14a:8df8:56c5 with SMTP id
- a92af1059eb24-16a61789ffcmr19374590c88.26.1791971105293; 
- Wed, 14 Oct 2026 02:45:05 -0700 (PDT)
+ AKwUvBzMU1c6O6/7FzITe9fdlzSxKfR8iYAhmtabcaTNSoPEWYF1BjNUb/CkuPzN7ouEznxqKUXDbxa3T06B@nongnu.org
+X-Gm-Message-State: AFq9FYL09NQSsIBPteAH4sIQSDD+iYtrnD17Qd3O7jXpEyCCwJZn11En
+ d2Okus5jE3Hb0WalVPyRyjHTIcxEGcA/Zgmdnap7Csky05jKbX0j60T8
+X-Gm-Gg: AYBFou22cC6j2IreRvW0HGtqzzfjEe0IrfQwDRezuAIeJf2u5pzPfU9fEbnN5nQIgI6
+ daSauBTUnkb5eElffnwfEkLan7PVj3dGWWGkvkRlxl2H4ZDolbQ6si6o7GG30GI0wdBsF/Cckk1
+ CIn/sA6omv8oDmuTvNmfdoC7yghKU1/JXcs1hjvYbD1Rlc9SNONzNawYDkPk6SQF5DfgN86Grgo
+ 9lgtJhsrSkUMsJ+PAojL3pl/J8wxZOuRtZpK1nzfB8aEtxPAY/ACkkR4dD9tUX5gZHl7JpMldYX
+ 4XAYhjsZitHxd1dzZn/ICowRlZ0iFhmyNl6aYTH5R3yE1lrtgo/UrK+b6fUKd62/7aj0lRnLg75
+ l2Z4U8GoIi3+F/AiZcfJwtB6biGkwlZOkUK59vKfep6YGKr7qebaj2qqTwXUcxtvS6VUuS6Z7V9
+ oH78M6zpxXDJYnYnUkPD0BP7DcTz6QAAflD9OL5hC/pvnm1UZ7HQ1lQpHCH7hMrAUCsvqxOWqQT
+ gNarBbKpBOCjm6zM94=
+X-Received: by 2002:a05:7022:7e0b:b0:149:7f69:a3ad with SMTP id
+ a92af1059eb24-17ab5e9bb8bmr5881039c88.13.1791971124955; 
+ Wed, 14 Oct 2026 02:45:24 -0700 (PDT)
 Received: from DESKTOP-Q716RM7 ([103.94.185.75])
  by smtp.googlemail.com with ESMTPSA id
- a92af1059eb24-169a31f6f5csm44348380c88.11.2026.10.14.02.44.56
+ a92af1059eb24-169a31f6f5csm44348380c88.11.2026.10.14.02.45.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 14 Oct 2026 02:45:03 -0700 (PDT)
+ Wed, 14 Oct 2026 02:45:23 -0700 (PDT)
 From: Yonggang Luo <luoyonggang@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: Alistair Francis <alistair.francis@wdc.com>,
@@ -98,23 +98,24 @@ Cc: Alistair Francis <alistair.francis@wdc.com>,
  Darren Kenny <darren.kenny@oracle.com>,
  =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
  Stafford Horne <shorne@gmail.com>
-Subject: [PATCH 31/34] qmp: Expose supported targets in query-machines
-Date: Wed, 14 Oct 2026 17:41:46 +0800
-Message-ID: <20261014094224.1976-16-luoyonggang@gmail.com>
+Subject: [PATCH 33/34] system/vl: handle cpu/device help properly for
+ multi-target qemu
+Date: Wed, 14 Oct 2026 17:41:48 +0800
+Message-ID: <20261014094224.1976-18-luoyonggang@gmail.com>
 X-Mailer: git-send-email 2.55.0.windows.3
 In-Reply-To: <20261014094224.1976-1-luoyonggang@gmail.com>
 References: <20261014094224.1976-1-luoyonggang@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1230;
- envelope-from=luoyonggang@gmail.com; helo=mail-dl1-x1230.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1231;
+ envelope-from=luoyonggang@gmail.com; helo=mail-dl1-x1231.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_FILL_THIS_FORM_SHORT=0.01 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -130,78 +131,63 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+This achieved by select the target by provided -machine $type option.
+Error when anything wrong.
+
 Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
 ---
- hw/core/machine-qmp-cmds.c | 16 ++++++++++++++++
- qapi/machine.json          |  5 ++++-
- 2 files changed, 20 insertions(+), 1 deletion(-)
+ system/vl.c | 29 ++++++++++++++++++++++++++++-
+ 1 file changed, 28 insertions(+), 1 deletion(-)
 
-diff --git a/hw/core/machine-qmp-cmds.c b/hw/core/machine-qmp-cmds.c
-index 59818764dad..620d64585e5 100644
---- a/hw/core/machine-qmp-cmds.c
-+++ b/hw/core/machine-qmp-cmds.c
-@@ -21,8 +21,10 @@
- #include "qapi/qobject-input-visitor.h"
- #include "qapi/type-helpers.h"
- #include "qemu/uuid.h"
-+#include "qemu/base-arch-defs.h"
- #include "qemu/target-info.h"
- #include "qemu/target-info-qapi.h"
-+#include "qemu/target-info-qom.h"
- #include "qom/qom-qobject.h"
- #include "system/hostmem.h"
- #include "system/hw_accel.h"
-@@ -104,6 +106,8 @@ MachineInfoList *qmp_query_machines(bool has_compat_props, bool compat_props,
-         MachineClass *mc = el->data;
-         const char *default_cpu_type = machine_class_default_cpu_type(mc);
-         MachineInfo *info;
-+        QemuTargetInfoList **target_tail;
-+        GSList *tel;
+diff --git a/system/vl.c b/system/vl.c
+index 5d6ba08b591..bad13393f24 100644
+--- a/system/vl.c
++++ b/system/vl.c
+@@ -1278,6 +1278,18 @@ static MachineClass *machine_target_select(GSList *machines, GSList **targets,
  
-         info = g_malloc0(sizeof(*info));
-         if (mc->is_default) {
-@@ -130,6 +134,18 @@ MachineInfoList *qmp_query_machines(bool has_compat_props, bool compat_props,
-         }
-         info->secure = object_class_is_secure(OBJECT_CLASS(mc));
+ static int device_help_func(void *opaque, QemuOpts *opts, Error **errp)
+ {
++    const char *driver = qemu_opt_get(opts, "driver");
++
++    if (target_combined_binary() && driver &&
++        (is_help_option(driver) || qemu_opt_has_help_opt(opts))) {
++        const char *name = qdict_get_try_str(machine_opts_dict, "type");
++
++        g_autoptr(GSList) machines = object_class_get_list(TYPE_MACHINE,
++                                                         false);
++        g_autoptr(GSList) targets = NULL;
++
++        machine_target_select(machines, &targets, name, &error_fatal);
++    }
+     return qdev_device_help(opts);
+ }
  
-+        target_tail = &info->targets;
-+        for (tel = target_info_qom_get_targets(); tel; tel = tel->next) {
-+            const TargetInfo *ti = TARGET_INFO_CLASS(tel->data)->target_info;
+@@ -2761,9 +2773,24 @@ static void qemu_process_help_options(void)
+      * Check for -cpu help and -device help before we call select_machine(),
+      * which will return an error if the architecture has no default machine
+      * type and the user did not specify one, so that the user doesn't need
+-     * to say '-cpu help -machine something'.
++     * to say '-cpu help -machine something' in single-target binaries.
+      */
+     if (cpu_option && is_help_option(cpu_option)) {
++        if (target_combined_binary()) {
++            const char *name = qdict_get_try_str(machine_opts_dict, "type");
 +
-+            if (mc->targets & QEMU_ARCH_BIT(ti->target_arch)) {
-+                QemuTargetInfo *target = g_new0(QemuTargetInfo, 1);
-+
-+                target->arch = ti->target_arch;
-+                QAPI_LIST_APPEND(target_tail, target);
++            if (!name) {
++                error_report("-cpu help requires -machine "
++                             "<arch>-<machine-name> or an unambiguous "
++                             "<machine-name> in a combined binary");
++                exit(EXIT_FAILURE);
 +            }
-+        }
++            g_autoptr(GSList) machines =
++                object_class_get_list(TYPE_MACHINE, false);
++            g_autoptr(GSList) targets = NULL;
 +
-         if (compat_props && mc->compat_props) {
-             int i;
-             info->compat_props = NULL;
-diff --git a/qapi/machine.json b/qapi/machine.json
-index 47fbc422ec5..ee089ff8c68 100644
---- a/qapi/machine.json
-+++ b/qapi/machine.json
-@@ -189,6 +189,9 @@
- #
- # @acpi: machine type supports ACPI (since 8.0)
- #
-+# @targets: targets supported by this machine
-+#     (since 11.2)
-+#
- # @compat-props: The machine type's compatibility properties.  Only
- #     present when `query-machines` argument @compat-props is true.
- #     (since 9.1)
-@@ -212,7 +215,7 @@
-             '*default-ram-id': 'str', 'acpi': 'bool',
-             '*compat-props': { 'type': ['CompatProperty'],
-                                'features': ['unstable'] },
--            'secure': 'bool' } }
-+            'secure': 'bool', 'targets': ['QemuTargetInfo'] } }
- 
- ##
- # @query-machines:
++            machine_target_select(machines, &targets, name, &error_fatal);
++        }
+         list_cpus();
+         exit(0);
+     }
 -- 
 2.55.0.windows.3
 
