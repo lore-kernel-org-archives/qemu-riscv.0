@@ -4,126 +4,118 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B878CC6B1D
-	for <qemu-riscv@archiver.kernel.org>; Wed, 14 Oct 2026 01:29:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4072CC6B1D
+	for <qemu-riscv@archiver.kernel.org>; Wed, 14 Oct 2026 02:41:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xGnm7-0001EN-Gc; Tue, 13 Oct 2026 21:27:24 -0400
+	id 1xGova-0004YU-OV; Tue, 13 Oct 2026 22:41:14 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bin.meng@processmission.com>)
- id 1xGnjn-0005rq-Et; Tue, 13 Oct 2026 21:25:03 -0400
-Received: from mail-japaneastazlp170120005.outbound.protection.outlook.com
- ([2a01:111:f403:c405::5] helo=TYPPR03CU001.outbound.protection.outlook.com)
+ (Exim 4.90_1) (envelope-from <alistair@alistair23.me>)
+ id 1xGovS-0004X9-Pg
+ for qemu-riscv@nongnu.org; Tue, 13 Oct 2026 22:41:08 -0400
+Received: from fhigh-a5-smtp.messagingengine.com ([103.168.172.156])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bin.meng@processmission.com>)
- id 1xGnjl-0006vY-Dm; Tue, 13 Oct 2026 21:24:59 -0400
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=LSi+sCZTU/s6C4ojkOsn1EhUuTYeVt8uJY8I8uA5O62IGPtRk0tCRui/mL6OtP3B8bCAN1NpTuHj9+ioc8t7fp0Bn2H5m+VOWdpuVKuzDnOKc9zlQn/e4tpDmr9pVdHSuW5ff/Dw6j970IB1Wo2V9guJDSVKrkDBWCYb6AZ6ljexpn5FQbpO5wkPfr8V0rfodDX7H/PMHR0RfV3dDxdydhMzWZO6+Hep/I1LZMO/msJ76rfZakA/OpujuKpEZk3/KaXFnECJPV6AFjgLvHfZs6fJONow7by73zL3OdAKMAV8YB6qt1EGwQwuLl8RrnkX/Zp0IOazELs1X6iYiyDp9g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=6hhcrfaMIxBzNW58DJPGFj5sqgDjiafTfdqDdn+p+2c=;
- b=STK3348RYZmS81w3c5ykzVT+0Js9qkYk2Ev8MKTwrXk0H2SmC1LTFNZBJKQKKioXDtfJIuILULSmm6jWBmIc34GGf/BnXbUTaryr+4K/wt5W+6JFH7RBlQ/nQUpr7TrCG3DqMUma7Ql6mDlO04LWlY+AXDTr7pPQXoW9L8SS0CcE3rdsO4HbNGETMJiAWjn4kH67RftpvmDm2AtHtO+EN0zpFmmEmoSrnvZCNAVp8H1t/WLxNCQFPvmW0GNPxr+zvWf9P/pwTKgxBfhGvYdgFY8nX+lW3saBkzkdV6pFhoAAnEvFPJ+WKOxA43F+hvdREIfQoIEea7T30oGpQ/q3pQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=processmission.com; dmarc=pass action=none
- header.from=processmission.com; dkim=pass header.d=processmission.com;
- arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=processmission.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=6hhcrfaMIxBzNW58DJPGFj5sqgDjiafTfdqDdn+p+2c=;
- b=jPpArE4w+P948Q3U5C+HXzIBRA8mR0QTDHaIk5Nk+LodncFev0J4LhP0ZRVIQa8FrE5J5feL/zsnbqh99zE23lY7nhLnB6mcgDW9C6bKaeydBIcovmjXcjyPudnW3Co0vi9edG/6wwGxIvOZOZ9ckIE1Mzjnio4eg9EMltgtERVqVUdQ9E9PD/bV8FtPwq3Hp1q0xZ3X6AKIcr2P3hhC8qxI/WH6U08J7xcgUXPg6x80OPTtOrxlBHgDRQ8ylUnZcVfaKKi+FGvWspr/fkx1rBLCLsEY+HVZUI6bKCiA8q4gVlYAFuDbRspvzE8/uiPMRWI2PikiWz+RtFoHSqHT2w==
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=processmission.com;
-Received: from KL1PR02MB6257.apcprd02.prod.outlook.com (2603:1096:820:da::11)
- by KL1PR02MB6214.apcprd02.prod.outlook.com (2603:1096:820:9e::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.522.12; Wed, 14 Oct
- 2026 01:24:37 +0000
-Received: from KL1PR02MB6257.apcprd02.prod.outlook.com
- ([fe80::ecf9:e832:8196:215]) by KL1PR02MB6257.apcprd02.prod.outlook.com
- ([fe80::ecf9:e832:8196:215%6]) with mapi id 15.21.0496.021; Wed, 14 Oct 2026
- 01:24:37 +0000
-From: Bin Meng <bin.meng@processmission.com>
-To: QEMU <qemu-devel@nongnu.org>
-Cc: Conor Dooley <conor.dooley@microchip.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Chao Liu <chao.liu@processmission.com>, Conor Dooley <conor@kernel.org>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Sebastian Huber <sebastian.huber@embedded-brains.de>,
- Weiwei Li <liwei1518@gmail.com>, qemu-riscv@nongnu.org
-Subject: [PATCH v4 19/27] hw/misc: pfsoc: Let IOSCB own service interrupt state
-Date: Wed, 14 Oct 2026 09:22:59 +0800
-Message-ID: <20261014012323.322790-20-bin.meng@processmission.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20261014012323.322790-1-bin.meng@processmission.com>
-References: <20261014012323.322790-1-bin.meng@processmission.com>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: TY6PR01CA0005.jpnprd01.prod.outlook.com
- (2603:1096:405:3bc::12) To KL1PR02MB6257.apcprd02.prod.outlook.com
- (2603:1096:820:da::11)
+ (Exim 4.90_1) (envelope-from <alistair@alistair23.me>)
+ id 1xGovN-0005O3-GM
+ for qemu-riscv@nongnu.org; Tue, 13 Oct 2026 22:41:04 -0400
+Received: from phl-compute-01.internal (phl-compute-01.internal [10.202.2.41])
+ by mailfhigh.phl.internal (Postfix) with ESMTP id C76D2140018C
+ for <qemu-riscv@nongnu.org>; Tue, 13 Oct 2026 22:40:58 -0400 (EDT)
+Received: from phl-frontend-04 ([10.202.2.163])
+ by phl-compute-01.internal (MEProxy); Tue, 13 Oct 2026 22:40:58 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alistair23.me;
+ h=cc:cc:content-transfer-encoding:content-type:content-type
+ :date:date:from:from:in-reply-to:in-reply-to:message-id
+ :mime-version:references:reply-to:subject:subject:to:to; s=fm2;
+ t=1791945658; x=1792032058; bh=grqR549geILkBhXJNUVwyo7XM+f/qEb8
+ 6qmp1doK4lo=; b=GAvhRXZJndx04mtjmrN5fiRbZTp8swm7Hr9a9Mqa/C4+fU2s
+ VBfIfSu5/cSc7m9H0zH3Vqz5QLl1D+uQBTn8lLs/8bJ5DT3ZG7X60Ymc7xgtyEun
+ dFfym3J9IDu5rsK7J0wY2Pi+te/78p7hGEAI8oVdsUG8+n22lCNa4tqsYPEQzrsD
+ gzikm1EiLbO4L2ZETSmU0AscAlsMa8MEUWfrRKiOU2CROhXPsQUL6+pVICZmlpy1
+ 3ZyQ2sfpBixyUOd25hiRJL4Pyd9+7ZOc/g9jDT6tYr5gX5p/kp+Uewtfy4drnNzb
+ 6wenL//hceh5Y+VJGcy5IHfQUOFr4dnWyBeQdg==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-transfer-encoding
+ :content-type:content-type:date:date:feedback-id:feedback-id
+ :from:from:in-reply-to:in-reply-to:message-id:mime-version
+ :references:reply-to:subject:subject:to:to:x-me-proxy
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1791945658; x=
+ 1792032058; bh=grqR549geILkBhXJNUVwyo7XM+f/qEb86qmp1doK4lo=; b=l
+ JfIJuULl7lXPtt1g6BK5poaNhy8WmIZWhcXkyJ+3UEcN9qCNAYLK8HMmeapzIoBf
+ Zjdgr7iQpS5ibh9VbdDJbbAQgyVvSeVMEQUcQYMJqIouriJoO+8ZlSnwIJu29alV
+ YP8HdKQR1SkbyKzUwlSBaj9wNEjRBLL9NsN9Py+tBFa3zGHyUBxP/3ssi2FKtrfY
+ eNGr3qEigOwVmha+Mjd28fxP/Hczbv7OqwfyvoIL+hQcxG9noQwmE2o4CCdHGwWx
+ Rh6FcOO0Cpt4TbeF+o4j7pAd0eJluGM3dB86p5myR0tWLO4kIlMLnVo2Q7IKmp2h
+ Ocoy/vaKe7c96Xy6jWC4Q==
+X-DKIM2-Info: draft=ietf-dkim-dkim2-spec-06;
+ repo=github.com/dkim2wg/interop; date=2026-10-04; sw=lmtpprox;
+ action=sign d=alistair23.me a=rsa-sha256;
+DKIM2-Signature: i=1; m=1; t=1791945658; d=alistair23.me;
+ mf=PGFsaXN0YWlyQGFsaXN0YWlyMjMubWU+;
+ rt=PHFlbXUtcmlzY3ZAbm9uZ251Lm9yZz4=;
+ s=fm2:rsa-sha256:q3yCo7BQQ+vGpmwrOWAfgrWn2P24jdNXkPPNWS1qKzvpAyM
+ 579A9bGDBN7c6nmKwHtxVWHIM/RXvZB1Kif3PTjD3KcebpDbSnotSMRraG9x0FHW
+ EX8eVvUF8Ivr3Tb0m91juW/nY7JK5NVhakYAkFR1VCmtvWKgQADPq1GhGkY2qolN
+ egmZtUJPXXO9tzrlQnia5NufirEIUlAnlFFvvFIMmK6HdWSjAbVNQ8oDk0xrbx+l
+ fldQE4hwWVecfclvnKRaPD2s4GKT5+KOTF7V9HY2ykwRC8RZHoKtCU+/zoLU1Yze
+ PY6b98/8p/1csBvpY8Pzbs1xyvpOySUYvsINJIA==;
+X-DKIM2-Info: draft=ietf-dkim-dkim2-spec-06;
+ repo=github.com/dkim2wg/interop; date=2026-10-04; sw=lmtpprox;
+ action=mi-m=1; hc=13;
+ hn=cc,content-transfer-encoding,content-type,date,feedback-id,
+ from,in-reply-to,message-id,mime-version,references,subject,to,
+ user-agent;
+Message-Instance: m=1;
+ h=sha256:N4Ydih/SiDbx7+zIrQBYdF3fLgPa7yUDzdZQ/IxRYuM=:grqR549geILkBhXJNUVwyo7XM+f/qEb86qmp1doK4lo=;
+X-ME-Sender: <xms:uevOalsnAkgH7dFqBLHCKYJwbBRJYX-g-V0qYV5Px9H9VDqEtRWwIQ>
+ <xme:uevOaqQLfN4eA8tEoRxzaC9ECtDF9wnkFeEvYck-nUQD5dfL_Ny6aeuIpOv0PETIM
+ k6HG0QqW2pkezcBA4_B_1kfiENrK_YPM-d7dQ6SOG2M29jiUzKmdfw>
+X-ME-Received: <xmr:uevOauSK_P-oFo9q1TZJfy_MPhRopxjuLcWnhGZjuQGouMrE60tuRWeLnaujw2MKjU4VtxEIRAURv0Vz5hSyashXwsk>
+X-ME-Proxy-Cause: dmFkZTFy4syGFbYD8tZhftRBWtnDjTNrWx/dtBTzP8TRnhu7FzUzI6R9PoQnnFDywCbTb8
+ eRhy3gRuYxVa0eLmtLIBG1d49QWqqZ2OWxXpoo7eqRKeu+xVrNn5vV4XGzWFeVO2QFiypo
+ Wl5SkmqPFi7gRj+oe02LhTcgG2nTljPRiR8AkljmzgYbC4sH4XoUDb3Mx3LOXa/eMyeuc1
+ iZheyaBKtfCbKa1xeftbfOpu8Z90tbDxuKGFjx9YXstxx6HG3x7i9zMUilW543gFz0X/ZX
+ JZJTW1oLy6OIdWYM5F9wFmZL1JdF33WvNdmT8M0l9QOG6YakReSgb8Dk1ZKxwWN5uDVxNR
+ lz5R2DAJuj6WzZjtXITZ0UqCKUw9ZDp77lDZkvzI5Im9ffNxy22XJf0pfCsNz/u6ucCZ48
+ bqxjDTFqaSO4L8kDOGU2jg0gLxopRh8hqdebCpz/V8yt3D0m4Zo0KO2O7e4K9B+3WRxD4D
+ jsb2McyEjY7nGRRXMuF/aYZtKCPK6reeDcD5wW1Fp+M4s87WzRdDpefkM9yIhQBQGZYRdF
+ CGK/gHyKMwymEz3ZB1bKis2c3a+q0xPtAIrAFPTMf8ukSyjEacQlLcXTLQSNOWCkTjzW1Q
+ /RJvGb0uuGRWojGkjwpN1VUsFoy3TArSEt1mGk5IUM4L7wziuIIsWJ3i1QGQ
+X-ME-Proxy: <xmx:uevOauoWfBtYjrwd7CYSsY8trd3JMEYIWCkMzElLkgqNKhRLq20O2g>
+ <xmx:uevOamBJig2O_6a9mbTLyUypcOUBZ2BUp94qugi8sI0s3InQ1g5r8g>
+ <xmx:uevOaru7TLZPwth5mHIZKX01THzNcVN4WQ2BrV1zxwyIfGjw_RPDuw>
+ <xmx:uevOatZu8gVPvfelwo8UDBlKCIORCQ4eS0EY7qhIUy0XWO3LQCM3HQ>
+ <xmx:uuvOamYBgnba-mHgVX9fs4aGI6-4W1bsII1l_nH1e2uFkvsdSb6dYNwh>
+Feedback-ID: ifd214418:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Tue,
+ 13 Oct 2026 22:40:53 -0400 (EDT)
+Message-ID: <0a3ed698bfa98cd967788863d4cab1dd50f98b2f.camel@alistair23.me>
+Subject: Re: [PATCH v3 3/4] hw/riscv/atlantis: Add machine property to
+ select default uart
+From: Alistair <alistair@alistair23.me>
+To: Portia Stephens <portias@oss.tenstorrent.com>, qemu-devel@nongnu.org
+Cc: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, Anirudh Srinivasan
+ <asrinivasan@oss.tenstorrent.com>, Daniel Henrique Barboza	
+ <daniel.barboza@oss.qualcomm.com>, Weiwei Li <liwei1518@gmail.com>, Palmer
+ Dabbelt <palmer@dabbelt.com>, Nicholas Piggin <npiggin@gmail.com>, Michael
+ Ellerman <mpe@kernel.org>,  Chao Liu <chao.liu@processmission.com>,
+ qemu-riscv@nongnu.org, Paolo Bonzini <pbonzini@redhat.com>, 
+ =?ISO-8859-1?Q?Marc-Andr=E9?= Lureau	 <marcandre.lureau@redhat.com>, Liu
+ Zhiwei <zhiwei_liu@linux.alibaba.com>,  Joel Stanley <joel@jms.id.au>
+Date: Wed, 14 Oct 2026 12:40:51 +1000
+In-Reply-To: <79349810-29d7-43bb-a3f4-91c0b70e73df@oss.tenstorrent.com>
+References: <20261001233324.2636629-1-portias@oss.tenstorrent.com>
+ <20261001233324.2636629-4-portias@oss.tenstorrent.com>
+ <41b85b9ad64efab7ae41cdc4a7315ffe6903264b.camel@alistair23.me>
+ <79349810-29d7-43bb-a3f4-91c0b70e73df@oss.tenstorrent.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.62.0 (by Flathub.org) 
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: KL1PR02MB6257:EE_|KL1PR02MB6214:EE_
-X-MS-Office365-Filtering-Correlation-Id: cc47dca1-01b3-41f5-38e2-08df2991e95c
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|23010399003|1800799024|376014|366016|7416014|18002099003|22082099003|10067099003|3023799007|261009223027099003|56012099006;
-X-Microsoft-Antispam-Message-Info: L8DPMGMgVMk2hXlydRNMZy5e5M9WLy9MrMbUqHsYOG7keqvPtIR+m+XmJVVGCD71ErmBuQggramZeIlM3lWukhmkcwQGxaK3B5zF1UWM1hCtDnlIDWvjtrHrpHjwPom3eQCSvx/n5M7S6xTSLXTq463sOQTqNXVogSO5hmpy5Sw31J+GJUynGhiErBJ1YNWjSQRpWliQWAxmooLjCOMNhEf0uj4aYXxmdOYD1CZEZdIDagLnhFOBrIc2gj5YkZztn3d7oTDC3Mxw7v6tGOvLFNm/wn8ZUYKZm0HSsgG5G4cNpRL/prsST2vD2o5zVgaVUazbKIux0ns7k61AXA/AsLrzIno7/dFprOZKkdeftMv2HHZ8TSIuc0VRRLkuRJDc6rny2S/xkPMRJ5BHyiUBSbNXKJj8CXurjyqMgNF94w+UE0JU/GJxwbAjOjT2Tv16HKEeDUYWZaTBFX1tApzbqAvDhEHky+J+66ggsv7PXGwwpPTjncjR1P4w4kQH0kM3wIMuiY8G7tvBO53hmScSj2YVrab1eMrGGGgL/q5XxRGjuK+gH3j7E1K18aZw98bEZDHG+97d55ziqgdErYyrThzg2evcuT8Zrw3AjuWvdSOyQCbCqHTsXrhul2RrcmzowHaTLtzZEqLdq0PIPWX77quKFF0sGMo/5M3RcZns/ZI=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:KL1PR02MB6257.apcprd02.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(23010399003)(1800799024)(376014)(366016)(7416014)(18002099003)(22082099003)(10067099003)(3023799007)(261009223027099003)(56012099006);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?7dC2SKYYv2Y4L6Py04Ps2V4qrHJjeiuT/rtE0wUyJwJM+AsoNy/t2mR1AqmH?=
- =?us-ascii?Q?zVWZocXZJXH1/iHoeg57agE2UVrrQYdb7pP8uPFKgWSR09lkVJ/3ZTLnJo8o?=
- =?us-ascii?Q?4eKM21scZBtXqowrZxrxSUn+R6qo1LsAfDr37pf6zctbVYFrPAl4qFTLOMar?=
- =?us-ascii?Q?+oTOsMNNRhzlXEcJpydvo1Mfr/BURbOoP1F6QOtw5Tw/j7DYgGbxLnW8ywEO?=
- =?us-ascii?Q?9le0s2BQNGGwq/kgej6ICc99U56+5TUxGyEBoPz5TcQghxsvIXv1575NPNm0?=
- =?us-ascii?Q?I6COYHdSOpiohFuMLrkl/butqTSZKD3dKnduQsiXgrQ91abGYQ7KC+GSll8L?=
- =?us-ascii?Q?jjmvxPVnapwocZEEBuA0hEVft6g6VIUI/H9xBF41vcA/KkVnzyJudJ+f1w2M?=
- =?us-ascii?Q?r+EjEClRqHcxQsyt21HHfOPOtAyhX0L7xB2AVN/PJJ0pqpGM4RaJfUlv/D8Q?=
- =?us-ascii?Q?iRqJnlltYxCoPej9dDK0GS6srU9xbmj6LI8lx8CXPxj7+1DvezSoRWCTpFUu?=
- =?us-ascii?Q?HpkXshLp2ooY9ghAnPvggxSkMJ1zWpMqB36k7BYFhYfXENfBM9IHFmRtmpHc?=
- =?us-ascii?Q?2Bw8IpaIX0ZN/J8m2hO8fV6Kgfh9XErSX5i2ojfx2vPbn6XzAInyzXx5+ecd?=
- =?us-ascii?Q?8DmrYRBQce4PorbHMupF8odgoqP8LluoBzKEhcjCyTGoh3wLxONaI2aUnmWv?=
- =?us-ascii?Q?dAlF1clIlibx+tcY0ThfJGdNI5UWpKeGXRzP0kbH6jT51CASn9VdkNxD78vd?=
- =?us-ascii?Q?+uAT69plDmzV1W/jGRt4pkiFVST7wFsPvKYIyc6uW7p6cdIrBVuVlB9WO4QL?=
- =?us-ascii?Q?oJPjPV9fKvdjyJKWqDN43W+ddP43gkFAOVIhoyVqwkO0ObzI3x+yMuWGi1YX?=
- =?us-ascii?Q?POyYJkcpW011ckwqxx+UH7Te+ee5tfqtMP+/z8+wBfVCa81g2E3CGDGcC4wL?=
- =?us-ascii?Q?g9ASBCVSz2bsu+x9XlfLZk03n7LeIjbdv8+UrxunokQVa2Kdfjkxl41Z/4au?=
- =?us-ascii?Q?MqaK6fMiUCH9JaumQGb9H6KwIjDr7vy27D9xm+cJuIEAWgRkKpWsHbWGxwgw?=
- =?us-ascii?Q?iKuyts/hoT7dkOk/lA4IKdijNg81cMQUyuuUM9Gte91MFJwQRS/dGdznzFt5?=
- =?us-ascii?Q?0c/kiQZGsSbUX1mEVn1IQ/njwu8ivKgcYcnAjgBEmMdTOU5l5eLGmIXYKBum?=
- =?us-ascii?Q?2WCMPKZPR6ft1MCV3Voy3eIutl7SLRkpIonILBfF6rW/ARVQQFdATSjjqJ36?=
- =?us-ascii?Q?xys886Nk1wVYGs3QnGul3jkwhY0Sx0UC7XvzNGrShwcokOFmpg6RCI3DdTHq?=
- =?us-ascii?Q?xwci7VxFxPXSv8rrTuwZTh7W2KFriufAV0LUWWUpoXdu1k7vBY4+lfkXuJrL?=
- =?us-ascii?Q?LGR5EHMMdWx90JZmMqbDEJa6p/Sa73Y1YN2RYsFQqPMf0l4tsUi8HTNvKAim?=
- =?us-ascii?Q?c8/T03UAXbzomSUwtTarKS54RhAnxlUbiX4TMKtW2puXx2Yb4VqIjlmWW0HJ?=
- =?us-ascii?Q?mjnkeK0R70FPm6YpJR4NF2ozV5YKcCq8h36FCmhh7cL4jGSYBZ9ZFyuvV/tV?=
- =?us-ascii?Q?Td5HtcxuwFNzh0zzRbQr+bMM3VHP+4DqL+4MBhA0rrqXadSOcN8J3+h/emEZ?=
- =?us-ascii?Q?JirTbPiP10gbzcP7ItB20C8NreF4dJ+/dGyyKnXpfCEKaSAC73UWlB6BOwJi?=
- =?us-ascii?Q?cBRfmc5el8eK3ExXctwE+AAAzcpHmpBBax09GkhNrVgi1Zeob+likHU7yzVF?=
- =?us-ascii?Q?IGawBCUoMBi0dSSJnkbQm3JhK8n1Fyg=3D?=
-X-OriginatorOrg: processmission.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: cc47dca1-01b3-41f5-38e2-08df2991e95c
-X-MS-Exchange-CrossTenant-AuthSource: KL1PR02MB6257.apcprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Oct 2026 01:24:37.3543 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: e0544bf7-9765-4630-ab69-0b266dc2169c
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: YmkqFu3S3+RbiESKgoVBZ1YmIMmacy5XRHi6Y7Z75cIe8dMSXPQ4XAQT8NbrPJ1tb2ptBXERsYSdtb+BVbsknPncrB+kB2yAiYHDaZLCtJY=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: KL1PR02MB6214
-Received-SPF: pass client-ip=2a01:111:f403:c405::5;
- envelope-from=bin.meng@processmission.com;
- helo=TYPPR03CU001.outbound.protection.outlook.com
+Received-SPF: pass client-ip=103.168.172.156;
+ envelope-from=alistair@alistair23.me; helo=fhigh-a5-smtp.messagingengine.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -146,230 +138,286 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-System service completion raises PLIC source 96 from IOSCB, while
-software accesses MESSAGE_INT through SYSREG. The MESSAGE_INT pending
-bit is not modelled explicitly, so reads return zero even when a
-service interrupt is active. Model the bit so service completion and
-register accesses use the same state.
+On Thu, 2026-10-08 at 09:02 +1000, Portia Stephens wrote:
+>=20
+> On 6/10/2026 11:35 PM, Alistair wrote:
+> > On Fri, 2026-10-02 at 09:33 +1000, Portia Stephens wrote:
+> > > The Atlantis SoC has 5 UARTs. This adds a machine property to set
+> > > which uart is on the first serial interface. This is the same
+> > > pattern
+> > > that is used by aspeed. The rest of the uart's will be added in
+> > > sequential order starting at serial interface 1.
+> > >=20
+> > > The default value is uart1 which means the Ascalon console will
+> > > be on
+> > > serial interface 0 by default.
+> > >=20
+> > > Signed-off-by: Portia Stephens <portias@oss.tenstorrent.com>
+> > > Reviewed-by: Daniel Henrique Barboza
+> > > <daniel.barboza@oss.qualcomm.com>
+> > > ---
+> > > =C2=A0=C2=A0hw/riscv/tt_atlantis.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0 | 77
+> > > ++++++++++++++++++++++++++++++--
+> > > --
+> > > =C2=A0=C2=A0include/hw/riscv/tt_atlantis.h |=C2=A0 1 +
+> > > =C2=A0=C2=A02 files changed, 69 insertions(+), 9 deletions(-)
+> > >=20
+> > > diff --git a/hw/riscv/tt_atlantis.c b/hw/riscv/tt_atlantis.c
+> > > index 2342edce93..7a5e1ddcd1 100644
+> > > --- a/hw/riscv/tt_atlantis.c
+> > > +++ b/hw/riscv/tt_atlantis.c
+> > > @@ -12,6 +12,7 @@
+> > > =C2=A0=C2=A0#include "qemu/error-report.h"
+> > > =C2=A0=C2=A0#include "qemu/guest-random.h"
+> > > =C2=A0=C2=A0#include "qemu/units.h"
+> > > +#include "qapi/visitor.h"
+> > > =C2=A0=20
+> > > =C2=A0=C2=A0#include "hw/core/boards.h"
+> > > =C2=A0=C2=A0#include "hw/core/loader.h"
+> > > @@ -422,6 +423,26 @@ static void load_fdt(TTAtlantisState *ams)
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 create_fdt_memory(ms->fdt, &ams->soc);
+> > > =C2=A0=C2=A0}
+> > > =C2=A0=20
+> > > +static inline int tt_atlantis_uart_index(int uart_dev)
+> > > +{
+> > > +=C2=A0=C2=A0=C2=A0 return uart_dev - TT_ATL_UART0;
+> > > +}
+> > > +
+> > > +static void
+> > > tt_atlantis_connect_serial_hds_to_uarts(TTAtlantisState
+> > > *ams)
+> > > +{
+> > > +=C2=A0=C2=A0=C2=A0 TTAtlantisSoCState *s =3D &ams->soc;
+> > > +=C2=A0=C2=A0=C2=A0 int uart_index =3D tt_atlantis_uart_index(ams->ua=
+rt_chosen);
+> > > +
+> > > +=C2=A0=C2=A0=C2=A0 qdev_prop_set_chr(DEVICE(&s->uart[uart_index]), "=
+chardev",
+> > > serial_hd(0));
+> > > +
+> > > +=C2=A0=C2=A0=C2=A0 for (int i =3D 1, uart =3D 0; i < TT_ATL_NUM_UART=
+S; uart++) {
+> > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (uart =3D=3D uart_inde=
+x) {
+> > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 c=
+ontinue;
+> > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }
+> > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 qdev_prop_set_chr(DEVICE(=
+&s->uart[uart]), "chardev",
+> > > serial_hd(i++));
+> > > +=C2=A0=C2=A0=C2=A0 }
+> > I don't like this. We shouldn't dynamically change the command line
+> > API
+> > based on a property
+>=20
+>=20
+> Fair enough, can we just take the first 3 patches in the series and
+> drop=20
+> this one? That will add modeling for all the uarts but only expose
+> uart1=20
+> on command line.
 
-Keep the pending state and PLIC output in IOSCB. Link SYSREG to IOSCB
-so MESSAGE_INT reads the current pending bit and writes update the
-same state.
+This is path 3 though. Do you mean take the first 2 patches?
 
-Signed-off-by: Bin Meng <bin.meng@processmission.com>
-Tested-by: Conor Dooley <conor.dooley@microchip.com>
+I can do that if you want
 
----
+Alistair
 
-(no changes since v3)
-
-Changes in v3:
-- Separate interrupt state ownership from the NOTIFY fix
-- Link SYSREG to IOSCB for MESSAGE_INT reads and writes
-- Support both clearing and setting the MESSAGE_INT pending bit
-
- include/hw/misc/mchp_pfsoc_ioscb.h  |  4 ++++
- include/hw/misc/mchp_pfsoc_sysreg.h |  3 ++-
- hw/misc/mchp_pfsoc_ioscb.c          | 20 ++++++++++++++--
- hw/misc/mchp_pfsoc_sysreg.c         | 37 ++++++++++++++++++++++-------
- hw/riscv/microchip_pfsoc.c          |  5 ++--
- 5 files changed, 55 insertions(+), 14 deletions(-)
-
-diff --git a/include/hw/misc/mchp_pfsoc_ioscb.h b/include/hw/misc/mchp_pfsoc_ioscb.h
-index aa108d2d88..e8386f9794 100644
---- a/include/hw/misc/mchp_pfsoc_ioscb.h
-+++ b/include/hw/misc/mchp_pfsoc_ioscb.h
-@@ -53,6 +53,7 @@ typedef struct MchpPfSoCIoscbState {
-     uint32_t services_sr;
-     uint8_t mailbox_data[MCHP_PFSOC_IOSCB_MAILBOX_SIZE];
-     char *serial_number;
-+    bool irq_pending;
-     qemu_irq irq;
- } MchpPfSoCIoscbState;
- 
-@@ -61,4 +62,7 @@ typedef struct MchpPfSoCIoscbState {
- #define MCHP_PFSOC_IOSCB(obj) \
-     OBJECT_CHECK(MchpPfSoCIoscbState, (obj), TYPE_MCHP_PFSOC_IOSCB)
- 
-+bool mchp_pfsoc_ioscb_get_irq_pending(MchpPfSoCIoscbState *s);
-+void mchp_pfsoc_ioscb_set_irq_pending(MchpPfSoCIoscbState *s, bool pending);
-+
- #endif /* MCHP_PFSOC_IOSCB_H */
-diff --git a/include/hw/misc/mchp_pfsoc_sysreg.h b/include/hw/misc/mchp_pfsoc_sysreg.h
-index c2b3688a94..d6c9027f2d 100644
---- a/include/hw/misc/mchp_pfsoc_sysreg.h
-+++ b/include/hw/misc/mchp_pfsoc_sysreg.h
-@@ -24,13 +24,14 @@
- #define MCHP_PFSOC_SYSREG_H
- 
- #include "hw/core/sysbus.h"
-+#include "hw/misc/mchp_pfsoc_ioscb.h"
- 
- #define MCHP_PFSOC_SYSREG_REG_SIZE  0x2000
- 
- typedef struct MchpPfSoCSysregState {
-     SysBusDevice parent;
-     MemoryRegion sysreg;
--    qemu_irq irq;
-+    MchpPfSoCIoscbState *ioscb;
- } MchpPfSoCSysregState;
- 
- #define TYPE_MCHP_PFSOC_SYSREG "mchp.pfsoc.sysreg"
-diff --git a/hw/misc/mchp_pfsoc_ioscb.c b/hw/misc/mchp_pfsoc_ioscb.c
-index bde1917c10..1f77da6852 100644
---- a/hw/misc/mchp_pfsoc_ioscb.c
-+++ b/hw/misc/mchp_pfsoc_ioscb.c
-@@ -209,6 +209,22 @@ static const MemoryRegionOps mchp_pfsoc_io_calib_ddr_ops = {
- #define SERVICES_STATUS_SUCCESS             0
- #define SERVICES_STATUS_FAILED              1
- 
-+static void mchp_pfsoc_ioscb_update_irq(MchpPfSoCIoscbState *s)
-+{
-+    qemu_set_irq(s->irq, s->irq_pending);
-+}
-+
-+bool mchp_pfsoc_ioscb_get_irq_pending(MchpPfSoCIoscbState *s)
-+{
-+    return s->irq_pending;
-+}
-+
-+void mchp_pfsoc_ioscb_set_irq_pending(MchpPfSoCIoscbState *s, bool pending)
-+{
-+    s->irq_pending = pending;
-+    mchp_pfsoc_ioscb_update_irq(s);
-+}
-+
- static void services_cr_write(MchpPfSoCIoscbState *s, uint32_t value)
- {
-     uint32_t command;
-@@ -248,7 +264,7 @@ static void services_cr_write(MchpPfSoCIoscbState *s, uint32_t value)
- 
-     s->services_sr = status << SERVICES_SR_STATUS_SHIFT;
-     if (value & SERVICES_CR_NOTIFY) {
--        qemu_irq_raise(s->irq);
-+        mchp_pfsoc_ioscb_set_irq_pending(s, true);
-     }
- }
- 
-@@ -339,7 +355,7 @@ static void mchp_pfsoc_ioscb_reset(DeviceState *dev)
-     s->services_cr = 0;
-     s->services_sr = 0;
-     memset(s->mailbox_data, 0, sizeof(s->mailbox_data));
--    qemu_irq_lower(s->irq);
-+    mchp_pfsoc_ioscb_set_irq_pending(s, false);
- }
- 
- static const Property mchp_pfsoc_ioscb_properties[] = {
-diff --git a/hw/misc/mchp_pfsoc_sysreg.c b/hw/misc/mchp_pfsoc_sysreg.c
-index 1d9154280a..4c52338c8a 100644
---- a/hw/misc/mchp_pfsoc_sysreg.c
-+++ b/hw/misc/mchp_pfsoc_sysreg.c
-@@ -24,20 +24,22 @@
- #include "qemu/bitops.h"
- #include "qemu/log.h"
- #include "qapi/error.h"
--#include "hw/core/irq.h"
-+#include "hw/core/qdev-properties.h"
- #include "hw/core/sysbus.h"
- #include "hw/misc/mchp_pfsoc_sysreg.h"
- #include "system/runstate.h"
- 
--#define CLOCK_CONFIG_CR 0x8
--#define RTC_CLOCK_CR    0xc
--#define MSS_RESET_CR    0x18
--#define ENVM_CR         0xb8
--#define MESSAGE_INT     0x118c
-+#define CLOCK_CONFIG_CR     0x8
-+#define RTC_CLOCK_CR        0xc
-+#define MSS_RESET_CR        0x18
-+#define ENVM_CR             0xb8
-+#define MESSAGE_INT         0x118c
-+#define MESSAGE_INT_PENDING BIT(0)
- 
- static uint64_t mchp_pfsoc_sysreg_read(void *opaque, hwaddr offset,
-                                        unsigned size)
- {
-+    MchpPfSoCSysregState *s = opaque;
-     uint32_t val = 0;
- 
-     switch (offset) {
-@@ -56,6 +58,10 @@ static uint64_t mchp_pfsoc_sysreg_read(void *opaque, hwaddr offset,
-         /* Indicate the eNVM is running at the configured divider rate */
-         val = BIT(6);
-         break;
-+    case MESSAGE_INT:
-+        val = mchp_pfsoc_ioscb_get_irq_pending(s->ioscb) ?
-+              MESSAGE_INT_PENDING : 0;
-+        break;
-     default:
-         qemu_log_mask(LOG_UNIMP, "%s: unimplemented device read "
-                       "(size %d, offset 0x%" HWADDR_PRIx ")\n",
-@@ -77,7 +83,12 @@ static void mchp_pfsoc_sysreg_write(void *opaque, hwaddr offset,
-         }
-         break;
-     case MESSAGE_INT:
--        qemu_irq_lower(s->irq);
-+        /*
-+         * MESSAGE_INT bit 0 is read/write: writing zero clears the interrupt
-+         * and writing one sets it. IOSCB owns the state and PLIC output.
-+         */
-+        mchp_pfsoc_ioscb_set_irq_pending(s->ioscb,
-+                                        value & MESSAGE_INT_PENDING);
-         break;
-     default:
-         qemu_log_mask(LOG_UNIMP, "%s: unimplemented device write "
-@@ -97,20 +108,30 @@ static void mchp_pfsoc_sysreg_realize(DeviceState *dev, Error **errp)
- {
-     MchpPfSoCSysregState *s = MCHP_PFSOC_SYSREG(dev);
- 
-+    if (!s->ioscb) {
-+        error_setg(errp, "The 'ioscb' link must be set");
-+        return;
-+    }
-+
-     memory_region_init_io(&s->sysreg, OBJECT(dev),
-                           &mchp_pfsoc_sysreg_ops, s,
-                           "mchp.pfsoc.sysreg",
-                           MCHP_PFSOC_SYSREG_REG_SIZE);
-     sysbus_init_mmio(SYS_BUS_DEVICE(dev), &s->sysreg);
--    sysbus_init_irq(SYS_BUS_DEVICE(dev), &s->irq);
- }
- 
-+static const Property mchp_pfsoc_sysreg_properties[] = {
-+    DEFINE_PROP_LINK("ioscb", MchpPfSoCSysregState, ioscb,
-+                     TYPE_MCHP_PFSOC_IOSCB, MchpPfSoCIoscbState *),
-+};
-+
- static void mchp_pfsoc_sysreg_class_init(ObjectClass *klass, const void *data)
- {
-     DeviceClass *dc = DEVICE_CLASS(klass);
- 
-     dc->desc = "Microchip PolarFire SoC SYSREG module";
-     dc->realize = mchp_pfsoc_sysreg_realize;
-+    device_class_set_props(dc, mchp_pfsoc_sysreg_properties);
- }
- 
- static const TypeInfo mchp_pfsoc_sysreg_info = {
-diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
-index 36c894b677..38f4e7d799 100644
---- a/hw/riscv/microchip_pfsoc.c
-+++ b/hw/riscv/microchip_pfsoc.c
-@@ -315,12 +315,11 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
-     }
- 
-     /* SYSREG */
-+    object_property_set_link(OBJECT(&s->sysreg), "ioscb", OBJECT(&s->ioscb),
-+                             &error_abort);
-     sysbus_realize(SYS_BUS_DEVICE(&s->sysreg), errp);
-     sysbus_mmio_map(SYS_BUS_DEVICE(&s->sysreg), 0,
-                     memmap[MICROCHIP_PFSOC_SYSREG].base);
--    sysbus_connect_irq(SYS_BUS_DEVICE(&s->sysreg), 0,
--                       qdev_get_gpio_in(DEVICE(s->plic),
--                       MICROCHIP_PFSOC_MAILBOX_IRQ));
- 
-     /* AXISW */
-     create_unimplemented_device("microchip.pfsoc.axisw",
--- 
-2.53.0
-
+>=20
+>=20
+> We will expose the remaining uarts as features as added to the model=20
+> that produce output that anyone would care to look at. For example,=20
+> uart0 is the system controller's console, when the system controller
+> is=20
+> added to the model then we will expose uart0 on the command line.
+> This=20
+> will prevent us from locking into a command line API before we need
+> to.
+>=20
+>=20
+>=20
+> >=20
+> > Alistair
+> >=20
+> > > +}
+> > > +
+> > > =C2=A0=C2=A0static void tt_atlantis_machine_done(Notifier *n, void *d=
+ata)
+> > > =C2=A0=C2=A0{
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 TTAtlantisState *ams =3D container_of(=
+n, TTAtlantisState,
+> > > machine_done);
+> > > @@ -484,11 +505,6 @@ static void
+> > > tt_atlantis_machine_done(Notifier
+> > > *n, void *data)
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 fdt_load_addr);
+> > > =C2=A0=C2=A0}
+> > > =C2=A0=20
+> > > -static inline int tt_atlantis_uart_index(int uart_dev)
+> > > -{
+> > > -=C2=A0=C2=A0=C2=A0 return uart_dev - TT_ATL_UART0;
+> > > -}
+> > > -
+> > > =C2=A0=C2=A0static void tt_atlantis_soc_init(Object *obj)
+> > > =C2=A0=C2=A0{
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 TTAtlantisSoCState *s =3D TT_ATLANTIS_=
+SOC(obj);
+> > > @@ -592,10 +608,6 @@ static void
+> > > tt_atlantis_soc_realize(DeviceState
+> > > *dev, Error **errp)
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 memory_region_add_subregion(s->memory,=
+ s-
+> > > > memmap[TT_ATL_BOOTROM].base,
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 &s->bootrom);
+> > > =C2=A0=20
+> > > -=C2=A0=C2=A0=C2=A0 /* UART1, the soc console (UART0 is for the boot
+> > > microcontroller
+> > > */
+> > > -=C2=A0=C2=A0=C2=A0 qdev_prop_set_chr(DEVICE(&s-
+> > > > uart[tt_atlantis_uart_index(TT_ATL_UART1)]),
+> > > -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 "chardev", ser=
+ial_hd(0));
+> > > -
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 for (int i =3D 0; i < TT_ATL_NUM_UARTS=
+; i++) {
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 SysBusDevice *=
+sbd =3D SYS_BUS_DEVICE(&s->uart[i]);
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (!sysbus_re=
+alize(sbd, errp)) {
+> > > @@ -663,6 +675,10 @@ static void
+> > > tt_atlantis_machine_init(MachineState *machine)
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 OBJECT(&ams->soc_memory),
+> > > &error_abort);
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 object_property_set_link(OBJECT(&ams->=
+soc), "dram",
+> > > OBJECT(machine->ram),
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 &error_abort);
+> > > +
+> > > +=C2=A0=C2=A0=C2=A0 /* Map serial interfaces to uart */
+> > > +=C2=A0=C2=A0=C2=A0 tt_atlantis_connect_serial_hds_to_uarts(ams);
+> > > +
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 qdev_realize(DEVICE(&ams->soc), NULL, =
+&error_fatal);
+> > > =C2=A0=20
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 /* I2C peripherals: qemu specific */
+> > > @@ -680,6 +696,47 @@ static void
+> > > tt_atlantis_machine_init(MachineState *machine)
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 qemu_add_machine_init_done_notifier(&a=
+ms->machine_done);
+> > > =C2=A0=C2=A0}
+> > > =C2=A0=20
+> > > +static void tt_atlantis_get_console(Object *obj, Visitor *v,
+> > > const
+> > > char *name,
+> > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 void =
+*opaque, Error **errp)
+> > > +{
+> > > +=C2=A0=C2=A0=C2=A0 TTAtlantisState *ams =3D TT_ATLANTIS_MACHINE(obj)=
+;
+> > > +=C2=A0=C2=A0=C2=A0 uint32_t uart_index =3D tt_atlantis_uart_index(am=
+s-
+> > > >uart_chosen);
+> > > +
+> > > +=C2=A0=C2=A0=C2=A0 visit_type_uint32(v, name, &uart_index, errp);
+> > > +}
+> > > +
+> > > +static void tt_atlantis_set_console(Object *obj, Visitor *v,
+> > > const
+> > > char *name,
+> > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 void =
+*opaque, Error **errp)
+> > > +{
+> > > +=C2=A0=C2=A0=C2=A0 TTAtlantisState *ams =3D TT_ATLANTIS_MACHINE(obj)=
+;
+> > > +=C2=A0=C2=A0=C2=A0 uint32_t value;
+> > > +
+> > > +=C2=A0=C2=A0=C2=A0 if (!visit_type_uint32(v, name, &value, errp)) {
+> > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return;
+> > > +=C2=A0=C2=A0=C2=A0 }
+> > > +
+> > > +=C2=A0=C2=A0=C2=A0 if (value >=3D TT_ATL_NUM_UARTS) {
+> > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 error_setg(errp, "\"conso=
+le\" should be in range [%d -
+> > > %d]",
+> > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 0, TT_ATL_NUM_UARTS - 1);
+> > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return;
+> > > +=C2=A0=C2=A0=C2=A0 }
+> > > +=C2=A0=C2=A0=C2=A0 ams->uart_chosen =3D value + TT_ATL_UART0;
+> > > +}
+> > > +
+> > > +static void tt_atlantis_machine_class_props_init(ObjectClass
+> > > *oc)
+> > > +{
+> > > +=C2=A0=C2=A0=C2=A0 ObjectProperty *console;
+> > > +
+> > > +=C2=A0=C2=A0=C2=A0 console =3D object_class_property_add(oc, "consol=
+e",
+> > > "uint32_t",
+> > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0 tt_atlantis_get_console,
+> > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0 tt_atlantis_set_console,
+> > > NULL, NULL);
+> > > +=C2=A0=C2=A0=C2=A0 object_class_property_set_description(oc, "consol=
+e",
+> > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 "=
+Change the default UART index on -serial. Valid
+> > > values
+> > > are 0 " \
+> > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 "=
+through 4");
+> > > +=C2=A0=C2=A0=C2=A0 /* Default to UART1, the Ascalon console */
+> > > +=C2=A0=C2=A0=C2=A0 object_property_set_default_uint(console, 1);
+> > > +}
+> > > +
+> > > =C2=A0=C2=A0static void tt_atlantis_machine_class_init(ObjectClass *o=
+c,
+> > > const
+> > > void *data)
+> > > =C2=A0=C2=A0{
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 MachineClass *mc =3D MACHINE_CLASS(oc)=
+;
+> > > @@ -693,6 +750,8 @@ static void
+> > > tt_atlantis_machine_class_init(ObjectClass *oc, const void *data)
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 mc->block_default_type =3D IF_VIRTIO;
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 mc->no_cdrom =3D 1;
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 mc->default_ram_id =3D "tt_atlantis.ra=
+m";
+> > > +
+> > > +=C2=A0=C2=A0=C2=A0 tt_atlantis_machine_class_props_init(oc);
+> > > =C2=A0=C2=A0}
+> > > =C2=A0=20
+> > > =C2=A0=C2=A0static const TypeInfo tt_atlantis_types[] =3D {
+> > > diff --git a/include/hw/riscv/tt_atlantis.h
+> > > b/include/hw/riscv/tt_atlantis.h
+> > > index b81b7c8abd..7bd46e9c9b 100644
+> > > --- a/include/hw/riscv/tt_atlantis.h
+> > > +++ b/include/hw/riscv/tt_atlantis.h
+> > > @@ -56,6 +56,7 @@ struct TTAtlantisState {
+> > > =C2=A0=20
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 MemoryRegion soc_memory;
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 TTAtlantisSoCState soc;
+> > > +=C2=A0=C2=A0=C2=A0 uint32_t uart_chosen;
+> > > =C2=A0=C2=A0};
+> > > =C2=A0=20
+> > > =C2=A0=C2=A0enum {
 
