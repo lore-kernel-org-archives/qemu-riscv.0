@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51179CC6B19
-	for <qemu-riscv@archiver.kernel.org>; Wed, 14 Oct 2026 01:29:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 212FDCC6B1D
+	for <qemu-riscv@archiver.kernel.org>; Wed, 14 Oct 2026 01:29:34 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xGnlT-0000QV-AK; Tue, 13 Oct 2026 21:26:45 -0400
+	id 1xGnmX-0001i2-1f; Tue, 13 Oct 2026 21:27:51 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bin.meng@processmission.com>)
- id 1xGnjk-0005q5-He; Tue, 13 Oct 2026 21:25:00 -0400
-Received: from mail-japaneastazlp170120005.outbound.protection.outlook.com
- ([2a01:111:f403:c405::5] helo=TYPPR03CU001.outbound.protection.outlook.com)
+ id 1xGnjk-0005q4-Gv; Tue, 13 Oct 2026 21:25:00 -0400
+Received: from mail-japanwestazlp170120003.outbound.protection.outlook.com
+ ([2a01:111:f403:c406::3] helo=OS8PR02CU002.outbound.protection.outlook.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bin.meng@processmission.com>)
- id 1xGnjj-0006vY-2G; Tue, 13 Oct 2026 21:24:56 -0400
+ id 1xGnji-0006vq-0o; Tue, 13 Oct 2026 21:24:55 -0400
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=dwCryo3XjgaeuEDcVJfqM+I4RrRwP8JGmBEWDe0qbuLd5nLJcFy0qEoH8hj5+oxIm9ZdJvZfjB5eoo5OVN4FrHUR0dieNGL44Q8ROkjisHFg0GymeQltYx22jRxo8Sd9INQKtDBwBl1ZlGJw3IJjfg1Ry27yQ+7HrS4iG3q+gKULUGFrpuDGmuKUJh2/PurIIiGffhgv7FxUJyVP/a7JvcjOeJKHWYHFUy+ce1p+u/qYWUzBsVqARVAdsIAvWbDGuUV9MMwt5UgyISHl7bZC08YvIsOMnxiTQYMNWZXtP8BeiIXcaJol9I/q684f122CnPyESEU+h62v9QPORoiyKQ==
+ b=OSX9xDMyMeAlNq5C6vEVHOEgTI2tSUn6WO3bBmKeN8lU0B1vhd6tuT8NxABI/bMJzZXX47Jpth9vke6pKp8KG0ibKQEiZUDEKvxwzSLflNeE9/JwrcnZPw2yuFJasqhcbbxKU6+e0v9udwnfXiE600Mm75YCy3oOXCKg27GGrFWzeUIlsgD6a2MYFEPJPeGwQnJqaWOOr/AzYq0NTmrH1BXthqMws3Mq2WzngzZdYZfWLi58dBKa+P++Yc0PeAFzglRFNI+gYtvHUFvUEx7Wv3TpvK0gX0urcosuhInjlQBiCGjxuDRHkaADiwsailERmuqXnn6K+jtBpXh2hJJlpA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=JPbYcYb+Ea6brIzLdDAwzjRCiMKtli9g++a9RzhFMtI=;
- b=y9ZzR/CZLostxfBP9mf2wvGj7VKzZpeRnvbaORko65nOnSKTd0DEwisc3doesGEI+mcijO+ncETMDim4rD5bN6WelbBX+lIDn7AOFXwVYxaD21lBnOaMwjvJhK59rmakzHvZAmR3BoIJBHsR4/5tlyIYDPMTCNtXPIHbYpHKpqf7ww9PQz8EkZlwaGT5rOUkkz2PX1qCSGQEEQn+zmdSdL9lc4ld5kap13RrXWzdMkl1WX/z1gfpvxkh0pYgKp21dIFyVEztYrPh+t30/98zzU2Vz5B5AInze/szb1hZ7/pyHku5yOVdQe3NQyADJE5+b2U+Xeh3fa/zNNNaLDzIKg==
+ bh=KMG2g42Bfo0zJu9pe05IBLFa73jLqvIBiTF2gesWqQU=;
+ b=G9HGcmlH3TS+gHQcBC6pGYE4uq2XnrNkFC/+mKOUPBpNvkFhh2l1DJyZq3PMLm0/T7tf7X5HiDLYYPin976qQv3TGn+T69wJd6JOEWfJZAOncS+m4Aoo4N01BFozaRzHBs3EUFD0WyTFxfcYywSkyUhpbGux6tLTpZXDBxhMyRI6cYHxvryqODikNtno7hEFutzJsbXlVa6mkDsO34+L/I7E16cklWms0FEDsnp9iSGditDUvn4PnFU79dFKrJ0RRsmZB2TXDwVAROiJa0aVQdlcBxI/Td54flXWIf9gPT3w7E1xjfjeap95NJCzpvlD5mQlVrXvOsKOykp5ZV02mg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=processmission.com; dmarc=pass action=none
  header.from=processmission.com; dkim=pass header.d=processmission.com;
@@ -33,26 +33,33 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=processmission.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=JPbYcYb+Ea6brIzLdDAwzjRCiMKtli9g++a9RzhFMtI=;
- b=GOAT2IiRkQJSSeRswsZUVflaU6U5LJhteU5iUi6f+RIMrj0SPSIrOBs6zEW0rBE82vQ3alGIHWNFevtvOrCjHSUEEISdU9Xwtl4K810IBT5WFGJRN978QWsYErdTHmP71dvQXDVKiFS9d4NOdKex0FfxFkNDBC4wjM6Xo1sMNpWk/cZkjm0CjtciplztB4Mz52U89wKcR/3hvVicmfKPSUnrnffh/E/7cQ1lLA3LdOfTIcDKmPBmFAV8M+c+8BQ/AEsWa8u6Blg6XKRxTe9ERPsm+mdaXIGzoI9DV87wL+gHGztQWguqQwseQGqhPmLTupOvCsGyA6jIhDwp1JSmJA==
+ bh=KMG2g42Bfo0zJu9pe05IBLFa73jLqvIBiTF2gesWqQU=;
+ b=L3q9pj7IS4XsOBOmGFjxQNGO+F4R1R6VAJ2lYaRw+tU0ZkBn5aZWjy5z4iRahgjIzaMOGkcN+hg0znCTnhgBlXJGwbh3XuZPfkp/HYmiz2upuo7bTVvjzxocXN+0ztPiER4SLOjVxf/ODzKgC3vZJnoANeCgBgg30H5roT+1b8eiDCueWyWyIJjjSclkfKAVntAjX8LQ/oekrAuuEyr4Kyn+b+Z+2JyTj10P3StoPiHZOdD/P062I3Hu8JP0Pfi6EGuw40jIQw8dcX0lOnttqDvbrPIpO7R4FLCdbHyuoKp7TiMTM71mfOklrDccdqMfHA4RlMKnHh84QfU4t65GDQ==
 Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=processmission.com;
 Received: from KL1PR02MB6257.apcprd02.prod.outlook.com (2603:1096:820:da::11)
- by KL1PR02MB6214.apcprd02.prod.outlook.com (2603:1096:820:9e::10)
+ by TYNPR02MB9225.apcprd02.prod.outlook.com (2603:1096:405:3b3::12)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.522.12; Wed, 14 Oct
- 2026 01:24:34 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.496.23; Wed, 14 Oct
+ 2026 01:24:47 +0000
 Received: from KL1PR02MB6257.apcprd02.prod.outlook.com
  ([fe80::ecf9:e832:8196:215]) by KL1PR02MB6257.apcprd02.prod.outlook.com
  ([fe80::ecf9:e832:8196:215%6]) with mapi id 15.21.0496.021; Wed, 14 Oct 2026
- 01:24:34 +0000
+ 01:24:47 +0000
 From: Bin Meng <bin.meng@processmission.com>
 To: QEMU <qemu-devel@nongnu.org>
-Cc: Conor Dooley <conor.dooley@microchip.com>, Conor Dooley <conor@kernel.org>,
- Sebastian Huber <sebastian.huber@embedded-brains.de>, qemu-riscv@nongnu.org
-Subject: [PATCH v4 18/27] hw/misc: pfsoc: Honor service notification requests
-Date: Wed, 14 Oct 2026 09:22:58 +0800
-Message-ID: <20261014012323.322790-19-bin.meng@processmission.com>
+Cc: Conor Dooley <conor.dooley@microchip.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Chao Liu <chao.liu@processmission.com>, Conor Dooley <conor@kernel.org>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+ Sebastian Huber <sebastian.huber@embedded-brains.de>,
+ Weiwei Li <liwei1518@gmail.com>, qemu-riscv@nongnu.org
+Subject: [PATCH v4 22/27] hw/riscv: pfsoc: Default Icicle Kit to five harts
+Date: Wed, 14 Oct 2026 09:23:02 +0800
+Message-ID: <20261014012323.322790-23-bin.meng@processmission.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20261014012323.322790-1-bin.meng@processmission.com>
 References: <20261014012323.322790-1-bin.meng@processmission.com>
@@ -63,67 +70,66 @@ X-ClientProxiedBy: TY6PR01CA0005.jpnprd01.prod.outlook.com
  (2603:1096:820:da::11)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: KL1PR02MB6257:EE_|KL1PR02MB6214:EE_
-X-MS-Office365-Filtering-Correlation-Id: feb50e56-2796-4d5d-32fc-08df2991e761
+X-MS-TrafficTypeDiagnostic: KL1PR02MB6257:EE_|TYNPR02MB9225:EE_
+X-MS-Office365-Filtering-Correlation-Id: be959a66-d8a9-4e74-0191-08df2991ef86
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|23010399003|1800799024|376014|366016|18002099003|22082099003|10067099003|261009223027099003|56012099006;
-X-Microsoft-Antispam-Message-Info: J0yHTALZXlxwTdrgwcYx9Gbs21oFAS/icuAIiThGhQvQtAlthOF+0ylONEVf9qJJbH7FkzUqV2GHWjQVUMBO/gMrsi1nJj0XsloUBwNvwZxRmvFZPNqzBeToRwN0AGItrVZczXy/kv3TMhdwch84zyX5tJwpIQ1VZVNOOx9tx/XkywWi1qNcig5z9IcRoFYR3JWm0dk9d7amfn4RfFFDjYRIMLp33DJF30YRc8r9qZa6PA/sdad5NDiVWVrb5iC11mbR4NjeRt4YmMikezpZKiAXbfXXz0HitiKP1hvqLkNtgX4tpBz4AZ9T3JQ6lYwSec9XR+Iy0uqyATwXStCPbnIoOFg4DJDUz6ymPJ4RvxkLq0x1ghinu3976aCb9xFOhLBDqage84jV/pLHSVpZu2IhB0vbpAeks2OW6T8oDOLB7EIQ6B+PuVO2nzC8a1ZlMLiE4QKTyLWKtmOxZQjxubiuwDORNVkOE2TGRJp5GVtYW+qNV6bcMewFBuMvmFPAxlGeP0iGoKI+dKhf+NHrEX/86lw9xMLjVln55zY8A/IeQ+xQg+u1q3nzBaHJDeZYia+5pP2QUHH1/tJwUeJZndeIA8snZYgeMsAfoGiUf4qIRrODs8JQ+bGpnnzG7EtRQNB56iJ8YO5yLBF9WyKTCyUaXNYD1HZy8YVa3AZ3fD4=
+ ARA:13230040|376014|7416014|366016|1800799024|23010399003|18002099003|22082099003|56012099006|261009223027099003|10067099003;
+X-Microsoft-Antispam-Message-Info: V570B9f8Fm7B2tSK+8i0/2jt/xC1g+hPmU8mrutDmAcDoKClSpEsdj138wjROl58t9a7Ngrd0e/6Co70sH9O50qaohSi+E8DeILPtyLJnVwBB6bOjQchSVGs6V9pj3Dq+eifpRKHRPfZdIz4KszUza7LfnjeQSi47uGxOsZ8+KagyTpvdpBfKbjSH9P0eP5MoZE/pMM36srIdtZYTEAHIz+IZRgX507/atN0l41tQMFuVeQLzj3no67trd/74pdSAn9Ehc6ERZDaF1MpD1TZUhkm6bT5b+W9mohFvI1gpdPNNiBAwUskYbzXpnpgV/11pyjdwgyR3FNtIBM7Eqz1a/AWa+STuBacXyIxXSuz+7CFpKwYU4DZKkUxHITdEFqXFLBb20PXfu0u/vit8NuQID5VYbHhxwuBkdZDOfyF2mLZ8STrGAHdmwPkwllgUgm97pVRj49M/3v+N+0boTbONdyuhGhn/JLER1hWHOfJGfcGlscmg7T4586o+du2dixveNwdq9En/VGp1LXrnhPLYjNKTAMTMHUqaydv8mmE6hLMuoRWZIQjqHOb/qkiov2l1mZYTyn2NKcvVItMKbLBWQLfO6eVD97sS7gZzw+zRhQdqdtrv0nJYgc+B3vE/DSeOd1V3hrc2cvregAyqp/AyNtMClZrUB4gQO+0P5A3dYw=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:KL1PR02MB6257.apcprd02.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(23010399003)(1800799024)(376014)(366016)(18002099003)(22082099003)(10067099003)(261009223027099003)(56012099006);
+ SFS:(13230040)(376014)(7416014)(366016)(1800799024)(23010399003)(18002099003)(22082099003)(56012099006)(261009223027099003)(10067099003);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?8LnSMmw+eGb5xFEIvKEtDlmRuiVr41xVId3n/MyEB0XBGbM1rvni2HF3maV2?=
- =?us-ascii?Q?JrbvTHAQpTv3Qir4G7X2cqEygcuzsBOL/22OeeYAK22AmAFThDKrNm+vttjk?=
- =?us-ascii?Q?RYov6p51MjIn/ZVzbg1KZc4zlPPtrGo9uJMy75PFLV1qvxeRC1c72JjCCZ/u?=
- =?us-ascii?Q?L1nBVf5wS0lxOpEHHHxwm6MNRlJUQeo96gWKApYkqMuaw+cl6zIf/Gn3hvpg?=
- =?us-ascii?Q?uQepnWyH0fgbVFnYbgQOxLt1s3+euxmeYEU/oeH/OxamZktN2uITHaH6FlnS?=
- =?us-ascii?Q?i38+4W5LvjMWa9N597YghuTfYf7f7oF1I1yYVhGBbo4VTS/jK7ygFjuWL7dz?=
- =?us-ascii?Q?JnSHX5p+2v4Kv/b1D3dC3vzluZfOvpvpuu5ldCtqU1pTSXdjWJyARp6++Gmz?=
- =?us-ascii?Q?x9+Vj0e/esShDDk/yjcGY1x0oNwNsRyJv+sj+kGLok4SrFHqfQEWJwwbuQsm?=
- =?us-ascii?Q?qgrfDRFu7Z6uEwI7qBEMLw9yaG8oUb3OKfWmH8i8wYpf4CSB8MeSzoqrXqGW?=
- =?us-ascii?Q?Ns4dO9dJUOp4IuE/u+JOZvdgwyMN0gkB3PzvAQlPNOcLGGznl/Uk7CzQ7i5i?=
- =?us-ascii?Q?C/6Kx8GhIw3LGMC542j+tmJbL7APDL6BfNVDZFjEsWByMb1XhCXVJkBQmPBZ?=
- =?us-ascii?Q?S1j7Yk3LXE4KAsT2BQixQWlROJK7IFeMHBkun1fflQqU5SEqD4WayOpyCEUY?=
- =?us-ascii?Q?l1CSKnGDTA+ueJe62pVfGowpSZZJuj8J7qJ5pyiFd0UtZdFXbweFWwHypFxe?=
- =?us-ascii?Q?ZZtZF+5fCQflChLeJ51p/GKiSY3LLb05/Hri/YyxNZeOxFhByNbAiioS1xVc?=
- =?us-ascii?Q?T0rgmjYOAosP3RqKI7IulPuNidXDR1dsgKtx3QfXeXuJByVT3lCdo5kcyhlR?=
- =?us-ascii?Q?7Q0mkuERBqqTSiz2/ekuDL53k/SlWUpM2IJh5LYPdO7SfwXcb8VAqWoYgNcr?=
- =?us-ascii?Q?dSIzpB4cHDJgIHdPpUtRYtqmysCA7LeK0eQUA6xjNd3NE0SBt3DqPDUgtqEi?=
- =?us-ascii?Q?f/qtx/DeWFU/om03Zx3XLHt44yVRjU7y2wtjPRUd+D0cfwianXgtXw7sCaYL?=
- =?us-ascii?Q?SaxDjHD8hVCx8JZ67qoeEi1d7wyN9WruHu/oO6aqd9Jln4ViFhp4wxYtOSdU?=
- =?us-ascii?Q?TYgZKp5wWY3vLUgYBs4KJ2KN84va/a1qDK3+fZNlmAtAPfjUu29Y+XYOtz7F?=
- =?us-ascii?Q?pLMF2koYO0UdiT/gdnwYHGqrLjAWX2kXo7qUwgiKzQn2n7X31gHGtAuiDA2c?=
- =?us-ascii?Q?QIiSRt7Brv3ou84QFDWzDODD2qBDRc+Ay5HSKx+2GQ5zxZKQF+XhU1GKkUOC?=
- =?us-ascii?Q?TP0jVooJ0WpVx19oHV2je8bmsvKKg9flWCrSWLrWJksyNBvUCMOLHMtnG6Aq?=
- =?us-ascii?Q?ohCwL3S3ZV6+5Q6z8m65roCFCwAtVYNjNM+XVVBnVwR+8XCqFNphYGhca7qE?=
- =?us-ascii?Q?jPxVHESJCIvcpdUokClN2f2TpCdzpEmi6HNwpEE1GHo6JDEo9kDoCCWPVviR?=
- =?us-ascii?Q?2HV2TbFMccj8VyWdL5SpLBrC8LvNGF0trQkq/6mXrIQkxidLOtf1QqbmGP5p?=
- =?us-ascii?Q?km2XwjWDbPAQqoNZy5+bynXyG59GhlcHL3a/XDa1vbZnRltH1gTRfrA0MK1k?=
- =?us-ascii?Q?KLXduRDNezaWn7rmsPbWvP3ff2nQw/+2PocJHDOqIrbV76LNec+u3Okur+R7?=
- =?us-ascii?Q?sz+ZQ102JkC7pogqIPaFIhZDvMBmxHix8NVXuaGcHYyLd5BSizwzlGi5Lqhb?=
- =?us-ascii?Q?VrcW55upqH9UvuxMZrZ33eJ9Yg0TGNE=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?boDmFfbN8Vl1lUjxrjlvcIY9IYQefj59zIjygHgvtQ3I2VtSgbkVfuSB7onX?=
+ =?us-ascii?Q?Ut+qD6TrmEjT10PvjJJ11+Obxj56KUd7qGuuWpeKfpuCcx/PMP9WLiGDV/pg?=
+ =?us-ascii?Q?mEcV6uhy4wfE2nYF00znyX5AhqBVG+wTrcQvxJJuXRIKkdb4l8YBCeCmVvDT?=
+ =?us-ascii?Q?q78bsEilTxnm/mi/tSQc5+tE69/IjnDhSWvadXnN3+s8NUk9MFaT5+b4Ta9Y?=
+ =?us-ascii?Q?ooPMbKK8yq1hGZZtfqnNbW8dIbHzUjtqtL5jAalxN+++M5IeJy1k0qomBiik?=
+ =?us-ascii?Q?QuOIzYFPozyTam3HhcHbEzvFSsBieXwwtfGb81g2ikZzTQ00bEO0myDj5Zdg?=
+ =?us-ascii?Q?IAuoXQSGJrvIOvAUtm8w0rmbXdiRTGXr34bCMoivSHEBy3/de3WdpFBQznqC?=
+ =?us-ascii?Q?ajIgaO9D/t7NSvCyxWhgIVJb1jaiUTqcHHL0CcJbupo0cyk6O8lEnYH47zAj?=
+ =?us-ascii?Q?OD5dB0nJUM3ksYk/5wCQhb73srzLAoHq2IDOYYCCuFvNs2eeNq0U/uZ+dhuB?=
+ =?us-ascii?Q?ZLMxJ/EK9EsY5tmHvahjrnN61VbIlKX6LyW8gKI4/efC62CMNZUidusD2pf+?=
+ =?us-ascii?Q?fVVGao7P7l+8op6PlQ8Gr6eUfZuU1xJqQZQQso+hrIOwmVH5EDes+V54QThN?=
+ =?us-ascii?Q?xEnlqrgJmgzvFU635XeCkq/MzBI6lIULzEvohlyfVlzypWgc2YlUR9QFN5qU?=
+ =?us-ascii?Q?jC37Hhc3eI1nkpNkAjDYNsfTRHwqyhaRKQfgu5GXpnR8jaDOp/Bol0IkyjQh?=
+ =?us-ascii?Q?nGFJ3CI3ePO43/2U2Mjfu/UJSjyd6D+ZoSOF93Y/aJFBSfobQxfd6te0hfi4?=
+ =?us-ascii?Q?ICAY6okMihVltAhjL/vOXwWmYzvXwGtm9ZgvweyG8HgUKxR43YzgvANRByNa?=
+ =?us-ascii?Q?7om5Am7U6ohIjg0V8VCnE6Iv95NSNnkPVrfRXN+YlmTTvvni5s2j86fS8a3/?=
+ =?us-ascii?Q?TQ9giyeMtyWMd9RcF2eb4SGXqofajHjR4bsgexPTb3TpwhzlxINvaOVyP80q?=
+ =?us-ascii?Q?1vf2Da9rarxWQczY0pRk/YDqHVwLrjOsvYqgbs6OeWM8/VY3QLOGZh/C2/tx?=
+ =?us-ascii?Q?moBAfYCIbpduckD93jtPWt3scAWxoNL0hXttsC7ftK6Id7LyPoiNLf1fDzP1?=
+ =?us-ascii?Q?p5Ht/zbkrQmCBkWFcGTHZUjw9ktDRvv68RxEq4jIVCxysRa38NRZZEKWXwpF?=
+ =?us-ascii?Q?mt/1HBJyaW/aRaVSF4reVDMToF+rx+9+hGSKitGz1Smm0IvBogL0ucUlzplp?=
+ =?us-ascii?Q?9XTpvo42JijUkUP+OWKKHuMBz5OHKpV5XxOSOE4u80arVf3ieg7Osl5fb4bH?=
+ =?us-ascii?Q?HDLQH3u2cpMZsXmD4ZLn7pw7rh4DPVpIbhCey+JhAymreJXde5A9hDv3Sm8A?=
+ =?us-ascii?Q?wEALwnpfMgwbltb8g5I6576w3oX68VWlVGSivjeXdKJeWG8e3O5n4FyUQ7w2?=
+ =?us-ascii?Q?J7C34XzQ8BfhFecXW1zay9xejvhaKeF8vZMI/YHx+B1+KPnGBksG4DoQvukc?=
+ =?us-ascii?Q?yKKbud4FBQxtZuAZMaV5V/nbNCDhTzYePyErVgLcdi8B1gxmQTutatXkFQ6Z?=
+ =?us-ascii?Q?uC6jqBkDzrcFmRkkCG2BpIVn+Cky7al6PyJH/KSwNEgCGZ5l5Cy2a5cpW+u6?=
+ =?us-ascii?Q?GauiAHT/u/prg9qbF+FY5JCLlkWTRDWYv6JEn4T72MmWRJ0yjyBtYRIHsZY1?=
+ =?us-ascii?Q?9yibcMXuqugMo+TOAUq8Jia+/CCqd0WgmcL1BXDFHGeKw9NfXAkscKMO5XW+?=
+ =?us-ascii?Q?r5RSH9F1u3h03vMYrhkoLUhIaCIfMRo=3D?=
 X-OriginatorOrg: processmission.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: feb50e56-2796-4d5d-32fc-08df2991e761
+X-MS-Exchange-CrossTenant-Network-Message-Id: be959a66-d8a9-4e74-0191-08df2991ef86
 X-MS-Exchange-CrossTenant-AuthSource: KL1PR02MB6257.apcprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Oct 2026 01:24:34.0221 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Oct 2026 01:24:47.6921 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: e0544bf7-9765-4630-ab69-0b266dc2169c
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Dn/+bblnX+GY7XALAjxkanglK0BXrKq204XXd20so1RB+t0re/A6yPSWHse7X1j0R5nGSiMeJiZbQ3PMg1ej97sgGQXpscGHt/UqVTOrQIE=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: KL1PR02MB6214
-Received-SPF: pass client-ip=2a01:111:f403:c405::5;
+X-MS-Exchange-CrossTenant-UserPrincipalName: 5lXd7jOk/maJAtO1pCRFDCR0kZdUpw+qJncXEiuZL+ELHQs/rLKspDjtF5voAg5o774s9SiwqvsmTQiUYz2b/LouTQaYflKQtf8oCgDScNM=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYNPR02MB9225
+Received-SPF: pass client-ip=2a01:111:f403:c406::3;
  envelope-from=bin.meng@processmission.com;
- helo=TYPPR03CU001.outbound.protection.outlook.com
+ helo=OS8PR02CU002.outbound.protection.outlook.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_PASS=-0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -140,16 +146,14 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Polling firmware requests system services with REQUEST set and NOTIFY
-clear. Raising PLIC source 96 for those requests leaves an interrupt
-pending that Linux can receive before submitting its first request.
-The mailbox interrupt handler then has no response buffer to fill.
+The Icicle Kit contains one E51 management hart and four U54 application
+harts. Defaulting to two harts can accidentally boot firmware and a
+device tree that expect the full five-hart topology.
 
-Raise the completion interrupt only for requests with NOTIFY set.
-The serial-number service already checks REQUEST before processing a
-command.
+Default to all five harts, while retaining the existing two-to-five
+range for users intentionally configuring fewer application harts.
+Document that firmware and device trees must match the selected count.
 
-Fixes: 592f0a9429b9 ("hw/{misc, riscv}: pfsoc: add system controller as unimplemented")
 Signed-off-by: Bin Meng <bin.meng@processmission.com>
 Tested-by: Conor Dooley <conor.dooley@microchip.com>
 
@@ -158,26 +162,40 @@ Tested-by: Conor Dooley <conor.dooley@microchip.com>
 (no changes since v3)
 
 Changes in v3:
-- Split the NOTIFY fix from interrupt acknowledgement wiring
+- Change only the default hart count and retain the minimum of two
+- Document reduced topologies and matching firmware requirements
 
- hw/misc/mchp_pfsoc_ioscb.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ docs/system/riscv/microchip-icicle-kit.rst | 3 +++
+ hw/riscv/microchip_pfsoc.c                 | 2 +-
+ 2 files changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/hw/misc/mchp_pfsoc_ioscb.c b/hw/misc/mchp_pfsoc_ioscb.c
-index 850125c8b4..bde1917c10 100644
---- a/hw/misc/mchp_pfsoc_ioscb.c
-+++ b/hw/misc/mchp_pfsoc_ioscb.c
-@@ -247,7 +247,9 @@ static void services_cr_write(MchpPfSoCIoscbState *s, uint32_t value)
-     }
+diff --git a/docs/system/riscv/microchip-icicle-kit.rst b/docs/system/riscv/microchip-icicle-kit.rst
+index b0ad24f174..138289a913 100644
+--- a/docs/system/riscv/microchip-icicle-kit.rst
++++ b/docs/system/riscv/microchip-icicle-kit.rst
+@@ -27,6 +27,9 @@ The ``microchip-icicle-kit`` machine supports the following devices:
+ * 1 SDHC storage controller
  
-     s->services_sr = status << SERVICES_SR_STATUS_SHIFT;
--    qemu_irq_raise(s->irq);
-+    if (value & SERVICES_CR_NOTIFY) {
-+        qemu_irq_raise(s->irq);
-+    }
- }
+ The machine has a fixed 2 GiB of RAM. Other memory sizes are rejected.
++The machine defaults to all five harts. ``-smp`` may select two to five harts,
++with one E51 and one to four U54 cores. The firmware and device tree must match
++the selected topology; the HSS boot flow below uses all five harts.
  
- static uint64_t mchp_pfsoc_ctrl_read(void *opaque, hwaddr offset,
+ Boot options
+ ------------
+diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
+index 855c719f76..9d8e5916e7 100644
+--- a/hw/riscv/microchip_pfsoc.c
++++ b/hw/riscv/microchip_pfsoc.c
+@@ -752,7 +752,7 @@ static void microchip_icicle_kit_machine_class_init(ObjectClass *oc,
+     mc->max_cpus = MICROCHIP_PFSOC_MANAGEMENT_CPU_COUNT +
+                    MICROCHIP_PFSOC_COMPUTE_CPU_COUNT;
+     mc->min_cpus = MICROCHIP_PFSOC_MANAGEMENT_CPU_COUNT + 1;
+-    mc->default_cpus = mc->min_cpus;
++    mc->default_cpus = mc->max_cpus;
+     mc->default_ram_id = "microchip.icicle.kit.ram";
+     mc->auto_create_sdcard = true;
+ 
 -- 
 2.53.0
 
