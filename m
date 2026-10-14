@@ -4,54 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBCD5C3DA7A
-	for <qemu-riscv@archiver.kernel.org>; Wed, 14 Oct 2026 16:31:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1B93CC6B1D
+	for <qemu-riscv@archiver.kernel.org>; Wed, 14 Oct 2026 16:31:35 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xH1ro-0000XI-LJ; Wed, 14 Oct 2026 12:30:12 -0400
+	id 1xH1rn-0000UQ-6y; Wed, 14 Oct 2026 12:30:12 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <wangyang25@otcaix.iscas.ac.cn>)
- id 1xH1rg-0000E8-Hw; Wed, 14 Oct 2026 12:30:04 -0400
+ id 1xH1rJ-00005U-DF; Wed, 14 Oct 2026 12:29:41 -0400
 Received: from smtp81.cstnet.cn ([159.226.251.81] helo=cstnet.cn)
  by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
  (Exim 4.90_1) (envelope-from <wangyang25@otcaix.iscas.ac.cn>)
- id 1xH1re-0006By-Ni; Wed, 14 Oct 2026 12:30:04 -0400
+ id 1xH1rH-000690-6I; Wed, 14 Oct 2026 12:29:41 -0400
 Received: from DESKTOP-7FLBREN (unknown [124.16.137.194])
- by APP-03 (Coremail) with SMTP id rQCowAA3Q0EFrs9qyUfBCg--.57650S4;
- Thu, 15 Oct 2026 00:29:58 +0800 (CST)
+ by APP-03 (Coremail) with SMTP id rQCowACXmDbrrc9q4kXBCg--.37629S4;
+ Thu, 15 Oct 2026 00:29:32 +0800 (CST)
 From: wangyang <wangyang25@otcaix.iscas.ac.cn>
-To: Helge.Deller@gmx.de
-Cc: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org,
-	alistair.francis@wdc.com
-Subject: Re: [PATCH 2/7] linux-user/riscv: invalidate other-hart reservations
- after AMO stores
-Date: Thu, 15 Oct 2026 00:29:56 +0800
-Message-ID: <20261014162956.1939-1-wangyang25@otcaix.iscas.ac.cn>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
+ liwei1518@gmail.com, daniel.barboza@oss.qualcomm.com,
+ zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
+ christoph.muellner@vrull.eu
+Subject: [PATCH v5 0/5] target/riscv: fix privilege, PMP, CFI, envcfg checks
+Date: Thu, 15 Oct 2026 00:29:25 +0800
+Message-ID: <20261014162930.251-1-wangyang25@otcaix.iscas.ac.cn>
 X-Mailer: git-send-email 2.55.0.windows.2
-In-Reply-To: <682222a7-cc6d-45ef-97b5-65280c546e12@gmx.de>
-References: <682222a7-cc6d-45ef-97b5-65280c546e12@gmx.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: rQCowAA3Q0EFrs9qyUfBCg--.57650S4
-X-Coremail-Antispam: 1UD129KBjvdXoW7Xr47ArW3AF1DAF4xAF47urg_yoWfKFc_uw
- 4kZry5W3WUAF43A3WUKFy7Zr17Xayvq34xZry5Ja1I934I9rZ8JanruF9xWa4xGayF9Fn8
- urnxZ3WY9r4a9jkaLaAFLSUrUUUUjb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
- 9fnUUIcSsGvfJTRUUUbIxYjsxI4VWkKwAYFVCjjxCrM7AC8VAFwI0_Jr0_Gr1l1xkIjI8I
- 6I8E6xAIw20EY4v20xvaj40_Wr0E3s1l1IIY67AEw4v_Jr0_Jr4l8cAvFVAK0II2c7xJM2
- 8CjxkF64kEwVA0rcxSw2x7M28EF7xvwVC0I7IYx2IY67AKxVWUCVW8JwA2z4x0Y4vE2Ix0
- cI8IcVCY1x0267AKxVWxJVW8Jr1l84ACjcxK6I8E87Iv67AKxVWUJVW8JwA2z4x0Y4vEx4
+X-CM-TRANSID: rQCowACXmDbrrc9q4kXBCg--.37629S4
+X-Coremail-Antispam: 1UD129KBjvJXoW7uF1fGFyrKr15Ww1UXrW8Zwb_yoW8trWUpF
+ 4rGayaqFWkGry7Awn3AF4UXr15Wr4fGw45X3srXryrZay5CFyFqrZ3K34aga4DJ3Z8Ww12
+ 9F1qkw13uF15ZFUanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUU9Ib7Iv0xC_Kw4lb4IE77IF4wAFF20E14v26r4j6ryUM7CY07I2
+ 0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rw
+ A2F7IY1VAKz4vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Jr0_JF4l84ACjcxK6xII
+ jxv20xvEc7CjxVAFwI0_Gr0_Cr1l84ACjcxK6I8E87Iv67AKxVWUJVW8JwA2z4x0Y4vEx4
  A2jsIEc7CjxVAFwI0_Gr0_Gr1UM2vYz4IE04k24VAvwVAKI4IrM2AIxVAIcxkEcVAq07x2
  0xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v26r126r1DMc
  Ij6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IYc2Ij64vIr41l
- c2xSY4AK67AK6r1l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxV
- Aqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r12
- 6r1DMIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_JFI_Gr1lIxAIcVC0I7IYx2IY6x
- kF7I0E14v26F4j6r4UJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAF
- wI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa
- 7IUYFXd5UUUUU==
+ c7CjxVAaw2AFwI0_Jw0_GFylc2xSY4AK67AK6r1l42xK82IYc2Ij64vIr41l4I8I3I0E4I
+ kC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWU
+ WwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr
+ 0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r4j6F4UMIIF0xvE42xK8VAvwI8IcIk0rVWU
+ JVWUCwCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJb
+ IYCTnIWIevJa73UjIFyTuYvjxUkcTQUUUUU
 X-Originating-IP: [124.16.137.194]
 X-CM-SenderInfo: 5zdqw5xdqjjk46rwut1l0ox2xfdvhtffof0/
 Received-SPF: pass client-ip=159.226.251.81;
@@ -76,30 +74,57 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hello Helge,
+This series fixes five independent RISC-V emulation issues in the
+XTheadCmo, XTheadBb, HLVX/PMP, Zicfilp, and environment-configuration
+paths.
 
-Thank you for picking up patches #1 and #2. Sorry for the very slow
-reply; I only recently caught up with this thread.
+The first two patches correct XThead instruction handling. The third
+adds the missing final PMP read check for HLVX. The fourth fixes
+Zicfilp exception priority for tracked misaligned JALR targets. The
+fifth canonicalizes reserved CBIE encoding while preserving the
+defined CBIE=11 encoding.
 
-The zicntr=false gating patch (commit ebfde6dafff2) is in master and I
-have not seen any follow-up problems with it.
+This series is based on 209b2afaface001c7d4d981e38f186afe7b24a50.
 
-The reservation invalidation patch (commit 5089493e45d3) is a different
-story. I have followed the performance report behind the revert
-proposal: the patch sends every store through EXCP_ATOMIC and walks all
-CPUs on each store, which turns an xz run on 2 MB into minutes instead
-of seconds. I agree that cost is not acceptable, so please let it be
-reverted. I will not ask for it to be kept in its current form.
+Validation performed:
 
-If I can work out a version that avoids the global serialization, I
-will send it as a separate follow-up with the multi-threaded numbers in
-the cover letter. Until then the reverted state is the right one.
+  - QEMU 11.1.1 baseline and patched test-case replays passed.
+  - HLVX.HU and HLVX.WU execute-only PMP cases and tracked and
+    untracked misaligned JALR controls were checked.
+  - Every intermediate patch state built for qemu-system-riscv32,
+    qemu-system-riscv64, qemu-riscv32, and qemu-riscv64.
+  - RV32 XTheadBb imm6 0, 31, 32, and 63 cases pass with the
+    extension enabled and remain illegal when it is disabled.
+  - The series passes checkpatch.pl, git diff --check, and
+    independent apply checks.
 
-No action needed from you on either patch.
+Changes since v4:
 
-Thanks again for taking care of them.
+  - Patch 2 masks the shift amount in the translator again, as
+    suggested by Richard Henderson, instead of splitting the decodetree
+    pattern. The original code and its Reviewed-by tag are restored.
+  - Patches 3 and 5 carry the Reviewed-by tags they received during
+    review of v3; both patches are byte-identical to the reviewed
+    version.
+  - Reword the test descriptions in the commit messages to refer to
+    test cases, as requested during review.
 
-Regards,
-Wangyang
+wangyang (5):
+  target/riscv: enforce XTheadCmo U-mode privilege checks
+  target/riscv: mask RV32 XTheadBb th.srri shift amount
+  target/riscv: require read permission for HLVX accesses
+  target/riscv: prioritize Zicfilp checks for misaligned JALR
+  target/riscv: canonicalize reserved CBIE encoding
+
+ target/riscv/internals.h                      |  6 ++++
+ target/riscv/tcg/cpu_helper.c                 | 24 ++++++++++-----
+ target/riscv/tcg/csr.c                        | 29 +++++++++++++++++++
+ target/riscv/tcg/insn_trans/trans_rvi.c.inc   |  9 +++++-
+ .../riscv/tcg/insn_trans/trans_xthead.c.inc   |  5 ++--
+ target/riscv/tcg/op_helper.c                  | 11 ++++---
+ 6 files changed, 67 insertions(+), 17 deletions(-)
+
+-- 
+2.55.0.windows.2
 
 
