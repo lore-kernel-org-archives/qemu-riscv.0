@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D110CCC6B20
-	for <qemu-riscv@archiver.kernel.org>; Wed, 14 Oct 2026 04:28:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9283CC6B1A
+	for <qemu-riscv@archiver.kernel.org>; Wed, 14 Oct 2026 04:31:17 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xGqb3-0000sz-HQ; Wed, 14 Oct 2026 00:28:09 -0400
+	id 1xGqdr-0001uQ-JO; Wed, 14 Oct 2026 00:31:03 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair@alistair23.me>)
- id 1xGqb1-0000sW-69
- for qemu-riscv@nongnu.org; Wed, 14 Oct 2026 00:28:07 -0400
-Received: from fout-a2-smtp.messagingengine.com ([103.168.172.145])
+ id 1xGqdo-0001pc-UK
+ for qemu-riscv@nongnu.org; Wed, 14 Oct 2026 00:31:00 -0400
+Received: from fhigh-a6-smtp.messagingengine.com ([103.168.172.157])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair@alistair23.me>)
- id 1xGqax-0005yb-Gg
- for qemu-riscv@nongnu.org; Wed, 14 Oct 2026 00:28:06 -0400
+ id 1xGqdm-0006L5-UX
+ for qemu-riscv@nongnu.org; Wed, 14 Oct 2026 00:31:00 -0400
 Received: from phl-compute-03.internal (phl-compute-03.internal [10.202.2.43])
- by mailfout.phl.internal (Postfix) with ESMTP id 0FC17EC00CE
- for <qemu-riscv@nongnu.org>; Wed, 14 Oct 2026 00:28:03 -0400 (EDT)
+ by mailfhigh.phl.internal (Postfix) with ESMTP id 598DB1400175
+ for <qemu-riscv@nongnu.org>; Wed, 14 Oct 2026 00:30:53 -0400 (EDT)
 Received: from phl-frontend-03 ([10.202.2.162])
- by phl-compute-03.internal (MEProxy); Wed, 14 Oct 2026 00:28:03 -0400
+ by phl-compute-03.internal (MEProxy); Wed, 14 Oct 2026 00:30:53 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alistair23.me;
  h=cc:cc:content-transfer-encoding:content-type:content-type
  :date:date:from:from:in-reply-to:in-reply-to:message-id
  :mime-version:references:reply-to:subject:subject:to:to; s=fm2;
- t=1791952083; x=1792038483; bh=nNrFgYs6Tj4vS2Ti17G6dvbR9TxTsUtZ
- agc3NsPkUI4=; b=hpxJDz12LTADV+UTDbTpXCjF26Mh2m6oqxHi0EnSiKJW+O0d
- eAAHohd08hYGcVd6nP77hE7fYVAXoTfOLbNYyNDVBnbRT99yVD7gmzz0YpgnEpvD
- KzxiRk0nV/7lHL6BmFSt6rtXeBREHXG4RFjV+IjVPH2WqPYDVq64K0ro5x2RdZK+
- 21CHx6Hl/mHRgWXSBuwwujELlXQ0d+XFBLETO9Vh+Qh14tpBf4yaczY2vlWG+hiW
- Rs+XMVOtEoIhjJPJqMU2MrLhxi/bWNNrq6h06Knfl4EOTv9ZaEHSUWi8wzv8pAGc
- Ym9cPA9c1peRwxROKHB57EqWVgLIlUdxJF74nw==
+ t=1791952253; x=1792038653; bh=lM/CT7B5lqbOJqRBdRu0ItaKIHBhcrD1
+ 1c+h6Uw9F+o=; b=O0PJHNZpPZKKwxsmuobWFx/W2wLNTTeLjjqSh/fFjBST9X0B
+ miJcuhfNOrYoiEUEADdBAPgqIlg0is5OAbnBmpTXFe8VxWANuc+/JTjMg+KqGPtn
+ cW5r60YwqsRft5pkL6qHe6v3Paiio6VecMYFxBPrhcFH5kvYpVqwF2G3Av4+1KRY
+ lOVT28uV8yMdZWWcZvMAOVQCN7H45CshXwtjyziKwWtmy015NQQrkdvlqFshX95M
+ 7obNdTuDy0vZKIPoyNq0R4BHvX1Ll/B/OZzwai27rOa2b0gcWwzONkIoBQBEopBZ
+ Nxl9Y6EnXJce+s54jZ/wpgsgiadw5yQFkaCgBA==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-transfer-encoding
  :content-type:content-type:date:date:feedback-id:feedback-id
  :from:from:in-reply-to:in-reply-to:message-id:mime-version
  :references:reply-to:subject:subject:to:to:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1791952083; x=
- 1792038483; bh=nNrFgYs6Tj4vS2Ti17G6dvbR9TxTsUtZagc3NsPkUI4=; b=Z
- j3DoEUbX+T8tITu8kyxn1p+aEgJNp16zOU71nTuofimXFso0y0hTW5DQY02AZmxu
- 3Ph6tohTnR5f0Bot81j5hnyiwx5IMEZc/EOEFnShsB4IX6EWabnEa5o+0WmEXBW0
- qbq7mY849l9vdrpL+JAo6CuG+SIZjWORqXDVAQldGgBMJ1y0FPa+JlW4s5IYD3AP
- puo+faVF7L3EtT3Frqyf3IrdQIhaxP73Q3UD6stkZFbkExDVaMl0DjP0N1CXncQ1
- MjZQRERfMXeHw+GK4pZZVCwgrCioUHCnXTS6kX+Dde5cOrASOY8RKeRItZdnz3XV
- brVcp7k7RDTJxjeMHrJRQ==
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1791952253; x=
+ 1792038653; bh=lM/CT7B5lqbOJqRBdRu0ItaKIHBhcrD11c+h6Uw9F+o=; b=b
+ ccKp8gMFV7odpuYp0gguxHy00NCO0xNP3Z/Q5OI7gYqBnAcvfOCMTf3Denax3I3b
+ an97KYGobOLqNW+oPxt7j+nmhEzWnAQXvynWTu45D6QpvraUWw4FXvBqGA88YzHR
+ 7wmfXWG9kLhmoNvcPlxuxhh7AHsXAeQqDBFXfnVcjKxCX5qY8rtn+lDqh68IiH2p
+ Xu3N+nlT3QtOQIJceUSeVfzXQ1QNsKN4ylDIVoWIKUwi/6d6gg8VH3EWiLtFWC47
+ EMzXvTeR90K/ZvwfkWvlamS+1vAevdyAD0gkNHuONgisO2jtFFWs7vkMKhCDhBdp
+ yw0WlsTlA7tbb7WgOczQA==
 X-DKIM2-Info: draft=ietf-dkim-dkim2-spec-06;
  repo=github.com/dkim2wg/interop; date=2026-10-04; sw=lmtpprox;
  action=sign d=alistair23.me a=rsa-sha256;
-DKIM2-Signature: i=1; m=1; t=1791952083; d=alistair23.me;
+DKIM2-Signature: i=1; m=1; t=1791952253; d=alistair23.me;
  mf=PGFsaXN0YWlyQGFsaXN0YWlyMjMubWU+;
  rt=PHFlbXUtcmlzY3ZAbm9uZ251Lm9yZz4=;
- s=fm2:rsa-sha256:K82x9nfqE/nBEvdLFWu2sS2ca7bsFrUtDlUBo5dG1irM2iv
- oGZZxs34d2F4SCYMlUIV2vi+Zpz53gywdLbms15sTu6dtV0Q3WscE9ASwHH6niO5
- GcApeV7Ivuuw7GQ31u6KXYFh/rO4zBAkOvdntIoVi3+/SAOnhaBTad/W8EnAHXl8
- hgp6Kj6vVbwmOcsROxeFaQBYobOOFJeACdhxGPdesceyiYvXA0NMIeQ2EaKnsuXO
- KeQPRd7y+G/msUSOy2hDTSqtKVSxgGRVYb+dWlsetM869aJqGyKby1iVLgEEA4Lz
- QKzGXW/bZqyAbgt/F855podu/8U51HAsOJ3isDw==;
+ s=fm2:rsa-sha256:UCwuafu0xrfPjzMNWUP/y6fGyPy6a71Xq01vCTGgFM2XljM
+ dkJsMV2++vMPWYrh+RhP/sd3zOlhVXW20aQf7w7MNHrzSP6ul8JDVLdp4Lv3wx4v
+ kMeNs7fstvy7ci7uvZpX0J7xGGbikM6qqzq8FbZeIBKltDSisU0nnHagiiZcbENp
+ 3KCNcLSokfLgSSujWHuJ841icKOy1NuI4mkxp6fEWFuoY0c+axH3jfaNdBCgh3ay
+ EgLAsG5cNOZRbYahIrroZcjpqIuZhLwQuMPmKnLcwBMx3UbsoMwVHOaT8bgavdTw
+ qmJkKhnB/RyHJp0klA+HYvHxnURsTxxmvYxbwJg==;
 X-DKIM2-Info: draft=ietf-dkim-dkim2-spec-06;
  repo=github.com/dkim2wg/interop; date=2026-10-04; sw=lmtpprox;
  action=mi-m=1; hc=13;
@@ -68,50 +68,50 @@ X-DKIM2-Info: draft=ietf-dkim-dkim2-spec-06;
  from,in-reply-to,message-id,mime-version,references,subject,to,
  user-agent;
 Message-Instance: m=1;
- h=sha256:miF3MDnCvBoZGiHN1bNTs/vjVHehRcB9t3kpgrW0rrE=:nNrFgYs6Tj4vS2Ti17G6dvbR9TxTsUtZagc3NsPkUI4=;
-X-ME-Sender: <xms:0wTPanKDuoJ3Z74M_7ZkOqiyhcjsvYy-eo8KZwCvuJV9MIDibRnBVg>
- <xme:0wTPavdOMuL8gCggrqIT6LMzwHuzmySGvDPO2quEBRoqF4EgkYvPRJiiy2oIFrGxp
- nk2V0DINcdYiE7iNsFLpvKVxUBulXGzfm6b2ueNmakqHF3Xc4TAAV-2>
-X-ME-Received: <xmr:0wTPau07plvHus026ejUcRjN6uuH3nDFmH_CH5vS4w2qWBGGaejFxWiAvtFwGw8G7nKXsltmpRUVFxjjhOho8lzYr64>
-X-ME-Proxy-Cause: dmFkZTGXwy3PD/pSXw5muzO+5ZK3ax58O9IODEptBYhSjJ9BrilKcbkSWOqcErsMvZSexc
- T3U7Hp4U16rQ8sPGovtOmlnwsEuQxII9KuhlFNNmG8XlmKgewnBqsO9yx/WOCwhCdG8Al8
- DmMpBoeQDFch3COh3cjoqEbr9x+4Y1pu8zMn4DB1MSrNNhPZsYUIB6+ogmD+0MqHRylkVn
- iYa6PEonN+rE1+dKwR/MaRE5HMztBVs+1uUju6d8h81Ur8sYNwpVVqlyKJmHomi2EcuJJg
- sL2t9+oMu3t+dr5uesLFU/KzpDi5CEL8VLJunoORLyzRezzhjhxSGaXFH2FRjx1hLlX+GE
- PAb9jJqvGhYBBzUzD/R/w3z/ffI9eFF8tcYWAJXkXCBLx6aH3waOSajMoEhS13m8vfkY8E
- Ewy4X76lhcR0GpILAQsAfG1dnuLH3FXY3uu3rsp5K8nOrY7NZ5l+GOr7ABVGcr9kmsLnzW
- qALjLBtbClZI+Y7sFkCSTwDkscRfgK8LOD6/Po8F3AC2GDwSmyalkjVBDXB2LdYrina1l7
- qGTgKx/c/PulqzQcchXnHmx59XVWFkUakp35Vb6Jp6qp7HDqFdXY4mOs/fJzW2lokSs21z
- sDjp1EWlZFuZtQPWMXLDZtMc9JqXQej1uhAFopcEhEg9B5NyYKC+88f9KOOg
-X-ME-Proxy: <xmx:0wTPaohp7NXt1whe2QdejFW0DGhrVW210Uc7zuCgHffSXFIbx_h_IQ>
- <xmx:0wTPakQnV-r_j5KiQeJMehs2za1stP9VuJ1x6WeaOkEiF0QOncW6bw>
- <xmx:0wTPaphT3SckpnG1IXG3KH64U4gZ8OrPOh8NgGH3HXFiM5fRi9ViRw>
- <xmx:0wTPak6j2BzA5bTAZgWCEwlYmr0_XiuEjluScOYDBd0SOYfStlJNOQ>
- <xmx:0wTPak-aSfDtQLjvqZyUCSKtpKqDR4ZB3thJyZ6nrlvWn9ikmreO5FjM>
+ h=sha256:FfGxxgZyeFBSs/SUFsE0o23L+BGX+i51yzP6+DcV8dY=:J6wXCQHgOhCqleME2xsLiF62Vavg6Uo3GZPHFuuIzRQ=;
+X-ME-Sender: <xms:fAXPajU8HbPHotdXduiHuAlSUlsl6U2045gkfqojxGR2HlP_h4jfhg>
+ <xme:fAXPaikBlWEyJvtlRjQQ1CsyfScP8qecn-9fCMHwLtEXUMMCT2C3VSx1b00loUVef
+ ZntwNPPx8xwYgC5TnF74X5HoGVWAMwvwzo19poYRZ54dCZjTl0r1x0j>
+X-ME-Received: <xmr:fAXPakZiMnm-KXKLUsKSuwbzAPG5AeKvW2pfK_6a84AzeNuP1sxaRlM3CgSSo_FJM-xFnFF7PMTr2m59o9dSmy7aHOE>
+X-ME-Proxy-Cause: dmFkZTGPS0Z/NKQnuxEzMQacG2rHnkt2QMJOrkL3S65LcYHb6WbKx+TJCtep9sT7Glhfxk
+ lZ2oQW/v0vQsZ3sURildClZV1VcfZKLuz+1jpIYtIUkeA6esdPdPM+vCWVj4BL7LI+iR89
+ 5aJOiMrXsYWLybXtP/MiTdIC2NKW4JrCpYE36LWNkK8n1kpe2o9VjfGT9zuO5FdwD/0h8l
+ 2sxGY0Y/MnJzj9hqq69h0MOOKfrsE+NNBYu938MP0C5qE7lducrKOi56GNfd3OYLYZZQjw
+ FadO9bfzL66AfnlA2OyudPbrmAPBbJsWfNQsrCHLStxUxucTHdS1H+tq1+AbGtV1ohKwId
+ t7XR5m5VOOrQjv/Zyd9jJRyB480RpKSS+6JJPR12XHJmJtLyShl54z71L2pJW8XYcgOtB0
+ d2+OWFTOkusoPmP8VcK4IbqydDuvuwtJcHVymIGuCYzj+Z1xiflTTZC9U44ql5dChAmBXU
+ Du5JFrI97rFjA1cmUcEWIB/2NtCkGIfEJfTRCx5D5YQkr5gth1BJ9yfI0qrz1sm4y6f6Af
+ 56gPeofA78O0zcwZvR1HFiq05GH4/ayQsY1ShtmWdDuyxJJqXzs/EgkvqVBWyyrn4075sS
+ SIvTxteZwj1rgCeKNObA3e0p6f97cysrDEr2aCZY9b40FONVpweL/viSVkYg
+X-ME-Proxy: <xmx:fAXPatPJZgRky5FrD7dp8F3G6MVgcuqOXN6VX125r10f8tEMDrcmGQ>
+ <xmx:fAXPapa23O71yXHQ_Lq-e6LxApYNidQsPedes4fH6aX8S68ajZWm-Q>
+ <xmx:fAXPar3P4rRdqPkYlg94KHwE-zwYhlZTKjGMh93h0YfL2UKI5zcbVA>
+ <xmx:fAXPavdUXbtPJvI95HVFSJocMOc5BUUK4rPWyTbhJckp9x9gAvR1cg>
+ <xmx:fQXPavuuEYed4d4omi1JzdY6TVosX0S_TdaVnK3q1AUldaa8Qfo9MLXz>
 Feedback-ID: ifd214418:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
- 14 Oct 2026 00:28:01 -0400 (EDT)
-Message-ID: <5966e420c23219afc5a3177168f22b186dd50feb.camel@alistair23.me>
-Subject: Re: [PATCH v2 21/23] target/riscv: Drop v0 argument from
- gen_helper_ldst_index
+ 14 Oct 2026 00:30:50 -0400 (EDT)
+Message-ID: <7ac693b6d4f38fe8b23ca487759de0362df31d07.camel@alistair23.me>
+Subject: Re: [PATCH v2 22/23] tests/tcg/riscv64: Vector load test
 From: Alistair <alistair@alistair23.me>
 To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org
-Date: Wed, 14 Oct 2026 14:27:59 +1000
-In-Reply-To: <20260821040404.268123-22-richard.henderson@linaro.org>
+Cc: qemu-riscv@nongnu.org, Joel Stanley <joel@jms.id.au>
+Date: Wed, 14 Oct 2026 14:30:49 +1000
+In-Reply-To: <20260821040404.268123-23-richard.henderson@linaro.org>
 References: <20260821040404.268123-1-richard.henderson@linaro.org>
- <20260821040404.268123-22-richard.henderson@linaro.org>
+ <20260821040404.268123-23-richard.henderson@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 User-Agent: Evolution 3.62.0 (by Flathub.org) 
 MIME-Version: 1.0
-Received-SPF: pass client-ip=103.168.172.145;
- envelope-from=alistair@alistair23.me; helo=fout-a2-smtp.messagingengine.com
+Received-SPF: pass client-ip=103.168.172.157;
+ envelope-from=alistair@alistair23.me; helo=fhigh-a6-smtp.messagingengine.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_PASS=-0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_PASS=-0.001,
  SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -129,265 +129,196 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On Thu, 2026-08-20 at 21:04 -0700, Richard Henderson wrote:
-> Since we're also passing env, v0 is always env->vreg.
+> From: Joel Stanley <joel@jms.id.au>
 >=20
+> A userspace program to perform vector loads and stores that cross
+> page
+> boundaries, and check the result.
+>=20
+> Signed-off-by: Joel Stanley <joel@jms.id.au>
 > Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+> Message-ID: <20260820130223.2762-2-joel@jms.id.au>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+I don't think we need this commit, the next one does the same thing,
+but in C instead of assembly
 
 Alistair
 
 > ---
-> =C2=A0target/riscv/helper.h=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0 | 64 ++++++++++---------
-> --
-> =C2=A0target/riscv/tcg/vector_helper.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | 15 ++---
-> =C2=A0target/riscv/tcg/insn_trans/trans_rvv.c.inc | 17 ++----
-> =C2=A03 files changed, 46 insertions(+), 50 deletions(-)
+> =C2=A0tests/tcg/riscv64/Makefile.target |=C2=A0 13 +++
+> =C2=A0tests/tcg/riscv64/test-rvv-ldst.S | 131
+> ++++++++++++++++++++++++++++++
+> =C2=A02 files changed, 144 insertions(+)
+> =C2=A0create mode 100644 tests/tcg/riscv64/test-rvv-ldst.S
 >=20
-> diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-> index 3ef352898b..bf49a793d5 100644
-> --- a/target/riscv/helper.h
-> +++ b/target/riscv/helper.h
-> @@ -187,38 +187,38 @@ DEF_HELPER_5(vsse8_v, void, ptr, tl, tl, env,
-> i32)
-> =C2=A0DEF_HELPER_5(vsse16_v, void, ptr, tl, tl, env, i32)
-> =C2=A0DEF_HELPER_5(vsse32_v, void, ptr, tl, tl, env, i32)
-> =C2=A0DEF_HELPER_5(vsse64_v, void, ptr, tl, tl, env, i32)
-> -DEF_HELPER_6(vlxei8_8_v, void, ptr, ptr, tl, ptr, env, i32)
-> -DEF_HELPER_6(vlxei8_16_v, void, ptr, ptr, tl, ptr, env, i32)
-> -DEF_HELPER_6(vlxei8_32_v, void, ptr, ptr, tl, ptr, env, i32)
-> -DEF_HELPER_6(vlxei8_64_v, void, ptr, ptr, tl, ptr, env, i32)
-> -DEF_HELPER_6(vlxei16_8_v, void, ptr, ptr, tl, ptr, env, i32)
-> -DEF_HELPER_6(vlxei16_16_v, void, ptr, ptr, tl, ptr, env, i32)
-> -DEF_HELPER_6(vlxei16_32_v, void, ptr, ptr, tl, ptr, env, i32)
-> -DEF_HELPER_6(vlxei16_64_v, void, ptr, ptr, tl, ptr, env, i32)
-> -DEF_HELPER_6(vlxei32_8_v, void, ptr, ptr, tl, ptr, env, i32)
-> -DEF_HELPER_6(vlxei32_16_v, void, ptr, ptr, tl, ptr, env, i32)
-> -DEF_HELPER_6(vlxei32_32_v, void, ptr, ptr, tl, ptr, env, i32)
-> -DEF_HELPER_6(vlxei32_64_v, void, ptr, ptr, tl, ptr, env, i32)
-> -DEF_HELPER_6(vlxei64_8_v, void, ptr, ptr, tl, ptr, env, i32)
-> -DEF_HELPER_6(vlxei64_16_v, void, ptr, ptr, tl, ptr, env, i32)
-> -DEF_HELPER_6(vlxei64_32_v, void, ptr, ptr, tl, ptr, env, i32)
-> -DEF_HELPER_6(vlxei64_64_v, void, ptr, ptr, tl, ptr, env, i32)
-> -DEF_HELPER_6(vsxei8_8_v, void, ptr, ptr, tl, ptr, env, i32)
-> -DEF_HELPER_6(vsxei8_16_v, void, ptr, ptr, tl, ptr, env, i32)
-> -DEF_HELPER_6(vsxei8_32_v, void, ptr, ptr, tl, ptr, env, i32)
-> -DEF_HELPER_6(vsxei8_64_v, void, ptr, ptr, tl, ptr, env, i32)
-> -DEF_HELPER_6(vsxei16_8_v, void, ptr, ptr, tl, ptr, env, i32)
-> -DEF_HELPER_6(vsxei16_16_v, void, ptr, ptr, tl, ptr, env, i32)
-> -DEF_HELPER_6(vsxei16_32_v, void, ptr, ptr, tl, ptr, env, i32)
-> -DEF_HELPER_6(vsxei16_64_v, void, ptr, ptr, tl, ptr, env, i32)
-> -DEF_HELPER_6(vsxei32_8_v, void, ptr, ptr, tl, ptr, env, i32)
-> -DEF_HELPER_6(vsxei32_16_v, void, ptr, ptr, tl, ptr, env, i32)
-> -DEF_HELPER_6(vsxei32_32_v, void, ptr, ptr, tl, ptr, env, i32)
-> -DEF_HELPER_6(vsxei32_64_v, void, ptr, ptr, tl, ptr, env, i32)
-> -DEF_HELPER_6(vsxei64_8_v, void, ptr, ptr, tl, ptr, env, i32)
-> -DEF_HELPER_6(vsxei64_16_v, void, ptr, ptr, tl, ptr, env, i32)
-> -DEF_HELPER_6(vsxei64_32_v, void, ptr, ptr, tl, ptr, env, i32)
-> -DEF_HELPER_6(vsxei64_64_v, void, ptr, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_5(vlxei8_8_v, void, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_5(vlxei8_16_v, void, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_5(vlxei8_32_v, void, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_5(vlxei8_64_v, void, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_5(vlxei16_8_v, void, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_5(vlxei16_16_v, void, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_5(vlxei16_32_v, void, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_5(vlxei16_64_v, void, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_5(vlxei32_8_v, void, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_5(vlxei32_16_v, void, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_5(vlxei32_32_v, void, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_5(vlxei32_64_v, void, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_5(vlxei64_8_v, void, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_5(vlxei64_16_v, void, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_5(vlxei64_32_v, void, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_5(vlxei64_64_v, void, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_5(vsxei8_8_v, void, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_5(vsxei8_16_v, void, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_5(vsxei8_32_v, void, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_5(vsxei8_64_v, void, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_5(vsxei16_8_v, void, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_5(vsxei16_16_v, void, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_5(vsxei16_32_v, void, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_5(vsxei16_64_v, void, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_5(vsxei32_8_v, void, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_5(vsxei32_16_v, void, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_5(vsxei32_32_v, void, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_5(vsxei32_64_v, void, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_5(vsxei64_8_v, void, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_5(vsxei64_16_v, void, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_5(vsxei64_32_v, void, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_5(vsxei64_64_v, void, ptr, tl, ptr, env, i32)
-> =C2=A0DEF_HELPER_4(vle8ff_v, void, ptr, tl, env, i32)
-> =C2=A0DEF_HELPER_4(vle16ff_v, void, ptr, tl, env, i32)
-> =C2=A0DEF_HELPER_4(vle32ff_v, void, ptr, tl, env, i32)
-> diff --git a/target/riscv/tcg/vector_helper.c
-> b/target/riscv/tcg/vector_helper.c
-> index 15c1281538..d46fd5c9c4 100644
-> --- a/target/riscv/tcg/vector_helper.c
-> +++ b/target/riscv/tcg/vector_helper.c
-> @@ -598,12 +598,13 @@ GEN_VEXT_GET_INDEX_ADDR(idx_w, uint32_t, H4)
-> =C2=A0GEN_VEXT_GET_INDEX_ADDR(idx_d, uint64_t, H8)
+> diff --git a/tests/tcg/riscv64/Makefile.target
+> b/tests/tcg/riscv64/Makefile.target
+> index 4da5b9a3b3..68a5ec5255 100644
+> --- a/tests/tcg/riscv64/Makefile.target
+> +++ b/tests/tcg/riscv64/Makefile.target
+> @@ -13,6 +13,19 @@ run-test-noc: QEMU_OPTS +=3D -cpu rv64,c=3Dfalse
+> =C2=A0TESTS +=3D test-aes
+> =C2=A0run-test-aes: QEMU_OPTS +=3D -cpu rv64,zk=3Don
 > =C2=A0
-> =C2=A0static void
-> -vext_ldst_index(void *vd, void *v0, target_ulong base,
-> +vext_ldst_index(void *vd, target_ulong base,
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0 void *vs2, CPURISCVState *env, uint32_t desc,
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0 vext_get_index_addr get_index_addr,
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0 vext_ldst_elem_fn_tlb *ldst_elem,
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0 uint32_t log2_esz, uintptr_t ra)
-> =C2=A0{
-> +=C2=A0=C2=A0=C2=A0 void *v0 =3D env->vreg;
-> =C2=A0=C2=A0=C2=A0=C2=A0 uint32_t nf =3D vext_nf(desc);
-> =C2=A0=C2=A0=C2=A0=C2=A0 uint32_t vm =3D vext_vm(desc);
-> =C2=A0=C2=A0=C2=A0=C2=A0 uint32_t max_elems =3D vext_max_elems(desc, log2=
-_esz);
-> @@ -633,10 +634,10 @@ vext_ldst_index(void *vd, void *v0,
-> target_ulong base,
-> =C2=A0}
-> =C2=A0
-> =C2=A0#define GEN_VEXT_LD_INDEX(NAME, ETYPE, INDEX_FN,
-> LOAD_FN)=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0 \
-> -QEMU_FLATTEN void HELPER(NAME)(void *vd, void *v0, target_ulong
-> base,=C2=A0=C2=A0 \
-> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 void *vs2, CPURISCVState *env,
-> uint32_t desc) \
-> +QEMU_FLATTEN void HELPER(NAME)(void *vd, target_ulong base, void
-> *vs2,=C2=A0 \
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 CPURISCVState *env, uint32_t
-> desc)=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 \
-> =C2=A0{=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0
-> =C2=A0=C2=A0=C2=A0 \
-> -=C2=A0=C2=A0=C2=A0 vext_ldst_index(vd, v0, base, vs2, env, desc,
-> INDEX_FN,=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0 \
-> +=C2=A0=C2=A0=C2=A0 vext_ldst_index(vd, base, vs2, env, desc,
-> INDEX_FN,=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 \
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 LOAD_FN, ctzl(sizeof(ETYPE=
-)),
-> GETPC());=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0 \
-> =C2=A0}
-> =C2=A0
-> @@ -658,10 +659,10 @@ GEN_VEXT_LD_INDEX(vlxei64_32_v, int32_t, idx_d,
-> lde_w_tlb)
-> =C2=A0GEN_VEXT_LD_INDEX(vlxei64_64_v, int64_t, idx_d, lde_d_tlb)
-> =C2=A0
-> =C2=A0#define GEN_VEXT_ST_INDEX(NAME, ETYPE, INDEX_FN,
-> STORE_FN)=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0 \
-> -QEMU_FLATTEN void HELPER(NAME)(void *vd, void *v0, target_ulong
-> base,=C2=A0=C2=A0 \
-> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 void *vs2, CPURISCVState *env,
-> uint32_t desc) \
-> +QEMU_FLATTEN void HELPER(NAME)(void *vd, target_ulong base, void
-> *vs2,=C2=A0 \
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 CPURISCVState *env, uint32_t
-> desc)=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 \
-> =C2=A0{=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0
-> =C2=A0=C2=A0=C2=A0 \
-> -=C2=A0=C2=A0=C2=A0 vext_ldst_index(vd, v0, base, vs2, env, desc,
-> INDEX_FN,=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0 \
-> +=C2=A0=C2=A0=C2=A0 vext_ldst_index(vd, base, vs2, env, desc,
-> INDEX_FN,=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 \
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 STORE_FN, ctzl(sizeof(ETYP=
-E)),
-> GETPC());=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0 \
-> =C2=A0}
-> =C2=A0
-> diff --git a/target/riscv/tcg/insn_trans/trans_rvv.c.inc
-> b/target/riscv/tcg/insn_trans/trans_rvv.c.inc
-> index 5e352dbf41..4556c644cc 100644
-> --- a/target/riscv/tcg/insn_trans/trans_rvv.c.inc
-> +++ b/target/riscv/tcg/insn_trans/trans_rvv.c.inc
-> @@ -975,33 +975,28 @@ GEN_VEXT_TRANS(vsse64_v, MO_64, rnfvm,
-> st_stride_op, st_stride_check)
-> =C2=A0/*
-> =C2=A0 *** index load and store
-> =C2=A0 */
-> -typedef void gen_helper_ldst_index(TCGv_ptr, TCGv_ptr, TCGv,
-> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 TCGv_ptr, TCGv_en=
-v, TCGv_i32);
-> +typedef void gen_helper_ldst_index(TCGv_ptr, TCGv, TCGv_ptr,
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 TCGv_env, TCGv_i3=
-2);
-> =C2=A0
-> =C2=A0static bool ldst_index_trans(uint32_t vd, uint32_t rs1, uint32_t
-> vs2,
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0 uint32_t data, gen_helper_ldst_index
-> *fn,
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0 DisasContext *s)
-> =C2=A0{
-> -=C2=A0=C2=A0=C2=A0 TCGv_ptr dest, mask, index;
-> -=C2=A0=C2=A0=C2=A0 TCGv base;
-> +=C2=A0=C2=A0=C2=A0 TCGv_ptr dest =3D tcg_temp_new_ptr();
-> +=C2=A0=C2=A0=C2=A0 TCGv_ptr index =3D tcg_temp_new_ptr();
-> +=C2=A0=C2=A0=C2=A0 TCGv base =3D get_gpr(s, rs1, EXT_NONE);
-> =C2=A0=C2=A0=C2=A0=C2=A0 TCGv_i32 desc;
-> =C2=A0
-> -=C2=A0=C2=A0=C2=A0 dest =3D tcg_temp_new_ptr();
-> -=C2=A0=C2=A0=C2=A0 mask =3D tcg_temp_new_ptr();
-> -=C2=A0=C2=A0=C2=A0 index =3D tcg_temp_new_ptr();
-> -=C2=A0=C2=A0=C2=A0 base =3D get_gpr(s, rs1, EXT_NONE);
-> -
-> =C2=A0=C2=A0=C2=A0=C2=A0 data =3D vdata_add_memopidx(s, data);
-> =C2=A0=C2=A0=C2=A0=C2=A0 desc =3D tcg_constant_i32(simd_desc(s->cfg_ptr->=
-vlenb,
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0 s->cfg_ptr->vlenb, data));
-> =C2=A0
-> =C2=A0=C2=A0=C2=A0=C2=A0 tcg_gen_addi_ptr(dest, tcg_env, vreg_ofs(s, vd))=
-;
-> =C2=A0=C2=A0=C2=A0=C2=A0 tcg_gen_addi_ptr(index, tcg_env, vreg_ofs(s, vs2=
-));
-> -=C2=A0=C2=A0=C2=A0 tcg_gen_addi_ptr(mask, tcg_env, vreg_ofs(s, 0));
-> =C2=A0
-> =C2=A0=C2=A0=C2=A0=C2=A0 mark_vs_dirty(s);
-> =C2=A0
-> -=C2=A0=C2=A0=C2=A0 fn(dest, mask, base, index, tcg_env, desc);
-> +=C2=A0=C2=A0=C2=A0 fn(dest, base, index, tcg_env, desc);
-> =C2=A0
-> =C2=A0=C2=A0=C2=A0=C2=A0 finalize_rvv_inst(s);
-> =C2=A0=C2=A0=C2=A0=C2=A0 return true;
+> +# Vector load test
+> +TESTS +=3D test-rvv-ldst
+> +test-rvv-ldst: CFLAGS +=3D -march=3Drv64gcv
+> +test-rvv-ldst: LDFLAGS =3D -nostdlib -static
+> +run-test-rvv-ldst: QEMU_OPTS +=3D -cpu max
+> +
+> +# Re-run the vector tests at each supported VLEN
+> +TEST_RVV_VLENS =3D 128 256 512 1024
+> +EXTRA_RUNS +=3D $(patsubst %,run-test-rvv-ldst-
+> vlen%,$(TEST_RVV_VLENS))
+> +run-test-rvv-ldst-vlen%: test-rvv-ldst
+> +	$(call run-test, $@, env QEMU=3D$(QEMU) $(QEMU) $(QEMU_OPTS) -
+> cpu max$(COMMA)vlen=3D$* $<, \
+> +		test-rvv-ldst with vlen=3D$*)
+> +
+> =C2=A0# Test for fcvtmod
+> =C2=A0TESTS +=3D test-fcvtmod
+> =C2=A0test-fcvtmod: CFLAGS +=3D -march=3Drv64imafdc
+> diff --git a/tests/tcg/riscv64/test-rvv-ldst.S
+> b/tests/tcg/riscv64/test-rvv-ldst.S
+> new file mode 100644
+> index 0000000000..939b3f038b
+> --- /dev/null
+> +++ b/tests/tcg/riscv64/test-rvv-ldst.S
+> @@ -0,0 +1,131 @@
+> +/*
+> + * RISC-V vector load/store page crossing test
+> + *
+> + * SPDX-License-Identifier: GPL-2.0-or-later
+> + */
+> +
+> +=C2=A0=C2=A0=C2=A0 .section .rodata
+> +=C2=A0=C2=A0=C2=A0 // Page aligned so the within-page cases never cross =
+a boundary
+> +=C2=A0=C2=A0=C2=A0 .set MAX_PAGE_SIZE, 65536
+> +=C2=A0=C2=A0=C2=A0 .balign MAX_PAGE_SIZE
+> +src_data:
+> +=C2=A0=C2=A0=C2=A0 .byte 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17
+> +=C2=A0=C2=A0=C2=A0 .byte 0x18, 0x19, 0x1A, 0x1B, 0x1C, 0x1D, 0x1E, 0x1F
+> +=C2=A0=C2=A0=C2=A0 .set NUM_BYTES, . - src_data
+> +
+> +=C2=A0=C2=A0=C2=A0 .balign MAX_PAGE_SIZE
+> +pageA_start:
+> +=C2=A0=C2=A0=C2=A0 // Fill the page, stopping 8 bytes short of the bound=
+ary
+> +=C2=A0=C2=A0=C2=A0 .fill MAX_PAGE_SIZE - 8, 1, 0xfa
+> +src_cross_data:
+> +=C2=A0=C2=A0=C2=A0 .byte 0x20, 0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x27
+> +pageB_start:
+> +=C2=A0=C2=A0=C2=A0 .byte 0x28, 0x29, 0x2A, 0x2B, 0x2C, 0x2D, 0x2E, 0x2F
+> +=C2=A0=C2=A0=C2=A0 .set NUM_CROSS_BYTES, . - src_cross_data
+> +
+> +=C2=A0=C2=A0=C2=A0 .section .bss
+> +=C2=A0=C2=A0=C2=A0 .balign MAX_PAGE_SIZE
+> +dst_data:
+> +=C2=A0=C2=A0=C2=A0 .space 16
+> +
+> +=C2=A0=C2=A0=C2=A0 .balign MAX_PAGE_SIZE
+> +=C2=A0=C2=A0=C2=A0 .space (MAX_PAGE_SIZE - 8)
+> +dst_cross_data:
+> +=C2=A0=C2=A0=C2=A0 .space 16
+> +
+> +.option norelax
+> +.option norvc
+> +
+> +=C2=A0=C2=A0=C2=A0 .text
+> +=C2=A0=C2=A0=C2=A0 .globl _start
+> +_start:
+> +=C2=A0=C2=A0=C2=A0 // Case 1: Load/store within a page. t3 is the exit c=
+ode on
+> failure
+> +=C2=A0=C2=A0=C2=A0 li=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 t3, 1
+> +=C2=A0=C2=A0=C2=A0 la=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 a0, src_data
+> +=C2=A0=C2=A0=C2=A0 li=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 a1, NUM_BYTES
+> +
+> +=C2=A0=C2=A0=C2=A0 // SEW=3D8, LMUL=3D1
+> +=C2=A0=C2=A0=C2=A0 vsetvli t0, a1, e8, m1, ta, ma
+> +
+> +=C2=A0=C2=A0=C2=A0 // Check the load will cover 16 bytes
+> +=C2=A0=C2=A0=C2=A0 bne=C2=A0=C2=A0=C2=A0=C2=A0 t0, a1, fail
+> +
+> +=C2=A0=C2=A0=C2=A0 // perform load
+> +=C2=A0=C2=A0=C2=A0 vle8.v=C2=A0 v1, (a0)
+> +
+> +=C2=A0=C2=A0=C2=A0 // Store vector content in memory
+> +=C2=A0=C2=A0=C2=A0 la=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 a2, dst_data
+> +=C2=A0=C2=A0=C2=A0 vse8.v=C2=A0 v1, (a2)
+> +
+> +=C2=A0=C2=A0=C2=A0 // Compare first half
+> +=C2=A0=C2=A0=C2=A0 ld=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 t1, 0(a0)
+> +=C2=A0=C2=A0=C2=A0 ld=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 t2, 0(a2)
+> +=C2=A0=C2=A0=C2=A0 bne=C2=A0=C2=A0=C2=A0=C2=A0 t1, t2, fail
+> +
+> +=C2=A0=C2=A0=C2=A0 // Compare second half
+> +=C2=A0=C2=A0=C2=A0 ld=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 t1, 8(a0)
+> +=C2=A0=C2=A0=C2=A0 ld=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 t2, 8(a2)
+> +=C2=A0=C2=A0=C2=A0 bne=C2=A0=C2=A0=C2=A0=C2=A0 t1, t2, fail
+> +
+> +=C2=A0=C2=A0=C2=A0 // Case 2: Load straddles a page boundary
+> +=C2=A0=C2=A0=C2=A0 li=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 t3, 2
+> +=C2=A0=C2=A0=C2=A0 la=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 a0, src_cross_data
+> +=C2=A0=C2=A0=C2=A0 li=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 a1, NUM_CROSS_BYTES
+> +
+> +=C2=A0=C2=A0=C2=A0 // SEW=3D8, LMUL=3D1
+> +=C2=A0=C2=A0=C2=A0 vsetvli t0, a1, e8, m1, ta, ma
+> +=C2=A0=C2=A0=C2=A0 bne=C2=A0=C2=A0=C2=A0=C2=A0 t0, a1, fail
+> +
+> +=C2=A0=C2=A0=C2=A0 // perform load
+> +=C2=A0=C2=A0=C2=A0 vle8.v=C2=A0 v1, (a0)
+> +
+> +=C2=A0=C2=A0=C2=A0 // Store vector content in memory
+> +=C2=A0=C2=A0=C2=A0 la=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 a2, dst_data
+> +=C2=A0=C2=A0=C2=A0 vse8.v=C2=A0 v1, (a2)
+> +
+> +=C2=A0=C2=A0=C2=A0 // Compare first half
+> +=C2=A0=C2=A0=C2=A0 ld=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 t1, 0(a0)
+> +=C2=A0=C2=A0=C2=A0 ld=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 t2, 0(a2)
+> +=C2=A0=C2=A0=C2=A0 bne=C2=A0=C2=A0=C2=A0=C2=A0 t1, t2, fail
+> +
+> +=C2=A0=C2=A0=C2=A0 // Compare second half
+> +=C2=A0=C2=A0=C2=A0 ld=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 t1, 8(a0)
+> +=C2=A0=C2=A0=C2=A0 ld=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 t2, 8(a2)
+> +=C2=A0=C2=A0=C2=A0 bne=C2=A0=C2=A0=C2=A0=C2=A0 t1, t2, fail
+> +
+> +=C2=A0=C2=A0=C2=A0 // Case 3: Store straddles a page boundary
+> +=C2=A0=C2=A0=C2=A0 li=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 t3, 3
+> +=C2=A0=C2=A0=C2=A0 la=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 a0, src_data
+> +=C2=A0=C2=A0=C2=A0 li=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 a1, NUM_BYTES
+> +
+> +=C2=A0=C2=A0=C2=A0 // SEW=3D8, LMUL=3D1
+> +=C2=A0=C2=A0=C2=A0 vsetvli t0, a1, e8, m1, ta, ma
+> +=C2=A0=C2=A0=C2=A0 bne=C2=A0=C2=A0=C2=A0=C2=A0 t0, a1, fail
+> +
+> +=C2=A0=C2=A0=C2=A0 // perform load
+> +=C2=A0=C2=A0=C2=A0 vle8.v=C2=A0 v1, (a0)
+> +
+> +=C2=A0=C2=A0=C2=A0 // Store vector content in memory
+> +=C2=A0=C2=A0=C2=A0 la=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 a2, dst_cross_data
+> +=C2=A0=C2=A0=C2=A0 vse8.v=C2=A0 v1, (a2)
+> +
+> +=C2=A0=C2=A0=C2=A0 // Compare first half
+> +=C2=A0=C2=A0=C2=A0 ld=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 t1, 0(a0)
+> +=C2=A0=C2=A0=C2=A0 ld=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 t2, 0(a2)
+> +=C2=A0=C2=A0=C2=A0 bne=C2=A0=C2=A0=C2=A0=C2=A0 t1, t2, fail
+> +
+> +=C2=A0=C2=A0=C2=A0 // Compare second half
+> +=C2=A0=C2=A0=C2=A0 ld=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 t1, 8(a0)
+> +=C2=A0=C2=A0=C2=A0 ld=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 t2, 8(a2)
+> +=C2=A0=C2=A0=C2=A0 bne=C2=A0=C2=A0=C2=A0=C2=A0 t1, t2, fail
+> +
+> +pass:
+> +=C2=A0=C2=A0=C2=A0 li=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 a0, 0
+> +=C2=A0=C2=A0=C2=A0 j=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 exit
+> +
+> +fail:
+> +=C2=A0=C2=A0=C2=A0 mv=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 a0, t3
+> +
+> +exit:
+> +=C2=A0=C2=A0=C2=A0 li=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 a7, 93=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 // sys_exit
+> +=C2=A0=C2=A0=C2=A0 ecall
 
