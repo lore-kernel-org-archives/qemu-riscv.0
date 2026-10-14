@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5044CC6B1F
-	for <qemu-riscv@archiver.kernel.org>; Wed, 14 Oct 2026 09:36:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 180EBCC6B1F
+	for <qemu-riscv@archiver.kernel.org>; Wed, 14 Oct 2026 09:36:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xGvOo-0006HZ-Ds; Wed, 14 Oct 2026 05:35:50 -0400
+	id 1xGvNV-0005En-5G; Wed, 14 Oct 2026 05:34:30 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xGvNg-0005Vn-0V
- for qemu-riscv@nongnu.org; Wed, 14 Oct 2026 05:34:45 -0400
-Received: from mail-dl1-x122b.google.com ([2607:f8b0:4864:20::122b])
+ id 1xGvNJ-00055l-RT
+ for qemu-riscv@nongnu.org; Wed, 14 Oct 2026 05:34:19 -0400
+Received: from mail-dl1-x1229.google.com ([2607:f8b0:4864:20::1229])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xGvNc-0000fs-Lg
- for qemu-riscv@nongnu.org; Wed, 14 Oct 2026 05:34:39 -0400
-Received: by mail-dl1-x122b.google.com with SMTP id
- a92af1059eb24-170135e43c7so1206627c88.0
- for <qemu-riscv@nongnu.org>; Wed, 14 Oct 2026 02:34:36 -0700 (PDT)
+ id 1xGvNI-0000bv-5B
+ for qemu-riscv@nongnu.org; Wed, 14 Oct 2026 05:34:17 -0400
+Received: by mail-dl1-x1229.google.com with SMTP id
+ a92af1059eb24-14394530ec6so2717597c88.1
+ for <qemu-riscv@nongnu.org>; Wed, 14 Oct 2026 02:34:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1791970475; x=1792575275; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1791970455; x=1792575255; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=IAa9EYHeaBZV1We1wS0Pw4Gbkg3A4EQ75sck0EgY0ZI=;
- b=LbmZWUAIbHt3z2zBA75HKVQQGMDF8haaEm9QDZZV0AHaLV19EZYJPWPpBJyurG5+O2
- naD2JSuweR9TaVypEddIlF45hTifdeTRP8tD8qzRiRHornQt/Wk0INl3ZkxUxmKQLNEM
- YLuqGIR4VR7s+EfbEJwxz8SO6Z0KIVA5jiaSkllcsQ76GzY14DHu3vnu6/WmIEbm6WsN
- BDXrJuDovWFr4Aq6tk0j2om/pXBjEDXXilvd+wMkJpjIIAh4PDOArYBvFWT9CIej8MgD
- 2nDQJ+IxB1pRSrj5dWIoaTGXuqFfDW7vD8A/TeEH2D1I5BsJcBEL7GPmXhKRx0/V26CI
- 8qCg==
+ bh=n1Kznjn9gwc9J8CJXnPKY6p2oc96M5De/Smwcsx+f98=;
+ b=E/Y48btEzOWxnsumy9XUq/joLWl0arMqLyG1YcRZA8OLIlWchtu6ns4B5Q0PrFcCLM
+ CM5eIC8qcZWxyviYH4q3b0l0R9eNQdSBBxJWuEaHBay2F3NQGGPBVMR5OnkEiVQqlmDI
+ 92jRPT3c5NZss4B1IFPrqSGq40QRD8RxGitGYYOevTCp6ooZ0nKK0d39CHMPxmwu3swn
+ dj+piktJXyDTzquFf695PkT2EHkR9c9Cq6VUi1UfLlCMmQnId+4E6IVwMYWv4R+mGPmf
+ hNvTDtSr8vN2IuPV/fJZjTfyx40u54OXp/tHsWjGA22OZ0+Mo7y+8QNPxaAS6NmhooIM
+ t2uw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1791970475; x=1792575275;
+ d=1e100.net; s=20260707; t=1791970455; x=1792575255;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=IAa9EYHeaBZV1We1wS0Pw4Gbkg3A4EQ75sck0EgY0ZI=;
- b=uQEC80bLDxN9Mf4KAEFKAJD/tZlJxCtOrGPl2cUDiNdrTE3VPs0dtlmUByKkiVum1n
- CFtnP7ob/J2no61Hhf7T+ysEncEvFNxeQIaHJGBS+ca6XVs13ZD3HJF8TaXGG2PYEyti
- Y6e7odJlyHP+0WTKnzAV6Zn1kLWpCb2k/DrjOlyQ+Ov0cmeHeIJFHBrYq7ksrSBlAxsm
- Y2XN5oR29t7nu62rMUH1O7cjEeGVuwo5uMLfWFp7PWTgOZrIfKE0giNXk7ROS2F85KAq
- xY9fZ4X7q6IxkgRhMTr8MXZt6E63bPs/P2muTeSIJ3B6uI7BImj2J4R7hp2W+aWGDOFH
- FzMA==
+ bh=n1Kznjn9gwc9J8CJXnPKY6p2oc96M5De/Smwcsx+f98=;
+ b=KI2G5iSApXKXXQpM1HXClC4B/yVmA5rbn4ZHN1TxnnJcTgbJcYl4si9g/UuuzytUlQ
+ XEwE7+ZtoHhI2Vp12MgfH+LyJXpyd0uh6S7Qw62sjLlVavLrN/L70K3UEL3kKcUcN83X
+ LzhoulJQxXr7NJfyYAbc+dl/rG893BAMWnb4lukD7uzKV9zgDEvndd7OUNR6g4DrdHq6
+ O63qVdDUncD0bE1o14XDwF+RMT/YdUaKX2vSZEnSSeW/fDVBWiNYbmspgfqRGhvHZS+J
+ WCVerAqU2IE8oqUz/T5rwlRts7Nwy3M/w2ZLfAFWSbUIlkZKZ4rY8LUSVq/1p2mPCvSP
+ VNlQ==
 X-Forwarded-Encrypted: i=1;
- AKwUvBzmS5gN3uOU6b1R1IFxB6sv6BIl+qRjPIbE24GMrClVK8dw47OybenRGHc0G/vRI2D2T89G3/QO8WFd@nongnu.org
-X-Gm-Message-State: AFq9FYKetFkuCICBSBjp0kbchYm1xLAetTxjNPa8efc+Ks+LFvL/FHgW
- nlVvLz68+h/6k+UsMCt0ZdpgadXmXsr7IKOaF0ogxeUhAwmav6Khl4ZE
-X-Gm-Gg: AYBFou3dP0Sw9UDueZ8W5ii1BiPR+bmOUIw6zxeGKkD//u3AnfHmbmIDZfpiGkWdbut
- xUK+CG8uTSahqzIBixAZv49oiRce4xwhKmjUmSRstxRWYxs/tJwUw365we1dAokYnwDW8b9DIKG
- 37ted7uJnwBkMzvT3Ilh95yTGNH4RMRWhyCIA1SjufobPi0gHFFQVMI4HCgMaq7EZGE2vJpqBFo
- xVQ1iTR5M3q36NxH2DRln99HI0GIIX4JZBwAwbhUqh3CZD/JOgcwU82K0GA5OPAs13A26NW1p1j
- NAWN0OZq9YiL/NedSpkikdyzqaokeWAreFCse5zCs7OUILwmXkrHIXAE+LWH2GFQWkx9uCC8Ak9
- RGM1dJzTNsY6veHgqdqB/TEq5/t3QrhuWpVi+ev8vCa8dYKeXmB8pD8BWxwy0JtPxinu5NYQUZ8
- E213ACt8qcKSEU15PHXIajEWOj3cSmJCDX8JUAUw47wwDX4xAmyq08aebPou+IN425VXZd27Zjc
- SVe0GKMc4zCgcFC+w==
-X-Received: by 2002:a05:701b:2713:b0:168:6ad8:e8b0 with SMTP id
- a92af1059eb24-16a6187f095mr23324103c88.14.1791970474962; 
- Wed, 14 Oct 2026 02:34:34 -0700 (PDT)
+ AKwUvBzMhZtMnQvZtLy038QPGibYzTRnLF/FXlc/VfHYFDJQImkHt99s8fkMXvrKRoBcOfwxCjYsj4gDhIxc@nongnu.org
+X-Gm-Message-State: AFq9FYK8iw0PbZ6E9QYyUZh6jBGS4GjWfdzWEsorpE9MwvHxnC3JVMIA
+ 5Cqh5etCnoHy3hum+4W+oJKcqAoEKUb0e+bHC69BHCcntbhop9Yel8SvU8v8Ks+Kp8A=
+X-Gm-Gg: AYBFou3yMCGM1l5TFnSVTVkEsJiG8HO4rxAz7usn9U46XNqEbde2mANI9jcbIcZpHTs
+ IYjObgGZlXZE8Vq92XBz3tCPXU83Sdy9U7aPBRSu89CzxgLiuTfbImgPu7/PvKLtbaYg6WUSjg1
+ s/3qGCQpL9GchF+x0o3cr8OWVyL9JS6/qNcIsx+Vk04e7SNxLkJfIyGL8slH3LQBZVOA9sFrWUd
+ 40B0/VGFaqxmF6mNKNQsrByjCYmrwEbXwFRQsTKXuwPM5H9BqTgn/zeZhP9pSfzzFAcfYdkuj0H
+ yUfS5twf1k1PmlPOp3uWXgXCddXjoCwGIqNf0sLR13otj7PEi+NVfgSCaCv/DyIApJ7nFqKXAUW
+ y7lggzWNn36d+qZKIeJCwno4L20nrrcyvKGkOkjoRLHzRrZeSj4wncQ22BET+V04gd8asJwbjHr
+ X93IMZ/4hHkKr3L1BZzfqAu8pO2trAFOBYu4689JwwnDrruBNeycRFhH99F31D/ZzTXogNKnj27
+ rDXgoKJ+uVhQIagXg==
+X-Received: by 2002:a05:701b:450b:10b0:164:3237:4483 with SMTP id
+ a92af1059eb24-16a6384f137mr18786492c88.42.1791970454472; 
+ Wed, 14 Oct 2026 02:34:14 -0700 (PDT)
 Received: from DESKTOP-Q716RM7 ([103.94.185.75])
  by smtp.googlemail.com with ESMTPSA id
- a92af1059eb24-1698de65af7sm48769303c88.0.2026.10.14.02.34.26
+ a92af1059eb24-1698de65af7sm48769303c88.0.2026.10.14.02.34.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 14 Oct 2026 02:34:33 -0700 (PDT)
+ Wed, 14 Oct 2026 02:34:13 -0700 (PDT)
 From: Yonggang Luo <luoyonggang@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: Eric Blake <eblake@redhat.com>, qemu-riscv@nongnu.org,
@@ -97,24 +97,24 @@ Cc: Eric Blake <eblake@redhat.com>, qemu-riscv@nongnu.org,
  Philippe Mathieu-Daude <philmd@mailo.com>,
  Jiaxun Yang <jiaxun.yang@flygoat.com>, Max Filippov <jcmvbkbc@gmail.com>,
  Stefano Garzarella <sgarzare@redhat.com>
-Subject: [PATCH 15/34] hw/scsi: Avoid guard loadparm with target_s390x() for
- s390x in class_init
-Date: Wed, 14 Oct 2026 17:31:25 +0800
-Message-ID: <20261014093152.834-16-luoyonggang@gmail.com>
+Subject: [PATCH 13/34] hw/microblaze: defer PetaLogix endianness default until
+ init
+Date: Wed, 14 Oct 2026 17:31:23 +0800
+Message-ID: <20261014093152.834-14-luoyonggang@gmail.com>
 X-Mailer: git-send-email 2.55.0.windows.3
 In-Reply-To: <20261014093152.834-1-luoyonggang@gmail.com>
 References: <20261014093152.834-1-luoyonggang@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::122b;
- envelope-from=luoyonggang@gmail.com; helo=mail-dl1-x122b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1229;
+ envelope-from=luoyonggang@gmail.com; helo=mail-dl1-x1229.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -130,51 +130,42 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This is for avoid call target_info() in class_init.
-Now we directly guard in scsi_property_set_loadparm instead.
-Don't know if its an API break, but the smallest change.
+This is for avoid call target_info() in class_init
 
 Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
 ---
- hw/scsi/scsi-disk.c | 18 ++++++++++--------
- 1 file changed, 10 insertions(+), 8 deletions(-)
+ hw/microblaze/petalogix_s3adsp1800_mmu.c | 11 ++++++++---
+ 1 file changed, 8 insertions(+), 3 deletions(-)
 
-diff --git a/hw/scsi/scsi-disk.c b/hw/scsi/scsi-disk.c
-index deb33ac1dda..276941ae537 100644
---- a/hw/scsi/scsi-disk.c
-+++ b/hw/scsi/scsi-disk.c
-@@ -3179,6 +3179,11 @@ static void scsi_property_set_loadparm(Object *obj, const char *value,
- {
-     void *lp_str;
- 
-+    if (!target_s390x()) {
-+        error_setg(errp, "'loadparm' is only supported on s390x");
-+        return;
-+    }
+diff --git a/hw/microblaze/petalogix_s3adsp1800_mmu.c b/hw/microblaze/petalogix_s3adsp1800_mmu.c
+index c5f64319009..43140ad7bda 100644
+--- a/hw/microblaze/petalogix_s3adsp1800_mmu.c
++++ b/hw/microblaze/petalogix_s3adsp1800_mmu.c
+@@ -83,7 +83,13 @@ petalogix_s3adsp1800_init(MachineState *machine)
+     MemoryRegion *phys_ram = g_new(MemoryRegion, 1);
+     qemu_irq irq[32];
+     MemoryRegion *sysmem = get_system_memory();
+-    EndianMode endianness = psms->endianness;
++    EndianMode endianness;
 +
-     if (object_property_get_int(obj, "bootindex", NULL) < 0) {
-         error_setg(errp, "'loadparm' is only valid for boot devices");
-         return;
-@@ -3196,14 +3201,11 @@ static void scsi_property_add_specifics(DeviceClass *dc)
- {
-     ObjectClass *oc = OBJECT_CLASS(dc);
++    if (psms->endianness == ENDIAN_MODE_UNSPECIFIED) {
++        psms->endianness = target_big_endian() ? ENDIAN_MODE_BIG :
++                                           ENDIAN_MODE_LITTLE;
++    }
++    endianness = psms->endianness;
  
--    /* The loadparm property is only supported on s390x */
--    if (target_s390x()) {
--        object_class_property_add_str(oc, "loadparm",
--                                      scsi_property_get_loadparm,
--                                      scsi_property_set_loadparm);
--        object_class_property_set_description(oc, "loadparm",
--                                              "load parameter (s390x only)");
--    }
-+    object_class_property_add_str(oc, "loadparm",
-+                                  scsi_property_get_loadparm,
-+                                  scsi_property_set_loadparm);
-+    object_class_property_set_description(oc, "loadparm",
-+                                          "load parameter (s390x only)");
+     cpu = MICROBLAZE_CPU(object_new(TYPE_MICROBLAZE_CPU));
+     object_property_set_str(OBJECT(cpu), "version", "7.10.d", &error_abort);
+@@ -178,8 +184,7 @@ static void petalogix_s3adsp1800_machine_class_init(ObjectClass *oc,
+                                           &EndianMode_lookup,
+                                           machine_get_endianness,
+                                           machine_set_endianness);
+-    object_property_set_default_str(prop, target_big_endian() ? "big"
+-                                                              : "little");
++    object_property_set_default_str(prop, "unspecified");
+     object_class_property_set_description(oc, "endianness",
+             "Defines whether the machine runs in big or little endian mode");
  }
- 
- static void scsi_disk_base_class_initfn(ObjectClass *klass, const void *data)
 -- 
 2.55.0.windows.3
 
