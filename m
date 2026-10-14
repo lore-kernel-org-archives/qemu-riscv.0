@@ -4,70 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93D89CC6B1F
-	for <qemu-riscv@archiver.kernel.org>; Wed, 14 Oct 2026 09:44:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0068CC6B1D
+	for <qemu-riscv@archiver.kernel.org>; Wed, 14 Oct 2026 09:44:50 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xGvWf-0003pT-3h; Wed, 14 Oct 2026 05:43:57 -0400
+	id 1xGvXV-0005aY-KS; Wed, 14 Oct 2026 05:44:49 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xGvWc-0003fC-Sq
- for qemu-riscv@nongnu.org; Wed, 14 Oct 2026 05:43:54 -0400
-Received: from mail-dy1-x1334.google.com ([2607:f8b0:4864:20::1334])
+ id 1xGvXH-00053p-KV
+ for qemu-riscv@nongnu.org; Wed, 14 Oct 2026 05:44:37 -0400
+Received: from mail-dl1-x122c.google.com ([2607:f8b0:4864:20::122c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xGvWZ-0001zE-Pl
- for qemu-riscv@nongnu.org; Wed, 14 Oct 2026 05:43:54 -0400
-Received: by mail-dy1-x1334.google.com with SMTP id
- 5a478bee46e88-30b6dad2382so9048367eec.0
- for <qemu-riscv@nongnu.org>; Wed, 14 Oct 2026 02:43:47 -0700 (PDT)
+ id 1xGvX8-00026D-Ma
+ for qemu-riscv@nongnu.org; Wed, 14 Oct 2026 05:44:28 -0400
+Received: by mail-dl1-x122c.google.com with SMTP id
+ a92af1059eb24-14394530ec6so2730111c88.1
+ for <qemu-riscv@nongnu.org>; Wed, 14 Oct 2026 02:44:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1791971027; x=1792575827; darn=nongnu.org;
- h=content-transfer-encoding:content-type:mime-version:references
- :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=synPi8hnFDON0bf/QeszSpYclzjkqZ5u8lY6d12QrFA=;
- b=qofgqE2dAD1vZmTunii07qV6aGlw+TBpUNOdNFa0gIHzeirFPzVg5UjOgPFLfg0VVe
- 2fuKwm+EIep57oJ/wKYSqyZYXr9575RNwfienxveWBl52wFWVITwwgxkhEtNhPPx1TbG
- 6v0KL84gsGf3i2wG8O83mYIyA+Aokab3QJ6/4wDHupaUVZT/kNeRsqiGdxrV5ahJaeTg
- AVnV56SeI4GE7/vZmRItykPtZzUBiagvGMKvmqEJcHxSyxNq9J7Fon7sHgemRmPdZJy8
- KTBPvcTmXk6qeFUt/QnAy9mKaEP/nEzVVP5i0PsI5bouLsqSGoIDKbK7QiKJ5zgHkQmg
- VzxA==
+ d=gmail.com; s=20251104; t=1791971065; x=1792575865; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=KO0jK5ge8mQcD+JCrU2SKqU9WNdQjJjrvSJVIgwsHK4=;
+ b=fiKSLXk1gBPktQkd2RQFd8jEwjvdew9A+6VLJGsE93t1SYVtzCtNwDRfnGs2iurLNH
+ XP86gq9lBs2YePRGUlPxUFLMP5RzCnFvCJ79F8DHaUanumG/acw2TPmfYtUCzoky2oJR
+ QPwulIeZ/cWhKKOx58XW3Qh2zdYz1ZSg1s6Ht7hWUMjyZ1cCZRn19zR9BRbK27Vu1Uui
+ ehrWLRZG/7oUWI65Y5akmWseRVt8teGav99JI5xdHbYAMySzn/L5OcIYB9LAwMg8Xbiu
+ entDHed5WoWdOpOFXQLjJ8RmDa/hCt+PUKwT6b/ok4e5v3D0vD5doH0ipaKd3nSrIbRR
+ gZcg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1791971027; x=1792575827;
- h=content-transfer-encoding:content-type:mime-version:references
- :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=synPi8hnFDON0bf/QeszSpYclzjkqZ5u8lY6d12QrFA=;
- b=DPQ3vZ65BOm8AO8KZgh+qEWc+J9KRz4WIdJNlrK2OX1QDFowcQB5g/eq57u4v5UXC7
- 17GANnQkspU8ShbOrfxB82tS2gZYy9S9d2IJDS5UoDYaT3/SJmEqWvqfjay2aqZ2GpMO
- 1GsByR+RIhFtPUKoIQ9531BSXZwAkBzgb2E+27G8pgNF6mCsIHxwvA0XzQngneYN2lFd
- O7qn3R04K7CLTfcsBghlIZtcesno+ZhY9NlGx5U4PWlVDmiWafqiojZU+YbS23tZBwU1
- FEqcW7dfQjHv5Og/G5StdB1aCHTaJizJ/o0cf7iIUBh5sC5CiJTESwUOVw513tXJW8N8
- hTNw==
+ d=1e100.net; s=20260707; t=1791971065; x=1792575865;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=KO0jK5ge8mQcD+JCrU2SKqU9WNdQjJjrvSJVIgwsHK4=;
+ b=pVi3wTadNLo6T3E70erjHvHlDWsjqL4XBq2CD/W39WK9LxtXXWJQVID98YbjNhnMrC
+ RITQWV72nMf7hEMa35wFNHdKZptsPivbVUejNWsWyMMMeBrmFXDB4SKqAs2kwOZZOGt8
+ NXicUrOKFxxPtNmdUYvAPPM60wwhBCVVV+EFVOAehi8Y3hWdS2xizDvqj+mFbT7d+UBh
+ 0Hq+nP4aigD9NCz4XUsZFJq5Z1CjdSE4xTsp4dYSz3rpF66ZOzL6hVIxusP4B8QLkPem
+ qUpEbpxtxhj9GWj5IZRzY4RJkXrrAkEEB+P/giGDcmIBldF8gyQQ1o22T0KXf7C2cujM
+ PhEQ==
 X-Forwarded-Encrypted: i=1;
- AKwUvBxxGY3Q2t2+fSRVhY7wk8N3VWdUO7Ayzq3R2v0LG1h2+D93EUA4f8IZX8FbRWxUcs8z9PTaHyJY+6Ad@nongnu.org
-X-Gm-Message-State: AFq9FYJQ/BwbKBdUR6ROoMyuf+WbvcBiFTEzBZhoBqOi+QcyU0lOsdPg
- 7x150Hk4GqH4kmed58syK2mqcqnqzU94M0P76D3aMrn2WuHWyE7kAmvM
-X-Gm-Gg: AYBFou2wgyBV4UqAI6R4iESnT8lC8qbo03iOBZfwqNK/lgoQfj4rGxYn3Hk8ZS4EM9C
- 5KzlVWfsom2lCq+tp02TvGPhbY4qLGE6kVIynCcsUVXaCa69XH4VTCfTJTaOf/ZRHxOzNpa+p9w
- 1woF9ma1OdZujg41IFa+Q3z0tenvOs+vTiQYcImwhJ1ounIazsxutUVIdUHxIXeiz9ysZyrHtvt
- PDkwJLyg1s3kHg8GxRujnF5AjENEFD+TDGRfktKOVrmqwtZzRMn+jKDzJCop513gWw2J/iwRrFQ
- G9sM9N70znc11dvZJ2AZ4n78HPdpuKSQMggm3eKabywEg70pojO9zN7tx5vv/CrPJLNMvgXL2fv
- jc3jM7Fxm8bTx7Xum1bfgHouqcRq0hZCvJmfVm1P3M7ICw1vU8mOGAk2X5k0jcmGAbYEf6OE96s
- 6/bbwAw3nszdI9sftiPBTA1i/0j8BDnzIg8XZ+L/0ZIJ+GULju13u6KCN/t/DD5Rb841aupwdRn
- 4argg2fU1IicUwQTQ==
-X-Received: by 2002:a05:7022:3b87:b0:164:7bbe:b609 with SMTP id
- a92af1059eb24-16a611c0785mr24546593c88.38.1791971026715; 
- Wed, 14 Oct 2026 02:43:46 -0700 (PDT)
+ AKwUvByIYvHfRlwq3mZG7hJFs0cb5500B9uQLqDwo8eFHR4M7wwLqu9C5YSQBUQOUI/kP9VgGriRlaNBC/US@nongnu.org
+X-Gm-Message-State: AFq9FYLAvzQdkt5FMhUCBiaTs9K1QdfjCwJf00Wq7W544ZIW2bgSMRbE
+ 9naPfg5aUlR21mkKyGEHaHxTjvJkNdiY48sfdN+WLJwAp4qGbco5Z0o6
+X-Gm-Gg: AYBFou386UIeiKN9iUdZ1QYaHW97NxbXSj0QIwfV40FCuPOAqKlZpJYup8U9bKCLhcf
+ 4IHCpPZbZo6seZNKByRMpIY8kqgCQZhFPX691GDbzxG0/VvZx/n3LJlLkqYGT5VXap7+X5KFYF9
+ AB/MlKbQQG690XLx4hMILSI24oWaMsGTVArSbVBo2zOznEZjSt913a4Wc1eClp+LdZ1d7tgzzpi
+ j91jxNtvUt3DeetazY7q6fFOQEHni7l8mb+eohNsEvtq3hIVaRcvPJvRmGC4G9JPBF/RSD4BWo9
+ KiuECdFjPGlmjOGxjgJVK7X70C7rlxFJqVCLIFVsorj1FJwsYa9sshfxvTv3bV6mlaV6WhpjiNU
+ xIYIkWEp5+n4J+Oq201tHBJljIGdE6HXazqix8cS41j5kEDHijCqfqnK7FEF/H/Knk8txavjCHN
+ /hGMa8FEtW0eboEsN3aYBnC4Y+p1pAfnaSE4hIphzxxCsfB2ql5EkCekUQ6IHL02jTTEh0Qd0CL
+ Ge0zMc+LKAZ9lIRBQ==
+X-Received: by 2002:a05:7022:7e08:b0:144:fa58:95d8 with SMTP id
+ a92af1059eb24-16a61a6ebb0mr28600435c88.27.1791971064923; 
+ Wed, 14 Oct 2026 02:44:24 -0700 (PDT)
 Received: from DESKTOP-Q716RM7 ([103.94.185.75])
  by smtp.googlemail.com with ESMTPSA id
- a92af1059eb24-169a31f6f5csm44348380c88.11.2026.10.14.02.43.38
+ a92af1059eb24-169a31f6f5csm44348380c88.11.2026.10.14.02.44.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 14 Oct 2026 02:43:45 -0700 (PDT)
+ Wed, 14 Oct 2026 02:44:24 -0700 (PDT)
 From: Yonggang Luo <luoyonggang@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: Alistair Francis <alistair.francis@wdc.com>,
@@ -99,24 +98,23 @@ Cc: Alistair Francis <alistair.francis@wdc.com>,
  Darren Kenny <darren.kenny@oracle.com>,
  =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
  Stafford Horne <shorne@gmail.com>
-Subject: [PATCH 23/34] hw/loongarch/virt: use unique QOM name
-Date: Wed, 14 Oct 2026 17:41:38 +0800
-Message-ID: <20261014094224.1976-8-luoyonggang@gmail.com>
+Subject: [PATCH 27/34] machine: match the versioned virt example to arm virt
+Date: Wed, 14 Oct 2026 17:41:42 +0800
+Message-ID: <20261014094224.1976-12-luoyonggang@gmail.com>
 X-Mailer: git-send-email 2.55.0.windows.3
 In-Reply-To: <20261014094224.1976-1-luoyonggang@gmail.com>
 References: <20261014094224.1976-1-luoyonggang@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1334;
- envelope-from=luoyonggang@gmail.com; helo=mail-dy1-x1334.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::122c;
+ envelope-from=luoyonggang@gmail.com; helo=mail-dl1-x122c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -132,115 +130,76 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Set TYPE_LOONGARCH_VIRT_MACHINE to MACHINE_TYPE_NAME("loongarch-virt")
-so LoongArch virt no longer collides with other virt-machine types in
-one process. Keep the -M / help / migration name as virt-* via
-machine_class_set_name().
+The comment still showed MACHINE_VER_TYPE_NAME("virt") and left out
+machine_class_set_name(). Show the arm-virt QOM type, keep the -M name
+as virt-<version>, and name the latest helper
+DEFINE_VIRT_MACHINE_AS_LATEST.
 
 Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
-Reviewed-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 Reviewed-by: Zhao Liu <zhao1.liu@intel.com>
 ---
- hw/loongarch/virt.c         | 45 ++++++++++++++++++++-----------------
- include/hw/loongarch/virt.h |  5 ++++-
- 2 files changed, 28 insertions(+), 22 deletions(-)
+ include/hw/core/boards.h | 27 ++++++++++++++++++---------
+ 1 file changed, 18 insertions(+), 9 deletions(-)
 
-diff --git a/hw/loongarch/virt.c b/hw/loongarch/virt.c
-index 9c5371af9de..5ca992a5ac7 100644
---- a/hw/loongarch/virt.c
-+++ b/hw/loongarch/virt.c
-@@ -1543,21 +1543,24 @@ static void virt_class_init(ObjectClass *oc, const void *data)
-         MACHINE_VER_SYM(options, virt, __VA_ARGS__)(mc); \
-         mc->desc = "QEMU " MACHINE_VER_STR(__VA_ARGS__) " LoongArch Virtual Machine"; \
-         MACHINE_VER_DEPRECATION(__VA_ARGS__); \
-+        machine_class_set_name(mc, "virt-" MACHINE_VER_STR(__VA_ARGS__)); \
-         if (latest) { \
-             mc->alias = "virt"; \
-             mc->is_default = true; \
-         } \
-     } \
--    static const TypeInfo MACHINE_VER_SYM(info, virt, __VA_ARGS__) = \
--    { \
--        .name = MACHINE_VER_TYPE_NAME("virt", __VA_ARGS__), \
--        .parent = TYPE_LOONGARCH_VIRT_MACHINE, \
--        .class_init = MACHINE_VER_SYM(class_init, virt, __VA_ARGS__), \
--    }; \
-     static void MACHINE_VER_SYM(register, virt, __VA_ARGS__)(void) \
-     { \
-+        const TypeInfo virt_machine_info = \
-+        { \
-+            .name = target_combined_binary() ? \
-+                    MACHINE_VER_TYPE_NAME("loongarch-virt", __VA_ARGS__) : \
-+                    MACHINE_VER_TYPE_NAME("virt", __VA_ARGS__), \
-+            .parent = TYPE_LOONGARCH_VIRT_MACHINE, \
-+            .class_init = MACHINE_VER_SYM(class_init, virt, __VA_ARGS__), \
-+        }; \
-         MACHINE_VER_DELETION(__VA_ARGS__); \
--        type_register_static(&MACHINE_VER_SYM(info, virt, __VA_ARGS__)); \
-+        type_register_static(&virt_machine_info); \
-     } \
-     type_init(MACHINE_VER_SYM(register, virt, __VA_ARGS__));
- 
-@@ -1579,22 +1582,22 @@ static void virt_instance_finalize(Object *obj)
-     g_free(lvms->oem_table_id);
- }
- 
--static const TypeInfo virt_machine_info = {
--    .name           = TYPE_LOONGARCH_VIRT_MACHINE,
--    .parent         = TYPE_MACHINE,
--    .abstract       = true,
--    .instance_size  = sizeof(LoongArchVirtMachineState),
--    .class_init     = virt_class_init,
--    .instance_init  = virt_initfn,
--    .instance_finalize = virt_instance_finalize,
--    .interfaces = (InterfaceInfo[]) {
--        { TYPE_HOTPLUG_HANDLER },
--        { }
--    },
--};
--
- static void machvirt_machine_init(void)
- {
-+    const TypeInfo virt_machine_info = {
-+        .name = TYPE_LOONGARCH_VIRT_MACHINE,
-+        .parent = TYPE_MACHINE,
-+        .abstract = true,
-+        .instance_size = sizeof(LoongArchVirtMachineState),
-+        .class_init = virt_class_init,
-+        .instance_init = virt_initfn,
-+        .instance_finalize = virt_instance_finalize,
-+        .interfaces = (InterfaceInfo[]) {
-+            { TYPE_HOTPLUG_HANDLER },
-+            { }
-+        },
-+    };
-+
-     type_register_static(&virt_machine_info);
- }
- 
-diff --git a/include/hw/loongarch/virt.h b/include/hw/loongarch/virt.h
-index d39a9bbf5dd..9a5f6486c0f 100644
---- a/include/hw/loongarch/virt.h
-+++ b/include/hw/loongarch/virt.h
-@@ -9,6 +9,7 @@
- #define HW_LOONGARCH_H
- 
- #include "hw/core/boards.h"
-+#include "qemu/target-info.h"
- #include "qemu/queue.h"
- #include "hw/block/flash.h"
- #include "hw/loongarch/boot.h"
-@@ -130,7 +131,9 @@ struct LoongArchVirtMachineState {
-     bool highmem_mmio;
- };
- 
--#define TYPE_LOONGARCH_VIRT_MACHINE  MACHINE_TYPE_NAME("virt")
-+#define TYPE_LOONGARCH_VIRT_MACHINE \
-+    (target_combined_binary() ? MACHINE_TYPE_NAME("loongarch-virt") : \
-+                                MACHINE_TYPE_NAME("virt"))
- OBJECT_DECLARE_SIMPLE_TYPE(LoongArchVirtMachineState, LOONGARCH_VIRT_MACHINE)
- void virt_acpi_setup(LoongArchVirtMachineState *lvms);
- void virt_fdt_setup(LoongArchVirtMachineState *lvms);
+diff --git a/include/hw/core/boards.h b/include/hw/core/boards.h
+index 6e5c8dac2d1..66d530bedf5 100644
+--- a/include/hw/core/boards.h
++++ b/include/hw/core/boards.h
+@@ -480,28 +480,37 @@ struct MachineState {
+  * For example, a macro that can be used to define versioned
+  * 'virt' machine types would look like:
+  *
++ *  #define TYPE_VIRT_MACHINE (target_combined_binary() ? \
++ *                             MACHINE_TYPE_NAME("arm-virt") : \
++ *                             MACHINE_TYPE_NAME("virt"))
++ *
+  *  #define DEFINE_VIRT_MACHINE_IMPL(latest, ...) \
+  *      static void MACHINE_VER_SYM(class_init, virt, __VA_ARGS__)( \
+  *          ObjectClass *oc, \
+- *          void *data) \
++ *          const void *data) \
+  *      { \
+  *          MachineClass *mc = MACHINE_CLASS(oc); \
+  *          MACHINE_VER_SYM(options, virt, __VA_ARGS__)(mc); \
+- *          mc->desc = "QEMU " MACHINE_VER_STR(__VA_ARGS__) " Virtual Machine"; \
++ *          mc->desc = "QEMU " MACHINE_VER_STR(__VA_ARGS__) \
++ *                     " ARM Virtual Machine"; \
+  *          MACHINE_VER_DEPRECATION(__VA_ARGS__); \
++ *          machine_class_set_name(mc, "virt-" MACHINE_VER_STR(__VA_ARGS__)); \
+  *          if (latest) { \
+  *              mc->alias = "virt"; \
+  *          } \
+  *      } \
+- *      static const TypeInfo MACHINE_VER_SYM(info, virt, __VA_ARGS__) = { \
+- *          .name = MACHINE_VER_TYPE_NAME("virt", __VA_ARGS__), \
+- *          .parent = TYPE_VIRT_MACHINE, \
+- *          .class_init = MACHINE_VER_SYM(class_init, virt, __VA_ARGS__), \
+- *      }; \
+  *      static void MACHINE_VER_SYM(register, virt, __VA_ARGS__)(void) \
+  *      { \
++ *          const TypeInfo virt_machine_info = \
++ *          { \
++ *              .name = target_combined_binary() ? \
++ *                      MACHINE_VER_TYPE_NAME("arm-virt", __VA_ARGS__) : \
++ *                      MACHINE_VER_TYPE_NAME("virt", __VA_ARGS__), \
++ *              .parent = TYPE_VIRT_MACHINE, \
++ *              .class_init = MACHINE_VER_SYM(class_init, virt, __VA_ARGS__), \
++ *          }; \
+  *          MACHINE_VER_DELETION(__VA_ARGS__); \
+- *          type_register_static(&MACHINE_VER_SYM(info, virt, __VA_ARGS__)); \
++ *          type_register_static(&virt_machine_info); \
+  *      } \
+  *      type_init(MACHINE_VER_SYM(register, virt, __VA_ARGS__));
+  *
+@@ -509,7 +518,7 @@ struct MachineState {
+  * whichever scenarios need to be catered for with a machine:
+  *
+  *  // Normal 2 digit, marked as latest e.g. 'virt-9.0'
+- *  #define DEFINE_VIRT_MACHINE_LATEST(major, minor) \
++ *  #define DEFINE_VIRT_MACHINE_AS_LATEST(major, minor) \
+  *      DEFINE_VIRT_MACHINE_IMPL(true, major, minor)
+  *
+  *  // Normal 2 digit e.g. 'virt-9.0'
 -- 
 2.55.0.windows.3
 
