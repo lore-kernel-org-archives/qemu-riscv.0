@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51F74CC6B1F
-	for <qemu-riscv@archiver.kernel.org>; Wed, 14 Oct 2026 09:43:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12F93CC6B1D
+	for <qemu-riscv@archiver.kernel.org>; Wed, 14 Oct 2026 09:43:47 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xGvVl-0002ne-2C; Wed, 14 Oct 2026 05:43:01 -0400
+	id 1xGvWJ-00033a-H9; Wed, 14 Oct 2026 05:43:35 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xGvVd-0002jE-Qc
- for qemu-riscv@nongnu.org; Wed, 14 Oct 2026 05:42:55 -0400
-Received: from mail-dl1-x122d.google.com ([2607:f8b0:4864:20::122d])
+ id 1xGvWE-00031i-D7
+ for qemu-riscv@nongnu.org; Wed, 14 Oct 2026 05:43:32 -0400
+Received: from mail-dl1-x1233.google.com ([2607:f8b0:4864:20::1233])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xGvVZ-0001g7-NP
- for qemu-riscv@nongnu.org; Wed, 14 Oct 2026 05:42:52 -0400
-Received: by mail-dl1-x122d.google.com with SMTP id
- a92af1059eb24-17bc533fda3so754335c88.1
- for <qemu-riscv@nongnu.org>; Wed, 14 Oct 2026 02:42:48 -0700 (PDT)
+ id 1xGvWC-0001r6-HX
+ for qemu-riscv@nongnu.org; Wed, 14 Oct 2026 05:43:30 -0400
+Received: by mail-dl1-x1233.google.com with SMTP id
+ a92af1059eb24-14394530ec6so2728639c88.1
+ for <qemu-riscv@nongnu.org>; Wed, 14 Oct 2026 02:43:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1791970967; x=1792575767; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1791971006; x=1792575806; darn=nongnu.org;
  h=content-transfer-encoding:content-type:mime-version:references
  :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=UMv3P7LT5eVeaLvzcHhKXPCVXwqK6FvuxNT3/ZpShFM=;
- b=Sr1SLthT5dT4d9y603sBsDCyRfbin4szv7Ivv/1w1uNXV0NxnPnSevDDZ40kImTE12
- wBuuFSx9rFI4cWu+s8qHNAqWFMsSDz7Wax8m8qnITtl8pxpgE8motXXUaU7bn3ITOQkp
- d6vUg3VF6IgQy7KJnmixPMr4cTQNUmKSnozDWxLj4aoXrqGVUQigTYZxpGTTbU7nh921
- hJCw6CFCTuDOeu3P91VqJJn8ZhSZrDOThsQA2c4oXBubjTUr2mCGgsc/K45KhRglbuM/
- 68CNNjmq81g8yzBvmv8Glu1KrKDCJ0Gbf0uXu0w2aNlQGIPYsyNcRtI6GZdy8Ze1JMFY
- fXsA==
+ bh=JHiFu4U4liJmndh7L3NobmTnl8BgwDY4UjBKZJ48w48=;
+ b=hSs5pdIzfv4uxMZDPTC7ofbbVuq4NfraaXHdb8q91Z2i4xLs7DBugNZ+F2nTbZWmJE
+ PU7vkRB91n5hR6vpak62YlJ+6x99YwR9HKYVtVpabiB4UBCjjp9ghkt6S9pchAaXkpXX
+ qrImzcjVpoNg2/ONGFM8aBaMKlsKVBk6lrE2qrIMd7lRiEMRzpaIlQJQWlnyA26N2gal
+ NPMaBd2tytmlrA/Cpe2hi30FmVhLTKe+HePR6xTyn57sfthfh5DJb0dfpYDxRFGIVnPV
+ 4aL7N3d8DZaTQp7A2jubuGt8pUyGg6rTnD23imZWdKS5FmCoRTmFvtSogj+2IjxZzMS3
+ VXQw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1791970967; x=1792575767;
+ d=1e100.net; s=20260707; t=1791971006; x=1792575806;
  h=content-transfer-encoding:content-type:mime-version:references
  :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=UMv3P7LT5eVeaLvzcHhKXPCVXwqK6FvuxNT3/ZpShFM=;
- b=j4SXQDUAb6Z2gwVwgKTxZR6Bp/TqzArFVAL3/UnHZ08yygzMwYxbiaCiFK00ccDVBQ
- mv6Sb/iOMfMZYrUOz2B5cVegdIbtqLrbfq8BL73bvybxlDnErGbm5DvBrVQCvnX+Fxhx
- g8sz2lV6VR9rpvXE3jfSpr4rMiKg7mN9loxXZ2AhLL0P9XUuFk8oBh2laOVLndwHc4KQ
- /aojDUS5ehiJXFd6HDObigqRW01SWS8/C94evvX3W5hvSKcTGzSu/QcIWD3LBwiShknq
- sLLllit8eP8L+0Xfl0k+87m5Yr0ETXYstChD7qoTANYKHwoaFGyPARKqZ59zclGiIi5j
- UQZg==
+ bh=JHiFu4U4liJmndh7L3NobmTnl8BgwDY4UjBKZJ48w48=;
+ b=llTGxeUyeuF49pobTYsTewFckFaiRJpaX3iSfagFuLUIsBF4DD68kD1gF663Xv2hb/
+ MGxLfLRhtkI+6XV6inJI7fRrlCUu8X2jzJLs9XrFCGsRmJdzk0UPradupgIs8QUlHdxT
+ 352W6EV9XFlnheMYIyO+cEQpd23zZjiHzhMuTgAfBXX1W6ihzfj+Opj79cx3WzbXrP2D
+ 5X2Iix9yVBahDhAqyelaCHfojotboMB/MPOv2r9yafi2HjkdOD8V0b/YwdwiVMHfMLnJ
+ 10DLccIRs5nP4YdgcKG65R5jBJD4gMWRzLv2ku2icNHVTKl7HRopyRzATO7H9Dzz7vlK
+ 17Ig==
 X-Forwarded-Encrypted: i=1;
- AKwUvBxOpyx7UW9Y3IN2irhvvanRztThF6nmAinPnZKBJ6jBaeweVHwr/Pd1s+EfvzUA2pyipPCSP++ht4zT@nongnu.org
-X-Gm-Message-State: AFq9FYLBQUHfs6/Pdjfnc1ZUDWS3MjPV4GBTFZdg6aKHDdwM+dTgEyoy
- eQAV7zRLbaCbbhyfAmfgASLvSduZsCqXWDsy6fVHZHkSFypof8nIMOPh
-X-Gm-Gg: AYBFou2XsZZ+C5ydd5tsKOQ16/130LYhU8mP9H3URqp/+ef7NjxP6nvhcABYYhysZbk
- G3GrR9sGa8EgWqrnCpVRAQExMy0X9T7vq9nLtzs5lESyCTi25r+6R6ELV5uUSD1H/xmTkjvGDur
- 9eeJ8wCg074y3hlpcYQoppYmJ7+y79kdDkqMkIbB5WzKb8PoX7kzdDN9QuH7bQH12gRpkvPC5fU
- 9XRaCdBzcgsPhoFdaSBZk6P6veS7NC5cNNQIWg1pr5BLhObOPHlpJ3dVlAsTeYYwY3TYDSNtb/n
- EE+sDucfXKtbu+wW1Gi+weoarfl/iM1sAbDEF5PIEEbFInnMwO69b/wjlU3UVCHMMHNZJ8cZsDo
- r3/oZpZRbacrdhsZWeDwtS8/LcCNgpUyxJpN0RNODI6rXIWSuCrOw3yWlVMsyUkFRrzsLYtEtqJ
- /9y3YvVhaICKf9x6JJDfE4PGnwNLJMfJPBrimqbKB9qqscKONh1dotUM7qRvr0eFRKYCc9N8GGR
- swY6oRDwF4kkjblQQ==
-X-Received: by 2002:a05:701b:2403:b0:145:152:b547 with SMTP id
- a92af1059eb24-16a56ab0d40mr20014077c88.1.1791970966688; 
- Wed, 14 Oct 2026 02:42:46 -0700 (PDT)
+ AKwUvBwqQSCKh0h0rNJdtd1bJdI/BEdEESYSoiEVF4cfMsy5sTownhW5GQHeuI4RmuiRGZBA4L5G9tf7k882@nongnu.org
+X-Gm-Message-State: AFq9FYJiBEZZmmwA3ESt8l0db2vkQlQAiASnOEkNvvRMCgFw3wD0Rkee
+ Nua3SdZ700Wm077QqfalqfeWXc0MJUtigKyVK/wrvvP7GuD8VOsxrlkh
+X-Gm-Gg: AYBFou0uaPoB8RE3xnSfK8x2Ma6Q6u1iOrUjpT04XzTIsJC4xV/KH1SlF+6RT58kYsa
+ B4i+ATBF9tHiZmRsoLSAgLPGdGhEq3KOFIYSLLzGpxYhoPXXXtg8ojxe3kTG9M6Xl1rgnX9LfzL
+ n9ckY4WQ3ncxlTObD3N/o31MF9KnxnxaV/B8TjAIY1UcVv4JMHzh2Q/rnH3a7n8MzG68nDgIeDE
+ oGUfGEbEBt/XpCYJclhdC+1nhfsIzCpYQkVSFrDCW99lEDVLVOAKhWzfvjiWIRGAval0d4YzeUD
+ topaS5k1eO2WBtAqzxN2770ZCB/1xY9k/T6XuZj1R1Iywa6igk6WY9LpyUMwJW5uYaplegwIj8y
+ eGa2Ne1oTFLN2fE7jtL5Agt3k/SyyjBgX8G2SU2BUH42HPPMArOLnpYjpxyYnPB/5GUmH/49Iok
+ Kj1LXVWcG5VcQQZ0lmexnj3WpgbS18NSwHlkbVig8nzNtUC9Ux8ZZE2KTOozj6COf5ysMqR7ZSM
+ 4BNdLELS8HhL5Qsug==
+X-Received: by 2002:a05:701b:231b:b0:165:55e2:2d69 with SMTP id
+ a92af1059eb24-16a640fcc35mr22716376c88.46.1791971006099; 
+ Wed, 14 Oct 2026 02:43:26 -0700 (PDT)
 Received: from DESKTOP-Q716RM7 ([103.94.185.75])
  by smtp.googlemail.com with ESMTPSA id
- a92af1059eb24-169a31f6f5csm44348380c88.11.2026.10.14.02.42.38
+ a92af1059eb24-169a31f6f5csm44348380c88.11.2026.10.14.02.43.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 14 Oct 2026 02:42:45 -0700 (PDT)
+ Wed, 14 Oct 2026 02:43:25 -0700 (PDT)
 From: Yonggang Luo <luoyonggang@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: Alistair Francis <alistair.francis@wdc.com>,
@@ -99,17 +99,17 @@ Cc: Alistair Francis <alistair.francis@wdc.com>,
  Darren Kenny <darren.kenny@oracle.com>,
  =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
  Stafford Horne <shorne@gmail.com>
-Subject: [PATCH 17/34] target-info: add a combined-binary query stub
-Date: Wed, 14 Oct 2026 17:41:32 +0800
-Message-ID: <20261014094224.1976-2-luoyonggang@gmail.com>
+Subject: [PATCH 21/34] hw/or1k/virt: use unique QOM name
+Date: Wed, 14 Oct 2026 17:41:36 +0800
+Message-ID: <20261014094224.1976-6-luoyonggang@gmail.com>
 X-Mailer: git-send-email 2.55.0.windows.3
 In-Reply-To: <20261014094224.1976-1-luoyonggang@gmail.com>
 References: <20261014094224.1976-1-luoyonggang@gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::122d;
- envelope-from=luoyonggang@gmail.com; helo=mail-dl1-x122d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1233;
+ envelope-from=luoyonggang@gmail.com; helo=mail-dl1-x1233.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -132,80 +132,64 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Declare target_combined_binary() in target-info.h and provide a stub
-implementation in stubs/target-info.c that returns false.
-
-This lets target-independent tools and single-target binaries use the
-query without a combined qemu-system implementation. A combined binary
-can provide its own implementation returning true.
+Set TYPE_VIRT_MACHINE to MACHINE_TYPE_NAME("or1k-virt") so OpenRISC
+virt no longer collides with other virt-machine types in one process.
+Keep the -M / help / migration name as virt via
+machine_class_set_name().
 
 Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
+Reviewed-by: Marc-André Lureau <marcandre.lureau@redhat.com>
+Reviewed-by: Zhao Liu <zhao1.liu@intel.com>
 ---
- MAINTAINERS                |  1 +
- include/qemu/target-info.h |  7 +++++++
- stubs/meson.build          |  1 +
- stubs/target-info.c        | 10 ++++++++++
- 4 files changed, 19 insertions(+)
- create mode 100644 stubs/target-info.c
+ hw/or1k/virt.c | 20 +++++++++++---------
+ 1 file changed, 11 insertions(+), 9 deletions(-)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index fc60193aa3f..669814d29c5 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -2146,6 +2146,7 @@ TargetInfo API
- M: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
- M: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
- S: Supported
-+F: stubs/target-info.c
- F: include/qemu/target-info*.h
- F: target-info*.c
- F: tests/unit/test-multi-targets.c
-diff --git a/include/qemu/target-info.h b/include/qemu/target-info.h
-index adda363ac39..9704ee32605 100644
---- a/include/qemu/target-info.h
-+++ b/include/qemu/target-info.h
-@@ -42,6 +42,13 @@ const char *target_cpu_type(void);
-  */
- bool target_big_endian(void);
+diff --git a/hw/or1k/virt.c b/hw/or1k/virt.c
+index a3ff903839b..ec20045a3d0 100644
+--- a/hw/or1k/virt.c
++++ b/hw/or1k/virt.c
+@@ -34,7 +34,9 @@
+ #define VIRT_CPUS_MAX 4
+ #define VIRT_CLK_MHZ 20000000
  
-+/**
-+ * target_combined_binary:
-+ *
-+ * Returns: %true if this is the combined qemu-system binary.
-+ */
-+bool target_combined_binary(void);
-+
- /**
-  * target_base_arm:
-  *
-diff --git a/stubs/meson.build b/stubs/meson.build
-index 29b6644b254..ed7aeb61d0d 100644
---- a/stubs/meson.build
-+++ b/stubs/meson.build
-@@ -3,6 +3,7 @@
- # below, so that it is clear who needs the stubbed functionality.
+-#define TYPE_VIRT_MACHINE MACHINE_TYPE_NAME("virt")
++#define TYPE_VIRT_MACHINE \
++    (target_combined_binary() ? MACHINE_TYPE_NAME("or1k-virt") : \
++                                MACHINE_TYPE_NAME("virt"))
+ #define VIRT_MACHINE(obj) \
+     OBJECT_CHECK(OR1KVirtState, (obj), TYPE_VIRT_MACHINE)
  
- stub_ss.add(files('cpu-get-clock.c'))
-+stub_ss.add(files('target-info.c'))
- stub_ss.add(files('fdset.c'))
- stub_ss.add(files('iothread-lock.c'))
- stub_ss.add(files('is-daemonized.c'))
-diff --git a/stubs/target-info.c b/stubs/target-info.c
-new file mode 100644
-index 00000000000..8873aa21594
---- /dev/null
-+++ b/stubs/target-info.c
-@@ -0,0 +1,10 @@
-+/* SPDX-License-Identifier: GPL-2.0-or-later */
-+
-+#include "qemu/osdep.h"
-+
-+#include "qemu/target-info.h"
-+
-+bool target_combined_binary(void)
-+{
-+    return false;
-+}
+@@ -548,22 +550,22 @@ static void openrisc_virt_machine_init(ObjectClass *oc, const void *data)
+     MachineClass *mc = MACHINE_CLASS(oc);
+ 
+     mc->desc = "or1k virtual machine";
++    machine_class_set_name(mc, "virt");
+     mc->init = openrisc_virt_init;
+     mc->max_cpus = VIRT_CPUS_MAX;
+     mc->is_default = false;
+     mc->default_cpu_type = OPENRISC_CPU_TYPE_NAME("or1200");
+ }
+ 
+-static const TypeInfo or1ksim_machine_typeinfo = {
+-    .name       = TYPE_VIRT_MACHINE,
+-    .parent     = TYPE_MACHINE,
+-    .class_init = openrisc_virt_machine_init,
+-    .instance_size = sizeof(OR1KVirtState),
+-    .is_available = target_or1k,
+-};
+-
+ static void or1ksim_machine_init_register_types(void)
+ {
++    const TypeInfo or1ksim_machine_typeinfo = {
++        .name = TYPE_VIRT_MACHINE,
++        .parent = TYPE_MACHINE,
++        .class_init = openrisc_virt_machine_init,
++        .instance_size = sizeof(OR1KVirtState),
++        .is_available = target_or1k,
++    };
+     type_register_static(&or1ksim_machine_typeinfo);
+ }
+ 
 -- 
 2.55.0.windows.3
 
