@@ -4,169 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E857C3DA7A
-	for <qemu-riscv@archiver.kernel.org>; Wed, 14 Oct 2026 17:36:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3E66CC6B1A
+	for <qemu-riscv@archiver.kernel.org>; Wed, 14 Oct 2026 18:16:48 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xH2tB-0001gv-D7; Wed, 14 Oct 2026 13:35:41 -0400
+	id 1xH3WZ-0002Tm-VD; Wed, 14 Oct 2026 14:16:23 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <pierrick.bouvier@oss.qualcomm.com>)
- id 1xH2t9-0001gE-KX
- for qemu-riscv@nongnu.org; Wed, 14 Oct 2026 13:35:39 -0400
-Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <pierrick.bouvier@oss.qualcomm.com>)
- id 1xH2t6-0005q1-R0
- for qemu-riscv@nongnu.org; Wed, 14 Oct 2026 13:35:38 -0400
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 69EEbRQo3813136
- for <qemu-riscv@nongnu.org>; Wed, 14 Oct 2026 17:35:34 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- kPaexnRf9zS+LN69dCeGEbXqXvBgg7OhiPBeXsfIQDY=; b=PgUDkhfmCapFshJA
- OxHHnhtvk6zbqX3e/Z0oHyYKvX+Y+je1zF9f9Ejtgn4VpUQrwkPD61vEpMYuKwDN
- 1s46gCFrq3FsXcuhJzyUAfxTxhF07lNiSSYaRc3QT1FBIY14Col354urmj287I6X
- 2/h573pT+qETucsA50HT6/2Up6mg+gnL00/8M1YvCTufDVUPcvToLf5phJ0FQkm4
- YDvucffjbCtmFlSz1J/C5HfvjFXcKwVi93E2xuZGFNkXK9i1F8n4Iqs2gwkfb3Z7
- A3S6qPTiVFUHNuc6ATcgNGnYWSayekO0TB4DFIvmIv5yLiR+JkTCyykw/1+bUcoK
- 8DMinA==
-Received: from mail-dy1-f198.google.com (mail-dy1-f198.google.com
- [74.125.82.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ha46u2tj7-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Wed, 14 Oct 2026 17:35:34 +0000 (GMT)
-Received: by mail-dy1-f198.google.com with SMTP id
- 5a478bee46e88-35d4538fd74so3803716eec.1
- for <qemu-riscv@nongnu.org>; Wed, 14 Oct 2026 10:35:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1791999334; x=1792604134; darn=nongnu.org;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=kPaexnRf9zS+LN69dCeGEbXqXvBgg7OhiPBeXsfIQDY=;
- b=XoCfp3xs0XNbZzy1S6Bvy7EEjOPTrpsYPsuQPye1v985RQYg9Br9mpTGBl4nwEMEbw
- oLocwx2Iq1tZe6DuWl0dLF9S6L3BpX5XEZ45Wq2YeDcHcGP7n4s0NkhhnGUCK6HVvp4j
- FPA4ei8YGiQEVyIHE8N/X5xsZ5r55WUKVCcUqZ5hidLx0a0Sf+mJDq0ekvi0deLyQUOn
- lVoyB6wXAhpLG1dFH+Ol9uTa9GCHUZxsWAniFAOk4oVkIDj3JBWmz0jYgypXD+IeQCYP
- qeJ87UzcxA5q7DCnxnTuBDTD53d2pt3A1bo/cDkUnCv91OH2olkd1hgPMP9XQaMCgLvV
- 5OAA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1791999334; x=1792604134;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=kPaexnRf9zS+LN69dCeGEbXqXvBgg7OhiPBeXsfIQDY=;
- b=wRJtHl/eQZbt0hJ5OHqjg2ujnKTq/x1s+z7hGvwAfUo8YkHJ0hlfcP3j47IyBW82aY
- MtVa48sMGur7g5y0OcSNnHygCgJZpzVLv8nSLKB9uiAy7HA009sBGr4D7/ODhAtFKZVX
- F1cxzG6REhVMq6FphaypU02Wkt8PBwIIdoe7J4aR8Sac0AAibWdU4CVy46fO/JTpklVb
- dE3phWlDNq0+FiL1YCUotVZnDVK/IQpmkVl7TVHQcJ42UVS/jf+Mur/6LXS84ydWP43P
- 4RV3fWcjIT1hfxYheSWQ03Mlc/Ar0a1ms53M02KXwUVE5w70tHWmc7BZLNZTkamBhgkI
- OOqA==
-X-Forwarded-Encrypted: i=1;
- AKwUvBwg3Hngfjadn5nFlQK4gEG8FYY9791ZJ5vjvG+GyVA0mngQmvijdo3hMs2ZXdWtEsoHLDO8Q7rK2b8/@nongnu.org
-X-Gm-Message-State: AFq9FYJ/8PxCipWhXZpzQfJEZo1sRBRAsqqfHxP/HukPhJXdcwUw8gDi
- xWFvG5oBwrQ6NBygCXbaTgwioU+WrJGP0PfHfu0+R9rtN7lOHSFrkl2qAH5DBp/SbMAIBEEklN5
- 6K39vpZ9dp+f/+q7c/ROBuwHr0oBVv9rltvWjDC/++F3rdJhlujVT2ZUu1w==
-X-Gm-Gg: AYBFou3Qm6veBBO7UL5PuiSk2J0IoCo3KH01nVaBrWuUK5jNB9j7nKHE6uyaqVmhY40
- DJ3iyqth8cCi9z0bhj+bYN2SeWAfVlg9F5qf21RBa1wsnrcnfSRcqbBQ0CO9BRAKqZdNE6rdR7D
- dLC8/y4V1M9JOrOxG24qyKztToP8qVig6AmGAGR4KIF7PfWkwRfgJCxsVqa/yAF/6TOPKppu6SP
- P2W8BL2LDS/k40vrG12W3dP3jrwDZ3ZBC1k+N8auwVmA+EPTd+DW1Fxik+/jeuC7mNZwuM11fWi
- QTPKGaU8fhW0Hk7+KJVepnKmrpbxCdAdCInDK6OJpFTdHDTRjsCAuLbpHl5S7Rbm/W0d9lrV4Kx
- ZRSwFj4MXI1UoYiQ7CveO2lSkQTX1BoNYlwxqFKCF0oe1St6v/oORpz4PDpRFmNMtNQJxsg==
-X-Received: by 2002:a05:693c:6099:b0:35e:e454:da28 with SMTP id
- 5a478bee46e88-35ee454da93mr548549eec.16.1791999333696; 
- Wed, 14 Oct 2026 10:35:33 -0700 (PDT)
-X-Received: by 2002:a05:693c:6099:b0:35e:e454:da28 with SMTP id
- 5a478bee46e88-35ee454da93mr548442eec.16.1791999332701; 
- Wed, 14 Oct 2026 10:35:32 -0700 (PDT)
-Received: from [192.168.1.199] (192-80-163-190.dyn.novuscom.net.
- [192.80.163.190]) by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-3537ca6d202sm53293624eec.13.2026.10.14.10.35.30
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 14 Oct 2026 10:35:32 -0700 (PDT)
-Message-ID: <b0d5c95f-b08d-4a3b-9c8c-7a7575250fdc@oss.qualcomm.com>
-Date: Wed, 14 Oct 2026 10:35:29 -0700
+ (Exim 4.90_1) (envelope-from <wangyang25@otcaix.iscas.ac.cn>)
+ id 1xH3WR-0002Sq-8u; Wed, 14 Oct 2026 14:16:15 -0400
+Received: from smtp21.cstnet.cn ([159.226.251.21] helo=cstnet.cn)
+ by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
+ (Exim 4.90_1) (envelope-from <wangyang25@otcaix.iscas.ac.cn>)
+ id 1xH3WN-00010h-Uv; Wed, 14 Oct 2026 14:16:15 -0400
+Received: from DESKTOP-7FLBREN (unknown [124.16.137.194])
+ by APP-01 (Coremail) with SMTP id qwCowADnuOzgxs9qifjeCg--.49849S4;
+ Thu, 15 Oct 2026 02:16:01 +0800 (CST)
+From: wangyang <wangyang25@otcaix.iscas.ac.cn>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
+ daniel.barboza@oss.qualcomm.com
+Subject: [PATCH] linux-user/riscv: preserve rs1 address for cbo.zero fault
+ reporting
+Date: Thu, 15 Oct 2026 02:15:59 +0800
+Message-ID: <20261014181559.1567-1-wangyang25@otcaix.iscas.ac.cn>
+X-Mailer: git-send-email 2.55.0.windows.2
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 00/34] single-binary: Select the softmmu target through
- -machine <type>
-To: Yonggang Luo <luoyonggang@gmail.com>, qemu-devel@nongnu.org
-Cc: Eric Blake <eblake@redhat.com>, qemu-riscv@nongnu.org,
- =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>,
- Alexander Bulekov <alxndr@bu.edu>, Laurent Vivier <lvivier@redhat.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Gerd Hoffmann <kraxel@redhat.com>,
- qemu-s390x@nongnu.org, Song Gao <17746591750@163.com>,
- Matthew Rosato <mjrosato@linux.ibm.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- "Michael S. Tsirkin" <mst@redhat.com>, Fabiano Rosas <farosas@suse.de>,
- Eric Farman <farman@linux.ibm.com>, Brian Cain
- <brian.cain@oss.qualcomm.com>, Stefan Hajnoczi <stefanha@redhat.com>,
- Darren Kenny <darren.kenny@oracle.com>, Ani Sinha <anisinha@redhat.com>,
- Peter Maydell <peter.maydell@linaro.org>,
- =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Stafford Horne <shorne@gmail.com>, Cornelia Huck <cohuck@redhat.com>,
- Zhao Liu <zhao1.liu@intel.com>, Weiwei Li <liwei1518@gmail.com>,
- Markus Armbruster <armbru@redhat.com>,
- David Hildenbrand <david@kernel.org>,
- Laurent Vivier <laurent@vivier.eu>, Fam Zheng <fam@euphon.net>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, qemu-arm@nongnu.org,
- Chao Liu <chao.liu@processmission.com>,
- Philippe Mathieu-Daude <philmd@mailo.com>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Max Filippov <jcmvbkbc@gmail.com>,
- Stefano Garzarella <sgarzare@redhat.com>
-References: <20261014093152.834-1-luoyonggang@gmail.com>
-From: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
-Content-Language: en-US
-In-Reply-To: <20261014093152.834-1-luoyonggang@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE0MDA3MCBTYWx0ZWRfX2CsD+4D0ZXqx
- HnmogB2ljaieAUEvh4FySADki/uuZO/HnIT8cj+vIjiLkj6tO45xZ5DaJoJHIYOO56HhGDFQdHZ
- YYR2BsJZ0+LRmahIstNB7WcjWTPEKe0=
-X-Proofpoint-GUID: 7Uo6TwSL9y1OH7SqAIdDogdPD--v5HU6
-X-Authority-Analysis: v=2.4 cv=Y6ttIReN c=1 sm=1 tr=0 ts=6acfbd66 cx=c_pps
- a=wEP8DlPgTf/vqF+yE6f9lg==:117 a=9852oil1ID9t5xBSyQ/BEA==:17
- a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=OrK7x0LPfmxmPngmsFUA:9 a=QEXdDO2ut3YA:10
- a=bBxd6f-gb0O0v-kibOvt:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE0MDA3MCBTYWx0ZWRfX3rCEb+iW8JTO
- GiJJkW1/0EJzuQkIPpS4UOC4yNE9s+397HulpTd6hJJUdLiSLI1CfFaYY/MT5H5i67FwRczfx70
- v50Ysz4mn2sGMpIfO+n65hH3s4lo/DYqNsgpTmDcrKVneldeQ3nb8YaY9hH3Aik5r0QYrnazwaY
- n5/gWvezT1zeaqfo9oq4SWnbs16S0Rka47l7kDMhnh7ioWU/K2mvM8t8xirXtK2DNd2iz55CiQ2
- 6G55/RsQR/nbIwjE1mezRI//xqCU+A8zEHRRpVVNLWdCgfv35vEJxPUbu3R7GWhWtJpAcZ6Oauh
- AS9oCqs4ThcQA6MvTvEWv9wHrX7gXUoNLmMEsV1dK+1koCKblLImjxaa30aPo2ag+oIenx4WIy9
- zz/HxyQypyiKDeDWRC9WbUokOoSFgXNknP2lwWXkrNSi8AKZV/CMoNm8RGlGuyshPBAEzmBuFIF
- mnnJpz5HhWw1fwgjxtQ==
-X-Proofpoint-ORIG-GUID: 7Uo6TwSL9y1OH7SqAIdDogdPD--v5HU6
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-13_01,2026-10-14_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 malwarescore=0 adultscore=0 phishscore=0
- lowpriorityscore=0 clxscore=1015 spamscore=0 suspectscore=0 bulkscore=0
- impostorscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610080000
- definitions=main-2610140070
-Received-SPF: pass client-ip=205.220.168.131;
- envelope-from=pierrick.bouvier@oss.qualcomm.com;
- helo=mx0a-0031df01.pphosted.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
-X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID: qwCowADnuOzgxs9qifjeCg--.49849S4
+X-Coremail-Antispam: 1UD129KBjvJXoW3Xry7Xr1xXFykGF43tr45trb_yoWxCr4UpF
+ Z7CrW7Kr93tFn7Xw4ftw4jvF15Wr4vgFsrG34ku3yS9r4Sq3yfZw1Dtay7uF4UGFs5XF4j
+ vFsFyryUAFyUXFDanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUU9Ib7Iv0xC_Kw4lb4IE77IF4wAFF20E14v26r4j6ryUM7CY07I2
+ 0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rw
+ A2F7IY1VAKz4vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Jr0_JF4l84ACjcxK6xII
+ jxv20xvEc7CjxVAFwI0_Jr0_Gr1l84ACjcxK6I8E87Iv67AKxVW8JVWxJwA2z4x0Y4vEx4
+ A2jsIEc7CjxVAFwI0_Gr0_Gr1UM2vYz4IE04k24VAvwVAKI4IrM2AIxVAIcxkEcVAq07x2
+ 0xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v26r1j6r18Mc
+ Ij6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IYc2Ij64vIr41l
+ c7CjxVAaw2AFwI0_JF0_Jw1lc2xSY4AK67AK6ryl42xK82IYc2Ij64vIr41l4I8I3I0E4I
+ kC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWU
+ WwC2zVAF1VAY17CE14v26r126r1DMIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr
+ 0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r1j6r4UMIIF0xvE42xK8VAvwI8IcIk0rVWU
+ JVWUCwCI42IY6I8E87Iv67AKxVW8JVWxJwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJb
+ IYCTnIWIevJa73UjIFyTuYvjxUkco2DUUUU
+X-Originating-IP: [124.16.137.194]
+X-CM-SenderInfo: 5zdqw5xdqjjk46rwut1l0ox2xfdvhtffof0/
+Received-SPF: pass client-ip=159.226.251.21;
+ envelope-from=wangyang25@otcaix.iscas.ac.cn; helo=cstnet.cn
+X-Spam_score_int: -41
+X-Spam_score: -4.2
+X-Spam_bar: ----
+X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -182,159 +73,184 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 10/14/2026 2:31 AM, Yonggang Luo wrote:
-> MachineClass::targets declares each machine's supported targets as a
-> uint64_t QEMU_ARCH_* mask.
-> 
-> In the combined executable, a machine can be selected from
-> <target>-<machine-name> when <machine-name> is ambitious.
-> Otherwise we can use <machine-name> to directly select a target.
-> 
-> Renaming SysEmuTarget to EmuTarget prepares the enum for both system and
-> user-mode targets before introducing more usage of it.
-> Rationale:
-> https://lore.kernel.org/qemu-devel/d6217459-1e55-4da0-a49f-bde8215d8c0e@oss.qualcomm.com/
-> 
-> The "virt" machines need distinct QOM names to coexist in a combined binary
-> or test. Their existing CLI names and aliases are preserved.
-> 
-> Other indirect call of target_info() in class_init/type_init is removed by
-> serveral commits, this is a prepare for select <target> by -machine $type.
-> As target_info() will be NULL till the target is selected under machine_select.
-> 
-> The commits through "hw: add MachineClass::targets with a usage and test"
-> add a minimal demo/test for introduce MachineClass::targets
-> 
-> The next group, through
-> "meson: build combined qemu-system for multi-target configurations",
-> enabled the test guard to prevent introduce future calling
-> target_info() in type_init or class_init
-> 
-> These two boundaries provide possible merge points.
-> 
-> "targets" be exported along with MachineInfo in commit
-> "qmp: Expose supported targets in query-machines", so that the qmp know
-> how to set proper $<target>-<machine-name>.
-> 
-> The rest commits is the introduce of support of <target> select from
-> `-machine $type`.
-> 
-> Yonggang Luo (34):
->   qemu/base-arch-defs: extract QEMU_ARCH_BIT for QEMU_ARCH_* enums
->   qemu: Use SYS_EMU_TARGET__MAX to define QEMU_ARCH_ALL
->   qemu: increase width of QEMU_ARCH_* masks enums to be 64 bits
->   qapi: rename SysEmuTarget to EmuTarget
->   qapi: add missing Linux user-mode targets to EmuTarget
->   meson: define TARGET_ARCH_VARIANT to target_name only
->   target-info: prepare the QOM target list before
->     module_call_init(MODULE_INIT_QOM)
->   hw: add MachineClass::targets with a usage and test
->   accel: register CPU parent for each target
->   meson: collect Rust crates for combined system target
->   module: Add module_allow_all_arch for allow all modules be loaded
->   target/arm: defer max-v8 initializer selection until CPU creation
->   hw/microblaze: defer PetaLogix endianness default until init
->   hw/pci: Avoid guard loadparm with target_s390x() for s390x in
->     class_init
->   hw/scsi: Avoid guard loadparm with target_s390x() for s390x in
->     class_init
->   hw/virtio/virtio-mem: Avoid call to target_info() in class_init
->   target-info: add a combined-binary query stub
->   machine: allow -M name to differ from QOM type
->   hw/riscv/virt: use unique QOM name
->   hw/arm/virt: use unique QOM name
->   hw/or1k/virt: use unique QOM name
->   hw/hexagon/virt: use unique QOM name
->   hw/loongarch/virt: use unique QOM name
->   hw/m68k/virt: use unique QOM name
->   hw/xtensa/virt: use unique QOM name
->   qapi: return MachineInfo typename from query-machines
->   machine: match the versioned virt example to arm virt
->   hw: Add MachineClass.targets for all "virt" machines for all possible
->     targets
->   system/arch_init: update qemu_arch_available to handle non-target
->     select condition
->   meson: build combined qemu-system for multi-target configurations
->   qmp: Expose supported targets in query-machines
->   system/vl: select target from machine name in combined binaries
->   system/vl: handle cpu/device help properly for multi-target qemu
->   qdev: Handle device alias ambiguous under multi-target qemu
-> 
->  MAINTAINERS                              |   2 +
->  accel/accel-common.c                     |   6 +-
->  accel/accel-internal.h                   |   1 +
->  accel/accel-system.c                     |  24 +++
->  accel/accel-user.c                       |   7 +
->  backends/igvm.c                          |   4 +-
->  hw/alpha/dp264.c                         |   2 +
->  hw/arm/virt.c                            |  56 +++----
->  hw/core/machine-qmp-cmds.c               |  19 ++-
->  hw/core/machine.c                        |   9 ++
->  hw/hexagon/virt.c                        |  25 +++-
->  hw/loongarch/virt.c                      |  47 +++---
->  hw/m68k/virt.c                           |  39 +++--
->  hw/microblaze/petalogix_s3adsp1800_mmu.c |  11 +-
->  hw/misc/vmlaunchupdate.c                 |   6 +-
->  hw/or1k/virt.c                           |  22 +--
->  hw/pci/pci.c                             |  18 ++-
->  hw/riscv/virt.c                          |  28 ++--
->  hw/scsi/scsi-disk.c                      |  18 ++-
->  hw/uefi/ovmf-log.c                       |   4 +-
->  hw/virtio/virtio-mem.c                   |  26 ++--
->  hw/xtensa/virt.c                         |  24 ++-
->  include/hw/arm/virt.h                    |   5 +-
->  include/hw/core/boards.h                 |  45 ++++--
->  include/hw/hexagon/virt.h                |   5 +-
->  include/hw/loongarch/virt.h              |   5 +-
->  include/hw/riscv/virt.h                  |   5 +-
->  include/monitor/qdev.h                   |   7 +
->  include/qemu/base-arch-defs.h            |  80 ++++++----
->  include/qemu/module.h                    |   2 +
->  include/qemu/target-info-def.h           |   2 +-
->  include/qemu/target-info-qapi.h          |   4 +-
->  include/qemu/target-info-qom.h           |   4 +
->  include/qemu/target-info.h               |   7 +
->  meson.build                              |  82 +++++++++-
->  monitor/monitor-hmp-internal.h           |   2 +-
->  qapi/machine.json                        |  44 +++---
->  qapi/pragma.json                         |   4 +-
->  qom/object.c                             |   4 +-
->  stubs/meson.build                        |   1 +
->  stubs/target-info.c                      |  10 ++
->  system/arch_init.c                       |  12 +-
->  system/qdev-monitor.c                    |  54 ++++++-
->  system/target-info.c                     |  10 ++
->  system/vl.c                              | 181 ++++++++++++++++++++---
->  target-info-def.c                        |   2 +-
->  target-info-qom.c                        |  26 +++-
->  target-info.c                            |  38 ++---
->  target/arm/tcg/cpu-max-v8.c              |  17 ++-
->  tests/qtest/fuzz/fuzz.c                  |   2 +-
->  tests/qtest/qom-test.c                   |  65 +++++++-
->  tests/unit/meson.build                   |   4 +-
->  tests/unit/test-multi-target.c           |  67 ++++++++-
->  util/module.c                            |  10 +-
->  54 files changed, 915 insertions(+), 289 deletions(-)
->  create mode 100644 stubs/target-info.c
->  create mode 100644 system/target-info.c
-> 
+helper_cbo_zero() aligns the address down to the cache-block size before
+probe_write(), and accel/tcg/user-exec.c:probe_access_internal() reports
+that aligned address to cpu_loop_exit_sigsegv(), so a store fault from a
+legal cbo.zero (e.g. on a read-only page) reports the aligned block base
+as si_addr instead of the rs1 value supplied by the program. Native
+RISC-V Linux reports the exact rs1 address. Keep the original address in
+CPUState and use it when the fault is reported.
 
-Hi Yonggang,
+The saved address must not outlive the instruction that produced it. The
+helper alone cannot guarantee that, because a store trigger or
+breakpoint on the cbo.zero access leaves through the debug path instead
+of one of the four fault consumers, and a later unrelated fault would
+then report the stale cbo.zero address. Also drop the pending override
+on every trap delivery: at the top of riscv_cpu_do_interrupt() and in
+riscv_cpu_debug_excp_handler() for system mode, and right after
+cpu_exec() returns in the linux-user cpu loop.
 
-in a previous thread, we had a long discussion about which direction we
-want to go, and what needs to be implemented. I politely suggested to
-focus first on simply removing dependency in class_init to target_info,
-and rely on is_available only. The idea was to convince you that small
-iteration steps are better than throw-all-in series. I thought we were
-on the same page.
+Tested: the read-only-page reproducer reports rs1 for offsets 1, 65 and
+129; an mcontrol store-trigger reproducer reports the follow-up load's
+own access-fault address instead of the earlier cbo.zero rs1.
 
-Now, yet another mega series mixing cleanup, code and even going as far
-as introducing the qemu-system binary.
+Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/4151
+Suggested-by: David Harris <david.harris@gitlab.com>
+Signed-off-by: wangyang <wangyang25@otcaix.iscas.ac.cn>
+---
+ accel/tcg/user-exec.c         |  7 ++++++-
+ include/hw/core/cpu.h         |  2 ++
+ linux-user/riscv/cpu_loop.c   |  3 +++
+ target/riscv/tcg/cpu_helper.c | 27 ++++++++++++++++++++++++---
+ target/riscv/tcg/debug.c      |  3 +++
+ target/riscv/tcg/op_helper.c  |  5 +++++
+ 6 files changed, 43 insertions(+), 4 deletions(-)
 
-I feel like spending time to give advice didn't lead to a concrete
-change in behavior. As a result, I'm stopping to review all those
-series, and will let others drive this.
+diff --git a/accel/tcg/user-exec.c b/accel/tcg/user-exec.c
+index a35aca7889..13c3845811 100644
+--- a/accel/tcg/user-exec.c
++++ b/accel/tcg/user-exec.c
+@@ -787,7 +787,12 @@ static int probe_access_internal(CPUArchState *env, vaddr addr,
+         return TLB_INVALID_MASK;
+     }
+ 
+-    cpu_loop_exit_sigsegv(env_cpu(env), addr, access_type, maperr, ra);
++    CPUState *cpu = env_cpu(env);
++    if (cpu->exception_addr_valid) {
++        addr = cpu->exception_addr;
++        cpu->exception_addr_valid = false;
++    }
++    cpu_loop_exit_sigsegv(cpu, addr, access_type, maperr, ra);
+ }
+ 
+ int probe_access_flags(CPUArchState *env, vaddr addr, int size,
+diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
+index ae66f5e33e..1fd68367f6 100644
+--- a/include/hw/core/cpu.h
++++ b/include/hw/core/cpu.h
+@@ -560,6 +560,8 @@ struct CPUState {
+     uint32_t tcg_cflags;
+     uint32_t halted;
+     int32_t exception_index;
++    vaddr exception_addr;
++    bool exception_addr_valid;
+ 
+     bool vcpu_dirty;
+     AccelCPUState *accel;
+diff --git a/linux-user/riscv/cpu_loop.c b/linux-user/riscv/cpu_loop.c
+index 6f27a06da4..dbf1d42d33 100644
+--- a/linux-user/riscv/cpu_loop.c
++++ b/linux-user/riscv/cpu_loop.c
+@@ -38,6 +38,9 @@ void cpu_loop(CPURISCVState *env)
+         cpu_exec_end(cs);
+         qemu_process_cpu_events(cs);
+ 
++        /* A trap ends the pending cbo.zero address override window. */
++        cs->exception_addr_valid = false;
++
+         switch (trapnr) {
+         case EXCP_INTERRUPT:
+             /* just indicate that signals should be handled asap */
+diff --git a/target/riscv/tcg/cpu_helper.c b/target/riscv/tcg/cpu_helper.c
+index 07d9222652..4513c9bdbe 100644
+--- a/target/riscv/tcg/cpu_helper.c
++++ b/target/riscv/tcg/cpu_helper.c
+@@ -1537,7 +1537,12 @@ static void raise_mmu_exception(CPURISCVState *env, target_ulong address,
+     default:
+         g_assert_not_reached();
+     }
+-    env->badaddr = address;
++    if (cs->exception_addr_valid) {
++        env->badaddr = cs->exception_addr;
++        cs->exception_addr_valid = false;
++    } else {
++        env->badaddr = address;
++    }
+     env->two_stage_lookup = two_stage;
+     env->two_stage_indirect_lookup = two_stage_indirect;
+ }
+@@ -1588,7 +1593,12 @@ void riscv_cpu_do_transaction_failed(CPUState *cs, hwaddr physaddr,
+         cs->exception_index = RISCV_EXCP_INST_ACCESS_FAULT;
+     }
+ 
+-    env->badaddr = addr;
++    if (cs->exception_addr_valid) {
++        env->badaddr = cs->exception_addr;
++        cs->exception_addr_valid = false;
++    } else {
++        env->badaddr = addr;
++    }
+     env->two_stage_lookup = mmuidx_2stage(mmu_idx);
+     env->two_stage_indirect_lookup = false;
+     cpu_loop_exit_restore(cs, retaddr);
+@@ -1621,7 +1631,12 @@ void riscv_cpu_do_unaligned_access(CPUState *cs, vaddr addr,
+     default:
+         g_assert_not_reached();
+     }
+-    env->badaddr = addr;
++    if (cs->exception_addr_valid) {
++        env->badaddr = cs->exception_addr;
++        cs->exception_addr_valid = false;
++    } else {
++        env->badaddr = addr;
++    }
+     env->two_stage_lookup = mmuidx_2stage(mmu_idx);
+     env->two_stage_indirect_lookup = false;
+     cpu_loop_exit_restore(cs, retaddr);
+@@ -2047,6 +2062,12 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+ {
+     RISCVCPU *cpu = RISCV_CPU(cs);
+     CPURISCVState *env = &cpu->env;
++
++    /*
++     * A trap ends the pending cbo.zero address override window, so drop
++     * any saved rs1 that a store trigger or breakpoint left behind.
++     */
++    cs->exception_addr_valid = false;
+     bool virt = env->virt_enabled;
+     bool write_gva = false;
+     bool always_storeamo = (env->excp_uw2 & RISCV_UW2_ALWAYS_STORE_AMO);
+diff --git a/target/riscv/tcg/debug.c b/target/riscv/tcg/debug.c
+index e4d719a1da..6962557251 100644
+--- a/target/riscv/tcg/debug.c
++++ b/target/riscv/tcg/debug.c
+@@ -973,6 +973,9 @@ void riscv_cpu_debug_excp_handler(CPUState *cs)
+     RISCVCPU *cpu = RISCV_CPU(cs);
+     CPURISCVState *env = &cpu->env;
+ 
++    /* A debug exit ends the cbo.zero address override window too. */
++    cs->exception_addr_valid = false;
++
+     if (cs->watchpoint_hit) {
+         if (cs->watchpoint_hit->flags & BP_CPU) {
+             do_trigger_action(env, DBG_ACTION_BP);
+diff --git a/target/riscv/tcg/op_helper.c b/target/riscv/tcg/op_helper.c
+index b67c7718db..3fc993a207 100644
+--- a/target/riscv/tcg/op_helper.c
++++ b/target/riscv/tcg/op_helper.c
+@@ -188,9 +188,13 @@ void helper_cbo_zero(CPURISCVState *env, target_ulong address)
+     int mmu_idx = riscv_env_mmu_index(env, false);
+     uintptr_t ra = GETPC();
+     void *mem;
++    CPUState *cs = env_cpu(env);
+ 
+     check_zicbo_envcfg(env, MENVCFG_CBZE, ra);
+ 
++    cs->exception_addr = address;
++    cs->exception_addr_valid = true;
++
+     /* Mask off low-bits to align-down to the cache-block. */
+     address &= ~(cbozlen - 1);
+ 
+@@ -218,6 +222,7 @@ void helper_cbo_zero(CPURISCVState *env, target_ulong address)
+             cpu_stb_mmuidx_ra(env, address + i, 0, mmu_idx, ra);
+         }
+     }
++    cs->exception_addr_valid = false;
+ }
+ 
+ /*
+-- 
+2.55.0.windows.2
 
-Regards,
-Pierrick
 
