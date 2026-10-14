@@ -4,76 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61217CC6B1D
-	for <qemu-riscv@archiver.kernel.org>; Wed, 14 Oct 2026 12:58:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC84ACC6B1D
+	for <qemu-riscv@archiver.kernel.org>; Wed, 14 Oct 2026 13:31:33 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xGyWV-0007Ff-Mx; Wed, 14 Oct 2026 08:55:59 -0400
+	id 1xGz4p-0003oF-KZ; Wed, 14 Oct 2026 09:31:27 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gong.shuai@sanechips.com.cn>)
- id 1xGu71-0006QH-RX; Wed, 14 Oct 2026 04:13:24 -0400
-Received: from mxhk.zte.com.cn ([160.30.148.34])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gong.shuai@sanechips.com.cn>)
- id 1xGu6z-00012B-Sp; Wed, 14 Oct 2026 04:13:23 -0400
-Received: from mse-fl2.zte.com.cn (unknown [10.5.228.133])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mxhk.zte.com.cn (FangMail) with ESMTPS id 4j4P8v1ppXz4yjjB;
- Wed, 14 Oct 2026 16:13:19 +0800 (CST)
-Received: (from root@localhost) by mse-fl2.zte.com.cn id 69E8DGoM005325;
- Wed, 14 Oct 2026 16:13:16 +0800 (+08)
- (envelope-from gong.shuai@sanechips.com.cn)
-Message-Id: <202610140813.69E8DGoM005325@mse-fl2.zte.com.cn>
-Received: from szxlzmapp04.zte.com.cn ([10.5.231.166])
- by mse-fl2.zte.com.cn with SMTP id 69E80O6W079479;
- Wed, 14 Oct 2026 16:00:24 +0800 (+08)
- (envelope-from gong.shuai@sanechips.com.cn)
-Received: from ubuntu-35-gs (unknown [10.230.214.35])
- by smtp (Zmail) with SMTP; Wed, 14 Oct 2026 16:00:26 +0800
-X-Zmail-TransId: 3e816acf369a024-0e2ef
-X-Zmail-LocalSMTP: 1
-X-Zmail-RealSender: gong.shuai@sanechips.com.cn
-From: Gong Shuai <gong.shuai@sanechips.com.cn>
-To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+ (Exim 4.90_1) (envelope-from <gsh517025@gmail.com>)
+ id 1xGz4n-0003nn-4e
+ for qemu-riscv@nongnu.org; Wed, 14 Oct 2026 09:31:25 -0400
+Received: from mail-pj2-x0b.google.com ([2607:f8b0:4864:39::b])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <gsh517025@gmail.com>)
+ id 1xGz4l-0005El-JM
+ for qemu-riscv@nongnu.org; Wed, 14 Oct 2026 09:31:24 -0400
+Received: by mail-pj2-x0b.google.com with SMTP id
+ 98e67ed59e1d1-3a84a12aa97so95043a91.1
+ for <qemu-riscv@nongnu.org>; Wed, 14 Oct 2026 06:31:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1791984682; x=1792589482; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:from:references
+ :cc:to:subject:user-agent:mime-version:date:message-id:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=krV9bZqp1uGdZgEnrbDhc7M2/7tmVFJKekcwwYxBAYk=;
+ b=Cs+BSnDblTYLsRg/KbkuyAj57Lhk/c89xrshqNI+lsdd3EV9KTFIZerA/yBbVNhJV7
+ RA98Iru50bVAKg+vXmk2EGetCU58jsDoIVdUW7tn88ruuuRsruFd2eQZovTFhNJkwRfi
+ qA7FOszgK0XcW/C3AU0V/J66+IguFW/vo9OSmJRACW0ZAIPyRoi0uzP2XrHUVtS1cqig
+ +tjMyeH5jy5Awhz6Kn+rb+7TqzOAQrpbMtN2siUq8MxtUfyTCcQA0fukzWxY1t1KWlGk
+ gRRlJpHwP3/mDWz/t+tB0DbS3O6lqO2lsAJQdcc42QNPnf9mI/jZRxhR4q6KcHeYVhrl
+ OH6w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1791984682; x=1792589482;
+ h=content-transfer-encoding:content-type:in-reply-to:from:references
+ :cc:to:subject:user-agent:mime-version:date:message-id:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=krV9bZqp1uGdZgEnrbDhc7M2/7tmVFJKekcwwYxBAYk=;
+ b=EN+Hn+fFowA8sm+MpZN3wc+z1u85lp7dtAUTucwp0bLjkgzSBC4O1XzTM8++MwXFoP
+ ynweg7eMSbCA/iMPgVO2dWuij1wY7Mg/5mpJEsxeWTXvyYEaY8wy1AJJ6biX9ZyssSCm
+ A95KY623jwJL7frkyrG6VZQTaGrC8iNBuR/F9NyJhM/bZFo3N3ZK0zav6W4cA9V1zQJz
+ mW+4B1CeheYXE8/QSQRwImjLZGqahiY+VOps90/vYnbzb53EKzDxrpOnl69zQrOGLmnq
+ KqJZvjwRO38FRE+DBrGN0V28rn6jjPwOuaVlJNRWPFuMXvsBDiWVqK+eHdvDI2iguxlc
+ FzgA==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBxCxaLdbV/fvpp3DVoVTUwL27HETksueXpe15NlTHErSAMjDmeR5xTjiU4lR6q/natUE/oqP85zErvW@nongnu.org
+X-Gm-Message-State: AFq9FYJ3xzTrKc9/9VelC+XWcrZEaMf6LcLtjwLkogHqT09b56GboQf8
+ 6ekq5/vJyB9A+wpHvJFbZA7Ihij9whwUZXuAiGoCpRmDQsVlypeAmyO+
+X-Gm-Gg: AYBFou11er7e9bHO5s7qn8LFA5yeVAxgORhrzrTUsF9aijQ0mh8OEyPKXkQB02Um1N2
+ lTjmnmmifwT2tboWJ+Yiu9RCOfFG1zQPkOnXS5i6mjTvY9+AxBkJuqO7UnOPlViHWTVeOlDtqsp
+ Wirkwnt8yf+xgY4Wl3fDF9E9CZqI2P3Y/kGPYpxwtaW1ZAx7sBBIh2j+hBcRj6X5msBdT/dQ2Bm
+ zYuRqPFRNm3Rz9hUJOPaK8Vg4quah3Crux66fmJbSDBh6FS2WVT3XMPFvRqF7OvFgMFNmXW/CTn
+ 897aDXO6wkedYvhwLg8MBa4Kezm/hXYJihJbRkN2qCh1JbFuPE490vWjUHrO0qGWP81ypdiedCf
+ fCdHn05ESlPfYPtD1tBRjAl3lZ1VGvseWM4A1phdJMiuHSa3EKUn0KPSNz0lfQ15hOmLFhuQ+kN
+ +rbW6z0vaditQwNv3ASoB1TU7H5ACv3bPd41WuKVfx7BNsxisqacDJkLANzXAanP9NHT1vGAnpt
+ UzU99scQlWY8I7OV7M=
+X-Received: by 2002:a17:90b:57cf:b0:3ac:8527:3fb9 with SMTP id
+ 98e67ed59e1d1-3ac852744a4mr553615a91.64.1791984681384; 
+ Wed, 14 Oct 2026 06:31:21 -0700 (PDT)
+Received: from [192.168.50.100] ([111.199.56.250])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-3ac7c79bb59sm951860a91.1.2026.10.14.06.31.16
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 14 Oct 2026 06:31:20 -0700 (PDT)
+Message-ID: <c53e02a4-95d8-4a51-82bc-043b27114b5f@gmail.com>
+Date: Wed, 14 Oct 2026 21:30:54 +0800
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC PATCH 01/14] linux-headers: Update iommufd.h header for
+ RISC-V IOMMU nested translation
+To: Gong Shuai <gong.shuai@sanechips.com.cn>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
 Cc: Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
+ <liwei1518@gmail.com>,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu@processmission.com>,
- "Michael S. Tsirkin" <mst@redhat.com>,
- Cornelia Huck <cohuck@redhat.com>, Wu Fei <wu.fei9@sanechips.com.cn>,
- Gong Shuai <gong.shuai@sanechips.com.cn>, Gong Shuai <gsh517025@gmail.com>
-Subject: [RFC PATCH 14/14] hw/riscv/riscv-iommu-accel: Add accel property for
- iommu device
-Date: Wed, 14 Oct 2026 16:00:05 +0800
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20261014080005.548066-1-gong.shuai@sanechips.com.cn>
+ Chao Liu <chao.liu@processmission.com>, "Michael S. Tsirkin"
+ <mst@redhat.com>, Cornelia Huck <cohuck@redhat.com>,
+ Wu Fei <wu.fei9@sanechips.com.cn>
 References: <20261014080005.548066-1-gong.shuai@sanechips.com.cn>
-MIME-Version: 1.0
-X-ZMAIL-USEORIGINALEMLTOOUTBOUND: 1
-Content-Transfer-Encoding: 8bit
-X-MAIL: mse-fl2.zte.com.cn 69E8DGoM005325
-X-MSS: AUDITRELEASE@mse-fl2.zte.com.cn
-X-TLS: YES
-X-ENVELOPE-SENDER: gong.shuai@sanechips.com.cn
-X-SOURCE-IP: 10.5.228.133 unknown Wed, 14 Oct 2026 16:13:19 +0800
-X-CLEAN: YES
-X-Fangmail-Anti-Spam-Filtered: true
-X-Fangmail-MID-QID: 6ACF399F.000/4j4P8v1ppXz4yjjB
-Received-SPF: pass client-ip=160.30.148.34;
- envelope-from=gong.shuai@sanechips.com.cn; helo=mxhk.zte.com.cn
-X-Spam_score_int: -18
-X-Spam_score: -1.9
+ <202610140811.69E8BqaU098670@mse-fl2.zte.com.cn>
+From: Gong Shuai <gsh517025@gmail.com>
+In-Reply-To: <202610140811.69E8BqaU098670@mse-fl2.zte.com.cn>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:39::b;
+ envelope-from=gsh517025@gmail.com; helo=mail-pj2-x0b.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
 X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, MSGID_FROM_MTA_HEADER=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Wed, 14 Oct 2026 08:55:29 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -88,130 +115,12 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Wu Fei <wu.fei9@sanechips.com.cn>
+Apologies for the separate email. Due to an email client setting error,
+the thread was broken. Here is the cover letter link:
 
-Add an "accel" property to enable the RISC-V IOMMU accelerator
-mode, following the ARM SMMUv3 accel device.
+https://lore.kernel.org/qemu-devel/202610140811.69E8BN84098054@mse-fl2.zte.com.cn/
 
-Migration is not supported in accel mode, as the host-side vIOMMU
-and HWPT state cannot be migrated; a migration blocker is
-registered.
-
-Signed-off-by: Wu Fei <wu.fei9@sanechips.com.cn>
-Signed-off-by: Gong Shuai <gong.shuai@sanechips.com.cn>
----
- hw/riscv/riscv-iommu.c | 57 ++++++++++++++++++++++++++++++++++++++++++
- hw/riscv/riscv-iommu.h |  1 +
- 2 files changed, 58 insertions(+)
-
-diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
-index 2a370ec474..7f47462306 100644
---- a/hw/riscv/riscv-iommu.c
-+++ b/hw/riscv/riscv-iommu.c
-@@ -23,6 +23,7 @@
- #include "hw/pci/pci_device.h"
- #include "hw/core/qdev-properties.h"
- #include "hw/riscv/riscv_hart.h"
-+#include "migration/blocker.h"
- #include "migration/vmstate.h"
- #include "qapi/error.h"
- #include "qemu/timer.h"
-@@ -2723,12 +2724,63 @@ static void riscv_iommu_instance_finalize(Object *obj)
-     g_hash_table_unref(s->iot_cache);
- }
- 
-+static bool riscv_iommu_validate_property(RISCVIOMMUState *s, Error **errp)
-+{
-+#ifndef CONFIG_RISCV_IOMMU_ACCEL
-+    if (s->accel) {
-+        error_setg(errp, "accel=on support not compiled in");
-+        return false;
-+    }
-+#endif
-+
-+    if (!s->accel) {
-+        return true;
-+    }
-+
-+    if (!s->enable_s_stage) {
-+        error_setg(errp,
-+                   "Only stage-1 is supported for RISC-V IOMMU with accel=on");
-+        return false;
-+    }
-+
-+    return true;
-+}
-+
- static void riscv_iommu_realize(DeviceState *dev, Error **errp)
- {
-     RISCVIOMMUState *s = RISCV_IOMMU(dev);
- 
-+    if (!riscv_iommu_validate_property(s, errp)) {
-+        return;
-+    }
-+
-     if (s->accel) {
-         riscv_iommu_accel_init(s);
-+        /*
-+        * With accel=on, MSI remapping is done by the host IOMMU. Disable
-+        * the emulated MSI capability so the guest's MSI message address
-+        * is a plain GPA translated on the host side; the guest then sees
-+        * no MSI capability bits and uses the base device context format.
-+        */
-+        s->enable_msi = false;
-+        /* G-stage is managed by the host (VFIO) in accel mode */
-+        s->enable_g_stage = false;
-+        /*
-+         * No ATS.INVAL path exists for the vIOMMU in accel mode now,
-+         * vfio-pci devices are not notifiers of the emulated IOMMU and
-+         * guest ATS.INVAL commands are not forwarded to the host, so hide
-+         * ATS/PRI capabilities.
-+         */
-+        s->enable_ats = false;
-+        /*
-+         * Per-PASID contexts and PDT inval for vIOMMU are unimplemented,
-+         * hide the process-directory capabilities.
-+         */
-+        s->cap &= ~(RISCV_IOMMU_CAP_PD8 | RISCV_IOMMU_CAP_PD17 |
-+                    RISCV_IOMMU_CAP_PD20);
-+        error_setg(&s->migration_blocker, "Migration not supported with "
-+                   "RISC-V IOMMU accel=on");
-+        migrate_add_blocker(&s->migration_blocker, errp);
-     }
- 
-     /* Report QEMU target physical address space limits. */
-@@ -2852,6 +2904,10 @@ static void riscv_iommu_unrealize(DeviceState *dev)
- {
-     RISCVIOMMUState *s = RISCV_IOMMU(dev);
- 
-+    if (s->migration_blocker) {
-+        migrate_del_blocker(&s->migration_blocker);
-+    }
-+
-     if (s->cap & RISCV_IOMMU_CAP_HPM) {
-         g_hash_table_unref(s->hpm_event_ctr_map);
-         timer_free(s->hpm_timer);
-@@ -2909,6 +2965,7 @@ static const Property riscv_iommu_properties[] = {
-         TYPE_MEMORY_REGION, MemoryRegion *),
-     DEFINE_PROP_UINT8("hpm-counters", RISCVIOMMUState, hpm_cntrs,
-                       RISCV_IOMMU_IOCOUNT_NUM),
-+    DEFINE_PROP_BOOL("accel", RISCVIOMMUState, accel, FALSE),
- };
- 
- static void riscv_iommu_class_init(ObjectClass *klass, const void *data)
-diff --git a/hw/riscv/riscv-iommu.h b/hw/riscv/riscv-iommu.h
-index c21bccb131..f782a41b9a 100644
---- a/hw/riscv/riscv-iommu.h
-+++ b/hw/riscv/riscv-iommu.h
-@@ -114,6 +114,7 @@ struct RISCVIOMMUState {
-     /* nested iommu support */
-     bool accel;
-     struct RISCVIOMMUAccelState *accel_state;
-+    Error *migration_blocker;
- };
- 
- void riscv_iommu_pci_setup_iommu(RISCVIOMMUState *iommu, PCIBus *bus,
--- 
-2.53.0
+Best regards,
+Shuai
 
 
