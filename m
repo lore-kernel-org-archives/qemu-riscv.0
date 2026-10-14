@@ -4,125 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4072CC6B1D
-	for <qemu-riscv@archiver.kernel.org>; Wed, 14 Oct 2026 02:41:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E69DCC6B19
+	for <qemu-riscv@archiver.kernel.org>; Wed, 14 Oct 2026 03:24:21 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xGova-0004YU-OV; Tue, 13 Oct 2026 22:41:14 -0400
+	id 1xGpaw-0001PU-0s; Tue, 13 Oct 2026 23:23:58 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair@alistair23.me>)
- id 1xGovS-0004X9-Pg
- for qemu-riscv@nongnu.org; Tue, 13 Oct 2026 22:41:08 -0400
-Received: from fhigh-a5-smtp.messagingengine.com ([103.168.172.156])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair@alistair23.me>)
- id 1xGovN-0005O3-GM
- for qemu-riscv@nongnu.org; Tue, 13 Oct 2026 22:41:04 -0400
-Received: from phl-compute-01.internal (phl-compute-01.internal [10.202.2.41])
- by mailfhigh.phl.internal (Postfix) with ESMTP id C76D2140018C
- for <qemu-riscv@nongnu.org>; Tue, 13 Oct 2026 22:40:58 -0400 (EDT)
-Received: from phl-frontend-04 ([10.202.2.163])
- by phl-compute-01.internal (MEProxy); Tue, 13 Oct 2026 22:40:58 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alistair23.me;
- h=cc:cc:content-transfer-encoding:content-type:content-type
- :date:date:from:from:in-reply-to:in-reply-to:message-id
- :mime-version:references:reply-to:subject:subject:to:to; s=fm2;
- t=1791945658; x=1792032058; bh=grqR549geILkBhXJNUVwyo7XM+f/qEb8
- 6qmp1doK4lo=; b=GAvhRXZJndx04mtjmrN5fiRbZTp8swm7Hr9a9Mqa/C4+fU2s
- VBfIfSu5/cSc7m9H0zH3Vqz5QLl1D+uQBTn8lLs/8bJ5DT3ZG7X60Ymc7xgtyEun
- dFfym3J9IDu5rsK7J0wY2Pi+te/78p7hGEAI8oVdsUG8+n22lCNa4tqsYPEQzrsD
- gzikm1EiLbO4L2ZETSmU0AscAlsMa8MEUWfrRKiOU2CROhXPsQUL6+pVICZmlpy1
- 3ZyQ2sfpBixyUOd25hiRJL4Pyd9+7ZOc/g9jDT6tYr5gX5p/kp+Uewtfy4drnNzb
- 6wenL//hceh5Y+VJGcy5IHfQUOFr4dnWyBeQdg==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-transfer-encoding
- :content-type:content-type:date:date:feedback-id:feedback-id
- :from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1791945658; x=
- 1792032058; bh=grqR549geILkBhXJNUVwyo7XM+f/qEb86qmp1doK4lo=; b=l
- JfIJuULl7lXPtt1g6BK5poaNhy8WmIZWhcXkyJ+3UEcN9qCNAYLK8HMmeapzIoBf
- Zjdgr7iQpS5ibh9VbdDJbbAQgyVvSeVMEQUcQYMJqIouriJoO+8ZlSnwIJu29alV
- YP8HdKQR1SkbyKzUwlSBaj9wNEjRBLL9NsN9Py+tBFa3zGHyUBxP/3ssi2FKtrfY
- eNGr3qEigOwVmha+Mjd28fxP/Hczbv7OqwfyvoIL+hQcxG9noQwmE2o4CCdHGwWx
- Rh6FcOO0Cpt4TbeF+o4j7pAd0eJluGM3dB86p5myR0tWLO4kIlMLnVo2Q7IKmp2h
- Ocoy/vaKe7c96Xy6jWC4Q==
-X-DKIM2-Info: draft=ietf-dkim-dkim2-spec-06;
- repo=github.com/dkim2wg/interop; date=2026-10-04; sw=lmtpprox;
- action=sign d=alistair23.me a=rsa-sha256;
-DKIM2-Signature: i=1; m=1; t=1791945658; d=alistair23.me;
- mf=PGFsaXN0YWlyQGFsaXN0YWlyMjMubWU+;
- rt=PHFlbXUtcmlzY3ZAbm9uZ251Lm9yZz4=;
- s=fm2:rsa-sha256:q3yCo7BQQ+vGpmwrOWAfgrWn2P24jdNXkPPNWS1qKzvpAyM
- 579A9bGDBN7c6nmKwHtxVWHIM/RXvZB1Kif3PTjD3KcebpDbSnotSMRraG9x0FHW
- EX8eVvUF8Ivr3Tb0m91juW/nY7JK5NVhakYAkFR1VCmtvWKgQADPq1GhGkY2qolN
- egmZtUJPXXO9tzrlQnia5NufirEIUlAnlFFvvFIMmK6HdWSjAbVNQ8oDk0xrbx+l
- fldQE4hwWVecfclvnKRaPD2s4GKT5+KOTF7V9HY2ykwRC8RZHoKtCU+/zoLU1Yze
- PY6b98/8p/1csBvpY8Pzbs1xyvpOySUYvsINJIA==;
-X-DKIM2-Info: draft=ietf-dkim-dkim2-spec-06;
- repo=github.com/dkim2wg/interop; date=2026-10-04; sw=lmtpprox;
- action=mi-m=1; hc=13;
- hn=cc,content-transfer-encoding,content-type,date,feedback-id,
- from,in-reply-to,message-id,mime-version,references,subject,to,
- user-agent;
-Message-Instance: m=1;
- h=sha256:N4Ydih/SiDbx7+zIrQBYdF3fLgPa7yUDzdZQ/IxRYuM=:grqR549geILkBhXJNUVwyo7XM+f/qEb86qmp1doK4lo=;
-X-ME-Sender: <xms:uevOalsnAkgH7dFqBLHCKYJwbBRJYX-g-V0qYV5Px9H9VDqEtRWwIQ>
- <xme:uevOaqQLfN4eA8tEoRxzaC9ECtDF9wnkFeEvYck-nUQD5dfL_Ny6aeuIpOv0PETIM
- k6HG0QqW2pkezcBA4_B_1kfiENrK_YPM-d7dQ6SOG2M29jiUzKmdfw>
-X-ME-Received: <xmr:uevOauSK_P-oFo9q1TZJfy_MPhRopxjuLcWnhGZjuQGouMrE60tuRWeLnaujw2MKjU4VtxEIRAURv0Vz5hSyashXwsk>
-X-ME-Proxy-Cause: dmFkZTFy4syGFbYD8tZhftRBWtnDjTNrWx/dtBTzP8TRnhu7FzUzI6R9PoQnnFDywCbTb8
- eRhy3gRuYxVa0eLmtLIBG1d49QWqqZ2OWxXpoo7eqRKeu+xVrNn5vV4XGzWFeVO2QFiypo
- Wl5SkmqPFi7gRj+oe02LhTcgG2nTljPRiR8AkljmzgYbC4sH4XoUDb3Mx3LOXa/eMyeuc1
- iZheyaBKtfCbKa1xeftbfOpu8Z90tbDxuKGFjx9YXstxx6HG3x7i9zMUilW543gFz0X/ZX
- JZJTW1oLy6OIdWYM5F9wFmZL1JdF33WvNdmT8M0l9QOG6YakReSgb8Dk1ZKxwWN5uDVxNR
- lz5R2DAJuj6WzZjtXITZ0UqCKUw9ZDp77lDZkvzI5Im9ffNxy22XJf0pfCsNz/u6ucCZ48
- bqxjDTFqaSO4L8kDOGU2jg0gLxopRh8hqdebCpz/V8yt3D0m4Zo0KO2O7e4K9B+3WRxD4D
- jsb2McyEjY7nGRRXMuF/aYZtKCPK6reeDcD5wW1Fp+M4s87WzRdDpefkM9yIhQBQGZYRdF
- CGK/gHyKMwymEz3ZB1bKis2c3a+q0xPtAIrAFPTMf8ukSyjEacQlLcXTLQSNOWCkTjzW1Q
- /RJvGb0uuGRWojGkjwpN1VUsFoy3TArSEt1mGk5IUM4L7wziuIIsWJ3i1QGQ
-X-ME-Proxy: <xmx:uevOauoWfBtYjrwd7CYSsY8trd3JMEYIWCkMzElLkgqNKhRLq20O2g>
- <xmx:uevOamBJig2O_6a9mbTLyUypcOUBZ2BUp94qugi8sI0s3InQ1g5r8g>
- <xmx:uevOaru7TLZPwth5mHIZKX01THzNcVN4WQ2BrV1zxwyIfGjw_RPDuw>
- <xmx:uevOatZu8gVPvfelwo8UDBlKCIORCQ4eS0EY7qhIUy0XWO3LQCM3HQ>
- <xmx:uuvOamYBgnba-mHgVX9fs4aGI6-4W1bsII1l_nH1e2uFkvsdSb6dYNwh>
-Feedback-ID: ifd214418:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Tue,
- 13 Oct 2026 22:40:53 -0400 (EDT)
-Message-ID: <0a3ed698bfa98cd967788863d4cab1dd50f98b2f.camel@alistair23.me>
-Subject: Re: [PATCH v3 3/4] hw/riscv/atlantis: Add machine property to
- select default uart
-From: Alistair <alistair@alistair23.me>
-To: Portia Stephens <portias@oss.tenstorrent.com>, qemu-devel@nongnu.org
-Cc: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, Anirudh Srinivasan
- <asrinivasan@oss.tenstorrent.com>, Daniel Henrique Barboza	
- <daniel.barboza@oss.qualcomm.com>, Weiwei Li <liwei1518@gmail.com>, Palmer
- Dabbelt <palmer@dabbelt.com>, Nicholas Piggin <npiggin@gmail.com>, Michael
- Ellerman <mpe@kernel.org>,  Chao Liu <chao.liu@processmission.com>,
- qemu-riscv@nongnu.org, Paolo Bonzini <pbonzini@redhat.com>, 
- =?ISO-8859-1?Q?Marc-Andr=E9?= Lureau	 <marcandre.lureau@redhat.com>, Liu
- Zhiwei <zhiwei_liu@linux.alibaba.com>,  Joel Stanley <joel@jms.id.au>
-Date: Wed, 14 Oct 2026 12:40:51 +1000
-In-Reply-To: <79349810-29d7-43bb-a3f4-91c0b70e73df@oss.tenstorrent.com>
+ (Exim 4.90_1) (envelope-from <portias@tenstorrent.com>)
+ id 1xGpaj-0001OC-SH
+ for qemu-riscv@nongnu.org; Tue, 13 Oct 2026 23:23:45 -0400
+Received: from mail-pj1-x1032.google.com ([2607:f8b0:4864:20::1032])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <portias@tenstorrent.com>)
+ id 1xGpah-0000A0-Jx
+ for qemu-riscv@nongnu.org; Tue, 13 Oct 2026 23:23:45 -0400
+Received: by mail-pj1-x1032.google.com with SMTP id
+ 98e67ed59e1d1-3a4c78ee4d6so280755a91.1
+ for <qemu-riscv@nongnu.org>; Tue, 13 Oct 2026 20:23:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=tenstorrent.com; s=google; t=1791948220; x=1792553020; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=oluE94ILmctJOhMYkVVCEvucPWdquNX70uNv7jnLdz0=;
+ b=XNLsz5tTm4D8AgMst9Q2bdypcJMiAXsV2GZdGsC//tLh4wA1/FQPtw0ZL3Tg0QhLxi
+ okp8w9KOWKo6+XqW7XdB70shuPFRQDKVOz2ugn0qoxwCWeYUm6jE5H7zke+/2ZYz7tnn
+ 2T+tNeDV7bL+tTEudqsHqgr+Q1hP2Yj2WwhtmlOfx1RDGRAZhguJGFnTmC3gENs4xX1/
+ 8WIs6Z7wtt5rrO4MjmUI3fdqAHNT4+eGe4yRpc5+BrB3GF8UZhmAQxDfOKT5w96Namtn
+ ZjbMomjQmj3Y7UU/Ryrq9plJRPg/ozjXr4l7/l1WuANC2b5bFzWV8U9Xzz7i04oK8jVW
+ m4KA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1791948220; x=1792553020;
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=oluE94ILmctJOhMYkVVCEvucPWdquNX70uNv7jnLdz0=;
+ b=OCOJ/uffQ0zwseHCXK4huqx6d/nwUw1iuacBqqDnDmaW6jRaQ4n5DCaRqQDHGXg4dr
+ uUGB1Nfpryfnm2mMuZCWdOVLQFxuWX9tUeoNuznVFHNQZvVaZX3L0hGkBcM+lEg9jbb3
+ h+RGpX8Lv0sCn8QGbcKTecoUd1sGjmcuOy1pNa3eOQUN0eq1FDoexFaN7bfYa3qJ1vA/
+ dX3iJEpGtfj1f6IroJCqrL0wHq0/1E60DZBLR5M4fKNru00xY+MCNpFT5S4FaqlSoQA0
+ CV0IoRD2GU6dzX4vaLuZ0/JbzXzHALPMALY/gpDj1enaTAua2N/hvGkmwuDtT+c+FnsH
+ fDWw==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBzVdryVS9h02mwwLWrBRML1rcJWN973WdeShjFWf9evw1nezQ4hxyG2qyn+7pV2ALylglxcc75YpvMQ@nongnu.org
+X-Gm-Message-State: AFq9FYL0H/161WKdTt1C9HZ3mobeHsQvwjqCuq4RebgtAeypqi7a60+q
+ heXXTERxC/SXkdTQHW1TEkFe3LMpCxrrkk6b9QuPCdD4uCboTLT5mmSch7DaLJT24Q8=
+X-Gm-Gg: AYBFou3xYCasixDPXXkh8XUR+ZxZjv71GrLAlgNfPU+pHACmH8F7C980nnlujXSEbu2
+ K5MgoqY5fgTvL2zf8m5uYMqQ5XFXQT2hFORqFAJaRfXnYX6MXSlhdttOLnAwyCr/vyb9tvrhcVR
+ C1twNdMKuc2cXL5tDd44EZmBZLJOtgXxTRMIAWGVflTu9WJqOWEHeNve+2ymNClV2I054bk1TZm
+ UC5dNkxFwR5KIiHWPCEjvKfODS0H+F5n4n0pJXA4tHIfWAphEwuomrXMhmP/DevjUhetir2QTWg
+ 4hdccp01aHJTf/qQ+13qFfWeUudjBZyXNy/Uyx8MG67ezTcdAvOsLpOy0nBPqtOXCEwMs/k8Kdw
+ 5P8Vyvy043PiRJqRoyHQeEKdDhDukwA6BF4phK3XrbG9s2QK+QZ+5EisJUO2NjImN7I5zNgvGR0
+ g357E3avnB8lkSqvGktlIDre1/4mu+ss91AFCpTUwrkGmwSK/K2TA46Vbzf1T2E1dSaWLTdNjyk
+ Oz+WherdmSEPj+BjPkyQcqba+g=
+X-Received: by 2002:a17:90b:3145:b0:3a6:f7be:fee6 with SMTP id
+ 98e67ed59e1d1-3ab3a346e9dmr19918039a91.1.1791948220534; 
+ Tue, 13 Oct 2026 20:23:40 -0700 (PDT)
+Received: from [172.16.1.33] ([159.196.41.205])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-3ac6006280dsm2271781a91.6.2026.10.13.20.23.35
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 13 Oct 2026 20:23:40 -0700 (PDT)
+Message-ID: <4cad38c5-c401-4a40-95d3-2cc4515b5bc3@oss.tenstorrent.com>
+Date: Wed, 14 Oct 2026 13:23:33 +1000
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 3/4] hw/riscv/atlantis: Add machine property to select
+ default uart
+To: Alistair <alistair@alistair23.me>, qemu-devel@nongnu.org
+Cc: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+ Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Weiwei Li <liwei1518@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Nicholas Piggin <npiggin@gmail.com>, Michael Ellerman <mpe@kernel.org>,
+ Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Joel Stanley <joel@jms.id.au>
 References: <20261001233324.2636629-1-portias@oss.tenstorrent.com>
  <20261001233324.2636629-4-portias@oss.tenstorrent.com>
  <41b85b9ad64efab7ae41cdc4a7315ffe6903264b.camel@alistair23.me>
  <79349810-29d7-43bb-a3f4-91c0b70e73df@oss.tenstorrent.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.62.0 (by Flathub.org) 
-MIME-Version: 1.0
-Received-SPF: pass client-ip=103.168.172.156;
- envelope-from=alistair@alistair23.me; helo=fhigh-a5-smtp.messagingengine.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+ <0a3ed698bfa98cd967788863d4cab1dd50f98b2f.camel@alistair23.me>
+Content-Language: en-US
+From: Portia Stephens <portias@oss.tenstorrent.com>
+In-Reply-To: <0a3ed698bfa98cd967788863d4cab1dd50f98b2f.camel@alistair23.me>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1032;
+ envelope-from=portias@tenstorrent.com; helo=mail-pj1-x1032.google.com
+X-Spam_score_int: -19
+X-Spam_score: -2.0
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_NONE=-0.0001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -138,286 +117,237 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, 2026-10-08 at 09:02 +1000, Portia Stephens wrote:
->=20
-> On 6/10/2026 11:35 PM, Alistair wrote:
-> > On Fri, 2026-10-02 at 09:33 +1000, Portia Stephens wrote:
-> > > The Atlantis SoC has 5 UARTs. This adds a machine property to set
-> > > which uart is on the first serial interface. This is the same
-> > > pattern
-> > > that is used by aspeed. The rest of the uart's will be added in
-> > > sequential order starting at serial interface 1.
-> > >=20
-> > > The default value is uart1 which means the Ascalon console will
-> > > be on
-> > > serial interface 0 by default.
-> > >=20
-> > > Signed-off-by: Portia Stephens <portias@oss.tenstorrent.com>
-> > > Reviewed-by: Daniel Henrique Barboza
-> > > <daniel.barboza@oss.qualcomm.com>
-> > > ---
-> > > =C2=A0=C2=A0hw/riscv/tt_atlantis.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0 | 77
-> > > ++++++++++++++++++++++++++++++--
-> > > --
-> > > =C2=A0=C2=A0include/hw/riscv/tt_atlantis.h |=C2=A0 1 +
-> > > =C2=A0=C2=A02 files changed, 69 insertions(+), 9 deletions(-)
-> > >=20
-> > > diff --git a/hw/riscv/tt_atlantis.c b/hw/riscv/tt_atlantis.c
-> > > index 2342edce93..7a5e1ddcd1 100644
-> > > --- a/hw/riscv/tt_atlantis.c
-> > > +++ b/hw/riscv/tt_atlantis.c
-> > > @@ -12,6 +12,7 @@
-> > > =C2=A0=C2=A0#include "qemu/error-report.h"
-> > > =C2=A0=C2=A0#include "qemu/guest-random.h"
-> > > =C2=A0=C2=A0#include "qemu/units.h"
-> > > +#include "qapi/visitor.h"
-> > > =C2=A0=20
-> > > =C2=A0=C2=A0#include "hw/core/boards.h"
-> > > =C2=A0=C2=A0#include "hw/core/loader.h"
-> > > @@ -422,6 +423,26 @@ static void load_fdt(TTAtlantisState *ams)
-> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 create_fdt_memory(ms->fdt, &ams->soc);
-> > > =C2=A0=C2=A0}
-> > > =C2=A0=20
-> > > +static inline int tt_atlantis_uart_index(int uart_dev)
-> > > +{
-> > > +=C2=A0=C2=A0=C2=A0 return uart_dev - TT_ATL_UART0;
-> > > +}
-> > > +
-> > > +static void
-> > > tt_atlantis_connect_serial_hds_to_uarts(TTAtlantisState
-> > > *ams)
-> > > +{
-> > > +=C2=A0=C2=A0=C2=A0 TTAtlantisSoCState *s =3D &ams->soc;
-> > > +=C2=A0=C2=A0=C2=A0 int uart_index =3D tt_atlantis_uart_index(ams->ua=
-rt_chosen);
-> > > +
-> > > +=C2=A0=C2=A0=C2=A0 qdev_prop_set_chr(DEVICE(&s->uart[uart_index]), "=
-chardev",
-> > > serial_hd(0));
-> > > +
-> > > +=C2=A0=C2=A0=C2=A0 for (int i =3D 1, uart =3D 0; i < TT_ATL_NUM_UART=
-S; uart++) {
-> > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (uart =3D=3D uart_inde=
-x) {
-> > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 c=
-ontinue;
-> > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }
-> > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 qdev_prop_set_chr(DEVICE(=
-&s->uart[uart]), "chardev",
-> > > serial_hd(i++));
-> > > +=C2=A0=C2=A0=C2=A0 }
-> > I don't like this. We shouldn't dynamically change the command line
-> > API
-> > based on a property
->=20
->=20
-> Fair enough, can we just take the first 3 patches in the series and
-> drop=20
-> this one? That will add modeling for all the uarts but only expose
-> uart1=20
-> on command line.
 
-This is path 3 though. Do you mean take the first 2 patches?
+On 14/10/2026 12:40 PM, Alistair wrote:
+> On Thu, 2026-10-08 at 09:02 +1000, Portia Stephens wrote:
+>> On 6/10/2026 11:35 PM, Alistair wrote:
+>>> On Fri, 2026-10-02 at 09:33 +1000, Portia Stephens wrote:
+>>>> The Atlantis SoC has 5 UARTs. This adds a machine property to set
+>>>> which uart is on the first serial interface. This is the same
+>>>> pattern
+>>>> that is used by aspeed. The rest of the uart's will be added in
+>>>> sequential order starting at serial interface 1.
+>>>>
+>>>> The default value is uart1 which means the Ascalon console will
+>>>> be on
+>>>> serial interface 0 by default.
+>>>>
+>>>> Signed-off-by: Portia Stephens <portias@oss.tenstorrent.com>
+>>>> Reviewed-by: Daniel Henrique Barboza
+>>>> <daniel.barboza@oss.qualcomm.com>
+>>>> ---
+>>>>    hw/riscv/tt_atlantis.c         | 77
+>>>> ++++++++++++++++++++++++++++++--
+>>>> --
+>>>>    include/hw/riscv/tt_atlantis.h |  1 +
+>>>>    2 files changed, 69 insertions(+), 9 deletions(-)
+>>>>
+>>>> diff --git a/hw/riscv/tt_atlantis.c b/hw/riscv/tt_atlantis.c
+>>>> index 2342edce93..7a5e1ddcd1 100644
+>>>> --- a/hw/riscv/tt_atlantis.c
+>>>> +++ b/hw/riscv/tt_atlantis.c
+>>>> @@ -12,6 +12,7 @@
+>>>>    #include "qemu/error-report.h"
+>>>>    #include "qemu/guest-random.h"
+>>>>    #include "qemu/units.h"
+>>>> +#include "qapi/visitor.h"
+>>>>    
+>>>>    #include "hw/core/boards.h"
+>>>>    #include "hw/core/loader.h"
+>>>> @@ -422,6 +423,26 @@ static void load_fdt(TTAtlantisState *ams)
+>>>>        create_fdt_memory(ms->fdt, &ams->soc);
+>>>>    }
+>>>>    
+>>>> +static inline int tt_atlantis_uart_index(int uart_dev)
+>>>> +{
+>>>> +    return uart_dev - TT_ATL_UART0;
+>>>> +}
+>>>> +
+>>>> +static void
+>>>> tt_atlantis_connect_serial_hds_to_uarts(TTAtlantisState
+>>>> *ams)
+>>>> +{
+>>>> +    TTAtlantisSoCState *s = &ams->soc;
+>>>> +    int uart_index = tt_atlantis_uart_index(ams->uart_chosen);
+>>>> +
+>>>> +    qdev_prop_set_chr(DEVICE(&s->uart[uart_index]), "chardev",
+>>>> serial_hd(0));
+>>>> +
+>>>> +    for (int i = 1, uart = 0; i < TT_ATL_NUM_UARTS; uart++) {
+>>>> +        if (uart == uart_index) {
+>>>> +            continue;
+>>>> +        }
+>>>> +        qdev_prop_set_chr(DEVICE(&s->uart[uart]), "chardev",
+>>>> serial_hd(i++));
+>>>> +    }
+>>> I don't like this. We shouldn't dynamically change the command line
+>>> API
+>>> based on a property
+>>
+>> Fair enough, can we just take the first 3 patches in the series and
+>> drop
+>> this one? That will add modeling for all the uarts but only expose
+>> uart1
+>> on command line.
+> This is path 3 though. Do you mean take the first 2 patches?
 
-I can do that if you want
 
-Alistair
+Yes but the documentation needs to be updated as well. I'll send a v4.
 
->=20
->=20
-> We will expose the remaining uarts as features as added to the model=20
-> that produce output that anyone would care to look at. For example,=20
-> uart0 is the system controller's console, when the system controller
-> is=20
-> added to the model then we will expose uart0 on the command line.
-> This=20
-> will prevent us from locking into a command line API before we need
-> to.
->=20
->=20
->=20
-> >=20
-> > Alistair
-> >=20
-> > > +}
-> > > +
-> > > =C2=A0=C2=A0static void tt_atlantis_machine_done(Notifier *n, void *d=
-ata)
-> > > =C2=A0=C2=A0{
-> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 TTAtlantisState *ams =3D container_of(=
-n, TTAtlantisState,
-> > > machine_done);
-> > > @@ -484,11 +505,6 @@ static void
-> > > tt_atlantis_machine_done(Notifier
-> > > *n, void *data)
-> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 fdt_load_addr);
-> > > =C2=A0=C2=A0}
-> > > =C2=A0=20
-> > > -static inline int tt_atlantis_uart_index(int uart_dev)
-> > > -{
-> > > -=C2=A0=C2=A0=C2=A0 return uart_dev - TT_ATL_UART0;
-> > > -}
-> > > -
-> > > =C2=A0=C2=A0static void tt_atlantis_soc_init(Object *obj)
-> > > =C2=A0=C2=A0{
-> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 TTAtlantisSoCState *s =3D TT_ATLANTIS_=
-SOC(obj);
-> > > @@ -592,10 +608,6 @@ static void
-> > > tt_atlantis_soc_realize(DeviceState
-> > > *dev, Error **errp)
-> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 memory_region_add_subregion(s->memory,=
- s-
-> > > > memmap[TT_ATL_BOOTROM].base,
-> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 &s->bootrom);
-> > > =C2=A0=20
-> > > -=C2=A0=C2=A0=C2=A0 /* UART1, the soc console (UART0 is for the boot
-> > > microcontroller
-> > > */
-> > > -=C2=A0=C2=A0=C2=A0 qdev_prop_set_chr(DEVICE(&s-
-> > > > uart[tt_atlantis_uart_index(TT_ATL_UART1)]),
-> > > -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 "chardev", ser=
-ial_hd(0));
-> > > -
-> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 for (int i =3D 0; i < TT_ATL_NUM_UARTS=
-; i++) {
-> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 SysBusDevice *=
-sbd =3D SYS_BUS_DEVICE(&s->uart[i]);
-> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (!sysbus_re=
-alize(sbd, errp)) {
-> > > @@ -663,6 +675,10 @@ static void
-> > > tt_atlantis_machine_init(MachineState *machine)
-> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 OBJECT(&ams->soc_memory),
-> > > &error_abort);
-> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 object_property_set_link(OBJECT(&ams->=
-soc), "dram",
-> > > OBJECT(machine->ram),
-> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 &error_abort);
-> > > +
-> > > +=C2=A0=C2=A0=C2=A0 /* Map serial interfaces to uart */
-> > > +=C2=A0=C2=A0=C2=A0 tt_atlantis_connect_serial_hds_to_uarts(ams);
-> > > +
-> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 qdev_realize(DEVICE(&ams->soc), NULL, =
-&error_fatal);
-> > > =C2=A0=20
-> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 /* I2C peripherals: qemu specific */
-> > > @@ -680,6 +696,47 @@ static void
-> > > tt_atlantis_machine_init(MachineState *machine)
-> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 qemu_add_machine_init_done_notifier(&a=
-ms->machine_done);
-> > > =C2=A0=C2=A0}
-> > > =C2=A0=20
-> > > +static void tt_atlantis_get_console(Object *obj, Visitor *v,
-> > > const
-> > > char *name,
-> > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 void =
-*opaque, Error **errp)
-> > > +{
-> > > +=C2=A0=C2=A0=C2=A0 TTAtlantisState *ams =3D TT_ATLANTIS_MACHINE(obj)=
-;
-> > > +=C2=A0=C2=A0=C2=A0 uint32_t uart_index =3D tt_atlantis_uart_index(am=
-s-
-> > > >uart_chosen);
-> > > +
-> > > +=C2=A0=C2=A0=C2=A0 visit_type_uint32(v, name, &uart_index, errp);
-> > > +}
-> > > +
-> > > +static void tt_atlantis_set_console(Object *obj, Visitor *v,
-> > > const
-> > > char *name,
-> > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 void =
-*opaque, Error **errp)
-> > > +{
-> > > +=C2=A0=C2=A0=C2=A0 TTAtlantisState *ams =3D TT_ATLANTIS_MACHINE(obj)=
-;
-> > > +=C2=A0=C2=A0=C2=A0 uint32_t value;
-> > > +
-> > > +=C2=A0=C2=A0=C2=A0 if (!visit_type_uint32(v, name, &value, errp)) {
-> > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return;
-> > > +=C2=A0=C2=A0=C2=A0 }
-> > > +
-> > > +=C2=A0=C2=A0=C2=A0 if (value >=3D TT_ATL_NUM_UARTS) {
-> > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 error_setg(errp, "\"conso=
-le\" should be in range [%d -
-> > > %d]",
-> > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 0, TT_ATL_NUM_UARTS - 1);
-> > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return;
-> > > +=C2=A0=C2=A0=C2=A0 }
-> > > +=C2=A0=C2=A0=C2=A0 ams->uart_chosen =3D value + TT_ATL_UART0;
-> > > +}
-> > > +
-> > > +static void tt_atlantis_machine_class_props_init(ObjectClass
-> > > *oc)
-> > > +{
-> > > +=C2=A0=C2=A0=C2=A0 ObjectProperty *console;
-> > > +
-> > > +=C2=A0=C2=A0=C2=A0 console =3D object_class_property_add(oc, "consol=
-e",
-> > > "uint32_t",
-> > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0 tt_atlantis_get_console,
-> > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0 tt_atlantis_set_console,
-> > > NULL, NULL);
-> > > +=C2=A0=C2=A0=C2=A0 object_class_property_set_description(oc, "consol=
-e",
-> > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 "=
-Change the default UART index on -serial. Valid
-> > > values
-> > > are 0 " \
-> > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 "=
-through 4");
-> > > +=C2=A0=C2=A0=C2=A0 /* Default to UART1, the Ascalon console */
-> > > +=C2=A0=C2=A0=C2=A0 object_property_set_default_uint(console, 1);
-> > > +}
-> > > +
-> > > =C2=A0=C2=A0static void tt_atlantis_machine_class_init(ObjectClass *o=
-c,
-> > > const
-> > > void *data)
-> > > =C2=A0=C2=A0{
-> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 MachineClass *mc =3D MACHINE_CLASS(oc)=
-;
-> > > @@ -693,6 +750,8 @@ static void
-> > > tt_atlantis_machine_class_init(ObjectClass *oc, const void *data)
-> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 mc->block_default_type =3D IF_VIRTIO;
-> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 mc->no_cdrom =3D 1;
-> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 mc->default_ram_id =3D "tt_atlantis.ra=
-m";
-> > > +
-> > > +=C2=A0=C2=A0=C2=A0 tt_atlantis_machine_class_props_init(oc);
-> > > =C2=A0=C2=A0}
-> > > =C2=A0=20
-> > > =C2=A0=C2=A0static const TypeInfo tt_atlantis_types[] =3D {
-> > > diff --git a/include/hw/riscv/tt_atlantis.h
-> > > b/include/hw/riscv/tt_atlantis.h
-> > > index b81b7c8abd..7bd46e9c9b 100644
-> > > --- a/include/hw/riscv/tt_atlantis.h
-> > > +++ b/include/hw/riscv/tt_atlantis.h
-> > > @@ -56,6 +56,7 @@ struct TTAtlantisState {
-> > > =C2=A0=20
-> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 MemoryRegion soc_memory;
-> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 TTAtlantisSoCState soc;
-> > > +=C2=A0=C2=A0=C2=A0 uint32_t uart_chosen;
-> > > =C2=A0=C2=A0};
-> > > =C2=A0=20
-> > > =C2=A0=C2=A0enum {
+
+>
+> I can do that if you want
+>
+> Alistair
+>
+>>
+>> We will expose the remaining uarts as features as added to the model
+>> that produce output that anyone would care to look at. For example,
+>> uart0 is the system controller's console, when the system controller
+>> is
+>> added to the model then we will expose uart0 on the command line.
+>> This
+>> will prevent us from locking into a command line API before we need
+>> to.
+>>
+>>
+>>
+>>> Alistair
+>>>
+>>>> +}
+>>>> +
+>>>>    static void tt_atlantis_machine_done(Notifier *n, void *data)
+>>>>    {
+>>>>        TTAtlantisState *ams = container_of(n, TTAtlantisState,
+>>>> machine_done);
+>>>> @@ -484,11 +505,6 @@ static void
+>>>> tt_atlantis_machine_done(Notifier
+>>>> *n, void *data)
+>>>>                                  fdt_load_addr);
+>>>>    }
+>>>>    
+>>>> -static inline int tt_atlantis_uart_index(int uart_dev)
+>>>> -{
+>>>> -    return uart_dev - TT_ATL_UART0;
+>>>> -}
+>>>> -
+>>>>    static void tt_atlantis_soc_init(Object *obj)
+>>>>    {
+>>>>        TTAtlantisSoCState *s = TT_ATLANTIS_SOC(obj);
+>>>> @@ -592,10 +608,6 @@ static void
+>>>> tt_atlantis_soc_realize(DeviceState
+>>>> *dev, Error **errp)
+>>>>        memory_region_add_subregion(s->memory, s-
+>>>>> memmap[TT_ATL_BOOTROM].base,
+>>>>                                    &s->bootrom);
+>>>>    
+>>>> -    /* UART1, the soc console (UART0 is for the boot
+>>>> microcontroller
+>>>> */
+>>>> -    qdev_prop_set_chr(DEVICE(&s-
+>>>>> uart[tt_atlantis_uart_index(TT_ATL_UART1)]),
+>>>> -                      "chardev", serial_hd(0));
+>>>> -
+>>>>        for (int i = 0; i < TT_ATL_NUM_UARTS; i++) {
+>>>>            SysBusDevice *sbd = SYS_BUS_DEVICE(&s->uart[i]);
+>>>>            if (!sysbus_realize(sbd, errp)) {
+>>>> @@ -663,6 +675,10 @@ static void
+>>>> tt_atlantis_machine_init(MachineState *machine)
+>>>>                                 OBJECT(&ams->soc_memory),
+>>>> &error_abort);
+>>>>        object_property_set_link(OBJECT(&ams->soc), "dram",
+>>>> OBJECT(machine->ram),
+>>>>                                 &error_abort);
+>>>> +
+>>>> +    /* Map serial interfaces to uart */
+>>>> +    tt_atlantis_connect_serial_hds_to_uarts(ams);
+>>>> +
+>>>>        qdev_realize(DEVICE(&ams->soc), NULL, &error_fatal);
+>>>>    
+>>>>        /* I2C peripherals: qemu specific */
+>>>> @@ -680,6 +696,47 @@ static void
+>>>> tt_atlantis_machine_init(MachineState *machine)
+>>>>        qemu_add_machine_init_done_notifier(&ams->machine_done);
+>>>>    }
+>>>>    
+>>>> +static void tt_atlantis_get_console(Object *obj, Visitor *v,
+>>>> const
+>>>> char *name,
+>>>> +                                    void *opaque, Error **errp)
+>>>> +{
+>>>> +    TTAtlantisState *ams = TT_ATLANTIS_MACHINE(obj);
+>>>> +    uint32_t uart_index = tt_atlantis_uart_index(ams-
+>>>>> uart_chosen);
+>>>> +
+>>>> +    visit_type_uint32(v, name, &uart_index, errp);
+>>>> +}
+>>>> +
+>>>> +static void tt_atlantis_set_console(Object *obj, Visitor *v,
+>>>> const
+>>>> char *name,
+>>>> +                                    void *opaque, Error **errp)
+>>>> +{
+>>>> +    TTAtlantisState *ams = TT_ATLANTIS_MACHINE(obj);
+>>>> +    uint32_t value;
+>>>> +
+>>>> +    if (!visit_type_uint32(v, name, &value, errp)) {
+>>>> +        return;
+>>>> +    }
+>>>> +
+>>>> +    if (value >= TT_ATL_NUM_UARTS) {
+>>>> +        error_setg(errp, "\"console\" should be in range [%d -
+>>>> %d]",
+>>>> +                   0, TT_ATL_NUM_UARTS - 1);
+>>>> +        return;
+>>>> +    }
+>>>> +    ams->uart_chosen = value + TT_ATL_UART0;
+>>>> +}
+>>>> +
+>>>> +static void tt_atlantis_machine_class_props_init(ObjectClass
+>>>> *oc)
+>>>> +{
+>>>> +    ObjectProperty *console;
+>>>> +
+>>>> +    console = object_class_property_add(oc, "console",
+>>>> "uint32_t",
+>>>> +                                        tt_atlantis_get_console,
+>>>> +                                        tt_atlantis_set_console,
+>>>> NULL, NULL);
+>>>> +    object_class_property_set_description(oc, "console",
+>>>> +            "Change the default UART index on -serial. Valid
+>>>> values
+>>>> are 0 " \
+>>>> +            "through 4");
+>>>> +    /* Default to UART1, the Ascalon console */
+>>>> +    object_property_set_default_uint(console, 1);
+>>>> +}
+>>>> +
+>>>>    static void tt_atlantis_machine_class_init(ObjectClass *oc,
+>>>> const
+>>>> void *data)
+>>>>    {
+>>>>        MachineClass *mc = MACHINE_CLASS(oc);
+>>>> @@ -693,6 +750,8 @@ static void
+>>>> tt_atlantis_machine_class_init(ObjectClass *oc, const void *data)
+>>>>        mc->block_default_type = IF_VIRTIO;
+>>>>        mc->no_cdrom = 1;
+>>>>        mc->default_ram_id = "tt_atlantis.ram";
+>>>> +
+>>>> +    tt_atlantis_machine_class_props_init(oc);
+>>>>    }
+>>>>    
+>>>>    static const TypeInfo tt_atlantis_types[] = {
+>>>> diff --git a/include/hw/riscv/tt_atlantis.h
+>>>> b/include/hw/riscv/tt_atlantis.h
+>>>> index b81b7c8abd..7bd46e9c9b 100644
+>>>> --- a/include/hw/riscv/tt_atlantis.h
+>>>> +++ b/include/hw/riscv/tt_atlantis.h
+>>>> @@ -56,6 +56,7 @@ struct TTAtlantisState {
+>>>>    
+>>>>        MemoryRegion soc_memory;
+>>>>        TTAtlantisSoCState soc;
+>>>> +    uint32_t uart_chosen;
+>>>>    };
+>>>>    
+>>>>    enum {
 
