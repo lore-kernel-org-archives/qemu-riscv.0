@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FB00CC6B1D
-	for <qemu-riscv@archiver.kernel.org>; Wed, 14 Oct 2026 09:44:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93D89CC6B1F
+	for <qemu-riscv@archiver.kernel.org>; Wed, 14 Oct 2026 09:44:47 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xGvWb-0003Uh-4g; Wed, 14 Oct 2026 05:43:53 -0400
+	id 1xGvWf-0003pT-3h; Wed, 14 Oct 2026 05:43:57 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xGvWR-0003FX-Rn
- for qemu-riscv@nongnu.org; Wed, 14 Oct 2026 05:43:45 -0400
-Received: from mail-dy1-x1333.google.com ([2607:f8b0:4864:20::1333])
+ id 1xGvWc-0003fC-Sq
+ for qemu-riscv@nongnu.org; Wed, 14 Oct 2026 05:43:54 -0400
+Received: from mail-dy1-x1334.google.com ([2607:f8b0:4864:20::1334])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xGvWN-0001uP-OU
- for qemu-riscv@nongnu.org; Wed, 14 Oct 2026 05:43:42 -0400
-Received: by mail-dy1-x1333.google.com with SMTP id
- 5a478bee46e88-33bf40b0c8bso69612eec.0
- for <qemu-riscv@nongnu.org>; Wed, 14 Oct 2026 02:43:37 -0700 (PDT)
+ id 1xGvWZ-0001zE-Pl
+ for qemu-riscv@nongnu.org; Wed, 14 Oct 2026 05:43:54 -0400
+Received: by mail-dy1-x1334.google.com with SMTP id
+ 5a478bee46e88-30b6dad2382so9048367eec.0
+ for <qemu-riscv@nongnu.org>; Wed, 14 Oct 2026 02:43:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1791971017; x=1792575817; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1791971027; x=1792575827; darn=nongnu.org;
  h=content-transfer-encoding:content-type:mime-version:references
  :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=uy0WPRIQ2imJZqNFdFp6IKRokxACF3m4EQdN1xfghQY=;
- b=LOcBLiWIlL6Hb82R4mGEvi9utfnI7IhGJhc1vK5uyUzuWX2IHf1SrtDl5AgiDjfWRW
- 6/TVX7RYYKLwnp/oyCbI8pJNO4Pqa6YcJjTvKYsBfcq9WsYQOo/N7B4fZCbxpPqdIAsi
- 1YAsYNy1xY8duQmNmVKdRJnOT1b//l6SHcWwke9cOh1HeE3E0CzSLBu17ABg9EntB6v3
- kQPn3cT+lXKXFR0qEbTsdSjHdz6FR+RlCJ5pnSBkxTUVIvYrIB+SlYGwrtvlzLG11K6p
- mrysUKQf84Yycni9TSxj9JHYxpyaR9N7h10OSNhTxkVci0AkdAKwBw3W1YPw2Cj1mnwF
- uCog==
+ bh=synPi8hnFDON0bf/QeszSpYclzjkqZ5u8lY6d12QrFA=;
+ b=qofgqE2dAD1vZmTunii07qV6aGlw+TBpUNOdNFa0gIHzeirFPzVg5UjOgPFLfg0VVe
+ 2fuKwm+EIep57oJ/wKYSqyZYXr9575RNwfienxveWBl52wFWVITwwgxkhEtNhPPx1TbG
+ 6v0KL84gsGf3i2wG8O83mYIyA+Aokab3QJ6/4wDHupaUVZT/kNeRsqiGdxrV5ahJaeTg
+ AVnV56SeI4GE7/vZmRItykPtZzUBiagvGMKvmqEJcHxSyxNq9J7Fon7sHgemRmPdZJy8
+ KTBPvcTmXk6qeFUt/QnAy9mKaEP/nEzVVP5i0PsI5bouLsqSGoIDKbK7QiKJ5zgHkQmg
+ VzxA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1791971017; x=1792575817;
+ d=1e100.net; s=20260707; t=1791971027; x=1792575827;
  h=content-transfer-encoding:content-type:mime-version:references
  :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=uy0WPRIQ2imJZqNFdFp6IKRokxACF3m4EQdN1xfghQY=;
- b=beBgDVamorTKSkalx0WV25ZKgTmQsyX2GLpRTWAHhShXSznmgxdQDIShc2QnC3+VRE
- wrQUUwytOfRQsOtLPP21KVO2uAatJwTxhjtiFWkCMo1fuwYfuBKgoB9RRqgcJaSax5to
- HPsTv0d4friv+s+OLUnVK7FFIjWNP0sn7H2d8dsFYRQQam8U3yOQ2jDLHEJmgIyObPKX
- wdTPht65jDG9mfL2iW0b57vDrCKx9G/5oFot72k9HXK9cG0LhWw84g4Lhp+QLSMF/Mnt
- hBL9JCgDgXDEmXxoKLbGI2H8e86ip7dqYlifHV8qfqtKvIoRxQ2ktuwwC/HrOMcO7YCW
- jzAg==
+ bh=synPi8hnFDON0bf/QeszSpYclzjkqZ5u8lY6d12QrFA=;
+ b=DPQ3vZ65BOm8AO8KZgh+qEWc+J9KRz4WIdJNlrK2OX1QDFowcQB5g/eq57u4v5UXC7
+ 17GANnQkspU8ShbOrfxB82tS2gZYy9S9d2IJDS5UoDYaT3/SJmEqWvqfjay2aqZ2GpMO
+ 1GsByR+RIhFtPUKoIQ9531BSXZwAkBzgb2E+27G8pgNF6mCsIHxwvA0XzQngneYN2lFd
+ O7qn3R04K7CLTfcsBghlIZtcesno+ZhY9NlGx5U4PWlVDmiWafqiojZU+YbS23tZBwU1
+ FEqcW7dfQjHv5Og/G5StdB1aCHTaJizJ/o0cf7iIUBh5sC5CiJTESwUOVw513tXJW8N8
+ hTNw==
 X-Forwarded-Encrypted: i=1;
- AKwUvByiZfaUxmjVQGmdHf/WhFlVDAX+R7Myp8i9fwJ08cVmH7zBYl/EIQ0GlzhJEL0AtDsGhZd7/YXZzqlN@nongnu.org
-X-Gm-Message-State: AFq9FYL4BMwyswndBphI+wkD4Mw2M+MXMfDWgWzk2F17jiWjn3Ecwk7U
- RHn4V9J7Z1H8+txAtUJHCIxwj8m7OMJ0cPt5pCSdMKywzJwhljxZ3dew
-X-Gm-Gg: AYBFou2RW8HTu2QoJWW4T2h/K30BJjj4e716niQfUCvmyrnE0BO21BEd3ABP3tujGEj
- 8B72201cOAUu6rr2iwp8hLNMKHHWeQsXfbWahiwHeoOZRigWdL/khSotMwSWJn1Ma6+qtNjI51C
- VavyJZ0FW+HZFORJhk5NuhnXvLA/FOHDAUDghE1t29hjzoGqdCWxdhI4/FBpOUdujfgr1COOT/Z
- LyWFZon3PQvjfSpVrg5KOWGpoW0IoqLMcUmK8aVwy0AibFETucXBsIfsa2KZGlLWGjc1GZ9iYjV
- olyxzjCWeWwrYfC2C3783/eUbY1jxyyW+jmReO6LD2vbIYvxGftXznXXJtjM2MT3aK1bokG6NRR
- roNr2lIwj1iulDG4bEhM2t5r1WeayAqxbmvpMBimk6eFqHKmknCd7Ttexk7kgBp8hMbws7qwzbr
- VT8kTcbmMYhOSSKkRM4+TfrEUXKeKbAhgs277tKUYZFQb3b3ybgkHgXnbkPqzgMaonpsqCrHF3s
- 3d1CGZdR3NDKJ0MwDsfdYHKBuqX
-X-Received: by 2002:a05:7022:e806:b0:178:4a98:8751 with SMTP id
- a92af1059eb24-1784ab70e5cmr8904859c88.37.1791971016822; 
- Wed, 14 Oct 2026 02:43:36 -0700 (PDT)
+ AKwUvBxxGY3Q2t2+fSRVhY7wk8N3VWdUO7Ayzq3R2v0LG1h2+D93EUA4f8IZX8FbRWxUcs8z9PTaHyJY+6Ad@nongnu.org
+X-Gm-Message-State: AFq9FYJQ/BwbKBdUR6ROoMyuf+WbvcBiFTEzBZhoBqOi+QcyU0lOsdPg
+ 7x150Hk4GqH4kmed58syK2mqcqnqzU94M0P76D3aMrn2WuHWyE7kAmvM
+X-Gm-Gg: AYBFou2wgyBV4UqAI6R4iESnT8lC8qbo03iOBZfwqNK/lgoQfj4rGxYn3Hk8ZS4EM9C
+ 5KzlVWfsom2lCq+tp02TvGPhbY4qLGE6kVIynCcsUVXaCa69XH4VTCfTJTaOf/ZRHxOzNpa+p9w
+ 1woF9ma1OdZujg41IFa+Q3z0tenvOs+vTiQYcImwhJ1ounIazsxutUVIdUHxIXeiz9ysZyrHtvt
+ PDkwJLyg1s3kHg8GxRujnF5AjENEFD+TDGRfktKOVrmqwtZzRMn+jKDzJCop513gWw2J/iwRrFQ
+ G9sM9N70znc11dvZJ2AZ4n78HPdpuKSQMggm3eKabywEg70pojO9zN7tx5vv/CrPJLNMvgXL2fv
+ jc3jM7Fxm8bTx7Xum1bfgHouqcRq0hZCvJmfVm1P3M7ICw1vU8mOGAk2X5k0jcmGAbYEf6OE96s
+ 6/bbwAw3nszdI9sftiPBTA1i/0j8BDnzIg8XZ+L/0ZIJ+GULju13u6KCN/t/DD5Rb841aupwdRn
+ 4argg2fU1IicUwQTQ==
+X-Received: by 2002:a05:7022:3b87:b0:164:7bbe:b609 with SMTP id
+ a92af1059eb24-16a611c0785mr24546593c88.38.1791971026715; 
+ Wed, 14 Oct 2026 02:43:46 -0700 (PDT)
 Received: from DESKTOP-Q716RM7 ([103.94.185.75])
  by smtp.googlemail.com with ESMTPSA id
- a92af1059eb24-169a31f6f5csm44348380c88.11.2026.10.14.02.43.28
+ a92af1059eb24-169a31f6f5csm44348380c88.11.2026.10.14.02.43.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 14 Oct 2026 02:43:35 -0700 (PDT)
+ Wed, 14 Oct 2026 02:43:45 -0700 (PDT)
 From: Yonggang Luo <luoyonggang@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: Alistair Francis <alistair.francis@wdc.com>,
@@ -99,17 +99,17 @@ Cc: Alistair Francis <alistair.francis@wdc.com>,
  Darren Kenny <darren.kenny@oracle.com>,
  =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
  Stafford Horne <shorne@gmail.com>
-Subject: [PATCH 22/34] hw/hexagon/virt: use unique QOM name
-Date: Wed, 14 Oct 2026 17:41:37 +0800
-Message-ID: <20261014094224.1976-7-luoyonggang@gmail.com>
+Subject: [PATCH 23/34] hw/loongarch/virt: use unique QOM name
+Date: Wed, 14 Oct 2026 17:41:38 +0800
+Message-ID: <20261014094224.1976-8-luoyonggang@gmail.com>
 X-Mailer: git-send-email 2.55.0.windows.3
 In-Reply-To: <20261014094224.1976-1-luoyonggang@gmail.com>
 References: <20261014094224.1976-1-luoyonggang@gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1333;
- envelope-from=luoyonggang@gmail.com; helo=mail-dy1-x1333.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1334;
+ envelope-from=luoyonggang@gmail.com; helo=mail-dy1-x1334.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -132,82 +132,115 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Set TYPE_HEXAGON_VIRT_MACHINE to MACHINE_TYPE_NAME("hexagon-virt") so
-Hexagon virt no longer collides with other virt-machine types in one
-process. Keep the -M / help / migration name as virt via
+Set TYPE_LOONGARCH_VIRT_MACHINE to MACHINE_TYPE_NAME("loongarch-virt")
+so LoongArch virt no longer collides with other virt-machine types in
+one process. Keep the -M / help / migration name as virt-* via
 machine_class_set_name().
 
 Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
-Reviewed-by: Brian Cain <brian.cain@oss.qualcomm.com>
 Reviewed-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 Reviewed-by: Zhao Liu <zhao1.liu@intel.com>
 ---
- hw/hexagon/virt.c         | 23 +++++++++++++++--------
- include/hw/hexagon/virt.h |  5 ++++-
- 2 files changed, 19 insertions(+), 9 deletions(-)
+ hw/loongarch/virt.c         | 45 ++++++++++++++++++++-----------------
+ include/hw/loongarch/virt.h |  5 ++++-
+ 2 files changed, 28 insertions(+), 22 deletions(-)
 
-diff --git a/hw/hexagon/virt.c b/hw/hexagon/virt.c
-index 64d8366d27d..ed086afe204 100644
---- a/hw/hexagon/virt.c
-+++ b/hw/hexagon/virt.c
-@@ -359,6 +359,7 @@ static void virt_class_init(ObjectClass *oc, const void *data)
-     MachineClass *mc = MACHINE_CLASS(oc);
+diff --git a/hw/loongarch/virt.c b/hw/loongarch/virt.c
+index 9c5371af9de..5ca992a5ac7 100644
+--- a/hw/loongarch/virt.c
++++ b/hw/loongarch/virt.c
+@@ -1543,21 +1543,24 @@ static void virt_class_init(ObjectClass *oc, const void *data)
+         MACHINE_VER_SYM(options, virt, __VA_ARGS__)(mc); \
+         mc->desc = "QEMU " MACHINE_VER_STR(__VA_ARGS__) " LoongArch Virtual Machine"; \
+         MACHINE_VER_DEPRECATION(__VA_ARGS__); \
++        machine_class_set_name(mc, "virt-" MACHINE_VER_STR(__VA_ARGS__)); \
+         if (latest) { \
+             mc->alias = "virt"; \
+             mc->is_default = true; \
+         } \
+     } \
+-    static const TypeInfo MACHINE_VER_SYM(info, virt, __VA_ARGS__) = \
+-    { \
+-        .name = MACHINE_VER_TYPE_NAME("virt", __VA_ARGS__), \
+-        .parent = TYPE_LOONGARCH_VIRT_MACHINE, \
+-        .class_init = MACHINE_VER_SYM(class_init, virt, __VA_ARGS__), \
+-    }; \
+     static void MACHINE_VER_SYM(register, virt, __VA_ARGS__)(void) \
+     { \
++        const TypeInfo virt_machine_info = \
++        { \
++            .name = target_combined_binary() ? \
++                    MACHINE_VER_TYPE_NAME("loongarch-virt", __VA_ARGS__) : \
++                    MACHINE_VER_TYPE_NAME("virt", __VA_ARGS__), \
++            .parent = TYPE_LOONGARCH_VIRT_MACHINE, \
++            .class_init = MACHINE_VER_SYM(class_init, virt, __VA_ARGS__), \
++        }; \
+         MACHINE_VER_DELETION(__VA_ARGS__); \
+-        type_register_static(&MACHINE_VER_SYM(info, virt, __VA_ARGS__)); \
++        type_register_static(&virt_machine_info); \
+     } \
+     type_init(MACHINE_VER_SYM(register, virt, __VA_ARGS__));
  
-     mc->desc = "Hexagon Virtual Machine";
-+    machine_class_set_name(mc, "virt");
-     mc->init = virt_init;
-     mc->default_cpu_type = HEXAGON_CPU_TYPE_NAME("v68");
-     mc->default_ram_size = 4 * GiB;
-@@ -373,12 +374,18 @@ static void virt_class_init(ObjectClass *oc, const void *data)
-     mc->default_nic = "virtio-mmio-bus";
+@@ -1579,22 +1582,22 @@ static void virt_instance_finalize(Object *obj)
+     g_free(lvms->oem_table_id);
  }
  
-+static void virt_machine_register_types(void)
-+{
-+    const TypeInfo virt_machine_types[] = {
-+        {
-+            .name = TYPE_HEXAGON_VIRT_MACHINE,
-+            .parent = TYPE_HEXAGON_COMMON_MACHINE,
-+            .instance_size = sizeof(HexagonVirtMachineState),
-+            .class_init = virt_class_init,
-+        }
-+    };
-+    type_register_static_array(virt_machine_types,
-+                               ARRAY_SIZE(virt_machine_types));
-+}
- 
--static const TypeInfo virt_machine_types[] = { {
--    .name = TYPE_HEXAGON_VIRT_MACHINE,
--    .parent = TYPE_HEXAGON_COMMON_MACHINE,
--    .instance_size = sizeof(HexagonVirtMachineState),
--    .class_init = virt_class_init,
--} };
+-static const TypeInfo virt_machine_info = {
+-    .name           = TYPE_LOONGARCH_VIRT_MACHINE,
+-    .parent         = TYPE_MACHINE,
+-    .abstract       = true,
+-    .instance_size  = sizeof(LoongArchVirtMachineState),
+-    .class_init     = virt_class_init,
+-    .instance_init  = virt_initfn,
+-    .instance_finalize = virt_instance_finalize,
+-    .interfaces = (InterfaceInfo[]) {
+-        { TYPE_HOTPLUG_HANDLER },
+-        { }
+-    },
+-};
 -
--DEFINE_TYPES(virt_machine_types)
-+type_init(virt_machine_register_types)
-diff --git a/include/hw/hexagon/virt.h b/include/hw/hexagon/virt.h
-index 4ca2f1ef859..e5dfcd351a5 100644
---- a/include/hw/hexagon/virt.h
-+++ b/include/hw/hexagon/virt.h
+ static void machvirt_machine_init(void)
+ {
++    const TypeInfo virt_machine_info = {
++        .name = TYPE_LOONGARCH_VIRT_MACHINE,
++        .parent = TYPE_MACHINE,
++        .abstract = true,
++        .instance_size = sizeof(LoongArchVirtMachineState),
++        .class_init = virt_class_init,
++        .instance_init = virt_initfn,
++        .instance_finalize = virt_instance_finalize,
++        .interfaces = (InterfaceInfo[]) {
++            { TYPE_HOTPLUG_HANDLER },
++            { }
++        },
++    };
++
+     type_register_static(&virt_machine_info);
+ }
+ 
+diff --git a/include/hw/loongarch/virt.h b/include/hw/loongarch/virt.h
+index d39a9bbf5dd..9a5f6486c0f 100644
+--- a/include/hw/loongarch/virt.h
++++ b/include/hw/loongarch/virt.h
 @@ -9,6 +9,7 @@
- #define HW_HEXAGONVIRT_H
+ #define HW_LOONGARCH_H
  
- #include "hw/hexagon/hexagon.h"
+ #include "hw/core/boards.h"
 +#include "qemu/target-info.h"
- #include "target/hexagon/cpu.h"
+ #include "qemu/queue.h"
+ #include "hw/block/flash.h"
+ #include "hw/loongarch/boot.h"
+@@ -130,7 +131,9 @@ struct LoongArchVirtMachineState {
+     bool highmem_mmio;
+ };
  
- #define VIRTIO_DEV_COUNT 8
-@@ -26,7 +27,9 @@ struct HexagonVirtMachineState {
- 
- void hexagon_load_fdt(const struct HexagonVirtMachineState *vms);
- 
--#define TYPE_HEXAGON_VIRT_MACHINE MACHINE_TYPE_NAME("virt")
-+#define TYPE_HEXAGON_VIRT_MACHINE \
-+    (target_combined_binary() ? MACHINE_TYPE_NAME("hexagon-virt") : \
+-#define TYPE_LOONGARCH_VIRT_MACHINE  MACHINE_TYPE_NAME("virt")
++#define TYPE_LOONGARCH_VIRT_MACHINE \
++    (target_combined_binary() ? MACHINE_TYPE_NAME("loongarch-virt") : \
 +                                MACHINE_TYPE_NAME("virt"))
- OBJECT_DECLARE_SIMPLE_TYPE(HexagonVirtMachineState, HEXAGON_VIRT_MACHINE)
- 
- #endif /* HW_HEXAGONVIRT_H */
+ OBJECT_DECLARE_SIMPLE_TYPE(LoongArchVirtMachineState, LOONGARCH_VIRT_MACHINE)
+ void virt_acpi_setup(LoongArchVirtMachineState *lvms);
+ void virt_fdt_setup(LoongArchVirtMachineState *lvms);
 -- 
 2.55.0.windows.3
 
