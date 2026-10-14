@@ -4,42 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28563CC6B1A
-	for <qemu-riscv@archiver.kernel.org>; Wed, 14 Oct 2026 16:30:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C105C3DA7A
+	for <qemu-riscv@archiver.kernel.org>; Wed, 14 Oct 2026 16:30:55 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xH1rk-0000Na-8X; Wed, 14 Oct 2026 12:30:08 -0400
+	id 1xH1rj-0000Gw-Na; Wed, 14 Oct 2026 12:30:07 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <wangyang25@otcaix.iscas.ac.cn>)
- id 1xH1rL-00006M-Gs; Wed, 14 Oct 2026 12:29:45 -0400
+ id 1xH1rJ-00005X-Da; Wed, 14 Oct 2026 12:29:41 -0400
 Received: from smtp81.cstnet.cn ([159.226.251.81] helo=cstnet.cn)
  by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
  (Exim 4.90_1) (envelope-from <wangyang25@otcaix.iscas.ac.cn>)
- id 1xH1rH-00069F-95; Wed, 14 Oct 2026 12:29:41 -0400
+ id 1xH1rG-00068x-AJ; Wed, 14 Oct 2026 12:29:40 -0400
 Received: from DESKTOP-7FLBREN (unknown [124.16.137.194])
- by APP-03 (Coremail) with SMTP id rQCowACXmDbrrc9q4kXBCg--.37629S8;
- Thu, 15 Oct 2026 00:29:33 +0800 (CST)
+ by APP-03 (Coremail) with SMTP id rQCowACXmDbrrc9q4kXBCg--.37629S9;
+ Thu, 15 Oct 2026 00:29:34 +0800 (CST)
 From: wangyang <wangyang25@otcaix.iscas.ac.cn>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
  liwei1518@gmail.com, daniel.barboza@oss.qualcomm.com,
  zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
  christoph.muellner@vrull.eu
-Subject: [PATCH v5 4/5] target/riscv: prioritize Zicfilp checks for misaligned
- JALR
-Date: Thu, 15 Oct 2026 00:29:29 +0800
-Message-ID: <20261014162930.251-5-wangyang25@otcaix.iscas.ac.cn>
+Subject: [PATCH v5 5/5] target/riscv: canonicalize reserved CBIE encoding
+Date: Thu, 15 Oct 2026 00:29:30 +0800
+Message-ID: <20261014162930.251-6-wangyang25@otcaix.iscas.ac.cn>
 X-Mailer: git-send-email 2.55.0.windows.2
 In-Reply-To: <20261014162930.251-1-wangyang25@otcaix.iscas.ac.cn>
 References: <20261014162930.251-1-wangyang25@otcaix.iscas.ac.cn>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: rQCowACXmDbrrc9q4kXBCg--.37629S8
-X-Coremail-Antispam: 1UD129KBjvJXoW7tF4UWF17Zr1fWF4DJryDtrb_yoW8Wryrpr
- 40k3yUKrZ8tF95ZF4SqF4UtF43Xa1fWa10qws2q3Z5tF4YyrW3tF1qkryagFyUAF4kur1a
- 9FWqya45WFWUJ3JanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+X-CM-TRANSID: rQCowACXmDbrrc9q4kXBCg--.37629S9
+X-Coremail-Antispam: 1UD129KBjvJXoW7CFy3Wr48uF1kXr15urW7Jwb_yoW8Kr4fpF
+ 4UWF45KrWv9ryI9a93Jr1UWF13Krs5Gay5Wwnruws7Xa13CFyftFnrK345Kr4UXFWxK3sF
+ 9wsxGryrCw4kJFDanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
  9KBjDU0xBIdaVrnRJUUUmvb7Iv0xC_Kw4lb4IE77IF4wAFF20E14v26rWj6s0DM7CY07I2
  0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI
  8067AKxVWUAVCq3wA2048vs2IY020Ec7CjxVAFwI0_Xr0E3s1l8cAvFVAK0II2c7xJM28C
@@ -78,41 +77,74 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-When Zicfilp tracking is active, a misaligned indirect JALR target also
-violates the landing-pad requirement. Generate the landing-pad
-software-check before the generic instruction-address-misaligned
-exception for tracked targets, while retaining the existing exception
-for untracked targets.
+CBIE encoding 10 is reserved when Zicbom is implemented, while
+encoding 11 has defined behavior. Canonicalize only encoding 10 in the
+menvcfg, senvcfg, and henvcfg write paths so the reserved value is not
+retained and the defined encoding remains unchanged.
 
-Tested: RV64 M-mode and S-mode Zicfilp controls and misaligned
-targets with c=true and c=false.
-Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/4415
+Tested: RV64 menvcfg, senvcfg, and henvcfg CBIE 10 and CBIE 11
+write/readback test cases.
+Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/4416
 Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Signed-off-by: wangyang <wangyang25@otcaix.iscas.ac.cn>
 ---
- target/riscv/tcg/insn_trans/trans_rvi.c.inc | 9 ++++++++-
- 1 file changed, 8 insertions(+), 1 deletion(-)
+ target/riscv/tcg/csr.c | 29 +++++++++++++++++++++++++++++
+ 1 file changed, 29 insertions(+)
 
-diff --git a/target/riscv/tcg/insn_trans/trans_rvi.c.inc b/target/riscv/tcg/insn_trans/trans_rvi.c.inc
-index cc1b5dbbad..aa79a5ef3c 100644
---- a/target/riscv/tcg/insn_trans/trans_rvi.c.inc
-+++ b/target/riscv/tcg/insn_trans/trans_rvi.c.inc
-@@ -187,7 +187,14 @@ static bool trans_jalr(DisasContext *ctx, arg_jalr *a)
- 
-     if (misaligned) {
-         gen_set_label(misaligned);
--        gen_exception_inst_addr_mis(ctx, target_pc);
-+        if (ctx->fcfi_enabled &&
-+            a->rs1 != xRA && a->rs1 != xT0 && a->rs1 != xT2) {
-+            tcg_gen_st8_i32(tcg_constant_i32(RISCV_EXCP_SW_CHECK_FCFI_TVAL),
-+                            tcg_env, offsetof(CPURISCVState, sw_check_code));
-+            generate_exception(ctx, RISCV_EXCP_SW_CHECK);
-+        } else {
-+            gen_exception_inst_addr_mis(ctx, target_pc);
-+        }
+diff --git a/target/riscv/tcg/csr.c b/target/riscv/tcg/csr.c
+index bd4b6dc114..cf59f9ae54 100644
+--- a/target/riscv/tcg/csr.c
++++ b/target/riscv/tcg/csr.c
+@@ -3260,6 +3260,16 @@ static RISCVException write_menvcfg(CPURISCVState *env, int csrno,
+             stce_changed = true;
+         }
      }
-     ctx->base.is_jmp = DISAS_NORETURN;
++
++    /*
++     * CBIE is a WARL field: encoding 10 is reserved.  A software write of
++     * this encoding must canonicalize to a supported value instead of being
++     * retained in the readback.
++     */
++    if (cfg->ext_zicbom && get_field(val, MENVCFG_CBIE) == 2) {
++        val &= ~MENVCFG_CBIE;
++    }
++
+     env->menvcfg = (env->menvcfg & ~mask) | (val & mask);
  
+     if (stce_changed) {
+@@ -3354,6 +3364,16 @@ static RISCVException write_senvcfg(CPURISCVState *env, int csrno,
+         mask |= SENVCFG_UKTE;
+     }
+ 
++    /*
++     * CBIE is a WARL field: encoding 10 is reserved.  A software write of
++     * this encoding must canonicalize to a supported value instead of being
++     * retained in the readback.
++     */
++    if (env_archcpu(env)->cfg.ext_zicbom &&
++        get_field(val, SENVCFG_CBIE) == 2) {
++        val &= ~SENVCFG_CBIE;
++    }
++
+     env->senvcfg = (env->senvcfg & ~mask) | (val & mask);
+     return RISCV_EXCP_NONE;
+ }
+@@ -3422,6 +3442,15 @@ static RISCVException write_henvcfg(CPURISCVState *env, int csrno,
+         }
+     }
+ 
++    /*
++     * CBIE is a WARL field: encoding 10 is reserved.  A software write of
++     * this encoding must canonicalize to a supported value instead of being
++     * retained in the readback.
++     */
++    if (cfg->ext_zicbom && get_field(val, HENVCFG_CBIE) == 2) {
++        val &= ~HENVCFG_CBIE;
++    }
++
+     if (riscv_cpu_mxl(env) == MXL_RV32) {
+         /*
+          * RV32 stores STCE/ADUE/PBMTE/DTE in henvcfgh, so a low-half henvcfg
 -- 
 2.55.0.windows.2
 
