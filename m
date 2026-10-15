@@ -4,65 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8AD82CC6B33
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D44BECC6B3E
 	for <qemu-riscv@archiver.kernel.org>; Thu, 15 Oct 2026 10:28:02 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xHIeP-0001L5-Rc; Thu, 15 Oct 2026 06:25:29 -0400
+	id 1xHIdx-0000n3-T5; Thu, 15 Oct 2026 06:25:01 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <eblot.ml@gmail.com>)
- id 1xHIeK-0001EE-EU
- for qemu-riscv@nongnu.org; Thu, 15 Oct 2026 06:25:24 -0400
-Received: from mail-wm1-f51.google.com ([209.85.128.51])
+ id 1xHIdv-0000lG-Cy
+ for qemu-riscv@nongnu.org; Thu, 15 Oct 2026 06:24:59 -0400
+Received: from mail-wr1-f49.google.com ([209.85.221.49])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <eblot.ml@gmail.com>)
- id 1xHIeI-0003iX-2s
- for qemu-riscv@nongnu.org; Thu, 15 Oct 2026 06:25:23 -0400
-Received: by mail-wm1-f51.google.com with SMTP id
- 5b1f17b1804b1-4a018792ab3so41419265e9.0
- for <qemu-riscv@nongnu.org>; Thu, 15 Oct 2026 03:25:21 -0700 (PDT)
+ id 1xHIds-0003KY-DW
+ for qemu-riscv@nongnu.org; Thu, 15 Oct 2026 06:24:59 -0400
+Received: by mail-wr1-f49.google.com with SMTP id
+ ffacd0b85a97d-48c4649b35bso258773f8f.3
+ for <qemu-riscv@nongnu.org>; Thu, 15 Oct 2026 03:24:56 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792059920; x=1792664720;
+ d=1e100.net; s=20260707; t=1792059895; x=1792664695;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=55Fgqc9VQyRpyCCP2Jau8AxqRXuSeRGIW2uq0lzhQEw=;
- b=A7B70qPIpp4X/TgYJhwcJTxNeIVYaBz3ocHwSNJG9hAFrVhUWB4/npCq2+D5nCNYtZ
- TGzCQWTXdtlr1rI6wY6SbB6YMuPC3hhShVEgVQ0hGHGIyFJd70c7LNZ7igLRNXmwNOnf
- 3QqSX+GjTmA0qlcbKa8t7EudR6VFG+3Bnn/SXSGqILcTXpiCnKofPAhCAMQCJ9TAnjFE
- j2F6OsPeSsNy0voRLGojczojlZzEbmUKNAHfsW7IfbhS/F0Eti7rvwIkzlLJ1eMFbtzS
- RgQbh2dmK6xtPj48/N5p+mnY5LwOfubQrJQVT8AcTm6F5cT1ZHlYgMnfDuvVugXW1Hu7
- +qmw==
+ bh=61NEYluxRsQGvtMueBIKvSSCDkn5fQLszcxox8Hk6CM=;
+ b=EiM/3jW6yFvI/H2h/QYxEype5oI190QzTzN6akIoWNaQWqWXrSebb5R8ldwlxo2rbE
+ dibD2berQ56ylfQcJmlB3hk6qJnoBlj5fMG3r8Cd/O6KcUxhAWv2PbVu650YbmuhPeVa
+ 386IL8uAAGIvMP/zSBvNi0Jd3WErKOtwP4iPSmyPwXLn+FfzWTB65s+TdvOQoehiiqAT
+ b6KOm44lvrsKkxK+1dFjjbmB/p/6HdNVTLjZrJNf6vnm7pjhNACXL+93Msw6zZexh5lD
+ eZXdLF/CyFiTdlpnNMNnpZ7QDV824lPK/U0f90UBVImA8TUMRM6Y2nW72x0ka3ZPUXbj
+ Vr6w==
 X-Forwarded-Encrypted: i=1;
- AKwUvBw4m0q+Tdc24lzBVj3hXqF0pN2C7hOGjwU4oy7vaYkC/W+FVEEhd+YJ1wEpiy4b1JsWRWYGW7eIm/hL@nongnu.org
-X-Gm-Message-State: AFq9FYJHBxONSzp/jQSxqhkYasau2bm1tcBl3WoMvPSCGg1f5OW90Ae/
- DLdw6fBK74QS7pymPUsbq+CbPSmKCGFAcbZTtovh+qtn56/bzXYkXWqO
-X-Gm-Gg: AYBFou2Xxt/aa51rbq4Zfim2HslDQHqSBgAlvSflArbgAMDcDafUzYiYU21ZAzeSCqx
- Q82zUR0b+ina2FaRVJNtbIrKd2PjDIScTTnv1pYfU6QFqhIqCAmnQO91L5qu9CIxOes7l7VbXTG
- yyI6uTdVkfu9zZZUZrc9+fB2Qe/leRecnv3E6sGGF594WwpE87BLyXfbfakPZ6c+WR7qCfoZhxJ
- HTTvwQXCpkSaoZER4vu9+Fh7YbM++1cCjlYf5oio9f9n7M7pfi8vkG6MDi5UF82HJIocDFVEJzF
- JTnpL4v91ydHPaOCkqAUCuCS18eIgi+vKjCHbmStxE8ZTBmvot6wjOfEDyrTx5vFzMgFdZbzfUA
- 6zO/dF7wqcmP7ZcfoowOon7beo3e9OPizzuZ6/N75VrRebCXDuNiOKGp6rxCfqgXpghhNPNTZn7
- J+QM+7BvewsbeGoBK4j72K8bCjM5WNigIBBmcPApMR/0/hCqF1bY/IWDCym1HN8wshgzgVMJFnP
- cBFCiZhVB+6YyHkSoZQDxOECz4X9J9SyM4SRwY3WEP7A1M=
-X-Received: by 2002:a05:600c:8b65:b0:49e:6683:d23c with SMTP id
- 5b1f17b1804b1-4a18e3ef1bdmr345050635e9.0.1792059920506; 
- Thu, 15 Oct 2026 03:25:20 -0700 (PDT)
+ AKwUvBz0ilm66wJE1LsGua4TEMx/B37b1X2iNZmGEsrtl9TR3F21hzV77OPzZ8rcfFzOxyWrcwByYRyNh95p@nongnu.org
+X-Gm-Message-State: AFq9FYITSQyxztwx9Z4swpxxFeDq64NCucOdkQqgFzxxhOh2XxcFyQQc
+ ehv3WbcKVBb1Z2meF1iVzlJgSykzFXMZVWgQ50rY2FLd7XVK3LP0nR/8
+X-Gm-Gg: AYBFou0NFc/U+piQbOTgIW71LmC6ADe37tB30ttLpyhy6idxSUCjjp3n2W9TSQRH/cM
+ tWfiv+pg9mBVmLSxnK3CN9JIWc0IcJrcNmOJvgig502actfwNzM+F79oqbNwsD4+rzETkEFFkC4
+ ZW5xK+k95BG0iEff1Oc4OkheUK7Ic8GMRkeP9IcydCQ3SGkjAuHAoO1Q6g1N9ciTT+gYHPXuqWQ
+ rIM7KxtR0F+qsUo6orkqFxX1lDfhDYeJSLTpZ/UidLwyccacAU736gkgXUKKuisJfVOk0e6j6kZ
+ MD8LL+eA+9yYV3Y12EDU3vnbNHB/G0+BVVdzNZ/R9Bjk4jq+omataYNub71WcMtNcUzL/U0o4MC
+ JkwpA61jT90pBHqaJqqyISmebkX+wzVBHR3tUzoZW6Jo1Chdr98tbZir4TZ+i+RJs4LGme8fkfv
+ +QDcxcCCdGvjc1lczk5wUt6D1BSBUEIGIXOrTfC+khP6mweGikRjVhHKrrvsobPdRFjuMHzs3u6
+ VHn8VjZPSXb8BTUMOO2lecIrghzUcgbdX97F9qlV7vTsxuOB05we3W/
+X-Received: by 2002:a5d:588e:0:b0:48d:c186:dcc6 with SMTP id
+ ffacd0b85a97d-48dc186dd62mr31665477f8f.57.1792059894704; 
+ Thu, 15 Oct 2026 03:24:54 -0700 (PDT)
 Received: from localhost (89-93-216-19.hfc.dyn.abo.bbox.fr. [89.93.216.19])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a1bd9b8ebdsm69844415e9.10.2026.10.15.03.25.19
+ ffacd0b85a97d-48df2619703sm5102749f8f.24.2026.10.15.03.24.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 15 Oct 2026 03:25:20 -0700 (PDT)
-Date: Thu, 15 Oct 2026 11:27:58 +0200
-Subject: [PATCH v3 11/50] hw/rtc: ds1338: prefix the file-local helpers
- with ds1338_
+ Thu, 15 Oct 2026 03:24:54 -0700 (PDT)
+Date: Thu, 15 Oct 2026 11:27:54 +0200
+Subject: [PATCH v3 07/50] tests/qtest: pca9545: add mux test
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Message-Id: <20261015-bmc-minerva-v3-11-7d50c8a108e5@free.fr>
+Message-Id: <20261015-bmc-minerva-v3-7-7d50c8a108e5@free.fr>
 References: <20261015-bmc-minerva-v3-0-7d50c8a108e5@free.fr>
 In-Reply-To: <20261015-bmc-minerva-v3-0-7d50c8a108e5@free.fr>
 To: qemu-devel@nongnu.org
@@ -79,15 +78,15 @@ Cc: =?utf-8?q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>,
  Emmanuel Blot <emmanuel.blot@free.fr>, 
  =?utf-8?q?C=C3=A9dric_Le_Goater?= <clg@redhat.com>
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1792056475; l=2103;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1792056475; l=4698;
  i=emmanuel.blot@free.fr; s=20260602; h=from:subject:message-id;
- bh=FMkjbHnVM4vN5NqR+DRLvhBEQGGHcj2pwxki5uk8mq4=;
- b=oQPF/Etz71xicNB2QlisxChLVRN5OlR6W/80dZOYIHylDcRQVDf4DPkC+7UrrjtqtsysWc3Z9
- jXlZ3BFuIi1AxggnbHO64G+FloWEpuBocXWQ7t2jTq+F5MqHxFgDK1a
+ bh=S5zD/fm1r3791LPnF7SwePv3pZV1UgFsCAKYoq/MMy0=;
+ b=D06H95TZpEWtZTJY2jHv1rHgRCeRKLnJMvF0BfvIcge9GV0TDdyGcT3qsW/h9x8Dun/zRvfeY
+ XrOcj4q3PW7ANte8TVHHSIBJoY80SrcK2F+5GnYiyY8b+ghIXR82+tO
 X-Developer-Key: i=emmanuel.blot@free.fr; a=ed25519;
  pk=0qFrZ21FAAN8OfVsSoVcCFTk/NMYOWzxJz4paSAVm0g=
-Received-SPF: pass client-ip=209.85.128.51; envelope-from=eblot.ml@gmail.com;
- helo=mail-wm1-f51.google.com
+Received-SPF: pass client-ip=209.85.221.49; envelope-from=eblot.ml@gmail.com;
+ helo=mail-wr1-f49.google.com
 X-Spam_score_int: -15
 X-Spam_score: -1.6
 X-Spam_bar: -
@@ -113,73 +112,150 @@ From:  Emmanuel Blot via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Two static helpers predate the rest of the file and carry no device
-prefix.
+Exercise the PCA9545 4-channel I2C mux: channel selection through the
+control byte, upper-nibble read-back, and interrupt logic.
 
 Reviewed-by: Cédric Le Goater <clg@redhat.com>
 Signed-off-by: Emmanuel Blot <emmanuel.blot@free.fr>
 ---
- hw/rtc/ds1338.c | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
+ tests/qtest/meson.build    |   1 +
+ tests/qtest/pca9545-test.c | 116 +++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 117 insertions(+)
 
-diff --git a/hw/rtc/ds1338.c b/hw/rtc/ds1338.c
-index 74aee6c746..1755a3a37c 100644
---- a/hw/rtc/ds1338.c
-+++ b/hw/rtc/ds1338.c
-@@ -57,7 +57,7 @@ static const VMStateDescription vmstate_ds1338 = {
-     }
- };
- 
--static void capture_current_time(DS1338State *s)
-+static void ds1338_capture_current_time(DS1338State *s)
- {
-     /* Capture the current time into the secondary registers
-      * which will be actually read by the data transfer operation.
-@@ -85,7 +85,7 @@ static void capture_current_time(DS1338State *s)
-     s->nvram[6] = to_bcd(now.tm_year - 100);
- }
- 
--static void inc_regptr(DS1338State *s)
-+static void ds1338_inc_regptr(DS1338State *s)
- {
-     /* The register pointer wraps around after 0x3F; wraparound
-      * causes the current time/date to be retransferred into
-@@ -93,7 +93,7 @@ static void inc_regptr(DS1338State *s)
-      */
-     s->ptr = (s->ptr + 1) & (NVRAM_SIZE - 1);
-     if (!s->ptr) {
--        capture_current_time(s);
-+        ds1338_capture_current_time(s);
-     }
- }
- 
-@@ -108,7 +108,7 @@ static int ds1338_event(I2CSlave *i2c, enum i2c_event event)
-          * START_SEND, because the guest can't get at that data
-          * without going through a START_RECV which would overwrite it.
-          */
--        capture_current_time(s);
-+        ds1338_capture_current_time(s);
-         break;
-     case I2C_START_SEND:
-         s->addr_byte = true;
-@@ -129,7 +129,7 @@ static uint8_t ds1338_recv(I2CSlave *i2c)
- 
-     trace_ds1338_recv(s->ptr, res);
- 
--    inc_regptr(s);
-+    ds1338_inc_regptr(s);
-     return res;
- }
- 
-@@ -204,7 +204,7 @@ static int ds1338_send(I2CSlave *i2c, uint8_t data)
-     } else {
-         s->nvram[s->ptr] = data;
-     }
--    inc_regptr(s);
-+    ds1338_inc_regptr(s);
-     return 0;
- }
- 
+diff --git a/tests/qtest/meson.build b/tests/qtest/meson.build
+index 200abf6f36..e05d8a07b9 100644
+--- a/tests/qtest/meson.build
++++ b/tests/qtest/meson.build
+@@ -336,6 +336,7 @@ qos_test_ss.add(
+   'ne2000-test.c',
+   'tulip-test.c',
+   'nvme-test.c',
++  'pca9545-test.c',
+   'pca9552-test.c',
+   'pca9554-test.c',
+   'pca9555-test.c',
+diff --git a/tests/qtest/pca9545-test.c b/tests/qtest/pca9545-test.c
+new file mode 100644
+index 0000000000..91f56db92f
+--- /dev/null
++++ b/tests/qtest/pca9545-test.c
+@@ -0,0 +1,116 @@
++/*
++ * QTest testcase for the PCA9545 4-channel I2C switch with interrupt logic
++ *
++ * Copyright (c) 2026 Meta Platforms, Inc. and affiliates.
++ *
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ */
++
++#include "qemu/osdep.h"
++#include "libqtest-single.h"
++#include "libqos/qgraph.h"
++#include "libqos/i2c.h"
++
++#define PCA9545_TEST_ID   "pca9545-test"
++#define PCA9545_TEST_ADDR 0x70
++#define PCA9545_TEST_PATH "/machine/peripheral/" PCA9545_TEST_ID
++
++/* INTn and INT are active low: level 0 is asserted. */
++#define INT_ASSERTED   0
++#define INT_RELEASED   1
++
++/* The mux has no register pointer: a read/write moves a single control byte. */
++static uint8_t pca9545_get(QI2CDevice *dev)
++{
++    uint8_t val;
++
++    qi2c_recv(dev, &val, 1);
++    return val;
++}
++
++static void pca9545_set(QI2CDevice *dev, uint8_t val)
++{
++    qi2c_send(dev, &val, 1);
++}
++
++static void pca9545_set_int(unsigned chan, int level)
++{
++    qtest_set_irq_in(global_qtest, PCA9545_TEST_PATH, "interrupt", chan, level);
++}
++
++/* Channel selection is the lower nibble; the upper nibble reads back 0. */
++static void test_channel_select(void *obj, void *data, QGuestAllocator *alloc)
++{
++    QI2CDevice *dev = (QI2CDevice *)obj;
++
++    g_assert_cmphex(pca9545_get(dev), ==, 0x00);
++
++    pca9545_set(dev, 0x05); /* channels 0 and 2 */
++    g_assert_cmphex(pca9545_get(dev), ==, 0x05);
++
++    pca9545_set(dev, 0x0f); /* all channels */
++    g_assert_cmphex(pca9545_get(dev), ==, 0x0f);
++
++    pca9545_set(dev, 0x00);
++    g_assert_cmphex(pca9545_get(dev), ==, 0x00);
++}
++
++/*
++ * The interrupt status is reported in the upper nibble (INT3..INT0) and is
++ * latched regardless of which channels are selected (PCA9545A Table 5).
++ */
++static void test_interrupt_status(void *obj, void *data, QGuestAllocator *alloc)
++{
++    QI2CDevice *dev = (QI2CDevice *)obj;
++
++    pca9545_set_int(1, INT_ASSERTED);
++    g_assert_cmphex(pca9545_get(dev), ==, 0x20);
++
++    pca9545_set(dev, 0x01);
++    pca9545_set_int(3, INT_ASSERTED);
++    g_assert_cmphex(pca9545_get(dev), ==, 0xa1); /* INT3 | INT1 | channel 0 */
++
++    pca9545_set_int(1, INT_RELEASED);
++    g_assert_cmphex(pca9545_get(dev), ==, 0x81); /* INT3 | channel 0 */
++}
++
++/* The INT output is pulled low while any channel interrupt is active. */
++static void test_interrupt_output(void *obj, void *data, QGuestAllocator *alloc)
++{
++    qtest_irq_intercept_out_named(global_qtest, PCA9545_TEST_PATH,
++                                  "interrupt-out");
++
++    /*
++     * Interception starts with no recorded level, so drive an idle input
++     * first to make the mux publish the released state of its output.
++     */
++    pca9545_set_int(0, INT_RELEASED);
++    g_assert_true(get_irq(0));
++
++    pca9545_set_int(0, INT_ASSERTED);
++    g_assert_false(get_irq(0));
++
++    pca9545_set_int(2, INT_ASSERTED);
++    g_assert_false(get_irq(0));
++
++    pca9545_set_int(0, INT_RELEASED);
++    g_assert_false(get_irq(0));
++    pca9545_set_int(2, INT_RELEASED);
++    g_assert_true(get_irq(0));
++}
++
++static void pca9545_register_nodes(void)
++{
++    QOSGraphEdgeOptions opts = {
++        .extra_device_opts = "id=" PCA9545_TEST_ID ",address=0x70"
++    };
++    add_qi2c_address(&opts, &(QI2CAddress) { PCA9545_TEST_ADDR });
++
++    qos_node_create_driver("pca9545", i2c_device_create);
++    qos_node_consumes("pca9545", "i2c-bus", &opts);
++
++    qos_add_test("channel-select", "pca9545", test_channel_select, NULL);
++    qos_add_test("interrupt-status", "pca9545", test_interrupt_status, NULL);
++    qos_add_test("interrupt-output", "pca9545", test_interrupt_output, NULL);
++}
++libqos_init(pca9545_register_nodes);
 
 -- 
 2.53.0-Meta
