@@ -4,102 +4,119 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71B89CC6B30
-	for <qemu-riscv@archiver.kernel.org>; Thu, 15 Oct 2026 03:20:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDB64CC6B2E
+	for <qemu-riscv@archiver.kernel.org>; Thu, 15 Oct 2026 04:41:50 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xHBzP-0006eR-4g; Wed, 14 Oct 2026 23:18:43 -0400
+	id 1xHDHS-00008w-1W; Thu, 15 Oct 2026 00:41:26 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <portias@tenstorrent.com>)
- id 1xHBzN-0006dr-Fa
- for qemu-riscv@nongnu.org; Wed, 14 Oct 2026 23:18:41 -0400
-Received: from mail-pf1-x42a.google.com ([2607:f8b0:4864:20::42a])
+ (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
+ id 1xHDHQ-00008O-QN
+ for qemu-riscv@nongnu.org; Thu, 15 Oct 2026 00:41:24 -0400
+Received: from mail-dy1-x1335.google.com ([2607:f8b0:4864:20::1335])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <portias@tenstorrent.com>)
- id 1xHBzK-0006dM-W6
- for qemu-riscv@nongnu.org; Wed, 14 Oct 2026 23:18:41 -0400
-Received: by mail-pf1-x42a.google.com with SMTP id
- d2e1a72fcca58-89a837bf00eso394446b3a.2
- for <qemu-riscv@nongnu.org>; Wed, 14 Oct 2026 20:18:38 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
+ id 1xHDHL-0005jY-Nl
+ for qemu-riscv@nongnu.org; Thu, 15 Oct 2026 00:41:24 -0400
+Received: by mail-dy1-x1335.google.com with SMTP id
+ 5a478bee46e88-33fb4680717so4612636eec.1
+ for <qemu-riscv@nongnu.org>; Wed, 14 Oct 2026 21:41:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=tenstorrent.com; s=google; t=1792034317; x=1792639117; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=EN/ArQ6Yx4MUlXbkiimVC3SDuEG/l3A8pHqFVMBZYQk=;
- b=EVn3xQnKXDg/09mG/MKM1L2AejxXpMNYmkuDKtoH7beG7HyJq48K8270TVT4PgK7Rs
- AyXoKcfHY5UGPd01ZccrmoWzlJaAzQuCUqs8rzsS/nwd7D4MSlTGVNp6c4+0KKOdIeIF
- u1yfxOQj5+BOuUqA1MdJJ8NLBmT4IkvOefFO2XFY4aIZ+dOVWV4Y1D4X2IKwuquDgcID
- g7HZzqqcS0WGYVl3meZkMLkx8IuESUYxCkHfA/i9E64ce0poaZEqRu09JOZ6S6XD5ZOm
- 94Ml57HWeJVLuuR4i4Us09+zfGW2LrB9BycHIEVXb1jOuLp0wWeHi00yI5Erxep9zHpL
- zm2g==
+ d=gmail.com; s=20251104; t=1792039278; x=1792644078; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=+DZ1jsqwTfgH5aimMfmjoml+Aari6eVWbh1Wwpcjr+A=;
+ b=KcJQ56mmC2eXMgYfexlu1Z4wpcZtL4n8e/u46YqdYkcDbUA0EVoL5rhOauRbgq3MEo
+ SrfimHMrlTLcEcO3Lj7vaUCbUFxVISRGtifLU6aK6dXCknDf+5DepiJZfKH5AUvrErUT
+ 5onIBzG291bu27SRQSpGlKj2Misq/+ca68wxLp2FhDXLuoUzVT68e91ggrS8ybXQDa3Y
+ svlxFlnsOBPx1pAHJFfeABPyiAOrNxQCYaIrhBVKGQGm5HDJq1e7iUH06sUNwkyycrYA
+ YSt37oDKFoDFLm3umteZEtkbKnlhtJFJnORatGJgIsgZDoPouevRBmToITcK1oDF5VAa
+ ShsQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792034317; x=1792639117;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=EN/ArQ6Yx4MUlXbkiimVC3SDuEG/l3A8pHqFVMBZYQk=;
- b=1Br3D0Az3qP4is+WIkhdCo/gmyRB5TslE70JXUmdBbbMAzdIcxghinFgSFrJ8Aot1Z
- lctP5Bfakb6f88h+bm7Gg7OP1xZ96qzlnP03nnUOdewS2bhgsRcvFqlzB1EH2LTRgqMp
- kNLqKEhy+2FQATFJsStu0ILdcLKvtMdJ+i6z/tSXfX+8eID2B0tvfaYN1cpTXBHE18jb
- lBOdRd8EquWoe6O5L5FoAICv3GUf4NxpHNlhzhOg+dSaOuMEixw8HjEGa/LSQNhTgldx
- Yd3xtZuZCAyYkxEo1FuGg3SKvcXCEc/XmT8CDVCIH2JIC8J0Td6UcHMPptHpgPD2p32j
- eHlA==
+ d=1e100.net; s=20260707; t=1792039278; x=1792644078;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=+DZ1jsqwTfgH5aimMfmjoml+Aari6eVWbh1Wwpcjr+A=;
+ b=qDA8NuUuXHHF+WVVBBBXTkpMR3fepSGSkmxukgxClV0OCiQrriy3PKUw08/sNzUQB7
+ L0RSQSiZzbiO/l9J/pmceYUmnoqaKIrFrdOPN/RzNrSXCM1rBb8lkD6DrA4RFZ6khMoq
+ UTJMDEbG0IX/TR4XWqR7Qj07upOqOAOnJws5fv80eNoVZuQ4GNGorOd6ilrmEyywlaIn
+ Kqap/fvRE+KB7AgcEaVF0wa4GZesP3l7HJtdVVQaaaP47DofuIvf6vae9Z5ezDO3VfQc
+ DPKXRnqmvTRZcIqKyNqsZEOydB4F04s09xuKoPW8YnUU8reHc8Yryv+AKhNqJ1euMiVt
+ 2xDw==
 X-Forwarded-Encrypted: i=1;
- AKwUvBwPeBOPRSYwgY8HT6oATuayD/1gm8W2pGNYJUoVWrXB3WBTdTuIOnlMf6H+xXhzEps1bCB6EciivtO9@nongnu.org
-X-Gm-Message-State: AFq9FYKD0NzrTUXWq30eoncpIhH2aciJbmcDrmFvIPzcsh12p2eHTy7P
- XtIcmX1DGPgbuGKmVdc5ZIk4fcaQo8gKKCHBrZebTFBj7LER6z/6d9EwM4r0rYoeMTA=
-X-Gm-Gg: AYBFou3THR1DlxVXxXCbzlzzlOe/PMsR2tmuA7wTwLbP4srbNf4ll9DM5cW5CO3JFyh
- r3degbitvHHekLaenKSyzggCIxAML6jsCjy7kQm/2qGdJnkHQNpcEDO8J+5JFeyykd9gV+qsXx0
- Y1wlRtnUaj//J0F/6KIByJHRQGxwEXFtvycSWSAG6W71fsPVSl3uHXBxTa1PAZFCVRCUEjlpzOP
- eWfSXH5ij2yRadyyN5H41LwwS1zu+6hqpOpekb0h+IeiFtKEpQbTj4AfWgBFDnEwzVTCNGHlqjl
- q/uH6H2x4zSzFlaJxOPtNvCkdMC+qc5gecmCcAK+IG0nu/WowlMTs5lw6x2zd/gLoHbVFrftf/E
- 1lIN1zNUfx+Nm++xEo3KZxeyPUyQdevdrikkG1CIkkocFLzmn40qadyvZDTb2oYauHM2lwH4xSi
- AjPfwdc4AZ4HSfLz9nfUseVK+F5AYAQVArfl+6mi/Q9JdJQAgAaOowQ8D3miBRg+yneCShXblK5
- A0lDOMyzAXuhteHJcs7Mczk4NzY8urlO8PFQt4ozmRmTuA=
-X-Received: by 2002:a17:90b:3145:b0:3a6:f7be:fee6 with SMTP id
- 98e67ed59e1d1-3ab3a346e9dmr25023876a91.1.1792034317358; 
- Wed, 14 Oct 2026 20:18:37 -0700 (PDT)
-Received: from lima-default.tail89d63.ts.net ([159.196.41.205])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3ac93049ec2sm1321725a91.1.2026.10.14.20.18.29
+ AKwUvByRaHUwPo5KABuRjjr84cEJWcSIo0MBX53k1DElpqkg0vtyMXEVM0Egudi4/+56tP0AHLhroi+C6sYV@nongnu.org
+X-Gm-Message-State: AFq9FYKc+q6mafGX2NPpgqofAmdmDXB85acdctkAFl4gVqMTEUUURKgg
+ psmWqd+OMtW3Km8YCLfDDL6ljBJJfXBeKxBWspta421+Ojpt3FNBtvkE
+X-Gm-Gg: AYBFou0ALdzRBLbXfCMq8AGKKAxqMjojG6K3swOwrxF9FrJiybV09GCIB/iSdVrH6RK
+ gT10f0yf5FP3Zd98JrvwZ8waODyXyVqy7ivmuzhSL9MJHaNzbG9tnmdJicbGWlpdPnntoPi6gmd
+ pDfPJ9nTlzF9xTZYqeu4i878uDlturE1xdRgco3c0+GGYgLynVm9+M09qI4AjlftrkftwvwXdoV
+ rXCrJLYIq9ARIGRxGsPLRJNclTNDBN2diVirWPa1xPY/qjmshuRTU4n0Eg6c6gHuGR/fTOfbSnz
+ tYyz/9sUHhEncfvcrYzOB1cm7apY9MEq27Oj/x1rIbGv0V+ARLyy1EqB8GhyvIvwZal/g1QlwJZ
+ iYOtDihBh2H6dIpCGMRb/9zvqbgfJ/S2pBJOXGl3U5qeFDEnNPL7BXuuoOu9Kbxn0zbb7lVaPNK
+ Q91zxsEy9yDs+s30UAkUlnUi/txG1FY9Hre+KY8Bx2Jp7Tyw7b7qgwVlJl1JNpustkkQdOd9hJ9
+ 1bkNgvKrkpwe3DDzw==
+X-Received: by 2002:a05:701b:4541:10b0:144:ed03:8972 with SMTP id
+ a92af1059eb24-16a5dee12c8mr23761434c88.16.1792039277544; 
+ Wed, 14 Oct 2026 21:41:17 -0700 (PDT)
+Received: from DESKTOP-Q716RM7 ([103.94.185.75])
+ by smtp.googlemail.com with ESMTPSA id
+ a92af1059eb24-17dc865cbffsm16016982c88.6.2026.10.14.21.41.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 14 Oct 2026 20:18:35 -0700 (PDT)
-From: Portia Stephens <portias@oss.tenstorrent.com>
+ Wed, 14 Oct 2026 21:41:16 -0700 (PDT)
+From: Yonggang Luo <luoyonggang@gmail.com>
 To: qemu-devel@nongnu.org
-Cc: Nicholas Piggin <npiggin@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Chao Liu <chao.liu@processmission.com>,
- Alistair Francis <alistair.francis@wdc.com>, qemu-riscv@nongnu.org,
+Cc: Peter Maydell <peter.maydell@linaro.org>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Joel Stanley <joel@jms.id.au>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>,
- Richard Henderson <richard.henderson@linaro.org>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org,
+ David Hildenbrand <david@kernel.org>, Glenn Miles <milesg@linux.ibm.com>,
  Zhao Liu <zhao1.liu@intel.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Ilya Leoshkevich <iii@linux.ibm.com>, Nicholas Piggin <npiggin@gmail.com>,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Portia Stephens <portias@oss.tenstorrent.com>,
- Michael Ellerman <mpe@kernel.org>
-Subject: [PATCH 03/12] hw/riscv/atlantis: Move Ascalon into cluster struct
-Date: Thu, 15 Oct 2026 13:17:55 +1000
-Message-ID: <20261015031804.2406055-4-portias@oss.tenstorrent.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20261015031804.2406055-1-portias@oss.tenstorrent.com>
-References: <20261015031804.2406055-1-portias@oss.tenstorrent.com>
+ =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
+ qemu-ppc@nongnu.org, Cornelia Huck <cohuck@redhat.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
+ "Dr. David Alan Gilbert" <dave@treblig.org>,
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+ Bibo Mao <maobibo@loongson.cn>, Artyom Tarasenko <atar4qemu@gmail.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Song Gao <17746591750@163.com>, Chinmay Rath <rathc@linux.ibm.com>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ Brian Cain <brian.cain@oss.qualcomm.com>,
+ Aleksandar Rikalo <arikalo@gmail.com>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Eric Farman <farman@linux.ibm.com>,
+ Philippe Mathieu-Daude <philmd@mailo.com>,
+ Xianglai Li <lixianglai@loongson.cn>,
+ Chao Liu <chao.liu@processmission.com>, qemu-s390x@nongnu.org,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Matthew Rosato <mjrosato@linux.ibm.com>,
+ Aurelien Jarno <aurelien@aurel32.net>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Laurent Vivier <laurent@vivier.eu>,
+ Harsh Prateek Bora <harshpb@linux.ibm.com>,
+ Yoshinori Sato <yoshinori.sato@nifty.com>
+Subject: [PATCH] target-info: dispatch CPU QMP, dump, monitor,
+ and Angel semihosting
+Date: Thu, 15 Oct 2026 12:41:02 +0800
+Message-ID: <20261015044104.879-1-luoyonggang@gmail.com>
+X-Mailer: git-send-email 2.55.0.windows.3
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42a;
- envelope-from=portias@tenstorrent.com; helo=mail-pf1-x42a.google.com
-X-Spam_score_int: -19
-X-Spam_score: -2.0
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1335;
+ envelope-from=luoyonggang@gmail.com; helo=mail-dy1-x1335.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_NONE=-0.0001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -115,450 +132,1502 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The Atlantis SoC has 3 CPU clusters of different CPU types and with
-different memory views of the system; Ascalon, RCPU, and CPL. In preparation
-for adding additional CPU clusters, move the Ascalon state information
-into it's own device.
+Put query-cpu-definitions, dump notes, monitor, and Angel semihosting on
+TargetOps[SYS_EMU_TARGET__MAX] and look up by target_arch().
+Keep the table in target-ops.c and with a stub
 
-Signed-off-by: Portia Stephens <portias@oss.tenstorrent.com>
+- Register with a QEMU_ARCH_* bitmask so shared base-arch objects
+  can fill both slots (e.g. QEMU_ARCH_ARM is ARM|AARCH64).
+- TARGET_INFO_CPU_OP is type_init. A NULL member means no handler.
+- Drop stubs/qmp-cpu.c
+       stubs/hmp-cmd-info_tlb.c
+       stubs/hmp-cmd-info_mem.c
+       stubs/dump.c
+
+Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
 ---
- hw/riscv/tt_atlantis.c         | 191 ++++++++++++++++++++-------------
- include/hw/riscv/tt_atlantis.h |  25 +++--
- 2 files changed, 137 insertions(+), 79 deletions(-)
+ MAINTAINERS                           |  1 -
+ hw/core/cpu-system.c                  | 23 ++++++++++
+ hw/core/machine-qmp-cmds.c            | 27 ++++++++++++
+ include/qemu/target-ops.h             | 59 +++++++++++++++++++++++++
+ include/semihosting/common-semi.h     | 63 ++++++++++++++++++++++++---
+ meson.build                           |  1 +
+ monitor/hmp.c                         | 25 +++++++++++
+ stubs/dump.c                          | 27 ------------
+ stubs/hmp-cmd-info_mem.c              | 12 -----
+ stubs/hmp-cmd-info_tlb.c              | 12 -----
+ stubs/meson.build                     |  4 --
+ stubs/qmp-cpu.c                       | 21 ---------
+ target-ops.c                          | 49 +++++++++++++++++++++
+ target/arm/arch_dump.c                |  8 +++-
+ target/arm/arm-qmp-cmds.c             | 15 +++++--
+ target/arm/common-semi-target.c       | 26 ++++++++---
+ target/arm/meson.build                |  7 +--
+ target/hexagon/common-semi-target.c   | 26 ++++++++---
+ target/i386/arch_dump.c               |  8 +++-
+ target/i386/cpu-system.c              | 12 +++--
+ target/i386/cpu.c                     |  6 ++-
+ target/i386/monitor.c                 |  8 +++-
+ target/loongarch/arch_dump.c          |  8 +++-
+ target/loongarch/loongarch-qmp-cmds.c | 15 +++++--
+ target/m68k/monitor.c                 |  4 +-
+ target/mips/system/mips-qmp-cmds.c    | 15 +++----
+ target/ppc/arch_dump.c                |  8 +++-
+ target/ppc/monitor.c                  |  4 +-
+ target/ppc/ppc-qmp-cmds.c             | 15 +++----
+ target/riscv/arch_dump.c              |  8 +++-
+ target/riscv/common-semi-target.c     | 28 ++++++++----
+ target/riscv/meson.build              |  4 +-
+ target/riscv/monitor.c                |  4 +-
+ target/riscv/riscv-qmp-cmds.c         | 15 +++++--
+ target/s390x/arch_dump.c              |  8 +++-
+ target/s390x/cpu_models_system.c      | 15 +++++--
+ target/sh4/monitor.c                  |  4 +-
+ target/sparc/monitor.c                |  4 +-
+ target/xtensa/monitor.c               |  4 +-
+ 39 files changed, 428 insertions(+), 175 deletions(-)
+ create mode 100644 include/qemu/target-ops.h
+ delete mode 100644 stubs/dump.c
+ delete mode 100644 stubs/hmp-cmd-info_mem.c
+ delete mode 100644 stubs/hmp-cmd-info_tlb.c
+ delete mode 100644 stubs/qmp-cpu.c
+ create mode 100644 target-ops.c
 
-diff --git a/hw/riscv/tt_atlantis.c b/hw/riscv/tt_atlantis.c
-index 684e12195d..8f217088c6 100644
---- a/hw/riscv/tt_atlantis.c
-+++ b/hw/riscv/tt_atlantis.c
-@@ -436,6 +436,7 @@ static void finalize_fdt(void *fdt, RISCVHartArrayState *harts,
- static void create_fdt(TTAtlantisState *ams)
- {
-     MachineState *ms = MACHINE(ams);
-+    TTAscalonClusterState *ac = &ams->soc.ascalon;
-     int fdt_size = 0;
- 
-     ms->fdt = riscv_create_board_device_tree("Tenstorrent Atlantis RISC-V Machine",
-@@ -447,12 +448,13 @@ static void create_fdt(TTAtlantisState *ams)
- 
-     qemu_fdt_add_subnode(ms->fdt, "/aliases");
- 
--    create_fdt_pmu(ms->fdt, &ams->soc.cpus);
-+    create_fdt_pmu(ms->fdt, &ac->cpus);
+diff --git a/MAINTAINERS b/MAINTAINERS
+index fc60193aa3f..3d5e5d0f31a 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -3420,7 +3420,6 @@ F: include/system/dump-arch.h
+ F: include/system/dump.h
+ F: qapi/dump.json
+ F: scripts/dump-guest-memory.py
+-F: stubs/dump.c
+ F: docs/specs/vmcoreinfo.rst
+ F: tests/qtest/vmcoreinfo-test.c
+ F: tests/qtest/dump-test.c
+diff --git a/hw/core/cpu-system.c b/hw/core/cpu-system.c
+index a64e8c2b687..c688e39c5bb 100644
+--- a/hw/core/cpu-system.c
++++ b/hw/core/cpu-system.c
+@@ -24,7 +24,9 @@
+ #include "exec/cputlb.h"
+ #include "exec/target_page.h"
+ #include "system/memory.h"
++#include "system/dump-arch.h"
+ #include "qemu/target-info.h"
++#include "qemu/target-ops.h"
+ #include "hw/core/boards.h"
+ #include "hw/core/qdev.h"
+ #include "hw/core/qdev-properties.h"
+@@ -130,6 +132,27 @@ int cpu_write_elf64_note(WriteCoreDumpFunction f, CPUState *cpu,
+     return (*cpu->cc->sysemu_ops->write_elf64_note)(f, cpu, cpuid, opaque);
  }
  
- static void load_fdt(TTAtlantisState *ams)
++int cpu_get_dump_info(ArchDumpInfo *info,
++                      const struct GuestPhysBlockList *guest_phys_blocks)
++{
++    const TargetOps *ops = target_ops();
++
++    if (!ops->get_dump_info) {
++        return -1;
++    }
++    return ops->get_dump_info(info, guest_phys_blocks);
++}
++
++ssize_t cpu_get_note_size(int class, int machine, int nr_cpus)
++{
++    const TargetOps *ops = target_ops();
++
++    if (!ops->get_note_size) {
++        return -1;
++    }
++    return ops->get_note_size(class, machine, nr_cpus);
++}
++
+ bool cpu_internal_is_big_endian(CPUState *cpu)
  {
-     MachineState *ms = MACHINE(ams);
-+    TTAscalonClusterState *ac = &ams->soc.ascalon;
-     char **node_path;
+     if (cpu->cc->sysemu_ops->internal_is_big_endian) {
+diff --git a/hw/core/machine-qmp-cmds.c b/hw/core/machine-qmp-cmds.c
+index 9c08b17510a..27a9900d125 100644
+--- a/hw/core/machine-qmp-cmds.c
++++ b/hw/core/machine-qmp-cmds.c
+@@ -22,6 +22,7 @@
+ #include "qapi/type-helpers.h"
+ #include "qemu/uuid.h"
+ #include "qemu/target-info.h"
++#include "qemu/target-ops.h"
+ #include "qemu/target-info-qapi.h"
+ #include "qom/qom-qobject.h"
+ #include "system/hostmem.h"
+@@ -455,3 +456,29 @@ void qmp_inject_nmi(Error **errp)
+ {
+     nmi_inject(errp);
+ }
++
++CpuDefinitionInfoList *qmp_query_cpu_definitions(Error **errp)
++{
++    const TargetOps *ops = target_ops();
++
++    if (!ops->query_cpu_definitions) {
++        error_setg(errp,
++                   "CPU model definitions are not supported on this target");
++        return NULL;
++    }
++    return ops->query_cpu_definitions(errp);
++}
++
++CpuModelExpansionInfo *qmp_query_cpu_model_expansion(CpuModelExpansionType type,
++                                                     CpuModelInfo *model,
++                                                     Error **errp)
++{
++    const TargetOps *ops = target_ops();
++
++    if (!ops->query_cpu_model_expansion) {
++        error_setg(errp,
++                   "CPU model expansion is not supported on this target");
++        return NULL;
++    }
++    return ops->query_cpu_model_expansion(type, model, errp);
++}
+diff --git a/include/qemu/target-ops.h b/include/qemu/target-ops.h
+new file mode 100644
+index 00000000000..f657c6fa054
+--- /dev/null
++++ b/include/qemu/target-ops.h
+@@ -0,0 +1,59 @@
++/*
++ * QEMU target info QOM types
++ *
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ */
++
++#ifndef QEMU_TARGET_OPS_H
++#define QEMU_TARGET_OPS_H
++
++#include <stddef.h>
++
++#include "qapi/error.h"
++#include "qemu/base-arch-defs.h"
++#include "qemu/target-info-def.h"
++#include "qom/object.h"
++
++typedef struct ArchDumpInfo ArchDumpInfo;
++struct GuestPhysBlockList;
++typedef struct CPUSemihostingOps CPUSemihostingOps;
++typedef struct MonitorHMP MonitorHMP;
++
++typedef struct TargetOps {
++    void (*info_tlb)(MonitorHMP *hmp, const QDict *qdict);
++    void (*info_mem)(MonitorHMP *hmp, const QDict *qdict);
++    CpuDefinitionInfoList *(*query_cpu_definitions)(Error **errp);
++    CpuModelExpansionInfo *(*query_cpu_model_expansion)(
++        CpuModelExpansionType type, CpuModelInfo *model, Error **errp);
++    int (*get_dump_info)(ArchDumpInfo *info,
++                         const struct GuestPhysBlockList *guest_phys_blocks);
++    ssize_t (*get_note_size)(int class, int machine, int nr_cpus);
++    const CPUSemihostingOps *semihosting;
++} TargetOps;
++
++/**
++ * target_ops_register:
++ * @arch_bitmask: QEMU_ARCH_* bitmask of SysEmuTarget slots to fill
++ * @offset: offsetof(TargetOps, member) for the slot being filled
++ * @impl: handler or ops table stored at that offset
++ *
++ * Combined binaries merge one member at a time so HMP, QMP, dump, and
++ * semihosting (or split QMP files) can register independently.
++ * Stores into every map[SysEmuTarget] bit set in @arch_bitmask
++ * (QEMU_ARCH_ARM fills ARM and AARCH64). Lookup is
++ * map[target_arch()].
++ */
++void target_ops_register(uint64_t arch_bitmask, size_t offset,
++                         void *impl);
++const TargetOps *target_ops(void);
++
++#define TARGET_OPS_REGISTER(arch_bitmask, member, impl)                       \
++static void glue(target_op_, impl)(void)                                      \
++{                                                                             \
++    target_ops_register((arch_bitmask),                                       \
++                        offsetof(TargetOps, member),                          \
++                        (void *)&(impl));                                     \
++}                                                                             \
++type_init(glue(target_op_, impl))
++
++#endif /* QEMU_TARGET_OPS_H */
+diff --git a/include/semihosting/common-semi.h b/include/semihosting/common-semi.h
+index 1e7699d7bbd..de54276b1dc 100644
+--- a/include/semihosting/common-semi.h
++++ b/include/semihosting/common-semi.h
+@@ -34,14 +34,63 @@
+ #ifndef COMMON_SEMI_H
+ #define COMMON_SEMI_H
+ 
++#include "exec/cpu-common.h"
++#include "qemu/target-ops.h"
++
++typedef struct CPUSemihostingOps {
++    uint64_t (*arg)(CPUState *cs, int argno);
++    void (*set_ret)(CPUState *cs, uint64_t ret);
++    void (*set_err)(CPUState *cs, int err);
++    bool (*is_64bit)(CPUArchState *env);
++    bool (*sys_exit_is_extended)(CPUState *cs);
++    uint64_t (*stack_bottom)(CPUState *cs);
++    bool (*has_synccache)(CPUArchState *env);
++} CPUSemihostingOps;
++
+ void common_semi_cb(CPUState *cs, uint64_t ret, int err);
+ void do_common_semihosting(CPUState *cs);
+-uint64_t common_semi_arg(CPUState *cs, int argno);
+-void common_semi_set_ret(CPUState *cs, uint64_t ret);
+-void common_semi_set_err(CPUState *cs, int err);
+-bool is_64bit_semihosting(CPUArchState *env);
+-bool common_semi_sys_exit_is_extended(CPUState *cs);
+-uint64_t common_semi_stack_bottom(CPUState *cs);
+-bool common_semi_has_synccache(CPUArchState *env);
++
++static inline const CPUSemihostingOps *cpu_semihosting_ops(void)
++{
++    const CPUSemihostingOps *ops = target_ops()->semihosting;
++
++    g_assert(ops);
++    return ops;
++}
++
++static inline uint64_t common_semi_arg(CPUState *cs, int argno)
++{
++    return cpu_semihosting_ops()->arg(cs, argno);
++}
++
++static inline void common_semi_set_ret(CPUState *cs, uint64_t ret)
++{
++    cpu_semihosting_ops()->set_ret(cs, ret);
++}
++
++static inline void common_semi_set_err(CPUState *cs, int err)
++{
++    cpu_semihosting_ops()->set_err(cs, err);
++}
++
++static inline bool is_64bit_semihosting(CPUArchState *env)
++{
++    return cpu_semihosting_ops()->is_64bit(env);
++}
++
++static inline bool common_semi_sys_exit_is_extended(CPUState *cs)
++{
++    return cpu_semihosting_ops()->sys_exit_is_extended(cs);
++}
++
++static inline uint64_t common_semi_stack_bottom(CPUState *cs)
++{
++    return cpu_semihosting_ops()->stack_bottom(cs);
++}
++
++static inline bool common_semi_has_synccache(CPUArchState *env)
++{
++    return cpu_semihosting_ops()->has_synccache(env);
++}
+ 
+ #endif /* COMMON_SEMI_H */
+diff --git a/meson.build b/meson.build
+index 255c887e8e6..faa3f26afa1 100644
+--- a/meson.build
++++ b/meson.build
+@@ -3853,6 +3853,7 @@ if have_block
+ endif
+ 
+ common_ss.add(files('cpu-common.c'))
++common_ss.add(files('target-ops.c'))
+ user_ss.add(files('cpu-target.c'))
+ system_ss.add(files('cpu-target.c'))
+ 
+diff --git a/monitor/hmp.c b/monitor/hmp.c
+index 488ec23937d..eadeec1d807 100644
+--- a/monitor/hmp.c
++++ b/monitor/hmp.c
+@@ -39,6 +39,7 @@
+ #include "qemu/option.h"
+ #include "qemu/base-arch-defs.h"
+ #include "qemu/target-info.h"
++#include "qemu/target-ops.h"
+ #include "qemu/units.h"
+ #include "qapi/error.h"
+ #include "qom/object_interfaces.h"
+@@ -58,6 +59,30 @@ MonitorHMP *monitor_cur_hmp(void)
+     return NULL;
+ }
+ 
++void hmp_info_mem(MonitorHMP *hmp, const QDict *qdict)
++{
++    const TargetOps *ops = target_ops();
++
++    if (ops->info_mem) {
++        ops->info_mem(hmp, qdict);
++    } else {
++        monitor_hmp_printf(hmp,
++                           "info mem is not supported on this architecture\n");
++    }
++}
++
++void hmp_info_tlb(MonitorHMP *hmp, const QDict *qdict)
++{
++    const TargetOps *ops = target_ops();
++
++    if (ops->info_tlb) {
++        ops->info_tlb(hmp, qdict);
++    } else {
++        monitor_hmp_printf(hmp,
++                           "info tlb is not supported on this architecture\n");
++    }
++}
++
+ static void monitor_hmp_finalize(Object *obj)
+ {
+     MonitorHMP *hmp = MONITOR_HMP(obj);
+diff --git a/stubs/dump.c b/stubs/dump.c
+deleted file mode 100644
+index df7897b72b1..00000000000
+--- a/stubs/dump.c
++++ /dev/null
+@@ -1,27 +0,0 @@
+-/*
+- * QEMU dump
+- *
+- * Copyright Fujitsu, Corp. 2011, 2012
+- *
+- * Authors:
+- *     Wen Congyang <wency@cn.fujitsu.com>
+- *
+- * This work is licensed under the terms of the GNU GPL, version 2 or later.
+- * See the COPYING file in the top-level directory.
+- *
+- */
+-
+-#include "qemu/osdep.h"
+-#include "system/dump-arch.h"
+-
+-int cpu_get_dump_info(ArchDumpInfo *info,
+-                      const struct GuestPhysBlockList *guest_phys_blocks)
+-{
+-    return -1;
+-}
+-
+-ssize_t cpu_get_note_size(int class, int machine, int nr_cpus)
+-{
+-    return -1;
+-}
+-
+diff --git a/stubs/hmp-cmd-info_mem.c b/stubs/hmp-cmd-info_mem.c
+deleted file mode 100644
+index 8a53e367a9f..00000000000
+--- a/stubs/hmp-cmd-info_mem.c
++++ /dev/null
+@@ -1,12 +0,0 @@
+-/*
+- * Human Monitor 'info mem' stub
+- *
+- * Copyright (c) Linaro
+- *
+- * SPDX-License-Identifier: GPL-2.0-or-later
+- */
+-
+-#include "qemu/osdep.h"
+-#include "monitor/hmp.h"
+-
+-HMP_STUB(info_mem)
+diff --git a/stubs/hmp-cmd-info_tlb.c b/stubs/hmp-cmd-info_tlb.c
+deleted file mode 100644
+index a144e68c1c7..00000000000
+--- a/stubs/hmp-cmd-info_tlb.c
++++ /dev/null
+@@ -1,12 +0,0 @@
+-/*
+- * Human Monitor 'info tlb' stub
+- *
+- * Copyright (c) Linaro
+- *
+- * SPDX-License-Identifier: GPL-2.0-or-later
+- */
+-
+-#include "qemu/osdep.h"
+-#include "monitor/hmp.h"
+-
+-HMP_STUB(info_tlb)
+diff --git a/stubs/meson.build b/stubs/meson.build
+index 29b6644b254..41d3f114df9 100644
+--- a/stubs/meson.build
++++ b/stubs/meson.build
+@@ -71,7 +71,6 @@ if have_system
+   # adding more of these.  If the symbol is used in specific_ss,
+   # in particular, consider defining a preprocessor macro via
+   # Kconfig or configs/targets/.
+-  stub_ss.add(files('dump.c'))
+   stub_ss.add(files('cmos.c'))
+   stub_ss.add(files('fw_cfg.c'))
+   if igvm.found()
+@@ -85,13 +84,10 @@ if have_system
+   stub_ss.add(files('qmp-i386-sev.c'))
+   stub_ss.add(files('qmp-i386-sgx.c'))
+   stub_ss.add(files('qmp-i386-xen.c'))
+-  stub_ss.add(files('qmp-cpu.c'))
+   stub_ss.add(files('qmp-cpu-s390x.c'))
+   stub_ss.add(files('qmp-cpu-s390x-kvm.c'))
+   if have_hmp
+-    stub_ss.add(files('hmp-cmd-info_mem.c'))
+     stub_ss.add(files('hmp-cmd-info_sev.c'))
+-    stub_ss.add(files('hmp-cmd-info_tlb.c'))
+     stub_ss.add(files('hmp-cmds-hw-s390x.c'))
+     stub_ss.add(files('hmp-cmds-target-i386.c'))
+   endif
+diff --git a/stubs/qmp-cpu.c b/stubs/qmp-cpu.c
+deleted file mode 100644
+index a8c7ee89b9d..00000000000
+--- a/stubs/qmp-cpu.c
++++ /dev/null
+@@ -1,21 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0-or-later */
+-
+-#include "qemu/osdep.h"
+-#include "qapi/error.h"
+-#include "qapi/qapi-commands-machine.h"
+-
+-CpuModelExpansionInfo *
+-qmp_query_cpu_model_expansion(CpuModelExpansionType type,
+-                              CpuModelInfo *model,
+-                              Error **errp)
+-{
+-    error_setg(errp, "CPU model expansion is not supported on this target");
+-    return NULL;
+-}
+-
+-CpuDefinitionInfoList *
+-qmp_query_cpu_definitions(Error **errp)
+-{
+-    error_setg(errp, "CPU model definitions are not supported on this target");
+-    return NULL;
+-}
+diff --git a/target-ops.c b/target-ops.c
+new file mode 100644
+index 00000000000..84ec427b680
+--- /dev/null
++++ b/target-ops.c
+@@ -0,0 +1,49 @@
++/*
++ * QEMU target CPU ops table
++ *
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ */
++
++#include "qemu/osdep.h"
++#include "qemu/error-report.h"
++#include "qemu/target-info-qapi.h"
++#include "qemu/target-ops.h"
++
++static TargetOps target_ops_table[SYS_EMU_TARGET__MAX];
++
++static void target_ops_store(SysEmuTarget arch, size_t offset, void *impl)
++{
++    void **slot;
++
++    slot = (void **)((char *)&target_ops_table[arch] + offset);
++    if (*slot && *slot != impl) {
++        error_report("TargetOps already registered for %s (offset %zu)",
++                     SysEmuTarget_str(arch), offset);
++        exit(1);
++    }
++    *slot = impl;
++}
++
++void target_ops_register(uint64_t arch_bitmask, size_t offset,
++                         void *impl)
++{
++    unsigned arch;
++
++    g_assert(offset + sizeof(void *) <= sizeof(TargetOps));
++    g_assert((offset % sizeof(void *)) == 0);
++    g_assert(arch_bitmask);
++
++    for (arch = 0; arch < SYS_EMU_TARGET__MAX; arch++) {
++        if (arch_bitmask & (1ULL << arch)) {
++            target_ops_store(arch, offset, impl);
++        }
++    }
++}
++
++const TargetOps *target_ops(void)
++{
++    SysEmuTarget arch = target_arch();
++
++    g_assert((unsigned)arch < SYS_EMU_TARGET__MAX);
++    return &target_ops_table[arch];
++}
+diff --git a/target/arm/arch_dump.c b/target/arm/arch_dump.c
+index 1dd79849c13..feef7bc290b 100644
+--- a/target/arm/arch_dump.c
++++ b/target/arm/arch_dump.c
+@@ -24,6 +24,7 @@
+ #include "system/dump.h"
+ #include "cpu-features.h"
+ #include "internals.h"
++#include "qemu/target-ops.h"
+ 
+ /* struct user_pt_regs from arch/arm64/include/uapi/asm/ptrace.h */
+ struct aarch64_user_regs {
+@@ -385,7 +386,7 @@ int arm_cpu_write_elf32_note(WriteCoreDumpFunction f, CPUState *cs,
+     return 0;
+ }
+ 
+-int cpu_get_dump_info(ArchDumpInfo *info,
++static int arm_get_dump_info(ArchDumpInfo *info,
+                       const GuestPhysBlockList *guest_phys_blocks)
+ {
+     ARMCPU *cpu;
+@@ -439,7 +440,7 @@ int cpu_get_dump_info(ArchDumpInfo *info,
+     return 0;
+ }
+ 
+-ssize_t cpu_get_note_size(int class, int machine, int nr_cpus)
++static ssize_t arm_get_note_size(int class, int machine, int nr_cpus)
+ {
+     ARMCPU *cpu = ARM_CPU(first_cpu);
+     size_t note_size;
+@@ -459,3 +460,6 @@ ssize_t cpu_get_note_size(int class, int machine, int nr_cpus)
+ 
+     return note_size * nr_cpus;
+ }
++
++TARGET_OPS_REGISTER(QEMU_ARCH_ARM, get_dump_info, arm_get_dump_info);
++TARGET_OPS_REGISTER(QEMU_ARCH_ARM, get_note_size, arm_get_note_size);
+diff --git a/target/arm/arm-qmp-cmds.c b/target/arm/arm-qmp-cmds.c
+index 83ec95c290f..7fbe64b5252 100644
+--- a/target/arm/arm-qmp-cmds.c
++++ b/target/arm/arm-qmp-cmds.c
+@@ -32,6 +32,7 @@
+ #include "qobject/qdict.h"
+ #include "qom/qom-qobject.h"
+ #include "cpu.h"
++#include "qemu/target-ops.h"
+ 
+ static GICCapability *gic_cap_new(int version)
+ {
+@@ -79,9 +80,10 @@ static const char *cpu_model_advertised_features[] = {
+     NULL
+ };
+ 
+-CpuModelExpansionInfo *qmp_query_cpu_model_expansion(CpuModelExpansionType type,
+-                                                     CpuModelInfo *model,
+-                                                     Error **errp)
++static CpuModelExpansionInfo *
++arm_query_cpu_model_expansion(CpuModelExpansionType type,
++                              CpuModelInfo *model,
++                              Error **errp)
+ {
+     CpuModelExpansionInfo *expansion_info;
+     const QDict *qdict_in;
+@@ -216,7 +218,7 @@ static void arm_cpu_add_definition(gpointer data, gpointer user_data)
+     QAPI_LIST_PREPEND(*cpu_list, info);
+ }
+ 
+-CpuDefinitionInfoList *qmp_query_cpu_definitions(Error **errp)
++static CpuDefinitionInfoList *arm_query_cpu_definitions(Error **errp)
+ {
+     CpuDefinitionInfoList *cpu_list = NULL;
+     GSList *list;
+@@ -227,3 +229,8 @@ CpuDefinitionInfoList *qmp_query_cpu_definitions(Error **errp)
+ 
+     return cpu_list;
+ }
++
++TARGET_OPS_REGISTER(QEMU_ARCH_ARM, query_cpu_definitions,
++                    arm_query_cpu_definitions);
++TARGET_OPS_REGISTER(QEMU_ARCH_ARM, query_cpu_model_expansion,
++                    arm_query_cpu_model_expansion);
+diff --git a/target/arm/common-semi-target.c b/target/arm/common-semi-target.c
+index 38d52deb3d6..f57715f378f 100644
+--- a/target/arm/common-semi-target.c
++++ b/target/arm/common-semi-target.c
+@@ -12,7 +12,7 @@
+ #include "semihosting/common-semi.h"
+ #include "target/arm/cpu-qom.h"
+ 
+-uint64_t common_semi_arg(CPUState *cs, int argno)
++static uint64_t arm_common_semi_arg(CPUState *cs, int argno)
+ {
+     ARMCPU *cpu = ARM_CPU(cs);
+     CPUARMState *env = &cpu->env;
+@@ -23,7 +23,7 @@ uint64_t common_semi_arg(CPUState *cs, int argno)
+     }
+ }
+ 
+-void common_semi_set_ret(CPUState *cs, uint64_t ret)
++static void arm_common_semi_set_ret(CPUState *cs, uint64_t ret)
+ {
+     ARMCPU *cpu = ARM_CPU(cs);
+     CPUARMState *env = &cpu->env;
+@@ -34,29 +34,41 @@ void common_semi_set_ret(CPUState *cs, uint64_t ret)
+     }
+ }
+ 
+-void common_semi_set_err(CPUState *cs, int err)
++static void arm_common_semi_set_err(CPUState *cs, int err)
+ {
+ }
+ 
+-bool common_semi_sys_exit_is_extended(CPUState *cs)
++static bool arm_common_semi_sys_exit_is_extended(CPUState *cs)
+ {
+     return is_a64(cpu_env(cs));
+ }
+ 
+-bool is_64bit_semihosting(CPUArchState *env)
++static bool arm_is_64bit_semihosting(CPUArchState *env)
+ {
+     return is_a64(env);
+ }
+ 
+-uint64_t common_semi_stack_bottom(CPUState *cs)
++static uint64_t arm_common_semi_stack_bottom(CPUState *cs)
+ {
+     ARMCPU *cpu = ARM_CPU(cs);
+     CPUARMState *env = &cpu->env;
+     return is_a64(env) ? env->xregs[31] : env->regs[13];
+ }
+ 
+-bool common_semi_has_synccache(CPUArchState *env)
++static bool arm_common_semi_has_synccache(CPUArchState *env)
+ {
+     /* Ok for A64, invalid for A32/T32 */
+     return is_a64(env);
+ }
++
++static const CPUSemihostingOps arm_semihosting_ops = {
++    .arg = arm_common_semi_arg,
++    .set_ret = arm_common_semi_set_ret,
++    .set_err = arm_common_semi_set_err,
++    .is_64bit = arm_is_64bit_semihosting,
++    .sys_exit_is_extended = arm_common_semi_sys_exit_is_extended,
++    .stack_bottom = arm_common_semi_stack_bottom,
++    .has_synccache = arm_common_semi_has_synccache,
++};
++
++TARGET_OPS_REGISTER(QEMU_ARCH_ARM, semihosting, arm_semihosting_ops);
+diff --git a/target/arm/meson.build b/target/arm/meson.build
+index 0369f96b4cc..dfcec55bd97 100644
+--- a/target/arm/meson.build
++++ b/target/arm/meson.build
+@@ -44,13 +44,10 @@ arm_stubs_ss.add(files(
+ arm_user_ss.add(files(
+   'el2-stubs.c',
+   'cpregs-omap-stub.c',
++  'common-semi-target.c',
+ ))
+-arm_user_ss.add(when: 'CONFIG_ARM_COMPATIBLE_SEMIHOSTING',
+-		        if_true: files('common-semi-target.c'))
+ 
+-arm_common_system_ss.add(files('cpu.c'))
+-arm_common_system_ss.add(when: 'CONFIG_ARM_COMPATIBLE_SEMIHOSTING',
+-		                 if_true: files('common-semi-target.c'))
++arm_common_system_ss.add(files('cpu.c', 'common-semi-target.c'))
+ arm_common_system_ss.add(files(
+   'arch_dump.c',
+   'arm-powerctl.c',
+diff --git a/target/hexagon/common-semi-target.c b/target/hexagon/common-semi-target.c
+index 210d33e54e2..86b6e1bcff4 100644
+--- a/target/hexagon/common-semi-target.c
++++ b/target/hexagon/common-semi-target.c
+@@ -11,41 +11,53 @@
+ #include "cpu_helper.h"
+ #include "semihosting/common-semi.h"
+ 
+-uint64_t common_semi_arg(CPUState *cs, int argno)
++static uint64_t hexagon_common_semi_arg(CPUState *cs, int argno)
+ {
+     CPUHexagonState *env = cpu_env(cs);
+     return env->gpr[HEX_REG_R00 + argno];
+ }
+ 
+-void common_semi_set_ret(CPUState *cs, uint64_t ret)
++static void hexagon_common_semi_set_ret(CPUState *cs, uint64_t ret)
+ {
+     CPUHexagonState *env = cpu_env(cs);
+     env->gpr[HEX_REG_R00] = ret;
+ }
+ 
+-void common_semi_set_err(CPUState *cs, int err)
++static void hexagon_common_semi_set_err(CPUState *cs, int err)
+ {
+     CPUHexagonState *env = cpu_env(cs);
+     env->gpr[HEX_REG_R01] = err;
+ }
+ 
+-bool common_semi_sys_exit_is_extended(CPUState *cs)
++static bool hexagon_common_semi_sys_exit_is_extended(CPUState *cs)
+ {
+     return false;
+ }
+ 
+-bool is_64bit_semihosting(CPUArchState *env)
++static bool hexagon_is_64bit_semihosting(CPUArchState *env)
+ {
+     return false;
+ }
+ 
+-uint64_t common_semi_stack_bottom(CPUState *cs)
++static uint64_t hexagon_common_semi_stack_bottom(CPUState *cs)
+ {
+     CPUHexagonState *env = cpu_env(cs);
+     return env->gpr[HEX_REG_SP];
+ }
+ 
+-bool common_semi_has_synccache(CPUArchState *env)
++static bool hexagon_common_semi_has_synccache(CPUArchState *env)
+ {
+     return false;
+ }
++
++static const CPUSemihostingOps hexagon_semihosting_ops = {
++    .arg = hexagon_common_semi_arg,
++    .set_ret = hexagon_common_semi_set_ret,
++    .set_err = hexagon_common_semi_set_err,
++    .is_64bit = hexagon_is_64bit_semihosting,
++    .sys_exit_is_extended = hexagon_common_semi_sys_exit_is_extended,
++    .stack_bottom = hexagon_common_semi_stack_bottom,
++    .has_synccache = hexagon_common_semi_has_synccache,
++};
++
++TARGET_OPS_REGISTER(QEMU_ARCH_HEXAGON, semihosting, hexagon_semihosting_ops);
+diff --git a/target/i386/arch_dump.c b/target/i386/arch_dump.c
+index 16e47c4747d..2a035551ba6 100644
+--- a/target/i386/arch_dump.c
++++ b/target/i386/arch_dump.c
+@@ -16,6 +16,7 @@
+ #include "system/dump.h"
+ #include "elf.h"
+ #include "system/memory_mapping.h"
++#include "qemu/target-ops.h"
+ 
+ #define ELF_NOTE_SIZE(hdr_size, name_size, desc_size)   \
+     ((DIV_ROUND_UP((hdr_size), 4)                       \
+@@ -394,7 +395,7 @@ int x86_cpu_write_elf32_qemunote(WriteCoreDumpFunction f, CPUState *cs,
+     return cpu_write_qemu_note(f, &cpu->env, s, 0);
+ }
+ 
+-int cpu_get_dump_info(ArchDumpInfo *info,
++static int x86_get_dump_info(ArchDumpInfo *info,
+                       const GuestPhysBlockList *guest_phys_blocks)
+ {
+     bool lma = false;
+@@ -429,7 +430,7 @@ int cpu_get_dump_info(ArchDumpInfo *info,
+     return 0;
+ }
+ 
+-ssize_t cpu_get_note_size(int class, int machine, int nr_cpus)
++static ssize_t x86_get_note_size(int class, int machine, int nr_cpus)
+ {
+     int name_size = 5; /* "CORE" or "QEMU" */
+     size_t elf_note_size = 0;
+@@ -459,3 +460,6 @@ ssize_t cpu_get_note_size(int class, int machine, int nr_cpus)
+ 
+     return (elf_note_size + qemu_note_size) * nr_cpus;
+ }
++
++TARGET_OPS_REGISTER(QEMU_ARCH_I386, get_dump_info, x86_get_dump_info);
++TARGET_OPS_REGISTER(QEMU_ARCH_I386, get_note_size, x86_get_note_size);
+diff --git a/target/i386/cpu-system.c b/target/i386/cpu-system.c
+index c8bbf0cbafd..e3645a96f08 100644
+--- a/target/i386/cpu-system.c
++++ b/target/i386/cpu-system.c
+@@ -29,6 +29,7 @@
+ #include "qapi/qapi-commands-machine.h"
+ 
+ #include "cpu-internal.h"
++#include "qemu/target-ops.h"
+ 
+ /* Return a QDict containing keys for all properties that can be included
+  * in static expansion of CPU models. All properties set by x86_cpu_load_model()
+@@ -188,10 +189,10 @@ out:
+     return xc;
+ }
+ 
+-CpuModelExpansionInfo *
+-qmp_query_cpu_model_expansion(CpuModelExpansionType type,
+-                                                      CpuModelInfo *model,
+-                                                      Error **errp)
++static CpuModelExpansionInfo *
++x86_query_cpu_model_expansion(CpuModelExpansionType type,
++                              CpuModelInfo *model,
++                              Error **errp)
+ {
+     X86CPU *xc = NULL;
      Error *err = NULL;
-     int fdt_size = 0;
-@@ -478,18 +480,19 @@ static void load_fdt(TTAtlantisState *ams)
-         g_strfreev(node_path);
-     }
- 
--    create_fdt_memory(ms->fdt, ams->soc.memmap, ms->ram_size);
-+    create_fdt_memory(ms->fdt, ac->memmap, ms->ram_size);
+@@ -241,6 +242,9 @@ out:
+     return ret;
  }
  
- static void tt_atlantis_machine_done(Notifier *n, void *data)
++TARGET_OPS_REGISTER(QEMU_ARCH_I386, query_cpu_model_expansion,
++                    x86_query_cpu_model_expansion);
++
+ void cpu_clear_apic_feature(CPUX86State *env)
  {
-     TTAtlantisState *ams = container_of(n, TTAtlantisState, machine_done);
-     TTAtlantisSoCState *s = &ams->soc;
-+    TTAscalonClusterState *ac = &s->ascalon;
-     MachineState *machine = MACHINE(ams);
--    hwaddr start_addr = s->memmap[TT_ATL_DDR_LO].base;
-+    hwaddr start_addr = ac->memmap[TT_ATL_DDR_LO].base;
-     hwaddr mem_size;
-     target_ulong firmware_end_addr, kernel_start_addr;
--    const char *firmware_name = riscv_default_firmware_name(&s->cpus);
-+    const char *firmware_name = riscv_default_firmware_name(&ac->cpus);
-     uint64_t fdt_load_addr;
-     uint64_t kernel_entry;
-     RISCVBootInfo boot_info;
-@@ -499,15 +502,16 @@ static void tt_atlantis_machine_done(Notifier *n, void *data)
-      * dynamic sysbus devices. Our FDT needs to be finalized.
-      */
-     if (machine->dtb == NULL) {
--        finalize_fdt(machine->fdt, &s->cpus, s->memmap, machine->ram_size);
-+        finalize_fdt(machine->fdt, &ac->cpus, ac->memmap,
-+                     machine->ram_size);
-     }
- 
-     mem_size = machine->ram_size;
--    if (mem_size > s->memmap[TT_ATL_DDR_LO].size) {
--        mem_size = s->memmap[TT_ATL_DDR_LO].size;
-+    if (mem_size > ac->memmap[TT_ATL_DDR_LO].size) {
-+        mem_size = ac->memmap[TT_ATL_DDR_LO].size;
-     }
--    riscv_boot_info_init_discontig_mem(&boot_info, &s->cpus,
--                                       s->memmap[TT_ATL_DDR_LO].base,
-+    riscv_boot_info_init_discontig_mem(&boot_info, &ac->cpus,
-+                                       ac->memmap[TT_ATL_DDR_LO].base,
-                                        mem_size);
- 
-     firmware_end_addr = riscv_find_and_load_firmware(machine, &boot_info,
-@@ -530,15 +534,15 @@ static void tt_atlantis_machine_done(Notifier *n, void *data)
-         kernel_entry = kernel_start_addr;
-     }
- 
--    fdt_load_addr = riscv_compute_fdt_addr(s->memmap[TT_ATL_DDR_LO].base,
--                                           s->memmap[TT_ATL_DDR_LO].size,
-+    fdt_load_addr = riscv_compute_fdt_addr(ac->memmap[TT_ATL_DDR_LO].base,
-+                                           ac->memmap[TT_ATL_DDR_LO].size,
-                                            machine, &boot_info);
-     riscv_load_fdt(fdt_load_addr, machine->fdt);
- 
-     /* load the reset vector */
--    riscv_setup_rom_reset_vec(machine, &s->cpus, start_addr,
--                              s->memmap[TT_ATL_BOOTROM].base,
--                              s->memmap[TT_ATL_BOOTROM].size,
-+    riscv_setup_rom_reset_vec(machine, &ac->cpus, start_addr,
-+                              ac->memmap[TT_ATL_BOOTROM].base,
-+                              ac->memmap[TT_ATL_BOOTROM].size,
-                               kernel_entry,
-                               fdt_load_addr);
- }
-@@ -548,11 +552,69 @@ static inline int tt_atlantis_uart_index(int uart_dev)
-     return uart_dev - TT_ATL_UART0;
+     env->features[FEAT_1_EDX] &= ~CPUID_APIC;
+diff --git a/target/i386/cpu.c b/target/i386/cpu.c
+index 74eebeabd7a..b240621c2b2 100644
+--- a/target/i386/cpu.c
++++ b/target/i386/cpu.c
+@@ -48,6 +48,7 @@
+ #include "system/address-spaces.h"
+ #include "hw/core/boards.h"
+ #include "hw/i386/sgx-epc.h"
++#include "qemu/target-ops.h"
+ #endif
+ #include "system/qtest.h"
+ #include "tcg/tcg-cpu.h"
+@@ -8191,7 +8192,7 @@ static void x86_cpu_definition_entry(gpointer data, gpointer user_data)
+     QAPI_LIST_PREPEND(*cpu_list, info);
  }
  
-+static void tt_ascalon_cluster_init(Object *obj)
-+{
-+    TTAscalonClusterState *ac = TT_ASCALON_CLUSTER(obj);
-+
-+    object_initialize_child(obj, "cpus", &ac->cpus, TYPE_RISCV_HART_ARRAY);
-+}
-+
-+static void tt_ascalon_cluster_realize(DeviceState *dev, Error **errp)
-+{
-+    TTAscalonClusterState *ac = TT_ASCALON_CLUSTER(dev);
-+
-+    if (!ac->memory) {
-+        error_setg(errp, "'memory' link is not set");
-+        return;
-+    }
-+    ac->memmap = tt_atlantis_memmap;
-+
-+    /* Boot ROM */
-+    if (!memory_region_init_rom(&ac->bootrom, OBJECT(ac), "tt-atlantis.bootrom",
-+                                ac->memmap[TT_ATL_BOOTROM].size, errp)) {
-+        return;
-+    }
-+    memory_region_add_subregion(ac->memory, ac->memmap[TT_ATL_BOOTROM].base,
-+                                &ac->bootrom);
-+
-+    /* CPUs */
-+    object_property_set_str(OBJECT(&ac->cpus), "cpu-type", ac->cpu_type,
-+                            &error_abort);
-+    object_property_set_int(OBJECT(&ac->cpus), "hartid-base", 0,
-+                            &error_abort);
-+    object_property_set_int(OBJECT(&ac->cpus), "num-harts", ac->num_harts,
-+                            &error_abort);
-+    object_property_set_int(OBJECT(&ac->cpus), "resetvec",
-+                            ac->memmap[TT_ATL_BOOTROM].base,
-+                            &error_abort);
-+    object_property_set_link(OBJECT(&ac->cpus), "memory",
-+                             OBJECT(ac->memory),
-+                             &error_abort);
-+    if (!sysbus_realize(SYS_BUS_DEVICE(&ac->cpus), errp)) {
-+        return;
-+    }
-+}
-+
-+static const Property tt_ascalon_cluster_props[] = {
-+    DEFINE_PROP_STRING("cpu-type", TTAscalonClusterState, cpu_type),
-+    DEFINE_PROP_UINT32("num-harts", TTAscalonClusterState, num_harts, 8),
-+    DEFINE_PROP_LINK("memory", TTAscalonClusterState, memory,
-+                     TYPE_MEMORY_REGION, MemoryRegion *),
-+};
-+
-+static void tt_ascalon_cluster_class_init(ObjectClass *oc, const void *data)
-+{
-+    DeviceClass *dc = DEVICE_CLASS(oc);
-+
-+    dc->realize = tt_ascalon_cluster_realize;
-+    device_class_set_props(dc, tt_ascalon_cluster_props);
-+}
-+
- static void tt_atlantis_soc_init(Object *obj)
+-CpuDefinitionInfoList *qmp_query_cpu_definitions(Error **errp)
++static CpuDefinitionInfoList *x86_query_cpu_definitions(Error **errp)
  {
-     TTAtlantisSoCState *s = TT_ATLANTIS_SOC(obj);
- 
--    object_initialize_child(obj, "cpus", &s->cpus, TYPE_RISCV_HART_ARRAY);
-+    object_initialize_child(obj, "ascalon", &s->ascalon, TYPE_TT_ASCALON_CLUSTER);
- 
-     for (int i = 0; i < TT_ATL_NUM_UARTS; i++) {
-         object_initialize_child(obj, "uart[*]", &s->uart[i],
-@@ -581,52 +643,36 @@ static void tt_atlantis_soc_init(Object *obj)
- static void tt_atlantis_soc_realize(DeviceState *dev, Error **errp)
- {
-     TTAtlantisSoCState *s = TT_ATLANTIS_SOC(dev);
-+    TTAscalonClusterState *ac = &s->ascalon;
-     ram_addr_t lo_ram_size, ram_size;
--    int hart_count = s->num_harts;
-+    int hart_count = ac->num_harts;
- 
--    if (!s->memory) {
--        error_setg(errp, "'memory' link is not set");
--        return;
--    }
-     if (!s->dram) {
-         error_setg(errp, "'dram' link is not set");
-         return;
-     }
--    ram_size = memory_region_size(s->dram);
--
--    s->memmap = tt_atlantis_memmap;
- 
--    /* CPUs */
--    object_property_set_str(OBJECT(&s->cpus), "cpu-type", s->cpu_type,
--                            &error_abort);
--    object_property_set_int(OBJECT(&s->cpus), "hartid-base", 0,
--                            &error_abort);
--    object_property_set_int(OBJECT(&s->cpus), "num-harts", hart_count,
--                            &error_abort);
--    object_property_set_int(OBJECT(&s->cpus), "resetvec",
--                            s->memmap[TT_ATL_BOOTROM].base,
--                            &error_abort);
--    object_property_set_link(OBJECT(&s->cpus), "memory", OBJECT(s->memory),
--                             &error_abort);
--    if (!sysbus_realize(SYS_BUS_DEVICE(&s->cpus), errp)) {
-+    if (!qdev_realize(DEVICE(&s->ascalon), NULL, errp)) {
-         return;
-     }
- 
--    s->irqchip = riscv_create_aia(s->memory,
-+    ram_size = memory_region_size(s->dram);
-+
-+    s->irqchip = riscv_create_aia(ac->memory,
-                                   true, TT_IMSIC_GUESTS,
-                                   TT_IMSIC_STRIDE,
-                                   TT_IMSIC_STRIDE,
-                                   TT_IRQCHIP_NUM_SOURCES,
--                                  &s->memmap[TT_ATL_MAPLIC],
--                                  &s->memmap[TT_ATL_SAPLIC],
--                                  &s->memmap[TT_ATL_MIMSIC],
--                                  &s->memmap[TT_ATL_SIMSIC],
-+                                  &ac->memmap[TT_ATL_MAPLIC],
-+                                  &ac->memmap[TT_ATL_SAPLIC],
-+                                  &ac->memmap[TT_ATL_MIMSIC],
-+                                  &ac->memmap[TT_ATL_SIMSIC],
-                                   0, 0, hart_count,
-                                   TT_IRQCHIP_NUM_MSIS,
-                                   TT_IRQCHIP_NUM_PRIO_BITS);
- 
--    riscv_aclint_mtimer_create(s->memory,
--            s->memmap[TT_ATL_ACLINT].base,
-+    riscv_aclint_mtimer_create(ac->memory,
-+            ac->memmap[TT_ATL_ACLINT].base,
-             TT_ACLINT_MTIME_SIZE,
-             0, hart_count,
-             TT_ACLINT_MTIMECMP,
-@@ -639,30 +685,22 @@ static void tt_atlantis_soc_realize(DeviceState *dev, Error **errp)
-      * The high address is where RAM lives. It is always present and may be
-      * up to 64GB. The low address is an alias of the first 2GB of that RAM.
-      */
--    if (ram_size > s->memmap[TT_ATL_DDR_HI].size) {
--        g_autofree char *sz = size_to_str(s->memmap[TT_ATL_DDR_HI].size);
-+    if (ram_size > ac->memmap[TT_ATL_DDR_HI].size) {
-+        g_autofree char *sz = size_to_str(ac->memmap[TT_ATL_DDR_HI].size);
-         error_setg(errp, "RAM size is too large, maximum is %s", sz);
-         return;
-     }
- 
-     memory_region_init_alias(&s->ram_hi, OBJECT(s), "ram.high", s->dram,
-                              0, ram_size);
--    memory_region_add_subregion(s->memory,
--                                s->memmap[TT_ATL_DDR_HI].base, &s->ram_hi);
-+    memory_region_add_subregion(ac->memory,
-+                                ac->memmap[TT_ATL_DDR_HI].base, &s->ram_hi);
- 
--    lo_ram_size = MIN(ram_size, s->memmap[TT_ATL_DDR_LO].size);
-+    lo_ram_size = MIN(ram_size, ac->memmap[TT_ATL_DDR_LO].size);
-     memory_region_init_alias(&s->ram_lo, OBJECT(s), "ram.low", s->dram,
-                              0, lo_ram_size);
--    memory_region_add_subregion(s->memory,
--                                s->memmap[TT_ATL_DDR_LO].base, &s->ram_lo);
--
--    /* Boot ROM */
--    if (!memory_region_init_rom(&s->bootrom, OBJECT(s), "tt-atlantis.bootrom",
--                                s->memmap[TT_ATL_BOOTROM].size, errp)) {
--        return;
--    }
--    memory_region_add_subregion(s->memory, s->memmap[TT_ATL_BOOTROM].base,
--                                &s->bootrom);
-+    memory_region_add_subregion(ac->memory,
-+                                ac->memmap[TT_ATL_DDR_LO].base, &s->ram_lo);
- 
-     /* 4 PRCM blocks */
-     if (!sysbus_realize(SYS_BUS_DEVICE(&s->prcm[TT_ATLANTIS_PRCM_DOMAIN_RCPU]),
-@@ -670,7 +708,7 @@ static void tt_atlantis_soc_realize(DeviceState *dev, Error **errp)
-         return;
-     }
-     memory_region_add_subregion(
--        s->memory, s->memmap[TT_ATL_PRCM_RCPU].base,
-+        ac->memory, ac->memmap[TT_ATL_PRCM_RCPU].base,
-         sysbus_mmio_get_region(
-             SYS_BUS_DEVICE(&s->prcm[TT_ATLANTIS_PRCM_DOMAIN_RCPU]), 0));
- 
-@@ -679,7 +717,7 @@ static void tt_atlantis_soc_realize(DeviceState *dev, Error **errp)
-         return;
-     }
-     memory_region_add_subregion(
--        s->memory, s->memmap[TT_ATL_PRCM_HSIO].base,
-+        ac->memory, ac->memmap[TT_ATL_PRCM_HSIO].base,
-         sysbus_mmio_get_region(
-             SYS_BUS_DEVICE(&s->prcm[TT_ATLANTIS_PRCM_DOMAIN_HSIO]), 0));
- 
-@@ -688,7 +726,7 @@ static void tt_atlantis_soc_realize(DeviceState *dev, Error **errp)
-         return;
-     }
-     memory_region_add_subregion(
--        s->memory, s->memmap[TT_ATL_PRCM_PCIE].base,
-+        ac->memory, ac->memmap[TT_ATL_PRCM_PCIE].base,
-         sysbus_mmio_get_region(
-             SYS_BUS_DEVICE(&s->prcm[TT_ATLANTIS_PRCM_DOMAIN_PCIE]), 0));
- 
-@@ -697,7 +735,7 @@ static void tt_atlantis_soc_realize(DeviceState *dev, Error **errp)
-         return;
-     }
-     memory_region_add_subregion(
--        s->memory, s->memmap[TT_ATL_PRCM_MM].base,
-+        ac->memory, ac->memmap[TT_ATL_PRCM_MM].base,
-         sysbus_mmio_get_region(
-             SYS_BUS_DEVICE(&s->prcm[TT_ATLANTIS_PRCM_DOMAIN_MM]), 0));
- 
-@@ -711,8 +749,8 @@ static void tt_atlantis_soc_realize(DeviceState *dev, Error **errp)
-             return;
-         }
- 
--        memory_region_add_subregion(s->memory,
--                                    s->memmap[TT_ATL_UART0 + i].base,
-+        memory_region_add_subregion(ac->memory,
-+                                    ac->memmap[TT_ATL_UART0 + i].base,
-                                     sysbus_mmio_get_region(sbd, 0));
-         sysbus_connect_irq(sbd, 0,
-                            qdev_get_gpio_in(s->irqchip, TT_ATL_UART0_IRQ + i));
-@@ -725,8 +763,8 @@ static void tt_atlantis_soc_realize(DeviceState *dev, Error **errp)
-         if (!sysbus_realize(sbd, errp)) {
-             return;
-         }
--        memory_region_add_subregion(s->memory,
--                                    s->memmap[TT_ATL_I2C0 + i].base,
-+        memory_region_add_subregion(ac->memory,
-+                                    ac->memmap[TT_ATL_I2C0 + i].base,
-                                     sysbus_mmio_get_region(sbd, 0));
-         sysbus_connect_irq(sbd, 0,
-                            qdev_get_gpio_in(s->irqchip, TT_ATL_I2C0_IRQ + i));
-@@ -734,10 +772,6 @@ static void tt_atlantis_soc_realize(DeviceState *dev, Error **errp)
+     CpuDefinitionInfoList *cpu_list = NULL;
+     GSList *list = get_sorted_cpu_model_list();
+@@ -8200,6 +8201,9 @@ CpuDefinitionInfoList *qmp_query_cpu_definitions(Error **errp)
+     return cpu_list;
  }
  
- static const Property tt_atlantis_soc_props[] = {
--    DEFINE_PROP_STRING("cpu-type", TTAtlantisSoCState, cpu_type),
--    DEFINE_PROP_UINT32("num-harts", TTAtlantisSoCState, num_harts, 8),
--    DEFINE_PROP_LINK("memory", TTAtlantisSoCState, memory,
--                     TYPE_MEMORY_REGION, MemoryRegion *),
-     DEFINE_PROP_LINK("dram", TTAtlantisSoCState, dram,
-                      TYPE_MEMORY_REGION, MemoryRegion *),
- };
-@@ -756,6 +790,7 @@ static void tt_atlantis_machine_init(MachineState *machine)
++TARGET_OPS_REGISTER(QEMU_ARCH_I386, query_cpu_definitions,
++                    x86_query_cpu_definitions);
++
+ #endif /* !CONFIG_USER_ONLY */
+ 
+ static uint8_t x86_cpu_get_host_avx10_version(void)
+diff --git a/target/i386/monitor.c b/target/i386/monitor.c
+index ce61132e0f5..c3c2fabf7a8 100644
+--- a/target/i386/monitor.c
++++ b/target/i386/monitor.c
+@@ -26,6 +26,7 @@
+ #include "cpu.h"
+ #include "monitor/monitor.h"
+ #include "monitor/hmp.h"
++#include "qemu/target-ops.h"
+ #include "qobject/qdict.h"
+ #include "qapi/error.h"
+ #include "qapi/qapi-commands-misc.h"
+@@ -211,7 +212,7 @@ static void tlb_info_la57(MonitorHMP *hmp, CPUArchState *env, AddressSpace *as)
+ }
+ #endif /* TARGET_X86_64 */
+ 
+-void hmp_info_tlb(MonitorHMP *hmp, const QDict *qdict)
++static void hmp_info_tlb_i386(MonitorHMP *hmp, const QDict *qdict)
  {
-     TTAtlantisState *ams = TT_ATLANTIS_MACHINE(machine);
-     TTAtlantisSoCState *s = &ams->soc;
-+    TTAscalonClusterState *ac = &s->ascalon;
+     CPUArchState *env;
+     AddressSpace *as;
+@@ -537,7 +538,7 @@ static void mem_info_la57(MonitorHMP *hmp, CPUArchState *env, AddressSpace *as)
+ }
+ #endif /* TARGET_X86_64 */
  
-     memory_region_init(&ams->soc_memory, OBJECT(machine),
-                        "tt-atlantis.soc-memory", UINT64_MAX);
-@@ -763,12 +798,16 @@ static void tt_atlantis_machine_init(MachineState *machine)
+-void hmp_info_mem(MonitorHMP *hmp, const QDict *qdict)
++static void hmp_info_mem_i386(MonitorHMP *hmp, const QDict *qdict)
+ {
+     CPUArchState *env;
+     AddressSpace *as;
+@@ -571,6 +572,9 @@ void hmp_info_mem(MonitorHMP *hmp, const QDict *qdict)
+     }
+ }
  
-     object_initialize_child(OBJECT(machine), "soc", &ams->soc,
-                             TYPE_TT_ATLANTIS_SOC);
--    object_property_set_str(OBJECT(&ams->soc), "cpu-type", machine->cpu_type,
++TARGET_OPS_REGISTER(QEMU_ARCH_I386, info_tlb, hmp_info_tlb_i386);
++TARGET_OPS_REGISTER(QEMU_ARCH_I386, info_mem, hmp_info_mem_i386);
 +
-+    /* User input machine properties, cpu_type and smp.cpus apply to Ascalon */
-+    object_property_set_str(OBJECT(ac), "cpu-type",
-+                            machine->cpu_type,
-                             &error_abort);
--    object_property_set_int(OBJECT(&ams->soc), "num-harts", machine->smp.cpus,
-+    object_property_set_int(OBJECT(ac), "num-harts",
-+                            machine->smp.cpus,
-                             &error_abort);
+ void hmp_mce(MonitorHMP *hmp, const QDict *qdict)
+ {
+     X86CPU *cpu;
+diff --git a/target/loongarch/arch_dump.c b/target/loongarch/arch_dump.c
+index 9d84faef969..2cc494d9e82 100644
+--- a/target/loongarch/arch_dump.c
++++ b/target/loongarch/arch_dump.c
+@@ -22,6 +22,7 @@
+ #include "elf.h"
+ #include "system/dump.h"
+ #include "internals.h"
++#include "qemu/target-ops.h"
  
--    object_property_set_link(OBJECT(&ams->soc), "memory",
-+    object_property_set_link(OBJECT(ac), "memory",
-                              OBJECT(&ams->soc_memory), &error_abort);
-     object_property_set_link(OBJECT(&ams->soc), "dram", OBJECT(machine->ram),
-                              &error_abort);
-@@ -808,6 +847,12 @@ static void tt_atlantis_machine_class_init(ObjectClass *oc, const void *data)
+ /* struct user_pt_regs from arch/loongarch/include/uapi/asm/ptrace.h */
+ struct loongarch_user_regs {
+@@ -142,7 +143,7 @@ int loongarch_cpu_write_elf64_note(WriteCoreDumpFunction f, CPUState *cs,
+     return ret;
+ }
  
- static const TypeInfo tt_atlantis_types[] = {
-     {
-+        .name       = TYPE_TT_ASCALON_CLUSTER,
-+        .parent     = TYPE_DEVICE,
-+        .instance_size = sizeof(TTAscalonClusterState),
-+        .instance_init = tt_ascalon_cluster_init,
-+        .class_init = tt_ascalon_cluster_class_init,
-+    }, {
-         .name       = TYPE_TT_ATLANTIS_SOC,
-         .parent     = TYPE_DEVICE,
-         .instance_size = sizeof(TTAtlantisSoCState),
-diff --git a/include/hw/riscv/tt_atlantis.h b/include/hw/riscv/tt_atlantis.h
-index f965bf23fc..4e3d5d4b5f 100644
---- a/include/hw/riscv/tt_atlantis.h
-+++ b/include/hw/riscv/tt_atlantis.h
-@@ -23,11 +23,14 @@ OBJECT_DECLARE_SIMPLE_TYPE(TTAtlantisState, TT_ATLANTIS_MACHINE)
- #define TYPE_TT_ATLANTIS_SOC "tt-atlantis-soc"
- OBJECT_DECLARE_SIMPLE_TYPE(TTAtlantisSoCState, TT_ATLANTIS_SOC)
+-int cpu_get_dump_info(ArchDumpInfo *info,
++static int loongarch_get_dump_info(ArchDumpInfo *info,
+                       const GuestPhysBlockList *guest_phys_blocks)
+ {
+     info->d_machine = EM_LOONGARCH;
+@@ -152,7 +153,7 @@ int cpu_get_dump_info(ArchDumpInfo *info,
+     return 0;
+ }
  
-+#define TYPE_TT_ASCALON_CLUSTER "riscv.tt-ascalon-cluster"
-+OBJECT_DECLARE_SIMPLE_TYPE(TTAscalonClusterState, TT_ASCALON_CLUSTER)
+-ssize_t cpu_get_note_size(int class, int machine, int nr_cpus)
++static ssize_t loongarch_get_note_size(int class, int machine, int nr_cpus)
+ {
+     size_t note_size = 0;
+ 
+@@ -162,3 +163,6 @@ ssize_t cpu_get_note_size(int class, int machine, int nr_cpus)
+ 
+     return note_size * nr_cpus;
+ }
 +
- #define TT_ATL_NUM_I2C 5
- #define TT_ATL_NUM_PRCM 4
- #define TT_ATL_NUM_UARTS 5
++TARGET_OPS_REGISTER(QEMU_ARCH_LOONGARCH, get_dump_info, loongarch_get_dump_info);
++TARGET_OPS_REGISTER(QEMU_ARCH_LOONGARCH, get_note_size, loongarch_get_note_size);
+diff --git a/target/loongarch/loongarch-qmp-cmds.c b/target/loongarch/loongarch-qmp-cmds.c
+index f053f22bb8c..edf1a2a8773 100644
+--- a/target/loongarch/loongarch-qmp-cmds.c
++++ b/target/loongarch/loongarch-qmp-cmds.c
+@@ -14,6 +14,7 @@
+ #include "qobject/qdict.h"
+ #include "qapi/qobject-input-visitor.h"
+ #include "qom/qom-qobject.h"
++#include "qemu/target-ops.h"
  
--struct TTAtlantisSoCState {
-+struct TTAscalonClusterState {
-     /*< private >*/
-     DeviceState parent;
+ static void loongarch_cpu_add_definition(gpointer data, gpointer user_data)
+ {
+@@ -28,7 +29,7 @@ static void loongarch_cpu_add_definition(gpointer data, gpointer user_data)
+     QAPI_LIST_PREPEND(*cpu_list, info);
+ }
  
-@@ -35,19 +38,29 @@ struct TTAtlantisSoCState {
-     const MemMapEntry *memmap;
- 
-     MemoryRegion *memory;
-+
-+    RISCVHartArrayState cpus;
-+    MemoryRegion bootrom;
-+
-+    uint32_t num_harts;
-+    char *cpu_type;
-+};
-+
-+struct TTAtlantisSoCState {
-+    /*< private >*/
-+    DeviceState parent;
-+
-+    /*< public >*/
-+    TTAscalonClusterState ascalon;
-+
-     MemoryRegion *dram;
-     MemoryRegion ram_hi;
-     MemoryRegion ram_lo;
- 
--    RISCVHartArrayState cpus;
-     DeviceState *irqchip;
-     DesignWareI2CState i2c[TT_ATL_NUM_I2C];
-     DW8250State uart[TT_ATL_NUM_UARTS];
--    MemoryRegion bootrom;
-     TTAtlantisPRCMState prcm[TT_ATL_NUM_PRCM];
--
--    uint32_t num_harts;
--    char *cpu_type;
+-CpuDefinitionInfoList *qmp_query_cpu_definitions(Error **errp)
++static CpuDefinitionInfoList *loongarch_query_cpu_definitions(Error **errp)
+ {
+     CpuDefinitionInfoList *cpu_list = NULL;
+     GSList *list;
+@@ -45,9 +46,10 @@ static const char *cpu_model_advertised_features[] = {
+     "ptw", NULL
  };
  
- struct TTAtlantisState {
+-CpuModelExpansionInfo *qmp_query_cpu_model_expansion(CpuModelExpansionType type,
+-                                                     CpuModelInfo *model,
+-                                                     Error **errp)
++static CpuModelExpansionInfo *
++loongarch_query_cpu_model_expansion(CpuModelExpansionType type,
++                                    CpuModelInfo *model,
++                                    Error **errp)
+ {
+     Visitor *visitor;
+     CpuModelExpansionInfo *expansion_info;
+@@ -133,3 +135,8 @@ CpuModelExpansionInfo *qmp_query_cpu_model_expansion(CpuModelExpansionType type,
+ 
+     return expansion_info;
+ }
++
++TARGET_OPS_REGISTER(QEMU_ARCH_LOONGARCH, query_cpu_definitions,
++                    loongarch_query_cpu_definitions);
++TARGET_OPS_REGISTER(QEMU_ARCH_LOONGARCH, query_cpu_model_expansion,
++                    loongarch_query_cpu_model_expansion);
+diff --git a/target/m68k/monitor.c b/target/m68k/monitor.c
+index e8b1b25a43c..6f901898e22 100644
+--- a/target/m68k/monitor.c
++++ b/target/m68k/monitor.c
+@@ -8,10 +8,11 @@
+ #include "qemu/osdep.h"
+ #include "cpu.h"
+ #include "monitor/hmp.h"
++#include "qemu/target-ops.h"
+ #include "monitor/monitor.h"
+ 
+ #ifdef CONFIG_HMP
+-void hmp_info_tlb(MonitorHMP *hmp, const QDict *qdict)
++static void hmp_info_tlb_m68k(MonitorHMP *hmp, const QDict *qdict)
+ {
+     CPUArchState *env1 = monitor_hmp_get_cpu_env(hmp);
+ 
+@@ -22,4 +23,5 @@ void hmp_info_tlb(MonitorHMP *hmp, const QDict *qdict)
+ 
+     dump_mmu(env1);
+ }
++TARGET_OPS_REGISTER(QEMU_ARCH_M68K, info_tlb, hmp_info_tlb_m68k);
+ #endif
+diff --git a/target/mips/system/mips-qmp-cmds.c b/target/mips/system/mips-qmp-cmds.c
+index b6a2874f2dd..3cd5dda3f8c 100644
+--- a/target/mips/system/mips-qmp-cmds.c
++++ b/target/mips/system/mips-qmp-cmds.c
+@@ -11,15 +11,7 @@
+ #include "qapi/error.h"
+ #include "qapi/qapi-commands-machine.h"
+ #include "cpu.h"
+-
+-CpuModelExpansionInfo *
+-qmp_query_cpu_model_expansion(CpuModelExpansionType type,
+-                              CpuModelInfo *model,
+-                              Error **errp)
+-{
+-    error_setg(errp, "CPU model expansion is not supported on this target");
+-    return NULL;
+-}
++#include "qemu/target-ops.h"
+ 
+ static void mips_cpu_add_definition(gpointer data, gpointer user_data)
+ {
+@@ -36,7 +28,7 @@ static void mips_cpu_add_definition(gpointer data, gpointer user_data)
+     QAPI_LIST_PREPEND(*cpu_list, info);
+ }
+ 
+-CpuDefinitionInfoList *qmp_query_cpu_definitions(Error **errp)
++static CpuDefinitionInfoList *mips_query_cpu_definitions(Error **errp)
+ {
+     CpuDefinitionInfoList *cpu_list = NULL;
+     GSList *list;
+@@ -47,3 +39,6 @@ CpuDefinitionInfoList *qmp_query_cpu_definitions(Error **errp)
+ 
+     return cpu_list;
+ }
++
++TARGET_OPS_REGISTER(QEMU_ARCH_MIPS, query_cpu_definitions,
++                    mips_query_cpu_definitions);
+diff --git a/target/ppc/arch_dump.c b/target/ppc/arch_dump.c
+index 80ac6c3e320..3cadf7525c8 100644
+--- a/target/ppc/arch_dump.c
++++ b/target/ppc/arch_dump.c
+@@ -17,6 +17,7 @@
+ #include "elf.h"
+ #include "system/dump.h"
+ #include "system/kvm.h"
++#include "qemu/target-ops.h"
+ 
+ #ifdef TARGET_PPC64
+ #define ELFCLASS ELFCLASS64
+@@ -229,7 +230,7 @@ static const struct NoteFuncDescStruct {
+ 
+ typedef struct NoteFuncDescStruct NoteFuncDesc;
+ 
+-int cpu_get_dump_info(ArchDumpInfo *info,
++static int ppc_get_dump_info(ArchDumpInfo *info,
+                       const struct GuestPhysBlockList *guest_phys_blocks)
+ {
+     PowerPCCPU *cpu;
+@@ -257,7 +258,7 @@ int cpu_get_dump_info(ArchDumpInfo *info,
+     return 0;
+ }
+ 
+-ssize_t cpu_get_note_size(int class, int machine, int nr_cpus)
++static ssize_t ppc_get_note_size(int class, int machine, int nr_cpus)
+ {
+     int name_size = 8; /* "CORE" or "QEMU" rounded */
+     size_t elf_note_size = 0;
+@@ -313,3 +314,6 @@ int ppc32_cpu_write_elf32_note(WriteCoreDumpFunction f, CPUState *cs,
+     PowerPCCPU *cpu = POWERPC_CPU(cs);
+     return ppc_write_all_elf_notes("CORE", f, cpu, cpuid, s);
+ }
++
++TARGET_OPS_REGISTER(QEMU_ARCH_PPC, get_dump_info, ppc_get_dump_info);
++TARGET_OPS_REGISTER(QEMU_ARCH_PPC, get_note_size, ppc_get_note_size);
+diff --git a/target/ppc/monitor.c b/target/ppc/monitor.c
+index 5a21c01593b..52930609251 100644
+--- a/target/ppc/monitor.c
++++ b/target/ppc/monitor.c
+@@ -9,10 +9,11 @@
+ #include "qemu/osdep.h"
+ #include "monitor/monitor.h"
+ #include "monitor/hmp.h"
++#include "qemu/target-ops.h"
+ #include "cpu.h"
+ 
+ #ifdef CONFIG_HMP
+-void hmp_info_tlb(MonitorHMP *hmp, const QDict *qdict)
++static void hmp_info_tlb_ppc(MonitorHMP *hmp, const QDict *qdict)
+ {
+     CPUArchState *env1 = monitor_hmp_get_cpu_env(hmp);
+ 
+@@ -22,4 +23,5 @@ void hmp_info_tlb(MonitorHMP *hmp, const QDict *qdict)
+     }
+     dump_mmu(env1);
+ }
++TARGET_OPS_REGISTER(QEMU_ARCH_PPC, info_tlb, hmp_info_tlb_ppc);
+ #endif
+diff --git a/target/ppc/ppc-qmp-cmds.c b/target/ppc/ppc-qmp-cmds.c
+index 96228919966..0bf2031fed1 100644
+--- a/target/ppc/ppc-qmp-cmds.c
++++ b/target/ppc/ppc-qmp-cmds.c
+@@ -29,15 +29,7 @@
+ #include "qapi/qapi-commands-machine.h"
+ #include "cpu-models.h"
+ #include "cpu-qom.h"
+-
+-CpuModelExpansionInfo *
+-qmp_query_cpu_model_expansion(CpuModelExpansionType type,
+-                              CpuModelInfo *model,
+-                              Error **errp)
+-{
+-    error_setg(errp, "CPU model expansion is not supported on this target");
+-    return NULL;
+-}
++#include "qemu/target-ops.h"
+ 
+ static void ppc_cpu_defs_entry(gpointer data, gpointer user_data)
+ {
+@@ -53,7 +45,7 @@ static void ppc_cpu_defs_entry(gpointer data, gpointer user_data)
+     QAPI_LIST_PREPEND(*first, info);
+ }
+ 
+-CpuDefinitionInfoList *qmp_query_cpu_definitions(Error **errp)
++static CpuDefinitionInfoList *ppc_query_cpu_definitions(Error **errp)
+ {
+     CpuDefinitionInfoList *cpu_list = NULL;
+     GSList *list;
+@@ -82,3 +74,6 @@ CpuDefinitionInfoList *qmp_query_cpu_definitions(Error **errp)
+ 
+     return cpu_list;
+ }
++
++TARGET_OPS_REGISTER(QEMU_ARCH_PPC, query_cpu_definitions,
++                    ppc_query_cpu_definitions);
+diff --git a/target/riscv/arch_dump.c b/target/riscv/arch_dump.c
+index 12b68799070..7f581aca220 100644
+--- a/target/riscv/arch_dump.c
++++ b/target/riscv/arch_dump.c
+@@ -20,6 +20,7 @@
+ #include "cpu.h"
+ #include "elf.h"
+ #include "system/dump.h"
++#include "qemu/target-ops.h"
+ 
+ /* struct user_regs_struct from arch/riscv/include/uapi/asm/ptrace.h */
+ struct riscv64_user_regs {
+@@ -161,7 +162,7 @@ int riscv_cpu_write_elf32_note(WriteCoreDumpFunction f, CPUState *cs,
+     return ret;
+ }
+ 
+-int cpu_get_dump_info(ArchDumpInfo *info,
++static int riscv_get_dump_info(ArchDumpInfo *info,
+                       const GuestPhysBlockList *guest_phys_blocks)
+ {
+     RISCVCPU *cpu;
+@@ -187,7 +188,7 @@ int cpu_get_dump_info(ArchDumpInfo *info,
+     return 0;
+ }
+ 
+-ssize_t cpu_get_note_size(int class, int machine, int nr_cpus)
++static ssize_t riscv_get_note_size(int class, int machine, int nr_cpus)
+ {
+     size_t note_size;
+ 
+@@ -199,3 +200,6 @@ ssize_t cpu_get_note_size(int class, int machine, int nr_cpus)
+ 
+     return note_size * nr_cpus;
+ }
++
++TARGET_OPS_REGISTER(QEMU_ARCH_RISCV, get_dump_info, riscv_get_dump_info);
++TARGET_OPS_REGISTER(QEMU_ARCH_RISCV, get_note_size, riscv_get_note_size);
+diff --git a/target/riscv/common-semi-target.c b/target/riscv/common-semi-target.c
+index 38a00e160c3..954c64c3c08 100644
+--- a/target/riscv/common-semi-target.c
++++ b/target/riscv/common-semi-target.c
+@@ -12,42 +12,54 @@
+ #include "cpu.h"
+ #include "semihosting/common-semi.h"
+ 
+-uint64_t common_semi_arg(CPUState *cs, int argno)
++static uint64_t riscv_common_semi_arg(CPUState *cs, int argno)
+ {
+     RISCVCPU *cpu = RISCV_CPU(cs);
+     CPURISCVState *env = &cpu->env;
+     return env->gpr[xA0 + argno];
+ }
+ 
+-void common_semi_set_ret(CPUState *cs, uint64_t ret)
++static void riscv_common_semi_set_ret(CPUState *cs, uint64_t ret)
+ {
+     RISCVCPU *cpu = RISCV_CPU(cs);
+     CPURISCVState *env = &cpu->env;
+     env->gpr[xA0] = ret;
+ }
+ 
+-void common_semi_set_err(CPUState *cs, int err)
++static void riscv_common_semi_set_err(CPUState *cs, int err)
+ {
+ }
+ 
+-bool is_64bit_semihosting(CPUArchState *env)
++static bool riscv_is_64bit_semihosting(CPUArchState *env)
+ {
+     return riscv_cpu_mxl(env) != MXL_RV32;
+ }
+ 
+-bool common_semi_sys_exit_is_extended(CPUState *cs)
++static bool riscv_common_semi_sys_exit_is_extended(CPUState *cs)
+ {
+-    return is_64bit_semihosting(cpu_env(cs));
++    return riscv_is_64bit_semihosting(cpu_env(cs));
+ }
+ 
+-uint64_t common_semi_stack_bottom(CPUState *cs)
++static uint64_t riscv_common_semi_stack_bottom(CPUState *cs)
+ {
+     RISCVCPU *cpu = RISCV_CPU(cs);
+     CPURISCVState *env = &cpu->env;
+     return env->gpr[xSP];
+ }
+ 
+-bool common_semi_has_synccache(CPUArchState *env)
++static bool riscv_common_semi_has_synccache(CPUArchState *env)
+ {
+     return true;
+ }
++
++static const CPUSemihostingOps riscv_semihosting_ops = {
++    .arg = riscv_common_semi_arg,
++    .set_ret = riscv_common_semi_set_ret,
++    .set_err = riscv_common_semi_set_err,
++    .is_64bit = riscv_is_64bit_semihosting,
++    .sys_exit_is_extended = riscv_common_semi_sys_exit_is_extended,
++    .stack_bottom = riscv_common_semi_stack_bottom,
++    .has_synccache = riscv_common_semi_has_synccache,
++};
++
++TARGET_OPS_REGISTER(QEMU_ARCH_RISCV, semihosting, riscv_semihosting_ops);
+diff --git a/target/riscv/meson.build b/target/riscv/meson.build
+index e1b51d2bd4d..93be2f599f2 100644
+--- a/target/riscv/meson.build
++++ b/target/riscv/meson.build
+@@ -11,12 +11,10 @@ gen = [
+ riscv_ss = ss.source_set()
+ riscv_ss.add(gen)
+ 
+-riscv_ss.add(when: 'CONFIG_ARM_COMPATIBLE_SEMIHOSTING',
+-		     if_true: files('common-semi-target.c'))
+-
+ riscv_ss.add(files(
+   'cpu.c',
+   'gdbstub.c',
++  'common-semi-target.c',
+ ))
+ 
+ riscv_stubs_ss = ss.source_set()
+diff --git a/target/riscv/monitor.c b/target/riscv/monitor.c
+index 7e61ae2a471..64bc196387b 100644
+--- a/target/riscv/monitor.c
++++ b/target/riscv/monitor.c
+@@ -26,6 +26,7 @@
+ #include "cpu_bits.h"
+ #include "monitor/monitor.h"
+ #include "monitor/hmp.h"
++#include "qemu/target-ops.h"
+ #include "system/memory.h"
+ #include "internals.h"
+ 
+@@ -217,7 +218,7 @@ static void mem_info_svxx(MonitorHMP *hmp, CPUArchState *env)
+               last_paddr + last_size - pbase, last_attr);
+ }
+ 
+-void hmp_info_mem(MonitorHMP *hmp, const QDict *qdict)
++static void hmp_info_mem_riscv(MonitorHMP *hmp, const QDict *qdict)
+ {
+     CPUArchState *env;
+ 
+@@ -246,6 +247,7 @@ void hmp_info_mem(MonitorHMP *hmp, const QDict *qdict)
+ 
+     mem_info_svxx(hmp, env);
+ }
++TARGET_OPS_REGISTER(QEMU_ARCH_RISCV, info_mem, hmp_info_mem_riscv);
+ #endif /* CONFIG_HMP */
+ 
+ #ifdef CONFIG_TCG
+diff --git a/target/riscv/riscv-qmp-cmds.c b/target/riscv/riscv-qmp-cmds.c
+index 2647deef916..0b2c685f22b 100644
+--- a/target/riscv/riscv-qmp-cmds.c
++++ b/target/riscv/riscv-qmp-cmds.c
+@@ -36,6 +36,7 @@
+ #include "cpu-qom.h"
+ #include "cpu.h"
+ #include "target/riscv/tcg/csr.h"
++#include "qemu/target-ops.h"
+ 
+ static void riscv_cpu_add_definition(gpointer data, gpointer user_data)
+ {
+@@ -54,7 +55,7 @@ static void riscv_cpu_add_definition(gpointer data, gpointer user_data)
+     QAPI_LIST_PREPEND(*cpu_list, info);
+ }
+ 
+-CpuDefinitionInfoList *qmp_query_cpu_definitions(Error **errp)
++static CpuDefinitionInfoList *riscv_query_cpu_definitions(Error **errp)
+ {
+     CpuDefinitionInfoList *cpu_list = NULL;
+     GSList *list = object_class_get_list(TYPE_RISCV_CPU, false);
+@@ -154,9 +155,10 @@ err:
+     visit_free(visitor);
+ }
+ 
+-CpuModelExpansionInfo *qmp_query_cpu_model_expansion(CpuModelExpansionType type,
+-                                                     CpuModelInfo *model,
+-                                                     Error **errp)
++static CpuModelExpansionInfo *
++riscv_query_cpu_model_expansion(CpuModelExpansionType type,
++                                CpuModelInfo *model,
++                                Error **errp)
+ {
+     CpuModelExpansionInfo *expansion_info;
+     QDict *qdict_out;
+@@ -225,3 +227,8 @@ CpuModelExpansionInfo *qmp_query_cpu_model_expansion(CpuModelExpansionType type,
+ 
+     return expansion_info;
+ }
++
++TARGET_OPS_REGISTER(QEMU_ARCH_RISCV, query_cpu_definitions,
++                    riscv_query_cpu_definitions);
++TARGET_OPS_REGISTER(QEMU_ARCH_RISCV, query_cpu_model_expansion,
++                    riscv_query_cpu_model_expansion);
+diff --git a/target/s390x/arch_dump.c b/target/s390x/arch_dump.c
+index 2c26e992959..246fe529438 100644
+--- a/target/s390x/arch_dump.c
++++ b/target/s390x/arch_dump.c
+@@ -18,6 +18,7 @@
+ #include "elf.h"
+ #include "system/dump.h"
+ #include "kvm/kvm_s390x.h"
++#include "qemu/target-ops.h"
+ #include "target/s390x/kvm/pv.h"
+ 
+ struct S390xUserRegsStruct {
+@@ -449,7 +450,7 @@ static void arch_cleanup(DumpState *s)
+     }
+ }
+ 
+-int cpu_get_dump_info(ArchDumpInfo *info,
++static int s390_get_dump_info(ArchDumpInfo *info,
+                       const struct GuestPhysBlockList *guest_phys_blocks)
+ {
+     info->d_machine = EM_S390;
+@@ -469,7 +470,7 @@ int cpu_get_dump_info(ArchDumpInfo *info,
+     return 0;
+ }
+ 
+-ssize_t cpu_get_note_size(int class, int machine, int nr_cpus)
++static ssize_t s390_get_note_size(int class, int machine, int nr_cpus)
+ {
+     int name_size = 8; /* "LINUX" or "CORE" + pad */
+     size_t elf_note_size = 0;
+@@ -495,3 +496,6 @@ ssize_t cpu_get_note_size(int class, int machine, int nr_cpus)
+ 
+     return (elf_note_size) * nr_cpus;
+ }
++
++TARGET_OPS_REGISTER(QEMU_ARCH_S390X, get_dump_info, s390_get_dump_info);
++TARGET_OPS_REGISTER(QEMU_ARCH_S390X, get_note_size, s390_get_note_size);
+diff --git a/target/s390x/cpu_models_system.c b/target/s390x/cpu_models_system.c
+index 5b846048675..156008ebdec 100644
+--- a/target/s390x/cpu_models_system.c
++++ b/target/s390x/cpu_models_system.c
+@@ -20,6 +20,7 @@
+ #include "qapi/qobject-input-visitor.h"
+ #include "qobject/qdict.h"
+ #include "qapi/qapi-commands-machine.h"
++#include "qemu/target-ops.h"
+ 
+ static void list_add_feat(const char *name, void *opaque);
+ 
+@@ -82,7 +83,7 @@ static void create_cpu_model_list(ObjectClass *klass, void *opaque)
+     QAPI_LIST_PREPEND(*cpu_list, info);
+ }
+ 
+-CpuDefinitionInfoList *qmp_query_cpu_definitions(Error **errp)
++static CpuDefinitionInfoList *s390_query_cpu_definitions(Error **errp)
+ {
+     struct CpuDefinitionInfoListData list_data = {
+         .list = NULL,
+@@ -208,9 +209,10 @@ static void cpu_info_from_model(CpuModelInfo *info, const S390CPUModel *model,
+     }
+ }
+ 
+-CpuModelExpansionInfo *qmp_query_cpu_model_expansion(CpuModelExpansionType type,
+-                                                      CpuModelInfo *model,
+-                                                      Error **errp)
++static CpuModelExpansionInfo *
++s390_query_cpu_model_expansion(CpuModelExpansionType type,
++                               CpuModelInfo *model,
++                               Error **errp)
+ {
+     Error *err = NULL;
+     CpuModelExpansionInfo *expansion_info = NULL;
+@@ -434,3 +436,8 @@ void apply_cpu_model(const S390CPUModel *model, Error **errp)
+         applied_model = *model;
+     }
+ }
++
++TARGET_OPS_REGISTER(QEMU_ARCH_S390X, query_cpu_definitions,
++                   s390_query_cpu_definitions);
++TARGET_OPS_REGISTER(QEMU_ARCH_S390X, query_cpu_model_expansion,
++                   s390_query_cpu_model_expansion);
+diff --git a/target/sh4/monitor.c b/target/sh4/monitor.c
+index 14261c05970..c40c3543ce8 100644
+--- a/target/sh4/monitor.c
++++ b/target/sh4/monitor.c
+@@ -25,6 +25,7 @@
+ #include "cpu.h"
+ #include "monitor/monitor.h"
+ #include "monitor/hmp.h"
++#include "qemu/target-ops.h"
+ 
+ #ifdef CONFIG_HMP
+ static void print_tlb(MonitorHMP *hmp, int idx, tlb_t *tlb)
+@@ -39,7 +40,7 @@ static void print_tlb(MonitorHMP *hmp, int idx, tlb_t *tlb)
+                        tlb->d, tlb->wt);
+ }
+ 
+-void hmp_info_tlb(MonitorHMP *hmp, const QDict *qdict)
++static void hmp_info_tlb_sh4(MonitorHMP *hmp, const QDict *qdict)
+ {
+     CPUArchState *env = monitor_hmp_get_cpu_env(hmp);
+     int i;
+@@ -56,4 +57,5 @@ void hmp_info_tlb(MonitorHMP *hmp, const QDict *qdict)
+     for (i = 0 ; i < UTLB_SIZE ; i++)
+         print_tlb(hmp, i, &env->utlb[i]);
+ }
++TARGET_OPS_REGISTER(QEMU_ARCH_SH4, info_tlb, hmp_info_tlb_sh4);
+ #endif
+diff --git a/target/sparc/monitor.c b/target/sparc/monitor.c
+index ed1e76fe73f..a22fb376e5d 100644
+--- a/target/sparc/monitor.c
++++ b/target/sparc/monitor.c
+@@ -25,10 +25,11 @@
+ #include "cpu.h"
+ #include "monitor/monitor.h"
+ #include "monitor/hmp.h"
++#include "qemu/target-ops.h"
+ 
+ 
+ #ifdef CONFIG_HMP
+-void hmp_info_tlb(MonitorHMP *hmp, const QDict *qdict)
++static void hmp_info_tlb_sparc(MonitorHMP *hmp, const QDict *qdict)
+ {
+     CPUArchState *env1 = monitor_hmp_get_cpu_env(hmp);
+ 
+@@ -38,4 +39,5 @@ void hmp_info_tlb(MonitorHMP *hmp, const QDict *qdict)
+     }
+     dump_mmu(env1);
+ }
++TARGET_OPS_REGISTER(QEMU_ARCH_SPARC, info_tlb, hmp_info_tlb_sparc);
+ #endif
+diff --git a/target/xtensa/monitor.c b/target/xtensa/monitor.c
+index e0fcac8565d..e31c0dfcc28 100644
+--- a/target/xtensa/monitor.c
++++ b/target/xtensa/monitor.c
+@@ -25,9 +25,10 @@
+ #include "cpu.h"
+ #include "monitor/monitor.h"
+ #include "monitor/hmp.h"
++#include "qemu/target-ops.h"
+ 
+ #ifdef CONFIG_HMP
+-void hmp_info_tlb(MonitorHMP *hmp, const QDict *qdict)
++static void hmp_info_tlb_xtensa(MonitorHMP *hmp, const QDict *qdict)
+ {
+     CPUArchState *env1 = monitor_hmp_get_cpu_env(hmp);
+ 
+@@ -37,4 +38,5 @@ void hmp_info_tlb(MonitorHMP *hmp, const QDict *qdict)
+     }
+     dump_mmu(env1);
+ }
++TARGET_OPS_REGISTER(QEMU_ARCH_XTENSA, info_tlb, hmp_info_tlb_xtensa);
+ #endif
 -- 
-2.43.0
+2.55.0.windows.3
 
 
