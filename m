@@ -4,96 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94AD5CC6B3C
-	for <qemu-riscv@archiver.kernel.org>; Thu, 15 Oct 2026 09:38:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F5DCCC6B33
+	for <qemu-riscv@archiver.kernel.org>; Thu, 15 Oct 2026 09:41:44 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xHHut-0004Ci-2B; Thu, 15 Oct 2026 05:38:27 -0400
+	id 1xHHxm-0005eQ-Pv; Thu, 15 Oct 2026 05:41:26 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xHHuq-0004Bp-TM
- for qemu-riscv@nongnu.org; Thu, 15 Oct 2026 05:38:24 -0400
-Received: from mail-ej1-x62d.google.com ([2a00:1450:4864:20::62d])
+ id 1xHHxl-0005dz-Hz
+ for qemu-riscv@nongnu.org; Thu, 15 Oct 2026 05:41:25 -0400
+Received: from mail-ed1-x530.google.com ([2a00:1450:4864:20::530])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xHHun-0006bK-UA
- for qemu-riscv@nongnu.org; Thu, 15 Oct 2026 05:38:24 -0400
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-c2dc63f8d8aso888060566b.0
- for <qemu-riscv@nongnu.org>; Thu, 15 Oct 2026 02:38:21 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1792057100; cv=none;
+ id 1xHHxj-0006wU-EA
+ for qemu-riscv@nongnu.org; Thu, 15 Oct 2026 05:41:25 -0400
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-6a0a4aa99bdso6407899a12.1
+ for <qemu-riscv@nongnu.org>; Thu, 15 Oct 2026 02:41:23 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1792057282; cv=none;
  d=google.com; s=arc-20260327;
- b=l5sxzRNxpFe4bStjLvzDnmFIjydYOWgafSYJnAFSEJp4ZQoi5fTERLafmhEGy5LYp5
- NGxxJPGtVc+ZpgcNGof+24MBMlRtT9+TlRKXXI7CWYTAQKzbNZRCKwVwhVq1CwWrKO4z
- R0kOnzL9+1W/ORC/6Ft7+oxW7fvpNJs2NKylAKqp100Xj2x5hnCq00ob+zdOc1fokxt0
- x7vglyJOSgJzp0YDGFQlxEdwjILhVECWB1ZIytqPEN6Cqx+r5kN9rG4oqc2N3WoHOy+x
- VZ9/sxN1Rn1/OZe0RZOU1sBGEg5mh9AttCBlyyz0iGSsqI93V8d2WmY9idj1ar8ZmHvH
- nCWQ==
+ b=MMOFxcfjgowaKjjTXEPLi726RrTPyYiRqVSHrlhv0I57Rn2hNoowaqYXGxmer96JQP
+ f8aqtdnpe79YtmoDCikroiCqlo+V/yGf/dti4oMZFp08oKr6khulGYNiTbF0q4csbIDI
+ LFdEJkns+Vb+GDyYEmzpvLGOjVRyIyGYHfhqjAumWw1V4IaiUzGVfXB250ZcJZkfxQME
+ FZFTUcFSuCnQwhwkuutrIr6HGcTQqZNjwLcGV9lNIWIkK+vTHiqh8FIe/hJNzkgfb246
+ 2zV4j7SrHnEA3JigwRdcEMQkDHzfih09InAtMoCi5H6KwanK/kaqJ6P82hbWwX7V74G9
+ uLEg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :reply-to:in-reply-to:references:mime-version:dkim-signature;
- bh=r5G0BsDa9TUzuCzRry+HFI28e0hkmXpHpz9bsdrKKew=;
- fh=Y/ojH4qwtRoPWSzLuTF+TqGCkxs8IHTgm74MzOGGU9I=;
- b=Ipe71nd3LiQSVDLrHXtO/jRE/8wNlVQF8zY4qypQOglT3dgmjARPV2nCPzQOaG+84f
- ndNBT9FUDQtmMgV8fBCeqYMU73Bun7kzDexLRueX3QG7yWvun/bNNgMdRiZ4mv2ir+iN
- HfPzJoPEDNJiJGqP80cVeCYWTug8oylbhEUdSkC1I2mudzK/JJ1PBsbm7IDUtzg9GdHl
- elnYix/logUdDBZwpNXus+rChBj6tpZ2X/2YtkZL7NVOlXie7IUPyHVyoiC9am0MYIij
- kp0kVd8cSG7sRtZqolkgdj1M2VvLfhV3llnA+CHc6VjX51zQtzRMMCC36e75xBfR9BKo
- czDw==; darn=nongnu.org
+ bh=T0uNFZETbrUrkESV3u2WXEkKMGRLrPXNrI21GDl35/I=;
+ fh=TiQo043ailk6meF1KbnwIQIWX61577WQDsgeXDI4GTg=;
+ b=r9Q68p19pGQYfu3iRdQn+ezakkYBD4if7SZmJxU1ES5JSWux0svD97EzmzAtIn4bqg
+ HwO4LPCx+Ls5K4mixGF/h0pW94JpJSaqYjWQ8f67MVcTO8+3MlB/7uVh9ZGyRtfRaJqf
+ /xfV0MFkun/XQSTrqu0nU57/eCLNByZhfCvDgfq84r6HqVvrhsSsDTuFJfpkGn5hGZZS
+ /SHRgicOk5p/zF++EYffIbCHJLBx4t53vofQyel7oK7qy5y49yePf0u8MvzgcXGCpAty
+ Fnb0q+FsQJ3w02PNrHo6M5Z/OIA4gV/X/b8v7sHRaZ/ZLr5oMBmgHSt2q8CsDZ0EwVz/
+ KadA==; darn=nongnu.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1792057100; x=1792661900; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1792057282; x=1792662082; darn=nongnu.org;
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:reply-to:in-reply-to:references:mime-version:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=r5G0BsDa9TUzuCzRry+HFI28e0hkmXpHpz9bsdrKKew=;
- b=qLNp4n2+xMdE6saiQGY7qiym8S4r7/BgO2tPc/NAzBPLXX0FdVbeDJDL+68IVoehrA
- I8kJjS/FCtmOPN7zYppbb4lKEIW/Nhz/Emlw6ECXW5Vz2YtPngtsbiFvI21maARoX1z8
- 22RC9QgPNA97od9JUXz/DsVRvR9j8G6RoxBvztwrQdgd9CRT59Wkrb+sGiH1m9QJTq5x
- clJmU6Gt3JPplEcLHfP8pUJA9yaTQXO69PgG03OtobtY9DhAzdbeYJwFCwkBUPU/NzE1
- WWdepP4BjjNvRgJ87l/whv8RVEHoDglEyirDv+00ZCcjgmX+QHH32DEYPY+ABSa+21KB
- 9BBg==
+ bh=T0uNFZETbrUrkESV3u2WXEkKMGRLrPXNrI21GDl35/I=;
+ b=oQgrtxsbc5GBLlm1Ykh5ado6R13Tvwv2EeEo5C10ht+Uhrvz92KvGugqvnbv8HZ5gc
+ iliXokoTYPpMJuJRStk+PCbZ0n8t5+Ka7FenF04n6c6w+pYVu3GLQmoTJasMCQRYcTxk
+ o1CCGGHj9QQUoPR8y2uWXwz7FgIKziCvupGeiBs0hMNOM61eQYOvT225Rxlxs0OQNfGt
+ PA43TrvqBVpuLcCCU00L+ib0U7oXt1YMnM5GBtaSPL1HV0HAfZvRwTmrKWol3wUIscDz
+ IpZ71duLs5Nbr3gqrr/VBPU0oPsKuK25gXpPn0sbbbVaJnhyxyr/l+nbp5ARbTNuyA5T
+ FSFg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792057100; x=1792661900;
+ d=1e100.net; s=20260707; t=1792057282; x=1792662082;
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:reply-to:in-reply-to:references:mime-version:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=r5G0BsDa9TUzuCzRry+HFI28e0hkmXpHpz9bsdrKKew=;
- b=Oxw1cnVBrSjdp4/zaYEJi8aAQipQo6PFSoX5/8c9pgPHCpya7g5D6apmpQ4CRsbDIZ
- aI36eHuKqPId3zS3bnLs4s/PGGzOJ8zFOVfqBKh7dsamA5lqAQaZ4yAMsfX5+oM5Glum
- OXQZjMhrN4CvGbo5SxoVS+UEqZ/80i8dhXmNWdMz93U07dSLB6kwIqUeON3TN9WP3P2t
- 5nlcXHoUIl5U689mJeWAMD4YMQbseU8Tkq9px6f/BZK7HwLCdMEvX+UMrpycnu/REb85
- vs2HWS/uHMDhAIC9NdJ/HQmlpH4DZ1DnP5JZeH406JIw5uSTBIdE8jskG0XelYG8lCl5
- vQkw==
+ bh=T0uNFZETbrUrkESV3u2WXEkKMGRLrPXNrI21GDl35/I=;
+ b=zngn0rL8DgZUsF+nMK8e6dP4qb44jvdt3BrwLZ4/Dd0AhSlu2OjwW4X20g2LAOTgnp
+ ld8ALLKDzKuCnkeiYbvZaN598Nj4OT2fa8Cj/cLO65pcyTkxtmyfO9Tc208iaiFJXqbt
+ sAxcmRE5Loz3pWLHtD5hYwYZVOvVOSTNQZ5aRrtUCzC+YL5At8ECot53NDcDmKPbo5Ay
+ 24UlUhIzDZfb999kRmWupUVoo87eaPmYP6S2x8e3kQJzHNnemOSBlZahlwQ1mHU9g61j
+ DDgXCXPHf89mrAHxkHoe5nIoRpW8sCg/xdqTEfc8fHIw3sWhctp3RrCJ5qmoQ0KhIgGy
+ DbaA==
 X-Forwarded-Encrypted: i=1;
- AKwUvBwfGYFfiuB2YpYyWvGKI8xotFHh+h6VNS9Wyzo9LscifyCPM3IyHj4o15mDxqmusVHTQGQcFxG/5xCX@nongnu.org
-X-Gm-Message-State: AFq9FYJG6BURH/BYYBzBT6gzVE+XXwVhI2APtSsQb+0t9FWoCYcrOyqw
- YfpjAs4Egr7zjDF4d/31kFwTfbFfEabOKiKIbYZLhiJ89NB+S2D+C4ENSkc7BIMy3tki1bMDgr6
- xfahaqQwPeq+WuwAfK9LkM/xVvrFEV7Q=
-X-Gm-Gg: AYBFou0jYFVLvdCSjKvUqF0KxgLMVqczSDa8dnt4QbLqDXyuKH1kKcIwI0jRdWWLsi7
- WL0Ocq1E9j5E9D2DE/CEninMEBxoZSCuEIvvWWG6cKLciiZpPA3rJYXaAsp9PLfpHGmDxyqCH/2
- iLsg5gUadKfbmnkuqSOCK0VE6+v1LcWVXKNZrZkHFt3GW77vo/KmSDVjPjQXbyCgRd3LS+37qJP
- fShdwmeVoF4YbgtnVj4Xu5GxY4pjjIqRHla3f6160JBXeC63/10CFNHPwkrIZvwKuGTa5IdmWLG
- c2KhgpAaUsAp9Rp+11VYAMa3/ISxn16/4EG24UkOOKuORQoo8Ll+PzjxhljiQHg9Rg==
-X-Received: by 2002:a17:907:c21:b0:c2d:cdc6:827e with SMTP id
- a640c23a62f3a-c31aa0a2ce0mr1864751066b.41.1792057100205; Thu, 15 Oct 2026
- 02:38:20 -0700 (PDT)
+ AKwUvBzQm7MQyEMNPOpxoIIVFp3GRI4kSW6r1GqQ4f0PvoBI2TsZFUcR3O+KboNzIN2Phak1ZUEtrKJrGjpz@nongnu.org
+X-Gm-Message-State: AFq9FYLz9VKpWjmWjRKQvJUJMLcuYHxUfvi0IVQb/dJ0/bZtotTOWaEE
+ WGusA0R1NB+a6jiHMTfyVkD3s4I3OBwdu0QhWZl/98jpSR/92R1M58zknthSjEnrWO/b1GyAAoM
+ zkZ+QAwL/4fRLLxy3HBupkOuwc0lp1r0=
+X-Gm-Gg: AYBFou24/HUcCf7/8noUeQM7/2nPOVopReS6sC0jb2Ww/D5O79d8mGon4+kngKHvD8q
+ ZqGX6JjhOhIp62uqQ+4c8zn6cOPqmEvJZNJEuzFLtR/pPTxal817rPFfrewa/AFNGOc72E98p9F
+ IYK64NDF1Y7Nr1HuOTpB4MJ78Ci0CHQ+EYWXsITARvA08DRGlNsQPbKeSNgzb0sO3KHpA0HGkju
+ bdSzVVubHsM3ogH8kP7JsiakdzOXNhQw5xfMAEp3ogxrM3698oo9nHhDmz+Pl5iM6gFxkeZNdkO
+ 6DKws1pG3DKfX4YsOMdp8kZFO9ZC/74gVnK3udcrdVmK3QowrOAQOyY=
+X-Received: by 2002:a05:6402:44cf:b0:6b1:c7d9:b622 with SMTP id
+ 4fb4d7f45d1cf-6b1c7d9b9c0mr7663893a12.26.1792057281361; Thu, 15 Oct 2026
+ 02:41:21 -0700 (PDT)
 MIME-Version: 1.0
 References: <20261015044104.879-1-luoyonggang@gmail.com>
- <CAFEAcA8n9E1jpcOCat0kzv0Q++x7YwK_MNJBJ0qGdtX1-As4zg@mail.gmail.com>
-In-Reply-To: <CAFEAcA8n9E1jpcOCat0kzv0Q++x7YwK_MNJBJ0qGdtX1-As4zg@mail.gmail.com>
+ <atCc0GPHiZo2WlNM@redhat.com>
+In-Reply-To: <atCc0GPHiZo2WlNM@redhat.com>
 From: Yonggang Luo <luoyonggang@gmail.com>
-Date: Thu, 15 Oct 2026 17:38:07 +0800
-X-Gm-Features: AclHuK8ImpVzSLpzl3F37S2gKdr6BmHMTgfbVwm-E2c2iARD0v6BZKeBj8njzKc
-Message-ID: <CAE2XoE-fgq_c9qONyvfbNi3Ys_hv7yKvGCkk+Wz+rHPW0p65Eg@mail.gmail.com>
+Date: Thu, 15 Oct 2026 17:41:09 +0800
+X-Gm-Features: AclHuK8GYGbA3cAAtuTRoMtEpjaxjCZh2tLZUcHwEvNTtJEr9Kx9Nv2nZyoQY1Q
+Message-ID: <CAE2XoE8ONwY388OqaOBh65RvLr3Gsksk3QS3Cw2HFqH=bHE4-A@mail.gmail.com>
 Subject: Re: [PATCH] target-info: dispatch CPU QMP, dump, monitor,
  and Angel semihosting
-To: Peter Maydell <peter.maydell@linaro.org>
-Cc: qemu-devel@nongnu.org,
+To: =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>
+Cc: qemu-devel@nongnu.org, Peter Maydell <peter.maydell@linaro.org>, 
  =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@oss.qualcomm.com>, 
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org, 
  David Hildenbrand <david@kernel.org>, Glenn Miles <milesg@linux.ibm.com>,
@@ -106,7 +106,6 @@ Cc: qemu-devel@nongnu.org,
  =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, 
  Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org, qemu-ppc@nongnu.org, 
  Cornelia Huck <cohuck@redhat.com>, Weiwei Li <liwei1518@gmail.com>, 
- =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
  "Dr. David Alan Gilbert" <dave@treblig.org>,
  Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, 
  Bibo Mao <maobibo@loongson.cn>, Artyom Tarasenko <atar4qemu@gmail.com>, 
@@ -123,8 +122,8 @@ Cc: qemu-devel@nongnu.org,
  Yoshinori Sato <yoshinori.sato@nifty.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::62d;
- envelope-from=luoyonggang@gmail.com; helo=mail-ej1-x62d.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::530;
+ envelope-from=luoyonggang@gmail.com; helo=mail-ed1-x530.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -148,11 +147,10 @@ Reply-To: luoyonggang@gmail.com
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Oct 15, 2026 at 5:20=E2=80=AFPM Peter Maydell <peter.maydell@linaro=
-.org> wrote:
+On Thu, Oct 15, 2026 at 5:29=E2=80=AFPM Daniel P. Berrang=C3=A9 <berrange@r=
+edhat.com> wrote:
 >
-> On Thu, 15 Oct 2026 at 05:41, Yonggang Luo <luoyonggang@gmail.com> wrote:
-> >
+> On Thu, Oct 15, 2026 at 12:41:02PM +0800, Yonggang Luo wrote:
 > > Put query-cpu-definitions, dump notes, monitor, and Angel semihosting o=
 n
 > > TargetOps[SYS_EMU_TARGET__MAX] and look up by target_arch().
@@ -167,64 +165,42 @@ n
 > >        stubs/dump.c
 > >
 > > Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
-> > ---
-> >  MAINTAINERS                           |  1 -
-> >  hw/core/cpu-system.c                  | 23 ++++++++++
-> >  hw/core/machine-qmp-cmds.c            | 27 ++++++++++++
-> >  include/qemu/target-ops.h             | 59 +++++++++++++++++++++++++
-> >  include/semihosting/common-semi.h     | 63 ++++++++++++++++++++++++---
-> >  meson.build                           |  1 +
-> >  monitor/hmp.c                         | 25 +++++++++++
-> >  stubs/dump.c                          | 27 ------------
-> >  stubs/hmp-cmd-info_mem.c              | 12 -----
-> >  stubs/hmp-cmd-info_tlb.c              | 12 -----
-> >  stubs/meson.build                     |  4 --
-> >  stubs/qmp-cpu.c                       | 21 ---------
-> >  target-ops.c                          | 49 +++++++++++++++++++++
-> >  target/arm/arch_dump.c                |  8 +++-
-> >  target/arm/arm-qmp-cmds.c             | 15 +++++--
-> >  target/arm/common-semi-target.c       | 26 ++++++++---
-> >  target/arm/meson.build                |  7 +--
-> >  target/hexagon/common-semi-target.c   | 26 ++++++++---
-> >  target/i386/arch_dump.c               |  8 +++-
-> >  target/i386/cpu-system.c              | 12 +++--
-> >  target/i386/cpu.c                     |  6 ++-
-> >  target/i386/monitor.c                 |  8 +++-
-> >  target/loongarch/arch_dump.c          |  8 +++-
-> >  target/loongarch/loongarch-qmp-cmds.c | 15 +++++--
-> >  target/m68k/monitor.c                 |  4 +-
-> >  target/mips/system/mips-qmp-cmds.c    | 15 +++----
-> >  target/ppc/arch_dump.c                |  8 +++-
-> >  target/ppc/monitor.c                  |  4 +-
-> >  target/ppc/ppc-qmp-cmds.c             | 15 +++----
-> >  target/riscv/arch_dump.c              |  8 +++-
-> >  target/riscv/common-semi-target.c     | 28 ++++++++----
-> >  target/riscv/meson.build              |  4 +-
-> >  target/riscv/monitor.c                |  4 +-
-> >  target/riscv/riscv-qmp-cmds.c         | 15 +++++--
-> >  target/s390x/arch_dump.c              |  8 +++-
-> >  target/s390x/cpu_models_system.c      | 15 +++++--
-> >  target/sh4/monitor.c                  |  4 +-
-> >  target/sparc/monitor.c                |  4 +-
-> >  target/xtensa/monitor.c               |  4 +-
-> >  39 files changed, 428 insertions(+), 175 deletions(-)
-> >  create mode 100644 include/qemu/target-ops.h
-> >  delete mode 100644 stubs/dump.c
-> >  delete mode 100644 stubs/hmp-cmd-info_mem.c
-> >  delete mode 100644 stubs/hmp-cmd-info_tlb.c
-> >  delete mode 100644 stubs/qmp-cpu.c
-> >  create mode 100644 target-ops.c
+> > +typedef struct TargetOps {
+> > +    void (*info_tlb)(MonitorHMP *hmp, const QDict *qdict);
+> > +    void (*info_mem)(MonitorHMP *hmp, const QDict *qdict);
+> > +    CpuDefinitionInfoList *(*query_cpu_definitions)(Error **errp);
+> > +    CpuModelExpansionInfo *(*query_cpu_model_expansion)(
+> > +        CpuModelExpansionType type, CpuModelInfo *model, Error **errp)=
+;
+> > +    int (*get_dump_info)(ArchDumpInfo *info,
+> > +                         const struct GuestPhysBlockList *guest_phys_b=
+locks);
+> > +    ssize_t (*get_note_size)(int class, int machine, int nr_cpus);
+> > +    const CPUSemihostingOps *semihosting;
+> > +} TargetOps;
 >
-> Too big a patch touching stuff all over the place with
-> insufficient explanation of what it's doing or why.
+> IMHO, TargetOps shouldn't exist and this kind of thing should
+> be done as virtual methods aginst the CPUClass, or failing
+> that, against the MachineClass.
 
-Oh, sorry, I post is just for demo(DRAFT) for other place to
-reference, but git-publish have no way
-to title it(maybe because I use it wrongly).
+Good point, so > +    void (*info_tlb)(MonitorHMP *hmp, const QDict *qdict)=
+;
+> +    void (*info_mem)(MonitorHMP *hmp, const QDict *qdict); should on Mac=
+hineClass?
+make sense. just for x86 we need a base abstract machine for it.
+
+anyway this is intent to be dropped. just for discussion to receive
+some feedback.
+
 >
-> thanks
-> -- PMM
-
+>
+> With regards,
+> Daniel
+> --
+> |: https://berrange.com       ~~        https://hachyderm.io/@berrange :|
+> |: https://libvirt.org          ~~          https://entangle-photo.org :|
+> |: https://pixelfed.art/berrange   ~~    https://fstop138.berrange.com :|
+>
 
 
 --=20
