@@ -4,69 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8570DCC6B30
-	for <qemu-riscv@archiver.kernel.org>; Thu, 15 Oct 2026 00:29:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F73DCC6B33
+	for <qemu-riscv@archiver.kernel.org>; Thu, 15 Oct 2026 00:29:46 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xH9LI-0001cW-JA; Wed, 14 Oct 2026 20:29:08 -0400
+	id 1xH9LE-0001bh-QQ; Wed, 14 Oct 2026 20:29:05 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <portias@tenstorrent.com>)
- id 1xH9LH-0001cA-8U
- for qemu-riscv@nongnu.org; Wed, 14 Oct 2026 20:29:07 -0400
-Received: from mail-pj1-x102e.google.com ([2607:f8b0:4864:20::102e])
+ id 1xH9LC-0001bI-Cn
+ for qemu-riscv@nongnu.org; Wed, 14 Oct 2026 20:29:02 -0400
+Received: from mail-pj1-x102d.google.com ([2607:f8b0:4864:20::102d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <portias@tenstorrent.com>)
- id 1xH9LF-0000wc-92
- for qemu-riscv@nongnu.org; Wed, 14 Oct 2026 20:29:07 -0400
-Received: by mail-pj1-x102e.google.com with SMTP id
- 98e67ed59e1d1-3ab7b8e6fc2so288792a91.3
- for <qemu-riscv@nongnu.org>; Wed, 14 Oct 2026 17:29:04 -0700 (PDT)
+ id 1xH9L9-0000wD-Pf
+ for qemu-riscv@nongnu.org; Wed, 14 Oct 2026 20:29:01 -0400
+Received: by mail-pj1-x102d.google.com with SMTP id
+ 98e67ed59e1d1-3ac7538422bso143049a91.2
+ for <qemu-riscv@nongnu.org>; Wed, 14 Oct 2026 17:28:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=tenstorrent.com; s=google; t=1792024144; x=1792628944; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=W6iQt/nJGJKSfexDx17afcIMBhxPEbv2eHDhVLE1BZQ=;
- b=I0aU5GSGT+YCrsGJRVyDUPmZSpde8Nq4RX6tb9iDejCYueGjZgvQaVrkD1HqRG+Re9
- Yyusxmf5ijy7nE3NR1ss3Rv0U2hJqFQWCpMY0IbNm4tCSWpm4aUfRZ8tW6XVCtEXGO51
- 50J1axNbE8Az6GtM9+55+zGiJKN6/0BmMsyOHrRPFy9bINXujP/Jc1/6Wa6ne0cides+
- QqQsXZ/ylhrZZ9Ez98W2bmndzVkH3L3odgyXVmDXK4VoZ5s9HbGJGVTu4sM1nLBLc5Y7
- Umhu+yK5JMLd5r65DTevn333laDU2/+kr4Cj1qsu6ZcFohpZ7W5/leKEXC8BDpCEpr0z
- nBaA==
+ d=tenstorrent.com; s=google; t=1792024138; x=1792628938; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:content-type:message-id:date
+ :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=/UEZ48QC3Os0vi1kIg7gMtuvAmT1VrIysmcWwHvMwVQ=;
+ b=eLxeYRuAkSJa+MCphjCkgkCzt4sGEU1UMkZyl3fep9yM57bw+U1ND59XwdYbThuQsO
+ oZEwC9qAaJXxvPRCUrLZWKfzu0Y1PJYYqmkuwasCFeLxgBL17lRzfiiwOZ4qQ2+2uW03
+ 39zjZ5tjXWg2Lw33wkg3fsMO6phBtdKK44z/BUAB7XoMW3gj0d6JEQXywVKOWidjvyQD
+ WXaUiaFPOJ4zrYuwNdH6HXe4JCBDvCV/8MtJSnHa4HrFtrKuSc2TmYmUJC0zd7y3ksH9
+ w8Axhp2XWYKXTY9O6NP+IJRuOimyA9urEecKR8vC0t8XVeVAMW7F7oiedU0f2NiJwg2s
+ 0guw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792024144; x=1792628944;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=W6iQt/nJGJKSfexDx17afcIMBhxPEbv2eHDhVLE1BZQ=;
- b=L7cpmtkJBKcUGpeWf5URDfXjGZUK0Ml1Uqt4eOzmmsBtqc11IxXN93yApqVbsnhfjh
- OZ3/AOsmGT66BY5Eq0LrOhxp9/87T1j/GmO98I/kKbDEIOWWa0Z7ybXhQVHL7+W1+UDL
- S9b8GfPv60dkR91cS4Z5l/Piw8rBV36Ll3zKB00dfjVmj3+Lr7s5z+7A2oGWNGF41u+t
- EPpqo93XM9iL6fduLF2pKqmJEAop77+UztDB/YnwXZLLqdjQJH3PJNgPBZCHcSNGBw8C
- m/deAV02PgXL1ZxDMt8DaGFvp527wmmXhMWMVt8Egu4XUYHCRJr4bvSpowYdYUEXes66
- JFiA==
+ d=1e100.net; s=20260707; t=1792024138; x=1792628938;
+ h=content-transfer-encoding:mime-version:content-type:message-id:date
+ :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=/UEZ48QC3Os0vi1kIg7gMtuvAmT1VrIysmcWwHvMwVQ=;
+ b=rhF+tSau++zfsdTJHEkXNn3ltNKapPl4pX2gqZlhXs+n3MNWeCyCKzRNFNPj3RiLIP
+ eeI451LUK4TjDFR91yYTV82QrQmQOtiMOSXTvE7Ra0jxAS/G8pW3C3joAdPCPFLSLBzW
+ 7DU/Ammb+RGTNOJt3Ck2Jm3RkbXT1q+9cUXIsgFFxTiNwd2n8cxQ5LbxqsKMjlMEKLxr
+ ITiNJofcO7V27Z+fQdvv0xLJh+sgsFBphw9H82tk755QyrDlPfYLT/caNhIQxOSAyynl
+ zbNbaVndZCssnP2ZzSJ0dArZWwLZvnABFII1VZwJYRPDp6aQgZzTGgfa0VnRN2O0Ad/i
+ I1Xw==
 X-Forwarded-Encrypted: i=1;
- AKwUvBzXl8+HCtxdYa/I8XTnYZ82aWHdAVkl5gY+N7qsDTnIhaBz1T7emu3nziJKtNEwUyomfnj4uy1ymvXb@nongnu.org
-X-Gm-Message-State: AFq9FYL2l4OpF18PyNO9/SCLUuaH5U4P2rl8DzyGmvkPcT4VzPVf7AP0
- lKHPjyOK8eYMV+vyHT/ythhLjt5cDs9gMPi/2e7x0puUPzHkSXVPXXPJ27iTLbAgmhA=
-X-Gm-Gg: AYBFou2/84ChAMpIGSnBwjX6aS9mrfgEURIqsh4SnCal2155Dv0gEaPu7SD53FTEQd4
- kh7WgwQzGxVsvvsjgdYGzr3y9q3iFM9aYBWzHECmSPKR1G3m26kHBeHI4YZVswGILdo1gYU2zJq
- Pkh/NGt7aVekoOEB+b8sDpblWDuXyCWqxPQoH0Fg1XxeGrtzwrLl59Lku1Y8BK/mC686J4szKhx
- 8ft42nn8o9qnG34vR4VvG9mAUt3KrH1njXR8oVcr+JkXoK4OlfHedG4yHZL3QuTjdfmv4ac1tmf
- VgsXiNt5fH0C/6FTd8PYvdYK8k8LLIcaeqo3q3xa866JsTjA7NUUIk8KAqyNh7D/PdcpqLtWViu
- THzbIvd3dEy31vEnjuI/kp3OsijqLfdIS7L8KXNTZNUY3eqSpok6yxL++Vghfzqaxf61kRTPWsM
- jUTuCYMaaUQ5eEklOkHSYkt0b4imWFqfko5bIs99XbR5jKhIpeEqoKRroJsiDQXQr0H/XpI7rea
- Y46C8tykgW+l8iEyWC6pBh+7IKAXgn8wdWz/34rDdFQZHQ=
-X-Received: by 2002:a17:90b:1a90:b0:3a8:1759:2217 with SMTP id
- 98e67ed59e1d1-3ab3a393867mr26528758a91.2.1792024143827; 
- Wed, 14 Oct 2026 17:29:03 -0700 (PDT)
+ AKwUvBywEN6VSmDqqDASI4+IAxTa4YUihhRDqKnuziCakjTk5c+PkD4EP+tdCITn/SPmpFkUTgKjHfUxRWC9@nongnu.org
+X-Gm-Message-State: AFq9FYItlWoQfBfiDdo2Fl++ROXEi+RsbNKxYyXCEKl/ww1K5QjeFS+h
+ x57pmGYbeSihzRsK0kHVP92WOvQj3U6osO0GckLz0HumCUJmh9dodeQjaWVKVGiQ1Dg=
+X-Gm-Gg: AYBFou1ABnHRwkeBcH7hHIr6DS2omE98CxnUCJXUVDoFApMDluigtpR040kJtg4DF4v
+ gp7TuXFO3EwFoTlg2bMlXntgGGVb1/Ikp6aG6347VsKQYj+VT/T5vjMnhqOoDo5rqH993Vo9nLl
+ NLVXpvp/0cYhl8bI25H/WaDG3MjnFowX2sqlTckCp0KXfOIKJJ+T5v7ebeDfVMwsNv3awy7PeyW
+ Q8+nhfiJkKlDJ5SII7y6Xeck4+Ol8lZpBzWNCyc6VA7WgZGVZcBfjX4A1EwmEd4KF4WuYy9JMKc
+ Cwqvls+18jl0wvhQIKJMAIp6PMvDrdC/X7ChM7aOZj6i4jT/oAHZPOU740aCG4FTCVys6OuPI9O
+ IT8Ip9m5oC57T5P2z2d9rGF3yei3daVY1g8zzP0iw5so5COdRvib6FKRZ9Rjm6UElY2MTAL2oDA
+ pW7y3vMTjK8uWLGA3L+dapDPZIU6W0yBKal+qT1Xi0iz+TcKeL/hDKvH+vVFUX0pFGoFbYzzS8T
+ /4bGuSG6XIE9xzGkHfazJFfx3AQNoyPVLaLZN2msspIpHk=
+X-Received: by 2002:a17:90b:224e:b0:3a8:9db2:a59 with SMTP id
+ 98e67ed59e1d1-3ab3a0f0a2amr24973833a91.0.1792024137899; 
+ Wed, 14 Oct 2026 17:28:57 -0700 (PDT)
 Received: from lima-default.tail89d63.ts.net ([159.196.41.205])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3ac92a49d7bsm795730a91.0.2026.10.14.17.28.58
+ 98e67ed59e1d1-3ac92a49d7bsm795730a91.0.2026.10.14.17.28.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 14 Oct 2026 17:29:03 -0700 (PDT)
+ Wed, 14 Oct 2026 17:28:57 -0700 (PDT)
 From: Portia Stephens <portias@oss.tenstorrent.com>
 To: qemu-devel@nongnu.org
 Cc: Chao Liu <chao.liu@processmission.com>,
@@ -81,16 +80,15 @@ Cc: Chao Liu <chao.liu@processmission.com>,
  Palmer Dabbelt <palmer@dabbelt.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Nicholas Piggin <npiggin@gmail.com>
-Subject: [PATCH v5 1/3] hw/riscv/atlantis: Use dw8250 UART model
-Date: Thu, 15 Oct 2026 10:28:47 +1000
-Message-ID: <20261015002849.1640109-2-portias@oss.tenstorrent.com>
+Subject: [PATCH v5 0/3] Improve modeling of the Atlantis UART
+Date: Thu, 15 Oct 2026 10:28:46 +1000
+Message-ID: <20261015002849.1640109-1-portias@oss.tenstorrent.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20261015002849.1640109-1-portias@oss.tenstorrent.com>
-References: <20261015002849.1640109-1-portias@oss.tenstorrent.com>
+Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102e;
- envelope-from=portias@tenstorrent.com; helo=mail-pj1-x102e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102d;
+ envelope-from=portias@tenstorrent.com; helo=mail-pj1-x102d.google.com
 X-Spam_score_int: -19
 X-Spam_score: -2.0
 X-Spam_bar: --
@@ -112,154 +110,45 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Replace the ns16550 UART with a Designware UART now that a model is
-available. The hack which sets the rest of the UART register space as
-unimplemented can be removed.
+The Atlantis SoC has a DesignWare UART compatible with DW8250. Previously
+the Atlantis machine had used the ns16550 UART with an unimplemented memory
+region backing the DesignWare specific register space. This updates the Atlantis
+model to use the now modeled DW8250.
 
-Signed-off-by: Portia Stephens <portias@oss.tenstorrent.com>
-Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
----
- hw/riscv/Kconfig               |  2 +-
- hw/riscv/tt_atlantis.c         | 48 +++++++++++-----------------------
- include/hw/riscv/tt_atlantis.h |  4 +--
- 3 files changed, 18 insertions(+), 36 deletions(-)
+The Ascalon console, uart1, remains on the first command line serial interface. The
+other 4 uarts are not added to the command line interface yet. They will be added
+as modeling is added that produces output on them.
 
-diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-index fb05031228..d89fdfcc86 100644
---- a/hw/riscv/Kconfig
-+++ b/hw/riscv/Kconfig
-@@ -144,7 +144,7 @@ config TENSTORRENT
-     select RISCV_ACLINT
-     select RISCV_APLIC
-     select RISCV_IMSIC
--    select SERIAL_MM
-+    select DW8250
-     select DEVICE_TREE
-     select DESIGNWARE_I2C
-     select DS1338
-diff --git a/hw/riscv/tt_atlantis.c b/hw/riscv/tt_atlantis.c
-index 4e6c39982c..dfd6bc6ba6 100644
---- a/hw/riscv/tt_atlantis.c
-+++ b/hw/riscv/tt_atlantis.c
-@@ -24,9 +24,8 @@
- #include "hw/riscv/fdt-common.h"
- #include "hw/riscv/riscv_hart.h"
- 
--#include "hw/char/serial-mm.h"
-+#include "hw/char/dw8250.h"
- #include "hw/intc/riscv_aclint.h"
--#include "hw/misc/unimp.h"
- #include "hw/misc/tt_atlantis_prcm.h"
- 
- #include "system/system.h"
-@@ -268,11 +267,15 @@ static void create_fdt_uart(void *fdt, const MemMapEntry *mem, int irq,
-                             int irqchip_phandle, uint32_t clk_parent_phandle,
-                             uint32_t clk_phandle)
- {
-+    static const char * const compat[2] = {
-+        "snps,dw-apb-uart", "ns16550a"
-+    };
-     g_autofree char *name = g_strdup_printf("/soc/serial@%"HWADDR_PRIX,
-                                             mem->base);
- 
-     qemu_fdt_add_subnode(fdt, name);
--    qemu_fdt_setprop_string(fdt, name, "compatible", "ns16550a");
-+    qemu_fdt_setprop_string_array(fdt, name, "compatible",
-+                                 (char **)&compat, ARRAY_SIZE(compat));
-     qemu_fdt_setprop_sized_cells(fdt, name, "reg", 2, mem->base, 2, mem->size);
-     qemu_fdt_setprop_cell(fdt, name, "reg-shift", 2);
-     qemu_fdt_setprop_cell(fdt, name, "reg-io-width", 4);
-@@ -466,17 +469,6 @@ static void load_fdt(TTAtlantisState *ams)
-     create_fdt_memory(ms->fdt, &ams->soc);
- }
- 
--static void mmio_map_unimplemented(MemoryRegion *memory, SysBusDevice *dev,
--                                   const char *name, hwaddr addr, uint64_t size)
--{
--    qdev_prop_set_string(DEVICE(dev), "name", name);
--    qdev_prop_set_uint64(DEVICE(dev), "size", size);
--    sysbus_realize(dev, &error_abort);
--
--    memory_region_add_subregion_overlap(memory, addr,
--                                        sysbus_mmio_get_region(dev, 0), -1000);
--}
--
- static void tt_atlantis_machine_done(Notifier *n, void *data)
- {
-     TTAtlantisState *ams = container_of(n, TTAtlantisState, machine_done);
-@@ -545,8 +537,7 @@ static void tt_atlantis_soc_init(Object *obj)
- 
-     object_initialize_child(obj, "cpus", &s->cpus, TYPE_RISCV_HART_ARRAY);
- 
--    object_initialize_child(obj, "uart1", &s->uart1,
--                            TYPE_UNIMPLEMENTED_DEVICE);
-+    object_initialize_child(obj, "uart1", &s->uart1, TYPE_DW8250);
- 
-     object_initialize_child(obj, "prcm-rcpu",
-                             &s->prcm[TT_ATLANTIS_PRCM_DOMAIN_RCPU],
-@@ -653,11 +644,6 @@ static void tt_atlantis_soc_realize(DeviceState *dev, Error **errp)
-     memory_region_add_subregion(s->memory, s->memmap[TT_ATL_BOOTROM].base,
-                                 &s->bootrom);
- 
--    /* UART1, the soc console (UART0 is for the boot microcontroller) */
--    serial_mm_init(s->memory, s->memmap[TT_ATL_UART1].base, 2,
--                   qdev_get_gpio_in(s->irqchip, TT_ATL_UART1_IRQ),
--                   115200, serial_hd(0), DEVICE_LITTLE_ENDIAN);
--
-     /* 4 PRCM blocks */
-     if (!sysbus_realize(SYS_BUS_DEVICE(&s->prcm[TT_ATLANTIS_PRCM_DOMAIN_RCPU]),
-                         errp)) {
-@@ -695,18 +681,14 @@ static void tt_atlantis_soc_realize(DeviceState *dev, Error **errp)
-         sysbus_mmio_get_region(
-             SYS_BUS_DEVICE(&s->prcm[TT_ATLANTIS_PRCM_DOMAIN_MM]), 0));
- 
--    /*
--     * Atlantis contains a DesignWare uart while the QEMU machine
--     * uses the serial_mm model with the base ns16550 register set.
--     * Linux's dw driver writes outside of serial_mm's 0x20 sized
--     * mapping and faults.
--     *
--     * Create an unimplemented device region so writes don't fault
--     * and reads return zero, which keeps Linux happy.
--     */
--    mmio_map_unimplemented(s->memory, SYS_BUS_DEVICE(&s->uart1),
--                           "tt-atlantis.uart1", s->memmap[TT_ATL_UART1].base,
--                           s->memmap[TT_ATL_UART1].size);
-+    /* UART1, the soc console (UART0 is for the boot microcontroller) */
-+    qdev_prop_set_chr(DEVICE(&s->uart1), "chardev", serial_hd(0));
-+    sysbus_realize(SYS_BUS_DEVICE(&s->uart1), &error_fatal);
-+    memory_region_add_subregion(s->memory,
-+                                s->memmap[TT_ATL_UART1].base,
-+                                sysbus_mmio_get_region(SYS_BUS_DEVICE(&s->uart1), 0));
-+    sysbus_connect_irq(SYS_BUS_DEVICE(&s->uart1), 0,
-+                       qdev_get_gpio_in(s->irqchip, TT_ATL_UART1_IRQ));
- 
-     /* I2C */
-     for (int i = 0; i < TT_ATL_NUM_I2C; i++) {
-diff --git a/include/hw/riscv/tt_atlantis.h b/include/hw/riscv/tt_atlantis.h
-index 577c867d71..fc7a4337cc 100644
---- a/include/hw/riscv/tt_atlantis.h
-+++ b/include/hw/riscv/tt_atlantis.h
-@@ -13,8 +13,8 @@
- #include "hw/core/sysbus.h"
- #include "hw/i2c/designware_i2c.h"
- #include "hw/intc/riscv_imsic.h"
--#include "hw/misc/unimp.h"
- #include "hw/misc/tt_atlantis_prcm.h"
-+#include "hw/char/dw8250.h"
- #include "hw/riscv/riscv_hart.h"
- 
- #define TYPE_TT_ATLANTIS_MACHINE MACHINE_TYPE_NAME("tt-atlantis")
-@@ -41,7 +41,7 @@ struct TTAtlantisSoCState {
-     RISCVHartArrayState cpus;
-     DeviceState *irqchip;
-     DesignWareI2CState i2c[TT_ATL_NUM_I2C];
--    UnimplementedDeviceState uart1;
-+    DW8250State uart1;
-     MemoryRegion bootrom;
-     TTAtlantisPRCMState prcm[TT_ATL_NUM_PRCM];
- 
+Changes from v4:
+- Rebased to include PRCM changes.
+- Dropped uart2 through 4 from device tree, this should of been done in v3 when they
+were removed from the command line -serial.
+
+Changes from v3:
+- Drop machine property which changes the ordering of the serial devices on the
+command line and update documentation with the change.
+
+Changes from v2:
+- Fix typo in documentation
+- Fix white spacing issue in machine help text
+
+Changes from v1:
+- Drop DW8250 fix, to be squashed into original patch which is not applied yet.
+- Use qemu_fdt_setprop_string_array for creating compatible string
+- Change machine property,console, from string to uint32 and set default value.
+- Documentation fixes
+
+Portia Stephens (3):
+  hw/riscv/atlantis: Use dw8250 UART model
+  hw/riscv/atlantis: Add all UARTs for Atlantis SoC
+  docs/atlantis: Update Atlantis UART documentation
+
+ docs/system/riscv/tt_atlantis.rst |  7 ++--
+ hw/riscv/Kconfig                  |  2 +-
+ hw/riscv/tt_atlantis.c            | 68 ++++++++++++++++---------------
+ include/hw/riscv/tt_atlantis.h    | 13 +++++-
+ 4 files changed, 50 insertions(+), 40 deletions(-)
+
 -- 
 2.43.0
 
