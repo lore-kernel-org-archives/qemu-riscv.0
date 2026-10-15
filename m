@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70E1ACC6B2D
-	for <qemu-riscv@archiver.kernel.org>; Thu, 15 Oct 2026 03:19:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79F8ACC6B2F
+	for <qemu-riscv@archiver.kernel.org>; Thu, 15 Oct 2026 03:20:01 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xHBzH-0006cO-LN; Wed, 14 Oct 2026 23:18:35 -0400
+	id 1xHBzf-0006kH-VE; Wed, 14 Oct 2026 23:18:59 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <portias@tenstorrent.com>)
- id 1xHBz7-0006a6-EA
- for qemu-riscv@nongnu.org; Wed, 14 Oct 2026 23:18:25 -0400
-Received: from mail-pj1-x1033.google.com ([2607:f8b0:4864:20::1033])
+ id 1xHBzZ-0006hV-MP
+ for qemu-riscv@nongnu.org; Wed, 14 Oct 2026 23:18:53 -0400
+Received: from mail-pf1-x42e.google.com ([2607:f8b0:4864:20::42e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <portias@tenstorrent.com>)
- id 1xHBz6-0006cc-2G
- for qemu-riscv@nongnu.org; Wed, 14 Oct 2026 23:18:25 -0400
-Received: by mail-pj1-x1033.google.com with SMTP id
- 98e67ed59e1d1-3ac847f9d78so125273a91.1
- for <qemu-riscv@nongnu.org>; Wed, 14 Oct 2026 20:18:23 -0700 (PDT)
+ id 1xHBzX-0006if-VV
+ for qemu-riscv@nongnu.org; Wed, 14 Oct 2026 23:18:53 -0400
+Received: by mail-pf1-x42e.google.com with SMTP id
+ d2e1a72fcca58-89a837bf00eso394483b3a.2
+ for <qemu-riscv@nongnu.org>; Wed, 14 Oct 2026 20:18:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=tenstorrent.com; s=google; t=1792034302; x=1792639102; darn=nongnu.org;
+ d=tenstorrent.com; s=google; t=1792034330; x=1792639130; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=VmMMUAd6gA6U8M7wACz8JIPXiKmX69iwu/hMcHHU1HE=;
- b=RlwVUPvYt34eWSM57yKG29lg+jTWgbEPbQWEU5YbY1FGQCK8RXmlnEEwrG+X8/YbKf
- uEEBA7nNmWtR0OxeFrtAuTtmWtEjpT/sPASL/G7dr7RqOi4j92I4oABHXoKiqZOTjC1e
- 85iyspILalPp64uPKitQrAlgQda21s9U7XcQwPM4bxUJeoyQqlLWq1EycNYRodvK2sy8
- lQ9rZB8BXEHhp4hgBMOPFNCBZNEENEirvy4QgsR/++FJ52iwzXvIaWNcoSLa6hQJp+rg
- FmWiklCatEyQRWkSxtI1uj9jyHpK1fx5A08p79HX6hpvJ2WrZhipDULjC7GIquFIeirW
- sfXQ==
+ bh=lSuRssBqPq4eepN2kOGh1UyXRV553icR6wX0UHNQwfg=;
+ b=PcxclAqkFxo+VPRePDGhoh9ZqxQEXKYmWm0zRvZVwpPAfFwbp6uSGR4m6fNeqF3f8C
+ sHtfK7wrpSgpW5OsldEEnK5UlbPwWTVXVV5NzQwDPqKTmqN8frxzQsv5sIXLQ+H/byl/
+ HJlxUh0NjNp8qAnqfUGDJ0EETwYOhyPazZlYZEid6W1gQjdj8ud0/RMln6tGgbEWr7e+
+ QgJZ9XGsjZ4ECchvCNOqH6l3fXmp8Uc9BmcWlJPifjXQsQEcX3OFhojV6s5CUJh5B7Hh
+ DZu9cglhiFCVKTezWZFx82CMKZ1OAbFs4G5AzCLmEtleSiGyuEc7YRez2TP0uGaXMF6g
+ 875g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792034302; x=1792639102;
+ d=1e100.net; s=20260707; t=1792034330; x=1792639130;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=VmMMUAd6gA6U8M7wACz8JIPXiKmX69iwu/hMcHHU1HE=;
- b=KZzWhWx26AI8IA+7szl3u/7VAlooPIslexhhbpKUhlKZJJfkTvB05+KvF6uSYvExES
- 9x0jdA6v0tlW1QFb7Cp3LybgInFJCh6dCS/l7TtZpUAgVsff0WQtfp9lrmTAxDPBB3PW
- IK5XK4OFI+Yyetbsa1CuattBJHaLZhE0XSi29cp9oniFrEjarw1FZt9bpGp+drH506qm
- hfbS8V/dQLy3u+QFeh5b25bfI0EHRB39k6lByO7FBnlhaawL3nuPBsgsddRi5S+5rPZS
- v1j0yktZziaFI6nY8MVvJMo508xR53GxwvB80fHQ3ap4eMbLr4ocxsESm56gX0WQbIB7
- NLfQ==
+ bh=lSuRssBqPq4eepN2kOGh1UyXRV553icR6wX0UHNQwfg=;
+ b=NmnGvHDgndBcAc99ks2TcPKFWrA9rHi5SM44TtuEhQaQSLd0pOmNshiEHz0H0BLWsD
+ Cko0tFZPfWxF+9Rg54MSnKGDYANYGzCBd6+V07TAGMtkj+0B+smUFr20BESqolsGxpwj
+ SsdU0HOECv5TYdwNXcjog/Zipc1mfQs9pRHIDIb3GZt5Du5FsjBugi/PmemjUdIXXJdo
+ p7bGYLF+5Ng3t15yfObvqgiE18wyBuzP9/2Gx8KK0uCbo2jW1QaMjqG85nSXLxgnowPe
+ Z6XMn/59CphwpJfAssOuXHjl5D1aiWkI4SeEBvIT6o9KNZBheSjnS2zxuOS1YUMEpFh4
+ IUuw==
 X-Forwarded-Encrypted: i=1;
- AKwUvBwXcvu8pEx+miqgb/hTXF93W0wLZ6/x+RaGT/3MwrV0XeCtBk4IQN+vhMBsm9GhGuUdBShjp7jvr2Yu@nongnu.org
-X-Gm-Message-State: AFq9FYLzHjNzIGIkDIjjtuJd2wIJXmMVpdL/0g8B7/86hRZMNLbB7ET8
- dLn0GgbsD084FBAqI0ZDjm/Yb9K4l7n0REkmc4Ahqp3tuEFIGdzat8VvrHNIOV+beTA=
-X-Gm-Gg: AYBFou3xc1mndRG1dW+8/FeKZ4xJbI2sZxW+bl8fkNnWfGfEL4sX5cLnLsVsqugBO9O
- Pbe3uBAbuEad8B+5KB5lUwGgf4yS63c3dlpyPTkx4qNQhznbtb3tIyaBCcpnMVGuY2zJoOIhxbi
- Y/TxCs1eWyWFmxQo228e/AaX25E866Qe9CgcUAqpQle6+OX2RlTgP5Q6JxfiOOJc3bez52wyEuK
- Unv5UYK4hiwN4Myyu2cPB2DfLIET4ahz51yW4lRU9jPcMyY+5ogdZpcN0dam4FHkZrPrWimbq5w
- OMY7ILtHWOMsdnTxJ7+y/LF3eN+p2g7w8ykDRYIbzADbwP4oGocSPyPerfBw4MeIvyiF2APoZsm
- jOXM+oTPGPcN6eqZ//ceD/LZXacyu38qjR+QQoztLa8CzDaSdA4OfRIokwsPFkA2mFLMaiLsBcS
- SlNk7LYE4cKgT1/6Ki8fLIQqCkOxw2B+GARfN7JNZ/0V9SlPB42FTQh913aXCuk4D5om0Inuhox
- gtLTzx4k1PmvnR29L8oMohW1C28KRqOayvv2+huzAnwQTZVY0l48q4x1dM=
-X-Received: by 2002:a17:90a:c105:b0:3ac:e6a:1af5 with SMTP id
- 98e67ed59e1d1-3ac0e6a4dccmr13978718a91.2.1792034302382; 
- Wed, 14 Oct 2026 20:18:22 -0700 (PDT)
+ AKwUvBw2qIJ0HYPg1AlbMM3+73yXmREnrQXT76aSDTHQjcdRwxQreWDxtQozgAsP0zRDo8VxE936Ko95qc02@nongnu.org
+X-Gm-Message-State: AFq9FYLMjtD2TVUhZgdUG1at4WTmed3aT4P2Bcnc2IfRsWLXbBhmxcSB
+ x5rOtIzNUkw6K44vZboYs32CV6V3Gs8T9frSFnDn0cUBezUpjzWbyjCpXZepxoZ1uYE=
+X-Gm-Gg: AYBFou1MkL2WPn/xdyc3nWqg0eDFi2APeFlthJ1M2yDDavyKQHcJd7la4vnqm4hFNcT
+ LkBLrI9KL5Xg6/EJjj+qPgfV4oXCL2nncPm08JGxkEs+P2HaWAbTz6MXuDH/hIiYTuPRmwWjHBQ
+ jmaoUXIXaBA1TeQqTq8W7RnHjSmO+6MHbAQ4VboqmOX3tFiliA1OxwN+iNYJ4hf+atxox6aHsOv
+ 8TCHoU1xCVCkPvKTK/whOueiWIMFUd/ze7gZIUcI1VsP4qCQtk0TMp6dN1YKxYOV41DZB0X+FOU
+ J98UasjWnTXUCn6PiKxNgoVoGexQcr52SOOAqmaAlIehtzbCKj4FGNwI/XP004HsQnEFXBLCfv8
+ QAxvCOl5ltUZmSlaGnlitv9Mga6nv9QhHuKnXVSrv8qm0SxcmeO/CRUoe7dmLapRxofonJGAeWy
+ 7ME/+v0fGFubiBnPkQp2ySdjZeMmvkmYiOlCNqhWRM8pKl1cLgNgZKa8F9DZkcxKIGgYcwiFvTY
+ m1Pz96W9pFmBlZX6v8cSnChswDYhXQE43DJdWuUod8lIOA=
+X-Received: by 2002:a17:90b:224e:b0:3a0:bcc8:1549 with SMTP id
+ 98e67ed59e1d1-3ab3afb180emr25908491a91.6.1792034330649; 
+ Wed, 14 Oct 2026 20:18:50 -0700 (PDT)
 Received: from lima-default.tail89d63.ts.net ([159.196.41.205])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3ac93049ec2sm1321725a91.1.2026.10.14.20.18.16
+ 98e67ed59e1d1-3ac93049ec2sm1321725a91.1.2026.10.14.20.18.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 14 Oct 2026 20:18:22 -0700 (PDT)
+ Wed, 14 Oct 2026 20:18:50 -0700 (PDT)
 From: Portia Stephens <portias@oss.tenstorrent.com>
 To: qemu-devel@nongnu.org
 Cc: Nicholas Piggin <npiggin@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>,
@@ -84,17 +84,16 @@ Cc: Nicholas Piggin <npiggin@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
  Portia Stephens <portias@oss.tenstorrent.com>,
  Michael Ellerman <mpe@kernel.org>
-Subject: [PATCH 01/12] hw/riscv/atlantis: Set valid_cpu_types for Atlantis
- machine
-Date: Thu, 15 Oct 2026 13:17:53 +1000
-Message-ID: <20261015031804.2406055-2-portias@oss.tenstorrent.com>
+Subject: [PATCH 05/12] hw/riscv/atlantis: Create CPU cluster for Atlantis cpus
+Date: Thu, 15 Oct 2026 13:17:57 +1000
+Message-ID: <20261015031804.2406055-6-portias@oss.tenstorrent.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261015031804.2406055-1-portias@oss.tenstorrent.com>
 References: <20261015031804.2406055-1-portias@oss.tenstorrent.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1033;
- envelope-from=portias@tenstorrent.com; helo=mail-pj1-x1033.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42e;
+ envelope-from=portias@tenstorrent.com; helo=mail-pf1-x42e.google.com
 X-Spam_score_int: -19
 X-Spam_score: -2.0
 X-Spam_bar: --
@@ -116,38 +115,87 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The Atlantis machine only supports setting the cpu_type to an Ascalon
-CPU. Set the valid_cpu_types to reflect this.
+In preparation for adding the RCPU, put the Ascalon harts in a
+CPUCluster. This will allow gdb to properly handle CPUs of different
+types.
 
 Signed-off-by: Portia Stephens <portias@oss.tenstorrent.com>
 ---
- hw/riscv/tt_atlantis.c | 6 ++++++
- 1 file changed, 6 insertions(+)
+ hw/riscv/Kconfig               |  1 +
+ hw/riscv/tt_atlantis.c         | 13 ++++++++++++-
+ include/hw/riscv/tt_atlantis.h |  2 ++
+ 3 files changed, 15 insertions(+), 1 deletion(-)
 
+diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
+index d89fdfcc86..4eccfa443e 100644
+--- a/hw/riscv/Kconfig
++++ b/hw/riscv/Kconfig
+@@ -149,6 +149,7 @@ config TENSTORRENT
+     select DESIGNWARE_I2C
+     select DS1338
+     select TMP105
++    select CPU_CLUSTER
+ 
+ config XIANGSHAN_KUNMINGHU
+     bool
 diff --git a/hw/riscv/tt_atlantis.c b/hw/riscv/tt_atlantis.c
-index 311de64eda..ec52faf17f 100644
+index f087fd16e3..5a2665b211 100644
 --- a/hw/riscv/tt_atlantis.c
 +++ b/hw/riscv/tt_atlantis.c
-@@ -76,6 +76,11 @@ static const MemMapEntry tt_atlantis_memmap[] = {
-     [TT_ATL_DDR_HI] =          { 0x100000000,  0x1000000000 },
- };
+@@ -50,6 +50,8 @@ QEMU_BUILD_BUG_ON(TT_IMSIC_STRIDE != (0x1000 << TT_IMSIC_GUEST_BITS));
+ #define TT_ACLINT_MTIMECMP      0x8000
+ #define TT_ACLINT_TIMEBASE_FREQ 1000000000
  
-+static const char *const tt_atlantis_valid_cpu_types[] = {
-+    TYPE_RISCV_CPU_TT_ASCALON,
-+    NULL
-+};
++#define ASCALON_CLUSTER_ID     0
 +
- static I2CBus *i2c_get_bus(TTAtlantisSoCState *s, unsigned busnr)
+ static const MemMapEntry tt_atlantis_memmap[] = {
+     /* Keep sorted with :'<,'>!sort -g -k 4 */
+     [TT_ATL_DDR_LO] =           { 0x00000000,    0x80000000 },
+@@ -556,7 +558,10 @@ static void tt_ascalon_cluster_init(Object *obj)
  {
-     assert(busnr < TT_ATL_NUM_I2C);
-@@ -792,6 +797,7 @@ static void tt_atlantis_machine_class_init(ObjectClass *oc, const void *data)
-     mc->default_cpus = 8;
-     mc->default_ram_size = 4 * GiB;
-     mc->default_cpu_type = TYPE_RISCV_CPU_TT_ASCALON;
-+    mc->valid_cpu_types = tt_atlantis_valid_cpu_types;
-     mc->block_default_type = IF_VIRTIO;
-     mc->no_cdrom = 1;
-     mc->default_ram_id = "tt_atlantis.ram";
+     TTAscalonClusterState *ac = TT_ASCALON_CLUSTER(obj);
+ 
+-    object_initialize_child(obj, "cpus", &ac->cpus, TYPE_RISCV_HART_ARRAY);
++    object_initialize_child(obj, "tt-ascalon.cluster", &ac->cluster,
++                            TYPE_CPU_CLUSTER);
++    object_initialize_child(OBJECT(&ac->cluster), "cpus", &ac->cpus,
++                            TYPE_RISCV_HART_ARRAY);
+ }
+ 
+ static void tt_ascalon_cluster_realize(DeviceState *dev, Error **errp)
+@@ -594,6 +599,12 @@ static void tt_ascalon_cluster_realize(DeviceState *dev, Error **errp)
+     if (!sysbus_realize(SYS_BUS_DEVICE(&ac->cpus), errp)) {
+         return;
+     }
++
++    qdev_prop_set_uint32(DEVICE(&ac->cluster), "cluster-id", ASCALON_CLUSTER_ID);
++    /* cluster must be realized after the hart array */
++    if (!qdev_realize(DEVICE(&ac->cluster), NULL, errp)) {
++        return;
++    }
+ }
+ 
+ static const Property tt_ascalon_cluster_props[] = {
+diff --git a/include/hw/riscv/tt_atlantis.h b/include/hw/riscv/tt_atlantis.h
+index 52b44504ae..e5fce1f675 100644
+--- a/include/hw/riscv/tt_atlantis.h
++++ b/include/hw/riscv/tt_atlantis.h
+@@ -15,6 +15,7 @@
+ #include "hw/intc/riscv_imsic.h"
+ #include "hw/misc/tt_atlantis_prcm.h"
+ #include "hw/char/dw8250.h"
++#include "hw/cpu/cluster.h"
+ #include "hw/riscv/riscv_hart.h"
+ 
+ #define TYPE_TT_ATLANTIS_MACHINE MACHINE_TYPE_NAME("tt-atlantis")
+@@ -40,6 +41,7 @@ struct TTAscalonClusterState {
+     MemoryRegion memory;
+ 
+     RISCVHartArrayState cpus;
++    CPUClusterState cluster;
+     MemoryRegion bootrom;
+ 
+     uint32_t num_harts;
 -- 
 2.43.0
 
