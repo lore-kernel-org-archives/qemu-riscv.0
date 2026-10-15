@@ -4,64 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB274CC6B33
-	for <qemu-riscv@archiver.kernel.org>; Thu, 15 Oct 2026 10:36:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4FD5CC6B34
+	for <qemu-riscv@archiver.kernel.org>; Thu, 15 Oct 2026 10:36:55 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xHIgr-0006Xd-Og; Thu, 15 Oct 2026 06:28:01 -0400
+	id 1xHIlB-0002ZL-Su; Thu, 15 Oct 2026 06:32:29 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <eblot.ml@gmail.com>)
- id 1xHIg8-0003gF-1d
- for qemu-riscv@nongnu.org; Thu, 15 Oct 2026 06:27:17 -0400
-Received: from mail-wr1-f54.google.com ([209.85.221.54])
+ id 1xHIh9-0007X8-IX
+ for qemu-riscv@nongnu.org; Thu, 15 Oct 2026 06:28:22 -0400
+Received: from mail-wr1-f48.google.com ([209.85.221.48])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <eblot.ml@gmail.com>)
- id 1xHIg5-00042x-1A
- for qemu-riscv@nongnu.org; Thu, 15 Oct 2026 06:27:15 -0400
-Received: by mail-wr1-f54.google.com with SMTP id
- ffacd0b85a97d-48df8fe8513so197135f8f.0
- for <qemu-riscv@nongnu.org>; Thu, 15 Oct 2026 03:27:12 -0700 (PDT)
+ id 1xHIh6-0004Hn-0H
+ for qemu-riscv@nongnu.org; Thu, 15 Oct 2026 06:28:19 -0400
+Received: by mail-wr1-f48.google.com with SMTP id
+ ffacd0b85a97d-48c4649b35bso261675f8f.3
+ for <qemu-riscv@nongnu.org>; Thu, 15 Oct 2026 03:28:07 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792060031; x=1792664831;
+ d=1e100.net; s=20260707; t=1792060087; x=1792664887;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=Adz/rIkVxKmnpzPklQqKGWWgHGHy0e2h5cr4SvKWE0I=;
- b=Mg/2u37mS6mBwcYtvTdA6xP/Btgs2yNsJuKx5O1PVYY+T/XZVy+Xi/Pb9mm1QkmcGn
- zxzmYkEaGyz2852UynRSdnPTj2mmSHWixAJZaF+AxXle2pAcEcL754rEvhsouYuQSrmI
- eGve814WrbqCV9em8wZ3jtoP1Ttw13MGwE6pE7HV2IHzuwudY6qiaxYztqa6vhp2zGK8
- VoexXYiOmuANdFq8J79EvcGi7hZFc4ZnRRlmI9dFuuXabw4YUdr4Ctlkm3N1SW8yTUxU
- wTi/ic+Bd8PeCu/4wQZelfGFJvvtNiXSTBZSzf/qbDv9D+GrTdeJfHPIPe0t2P0+9VXv
- iq+A==
+ bh=DeiJYZqRfQOfLFJzRerKdRRjmQabvVc3EFQMHa8VS4A=;
+ b=Lsv92PgXwhDsB8DI2xy8JUN0lxILJInTFFwYP9M2y11Ds8y1t5erssKVi5gdJwIBCj
+ c5egD/XS8CLWKmrZZ34a7l6X57coKwasg4VmVH+D2NQEWXp7zlNvZohvfDhcvtShKHIn
+ bJpUOe02PGJb7ZbwWxrbNrdlV+2VINAcmIU52xKTlZxrqQ4U1J0hFuxeUFZDR6UbCPvA
+ B9AwQvZsr73hYnNLHjQQCNFu56JLForpe1APdxajgF8SbDsXv2Ir+QWjT1vci12Xlqka
+ EaLtzQ27Pdn4shzIlqUi7kwQRTD6QOlJGxLdTneEHuZHzS5PBdZjOphG3hP5NbbrRZy/
+ TWwg==
 X-Forwarded-Encrypted: i=1;
- AKwUvBzE/fN8HcGLBjXlkDI3GJohwlkanwNAJRSqaB4XUK9iWsFMbNu14rowI7GUpY1DcMBranrOFmdpqV0X@nongnu.org
-X-Gm-Message-State: AFq9FYLL3zMc4CzNw8MywkjOHW5Y4793vR5ypgoYvJFBtQqG7ffRnREO
- D0T96pjwRGRDNROBuKTl7/X4lZy2bb9hX1OIF02eNBlVIIOLQ9b3xPuy
-X-Gm-Gg: AYBFou18zT72D6W2mgRMziUGNarMS4aVuwdfGJXBd2BRUF/jQZdOJPLgOaNUiQQ7oq3
- H7Enf5H5PF811AyJITNwUhsrKYc9WRZcDJwmm2hw0rGlcOI6GQcPbvi7n1NAhr6+g4PrCUJifIF
- kn0R7xV3/x0fo+kKDhkcngRbcVR7rtI+EqHmY6l/eZu3SNNHYzRMEbGcCpmf6RyhmGnbF9JBM6S
- EuZ28YOt0JtRtRCXyd/RSUlVHZOv8s6S59aozGoBJesZfcG6h7Ak5bnTQXco6a8h/skrrWxXr5I
- M9XqSyMD6Bed6a/LMtoUPA1rX1jG4hKnvpAddpOKeP1JqbpvC3757g3cUVif8+Olw6FzjCFepwE
- BMKJkZbXc9wzyitI9BrNH7CYC2QMbwRwnqUT6L6K04sqCl3I5aaBqWXhCsF9KIWehpCIcOZUyMQ
- D6F8KUZl3N8X8MulsHEDMKiPJtQM+Lg/s9OwJtYQejRR6RyxHizkBkachaRH0JA6HfT+7Wpt5lp
- b/5s5A3llinqUxMFNZ9dAWy0Y1f15RjyRv2W6WT7xl0y6kFb8AhNXWH
-X-Received: by 2002:a05:6000:29c3:b0:48c:58d5:30fb with SMTP id
- ffacd0b85a97d-48dba7876bemr24188526f8f.5.1792060031108; 
- Thu, 15 Oct 2026 03:27:11 -0700 (PDT)
+ AKwUvBxTlEfLLdS0G8YiRrbDUCMzQQE5yAseTm63Wp9Byy8+h2y6qL/ZnluRpMFEz1ovGZMN+bJPSpZ0x9Fx@nongnu.org
+X-Gm-Message-State: AFq9FYIov6L9ZZoSvIeAz8ZDUlHDsU6EGZ0ZJerLEtMeQainwKHL4TtB
+ kv7bfmR1gAMsI57AbdqIG5fzB6//6717aUCrnus4paTzHETyif/5PBkm
+X-Gm-Gg: AYBFou3SYGS0Jcb9B87cDYAH6RYAvcWXxstmi78t8R7snKml8Mogj8/dAp1d2LQ5s4u
+ xJcPY0sLqPRoMlKp4z8U+jE5XuyG1qXmBF4wbR1Yb+BOwG557dsXNJXChyMRlJOZGCGe3HnvPav
+ HI3UY5PxtnlfHAGxh+40E0ImanFsSZ768R0IH+6WI6GcGR7cuF09UpXezri9ja7USDu7HZL+vJp
+ JV4UQTBuQuG4P6umUfX2tancLxopsSabSktNTHHGQM87sZ7FSiKblxDYyg3XcBdjtybwzUHPmPS
+ 0BFeEUHnRkNAcjT0uIPSHGhDF0tFuTdZOg8EI7hm6YBX045dzNxt8xCZi9+8rttHiwVlB6cFmLC
+ bw58bsYG9I2T+sZ7dGDvonsOFmho8NUGEYxrbc+C0BCD/JGONvW37tnPvL7wXQcVU6HDY0UaD9d
+ OMl5Qg2eS6aN2acC4kueNzGP/fLXDr4COMFDhRrdGbXhSla1Y0DzpDB6mCGG92H/AuVBuJNHup2
+ u117H/TFjvPK4ts707BibIg398keRKctnNGgRynH0neDBM=
+X-Received: by 2002:adf:e183:0:b0:487:490:8391 with SMTP id
+ ffacd0b85a97d-48dbaadd94cmr36059030f8f.16.1792060086746; 
+ Thu, 15 Oct 2026 03:28:06 -0700 (PDT)
 Received: from localhost (89-93-216-19.hfc.dyn.abo.bbox.fr. [89.93.216.19])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48de77606fbsm10342203f8f.53.2026.10.15.03.27.09
+ ffacd0b85a97d-48defca4013sm7991892f8f.9.2026.10.15.03.28.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 15 Oct 2026 03:27:10 -0700 (PDT)
-Date: Thu, 15 Oct 2026 11:28:14 +0200
-Subject: [PATCH v3 27/50] tests/qtest: ds1339: cover the end-of-month rollover
+ Thu, 15 Oct 2026 03:28:05 -0700 (PDT)
+Date: Thu, 15 Oct 2026 11:28:22 +0200
+Subject: [PATCH v3 35/50] tests/qtest: ina230: cover the ALERT limit
+ functions and CVRF
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261015-bmc-minerva-v3-27-7d50c8a108e5@free.fr>
+Message-Id: <20261015-bmc-minerva-v3-35-7d50c8a108e5@free.fr>
 References: <20261015-bmc-minerva-v3-0-7d50c8a108e5@free.fr>
 In-Reply-To: <20261015-bmc-minerva-v3-0-7d50c8a108e5@free.fr>
 To: qemu-devel@nongnu.org
@@ -75,17 +76,17 @@ Cc: =?utf-8?q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>,
  Laurent Vivier <lvivier@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>, 
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, 
  =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>, 
- Emmanuel Blot <emmanuel.blot@free.fr>
+ Emmanuel Blot <emmanuel.blot@free.fr>, Glenn Miles <milesg@linux.ibm.com>
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1792056476; l=3758;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1792056476; l=4653;
  i=emmanuel.blot@free.fr; s=20260602; h=from:subject:message-id;
- bh=iOwmzyJ4hd6oW//GUNriTfBTlQKKZhGGR+JckreHq5Q=;
- b=uxSFlsTndJWAU+VPfl1yjgl8aVtXUmBtubp9+4Jp1uqFi1hFBfQRZpUH9kBOP8Xnwc2ij/lVJ
- cCNMQq/lYArBN1yCWGlW+Y29XlcdyLB/ttRNr8of89Ecp+8nDh71DoG
+ bh=yU/ASNKVFYSLSDsLa8e4k+jfJS9UQPvsF84TMUUNANI=;
+ b=mW/MkKLeExb8M8KGFcDd1/j4J97gFuC34cY/of1JY6SBJPy+fjJJfY/MFiBWYEoPI+XGskp70
+ j09WvOTLc9OCkdzxrXgb98AGPzJJlICTMZFGDhN+sKbioZf+BIGr6eJ
 X-Developer-Key: i=emmanuel.blot@free.fr; a=ed25519;
  pk=0qFrZ21FAAN8OfVsSoVcCFTk/NMYOWzxJz4paSAVm0g=
-Received-SPF: pass client-ip=209.85.221.54; envelope-from=eblot.ml@gmail.com;
- helo=mail-wr1-f54.google.com
+Received-SPF: pass client-ip=209.85.221.48; envelope-from=eblot.ml@gmail.com;
+ helo=mail-wr1-f48.google.com
 X-Spam_score_int: -15
 X-Spam_score: -1.6
 X-Spam_bar: -
@@ -111,99 +112,129 @@ From:  Emmanuel Blot via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The end-of-month rollover was untested, for any of the lengths the
-calendar gives a month.
+Cover the shunt/bus/power alert-limit functions, the alert latch
+behaviour and the conversion-ready flag.
 
+Reviewed-by: Glenn Miles <milesg@linux.ibm.com>
 Signed-off-by: Emmanuel Blot <emmanuel.blot@free.fr>
 ---
- tests/qtest/ds1339-test.c | 60 +++++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 60 insertions(+)
+ tests/qtest/ina230-test.c | 97 +++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 97 insertions(+)
 
-diff --git a/tests/qtest/ds1339-test.c b/tests/qtest/ds1339-test.c
-index 8c144579e6..7eec163049 100644
---- a/tests/qtest/ds1339-test.c
-+++ b/tests/qtest/ds1339-test.c
-@@ -14,6 +14,7 @@
- 
- /* DS1339 register map */
- #define DS1339_SECONDS   0x00
-+#define DS1339_DATE      0x04
- #define DS1339_MONTH     0x05
- #define DS1339_YEAR      0x06
- #define DS1339_ALARM1    0x07
-@@ -169,6 +170,61 @@ static void test_eosc_restart(void *obj, void *data, QGuestAllocator *alloc)
-     g_assert_cmphex(resp[6], ==, 0x31);
+diff --git a/tests/qtest/ina230-test.c b/tests/qtest/ina230-test.c
+index b01f9445d1..1c55028fcb 100644
+--- a/tests/qtest/ina230-test.c
++++ b/tests/qtest/ina230-test.c
+@@ -215,6 +215,98 @@ static void test_edges_overflow(void *obj, void *data, QGuestAllocator *alloc)
+     g_assert_cmphex(i2c_get16(dev, REG_MASK_ENABLE) & ME_OVF, ==, ME_OVF);
  }
  
-+/* Program 23:59:59 on the last day of a month and run the clock past it. */
-+static void check_month_rollover(QI2CDevice *i2cdev,
-+                                 uint8_t date, uint8_t month, uint8_t year,
-+                                 uint8_t next_date, uint8_t next_month,
-+                                 uint8_t next_year)
++/* Shunt over-limit alert (transparent mode) sets the AFF flag */
++static void test_alert_shunt_over(void *obj, void *data,
++                                  QGuestAllocator *alloc)
 +{
-+    const uint8_t tod[7] = { 0x59, 0x59, 0x23, 0x01, date, month, year };
-+    uint8_t resp[7];
-+    unsigned idx;
++    QI2CDevice *dev = (QI2CDevice *)obj;
 +
-+    i2c_write_block(i2cdev, DS1339_SECONDS, tod, sizeof(tod));
++    i2c_set16(dev, REG_CONFIG, CONFIG_RST);
 +
-+    for (idx = 0; idx < 50; idx++) {
-+        if (i2c_get8(i2cdev, DS1339_DATE) != date) {
-+            break;
-+        }
-+        g_usleep(100 * 1000);
-+    }
++    i2c_set16(dev, REG_ALERT_LIMIT, 0x1000);
++    i2c_set16(dev, REG_MASK_ENABLE, ME_SOL);
 +
-+    i2c_read_block(i2cdev, DS1339_SECONDS, resp, sizeof(resp));
-+    g_assert_cmphex(resp[4], ==, next_date);
-+    g_assert_cmphex(resp[5] & 0x1f, ==, next_month);
-+    g_assert_cmphex(resp[6], ==, next_year);
++    qmp_ina230_set("shunt-voltage", 2500000);
++    g_assert_cmphex(i2c_get16(dev, REG_MASK_ENABLE) & ME_AFF, ==, 0);
++
++    qmp_ina230_set("shunt-voltage", 20000000);
++    g_assert_cmphex(i2c_get16(dev, REG_MASK_ENABLE) & ME_AFF, ==, ME_AFF);
++
++    qmp_ina230_set("shunt-voltage", 2500000);
++    g_assert_cmphex(i2c_get16(dev, REG_MASK_ENABLE) & ME_AFF, ==, 0);
 +}
 +
-+/* A 31-day month rolls over to the first of the next. */
-+static void test_month_31_days(void *obj, void *data, QGuestAllocator *alloc)
++/* Latch mode holds the alert until the Mask/Enable register is read */
++static void test_alert_latch(void *obj, void *data, QGuestAllocator *alloc)
 +{
-+    check_month_rollover((QI2CDevice *)obj,
-+                         0x31, 0x01, 0x23, 0x01, 0x02, 0x23);
++    QI2CDevice *dev = (QI2CDevice *)obj;
++    uint16_t me;
++
++    i2c_set16(dev, REG_CONFIG, CONFIG_RST);
++
++    i2c_set16(dev, REG_ALERT_LIMIT, 0x1000);
++    i2c_set16(dev, REG_MASK_ENABLE, ME_SOL | ME_LEN);
++
++    qmp_ina230_set("shunt-voltage", 20000000);
++    qmp_ina230_set("shunt-voltage", 2500000);
++
++    me = i2c_get16(dev, REG_MASK_ENABLE);
++    g_assert_cmphex(me & ME_AFF, ==, ME_AFF);
++
++    g_assert_cmphex(i2c_get16(dev, REG_MASK_ENABLE) & ME_AFF, ==, 0);
 +}
 +
-+/* A 30-day month rolls over to the first of the next. */
-+static void test_month_30_days(void *obj, void *data, QGuestAllocator *alloc)
++/* Bus over-limit alert */
++static void test_alert_bus(void *obj, void *data, QGuestAllocator *alloc)
 +{
-+    check_month_rollover((QI2CDevice *)obj,
-+                         0x30, 0x04, 0x23, 0x01, 0x05, 0x23);
++    QI2CDevice *dev = (QI2CDevice *)obj;
++
++    i2c_set16(dev, REG_CONFIG, CONFIG_RST);
++
++    i2c_set16(dev, REG_ALERT_LIMIT, 0x2000);
++    i2c_set16(dev, REG_MASK_ENABLE, ME_BOL);
++
++    qmp_ina230_set("bus-voltage", 5000000);
++    g_assert_cmphex(i2c_get16(dev, REG_MASK_ENABLE) & ME_AFF, ==, 0);
++
++    qmp_ina230_set("bus-voltage", 12000000);
++    g_assert_cmphex(i2c_get16(dev, REG_MASK_ENABLE) & ME_AFF, ==, ME_AFF);
 +}
 +
-+/* Outside a leap year, February rolls over after the 28th. */
-+static void test_month_28_days(void *obj, void *data, QGuestAllocator *alloc)
++/* Power over-limit alert */
++static void test_alert_power(void *obj, void *data, QGuestAllocator *alloc)
 +{
-+    check_month_rollover((QI2CDevice *)obj,
-+                         0x28, 0x02, 0x23, 0x01, 0x03, 0x23);
++    QI2CDevice *dev = (QI2CDevice *)obj;
++
++    i2c_set16(dev, REG_CONFIG, CONFIG_RST);
++
++    qmp_ina230_set("shunt-voltage", 20000000);
++    qmp_ina230_set("bus-voltage", 11980000);
++    i2c_set16(dev, REG_CALIBRATION, 0x0A00);
++
++    i2c_set16(dev, REG_ALERT_LIMIT, 0x1000);
++    i2c_set16(dev, REG_MASK_ENABLE, ME_POL);
++    g_assert_cmphex(i2c_get16(dev, REG_MASK_ENABLE) & ME_AFF, ==, ME_AFF);
++
++    i2c_set16(dev, REG_ALERT_LIMIT, 0x2000);
++    g_assert_cmphex(i2c_get16(dev, REG_MASK_ENABLE) & ME_AFF, ==, 0);
 +}
 +
-+/* In a leap year the 28th is not the last day of February. */
-+static void test_month_29_days(void *obj, void *data, QGuestAllocator *alloc)
++/* Conversion Ready Flag: set on conversion, cleared by reading Mask/Enable */
++static void test_cvrf(void *obj, void *data, QGuestAllocator *alloc)
 +{
-+    QI2CDevice *i2cdev = (QI2CDevice *)obj;
++    QI2CDevice *dev = (QI2CDevice *)obj;
 +
-+    check_month_rollover(i2cdev, 0x28, 0x02, 0x24, 0x29, 0x02, 0x24);
-+    check_month_rollover(i2cdev, 0x29, 0x02, 0x24, 0x01, 0x03, 0x24);
++    i2c_set16(dev, REG_CONFIG, CONFIG_RST);
++
++    /* A conversion (triggered by injection) sets CVRF */
++    qmp_ina230_set("shunt-voltage", 20000000);
++    g_assert_cmphex(i2c_get16(dev, REG_MASK_ENABLE) & ME_CVRF, ==, ME_CVRF);
++
++    /* The previous read cleared CVRF; no conversion since, so it stays clear */
++    g_assert_cmphex(i2c_get16(dev, REG_MASK_ENABLE) & ME_CVRF, ==, 0);
 +}
 +
- /* The Century bit is guest-writable and survives an oscillator restart. */
- static void test_century_bit(void *obj, void *data, QGuestAllocator *alloc)
+ static void ina230_register_nodes(void)
  {
-@@ -314,6 +370,10 @@ static void ds1339_register_nodes(void)
-     qos_add_test("eosc-restart", "ds1339", test_eosc_restart, NULL);
-     qos_add_test("stopped-reserved-bits", "ds1339",
-                  test_stopped_reserved_bits, NULL);
-+    qos_add_test("month-28-days", "ds1339", test_month_28_days, NULL);
-+    qos_add_test("month-29-days", "ds1339", test_month_29_days, NULL);
-+    qos_add_test("month-30-days", "ds1339", test_month_30_days, NULL);
-+    qos_add_test("month-31-days", "ds1339", test_month_31_days, NULL);
-     qos_add_test("century-bit", "ds1339", test_century_bit, NULL);
-     qos_add_test("century-write-no-toggle", "ds1339",
-                  test_century_write_no_toggle, NULL);
+     QOSGraphEdgeOptions opts = {
+@@ -235,5 +327,10 @@ static void ina230_register_nodes(void)
+     qos_add_test("power", "ina230", test_power, NULL);
+     qos_add_test("zero-cal", "ina230", test_zero_cal, NULL);
+     qos_add_test("edges-overflow", "ina230", test_edges_overflow, NULL);
++    qos_add_test("alert-shunt-over", "ina230", test_alert_shunt_over, NULL);
++    qos_add_test("alert-latch", "ina230", test_alert_latch, NULL);
++    qos_add_test("alert-bus", "ina230", test_alert_bus, NULL);
++    qos_add_test("alert-power", "ina230", test_alert_power, NULL);
++    qos_add_test("cvrf", "ina230", test_cvrf, NULL);
+ }
+ libqos_init(ina230_register_nodes);
 
 -- 
 2.53.0-Meta
