@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1720CC6B34
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB227CC6B38
 	for <qemu-riscv@archiver.kernel.org>; Thu, 15 Oct 2026 10:27:02 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xHIf9-0002IS-Qf; Thu, 15 Oct 2026 06:26:18 -0400
+	id 1xHIdj-0000ca-3w; Thu, 15 Oct 2026 06:24:47 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <eblot.ml@gmail.com>)
- id 1xHIet-0001oM-PA
- for qemu-riscv@nongnu.org; Thu, 15 Oct 2026 06:25:59 -0400
-Received: from mail-wm1-f50.google.com ([209.85.128.50])
+ id 1xHIdM-0000WM-IB
+ for qemu-riscv@nongnu.org; Thu, 15 Oct 2026 06:24:26 -0400
+Received: from mail-wm1-f49.google.com ([209.85.128.49])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <eblot.ml@gmail.com>)
- id 1xHIep-0003on-Nf
- for qemu-riscv@nongnu.org; Thu, 15 Oct 2026 06:25:59 -0400
-Received: by mail-wm1-f50.google.com with SMTP id
- 5b1f17b1804b1-49fbb2acc90so43210195e9.2
- for <qemu-riscv@nongnu.org>; Thu, 15 Oct 2026 03:25:53 -0700 (PDT)
+ id 1xHIdK-0003D4-85
+ for qemu-riscv@nongnu.org; Thu, 15 Oct 2026 06:24:24 -0400
+Received: by mail-wm1-f49.google.com with SMTP id
+ 5b1f17b1804b1-49d05d51553so12603725e9.2
+ for <qemu-riscv@nongnu.org>; Thu, 15 Oct 2026 03:24:21 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792059952; x=1792664752;
+ d=1e100.net; s=20260707; t=1792059861; x=1792664661;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=9jZpvK/2JIYvTgChmDwtU9W+dxG3f61FuvNfLFka24M=;
- b=k7kKhuSgWzz8WeeeSnHvpL4Gtce4xOMwdk9T0YSQ8xa75C4+2ciPptTR6MPSFecedw
- cnt6a26mdDM9mYv3TosNRzB87lVP4HGrwoN+qzFOnnxJE+p0uqBO77kfs92QpOLHO7Pu
- WbsCFTeKRoWI/gW2mmPP9VDsy75zk7G6Us8WU9QrnP0YJEEgll4jWIjeG3itmWLSNa1P
- C7ns3fABL4YsprrtndEx0B6OIkO5wMRgXVog9Clkv/2MAzKi9BmLMpLtq0ftfSjzJJPa
- iqIJMzHy10v8h925znP78oWq8niNUJ1YlFRTaOcF1GjV3G1zjzXLbFeuWsPdupQhmwuA
- hEvg==
+ bh=0Pey2/h5d4egpWMShENSUMjJQuRdUBUW9uGkG9/qdms=;
+ b=dvOhKAmJh00VOGLi3+7eTl52z4IfoD6/7Cfm/UV+L2bhVZ9KHlOQ/dtrriE01fYF3F
+ aWUvtfOGfNsGllK4FsgIFtl21+euz7sS9pUeKxNLq0ZorFrdLQbD9kwsPsyHCgZuYsse
+ OM4DfxxRaprYU1gvJ/RQRjG4rG4aidYULfuyNQFHsTEJVyxdfX3+8es2eiIj6dVgA8Zs
+ sTLrCOJ2JHBCgSqftO5+p1gZY0V89Af5mVfC/NCkTVZjScPUSsr3bgVf5OXDKVfQuQL/
+ Bbuid8btABmm6/MJ4HCOmtKn/PKCSrpArqu2OsKQcg/Mtz73CnYT6i7bfyVorlTJoO83
+ rlMA==
 X-Forwarded-Encrypted: i=1;
- AKwUvBxa/GngnlI5/vuLIo2xIiPCULwFMxIRDPmXUOVQ3XDvpQDLwi/QVK+w9mdiD3txBVUFP09HXWLshie+@nongnu.org
-X-Gm-Message-State: AFq9FYKEFJ/CFbWqvMMBdYKn1NpBYVsjGObItUrtQb20gQj4UrmdTamB
- 3EeG/yQjCMIIS5d894rh4SfllrPIhgZY9/j3j6ZmZjnAtTknkydc2CsK
-X-Gm-Gg: AYBFou1b2xAeiwUkYIJa9+fO9LMYcufraLbwzC71LEppoQuU4q2J83ww6Xg6dnBUAHy
- uDGnjw6w/wzQhrinEycLwC5yCmwHjhNG1cIO29KBMr7hLFQ9i6/4X1Nwkygg2VW4nTzOsGsqeFV
- 36Y7KkKbK8jmWzgk3l8CADaKgqB0pCVaiJDhla6aG/38A0n55a//wIaNzUpp5gWA0wab+ypxAnI
- mJwg7P/dCix3+qhnvGvNxjBomHwAAEOD2wFMFua7AuZCzOaJkXxwMGUUAVJtVuTXED1tGx0onzJ
- QRNCcQR3QdiaocppZey4VqPXUOQHDvnCmxInvKalD8Twjl7+rGPOyvr2bR0gCmNzQcOH3UtObbs
- vD3uHn8IqGijTkT9mKf/ap/U0NVc/9VB8IQ2n5q/atyRa/t1pinEdOvcm4RrLnLZM+swhR+h5Ss
- PWdwMlB6zqCkKQx3K2nja5aA3I4Tr6cikn+joY5xN1jryQks11XARMF61YpD9ik7gWw0beRHP1X
- 28jiSyhMtXlpgKLuYJayF0YqMkVxZNhVwh5i5tTEFr3BiGrZgP7sEs+
-X-Received: by 2002:a05:600c:8b04:b0:4a0:1e37:ae41 with SMTP id
- 5b1f17b1804b1-4a18e4d67edmr363874445e9.24.1792059952345; 
- Thu, 15 Oct 2026 03:25:52 -0700 (PDT)
+ AKwUvBz7MHQGpK1jJ3tdy1KbNY+FvSgRrvCecr5OlobIYv77MnGPNooHvWGPDw/jpQsUzYm2jm9iTXqqVRK9@nongnu.org
+X-Gm-Message-State: AFq9FYInRdpGCESm+S1HxBPPjikrKaFFWTpI/+Zg1GGnb0CEvy5cMn8a
+ QdCG7sKq+2B5luXgjQLpeFNPU2FPA0H/t2bqd2Ss0egORmE8S1K24+Uz
+X-Gm-Gg: AYBFou0GXIwqY6KrhAvXKxITEri7/UgpX0suRKRhCdhdBJDaHYYgXWo2emeZJBOmAqZ
+ JlLIMIpTDovGT/iLlnI4LnOOWP4lxMjwLUtzpQ9Pr/3Abw2Jk9VFCn9emzdMklafOQCCi0z/laR
+ QHYhNHJ/PpvGy0oAhdRu/TXgXKHXzqGYOnhrv7mehhjB75T5jBNUG2EUF1Ab2RjzxFneimnLYHs
+ OjaTMYXMcBcfkllHAf2GhTvhvNe+9ml1dnO9L95K/+5RgFnrWjAZoHYHVmcjK44J3/pQSp9bP8K
+ XkiDMBlown/w2nYB6IF+zqPM9IN6jMutSDOo6JPAvAWcJHpYKRPqC/7fJxewICAjtr+AxSu6r9a
+ 9A52rYqv14GgRikXG0p0jK8wYdOfXXJ68laU9SApGHndLJIhJms7/5U+ApJGx0k40Wz0NaDo0D3
+ v8EkufuLBTSgoe0K/3S5MyJbgF110eYqZXj8v6DcuvAlKRYqiKRwRpyda5nx91cIshTp9Wg02wy
+ 8mVAJOhHNjidPh7545x8Q5/E1ICIruFMc6l79OR77s9Sw==
+X-Received: by 2002:a05:600c:1d11:b0:4a0:25db:4591 with SMTP id
+ 5b1f17b1804b1-4a18e4a4c33mr393827345e9.23.1792059860573; 
+ Thu, 15 Oct 2026 03:24:20 -0700 (PDT)
 Received: from localhost (89-93-216-19.hfc.dyn.abo.bbox.fr. [89.93.216.19])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48de0bc5e0asm17920485f8f.50.2026.10.15.03.25.51
+ 5b1f17b1804b1-4a1bd96fed4sm61274505e9.2.2026.10.15.03.24.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 15 Oct 2026 03:25:51 -0700 (PDT)
-Date: Thu, 15 Oct 2026 11:28:03 +0200
-Subject: [PATCH v3 16/50] hw/rtc: ds1338: add a persist-on-reset property
+ Thu, 15 Oct 2026 03:24:20 -0700 (PDT)
+Date: Thu, 15 Oct 2026 11:27:49 +0200
+Subject: [PATCH v3 02/50] docs/system/arm/aspeed: add the sanmiguel-bmc machine
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261015-bmc-minerva-v3-16-7d50c8a108e5@free.fr>
+Content-Transfer-Encoding: 8bit
+Message-Id: <20261015-bmc-minerva-v3-2-7d50c8a108e5@free.fr>
 References: <20261015-bmc-minerva-v3-0-7d50c8a108e5@free.fr>
 In-Reply-To: <20261015-bmc-minerva-v3-0-7d50c8a108e5@free.fr>
 To: qemu-devel@nongnu.org
@@ -75,17 +75,18 @@ Cc: =?utf-8?q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>,
  Laurent Vivier <lvivier@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>, 
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, 
  =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>, 
- Emmanuel Blot <emmanuel.blot@free.fr>
+ Emmanuel Blot <emmanuel.blot@free.fr>, Jamin Lin <jaminlin1207@gmail.com>, 
+ =?utf-8?q?C=C3=A9dric_Le_Goater?= <clg@redhat.com>
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1792056475; l=2773;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1792056474; l=930;
  i=emmanuel.blot@free.fr; s=20260602; h=from:subject:message-id;
- bh=qmvk0g/rmD++ZnSC5okHJqYVp2DjqufV612HoOi6RBE=;
- b=dwE/4Q2/CUvFtqKLHH7o8EFa7qQ5VKWJ+ctn1qFAqAxtw4IOBiJEAjPvC8K2k1fmU62nf7XXD
- ILQtL24fiaMCe5mj/heFDtFSW3dJ+OlYCSblM3jEQj+ZsBxGsqaxBC1
+ bh=f+ewNztwtHsQvjNwITmtmh2RHXZRe5TnF0pSYWV+BZo=;
+ b=n/hPuH2OEZgEqvXG6jHRYPpF9OlmfLfbELivf7KRVn5BQ+oqc7dr1sZZmfoggz0VECaiEa2uW
+ RReHHGEWT46CyBc+PauWC/CC/Di9uE27c3SaS/WDKTwCS3fFywj+scs
 X-Developer-Key: i=emmanuel.blot@free.fr; a=ed25519;
  pk=0qFrZ21FAAN8OfVsSoVcCFTk/NMYOWzxJz4paSAVm0g=
-Received-SPF: pass client-ip=209.85.128.50; envelope-from=eblot.ml@gmail.com;
- helo=mail-wm1-f50.google.com
+Received-SPF: pass client-ip=209.85.128.49; envelope-from=eblot.ml@gmail.com;
+ helo=mail-wm1-f49.google.com
 X-Spam_score_int: -15
 X-Spam_score: -1.6
 X-Spam_bar: -
@@ -111,90 +112,28 @@ From:  Emmanuel Blot via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-A real RTC keeps counting across a reboot of the machine it sits in,
-and its register file comes back with it. The model instead wiped the
-registers on every reset and resynchronised the clock with the host.
+The Facebook SanMiguel BMC machine is supported by hw/arm but has never
+been listed in the Aspeed documentation. Add it to the AST2600 machine
+table.
 
-Add a property selecting between the two. It defaults off, leaving
-every board as it was.
-
+Reviewed-by: Jamin Lin <jaminlin1207@gmail.com>
+Reviewed-by: Cédric Le Goater <clg@redhat.com>
 Signed-off-by: Emmanuel Blot <emmanuel.blot@free.fr>
 ---
- hw/rtc/ds1338.c | 29 +++++++++++++++++++++++++----
- 1 file changed, 25 insertions(+), 4 deletions(-)
+ docs/system/arm/aspeed.rst | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/hw/rtc/ds1338.c b/hw/rtc/ds1338.c
-index c5fc74e6ca..21deb94689 100644
---- a/hw/rtc/ds1338.c
-+++ b/hw/rtc/ds1338.c
-@@ -22,6 +22,7 @@
- #include "qemu/osdep.h"
- #include "hw/i2c/i2c.h"
- #include "hw/rtc/ds1338.h"
-+#include "hw/core/qdev-properties.h"
- #include "migration/vmstate.h"
- #include "qemu/bcd.h"
- #include "qom/object.h"
-@@ -56,7 +57,8 @@ struct DS1338State {
-     uint8_t nvram[NVRAM_SIZE];
-     int32_t ptr;
-     bool addr_byte;
--    bool osc_stopped;   /* oscillator halted: time is frozen */
-+    bool osc_stopped;      /* oscillator halted: time is frozen */
-+    bool persist_on_reset; /* keep the registers across a reset */
- };
- 
- struct DS1338Class {
-@@ -263,9 +265,8 @@ static int ds1338_send(I2CSlave *i2c, uint8_t data)
-     return 0;
- }
- 
--static void ds1338_reset_hold(Object *obj, ResetType type)
-+static void ds1338_power_on(DS1338State *s)
- {
--    DS1338State *s = DS1338(obj);
-     DS1338Class *k = DS1338_GET_CLASS(s);
- 
-     /* The clock is running and synchronized with the host */
-@@ -273,11 +274,29 @@ static void ds1338_reset_hold(Object *obj, ResetType type)
-     s->wday_offset = 0;
-     memset(s->nvram, 0, NVRAM_SIZE);
-     s->nvram[k->ctrl_addr] = k->ctrl_reset;
-+    s->osc_stopped = false;
-+}
-+
-+static void ds1338_realize(DeviceState *dev, Error **errp)
-+{
-+    ds1338_power_on(DS1338(dev));
-+}
-+
-+static void ds1338_reset_hold(Object *obj, ResetType type)
-+{
-+    DS1338State *s = DS1338(obj);
-+
-+    if (!s->persist_on_reset) {
-+        ds1338_power_on(s);
-+    }
-     s->ptr = 0;
-     s->addr_byte = false;
--    s->osc_stopped = false;
- }
- 
-+static const Property ds1338_properties[] = {
-+    DEFINE_PROP_BOOL("persist-on-reset", DS1338State, persist_on_reset, false),
-+};
-+
- static void ds1338_class_init(ObjectClass *klass, const void *data)
- {
-     DeviceClass *dc = DEVICE_CLASS(klass);
-@@ -289,6 +308,8 @@ static void ds1338_class_init(ObjectClass *klass, const void *data)
-     k->recv = ds1338_recv;
-     k->send = ds1338_send;
-     rc->phases.hold = ds1338_reset_hold;
-+    dc->realize = ds1338_realize;
-+    device_class_set_props(dc, ds1338_properties);
-     dc->desc = "DS1338 I2C RTC with 56-byte NV RAM";
-     dc->vmsd = &vmstate_ds1338;
+diff --git a/docs/system/arm/aspeed.rst b/docs/system/arm/aspeed.rst
+index 933df41f96..f38f33cbe1 100644
+--- a/docs/system/arm/aspeed.rst
++++ b/docs/system/arm/aspeed.rst
+@@ -34,6 +34,7 @@ AST2600 SoC based machines :
+ - ``bletchley-bmc``        Facebook Bletchley BMC
+ - ``fby35-bmc``            Facebook fby35 BMC
+ - ``catalina-bmc``         Facebook Catalina BMC
++- ``sanmiguel-bmc``        Facebook SanMiguel BMC
+ - ``anacapa-bmc``          Facebook Anacapa BMC
+ - ``gb200nvl-bmc``         Nvidia GB200nvl BMC
  
 
 -- 
