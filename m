@@ -4,148 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55082CC6B2F
-	for <qemu-riscv@archiver.kernel.org>; Thu, 15 Oct 2026 06:52:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55A9FCC6B2F
+	for <qemu-riscv@archiver.kernel.org>; Thu, 15 Oct 2026 07:54:45 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xHFJf-0003po-7v; Thu, 15 Oct 2026 02:51:51 -0400
+	id 1xHGHw-0000sY-6S; Thu, 15 Oct 2026 03:54:08 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <sunilvl@oss.qualcomm.com>)
- id 1xHFJe-0003pY-GK
- for qemu-riscv@nongnu.org; Thu, 15 Oct 2026 02:51:50 -0400
-Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <sunilvl@oss.qualcomm.com>)
- id 1xHFJc-0007lI-RU
- for qemu-riscv@nongnu.org; Thu, 15 Oct 2026 02:51:50 -0400
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 69F1Oh501707322
- for <qemu-riscv@nongnu.org>; Thu, 15 Oct 2026 06:51:48 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=FtXTyNE+ySF
- l1RccLZzdpB9NDkIK2AGfN/me+zt3GCc=; b=Pi9VsRYKXfVCHM4OAppIwL2tx0X
- Z/JP7Wc3t/UEw2pTjew+oNY9LcuDt6Mcm8rAn7u6BunuzbyoCAHXfGSOSwesIPbQ
- 9ucDbdSqIQpG5Mg2TdBAjI2aS7Y/SOfQSi+QZaszYy1cu8+DTmUIVLFOdqarCI+b
- FdGjCtITkTO5ijAUF+oEoJqYwMkQQgfPd5aTgvqsCRJGDUTlfAIv1uVsbeWEdb6y
- oTDkitdFO6YjuSFPQbwxRsE9GILam8oj71J0rSBXkxh+hdtnGNUKvy7nnWnJAnuw
- mBKbyNNr6oXPWbwWNBx8RUjFfpnlocTbgPEG1V6snTKl+CGYM2X7MLNBbNQ==
-Received: from mail-dl1-f70.google.com (mail-dl1-f70.google.com [74.125.82.70])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4han54s3hh-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Thu, 15 Oct 2026 06:51:47 +0000 (GMT)
-Received: by mail-dl1-f70.google.com with SMTP id
- a92af1059eb24-149e8e8ad71so5719904c88.1
- for <qemu-riscv@nongnu.org>; Wed, 14 Oct 2026 23:51:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1792047107; x=1792651907; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=FtXTyNE+ySFl1RccLZzdpB9NDkIK2AGfN/me+zt3GCc=;
- b=StDfCgC6Su3qnnzrDfWSIa1bfCSNl3mzIpzkJjndYQD2Ja9rXGoKbGbYfK6zVzyam1
- 2U67bbocs+NRh+uqaLAturRUkyAAOh66rgZXXwKi/uWB20lIpWwDADHBHoo5rkUyu0vS
- 5COrcgJnLOo3aHueiNdAevQ1NTI7miQg3/5geA82QePPALCoZiA2tnkxpKVn+WPBga40
- sWE+2QdxKAf326p/ImZoaV1P7RRBGwBirWsp1ePom2aURfAFuBCLuPjmX2C5KPvaw/sz
- DroHH64GObd2ye/931C0mPWh8SCzhC3ajk6SQcUYZ+Nn3WLeymyQoqjVbspF1bEu53cQ
- fbBw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792047107; x=1792651907;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=FtXTyNE+ySFl1RccLZzdpB9NDkIK2AGfN/me+zt3GCc=;
- b=U1gynObZNoCd1E1RcW7psfuO3FoGpX+Uj7zNLhX9sDwOkFgkZjU9iLsRs7cXvSdXJl
- JjSGD64PIWCuXw/E32K8qlNtWOIPUH8N2pSoK9UrnfKlT5tR/TSKe9xoNm2wJWEQwSQL
- ODE+kiLnf4tXVWWziqNo5Iz3WupVqwuux54P7KLNib9eBVniL5lPBPxPuHoy0dlP7t++
- DjFQm82/ybc3Er9s070Ldpm9p88Qj5ngSxpuEXHAoHc0gGzQrgNifNXfV7JcqiZdunMi
- VE9ZCxCRGJ3PT8LEsRE7LxrLFbC3W4MOvh2z4nGbVP8zb1q86CT8V6rYF3TOQVVnYkTV
- o8yQ==
-X-Forwarded-Encrypted: i=1;
- AKwUvByyjN0qCIg1nVi2v6Oh0Tqt0zoqJSjVpXLCtxUQHpcUFolitcCoZFv/ogXyq4SgRWexE3Pn85g/yVg/@nongnu.org
-X-Gm-Message-State: AFq9FYKV+JGjmrPA5uKF2dCitpBxS6pocFPLDA7ZAuOa7ZV3e808w5Og
- acIC8qkNG9S2WGTvd5igVorQ72clyLIWHjehB/zwOAsPJGhOxEcMsVbeKun403N7fA6OfMcrlye
- X/ZlknZSw07C3mSpkPV7vZbCr7W5FE9F3RzXvqzq1pI0GrzRg86CdPVou2Q==
-X-Gm-Gg: AYBFou0arDPV5gW4PdXgfdl6bI9p1cuTKcnrOCl6q2XRljVkyNLiekDpeEjRjOUikjQ
- P/Yl4hViAOzupXTC03wmmiDk97eiz62/fhKLIT3ty2YJQFBkMyVXFPv46gYEU/R2rtxYQxT9DcV
- alXzFou7As6sTbkh/AGh+sz4Ez9a1Xwn5MDOdHxWHgngXQTAebJQdnf45nImVX9X+TGjDF4nOn+
- DprLmcn3f+kzWIKxLYXWKsJXZ4Cw9aqjYIb8OpUfqvkLpMMmXjGixXLWZ47rp2wdtaBL1YJFVRT
- 1InF2ltCMs97R63darwnL65eP5xcG8JytyRAag69Zm/10Hxpagux8sPKiTRujWOSm/fi+jtTC4d
- pumwj5YclEqko2kwDfkGaL6fDQLuOvSV+SxzDu/ychN6LkcnlRPyXu7Nk5oWAp+gOHsvPdVcLbX
- Jj2yqhbo8PLag=
-X-Received: by 2002:a05:7022:ea56:20b0:17f:7280:134b with SMTP id
- a92af1059eb24-17f72801559mr3244905c88.30.1792047106708; 
- Wed, 14 Oct 2026 23:51:46 -0700 (PDT)
-X-Received: by 2002:a05:7022:ea56:20b0:17f:7280:134b with SMTP id
- a92af1059eb24-17f72801559mr3244868c88.30.1792047106109; 
- Wed, 14 Oct 2026 23:51:46 -0700 (PDT)
-Received: from hu-sunilvl-blr.qualcomm.com
- (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
- by smtp.gmail.com with ESMTPSA id
- a92af1059eb24-169a442956asm67451789c88.16.2026.10.14.23.51.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 14 Oct 2026 23:51:45 -0700 (PDT)
-From: Sunil V L <sunilvl@oss.qualcomm.com>
-To: qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>,
+ (Exim 4.90_1) (envelope-from <wangyang25@otcaix.iscas.ac.cn>)
+ id 1xHGHs-0000r3-8C; Thu, 15 Oct 2026 03:54:05 -0400
+Received: from smtp81.cstnet.cn ([159.226.251.81] helo=cstnet.cn)
+ by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
+ (Exim 4.90_1) (envelope-from <wangyang25@otcaix.iscas.ac.cn>)
+ id 1xHGHq-0004Q8-0W; Thu, 15 Oct 2026 03:54:04 -0400
+Received: from [172.17.0.2] (unknown [124.16.137.194])
+ by APP-03 (Coremail) with SMTP id rQCowACHizmMhtBq093SCg--.11963S3;
+ Thu, 15 Oct 2026 15:53:48 +0800 (CST)
+From: wangyang <wangyang25@otcaix.iscas.ac.cn>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Weiwei Li <liweiwei@iscas.ac.cn>, 
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu@processmission.com>,
- "Michael S . Tsirkin" <mst@redhat.com>,
- Igor Mammedov <imammedo@redhat.com>, Ani Sinha <anisinha@redhat.com>,
- Anup Patel <anup.patel@oss.qualcomm.com>,
- Drew Fustini <fustini@kernel.org>, Prajwal N <prajwal.n@oss.qualcomm.com>,
- Shankar C <shankar.c@oss.qualcomm.com>,
- Sunil V L <sunilvl@oss.qualcomm.com>
-Subject: [PATCH v2 3/4] tests/qtest/bios-tables-test: Update riscv64 virt PPTT
- golden reference
-Date: Thu, 15 Oct 2026 12:19:56 +0530
-Message-ID: <20261015064957.4076464-4-sunilvl@oss.qualcomm.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20261015064957.4076464-1-sunilvl@oss.qualcomm.com>
-References: <20261015064957.4076464-1-sunilvl@oss.qualcomm.com>
+ Liu Zhiwei <zhiwei_liu@c-sky.com>
+Subject: [PATCH] target/riscv: gate envcfg CBO fields on extensions
+Date: Thu, 15 Oct 2026 07:53:47 +0000
+Message-Id: <179205082798.38010.17010797392458454916@otcaix.iscas.ac.cn>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=RYQFmFtv c=1 sm=1 tr=0 ts=6ad07803 cx=c_pps
- a=SvEPeNj+VMjHSW//kvnxuw==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22 a=EUspDBNiAAAA:8
- a=7nS_kZPvwonqTfo6PMEA:9 a=Kq8ClHjjuc5pcCNDwlU0:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE1MDAyNyBTYWx0ZWRfX8VOG0Lw+WK8w
- X5UXbXVSECx+4J3FqEhuHk473XTv2ZRN2DLi5Z+TtYx2vtD6K7KYm8kgtS4UsJdiikC87TckG+V
- wAk8goOXcC0JwhuN4pG9zSOjCiXNZitB9Qg2TdE+69U1B7XuHhAGIF5mOvt924OARaIrb8KzUTX
- lBiB0fFasII7cbiFxqlJA1k1P51YiEZARigmdW1/Ytcj4kxRbV8hyUsJuvCEgrLlDkUyDiC1ZDF
- e2TkBanWa6bifWf65SjJD4YU0AMyv1NoAVnUWt9HsGhuqw/MYX7XoDQeUAf4FhgdoYtz/us30ef
- ZL0yRy+r0Dk5IRwtSQTgdyPy0YJr6ilXfovgI2w8u5o0gpePClP6D3nYOQCBf1ENoiY4l0AhUBp
- leEXopgGjePojfXfh2mXJeq97gJM3xQdsq1C9i0jYY5uwMX/7SaK747vffLIyOAb+edMaQMlPhB
- fa9zR+5EoiGd8tZsipQ==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE1MDAyNyBTYWx0ZWRfX7yfRSjOF8PN4
- jvIeOdJq9+9oIs2N7r620RjANHmj3CTpzzIoetuJWEyuqIIxWnFmlVUQzf6vyyf4oDULpY1bpzs
- d1ogc+PAYry22kKUH6RA/F6BYAAkidA=
-X-Proofpoint-GUID: QoS6eWD9gEb6ksoFXD4HNfmocU13f6AC
-X-Proofpoint-ORIG-GUID: QoS6eWD9gEb6ksoFXD4HNfmocU13f6AC
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-13_01,2026-10-14_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 phishscore=0 bulkscore=0 suspectscore=0 impostorscore=0
- lowpriorityscore=0 spamscore=0 malwarescore=0 clxscore=1015 adultscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610150027
-Received-SPF: pass client-ip=205.220.180.131;
- envelope-from=sunilvl@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
-X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-CM-TRANSID: rQCowACHizmMhtBq093SCg--.11963S3
+X-Coremail-Antispam: 1UD129KBjvJXoWxZw4UCw4xXr1rCw4rtr4fZrb_yoW5WFWUpF
+ s8WFsxGrWkt34S9a93Gr1UWFs8JrZ5Ka929wnruasavFW2vrn3GFyDt343Ar18WFyxAr47
+ K3ya9r1jyF4UAFDanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUU9ab7Iv0xC_Kw4lb4IE77IF4wAFF20E14v26r4j6ryUM7CY07I2
+ 0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rw
+ A2F7IY1VAKz4vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Jr0_JF4l84ACjcxK6xII
+ jxv20xvEc7CjxVAFwI0_Gr0_Cr1l84ACjcxK6I8E87Iv67AKxVWxJVW8Jr1l84ACjcxK6I
+ 8E87Iv6xkF7I0E14v26r4UJVWxJr1lnxkEFVAIw20F6cxK64vIFxWle2I262IYc4CY6c8I
+ j28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2Ix0cI8IcVAFwI0_Jrv_JF
+ 1lYx0Ex4A2jsIE14v26r4j6F4UMcvjeVCFs4IE7xkEbVWUJVW8JwACjcxG0xvEwIxGrwCY
+ 1x0262kKe7AKxVWUAVWUtwCY02Avz4vE14v_GF4l42xK82IYc2Ij64vIr41l4I8I3I0E4I
+ kC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWU
+ WwC2zVAF1VAY17CE14v26r126r1DMIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr
+ 0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r4j6F4UMIIF0xvE42xK8VAvwI8IcIk0rVWU
+ JVWUCwCI42IY6I8E87Iv67AKxVW8JVWxJwCI42IY6I8E87Iv6xkF7I0E14v26r4UJVWxJr
+ UvcSsGvfC2KfnxnUUI43ZEXa7IU5WCJJUUUUU==
+X-Originating-IP: [124.16.137.194]
+X-CM-SenderInfo: 5zdqw5xdqjjk46rwut1l0ox2xfdvhtffof0/
+Received-SPF: pass client-ip=159.226.251.81;
+ envelope-from=wangyang25@otcaix.iscas.ac.cn; helo=cstnet.cn
+X-Spam_score_int: -41
+X-Spam_score: -4.2
+X-Spam_bar: ----
+X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -161,107 +74,89 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Update the RISC-V PPTT reference to match the actual PPTT generated by
-QEMU.
+The envcfg CBO fields are provided by Zicbom and Zicboz. Keep them
+read-only zero when the corresponding extension is absent in all three
+envcfg CSRs.
+Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/4225
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Signed-off-by: wangyang <wangyang25@otcaix.iscas.ac.cn>
+ target/riscv/tcg/csr.c | 37 +++++++++++++++++++++++++++++++++----
+ 1 file changed, 33 insertions(+), 4 deletions(-)
 
-Diffs from iasl:
-
-+/*
-+ * Intel ACPI Component Architecture
-+ * AML/ASL+ Disassembler version 20230628 (64-bit version)
-+ * Copyright (c) 2000 - 2023 Intel Corporation
-+ *
-+ * Disassembly of /tmp/aml-DN3NW3, Sun Oct 11 23:01:04 2026
-+ *
-+ * ACPI Data Table [PPTT]
-+ *
-+ * Format: [HexOffset DecimalOffset ByteLength]  FieldName : FieldValue (in hex)
-+ */
+diff --git a/target/riscv/tcg/csr.c b/target/riscv/tcg/csr.c
+index 061bc9d..96c513b 100644
+--- a/target/riscv/tcg/csr.c
++++ b/target/riscv/tcg/csr.c
+@@ -3224,10 +3224,19 @@ static RISCVException write_menvcfg(CPURISCVState *en=
+v, int csrno,
+                                     target_ulong val, uintptr_t ra)
+ {
+     const RISCVCPUConfig *cfg =3D riscv_cpu_cfg(env);
+-    uint64_t mask =3D MENVCFG_FIOM | MENVCFG_CBIE | MENVCFG_CBCFE |
+-                    MENVCFG_CBZE;
++    uint64_t mask =3D MENVCFG_FIOM;
+     bool stce_changed =3D false;
+=20
++    /* CBIE/CBCFE are read-only zero when Zicbom is not implemented. */
++    if (cfg->ext_zicbom) {
++        mask |=3D MENVCFG_CBIE | MENVCFG_CBCFE;
++    }
 +
-+[000h 0000 004h]                   Signature : "PPTT"    [Processor Properties Topology Table]
-+[004h 0004 004h]                Table Length : 00000060
-+[008h 0008 001h]                    Revision : 02
-+[009h 0009 001h]                    Checksum : 27
-+[00Ah 0010 006h]                      Oem ID : "BOCHS "
-+[010h 0016 008h]                Oem Table ID : "BXPC    "
-+[018h 0024 004h]                Oem Revision : 00000001
-+[01Ch 0028 004h]             Asl Compiler ID : "BXPC"
-+[020h 0032 004h]       Asl Compiler Revision : 00000001
++    /* CBZE is read-only zero when Zicboz is not implemented. */
++    if (cfg->ext_zicboz) {
++        mask |=3D MENVCFG_CBZE;
++    }
 +
+     /*
+      * menvcfg.LPE (Zicfilp) and menvcfg.SSE (Zicfiss) reside in the low
+      * 32 bits and are defined for both RV32 and RV64, so they must be
+@@ -3328,8 +3337,18 @@ static RISCVException read_senvcfg(CPURISCVState *env,=
+ int csrno,
+ static RISCVException write_senvcfg(CPURISCVState *env, int csrno,
+                                     target_ulong val, uintptr_t ra)
+ {
+-    uint64_t mask =3D SENVCFG_FIOM | SENVCFG_CBIE | SENVCFG_CBCFE | SENVCFG_=
+CBZE;
++    uint64_t mask =3D SENVCFG_FIOM;
+     RISCVException ret;
 +
-+[024h 0036 001h]               Subtable Type : 00 [Processor Hierarchy Node]
-+[025h 0037 001h]                      Length : 14
-+[026h 0038 002h]                    Reserved : 0000
-+[028h 0040 004h]       Flags (decoded below) : 00000011
-+                            Physical package : 1
-+                     ACPI Processor ID valid : 0
-+                       Processor is a thread : 0
-+                              Node is a leaf : 0
-+                    Identical Implementation : 1
-+[02Ch 0044 004h]                      Parent : 00000000
-+[030h 0048 004h]           ACPI Processor ID : 00000000
-+[034h 0052 004h]     Private Resource Number : 00000000
++    /* CBIE/CBCFE are read-only zero when Zicbom is not implemented. */
++    if (env_archcpu(env)->cfg.ext_zicbom) {
++        mask |=3D SENVCFG_CBIE | SENVCFG_CBCFE;
++    }
 +
-+[038h 0056 001h]               Subtable Type : 00 [Processor Hierarchy Node]
-+[039h 0057 001h]                      Length : 14
-+[03Ah 0058 002h]                    Reserved : 0000
-+[03Ch 0060 004h]       Flags (decoded below) : 00000011
-+                            Physical package : 1
-+                     ACPI Processor ID valid : 0
-+                       Processor is a thread : 0
-+                              Node is a leaf : 0
-+                    Identical Implementation : 1
-+[040h 0064 004h]                      Parent : 00000024
-+[044h 0068 004h]           ACPI Processor ID : 00000000
-+[048h 0072 004h]     Private Resource Number : 00000000
++    /* CBZE is read-only zero when Zicboz is not implemented. */
++    if (env_archcpu(env)->cfg.ext_zicboz) {
++        mask |=3D SENVCFG_CBZE;
++    }
+     /* Update PMM field only if the value is valid according to Zjpm v1.0 */
+     if (env_archcpu(env)->cfg.ext_ssnpm &&
+         riscv_cpu_mxl(env) =3D=3D MXL_RV64 &&
+@@ -3386,10 +3405,20 @@ static RISCVException write_henvcfg(CPURISCVState *en=
+v, int csrno,
+                                     target_ulong val, uintptr_t ra)
+ {
+     const RISCVCPUConfig *cfg =3D riscv_cpu_cfg(env);
+-    uint64_t mask =3D HENVCFG_FIOM | HENVCFG_CBIE | HENVCFG_CBCFE | HENVCFG_=
+CBZE;
++    uint64_t mask =3D HENVCFG_FIOM;
+     RISCVException ret;
+     bool stce_changed =3D false;
+=20
++    /* CBIE/CBCFE are read-only zero when Zicbom is not implemented. */
++    if (cfg->ext_zicbom) {
++        mask |=3D HENVCFG_CBIE | HENVCFG_CBCFE;
++    }
 +
-+[04Ch 0076 001h]               Subtable Type : 00 [Processor Hierarchy Node]
-+[04Dh 0077 001h]                      Length : 14
-+[04Eh 0078 002h]                    Reserved : 0000
-+[050h 0080 004h]       Flags (decoded below) : 0000000A
-+                            Physical package : 0
-+                     ACPI Processor ID valid : 1
-+                       Processor is a thread : 0
-+                              Node is a leaf : 1
-+                    Identical Implementation : 0
-+[054h 0084 004h]                      Parent : 00000038
-+[058h 0088 004h]           ACPI Processor ID : 00000000
-+[05Ch 0092 004h]     Private Resource Number : 00000000
++    /* CBZE is read-only zero when Zicboz is not implemented. */
++    if (cfg->ext_zicboz) {
++        mask |=3D HENVCFG_CBZE;
++    }
 +
-+Raw Table Data: Length 96 (0x60)
-+
-+    0000: 50 50 54 54 60 00 00 00 02 27 42 4F 43 48 53 20  // PPTT`....'BOCHS
-+    0010: 42 58 50 43 20 20 20 20 01 00 00 00 42 58 50 43  // BXPC    ....BXPC
-+    0020: 01 00 00 00 00 14 00 00 11 00 00 00 00 00 00 00  // ................
-+    0030: 00 00 00 00 00 00 00 00 00 14 00 00 11 00 00 00  // ................
-+    0040: 24 00 00 00 00 00 00 00 00 00 00 00 00 14 00 00  // $...............
-+    0050: 0A 00 00 00 38 00 00 00 00 00 00 00 00 00 00 00  // ....8...........
-
-Signed-off-by: Sunil V L <sunilvl@oss.qualcomm.com>
-Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
----
- tests/data/acpi/riscv64/virt/PPTT           | Bin 0 -> 96 bytes
- tests/qtest/bios-tables-test-allowed-diff.h |   1 -
- 2 files changed, 1 deletion(-)
-
-diff --git a/tests/data/acpi/riscv64/virt/PPTT b/tests/data/acpi/riscv64/virt/PPTT
-index e69de29bb2d1d6434b8b29ae775ad8c2e48c5391..15598a9b8a3cc0cdd50bc1f77c73ae0ba728a272 100644
-GIT binary patch
-literal 96
-zcmWFt2nk7GU|?WUck*}k2v%^42yj*a0!E-1hz+6{L>L$ZK{PUeim9N9aRK=jNMZmJ
-Cwg&+K
-
-literal 0
-HcmV?d00001
-
-diff --git a/tests/qtest/bios-tables-test-allowed-diff.h b/tests/qtest/bios-tables-test-allowed-diff.h
-index 94be7a69a22e..dfb8523c8bf4 100644
---- a/tests/qtest/bios-tables-test-allowed-diff.h
-+++ b/tests/qtest/bios-tables-test-allowed-diff.h
-@@ -1,2 +1 @@
- /* List of comma-separated changed AML files to ignore */
--"tests/data/acpi/riscv64/virt/PPTT",
--- 
+     ret =3D smstateen_acc_ok(env, 0, SMSTATEEN0_HSENVCFG);
+     if (ret !=3D RISCV_EXCP_NONE) {
+         return ret;
+--=20
 2.43.0
 
 
