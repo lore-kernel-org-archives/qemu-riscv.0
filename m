@@ -4,64 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B817ACC6B33
-	for <qemu-riscv@archiver.kernel.org>; Thu, 15 Oct 2026 10:34:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDDFDCC6B30
+	for <qemu-riscv@archiver.kernel.org>; Thu, 15 Oct 2026 10:35:11 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xHIlj-0005VD-Ct; Thu, 15 Oct 2026 06:33:03 -0400
+	id 1xHIlQ-0003eA-1N; Thu, 15 Oct 2026 06:32:44 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <eblot.ml@gmail.com>)
- id 1xHIif-0000Hm-3P
- for qemu-riscv@nongnu.org; Thu, 15 Oct 2026 06:29:53 -0400
-Received: from mail-wm1-f49.google.com ([209.85.128.49])
+ id 1xHIhF-0007eP-Ey
+ for qemu-riscv@nongnu.org; Thu, 15 Oct 2026 06:28:29 -0400
+Received: from mail-wm1-f41.google.com ([209.85.128.41])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <eblot.ml@gmail.com>)
- id 1xHIid-0004e5-D7
- for qemu-riscv@nongnu.org; Thu, 15 Oct 2026 06:29:52 -0400
-Received: by mail-wm1-f49.google.com with SMTP id
- 5b1f17b1804b1-4a1b07c3c5fso17318365e9.1
- for <qemu-riscv@nongnu.org>; Thu, 15 Oct 2026 03:29:51 -0700 (PDT)
+ id 1xHIhB-0004KR-Uy
+ for qemu-riscv@nongnu.org; Thu, 15 Oct 2026 06:28:25 -0400
+Received: by mail-wm1-f41.google.com with SMTP id
+ 5b1f17b1804b1-4a172eb31f0so44234135e9.1
+ for <qemu-riscv@nongnu.org>; Thu, 15 Oct 2026 03:28:21 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792060190; x=1792664990;
+ d=1e100.net; s=20260707; t=1792060100; x=1792664900;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=yjBmG+zuYRbjC22UGQURaHMUPP1uzHBYq+b+aCfLeJc=;
- b=t7z3ErTBxO4K9nyyHa/41Gsh70+4ckCnrEJRUmL9sfoWR3cVr3zYsIBQL7Ozcms8ci
- udzrNSeHoD8WEpQLzFUURYvOMdW3lITZVJHcUpL8zWHh2ffY44gUdQgfic6/4KZSDhDA
- sUD4jwyoYy6vtieRQP11yu7vpBj2OCP050lF3IWCNX5/6yk0S2dgYedQcq33Cq+TPlVe
- 6MtA5NztYKsm0i5sfTJLgiDd5QMNIgL40xquSYY8zPnX+/fBGlgeIuQuleblKcp1ysM3
- qJWwIOLg9lzGOrHKUdNQSLefcSKBCLnSkDoQVdlZlVVU8WC0pPmCC0AqLJ2cL5r0r7wU
- 2vWA==
+ bh=OOFmzhwngATj5QXbK6+ilaV21N6JVdHVnASw6Lr12jc=;
+ b=tAmsuG7KZADA8nVf7aKqcYUOOLNqzu7ptnEh+NK7seprm/Uf0dMlGYkMz04RpO/V0v
+ jgnqt1KKXynVBIe4rmtvRZnZdxtaUoqgGDpPIzqaFzMQQ8CUB/rLEXfsAsNNm4zyo4Vk
+ 3pqupP7MSqah3JqvUUgXHB8LPfZRIhw0InHeqwAggdV30B6TRA46Vl9Fo2JUzjvUSkJW
+ jQFKvIlRFSK8bQl2E7/4la3xoga8lrKohbaGHnZXV72uP7axh6kPA/G/8THREP+EV3HX
+ NAYjL7847KYk1//QtfOck6bedqxJ7ekX0KDYaQou4ybfg5IRsuJQoe0JXljv9stnURmn
+ DBVA==
 X-Forwarded-Encrypted: i=1;
- AKwUvBybEgQAWjRLfn5TSPla45TkHbroy89SHwgwnhw4BFJeTU8lFxCOoZeu22ytZuD8I151oha8Bp8opWFG@nongnu.org
-X-Gm-Message-State: AFq9FYIfCBVBfCDPnMbG3j2APFuLuOYaOKeP+LO57RtdsROtUo+6MF4i
- xp2jNvN5BZcQ6UyOa2CttFTAVS/vlzETqd1xN+wWXrl/fqG2rnZbE6xI
-X-Gm-Gg: AYBFou128gEbxLdHhy2Y56fayHPLJY1L8Z4NhBhnso2QKTZ0SyuoW3G3vuN15Vc/Is5
- KLP3sW3V66EZKDPFamgB+mGXbjKSw46Jk+yfY0IrUxqmCf8RwmXRBe7K8MlwFRkQ7VTdYLwpX/z
- jlUGrOXcm5TJVSE5Xm6VaTsU+BFZVbO/ZnXzi7iBiMuHsI896007NecwyxKxJ0kR4o2+tcKwSVf
- HLggBJbX7cjh+X5ncMMvo/KV0dNhLb4yuKzdJP6WbQvXRMP+Lk7neurHUsQl9wYtiC/kN6KTRC6
- EUz1TDHVLcL4Wb2KfTBStgMrN80nIwIs9Oaw+SowekeZUg2lhttxCr6gjETcbNjr1uC0/JS7Atv
- nZcaeD/eE+GCmSLrVB0t67kdxdpiRkCdkprRey0HCKpOqj/0vxWNfHz9+7ruDgw/tb7cHYXo4/i
- 8N/BQBhAQrn3WwxN8eThDJp6xEcY9bbsldTmBmysT01QiS3KuvLp7n5MlfH+TjURLN8tM3kt3a+
- 2sf617JUx1viCnK0hdwEmu8FIoCg1CDWVNsnS4wWtYIBw==
-X-Received: by 2002:a05:600c:4e43:b0:4a0:1f90:594b with SMTP id
- 5b1f17b1804b1-4a18e4b67e1mr365550045e9.22.1792060189894; 
- Thu, 15 Oct 2026 03:29:49 -0700 (PDT)
+ AKwUvBz+WnjaZatA2DtdDGr6u829sBRemVYsljivGf0JLxflDxeklisNZ1n+K7oWpmdCFZyWnBwuYyOfEBB4@nongnu.org
+X-Gm-Message-State: AFq9FYLyx6d7/lXne9dmxeJagm6/SVnM0qNH8UcOO6eibrRdt5+hbxcE
+ Artvic5lLXcRYPEIGy+hycbdvQ4w82gfZH0H31WHkc7CSAlM1oZ/wUN6
+X-Gm-Gg: AYBFou3EmKxuqA5tSy1iLkosLHspn1ChVyhNrhHLTH5Zgg5uk7vf3nLj0O3MHaHtqba
+ vhgEtR3VnIwpDzHVTHX7nVrEitANaK+SURrZ93lFW1kvupaf1caFrknp502rVQPrAqjTiEUdblC
+ ognoG+dYrwcpwj2oerJ+JS/pwNJvMLpgyBSwqXLy1owiWmbxuPWBAxIivo7WHaetpqZXaZq8y3A
+ MCmrt4VX14z3ARt9oWtw8sv+WribSVfr4XINZDIjSTEtrlJjeGNwAa/GXvSBQ0d2B5bZYf7QLhm
+ CE0Kg+dHXufQjc/5x6eMAqoyyRKLBNol5cfalnd8Xwuxzr2EOvrCrIgNtfcByYqMEKuJIwoopNX
+ EVc6Ehc5zUPnDyFHdja1zywmhLPcx54eVe8/PxWHVWg5wlrK7IzK3DXJ9t/0Ip795j/US3hjOva
+ YRp9Mfsg6PmoGQUuq8GUPE+OV3CL8mnDOKqzMmY7mXl3yZZFmif45v4dwAe9W9nckruc5pF4KSa
+ /AxvkeUMdFN9xZcdeYoRx9Vh4W7oSenA4xYtzVYK2oLnXs=
+X-Received: by 2002:a05:600d:1b:b0:4a1:9661:14b7 with SMTP id
+ 5b1f17b1804b1-4a196611b9amr267914405e9.32.1792060100051; 
+ Thu, 15 Oct 2026 03:28:20 -0700 (PDT)
 Received: from localhost (89-93-216-19.hfc.dyn.abo.bbox.fr. [89.93.216.19])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a1bd5f4319sm27199325e9.0.2026.10.15.03.29.48
+ 5b1f17b1804b1-4a1bd66c5e6sm40366255e9.2.2026.10.15.03.28.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 15 Oct 2026 03:29:48 -0700 (PDT)
-Date: Thu, 15 Oct 2026 11:28:37 +0200
-Subject: [PATCH v3 50/50] tests/functional/arm: minerva: add BMC boot test
+ Thu, 15 Oct 2026 03:28:19 -0700 (PDT)
+Date: Thu, 15 Oct 2026 11:28:24 +0200
+Subject: [PATCH v3 37/50] tests/qtest: ina230: cover operating modes and
+ triggered conversions
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261015-bmc-minerva-v3-50-7d50c8a108e5@free.fr>
+Message-Id: <20261015-bmc-minerva-v3-37-7d50c8a108e5@free.fr>
 References: <20261015-bmc-minerva-v3-0-7d50c8a108e5@free.fr>
 In-Reply-To: <20261015-bmc-minerva-v3-0-7d50c8a108e5@free.fr>
 To: qemu-devel@nongnu.org
@@ -77,15 +78,15 @@ Cc: =?utf-8?q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>,
  =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>, 
  Emmanuel Blot <emmanuel.blot@free.fr>
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1792056477; l=2487;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1792056476; l=5268;
  i=emmanuel.blot@free.fr; s=20260602; h=from:subject:message-id;
- bh=utRMkw0VXmaCFdITu3Kg7E0hjjFW9yC9c7a309pEC8o=;
- b=SABl57njXkNYtVhmFAMHi+9+Vh94V3yFVOyiJ6i4w7g/HzNMH4rEXJxxNzKHKDhDsKospncCz
- 2RDPbzyCefZBmJQPxlpxQ6MtV28h4038LwoDLqgRGUTdZMXmVJn+Fja
+ bh=M/AP87tzHPyKIB2/isqSVgsUBIucUWr9P38+NmmmCT4=;
+ b=Yg5mzoaTRKUYOwLQCo+DrFpSzZQ/xsxjaSNkp9VVBeOdH8mjTi6omkFfwMDnOncs48DVluoXG
+ 7BNCbFgGVXOAb22pR0PGra4CZsXz52fJQINZOtClEjyUXgkAKe3SUGH
 X-Developer-Key: i=emmanuel.blot@free.fr; a=ed25519;
  pk=0qFrZ21FAAN8OfVsSoVcCFTk/NMYOWzxJz4paSAVm0g=
-Received-SPF: pass client-ip=209.85.128.49; envelope-from=eblot.ml@gmail.com;
- helo=mail-wm1-f49.google.com
+Received-SPF: pass client-ip=209.85.128.41; envelope-from=eblot.ml@gmail.com;
+ helo=mail-wm1-f41.google.com
 X-Spam_score_int: -15
 X-Spam_score: -1.6
 X-Spam_bar: -
@@ -111,74 +112,129 @@ From:  Emmanuel Blot via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Add a functional test booting the Facebook Minerva BMC machine.
-
-Note: The boot image currently lives on a personal fork; a TODO in the
-test notes it should be relocated under legoater/qemu-aspeed-boot before
-upstreaming.
+Add coverage for the MODE field: power-down retains the last results,
+the shunt/bus channel-enable bits gate which registers track new inputs,
+triggered modes convert once per Config write, and bus-only mode still
+derives power from the retained current.
 
 Signed-off-by: Emmanuel Blot <emmanuel.blot@free.fr>
 ---
- tests/functional/arm/meson.build            |  2 ++
- tests/functional/arm/test_aspeed_minerva.py | 30 +++++++++++++++++++++++++++++
- 2 files changed, 32 insertions(+)
+ tests/qtest/ina230-test.c | 95 ++++++++++++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 94 insertions(+), 1 deletion(-)
 
-diff --git a/tests/functional/arm/meson.build b/tests/functional/arm/meson.build
-index 61b00932db..dd1ddf7f6f 100644
---- a/tests/functional/arm/meson.build
-+++ b/tests/functional/arm/meson.build
-@@ -16,6 +16,7 @@ test_arm_timeouts = {
-   'aspeed_bletchley' : 480,
-   'aspeed_catalina' : 480,
-   'aspeed_gb200nvl_bmc' : 480,
-+  'aspeed_minerva' : 480,
-   'aspeed_rainier' : 480,
-   'bpim2u' : 500,
-   'collie' : 180,
-@@ -51,6 +52,7 @@ tests_arm_system_thorough = [
-   'aspeed_bletchley',
-   'aspeed_catalina',
-   'aspeed_gb200nvl_bmc',
-+  'aspeed_minerva',
-   'aspeed_rainier',
-   'bpim2u',
-   'canona1100',
-diff --git a/tests/functional/arm/test_aspeed_minerva.py b/tests/functional/arm/test_aspeed_minerva.py
-new file mode 100644
-index 0000000000..925a82b139
---- /dev/null
-+++ b/tests/functional/arm/test_aspeed_minerva.py
-@@ -0,0 +1,30 @@
-+#!/usr/bin/env python3
-+#
-+# Functional test that boots the ASPEED machines
-+#
-+# Copyright (c) 2026 Meta Platforms, Inc. and affiliates.
-+#
-+# SPDX-License-Identifier: GPL-2.0-or-later
+diff --git a/tests/qtest/ina230-test.c b/tests/qtest/ina230-test.c
+index 36c899efee..4d601c74b5 100644
+--- a/tests/qtest/ina230-test.c
++++ b/tests/qtest/ina230-test.c
+@@ -142,7 +142,97 @@ static void test_config_wmask(void *obj, void *data, QGuestAllocator *alloc)
+     g_assert_cmphex(i2c_get16(dev, REG_CONFIG), ==, 0x7FFF);
+ }
+ 
+-/* Shunt voltage register, including two's-complement negatives */
++/* Operating modes */
++static void test_modes(void *obj, void *data, QGuestAllocator *alloc)
++{
++    QI2CDevice *dev = (QI2CDevice *)obj;
++    static const struct {
++        uint8_t mode;
++        uint16_t shunt, bus, current, power;
++    } cases[] = {
++        /* Power-down: no conversion, every register retains the baseline */
++        { 0x0, 0x1F40, 0x2570, 0x2710, 0x12B8 },
++        { 0x4, 0x1F40, 0x2570, 0x2710, 0x12B8 },
++        /* Shunt only (continuous): shunt and current track the probe */
++        { 0x5, 0x0FA0, 0x2570, 0x1388, 0x12B8 },
++        /* Shunt and bus (continuous): every register tracks the probe */
++        { 0x7, 0x0FA0, 0x12C0, 0x1388, 0x04B0 },
++    };
++    size_t idx;
 +
-+from qemu_test import Asset
-+from aspeed import AspeedTest
++    for (idx = 0; idx < ARRAY_SIZE(cases); idx++) {
++        i2c_set16(dev, REG_CONFIG, CONFIG_RST);
++        i2c_set16(dev, REG_CALIBRATION, 0x0A00);
++        qmp_ina230_set("shunt-voltage", 20000000);
++        qmp_ina230_set("bus-voltage", 11980000);
 +
++        i2c_set16(dev, REG_CONFIG, cases[idx].mode);
++        qmp_ina230_set("shunt-voltage", 10000000);
++        qmp_ina230_set("bus-voltage", 6000000);
 +
-+class MinervaMachine(AspeedTest):
++        g_assert_cmphex(i2c_get16(dev, REG_SHUNT), ==, cases[idx].shunt);
++        g_assert_cmphex(i2c_get16(dev, REG_BUS), ==, cases[idx].bus);
++        g_assert_cmphex(i2c_get16(dev, REG_CURRENT), ==, cases[idx].current);
++        g_assert_cmphex(i2c_get16(dev, REG_POWER), ==, cases[idx].power);
++    }
++}
 +
-+    # TODO: the boot image currently lives on a personal fork; move it under
-+    # legoater/qemu-aspeed-boot before upstreaming.
-+    ASSET_MINERVA_FLASH = Asset(
-+        'https://github.com/eblot/qemu-aspeed-boot/raw/refs/heads/minerva-bmc/images/minerva-bmc/openbmc-20260720025047/'
-+            'obmc-phosphor-image-minerva-20260720025047.static.mtd.xz',
-+        'bd713df39d3c09846299a2377315465187a4dcd33c29d3b3d683ef13b59f36bb')
++/*
++ * Triggered modes perform exactly one conversion per trigger, where the
++ * trigger is a Configuration-register write. Injected input changes
++ * between triggers are ignored until the next write.
++ */
++static void test_triggered(void *obj, void *data, QGuestAllocator *alloc)
++{
++    QI2CDevice *dev = (QI2CDevice *)obj;
 +
-+    def test_arm_ast2600_minerva_openbmc(self):
-+        image_path = self.uncompress(self.ASSET_MINERVA_FLASH)
++    i2c_set16(dev, REG_CONFIG, CONFIG_RST);
++    i2c_set16(dev, REG_CALIBRATION, 0x0A00);
 +
-+        self.do_test_arm_aspeed_openbmc('minerva-bmc', image=image_path,
-+                                        uboot='2019.04', cpu_id='0xf00',
-+                                        soc='AST2600 rev A3')
++    qmp_ina230_set("shunt-voltage", 20000000);
++    qmp_ina230_set("bus-voltage", 11980000);
 +
-+if __name__ == '__main__':
-+    AspeedTest.main()
++    i2c_set16(dev, REG_CONFIG, 0x03);
++    g_assert_cmphex(i2c_get16(dev, REG_SHUNT), ==, 0x1F40);
++    g_assert_cmphex(i2c_get16(dev, REG_BUS), ==, 0x2570);
++
++    qmp_ina230_set("shunt-voltage", 10000000);
++    qmp_ina230_set("bus-voltage", 6000000);
++    g_assert_cmphex(i2c_get16(dev, REG_SHUNT), ==, 0x1F40);
++    g_assert_cmphex(i2c_get16(dev, REG_BUS), ==, 0x2570);
++
++    i2c_set16(dev, REG_CONFIG, 0x03);
++    g_assert_cmphex(i2c_get16(dev, REG_SHUNT), ==, 0x0FA0);
++    g_assert_cmphex(i2c_get16(dev, REG_BUS), ==, 0x12C0);
++
++    i2c_set16(dev, REG_CONFIG, 0x07);
++    qmp_ina230_set("shunt-voltage", 20000000);
++    g_assert_cmphex(i2c_get16(dev, REG_SHUNT), ==, 0x1F40);
++}
++
++/*
++ * In a bus-only mode the current register is retained, but the power register
++ * is still refreshed on each bus conversion from that retained current.
++ */
++static void test_bus_only_power(void *obj, void *data, QGuestAllocator *alloc)
++{
++    QI2CDevice *dev = (QI2CDevice *)obj;
++
++    i2c_set16(dev, REG_CONFIG, CONFIG_RST);
++    i2c_set16(dev, REG_CALIBRATION, 0x0A00);
++    qmp_ina230_set("shunt-voltage", 20000000);
++    qmp_ina230_set("bus-voltage", 11980000);
++    g_assert_cmphex(i2c_get16(dev, REG_CURRENT), ==, 0x2710);
++
++    i2c_set16(dev, REG_CONFIG, 0x06);
++    qmp_ina230_set("bus-voltage", 6000000);
++
++    g_assert_cmphex(i2c_get16(dev, REG_CURRENT), ==, 0x2710);
++    g_assert_cmphex(i2c_get16(dev, REG_BUS), ==, 0x12C0);
++    g_assert_cmphex(i2c_get16(dev, REG_POWER), ==, 0x0960);
++}
++
++/* Shunt voltage register */
+ static void test_shunt_injection(void *obj, void *data, QGuestAllocator *alloc)
+ {
+     QI2CDevice *dev = (QI2CDevice *)obj;
+@@ -377,6 +467,9 @@ static void ina230_register_nodes(void)
+     qos_add_test("defaults", "ina230", test_defaults, NULL);
+     qos_add_test("soft-reset", "ina230", test_soft_reset, NULL);
+     qos_add_test("config-wmask", "ina230", test_config_wmask, NULL);
++    qos_add_test("modes", "ina230", test_modes, NULL);
++    qos_add_test("triggered", "ina230", test_triggered, NULL);
++    qos_add_test("bus-only-power", "ina230", test_bus_only_power, NULL);
+     qos_add_test("shunt-injection", "ina230", test_shunt_injection, NULL);
+     qos_add_test("bus-injection", "ina230", test_bus_injection, NULL);
+     qos_add_test("shunt-limits", "ina230", test_shunt_limits, NULL);
 
 -- 
 2.53.0-Meta
