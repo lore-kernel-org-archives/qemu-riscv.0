@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E184CC6B2D
-	for <qemu-riscv@archiver.kernel.org>; Thu, 15 Oct 2026 03:18:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70E1ACC6B2D
+	for <qemu-riscv@archiver.kernel.org>; Thu, 15 Oct 2026 03:19:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xHBzI-0006cn-Vf; Wed, 14 Oct 2026 23:18:37 -0400
+	id 1xHBzH-0006cO-LN; Wed, 14 Oct 2026 23:18:35 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <portias@tenstorrent.com>)
- id 1xHBzH-0006cI-Bn
- for qemu-riscv@nongnu.org; Wed, 14 Oct 2026 23:18:35 -0400
-Received: from mail-pj1-x1031.google.com ([2607:f8b0:4864:20::1031])
+ id 1xHBz7-0006a6-EA
+ for qemu-riscv@nongnu.org; Wed, 14 Oct 2026 23:18:25 -0400
+Received: from mail-pj1-x1033.google.com ([2607:f8b0:4864:20::1033])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <portias@tenstorrent.com>)
- id 1xHBzD-0006d2-Kl
- for qemu-riscv@nongnu.org; Wed, 14 Oct 2026 23:18:33 -0400
-Received: by mail-pj1-x1031.google.com with SMTP id
- 98e67ed59e1d1-3a47d4fb7feso359025a91.0
- for <qemu-riscv@nongnu.org>; Wed, 14 Oct 2026 20:18:30 -0700 (PDT)
+ id 1xHBz6-0006cc-2G
+ for qemu-riscv@nongnu.org; Wed, 14 Oct 2026 23:18:25 -0400
+Received: by mail-pj1-x1033.google.com with SMTP id
+ 98e67ed59e1d1-3ac847f9d78so125273a91.1
+ for <qemu-riscv@nongnu.org>; Wed, 14 Oct 2026 20:18:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=tenstorrent.com; s=google; t=1792034309; x=1792639109; darn=nongnu.org;
+ d=tenstorrent.com; s=google; t=1792034302; x=1792639102; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=AwD3x/rudsb+06V6RP8ZLAuRqMJZhv941j/hOpH+ahg=;
- b=UoQQW+wo98fLoMendHkYPSazg8rLt8HDBQt8RJsy0YRlHI8lPDiw5JMdu7NJgHMxiy
- KfIUQxKWPOPvRzEqQQo6uLPMp4syomjJmg8ChmPoyctOK3rOroHssgHXDq0S4fqaUBcL
- Db8KgvdB+QONGqrNmZ+lajGpFVb0Dqx6p+Qu1PNeM2L+KQi+ivIk+bux3/Jea4eG6V/z
- IcLCd7hSgV7c0vX+WLZ8Xlct4FLSE2SQuyEAbDOc7KYcV6l9zhHik2foKgzlu+s8sJ/F
- PtBpa7qS9gwa8n+KB8XyEjlgKs2RERFRqZ7q/8zbGyS6jpelpovIdkUOtYjCjlKfdl4r
- nAsQ==
+ bh=VmMMUAd6gA6U8M7wACz8JIPXiKmX69iwu/hMcHHU1HE=;
+ b=RlwVUPvYt34eWSM57yKG29lg+jTWgbEPbQWEU5YbY1FGQCK8RXmlnEEwrG+X8/YbKf
+ uEEBA7nNmWtR0OxeFrtAuTtmWtEjpT/sPASL/G7dr7RqOi4j92I4oABHXoKiqZOTjC1e
+ 85iyspILalPp64uPKitQrAlgQda21s9U7XcQwPM4bxUJeoyQqlLWq1EycNYRodvK2sy8
+ lQ9rZB8BXEHhp4hgBMOPFNCBZNEENEirvy4QgsR/++FJ52iwzXvIaWNcoSLa6hQJp+rg
+ FmWiklCatEyQRWkSxtI1uj9jyHpK1fx5A08p79HX6hpvJ2WrZhipDULjC7GIquFIeirW
+ sfXQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792034309; x=1792639109;
+ d=1e100.net; s=20260707; t=1792034302; x=1792639102;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=AwD3x/rudsb+06V6RP8ZLAuRqMJZhv941j/hOpH+ahg=;
- b=ElgQssm/AGSq9nzIqflNNPq+f1ePbnSPb1jLkiNfnYxKBsMgcEI1CPfGEUnyTlaqm9
- dzfIHrbuYMoDr6+Ohw9amqiFbBoIiIXkuUF6aEYCCR8o9a0aYYBWaAEZPbt3WCXqPOYM
- s67Bylg5uwzKlkEZO4YC/49f2pTn/tUtMj6pAncZhd2FapvxMY0QGRj8jSjUKhCL/5XJ
- c8ZdfjjU8mVNbe9A2sNOuopzPztCUkc5IuV7NfQtRbaGh2SQ7pp3bM1aAlLUetw7Q6fd
- THMo+C0jq/4vEV4ohjj2AhIJFdnh8hgI/bCgQFQq6aG6Ha455gtZbQzAY3RzH3f3kZJQ
- BPDw==
+ bh=VmMMUAd6gA6U8M7wACz8JIPXiKmX69iwu/hMcHHU1HE=;
+ b=KZzWhWx26AI8IA+7szl3u/7VAlooPIslexhhbpKUhlKZJJfkTvB05+KvF6uSYvExES
+ 9x0jdA6v0tlW1QFb7Cp3LybgInFJCh6dCS/l7TtZpUAgVsff0WQtfp9lrmTAxDPBB3PW
+ IK5XK4OFI+Yyetbsa1CuattBJHaLZhE0XSi29cp9oniFrEjarw1FZt9bpGp+drH506qm
+ hfbS8V/dQLy3u+QFeh5b25bfI0EHRB39k6lByO7FBnlhaawL3nuPBsgsddRi5S+5rPZS
+ v1j0yktZziaFI6nY8MVvJMo508xR53GxwvB80fHQ3ap4eMbLr4ocxsESm56gX0WQbIB7
+ NLfQ==
 X-Forwarded-Encrypted: i=1;
- AKwUvBy5fIJy+sFAH/cz20GyoDSWHLX8DO2tqlbPGTpCCOQWcmenuWMXuvM6wkoTP7AHruTO37+K9ygJSAcZ@nongnu.org
-X-Gm-Message-State: AFq9FYJVVLvsdJt4+Xz5YnM4QiJ8pJzcQCWPOPsFB6jSrmwbZfOAq1cP
- 8MkdSCBJXrP9c/LHD0EkFn0ATlvlHJeLR3y+TvKXJC6RAVY6cj1a1ULhrh79DsczOlg=
-X-Gm-Gg: AYBFou0sqpeNU/jwD62PcZOlXd/6YBTaPZEc111z4L9lQ0w8zyHxzFGlmzV99//ZWzb
- h5D0T6KW9RgEgrVJqoa5YQxbivrpmDkxaHn+U2tYzjFcJbCXJ4JfgufbCxqCNvbkxN/NAmyNLXP
- O8NHN8GPw4+bYB+o2QdOmL6kS1FmjTw0KHf8tHs9wLR0z4amieHCAJJ6PMQ/+5WR68dCQsezTOt
- 0UJX8YmVvhWdilGyhKc4tNKQpYFxI2E44hN3D7PL/38+aakwp5ajcVKR9NWjgdCqpD80F90j1ot
- 9B2h0YhT4p+dwNwRQHCEp1C7PRaINJst9FEGKdE2j3RUaSleEYq0fqUGV233q/JxLdSr5WkQZsN
- xrUdWz+T5dSZtSTENf3Ka2SoPR36ok7G62K7s3WY35ahcx/9D5mHtxGlfNNAj/4ROtHt8PFzn3A
- I2cB8GVoYwwitOFv1klbuFTt4O++JvPDTLqx+ZoAzWgPAg6Y7P2iMK4wEPO+B8RA4PyZVMmvaYq
- Ix8nJJpEMy/hR7z6X3xesveWQdoN3OmcE+8BQFuf3QGqUI=
-X-Received: by 2002:a17:90a:d49:b0:3ab:be66:ddc5 with SMTP id
- 98e67ed59e1d1-3abbe66df3bmr11756966a91.6.1792034309069; 
- Wed, 14 Oct 2026 20:18:29 -0700 (PDT)
+ AKwUvBwXcvu8pEx+miqgb/hTXF93W0wLZ6/x+RaGT/3MwrV0XeCtBk4IQN+vhMBsm9GhGuUdBShjp7jvr2Yu@nongnu.org
+X-Gm-Message-State: AFq9FYLzHjNzIGIkDIjjtuJd2wIJXmMVpdL/0g8B7/86hRZMNLbB7ET8
+ dLn0GgbsD084FBAqI0ZDjm/Yb9K4l7n0REkmc4Ahqp3tuEFIGdzat8VvrHNIOV+beTA=
+X-Gm-Gg: AYBFou3xc1mndRG1dW+8/FeKZ4xJbI2sZxW+bl8fkNnWfGfEL4sX5cLnLsVsqugBO9O
+ Pbe3uBAbuEad8B+5KB5lUwGgf4yS63c3dlpyPTkx4qNQhznbtb3tIyaBCcpnMVGuY2zJoOIhxbi
+ Y/TxCs1eWyWFmxQo228e/AaX25E866Qe9CgcUAqpQle6+OX2RlTgP5Q6JxfiOOJc3bez52wyEuK
+ Unv5UYK4hiwN4Myyu2cPB2DfLIET4ahz51yW4lRU9jPcMyY+5ogdZpcN0dam4FHkZrPrWimbq5w
+ OMY7ILtHWOMsdnTxJ7+y/LF3eN+p2g7w8ykDRYIbzADbwP4oGocSPyPerfBw4MeIvyiF2APoZsm
+ jOXM+oTPGPcN6eqZ//ceD/LZXacyu38qjR+QQoztLa8CzDaSdA4OfRIokwsPFkA2mFLMaiLsBcS
+ SlNk7LYE4cKgT1/6Ki8fLIQqCkOxw2B+GARfN7JNZ/0V9SlPB42FTQh913aXCuk4D5om0Inuhox
+ gtLTzx4k1PmvnR29L8oMohW1C28KRqOayvv2+huzAnwQTZVY0l48q4x1dM=
+X-Received: by 2002:a17:90a:c105:b0:3ac:e6a:1af5 with SMTP id
+ 98e67ed59e1d1-3ac0e6a4dccmr13978718a91.2.1792034302382; 
+ Wed, 14 Oct 2026 20:18:22 -0700 (PDT)
 Received: from lima-default.tail89d63.ts.net ([159.196.41.205])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3ac93049ec2sm1321725a91.1.2026.10.14.20.18.22
+ 98e67ed59e1d1-3ac93049ec2sm1321725a91.1.2026.10.14.20.18.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 14 Oct 2026 20:18:28 -0700 (PDT)
+ Wed, 14 Oct 2026 20:18:22 -0700 (PDT)
 From: Portia Stephens <portias@oss.tenstorrent.com>
 To: qemu-devel@nongnu.org
 Cc: Nicholas Piggin <npiggin@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>,
@@ -84,17 +84,17 @@ Cc: Nicholas Piggin <npiggin@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
  Portia Stephens <portias@oss.tenstorrent.com>,
  Michael Ellerman <mpe@kernel.org>
-Subject: [PATCH 02/12] hw/riscv/atlantis: Update fdt functions to take generic
- parameters
-Date: Thu, 15 Oct 2026 13:17:54 +1000
-Message-ID: <20261015031804.2406055-3-portias@oss.tenstorrent.com>
+Subject: [PATCH 01/12] hw/riscv/atlantis: Set valid_cpu_types for Atlantis
+ machine
+Date: Thu, 15 Oct 2026 13:17:53 +1000
+Message-ID: <20261015031804.2406055-2-portias@oss.tenstorrent.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261015031804.2406055-1-portias@oss.tenstorrent.com>
 References: <20261015031804.2406055-1-portias@oss.tenstorrent.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1031;
- envelope-from=portias@tenstorrent.com; helo=mail-pj1-x1031.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1033;
+ envelope-from=portias@tenstorrent.com; helo=mail-pj1-x1033.google.com
 X-Spam_score_int: -19
 X-Spam_score: -2.0
 X-Spam_bar: --
@@ -116,261 +116,38 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Currently the Atlantis fdt functions take TTAtlantisSoCState as
-parameter and derive all needed values from there. This doesn't easily
-allow for using these functions once the system has multiple memmaps and
-hart arrays. This change updates the fdt functions to take more generic
-parameters. This is in preparation for adding more hart arrays of
-different clusters to the Atlantis SoC.
+The Atlantis machine only supports setting the cpu_type to an Ascalon
+CPU. Set the valid_cpu_types to reflect this.
 
 Signed-off-by: Portia Stephens <portias@oss.tenstorrent.com>
 ---
- hw/riscv/tt_atlantis.c | 83 ++++++++++++++++++++++--------------------
- 1 file changed, 43 insertions(+), 40 deletions(-)
+ hw/riscv/tt_atlantis.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
 diff --git a/hw/riscv/tt_atlantis.c b/hw/riscv/tt_atlantis.c
-index ec52faf17f..684e12195d 100644
+index 311de64eda..ec52faf17f 100644
 --- a/hw/riscv/tt_atlantis.c
 +++ b/hw/riscv/tt_atlantis.c
-@@ -94,18 +94,18 @@ static uint32_t next_phandle(void)
-     return fdt_phandle++;
- }
+@@ -76,6 +76,11 @@ static const MemMapEntry tt_atlantis_memmap[] = {
+     [TT_ATL_DDR_HI] =          { 0x100000000,  0x1000000000 },
+ };
  
--static void create_fdt_memory(void *fdt, TTAtlantisSoCState *s)
-+static void create_fdt_memory(void *fdt, const MemMapEntry *memmap,
-+                              hwaddr ram_size)
++static const char *const tt_atlantis_valid_cpu_types[] = {
++    TYPE_RISCV_CPU_TT_ASCALON,
++    NULL
++};
++
+ static I2CBus *i2c_get_bus(TTAtlantisSoCState *s, unsigned busnr)
  {
--    hwaddr ram_size = memory_region_size(s->dram);
-     hwaddr size_lo = ram_size;
-     hwaddr size_hi = 0;
- 
--    if (size_lo > s->memmap[TT_ATL_DDR_LO].size) {
--        size_lo = s->memmap[TT_ATL_DDR_LO].size;
-+    if (size_lo > memmap[TT_ATL_DDR_LO].size) {
-+        size_lo = memmap[TT_ATL_DDR_LO].size;
-         size_hi = ram_size - size_lo;
-     }
- 
--    riscv_create_fdt_socket_memory(fdt, s->memmap[TT_ATL_DDR_LO].base,
-+    riscv_create_fdt_socket_memory(fdt, memmap[TT_ATL_DDR_LO].base,
-                                    size_lo, 0, false);
-     if (size_hi) {
-         /*
-@@ -114,12 +114,13 @@ static void create_fdt_memory(void *fdt, TTAtlantisSoCState *s)
-          * (or good reason) to describe that aliasing 2GB with DT?
-          */
-         riscv_create_fdt_socket_memory(fdt,
--                                       s->memmap[TT_ATL_DDR_HI].base + size_lo,
-+                                       memmap[TT_ATL_DDR_HI].base + size_lo,
-                                        size_hi, 0, false);
-     }
- }
- 
--static void create_fdt_aclint(void *fdt, TTAtlantisSoCState *s,
-+static void create_fdt_aclint(void *fdt, RISCVHartArrayState *harts,
-+                              const MemMapEntry *memmap,
-                               uint32_t *intc_phandles)
- {
-     g_autofree char *name = NULL;
-@@ -127,15 +128,15 @@ static void create_fdt_aclint(void *fdt, TTAtlantisSoCState *s,
-     uint32_t aclint_cells_size;
-     hwaddr addr;
- 
--    aclint_mtimer_cells = g_new0(uint32_t, s->cpus.num_harts * 2);
-+    aclint_mtimer_cells = g_new0(uint32_t, harts->num_harts * 2);
- 
--    for (int cpu = 0; cpu < s->cpus.num_harts; cpu++) {
-+    for (int cpu = 0; cpu < harts->num_harts; cpu++) {
-         aclint_mtimer_cells[cpu * 2 + 0] = cpu_to_be32(intc_phandles[cpu]);
-         aclint_mtimer_cells[cpu * 2 + 1] = cpu_to_be32(IRQ_M_TIMER);
-     }
--    aclint_cells_size = s->cpus.num_harts * sizeof(uint32_t) * 2;
-+    aclint_cells_size = harts->num_harts * sizeof(uint32_t) * 2;
- 
--    addr = s->memmap[TT_ATL_ACLINT].base;
-+    addr = memmap[TT_ATL_ACLINT].base;
- 
-     name = g_strdup_printf("/soc/mtimer@%"HWADDR_PRIX, addr);
-     qemu_fdt_add_subnode(fdt, name);
-@@ -221,52 +222,53 @@ static void create_fdt_one_aplic(void *fdt,
-     qemu_fdt_setprop_cell(fdt, name, "phandle", aplic_phandle);
- }
- 
--static void create_fdt_pmu(void *fdt, TTAtlantisSoCState *s)
-+static void create_fdt_pmu(void *fdt, RISCVHartArrayState *harts)
- {
-     char pmu_name[] = "/pmu";
--    RISCVCPU *hart = &s->cpus.harts[0];
-+    RISCVCPU *hart = &harts->harts[0];
- 
-     qemu_fdt_add_subnode(fdt, pmu_name);
-     qemu_fdt_setprop_string(fdt, pmu_name, "compatible", "riscv,pmu");
-     riscv_pmu_generate_fdt_node(fdt, hart->pmu_avail_ctrs, pmu_name);
- }
- 
--static void create_fdt_cpu(void *fdt, TTAtlantisSoCState *s,
-+static void create_fdt_cpu(void *fdt, RISCVHartArrayState *harts,
-+                           const MemMapEntry *memmap,
-                            uint32_t aplic_s_phandle,
-                            uint32_t imsic_s_phandle)
- {
--    g_autofree uint32_t *intc_phandles = g_new0(uint32_t, s->cpus.num_harts);
--    int num_harts = s->cpus.num_harts;
-+    int num_harts = harts->num_harts;
-+    g_autofree uint32_t *intc_phandles = g_new0(uint32_t, num_harts);
- 
-     riscv_fdt_create_cpu_socket_subnode(fdt, TT_ACLINT_TIMEBASE_FREQ);
- 
--    riscv_create_fdt_socket_cpus(fdt, s->cpus.harts, 0, num_harts,
--                                 s->cpus.hartid_base, &fdt_phandle,
-+    riscv_create_fdt_socket_cpus(fdt, harts->harts, 0, num_harts,
-+                                 harts->hartid_base, &fdt_phandle,
-                                  intc_phandles, false, false);
- 
--    create_fdt_aclint(fdt, s, intc_phandles);
-+    create_fdt_aclint(fdt, harts, memmap, intc_phandles);
- 
-     /* M-level IMSIC node */
-     uint32_t msi_m_phandle = next_phandle();
--    create_fdt_one_imsic(fdt, &s->memmap[TT_ATL_MIMSIC], num_harts,
-+    create_fdt_one_imsic(fdt, &memmap[TT_ATL_MIMSIC], num_harts,
-                          intc_phandles, msi_m_phandle,
-                          IRQ_M_EXT, TT_IMSIC_GUEST_BITS);
- 
-     /* S-level IMSIC node */
--    create_fdt_one_imsic(fdt, &s->memmap[TT_ATL_SIMSIC], num_harts,
-+    create_fdt_one_imsic(fdt, &memmap[TT_ATL_SIMSIC], num_harts,
-                          intc_phandles, imsic_s_phandle,
-                          IRQ_S_EXT, TT_IMSIC_GUEST_BITS);
- 
-     uint32_t aplic_m_phandle = next_phandle();
- 
-     /* M-level APLIC node */
--    create_fdt_one_aplic(fdt, &s->memmap[TT_ATL_MAPLIC],
-+    create_fdt_one_aplic(fdt, &memmap[TT_ATL_MAPLIC],
-                          msi_m_phandle, intc_phandles,
-                          aplic_m_phandle, aplic_s_phandle,
-                          IRQ_M_EXT, num_harts);
- 
-     /* S-level APLIC node */
--    create_fdt_one_aplic(fdt, &s->memmap[TT_ATL_SAPLIC],
-+    create_fdt_one_aplic(fdt, &memmap[TT_ATL_SAPLIC],
-                          imsic_s_phandle, intc_phandles,
-                          aplic_s_phandle, 0,
-                          IRQ_S_EXT, num_harts);
-@@ -338,10 +340,10 @@ static void create_fdt_i2c(void *fdt, const MemMapEntry *mem, uint32_t irq,
-     qemu_fdt_setprop_cell(fdt, name, "#size-cells", 0);
- }
- 
--static void create_fdt_i2c_device(void *fdt, TTAtlantisSoCState *s, int bus,
--                                  const char *compat, int addr)
-+static void create_fdt_i2c_device(void *fdt, const MemMapEntry *memmap,
-+                                  int bus, const char *compat, int addr)
- {
--    hwaddr base = s->memmap[TT_ATL_I2C0 + bus].base;
-+    hwaddr base = memmap[TT_ATL_I2C0 + bus].base;
-     g_autofree char *name = g_strdup_printf("/soc/i2c@%"HWADDR_PRIX"/sensor@%x",
-                                             base, addr);
- 
-@@ -370,7 +372,8 @@ static char *create_fdt_prcm(void *fdt, const MemMapEntry *mem,
-     return name;
- }
- 
--static void finalize_fdt(void *fdt, TTAtlantisSoCState *s)
-+static void finalize_fdt(void *fdt, RISCVHartArrayState *harts,
-+                         const MemMapEntry *memmap, hwaddr ram_size)
- {
-     uint32_t aplic_s_phandle = next_phandle();
-     uint32_t imsic_s_phandle = next_phandle();
-@@ -378,9 +381,9 @@ static void finalize_fdt(void *fdt, TTAtlantisSoCState *s)
-     uint32_t prcm_rcpu_phandle;
-     g_autofree char *rcpu_name, *hsio_name, *pcie_name, *mm_name;
- 
--    create_fdt_cpu(fdt, s, aplic_s_phandle, imsic_s_phandle);
-+    create_fdt_cpu(fdt, harts, memmap, aplic_s_phandle, imsic_s_phandle);
- 
--    create_fdt_memory(fdt, s);
-+    create_fdt_memory(fdt, memmap, ram_size);
- 
-     /*
-      * We want to do this, but the Linux aplic driver was broken before v6.16
-@@ -391,7 +394,7 @@ static void finalize_fdt(void *fdt, TTAtlantisSoCState *s)
- 
-     create_fdt_clk(fdt, "osc-24m", 24000000, osc_24m_phandle);
- 
--    rcpu_name = create_fdt_prcm(fdt, &s->memmap[TT_ATL_PRCM_RCPU], "rcpu");
-+    rcpu_name = create_fdt_prcm(fdt, &memmap[TT_ATL_PRCM_RCPU], "rcpu");
-     prcm_rcpu_phandle = qemu_fdt_get_phandle(fdt, rcpu_name);
-     qemu_fdt_setprop_cells(fdt, rcpu_name, "clocks", osc_24m_phandle);
-     qemu_fdt_setprop_cells(fdt, rcpu_name, "assigned-clocks",
-@@ -401,33 +404,33 @@ static void finalize_fdt(void *fdt, TTAtlantisSoCState *s)
-                            prcm_rcpu_phandle, TT_ATL_CLK_RCPU_PLL,
-                            prcm_rcpu_phandle, TT_ATL_CLK_NOC_PLL);
- 
--    hsio_name = create_fdt_prcm(fdt, &s->memmap[TT_ATL_PRCM_HSIO], "hsio");
-+    hsio_name = create_fdt_prcm(fdt, &memmap[TT_ATL_PRCM_HSIO], "hsio");
-     qemu_fdt_setprop_cells(fdt, hsio_name, "clocks", osc_24m_phandle,
-                            prcm_rcpu_phandle, TT_ATL_CLK_HSIO_PLL);
- 
--    pcie_name = create_fdt_prcm(fdt, &s->memmap[TT_ATL_PRCM_PCIE], "pcie");
-+    pcie_name = create_fdt_prcm(fdt, &memmap[TT_ATL_PRCM_PCIE], "pcie");
-     qemu_fdt_setprop_cells(fdt, pcie_name, "clocks", osc_24m_phandle,
-                            prcm_rcpu_phandle, TT_ATL_CLK_PCIE_PLL);
- 
--    mm_name = create_fdt_prcm(fdt, &s->memmap[TT_ATL_PRCM_MM], "mm");
-+    mm_name = create_fdt_prcm(fdt, &memmap[TT_ATL_PRCM_MM], "mm");
-     qemu_fdt_setprop_cells(fdt, mm_name, "clocks", osc_24m_phandle,
-                            prcm_rcpu_phandle, TT_ATL_CLK_MM_PLL0,
-                            prcm_rcpu_phandle, TT_ATL_CLK_MM_PLL1);
- 
--    create_fdt_uart(fdt, &s->memmap[TT_ATL_UART1], TT_ATL_UART1_IRQ,
-+    create_fdt_uart(fdt, &memmap[TT_ATL_UART1], TT_ATL_UART1_IRQ,
-                     aplic_s_phandle, prcm_rcpu_phandle, TT_ATL_CLK_UART1_PCLK);
- 
-     for (int i = 0; i < TT_ATL_NUM_I2C; i++) {
-         create_fdt_i2c(fdt,
--                       &s->memmap[TT_ATL_I2C0 + i],
-+                       &memmap[TT_ATL_I2C0 + i],
-                        TT_ATL_I2C0_IRQ + i,
-                        aplic_s_phandle, prcm_rcpu_phandle,
-                        TT_ATL_CLK_I2C0_PCLK + i);
-     }
- 
-     /* I2C peripherals: qemu specific */
--    create_fdt_i2c_device(fdt, s, 0, "dallas,ds1338", 0x6f);
--    create_fdt_i2c_device(fdt, s, 4, "ti,tmp105", 0x48);
-+    create_fdt_i2c_device(fdt, memmap, 0, "dallas,ds1338", 0x6f);
-+    create_fdt_i2c_device(fdt, memmap, 4, "ti,tmp105", 0x48);
- }
- 
- static void create_fdt(TTAtlantisState *ams)
-@@ -444,7 +447,7 @@ static void create_fdt(TTAtlantisState *ams)
- 
-     qemu_fdt_add_subnode(ms->fdt, "/aliases");
- 
--    create_fdt_pmu(ms->fdt, &ams->soc);
-+    create_fdt_pmu(ms->fdt, &ams->soc.cpus);
- }
- 
- static void load_fdt(TTAtlantisState *ams)
-@@ -475,7 +478,7 @@ static void load_fdt(TTAtlantisState *ams)
-         g_strfreev(node_path);
-     }
- 
--    create_fdt_memory(ms->fdt, &ams->soc);
-+    create_fdt_memory(ms->fdt, ams->soc.memmap, ms->ram_size);
- }
- 
- static void tt_atlantis_machine_done(Notifier *n, void *data)
-@@ -496,7 +499,7 @@ static void tt_atlantis_machine_done(Notifier *n, void *data)
-      * dynamic sysbus devices. Our FDT needs to be finalized.
-      */
-     if (machine->dtb == NULL) {
--        finalize_fdt(machine->fdt, s);
-+        finalize_fdt(machine->fdt, &s->cpus, s->memmap, machine->ram_size);
-     }
- 
-     mem_size = machine->ram_size;
+     assert(busnr < TT_ATL_NUM_I2C);
+@@ -792,6 +797,7 @@ static void tt_atlantis_machine_class_init(ObjectClass *oc, const void *data)
+     mc->default_cpus = 8;
+     mc->default_ram_size = 4 * GiB;
+     mc->default_cpu_type = TYPE_RISCV_CPU_TT_ASCALON;
++    mc->valid_cpu_types = tt_atlantis_valid_cpu_types;
+     mc->block_default_type = IF_VIRTIO;
+     mc->no_cdrom = 1;
+     mc->default_ram_id = "tt_atlantis.ram";
 -- 
 2.43.0
 
