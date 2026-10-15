@@ -4,64 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 088D3CC6B33
-	for <qemu-riscv@archiver.kernel.org>; Thu, 15 Oct 2026 10:26:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F746CC6B34
+	for <qemu-riscv@archiver.kernel.org>; Thu, 15 Oct 2026 10:26:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xHIeL-0001GJ-Oj; Thu, 15 Oct 2026 06:25:25 -0400
+	id 1xHIf1-00028Z-W8; Thu, 15 Oct 2026 06:26:09 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <eblot.ml@gmail.com>)
- id 1xHIeD-00015l-KR
- for qemu-riscv@nongnu.org; Thu, 15 Oct 2026 06:25:18 -0400
-Received: from mail-wm1-f48.google.com ([209.85.128.48])
+ id 1xHIeY-0001TQ-AX
+ for qemu-riscv@nongnu.org; Thu, 15 Oct 2026 06:25:38 -0400
+Received: from mail-wr1-f52.google.com ([209.85.221.52])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <eblot.ml@gmail.com>)
- id 1xHIeB-0003g1-Lr
- for qemu-riscv@nongnu.org; Thu, 15 Oct 2026 06:25:17 -0400
-Received: by mail-wm1-f48.google.com with SMTP id
- 5b1f17b1804b1-4a1698ea378so41647875e9.2
- for <qemu-riscv@nongnu.org>; Thu, 15 Oct 2026 03:25:15 -0700 (PDT)
+ id 1xHIeV-0003m2-3q
+ for qemu-riscv@nongnu.org; Thu, 15 Oct 2026 06:25:38 -0400
+Received: by mail-wr1-f52.google.com with SMTP id
+ ffacd0b85a97d-48b042c0728so1215941f8f.1
+ for <qemu-riscv@nongnu.org>; Thu, 15 Oct 2026 03:25:34 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792059914; x=1792664714;
+ d=1e100.net; s=20260707; t=1792059934; x=1792664734;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=FE9EBUZhqaKkcddPc+39V0rw7VbXhB6SBbD4e6broq8=;
- b=LF6w9L4u+0ohg8J7uYam57VbZ9+I63qCPl7SpF6/ReNRibpyjTpEZ6H+gr+j2v/WdJ
- nI1YY6Mn0BzIZXVQoAH5DqSI6qzYc3sRjC4fERUxwX6hRnJTQdQBkugJscJbc6eqlezq
- Ygut0kuOyHOzYwHnqsyK6XqxUrK6Gc5on2i/1I/y1klBHpL2lQyjgUZtl4bEE82bAOJX
- PDIGXxScYALTzfpdCGbERpO7AT+nynUiPZkf/yRFdOoF/jsXsVsxN4u0ib2hqPr+g0Ry
- 0weEqC8STJt7BC2zCUPbVBGQ7IaKLwrM2gf3NA2cS80SkhMV8QEY2vD7+l5zXtqY1ePD
- TPpA==
+ bh=/7vqyfsfQSXKfw69CwuMNDomx2TM2p1e+fdBs9WDTis=;
+ b=n4ZaY6Sxcqz8M1guTrHoWwUSmSQZcMkBKNWuwm0xxu9zwCZOLWG+AW3txNqWoL0hQL
+ ITLKP05XoPj73ztzrqa7jKOr9wLBwf81AW2xRbhggg2JG8h95utFwigTqG8t0kJOH3/F
+ X7suJgYNaL178wz/mShxpi8iLMJfVDpUi6xh47cwvqioJ+fNOwWuTchs+QDBDRn9iCHk
+ 7d0a99IPdTbuCr0ZAo/cTo4ns9/RqHGSlkKtQvo0lohifX8cJ/dwCaweFTbD/Zq9Q8x7
+ V0+/eWaQJMKZeIvs7Q4vEk28+kLeZ68cx/j0cK95Ta/YZmVcGmENch3j2HMETVXJ1FvE
+ l6kg==
 X-Forwarded-Encrypted: i=1;
- AKwUvBxFRMq1wwWk+S3X8ADGUyDRmw7Az4Aq2kH5va00pCsbfDbC750/A1czZ1wxhSur40hPpsw0G5+6DBPg@nongnu.org
-X-Gm-Message-State: AFq9FYJezWNU30H5XQVpGdiSm2SL9Sci43xthd8bdxs2TBnQW1V4TaMr
- Rj8T+yaq7nZ1Exshd6SPElCZRCRNVOG2ilkDi0tRpXct71cE3kB9seM/
-X-Gm-Gg: AYBFou1DDplBFeBN43wnmbbX6tU5i41yvLx9CI/u4ArVT+s2Ll4W/j4Cm5B0qIiKyk0
- 445lNS9kdl+B9cQIpCPzmt4aYs5FpkfY1K+inPPMYb9p7D8ts5f6G4slMaxQvzsvulyTjvgT4q7
- R3OhAEdoHls40Flzn0Ozbf9F7K4ShKbkOCfqTskJMiB6AP30lPjsoOd8qnwk0vtanKWHo5Y16Kx
- YXofIIS6OHP2Wd0VelmE5peBayYml6c49rF5HTDN0lf5lT4rkwimNvG/9naZgCxeQXxPv9p/5Jb
- xcIOzH+sG8CbL8TsLMyp25THMk96vSS+YzvkYPFZxYeq0m1BCqhPtv3izJ3nlGm8P8Z4zuY/K49
- 9rdQv30kwWOPNweo8VrZEYewTtzreEQ6P8Pq2wZBKXiZuyjuMlSFl/matdcKQkIqlbI8BuemqTs
- yii9i3BhKn/Fhs/ZjvCaRoxCb6DfyOJ2jxQfZ+XRiWGHtUgBqJ8SWUv1VO2C8Q/z7zgWsJHecll
- u/Ac4n80mBQi1ScBLl3hU9b0CDe9Yr4hXRBruMPir0j8A==
-X-Received: by 2002:a05:600c:8b01:b0:4a1:c4d3:2fc0 with SMTP id
- 5b1f17b1804b1-4a1c4d32fe7mr12605005e9.6.1792059914206; 
- Thu, 15 Oct 2026 03:25:14 -0700 (PDT)
+ AKwUvBzWJ3NSIYB+EJj/cyh4tLN/n4Ie0tgoNR7+cody6z9c0lDuGpqq6zSLGOezaAwiEgwmsQHIoyvUvPAY@nongnu.org
+X-Gm-Message-State: AFq9FYJBZ5Ch13L7kJr85pVkQOXJ4xniFGU3NMAvp+/UW8hRR5msziKV
+ KA6tGndRg07gyoL0MvIsVWB7mYgBmpThPYcA2/gD3755HDU+XD7iJmFW
+X-Gm-Gg: AYBFou1wk7+hjb+tyeL+QpgEF8G1HdPNSgSnTq40xUsM1azQpt+XHJH+pSP873pCS9s
+ cDFBQ+a8XIUlQJcJGMeLGKu473Lwyyks+Lcrhhw9aFn0MEL/3v1yN5BSpyRNmNkyk9habuFAg65
+ P04vEtf2luQupVoWhArSFXzGkzYCE09aFEGfYrBQfg6lZiME+MaANmUiwpYmTHpzMJ3uamB5jhm
+ hr5YhPeCYTk8m0DsunmMA67LSlMVG8gyBidivDfKCNiYgP371H2zeKAknddlhOzwayqXa+ZB0Jy
+ 6PpIQPDs6sUCd7FMHoo0wfPFY6ndusl83vRWludpUvHpECirdtf5ASc3ZuoCHHF7oxiShk7hqRK
+ G2FB5qmTnhESJPYUoHMfHOep5d32G+rkvJ7B767Ufnw2UZ93WlPEGSU2lioVlKVfnhTxBayeBwi
+ j8XjzuXecmDUY85da9A6Nh0MrE7VlyDjvv26Li/p3BuLv41ZYgbEBw7zzfMVgQjkiaXNTNWREQy
+ q4hASZklotWgbhqbLM8aoe3ZdM3tajykOt4u4nA+DDxRA==
+X-Received: by 2002:a05:600c:1d0b:b0:4a0:13ea:2ec3 with SMTP id
+ 5b1f17b1804b1-4a18e4ddca6mr373974445e9.35.1792059933158; 
+ Thu, 15 Oct 2026 03:25:33 -0700 (PDT)
 Received: from localhost (89-93-216-19.hfc.dyn.abo.bbox.fr. [89.93.216.19])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a1bd96fed4sm61331865e9.2.2026.10.15.03.25.13
+ 5b1f17b1804b1-4a1bd68144fsm43754785e9.4.2026.10.15.03.25.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 15 Oct 2026 03:25:13 -0700 (PDT)
-Date: Thu, 15 Oct 2026 11:27:57 +0200
-Subject: [PATCH v3 10/50] hw/rtc: ds1338: implement Resettable reset
+ Thu, 15 Oct 2026 03:25:32 -0700 (PDT)
+Date: Thu, 15 Oct 2026 11:28:00 +0200
+Subject: [PATCH v3 13/50] hw/rtc: ds1338: program the clock from the time
+ registers
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Message-Id: <20261015-bmc-minerva-v3-10-7d50c8a108e5@free.fr>
+Content-Transfer-Encoding: 7bit
+Message-Id: <20261015-bmc-minerva-v3-13-7d50c8a108e5@free.fr>
 References: <20261015-bmc-minerva-v3-0-7d50c8a108e5@free.fr>
 In-Reply-To: <20261015-bmc-minerva-v3-0-7d50c8a108e5@free.fr>
 To: qemu-devel@nongnu.org
@@ -75,18 +76,17 @@ Cc: =?utf-8?q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>,
  Laurent Vivier <lvivier@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>, 
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, 
  =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>, 
- Emmanuel Blot <emmanuel.blot@free.fr>, 
- =?utf-8?q?C=C3=A9dric_Le_Goater?= <clg@redhat.com>
+ Emmanuel Blot <emmanuel.blot@free.fr>
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1792056475; l=1388;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1792056475; l=6068;
  i=emmanuel.blot@free.fr; s=20260602; h=from:subject:message-id;
- bh=Yb1Zh34x6jrS484Xx/w7PuZZxma8LedPKe6tazap2S0=;
- b=SnOmwT7Zf8wEjEhQ9q5+5OYXjUkHVzgPRC4uRFLHLhKjBjCeOBnlqp61QxMFGSrZzocihtQvF
- QjyJPKbe9BpBHu3ThZUodPNKfvRzjtg8s0FevwM230g0L9sKfFjLkCY
+ bh=uej/UOj+V/lpxWjtnR1AN5iwpDxP7F3nxb3Qip3BUmg=;
+ b=+WaU57kgTcaSV+G3yvRq6EYp7j5INJrXeUH8WFLguWiiFv+TvFUn9GrnEVfKmes/chigPXsyW
+ Qd0nTma3H8aB8/yd0+xFZbukgmVlzvIqV4TKPeXsOWJLZCbbDHpuKiq
 X-Developer-Key: i=emmanuel.blot@free.fr; a=ed25519;
  pk=0qFrZ21FAAN8OfVsSoVcCFTk/NMYOWzxJz4paSAVm0g=
-Received-SPF: pass client-ip=209.85.128.48; envelope-from=eblot.ml@gmail.com;
- helo=mail-wm1-f48.google.com
+Received-SPF: pass client-ip=209.85.221.52; envelope-from=eblot.ml@gmail.com;
+ helo=mail-wr1-f52.google.com
 X-Spam_score_int: -15
 X-Spam_score: -1.6
 X-Spam_bar: -
@@ -112,46 +112,172 @@ From:  Emmanuel Blot via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The device relied on device_class_set_legacy_reset(), a compatibility
-shim around the legacy DeviceState reset hook. Convert ds1338_reset()
-into a proper Resettable hold phase, dropping the legacy shim.
+A write to a time register rebuilt a struct tm from the current date,
+substituted the field being written and folded the result back into
+the offset. Every byte of a multi-byte transfer was therefore
+normalised against the fields the guest had not written yet: a date of
+31 programmed while the month register still held a 30-day month moved
+the clock into the following month.
 
-Reviewed-by: Cédric Le Goater <clg@redhat.com>
+Keep the written value in the register file and derive the offset from
+the file as a whole. This needs the registers refreshed on a
+START_SEND, as the hardware does on any START.
+
 Signed-off-by: Emmanuel Blot <emmanuel.blot@free.fr>
 ---
- hw/rtc/ds1338.c | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
+ hw/rtc/ds1338.c | 116 ++++++++++++++++++++++++++++++--------------------------
+ 1 file changed, 63 insertions(+), 53 deletions(-)
 
 diff --git a/hw/rtc/ds1338.c b/hw/rtc/ds1338.c
-index f8b3340bf0..74aee6c746 100644
+index 7eaa663113..862e03bd32 100644
 --- a/hw/rtc/ds1338.c
 +++ b/hw/rtc/ds1338.c
-@@ -208,9 +208,9 @@ static int ds1338_send(I2CSlave *i2c, uint8_t data)
-     return 0;
- }
+@@ -8,6 +8,12 @@
+  *
+  * Contributions after 2012-01-13 are licensed under the terms of the
+  * GNU GPL, version 2 or (at your option) any later version.
++ *
++ * Limitations:
++ * - Writing the seconds register does not reset the internal countdown chain,
++ *   so the sub-second phase of the clock is not modelled.
++ * - Leap years follow the Gregorian rule, where the parts stop at 2100: they
++ *   derive the leap year from the two-digit year alone.
+  */
  
--static void ds1338_reset(DeviceState *dev)
-+static void ds1338_reset_hold(Object *obj, ResetType type)
+ #include "qemu/osdep.h"
+@@ -75,6 +81,41 @@ static const VMStateDescription vmstate_ds1338 = {
+     }
+ };
+ 
++/* Reconstruct a struct tm from the BCD time registers in nvram. */
++static void ds1338_time_from_regs(DS1338State *s, struct tm *now)
++{
++    qemu_get_timedate(now, s->offset);
++    now->tm_sec = from_bcd(s->nvram[0] & 0x7f);
++    now->tm_min = from_bcd(s->nvram[1] & 0x7f);
++    if (s->nvram[2] & HOURS_12) {
++        int tmp = from_bcd(s->nvram[2] & (HOURS_PM - 1));
++        if (s->nvram[2] & HOURS_PM) {
++            tmp += 12;
++        }
++        if (tmp % 12 == 0) {
++            tmp -= 12;
++        }
++        now->tm_hour = tmp;
++    } else {
++        now->tm_hour = from_bcd(s->nvram[2] & (HOURS_12 - 1));
++    }
++    now->tm_mday = from_bcd(s->nvram[4] & 0x3f);
++    now->tm_mon = from_bcd(s->nvram[5] & 0x1f) - 1;
++    now->tm_year = from_bcd(s->nvram[6]) + 100;
++}
++
++static void ds1338_resync_from_regs(DS1338State *s)
++{
++    struct tm now;
++    int user_wday;
++
++    ds1338_time_from_regs(s, &now);
++    s->offset = qemu_timedate_diff(&now);
++    qemu_get_timedate(&now, s->offset);
++    user_wday = (s->nvram[3] & 7) - 1;
++    s->wday_offset = (user_wday - now.tm_wday + 7) % 7;
++}
++
+ static void ds1338_capture_current_time(DS1338State *s)
  {
--    DS1338State *s = DS1338(dev);
-+    DS1338State *s = DS1338(obj);
+     /* Capture the current time into the secondary registers
+@@ -123,16 +164,16 @@ static int ds1338_event(I2CSlave *i2c, enum i2c_event event)
+     DS1338State *s = DS1338(i2c);
  
-     /* The clock is running and synchronized with the host */
-     s->offset = 0;
-@@ -224,11 +224,12 @@ static void ds1338_class_init(ObjectClass *klass, const void *data)
- {
-     DeviceClass *dc = DEVICE_CLASS(klass);
-     I2CSlaveClass *k = I2C_SLAVE_CLASS(klass);
-+    ResettableClass *rc = RESETTABLE_CLASS(klass);
- 
-     k->event = ds1338_event;
-     k->recv = ds1338_recv;
-     k->send = ds1338_send;
--    device_class_set_legacy_reset(dc, ds1338_reset);
-+    rc->phases.hold = ds1338_reset_hold;
-     dc->vmsd = &vmstate_ds1338;
- }
- 
+     switch (event) {
+-    case I2C_START_RECV:
+-        /* In h/w, capture happens on any START condition, not just a
+-         * START_RECV, but there is no need to actually capture on
+-         * START_SEND, because the guest can't get at that data
+-         * without going through a START_RECV which would overwrite it.
+-         */
+-        ds1338_capture_current_time(s);
+-        break;
+     case I2C_START_SEND:
+         s->addr_byte = true;
++        /* fall through */
++    case I2C_START_RECV:
++        /*
++         * In h/w the time is transferred to the user registers on any START
++         * condition, so a write modifies the running time rather than
++         * whatever the last read left behind.
++         */
++        ds1338_capture_current_time(s);
+         break;
+     default:
+         break;
+@@ -167,51 +208,20 @@ static int ds1338_send(I2CSlave *i2c, uint8_t data)
+         return 0;
+     }
+     if (s->ptr < 7) {
+-        /* Time register. */
+-        struct tm now;
+-        qemu_get_timedate(&now, s->offset);
+-        switch(s->ptr) {
+-        case 0:
+-            /* TODO: Implement CH (stop) bit.  */
+-            now.tm_sec = from_bcd(data & 0x7f);
+-            break;
+-        case 1:
+-            now.tm_min = from_bcd(data & 0x7f);
+-            break;
+-        case 2:
+-            if (data & HOURS_12) {
+-                int tmp = from_bcd(data & (HOURS_PM - 1));
+-                if (data & HOURS_PM) {
+-                    tmp += 12;
+-                }
+-                if (tmp % 12 == 0) {
+-                    tmp -= 12;
+-                }
+-                now.tm_hour = tmp;
+-            } else {
+-                now.tm_hour = from_bcd(data & (HOURS_12 - 1));
+-            }
+-            break;
+-        case 3:
+-            {
+-                /* The day field is supposed to contain a value in
+-                   the range 1-7. Otherwise behavior is undefined.
+-                 */
+-                int user_wday = (data & 7) - 1;
+-                s->wday_offset = (user_wday - now.tm_wday + 7) % 7;
+-            }
+-            break;
+-        case 4:
+-            now.tm_mday = from_bcd(data & 0x3f);
+-            break;
+-        case 5:
+-            now.tm_mon = from_bcd(data & 0x1f) - 1;
+-            break;
+-        case 6:
+-            now.tm_year = from_bcd(data) + 100;
+-            break;
+-        }
+-        s->offset = qemu_timedate_diff(&now);
++        /*
++         * Time register. The write lands in the register file and the clock
++         * is then rebuilt from it as a whole: a transfer that programs the
++         * date before the month it belongs to must not be normalised away
++         * against the month still held from the previous date.
++         *
++         * TODO: Implement CH (stop) bit.
++         */
++        static const uint8_t valid[7] = {
++            0x7f, 0x7f, 0x7f, 0x07, 0x3f, 0x1f, 0xff
++        };
++
++        s->nvram[s->ptr] = data & valid[s->ptr];
++        ds1338_resync_from_regs(s);
+     } else {
+         if (s->ptr == k->ctrl_addr) {
+             /* Control register: reserved bits read back as zero. */
 
 -- 
 2.53.0-Meta
