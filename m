@@ -4,105 +4,134 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96D18CC6B33
-	for <qemu-riscv@archiver.kernel.org>; Thu, 15 Oct 2026 09:29:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94AD5CC6B3C
+	for <qemu-riscv@archiver.kernel.org>; Thu, 15 Oct 2026 09:38:31 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xHHm3-0007jP-8f; Thu, 15 Oct 2026 05:29:19 -0400
+	id 1xHHut-0004Ci-2B; Thu, 15 Oct 2026 05:38:27 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1xHHm1-0007is-RJ
- for qemu-riscv@nongnu.org; Thu, 15 Oct 2026 05:29:17 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1xHHlz-0005UN-RH
- for qemu-riscv@nongnu.org; Thu, 15 Oct 2026 05:29:17 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1792056554;
- h=from:from:reply-to:reply-to:subject:subject:date:date:
- message-id:message-id:to:to:cc:cc:mime-version:mime-version:
- content-type:content-type:in-reply-to:in-reply-to:  references:references;
- bh=x/dxeng4eOW0e5HyQvSWqbwVVzdJY7sjj6J/J5iYM/M=;
- b=R1h8nynt3cY0frheS9Dio71BajLfwDOP+OSAC5mI0ZmASyZAW/lHPibIVtUDUUU1IR0Sbq
- mbpLC2YRMoNAaUfPGtTq9crrhs83cMZglBuNl+DX03q8ssZVxkoWnLoVIMmEzAFSVo9LBq
- lAl0UGFDNtznTxYttuYpOIxLNGz9iYA=
-Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-511-ZFzJAW-PNC-3A3lNN2J7oA-1; Thu,
- 15 Oct 2026 09:29:10 +0000
-X-MC-Unique: ZFzJAW-PNC-3A3lNN2J7oA-1
-X-Mimecast-MFC-AGG-ID: ZFzJAW-PNC-3A3lNN2J7oA_1792056546
-Received: from mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.93])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 6297818011DC; Thu, 15 Oct 2026 09:29:04 +0000 (UTC)
-Received: from redhat.com (headnet04.pony-001.prod.iad2.dc.redhat.com
- [10.2.32.116])
- by mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 02723180057F; Thu, 15 Oct 2026 09:28:51 +0000 (UTC)
-Date: Thu, 15 Oct 2026 10:28:48 +0100
-From: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
-To: Yonggang Luo <luoyonggang@gmail.com>
-Cc: qemu-devel@nongnu.org, Peter Maydell <peter.maydell@linaro.org>,
- Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org,
- David Hildenbrand <david@kernel.org>,
- Glenn Miles <milesg@linux.ibm.com>, Zhao Liu <zhao1.liu@intel.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Ilya Leoshkevich <iii@linux.ibm.com>, Nicholas Piggin <npiggin@gmail.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- =?utf-8?Q?Marc-Andr=C3=A9?= Lureau <marcandre.lureau@redhat.com>,
- Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
- qemu-ppc@nongnu.org, Cornelia Huck <cohuck@redhat.com>,
- Weiwei Li <liwei1518@gmail.com>,
- "Dr. David Alan Gilbert" <dave@treblig.org>,
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
- Bibo Mao <maobibo@loongson.cn>, Artyom Tarasenko <atar4qemu@gmail.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Song Gao <17746591750@163.com>, Chinmay Rath <rathc@linux.ibm.com>,
- Paolo Bonzini <pbonzini@redhat.com>,
- Brian Cain <brian.cain@oss.qualcomm.com>,
- Aleksandar Rikalo <arikalo@gmail.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Eric Farman <farman@linux.ibm.com>,
- Philippe Mathieu-Daude <philmd@mailo.com>,
- Xianglai Li <lixianglai@loongson.cn>,
- Chao Liu <chao.liu@processmission.com>, qemu-s390x@nongnu.org,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Matthew Rosato <mjrosato@linux.ibm.com>,
- Aurelien Jarno <aurelien@aurel32.net>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Laurent Vivier <laurent@vivier.eu>,
- Harsh Prateek Bora <harshpb@linux.ibm.com>,
- Yoshinori Sato <yoshinori.sato@nifty.com>
-Subject: Re: [PATCH] target-info: dispatch CPU QMP, dump, monitor, and Angel
- semihosting
-Message-ID: <atCc0GPHiZo2WlNM@redhat.com>
-References: <20261015044104.879-1-luoyonggang@gmail.com>
+ (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
+ id 1xHHuq-0004Bp-TM
+ for qemu-riscv@nongnu.org; Thu, 15 Oct 2026 05:38:24 -0400
+Received: from mail-ej1-x62d.google.com ([2a00:1450:4864:20::62d])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
+ id 1xHHun-0006bK-UA
+ for qemu-riscv@nongnu.org; Thu, 15 Oct 2026 05:38:24 -0400
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-c2dc63f8d8aso888060566b.0
+ for <qemu-riscv@nongnu.org>; Thu, 15 Oct 2026 02:38:21 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1792057100; cv=none;
+ d=google.com; s=arc-20260327;
+ b=l5sxzRNxpFe4bStjLvzDnmFIjydYOWgafSYJnAFSEJp4ZQoi5fTERLafmhEGy5LYp5
+ NGxxJPGtVc+ZpgcNGof+24MBMlRtT9+TlRKXXI7CWYTAQKzbNZRCKwVwhVq1CwWrKO4z
+ R0kOnzL9+1W/ORC/6Ft7+oxW7fvpNJs2NKylAKqp100Xj2x5hnCq00ob+zdOc1fokxt0
+ x7vglyJOSgJzp0YDGFQlxEdwjILhVECWB1ZIytqPEN6Cqx+r5kN9rG4oqc2N3WoHOy+x
+ VZ9/sxN1Rn1/OZe0RZOU1sBGEg5mh9AttCBlyyz0iGSsqI93V8d2WmY9idj1ar8ZmHvH
+ nCWQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :reply-to:in-reply-to:references:mime-version:dkim-signature;
+ bh=r5G0BsDa9TUzuCzRry+HFI28e0hkmXpHpz9bsdrKKew=;
+ fh=Y/ojH4qwtRoPWSzLuTF+TqGCkxs8IHTgm74MzOGGU9I=;
+ b=Ipe71nd3LiQSVDLrHXtO/jRE/8wNlVQF8zY4qypQOglT3dgmjARPV2nCPzQOaG+84f
+ ndNBT9FUDQtmMgV8fBCeqYMU73Bun7kzDexLRueX3QG7yWvun/bNNgMdRiZ4mv2ir+iN
+ HfPzJoPEDNJiJGqP80cVeCYWTug8oylbhEUdSkC1I2mudzK/JJ1PBsbm7IDUtzg9GdHl
+ elnYix/logUdDBZwpNXus+rChBj6tpZ2X/2YtkZL7NVOlXie7IUPyHVyoiC9am0MYIij
+ kp0kVd8cSG7sRtZqolkgdj1M2VvLfhV3llnA+CHc6VjX51zQtzRMMCC36e75xBfR9BKo
+ czDw==; darn=nongnu.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1792057100; x=1792661900; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:reply-to:in-reply-to:references:mime-version:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=r5G0BsDa9TUzuCzRry+HFI28e0hkmXpHpz9bsdrKKew=;
+ b=qLNp4n2+xMdE6saiQGY7qiym8S4r7/BgO2tPc/NAzBPLXX0FdVbeDJDL+68IVoehrA
+ I8kJjS/FCtmOPN7zYppbb4lKEIW/Nhz/Emlw6ECXW5Vz2YtPngtsbiFvI21maARoX1z8
+ 22RC9QgPNA97od9JUXz/DsVRvR9j8G6RoxBvztwrQdgd9CRT59Wkrb+sGiH1m9QJTq5x
+ clJmU6Gt3JPplEcLHfP8pUJA9yaTQXO69PgG03OtobtY9DhAzdbeYJwFCwkBUPU/NzE1
+ WWdepP4BjjNvRgJ87l/whv8RVEHoDglEyirDv+00ZCcjgmX+QHH32DEYPY+ABSa+21KB
+ 9BBg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1792057100; x=1792661900;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:reply-to:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=r5G0BsDa9TUzuCzRry+HFI28e0hkmXpHpz9bsdrKKew=;
+ b=Oxw1cnVBrSjdp4/zaYEJi8aAQipQo6PFSoX5/8c9pgPHCpya7g5D6apmpQ4CRsbDIZ
+ aI36eHuKqPId3zS3bnLs4s/PGGzOJ8zFOVfqBKh7dsamA5lqAQaZ4yAMsfX5+oM5Glum
+ OXQZjMhrN4CvGbo5SxoVS+UEqZ/80i8dhXmNWdMz93U07dSLB6kwIqUeON3TN9WP3P2t
+ 5nlcXHoUIl5U689mJeWAMD4YMQbseU8Tkq9px6f/BZK7HwLCdMEvX+UMrpycnu/REb85
+ vs2HWS/uHMDhAIC9NdJ/HQmlpH4DZ1DnP5JZeH406JIw5uSTBIdE8jskG0XelYG8lCl5
+ vQkw==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBwfGYFfiuB2YpYyWvGKI8xotFHh+h6VNS9Wyzo9LscifyCPM3IyHj4o15mDxqmusVHTQGQcFxG/5xCX@nongnu.org
+X-Gm-Message-State: AFq9FYJG6BURH/BYYBzBT6gzVE+XXwVhI2APtSsQb+0t9FWoCYcrOyqw
+ YfpjAs4Egr7zjDF4d/31kFwTfbFfEabOKiKIbYZLhiJ89NB+S2D+C4ENSkc7BIMy3tki1bMDgr6
+ xfahaqQwPeq+WuwAfK9LkM/xVvrFEV7Q=
+X-Gm-Gg: AYBFou0jYFVLvdCSjKvUqF0KxgLMVqczSDa8dnt4QbLqDXyuKH1kKcIwI0jRdWWLsi7
+ WL0Ocq1E9j5E9D2DE/CEninMEBxoZSCuEIvvWWG6cKLciiZpPA3rJYXaAsp9PLfpHGmDxyqCH/2
+ iLsg5gUadKfbmnkuqSOCK0VE6+v1LcWVXKNZrZkHFt3GW77vo/KmSDVjPjQXbyCgRd3LS+37qJP
+ fShdwmeVoF4YbgtnVj4Xu5GxY4pjjIqRHla3f6160JBXeC63/10CFNHPwkrIZvwKuGTa5IdmWLG
+ c2KhgpAaUsAp9Rp+11VYAMa3/ISxn16/4EG24UkOOKuORQoo8Ll+PzjxhljiQHg9Rg==
+X-Received: by 2002:a17:907:c21:b0:c2d:cdc6:827e with SMTP id
+ a640c23a62f3a-c31aa0a2ce0mr1864751066b.41.1792057100205; Thu, 15 Oct 2026
+ 02:38:20 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20261015044104.879-1-luoyonggang@gmail.com>
-User-Agent: Mutt/2.4.2 (2026-08-30)
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.93
-X-Mimecast-MFC-PROC-ID: K0YTs_tLBVewf0zvW8IrPOAMr_H4KJRhJhdQndILmH8_1792056546
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=berrange@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -22
-X-Spam_score: -2.3
+References: <20261015044104.879-1-luoyonggang@gmail.com>
+ <CAFEAcA8n9E1jpcOCat0kzv0Q++x7YwK_MNJBJ0qGdtX1-As4zg@mail.gmail.com>
+In-Reply-To: <CAFEAcA8n9E1jpcOCat0kzv0Q++x7YwK_MNJBJ0qGdtX1-As4zg@mail.gmail.com>
+From: Yonggang Luo <luoyonggang@gmail.com>
+Date: Thu, 15 Oct 2026 17:38:07 +0800
+X-Gm-Features: AclHuK8ImpVzSLpzl3F37S2gKdr6BmHMTgfbVwm-E2c2iARD0v6BZKeBj8njzKc
+Message-ID: <CAE2XoE-fgq_c9qONyvfbNi3Ys_hv7yKvGCkk+Wz+rHPW0p65Eg@mail.gmail.com>
+Subject: Re: [PATCH] target-info: dispatch CPU QMP, dump, monitor,
+ and Angel semihosting
+To: Peter Maydell <peter.maydell@linaro.org>
+Cc: qemu-devel@nongnu.org,
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@oss.qualcomm.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org, 
+ David Hildenbrand <david@kernel.org>, Glenn Miles <milesg@linux.ibm.com>,
+ Zhao Liu <zhao1.liu@intel.com>, 
+ Richard Henderson <richard.henderson@linaro.org>,
+ Ilya Leoshkevich <iii@linux.ibm.com>, 
+ Nicholas Piggin <npiggin@gmail.com>, 
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
+ =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>, 
+ =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, 
+ Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org, qemu-ppc@nongnu.org, 
+ Cornelia Huck <cohuck@redhat.com>, Weiwei Li <liwei1518@gmail.com>, 
+ =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
+ "Dr. David Alan Gilbert" <dave@treblig.org>,
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, 
+ Bibo Mao <maobibo@loongson.cn>, Artyom Tarasenko <atar4qemu@gmail.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, Song Gao <17746591750@163.com>, 
+ Chinmay Rath <rathc@linux.ibm.com>, Paolo Bonzini <pbonzini@redhat.com>, 
+ Brian Cain <brian.cain@oss.qualcomm.com>, Aleksandar Rikalo <arikalo@gmail.com>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Eric Farman <farman@linux.ibm.com>, 
+ Philippe Mathieu-Daude <philmd@mailo.com>, Xianglai Li <lixianglai@loongson.cn>,
+ Chao Liu <chao.liu@processmission.com>, qemu-s390x@nongnu.org, 
+ Palmer Dabbelt <palmer@dabbelt.com>, Matthew Rosato <mjrosato@linux.ibm.com>, 
+ Aurelien Jarno <aurelien@aurel32.net>, Jiaxun Yang <jiaxun.yang@flygoat.com>, 
+ Laurent Vivier <laurent@vivier.eu>, Harsh Prateek Bora <harshpb@linux.ibm.com>,
+ Yoshinori Sato <yoshinori.sato@nifty.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::62d;
+ envelope-from=luoyonggang@gmail.com; helo=mail-ej1-x62d.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.3 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.24,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -115,46 +144,94 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Reply-To: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
+Reply-To: luoyonggang@gmail.com
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Oct 15, 2026 at 12:41:02PM +0800, Yonggang Luo wrote:
-> Put query-cpu-definitions, dump notes, monitor, and Angel semihosting on
-> TargetOps[SYS_EMU_TARGET__MAX] and look up by target_arch().
-> Keep the table in target-ops.c and with a stub
-> 
-> - Register with a QEMU_ARCH_* bitmask so shared base-arch objects
->   can fill both slots (e.g. QEMU_ARCH_ARM is ARM|AARCH64).
-> - TARGET_INFO_CPU_OP is type_init. A NULL member means no handler.
-> - Drop stubs/qmp-cpu.c
->        stubs/hmp-cmd-info_tlb.c
->        stubs/hmp-cmd-info_mem.c
->        stubs/dump.c
-> 
-> Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
-> +typedef struct TargetOps {
-> +    void (*info_tlb)(MonitorHMP *hmp, const QDict *qdict);
-> +    void (*info_mem)(MonitorHMP *hmp, const QDict *qdict);
-> +    CpuDefinitionInfoList *(*query_cpu_definitions)(Error **errp);
-> +    CpuModelExpansionInfo *(*query_cpu_model_expansion)(
-> +        CpuModelExpansionType type, CpuModelInfo *model, Error **errp);
-> +    int (*get_dump_info)(ArchDumpInfo *info,
-> +                         const struct GuestPhysBlockList *guest_phys_blocks);
-> +    ssize_t (*get_note_size)(int class, int machine, int nr_cpus);
-> +    const CPUSemihostingOps *semihosting;
-> +} TargetOps;
+On Thu, Oct 15, 2026 at 5:20=E2=80=AFPM Peter Maydell <peter.maydell@linaro=
+.org> wrote:
+>
+> On Thu, 15 Oct 2026 at 05:41, Yonggang Luo <luoyonggang@gmail.com> wrote:
+> >
+> > Put query-cpu-definitions, dump notes, monitor, and Angel semihosting o=
+n
+> > TargetOps[SYS_EMU_TARGET__MAX] and look up by target_arch().
+> > Keep the table in target-ops.c and with a stub
+> >
+> > - Register with a QEMU_ARCH_* bitmask so shared base-arch objects
+> >   can fill both slots (e.g. QEMU_ARCH_ARM is ARM|AARCH64).
+> > - TARGET_INFO_CPU_OP is type_init. A NULL member means no handler.
+> > - Drop stubs/qmp-cpu.c
+> >        stubs/hmp-cmd-info_tlb.c
+> >        stubs/hmp-cmd-info_mem.c
+> >        stubs/dump.c
+> >
+> > Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
+> > ---
+> >  MAINTAINERS                           |  1 -
+> >  hw/core/cpu-system.c                  | 23 ++++++++++
+> >  hw/core/machine-qmp-cmds.c            | 27 ++++++++++++
+> >  include/qemu/target-ops.h             | 59 +++++++++++++++++++++++++
+> >  include/semihosting/common-semi.h     | 63 ++++++++++++++++++++++++---
+> >  meson.build                           |  1 +
+> >  monitor/hmp.c                         | 25 +++++++++++
+> >  stubs/dump.c                          | 27 ------------
+> >  stubs/hmp-cmd-info_mem.c              | 12 -----
+> >  stubs/hmp-cmd-info_tlb.c              | 12 -----
+> >  stubs/meson.build                     |  4 --
+> >  stubs/qmp-cpu.c                       | 21 ---------
+> >  target-ops.c                          | 49 +++++++++++++++++++++
+> >  target/arm/arch_dump.c                |  8 +++-
+> >  target/arm/arm-qmp-cmds.c             | 15 +++++--
+> >  target/arm/common-semi-target.c       | 26 ++++++++---
+> >  target/arm/meson.build                |  7 +--
+> >  target/hexagon/common-semi-target.c   | 26 ++++++++---
+> >  target/i386/arch_dump.c               |  8 +++-
+> >  target/i386/cpu-system.c              | 12 +++--
+> >  target/i386/cpu.c                     |  6 ++-
+> >  target/i386/monitor.c                 |  8 +++-
+> >  target/loongarch/arch_dump.c          |  8 +++-
+> >  target/loongarch/loongarch-qmp-cmds.c | 15 +++++--
+> >  target/m68k/monitor.c                 |  4 +-
+> >  target/mips/system/mips-qmp-cmds.c    | 15 +++----
+> >  target/ppc/arch_dump.c                |  8 +++-
+> >  target/ppc/monitor.c                  |  4 +-
+> >  target/ppc/ppc-qmp-cmds.c             | 15 +++----
+> >  target/riscv/arch_dump.c              |  8 +++-
+> >  target/riscv/common-semi-target.c     | 28 ++++++++----
+> >  target/riscv/meson.build              |  4 +-
+> >  target/riscv/monitor.c                |  4 +-
+> >  target/riscv/riscv-qmp-cmds.c         | 15 +++++--
+> >  target/s390x/arch_dump.c              |  8 +++-
+> >  target/s390x/cpu_models_system.c      | 15 +++++--
+> >  target/sh4/monitor.c                  |  4 +-
+> >  target/sparc/monitor.c                |  4 +-
+> >  target/xtensa/monitor.c               |  4 +-
+> >  39 files changed, 428 insertions(+), 175 deletions(-)
+> >  create mode 100644 include/qemu/target-ops.h
+> >  delete mode 100644 stubs/dump.c
+> >  delete mode 100644 stubs/hmp-cmd-info_mem.c
+> >  delete mode 100644 stubs/hmp-cmd-info_tlb.c
+> >  delete mode 100644 stubs/qmp-cpu.c
+> >  create mode 100644 target-ops.c
+>
+> Too big a patch touching stuff all over the place with
+> insufficient explanation of what it's doing or why.
 
-IMHO, TargetOps shouldn't exist and this kind of thing should
-be done as virtual methods aginst the CPUClass, or failing
-that, against the MachineClass.
+Oh, sorry, I post is just for demo(DRAFT) for other place to
+reference, but git-publish have no way
+to title it(maybe because I use it wrongly).
+>
+> thanks
+> -- PMM
 
 
-With regards,
-Daniel
--- 
-|: https://berrange.com       ~~        https://hachyderm.io/@berrange :|
-|: https://libvirt.org          ~~          https://entangle-photo.org :|
-|: https://pixelfed.art/berrange   ~~    https://fstop138.berrange.com :|
 
+--=20
+         =E6=AD=A4=E8=87=B4
+=E7=A4=BC
+=E7=BD=97=E5=8B=87=E5=88=9A
+Yours
+    sincerely,
+Yonggang Luo
 
