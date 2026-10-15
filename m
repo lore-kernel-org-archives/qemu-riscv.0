@@ -4,65 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 498E1CC6B3E
-	for <qemu-riscv@archiver.kernel.org>; Thu, 15 Oct 2026 10:33:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08C78CC6B30
+	for <qemu-riscv@archiver.kernel.org>; Thu, 15 Oct 2026 10:33:31 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xHIlU-0004Dw-VN; Thu, 15 Oct 2026 06:32:49 -0400
+	id 1xHIly-0006Oy-B1; Thu, 15 Oct 2026 06:33:18 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <eblot.ml@gmail.com>)
- id 1xHIho-0007yT-Gu
- for qemu-riscv@nongnu.org; Thu, 15 Oct 2026 06:29:05 -0400
+ id 1xHIiR-0008TO-PF
+ for qemu-riscv@nongnu.org; Thu, 15 Oct 2026 06:29:42 -0400
 Received: from mail-wm1-f41.google.com ([209.85.128.41])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <eblot.ml@gmail.com>)
- id 1xHIhc-0004Ry-SQ
- for qemu-riscv@nongnu.org; Thu, 15 Oct 2026 06:28:53 -0400
+ id 1xHIiP-0004cK-Ns
+ for qemu-riscv@nongnu.org; Thu, 15 Oct 2026 06:29:39 -0400
 Received: by mail-wm1-f41.google.com with SMTP id
- 5b1f17b1804b1-49d0da752ffso15865675e9.3
- for <qemu-riscv@nongnu.org>; Thu, 15 Oct 2026 03:28:47 -0700 (PDT)
+ 5b1f17b1804b1-4a16bc2278aso36405895e9.1
+ for <qemu-riscv@nongnu.org>; Thu, 15 Oct 2026 03:29:37 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792060126; x=1792664926;
+ d=1e100.net; s=20260707; t=1792060176; x=1792664976;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=+iZ28/KoA905ofYSw6x92JFQmjhJ3dIZ5D/oWJUxmno=;
- b=OFOD3ubQvhG6yzfEj0DixKitDZdpH5EoQVNSXcVVbDl2FryH/ptcM/LblOYvrkBwbM
- TosTQbObH1vXmpBI+tTlxKCedV+NY72SE6jXXkpBvE4XdhkKHz/Yj7yD4deaMP7UNGeJ
- bgThAv9tjUAdwTy0KCWNNh4LuW9CsdWpmpz6UaH5iaAx8zJ8tAGu1LDjuM0z4kkDkOPo
- g4RmPndiDAHXODplQZvh8GdYtILRb38GmdlLy78Y7y5dbFp+EXsDgUriHsqBJrOX8Eyc
- metiadrV8OVseyaAOjRFx4gu1Mvj858iPhQju+8VZifPY70mhGqMrzW0C67t3bc/YHUF
- ClkQ==
+ bh=Sq7XhabJmYhh213jf/5ZhPcJEk2bxoy1lv+2qIC8xl4=;
+ b=fVkUGbyHbtm83HIpZ1CXxxz20FcAdCYmoAhVp16FWK/iEHQnH5Ocuo5SIc6Zqbn5OI
+ dSqkxEYfFhFVYcbRAGIhgYeIjGfTfLGyL/t1obuA7hwy1bKaS2UDjobjZeyEaq/hcm+n
+ fYgB0TtvsssimWgpcdSq5sWTZ8ol25q0GFiCLLiw+eRRrc68LF3QRpbUDAL3ilq5u5Yh
+ ky6/X2eVIBEegf64zzIhuLjd+3PtxSLjNbzijOtAqytScx/0K122nHrqsc3B6Pp2m8CN
+ OpxA6fxjtrsiPbD4I4wIcDtJEGGWaITk71OVLMHMA84g5WkqulKrKnGkz9yiVVVM5OiJ
+ HVrg==
 X-Forwarded-Encrypted: i=1;
- AKwUvBzcKhrxVQe+jYo+Qo3UNsTx5iSGm8e2YZ03PnIkGJF6lwmtowsseUFkL+ORY9muk0Hf96lHp3xvyLzU@nongnu.org
-X-Gm-Message-State: AFq9FYLxnEHjHouHvIYQvXX9+86/RTWL7FTkQSDsMSoniKyK87MXcp+0
- jpK374gChsGwKcuDW+7n9yQeG19ZtO47oX9/WWupbYG13tnDpjf9tSs4
-X-Gm-Gg: AYBFou308YbwT2nNh6V56UtZ0INU/bKOepn9jrwK6nZicx0T2mVJzqE4GYLRXo7iznm
- fwPH1HsKMLhQCQtS1zTt3eNvmBCGcZVV75UZqfkIXHTaiwWaNtj5iKrn9rRudJkvEqEDiwy8Xjy
- U9k/jSh8x1wNmeKD2x/KQ+8yRkn7GxJ9xohJE604EaSQ7wHLPzu/1U4r7tTDJeYI/jXpUh/9HTC
- 4PEqz9IkBQ1rMeHAOasoJLOjYBxMaTd2zzD21ft+xSRhsAh1k08ggOl2Za3WIaiERN9QEH976Wu
- 1i1szmmDC5eQ/OH/Z0sDx1GFeCM68FfaxOZjR+j/QDJmT552Aevg/lFjBsUHx9c8C+pk225KLFV
- X75qskmrGXmLg5nOz9+tE0yC09L3mxOizK18g2PIxAA4UitEDqCeyyYwSzcQPB2MtXcWZ+LYXBW
- Jl4scvgngf+Dy5PO+lYCmWd8ZISaXOy7e7J+cqAc6wbJ7Alct3s5GgfD58fVZRbOHjNrjrHErLf
- fJc4k2dpDmioi+PPi4GcTlISpGqfmRvKJVD5djFdtpMIQ==
-X-Received: by 2002:a05:600c:a01:b0:49f:ce72:e931 with SMTP id
- 5b1f17b1804b1-4a18e4fe3e1mr389135245e9.35.1792060125982; 
- Thu, 15 Oct 2026 03:28:45 -0700 (PDT)
+ AKwUvBzZTJ+kKMoOofbhQCU9/iD1JhnvIEoBmC9flN2urSaXvi65z4mUm251P5FyIPGGk7ViT7D2mzWxzL26@nongnu.org
+X-Gm-Message-State: AFq9FYJ61x7meFpTZLrIJWkxqFOQIqiaXuUDEkGJWulMlvzk6geqqcSk
+ Pwc4WT4Z3HxQow00P5NXunlol5pQ9zmFKwkPMD2jhMT2mfoC3KDsJS/e
+X-Gm-Gg: AYBFou3YWeeW2WJ1s8srFBm8Cb/X6YYYnDrxGr2sQ+rW/kPpj8nWFrn7NYcuR7wnZEm
+ OaL6PfzxeAKxvw/8DejAl94RswSw+oTuu5iFi/nmxc6PeICp6E7WB0OQtL8AWMrmienEuUGG9F4
+ xaEw4UtEemH0q7qhSI/6UOrmF7fdjdvLw3Nqw0Z+lYdd2dkO0I7Bi/1lC8hYUQ0qGfEyVA+AJEO
+ Lvy9ExzMVit5HSrVgxnr+p6SAZMpkJ3D1SDlfM/QB0wvqAoIvKj2FN8VohcGViX/ttk2Q2o0S4k
+ EAcNcfT/IXODcGO9QLWM3EJc/GGPClSt47LLDVDiN+dgk5FgVGmeFjz8SLR020cCJOU5Tsc9nYu
+ +96VittYX2a40M1JLpqZovTZ11nNgOitzMZLdePPGGok5Z06snTpA7BO5ts6XNS13QyOb0ey2vv
+ IxrfG9wpdp+NOXqXqe6obWEM4lIJpFOj0n3yFMdq8HLi0/GcH0l5FlqsOtHkxed92h5jiv4XAxf
+ r6iKd8CgH9xReVzdtvHmGJq6ATSgsnD/AIjBr98geSFHfdKwAcoGaYu9w==
+X-Received: by 2002:a05:600c:3ba2:b0:4a1:acab:234c with SMTP id
+ 5b1f17b1804b1-4a1acab23acmr206608275e9.10.1792060176209; 
+ Thu, 15 Oct 2026 03:29:36 -0700 (PDT)
 Received: from localhost (89-93-216-19.hfc.dyn.abo.bbox.fr. [89.93.216.19])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48de0bd1843sm18046221f8f.56.2026.10.15.03.28.45
+ 5b1f17b1804b1-4a1bd99faf3sm59818785e9.14.2026.10.15.03.29.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 15 Oct 2026 03:28:45 -0700 (PDT)
-Date: Thu, 15 Oct 2026 11:28:28 +0200
-Subject: [PATCH v3 41/50] tests/qtest: ina238: add current/voltage/power
- monitor test
+ Thu, 15 Oct 2026 03:29:35 -0700 (PDT)
+Date: Thu, 15 Oct 2026 11:28:35 +0200
+Subject: [PATCH v3 48/50] hw/arm: minerva: add Facebook BMC machine
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261015-bmc-minerva-v3-41-7d50c8a108e5@free.fr>
+Message-Id: <20261015-bmc-minerva-v3-48-7d50c8a108e5@free.fr>
 References: <20261015-bmc-minerva-v3-0-7d50c8a108e5@free.fr>
 In-Reply-To: <20261015-bmc-minerva-v3-0-7d50c8a108e5@free.fr>
 To: qemu-devel@nongnu.org
@@ -76,13 +75,13 @@ Cc: =?utf-8?q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>,
  Laurent Vivier <lvivier@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>, 
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, 
  =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>, 
- Emmanuel Blot <emmanuel.blot@free.fr>, Glenn Miles <milesg@linux.ibm.com>
+ Emmanuel Blot <emmanuel.blot@free.fr>
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1792056477; l=7751;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1792056477; l=8435;
  i=emmanuel.blot@free.fr; s=20260602; h=from:subject:message-id;
- bh=5svcqq2Q10oVhDmjmHtYDAAkxmrf1PXQfxC6u12Kf50=;
- b=E3UgXPivAHVvzj0ULaX8jkvVz8J3hj+9txXBW+dmpwnzUw+NRql6HfcE9zY+MWDj8v3iB41Lv
- pX2ONnZgyyLAR9t1dz3fj1wCI5YmpvFCJZSkVLR19dpkB98MYzeTbr9
+ bh=uIkPvuS1HhUIQuDA8DlpvtePjZWDWAz2s5Y0WUPJu8I=;
+ b=Q0i/Ml3HrciF1rfHda5E0dEE0Vw0CsLp2lciEf7+p5R9+VfUs10Q0+EMSTPbBBC5AN1vpymJ4
+ El56FW28qhEDcaY2A7BI8+Z+fdtfZQDFfGaL+Hwk4qf0G/x2w+rrnl4
 X-Developer-Key: i=emmanuel.blot@free.fr; a=ed25519;
  pk=0qFrZ21FAAN8OfVsSoVcCFTk/NMYOWzxJz4paSAVm0g=
 Received-SPF: pass client-ip=209.85.128.41; envelope-from=eblot.ml@gmail.com;
@@ -112,25 +111,45 @@ From:  Emmanuel Blot via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Introduce the INA238 qtest: the qgraph node, the QMP injection helpers
-and the register map. Cover the reset defaults, the software reset, and
-the Configuration register write mask.
+Add a machine for the Facebook Minerva Chassis Management Module (BMC),
+an AST2600-based board modelled from its device tree
+(aspeed-bmc-facebook-minerva.dts).
 
-Reviewed-by: Glenn Miles <milesg@linux.ibm.com>
+The board uses INA230 and INA238 power monitors, TMP75 temperature
+sensors, PCA9555 IO expanders, PCA9545 and PCA9548 I2C muxes, AT24C
+EEPROMs and a DS1339 RTC.
+
+Every device the Minerva device tree describes and QEMU already models
+is instantiated. The remaining ones (LTC4287, XDP710, MAX31790, PCF8563
+and IPMB) have no QEMU model and are left documented as comments.
+
 Signed-off-by: Emmanuel Blot <emmanuel.blot@free.fr>
 ---
- tests/qtest/ina238-test.c | 177 ++++++++++++++++++++++++++++++++++++++++++++++
- tests/qtest/meson.build   |   1 +
- 2 files changed, 178 insertions(+)
+ docs/system/arm/aspeed.rst      |   1 +
+ hw/arm/aspeed_ast2600_minerva.c | 180 ++++++++++++++++++++++++++++++++++++++++
+ hw/arm/meson.build              |   1 +
+ 3 files changed, 182 insertions(+)
 
-diff --git a/tests/qtest/ina238-test.c b/tests/qtest/ina238-test.c
+diff --git a/docs/system/arm/aspeed.rst b/docs/system/arm/aspeed.rst
+index f38f33cbe1..bbd3d9cdf4 100644
+--- a/docs/system/arm/aspeed.rst
++++ b/docs/system/arm/aspeed.rst
+@@ -36,6 +36,7 @@ AST2600 SoC based machines :
+ - ``catalina-bmc``         Facebook Catalina BMC
+ - ``sanmiguel-bmc``        Facebook SanMiguel BMC
+ - ``anacapa-bmc``          Facebook Anacapa BMC
++- ``minerva-bmc``          Facebook Minerva BMC
+ - ``gb200nvl-bmc``         Nvidia GB200nvl BMC
+ 
+ Supported devices
+diff --git a/hw/arm/aspeed_ast2600_minerva.c b/hw/arm/aspeed_ast2600_minerva.c
 new file mode 100644
-index 0000000000..6e59ed30b5
+index 0000000000..93abc64770
 --- /dev/null
-+++ b/tests/qtest/ina238-test.c
-@@ -0,0 +1,177 @@
++++ b/hw/arm/aspeed_ast2600_minerva.c
+@@ -0,0 +1,180 @@
 +/*
-+ * QTest testcase for the INA238 current/voltage/power monitor
++ * Facebook Minerva Chassis Management Module
 + *
 + * Copyright (c) 2026 Meta Platforms, Inc. and affiliates.
 + *
@@ -138,186 +157,189 @@ index 0000000000..6e59ed30b5
 + */
 +
 +#include "qemu/osdep.h"
-+#include "libqos/i2c.h"
-+#include "libqos/qgraph.h"
-+#include "libqtest-single.h"
-+#include "qobject/qdict.h"
++#include "hw/arm/aspeed.h"
++#include "hw/arm/aspeed_soc.h"
++#include "hw/i2c/i2c_mux_pca954x.h"
++#include "hw/gpio/pca9552.h"
++#include "hw/nvram/eeprom_at24c.h"
++#include "hw/rtc/ds1338.h"
++#include "hw/sensor/ina230.h"
++#include "hw/sensor/ina238.h"
++#include "hw/sensor/tmp105.h"
 +
-+#define INA238_TEST_ID      "ina238-test"
-+#define INA238_TEST_ADDR    0x40
++/*
++ * Minerva hardware values.
++ */
++#define MINERVA_BMC_HW_STRAP1 0x00002002
++#define MINERVA_BMC_HW_STRAP2 0x00000800
++#define MINERVA_BMC_RAM_SIZE (2 * GiB)
 +
-+/* Register pointer addresses */
-+#define REG_CONFIG          0x00
-+#define REG_ADC_CONFIG      0x01
-+#define REG_SHUNT_CAL       0x02
-+#define REG_VSHUNT          0x04
-+#define REG_VBUS            0x05
-+#define REG_DIETEMP         0x06
-+#define REG_CURRENT         0x07
-+#define REG_POWER           0x08
-+#define REG_DIAG_ALRT       0x0B
-+#define REG_SOVL            0x0C
-+#define REG_SUVL            0x0D
-+#define REG_BOVL            0x0E
-+#define REG_BUVL            0x0F
-+#define REG_TEMP_LIMIT      0x10
-+#define REG_PWR_LIMIT       0x11
-+#define REG_MANUFACTURER_ID 0x3E
-+#define REG_DEVICE_ID       0x3F
-+
-+/* Configuration register bits */
-+#define CONFIG_RST          0x8000
-+#define CONFIG_ADCRANGE     0x0010
-+
-+/* DIAG_ALRT register bits */
-+#define DIAG_MEMSTAT        0x0001
-+#define DIAG_CNVRF          0x0002
-+#define DIAG_POL            0x0004
-+#define DIAG_BUSUL          0x0008
-+#define DIAG_BUSOL          0x0010
-+#define DIAG_SHNTUL         0x0020
-+#define DIAG_SHNTOL         0x0040
-+#define DIAG_TMPOL          0x0080
-+#define DIAG_MATHOF         0x0200
-+#define DIAG_APOL           0x1000
-+#define DIAG_SLOWALERT      0x2000
-+#define DIAG_CNVR           0x4000
-+#define DIAG_ALATCH         0x8000
-+
-+/* Reset values */
-+#define CONFIG_POR          0x0000
-+#define ADC_CONFIG_POR      0xFB68
-+#define SHUNT_CAL_POR       0x1000
-+#define DIAG_ALRT_POR       0x0001
-+#define SOVL_POR            0x7FFF
-+#define SUVL_POR            0x8000
-+#define BOVL_POR            0x7FFF
-+#define BUVL_POR            0x0000
-+#define TEMP_LIMIT_POR      0x7FF0
-+#define PWR_LIMIT_POR       0xFFFF
-+#define MANUFACTURER_ID_VAL 0x5449
-+#define DEVICE_ID_VAL       0x2381
-+
-+/* Read the 24-bit POWER register (MSB first) */
-+static uint32_t i2c_get24(QI2CDevice *dev, uint8_t reg)
++/*
++ * Fan Controller Board (FCB).  The Minerva BMC device tree describes six
++ * identical FCBs, each hanging off one channel of the PCA9548 on i2c2.
++ */
++static void minerva_fcb_i2c_init(I2CBus *bus)
 +{
-+    uint8_t resp[3];
-+
-+    i2c_read_block(dev, reg, resp, sizeof(resp));
-+    return (resp[0] << 16) | (resp[1] << 8) | resp[2];
++    /* eeprom@50 - atmel,24c128 */
++    at24c_eeprom_init(bus, 0x50, 16 * KiB);
++    /* pwm@5e - maxim,max31790 (no model) */
++    /* power-sensor@40/41/44/45 - ti,ina238 */
++    i2c_slave_create_simple(bus, TYPE_INA238, 0x40);
++    i2c_slave_create_simple(bus, TYPE_INA238, 0x41);
++    i2c_slave_create_simple(bus, TYPE_INA238, 0x44);
++    i2c_slave_create_simple(bus, TYPE_INA238, 0x45);
++    /* temperature-sensor@4b - tmp75 */
++    i2c_slave_create_simple(bus, TYPE_TMP75, 0x4b);
++    /* gpio@11/12/13/17 - pca9555 */
++    i2c_slave_create_simple(bus, TYPE_PCA9555, 0x11);
++    i2c_slave_create_simple(bus, TYPE_PCA9555, 0x12);
++    i2c_slave_create_simple(bus, TYPE_PCA9555, 0x13);
++    i2c_slave_create_simple(bus, TYPE_PCA9555, 0x17);
 +}
 +
-+/* QMP helpers for injecting the physical inputs */
-+
-+static void qmp_ina238_set(const char *property, int value)
++static void minerva_pca9545_eeprom_init(I2CBus *bus, uint8_t addr,
++                                        unsigned neeprom)
 +{
-+    QDict *resp;
++    I2CSlave *i2c_mux = i2c_slave_create_simple(bus, TYPE_PCA9545, addr);
 +
-+    resp = qmp("{ 'execute': 'qom-set', 'arguments':"
-+               " { 'path': %s, 'property': %s, 'value': %d } }",
-+               INA238_TEST_ID, property, value);
-+    g_assert(qdict_haskey(resp, "return"));
-+    qobject_unref(resp);
++    for (unsigned idx = 0; idx < neeprom; idx++) {
++        at24c_eeprom_init(pca954x_i2c_get_bus(i2c_mux, idx), 0x50, 8 * KiB);
++    }
 +}
 +
-+/* Power-on-reset default values and the ID registers */
-+static void test_defaults(void *obj, void *data, QGuestAllocator *alloc)
++static void minerva_bmc_i2c_init(AspeedMachineState *bmc)
 +{
-+    QI2CDevice *dev = (QI2CDevice *)obj;
++    /* Reference: aspeed-bmc-facebook-minerva.dts */
 +
-+    g_assert_cmphex(i2c_get16(dev, REG_CONFIG), ==, CONFIG_POR);
-+    g_assert_cmphex(i2c_get16(dev, REG_ADC_CONFIG), ==, ADC_CONFIG_POR);
-+    g_assert_cmphex(i2c_get16(dev, REG_SHUNT_CAL), ==, SHUNT_CAL_POR);
-+    g_assert_cmphex(i2c_get16(dev, REG_VSHUNT), ==, 0x0000);
-+    g_assert_cmphex(i2c_get16(dev, REG_VBUS), ==, 0x0000);
-+    g_assert_cmphex(i2c_get16(dev, REG_DIETEMP), ==, 0x0000);
-+    g_assert_cmphex(i2c_get16(dev, REG_CURRENT), ==, 0x0000);
-+    g_assert_cmphex(i2c_get24(dev, REG_POWER), ==, 0x000000);
-+    g_assert_cmphex(i2c_get16(dev, REG_DIAG_ALRT), ==, DIAG_ALRT_POR);
-+    g_assert_cmphex(i2c_get16(dev, REG_SOVL), ==, SOVL_POR);
-+    g_assert_cmphex(i2c_get16(dev, REG_SUVL), ==, SUVL_POR);
-+    g_assert_cmphex(i2c_get16(dev, REG_BOVL), ==, BOVL_POR);
-+    g_assert_cmphex(i2c_get16(dev, REG_BUVL), ==, BUVL_POR);
-+    g_assert_cmphex(i2c_get16(dev, REG_TEMP_LIMIT), ==, TEMP_LIMIT_POR);
-+    g_assert_cmphex(i2c_get16(dev, REG_PWR_LIMIT), ==, PWR_LIMIT_POR);
-+    g_assert_cmphex(i2c_get16(dev, REG_MANUFACTURER_ID), ==,
-+                    MANUFACTURER_ID_VAL);
-+    g_assert_cmphex(i2c_get16(dev, REG_DEVICE_ID), ==, DEVICE_ID_VAL);
++    AspeedSoCState *soc = bmc->soc;
++    I2CBus *i2c[16] = {};
++    I2CSlave *i2c_mux;
++
++    for (unsigned idx = 0; idx < ARRAY_SIZE(i2c); idx++) {
++        i2c[idx] = aspeed_i2c_get_bus(&soc->i2c, idx);
++    }
++
++    /* &i2c0 */
++    /* power-monitor@40/41 - ti,ina230 */
++    i2c_slave_create_simple(i2c[0], TYPE_INA230, 0x40);
++    i2c_slave_create_simple(i2c[0], TYPE_INA230, 0x41);
++    /* power-monitor@44 - lltc,ltc4287 (no model) */
++    /* power-monitor@43 - infineon,xdp710 (no model) */
++    /* leds_gpio: gpio@19 - pca9555 */
++    i2c_slave_create_simple(i2c[0], TYPE_PCA9555, 0x19);
++    /* gpio@11/12/13 - pca9555 */
++    i2c_slave_create_simple(i2c[0], TYPE_PCA9555, 0x11);
++    i2c_slave_create_simple(i2c[0], TYPE_PCA9555, 0x12);
++    i2c_slave_create_simple(i2c[0], TYPE_PCA9555, 0x13);
++
++    /* &i2c1 */
++    /* temperature-sensor@4b/4f - tmp75 */
++    i2c_slave_create_simple(i2c[1], TYPE_TMP75, 0x4b);
++    i2c_slave_create_simple(i2c[1], TYPE_TMP75, 0x4f);
++    /* eeprom@54 - atmel,24c128 */
++    at24c_eeprom_init(i2c[1], 0x54, 16 * KiB);
++
++    /* &i2c2 */
++    /* i2c-mux@77 (PCA9548) - six Fan Controller Boards */
++    i2c_mux = i2c_slave_create_simple(i2c[2], TYPE_PCA9548, 0x77);
++    /* FCB 1 - imux16 (channel 1) */
++    minerva_fcb_i2c_init(pca954x_i2c_get_bus(i2c_mux, 1));
++    /* FCB 2 - imux17 (channel 0) */
++    minerva_fcb_i2c_init(pca954x_i2c_get_bus(i2c_mux, 0));
++    /* FCB 3 - imux18 (channel 3) */
++    minerva_fcb_i2c_init(pca954x_i2c_get_bus(i2c_mux, 3));
++    /* FCB 4 - imux19 (channel 2) */
++    minerva_fcb_i2c_init(pca954x_i2c_get_bus(i2c_mux, 2));
++    /* FCB 5 - imux20 (channel 4) */
++    minerva_fcb_i2c_init(pca954x_i2c_get_bus(i2c_mux, 4));
++    /* FCB 6 - imux21 (channel 5) */
++    minerva_fcb_i2c_init(pca954x_i2c_get_bus(i2c_mux, 5));
++    /* imux22/imux23 (channels 6/7) - empty */
++
++    /* &i2c3 */
++    /* i2c-mux@72 (PCA9545) - imux24-27, eeprom@50 on each channel */
++    minerva_pca9545_eeprom_init(i2c[3], 0x72, 4);
++
++    /* &i2c4 */
++    /* i2c-mux@72 (PCA9545) - imux28-31, eeprom@50 on each channel */
++    minerva_pca9545_eeprom_init(i2c[4], 0x72, 4);
++
++    /* &i2c5 */
++    /* i2c-mux@72 (PCA9545) - imux32-35, eeprom@50 on each channel */
++    minerva_pca9545_eeprom_init(i2c[5], 0x72, 4);
++
++    /* &i2c6 */
++    /* i2c-mux@72 (PCA9545) - imux36-39, eeprom@50 on each channel */
++    minerva_pca9545_eeprom_init(i2c[6], 0x72, 4);
++
++    /* &i2c7 - empty */
++    /* &i2c8 - empty */
++
++    /* &i2c9 */
++    /* eeprom@50 - atmel,24c64 */
++    at24c_eeprom_init(i2c[9], 0x50, 8 * KiB);
++    /* rtc@51 - nxp,pcf8563 (no model) */
++    /* rtc@68 - dallas,ds1339 */
++    i2c_slave_create_simple(i2c[9], TYPE_DS1339, 0x68);
++
++    /* &i2c12 */
++    /* i2c-mux@70 (PCA9545) - imux40-42 eeprom@50, imux43 empty */
++    minerva_pca9545_eeprom_init(i2c[12], 0x70, 3);
++
++    /* &i2c13 */
++    /* i2c-mux@70 (PCA9545) - imux44-46 eeprom@50, imux47 empty */
++    minerva_pca9545_eeprom_init(i2c[13], 0x70, 3);
++
++    /* &i2c14 */
++    /* ipmb@10 - ipmb-dev (no model) */
++
++    /* &i2c15 */
++    /* eeprom@50 - atmel,24c128 */
++    at24c_eeprom_init(i2c[15], 0x50, 16 * KiB);
++    /* eeprom@56 - atmel,24c64 */
++    at24c_eeprom_init(i2c[15], 0x56, 8 * KiB);
 +}
 +
-+/* Software reset via the Configuration RST bit */
-+static void test_soft_reset(void *obj, void *data, QGuestAllocator *alloc)
++static void aspeed_machine_minerva_class_init(ObjectClass *oc,
++                                              const void *data)
 +{
-+    QI2CDevice *dev = (QI2CDevice *)obj;
++    MachineClass *mc = MACHINE_CLASS(oc);
++    AspeedMachineClass *amc = ASPEED_MACHINE_CLASS(oc);
 +
-+    i2c_set16(dev, REG_SHUNT_CAL, 0x1234);
-+    i2c_set16(dev, REG_SOVL, 0x0500);
-+    i2c_set16(dev, REG_TEMP_LIMIT, 0x0A00);
-+    i2c_set16(dev, REG_DIAG_ALRT, DIAG_ALATCH);
-+
-+    qmp_ina238_set("shunt-voltage", 97200000);
-+    qmp_ina238_set("bus-voltage", 48000000);
-+    qmp_ina238_set("die-temperature", 25000);
-+
-+    g_assert_cmphex(i2c_get16(dev, REG_SHUNT_CAL), ==, 0x1234);
-+    g_assert_cmphex(i2c_get16(dev, REG_SOVL), ==, 0x0500);
-+    g_assert_cmphex(i2c_get16(dev, REG_VSHUNT), ==, 0x4BF0);
-+    g_assert_cmpuint(i2c_get16(dev, REG_CURRENT), !=, 0);
-+
-+    i2c_set16(dev, REG_CONFIG, CONFIG_RST);
-+
-+    g_assert_cmphex(i2c_get16(dev, REG_CONFIG), ==, CONFIG_POR);
-+    g_assert_cmphex(i2c_get16(dev, REG_SHUNT_CAL), ==, SHUNT_CAL_POR);
-+    g_assert_cmphex(i2c_get16(dev, REG_SOVL), ==, SOVL_POR);
-+    g_assert_cmphex(i2c_get16(dev, REG_TEMP_LIMIT), ==, TEMP_LIMIT_POR);
-+    g_assert_cmphex(i2c_get16(dev, REG_DIAG_ALRT), ==, DIAG_ALRT_POR);
-+
-+    g_assert_cmphex(i2c_get16(dev, REG_VSHUNT), ==, 0x0000);
-+    g_assert_cmphex(i2c_get16(dev, REG_VBUS), ==, 0x0000);
-+    g_assert_cmphex(i2c_get16(dev, REG_DIETEMP), ==, 0x0000);
-+    g_assert_cmphex(i2c_get16(dev, REG_CURRENT), ==, 0x0000);
-+    g_assert_cmpuint(i2c_get24(dev, REG_POWER), ==, 0);
++    mc->desc       = "Facebook Minerva BMC (Cortex-A7)";
++    amc->soc_name  = "ast2600-a3";
++    amc->hw_strap1 = MINERVA_BMC_HW_STRAP1;
++    amc->hw_strap2 = MINERVA_BMC_HW_STRAP2;
++    amc->fmc_model = "mx66l1g45g";
++    amc->spi_model = NULL;
++    amc->num_cs    = 2;
++    amc->macs_mask = ASPEED_MAC3_ON;
++    amc->i2c_init  = minerva_bmc_i2c_init;
++    mc->default_ram_size = MINERVA_BMC_RAM_SIZE;
++    aspeed_machine_class_init_cpus_defaults(mc);
 +}
 +
-+/* CONFIG keeps only the writable ADCRANGE/CONVDLY bits and self-clears RST */
-+static void test_config_wmask(void *obj, void *data, QGuestAllocator *alloc)
-+{
-+    QI2CDevice *dev = (QI2CDevice *)obj;
++static const TypeInfo aspeed_ast2600_minerva_types[] = {
++    {
++        .name          = MACHINE_TYPE_NAME("minerva-bmc"),
++        .parent        = TYPE_ASPEED_MACHINE,
++        .class_init    = aspeed_machine_minerva_class_init,
++    }
++};
 +
-+    i2c_set16(dev, REG_CONFIG, CONFIG_ADCRANGE | 0x0040);
-+    g_assert_cmphex(i2c_get16(dev, REG_CONFIG), ==, CONFIG_ADCRANGE | 0x0040);
-+
-+    i2c_set16(dev, REG_CONFIG, CONFIG_RST);
-+    g_assert_cmphex(i2c_get16(dev, REG_CONFIG), ==, CONFIG_POR);
-+}
-+
-+static void ina238_register_nodes(void)
-+{
-+    QOSGraphEdgeOptions opts = {
-+        .extra_device_opts = "id=" INA238_TEST_ID ",address=0x40"
-+    };
-+    add_qi2c_address(&opts, &(QI2CAddress) { INA238_TEST_ADDR });
-+
-+    qos_node_create_driver("ina238", i2c_device_create);
-+    qos_node_consumes("ina238", "i2c-bus", &opts);
-+
-+    qos_add_test("defaults", "ina238", test_defaults, NULL);
-+    qos_add_test("soft-reset", "ina238", test_soft_reset, NULL);
-+    qos_add_test("config-wmask", "ina238", test_config_wmask, NULL);
-+}
-+libqos_init(ina238_register_nodes);
-diff --git a/tests/qtest/meson.build b/tests/qtest/meson.build
-index e413a0cc75..7005509d4d 100644
---- a/tests/qtest/meson.build
-+++ b/tests/qtest/meson.build
-@@ -331,6 +331,7 @@ qos_test_ss.add(
-   'eepro100-test.c',
-   'es1370-test.c',
-   'ina230-test.c',
-+  'ina238-test.c',
-   'lsm303dlhc-mag-test.c',
-   'isl_pmbus_vr-test.c',
-   'max34451-test.c',
++DEFINE_TYPES(aspeed_ast2600_minerva_types)
+diff --git a/hw/arm/meson.build b/hw/arm/meson.build
+index bcc068de04..a9e8270b85 100644
+--- a/hw/arm/meson.build
++++ b/hw/arm/meson.build
+@@ -63,6 +63,7 @@ arm_common_ss.add(when: 'CONFIG_ASPEED_SOC', if_true: files(
+   'aspeed_ast2600_fby35.c',
+   'aspeed_ast2600_fuji.c',
+   'aspeed_ast2600_gb200nvl.c',
++  'aspeed_ast2600_minerva.c',
+   'aspeed_ast2600_rainier.c',
+   'aspeed_ast2600_sanmiguel.c',
+   'aspeed_ast10x0.c',
 
 -- 
 2.53.0-Meta
