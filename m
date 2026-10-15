@@ -4,65 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CCF1CC6B34
-	for <qemu-riscv@archiver.kernel.org>; Thu, 15 Oct 2026 10:34:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B817ACC6B33
+	for <qemu-riscv@archiver.kernel.org>; Thu, 15 Oct 2026 10:34:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xHIlR-0003ty-Tj; Thu, 15 Oct 2026 06:32:45 -0400
+	id 1xHIlj-0005VD-Ct; Thu, 15 Oct 2026 06:33:03 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <eblot.ml@gmail.com>)
- id 1xHIhN-0007kB-0n
- for qemu-riscv@nongnu.org; Thu, 15 Oct 2026 06:28:43 -0400
-Received: from mail-wm1-f51.google.com ([209.85.128.51])
+ id 1xHIif-0000Hm-3P
+ for qemu-riscv@nongnu.org; Thu, 15 Oct 2026 06:29:53 -0400
+Received: from mail-wm1-f49.google.com ([209.85.128.49])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <eblot.ml@gmail.com>)
- id 1xHIhH-0004Ol-Te
- for qemu-riscv@nongnu.org; Thu, 15 Oct 2026 06:28:32 -0400
-Received: by mail-wm1-f51.google.com with SMTP id
- 5b1f17b1804b1-4a19cba5c14so46043905e9.3
- for <qemu-riscv@nongnu.org>; Thu, 15 Oct 2026 03:28:27 -0700 (PDT)
+ id 1xHIid-0004e5-D7
+ for qemu-riscv@nongnu.org; Thu, 15 Oct 2026 06:29:52 -0400
+Received: by mail-wm1-f49.google.com with SMTP id
+ 5b1f17b1804b1-4a1b07c3c5fso17318365e9.1
+ for <qemu-riscv@nongnu.org>; Thu, 15 Oct 2026 03:29:51 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792060106; x=1792664906;
+ d=1e100.net; s=20260707; t=1792060190; x=1792664990;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=SXVkV6BmIYa4CM52mZdbIuwD6cqbidYPD1oEQTmNrJw=;
- b=cKrXNvC1pXdD4cvC+/alD1AhjDirvANghicJg6R8edQXXZal4Hd/j38yF6eyW19jIv
- ER2pNT2c0s7ehYqzsnO1NQPgangqmA0xiup/vqy0hCWcMC03v6JWJiD63CygPfZ7i1is
- /KC1EovQe+AQGT01p6a8BIf1DlIN9plQaKd5GI5+y6UVesRYSvVefm9W5X8WmZCnfyM7
- rC6CrOWYH+RuD5oRrI8Sv2vrC3OI3Izz9QaqYGd/w1L0YFhb37ZaqQI6O2o3FB6pkgVi
- oz9IwFjTw7Xx62UfpomwDoYUyD65Yy8LVYvqk9LJ9IoWfTu6F3blLyyrNn5ONmPUfncP
- vLzQ==
+ bh=yjBmG+zuYRbjC22UGQURaHMUPP1uzHBYq+b+aCfLeJc=;
+ b=t7z3ErTBxO4K9nyyHa/41Gsh70+4ckCnrEJRUmL9sfoWR3cVr3zYsIBQL7Ozcms8ci
+ udzrNSeHoD8WEpQLzFUURYvOMdW3lITZVJHcUpL8zWHh2ffY44gUdQgfic6/4KZSDhDA
+ sUD4jwyoYy6vtieRQP11yu7vpBj2OCP050lF3IWCNX5/6yk0S2dgYedQcq33Cq+TPlVe
+ 6MtA5NztYKsm0i5sfTJLgiDd5QMNIgL40xquSYY8zPnX+/fBGlgeIuQuleblKcp1ysM3
+ qJWwIOLg9lzGOrHKUdNQSLefcSKBCLnSkDoQVdlZlVVU8WC0pPmCC0AqLJ2cL5r0r7wU
+ 2vWA==
 X-Forwarded-Encrypted: i=1;
- AKwUvBw9Lqu5hHeFD3wVA2Ev90N+p9BU15aKnvLLFMv2+LbDpNTdklC0md96Ux3lvj63BhiWE8y1AyMvkjkp@nongnu.org
-X-Gm-Message-State: AFq9FYKiqOpGg9XS9wS+RX73CAYkNGEXd85L0LepnOKYOvc5z64lcP/W
- fuKpLJvFQ0P5lf4Edho/BBnRUj4OOlGDSD7sr7326l6GFc3ej7vHVhSJ
-X-Gm-Gg: AYBFou2uubwSvHVjw0yqgo4l89nkBVI+STJEWrHWK5fOvtsbAjoaux5rt6lHZ+i3yaa
- CyS4BYTqulfoOzLL548FsB18ZcnfhLSZjC4jxZx4QaCw1v55Ym5hZFvRZfhgVSphymXsep31Qzo
- AjG+8jzoZbd62xRjBj5VZhU0pot20GxwaQTtbU1N4gVEIw9gRO5xqfmaB+IPVRuZGCBXzukzyxQ
- vneaIn/pHoTkrEqgjqFoIKKkvUvG5IzgJbplYp/tRZWCn7LIeQyv7rAqHF55jAHbHQUEFOxG9bY
- qPbgqsO8F/8UVgXlfpdSuaugNQL2NEu+nJTXeokvkKqyJag4FPdZfyk0JyoW44a8bQVr1daFIuR
- CwUfg1U6z5adg2TP5kU3Afy/dlSGliUXvzx4KcctGrmYPAenmvpjDMOnEMancfaVvG4YtQ5Fuxv
- IeRdA8CFlXci/2/xBaR+PzIld8HSMImO/avSCDPi5xyz5Nxxofn+GyMQwh7HEY9eXALaScLmENN
- o4Og5wyFGcwqadsyswqYfS+u4KToWFfsSatNenMYekvmg==
-X-Received: by 2002:a05:600c:4e4f:b0:4a1:ad27:e797 with SMTP id
- 5b1f17b1804b1-4a1ad27e79cmr172669715e9.6.1792060106381; 
- Thu, 15 Oct 2026 03:28:26 -0700 (PDT)
+ AKwUvBybEgQAWjRLfn5TSPla45TkHbroy89SHwgwnhw4BFJeTU8lFxCOoZeu22ytZuD8I151oha8Bp8opWFG@nongnu.org
+X-Gm-Message-State: AFq9FYIfCBVBfCDPnMbG3j2APFuLuOYaOKeP+LO57RtdsROtUo+6MF4i
+ xp2jNvN5BZcQ6UyOa2CttFTAVS/vlzETqd1xN+wWXrl/fqG2rnZbE6xI
+X-Gm-Gg: AYBFou128gEbxLdHhy2Y56fayHPLJY1L8Z4NhBhnso2QKTZ0SyuoW3G3vuN15Vc/Is5
+ KLP3sW3V66EZKDPFamgB+mGXbjKSw46Jk+yfY0IrUxqmCf8RwmXRBe7K8MlwFRkQ7VTdYLwpX/z
+ jlUGrOXcm5TJVSE5Xm6VaTsU+BFZVbO/ZnXzi7iBiMuHsI896007NecwyxKxJ0kR4o2+tcKwSVf
+ HLggBJbX7cjh+X5ncMMvo/KV0dNhLb4yuKzdJP6WbQvXRMP+Lk7neurHUsQl9wYtiC/kN6KTRC6
+ EUz1TDHVLcL4Wb2KfTBStgMrN80nIwIs9Oaw+SowekeZUg2lhttxCr6gjETcbNjr1uC0/JS7Atv
+ nZcaeD/eE+GCmSLrVB0t67kdxdpiRkCdkprRey0HCKpOqj/0vxWNfHz9+7ruDgw/tb7cHYXo4/i
+ 8N/BQBhAQrn3WwxN8eThDJp6xEcY9bbsldTmBmysT01QiS3KuvLp7n5MlfH+TjURLN8tM3kt3a+
+ 2sf617JUx1viCnK0hdwEmu8FIoCg1CDWVNsnS4wWtYIBw==
+X-Received: by 2002:a05:600c:4e43:b0:4a0:1f90:594b with SMTP id
+ 5b1f17b1804b1-4a18e4b67e1mr365550045e9.22.1792060189894; 
+ Thu, 15 Oct 2026 03:29:49 -0700 (PDT)
 Received: from localhost (89-93-216-19.hfc.dyn.abo.bbox.fr. [89.93.216.19])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48de0bd733fsm17897744f8f.58.2026.10.15.03.28.25
+ 5b1f17b1804b1-4a1bd5f4319sm27199325e9.0.2026.10.15.03.29.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 15 Oct 2026 03:28:25 -0700 (PDT)
-Date: Thu, 15 Oct 2026 11:28:25 +0200
-Subject: [PATCH v3 38/50] tests/qtest: ina230: cover ALERT latch
- persistence
+ Thu, 15 Oct 2026 03:29:48 -0700 (PDT)
+Date: Thu, 15 Oct 2026 11:28:37 +0200
+Subject: [PATCH v3 50/50] tests/functional/arm: minerva: add BMC boot test
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261015-bmc-minerva-v3-38-7d50c8a108e5@free.fr>
+Message-Id: <20261015-bmc-minerva-v3-50-7d50c8a108e5@free.fr>
 References: <20261015-bmc-minerva-v3-0-7d50c8a108e5@free.fr>
 In-Reply-To: <20261015-bmc-minerva-v3-0-7d50c8a108e5@free.fr>
 To: qemu-devel@nongnu.org
@@ -76,17 +75,17 @@ Cc: =?utf-8?q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>,
  Laurent Vivier <lvivier@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>, 
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, 
  =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>, 
- Emmanuel Blot <emmanuel.blot@free.fr>, Glenn Miles <milesg@linux.ibm.com>
+ Emmanuel Blot <emmanuel.blot@free.fr>
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1792056476; l=4970;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1792056477; l=2487;
  i=emmanuel.blot@free.fr; s=20260602; h=from:subject:message-id;
- bh=W8bVV49/k/VdCQ886gBN1IQ0GLO/G1VK52xof55CHLg=;
- b=izrE0Ei6LuVlDgzOoZf5xuAgBouG0QHhkfTEsa/7pbev/U3Uk7z+E4Ja5k+nRLGxqwR5nXzYS
- u2PQjP6AGAoCGASkJaqegIcA9ii1On1IQoO2ZeIcCinpXIBF0aPN45j
+ bh=utRMkw0VXmaCFdITu3Kg7E0hjjFW9yC9c7a309pEC8o=;
+ b=SABl57njXkNYtVhmFAMHi+9+Vh94V3yFVOyiJ6i4w7g/HzNMH4rEXJxxNzKHKDhDsKospncCz
+ 2RDPbzyCefZBmJQPxlpxQ6MtV28h4038LwoDLqgRGUTdZMXmVJn+Fja
 X-Developer-Key: i=emmanuel.blot@free.fr; a=ed25519;
  pk=0qFrZ21FAAN8OfVsSoVcCFTk/NMYOWzxJz4paSAVm0g=
-Received-SPF: pass client-ip=209.85.128.51; envelope-from=eblot.ml@gmail.com;
- helo=mail-wm1-f51.google.com
+Received-SPF: pass client-ip=209.85.128.49; envelope-from=eblot.ml@gmail.com;
+ helo=mail-wm1-f49.google.com
 X-Spam_score_int: -15
 X-Spam_score: -1.6
 X-Spam_bar: -
@@ -112,124 +111,74 @@ From:  Emmanuel Blot via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Verify what releases a latched alert and what can bring it back: a
-Mask/Enable read and a Configuration write both clear it, and only a
-conversion that re-samples the fault on a channel it converted asserts
-it again.
+Add a functional test booting the Facebook Minerva BMC machine.
 
-Reviewed-by: Glenn Miles <milesg@linux.ibm.com>
+Note: The boot image currently lives on a personal fork; a TODO in the
+test notes it should be relocated under legoater/qemu-aspeed-boot before
+upstreaming.
+
 Signed-off-by: Emmanuel Blot <emmanuel.blot@free.fr>
 ---
- tests/qtest/ina230-test.c | 89 +++++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 89 insertions(+)
+ tests/functional/arm/meson.build            |  2 ++
+ tests/functional/arm/test_aspeed_minerva.py | 30 +++++++++++++++++++++++++++++
+ 2 files changed, 32 insertions(+)
 
-diff --git a/tests/qtest/ina230-test.c b/tests/qtest/ina230-test.c
-index 4d601c74b5..cda52bb815 100644
---- a/tests/qtest/ina230-test.c
-+++ b/tests/qtest/ina230-test.c
-@@ -364,6 +364,88 @@ static void test_alert_latch(void *obj, void *data, QGuestAllocator *alloc)
- }
- 
- /* Bus over-limit alert */
-+static void test_alert_latch_persist(void *obj, void *data,
-+                                     QGuestAllocator *alloc)
-+{
-+    QI2CDevice *dev = (QI2CDevice *)obj;
+diff --git a/tests/functional/arm/meson.build b/tests/functional/arm/meson.build
+index 61b00932db..dd1ddf7f6f 100644
+--- a/tests/functional/arm/meson.build
++++ b/tests/functional/arm/meson.build
+@@ -16,6 +16,7 @@ test_arm_timeouts = {
+   'aspeed_bletchley' : 480,
+   'aspeed_catalina' : 480,
+   'aspeed_gb200nvl_bmc' : 480,
++  'aspeed_minerva' : 480,
+   'aspeed_rainier' : 480,
+   'bpim2u' : 500,
+   'collie' : 180,
+@@ -51,6 +52,7 @@ tests_arm_system_thorough = [
+   'aspeed_bletchley',
+   'aspeed_catalina',
+   'aspeed_gb200nvl_bmc',
++  'aspeed_minerva',
+   'aspeed_rainier',
+   'bpim2u',
+   'canona1100',
+diff --git a/tests/functional/arm/test_aspeed_minerva.py b/tests/functional/arm/test_aspeed_minerva.py
+new file mode 100644
+index 0000000000..925a82b139
+--- /dev/null
++++ b/tests/functional/arm/test_aspeed_minerva.py
+@@ -0,0 +1,30 @@
++#!/usr/bin/env python3
++#
++# Functional test that boots the ASPEED machines
++#
++# Copyright (c) 2026 Meta Platforms, Inc. and affiliates.
++#
++# SPDX-License-Identifier: GPL-2.0-or-later
 +
-+    i2c_set16(dev, REG_CONFIG, CONFIG_RST);
-+    i2c_set16(dev, REG_ALERT_LIMIT, 0x1000);
-+    i2c_set16(dev, REG_MASK_ENABLE, ME_SOL | ME_LEN);
++from qemu_test import Asset
++from aspeed import AspeedTest
 +
-+    qmp_ina230_set("shunt-voltage", 20000000);
 +
-+    /* First read shows the latched AFF and clears the latch */
-+    g_assert_cmphex(i2c_get16(dev, REG_MASK_ENABLE) & ME_AFF, ==, ME_AFF);
++class MinervaMachine(AspeedTest):
 +
-+    /* Fault still present but no new conversion: AFF stays cleared */
-+    g_assert_cmphex(i2c_get16(dev, REG_MASK_ENABLE) & ME_AFF, ==, 0);
++    # TODO: the boot image currently lives on a personal fork; move it under
++    # legoater/qemu-aspeed-boot before upstreaming.
++    ASSET_MINERVA_FLASH = Asset(
++        'https://github.com/eblot/qemu-aspeed-boot/raw/refs/heads/minerva-bmc/images/minerva-bmc/openbmc-20260720025047/'
++            'obmc-phosphor-image-minerva-20260720025047.static.mtd.xz',
++        'bd713df39d3c09846299a2377315465187a4dcd33c29d3b3d683ef13b59f36bb')
 +
-+    qmp_ina230_set("shunt-voltage", 20000000);
-+    g_assert_cmphex(i2c_get16(dev, REG_MASK_ENABLE) & ME_AFF, ==, ME_AFF);
-+}
++    def test_arm_ast2600_minerva_openbmc(self):
++        image_path = self.uncompress(self.ASSET_MINERVA_FLASH)
 +
-+/* A Configuration write releases the latch as a Mask/Enable read does. */
-+static void test_alert_latch_config(void *obj, void *data,
-+                                    QGuestAllocator *alloc)
-+{
-+    QI2CDevice *dev = (QI2CDevice *)obj;
++        self.do_test_arm_aspeed_openbmc('minerva-bmc', image=image_path,
++                                        uboot='2019.04', cpu_id='0xf00',
++                                        soc='AST2600 rev A3')
 +
-+    i2c_set16(dev, REG_CONFIG, CONFIG_RST);
-+    i2c_set16(dev, REG_ALERT_LIMIT, 0x1000);
-+    i2c_set16(dev, REG_MASK_ENABLE, ME_SOL | ME_LEN);
-+
-+    /* Latch a fault, then bring the input back below the limit */
-+    qmp_ina230_set("shunt-voltage", 20000000);
-+    qmp_ina230_set("shunt-voltage", 2500000);
-+
-+    i2c_set16(dev, REG_CONFIG, CONFIG_POR);
-+    g_assert_cmphex(i2c_get16(dev, REG_MASK_ENABLE) & ME_AFF, ==, 0);
-+
-+    /* With the fault present, the reconversion latches it again */
-+    qmp_ina230_set("shunt-voltage", 20000000);
-+    i2c_set16(dev, REG_CONFIG, CONFIG_POR);
-+    g_assert_cmphex(i2c_get16(dev, REG_MASK_ENABLE) & ME_AFF, ==, ME_AFF);
-+}
-+
-+/* The releasing write need not reconvert: a power-down leaves it clear. */
-+static void test_alert_latch_shutdown(void *obj, void *data,
-+                                      QGuestAllocator *alloc)
-+{
-+    QI2CDevice *dev = (QI2CDevice *)obj;
-+
-+    i2c_set16(dev, REG_CONFIG, CONFIG_RST);
-+    i2c_set16(dev, REG_ALERT_LIMIT, 0x1000);
-+    i2c_set16(dev, REG_MASK_ENABLE, ME_SOL | ME_LEN);
-+
-+    qmp_ina230_set("shunt-voltage", 20000000);
-+
-+    i2c_set16(dev, REG_CONFIG, 0x0000); /* power-down */
-+    g_assert_cmphex(i2c_get16(dev, REG_MASK_ENABLE) & ME_AFF, ==, 0);
-+}
-+
-+/*
-+ * A conversion only re-samples the alert of a channel it converted: the bus
-+ * register a shunt-only conversion left stale must not re-latch.
-+ */
-+static void test_alert_channel(void *obj, void *data, QGuestAllocator *alloc)
-+{
-+    QI2CDevice *dev = (QI2CDevice *)obj;
-+
-+    i2c_set16(dev, REG_CONFIG, CONFIG_RST);
-+    i2c_set16(dev, REG_ALERT_LIMIT, 0x2000);
-+    i2c_set16(dev, REG_MASK_ENABLE, ME_BOL | ME_LEN);
-+
-+    qmp_ina230_set("bus-voltage", 12000000);
-+    g_assert_cmphex(i2c_get16(dev, REG_MASK_ENABLE) & ME_AFF, ==, ME_AFF);
-+
-+    /* Shunt-only mode: the bus register keeps its over-limit value */
-+    i2c_set16(dev, REG_CONFIG, 0x0005);
-+    qmp_ina230_set("shunt-voltage", 20000000);
-+    g_assert_cmphex(i2c_get16(dev, REG_BUS), ==, 0x2580);
-+    g_assert_cmphex(i2c_get16(dev, REG_MASK_ENABLE) & ME_AFF, ==, 0);
-+}
-+
- static void test_alert_bus(void *obj, void *data, QGuestAllocator *alloc)
- {
-     QI2CDevice *dev = (QI2CDevice *)obj;
-@@ -481,6 +563,13 @@ static void ina230_register_nodes(void)
-     qos_add_test("edges-overflow", "ina230", test_edges_overflow, NULL);
-     qos_add_test("alert-shunt-over", "ina230", test_alert_shunt_over, NULL);
-     qos_add_test("alert-latch", "ina230", test_alert_latch, NULL);
-+    qos_add_test("alert-latch-persist", "ina230", test_alert_latch_persist,
-+                 NULL);
-+    qos_add_test("alert-latch-config", "ina230", test_alert_latch_config,
-+                 NULL);
-+    qos_add_test("alert-latch-shutdown", "ina230", test_alert_latch_shutdown,
-+                 NULL);
-+    qos_add_test("alert-channel", "ina230", test_alert_channel, NULL);
-     qos_add_test("alert-bus", "ina230", test_alert_bus, NULL);
-     qos_add_test("alert-power", "ina230", test_alert_power, NULL);
-     qos_add_test("cvrf", "ina230", test_cvrf, NULL);
++if __name__ == '__main__':
++    AspeedTest.main()
 
 -- 
 2.53.0-Meta
