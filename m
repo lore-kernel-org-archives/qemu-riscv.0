@@ -4,95 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55B6BCCA462
-	for <qemu-riscv@archiver.kernel.org>; Fri, 16 Oct 2026 07:46:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20C6ECCA462
+	for <qemu-riscv@archiver.kernel.org>; Fri, 16 Oct 2026 07:48:13 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xHcdz-0007C0-E6; Fri, 16 Oct 2026 03:46:23 -0400
+	id 1xHcfO-0007hs-DG; Fri, 16 Oct 2026 03:47:50 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xHcdp-00079o-8K
- for qemu-riscv@nongnu.org; Fri, 16 Oct 2026 03:46:13 -0400
-Received: from mail-ed1-x533.google.com ([2a00:1450:4864:20::533])
+ id 1xHcfH-0007gZ-Tn
+ for qemu-riscv@nongnu.org; Fri, 16 Oct 2026 03:47:45 -0400
+Received: from mail-ed1-x534.google.com ([2a00:1450:4864:20::534])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xHcdn-00047K-3x
- for qemu-riscv@nongnu.org; Fri, 16 Oct 2026 03:46:12 -0400
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-6a0a4aa99bdso7877628a12.1
- for <qemu-riscv@nongnu.org>; Fri, 16 Oct 2026 00:46:09 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1792136767; cv=none;
+ id 1xHcfD-0004BE-Ua
+ for qemu-riscv@nongnu.org; Fri, 16 Oct 2026 03:47:43 -0400
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-6acbdbc1725so4126876a12.3
+ for <qemu-riscv@nongnu.org>; Fri, 16 Oct 2026 00:47:39 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1792136858; cv=none;
  d=google.com; s=arc-20260327;
- b=WYAUXvHXXOIeLXVYW+edNybiGzyP0eGyMmLJs8Gh5SWCbCYZOaVQx0BGVqHUSASwHM
- m3sL5bdoaBAAYCgfBqzvTnJOQ7L1hIgmR1Dwuil853O45bpeGB8xPSmd599Jno4yJAbu
- IiFYAmOAjCUqpa1AfHb/Ylsr5me8ZHhWFASunfATuhPDJRBJCAAIy/yGGw5fG35hfwk5
- 8Pf9xaRW+sDT1ni8xkM101YN1vtFfD4cgtCj3N/F87oUoZypjPcdj1IpJ7FjzWEeFrjY
- 6sWGbYMQPuzTdlIf4SzhBS8XUXerCnypbb2I6lTEeSSpt921/ChXhZP2EPip1jEMMDGG
- xoxQ==
+ b=WPbmK2LvKyN4fxiQlbTkMNK91f2GqnTUJWCpzb5l+weFv1NMHjlCjG6bWBr7VBY3Kx
+ hsFV1Rd7kbty5xPiHzfPYA0ul/FRoZWhA3rcNIa+xRE+Wp0NssM2CUzFwECRpMhqISMb
+ C96QGVVOD86zbuyrDz2+gg90QuabfkHs5Bl91gKUfP/NIqBAdw+tsltKQWN5q8beP8gG
+ dG45m2wPjKKUb2DjtmqdVUDF9qNO9936g9H2B8jn+R2Djv4MOh2zm0cyyFvpQceoQOlh
+ z2BvEphfa5WKj7wDiLttwGlYcdO8jpe2c/SBUyGIw+hOYn8Jbo+QWEM/n0DQWgRxIIfh
+ okEA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :reply-to:in-reply-to:references:mime-version:dkim-signature;
- bh=dWshOP8vnrAxbyRS/QN38SaLQ7rjqxT4inF1al0mW7E=;
- fh=7I8y2jq3Wc5AcX53B3UIv66qjHaQ18bYYn3auvXkp5Q=;
- b=DoBkCQeCpxzoZq5hyrjh5CIOadVHcm/ElhWNgEO+QpWNvKASl/GESTdP3ju0NNRBKw
- 443qbeL9R/w9Lw7IpoJKLvvQMcs6c4LjylLOcTEhpdKFYz6K+6waGGC2J3EfGw3hARTj
- 9oUIMQpIuUB57iJwLek1VLTKfR0kznsxkUxg4hrygETOOGwAKAINrmD1pZKupnsQT9k0
- 2V4GZNvGfuE9dBzHM1bxz7k1sQrw4LvAVcl08X8uunxqyyQxQDGUQ6+LkMfQbvZ8rG8z
- O4kgV5ExiLlOIc65sq0xZPqrvLVepRRMx7tljvZpWi/5g03eNMs99qvTEgc76DWXpxP2
- X5kw==; darn=nongnu.org
+ bh=srAuSQr6+iSCtJhUw4J2OCKggwuluEEaJwvUk6BuSYI=;
+ fh=6vA6lfHacbzpP3oaIiYZurmgsH1myyDoDrty9KDg7/c=;
+ b=KRpFmH6qqABSpJDJagV9O9ircq5ZKyT8DH2JzNtLvKE1KbHxnTOdxXfpccShiwcYhZ
+ EH1gCFQ3zQUDLjzMuNeBhSJOMIHPrZGpy/GbvbG60Y/W92tXqV6WmUbYLRJEuMSxxaIi
+ IA7tsOdpk8TVxSOMD2TjlE50gqXo++c2FNWJLLFZOt5nVrPb07zLpIhJxvynNKhkDgau
+ RgMboAFpJN2iqXmO2B40Xh6v1+OeUiQN0FBJysYYwfiQgsjwpWBdX7TiYZliYYyyehpN
+ GtocKLE5XQc81KFAKWmVpPR1vXRfSvb+VtaLeSizapf16Zo2pRbS8ZjypsQRqcAR6EO/
+ dd+w==; darn=nongnu.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1792136767; x=1792741567; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1792136858; x=1792741658; darn=nongnu.org;
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:reply-to:in-reply-to:references:mime-version:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=dWshOP8vnrAxbyRS/QN38SaLQ7rjqxT4inF1al0mW7E=;
- b=AAnWMq/gK/z3bqcgNglCeSyjwGMKK+pSZYsyCIj74yKi3xsLOiVc35EEx2em6Q7uoo
- 57zzaecn5aGflyISOjZdwMCzfMxdHv4yD40M1ezseaqevoxqGvXKG7bCUwOv/n4jZMsK
- pcH3Y81Swy0c3Ujqm2v0rb6Aaiqd21V0Eo/1deMIWER5XKOwNNiq0ILtKJH4piXk+flI
- wdyuPKPT7iiPczNSyRKFuEBdbhpGF4IausyXtQpEEYCIoB2w4BsKVGU1FupmFeKMoaE8
- APIwgRHk8FkkCFXenceRWFjo1cFkT8xlVanXO8cbxK0xCBjDu781AO0uHq4nlm+LwfiY
- 6tRg==
+ bh=srAuSQr6+iSCtJhUw4J2OCKggwuluEEaJwvUk6BuSYI=;
+ b=d03pINP7N4OoI7M9dGjrVAOHy58e9Lx35UWWKr6iFo6l242DWl5q7gbEtFUGf/8ppE
+ Mi8XNz00+PoNutbBPGh/1Z+89fy9NFbh+LexIkG3cwpeJ9NjrZQS4U68FM3gG9eu7po2
+ DtUd1g8tBJTlh/g7TehWaMOfg08xKWfoOPvLOpN/EIbiHWklI2u6Qu5ewg0pdbfHghGO
+ cyNmin6rrXrLT0lWLUMquRg1rJB7fPm6imRGqAHWPKeYUSql/azl4N0bBCLs/hlrRahU
+ DfUjZPbaR7BX2hAXroUTumWqAuImNWPSKN9QiPLlmDONUEIfE7xpBVFs9i1gEjEcDw66
+ buvw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792136767; x=1792741567;
+ d=1e100.net; s=20260707; t=1792136858; x=1792741658;
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:reply-to:in-reply-to:references:mime-version:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=dWshOP8vnrAxbyRS/QN38SaLQ7rjqxT4inF1al0mW7E=;
- b=L31Ost6INIpEllTZnZJvVgFdoXMpiGisjoG3HETdJkLuJCetEZcOckrpCMeVOHXhnJ
- nUiInwfZi/YHjzURBygANPY64C8TV7thWcAe7Ju2c8EUIjnyIyGp/C4ciFsXuOyvgmP6
- zzExBr2qIDCeoCcAA7gaoMls+tMrRwdUkQntPdSOuevkS0NwEHipIchIxb3uDcbs8a6V
- 6xxpXycMt8W0l++aiyxtwvwo00pRJE8otLnUD+1lSLA7dZD/kLcW/imOVWoQlRHqkpF6
- Mv6zBEFzK8lWSsYsPg5fU4zM+mqsPUoR5++VXT5Rho3YEOm2Dtq8Xk7oN8I7iAQSEOW+
- zfrA==
+ bh=srAuSQr6+iSCtJhUw4J2OCKggwuluEEaJwvUk6BuSYI=;
+ b=KoS/yNWq4OW+vzPzsWfaZWl956SzJkOX+se7sV3ObeQx8XQArOn8xj7tHJl9u9Nmph
+ VOaa+VpwBpt2bM3K8Llnf4qZkB9jhKiJgST8JpVEw+worNLkCXs/oPAslwO4hMDeI17A
+ YQP/7bS1HizghXWwdhKgHamvdi+uWmpXWLMOklSW0i6+cPI85iToVdUxsiTWdEnJT7SJ
+ MhZ7PHRBX2SUnkVNrOaZyVAqtnnwHSVnK4/5fgwufWpzWnaS/hkRFRp0sJiV+D51AkYV
+ bxL9wxxFHM9Yx32Fq7H4JAjhK23o7lwIqO9znq7MOW53SuBMgLO9fnzNKhlbH/Zuc3pL
+ nqPQ==
 X-Forwarded-Encrypted: i=1;
- AKwUvByyTE4kbZtANDg4DfwHz14f6RSqKPcEugtDtcfvM1FEASl42NgOqAwmaonC+nI97kuv9snTq7ilS/FQ@nongnu.org
-X-Gm-Message-State: AFq9FYJZhEfFwzElTpzxviB4aH7iomjr6jCud/hPIMo4mZvU6p4wKpUH
- TzAAmmbJ9m3hAhC/7FBlxasVX6Ru+aVaOEvQy8W3kC5Fr+mFNzUASzhKkE1LxoKanmdPw05YDKz
- C+cL/NF46wYxdeLpU1W5v/WJwFsqyw1c=
-X-Gm-Gg: AYBFou03PU9s14pOq1xKi9RBTjyUUaFhVw6IdF1tHSpAPNcO+WKblhdoD+CGJGyRvNs
- 4nkcAhtRHgO2JzEFmuEa6tYeTfr4tIyRCvBQ+wNeFDe+zCXQ2Ot0IKJcF0Lb0Tvacs8n1Lt+7KU
- FDx8JGif8GVck8oQ3/TQAAI9eJzLQs2FbRJVizU8tSpbySiWJTeDnJ7skD11Si4yejHWSwXfj5l
- c/SP8BOSF/isAGb4s59h3P8/U6cz5HsazzCogQdsgzbzHZrFQQiUOR9Q7OJqYTjKtLJ7WQ791VX
- GnjlHN7lmVI9rchNzT9c7g1Yt2dl2wV1hWk0PQqGdF15BWEDcACuoxA=
-X-Received: by 2002:a05:6402:21d2:b0:6af:e26c:f6ad with SMTP id
- 4fb4d7f45d1cf-6b17c27d33amr13141437a12.39.1792136766714; Fri, 16 Oct 2026
- 00:46:06 -0700 (PDT)
+ AKwUvBzqr2RQNWho0qNidM5a8D/M/vQ4vBO2cjxeURFvWVKYWW30opv9u2beRNpc2sKox/Kop66+/BYhlvBb@nongnu.org
+X-Gm-Message-State: AFq9FYIv4sH5nyl2y0YJ7HoVuCqON0RXfkVtam8rhXKVqL5Qb++qN7ZJ
+ DHoEFc4kWtAUrqTAeRcq+dn04FMO7CpITuKVsumL4A6iYoFSIBFuZtC7dTDkR5TjogC7SfCCfQL
+ rfXJadmeunW1LbeMDTQf8R+cRj/iEqJY=
+X-Gm-Gg: AYBFou3nl/nzls9VHNFoo9rvW9StFHdWnfzYJnhLgqvcGrHPLjcLgcwaVlvWdZKuHVZ
+ BZJV+JONIngltbYNdkQmpfC+lb/txuW8r9RxHrww/357rlDnTr5+YV/T6oBMFQyshxcQaQm8TlA
+ vCL6x2ZfIiW9UQOOPjgbpYApZAD4g4gyZQqau6PPHTnrNtXl+0fg/hvFDZ241Ru5bgl7LEKqgVX
+ jt3+vzuTfOwtJUm4EmkfyVJ3ULwSWqL0NuZ6SykAp8Vba7h4/PZM5mIlvvLpq8dvlP6X81aZNAI
+ 0wrNmLEYxWPm+mkJY+ScPWogkZrfIfZvfOHea5f8LFTNBAarK7eE5Cc=
+X-Received: by 2002:a05:6402:1ccf:b0:6aa:b341:3f9a with SMTP id
+ 4fb4d7f45d1cf-6b17c28f210mr16510987a12.39.1792136857665; Fri, 16 Oct 2026
+ 00:47:37 -0700 (PDT)
 MIME-Version: 1.0
 References: <20261014094224.1976-1-luoyonggang@gmail.com>
- <6da8ceed-7ff4-497b-9499-a0d5d3925e15@kernel.org>
-In-Reply-To: <6da8ceed-7ff4-497b-9499-a0d5d3925e15@kernel.org>
+ <8f2da1a8-25fa-4773-a9f0-1da56c0d29d4@oss.qualcomm.com>
+In-Reply-To: <8f2da1a8-25fa-4773-a9f0-1da56c0d29d4@oss.qualcomm.com>
 From: Yonggang Luo <luoyonggang@gmail.com>
-Date: Fri, 16 Oct 2026 15:45:53 +0800
-X-Gm-Features: AclHuK_kKqMANioqEfV05t7_Ls7bgGJG-gMqc2WRcSVav3Ha0Uuqpc9uQpe_ty8
-Message-ID: <CAE2XoE8qJ7baHd_2xsUc4jQF8OUu0_epDc2GMLUH1YtVAA0=XQ@mail.gmail.com>
+Date: Fri, 16 Oct 2026 15:47:25 +0800
+X-Gm-Features: AclHuK961PcyDjAqx7lE3pGkFXe3kzF7S4W5Wqbv6ZxBAtsQQWgQ686oeQ4dxRI
+Message-ID: <CAE2XoE-0B9nc9T_Mn8+HU1h_tKscJYKX1biZ=Lf+p+aMmuxKvg@mail.gmail.com>
 Subject: Re: [PATCH 16/34] hw/virtio/virtio-mem: Avoid call to target_info()
  in class_init
-To: David Hildenbrand <david@kernel.org>
+To: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
 Cc: qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>, 
  Cornelia Huck <cohuck@redhat.com>,
  "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
@@ -100,6 +100,7 @@ Cc: qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
  Eric Farman <farman@linux.ibm.com>, 
  Ani Sinha <anisinha@redhat.com>, qemu-s390x@nongnu.org, 
  Gerd Hoffmann <kraxel@redhat.com>, Stefano Garzarella <sgarzare@redhat.com>, 
+ David Hildenbrand <david@kernel.org>, 
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
  Alexander Bulekov <alxndr@bu.edu>, Laurent Vivier <lvivier@redhat.com>,
  =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@oss.qualcomm.com>, 
@@ -112,9 +113,8 @@ Cc: qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
  Fam Zheng <fam@euphon.net>, 
  Markus Armbruster <armbru@redhat.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>, 
  Paolo Bonzini <pbonzini@redhat.com>, Matthew Rosato <mjrosato@linux.ibm.com>, 
- Chao Liu <chao.liu@processmission.com>, 
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
- Max Filippov <jcmvbkbc@gmail.com>, Weiwei Li <liwei1518@gmail.com>,
+ Chao Liu <chao.liu@processmission.com>, Max Filippov <jcmvbkbc@gmail.com>, 
+ Weiwei Li <liwei1518@gmail.com>,
  Richard Henderson <richard.henderson@linaro.org>, 
  Brian Cain <brian.cain@oss.qualcomm.com>,
  Darren Kenny <darren.kenny@oracle.com>, 
@@ -122,8 +122,8 @@ Cc: qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
  Stafford Horne <shorne@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::533;
- envelope-from=luoyonggang@gmail.com; helo=mail-ed1-x533.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::534;
+ envelope-from=luoyonggang@gmail.com; helo=mail-ed1-x534.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -147,10 +147,10 @@ Reply-To: luoyonggang@gmail.com
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Oct 16, 2026 at 3:37=E2=80=AFPM David Hildenbrand <david@kernel.org=
-> wrote:
+On Thu, Oct 15, 2026 at 1:22=E2=80=AFAM Pierrick Bouvier
+<pierrick.bouvier@oss.qualcomm.com> wrote:
 >
-> On 10/14/26 11:41, Yonggang Luo wrote:
+> On 10/14/2026 2:41 AM, Yonggang Luo wrote:
 > > Done by merge virtio_mem_legacy_guests_properties into virtio_mem_prope=
 rties.
 > > As we already have vmem->unplugged_inaccessible handle in virtio_mem_de=
@@ -207,27 +207,12 @@ ass, const void *data)
 > >
 > >      set_bit(DEVICE_CATEGORY_MISC, dc->categories);
 >
-> Now a property introspection shows properties that don't make any sense f=
-or
-> other targets.
->
-> I don't see the value, really.
+> Not sure what happened with the sending, but it seems like this series
+> has been split in two threads.
 
-This is the only way I can get a usable qemu-system(single-binary),
-looks ugly but I have already tried other means.
-
-Using "is_avaiable" basically has the same effect like the one before
-this change.
-And renaming the QOM name would cause much more issues. I'll wait for
-others to do these.
-I've tried my best, sorry.
-
->
-> --
-> Cheers,
->
-> David
->
+I accidentally broke the sending procedure, till I found it's too
+late, what I am confused about is why when I recover to send
+the rest, it's not in the same threads. I am using git-publish.
 
 
 --=20
