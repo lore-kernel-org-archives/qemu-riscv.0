@@ -4,65 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E05C1CCA462
-	for <qemu-riscv@archiver.kernel.org>; Fri, 16 Oct 2026 08:13:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1EF0CCA464
+	for <qemu-riscv@archiver.kernel.org>; Fri, 16 Oct 2026 09:09:27 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xHd41-00084M-6Q; Fri, 16 Oct 2026 04:13:17 -0400
+	id 1xHdwG-0002KD-TY; Fri, 16 Oct 2026 05:09:21 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <karthika.b@cdac.in>)
- id 1xHd40-000848-8h; Fri, 16 Oct 2026 04:13:16 -0400
-Received: from mailsender.cdac.in ([196.1.113.117]
- helo=mailsender-core1.pune.cdac.in)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <karthika.b@cdac.in>)
- id 1xHd3v-0006Th-EO; Fri, 16 Oct 2026 04:13:16 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=cdac.in; s=default;
- t=1792138069; bh=YkaY2bPB7qZ4iKFjQGhf5TqtqVui81Uow0xdD0bbLLg=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=TWipURGpl9uP1uJxW9o8RvNYoS9GBg985FVpW+P6NWnyIVhWhpfnnjOBbSlGXZsfR
- 09zr5gQmtoUJ7v/5JrhgLCKWzgswX1aftUqH/ClSCzPtxXhkTi4xuU4prTfc6jNuy0
- jDjosS0PNzIlyffiYwxfw5A1FKw+1LH+vgdbWnjU=
-Received: from mscr-int2.pune.cdac.in (mscr-int2.pune.cdac.in [10.208.193.12])
- by mailsender.cdac.in (8.15.2/8.15.2/Debian-22ubuntu3) with ESMTP id
- 69G87nq13825155; Fri, 16 Oct 2026 13:37:49 +0530
-Received: from mailgw-cip.pune.cdac.in (mscr-haproxy.pune.cdac.in
- [10.208.193.46])
- by mscr-int2.pune.cdac.in (Postfix) with ESMTP id B512A10014456;
- Fri, 16 Oct 2026 13:37:38 +0530 (IST)
-X-Auth: karthika.b@cdac.in
-Received: from hdg164.tvm.cdac.in (hd_hdg164.tvm.cdac.in [10.176.18.107])
- (Authenticated sender: karthika.b@cdac.in)
- by mailgw-cip.pune.cdac.in (Postfix) with ESMTPSA id 8300614E2700;
- Fri, 16 Oct 2026 13:37:38 +0530 (IST)
-From: Karthika B <karthika.b@cdac.in>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, sreenadh@cdac.in, raokk@cdac.in,
- Karthika B <karthika.b@cdac.in>
-Subject: [PATCH 0/7] RISC-V: Add CDAC VEGA machine support
-Date: Fri, 16 Oct 2026 13:37:00 +0530
-Message-ID: <20261016080709.17331-1-karthika.b@cdac.in>
+ (Exim 4.90_1) (envelope-from <fritchleybohrer@gmail.com>)
+ id 1xHdvs-0002ID-Vd
+ for qemu-riscv@nongnu.org; Fri, 16 Oct 2026 05:08:58 -0400
+Received: from mail-pj2-x0b.google.com ([2607:f8b0:4864:39::b])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <fritchleybohrer@gmail.com>)
+ id 1xHdvn-00039s-RY
+ for qemu-riscv@nongnu.org; Fri, 16 Oct 2026 05:08:53 -0400
+Received: by mail-pj2-x0b.google.com with SMTP id
+ d9443c01a7336-2e609985789so23289915ad.1
+ for <qemu-riscv@nongnu.org>; Fri, 16 Oct 2026 02:08:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1792141729; x=1792746529; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=qaRD/4q9PGRUjXYuBhoz03xHv+WwWzOxZlY6uZE5R9A=;
+ b=nqyJrWrGdXxv7BMJ/fJUFSxziM3HopVqxBTZq8PUc0vmtjPyucENolqx7sJtyRaVOA
+ gOuGHrsJlufsep4X98VGRzzHknCXuDwzdBTeKUMn1Wz79dC3tgeVPiG3fOjl1/FBKWBu
+ FIHWc6HHAFzAqIy34D4zAW+PUv7C/nxFyEdS/iMPpcG/18bNSvMm1Qb+YU+dqPtP0AqZ
+ ZkYl7q+clBAC21q1jxnKuMzey8rVb3S8LC5JKuRMgyjcnm9S4/ZhYnMZyrOFrfOBmycX
+ LPJhqXZbYaPbeuTaQWNOx0u2EmVFTiTu3UZ2jP2Ma0+1n0mgsgzaTr/9vrcfasuec0ml
+ +9QQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1792141729; x=1792746529;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=qaRD/4q9PGRUjXYuBhoz03xHv+WwWzOxZlY6uZE5R9A=;
+ b=i6cclKnzYJpjKlhCpzKDqfCrtwJ+Lefgc4p59/JLcF+3OBm/jte9rL+Rm73mjNJvuq
+ TMIuh0bqTaSiyxvFALmRXS9TrpYtWX30y2yjwtUCHqWBzkE9mBtEcWyNXSnF4P9KximU
+ hiqDIbZKQEkXfeD+j93uVhgxhSshfNSSJjX8UKPtvmYVYPN/BVCZh/23a8ndrFLrjK2p
+ J/L20BMmJbfXsB/GV4vzBM2Tk3HkfasZFg+hkiydeRVV+l+Q8og4+aRiKtsRHxiJlap5
+ LvoiCVVvGYBC3j82exWgh60xoE6YDJCXhEBVRdboxh66a5r2+st9RBtqmbpl4+QIkkBQ
+ UBUw==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBxbM8qdM+wBOD57PSyNXerWXTEkQ5CXwyWGSHA1rMgsjlLSHr7sxNzakflBzEIqtUC2g3EWupxh2Asb@nongnu.org
+X-Gm-Message-State: AFq9FYJTn3yWN1yR1j5fnOluMWD1OXVWaWyK8zYdJjFy6uKr9J3d2uvS
+ mXy4IgWJ4x/NDi7LCPtb7P5hgM2GMoVto5244SCx+ttIVOWJkS7Cmo8A
+X-Gm-Gg: AYBFou2KBB6zZHyeSR4RjYdIxg7ezFm+0cmKSZSFG0OsmOr9RToERjbQxGiP62taGy6
+ KNok379bUca/cJoByCnheooZrpFOR205u26DAVFw5XFsbAct3Rxe1T1QgGCo3+j0EiYTwlzNo/4
+ V9CDhIQDAN8W/l3E1gz5ZtZSzcJwVPvUQV/cWe0xgZNJ9icKedX7SV85tuksTUPez6fY8VPGxW5
+ QlIhSP2L0K0LftZUengPOOT6XwCAMosXNJjydbpQR97Hg+DEyAsxmKv5pP+o60q0m5hWwJ+ETQp
+ 9BDDWH1vKUuxG+dASx0cmBwiWh3+OUel6c73EhIGnrmQ1lApe2JQJ7FWzgU7xnl+0N9O+1zpLPV
+ Fn7OVx0yRq8paRul+ZOugIH4IY4LwPM27s8VjejR0qystG/wdv/lM3XvaLE4H3CzNRhw80gpjIp
+ on2P3M2VYgPK3V3mzjcO/3pvWi2w+yZObRAiMr5Jm745Anp/sKxtfCKx0altCpdEKlXN5BYUfe1
+ P8du8odew4TdozA+NEWn2IXyw==
+X-Received: by 2002:a17:903:40c5:b0:2df:8382:918b with SMTP id
+ d9443c01a7336-2e8427156c6mr189417185ad.0.1792141728259; 
+ Fri, 16 Oct 2026 02:08:48 -0700 (PDT)
+Received: from Dell-WorkStation.localdomain ([152.175.67.81])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2e97e5d51b5sm6914525ad.8.2026.10.16.02.08.43
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 16 Oct 2026 02:08:47 -0700 (PDT)
+From: Zephyr Li <fritchleybohrer@gmail.com>
+To: alistair.francis@wdc.com
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, palmer@dabbelt.com,
+ daniel.barboza@oss.qualcomm.com, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com, farosas@suse.de,
+ lvivier@redhat.com, pbonzini@redhat.com,
+ Zephyr Li <fritchleybohrer@gmail.com>
+Subject: [PATCH] hw/riscv/riscv-iommu: encode debug translation ranges
+Date: Fri, 16 Oct 2026 17:08:32 +0800
+Message-ID: <20261016090832.38530-1-fritchleybohrer@gmail.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <385625713.441366.1761727810206@webmail2.cdac.in>
-References: <385625713.441366.1761727810206@webmail2.cdac.in>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CDAC-PUNE-MailScanner-Information: Please contact the ISP for more
- information
-X-CDAC-PUNE-MailScanner-ID: B512A10014456.ACF51
-X-CDAC-PUNE-MailScanner: Found to be clean
-X-CDAC-PUNE-MailScanner-SpamCheck: not spam, SpamAssassin (not cached,
- score=-0.999, required 6, ALL_TRUSTED -1.00, URIBL_BLOCKED 0.00)
-X-CDAC-PUNE-MailScanner-From: karthika.b@cdac.in
-Received-SPF: pass client-ip=196.1.113.117; envelope-from=karthika.b@cdac.in;
- helo=mailsender-core1.pune.cdac.in
+Received-SPF: pass client-ip=2607:f8b0:4864:39::b;
+ envelope-from=fritchleybohrer@gmail.com; helo=mail-pj2-x0b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -79,214 +103,284 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This series adds QEMU machine support for VEGA, a RISC-V SoC family
-developed by C-DAC (Centre for Development of Advanced Computing,
-India) as part of the DIR-V processor program.
+The debug translation response aligns the translated physical address to
+the effective translation range, but always reports S=0. For a request
+inside a superpage, the response therefore identifies the wrong 4 KiB
+physical page.
 
-VEGA series of microprocessors are developed as part of the
-Microprocessor Development Programme, initiated and funded by MeitY
-(Ministry of Electronics and Information Technology, Government of
-India), with the mission objective to design and develop
-indigenously a family of microprocessors, related IPs, and the
-complete ecosystem to enable fully indigenous product development
-catering to various requirements in the strategic, industrial, and
-commercial sectors. VEGA is developed at C-DAC, Thiruvananthapuram.
+For effective ranges larger than 4 KiB, set S and encode the range size
+using trailing ones in the PPN field. Keep the existing response format
+for 4 KiB translations.
 
-Background
-----------
-VEGA is a series of 32-bit and 64-bit single/multi-core RISC-V
-processors (Thejas32 and Thejas64) developed under the DIR-V program,
-integrated with multi-level caches, an MMU, and a coherent
-interconnect on real silicon. This series adds a QEMU 'vega' machine
-model supporting both the Thejas32 (RV32) and Thejas64 (RV64)
-variants, modelled on real silicon behaviour rather than a
-synthetic/virtual platform.
+The RISC-V IOMMU specification permits reporting a 4 KiB translation even
+when the page tables use superpages. Reporting the effective range is an
+implementation choice; this change does not claim that S=1 is mandatory
+for every translation through a superpage mapping.
 
-More details on the VEGA processor series:
-  https://vegaprocessors.in/
-VEGA documentation:
-  https://cdac-vega.gitlab.io/
+Add debug-response tests for S-stage-only 4 KiB, 64 KiB NAPOT, and 2 MiB
+translations, G-stage-only 2 MiB translations, and nested S4K/G2M,
+S2M/G4K, and S2M/G2M mappings. Check requests inside large ranges and at
+both ends. The mixed nested cases verify that the response uses the
+smaller effective translation granularity.
 
-The model has been validated against Aries boards (Thejas32) and
-Thejas64 SoCs, booting:
-  - bare-metal ELF payloads via -bios (no DTB, fixed UART framing),
-    for both RV32 and RV64, using the VEGA SDK's example UART
-    "hello world" application
-  - Linux via BBL with a user-supplied -dtb describing the SoC (RV64)
+Fixes: a7aa525b93c3 ("hw/riscv/riscv-iommu: add DBG support")
+Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/3552
+Signed-off-by: Zephyr Li <fritchleybohrer@gmail.com>
+---
+ hw/riscv/riscv-iommu.c         |  14 ++-
+ tests/qtest/iommu-riscv-test.c | 193 +++++++++++++++++++++++++++++++++
+ 2 files changed, 206 insertions(+), 1 deletion(-)
 
-What's included
-----------------
- - hw/riscv/vega.c            - machine model, device creation, boot flow.
-                                 Note: VEGA does not generate its device
-                                 tree internally; -dtb is required for any
-                                 -kernel boot (see note below)
- - hw/intc/vega_plic.c        - CDAC PLIC variant (register layout
-                                 differs from the generic riscv,plic0;
-                                 see patch N/N for details)
- - hw/intc/vega_aclint.c      - ACLINT MSWI/SSWI/MTIMER, with the
-                                 STIMECMP handling VEGA's boot ROM /
-                                 BBL relies on
- - target/riscv/cpu.c         - adds TYPE_RISCV_CPU_VEGA32 and
-                                 TYPE_RISCV_CPU_VEGA64, CPU subtypes
-                                 baking in VEGA's fixed baseline (IMA +
-                                 S/U + Zicsr/Zifencei + SV32/SV39), so
-                                 -M vega boots on either architecture
-                                 without a manual -cpu string; see note
-                                 below on why both are parented on
-                                 sifive-u rather than the generic base
-                                 CPU type
- - docs/system/riscv/vega.rst - user-facing documentation
- - tests/functional/riscv32/test_vega.py,
-   tests/functional/riscv64/test_vega.py
-                               - functional tests booting -M vega on
-                                 both architectures (bare-metal on
-                                 both; bare-metal + Linux/BBL on
-                                 riscv64), fetching small test binaries
-                                 from a stable, checksummed external
-                                 asset repository
- - MAINTAINERS entry
-
-Notable hardware characteristics reviewers should know up front
------------------------------------------------------------------
- - The PLIC and CLINT/ACLINT are co-located at the same base address
-   on real VEGA silicon (0x20010000). This is not a QEMU modelling
-   error; it reflects the actual SoC memory map.
- - The PLIC aperture is 0x400 bytes, sized for the current maximum
-   hart count on this SoC family; it is not the generic upstream PLIC
-   aperture size.
- - UART register framing differs between boot modes: bare-metal always
-   uses shift=2/io-width=4 (fixed 32-bit stride), while Linux boot
-   reads reg-shift from the DTB serial node, since the two boot paths
-   exercise the hardware through different firmware layers.
- - TYPE_RISCV_CPU_VEGA32/VEGA64 are parented on TYPE_RISCV_CPU_SIFIVE_U
-   rather than TYPE_RISCV_CPU_BASE or TYPE_RISCV_BARE_CPU.
-   TYPE_RISCV_CPU_BASE's default misa_ext includes RVH, and the
-   class-level misa_ext merge is OR-only (a subtype cannot clear a bit
-   its parent already set), so RVH could not be disabled from a
-   TYPE_RISCV_CPU_BASE-derived subtype. TYPE_RISCV_BARE_CPU avoids
-   that, but unconditionally forces max_satp_mode to 'bare' for any
-   CPU in its lineage regardless of what the subtype configures, which
-   breaks paging. TYPE_RISCV_CPU_SIFIVE_U has neither issue, but
-   silently sets priv_spec to PRIV_VERSION_1_10_0 (an older RISC-V
-   privileged spec version) rather than the current one. This surfaced
-   as a real boot hang against production BBL/DTB pairs (BBL's
-   delegate_traps() mideleg assertion failed) that was not visible in
-   simpler test boots, since the hang depends on firmware built
-   against a newer priv spec than 1.10.0. Both VEGA CPU subtypes
-   explicitly override priv_spec back to PRIV_VERSION_LATEST to fix
-   this; anyone deriving a new CPU subtype from a SiFive-family parent
-   should be aware this default does not propagate the way ISA
-   extension bits might be assumed to.
- - VEGA does not generate a device tree internally. -dtb is required
-   for any -kernel (Linux/BBL) boot; the machine errors out clearly if
-   a kernel is given without -dtb and without -bios firmware. A bare
-   "-M vega" with no boot arguments at all (e.g. qtest's generic
-   smoke tests) is a valid, inert state and does not error. This keeps
-   the initial series scoped to what has been directly tested;
-   internal FDT generation may follow as a later series.
- - PLIC and CLINT compatible strings are "cdac,plic-1.0.0" and
-   "riscv,clint0" respectively. CDAC's own Buildroot-based BBL/Linux
-   builds use a CDAC-specific PLIC driver matched against the former,
-   and use the generic CLINT compatible string directly (no
-   CDAC-specific CLINT driver exists in any current VEGA firmware
-   variant). A DTB intended to boot stock, unmodified riscv-pk/BBL
-   (which only recognises "riscv,plic0" verbatim) will need to
-   additionally advertise that generic string for the PLIC node.
-
-What is NOT included / deliberately left out
----------------------------------------------
- - No AIA/APLIC/IMSIC support: current VEGA silicon does not implement
-   AIA, so that code path (present in earlier internal revisions) has
-   been removed rather than left as dead code.
- - No internal device-tree generation: see note above; -dtb is
-   required for -kernel boots in this series.
- - No SDHCI, SPI, I2C functional models yet: exposed as
-   unimplemented-device stubs matching the real address ranges, so
-   guest software can probe them safely; functional models may follow
-   in later series.
- - No RV32 Linux boot test yet: the functional test suite covers
-   bare-metal on both architectures and a full Linux/BBL boot on
-   riscv64 only, since an RV32 (Thejas32) Linux/BBL boot has not yet
-   been verified; this may follow in a later series once available.
-
-Testing
--------
- - riscv32-softmmu and riscv64-softmmu builds, `make check` clean on
-   both
- - checkpatch.pl clean across the series
- - Functional tests added under tests/functional/riscv32/test_vega.py
-   and tests/functional/riscv64/test_vega.py, passing via both direct
-   invocation and `meson test` on both architectures:
-     - bare-metal "hello world" boot (RV32 and RV64)
-     - full Linux boot via BBL to a login prompt (RV64)
- - Manual testing additionally covered: virtio-net networking, and an
-   extended stress-ng run (CPU, matrix, VM, filesystem, device-access
-   stressors) under Linux on -M vega
-
-We previously posted an early version of VEGA machine support
-(Message-ID: <385625713.441366.1761727810206@webmail2.cdac.in>)
-without a proper cover letter, MAINTAINERS entry, documentation, or
-tests, and sent via a webmail client rather than git send-email,
-which likely affected formatting. This series is a corrected
-resubmission addressing all of that: it is sent via git send-email,
-and adds the documentation, MAINTAINERS entry, and functional tests
-that were missing before. We've since read and followed
-docs/devel/submitting-a-patch.rst in full. Feedback on process as
-well as code is very welcome.
-
-Karthika B (7):
-  hw/intc: Add CDAC VEGA PLIC device model
-  hw/intc: Add CDAC VEGA ACLINT device model
-  target/riscv: Add VEGA32 and VEGA64 CPU types
-  hw/riscv: Add CDAC VEGA machine model
-  docs/system/riscv: Add VEGA machine documentation
-  tests/functional: Add VEGA machine functional tests
-  MAINTAINERS: Add entry for VEGA machine
-
- MAINTAINERS                                 |  14 +
- configs/devices/riscv64-softmmu/default.mak |   1 +
- docs/system/riscv/vega.rst                  | 219 +++++++
- docs/system/target-riscv.rst                |   1 +
- hw/intc/Kconfig                             |   7 +
- hw/intc/meson.build                         |   2 +
- hw/intc/vega_aclint.c                       | 668 ++++++++++++++++++++
- hw/intc/vega_plic.c                         | 517 +++++++++++++++
- hw/riscv/Kconfig                            |  11 +
- hw/riscv/meson.build                        |   1 +
- hw/riscv/vega.c                             | 502 +++++++++++++++
- include/hw/intc/vega_aclint.h               |  84 +++
- include/hw/intc/vega_plic.h                 |  87 +++
- include/hw/riscv/vega.h                     | 136 ++++
- target/riscv/cpu-qom.h                      |   2 +
- target/riscv/cpu.c                          |  25 +
- tests/functional/riscv32/meson.build        |   1 +
- tests/functional/riscv32/test_vega.py       |  32 +
- tests/functional/riscv64/meson.build        |   1 +
- tests/functional/riscv64/test_vega.py       |  63 ++
- 20 files changed, 2374 insertions(+)
- create mode 100644 docs/system/riscv/vega.rst
- create mode 100644 hw/intc/vega_aclint.c
- create mode 100644 hw/intc/vega_plic.c
- create mode 100644 hw/riscv/vega.c
- create mode 100644 include/hw/intc/vega_aclint.h
- create mode 100644 include/hw/intc/vega_plic.h
- create mode 100644 include/hw/riscv/vega.h
- create mode 100644 tests/functional/riscv32/test_vega.py
- create mode 100644 tests/functional/riscv64/test_vega.py
-
+diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
+index 323a041b4a558136819b1cd41452e96481ba164a..67d8456b9d3ed34308ca794e8d700664ebacce0f 100644
+--- a/hw/riscv/riscv-iommu.c
++++ b/hw/riscv/riscv-iommu.c
+@@ -2281,8 +2281,20 @@ static void riscv_iommu_process_dbg(RISCVIOMMUState *s)
+         if (fault) {
+             iova = RISCV_IOMMU_TR_RESPONSE_FAULT | (((uint64_t) fault) << 10);
+         } else {
++            uint64_t ppn;
++
+             iova = iotlb.translated_addr & ~iotlb.addr_mask;
+-            iova = set_field(0, RISCV_IOMMU_TR_RESPONSE_PPN, PPN_DOWN(iova));
++            ppn = PPN_DOWN(iova);
++
++            if (iotlb.addr_mask > TARGET_PAGE_SIZE - 1) {
++                /* Encode the translation range as trailing ones in the PPN. */
++                ppn |= PPN_DOWN(iotlb.addr_mask) >> 1;
++                iova = RISCV_IOMMU_TR_RESPONSE_S;
++            } else {
++                iova = 0;
++            }
++
++            iova = set_field(iova, RISCV_IOMMU_TR_RESPONSE_PPN, ppn);
+         }
+         riscv_iommu_reg_set64(s, RISCV_IOMMU_REG_TR_RESPONSE, iova);
+     }
+diff --git a/tests/qtest/iommu-riscv-test.c b/tests/qtest/iommu-riscv-test.c
+index 26380248912cc281e313e20a3daf1831be1eded3..1cd753c4f243f207dc34b7acbe41ef0d55772cba 100644
+--- a/tests/qtest/iommu-riscv-test.c
++++ b/tests/qtest/iommu-riscv-test.c
+@@ -19,6 +19,12 @@
+ 
+ #define DMA_LEN           4
+ 
++#define DBG_PAGE_SIZE           0x1000ull
++#define DBG_NAPOT_SIZE          0x10000ull
++#define DBG_SUPERPAGE_SIZE      0x200000ull
++#define DBG_TRANSLATED_PA       0x90000000ull
++#define DBG_NESTED_GPA          0x200000ull
++
+ /* RISC-V virt machine PCI configuration */
+ #define RISCV_GPEX_PIO_BASE        0x3000000
+ #define RISCV_BUS_PIO_LIMIT        0x10000
+@@ -35,6 +41,64 @@ typedef struct RiscvIommuTestState {
+     uint64_t iommu_base;
+ } RiscvIommuTestState;
+ 
++typedef struct RiscvIommuDbgTest {
++    const char *name;
++    QRIOMMUTransMode mode;
++    uint64_t s_page_size;
++    uint64_t g_page_size;
++    uint64_t pa;
++    uint64_t expected_response;
++} RiscvIommuDbgTest;
++
++static const RiscvIommuDbgTest debug_tests[] = {
++    {
++        .name = "page-4k",
++        .mode = QRIOMMU_TM_S_STAGE_ONLY,
++        .s_page_size = DBG_PAGE_SIZE,
++        .pa = DBG_TRANSLATED_PA + DBG_PAGE_SIZE,
++        .expected_response = 0x24000400ull,
++    }, {
++        .name = "napot-64k",
++        .mode = QRIOMMU_TM_S_STAGE_ONLY,
++        .s_page_size = DBG_NAPOT_SIZE,
++        .pa = DBG_TRANSLATED_PA,
++        .expected_response = 0x24001e00ull,
++    }, {
++        .name = "superpage",
++        .mode = QRIOMMU_TM_S_STAGE_ONLY,
++        .s_page_size = DBG_SUPERPAGE_SIZE,
++        .pa = DBG_TRANSLATED_PA,
++        .expected_response = 0x2403fe00ull,
++    }, {
++        .name = "g-stage-superpage",
++        .mode = QRIOMMU_TM_G_STAGE_ONLY,
++        .g_page_size = DBG_SUPERPAGE_SIZE,
++        .pa = DBG_TRANSLATED_PA,
++        .expected_response = 0x2403fe00ull,
++    }, {
++        .name = "nested-s4k-g2m",
++        .mode = QRIOMMU_TM_NESTED,
++        .s_page_size = DBG_PAGE_SIZE,
++        .g_page_size = DBG_SUPERPAGE_SIZE,
++        .pa = DBG_TRANSLATED_PA,
++        .expected_response = 0x24001000ull,
++    }, {
++        .name = "nested-s2m-g4k",
++        .mode = QRIOMMU_TM_NESTED,
++        .s_page_size = DBG_SUPERPAGE_SIZE,
++        .g_page_size = DBG_PAGE_SIZE,
++        .pa = DBG_TRANSLATED_PA,
++        .expected_response = 0x24001000ull,
++    }, {
++        .name = "nested-s2m-g2m",
++        .mode = QRIOMMU_TM_NESTED,
++        .s_page_size = DBG_SUPERPAGE_SIZE,
++        .g_page_size = DBG_SUPERPAGE_SIZE,
++        .pa = DBG_TRANSLATED_PA,
++        .expected_response = 0x2403fe00ull,
++    },
++};
++
+ static void riscv_config_qpci_bus(QGenericPCIBus *qpci)
+ {
+     qpci->gpex_pio_base = RISCV_GPEX_PIO_BASE;
+@@ -264,6 +328,129 @@ static void test_riscv_iommu_nested(void)
+     run_riscv_iommu_translation(&cfg);
+ }
+ 
++static void riscv_iommu_dbg_map_leaf(QTestState *qts, uint64_t l1_pa,
++                                    uint64_t l2_pa, uint64_t va, uint64_t pa,
++                                    uint64_t page_size)
++{
++    uint64_t pte = ((pa >> 12) << 10) | QRIOMMU_LEAF_PTE_RW_MASK;
++    uint64_t pte_addr;
++
++    g_assert_cmphex(pa & (page_size - 1), ==, 0);
++
++    if (page_size == DBG_SUPERPAGE_SIZE) {
++        pte_addr = l1_pa + (((va >> 21) & 0x1ff) * sizeof(uint64_t));
++        qtest_writeq(qts, pte_addr, pte);
++    } else if (page_size == DBG_NAPOT_SIZE) {
++        /* A 64 KiB NAPOT PTE has N=1 and PPN[3:0]=1000. */
++        pte |= BIT_ULL(63) | (8ull << 10);
++        va &= ~(DBG_NAPOT_SIZE - 1);
++        for (unsigned i = 0; i < DBG_NAPOT_SIZE / DBG_PAGE_SIZE; i++) {
++            pte_addr = l2_pa + ((((va >> 12) + i) & 0x1ff) *
++                                sizeof(uint64_t));
++            qtest_writeq(qts, pte_addr, pte);
++        }
++    } else {
++        g_assert_cmphex(page_size, ==, DBG_PAGE_SIZE);
++        pte_addr = l2_pa + (((va >> 12) & 0x1ff) * sizeof(uint64_t));
++        qtest_writeq(qts, pte_addr, pte);
++    }
++}
++
++static uint64_t riscv_iommu_dbg_translate(RiscvIommuTestState *state,
++                                         uint64_t iova)
++{
++    uint64_t request;
++
++    qtest_writeq(state->qts,
++                 state->iommu_base + RISCV_IOMMU_REG_TR_REQ_IOVA, iova);
++    request = ((uint64_t)state->testdev->devfn << 40) |
++              RISCV_IOMMU_TR_REQ_CTL_GO_BUSY;
++    qtest_writeq(state->qts,
++                 state->iommu_base + RISCV_IOMMU_REG_TR_REQ_CTL, request);
++
++    request = qtest_readq(state->qts,
++                          state->iommu_base + RISCV_IOMMU_REG_TR_REQ_CTL);
++    g_assert_cmpuint(request & RISCV_IOMMU_TR_REQ_CTL_GO_BUSY, ==, 0);
++
++    return qtest_readq(state->qts,
++                       state->iommu_base + RISCV_IOMMU_REG_TR_RESPONSE);
++}
++
++static void test_riscv_iommu_dbg(gconstpointer data)
++{
++    const RiscvIommuDbgTest *cfg = data;
++    RiscvIommuTestState state = { 0 };
++    uint64_t iova = QRIOMMU_IOVA & ~(DBG_PAGE_SIZE - 1);
++    uint64_t s_pa = cfg->pa;
++    uint64_t page_size = cfg->mode == QRIOMMU_TM_G_STAGE_ONLY ?
++                         cfg->g_page_size : cfg->s_page_size;
++    uint64_t response;
++
++    if (!riscv_iommu_test_setup(&state)) {
++        return;
++    }
++
++    riscv_iommu_check(state.qts, state.iommu_base, cfg->mode);
++    qriommu_build_translation(state.qts, cfg->mode, state.testdev->devfn);
++
++    if (cfg->mode == QRIOMMU_TM_NESTED) {
++        uint64_t g_l1_pa = QRIOMMU_SPACE_OFFS + QRIOMMU_G_L0_PTE_VAL;
++        uint64_t g_l2_pa = QRIOMMU_SPACE_OFFS + QRIOMMU_G_L1_PTE_VAL;
++        uint64_t offset = iova & (DBG_SUPERPAGE_SIZE - 1);
++        uint64_t gpa = DBG_NESTED_GPA + offset;
++        uint64_t pte_addr;
++        uint64_t pte;
++
++        /* Map all S-stage page tables through one 2 MiB G-stage leaf. */
++        riscv_iommu_dbg_map_leaf(state.qts, g_l1_pa, g_l2_pa, 0,
++                                 QRIOMMU_SPACE_OFFS, DBG_SUPERPAGE_SIZE);
++
++        if (cfg->g_page_size == DBG_PAGE_SIZE) {
++            pte_addr = g_l1_pa + (((gpa >> 21) & 0x1ff) * sizeof(uint64_t));
++            pte = ((g_l2_pa >> 12) << 10) | QRIOMMU_NON_LEAF_PTE_MASK;
++            qtest_writeq(state.qts, pte_addr, pte);
++        }
++        riscv_iommu_dbg_map_leaf(state.qts, g_l1_pa, g_l2_pa, gpa,
++                                 cfg->pa + (offset & ~(cfg->g_page_size - 1)),
++                                 cfg->g_page_size);
++        s_pa = gpa & ~(cfg->s_page_size - 1);
++        page_size = MIN(page_size, cfg->g_page_size);
++    }
++
++    if (cfg->mode == QRIOMMU_TM_G_STAGE_ONLY) {
++        riscv_iommu_dbg_map_leaf(state.qts,
++                                 QRIOMMU_SPACE_OFFS + QRIOMMU_G_L0_PTE_VAL,
++                                 QRIOMMU_SPACE_OFFS + QRIOMMU_G_L1_PTE_VAL,
++                                 iova, cfg->pa, cfg->g_page_size);
++    } else {
++        riscv_iommu_dbg_map_leaf(state.qts,
++                                 QRIOMMU_SPACE_OFFS + QRIOMMU_L0_PTE_VAL,
++                                 QRIOMMU_SPACE_OFFS + QRIOMMU_L1_PTE_VAL,
++                                 iova, s_pa, cfg->s_page_size);
++    }
++    qriommu_program_regs(state.qts, state.iommu_base);
++
++    /*
++     * The specification permits reporting a smaller range. These tests
++     * verify QEMU's choice to report the effective translation range.
++     */
++    response = riscv_iommu_dbg_translate(&state, iova);
++    g_assert_cmphex(response, ==, cfg->expected_response);
++
++    if (page_size > DBG_PAGE_SIZE) {
++        /* Check the first and last pages, in addition to the interior. */
++        iova &= ~(page_size - 1);
++        response = riscv_iommu_dbg_translate(&state, iova);
++        g_assert_cmphex(response, ==, cfg->expected_response);
++        response = riscv_iommu_dbg_translate(&state,
++                                            iova + page_size - DBG_PAGE_SIZE);
++        g_assert_cmphex(response, ==, cfg->expected_response);
++    }
++
++    riscv_iommu_test_teardown(&state);
++}
++
+ int main(int argc, char **argv)
+ {
+     g_test_init(&argc, &argv, NULL);
+@@ -275,5 +462,11 @@ int main(int argc, char **argv)
+                    test_riscv_iommu_g_stage_only);
+     qtest_add_func("/iommu-testdev/translation/ns-nested",
+                    test_riscv_iommu_nested);
++    for (unsigned i = 0; i < G_N_ELEMENTS(debug_tests); i++) {
++        g_autofree char *path = g_strdup_printf("/iommu-testdev/debug/%s",
++                                               debug_tests[i].name);
++
++        qtest_add_data_func(path, &debug_tests[i], test_riscv_iommu_dbg);
++    }
+     return g_test_run();
+ }
 -- 
 2.43.0
-
-------------------------------------------------------------------------------------------------------------
-[ C-DAC is on Social-Media too. Kindly follow us at:
-Facebook: https://www.facebook.com/CDACINDIA & Twitter: @cdacindia ]
-
-This e-mail is for the sole use of the intended recipient(s) and may
-contain confidential and privileged information. If you are not the
-intended recipient, please contact the sender by reply e-mail and destroy
-all copies and the original message. Any unauthorized review, use,
-disclosure, dissemination, forwarding, printing or copying of this email
-is strictly prohibited and appropriate legal action will be taken.
-------------------------------------------------------------------------------------------------------------
 
 
