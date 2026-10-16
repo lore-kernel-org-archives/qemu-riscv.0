@@ -4,68 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4EB0CC6B38
-	for <qemu-riscv@archiver.kernel.org>; Fri, 16 Oct 2026 08:02:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1885CCA462
+	for <qemu-riscv@archiver.kernel.org>; Fri, 16 Oct 2026 08:08:48 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xHctE-0001NC-J0; Fri, 16 Oct 2026 04:02:08 -0400
+	id 1xHczS-0003pB-BF; Fri, 16 Oct 2026 04:08:35 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <xiangwencheng@lanxincomputing.com>)
- id 1xHctB-0001MC-13
- for qemu-riscv@nongnu.org; Fri, 16 Oct 2026 04:02:05 -0400
-Received: from va-2-19.ptr.blmpb.com ([209.127.231.19])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <xiangwencheng@lanxincomputing.com>)
- id 1xHct5-0005Mk-A4
- for qemu-riscv@nongnu.org; Fri, 16 Oct 2026 04:02:04 -0400
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- s=s1; d=lanxincomputing-com.20200927.dkim.feishu.cn; t=1792137702;
- h=from:subject:mime-version:from:date:message-id:subject:to:cc:
- reply-to:content-type:mime-version:in-reply-to:message-id;
- bh=rVqwVSb1ecKRYFexgzok1omkUkFfDH95/3y/k9gEVqM=;
- b=Ia14zDNA+jWyaSQ1vY08W2dxtgcI8CJuO7f+V9RbR1Erl5BNal+bPEC1ZTirFalEqo8kND
- Ij3LY+bA2OB7vzI6zG5Ki93aFfFiM/a7PxdOXfxYUeVr+uZXOOuuwCOV3cV+ACdXvGFOtR
- DerY4Vwy77mHbDUBX64iG6nB3RetzpRJB8pXH+Mz4cxwV45ljQfdCt32iU2EQmIY0rF365
- dT4zUytZZDKE42MY8RKSd1dpz4OoQmcfIYUpyi1SvXE3Z7+FzcUt+vBeeirp8+dJlpdldH
- o+w48GpZL8iWK5jHM/AlHBRohFmJZ/IMS2z1VnrY0ug5LKISWscQR9JnpIW/4Q==
-Cc: "Peter Xu" <peterx@redhat.com>, 
- "Richard Henderson" <richard.henderson@linaro.org>, <mst@redhat.com>, 
- <pbonzini@redhat.com>, <philmd@mailo.com>, <qemu-devel@nongnu.org>, 
- <qemu-riscv@nongnu.org>
-Subject: Re: [PATCH v2] virtio: Add aligned ld/st accessors for vring
-X-Lms-Return-Path: <lba+26ad1d9d9+54d4c9+nongnu.org+xiangwencheng@lanxincomputing.com>
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Mozilla Thunderbird
-Content-Type: text/plain; charset=UTF-8
-To: "Peter Maydell" <peter.maydell@linaro.org>
-Date: Fri, 16 Oct 2026 16:01:26 +0800
-Mime-Version: 1.0
-X-Original-From: BillXiang <xiangwencheng@lanxincomputing.com>
-In-Reply-To: <CAFEAcA-hV-eZHfH1FMYNLaFY8M-emt8aN+Nt4MvfhSfkUZv7AQ@mail.gmail.com>
-From: "BillXiang" <xiangwencheng@lanxincomputing.com>
-References: <20260821100856.1794011-1-xiangwencheng@lanxincomputing.com>
- <CAFEAcA_kLpaz0UQi3Q315kLVqvDtxKh77kU2meN9G1_evfKBeQ@mail.gmail.com>
- <bad5c8b3-668f-4893-974f-9dbca8dc6893@linaro.org>
- <02da9676-febf-4389-b09b-5e5d41c1084e@lanxincomputing.com>
- <aoxiBB2Wn8NiL5s6@x1.local>
- <5a2a8e0e-2fa6-4905-9752-b2ed0ab3f0ac@lanxincomputing.com>
- <aprI8xQIDCRTJOV1@x1.local>
- <9d125a95-0fa1-4ea8-a8a6-4869afc629bc@lanxincomputing.com>
- <CAFEAcA-hV-eZHfH1FMYNLaFY8M-emt8aN+Nt4MvfhSfkUZv7AQ@mail.gmail.com>
-Content-Language: en-US
-Message-Id: <e6cab0f9-6a10-43b7-95e5-35609ea3929d@lanxincomputing.com>
-Received: from [127.0.0.1] ([123.120.5.129]) by smtp.feishu.cn with ESMTPS;
- Fri, 16 Oct 2026 16:01:27 +0800
-Received-SPF: pass client-ip=209.127.231.19;
- envelope-from=xiangwencheng@lanxincomputing.com; helo=va-2-19.ptr.blmpb.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, MSGID_FROM_MTA_HEADER=0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ (Exim 4.90_1) (envelope-from <karthika.b@cdac.in>)
+ id 1xHczG-0003o9-CH; Fri, 16 Oct 2026 04:08:24 -0400
+Received: from mailsender.cdac.in ([196.1.113.117]
+ helo=mailsender-core1.pune.cdac.in)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <karthika.b@cdac.in>)
+ id 1xHczA-0005w6-MU; Fri, 16 Oct 2026 04:08:21 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=cdac.in; s=default;
+ t=1792138078; bh=fhREqVjIOaSR1eiA6lBky1Aw8am+YPwicWDTrG5TP9A=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=bSN+dHDkGmG+SMb+/wZxeOwP8ZTAEUkgiOg6NxbKoIcH33av6QQFiv4T+f/Pp4DsU
+ r/bUvH7nrzO2rA07pVNrUQUC1WbXbJ5MrMEUviHsCej2KN25x2j0WXHVlQeg19HwQK
+ KSWR2uaqrZWBPPcZyRP5OCOG76nuBYvvspl6b054=
+Received: from mscr-int2.pune.cdac.in (mscr-int2.pune.cdac.in [10.208.193.12])
+ by mailsender.cdac.in (8.15.2/8.15.2/Debian-22ubuntu3) with ESMTP id
+ 69G87vhZ3825194; Fri, 16 Oct 2026 13:37:58 +0530
+Received: from mailgw-cip.pune.cdac.in (mscr-haproxy.pune.cdac.in
+ [10.208.193.46])
+ by mscr-int2.pune.cdac.in (Postfix) with ESMTP id 79AFF10014455;
+ Fri, 16 Oct 2026 13:37:46 +0530 (IST)
+X-Auth: karthika.b@cdac.in
+Received: from hdg164.tvm.cdac.in (hd_hdg164.tvm.cdac.in [10.176.18.107])
+ (Authenticated sender: karthika.b@cdac.in)
+ by mailgw-cip.pune.cdac.in (Postfix) with ESMTPSA id 3E31A14E17D2;
+ Fri, 16 Oct 2026 13:37:46 +0530 (IST)
+From: Karthika B <karthika.b@cdac.in>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, sreenadh@cdac.in, raokk@cdac.in,
+ Karthika B <karthika.b@cdac.in>, Paolo Bonzini <pbonzini@redhat.com>
+Subject: [PATCH 1/7] hw/intc: Add CDAC VEGA PLIC device model
+Date: Fri, 16 Oct 2026 13:37:01 +0530
+Message-ID: <20261016080709.17331-2-karthika.b@cdac.in>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20261016080709.17331-1-karthika.b@cdac.in>
+References: <385625713.441366.1761727810206@webmail2.cdac.in>
+ <20261016080709.17331-1-karthika.b@cdac.in>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-CDAC-PUNE-MailScanner-Information: Please contact the ISP for more
+ information
+X-CDAC-PUNE-MailScanner-ID: 79AFF10014455.A03F8
+X-CDAC-PUNE-MailScanner: Found to be clean
+X-CDAC-PUNE-MailScanner-SpamCheck: not spam, SpamAssassin (not cached,
+ score=-0.999, required 6, ALL_TRUSTED -1.00, URIBL_BLOCKED 0.00)
+X-CDAC-PUNE-MailScanner-From: karthika.b@cdac.in
+Received-SPF: pass client-ip=196.1.113.117; envelope-from=karthika.b@cdac.in;
+ helo=mailsender-core1.pune.cdac.in
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -81,84 +80,674 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 9/7/2026 6:29 PM, Peter Maydell wrote:
-> On Mon, 7 Sept 2026 at 11:12, BillXiang
-> <xiangwencheng@lanxincomputing.com> wrote:
->>
->> On 9/4/2026 9:34 PM, Peter Xu wrote:
->>> On Tue, Sep 01, 2026 at 10:44:13AM +0800, BillXiang wrote:
->>>> On 8/24/2026 11:23 PM, Peter Xu wrote:
->>>>> On Mon, Aug 24, 2026 at 12:19:15PM +0800, BillXiang wrote:
->>>>>> Hi Richard, I've read your code in accel/tcg/ldst_atomicity.c.inc. D=
-o
->>>>>> you think it would be better to make the load/store_atomic* public?
->>>>>
->>>>> They do not fit by default, as we need to still process unaligned cas=
-es?
->>>>
->>>> You mentioned the use of guest CPU context in [1]. However, what I mea=
-nt
->>>> by load/store_atomic* is code like the following:
->>>>
->>>> static inline uint16_t load_atomic2(void *pv)
->>>> {
->>>>        uint16_t *p =3D __builtin_assume_aligned(pv, 2);
->>>>        return qatomic_read(p);
->>>> }
->>>>
->>>> static inline void store_atomic2(void *pv, uint16_t val)
->>>> {
->>>>        uint16_t *p =3D __builtin_assume_aligned(pv, 2);
->>>>        qatomic_set(p, val);
->>>> }
->>>>
->>>> I consider these to be generic atomic load/store primitives.
->>>
->>> __builtin_assume_aligned() tells the compiler the address is aligned.  =
-What
->>> if it is not?
->>
->> When using __builtin_assume_aligned, the compiler will generate
->> unaligned load/store instructions if the data is not aligned, rather
->> than emitting byte=E2=80=91by=E2=80=91byte code, which may cause errors =
-on processors
->> that do not support unaligned accesses. That's what I mean: callers must
->> ensure @addr is naturally aligned to the access size.
->=20
-> Indeed. That's why the ldst_atomicity.c.inc code only calls them
-> when it can guarantee the alignment, with fallback cases for
-> when it isn't. Those are the lowest level internal functions
-> in that code, and the higher level ones are things like
-> load_atom_2() (which might call load_atomic2() if the address
-> is 2-aligned, or lduw_he_p() if it's not but the caller said
-> it doesn't care about getting a 2-byte-atomic load for an
-> unaligned pointer, or a function to do an atomic 8-byte access
-> and extract the 2 bytes we care about, or if all else fails
-> falling back to "stop all QEMU threads and do a non-atomic read".
->=20
-> The difficulty in generalizing that code for device use I suspect
-> is whether the fallback cases remain the right thing to do.
->=20
-> -- PMM
+Signed-off-by: Karthika B <karthika.b@cdac.in>
+---
+ hw/intc/Kconfig             |   7 +
+ hw/intc/meson.build         |   2 +
+ hw/intc/vega_plic.c         | 517 ++++++++++++++++++++++++++++++++++++
+ include/hw/intc/vega_plic.h |  87 ++++++
+ 4 files changed, 613 insertions(+)
+ create mode 100644 hw/intc/vega_plic.c
+ create mode 100644 include/hw/intc/vega_plic.h
 
-Hi all,
+diff --git a/hw/intc/Kconfig b/hw/intc/Kconfig
+index 636d00b7e8..942ec4d0e5 100644
+--- a/hw/intc/Kconfig
++++ b/hw/intc/Kconfig
+@@ -117,3 +117,10 @@ config LOONGARCH_EXTIOI
+ 
+ config LOONGARCH_DINTC
+     bool
++
++config VEGA_ACLINT
++    bool
++
++config VEGA_PLIC
++    bool
++    select MSI_NONBROKEN
+diff --git a/hw/intc/meson.build b/hw/intc/meson.build
+index fac2d228f9..4c9eb0e9c4 100644
+--- a/hw/intc/meson.build
++++ b/hw/intc/meson.build
+@@ -68,6 +68,8 @@ specific_ss.add(when: 'CONFIG_RISCV_APLIC', if_true: files('riscv_aplic.c'))
+ specific_ss.add(when: 'CONFIG_RISCV_IMSIC', if_true: files('riscv_imsic.c'))
+ specific_ss.add(when: 'CONFIG_SIFIVE_PLIC', if_true: files('sifive_plic.c'))
+ specific_ss.add(when: 'CONFIG_XICS', if_true: files('xics.c', 'xive2.c'))
++specific_ss.add(when: 'CONFIG_VEGA_ACLINT', if_true: files('vega_aclint.c'))
++specific_ss.add(when: 'CONFIG_VEGA_PLIC', if_true: files('vega_plic.c'))
+ specific_ss.add(when: ['CONFIG_KVM', 'CONFIG_XICS'],
+ 		if_true: files('xics_kvm.c'))
+ specific_ss.add(when: 'CONFIG_PSERIES', if_true: files('xics_spapr.c', 'spapr_xive.c'))
+diff --git a/hw/intc/vega_plic.c b/hw/intc/vega_plic.c
+new file mode 100644
+index 0000000000..7ad58b0023
+--- /dev/null
++++ b/hw/intc/vega_plic.c
+@@ -0,0 +1,517 @@
++/*
++ * VEGA PLIC (Platform-Level Interrupt Controller) emulation
++ *
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ *
++ * Copyright (c) 2025 C-DAC (Centre for Development of Advanced Computing)
++ *
++ * This program is free software; you can redistribute it and/or modify it
++ * under the terms and conditions of the GNU General Public License,
++ * version 2 or later, as published by the Free Software Foundation.
++ *
++ * This program is distributed in the hope it will be useful, but WITHOUT
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
++ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
++ * more details.
++ *
++ * You should have received a copy of the GNU General Public License along with
++ * this program.  If not, see <http://www.gnu.org/licenses/>.
++ */
++
++#include "qemu/osdep.h"
++#include "qapi/error.h"
++#include "qemu/log.h"
++#include "qemu/module.h"
++#include "qemu/error-report.h"
++#include "hw/core/sysbus.h"
++#include "hw/core/qdev-properties.h"
++#include "hw/intc/vega_plic.h"
++#include "target/riscv/cpu.h"
++#include "migration/vmstate.h"
++#include "hw/core/irq.h"
++#include "system/kvm.h"
++
++static bool addr_between(uint32_t addr, uint32_t base, uint32_t num)
++{
++    return addr >= base && addr - base < num;
++}
++
++static PLICMode char_to_mode(char c)
++{
++    switch (c) {
++    case 'U': return PLICMode_U;
++    case 'S': return PLICMode_S;
++    case 'M': return PLICMode_M;
++    default:
++        error_report("plic: invalid mode '%c'", c);
++        exit(1);
++    }
++}
++
++static uint32_t atomic_set_masked(uint32_t *a, uint32_t mask, uint32_t value)
++{
++    uint32_t old, new, cmp = qatomic_read(a);
++
++    do {
++        old = cmp;
++        new = (old & ~mask) | (value & mask);
++        cmp = qatomic_cmpxchg(a, old, new);
++    } while (old != cmp);
++
++    return old;
++}
++
++static void vega_plic_set_pending(VegaPLICState *plic, int irq, bool level)
++{
++    atomic_set_masked(&plic->pending[irq >> 5], 1 << (irq & 31), -!!level);
++}
++
++static void vega_plic_set_claimed(VegaPLICState *plic, int irq, bool level)
++{
++    atomic_set_masked(&plic->claimed[irq >> 5], 1 << (irq & 31), -!!level);
++}
++
++static uint32_t vega_plic_claimed(VegaPLICState *plic, uint32_t addrid)
++{
++    uint32_t max_irq = 0;
++    uint32_t max_prio = plic->target_priority[addrid];
++    int i, j;
++    int num_irq_in_word = 32;
++
++    for (i = 0; i < plic->bitfield_words; i++) {
++        uint32_t pending_enabled_not_claimed =
++                        (plic->pending[i] & ~plic->claimed[i]) &
++                            plic->enable[addrid * plic->bitfield_words + i];
++
++        if (!pending_enabled_not_claimed) {
++            continue;
++        }
++
++        if (i == (plic->bitfield_words - 1)) {
++            /*
++             * If plic->num_sources is not multiple of 32, num-of-irq in last
++             * word is not 32. Compute the num-of-irq of last word to avoid
++             * out-of-bound access of source_priority array.
++             */
++            num_irq_in_word = plic->num_sources - ((plic->bitfield_words - 1) << 5);
++        }
++
++        for (j = 0; j < num_irq_in_word; j++) {
++            int irq = (i << 5) + j;
++            uint32_t prio = plic->source_priority[irq];
++            int enabled = pending_enabled_not_claimed & (1 << j);
++
++            if (enabled && prio > max_prio) {
++                max_irq = irq;
++                max_prio = prio;
++            }
++        }
++    }
++
++    return max_irq;
++}
++
++static void vega_plic_update(VegaPLICState *plic)
++{
++    int addrid;
++
++    /* raise irq on harts where this irq is enabled */
++    for (addrid = 0; addrid < plic->num_addrs; addrid++) {
++        uint32_t hartid = plic->addr_config[addrid].hartid;
++        PLICMode mode = plic->addr_config[addrid].mode;
++        bool level = !!vega_plic_claimed(plic, addrid);
++
++        switch (mode) {
++        case PLICMode_M:
++            qemu_set_irq(plic->m_external_irqs[hartid - plic->hartid_base], level);
++            break;
++        case PLICMode_S:
++            qemu_set_irq(plic->s_external_irqs[hartid - plic->hartid_base], level);
++            break;
++        default:
++            break;
++        }
++    }
++}
++
++static const uint32_t vega_priority_regs = 0x10;
++static const uint32_t vega_pending_regs = 0x4;
++static const uint32_t vega_enable_reg_size = 0x100;
++
++static uint64_t vega_plic_read(void *opaque, hwaddr addr, unsigned size)
++{
++    VegaPLICState *plic = opaque;
++
++    if (addr_between(addr, plic->priority_base, vega_priority_regs << 2)) {
++        /* Between 0x00 and 0x40 (Write only) */
++        uint32_t irq = (addr >> 2) * 8;
++        uint32_t result = 0;
++
++        for (uint32_t i = 0; i < 8; i++) {
++            if (irq != 0) {
++                result |= (plic->source_priority[irq] & 0xf) << (i * 4);
++            }
++            irq++;
++        }
++        return result;
++    } else if (addr_between(addr, plic->pending_base,
++                            vega_pending_regs << 2)) {
++        /* Between 0x80 and 0x90 (Read only) */
++        uint32_t word = (addr - plic->pending_base) >> 2;
++
++        return plic->pending[word];
++    } else if (addr_between(addr, plic->enable_base, vega_enable_reg_size)) {
++        /* Between 0x100 and 0x200 */
++        uint32_t addrid = (addr - plic->enable_base) / plic->enable_stride;
++        uint32_t wordid = (addr - plic->enable_base -
++                          (addrid * plic->enable_stride)) >> 2;
++
++        if (wordid < plic->bitfield_words) {
++            return plic->enable[addrid * plic->bitfield_words + wordid];
++        }
++    } else if (addr_between(addr, plic->context_base,
++                            plic->num_addrs * plic->context_stride)) {
++        uint32_t addrid = (addr - plic->context_base) / plic->context_stride;
++        uint32_t contextid = (addr & (plic->context_stride - 1));
++
++        if (contextid == 0) {
++            return plic->target_priority[addrid];
++        } else if (contextid == 4) {
++            uint32_t max_irq = vega_plic_claimed(plic, addrid);
++
++            if (max_irq) {
++                vega_plic_set_pending(plic, max_irq, false);
++                vega_plic_set_claimed(plic, max_irq, true);
++            }
++
++            vega_plic_update(plic);
++            return max_irq;
++        }
++    }
++
++    qemu_log_mask(LOG_GUEST_ERROR,
++                  "%s: Invalid register read 0x%" HWADDR_PRIx "\n",
++                  __func__, addr);
++    return 0;
++}
++
++static void vega_plic_write(void *opaque, hwaddr addr, uint64_t value,
++                            unsigned size)
++{
++    VegaPLICState *plic = opaque;
++
++    if (addr_between(addr, plic->priority_base, vega_priority_regs << 2)) {
++        /* Between 0x00 and 0x40 (Write only) */
++        uint32_t irq = (addr >> 2) * 8;
++
++        for (uint32_t i = 0; i < 8; i++) {
++            if (irq != 0) {
++                plic->source_priority[irq] = (value >> (i * 4)) & 0xff;
++                vega_plic_update(plic);
++            }
++            irq++;
++        }
++    } else if (addr_between(addr, plic->pending_base,
++                            vega_pending_regs << 2)) {
++        /* Between 0x80 and 0x90 (Read only) */
++        qemu_log_mask(LOG_GUEST_ERROR,
++                      "%s: invalid pending write: 0x%" HWADDR_PRIx "",
++                      __func__, addr);
++    } else if (addr_between(addr, plic->enable_base, vega_enable_reg_size)) {
++        /* Between 0x100 and 0x200 */
++        uint32_t addrid = (addr - plic->enable_base) / plic->enable_stride;
++        uint32_t wordid = (addr - plic->enable_base -
++                          (addrid * plic->enable_stride)) >> 2;
++
++        if (wordid < plic->bitfield_words) {
++            plic->enable[addrid * plic->bitfield_words + wordid] = value;
++        } else {
++            qemu_log_mask(LOG_GUEST_ERROR,
++                          "%s: Invalid enable write 0x%" HWADDR_PRIx "\n",
++                          __func__, addr);
++        }
++    } else if (addr_between(addr, plic->context_base,
++                            plic->num_addrs * plic->context_stride)) {
++        uint32_t addrid = (addr - plic->context_base) / plic->context_stride;
++        uint32_t contextid = (addr & (plic->context_stride - 1));
++
++        if (contextid == 0) {
++            if (value <= plic->num_priorities) {
++                plic->target_priority[addrid] = value;
++                vega_plic_update(plic);
++            }
++        } else if (contextid == 4) {
++            if (value < plic->num_sources) {
++                vega_plic_set_claimed(plic, value, false);
++                vega_plic_update(plic);
++            }
++        } else {
++            qemu_log_mask(LOG_GUEST_ERROR,
++                          "%s: Invalid context write 0x%" HWADDR_PRIx "\n",
++                          __func__, addr);
++        }
++    } else {
++        qemu_log_mask(LOG_GUEST_ERROR,
++                      "%s: Invalid register write 0x%" HWADDR_PRIx "\n",
++                      __func__, addr);
++    }
++}
++
++static const MemoryRegionOps vega_plic_ops = {
++    .read = vega_plic_read,
++    .write = vega_plic_write,
++    .endianness = DEVICE_LITTLE_ENDIAN,
++    .valid = {
++        .min_access_size = 4,
++        .max_access_size = 4
++    }
++};
++
++static void vega_plic_reset(DeviceState *dev)
++{
++    VegaPLICState *s = VEGA_PLIC(dev);
++    int i;
++
++    memset(s->source_priority, 0, sizeof(uint32_t) * s->num_sources);
++    memset(s->target_priority, 0, sizeof(uint32_t) * s->num_addrs);
++    memset(s->pending, 0, sizeof(uint32_t) * s->bitfield_words);
++    memset(s->claimed, 0, sizeof(uint32_t) * s->bitfield_words);
++    memset(s->enable, 0, sizeof(uint32_t) * s->num_enables);
++
++    for (i = 0; i < s->num_harts; i++) {
++        qemu_set_irq(s->m_external_irqs[i], 0);
++        qemu_set_irq(s->s_external_irqs[i], 0);
++    }
++}
++
++/*
++ * parse PLIC hart/mode address offset config
++ *
++ * "M"              1 hart with M mode
++ * "MS,MS"          2 harts, 0-1 with M and S mode
++ * "M,MS,MS,MS,MS"  5 harts, 0 with M mode, 1-5 with M and S mode
++ */
++static void parse_hart_config(VegaPLICState *plic)
++{
++    int addrid, hartid, modes, m;
++    const char *p;
++    char c;
++
++    /* count and validate hart/mode combinations */
++    addrid = 0, hartid = 0, modes = 0;
++    p = plic->hart_config;
++    while ((c = *p++)) {
++        if (c == ',') {
++            if (modes) {
++                addrid += ctpop8(modes);
++                hartid++;
++                modes = 0;
++            }
++        } else {
++            m = 1 << char_to_mode(c);
++            if (modes == (modes | m)) {
++                error_report("plic: duplicate mode '%c' in config: %s",
++                             c, plic->hart_config);
++                exit(1);
++            }
++            modes |= m;
++        }
++    }
++    if (modes) {
++        addrid += ctpop8(modes);
++        hartid++;
++        modes = 0;
++    }
++
++    plic->num_addrs = addrid;
++    plic->num_harts = hartid;
++
++    /* store hart/mode combinations */
++    plic->addr_config = g_new(PLICAddr, plic->num_addrs);
++    addrid = 0, hartid = plic->hartid_base;
++    p = plic->hart_config;
++    while ((c = *p++)) {
++        if (c == ',') {
++            if (modes) {
++                hartid++;
++                modes = 0;
++            }
++        } else {
++            m = char_to_mode(c);
++            plic->addr_config[addrid].addrid = addrid;
++            plic->addr_config[addrid].hartid = hartid;
++            plic->addr_config[addrid].mode = m;
++            modes |= (1 << m);
++            addrid++;
++        }
++    }
++}
++
++static void vega_plic_irq_request(void *opaque, int irq, int level)
++{
++    VegaPLICState *s = opaque;
++
++    if (level > 0) {
++        vega_plic_set_pending(s, irq, true);
++        vega_plic_update(s);
++    }
++}
++
++static void vega_plic_realize(DeviceState *dev, Error **errp)
++{
++    VegaPLICState *s = VEGA_PLIC(dev);
++    int i;
++
++    memory_region_init_io(&s->mmio, OBJECT(dev), &vega_plic_ops, s,
++                          TYPE_VEGA_PLIC, s->aperture_size);
++    sysbus_init_mmio(SYS_BUS_DEVICE(dev), &s->mmio);
++
++    parse_hart_config(s);
++
++    if (!s->num_sources) {
++        error_setg(errp, "plic: invalid number of interrupt sources");
++        return;
++    }
++
++    s->bitfield_words = (s->num_sources + 31) >> 5;
++    s->num_enables = s->bitfield_words * s->num_addrs;
++    s->source_priority = g_new0(uint32_t, s->num_sources);
++    s->target_priority = g_new0(uint32_t, s->num_addrs);
++    s->pending = g_new0(uint32_t, s->bitfield_words);
++    s->claimed = g_new0(uint32_t, s->bitfield_words);
++    s->enable = g_new0(uint32_t, s->num_enables);
++
++    qdev_init_gpio_in(dev, vega_plic_irq_request, s->num_sources);
++
++    s->s_external_irqs = g_malloc(sizeof(qemu_irq) * s->num_harts);
++    qdev_init_gpio_out(dev, s->s_external_irqs, s->num_harts);
++
++    s->m_external_irqs = g_malloc(sizeof(qemu_irq) * s->num_harts);
++    qdev_init_gpio_out(dev, s->m_external_irqs, s->num_harts);
++
++    /*
++     * We can't allow the supervisor to control SEIP as this would allow the
++     * supervisor to clear a pending external interrupt which will result in
++     * lost a interrupt in the case a PLIC is attached. The SEIP bit must be
++     * hardware controlled when a PLIC is attached.
++     */
++    for (i = 0; i < s->num_harts; i++) {
++        RISCVCPU *cpu = RISCV_CPU(qemu_get_cpu(s->hartid_base + i));
++        if (riscv_cpu_claim_interrupts(cpu, MIP_SEIP) < 0) {
++            error_setg(errp, "SEIP already claimed");
++            return;
++        }
++    }
++
++}
++
++static const VMStateDescription vmstate_vega_plic = {
++    .name = "riscv_vega_plic",
++    .version_id = 1,
++    .minimum_version_id = 1,
++    .fields = (const VMStateField[]) {
++            VMSTATE_VARRAY_UINT32(source_priority, VegaPLICState,
++                                  num_sources, 0,
++                                  vmstate_info_uint32, uint32_t),
++            VMSTATE_VARRAY_UINT32(target_priority, VegaPLICState,
++                                  num_addrs, 0,
++                                  vmstate_info_uint32, uint32_t),
++            VMSTATE_VARRAY_UINT32(pending, VegaPLICState, bitfield_words, 0,
++                                  vmstate_info_uint32, uint32_t),
++            VMSTATE_VARRAY_UINT32(claimed, VegaPLICState, bitfield_words, 0,
++                                  vmstate_info_uint32, uint32_t),
++            VMSTATE_VARRAY_UINT32(enable, VegaPLICState, num_enables, 0,
++                                  vmstate_info_uint32, uint32_t),
++            VMSTATE_END_OF_LIST()
++        }
++};
++
++static const Property vega_plic_properties[] = {
++    DEFINE_PROP_STRING("hart-config", VegaPLICState, hart_config),
++    DEFINE_PROP_UINT32("hartid-base", VegaPLICState, hartid_base, 0),
++    /* number of interrupt sources including interrupt source 0 */
++    DEFINE_PROP_UINT32("num-sources", VegaPLICState, num_sources, 1),
++    DEFINE_PROP_UINT32("num-priorities", VegaPLICState, num_priorities, 0),
++    /* interrupt priority register base starting from source 0 */
++    DEFINE_PROP_UINT32("priority-base", VegaPLICState, priority_base, 0),
++    DEFINE_PROP_UINT32("pending-base", VegaPLICState, pending_base, 0),
++    DEFINE_PROP_UINT32("enable-base", VegaPLICState, enable_base, 0),
++    DEFINE_PROP_UINT32("enable-stride", VegaPLICState, enable_stride, 0),
++    DEFINE_PROP_UINT32("context-base", VegaPLICState, context_base, 0),
++    DEFINE_PROP_UINT32("context-stride", VegaPLICState, context_stride, 0),
++    DEFINE_PROP_UINT32("aperture-size", VegaPLICState, aperture_size, 0),
++};
++
++static void vega_plic_class_init(ObjectClass *klass, const void *data)
++{
++    DeviceClass *dc = DEVICE_CLASS(klass);
++
++    device_class_set_legacy_reset(dc, vega_plic_reset);
++    device_class_set_props(dc, vega_plic_properties);
++    dc->realize = vega_plic_realize;
++    dc->vmsd = &vmstate_vega_plic;
++}
++
++static const TypeInfo vega_plic_info = {
++    .name          = TYPE_VEGA_PLIC,
++    .parent        = TYPE_SYS_BUS_DEVICE,
++    .instance_size = sizeof(VegaPLICState),
++    .class_init    = vega_plic_class_init,
++};
++
++static void vega_plic_register_types(void)
++{
++    type_register_static(&vega_plic_info);
++}
++
++type_init(vega_plic_register_types)
++
++/*
++ * Create PLIC device.
++ */
++DeviceState *vega_plic_create(hwaddr addr, char *hart_config,
++    uint32_t num_harts,
++    uint32_t hartid_base, uint32_t num_sources,
++    uint32_t num_priorities, uint32_t priority_base,
++    uint32_t pending_base, uint32_t enable_base,
++    uint32_t enable_stride, uint32_t context_base,
++    uint32_t context_stride, uint32_t aperture_size)
++{
++    DeviceState *dev = qdev_new(TYPE_VEGA_PLIC);
++    int i;
++    VegaPLICState *plic;
++
++    assert(enable_stride == (enable_stride & -enable_stride));
++    assert(context_stride == (context_stride & -context_stride));
++    qdev_prop_set_string(dev, "hart-config", hart_config);
++    qdev_prop_set_uint32(dev, "hartid-base", hartid_base);
++    qdev_prop_set_uint32(dev, "num-sources", num_sources);
++    qdev_prop_set_uint32(dev, "num-priorities", num_priorities);
++    qdev_prop_set_uint32(dev, "priority-base", priority_base);
++    qdev_prop_set_uint32(dev, "pending-base", pending_base);
++    qdev_prop_set_uint32(dev, "enable-base", enable_base);
++    qdev_prop_set_uint32(dev, "enable-stride", enable_stride);
++    qdev_prop_set_uint32(dev, "context-base", context_base);
++    qdev_prop_set_uint32(dev, "context-stride", context_stride);
++    qdev_prop_set_uint32(dev, "aperture-size", aperture_size);
++    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
++    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, addr);
++
++    plic = VEGA_PLIC(dev);
++
++    for (i = 0; i < plic->num_addrs; i++) {
++        int cpu_num = plic->addr_config[i].hartid;
++        CPUState *cpu = qemu_get_cpu(cpu_num);
++
++        if (plic->addr_config[i].mode == PLICMode_M) {
++            qdev_connect_gpio_out(dev, cpu_num - hartid_base + num_harts,
++                                  qdev_get_gpio_in(DEVICE(cpu), IRQ_M_EXT));
++        }
++        if (plic->addr_config[i].mode == PLICMode_S) {
++            qdev_connect_gpio_out(dev, cpu_num - hartid_base,
++                                  qdev_get_gpio_in(DEVICE(cpu), IRQ_S_EXT));
++        }
++    }
++
++    return dev;
++}
+diff --git a/include/hw/intc/vega_plic.h b/include/hw/intc/vega_plic.h
+new file mode 100644
+index 0000000000..f26d91a2a3
+--- /dev/null
++++ b/include/hw/intc/vega_plic.h
+@@ -0,0 +1,87 @@
++/*
++ * VEGA PLIC (Platform-Level Interrupt Controller) interface
++ *
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ *
++ * Copyright (c) 2025 C-DAC (Centre for Development of Advanced Computing)
++ *
++ * This program is free software; you can redistribute it and/or modify it
++ * under the terms and conditions of the GNU General Public License,
++ * version 2 or later, as published by the Free Software Foundation.
++ *
++ * This program is distributed in the hope it will be useful, but WITHOUT
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
++ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
++ * more details.
++ *
++ * You should have received a copy of the GNU General Public License along with
++ * this program.  If not, see <http://www.gnu.org/licenses/>.
++ */
++
++#ifndef HW_VEGA_PLIC_H
++#define HW_VEGA_PLIC_H
++
++#include "hw/core/sysbus.h"
++#include "qom/object.h"
++
++#define TYPE_VEGA_PLIC "riscv.vega.plic"
++
++typedef struct VegaPLICState VegaPLICState;
++DECLARE_INSTANCE_CHECKER(VegaPLICState, VEGA_PLIC,
++                         TYPE_VEGA_PLIC)
++
++typedef enum PLICMode {
++    PLICMode_U,
++    PLICMode_S,
++    PLICMode_M
++} PLICMode;
++
++typedef struct PLICAddr {
++    uint32_t addrid;
++    uint32_t hartid;
++    PLICMode mode;
++} PLICAddr;
++
++struct VegaPLICState {
++    /*< private >*/
++    SysBusDevice parent_obj;
++
++    /*< public >*/
++    MemoryRegion mmio;
++    uint32_t num_addrs;
++    uint32_t num_harts;
++    uint32_t bitfield_words;
++    uint32_t num_enables;
++    PLICAddr *addr_config;
++    uint32_t *source_priority;
++    uint32_t *target_priority;
++    uint32_t *pending;
++    uint32_t *claimed;
++    uint32_t *enable;
++
++    /* config */
++    char *hart_config;
++    uint32_t hartid_base;
++    uint32_t num_sources;
++    uint32_t num_priorities;
++    uint32_t priority_base;
++    uint32_t pending_base;
++    uint32_t enable_base;
++    uint32_t enable_stride;
++    uint32_t context_base;
++    uint32_t context_stride;
++    uint32_t aperture_size;
++
++    qemu_irq *m_external_irqs;
++    qemu_irq *s_external_irqs;
++};
++
++DeviceState *vega_plic_create(hwaddr addr, char *hart_config,
++    uint32_t num_harts,
++    uint32_t hartid_base, uint32_t num_sources,
++    uint32_t num_priorities, uint32_t priority_base,
++    uint32_t pending_base, uint32_t enable_base,
++    uint32_t enable_stride, uint32_t context_base,
++    uint32_t context_stride, uint32_t aperture_size);
++
++#endif
+-- 
+2.43.0
 
-Sorry for the long delay on this patch. I've been occupied with other=20
-matters.
 
-As discussed above, it would be better to address all the same failures,=20
-but it is also difficult to cover all the fallback cases.
+------------------------------------------------------------------------------------------------------------
+[ C-DAC is on Social-Media too. Kindly follow us at:
+Facebook: https://www.facebook.com/CDACINDIA & Twitter: @cdacindia ]
 
-Does anyone have any further suggestions? Could we just focus on the=20
-specific virtio case where the address is aligned and needs to be=20
-accessed atomically? Or could we use Peter's patch[1] to automatically=20
-switch to aligned access?
+This e-mail is for the sole use of the intended recipient(s) and may
+contain confidential and privileged information. If you are not the
+intended recipient, please contact the sender by reply e-mail and destroy
+all copies and the original message. Any unauthorized review, use,
+disclosure, dissemination, forwarding, printing or copying of this email
+is strictly prohibited and appropriate legal action will be taken.
+------------------------------------------------------------------------------------------------------------
 
-
-Thanks,
-
---
-BillXiang
-
-[1] https://lore.kernel.org/qemu-devel/aoxiBB2Wn8NiL5s6@x1.local/
 
