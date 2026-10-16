@@ -4,99 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2EC00CCF2C1
-	for <qemu-riscv@archiver.kernel.org>; Fri, 16 Oct 2026 13:57:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B9BBCCA46C
+	for <qemu-riscv@archiver.kernel.org>; Fri, 16 Oct 2026 14:07:12 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xHiQO-0004Po-62; Fri, 16 Oct 2026 09:56:44 -0400
+	id 1xHiZg-0006zl-QW; Fri, 16 Oct 2026 10:06:21 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1xHiQI-0004ON-Ju
- for qemu-riscv@nongnu.org; Fri, 16 Oct 2026 09:56:40 -0400
-Received: from mail-yw1-x1132.google.com ([2607:f8b0:4864:20::1132])
+ (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
+ id 1xHiZU-0006yl-59
+ for qemu-riscv@nongnu.org; Fri, 16 Oct 2026 10:06:12 -0400
+Received: from mail-ed1-x531.google.com ([2a00:1450:4864:20::531])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1xHiQF-0003gq-Gx
- for qemu-riscv@nongnu.org; Fri, 16 Oct 2026 09:56:38 -0400
-Received: by mail-yw1-x1132.google.com with SMTP id
- 00721157ae682-8ac4806e210so48361177b3.1
- for <qemu-riscv@nongnu.org>; Fri, 16 Oct 2026 06:56:35 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1792158994; cv=none;
+ (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
+ id 1xHiZS-0004jm-CD
+ for qemu-riscv@nongnu.org; Fri, 16 Oct 2026 10:06:07 -0400
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-6b1f4d8e09aso2602682a12.1
+ for <qemu-riscv@nongnu.org>; Fri, 16 Oct 2026 07:06:05 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1792159565; cv=none;
  d=google.com; s=arc-20260327;
- b=GWSwSmyntKRSxeuO2Nl4dDhs33nFZYC3SDWcGaunxzLkNyLnCq1N/22CUxOkrFPyMo
- Rw0ZGnTjnUVehY+BEXBu/qSksf2waTtPoe4I/DhFZZKzlz6SHCSiEsjOpPqpfTbU5guU
- Bm5fBwDREx/36DheqrZDrx2EEkQe3UuheIUh//5/ITS0rXuZsDxb9sskvTv/7//0JnAQ
- pmZfaFdNC0SDutBN4VeBYuMWBiyJD8h0Lva3tNGKDCjHtfiv/M/DXbhUmXXO0qfLookg
- Wr2xprzu8Y3Sv9f6X4/iWnDTTXadIMCD3+XZ1xF0rSgKvk22opDdM5zWWULezHrZ1klK
- FRJQ==
+ b=FzUe8UmUYeI92Nm90k6o2jc2t+I/GAB//NkzEIwFA9gi2ndOmcAvlaigxjOMZAcWAK
+ 9+7Q2uoNHqp129lXAj0QUWc+k/uN8fEqppGq6EfZC1LPR6Y1DbD9zt9ny4rjitxAETef
+ 6ckph+iaRLgy25c9r6K4701pLZmNavU/gCGARZ2D4ukBxdgeTxuCxoQX8NtZv+9S7eBI
+ PkFPPPIoY1oMg410fbLh2VJDQenNJ31UCOUPp6tDntmZUDbnDbdOn+ujh3yY4oQxBUy7
+ 2rRsLlsPaRfFWw88p0hFF1/6kP6IHghxEmkbqvZDQDmmIIr+s3zndrt0r8vvKfnPhfNW
+ Tueg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=fTdKnUdCFdyXZeAX9yFe/q/eC5y0O8GVJQgxbqY+Rz4=;
- fh=/UHyZht4nPgvr40LoNeof84sJLcTrpJB7ZZxoEbpBTw=;
- b=sSm51k+Fj8AUzP3GWY3NhUpYnwiVu9r6egkYgj8xk+pcT5VcDc8Spla1IfTasXEyh8
- 4VjTbjXp3nFt5p4xB+PC0fvZEwxYTiHT0T23mbT4TkTB3fXdqR2Wle665eQf2l77+Urd
- YtRQ9O61Jcm/Y8ZdrdY9mev8/yjPGbGOp+izK659rYZ1gNoVJV+j2cxn/lLz0pPgnHaH
- C5hyryp2p8FYvh7UwDN0lmW/Q3/bDKX9HP7Nmy4YmzL/dTbrPejsvDsYrCUc0aVLjYdo
- LSm8QxQXwdpE2PxEMbCqXXVBPA885HDK2JDn/LhFEnGBkgZHmNnpmc53Pi3O4sUI/k7Y
- soBQ==; darn=nongnu.org
+ :reply-to:in-reply-to:references:mime-version:dkim-signature;
+ bh=J9IImW9GgYpIi/RCk8fzQ0zy4Zwv383B/5op/lAYV24=;
+ fh=xQUJebv5gW9RYDblA3X8azZu3w+BaXfGwRL81daC/Jk=;
+ b=if9GT+7oV+0bWEK63P2AlFOAYrwyxatzDKs7mupl2bBOblMNeGrx9TnRVsHEbkGfgJ
+ TlI9okt4+ZM6k/DrFe25KlSkRbc152Mg+kPFeIImjKcw4jtrHzbyR/SPMupqOdibl2Po
+ n/gI85lL/+FYSzG5TyEsGCiGY6Jz3rz80EamRO71vOgVzm5O7K9zNotLgc3ZrofOgjCd
+ EQa1W6WKOQqRmGJfdrTgcI6OkcNJA2R/a3df3g3u/T8s/eEYQJzGahjXOU/NMB6w1XfS
+ W1AFgssH8PB0R9S8KFENUF78ak/WKwSQ2nocWJgGvJpuBvhLPZiqkAwdSBhpGJqYRsy9
+ BqOA==; darn=nongnu.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1792158994; x=1792763794; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1792159565; x=1792764365; darn=nongnu.org;
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=fTdKnUdCFdyXZeAX9yFe/q/eC5y0O8GVJQgxbqY+Rz4=;
- b=Q0+vhXY3Rt+RY+oJUxClce2ZGfVQZyYPR3az6zu0zYL6bREHbf9XpeGcRv/GJOEvPd
- TSqheX1kuC/I+L54FTjjKbEIJ+sttI8j5DRjuqR9SX419XqyjF4ORu5VpCI0TZeq7N1I
- U1+mfu1g9NSSm9cf3qb9/FFIPq29YEI48xm5vGn+81MHIoSnToYmsmvMc9cmHK7CzlZn
- r+8pp4bFAQae+V+aMj/iAKYJk0WC4LwNmt/xMbfV/FqxVbTSUdNUyMQbG9a9J1oi+zsX
- ErQfC/GZvsHLoCxktFFZyp1Zf4XPZ7d6/0BsIEiEClURShqMOobh0nHlst2E+nH3yAMU
- 87ng==
+ :date:from:reply-to:in-reply-to:references:mime-version:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=J9IImW9GgYpIi/RCk8fzQ0zy4Zwv383B/5op/lAYV24=;
+ b=OIMtTIZwfQ4ORk6ygTzGEIE7Lv64oLpfsBmb0TUzXL0Mk4Z/4xe8oOusxdqwn+WaXw
+ UhQkVmP1lTCRrtVtZhITTu2zQ73ShlD5HjgD8QFqjYegS1fCUPG+BU8TQt6aC0T/o+0g
+ efSiOswEzolnz9tFp9rh3r+ito3t6917GU/H4NjYvvij/X8GRU+pAJzq2BAcpkdE8HmI
+ en7UowcDJSVfwm4Lrs/mxRBg/XNehu0lzovPDIXBm6ZNxWuJuMkxj17vfdWekeiQ1R9z
+ uVUWcmjKrSiGsnzoAt6p8zRbw8LsGeBusuqOPJz1/Mmqcx6VKKYzwDzzWe6nrBI/ZTuH
+ qokA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792158994; x=1792763794;
+ d=1e100.net; s=20260707; t=1792159565; x=1792764365;
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :date:from:reply-to:in-reply-to:references:mime-version:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=fTdKnUdCFdyXZeAX9yFe/q/eC5y0O8GVJQgxbqY+Rz4=;
- b=Mtto+Dj1/nj5nb+FKCkPPEYknY7U6djzM6s79D6+5LUfly7kt4gJ49HoYUrO7K+cT5
- R9tXMXk4VQwIm4Nn+7b1TeVlT/I/++JgahsfJU2kyLSMIvNtNV/QFu3XZaBnueiy4vy1
- NcV9o8f1hAnD/gIG69jjoX4wxjFI0+5vWuqIjO2EJUnaKRby5y6UxVZOrvB3hPuGWbtn
- n9nA91I60x19LhR8zAtHuHp7npTbpXnKs//Twl2JzmXSu5T1/nvIdudoB5S+chri3+Sz
- 0z/1ahGqvUpo1Eq44ITFUX+Q9dE9tth5CA3AY1cYtoVx/bMZxOwZrFV2IxDBtaMVgzQ5
- 3D5g==
+ bh=J9IImW9GgYpIi/RCk8fzQ0zy4Zwv383B/5op/lAYV24=;
+ b=hTpp0Bbjuv+Qgf1s0lYSvcVs51oepXBieTIgSJjFyOBmUchQf9Fcr6JQyfz5MmF+Qy
+ VHitW5hQTpoo8YR9oz92jW/JYgm8istxVYGlh6MFkr2hsLwMaatFUNYiVf8nHMTYeHGx
+ RFVEEervJhxzhHOshw4ozBaQ/7kZFwAcA8OpKUhTgLqX9ziqGFmXfz5vNvQocbPN9B/L
+ r0h9jYEDKPMGp2QmFXjdtT2SoYtmiCtRq9eC36Rfc4YZ7sw76ovWdG7tXe6s1f6GAvwb
+ lkkeh4ytn4rSb4ICDHl0VPMF3Tn75e/yVQxrNYkDJjOGHllMnTxr1TrU4QJy/5PcGOMq
+ PSoA==
 X-Forwarded-Encrypted: i=1;
- AKwUvBxjqOBWVfpW1kPvUqBbIr35GemWOkXkdSg3SxrbdT+QnUbyJomfH9IAOb34akZkXUCPXkbHPZSH+dD6@nongnu.org
-X-Gm-Message-State: AFq9FYIbJaZzJhZuYiXz1yynotPOl+9CSDP9WDHDRoLCUPvhkelGyc0M
- /3/umVdFfbmvXCd315mvJiVOx2CfHFLQLx7sjqF59VoE04bYGtsAgXzeWMchgWcEyGNdJ8NVBD7
- fpObFZ5I+IpErdlU8xXh4yZEvKMhpwzgRvpSiaUOaNA==
-X-Gm-Gg: AYBFou2K9+v6kjVFhrZhhhhO0SDx8n+6fT4D2vPZ+GaVb9OEPw9HY7mUw/75y/xb9eG
- w3TLAAdUIsaAsFw50pHLmKrq8X8NtoCUy6qoKCPWycNrHRwJ3Bi8xYEdzlutefD+gT3IAweq9kK
- d/0M/hBaHyJ0HLw577skgcj4XFdnUPIA7vQH8jNk2Ei2jhCNGclGCgBDUx46Vqf24tj8EYbXu/n
- W8zVkZPcyHLEVWF8gMfakfpgvkKXIFedf4TVRqP824qQsb7b3y8E/HiJCG79yxzS7LqOUvT9qM+
- Dfc3rj9hD70x6ebuyN37WcugK6r4s9WG9jhCUwvGW5aH+RveXhc9D+rDGMGYTaWiRi8Z35cYRG8
- x/BhQji61UBo8MamTCQHx7HRG69jtWAmuOR02gKk=
-X-Received: by 2002:a05:690c:e641:b0:8ab:48c5:cbce with SMTP id
- 00721157ae682-8b0f217d65fmr71687b3.32.1792158994114; Fri, 16 Oct 2026
- 06:56:34 -0700 (PDT)
+ AKwUvBzTJ0H1r3moyU6bOZ3CLyBnfybCrZKLJOk1uRfe+BRmMEI2xh1L6GA6GnNYek7CVnfSJcrslG5POw2L@nongnu.org
+X-Gm-Message-State: AFq9FYI3viYClovPxqrA/p/BOut2FK4s/mEY4oy1Sh/Cg3tnYs7Q+B8M
+ Gw7rh6THc3BJSTM5vPDa2/inWgc/+9j22puAZ7b5KDQp5o7XD6i/yG82IGzrVgNIYXj7NuvaO1y
+ tNAzHjRv81MytiyqH36XSekoDzIqDvgM=
+X-Gm-Gg: AYBFou0LBvq40N7GVjgH0869KcJFgfC4FXmC3uHONMuMmdQbO8AXGjug8MIq0VOgGsh
+ YuHrmWd1e+0cv3rX1d3ea8V1eWbwo1vuP7Xew0mpiA3mpoFwagEZ2yKizHjYBy3sTkneM3BP65V
+ MErQ1NPJSCC3heFEjIfxTXhgCnLJwVFfOHuViBrESE0fWL09mMm6XQOwyyut+wpF8IawNuZkcon
+ 1XvKwQKiMD/0Vu+/mu3IpnaPjZEFugX7DMTXI5CGNHPgT3DnrTEovHkIDbDd4WfKxxsOBZVDbLf
+ +H1bmUv3Nkr6+ca7F1foTrvm82ctH877G+w0G/8HMtlxxx3QSliZohM=
+X-Received: by 2002:a05:6402:400f:b0:6b1:c526:afa8 with SMTP id
+ 4fb4d7f45d1cf-6b1c526b70fmr10556282a12.9.1792159564415; Fri, 16 Oct 2026
+ 07:06:04 -0700 (PDT)
 MIME-Version: 1.0
 References: <20261015044104.879-1-luoyonggang@gmail.com>
  <CAFEAcA8n9E1jpcOCat0kzv0Q++x7YwK_MNJBJ0qGdtX1-As4zg@mail.gmail.com>
  <CAE2XoE-fgq_c9qONyvfbNi3Ys_hv7yKvGCkk+Wz+rHPW0p65Eg@mail.gmail.com>
  <077274ba-002e-4241-9158-13a3270bddaa@oss.qualcomm.com>
-In-Reply-To: <077274ba-002e-4241-9158-13a3270bddaa@oss.qualcomm.com>
-From: Peter Maydell <peter.maydell@linaro.org>
-Date: Fri, 16 Oct 2026 14:56:22 +0100
-X-Gm-Features: AclHuK8ssUU6FVTl6l9wX-3cDpH8rijJrXQJT0ZI9oWF2AtJ-fysQFU920oTZ_w
-Message-ID: <CAFEAcA-mii9S1NvhKOt=pMha6-OQKheYj7FuMaDVbV2Eoi-3bQ@mail.gmail.com>
+ <CAFEAcA-mii9S1NvhKOt=pMha6-OQKheYj7FuMaDVbV2Eoi-3bQ@mail.gmail.com>
+In-Reply-To: <CAFEAcA-mii9S1NvhKOt=pMha6-OQKheYj7FuMaDVbV2Eoi-3bQ@mail.gmail.com>
+From: Yonggang Luo <luoyonggang@gmail.com>
+Date: Fri, 16 Oct 2026 22:05:51 +0800
+X-Gm-Features: AclHuK-LdFdTnzXiy5jqe912RkVRxxCOyAwgNKxP22ZmT1O2AJBfnTBnW-lNw90
+Message-ID: <CAE2XoE9W+vohRokJ=ePFesJpiTg7hfjSH3c4ptAibFPxAtv8oQ@mail.gmail.com>
 Subject: Re: [PATCH] target-info: dispatch CPU QMP, dump, monitor,
  and Angel semihosting
-To: Brian Cain <brian.cain@oss.qualcomm.com>
-Cc: luoyonggang@gmail.com, qemu-devel@nongnu.org, 
+To: Peter Maydell <peter.maydell@linaro.org>
+Cc: Brian Cain <brian.cain@oss.qualcomm.com>, qemu-devel@nongnu.org, 
  =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@oss.qualcomm.com>, 
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org, 
  David Hildenbrand <david@kernel.org>, Glenn Miles <milesg@linux.ibm.com>,
@@ -126,15 +126,15 @@ Cc: luoyonggang@gmail.com, qemu-devel@nongnu.org,
  Yoshinori Sato <yoshinori.sato@nifty.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1132;
- envelope-from=peter.maydell@linaro.org; helo=mail-yw1-x1132.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::531;
+ envelope-from=luoyonggang@gmail.com; helo=mail-ed1-x531.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -147,49 +147,66 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
+Reply-To: luoyonggang@gmail.com
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, 16 Oct 2026 at 14:51, Brian Cain <brian.cain@oss.qualcomm.com> wrot=
-e:
+On Fri, Oct 16, 2026 at 9:56=E2=80=AFPM Peter Maydell <peter.maydell@linaro=
+.org> wrote:
 >
+> On Fri, 16 Oct 2026 at 14:51, Brian Cain <brian.cain@oss.qualcomm.com> wr=
+ote:
+> >
+> >
+> > On 10/15/2026 4:38 AM, Yonggang Luo wrote:
+> > > On Thu, Oct 15, 2026 at 5:20=E2=80=AFPM Peter Maydell <peter.maydell@=
+linaro.org> wrote:
+> > >> On Thu, 15 Oct 2026 at 05:41, Yonggang Luo <luoyonggang@gmail.com> w=
+rote:
+> > >>> Put query-cpu-definitions, dump notes, monitor, and Angel semihosti=
+ng on
+> > >>> TargetOps[SYS_EMU_TARGET__MAX] and look up by target_arch().
+> > >>> Keep the table in target-ops.c and with a stub
+> > >>>
+> > >>> - Register with a QEMU_ARCH_* bitmask so shared base-arch objects
+> > >>>    can fill both slots (e.g. QEMU_ARCH_ARM is ARM|AARCH64).
+> > >>> - TARGET_INFO_CPU_OP is type_init. A NULL member means no handler.
+> > >>> - Drop stubs/qmp-cpu.c
+> > >>>         stubs/hmp-cmd-info_tlb.c
+> > >>>         stubs/hmp-cmd-info_mem.c
+> > >>>         stubs/dump.c
+> > >>>
+> > >>> Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
 >
-> On 10/15/2026 4:38 AM, Yonggang Luo wrote:
-> > On Thu, Oct 15, 2026 at 5:20=E2=80=AFPM Peter Maydell <peter.maydell@li=
-naro.org> wrote:
-> >> On Thu, 15 Oct 2026 at 05:41, Yonggang Luo <luoyonggang@gmail.com> wro=
-te:
-> >>> Put query-cpu-definitions, dump notes, monitor, and Angel semihosting=
- on
-> >>> TargetOps[SYS_EMU_TARGET__MAX] and look up by target_arch().
-> >>> Keep the table in target-ops.c and with a stub
-> >>>
-> >>> - Register with a QEMU_ARCH_* bitmask so shared base-arch objects
-> >>>    can fill both slots (e.g. QEMU_ARCH_ARM is ARM|AARCH64).
-> >>> - TARGET_INFO_CPU_OP is type_init. A NULL member means no handler.
-> >>> - Drop stubs/qmp-cpu.c
-> >>>         stubs/hmp-cmd-info_tlb.c
-> >>>         stubs/hmp-cmd-info_mem.c
-> >>>         stubs/dump.c
-> >>>
-> >>> Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
-
-> >> Too big a patch touching stuff all over the place with
-> >> insufficient explanation of what it's doing or why.
-> > Oh, sorry, I post is just for demo(DRAFT) for other place to
-> > reference, but git-publish have no way
-> > to title it(maybe because I use it wrongly).
+> > >> Too big a patch touching stuff all over the place with
+> > >> insufficient explanation of what it's doing or why.
+> > > Oh, sorry, I post is just for demo(DRAFT) for other place to
+> > > reference, but git-publish have no way
+> > > to title it(maybe because I use it wrongly).
+> >
+> > git publish has `--subject-prefix=3DPREFIX` - that will let you qualify
+> > this as DRAFT/RFC.
 >
-> git publish has `--subject-prefix=3DPREFIX` - that will let you qualify
-> this as DRAFT/RFC.
+> It's also helpful to edit the commit message for a single-patch
+> RFC so it's clear about the purpose of posting it (or to provide
+> a suitable cover letter on a multi-patch RFC). "Just a draft
+> to go with this other discussion" is totally fine, as long as
+> the commit message says so. (More generally, an RFC should say
+> what you are asking for comments about :-))
 
-It's also helpful to edit the commit message for a single-patch
-RFC so it's clear about the purpose of posting it (or to provide
-a suitable cover letter on a multi-patch RFC). "Just a draft
-to go with this other discussion" is totally fine, as long as
-the commit message says so. (More generally, an RFC should say
-what you are asking for comments about :-))
+Thanks, I'll take care of it next time.
 
-thanks
--- PMM
+>
+> thanks
+> -- PMM
+
+
+
+--=20
+         =E6=AD=A4=E8=87=B4
+=E7=A4=BC
+=E7=BD=97=E5=8B=87=E5=88=9A
+Yours
+    sincerely,
+Yonggang Luo
 
