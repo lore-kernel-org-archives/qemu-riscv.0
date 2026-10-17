@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56224CCF2C4
-	for <qemu-riscv@archiver.kernel.org>; Sat, 17 Oct 2026 14:54:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79406CCF2C4
+	for <qemu-riscv@archiver.kernel.org>; Sat, 17 Oct 2026 14:54:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xI5nM-0004xd-0v; Sat, 17 Oct 2026 10:54:00 -0400
+	id 1xI5nH-0004xD-NM; Sat, 17 Oct 2026 10:53:55 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <wang.yechao255@zte.com.cn>)
- id 1xI5ma-0004ql-73; Sat, 17 Oct 2026 10:53:13 -0400
-Received: from mxhk.zte.com.cn ([160.30.148.35])
+ id 1xI5ma-0004qm-9x; Sat, 17 Oct 2026 10:53:13 -0400
+Received: from mxct.zte.com.cn ([183.62.165.209])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <wang.yechao255@zte.com.cn>)
- id 1xI5mX-0006fr-4m; Sat, 17 Oct 2026 10:53:11 -0400
+ id 1xI5mX-0006fa-3b; Sat, 17 Oct 2026 10:53:12 -0400
 Received: from mse-fl2.zte.com.cn (unknown [10.5.228.133])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mxhk.zte.com.cn (FangMail) with ESMTPS id 4j6Pth4LPJz8Xrkn;
- Sat, 17 Oct 2026 22:53:00 +0800 (CST)
-Received: from szxl2zmapp06.zte.com.cn ([10.1.32.108])
- by mse-fl2.zte.com.cn with SMTP id 69HEqqa3033850;
- Sat, 17 Oct 2026 22:52:52 +0800 (+08)
+ by mxct.zte.com.cn (FangMail) with ESMTPS id 4j6PtW75Gpz5B7RN;
+ Sat, 17 Oct 2026 22:52:51 +0800 (CST)
+Received: from szxl2zmapp07.zte.com.cn ([10.1.32.52])
+ by mse-fl2.zte.com.cn with SMTP id 69HEqove033829;
+ Sat, 17 Oct 2026 22:52:50 +0800 (+08)
  (envelope-from wang.yechao255@zte.com.cn)
 Received: from localhost.localdomain (unknown [10.234.74.162])
- by smtp (Zmail) with SMTP; Sat, 17 Oct 2026 22:52:55 +0800
-X-Zmail-TransId: 3e816ad38bc7024-fb159
+ by smtp (Zmail) with SMTP; Sat, 17 Oct 2026 22:52:53 +0800
+X-Zmail-TransId: 3e816ad38bc5024-fb150
 X-Zmail-LocalSMTP: 1
 X-ZMAIL-USEORIGINALEMLTOOUTBOUND: 1
 X-Zmail-RealSender: wang.yechao255@zte.com.cn
@@ -42,29 +42,29 @@ Cc: Weiwei Li <liwei1518@gmail.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org, Wang Yechao <wang.yechao255@zte.com.cn>
-Subject: [PATCH 2/3] target/riscv/kvm: Sync SBI STA shmem registers with KVM
-Date: Sat, 17 Oct 2026 22:51:46 +0800
-Message-ID: <20261017145211.219258-3-wang.yechao255@zte.com.cn>
+Subject: [PATCH 1/3] target/riscv/kvm: Detect SBI STA extension support
+Date: Sat, 17 Oct 2026 22:51:45 +0800
+Message-ID: <20261017145211.219258-2-wang.yechao255@zte.com.cn>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20261017145211.219258-1-wang.yechao255@zte.com.cn>
 References: <20261017145211.219258-1-wang.yechao255@zte.com.cn>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 8bit
-X-MAIL: mse-fl2.zte.com.cn 69HEqqa3033850
+X-MAIL: mse-fl2.zte.com.cn 69HEqove033829
 X-TLS: YES
 X-ENVELOPE-SENDER: wang.yechao255@zte.com.cn
-X-SOURCE-IP: 10.5.228.133 unknown Sat, 17 Oct 2026 22:53:00 +0800
+X-SOURCE-IP: 10.5.228.133 unknown Sat, 17 Oct 2026 22:52:52 +0800
 X-CLEAN: YES
 X-Fangmail-Anti-Spam-Filtered: true
-X-Fangmail-MID-QID: 6AD38BCC.000/4j6Pth4LPJz8Xrkn
-Received-SPF: pass client-ip=160.30.148.35;
- envelope-from=wang.yechao255@zte.com.cn; helo=mxhk.zte.com.cn
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_MSPIKE_H5=0.001,
- RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
+X-Fangmail-MID-QID: 6AD38BC3.001/4j6PtW75Gpz5B7RN
+Received-SPF: pass client-ip=183.62.165.209;
+ envelope-from=wang.yechao255@zte.com.cn; helo=mxct.zte.com.cn
+X-Spam_score_int: -41
+X-Spam_score: -4.2
+X-Spam_bar: ----
+X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
+ RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -81,171 +81,64 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Now that SBI STA support is detected, synchronize the shared memory
-address (shmem_lo and shmem_hi) between KVM and QEMU using the
-KVM_REG_RISCV_SBI_STA one-reg interface.
+Probe for the SBI STA extension by searching for a one-reg id built
+from KVM_REG_RISCV_SBI_EXT and KVM_RISCV_SBI_EXT_STA in the register
+list returned by KVM, following the existing SBI DBCN pattern, and
+record the result in kvm_sbi_sta.supported.
 
-The shmem address is configured by the guest, so QEMU does not
-need to perform put reg operations during reset.
+This patch only adds capability detection; nothing consumes
+kvm_sbi_sta.supported yet. The register synchronization that uses it
+is added by a subsequent patch.
 
 Signed-off-by: Wang Yechao <wang.yechao255@zte.com.cn>
 ---
- target/riscv/cpu.h         |  6 +++
- target/riscv/kvm/kvm-cpu.c | 97 ++++++++++++++++++++++++++++++++++++++
- 2 files changed, 103 insertions(+)
+ target/riscv/kvm/kvm-cpu.c | 20 ++++++++++++++++++++
+ 1 file changed, 20 insertions(+)
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index b65d631994..4da7963d3d 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -34,6 +34,9 @@
- #include "cpu_cfg.h"
- #include "qapi/qapi-types-common.h"
- #include "cpu-qom.h"
-+#ifdef CONFIG_KVM
-+#include <linux/kvm.h>
-+#endif
- 
- typedef struct CPUArchState CPURISCVState;
- 
-@@ -550,6 +553,9 @@ struct CPUArchState {
-     /* KVM multiprocessor state */
-     uint32_t kvm_mp_state;
-     bool kvm_mp_state_loaded;
-+
-+    /* kvm sbi state */
-+    struct kvm_riscv_sbi_sta kvm_sbi_sta;
- #endif /* CONFIG_KVM */
- };
- 
 diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-index 8ab43432dd..ba5ba63854 100644
+index c085b22b23..8ab43432dd 100644
 --- a/target/riscv/kvm/kvm-cpu.c
 +++ b/target/riscv/kvm/kvm-cpu.c
-@@ -123,6 +123,11 @@ static uint64_t kvm_riscv_vector_reg_id(RISCVCPU *cpu,
-     KVM_RISCV_REG_ID_ULONG(KVM_REG_RISCV_VECTOR, \
-                            KVM_REG_RISCV_VECTOR_CSR_REG(name))
+@@ -473,6 +473,12 @@ static KVMCPUConfig kvm_sbi_dbcn = {
+                   KVM_REG_RISCV_SBI_EXT | KVM_RISCV_SBI_EXT_DBCN
+ };
  
-+#define RISCV_SBI_STA_REG(name) \
-+    KVM_RISCV_REG_ID_ULONG(KVM_REG_RISCV_SBI_STATE, \
-+                           KVM_REG_RISCV_SBI_STA | \
-+                           KVM_REG_RISCV_SBI_STA_REG(name))
++static KVMCPUConfig kvm_sbi_sta = {
++    .name = "sbi_sta",
++    .kvm_reg_id = KVM_REG_RISCV | KVM_REG_SIZE_U64 |
++                  KVM_REG_RISCV_SBI_EXT | KVM_RISCV_SBI_EXT_STA
++};
 +
- #define KVM_RISCV_GET_TIMER(cs, name, reg) \
-     do { \
-         int ret = kvm_get_one_reg(cs, RISCV_TIMER_REG(name), &reg); \
-@@ -1010,6 +1015,88 @@ static int kvm_riscv_put_regs_vector(CPUState *cs)
-     return ret;
+ static void kvm_riscv_update_cpu_cfg_isa_ext(RISCVCPU *cpu, CPUState *cs)
+ {
+     uint64_t id, reg;
+@@ -1233,6 +1239,19 @@ static void kvm_riscv_check_sbi_dbcn_support(RISCVCPU *cpu,
+     }
  }
  
-+static int kvm_riscv_get_regs_sbi_sta(CPUState *cs)
++static void kvm_riscv_check_sbi_sta_support(RISCVCPU *cpu,
++                                            struct kvm_reg_list *reglist)
 +{
-+    RISCVCPU *cpu = RISCV_CPU(cs);
-+    CPURISCVState *env = &cpu->env;
-+    target_ulong reg;
-+    int ret = 0;
++    struct kvm_reg_list *reg_search;
 +
-+    if (!kvm_sbi_sta.supported) {
-+        return 0;
++    reg_search = bsearch(&kvm_sbi_sta.kvm_reg_id, reglist->reg, reglist->n,
++                         sizeof(uint64_t), uint64_cmp);
++
++    if (reg_search) {
++        kvm_sbi_sta.supported = true;
 +    }
-+
-+    ret = kvm_get_one_reg(cs, RISCV_SBI_STA_REG(shmem_lo), &reg);
-+    if (ret) {
-+        return ret;
-+    }
-+    env->kvm_sbi_sta.shmem_lo = reg;
-+
-+    ret = kvm_get_one_reg(cs, RISCV_SBI_STA_REG(shmem_hi), &reg);
-+    if (ret) {
-+        return ret;
-+    }
-+    env->kvm_sbi_sta.shmem_hi = reg;
-+
-+    return ret;
 +}
 +
-+static int kvm_riscv_get_regs_sbi_state(CPUState *cs)
-+{
-+    int ret = 0;
-+
-+    ret = kvm_riscv_get_regs_sbi_sta(cs);
-+    if (ret) {
-+        return ret;
-+    }
-+
-+    return 0;
-+}
-+
-+static int kvm_riscv_put_regs_sbi_sta(CPUState *cs)
-+{
-+    RISCVCPU *cpu = RISCV_CPU(cs);
-+    CPURISCVState *env = &cpu->env;
-+    target_ulong reg;
-+    int ret = 0;
-+
-+    if (!kvm_sbi_sta.supported) {
-+        return 0;
-+    }
-+
-+    reg = env->kvm_sbi_sta.shmem_lo;
-+    ret = kvm_set_one_reg(cs, RISCV_SBI_STA_REG(shmem_lo), &reg);
-+    if (ret) {
-+        return ret;
-+    }
-+
-+    reg = env->kvm_sbi_sta.shmem_hi;
-+    ret = kvm_set_one_reg(cs, RISCV_SBI_STA_REG(shmem_hi), &reg);
-+    if (ret) {
-+        return ret;
-+    }
-+
-+    return ret;
-+}
-+
-+static int kvm_riscv_put_regs_sbi_state(CPUState *cs, KvmPutState level)
-+{
-+    int ret = 0;
-+
-+    /*
-+     * The shmem address of SBI STA is configured by the guest. During reset,
-+     * QEMU does not need to perform put reg operations.
-+     */
-+    if (level != KVM_PUT_RESET_STATE) {
-+        ret = kvm_riscv_put_regs_sbi_sta(cs);
-+        if (ret) {
-+            return ret;
-+        }
-+    }
-+
-+    return ret;
-+}
-+
- typedef struct KVMScratchCPU {
-     int kvmfd;
-     int vmfd;
-@@ -1433,6 +1520,11 @@ int kvm_arch_get_registers(CPUState *cs, Error **errp)
-         return ret;
+ static void kvm_riscv_read_vlenb(RISCVCPU *cpu, KVMScratchCPU *kvmcpu,
+                                  struct kvm_reg_list *reglist)
+ {
+@@ -1365,6 +1384,7 @@ static void kvm_riscv_init_cfg(RISCVCPU *cpu, KVMScratchCPU *kvmcpu)
      }
  
-+    ret = kvm_riscv_get_regs_sbi_state(cs);
-+    if (ret) {
-+        return ret;
-+    }
-+
-     if (cap_has_mp_state) {
-         struct kvm_mp_state mp_state;
- 
-@@ -1520,6 +1612,11 @@ int kvm_arch_put_registers(CPUState *cs, KvmPutState level, Error **errp)
-         return ret;
-     }
- 
-+    ret = kvm_riscv_put_regs_sbi_state(cs, level);
-+    if (ret) {
-+        return ret;
-+    }
-+
-     if (KVM_PUT_RESET_STATE == level) {
-         CPURISCVState *env = &RISCV_CPU(cs)->env;
+     kvm_riscv_check_sbi_dbcn_support(cpu, reglist);
++    kvm_riscv_check_sbi_sta_support(cpu, reglist);
+     kvm_riscv_read_csr_cfg(reglist);
+ }
  
 -- 
 2.27.0
