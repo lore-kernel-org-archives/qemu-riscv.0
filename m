@@ -4,137 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B9BBCCA46C
-	for <qemu-riscv@archiver.kernel.org>; Fri, 16 Oct 2026 14:07:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B00ACCF2C1
+	for <qemu-riscv@archiver.kernel.org>; Sat, 17 Oct 2026 14:40:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xHiZg-0006zl-QW; Fri, 16 Oct 2026 10:06:21 -0400
+	id 1xI5a2-0002g1-P4; Sat, 17 Oct 2026 10:40:14 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xHiZU-0006yl-59
- for qemu-riscv@nongnu.org; Fri, 16 Oct 2026 10:06:12 -0400
-Received: from mail-ed1-x531.google.com ([2a00:1450:4864:20::531])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xHiZS-0004jm-CD
- for qemu-riscv@nongnu.org; Fri, 16 Oct 2026 10:06:07 -0400
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-6b1f4d8e09aso2602682a12.1
- for <qemu-riscv@nongnu.org>; Fri, 16 Oct 2026 07:06:05 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1792159565; cv=none;
- d=google.com; s=arc-20260327;
- b=FzUe8UmUYeI92Nm90k6o2jc2t+I/GAB//NkzEIwFA9gi2ndOmcAvlaigxjOMZAcWAK
- 9+7Q2uoNHqp129lXAj0QUWc+k/uN8fEqppGq6EfZC1LPR6Y1DbD9zt9ny4rjitxAETef
- 6ckph+iaRLgy25c9r6K4701pLZmNavU/gCGARZ2D4ukBxdgeTxuCxoQX8NtZv+9S7eBI
- PkFPPPIoY1oMg410fbLh2VJDQenNJ31UCOUPp6tDntmZUDbnDbdOn+ujh3yY4oQxBUy7
- 2rRsLlsPaRfFWw88p0hFF1/6kP6IHghxEmkbqvZDQDmmIIr+s3zndrt0r8vvKfnPhfNW
- Tueg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :reply-to:in-reply-to:references:mime-version:dkim-signature;
- bh=J9IImW9GgYpIi/RCk8fzQ0zy4Zwv383B/5op/lAYV24=;
- fh=xQUJebv5gW9RYDblA3X8azZu3w+BaXfGwRL81daC/Jk=;
- b=if9GT+7oV+0bWEK63P2AlFOAYrwyxatzDKs7mupl2bBOblMNeGrx9TnRVsHEbkGfgJ
- TlI9okt4+ZM6k/DrFe25KlSkRbc152Mg+kPFeIImjKcw4jtrHzbyR/SPMupqOdibl2Po
- n/gI85lL/+FYSzG5TyEsGCiGY6Jz3rz80EamRO71vOgVzm5O7K9zNotLgc3ZrofOgjCd
- EQa1W6WKOQqRmGJfdrTgcI6OkcNJA2R/a3df3g3u/T8s/eEYQJzGahjXOU/NMB6w1XfS
- W1AFgssH8PB0R9S8KFENUF78ak/WKwSQ2nocWJgGvJpuBvhLPZiqkAwdSBhpGJqYRsy9
- BqOA==; darn=nongnu.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1792159565; x=1792764365; darn=nongnu.org;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:reply-to:in-reply-to:references:mime-version:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=J9IImW9GgYpIi/RCk8fzQ0zy4Zwv383B/5op/lAYV24=;
- b=OIMtTIZwfQ4ORk6ygTzGEIE7Lv64oLpfsBmb0TUzXL0Mk4Z/4xe8oOusxdqwn+WaXw
- UhQkVmP1lTCRrtVtZhITTu2zQ73ShlD5HjgD8QFqjYegS1fCUPG+BU8TQt6aC0T/o+0g
- efSiOswEzolnz9tFp9rh3r+ito3t6917GU/H4NjYvvij/X8GRU+pAJzq2BAcpkdE8HmI
- en7UowcDJSVfwm4Lrs/mxRBg/XNehu0lzovPDIXBm6ZNxWuJuMkxj17vfdWekeiQ1R9z
- uVUWcmjKrSiGsnzoAt6p8zRbw8LsGeBusuqOPJz1/Mmqcx6VKKYzwDzzWe6nrBI/ZTuH
- qokA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792159565; x=1792764365;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:reply-to:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=J9IImW9GgYpIi/RCk8fzQ0zy4Zwv383B/5op/lAYV24=;
- b=hTpp0Bbjuv+Qgf1s0lYSvcVs51oepXBieTIgSJjFyOBmUchQf9Fcr6JQyfz5MmF+Qy
- VHitW5hQTpoo8YR9oz92jW/JYgm8istxVYGlh6MFkr2hsLwMaatFUNYiVf8nHMTYeHGx
- RFVEEervJhxzhHOshw4ozBaQ/7kZFwAcA8OpKUhTgLqX9ziqGFmXfz5vNvQocbPN9B/L
- r0h9jYEDKPMGp2QmFXjdtT2SoYtmiCtRq9eC36Rfc4YZ7sw76ovWdG7tXe6s1f6GAvwb
- lkkeh4ytn4rSb4ICDHl0VPMF3Tn75e/yVQxrNYkDJjOGHllMnTxr1TrU4QJy/5PcGOMq
- PSoA==
-X-Forwarded-Encrypted: i=1;
- AKwUvBzTJ0H1r3moyU6bOZ3CLyBnfybCrZKLJOk1uRfe+BRmMEI2xh1L6GA6GnNYek7CVnfSJcrslG5POw2L@nongnu.org
-X-Gm-Message-State: AFq9FYI3viYClovPxqrA/p/BOut2FK4s/mEY4oy1Sh/Cg3tnYs7Q+B8M
- Gw7rh6THc3BJSTM5vPDa2/inWgc/+9j22puAZ7b5KDQp5o7XD6i/yG82IGzrVgNIYXj7NuvaO1y
- tNAzHjRv81MytiyqH36XSekoDzIqDvgM=
-X-Gm-Gg: AYBFou0LBvq40N7GVjgH0869KcJFgfC4FXmC3uHONMuMmdQbO8AXGjug8MIq0VOgGsh
- YuHrmWd1e+0cv3rX1d3ea8V1eWbwo1vuP7Xew0mpiA3mpoFwagEZ2yKizHjYBy3sTkneM3BP65V
- MErQ1NPJSCC3heFEjIfxTXhgCnLJwVFfOHuViBrESE0fWL09mMm6XQOwyyut+wpF8IawNuZkcon
- 1XvKwQKiMD/0Vu+/mu3IpnaPjZEFugX7DMTXI5CGNHPgT3DnrTEovHkIDbDd4WfKxxsOBZVDbLf
- +H1bmUv3Nkr6+ca7F1foTrvm82ctH877G+w0G/8HMtlxxx3QSliZohM=
-X-Received: by 2002:a05:6402:400f:b0:6b1:c526:afa8 with SMTP id
- 4fb4d7f45d1cf-6b1c526b70fmr10556282a12.9.1792159564415; Fri, 16 Oct 2026
- 07:06:04 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <tanchi25@mails.ucas.ac.cn>)
+ id 1xI5a0-0002dH-Af; Sat, 17 Oct 2026 10:40:12 -0400
+Received: from smtp25.cstnet.cn ([159.226.251.25] helo=cstnet.cn)
+ by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
+ (Exim 4.90_1) (envelope-from <tanchi25@mails.ucas.ac.cn>)
+ id 1xI5Zx-0005Y0-Lx; Sat, 17 Oct 2026 10:40:12 -0400
+Received: from k3-03 (unknown [159.226.43.8])
+ by APP-05 (Coremail) with SMTP id zQCowAAnV0GxiNNqbs+wCw--.2747S2;
+ Sat, 17 Oct 2026 22:39:55 +0800 (CST)
+From: Tan Chi <tanchi25@mails.ucas.ac.cn>
+To: qemu-devel@nongnu.org
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com,
+ daniel.barboza@oss.qualcomm.com, zhiwei_liu@linux.alibaba.com,
+ chao.liu@processmission.com, qemu-riscv@nongnu.org,
+ Tan Chi <tanchi25@mails.ucas.ac.cn>
+Subject: [PATCH v2 0/2] hw/riscv/riscv-iommu: reclaim invalidated IOATC entries
+Date: Sat, 17 Oct 2026 22:39:41 +0800
+Message-ID: <20261017143943.15521-1-tanchi25@mails.ucas.ac.cn>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
-References: <20261015044104.879-1-luoyonggang@gmail.com>
- <CAFEAcA8n9E1jpcOCat0kzv0Q++x7YwK_MNJBJ0qGdtX1-As4zg@mail.gmail.com>
- <CAE2XoE-fgq_c9qONyvfbNi3Ys_hv7yKvGCkk+Wz+rHPW0p65Eg@mail.gmail.com>
- <077274ba-002e-4241-9158-13a3270bddaa@oss.qualcomm.com>
- <CAFEAcA-mii9S1NvhKOt=pMha6-OQKheYj7FuMaDVbV2Eoi-3bQ@mail.gmail.com>
-In-Reply-To: <CAFEAcA-mii9S1NvhKOt=pMha6-OQKheYj7FuMaDVbV2Eoi-3bQ@mail.gmail.com>
-From: Yonggang Luo <luoyonggang@gmail.com>
-Date: Fri, 16 Oct 2026 22:05:51 +0800
-X-Gm-Features: AclHuK-LdFdTnzXiy5jqe912RkVRxxCOyAwgNKxP22ZmT1O2AJBfnTBnW-lNw90
-Message-ID: <CAE2XoE9W+vohRokJ=ePFesJpiTg7hfjSH3c4ptAibFPxAtv8oQ@mail.gmail.com>
-Subject: Re: [PATCH] target-info: dispatch CPU QMP, dump, monitor,
- and Angel semihosting
-To: Peter Maydell <peter.maydell@linaro.org>
-Cc: Brian Cain <brian.cain@oss.qualcomm.com>, qemu-devel@nongnu.org, 
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@oss.qualcomm.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org, 
- David Hildenbrand <david@kernel.org>, Glenn Miles <milesg@linux.ibm.com>,
- Zhao Liu <zhao1.liu@intel.com>, 
- Richard Henderson <richard.henderson@linaro.org>,
- Ilya Leoshkevich <iii@linux.ibm.com>, 
- Nicholas Piggin <npiggin@gmail.com>, 
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
- =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>, 
- =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, 
- Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org, qemu-ppc@nongnu.org, 
- Cornelia Huck <cohuck@redhat.com>, Weiwei Li <liwei1518@gmail.com>, 
- =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
- "Dr. David Alan Gilbert" <dave@treblig.org>,
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, 
- Bibo Mao <maobibo@loongson.cn>, Artyom Tarasenko <atar4qemu@gmail.com>, 
- Alistair Francis <alistair.francis@wdc.com>, Song Gao <17746591750@163.com>, 
- Chinmay Rath <rathc@linux.ibm.com>, Paolo Bonzini <pbonzini@redhat.com>, 
- Aleksandar Rikalo <arikalo@gmail.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>, 
- Eric Farman <farman@linux.ibm.com>, Philippe Mathieu-Daude <philmd@mailo.com>, 
- Xianglai Li <lixianglai@loongson.cn>, Chao Liu <chao.liu@processmission.com>, 
- qemu-s390x@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
- Matthew Rosato <mjrosato@linux.ibm.com>, Aurelien Jarno <aurelien@aurel32.net>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Laurent Vivier <laurent@vivier.eu>, 
- Harsh Prateek Bora <harshpb@linux.ibm.com>,
- Yoshinori Sato <yoshinori.sato@nifty.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::531;
- envelope-from=luoyonggang@gmail.com; helo=mail-ed1-x531.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID: zQCowAAnV0GxiNNqbs+wCw--.2747S2
+X-Coremail-Antispam: 1UD129KBjvdXoWrtFW5trWfuF18uryrKr18AFb_yoWDurc_uF
+ Z3ta429r4UJayUCF9rKF4rAryYyayUur1UtFykJr47uw17JFs8Aw4DKrsxXr18u3WfAFna
+ yFykA3y8Ar12qjkaLaAFLSUrUUUUjb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+ 9fnUUIcSsGvfJTRUUUb-xFF20E14v26r4j6ryUM7CY07I20VC2zVCF04k26cxKx2IYs7xG
+ 6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8w
+ A2z4x0Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr0_
+ Cr1l84ACjcxK6I8E87Iv67AKxVW0oVCq3wA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_GcCE3s
+ 1lnxkEFVAIw20F6cxK64vIFxWle2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IE
+ w4CE5I8CrVC2j2WlYx0E2Ix0cI8IcVAFwI0_JrI_JrylYx0Ex4A2jsIE14v26r1j6r4UMc
+ vjeVCFs4IE7xkEbVWUJVW8JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v
+ 4I1lc7CjxVAaw2AFwI0_Jw0_GFylc2xSY4AK67AK6ry5MxAIw28IcxkI7VAKI48JMxC20s
+ 026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_
+ JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14
+ v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVWUJVW8JwCI42IY6xAIw20EY4v20xva
+ j40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVWUJV
+ W8JbIYCTnIWIevJa73UjIFyTuYvjfUrwIDUUUUU
+X-Originating-IP: [159.226.43.8]
+X-CM-SenderInfo: pwdquxrlsvqzpdlo2hpxfd2hldfou0/
+Received-SPF: pass client-ip=159.226.251.25;
+ envelope-from=tanchi25@mails.ucas.ac.cn; helo=cstnet.cn
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -147,66 +71,37 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Reply-To: luoyonggang@gmail.com
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Oct 16, 2026 at 9:56=E2=80=AFPM Peter Maydell <peter.maydell@linaro=
-.org> wrote:
->
-> On Fri, 16 Oct 2026 at 14:51, Brian Cain <brian.cain@oss.qualcomm.com> wr=
-ote:
-> >
-> >
-> > On 10/15/2026 4:38 AM, Yonggang Luo wrote:
-> > > On Thu, Oct 15, 2026 at 5:20=E2=80=AFPM Peter Maydell <peter.maydell@=
-linaro.org> wrote:
-> > >> On Thu, 15 Oct 2026 at 05:41, Yonggang Luo <luoyonggang@gmail.com> w=
-rote:
-> > >>> Put query-cpu-definitions, dump notes, monitor, and Angel semihosti=
-ng on
-> > >>> TargetOps[SYS_EMU_TARGET__MAX] and look up by target_arch().
-> > >>> Keep the table in target-ops.c and with a stub
-> > >>>
-> > >>> - Register with a QEMU_ARCH_* bitmask so shared base-arch objects
-> > >>>    can fill both slots (e.g. QEMU_ARCH_ARM is ARM|AARCH64).
-> > >>> - TARGET_INFO_CPU_OP is type_init. A NULL member means no handler.
-> > >>> - Drop stubs/qmp-cpu.c
-> > >>>         stubs/hmp-cmd-info_tlb.c
-> > >>>         stubs/hmp-cmd-info_mem.c
-> > >>>         stubs/dump.c
-> > >>>
-> > >>> Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
->
-> > >> Too big a patch touching stuff all over the place with
-> > >> insufficient explanation of what it's doing or why.
-> > > Oh, sorry, I post is just for demo(DRAFT) for other place to
-> > > reference, but git-publish have no way
-> > > to title it(maybe because I use it wrongly).
-> >
-> > git publish has `--subject-prefix=3DPREFIX` - that will let you qualify
-> > this as DRAFT/RFC.
->
-> It's also helpful to edit the commit message for a single-patch
-> RFC so it's clear about the purpose of posting it (or to provide
-> a suitable cover letter on a multi-patch RFC). "Just a draft
-> to go with this other discussion" is totally fine, as long as
-> the commit message says so. (More generally, an RFC should say
-> what you are asking for comments about :-))
+This series changes selective IOTINVAL handling to remove matching entries
+from the IOATC instead of leaving them in the hash table with IOMMU_NONE.
 
-Thanks, I'll take care of it next time.
+Patch 1 adds explicit serialization for IOATC accesses, providing the
+entry lifetime protection needed before entries can be removed.
 
->
-> thanks
-> -- PMM
+Patch 2 changes selective invalidation to remove matching entries. This
+avoids repeatedly scanning invalid entries and prevents them from
+contributing to the IOATC size limit.
 
+The performance measurements are included in patch 2.
 
+v2:
+- Split the IOATC locking and invalidation changes into separate patches.
+- Reduce the scope of iot_lock in the translation path.
 
---=20
-         =E6=AD=A4=E8=87=B4
-=E7=A4=BC
-=E7=BD=97=E5=8B=87=E5=88=9A
-Yours
-    sincerely,
-Yonggang Luo
+v1:
+https://lists.nongnu.org/archive/html/qemu-devel/2026-10/msg01606.html
+
+Tan Chi (2):
+  hw/riscv/riscv-iommu: serialize IOATC accesses
+  hw/riscv/riscv-iommu: reclaim invalidated IOATC entries
+
+ hw/riscv/riscv-iommu.c | 173 ++++++++++++++++++++---------------------
+ hw/riscv/riscv-iommu.h |   1 +
+ 2 files changed, 87 insertions(+), 87 deletions(-)
+
+-- 
+2.53.0
+
 
