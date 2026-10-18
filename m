@@ -4,84 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75BCACCF2C4
-	for <qemu-riscv@archiver.kernel.org>; Sun, 18 Oct 2026 14:10:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8947CCF2C9
+	for <qemu-riscv@archiver.kernel.org>; Sun, 18 Oct 2026 14:11:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xIRap-0005ma-Dr; Sun, 18 Oct 2026 10:10:31 -0400
+	id 1xIRah-0005kh-5g; Sun, 18 Oct 2026 10:10:23 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dingtaodtdt@gmail.com>)
- id 1xIRao-0005mI-3T
- for qemu-riscv@nongnu.org; Sun, 18 Oct 2026 10:10:30 -0400
-Received: from mail-pf1-x430.google.com ([2607:f8b0:4864:20::430])
+ id 1xIRae-0005kH-PL
+ for qemu-riscv@nongnu.org; Sun, 18 Oct 2026 10:10:21 -0400
+Received: from mail-pf1-x42d.google.com ([2607:f8b0:4864:20::42d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dingtaodtdt@gmail.com>)
- id 1xIRam-0004zW-Mj
- for qemu-riscv@nongnu.org; Sun, 18 Oct 2026 10:10:29 -0400
-Received: by mail-pf1-x430.google.com with SMTP id
- d2e1a72fcca58-8a064dcfcfdso59219b3a.2
- for <qemu-riscv@nongnu.org>; Sun, 18 Oct 2026 07:10:27 -0700 (PDT)
+ id 1xIRad-0004yc-6K
+ for qemu-riscv@nongnu.org; Sun, 18 Oct 2026 10:10:20 -0400
+Received: by mail-pf1-x42d.google.com with SMTP id
+ d2e1a72fcca58-8a052aff9e9so717896b3a.0
+ for <qemu-riscv@nongnu.org>; Sun, 18 Oct 2026 07:10:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1792332627; x=1792937427; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=QJ2vmhNG/CjE3MDSpCuzv+6F5+re1f9SXvYAgJYl+7Y=;
- b=J0Dq2QMg16mfIvb+KfdEgEGm5rHmhS0Md4pHomRIwprWY+DFtsqUO9mcUqogpiLBQn
- BO9aM9E96gOloGO9m9EdZdp6WX0raHZQRgP+rDoM25dm3+5uCENDIv95zYw9/AY+HYU6
- T4goKhwZi0t9s6kF8sOK6K1AxkW/2kFLSkwGwJUimpsWoKt0h1yY7cODfeC9ZtR65rRV
- 1pR1umau/5VmlFkfU8tiGVhcMfNij+BD6GoAsg2OpPJIkcZrb6cArxjxwGnlN2M+jJTL
- N6dTBmoVhqZbdlkCrlYpiVyZ2C+BZ3kSbEgiWUiksf1V1k7WypNcoFTj2Uq/OhgNF8kT
- ioHA==
+ d=gmail.com; s=20251104; t=1792332618; x=1792937418; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=/Yb92bKVAbeQ8k8U6ZwO25vtKkZS6qfdf0XOHDe+dsw=;
+ b=MqgnD3oLdOe0ABDTM7Yp4WlyJS5v3OK2DYBPUcHEkrwZqppL0onNqhHGeTTAeAXWjg
+ s/ci7BjI8eLnq9OCMqC7k77f8gW/NSdnkkwmduTQMoN/t234fUW/b7sVlWn9IY6CrrEy
+ vQGwptkA8WkFl802BKjqq6vpUYyNEHMThMDQ21JcNAfg3P8kFeZdY4wfjuD9Ho1VpB5k
+ qBikbRQmgrLcaAUMpbUpddJbQb86FoybqNRsN57kdZq53hY/oTujBcogPeK6XMeU3Mgd
+ YVixfG5NGGPaSjZLw7bUMr/GDb1Caf4hl4tdKHrhG73y6hPtfpsyLT1ojURXiF689VVO
+ KjzQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792332627; x=1792937427;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=QJ2vmhNG/CjE3MDSpCuzv+6F5+re1f9SXvYAgJYl+7Y=;
- b=oRlo5HgmgKf7ky+C5pnf4mFosquplBsikucXGq66urQQh2WUPYJJJPx4tygGvBAP68
- S1NBvWe/z6nFMDzefIkxDFF0lNg3moVQdsEwRh3fa170l5crlh1a5ATqIQ0Oc68L1RU/
- 0wIoE+fQTVDWDqYykn/GqH4rLpI9OJ2RPzXjzRkhRcvCUduZHjUfua/ru0CRVB+QsOG5
- cEXpAxW2BPLFf/nACBc9eDYXapeot56v+WmhW4nmH8go3uXK4Q59SmxXUnPgg09NGxbI
- TpoQ3DbquXfHtPEa7DHn3lE9eC/ehN/bJM6pIbCfBJq/SZWiholOdzSAM1QrzWVZ64E6
- Zd0w==
-X-Gm-Message-State: AFq9FYI2kYkysVFRd2/o4fFIG3pin/lf3rzkLxipG0IHAFRXUVfAnJrR
- HeiG1pj0IFRpmX3dZOZnmZETYmkzG6HEW/PFhsJCaQcKhfFVUyw+OEHR
-X-Gm-Gg: AYBFou1/vG3PoXVS6xczDhItmDUl2cobAWrUEi6MBskWHJBbsMNFtWsG45B1I8UJ9Gp
- lzTAkbEbyaO4i68uAdBjQc4xS9DeLUawiAaH7myneqKnNx4CVqhcQKp7i9gU+n7pqD51wKiQajQ
- 4LBnmjy9SWs5sBchRGPyvy43kaHJq3whA/ze7HwKJ0v/3Er9PKAtdKXnXqOn/VbEC43UUq8fFQF
- 1Gr9Np4TExLO8NfbFVhTH1NyZ51e/QUJg7zd1Re6DdTu6UociSS0IAls2HUYsMJTcregcVRpmz4
- iBREYEf0yQ6NPuvpI4YNl0zKVSOK5M10/KIbZw+hsVMCCQhXRnj/zmFVlQTrgY5qqw9adyaFhu9
- 2qlp0pC8kfVD+ME535tRjh91mM7dLHdZ5oqcjiX6ecm6kAG+67i1u03uU76N5L9VwvqwFFgeDvz
- yVHxfPlNKuwqwrCsE8uTr+R3DDsVV3OIUoCs/20Y4v9idOGKcDeXkLz5nWMf0n4F0GOjcPfn3AT
- HEavuEKZmuVZyoO
-X-Received: by 2002:a05:6a00:4c99:b0:87c:b126:8e4d with SMTP id
- d2e1a72fcca58-8a04aa2a824mr3534421b3a.3.1792332626931; 
- Sun, 18 Oct 2026 07:10:26 -0700 (PDT)
+ d=1e100.net; s=20260707; t=1792332618; x=1792937418;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=/Yb92bKVAbeQ8k8U6ZwO25vtKkZS6qfdf0XOHDe+dsw=;
+ b=G8D0otGh1Q1J81o+HMfMHQ7kP52XZcpmEq9OL5IGsgPeRPi3xNFCw+4GH90V8BXTNV
+ pp+4g1aZOAV6oDBOzO10Zp1+zsrowsPZrzBRwFTXTW2UIb/1wq5kKpGwEwbTTBA34M61
+ e2cJ3/XV+5m4C0Bq1ukoGrr3sSb8JGzy/xJ50lX+8QilRW1l1NjHntZeyKAKuckHrr70
+ 98bt2P9F8eUc19bRQ0xlBlJBr13dG0s6IDUozGVOSD8XeFQfPCoLjZN8EbePsGdTER4U
+ S2N0d/aSu3WrRwUpIst0FnNaNxIdamFZdGdIpgY8K8CLedGYCraCm1P1f0rZbbqtkE7F
+ jfkg==
+X-Gm-Message-State: AFq9FYLT3tZWo+EAuOu+zZXavCCH0JA3knY/qIA3GdbZjpVxmtz2VJJu
+ lniZrYp97aq4c2gyVnB9RhHXO3foEjIauVFGdwjvcrWn74HI/KxC04qZ
+X-Gm-Gg: AYBFou0OYmHt/1RM1dg3FbPncFMDESgoFptUlbFe68WceYUlyQuxdR0LqUpAPlHyiCY
+ J+QqaktnXPYc4pAm9F/MVgbR3KFKNTJW2YLJKCkjsA6hS4LkjuVu/9ZERxe03g/twMdeYO5PaVY
+ fGzS4/r3BQ5aBUcfXV3g+ZUVte7l+VzRFEDYMbwUEf8v6OmJaGkbjYuFcah8JDAnpEa1D7LYVuQ
+ HdzigKyinvfkjCWy8nzzCjA21eZKm43FwKLxzUAwK6T0uULKDfNHtjcu9CBrKzdPNmM4X52kmNX
+ CqE9Q0l/ER9P99nCyvehqce73zFP4ihs4bE4erCi6NXuKlI1f0TxmSLEMY66C/W7sq1NBl26rlO
+ fvTOtPrrOWbLT22k2oykG6YYdKPAmXjk+rOzBu8rj0QRZnsiDvILogM2S44aZCuiT7nF9UZxE3v
+ 0qF1gfR6w8rI52+cusyldG3tCdKBKZB1byDzdr3Fx8IAUq4vkR6ETo9uwQQRcUjRNvxNDjEzuYr
+ RS2RZrWj5JmqoAj
+X-Received: by 2002:a05:6a00:1806:b0:851:8baf:5b26 with SMTP id
+ d2e1a72fcca58-8a04ba18476mr3928177b3a.14.1792332617565; 
+ Sun, 18 Oct 2026 07:10:17 -0700 (PDT)
 Received: from dt-VM.localdomain ([101.204.150.66])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-89f57653ea9sm2949430b3a.32.2026.10.18.07.10.22
+ d2e1a72fcca58-89f57653ea9sm2949430b3a.32.2026.10.18.07.10.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 18 Oct 2026 07:10:26 -0700 (PDT)
+ Sun, 18 Oct 2026 07:10:16 -0700 (PDT)
 From: Tao Ding <dingtaodtdt@gmail.com>
 X-Google-Original-From: Tao Ding <dingtao0430@163.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, chao.liu@processmission.com, farosas@suse.de,
  lvivier@redhat.com, pbonzini@redhat.com, Alistair.Francis@wdc.com,
- Tao Ding <dingtao0430@163.com>, Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH v3 2/5] hw/misc: fix calculating input address overflow in
+ Tao Ding <dingtao0430@163.com>
+Subject: [PATCH v3 0/5] Fix integer handling issues in k230_gsdma and
  k230_decomp_gzip
-Date: Sun, 18 Oct 2026 22:10:03 +0800
-Message-ID: <20261018141006.16398-3-dingtao0430@163.com>
+Date: Sun, 18 Oct 2026 22:10:01 +0800
+Message-ID: <20261018141006.16398-1-dingtao0430@163.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20261018141006.16398-1-dingtao0430@163.com>
-References: <20261018141006.16398-1-dingtao0430@163.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::430;
- envelope-from=dingtaodtdt@gmail.com; helo=mail-pf1-x430.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42d;
+ envelope-from=dingtaodtdt@gmail.com; helo=mail-pf1-x42d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -104,30 +101,35 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Use hwaddr for address calculations to avoid 32-bit overflow.
+Hi, all
 
-Resolves: Coverity CID 1685517
+This series fixes integer overflow, truncation, and underflow issues
+reported by Coverity in the K230 GZIP decompressor, its qtest, and GSDMA.
+https://lore.kernel.org/qemu-devel/5fc57f49cea0ac3542128d0e2208edd6d7484f7e.camel@wdc.com/
 
-Reported-by: Alistair Francis <Alistair.Francis@wdc.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-Signed-off-by: Tao Ding <dingtao0430@163.com>
----
- hw/misc/k230_decomp_gzip.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Thanks.
 
-diff --git a/hw/misc/k230_decomp_gzip.c b/hw/misc/k230_decomp_gzip.c
-index ac06cc1571..da4dc6f954 100644
---- a/hw/misc/k230_decomp_gzip.c
-+++ b/hw/misc/k230_decomp_gzip.c
-@@ -59,7 +59,7 @@ static hwaddr k230_decomp_gzip_output_addr(K230DecompGzipState *s)
- 
- static hwaddr k230_decomp_gzip_input_addr(K230DecompGzipState *s)
- {
--    return s->input.slot * K230_DECOMP_GZIP_BLOCK_SIZE +
-+    return (hwaddr) s->input.slot * K230_DECOMP_GZIP_BLOCK_SIZE +
-            K230_DECOMP_GZIP_SRAM_IN_BASE;
- }
- 
+The patchv1 series is posted in:
+https://lore.kernel.org/qemu-devel/20261002140245.30214-1-dingtao0430@163.com/
+
+Changes in v2->v3:
+- Separate global and channel register handling to prevent unsigned address underflow 
+  when calculating GSDMA channel offsets.
+
+Tao Ding (5):
+  hw/misc: fix calculating output address overflow in k230_decomp_gzip
+  hw/misc: fix calculating input address overflow in k230_decomp_gzip
+  hw/misc: use hwaddr for the k230_decomp_gzip input address
+  qtest: fix k230_decomp_gzip test integer handling issues
+  hw/dma: fix k230_gsdma integer handling issues
+
+ hw/dma/k230_gsdma.c                 | 84 ++++++++++++++---------------
+ hw/misc/k230_decomp_gzip.c          |  6 +--
+ tests/qtest/k230-decomp-gzip-test.c |  2 +-
+ 3 files changed, 46 insertions(+), 46 deletions(-)
+
+
+base-commit: 0a1ebd448b38afaa118597cbb633dbec24ef74d3
 -- 
 2.43.0
 
