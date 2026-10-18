@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EBABCCF2C4
-	for <qemu-riscv@archiver.kernel.org>; Sun, 18 Oct 2026 13:41:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55943CCA490
+	for <qemu-riscv@archiver.kernel.org>; Sun, 18 Oct 2026 13:47:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xIR94-00017R-8J; Sun, 18 Oct 2026 09:41:50 -0400
+	id 1xIRE4-0001wq-UM; Sun, 18 Oct 2026 09:47:00 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dingtaodtdt@gmail.com>)
- id 1xIR92-00015T-MG
- for qemu-riscv@nongnu.org; Sun, 18 Oct 2026 09:41:48 -0400
-Received: from mail-pf1-x431.google.com ([2607:f8b0:4864:20::431])
+ id 1xIRE3-0001wZ-IL
+ for qemu-riscv@nongnu.org; Sun, 18 Oct 2026 09:46:59 -0400
+Received: from mail-pg1-x52f.google.com ([2607:f8b0:4864:20::52f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dingtaodtdt@gmail.com>)
- id 1xIR90-0002rS-MY
- for qemu-riscv@nongnu.org; Sun, 18 Oct 2026 09:41:48 -0400
-Received: by mail-pf1-x431.google.com with SMTP id
- d2e1a72fcca58-89f28c3ac7bso341061b3a.0
- for <qemu-riscv@nongnu.org>; Sun, 18 Oct 2026 06:41:45 -0700 (PDT)
+ id 1xIRE0-0003Id-OD
+ for qemu-riscv@nongnu.org; Sun, 18 Oct 2026 09:46:58 -0400
+Received: by mail-pg1-x52f.google.com with SMTP id
+ 41be03b00d2f7-cc502d509c0so400598a12.2
+ for <qemu-riscv@nongnu.org>; Sun, 18 Oct 2026 06:46:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1792330904; x=1792935704; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1792331215; x=1792936015; darn=nongnu.org;
  h=in-reply-to:from:references:cc:to:subject:user-agent:mime-version
  :date:message-id:content-type:from:to:cc:subject:date:message-id
  :reply-to:content-type;
- bh=WQhwK78wnfJ5eZGrDMcIglkMM9XjuGAgLzw8Lwnd6Vc=;
- b=QEi69kZzU+K3dWox+3u5KMVsc5olGjBQ0E3BAZEEi3Ph+B8xXSwbLmyJDT0h+Tef80
- IJ5LoPf5fPg8FTFzIj+FCwjB43TG1fi0j5A21wgcFxaX2EbpL/l1eGhdLG5AYcFoZmLO
- F1XNRHLo2Xm5p5hvIiloVDTaSIrqNDa83U/52TJftcwe8FSTeEg/8JtMih0EXSE9eASq
- bAj3w508Upq1kNd/Zy8Y8U7hHqv24mhrKd6uT1jb2y0NHiia47SFvO59e1SDnGYC0Miv
- 7THTeQ9ZFBjOYs+Szw2eGiCvEo5/J678wEr6i6CZt5mLtwe2DZBPfH/aWParGYbtJsCr
- hq4Q==
+ bh=v3WCI1tUGo09VV1rtuj2xXf776KiLDgjfSpYL4m1xtI=;
+ b=ZNhLCSoJ0TZZYZ22lRNs4MsRkPmmvHR1rODIq/tGRgwv9M1EexDKgta23Hoz4OBLaz
+ SzCu/eROflFnJgf/yN0f7mQRQZf63oV4wZhpmeLYo59NrU/yVRaED8chCiGSodLJYGnE
+ /Tqd849Czv1AFW+oeLSBrWU0jB1WCiTsajz5fw2Z7f3Uug3iTgUD4w+XorBuSk1Rb2hB
+ LxSLBzUPtbq0p5oeN/kuveliUSJpRSuKjo1XJ3XvDvyKOJn1QkmMkpr5P0EiZhPOw5OW
+ owBE7ky3vD3LIvfazKkjekeHpzIaHsUEl5x3amXYfT7etbn+nqxLo/3IY/mzMiU5vKyF
+ AGIw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792330904; x=1792935704;
+ d=1e100.net; s=20260707; t=1792331215; x=1792936015;
  h=in-reply-to:from:references:cc:to:subject:user-agent:mime-version
  :date:message-id:content-type:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=WQhwK78wnfJ5eZGrDMcIglkMM9XjuGAgLzw8Lwnd6Vc=;
- b=mi5HdBRP9xab/BjHKFlXKHIFuJiRNtpXdvQViMUOH9XdufTL2bQxeq5nJWRydAjeUS
- J0wDOI8TPlW5WxEBIv0oLuEsvcaDF7t5w7epAyNyKpkXJ5WGkJOuMQzMajD1yYxIGOBh
- 84eo3t2e9rhhj2wo+33QfGe0giAwprfkP6+Xxbx+c12YgjSubrtYKnh8pzuuCHGx6yAL
- 39j0iizuI1jG+WG4wiofG8fKCWepvgJL6l7QVClrrQ8HVyDlDABnSJ7ojbh78y5/zjoc
- 4tJfuGr3QKZoUa/iRizGBmbDdd0JHkl5NzmLrOy7I69vPSJ5HRWXXhEupIR8XvCFbMFW
- fuLg==
+ bh=v3WCI1tUGo09VV1rtuj2xXf776KiLDgjfSpYL4m1xtI=;
+ b=WGWFU6ukto2B/4SDz8wvb2cISFXCmEGEgYaMkxJ1qKcXdOY8kNgre/NHxbAZJ/7bth
+ E0oLu2ublvpZZxBZiVGQ6UCDYH6XLQyrKXV/DMFVQrep14EBiEeWkSKyTgkgzGnJnZk9
+ LuERzBsECjrwfkKQBSEhSS7mzi4osm96WTy9tv9q3knnzUPyYZrk0QUdUm04UJFfPgI+
+ K0Bd4nQ3QkK8x680hNCFCWh9w9Vw3MhSCpjVhEmpXCAKjtC83Pf+TMmSByi15pk11iGK
+ RmOXghEDJZzfIDxEPmM22r7djwz8rX9ghH64ParUr2fq/EtjbxP1cSE53pfvyA/CplOe
+ hm7A==
 X-Forwarded-Encrypted: i=1;
- AKwUvBwLoo4AP0vAhzmGqyeHKxURJZulRcqtugR+W3q+nfQoJm/rxfCJm0/HLsrsUg+rmwbbnGSI/Z1khOX1@nongnu.org
-X-Gm-Message-State: AFq9FYJlvxRTqIjjfJ06917uD+bfQ+HJnHWHDj76QoCuuhK0yIxdKCya
- aHMDCNNLc1AK+J9ahnwPGKks+RYg393xv5gZVHaA8GXegV4JQtH+dRmp
-X-Gm-Gg: AYBFou0rQxKrYDruyWGdQHbujGidc1huLbUs9Z/AsqbWbvrFDp9/1cauR/fXkZ8RF9l
- YcYbFhxo620G1ZAh16ScLIl3sYAl+LugjtMGWoxVejWgSS8XBKf0MgHd1t2S45c3WqUMmLpK4A5
- XHgELK9vr3z5RO6u98PFf4jdynaFuwm9umTehCk8XF70kFCDTf1CO8jVGKjwqmuZxqpDtLoJgpl
- 9Tp4s48hxZVzkI492M4hkS7nt/1iflOB5V4Vtq9uJX/YoybXkiCaVjUnFnKuRMSJEWkysc8oipP
- EHE6cKPLcdT1vV5kf95Oav7KCs1IBmiOoABS7yKnW1WQZbYY/Djo10KzWxcVx1yBttnRAYyGAIO
- rnFMawb06csM1E2ubXR1r2AbShbVzP4ZwTAODyfNB3wurakLbxVJ/d2Ab5lrAg194fo/g+YfeXI
- fQzOT4gxyZjAtu0dvAz4E7+wzUnw+JYT6/cR1oYHOtE1T54d3f70DoAOLig3RNd6uSCUyxeWOv8
- 13P6uDCSxJ7jYo=
-X-Received: by 2002:a05:6a00:3c91:b0:89e:261c:448b with SMTP id
- d2e1a72fcca58-8a04cb24551mr3730201b3a.34.1792330903641; 
- Sun, 18 Oct 2026 06:41:43 -0700 (PDT)
+ AKwUvBxExtV3JWYVXMrtL4TzIGPHTLI/4O9eqSphvtVXBvzPltNOf3rQK/+aIvWQ5ikgY0j8Wfixf3pFTXib@nongnu.org
+X-Gm-Message-State: AFq9FYJ3n5dRM6VoUDoFyqBBGji3ly9wj/4q97RxTQ6HQqC+pq99Qg3K
+ YaUYdJ1U9DMVmWfonc8728BwsSBL/LZ4Ap/RWxJM413NS5agzid7tJja
+X-Gm-Gg: AYBFou0VPmo1fc7V+q1f/bHgB1yyTWkkGGx/zlta3OnnNHA1Mr7pyaCThhK0+x93U43
+ Xn0nhozqArEfr0fh0iwUca3UIuoXCByG8cUBzJCspJvtBw0Ekx0MgZd3t1zU78cyJg/7BWRp3Hp
+ X82Odv3IEkEdYwqGXHFvCto5K8Xni+od9yX7Trz5daMA2BinuqU9g4GOAhMvr6pwl7O1XJJ6P4M
+ mvUj2lyl/7uGvc8puWSQ++BRPlKLbQPpwZ0lv5Y5PVFOjbtWIheaeuUKJmPVsu1Fu8oEhlc7an5
+ YWwkpupeW77vAvLJOo2QJuE78cceLIV9p5HhluVgVyeglaB7Fj+kiZhrftCM/el9oOb3Pjh0S2O
+ NzjPQ/hZldHNESbXoAZY61d3xqgPeCfRPkw3R4zJyaEbdQxsTvqwUY6a+QdP3IqGllVozBuvOlB
+ tILuSKu1ZH4SPzInnDMF6i01q3lD4LNkvFbRSXtzqRGlXnNFvxH0ZhOcw3V8ZC64CpbyViGbo8Q
+ EHLuKd7bpEU5Ic=
+X-Received: by 2002:a17:90b:224e:b0:3a8:59d3:530f with SMTP id
+ 98e67ed59e1d1-3acef596160mr4508914a91.57.1792331215105; 
+ Sun, 18 Oct 2026 06:46:55 -0700 (PDT)
 Received: from [192.168.3.23] ([101.204.150.66])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-89f56c8b922sm2939138b3a.11.2026.10.18.06.41.39
+ 98e67ed59e1d1-3acddc37958sm10094382a91.14.2026.10.18.06.46.51
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 18 Oct 2026 06:41:42 -0700 (PDT)
+ Sun, 18 Oct 2026 06:46:54 -0700 (PDT)
 Content-Type: multipart/alternative;
- boundary="------------uyKehUpbyQKH8SDP20PfNHxn"
-Message-ID: <b969dd01-6ed5-4a29-a112-b5f00dd78642@gmail.com>
-Date: Sun, 18 Oct 2026 21:41:37 +0800
+ boundary="------------f7XP9C0ic0mTre50cVJYPPGR"
+Message-ID: <1ab73f47-b18c-4e6f-86e1-749d2cc066d1@gmail.com>
+Date: Sun, 18 Oct 2026 21:46:49 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 5/5] hw/dma: fix k230_gsdma integer handling issues
+Subject: Re: [PATCH v2 0/5] Fix integer handling issues in k230_gsdma and
+ k230_decomp_gzip
 To: Alistair Francis <Alistair.Francis@wdc.com>,
  "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>
 Cc: "dingtao0430@163.com" <dingtao0430@163.com>,
@@ -83,12 +84,11 @@ Cc: "dingtao0430@163.com" <dingtao0430@163.com>,
  "chao.liu@processmission.com" <chao.liu@processmission.com>,
  "lvivier@redhat.com" <lvivier@redhat.com>
 References: <20261002140245.30214-1-dingtao0430@163.com>
- <20261002140245.30214-6-dingtao0430@163.com>
- <621efd0cf2f709dd9cc0491a7955d21bd0f7f09b.camel@wdc.com>
+ <e0d56fe8e8d4286bfead76189dad550ed5b7db7b.camel@wdc.com>
 From: Tao Ding <dingtaodtdt@gmail.com>
-In-Reply-To: <621efd0cf2f709dd9cc0491a7955d21bd0f7f09b.camel@wdc.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::431;
- envelope-from=dingtaodtdt@gmail.com; helo=mail-pf1-x431.google.com
+In-Reply-To: <e0d56fe8e8d4286bfead76189dad550ed5b7db7b.camel@wdc.com>
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52f;
+ envelope-from=dingtaodtdt@gmail.com; helo=mail-pg1-x52f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -112,69 +112,54 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 This is a multi-part message in MIME format.
---------------uyKehUpbyQKH8SDP20PfNHxn
+--------------f7XP9C0ic0mTre50cVJYPPGR
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 
+CID 1685513 appears to be an existing issue rather than one introduced by my patch.
+I’m also not familiar with this part of the code, so it may be better handled by the relevant maintainer.
 
-On 10/16/2026 10:05 AM, Alistair Francis wrote:
+On 10/16/2026 10:06 AM, Alistair Francis wrote:
 
 > On Fri, 2026-10-02 at 22:02 +0800, Tao Ding wrote:
->> Validate the address before subtracting the channel base and use
->> hwaddr
->> for channel calculations to prevent unsigned underflow and
->> truncation.
+>> Hi, all
 >>
->> Resolves: Coverity CID 1685514
->>
->> Reported-by: Alistair Francis<Alistair.Francis@wdc.com>
->> Signed-off-by: Tao Ding<dingtao0430@163.com>
->> ---
->> Compared to patchv1, the modification of ch has been removed.
->> Because ch is an unsigned int, it is sufficient.
->>
->>   hw/dma/k230_gsdma.c | 4 ++++
->>   1 file changed, 4 insertions(+)
->>
->> diff --git a/hw/dma/k230_gsdma.c b/hw/dma/k230_gsdma.c
->> index 7635cd19e8..e422b436a2 100644
->> --- a/hw/dma/k230_gsdma.c
->> +++ b/hw/dma/k230_gsdma.c
->> @@ -329,6 +329,9 @@ static uint64_t k230_gsdma_read(void *opaque,
->> hwaddr addr, unsigned int size)
->>           break;
->>       }
->>   
->> +    if (addr < K230_GSDMA_CH_BASE) {
->> +        goto out;
->> +    }
-> This isn't right, you already have a `if (addr < K230_GSDMA_CH_BASE)`
-> check above, just use that but return.
->
-> That way we don't log a read that doesn't actually happen, and can
-> avoid a goto
+>> This series fixes integer overflow, truncation, and underflow issues
+>> reported by Coverity in the K230 GZIP decompressor, its qtest, and
+>> GSDMA.
+>> https://lore.kernel.org/qemu-devel/5fc57f49cea0ac3542128d0e2208edd6d7484f7e.camel@wdc.com/
+> What about 1685513?
 >
 > Alistair
-
-Yes, we can return in the if in the default above.
-But some addresses arrive here through other branches of the switch, and these addresses are smaller than K230_SSDMA_CH_SASE.
-If there is no goto, overflow errors will occur when calculating "ch".
-The next patch will use conditional judgment to avoid using goto.
-
 >
->>       ch = (addr - K230_GSDMA_CH_BASE) / K230_GSDMA_CH_STRIDE;
->>       ch_off = (addr - K230_GSDMA_CH_BASE) % K230_GSDMA_CH_STRIDE;
->>       if (ch < K230_GSDMA_NUM_SDMA_CHANNELS) {
->> @@ -355,6 +358,7 @@ static uint64_t k230_gsdma_read(void *opaque,
->> hwaddr addr, unsigned int size)
->>           }
->>       }
->>   
->> +out:
->>       trace_k230_gsdma_read(addr, size, ret);
->>       return ret;
->>   }
---------------uyKehUpbyQKH8SDP20PfNHxn
+>> Thanks.
+>>
+>> The patchv1 series is posted in:
+>> https://lore.kernel.org/qemu-devel/20261001022223.8633-1-dingtao0430@163.com/T
+>>
+>> Changes in v1->v2:
+>> - Split the original k230_decomp_gzip patch into three patches, one
+>> for
+>>    each integer handling issue.
+>> - Remove the modifications "ch" in patchv1 3/3, which is now patchv2
+>> 5/5.
+>>
+>> Tao Ding (5):
+>>    hw/misc: fix calculating output address overflow in
+>> k230_decomp_gzip
+>>    hw/misc: fix calculating input address overflow in k230_decomp_gzip
+>>    hw/misc: use hwaddr for the k230_decomp_gzip input address
+>>    qtest: fix k230_decomp_gzip test integer handling issues
+>>    hw/dma: fix k230_gsdma integer handling issues
+>>
+>>   hw/dma/k230_gsdma.c                 | 4 ++++
+>>   hw/misc/k230_decomp_gzip.c          | 6 +++---
+>>   tests/qtest/k230-decomp-gzip-test.c | 2 +-
+>>   3 files changed, 8 insertions(+), 4 deletions(-)
+>>
+>>
+>> base-commit: 0a1ebd448b38afaa118597cbb633dbec24ef74d3
+--------------f7XP9C0ic0mTre50cVJYPPGR
 Content-Type: text/html; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
@@ -184,82 +169,63 @@ Content-Transfer-Encoding: 8bit
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   </head>
   <body>
-    <p><br>
-    </p>
-    <pre class="moz-cite-prefix">On 10/16/2026 10:05 AM, Alistair Francis wrote:
+    <pre>CID 1685513 appears to be an existing issue rather than one introduced by my patch. 
+I’m also not familiar with this part of the code, so it may be better handled by the relevant maintainer.</pre>
+    <pre class="moz-cite-prefix">On 10/16/2026 10:06 AM, Alistair Francis wrote:
 </pre>
     <blockquote type="cite"
-      cite="mid:621efd0cf2f709dd9cc0491a7955d21bd0f7f09b.camel@wdc.com">
+      cite="mid:e0d56fe8e8d4286bfead76189dad550ed5b7db7b.camel@wdc.com">
       <pre wrap="" class="moz-quote-pre">On Fri, 2026-10-02 at 22:02 +0800, Tao Ding wrote:
 </pre>
       <blockquote type="cite">
-        <pre wrap="" class="moz-quote-pre">Validate the address before subtracting the channel base and use
-hwaddr 
-for channel calculations to prevent unsigned underflow and
-truncation.
+        <pre wrap="" class="moz-quote-pre">Hi, all
 
-Resolves: Coverity CID 1685514
-
-Reported-by: Alistair Francis <a class="moz-txt-link-rfc2396E" href="mailto:Alistair.Francis@wdc.com">&lt;Alistair.Francis@wdc.com&gt;</a>
-Signed-off-by: Tao Ding <a class="moz-txt-link-rfc2396E" href="mailto:dingtao0430@163.com">&lt;dingtao0430@163.com&gt;</a>
----
-Compared to patchv1, the modification of ch has been removed. 
-Because ch is an unsigned int, it is sufficient.
-
- hw/dma/k230_gsdma.c | 4 ++++
- 1 file changed, 4 insertions(+)
-
-diff --git a/hw/dma/k230_gsdma.c b/hw/dma/k230_gsdma.c
-index 7635cd19e8..e422b436a2 100644
---- a/hw/dma/k230_gsdma.c
-+++ b/hw/dma/k230_gsdma.c
-@@ -329,6 +329,9 @@ static uint64_t k230_gsdma_read(void *opaque,
-hwaddr addr, unsigned int size)
-         break;
-     }
- 
-+    if (addr &lt; K230_GSDMA_CH_BASE) {
-+        goto out;
-+    }
+This series fixes integer overflow, truncation, and underflow issues
+reported by Coverity in the K230 GZIP decompressor, its qtest, and
+GSDMA.
+<a class="moz-txt-link-freetext" href="https://lore.kernel.org/qemu-devel/5fc57f49cea0ac3542128d0e2208edd6d7484f7e.camel@wdc.com/">https://lore.kernel.org/qemu-devel/5fc57f49cea0ac3542128d0e2208edd6d7484f7e.camel@wdc.com/</a>
 </pre>
       </blockquote>
       <pre wrap="" class="moz-quote-pre">
-This isn't right, you already have a `if (addr &lt; K230_GSDMA_CH_BASE)`
-check above, just use that but return.
-
-That way we don't log a read that doesn't actually happen, and can
-avoid a goto
+What about 1685513?
 
 Alistair
-</pre>
-    </blockquote>
-    <pre>Yes, we can return in the if in the default above.
-But some addresses arrive here through other branches of the switch, and these addresses are smaller than K230_SSDMA_CH_SASE.
-If there is no goto, overflow errors will occur when calculating "ch".
-The next patch will use conditional judgment to avoid using goto.</pre>
-    <blockquote type="cite"
-      cite="mid:621efd0cf2f709dd9cc0491a7955d21bd0f7f09b.camel@wdc.com">
-      <pre wrap="" class="moz-quote-pre">
 
 </pre>
       <blockquote type="cite">
-        <pre wrap="" class="moz-quote-pre">     ch = (addr - K230_GSDMA_CH_BASE) / K230_GSDMA_CH_STRIDE;
-     ch_off = (addr - K230_GSDMA_CH_BASE) % K230_GSDMA_CH_STRIDE;
-     if (ch &lt; K230_GSDMA_NUM_SDMA_CHANNELS) {
-@@ -355,6 +358,7 @@ static uint64_t k230_gsdma_read(void *opaque,
-hwaddr addr, unsigned int size)
-         }
-     }
- 
-+out:
-     trace_k230_gsdma_read(addr, size, ret);
-     return ret;
- }
+        <pre wrap="" class="moz-quote-pre">
+Thanks.
+
+The patchv1 series is posted in:
+<a class="moz-txt-link-freetext" href="https://lore.kernel.org/qemu-devel/20261001022223.8633-1-dingtao0430@163.com/T">https://lore.kernel.org/qemu-devel/20261001022223.8633-1-dingtao0430@163.com/T</a>
+
+Changes in v1-&gt;v2:
+- Split the original k230_decomp_gzip patch into three patches, one
+for
+  each integer handling issue.
+- Remove the modifications "ch" in patchv1 3/3, which is now patchv2
+5/5.
+
+Tao Ding (5):
+  hw/misc: fix calculating output address overflow in
+k230_decomp_gzip
+  hw/misc: fix calculating input address overflow in k230_decomp_gzip
+  hw/misc: use hwaddr for the k230_decomp_gzip input address
+  qtest: fix k230_decomp_gzip test integer handling issues
+  hw/dma: fix k230_gsdma integer handling issues
+
+ hw/dma/k230_gsdma.c                 | 4 ++++
+ hw/misc/k230_decomp_gzip.c          | 6 +++---
+ tests/qtest/k230-decomp-gzip-test.c | 2 +-
+ 3 files changed, 8 insertions(+), 4 deletions(-)
+
+
+base-commit: 0a1ebd448b38afaa118597cbb633dbec24ef74d3
 </pre>
       </blockquote>
     </blockquote>
   </body>
 </html>
 
---------------uyKehUpbyQKH8SDP20PfNHxn--
+--------------f7XP9C0ic0mTre50cVJYPPGR--
 
