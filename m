@@ -1,58 +1,58 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E97FD606A319
-	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Oct 2026 11:13:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 54B99606A319
+	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Oct 2026 11:13:17 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=f4nQMFmt
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=Dq0C0yWn
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xJ7Sv-000214-VR; Tue, 20 Oct 2026 06:53:10 -0400
+	id 1xJ7QZ-0007w4-Hz; Tue, 20 Oct 2026 06:50:43 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1xJ7Qn-0008ND-AL
- for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:50:57 -0400
+ id 1xJ7PG-00043w-SS
+ for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:49:23 -0400
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1xJ7Qj-0006PO-Ns
- for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:50:56 -0400
+ id 1xJ7PE-0005kE-0j
+ for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:49:22 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1792493450;
+ s=mimecast20190719; t=1792493359;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=S8kTexksySb92RkWPQob17KtLeYJq8y0yNIndqLcc+s=;
- b=f4nQMFmt9HbmsHLtdzHmaIaH9TXjy1n3ibAzFHOocV2s+aVV7oPBciEaWGlq/KyqT3bQws
- oWFu82Cs6x2S57tQZdRK1q7gbRBnM9TtXIxZTEuPqSKwdIDgWOuqs6DvZxvMpil7ihVVzV
- E5CTeNTEUrEU5fSTsJMWQNHdvSMldzs=
-Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
+ bh=R8vVLHsjEWyiM3GyLmHOx9f7QvIPqbFYRpW6VNEtrF4=;
+ b=Dq0C0yWnYVZ/Cx04ZWwngqaU/lvTR7rTCu3Y2LlZCeBipOK8drahR2e87jqbeGo0GENNNl
+ jnf1ISCS3yTIMiKqbXKY19MtoyM0fpIiQPgQ1PlQmybTs3xV0Y6272mZ+mzCUcRODyjCJF
+ e4jXAgviV8e6k0wITVm72TFevIy3+nw=
+Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-689-7M2NqJufMDOobZCWpwZs9w-1; Tue,
- 20 Oct 2026 10:50:45 +0000
-X-MC-Unique: 7M2NqJufMDOobZCWpwZs9w-1
-X-Mimecast-MFC-AGG-ID: 7M2NqJufMDOobZCWpwZs9w_1792493441
-Received: from mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.17])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-443-LCXPFJilNDyc21HBnDLkMg-1; Tue,
+ 20 Oct 2026 10:49:15 +0000
+X-MC-Unique: LCXPFJilNDyc21HBnDLkMg-1
+X-Mimecast-MFC-AGG-ID: LCXPFJilNDyc21HBnDLkMg_1792493351
+Received: from mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.93])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 5E3CE1954AF3; Tue, 20 Oct 2026 10:50:41 +0000 (UTC)
+ by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 8E0361955BD4; Tue, 20 Oct 2026 10:49:11 +0000 (UTC)
 Received: from localhost (headnet04.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.116])
- by mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 4CA251956095; Tue, 20 Oct 2026 10:50:38 +0000 (UTC)
+ by mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id 51BBB18002B1; Tue, 20 Oct 2026 10:49:08 +0000 (UTC)
 From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-Date: Tue, 20 Oct 2026 14:46:06 +0400
-Subject: [PATCH v7 49/65] include: add QEMU_REPEAT helper macro
+Date: Tue, 20 Oct 2026 14:45:50 +0400
+Subject: [PATCH v7 33/65] hw/ppc/spapr_caps: fix property type name
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Message-Id: <20261020-qom-qapi-v7-49-431a86b02b58@redhat.com>
+Message-Id: <20261020-qom-qapi-v7-33-431a86b02b58@redhat.com>
 References: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 In-Reply-To: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 To: qemu-devel@nongnu.org
@@ -127,25 +127,25 @@ Cc: Markus Armbruster <armbru@redhat.com>,
  Yoshinori Sato <yoshinori.sato@nifty.com>, Jiri Pirko <jiri@resnulli.us>, 
  Eric Auger <eric.auger@redhat.com>, Laurent Vivier <lvivier@redhat.com>, 
  =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=5069;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=878;
  i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=QfToyuYJOLlF7sVISH3TkcbrVSBGm2Ii2KsCu8httjE=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZctD1NQTngqU/jBCkEfMek9xa0vMpb6NJE8
- n3GhucWk+2JAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGXAAKCRDa6OEJdZac
- 5Ql3D/wOI62xjJd8gtsu1K015Mj1esGNk3N1OdLVzhvzC8XbQvPEjY9tEjanTvUT/tSDkebzQqp
- wfSbuNHZo2LWhz4d7Wb0804H4k/QbpWXXItKX82506hR5MwcSm8hUjY/X6b3sz99rcdsWT0OYuB
- N2PLFvmXrXrT34rd2lk3l9IEv008VGElWvHn+lGOsyEFdIi/zoDQuQTkGXQNX9r8iwDerholxzT
- +YZ5vO9NOWYzlEcvAPuA1dqTZKv0M9sHG++CE+6rKm7la2iiLolf0dIPC9Lek616L5XTeNy7Con
- EF8tZhpLovhA6XrZr2f/PiaJxHf5yCU0Sq0nNl8Fbybo63RLmGHKN3Eu3hwqRCLDy9l1/5v++ol
- S9hoHIJukwRZWnX0ts9nDy7TeFwjlL2jTa5zYCWg9W7/sdnOtFpaRYdj/lgqkMlTa+D86mUvx9a
- 9InKktX0yyqWi5G5hNKi9NOS0lo8H7z0cS/vAMcv16S106YylJ7/t+pIcH0uo8VsZZRuXZ7h/LE
- P4apvjyFIb53bu2HO5H2KfwPzrSgW8jM6CGO9+0RBtkG7nQ+6OYilLtspSRo2mGJD8ejzD5m8U6
- /mj9N3MBuGZckwN2lJSTywe0n7qy4Ybb5v/f4A7HZtbB78gEulqlZppqsvIUcivzHg3tITYzqlL
- tsVVC+qXxIFzhWg==
+ bh=Qq7OSQxtuwlCseGf35wegvnM5f+EnUrGWd4RRhnAzxw=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZaWeTAuqQ+RlnWisH2RQ0zLCOkC+4rdcGXQ
+ QZYeC6VHiyJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGWgAKCRDa6OEJdZac
+ 5SEMD/9w84ouUqqiCZ64ZylCbaeUJxtrtqWrrPUGFcC4JDbVpUU7Nct7HZK5iaBsDnqrZURBNr/
+ 8RtOPyRuf3Q4/lguHW+RKtJ6Jw6sS9784J67RNrbD/EUHDIUOt7QzUVNwflsohDZNJOI9y+5Jnm
+ kQo6SsduyW19qi63LcidGWcAlV/Xhkp7CQCbfFhhsWCCOZImzdzQNYXU5o48Xw0oHdXg8nKkp8o
+ CHqOboRWcyM8r62/Gw1pH4wfJ4FTNQ6cZE+4d9Vig+z5pqWha7vzQllfk7aMxXAmqkXS/vARQoM
+ UXUUZp/aZHyRnnikACNHPNcdFMpXi+1ZumV++RqFqAMt4YSox+qwQ7UscrjDUjEIb5XAOUktB5B
+ VPkm6qZmiK9o23zlZPnbrcOd6Cc/oVEoxtzF/5aGWNPq4xUErMRaj6oZ1O0g3E2Sp17WjDScFl+
+ 0lzVm3f2Q6znwnFis+4sg7ZlVUeCQv4+0yNa6+YCuJUlOi9rSfQRe9bHmQZvOvqRYdxKhXzWeUP
+ px5zlcXZSRP9vaSQKS4s9yZuJXZyk9Fm+4Tp9UD7LAkNEdD0HnXM4AvsfFojISVCJV9Kog3R+f0
+ PepoSJr4XZ308R58TgTJ4NL5LlAsuYnr0Pwm+XPXvg1N8aoTb4MS7gKitj+utet5HHJ0ws1tClu
+ dh4Iln1OvPNjzpQ==
 X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
  fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.17
-X-Mimecast-MFC-PROC-ID: Y2z5NiHxbzYixE9U6eOj0IKe_ertgsZ2dV5M2fMzTkE_1792493441
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.93
+X-Mimecast-MFC-PROC-ID: fH93TA3qVHAdpf9DDC_6IwdIj66OeQty7ayL4OWO5Qg_1792493351
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
@@ -177,141 +177,28 @@ X-Spam-Status: No, score=-16.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Introduce a macro used in following commit, and convert a few existing
-candidates. Inspired by a similar macro in Linux kernel/trace/bpf_trace.c
+The getter/setter use visit_type_size(). Fix the type name mismatch.
 
+Reviewed-by: Amit Machhiwal <amachhiw@linux.ibm.com>
 Signed-off-by: Markus Armbruster <armbru@redhat.com>
 Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 ---
- hw/misc/tz-ppc.c               | 19 ++-----------------
- hw/remote/vfio-user-obj.c      | 17 +++--------------
- include/hw/cxl/cxl_component.h |  5 +----
- include/qemu/osdep.h           | 33 +++++++++++++++++++++++++++++++++
- 4 files changed, 39 insertions(+), 35 deletions(-)
+ hw/ppc/spapr_caps.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/hw/misc/tz-ppc.c b/hw/misc/tz-ppc.c
-index 6f820430eed8..5f09ce164c19 100644
---- a/hw/misc/tz-ppc.c
-+++ b/hw/misc/tz-ppc.c
-@@ -303,26 +303,11 @@ static const VMStateDescription tz_ppc_vmstate = {
- 
- #define DEFINE_PORT(N)                                          \
-     DEFINE_PROP_LINK("port[" #N "]", TZPPC, port[N].downstream, \
--                     TYPE_MEMORY_REGION, MemoryRegion *)
-+                     TYPE_MEMORY_REGION, MemoryRegion *),
- 
- static const Property tz_ppc_properties[] = {
-     DEFINE_PROP_UINT32("NONSEC_MASK", TZPPC, nonsec_mask, 0),
--    DEFINE_PORT(0),
--    DEFINE_PORT(1),
--    DEFINE_PORT(2),
--    DEFINE_PORT(3),
--    DEFINE_PORT(4),
--    DEFINE_PORT(5),
--    DEFINE_PORT(6),
--    DEFINE_PORT(7),
--    DEFINE_PORT(8),
--    DEFINE_PORT(9),
--    DEFINE_PORT(10),
--    DEFINE_PORT(11),
--    DEFINE_PORT(12),
--    DEFINE_PORT(13),
--    DEFINE_PORT(14),
--    DEFINE_PORT(15),
-+    QEMU_REPEAT(TZ_NUM_PORTS, DEFINE_PORT)
- };
- 
- static void tz_ppc_class_init(ObjectClass *klass, const void *data)
-diff --git a/hw/remote/vfio-user-obj.c b/hw/remote/vfio-user-obj.c
-index 7e6819f670b5..84c3ff05cfb8 100644
---- a/hw/remote/vfio-user-obj.c
-+++ b/hw/remote/vfio-user-obj.c
-@@ -496,22 +496,11 @@ static size_t vfu_object_bar_rw(PCIDevice *pci_dev, int pci_bar,
-                                  buf, count, is_write);                        \
-     }                                                                          \
- 
--VFU_OBJECT_BAR_HANDLER(0)
--VFU_OBJECT_BAR_HANDLER(1)
--VFU_OBJECT_BAR_HANDLER(2)
--VFU_OBJECT_BAR_HANDLER(3)
--VFU_OBJECT_BAR_HANDLER(4)
--VFU_OBJECT_BAR_HANDLER(5)
--VFU_OBJECT_BAR_HANDLER(6)
-+QEMU_REPEAT(PCI_NUM_REGIONS, VFU_OBJECT_BAR_HANDLER)
- 
-+#define VFU_OBJECT_BAR_HANDLER_PTR(BAR_NO) vfu_object_bar##BAR_NO##_handler,
- static vfu_region_access_cb_t *vfu_object_bar_handlers[PCI_NUM_REGIONS] = {
--    &vfu_object_bar0_handler,
--    &vfu_object_bar1_handler,
--    &vfu_object_bar2_handler,
--    &vfu_object_bar3_handler,
--    &vfu_object_bar4_handler,
--    &vfu_object_bar5_handler,
--    &vfu_object_bar6_handler,
-+    QEMU_REPEAT(PCI_NUM_REGIONS, VFU_OBJECT_BAR_HANDLER_PTR)
- };
- 
- /**
-diff --git a/include/hw/cxl/cxl_component.h b/include/hw/cxl/cxl_component.h
-index ffc82202206c..fca8b7055ccd 100644
---- a/include/hw/cxl/cxl_component.h
-+++ b/include/hw/cxl/cxl_component.h
-@@ -186,10 +186,7 @@ REG32(CXL_HDM_DECODER_GLOBAL_CONTROL, CXL_HDM_REGISTERS_OFFSET + 4)
- /* Support 4 decoders at all levels of topology */
- #define CXL_HDM_DECODER_COUNT 4
- 
--HDM_DECODER_INIT(0);
--HDM_DECODER_INIT(1);
--HDM_DECODER_INIT(2);
--HDM_DECODER_INIT(3);
-+QEMU_REPEAT(CXL_HDM_DECODER_COUNT, HDM_DECODER_INIT)
- 
- /*
-  * CXL r3.1 Section 8.2.4.21: CXL Extended Security Capability Structure
-diff --git a/include/qemu/osdep.h b/include/qemu/osdep.h
-index 1ec5b42230be..a5e7ff99cb89 100644
---- a/include/qemu/osdep.h
-+++ b/include/qemu/osdep.h
-@@ -191,6 +191,39 @@ extern "C" {
- 
- #include "qemu/typedefs.h"
- 
-+/*
-+ * QEMU_REPEAT(n, m) - invoke m(0) m(1) ... m(n-1)
-+ *
-+ * Expands to n invocations of m, each with a literal integer argument.
-+ * n must be a compile-time constant in 0..16.
-+ *
-+ * Example - generate 4 per-index function definitions:
-+ *
-+ *   #define DEFINE_GETTER(i) \
-+ *   static int get_##i(void) { return values[i]; }
-+ *
-+ *   QEMU_REPEAT(4, DEFINE_GETTER)
-+ */
-+#define QEMU_REPEAT_0(m)
-+#define QEMU_REPEAT_1(m)   QEMU_REPEAT_0(m)   m(0)
-+#define QEMU_REPEAT_2(m)   QEMU_REPEAT_1(m)   m(1)
-+#define QEMU_REPEAT_3(m)   QEMU_REPEAT_2(m)   m(2)
-+#define QEMU_REPEAT_4(m)   QEMU_REPEAT_3(m)   m(3)
-+#define QEMU_REPEAT_5(m)   QEMU_REPEAT_4(m)   m(4)
-+#define QEMU_REPEAT_6(m)   QEMU_REPEAT_5(m)   m(5)
-+#define QEMU_REPEAT_7(m)   QEMU_REPEAT_6(m)   m(6)
-+#define QEMU_REPEAT_8(m)   QEMU_REPEAT_7(m)   m(7)
-+#define QEMU_REPEAT_9(m)   QEMU_REPEAT_8(m)   m(8)
-+#define QEMU_REPEAT_10(m)  QEMU_REPEAT_9(m)   m(9)
-+#define QEMU_REPEAT_11(m)  QEMU_REPEAT_10(m)  m(10)
-+#define QEMU_REPEAT_12(m)  QEMU_REPEAT_11(m)  m(11)
-+#define QEMU_REPEAT_13(m)  QEMU_REPEAT_12(m)  m(12)
-+#define QEMU_REPEAT_14(m)  QEMU_REPEAT_13(m)  m(13)
-+#define QEMU_REPEAT_15(m)  QEMU_REPEAT_14(m)  m(14)
-+#define QEMU_REPEAT_16(m)  QEMU_REPEAT_15(m)  m(15)
-+#define QEMU_REPEAT_(n, m) QEMU_REPEAT_##n(m)
-+#define QEMU_REPEAT(n, m)  QEMU_REPEAT_(n, m)
-+
- /**
-  * Mark a function that executes in coroutine context
-  *
+diff --git a/hw/ppc/spapr_caps.c b/hw/ppc/spapr_caps.c
+index 0d659e9b0251..103b17364feb 100644
+--- a/hw/ppc/spapr_caps.c
++++ b/hw/ppc/spapr_caps.c
+@@ -784,7 +784,7 @@ SpaprCapabilityInfo capability_table[SPAPR_CAP_NUM] = {
+         .index = SPAPR_CAP_HPT_MAXPAGESIZE,
+         .get = spapr_cap_get_pagesize,
+         .set = spapr_cap_set_pagesize,
+-        .type = "int",
++        .type = "size",
+         .apply = cap_hpt_maxpagesize_apply,
+         .cpu_apply = cap_hpt_maxpagesize_cpu_apply,
+     },
 
 -- 
 2.56.0.116.g6de20f6092dc
