@@ -1,165 +1,124 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1C3AC60A3817
-	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Oct 2026 10:51:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6704D60A263B
+	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Oct 2026 10:51:22 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=QMWsi5VV
+	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=Sx2SUMg9
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xJ7Qw-00008d-5r; Tue, 20 Oct 2026 06:51:08 -0400
+	id 1xJ7KC-0004jT-Je; Tue, 20 Oct 2026 06:44:08 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1xJ7Q7-0006b8-Nv
- for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:50:15 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1xJ7Q4-0006CH-WD
- for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:50:15 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1792493412;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=EljyyKpOaP+UVHeVMtiabRjWia9m5EXPj7DEMxHLTqI=;
- b=QMWsi5VVcviMK0s0SHV+TgMQk21CviSjtawjS/R8q89kZClam+7WG56cyle89XmhkpEnMp
- 9JMXCTEeMD61s7Ip6tjq2YTSPsDcHoc0fea4kdHHaI3V0ZcykzlXQ/yoMvpxa8DQuLr5za
- 0MvGekwskWGDTwuoBBqy1OmjO3Zc8Zo=
-Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-553-_7Frlu4AM46-pYvhF0dpvA-1; Tue,
- 20 Oct 2026 10:50:08 +0000
-X-MC-Unique: _7Frlu4AM46-pYvhF0dpvA-1
-X-Mimecast-MFC-AGG-ID: _7Frlu4AM46-pYvhF0dpvA_1792493403
-Received: from mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.93])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 7188D1956076; Tue, 20 Oct 2026 10:50:03 +0000 (UTC)
-Received: from localhost (headnet04.pony-001.prod.iad2.dc.redhat.com
- [10.2.32.116])
- by mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id DC7271800586; Tue, 20 Oct 2026 10:50:00 +0000 (UTC)
-From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-Date: Tue, 20 Oct 2026 14:45:59 +0400
-Subject: [PATCH v7 42/65] virtio-balloon: convert guest-stats property to
- QAPI type
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1xJ7Jl-0004Hh-Ow
+ for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:43:42 -0400
+Received: from mail-wr1-x429.google.com ([2a00:1450:4864:20::429])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1xJ7JY-0004M6-Ej
+ for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:43:41 -0400
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-48b042c0728so917720f8f.1
+ for <qemu-riscv@nongnu.org>; Tue, 20 Oct 2026 03:43:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1792493006; x=1793097806; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:mime-version:references
+ :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=XaCIspnOiGUcI2BoHO8g5A8hP2lh454sdkCiT2j/ODo=;
+ b=Sx2SUMg95c/MQuCE2y3KSOn1ySYbwFIHLcQAJP89Zs7MlH4aV6cycUrGnB3E8Wfwaj
+ GHcVS2ltquv+xz8iLB6IcHs29nw6Aq9/6owebnMzEJSBuN+aLRWqgj6v6OAmXltuM/1s
+ oYQSp2retdaHkSfqANykQftu58GJe1bcc+hVZ+6SjQYZ7RvbcTUQj4NSv1vOjZjoyka4
+ 1WsHkx+lQi8IDe91wFaJ2DIp7LV/BxYjk7vIkoNMQ+h8rGOSnkKTIgepMK1Q/qt+FgSl
+ F6RI3PRM7n5wLd44Vkzbg3P82KLU7E1uxwRiizTE0OnWb++hKac1WayzsWmXNRjpo2Zp
+ ooxA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1792493006; x=1793097806;
+ h=content-transfer-encoding:content-type:mime-version:references
+ :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=XaCIspnOiGUcI2BoHO8g5A8hP2lh454sdkCiT2j/ODo=;
+ b=o0B9UlKd62k6CYdXiAyEm+RVNf0JAgfK1Id9losoc+n0jeqzNgdoXxV2AdBJSpxzVC
+ 6BWdhB4xpt9fx49fvD3j1AS27toLMPzzmxhldqMF509D9mg4q+tiAFb+KrPs6YOzYiGH
+ J7xSK1+wZcN73DQxWiKLgSqu7+WLs7QIMeAoePFt2BTLyh5VifF/snTMsJjujEn2eznl
+ v8Wn3Lfk5YTx8GP7QAwFGc9BvevoZBaGLkRv0fxzymg0i9wcg0Bx1NHvHyTSG9avV/wg
+ hM61bvkveTo83yFfLLDSOHcsSN6FCHPSB/Yf6KWsTqBvuhzuPaAk+yVaG5UZFKOAn5li
+ CFag==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBz6lFcMZ21923IG2tqsOUecQwA771L3V4fObISRUEw7oGT6BN/50Z+UP4rbMhp9XTWyIqhRcEvQhrAP@nongnu.org
+X-Gm-Message-State: AFq9FYKl1a6tQIYsEd7mI7s1v3KBeANezeiunTRDEsKI/DA0ujaQuw3w
+ LyeXK9tXJBIJO0Uehh2GxLqjDnx8jzGtPE2b0zwc/nZ4+qjYvIlDn1hiMSPCbpWEwA8=
+X-Gm-Gg: AYBFou0MBgkL9KBmJYHoL5HNbqndwcG7u/+RMcWI2EzHwuTFZYOKMro5fPbqOemQLbN
+ 6p8YJf0odmmCV62cTcROmsk6rTz/WN9qorWS7MeB+MNMQV/ZkChD6o4vWr/6SeQ/jqEdpeO3Pao
+ ga09ZO7TBAUFx01opTlsWWFqYoIAbt7m3OrLIR0bPvdWZJ3qKpscWQB+Pf5K+/0MGKLT9zdEyn3
+ JTO8krTH2ofUDYln98V2/NmyVoxL2pA6d+xcolgUvBWpqrpR505jfiQmXO1eLCRqimmQf2mHhHY
+ TSInIcH0G0bD5q170QvR8lN4x3gxhNA6aema2dF0WRrdq1oF4Z3JulB6Djxqgjd489qJ/VkRh+q
+ N1ELhikG7oWilWHScq7YtEyArvS8u3CFfp3xvkVr/iTsnQK1ZmKbzm+TEUmKY6VVcOo4oKewprt
+ fedqmAtS9ayo22j336bQl8sdj0q6siCoy2Op/+cDyWZpjTGVO5btKyBq7j3USSmVGXLTUn+zZTX
+ j8liw+M
+X-Received: by 2002:adf:e001:0:10b0:48d:f876:f370 with SMTP id
+ ffacd0b85a97d-48e1bdf80a0mr4553512f8f.48.1792493006379; 
+ Tue, 20 Oct 2026 03:43:26 -0700 (PDT)
+Received: from draig.lan ([185.124.0.158]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-48e1d820714sm5176611f8f.35.2026.10.20.03.43.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 20 Oct 2026 03:43:24 -0700 (PDT)
+Received: from draig.lan (localhost [IPv6:::1])
+ by draig.lan (Postfix) with ESMTP id 871EE5FB54;
+ Tue, 20 Oct 2026 11:43:21 +0100 (BST)
+From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: Bibo Mao <maobibo@loongson.cn>,
+ Christian Borntraeger <borntraeger@linux.ibm.com>,
+ Ilya Leoshkevich <iii@linux.ibm.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, Eric Farman <farman@linux.ibm.com>,
+ Song Gao <17746591750@163.com>, Harsh Prateek Bora <harshpb@linux.ibm.com>,
+ David Hildenbrand <david@kernel.org>, Bernhard Beschow <shentey@gmail.com>,
+ Halil Pasic <pasic@linux.ibm.com>, Nicholas Piggin <npiggin@gmail.com>,
+ Paul Durrant <paul@xen.org>,
+ =?UTF-8?q?Bj=C3=B6rn=20Walk?= <bwalk@linux.ibm.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, qemu-s390x@nongnu.org,
+ David Woodhouse <dwmw2@infradead.org>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-ppc@nongnu.org,
+ Marcelo Tosatti <mtosatti@redhat.com>, kvm@vger.kernel.org,
+ qemu-arm@nongnu.org, linux-edac@vger.kernel.org,
+ Glenn Miles <milesg@linux.ibm.com>, Chao Liu <chao.liu@processmission.com>,
+ Cornelia Huck <cohuck@redhat.com>, Gautam Menghani <gautam@linux.ibm.com>,
+ Xianglai Li <lixianglai@loongson.cn>,
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+ Chinmay Rath <rathc@linux.ibm.com>, "Michael S. Tsirkin" <mst@redhat.com>,
+ Matthew Rosato <mjrosato@linux.ibm.com>,
+ Amit Machhiwal <amachhiw@linux.ibm.com>, Zhao Liu <zhao1.liu@intel.com>,
+ Weiwei Li <liwei1518@gmail.com>, Peter Maydell <peter.maydell@linaro.org>,
+ Mauro Carvalho Chehab <mchehab+huawei@kernel.org>, qemu-riscv@nongnu.org,
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
+Subject: [PATCH 09/23] accel/kvm: port kvm_arch_post_run to KVMCPUOps
+Date: Tue, 20 Oct 2026 11:43:03 +0100
+Message-ID: <20261020104320.3686723-10-alex.bennee@linaro.org>
+X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20261020104320.3686723-1-alex.bennee@linaro.org>
+References: <20261020104320.3686723-1-alex.bennee@linaro.org>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Message-Id: <20261020-qom-qapi-v7-42-431a86b02b58@redhat.com>
-References: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
-In-Reply-To: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
-To: qemu-devel@nongnu.org
-Cc: Markus Armbruster <armbru@redhat.com>, 
- Michael Roth <michael.roth@amd.com>, John Snow <jsnow@redhat.com>, 
- Peter Maydell <peter.maydell@linaro.org>, 
- Mauro Carvalho Chehab <mchehab+huawei@kernel.org>, 
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, 
- Paolo Bonzini <pbonzini@redhat.com>, 
- =?utf-8?q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
- Kostiantyn Kostiuk <kkostiuk@redhat.com>, Eric Blake <eblake@redhat.com>, 
- David Hildenbrand <david@kernel.org>, Igor Mammedov <imammedo@redhat.com>, 
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
- Jason Wang <jasowangio@gmail.com>, Marcelo Tosatti <mtosatti@redhat.com>, 
- kvm@vger.kernel.org, Alberto Garcia <berto@igalia.com>, 
- Kevin Wolf <kwolf@redhat.com>, Hanna Reitz <hreitz@redhat.com>, 
- =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>, 
- Zhao Liu <zhao1.liu@intel.com>, Jonathan Cameron <jic23@kernel.org>, 
- Junjie Cao <junjie.cao@intel.com>, Anisa Su <anisa.su@samsung.com>, 
- Elena Ufimtseva <elena.ufimtseva@oracle.com>, 
- Jagannathan Raman <jag.raman@oracle.com>, 
- John Levon <john.levon@nutanix.com>, 
- Thanos Makatos <thanos.makatos@nutanix.com>, 
- =?utf-8?q?C=C3=A9dric_Le_Goater?= <clg@redhat.com>, 
- Cornelia Huck <cohuck@redhat.com>, Eric Farman <farman@linux.ibm.com>, 
- Matthew Rosato <mjrosato@linux.ibm.com>, 
- Richard Henderson <richard.henderson@linaro.org>, 
- Ilya Leoshkevich <iii@linux.ibm.com>, qemu-block@nongnu.org, 
- linux-cxl@vger.kernel.org, qemu-s390x@nongnu.org, 
- "Michael S. Tsirkin" <mst@redhat.com>, Sergio Lopez <slp@redhat.com>, 
- qemu-arm@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, 
- Weiwei Li <liwei1518@gmail.com>, 
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org, 
- Song Gao <17746591750@163.com>, Bibo Mao <maobibo@loongson.cn>, 
- Xianglai Li <lixianglai@loongson.cn>, Jiaxun Yang <jiaxun.yang@flygoat.com>, 
- Pedro Barbuda <pbarbuda@microsoft.com>, 
- Mohamed Mediouni <mohamed@unpredictable.fr>, 
- Nicholas Piggin <npiggin@gmail.com>, 
- Harsh Prateek Bora <harshpb@linux.ibm.com>, 
- Amit Machhiwal <amachhiw@linux.ibm.com>, qemu-ppc@nongnu.org, 
- Zhang Chen <zhangckid@gmail.com>, Li Zhijian <lizhijian@fujitsu.com>, 
- Alistair Francis <alistair@alistair23.me>, Alexander Graf <graf@amazon.com>, 
- "Gonglei (Arei)" <arei.gonglei@huawei.com>, 
- zhenwei pi <zhenwei.pi@linux.dev>, Ani Sinha <anisinha@redhat.com>, 
- Luc Michel <luc@lmichel.fr>, 
- =?utf-8?q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>, 
- Jamin Lin <jamin_lin@aspeedtech.com>, Kane Chen <kane_chen@aspeedtech.com>, 
- Samuel Tardieu <sam@rfc1149.net>, "Denis V. Lunev" <den@openvz.org>, 
- FangSheng Huang <FangSheng.Huang@amd.com>, Tyrone Ting <kfting@nuvoton.com>, 
- Hao Wu <wuhaotsh@google.com>, Keith Busch <kbusch@kernel.org>, 
- Klaus Jensen <its@irrelevant.dk>, Jesper Devantier <foss@defmacro.it>, 
- Aditya Gupta <adityag@linux.ibm.com>, Glenn Miles <milesg@linux.ibm.com>, 
- Conor Dooley <conor@kernel.org>, 
- Sebastian Huber <sebastian.huber@embedded-brains.de>, 
- Halil Pasic <pasic@linux.ibm.com>, 
- Christian Borntraeger <borntraeger@linux.ibm.com>, 
- Jason Herne <jjherne@linux.ibm.com>, Titus Rwantare <titusr@google.com>, 
- Stefano Stabellini <sstabellini@kernel.org>, 
- Anthony PERARD <anthony@xenproject.org>, Peter Xu <peterx@redhat.com>, 
- Chinmay Rath <rathc@linux.ibm.com>, 
- Hendrik Brueckner <brueckner@linux.ibm.com>, xen-devel@lists.xenproject.org, 
- Roman Bolshakov <rbolshakov@ddn.com>, 
- Phil Dennis-Jordan <phil@philjordan.eu>, Fam Zheng <fam@euphon.net>, 
- Farhan Ali <alifm@linux.ibm.com>, Alex Williamson <alex@shazbot.org>, 
- Tao Tang <tangtao1634@phytium.com.cn>, 
- Stefan Berger <stefanb@linux.vnet.ibm.com>, Fabiano Rosas <farosas@suse.de>, 
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>, 
- Artyom Tarasenko <atar4qemu@gmail.com>, 
- Yoshinori Sato <yoshinori.sato@nifty.com>, Jiri Pirko <jiri@resnulli.us>, 
- Eric Auger <eric.auger@redhat.com>, Laurent Vivier <lvivier@redhat.com>, 
- =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=10182;
- i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=0g8PFfs3LJuc0BLWv6rMvjXCCHAbNtdnRJuucBbysso=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZbJgd7s8Bcgu4jJ87MBVuZ+yAsGD3uZV7Ld
- ZOdhpMi4vyJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGWwAKCRDa6OEJdZac
- 5a+iD/9O1qwWl2Gco4J1mBvanY/rwFGr7NPb9pyAfuwVDpozMDdvXhMl7hahB1Ds96uxJ/rE4qX
- SBiL4gdjh3V17vwq4s8eVGAy4vXzmKarp9JFyYGBdIYBMyaD/l/nF9JpCvzHBfeoJVaJiT1PQQt
- xYL67ZSgUBNuzxP6nOe8i/6molK+XMubhLA3Kq2QQXlkYO/VdfQtO/IJhzrmXxbG01aPW1rlCzK
- dpH2Pg86MU+st3pFO6V2u2mWPT4iBrhRvldHPguFEFz3XzWBP4mk0lC6FjZzlsEbsug2La+TE/A
- Cssx+kRcv3yHPtzgrG0dTA8JSlBWJMGi6Mj+MpceHoDoFYuX3fYpide5R/fVlg+SeNqlorDtHuk
- novEDfzkqUfPInZeNVGWeblx5V2CWdPPHGjJiTexE+gYnW0dCzCdm7huVbeMNcwx115bEnARo3K
- 3p5W5EaVBokC/qsklxmPmHMpC8HOC11c6bky6ZydQ9R0CXbJaooGegZUHMl8BQVojw9uT4HuIEf
- zhvHk7DKGkyT1aTa3Oe+Ey83EQ7NDIygPh75uIZjWT6gzgVMLebNYJMiE9wdeb8EdXuAg/JFEnW
- F8wmPQVW1QH9o6VSbwih+m8LfSoBGJO4URR1+cnKCLSUdPeyYFJmFz5ZccsUYDyKK8i/VtQMyW0
- 2U8t9WP1qP4jaPg==
-X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
- fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.93
-X-Mimecast-MFC-PROC-ID: zPWsOdLRN9839Y_ppKmcIHiGq_e37pgNwjfeTGcowZg_1792493403
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.129.124;
- envelope-from=marcandre.lureau@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: 9
-X-Spam_score: 0.9
-X-Spam_bar: /
-X-Spam_report: (0.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.329,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_SBL_CSS=3.335, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+Received-SPF: pass client-ip=2a00:1450:4864:20::429;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x429.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -171,283 +130,207 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-16.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham autolearn_force=no version=4.0.1
+	SPF_PASS,USER_AGENT_GIT autolearn=unavailable autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Define VirtioBalloonStats and VirtioBalloonGuestStats QAPI struct types
-in the schema, replacing the hand-rolled visitor in balloon_stats_get_all()
-with a generated visit_type_VirtioBalloonGuestStats() call.
+Again not all arches do something for this so default to set
+MEMTXATTRS_UNSPECIFIED for any potential MMIO we might handle next.
 
-The wire format is preserved: the JSON output from qom-get is identical
-to the previous hand-rolled visitor output.
-
-Signed-off-by: Markus Armbruster <armbru@redhat.com>
-Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
+Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- docs/interop/virtio-balloon-stats.rst | 22 +--------
- hw/virtio/virtio-balloon.c            | 84 ++++++++++++--------------------
- qapi/machine.json                     | 92 +++++++++++++++++++++++++++++++++++
- 3 files changed, 123 insertions(+), 75 deletions(-)
+ include/accel/kvm/cpu-ops.h | 8 ++++++++
+ include/system/kvm.h        | 2 --
+ target/i386/kvm/kvm_i386.h  | 1 +
+ accel/kvm/kvm-all.c         | 6 +++++-
+ target/arm/kvm.c            | 3 ++-
+ target/i386/kvm/kvm-cpu.c   | 1 +
+ target/i386/kvm/kvm.c       | 2 +-
+ target/loongarch/kvm/kvm.c  | 5 -----
+ target/ppc/kvm.c            | 5 -----
+ target/riscv/kvm/kvm-cpu.c  | 5 -----
+ target/s390x/kvm/kvm.c      | 5 -----
+ 11 files changed, 18 insertions(+), 25 deletions(-)
 
-diff --git a/docs/interop/virtio-balloon-stats.rst b/docs/interop/virtio-balloon-stats.rst
-index b9a6a6edb229..88d3271bbb02 100644
---- a/docs/interop/virtio-balloon-stats.rst
-+++ b/docs/interop/virtio-balloon-stats.rst
-@@ -22,27 +22,7 @@ polling the guest's balloon driver for new stats in the specified time
- interval.
+diff --git a/include/accel/kvm/cpu-ops.h b/include/accel/kvm/cpu-ops.h
+index 2c04fa5adf5..e74081eb133 100644
+--- a/include/accel/kvm/cpu-ops.h
++++ b/include/accel/kvm/cpu-ops.h
+@@ -23,9 +23,17 @@ struct kvm_run;
+  *           that need to inject pending events (e.g. x86 NMI/SMI) or verify
+  *           injected exceptions (e.g. ARM external data aborts).
+  *           May be NULL if the target does not require pre-run handling.
++ * @post_run: Optional callback executed immediately after the KVM_RUN ioctl
++ *            returns in the vCPU thread loop. Used by architectures to
++ *            inspect or process hardware registers/flags (e.g. x86 APIC/TPR
++ *            or ARM timer interrupt synchronization) and return the
++ *            #MemTxAttrs to use for handling MMIO exits.
++ *            May be NULL if the target does not require post-run handling,
++ *            in which case MEMTXATTRS_UNSPECIFIED is assumed.
+  */
+ typedef struct KVMCPUOps {
+     void (*pre_run)(CPUState *cpu, struct kvm_run *run);
++    MemTxAttrs (*post_run)(CPUState *cpu, struct kvm_run *run);
+ } KVMCPUOps;
  
- To retrieve those stats, clients have to query the guest-stats property,
--which will return a dictionary containing:
--
--  * A key named 'stats', containing all available stats. If the guest
--    doesn't support a particular stat, or if it couldn't be retrieved,
--    its value will be -1. Currently, the following stats are supported:
--
--      - stat-swap-in
--      - stat-swap-out
--      - stat-major-faults
--      - stat-minor-faults
--      - stat-free-memory
--      - stat-total-memory
--      - stat-available-memory
--      - stat-disk-caches
--      - stat-htlb-pgalloc
--      - stat-htlb-pgfail
--
--  * A key named last-update, which contains the last stats update
--    timestamp in seconds. Since this timestamp is generated by the host,
--    a buggy guest can't influence its value. The value is 0 if the guest
--    has not updated the stats (yet).
-+which will return a VirtioBalloonGuestStats (see QAPI documentation).
+ #define TYPE_KVM_ACCEL_CPU "kvm-accel-cpu"
+diff --git a/include/system/kvm.h b/include/system/kvm.h
+index e9d7b86ea4a..82785d37600 100644
+--- a/include/system/kvm.h
++++ b/include/system/kvm.h
+@@ -333,8 +333,6 @@ extern const KVMCapabilityInfo kvm_arch_required_capabilities[];
  
- It's also important to note the following:
+ void kvm_arch_accel_class_init(ObjectClass *oc);
  
-diff --git a/hw/virtio/virtio-balloon.c b/hw/virtio/virtio-balloon.c
-index 7ffbe48e5134..bfc75f5dfc72 100644
---- a/hw/virtio/virtio-balloon.c
-+++ b/hw/virtio/virtio-balloon.c
-@@ -29,6 +29,8 @@
- #include "qapi/error.h"
- #include "qapi/qapi-builtin-type-infos.h"
- #include "qapi/qapi-events-machine.h"
-+#include "qapi/qapi-type-infos-machine.h"
-+#include "qapi/qapi-visit-machine.h"
- #include "qapi/visitor.h"
- #include "trace.h"
- #include "qemu/error-report.h"
-@@ -170,33 +172,8 @@ static void balloon_deflate_page(VirtIOBalloon *balloon,
+-MemTxAttrs kvm_arch_post_run(CPUState *cpu, struct kvm_run *run);
+-
+ int kvm_arch_handle_exit(CPUState *cpu, struct kvm_run *run);
+ 
+ int kvm_arch_process_async_events(CPUState *cpu);
+diff --git a/target/i386/kvm/kvm_i386.h b/target/i386/kvm/kvm_i386.h
+index 218ae8f09ce..6fb1da6a40c 100644
+--- a/target/i386/kvm/kvm_i386.h
++++ b/target/i386/kvm/kvm_i386.h
+@@ -34,6 +34,7 @@ bool kvm_hyperv_expand_features(X86CPU *cpu, Error **errp);
+ int kvm_get_vm_type(MachineState *ms);
+ void kvm_arch_reset_vcpu(X86CPU *cs);
+ void x86_kvm_pre_run(CPUState *cpu, struct kvm_run *run);
++MemTxAttrs x86_kvm_post_run(CPUState *cpu, struct kvm_run *run);
+ void kvm_arch_after_reset_vcpu(X86CPU *cpu);
+ void kvm_arch_do_init_vcpu(X86CPU *cs);
+ uint32_t kvm_arch_get_supported_cpuid(KVMState *env, uint32_t function,
+diff --git a/accel/kvm/kvm-all.c b/accel/kvm/kvm-all.c
+index 4dca5467f4a..41229774068 100644
+--- a/accel/kvm/kvm-all.c
++++ b/accel/kvm/kvm-all.c
+@@ -3500,7 +3500,11 @@ int kvm_cpu_exec(CPUState *cpu)
+          * as true, cpu->exit_request will always read as true.
+          */
+ 
+-        attrs = kvm_arch_post_run(cpu, run);
++        if (ops->post_run) {
++            attrs = ops->post_run(cpu, run);
++        } else {
++            attrs = MEMTXATTRS_UNSPECIFIED;
++        }
+ 
+ #ifdef KVM_HAVE_MCE_INJECTION
+         if (unlikely(have_sigbus_pending)) {
+diff --git a/target/arm/kvm.c b/target/arm/kvm.c
+index 4475fd1a9d9..d5f9b7c088c 100644
+--- a/target/arm/kvm.c
++++ b/target/arm/kvm.c
+@@ -1404,7 +1404,7 @@ static void arm_kvm_pre_run(CPUState *cs, struct kvm_run *run)
      }
  }
  
--/*
-- * All stats upto VIRTIO_BALLOON_S_NR /must/ have a
-- * non-NULL name declared here, since these are used
-- * as keys for populating the QDict with stats
-- */
--static const char *balloon_stat_names[] = {
--   [VIRTIO_BALLOON_S_SWAP_IN] = "stat-swap-in",
--   [VIRTIO_BALLOON_S_SWAP_OUT] = "stat-swap-out",
--   [VIRTIO_BALLOON_S_MAJFLT] = "stat-major-faults",
--   [VIRTIO_BALLOON_S_MINFLT] = "stat-minor-faults",
--   [VIRTIO_BALLOON_S_MEMFREE] = "stat-free-memory",
--
--   [VIRTIO_BALLOON_S_MEMTOT] = "stat-total-memory",
--   [VIRTIO_BALLOON_S_AVAIL] = "stat-available-memory",
--   [VIRTIO_BALLOON_S_CACHES] = "stat-disk-caches",
--   [VIRTIO_BALLOON_S_HTLB_PGALLOC] = "stat-htlb-pgalloc",
--   [VIRTIO_BALLOON_S_HTLB_PGFAIL] = "stat-htlb-pgfail",
--
--   [VIRTIO_BALLOON_S_OOM_KILL] = "stat-oom-kills",
--   [VIRTIO_BALLOON_S_ALLOC_STALL] = "stat-alloc-stalls",
--   [VIRTIO_BALLOON_S_ASYNC_SCAN] = "stat-async-scans",
--   [VIRTIO_BALLOON_S_DIRECT_SCAN] = "stat-direct-scans",
--   [VIRTIO_BALLOON_S_ASYNC_RECLAIM] = "stat-async-reclaims",
--
--   [VIRTIO_BALLOON_S_DIRECT_RECLAIM] = "stat-direct-reclaims",
--};
--G_STATIC_ASSERT(G_N_ELEMENTS(balloon_stat_names) == VIRTIO_BALLOON_S_NR);
-+/* Update VirtioBalloonStats QAPI type when new stats are added */
-+G_STATIC_ASSERT(VIRTIO_BALLOON_S_NR == 16);
- 
- /*
-  * reset_stats - Mark all items in the stats array as unset
-@@ -258,33 +235,31 @@ static void balloon_stats_get_all(Object *obj, Visitor *v, const char *name,
-                                   void *opaque, Error **errp)
+-MemTxAttrs kvm_arch_post_run(CPUState *cs, struct kvm_run *run)
++static MemTxAttrs arm_kvm_post_run(CPUState *cs, struct kvm_run *run)
  {
-     VirtIOBalloon *s = VIRTIO_BALLOON(obj);
--    bool ok = false;
--    int i;
-+    VirtioBalloonStats stats = {
-+        .stat_swap_in = s->stats[VIRTIO_BALLOON_S_SWAP_IN],
-+        .stat_swap_out = s->stats[VIRTIO_BALLOON_S_SWAP_OUT],
-+        .stat_major_faults = s->stats[VIRTIO_BALLOON_S_MAJFLT],
-+        .stat_minor_faults = s->stats[VIRTIO_BALLOON_S_MINFLT],
-+        .stat_free_memory = s->stats[VIRTIO_BALLOON_S_MEMFREE],
-+        .stat_total_memory = s->stats[VIRTIO_BALLOON_S_MEMTOT],
-+        .stat_available_memory = s->stats[VIRTIO_BALLOON_S_AVAIL],
-+        .stat_disk_caches = s->stats[VIRTIO_BALLOON_S_CACHES],
-+        .stat_htlb_pgalloc = s->stats[VIRTIO_BALLOON_S_HTLB_PGALLOC],
-+        .stat_htlb_pgfail = s->stats[VIRTIO_BALLOON_S_HTLB_PGFAIL],
-+        .stat_oom_kills = s->stats[VIRTIO_BALLOON_S_OOM_KILL],
-+        .stat_alloc_stalls = s->stats[VIRTIO_BALLOON_S_ALLOC_STALL],
-+        .stat_async_scans = s->stats[VIRTIO_BALLOON_S_ASYNC_SCAN],
-+        .stat_direct_scans = s->stats[VIRTIO_BALLOON_S_DIRECT_SCAN],
-+        .stat_async_reclaims = s->stats[VIRTIO_BALLOON_S_ASYNC_RECLAIM],
-+        .stat_direct_reclaims = s->stats[VIRTIO_BALLOON_S_DIRECT_RECLAIM],
-+    };
-+    VirtioBalloonGuestStats guest_stats = {
-+        .last_update = s->stats_last_update,
-+        .stats = &stats,
-+    };
-+    VirtioBalloonGuestStats *argp = &guest_stats;
+     ARMCPU *cpu;
+     uint32_t switched_level;
+@@ -2667,6 +2667,7 @@ void arm_gic_cap_kvm_probe(GICCapability *v2, GICCapability *v3)
  
--    if (!visit_start_struct(v, name, NULL, 0, errp)) {
--        return;
--    }
--    if (!visit_type_int(v, "last-update", &s->stats_last_update, errp)) {
--        goto out_end;
--    }
--
--    if (!visit_start_struct(v, "stats", NULL, 0, errp)) {
--        goto out_end;
--    }
--    for (i = 0; i < VIRTIO_BALLOON_S_NR; i++) {
--        if (!visit_type_uint64(v, balloon_stat_names[i], &s->stats[i], errp)) {
--            goto out_nested;
--        }
--    }
--    ok = visit_check_struct(v, errp);
--out_nested:
--    visit_end_struct(v, NULL);
--
--    if (ok) {
--        visit_check_struct(v, errp);
--    }
--out_end:
--    visit_end_struct(v, NULL);
-+    visit_type_VirtioBalloonGuestStats(v, name, &argp, errp);
+ static const KVMCPUOps arm_kvm_cpu_ops = {
+     .pre_run = arm_kvm_pre_run,
++    .post_run = arm_kvm_post_run,
+ };
+ 
+ static void kvm_cpu_accel_class_init(ObjectClass *oc, const void *data)
+diff --git a/target/i386/kvm/kvm-cpu.c b/target/i386/kvm/kvm-cpu.c
+index eab5ab46d45..64af85cd113 100644
+--- a/target/i386/kvm/kvm-cpu.c
++++ b/target/i386/kvm/kvm-cpu.c
+@@ -236,6 +236,7 @@ static void kvm_cpu_instance_init(CPUState *cs)
+ 
+ static const KVMCPUOps x86_kvm_cpu_ops = {
+     .pre_run = x86_kvm_pre_run,
++    .post_run = x86_kvm_post_run,
+ };
+ 
+ static void kvm_cpu_accel_class_init(ObjectClass *oc, const void *data)
+diff --git a/target/i386/kvm/kvm.c b/target/i386/kvm/kvm.c
+index e9bcda70dac..a1b91d502f0 100644
+--- a/target/i386/kvm/kvm.c
++++ b/target/i386/kvm/kvm.c
+@@ -5995,7 +5995,7 @@ static void kvm_rate_limit_on_bus_lock(void)
+     }
  }
  
- static void balloon_stats_get_poll_interval(Object *obj, Visitor *v,
-@@ -1037,7 +1012,8 @@ static void virtio_balloon_instance_init(Object *obj)
-     s->free_page_hint_cmd_id = VIRTIO_BALLOON_FREE_PAGE_HINT_CMD_ID_MIN;
-     s->free_page_hint_notify.notify = virtio_balloon_free_page_hint_notify;
+-MemTxAttrs kvm_arch_post_run(CPUState *cpu, struct kvm_run *run)
++MemTxAttrs x86_kvm_post_run(CPUState *cpu, struct kvm_run *run)
+ {
+     X86CPU *x86_cpu = X86_CPU(cpu);
+     CPUX86State *env = &x86_cpu->env;
+diff --git a/target/loongarch/kvm/kvm.c b/target/loongarch/kvm/kvm.c
+index b8fb2094062..192538c0aa9 100644
+--- a/target/loongarch/kvm/kvm.c
++++ b/target/loongarch/kvm/kvm.c
+@@ -1517,11 +1517,6 @@ int kvm_arch_irqchip_create(KVMState *s)
+     return kvm_check_extension(s, KVM_CAP_DEVICE_CTRL);
+ }
  
--    object_property_add(obj, "guest-stats", "guest statistics",
-+    object_property_add_qapi(obj, "guest-stats",
-+                        &VirtioBalloonGuestStats_type_info,
-                         balloon_stats_get_all, NULL, NULL, NULL);
+-MemTxAttrs kvm_arch_post_run(CPUState *cs, struct kvm_run *run)
+-{
+-    return MEMTXATTRS_UNSPECIFIED;
+-}
+-
+ int kvm_arch_process_async_events(CPUState *cs)
+ {
+     return cs->halted;
+diff --git a/target/ppc/kvm.c b/target/ppc/kvm.c
+index 17b16e33881..5ef4722cd6f 100644
+--- a/target/ppc/kvm.c
++++ b/target/ppc/kvm.c
+@@ -1336,11 +1336,6 @@ int kvmppc_set_interrupt(PowerPCCPU *cpu, int irq, int level)
+     return 0;
+ }
  
-     object_property_add_qapi(obj, "guest-stats-polling-interval", &int_type_info,
-diff --git a/qapi/machine.json b/qapi/machine.json
-index 9b145c635baf..34be3156270c 100644
---- a/qapi/machine.json
-+++ b/qapi/machine.json
-@@ -1126,6 +1126,98 @@
- ##
- { 'struct': 'BalloonInfo', 'data': {'actual': 'int' } }
+-MemTxAttrs kvm_arch_post_run(CPUState *cs, struct kvm_run *run)
+-{
+-    return MEMTXATTRS_UNSPECIFIED;
+-}
+-
+ int kvm_arch_process_async_events(CPUState *cs)
+ {
+     return cs->halted;
+diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
+index 8575e673811..9580b6c1b20 100644
+--- a/target/riscv/kvm/kvm-cpu.c
++++ b/target/riscv/kvm/kvm-cpu.c
+@@ -1640,11 +1640,6 @@ int kvm_arch_process_async_events(CPUState *cs)
+     return 0;
+ }
  
-+##
-+# @VirtioBalloonStats:
-+#
-+# VirtIO balloon device guest memory statistics.
-+#
-+# If the guest doesn't support a particular stat, or if it couldn't
-+# be retrieved, its value will be -1.
-+#
-+# @stat-swap-in: The amount of memory that has been
-+#     swapped in (in bytes).
-+#
-+# @stat-swap-out: The amount of memory that has been
-+#     swapped out to disk (in bytes).
-+#
-+# @stat-major-faults: The number of major page faults
-+#     that have occurred.
-+#
-+# @stat-minor-faults: The number of minor page faults
-+#     that have occurred.
-+#
-+# @stat-free-memory: The amount of memory not being used
-+#     for any purpose (in bytes).
-+#
-+# @stat-total-memory: The total amount of memory available
-+#     (in bytes).
-+#
-+# @stat-available-memory: An estimate of how much memory is available
-+#     (in bytes) for starting new applications, without pushing the
-+#     system to swap.
-+#
-+# @stat-disk-caches: The amount of memory, in bytes, that can be
-+#     quickly reclaimed without additional I/O.  Typically these pages
-+#     are used for caching files from disk.
-+#
-+# @stat-htlb-pgalloc: The number of successful hugetlb page
-+#     allocations
-+#
-+# @stat-htlb-pgfail: The number of failed hugetlb page
-+#     allocations
-+#
-+# @stat-oom-kills: The number of OOM killer invocations
-+#
-+# @stat-alloc-stalls: The number of memory allocation stalls
-+#
-+# @stat-async-scans: The number of memory scanned asynchronously
-+#
-+# @stat-direct-scans: The number of memory scanned directly
-+#
-+# @stat-async-reclaims: The number of memory reclaimed asynchronously
-+#
-+# @stat-direct-reclaims: The number of memory reclaimed directly
-+#
-+# Since: 11.2
-+##
-+{ 'struct': 'VirtioBalloonStats',
-+  'data': {
-+    'stat-swap-in': 'uint64',
-+    'stat-swap-out': 'uint64',
-+    'stat-major-faults': 'uint64',
-+    'stat-minor-faults': 'uint64',
-+    'stat-free-memory': 'uint64',
-+    'stat-total-memory': 'uint64',
-+    'stat-available-memory': 'uint64',
-+    'stat-disk-caches': 'uint64',
-+    'stat-htlb-pgalloc': 'uint64',
-+    'stat-htlb-pgfail': 'uint64',
-+    'stat-oom-kills': 'uint64',
-+    'stat-alloc-stalls': 'uint64',
-+    'stat-async-scans': 'uint64',
-+    'stat-direct-scans': 'uint64',
-+    'stat-async-reclaims': 'uint64',
-+    'stat-direct-reclaims': 'uint64' } }
-+
-+##
-+# @VirtioBalloonGuestStats:
-+#
-+# Guest statistics from the VirtIO balloon device.
-+#
-+# @last-update: timestamp in seconds of the last stats
-+#     update from the guest (since this timestamp is generated
-+#     by the host, a buggy guest can't influence its value),
-+#     or 0 if no update has been received yet.
-+#
-+# @stats: balloon memory statistics
-+#
-+# Since: 11.2
-+##
-+{ 'struct': 'VirtioBalloonGuestStats',
-+  'data': {
-+    'last-update': 'int',
-+    'stats': 'VirtioBalloonStats' } }
-+
- ##
- # @query-balloon:
- #     Return information about the balloon device.
-
+-MemTxAttrs kvm_arch_post_run(CPUState *cs, struct kvm_run *run)
+-{
+-    return MEMTXATTRS_UNSPECIFIED;
+-}
+-
+ bool kvm_arch_stop_on_emulation_error(CPUState *cs)
+ {
+     return true;
+diff --git a/target/s390x/kvm/kvm.c b/target/s390x/kvm/kvm.c
+index 827816e5b98..ad1145c4ec1 100644
+--- a/target/s390x/kvm/kvm.c
++++ b/target/s390x/kvm/kvm.c
+@@ -984,11 +984,6 @@ void kvm_arch_update_guest_debug(CPUState *cpu, struct kvm_guest_debug *dbg)
+     }
+ }
+ 
+-MemTxAttrs kvm_arch_post_run(CPUState *cs, struct kvm_run *run)
+-{
+-    return MEMTXATTRS_UNSPECIFIED;
+-}
+-
+ int kvm_arch_process_async_events(CPUState *cs)
+ {
+     return cs->halted;
 -- 
-2.56.0.116.g6de20f6092dc
+2.47.3
 
 
