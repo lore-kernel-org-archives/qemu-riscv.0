@@ -1,122 +1,110 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 61312606A319
-	for <qemu-riscv@archiver.kernel.org>; Mon, 19 Oct 2026 22:24:16 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 206D8606A319
+	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Oct 2026 05:01:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=alistair23.me header.i=@alistair23.me header.a=rsa-sha256 header.s=fm2 header.b=Iiej6qJP;
-	dkim=pass (2048-bit key, unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.a=rsa-sha256 header.s=fm2 header.b=Ss4Pk4bb
+	dkim=pass (2048-bit key, unprotected) header.d=tenstorrent.com header.i=@tenstorrent.com header.a=rsa-sha256 header.s=google header.b=dY4e5d5J
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xIvlx-0006zH-1k; Mon, 19 Oct 2026 18:24:01 -0400
+	id 1xJ1yK-00066z-OS; Tue, 20 Oct 2026 01:01:12 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair@alistair23.me>)
- id 1xIvls-0006yq-Vt
- for qemu-riscv@nongnu.org; Mon, 19 Oct 2026 18:23:58 -0400
-Received: from fout-b3-smtp.messagingengine.com ([202.12.124.146])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair@alistair23.me>)
- id 1xIvlr-0002gH-2P
- for qemu-riscv@nongnu.org; Mon, 19 Oct 2026 18:23:56 -0400
-Received: from phl-compute-04.internal (phl-compute-04.internal [10.202.2.44])
- by mailfout.stl.internal (Postfix) with ESMTP id F286A1D00217
- for <qemu-riscv@nongnu.org>; Mon, 19 Oct 2026 18:23:52 -0400 (EDT)
-Received: from phl-imap-06 ([10.202.2.83])
- by phl-compute-04.internal (MEProxy); Mon, 19 Oct 2026 18:23:53 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alistair23.me;
- h=cc:cc:content-transfer-encoding:content-type:content-type
- :date:date:from:from:in-reply-to:in-reply-to:message-id
- :mime-version:references:reply-to:subject:subject:to:to; s=fm2;
- t=1792448631; x=1792535031; bh=JwbIzoAFj7s/tMni55F1SZTrVuBkHFU8
- C4xASiD8/X8=; b=Iiej6qJPhGUTEiNEUh5tJoZjQSs8OSLZO2s8Vrpvqri50SUS
- lfRrL1QJh6UYFGH8ZRlV7DQyD2pdqFSTjbQ0rfLSnRzrv/+yK/eoa/+o9y8Nuq4z
- NeTRdRjv0TcjOCmtcmjCeQr0Q2oXj1I/8jjYZUmy3ikfHYZPZSxcAxVgubxPgl4b
- xlJpb6yX1JxR+j9Gp2HXneA6uW4u32IpegIcXBUHX4Xiw/hGazZsPgZa6WbXLDUV
- M/PT16vB6VGEH0HRE29CFQzLcgLzP6zmBwgdePkCKg5dQxSpn34o0KzgQ+38v8dC
- ABegdcchaM8pZltIzufhNfH8V/a0A2vriX+Jyw==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-transfer-encoding
- :content-type:content-type:date:date:feedback-id:feedback-id
- :from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1792448631; x=
- 1792535031; bh=JwbIzoAFj7s/tMni55F1SZTrVuBkHFU8C4xASiD8/X8=; b=S
- s4Pk4bb0QxzMJ9UbDgnpp3FXEW+F2QCx82Gsc9HAq+bq6/ZJ4l4uJI7w6ZHNH3Ps
- lR7slNbasAoiglzoB+dU8socpcU2PcoyRV3pla6WF4ba6dGvaYK4ekaJZNXltXIn
- P2HYA0it8Mz65zTGXUSp0cbPTILq2/vPaFdw8xOG8MLbtzfSCvQBXJceyEHABMPb
- PbGtkw5wygb5dxMHQDdyI57MtiPwlKmWY+z0AInlDtxDW8JI/kNn72n3+aHkdgrh
- wbB8PcczStmz85rI301UDZrcCBeQJB9KxlVtsXY59aPY6ejuQdAPhegAs/389QkF
- TnI4NRpeNigjWyLbMuy0w==
-X-DKIM2-Info: draft=ietf-dkim-dkim2-spec-06;
- repo=github.com/dkim2wg/interop; date=2026-10-08; sw=lmtpprox;
- action=sign d=alistair23.me a=rsa-sha256;
-DKIM2-Signature: i=1; m=1; t=1792448631; d=alistair23.me;
- mf=PGFsaXN0YWlyQGFsaXN0YWlyMjMubWU+;
- rt=PHFlbXUtcmlzY3ZAbm9uZ251Lm9yZz4=;
- s=fm2:rsa-sha256:dvrPVnAIc4kLgNxxCZvOCJO9aYzjbqWeSMH2NwN1octgRrG
- Bedev3FWRiJToUeFvCAWeM0V8POUlxNqxDj1Xq0n6nhvgx6jSXVoIk7Lcx6gZKCQ
- 86Py0lKftZtTs4s2ThZpI476pX5B4iRHel7uamPUAmqaer9NR2rKROtEXvXIr0cj
- tLv2WPgSJ/KQ7ihtjAW+im/aLJpAuh0A63JLucS65xdqsx+MQDOFP4kmdF8YfVDn
- kIUpbr6OFJeotpaG2vO06MX7v8b3bAIXqkTDB048Y/4QxzPRwFb0d2kHj91ZxJXh
- UW1xqMlboQMYM3F3uJdz8IsPQ/inWRaxVZ10uTQ==;
-X-DKIM2-Info: draft=ietf-dkim-dkim2-spec-06;
- repo=github.com/dkim2wg/interop; date=2026-10-08; sw=lmtpprox;
- action=mi-m=1; hc=12;
- hn=cc,content-transfer-encoding,content-type,date,feedback-id,
- from,in-reply-to,message-id,mime-version,references,subject,to;
-Message-Instance: m=1;
- h=sha256:qKQjxaLqHd1D4iLSyQAZV/XxHJXDTpzQyK9HiaG6nm8=:FtbcGGLUG4SDzZioCwEHlhkf3tyFlA8vb8BTvLbgaY8=;
-X-ME-Sender: <xms:dpjWanZyUk2XWRTgPmKQKRtQMCjXJSy1tomxXsj5YWBgAMjvGifldA>
- <xme:dpjWahOUR7N2UIMC84P7vNJwBsX_vp2_2_hqHKtJWOJPd209hvHiMdCDCbmcUNGOs
- 16nEMbLLi00o7Hoh25QMsDThSZkRY43drcQWWumlIUnA37filioGxJb>
-X-ME-Proxy-Cause: dmFkZTGtph2muZbhyLna+X23pHTdR85Me4lQuTrfHOOsZBYs/Kg/Z1WF+iop5X+9YXu3mb
- qV3jSR8/C4Ylla+EZfb2pxWEa4emeXJrnb78ScoQoewY3wMXucoScf2AxJQLFGIfghZHtx
- 8AGIuttibxsTchm5zrfCGrkKN51FHDa0VvQfjY6nADlQBZEFUHjOiKL+ErkRLnyLP2Ofu0
- l2uvd2UNwQj54n2YY2W0hA3h+9U3oQhn5szTl76E2VPpDGiXeBp1H9x3EqSR5hQQChUKe/
- qwXYQpjIZpT2B8wVTPnR4UmOXOy4uLYpzmGJ9bv37scF4JMDrtzIpYxK5tCZIE/gJ+eEOm
- pA2KJOBnBlNr13p5+mqqVEztYdCAOWdnSIDVQvhPNxWjoXTV/r7UeCADtN6zAkSsKBd2nU
- zCkA8qqvd22y/o0UXoW/AVLIVOcyC9V1M7X4phHytLfwYPj480aTx2rm5Hc8AePT5DdIWt
- LEEOjSTNVTFJhbzVcDJaHOQeDQHNcf9zunmFC+RYnNrrfbJws/eQT5Tc/gawbKDuM1N+F4
- Q3e6g9PTY152OnwmWhzGs0IicpXDGbVohhwcM0suF7nX5T8K44GtWZK6SGgUM1JmHFynz5
- XBpca5hk5B3nC3Dv4boTB43W9FcmHrJBBn6j10JYPLFKUM14O2E284ZL+lZA
-X-ME-Proxy: <xmx:dpjWan5hKBP3-UW9BBVZA50mUvL0wqcpiQf7RFv3f7GuMBNhpDhh9Q>
- <xmx:dpjWapedvAsGtJ18zlXS9MI9uy-5VgZPwS1PvTImNedgWLNkcVbwGQ>
- <xmx:dpjWai78viHdGBm0NmRuHQEES44qEAMUle7s4pYbFe76pou0aKV7vg>
- <xmx:dpjWau-0v4OA_H3an0tQPivAlRGbJLzCOQ1qce2zqJ4f0tTXMP6urQ>
- <xmx:d5jWaqUV8mQ4O7POKcCgnvJaWoIt1lvX_L46KCzhieOG9G99B5fqHu8C>
-Feedback-ID: ifd214418:Fastmail
-Received: by mailuser.phl.internal (Postfix, from userid 501)
- id 7C83D2400098; Mon, 19 Oct 2026 18:23:50 -0400 (EDT)
-X-Mailer: MessagingEngine.com Webmail Interface
+ (Exim 4.90_1) (envelope-from <portias@tenstorrent.com>)
+ id 1xJ1yI-00066U-Hx
+ for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 01:01:10 -0400
+Received: from mail-pj1-x1035.google.com ([2607:f8b0:4864:20::1035])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <portias@tenstorrent.com>)
+ id 1xJ1yE-0001Du-UL
+ for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 01:01:09 -0400
+Received: by mail-pj1-x1035.google.com with SMTP id
+ 98e67ed59e1d1-3acb1224533so537098a91.2
+ for <qemu-riscv@nongnu.org>; Mon, 19 Oct 2026 22:01:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=tenstorrent.com; s=google; t=1792472465; x=1793077265; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=EAaRc8Swd9yFZG0wYIL94sKXbXDTRScbWo9hSG6e9eQ=;
+ b=dY4e5d5JMsvtDwK6yn+GHSg2EZN+9j3RZIwf5W5ADbABhRbQ8+OX6/AQ7qG3G6DJX4
+ PzmNhSv3/e037xF10+Y5d/cGTJPGLzMKSmU5qzgJRzI0HiFkywXpw8WgkPnLvgsCn4gx
+ 8Kcajki2BJ+frLO06HZHt3GjDm1BAMmreCEiJdxHNBr5VLAyTC/5ObccCYCrWw2qcE0f
+ RsYUwkPPp8BdJJRN3xB2DC9ADj0YQGEJZTOBfrrUtYnhi2fUTrgbX2KgEgxsgfbREbyC
+ xUuEXpN2ISysaoa+HsYaRmKcLuKSrA4dIBpc+1QP1FpXZB5/FO7K1+lrTK1d+mMaRPZ/
+ 3ULw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1792472465; x=1793077265;
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=EAaRc8Swd9yFZG0wYIL94sKXbXDTRScbWo9hSG6e9eQ=;
+ b=TY3+2CrY9sqOUrCct7sqDtmT3Kc6eRAGJaIYWqLgIQf7eUHmc9Aoo4gjdW/8Q6dTZW
+ CekW67Vb10NTn3khaO8T+rRnvmvrFvYG9CI/OsleIlQKdkUHL6vxiJjVIYH4hHnhmiy9
+ 0CP+29QB1rbkn2z1DXMyZOopOylWTuHIXNZjcFyxlLWOiisFeaR2fPj8NgcPTd7/Izyo
+ 1Q19uXZMoA+dwRmqlHAPc4Un1jxL5ehE6CWsl5i+Eyw/vGZqGmb+idE569oAkW2TFMba
+ v4gK2cc7aNK5U7xBwvjUAexozpuDPE1lF4vZW0aZDbjVJ7Cg83l8kd8faQFjMVUbn/Ub
+ xFgg==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBwazwTj0T0TDY4qqAqUL0bSPCX9fawjikwgY1zP/KOrNW00qlPB2lhbgU5NB20u1mpEBHa7cummDkMp@nongnu.org
+X-Gm-Message-State: AFq9FYJI9MY+tgZdGTvENjLREKh3WEyQJYjbgBIX79PinRC7rHOo5R4v
+ bIuJchaDh/K7ahBHMI4q/dZgIL1pKEpRmdkKWvyRxpOh7QMOojrNsWL3pGeIViCuu9Q=
+X-Gm-Gg: AYBFou1ic5fo67oCrM5ccCCVIW+v1pK9eJs30eBqJDR/I02y/uICgDWicRTb5IuczaD
+ 7P7JhBqzY4NoEyD7PdiqwE33LyyOgyY+Gvt43n/IWQ+96o3vEcZxaI1XlvF4OMRlqTqZhpNg5Ln
+ wjAWDv0jSD1MJ5kW1QDqHlLM4nq82UBBudGaok3tg4wvgOv7pPQ3PBJoRevXvjI2wcjCtbbXs5r
+ HEqGsYtFKofyJcQTTFA3dMfto1HSwbH5wvGE9SPmHOQgs9VHDVOtHafYdP5kS8gztdLyWPGOyaG
+ 2btjyJfO9kNbo7eGf5Vl5P4sHhMR8mJLu3vVfDktX4zKjRaJMS8OJD1KrnOzu+27GqvmomLnGlU
+ GwYuwHLYfuPGtRQ4EQRT4UDc81BMDl9Z87tJxgiSI//SV4ZYEvzMxZ2tndwZ5/zdjC5d7z6Kc59
+ xBQOu21HEpnb/jp4e5l5QxDEY9m4yaN6RiDw75nAGZ6yfmzG2pmI164QWoaGaxAsgaoEatcV5fo
+ QK7V8TwmUT3kFYN5G/Lau1rEqdyzVRys3Rw
+X-Received: by 2002:a17:90b:39a4:b0:3a8:736e:c19b with SMTP id
+ 98e67ed59e1d1-3acef4e05e6mr13912591a91.4.1792472464858; 
+ Mon, 19 Oct 2026 22:01:04 -0700 (PDT)
+Received: from [172.16.1.33] ([159.196.41.205])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-3ad5d6df937sm2257387a91.12.2026.10.19.22.00.58
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 19 Oct 2026 22:01:04 -0700 (PDT)
+Message-ID: <1cb7fae6-79c4-4d5b-88c2-968727defbf4@oss.tenstorrent.com>
+Date: Tue, 20 Oct 2026 15:00:57 +1000
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-ThreadId: AbA2t0igsNsw
-Date: Tue, 20 Oct 2026 08:23:30 +1000
-From: Alistair <alistair@alistair23.me>
-To: "Daniel Henrique Barboza" <daniel.barboza@oss.qualcomm.com>,
- "Palmer Dabbelt" <palmer@dabbelt.com>
-Cc: "Joel Stanley" <joel@jms.id.au>, "Weiwei Li" <liwei1518@gmail.com>,
- "Liu Zhiwei" <zhiwei_liu@linux.alibaba.com>,
- "Chao Liu" <chao.liu.zevorn@gmail.com>, qemu-riscv@nongnu.org,
- "Max Chou" <max.chou@sifive.com>, "Michael Neuling" <mikey@neuling.org>
-Message-Id: <0dd5d8a1-ee0c-474c-a7e9-f5176c747c82@app.fastmail.com>
-In-Reply-To: <347b3e242afbee1221ae9ce10cd0f6b59b269bfc.camel@alistair23.me>
-References: <mhng-CF09685E-EE91-415D-BA66-874115494267@Palmers-Mini.rwc.dabbelt.com>
- <55a04a68-4659-4431-be27-a3621e44be23@oss.qualcomm.com>
- <347b3e242afbee1221ae9ce10cd0f6b59b269bfc.camel@alistair23.me>
-Subject: Re: Regular QEMU RISC-V Call
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=202.12.124.146;
- envelope-from=alistair@alistair23.me; helo=fout-b3-smtp.messagingengine.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 07/12] machine: Support extra board CPUs outside -smp
+To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>
+Cc: qemu-devel@nongnu.org, Nicholas Piggin <npiggin@gmail.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Chao Liu <chao.liu@processmission.com>,
+ Alistair Francis <alistair.francis@wdc.com>, qemu-riscv@nongnu.org,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, Joel Stanley <joel@jms.id.au>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Zhao Liu <zhao1.liu@intel.com>, Michael Ellerman <mpe@kernel.org>
+References: <20261015031804.2406055-1-portias@oss.tenstorrent.com>
+ <20261015031804.2406055-8-portias@oss.tenstorrent.com>
+ <b87a7231-ca35-4c1d-bc05-ffeee15eebf0@oss.qualcomm.com>
+ <atH7u-UCZ3dbA-ui@redhat.com>
+ <763f740c-559c-4f99-a237-daf1e88d4e07@oss.qualcomm.com>
+Content-Language: en-US
+From: Portia Stephens <portias@oss.tenstorrent.com>
+In-Reply-To: <763f740c-559c-4f99-a237-daf1e88d4e07@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1035;
+ envelope-from=portias@tenstorrent.com; helo=mail-pj1-x1035.google.com
+X-Spam_score_int: -19
+X-Spam_score: -2.0
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_NONE=-0.0001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -128,87 +116,88 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS autolearn=no
+X-Spam-Status: No, score=-5.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SPF_HELO_PASS,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
 	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Fri, 11 Sep 2026, at 10:08 AM, Alistair wrote:
-> On Fri, 2026-08-14 at 17:20 -0300, Daniel Henrique Barboza wrote:
-> > 
-> > 
-> > On 8/14/2026 5:06 PM, Palmer Dabbelt wrote:
-> > > On Fri, 14 Aug 2026 13:02:50 PDT (-0700),
-> > > alistair@alistair23.me wrote:
-> > > > On Sat, 15 Aug 2026, at 6:01 AM, Palmer Dabbelt wrote:
-> > > > > On Fri, 14 Aug 2026 13:00:04 PDT (-0700),
-> > > > > alistair@alistair23.me wrote:
-> > > > > > On Wed, 22 Jul 2026, at 5:02 AM, Daniel Henrique Barboza
-> > > > > > wrote:
-> > > > > > > 
-> > > > > > > 
-> > > > > > > On 7/21/2026 3:37 PM, Alistair Francis wrote:
-> > > > > > > > On 17/6/26 09:18, Alistair wrote:
-> > > > > > > > > On Tue, 16 Jun 2026, at 8:35 PM, Alistair Francis
-> > > > > > > > > wrote:
-> > > > > > > > > > On 16/6/26 16:07, Joel Stanley wrote:
-> > > > > > > > > > > On Thu, 11 Jun 2026 at 13:52, Alistair
-> > > > > > > > > > > <alistair@alistair23.me> wrote:
-> > > > > > > > > > > > For the time, I'm picking Wednesday the 17th of
-> > > > > > > > > > > > June at 10AM AEST (UTC+10). Hopefully that works
-> > > > > > > > > > > > ok for everyone. If it doesn't let me know and we
-> > > > > > > > > > > > might be able to move it around.
-> > > > > > > > > > 
-> > > > > > > > > > That means the meeting should start in a little less
-> > > > > > > > > > then 13 and a half
-> > > > > > > > > > hours! I'll send out a Teams invite tomorrow
-> > > > > > > > 
-> > > > > > > > Hey!
-> > > > > > > > 
-> > > > > > > > I realised that it's now been a month. I leave for
-> > > > > > > > holidays in a few days, am currently recovering from some
-> > > > > > > > sickness and don't have any agenda items. So let's skip
-> > > > > > > > this month and start again in August
-> > > > > > > 
-> > > > > > > In fact the meeting was yesterday according to the calendar
-> > > > > > > invite Palmer sent
-> > > > > > > :D figured that ppl forgot about it and I dropped the call
-> > > > > > > after 10 minutes.
-> > > > > > > 
-> > > > > > > If we're going to stick with Palmer's existing invite the
-> > > > > > > next meeting will be
-> > > > > > > August 18th 10AM UTC+10.
-> > > > > > 
-> > > > > > My Teams meeting thing had the 17th of August.
-> > > > > > 
-> > > > > > I only get back on the 17th, so let's do the Thursday the
-> > > > > > 17th at the same time.
-> > > > > 
-> > > > > I'm super lost now...
-> > > > 
-> > > > Thursday the 20th of August I meant
-> > > 
-> > > OK, I've attempted to update my calendar and maybe you guys will
-> > > see that ;)
-> > 
-> > It worked for me. Thx Palmer!
-> 
-> I think we have a call scheduled next week.
-> 
-> I'm away next week travelling, so I won't be able to make it. After
-> that Plumbers is only 2 weeks away, and I think a few people will be
-> there.
-> 
-> So let's skip this months meeting and we can chat about anything at
-> Plumbers.
 
-If anyone has any agenda items for next month please let me know. There are no items for today and most people were are LPC so we don't have anything to discuss.
+On 16/10/2026 9:23 PM, Daniel Henrique Barboza wrote:
+>
+>
+> On 10/16/2026 7:26 AM, Daniel P. Berrangé wrote:
+>> On Thu, Oct 15, 2026 at 05:31:33PM -0300, Daniel Henrique Barboza wrote:
+>>> Phil, Pierrick,
+>>>
+>>> This patch seems to dwell around your turf.  Did you think about how to
+>>> instantiate different CPUs that might have different SMP topologies in
+>>> the context of single binary/split accel work?
+>>
+>> IMHO the -smp argument as it exists today is essentially unfixable
+>> for the general case and will ultimately need to be declared legacy
+>> / for simplistic usage only. Trying to paper over the limitations of
+>> -smp with special cases like "extra cpus" is unlikely to deliver
+>> attractive solutions long term.
+>>
+>> The eventual emulation of heterogeneous CPUS in the single binary
+>> work will bring this to a head, but it already causes problems
+>> today with our per-target binaries because even individual the real
+>> world CPUs we want to be able to model are not symmetric.
+>>
+>> As a historical reference, a while back, Zhao had an RFC that proposed
+>> we use '-device' to define each topology level discretely, which would
+>> allow for arbitrary asymmetric topologies:
+>>
+>> https://lists.gnu.org/archive/html/qemu-devel/2024-09/msg03727.html
+>
+> This RFC looks solid.  Any reason why we didn't go through with it 
+> back then?
+> The conversation just fizzled out quietly from what I'm reading in the 
+> archives ...
+>
+> I am not sure about the schedule/planning around the heterogeneous CPU 
+> work
+> but if this RFC is aligned with that effort it would be great if we 
+> could push
+> that forward.   Enabling multiple CPUs of the same architecture/target 
+> into
+> a single board seems like a step into that direction.
+>
+> We have the tt-atlantis RISC-V board that has a use case for 
+> additional CPUs outside
+> of the main smp topology, i.e. we can use the board as a 
+> testcase/validation for
+> the RFC.
+>
 
-Alistair
+Thanks for pointing to the RFC. It does look like it would give the user 
+control to specify hart count for just the Ascalon cluster, the problem 
+this patch is trying to solve. tt-atlantis will be less configurable 
+than what the RFC proposes. For example, it won't support running 
+without the Ascalon cluster enabled. It only supports specifying the 
+number of harts on the Ascalon cluster and enabling/disabling the single 
+RCPU hart.
 
-> 
-> Alistair
-> 
+
+I am going to send a v2 of this series that lumps the smp CPU count of 
+the RCPU and Ascalon together removing the need for this patch, this is 
+what the Xilinx machines currently do with their A- and R- cores. Then I 
+can take a look at reviving the RFC and using the topology on Atlantis. 
+I worry that the Atlantis machine isn't configurable enough to justify 
+the new topology. I will take a stab at it and see if it makes sense.
+
+
+
+>
+> Cheers,
+> Daniel
+>
+>
+>>
+>>
+>> With regards,
+>> Daniel
+>
 
