@@ -1,59 +1,58 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 75F96606A31B
-	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Oct 2026 11:02:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6ECBF606A325
+	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Oct 2026 11:03:28 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=XheSlepi
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=Ma1S9WUJ
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xJ7Qc-00083z-US; Tue, 20 Oct 2026 06:50:46 -0400
+	id 1xJ7P3-0003jd-Mx; Tue, 20 Oct 2026 06:49:09 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1xJ7Pc-0004oT-2I
- for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:49:45 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ id 1xJ7NT-0001Gv-2D
+ for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:47:38 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1xJ7PX-0005oM-Ar
- for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:49:42 -0400
+ id 1xJ7NO-0005I9-D4
+ for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:47:28 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1792493377;
+ s=mimecast20190719; t=1792493245;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=0IAJt0UD2BHY2aeJtNI3vxcEoKPgyvku96KOQdFfo40=;
- b=XheSlepiYjPkn54MxEPdmfieiKmPuuCRZGsrjvsxWUqOS4+k3u9VGuwRYDQfzdM4qiHhEB
- xg4hWPTGtW5dbfwKWzYE/59WQptKpITrD5Ft+bDE5A94PLVJP5vPkTokpaVYKw3VeVmtFr
- HxJk+7zLqkF2un4FYycSKl/ZqoNPeDo=
+ bh=T3j8f+7qjazkHlU3ibuflAeMZnSK6eTgFQwyyu7+HY4=;
+ b=Ma1S9WUJwCrl7Z8h//7gJQ6StBDL/nu4R0flBPucFKAY4XaX8e5jH+oo+mf2E0F+vR8wIo
+ /AavSU1Jt93i1O2rk4QEDLGy54TSEqNYVFOlyuGCN0ZHbQtM05f4yKNhzm27UaG/V/CZ3S
+ XWXONaRFLVON5vtm0nDsfP+HISqCpj4=
 Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-692-f6pkGtb9O-GKxmFhJLnr0g-1; Tue,
- 20 Oct 2026 10:49:33 +0000
-X-MC-Unique: f6pkGtb9O-GKxmFhJLnr0g-1
-X-Mimecast-MFC-AGG-ID: f6pkGtb9O-GKxmFhJLnr0g_1792493369
-Received: from mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.95])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-261-ihbyk2kzMnWd3H-QsJ0KOQ-1; Tue,
+ 20 Oct 2026 10:47:20 +0000
+X-MC-Unique: ihbyk2kzMnWd3H-QsJ0KOQ-1
+X-Mimecast-MFC-AGG-ID: ihbyk2kzMnWd3H-QsJ0KOQ_1792493236
+Received: from mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.93])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
  by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 96BF018011E7; Tue, 20 Oct 2026 10:49:29 +0000 (UTC)
+ id EFDAD18007F6; Tue, 20 Oct 2026 10:47:15 +0000 (UTC)
 Received: from localhost (headnet04.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.116])
- by mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 07CCA418; Tue, 20 Oct 2026 10:49:24 +0000 (UTC)
+ by mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id AC08B1800586; Tue, 20 Oct 2026 10:47:12 +0000 (UTC)
 From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-Date: Tue, 20 Oct 2026 14:45:53 +0400
-Subject: [PATCH v7 36/65] net/colo-compare: fix max_queue_size setter
- visitor type
+Date: Tue, 20 Oct 2026 14:45:28 +0400
+Subject: [PATCH v7 11/65] qom: add qapi_type field to ObjectProperty
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Message-Id: <20261020-qom-qapi-v7-36-431a86b02b58@redhat.com>
+Message-Id: <20261020-qom-qapi-v7-11-431a86b02b58@redhat.com>
 References: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 In-Reply-To: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 To: qemu-devel@nongnu.org
@@ -128,29 +127,29 @@ Cc: Markus Armbruster <armbru@redhat.com>,
  Yoshinori Sato <yoshinori.sato@nifty.com>, Jiri Pirko <jiri@resnulli.us>, 
  Eric Auger <eric.auger@redhat.com>, Laurent Vivier <lvivier@redhat.com>, 
  =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1019;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1530;
  i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=2Ht6gW7AXC+9m2hyIj3XjReAS0cmbqbO/nhhR3s10ik=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZaBju/eY1bBbqeZbyaaIna3yDT1YO5S2ZfK
- Dk+TjopPr+JAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGWgAKCRDa6OEJdZac
- 5dQZD/9+OPsZ+9wdTvZlJAHJ8LdZ+1IrTm8SRc4WfgMoVaUgmxvUmArgHB8hI32zhhT+Ba88j5h
- KVa4ATUp8pq0eFWpUQQliSGEcG8IcvbDzwCdXHlbCyx1nenDacuX0x1Xzy6lOPsZkDaLW4sd1av
- aslU4lzEjPo+woZOS+f31o8bS96Uj4DK9zSO/2jZS60JmsZVWU2RuRFsQ4ynCztQC5WVe561WiF
- Neo8iP9N1N6jRWQ/W9lDjOjhSLPfoogGEELTAUdypajGDPuGgyGOUNHGrXgAoT6RZ9LSPkaXi9M
- YVb+sG/RbGXWjlrdd/CFkcXWKmRvs4HZYOoCxI3XLPjngyKh4mXKogIvBPZkZyD1Mc01f37OWJJ
- Z601T1TKyOwOevdMSa3zjfTSInCHXtBGcfygNJ1EHaIfbfspA5GBA6TYOD34MkYVQ7Xo0EMeDYd
- ZIRp02UPolMQALQO0ANg3mVOP62D3BNsyhxHxlfjumfHsGoGYZ6mHjkjkO/PzHDEye+BfFcPcE1
- op8EVu1uAVHHecAerzTbPZ2xi8hfaVgovOLMJe0DIozxp7l06V9c+bbZegHgr1qr0kr+5Z1dy+b
- cGCIdsvGHbP8dorXb8/DNE5clHvwjDTMX8mVMgxx/XbT5GQClDJRTRj2mTFy/Cr8znwahtft6UL
- 2RCiOOUs4aDYIGg==
+ bh=2OIgxeWqZ6otP2YGCtYtdyJ3HEK4Fvyx/L7bWvHPHdk=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZYjp5Y+KqlnMbXKVbPp8oeCxnUXz1KL4/P8
+ K4p+GJF/R2JAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGWAAKCRDa6OEJdZac
+ 5TnHEACR1GhcDzcI8DmQKfHIpJvlmkNBtahkon1/NhI0x7islO7obbKLlwPWCy4wQP0LWmjiFde
+ xdHBmPABE8w+GBhIOHh7SA0bED9tVk5Z/KKlUlLW05WmHAclgZP0w/6d5wvOkytAsYlsqG3VRxy
+ pzheoaZub7M/f1Vel44KT2PyTTkmTa/qOXxEwlb0xyleSWHAWJ9YwJZGDMVgrIazoCrrCjuu3I7
+ iTedHPzNeu958dcqBAk2k83xJ9h7d8l/nOwWQBatA7434OZv4mQjeA8o1Ofgcbi65KOPJGxySd/
+ zpF8bho145/tHV1hb2kOE9AJZWK5EagdnYfGHXBmTDKlj+Th/DTIwXSf5tt/sZhF0vRDi1iPq/I
+ LKCOU9KvJA+kSgItubIrwmplrAZNenxsHtooqhUGlhbPvcmEcxvBEYCswzXAevfatbwJoe7DFxw
+ Q+8H0wl+PDfMBiyBB0MAjrQjDNAgi3DiW+nG2xFvGonrsvQbamKdlaKdTC0x/2QCSiZM65jfyJv
+ qZtODKR7Ucan3Z0MVy9Ve7TFMgJLRkBuEHYeUxKnLwFChoZ5UPUii0h9F/SrqgDGCI5+Y7VLkFR
+ PA/35B9aACGPcf7BnkarTv8euSmDQVmF5eXIH82cCmx+dLkD7Y0WERC0r9g9iDHW6Ux3KE0GVqX
+ 9APAXx+LTkI4QMg==
 X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
  fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
-X-Scanned-By: MIMEDefang 3.6 on 10.30.177.95
-X-Mimecast-MFC-PROC-ID: EoNMSzZs-pWl84ABxAOvBWK4RcObyBbOnt2twDgiQEc_1792493369
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.93
+X-Mimecast-MFC-PROC-ID: qpHAqlxa79kkr8T-Hyt3m-9biuZxHRUHMRR320iGbIk_1792493236
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.133.124;
+Received-SPF: pass client-ip=170.10.129.124;
  envelope-from=marcandre.lureau@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -23
@@ -158,8 +157,8 @@ X-Spam_score: -2.4
 X-Spam_bar: --
 X-Spam_report: (-2.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.329,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -178,33 +177,50 @@ X-Spam-Status: No, score=-16.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-The setter was using visit_type_uint64, accepting values wider than
-the uint32_t field. Use visit_type_uint32 to match the getter, field,
-and typename.
+Add a const pointer to QAPITypeInfo in ObjectProperty. NULL for now,
+but future patches will add means to make it non-null. The
+QAPITypeInfo will then be used by QOM introspection to tie the
+property to a QAPI type.
 
-Fixes: 0c4266ef2690 ("net/colo-compare.c: Fix compare_timeout format issue")
 Signed-off-by: Markus Armbruster <armbru@redhat.com>
 Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 ---
- net/colo-compare.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ include/qom/object.h | 2 ++
+ qom/object.c         | 1 +
+ 2 files changed, 3 insertions(+)
 
-diff --git a/net/colo-compare.c b/net/colo-compare.c
-index 948a2f7f9e4b..a6910de869ff 100644
---- a/net/colo-compare.c
-+++ b/net/colo-compare.c
-@@ -1129,9 +1129,9 @@ static void set_max_queue_size(Object *obj, Visitor *v,
-                                const char *name, void *opaque,
-                                Error **errp)
- {
--    uint64_t value;
-+    uint32_t value;
+diff --git a/include/qom/object.h b/include/qom/object.h
+index 90c1a34e49aa..e9b380462ded 100644
+--- a/include/qom/object.h
++++ b/include/qom/object.h
+@@ -15,6 +15,7 @@
+ #define QEMU_OBJECT_H
  
--    if (!visit_type_uint64(v, name, &value, errp)) {
-+    if (!visit_type_uint32(v, name, &value, errp)) {
-         return;
+ #include "qapi/qapi-builtin-types.h"
++#include "qapi/qapi-type-info.h"
+ #include "qemu/module.h"
+ 
+ struct TypeImpl;
+@@ -91,6 +92,7 @@ struct ObjectProperty
+     char *name;
+     char *type;
+     char *description;
++    const QAPITypeInfo *qapi_type;
+     ObjectPropertyAccessor *get;
+     ObjectPropertyAccessor *set;
+     ObjectPropertyResolve *resolve;
+diff --git a/qom/object.c b/qom/object.c
+index 96498f3d001c..c34b47312f29 100644
+--- a/qom/object.c
++++ b/qom/object.c
+@@ -3171,6 +3171,7 @@ object_property_add_alias(Object *obj, const char *name,
+                              property_release_alias,
+                              prop);
+     op->resolve = property_resolve_alias;
++    op->qapi_type = target_prop->qapi_type;
+     if (target_prop->defval) {
+         op->defval = qobject_ref(target_prop->defval);
      }
-     if (!value) {
 
 -- 
 2.56.0.116.g6de20f6092dc
