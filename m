@@ -1,59 +1,58 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5F82E606A319
-	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Oct 2026 11:07:30 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C7DA8606A327
+	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Oct 2026 11:08:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=FBGC8D2F
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=EsuFvIr/
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xJ7TX-0003M0-0D; Tue, 20 Oct 2026 06:53:47 -0400
+	id 1xJ7Ue-0006sW-0o; Tue, 20 Oct 2026 06:54:56 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1xJ7QZ-0007wk-LV
- for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:50:43 -0400
+ id 1xJ7Rq-00017F-T5
+ for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:52:03 -0400
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1xJ7QV-0006MT-Cp
- for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:50:43 -0400
+ id 1xJ7Rm-0006gO-Jv
+ for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:52:02 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1792493438;
+ s=mimecast20190719; t=1792493516;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=wDKqI9lxsJYOWv5oXkIIVMolronNVooZmn3jjB1NaoM=;
- b=FBGC8D2F/nuBnjo516KjQp0lZ/Y2GSslLu2UWgfYYLluhW/o46vYUQga2v1tMZbd8kcVjX
- m1Br9rdtO0rJtlOvX0IndgITkcN/NX5NPkCMUK0GGR/EdQ1pjwGS78b/FwZ7CT26MWjjZI
- 5gIq/hgW7kvXBMoxjM+0icEmV+N6JvA=
-Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
+ bh=th1JKpfzAzi8+0DyZvMgIumhc4CFEiTeW47qkGiYHs4=;
+ b=EsuFvIr/Opo2dpcrc92u4DQgS/+C9k3yD9tfXf7sXD5fCVOUI96+5ochFzdcbM/CWCUHuc
+ MmyoNxtDKTJbk0+Cn510+GFzt8qiLaDmw44nuRVmKLCituWLRy4c/f3f/iSSdPc4wxS5n2
+ lPgNOjuco4s0d7NbAiKg9x207QCFZH8=
+Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-694-nPrkmqWhMXen_3R1vU7oZw-1; Tue,
- 20 Oct 2026 10:50:34 +0000
-X-MC-Unique: nPrkmqWhMXen_3R1vU7oZw-1
-X-Mimecast-MFC-AGG-ID: nPrkmqWhMXen_3R1vU7oZw_1792493430
-Received: from mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.93])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-228-MDo8sez-NcyGAOl5_G0YjQ-1; Tue,
+ 20 Oct 2026 10:51:52 +0000
+X-MC-Unique: MDo8sez-NcyGAOl5_G0YjQ-1
+X-Mimecast-MFC-AGG-ID: MDo8sez-NcyGAOl5_G0YjQ_1792493508
+Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 06E3A1805A18; Tue, 20 Oct 2026 10:50:30 +0000 (UTC)
+ by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id E077E1955DD1; Tue, 20 Oct 2026 10:51:47 +0000 (UTC)
 Received: from localhost (headnet04.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.116])
- by mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id D157218005B8; Tue, 20 Oct 2026 10:50:26 +0000 (UTC)
+ by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id 9E9F31800677; Tue, 20 Oct 2026 10:51:44 +0000 (UTC)
 From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-Date: Tue, 20 Oct 2026 14:46:04 +0400
-Subject: [PATCH v7 47/65] hw/s390x: convert BootCertificatesList to
- QAPI-aware registration
+Date: Tue, 20 Oct 2026 14:46:19 +0400
+Subject: [PATCH v7 62/65] hw/i386: convert PCSouthBridgeOption to QAPI enum
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Message-Id: <20261020-qom-qapi-v7-47-431a86b02b58@redhat.com>
+Message-Id: <20261020-qom-qapi-v7-62-431a86b02b58@redhat.com>
 References: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 In-Reply-To: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 To: qemu-devel@nongnu.org
@@ -128,38 +127,39 @@ Cc: Markus Armbruster <armbru@redhat.com>,
  Yoshinori Sato <yoshinori.sato@nifty.com>, Jiri Pirko <jiri@resnulli.us>, 
  Eric Auger <eric.auger@redhat.com>, Laurent Vivier <lvivier@redhat.com>, 
  =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1505;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=6526;
  i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=wdbhYWD/vf672j0phUbR1cOU3kwkLl3/cupZ0YaTznU=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZbDkYgPj0HDzsA3Y34WzGHrPrDPeDHvzd0l
- wPaLOFmX3WJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGWwAKCRDa6OEJdZac
- 5QyFD/0b7xA4ChrYMo5WcQsrtlQZqCXFanjHmndWojPNq6E6DJrh7yNweRlM5B8GO8az5oyA75h
- sUttRiBWYNvMnlgXQtH/nE8T96ywsGyTT9ZInHttlzN9P5Fh5Kr/SqOcHkuYj6mXh4Qo8l9kpkX
- 5Ls7K8Ke23byTyibodkbaedkpfdM3EpJ3hzQ5r3Cbp68RrQqxPRAGGe+DEVXyTzCaUIrg/oKuKl
- ee+1owd49sj/oDWlsbQ8JKwkl9rM61yJQqCHZ/8bYXLsQ8Sy+lP6fJkHm9Ng4C2rM7dDW0wPeZJ
- /AnxrnFDz+SaS70Z+Q7qSIRHxareyWZJA0rnKOl82n26hwJ2mAFFTibkJxJPdnojLqX+mWBzWUU
- 61jumL2L/vI6Hbuh3iO7YnsdjYk+RAjIYNyc/LVGHWFYLkgevtNRkvL4bo4c8ILFq/kfEbpOOX9
- IJctXj/7n79Sx62wNtTjV3Wmenr+zMkYIemOn14uqf9VuXdkB0ih5iiJgO031WJpDUGUW/l3UO0
- Nt1goAs8YdyzC1w+yD/OBemcsUJMxG2IKhcXMBoyjQtwO1hYYX+0qqyxosT72NLiOrgKTvIWx/C
- AamF9QKFFgHdWVkuKlqIBCfed1sEkedvwsLa07Bik/rEdPJdSrKHrHCPDZ9x/Q5r3QVwD+zyVVq
- V10wnjLfSGUrDTg==
+ bh=jr+R1XEAXGqEfl6dzBqQchDTHMoMaEnbkkCJTWPjK7M=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZdHAMFgnhAvWl4qCaozSGC8ZoljjEYi6VBP
+ 70IoZTx452JAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGXQAKCRDa6OEJdZac
+ 5bQgEACXrVy4PI0RHLf3EYbpFdgeh/G/qw9Szqqn90QJFXbDyFtQmp3c6wFtAFWSP3ffrhRIGOr
+ RcUHeYkCVoyizAcDDgjI8OyPrmHVEnG3PwXeWRtGK0kH1my0bbmCJx/osVW8rApSvdzvYpi9s0Y
+ 6bnxKKjw0JzliwdtFqTmFt0nn1S7YQOKfUDqhPgAWAHg8bwDPi1N1201GaF9lvKcJLYtaT4uNPx
+ duB+KEvf23TePBMMCkwNlGjW5qm6S0gf5Ryxjb7UDLk0DAMDD6sOLYbUwrlEcS2bJu7T+7pz3Pk
+ KIUx9WJmwNr8hA510xbEUM7U+qI4jtLtBszuvBioYQI3kVmqBqcaNtqPICXlIwOy+0b4xnL1Gkk
+ eA26OvbARkhRxfm9CnY4bEgdMJQoeQnDOu1qzkbjiH5164V7Vey/w6iyXw5kqW/vm1Sq08RW2k9
+ ICd329fnCbR+neChTSaunOu2wlSsKfBfb8AHGJDPC9l+G08VUaWeDhOHfuAgrke7NLVPatk+RPO
+ Idq2+9q621/0Y/k95lzrzNRBGYp6P2uo1GlxLYcHglKAYZo/Cej2Jt8gBe7Gw+Qz351rWqwXcvm
+ 8YX+kB6Z2Q3knEFy4SolR3NudeuK7WGfrFsryom7DUjqSDf2dGK5/LD4kxH5aflGMGZmB0moZnG
+ LnhWzV1mrbEwmtw==
 X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
  fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.93
-X-Mimecast-MFC-PROC-ID: 30ys56jiXj_8xAiMRMqViQWMtQLENhBszKmQDzqWJqE_1792493430
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
+X-Mimecast-MFC-PROC-ID: rUi5-w0gPb_3AeCMHf0ARQmXbLFC4fFzHbtAwicAgbo_1792493508
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=170.10.133.124;
  envelope-from=marcandre.lureau@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -23
-X-Spam_score: -2.4
-X-Spam_bar: --
-X-Spam_report: (-2.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.329,
+X-Spam_score_int: 9
+X-Spam_score: 0.9
+X-Spam_bar: /
+X-Spam_report: (0.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.329,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ RCVD_IN_SBL_CSS=3.335, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -178,37 +178,192 @@ X-Spam-Status: No, score=-16.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
+Move PCSouthBridgeOption from a hand-rolled C enum to a proper QAPI
+enum in qapi/machine.json.
+
+This gives the x-south-bridge property a generated type_info with a
+valid masked_name, so it appears in query-qmp-schema introspection and
+the qapi-type field of qom-list-properties output.
+
+The south_bridge/default_south_bridge fields change from const char *
+to PCSouthBridgeOption, with an explicit mapping table from enum value
+to QOM device type name.
+
+Enum values are changed: "PIIX3"->"ppix3", "piix4-isa"->"piix4", this
+is under a x-property, so shouldn't be a breaking change.
+
 Signed-off-by: Markus Armbruster <armbru@redhat.com>
 Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 ---
- hw/s390x/s390-virtio-ccw.c | 7 +++++--
- 1 file changed, 5 insertions(+), 2 deletions(-)
+ hw/i386/pc_piix.c    | 61 ++++++++++++++++------------------------------------
+ include/hw/i386/pc.h |  4 ++--
+ qapi/machine.json    | 14 ++++++++++++
+ 3 files changed, 34 insertions(+), 45 deletions(-)
 
-diff --git a/hw/s390x/s390-virtio-ccw.c b/hw/s390x/s390-virtio-ccw.c
-index 3ed425b16c3e..8bc09c179552 100644
---- a/hw/s390x/s390-virtio-ccw.c
-+++ b/hw/s390x/s390-virtio-ccw.c
-@@ -44,6 +44,7 @@
- #include "target/s390x/kvm/pv.h"
- #include "migration/blocker.h"
- #include "qapi/qapi-builtin-type-infos.h"
-+#include "qapi/qapi-type-infos-machine-s390x.h"
- #include "qapi/visitor.h"
- #include "qapi/qapi-visit-machine-s390x.h"
- #include "hw/s390x/cpu-topology.h"
-@@ -918,8 +919,10 @@ static void ccw_machine_class_init(ObjectClass *oc, const void *data)
-             " to upper case) to pass to machine loader, boot manager,"
-             " and guest kernel");
+diff --git a/hw/i386/pc_piix.c b/hw/i386/pc_piix.c
+index 63c4667ea372..5a94a34166d8 100644
+--- a/hw/i386/pc_piix.c
++++ b/hw/i386/pc_piix.c
+@@ -47,6 +47,7 @@
+ #include "hw/acpi/acpi.h"
+ #include "hw/vfio/types.h"
+ #include "qapi/error.h"
++#include "qapi/qapi-type-infos-machine.h"
+ #include "qemu/error-report.h"
+ #include "system/xen.h"
+ #ifdef CONFIG_XEN
+@@ -75,6 +76,11 @@ static GlobalProperty pc_piix_compat_defaults[] = {
+ static const size_t pc_piix_compat_defaults_len =
+     G_N_ELEMENTS(pc_piix_compat_defaults);
  
--    object_class_property_add(oc, "boot-certs", "BootCertificatesList",
--                              machine_get_boot_certs, machine_set_boot_certs, NULL, NULL);
-+    object_class_property_add_qapi(oc, "boot-certs",
-+                                   &BootCertificatesList_type_info,
-+                                   machine_get_boot_certs,
-+                                   machine_set_boot_certs, NULL, NULL);
-     object_class_property_set_description(oc, "boot-certs",
-             "provide paths to a directory and/or a certificate file for secure boot");
++static const char *pc_south_bridge_type[] = {
++    [PC_SOUTH_BRIDGE_OPTION_PIIX3] = TYPE_PIIX3_DEVICE,
++    [PC_SOUTH_BRIDGE_OPTION_PIIX4] = TYPE_PIIX4_PCI_DEVICE,
++};
++
+ /*
+  * Return the global irq number corresponding to a given device irq
+  * pin. We could also use the bus number to have a more precise mapping.
+@@ -236,7 +242,8 @@ static void pc_init1(MachineState *machine, const char *pci_type)
  
+     gsi_state = pc_gsi_create(&x86ms->gsi, true);
+ 
+-    pci_dev = pci_new_multifunction(-1, pcms->south_bridge);
++    pci_dev = pci_new_multifunction(-1,
++                                    pc_south_bridge_type[pcms->south_bridge]);
+     object_property_set_bool(OBJECT(pci_dev), "has-usb",
+                              machine_usb(machine), &error_abort);
+     object_property_set_bool(OBJECT(pci_dev), "has-acpi",
+@@ -317,51 +324,18 @@ static void pc_init1(MachineState *machine, const char *pci_type)
+     }
+ }
+ 
+-typedef enum PCSouthBridgeOption {
+-    PC_SOUTH_BRIDGE_OPTION_PIIX3,
+-    PC_SOUTH_BRIDGE_OPTION_PIIX4,
+-    PC_SOUTH_BRIDGE_OPTION_MAX,
+-} PCSouthBridgeOption;
+-
+-static const QEnumLookup PCSouthBridgeOption_lookup = {
+-    .array = (const char *const[]) {
+-        [PC_SOUTH_BRIDGE_OPTION_PIIX3] = TYPE_PIIX3_DEVICE,
+-        [PC_SOUTH_BRIDGE_OPTION_PIIX4] = TYPE_PIIX4_PCI_DEVICE,
+-    },
+-    .size = PC_SOUTH_BRIDGE_OPTION_MAX
+-};
+-
+ static int pc_get_south_bridge(Object *obj, Error **errp)
+ {
+     PCMachineState *pcms = PC_MACHINE(obj);
+-    int i;
+ 
+-    for (i = 0; i < PCSouthBridgeOption_lookup.size; i++) {
+-        if (g_strcmp0(PCSouthBridgeOption_lookup.array[i],
+-                      pcms->south_bridge) == 0) {
+-            return i;
+-        }
+-    }
+-
+-    error_setg(errp, "Invalid south bridge value set");
+-    return 0;
++    return pcms->south_bridge;
+ }
+ 
+ static void pc_set_south_bridge(Object *obj, int value, Error **errp)
+ {
+     PCMachineState *pcms = PC_MACHINE(obj);
+ 
+-    if (value < 0) {
+-        error_setg(errp, "Value can't be negative");
+-        return;
+-    }
+-
+-    if (value >= PCSouthBridgeOption_lookup.size) {
+-        error_setg(errp, "Value too big");
+-        return;
+-    }
+-
+-    pcms->south_bridge = PCSouthBridgeOption_lookup.array[value];
++    pcms->south_bridge = value;
+ }
+ 
+ #ifdef CONFIG_XEN
+@@ -398,7 +372,7 @@ static void pc_i440fx_machine_options(MachineClass *m)
+ {
+     PCMachineClass *pcmc = PC_MACHINE_CLASS(m);
+     ObjectClass *oc = OBJECT_CLASS(m);
+-    pcmc->default_south_bridge = TYPE_PIIX3_DEVICE;
++    pcmc->default_south_bridge = PC_SOUTH_BRIDGE_OPTION_PIIX3;
+     pcmc->pci_root_uid = 0;
+     pcmc->default_cpu_version = 1;
+ 
+@@ -413,12 +387,13 @@ static void pc_i440fx_machine_options(MachineClass *m)
+     machine_class_allow_dynamic_sysbus_dev(m, TYPE_VMBUS_BRIDGE);
+     machine_class_allow_dynamic_sysbus_dev(m, TYPE_UEFI_VARS_X64);
+ 
+-    object_class_property_add_enum(oc, "x-south-bridge", "PCSouthBridgeOption",
+-                                   &PCSouthBridgeOption_lookup,
+-                                   pc_get_south_bridge,
+-                                   pc_set_south_bridge);
+-    object_class_property_set_description(oc, "x-south-bridge",
+-                                     "Use a different south bridge than PIIX3");
++    object_class_property_add_qapi_enum(oc, QAPI_ENUM_PROP(
++        .name = "x-south-bridge",
++        .description = "Use a different south bridge than PIIX3",
++        .qapi_type = &PCSouthBridgeOption_type_info,
++        .get = pc_get_south_bridge,
++        .set = pc_set_south_bridge,
++    ));
+     compat_props_add(m->compat_props,
+                      pc_piix_compat_defaults, pc_piix_compat_defaults_len);
+ }
+diff --git a/include/hw/i386/pc.h b/include/hw/i386/pc.h
+index 8edec62a1af2..3afd376116b1 100644
+--- a/include/hw/i386/pc.h
++++ b/include/hw/i386/pc.h
+@@ -47,7 +47,7 @@ typedef struct PCMachineState {
+     uint64_t max_ram_below_4g;
+     OnOffAuto vmport;
+     SmbiosEntryPointType smbios_entry_point_type;
+-    const char *south_bridge;
++    PCSouthBridgeOption south_bridge;
+ 
+     bool acpi_build_enabled;
+     bool wdat_enabled;
+@@ -94,7 +94,7 @@ struct PCMachineClass {
+ 
+     /* Device configuration: */
+     bool pci_enabled;
+-    const char *default_south_bridge;
++    PCSouthBridgeOption default_south_bridge;
+ 
+     /* Compat options: */
+ 
+diff --git a/qapi/machine.json b/qapi/machine.json
+index 46b6935ab0b8..cc028e890ae5 100644
+--- a/qapi/machine.json
++++ b/qapi/machine.json
+@@ -462,6 +462,20 @@
+ { 'enum': 'Pca9554PinState',
+   'data': ['low', 'high'] }
+ 
++##
++# @PCSouthBridgeOption:
++#
++# South bridge chipset option for PC i440FX machines.
++#
++# @piix3: Intel PIIX3 (default)
++#
++# @piix4: Intel PIIX4
++#
++# Since: 11.2
++##
++{ 'enum': 'PCSouthBridgeOption',
++  'data': ['piix3', 'piix4'] }
++
+ ##
+ # @inject-nmi:
+ #     Injects a Non-Maskable Interrupt (machine specific: for example
 
 -- 
 2.56.0.116.g6de20f6092dc
