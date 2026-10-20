@@ -1,59 +1,59 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4AA6C606A31D
-	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Oct 2026 10:56:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C2CA2606A319
+	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Oct 2026 10:57:38 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=WjI35hrQ
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=SBvx/YLK
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xJ7QS-0007aN-7Z; Tue, 20 Oct 2026 06:50:36 -0400
+	id 1xJ7Nr-00027z-Ar; Tue, 20 Oct 2026 06:47:55 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1xJ7P6-0003t4-LD
- for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:49:14 -0400
+ id 1xJ7N9-00018R-CK
+ for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:47:13 -0400
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1xJ7P3-0005hj-HN
- for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:49:12 -0400
+ id 1xJ7N6-0005EC-CC
+ for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:47:10 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1792493348;
+ s=mimecast20190719; t=1792493227;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=GzrRsz6mLl7MwzdhkY7vfYrvBkZMGUNTXQg1+7bFvLg=;
- b=WjI35hrQXJ0ijBYcUi0UVMCHqSVtKNNZW1/084jkdA/Q5NyXD8a085euiie+zES1K6B6ZS
- PgzFLcHRGxQ/qH951645GnryXtaSjuAlaz/ic3UGMN0jHvB9bwO4QsRpjHWAeK18vROm9e
- WwOPmBovFIroMLyoFI+pmgrUa/iZfP4=
-Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ bh=ABGJlqhjTzuYRZnmPc116ozStZtH+NrxbC+tSxh9ams=;
+ b=SBvx/YLKSO6I5YWCcQNXg1x5p2qegTbB1B8pmD5VbPiBXFI2HwpaKWvWnZi7J/A245pf65
+ ueRclmFcQMY4y35MOCwELAimycIKARX2pkfx0et+xfT+EhDGf6OppfGR+znOUnVUgAPc8b
+ k2AVvUzMRsjwEnPm9vN6C3u9J5XRiV0=
+Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-695-yDBtsgiZMVeudebqgTG40w-1; Tue,
- 20 Oct 2026 10:49:04 +0000
-X-MC-Unique: yDBtsgiZMVeudebqgTG40w-1
-X-Mimecast-MFC-AGG-ID: yDBtsgiZMVeudebqgTG40w_1792493340
-Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-225-c5deni3IOC2wghL_mDuwjA-1; Tue,
+ 20 Oct 2026 10:47:02 +0000
+X-MC-Unique: c5deni3IOC2wghL_mDuwjA-1
+X-Mimecast-MFC-AGG-ID: c5deni3IOC2wghL_mDuwjA_1792493219
+Received: from mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.12])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 463A71955F13; Tue, 20 Oct 2026 10:49:00 +0000 (UTC)
+ by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id E2CAE1800BD4; Tue, 20 Oct 2026 10:46:58 +0000 (UTC)
 Received: from localhost (headnet04.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.116])
- by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id C02F71800643; Tue, 20 Oct 2026 10:48:57 +0000 (UTC)
+ by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id 66E731956088; Tue, 20 Oct 2026 10:46:55 +0000 (UTC)
 From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-Date: Tue, 20 Oct 2026 14:45:48 +0400
-Subject: [PATCH v7 31/65] accel/kvm: convert OnOffSplit property to
- QAPI-aware registration
+Date: Tue, 20 Oct 2026 14:45:25 +0400
+Subject: [PATCH v7 08/65] qapi/gen: fix _module_basename for multi-dash
+ 'what' parameters
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Message-Id: <20261020-qom-qapi-v7-31-431a86b02b58@redhat.com>
+Message-Id: <20261020-qom-qapi-v7-8-431a86b02b58@redhat.com>
 References: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 In-Reply-To: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 To: qemu-devel@nongnu.org
@@ -128,38 +128,38 @@ Cc: Markus Armbruster <armbru@redhat.com>,
  Yoshinori Sato <yoshinori.sato@nifty.com>, Jiri Pirko <jiri@resnulli.us>, 
  Eric Auger <eric.auger@redhat.com>, Laurent Vivier <lvivier@redhat.com>, 
  =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2783;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1135;
  i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=+bwgKTQoEXvch3Nux+0BT762997CE8SOrsZR1127GSg=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10Za8fqdACvj1nRd8+C/AFYeoaG4KSLJ6yGQQ
- Glfe3Z930GJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGWgAKCRDa6OEJdZac
- 5eUfD/9SnH6zP3RrX1y/+UloXnrP0adIyHDiLTAU3ewz/VXg/42/fyfveSadLjnEYI4LS5PYVJD
- v/pRwcO+N8ttIKGUUnzvZ8LbPJ2aOUgbCxlb4OK1H/o0SeUotkF4vrecY3jiuanZDAad9nnJknV
- xUSfv6C47md+eGcoSxfBJtIoHoCzqP0VrumAL7f2whnw8f6IDaVVKTSD6sZJ2Efs7s1Qn16rBMu
- sqGVWI8FrPFjMzb/2EDPUkou27o+hp2N8qu8YOve5UpP6QDxfnvjhmhmzJqVkCfvoO7rCGKkijo
- k6vWvpqSMKDK7l1tHS0Ku4FIISLg98nxTng63G6H0qOK0nHyQP1GSk2qwxpiYk8u9Ce9qsIz+11
- sIE9BYfcmZCOjWPUgJLaVkhwmIjD02zSVmTioREECRxLjNPpDkjuJr0Xdlsh2WYnRWY3Fl1t7OD
- GbNk+8g5pktMfc35r/EnZqCHRxK62xZpnLhPmwgZXCOU2v78mH+KMUj4kAc1hL4GqVsXBZ9hmrQ
- jIMQW97/Fx15LS09jI953OtIvrmwRkkpGdMo1MDk0IGUeACzxNcIm9WjoGfUs6o75BDqmwcC7i1
- Z3C6vhvu7wZNWdHqfWnywxQ/mt0EngUghtCxbR/EkXeD+K3qeezLfiPlajqHqOA85YFTZ6KTEUz
- jiYTPV8RQoITU0g==
+ bh=OXQAJj92qnLHVy/ekT2tV/E7DqxlrqwyneXLdAaw748=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZYkpNZTiTu/0NKP25uG6QN+n4wrDZMxyVQO
+ X1gFQ2YGniJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGWAAKCRDa6OEJdZac
+ 5Tm3EACDRom1wjYZ0S5SCUsfw8t+j56evvGukUBRwQKN2w3Du6uYAw4nS9RuGSZhu8Qnd+u5pMZ
+ RR4HP3oxzkczsRTA8h9qgVMNqhnT0wlElBiABH9tCI3YJUEmCvZ6BcLxuFPzfBeyc9GxW13b1zO
+ eFJpHhMeM/R3jK04zRuRqksv4/8kXnR6/wpqoTWxFKiLIHlDVBwA/CTfIs4nGprg3ZGZmRlb33o
+ EmNs25MODVt3L329BQIU0WG7OwYkXsYoGUdf4ZEbcr9CZywiZ8S0Rvx9fyqeYkVfaSlmqy1IM8D
+ gBphVT/878S1qnGZqgmJs2Mb/btw8aPl7PQPV5lHDeMKBfwNHCoePHXNHb7C36F9khg3w29QQGl
+ cKkIx32v/w3/L0dR1CWVI+YkbZ7xfh8oZJabF87gg5+jzpgm0AhaVUIgHU33CwJpYm2u62IUU6O
+ GUxREslEK8bfz4pPnfxyzQVd8JIjSZoz7J2ip2+0PYyI8mftsOWTAFnUU8jnITGf2UjSAGRfXtR
+ DTXKPDqAwHdk7bX3rSvoybxG2RnFNFluw+yjjhDEyY/RhYpOJItxVCbcr+e3/wkbhBjbIiHOO14
+ e3pUpNugRf71Qh75I/eHU/GjXdHLvK/PibBXQ7ZxPFfUTuBYAVOQILNa2K4bAzoDOqwVFf9OOq/
+ UAbLSh+VqcTxYTw==
 X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
  fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
-X-Mimecast-MFC-PROC-ID: Y-c0edoggWUpR6kqfYMrwF3aONA58GJEZKf4qaNNK5Q_1792493340
+X-Scanned-By: MIMEDefang 3.0 on 10.30.177.12
+X-Mimecast-MFC-PROC-ID: bb5cOKUnWTlK_1Idbn8QHkqdaBaMVSHOJ3Z_v5sd1qM_1792493219
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=170.10.129.124;
  envelope-from=marcandre.lureau@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: 9
-X-Spam_score: 0.9
-X-Spam_bar: /
-X-Spam_report: (0.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.329,
+X-Spam_score_int: -23
+X-Spam_score: -2.4
+X-Spam_bar: --
+X-Spam_report: (-2.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.329,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_SBL_CSS=3.335, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -174,86 +174,36 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 X-Spam-Status: No, score=-16.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham autolearn_force=no version=4.0.1
+	SPF_PASS autolearn=unavailable autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Convert the OnOffSplit property from manual visitor-based
-callbacks to property_add_qapi_enum().
+The re.sub() call replaces every hyphen in 'what' with the system module
+infix. This produces broken filenames for multi-hyphen names (e.g.
+'qapi-type-infos' becomes 'qapi-builtin-type-builtin-infos').
 
+Add count=1 so only the first hyphen is replaced.
+
+Reviewed-by: Markus Armbruster <armbru@redhat.com>
 Signed-off-by: Markus Armbruster <armbru@redhat.com>
 Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 ---
- accel/kvm/kvm-all.c | 26 ++++++++++----------------
- 1 file changed, 10 insertions(+), 16 deletions(-)
+ scripts/qapi/gen.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/accel/kvm/kvm-all.c b/accel/kvm/kvm-all.c
-index db8fba53f339..1d91667fb880 100644
---- a/accel/kvm/kvm-all.c
-+++ b/accel/kvm/kvm-all.c
-@@ -46,6 +46,7 @@
- #include "qapi/visitor.h"
- #include "qapi/qapi-types-common.h"
- #include "qapi/qapi-visit-common.h"
-+#include "qapi/qapi-type-infos-common.h"
- #include "system/reset.h"
- #include "qemu/guest-random.h"
- #include "system/hw_accel.h"
-@@ -4151,22 +4152,17 @@ static void kvm_set_kvm_shadow_mem(Object *obj, Visitor *v,
-     s->kvm_shadow_mem = value;
- }
+diff --git a/scripts/qapi/gen.py b/scripts/qapi/gen.py
+index 0c9b8db3b024..690187d4280d 100644
+--- a/scripts/qapi/gen.py
++++ b/scripts/qapi/gen.py
+@@ -300,7 +300,7 @@ def _module_basename(self, what: str, name: str) -> str:
+                 ret += '-' + os.path.splitext(basename)[0]
+         else:
+             assert QAPISchemaModule.is_system_module(name)
+-            ret += re.sub(r'-', '-' + name[2:] + '-', what)
++            ret += re.sub(r'-', '-' + name[2:] + '-', what, count=1)
+         return ret
  
--static void kvm_set_kernel_irqchip(Object *obj, Visitor *v,
--                                   const char *name, void *opaque,
-+static void kvm_set_kernel_irqchip(Object *obj, int value,
-                                    Error **errp)
- {
-     KVMState *s = KVM_STATE(obj);
--    OnOffSplit mode;
- 
-     if (s->fd != -1) {
-         error_setg(errp, "Cannot set properties after the accelerator has been initialized");
-         return;
-     }
- 
--    if (!visit_type_OnOffSplit(v, name, &mode, errp)) {
--        return;
--    }
--    switch (mode) {
-+    switch (value) {
-     case ON_OFF_SPLIT_ON:
-         s->kernel_irqchip_allowed = true;
-         s->kernel_irqchip_required = true;
-@@ -4183,10 +4179,7 @@ static void kvm_set_kernel_irqchip(Object *obj, Visitor *v,
-         s->kernel_irqchip_split = ON_OFF_AUTO_ON;
-         break;
-     default:
--        /* The value was checked in visit_type_OnOffSplit() above. If
--         * we get here, then something is wrong in QEMU.
--         */
--        abort();
-+        g_assert_not_reached();
-     }
- }
- 
-@@ -4303,11 +4296,12 @@ static void kvm_accel_class_init(ObjectClass *oc, const void *data)
-     ac->has_memory = kvm_accel_has_memory;
-     ac->allowed = &kvm_allowed;
- 
--    object_class_property_add(oc, "kernel-irqchip", "on|off|split",
--        NULL, kvm_set_kernel_irqchip,
--        NULL, NULL);
--    object_class_property_set_description(oc, "kernel-irqchip",
--        "Configure KVM in-kernel irqchip");
-+    object_class_property_add_qapi_enum(oc, QAPI_ENUM_PROP(
-+        .name = "kernel-irqchip",
-+        .qapi_type = &OnOffSplit_type_info,
-+        .set = kvm_set_kernel_irqchip,
-+        .description = "Configure KVM in-kernel irqchip",
-+    ));
- 
-     object_class_property_add(oc, "kvm-shadow-mem", "int",
-         kvm_get_kvm_shadow_mem, kvm_set_kvm_shadow_mem,
+     def _module_filename(self, what: str, name: str) -> str:
 
 -- 
 2.56.0.116.g6de20f6092dc
