@@ -1,114 +1,120 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D6F27606A31A
-	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Oct 2026 10:14:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3B71B606A31E
+	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Oct 2026 10:43:52 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=M+BpdnQS
+	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=h69dCYmf
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xJ6qq-0000Tl-O4; Tue, 20 Oct 2026 06:13:48 -0400
+	id 1xJ7Je-0004CP-Sg; Tue, 20 Oct 2026 06:43:34 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1xJ6ql-0000SB-E8
- for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:13:43 -0400
-Received: from mail-yw1-x1134.google.com ([2607:f8b0:4864:20::1134])
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1xJ7Ja-00047x-5G
+ for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:43:30 -0400
+Received: from mail-wm1-x32d.google.com ([2a00:1450:4864:20::32d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1xJ6qj-0001fY-TL
- for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:13:43 -0400
-Received: by mail-yw1-x1134.google.com with SMTP id
- 00721157ae682-8b125371596so2367847b3.0
- for <qemu-riscv@nongnu.org>; Tue, 20 Oct 2026 03:13:41 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1792491220; cv=none;
- d=google.com; s=arc-20260327;
- b=PFi4inwGLNE87EdAWhLWE3MgCRFbeJPt2UnwBsCX/AzCs7gMqAgm68/Fuwdv7+vOHo
- Ma72YKz93IVhPpZV3sHs2MwID69EF3nm/xc342k3zk5HUQjRh7bxBrIReAbTAgSTz4f7
- Iqd/j0RY6xI6/ACkyk7J/1rBcbYY1mBmd5dxxoVxGuhF6N2T1ZZ9P1NUGHY02Ztx2WYq
- D8fZi1H0vsRJXrrD0Q/vWj//r4a/gyJq1cFfWnY8g7baFo+UfjfpgzGozXiVUl6Jx8Ap
- ALA9t0wX7MxOz3oxxwmDmwgBNxWv3sOTsOtxa11ZJaL1whfYKBdLgDrz+o/BWeRFNFHK
- lgpw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=PRsB9LC/9b722cwBC5j1n6/wc/Ay0KTAGtZK1kbgKXY=;
- fh=hHz50KGXGrNjginwFlvlVVyNFi3e+tYSTS7L9kSnosg=;
- b=ddRlLfOcPcP/lm0z6/WJ/jDwra2ZuSWMmDwkbApk6Vhrx2WWjbd8wLe2H9Nyw8ITm8
- iZdNNPHVGqt+5RMPnwvW0nbVTyq5hcO5jPD+r02Ijy8js1SleAM8ytKpsR1K18WVVGPV
- 45gXJjkfqpIK9n0GMkXYuUuFjQ2ehAgMgp7LHxrkjPlvGCzTAgqEBshOk1/iJze0mf8o
- en/VFsDqes48awT18OeuVDnDQnzCnDmV69HrphlN/Wgvs0oud0MSr7Z54woIJRRx6q0r
- K/a+jHQXCMVh5XZgajmgR7zqhgzXk4zKpwu9gODE4Sq9aNRUeSlZ5j+B28m1oq//7e+7
- lOqA==; darn=nongnu.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1xJ7JU-0004JU-Od
+ for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:43:29 -0400
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-4a16af2a232so21607505e9.1
+ for <qemu-riscv@nongnu.org>; Tue, 20 Oct 2026 03:43:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1792491220; x=1793096020; darn=nongnu.org;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=PRsB9LC/9b722cwBC5j1n6/wc/Ay0KTAGtZK1kbgKXY=;
- b=M+BpdnQSftRJn1mNztAdAZ85sYEvI8t01wZxoKlXaw5ohXieAM2XUWxN4S9KNMBYfH
- jrQPabAOyydw2nQZU2Vcu9NbRToE00xyXYvV1rJk+sf9O7rtD6Yz9SeFwPAbe/C5pr+h
- vc0TjCadRGtoY2Iv0+LpKc5AFDIcbL8USln7V5J01BvWuAv/6Q4FHqyH+qdg6444ano+
- URMnXBj41xpAjFsMQB42cNYhviGDLL5LdwpFA8itHSsFjHwcKpDD6MDA3ryQBZOSxqnO
- Duu1rLsf5wVrCGpX5zSFBTzMceHOyXmGxWpDd57fxvEn5g8RfdV+M3404nqJKRgeCBTJ
- Ke3Q==
+ d=linaro.org; s=google; t=1792493003; x=1793097803; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:mime-version:message-id:date
+ :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=3NNeDfISu2gpg9ZYXN0W5UQrgwObRlFXGjX8CXeq/qY=;
+ b=h69dCYmfoPKNF1jFib4GFauJXecSl7LUYpU07Fszgl4Ef2VzCTxYoLXOFfNZ/Xd7BZ
+ Dfh8ChJqacvyiwHu/tO+UW/cNyjBZtBzrxjnWaHNvvriyjAOrixW+F+JadSQOlpNZYuN
+ a40TFL8m/x7XsWNJh1ePuL8ZH5BvwA+kw1MEMhTg3zXJe/yKlxO/mEiZZfnMGnE3EvnB
+ FhZq4H1ezyB1sPCejQ92hiocdyLhvRVPd9wR0Jmwu4A9HjEJ5u7SsrqPqNw3mwXGerLs
+ qRb9v0ASlPuskDVgEIbYwxDzwoiQEiy2JPwgwOH5Mm1XJh84QoxFOuplA49sekqlCfTr
+ Y9CQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792491220; x=1793096020;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=PRsB9LC/9b722cwBC5j1n6/wc/Ay0KTAGtZK1kbgKXY=;
- b=lcmLEbL94N0pP7vdhAv4vhyJOblTD6tC4mH0KN9pd0zSEKvJbGWeXK0GIXqQRO2NYQ
- 2qODTAE3v0kPJONuhmGts/b+PniyOAJ5cpk1FnSnzhy0kgL3Z0kZPlDT2p74CcfsiCRm
- f7hKQt1J1GwbMDevnOit5YwPl7TjvnTxB1kSvR+NvLskH9gU5UjhxHUFv90uhUpUi/zM
- sJv9m+BdEytgFnddqEd4JsXZWpyrALQoL5ZuvBkaX3OpbFmUag84qUk7gS+UnS/+gMCS
- XMAmEA1uEibpMbz2y7t5L4rutZvpK9tCBC1WfPNZ3L78WtMK0+KRQ5SibVIvyLtlZTam
- 1NFQ==
+ d=1e100.net; s=20260707; t=1792493003; x=1793097803;
+ h=content-transfer-encoding:content-type:mime-version:message-id:date
+ :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=3NNeDfISu2gpg9ZYXN0W5UQrgwObRlFXGjX8CXeq/qY=;
+ b=kmBSv8k4hIsSUrsT0gAKYlfHxUYKAMjTyAj0PTv57KBYKxPd7fj0YrJpQeVJBC+pDE
+ zgkf/u5chRVA+9H5kyquTPxp6oifqFJ6SWbSPsgYMDQVdKxyp2sYOt2nf++OLx0Eoq8f
+ k3I/QaYJlHC/NOrty4PMz2HS1ojqk0oVczhWsl3m0xCx3maUAx9Xwb8+usdiuESlaAPg
+ fVc0NyFlmQKZtRmMXYBFjQi/Rm9ub4MN4hqdhUBimBV/x2ar0EFtaeaosU2E9DwK0a8/
+ rTakEftDC6ybWanvk757sd1A6R5GTY0wYJAVTs0K58OBmWtHqZXD9D7QMu93an5aWip2
+ f0sw==
 X-Forwarded-Encrypted: i=1;
- AKwUvBwUF8RFNhU5dejkefuDgE69MUeusK1Q/rgScVQosFT92lu8uJn8urCSozbnLyguJ4AYBBlcWF1/X6as@nongnu.org
-X-Gm-Message-State: AFq9FYKVf4KUxwcm2F/t8qtCQrdCmmsJ53CPBeddDLCnuP4D8Oyf01vC
- fOTM9HpEWE8G7ESb/67lFGKhl1Aff9QArS4SjtWqZzMgnh7RQAkCAwXhN/SiLt/6/TqYpsoll5h
- pjiSqp/VOoL6E7urK4G7nYoyS4kdsoJdP3sr8Du5QTZLwSDh0Kc4QMg4=
-X-Gm-Gg: AYBFou2Qew4PyeyVlfzkMej4qMazIHLVWKSilSow5ekYBbQ4EeH4MFAWSuITLcJc6y3
- GHQ9D4zR/pK4JDlPEmuxOIC+gcnyY0350Ey9qtABBbqiM1cp3p5efsBkXEPo0bzOJoe5eZGRZD7
- JWgpS80Rcrd4BGRt4qpCrujy/eYGpqGOjQZ7ySCuzK1vH3YiN+kdFkc+bSN1QLA0DDCsSqJ0Uf1
- Bqz9YHQwWYv9JaXCZdHvsGitXV96uTpu7//zbc64xnmTNROiy9j6SEF5LTZccYHwzGTOfE9EZxR
- hlPSHjQtJ8A5wVL+1C9BdDoHg+6Dy2q4ASoDzBAl/2i+XshHEsAEspWmDgA8Um3gx7RlWaG9sUt
- 2WEpp8l5e2eewM5G0748eVQ+fmVv1TqfWg/H+sJY=
-X-Received: by 2002:a05:690c:97:b0:8b0:bc8e:9d75 with SMTP id
- 00721157ae682-8b120054e65mr5681457b3.22.1792491220419; Tue, 20 Oct 2026
- 03:13:40 -0700 (PDT)
+ AKwUvBwS2JwvicQ4OgeiHyDUbRKmCk9bs3RAe8Fc+/7D/9AxeBjX3plmSkwc8q2WfOJnQr+byITn+e5EdoFr@nongnu.org
+X-Gm-Message-State: AFq9FYJlWCTe0JxQx7ehGUj/GwcyE3ZveVq5eirFowxi68oQbipE5swC
+ uYCOqPnc9pdgPpAD+yxRyVzvW44u8Xnf++Sxm8vXiu7ddmOL46xbbNpV9jSBmV9XiRg=
+X-Gm-Gg: AYBFou3nYIGdl1dxRxiD4EDTXNB4smmSomz65+QoPs9cjDuVMLwWx3536eT1YE9/LHK
+ QussKflr7jSO6wvEhbJtXHUsMnbXooV9BRFOYAEkmFSUbWiHaeXlX0cR0OgXFrIdf3X6XDz/0TP
+ 9+zU34i2QPHu+OkuSt1drCoiavZ2/T8ZPRW5UZkq5JVyQ117/5UlmtSWCAw+/mGNOvxhIxmVyfP
+ aFZeF65B/+DSir3UBqCaDCWO3VZeYljkt5aIgOOpN6SN4qmD1cSmpb/eW+I0603e4tYV2HwNTkB
+ m5CHVYyc22aYY5wP9grZmx07bA53Y32mxQeP93sakBDWbmoK7+U2aC/Vv1XeUuJr8JMEgxOKgYr
+ +rN7b7oEaW0MKnONLBoZ8AkX646F1k6Xfxuz2ABTNuNUD3bAmIP8NesgBeqTaaiwZZqCkQ/mUUg
+ X8VVQn40efUNCKfqi/p9hqtuaeqm3LWjSrRY2s+fxt9vs1m0Ak76jhvIUcOPaXdxUTHcVo4Zupq
+ dvhO26Q
+X-Received: by 2002:a05:600c:608e:b0:4a1:e08e:46b5 with SMTP id
+ 5b1f17b1804b1-4a1e08e4871mr157389645e9.16.1792493003076; 
+ Tue, 20 Oct 2026 03:43:23 -0700 (PDT)
+Received: from draig.lan ([185.124.0.158]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4a1ce325107sm289903195e9.3.2026.10.20.03.43.21
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 20 Oct 2026 03:43:21 -0700 (PDT)
+Received: from draig.lan (localhost [IPv6:::1])
+ by draig.lan (Postfix) with ESMTP id 37ED55F8DC;
+ Tue, 20 Oct 2026 11:43:20 +0100 (BST)
+From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: Bibo Mao <maobibo@loongson.cn>,
+ Christian Borntraeger <borntraeger@linux.ibm.com>,
+ Ilya Leoshkevich <iii@linux.ibm.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, Eric Farman <farman@linux.ibm.com>,
+ Song Gao <17746591750@163.com>, Harsh Prateek Bora <harshpb@linux.ibm.com>,
+ David Hildenbrand <david@kernel.org>, Bernhard Beschow <shentey@gmail.com>,
+ Halil Pasic <pasic@linux.ibm.com>, Nicholas Piggin <npiggin@gmail.com>,
+ Paul Durrant <paul@xen.org>,
+ =?UTF-8?q?Bj=C3=B6rn=20Walk?= <bwalk@linux.ibm.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, qemu-s390x@nongnu.org,
+ David Woodhouse <dwmw2@infradead.org>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-ppc@nongnu.org,
+ Marcelo Tosatti <mtosatti@redhat.com>, kvm@vger.kernel.org,
+ qemu-arm@nongnu.org, linux-edac@vger.kernel.org,
+ Glenn Miles <milesg@linux.ibm.com>, Chao Liu <chao.liu@processmission.com>,
+ Cornelia Huck <cohuck@redhat.com>, Gautam Menghani <gautam@linux.ibm.com>,
+ Xianglai Li <lixianglai@loongson.cn>,
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+ Chinmay Rath <rathc@linux.ibm.com>, "Michael S. Tsirkin" <mst@redhat.com>,
+ Matthew Rosato <mjrosato@linux.ibm.com>,
+ Amit Machhiwal <amachhiw@linux.ibm.com>, Zhao Liu <zhao1.liu@intel.com>,
+ Weiwei Li <liwei1518@gmail.com>, Peter Maydell <peter.maydell@linaro.org>,
+ Mauro Carvalho Chehab <mchehab+huawei@kernel.org>, qemu-riscv@nongnu.org,
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
+Subject: [PATCH 00/23] kvm: introduce KVMCPUOps
+Date: Tue, 20 Oct 2026 11:42:54 +0100
+Message-ID: <20261020104320.3686723-1-alex.bennee@linaro.org>
+X-Mailer: git-send-email 2.47.3
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-References: <20261020075927.56983-1-philmd@oss.qualcomm.com>
-In-Reply-To: <20261020075927.56983-1-philmd@oss.qualcomm.com>
-From: Peter Maydell <peter.maydell@linaro.org>
-Date: Tue, 20 Oct 2026 11:13:29 +0100
-X-Gm-Features: AclHuK8-v59XNJAaqQ3PHglvgqaCbOZMo69jmvEw9CwAMfs4PAF0IIYptsPE_T0
-Message-ID: <CAFEAcA_S60THRtAeck_khNhLQkzTMTGap=jr1AnmNoDqg+8rEA@mail.gmail.com>
-Subject: Re: [PATCH v2] docs: Move RISC-V 'Z' CPU properties section to
- removed features
-To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@oss.qualcomm.com>
-Cc: qemu-devel@nongnu.org, 
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, qemu-riscv@nongnu.org, 
- devel@lists.libvirt.org, 
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
- Alistair Francis <alistair.francis@wdc.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1134;
- envelope-from=peter.maydell@linaro.org; helo=mail-yw1-x1134.google.com
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::32d;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -120,32 +126,111 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS autolearn=unavailable autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Tue, 20 Oct 2026 at 08:59, Philippe Mathieu-Daud=C3=A9
-<philmd@oss.qualcomm.com> wrote:
->
-> RISC-V 'Z' CPU properties were removed in commit 455c0fa9eef,
-> for the release v10.1.0. Move the corresponding section from
-> deprecated.rst to removed-features.rst, adjusting the wording
-> accordingly.
->
-> Fixes: 455c0fa9eef ("target/riscv: remove capital 'Z' CPU properties")
-> Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@oss.qualcomm.com>
-> ---
->  docs/about/deprecated.rst       | 24 ------------------------
->  docs/about/removed-features.rst |  7 +++++++
->  2 files changed, 7 insertions(+), 24 deletions(-)
+There is a world coming where we can have a KVM interface which
+supports multiple architectures. The old style approach of using
+linking to resolve per arch kvm_arch_foo handlers won't scale and is
+also slightly antithetical to the flexible not-quite object orientated
+way we do things in QEMU.
 
-Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
+Taking TCGCpuOps as a reference this implements KVMCpuOps as the
+shared function dispatcher for CPU specific KVM operations.
 
-thanks
--- PMM
+A couple of open questions:
+
+  - should we consider some sort of shared AccelInfo region for
+  CPUState instead of a bunch of mutually unused bits
+  - how can we improve coverage of KVM testing?
+
+The main driver for writing:
+
+  Message-ID: <20261019192704.3220373-1-alex.bennee@linaro.org>
+  Date: Mon, 19 Oct 2026 20:26:45 +0100
+  Subject: [PATCH v3 00/19] testing/next: functional testing updates for gdb (pre-PR)
+  From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
+
+was so I could be sure the KVMCpuOps where properly working. I don't
+think we have that much that exercises KVM in our CI system anyway
+because most runners don't give access to HW virtualisation. I have
+tested this on:
+
+  - x86_64 (on my dev box)
+  - aarch64 (on my personal dev box and the aarch64 ci machine)
+  - s390x (on devcloud instance, same as the s390x runner)
+
+Notably I wasn't able to test the riscv64, loongarch64 or ppc64
+behaviour. I do have access to the OSUL ppc runner but it doesn't
+support nested virt and testing on that machine needs some love anyway
+(see #3207).
+
+Anyway I await your discussion ;-)
+
+Alex.
+
+Alex Bennée (23):
+  accel: introduce KVMAccelClass and KVMCPUOps
+  target/i386: wire up empty KVMAccelCPUClass
+  target/ppc: wire up empty KVMAccelCPUClass
+  target/riscv: wire up empty KVMAccelCPUClass
+  target/arm: wire up empty KVMAccelCPUClass
+  target/s390x: wire up empty KVMAccelCPUClass
+  target/loongarch: wire up empty KVMAccelCPUClass
+  accel/kvm: port kvm_arch_pre_run to KVMCPUOps
+  accel/kvm: port kvm_arch_post_run to KVMCPUOps
+  accel/kvm: port kvm_arch_handle_exit to KVMCPUOps
+  accel/kvm: port kvm_arch_process_async_events to KVMCPUOps
+  accel/kvm: port kvm_arch_[put|get]_registers to KVMCPUOps
+  accel/kvm: port kvm_arch_pre_create_vcpu to KVMCPUOps
+  accel/kvm: port kvm_arch_init_vcpu to KVMCPUOps
+  accel/kvm: port kvm_arch_destroy_vcpu to KVMCPUOps
+  accel/kvm: port kvm_arch_vpcu_id to KVMCPUOps
+  accel/kvm: port kvm_arch_update_guest_debug to KVMCPUOps
+  accel/kvm: port kvm_arch_[insert|remove]_hw_breakpoints to KVMCPUOps
+  accel/kvm: remove TARGET_KVM_HAVE_GUEST_DEBUG
+  accel/kvm: port kvm_arch_stop_on_emulation_error to KVMCPUOps
+  accel/kvm: port kvm_arch_on_sigbus_vcpu to KVMCPUOps
+  accel/kvm: cache KVMCPUOps
+  accel/kvm: remove redundant ops checks for kvm_get_cpu_ops
+
+ docs/specs/acpi_hest_ghes.rst           |   3 +-
+ configs/targets/aarch64-softmmu.mak     |   1 -
+ configs/targets/i386-softmmu.mak        |   1 -
+ configs/targets/loongarch64-softmmu.mak |   1 -
+ configs/targets/ppc-softmmu.mak         |   1 -
+ configs/targets/ppc64-softmmu.mak       |   1 -
+ configs/targets/riscv64-softmmu.mak     |   1 -
+ configs/targets/s390x-softmmu.mak       |   1 -
+ configs/targets/x86_64-softmmu.mak      |   1 -
+ include/accel/kvm/cpu-ops.h             | 171 ++++++++++++++++++++++
+ include/hw/core/cpu.h                   |   3 +
+ include/system/kvm.h                    |  42 +-----
+ include/system/kvm_int.h                |   2 -
+ target/i386/kvm/kvm_i386.h              |  20 +++
+ accel/kvm/kvm-accel-ops.c               |  13 +-
+ accel/kvm/kvm-all.c                     | 183 +++++++++++++++++-------
+ accel/tcg/cpu-exec.c                    |   2 +-
+ hw/i386/kvm/xen_evtchn.c                |   6 +-
+ hw/intc/openpic_kvm.c                   |   4 +-
+ hw/intc/spapr_xive_kvm.c                |  10 +-
+ hw/intc/xics_kvm.c                      |   6 +-
+ target/arm/kvm.c                        |  96 +++++++------
+ target/i386/kvm/kvm-cpu.c               |  26 +++-
+ target/i386/kvm/kvm.c                   |  42 +++---
+ target/loongarch/cpu.c                  |   8 +-
+ target/loongarch/kvm/kvm.c              |  96 ++++++-------
+ target/ppc/kvm.c                        |  75 +++++-----
+ target/riscv/kvm/kvm-cpu.c              |  95 +++++-------
+ target/s390x/kvm/kvm.c                  |  89 +++++++-----
+ 29 files changed, 628 insertions(+), 372 deletions(-)
+ create mode 100644 include/accel/kvm/cpu-ops.h
+
+-- 
+2.47.3
+
 
