@@ -1,74 +1,73 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B3561606A319
-	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Oct 2026 11:13:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 55951606A31F
+	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Oct 2026 11:13:27 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=Gtl+Fenq
+	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=pH4snO+n
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xJ7Kt-0005W6-2z; Tue, 20 Oct 2026 06:44:51 -0400
+	id 1xJ7Jt-0004Ku-1J; Tue, 20 Oct 2026 06:43:49 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1xJ7Jv-0004PR-Oj
- for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:43:53 -0400
-Received: from mail-wm1-x336.google.com ([2a00:1450:4864:20::336])
+ id 1xJ7Jf-0004DN-Iw
+ for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:43:35 -0400
+Received: from mail-wr1-x429.google.com ([2a00:1450:4864:20::429])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1xJ7Je-0004QY-ER
- for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:43:51 -0400
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-4a16aaf2067so38014765e9.0
- for <qemu-riscv@nongnu.org>; Tue, 20 Oct 2026 03:43:33 -0700 (PDT)
+ id 1xJ7JW-0004Kt-Re
+ for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:43:35 -0400
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-48e09aa5264so1843792f8f.2
+ for <qemu-riscv@nongnu.org>; Tue, 20 Oct 2026 03:43:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1792493013; x=1793097813; darn=nongnu.org;
+ d=linaro.org; s=google; t=1792493005; x=1793097805; darn=nongnu.org;
  h=content-transfer-encoding:content-type:mime-version:references
  :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=QWwoMa4UZtGGfww2XLbb/N5Nn1L+rU0o0RKmqlS3tj4=;
- b=Gtl+Fenq5PkQ6oQ9y7Gae84mP3bravru15XmPhTXQlnfmPvyLsput8ITkjrpZaMCqF
- YxJqZPejQ0+l8JrWxt5sc1e7P27zf/9rJ3HCmi38motSXkUMhQdWDrO+jNkdhXg8YelF
- 7iEOV2FcDMTDUVKYogATgnKOjc7Sm0H5Tnm8MmtI2lHy2IdkZqzuD+zrxyBDPmVLg7uZ
- 6B0GuDOd1XgsbDAETCspeOKNQakbpOs5OllHvg3MnPGxgm8/Da9kCPo8bIkeG2n8yU8a
- g6Ef8vu9dWdwHciQnXjiWfxcixi7gAL5x24HGHxWuJxO+bRcb3HZmJ7clSgDS9n8vhAM
- Mz5A==
+ bh=xpvK8hxiiby7P5GAABphDAJ86oAgF7lyRnWJr7JT/sM=;
+ b=pH4snO+n+tK8npEh5Hcs3JcM0q1mTOJ9zdmziUOKQ3QBteryHWf/cF8v5QFC3V2pzf
+ 71k8E7OOqxh7zbAuxXK+RVTTFUH7z5MnevEmwSbsofHTfL91V0Hixo8cniQHClyZB5hF
+ Tk4NBcCah652FlMstMgCsurf8DuY7V5XtvUzpT8XZ4uDVQwqVbfyH7t5AITo7yHPyGSZ
+ srxrhp3u44+N21zHBy2Hy4WkOI2hEAof70OQ7aBGtsdqUnU8AitYOvjZhXr5iyI8S7L0
+ ykwIRX0ucApkb5gyy/cKnczdvJW+2yn4Wom4joTGwGdEq3OR6Dyr3jbEJqYUDM6bAThx
+ h9nQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792493013; x=1793097813;
+ d=1e100.net; s=20260707; t=1792493005; x=1793097805;
  h=content-transfer-encoding:content-type:mime-version:references
  :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=QWwoMa4UZtGGfww2XLbb/N5Nn1L+rU0o0RKmqlS3tj4=;
- b=k/lJUQG+ZQjMV5h1Xk9gR+jhucV2J7kVFmM965AD30FIFOtvCmwG2n3w4hDsx26/OE
- Eg+kTP7veDnGLh8TA1lt/KTOZ4Y4zuq9HhPt4sKYQPu2LlZVevD8CxMndpWh8FyfbDNG
- dw0NAZhYXkeSAImyT+/+SWZgFr0Ko381ZdimEc1AGlqPPl79mNjlyS/Vz+XMEWfX8c/6
- yftnloDstTOmb7ZTErqak1JOJeTauSSbRIIuPWqroBcyV/CzIwE8ZBelBS8WFfDBfbsF
- E90sJHya6kkUCcYjqskGZxMAO9oJPUl7VS4EoLMybmYjNMmlrjOhU3KJvwUMVFI/+lIY
- Vlxg==
+ bh=xpvK8hxiiby7P5GAABphDAJ86oAgF7lyRnWJr7JT/sM=;
+ b=BMDCK0t7JH5Zl8hizS/fddJ+0OqIqSoBqgFDJ1t6SB38Ycyhc40a2IdFAivP8qwCut
+ tK+iUUwMNIN6yLJviI27K3OYuJ+JfYMkGbC4ALNUnFoRTFDGIXRdx11pYGQEgvCZ3owz
+ YgXsuQUkpknTJwof853Oy2FPYqLd4woERWnd3gBsb2TdqGTiBsszKnQv7ejzlujKT+fI
+ eWx/TWHOfbr1J+6f1oWMps2u5Az3N3LG2GgeInuuBFEFrLc1Gsc57DrZ/svqTZQ5mWYv
+ XDFimKtu2rr5bFuRJYKTKhzsCYNURNGrpldoSv62yBlu6UfoXfWyyUk5YRwq2HEELlxK
+ 5fLQ==
 X-Forwarded-Encrypted: i=1;
- AKwUvBx7ouo958UtAhJ08x24k0XIzncDWa6mCOtKlEFPD0IEzRlq0QN3GwBZ7BlF7rLbGIMJ9RQ48fdz4qYQ@nongnu.org
-X-Gm-Message-State: AFq9FYLgBD//t6MQC7J4LEdqn8kzv+hroDLc1C02uooD3W7jYPQqdP18
- y9qoXOCKsq+pq13Ida3nWZj8RfXtlpdzlfRa/j4EhNstS/gjc+QCyvkhuCPCeYgQb+E=
-X-Gm-Gg: AYBFou1rDdHr0sM0RwH52iE1JaciBGXDObHsJFNfIUqJnRoMey+OJZBdBfTxvzxZ9Ov
- 1+rlaK1Oj94yHHpAShsCvJTaDw+AhV52L4xdzjT22lLZBkq2jfwRXXRCaLg5PVoj8vH9mRqL6DD
- 78olIM+tkenncXWwCbUDnd4jtpPvQSI38whwqlaEVD1UUL5YROsK1Zi2OPKhPWr/uuEOSS1pQLh
- HN1sAK5akJXK+4mH2tZ4uLz5GKOZUF2cRsJC1pr1+bbgwdZygxav0zAlDfyD+pL+YAj88w/1GAl
- RCZslfJ1kDH8UX5nPnZQTpVCs5xs8liqGYFq/RGtZx3oedFDRnLSkGW6Ujsvc5ErKmLJrwhw48q
- ccLfBTKinJOciZ47f8Gp87mIZjyl8j4yNbsD9Sw9867kLKIskww4eaYpbn3+WXD28Rz8DnivZyC
- WrVFHNvjxpq30zkPlrllrOpb11eO/MTXN1gOaabF1biuC7tWe+9YMxGjFwJUrEEDm3HVB9WwhND
- q7jWByP
-X-Received: by 2002:a05:600c:3547:b0:4a1:7c56:d4e2 with SMTP id
- 5b1f17b1804b1-4a1d7608dcemr216790035e9.16.1792493012821; 
- Tue, 20 Oct 2026 03:43:32 -0700 (PDT)
+ AKwUvBwHkU85HszGO6ZFLGNSSMp8CkNcV11a48D/6TSCVzBEPgR16mzUoOwofdoIvcRbfDLOCfy+hFdPsgXx@nongnu.org
+X-Gm-Message-State: AFq9FYKSzB+ydYmzYH6K1uwKpt3worSJOP6Qbwf+zo+4gOtg9/BuWfwz
+ mVAWkxtarlj9Xxw9IO/qfA2wmWO2m+QT0oXCQD8nrzlELN6IaaTYu2XXcVhD6d7Kb0g=
+X-Gm-Gg: AYBFou0gFuHd+fghlpuG40i/N/R4clPevDinX/Z5TaYUOTa64874L4qrkeoOJLohCD5
+ QISMSOPl+lmH0efRkffRGgnviLQ88vFX3vPf+MKhQLf/eK9n7TcWBOwi0iSiegVJkCISpbfPoza
+ uzLibARaJeHLn1mG05w3uo7lsGIgPXK17mqh2Fb+WVwh/kw/Mlg9DL7vfDuAoooz3c+HwxTjsLU
+ Ot+m1U0I+QH0wTtE1wi5ToLMRkoJa39/1NxNeVG9RI0VhnSGNDSsIpYwdjQSHV4LffZI1sM9A+B
+ YmZWi7f+uHwHcFR23FcM2vTURu8BdOpw30Mwa5OS4ENjDcdsCoKH26aevkk0J7vnaEUz8y5sY0m
+ WSyvgLaBof0F8NDlyQJH7W0QWl1F+6VPg1jknNjSEICfb5mMV0+qIa6CZS1qbsLEry4NXwAUhym
+ q6ylkYH9mgcdArwHR+cKDJmuQG2EtKUv2pbImaX46DselWU6djN8omZHNeHMTNNd+DBr3GLnk=
+X-Received: by 2002:a05:6000:2388:b0:48d:dec7:974c with SMTP id
+ ffacd0b85a97d-48e07985764mr20442510f8f.7.1792493005061; 
+ Tue, 20 Oct 2026 03:43:25 -0700 (PDT)
 Received: from draig.lan ([185.124.0.158]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48e1d6dc034sm4931794f8f.3.2026.10.20.03.43.25
+ ffacd0b85a97d-48e1d818237sm5338778f8f.27.2026.10.20.03.43.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 20 Oct 2026 03:43:27 -0700 (PDT)
+ Tue, 20 Oct 2026 03:43:24 -0700 (PDT)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id EF4CC5F915;
- Tue, 20 Oct 2026 11:43:22 +0100 (BST)
+ by draig.lan (Postfix) with ESMTP id CBA755FA65;
+ Tue, 20 Oct 2026 11:43:20 +0100 (BST)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Bibo Mao <maobibo@loongson.cn>,
@@ -100,9 +99,9 @@ Cc: Bibo Mao <maobibo@loongson.cn>,
  Weiwei Li <liwei1518@gmail.com>, Peter Maydell <peter.maydell@linaro.org>,
  Mauro Carvalho Chehab <mchehab+huawei@kernel.org>, qemu-riscv@nongnu.org,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
-Subject: [PATCH 15/23] accel/kvm: port kvm_arch_destroy_vcpu to KVMCPUOps
-Date: Tue, 20 Oct 2026 11:43:09 +0100
-Message-ID: <20261020104320.3686723-16-alex.bennee@linaro.org>
+Subject: [PATCH 05/23] target/arm: wire up empty KVMAccelCPUClass
+Date: Tue, 20 Oct 2026 11:42:59 +0100
+Message-ID: <20261020104320.3686723-6-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20261020104320.3686723-1-alex.bennee@linaro.org>
 References: <20261020104320.3686723-1-alex.bennee@linaro.org>
@@ -110,8 +109,8 @@ X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::336;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x336.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::429;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x429.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -138,228 +137,53 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Not every architecture was doing something here so we can make it an
-optional hook.
+We will fill in the functions in future commits.
 
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- include/accel/kvm/cpu-ops.h |  6 ++++++
- include/system/kvm.h        |  2 --
- target/i386/kvm/kvm_i386.h  |  1 +
- accel/kvm/kvm-all.c         | 17 +++++++++++------
- target/arm/kvm.c            |  5 -----
- target/i386/kvm/kvm-cpu.c   |  1 +
- target/i386/kvm/kvm.c       |  2 +-
- target/loongarch/kvm/kvm.c  |  3 ++-
- target/ppc/kvm.c            |  5 -----
- target/riscv/kvm/kvm-cpu.c  |  5 -----
- target/s390x/kvm/kvm.c      |  3 ++-
- 11 files changed, 24 insertions(+), 26 deletions(-)
+ target/arm/kvm.c | 25 +++++++++++++++++++++++++
+ 1 file changed, 25 insertions(+)
 
-diff --git a/include/accel/kvm/cpu-ops.h b/include/accel/kvm/cpu-ops.h
-index 23557a42ba7..171568e08cb 100644
---- a/include/accel/kvm/cpu-ops.h
-+++ b/include/accel/kvm/cpu-ops.h
-@@ -28,6 +28,11 @@ struct kvm_run;
-  * @init_vcpu: Mandatory callback executed to perform architecture-specific
-  *             initialization of a newly created KVM vCPU.
-  *             Returns 0 on success, or a negative errno on failure.
-+ * @destroy_vcpu: Optional callback executed when destroying a KVM vCPU
-+ *                (e.g. to free architecture-specific buffers or deregister
-+ *                state change handlers).
-+ *                May be NULL if no architecture-specific cleanup is required.
-+ *                Returns 0 on success, or a negative errno on failure.
-  * @get_registers: Mandatory callback to synchronize architecture-specific
-  *                 vCPU register state from KVM into QEMU's CPUState.
-  *                 Returns 0 on success, or a negative errno on failure.
-@@ -65,6 +70,7 @@ struct kvm_run;
- typedef struct KVMCPUOps {
-     int (*pre_create_vcpu)(CPUState *cpu, Error **errp);
-     int (*init_vcpu)(CPUState *cpu);
-+    int (*destroy_vcpu)(CPUState *cpu);
-     int (*get_registers)(CPUState *cpu, Error **errp);
-     int (*put_registers)(CPUState *cpu, KvmPutState level, Error **errp);
-     void (*pre_run)(CPUState *cpu, struct kvm_run *run);
-diff --git a/include/system/kvm.h b/include/system/kvm.h
-index a722f266dae..a66344cc70c 100644
---- a/include/system/kvm.h
-+++ b/include/system/kvm.h
-@@ -346,8 +346,6 @@ int kvm_arch_get_default_type(MachineState *ms);
- 
- int kvm_arch_init(MachineState *ms, KVMState *s);
- 
--int kvm_arch_destroy_vcpu(CPUState *cpu);
--
- #ifdef TARGET_KVM_HAVE_RESET_PARKED_VCPU
- void kvm_arch_reset_parked_vcpu(unsigned long vcpu_id, int kvm_fd);
- #else
-diff --git a/target/i386/kvm/kvm_i386.h b/target/i386/kvm/kvm_i386.h
-index 8af5a9dc0ef..c7ffed75c1d 100644
---- a/target/i386/kvm/kvm_i386.h
-+++ b/target/i386/kvm/kvm_i386.h
-@@ -35,6 +35,7 @@ int kvm_get_vm_type(MachineState *ms);
- void kvm_arch_reset_vcpu(X86CPU *cs);
- int x86_kvm_pre_create_vcpu(CPUState *cpu, Error **errp);
- int x86_kvm_init_vcpu(CPUState *cs);
-+int x86_kvm_destroy_vcpu(CPUState *cs);
- int x86_kvm_get_registers(CPUState *cs, Error **errp);
- int x86_kvm_put_registers(CPUState *cpu, KvmPutState level, Error **errp);
- void x86_kvm_pre_run(CPUState *cpu, struct kvm_run *run);
-diff --git a/accel/kvm/kvm-all.c b/accel/kvm/kvm-all.c
-index d877edaa5e8..69117271fa3 100644
---- a/accel/kvm/kvm-all.c
-+++ b/accel/kvm/kvm-all.c
-@@ -468,9 +468,11 @@ static int kvm_rebind_vcpus(Error **errp)
-             close(cpu->kvm_fd);
-         }
- 
--        ret = kvm_arch_destroy_vcpu(cpu);
--        if (ret < 0) {
--            goto err;
-+        if (ops->destroy_vcpu) {
-+            ret = ops->destroy_vcpu(cpu);
-+            if (ret < 0) {
-+                goto err;
-+            }
-         }
- 
-         if (s->coalesced_mmio_ring == (void *)cpu->kvm_run + PAGE_SIZE) {
-@@ -647,14 +649,17 @@ static int vcpu_unmap_regions(KVMState *s, CPUState *cpu)
- 
- static int do_kvm_destroy_vcpu(CPUState *cpu)
- {
-+    const KVMCPUOps *ops = kvm_get_cpu_ops(cpu);
-     KVMState *s = kvm_state;
-     int ret = 0;
- 
-     trace_kvm_destroy_vcpu(cpu->cpu_index, kvm_arch_vcpu_id(cpu));
- 
--    ret = kvm_arch_destroy_vcpu(cpu);
--    if (ret < 0) {
--        goto err;
-+    if (ops->destroy_vcpu) {
-+        ret = ops->destroy_vcpu(cpu);
-+        if (ret < 0) {
-+            goto err;
-+        }
-     }
- 
-     /* If I am the CPU that created coalesced_mmio_ring, then discard it */
 diff --git a/target/arm/kvm.c b/target/arm/kvm.c
-index b62f40623c3..042a075e612 100644
+index 3d905f8565d..7a3c957c3a5 100644
 --- a/target/arm/kvm.c
 +++ b/target/arm/kvm.c
-@@ -2093,11 +2093,6 @@ static int arm_kvm_init_vcpu(CPUState *cs)
-     return kvm_arm_init_cpreg_list(cpu);
+@@ -42,6 +42,8 @@
+ #include "hw/acpi/ghes.h"
+ #include "target/arm/gtimer.h"
+ #include "migration/blocker.h"
++#include "accel/accel-cpu-target.h"
++#include "accel/kvm/cpu-ops.h"
+ 
+ const KVMCapabilityInfo kvm_arch_required_capabilities[] = {
+     KVM_CAP_INFO(DEVICE_CTRL),
+@@ -2662,3 +2664,26 @@ void arm_gic_cap_kvm_probe(GICCapability *v2, GICCapability *v3)
+ 
+     kvm_arm_destroy_scratch_host_vcpu(fdarray);
  }
- 
--int kvm_arch_destroy_vcpu(CPUState *cs)
--{
--    return 0;
--}
--
- /* Callers must hold the iothread mutex lock */
- static void kvm_inject_arm_sea(CPUState *c)
- {
-diff --git a/target/i386/kvm/kvm-cpu.c b/target/i386/kvm/kvm-cpu.c
-index 6c547f204f8..8d250b3a847 100644
---- a/target/i386/kvm/kvm-cpu.c
-+++ b/target/i386/kvm/kvm-cpu.c
-@@ -237,6 +237,7 @@ static void kvm_cpu_instance_init(CPUState *cs)
- static const KVMCPUOps x86_kvm_cpu_ops = {
-     .pre_create_vcpu = x86_kvm_pre_create_vcpu,
-     .init_vcpu = x86_kvm_init_vcpu,
-+    .destroy_vcpu = x86_kvm_destroy_vcpu,
-     .get_registers = x86_kvm_get_registers,
-     .put_registers = x86_kvm_put_registers,
-     .pre_run = x86_kvm_pre_run,
-diff --git a/target/i386/kvm/kvm.c b/target/i386/kvm/kvm.c
-index 46b7e497aaf..a8109004e43 100644
---- a/target/i386/kvm/kvm.c
-+++ b/target/i386/kvm/kvm.c
-@@ -2533,7 +2533,7 @@ int x86_kvm_init_vcpu(CPUState *cs)
-     return r;
- }
- 
--int kvm_arch_destroy_vcpu(CPUState *cs)
-+int x86_kvm_destroy_vcpu(CPUState *cs)
- {
-     X86CPU *cpu = X86_CPU(cs);
-     CPUX86State *env = &cpu->env;
-diff --git a/target/loongarch/kvm/kvm.c b/target/loongarch/kvm/kvm.c
-index 8f2ceb50a78..6705e6698bd 100644
---- a/target/loongarch/kvm/kvm.c
-+++ b/target/loongarch/kvm/kvm.c
-@@ -1437,7 +1437,7 @@ void kvm_loongarch_cpu_post_init(LoongArchCPU *cpu)
-                                     "Set off to disable KVM steal time.");
- }
- 
--int kvm_arch_destroy_vcpu(CPUState *cs)
-+static int loongarch_kvm_destroy_vcpu(CPUState *cs)
- {
-     LoongArchCPU *cpu = LOONGARCH_CPU(cs);
- 
-@@ -1640,6 +1640,7 @@ void kvm_arch_accel_class_init(ObjectClass *oc)
- 
- static const KVMCPUOps loongarch_kvm_cpu_ops = {
-     .init_vcpu = loongarch_kvm_init_vcpu,
-+    .destroy_vcpu = loongarch_kvm_destroy_vcpu,
-     .get_registers = loongarch_kvm_get_registers,
-     .put_registers = loongarch_kvm_put_registers,
-     .handle_exit = loongarch_kvm_handle_exit,
-diff --git a/target/ppc/kvm.c b/target/ppc/kvm.c
-index 075999b553a..cb461963713 100644
---- a/target/ppc/kvm.c
-+++ b/target/ppc/kvm.c
-@@ -524,11 +524,6 @@ static int ppc_kvm_init_vcpu(CPUState *cs)
-     return ret;
- }
- 
--int kvm_arch_destroy_vcpu(CPUState *cs)
--{
--    return 0;
--}
--
- static void kvm_sw_tlb_put(PowerPCCPU *cpu)
- {
-     CPUPPCState *env = &cpu->env;
-diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-index b202882a155..4247cbec3d9 100644
---- a/target/riscv/kvm/kvm-cpu.c
-+++ b/target/riscv/kvm/kvm-cpu.c
-@@ -1512,11 +1512,6 @@ int kvm_arch_fixup_msi_route(struct kvm_irq_routing_entry *route,
-     return 0;
- }
- 
--int kvm_arch_destroy_vcpu(CPUState *cs)
--{
--    return 0;
--}
--
- unsigned long kvm_arch_vcpu_id(CPUState *cpu)
- {
-     return cpu->cpu_index;
-diff --git a/target/s390x/kvm/kvm.c b/target/s390x/kvm/kvm.c
-index 478b21a57fd..0dcd198afe3 100644
---- a/target/s390x/kvm/kvm.c
-+++ b/target/s390x/kvm/kvm.c
-@@ -409,7 +409,7 @@ static int s390x_kvm_init_vcpu(CPUState *cs)
-     return 0;
- }
- 
--int kvm_arch_destroy_vcpu(CPUState *cs)
-+static int s390x_kvm_destroy_vcpu(CPUState *cs)
- {
-     S390CPU *cpu = S390_CPU(cs);
- 
-@@ -2647,6 +2647,7 @@ void kvm_arch_accel_class_init(ObjectClass *oc)
- 
- static const KVMCPUOps s390x_kvm_cpu_ops = {
-     .init_vcpu = s390x_kvm_init_vcpu,
-+    .destroy_vcpu = s390x_kvm_destroy_vcpu,
-     .get_registers = s390x_kvm_get_registers,
-     .put_registers = s390x_kvm_put_registers,
-     .handle_exit = s390x_kvm_handle_exit,
++
++static const KVMCPUOps arm_kvm_cpu_ops = {
++};
++
++static void kvm_cpu_accel_class_init(ObjectClass *oc, const void *data)
++{
++    KVMAccelCPUClass *kacc = KVM_ACCEL_CPU_CLASS(oc);
++
++    kacc->cpu_ops = &arm_kvm_cpu_ops;
++}
++
++static const TypeInfo kvm_cpu_accel_type_info = {
++    .name = ACCEL_CPU_NAME("kvm"),
++    .parent = TYPE_KVM_ACCEL_CPU,
++    .class_init = kvm_cpu_accel_class_init,
++    .abstract = true,
++};
++
++static void kvm_cpu_accel_register_types(void)
++{
++    type_register_static(&kvm_cpu_accel_type_info);
++}
++type_init(kvm_cpu_accel_register_types);
 -- 
 2.47.3
 
