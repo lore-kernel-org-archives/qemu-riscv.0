@@ -1,58 +1,59 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A1BCF606A327
-	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Oct 2026 11:07:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5F82E606A319
+	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Oct 2026 11:07:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=XsgYjdJA
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=FBGC8D2F
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xJ7U4-0004m8-VL; Tue, 20 Oct 2026 06:54:21 -0400
+	id 1xJ7TX-0003M0-0D; Tue, 20 Oct 2026 06:53:47 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1xJ7R8-0000Lk-3l
- for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:51:20 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ id 1xJ7QZ-0007wk-LV
+ for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:50:43 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1xJ7R2-0006UU-O9
- for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:51:17 -0400
+ id 1xJ7QV-0006MT-Cp
+ for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:50:43 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1792493472;
+ s=mimecast20190719; t=1792493438;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=xYy3oSp+ff1fXLKzAr/ltjneF4aulTjsLHGvoluUofo=;
- b=XsgYjdJAHkLzwN+Yh944/CN3a6RnT8bL7e1lbNQNP2Q/7Ea6djLl4yt+QQs6RkHF0tAxEO
- O+psL+YagLOVmgD/e8sjWs6/t4j2sFivv7Yc+FswENvLoOTWue/7gqlFVitJl7ZEGCdWzQ
- Znse25YpEb/9WfXmBWNLfwptYAiAqJI=
-Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ bh=wDKqI9lxsJYOWv5oXkIIVMolronNVooZmn3jjB1NaoM=;
+ b=FBGC8D2F/nuBnjo516KjQp0lZ/Y2GSslLu2UWgfYYLluhW/o46vYUQga2v1tMZbd8kcVjX
+ m1Br9rdtO0rJtlOvX0IndgITkcN/NX5NPkCMUK0GGR/EdQ1pjwGS78b/FwZ7CT26MWjjZI
+ 5gIq/hgW7kvXBMoxjM+0icEmV+N6JvA=
+Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-317-_02t9xyMOm20feBYezgTrw-1; Tue,
- 20 Oct 2026 10:50:55 +0000
-X-MC-Unique: _02t9xyMOm20feBYezgTrw-1
-X-Mimecast-MFC-AGG-ID: _02t9xyMOm20feBYezgTrw_1792493452
-Received: from mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.12])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-694-nPrkmqWhMXen_3R1vU7oZw-1; Tue,
+ 20 Oct 2026 10:50:34 +0000
+X-MC-Unique: nPrkmqWhMXen_3R1vU7oZw-1
+X-Mimecast-MFC-AGG-ID: nPrkmqWhMXen_3R1vU7oZw_1792493430
+Received: from mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.93])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id E195F1954AF3; Tue, 20 Oct 2026 10:50:51 +0000 (UTC)
+ by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 06E3A1805A18; Tue, 20 Oct 2026 10:50:30 +0000 (UTC)
 Received: from localhost (headnet04.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.116])
- by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 668161956089; Tue, 20 Oct 2026 10:50:49 +0000 (UTC)
+ by mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id D157218005B8; Tue, 20 Oct 2026 10:50:26 +0000 (UTC)
 From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-Date: Tue, 20 Oct 2026 14:46:08 +0400
-Subject: [PATCH v7 51/65] hw/pci: change the busnr type to uint8
+Date: Tue, 20 Oct 2026 14:46:04 +0400
+Subject: [PATCH v7 47/65] hw/s390x: convert BootCertificatesList to
+ QAPI-aware registration
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Message-Id: <20261020-qom-qapi-v7-51-431a86b02b58@redhat.com>
+Message-Id: <20261020-qom-qapi-v7-47-431a86b02b58@redhat.com>
 References: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 In-Reply-To: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 To: qemu-devel@nongnu.org
@@ -127,38 +128,38 @@ Cc: Markus Armbruster <armbru@redhat.com>,
  Yoshinori Sato <yoshinori.sato@nifty.com>, Jiri Pirko <jiri@resnulli.us>, 
  Eric Auger <eric.auger@redhat.com>, Laurent Vivier <lvivier@redhat.com>, 
  =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=676;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1505;
  i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=XgvIxLl/BnhUDwV4Ml62CrnmhSOe02ljvgEL6HF9kIM=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZcsdAOAS0hjUnxh3WDcMl5LulHDaGVEH+/r
- GrDaZ1+NveJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGXAAKCRDa6OEJdZac
- 5WzUD/4gS8E5fmzaBRANZzmTHi4LMZi0Pnr4ISijVYni9psdGZecJgyELgBiKlkS5moIjcmgfO9
- LtzEDam7EKKaMjQcN5+qoT9kJDLjDpBykqFrZivQF2+tVHrtUmmPMpE3gd+qdxjg6bjuHJE9nm1
- y58JRaSIUeY5pv9QUPqHyIIC2MN6AtkJNS6T4D6zslZnqceh+5SUOmjDOh3IoP69Ya4dCoo4eLh
- /c5wEk48USsos1BczsynxRLqlv372oV7D6FHO+gwf7Umv7Wuuk3wMq7v55VvBk9ClGMFFFHl1Bl
- K3IymWi5lcpeebgGoY2rJ461Nf1K2sX+de1UruF0XycFGG7zJB0fY0/QCktkFe//ULP8eWVVPxr
- x4po1soNOkYf6gQEeqjLamK0g8ZJygWnnbTzMGQEwO1n2GefBmYe/bslKuhzlSlv0HKmfN1M7tb
- byc79SREJ+GyMzX/SS2qzWi9Gn2rDYqKAs9h/RWWJ+yB/ND5yn9/LQ7juXguQ9BRcahIQMeTOiD
- VEEzjLcJHQbx5RCwpKZQ95j9UiN4WpHPiULZe4dPYsvpFHaoocZ8FKiKm53uryDXr8nXEA4SAUg
- dfhpm5tVTAMYZqUADL7oer+1PwE0J6AANyAUXX8h59mqI45I6O/T5kqAez+QPc00dcUYloWmkkC
- 4rA7sxiB57P9E5A==
+ bh=wdbhYWD/vf672j0phUbR1cOU3kwkLl3/cupZ0YaTznU=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZbDkYgPj0HDzsA3Y34WzGHrPrDPeDHvzd0l
+ wPaLOFmX3WJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGWwAKCRDa6OEJdZac
+ 5QyFD/0b7xA4ChrYMo5WcQsrtlQZqCXFanjHmndWojPNq6E6DJrh7yNweRlM5B8GO8az5oyA75h
+ sUttRiBWYNvMnlgXQtH/nE8T96ywsGyTT9ZInHttlzN9P5Fh5Kr/SqOcHkuYj6mXh4Qo8l9kpkX
+ 5Ls7K8Ke23byTyibodkbaedkpfdM3EpJ3hzQ5r3Cbp68RrQqxPRAGGe+DEVXyTzCaUIrg/oKuKl
+ ee+1owd49sj/oDWlsbQ8JKwkl9rM61yJQqCHZ/8bYXLsQ8Sy+lP6fJkHm9Ng4C2rM7dDW0wPeZJ
+ /AnxrnFDz+SaS70Z+Q7qSIRHxareyWZJA0rnKOl82n26hwJ2mAFFTibkJxJPdnojLqX+mWBzWUU
+ 61jumL2L/vI6Hbuh3iO7YnsdjYk+RAjIYNyc/LVGHWFYLkgevtNRkvL4bo4c8ILFq/kfEbpOOX9
+ IJctXj/7n79Sx62wNtTjV3Wmenr+zMkYIemOn14uqf9VuXdkB0ih5iiJgO031WJpDUGUW/l3UO0
+ Nt1goAs8YdyzC1w+yD/OBemcsUJMxG2IKhcXMBoyjQtwO1hYYX+0qqyxosT72NLiOrgKTvIWx/C
+ AamF9QKFFgHdWVkuKlqIBCfed1sEkedvwsLa07Bik/rEdPJdSrKHrHCPDZ9x/Q5r3QVwD+zyVVq
+ V10wnjLfSGUrDTg==
 X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
  fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.12
-X-Mimecast-MFC-PROC-ID: -HpvBmhJZgcDSGWnH-53VMhuJAAkFAjCiZ7huRwW6uM_1792493452
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.93
+X-Mimecast-MFC-PROC-ID: 30ys56jiXj_8xAiMRMqViQWMtQLENhBszKmQDzqWJqE_1792493430
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.129.124;
+Received-SPF: pass client-ip=170.10.133.124;
  envelope-from=marcandre.lureau@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: 9
-X-Spam_score: 0.9
-X-Spam_bar: /
-X-Spam_report: (0.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.329,
+X-Spam_score_int: -23
+X-Spam_score: -2.4
+X-Spam_bar: --
+X-Spam_report: (-2.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.329,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_SBL_CSS=3.335, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -177,27 +178,36 @@ X-Spam-Status: No, score=-16.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-It is effectively a u8. The next changes are going to use the
-uint8_type_info for it.
-
 Signed-off-by: Markus Armbruster <armbru@redhat.com>
 Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 ---
- hw/pci/pci.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ hw/s390x/s390-virtio-ccw.c | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
 
-diff --git a/hw/pci/pci.c b/hw/pci/pci.c
-index 0efb4eb4bb03..6edc702776ab 100644
---- a/hw/pci/pci.c
-+++ b/hw/pci/pci.c
-@@ -80,7 +80,7 @@ static void prop_pci_busnr_get(Object *obj, Visitor *v, const char *name,
- }
+diff --git a/hw/s390x/s390-virtio-ccw.c b/hw/s390x/s390-virtio-ccw.c
+index 3ed425b16c3e..8bc09c179552 100644
+--- a/hw/s390x/s390-virtio-ccw.c
++++ b/hw/s390x/s390-virtio-ccw.c
+@@ -44,6 +44,7 @@
+ #include "target/s390x/kvm/pv.h"
+ #include "migration/blocker.h"
+ #include "qapi/qapi-builtin-type-infos.h"
++#include "qapi/qapi-type-infos-machine-s390x.h"
+ #include "qapi/visitor.h"
+ #include "qapi/qapi-visit-machine-s390x.h"
+ #include "hw/s390x/cpu-topology.h"
+@@ -918,8 +919,10 @@ static void ccw_machine_class_init(ObjectClass *oc, const void *data)
+             " to upper case) to pass to machine loader, boot manager,"
+             " and guest kernel");
  
- static const PropertyInfo prop_pci_busnr = {
--    .type = "busnr",
-+    .type = "uint8",
-     .get = prop_pci_busnr_get,
- };
+-    object_class_property_add(oc, "boot-certs", "BootCertificatesList",
+-                              machine_get_boot_certs, machine_set_boot_certs, NULL, NULL);
++    object_class_property_add_qapi(oc, "boot-certs",
++                                   &BootCertificatesList_type_info,
++                                   machine_get_boot_certs,
++                                   machine_set_boot_certs, NULL, NULL);
+     object_class_property_set_description(oc, "boot-certs",
+             "provide paths to a directory and/or a certificate file for secure boot");
  
 
 -- 
