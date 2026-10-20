@@ -1,59 +1,59 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 16BB760A2607
-	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Oct 2026 11:11:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1428D60A380F
+	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Oct 2026 11:11:41 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=YSPefJdd
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=PprNotCB
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xJ7T1-0002Fb-MD; Tue, 20 Oct 2026 06:53:15 -0400
+	id 1xJ7Q6-0006V6-Pt; Tue, 20 Oct 2026 06:50:14 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1xJ7R0-0000HH-3f
- for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:51:10 -0400
+ id 1xJ7Od-0003BU-NG
+ for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:48:48 -0400
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1xJ7Qy-0006Sy-1X
- for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:51:09 -0400
+ id 1xJ7OZ-0005Z0-L7
+ for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:48:41 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1792493467;
+ s=mimecast20190719; t=1792493317;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=OxciqWPAoEP3mYi79fT0gwyx/y+Ueu4PihTpFMb+Vro=;
- b=YSPefJddeHl7EOQnV+mK5ShlDkcEaTRfGCqkNADeaXNRvU4O8ltF1FPNmepOJyyAOyquFB
- 8s3cLrNtCWINLhSpDob/krcQspMP8r5BKHK0BNDEKOpT6lBxOzZZ4jV8pO5Q5samSM75Y6
- Gsq61ysvNfv+AO3OVvUrXOPXLgcr8xc=
-Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
+ bh=oguRv2squZzE4kLuZbCGfVuSLth7nwetzOZz6ya/vQM=;
+ b=PprNotCBusVvuFCyVBE1YkGAAwE+yPpR2uDnn660xqTsMTuRDcaA9wvCsdAt/hbSDsX5WV
+ IWI7TK04LkfCE2OU7hfpm/j2mJ0+9M9DG2/lkyDnZ3jWZrFAAlvBwdwCSqQSHW+YelqWdM
+ M5l+PZEXo2rT69kpGHBXR1lUNH+3aNI=
+Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-315-plwKHC4NOLSL9hNBtPanxA-1; Tue,
- 20 Oct 2026 10:51:05 +0000
-X-MC-Unique: plwKHC4NOLSL9hNBtPanxA-1
-X-Mimecast-MFC-AGG-ID: plwKHC4NOLSL9hNBtPanxA_1792493462
-Received: from mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.12])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-29-uBDd0-1GMx-Pw1Kl9QVEug-1; Tue,
+ 20 Oct 2026 06:48:27 -0400
+X-MC-Unique: uBDd0-1GMx-Pw1Kl9QVEug-1
+X-Mimecast-MFC-AGG-ID: uBDd0-1GMx-Pw1Kl9QVEug_1792493303
+Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id D94121800628; Tue, 20 Oct 2026 10:51:01 +0000 (UTC)
+ by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 0BFD51955DCB; Tue, 20 Oct 2026 10:48:23 +0000 (UTC)
 Received: from localhost (headnet04.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.116])
- by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 1B6D11956089; Tue, 20 Oct 2026 10:50:59 +0000 (UTC)
+ by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id 811011800257; Tue, 20 Oct 2026 10:48:20 +0000 (UTC)
 From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-Date: Tue, 20 Oct 2026 14:46:10 +0400
-Subject: [PATCH v7 53/65] qdev: convert core PropertyInfo definitions to
- use qapi_type
+Date: Tue, 20 Oct 2026 14:45:41 +0400
+Subject: [PATCH v7 24/65] arm/virt: convert OnOffAuto acpi property to
+ QAPI-aware registration
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Message-Id: <20261020-qom-qapi-v7-53-431a86b02b58@redhat.com>
+Message-Id: <20261020-qom-qapi-v7-24-431a86b02b58@redhat.com>
 References: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 In-Reply-To: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 To: qemu-devel@nongnu.org
@@ -128,38 +128,38 @@ Cc: Markus Armbruster <armbru@redhat.com>,
  Yoshinori Sato <yoshinori.sato@nifty.com>, Jiri Pirko <jiri@resnulli.us>, 
  Eric Auger <eric.auger@redhat.com>, Laurent Vivier <lvivier@redhat.com>, 
  =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=6959;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2443;
  i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=RHtqBiZ1ZpqW16u5ZDKaCCTk7bDqrZ48KqqtmQit3DY=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZctFtIhQr7wjwq0vlVATZsMz0DILvEH+0jv
- hwCsb531JmJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGXAAKCRDa6OEJdZac
- 5fUsD/9v7R2O4amiuZ6SP+5w4OuXKDrY8C+/Sc9jWdJC+ykOn3MS1oFd6aG72bZkKifmaaiUg7L
- TYOQ73e/j30Aq8BxvAneXubghaxQasTkvl99rK7tpyVZmrR50QihCvaY/ojpH0CLNYG2XkUUxKL
- y8yd7vUzbbeRmLV9PNMcmwDeruh6TA0cZ9WXnDE587xYeh2mwT4wozR1RpBy/mOaVV6pCsAH5fC
- FJEzUzb0nzAnNGbVueWWQDRGCe73rj4hcn34RKSLYVxJQzQWL2mdCkPZN0RISYsH2pQ7vRwObYz
- NfzpXdVqc2iGmdIhuVCSrT22vQagV3Ver1Mu/8au7kLcxHnm9QFUhImJS4yToAOJk2Lgk2IJuAj
- RKOI0UHd43FbgYRrs5+S+TOkayjmFvlvJQ5ttHfYA95e+Dy55b6P2DbihYrAcl+AabExEmH+ikO
- Z3dzsDiMnsSR4xCGGFtThVh4RJ/4Qw1IGQAl3Lu+8C3d89oEU6hCmPWUiZAWw0a20/UT9N9KyKx
- is8Bnc3h8p0qMcWdiz2wZ7Pb/oOW6ZTqdF94KyeCq1FZS1D/CmS265DPmP+EGKz75jb30ZiRafc
- vpG2mZrXz/I1P9ivzKYIX20Jf3dTEQesxhMn3mUkfIGOcm3wVD1XCjYjkRPs6YUrOSeAgL0EmlP
- kEIkN/dkX0GxvOQ==
+ bh=WJV9rbWGfyoHPVy5l0gOvkb5+YjNc4EgQxym05N/4z0=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZZD2w11mplFmU1C3uOjRIrgiEXmssGFGVqF
+ U+VXCQyIhmJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGWQAKCRDa6OEJdZac
+ 5VV9D/4yHO7gBqYrWIgKINlgaqxweu9J3zPt0Q96BUDUTYP82Ji46aRrDnTKFU/lmiVpB0fAB4e
+ XJamdIf6GysZPW/ts5RuPqmpRgUOHkFyl3w6WSrVcFZiUziA7H7//SozvNb0ksb52BEBDgRfu59
+ 76EmyWmsMmdXm+7NFzf2Yr+0bybSNkLa/MDFeCosMy7O2q3mPK9t3viHrwkYiKodq7f49cF6ULL
+ oQdp5XFWl+UruNu6YzMVat1OiEu+899ewJ0eacPhEublBVLtFTlEyPN76iInq272v6ozbm0j+v4
+ dODiO9YWj3H5tgsJT8uGwdCphesONwj0ehWE8RIOlcUgPq4CG6I5T2hqeBC816s74u8j3SXm1gs
+ UhtJlBc/VY3cXU1/oQ2tjN4SSA6n7oGSwK+LRulGbjdZC6TUoOksZ1YjYPPMnyAOQ5TRVyAAgpc
+ O/JcWDzz2hNjVcm8QKZsT7maPZt2pSxPvzOMz6stvRCSGt8xEj/e2l9kUWyvKNOEIFsGMjCJ4NB
+ pytKX14Dode4YAKX1vRHPXwn7/ugDk+4mt37W8v1DKB3P4UJu9L8YinWg2FGRK8OTzDd+mMm7aT
+ E0xuadOhVSJzsCQlpI4JB5RAmJ9WvMZdP4Mo65KTRR9rVKvDeEboNO+ggGjsDNOsWBeK+S/od4x
+ iQ07BZ5MWxFvlRw==
 X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
  fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.12
-X-Mimecast-MFC-PROC-ID: aBnh0edrIFsMYl_-7DLrvTv1RRHcM0w-gclnYFTfAqA_1792493462
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
+X-Mimecast-MFC-PROC-ID: dr7NC8tsnaXZefzPM4w5xbZKBsgf-oohOQav0Yb0QNs_1792493303
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=170.10.129.124;
  envelope-from=marcandre.lureau@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -23
-X-Spam_score: -2.4
-X-Spam_bar: --
-X-Spam_report: (-2.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.329,
+X-Spam_score_int: 9
+X-Spam_score: 0.9
+X-Spam_bar: /
+X-Spam_report: (0.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.329,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_SBL_CSS=3.335, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -178,201 +178,73 @@ X-Spam-Status: No, score=-16.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Replace .type string with .qapi_type pointer on all core PropertyInfo
-definitions in qdev-properties.c. Remove .enum_table from enum
-definitions, since the lookup is now accessed through .qapi_type->lookup
-via the qdev_propinfo_enum_lookup() fallback helper.
-
-Note that qdev_prop_usize now reports "uint32" or "uint64" depending on
-the host. If usize is worth preserving, it should be added as a QAPI
-builtin type. Or perhaps we should simply use "size" everywhere (u64)?
-
-It's also strange to use type "size" for both u32 (prop_size32) and u64
-(prop_size).
-
-Link property are actually strings. The "full type name" is set when
-the property is added, as "link<TYPE>".
-
-Array property will be refactored in a subsequent patch.
+Convert the acpi OnOffAuto property from manual visitor-based
+callbacks to property_add_qapi_enum().
 
 Signed-off-by: Markus Armbruster <armbru@redhat.com>
 Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 ---
- hw/core/qdev-properties.c | 42 +++++++++++++++++++++++-------------------
- 1 file changed, 23 insertions(+), 19 deletions(-)
+ hw/arm/virt.c | 27 ++++++++++++---------------
+ 1 file changed, 12 insertions(+), 15 deletions(-)
 
-diff --git a/hw/core/qdev-properties.c b/hw/core/qdev-properties.c
-index ee50fbb9f570..abdb380cb9ec 100644
---- a/hw/core/qdev-properties.c
-+++ b/hw/core/qdev-properties.c
-@@ -12,6 +12,8 @@
- #include "qdev-prop-internal.h"
- #include "qom/compat-properties.h"
- #include "qom/qom-qobject.h"
-+#include "qapi/qapi-builtin-type-infos.h"
+diff --git a/hw/arm/virt.c b/hw/arm/virt.c
+index 0d56197dacee..0da10b799cfb 100644
+--- a/hw/arm/virt.c
++++ b/hw/arm/virt.c
+@@ -73,7 +73,7 @@
+ #include "whpx_arm.h"
+ #include "hw/firmware/smbios.h"
+ #include "qapi/visitor.h"
+-#include "qapi/qapi-visit-common.h"
 +#include "qapi/qapi-type-infos-common.h"
- 
- void qdev_prop_set_after_realize(DeviceState *dev, const char *name,
-                                   Error **errp)
-@@ -181,7 +183,7 @@ static void set_default_value_bool(ObjectProperty *op, const Property *prop)
+ #include "qobject/qlist.h"
+ #include "standard-headers/linux/input.h"
+ #include "hw/arm/smmuv3.h"
+@@ -3565,21 +3565,16 @@ bool virt_is_acpi_enabled(const VirtMachineState *vms)
+     return true;
  }
  
- const PropertyInfo qdev_prop_bit = {
--    .type  = "bool",
-+    .qapi_type = &bool_type_info,
-     .description = "on/off",
-     .get   = prop_get_bit,
-     .set   = prop_set_bit,
-@@ -231,7 +233,7 @@ static void prop_set_bit64(Object *obj, Visitor *v, const char *name,
+-static void virt_get_acpi(Object *obj, Visitor *v, const char *name,
+-                          void *opaque, Error **errp)
++static int virt_get_acpi(Object *obj, Error **errp)
+ {
+     VirtMachineState *vms = VIRT_MACHINE(obj);
+-    OnOffAuto acpi = vms->acpi;
+-
+-    visit_type_OnOffAuto(v, name, &acpi, errp);
++    return vms->acpi;
  }
  
- const PropertyInfo qdev_prop_bit64 = {
--    .type  = "bool",
-+    .qapi_type = &bool_type_info,
-     .description = "on/off",
-     .get   = prop_get_bit64,
-     .set   = prop_set_bit64,
-@@ -293,9 +295,8 @@ static void prop_set_on_off_auto_bit64(Object *obj, Visitor *v,
+-static void virt_set_acpi(Object *obj, Visitor *v, const char *name,
+-                          void *opaque, Error **errp)
++static void virt_set_acpi(Object *obj, int value, Error **errp)
+ {
+     VirtMachineState *vms = VIRT_MACHINE(obj);
+-
+-    visit_type_OnOffAuto(v, name, &vms->acpi, errp);
++    vms->acpi = value;
  }
  
- const PropertyInfo qdev_prop_on_off_auto_bit64 = {
--    .type = "OnOffAuto",
-+    .qapi_type = &OnOffAuto_type_info,
-     .description = "on/off/auto",
--    .enum_table = &OnOffAuto_lookup,
-     .get = prop_get_on_off_auto_bit64,
-     .set = prop_set_on_off_auto_bit64,
-     .set_default_value = qdev_propinfo_set_default_value_enum,
-@@ -322,7 +323,7 @@ static void set_bool(Object *obj, Visitor *v, const char *name, void *opaque,
- }
+ static bool virt_get_ras(Object *obj, Error **errp)
+@@ -4207,11 +4202,13 @@ static void virt_machine_class_init(ObjectClass *oc, const void *data)
+     mc->default_ram_id = "mach-virt.ram";
+     mc->default_nic = "virtio-net-pci";
  
- const PropertyInfo qdev_prop_bool = {
--    .type  = "bool",
-+    .qapi_type = &bool_type_info,
-     .description = "on/off",
-     .get   = get_bool,
-     .set   = set_bool,
-@@ -362,7 +363,7 @@ void qdev_propinfo_set_default_value_uint(ObjectProperty *op,
- }
- 
- const PropertyInfo qdev_prop_uint8 = {
--    .type  = "uint8",
-+    .qapi_type = &uint8_type_info,
-     .get   = get_uint8,
-     .set   = set_uint8,
-     .set_default_value = qdev_propinfo_set_default_value_uint,
-@@ -389,7 +390,7 @@ static void set_uint16(Object *obj, Visitor *v, const char *name,
- }
- 
- const PropertyInfo qdev_prop_uint16 = {
--    .type  = "uint16",
-+    .qapi_type = &uint16_type_info,
-     .get   = get_uint16,
-     .set   = set_uint16,
-     .set_default_value = qdev_propinfo_set_default_value_uint,
-@@ -434,14 +435,14 @@ static void set_int32(Object *obj, Visitor *v, const char *name, void *opaque,
- }
- 
- const PropertyInfo qdev_prop_uint32 = {
--    .type  = "uint32",
-+    .qapi_type = &uint32_type_info,
-     .get   = get_uint32,
-     .set   = set_uint32,
-     .set_default_value = qdev_propinfo_set_default_value_uint,
- };
- 
- const PropertyInfo qdev_prop_int32 = {
--    .type  = "int32",
-+    .qapi_type = &int32_type_info,
-     .get   = qdev_propinfo_get_int32,
-     .set   = set_int32,
-     .set_default_value = qdev_propinfo_set_default_value_int,
-@@ -486,14 +487,14 @@ static void set_int64(Object *obj, Visitor *v, const char *name,
- }
- 
- const PropertyInfo qdev_prop_uint64 = {
--    .type  = "uint64",
-+    .qapi_type = &uint64_type_info,
-     .get   = get_uint64,
-     .set   = set_uint64,
-     .set_default_value = qdev_propinfo_set_default_value_uint,
- };
- 
- const PropertyInfo qdev_prop_int64 = {
--    .type  = "int64",
-+    .qapi_type = &int64_type_info,
-     .get   = get_int64,
-     .set   = set_int64,
-     .set_default_value = qdev_propinfo_set_default_value_int,
-@@ -515,7 +516,7 @@ static void set_uint64_checkmask(Object *obj, Visitor *v, const char *name,
- }
- 
- const PropertyInfo qdev_prop_uint64_checkmask = {
--    .type  = "uint64",
-+    .qapi_type = &uint64_type_info,
-     .get   = get_uint64,
-     .set   = set_uint64_checkmask,
- };
-@@ -551,7 +552,11 @@ static void set_usize(Object *obj, Visitor *v, const char *name, void *opaque,
- }
- 
- const PropertyInfo qdev_prop_usize = {
--    .type  = "usize",
-+#if HOST_LONG_BITS == 32
-+    .qapi_type = &uint32_type_info,
-+#else
-+    .qapi_type = &uint64_type_info,
-+#endif
-     .get   = get_usize,
-     .set   = set_usize,
-     .set_default_value = qdev_propinfo_set_default_value_uint,
-@@ -595,7 +600,7 @@ static void set_string(Object *obj, Visitor *v, const char *name,
- }
- 
- const PropertyInfo qdev_prop_string = {
--    .type  = "str",
-+    .qapi_type = &str_type_info,
-     .release = release_string,
-     .get   = get_string,
-     .set   = set_string,
-@@ -604,9 +609,8 @@ const PropertyInfo qdev_prop_string = {
- /* --- on/off/auto --- */
- 
- const PropertyInfo qdev_prop_on_off_auto = {
--    .type = "OnOffAuto",
-+    .qapi_type = &OnOffAuto_type_info,
-     .description = "on/off/auto",
--    .enum_table = &OnOffAuto_lookup,
-     .get = qdev_propinfo_get_enum,
-     .set = qdev_propinfo_set_enum,
-     .set_default_value = qdev_propinfo_set_default_value_enum,
-@@ -647,7 +651,7 @@ static void set_size32(Object *obj, Visitor *v, const char *name, void *opaque,
- }
- 
- const PropertyInfo qdev_prop_size32 = {
--    .type  = "size",
-+    .qapi_type = &size_type_info,
-     .get = qdev_propinfo_get_size32,
-     .set = set_size32,
-     .set_default_value = qdev_propinfo_set_default_value_uint,
-@@ -1060,7 +1064,7 @@ static void set_size(Object *obj, Visitor *v, const char *name, void *opaque,
- }
- 
- const PropertyInfo qdev_prop_size = {
--    .type  = "size",
-+    .qapi_type = &size_type_info,
-     .get = get_size,
-     .set = set_size,
-     .set_default_value = qdev_propinfo_set_default_value_uint,
-@@ -1142,7 +1146,7 @@ static void set_link(Object *obj, Visitor *v, const char *name, void *opaque,
- }
- 
- const PropertyInfo qdev_prop_link = {
--    .type = "link",
-+    .qapi_type = &str_type_info,
-     .create = create_link_property,
-     /*
-      * Since we have a create method, the get and set are used
+-    object_class_property_add(oc, "acpi", "OnOffAuto",
+-        virt_get_acpi, virt_set_acpi,
+-        NULL, NULL);
+-    object_class_property_set_description(oc, "acpi",
+-        "Enable ACPI");
++    object_class_property_add_qapi_enum(oc, QAPI_ENUM_PROP(
++        .name = "acpi",
++        .description = "Enable ACPI",
++        .qapi_type = &OnOffAuto_type_info,
++        .get = virt_get_acpi,
++        .set = virt_set_acpi,
++    ));
+     object_class_property_add_bool(oc, "secure", virt_get_secure,
+                                    virt_set_secure);
+     object_class_property_set_description(oc, "secure",
 
 -- 
 2.56.0.116.g6de20f6092dc
