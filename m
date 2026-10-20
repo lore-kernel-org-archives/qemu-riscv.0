@@ -1,149 +1,60 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6FAB4606A31B
-	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Oct 2026 08:01:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 77361606A319
+	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Oct 2026 10:05:20 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=ZQqu7xTC;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Wx0H3aVH
+	dkim=pass (1024-bit key, unprotected) header.d=vmexit.de header.i=@vmexit.de header.a=rsa-sha256 header.s=mail header.b=KOvMdZx6
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xJ4mV-00053H-Gp; Tue, 20 Oct 2026 04:01:11 -0400
+	id 1xJ6iW-000645-Cq; Tue, 20 Oct 2026 06:05:12 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1xJ4mO-00050i-D3
- for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 04:01:04 -0400
-Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
+ (Exim 4.90_1) (envelope-from <ralf@vmexit.de>)
+ id 1xJ6iT-00063L-K3; Tue, 20 Oct 2026 06:05:09 -0400
+Received: from vmexit.de ([2a0a:4cc0:c1:d4ba::2] helo=gizmo.vmexit.de)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1xJ4mM-0007Oc-DM
- for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 04:01:03 -0400
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 69K7kNaq1025998
- for <qemu-riscv@nongnu.org>; Tue, 20 Oct 2026 08:01:00 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- kqdUQZ5WOVbFKmWnSIDXR3DCl1yA6xbzJRYh//OQAIs=; b=ZQqu7xTChU3gUb/b
- iAAZI4AJWKHqkimc9gOgtVjFOM+i69YoYT3rjxDLqJSboxiFrdYmhF97A636rt3t
- p5FKAIF2ac+08lR8RJT6BfFRQHKU3nVONa/X37vU51HmCTAXPOQJRuLITzSKwj3w
- 0dwo4/zGNVqPNTCK8istxJyQD8IFGiunuJ/CRvw4ncRTMIaR8DyWsss8mW7zxm6G
- 2CiibpK0r/SUwwbVfToVf00KjjFc7cB7aAjI/AYckynUCjI0RYcWIg7jJYdqpIV2
- JWS8ZQO5I4q9gZKGHEXNKWvZFYa2vTpHJYHqtzNc59Sbm4x3DFJ3iNfpbZc2NMs4
- SS0Zog==
-Received: from mail-qv1-f69.google.com (mail-qv1-f69.google.com
- [209.85.219.69])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hdw5n1hby-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Tue, 20 Oct 2026 08:01:00 +0000 (GMT)
-Received: by mail-qv1-f69.google.com with SMTP id
- 6a1803df08f44-91bebff9fcaso82168936d6.2
- for <qemu-riscv@nongnu.org>; Tue, 20 Oct 2026 01:01:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1792483260; x=1793088060; darn=nongnu.org;
- h=content-transfer-encoding:content-type:in-reply-to:from:references
- :cc:to:content-language:subject:user-agent:mime-version:date
- :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=kqdUQZ5WOVbFKmWnSIDXR3DCl1yA6xbzJRYh//OQAIs=;
- b=Wx0H3aVHHtAlGV+h5qJp+c+O5LDBDWcNoYEyMNq9vpyb/XxsKCFXn0DN2vKqrAZ8QF
- 3JUA4zb4r+qkVaGcXQ6Ing3zW1MFp/177t2hP5WzdOzoi6oSfGdgkTBzsw8+SVJUP6I2
- 9IdAVWilL7ayEHm8K61oD52ZcbJAGR9GtZDZjl90+OMfR/beDfElcXHiNufmlmCAKMFt
- MjdGC/bYMYKRq2tHEClLVE8qGxRn1CsArz2XWfJq+YPu+47ZKFIK5eS6O9jkgjoe5P+s
- KQYcSrXCGSX9OeIoVfi5/rIXAiJXc4aE3fwJYWlj6R0UGyS90SO7OsWBX2arlZ+vVlNz
- KLCQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792483260; x=1793088060;
- h=content-transfer-encoding:content-type:in-reply-to:from:references
- :cc:to:content-language:subject:user-agent:mime-version:date
- :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=kqdUQZ5WOVbFKmWnSIDXR3DCl1yA6xbzJRYh//OQAIs=;
- b=mNQeMWeicFG7/FtS/L8aNiWohNyfB41OncBCyQkDqHaW+qWy9Bqe2WF03iaz+0hk3t
- gIGLH9s2OOqebEorqUMaNmIrm95S6tNgu5v7mvYAHMvPq1Y/e3gFK6oKyoH0Llp61v7W
- q1yaA9D5kjR/d3S9YmNmFwB0zgZ5GWkRXYIcbltuXStOOXG5PBEWD1LrxpO4+t0NRbhw
- OrQX8PGNLsl/8VioFiMyvej+F/Tfr8ELRAwxzoPWHWUDYH7slyUPRNRmhOOkAC6U5lZA
- znZHY1P5gcBgXBy4rNY017XcukSacKoDHoMsBoM1X6Yzk6hro6hhdAgwCk4QF9yScdss
- o/XA==
-X-Forwarded-Encrypted: i=1;
- AKwUvBxCYsM3/dO1CPUOC140ewGFWCRuv7zIRW+P8jiZJwIoulbjRiuCZ1EUpGyPKy/E2HABvbkXk4u5lHdM@nongnu.org
-X-Gm-Message-State: AFq9FYLXVBUmnbn4GX8OEDJp5Li3ZVWGF3vYaPqkP9wmnEoLwGyjRUkQ
- nvo/w1IgV69FpDus5GQ45WGSrPhBWXTIk8BUHb0HPo2ATJWTnWrKWaNSkchiLqI/LxVqInbUE75
- 73/LFv1qwCdIj3o8JIGatTr8cBdaA0ZKToeWF2EvVM8mPZng4iHshKdYa+2gbJNI/zUvb
-X-Gm-Gg: AYBFou1vdBYhOyFYC6bPMAmfuYy3x8HOLQyFMjlD7Thy5qzSa21ZrZiWiPZmdA3MfKx
- +uUkdnUxvtiVNAw/R+aQx44fNwV+kuASi6yp9G7GCepqMPQQ64W/+5fPjqPyNnKowzfn3iEirbd
- /R7dUUHuAaDK3sIeDBpRKX7iX91cwUbiJHrrdLXN/93FRbx4xCuNztM+vHZ7Fhcasgpfvl+/fAz
- GRWzsFQjfMDKlkyldT8FJSAHLfh+ykdGrXOA4X8yYQjgBJ5+NLBl1/k3smuaLRzioJopCtRLhhq
- tU3va7nAtT3XER9U21fnv+gzYBdv0b5t9x41CqlzJ0DHiz+EeCa0StTY/NhMBx6CeG0lbBQk8gE
- 3UDHTAXTvD52gowQ7Q84QhNY6RTfcOQFOnQ==
-X-Received: by 2002:a05:620a:470f:b0:93c:7e9c:3bba with SMTP id
- af79cd13be357-93f29d2c0b9mr1746212385a.41.1792483260104; 
- Tue, 20 Oct 2026 01:01:00 -0700 (PDT)
-X-Received: by 2002:a05:620a:470f:b0:93c:7e9c:3bba with SMTP id
- af79cd13be357-93f29d2c0b9mr1746207985a.41.1792483259548; 
- Tue, 20 Oct 2026 01:00:59 -0700 (PDT)
-Received: from [192.168.69.210] (pmd666.hd.free.fr. [88.187.86.199])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48e1d810035sm4688542f8f.13.2026.10.20.01.00.58
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 20 Oct 2026 01:00:58 -0700 (PDT)
-Message-ID: <6337a90b-b14c-4df8-aa0b-570cac47e965@oss.qualcomm.com>
-Date: Tue, 20 Oct 2026 10:00:57 +0200
+ (Exim 4.90_1) (envelope-from <ralf@vmexit.de>)
+ id 1xJ6iR-0000oK-A4; Tue, 20 Oct 2026 06:05:09 -0400
+Message-ID: <75ba3867-3825-4ec5-8efc-02e32065d657@vmexit.de>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vmexit.de; s=mail;
+ t=1792490701;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=+b+5SSs4tNvmQJMvJtLP7EdnbOZuRWcDPtIiywrrX3o=;
+ b=KOvMdZx6qviQD/FVowB5g0n/aM1ShcinOLcUAaSaIJRbZDglGGa97UAC8AVMUMzIhmcCCN
+ bEVVrYdoxoKULWp3B4juKFpm5A0N6ES0/hXu5qn9O/68bIgofDjNHGQDYJLQTfIKEt5gex
+ yow8B76nj/In2vLF/L8s6xVMZ9BEj8k=
+Date: Tue, 20 Oct 2026 12:05:00 +0200
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] docs: Remove stale chapter on RISC-V 'Z' CPU properties
-Content-Language: en-US
+Subject: Re: [PATCH] hw/riscv/virt: only describe PLIC contexts that exist
 To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Peter Maydell <peter.maydell@linaro.org>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, devel@lists.libvirt.org,
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
- Alistair Francis <alistair.francis@wdc.com>
-References: <20261018230741.6560-1-philmd@oss.qualcomm.com>
- <8360ad12-6dab-44e6-a930-17ed8e92a09b@oss.qualcomm.com>
- <CAFEAcA8thrNkzvR_UVnfYUjaSNiaax6Xupw=DsBapHDyPbpdEg@mail.gmail.com>
- <943c16d9-1880-44a6-9982-4fac725cf982@oss.qualcomm.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
-In-Reply-To: <943c16d9-1880-44a6-9982-4fac725cf982@oss.qualcomm.com>
+ qemu-devel@nongnu.org
+Cc: Ralf Ramsauer <ralf.ramsauer@oth-regensburg.de>, qemu-riscv@nongnu.org,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
+ <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Chao Liu <chao.liu@processmission.com>,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
+ Bin Meng <bmeng.cn@gmail.com>
+References: <20260927231838.236616-1-ralf@vmexit.de>
+ <0abd8b75-8fd5-465f-9b67-5fdc161cc14f@oss.qualcomm.com>
+From: Ralf Ramsauer <ralf@vmexit.de>
+Content-Language: en-US
+In-Reply-To: <0abd8b75-8fd5-465f-9b67-5fdc161cc14f@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: mcuWvmzAK1W9QDjISbEmInr3ubifeq_R
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIwMDAzMSBTYWx0ZWRfX+WJ8wAVONOho
- 00lJQpiTiCvL6kSHfzzM6pCzxzW8LuPXVrzSktsPHCIugLzbebVS8MdAt2nM5TLV/C1cCo4rjNC
- we2FYdvlUHAgoPmMQQD0M+ZcZCiio7c=
-X-Proofpoint-ORIG-GUID: mcuWvmzAK1W9QDjISbEmInr3ubifeq_R
-X-Authority-Analysis: v=2.4 cv=A5z5rKWG c=1 sm=1 tr=0 ts=6ad71fbc cx=c_pps
- a=wEM5vcRIz55oU/E2lInRtA==:117 a=4s3hRJSeHn4rkQlkrse1kQ==:17
- a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=M51BFTxLslgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=0JJvY9oDge711AmrAkMA:9 a=3ZKOabzyN94A:10
- a=QEXdDO2ut3YA:10 a=OIgjcC2v60KrkQgK7BGD:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIwMDAzMSBTYWx0ZWRfX49B7l2iC2LBY
- 2jB565GasAHFhAldzE/FV9uggfXclFiBLC5oY3XAczz7tpv1GQ3g+O4T+vg6x5mTW1nJqXPdRuL
- kwNQ5OFEF48rq9F0+FpNlKYbA/NvlfzRO4L0oSUZNiNJSY2Yqbx/+eB3eQWJBpXwHvcX4kJcHCe
- V0lkKNF/IIALSJBDMx8xD4rRAcdY5AZPiX9UVGTCAdySVVaY9yu23EfJC2Qq8MZKioQ10jXa7GA
- pkiNVKO93J/toGqfyG6j6lKgsH8AAlOckPKtQkdcDmFSHfh1Wh2AisI4JLo0QGO2RhbWT/1MwOv
- noV+FPSmfLS2J9paOkPlFFj9A8287qfNZtUuBrNwp+uEFN38hXONBTi0RoOFyZwmknJsZ88CU4m
- dsR7zZlP2CX0krEe/hiFbWUYVIBfVqOxJyijYoXKp+UHEs3WldSr9lasyH5APYSecQZZ2vX53+Z
- xezhI9R/N6xJ+MkiFUQ==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-20_01,2026-10-19_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 malwarescore=0 adultscore=0 priorityscore=1501 suspectscore=0
- phishscore=0 spamscore=0 bulkscore=0 impostorscore=0 lowpriorityscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610200031
-Received-SPF: pass client-ip=205.220.180.131;
- envelope-from=philmd@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
+Received-SPF: pass client-ip=2a0a:4cc0:c1:d4ba::2; envelope-from=ralf@vmexit.de;
+ helo=gizmo.vmexit.de
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -156,42 +67,183 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_SANE_1
-	autolearn=no autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 19/10/26 13:54, Daniel Henrique Barboza wrote:
+Hi Daniel,
+
+On 9/29/26 01:26, Daniel Henrique Barboza wrote:
+> Hello,
 > 
-> 
-> On 10/19/2026 6:48 AM, Peter Maydell wrote:
->> On Mon, 19 Oct 2026 at 10:42, Daniel Henrique Barboza
->> <daniel.barboza@oss.qualcomm.com> wrote:
->>>
->>>
->>>
->>> On 10/18/2026 8:07 PM, Philippe Mathieu-Daudé wrote:
->>>> RISC-V 'Z' CPU properties were removed in commit 455c0fa9eef,
->>>> for the release v10.1.0. Remove the stale comment.
->>>
->>> I wasn't aware that we need to remove stuff from deprecated.rst after
->>> awhile.  Thanks for taking care of it!
+> On 9/27/2026 8:18 PM, Ralf Ramsauer wrote:
+>> From: Ralf Ramsauer <ralf.ramsauer@oth-regensburg.de>
 >>
->> We are supposed to move the section from deprecated.rst to
->> removed.rst (adjusting it as necessary) when the feature moves
->> from "deprecated" to "actually removed". We didn't do that in
->> 455c0fa9eef, so we should do that here, rather than just deleting
->> the section.
+>> The PLIC device is created from the topology string built by
+>> riscv_plic_hart_config_string(), which gives a hart a supervisor context
+>> only if that hart actually has supervisor mode.  The device tree, in
+>> contrast, lists a machine and a supervisor context for every hart,
+>> unconditionally.
+>>
+>> The two have disagreed since commit 7d10ff8a4d ("hw/riscv: virt: Use the
+>> PLIC config helper function") taught the device about harts without
+>> S-mode and left the device tree behind.  Boot with
+>>
+>>      -cpu rv64,s=false,u=false -smp 4
+>>
+>> and the PLIC implements four contexts while the device tree advertises
+>> eight.  Contexts are numbered by their position in 'interrupts-extended',
+>> so a guest that takes its context number from the property gets it wrong
+>> for every hart but the first: hart 1 drives the context of hart 2, and
+>> the upper harts address contexts the PLIC never created.  This is what an
+>> M-mode kernel on the virt machine runs into; sifive_u already omits the
+>> supervisor entry for its management hart.
+>>
+>> Emit the supervisor entry only for the harts that have supervisor mode.
+>>
+>> Fixes: 7d10ff8a4d ("hw/riscv: virt: Use the PLIC config helper function")
+>> Signed-off-by: Ralf Ramsauer <ralf.ramsauer@oth-regensburg.de>
+>> ---
+>>   hw/riscv/virt.c | 21 +++++++++++++++------
+>>   1 file changed, 15 insertions(+), 6 deletions(-)
+>>
+>> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+>> index d4b501802f..d0ce9dc862 100644
+>> --- a/hw/riscv/virt.c
+>> +++ b/hw/riscv/virt.c
+>> @@ -165,14 +165,23 @@ static void 
+>> create_fdt_socket_plic(RISCVVirtState *s,
+>>               plic_cells[cpu * 2 + 1] = cpu_to_be32(IRQ_S_EXT);
+>>           }
+>>      } else {
+>> -        cells_length = s->soc[socket].num_harts * 4;
+>> -        plic_cells = g_new0(uint32_t, cells_length);
+>> +        plic_cells = g_new0(uint32_t, s->soc[socket].num_harts * 4);
+>> +        cells_length = 0;
+>>           for (cpu = 0; cpu < s->soc[socket].num_harts; cpu++) {
+>> -            plic_cells[cpu * 4 + 0] = cpu_to_be32(intc_phandles[cpu]);
+>> -            plic_cells[cpu * 4 + 1] = cpu_to_be32(IRQ_M_EXT);
+>> -            plic_cells[cpu * 4 + 2] = cpu_to_be32(intc_phandles[cpu]);
+>> -            plic_cells[cpu * 4 + 3] = cpu_to_be32(IRQ_S_EXT);
+>> +            CPURISCVState *env = &s->soc[socket].harts[cpu].env;
 
-Oops...
+Thanks for the review, sorry for the late reply!
+
+Okay, with your comments, and having the helper in mind, I now see that 
+we can also get rid of that nasty if-elsery here, if we did something like:
+
+has_m_mode = !kvm_enable(); // constant for the platform (applies on all 
+harts for virt as well as sifive-u, afaict)
+
+plic_cells = num_harts * (has_m_mode ? 4 : 2);
+for_each_hart(i) {
+   if (has_m_mode) // constant
+     fill_m_mode_ctx();
+
+   if (hart_has_supervisor) // dynamic per-hart
+     fill_s_mode_ctx(i);
+}
+
+And we then have the almost same pattern for sifive_u, besides the fact 
+that we always see m-mode there.
+
+Which now could allow us to factor that whole logic out. I'll see what 
+we could do here. Will test that, and provide a v2 soonish!
+
+Thanks,
+   Ralf
 
 > 
-> Got it.  Thanks for clarifying!
+> There are a few things to consider here.  First is that we have a very 
+> similar PLIC
+> code in the sifive_u.c board.  I believe we want this fix also applied 
+> there.
 > 
-> Phil, can you please re-send the patch moving the text to remove.rst?
+> Second, we should avoid accessing CPU internals in board code.  In an 
+> ideal world
+> the board would be completely oblivious to what the CPU is about, e.g. 
+> its extensions
+> and accelerator mode.  In practice we have to account for accelerator 
+> differences since
+> KVM and TCG requires different stuff w.r.t irq controllers and timers 
+> and so on, and
+> at least for now this code is being open coded in the boards.
+> 
+> For the problem you're addressing here I would like to avoid making the 
+> board accessing
+> the CPU env and checking for RVS.  My suggestion here is:
+> 
+> - we need a pre-patch that adds a helper in cpu.c that tells whether a 
+> CPU has supervisor
+> mode.  Something like:
+> 
+> (cpu.c, could be right after "riscv_cpu_is_vendor")
+> 
+> bool riscv_cpu_has_supervisor_mode(RISCVCPU *cpu)
+> {
+> #ifndef CONFIG_USER_ONLY
+>      if (kvm_enabled()) {
+>          return true;
+>      }
+> 
+>      return riscv_has_ext(&cpu->env, RVS);
+> #else
+>     return false;
+> #endif
+> }
+> 
+> same thing in cpu.h.  The justification for this helper in a separated 
+> patch is that
+> "next patch needs to verify supervisor mode for CPUs in hw/riscv board 
+> code", or
+> something around those lines.
+> 
+> 
+> - in this patch you can then do:
+> 
+> 
+>  > +            if (riscv_cpu_has_supervisor_mode(s- 
+>  >soc[socket].harts[cpu])) {
+>  > +                plic_cells[cells_length++] = 
+> cpu_to_be32(intc_phandles[cpu]);
+>  > +                plic_cells[cells_length++] = cpu_to_be32(IRQ_S_EXT);
+>  > +            }
+> 
+> And we're at least trying to obfuscating the CPU internals from the 
+> board a bit.
+> 
+> 
+> And please do the same in sifive_u.c.  Don't need to be in this same 
+> patch, so feel
+> free to add another patch  just for the sifive_u board.
+> 
+> 
+> Thanks,
+> Daniel
+> 
+>> +
+>> +            plic_cells[cells_length++] = 
+>> cpu_to_be32(intc_phandles[cpu]);
+>> +            plic_cells[cells_length++] = cpu_to_be32(IRQ_M_EXT);
+>> +
+>> +            /*
+>> +             * The PLIC implements a supervisor context only for 
+>> harts that
+>> +             * have supervisor mode, see 
+>> riscv_plic_hart_config_string().
+>> +             */
+>> +            if (riscv_has_ext(env, RVS)) {
+>> +                plic_cells[cells_length++] = 
+>> cpu_to_be32(intc_phandles[cpu]);
+>> +                plic_cells[cells_length++] = cpu_to_be32(IRQ_S_EXT);
+>> +            }
+>>           }
+>>       }
+>>
+>> base-commit: 81ce3a87737aa50716c42db8886082d12783e0a1
+> 
 
-Fixed in v2:
-https://lore.kernel.org/qemu-devel/20261020075927.56983-1-philmd@oss.qualcomm.com/T/#u
 
