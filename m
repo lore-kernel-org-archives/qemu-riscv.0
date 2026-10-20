@@ -1,59 +1,58 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F24AF606A324
-	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Oct 2026 11:01:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CE435606A31F
+	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Oct 2026 11:01:35 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=Pp4t7PoX
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=S9z9fb03
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xJ7QU-0007i0-DQ; Tue, 20 Oct 2026 06:50:38 -0400
+	id 1xJ7O5-0002f8-7K; Tue, 20 Oct 2026 06:48:09 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1xJ7P1-0003ja-CI
- for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:49:07 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ id 1xJ7Nk-0001gt-IS
+ for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:47:48 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1xJ7Oy-0005gh-JU
- for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:49:07 -0400
+ id 1xJ7Ni-0005NM-V6
+ for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:47:48 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1792493343;
+ s=mimecast20190719; t=1792493266;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=vqRAumP9Q4P45v+BnAaswZB9eyGK4924nboYOJbbp2E=;
- b=Pp4t7PoXPc6risekObVBS7oa6PvODWLaqylR7KF5GeyLlZMt4v+yvY98KvsFbymQs/cFo4
- +r1HfspmEgErdD637s5UZt8hdC9SDGdxbS7YY8MZFHNICCVRXgYBgRF3wNNjh9uHVs94mu
- zj0DlI2EeCXv9rHQxGO759Wn89eTnzA=
-Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
+ bh=+mUlmiLA0IUJrEFhhdtqFL7MoWyX2aJUgEr0fLN0OLI=;
+ b=S9z9fb038lLKmzVz3IScWE/4NIpec9ba0bbTuGi4m7v/nbzimE2UHfpBZ0OVpZyIO0V9zE
+ sfl8loTR3qCDXbtyuHV4z88Ofvo5PfDtBAIkN1CjYwc8qVBpIDNfASgxtgH+B9KnXBF1k8
+ veb5BLl8kA4kmedpL6eJB3tu/xtZTiY=
+Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-517-GSbpLDLrPQqHZRQ94vMg0A-1; Tue,
- 20 Oct 2026 10:48:59 +0000
-X-MC-Unique: GSbpLDLrPQqHZRQ94vMg0A-1
-X-Mimecast-MFC-AGG-ID: GSbpLDLrPQqHZRQ94vMg0A_1792493335
-Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-98-b50LkXhBNAOr4KDZgzOCJQ-1; Tue,
+ 20 Oct 2026 06:47:41 -0400
+X-MC-Unique: b50LkXhBNAOr4KDZgzOCJQ-1
+X-Mimecast-MFC-AGG-ID: b50LkXhBNAOr4KDZgzOCJQ_1792493257
+Received: from mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.95])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 401F418002AD; Tue, 20 Oct 2026 10:48:55 +0000 (UTC)
+ by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 0944C1955F10; Tue, 20 Oct 2026 10:47:37 +0000 (UTC)
 Received: from localhost (headnet04.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.116])
- by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 4CB201800257; Tue, 20 Oct 2026 10:48:52 +0000 (UTC)
+ by mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id 2487E418; Tue, 20 Oct 2026 10:47:34 +0000 (UTC)
 From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-Date: Tue, 20 Oct 2026 14:45:47 +0400
-Subject: [PATCH v7 30/65] whpx: convert OnOffAuto arch properties to
- QAPI-aware registration
+Date: Tue, 20 Oct 2026 14:45:32 +0400
+Subject: [PATCH v7 15/65] qom: add object_property_set_default_enum()
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Message-Id: <20261020-qom-qapi-v7-30-431a86b02b58@redhat.com>
+Message-Id: <20261020-qom-qapi-v7-15-431a86b02b58@redhat.com>
 References: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 In-Reply-To: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 To: qemu-devel@nongnu.org
@@ -128,38 +127,39 @@ Cc: Markus Armbruster <armbru@redhat.com>,
  Yoshinori Sato <yoshinori.sato@nifty.com>, Jiri Pirko <jiri@resnulli.us>, 
  Eric Auger <eric.auger@redhat.com>, Laurent Vivier <lvivier@redhat.com>, 
  =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=6702;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1741;
  i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=F8HZ01XPkkBAtzYnAznI+OeIpIRAjOQCT4x6+nWcsZQ=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZaNHtr+AkGnY6QtTL0vsHs6SXFQUQ8MQ6i4
- S1YABGB6XOJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGWgAKCRDa6OEJdZac
- 5U3+D/0bY0Yw06OplfGaxwkWeRkmM8vGPJ5F9M0cVeicCg/oXCYp+UKgC78TYi76WRGpbyL2C7S
- 0KxXaqPjOuPoiru3KbrrdebJxsrbKZijDWmhlIsP9jywqVWMuCB+weipCeiSrSWcM8KYKDNl6lh
- BAGjS+eZuivN40OoVe2PxA7lKt96RrybUNJq39LwnTdm/8Lx0x5A7nOmtMf6p5zUDEy6bO9wTJ9
- /9cnmG5OgUn4fNab0GmXDPDj2/b7lDQNLOZQiOEE1aPD1CnruklCEcrbKrMXEZIYQc9JkVJVviZ
- sWu3vDJ9GCWP/JGd6P26BcaZeOw6qiIfSjJgGMcE3CyRguBdSr4ldn+yC83f6n9vVa68VDVU85t
- PoSwXa0eYL0MCuvzu1v2GPnE/oDcMkqhH7+e/tLdejjt7K9jX7qtbmGTnHtszQGZv3Bn0tfV3RM
- fJtheu+i9GFuCM5MxESNY85RUBO6acenPHsR1+nmHtqbICIGanSHvfZzCXqJL4WwAH/IRbzic4F
- sB4SZ4sCdErodKNcNWECfUhDwpvmtfzJ5r4PC9kT3qEABypAk8pdibNyUNuaX6p+KJtOwuuQsnA
- NP6Npp4aqbXBUyIW3gZUAcetZJhmn/V7jRQ/TFEG2uGqdOa3T2YNGJ9TDknE1CAeWkCjRf+IwA6
- Z2YAEk2bZvmBjgQ==
+ bh=bT9PbeYHomyeIGAcVfTDM+lJI5Y2hBOOffhp2f1n7bs=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZY3cZceXMTAsDTPVPQLUPiFXhCtfGOTuUzE
+ ex7dEME5rOJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGWAAKCRDa6OEJdZac
+ 5YB4D/9GPjvfJ9QnS3NS7uzoH3zuMz6cgmZWUWiCGV7tsWnNbbIfmXnGwpWDwpNzL9cRsohPRiM
+ Tt8mSTGA/sJmszkK+oQShJ63FCmfW5pbd7ruMCtTStlRVh8rCjUWyx0b9IGf9lj7a1sXuaMjRiZ
+ RmIstsYrcvq9fJ0J5SM1RTodk1Qvgn2pQe7pG/U8OW8Myg6fto5tvml4IN5pYuE4YB/AteIWUfl
+ cy3Y6JisAPLbkZWEjeehnRqpYjs8lJcEc0jd6jT5Ajm3DFQFLMkmckRPpjNofoDbeN1tQ7K0s98
+ vwayy8xoutwUgsV9wX6qCvRBLY1+DpxNBTHm+xV32yF2estcn1ixmHngJQMaNbWwx3sJ0FueH2i
+ nHGW2/UH0XkgcegNOKOcSppusTIisYEHOeK2W37dK7A4gv7fgemaMBfKADWuc6jN/xKP4O2sAOs
+ EPPKK+R1nyzBdIIsDWdYkhnmUpz08PjAX7t/9zIyQvJy6HeZMYEvqH92Dv9Aqm0tKTwJeHGv8Mx
+ G+jFxLb6K1GFyZQ9S6izdwx5JWqfiEfKijUzBP4iLHpB4BirgMYkk/bqayFVYZSlxI7iVj9lGda
+ LEl9RmhNncJu8lNAZW9bmWSGo4Vlr/rpl4jKvIuRbcz2N62kMeZEEXIRFPUNBGeJNDW8b+FYyQK
+ eIre7G+lNeX5Okw==
 X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
  fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
-X-Mimecast-MFC-PROC-ID: DrWmGt6dz7__DKp6DCfsuUmq3i7LzcnXC2xLJ8sgwFA_1792493335
+X-Scanned-By: MIMEDefang 3.6 on 10.30.177.95
+X-Mimecast-MFC-PROC-ID: tnvCN-IcAr7MbEnpdIfBH4PyPEq2R6Z-ueIMxA2bfOY_1792493257
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.129.124;
+Received-SPF: pass client-ip=170.10.133.124;
  envelope-from=marcandre.lureau@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -23
-X-Spam_score: -2.4
-X-Spam_bar: --
-X-Spam_report: (-2.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.329,
+X-Spam_score_int: 9
+X-Spam_score: 0.9
+X-Spam_bar: /
+X-Spam_report: (0.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.329,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ RCVD_IN_SBL_CSS=3.335, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -178,214 +178,55 @@ X-Spam-Status: No, score=-16.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Convert the ignore-unknown-msr, intercept-msr-gp, and ssd OnOffAuto
-properties from manual visitor-based callbacks to
-property_add_qapi_enum().
+A simple helper to set the default enum value from the integer value.
 
 Signed-off-by: Markus Armbruster <armbru@redhat.com>
 Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 ---
- target/i386/whpx/whpx-all.c | 101 +++++++++++++++-----------------------------
- 1 file changed, 34 insertions(+), 67 deletions(-)
+ include/qom/object.h | 9 +++++++++
+ qom/object.c         | 9 +++++++++
+ 2 files changed, 18 insertions(+)
 
-diff --git a/target/i386/whpx/whpx-all.c b/target/i386/whpx/whpx-all.c
-index 113f79afb9ab..64fa389a2f93 100644
---- a/target/i386/whpx/whpx-all.c
-+++ b/target/i386/whpx/whpx-all.c
-@@ -30,7 +30,7 @@
- #include "qemu/error-report.h"
- #include "qapi/error.h"
- #include "qapi/qapi-types-common.h"
--#include "qapi/qapi-visit-common.h"
-+#include "qapi/qapi-type-infos-common.h"
- #include "migration/blocker.h"
- #include "host-cpu.h"
- #include "accel/accel-cpu-target.h"
-@@ -1875,6 +1875,7 @@ void whpx_apply_breakpoints(
-     }
- }
- 
-+
- void whpx_arch_destroy_vcpu(CPUState *cpu)
- {
-     X86CPU *x86cpu = X86_CPU(cpu);
-@@ -1955,7 +1956,7 @@ static int whpx_handle_hyperv_guestidle(CPUState *cpu)
-     return whpx_handle_halt(cpu);
- }
- 
--static void whpx_vcpu_kick_out_of_hlt(CPUState *cpu) 
-+static void whpx_vcpu_kick_out_of_hlt(CPUState *cpu)
- {
-     WHV_REGISTER_VALUE reg;
-     whpx_get_reg(cpu, WHvRegisterInternalActivityState, &reg);
-@@ -2059,7 +2060,7 @@ static void whpx_vcpu_pre_run(CPUState *cpu)
-                 .Vector = irq,
-             };
-             reg_count += 1;
--            /* 
-+            /*
-              * When the Hyper-V APIC is enabled, to get out of HLT we
-              * either have to request an interrupt or manually get it away
-              * from HLT.
-@@ -2359,7 +2360,7 @@ int whpx_vcpu_run(CPUState *cpu)
-             WHV_REGISTER_VALUE reg_values[3] = {0};
-             WHV_REGISTER_NAME reg_names[3];
-             UINT32 reg_count;
--            bool is_known_msr = 0; 
-+            bool is_known_msr = 0;
-             bool raises_gpf = false;
-             uint64_t val;
- 
-@@ -2911,120 +2912,86 @@ void whpx_cpu_instance_init(CPUState *cs)
-  * Partition support
+diff --git a/include/qom/object.h b/include/qom/object.h
+index e9b380462ded..2a5723c555e9 100644
+--- a/include/qom/object.h
++++ b/include/qom/object.h
+@@ -1260,6 +1260,15 @@ void object_property_set_default_bool(ObjectProperty *prop, bool value);
   */
+ void object_property_set_default_str(ObjectProperty *prop, const char *value);
  
--static void whpx_set_unknown_msr(Object *obj, Visitor *v,
--                                   const char *name, void *opaque,
--                                   Error **errp)
-+static void whpx_set_unknown_msr(Object *obj, int value, Error **errp)
- {
-     struct whpx_state *whpx = &whpx_global;
--    OnOffAuto mode;
- 
--    if (!visit_type_OnOffAuto(v, name, &mode, errp)) {
--        return;
--    }
--
--    switch (mode) {
-+    switch (value) {
-     case ON_OFF_AUTO_ON:
-         whpx->ignore_unknown_msr = true;
-         break;
--
-     case ON_OFF_AUTO_OFF:
-         whpx->ignore_unknown_msr = false;
-         break;
--
-     case ON_OFF_AUTO_AUTO:
-         whpx->ignore_unknown_msr = true;
-         break;
-     default:
--        /*
--         * The value was checked in visit_type_OnOffAuto() above. If
--         * we get here, then something is wrong in QEMU.
--         */
--        abort();
-+        g_assert_not_reached();
-     }
- }
- 
--static void whpx_set_intercept_msr_gp(Object *obj, Visitor *v,
--                                   const char *name, void *opaque,
--                                   Error **errp)
-+static void whpx_set_intercept_msr_gp(Object *obj, int value, Error **errp)
- {
-     struct whpx_state *whpx = &whpx_global;
--    OnOffAuto mode;
- 
--    if (!visit_type_OnOffAuto(v, name, &mode, errp)) {
--        return;
--    }
--
--    switch (mode) {
-+    switch (value) {
-     case ON_OFF_AUTO_ON:
-         whpx->intercept_msr_gp = true;
-         break;
--
-     case ON_OFF_AUTO_OFF:
-         whpx->intercept_msr_gp = false;
-         break;
--
-     case ON_OFF_AUTO_AUTO:
-         whpx->intercept_msr_gp = false;
-         break;
-     default:
--        /*
--         * The value was checked in visit_type_OnOffAuto() above. If
--         * we get here, then something is wrong in QEMU.
--         */
--        abort();
-+        g_assert_not_reached();
-     }
- }
- 
--static void whpx_set_ssd(Object *obj, Visitor *v,
--                                   const char *name, void *opaque,
--                                   Error **errp)
-+static void whpx_set_ssd(Object *obj, int value, Error **errp)
- {
-     struct whpx_state *whpx = &whpx_global;
--    OnOffAuto mode;
- 
--    if (!visit_type_OnOffAuto(v, name, &mode, errp)) {
--        return;
--    }
--
--    switch (mode) {
-+    switch (value) {
-     case ON_OFF_AUTO_ON:
-         whpx->separate_security_domain = true;
-         break;
--
-     case ON_OFF_AUTO_OFF:
-         whpx->separate_security_domain = false;
-         break;
--
-     case ON_OFF_AUTO_AUTO:
-         whpx->separate_security_domain = true;
-         break;
-     default:
--        /*
--         * The value was checked in visit_type_OnOffAuto() above. If
--         * we get here, then something is wrong in QEMU.
--         */
--        abort();
-+        g_assert_not_reached();
-     }
- }
- 
- 
- void whpx_arch_accel_class_init(ObjectClass *oc)
- {
--    object_class_property_add(oc, "ignore-unknown-msr", "OnOffAuto",
--        NULL, whpx_set_unknown_msr,
--        NULL, NULL);
--    object_class_property_set_description(oc, "ignore-unknown-msr",
--        "Configure unknown MSR behavior");
--    object_class_property_add(oc, "intercept-msr-gp", "OnOffAuto",
--        NULL, whpx_set_intercept_msr_gp,
--        NULL, NULL);
--    object_class_property_set_description(oc, "intercept-msr-gp",
--        "Intercept #GP to log erroring MSR accesses.");
--    object_class_property_add(oc, "ssd", "OnOffAuto",
--        NULL, whpx_set_ssd,
--        NULL, NULL);
--    object_class_property_set_description(oc, "ssd",
--        "Separate security domain");
-+    object_class_property_add_qapi_enum(oc, QAPI_ENUM_PROP(
-+        .name = "ignore-unknown-msr",
-+        .description = "Configure unknown MSR behavior",
-+        .qapi_type = &OnOffAuto_type_info,
-+        .set = whpx_set_unknown_msr,
-+    ));
++/**
++ * object_property_set_default_enum:
++ * @prop: the property to set
++ * @value: the value to be written to the property
++ *
++ * Set the property default value.
++ */
++void object_property_set_default_enum(ObjectProperty *prop, int value);
 +
-+    object_class_property_add_qapi_enum(oc, QAPI_ENUM_PROP(
-+        .name = "intercept-msr-gp",
-+        .description = "Intercept #GP to log erroring MSR accesses.",
-+        .qapi_type = &OnOffAuto_type_info,
-+        .set = whpx_set_intercept_msr_gp,
-+    ));
-+
-+    object_class_property_add_qapi_enum(oc, QAPI_ENUM_PROP(
-+        .name = "ssd",
-+        .description = "Separate security domain",
-+        .qapi_type = &OnOffAuto_type_info,
-+        .set = whpx_set_ssd,
-+    ));
+ /**
+  * object_property_set_default_list:
+  * @prop: the property to set
+diff --git a/qom/object.c b/qom/object.c
+index c34b47312f29..1d09315b328b 100644
+--- a/qom/object.c
++++ b/qom/object.c
+@@ -1719,6 +1719,15 @@ void object_property_set_default_str(ObjectProperty *prop, const char *value)
+     object_property_set_default(prop, QOBJECT(qstring_from_str(value)));
  }
  
- int whpx_accel_init(AccelState *as, MachineState *ms)
++void object_property_set_default_enum(ObjectProperty *prop, int value)
++{
++    assert(prop && prop->qapi_type && prop->qapi_type->lookup);
++
++    object_property_set_default(prop, QOBJECT(qstring_from_str(
++        qapi_enum_lookup(prop->qapi_type->lookup, value)
++    )));
++}
++
+ void object_property_set_default_list(ObjectProperty *prop)
+ {
+     object_property_set_default(prop, QOBJECT(qlist_new()));
 
 -- 
 2.56.0.116.g6de20f6092dc
