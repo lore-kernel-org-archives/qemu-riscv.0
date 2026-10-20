@@ -1,59 +1,59 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DA6BD60A260F
-	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Oct 2026 10:50:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C3A32606A324
+	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Oct 2026 10:50:16 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=Y/JUHWcH
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=Wi/LmWHg
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xJ7Pg-0004uT-Uj; Tue, 20 Oct 2026 06:49:49 -0400
+	id 1xJ7Nn-0001xD-8E; Tue, 20 Oct 2026 06:47:51 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1xJ7Ny-0002Qi-Vt
- for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:48:03 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ id 1xJ7Mp-0000sZ-F7
+ for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:46:53 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1xJ7Nx-0005R4-7X
- for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:48:02 -0400
+ id 1xJ7Mn-0005BK-Nb
+ for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:46:51 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1792493280;
+ s=mimecast20190719; t=1792493209;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=QCsJ6kicmUEQxvaxmAE24eNtz/CdTOeeNBSuCmDZMU8=;
- b=Y/JUHWcHZ+ap0O0Wm78cAKjow6Gofv9xDOMrs2pIr9/kchVXIMB/iq1ODRqt7PDXfH1Xg+
- GEJg1wDoFZ+1rwIvOCb8v02+jhKTSAK/QheGHSf8v3QgReuKNvl3mjP9PStu5vzjfHtGzO
- +FvdQdWI8iFlMSnnPPL03eMj8G1PQ7k=
-Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ bh=xG2OGo4lx2YCSH10YJfMac8tHdMtlMp6mBUYGSWviZ4=;
+ b=Wi/LmWHgVQr37I7HM3dRB37hrGFBOQn+POAjUGkCspzb/xs7B/45HyRdqnnjjAqGsoculR
+ Fm0PDKk0n7c/JKrKi9uVpx6BgkLIqXQ90msn/Cyu4HP2SsrypUrJhjFP4XISBKYm9L7B+z
+ ErL74X8unniWmR4TO8fyEFMpBsEj8f8=
+Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-624-Yh3hFIQYORWMSyn7dgfYTg-1; Tue,
- 20 Oct 2026 10:47:56 +0000
-X-MC-Unique: Yh3hFIQYORWMSyn7dgfYTg-1
-X-Mimecast-MFC-AGG-ID: Yh3hFIQYORWMSyn7dgfYTg_1792493272
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-681-dv92ItMdM9G_nQvMyXZAiA-1; Tue,
+ 20 Oct 2026 10:46:44 +0000
+X-MC-Unique: dv92ItMdM9G_nQvMyXZAiA-1
+X-Mimecast-MFC-AGG-ID: dv92ItMdM9G_nQvMyXZAiA_1792493201
 Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com
  (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 64C7A1955EBF; Tue, 20 Oct 2026 10:47:52 +0000 (UTC)
+ by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 0CCE818005B9; Tue, 20 Oct 2026 10:46:40 +0000 (UTC)
 Received: from localhost (headnet04.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.116])
  by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 7DD3F1803A59; Tue, 20 Oct 2026 10:47:49 +0000 (UTC)
-From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-Date: Tue, 20 Oct 2026 14:45:35 +0400
-Subject: [PATCH v7 18/65] tests: update check-qom-proplist for QAPI-aware
- property registration
+ id 26AF11800643; Tue, 20 Oct 2026 10:46:35 +0000 (UTC)
+From: marcandre.lureau@redhat.com
+Date: Tue, 20 Oct 2026 14:45:22 +0400
+Subject: [PATCH v7 05/65] qapi: QAPISchemaVisitor.visit_needed() is now
+ unused, drop
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Message-Id: <20261020-qom-qapi-v7-18-431a86b02b58@redhat.com>
+Message-Id: <20261020-qom-qapi-v7-5-431a86b02b58@redhat.com>
 References: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 In-Reply-To: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 To: qemu-devel@nongnu.org
@@ -128,39 +128,38 @@ Cc: Markus Armbruster <armbru@redhat.com>,
  Yoshinori Sato <yoshinori.sato@nifty.com>, Jiri Pirko <jiri@resnulli.us>, 
  Eric Auger <eric.auger@redhat.com>, Laurent Vivier <lvivier@redhat.com>, 
  =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=5424;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1193;
  i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=PG77OxkKQyF3UcxTgSF0ItIIQR9h6IXM0cn9v6bEm2s=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZZx0j1p4X5AH6xbN8P7cVXiebxN4/NouqlD
- Bs0dZkcTS6JAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGWQAKCRDa6OEJdZac
- 5btyD/sEpsN54WFVkoxy/MA7ND5ExbGYknt3DZedYvvU6rJFWigzxdRqfgu17q4W5zjE+AamjfL
- BupH4gTHx7+2HfkN3D1gTx/xFdM5Kl6ToEoiDKjNOo862W3jNyyg4ovmX4tTnGNMAz88AfPwhL+
- 2ZWNFNzjipqIGY0qQX4Bx66aa2+YE4fY3hQ9iiu+WjFc6AbgnPg4TF4XhUyHF70who98clFVOMD
- yjczx/5tD0aUOR4P15K6+ixi33/auB4tE1Iwmnx/jgl1p3xCy28fffjfyI9wgZwkX2u2stbYLIn
- lDbgxSH1ReWWj7z4XdgyxwniV2xbBYeYJEkOtCV/y7/dK6+AM+a7Qnq3kI/dzYhJuvhq5wU+HGR
- RiM76TgllhaUHS8VdrKmAFY/LmMaDcf5u+dyeDe3ragYCi0YRneV87Q3JrrFqhWtzDyLlEBLQBg
- R2RYEWwbUq91SYc+sy3M2s1dxK/Auw8r9jDxBr9VPRZeaKJzAr1tPm6hnSzp+dkR4vgyuSdKfW2
- xgnVBc5i1OBtTZMbay85wjtkAfGfPH5jqgFBr3+8p6u1r9UH55oNAmVqy1ev7FnV/EBA4FlmSyX
- 4Ic6VS1CTDmF2CzubrTp3nVMwtdHRxtTKiFnV+tWJm6wxUGQS0/zDlqzL+ypt2gHRnuRwgDXqHU
- doz9mjn/aUw3+xw==
+ bh=yBAs+PsGI+mRRHuSXNI42xoWI9p0TSDsh65vQW8BRrc=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZX3wnVoTG1DT7PkibN0fixZC+3g4HczKxre
+ WlR6XwfjdSJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGVwAKCRDa6OEJdZac
+ 5XW2D/45KfzoQQ844pW9wPBstfoA4zhpxgYbXZdFhd1B3tDYs+gd0ydHZpM8roMnIC6sUz2UZVw
+ IXLD2jiHt7yLZuphP/QVxipCVGpGWDePAo2x1ibRtN36V7QF2kYhmxqri0MMwpjy6AJMTGCUuMB
+ xpRJlv+RypwgdJZTss3IDeLAh6amwIn5KwnKxa+VhAa1TweG97haA2x1DkLDE1BBaEBWerNMIhY
+ XkU4aw+JMmBUEmqAu5AXPH7DXgINM5RHn/JzyiI3T7yLfmL0zAUjrq4eWRwG1HVPMGONTO7JfNE
+ 0o0E+ULXqwLnQTgbGmZcyCHeOER/LovvzMIKrdz4xytDwyhERlt04lMyYKta/VQamfyHHL2eqte
+ BmWKR4GrxysyQvF6+XvxLYIUbvcW/GEmZ2K3JOVgeh6yRY/mnANaUpqMzl5nZ1WZij3x49QanrG
+ auTI+YKu1G7+pXQipQNg7LGtWo8+sBXCM44evsO6d6zedjLoJkpGbTJ2q1EbcCLvk12mjFkkh4A
+ KdfC5MVpqO+KN0XR8txFvJs/K3UkRZlxM97ff+6aW7nGxBCmH5iL8yB/dAH2yravcO9bYYO+LQC
+ Gs61agHa3hpCya2FC5c0KTXMLzmROHlqfLGqWdmgsZLg8hrozGFp5ahu+m+OGcL5QZ746vJi74E
+ ghKphqYO93tyqXA==
 X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
  fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
 X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
-X-Mimecast-MFC-PROC-ID: uC3hjrWmPQeXagblluXgogjmopiJTaejPvnNYvhc8p4_1792493272
+X-Mimecast-MFC-PROC-ID: 9uSUk9coarVKY7log2RW3_lYrA-pMGIJa5dVIbxWBdw_1792493201
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.133.124;
+Received-SPF: pass client-ip=170.10.129.124;
  envelope-from=marcandre.lureau@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: 9
-X-Spam_score: 0.9
-X-Spam_bar: /
-X-Spam_report: (0.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.329,
+X-Spam_score_int: -23
+X-Spam_score: -2.4
+X-Spam_bar: --
+X-Spam_report: (-2.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.329,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
- RCVD_IN_SBL_CSS=3.335, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -179,155 +178,40 @@ X-Spam-Status: No, score=-16.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Migrate the dummy object's string and enum properties from the legacy
-object_class_property_add_str/enum() helpers to the new QAPI-aware
-object_class_property_add_qapi/qapi_enum() registration.
-
-Add test cases verifying that the qapi_type metadata is correctly
-populated on properties registered through the new API, and that it
-remains NULL for properties using the old-style registration.
+From: Markus Armbruster <armbru@redhat.com>
 
 Signed-off-by: Markus Armbruster <armbru@redhat.com>
-Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
+Reviewed-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 ---
- tests/unit/check-qom-proplist.c | 93 ++++++++++++++++++++++++++++++++++-------
- 1 file changed, 77 insertions(+), 16 deletions(-)
+ scripts/qapi/schema.py | 8 +-------
+ 1 file changed, 1 insertion(+), 7 deletions(-)
 
-diff --git a/tests/unit/check-qom-proplist.c b/tests/unit/check-qom-proplist.c
-index 89de92b7d91f..69155e720751 100644
---- a/tests/unit/check-qom-proplist.c
-+++ b/tests/unit/check-qom-proplist.c
-@@ -108,22 +108,21 @@ static int dummy_get_av(Object *obj,
- }
+diff --git a/scripts/qapi/schema.py b/scripts/qapi/schema.py
+index 11f3accec873..9e2152fa419b 100644
+--- a/scripts/qapi/schema.py
++++ b/scripts/qapi/schema.py
+@@ -179,11 +179,6 @@ def visit_end(self) -> None:
+     def visit_module(self, name: str) -> None:
+         pass
+ 
+-    def visit_needed(self, entity: QAPISchemaEntity) -> bool:
+-        # pylint: disable=unused-argument
+-        # Default to visiting everything
+-        return True
+-
+     def visit_include(self, name: str, info: Optional[QAPISourceInfo]) -> None:
+         pass
+ 
+@@ -315,8 +310,7 @@ def add_entity(self, ent: QAPISchemaEntity) -> None:
+     def visit(self, visitor: QAPISchemaVisitor) -> None:
+         visitor.visit_module(self.name)
+         for entity in self._entity_list:
+-            if visitor.visit_needed(entity):
+-                entity.visit(visitor)
++            entity.visit(visitor)
  
  
--static void dummy_set_sv(Object *obj,
--                         const char *value,
--                         Error **errp)
-+static void dummy_set_sv(Object *obj, Visitor *v, const char *name,
-+                         void *opaque, Error **errp)
- {
-     DummyObject *dobj = DUMMY_OBJECT(obj);
- 
--    g_free(dobj->sv);
--    dobj->sv = g_strdup(value);
-+    g_clear_pointer(&dobj->sv, g_free);
-+    visit_type_str(v, name, &dobj->sv, errp);
- }
- 
--static char *dummy_get_sv(Object *obj,
--                          Error **errp)
-+static void dummy_get_sv(Object *obj, Visitor *v, const char *name,
-+                         void *opaque, Error **errp)
- {
-     DummyObject *dobj = DUMMY_OBJECT(obj);
- 
--    return g_strdup(dobj->sv);
-+    visit_type_str(v, name, &dobj->sv, errp);
- }
- 
- 
-@@ -135,16 +134,28 @@ static void dummy_init(Object *obj)
- }
- 
- 
-+static const QAPITypeInfo dummy_animal_qapi_type_info = {
-+    .name = "DummyAnimal",
-+    .masked_name = "DummyAnimalSchema",
-+    .lookup = &dummy_animal_map,
-+};
-+
-+static const QAPITypeInfo dummy_str_qapi_type_info = {
-+    .name = "str",
-+    .masked_name = "StrSchema",
-+};
-+
- static void dummy_class_init(ObjectClass *cls, const void *data)
- {
--    object_class_property_add_str(cls, "sv",
--                                  dummy_get_sv,
--                                  dummy_set_sv);
--    object_class_property_add_enum(cls, "av",
--                                   "DummyAnimal",
--                                   &dummy_animal_map,
--                                   dummy_get_av,
--                                   dummy_set_av);
-+    object_class_property_add_qapi(cls, "sv", &dummy_str_qapi_type_info,
-+                                   dummy_get_sv, dummy_set_sv,
-+                                   NULL, NULL);
-+    object_class_property_add_qapi_enum(cls, QAPI_ENUM_PROP(
-+        .name = "av",
-+        .qapi_type = &dummy_animal_qapi_type_info,
-+        .get = dummy_get_av,
-+        .set = dummy_set_av,
-+    ));
- }
- 
- 
-@@ -703,6 +714,54 @@ static void test_qom_partial_path(void)
-     object_unparent(cont1);
- }
- 
-+static void test_dummy_qapi_enum(void)
-+{
-+    ObjectProperty *prop;
-+    Object *parent = object_get_objects_root();
-+    DummyObject *dobj = DUMMY_OBJECT(
-+        object_new_with_props(TYPE_DUMMY,
-+                              parent,
-+                              "dummy0",
-+                              &error_abort,
-+                              "av", "platypus",
-+                              NULL));
-+
-+    g_assert(dobj->av == DUMMY_PLATYPUS);
-+
-+    prop = object_property_find(OBJECT(dobj), "av");
-+    g_assert(prop);
-+    g_assert(prop->qapi_type == &dummy_animal_qapi_type_info);
-+    g_assert_cmpstr(prop->qapi_type->name, ==, "DummyAnimal");
-+    g_assert_cmpstr(prop->qapi_type->masked_name, ==, "DummyAnimalSchema");
-+    g_assert(prop->qapi_type->lookup == &dummy_animal_map);
-+
-+    object_unparent(OBJECT(dobj));
-+}
-+
-+static void test_dummy_qapi_prop(void)
-+{
-+    ObjectProperty *prop;
-+    Object *parent = object_get_objects_root();
-+    DummyObject *dobj = DUMMY_OBJECT(
-+        object_new_with_props(TYPE_DUMMY,
-+                              parent,
-+                              "dummy0",
-+                              &error_abort,
-+                              "sv", "hello",
-+                              NULL));
-+
-+    g_assert_cmpstr(dobj->sv, ==, "hello");
-+
-+    prop = object_property_find(OBJECT(dobj), "sv");
-+    g_assert(prop);
-+    g_assert(prop->qapi_type == &dummy_str_qapi_type_info);
-+    g_assert_cmpstr(prop->qapi_type->name, ==, "str");
-+    g_assert_cmpstr(prop->qapi_type->masked_name, ==, "StrSchema");
-+    g_assert(prop->qapi_type->lookup == NULL);
-+
-+    object_unparent(OBJECT(dobj));
-+}
-+
- int main(int argc, char **argv)
- {
-     g_test_init(&argc, &argv, NULL);
-@@ -727,6 +786,8 @@ int main(int argc, char **argv)
-     g_test_add_func("/qom/proplist/iterator", test_dummy_iterator);
-     g_test_add_func("/qom/proplist/class_iterator", test_dummy_class_iterator);
-     g_test_add_func("/qom/proplist/delchild", test_dummy_delchild);
-+    g_test_add_func("/qom/proplist/qapi_enum", test_dummy_qapi_enum);
-+    g_test_add_func("/qom/proplist/qapi_prop", test_dummy_qapi_prop);
-     g_test_add_func("/qom/resolve/partial", test_qom_partial_path);
- 
-     return g_test_run();
+ class QAPISchemaInclude(QAPISchemaEntity):
 
 -- 
 2.56.0.116.g6de20f6092dc
