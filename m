@@ -1,74 +1,73 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5C2D2606A322
-	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Oct 2026 10:44:18 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 05CFA606A31F
+	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Oct 2026 10:44:35 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=iCv5mBKZ
+	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=TvvgZIbM
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xJ7Jb-00048D-JP; Tue, 20 Oct 2026 06:43:31 -0400
+	id 1xJ7KH-0004pF-Bn; Tue, 20 Oct 2026 06:44:14 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1xJ7JX-000469-NA
- for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:43:27 -0400
-Received: from mail-wm1-x331.google.com ([2a00:1450:4864:20::331])
+ id 1xJ7Jo-0004Jg-OZ
+ for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:43:46 -0400
+Received: from mail-wm1-x335.google.com ([2a00:1450:4864:20::335])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1xJ7JU-0004J0-9Q
- for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:43:27 -0400
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-4a018792ab3so23724675e9.0
- for <qemu-riscv@nongnu.org>; Tue, 20 Oct 2026 03:43:23 -0700 (PDT)
+ id 1xJ7JZ-0004NJ-EM
+ for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:43:44 -0400
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-4a1cef0439aso33845925e9.0
+ for <qemu-riscv@nongnu.org>; Tue, 20 Oct 2026 03:43:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1792493002; x=1793097802; darn=nongnu.org;
+ d=linaro.org; s=google; t=1792493008; x=1793097808; darn=nongnu.org;
  h=content-transfer-encoding:content-type:mime-version:references
  :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=GObncgmEUBUSeoRmmw6cdeZcoKrwnIqxlNvyYUwUu+A=;
- b=iCv5mBKZoEQzGYBBQZmyqGREpGZopyN2ntXUYWUEcX8aQz91F0hbnpltOjOv08cHc8
- /+JWJjhqjSprGTzGMUZnW+4pRA+22jpAMd87cbvVimzRNtU4LHkQ+9ET/prOiLWESHLA
- Im4yaPl/N1tp4Hj5anoeay8mxDfwKwrDJzhk7D9qTTBNNNdRB7Y6kx7N6L1rkafo77o/
- 77AZRwKN+pyvV1BKoSSUDVc1dHrNX70ALjm7e+r2PxHuWg2aKV90Fn71UQxhSv28EvDu
- iqHL+No7MqX4djpXlniha+lGDMqbUm22IgSdVR8IKVJYPmb/aU0Hv/IkzHJgjlqjS2+6
- rVMg==
+ bh=EmgF4PQPx9bMlndd3x44tzG0fL4M//RuzZARimvwNlE=;
+ b=TvvgZIbMkbY3WFVYt20NT1IYS1J7042qre5IpobbaZqwpqLODE3xG7OKLqGk2ojc07
+ Okc9LFR0hg3uN1r4ydMslswsFdBuO5KotIwm5gErdEhZPBIht8g5Bv1Ec6I13dIRRDCR
+ 5ZgPoSClLjLgsRhLdM6LMVfm+wg0otdtWixQbR/8A2pUmzrAmUJWArwajfzI3woOc1OH
+ 3G3Z7BYK1mejqu5QJDKNlZE+fXFQsrEh318pfslGcb2YW1soaMvPtkxpi44ifFOPt+ue
+ RE0PL1IUHXANi1TkXdZ/wEEaUU3GHWmgHX/lAxUodysOCU6w8Yc07cUFXgl+c2CZJA+G
+ rSsw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792493002; x=1793097802;
+ d=1e100.net; s=20260707; t=1792493008; x=1793097808;
  h=content-transfer-encoding:content-type:mime-version:references
  :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=GObncgmEUBUSeoRmmw6cdeZcoKrwnIqxlNvyYUwUu+A=;
- b=Tp7zFVfBlPlZzOFABnKbfillMFSTf0pvPI+kBv3atbmsZvcBM5PvXk6F11QO/8z/4f
- GusEzJQHqDb6Jatyi+7zvVAWewiwStYzrbaffbMGC22ATdtqbQwVUzwya2XbuWEUQga9
- TpRFComXdyGXtn8vtcIN4zMYQY+1JXWVxU20xdAN2lvZoXAOQJM2WrtTkCYDdiPrWJLT
- Qp2x4htY1slIaFj8GE1VqpmBDCV8Is5x2+lSV2WIsBTblbWafFZ9ClybgGrg//rSxRs+
- Mk/wzawA0ZHsMcQiL+fOKQEev65rkiWecLPhP8Dmiu47G0oYjVZ3o6GyvZ2uqJbosUQc
- TVRg==
+ bh=EmgF4PQPx9bMlndd3x44tzG0fL4M//RuzZARimvwNlE=;
+ b=zjpkc4ol2h4I/hGjmZhzNcteOimbWlgfN7UwcpBfsalghxwelfv9wth8561ondKJdX
+ o+4t9asrWT9dV2bSPRG2sf7dRXXGQkEN543ylWjGegc/OtuNsotZv+oHM1WcMg3MOxfG
+ dueqsH3TCU02bUgg0wusPUgPmWP9O/ephA2rCglBlXXw4MvWovtRqzbcXC/SJBqMhtC3
+ KQE5n8T4Qc8MI+++uNbt1e4z5bakhNL3f8Mz4WWLEQm+4+KfFRIetb1bzBGeI1S4QD/j
+ IcX7iW420qm6RDvCOrvDLUfBwNzGKRCUML1zDT+T0oq/Pl4AMA5cJVD0aPlXAk4cl75e
+ tCMA==
 X-Forwarded-Encrypted: i=1;
- AKwUvBypUBbecJJ4FWHT0lAlbpzMN3fjpmDuAnA+TWkOOnRJcrq8ZUK8tdXUvyFwcC7cElfnx2Kvvi8oz0Ss@nongnu.org
-X-Gm-Message-State: AFq9FYJEW+qE00+Qay434z/5CK9zCRuaEfHs+BrWxlSgum6WO8/GVyGk
- pFgfTGGk1nquPOqIe3PI7QfXyqvn6mhYm6C62xw2G/gZmIzkv7vDPCMBtyN6rNqCQ7k=
-X-Gm-Gg: AYBFou1gJZlXYsAajvhsi0n/peBiy6X7gWVzjMdnwssYo1JONbvTeOm09SjX8JJk21p
- 64d6buLSwYk99Y+beF9PUvjORL17/60G9c4S6NFcYRhuicj7/mJRcn+/nCX0QnNCtDt6hTpqz8m
- H7rtuxBpMctSa0AYAItltx5MgW/n4z/2+p1Ln7rBlUK3//q/mJadiIc1pW/Edw/K0IOW/cej/Cy
- TdpMLpsX0l/XNXbQZmcu8hZzFl793xZEBg6ytJ6oKYQQ/DPJdl++tYbSObPME4d2U/3IFpeLwJe
- 0gafz/lfOqhTSBGbxhntaKq7W9lurglmoGAzRxp18+rD0pW+ZU2eATKF2H1mT3EGcJdbB8B5nim
- xhro+sNZHsMpKkM8nbtO1A5XfqEZuLTlYZ2tB1RdKUrUBV4r7uOQCAGaMqVwfVMCrkT7JFof0vT
- LGUBIGV/tO/CQ0Gjaay27pF9FUtoVhPrM6O7o+PmEaLo4nt1wijoS6qMRIfbXw4puKeB8hy/49x
- LxfFj1R
-X-Received: by 2002:a05:600c:c0c7:b0:4a1:d743:77f1 with SMTP id
- 5b1f17b1804b1-4a1d7bc2e33mr147348455e9.24.1792493001951; 
- Tue, 20 Oct 2026 03:43:21 -0700 (PDT)
+ AKwUvByYA/6UqV+xITjVZC+QRtnZ+0hBclrj42/nVoPO7Pfr15wC1FPYTH9h/FpSDRKQnfMTi5v4rXpakqft@nongnu.org
+X-Gm-Message-State: AFq9FYK8uC+YDddJ9mH/aWxb/Z7nKuuO+Ac3R6nW9OujErnsYecHL3X3
+ 1C6mFIVtmYxZRkYwiqQuGO8k4Lq4Tn6AxgrysSFxJHcuyMMqOcks0HWFc/4Kgf54uVU=
+X-Gm-Gg: AYBFou1HL2mH/JA/KdeYEAHztMnCiuX3BdwJQaqqWBt3fF4yHy6lBLP/8YvlhGGWH9Q
+ e/9M+Ps0Xllx7WgkRu3ZU4Tf25jI+O3XDsIMi99CLx32yNZjq2v8k7BUl0QLzGXIOw7rYmEH+JF
+ BFPmOjmRKIEMboeSFoTF4OQxYi5NZviGznNgmliwL+yUQgxSPryx8Vrny4X/xes9ErTChW+RwTG
+ 7tcYn8Rlo2NvHmABbmwA0hAAtn9fWlir+Ujhy1cLe33xgbrqDNhqWNkDVv44dLU/u9YbFHbuFx/
+ 6nDDqcVJVMujwPB3JKrcvI9t8e/62fkOAxD5ytBe0y8Hiwk2+z3c878EsnA0zSNzgLP3Ff9tO85
+ 5ZRAPzFTi+5lNvpgG+bgGGKu6sNC5OEESCW40ltvN6k2rGmtu38LeKrYRAZw046o7Hj2RIPQ6wS
+ UUvWAPrnzELrzLYbnoXMYqUpnjZqsjMcCNtE58a0nGMcY9RWBAJRi3Fto2EJ3jGQ+hlN41cw==
+X-Received: by 2002:a05:600d:4187:b0:4a1:f99e:f22d with SMTP id
+ 5b1f17b1804b1-4a1f99ef467mr11426185e9.6.1792493007433; 
+ Tue, 20 Oct 2026 03:43:27 -0700 (PDT)
 Received: from draig.lan ([185.124.0.158]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a1f2cc8e98sm67312705e9.9.2026.10.20.03.43.20
+ 5b1f17b1804b1-4a1f863e709sm9184055e9.3.2026.10.20.03.43.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 20 Oct 2026 03:43:21 -0700 (PDT)
+ Tue, 20 Oct 2026 03:43:24 -0700 (PDT)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 743535F957;
- Tue, 20 Oct 2026 11:43:20 +0100 (BST)
+ by draig.lan (Postfix) with ESMTP id 14B1A5FACD;
+ Tue, 20 Oct 2026 11:43:21 +0100 (BST)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Bibo Mao <maobibo@loongson.cn>,
@@ -100,9 +99,9 @@ Cc: Bibo Mao <maobibo@loongson.cn>,
  Weiwei Li <liwei1518@gmail.com>, Peter Maydell <peter.maydell@linaro.org>,
  Mauro Carvalho Chehab <mchehab+huawei@kernel.org>, qemu-riscv@nongnu.org,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
-Subject: [PATCH 02/23] target/i386: wire up empty KVMAccelCPUClass
-Date: Tue, 20 Oct 2026 11:42:56 +0100
-Message-ID: <20261020104320.3686723-3-alex.bennee@linaro.org>
+Subject: [PATCH 07/23] target/loongarch: wire up empty KVMAccelCPUClass
+Date: Tue, 20 Oct 2026 11:43:01 +0100
+Message-ID: <20261020104320.3686723-8-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20261020104320.3686723-1-alex.bennee@linaro.org>
 References: <20261020104320.3686723-1-alex.bennee@linaro.org>
@@ -110,8 +109,8 @@ X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::331;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x331.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::335;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x335.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -141,45 +140,49 @@ We will fill in the functions in future commits.
 
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- target/i386/kvm/kvm-cpu.c | 8 +++++++-
- 1 file changed, 7 insertions(+), 1 deletion(-)
+ target/loongarch/kvm/kvm.c | 25 +++++++++++++++++++++++++
+ 1 file changed, 25 insertions(+)
 
-diff --git a/target/i386/kvm/kvm-cpu.c b/target/i386/kvm/kvm-cpu.c
-index da8d77ade06..9de107a18d5 100644
---- a/target/i386/kvm/kvm-cpu.c
-+++ b/target/i386/kvm/kvm-cpu.c
-@@ -17,6 +17,7 @@
- 
- #include "kvm_i386.h"
- #include "accel/accel-cpu-target.h"
+diff --git a/target/loongarch/kvm/kvm.c b/target/loongarch/kvm/kvm.c
+index 941142305e4..4bc08f195ed 100644
+--- a/target/loongarch/kvm/kvm.c
++++ b/target/loongarch/kvm/kvm.c
+@@ -29,6 +29,8 @@
+ #include "cpu-csr.h"
+ #include "kvm_loongarch.h"
+ #include "trace.h"
++#include "accel/accel-cpu-target.h"
 +#include "accel/kvm/cpu-ops.h"
  
- static void kvm_set_guest_phys_bits(CPUState *cs)
+ static bool cap_has_mp_state;
+ static unsigned int brk_insn;
+@@ -1648,3 +1650,26 @@ int kvm_loongarch_set_interrupt(LoongArchCPU *cpu, int irq, int level)
+ void kvm_arch_accel_class_init(ObjectClass *oc)
  {
-@@ -233,17 +234,22 @@ static void kvm_cpu_instance_init(CPUState *cs)
-     kvm_cpu_xsave_init();
  }
- 
-+static const KVMCPUOps x86_kvm_cpu_ops = {
++
++static const KVMCPUOps loongarch_kvm_cpu_ops = {
 +};
 +
- static void kvm_cpu_accel_class_init(ObjectClass *oc, const void *data)
- {
-     AccelCPUClass *acc = ACCEL_CPU_CLASS(oc);
++static void kvm_cpu_accel_class_init(ObjectClass *oc, const void *data)
++{
 +    KVMAccelCPUClass *kacc = KVM_ACCEL_CPU_CLASS(oc);
- 
-     acc->cpu_target_realize = kvm_cpu_realizefn;
-     acc->cpu_instance_init = kvm_cpu_instance_init;
-+    kacc->cpu_ops = &x86_kvm_cpu_ops;
- }
- static const TypeInfo kvm_cpu_accel_type_info = {
-     .name = ACCEL_CPU_NAME("kvm"),
- 
--    .parent = TYPE_ACCEL_CPU,
++
++    kacc->cpu_ops = &loongarch_kvm_cpu_ops;
++}
++
++static const TypeInfo kvm_cpu_accel_type_info = {
++    .name = ACCEL_CPU_NAME("kvm"),
 +    .parent = TYPE_KVM_ACCEL_CPU,
-     .class_init = kvm_cpu_accel_class_init,
-     .abstract = true,
- };
++    .class_init = kvm_cpu_accel_class_init,
++    .abstract = true,
++};
++
++static void kvm_cpu_accel_register_types(void)
++{
++    type_register_static(&kvm_cpu_accel_type_info);
++}
++type_init(kvm_cpu_accel_register_types);
 -- 
 2.47.3
 
