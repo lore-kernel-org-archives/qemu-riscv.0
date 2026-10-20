@@ -1,148 +1,175 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 09309606A31E
-	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Oct 2026 19:36:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 99C1C606A319
+	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Oct 2026 20:30:17 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=E8c2+z+3;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=CKxzHdKQ
+	dkim=pass (2048-bit key, unprotected) header.d=ibm.com header.i=@ibm.com header.a=rsa-sha256 header.s=pp1 header.b=gryBQiZp
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xJFdL-000537-3m; Tue, 20 Oct 2026 15:36:27 -0400
+	id 1xJGSR-0006GB-Uz; Tue, 20 Oct 2026 16:29:16 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xJFdJ-00052o-Az
- for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 15:36:25 -0400
-Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
+ (Exim 4.90_1) (envelope-from <milesg@linux.ibm.com>)
+ id 1xJGSP-0006Fg-L5; Tue, 20 Oct 2026 16:29:13 -0400
+Received: from mx0a-001b2d01.pphosted.com ([148.163.156.1])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xJFdG-0000F1-OX
- for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 15:36:25 -0400
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 69KGtkW82278767
- for <qemu-riscv@nongnu.org>; Tue, 20 Oct 2026 19:36:21 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- zEx1jbVy6KEIefnzlAofyoKHJlVVp0+831FyWmke0Aw=; b=E8c2+z+3hK2kIotP
- Mmyf36dG7jTkXaj/s12ydJ/+BdiXeYoeHKg0hG40DlEYs7dGkQr1KL+rsNAb0n7x
- fqhSVYa5p+cnvIoixabwBuHNSGO8VwWZTflZHrF5t5M/cEVtE+hnykBhhUKdWmix
- cCHkyGI8jKCaYyiHzofKlZQuGjqG/aN4+Z5XAXJHE7TisLdJSX0kuNtRfy1Q14yV
- gBBECqq8o4NxPCSKCxi8OThb3x/uhVOdUwnpLePDIWT4l9T13XsfiGJDRmStySzy
- zjPQ0NluLFKtCK/pX7sjoKuWj0yKurlO0JhwaFUBT4IgDhqt/07chIFzUGeK/WNG
- uDVK/A==
-Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com
- [209.85.160.200])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4he7h29vpr-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Tue, 20 Oct 2026 19:36:21 +0000 (GMT)
-Received: by mail-qt1-f200.google.com with SMTP id
- d75a77b69052e-53664602c7fso754091cf.1
- for <qemu-riscv@nongnu.org>; Tue, 20 Oct 2026 12:36:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1792524980; x=1793129780; darn=nongnu.org;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=zEx1jbVy6KEIefnzlAofyoKHJlVVp0+831FyWmke0Aw=;
- b=CKxzHdKQPd04/YJrknU7BWfxsuq3ti7mXhuB1Cj9UyK03DbwVJX5/nK0Ek+pPz0+o5
- 6l0ULX4bF4rOoLaVifPI0sG12OFV/J70hGrI7XD+lxLCcPLmm5LilayXpOvBH9wYavBk
- Ty0BolhNohvxq1a3RrcIFCtfR9V7K3KjwQQXRuCgEuliXBUdVrBNTIcBkKzqicbqIeBT
- wQ09KAO3Dko9/z2jy7QZmz9JaE+a96/SF20Cf536zP9vVP+kTuKq9r1fu0z8Ahw7oIMs
- e/+MU80Eqwc7/mXifazH843CKhF5YxNH3TpPzt6OgWmxYXtSgcSJC3PHn3ynJ8EUlB0m
- p12Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792524980; x=1793129780;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=zEx1jbVy6KEIefnzlAofyoKHJlVVp0+831FyWmke0Aw=;
- b=Hj9Y/14Icuh8q+tdAaiZ85zYP0WDRil/fzV3A9DcoktuV0j4FUcPoRlu5vZM9Ix2KI
- jGg28gZWRV2jz8cdumlDBPr9bqJm+YjBOn3/sL+E0mRpcEvsSxTrH9jry59X/AcFthQ/
- Xn1xxr6g7ohnxiEQWy5UGSt/62iz0YikqYHppfQKzl9PvgYmBsS3SKDJd1z3QokekE6D
- B4OBroFJh7/t/WLvJKTymI85hjGzV6bbTh/YlebgyAozLQN6zrc90VXjq/ubRIFCEAjE
- hoIn21+GNjaaB39j7a9Ijv1gsJa99EoZE2RGWj0xbOusTABrsVdPWKYcFWvEdQKrbN3E
- LiGA==
-X-Forwarded-Encrypted: i=1;
- AKwUvBxgZ5gsjQLLdW5ccIZwrbEqG/vjqtgZKxk5wkeChyS7THcJ5Lolmw1MdgFGKI5kdqtwUo8hVx7b4yfP@nongnu.org
-X-Gm-Message-State: AFq9FYL21AuGsguEfFgAm5sKy4JT3j9iTbLgKFH1oFqRxPopW8LcHXvm
- PHDnraM1qLF3kq8hv2vtRS5MfU4sG42bWVXm1AUnTju2q9Q4O7ZEbdyE+G+SnF7W08QKgn4p3B8
- 5yHiFwASUu6KlNiGgZytCeQhVZk+npehM6EUzdHrPPA2yuDg0wA97TGamNA==
-X-Gm-Gg: AYBFou3Qupj1+CscK2qdAJU5Z714kIICgVLp994JH5UFurSdGlIykBepi8Ws8ExvtUa
- RaYM8YHkFPwAIsOZ7oqa0cgQyS6jqU1ESj3wKUB4xyu5knl2gA6tSPUwA5u9FsO/qdfMKftUK11
- tcvkX4Xx8jbaYMKSYOPgM4ZJ9PbyikFRPiVJnPg/LIwCl1QwzCrLOg7bIZTos/IFre5ANg8TPtv
- xj3Bia1zOJHtE9x4ljIrgPGruLckK3uEunObeAookOtyaXDTGj2hW/tC9IH1LucOu5iKxHMDKFV
- nE2BJ8eTB9zNE/cl8AaZZKtAMSb2lLTE4FetRofVwbEU2i1NRnne9pDP3YWrs4UcOVPBCuhXgRf
- rCrBS0zzOoeohtSSHmhJoEkePcBdQRI5eMUjE7upwES6Ai/PrcvvV2A5tdKeVf9yoobiUsm71
-X-Received: by 2002:a05:622a:144e:b0:533:33ed:c39d with SMTP id
- d75a77b69052e-53645c1fa2cmr162930121cf.7.1792524980108; 
- Tue, 20 Oct 2026 12:36:20 -0700 (PDT)
-X-Received: by 2002:a05:622a:144e:b0:533:33ed:c39d with SMTP id
- d75a77b69052e-53645c1fa2cmr162929871cf.7.1792524979519; 
- Tue, 20 Oct 2026 12:36:19 -0700 (PDT)
-Received: from [192.168.68.101] (200-204-190-237.dsl.telesp.net.br.
- [200.204.190.237]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-53698ae7fa8sm3461731cf.9.2026.10.20.12.36.17
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 20 Oct 2026 12:36:19 -0700 (PDT)
-Message-ID: <da95e5d0-156e-47d1-9021-44e31d8f487e@oss.qualcomm.com>
-Date: Tue, 20 Oct 2026 16:36:16 -0300
+ (Exim 4.90_1) (envelope-from <milesg@linux.ibm.com>)
+ id 1xJGSM-0004oj-KT; Tue, 20 Oct 2026 16:29:13 -0400
+Received: from pps.filterd (m0356517.ppops.net [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 69KHEaMW3065410; Tue, 20 Oct 2026 20:28:59 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
+ :content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:reply-to:subject:to; s=pp1;
+ bh=Pbg2OFXa34DEIIHpJyaCulmgUfbxOrfxEkZAKRhMex4=; b=gryBQiZpYaYe
+ +rscbtJOMUMGzJILaO9bxcqwAzLIOX+j60zcXWH7tKvp08o40WoTpUGVyLoqWjGF
+ ZkUPXLwP8RwgFXaLLDWNzTKj3ap3mJdD1BO/1HXfs1dYuHwb9rWeRqt8GowmS644
+ 50UL+brNoroymAw4we0HPjTOmE1wcH9sGecmJN6hvUF49OvQ80slVcDAhqxSmPlQ
+ hSAB89mjuxAM4Xy/czGuXpXvp+9ip0/G8lAJ8i3S+uKSjmnkBnAPhxEv9O4Zujz+
+ n5IQ9SrRLVR2AI3cmiOziLyzdt3R0G+SY7SZNguBEHE3h6jlPLu0ojoSEWc6Cwsc
+ weZZ1xQpeA==
+Received: from ppma21.wdc07v.mail.ibm.com
+ (5b.69.3da9.ip4.static.sl-reverse.com [169.61.105.91])
+ by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4hdw5a58tk-1
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+ Tue, 20 Oct 2026 20:28:58 +0000 (GMT)
+Received: from pps.filterd (ppma21.wdc07v.mail.ibm.com [127.0.0.1])
+ by ppma21.wdc07v.mail.ibm.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 69KKOc4J1753723; Tue, 20 Oct 2026 20:28:57 GMT
+Received: from smtprelay04.wdc07v.mail.ibm.com ([172.16.1.71])
+ by ppma21.wdc07v.mail.ibm.com (PPS) with ESMTPS id 4he7bs2390-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 20 Oct 2026 20:28:57 +0000 (GMT)
+Received: from smtpav05.wdc07v.mail.ibm.com (smtpav05.wdc07v.mail.ibm.com
+ [10.39.53.232])
+ by smtprelay04.wdc07v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
+ 69KKSu7F26542802
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Tue, 20 Oct 2026 20:28:56 GMT
+Received: from smtpav05.wdc07v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 5AF0B58059;
+ Tue, 20 Oct 2026 20:28:56 +0000 (GMT)
+Received: from smtpav05.wdc07v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 39C1758053;
+ Tue, 20 Oct 2026 20:28:49 +0000 (GMT)
+Received: from mambor8.rchland.ibm.com (unknown [9.10.239.198])
+ by smtpav05.wdc07v.mail.ibm.com (Postfix) with ESMTP;
+ Tue, 20 Oct 2026 20:28:49 +0000 (GMT)
+Message-ID: <9623e038a99fbaa32f3b674335b717aaac28a9b7.camel@linux.ibm.com>
+Subject: Re: [PATCH v7 48/65] hw/gpio/pca955x: use QAPI enums for led and
+ pin properties
+From: Miles Glenn <milesg@linux.ibm.com>
+To: =?ISO-8859-1?Q?Marc-Andr=E9?= Lureau <marcandre.lureau@redhat.com>,
+ qemu-devel@nongnu.org
+Cc: Markus Armbruster <armbru@redhat.com>, Michael Roth
+ <michael.roth@amd.com>, John Snow <jsnow@redhat.com>, Peter Maydell
+ <peter.maydell@linaro.org>, Mauro Carvalho Chehab
+ <mchehab+huawei@kernel.org>, Pierrick Bouvier
+ <pierrick.bouvier@oss.qualcomm.com>, Paolo Bonzini <pbonzini@redhat.com>,
+ "Daniel P." =?ISO-8859-1?Q?Berrang=E9?= <berrange@redhat.com>, Kostiantyn
+ Kostiuk <kkostiuk@redhat.com>, Eric Blake <eblake@redhat.com>, David
+ Hildenbrand <david@kernel.org>, Igor Mammedov <imammedo@redhat.com>, "Edgar
+ E. Iglesias" <edgar.iglesias@gmail.com>, Jason Wang <jasowangio@gmail.com>,
+ Marcelo Tosatti <mtosatti@redhat.com>, kvm@vger.kernel.org, Alberto Garcia
+ <berto@igalia.com>, Kevin Wolf <kwolf@redhat.com>, Hanna Reitz
+ <hreitz@redhat.com>, Philippe =?ISO-8859-1?Q?Mathieu-Daud=E9?=
+ <philmd@oss.qualcomm.com>, Zhao Liu <zhao1.liu@intel.com>, Jonathan Cameron
+ <jic23@kernel.org>, Junjie Cao <junjie.cao@intel.com>, Anisa Su
+ <anisa.su@samsung.com>, Elena Ufimtseva <elena.ufimtseva@oracle.com>,
+ Jagannathan Raman <jag.raman@oracle.com>, John Levon
+ <john.levon@nutanix.com>, Thanos Makatos <thanos.makatos@nutanix.com>,
+ =?ISO-8859-1?Q?C=E9dric?= Le Goater <clg@redhat.com>, Cornelia Huck
+ <cohuck@redhat.com>, Eric Farman <farman@linux.ibm.com>, Matthew Rosato
+ <mjrosato@linux.ibm.com>, Richard Henderson <richard.henderson@linaro.org>,
+ Ilya Leoshkevich <iii@linux.ibm.com>, qemu-block@nongnu.org,
+ linux-cxl@vger.kernel.org, qemu-s390x@nongnu.org, "Michael S. Tsirkin"
+ <mst@redhat.com>, Sergio Lopez <slp@redhat.com>,
+ qemu-arm@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, Alistair Francis
+ <alistair.francis@wdc.com>, Weiwei Li <liwei1518@gmail.com>, Daniel
+ Henrique Barboza <daniel.barboza@oss.qualcomm.com>, Liu Zhiwei
+ <zhiwei_liu@linux.alibaba.com>,
+ Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org,
+ Song Gao <17746591750@163.com>, Bibo Mao <maobibo@loongson.cn>,
+ Xianglai Li <lixianglai@loongson.cn>, Jiaxun Yang
+ <jiaxun.yang@flygoat.com>, Pedro Barbuda <pbarbuda@microsoft.com>, Mohamed
+ Mediouni <mohamed@unpredictable.fr>, Nicholas Piggin <npiggin@gmail.com>,
+ Harsh Prateek Bora <harshpb@linux.ibm.com>, Amit Machhiwal
+ <amachhiw@linux.ibm.com>, qemu-ppc@nongnu.org, Zhang Chen
+ <zhangckid@gmail.com>, Li Zhijian <lizhijian@fujitsu.com>, Alistair Francis
+ <alistair@alistair23.me>, Alexander Graf <graf@amazon.com>, "Gonglei
+ (Arei)" <arei.gonglei@huawei.com>, zhenwei pi <zhenwei.pi@linux.dev>, Ani
+ Sinha <anisinha@redhat.com>, Luc Michel <luc@lmichel.fr>,
+ =?ISO-8859-1?Q?C=E9dric?= Le Goater <clg@kaod.org>, Jamin Lin
+ <jamin_lin@aspeedtech.com>, Kane Chen <kane_chen@aspeedtech.com>, Samuel
+ Tardieu <sam@rfc1149.net>, "Denis V. Lunev" <den@openvz.org>, FangSheng
+ Huang <FangSheng.Huang@amd.com>, Tyrone Ting <kfting@nuvoton.com>, Hao Wu
+ <wuhaotsh@google.com>, Keith Busch <kbusch@kernel.org>, Klaus Jensen
+ <its@irrelevant.dk>, Jesper Devantier <foss@defmacro.it>, Aditya Gupta
+ <adityag@linux.ibm.com>, Conor Dooley <conor@kernel.org>, Sebastian Huber
+ <sebastian.huber@embedded-brains.de>, Halil Pasic <pasic@linux.ibm.com>,
+ Christian Borntraeger <borntraeger@linux.ibm.com>, Jason Herne
+ <jjherne@linux.ibm.com>, Titus Rwantare <titusr@google.com>, Stefano
+ Stabellini <sstabellini@kernel.org>, Anthony PERARD
+ <anthony@xenproject.org>, Peter Xu <peterx@redhat.com>, Chinmay Rath
+ <rathc@linux.ibm.com>, Hendrik Brueckner <brueckner@linux.ibm.com>,
+ xen-devel@lists.xenproject.org, Roman Bolshakov <rbolshakov@ddn.com>, Phil
+ Dennis-Jordan <phil@philjordan.eu>, Fam Zheng <fam@euphon.net>, Farhan Ali
+ <alifm@linux.ibm.com>, Alex Williamson <alex@shazbot.org>, Tao Tang
+ <tangtao1634@phytium.com.cn>, Stefan Berger <stefanb@linux.vnet.ibm.com>,
+ Fabiano Rosas <farosas@suse.de>, Mark Cave-Ayland
+ <mark.cave-ayland@ilande.co.uk>, Artyom Tarasenko <atar4qemu@gmail.com>,
+ Yoshinori Sato <yoshinori.sato@nifty.com>,
+ Jiri Pirko <jiri@resnulli.us>, Eric Auger <eric.auger@redhat.com>,
+ Laurent Vivier <lvivier@redhat.com>
+Date: Tue, 20 Oct 2026 15:28:48 -0500
+In-Reply-To: <20261020-qom-qapi-v7-48-431a86b02b58@redhat.com>
+References: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
+ <20261020-qom-qapi-v7-48-431a86b02b58@redhat.com>
+Organization: IBM
+Content-Type: text/plain; charset="UTF-8"
+X-Mailer: Evolution 3.28.5 (3.28.5-27.el8_10) 
 X-Archived-By: <archiver.kernel.org>
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/2] hw/riscv/riscv-iommu: reclaim invalidated IOATC
- entries
-To: Tan Chi <tanchi25@mails.ucas.ac.cn>, qemu-devel@nongnu.org
-Cc: palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
- qemu-riscv@nongnu.org
-References: <20261017143943.15521-1-tanchi25@mails.ucas.ac.cn>
- <20261017144533.15610-2-tanchi25@mails.ucas.ac.cn>
-From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Content-Language: en-US
-In-Reply-To: <20261017144533.15610-2-tanchi25@mails.ucas.ac.cn>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-GUID: dPeTqcGkLUSnhJ47IHNqhO2kBv4ee77h
-X-Proofpoint-ORIG-GUID: dPeTqcGkLUSnhJ47IHNqhO2kBv4ee77h
-X-Authority-Analysis: v=2.4 cv=EuJHPicA c=1 sm=1 tr=0 ts=6ad7c2b5 cx=c_pps
- a=JbAStetqSzwMeJznSMzCyw==:117 a=QmVDPCq3bE4LYXGvZ20s0w==:17
- a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
- a=EUspDBNiAAAA:8 a=jTvNZoomtVP_xqLlT78A:9 a=QEXdDO2ut3YA:10
- a=uxP6HrT_eTzRwkO_Te1X:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIwMDA3OCBTYWx0ZWRfX7/2FX9Zf6n//
- RPpvxxEkicWniLTiix7pdNDFEbJIzuCYhpKCF19OcRA+Hj8+jOHsiZH5vtgi8gtBj0DKvOa7ANv
- 2XEnLZR/qujY1yCH4l4DciwmFRib2So=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIwMDA3OCBTYWx0ZWRfX95ObX0i9G+CP
- 2Csp+efaxgeQIRzwhLin7GejGllEiWUS9BYgi6/jnTAiKLP14mF8I/b/bFJ4HdfY++/d2RgrhhR
- /vqaduv6TH0/7YiVR5q0Y+hf1U5u0k1acL7Q4eWVqbyz2unnS8++8G+dzBud7LOJ1lcBkG355Qt
- 7dg2tYT9qmh3VhDWQ6ldv/0pgwE8kleb97D9Adj4caBhi7REeUWa7+t290raNap8oy/YaXITJni
- 6bHXyTz3n195sYQeeUzBtxXb5py6rzblEXvhRoBV/D+9Q24ECfaJtqTwgzIW+ms3gA6+MvonYTd
- 883rGWiJmVrOUTekOfNW9Mgar32Stz1mup2mmVwWEYvY/CLhZfJju5NrUIr5RqefJLERZ8ysAtL
- Bd1Xm9MGgMUqXTTHeISsyVhmAkFPbIU4mBJWhGYFofQCNPQOOLnczch1HRtDzVq6ByYT8f/pXE7
- ryxWtS/YbjkYnHPBXMQ==
+Mime-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-TM-AS-GCONF: 00
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIwMDA4MCBTYWx0ZWRfX+9t/y7lhb2NG
+ WRjTvBs8OQevzx4sdzmL6Tx48u4P32LMaUsHknmvsUzsQaucLioBR2sjCY6GT3OJ4yssLuDC0EO
+ xJOE2Sdth5z5s9nQwh6PUys3fZGefWM=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIwMDA4MCBTYWx0ZWRfX3Qu0Fruw9FfE
+ Ym4jZr96pufaiiUd4/rQ1VRiwxdBVMEJLalf3ME9JEtAQaN6Yhv0QwgryMUZTbXSXwg/DfZZCl7
+ /xP3aEF4DBW1yJT16UvGIlCC8savRUWw67ZIp3OUezPcqsRlbBNFuScIw7bh74KPfDDfp3UWH0H
+ tkc7dPCd5QXXhKqVxbaO61OTVKvMRVzCRXgvlL5Qw6pAHPkVV4ALHoA7o+NX+SE29WGhwk1ozVa
+ hTadZPgXjdOlRadT+Pzkf9PEbGlkJf2S995AwjStoV4mJwbnBdy1JmwZiXYnkVD6m8dGRXVBSUJ
+ hTMlIbAgYthVor/1Dab5nXl+SPjghbjOfG1OzOZ1req4HJPion9UERcDGtLjrnNyDZ3j0kysEDi
+ cUR7EwYhI81VbRMm2Ocx47cZ1J++/t1P8i3Q1GulTumaAI6YDA09Bd7ZCbpejcrAF8paLII0Pm6
+ KD8z5UTW5GBvooZYOJw==
+X-Proofpoint-GUID: B9E0T9KfFgRckvDuzc9Ax4ROrE9sxB9M
+X-Authority-Analysis: v=2.4 cv=JIKuIMKb c=1 sm=1 tr=0 ts=6ad7cf0b cx=c_pps
+ a=GFwsV6G8L6GxiO2Y/PsHdQ==:117 a=GFwsV6G8L6GxiO2Y/PsHdQ==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=RnoormkPH1_aCDwRdu11:22 a=U7nrCbtTmkRpXpFmAIza:22 a=VnNF1IyMAAAA:8
+ a=20KFwNOVAAAA:8 a=HV9-su-gHPMe9Pw3G_AA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+X-Proofpoint-ORIG-GUID: B9E0T9KfFgRckvDuzc9Ax4ROrE9sxB9M
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-20_03,2026-10-19_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 impostorscore=0 clxscore=1015 spamscore=0 adultscore=0
- priorityscore=1501 lowpriorityscore=0 suspectscore=0 phishscore=0 bulkscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610200078
-Received-SPF: pass client-ip=205.220.168.131;
- envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
+ suspectscore=0 malwarescore=0 lowpriorityscore=0 adultscore=0
+ priorityscore=1501 spamscore=0 phishscore=0 bulkscore=0 clxscore=1011
+ impostorscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610190000
+ definitions=main-2610200080
+Received-SPF: pass client-ip=148.163.156.1; envelope-from=milesg@linux.ibm.com;
+ helo=mx0a-001b2d01.pphosted.com
+X-Spam_score_int: -26
+X-Spam_score: -2.7
 X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_LOW=-0.7,
+ RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -153,308 +180,437 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
+Reply-To: milesg@linux.ibm.com
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,USER_AGENT_SANE_1 autolearn=unavailable autolearn_force=no
+X-Spam-Status: No, score=-15.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
+	USER_AGENT_SANE_2 autolearn=unavailable autolearn_force=no
 	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
+Reviewed-by: Glenn Miles <milesg@linux.ibm.com>
 
+Thanks,
 
-On 10/17/2026 11:45 AM, Tan Chi wrote:
-> IOTINVAL currently walks the IOATC hash table and invalidates matching
-> entries by setting iot->perm to IOMMU_NONE. The invalidated entries remain
-> in the hash table afterwards.
+Glenn
+
+On Tue, 2026-10-20 at 14:46 +0400, Marc-André Lureau wrote:
+> Replace hand-rolled string lookup tables with QAPI enums
+> Pca9552LedState and Pca955{2,4}PinState for the led%d and pin%d QOM
+> properties. This fixes the incorrect property type ("bool" for LEDs,
+> "str" for pins) and lets QAPI handle string-to-enum conversion in the
+> visitor, removing the manual string matching in the setters.
 > 
-> Under workloads with frequent DMA map/unmap activity, invalid entries can
-> accumulate while only a smaller number of entries remain valid. Subsequent
-> IOTINVAL operations continue to scan these entries. They are also included
-> in g_hash_table_size(), causing the IOATC to reach iot_limit earlier and
-> the entire cache to be flushed more frequently.
+> Add QEMU_BUILD_BUG_ON guards to ensure the QAPI-generated enum values
+> stay in sync with the hardware register encoding.
 > 
-> Remove matching entries during invalidation instead of leaving them in the
-> hash table with IOMMU_NONE.
+> I kept Pca9552PinState & @Pca9554PinState separate types, because I
+> don't know if they could diverge. We could eventually merge those.
 > 
-> The measurements use a Linux 7.3-rc5 guest based on linux-iommu/next
-> commit cec2dc7663e7 with v6 of the "iommu/riscv: Enable MSI remapping,
-> IOMMU_DMA and VFIO" series applied. The QEMU behavior is not specific to
-> this guest kernel; this configuration makes it easier to exercise through
-> normal DMA map/unmap activity.
-> 
-> In a high-churn NVMe workload with frequent DMA map/unmap activity, runtime
-> drops from 168 seconds to 35 seconds, a 4.8x speedup.
-> 
-> A short fio workload with a small working set remains within measurement
-> noise. Across three runs for each version of a 300-second fio workload with
-> a 4 GiB working set, median throughput improves from 68.6 MiB/s to
-> 75.0 MiB/s, an increase of 9.3%.
-> 
-> Signed-off-by: Tan Chi <tanchi25@mails.ucas.ac.cn>
+> Signed-off-by: Markus Armbruster <armbru@redhat.com>
+> Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 > ---
-
-Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-
->   hw/riscv/riscv-iommu.c | 122 +++++++++++++++++++----------------------
->   1 file changed, 56 insertions(+), 66 deletions(-)
+>  hw/gpio/pca9552.c | 82 +++++++++++++++++++++----------------------------------
+>  hw/gpio/pca9554.c | 39 ++++++++++----------------
+>  qapi/machine.json | 46 +++++++++++++++++++++++++++++++
+>  3 files changed, 92 insertions(+), 75 deletions(-)
 > 
-> diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
-> index bd34c72868..c217a428de 100644
-> --- a/hw/riscv/riscv-iommu.c
-> +++ b/hw/riscv/riscv-iommu.c
-> @@ -1582,104 +1582,93 @@ static guint riscv_iommu_iot_hash(gconstpointer v)
->   /* GV: 0 AV: 0 PSCV: 0 GVMA: 0 */
->   /* GV: 0 AV: 0 GVMA: 1 */
->   static
-> -void riscv_iommu_iot_inval_all(gpointer key, gpointer value, gpointer data)
-> +gboolean riscv_iommu_iot_inval_all(gpointer key, gpointer value, gpointer data)
->   {
->       RISCVIOMMUEntry *iot = (RISCVIOMMUEntry *) value;
->       RISCVIOMMUEntry *arg = (RISCVIOMMUEntry *) data;
-> -    if (iot->tag == arg->tag) {
-> -        iot->perm = IOMMU_NONE;
+> diff --git a/hw/gpio/pca9552.c b/hw/gpio/pca9552.c
+> index 719149b7174b..16741c22dea3 100644
+> --- a/hw/gpio/pca9552.c
+> +++ b/hw/gpio/pca9552.c
+> @@ -23,7 +23,8 @@
+>  #include "hw/core/irq.h"
+>  #include "migration/vmstate.h"
+>  #include "qapi/error.h"
+> -#include "qapi/visitor.h"
+> +#include "qapi/qapi-types-machine.h"
+> +#include "qapi/qapi-visit-machine.h"
+>  #include "trace.h"
+>  #include "qom/object.h"
+>  
+> @@ -59,16 +60,15 @@ struct PCA955xClass {
+>  /*
+>   * Note:  The LED_ON and LED_OFF configuration values for the PCA955X
+>   *        chips are the reverse of the PCA953X family of chips.
+> + *
+> + * The QAPI enums must match the hardware register values.
+>   */
+> -#define PCA9552_LED_ON   0x0
+> -#define PCA9552_LED_OFF  0x1
+> -#define PCA9552_LED_PWM0 0x2
+> -#define PCA9552_LED_PWM1 0x3
+> -#define PCA9552_PIN_LOW  0x0
+> -#define PCA9552_PIN_HIZ  0x1
+> -
+> -static const char *led_state[] = {"on", "off", "pwm0", "pwm1"};
+> -static const char *pin_state[] = {"low", "high"};
+> +QEMU_BUILD_BUG_ON(PCA9552_LED_STATE_ON != 0x0);
+> +QEMU_BUILD_BUG_ON(PCA9552_LED_STATE_OFF != 0x1);
+> +QEMU_BUILD_BUG_ON(PCA9552_LED_STATE_PWM0 != 0x2);
+> +QEMU_BUILD_BUG_ON(PCA9552_LED_STATE_PWM1 != 0x3);
+> +QEMU_BUILD_BUG_ON(PCA9552_PIN_STATE_LOW != 0x0);
+> +QEMU_BUILD_BUG_ON(PCA9552_PIN_STATE_HIGH != 0x1);
+>  
+>  static uint8_t pca955x_pin_get_config(PCA955xState *s, int pin)
+>  {
+> @@ -142,24 +142,24 @@ static void pca955x_update_pin_input(PCA955xState *s)
+>              uint8_t config = pca955x_pin_get_config(s, i);
+>  
+>              switch (config) {
+> -            case PCA9552_LED_ON:
+> +            case PCA9552_LED_STATE_ON:
+>                  /* Pin is set to 0V to turn on LED */
+>                  s->regs[input_reg] &= ~bit_mask;
+>                  break;
+> -            case PCA9552_LED_OFF:
+> +            case PCA9552_LED_STATE_OFF:
+>                  /*
+>                   * Pin is set to Hi-Z to turn off LED and
+>                   * pullup sets it to a logical 1 unless
+>                   * external device drives it low.
+>                   */
+> -                if (s->ext_state[i] == PCA9552_PIN_LOW) {
+> +                if (s->ext_state[i] == PCA9552_PIN_STATE_LOW) {
+>                      s->regs[input_reg] &= ~bit_mask;
+>                  } else {
+>                      s->regs[input_reg] |=  bit_mask;
+>                  }
+>                  break;
+> -            case PCA9552_LED_PWM0:
+> -            case PCA9552_LED_PWM1:
+> +            case PCA9552_LED_STATE_PWM0:
+> +            case PCA9552_LED_STATE_PWM1:
+>                  /* TODO */
+>              default:
+>                  break;
+> @@ -176,7 +176,7 @@ static void pca955x_update_pin_input(PCA955xState *s)
+>               */
+>              if (s->regs[config_reg] & bit_mask) {
+>                  /* Input mode - reflect external state */
+> -                if (s->ext_state[i] == PCA9552_PIN_LOW) {
+> +                if (s->ext_state[i] == PCA9552_PIN_STATE_LOW) {
+>                      s->regs[input_reg] &= ~bit_mask;
+>                  } else {
+>                      s->regs[input_reg] |= bit_mask;
+> @@ -360,7 +360,7 @@ static void pca955x_get_led(Object *obj, Visitor *v, const char *name,
+>      PCA955xClass *k = PCA955X_GET_CLASS(obj);
+>      PCA955xState *s = PCA955X(obj);
+>      int led, rc, reg;
+> -    uint8_t state;
+> +    Pca9552LedState state;
+>  
+>      rc = sscanf(name, "led%2d", &led);
+>      if (rc != 1) {
+> @@ -378,7 +378,7 @@ static void pca955x_get_led(Object *obj, Visitor *v, const char *name,
+>       */
+>      reg = PCA9552_LS0 + led / 4;
+>      state = (pca955x_read(s, reg) >> ((led % 4) * 2)) & 0x3;
+> -    visit_type_str(v, name, (char **)&led_state[state], errp);
+> +    visit_type_Pca9552LedState(v, name, &state, errp);
+>  }
+>  
+>  /*
+> @@ -397,10 +397,9 @@ static void pca955x_set_led(Object *obj, Visitor *v, const char *name,
+>      PCA955xClass *k = PCA955X_GET_CLASS(obj);
+>      PCA955xState *s = PCA955X(obj);
+>      int led, rc, reg, val;
+> -    uint8_t state;
+> -    g_autofree char *state_str = NULL;
+> +    Pca9552LedState state;
+>  
+> -    if (!visit_type_str(v, name, &state_str, errp)) {
+> +    if (!visit_type_Pca9552LedState(v, name, &state, errp)) {
+>          return;
+>      }
+>      rc = sscanf(name, "led%2d", &led);
+> @@ -413,16 +412,6 @@ static void pca955x_set_led(Object *obj, Visitor *v, const char *name,
+>          return;
+>      }
+>  
+> -    for (state = 0; state < ARRAY_SIZE(led_state); state++) {
+> -        if (!strcmp(state_str, led_state[state])) {
+> -            break;
+> -        }
 > -    }
-> +    return iot->tag == arg->tag;
->   }
->   
->   /* GV: 0 AV: 0 PSCV: 1 GVMA: 0 */
->   static
-> -void riscv_iommu_iot_inval_pscid(gpointer key, gpointer value, gpointer data)
-> +gboolean riscv_iommu_iot_inval_pscid(gpointer key, gpointer value,
-> +                                     gpointer data)
->   {
->       RISCVIOMMUEntry *iot = (RISCVIOMMUEntry *) value;
->       RISCVIOMMUEntry *arg = (RISCVIOMMUEntry *) data;
-> -    if (iot->tag == arg->tag &&
-> -        iot->pscid == arg->pscid) {
-> -        iot->perm = IOMMU_NONE;
+> -    if (state >= ARRAY_SIZE(led_state)) {
+> -        error_setg(errp, "%s invalid led state %s", __func__, state_str);
+> -        return;
 > -    }
-> +    return iot->tag == arg->tag &&
-> +           iot->pscid == arg->pscid;
->   }
->   
->   /* GV: 0 AV: 1 PSCV: 0 GVMA: 0 */
->   static
-> -void riscv_iommu_iot_inval_iova(gpointer key, gpointer value, gpointer data)
-> +gboolean riscv_iommu_iot_inval_iova(gpointer key, gpointer value, gpointer data)
->   {
->       RISCVIOMMUEntry *iot = (RISCVIOMMUEntry *) value;
->       RISCVIOMMUEntry *arg = (RISCVIOMMUEntry *) data;
-> -    if (iot->tag == arg->tag &&
-> -        iot->iova == arg->iova) {
-> -        iot->perm = IOMMU_NONE;
+> -
+>      reg = PCA9552_LS0 + led / 4;
+>      val = pca955x_read(s, reg);
+>      val = pca955x_ledsel(val, led % 4, state);
+> @@ -437,7 +426,8 @@ static void pca955x_get_pin(Object *obj, Visitor *v, const char *name,
+>      PCA955xClass *k = PCA955X_GET_CLASS(obj);
+>      PCA955xState *s = PCA955X(obj);
+>      int pin, rc;
+> -    uint8_t input_reg, state;
+> +    uint8_t input_reg;
+> +    Pca9552PinState state;
+>  
+>      rc = sscanf(name, "pin%2d", &pin);
+>      if (rc != 1) {
+> @@ -455,7 +445,7 @@ static void pca955x_get_pin(Object *obj, Visitor *v, const char *name,
+>       */
+>      input_reg = PCA9535_INPUT0 + (pin / 8);
+>      state = (s->regs[input_reg] >> (pin % 8)) & 0x1;
+> -    visit_type_str(v, name, (char **)&pin_state[state], errp);
+> +    visit_type_Pca9552PinState(v, name, &state, errp);
+>  }
+>  
+>  static void pca955x_set_pin(Object *obj, Visitor *v, const char *name,
+> @@ -464,10 +454,10 @@ static void pca955x_set_pin(Object *obj, Visitor *v, const char *name,
+>      PCA955xClass *k = PCA955X_GET_CLASS(obj);
+>      PCA955xState *s = PCA955X(obj);
+>      int pin, rc;
+> -    uint8_t state, config_reg;
+> -    g_autofree char *state_str = NULL;
+> +    Pca9552PinState state;
+> +    uint8_t config_reg;
+>  
+> -    if (!visit_type_str(v, name, &state_str, errp)) {
+> +    if (!visit_type_Pca9552PinState(v, name, &state, errp)) {
+>          return;
+>      }
+>      rc = sscanf(name, "pin%2d", &pin);
+> @@ -480,16 +470,6 @@ static void pca955x_set_pin(Object *obj, Visitor *v, const char *name,
+>          return;
+>      }
+>  
+> -    for (state = 0; state < ARRAY_SIZE(pin_state); state++) {
+> -        if (!strcmp(state_str, pin_state[state])) {
+> -            break;
+> -        }
 > -    }
-> +    return iot->tag == arg->tag &&
-> +           iot->iova == arg->iova;
->   }
->   
->   /* GV: 0 AV: 1 PSCV: 1 GVMA: 0 */
-> -static void riscv_iommu_iot_inval_pscid_iova(gpointer key, gpointer value,
-> -                                             gpointer data)
-> +static gboolean riscv_iommu_iot_inval_pscid_iova(gpointer key,
-> +                                                 gpointer value,
-> +                                                 gpointer data)
->   {
->       RISCVIOMMUEntry *iot = (RISCVIOMMUEntry *) value;
->       RISCVIOMMUEntry *arg = (RISCVIOMMUEntry *) data;
-> -    if (iot->tag == arg->tag &&
-> -        iot->pscid == arg->pscid &&
-> -        iot->iova == arg->iova) {
-> -        iot->perm = IOMMU_NONE;
+> -    if (state >= ARRAY_SIZE(pin_state)) {
+> -        error_setg(errp, "%s invalid pin state %s", __func__, state_str);
+> -        return;
 > -    }
-> +    return iot->tag == arg->tag &&
-> +           iot->pscid == arg->pscid &&
-> +           iot->iova == arg->iova;
->   }
->   
->   /* GV: 1 AV: 0 PSCV: 0 GVMA: 0 */
->   /* GV: 1 AV: 0 GVMA: 1 */
-> -static
-> -void riscv_iommu_iot_inval_gscid(gpointer key, gpointer value, gpointer data)
-> +static gboolean riscv_iommu_iot_inval_gscid(gpointer key, gpointer value,
-> +                                            gpointer data)
->   {
->       RISCVIOMMUEntry *iot = (RISCVIOMMUEntry *) value;
->       RISCVIOMMUEntry *arg = (RISCVIOMMUEntry *) data;
-> -    if (iot->tag == arg->tag &&
-> -        iot->gscid == arg->gscid) {
-> -        iot->perm = IOMMU_NONE;
+> -
+>      /* Only input-configured pins can be driven by an external device. */
+>      config_reg = PCA9535_CONFIG0 + (pin / 8);
+>      if (!((s->regs[config_reg] >> (pin % 8)) & 0x1)) {
+> @@ -499,7 +479,7 @@ static void pca955x_set_pin(Object *obj, Visitor *v, const char *name,
+>          return;
+>      }
+>  
+> -    pca955x_set_ext_state(s, pin, state != PCA9552_PIN_LOW);
+> +    pca955x_set_ext_state(s, pin, state != PCA9552_PIN_STATE_LOW);
+>  }
+>  
+>  static const VMStateDescription pca9552_vmstate = {
+> @@ -529,7 +509,7 @@ static void pca9552_reset_hold(Object *obj, ResetType type)
+>      s->regs[PCA9552_LS2] = 0x55;
+>      s->regs[PCA9552_LS3] = 0x55;
+>  
+> -    memset(s->ext_state, PCA9552_PIN_HIZ, PCA955X_PIN_COUNT_MAX);
+> +    memset(s->ext_state, PCA9552_PIN_STATE_HIGH, PCA955X_PIN_COUNT_MAX);
+>      pca955x_update_pin_input(s);
+>  
+>      s->pointer = 0xFF;
+> @@ -549,7 +529,7 @@ static void pca9535_reset_hold(Object *obj, ResetType type)
+>      s->regs[PCA9535_CONFIG0] = 0xFF;  /* All pins as inputs */
+>      s->regs[PCA9535_CONFIG1] = 0xFF;  /* All pins as inputs */
+>  
+> -    memset(s->ext_state, PCA9552_PIN_HIZ, PCA955X_PIN_COUNT_MAX);
+> +    memset(s->ext_state, PCA9552_PIN_STATE_HIGH, PCA955X_PIN_COUNT_MAX);
+>      pca955x_update_pin_input(s);
+>  
+>      s->pointer = 0xFF;
+> @@ -567,12 +547,12 @@ static void pca955x_initfn(Object *obj)
+>          if (k->has_led_support) {
+>              /* LED variant: expose the LED selector state as led%d. */
+>              name = g_strdup_printf("led%d", ix);
+> -            object_property_add(obj, name, "bool",
+> +            object_property_add(obj, name, "Pca9552LedState",
+>                                  pca955x_get_led, pca955x_set_led, NULL, NULL);
+>          } else {
+>              /* GPIO variant: expose the pin logic level as pin%d. */
+>              name = g_strdup_printf("pin%d", ix);
+> -            object_property_add(obj, name, "str",
+> +            object_property_add(obj, name, "Pca9552PinState",
+>                                  pca955x_get_pin, pca955x_set_pin, NULL, NULL);
+>          }
+>          g_free(name);
+> diff --git a/hw/gpio/pca9554.c b/hw/gpio/pca9554.c
+> index 904698cdce85..e4eddc829ef7 100644
+> --- a/hw/gpio/pca9554.c
+> +++ b/hw/gpio/pca9554.c
+> @@ -16,6 +16,8 @@
+>  #include "hw/core/irq.h"
+>  #include "migration/vmstate.h"
+>  #include "qapi/error.h"
+> +#include "qapi/qapi-types-machine.h"
+> +#include "qapi/qapi-visit-machine.h"
+>  #include "qapi/visitor.h"
+>  #include "trace.h"
+>  #include "qom/object.h"
+> @@ -32,10 +34,8 @@ typedef struct PCA9554Class PCA9554Class;
+>  DECLARE_CLASS_CHECKERS(PCA9554Class, PCA9554,
+>                         TYPE_PCA9554)
+>  
+> -#define PCA9554_PIN_LOW  0x0
+> -#define PCA9554_PIN_HIZ  0x1
+> -
+> -static const char *pin_state[] = {"low", "high"};
+> +QEMU_BUILD_BUG_ON(PCA9554_PIN_STATE_LOW != 0x0);
+> +QEMU_BUILD_BUG_ON(PCA9554_PIN_STATE_HIGH != 0x1);
+>  
+>  static void pca9554_update_pin_input(PCA9554State *s)
+>  {
+> @@ -54,7 +54,7 @@ static void pca9554_update_pin_input(PCA9554State *s)
+>               * Input: the pin is Hi-Z with a pull-up, so it reads high
+>               * unless an external device drives it low.
+>               */
+> -            if (s->ext_state[i] == PCA9554_PIN_LOW) {
+> +            if (s->ext_state[i] == PCA9554_PIN_STATE_LOW) {
+>                  s->regs[PCA9554_INPUT] &= ~bit_mask;
+>              } else {
+>                  s->regs[PCA9554_INPUT] |= bit_mask;
+> @@ -156,7 +156,7 @@ static void pca9554_get_pin(Object *obj, Visitor *v, const char *name,
+>  {
+>      PCA9554State *s = PCA9554(obj);
+>      int pin, rc;
+> -    uint8_t state;
+> +    Pca9554PinState state;
+>  
+>      rc = sscanf(name, "pin%2d", &pin);
+>      if (rc != 1) {
+> @@ -175,7 +175,7 @@ static void pca9554_get_pin(Object *obj, Visitor *v, const char *name,
+>       * holds the wire level regardless of the configured direction.
+>       */
+>      state = (s->regs[PCA9554_INPUT] >> pin) & 0x1;
+> -    visit_type_str(v, name, (char **)&pin_state[state], errp);
+> +    visit_type_Pca9554PinState(v, name, &state, errp);
+>  }
+>  
+>  static void pca9554_set_pin(Object *obj, Visitor *v, const char *name,
+> @@ -183,10 +183,10 @@ static void pca9554_set_pin(Object *obj, Visitor *v, const char *name,
+>  {
+>      PCA9554State *s = PCA9554(obj);
+>      int pin, rc, val;
+> -    uint8_t state, mask;
+> -    g_autofree char *state_str = NULL;
+> +    uint8_t mask;
+> +    Pca9554PinState state;
+>  
+> -    if (!visit_type_str(v, name, &state_str, errp)) {
+> +    if (!visit_type_Pca9554PinState(v, name, &state, errp)) {
+>          return;
+>      }
+>      rc = sscanf(name, "pin%2d", &pin);
+> @@ -199,16 +199,6 @@ static void pca9554_set_pin(Object *obj, Visitor *v, const char *name,
+>          return;
+>      }
+>  
+> -    for (state = 0; state < ARRAY_SIZE(pin_state); state++) {
+> -        if (!strcmp(state_str, pin_state[state])) {
+> -            break;
+> -        }
 > -    }
-> +    return iot->tag == arg->tag &&
-> +           iot->gscid == arg->gscid;
->   }
->   
->   /* GV: 1 AV: 0 PSCV: 1 GVMA: 0 */
-> -static void riscv_iommu_iot_inval_gscid_pscid(gpointer key, gpointer value,
-> -                                              gpointer data)
-> +static gboolean riscv_iommu_iot_inval_gscid_pscid(gpointer key,
-> +                                                  gpointer value,
-> +                                                  gpointer data)
->   {
->       RISCVIOMMUEntry *iot = (RISCVIOMMUEntry *) value;
->       RISCVIOMMUEntry *arg = (RISCVIOMMUEntry *) data;
-> -    if (iot->tag == arg->tag &&
-> -        iot->gscid == arg->gscid &&
-> -        iot->pscid == arg->pscid) {
-> -        iot->perm = IOMMU_NONE;
+> -    if (state >= ARRAY_SIZE(pin_state)) {
+> -        error_setg(errp, "%s invalid pin state %s", __func__, state_str);
+> -        return;
 > -    }
-> +    return iot->tag == arg->tag &&
-> +           iot->gscid == arg->gscid &&
-> +           iot->pscid == arg->pscid;
->   }
->   
->   /* GV: 1 AV: 1 PSCV: 0 GVMA: 0 */
->   /* GV: 1 AV: 1 GVMA: 1 */
-> -static void riscv_iommu_iot_inval_gscid_iova(gpointer key, gpointer value,
-> -                                             gpointer data)
-> +static gboolean riscv_iommu_iot_inval_gscid_iova(gpointer key,
-> +                                                 gpointer value,
-> +                                                 gpointer data)
->   {
->       RISCVIOMMUEntry *iot = (RISCVIOMMUEntry *) value;
->       RISCVIOMMUEntry *arg = (RISCVIOMMUEntry *) data;
-> -    if (iot->tag == arg->tag &&
-> -        iot->gscid == arg->gscid &&
-> -        iot->iova == arg->iova) {
-> -        iot->perm = IOMMU_NONE;
-> -    }
-> +    return iot->tag == arg->tag &&
-> +           iot->gscid == arg->gscid &&
-> +           iot->iova == arg->iova;
->   }
->   
->   /* GV: 1 AV: 1 PSCV: 1 GVMA: 0 */
-> -static void riscv_iommu_iot_inval_gscid_pscid_iova(gpointer key, gpointer value,
-> -                                                   gpointer data)
-> +static gboolean riscv_iommu_iot_inval_gscid_pscid_iova(gpointer key,
-> +                                                       gpointer value,
-> +                                                       gpointer data)
->   {
->       RISCVIOMMUEntry *iot = (RISCVIOMMUEntry *) value;
->       RISCVIOMMUEntry *arg = (RISCVIOMMUEntry *) data;
-> -    if (iot->tag == arg->tag &&
-> -        iot->gscid == arg->gscid &&
-> -        iot->pscid == arg->pscid &&
-> -        iot->iova == arg->iova) {
-> -        iot->perm = IOMMU_NONE;
-> -    }
-> +    return iot->tag == arg->tag &&
-> +           iot->gscid == arg->gscid &&
-> +           iot->pscid == arg->pscid &&
-> +           iot->iova == arg->iova;
->   }
->   
->   /* caller must hold iot_lock */
-> @@ -1712,7 +1701,7 @@ static void riscv_iommu_iot_update(RISCVIOMMUState *s, RISCVIOMMUEntry *iot)
->       g_hash_table_add(s->iot_cache, iot);
->   }
->   
-> -static void riscv_iommu_iot_inval(RISCVIOMMUState *s, GHFunc func,
-> +static void riscv_iommu_iot_inval(RISCVIOMMUState *s, GHRFunc func,
->       uint32_t gscid, uint32_t pscid, hwaddr iova, RISCVIOMMUTransTag transtag)
->   {
->       RISCVIOMMUEntry key = {
-> @@ -1723,7 +1712,7 @@ static void riscv_iommu_iot_inval(RISCVIOMMUState *s, GHFunc func,
->       };
->   
->       qemu_mutex_lock(&s->iot_lock);
-> -    g_hash_table_foreach(s->iot_cache, func, &key);
-> +    g_hash_table_foreach_remove(s->iot_cache, func, &key);
->       qemu_mutex_unlock(&s->iot_lock);
->   }
->   
-> @@ -1972,7 +1961,8 @@ static void riscv_iommu_process_cq_tail(RISCVIOMMUState *s)
->       dma_addr_t addr;
->       uint32_t tail, head, ctrl;
->       uint64_t cmd_opcode;
-> -    GHFunc func;
-> +    GHRFunc iot_func;
-> +    GHFunc ctx_func;
->   
->       ctrl = riscv_iommu_reg_get32(s, RISCV_IOMMU_REG_CQCSR);
->       tail = riscv_iommu_reg_get32(s, RISCV_IOMMU_REG_CQT) & s->cq_mask;
-> @@ -2035,18 +2025,18 @@ static void riscv_iommu_process_cq_tail(RISCVIOMMUState *s)
->                   goto cmd_ill;
->               }
->   
-> -            func = riscv_iommu_iot_inval_all;
-> +            iot_func = riscv_iommu_iot_inval_all;
->   
->               if (gv) {
-> -                func = (av) ? riscv_iommu_iot_inval_gscid_iova :
-> +                iot_func = (av) ? riscv_iommu_iot_inval_gscid_iova :
->                                 riscv_iommu_iot_inval_gscid;
->               }
->   
->               riscv_iommu_iot_inval(
-> -                s, func, gscid, pscid, iova, RISCV_IOMMU_TRANS_TAG_VG);
-> +                s, iot_func, gscid, pscid, iova, RISCV_IOMMU_TRANS_TAG_VG);
->   
->               riscv_iommu_iot_inval(
-> -                s, func, gscid, pscid, iova, RISCV_IOMMU_TRANS_TAG_VN);
-> +                s, iot_func, gscid, pscid, iova, RISCV_IOMMU_TRANS_TAG_VN);
->               break;
->           }
->   
-> @@ -2066,24 +2056,24 @@ static void riscv_iommu_process_cq_tail(RISCVIOMMUState *s)
->               if (gv) {
->                   transtag = RISCV_IOMMU_TRANS_TAG_VN;
->                   if (pscv) {
-> -                    func = (av) ? riscv_iommu_iot_inval_gscid_pscid_iova :
-> +                    iot_func = (av) ? riscv_iommu_iot_inval_gscid_pscid_iova :
->                                     riscv_iommu_iot_inval_gscid_pscid;
->                   } else {
-> -                    func = (av) ? riscv_iommu_iot_inval_gscid_iova :
-> +                    iot_func = (av) ? riscv_iommu_iot_inval_gscid_iova :
->                                     riscv_iommu_iot_inval_gscid;
->                   }
->               } else {
->                   transtag = RISCV_IOMMU_TRANS_TAG_SS;
->                   if (pscv) {
-> -                    func = (av) ? riscv_iommu_iot_inval_pscid_iova :
-> +                    iot_func = (av) ? riscv_iommu_iot_inval_pscid_iova :
->                                     riscv_iommu_iot_inval_pscid;
->                   } else {
-> -                    func = (av) ? riscv_iommu_iot_inval_iova :
-> +                    iot_func = (av) ? riscv_iommu_iot_inval_iova :
->                                     riscv_iommu_iot_inval_all;
->                   }
->               }
->   
-> -            riscv_iommu_iot_inval(s, func, gscid, pscid, iova, transtag);
-> +            riscv_iommu_iot_inval(s, iot_func, gscid, pscid, iova, transtag);
->               break;
->           }
->   
-> @@ -2091,12 +2081,12 @@ static void riscv_iommu_process_cq_tail(RISCVIOMMUState *s)
->                                RISCV_IOMMU_CMD_IODIR_OPCODE):
->               if (!(cmd.dword0 & RISCV_IOMMU_CMD_IODIR_DV)) {
->                   /* invalidate all device context cache mappings */
-> -                func = riscv_iommu_ctx_inval_all;
-> +                ctx_func = riscv_iommu_ctx_inval_all;
->               } else {
->                   /* invalidate all device context matching DID */
-> -                func = riscv_iommu_ctx_inval_devid;
-> +                ctx_func = riscv_iommu_ctx_inval_devid;
->               }
-> -            riscv_iommu_ctx_inval(s, func,
-> +            riscv_iommu_ctx_inval(s, ctx_func,
->                   get_field(cmd.dword0, RISCV_IOMMU_CMD_IODIR_DID), 0);
->               break;
->   
-> @@ -2106,9 +2096,9 @@ static void riscv_iommu_process_cq_tail(RISCVIOMMUState *s)
->                   /* illegal command arguments IODIR_PDT & DV == 0 */
->                   goto cmd_ill;
->               } else {
-> -                func = riscv_iommu_ctx_inval_devid_procid;
-> +                ctx_func = riscv_iommu_ctx_inval_devid_procid;
->               }
-> -            riscv_iommu_ctx_inval(s, func,
-> +            riscv_iommu_ctx_inval(s, ctx_func,
->                   get_field(cmd.dword0, RISCV_IOMMU_CMD_IODIR_DID),
->                   get_field(cmd.dword0, RISCV_IOMMU_CMD_IODIR_PID));
->               break;
+> -
+>      if (s->hw_dir) {
+>          /* Warn and ignore if the guest has configured this pin as output */
+>          if (!((s->regs[PCA9554_CONFIG] >> pin) & 0x1)) {
+> @@ -219,13 +209,13 @@ static void pca9554_set_pin(Object *obj, Visitor *v, const char *name,
+>              return;
+>          }
+>          /* Drive the external input level */
+> -        pca9554_set_ext_state(s, pin, state != PCA9554_PIN_LOW);
+> +        pca9554_set_ext_state(s, pin, state != PCA9554_PIN_STATE_LOW);
+>      } else {
+>          /* Legacy behavior: force output mode and drive */
+>          /* First, modify the output register bit */
+>          val = pca9554_read(s, PCA9554_OUTPUT);
+>          mask = 0x1 << pin;
+> -        if (state == PCA9554_PIN_LOW) {
+> +        if (state == PCA9554_PIN_STATE_LOW) {
+>              val &= ~(mask);
+>          } else {
+>              val |= mask;
+> @@ -264,7 +254,7 @@ static void pca9554_reset(DeviceState *dev)
+>      s->regs[PCA9554_POLARITY] = 0x0; /* No pins are inverted */
+>      s->regs[PCA9554_CONFIG] = pin_mask; /* All pins are inputs */
+>  
+> -    memset(s->ext_state, PCA9554_PIN_HIZ, pc->pin_count);
+> +    memset(s->ext_state, PCA9554_PIN_STATE_HIGH, pc->pin_count);
+>      pca9554_update_pin_input(s);
+>  
+>      s->pointer = 0x0;
+> @@ -280,7 +270,8 @@ static void pca9554_initfn(Object *obj)
+>          char *name;
+>  
+>          name = g_strdup_printf("pin%d", pin);
+> -        object_property_add(obj, name, "str", pca9554_get_pin, pca9554_set_pin,
+> +        object_property_add(obj, name, "Pca9554PinState",
+> +                            pca9554_get_pin, pca9554_set_pin,
+>                              NULL, NULL);
+>          g_free(name);
+>      }
+> diff --git a/qapi/machine.json b/qapi/machine.json
+> index 34be3156270c..46b6935ab0b8 100644
+> --- a/qapi/machine.json
+> +++ b/qapi/machine.json
+> @@ -416,6 +416,52 @@
+>  { 'enum': 'LostTickPolicy',
+>    'data': ['discard', 'delay', 'slew' ] }
+>  
+> +##
+> +# @Pca9552LedState:
+> +#
+> +# LED state for PCA9552.
+> +#
+> +# @on: LED on
+> +#
+> +# @off: LED off
+> +#
+> +# @pwm0: LED controlled by PWM0
+> +#
+> +# @pwm1: LED controlled by PWM1
+> +#
+> +# Since: 11.2
+> +##
+> +{ 'enum': 'Pca9552LedState',
+> +  'data': ['on', 'off', 'pwm0', 'pwm1'] }
+> +
+> +##
+> +# @Pca9552PinState:
+> +#
+> +# Pin state for PCA9552.
+> +#
+> +# @low: Pin low
+> +#
+> +# @high: Pin high
+> +#
+> +# Since: 11.2
+> +##
+> +{ 'enum': 'Pca9552PinState',
+> +  'data': ['low', 'high'] }
+> +
+> +##
+> +# @Pca9554PinState:
+> +#
+> +# Pin state for PCA9554.
+> +#
+> +# @low: Pin low
+> +#
+> +# @high: Pin high
+> +#
+> +# Since: 11.2
+> +##
+> +{ 'enum': 'Pca9554PinState',
+> +  'data': ['low', 'high'] }
+> +
+>  ##
+>  # @inject-nmi:
+>  #     Injects a Non-Maskable Interrupt (machine specific: for example
+> 
 
 
