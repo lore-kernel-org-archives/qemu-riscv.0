@@ -1,142 +1,155 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5654B606A320
-	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Oct 2026 13:26:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 10855606A31A
+	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Oct 2026 19:11:35 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=jVIpKtaV
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=PovsFuz9;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=kamAJRwh
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xJ9r2-00038f-IK; Tue, 20 Oct 2026 09:26:12 -0400
+	id 1xJFEc-0004mY-Q8; Tue, 20 Oct 2026 15:10:54 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1xJ9qp-00035x-OW
- for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 09:26:03 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ (Exim 4.90_1) (envelope-from <pierrick.bouvier@oss.qualcomm.com>)
+ id 1xJFEO-0004hf-8B
+ for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 15:10:41 -0400
+Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1xJ9qk-0002yF-8e
- for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 09:25:59 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1792502753;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=A/2pHd+aS8DA34XJvVp3LyaeljRYqqdyzYtr5T0L1kw=;
- b=jVIpKtaVcn6V+lIEBn6Mn2hCS6826Lxe6GQKgFwLhxGFFdKW28sBjv7GnO0PqKuK8Fjw21
- HKgAfRxEaJ1UzaBaWJUGFp5z2z9aYvr8+O3h5cZkSpL1F0l+ubmdLe1Y5texk0tihWRiex
- lilEVyBBhu3gu/vIH7Qru+EEU84n7pc=
-Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-402-GpgImfhOMWa0lumUFG9c1g-1; Tue,
- 20 Oct 2026 13:25:47 +0000
-X-MC-Unique: GpgImfhOMWa0lumUFG9c1g-1
-X-Mimecast-MFC-AGG-ID: GpgImfhOMWa0lumUFG9c1g_1792502743
-Received: from mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.93])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id D737F1800BDD; Tue, 20 Oct 2026 13:25:39 +0000 (UTC)
-Received: from blackfin.pond.sub.org (unknown [10.44.22.5])
- by mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id EA9B818005B3; Tue, 20 Oct 2026 13:25:35 +0000 (UTC)
-Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id 71D8121E6A04; Tue, 20 Oct 2026 15:25:33 +0200 (CEST)
-From: Markus Armbruster <armbru@redhat.com>
-To: =?utf-8?Q?Marc-Andr=C3=A9?= Lureau <marcandre.lureau@redhat.com>
-Cc: qemu-devel@nongnu.org,  Michael Roth <michael.roth@amd.com>,  John Snow
- <jsnow@redhat.com>,  Peter Maydell <peter.maydell@linaro.org>,  Mauro
- Carvalho Chehab <mchehab+huawei@kernel.org>,  Pierrick Bouvier
- <pierrick.bouvier@oss.qualcomm.com>,  Paolo Bonzini <pbonzini@redhat.com>,
- Daniel P. =?utf-8?Q?Berrang=C3=A9?= <berrange@redhat.com>,  Kostiantyn
- Kostiuk
- <kkostiuk@redhat.com>,  Eric Blake <eblake@redhat.com>,  David Hildenbrand
- <david@kernel.org>,  Igor Mammedov <imammedo@redhat.com>,  "Edgar E.
- Iglesias" <edgar.iglesias@gmail.com>,  Jason Wang <jasowangio@gmail.com>,
- Marcelo Tosatti <mtosatti@redhat.com>,  kvm@vger.kernel.org,  Alberto
- Garcia <berto@igalia.com>,  Kevin Wolf <kwolf@redhat.com>,  Hanna Reitz
- <hreitz@redhat.com>,  Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?=
- <philmd@oss.qualcomm.com>,
- Zhao Liu <zhao1.liu@intel.com>,  Jonathan Cameron <jic23@kernel.org>,
- Junjie Cao <junjie.cao@intel.com>,  Anisa Su <anisa.su@samsung.com>,
- Elena Ufimtseva <elena.ufimtseva@oracle.com>,  Jagannathan Raman
- <jag.raman@oracle.com>,  John Levon <john.levon@nutanix.com>,  Thanos
- Makatos <thanos.makatos@nutanix.com>,  =?utf-8?Q?C=C3=A9dric?= Le Goater
- <clg@redhat.com>,
- Cornelia Huck <cohuck@redhat.com>,  Eric Farman <farman@linux.ibm.com>,
- Matthew Rosato <mjrosato@linux.ibm.com>,  Richard Henderson
- <richard.henderson@linaro.org>,  Ilya Leoshkevich <iii@linux.ibm.com>,
- qemu-block@nongnu.org,  linux-cxl@vger.kernel.org,
- qemu-s390x@nongnu.org,  "Michael S. Tsirkin" <mst@redhat.com>,  Sergio
- Lopez <slp@redhat.com>,  qemu-arm@nongnu.org,  Palmer Dabbelt
- <palmer@dabbelt.com>,  Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>,  Daniel Henrique Barboza
- <daniel.barboza@oss.qualcomm.com>,  Liu Zhiwei
- <zhiwei_liu@linux.alibaba.com>,  Chao Liu <chao.liu@processmission.com>,
- qemu-riscv@nongnu.org,  Song Gao <17746591750@163.com>,  Bibo Mao
- <maobibo@loongson.cn>,  Xianglai Li <lixianglai@loongson.cn>,  Jiaxun Yang
- <jiaxun.yang@flygoat.com>,  Pedro Barbuda <pbarbuda@microsoft.com>,
- Mohamed Mediouni <mohamed@unpredictable.fr>,  Nicholas Piggin
- <npiggin@gmail.com>,  Harsh Prateek Bora <harshpb@linux.ibm.com>,  Amit
- Machhiwal <amachhiw@linux.ibm.com>,  qemu-ppc@nongnu.org,  Zhang Chen
- <zhangckid@gmail.com>,  Li Zhijian <lizhijian@fujitsu.com>,  Alistair
- Francis <alistair@alistair23.me>,  Alexander Graf <graf@amazon.com>,
- "Gonglei (Arei)" <arei.gonglei@huawei.com>,  zhenwei pi
- <zhenwei.pi@linux.dev>,  Ani Sinha <anisinha@redhat.com>,  Luc Michel
- <luc@lmichel.fr>,  =?utf-8?Q?C=C3=A9dric?= Le Goater <clg@kaod.org>,  Jamin
- Lin
- <jamin_lin@aspeedtech.com>,  Kane Chen <kane_chen@aspeedtech.com>,  Samuel
- Tardieu <sam@rfc1149.net>,  "Denis V. Lunev" <den@openvz.org>,  FangSheng
- Huang <FangSheng.Huang@amd.com>,  Tyrone Ting <kfting@nuvoton.com>,  Hao
- Wu <wuhaotsh@google.com>,  Keith Busch <kbusch@kernel.org>,  Klaus Jensen
- <its@irrelevant.dk>,  Jesper Devantier <foss@defmacro.it>,  Aditya Gupta
- <adityag@linux.ibm.com>,  Glenn Miles <milesg@linux.ibm.com>,  Conor
- Dooley <conor@kernel.org>,  Sebastian Huber
- <sebastian.huber@embedded-brains.de>,  Halil Pasic <pasic@linux.ibm.com>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,  Jason Herne
- <jjherne@linux.ibm.com>,  Titus Rwantare <titusr@google.com>,  Stefano
- Stabellini <sstabellini@kernel.org>,  Anthony PERARD
- <anthony@xenproject.org>,  Peter Xu <peterx@redhat.com>,  Chinmay Rath
- <rathc@linux.ibm.com>,  Hendrik Brueckner <brueckner@linux.ibm.com>,
- xen-devel@lists.xenproject.org,  Roman Bolshakov <rbolshakov@ddn.com>,
- Phil Dennis-Jordan <phil@philjordan.eu>,  Fam Zheng <fam@euphon.net>,
- Farhan Ali <alifm@linux.ibm.com>,  Alex Williamson <alex@shazbot.org>,
- Tao Tang <tangtao1634@phytium.com.cn>,  Stefan Berger
- <stefanb@linux.vnet.ibm.com>,  Fabiano Rosas <farosas@suse.de>,  Mark
- Cave-Ayland <mark.cave-ayland@ilande.co.uk>,  Artyom Tarasenko
- <atar4qemu@gmail.com>,  Yoshinori Sato <yoshinori.sato@nifty.com>,  Jiri
- Pirko <jiri@resnulli.us>,  Eric Auger <eric.auger@redhat.com>,  Laurent
- Vivier <lvivier@redhat.com>
-Subject: Re: [PATCH v7 43/65] qom: replace object_property_add_tm with
- StructTm QAPI type
-In-Reply-To: <20261020-qom-qapi-v7-43-431a86b02b58@redhat.com>
- (=?utf-8?Q?=22Marc-Andr=C3=A9?=
- Lureau"'s message of "Tue, 20 Oct 2026 14:46:00 +0400")
-References: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
- <20261020-qom-qapi-v7-43-431a86b02b58@redhat.com>
-Date: Tue, 20 Oct 2026 15:25:33 +0200
-Message-ID: <874iegpkqa.fsf@pond.sub.org>
-User-Agent: Gnus/5.13 (Gnus v5.13)
+ (Exim 4.90_1) (envelope-from <pierrick.bouvier@oss.qualcomm.com>)
+ id 1xJFEM-0006dF-FJ
+ for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 15:10:39 -0400
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 69KI77nJ2385044
+ for <qemu-riscv@nongnu.org>; Tue, 20 Oct 2026 19:10:35 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ ktxyaH7DNIkud1mcxP3wvB9yisQeqxyQelx7tbu0Y7w=; b=PovsFuz9PaFo5gRm
+ bZb2vs0D9t/92GODieD4JZeZzGRpG1uLIvahUWZaPS2M69NH41sX6QLt2S6/bfNd
+ r+mtKSGW96XPN46KDmjJYKh/XaO9a7XRYFghap2rFUL/OuYzevPcRVK9ys2vmARd
+ xC+IhQjfGqT/rjrRs6XTk0xnLx869FqFwpwch4hiJK/03Je16jFm5H9FmDYRL6hd
+ yNcohT+GzHkTgX4O8IQFJch5ebB03UH+WEj9CGyMC1nZpAy2U/2d/3X5WS+CQAbQ
+ l/LdZjnCpgrHJQBVr4ywJzn0pplQNDwIT4caerMPfbo+m+p6IA/z8lJyXoBBNng6
+ q/JIvQ==
+Received: from mail-dy1-f199.google.com (mail-dy1-f199.google.com
+ [74.125.82.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hdw5n44b3-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Tue, 20 Oct 2026 19:10:35 +0000 (GMT)
+Received: by mail-dy1-f199.google.com with SMTP id
+ 5a478bee46e88-33c35f5ca6cso7172889eec.1
+ for <qemu-riscv@nongnu.org>; Tue, 20 Oct 2026 12:10:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1792523434; x=1793128234; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=ktxyaH7DNIkud1mcxP3wvB9yisQeqxyQelx7tbu0Y7w=;
+ b=kamAJRwhYDSyeNZjjgED7zORJXVOYGWdv7AXeBoyQvEpZ1bpb7yznhbHBMlK2KbeDg
+ bFiQUssfCRkTyIuzm5XONvwUZ43hy4w/+uiqvmCPGxz0vP0o35j5PkvOWevJyJXKHNw+
+ b+merU1/A6XNCYk1a1ESAY8Odj0DSTjBuhwVao5PJqXEnir5A2Ybn0Zv5RU1vPbKyut3
+ ddOB5otqzQT9FhsxFiNt2WSHc7Bh5zcRbcwGzTF+16chfH3zsc4ndd2uL6GaPWMV/8p1
+ f20DKSgDN05koLT+sMikWxX/G9K7psYhAXwLJCBtslxrw0EllNg+V18rbBCZua1pcO6G
+ ulWg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1792523434; x=1793128234;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=ktxyaH7DNIkud1mcxP3wvB9yisQeqxyQelx7tbu0Y7w=;
+ b=ihs9TN/vP7iDOKtqxxYVWSs6fWIoay8Sip0ZuS7z+IOvUFV3nAnrGkqgM0x174iPAw
+ y2fCZ8m6ouynffGXXyOiBaxjeFOKRVfg72CafD+0mk2fkhmoKxbK/xORwPr0D+fB3Jwg
+ TTzO3ZmpIi7MLIWTWBph4FFLt6B5c6X51JoeK2bAqFtPE81PbyxI2aeQa88InOxiUJ6h
+ cQX0Jaw1lj8te9RxxXpQiiEBDjpqrwAlgw2pNPtEqADV6WHFI+twCzLZEB1hSxm/0xCi
+ ug2Ip5M8waYt+tswoRzqCopuzxWT0Jg7aaDQISu0qKxlLknCuf2lfWxWTpEj8XM0GVBf
+ /Yrw==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBzBfmLvV3mG6Z4ddzfKmgr9u+E7CQIIGvJwHvoVXoyd6pi4bkCa7EGCZ8DK+Ow6XiI9koVx3k6XrZW8@nongnu.org
+X-Gm-Message-State: AFq9FYKrSS0OZ8zhHeaV0ChoNeosmFucFISjXYG2BayFfdbQICdHxeUw
+ zBrMryPDXDmxinJIQY3Z+/1Xwyygc5acXYu8lytmTqW+FCXOZN+7hFOloW3RIohevhXGOfcECXU
+ vFx7PTG4tTspu+d820iAdbaMx5H/9iG+TnKY0cfSlJX/qOzhMWCTXdA7kVg==
+X-Gm-Gg: AYBFou2deM6syj02Vj+/PMBeD+FWlGu018oELjsSbBpN/pU1Sxo9TPWreBCMeozzLda
+ OLaw1/u2men9aDuzOhdP+v4TXepB/Wqxbbme1scEwxmNRc21TEs98QW4fZyVY888SRp5SRoR+iT
+ FRwKQfDJTA/LtPXPz3bN9y8tkoIK5/2xXtAe3sCvsaLktBhRst9Zy7JDz2zTXVSkwd5yyPqXm6+
+ scu0AOlbG1L8jA5PGqxCXaV4J/GARA7dIfPIgrpx6SyChziCVitWPu5kVnindzIQ4hM2VsyiIOc
+ eIXcC2lhMYeaZRVA/FBoT9M4IVGp68dhb0ksJ8iik+siFybF51Yk/3ScJ1T/Ygcc6At1qZHvn6o
+ mmMvCmSqYkYIgAOhul7g39djILgNUKD0rVVwlB6FxqsS2WP+WcFq5CZxcxt5C9aztGp9ROw==
+X-Received: by 2002:a05:701b:450f:10b0:185:33ab:4d55 with SMTP id
+ a92af1059eb24-18533ab4e84mr15803612c88.29.1792523433911; 
+ Tue, 20 Oct 2026 12:10:33 -0700 (PDT)
+X-Received: by 2002:a05:701b:450f:10b0:185:33ab:4d55 with SMTP id
+ a92af1059eb24-18533ab4e84mr15803583c88.29.1792523433225; 
+ Tue, 20 Oct 2026 12:10:33 -0700 (PDT)
+Received: from [192.168.1.199] (192-80-163-190.dyn.novuscom.net.
+ [192.80.163.190]) by smtp.gmail.com with ESMTPSA id
+ a92af1059eb24-1903d87ab1bsm602543c88.21.2026.10.20.12.10.32
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 20 Oct 2026 12:10:32 -0700 (PDT)
+Message-ID: <116ac62b-3bb8-4dc1-a136-4452a1c1946d@oss.qualcomm.com>
+Date: Tue, 20 Oct 2026 12:10:31 -0700
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.93
-X-Mimecast-MFC-PROC-ID: ZNPHcYzrKwSLDPbZx7kmJhe3z8NVEy6M58UN8jxMAuw_1792502743
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=armbru@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -23
-X-Spam_score: -2.4
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 17/27] target/riscv: Register CPUClass::exception_name()
+ handler
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
+ qemu-devel@nongnu.org
+Cc: Richard Henderson <richard.henderson@linaro.org>,
+ Paolo Bonzini <pbonzini@redhat.com>, Peter Maydell
+ <peter.maydell@linaro.org>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
+ <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org
+References: <20261007094516.75732-1-philmd@oss.qualcomm.com>
+ <20261007094516.75732-18-philmd@oss.qualcomm.com>
+From: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
+Content-Language: en-US
+In-Reply-To: <20261007094516.75732-18-philmd@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-GUID: d7bgTIbt7hfRN0KSg6Odd28Q3ODF0UQq
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIwMDA3NiBTYWx0ZWRfXzl4m9Cl0Go7r
+ LIXJ8IiEIM8UB3M4Ul7Uv/h2IGvL4WEFGepS8mFwmVaytI3GAQVc2ZFhZ+JzsDwxZukocRinJv5
+ Er/z6p1W03kIUvY4FXDmZ2YTGBJIwcs=
+X-Proofpoint-ORIG-GUID: d7bgTIbt7hfRN0KSg6Odd28Q3ODF0UQq
+X-Authority-Analysis: v=2.4 cv=A5z5rKWG c=1 sm=1 tr=0 ts=6ad7bcab cx=c_pps
+ a=cFYjgdjTJScbgFmBucgdfQ==:117 a=9852oil1ID9t5xBSyQ/BEA==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
+ a=EUspDBNiAAAA:8 a=tTG0r3Upy50XSGkOqccA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=scEy_gLbYbu1JhEsrz4S:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIwMDA3NiBTYWx0ZWRfX7jpz7fkrScxg
+ CVRP8/84IYXuyT/Lt8hcWejs7SLlHxRsx9hbghgwvQQNcBIeqq4JqK6XDsKk7HyJimbXRU2G7MQ
+ PhB/OFEuquKaca6SleUnsEnKyQHIymZ+865MeF1uBzRMP9U3TWIC9I1ERarY3i12u++EwxuLObK
+ FmuHW4B0q9fqxYO9RlAGqau7wrx65Z0OW/hEp4kxZoXhF5qqWj4gKYErppM1krZM4129WTcWsmG
+ Bth2NOLDeUPRUd9bNlmcFgvQ/0yLg/fnouPAKF57ooeaEcEFgj5Q0Gfzdod+WZNnGzAmzHM4LNn
+ 1UYlFEcTTk7cX5LWTP6xrPsyuLOkAREQVwST67cRjRHpG1TyyEZkGLFmaypgT/+Vr2t2KDn2COm
+ 6FRPCMVWLkWLIj9ipKq9UR93f7dBsuFiLsUJzoYnolaiOjgJFiY8PID53uKZC5iKzfVF8tsQ/nZ
+ PFl9Q98pwNlBlHFeRug==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-20_03,2026-10-19_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 malwarescore=0 adultscore=0 priorityscore=1501 suspectscore=0
+ phishscore=0 spamscore=0 bulkscore=0 impostorscore=0 lowpriorityscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610200076
+Received-SPF: pass client-ip=205.220.180.131;
+ envelope-from=pierrick.bouvier@oss.qualcomm.com;
+ helo=mx0b-0031df01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
 X-Spam_bar: --
-X-Spam_report: (-2.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.329,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -148,261 +161,27 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-17.6 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
 	SPF_PASS,USER_AGENT_SANE_1 autolearn=unavailable autolearn_force=no
 	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com> writes:
-
-> Define a StructTm QAPI struct in common.json matching the existing
-> "struct tm" property wire format (tm_year, tm_mon, tm_mday, tm_hour,
-> tm_min, tm_sec as int32).
->
-> Convert the two callers (mc146818rtc and spapr_rtc) to use
-> object_property_add_qapi() with a standard ObjectPropertyAccessor
-> that populates a StructTm and calls the generated visitor.
->
-> Remove object_property_add_tm(), object_class_property_add_tm(),
-> the TMProperty type, and the property_get_tm() helper from
-> qom/object.c, along with their declarations in object.h.
->
-> Reviewed-by: Amit Machhiwal <amachhiw@linux.ibm.com>
-> Signed-off-by: Markus Armbruster <armbru@redhat.com>
-> Signed-off-by: Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com>
+On 10/7/2026 2:45 AM, Philippe Mathieu-Daudé wrote:
+> Factor riscv_excp_name() and riscv_intr_name() out of
+> riscv_cpu_get_trap_name(). Register riscv_excp_name()
+> as the CPUClass::exception_name() handler, so the common
+> exception logging can resolve RISCV exception codes to names.
+> 
+> Signed-off-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
 > ---
->  hw/ppc/spapr_rtc.c   | 24 +++++++++++++++---
->  hw/rtc/mc146818rtc.c | 22 ++++++++++++++---
->  include/qom/object.h | 29 ----------------------
->  qapi/common.json     | 28 +++++++++++++++++++++
->  qapi/pragma.json     |  1 +
->  qom/object.c         | 69 ----------------------------------------------=
-------
->  6 files changed, 69 insertions(+), 104 deletions(-)
->
-> diff --git a/hw/ppc/spapr_rtc.c b/hw/ppc/spapr_rtc.c
-> index 1f7d2d8f898b..5105cf538f64 100644
-> --- a/hw/ppc/spapr_rtc.c
-> +++ b/hw/ppc/spapr_rtc.c
-> @@ -33,6 +33,9 @@
->  #include "migration/vmstate.h"
->  #include "qapi/error.h"
->  #include "qapi/qapi-events-misc.h"
-> +#include "qapi/qapi-type-infos-common.h"
-> +#include "qapi/qapi-visit-common.h"
-> +#include "qapi/visitor.h"
->  #include "qemu/cutils.h"
->  #include "qemu/module.h"
-> =20
-> @@ -131,9 +134,23 @@ static void rtas_set_time_of_day(PowerPCCPU *cpu, Sp=
-aprMachineState *spapr,
->      rtas_st(rets, 0, RTAS_OUT_SUCCESS);
->  }
-> =20
-> -static void spapr_rtc_qom_date(Object *obj, struct tm *current_tm, Error=
- **errp)
-> +static void spapr_rtc_qom_date(Object *obj, Visitor *v, const char *name=
-,
-> +                               void *opaque, Error **errp)
->  {
-> -    spapr_rtc_read(SPAPR_RTC(obj), current_tm, NULL);
-> +    struct tm value;
-> +    StructTm tm, *tmp =3D &tm;
-> +
-> +    spapr_rtc_read(SPAPR_RTC(obj), &value, NULL);
-> +
-> +    tm =3D (StructTm) {
-> +        .tm_year =3D value.tm_year,
-> +        .tm_mon =3D value.tm_mon,
-> +        .tm_mday =3D value.tm_mday,
-> +        .tm_hour =3D value.tm_hour,
-> +        .tm_min =3D value.tm_min,
-> +        .tm_sec =3D value.tm_sec,
-> +    };
-> +    visit_type_StructTm(v, name, &tmp, errp);
->  }
-> =20
->  static void spapr_rtc_realize(DeviceState *dev, Error **errp)
-> @@ -150,7 +167,8 @@ static void spapr_rtc_realize(DeviceState *dev, Error=
- **errp)
->      rtc_ns =3D qemu_clock_get_ns(rtc_clock);
->      rtc->ns_offset =3D host_s * NANOSECONDS_PER_SECOND - rtc_ns;
-> =20
-> -    object_property_add_tm(OBJECT(rtc), "date", spapr_rtc_qom_date);
-> +    object_property_add_qapi(OBJECT(rtc), "date", &StructTm_type_info,
-> +                             spapr_rtc_qom_date, NULL, NULL, NULL);
+>  target/riscv/cpu.h           |  1 +
+>  target/riscv/cpu.c           | 29 ++++++++++++++++++-----------
+>  target/riscv/tcg/op_helper.c |  2 +-
+>  3 files changed, 20 insertions(+), 12 deletions(-)
+> 
 
-The @type reported by qom-list & friends changes from "struct tm"
-(visible at the end of this patch) to to "StuctTm".  Such changes can be
-compatibility breaks.
-
-Same "this is okay" argument as for the previous patch, and same
-request: please note the change in the commit message.
-
->  }
-> =20
->  static const VMStateDescription vmstate_spapr_rtc =3D {
-> diff --git a/hw/rtc/mc146818rtc.c b/hw/rtc/mc146818rtc.c
-> index ba396435d1af..6010f8587ce0 100644
-> --- a/hw/rtc/mc146818rtc.c
-> +++ b/hw/rtc/mc146818rtc.c
-> @@ -42,6 +42,8 @@
->  #include "migration/vmstate.h"
->  #include "qapi/error.h"
->  #include "qapi/qapi-events-misc.h"
-> +#include "qapi/qapi-type-infos-common.h"
-> +#include "qapi/qapi-visit-common.h"
->  #include "qapi/visitor.h"
->  #include "trace.h"
-> =20
-> @@ -854,12 +856,25 @@ static const MemoryRegionOps cmos_ops =3D {
->      .endianness =3D DEVICE_LITTLE_ENDIAN,
->  };
-> =20
-> -static void rtc_get_date(Object *obj, struct tm *current_tm, Error **err=
-p)
-> +static void rtc_get_date(Object *obj, Visitor *v, const char *name,
-> +                         void *opaque, Error **errp)
->  {
->      MC146818RtcState *s =3D MC146818_RTC(obj);
-> +    struct tm value;
-> +    StructTm tm, *tmp =3D &tm;
-> =20
->      rtc_update_time(s);
-> -    rtc_get_time(s, current_tm);
-> +    rtc_get_time(s, &value);
-> +
-> +    tm =3D (StructTm) {
-> +        .tm_year =3D value.tm_year,
-> +        .tm_mon =3D value.tm_mon,
-> +        .tm_mday =3D value.tm_mday,
-> +        .tm_hour =3D value.tm_hour,
-> +        .tm_min =3D value.tm_min,
-> +        .tm_sec =3D value.tm_sec,
-> +    };
-> +    visit_type_StructTm(v, name, &tmp, errp);
->  }
-> =20
->  static void rtc_realizefn(DeviceState *dev, Error **errp)
-> @@ -1019,7 +1034,8 @@ static void rtc_class_initfn(ObjectClass *klass, co=
-nst void *data)
->      device_class_set_props(dc, mc146818rtc_properties);
->      set_bit(DEVICE_CATEGORY_MISC, dc->categories);
-> =20
-> -    object_class_property_add_tm(klass, "date", rtc_get_date);
-> +    object_class_property_add_qapi(klass, "date", &StructTm_type_info,
-> +                                   rtc_get_date, NULL, NULL, NULL);
->  }
-> =20
->  static const TypeInfo mc146818rtc_info =3D {
-> diff --git a/include/qom/object.h b/include/qom/object.h
-> index e04be4caed57..29cbd84b8d03 100644
-> --- a/include/qom/object.h
-> +++ b/include/qom/object.h
-> @@ -2156,35 +2156,6 @@ object_class_property_add_qapi(ObjectClass *klass,
->                                 ObjectPropertyRelease *release,
->                                 void *opaque);
-> =20
-> -/**
-> - * object_property_add_tm:
-> - * @obj: the object to add a property to
-> - * @name: the name of the property
-> - * @get: the getter or NULL if the property is write-only.
-> - *
-> - * Add a read-only struct tm valued property using a getter function.
-> - * This function will add a property of type 'struct tm'.
-> - *
-> - * Returns: The newly added property on success, or %NULL on failure.
-> - */
-> -ObjectProperty *object_property_add_tm(Object *obj, const char *name,
-> -                            void (*get)(Object *, struct tm *, Error **)=
-);
-> -
-> -/**
-> - * object_class_property_add_tm:
-> - * @klass: the object class to add a property to
-> - * @name: the name of the property
-> - * @get: the getter or NULL if the property is write-only.
-> - *
-> - * Add a read-only struct tm valued property using a getter function.
-> - * This function will add a property of type 'struct tm'.
-> - *
-> - * Returns: The newly added property on success, or %NULL on failure.
-> - */
-> -ObjectProperty *object_class_property_add_tm(ObjectClass *klass,
-> -                            const char *name,
-> -                            void (*get)(Object *, struct tm *, Error **)=
-);
-> -
->  typedef enum {
->      /* Automatically add a getter to the property */
->      OBJ_PROP_FLAG_READ =3D 1 << 0,
-> diff --git a/qapi/common.json b/qapi/common.json
-> index 1352e664b23e..222037ea0b32 100644
-> --- a/qapi/common.json
-> +++ b/qapi/common.json
-> @@ -218,3 +218,31 @@
->  ##
->  { 'enum': 'EndianMode',
->    'data': [ 'unspecified', 'little', 'big' ] }
-> +
-> +##
-> +# @StructTm:
-> +#
-> +# Broken-down time.  Field semantics match C ``struct tm``.
-
-Again, please use the revised syntax for introductions.
-
-> +#
-> +# @tm_year: years since 1900
-> +#
-> +# @tm_mon: months since January (0-11)
-> +#
-> +# @tm_mday: day of the month (1-31)
-> +#
-> +# @tm_hour: hours since midnight (0-23)
-> +#
-> +# @tm_min: minutes after the hour (0-59)
-> +#
-> +# @tm_sec: seconds after the minute (0-59, 60-61 for leap seconds)
-> +#
-> +# Since: 11.2
-
-Same "do we care?" as for the previous patch.
-
-> +##
-> +{ 'struct': 'StructTm',
-> +  'data': {
-> +    'tm_year': 'int32',
-> +    'tm_mon': 'int32',
-> +    'tm_mday': 'int32',
-> +    'tm_hour': 'int32',
-> +    'tm_min': 'int32',
-> +    'tm_sec': 'int32' } }
-> diff --git a/qapi/pragma.json b/qapi/pragma.json
-> index 342cedc42e76..9be2819a46bd 100644
-> --- a/qapi/pragma.json
-> +++ b/qapi/pragma.json
-> @@ -109,6 +109,7 @@
-       # Externally visible types whose member names may use uppercase
-
-Not this patch's fault, but here goes anyway: the comment should be "may
-use uppercase or '_'".  I'll fix it.
-
-       'member-name-exceptions': [     # visible in:
-           'ACPISlotType',             # query-acpi-ospm-status
-           [...]
->          'QKeyCode',                 # send-key, input-sent-event
->          'QapiErrorClass',           # QMP error replies
->          'SshHostKeyCheckMode',      # blockdev-add, -blockdev
-> +        'StructTm',                 # qom-get of RTC date property
->          'SysEmuTarget',             # query-cpu-fast, query-target
->          'UuidInfo',                 # query-uuid
->          'VncClientInfo',            # query-vnc, query-vnc-servers, ...
-
-[...]
-
+Reviewed-by: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
 
