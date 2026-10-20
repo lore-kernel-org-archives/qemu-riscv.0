@@ -1,59 +1,58 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C3A32606A324
-	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Oct 2026 10:50:16 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C6D0C60A2612
+	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Oct 2026 10:50:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=Wi/LmWHg
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=P2KwWbnS
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xJ7Nn-0001xD-8E; Tue, 20 Oct 2026 06:47:51 -0400
+	id 1xJ7Nk-0001fy-Uv; Tue, 20 Oct 2026 06:47:49 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1xJ7Mp-0000sZ-F7
- for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:46:53 -0400
+ id 1xJ7MU-0000WI-8l
+ for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:46:31 -0400
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1xJ7Mn-0005BK-Nb
- for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:46:51 -0400
+ id 1xJ7MR-00057E-Oo
+ for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:46:29 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1792493209;
+ s=mimecast20190719; t=1792493187;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=xG2OGo4lx2YCSH10YJfMac8tHdMtlMp6mBUYGSWviZ4=;
- b=Wi/LmWHgVQr37I7HM3dRB37hrGFBOQn+POAjUGkCspzb/xs7B/45HyRdqnnjjAqGsoculR
- Fm0PDKk0n7c/JKrKi9uVpx6BgkLIqXQ90msn/Cyu4HP2SsrypUrJhjFP4XISBKYm9L7B+z
- ErL74X8unniWmR4TO8fyEFMpBsEj8f8=
-Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
+ bh=Wrkputc8/RPpD4nnWHNw9T7RRAU4Kg2aM4nuyIGGs8E=;
+ b=P2KwWbnS9ygGzQ/ZLqIaSEASARp1ANhH7OH8vh9SkqbCeKGzLAOjyDqcjuuzp56faazgvM
+ eVmAUmPzTC4TVEhpvQOPAJ9X0YS6JelQZjBH9HP2Uas5A0/IsLtPfgKkGvQOsX/wNJ5DZv
+ 4s4hwEOGelFhvZpAi4BkPo99bXszpBM=
+Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-681-dv92ItMdM9G_nQvMyXZAiA-1; Tue,
- 20 Oct 2026 10:46:44 +0000
-X-MC-Unique: dv92ItMdM9G_nQvMyXZAiA-1
-X-Mimecast-MFC-AGG-ID: dv92ItMdM9G_nQvMyXZAiA_1792493201
-Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-349-AZuVlQ_mNCWlMBKmGs5kWg-1; Tue,
+ 20 Oct 2026 10:46:23 +0000
+X-MC-Unique: AZuVlQ_mNCWlMBKmGs5kWg-1
+X-Mimecast-MFC-AGG-ID: AZuVlQ_mNCWlMBKmGs5kWg_1792493179
+Received: from mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.12])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 0CCE818005B9; Tue, 20 Oct 2026 10:46:40 +0000 (UTC)
+ by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 73F281800D85; Tue, 20 Oct 2026 10:46:18 +0000 (UTC)
 Received: from localhost (headnet04.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.116])
- by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 26AF11800643; Tue, 20 Oct 2026 10:46:35 +0000 (UTC)
+ by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id 9D8411956088; Tue, 20 Oct 2026 10:46:13 +0000 (UTC)
 From: marcandre.lureau@redhat.com
-Date: Tue, 20 Oct 2026 14:45:22 +0400
-Subject: [PATCH v7 05/65] qapi: QAPISchemaVisitor.visit_needed() is now
- unused, drop
+Date: Tue, 20 Oct 2026 14:45:19 +0400
+Subject: [PATCH v7 02/65] qapi: Ease access to introspection names
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Message-Id: <20261020-qom-qapi-v7-5-431a86b02b58@redhat.com>
+Message-Id: <20261020-qom-qapi-v7-2-431a86b02b58@redhat.com>
 References: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 In-Reply-To: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 To: qemu-devel@nongnu.org
@@ -128,25 +127,25 @@ Cc: Markus Armbruster <armbru@redhat.com>,
  Yoshinori Sato <yoshinori.sato@nifty.com>, Jiri Pirko <jiri@resnulli.us>, 
  Eric Auger <eric.auger@redhat.com>, Laurent Vivier <lvivier@redhat.com>, 
  =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1193;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=7889;
  i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=yBAs+PsGI+mRRHuSXNI42xoWI9p0TSDsh65vQW8BRrc=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZX3wnVoTG1DT7PkibN0fixZC+3g4HczKxre
- WlR6XwfjdSJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGVwAKCRDa6OEJdZac
- 5XW2D/45KfzoQQ844pW9wPBstfoA4zhpxgYbXZdFhd1B3tDYs+gd0ydHZpM8roMnIC6sUz2UZVw
- IXLD2jiHt7yLZuphP/QVxipCVGpGWDePAo2x1ibRtN36V7QF2kYhmxqri0MMwpjy6AJMTGCUuMB
- xpRJlv+RypwgdJZTss3IDeLAh6amwIn5KwnKxa+VhAa1TweG97haA2x1DkLDE1BBaEBWerNMIhY
- XkU4aw+JMmBUEmqAu5AXPH7DXgINM5RHn/JzyiI3T7yLfmL0zAUjrq4eWRwG1HVPMGONTO7JfNE
- 0o0E+ULXqwLnQTgbGmZcyCHeOER/LovvzMIKrdz4xytDwyhERlt04lMyYKta/VQamfyHHL2eqte
- BmWKR4GrxysyQvF6+XvxLYIUbvcW/GEmZ2K3JOVgeh6yRY/mnANaUpqMzl5nZ1WZij3x49QanrG
- auTI+YKu1G7+pXQipQNg7LGtWo8+sBXCM44evsO6d6zedjLoJkpGbTJ2q1EbcCLvk12mjFkkh4A
- KdfC5MVpqO+KN0XR8txFvJs/K3UkRZlxM97ff+6aW7nGxBCmH5iL8yB/dAH2yravcO9bYYO+LQC
- Gs61agHa3hpCya2FC5c0KTXMLzmROHlqfLGqWdmgsZLg8hrozGFp5ahu+m+OGcL5QZ746vJi74E
- ghKphqYO93tyqXA==
+ bh=a2pApAt20adFheRFMFL0JhfgD1DBySkAUQki6ne7iLY=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZX47T8N7MhCWr0sH+GZry8k5SuXuUXyZs9e
+ X4b68TesAyJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGVwAKCRDa6OEJdZac
+ 5auAD/4/Ie/cSClFbfq3pLk5G4chwRGPx/IkNYssN2QhE7SuensGeO9N3hAkiwjTWMQUa4RmIV3
+ Ih/ody0cyQZ7ebEGwThhPd/0tDx7xTVJYKJlWKSTE5TWfQGUlgdud9VFnpmx8tSWLwXoFzA3/Hi
+ z84mm5HxX4k1UOcwbKkeDY6EkPEVuH8/N0fn/A7MiLmcS+vrSdBq2tiEnHZ2QEopsTjy7Fg+8Dm
+ trZ5cGqVMRvocoVM8CgiT6O62rCese/7CxN6AiIHPC523itkKI9FAhKp4RCjU92vE34Y4qb3OK7
+ 4nLiR3tXfQKU/YeaXR1MILIVGMiK5nF1dai6meQh2g2gFR5CZaT6gar5YZXLqO6P5vbb/h9A5B1
+ XfERQ+8YYELHMZBHW9/k9O9lzRT4AaVsNM0NRp0v7q2tBK8LXDi/gCQ8p7fmH14kbbMpCNI05fK
+ raCcLlKl6gYu52cO8zN9VqgDnMq9FRZW0+OUXJFULxZ30mbl8FV2VQh7yqS7Pjv7b0zNHWAunEZ
+ wonP/p1G5r2Po5hwZOcexcv5WAK6BbCPlEQLoNz9USS4GnPaglfv0pEsF4RVBhsqmN/mm7S8mbt
+ wlt5AqKpk3Y/XRH4EIFYc+5GuwKmie/wmHA0vfOmbqn2V9JRLHgrJL5pHEdbb6UDEt2kucPZXXU
+ qlf+go84nzQ475Q==
 X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
  fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
-X-Mimecast-MFC-PROC-ID: 9uSUk9coarVKY7log2RW3_lYrA-pMGIJa5dVIbxWBdw_1792493201
+X-Scanned-By: MIMEDefang 3.0 on 10.30.177.12
+X-Mimecast-MFC-PROC-ID: 3LnIDmMP-fQo5VqAra508fywWrhsSZj_7PSGp_vLugE_1792493179
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
@@ -174,44 +173,199 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 X-Spam-Status: No, score=-16.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham autolearn_force=no version=4.0.1
+	SPF_PASS autolearn=unavailable autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 From: Markus Armbruster <armbru@redhat.com>
 
+query-qmp-schema masks type names, because they are not part of the
+external interface.  Marc-André Lureau would like to also use them
+with qom-list & friends.  Trouble is the masked names are buried deep
+in QAPISchemaGenIntrospectVisitor.  Lift them into schema.py: new
+QAPISchemaDefinition method introspection_name() returns a
+definition's name for use in introspection.
+
+This changes the masked names, which is fine.
+
 Signed-off-by: Markus Armbruster <armbru@redhat.com>
 Reviewed-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 ---
- scripts/qapi/schema.py | 8 +-------
- 1 file changed, 1 insertion(+), 7 deletions(-)
+ scripts/qapi/introspect.py | 23 ++++-------------------
+ scripts/qapi/schema.py     | 43 +++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 47 insertions(+), 19 deletions(-)
 
+diff --git a/scripts/qapi/introspect.py b/scripts/qapi/introspect.py
+index 7e28de2279ad..644461560c64 100644
+--- a/scripts/qapi/introspect.py
++++ b/scripts/qapi/introspect.py
+@@ -30,7 +30,6 @@
+     QAPISchemaAlternatives,
+     QAPISchemaArrayType,
+     QAPISchemaBranches,
+-    QAPISchemaBuiltinType,
+     QAPISchemaEntity,
+     QAPISchemaEnumMember,
+     QAPISchemaFeature,
+@@ -177,7 +176,6 @@ def __init__(self, prefix: str, unmask: bool):
+         self._schema: Optional[QAPISchema] = None
+         self._trees: List[Annotated[SchemaInfo]] = []
+         self._used_types: List[QAPISchemaType] = []
+-        self._name_map: Dict[str, str] = {}
+         self._genc.add(mcgen('''
+ #include "qemu/osdep.h"
+ #include "%(prefix)sqapi-introspect.h"
+@@ -208,18 +206,14 @@ def visit_end(self) -> None:
+         self._schema = None
+         self._trees = []
+         self._used_types = []
+-        self._name_map = {}
+ 
+     def visit_needed(self, entity: QAPISchemaEntity) -> bool:
+         # Ignore types on first pass; visit_end() will pick up used types
+         return not isinstance(entity, QAPISchemaType)
+ 
+     def _name(self, name: str) -> str:
+-        if self._unmask:
+-            return name
+-        if name not in self._name_map:
+-            self._name_map[name] = '%d' % len(self._name_map)
+-        return self._name_map[name]
++        assert self._schema
++        return self._schema.definition_introspection_name(name, self._unmask)
+ 
+     def _use_type(self, typ: QAPISchemaType) -> str:
+         assert self._schema is not None
+@@ -237,13 +231,6 @@ def _use_type(self, typ: QAPISchemaType) -> str:
+         # Add type to work queue if new
+         if typ not in self._used_types:
+             self._used_types.append(typ)
+-        # Clients should examine commands and events, not types.  Hide
+-        # type names as integers to reduce the temptation.  Also, it
+-        # saves a few characters on the wire.
+-        if isinstance(typ, QAPISchemaBuiltinType):
+-            return typ.name
+-        if isinstance(typ, QAPISchemaArrayType):
+-            return '[' + self._use_type(typ.element_type) + ']'
+         return self._name(typ.name)
+ 
+     @staticmethod
+@@ -271,8 +258,7 @@ def _gen_tree(self, name: str, mtype: str, obj: Dict[str, object],
+                 # Output a comment to make it easy to map masked names
+                 # back to the source when reading the generated output.
+                 comment = f'"{self._name(name)}" = {name}'
+-            name = self._name(name)
+-        obj['name'] = name
++        obj['name'] = self._name(name)
+         obj['meta-type'] = mtype
+         if features:
+             obj['features'] = self._gen_features(features)
+@@ -327,8 +313,7 @@ def visit_array_type(self, name: str, info: Optional[QAPISourceInfo],
+                          ifcond: QAPISchemaIfCond,
+                          element_type: QAPISchemaType) -> None:
+         element = self._use_type(element_type)
+-        self._gen_tree('[' + element + ']', 'array', {'element-type': element},
+-                       ifcond)
++        self._gen_tree(name, 'array', {'element-type': element}, ifcond)
+ 
+     def visit_object_type_flat(self, name: str, info: Optional[QAPISourceInfo],
+                                ifcond: QAPISchemaIfCond,
 diff --git a/scripts/qapi/schema.py b/scripts/qapi/schema.py
-index 11f3accec873..9e2152fa419b 100644
+index 9c9e257a8fd5..11f3accec873 100644
 --- a/scripts/qapi/schema.py
 +++ b/scripts/qapi/schema.py
-@@ -179,11 +179,6 @@ def visit_end(self) -> None:
-     def visit_module(self, name: str) -> None:
-         pass
+@@ -136,6 +136,13 @@ def __repr__(self) -> str:
+     def c_name(self) -> str:
+         return c_name(self.name)
  
--    def visit_needed(self, entity: QAPISchemaEntity) -> bool:
--        # pylint: disable=unused-argument
--        # Default to visiting everything
--        return True
--
-     def visit_include(self, name: str, info: Optional[QAPISourceInfo]) -> None:
-         pass
++    def set_ordinal(self, ordinal: int) -> None:
++        pass
++
++    # pylint: disable=unused-argument
++    def introspection_name(self, unmask: bool) -> str:
++        return self.name
++
+     def check(self, schema: QAPISchema) -> None:
+         assert not self._checked
+         super().check(schema)
+@@ -323,6 +330,17 @@ def visit(self, visitor: QAPISchemaVisitor) -> None:
  
-@@ -315,8 +310,7 @@ def add_entity(self, ent: QAPISchemaEntity) -> None:
+ 
+ class QAPISchemaType(QAPISchemaDefinition, ABC):
++    def __init__(
++        self,
++        name: str,
++        info: Optional[QAPISourceInfo],
++        doc: Optional[QAPIDoc],
++        ifcond: Optional[QAPISchemaIfCond] = None,
++        features: Optional[List[QAPISchemaFeature]] = None,
++    ):
++        super().__init__(name, info, doc, ifcond, features)
++        self._masked_name: Optional[str] = None
++
+     # Return the C type for common use.
+     # For the types we commonly box, this is a pointer type.
+     @abstractmethod
+@@ -363,6 +381,17 @@ def need_has_if_optional(self) -> bool:
+         # Except for arrays; see QAPISchemaArrayType.need_has_if_optional().
+         return not self.c_type().endswith(POINTER_SUFFIX)
+ 
++    def set_ordinal(self, ordinal: int) -> None:
++        assert not self._masked_name
++        self._masked_name = str(ordinal)
++
++    def introspection_name(self, unmask: bool) -> str:
++        # Type names are not part of the external interface.  Hide
++        # them in introspection.  Also saves a few characters on the
++        # wire.
++        assert self._masked_name
++        return self.name if unmask else self._masked_name
++
+     def check(self, schema: QAPISchema) -> None:
+         super().check(schema)
+         for feat in self.features:
+@@ -402,6 +431,11 @@ def json_type(self) -> str:
+     def doc_type(self) -> str:
+         return self.json_type()
+ 
++    def introspection_name(self, unmask: bool):
++        if self.json_type() == 'int':
++            return 'int'
++        return self.name
++
      def visit(self, visitor: QAPISchemaVisitor) -> None:
-         visitor.visit_module(self.name)
-         for entity in self._entity_list:
--            if visitor.visit_needed(entity):
--                entity.visit(visitor)
-+            entity.visit(visitor)
+         super().visit(visitor)
+         visitor.visit_builtin_type(self.name, self.info, self.json_type())
+@@ -503,6 +537,9 @@ def doc_type(self) -> Optional[str]:
+             return None
+         return 'array of ' + elt_doc_type
  
++    def introspection_name(self, unmask: bool):
++        return '[' + self.element_type.introspection_name(unmask) + ']'
++
+     def visit(self, visitor: QAPISchemaVisitor) -> None:
+         super().visit(visitor)
+         visitor.visit_array_type(self.name, self.info, self.ifcond,
+@@ -1182,6 +1219,7 @@ def _def_definition(self, defn: QAPISchemaDefinition) -> None:
+                     "'%s' is already defined\n%s" % (defn.name, where))
+             raise QAPISemError(
+                 defn.info, "%s is already defined" % other_defn.describe())
++        defn.set_ordinal(len(self._entity_dict))
+         self._entity_dict[defn.name] = defn
  
- class QAPISchemaInclude(QAPISchemaEntity):
+     def lookup_defn(self, name: str) -> Optional[QAPISchemaDefinition]:
+@@ -1208,6 +1246,11 @@ def resolve_type(
+                 info, "%s uses unknown type '%s'" % (what, name))
+         return typ
+ 
++    def definition_introspection_name(self, name: str, unmask: bool) -> str:
++        defn = self.lookup_defn(name)
++        assert defn
++        return defn.introspection_name(unmask)
++
+     def _module_name(self, fname: str) -> str:
+         if QAPISchemaModule.is_system_module(fname):
+             return fname
 
 -- 
 2.56.0.116.g6de20f6092dc
