@@ -1,58 +1,59 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F0167606A31B
-	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Oct 2026 10:54:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D7AC1606A319
+	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Oct 2026 10:55:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=OeD2LJCz
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=Yk0Mu8Cx
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xJ7Nr-00029A-JT; Tue, 20 Oct 2026 06:47:55 -0400
+	id 1xJ7TG-0002Xa-0c; Tue, 20 Oct 2026 06:53:30 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1xJ7Mv-0000x5-7J
- for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:46:57 -0400
+ id 1xJ7QB-0006lo-M3
+ for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:50:19 -0400
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1xJ7Mt-0005CK-BO
- for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:46:56 -0400
+ id 1xJ7Q9-0006Ea-6n
+ for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:50:19 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1792493214;
+ s=mimecast20190719; t=1792493416;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=1Mnn0OKxBD8aP9I5qh8TLkmYe32toylT7CmahJ3BKVM=;
- b=OeD2LJCzszGey1IL7trqKjyHjN2igCdUfNP5bSJOqA3Ue1RmLdHw+4tt58OXd7Yb7bos3s
- b/Ht4sR015tzf6kZgc7NMUhZhB1iNNIwLddoVWeP12qFLbowx8sxhWSxZ/a2vRxPl+YU61
- rHLwCTzd94VTzu258rOKcCrRRIdCxXA=
-Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
+ bh=Itw7ntZ95b3QcknDaSfuTChM6ZY/eyyVFOmmM9NldCA=;
+ b=Yk0Mu8Cxj/pDmYYrvxB1HjyvJi3jSm+j57BZSS7M8ZlWadeBGpZJP4h6fp/Yo5qh7fFllJ
+ 5nHRgUJeddsie8wICVU5d2aYsenxf7bkORlEa0IsXDtO1X4BRk99Oh4p81Icjshbl9NZqt
+ ws/2awaqM7IYoMRsdAfqnJUZjsbW67U=
+Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-66-08VlUpjQOgagH2hPOiBlKQ-1; Tue,
- 20 Oct 2026 06:46:51 -0400
-X-MC-Unique: 08VlUpjQOgagH2hPOiBlKQ-1
-X-Mimecast-MFC-AGG-ID: 08VlUpjQOgagH2hPOiBlKQ_1792493207
-Received: from mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.95])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-508-dvXahRDTM9ep7v5fxtgUQQ-1; Tue,
+ 20 Oct 2026 10:50:13 +0000
+X-MC-Unique: dvXahRDTM9ep7v5fxtgUQQ-1
+X-Mimecast-MFC-AGG-ID: dvXahRDTM9ep7v5fxtgUQQ_1792493409
+Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id ACB211956044; Tue, 20 Oct 2026 10:46:46 +0000 (UTC)
+ by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 250A01954B17; Tue, 20 Oct 2026 10:50:09 +0000 (UTC)
 Received: from localhost (headnet04.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.116])
- by mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 8DCE25BC; Tue, 20 Oct 2026 10:46:42 +0000 (UTC)
-From: marcandre.lureau@redhat.com
-Date: Tue, 20 Oct 2026 14:45:23 +0400
-Subject: [PATCH v7 06/65] qapi/introspect: Tweak integer type masking
+ by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id D408F1800643; Tue, 20 Oct 2026 10:50:05 +0000 (UTC)
+From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
+Date: Tue, 20 Oct 2026 14:46:00 +0400
+Subject: [PATCH v7 43/65] qom: replace object_property_add_tm with StructTm
+ QAPI type
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Message-Id: <20261020-qom-qapi-v7-6-431a86b02b58@redhat.com>
+Message-Id: <20261020-qom-qapi-v7-43-431a86b02b58@redhat.com>
 References: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 In-Reply-To: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 To: qemu-devel@nongnu.org
@@ -127,25 +128,25 @@ Cc: Markus Armbruster <armbru@redhat.com>,
  Yoshinori Sato <yoshinori.sato@nifty.com>, Jiri Pirko <jiri@resnulli.us>, 
  Eric Auger <eric.auger@redhat.com>, Laurent Vivier <lvivier@redhat.com>, 
  =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3300;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=10126;
  i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=Xp7N7Cw12fT4B5RHyRwaz0UVvBY0Z8fxHr38SNSrB2w=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZY+HBluuWmLicnFhqmNZvedYN8EZPAWD5tz
- upmO1Ga58aJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGWAAKCRDa6OEJdZac
- 5XzlD/9HEY5z6oC69wenr9Qv7msxCbEfY7YI+AvbI4TE33VpTsB5TXw0w5hoWWG2I7nT0pxMrC6
- gjxcavbpLfNQuSlpsicTsD9FELzSz+6xM2MwthryKshrqOQ9eRIaSYzYj3XG7snmj5JTIp1NNtv
- uGyxTUY11F5thO0nh78pl5m3FnMgJ6J+bR4QZEixKMGDsWgdCBjFf35n+hs8Zq0TNqPPWdZM4WU
- 57QEO3MxpnUTcn8ZIAlxz7YffgWnpU+luA9bZzFqcMNqPeQ/+RHcjv3I6UUIkEAQsDNF+gvnDrJ
- 0A0Spg+6FzMovmlLnKdyDNOj6AaNgCwSBLwxZYMfMpx3I4QGmDOSrKcbVpOnh6MpSqeem9v3E/A
- s/LAha/LFAADBkXjPbHEKPDdUytOKctZ5gi0Ohky86vcCzQBcxOVOnk4PcWYQrzYFwj9TPpC2xi
- deGrYMAo64/fK+8aRp2ADj0fVj4WgnOQ5R5PVEbkxEjGkosB3xcpxKcWBrP+aSookP2fMF0jWZb
- lKHZmcLSlzz257XcK6F/9t5jcM17+nvcivFb2k3m2Zgtv47ZxI2g3D7m4GndVEQKFcBhq2PLDyJ
- 1YX7I6YK/eWF/FLjTA8Tfv5IJA62HbC6KqrK/8ewzPwZHbkgvIrqnvS4oQ6Mkv3S4l3TDiGWTv8
- 1WOmqtKMlpy+WEQ==
+ bh=8en+VmzcHhkOLZUQUh0YjN1piPKoLpt2OiF/08xyjt4=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZbnN7eBjTOgKWdRnn37M96n/vY+BRbUyYzY
+ fpY6OFY4GyJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGWwAKCRDa6OEJdZac
+ 5YVUD/9onwAEiHq4pCCkbty5UAKselNdSCAGMHXx5SISVLS2Kwi85In4t9/kLGEyHrqHeZQuERb
+ /DrZ3NA7govycT07do1BCxp0bJ9Tsl1z7uJ4Kjoa862ewDpOD825V9s/3o8StmpPJoOtYthPSyK
+ gPvECR0A34F5byFx68WIF0RiEx5+zxT3cIWaS2BQ/n9aN+iP9nslNRRyVURbpSu/HLWg9PJ2RCo
+ 6D4EIrnn+ct6phJy5oEmDmD8fuchqDjTRI5Uf+Of+uf/KkSFwFilkUS2gt3DtjU/dI/ngzQnQjM
+ A4togvItM9aalAiU32Ccxvck2JsYA21Y4SU9yNvXyW3wGemfbFApSEM8JyNq3pc8zPpEjN5pwf3
+ pD1Me0RXjz5Hm8AMvVw4bQ9NruvfmbUxftEfh04ryFlAqRLb3zqC2EYQvIa57Lu637taVwqYF38
+ ChZGbQKAD9tG7noF8pinzh5OCw/N0JHhIMkXcugBD6Ib31pA8zY/ByWYHO+Vgsr53dLJGgHpYPT
+ jN6RFE1SokU1E6XU978tXDwQMOmYbzZifj1e8yyZVjvS/7ewgYLNx4oszXrh2Ez++ApJnBhsfss
+ aQUwz1FeO06KT5e6USlZd8/B5+Yq1ppDR7geKaJQU6y6wnWs2H4dE61Y+jbOF1Ck6NK8ECMGVBo
+ 8wUA5cr0hid+yZw==
 X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
  fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
-X-Scanned-By: MIMEDefang 3.6 on 10.30.177.95
-X-Mimecast-MFC-PROC-ID: m1DGpbZX5d-va5MKiEvNZLXEI_xfWLtgyKf4wgvZtmE_1792493207
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
+X-Mimecast-MFC-PROC-ID: LLhzOhvdZxmU2yjIi5bhEOIh8v-U6i2bMiB-F1VkUVo_1792493409
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
@@ -174,84 +175,303 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 X-Spam-Status: No, score=-16.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham autolearn_force=no version=4.0.1
+	SPF_PASS autolearn=unavailable autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-From: Markus Armbruster <armbru@redhat.com>
+Define a StructTm QAPI struct in common.json matching the existing
+"struct tm" property wire format (tm_year, tm_mon, tm_mday, tm_hour,
+tm_min, tm_sec as int32).
 
-Since introspection maps all integer types to 'int', we need to skip
-all but one of them.  Instead of filtering by hardcoded name, filter
-out duplicates.
+Convert the two callers (mc146818rtc and spapr_rtc) to use
+object_property_add_qapi() with a standard ObjectPropertyAccessor
+that populates a StructTm and calls the generated visitor.
 
+Remove object_property_add_tm(), object_class_property_add_tm(),
+the TMProperty type, and the property_get_tm() helper from
+qom/object.c, along with their declarations in object.h.
+
+Reviewed-by: Amit Machhiwal <amachhiw@linux.ibm.com>
 Signed-off-by: Markus Armbruster <armbru@redhat.com>
-Reviewed-by: Marc-André Lureau <marcandre.lureau@redhat.com>
+Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 ---
- scripts/qapi/introspect.py | 18 ++++++++++--------
- 1 file changed, 10 insertions(+), 8 deletions(-)
+ hw/ppc/spapr_rtc.c   | 24 +++++++++++++++---
+ hw/rtc/mc146818rtc.c | 22 ++++++++++++++---
+ include/qom/object.h | 29 ----------------------
+ qapi/common.json     | 28 +++++++++++++++++++++
+ qapi/pragma.json     |  1 +
+ qom/object.c         | 69 ----------------------------------------------------
+ 6 files changed, 69 insertions(+), 104 deletions(-)
 
-diff --git a/scripts/qapi/introspect.py b/scripts/qapi/introspect.py
-index 15302ecf155a..dc6f70a6fe9e 100644
---- a/scripts/qapi/introspect.py
-+++ b/scripts/qapi/introspect.py
-@@ -172,7 +172,7 @@ def __init__(self, prefix: str, unmask: bool):
-             ' * QAPI/QMP schema introspection', __doc__)
-         self._unmask = unmask
-         self._schema: Optional[QAPISchema] = None
--        self._trees: List[Annotated[SchemaInfo]] = []
-+        self._trees: Dict[str, Annotated[SchemaInfo]] = {}
-         self._genc.add(mcgen('''
- #include "qemu/osdep.h"
- #include "%(prefix)sqapi-introspect.h"
-@@ -191,13 +191,14 @@ def visit_end(self) -> None:
- extern const QLitObject %(c_name)s;
- ''',
-                              c_name=c_name(name)))
-+        trees = list(self._trees.values())
-         self._genc.add(mcgen('''
- const QLitObject %(c_name)s = %(c_string)s;
- ''',
-                              c_name=c_name(name),
--                             c_string=_tree_to_qlit(self._trees)))
-+                             c_string=_tree_to_qlit(trees)))
-         self._schema = None
--        self._trees = []
-+        self._trees = {}
+diff --git a/hw/ppc/spapr_rtc.c b/hw/ppc/spapr_rtc.c
+index 1f7d2d8f898b..5105cf538f64 100644
+--- a/hw/ppc/spapr_rtc.c
++++ b/hw/ppc/spapr_rtc.c
+@@ -33,6 +33,9 @@
+ #include "migration/vmstate.h"
+ #include "qapi/error.h"
+ #include "qapi/qapi-events-misc.h"
++#include "qapi/qapi-type-infos-common.h"
++#include "qapi/qapi-visit-common.h"
++#include "qapi/visitor.h"
+ #include "qemu/cutils.h"
+ #include "qemu/module.h"
  
-     def _name(self, name: str) -> str:
-         assert self._schema
-@@ -235,7 +236,12 @@ def _gen_tree(self, name: str, mtype: str, obj: Dict[str, object],
-         obj['meta-type'] = mtype
-         if features:
-             obj['features'] = self._gen_features(features)
--        self._trees.append(Annotated(obj, ifcond, comment))
-+        if introspection_name in self._trees:
-+            # Duplicates are possible because
-+            # QAPISchemaBuiltinType.introspection_name() returns 'int'
-+            # for all integer types.  Ignore them.
-+            return
-+        self._trees[introspection_name] = Annotated(obj, ifcond, comment)
+@@ -131,9 +134,23 @@ static void rtas_set_time_of_day(PowerPCCPU *cpu, SpaprMachineState *spapr,
+     rtas_st(rets, 0, RTAS_OUT_SUCCESS);
+ }
  
-     def _gen_enum_member(self, member: QAPISchemaEnumMember
-                          ) -> Annotated[SchemaInfoEnumMember]:
-@@ -268,8 +274,6 @@ def _gen_variant(self, variant: QAPISchemaVariant
+-static void spapr_rtc_qom_date(Object *obj, struct tm *current_tm, Error **errp)
++static void spapr_rtc_qom_date(Object *obj, Visitor *v, const char *name,
++                               void *opaque, Error **errp)
+ {
+-    spapr_rtc_read(SPAPR_RTC(obj), current_tm, NULL);
++    struct tm value;
++    StructTm tm, *tmp = &tm;
++
++    spapr_rtc_read(SPAPR_RTC(obj), &value, NULL);
++
++    tm = (StructTm) {
++        .tm_year = value.tm_year,
++        .tm_mon = value.tm_mon,
++        .tm_mday = value.tm_mday,
++        .tm_hour = value.tm_hour,
++        .tm_min = value.tm_min,
++        .tm_sec = value.tm_sec,
++    };
++    visit_type_StructTm(v, name, &tmp, errp);
+ }
  
-     def visit_builtin_type(self, name: str, info: Optional[QAPISourceInfo],
-                            json_type: str) -> None:
--        if json_type == 'int' and name != 'int':
--            return
-         self._gen_tree(name, 'builtin', {'json-type': json_type})
+ static void spapr_rtc_realize(DeviceState *dev, Error **errp)
+@@ -150,7 +167,8 @@ static void spapr_rtc_realize(DeviceState *dev, Error **errp)
+     rtc_ns = qemu_clock_get_ns(rtc_clock);
+     rtc->ns_offset = host_s * NANOSECONDS_PER_SECOND - rtc_ns;
  
-     def visit_enum_type(self, name: str, info: Optional[QAPISourceInfo],
-@@ -287,8 +291,6 @@ def visit_enum_type(self, name: str, info: Optional[QAPISourceInfo],
-     def visit_array_type(self, name: str, info: Optional[QAPISourceInfo],
-                          ifcond: QAPISchemaIfCond,
-                          element_type: QAPISchemaType) -> None:
--        if element_type.json_type() == 'int' and name != 'intList':
--            return
-         element = self._use_type(element_type)
-         self._gen_tree(name, 'array', {'element-type': element}, ifcond)
+-    object_property_add_tm(OBJECT(rtc), "date", spapr_rtc_qom_date);
++    object_property_add_qapi(OBJECT(rtc), "date", &StructTm_type_info,
++                             spapr_rtc_qom_date, NULL, NULL, NULL);
+ }
  
+ static const VMStateDescription vmstate_spapr_rtc = {
+diff --git a/hw/rtc/mc146818rtc.c b/hw/rtc/mc146818rtc.c
+index ba396435d1af..6010f8587ce0 100644
+--- a/hw/rtc/mc146818rtc.c
++++ b/hw/rtc/mc146818rtc.c
+@@ -42,6 +42,8 @@
+ #include "migration/vmstate.h"
+ #include "qapi/error.h"
+ #include "qapi/qapi-events-misc.h"
++#include "qapi/qapi-type-infos-common.h"
++#include "qapi/qapi-visit-common.h"
+ #include "qapi/visitor.h"
+ #include "trace.h"
+ 
+@@ -854,12 +856,25 @@ static const MemoryRegionOps cmos_ops = {
+     .endianness = DEVICE_LITTLE_ENDIAN,
+ };
+ 
+-static void rtc_get_date(Object *obj, struct tm *current_tm, Error **errp)
++static void rtc_get_date(Object *obj, Visitor *v, const char *name,
++                         void *opaque, Error **errp)
+ {
+     MC146818RtcState *s = MC146818_RTC(obj);
++    struct tm value;
++    StructTm tm, *tmp = &tm;
+ 
+     rtc_update_time(s);
+-    rtc_get_time(s, current_tm);
++    rtc_get_time(s, &value);
++
++    tm = (StructTm) {
++        .tm_year = value.tm_year,
++        .tm_mon = value.tm_mon,
++        .tm_mday = value.tm_mday,
++        .tm_hour = value.tm_hour,
++        .tm_min = value.tm_min,
++        .tm_sec = value.tm_sec,
++    };
++    visit_type_StructTm(v, name, &tmp, errp);
+ }
+ 
+ static void rtc_realizefn(DeviceState *dev, Error **errp)
+@@ -1019,7 +1034,8 @@ static void rtc_class_initfn(ObjectClass *klass, const void *data)
+     device_class_set_props(dc, mc146818rtc_properties);
+     set_bit(DEVICE_CATEGORY_MISC, dc->categories);
+ 
+-    object_class_property_add_tm(klass, "date", rtc_get_date);
++    object_class_property_add_qapi(klass, "date", &StructTm_type_info,
++                                   rtc_get_date, NULL, NULL, NULL);
+ }
+ 
+ static const TypeInfo mc146818rtc_info = {
+diff --git a/include/qom/object.h b/include/qom/object.h
+index e04be4caed57..29cbd84b8d03 100644
+--- a/include/qom/object.h
++++ b/include/qom/object.h
+@@ -2156,35 +2156,6 @@ object_class_property_add_qapi(ObjectClass *klass,
+                                ObjectPropertyRelease *release,
+                                void *opaque);
+ 
+-/**
+- * object_property_add_tm:
+- * @obj: the object to add a property to
+- * @name: the name of the property
+- * @get: the getter or NULL if the property is write-only.
+- *
+- * Add a read-only struct tm valued property using a getter function.
+- * This function will add a property of type 'struct tm'.
+- *
+- * Returns: The newly added property on success, or %NULL on failure.
+- */
+-ObjectProperty *object_property_add_tm(Object *obj, const char *name,
+-                            void (*get)(Object *, struct tm *, Error **));
+-
+-/**
+- * object_class_property_add_tm:
+- * @klass: the object class to add a property to
+- * @name: the name of the property
+- * @get: the getter or NULL if the property is write-only.
+- *
+- * Add a read-only struct tm valued property using a getter function.
+- * This function will add a property of type 'struct tm'.
+- *
+- * Returns: The newly added property on success, or %NULL on failure.
+- */
+-ObjectProperty *object_class_property_add_tm(ObjectClass *klass,
+-                            const char *name,
+-                            void (*get)(Object *, struct tm *, Error **));
+-
+ typedef enum {
+     /* Automatically add a getter to the property */
+     OBJ_PROP_FLAG_READ = 1 << 0,
+diff --git a/qapi/common.json b/qapi/common.json
+index 1352e664b23e..222037ea0b32 100644
+--- a/qapi/common.json
++++ b/qapi/common.json
+@@ -218,3 +218,31 @@
+ ##
+ { 'enum': 'EndianMode',
+   'data': [ 'unspecified', 'little', 'big' ] }
++
++##
++# @StructTm:
++#
++# Broken-down time.  Field semantics match C ``struct tm``.
++#
++# @tm_year: years since 1900
++#
++# @tm_mon: months since January (0-11)
++#
++# @tm_mday: day of the month (1-31)
++#
++# @tm_hour: hours since midnight (0-23)
++#
++# @tm_min: minutes after the hour (0-59)
++#
++# @tm_sec: seconds after the minute (0-59, 60-61 for leap seconds)
++#
++# Since: 11.2
++##
++{ 'struct': 'StructTm',
++  'data': {
++    'tm_year': 'int32',
++    'tm_mon': 'int32',
++    'tm_mday': 'int32',
++    'tm_hour': 'int32',
++    'tm_min': 'int32',
++    'tm_sec': 'int32' } }
+diff --git a/qapi/pragma.json b/qapi/pragma.json
+index 342cedc42e76..9be2819a46bd 100644
+--- a/qapi/pragma.json
++++ b/qapi/pragma.json
+@@ -109,6 +109,7 @@
+         'QKeyCode',                 # send-key, input-sent-event
+         'QapiErrorClass',           # QMP error replies
+         'SshHostKeyCheckMode',      # blockdev-add, -blockdev
++        'StructTm',                 # qom-get of RTC date property
+         'SysEmuTarget',             # query-cpu-fast, query-target
+         'UuidInfo',                 # query-uuid
+         'VncClientInfo',            # query-vnc, query-vnc-servers, ...
+diff --git a/qom/object.c b/qom/object.c
+index 9f9a2abfa08d..cf18880c6c0c 100644
+--- a/qom/object.c
++++ b/qom/object.c
+@@ -2721,75 +2721,6 @@ object_class_property_add_qapi(ObjectClass *klass, const char *name,
+     return prop;
+ }
+ 
+-typedef struct TMProperty {
+-    void (*get)(Object *, struct tm *, Error **);
+-} TMProperty;
+-
+-static void property_get_tm(Object *obj, Visitor *v, const char *name,
+-                            void *opaque, Error **errp)
+-{
+-    TMProperty *prop = opaque;
+-    Error *err = NULL;
+-    struct tm value;
+-
+-    prop->get(obj, &value, &err);
+-    if (err) {
+-        error_propagate(errp, err);
+-        return;
+-    }
+-
+-    if (!visit_start_struct(v, name, NULL, 0, errp)) {
+-        return;
+-    }
+-    if (!visit_type_int32(v, "tm_year", &value.tm_year, errp)) {
+-        goto out_end;
+-    }
+-    if (!visit_type_int32(v, "tm_mon", &value.tm_mon, errp)) {
+-        goto out_end;
+-    }
+-    if (!visit_type_int32(v, "tm_mday", &value.tm_mday, errp)) {
+-        goto out_end;
+-    }
+-    if (!visit_type_int32(v, "tm_hour", &value.tm_hour, errp)) {
+-        goto out_end;
+-    }
+-    if (!visit_type_int32(v, "tm_min", &value.tm_min, errp)) {
+-        goto out_end;
+-    }
+-    if (!visit_type_int32(v, "tm_sec", &value.tm_sec, errp)) {
+-        goto out_end;
+-    }
+-    visit_check_struct(v, errp);
+-out_end:
+-    visit_end_struct(v, NULL);
+-}
+-
+-ObjectProperty *
+-object_property_add_tm(Object *obj, const char *name,
+-                       void (*get)(Object *, struct tm *, Error **))
+-{
+-    TMProperty *prop = g_malloc0(sizeof(*prop));
+-
+-    prop->get = get;
+-
+-    return object_property_add(obj, name, "struct tm",
+-                               get ? property_get_tm : NULL, NULL,
+-                               property_release_data,
+-                               prop);
+-}
+-
+-ObjectProperty *
+-object_class_property_add_tm(ObjectClass *klass, const char *name,
+-                             void (*get)(Object *, struct tm *, Error **))
+-{
+-    TMProperty *prop = g_malloc0(sizeof(*prop));
+-
+-    prop->get = get;
+-
+-    return object_class_property_add(klass, name, "struct tm",
+-                                     get ? property_get_tm : NULL,
+-                                     NULL, NULL, prop);
+-}
+ 
+ static char *object_get_type(Object *obj, Error **errp)
+ {
 
 -- 
 2.56.0.116.g6de20f6092dc
