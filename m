@@ -1,148 +1,140 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 10855606A31A
-	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Oct 2026 19:11:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D3135606A31A
+	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Oct 2026 19:36:22 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=PovsFuz9;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=kamAJRwh
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=KEFA6U7r;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=X+kAnYg/
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xJFEc-0004mY-Q8; Tue, 20 Oct 2026 15:10:54 -0400
+	id 1xJFdA-00051O-FP; Tue, 20 Oct 2026 15:36:16 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <pierrick.bouvier@oss.qualcomm.com>)
- id 1xJFEO-0004hf-8B
- for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 15:10:41 -0400
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1xJFd9-00051G-5q
+ for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 15:36:15 -0400
 Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <pierrick.bouvier@oss.qualcomm.com>)
- id 1xJFEM-0006dF-FJ
- for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 15:10:39 -0400
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1xJFd6-0000EM-SA
+ for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 15:36:14 -0400
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 69KI77nJ2385044
- for <qemu-riscv@nongnu.org>; Tue, 20 Oct 2026 19:10:35 GMT
+ 69KJI3dX1508779
+ for <qemu-riscv@nongnu.org>; Tue, 20 Oct 2026 19:36:09 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- ktxyaH7DNIkud1mcxP3wvB9yisQeqxyQelx7tbu0Y7w=; b=PovsFuz9PaFo5gRm
- bZb2vs0D9t/92GODieD4JZeZzGRpG1uLIvahUWZaPS2M69NH41sX6QLt2S6/bfNd
- r+mtKSGW96XPN46KDmjJYKh/XaO9a7XRYFghap2rFUL/OuYzevPcRVK9ys2vmARd
- xC+IhQjfGqT/rjrRs6XTk0xnLx869FqFwpwch4hiJK/03Je16jFm5H9FmDYRL6hd
- yNcohT+GzHkTgX4O8IQFJch5ebB03UH+WEj9CGyMC1nZpAy2U/2d/3X5WS+CQAbQ
- l/LdZjnCpgrHJQBVr4ywJzn0pplQNDwIT4caerMPfbo+m+p6IA/z8lJyXoBBNng6
- q/JIvQ==
-Received: from mail-dy1-f199.google.com (mail-dy1-f199.google.com
- [74.125.82.199])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hdw5n44b3-1
+ Zm1GplTLJCFEHQBBO5u9p6Q4G5v5I2vGYCddqLp2fgk=; b=KEFA6U7rwFiUxbSU
+ 0/52t6VsuONpMOyBqshM6s7RyoxyeeUJSG0zXBzkXFGnijEmPeaac2q+kM4Q0L4x
+ aaqYFD2EZ02NE+9kn7uw4rVMbwreGa0AgUbmqwH8zqNDKIGe/DiZyzl1byuZM3ul
+ Q4CWl1vqO98NyzTu4QuE/nhuTu7UdY2mfNeHOlD5eShuDXOtxIfRPIBkQ//Amcmu
+ PHajFuU6ISoL06VzH0u8y61PRyjrCjC3v8cIRFlGbdkEYovHh90N25nWCIAyMiuS
+ oUJ3laAf8SaBHOy9XZqvG7W91YbELaH+CR1RLhTMFDAxeVCSeq12x2zT+6W4UQKA
+ OTw5bg==
+Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com
+ [209.85.222.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4heeb98205-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Tue, 20 Oct 2026 19:10:35 +0000 (GMT)
-Received: by mail-dy1-f199.google.com with SMTP id
- 5a478bee46e88-33c35f5ca6cso7172889eec.1
- for <qemu-riscv@nongnu.org>; Tue, 20 Oct 2026 12:10:34 -0700 (PDT)
+ for <qemu-riscv@nongnu.org>; Tue, 20 Oct 2026 19:36:09 +0000 (GMT)
+Received: by mail-qk1-f199.google.com with SMTP id
+ af79cd13be357-93f3969a2a7so419885a.2
+ for <qemu-riscv@nongnu.org>; Tue, 20 Oct 2026 12:36:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1792523434; x=1793128234; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1792524967; x=1793129767; darn=nongnu.org;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=ktxyaH7DNIkud1mcxP3wvB9yisQeqxyQelx7tbu0Y7w=;
- b=kamAJRwhYDSyeNZjjgED7zORJXVOYGWdv7AXeBoyQvEpZ1bpb7yznhbHBMlK2KbeDg
- bFiQUssfCRkTyIuzm5XONvwUZ43hy4w/+uiqvmCPGxz0vP0o35j5PkvOWevJyJXKHNw+
- b+merU1/A6XNCYk1a1ESAY8Odj0DSTjBuhwVao5PJqXEnir5A2Ybn0Zv5RU1vPbKyut3
- ddOB5otqzQT9FhsxFiNt2WSHc7Bh5zcRbcwGzTF+16chfH3zsc4ndd2uL6GaPWMV/8p1
- f20DKSgDN05koLT+sMikWxX/G9K7psYhAXwLJCBtslxrw0EllNg+V18rbBCZua1pcO6G
- ulWg==
+ bh=Zm1GplTLJCFEHQBBO5u9p6Q4G5v5I2vGYCddqLp2fgk=;
+ b=X+kAnYg/psOqAjKhlxl+MVxjlGGeRGUX89xqlYZmi88a8zW52m6uhAsNiY2Y/MvkaU
+ EV1RH5N45ZLJAcfikRM5sI7GRWpqUL4VsGzEpgn1gSkB9CnO0igWfZfZsEMVH8vvOxAO
+ U5Esrh0JYefhZsgymBcLAnRtwwLBZVY6rJgs+qVwc6WmbTaOtIluUtCTs8kQd12JgyPS
+ QWrz4ehkcS2ju6NuLu+rmw6+PZ75oEV7E6td1fJPFGtzRv5f7RgafN9sZO7TWbRS3qlw
+ bFDjcvAU+77ommZoQVLkq1fHT23pMnfKTjuk+kMbCy1fRSbqjokdi7ITrZsd1Em69Q8O
+ uXfQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792523434; x=1793128234;
+ d=1e100.net; s=20260707; t=1792524967; x=1793129767;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=ktxyaH7DNIkud1mcxP3wvB9yisQeqxyQelx7tbu0Y7w=;
- b=ihs9TN/vP7iDOKtqxxYVWSs6fWIoay8Sip0ZuS7z+IOvUFV3nAnrGkqgM0x174iPAw
- y2fCZ8m6ouynffGXXyOiBaxjeFOKRVfg72CafD+0mk2fkhmoKxbK/xORwPr0D+fB3Jwg
- TTzO3ZmpIi7MLIWTWBph4FFLt6B5c6X51JoeK2bAqFtPE81PbyxI2aeQa88InOxiUJ6h
- cQX0Jaw1lj8te9RxxXpQiiEBDjpqrwAlgw2pNPtEqADV6WHFI+twCzLZEB1hSxm/0xCi
- ug2Ip5M8waYt+tswoRzqCopuzxWT0Jg7aaDQISu0qKxlLknCuf2lfWxWTpEj8XM0GVBf
- /Yrw==
+ bh=Zm1GplTLJCFEHQBBO5u9p6Q4G5v5I2vGYCddqLp2fgk=;
+ b=BmaHhyVY/JHyvjatth6/1LRwPSC6u2OI+vxECxNgD5mwks3NMHxyn4Rv26/BNNbiWg
+ 7nL5QARKcIQeFBA8Tk2u/oDiIW+YUCHUX6Yl4N6+uYN0rCKMMu6YP+pjmVCC5eSdXb2r
+ uzHXeUuCbzYmDbJmG5Xj2wyvaAZEjWBg+yD6U+N1MYs9OCpxGfNPw9c6pORQ7Dv+mep8
+ r5mfINCWyB6AASi91bVkLbwzSHwawm8F19yh0VRBjMTbIfyTIs4yXmtOwpwfWtVLBQOC
+ RuHiWIdwKpuY2IlFvikHJRz0lB73LT5FT9Zs/0eS52Z6wiR4zVB1Znswb1NpM9CJjiDC
+ gc1g==
 X-Forwarded-Encrypted: i=1;
- AKwUvBzBfmLvV3mG6Z4ddzfKmgr9u+E7CQIIGvJwHvoVXoyd6pi4bkCa7EGCZ8DK+Ow6XiI9koVx3k6XrZW8@nongnu.org
-X-Gm-Message-State: AFq9FYKrSS0OZ8zhHeaV0ChoNeosmFucFISjXYG2BayFfdbQICdHxeUw
- zBrMryPDXDmxinJIQY3Z+/1Xwyygc5acXYu8lytmTqW+FCXOZN+7hFOloW3RIohevhXGOfcECXU
- vFx7PTG4tTspu+d820iAdbaMx5H/9iG+TnKY0cfSlJX/qOzhMWCTXdA7kVg==
-X-Gm-Gg: AYBFou2deM6syj02Vj+/PMBeD+FWlGu018oELjsSbBpN/pU1Sxo9TPWreBCMeozzLda
- OLaw1/u2men9aDuzOhdP+v4TXepB/Wqxbbme1scEwxmNRc21TEs98QW4fZyVY888SRp5SRoR+iT
- FRwKQfDJTA/LtPXPz3bN9y8tkoIK5/2xXtAe3sCvsaLktBhRst9Zy7JDz2zTXVSkwd5yyPqXm6+
- scu0AOlbG1L8jA5PGqxCXaV4J/GARA7dIfPIgrpx6SyChziCVitWPu5kVnindzIQ4hM2VsyiIOc
- eIXcC2lhMYeaZRVA/FBoT9M4IVGp68dhb0ksJ8iik+siFybF51Yk/3ScJ1T/Ygcc6At1qZHvn6o
- mmMvCmSqYkYIgAOhul7g39djILgNUKD0rVVwlB6FxqsS2WP+WcFq5CZxcxt5C9aztGp9ROw==
-X-Received: by 2002:a05:701b:450f:10b0:185:33ab:4d55 with SMTP id
- a92af1059eb24-18533ab4e84mr15803612c88.29.1792523433911; 
- Tue, 20 Oct 2026 12:10:33 -0700 (PDT)
-X-Received: by 2002:a05:701b:450f:10b0:185:33ab:4d55 with SMTP id
- a92af1059eb24-18533ab4e84mr15803583c88.29.1792523433225; 
- Tue, 20 Oct 2026 12:10:33 -0700 (PDT)
-Received: from [192.168.1.199] (192-80-163-190.dyn.novuscom.net.
- [192.80.163.190]) by smtp.gmail.com with ESMTPSA id
- a92af1059eb24-1903d87ab1bsm602543c88.21.2026.10.20.12.10.32
+ AKwUvBzfzpkMfeVmX9SQiGxgoxcpnV5G/qaIFp1d30SZUm0Di+9yLbngCCF4rED3rsqwCHFbBz0UxzZcxtlf@nongnu.org
+X-Gm-Message-State: AFq9FYJMf/N+biUwbhEqG6xe0xzo3rxfScuowdVDjhvGE5AI319l6+1y
+ htYyJLQlSlQbwvgzTQTKzrEqwkjbbj5Pb3AvCHEFO4DYREehRSrmvDoC3lN8tsRLY18K2tzAcAi
+ VHxCa1p9KdvIgEqUxZNdSS0G1dm1+cmqxtFyCuE8kkIoCMEre4pHijWdN7w==
+X-Gm-Gg: AYBFou06ZZhppiBd22xcmYevDAIJ49UpSdFWtTM+UOgfoIdQKKdM51h6mB5q1H875VB
+ 9fLT5qL1Ry3s1nZpFV+kKG9HqGLPEgniFJKYEEf2lyeMk/yd3u6yA8z8PYs6+eP47xMhGalXsE1
+ EVnPAA2Kb2q5l5GVFqRd5Fr4yFZTrYJvrb2tOSYdsI2Gxv9Ww6TAXHf8cj1oLbc+eArtkKM3WoK
+ 7AEjmnyx9Ie1cH9CSFTOmmX64yBTwISA9MSIe2Zuar/CoKOP7g0rUvq7rRb770wooxDdZizO5s3
+ HSDqz6DfHxT6KDXffhqqb41A9UxDdshEtz+AGPe8p6aJFyRnV9+G8pfCwidXrPlGWeJ1wP5IEqc
+ GHcyZSGu8B5YCBVAUSL0roJOzsZ+4sV/AtwBfVyLrfAv4Oeu85LzLB7YJBas5Fcf4DGuU6AcL
+X-Received: by 2002:a05:620a:1706:b0:93f:2940:1ff0 with SMTP id
+ af79cd13be357-93f57f05b89mr48788885a.24.1792524966899; 
+ Tue, 20 Oct 2026 12:36:06 -0700 (PDT)
+X-Received: by 2002:a05:620a:1706:b0:93f:2940:1ff0 with SMTP id
+ af79cd13be357-93f57f05b89mr48784885a.24.1792524966318; 
+ Tue, 20 Oct 2026 12:36:06 -0700 (PDT)
+Received: from [192.168.68.101] (200-204-190-237.dsl.telesp.net.br.
+ [200.204.190.237]) by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-93f56dd0022sm63039385a.20.2026.10.20.12.36.04
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 20 Oct 2026 12:10:32 -0700 (PDT)
-Message-ID: <116ac62b-3bb8-4dc1-a136-4452a1c1946d@oss.qualcomm.com>
-Date: Tue, 20 Oct 2026 12:10:31 -0700
+ Tue, 20 Oct 2026 12:36:05 -0700 (PDT)
+Message-ID: <e72c6610-1a05-4766-aa12-2104ee5836af@oss.qualcomm.com>
+Date: Tue, 20 Oct 2026 16:36:02 -0300
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 17/27] target/riscv: Register CPUClass::exception_name()
- handler
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
- qemu-devel@nongnu.org
-Cc: Richard Henderson <richard.henderson@linaro.org>,
- Paolo Bonzini <pbonzini@redhat.com>, Peter Maydell
- <peter.maydell@linaro.org>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
- <liwei1518@gmail.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org
-References: <20261007094516.75732-1-philmd@oss.qualcomm.com>
- <20261007094516.75732-18-philmd@oss.qualcomm.com>
-From: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
+Subject: Re: [PATCH v2 1/2] hw/riscv/riscv-iommu: serialize IOATC accesses
+To: Tan Chi <tanchi25@mails.ucas.ac.cn>, qemu-devel@nongnu.org
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
+ qemu-riscv@nongnu.org
+References: <20261017143943.15521-1-tanchi25@mails.ucas.ac.cn>
+ <20261017144533.15610-1-tanchi25@mails.ucas.ac.cn>
+From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Content-Language: en-US
-In-Reply-To: <20261007094516.75732-18-philmd@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: d7bgTIbt7hfRN0KSg6Odd28Q3ODF0UQq
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIwMDA3NiBTYWx0ZWRfXzl4m9Cl0Go7r
- LIXJ8IiEIM8UB3M4Ul7Uv/h2IGvL4WEFGepS8mFwmVaytI3GAQVc2ZFhZ+JzsDwxZukocRinJv5
- Er/z6p1W03kIUvY4FXDmZ2YTGBJIwcs=
-X-Proofpoint-ORIG-GUID: d7bgTIbt7hfRN0KSg6Odd28Q3ODF0UQq
-X-Authority-Analysis: v=2.4 cv=A5z5rKWG c=1 sm=1 tr=0 ts=6ad7bcab cx=c_pps
- a=cFYjgdjTJScbgFmBucgdfQ==:117 a=9852oil1ID9t5xBSyQ/BEA==:17
+In-Reply-To: <20261017144533.15610-1-tanchi25@mails.ucas.ac.cn>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIwMDA3OCBTYWx0ZWRfX8uw8lYLDOV6x
+ 8d2zJfpPIXGUPfNr6rDqTSUwAj5JEX1MKauM96I5vxf9DSsnslD71z/6bqi6eYX3iow2NtsQrJv
+ gN+JNWohGjBB6N2ucLEtgpJ2DMMlw9A=
+X-Proofpoint-GUID: OLp4xxjQEHnjp47B_Lz53Pdx9dgaWBKQ
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIwMDA3OCBTYWx0ZWRfX7Pc9U8LvXUKe
+ +/BkiuDiKbCME7ZFXZojV5Z4pQEhXC2NIjwQJnou5UC0emSiiSteVbOu5bKE25kgFTmIw26d+2n
+ IDv/6cIlaWpoDhVgG0T8/pGHGKobXsETyicR0sWN7INOrJdk5vENCrv8/p5E0aEoaSeodTBcvIc
+ iOfjOOWNKKC9M3G04KG6oYpyavBgPgEHXWu1WWEc0GWpZyTYkex6yVQLfmuhCHE6f+vU93efczx
+ bLFLjytvcFXLB7xFmzD8D7Wtu5bj/r5kFVQHt6IGUmRci1QMBzH68hj2ZkF2iVqdXvpsE+KeuHW
+ J4lGZtb16rwra81MHB5sde89Pq/K8xSXEhhfFhOX7Yihl02neCMVRJjQuKWVwo2t9WZdyyNIQWS
+ jIDOyJD2hxT4g3odk5K9fBmjH1bJB98gWwn2BqRyqTtfgIWMnd5Cmx/weL5D0qxWt2ij+rICnmz
+ tsplCFUD+caiqf3irgA==
+X-Authority-Analysis: v=2.4 cv=R42WitRX c=1 sm=1 tr=0 ts=6ad7c2a9 cx=c_pps
+ a=HLyN3IcIa5EE8TELMZ618Q==:117 a=QmVDPCq3bE4LYXGvZ20s0w==:17
  a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
- a=EUspDBNiAAAA:8 a=tTG0r3Upy50XSGkOqccA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=scEy_gLbYbu1JhEsrz4S:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIwMDA3NiBTYWx0ZWRfX7jpz7fkrScxg
- CVRP8/84IYXuyT/Lt8hcWejs7SLlHxRsx9hbghgwvQQNcBIeqq4JqK6XDsKk7HyJimbXRU2G7MQ
- PhB/OFEuquKaca6SleUnsEnKyQHIymZ+865MeF1uBzRMP9U3TWIC9I1ERarY3i12u++EwxuLObK
- FmuHW4B0q9fqxYO9RlAGqau7wrx65Z0OW/hEp4kxZoXhF5qqWj4gKYErppM1krZM4129WTcWsmG
- Bth2NOLDeUPRUd9bNlmcFgvQ/0yLg/fnouPAKF57ooeaEcEFgj5Q0Gfzdod+WZNnGzAmzHM4LNn
- 1UYlFEcTTk7cX5LWTP6xrPsyuLOkAREQVwST67cRjRHpG1TyyEZkGLFmaypgT/+Vr2t2KDn2COm
- 6FRPCMVWLkWLIj9ipKq9UR93f7dBsuFiLsUJzoYnolaiOjgJFiY8PID53uKZC5iKzfVF8tsQ/nZ
- PFl9Q98pwNlBlHFeRug==
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
+ a=EUspDBNiAAAA:8 a=JNyCrnv5xJobtWStvckA:9 a=QEXdDO2ut3YA:10
+ a=bTQJ7kPSJx9SKPbeHEYW:22
+X-Proofpoint-ORIG-GUID: OLp4xxjQEHnjp47B_Lz53Pdx9dgaWBKQ
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-20_03,2026-10-19_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 malwarescore=0 adultscore=0 priorityscore=1501 suspectscore=0
- phishscore=0 spamscore=0 bulkscore=0 impostorscore=0 lowpriorityscore=0
+ bulkscore=0 lowpriorityscore=0 priorityscore=1501 suspectscore=0 spamscore=0
+ malwarescore=0 adultscore=0 clxscore=1015 impostorscore=0 phishscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610200076
+ reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610200078
 Received-SPF: pass client-ip=205.220.180.131;
- envelope-from=pierrick.bouvier@oss.qualcomm.com;
- helo=mx0b-0031df01.pphosted.com
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
 X-Spam_score_int: -27
 X-Spam_score: -2.8
 X-Spam_bar: --
@@ -164,24 +156,189 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,USER_AGENT_SANE_1 autolearn=unavailable autolearn_force=no
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
 	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 10/7/2026 2:45 AM, Philippe Mathieu-Daudé wrote:
-> Factor riscv_excp_name() and riscv_intr_name() out of
-> riscv_cpu_get_trap_name(). Register riscv_excp_name()
-> as the CPUClass::exception_name() handler, so the common
-> exception logging can resolve RISCV exception codes to names.
-> 
-> Signed-off-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
-> ---
->  target/riscv/cpu.h           |  1 +
->  target/riscv/cpu.c           | 29 ++++++++++++++++++-----------
->  target/riscv/tcg/op_helper.c |  2 +-
->  3 files changed, 20 insertions(+), 12 deletions(-)
-> 
 
-Reviewed-by: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
+
+On 10/17/2026 11:45 AM, Tan Chi wrote:
+> The IOATC currently keeps references to the hash table while cached
+> entries are being used. The following change will remove matching
+> entries during invalidation, which requires cached entry lifetime to be
+> protected explicitly.
+> 
+> Add an iot_lock to serialize IOATC lookup, update, invalidation, and
+> reset operations. Copy the fields needed by the translation path while
+> holding the lock, then release it before updating the IOMMUTLBEntry.
+> 
+> Keep the page-table walk outside the critical section so the lock is not
+> held across potentially expensive memory accesses.
+> 
+> Signed-off-by: Tan Chi <tanchi25@mails.ucas.ac.cn>
+> ---
+
+Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+
+>   hw/riscv/riscv-iommu.c | 53 ++++++++++++++++++++++++------------------
+>   hw/riscv/riscv-iommu.h |  1 +
+>   2 files changed, 32 insertions(+), 22 deletions(-)
+> 
+> diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
+> index 323a041b4a..bd34c72868 100644
+> --- a/hw/riscv/riscv-iommu.c
+> +++ b/hw/riscv/riscv-iommu.c
+> @@ -1682,7 +1682,7 @@ static void riscv_iommu_iot_inval_gscid_pscid_iova(gpointer key, gpointer value,
+>       }
+>   }
+>   
+> -/* caller should keep ref-count for iot_cache object */
+> +/* caller must hold iot_lock */
+>   static RISCVIOMMUEntry *riscv_iommu_iot_lookup(RISCVIOMMUContext *ctx,
+>       GHashTable *iot_cache, hwaddr iova, RISCVIOMMUTransTag transtag)
+>   {
+> @@ -1695,27 +1695,26 @@ static RISCVIOMMUEntry *riscv_iommu_iot_lookup(RISCVIOMMUContext *ctx,
+>       return g_hash_table_lookup(iot_cache, &key);
+>   }
+>   
+> -/* caller should keep ref-count for iot_cache object */
+> -static void riscv_iommu_iot_update(RISCVIOMMUState *s,
+> -    GHashTable *iot_cache, RISCVIOMMUEntry *iot)
+> +/* caller must hold iot_lock */
+> +static void riscv_iommu_iot_update(RISCVIOMMUState *s, RISCVIOMMUEntry *iot)
+>   {
+>       if (!s->iot_limit) {
+>           return;
+>       }
+>   
+>       if (g_hash_table_size(s->iot_cache) >= s->iot_limit) {
+> -        iot_cache = g_hash_table_new_full(riscv_iommu_iot_hash,
+> -                                          riscv_iommu_iot_equal,
+> -                                          g_free, NULL);
+> -        g_hash_table_unref(qatomic_xchg(&s->iot_cache, iot_cache));
+> +        GHashTable *old_cache = s->iot_cache;
+> +        s->iot_cache = g_hash_table_new_full(riscv_iommu_iot_hash,
+> +                                             riscv_iommu_iot_equal,
+> +                                             g_free, NULL);
+> +        g_hash_table_unref(old_cache);
+>       }
+> -    g_hash_table_add(iot_cache, iot);
+> +    g_hash_table_add(s->iot_cache, iot);
+>   }
+>   
+>   static void riscv_iommu_iot_inval(RISCVIOMMUState *s, GHFunc func,
+>       uint32_t gscid, uint32_t pscid, hwaddr iova, RISCVIOMMUTransTag transtag)
+>   {
+> -    GHashTable *iot_cache;
+>       RISCVIOMMUEntry key = {
+>           .tag = transtag,
+>           .gscid = gscid,
+> @@ -1723,9 +1722,9 @@ static void riscv_iommu_iot_inval(RISCVIOMMUState *s, GHFunc func,
+>           .iova  = PPN_DOWN(iova),
+>       };
+>   
+> -    iot_cache = g_hash_table_ref(s->iot_cache);
+> -    g_hash_table_foreach(iot_cache, func, &key);
+> -    g_hash_table_unref(iot_cache);
+> +    qemu_mutex_lock(&s->iot_lock);
+> +    g_hash_table_foreach(s->iot_cache, func, &key);
+> +    qemu_mutex_unlock(&s->iot_lock);
+>   }
+>   
+>   static RISCVIOMMUTransTag riscv_iommu_get_transtag(RISCVIOMMUContext *ctx)
+> @@ -1747,15 +1746,14 @@ static int riscv_iommu_translate(RISCVIOMMUState *s, RISCVIOMMUContext *ctx,
+>   {
+>       RISCVIOMMUTransTag transtag = riscv_iommu_get_transtag(ctx);
+>       RISCVIOMMUEntry *iot;
+> -    IOMMUAccessFlags perm;
+> +    IOMMUAccessFlags perm = IOMMU_NONE;
+>       bool enable_pid;
+>       bool enable_pri;
+> -    GHashTable *iot_cache;
+> +    hwaddr phys = 0;
+>       int fault;
+>   
+>       riscv_iommu_hpm_incr_ctr(s, ctx, RISCV_IOMMU_HPMEVENT_URQ);
+>   
+> -    iot_cache = g_hash_table_ref(s->iot_cache);
+>       enable_pri = (iotlb->perm == IOMMU_NONE) &&
+>                    (ctx->tc & RISCV_IOMMU_DC_TC_EN_PRI);
+>       enable_pid = (ctx->tc & RISCV_IOMMU_DC_TC_PDTV);
+> @@ -1771,10 +1769,15 @@ static int riscv_iommu_translate(RISCVIOMMUState *s, RISCVIOMMUContext *ctx,
+>           }
+>       }
+>   
+> -    iot = riscv_iommu_iot_lookup(ctx, iot_cache, iotlb->iova, transtag);
+> -    perm = iot ? iot->perm : IOMMU_NONE;
+> +    qemu_mutex_lock(&s->iot_lock);
+> +    iot = riscv_iommu_iot_lookup(ctx, s->iot_cache, iotlb->iova, transtag);
+> +    if (iot) {
+> +        perm = iot->perm;
+> +        phys = iot->phys;
+> +    }
+> +    qemu_mutex_unlock(&s->iot_lock);
+>       if (perm != IOMMU_NONE) {
+> -        iotlb->translated_addr = PPN_PHYS(iot->phys);
+> +        iotlb->translated_addr = PPN_PHYS(phys);
+>           iotlb->addr_mask = ~TARGET_PAGE_MASK;
+>           iotlb->perm = perm;
+>           fault = 0;
+> @@ -1805,12 +1808,12 @@ static int riscv_iommu_translate(RISCVIOMMUState *s, RISCVIOMMUContext *ctx,
+>           iot->pscid = get_field(ctx->ta, RISCV_IOMMU_DC_TA_PSCID);
+>           iot->perm = iotlb->perm;
+>           iot->tag = transtag;
+> -        riscv_iommu_iot_update(s, iot_cache, iot);
+> +        qemu_mutex_lock(&s->iot_lock);
+> +        riscv_iommu_iot_update(s, iot);
+> +        qemu_mutex_unlock(&s->iot_lock);
+>       }
+>   
+>   done:
+> -    g_hash_table_unref(iot_cache);
+> -
+>       if (enable_pri && fault) {
+>           struct riscv_iommu_pq_record pr = {0};
+>           if (enable_pid) {
+> @@ -2674,6 +2677,7 @@ static void riscv_iommu_instance_init(Object *obj)
+>       s->iot_cache = g_hash_table_new_full(riscv_iommu_iot_hash,
+>                                            riscv_iommu_iot_equal,
+>                                            g_free, NULL);
+> +    qemu_mutex_init(&s->iot_lock);
+>   
+>       s->iommus.le_next = NULL;
+>       s->iommus.le_prev = NULL;
+> @@ -2690,6 +2694,8 @@ static void riscv_iommu_instance_finalize(Object *obj)
+>   
+>       g_hash_table_unref(s->ctx_cache);
+>       g_hash_table_unref(s->iot_cache);
+> +
+> +    qemu_mutex_destroy(&s->iot_lock);
+>   }
+>   
+>   static void riscv_iommu_realize(DeviceState *dev, Error **errp)
+> @@ -2850,7 +2856,10 @@ void riscv_iommu_reset(RISCVIOMMUState *s)
+>       riscv_iommu_reg_set32(s, RISCV_IOMMU_REG_IPSR, 0);
+>   
+>       g_hash_table_remove_all(s->ctx_cache);
+> +
+> +    qemu_mutex_lock(&s->iot_lock);
+>       g_hash_table_remove_all(s->iot_cache);
+> +    qemu_mutex_unlock(&s->iot_lock);
+>   }
+>   
+>   static const Property riscv_iommu_properties[] = {
+> diff --git a/hw/riscv/riscv-iommu.h b/hw/riscv/riscv-iommu.h
+> index 7c470ba084..403d10b321 100644
+> --- a/hw/riscv/riscv-iommu.h
+> +++ b/hw/riscv/riscv-iommu.h
+> @@ -73,6 +73,7 @@ struct RISCVIOMMUState {
+>   
+>       GHashTable *iot_cache;          /* IO Translated Address Cache */
+>       unsigned iot_limit;             /* IO Translation Cache size limit */
+> +    QemuMutex iot_lock;
+>   
+>       /* MMIO Hardware Interface */
+>       MemoryRegion regs_mr;
+
 
