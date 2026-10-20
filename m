@@ -1,123 +1,166 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 55951606A31F
-	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Oct 2026 11:13:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 88069606A31B
+	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Oct 2026 11:13:44 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=pH4snO+n
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=CwMp0C/i
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xJ7Jt-0004Ku-1J; Tue, 20 Oct 2026 06:43:49 -0400
+	id 1xJ7Q3-0006G0-H1; Tue, 20 Oct 2026 06:50:11 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1xJ7Jf-0004DN-Iw
- for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:43:35 -0400
-Received: from mail-wr1-x429.google.com ([2a00:1450:4864:20::429])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1xJ7JW-0004Kt-Re
- for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:43:35 -0400
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-48e09aa5264so1843792f8f.2
- for <qemu-riscv@nongnu.org>; Tue, 20 Oct 2026 03:43:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1792493005; x=1793097805; darn=nongnu.org;
- h=content-transfer-encoding:content-type:mime-version:references
- :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=xpvK8hxiiby7P5GAABphDAJ86oAgF7lyRnWJr7JT/sM=;
- b=pH4snO+n+tK8npEh5Hcs3JcM0q1mTOJ9zdmziUOKQ3QBteryHWf/cF8v5QFC3V2pzf
- 71k8E7OOqxh7zbAuxXK+RVTTFUH7z5MnevEmwSbsofHTfL91V0Hixo8cniQHClyZB5hF
- Tk4NBcCah652FlMstMgCsurf8DuY7V5XtvUzpT8XZ4uDVQwqVbfyH7t5AITo7yHPyGSZ
- srxrhp3u44+N21zHBy2Hy4WkOI2hEAof70OQ7aBGtsdqUnU8AitYOvjZhXr5iyI8S7L0
- ykwIRX0ucApkb5gyy/cKnczdvJW+2yn4Wom4joTGwGdEq3OR6Dyr3jbEJqYUDM6bAThx
- h9nQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792493005; x=1793097805;
- h=content-transfer-encoding:content-type:mime-version:references
- :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=xpvK8hxiiby7P5GAABphDAJ86oAgF7lyRnWJr7JT/sM=;
- b=BMDCK0t7JH5Zl8hizS/fddJ+0OqIqSoBqgFDJ1t6SB38Ycyhc40a2IdFAivP8qwCut
- tK+iUUwMNIN6yLJviI27K3OYuJ+JfYMkGbC4ALNUnFoRTFDGIXRdx11pYGQEgvCZ3owz
- YgXsuQUkpknTJwof853Oy2FPYqLd4woERWnd3gBsb2TdqGTiBsszKnQv7ejzlujKT+fI
- eWx/TWHOfbr1J+6f1oWMps2u5Az3N3LG2GgeInuuBFEFrLc1Gsc57DrZ/svqTZQ5mWYv
- XDFimKtu2rr5bFuRJYKTKhzsCYNURNGrpldoSv62yBlu6UfoXfWyyUk5YRwq2HEELlxK
- 5fLQ==
-X-Forwarded-Encrypted: i=1;
- AKwUvBwHkU85HszGO6ZFLGNSSMp8CkNcV11a48D/6TSCVzBEPgR16mzUoOwofdoIvcRbfDLOCfy+hFdPsgXx@nongnu.org
-X-Gm-Message-State: AFq9FYKSzB+ydYmzYH6K1uwKpt3worSJOP6Qbwf+zo+4gOtg9/BuWfwz
- mVAWkxtarlj9Xxw9IO/qfA2wmWO2m+QT0oXCQD8nrzlELN6IaaTYu2XXcVhD6d7Kb0g=
-X-Gm-Gg: AYBFou0gFuHd+fghlpuG40i/N/R4clPevDinX/Z5TaYUOTa64874L4qrkeoOJLohCD5
- QISMSOPl+lmH0efRkffRGgnviLQ88vFX3vPf+MKhQLf/eK9n7TcWBOwi0iSiegVJkCISpbfPoza
- uzLibARaJeHLn1mG05w3uo7lsGIgPXK17mqh2Fb+WVwh/kw/Mlg9DL7vfDuAoooz3c+HwxTjsLU
- Ot+m1U0I+QH0wTtE1wi5ToLMRkoJa39/1NxNeVG9RI0VhnSGNDSsIpYwdjQSHV4LffZI1sM9A+B
- YmZWi7f+uHwHcFR23FcM2vTURu8BdOpw30Mwa5OS4ENjDcdsCoKH26aevkk0J7vnaEUz8y5sY0m
- WSyvgLaBof0F8NDlyQJH7W0QWl1F+6VPg1jknNjSEICfb5mMV0+qIa6CZS1qbsLEry4NXwAUhym
- q6ylkYH9mgcdArwHR+cKDJmuQG2EtKUv2pbImaX46DselWU6djN8omZHNeHMTNNd+DBr3GLnk=
-X-Received: by 2002:a05:6000:2388:b0:48d:dec7:974c with SMTP id
- ffacd0b85a97d-48e07985764mr20442510f8f.7.1792493005061; 
- Tue, 20 Oct 2026 03:43:25 -0700 (PDT)
-Received: from draig.lan ([185.124.0.158]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48e1d818237sm5338778f8f.27.2026.10.20.03.43.22
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 20 Oct 2026 03:43:24 -0700 (PDT)
-Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id CBA755FA65;
- Tue, 20 Oct 2026 11:43:20 +0100 (BST)
-From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: qemu-devel@nongnu.org
-Cc: Bibo Mao <maobibo@loongson.cn>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,
- Ilya Leoshkevich <iii@linux.ibm.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Eric Farman <farman@linux.ibm.com>,
- Song Gao <17746591750@163.com>, Harsh Prateek Bora <harshpb@linux.ibm.com>,
- David Hildenbrand <david@kernel.org>, Bernhard Beschow <shentey@gmail.com>,
- Halil Pasic <pasic@linux.ibm.com>, Nicholas Piggin <npiggin@gmail.com>,
- Paul Durrant <paul@xen.org>,
- =?UTF-8?q?Bj=C3=B6rn=20Walk?= <bwalk@linux.ibm.com>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, qemu-s390x@nongnu.org,
- David Woodhouse <dwmw2@infradead.org>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-ppc@nongnu.org,
- Marcelo Tosatti <mtosatti@redhat.com>, kvm@vger.kernel.org,
- qemu-arm@nongnu.org, linux-edac@vger.kernel.org,
- Glenn Miles <milesg@linux.ibm.com>, Chao Liu <chao.liu@processmission.com>,
- Cornelia Huck <cohuck@redhat.com>, Gautam Menghani <gautam@linux.ibm.com>,
- Xianglai Li <lixianglai@loongson.cn>,
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
- Chinmay Rath <rathc@linux.ibm.com>, "Michael S. Tsirkin" <mst@redhat.com>,
- Matthew Rosato <mjrosato@linux.ibm.com>,
- Amit Machhiwal <amachhiw@linux.ibm.com>, Zhao Liu <zhao1.liu@intel.com>,
- Weiwei Li <liwei1518@gmail.com>, Peter Maydell <peter.maydell@linaro.org>,
- Mauro Carvalho Chehab <mchehab+huawei@kernel.org>, qemu-riscv@nongnu.org,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
-Subject: [PATCH 05/23] target/arm: wire up empty KVMAccelCPUClass
-Date: Tue, 20 Oct 2026 11:42:59 +0100
-Message-ID: <20261020104320.3686723-6-alex.bennee@linaro.org>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20261020104320.3686723-1-alex.bennee@linaro.org>
-References: <20261020104320.3686723-1-alex.bennee@linaro.org>
+ (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
+ id 1xJ7Od-0003BX-Nk
+ for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:48:48 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
+ id 1xJ7Oa-0005ZL-Ui
+ for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:48:43 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1792493318;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=jKM88emaTtDD8hNN+EMLi80BeL2n1f7ZRXAzTgl+JrI=;
+ b=CwMp0C/iQI0fYKhCyqREo2nkkt2QjEFGbuQyOLZB5ZO9PR7eC/kszSKj4GmU8+Xnh8sR6/
+ XQLWA0doGiXHHEgCnQSSpgQInjIU2CXUAKSRUuL+0IShxCoskDMpLz2pLhWWwyt3s3nhxW
+ cZySd2BbvScc1ELyi800c6zULgLB+rg=
+Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-562-EQKPMv8wMpawhrKwHK50cA-1; Tue,
+ 20 Oct 2026 10:48:33 +0000
+X-MC-Unique: EQKPMv8wMpawhrKwHK50cA-1
+X-Mimecast-MFC-AGG-ID: EQKPMv8wMpawhrKwHK50cA_1792493308
+Received: from mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.17])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 57756195604D; Tue, 20 Oct 2026 10:48:28 +0000 (UTC)
+Received: from localhost (headnet04.pony-001.prod.iad2.dc.redhat.com
+ [10.2.32.116])
+ by mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id 1F5DC1956095; Tue, 20 Oct 2026 10:48:25 +0000 (UTC)
+From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
+Date: Tue, 20 Oct 2026 14:45:42 +0400
+Subject: [PATCH v7 25/65] riscv/virt: convert OnOffAuto properties to
+ QAPI-aware registration
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+Message-Id: <20261020-qom-qapi-v7-25-431a86b02b58@redhat.com>
+References: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
+In-Reply-To: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
+To: qemu-devel@nongnu.org
+Cc: Markus Armbruster <armbru@redhat.com>, 
+ Michael Roth <michael.roth@amd.com>, John Snow <jsnow@redhat.com>, 
+ Peter Maydell <peter.maydell@linaro.org>, 
+ Mauro Carvalho Chehab <mchehab+huawei@kernel.org>, 
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, 
+ Paolo Bonzini <pbonzini@redhat.com>, 
+ =?utf-8?q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
+ Kostiantyn Kostiuk <kkostiuk@redhat.com>, Eric Blake <eblake@redhat.com>, 
+ David Hildenbrand <david@kernel.org>, Igor Mammedov <imammedo@redhat.com>, 
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
+ Jason Wang <jasowangio@gmail.com>, Marcelo Tosatti <mtosatti@redhat.com>, 
+ kvm@vger.kernel.org, Alberto Garcia <berto@igalia.com>, 
+ Kevin Wolf <kwolf@redhat.com>, Hanna Reitz <hreitz@redhat.com>, 
+ =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>, 
+ Zhao Liu <zhao1.liu@intel.com>, Jonathan Cameron <jic23@kernel.org>, 
+ Junjie Cao <junjie.cao@intel.com>, Anisa Su <anisa.su@samsung.com>, 
+ Elena Ufimtseva <elena.ufimtseva@oracle.com>, 
+ Jagannathan Raman <jag.raman@oracle.com>, 
+ John Levon <john.levon@nutanix.com>, 
+ Thanos Makatos <thanos.makatos@nutanix.com>, 
+ =?utf-8?q?C=C3=A9dric_Le_Goater?= <clg@redhat.com>, 
+ Cornelia Huck <cohuck@redhat.com>, Eric Farman <farman@linux.ibm.com>, 
+ Matthew Rosato <mjrosato@linux.ibm.com>, 
+ Richard Henderson <richard.henderson@linaro.org>, 
+ Ilya Leoshkevich <iii@linux.ibm.com>, qemu-block@nongnu.org, 
+ linux-cxl@vger.kernel.org, qemu-s390x@nongnu.org, 
+ "Michael S. Tsirkin" <mst@redhat.com>, Sergio Lopez <slp@redhat.com>, 
+ qemu-arm@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org, 
+ Song Gao <17746591750@163.com>, Bibo Mao <maobibo@loongson.cn>, 
+ Xianglai Li <lixianglai@loongson.cn>, Jiaxun Yang <jiaxun.yang@flygoat.com>, 
+ Pedro Barbuda <pbarbuda@microsoft.com>, 
+ Mohamed Mediouni <mohamed@unpredictable.fr>, 
+ Nicholas Piggin <npiggin@gmail.com>, 
+ Harsh Prateek Bora <harshpb@linux.ibm.com>, 
+ Amit Machhiwal <amachhiw@linux.ibm.com>, qemu-ppc@nongnu.org, 
+ Zhang Chen <zhangckid@gmail.com>, Li Zhijian <lizhijian@fujitsu.com>, 
+ Alistair Francis <alistair@alistair23.me>, Alexander Graf <graf@amazon.com>, 
+ "Gonglei (Arei)" <arei.gonglei@huawei.com>, 
+ zhenwei pi <zhenwei.pi@linux.dev>, Ani Sinha <anisinha@redhat.com>, 
+ Luc Michel <luc@lmichel.fr>, 
+ =?utf-8?q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>, 
+ Jamin Lin <jamin_lin@aspeedtech.com>, Kane Chen <kane_chen@aspeedtech.com>, 
+ Samuel Tardieu <sam@rfc1149.net>, "Denis V. Lunev" <den@openvz.org>, 
+ FangSheng Huang <FangSheng.Huang@amd.com>, Tyrone Ting <kfting@nuvoton.com>, 
+ Hao Wu <wuhaotsh@google.com>, Keith Busch <kbusch@kernel.org>, 
+ Klaus Jensen <its@irrelevant.dk>, Jesper Devantier <foss@defmacro.it>, 
+ Aditya Gupta <adityag@linux.ibm.com>, Glenn Miles <milesg@linux.ibm.com>, 
+ Conor Dooley <conor@kernel.org>, 
+ Sebastian Huber <sebastian.huber@embedded-brains.de>, 
+ Halil Pasic <pasic@linux.ibm.com>, 
+ Christian Borntraeger <borntraeger@linux.ibm.com>, 
+ Jason Herne <jjherne@linux.ibm.com>, Titus Rwantare <titusr@google.com>, 
+ Stefano Stabellini <sstabellini@kernel.org>, 
+ Anthony PERARD <anthony@xenproject.org>, Peter Xu <peterx@redhat.com>, 
+ Chinmay Rath <rathc@linux.ibm.com>, 
+ Hendrik Brueckner <brueckner@linux.ibm.com>, xen-devel@lists.xenproject.org, 
+ Roman Bolshakov <rbolshakov@ddn.com>, 
+ Phil Dennis-Jordan <phil@philjordan.eu>, Fam Zheng <fam@euphon.net>, 
+ Farhan Ali <alifm@linux.ibm.com>, Alex Williamson <alex@shazbot.org>, 
+ Tao Tang <tangtao1634@phytium.com.cn>, 
+ Stefan Berger <stefanb@linux.vnet.ibm.com>, Fabiano Rosas <farosas@suse.de>, 
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>, 
+ Artyom Tarasenko <atar4qemu@gmail.com>, 
+ Yoshinori Sato <yoshinori.sato@nifty.com>, Jiri Pirko <jiri@resnulli.us>, 
+ Eric Auger <eric.auger@redhat.com>, Laurent Vivier <lvivier@redhat.com>, 
+ =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3989;
+ i=marcandre.lureau@redhat.com; h=from:subject:message-id;
+ bh=HRo91rA2atLaPMjCcy77uoSJBv27Cj9pfW470LYlxds=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZZn3Inx2fUnnD+uy0noJtEswlqC284ZfNax
+ CJpcQgVj++JAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGWQAKCRDa6OEJdZac
+ 5YyTD/sHV9okzYNJc6MkoRYx/8TowxhPLBhPsWuj+Z23OSrNnkhKkHnDExMsk5HmnvTa0ulRg4b
+ LYQKIHIadpWN/XU7ugrsNMWvt2vE1M6WMh1J6VHifxNwfktdLDiRJbe0FDZnfd37CWdaQUUl2J8
+ avTewGpI6EMGes/ro4NKDvyC4R0266xA2ma3nkF4giv5r4D9u10PkgS0JY1La1JPmg8jSCrBWSG
+ h5SRiJTRRB838tgMyKtlieM2qvFkwYs6vxZta8mwMLWRCJ2qlrDou4X+w0mQmWe22ZDxnnKShlS
+ 862qoPEe5fd+gL0bJwae3XjbgOWdIFsVxVAp8CGayp+xYpvHin9d0m0LqMai3fWlbmhL7Cfg1s1
+ rydrYSQTeUYAMErEqGvu2WCnqBtBZtQFmwr15x6v5/bqPorKv4DQHwiVwdKURNyFdW+Nx3KFAfq
+ AscOzqRwse2gfkIaC1/3VfU4l2KUfFX5H7n6u7Qmir7AEKGBJmV21sGsvEGiLanNfn6G5Mhk3t3
+ rOWtlDBNgJ7TPddfv1DlKc4E1knF6kuaAYaQ0h/fdvNK4/n+iTgK2yAcTj5LqixHVyRzDDDdAX3
+ AjXEd1EQ7S0ak0D07LG6vcNpzqsFF0hV1CHcYiqXo8BniMFmPKjS8rc/4CkqczHYdJv0WAwtWHl
+ AkxiOqO7ZuvqssQ==
+X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
+ fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
+X-Scanned-By: MIMEDefang 3.0 on 10.30.177.17
+X-Mimecast-MFC-PROC-ID: js2DPfoBNxJdsiXaUfVbbxCjozSHJk9bIkIetQgxdMc_1792493308
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::429;
- envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x429.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Received-SPF: pass client-ip=170.10.133.124;
+ envelope-from=marcandre.lureau@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: 9
+X-Spam_score: 0.9
+X-Spam_bar: /
+X-Spam_report: (0.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.329,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ RCVD_IN_SBL_CSS=3.335, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -129,62 +172,122 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+X-Spam-Status: No, score=-16.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,USER_AGENT_GIT autolearn=unavailable autolearn_force=no
-	version=4.0.1
+	SPF_PASS autolearn=unavailable autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-We will fill in the functions in future commits.
+Convert the acpi and iommu-sys OnOffAuto properties from manual
+visitor-based callbacks to property_add_qapi_enum().
 
-Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Signed-off-by: Markus Armbruster <armbru@redhat.com>
+Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 ---
- target/arm/kvm.c | 25 +++++++++++++++++++++++++
- 1 file changed, 25 insertions(+)
+ hw/riscv/virt.c | 52 +++++++++++++++++++++++-----------------------------
+ 1 file changed, 23 insertions(+), 29 deletions(-)
 
-diff --git a/target/arm/kvm.c b/target/arm/kvm.c
-index 3d905f8565d..7a3c957c3a5 100644
---- a/target/arm/kvm.c
-+++ b/target/arm/kvm.c
-@@ -42,6 +42,8 @@
- #include "hw/acpi/ghes.h"
- #include "target/arm/gtimer.h"
- #include "migration/blocker.h"
-+#include "accel/accel-cpu-target.h"
-+#include "accel/kvm/cpu-ops.h"
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index d4b501802f60..c33a279f1e5c 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -57,7 +57,7 @@
+ #include "hw/pci-host/gpex.h"
+ #include "hw/display/ramfb.h"
+ #include "hw/acpi/aml-build.h"
+-#include "qapi/qapi-visit-common.h"
++#include "qapi/qapi-type-infos-common.h"
+ #include "hw/virtio/virtio-iommu.h"
+ #include "hw/uefi/var-service-api.h"
  
- const KVMCapabilityInfo kvm_arch_required_capabilities[] = {
-     KVM_CAP_INFO(DEVICE_CTRL),
-@@ -2662,3 +2664,26 @@ void arm_gic_cap_kvm_probe(GICCapability *v2, GICCapability *v3)
- 
-     kvm_arm_destroy_scratch_host_vcpu(fdarray);
+@@ -1049,21 +1049,16 @@ bool virt_is_iommu_sys_enabled(RISCVVirtState *s)
+     return s->iommu_sys == ON_OFF_AUTO_ON;
  }
-+
-+static const KVMCPUOps arm_kvm_cpu_ops = {
-+};
-+
-+static void kvm_cpu_accel_class_init(ObjectClass *oc, const void *data)
-+{
-+    KVMAccelCPUClass *kacc = KVM_ACCEL_CPU_CLASS(oc);
-+
-+    kacc->cpu_ops = &arm_kvm_cpu_ops;
-+}
-+
-+static const TypeInfo kvm_cpu_accel_type_info = {
-+    .name = ACCEL_CPU_NAME("kvm"),
-+    .parent = TYPE_KVM_ACCEL_CPU,
-+    .class_init = kvm_cpu_accel_class_init,
-+    .abstract = true,
-+};
-+
-+static void kvm_cpu_accel_register_types(void)
-+{
-+    type_register_static(&kvm_cpu_accel_type_info);
-+}
-+type_init(kvm_cpu_accel_register_types);
+ 
+-static void virt_get_iommu_sys(Object *obj, Visitor *v, const char *name,
+-                               void *opaque, Error **errp)
++static int virt_get_iommu_sys(Object *obj, Error **errp)
+ {
+     RISCVVirtState *s = RISCV_VIRT_MACHINE(obj);
+-    OnOffAuto iommu_sys = s->iommu_sys;
+-
+-    visit_type_OnOffAuto(v, name, &iommu_sys, errp);
++    return s->iommu_sys;
+ }
+ 
+-static void virt_set_iommu_sys(Object *obj, Visitor *v, const char *name,
+-                               void *opaque, Error **errp)
++static void virt_set_iommu_sys(Object *obj, int value, Error **errp)
+ {
+     RISCVVirtState *s = RISCV_VIRT_MACHINE(obj);
+-
+-    visit_type_OnOffAuto(v, name, &s->iommu_sys, errp);
++    s->iommu_sys = value;
+ }
+ 
+ bool virt_is_acpi_enabled(RISCVVirtState *s)
+@@ -1071,21 +1066,16 @@ bool virt_is_acpi_enabled(RISCVVirtState *s)
+     return s->acpi != ON_OFF_AUTO_OFF;
+ }
+ 
+-static void virt_get_acpi(Object *obj, Visitor *v, const char *name,
+-                          void *opaque, Error **errp)
++static int virt_get_acpi(Object *obj, Error **errp)
+ {
+     RISCVVirtState *s = RISCV_VIRT_MACHINE(obj);
+-    OnOffAuto acpi = s->acpi;
+-
+-    visit_type_OnOffAuto(v, name, &acpi, errp);
++    return s->acpi;
+ }
+ 
+-static void virt_set_acpi(Object *obj, Visitor *v, const char *name,
+-                          void *opaque, Error **errp)
++static void virt_set_acpi(Object *obj, int value, Error **errp)
+ {
+     RISCVVirtState *s = RISCV_VIRT_MACHINE(obj);
+-
+-    visit_type_OnOffAuto(v, name, &s->acpi, errp);
++    s->acpi = value;
+ }
+ 
+ static const HotplugHandler *
+@@ -1183,17 +1173,21 @@ static void virt_machine_class_init(ObjectClass *oc, const void *data)
+         object_class_property_set_description(oc, "aia-guests", str);
+     }
+ 
+-    object_class_property_add(oc, "acpi", "OnOffAuto",
+-                              virt_get_acpi, virt_set_acpi,
+-                              NULL, NULL);
+-    object_class_property_set_description(oc, "acpi",
+-                                          "Enable ACPI");
++    object_class_property_add_qapi_enum(oc, QAPI_ENUM_PROP(
++        .name = "acpi",
++        .description = "Enable ACPI",
++        .qapi_type = &OnOffAuto_type_info,
++        .get = virt_get_acpi,
++        .set = virt_set_acpi,
++    ));
+ 
+-    object_class_property_add(oc, "iommu-sys", "OnOffAuto",
+-                              virt_get_iommu_sys, virt_set_iommu_sys,
+-                              NULL, NULL);
+-    object_class_property_set_description(oc, "iommu-sys",
+-                                          "Enable IOMMU platform device");
++    object_class_property_add_qapi_enum(oc, QAPI_ENUM_PROP(
++        .name = "iommu-sys",
++        .description = "Enable IOMMU platform device",
++        .qapi_type = &OnOffAuto_type_info,
++        .get = virt_get_iommu_sys,
++        .set = virt_set_iommu_sys,
++    ));
+ }
+ 
+ static const TypeInfo virt_machine_typeinfo = {
+
 -- 
-2.47.3
+2.56.0.116.g6de20f6092dc
 
 
