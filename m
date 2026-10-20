@@ -1,58 +1,59 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0FA51606A321
-	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Oct 2026 10:49:50 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1DA8460A2603
+	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Oct 2026 10:49:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=E2K2radM
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=OQjmLvnw
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xJ7Nz-0002QV-CN; Tue, 20 Oct 2026 06:48:03 -0400
+	id 1xJ7Nl-0001lf-LV; Tue, 20 Oct 2026 06:47:49 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1xJ7NB-00019S-UT
- for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:47:19 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ id 1xJ7Md-0000hk-Kt
+ for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:46:42 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1xJ7N8-0005Ei-4S
- for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:47:12 -0400
+ id 1xJ7Mb-00059B-Lx
+ for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:46:39 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1792493229;
+ s=mimecast20190719; t=1792493197;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=T4Uxxm/AUYAlgWDMQDpSo2oDR3RYBjxEx/nUKW/pClc=;
- b=E2K2radMdsPv/z5GuiUEacMLRQoFsy5QmnWbthuXZ0n750dz3TFMAedfzKGMnNSRjpPgAW
- AnKvUmnIUzisbHGnH3jWfxQVBxyuiWFhyeUJsgV2At+pcHWUXzQQWBywC/LAibKbd99pRv
- ZTTW1RtdOKuzzARm6TKQYLirxhpIuh8=
-Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ bh=Q7myRjnvJN1zs4/WFeao6QDd+ittV+0+bFc6WNm3+3s=;
+ b=OQjmLvnw8PY85Oi31TUdRFpRfeQ8N5RlYrMqTnBegyVSapWvrzorjPRwWzIqifKZdMENVL
+ x0n5SHgdXZLA2jzU+/HmhJbYYTZszwiQknO4vwm6QI/JxVPxGcFXMpKdsn9qnt10HRXY2i
+ cioawTo1oXLi8vtJWF5KKwsUyyU0qzc=
+Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-379-Q9FEb42bMfer0z7ZaConTg-1; Tue,
- 20 Oct 2026 10:46:57 +0000
-X-MC-Unique: Q9FEb42bMfer0z7ZaConTg-1
-X-Mimecast-MFC-AGG-ID: Q9FEb42bMfer0z7ZaConTg_1792493213
-Received: from mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.93])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-266-qJjFWL2MMmO8dr1kA-VMhA-1; Tue,
+ 20 Oct 2026 10:46:31 +0000
+X-MC-Unique: qJjFWL2MMmO8dr1kA-VMhA-1
+X-Mimecast-MFC-AGG-ID: qJjFWL2MMmO8dr1kA-VMhA_1792493187
+Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 9809D1954B20; Tue, 20 Oct 2026 10:46:52 +0000 (UTC)
+ by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 9A622180133B; Tue, 20 Oct 2026 10:46:26 +0000 (UTC)
 Received: from localhost (headnet04.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.116])
- by mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 2267C1800444; Tue, 20 Oct 2026 10:46:49 +0000 (UTC)
-From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-Date: Tue, 20 Oct 2026 14:45:24 +0400
-Subject: [PATCH v7 07/65] qapi: add QAPITypeInfo struct definition
+ by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id 20B851800643; Tue, 20 Oct 2026 10:46:20 +0000 (UTC)
+From: marcandre.lureau@redhat.com
+Date: Tue, 20 Oct 2026 14:45:20 +0400
+Subject: [PATCH v7 03/65] qapi/introspect: Simplify masked name comment
+ emission slighly
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Message-Id: <20261020-qom-qapi-v7-7-431a86b02b58@redhat.com>
+Message-Id: <20261020-qom-qapi-v7-3-431a86b02b58@redhat.com>
 References: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 In-Reply-To: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 To: qemu-devel@nongnu.org
@@ -127,38 +128,38 @@ Cc: Markus Armbruster <armbru@redhat.com>,
  Yoshinori Sato <yoshinori.sato@nifty.com>, Jiri Pirko <jiri@resnulli.us>, 
  Eric Auger <eric.auger@redhat.com>, Laurent Vivier <lvivier@redhat.com>, 
  =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1828;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1620;
  i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=ncAoduk+W++XsQQC6jhXGd6nHnXr1eyWDznZbZI1kq8=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZYgCKdk47hapDm+FojdwVHdZciBcCELJvB+
- Yw7agAaZi2JAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGWAAKCRDa6OEJdZac
- 5T9oD/9GpeJFOttXk8RI55B118B4xUvL1oaf8Lo8kCm7RluwGbnLkgkEWk3zfL95zz4jtUJwnKQ
- LkI/5HSvCywgfyFPEHSeLsTL1fdJsoyRVHSZu5kn7dXrnfwQt03BqXsZoGPyzgJ4O6dtOX+WHQ/
- p6v8cw5FjgYcyrcGkoZL25m8291Qj+cifHCodAv8D8Pwc/O0TMY9tcXyBGixECq8bhC05GlyiFL
- 1HahUKZPfY5wzXAb1ZpI5IG4ebak9SIACrEGavNNow/2pr7YKP9Dv4SiziC+P1lhVrmELQbxRok
- HGAL/k9Se+GdzyvbmuU0S5/R4GZNAkxqR3Zt8oy+8jyDYnlw8M9s/RPqgkS98TF1jpcFKlp/7EA
- YNW4QBcSGFwWOBrSYO2580wx+fB01GWAv5Oxz3vyKBSQyKgmF04H7rB9l2vKNMWnxKRzNqjbmXt
- 8EvxF5m5VzSm7Pv1Y7jp9cZ/hGY7hDy84syz2Amn5jd7IFzuDgcyRV5G0EZQisXAao1ed7uWeCA
- rdKBAJUAVv0WyiAVn5qgDoZcqgLGp/vBung/13PF3FFVyJdvO3llipzkXBwaLeKpimriCvSA0ag
- eO9DfBCSkrhnJUIyeTawq6BHzOMEOc9xWB+Mubdj/bUzMsWXWGu7MXSGR9kP+1Nkw0P1SbqEYCO
- SE+11f2XzLE52rQ==
+ bh=VT5u6B1qUaxaf9+tLnGedzovD3GH8labF6VNv1guiyM=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZXLImEUkMO1oHPQ87OflvNF4Yi2udXpYkVC
+ bgHxuhfWBSJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGVwAKCRDa6OEJdZac
+ 5apPEACW7/JRacnRcMdLuR2wffTHpKlhTnnNttkfa+uxqEFGpUBAVm+QmXcBWiHQepjJYrrnCLX
+ kX+DqErqWmeiNvxzI6JiXnzTLZT+qJhJv8xsO/VJJDrfMn1ueuWzUrj+B6OuHiY8G6sKD5B22r2
+ /VsVx5S39hkt2iAucJYFWX/jCbXr/n7JLfXZhIxEj5BOvCvg5Yi0LL2TqlYsbb8popca2rYP1LR
+ NPoU4LRf51hxD2ywaO+6y/j0N21xE0p2YkndRii6LnkybRIxrfS/5bnqGpLfMNBLgkT78iIM8lt
+ NrBUIcQuB2ZB1X0yNDB2FHzKruZggB1WNpUshItWpvIpDoPoGH3skEwfR/V5fD0qfS/LZSqqyjB
+ 4FJtdTuRRF4YsaCbLtQNFS8/+QQV4/Vdi5fyBJBJkUomWmIJ9Gmo13qCN7QZ48ATUiFB5yMjLX9
+ bstCXnov+XHxOtODxHO4PES/1tyzo8hAqxMSO7jC3lVaeZiXCYHaNmzZGZmg8rw+ACTin7LuEQX
+ oFXd4FeQcXIRzEKbNbs3ma5jEAL5lKpL5YEur2r2ksx/zaX4Ck+aLw4T4c9LwKnL2l82ALZeysf
+ UF3MM5kuOAz2l1KljOxTX1ENX/TZBM0eH+aQiWoC7ma7Ez/O5zz63gJTXWajtX6GQgtJcz+zO1R
+ w+mtvxa/th+1OpQ==
 X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
  fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.93
-X-Mimecast-MFC-PROC-ID: 8Nxpn5gDYEpdfJ3W6aPxEC764sEu1dEAYC6te0YhQo0_1792493213
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
+X-Mimecast-MFC-PROC-ID: YU2PF_7olQNdKi-xYR9Z271r10hRIRPcT-VWYaLZuqY_1792493187
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.129.124;
+Received-SPF: pass client-ip=170.10.133.124;
  envelope-from=marcandre.lureau@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: 9
-X-Spam_score: 0.9
-X-Spam_bar: /
-X-Spam_report: (0.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.329,
+X-Spam_score_int: -23
+X-Spam_score: -2.4
+X-Spam_bar: --
+X-Spam_report: (-2.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.329,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_SBL_CSS=3.335, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -177,56 +178,42 @@ X-Spam-Status: No, score=-16.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Introduce a minimal struct that pairs a QAPI type's internal name with
-its "masked" introspection name. Generated constants of this type will
-let QOM property registration carry a reliable reference to the QAPI
-schema and possibly other associated data.
+From: Markus Armbruster <armbru@redhat.com>
 
-The fields are populated in following commits.
+Instead of emitting the comment for certain meta-types, simply emit it
+when introspection name and name differ.
+
+This additionally emits it for arrays, which is fine.
 
 Signed-off-by: Markus Armbruster <armbru@redhat.com>
-Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
+Reviewed-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 ---
- include/qapi/qapi-type-info.h | 31 +++++++++++++++++++++++++++++++
- 1 file changed, 31 insertions(+)
+ scripts/qapi/introspect.py | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/include/qapi/qapi-type-info.h b/include/qapi/qapi-type-info.h
-new file mode 100644
-index 000000000000..6a6355568325
---- /dev/null
-+++ b/include/qapi/qapi-type-info.h
-@@ -0,0 +1,31 @@
-+/*
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ */
-+
-+#ifndef QAPI_TYPE_INFO_H
-+#define QAPI_TYPE_INFO_H
-+
-+#include "qapi/util.h"
-+
-+/**
-+ * QAPITypeInfo - QAPI type metadata
-+ *
-+ * @name: QAPI type name (e.g. "str", "OnOffAuto", "int32List").
-+ *        QOM uses this as the property type string.
-+ * @masked_name: Name of the type in the QAPI introspection schema, assigned by
-+ *        scripts/qapi code generator (e.g. "368").
-+ * @lookup: QEnumLookup for this type, or NULL for non-enum types.
-+ *        visit_type_enum(), qapi_enum_parse(), and qapi_enum_lookup()
-+ *        all rely on it.
-+ * @list: The list-type counterpart, or NULL if none exists.
-+ *        str_type_info.list points to strList_type_info.  qdev array
-+ *        properties follow this to find the list type for their element.
-+ */
-+typedef struct QAPITypeInfo {
-+    const char *name;
-+    const char *masked_name;
-+    const QEnumLookup *lookup;
-+    const struct QAPITypeInfo *list;
-+} QAPITypeInfo;
-+
-+#endif /* QAPI_TYPE_INFO_H */
+diff --git a/scripts/qapi/introspect.py b/scripts/qapi/introspect.py
+index 644461560c64..49d1ed2897e8 100644
+--- a/scripts/qapi/introspect.py
++++ b/scripts/qapi/introspect.py
+@@ -253,12 +253,12 @@ def _gen_tree(self, name: str, mtype: str, obj: Dict[str, object],
+                          Will be omitted from the output if empty.
+         """
+         comment: Optional[str] = None
+-        if mtype not in ('command', 'event', 'builtin', 'array'):
+-            if not self._unmask:
+-                # Output a comment to make it easy to map masked names
+-                # back to the source when reading the generated output.
+-                comment = f'"{self._name(name)}" = {name}'
+-        obj['name'] = self._name(name)
++        introspection_name = self._name(name)
++        if introspection_name != name:
++            # Output a comment to make it easy to map masked names
++            # back to the source when reading the generated output.
++            comment = f'"{introspection_name}" = {name}'
++        obj['name'] = introspection_name
+         obj['meta-type'] = mtype
+         if features:
+             obj['features'] = self._gen_features(features)
 
 -- 
 2.56.0.116.g6de20f6092dc
