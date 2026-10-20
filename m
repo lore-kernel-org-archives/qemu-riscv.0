@@ -1,125 +1,166 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 07F8660A4AF4
-	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Oct 2026 10:52:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 85E52606A31D
+	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Oct 2026 10:52:40 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=kaJtRSXs
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=QC8YQnI+
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xJ7Ks-0005S8-2J; Tue, 20 Oct 2026 06:44:50 -0400
+	id 1xJ7Qb-000822-C2; Tue, 20 Oct 2026 06:50:45 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1xJ7K7-0004gQ-H8
- for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:44:04 -0400
-Received: from mail-wr1-x431.google.com ([2a00:1450:4864:20::431])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1xJ7Jj-0004Td-1j
- for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:44:03 -0400
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-48e10a70540so1300572f8f.1
- for <qemu-riscv@nongnu.org>; Tue, 20 Oct 2026 03:43:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1792493017; x=1793097817; darn=nongnu.org;
- h=content-transfer-encoding:content-type:mime-version:references
- :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=CI4y4+8QDNrII/yQJeeQ7eR8U6iPwLtUl1oInnwM8Os=;
- b=kaJtRSXsFBfKDO5yVoh1lgKynrsM6QzcILKR9/Vk/wY1fNQvtMjIpkaZqA41PS9fIX
- KkvekhZ75bb4mwqlxE/94tHJ/W8ZOIcA3sLJPT0l44CCXnOmZnTCHjMqsp/G8h97Ss8x
- 8AwXSfxsKrihxIlk/WjdWbGW9kS1fHlunOUm8iJQXCxOGScLPKVgFXeUvUFp+amGoGju
- PHmXvSC2nSWCWblSGdi8AlthQEp55nShhKAFhodToFiFw90M98klToWoSLQnYLyqdvio
- vRdzx6GufWn2UtxcsRvg5XQxQ1uScZxFWFWiE9EIz4bkMxhoHO57DZb5MDmpHepC03eZ
- /mNQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792493017; x=1793097817;
- h=content-transfer-encoding:content-type:mime-version:references
- :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=CI4y4+8QDNrII/yQJeeQ7eR8U6iPwLtUl1oInnwM8Os=;
- b=dCBr9IZCqsssQ2yGyHJ+FKlUx0tjLhUVNu2W25GWdRDiK7O3v2dyNZJguijwUoTlTh
- 2cvvZX+fAG7PcdxSJV0vpi5s7in8Dgk1uj+1lEn7oN39DKbzwLEroh7sULLCVFyvZVAE
- xqyiXiu9yj2wQelSjnLWI8/ssfBzrtZBdpqNzuE/Ax+xaZohniS5mt/5E6TtOir+a3lc
- M+sPOpoJmnCG+95v3A1SKFPFurkSaJx3p+sXBYeR7Fl9JLP71ynR0jXWHYpCB8QHzxSk
- GHV3mWFI+hfK7BhKXL8V7DD9EhTqvX/bW7ydAlbXdKNqX+sHU6b9ogPYg2HH7jpqMqDN
- zpfg==
-X-Forwarded-Encrypted: i=1;
- AKwUvBwZUJ8nz9u7C9jpQnpINY7BT4M4kQCxjUhsiDVlTB5Mpi1w4MwNCHe3ydV1X72j6Lz+tLsb5kSqwF04@nongnu.org
-X-Gm-Message-State: AFq9FYJ2J6Ph2zNz8X+cloDlLs+LlK8sAIAD/JUJzstH6KbYaWigacAR
- 23FnhFdyp4soKzcp2yoVjGjhBfSnzgUlXrSYK5feuK06Pnpj8SQlyqMTLkzPgm5ydxo=
-X-Gm-Gg: AYBFou2F+z3qiY0YO/CDIwmr/rAGn8UjJ6kcTh5o0XbWKD35doawGv+2pqZf4tWe/C/
- cGDT28zSJcOxDLBTtfUi2BHgV1COqIIwaO1Mibig5gHgzo8QahkNjsPSat9adxMn1NFljKFpExW
- XlrcUYaHntxyceytKNqrDznEqvfzCPE49wYhLIcapsxYFYcM1VZQnLJ84rIuE03uR5sA7td0Y8U
- Ylz+67aZRZYCYcKoOwVYgxlL5rEJ1E9dr0iyKqyRn5WVFUqMiXxStcVrLiXR7BD1h/l0GkZMhnO
- 7e3VYg5g+/qKZE/hCBaUSyyOCiCso1wrLayu8fRzWqOmYcOMYVDqdQO85Z42uI/gfgEUUUy8Y0o
- c1/0cWUejGgV6DARiURAhiWLpbKasrA8j7/OHxBUf911h/x6PEY/YyRYjTyFDvHxQfLTwZYTGuR
- D3kM96FNbFu7iOAvxblvlHj+iuPhEVBn0V9V+I2HDlLiyL0OtgFefcLSsYmdlQ946zal5vd2Gny
- 4J5aLO5
-X-Received: by 2002:a05:6000:4a0e:b0:48b:1119:5756 with SMTP id
- ffacd0b85a97d-48e07bbd34bmr18765919f8f.17.1792493017263; 
- Tue, 20 Oct 2026 03:43:37 -0700 (PDT)
-Received: from draig.lan ([185.124.0.158]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48e1d80feb1sm5497671f8f.12.2026.10.20.03.43.26
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 20 Oct 2026 03:43:27 -0700 (PDT)
-Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id B7A725FE0E;
- Tue, 20 Oct 2026 11:43:23 +0100 (BST)
-From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: qemu-devel@nongnu.org
-Cc: Bibo Mao <maobibo@loongson.cn>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,
- Ilya Leoshkevich <iii@linux.ibm.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Eric Farman <farman@linux.ibm.com>,
- Song Gao <17746591750@163.com>, Harsh Prateek Bora <harshpb@linux.ibm.com>,
- David Hildenbrand <david@kernel.org>, Bernhard Beschow <shentey@gmail.com>,
- Halil Pasic <pasic@linux.ibm.com>, Nicholas Piggin <npiggin@gmail.com>,
- Paul Durrant <paul@xen.org>,
- =?UTF-8?q?Bj=C3=B6rn=20Walk?= <bwalk@linux.ibm.com>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, qemu-s390x@nongnu.org,
- David Woodhouse <dwmw2@infradead.org>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-ppc@nongnu.org,
- Marcelo Tosatti <mtosatti@redhat.com>, kvm@vger.kernel.org,
- qemu-arm@nongnu.org, linux-edac@vger.kernel.org,
- Glenn Miles <milesg@linux.ibm.com>, Chao Liu <chao.liu@processmission.com>,
- Cornelia Huck <cohuck@redhat.com>, Gautam Menghani <gautam@linux.ibm.com>,
- Xianglai Li <lixianglai@loongson.cn>,
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
- Chinmay Rath <rathc@linux.ibm.com>, "Michael S. Tsirkin" <mst@redhat.com>,
- Matthew Rosato <mjrosato@linux.ibm.com>,
- Amit Machhiwal <amachhiw@linux.ibm.com>, Zhao Liu <zhao1.liu@intel.com>,
- Weiwei Li <liwei1518@gmail.com>, Peter Maydell <peter.maydell@linaro.org>,
- Mauro Carvalho Chehab <mchehab+huawei@kernel.org>, qemu-riscv@nongnu.org,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
-Subject: [PATCH 18/23] accel/kvm: port kvm_arch_[insert|remove]_hw_breakpoints
- to KVMCPUOps
-Date: Tue, 20 Oct 2026 11:43:12 +0100
-Message-ID: <20261020104320.3686723-19-alex.bennee@linaro.org>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20261020104320.3686723-1-alex.bennee@linaro.org>
-References: <20261020104320.3686723-1-alex.bennee@linaro.org>
+ (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
+ id 1xJ7PO-0004IN-LI
+ for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:49:30 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
+ id 1xJ7PM-0005mC-MJ
+ for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:49:30 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1792493368;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=G0tJqQA4vjH1OewDrlPPbV755lqj6OJV4iLGYLxe1dQ=;
+ b=QC8YQnI+rwTo5TVIyAHdJ0suxxgCt8Q1ye5bGlBv5zTRgtaO6Cir+PBOQBXEHDe5v5QDrS
+ 6cQZrQMfKyAy+qLH+j0ubZraRFfRixdwhJ1LgNKWApv4qlm5STLX6y3u5hJCtoPAmf9QSb
+ faqlSua5Y7Q61RQ0yHgUX5lRc5y1/2U=
+Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-532-AU63UEb8PQ-MadFO--Yndg-1; Tue,
+ 20 Oct 2026 10:49:20 +0000
+X-MC-Unique: AU63UEb8PQ-MadFO--Yndg-1
+X-Mimecast-MFC-AGG-ID: AU63UEb8PQ-MadFO--Yndg_1792493356
+Received: from mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.95])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 8EE4D1955DE9; Tue, 20 Oct 2026 10:49:16 +0000 (UTC)
+Received: from localhost (headnet04.pony-001.prod.iad2.dc.redhat.com
+ [10.2.32.116])
+ by mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id 1701A418; Tue, 20 Oct 2026 10:49:14 +0000 (UTC)
+From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
+Date: Tue, 20 Oct 2026 14:45:51 +0400
+Subject: [PATCH v7 34/65] ppc/spapr-caps: convert to QAPI-aware property
+ registration
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+Message-Id: <20261020-qom-qapi-v7-34-431a86b02b58@redhat.com>
+References: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
+In-Reply-To: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
+To: qemu-devel@nongnu.org
+Cc: Markus Armbruster <armbru@redhat.com>, 
+ Michael Roth <michael.roth@amd.com>, John Snow <jsnow@redhat.com>, 
+ Peter Maydell <peter.maydell@linaro.org>, 
+ Mauro Carvalho Chehab <mchehab+huawei@kernel.org>, 
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, 
+ Paolo Bonzini <pbonzini@redhat.com>, 
+ =?utf-8?q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
+ Kostiantyn Kostiuk <kkostiuk@redhat.com>, Eric Blake <eblake@redhat.com>, 
+ David Hildenbrand <david@kernel.org>, Igor Mammedov <imammedo@redhat.com>, 
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
+ Jason Wang <jasowangio@gmail.com>, Marcelo Tosatti <mtosatti@redhat.com>, 
+ kvm@vger.kernel.org, Alberto Garcia <berto@igalia.com>, 
+ Kevin Wolf <kwolf@redhat.com>, Hanna Reitz <hreitz@redhat.com>, 
+ =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>, 
+ Zhao Liu <zhao1.liu@intel.com>, Jonathan Cameron <jic23@kernel.org>, 
+ Junjie Cao <junjie.cao@intel.com>, Anisa Su <anisa.su@samsung.com>, 
+ Elena Ufimtseva <elena.ufimtseva@oracle.com>, 
+ Jagannathan Raman <jag.raman@oracle.com>, 
+ John Levon <john.levon@nutanix.com>, 
+ Thanos Makatos <thanos.makatos@nutanix.com>, 
+ =?utf-8?q?C=C3=A9dric_Le_Goater?= <clg@redhat.com>, 
+ Cornelia Huck <cohuck@redhat.com>, Eric Farman <farman@linux.ibm.com>, 
+ Matthew Rosato <mjrosato@linux.ibm.com>, 
+ Richard Henderson <richard.henderson@linaro.org>, 
+ Ilya Leoshkevich <iii@linux.ibm.com>, qemu-block@nongnu.org, 
+ linux-cxl@vger.kernel.org, qemu-s390x@nongnu.org, 
+ "Michael S. Tsirkin" <mst@redhat.com>, Sergio Lopez <slp@redhat.com>, 
+ qemu-arm@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org, 
+ Song Gao <17746591750@163.com>, Bibo Mao <maobibo@loongson.cn>, 
+ Xianglai Li <lixianglai@loongson.cn>, Jiaxun Yang <jiaxun.yang@flygoat.com>, 
+ Pedro Barbuda <pbarbuda@microsoft.com>, 
+ Mohamed Mediouni <mohamed@unpredictable.fr>, 
+ Nicholas Piggin <npiggin@gmail.com>, 
+ Harsh Prateek Bora <harshpb@linux.ibm.com>, 
+ Amit Machhiwal <amachhiw@linux.ibm.com>, qemu-ppc@nongnu.org, 
+ Zhang Chen <zhangckid@gmail.com>, Li Zhijian <lizhijian@fujitsu.com>, 
+ Alistair Francis <alistair@alistair23.me>, Alexander Graf <graf@amazon.com>, 
+ "Gonglei (Arei)" <arei.gonglei@huawei.com>, 
+ zhenwei pi <zhenwei.pi@linux.dev>, Ani Sinha <anisinha@redhat.com>, 
+ Luc Michel <luc@lmichel.fr>, 
+ =?utf-8?q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>, 
+ Jamin Lin <jamin_lin@aspeedtech.com>, Kane Chen <kane_chen@aspeedtech.com>, 
+ Samuel Tardieu <sam@rfc1149.net>, "Denis V. Lunev" <den@openvz.org>, 
+ FangSheng Huang <FangSheng.Huang@amd.com>, Tyrone Ting <kfting@nuvoton.com>, 
+ Hao Wu <wuhaotsh@google.com>, Keith Busch <kbusch@kernel.org>, 
+ Klaus Jensen <its@irrelevant.dk>, Jesper Devantier <foss@defmacro.it>, 
+ Aditya Gupta <adityag@linux.ibm.com>, Glenn Miles <milesg@linux.ibm.com>, 
+ Conor Dooley <conor@kernel.org>, 
+ Sebastian Huber <sebastian.huber@embedded-brains.de>, 
+ Halil Pasic <pasic@linux.ibm.com>, 
+ Christian Borntraeger <borntraeger@linux.ibm.com>, 
+ Jason Herne <jjherne@linux.ibm.com>, Titus Rwantare <titusr@google.com>, 
+ Stefano Stabellini <sstabellini@kernel.org>, 
+ Anthony PERARD <anthony@xenproject.org>, Peter Xu <peterx@redhat.com>, 
+ Chinmay Rath <rathc@linux.ibm.com>, 
+ Hendrik Brueckner <brueckner@linux.ibm.com>, xen-devel@lists.xenproject.org, 
+ Roman Bolshakov <rbolshakov@ddn.com>, 
+ Phil Dennis-Jordan <phil@philjordan.eu>, Fam Zheng <fam@euphon.net>, 
+ Farhan Ali <alifm@linux.ibm.com>, Alex Williamson <alex@shazbot.org>, 
+ Tao Tang <tangtao1634@phytium.com.cn>, 
+ Stefan Berger <stefanb@linux.vnet.ibm.com>, Fabiano Rosas <farosas@suse.de>, 
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>, 
+ Artyom Tarasenko <atar4qemu@gmail.com>, 
+ Yoshinori Sato <yoshinori.sato@nifty.com>, Jiri Pirko <jiri@resnulli.us>, 
+ Eric Auger <eric.auger@redhat.com>, Laurent Vivier <lvivier@redhat.com>, 
+ =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
+X-Developer-Signature: v=1; a=openpgp-sha256; l=6963;
+ i=marcandre.lureau@redhat.com; h=from:subject:message-id;
+ bh=h0OiLsI4rZp+v/Mhu46aHZ2MeGUSC4RGBbFRwR/fgso=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZafzwZrCef0nnjKmQFgGHI7d1DU4j3tcKg8
+ rfJ8YYSxbiJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGWgAKCRDa6OEJdZac
+ 5ZNiD/9uJkrnfIq0f1AAFb55zRGcmM6E9/bY9PjcQwic7qZwiIF30FoVEyW+LS1V4LBV8lFxJNS
+ PQU7j6R+CB6v9HoMI64E1PyApDwdLlnaHAJlXcyEPUzd2BVafhj1hHbaYhLxkEy1FKLnJgXjLkJ
+ gdIwysLCQIt8EXWXa5PEr9we5qawBjwypQ0Lag+ls7M/dEH/0Kh1uzOi9w8a2krYIDQZcarZN7i
+ E4LtOP390qyqqA6YnMhP59VMT+qvfxHzc/ZQswUOQyZJDTsWt5bsBXzpOFFpbBXuTXpDT9AtofO
+ ID8iow8Lpz1Tszo5kP/m/Lm4S8UWRsm6FmK1PFXmwtWWlyXJh+CUFxiKOxoxpS5FTXbRJGSv05O
+ ZMYDLHTHu8+gadlaJjYgyFbJVyKlNsrAGTmFvM/RU3rpVkTt06dMhmHo8K8rWEYHAwUYB4Ks35l
+ E6S+GJ02O0X284mnQwikHn+fLhcivRrqM+9mynA/bGmrsWZIK4DhT6Cp8zFSPLW47Oshjun/E64
+ G1PIDvecXY/KRp7V24XZJYFMStRWq10r6lNpi654+g4kT2EsUxLVHwoqsQTcV+XoNk/+hsNx570
+ AStfbHcS7MyUnY6GxM7Pl2zFwIbukx86j8jruO3yrSjE+v6CcaPGGLJ2oigWATENvOZrnqpgn3Y
+ yk4mypdVxiZikCA==
+X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
+ fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
+X-Scanned-By: MIMEDefang 3.6 on 10.30.177.95
+X-Mimecast-MFC-PROC-ID: 3gmMqQXWGTjlX7bp4LRRtUob3xZkzfMSpZVEwV4HaC0_1792493356
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::431;
- envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x431.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=170.10.133.124;
+ envelope-from=marcandre.lureau@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: 9
+X-Spam_score: 0.9
+X-Spam_bar: /
+X-Spam_report: (0.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.329,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ RCVD_IN_SBL_CSS=3.335, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -131,388 +172,195 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+X-Spam-Status: No, score=-16.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,USER_AGENT_GIT autolearn=unavailable autolearn_force=no
-	version=4.0.1
+	SPF_PASS autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-We are able to eliminate some NOP implementations with a default
-fallback.
+Replace the type string in SpaprCapabilityInfo with a QAPITypeInfo
+pointer and switch spapr_caps_add_properties() from
+object_class_property_add() to object_class_property_add_qapi().
 
-Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+Reviewed-by: Amit Machhiwal <amachhiw@linux.ibm.com>
+Signed-off-by: Markus Armbruster <armbru@redhat.com>
+Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 ---
- include/accel/kvm/cpu-ops.h | 15 +++++++++++++++
- include/system/kvm.h        |  6 ------
- target/i386/kvm/kvm_i386.h  |  5 +++++
- accel/kvm/kvm-all.c         | 18 ++++++++++++++----
- target/arm/kvm.c            | 13 ++++++++-----
- target/i386/kvm/kvm-cpu.c   |  3 +++
- target/i386/kvm/kvm.c       | 10 +++++-----
- target/loongarch/kvm/kvm.c  | 16 ----------------
- target/ppc/kvm.c            | 13 ++++++++-----
- target/riscv/kvm/kvm-cpu.c  | 19 -------------------
- target/s390x/kvm/kvm.c      |  9 ++++++---
- 11 files changed, 64 insertions(+), 63 deletions(-)
+ hw/ppc/spapr_caps.c | 39 ++++++++++++++++++++-------------------
+ 1 file changed, 20 insertions(+), 19 deletions(-)
 
-diff --git a/include/accel/kvm/cpu-ops.h b/include/accel/kvm/cpu-ops.h
-index d2374e91cef..23a83eee6ed 100644
---- a/include/accel/kvm/cpu-ops.h
-+++ b/include/accel/kvm/cpu-ops.h
-@@ -85,6 +85,16 @@ struct kvm_run;
-  *                        software breakpoint, restoring @bp->saved_insn at
-  *                        @bp->pc.
-  *                        Returns 0 on success, or a negative errno on failure.
-+ * @insert_hw_breakpoint: Optional callback to insert an architecture-specific
-+ *                        hardware breakpoint or watchpoint at address @addr
-+ *                        with length @len and type @type.
-+ *                        Returns 0 on success, or a negative errno on failure.
-+ * @remove_hw_breakpoint: Optional callback to remove an architecture-specific
-+ *                        hardware breakpoint or watchpoint at address @addr
-+ *                        with length @len and type @type.
-+ *                        Returns 0 on success, or a negative errno on failure.
-+ * @remove_all_hw_breakpoints: Optional callback to remove all architecture-
-+ *                             specific hardware breakpoints and watchpoints.
-  */
- typedef struct KVMCPUOps {
-     int (*pre_create_vcpu)(CPUState *cpu, Error **errp);
-@@ -100,6 +110,11 @@ typedef struct KVMCPUOps {
-     void (*update_guest_debug)(CPUState *cpu, struct kvm_guest_debug *dbg);
-     int (*insert_sw_breakpoint)(CPUState *cpu, struct kvm_sw_breakpoint *bp);
-     int (*remove_sw_breakpoint)(CPUState *cpu, struct kvm_sw_breakpoint *bp);
-+    int (*insert_hw_breakpoint)(CPUState *cpu, vaddr addr, vaddr len,
-+                                GdbBreakpointType type);
-+    int (*remove_hw_breakpoint)(CPUState *cpu, vaddr addr, vaddr len,
-+                                GdbBreakpointType type);
-+    void (*remove_all_hw_breakpoints)(CPUState *cpu);
- } KVMCPUOps;
+diff --git a/hw/ppc/spapr_caps.c b/hw/ppc/spapr_caps.c
+index 103b17364feb..e622c79eb52a 100644
+--- a/hw/ppc/spapr_caps.c
++++ b/hw/ppc/spapr_caps.c
+@@ -24,6 +24,7 @@
  
- #define TYPE_KVM_ACCEL_CPU "kvm-accel-cpu"
-diff --git a/include/system/kvm.h b/include/system/kvm.h
-index 52b7a63a0b3..cfc0144d9a5 100644
---- a/include/system/kvm.h
-+++ b/include/system/kvm.h
-@@ -394,12 +394,6 @@ struct kvm_sw_breakpoint *kvm_find_sw_breakpoint(CPUState *cpu,
+ #include "qemu/osdep.h"
+ #include "qemu/error-report.h"
++#include "qapi/qapi-builtin-type-infos.h"
+ #include "qapi/error.h"
+ #include "qapi/visitor.h"
+ #include "system/hw_accel.h"
+@@ -59,7 +60,7 @@ typedef struct SpaprCapabilityInfo {
+     /* Getter and Setter Function Pointers */
+     ObjectPropertyAccessor *get;
+     ObjectPropertyAccessor *set;
+-    const char *type;
++    const QAPITypeInfo *type;
+     /* Possible values if this is a custom string type */
+     SpaprCapPossible *possible;
+     /* Make sure the virtual hardware can support this capability */
+@@ -725,7 +726,7 @@ SpaprCapabilityInfo capability_table[SPAPR_CAP_NUM] = {
+         .index = SPAPR_CAP_HTM,
+         .get = spapr_cap_get_bool,
+         .set = spapr_cap_set_bool,
+-        .type = "bool",
++        .type = &bool_type_info,
+         .apply = cap_htm_apply,
+     },
+     [SPAPR_CAP_VSX] = {
+@@ -734,7 +735,7 @@ SpaprCapabilityInfo capability_table[SPAPR_CAP_NUM] = {
+         .index = SPAPR_CAP_VSX,
+         .get = spapr_cap_get_bool,
+         .set = spapr_cap_set_bool,
+-        .type = "bool",
++        .type = &bool_type_info,
+         .apply = cap_vsx_apply,
+     },
+     [SPAPR_CAP_DFP] = {
+@@ -743,7 +744,7 @@ SpaprCapabilityInfo capability_table[SPAPR_CAP_NUM] = {
+         .index = SPAPR_CAP_DFP,
+         .get = spapr_cap_get_bool,
+         .set = spapr_cap_set_bool,
+-        .type = "bool",
++        .type = &bool_type_info,
+         .apply = cap_dfp_apply,
+     },
+     [SPAPR_CAP_CFPC] = {
+@@ -752,7 +753,7 @@ SpaprCapabilityInfo capability_table[SPAPR_CAP_NUM] = {
+         .index = SPAPR_CAP_CFPC,
+         .get = spapr_cap_get_string,
+         .set = spapr_cap_set_string,
+-        .type = "string",
++        .type = &str_type_info,
+         .possible = &cap_cfpc_possible,
+         .apply = cap_safe_cache_apply,
+     },
+@@ -762,7 +763,7 @@ SpaprCapabilityInfo capability_table[SPAPR_CAP_NUM] = {
+         .index = SPAPR_CAP_SBBC,
+         .get = spapr_cap_get_string,
+         .set = spapr_cap_set_string,
+-        .type = "string",
++        .type = &str_type_info,
+         .possible = &cap_sbbc_possible,
+         .apply = cap_safe_bounds_check_apply,
+     },
+@@ -774,7 +775,7 @@ SpaprCapabilityInfo capability_table[SPAPR_CAP_NUM] = {
+         .index = SPAPR_CAP_IBS,
+         .get = spapr_cap_get_string,
+         .set = spapr_cap_set_string,
+-        .type = "string",
++        .type = &str_type_info,
+         .possible = &cap_ibs_possible,
+         .apply = cap_safe_indirect_branch_apply,
+     },
+@@ -784,7 +785,7 @@ SpaprCapabilityInfo capability_table[SPAPR_CAP_NUM] = {
+         .index = SPAPR_CAP_HPT_MAXPAGESIZE,
+         .get = spapr_cap_get_pagesize,
+         .set = spapr_cap_set_pagesize,
+-        .type = "size",
++        .type = &size_type_info,
+         .apply = cap_hpt_maxpagesize_apply,
+         .cpu_apply = cap_hpt_maxpagesize_cpu_apply,
+     },
+@@ -794,7 +795,7 @@ SpaprCapabilityInfo capability_table[SPAPR_CAP_NUM] = {
+         .index = SPAPR_CAP_NESTED_KVM_HV,
+         .get = spapr_cap_get_bool,
+         .set = spapr_cap_set_bool,
+-        .type = "bool",
++        .type = &bool_type_info,
+         .apply = cap_nested_kvm_hv_apply,
+     },
+     [SPAPR_CAP_NESTED_PAPR] = {
+@@ -803,7 +804,7 @@ SpaprCapabilityInfo capability_table[SPAPR_CAP_NUM] = {
+         .index = SPAPR_CAP_NESTED_PAPR,
+         .get = spapr_cap_get_bool,
+         .set = spapr_cap_set_bool,
+-        .type = "bool",
++        .type = &bool_type_info,
+         .apply = cap_nested_papr_apply,
+     },
+     [SPAPR_CAP_LARGE_DECREMENTER] = {
+@@ -812,7 +813,7 @@ SpaprCapabilityInfo capability_table[SPAPR_CAP_NUM] = {
+         .index = SPAPR_CAP_LARGE_DECREMENTER,
+         .get = spapr_cap_get_bool,
+         .set = spapr_cap_set_bool,
+-        .type = "bool",
++        .type = &bool_type_info,
+         .apply = cap_large_decr_apply,
+         .cpu_apply = cap_large_decr_cpu_apply,
+     },
+@@ -822,7 +823,7 @@ SpaprCapabilityInfo capability_table[SPAPR_CAP_NUM] = {
+         .index = SPAPR_CAP_CCF_ASSIST,
+         .get = spapr_cap_get_bool,
+         .set = spapr_cap_set_bool,
+-        .type = "bool",
++        .type = &bool_type_info,
+         .apply = cap_ccf_assist_apply,
+     },
+     [SPAPR_CAP_FWNMI] = {
+@@ -831,7 +832,7 @@ SpaprCapabilityInfo capability_table[SPAPR_CAP_NUM] = {
+         .index = SPAPR_CAP_FWNMI,
+         .get = spapr_cap_get_bool,
+         .set = spapr_cap_set_bool,
+-        .type = "bool",
++        .type = &bool_type_info,
+         .apply = cap_fwnmi_apply,
+     },
+     [SPAPR_CAP_RPT_INVALIDATE] = {
+@@ -840,7 +841,7 @@ SpaprCapabilityInfo capability_table[SPAPR_CAP_NUM] = {
+         .index = SPAPR_CAP_RPT_INVALIDATE,
+         .get = spapr_cap_get_bool,
+         .set = spapr_cap_set_bool,
+-        .type = "bool",
++        .type = &bool_type_info,
+         .apply = cap_rpt_invalidate_apply,
+     },
+     [SPAPR_CAP_AIL_MODE_3] = {
+@@ -849,7 +850,7 @@ SpaprCapabilityInfo capability_table[SPAPR_CAP_NUM] = {
+         .index = SPAPR_CAP_AIL_MODE_3,
+         .get = spapr_cap_get_bool,
+         .set = spapr_cap_set_bool,
+-        .type = "bool",
++        .type = &bool_type_info,
+         .apply = cap_ail_mode_3_apply,
+     },
+     [SPAPR_CAP_DAWR1] = {
+@@ -858,7 +859,7 @@ SpaprCapabilityInfo capability_table[SPAPR_CAP_NUM] = {
+         .index = SPAPR_CAP_DAWR1,
+         .get = spapr_cap_get_bool,
+         .set = spapr_cap_set_bool,
+-        .type = "bool",
++        .type = &bool_type_info,
+         .apply = cap_dawr1_apply,
+     },
+ };
+@@ -1069,9 +1070,9 @@ void spapr_caps_add_properties(SpaprMachineClass *smc)
+         g_autofree char *name = g_strdup_printf("cap-%s", cap->name);
+         g_autofree char *desc = g_strdup(cap->description);
  
- int kvm_sw_breakpoints_active(CPUState *cpu);
+-        object_class_property_add(klass, name, cap->type,
+-                                  cap->get, cap->set,
+-                                  NULL, cap);
++        object_class_property_add_qapi(klass, name, cap->type,
++                                       cap->get, cap->set,
++                                       NULL, cap);
  
--int kvm_arch_insert_gdbstub_hw_breakpoint(vaddr addr, vaddr len,
--                                          GdbBreakpointType type);
--int kvm_arch_remove_gdbstub_hw_breakpoint(vaddr addr, vaddr len,
--                                          GdbBreakpointType type);
--void kvm_arch_remove_all_gdbstub_hw_breakpoints(void);
--
- bool kvm_arch_stop_on_emulation_error(CPUState *cpu);
- 
- int kvm_vm_check_extension(KVMState *s, unsigned int extension);
-diff --git a/target/i386/kvm/kvm_i386.h b/target/i386/kvm/kvm_i386.h
-index 27eea1f65ff..e2ae601100c 100644
---- a/target/i386/kvm/kvm_i386.h
-+++ b/target/i386/kvm/kvm_i386.h
-@@ -46,6 +46,11 @@ int x86_kvm_process_async_events(CPUState *cs);
- void x86_kvm_update_guest_debug(CPUState *cpu, struct kvm_guest_debug *dbg);
- int x86_kvm_insert_sw_breakpoint(CPUState *cs, struct kvm_sw_breakpoint *bp);
- int x86_kvm_remove_sw_breakpoint(CPUState *cs, struct kvm_sw_breakpoint *bp);
-+int x86_kvm_insert_hw_breakpoint(CPUState *cs, vaddr addr, vaddr len,
-+                                 GdbBreakpointType type);
-+int x86_kvm_remove_hw_breakpoint(CPUState *cs, vaddr addr, vaddr len,
-+                                 GdbBreakpointType type);
-+void x86_kvm_remove_all_hw_breakpoints(CPUState *cs);
- void kvm_arch_after_reset_vcpu(X86CPU *cpu);
- void kvm_arch_do_init_vcpu(X86CPU *cs);
- uint32_t kvm_arch_get_supported_cpuid(KVMState *env, uint32_t function,
-diff --git a/accel/kvm/kvm-all.c b/accel/kvm/kvm-all.c
-index 24ded4b1804..3bd61264a7e 100644
---- a/accel/kvm/kvm-all.c
-+++ b/accel/kvm/kvm-all.c
-@@ -3917,7 +3917,12 @@ int kvm_insert_gdbstub_breakpoint(CPUState *cpu, GdbBreakpointType type,
- 
-         QTAILQ_INSERT_HEAD(&cpu->kvm_state->kvm_sw_breakpoints, bp, entry);
-     } else {
--        err = kvm_arch_insert_gdbstub_hw_breakpoint(addr, len, type);
-+        const KVMCPUOps *ops = kvm_get_cpu_ops(cpu);
-+
-+        if (!ops || !ops->insert_hw_breakpoint) {
-+            return -ENOSYS;
-+        }
-+        err = ops->insert_hw_breakpoint(cpu, addr, len, type);
-         if (err) {
-             return err;
-         }
-@@ -3937,9 +3942,9 @@ int kvm_remove_gdbstub_breakpoint(CPUState *cpu, GdbBreakpointType type,
- {
-     struct kvm_sw_breakpoint *bp;
-     int err;
-+    const KVMCPUOps *ops = kvm_get_cpu_ops(cpu);
- 
-     if (type == GDB_BREAKPOINT_SW) {
--        const KVMCPUOps *ops = kvm_get_cpu_ops(cpu);
- 
-         bp = kvm_find_sw_breakpoint(cpu, addr);
-         if (!bp) {
-@@ -3963,7 +3968,10 @@ int kvm_remove_gdbstub_breakpoint(CPUState *cpu, GdbBreakpointType type,
-         QTAILQ_REMOVE(&cpu->kvm_state->kvm_sw_breakpoints, bp, entry);
-         g_free(bp);
-     } else {
--        err = kvm_arch_remove_gdbstub_hw_breakpoint(addr, len, type);
-+        if (!ops || !ops->remove_hw_breakpoint) {
-+            return -ENOSYS;
-+        }
-+        err = ops->remove_hw_breakpoint(cpu, addr, len, type);
-         if (err) {
-             return err;
-         }
-@@ -4005,7 +4013,9 @@ void kvm_remove_all_gdbstub_breakpoints(CPUState *cpu)
-         QTAILQ_REMOVE(&s->kvm_sw_breakpoints, bp, entry);
-         g_free(bp);
+         object_class_property_set_description(klass, name, desc);
      }
--    kvm_arch_remove_all_gdbstub_hw_breakpoints();
-+    if (ops && ops->remove_all_hw_breakpoints) {
-+        ops->remove_all_hw_breakpoints(cpu);
-+    }
- 
-     CPU_FOREACH(cpu) {
-         kvm_update_guest_debug(cpu, 0);
-diff --git a/target/arm/kvm.c b/target/arm/kvm.c
-index a4f063f2efb..5c0ccfc11cd 100644
---- a/target/arm/kvm.c
-+++ b/target/arm/kvm.c
-@@ -1821,8 +1821,8 @@ void kvm_arch_accel_class_init(ObjectClass *oc)
-         "Eager Page Split chunk size for hugepages. (default: 0, disabled)");
- }
- 
--int kvm_arch_insert_gdbstub_hw_breakpoint(vaddr addr, vaddr len,
--                                          GdbBreakpointType type)
-+static int arm_kvm_insert_hw_breakpoint(CPUState *cs, vaddr addr, vaddr len,
-+                                         GdbBreakpointType type)
- {
-     switch (type) {
-     case GDB_BREAKPOINT_HW:
-@@ -1837,8 +1837,8 @@ int kvm_arch_insert_gdbstub_hw_breakpoint(vaddr addr, vaddr len,
-     }
- }
- 
--int kvm_arch_remove_gdbstub_hw_breakpoint(vaddr addr, vaddr len,
--                                          GdbBreakpointType type)
-+static int arm_kvm_remove_hw_breakpoint(CPUState *cs, vaddr addr, vaddr len,
-+                                         GdbBreakpointType type)
- {
-     switch (type) {
-     case GDB_BREAKPOINT_HW:
-@@ -1852,7 +1852,7 @@ int kvm_arch_remove_gdbstub_hw_breakpoint(vaddr addr, vaddr len,
-     }
- }
- 
--void kvm_arch_remove_all_gdbstub_hw_breakpoints(void)
-+static void arm_kvm_remove_all_hw_breakpoints(CPUState *cs)
- {
-     if (cur_hw_wps > 0) {
-         g_array_remove_range(hw_watchpoints, 0, cur_hw_wps);
-@@ -2658,6 +2658,9 @@ static const KVMCPUOps arm_kvm_cpu_ops = {
-     .update_guest_debug = arm_kvm_update_guest_debug,
-     .insert_sw_breakpoint = arm_kvm_insert_sw_breakpoint,
-     .remove_sw_breakpoint = arm_kvm_remove_sw_breakpoint,
-+    .insert_hw_breakpoint = arm_kvm_insert_hw_breakpoint,
-+    .remove_hw_breakpoint = arm_kvm_remove_hw_breakpoint,
-+    .remove_all_hw_breakpoints = arm_kvm_remove_all_hw_breakpoints,
- };
- 
- static void kvm_cpu_accel_class_init(ObjectClass *oc, const void *data)
-diff --git a/target/i386/kvm/kvm-cpu.c b/target/i386/kvm/kvm-cpu.c
-index 0cd0884be30..baaee0c7e71 100644
---- a/target/i386/kvm/kvm-cpu.c
-+++ b/target/i386/kvm/kvm-cpu.c
-@@ -248,6 +248,9 @@ static const KVMCPUOps x86_kvm_cpu_ops = {
-     .update_guest_debug = x86_kvm_update_guest_debug,
-     .insert_sw_breakpoint = x86_kvm_insert_sw_breakpoint,
-     .remove_sw_breakpoint = x86_kvm_remove_sw_breakpoint,
-+    .insert_hw_breakpoint = x86_kvm_insert_hw_breakpoint,
-+    .remove_hw_breakpoint = x86_kvm_remove_hw_breakpoint,
-+    .remove_all_hw_breakpoints = x86_kvm_remove_all_hw_breakpoints,
- };
- 
- static void kvm_cpu_accel_class_init(ObjectClass *oc, const void *data)
-diff --git a/target/i386/kvm/kvm.c b/target/i386/kvm/kvm.c
-index 4ee7f53c2a8..78c06a07bd6 100644
---- a/target/i386/kvm/kvm.c
-+++ b/target/i386/kvm/kvm.c
-@@ -6176,8 +6176,8 @@ static int find_hw_breakpoint(target_ulong addr, int len, GdbBreakpointType type
-     return -1;
- }
- 
--int kvm_arch_insert_gdbstub_hw_breakpoint(vaddr addr, vaddr len,
--                                          GdbBreakpointType type)
-+int x86_kvm_insert_hw_breakpoint(CPUState *cs, vaddr addr, vaddr len,
-+                                 GdbBreakpointType type)
- {
-     switch (type) {
-     case GDB_BREAKPOINT_HW:
-@@ -6217,8 +6217,8 @@ int kvm_arch_insert_gdbstub_hw_breakpoint(vaddr addr, vaddr len,
-     return 0;
- }
- 
--int kvm_arch_remove_gdbstub_hw_breakpoint(vaddr addr, vaddr len,
--                                          GdbBreakpointType type)
-+int x86_kvm_remove_hw_breakpoint(CPUState *cs, vaddr addr, vaddr len,
-+                                 GdbBreakpointType type)
- {
-     int n;
- 
-@@ -6232,7 +6232,7 @@ int kvm_arch_remove_gdbstub_hw_breakpoint(vaddr addr, vaddr len,
-     return 0;
- }
- 
--void kvm_arch_remove_all_gdbstub_hw_breakpoints(void)
-+void x86_kvm_remove_all_hw_breakpoints(CPUState *cs)
- {
-     nb_hw_breakpoint = 0;
- }
-diff --git a/target/loongarch/kvm/kvm.c b/target/loongarch/kvm/kvm.c
-index 0899aef552e..b15f60bd2c3 100644
---- a/target/loongarch/kvm/kvm.c
-+++ b/target/loongarch/kvm/kvm.c
-@@ -1551,22 +1551,6 @@ static int loongarch_kvm_remove_sw_breakpoint(CPUState *cs,
-     return 0;
- }
- 
--int kvm_arch_insert_gdbstub_hw_breakpoint(vaddr addr, vaddr len,
--                                          GdbBreakpointType type)
--{
--    return -ENOSYS;
--}
--
--int kvm_arch_remove_gdbstub_hw_breakpoint(vaddr addr, vaddr len,
--                                          GdbBreakpointType type)
--{
--    return -ENOSYS;
--}
--
--void kvm_arch_remove_all_gdbstub_hw_breakpoints(void)
--{
--}
--
- static bool kvm_loongarch_handle_debug(CPUState *cs, struct kvm_run *run)
- {
-     LoongArchCPU *cpu = LOONGARCH_CPU(cs);
-diff --git a/target/ppc/kvm.c b/target/ppc/kvm.c
-index 4b2e42ef163..548bf3e00ad 100644
---- a/target/ppc/kvm.c
-+++ b/target/ppc/kvm.c
-@@ -1438,8 +1438,8 @@ static int find_hw_watchpoint(target_ulong addr, int *flag)
-     return -1;
- }
- 
--int kvm_arch_insert_gdbstub_hw_breakpoint(vaddr addr, vaddr len,
--                                          GdbBreakpointType type)
-+static int ppc_kvm_insert_hw_breakpoint(CPUState *cs, vaddr addr, vaddr len,
-+                                         GdbBreakpointType type)
- {
-     const unsigned breakpoint_index = nb_hw_breakpoint + nb_hw_watchpoint;
-     if (breakpoint_index >= ARRAY_SIZE(hw_debug_points)) {
-@@ -1483,8 +1483,8 @@ int kvm_arch_insert_gdbstub_hw_breakpoint(vaddr addr, vaddr len,
-     return 0;
- }
- 
--int kvm_arch_remove_gdbstub_hw_breakpoint(vaddr addr, vaddr len,
--                                          GdbBreakpointType type)
-+static int ppc_kvm_remove_hw_breakpoint(CPUState *cs, vaddr addr, vaddr len,
-+                                         GdbBreakpointType type)
- {
-     int n;
- 
-@@ -1512,7 +1512,7 @@ int kvm_arch_remove_gdbstub_hw_breakpoint(vaddr addr, vaddr len,
-     return 0;
- }
- 
--void kvm_arch_remove_all_gdbstub_hw_breakpoints(void)
-+static void ppc_kvm_remove_all_hw_breakpoints(CPUState *cs)
- {
-     nb_hw_breakpoint = nb_hw_watchpoint = 0;
- }
-@@ -3075,6 +3075,9 @@ static const KVMCPUOps ppc_kvm_cpu_ops = {
-     .update_guest_debug = ppc_kvm_update_guest_debug,
-     .insert_sw_breakpoint = ppc_kvm_insert_sw_breakpoint,
-     .remove_sw_breakpoint = ppc_kvm_remove_sw_breakpoint,
-+    .insert_hw_breakpoint = ppc_kvm_insert_hw_breakpoint,
-+    .remove_hw_breakpoint = ppc_kvm_remove_hw_breakpoint,
-+    .remove_all_hw_breakpoints = ppc_kvm_remove_all_hw_breakpoints,
- };
- 
- static void kvm_cpu_accel_class_init(ObjectClass *oc, const void *data)
-diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-index 8a82160a7bf..aeb049c0c71 100644
---- a/target/riscv/kvm/kvm-cpu.c
-+++ b/target/riscv/kvm/kvm-cpu.c
-@@ -2279,25 +2279,6 @@ static int riscv_kvm_remove_sw_breakpoint(CPUState *cs,
-     return 0;
- }
- 
--int kvm_arch_insert_gdbstub_hw_breakpoint(vaddr addr, vaddr len,
--                                          GdbBreakpointType type)
--{
--    /* TODO; To be implemented later. */
--    return -EINVAL;
--}
--
--int kvm_arch_remove_gdbstub_hw_breakpoint(vaddr addr, vaddr len,
--                                          GdbBreakpointType type)
--{
--    /* TODO; To be implemented later. */
--    return -EINVAL;
--}
--
--void kvm_arch_remove_all_gdbstub_hw_breakpoints(void)
--{
--    /* TODO; To be implemented later. */
--}
--
- static void riscv_kvm_update_guest_debug(CPUState *cs,
-                                          struct kvm_guest_debug *dbg)
- {
-diff --git a/target/s390x/kvm/kvm.c b/target/s390x/kvm/kvm.c
-index 12695376442..ccdc85900ba 100644
---- a/target/s390x/kvm/kvm.c
-+++ b/target/s390x/kvm/kvm.c
-@@ -902,7 +902,7 @@ static int insert_hw_breakpoint(vaddr addr, int len, int type)
-     return 0;
- }
- 
--int kvm_arch_insert_gdbstub_hw_breakpoint(vaddr addr, vaddr len,
-+static int s390x_kvm_insert_hw_breakpoint(CPUState *cs, vaddr addr, vaddr len,
-                                           GdbBreakpointType type)
- {
-     switch (type) {
-@@ -921,7 +921,7 @@ int kvm_arch_insert_gdbstub_hw_breakpoint(vaddr addr, vaddr len,
-     return insert_hw_breakpoint(addr, len, type);
- }
- 
--int kvm_arch_remove_gdbstub_hw_breakpoint(vaddr addr, vaddr len,
-+static int s390x_kvm_remove_hw_breakpoint(CPUState *cs, vaddr addr, vaddr len,
-                                           GdbBreakpointType type)
- {
-     int size;
-@@ -951,7 +951,7 @@ int kvm_arch_remove_gdbstub_hw_breakpoint(vaddr addr, vaddr len,
-     return 0;
- }
- 
--void kvm_arch_remove_all_gdbstub_hw_breakpoints(void)
-+static void s390x_kvm_remove_all_hw_breakpoints(CPUState *cs)
- {
-     nb_hw_breakpoints = 0;
-     g_free(hw_breakpoints);
-@@ -2653,6 +2653,9 @@ static const KVMCPUOps s390x_kvm_cpu_ops = {
-     .update_guest_debug = s390x_kvm_update_guest_debug,
-     .insert_sw_breakpoint = s390x_kvm_insert_sw_breakpoint,
-     .remove_sw_breakpoint = s390x_kvm_remove_sw_breakpoint,
-+    .insert_hw_breakpoint = s390x_kvm_insert_hw_breakpoint,
-+    .remove_hw_breakpoint = s390x_kvm_remove_hw_breakpoint,
-+    .remove_all_hw_breakpoints = s390x_kvm_remove_all_hw_breakpoints,
- };
- 
- static void kvm_cpu_accel_class_init(ObjectClass *oc, const void *data)
+
 -- 
-2.47.3
+2.56.0.116.g6de20f6092dc
 
 
