@@ -1,59 +1,59 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4C779606A31B
-	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Oct 2026 11:15:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B7EC1606A31E
+	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Oct 2026 11:16:07 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=Kvj6Uhmx
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=aanf2Mf7
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xJ7QI-00078L-PL; Tue, 20 Oct 2026 06:50:26 -0400
+	id 1xJ7Ud-0006lY-6c; Tue, 20 Oct 2026 06:54:55 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1xJ7Ol-0003EL-07
- for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:48:52 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ id 1xJ7Rq-00017I-Tn
+ for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:52:03 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1xJ7Oh-0005bK-AC
- for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:48:49 -0400
+ id 1xJ7Rm-0006fv-KZ
+ for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:52:02 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1792493326;
+ s=mimecast20190719; t=1792493515;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=VsbaU0VdjEFE5/Kdiolu0QHc56Ub04+6AJsyszfha5Q=;
- b=Kvj6Uhmx0CftacNi8fS11w2+s5+vYOuMOklkfQcL817okxj1BLEXQ5Wx0bxnDrs2S7y03u
- /igaXAem0RanY67EA4+bRDbOFopm14PF8Is+FUroEJEjxZShXK7zfrGslsQ1kCajOGRwjm
- flMBuzKO9F2N5mpB94gS69XuGdt0/A0=
-Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ bh=LYACgjhTWZ9q+fLhnzsamP9g+AzKgXq2yAfu5fEslcg=;
+ b=aanf2Mf7GTaqdeppr2099HyhO9I/TSgix+uC+WtKZV2G8B6Kmdc7XEbSim7JOqlhC/6Ee7
+ K+eG0nFiK/NUTA/b80rr8zIsGdF19H1FD4YKd+YjdHzQUQHy1fsdEVjhdRSNwbxj1LiUjO
+ ApO0yCl0V+8Vq3W+7VIwWrSWc79xMf0=
+Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-83--Z5Wuh_zPUyc0JzRRnv_JA-1; Tue,
- 20 Oct 2026 06:48:42 -0400
-X-MC-Unique: -Z5Wuh_zPUyc0JzRRnv_JA-1
-X-Mimecast-MFC-AGG-ID: -Z5Wuh_zPUyc0JzRRnv_JA_1792493319
-Received: from mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.95])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-674-wz3IHZmqNpWyL00b1VAr7Q-1; Tue,
+ 20 Oct 2026 10:51:46 +0000
+X-MC-Unique: wz3IHZmqNpWyL00b1VAr7Q-1
+X-Mimecast-MFC-AGG-ID: wz3IHZmqNpWyL00b1VAr7Q_1792493502
+Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 15B921956076; Tue, 20 Oct 2026 10:48:39 +0000 (UTC)
+ by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 390C7180132B; Tue, 20 Oct 2026 10:51:42 +0000 (UTC)
 Received: from localhost (headnet04.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.116])
- by mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 1EFBA418; Tue, 20 Oct 2026 10:48:36 +0000 (UTC)
+ by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id AEC3230000E7; Tue, 20 Oct 2026 10:51:39 +0000 (UTC)
 From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-Date: Tue, 20 Oct 2026 14:45:44 +0400
-Subject: [PATCH v7 27/65] hostmem-file: convert OnOffAuto rom property to
- QAPI-aware registration
+Date: Tue, 20 Oct 2026 14:46:18 +0400
+Subject: [PATCH v7 61/65] qdev: remove deprecated PropertyInfo.type and
+ .enum_table fields
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Message-Id: <20261020-qom-qapi-v7-27-431a86b02b58@redhat.com>
+Message-Id: <20261020-qom-qapi-v7-61-431a86b02b58@redhat.com>
 References: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 In-Reply-To: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 To: qemu-devel@nongnu.org
@@ -128,38 +128,38 @@ Cc: Markus Armbruster <armbru@redhat.com>,
  Yoshinori Sato <yoshinori.sato@nifty.com>, Jiri Pirko <jiri@resnulli.us>, 
  Eric Auger <eric.auger@redhat.com>, Laurent Vivier <lvivier@redhat.com>, 
  =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3017;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5656;
  i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=iZFd9HvderJ8uRReytwVEg9V/BI0/W9et6yTV5n+0HQ=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZaUi0I/HhTBoPEm8cGvUR2Ags/oP63+/IJC
- B3aPbt5x/6JAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGWgAKCRDa6OEJdZac
- 5SbrEACzpT4DA3aDgoPm1mkI7LWP4C1/KmFL4+/JVH+4dvDiHK2lfPUcj6g8+5ZAjiaZ7BNg5vr
- GU3ywL52hlZ5JZCn41HMfti/ha4z983dNfIctpiaV9RJU+A22EtAvPLpDEcFPF9PfeB/aMB6a1h
- 0Dpk/O8iKpIR0ww2sHYfJ7HC8jqBpBpc5BTWLONeOzWTk3OnFRU6R0c5BPcI6cENi7juVgxXrtZ
- ispq5YrtGrp52pLe3Ewh7Z+QrKyA2oKxwo7jhh3PQ9MQf1Bv4H9XMKBZmivwnir/bT4wnDtabCG
- Z3MBE8QRfPUHzLW7s8idRTcelPr99S0+ZteQGhagDNHrC6CSQMSUQPO7daBJj8bgI/gxraF66d0
- ceIDBeRODFFyp397ZvOHRafc6G41UZt3Q09G/ONGcgNom+1IxZuqlJKhvb2/lhLdZMQFRPNkGAj
- +EpBka/x64Ny38YdXyQE79VKzddpZZLDC1bVdR+/jm4r3s6ujtMANYlwZojYhpW6CGtB8RorWmI
- BzUp4XLCDTQrGR4EZej7rnfAUKzkJ3+sMWrkIk59mZgmLJ5fXSxLqhwExH6OrIEp1ay3QZ15Bhp
- MS3Wp8RSmuhgaHr6i15QnVDly1vb0u60cJvRjNcpvjIEC40XFnirrOV6Qw6AmT4lgBoJx/CvkS4
- b2y0JppmjOhRU9g==
+ bh=GW0iWX+ovnUEAGVG0BxcFS64OjWdn47qGiXFBFBt6kE=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZduD65Qr6F408CFXCHRwiWcGKpWuyckav27
+ m0L7FlHyHOJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGXQAKCRDa6OEJdZac
+ 5SIyD/9K494S/RKkzAsSOv9T/MgMAP/WgYu11N3TAUAFlouXn2Swjs8mxH+DvN0TL1zOI7DEln4
+ fWF3jd4K9yGpeOdK3FVhlUuUGIu+vCahmXGsC2IRNnSgUJb4k2RHjeIiyWV/jhtNA/9wx465q/C
+ 0OSjxbW+EtYZ3lz0RkjF6YDM+tm9WVYqnQnMDbFuzngcpgqksdveXP06Xu2THNHykMaEy9m8nir
+ mzxnTI67NabjcysMX+MF1Qgy6e2kI6X8PSi5Ii4CpJXlg6NszHB8aISyuxGh3En/Fv2Y/2f/fzC
+ sIKxBFBcSVSMYhRpwzAZZCX8YSUbh2Y42NRkfwZMI08gHA+sl8pYFdenolCBtd8mEDlWjtCWGLB
+ c97FNo8YgEqQpDTNZOal6LhBdRktum+TSi1XlcqMndZ/TCO/g5x8g/hnsFrp/+6WHt+4VAegrzT
+ mkGeBr/Y+ok5ueSlc+kTZYEoLpKHAsHeYM3r+GcPnXOgCk9GvkOrAfaAoHc155+qqmkOyAUeWJu
+ V4X338aVVee/lykp8yDDcAkwPVhw1DH0lCRXuHCA2/aR8xhiZg8zMindNp8TtG/QbTUCwDa/WMw
+ hJcKbcWKMOqkjIZn3eNTlzVwzpE6SFeoKKAnXaQFooDRlL0a/mAzPqJ1ahGBT4iLEdc/AVpxjkM
+ ETt5bqcvNS2VmlQ==
 X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
  fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
-X-Scanned-By: MIMEDefang 3.6 on 10.30.177.95
-X-Mimecast-MFC-PROC-ID: UKrYEkdFzrOi0tQjuDfH3XXIvAI0pJb3quhP5m4BixA_1792493319
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
+X-Mimecast-MFC-PROC-ID: cyepcb4FjhnbZjiusCnA0gzaAb9h_jGSrDLAZkPR9UY_1792493502
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.129.124;
+Received-SPF: pass client-ip=170.10.133.124;
  envelope-from=marcandre.lureau@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: 9
-X-Spam_score: 0.9
-X-Spam_bar: /
-X-Spam_report: (0.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.329,
+X-Spam_score_int: -23
+X-Spam_score: -2.4
+X-Spam_bar: --
+X-Spam_report: (-2.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.329,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_SBL_CSS=3.335, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -178,82 +178,140 @@ X-Spam-Status: No, score=-16.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Convert the rom OnOffAuto property from manual visitor-based
-callbacks to property_add_qapi_enum().
+Now that all PropertyInfo definitions use .qapi_type, remove the
+legacy .type (string) and .enum_table fields from PropertyInfo, and
+the .arrayinfo/.arrayfieldsize fields from Property.
+
+Remove fallback branches in qdev_property_add_static() and
+qdev_class_add_property() that used object_property_add() with
+prop->info->type: these always use the QAPI-aware registration
+path now. Simplify qdev_propinfo_enum_lookup(), prop_array_info()
+and prop_array_elem_size() to use the new fields directly.
 
 Signed-off-by: Markus Armbruster <armbru@redhat.com>
 Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 ---
- backends/hostmem-file.c | 29 +++++++++++++----------------
- 1 file changed, 13 insertions(+), 16 deletions(-)
+ hw/core/qdev-properties.c         | 58 ++++++++++++---------------------------
+ include/hw/core/qdev-properties.h |  4 ---
+ 2 files changed, 17 insertions(+), 45 deletions(-)
 
-diff --git a/backends/hostmem-file.c b/backends/hostmem-file.c
-index 7efecf71f565..7d4d52482966 100644
---- a/backends/hostmem-file.c
-+++ b/backends/hostmem-file.c
-@@ -19,7 +19,7 @@
- #include "qom/object_interfaces.h"
- #include "qom/object.h"
- #include "qapi/visitor.h"
--#include "qapi/qapi-visit-common.h"
-+#include "qapi/qapi-type-infos-common.h"
+diff --git a/hw/core/qdev-properties.c b/hw/core/qdev-properties.c
+index 5c403cc2e57e..a121878467e1 100644
+--- a/hw/core/qdev-properties.c
++++ b/hw/core/qdev-properties.c
+@@ -103,11 +103,8 @@ static ObjectPropertyAccessor *field_prop_setter(const PropertyInfo *info)
  
- OBJECT_DECLARE_SIMPLE_TYPE(HostMemoryBackendFile, MEMORY_BACKEND_FILE)
- 
-@@ -230,30 +230,24 @@ static void file_memory_backend_set_readonly(Object *obj, bool value,
-     fb->readonly = value;
+ const QEnumLookup *qdev_propinfo_enum_lookup(const PropertyInfo *info)
+ {
+-    if (info->qapi_type) {
+-        assert(info->qapi_type->lookup);
+-        return info->qapi_type->lookup;
+-    }
+-    return info->enum_table;
++    assert(info->qapi_type->lookup);
++    return info->qapi_type->lookup;
  }
  
--static void file_memory_backend_get_rom(Object *obj, Visitor *v,
--                                        const char *name, void *opaque,
--                                        Error **errp)
-+static int file_memory_backend_get_rom(Object *obj, Error **errp)
+ void qdev_propinfo_get_enum(Object *obj, Visitor *v, const char *name,
+@@ -668,18 +665,12 @@ struct ArrayElementList {
+ 
+ static const PropertyInfo *prop_array_info(const Property *prop)
  {
-     HostMemoryBackendFile *fb = MEMORY_BACKEND_FILE(obj);
--    OnOffAuto rom = fb->rom;
--
--    visit_type_OnOffAuto(v, name, &rom, errp);
-+    return fb->rom;
+-    if (prop->info->element_info) {
+-        return prop->info->element_info;
+-    }
+-    return prop->arrayinfo;
++    return prop->info->element_info;
  }
  
--static void file_memory_backend_set_rom(Object *obj, Visitor *v,
--                                        const char *name, void *opaque,
--                                        Error **errp)
-+static void file_memory_backend_set_rom(Object *obj, int value, Error **errp)
+ static int prop_array_elem_size(const Property *prop)
  {
-     HostMemoryBackend *backend = MEMORY_BACKEND(obj);
-     HostMemoryBackendFile *fb = MEMORY_BACKEND_FILE(obj);
+-    if (prop->info->element_size) {
+-        return prop->info->element_size;
+-    }
+-    return prop->arrayfieldsize;
++    return prop->info->element_size;
+ }
  
-     if (host_memory_backend_mr_inited(backend)) {
--        error_setg(errp, "cannot change property '%s' of %s.", name,
-+        error_setg(errp, "cannot change property 'rom' of %s.",
-                    object_get_typename(obj));
-         return;
+ /*
+@@ -1224,20 +1215,13 @@ void qdev_property_add_static(DeviceState *dev, const Property *prop)
+     const QAPITypeInfo *qapi_type = qdev_prop_qapi_type(prop);
+ 
+     assert(!prop->info->create);
++    assert(qapi_type);
+ 
+-    if (qapi_type) {
+-        op = object_property_add_qapi(obj, prop->name, qapi_type,
+-                                      field_prop_getter(prop->info),
+-                                      field_prop_setter(prop->info),
+-                                      prop->info->release,
+-                                      (Property *)prop);
+-    } else {
+-        op = object_property_add(obj, prop->name, prop->info->type,
+-                                 field_prop_getter(prop->info),
+-                                 field_prop_setter(prop->info),
+-                                 prop->info->release,
+-                                 (Property *)prop);
+-    }
++    op = object_property_add_qapi(obj, prop->name, qapi_type,
++                                  field_prop_getter(prop->info),
++                                  field_prop_setter(prop->info),
++                                  prop->info->release,
++                                  (Property *)prop);
+ 
+     object_property_set_description(obj, prop->name,
+                                     prop->info->description);
+@@ -1261,21 +1245,13 @@ static void qdev_class_add_property(DeviceClass *klass, const char *name,
+     } else {
+         const QAPITypeInfo *qapi_type = qdev_prop_qapi_type(prop);
+ 
+-        if (qapi_type) {
+-            op = object_class_property_add_qapi(oc,
+-                                               name, qapi_type,
+-                                               field_prop_getter(prop->info),
+-                                               field_prop_setter(prop->info),
+-                                               prop->info->release,
+-                                               (Property *)prop);
+-        } else {
+-            op = object_class_property_add(oc,
+-                                           name, prop->info->type,
+-                                           field_prop_getter(prop->info),
+-                                           field_prop_setter(prop->info),
+-                                           prop->info->release,
+-                                           (Property *)prop);
+-        }
++        assert(qapi_type);
++        op = object_class_property_add_qapi(oc,
++                                            name, qapi_type,
++                                            field_prop_getter(prop->info),
++                                            field_prop_setter(prop->info),
++                                            prop->info->release,
++                                            (Property *)prop);
      }
+     if (prop->set_default) {
+         prop->info->set_default_value(op, prop);
+diff --git a/include/hw/core/qdev-properties.h b/include/hw/core/qdev-properties.h
+index 39f95ce7a3c6..2267e734d1fd 100644
+--- a/include/hw/core/qdev-properties.h
++++ b/include/hw/core/qdev-properties.h
+@@ -23,17 +23,13 @@ struct Property {
+         int64_t i;
+         uint64_t u;
+     } defval;
+-    const PropertyInfo *arrayinfo;
+     int          arrayoffset;
+-    int          arrayfieldsize;
+     uint8_t      bitnr;
+     bool         set_default;
+ };
  
--    visit_type_OnOffAuto(v, name, &fb->rom, errp);
-+    fb->rom = value;
- }
- 
- static void file_backend_unparent(Object *obj)
-@@ -298,10 +292,13 @@ file_backend_class_init(ObjectClass *oc, const void *data)
-     object_class_property_add_bool(oc, "readonly",
-         file_memory_backend_get_readonly,
-         file_memory_backend_set_readonly);
--    object_class_property_add(oc, "rom", "OnOffAuto",
--        file_memory_backend_get_rom, file_memory_backend_set_rom, NULL, NULL);
--    object_class_property_set_description(oc, "rom",
--        "Whether to create Read Only Memory (ROM)");
-+    object_class_property_add_qapi_enum(oc, QAPI_ENUM_PROP(
-+        .name = "rom",
-+        .description = "Whether to create Read Only Memory (ROM)",
-+        .qapi_type = &OnOffAuto_type_info,
-+        .get = file_memory_backend_get_rom,
-+        .set = file_memory_backend_set_rom,
-+    ));
- }
- 
- static void file_backend_instance_finalize(Object *o)
+ struct PropertyInfo {
+-    const char *type;
+     const char *description;
+-    const QEnumLookup *enum_table;
+     const QAPITypeInfo *qapi_type;
+     const struct PropertyInfo *element_info;
+     int element_size;
 
 -- 
 2.56.0.116.g6de20f6092dc
