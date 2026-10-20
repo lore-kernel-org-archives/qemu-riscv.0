@@ -1,58 +1,59 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C6D0C60A2612
-	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Oct 2026 10:50:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 62E5B60A3810
+	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Oct 2026 10:50:57 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=P2KwWbnS
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=if9HlzBN
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xJ7Nk-0001fy-Uv; Tue, 20 Oct 2026 06:47:49 -0400
+	id 1xJ7Pk-0005Cx-4T; Tue, 20 Oct 2026 06:49:52 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1xJ7MU-0000WI-8l
- for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:46:31 -0400
+ id 1xJ7O4-0002fF-B5
+ for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:48:08 -0400
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1xJ7MR-00057E-Oo
- for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:46:29 -0400
+ id 1xJ7O1-0005SZ-Ki
+ for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:48:08 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1792493187;
+ s=mimecast20190719; t=1792493285;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=Wrkputc8/RPpD4nnWHNw9T7RRAU4Kg2aM4nuyIGGs8E=;
- b=P2KwWbnS9ygGzQ/ZLqIaSEASARp1ANhH7OH8vh9SkqbCeKGzLAOjyDqcjuuzp56faazgvM
- eVmAUmPzTC4TVEhpvQOPAJ9X0YS6JelQZjBH9HP2Uas5A0/IsLtPfgKkGvQOsX/wNJ5DZv
- 4s4hwEOGelFhvZpAi4BkPo99bXszpBM=
-Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
+ bh=VhnuP9GUFWkUKVrWiyyQ4TwAPJA5jCWzmPwQlY7WHrg=;
+ b=if9HlzBNKeHYQloilpcZZcciTW66M25xfz7eQ3zmif7cST1GxqnoVf5ifydDELsT2DuPO5
+ xT0ADbjWc3TFa/rRdFvclFDEcoXlEGvUI5LG7Z5R2cacADxvpVkHxZrrm1Ed+vVeNM1Ffm
+ qfxzfD7SSX22oR09GT6PThp7Tfzx/i8=
+Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-349-AZuVlQ_mNCWlMBKmGs5kWg-1; Tue,
- 20 Oct 2026 10:46:23 +0000
-X-MC-Unique: AZuVlQ_mNCWlMBKmGs5kWg-1
-X-Mimecast-MFC-AGG-ID: AZuVlQ_mNCWlMBKmGs5kWg_1792493179
-Received: from mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.12])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-381-X4ttvQKTOGG9YvCqjtTwwQ-1; Tue,
+ 20 Oct 2026 10:48:00 +0000
+X-MC-Unique: X4ttvQKTOGG9YvCqjtTwwQ-1
+X-Mimecast-MFC-AGG-ID: X4ttvQKTOGG9YvCqjtTwwQ_1792493277
+Received: from mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.93])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 73F281800D85; Tue, 20 Oct 2026 10:46:18 +0000 (UTC)
+ by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 11DD51802573; Tue, 20 Oct 2026 10:47:57 +0000 (UTC)
 Received: from localhost (headnet04.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.116])
- by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 9D8411956088; Tue, 20 Oct 2026 10:46:13 +0000 (UTC)
-From: marcandre.lureau@redhat.com
-Date: Tue, 20 Oct 2026 14:45:19 +0400
-Subject: [PATCH v7 02/65] qapi: Ease access to introspection names
+ by mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id 8CE561800444; Tue, 20 Oct 2026 10:47:54 +0000 (UTC)
+From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
+Date: Tue, 20 Oct 2026 14:45:36 +0400
+Subject: [PATCH v7 19/65] qom: convert QAPI enum properties to QAPI-aware
+ registration
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Message-Id: <20261020-qom-qapi-v7-2-431a86b02b58@redhat.com>
+Message-Id: <20261020-qom-qapi-v7-19-431a86b02b58@redhat.com>
 References: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 In-Reply-To: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 To: qemu-devel@nongnu.org
@@ -127,25 +128,25 @@ Cc: Markus Armbruster <armbru@redhat.com>,
  Yoshinori Sato <yoshinori.sato@nifty.com>, Jiri Pirko <jiri@resnulli.us>, 
  Eric Auger <eric.auger@redhat.com>, Laurent Vivier <lvivier@redhat.com>, 
  =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=7889;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=17948;
  i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=a2pApAt20adFheRFMFL0JhfgD1DBySkAUQki6ne7iLY=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZX47T8N7MhCWr0sH+GZry8k5SuXuUXyZs9e
- X4b68TesAyJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGVwAKCRDa6OEJdZac
- 5auAD/4/Ie/cSClFbfq3pLk5G4chwRGPx/IkNYssN2QhE7SuensGeO9N3hAkiwjTWMQUa4RmIV3
- Ih/ody0cyQZ7ebEGwThhPd/0tDx7xTVJYKJlWKSTE5TWfQGUlgdud9VFnpmx8tSWLwXoFzA3/Hi
- z84mm5HxX4k1UOcwbKkeDY6EkPEVuH8/N0fn/A7MiLmcS+vrSdBq2tiEnHZ2QEopsTjy7Fg+8Dm
- trZ5cGqVMRvocoVM8CgiT6O62rCese/7CxN6AiIHPC523itkKI9FAhKp4RCjU92vE34Y4qb3OK7
- 4nLiR3tXfQKU/YeaXR1MILIVGMiK5nF1dai6meQh2g2gFR5CZaT6gar5YZXLqO6P5vbb/h9A5B1
- XfERQ+8YYELHMZBHW9/k9O9lzRT4AaVsNM0NRp0v7q2tBK8LXDi/gCQ8p7fmH14kbbMpCNI05fK
- raCcLlKl6gYu52cO8zN9VqgDnMq9FRZW0+OUXJFULxZ30mbl8FV2VQh7yqS7Pjv7b0zNHWAunEZ
- wonP/p1G5r2Po5hwZOcexcv5WAK6BbCPlEQLoNz9USS4GnPaglfv0pEsF4RVBhsqmN/mm7S8mbt
- wlt5AqKpk3Y/XRH4EIFYc+5GuwKmie/wmHA0vfOmbqn2V9JRLHgrJL5pHEdbb6UDEt2kucPZXXU
- qlf+go84nzQ475Q==
+ bh=6HmJUS8ti31K3a3a2qrKIDTAV1LxUYYBxrUY2iMoiRk=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZZPwxGnXSq4QWDKEGgMqYI/Z8qJ2n4E63t1
+ CAug9EBmVyJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGWQAKCRDa6OEJdZac
+ 5RHYD/0VR6RzZzElo//CjihnI3BcxT2JM6duKVAvqwMTKrGjqQtVIr3yVB0WUDpv88WeJIFdg0g
+ K44rtv1wBk3k27wWQHYXY7c7JCopqGlklnoCl86FeoYYYtNUsZPVs9q0ULFWIGI4Tqp9X1F3SN4
+ dbjLnZ1Ds0GY7fjQa/rXmv1xBN/ahVlo1NQKDWaeCSJwkAUBJwZiQQ736DUVGC/tvtwX84EN9Lj
+ tzSSsfMTBvx8cfQd8cXEIO6dhfddIinGu4eywL3AK9pJrNpx6dC5Dnam87ouxnsCWLlA+6dFsLe
+ 2Bdmci2g1kcW2nSWb7I9o9TCiM/vYwjLeUAqn7U/0L3UQ8bGN7FSEWEVuyu1zZ5cMJK9629XRc3
+ 4Y/qFNn34AbWMmCBopkJp/i6yYUt2EfML+gU2n9Bk+HcR+bjmDaQQYN7HtB0Gtgy9+XmlJXrvMP
+ bkXFMpwWuoCn1YI6Bva6xjA/IWMdU/ZWW3UtIEZPXG8WkIw38aJVQormQ3+2lWqXnL94+ZMpScV
+ kW49h/CEZOyzQQD21DXh7geRV1HjhOnTlfIUNdehs+faDS+daQfvUFXcgFyCeq7y+3TDtO1xakH
+ yHL8HFJRXqWCOyvHMBUDfw0xmYBnia9NugUUUqNrAEMaAvPgcg6yI34b2O1h2KaPpyFe5IVMSAA
+ p5e/RxCRFKHbH2Q==
 X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
  fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.12
-X-Mimecast-MFC-PROC-ID: 3LnIDmMP-fQo5VqAra508fywWrhsSZj_7PSGp_vLugE_1792493179
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.93
+X-Mimecast-MFC-PROC-ID: eIbUiNvBXY-_QDIt93hv6p7xUFm5juHwNO6MP-hzvnY_1792493277
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
@@ -173,199 +174,427 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 X-Spam-Status: No, score=-16.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS autolearn=unavailable autolearn_force=no version=4.0.1
+	SPF_PASS autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-From: Markus Armbruster <armbru@redhat.com>
+Convert all callers of object_class_property_add_enum() but one to use
+the new object_class_property_add_qapi_enum() with the
+QAPI_ENUM_PROP() macro, which provides type information via
+QAPITypeInfo instead of raw lookup tables and string type names.
 
-query-qmp-schema masks type names, because they are not part of the
-external interface.  Marc-André Lureau would like to also use them
-with qom-list & friends.  Trouble is the masked names are buried deep
-in QAPISchemaGenIntrospectVisitor.  Lift them into schema.py: new
-QAPISchemaDefinition method introspection_name() returns a
-definition's name for use in introspection.
+This enables QMP QOM introspection to report accurate QAPI type names
+for enum properties. Where a separate set_description call was used,
+the description is now embedded in the QAPI_ENUM_PROP initializer.
 
-This changes the masked names, which is fine.
+Leave pc_i440fx_machine_options() for later, because enum
+PCSouthBridgeOption is a handmade QAPI-like enum instead of a real
+one.
 
 Signed-off-by: Markus Armbruster <armbru@redhat.com>
-Reviewed-by: Marc-André Lureau <marcandre.lureau@redhat.com>
+Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 ---
- scripts/qapi/introspect.py | 23 ++++-------------------
- scripts/qapi/schema.py     | 43 +++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 47 insertions(+), 19 deletions(-)
+ authz/list.c                             | 12 +++++++-----
+ backends/hostmem.c                       | 14 ++++++++------
+ crypto/secret_common.c                   | 12 +++++++-----
+ crypto/tlscreds.c                        | 12 +++++++-----
+ hw/microblaze/petalogix_s3adsp1800_mmu.c | 19 +++++++++++--------
+ include/chardev/char.h                   |  8 --------
+ monitor/qmp.c                            | 12 +++++++-----
+ net/filter.c                             | 10 +++++++---
+ target/i386/kvm/kvm.c                    | 30 +++++++++++++++++-------------
+ ui/console-vc.c                          |  8 +++++++-
+ ui/dbus.c                                | 18 ++++++++++++++----
+ ui/input-linux.c                         | 11 +++++++----
+ 12 files changed, 99 insertions(+), 67 deletions(-)
 
-diff --git a/scripts/qapi/introspect.py b/scripts/qapi/introspect.py
-index 7e28de2279ad..644461560c64 100644
---- a/scripts/qapi/introspect.py
-+++ b/scripts/qapi/introspect.py
-@@ -30,7 +30,6 @@
-     QAPISchemaAlternatives,
-     QAPISchemaArrayType,
-     QAPISchemaBranches,
--    QAPISchemaBuiltinType,
-     QAPISchemaEntity,
-     QAPISchemaEnumMember,
-     QAPISchemaFeature,
-@@ -177,7 +176,6 @@ def __init__(self, prefix: str, unmask: bool):
-         self._schema: Optional[QAPISchema] = None
-         self._trees: List[Annotated[SchemaInfo]] = []
-         self._used_types: List[QAPISchemaType] = []
--        self._name_map: Dict[str, str] = {}
-         self._genc.add(mcgen('''
+diff --git a/authz/list.c b/authz/list.c
+index 17aa0efd80e8..363b2ee12c98 100644
+--- a/authz/list.c
++++ b/authz/list.c
+@@ -22,6 +22,7 @@
+ #include "authz/list.h"
+ #include "trace.h"
+ #include "qom/object_interfaces.h"
++#include "qapi/qapi-type-infos-authz.h"
+ #include "qapi/qapi-visit-authz.h"
+ #include "qemu/module.h"
+ 
+@@ -120,11 +121,12 @@ qauthz_list_class_init(ObjectClass *oc, const void *data)
+ {
+     QAuthZClass *authz = QAUTHZ_CLASS(oc);
+ 
+-    object_class_property_add_enum(oc, "policy",
+-                                   "QAuthZListPolicy",
+-                                   &QAuthZListPolicy_lookup,
+-                                   qauthz_list_prop_get_policy,
+-                                   qauthz_list_prop_set_policy);
++    object_class_property_add_qapi_enum(oc, QAPI_ENUM_PROP(
++        .name = "policy",
++        .qapi_type = &QAuthZListPolicy_type_info,
++        .get = qauthz_list_prop_get_policy,
++        .set = qauthz_list_prop_set_policy,
++    ));
+ 
+     object_class_property_add(oc, "rules", "QAuthZListRule",
+                               qauthz_list_prop_get_rules,
+diff --git a/backends/hostmem.c b/backends/hostmem.c
+index 8782c8b1ea98..edb8e6ab4502 100644
+--- a/backends/hostmem.c
++++ b/backends/hostmem.c
+@@ -16,6 +16,7 @@
+ #include "hw/core/boards.h"
+ #include "qapi/error.h"
+ #include "qapi/qapi-builtin-visit.h"
++#include "qapi/qapi-type-infos-common.h"
+ #include "qapi/visitor.h"
+ #include "qemu/config-file.h"
+ #include "qom/compat-properties.h"
+@@ -551,12 +552,13 @@ host_memory_backend_class_init(ObjectClass *oc, const void *data)
+         NULL, NULL);
+     object_class_property_set_description(oc, "host-nodes",
+         "Binds memory to the list of NUMA host nodes");
+-    object_class_property_add_enum(oc, "policy", "HostMemPolicy",
+-        &HostMemPolicy_lookup,
+-        host_memory_backend_get_policy,
+-        host_memory_backend_set_policy);
+-    object_class_property_set_description(oc, "policy",
+-        "Set the NUMA policy");
++    object_class_property_add_qapi_enum(oc, QAPI_ENUM_PROP(
++        .name = "policy",
++        .description = "Set the NUMA policy",
++        .qapi_type = &HostMemPolicy_type_info,
++        .get = host_memory_backend_get_policy,
++        .set = host_memory_backend_set_policy,
++    ));
+     object_class_property_add_bool(oc, "share",
+         host_memory_backend_get_share, host_memory_backend_set_share);
+     object_class_property_set_description(oc, "share",
+diff --git a/crypto/secret_common.c b/crypto/secret_common.c
+index a5ecb876aeba..381d23ecc8e0 100644
+--- a/crypto/secret_common.c
++++ b/crypto/secret_common.c
+@@ -22,6 +22,7 @@
+ #include "crypto/secret_common.h"
+ #include "crypto/cipher.h"
+ #include "qapi/error.h"
++#include "qapi/qapi-type-infos-crypto.h"
+ #include "qom/object_interfaces.h"
+ #include "qemu/base64.h"
+ #include "qemu/module.h"
+@@ -269,11 +270,12 @@ qcrypto_secret_class_init(ObjectClass *oc, const void *data)
+ 
+     ucc->complete = qcrypto_secret_complete;
+ 
+-    object_class_property_add_enum(oc, "format",
+-                                   "QCryptoSecretFormat",
+-                                   &QCryptoSecretFormat_lookup,
+-                                   qcrypto_secret_prop_get_format,
+-                                   qcrypto_secret_prop_set_format);
++    object_class_property_add_qapi_enum(oc, QAPI_ENUM_PROP(
++        .name = "format",
++        .qapi_type = &QCryptoSecretFormat_type_info,
++        .get = qcrypto_secret_prop_get_format,
++        .set = qcrypto_secret_prop_set_format,
++    ));
+     object_class_property_add_str(oc, "keyid",
+                                   qcrypto_secret_prop_get_keyid,
+                                   qcrypto_secret_prop_set_keyid);
+diff --git a/crypto/tlscreds.c b/crypto/tlscreds.c
+index fb09e295a65c..54859720bf74 100644
+--- a/crypto/tlscreds.c
++++ b/crypto/tlscreds.c
+@@ -20,6 +20,7 @@
+ 
  #include "qemu/osdep.h"
- #include "%(prefix)sqapi-introspect.h"
-@@ -208,18 +206,14 @@ def visit_end(self) -> None:
-         self._schema = None
-         self._trees = []
-         self._used_types = []
--        self._name_map = {}
+ #include "qapi/error.h"
++#include "qapi/qapi-type-infos-crypto.h"
+ #include "qapi-types-crypto.h"
+ #include "qemu/module.h"
+ #include "qemu/error-report.h"
+@@ -221,11 +222,12 @@ qcrypto_tls_creds_class_init(ObjectClass *oc, const void *data)
+     object_class_property_add_str(oc, "dir",
+                                   qcrypto_tls_creds_prop_get_dir,
+                                   qcrypto_tls_creds_prop_set_dir);
+-    object_class_property_add_enum(oc, "endpoint",
+-                                   "QCryptoTLSCredsEndpoint",
+-                                   &QCryptoTLSCredsEndpoint_lookup,
+-                                   qcrypto_tls_creds_prop_get_endpoint,
+-                                   qcrypto_tls_creds_prop_set_endpoint);
++    object_class_property_add_qapi_enum(oc, QAPI_ENUM_PROP(
++        .name = "endpoint",
++        .qapi_type = &QCryptoTLSCredsEndpoint_type_info,
++        .get = qcrypto_tls_creds_prop_get_endpoint,
++        .set = qcrypto_tls_creds_prop_set_endpoint,
++    ));
+     object_class_property_add_str(oc, "priority",
+                                   qcrypto_tls_creds_prop_get_priority,
+                                   qcrypto_tls_creds_prop_set_priority);
+diff --git a/hw/microblaze/petalogix_s3adsp1800_mmu.c b/hw/microblaze/petalogix_s3adsp1800_mmu.c
+index c5f64319009b..9a8fcc667812 100644
+--- a/hw/microblaze/petalogix_s3adsp1800_mmu.c
++++ b/hw/microblaze/petalogix_s3adsp1800_mmu.c
+@@ -27,6 +27,7 @@
+ #include "qemu/target-info.h"
+ #include "qemu/units.h"
+ #include "qapi/error.h"
++#include "qapi/qapi-type-infos-common.h"
+ #include "target/microblaze/cpu.h"
+ #include "hw/core/sysbus.h"
+ #include "net/net.h"
+@@ -174,14 +175,16 @@ static void petalogix_s3adsp1800_machine_class_init(ObjectClass *oc,
+     mc->init = petalogix_s3adsp1800_init;
+     mc->is_default = true;
  
-     def visit_needed(self, entity: QAPISchemaEntity) -> bool:
-         # Ignore types on first pass; visit_end() will pick up used types
-         return not isinstance(entity, QAPISchemaType)
+-    prop = object_class_property_add_enum(oc, "endianness", "EndianMode",
+-                                          &EndianMode_lookup,
+-                                          machine_get_endianness,
+-                                          machine_set_endianness);
+-    object_property_set_default_str(prop, target_big_endian() ? "big"
+-                                                              : "little");
+-    object_class_property_set_description(oc, "endianness",
+-            "Defines whether the machine runs in big or little endian mode");
++    prop = object_class_property_add_qapi_enum(oc, QAPI_ENUM_PROP(
++        .name = "endianness",
++        .description =
++            "Defines whether the machine runs in big or little endian mode",
++        .qapi_type = &EndianMode_type_info,
++        .get = machine_get_endianness,
++        .set = machine_set_endianness,
++    ));
++    object_property_set_default_enum(prop,
++        target_big_endian() ? ENDIAN_MODE_BIG : ENDIAN_MODE_LITTLE);
+ }
  
-     def _name(self, name: str) -> str:
--        if self._unmask:
--            return name
--        if name not in self._name_map:
--            self._name_map[name] = '%d' % len(self._name_map)
--        return self._name_map[name]
-+        assert self._schema
-+        return self._schema.definition_introspection_name(name, self._unmask)
+ static const TypeInfo petalogix_s3adsp1800_machine_types[] = {
+diff --git a/include/chardev/char.h b/include/chardev/char.h
+index 2616c19cc095..21bf85d197eb 100644
+--- a/include/chardev/char.h
++++ b/include/chardev/char.h
+@@ -352,12 +352,4 @@ static void set_encoding(Object *obj, int value, Error **errp)  \
+     cast_func(obj)->encoding = value;                           \
+ }
  
-     def _use_type(self, typ: QAPISchemaType) -> str:
-         assert self._schema is not None
-@@ -237,13 +231,6 @@ def _use_type(self, typ: QAPISchemaType) -> str:
-         # Add type to work queue if new
-         if typ not in self._used_types:
-             self._used_types.append(typ)
--        # Clients should examine commands and events, not types.  Hide
--        # type names as integers to reduce the temptation.  Also, it
--        # saves a few characters on the wire.
--        if isinstance(typ, QAPISchemaBuiltinType):
--            return typ.name
--        if isinstance(typ, QAPISchemaArrayType):
--            return '[' + self._use_type(typ.element_type) + ']'
-         return self._name(typ.name)
+-static inline void chardev_vc_add_encoding_prop(ObjectClass *oc,
+-    int (*get)(Object *, Error **),
+-    void (*set)(Object *, int, Error **))
+-{
+-    object_class_property_add_enum(oc, "encoding", "ChardevVCEncoding",
+-                                   &ChardevVCEncoding_lookup, get, set);
+-}
+-
+ #endif
+diff --git a/monitor/qmp.c b/monitor/qmp.c
+index eb44012643f6..c2849214d58b 100644
+--- a/monitor/qmp.c
++++ b/monitor/qmp.c
+@@ -30,6 +30,7 @@
+ #include "qapi/error.h"
+ #include "qapi/qapi-commands-control.h"
+ #include "qapi/qapi-commands-char.h"
++#include "qapi/qapi-type-infos-qom.h"
+ #include "qobject/qdict.h"
+ #include "qobject/qjson.h"
+ #include "qobject/qlist.h"
+@@ -133,11 +134,12 @@ static void monitor_qmp_class_init(ObjectClass *cls, const void *data)
+     object_class_property_add_bool(cls, "pretty",
+                                    monitor_qmp_get_pretty,
+                                    monitor_qmp_set_pretty);
+-    object_class_property_add_enum(cls, "close-action",
+-                                   "MonitorQMPCloseAction",
+-                                   &MonitorQMPCloseAction_lookup,
+-                                   monitor_qmp_get_close_action,
+-                                   monitor_qmp_set_close_action);
++    object_class_property_add_qapi_enum(cls, QAPI_ENUM_PROP(
++        .name = "close-action",
++        .qapi_type = &MonitorQMPCloseAction_type_info,
++        .get = monitor_qmp_get_close_action,
++        .set = monitor_qmp_set_close_action,
++    ));
  
-     @staticmethod
-@@ -271,8 +258,7 @@ def _gen_tree(self, name: str, mtype: str, obj: Dict[str, object],
-                 # Output a comment to make it easy to map masked names
-                 # back to the source when reading the generated output.
-                 comment = f'"{self._name(name)}" = {name}'
--            name = self._name(name)
--        obj['name'] = name
-+        obj['name'] = self._name(name)
-         obj['meta-type'] = mtype
-         if features:
-             obj['features'] = self._gen_features(features)
-@@ -327,8 +313,7 @@ def visit_array_type(self, name: str, info: Optional[QAPISourceInfo],
-                          ifcond: QAPISchemaIfCond,
-                          element_type: QAPISchemaType) -> None:
-         element = self._use_type(element_type)
--        self._gen_tree('[' + element + ']', 'array', {'element-type': element},
--                       ifcond)
-+        self._gen_tree(name, 'array', {'element-type': element}, ifcond)
+     moncls->emit_event = monitor_qmp_emit_event;
+     moncls->requires_iothread = monitor_qmp_requires_iothread;
+diff --git a/net/filter.c b/net/filter.c
+index 389f3b0bfefb..79883af22a54 100644
+--- a/net/filter.c
++++ b/net/filter.c
+@@ -8,6 +8,7 @@
  
-     def visit_object_type_flat(self, name: str, info: Optional[QAPISourceInfo],
-                                ifcond: QAPISchemaIfCond,
-diff --git a/scripts/qapi/schema.py b/scripts/qapi/schema.py
-index 9c9e257a8fd5..11f3accec873 100644
---- a/scripts/qapi/schema.py
-+++ b/scripts/qapi/schema.py
-@@ -136,6 +136,13 @@ def __repr__(self) -> str:
-     def c_name(self) -> str:
-         return c_name(self.name)
+ #include "qemu/osdep.h"
+ #include "qapi/error.h"
++#include "qapi/qapi-type-infos-common.h"
+ #include "qapi/qmp/qerror.h"
+ #include "qemu/error-report.h"
  
-+    def set_ordinal(self, ordinal: int) -> None:
-+        pass
-+
-+    # pylint: disable=unused-argument
-+    def introspection_name(self, unmask: bool) -> str:
-+        return self.name
-+
-     def check(self, schema: QAPISchema) -> None:
-         assert not self._checked
-         super().check(schema)
-@@ -323,6 +330,17 @@ def visit(self, visitor: QAPISchemaVisitor) -> None:
+@@ -342,9 +343,12 @@ static void netfilter_class_init(ObjectClass *oc, const void *data)
  
+     object_class_property_add_str(oc, "netdev",
+                                   netfilter_get_netdev_id, netfilter_set_netdev_id);
+-    object_class_property_add_enum(oc, "queue", "NetFilterDirection",
+-                                   &NetFilterDirection_lookup,
+-                                   netfilter_get_direction, netfilter_set_direction);
++    object_class_property_add_qapi_enum(oc, QAPI_ENUM_PROP(
++        .name = "queue",
++        .qapi_type = &NetFilterDirection_type_info,
++        .get = netfilter_get_direction,
++        .set = netfilter_set_direction,
++    ));
+     object_class_property_add_str(oc, "status",
+                                   netfilter_get_status, netfilter_set_status);
+     object_class_property_add_str(oc, "position",
+diff --git a/target/i386/kvm/kvm.c b/target/i386/kvm/kvm.c
+index da922f72d71e..f2e8dc8c156d 100644
+--- a/target/i386/kvm/kvm.c
++++ b/target/i386/kvm/kvm.c
+@@ -14,6 +14,8 @@
  
- class QAPISchemaType(QAPISchemaDefinition, ABC):
-+    def __init__(
-+        self,
-+        name: str,
-+        info: Optional[QAPISourceInfo],
-+        doc: Optional[QAPIDoc],
-+        ifcond: Optional[QAPISchemaIfCond] = None,
-+        features: Optional[List[QAPISchemaFeature]] = None,
-+    ):
-+        super().__init__(name, info, doc, ifcond, features)
-+        self._masked_name: Optional[str] = None
-+
-     # Return the C type for common use.
-     # For the types we commonly box, this is a pointer type.
-     @abstractmethod
-@@ -363,6 +381,17 @@ def need_has_if_optional(self) -> bool:
-         # Except for arrays; see QAPISchemaArrayType.need_has_if_optional().
-         return not self.c_type().endswith(POINTER_SUFFIX)
+ #include "qemu/osdep.h"
+ #include "qapi/qapi-events-run-state.h"
++#include "qapi/qapi-type-infos-common.h"
++#include "qapi/qapi-type-infos-run-state.h"
+ #include "qapi/error.h"
+ #include "qapi/visitor.h"
+ #include <math.h>
+@@ -7089,12 +7091,13 @@ static void kvm_arch_set_honor_guest_pat(Object *obj, int value, Error **errp)
  
-+    def set_ordinal(self, ordinal: int) -> None:
-+        assert not self._masked_name
-+        self._masked_name = str(ordinal)
-+
-+    def introspection_name(self, unmask: bool) -> str:
-+        # Type names are not part of the external interface.  Hide
-+        # them in introspection.  Also saves a few characters on the
-+        # wire.
-+        assert self._masked_name
-+        return self.name if unmask else self._masked_name
-+
-     def check(self, schema: QAPISchema) -> None:
-         super().check(schema)
-         for feat in self.features:
-@@ -402,6 +431,11 @@ def json_type(self) -> str:
-     def doc_type(self) -> str:
-         return self.json_type()
+ void kvm_arch_accel_class_init(ObjectClass *oc)
+ {
+-    object_class_property_add_enum(oc, "notify-vmexit", "NotifyVMexitOption",
+-                                   &NotifyVmexitOption_lookup,
+-                                   kvm_arch_get_notify_vmexit,
+-                                   kvm_arch_set_notify_vmexit);
+-    object_class_property_set_description(oc, "notify-vmexit",
+-                                          "Enable notify VM exit");
++    object_class_property_add_qapi_enum(oc, QAPI_ENUM_PROP(
++        .name = "notify-vmexit",
++        .description = "Enable notify VM exit",
++        .qapi_type = &NotifyVmexitOption_type_info,
++        .get = kvm_arch_get_notify_vmexit,
++        .set = kvm_arch_set_notify_vmexit,
++    ));
  
-+    def introspection_name(self, unmask: bool):
-+        if self.json_type() == 'int':
-+            return 'int'
-+        return self.name
-+
-     def visit(self, visitor: QAPISchemaVisitor) -> None:
-         super().visit(visitor)
-         visitor.visit_builtin_type(self.name, self.info, self.json_type())
-@@ -503,6 +537,9 @@ def doc_type(self) -> Optional[str]:
-             return None
-         return 'array of ' + elt_doc_type
+     object_class_property_add(oc, "notify-window", "uint32",
+                               kvm_arch_get_notify_window,
+@@ -7127,13 +7130,14 @@ void kvm_arch_accel_class_init(ObjectClass *oc)
+     object_class_property_set_description(oc, "xen-evtchn-max-pirq",
+                                           "Maximum number of Xen PIRQs");
  
-+    def introspection_name(self, unmask: bool):
-+        return '[' + self.element_type.introspection_name(unmask) + ']'
-+
-     def visit(self, visitor: QAPISchemaVisitor) -> None:
-         super().visit(visitor)
-         visitor.visit_array_type(self.name, self.info, self.ifcond,
-@@ -1182,6 +1219,7 @@ def _def_definition(self, defn: QAPISchemaDefinition) -> None:
-                     "'%s' is already defined\n%s" % (defn.name, where))
-             raise QAPISemError(
-                 defn.info, "%s is already defined" % other_defn.describe())
-+        defn.set_ordinal(len(self._entity_dict))
-         self._entity_dict[defn.name] = defn
+-    object_class_property_add_enum(oc, "honor-guest-pat", "OnOffAuto",
+-                                   &OnOffAuto_lookup,
+-                                   kvm_arch_get_honor_guest_pat,
+-                                   kvm_arch_set_honor_guest_pat);
+-    object_class_property_set_description(oc, "honor-guest-pat",
+-                                          "Disable KVM quirk that ignores guest PAT "
+-                                          "memory type settings (default: auto)");
++    object_class_property_add_qapi_enum(oc, QAPI_ENUM_PROP(
++        .name = "honor-guest-pat",
++        .description = "Disable KVM quirk that ignores guest PAT "
++                       "memory type settings (default: auto)",
++        .qapi_type = &OnOffAuto_type_info,
++        .get = kvm_arch_get_honor_guest_pat,
++        .set = kvm_arch_set_honor_guest_pat,
++    ));
+ }
  
-     def lookup_defn(self, name: str) -> Optional[QAPISchemaDefinition]:
-@@ -1208,6 +1246,11 @@ def resolve_type(
-                 info, "%s uses unknown type '%s'" % (what, name))
-         return typ
+ void kvm_set_max_apic_id(uint32_t max_apic_id)
+diff --git a/ui/console-vc.c b/ui/console-vc.c
+index 99cc8f09c887..cca4790c993c 100644
+--- a/ui/console-vc.c
++++ b/ui/console-vc.c
+@@ -6,6 +6,7 @@
  
-+    def definition_introspection_name(self, name: str, unmask: bool) -> str:
-+        defn = self.lookup_defn(name)
-+        assert defn
-+        return defn.introspection_name(unmask)
-+
-     def _module_name(self, fname: str) -> str:
-         if QAPISchemaModule.is_system_module(fname):
-             return fname
+ #include "chardev/char.h"
+ #include "qapi/error.h"
++#include "qapi/qapi-type-infos-char.h"
+ #include "qemu/option.h"
+ #include "qemu/queue.h"
+ #include "qom/compat-properties.h"
+@@ -326,7 +327,12 @@ static void char_vc_class_init(ObjectClass *oc, const void *data)
+     cc->supports_size_opts = true;
+     cc->supports_encoding_opts = true;
+ 
+-    chardev_vc_add_encoding_prop(oc, get_encoding, set_encoding);
++    object_class_property_add_qapi_enum(oc, QAPI_ENUM_PROP(
++        .name = "encoding",
++        .qapi_type = &ChardevVCEncoding_type_info,
++        .get = get_encoding,
++        .set = set_encoding,
++    ));
+ }
+ 
+ static void char_vc_init(Object *obj)
+diff --git a/ui/dbus.c b/ui/dbus.c
+index 7be0f8e26119..afc321514c68 100644
+--- a/ui/dbus.c
++++ b/ui/dbus.c
+@@ -38,6 +38,8 @@
+ #include "qemu/audio.h"
+ #include "audio/audio_int.h" /* FIXME: use QOM dynamic cast instead of drv->name */
+ #include "qapi/error.h"
++#include "qapi/qapi-type-infos-char.h"
++#include "qapi/qapi-type-infos-ui.h"
+ #include "trace.h"
+ 
+ #include "dbus.h"
+@@ -508,9 +510,12 @@ dbus_display_class_init(ObjectClass *oc, const void *data)
+     object_class_property_add_bool(oc, "p2p", get_dbus_p2p, set_dbus_p2p);
+     object_class_property_add_str(oc, "addr", get_dbus_addr, set_dbus_addr);
+     object_class_property_add_str(oc, "audiodev", get_audiodev, set_audiodev);
+-    object_class_property_add_enum(oc, "gl-mode",
+-                                   "DisplayGLMode", &DisplayGLMode_lookup,
+-                                   get_gl_mode, set_gl_mode);
++    object_class_property_add_qapi_enum(oc, QAPI_ENUM_PROP(
++        .name = "gl-mode",
++        .qapi_type = &DisplayGLMode_type_info,
++        .get = get_gl_mode,
++        .set = set_gl_mode,
++    ));
+ }
+ 
+ #define TYPE_CHARDEV_VC "chardev-vc"
+@@ -602,7 +607,12 @@ dbus_vc_class_init(ObjectClass *oc, const void *data)
+     cc->chr_open = dbus_vc_open;
+     cc->supports_encoding_opts = true;
+ 
+-    chardev_vc_add_encoding_prop(oc, get_encoding, set_encoding);
++    object_class_property_add_qapi_enum(oc, QAPI_ENUM_PROP(
++        .name = "encoding",
++        .qapi_type = &ChardevVCEncoding_type_info,
++        .get = get_encoding,
++        .set = set_encoding,
++    ));
+ }
+ 
+ static void
+diff --git a/ui/input-linux.c b/ui/input-linux.c
+index f4eee1ffd7ec..715d1f589297 100644
+--- a/ui/input-linux.c
++++ b/ui/input-linux.c
+@@ -6,6 +6,7 @@
+ 
+ #include "qemu/osdep.h"
+ #include "qapi/error.h"
++#include "qapi/qapi-type-infos-common.h"
+ #include "qemu/config-file.h"
+ #include "qemu/main-loop.h"
+ #include "qemu/module.h"
+@@ -506,10 +507,12 @@ static void input_linux_class_init(ObjectClass *oc, const void *data)
+     object_class_property_add_bool(oc, "repeat",
+                                    input_linux_get_repeat,
+                                    input_linux_set_repeat);
+-    object_class_property_add_enum(oc, "grab-toggle", "GrabToggleKeys",
+-                                   &GrabToggleKeys_lookup,
+-                                   input_linux_get_grab_toggle,
+-                                   input_linux_set_grab_toggle);
++    object_class_property_add_qapi_enum(oc, QAPI_ENUM_PROP(
++        .name = "grab-toggle",
++        .qapi_type = &GrabToggleKeys_type_info,
++        .get = input_linux_get_grab_toggle,
++        .set = input_linux_set_grab_toggle,
++    ));
+ }
+ 
+ static const TypeInfo input_linux_info = {
 
 -- 
 2.56.0.116.g6de20f6092dc
