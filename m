@@ -1,59 +1,58 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9D81060A3801
-	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Oct 2026 11:11:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EE34760A3810
+	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Oct 2026 11:12:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=XXw21nxA
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=gtrex/bk
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xJ7QF-0006vb-Fc; Tue, 20 Oct 2026 06:50:23 -0400
+	id 1xJ7Ui-0007G5-J4; Tue, 20 Oct 2026 06:55:00 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1xJ7Om-0003Hz-QN
- for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:48:56 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ id 1xJ7Ry-0001Jy-61
+ for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:52:10 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1xJ7Oh-0005bf-Qk
- for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:48:51 -0400
+ id 1xJ7Rv-0006kP-UZ
+ for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:52:09 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1792493327;
+ s=mimecast20190719; t=1792493527;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=PV9kuqJKGQPXQgRGsKGHU0tbZKUNtph+KWyMZp45370=;
- b=XXw21nxAXgnfKlo7oIdq2TqRm7Cxkt9AP0X/8YgKCXZI2KMjwwzldxkoe5A81x9o7Kv3sW
- T+o+lCiGF2MyaNelIbPyzzIb6M7e/cqynS+b5g/PAiXVES3R3iuKvSkJKxRd2IyCrNMPPG
- 0WRfQGQS044cYRFoeElZqetIK0KZORA=
-Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
+ bh=edIbxy8j0ZeLmK0JPM910tAFzYTrVmN4a79XoyzsTPs=;
+ b=gtrex/bk4a3BDRkhwzdqL75JTJcGOQBe0iwSCNU6/M06K6S6k/iZDrYlf0pTa67UHiWAJL
+ Jg+BZeFQ4P7Fk+GLFhb1n/p89BRH6c23pFa9krtXpRuPXBilshpUagsIluGvWve4Ogf5x2
+ VjvFeXuV1l0lpyyelIwHdqmkOmWEkgc=
+Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-656-evkX-KHbNye8aHdQO4NYlg-1; Tue,
- 20 Oct 2026 10:48:38 +0000
-X-MC-Unique: evkX-KHbNye8aHdQO4NYlg-1
-X-Mimecast-MFC-AGG-ID: evkX-KHbNye8aHdQO4NYlg_1792493313
-Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-607-UkF2cxSIP0KFpD-x2kfPug-1; Tue,
+ 20 Oct 2026 10:52:03 +0000
+X-MC-Unique: UkF2cxSIP0KFpD-x2kfPug-1
+X-Mimecast-MFC-AGG-ID: UkF2cxSIP0KFpD-x2kfPug_1792493519
+Received: from mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.95])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id BF9F3180056E; Tue, 20 Oct 2026 10:48:33 +0000 (UTC)
+ by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 171B41955DE8; Tue, 20 Oct 2026 10:51:59 +0000 (UTC)
 Received: from localhost (headnet04.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.116])
- by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id D3CE130000E7; Tue, 20 Oct 2026 10:48:30 +0000 (UTC)
+ by mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id D26A65BC; Tue, 20 Oct 2026 10:51:55 +0000 (UTC)
 From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-Date: Tue, 20 Oct 2026 14:45:43 +0400
-Subject: [PATCH v7 26/65] loongarch/virt: convert OnOffAuto properties to
- QAPI-aware registration
+Date: Tue, 20 Oct 2026 14:46:21 +0400
+Subject: [PATCH v7 64/65] qom: use QAPITypeInfo in object_property_get_enum
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Message-Id: <20261020-qom-qapi-v7-26-431a86b02b58@redhat.com>
+Message-Id: <20261020-qom-qapi-v7-64-431a86b02b58@redhat.com>
 References: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 In-Reply-To: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 To: qemu-devel@nongnu.org
@@ -128,38 +127,38 @@ Cc: Markus Armbruster <armbru@redhat.com>,
  Yoshinori Sato <yoshinori.sato@nifty.com>, Jiri Pirko <jiri@resnulli.us>, 
  Eric Auger <eric.auger@redhat.com>, Laurent Vivier <lvivier@redhat.com>, 
  =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=6018;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4777;
  i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=mcn2JeHI5hIu+VBT7QhXgV3egUYPPh04IMlXvF5e4Ec=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZZn4jMd/2ebsZ0FoPPbj1jDn2hGRETnXjT2
- a9TRgsJMRyJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGWQAKCRDa6OEJdZac
- 5VcbD/0XQPP+Hq6G02Te1ATdBSDCe1WOePn+q3hsXMEjoOzOBoMnryWDu8kNBch2qC8q592TwYn
- hRkWhx3p8YWF9kYFeQ23u32TqttVt/lCxq8pWndKI6GgSC5v8616dnw2YpSgsb3fosKThWBUUUk
- fCN2F7JenKbU2ahFlCWtu7UAB0XSoTl4KkhrepX20amiSBjQnvZQvYi/1xg7w2m5ZMSYMSmH/LC
- l23OSw7QCemnhrF++uLTOObyXcs8T5yYj67uh0BF19kJB3ZzZ0jaMA3li1HytdrFcV7GwnFvH0D
- LXX8Rrv5mvff1zR2spKxkS9RctUmQZdKlOZ+GhgQnZX+wyQIgSQesWnPD8JmIU9lJGXw7voOqGQ
- cnwmMtO4dkVkqgg8e8dPEOenMG0LMpxPwEXmbP1l4zz9T5pL6YEFBPe3sLJ/Q4vz+eChkhPJpnT
- kbYtHnZSNae7agOjfkGpzv0xQZnugriVrT0XMl8A8/QQEQDDkngQF3/tF2Wjp1UBd9uE9NLqTVA
- 5kCV+wPxw4rBcTH/PtAQiXN2Y/UxDOIz8vsWuaQySEqGQynllWHdiPAk4QmiAgkoxO/0r0j4yWG
- zVIXphd2t3fdmg99IfAn5usbT83aXvGpab7PMeWgsXcGpLJh205ful7Mp2GUVpQTa6A92/oPOaA
- YI89h+wirCbvd3w==
+ bh=btPOLigegMrUtE/H8gDPhCCZC+0Be3DpIj2amZiGpeM=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZdBPk60N5wT01axiLdb48ZwuPjCejnM2ZCc
+ 8PglQD+RAWJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGXQAKCRDa6OEJdZac
+ 5SPyEAC5HRZ0r0eZqxI5kzCsHrclz4H0Z1qTSRRBggURJDWP1KPYcglKwzX4001DDcIq+3FTVpq
+ uqL6jJTS5vpJyJyR897eCp/+/txzLU8tlhsslIoDbOhlREexjvA38cJU7R22vQlvcx+DpICRHE3
+ a5XvP5h0s1/Pyiwdap+iMevEvuEEcbH/jRuSHep2d8iVv7Koi8q0iUC8zZ9PuwSKBiXi/oILGfy
+ aiMrs8f/RgP9W/MoV3ZQRoFzC+PDRjFuTVfcaA60kq0BkbXlZZqC8u7Z+II9Xx+mxD8jpqF0dvl
+ YdxYl9iXw3cbjdx662K6DNPPTjQqlqch+lUyD9IDKGSOxwMVRZODMwFtKF8oOvp/VlJSjSI2dYp
+ n/X+gSwpl4DPtL64HznEe7j1fcGEq0YFRHnDbDHbwuxtIa57jCuK6wDAdaarfxUiuLtPfX7zXKA
+ 1mhzw7Xk53JCYfVRtyhDDwz68cwocztkSeDoHbr+rWIMtJWAgR3K0ZgRcwpuhUoaQpp7LtkUpd6
+ SttTn4wc4MNuYc4Awpzamcf3DaIFaC+EQhFDU5i9gl+OPJb5rstVcuwsDzcleSXgUaDrqgSpCQo
+ Bgm5lkNrnrlf7BG0h6WM3CgbBEadCmph3q1159HTgqfLA36QI7zt946mDEQrtiXWNDke3TZA+Wo
+ l6wkFmd77J6ABag==
 X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
  fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
-X-Mimecast-MFC-PROC-ID: 0Wx96lhvKKEKFwQkP6rnGQwGZ23AsRpDr0Ei2J97qio_1792493313
+X-Scanned-By: MIMEDefang 3.6 on 10.30.177.95
+X-Mimecast-MFC-PROC-ID: MqiAPRqA5CCmc0ckGiCGogPFOzFUdq9ACD__w9lSLHQ_1792493519
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.133.124;
+Received-SPF: pass client-ip=170.10.129.124;
  envelope-from=marcandre.lureau@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -23
-X-Spam_score: -2.4
-X-Spam_bar: --
-X-Spam_report: (-2.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.329,
+X-Spam_score_int: 9
+X-Spam_score: 0.9
+X-Spam_bar: /
+X-Spam_report: (0.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.329,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_SBL_CSS=3.335, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -178,160 +177,120 @@ X-Spam-Status: No, score=-16.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Convert the acpi, v-eiointc, and dmsi OnOffAuto properties from
-manual visitor-based callbacks to property_add_qapi_enum().
+The typename parameter becomes a QAPITypeInfo pointer, and the
+validation compares prop->qapi_type against it instead of matching
+prop->type strings.
 
-Reviewed-by: Bibo Mao <maobibo@loongson.cn>
 Signed-off-by: Markus Armbruster <armbru@redhat.com>
 Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 ---
- hw/loongarch/virt.c | 85 +++++++++++++++++++++++++----------------------------
- 1 file changed, 40 insertions(+), 45 deletions(-)
+ hw/core/machine-qmp-cmds.c      | 4 +++-
+ include/qom/object.h            | 4 ++--
+ qom/object.c                    | 8 ++++----
+ tests/unit/check-qom-proplist.c | 6 +++---
+ 4 files changed, 12 insertions(+), 10 deletions(-)
 
-diff --git a/hw/loongarch/virt.c b/hw/loongarch/virt.c
-index 9c5371af9dee..db8ea76f117c 100644
---- a/hw/loongarch/virt.c
-+++ b/hw/loongarch/virt.c
-@@ -36,7 +36,8 @@
- #include "target/loongarch/cpu.h"
- #include "target/loongarch/cpu-mmu.h"
- #include "hw/firmware/smbios.h"
--#include "qapi/qapi-visit-common.h"
+diff --git a/hw/core/machine-qmp-cmds.c b/hw/core/machine-qmp-cmds.c
+index 3fee45d568da..6b425baeb2da 100644
+--- a/hw/core/machine-qmp-cmds.c
++++ b/hw/core/machine-qmp-cmds.c
+@@ -18,6 +18,7 @@
+ #include "qapi/qapi-commands-accelerator.h"
+ #include "qapi/qapi-commands-machine.h"
+ #include "qobject/qobject.h"
 +#include "qapi/qapi-type-infos-common.h"
-+#include "qapi/visitor.h"
- #include "hw/acpi/generic_event_device.h"
- #include "hw/mem/nvdimm.h"
- #include "hw/core/platform-bus.h"
-@@ -51,26 +52,21 @@
- #include "qemu/log.h"
- #include "kvm/kvm_loongarch.h"
+ #include "qapi/qobject-input-visitor.h"
+ #include "qapi/type-helpers.h"
+ #include "qemu/uuid.h"
+@@ -252,7 +253,8 @@ static int query_memdev(Object *obj, void *opaque)
+         } else {
+             m->has_reserve = true;
+         }
+-        m->policy = object_property_get_enum(obj, "policy", "HostMemPolicy",
++        m->policy = object_property_get_enum(obj, "policy",
++                                             &HostMemPolicy_type_info,
+                                              &error_abort);
+         host_nodes = object_property_get_qobject(obj,
+                                                  "host-nodes",
+diff --git a/include/qom/object.h b/include/qom/object.h
+index a9bbc44cfcc9..9f937e30dae5 100644
+--- a/include/qom/object.h
++++ b/include/qom/object.h
+@@ -1566,7 +1566,7 @@ uint64_t object_property_get_uint(Object *obj, const char *name,
+  * object_property_get_enum:
+  * @obj: the object
+  * @name: the name of the property
+- * @typename: the name of the enum data type
++ * @type_info: the QAPITypeInfo of the enum
+  * @errp: returns an error if this function fails
+  *
+  * Returns: the value of the property, converted to an integer (which
+@@ -1574,7 +1574,7 @@ uint64_t object_property_get_uint(Object *obj, const char *name,
+  * value is not an enum).
+  */
+ int object_property_get_enum(Object *obj, const char *name,
+-                             const char *typename, Error **errp);
++                             const QAPITypeInfo *type_info, Error **errp);
  
--static void virt_get_dmsi(Object *obj, Visitor *v, const char *name,
--                             void *opaque, Error **errp)
-+static int virt_get_dmsi(Object *obj, Error **errp)
- {
-     LoongArchVirtMachineState *lvms = LOONGARCH_VIRT_MACHINE(obj);
--    OnOffAuto dmsi = lvms->dmsi;
--
--    visit_type_OnOffAuto(v, name, &dmsi, errp);
--
-+    return lvms->dmsi;
+ /**
+  * object_property_set:
+diff --git a/qom/object.c b/qom/object.c
+index 791d981dc689..40b569d4d574 100644
+--- a/qom/object.c
++++ b/qom/object.c
+@@ -1775,7 +1775,7 @@ uint64_t object_property_get_uint(Object *obj, const char *name,
  }
--static void virt_set_dmsi(Object *obj, Visitor *v, const char *name,
--                              void *opaque, Error **errp)
-+
-+static void virt_set_dmsi(Object *obj, int value, Error **errp)
- {
-     LoongArchVirtMachineState *lvms = LOONGARCH_VIRT_MACHINE(obj);
-+    lvms->dmsi = value;
  
--    visit_type_OnOffAuto(v, name, &lvms->dmsi, errp);
--
--    if (lvms->dmsi == ON_OFF_AUTO_OFF) {
-+    if (value == ON_OFF_AUTO_OFF) {
-         lvms->misc_feature &= ~BIT(IOCSRF_DMSI);
-         lvms->misc_status &= ~BIT_ULL(IOCSRM_DMSI_EN);
--    } else if (lvms->dmsi == ON_OFF_AUTO_ON) {
-+    } else if (value == ON_OFF_AUTO_ON) {
-         lvms->misc_feature = BIT(IOCSRF_DMSI);
+ int object_property_get_enum(Object *obj, const char *name,
+-                             const char *typename, Error **errp)
++                             const QAPITypeInfo *type_info, Error **errp)
+ {
+     char *str;
+     int ret;
+@@ -1785,10 +1785,10 @@ int object_property_get_enum(Object *obj, const char *name,
+         return -1;
      }
- }
-@@ -78,21 +74,16 @@ static void virt_set_dmsi(Object *obj, Visitor *v, const char *name,
- #define DEFAULT_HIGH_PCIE_MMIO_SIZE_GB 64
- #define DEFAULT_HIGH_PCIE_MMIO_SIZE (DEFAULT_HIGH_PCIE_MMIO_SIZE_GB * GiB)
  
--static void virt_get_veiointc(Object *obj, Visitor *v, const char *name,
--                              void *opaque, Error **errp)
-+static int virt_get_veiointc(Object *obj, Error **errp)
- {
-     LoongArchVirtMachineState *lvms = LOONGARCH_VIRT_MACHINE(obj);
--    OnOffAuto veiointc = lvms->veiointc;
--
--    visit_type_OnOffAuto(v, name, &veiointc, errp);
-+    return lvms->veiointc;
- }
+-    if (!g_str_equal(prop->type, typename)) {
++    if (prop->qapi_type != type_info) {
+         error_setg(errp, "Property %s on %s is not '%s' enum type",
+-                   name, object_class_get_name(
+-                       object_get_class(obj)), typename);
++                   name, object_class_get_name(object_get_class(obj)),
++                   type_info->name);
+         return -1;
+     }
  
--static void virt_set_veiointc(Object *obj, Visitor *v, const char *name,
--                              void *opaque, Error **errp)
-+static void virt_set_veiointc(Object *obj, int value, Error **errp)
- {
-     LoongArchVirtMachineState *lvms = LOONGARCH_VIRT_MACHINE(obj);
--
--    visit_type_OnOffAuto(v, name, &lvms->veiointc, errp);
-+    lvms->veiointc = value;
- }
+diff --git a/tests/unit/check-qom-proplist.c b/tests/unit/check-qom-proplist.c
+index 69155e720751..1cb48c7490ef 100644
+--- a/tests/unit/check-qom-proplist.c
++++ b/tests/unit/check-qom-proplist.c
+@@ -582,14 +582,14 @@ static void test_dummy_getenum(void)
  
- static bool virt_get_highmem_mmio(Object *obj, Error **errp)
-@@ -1025,21 +1016,16 @@ static void virt_init(MachineState *machine)
-     loongarch_load_kernel(machine, &lvms->bootinfo, phys_addr_mask);
- }
+     val = object_property_get_enum(OBJECT(dobj),
+                                    "av",
+-                                   "DummyAnimal",
++                                   &dummy_animal_qapi_type_info,
+                                    &error_abort);
+     g_assert(val == DUMMY_PLATYPUS);
  
--static void virt_get_acpi(Object *obj, Visitor *v, const char *name,
--                          void *opaque, Error **errp)
-+static int virt_get_acpi(Object *obj, Error **errp)
- {
-     LoongArchVirtMachineState *lvms = LOONGARCH_VIRT_MACHINE(obj);
--    OnOffAuto acpi = lvms->acpi;
--
--    visit_type_OnOffAuto(v, name, &acpi, errp);
-+    return lvms->acpi;
- }
- 
--static void virt_set_acpi(Object *obj, Visitor *v, const char *name,
--                               void *opaque, Error **errp)
-+static void virt_set_acpi(Object *obj, int value, Error **errp)
- {
-     LoongArchVirtMachineState *lvms = LOONGARCH_VIRT_MACHINE(obj);
--
--    visit_type_OnOffAuto(v, name, &lvms->acpi, errp);
-+    lvms->acpi = value;
- }
- 
- static char *virt_get_oem_id(Object *obj, Error **errp)
-@@ -1483,20 +1469,29 @@ static void virt_class_init(ObjectClass *oc, const void *data)
-     hc->unplug_request = virt_device_unplug_request;
-     hc->unplug = virt_device_unplug;
- 
--    object_class_property_add(oc, "acpi", "OnOffAuto",
--        virt_get_acpi, virt_set_acpi,
--        NULL, NULL);
--    object_class_property_set_description(oc, "acpi",
--        "Enable ACPI");
--    object_class_property_add(oc, "v-eiointc", "OnOffAuto",
--        virt_get_veiointc, virt_set_veiointc,
--        NULL, NULL);
--    object_class_property_set_description(oc, "v-eiointc",
--                            "Enable Virt Extend I/O Interrupt Controller.");
--    object_class_property_add(oc, "dmsi", "OnOffAuto",
--        virt_get_dmsi, virt_set_dmsi, NULL, NULL);
--    object_class_property_set_description(oc, "dmsi",
--                            "Enable direct Message-interrupts Controller.");
-+    object_class_property_add_qapi_enum(oc, QAPI_ENUM_PROP(
-+        .name = "acpi",
-+        .description = "Enable ACPI",
-+        .qapi_type = &OnOffAuto_type_info,
-+        .get = virt_get_acpi,
-+        .set = virt_set_acpi,
-+    ));
-+
-+    object_class_property_add_qapi_enum(oc, QAPI_ENUM_PROP(
-+        .name = "v-eiointc",
-+        .description = "Enable Virt Extend I/O Interrupt Controller.",
-+        .qapi_type = &OnOffAuto_type_info,
-+        .get = virt_get_veiointc,
-+        .set = virt_set_veiointc,
-+    ));
-+
-+    object_class_property_add_qapi_enum(oc, QAPI_ENUM_PROP(
-+        .name = "dmsi",
-+        .description = "Enable direct Message-interrupts Controller.",
-+        .qapi_type = &OnOffAuto_type_info,
-+        .get = virt_get_dmsi,
-+        .set = virt_set_dmsi,
-+    ));
-     machine_class_allow_dynamic_sysbus_dev(mc, TYPE_RAMFB_DEVICE);
-     machine_class_allow_dynamic_sysbus_dev(mc, TYPE_UEFI_VARS_SYSBUS);
- #ifdef CONFIG_TPM
+     /* A bad enum type name */
+     val = object_property_get_enum(OBJECT(dobj),
+                                    "av",
+-                                   "BadAnimal",
++                                   &dummy_str_qapi_type_info,
+                                    &err);
+     g_assert(val == -1);
+     error_free_or_abort(&err);
+@@ -597,7 +597,7 @@ static void test_dummy_getenum(void)
+     /* A non-enum property name */
+     val = object_property_get_enum(OBJECT(dobj),
+                                    "iv",
+-                                   "DummyAnimal",
++                                   &dummy_animal_qapi_type_info,
+                                    &err);
+     g_assert(val == -1);
+     error_free_or_abort(&err);
 
 -- 
 2.56.0.116.g6de20f6092dc
