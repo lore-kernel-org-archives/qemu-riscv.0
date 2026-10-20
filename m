@@ -1,59 +1,58 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 82D0C606A31E
-	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Oct 2026 10:54:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F0167606A31B
+	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Oct 2026 10:54:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=XSffY2IV
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=OeD2LJCz
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xJ7TT-0003DQ-Rp; Tue, 20 Oct 2026 06:53:44 -0400
+	id 1xJ7Nr-00029A-JT; Tue, 20 Oct 2026 06:47:55 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1xJ7QM-0007J4-DU
- for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:50:30 -0400
+ id 1xJ7Mv-0000x5-7J
+ for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:46:57 -0400
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1xJ7QK-0006JY-O5
- for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:50:30 -0400
+ id 1xJ7Mt-0005CK-BO
+ for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 06:46:56 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1792493428;
+ s=mimecast20190719; t=1792493214;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=cjstbMWmXOAnQJ0vRg4/TV0UxKxkDAMv9/7iDMdvYXk=;
- b=XSffY2IVRgKgqakC6JFT2BMyHFj54TJXSMa5xU8QBEIRxg5dsbGsaWvi+/pHaj3+eRokW0
- qn1zCMaRbLDwnuJ94IPUwSpWYP8YhZiu1/RaIzLsTmOvRrL0Qjj7FQBlojsaIcts423yVY
- cE9YQQJd2SiIeiKrPZB49vwaau/9VhQ=
-Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
+ bh=1Mnn0OKxBD8aP9I5qh8TLkmYe32toylT7CmahJ3BKVM=;
+ b=OeD2LJCzszGey1IL7trqKjyHjN2igCdUfNP5bSJOqA3Ue1RmLdHw+4tt58OXd7Yb7bos3s
+ b/Ht4sR015tzf6kZgc7NMUhZhB1iNNIwLddoVWeP12qFLbowx8sxhWSxZ/a2vRxPl+YU61
+ rHLwCTzd94VTzu258rOKcCrRRIdCxXA=
+Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-142-LEtBYtaXNhep3HOST1h5pg-1; Tue,
- 20 Oct 2026 06:50:24 -0400
-X-MC-Unique: LEtBYtaXNhep3HOST1h5pg-1
-X-Mimecast-MFC-AGG-ID: LEtBYtaXNhep3HOST1h5pg_1792493420
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-66-08VlUpjQOgagH2hPOiBlKQ-1; Tue,
+ 20 Oct 2026 06:46:51 -0400
+X-MC-Unique: 08VlUpjQOgagH2hPOiBlKQ-1
+X-Mimecast-MFC-AGG-ID: 08VlUpjQOgagH2hPOiBlKQ_1792493207
 Received: from mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com
  (mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.95])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id C61F61955DA5; Tue, 20 Oct 2026 10:50:19 +0000 (UTC)
+ by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id ACB211956044; Tue, 20 Oct 2026 10:46:46 +0000 (UTC)
 Received: from localhost (headnet04.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.116])
  by mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 854725BC; Tue, 20 Oct 2026 10:50:16 +0000 (UTC)
-From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-Date: Tue, 20 Oct 2026 14:46:02 +0400
-Subject: [PATCH v7 45/65] hw/s390-virtio-ccw: convert loadparm property to
- QAPI-aware registration
+ id 8DCE25BC; Tue, 20 Oct 2026 10:46:42 +0000 (UTC)
+From: marcandre.lureau@redhat.com
+Date: Tue, 20 Oct 2026 14:45:23 +0400
+Subject: [PATCH v7 06/65] qapi/introspect: Tweak integer type masking
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Message-Id: <20261020-qom-qapi-v7-45-431a86b02b58@redhat.com>
+Message-Id: <20261020-qom-qapi-v7-6-431a86b02b58@redhat.com>
 References: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 In-Reply-To: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 To: qemu-devel@nongnu.org
@@ -128,25 +127,25 @@ Cc: Markus Armbruster <armbru@redhat.com>,
  Yoshinori Sato <yoshinori.sato@nifty.com>, Jiri Pirko <jiri@resnulli.us>, 
  Eric Auger <eric.auger@redhat.com>, Laurent Vivier <lvivier@redhat.com>, 
  =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1438;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3300;
  i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=kUpPGFy4418k+1NoT02grj7G7ylnBF+ugRFLSNuQ/I8=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZbZ381/sBWM1azZ53D7cfjK2vNDIyCM5jiw
- Xz8ukfeXYKJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGWwAKCRDa6OEJdZac
- 5WE7EACcNb6WUPAXGp4swEqKgOrI7mRkcimuGMJxDQptX6voqKSzXDGgbjpNbOpCSvTsAUBzqkf
- VmQ+u1XXdOcMUFOXV12h+uVIagNkH/FDk+vj6EhW+7Kv+xUWHQwihzevCBsOe5YRu7AoC5JFL7e
- 0gnAXgwlHoUc7rofc1b2A696Xi73B0BOxB5zdDwbfJPmC+zNLT3hs1Td4Kz/nHF5mI2tkY38zor
- J9Gu+Zngb8i7tCVWNN4rxMRTflUnEleoTBaZ/MzpgKLm6BMGvNB/RklxuTW9RaHm5c7Hn2tOkUX
- BjBeCAlN8BDg+4cPXlsrKBOZG04cS8ma9QO+ZFcTJJ0v6YXzwA+GsHW4fPIoGszFa+UyJOoyFyZ
- JjxorHFP+v58GJcIr421M6yCPKqLa70RxTrPsVBPMAHrP0TejWLeOs0hIrNkRiE5+2601BD6apI
- rZkqEk8rXGc2YmuOolkjrs6b6PIw2R6sibjUwbIPFEHNu7HbC/WLZG6sxGdbaHB5xKhjg7Yo0Hf
- sljEdE+S9n89L1t8za9aF28F5ivQkNlw/vJ2npjoxGF9L6HCdk+EiYF61ps7MRQR9ViFVustynh
- PdOoORH0IHDSPitjUdZoIvZb6i6CW8KZCeXn1ZUTNMv/w8f9vbbxVroo3zzRSKiilj8k+2MxLjs
- N6G+newXEeukaug==
+ bh=Xp7N7Cw12fT4B5RHyRwaz0UVvBY0Z8fxHr38SNSrB2w=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZY+HBluuWmLicnFhqmNZvedYN8EZPAWD5tz
+ upmO1Ga58aJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGWAAKCRDa6OEJdZac
+ 5XzlD/9HEY5z6oC69wenr9Qv7msxCbEfY7YI+AvbI4TE33VpTsB5TXw0w5hoWWG2I7nT0pxMrC6
+ gjxcavbpLfNQuSlpsicTsD9FELzSz+6xM2MwthryKshrqOQ9eRIaSYzYj3XG7snmj5JTIp1NNtv
+ uGyxTUY11F5thO0nh78pl5m3FnMgJ6J+bR4QZEixKMGDsWgdCBjFf35n+hs8Zq0TNqPPWdZM4WU
+ 57QEO3MxpnUTcn8ZIAlxz7YffgWnpU+luA9bZzFqcMNqPeQ/+RHcjv3I6UUIkEAQsDNF+gvnDrJ
+ 0A0Spg+6FzMovmlLnKdyDNOj6AaNgCwSBLwxZYMfMpx3I4QGmDOSrKcbVpOnh6MpSqeem9v3E/A
+ s/LAha/LFAADBkXjPbHEKPDdUytOKctZ5gi0Ohky86vcCzQBcxOVOnk4PcWYQrzYFwj9TPpC2xi
+ deGrYMAo64/fK+8aRp2ADj0fVj4WgnOQ5R5PVEbkxEjGkosB3xcpxKcWBrP+aSookP2fMF0jWZb
+ lKHZmcLSlzz257XcK6F/9t5jcM17+nvcivFb2k3m2Zgtv47ZxI2g3D7m4GndVEQKFcBhq2PLDyJ
+ 1YX7I6YK/eWF/FLjTA8Tfv5IJA62HbC6KqrK/8ewzPwZHbkgvIrqnvS4oQ6Mkv3S4l3TDiGWTv8
+ 1WOmqtKMlpy+WEQ==
 X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
  fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
 X-Scanned-By: MIMEDefang 3.6 on 10.30.177.95
-X-Mimecast-MFC-PROC-ID: mlkMWSojNdGoCUF9YI0W0XvZNDqKFApC13otsqAdbR0_1792493420
+X-Mimecast-MFC-PROC-ID: m1DGpbZX5d-va5MKiEvNZLXEI_xfWLtgyKf4wgvZtmE_1792493207
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
@@ -179,37 +178,80 @@ X-Spam-Status: No, score=-16.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-The QAPI type is actually a string. Here also, if we had typedef support
-we could expose a more specific type.
+From: Markus Armbruster <armbru@redhat.com>
+
+Since introspection maps all integer types to 'int', we need to skip
+all but one of them.  Instead of filtering by hardcoded name, filter
+out duplicates.
 
 Signed-off-by: Markus Armbruster <armbru@redhat.com>
-Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
+Reviewed-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 ---
- hw/s390x/s390-virtio-ccw.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ scripts/qapi/introspect.py | 18 ++++++++++--------
+ 1 file changed, 10 insertions(+), 8 deletions(-)
 
-diff --git a/hw/s390x/s390-virtio-ccw.c b/hw/s390x/s390-virtio-ccw.c
-index fda5ecc9ad3c..3ed425b16c3e 100644
---- a/hw/s390x/s390-virtio-ccw.c
-+++ b/hw/s390x/s390-virtio-ccw.c
-@@ -43,6 +43,7 @@
- #include "system/hostmem.h"
- #include "target/s390x/kvm/pv.h"
- #include "migration/blocker.h"
-+#include "qapi/qapi-builtin-type-infos.h"
- #include "qapi/visitor.h"
- #include "qapi/qapi-visit-machine-s390x.h"
- #include "hw/s390x/cpu-topology.h"
-@@ -908,7 +909,8 @@ static void ccw_machine_class_init(ObjectClass *oc, const void *data)
-     object_class_property_set_description(oc, "dea-key-wrap",
-             "enable/disable DEA key wrapping using the CPACF wrapping key");
+diff --git a/scripts/qapi/introspect.py b/scripts/qapi/introspect.py
+index 15302ecf155a..dc6f70a6fe9e 100644
+--- a/scripts/qapi/introspect.py
++++ b/scripts/qapi/introspect.py
+@@ -172,7 +172,7 @@ def __init__(self, prefix: str, unmask: bool):
+             ' * QAPI/QMP schema introspection', __doc__)
+         self._unmask = unmask
+         self._schema: Optional[QAPISchema] = None
+-        self._trees: List[Annotated[SchemaInfo]] = []
++        self._trees: Dict[str, Annotated[SchemaInfo]] = {}
+         self._genc.add(mcgen('''
+ #include "qemu/osdep.h"
+ #include "%(prefix)sqapi-introspect.h"
+@@ -191,13 +191,14 @@ def visit_end(self) -> None:
+ extern const QLitObject %(c_name)s;
+ ''',
+                              c_name=c_name(name)))
++        trees = list(self._trees.values())
+         self._genc.add(mcgen('''
+ const QLitObject %(c_name)s = %(c_string)s;
+ ''',
+                              c_name=c_name(name),
+-                             c_string=_tree_to_qlit(self._trees)))
++                             c_string=_tree_to_qlit(trees)))
+         self._schema = None
+-        self._trees = []
++        self._trees = {}
  
--    object_class_property_add(oc, "loadparm", "loadparm",
-+    /* if QAPI learns to typedef str, we could expose a more specific type */
-+    object_class_property_add_qapi(oc, "loadparm", &str_type_info,
-                               machine_get_loadparm, machine_set_loadparm,
-                               NULL, NULL);
-     object_class_property_set_description(oc, "loadparm",
+     def _name(self, name: str) -> str:
+         assert self._schema
+@@ -235,7 +236,12 @@ def _gen_tree(self, name: str, mtype: str, obj: Dict[str, object],
+         obj['meta-type'] = mtype
+         if features:
+             obj['features'] = self._gen_features(features)
+-        self._trees.append(Annotated(obj, ifcond, comment))
++        if introspection_name in self._trees:
++            # Duplicates are possible because
++            # QAPISchemaBuiltinType.introspection_name() returns 'int'
++            # for all integer types.  Ignore them.
++            return
++        self._trees[introspection_name] = Annotated(obj, ifcond, comment)
+ 
+     def _gen_enum_member(self, member: QAPISchemaEnumMember
+                          ) -> Annotated[SchemaInfoEnumMember]:
+@@ -268,8 +274,6 @@ def _gen_variant(self, variant: QAPISchemaVariant
+ 
+     def visit_builtin_type(self, name: str, info: Optional[QAPISourceInfo],
+                            json_type: str) -> None:
+-        if json_type == 'int' and name != 'int':
+-            return
+         self._gen_tree(name, 'builtin', {'json-type': json_type})
+ 
+     def visit_enum_type(self, name: str, info: Optional[QAPISourceInfo],
+@@ -287,8 +291,6 @@ def visit_enum_type(self, name: str, info: Optional[QAPISourceInfo],
+     def visit_array_type(self, name: str, info: Optional[QAPISourceInfo],
+                          ifcond: QAPISchemaIfCond,
+                          element_type: QAPISchemaType) -> None:
+-        if element_type.json_type() == 'int' and name != 'intList':
+-            return
+         element = self._use_type(element_type)
+         self._gen_tree(name, 'array', {'element-type': element}, ifcond)
+ 
 
 -- 
 2.56.0.116.g6de20f6092dc
