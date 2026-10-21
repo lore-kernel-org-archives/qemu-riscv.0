@@ -1,146 +1,72 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 21B43607154A
-	for <qemu-riscv@archiver.kernel.org>; Wed, 21 Oct 2026 03:26:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 18378606A319
+	for <qemu-riscv@archiver.kernel.org>; Wed, 21 Oct 2026 05:59:42 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=UL6IpIKD;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=QO6RNLXw
+	dkim=pass (1024-bit key, unprotected) header.d=huawei.com header.i=@huawei.com header.a=rsa-sha256 header.s=dkim header.b=kJsZmB3x
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xJMqT-00087T-8F; Tue, 20 Oct 2026 23:18:29 -0400
+	id 1xJPMM-0006CJ-Eg; Wed, 21 Oct 2026 01:59:34 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1xJMpf-0005Vp-0k
- for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 23:17:39 -0400
-Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
+ (Exim 4.90_1) (envelope-from <ruanjinjie@huawei.com>)
+ id 1xJKvE-0001tr-AS; Tue, 20 Oct 2026 21:15:16 -0400
+Received: from canpmsgout04.his.huawei.com ([113.46.200.219])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1xJMpd-00033q-3U
- for qemu-riscv@nongnu.org; Tue, 20 Oct 2026 23:17:38 -0400
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 69L2reR94071012
- for <qemu-riscv@nongnu.org>; Wed, 21 Oct 2026 03:17:25 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- +EK3zscJwoQQDbnM5hHAO2MOpUzNFtj5kae7Svd/g0k=; b=UL6IpIKDVMK/gvjs
- 5Zn1/Rps2XWNe8tZ7wTd7wYlVYop6wZGa5afRzFe8zqm9JqnZHdUQlOJQFnF3rd7
- u6yaFa0kOwYlVc9zi6+vPOSFAHtuIsGVZDnCEohHuAMUAtU8AgWikTy5zIVLzfbT
- L4A9zyrDzDZhBoC69URi76pENbTYDJjtJNB3nZUo/NqnY8WwLAqV9dSrdQiEDWvg
- 5D+PEV1K8vgY4AFMohXOmFVmOLR0PfykRlhtj+PLuZs8lpNXXFW3frkDqFkScQZS
- ovJBT2e45aPTbJOvUXPcm3BQK59PeEbLSU8SZUp5sU1nIthTVsS8u+JPEW/aleat
- zT9r9g==
-Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com
- [209.85.222.199])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hedajhrfg-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Wed, 21 Oct 2026 03:17:24 +0000 (GMT)
-Received: by mail-qk1-f199.google.com with SMTP id
- af79cd13be357-93cb71b1443so59518785a.2
- for <qemu-riscv@nongnu.org>; Tue, 20 Oct 2026 20:17:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1792552644; x=1793157444; darn=nongnu.org;
- h=content-transfer-encoding:content-type:mime-version:references
- :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=+EK3zscJwoQQDbnM5hHAO2MOpUzNFtj5kae7Svd/g0k=;
- b=QO6RNLXwCrALX/JJS7vVPfNeuuH0duS2lq84pL9wp1wcI62+j7RZJm2H6u9lKqNIaH
- MVEwCzfZHFysi+AMiQUlcP+TooqaxMp+BvLDfFbzMyDVJ5gHOpRMfJwKbSx7r7p7Y7q0
- w0ZN8AcbU+WUCZkbt5diV687R5wNg8pfEdV+z5gLiTn3YemdLoH21zzq41LQxeNClokU
- KnBuNlm/7iXvPOzWANlYslIsaajB+SGbRDMRAz+DwN9+QOMAwieJeMI9gscO1U4q95c5
- agblS8RMX4nQQEM7cLlhIfUkoNq/O7k6/KzcjYM7CFz7eB/qL1N2JbWq6hpmwS7Zq2X2
- AHxw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792552644; x=1793157444;
- h=content-transfer-encoding:content-type:mime-version:references
- :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=+EK3zscJwoQQDbnM5hHAO2MOpUzNFtj5kae7Svd/g0k=;
- b=FkUmA7cuyMho4/MyVVWDsZ85WkbUD7QqPxHzpuELCdt1PcVKllac/rMX2AjzjmilWz
- L5AuGQXK4Z6DpGkD56cGNtIQnXHjVGZ1dl8OLu9VPVVHjsYH2TM/C3S5W1KDsW40BkkG
- dvAwFjaLehCydYT+J4urVvRKlIkIEVoq20cSkFJrMHHhqW4G29gZ+XMDuNE0BkV/jdQe
- cDJkKKAYzOjXG+A13eIntZC7KmOTMiWKS2I0dAeJqt4cb6cNSgqLvElAFZQhKR7KHrqL
- 2Lvhm+vuHm1BCpgtcFecVSFX95T0U7XEOHro60KaBvf+UUbhIMsX67hFM4MTRU+LPhpd
- bIDQ==
-X-Forwarded-Encrypted: i=1;
- AKwUvBzgW84AZXyZi7A7EVBoCIL4D7NcpMyYxOdWMWV4PU/uLa31xV7u7aUSHijDY/O/Ybks3+iF5gp84Cqu@nongnu.org
-X-Gm-Message-State: AFq9FYKCw7xJkbdmOvFoFTfSMEubNUxt+SJFLg7MPMtBcJiBOlKpjoVN
- CyAmjXYClGuIl/XsqDpig+ddMMtmP/voipgcoCFzRZpwo5OWjimrPEjJcrQd95DP6mUYziFz9av
- qPLtjgU3ro2vX9xWDgGldkpLZPtn53ia7IYj++9ZKtheMDceoVk9p1L93Cg==
-X-Gm-Gg: AYBFou2DDUssz52UGNZhZhGLCgyCh86396muNrwZK97bOw1QNymkT4SSB0Hgzxphrm+
- 0fYbf6JCcJpN0k34wEUZGK8hhu5bFOwBl/spMRzVpaDNryKHO3vcMMWG7++HuYWpl43PaQQ7soG
- J5etK4+uO8+DRETxO8QJSOfs+yn6gF2D5OMrIcW9QlhYqyGucwV+KgwVSMEAKfVZOBqQxI25wrA
- 14LHr2LGxY5sGtsRPkeY9V0mea/6ZVsITp5/O+fGgHMloAq2BDY+frIGDNFSfCCIo3t07xY2DAN
- tbZCiwzDEs8Q7rzEKNbD/WdzWwNEc3FjJSRHRymb2wZK6/q+uPSNfpPwVXgiIGyCK9gHD2yrme1
- i/yGhv2uyEQlyNXbcDfBIAEvFpeyFOCgW2PSn4NZ3
-X-Received: by 2002:a05:620a:261d:b0:93e:fd69:9a93 with SMTP id
- af79cd13be357-93f57f84f2fmr203775885a.31.1792552644411; 
- Tue, 20 Oct 2026 20:17:24 -0700 (PDT)
-X-Received: by 2002:a05:620a:261d:b0:93e:fd69:9a93 with SMTP id
- af79cd13be357-93f57f84f2fmr203773785a.31.1792552644023; 
- Tue, 20 Oct 2026 20:17:24 -0700 (PDT)
-Received: from localhost.localdomain (pmd666.hd.free.fr. [88.187.86.199])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a1fcd70027sm11156995e9.0.2026.10.20.20.17.22
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 20 Oct 2026 20:17:23 -0700 (PDT)
-From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
- qemu-s390x@nongnu.org, Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
-Subject: [PATCH v2 25/33] target/rx: Register CPUClass::exception_name()
- handler
-Date: Wed, 21 Oct 2026 05:13:58 +0200
-Message-ID: <20261021031407.24862-26-philmd@oss.qualcomm.com>
-X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20261021031407.24862-1-philmd@oss.qualcomm.com>
-References: <20261021031407.24862-1-philmd@oss.qualcomm.com>
+ (Exim 4.90_1) (envelope-from <ruanjinjie@huawei.com>)
+ id 1xJKvA-00018G-8l; Tue, 20 Oct 2026 21:15:16 -0400
+dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
+ c=relaxed/relaxed; q=dns/txt; h=From;
+ bh=55oZ58121bCTpAVf7xgNQu1APHrYbskEt3/x9lr/ko8=;
+ b=kJsZmB3xFjyzCMmg7i6J67776SbBDQixeaJOAHdr+DwUh5rT/GmComsSu2fWJC+/xj+FKxk2t
+ 5VnYOsAKvQMja6gaXZkRqDjkykKUuYuyytkq6j1/CfGWz+LzbUna8Yv4Wa7SvUOMktTUCMOG5ii
+ U1oAs+I1VahSQmXjqGjYb9k=
+Received: from mail.maildlp.com (unknown [172.19.162.140])
+ by canpmsgout04.his.huawei.com (SkyGuard) with ESMTPS id 4j8WXj10myz1prL7;
+ Wed, 21 Oct 2026 09:14:45 +0800 (CST)
+Received: from kwepemk200008.china.huawei.com (unknown [7.202.194.74])
+ by mail.maildlp.com (Postfix) with ESMTPS id D2C6720333;
+ Wed, 21 Oct 2026 09:14:48 +0800 (CST)
+Received: from [10.67.110.68] (10.67.110.68) by kwepemk200008.china.huawei.com
+ (7.202.194.74) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Wed, 21 Oct
+ 2026 09:14:47 +0800
+Message-ID: <89a1d9cf-fa0b-47bf-a54f-338e1339effd@huawei.com>
+Date: Wed, 21 Oct 2026 09:14:46 +0800
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 0/4] RISC-V: ACPI: Add PPTT support
+To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, Drew Fustini
+ <fustini@kernel.org>, Sunil V L <sunilvl@oss.qualcomm.com>
+CC: <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>, Palmer Dabbelt
+ <palmer@dabbelt.com>, Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
+ <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Chao Liu
+ <chao.liu@processmission.com>, "Michael S . Tsirkin" <mst@redhat.com>, Igor
+ Mammedov <imammedo@redhat.com>, Ani Sinha <anisinha@redhat.com>, Anup Patel
+ <anup.patel@oss.qualcomm.com>, Prajwal N <prajwal.n@oss.qualcomm.com>,
+ Shankar C <shankar.c@oss.qualcomm.com>, Jinjie Ruan <2118537295@qq.com>
+References: <20261015064957.4076464-1-sunilvl@oss.qualcomm.com>
+ <atfrQY1w-er0onXV@thelio>
+ <9c468ae3-e303-40da-bbc8-a22a82b9bc97@oss.qualcomm.com>
+From: Jinjie Ruan <ruanjinjie@huawei.com>
+In-Reply-To: <9c468ae3-e303-40da-bbc8-a22a82b9bc97@oss.qualcomm.com>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIxMDAxMiBTYWx0ZWRfXx/Egd9/Aj88t
- I4LBgGk9gjoqHe5YfueMZxH7Ha8ZrLs1foAd/xcSqEV3+/Aos+pyxGRnZM0AwUNpRczJvdSvbac
- zCdSAJR758gnsCGslIrU/cZXWuz0zbFp4fGbpte17u32EAakn5qMbUaUp+YazEBely2HmCGwKT/
- rhUzasR5NkQLT0YeDXpd4Nl0uYaTu3xA4C4D5hESoVAKWxFU2QtVX6NZVQaFcBdOH4CYZjLRAqK
- 00cyB6lu2o/sN/4s2SmCeIyvVaF5Cqs7DCDlznCtV798KnHdBhUd1iYZJmTJS0Xt2c20zbJI/ow
- 7iqdaLZWz/uGYxO3MGtzarLvBANSO8EFgyCsQrtj2x6u0It8DtG2VePJpKZsglApYjzG0tjk1lN
- E5VpNRqwnYnFcopFGrKwLcgtjpJu4smS5ywcPgegUG8hg7Cb8Aggfgp8HAfJtfPR/xPZQ+oFOYl
- FimaWovtHN/4kAa6SFQ==
-X-Proofpoint-GUID: ShZvlpc6UZlSeLsY5cxN1qLovAT57jKN
-X-Proofpoint-ORIG-GUID: ShZvlpc6UZlSeLsY5cxN1qLovAT57jKN
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIxMDAxMiBTYWx0ZWRfX+6TQVNKG9C8h
- MpT7zVnwF57dyn0oLIMar2IwpcOcdCIzSyy2935UsfPorBvpjHltZHR266KBWdy869h7kYHjaZ9
- OVfXb1hE2anXbVDRsAkyRn1rKN1L83s=
-X-Authority-Analysis: v=2.4 cv=HrTjiETS c=1 sm=1 tr=0 ts=6ad82ec5 cx=c_pps
- a=HLyN3IcIa5EE8TELMZ618Q==:117 a=4s3hRJSeHn4rkQlkrse1kQ==:17
- a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=M51BFTxLslgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
- a=EUspDBNiAAAA:8 a=7bFQwIbWrMmj_3m7X6gA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=bTQJ7kPSJx9SKPbeHEYW:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-21_01,2026-10-19_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 clxscore=1015 impostorscore=0 suspectscore=0 bulkscore=0
- adultscore=0 priorityscore=1501 spamscore=0 malwarescore=0 lowpriorityscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610210012
-Received-SPF: pass client-ip=205.220.180.131;
- envelope-from=philmd@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
-X-Spam_score_int: -2
-X-Spam_score: -0.3
-X-Spam_bar: /
-X-Spam_report: (-0.3 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- SUSPICIOUS_RECIPS=2.51 autolearn=no autolearn_force=no
+X-ClientProxiedBy: kwepems100002.china.huawei.com (7.221.188.206) To
+ kwepemk200008.china.huawei.com (7.202.194.74)
+Received-SPF: pass client-ip=113.46.200.219;
+ envelope-from=ruanjinjie@huawei.com; helo=canpmsgout04.his.huawei.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Wed, 21 Oct 2026 01:59:30 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -151,131 +77,90 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,USER_AGENT_GIT autolearn=unavailable autolearn_force=no
-	version=4.0.1
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=no autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Factor rx_exception_name() out of rx_cpu_do_interrupt()
-and register it as the CPUClass::exception_name() handler,
-so the common exception logging can resolve RX exception
-codes to names.
 
-Signed-off-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
-Reviewed-by: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
----
- target/rx/cpu.h    |  1 +
- target/rx/cpu.c    |  1 +
- target/rx/helper.c | 53 ++++++++++++++++++++++++++++------------------
- 3 files changed, 34 insertions(+), 21 deletions(-)
 
-diff --git a/target/rx/cpu.h b/target/rx/cpu.h
-index 0d9f4898a26..06208380621 100644
---- a/target/rx/cpu.h
-+++ b/target/rx/cpu.h
-@@ -147,6 +147,7 @@ struct RXCPUClass {
- #define CPU_RESOLVING_TYPE TYPE_RX_CPU
- 
- const char *rx_crname(uint8_t cr);
-+const char *rx_exception_name(int excp);
- void rx_cpu_do_interrupt(CPUState *cpu);
- bool rx_cpu_exec_interrupt(CPUState *cpu, int int_req);
- hwaddr rx_cpu_get_phys_addr_debug(CPUState *cpu, vaddr addr);
-diff --git a/target/rx/cpu.c b/target/rx/cpu.c
-index 9b8473d71cf..bcaf6659ac5 100644
---- a/target/rx/cpu.c
-+++ b/target/rx/cpu.c
-@@ -245,6 +245,7 @@ static void rx_cpu_class_init(ObjectClass *klass, const void *data)
-                                        &rcc->parent_phases);
- 
-     cc->class_by_name = rx_cpu_class_by_name;
-+    cc->exception_name = rx_exception_name;
-     cc->dump_state = rx_cpu_dump_state;
-     cc->set_pc = rx_cpu_set_pc;
-     cc->get_pc = rx_cpu_get_pc;
-diff --git a/target/rx/helper.c b/target/rx/helper.c
-index bc76dd28ab3..ed9cadc0bd4 100644
---- a/target/rx/helper.c
-+++ b/target/rx/helper.c
-@@ -24,6 +24,37 @@
- #include "hw/core/irq.h"
- #include "qemu/plugin.h"
- 
-+const char *rx_exception_name(int excp)
-+{
-+    const char *name;
-+
-+    switch (excp) {
-+    case RX_EXCP_PRIVILEGE_VIOLATION:
-+        name = "privilege violation";
-+        break;
-+    case RX_EXCP_ACCESS:
-+        name = "access exception";
-+        break;
-+    case RX_EXCP_ILLEGAL_INSTRUCTION:
-+        name = "illegal instruction";
-+        break;
-+    case RX_EXCP_FPU:
-+        name = "fpu exception";
-+        break;
-+    case RX_EXCP_NMI:
-+        name = "non-maskable interrupt";
-+        break;
-+    case RX_EXCP_TRAP_BASE ... RX_EXCP_TRAP_BASE + RX_EXCP_TRAP_COUNT - 1:
-+        name = "unconditional trap";
-+        break;
-+    default:
-+        name = "unknown";
-+        break;
-+    }
-+
-+    return name;
-+}
-+
- void rx_cpu_unpack_psw(CPURXState *env, uint32_t psw, int rte)
- {
-     if (env->psw_pm == 0) {
-@@ -79,7 +110,6 @@ void rx_cpu_do_interrupt(CPUState *cs)
-         qemu_log_mask(CPU_LOG_INT, "interrupt 0x%02x raised\n", env->ack_irq);
-     } else {
-         uint32_t vec = cs->exception_index;
--        const char *expname = "unknown exception";
- 
-         env->isp -= 4;
-         cpu_stl_le_data(env, env->isp, save_psw);
-@@ -100,27 +130,8 @@ void rx_cpu_do_interrupt(CPUState *cs)
-             qemu_plugin_vcpu_exception_cb(cs, last_pc);
-         }
- 
--        switch (vec) {
--        case RX_EXCP_PRIVILEGE_VIOLATION:
--            expname = "privilege violation";
--            break;
--        case RX_EXCP_ACCESS:
--            expname = "access exception";
--            break;
--        case RX_EXCP_ILLEGAL_INSTRUCTION:
--            expname = "illegal instruction";
--            break;
--        case RX_EXCP_FPU:
--            expname = "fpu exception";
--            break;
--        case RX_EXCP_NMI:
--            expname = "non-maskable interrupt";
--            break;
--        case RX_EXCP_TRAP_BASE ... RX_EXCP_TRAP_BASE + RX_EXCP_TRAP_COUNT - 1:
--            expname = "unconditional trap";
--        }
-         qemu_log_mask(CPU_LOG_INT, "exception 0x%02x [%s] raised\n",
--                      (vec & 0xff), expname);
-+                      (vec & 0xff), rx_exception_name(vec));
-     }
-     env->regs[0] = env->isp;
- }
+在 2026/10/21 8:39, Daniel Henrique Barboza 写道:
+> Hi Drew!
+> 
+> On 10/20/2026 7:29 PM, Drew Fustini wrote:
+>> On Thu, Oct 15, 2026 at 12:19:53PM +0530, Sunil V L wrote:
+>>> Hi all,
+>>>
+>>> This series adds ACPI Processor Properties Topology Table (PPTT)
+>>> support to
+>>> the RISC-V virt machine. PPTT allows the guest to discover the
+>>> processor and
+>>> cache topology exposed by the machine, which is useful for making better
+>>> scheduling and cache-management decisions.
+>>
+>> Thanks for picking up PPTT support. I can now rebase the RQSC support
+>> [1] on this series.
+>>
+>> However, RQSC actually needs PPTT revision 3, because it adds cache IDs
+>> to the PPTT. The RQSC table references a capacity controller's cache by
+>> the PPTT cache ID. In Linux, find_acpi_cache_level_from_id() and
+>> acpi_pptt_get_cpumask_from_cache_id() return -ENOENT if PPTT rev < 3.
+>>
+>> There is a new MPAM series by Jinjie Ruan which contains the patch
+>> "[PATCH 04/37] hw/acpi: Build PPTT rev 3 with cache IDs for MPAM
+>> cross-references" [2]. It bumps build_pptt() to revision 3 and gives
+>> every cache node an ID.
+>>
+>> I could just base the RQSC series on this PPTT series and that patch
+>> 03/37. But maybe there is a better way to coordinate adding PPTT v3?
+> 
+> This PPTT support is acked and I believe we'll queue it in riscv-to-
+> apply.next
+> shortly.
+> 
+> As for the PPTT rev3 patch in the "Add Arm MPAM emulation", my
+> suggestion is
+> to put that on top of your series (i.e. your series will contain that
+> patch).
+> That ARM series has 37 patches and might take awhile to go through, and
+> your
+> work relies only on patch 04 ...  which happens to be an arch agnostic
+> patch.
+> I believe it's fine for us to push it via the riscv queue.
+> 
+> I see that the author from the ARM series is CCed here.  Jinjie Ruan,
+> are you
+> okay with us pushing your patch via the RISC-V tree?  It'll unblock
+> Drew's work
+> and you'll have one less patch to worry about in your ARM MPAM work.
+
+Hi Daniel,
+
+I'm fine to do so.
+
+> 
+> 
+> Thanks,
+> Daniel
+> 
+> 
+> 
+> 
+> 
+>>
+>> Thanks,
+>> Drew
+>>
+>> [1] https://lore.kernel.org/all/20260202-riscv-rqsc-v1-0-
+>> dcf448a3ed73@kernel.org/
+>> [2] https://lore.kernel.org/all/
+>> tencent_F9C68A515AC6C40BE2C32DB314E14CCB7106@qq.com/
+> 
+
 -- 
-2.55.0
+Best regards,
+Jinjie
 
 
