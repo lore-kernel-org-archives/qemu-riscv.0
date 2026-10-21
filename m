@@ -1,92 +1,92 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D0505606A319
-	for <qemu-riscv@archiver.kernel.org>; Wed, 21 Oct 2026 23:16:18 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D3FF2606A319
+	for <qemu-riscv@archiver.kernel.org>; Wed, 21 Oct 2026 23:16:28 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=oHd7rfjf;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=BooGWYqm
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=DYXpREhF;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=FKzwnbVk
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xJfVt-0007XX-SF; Wed, 21 Oct 2026 19:14:29 -0400
+	id 1xJfW3-0007dW-SS; Wed, 21 Oct 2026 19:14:39 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xJfVr-0007WW-U7
- for qemu-riscv@nongnu.org; Wed, 21 Oct 2026 19:14:27 -0400
-Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
+ id 1xJfVw-0007Z5-7I
+ for qemu-riscv@nongnu.org; Wed, 21 Oct 2026 19:14:32 -0400
+Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xJfVp-0004yc-Sq
- for qemu-riscv@nongnu.org; Wed, 21 Oct 2026 19:14:27 -0400
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+ id 1xJfVu-00050f-AT
+ for qemu-riscv@nongnu.org; Wed, 21 Oct 2026 19:14:31 -0400
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 69LKeKNu2160548
- for <qemu-riscv@nongnu.org>; Wed, 21 Oct 2026 23:14:14 GMT
+ 69LKdwiI816938
+ for <qemu-riscv@nongnu.org>; Wed, 21 Oct 2026 23:14:29 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=aZTPn3dLfVQ
- QbusORahx+nzRUWSRdq1k8r7nhB7U/pA=; b=oHd7rfjfnZoTy3fF8Ldj/7P+hvW
- Qp5YLxd1cMpgdjncoURIe4pbu6MrsJ4pvgxvSYBZrmMQktIC9mZD4VrJRfyK/Iv8
- 6vKh5zWn8eFcK0Yy/GE8FVjVYr+W3rGCORnri0nU2pKif3w0rvSsVesk774eerar
- Ow/vV2sL+4pR05DSQa04dmb3Uzr+dOOqxN4rkzT83HEPyPBXiZFM00gtm8maBM4m
- ClvWfhkruvc66mfbvWQqZrn12CA0Wp5nll4kKdAGm21RhMrfx7D1irpfEpXZDO/X
- ESxtY9TM8ljKBtNUWZM3hLbDJDTp2eXAq3fFZiHUjWg62PtzA4jxLPjyptg==
-Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com
- [209.85.160.200])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hf1u3h349-1
+ :mime-version:references:subject:to; s=qcppdkim1; bh=zs3SY315D8a
+ /Zw/QdtK2fiSbIXP7gnfs6y7WyCjT/qc=; b=DYXpREhFrUJJ36hplIj1k2+hbIq
+ 4OO18kAXGCBYv8ejguwEcsStCHGFvD/VP0vT+ikfNQtywnL6drvja9RGNpo1tt98
+ 86z9++NZpgL7oX3TPOk0V+R1FknRGWOYXAO39Z7UsN6+aAUPperzli6KWgkvWeFh
+ aCXR4EZCcgeLPQZ2tJL4uW2ar3Ek+j9QxPWdYKD1/BH/LrJVJHjMWhbL9B7yWdMh
+ lIU26ebPhkTIXhqbA9L+8KIZ2M27RbAJlhTkCM2ub6y5X5GTPPCCOCSewzFWS2rf
+ 7HTz7VRffzRt5O/BWVwH9rAr7goTIizqwaEwN9u1B7nS9MuR4zcEBpvcj7w==
+Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com
+ [209.85.160.197])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hex58a929-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Wed, 21 Oct 2026 23:14:14 +0000 (GMT)
-Received: by mail-qt1-f200.google.com with SMTP id
- d75a77b69052e-53661e036a2so24618761cf.1
- for <qemu-riscv@nongnu.org>; Wed, 21 Oct 2026 16:14:14 -0700 (PDT)
+ for <qemu-riscv@nongnu.org>; Wed, 21 Oct 2026 23:14:28 +0000 (GMT)
+Received: by mail-qt1-f197.google.com with SMTP id
+ d75a77b69052e-53661e036a2so24621041cf.1
+ for <qemu-riscv@nongnu.org>; Wed, 21 Oct 2026 16:14:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1792624454; x=1793229254; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1792624468; x=1793229268; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=aZTPn3dLfVQQbusORahx+nzRUWSRdq1k8r7nhB7U/pA=;
- b=BooGWYqmUeZn3Vls7ws3zTk7wNSdtFbn2h1UOHITf26GljpDTo23epqkJStg+5NozD
- pgLnzYpZZHOT1qflOoJwGOSQVVGtFWJ1huvI4nNJzFMV5IxUmt/bkvclAtNjDSLNF4oe
- oiAqa+Q5+WF5BfeZSnV3w1YMK9ollRmSNzD9Hk5HPTDIVa5GdhfAkojvtZwG3WiaXKfK
- DZ6w7l64dtChQsDAsBTi1oyoYf3Y1egUBEmyy+0CfPyF5mu6P8U3m7lo00UMe/FB68J5
- OGJYdUAsLbCKdXF1xQu33fggKXI3mPSCIP5y/qZrfEKwoRqSU4GOAAz/SFkqBk+1shRG
- 1Aeg==
+ bh=zs3SY315D8a/Zw/QdtK2fiSbIXP7gnfs6y7WyCjT/qc=;
+ b=FKzwnbVks+S8W8hz0Dophb9BCy516wvsMwER8g1M5iUCUN+21OHnTrAPi2EEqwXlLH
+ 1sp9LgI/U3+BULl9ZJlzOFHpEQSo0BVk9lkGUgypqFNLloE3whzFmLvaqbHHSOx71nW5
+ hdmd7f9pMd9+weDfvQpQPJPA2wQdJwP+o8IS4mHyXNk2D20fpfkFYBXRh7gZDQIGvV1h
+ AAfJXalIGt6WremEtb08wVIF8gDDxuIlEqECfOg6VVLh+7bh/b9xArePpJqjPAz9Ggyk
+ 73rvahpXmkVYO/72zZ7/qXjy1UAZH5j3wnO0OpyKXfgg+5GsdrajeXV9V+RsQVOOihsv
+ 2Rww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792624454; x=1793229254;
+ d=1e100.net; s=20260707; t=1792624468; x=1793229268;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=aZTPn3dLfVQQbusORahx+nzRUWSRdq1k8r7nhB7U/pA=;
- b=sJZHvuw351z9rTp7d6EY1XlMbiVgFdIgxwBxbQ049iUkug3pb8lZIzMXQd+YMd8HKQ
- Dl3dOPqAsR72oCh3TwOts3YRF+aKDylGmpY+qVVjCyPH+6xCv8NviZN/+hONrBYB+PLq
- pRJ+QDj1TJLiQA2IOgEa0QXkd0lD538ch6K8kwBWhX/Hfuvw9xGQMWhFPtw3uhxCtq7e
- KxIOPPCAKru7CaFB5rjZByqufAuoAAI3aQ0o1qy+F4/Gh1HUCgzhYrMvv79cuRZqNpFX
- RzYz/LJEpOWPrdkdT1d1+47X3ipNYjGbaZXnyrtiy9VTVsizg/3vG/4oXho8ZfYOdVDq
- xZjw==
-X-Gm-Message-State: AFq9FYKVXrmamk/1uEXwf1aQP3MF8Puelrnxsixd6HsTO3XIeHpYltrk
- CEqbbJajepB+TGZji1AOb4zl0UmVKiMbRXv8S61QoQreFH6a/vjxdn7CCAZffoZjAVMOiiHlFxs
- iyjCMOS0vxfbGhRVsogDBxBS5pAJZoIO+KuoV75ezBtWiaf8RO5Mp7/2C7ePT16Dylw==
-X-Gm-Gg: AYBFou2ZNw6MNnwzLydn1AECkkkeNAm3/Ek1jnXLlfMQ5pxK2EHQrnWxs+ixCRrn9u1
- NDJnes+Z+ig/lTWqnUkDg+MebSCBEUFMReZi/C04grlkdkcGs+JgGgoh3uzhVvRrQmziRUzW0gw
- E+rRZvRke65umEW7M/LIUxJP2ixLQ9UsU/7X+KQspSW857o3ORdhF0rhDxgGdcAm8GfAuxaAxUI
- 4bum65OWXdzfw1yqzN6c3yJxyFJ9iHPGkx7lQsx7QhvpVp66YXp1avi9ACRBLonq80d/UkEMter
- rvbHVwx0fI1LYRrfWuh+QOGAXFMvL+NaCDKGdnNv+IaM8d7yD5A3HXlcbVFveriDaX8xIe3sWO/
- iUVN5HcClitH9bVi9JEoHNkGwrcUhzh9lfErNOOwAUwC46uw5iau1+0kaGiUargVZ3p3e7JZcoQ
+ bh=zs3SY315D8a/Zw/QdtK2fiSbIXP7gnfs6y7WyCjT/qc=;
+ b=DOrZYn3k1lstxe09jRyYxseBz+hFQpubVs/Pc8ame9LA7TuLXxeFNlVnQ1UYcGmOUL
+ f5kEEQrjzAOvNkZhoUtGMEh/ZOLJSz8ERKkQ90GYsrrvCrvQIxpkmu/79QpMtZOF7yGp
+ JH1R0aUmuczF422tEp7SjhbzD036pts9kdaXuUusiGoqfWzyjahphfn29nuxeVl59TE4
+ UiM2gneOOJL+VLeEWLpK//LzDU7tEhzrrWxml5WgmFdYVkmxewLNbPxEzDYrIRTR9uHy
+ g6HBlrDXh8eL0JDoSFiDtBLl4Z7Ba9xsQJG3KOq1csOV18Jx8MHNh7nh+PiOAAXe5rnE
+ fxfQ==
+X-Gm-Message-State: AFq9FYJ7nBs2UoR2wG31qtpuM/hEtsrbpZqoSNC3mDL8TLFcdTjfJCun
+ MMecOidVc3xLMLrJa91st0TKYMJKTJb/y4T0WI/ozKF2vtxfLAs7e6FeeTjQ8ey2bg8tlIe32pw
+ 3GRyaz9YOtGrdhPrxB8NQ/WnQD4M+0cfxfxUpvSjlOu66SEvAywSrUg3Cvw==
+X-Gm-Gg: AYBFou3J5q9BGSiBAJtykw2ZMtQmAwCEzXH8XCgvjDZgoW7vNiYkJTsvvpS9BkRxVjN
+ gm6wAbq+egaoPBsDWssoTDKSp+sUwXzQHd4pS33+9mlt5qC2bnkNfGmIh5TdVZW1ZAUkdIvEiTm
+ 7BAbgc33YGojgRNSdpF/QZ05YIC42GAEUgIQBgiapELuwsFggb4qcvofgZI3sPZlXPjD8D5d3gK
+ BBjlygzhBQxTcO3qvWwwiaLiy8En7JlPJygN5by+cHIY1pCPuZ/MdMsRlnHL+AgNzeBB7W3nXbf
+ +PutFGzSLMyptPVJG74thp1+xShIWcqYgOcMymyfimGPX5s8C3TikC3xRT/qWukJgGMqdao6IJo
+ eKngNdB/Bw9cWEkOSx31OqkmKS30jv+PvirhepCJOlHhqFSPvkvKKH+YAh09gqLQFJFIr7CJ2qw
  ==
-X-Received: by 2002:ac8:5f0b:0:b0:536:66ec:1b06 with SMTP id
- d75a77b69052e-5369b89c2e8mr55336681cf.50.1792624453843; 
- Wed, 21 Oct 2026 16:14:13 -0700 (PDT)
-X-Received: by 2002:ac8:5f0b:0:b0:536:66ec:1b06 with SMTP id
- d75a77b69052e-5369b89c2e8mr55336341cf.50.1792624453373; 
- Wed, 21 Oct 2026 16:14:13 -0700 (PDT)
+X-Received: by 2002:a05:622a:544c:b0:535:a5fc:3b5f with SMTP id
+ d75a77b69052e-5369bb2e57dmr55251391cf.75.1792624467757; 
+ Wed, 21 Oct 2026 16:14:27 -0700 (PDT)
+X-Received: by 2002:a05:622a:544c:b0:535:a5fc:3b5f with SMTP id
+ d75a77b69052e-5369bb2e57dmr55250931cf.75.1792624467124; 
+ Wed, 21 Oct 2026 16:14:27 -0700 (PDT)
 Received: from QCOM-UWl2o8bcGT.qualcomm.com
  (200-204-190-237.dsl.telesp.net.br. [200.204.190.237])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-536ab6cd0dcsm11995651cf.6.2026.10.21.16.14.10
+ d75a77b69052e-536ab6cd0dcsm11995651cf.6.2026.10.21.16.14.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 21 Oct 2026 16:14:12 -0700 (PDT)
+ Wed, 21 Oct 2026 16:14:26 -0700 (PDT)
 From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
@@ -94,52 +94,51 @@ Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
  antikostya2@gmail.com,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
  Palmer Dabbelt <palmer@dabbelt.com>
-Subject: [PATCH v4 05/18] hw/riscv/virt.c add trace encoder and ramsink fdt
- nodes
-Date: Wed, 21 Oct 2026 20:13:32 -0300
-Message-ID: <20261021231346.2452179-6-daniel.barboza@oss.qualcomm.com>
+Subject: [PATCH v4 10/18] hw/riscv/rv-trace-messages.c: add encoded trap
+ message
+Date: Wed, 21 Oct 2026 20:13:37 -0300
+Message-ID: <20261021231346.2452179-11-daniel.barboza@oss.qualcomm.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261021231346.2452179-1-daniel.barboza@oss.qualcomm.com>
 References: <20261021231346.2452179-1-daniel.barboza@oss.qualcomm.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=S8ZMU4sP c=1 sm=1 tr=0 ts=6ad94746 cx=c_pps
- a=JbAStetqSzwMeJznSMzCyw==:117 a=QmVDPCq3bE4LYXGvZ20s0w==:17
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIxMDA5MiBTYWx0ZWRfX2nrkDhFlHhfS
+ H7PzWreUcf9lUcDL6jVGJUn/3KOiA7b09T49//ov7zxSaH2e/gn1ojwrEJe6pJGHEeETlZPCJ6V
+ RmWHoQTeT1hv9wRhOyb9cmlV4HdTf1U=
+X-Proofpoint-GUID: kMogy8TZmwwiXn8fkamkhvHcpl-xgbRF
+X-Proofpoint-ORIG-GUID: kMogy8TZmwwiXn8fkamkhvHcpl-xgbRF
+X-Authority-Analysis: v=2.4 cv=Ku7YSmWN c=1 sm=1 tr=0 ts=6ad94754 cx=c_pps
+ a=EVbN6Ke/fEF3bsl7X48z0g==:117 a=QmVDPCq3bE4LYXGvZ20s0w==:17
  a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22 a=EUspDBNiAAAA:8
- a=mr6zqDPyyxlTI8rpP2AA:9 a=uxP6HrT_eTzRwkO_Te1X:22
-X-Proofpoint-ORIG-GUID: TRy05kG6CSWsZn1JK3gX4S787hCPtR5T
-X-Proofpoint-GUID: TRy05kG6CSWsZn1JK3gX4S787hCPtR5T
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIxMDA5MiBTYWx0ZWRfX0cneVDMPLQ8M
- Q1e+DeQpRzdBUzwvNd5GOAMo3y9Hj3J8il0Xgqj/5Ux8wy/nRUiyICVynLKxb2aj20ZpxbhzgNo
- IDH1LVIwj2baYVF+cG8H4KxEcpj45ihe+jAYwP5wWdxtrLTDCMGUA93ZA/EmR7CVZcriF3B4Vo4
- RptXzNH4NZoncb/UT681GvafyLQiTfMW020eLXBCoEceqCU/PQUjZTDuBgPERmlBDVc8O15Lp+/
- 6RjdhEiOTcUhuV7DTo82edd0ie0hagoObH0CvzHEKE428dFJD+f1kp8yl39VyEHVcgyB+1LDuVL
- EET1IHr+JF5A9Riv1awS+S38l9+IfWxT+a4AipC2nyubh4jOR8K2wpnu5cliwGftcXY2fuH1auN
- ljdO5Z+/tee7R+NdIUMdfNbK5sACacM4zCtjzryciMcXTi0+/SvEJiN0jKhhazIMehmV4EYKI0n
- jM616ByGENBF8AeCkCQ==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIxMDA5MiBTYWx0ZWRfX9Mtq+QN2uHJL
- b6xoYO9A9Dnq6OGeaVG2iynub/Is+cKfgDy8V2ZiBEdVvbM8MsSC2D8hFD8XKfBPyxrnxWzw26K
- UPzwAWV4/xyE3c7LIPbhATbHTiO0ruU=
+ a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22 a=EUspDBNiAAAA:8
+ a=wHbgKFqcilCShCF3WtgA:9 a=a_PwQJl-kcHnX1M80qC6:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIxMDA5MiBTYWx0ZWRfX1vB31RvJvCOe
+ 8/TUVQtny+ZxEy6xt03Z8YkkBpn7+EJbiesyUxpRk1+hNczDYcClAQ/99fXbNVF/5WnyA9rlBpz
+ vmfPmkQxXfWrlN4+xZZ5sPkGeC7nb9e1VBwgqab6EroUb/GF/FAxTb9Tuo9edjMWs2Ju/dHkSKm
+ JOdG7ZjZjx25XHutH8WzQMK3aCkG1B+HxA9Ind0Jmwg+FNHP3wp4ahUATc76dVFjFZxtNvprf9p
+ YbsQsu3hnfFnEoJx92UQ3HdBglEfw3NRxM7THYwXLQVjfa7XAjM6KVQdDB3nOyP7irgrF5i9Q5y
+ DC2cuI7DYxihbsgNlDgfz/f6QSBri94xGeVhRWWLxHSfN85nyakF/u/8yzuSFaRLwJE0155TpH7
+ tzohnYQJ24jwCZblHBxww8JSYfsZNQPXAAddlKO29BJlP16ljbd8vrdaJAQLHrWShqFW5o/+8lo
+ d4W8ANROZ960Qn/hyDw==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-10-21_06,2026-10-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 phishscore=0 clxscore=1015 adultscore=0 impostorscore=0
- malwarescore=0 spamscore=0 suspectscore=0 lowpriorityscore=0
- priorityscore=1501 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610190000
- definitions=main-2610210092
-Received-SPF: pass client-ip=205.220.180.131;
- envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
+ lowpriorityscore=0 impostorscore=0 malwarescore=0 adultscore=0 clxscore=1015
+ priorityscore=1501 spamscore=0 phishscore=0 bulkscore=0 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610210092
+Received-SPF: pass client-ip=205.220.168.131;
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
 X-Spam_score_int: -27
 X-Spam_score: -2.8
 X-Spam_bar: --
 X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -154,186 +153,156 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,USER_AGENT_GIT autolearn=unavailable autolearn_force=no
-	version=4.0.1
+	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-The trace encoder and trace ramsink nodes should confirm to the bindings
-described in "riscv,trace-component.yaml" in the Linux kernel. That way,
-encoder and ramsink devices get populated on the rvtrace bus and perf
-record is able to capture the trace data in the auxtrace section as
-expected.
+The trap message consists of a Format 3 Subformat 1 e-trace message.
+
+According to the Efficient Trace for RISC-V spec, section "Format 3
+thaddr, address and privilege fields", the 'thaddr' will be zero if:
+
+- we can't infer the EPC after an uninferable PC discontinuity (like traps).
+  This doesn't happen in our current TCG backend - we'll always know the
+  trap EPC in riscv_cpu_do_interrupt();
+
+- a second interrupt/exception happens while the handler of the first
+  trap hasn't exited. This also doesn't happen in TCG given that we do
+  not emulate a multi-insn pipeline model, i.e. we'll only retire one
+  insns at a time.
+
+This means that we'll always send trap packets with 'thaddr' set to 1,
+thus we're hardcoding it in the message helper.
 
 Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 ---
- hw/riscv/fdt-common.c         | 70 +++++++++++++++++++++++++++++++++++
- hw/riscv/virt.c               | 47 +++++++++++++++++++++++
- include/hw/riscv/fdt-common.h |  4 ++
- 3 files changed, 121 insertions(+)
+ hw/riscv/rv-trace-messages.c | 94 ++++++++++++++++++++++++++++++++++++
+ hw/riscv/rv-trace-messages.h |  5 ++
+ 2 files changed, 99 insertions(+)
 
-diff --git a/hw/riscv/fdt-common.c b/hw/riscv/fdt-common.c
-index ce2dcb43b4..6130b1bcc1 100644
---- a/hw/riscv/fdt-common.c
-+++ b/hw/riscv/fdt-common.c
-@@ -105,6 +105,12 @@ void riscv_fdt_create_cpu_socket_subnode(void *fdt,
-     qemu_fdt_add_subnode(fdt, "/cpus/cpu-map");
- }
+diff --git a/hw/riscv/rv-trace-messages.c b/hw/riscv/rv-trace-messages.c
+index 01ff51c715..7ea1c87fff 100644
+--- a/hw/riscv/rv-trace-messages.c
++++ b/hw/riscv/rv-trace-messages.c
+@@ -35,6 +35,24 @@ typedef struct RVTraceSyncPayload {
+ } RVTraceSyncPayload;
+ #define SYNC_PAYLOAD_SIZE_64BITS 9
  
-+/* Caller must free string after use */
-+static char* fdt_get_cpu_nodename(int cpu_id)
-+{
-+    return g_strdup_printf("/cpus/cpu@%d", cpu_id);
-+}
++/*
++ * Format 3 subformat 1 without 'time' and 'context' fields
++ */
++typedef struct RVTraceTrapPayload {
++    uint8_t format:2;
++    uint8_t subformat:2;
++    uint8_t branch:1;
++    uint8_t privilege:3;
++    uint8_t ecause:6;
++    uint8_t interrupt:1;
++    uint8_t thaddr:1;
++    uint32_t addressLow;
++    uint32_t addressHigh;
++    uint32_t tvalLow;
++    uint32_t tvalHigh;
++} RVTraceTrapPayload;
++#define TRAP_PAYLOAD_SIZE_64BITS 18
 +
- static void
- create_fdt_socket_cpu_internal(void *fdt, char *clust_name, RISCVCPU *cpu_ptr,
-                                int cpu, int socket_id, int socket_hartid_base,
-@@ -849,3 +855,67 @@ void riscv_create_fdt_rtc(void *fdt, const MemMapEntry *rtc_mem,
-         qemu_fdt_setprop_cells(fdt, name, "interrupts", rtc_irq, 0x4);
-     }
- }
-+
-+/* Returns the 'out-ports/port/endpoint' nodepath.  Caller
-+   must free the string after use.  */
-+char *riscv_create_fdt_trace_encoder(void *fdt, hwaddr addr, hwaddr size,
-+                                     int cpu_id)
-+{
-+    static const char * const tr_compat[2] = { "qemu,trace-component",
-+                                               "riscv,trace-component" };
-+    g_autofree char *cpu_nodename = fdt_get_cpu_nodename(cpu_id);
-+    g_autofree char *trencoder_name = NULL;
-+    char *endpoint = NULL;
-+
-+    trencoder_name = g_strdup_printf("/soc/encoder@%"HWADDR_PRIx, addr);
-+    qemu_fdt_add_subnode(fdt, trencoder_name);
-+
-+    qemu_fdt_setprop_sized_cells(fdt, trencoder_name, "reg",
-+                                 2, addr,
-+                                 2, size);
-+
-+    qemu_fdt_setprop_string_array(fdt, trencoder_name, "compatible",
-+                                  (char **)&tr_compat,
-+                                  ARRAY_SIZE(tr_compat));
-+
-+    qemu_fdt_setprop_phandle(fdt, trencoder_name, "cpus", cpu_nodename);
-+
-+    endpoint = g_strdup_printf("%s/out-ports/port/endpoint", trencoder_name);
-+    qemu_fdt_add_path(fdt, endpoint);
-+    qemu_fdt_setprop_cell(fdt, endpoint, "phandle",
-+                          qemu_fdt_alloc_phandle(fdt));
-+
-+    return endpoint;
-+}
-+
-+/* Returns the 'in-ports/port/endpoint' nodepath.  Caller
-+   must free the string after use.  */
-+char *riscv_create_fdt_trace_ramsink(void *fdt, hwaddr addr, hwaddr size,
-+                                     int cpu_id)
-+{
-+    static const char * const tr_compat[2] = { "qemu,trace-component",
-+                                               "riscv,trace-component" };
-+    g_autofree char *cpu_nodename = fdt_get_cpu_nodename(cpu_id);
-+    g_autofree char *ramsink_name = NULL;
-+    char *endpoint = NULL;
-+
-+    ramsink_name = g_strdup_printf("/soc/ramsink@%"HWADDR_PRIx, addr);
-+    qemu_fdt_add_subnode(fdt, ramsink_name);
-+
-+    qemu_fdt_setprop_sized_cells(fdt, ramsink_name, "reg",
-+                                 2, addr,
-+                                 2, size);
-+
-+    qemu_fdt_setprop_string_array(fdt, ramsink_name, "compatible",
-+                                  (char **)&tr_compat,
-+                                  ARRAY_SIZE(tr_compat));
-+
-+    qemu_fdt_setprop_phandle(fdt, ramsink_name, "cpus", cpu_nodename);
-+
-+    endpoint = g_strdup_printf("%s/in-ports/port/endpoint", ramsink_name);
-+    qemu_fdt_add_path(fdt, endpoint);
-+    qemu_fdt_setprop_cell(fdt, endpoint, "phandle",
-+                          qemu_fdt_alloc_phandle(fdt));
-+
-+    return endpoint;
-+}
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index d47b295f0c..6bc8d384ec 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -479,6 +479,51 @@ static void create_fdt_iommu(RISCVVirtState *s, uint16_t bdf)
-     s->pci_iommu_bdf = bdf;
- }
- 
-+static void create_fdt_rvtrace(RISCVVirtState *s)
-+{
-+    MachineState *ms = MACHINE(s);
-+    int socket_count = riscv_socket_count(ms);
-+    hwaddr encoder_addr, ramsink_addr, size = 0x100;
-+    RISCVCPU *cpu_ptr;
-+    int cpu_id;
-+
-+    for (int i = 0; i < socket_count; i++) {
-+        for (int cpu = 0; cpu < s->soc[i].num_harts; cpu++) {
-+            g_autofree char *in_endpoint = NULL;
-+            g_autofree char *out_endpoint = NULL;
-+
-+            cpu_ptr = &s->soc[i].harts[cpu];
-+            if (!cpu_ptr->trencoder) {
-+                continue;
-+            }
-+
-+            encoder_addr = object_property_get_uint(cpu_ptr->trencoder,
-+                                                    "baseaddr",
-+                                                    &error_abort);
-+            ramsink_addr = object_property_get_uint(cpu_ptr->trencoder,
-+                                                    "dest-baseaddr",
-+                                                    &error_abort);
-+            cpu_id = s->soc[i].hartid_base + cpu;
-+
-+            in_endpoint = riscv_create_fdt_trace_ramsink(ms->fdt,
-+                                                         ramsink_addr,
-+                                                         size, cpu_id);
-+
-+            out_endpoint = riscv_create_fdt_trace_encoder(ms->fdt,
-+                                                          encoder_addr,
-+                                                          size, cpu_id);
-+
-+            /* The remote-endpoint property is bidirectional, i.e. the
-+               in-ports endpoint must point to the out-ports endpoint
-+               and vice-versa.  */
-+            qemu_fdt_setprop_phandle(ms->fdt, in_endpoint,
-+                                     "remote-endpoint", out_endpoint);
-+            qemu_fdt_setprop_phandle(ms->fdt, out_endpoint,
-+                                     "remote-endpoint", in_endpoint);
-+        }
-+    }
-+}
-+
- static void finalize_fdt(RISCVVirtState *s)
+ static void rv_etrace_write_bits(uint8_t *bytes, uint32_t bit_pos,
+                                  uint32_t num_bits, uint32_t val)
  {
-     uint32_t phandle = 1, irq_mmio_phandle = 1, msi_pcie_phandle = 1;
-@@ -520,6 +565,8 @@ static void finalize_fdt(RISCVVirtState *s)
+@@ -92,3 +110,79 @@ size_t rv_etrace_gen_encoded_sync_msg(uint8_t *buf, uint64_t pc,
  
-     riscv_create_fdt_rtc(MACHINE(s)->fdt, &s->memmap[VIRT_RTC], RTC_IRQ,
-                          s->aia_type, irq_mmio_phandle);
-+
-+    create_fdt_rvtrace(s);
+     return HEADER_SIZE + SYNC_PAYLOAD_SIZE_64BITS;
  }
++
++/*
++ * Note: this function assumes thaddr = 1.
++ */
++size_t rv_etrace_gen_encoded_trap_msg(uint8_t *buf, uint64_t trap_addr,
++                                      TracePrivLevel priv_level,
++                                      uint8_t ecause,
++                                      bool is_interrupt,
++                                      uint64_t tval)
++{
++    RVTraceTrapPayload payload = {.format = 0b11,
++                                  .subformat = 0b01,
++                                  .branch = 1,
++                                  .privilege = priv_level,
++                                  .ecause = ecause};
++    RVTraceMessageHeader header = {.flow = 0, .extend = 0,
++                                   .length = TRAP_PAYLOAD_SIZE_64BITS};
++    uint8_t bit_pos;
++
++    payload.addressLow = extract64(trap_addr, 0, 32);
++    payload.addressHigh = extract64(trap_addr, 32, 32);
++
++    /*
++     * When interrupt = 1 'tval' is ommited. Take 8 bytes
++     * from the final size.
++     */
++    if (is_interrupt) {
++        header.length = TRAP_PAYLOAD_SIZE_64BITS - 8;
++    }
++
++    rv_etrace_write_header(buf, header);
++    bit_pos = 8;
++
++    rv_etrace_write_bits(buf, bit_pos, 2, payload.format);
++    bit_pos += 2;
++    rv_etrace_write_bits(buf, bit_pos, 2, payload.subformat);
++    bit_pos += 2;
++    rv_etrace_write_bits(buf, bit_pos, 1, payload.branch);
++    bit_pos += 1;
++    rv_etrace_write_bits(buf, bit_pos, 3, payload.privilege);
++    bit_pos += 3;
++
++    rv_etrace_write_bits(buf, bit_pos, 6, payload.ecause);
++    bit_pos += 6;
++
++    if (is_interrupt) {
++        rv_etrace_write_bits(buf, bit_pos, 1, 1);
++    } else {
++        rv_etrace_write_bits(buf, bit_pos, 1, 0);
++    }
++    bit_pos += 1;
++
++    /* thaddr is hardcoded to 1 for now */
++    rv_etrace_write_bits(buf, bit_pos, 1, 1);
++    bit_pos += 1;
++
++    rv_etrace_write_bits(buf, bit_pos, 32, payload.addressLow);
++    bit_pos += 32;
++    rv_etrace_write_bits(buf, bit_pos, 32, payload.addressHigh);
++    bit_pos += 32;
++
++    /* Skip trap_addr if is_interrupt  */
++    if (is_interrupt) {
++        goto out;
++    }
++
++    payload.tvalLow = extract64(trap_addr, 0, 32);
++    payload.tvalHigh = extract64(trap_addr, 32, 32);
++
++    rv_etrace_write_bits(buf, bit_pos, 32, payload.tvalLow);
++    bit_pos += 32;
++    rv_etrace_write_bits(buf, bit_pos, 32, payload.tvalHigh);
++
++out:
++    return HEADER_SIZE + header.length;
++}
+diff --git a/hw/riscv/rv-trace-messages.h b/hw/riscv/rv-trace-messages.h
+index c7226b50a9..f210e048dd 100644
+--- a/hw/riscv/rv-trace-messages.h
++++ b/hw/riscv/rv-trace-messages.h
+@@ -21,5 +21,10 @@ typedef enum {
  
- static void create_fdt(RISCVVirtState *s)
-diff --git a/include/hw/riscv/fdt-common.h b/include/hw/riscv/fdt-common.h
-index eb9db8278d..fd03a9e0ab 100644
---- a/include/hw/riscv/fdt-common.h
-+++ b/include/hw/riscv/fdt-common.h
-@@ -136,4 +136,8 @@ void riscv_create_fdt_uart(void *fdt, const MemMapEntry *uart_mem,
- void riscv_create_fdt_rtc(void *fdt, const MemMapEntry *rtc_mem,
-                           int rtc_irq, int aia_type,
-                           uint32_t irq_phandle);
-+char *riscv_create_fdt_trace_encoder(void *fdt, hwaddr addr, hwaddr size,
-+                                     int cpu_id);
-+char *riscv_create_fdt_trace_ramsink(void *fdt, hwaddr addr, hwaddr size,
-+                                     int cpu_id);
+ size_t rv_etrace_gen_encoded_sync_msg(uint8_t *buf, uint64_t pc,
+                                       TracePrivLevel priv_level);
++size_t rv_etrace_gen_encoded_trap_msg(uint8_t *buf, uint64_t trap_addr,
++                                      TracePrivLevel priv_level,
++                                      uint8_t ecause,
++                                      bool is_interrupt,
++                                      uint64_t tval);
+ 
  #endif
 -- 
 2.43.0
