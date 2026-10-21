@@ -1,145 +1,142 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 362F8606A319
-	for <qemu-riscv@archiver.kernel.org>; Wed, 21 Oct 2026 13:33:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 353A3606A319
+	for <qemu-riscv@archiver.kernel.org>; Wed, 21 Oct 2026 14:47:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=G9znpmww;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=XeZaHqpX
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=baiN5V2X
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xJWR8-0001Bc-KZ; Wed, 21 Oct 2026 09:32:58 -0400
+	id 1xJXaW-00045R-MU; Wed, 21 Oct 2026 10:46:44 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xJWR6-0001B5-OE
- for qemu-riscv@nongnu.org; Wed, 21 Oct 2026 09:32:56 -0400
-Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1xJXZR-0003qN-36
+ for qemu-riscv@nongnu.org; Wed, 21 Oct 2026 10:45:40 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xJWR4-0005mC-Fv
- for qemu-riscv@nongnu.org; Wed, 21 Oct 2026 09:32:56 -0400
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 69LDNAU8402915
- for <qemu-riscv@nongnu.org>; Wed, 21 Oct 2026 13:32:53 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- 9pLF8mIHWOk5zqg++YoP18PKV2FEaBQenve5hwcvq44=; b=G9znpmwwkJUJrK8R
- Iztbu/IqbYMIIDvTKzyJEZWKOTxqhxwR8+Tl85y15W+WJhC7BXCrXh23vzFeVIKo
- hM4Fc0VvAM/8kYV85DQwhDoNIC83Xi/Dto+I7TZIXZOODFEfoNxzLdzkHD1IKSnH
- Cn/OFHR6uoT4CriCXNWmXNhobE8DHthlrlw5ZdDDuxZevPm8fJVq4JMuEoXUl7z+
- Du3hfMQlVIS1dHdm+vwRvJpLY/JUgZGy3/jfXhy4mpX7e0Ibu64gIF0IwhuOMEff
- xwXKf0mYNwlKhZY7M7ubXg4d7fBGrpTfo829d7MROpFZJJwo2yrm73QohZHJ6wLg
- LvFLXA==
-Received: from mail-yw1-f197.google.com (mail-yw1-f197.google.com
- [209.85.128.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hex7vr1ss-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Wed, 21 Oct 2026 13:32:53 +0000 (GMT)
-Received: by mail-yw1-f197.google.com with SMTP id
- 00721157ae682-8b0cfe694c3so9473387b3.2
- for <qemu-riscv@nongnu.org>; Wed, 21 Oct 2026 06:32:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1792589573; x=1793194373; darn=nongnu.org;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=9pLF8mIHWOk5zqg++YoP18PKV2FEaBQenve5hwcvq44=;
- b=XeZaHqpXTimVl5HvCZmJXB8nKL8wtj3P0r7hc7uHIAzioA9GENcRe3xIQIBfW/DOtc
- zLHL3bC74QxORh9MtdEYgbP6ojNsQC2gT1N64kCfJMihOm2/7Pgqk7sVfb6suSm/HeeZ
- NeuTDD32A+MyVx+JLebAZjFNLHpZmTq03VvccboFlMDxr+O5Ff+GbL45emGzNtuEAobu
- Vi37a+tdLN+ZUN2z+/JiW6yMpqpL0OmYvoJsZY5937DLSe0iv/8GjPGzM5GOX9Nl6K/j
- oSVIJHLOg0mpjGx8xJI9BWeGrNUcqOiWkW7owwAvyJa/bRzPxAerw93G+knPbGytwGPe
- nclA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792589573; x=1793194373;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=9pLF8mIHWOk5zqg++YoP18PKV2FEaBQenve5hwcvq44=;
- b=DV5LGj0WByAwAmGE9pVbTiECi8AUqrvR5RAF6SCebvbfGOt4BswYVfNAVLRRmlWQ1Q
- OMgBMCTdK7lLZXjdSRT6jnUcCWI2TXED0NQMD2f4S6pbma9Fur19imjRLcD1JDtCwJK4
- 0ExVkXi/y4lxQviDEZWckXMYuySuSG2BWeK9goFyyXPWyP+t78Cll5KMIJ1oauPsb+MD
- JyumnY/CHHAH/NtuS4yfOKK9qjyWw7xcodz7MJfxL8qnu8up7lM9RDrciuHDimnScV2p
- HRT1i49W0Z4rPme1FhSVjZxnzTO3NQPYlVhtwuZ53fHoEImas1hy6GAsGmnCS37yCEDi
- Zxrg==
-X-Gm-Message-State: AFq9FYLVaxB51C27JmSfdHarH0nKVbVBc9YfD1iTNW3C2r3ByHavdEbg
- l1ezE399moksZmNTUTPlIaveF7Q7v5sGb9ZvBZtyN/6OLAYu048A4DawokNdXCtEIqnEKCMV+Nl
- H6nyyXwkFZ1wfM4TI+OxPATBPF0s71nBiKakgyk7RvsELhzaVN5kPvHPB5A==
-X-Gm-Gg: AYBFou3kDDcPkqc1ETJfkHDn59ruj1JSE4/sb1IWs67ciQnnFdSFgLfhf49OF/+OuyM
- Q/T+ziipVgyCJXEdnOhX7k4eLi1buutU1JrBWaPkGaI17NCjS3pRFavjrqke1a/SF4jYHntRK3w
- ydO38sYEzFNPRGnWajVdiZlCpnoasjt+4e+ziN+VpnHHnqLEh3m51hv0sTohQ7DJihvBUgQeVD9
- nBUnO2J3XBetcE4Ol6pC9duMGZiSmpzsB52hmXxVJ/Sk1m7eTdj6UeDb9Lh8wgwSxQM7dOCq4Yh
- lyGxRqVGVuep1V2JMTmdMq5T39paWpSEkTgHLeo2OKcodguquSLcZLnondSNmZ1+SfTBh3Q1w6N
- cRRaMo0OOFqkKkx2yCK288QFHnMy8D93KIsZZWZ208cQ7Tnb07GBxspOZ1+aoypcEI+h/mFpI
-X-Received: by 2002:a05:690c:660c:b0:8a8:6fac:21af with SMTP id
- 00721157ae682-8b133c99130mr12106467b3.12.1792589572609; 
- Wed, 21 Oct 2026 06:32:52 -0700 (PDT)
-X-Received: by 2002:a05:690c:660c:b0:8a8:6fac:21af with SMTP id
- 00721157ae682-8b133c99130mr12106207b3.12.1792589571968; 
- Wed, 21 Oct 2026 06:32:51 -0700 (PDT)
-Received: from [192.168.68.101] (200-204-190-237.dsl.telesp.net.br.
- [200.204.190.237]) by smtp.gmail.com with ESMTPSA id
- 00721157ae682-8b12ff04e1asm10944037b3.1.2026.10.21.06.32.49
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 21 Oct 2026 06:32:51 -0700 (PDT)
-Message-ID: <5576bebb-3c2a-480b-ada0-bbbbf3fe6b7a@oss.qualcomm.com>
-Date: Wed, 21 Oct 2026 10:32:48 -0300
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1xJXZL-0004Lg-FJ
+ for qemu-riscv@nongnu.org; Wed, 21 Oct 2026 10:45:34 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1792593928;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=JDM0WUBiT+rQ0E9Y++3yExU/xhUlliEDnE5RqvGKgRs=;
+ b=baiN5V2XTqikSAk0FdLrVb7f+yoX5h67klvL7wUPKjr5aHzS75qTZDh/GWSRS8BfMm3sWm
+ bCq4SFMTrR2VAQhFJIn1zi4KdznO9T4hLG9fvmdhzxWc57+QjoOqbxoBnuJVmTHsEKjo3j
+ jojqSbRd7Q5A617vdQd8K6nYloV1ZxY=
+Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-44-697RRaHWMcyjyp9VUObGAw-1; Wed,
+ 21 Oct 2026 10:45:22 -0400
+X-MC-Unique: 697RRaHWMcyjyp9VUObGAw-1
+X-Mimecast-MFC-AGG-ID: 697RRaHWMcyjyp9VUObGAw_1792593918
+Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 0D26B18007EA; Wed, 21 Oct 2026 14:45:15 +0000 (UTC)
+Received: from blackfin.pond.sub.org (unknown [10.44.22.5])
+ by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 82B9030002CB; Wed, 21 Oct 2026 14:45:09 +0000 (UTC)
+Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
+ id 23A7921E6A04; Wed, 21 Oct 2026 16:45:07 +0200 (CEST)
+From: Markus Armbruster <armbru@redhat.com>
+To: =?utf-8?Q?Marc-Andr=C3=A9?= Lureau <marcandre.lureau@redhat.com>
+Cc: qemu-devel@nongnu.org,  Michael Roth <michael.roth@amd.com>,  John Snow
+ <jsnow@redhat.com>,  Peter Maydell <peter.maydell@linaro.org>,  Mauro
+ Carvalho Chehab <mchehab+huawei@kernel.org>,  Pierrick Bouvier
+ <pierrick.bouvier@oss.qualcomm.com>,  Paolo Bonzini <pbonzini@redhat.com>,
+ Daniel P. =?utf-8?Q?Berrang=C3=A9?= <berrange@redhat.com>,  Kostiantyn
+ Kostiuk
+ <kkostiuk@redhat.com>,  Eric Blake <eblake@redhat.com>,  David Hildenbrand
+ <david@kernel.org>,  Igor Mammedov <imammedo@redhat.com>,  "Edgar E.
+ Iglesias" <edgar.iglesias@gmail.com>,  Jason Wang <jasowangio@gmail.com>,
+ Marcelo Tosatti <mtosatti@redhat.com>,  kvm@vger.kernel.org,  Alberto
+ Garcia <berto@igalia.com>,  Kevin Wolf <kwolf@redhat.com>,  Hanna Reitz
+ <hreitz@redhat.com>,  Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?=
+ <philmd@oss.qualcomm.com>,
+ Zhao Liu <zhao1.liu@intel.com>,  Jonathan Cameron <jic23@kernel.org>,
+ Junjie Cao <junjie.cao@intel.com>,  Anisa Su <anisa.su@samsung.com>,
+ Elena Ufimtseva <elena.ufimtseva@oracle.com>,  Jagannathan Raman
+ <jag.raman@oracle.com>,  John Levon <john.levon@nutanix.com>,  Thanos
+ Makatos <thanos.makatos@nutanix.com>,  =?utf-8?Q?C=C3=A9dric?= Le Goater
+ <clg@redhat.com>,
+ Cornelia Huck <cohuck@redhat.com>,  Eric Farman <farman@linux.ibm.com>,
+ Matthew Rosato <mjrosato@linux.ibm.com>,  Richard Henderson
+ <richard.henderson@linaro.org>,  Ilya Leoshkevich <iii@linux.ibm.com>,
+ qemu-block@nongnu.org,  linux-cxl@vger.kernel.org,
+ qemu-s390x@nongnu.org,  "Michael S. Tsirkin" <mst@redhat.com>,  Sergio
+ Lopez <slp@redhat.com>,  qemu-arm@nongnu.org,  Palmer Dabbelt
+ <palmer@dabbelt.com>,  Alistair Francis <alistair.francis@wdc.com>,
+ Weiwei Li <liwei1518@gmail.com>,  Daniel Henrique Barboza
+ <daniel.barboza@oss.qualcomm.com>,  Liu Zhiwei
+ <zhiwei_liu@linux.alibaba.com>,  Chao Liu <chao.liu@processmission.com>,
+ qemu-riscv@nongnu.org,  Song Gao <17746591750@163.com>,  Bibo Mao
+ <maobibo@loongson.cn>,  Xianglai Li <lixianglai@loongson.cn>,  Jiaxun Yang
+ <jiaxun.yang@flygoat.com>,  Pedro Barbuda <pbarbuda@microsoft.com>,
+ Mohamed Mediouni <mohamed@unpredictable.fr>,  Nicholas Piggin
+ <npiggin@gmail.com>,  Harsh Prateek Bora <harshpb@linux.ibm.com>,  Amit
+ Machhiwal <amachhiw@linux.ibm.com>,  qemu-ppc@nongnu.org,  Zhang Chen
+ <zhangckid@gmail.com>,  Li Zhijian <lizhijian@fujitsu.com>,  Alistair
+ Francis <alistair@alistair23.me>,  Alexander Graf <graf@amazon.com>,
+ "Gonglei (Arei)" <arei.gonglei@huawei.com>,  zhenwei pi
+ <zhenwei.pi@linux.dev>,  Ani Sinha <anisinha@redhat.com>,  Luc Michel
+ <luc@lmichel.fr>,  =?utf-8?Q?C=C3=A9dric?= Le Goater <clg@kaod.org>,  Jamin
+ Lin
+ <jamin_lin@aspeedtech.com>,  Kane Chen <kane_chen@aspeedtech.com>,  Samuel
+ Tardieu <sam@rfc1149.net>,  "Denis V. Lunev" <den@openvz.org>,  FangSheng
+ Huang <FangSheng.Huang@amd.com>,  Tyrone Ting <kfting@nuvoton.com>,  Hao
+ Wu <wuhaotsh@google.com>,  Keith Busch <kbusch@kernel.org>,  Klaus Jensen
+ <its@irrelevant.dk>,  Jesper Devantier <foss@defmacro.it>,  Aditya Gupta
+ <adityag@linux.ibm.com>,  Glenn Miles <milesg@linux.ibm.com>,  Conor
+ Dooley <conor@kernel.org>,  Sebastian Huber
+ <sebastian.huber@embedded-brains.de>,  Halil Pasic <pasic@linux.ibm.com>,
+ Christian Borntraeger <borntraeger@linux.ibm.com>,  Jason Herne
+ <jjherne@linux.ibm.com>,  Titus Rwantare <titusr@google.com>,  Stefano
+ Stabellini <sstabellini@kernel.org>,  Anthony PERARD
+ <anthony@xenproject.org>,  Peter Xu <peterx@redhat.com>,  Chinmay Rath
+ <rathc@linux.ibm.com>,  Hendrik Brueckner <brueckner@linux.ibm.com>,
+ xen-devel@lists.xenproject.org,  Roman Bolshakov <rbolshakov@ddn.com>,
+ Phil Dennis-Jordan <phil@philjordan.eu>,  Fam Zheng <fam@euphon.net>,
+ Farhan Ali <alifm@linux.ibm.com>,  Alex Williamson <alex@shazbot.org>,
+ Tao Tang <tangtao1634@phytium.com.cn>,  Stefan Berger
+ <stefanb@linux.vnet.ibm.com>,  Fabiano Rosas <farosas@suse.de>,  Mark
+ Cave-Ayland <mark.cave-ayland@ilande.co.uk>,  Artyom Tarasenko
+ <atar4qemu@gmail.com>,  Yoshinori Sato <yoshinori.sato@nifty.com>,  Jiri
+ Pirko <jiri@resnulli.us>,  Eric Auger <eric.auger@redhat.com>,  Laurent
+ Vivier <lvivier@redhat.com>
+Subject: Re: [PATCH v7 60/65] qdev: simplify DEFINE_PROP_ARRAY and remove
+ generic array PropertyInfo
+In-Reply-To: <20261020-qom-qapi-v7-60-431a86b02b58@redhat.com>
+ (=?utf-8?Q?=22Marc-Andr=C3=A9?=
+ Lureau"'s message of "Tue, 20 Oct 2026 14:46:17 +0400")
+References: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
+ <20261020-qom-qapi-v7-60-431a86b02b58@redhat.com>
+Date: Wed, 21 Oct 2026 16:45:07 +0200
+Message-ID: <878q3rm7t8.fsf@pond.sub.org>
+User-Agent: Gnus/5.13 (Gnus v5.13)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 RESEND 3/3] hw/intc/imsic: Add in-kernel imsic save and
- restore function
-To: liu.xuemei1@zte.com.cn, palmer@dabbelt.com, alistair.francis@wdc.com,
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com,
- chao.liu.zevorn@gmail.com, peterx@redhat.com, farosas@suse.de
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-References: <20260602143335139vSrlCbb4GSWlGSnOMETFs@zte.com.cn>
-From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Content-Language: en-US
-In-Reply-To: <20260602143335139vSrlCbb4GSWlGSnOMETFs@zte.com.cn>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-ORIG-GUID: EayMo8oiWPORytb5nmJFczA74SGrWWS2
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIxMDA1MyBTYWx0ZWRfX1Zy6zR6wvdG0
- Gjr7ExirfUc78Mb+Uazn0vinemUiW6dKTBtBwYIbnBeCyWyvu2YfF9kzjB7AZRG3Rqk+YmF2ZZ/
- 4l31s4mBATYEQp88Ob+FVf69PWzeEVY=
-X-Proofpoint-GUID: EayMo8oiWPORytb5nmJFczA74SGrWWS2
-X-Authority-Analysis: v=2.4 cv=e4uT2qp/ c=1 sm=1 tr=0 ts=6ad8bf05 cx=c_pps
- a=0mLRTIufkjop4KoA/9S1MA==:117 a=QmVDPCq3bE4LYXGvZ20s0w==:17
- a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
- a=1RTuLK3dAAAA:8 a=twNBsePXMh2ZGtmFprsA:9 a=QEXdDO2ut3YA:10
- a=WgItmB6HBUc_1uVUp3mg:22 a=kRpfLKi8w9umh8uBmg1i:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIxMDA1MyBTYWx0ZWRfX8VcDBuDCnQ4a
- W9jDdN8mHaHoKQToNIkJderfcuqosBeaREr5JSsDYctfwX4YjCo3oYKwZHemlSHwy8garKwRFPI
- BZtrnh2jsnXAI4xKUxS39z8b4LcSvaRa8SoGV3+kwjJrS3Mz7umV0A8UUCdNw5v0XWj5xPcchs7
- XyELwm5cM51JSSyliP6t5XVpcG9eiQNKmX9ScGIUE/XB4Ueu53eJaeCaVeuW9s1KVSH5Ql3klrF
- OLnzhpj8bTo4dFiguSmvjkjQZhrNbmsBUJFZbXvh7ZeQpjasKKYQXiu6wmIo4nkYhI/SQ9RWfNB
- yiOXuk1wwy2LD7i0L5RWD8XgX6jC1yOxA40Aa+DHqFHCevbPzkYA5CvR3quFzHe0thKVi9lnycn
- iUyEVxjjMuB/QL5AOsywXf7q/Gmy7ggymhWebbh6xCkPrIV40PcTM8Oh8KK31Qi8GBCjIfUKd+D
- sUTyfyAb8hxJ76QekMQ==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-10-21_03,2026-10-21_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 lowpriorityscore=0 spamscore=0 adultscore=0 clxscore=1015
- priorityscore=1501 suspectscore=0 bulkscore=0 malwarescore=0 impostorscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610210053
-Received-SPF: pass client-ip=205.220.180.131;
- envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
+X-Mimecast-MFC-PROC-ID: u0N98GxAHQNiW7WjCLndQkYuCgcP84i9GP79Mpt_MIw_1792593918
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=armbru@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -27
 X-Spam_score: -2.8
 X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -151,301 +148,32 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+X-Spam-Status: No, score=-12.6 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
+	USER_AGENT_SANE_1 autolearn=unavailable autolearn_force=no
 	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
+Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com> writes:
 
+> Change DEFINE_PROP_ARRAY, the macro now uses _arrayprop##_list to
+> resolve the typed list PropertyInfo (introduced in the previous patch)
+> instead of the generic qdev_prop_array.
+>
+> This means the element type and size information is carried by the
+> PropertyInfo itself rather than duplicated at each callsite. Since
+> the typed list PropertyInfos encode element_info and element_size,
+> the .arrayinfo and .arrayfieldsize fields are no longer set by the
+> macro (they will be removed from the Property struct in the next patch).
+>
+> Remove qdev_prop_array, which is now unused.
+>
+> Signed-off-by: Markus Armbruster <armbru@redhat.com>
+> Signed-off-by: Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com>
 
-On 6/2/2026 3:33 AM, liu.xuemei1@zte.com.cn wrote:
-> From: Xuemei Liu <liu.xuemei1@zte.com.cn>
-> 
-> Add save and restore funtction if kvm_irqchip_in_kernel() return
-> true, it is to get and set IMSIC irqchip state from KVM kernel.
-> 
-> Signed-off-by: Xuemei Liu <liu.xuemei1@zte.com.cn>
-> ---
->   hw/intc/riscv_imsic.c         | 171 +++++++++++++++++++++++++++++++---
->   include/hw/intc/riscv_imsic.h |   3 +
->   include/qemu/bitops.h         |   1 +
->   migration/vmstate-types.c     |   1 -
->   4 files changed, 161 insertions(+), 15 deletions(-)
-> 
-> diff --git a/hw/intc/riscv_imsic.c b/hw/intc/riscv_imsic.c
-> index 6dbbc152a2..bfce181af9 100644
-> --- a/hw/intc/riscv_imsic.c
-> +++ b/hw/intc/riscv_imsic.c
-> @@ -34,6 +34,7 @@
->   #include "system/system.h"
->   #include "system/kvm.h"
->   #include "migration/vmstate.h"
-> +#include "kvm/kvm_riscv.h"
-> 
->   #define IMSIC_MMIO_PAGE_LE             0x00
->   #define IMSIC_MMIO_PAGE_BE             0x04
-> @@ -382,11 +383,16 @@ static void riscv_imsic_realize(DeviceState *dev, Error **errp)
->           qdev_init_gpio_out(dev, imsic->external_irqs, imsic->num_pages);
-> 
->           imsic->num_eistate = imsic->num_pages * imsic->num_irqs;
-> -        imsic->eidelivery = g_new0(uint32_t, imsic->num_pages);
-> -        imsic->eithreshold = g_new0(uint32_t, imsic->num_pages);
->           imsic->eistate = g_new0(uint32_t, imsic->num_eistate);
-> +    } else {
-> +        imsic->nr_eix = 2 * BITS_TO_U64S(imsic->num_irqs);
-> +        imsic->eie = g_new0(uint32_t, imsic->nr_eix);
-> +        imsic->eip = g_new0(uint32_t, imsic->nr_eix);
->       }
-> 
-> +    imsic->eidelivery = g_new0(uint32_t, imsic->num_pages);
-> +    imsic->eithreshold = g_new0(uint32_t, imsic->num_pages);
-> +
->       memory_region_init_io(&imsic->mmio, OBJECT(dev), &riscv_imsic_ops,
->                             imsic, TYPE_RISCV_IMSIC,
->                             IMSIC_MMIO_SIZE(imsic->num_pages));
-> @@ -417,23 +423,17 @@ static const Property riscv_imsic_properties[] = {
->       DEFINE_PROP_UINT32("num-irqs", RISCVIMSICState, num_irqs, 0),
->   };
-> 
-> -static bool riscv_imsic_state_needed(void *opaque)
-> +static bool riscv_imsic_emul_state_needed(void *opaque)
->   {
->       return !kvm_irqchip_in_kernel();
->   }
-> 
-> -static const VMStateDescription vmstate_riscv_imsic = {
-> -    .name = "riscv_imsic",
-> -    .version_id = 2,
-> -    .minimum_version_id = 2,
-> -    .needed = riscv_imsic_state_needed,
-> +static const VMStateDescription vmstate_riscv_imsic_emul = {
-> +    .name = "riscv_imsic_emul",
-> +    .version_id = 1,
-> +    .minimum_version_id = 1,
-> +    .needed = riscv_imsic_emul_state_needed,
->       .fields = (const VMStateField[]) {
-> -            VMSTATE_VARRAY_UINT32(eidelivery, RISCVIMSICState,
-> -                                  num_pages, 0,
-> -                                  vmstate_info_uint32, uint32_t),
-> -            VMSTATE_VARRAY_UINT32(eithreshold, RISCVIMSICState,
-> -                                  num_pages, 0,
-> -                                  vmstate_info_uint32, uint32_t),
->               VMSTATE_VARRAY_UINT32(eistate, RISCVIMSICState,
->                                     num_eistate, 0,
->                                     vmstate_info_uint32, uint32_t),
-> @@ -441,6 +441,149 @@ static const VMStateDescription vmstate_riscv_imsic = {
->           }
->   };
-> 
-> +static bool riscv_imsic_in_kernel_state_needed(void *opaque)
-> +{
-> +    return kvm_irqchip_in_kernel();
-> +}
-> +
-> +static int riscv_imsic_in_kernel_pre_save(void *opaque)
-> +{
-> +    RISCVIMSICState *imsic = opaque;
-> +    RISCVCPU *rcpu = RISCV_CPU(cpu_by_arch_id(imsic->hartid));
-> +    bool is_32bit = riscv_cpu_is_32bit(rcpu);
-> +    uint32_t inc = 2;
-> +    uint64_t attr;
-> +
-> +    if (is_32bit) {
-> +        inc = 1;
-> +    }
-> +
-> +    if (kvm_irqchip_in_kernel()) {
-> +        for (uint32_t i = 0; i < imsic->nr_eix; i += inc) {
-> +            attr = KVM_DEV_RISCV_AIA_IMSIC_MKATTR(imsic->hartid,
-> +                                                  ISELECT_IMSIC_EIE0 + i);
-> +            kvm_riscv_aia_access_reg(KVM_DEV_RISCV_AIA_GRP_IMSIC, attr,
-> +                                     imsic->eie + i, false);
-> +
-> +            attr = KVM_DEV_RISCV_AIA_IMSIC_MKATTR(imsic->hartid,
-> +                                                  ISELECT_IMSIC_EIP0 + i);
-> +            kvm_riscv_aia_access_reg(KVM_DEV_RISCV_AIA_GRP_IMSIC, attr,
-> +                                     imsic->eip + i, false);
-> +        }
-> +    }
-> +
-> +    return 0;
-> +}
-> +
-> +static int riscv_imsic_in_kernel_post_load(void *opaque, int version_id)
-> +{
-> +    RISCVIMSICState *imsic = opaque;
-> +    RISCVCPU *rcpu = RISCV_CPU(cpu_by_arch_id(imsic->hartid));
-> +    bool is_32bit = riscv_cpu_is_32bit(rcpu);
-> +    uint32_t inc = 2;
-> +    uint64_t attr;
-> +
-> +    if (is_32bit) {
-> +        inc = 1;
-> +    }
-> +
-> +    if (kvm_irqchip_in_kernel()) {
-> +        for (uint32_t i = 0; i < imsic->nr_eix; i += inc) {
-> +            attr = KVM_DEV_RISCV_AIA_IMSIC_MKATTR(imsic->hartid,
-> +                                                  ISELECT_IMSIC_EIE0 + i);
-> +            kvm_riscv_aia_access_reg(KVM_DEV_RISCV_AIA_GRP_IMSIC, attr,
-> +                                     imsic->eie + i, true);
-> +
-> +            attr = KVM_DEV_RISCV_AIA_IMSIC_MKATTR(imsic->hartid,
-> +                                                  ISELECT_IMSIC_EIP0 + i);
-> +            kvm_riscv_aia_access_reg(KVM_DEV_RISCV_AIA_GRP_IMSIC, attr,
-> +                                     imsic->eip + i, true);
-> +        }
-> +    }
-> +
-> +    return 0;
-> +}
-> +
-
-This has the same build problems as patch 2 - we need to filter out the KVM
-specific builds when doing a TCG only build.  Using #ifdef CONFIG_KVM will
-also work here.
-
-
-One more thing:
-
-> +static const VMStateDescription vmstate_riscv_imsic_in_kernel = {
-> +    .name = "riscv_imsic_in_kernel",
-> +    .version_id = 1,
-> +    .minimum_version_id = 1,
-> +    .needed = riscv_imsic_in_kernel_state_needed,
-> +    .pre_save = riscv_imsic_in_kernel_pre_save,
-> +    .post_load = riscv_imsic_in_kernel_post_load,
-> +    .fields = (const VMStateField[]) {
-> +        VMSTATE_VARRAY_UINT32(eie, RISCVIMSICState,
-> +                              nr_eix, 0,
-> +                              vmstate_info_uint32, uint32_t),
-> +        VMSTATE_VARRAY_UINT32(eip, RISCVIMSICState,
-> +                              nr_eix, 0,
-> +                              vmstate_info_uint32, uint32_t),
-> +        VMSTATE_END_OF_LIST()
-> +    }
-> +};
-> +
-> +static int riscv_imsic_pre_save(void *opaque)
-
-Both riscv_imsic_pre_save() and riscv_imsic_post_load() are KVM specific load
-callbacks, so I suggest renaming them to add "kvm" somewhere in the function
-name.
-
-
-Thanks,
-Daniel
-
-> +{
-> +    RISCVIMSICState *imsic = opaque;
-> +    uint64_t attr;
-> +
-> +    if (kvm_irqchip_in_kernel()) {
-> +        attr = KVM_DEV_RISCV_AIA_IMSIC_MKATTR(imsic->hartid,
-> +                                              ISELECT_IMSIC_EIDELIVERY);
-> +        kvm_riscv_aia_access_reg(KVM_DEV_RISCV_AIA_GRP_IMSIC, attr,
-> +                                 imsic->eidelivery, false);
-> +
-> +        attr = KVM_DEV_RISCV_AIA_IMSIC_MKATTR(imsic->hartid,
-> +                                              ISELECT_IMSIC_EITHRESHOLD);
-> +        kvm_riscv_aia_access_reg(KVM_DEV_RISCV_AIA_GRP_IMSIC, attr,
-> +                                 imsic->eithreshold, false);
-> +   }
-> +
-> +    return 0;
-> +}
-> +
-> +static int riscv_imsic_post_load(void *opaque, int version_id)
-> +{
-> +    RISCVIMSICState *imsic = opaque;
-> +    uint64_t attr;
-> +
-> +    if (kvm_irqchip_in_kernel()) {
-> +        attr = KVM_DEV_RISCV_AIA_IMSIC_MKATTR(imsic->hartid,
-> +                                              ISELECT_IMSIC_EIDELIVERY);
-> +        kvm_riscv_aia_access_reg(KVM_DEV_RISCV_AIA_GRP_IMSIC, attr,
-> +                                 imsic->eidelivery, true);
-> +
-> +        attr = KVM_DEV_RISCV_AIA_IMSIC_MKATTR(imsic->hartid,
-> +                                              ISELECT_IMSIC_EITHRESHOLD);
-> +        kvm_riscv_aia_access_reg(KVM_DEV_RISCV_AIA_GRP_IMSIC, attr,
-> +                                 imsic->eithreshold, true);
-> +   }
-> +
-> +    return 0;
-> +}
-> +
-> +static const VMStateDescription vmstate_riscv_imsic = {
-> +    .name = "riscv_imsic",
-> +    .version_id = 3,
-> +    .minimum_version_id = 3,
-> +    .pre_save = riscv_imsic_pre_save,
-> +    .post_load = riscv_imsic_post_load,
-> +    .fields = (const VMStateField[]) {
-> +        VMSTATE_VARRAY_UINT32(eidelivery, RISCVIMSICState,
-> +                              num_pages, 0,
-> +                              vmstate_info_uint32, uint32_t),
-> +        VMSTATE_VARRAY_UINT32(eithreshold, RISCVIMSICState,
-> +                              num_pages, 0,
-> +                              vmstate_info_uint32, uint32_t),
-> +        VMSTATE_END_OF_LIST()
-> +    },
-> +    .subsections = (const VMStateDescription * const []) {
-> +        &vmstate_riscv_imsic_emul,
-> +        &vmstate_riscv_imsic_in_kernel,
-> +        NULL
-> +    }
-> +};
-> +
->   static void riscv_imsic_class_init(ObjectClass *klass, const void *data)
->   {
->       DeviceClass *dc = DEVICE_CLASS(klass);
-> diff --git a/include/hw/intc/riscv_imsic.h b/include/hw/intc/riscv_imsic.h
-> index fae999731d..2206d82e0c 100644
-> --- a/include/hw/intc/riscv_imsic.h
-> +++ b/include/hw/intc/riscv_imsic.h
-> @@ -54,12 +54,15 @@ struct RISCVIMSICState {
->       uint32_t *eidelivery;
->       uint32_t *eithreshold;
->       uint32_t *eistate;
-> +    uint32_t *eip;
-> +    uint32_t *eie;
-> 
->       /* config */
->       bool mmode;
->       uint32_t hartid;
->       uint32_t num_pages;
->       uint32_t num_irqs;
-> +    uint32_t nr_eix;
->   };
-> 
->   DeviceState *riscv_imsic_create(hwaddr addr, uint32_t hartid, bool mmode,
-> diff --git a/include/qemu/bitops.h b/include/qemu/bitops.h
-> index c7b838a628..a7f86f2ee0 100644
-> --- a/include/qemu/bitops.h
-> +++ b/include/qemu/bitops.h
-> @@ -20,6 +20,7 @@
->   #define BITS_PER_LONG           (sizeof (unsigned long) * BITS_PER_BYTE)
->   #define BITS_TO_LONGS(nr)       DIV_ROUND_UP(nr, BITS_PER_BYTE * sizeof(long))
->   #define BITS_TO_U32S(nr)        DIV_ROUND_UP(nr, BITS_PER_BYTE * sizeof(uint32_t))
-> +#define BITS_TO_U64S(nr)        DIV_ROUND_UP(nr, BITS_PER_BYTE * sizeof(uint64_t))
-> 
->   #define BIT(nr)                 (1UL << (nr))
->   #define BIT_ULL(nr)             (1ULL << (nr))
-> diff --git a/migration/vmstate-types.c b/migration/vmstate-types.c
-> index ae465c5c2c..7e6f37f8c4 100644
-> --- a/migration/vmstate-types.c
-> +++ b/migration/vmstate-types.c
-> @@ -597,7 +597,6 @@ const VMStateInfo vmstate_info_tmp = {
->    * is an array of 'unsigned long', which may be either 32 or 64 bits.
->    */
->   /* This is the number of 64 bit words sent over the wire */
-> -#define BITS_TO_U64S(nr) DIV_ROUND_UP(nr, 64)
->   static bool load_bitmap(QEMUFile *f, void *pv, size_t size,
->                           const VMStateField *field, Error **errp)
->   {
+I see the type of "gicv5" property "cpus" change from "list", which lazy
+bad, to "link<arm-cpu>List, which is confused bad.
 
 
