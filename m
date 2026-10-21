@@ -1,143 +1,149 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 954E2606A319
-	for <qemu-riscv@archiver.kernel.org>; Wed, 21 Oct 2026 17:32:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C6A78606A334
+	for <qemu-riscv@archiver.kernel.org>; Wed, 21 Oct 2026 18:16:31 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=fbpZ7NCi;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=i4CfUw5G
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=kgROA807;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=ULtB2VA3
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xJaAO-00051a-La; Wed, 21 Oct 2026 13:31:56 -0400
+	id 1xJaqi-00079M-C0; Wed, 21 Oct 2026 14:15:44 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xJaAK-00050y-E4
- for qemu-riscv@nongnu.org; Wed, 21 Oct 2026 13:31:53 -0400
-Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
+ id 1xJaqQ-0006vT-US
+ for qemu-riscv@nongnu.org; Wed, 21 Oct 2026 14:15:23 -0400
+Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xJaAI-0004Ir-JH
- for qemu-riscv@nongnu.org; Wed, 21 Oct 2026 13:31:52 -0400
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+ id 1xJaqP-0008LR-BS
+ for qemu-riscv@nongnu.org; Wed, 21 Oct 2026 14:15:22 -0400
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 69LG4DX32149343
- for <qemu-riscv@nongnu.org>; Wed, 21 Oct 2026 17:31:45 GMT
+ 69LHpUCB996564
+ for <qemu-riscv@nongnu.org>; Wed, 21 Oct 2026 18:15:18 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:date:from:message-id:mime-version
- :subject:to; s=qcppdkim1; bh=/faf1fcGkZifVtX4KwiyLLetYAcWAj3S+gI
- NU5wxAXs=; b=fbpZ7NCi0uTBcrpKMOUMGBg1HzrmjPBPbHEGsevAxIeXr0Et29c
- oOEugChMQ+eGtOQ5AUTI9uDI2/NrDZYYybIF2VNrvBIugD4v4g/xmRkUJWAkL88z
- hnydUyIM58WSf233riytTkOYNf1mv8rOSgFfbMNkCpZG0AavTvoSHy7kUZYT7wMO
- A/JbOutBFJlpSRsUbHRgPNZLLzPi9CUGiBzP/L5ljsnb2aUxvlB1XsHMEHOUWPVQ
- TOZSgMFLZtRKQNNWm+13uGYgMGO7NjNBBr5c0zxugrJWQWH/RX+vK6pn8Q1KXWAV
- hXRbpnrH4qcNDm3nzPkne1LS3Q4/Uz+SOeg==
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com
- [209.85.222.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hf0ke0dm5-1
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ cS1BtsvyyYqE4NW9AJlViTsvQpuH2ej3S8uzgU2953U=; b=kgROA807YcSjGqBe
+ etZM9vEDz6bCN2v4qJsVVXlDVUD67tKaWOIg82JMrQqWM2YNRKRdBudwe1Jt9oVU
+ 3QhGsUiQmQ8s+U/0yXuIUslpEEKRwgaeLtpidPgFmn8Zk7coEO66Gs8741hXfKND
+ YjHSnTXNgzQfWn1K4QeX8f1PnffWhhx2t9viS6egJQZpXVhk8eTzsG/fu/iAYGM0
+ S1xb7+qKdIfgsudCgd+8wWG/bLbtmHlA0Iz3scEMKPKhqghZoMNVP90k8tHcgIzF
+ nIvwyNMJT6gV4YMXsO3yOuH2gH2wdbWO16hg4SotNnWDIiT5overkwdhoKlVlI6X
+ tciFuQ==
+Received: from mail-qv1-f69.google.com (mail-qv1-f69.google.com
+ [209.85.219.69])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hex7vsa2y-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Wed, 21 Oct 2026 17:31:45 +0000 (GMT)
-Received: by mail-qk1-f198.google.com with SMTP id
- af79cd13be357-9308eafb465so293913185a.2
- for <qemu-riscv@nongnu.org>; Wed, 21 Oct 2026 10:31:45 -0700 (PDT)
+ for <qemu-riscv@nongnu.org>; Wed, 21 Oct 2026 18:15:18 +0000 (GMT)
+Received: by mail-qv1-f69.google.com with SMTP id
+ 6a1803df08f44-9179a556c43so21831386d6.3
+ for <qemu-riscv@nongnu.org>; Wed, 21 Oct 2026 11:15:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1792603904; x=1793208704; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=/faf1fcGkZifVtX4KwiyLLetYAcWAj3S+gINU5wxAXs=;
- b=i4CfUw5G9KGyTBam7RoI5ZBNGUUzkcoFvUvOteOZYWhoavofD+bAeJjt5sYLHHDI7m
- tibJawtmfrTcj7WF1aPNDE7rTobv/xCrlGAijs12d9HcSq0weM+YBVbqpopp58ks1Te8
- E0gl8AQDRPvHLXlNqCWTB3SU0MqTKBDJOvY3vUZSg/4VsKQSoVp0mzjFELL4rH47dUVT
- pKhO0KX+nr54voKoLq11vFlwcz9K1fD2AcMr7nnIucnPjyZ8fm0hmtcI/OzcIFOdHks1
- ST2uHaVlHRY7OvkyYUXC5Hkv+JUOXtOYgwc0zvCU7GARvAlT1iDLagUfpfAnXVfNhaxv
- ymkg==
+ d=oss.qualcomm.com; s=google; t=1792606518; x=1793211318; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=cS1BtsvyyYqE4NW9AJlViTsvQpuH2ej3S8uzgU2953U=;
+ b=ULtB2VA3Evz+fBPOkIFTxb2WvuUgRG8Q53sEpxjlQen1IY5+7bkQxaFLfjiRcl0u+e
+ ob8BsDHQvHZGILyDR5qhLRJpPEoSaNuvSsOTvtYowOeT7s0Ge9rgVrGfnVqzxvtENfat
+ TpFzA208E6URl5YpZhpMyR8x944hynNTyewIumB4PxAHnwNvje5EiMEGsIZUvi1JK6nV
+ 1I/ds4nrn0luQTphKNsWx97/rbGzS3YTY7AwkWKosRbEEpGgG1fyMNNtXuUBswqTrCYM
+ K6vdZcWpro71OBeDD7eIcLLk0RfTP35W10U9bt9wV9LhoaLjhYpywS4kAIp1eDpxShyf
+ mmcQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792603904; x=1793208704;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20260707; t=1792606518; x=1793211318;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=/faf1fcGkZifVtX4KwiyLLetYAcWAj3S+gINU5wxAXs=;
- b=gDfxSnWhX8JUyakgSBvNhGJIACi7SGZPkRsMwkc+4DVXi+GafAjf+CZMIGm27pa2sg
- JHlXehUdR5UHHmJxkqftM08+blbNu3iTrnF/egvOKYEWFL5wEaMej4DxLNV0nIMrzYTo
- c4Wj73Y+GH2bmsxlgg+LLiyBVtAWTG5ETuonII81KKmXJpi1rVNxjk09DbKx7haQhd3B
- YSUNh1CsuNJ2UHPy/dY0KKqORgtnaTWzITHWca2SjeO0SRwmCH5MUjxfxW30kWBtpEaM
- h1B+o3SokHswWBYrEaorw/Td78bLeaGlwN0clFAL4U7b/kM3SEsh9xAgz1B9biHpGIsF
- CkCg==
-X-Gm-Message-State: AFq9FYLERJjqVJmi4otmOuaVG9YFDBtA9sVXzkz8M+x3wQM2nzI/4gOp
- Wz7HKBECSmsp2QmMkqqdvE85oRnJguHuT7RHWOSSROO2NW4mT7Sa2/QvUN+5+wjFdcPq0RdZ6Iy
- s3uqrG8aahSzC+lTFLrMxjeQYS9iLg7dWoMrDuZvFDsAgwfHLvLa711oU2w==
-X-Gm-Gg: AYBFou0lAdGwSoNlrI+QPw8W0stOF22OY7cAdXx//xxAgWh4Fv7QcFgKez84pG2TGbe
- 2ySoLyvLOsEVq74/CY3c3dIvLYPN8YOvDeiRxCfrcfqX+MkKddn2cHokDzzNV+p0h2X0n41qrh0
- aKYAWZPXb5fFLga//X6g0bUAiOG1cngy2tXleoM1kuPsErbiXxeHQ2xwfA6seGi+nc0q1yaTLO/
- zPGDlqJ7KKMZ4/iJ2UgcRWsM81BXaX7JPuXf7FrTsG2nDKsADvNlrtW9sH+3x0NBiz3cIoKKleE
- DAqKQq3LKm/bRDioqPWN1Acu+fG5Pyw6EoR2lT0M1pzJ374OYrE9nYl8GHUHiKYYlIlKBaVr8Wm
- wDA3fLJf4YXlpSmZWzaV8CVmcUQxVd062TKamsYCrtFzJTo1DNkhPvVTThUxUcEWtDlmcxNLg9w
- ==
-X-Received: by 2002:a05:620a:4586:b0:93e:942f:b8a6 with SMTP id
- af79cd13be357-93f57f7da12mr566696685a.59.1792603904144; 
- Wed, 21 Oct 2026 10:31:44 -0700 (PDT)
-X-Received: by 2002:a05:620a:4586:b0:93e:942f:b8a6 with SMTP id
- af79cd13be357-93f57f7da12mr566691285a.59.1792603903383; 
- Wed, 21 Oct 2026 10:31:43 -0700 (PDT)
-Received: from QCOM-UWl2o8bcGT.qualcomm.com
- (200-204-190-237.dsl.telesp.net.br. [200.204.190.237])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-93f56c6e030sm308435985a.1.2026.10.21.10.31.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 21 Oct 2026 10:31:42 -0700 (PDT)
-From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
- armbru@redhat.com, philmd@oss.qualcomm.com,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Palmer Dabbelt <palmer@dabbelt.com>
-Subject: [PATCH] target/riscv/cpu.c: duct tape fix for QMP + RV profiles
- introspection
-Date: Wed, 21 Oct 2026 14:31:38 -0300
-Message-ID: <20261021173138.2388231-1-daniel.barboza@oss.qualcomm.com>
-X-Mailer: git-send-email 2.43.0
+ bh=cS1BtsvyyYqE4NW9AJlViTsvQpuH2ej3S8uzgU2953U=;
+ b=rTNemO3iC2BylGfdgKiusrlY440EpvTHJR7Z5Qlcm7VHtNmGha0GLdZYfxBJDUo6HQ
+ U6eZBQ8QNUiCJI3Oytm/HmWC2jvzDWAMW69GhtiHbs24xA6D0RvWgYOyiKhJak15pqEM
+ mhmNwYc6lCxGz4MSquZzBfYInFKYDgTg80r8vHG9ZF8XokM3volBraBOi2GmqwOewObw
+ mkWR9NS9oTLokt5SspIemU6wXsVhg31OYV4jB9+PdLC7THYzAkwaEkMOTDVbSirtSqym
+ 0os69iiT2zOLlmqYHr0jc4+RoaDt9yElZQ42i7opQsCJT/rKpLoRpZkeIW/v8AUDqEuZ
+ Vq6w==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBxcPGDDEqi66kCgrZSXa29HzaXU3M71wyVG00GGahryOUC75A+kHPeblR/mUP99l2UzaMZIbRmPDciY@nongnu.org
+X-Gm-Message-State: AFq9FYIz90ur4nu3n8F0prIi5SjmiB4oQGoIhndQwyJkWKPOXRcHPFWI
+ XIGY4olo9MX8Wh9vu39n6xMJbNvHmnUh1nJYptUEiuujUiw0skZO7udakcN6jZu4gxsle3sT3DP
+ rM8wc8BVDogjvvpQyhAoPRRlDgWzjVfh/HAV8aa0TDtxvpYLS2PW5vl0BJQ==
+X-Gm-Gg: AYBFou2l9V5YshCKAakLfXy4hrNCDwZGTDG7ayUNPlvH3cUsz4GZ/l4RUBSWBWGrdGX
+ y8gJOfh5nlnxp9EnbIerdu3OBsa+eV7L/oiWA/1qcrjJLlKo4bHNKhuRpqkYglBPWDCMonsRFTG
+ HY/L5PuuaGqHXLRL9nE3MScCsSAMR+Pvio6LcaH+wy6SpNmAC6CWmGpb5ZmuFQl95dqnpVV/5uu
+ DvRTXhyuNWfamXqakSX6ANzIGNVEUdKZxr18IayVX6/us9xWUb3xvxcgwjOLK8xS1hIFoHOHMVi
+ 4zBC8SWcJe62/vhpom/hj8ZdjTewmLF/I7clb/B3i9B87acfcbG9ML/DjCukoGaOsxL8ASRij74
+ UAD9fiyg3N+C2DD8jiEtCVBR1VlzsadpxNM7jJHLi5ae4DD+a5C4HvFXS2dPL1nvAaYNfhiyV
+X-Received: by 2002:a05:6214:240d:b0:91b:88fe:a426 with SMTP id
+ 6a1803df08f44-91c12d0ee58mr50635616d6.0.1792606517428; 
+ Wed, 21 Oct 2026 11:15:17 -0700 (PDT)
+X-Received: by 2002:a05:6214:240d:b0:91b:88fe:a426 with SMTP id
+ 6a1803df08f44-91c12d0ee58mr50634576d6.0.1792606516695; 
+ Wed, 21 Oct 2026 11:15:16 -0700 (PDT)
+Received: from [192.168.68.101] (200-204-190-237.dsl.telesp.net.br.
+ [200.204.190.237]) by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-91c10c0f838sm30382806d6.32.2026.10.21.11.15.14
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 21 Oct 2026 11:15:16 -0700 (PDT)
+Message-ID: <0c32b74a-ed4b-4ab8-86d1-129f35d5862b@oss.qualcomm.com>
+Date: Wed, 21 Oct 2026 15:15:12 -0300
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: 2o2cryxibeXjTv5Clru_Rc-MhBhhCAXV
-X-Proofpoint-ORIG-GUID: 2o2cryxibeXjTv5Clru_Rc-MhBhhCAXV
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIxMDA2OSBTYWx0ZWRfX9WrA+JlzuVuO
- cUfIP9legjdUQc4qSs2o5YNi6zf0KqiwYxcWijlxsQL32mChoQB8aCy9kU6GreQkoFps72cz/oo
- 8bmDfTcc0ra4lp+3x9Kb3WQsiAHWdkw=
-X-Authority-Analysis: v=2.4 cv=KOzPn1Fo c=1 sm=1 tr=0 ts=6ad8f701 cx=c_pps
- a=qKBjSQ1v91RyAK45QCPf5w==:117 a=QmVDPCq3bE4LYXGvZ20s0w==:17
- a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22 a=VwQbUJbxAAAA:8
- a=ZiMIAIO6AAAA:8 a=20KFwNOVAAAA:8 a=EUspDBNiAAAA:8 a=R_5PQWnzNJfoGkejWzcA:9
- a=NFOGd7dJGGMPyQGDc5-O:22 a=KohFQSMcaiS2QNUyYz07:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIxMDA2OSBTYWx0ZWRfX7Fh0WfvbtRq0
- QPFsFYJvc0f4nCCW5mLny6nNCQNTIZq5vzRAQiuGPKF+5EQXwEzX9eENEMipR0GAmoFCQlYfMgd
- qbOSOfQvqcLBrFYaFcemcWBSF7kc/U/923zSGgUCyhu9lRRW6p9sLKKMr4JlKHgRV8yKdamVKl/
- 8fROhk1q4vwxxJ9sY6L8+92fiddoFKDBdyotwrCxY4bOn9ED1AgSOku8lHXYez8vO2UT1bnaBs8
- C2mVlIQhNmMH5eQiCVjkj9+KgE74yST+FGyuGSdXI1AanWH6GPQS67o+UCpTuUyxd4c/AMa8bqF
- V/ckojI8wkDDOFOb2mVoZZb83SuxTDbHiquXddkrhC1yzyix7OUgMiudT9taicb+gXLpCqP/Aii
- o+RtcIpaKIhCJXGvsxo6RbUxbIl399N2bmqFPTKdfocKjbKNj+tkIsKCh11IFIvL6h2gs2uRb1h
- 2EH7uji5GIw80YYvXsg==
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/3] target/riscv/kvm: Detect SBI STA extension support
+To: Wang Yechao <wang.yechao255@zte.com.cn>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>
+Cc: Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+References: <20261017145211.219258-1-wang.yechao255@zte.com.cn>
+ <20261017145211.219258-2-wang.yechao255@zte.com.cn>
+From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Content-Language: en-US
+In-Reply-To: <20261017145211.219258-2-wang.yechao255@zte.com.cn>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-ORIG-GUID: Ep1G9d-9sI6xElxDgfMdVjumuoXij9kt
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIxMDA3MiBTYWx0ZWRfX7Yn0P0AB8/eq
+ jY8iMpH8degHl8sD2VUEUo6eNCSe70tuUPqCb96Lahs+YnIsLuhNiElUWws8VaCDjUUIDGTTz9D
+ 8AXc+roSFnxhF86uinGtizBE6IPDpQs=
+X-Proofpoint-GUID: Ep1G9d-9sI6xElxDgfMdVjumuoXij9kt
+X-Authority-Analysis: v=2.4 cv=e4uT2qp/ c=1 sm=1 tr=0 ts=6ad90136 cx=c_pps
+ a=wEM5vcRIz55oU/E2lInRtA==:117 a=QmVDPCq3bE4LYXGvZ20s0w==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
+ a=1RTuLK3dAAAA:8 a=EUspDBNiAAAA:8 a=wf5jhZewy8u8kOt9vRIA:9 a=QEXdDO2ut3YA:10
+ a=OIgjcC2v60KrkQgK7BGD:22 a=kRpfLKi8w9umh8uBmg1i:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIxMDA3MiBTYWx0ZWRfX560//cd+8bxD
+ E25bhGmEO1JCrtbKTGK8j9MIEtCPaj7sp0+QF7QZBIgqumMkuDZW66YAk103Jwa0kLXvYkQblql
+ qcOOjAVd66Jl++A1iTYbhbXUleiS4Eg076wX5Q7kMq08HXwvN7jo3fHab8QK1HZZocrMZxykjbO
+ avNMapnrir6fSNcsZoUNdxWPnnih+s74QvdiNIfWLvXHuh35nI5Zbd1JfNA+cbplfC1+4XIdXqI
+ 4YP3ZZQz6uMpuedkeEeWc3u2/2+4pti7fJpnU5n8HGCgQJYmNtc7niY3Urt8acb7FCRYKkrhHbK
+ lBmHOcIapk+utp8CpgDdWrrUv6hdHOguRjwAhRT3sB6wLkWUarLVyvNdfqjCM7PgJF4TqFf7Bnx
+ L6s33YSH9y+QYW/msDUub/nA8BPwJNfzSlLZVCCYq8KKLBZcsLdqAekhzWzdl6D5y6XBHYTxGb8
+ e7ZA8NvqEvUhl8jFPGQ==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-10-21_04,2026-10-21_02,2025-10-01_01
+ definitions=2026-10-21_05,2026-10-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 spamscore=0 impostorscore=0 suspectscore=0 bulkscore=0
- lowpriorityscore=0 adultscore=0 priorityscore=1501 malwarescore=0
- phishscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610190000
- definitions=main-2610210069
-Received-SPF: pass client-ip=205.220.168.131;
- envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
+ phishscore=0 lowpriorityscore=0 spamscore=0 adultscore=0 clxscore=1015
+ priorityscore=1501 suspectscore=0 bulkscore=0 malwarescore=0 impostorscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610210072
+Received-SPF: pass client-ip=205.220.180.131;
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
 X-Spam_score_int: -27
 X-Spam_score: -2.8
 X-Spam_bar: --
 X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -149,75 +155,78 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=unavailable autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Maruks reported in [1] a problem with QMP introspection with
-qemu-system-riscv64 that happens after querying a profile CPU.  QEMU
-crashes hitting an abort during satp_mode logic that, somehow, is being
-triggered via profile code.
 
-For every profile CPU that goes through init we're setting an 'enabled'
-flag in the static RISCVProfile object.  This sounded like an okay idea
-back when profiles were introduced, but now we've realized that QMP will
-querying CPUs without exiting the QEMU process while also going multiple
-times through cpu_init() and friends.  The result is that we're in a
-situation where we have runtime information being stored in static arrays
-that persists between CPU definitions being introspected.
 
-A proper fix is to get rid of profile->enabled and turn profiles into
-cpu->cfg flags like we do with every other extension.  Unfortunately
-we've been using profile->enabled for lots of things and a redesign
-would be in order, one which I'm not comfortable doing right now - we're
-too close to the QEMU 11.2 code freeze for such a change.
+On 10/17/2026 11:51 AM, Wang Yechao wrote:
+> Probe for the SBI STA extension by searching for a one-reg id built
+> from KVM_REG_RISCV_SBI_EXT and KVM_RISCV_SBI_EXT_STA in the register
+> list returned by KVM, following the existing SBI DBCN pattern, and
+> record the result in kvm_sbi_sta.supported.
+> 
+> This patch only adds capability detection; nothing consumes
+> kvm_sbi_sta.supported yet. The register synchronization that uses it
+> is added by a subsequent patch.
+> 
+> Signed-off-by: Wang Yechao <wang.yechao255@zte.com.cn>
+> ---
 
-For now let's silver tape a fix in cpu_init() to reset profile->enabled
-for all available profiles.  We'll do a proper redesign in the next
-release cycle.
+Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 
-[1] https://lore.kernel.org/qemu-devel/87ld7rmdi6.fsf@pond.sub.org/
-
-Reported-by: Markus Armbruster <armbru@redhat.com>
-Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
----
- target/riscv/cpu.c | 19 +++++++++++++++++++
- 1 file changed, 19 insertions(+)
-
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 08a4d14ea1..46b74302db 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -1550,6 +1550,25 @@ static void riscv_cpu_init(Object *obj)
-     cpu->env.vext_ver = VEXT_VERSION_1_00_0;
-     cpu->cfg.max_satp_mode = -1;
- 
-+    /*
-+     * The way we're handling profiles does not cope well with QMP
-+     * instropection.  We have a static array that stores RISCVCPUProfiles
-+     * objs that hold runtime state for the lifetime of the QEMU process.
-+     * Thus setting profile->enabled once, e.g. when instropecting a
-+     * profile CPU, will leave the flag set for subsequent intropections.
-+     *
-+     * For now, clear all 'enabled' flags to avoid misleading QMP w.r.t
-+     * profiles being set.
-+     *
-+     * FIXME: a better long term solution is to remove profile->enabled
-+     * and just use regular cpu->cfg flags, avoiding static variables
-+     * storing dynamic state.  This will help us not only with QMP but
-+     * also single-binary support.
-+     */
-+    for (int i = 0; riscv_profiles[i] != NULL; i++) {
-+        riscv_profiles[i]->enabled = false;
-+    }
-+
-     if (mcc->def->profile) {
-         mcc->def->profile->enabled = true;
-     }
--- 
-2.43.0
+>   target/riscv/kvm/kvm-cpu.c | 20 ++++++++++++++++++++
+>   1 file changed, 20 insertions(+)
+> 
+> diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
+> index c085b22b23..8ab43432dd 100644
+> --- a/target/riscv/kvm/kvm-cpu.c
+> +++ b/target/riscv/kvm/kvm-cpu.c
+> @@ -473,6 +473,12 @@ static KVMCPUConfig kvm_sbi_dbcn = {
+>                     KVM_REG_RISCV_SBI_EXT | KVM_RISCV_SBI_EXT_DBCN
+>   };
+>   
+> +static KVMCPUConfig kvm_sbi_sta = {
+> +    .name = "sbi_sta",
+> +    .kvm_reg_id = KVM_REG_RISCV | KVM_REG_SIZE_U64 |
+> +                  KVM_REG_RISCV_SBI_EXT | KVM_RISCV_SBI_EXT_STA
+> +};
+> +
+>   static void kvm_riscv_update_cpu_cfg_isa_ext(RISCVCPU *cpu, CPUState *cs)
+>   {
+>       uint64_t id, reg;
+> @@ -1233,6 +1239,19 @@ static void kvm_riscv_check_sbi_dbcn_support(RISCVCPU *cpu,
+>       }
+>   }
+>   
+> +static void kvm_riscv_check_sbi_sta_support(RISCVCPU *cpu,
+> +                                            struct kvm_reg_list *reglist)
+> +{
+> +    struct kvm_reg_list *reg_search;
+> +
+> +    reg_search = bsearch(&kvm_sbi_sta.kvm_reg_id, reglist->reg, reglist->n,
+> +                         sizeof(uint64_t), uint64_cmp);
+> +
+> +    if (reg_search) {
+> +        kvm_sbi_sta.supported = true;
+> +    }
+> +}
+> +
+>   static void kvm_riscv_read_vlenb(RISCVCPU *cpu, KVMScratchCPU *kvmcpu,
+>                                    struct kvm_reg_list *reglist)
+>   {
+> @@ -1365,6 +1384,7 @@ static void kvm_riscv_init_cfg(RISCVCPU *cpu, KVMScratchCPU *kvmcpu)
+>       }
+>   
+>       kvm_riscv_check_sbi_dbcn_support(cpu, reglist);
+> +    kvm_riscv_check_sbi_sta_support(cpu, reglist);
+>       kvm_riscv_read_csr_cfg(reglist);
+>   }
+>   
 
 
