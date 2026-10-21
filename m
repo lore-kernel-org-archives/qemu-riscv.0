@@ -1,92 +1,92 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6F72F606A319
-	for <qemu-riscv@archiver.kernel.org>; Wed, 21 Oct 2026 23:14:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7EEAD606A31A
+	for <qemu-riscv@archiver.kernel.org>; Wed, 21 Oct 2026 23:15:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=cDzqf+yH;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=FnmmWLUO
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=pManGaQ+;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=T0ui4gmH
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xJfVd-0007TO-Ig; Wed, 21 Oct 2026 19:14:13 -0400
+	id 1xJfW9-0007if-44; Wed, 21 Oct 2026 19:14:46 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xJfVc-0007Sh-A2
- for qemu-riscv@nongnu.org; Wed, 21 Oct 2026 19:14:12 -0400
-Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
+ id 1xJfW4-0007e7-CZ
+ for qemu-riscv@nongnu.org; Wed, 21 Oct 2026 19:14:41 -0400
+Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xJfVa-0004xZ-Ft
- for qemu-riscv@nongnu.org; Wed, 21 Oct 2026 19:14:12 -0400
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+ id 1xJfW2-00052F-C7
+ for qemu-riscv@nongnu.org; Wed, 21 Oct 2026 19:14:40 -0400
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 69LKeNhk1360556
- for <qemu-riscv@nongnu.org>; Wed, 21 Oct 2026 23:14:09 GMT
+ 69LKeEee817280
+ for <qemu-riscv@nongnu.org>; Wed, 21 Oct 2026 23:14:37 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=TcXneSB/u9y
- BDzqG/KSAIr8+QMbvQhEJzHVwZFL2flg=; b=cDzqf+yHnb5zNtLD5jdI6Ykf+3d
- viPWF36z1ZFwPWZtCoVErggj5u9llcp5QkKbbutN7ky6Gm/o7Rrbt39/9/b5yMZh
- MhcVrwZVm1DJZlHdXvgZYD8zo79Ed6/4lhKy1zdqHmUYmtNBNvO08+QIo01BSl6P
- TZdMrX690rU3piXBKzXnz8dGdp5TYysUHmL2EgwQXo/ogch7xCL4Qk4iLJ4UJ7aJ
- CK1aQ40/Mz5FT0aAKqqe+2i7q2GmgTdBw7wHIC/L8srNcMfNpP9/P1SwK04Q6Xqw
- 4hK3l00wPSjjU5WqBceuOdZBVrsYJT7COHgMQOwGfrNMtdX7i0fK2V3J+xA==
+ :mime-version:references:subject:to; s=qcppdkim1; bh=GtCiobWCtFK
+ 9wCms6GkKM6L2wC39nyV6NvheYNJNBUY=; b=pManGaQ+FSQu9xUhx7TjxbIXWGl
+ Fod6N2ma1ngskoeq30vcv0NQ/lP1D6jIwWgAbAkC8wStusZ01IkeX3W422br7w3S
+ 3+Vyh1AQSH54GPCLrd7JuCjYN4+RhyPE6ldBPmOmude6Nj/PD3+yqargHmZSSkAF
+ kPucPlmtVoVp0/d94N/7rBH8AY3QZNFJgy6a53ovGKQdQY3CqJeI227BqXwO769g
+ cxbfCAOADc2R1qjvtZspiDEteIDxpBIZBV6pwVdfaCawymos5I0Ves2oJ4fPfzYp
+ Hm+7TsJpCa3MsBknTs05BDWKH6WSXei923faWyaElGXUiLAIdnjC1XDf8aQ==
 Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com
  [209.85.160.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hex7vt77w-1
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hex58a92k-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Wed, 21 Oct 2026 23:14:09 +0000 (GMT)
+ for <qemu-riscv@nongnu.org>; Wed, 21 Oct 2026 23:14:36 +0000 (GMT)
 Received: by mail-qt1-f197.google.com with SMTP id
- d75a77b69052e-5351f1b26e6so19989171cf.2
- for <qemu-riscv@nongnu.org>; Wed, 21 Oct 2026 16:14:09 -0700 (PDT)
+ d75a77b69052e-53380b67cfdso29476751cf.1
+ for <qemu-riscv@nongnu.org>; Wed, 21 Oct 2026 16:14:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1792624449; x=1793229249; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1792624476; x=1793229276; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=TcXneSB/u9yBDzqG/KSAIr8+QMbvQhEJzHVwZFL2flg=;
- b=FnmmWLUOsA1ztEcah5CkaIWth5kSWFKOUdu9RepStT45DFOR8ImDbPW9RoatXGCRnI
- 7Tr+cFhJdU7/EwDNWGCrKNBrE9Ngk9Mf2kCWX/HQnBhH65QguZhnUyvBEMB7JOFvpQt/
- mjtQxLjaiNXti52XngFBbO6eUJX9w1F55FYrad4xwsFow8Kc7rcrWleFbuNvkFwvzlE7
- Cl/ylwZEenqQVtSmoSKmKcfBqDIqfC/LtbFyMST28qhWLC91XpZ7pjPAtfxJVHcm33Db
- A+2dA7pDdKXb0zKHbsGAv22HZitM7bk9bBOdCQgjycXmvYGWmrd4vOvKELw5xOWDjYcu
- kCkQ==
+ bh=GtCiobWCtFK9wCms6GkKM6L2wC39nyV6NvheYNJNBUY=;
+ b=T0ui4gmHIsXbi7dWJKQaa8OvDpVrcFsrVATjJ1XgIhdwH57BG/FFcLB+xyIZR5Cz3U
+ TMB61S/3+s0eUICyxbtCtXqnpxzKizP8fI1V8DwM9S/BTxQMdF+1/at3lGfJfqJ0FFiU
+ mpoGh92ZvMORNr1PL7qRINNUUPaSRFP+iGe5SMpX8FoD/IfHhIrabe3ZA9Nd3rVjjOd4
+ m1r+skvOItOI/hnDHASt8clH2mtoOQhqDdyw7SFuZoBkIoa7xNCmMGvC16PMk32UI9D6
+ MrLsUYFF4tXpnAfgYXnPy/+3neqzWtVT0+j12viO2h9JfY6s3nDKFZNihGICVl7G/Uxi
+ JfSA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792624449; x=1793229249;
+ d=1e100.net; s=20260707; t=1792624476; x=1793229276;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=TcXneSB/u9yBDzqG/KSAIr8+QMbvQhEJzHVwZFL2flg=;
- b=ai0/T2knmU9doIFwSwnSj8eDeiOOblTsHzqNI/XP667U8sqUUF8xdtIcqYa9WpFOzE
- ydQZBMQY3v2RfdOtcFqUC9iayuqWJ/0UFnSZlbRtRVa1aKmd59IPZVf6+1/wxKgPVzyB
- PVslWbPT0udUVYvy7nLL9mZC044CnVnDnnLnH82yGu5dNwg+PMghYYxHd+e24a7zgKoz
- 7IaKNN7KfUNAo1RBkXwOIq8r84dQkty80lGvq4PU9fKFk9WEvS4hv2bNAP51YAgW8mT/
- L+CwdQ4hZyjY8tLvytzSL6V/YtEbL23s8skUEzHieRDJ0oX6ZIdIScaii+WFLJr7ftbI
- xL5Q==
-X-Gm-Message-State: AFq9FYLmmFpFNjttoJNsMTyK0jjLvk8lo0UyBghYi39BU4TUo60UNXQw
- kpBq0KU/dWy2+3pximQJUlnXdMqjzax3dmXaLE+/XDDHs9Dgxxv7o741cdMdGq4n2FyjgKxNJUM
- cuA4B7Jne/cnuf3lCOTpozv8mdUYfGkpn/2IBnpb38imHTtpBq3y5l3tcyQ==
-X-Gm-Gg: AYBFou2ZlG8aNTFBOxLYcuSvctR/TM2JOSfz5uj+aCiJvsawBTtS9oevvDbiuEqRWCY
- ti71r8qfPxHAayPK8GzRt+YaYf0gZ/WtirLsr0Bgib6u18sJE0vN/Ntq94CBu5o0Tz3oaZs/Prf
- Ow9EqKuwRgCS7HHE/WQU80ZmgOthTXA8GGv/9H57zfT0wQWNTVPAKmBobY+XNyiROsfDVJ9BZX6
- 8S03UE4f3dBXM/N+vk5cqQJSxjIB/Fs/3P0kcZ2TIkHBw0YQbW4PbADDVy913ZNccPBEoPInp/r
- xJ60oDW5DVhYS9CfKJ7lLw+6YbwWAD0AvCViopQM+kktZ4SsFI+dhP6L+osKC8W1I8hyZqMUd3U
- vZ8VW0gZohAv1OU6W6esTa7XfB8z0JL+fxJG0b0vJYDJgSkl/fra12K8H5molislbAam82UZGrA
+ bh=GtCiobWCtFK9wCms6GkKM6L2wC39nyV6NvheYNJNBUY=;
+ b=jtZPDW7BeTWf+EyrAP4o9u5an4wLhJI10JSmWxp6rdRZyrwdg4XAYfRXMmd/UFoAMJ
+ UupZL4emSnVPMO/EAejkk/QACRMExsx41wTUdvzEq0QKp7fJ0FhrAkbOLcVLt40Ch62i
+ W1XPU2PGOFif5mwXnyWbnnQiRolQrQE/0e38lUfqg7iLgoe90NZFb+JcJ8l4/6fGr+MZ
+ LnZ9MG5arjHOu4Jc3mWWV7Z0n1LXbOpO7SDsCRbMBl2QKD0x3eZwJNT/QsXXtxHVKyzN
+ cn+csXHzOQ/d1XhYwuDjz8bv4J4JjQSO4B9jUGTLddZinUrSMiFrEPzS6QUjz96PfLrS
+ nn3g==
+X-Gm-Message-State: AFq9FYJmXEpHwT0nqFbmUDQmuAISWnJKQPtA5+SdO1C4KrJ61TVMpLFk
+ v5pVxeZX2DefU3n0AZWbBKRmypHNS1nHVcUbpixhRhcwppNCTGrCInOfu4RdMknwsLt9yVZPmu2
+ x/5icWxc16tkgFStGfsbJmn1JaIs9A8615riHiGhQW9lyJPFyRF+dmRlNMQ==
+X-Gm-Gg: AYBFou1Ia70YMFpotv8bapSrFuygnju+RxDbnDClsCDBoRmSBSzzHbU/A2KmWutdw5w
+ 3YRDcP6aGcJvKnGyW1DGj7LH4MWAGupuesYSy+Z9t0cKwDRzZidP7OEv7OTHZbHc+Znh4vAeVwN
+ FEV9Na+4ROI5nu5l0NcrfqzCYNOAOLCv52vuaPihzybpvs5DV5L78kl2ZE/oPQTQUD9GL6zaiGk
+ pZDMx0sGLlP9RuDT675cxa2p89QwbUxUc3vK+IBpB0CfwGnXLfqdLa8w0NgAmhdC6X4Xe3D/RAX
+ fAUCdlrh+whn6o9J5UAREM7ML3nTTnHsIAjACYjDZCEFHg4KIOgx93UeRUxPjOHMkjUENL7vjGi
+ 7erZintT25pZvnKkT2X0kz0QmkWzTUTI2Ijqgmjs4n82Ee9v+eDO4AnikzWAOxM/9CnpJKxQAmw
  ==
-X-Received: by 2002:a05:622a:4c13:b0:536:2fd8:a4d8 with SMTP id
- d75a77b69052e-5369b8538d5mr56442941cf.15.1792624448569; 
- Wed, 21 Oct 2026 16:14:08 -0700 (PDT)
-X-Received: by 2002:a05:622a:4c13:b0:536:2fd8:a4d8 with SMTP id
- d75a77b69052e-5369b8538d5mr56442471cf.15.1792624448000; 
- Wed, 21 Oct 2026 16:14:08 -0700 (PDT)
+X-Received: by 2002:ac8:5ac4:0:b0:536:1f7a:610e with SMTP id
+ d75a77b69052e-5369b5a5426mr60648451cf.6.1792624476014; 
+ Wed, 21 Oct 2026 16:14:36 -0700 (PDT)
+X-Received: by 2002:ac8:5ac4:0:b0:536:1f7a:610e with SMTP id
+ d75a77b69052e-5369b5a5426mr60648121cf.6.1792624475563; 
+ Wed, 21 Oct 2026 16:14:35 -0700 (PDT)
 Received: from QCOM-UWl2o8bcGT.qualcomm.com
  (200-204-190-237.dsl.telesp.net.br. [200.204.190.237])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-536ab6cd0dcsm11995651cf.6.2026.10.21.16.14.05
+ d75a77b69052e-536ab6cd0dcsm11995651cf.6.2026.10.21.16.14.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 21 Oct 2026 16:14:07 -0700 (PDT)
+ Wed, 21 Oct 2026 16:14:35 -0700 (PDT)
 From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
@@ -94,43 +94,44 @@ Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
  antikostya2@gmail.com,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
  Palmer Dabbelt <palmer@dabbelt.com>
-Subject: [PATCH v4 03/18] hw/riscv/trace-encoder: add trace start/stop logic
-Date: Wed, 21 Oct 2026 20:13:30 -0300
-Message-ID: <20261021231346.2452179-4-daniel.barboza@oss.qualcomm.com>
+Subject: [PATCH v4 13/18] hw/riscv/trace: add format2 msg helper
+Date: Wed, 21 Oct 2026 20:13:40 -0300
+Message-ID: <20261021231346.2452179-14-daniel.barboza@oss.qualcomm.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261021231346.2452179-1-daniel.barboza@oss.qualcomm.com>
 References: <20261021231346.2452179-1-daniel.barboza@oss.qualcomm.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-ORIG-GUID: 4MZ3kgIvoRVBSn_cgiOTDtNJTwx8hHlI
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIxMDA5MiBTYWx0ZWRfX2vtQ8tFmMxhM
- iJaYlLlqU9DX8zNK/JyB/gvxxNOZZzrQ8jHmTpxt87U3gTizYQ+Rof0hXzs116BogU53QrfEjPi
- haLgGS6sMDM5XzTnvMDf8DjImnLsCSQ=
-X-Proofpoint-GUID: 4MZ3kgIvoRVBSn_cgiOTDtNJTwx8hHlI
-X-Authority-Analysis: v=2.4 cv=e4uT2qp/ c=1 sm=1 tr=0 ts=6ad94741 cx=c_pps
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIxMDA5MiBTYWx0ZWRfX/AdL2trKJQax
+ LL6t/SPKdhIzzOno5aZb2YrH7OjFw4ORhP3HBHaMzCsG3AnS4dKV2tBbS2VXr0GqHJhS++pyQEW
+ KDDZHNFWNJY4Z1WxjuXM4RUFWE/AuLg=
+X-Proofpoint-GUID: gtHX1_CQgNenMKS0Og5CTlX_CrKwPzX1
+X-Proofpoint-ORIG-GUID: gtHX1_CQgNenMKS0Og5CTlX_CrKwPzX1
+X-Authority-Analysis: v=2.4 cv=Ku7YSmWN c=1 sm=1 tr=0 ts=6ad9475d cx=c_pps
  a=EVbN6Ke/fEF3bsl7X48z0g==:117 a=QmVDPCq3bE4LYXGvZ20s0w==:17
  a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22 a=EUspDBNiAAAA:8
- a=Zvy5nz_Gwx3CY_hQl98A:9 a=a_PwQJl-kcHnX1M80qC6:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIxMDA5MiBTYWx0ZWRfX+YJqeC9uYAIY
- sgKGS2rHL50A9L3eosRvNeATIpeQcKUWVhFRVua4QITDu/viOdlPJTqYXhvlrWzJ0gWrkfK/9Zs
- bfgQPQGnBsgeFhZC/3RdhXS/kQ1tZX8mAeJFLJnWPjt9M7Jh4/Vke8jMUpA45Ciicxel5A/KgWi
- 3KmUuf+Zfft0YitEYmmBTrZAoJKVKKx16BiyqtNR35dbTGIuYq9fmvof9ck71+OxU2WQTZqSkc+
- xTlMSbge7F0t0LWJWRdK1Q6QEpv+WoOFa/97tCpGjJoPt5u3pKGh0WDsan+ScBo0pWg9q2iX/T5
- GikoeM6WsuAHB54A3mI2sbmNTfQjQBDWbkolYEhIcNszvPy7/yMjVFwYc88zJW15021o5EVX9eA
- XCZijRUbcK1U1tNwqn/aUmClp/SxVnjiOi+jRG/LRPaHM5qXflgLwb39Lqgk+0egxllUcnlYqJN
- tTY7+2jHb3SlpzKzHzQ==
+ a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22 a=V1jnuoLLAAAA:20
+ a=EUspDBNiAAAA:8 a=7Y-KOW0DsKw0bwanU4kA:9 a=a_PwQJl-kcHnX1M80qC6:22
+ a=bA3UWDv6hWIuX7UZL3qL:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIxMDA5MiBTYWx0ZWRfX+1gNJUkJegLv
+ VEjFxlKeU2VcKlSPdrh69xFFULzyChmh1c9cyFjgWuz6QGabPcIsCz3pMXwC4FVK7xH8269lws/
+ ZWvBHLON8GGYeLSqJUXM6qxMNbmU5WQE6LjKmerPPfAHKQAKJqil7+tC+3qy/N0tNMBmIyB8BdC
+ 3B+y66azkhqXc7sONmLvMh8rP7Hj5XJ/1/blmUeQhS8WrFiDOPibR1tt5S/G1AzQEcsPHosAf24
+ EGpDtNdoveY9TiswNWOvFdpSaMtnambspjnFAnTgkpZaoiFIpkUBTbWLyGi9C4LjL2qxqVrVD0i
+ qpc7I+lyjQMDSDIebCVIUMjO+lUiDJ67BbDxxDdEn8MUCZ6dlKwuRc1/khWtoDlkDf1s6FwvJ71
+ sokCauyBXJ5g0dWlIOhHqP7CgC1/eaXVdTCTx1G8phtvww1x8FTjN4ko9U+etjp48cQda0q3KeE
+ BpxOnrT0OsbcyMos7/w==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-10-21_06,2026-10-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 lowpriorityscore=0 spamscore=0 adultscore=0 clxscore=1015
- priorityscore=1501 suspectscore=0 bulkscore=0 malwarescore=0 impostorscore=0
+ lowpriorityscore=0 impostorscore=0 malwarescore=0 adultscore=0 clxscore=1015
+ priorityscore=1501 spamscore=0 phishscore=0 bulkscore=0 suspectscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610210092
-Received-SPF: pass client-ip=205.220.180.131;
- envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
+Received-SPF: pass client-ip=205.220.168.131;
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
 X-Spam_score_int: -27
 X-Spam_score: -2.8
 X-Spam_bar: --
@@ -149,197 +150,133 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-23.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,USER_AGENT_GIT autolearn=unavailable autolearn_force=no
-	version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Starting/stopping a trace session will rely on two flags:
+Before handling updiscon (uninferable PC discontinuity) cases add the
+encoded message we're going to use, format 2. Format 1 will be added
+when we add the branch map.
 
-- trace_next_insn: this flag will be used to signal the translation that
-  the encoder wants to know the PC of the current insn. The translation
-  helper (to be added) will clear this flag after sending the current
-  insn to the encoder;
+There are design decisions worth documenting in this patch. For irreport,
+the e-trace-encap spec [1] in section 7.6. "Format 2 packets",  says that
+we should make this bit !updiscon if we're either:
 
-- trace_running: shows that we're running a trace session and certain
-  insns classes (traps, certain jumps and branches) need to report to
-  the trace encoder.
+"following a return because its address differs from the predicted return
+address at the top of the implicit_return return address stack, or the
+last retired before an exception, interrupt, privilege change or resync
+because it is necessary to report the current address stack depth or
+nested call count."
 
-These flags are controlled by the trTeInstTracing bit. This bit requires
-other two bits to be set beforehand (ACTIVE and ENABLE). We'll revisit
-these bits in the future as more features are implemented.
+We do not implement any form of call/return prediction in the encoder,
+and TCG will always retire a single insn per cycle. This means that
+we'll never set irreport, i.e. irreport will always be equal to
+updiscon. If this interpretation turns out to be wrong we'll revisit
+this helper.
 
-While we're at it, add hardwire bits to indicate which features we're
-(not) implementing at this time.
+Likewise, irdepth is also not implemented since we'll always return a
+package where irreport == updiscon. The size of the field is arbitrarily
+set to '3' to avoid adding padding in the end of the msg to complete an
+extra byte.
+
+[1] https://github.com/riscv-non-isa/e-trace-encap/releases/tag/v1.0
 
 Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 ---
- hw/riscv/trace-encoder.c | 107 +++++++++++++++++++++++++++++++++++++++
- hw/riscv/trace-encoder.h |   4 ++
- 2 files changed, 111 insertions(+)
+ hw/riscv/rv-trace-messages.c | 59 ++++++++++++++++++++++++++++++++++++
+ hw/riscv/rv-trace-messages.h |  2 ++
+ 2 files changed, 61 insertions(+)
 
-diff --git a/hw/riscv/trace-encoder.c b/hw/riscv/trace-encoder.c
-index 19ab785334..99399a55e1 100644
---- a/hw/riscv/trace-encoder.c
-+++ b/hw/riscv/trace-encoder.c
-@@ -30,7 +30,11 @@ REG32(TR_TE_CONTROL, 0x0)
-     FIELD(TR_TE_CONTROL, INST_TRACING, 2, 1)
-     FIELD(TR_TE_CONTROL, EMPTY, 3, 1)
-     FIELD(TR_TE_CONTROL, INST_MODE, 4, 3)
-+    FIELD(TR_TE_CONTROL, CONTEXT, 9, 1)
-+    FIELD(TR_TE_CONTROL, INST_STALL_ENA, 13, 1)
-+    FIELD(TR_TE_CONTROL, INHIBIT_SRC, 15, 1)
-     FIELD(TR_TE_CONTROL, INST_SYNC_MODE, 16, 2)
-+    FIELD(TR_TE_CONTROL, INST_SYNC_MAX, 20, 4)
-     FIELD(TR_TE_CONTROL, FORMAT, 24, 3)
-     /* reserved bits */
-     FIELD(TR_TE_CONTROL, RSVP1, 7, 2)
-@@ -75,17 +79,116 @@ REG32(TR_TE_IMPL, 0x4)
+diff --git a/hw/riscv/rv-trace-messages.c b/hw/riscv/rv-trace-messages.c
+index 7ea1c87fff..83d3436e2e 100644
+--- a/hw/riscv/rv-trace-messages.c
++++ b/hw/riscv/rv-trace-messages.c
+@@ -53,6 +53,17 @@ typedef struct RVTraceTrapPayload {
+ } RVTraceTrapPayload;
+ #define TRAP_PAYLOAD_SIZE_64BITS 18
  
- #define R_TR_TE_IMPL_RESET (BIT(0) | BIT(8))
- 
-+REG32(TR_TE_INST_FEATURES, 0x8)
-+    FIELD(TR_TE_INST_FEATURES, NO_ADDR_DIFF, 0, 1)
++typedef struct RVTraceFormat2Payload {
++    uint8_t format:2;
++    uint32_t addressLow;
++    uint32_t addressHigh;
++    uint8_t notify:1;
++    uint8_t updiscon:1;
++    uint8_t irreport:1;
++    uint8_t irdepth:3;
++} RVTraceFormat2Payload;
++#define FORMAT2_PAYLOAD_SIZE_64BITS 9
 +
-+static uint64_t trencoder_te_ctrl_set_hardwire_vals(uint64_t input)
-+{
-+    input = FIELD_DP32(input, TR_TE_CONTROL, INST_MODE, 0x6);
-+    input = FIELD_DP32(input, TR_TE_CONTROL, CONTEXT, 0);
-+    input = FIELD_DP32(input, TR_TE_CONTROL, INST_STALL_ENA, 0);
-+    input = FIELD_DP32(input, TR_TE_CONTROL, INHIBIT_SRC, 1);
-+    input = FIELD_DP32(input, TR_TE_CONTROL, FORMAT, 0);
-+
-+    /* SYNC_MODE and SYNC_MAX will be revisited */
-+    input = FIELD_DP32(input, TR_TE_CONTROL, INST_SYNC_MODE, 0);
-+    input = FIELD_DP32(input, TR_TE_CONTROL, INST_SYNC_MAX, 0);
-+
-+    return input;
-+}
-+
-+static uint64_t trencoder_te_ctrl_prew(RegisterInfo *reg, uint64_t val)
-+{
-+    TraceEncoder *te = TRACE_ENCODER(reg->opaque);
-+    uint32_t trTeActive = ARRAY_FIELD_EX32(te->regs, TR_TE_CONTROL, ACTIVE);
-+    uint32_t trTeInstTracing = ARRAY_FIELD_EX32(te->regs, TR_TE_CONTROL,
-+                                                INST_TRACING);
-+    uint32_t temp;
-+
-+    val = trencoder_te_ctrl_set_hardwire_vals(val);
-+
-+    if (!trTeActive) {
-+        /*
-+         * 11.2 Reset and discovery, table 58, trTeControl = 0x1
-+         * means "Release from reset and set all defaults." Do
-+         * that only if trTeActive is 0.
-+         */
-+        if (val == 0x1) {
-+            val = FIELD_DP32(val, TR_TE_CONTROL, EMPTY, 1);
-+
-+            return val;
-+        }
-+
-+        /*
-+         * 11.3 Enabling and Disabling hints that the device must
-+         * be activated first (trTeActive = 1), then enabled.
-+         * Do not enable the device if it's not active
-+         * beforehand.
-+         */
-+        temp = FIELD_EX32(val, TR_TE_CONTROL, ENABLE);
-+        if (temp) {
-+            val = FIELD_DP32(val, TR_TE_CONTROL, ENABLE, 0);
-+        }
-+    }
-+
-+    /*
-+     * Do not allow inst tracing to start if the device isn't
-+     * already enabled. Do not allow enabling the devince and
-+     * and enable tracing at the same time.
-+     */
-+    if (!te->enabled && trTeInstTracing) {
-+        val = FIELD_DP32(val, TR_TE_CONTROL, INST_TRACING, 0);
-+    }
-+
-+    return val;
-+}
-+
-+static void trencoder_te_ctrl_postw(RegisterInfo *reg, uint64_t val)
-+{
-+    TraceEncoder *te = TRACE_ENCODER(reg->opaque);
-+    uint32_t trTeActive = ARRAY_FIELD_EX32(te->regs, TR_TE_CONTROL, ACTIVE);
-+    uint32_t trTeEnable = ARRAY_FIELD_EX32(te->regs, TR_TE_CONTROL, ENABLE);
-+    uint32_t trTeInstTracing = ARRAY_FIELD_EX32(te->regs, TR_TE_CONTROL,
-+                                                INST_TRACING);
-+
-+    if (!trTeActive) {
-+        te->enabled = false;
-+        te->trace_running = false;
-+        te->trace_next_insn = false;
-+        return;
-+    }
-+
-+    if (te->enabled && !trTeEnable) {
-+        /* TODO: this should cause a pending trace data flush. */
-+    }
-+
-+    te->enabled = trTeEnable ? true : false;
-+
-+    if (!te->trace_running && trTeInstTracing) {
-+        /* Starting trace. Ask the CPU for the first trace insn */
-+        te->trace_next_insn = true;
-+    }
-+
-+    te->trace_running = trTeInstTracing ? true : false;
-+}
-+
- static RegisterAccessInfo trencoder_regs_info[] = {
-     {   .name = "TR_TE_CONTROL", .addr = A_TR_TE_CONTROL,
-         .rsvd = R_TR_TE_CONTROL_RSVP_BITS,
-         .reset = R_TR_TE_CONTROL_RESET,
-         .ro = R_TR_TE_CONTROL_RO_BITS,
-+        .pre_write = &trencoder_te_ctrl_prew,
-+        .post_write = &trencoder_te_ctrl_postw,
-     },
-     {   .name = "TR_TE_IMPL", .addr = A_TR_TE_IMPL,
-         .rsvd = R_TR_TE_IMPL_RSVP_BITS,
-         .reset = R_TR_TE_IMPL_RESET,
-         .ro = R_TR_TE_IMPL_RO_BITS,
-     },
-+    {   .name = "TR_TE_INST_FEATURES", .addr = A_TR_TE_INST_FEATURES,
-+        .reset = R_TR_TE_INST_FEATURES_NO_ADDR_DIFF_MASK,
-+        .ro = ~0,
-+    },
- };
- 
- static uint64_t trencoder_read(void *opaque, hwaddr addr, unsigned size)
-@@ -132,6 +235,10 @@ static void trencoder_reset(DeviceState *dev)
-     for (int i = 0; i < ARRAY_SIZE(te->regs_info); i++) {
-         register_reset(&te->regs_info[i]);
-     }
-+
-+    te->enabled = false;
-+    te->trace_running = false;
-+    te->trace_next_insn = false;
+ static void rv_etrace_write_bits(uint8_t *bytes, uint32_t bit_pos,
+                                  uint32_t num_bits, uint32_t val)
+ {
+@@ -186,3 +197,51 @@ size_t rv_etrace_gen_encoded_trap_msg(uint8_t *buf, uint64_t trap_addr,
+ out:
+     return HEADER_SIZE + header.length;
  }
- 
- static void trencoder_realize(DeviceState *dev, Error **errp)
-diff --git a/hw/riscv/trace-encoder.h b/hw/riscv/trace-encoder.h
-index 8978865663..30d118be1e 100644
---- a/hw/riscv/trace-encoder.h
-+++ b/hw/riscv/trace-encoder.h
-@@ -33,6 +33,10 @@ struct TraceEncoder {
-     hwaddr ramsink_ramlimit;
-     uint32_t regs[TRACE_R_MAX];
-     RegisterInfo regs_info[TRACE_R_MAX];
 +
-+    bool enabled;
-+    bool trace_running;
-+    bool trace_next_insn;
- };
++/*
++ * Note: irreport and irdepth is always == updiscon.
++ *
++ * return_stack_size_p + call_counter_size_p is hardcoded
++ * to 3 since we don't implement neither ATM.
++ */
++size_t rv_etrace_gen_encoded_format2_msg(uint8_t *buf, uint64_t addr,
++                                         bool notify, bool updiscon)
++{
++    RVTraceFormat2Payload payload = {.format = 0b11,
++                                     .notify = notify,
++                                     .updiscon = updiscon};
++    RVTraceMessageHeader header = {.flow = 0, .extend = 0,
++                                   .length = FORMAT2_PAYLOAD_SIZE_64BITS};
++    uint8_t bit_pos;
++
++    payload.addressLow = extract64(addr, 0, 32);
++    payload.addressHigh = extract64(addr, 32, 32);
++
++    payload.irreport = updiscon;
++    if (updiscon) {
++        payload.irdepth = 0b111;
++    } else {
++        payload.irdepth = 0;
++    }
++
++    rv_etrace_write_header(buf, header);
++    bit_pos = 8;
++
++    rv_etrace_write_bits(buf, bit_pos, 2, payload.format);
++    bit_pos += 2;
++
++    rv_etrace_write_bits(buf, bit_pos, 32, payload.addressLow);
++    bit_pos += 32;
++    rv_etrace_write_bits(buf, bit_pos, 32, payload.addressHigh);
++    bit_pos += 32;
++
++    rv_etrace_write_bits(buf, bit_pos, 1, payload.notify);
++    bit_pos += 1;
++    rv_etrace_write_bits(buf, bit_pos, 1, payload.updiscon);
++    bit_pos += 1;
++    rv_etrace_write_bits(buf, bit_pos, 1, payload.irreport);
++    bit_pos += 1;
++    rv_etrace_write_bits(buf, bit_pos, 3, payload.irdepth);
++
++    return HEADER_SIZE + header.length;
++}
+diff --git a/hw/riscv/rv-trace-messages.h b/hw/riscv/rv-trace-messages.h
+index f210e048dd..89f30e7d36 100644
+--- a/hw/riscv/rv-trace-messages.h
++++ b/hw/riscv/rv-trace-messages.h
+@@ -26,5 +26,7 @@ size_t rv_etrace_gen_encoded_trap_msg(uint8_t *buf, uint64_t trap_addr,
+                                       uint8_t ecause,
+                                       bool is_interrupt,
+                                       uint64_t tval);
++size_t rv_etrace_gen_encoded_format2_msg(uint8_t *buf, uint64_t addr,
++                                         bool notify, bool updiscon);
  
- #define TYPE_TRACE_ENCODER "trace-encoder"
+ #endif
 -- 
 2.43.0
 
