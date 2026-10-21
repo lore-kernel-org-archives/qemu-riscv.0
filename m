@@ -1,142 +1,148 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 353A3606A319
-	for <qemu-riscv@archiver.kernel.org>; Wed, 21 Oct 2026 14:47:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 32105606CD49
+	for <qemu-riscv@archiver.kernel.org>; Wed, 21 Oct 2026 16:18:53 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=baiN5V2X
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=DLIIaC3P;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Zk/Xffd9
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xJXaW-00045R-MU; Wed, 21 Oct 2026 10:46:44 -0400
+	id 1xJZ1Y-000616-E1; Wed, 21 Oct 2026 12:18:46 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1xJXZR-0003qN-36
- for qemu-riscv@nongnu.org; Wed, 21 Oct 2026 10:45:40 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ (Exim 4.90_1) (envelope-from <pierrick.bouvier@oss.qualcomm.com>)
+ id 1xJZ1E-0005tt-0E
+ for qemu-riscv@nongnu.org; Wed, 21 Oct 2026 12:18:27 -0400
+Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1xJXZL-0004Lg-FJ
- for qemu-riscv@nongnu.org; Wed, 21 Oct 2026 10:45:34 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1792593928;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=JDM0WUBiT+rQ0E9Y++3yExU/xhUlliEDnE5RqvGKgRs=;
- b=baiN5V2XTqikSAk0FdLrVb7f+yoX5h67klvL7wUPKjr5aHzS75qTZDh/GWSRS8BfMm3sWm
- bCq4SFMTrR2VAQhFJIn1zi4KdznO9T4hLG9fvmdhzxWc57+QjoOqbxoBnuJVmTHsEKjo3j
- jojqSbRd7Q5A617vdQd8K6nYloV1ZxY=
-Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-44-697RRaHWMcyjyp9VUObGAw-1; Wed,
- 21 Oct 2026 10:45:22 -0400
-X-MC-Unique: 697RRaHWMcyjyp9VUObGAw-1
-X-Mimecast-MFC-AGG-ID: 697RRaHWMcyjyp9VUObGAw_1792593918
-Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 0D26B18007EA; Wed, 21 Oct 2026 14:45:15 +0000 (UTC)
-Received: from blackfin.pond.sub.org (unknown [10.44.22.5])
- by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 82B9030002CB; Wed, 21 Oct 2026 14:45:09 +0000 (UTC)
-Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id 23A7921E6A04; Wed, 21 Oct 2026 16:45:07 +0200 (CEST)
-From: Markus Armbruster <armbru@redhat.com>
-To: =?utf-8?Q?Marc-Andr=C3=A9?= Lureau <marcandre.lureau@redhat.com>
-Cc: qemu-devel@nongnu.org,  Michael Roth <michael.roth@amd.com>,  John Snow
- <jsnow@redhat.com>,  Peter Maydell <peter.maydell@linaro.org>,  Mauro
- Carvalho Chehab <mchehab+huawei@kernel.org>,  Pierrick Bouvier
- <pierrick.bouvier@oss.qualcomm.com>,  Paolo Bonzini <pbonzini@redhat.com>,
- Daniel P. =?utf-8?Q?Berrang=C3=A9?= <berrange@redhat.com>,  Kostiantyn
- Kostiuk
- <kkostiuk@redhat.com>,  Eric Blake <eblake@redhat.com>,  David Hildenbrand
- <david@kernel.org>,  Igor Mammedov <imammedo@redhat.com>,  "Edgar E.
- Iglesias" <edgar.iglesias@gmail.com>,  Jason Wang <jasowangio@gmail.com>,
- Marcelo Tosatti <mtosatti@redhat.com>,  kvm@vger.kernel.org,  Alberto
- Garcia <berto@igalia.com>,  Kevin Wolf <kwolf@redhat.com>,  Hanna Reitz
- <hreitz@redhat.com>,  Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?=
- <philmd@oss.qualcomm.com>,
- Zhao Liu <zhao1.liu@intel.com>,  Jonathan Cameron <jic23@kernel.org>,
- Junjie Cao <junjie.cao@intel.com>,  Anisa Su <anisa.su@samsung.com>,
- Elena Ufimtseva <elena.ufimtseva@oracle.com>,  Jagannathan Raman
- <jag.raman@oracle.com>,  John Levon <john.levon@nutanix.com>,  Thanos
- Makatos <thanos.makatos@nutanix.com>,  =?utf-8?Q?C=C3=A9dric?= Le Goater
- <clg@redhat.com>,
- Cornelia Huck <cohuck@redhat.com>,  Eric Farman <farman@linux.ibm.com>,
- Matthew Rosato <mjrosato@linux.ibm.com>,  Richard Henderson
- <richard.henderson@linaro.org>,  Ilya Leoshkevich <iii@linux.ibm.com>,
- qemu-block@nongnu.org,  linux-cxl@vger.kernel.org,
- qemu-s390x@nongnu.org,  "Michael S. Tsirkin" <mst@redhat.com>,  Sergio
- Lopez <slp@redhat.com>,  qemu-arm@nongnu.org,  Palmer Dabbelt
- <palmer@dabbelt.com>,  Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>,  Daniel Henrique Barboza
- <daniel.barboza@oss.qualcomm.com>,  Liu Zhiwei
- <zhiwei_liu@linux.alibaba.com>,  Chao Liu <chao.liu@processmission.com>,
- qemu-riscv@nongnu.org,  Song Gao <17746591750@163.com>,  Bibo Mao
- <maobibo@loongson.cn>,  Xianglai Li <lixianglai@loongson.cn>,  Jiaxun Yang
- <jiaxun.yang@flygoat.com>,  Pedro Barbuda <pbarbuda@microsoft.com>,
- Mohamed Mediouni <mohamed@unpredictable.fr>,  Nicholas Piggin
- <npiggin@gmail.com>,  Harsh Prateek Bora <harshpb@linux.ibm.com>,  Amit
- Machhiwal <amachhiw@linux.ibm.com>,  qemu-ppc@nongnu.org,  Zhang Chen
- <zhangckid@gmail.com>,  Li Zhijian <lizhijian@fujitsu.com>,  Alistair
- Francis <alistair@alistair23.me>,  Alexander Graf <graf@amazon.com>,
- "Gonglei (Arei)" <arei.gonglei@huawei.com>,  zhenwei pi
- <zhenwei.pi@linux.dev>,  Ani Sinha <anisinha@redhat.com>,  Luc Michel
- <luc@lmichel.fr>,  =?utf-8?Q?C=C3=A9dric?= Le Goater <clg@kaod.org>,  Jamin
- Lin
- <jamin_lin@aspeedtech.com>,  Kane Chen <kane_chen@aspeedtech.com>,  Samuel
- Tardieu <sam@rfc1149.net>,  "Denis V. Lunev" <den@openvz.org>,  FangSheng
- Huang <FangSheng.Huang@amd.com>,  Tyrone Ting <kfting@nuvoton.com>,  Hao
- Wu <wuhaotsh@google.com>,  Keith Busch <kbusch@kernel.org>,  Klaus Jensen
- <its@irrelevant.dk>,  Jesper Devantier <foss@defmacro.it>,  Aditya Gupta
- <adityag@linux.ibm.com>,  Glenn Miles <milesg@linux.ibm.com>,  Conor
- Dooley <conor@kernel.org>,  Sebastian Huber
- <sebastian.huber@embedded-brains.de>,  Halil Pasic <pasic@linux.ibm.com>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,  Jason Herne
- <jjherne@linux.ibm.com>,  Titus Rwantare <titusr@google.com>,  Stefano
- Stabellini <sstabellini@kernel.org>,  Anthony PERARD
- <anthony@xenproject.org>,  Peter Xu <peterx@redhat.com>,  Chinmay Rath
- <rathc@linux.ibm.com>,  Hendrik Brueckner <brueckner@linux.ibm.com>,
- xen-devel@lists.xenproject.org,  Roman Bolshakov <rbolshakov@ddn.com>,
- Phil Dennis-Jordan <phil@philjordan.eu>,  Fam Zheng <fam@euphon.net>,
- Farhan Ali <alifm@linux.ibm.com>,  Alex Williamson <alex@shazbot.org>,
- Tao Tang <tangtao1634@phytium.com.cn>,  Stefan Berger
- <stefanb@linux.vnet.ibm.com>,  Fabiano Rosas <farosas@suse.de>,  Mark
- Cave-Ayland <mark.cave-ayland@ilande.co.uk>,  Artyom Tarasenko
- <atar4qemu@gmail.com>,  Yoshinori Sato <yoshinori.sato@nifty.com>,  Jiri
- Pirko <jiri@resnulli.us>,  Eric Auger <eric.auger@redhat.com>,  Laurent
- Vivier <lvivier@redhat.com>
-Subject: Re: [PATCH v7 60/65] qdev: simplify DEFINE_PROP_ARRAY and remove
- generic array PropertyInfo
-In-Reply-To: <20261020-qom-qapi-v7-60-431a86b02b58@redhat.com>
- (=?utf-8?Q?=22Marc-Andr=C3=A9?=
- Lureau"'s message of "Tue, 20 Oct 2026 14:46:17 +0400")
-References: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
- <20261020-qom-qapi-v7-60-431a86b02b58@redhat.com>
-Date: Wed, 21 Oct 2026 16:45:07 +0200
-Message-ID: <878q3rm7t8.fsf@pond.sub.org>
-User-Agent: Gnus/5.13 (Gnus v5.13)
+ (Exim 4.90_1) (envelope-from <pierrick.bouvier@oss.qualcomm.com>)
+ id 1xJZ1A-0004gZ-7e
+ for qemu-riscv@nongnu.org; Wed, 21 Oct 2026 12:18:23 -0400
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 69LFTxfL991799
+ for <qemu-riscv@nongnu.org>; Wed, 21 Oct 2026 16:18:19 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ +7P4Ra2FlG30IEFvPOMTnlF5m8H8Ybi6OBXmLG48TzM=; b=DLIIaC3P8GGB0yEg
+ hyVcgvaJO/CdwA8H+88ytX8tXN0ln/0Ij8kd678L+M6ySLtY+aoLSvWdM9aP+vY3
+ 7UI0jeQEy/ZFDJgy42fPAAZrymZiFOe1ir0Viz0UkEw6qIaUCLM1fbMxk0JjkfKd
+ 4nOgblI3tQdkck3N+U0kOT1Ef7lCD/LAv1AI8nDXiBce5UcK7P4aYcFn7TIatxzT
+ /dEUiDljkajqCmeK6IlilyT35ECOL5zntQGOtyIGvUKcu2JloZPr9Z2ip+7vzKdJ
+ YzL+eWFyp6WJf98iQB67/qZaSj0hFbYXQOLR1Qd5Uk7ALOZz/PPNWxINXj0bI8e7
+ ZA2XkA==
+Received: from mail-dy1-f200.google.com (mail-dy1-f200.google.com
+ [74.125.82.200])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4heh5r404f-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Wed, 21 Oct 2026 16:18:18 +0000 (GMT)
+Received: by mail-dy1-f200.google.com with SMTP id
+ 5a478bee46e88-30c0d568830so2121272eec.1
+ for <qemu-riscv@nongnu.org>; Wed, 21 Oct 2026 09:18:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1792599496; x=1793204296; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=+7P4Ra2FlG30IEFvPOMTnlF5m8H8Ybi6OBXmLG48TzM=;
+ b=Zk/Xffd99Ew7UU9byT/H4cvxGJme3f/Msx5mr7wdXhdxqELPwcgm91yQvDiUHqmeP8
+ wDj2aux2/uO6Nf9lqDfy8k+zoKhLg0ZpFaO5PPGpLloraI/5NG0yrpwTwvi3840KbssC
+ j8dgNd08hox1FuC9Qq6O8FgYkzeLrJ9sa5jpm4bd2/2wW9Reb8lhXHMT9jcvCh+yXzyJ
+ j3l7/GT74IAEoE3uQCL5yM+sdQhS0zncSzuCOzplC+iUj+nPB74J1irxQMAluvofOFz3
+ Xdii7ShnkPH8A2RAvur3XJu2wWorx8EnW103X2qyruLOs7vKsz/e+8PDz/jWszIAkNFm
+ saRQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1792599496; x=1793204296;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=+7P4Ra2FlG30IEFvPOMTnlF5m8H8Ybi6OBXmLG48TzM=;
+ b=qtvhpHy7HyVgYCvILzs4m9OD5RHtC6Im2ZAvikCatktgdalQaq6e/9eFmH1gDrlwy0
+ rGe0JHrDv+A1Q+Ny6buHO7X5DkQaADhXfPQT12nXswjZCtI3eOMDX9lNL/DdjmDow5vH
+ TfOi2VG+M2sJat+Ca0Y0w3NAXKYwE7aUzPTTWAR/FvuZk5DbjDTIknc9eDS4DQ3OjCfm
+ 66/BgdYJQbyDr4+bWeOC2lSoQZY4AJ/khi8DeuO2WvM3u1OsoCYHgd48qAlFjVIq8ky4
+ c/9Z4jsxsY/7dUGNTacvWzIpxYgw/Kdsd53ovbb0cYCRNiyP/2+XEuW+idYsFsaWETPh
+ G38Q==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBx4+9d4JUmxQQiOycDLcOX7VHhdukoTLr9R5tVwpJ8FW3/Hj28Y4cZk56Ih0JzSmGvw8l7z6f7DWVRX@nongnu.org
+X-Gm-Message-State: AFq9FYIhjzPsRBe2MFRgFmQ7AVquekCA3rmS7aGLoEmeuKHGK73f/uGX
+ PxlMqaRwb1VWHLHjNbU1TTHxCEgWjpct8evDlH1Xkf0uhwnjLKLxbQGsdWiT4TNLS92wMUqlbPZ
+ Y0MSzN+h5sbTgUJ4+LCQoloHeXlGMGSLK6T7WsDV9sxe5irhJWEJmnoEX6A==
+X-Gm-Gg: AYBFou1fKdOAqZl5KeBtqhPah5OVbsUrcmXjZd8RkH4xm5e62iGHu9eRHd9nV1HPEVt
+ Q3YTlBvI9tRw+DpV3LyCxP3apy0FHhdqMrbq79qzIcr761iXe+FuvRNsNglZSXpTyc1NJRgJ8YE
+ 0hjcR0+lCpQCaSsGXuxYRJb4akSc5f+whD1UuZ3TRHU4RDfzvmffXHh5qkqRvyjR0kNJqRYmhDi
+ DrBsy7mtM0RAKcPBVa4CjAWmRBEGSXTVCqpzqs2HM+XsqmB2XoHhalzDhfEg+RWjVYCDb0q2Mpj
+ HOP08T3HMoDU/mZj16SxXbSmtGlop9maezwXp253ypLoQkTmLvA+ZxyxPnMOhnTBRFlB0pruUFQ
+ n/uh1pufSSCCb0YrTYh3c84FIzTKl2ALxc+RTrIslrkW7LSLWy+cFKvCExUaNighVf0Rc3w==
+X-Received: by 2002:a05:701b:2608:b0:14d:5a09:5cd0 with SMTP id
+ a92af1059eb24-190a7d16114mr2724009c88.42.1792599496119; 
+ Wed, 21 Oct 2026 09:18:16 -0700 (PDT)
+X-Received: by 2002:a05:701b:2608:b0:14d:5a09:5cd0 with SMTP id
+ a92af1059eb24-190a7d16114mr2723971c88.42.1792599495418; 
+ Wed, 21 Oct 2026 09:18:15 -0700 (PDT)
+Received: from [192.168.1.199] (192-80-163-190.dyn.novuscom.net.
+ [192.80.163.190]) by smtp.gmail.com with ESMTPSA id
+ a92af1059eb24-1903ca044d4sm7598612c88.17.2026.10.21.09.18.13
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 21 Oct 2026 09:18:13 -0700 (PDT)
+Message-ID: <5e3635d5-1bd2-46b2-9f7d-78001159038c@oss.qualcomm.com>
+Date: Wed, 21 Oct 2026 09:18:12 -0700
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
-X-Mimecast-MFC-PROC-ID: u0N98GxAHQNiW7WjCLndQkYuCgcP84i9GP79Mpt_MIw_1792593918
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=armbru@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
-X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 01/33] qemu/osdep: Add ARRAY_ELEM_OR_NULL() macro
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
+ qemu-devel@nongnu.org
+Cc: qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
+ qemu-s390x@nongnu.org
+References: <20261021031407.24862-1-philmd@oss.qualcomm.com>
+ <20261021031407.24862-2-philmd@oss.qualcomm.com>
+From: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
+Content-Language: en-US
+In-Reply-To: <20261021031407.24862-2-philmd@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Authority-Analysis: v=2.4 cv=aI5lOr9m c=1 sm=1 tr=0 ts=6ad8e5ca cx=c_pps
+ a=PfFC4Oe2JQzmKTvty2cRDw==:117 a=9852oil1ID9t5xBSyQ/BEA==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
+ a=EUspDBNiAAAA:8 a=2T9r-ujFxUm_s10wYvAA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=6Ab_bkdmUrQuMsNx7PHu:22
+X-Proofpoint-ORIG-GUID: wf-WAVZXSrrNxXy48PtX3Jx_R6CSNoLO
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIxMDA2NCBTYWx0ZWRfX1nlV1th879jb
+ ICJnAVJXTVJzGkm2Uq7w3g3VwFnL8q4cQjfwt4d2qw4Nk+umtiJDK01taAyD5ekCdwAATeddKHf
+ 4lFPDuf7tWLjn1+nwCYg9X1pz0FXsbNi3Le6b9bB0gCONSkviRDJgOXQaEqiX+cYbF73W7VUNFP
+ RDZO/Uk4exxWvAeFYMY09+VhGFQVEYV7kRveSYTYhw1pIWuZWqPUbWqT+H4fXosK4nqAzdc0hZ9
+ 9aoExK7hFpZH5o1Wfrwlv3PIXxNlHazOkY/Lc8asTSrwCZkB+nvyLKxNJQ1Vk14UpgjKENkV9wI
+ 7S8D3stsuJYIlMcqr8KOfDxfYE9F/g8MpJU7G3Z1W9oCo+8V0RH7tLiKdc0tf4b0gMkk2iCdZFn
+ riuOIW54u8R45h1hUzGTpSDnxSraPaO5qxVHRnxoXES0taYO3TXReGJ5hQhQeMI+Xubjbo/vbtQ
+ iSlw0aTjKLXiOu1AEQg==
+X-Proofpoint-GUID: wf-WAVZXSrrNxXy48PtX3Jx_R6CSNoLO
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIxMDA2NCBTYWx0ZWRfXzAMmQ+ADowRm
+ dQcRDWMv+yLwq9EFe5DrrAotaVAbEybr7hAzsibIeeZ9T1S/JXymqjmSy1oT1YRoZRNc83cq3jC
+ miC1l9jlBmC336ZVhxe2VVPHHS2MTIw=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-10-21_04,2026-10-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 clxscore=1015 impostorscore=0 spamscore=0 bulkscore=0
+ malwarescore=0 suspectscore=0 adultscore=0 phishscore=0 lowpriorityscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610210064
+Received-SPF: pass client-ip=205.220.180.131;
+ envelope-from=pierrick.bouvier@oss.qualcomm.com;
+ helo=mx0b-0031df01.pphosted.com
+X-Spam_score_int: -2
+X-Spam_score: -0.3
+X-Spam_bar: /
+X-Spam_report: (-0.3 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ SUSPICIOUS_RECIPS=2.51 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -148,32 +154,56 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-12.6 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
-	USER_AGENT_SANE_1 autolearn=unavailable autolearn_force=no
+X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=unavailable autolearn_force=no
 	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com> writes:
+On 10/20/2026 8:13 PM, Philippe Mathieu-Daudé wrote:
+> Add a macro returning array[index] or NULL when the index is out
+> of bounds, useful to convert switch statements over enums into
+> static string lookup tables.
+> 
+> Suggested-by: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
+> Signed-off-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
+> ---
+>  include/qemu/osdep.h | 12 ++++++++++++
+>  1 file changed, 12 insertions(+)
+> 
+> diff --git a/include/qemu/osdep.h b/include/qemu/osdep.h
+> index 1ec5b42230b..993c8ffde0c 100644
+> --- a/include/qemu/osdep.h
+> +++ b/include/qemu/osdep.h
+> @@ -533,6 +533,18 @@ void QEMU_ERROR("code path is reachable")
+>                         QEMU_BUILD_BUG_ON_ZERO(!QEMU_IS_ARRAY(x)))
+>  #endif
+>  
+> +/**
+> + * ARRAY_ELEM_OR_NULL() - Return an array element, or NULL if out of bounds
+> + * @array: array to index
+> + * @index: index of the element to return
+> + *
+> + * Return @array[@index] if @index is a valid index (negative indices
+> + * also yield NULL), otherwise return NULL. Useful to look up entries
+> + * in enum-indexed tables without a prior bounds check.
+> + */
+> +#define ARRAY_ELEM_OR_NULL(array, index) \
+> +    ((index) < 0 || (index) >= ARRAY_SIZE(array) ? NULL : (array)[index])
+> +
+>  int qemu_daemon(int nochdir, int noclose);
+>  void *qemu_anon_ram_alloc(size_t size, uint64_t *align, bool shared,
+>                            bool noreserve);
 
-> Change DEFINE_PROP_ARRAY, the macro now uses _arrayprop##_list to
-> resolve the typed list PropertyInfo (introduced in the previous patch)
-> instead of the generic qdev_prop_array.
->
-> This means the element type and size information is carried by the
-> PropertyInfo itself rather than duplicated at each callsite. Since
-> the typed list PropertyInfos encode element_info and element_size,
-> the .arrayinfo and .arrayfieldsize fields are no longer set by the
-> macro (they will be removed from the Property struct in the next patch).
->
-> Remove qdev_prop_array, which is now unused.
->
-> Signed-off-by: Markus Armbruster <armbru@redhat.com>
-> Signed-off-by: Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com>
+It assumes that array contains pointers only. If we restrict macro to
+char *, with a use of _Generic, it can be enforced at compile time.
+Another solution is to define a companion inline function that takes a
+const char *array[] parameter, so wrong conversion are caught at compile
+time also.
 
-I see the type of "gicv5" property "cpus" change from "list", which lazy
-bad, to "link<arm-cpu>List, which is confused bad.
+Just a suggestion though.
+Reviewed-by: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
 
 
