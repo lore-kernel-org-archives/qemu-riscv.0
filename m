@@ -1,61 +1,77 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 85AAB60A2604
-	for <qemu-riscv@archiver.kernel.org>; Wed, 21 Oct 2026 12:05:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 69D14606A319
+	for <qemu-riscv@archiver.kernel.org>; Wed, 21 Oct 2026 12:42:47 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=itx.no header.i=@itx.no header.a=rsa-sha256 header.s=mx.itx.no header.b=VTUg/DiB
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=PqM19maQ
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xJV4S-00010u-N0; Wed, 21 Oct 2026 08:05:28 -0400
+	id 1xJVeO-00083V-Vk; Wed, 21 Oct 2026 08:42:37 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <stian@itx.no>)
- id 1xJRcB-0007lh-6B; Wed, 21 Oct 2026 04:24:03 -0400
-Received: from itx-kvm-14.itxnorge.no ([91.189.121.228] helo=mx.itxnorge.no)
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1xJVe9-00082F-UT
+ for qemu-riscv@nongnu.org; Wed, 21 Oct 2026 08:42:23 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <stian@itx.no>)
- id 1xJRc8-00083b-Mg; Wed, 21 Oct 2026 04:24:02 -0400
-Message-ID: <ea87bcf45ea0f243887d9c0e78fce175795aa58d.camel@itx.no>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=itx.no; s=mx.itx.no;
- t=1792571036;
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1xJVe7-0000oe-0G
+ for qemu-riscv@nongnu.org; Wed, 21 Oct 2026 08:42:20 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1792586538;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=ISWWj11fiXyKJn3Av8CQWWsk3q/pNaR0p/3W2UXWKus=;
- b=VTUg/DiBqwfdHfogs/jJ2lKctBVjt75uXgAwwUvhSSbu42yiNxIDX2a+Rhi8MUTRjwYbxp
- aepA6J9DnOz0qwFk03plPtqr0zsPwtHjtHFbbmTcr8eYXBcxSyS7JN1V4COP8tghZa4L+W
- u0IrfC7fZea+Y337QS9dfIA/2P5UfmE=
-Subject: Re: [PATCH v2 4/7] target/sparc: Add the AES key expansion
- instructions
-From: Stian Halseth <stian@itx.no>
-To: Philippe =?ISO-8859-1?Q?Mathieu-Daud=E9?= <philmd@oss.qualcomm.com>, 
- qemu-devel@nongnu.org
-Cc: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>, Artyom Tarasenko
- <atar4qemu@gmail.com>, Richard Henderson <richard.henderson@linaro.org>, 
- Laurent Vivier <laurent@vivier.eu>, Helge Deller <deller@gmx.de>, Pierrick
- Bouvier <pierrick.bouvier@oss.qualcomm.com>, Eric Biggers
- <ebiggers@kernel.org>,  qemu-riscv <qemu-riscv@nongnu.org>
-Date: Wed, 21 Oct 2026 10:23:54 +0200
-In-Reply-To: <145a7086-d9eb-4cf0-a162-b3a44d51e9e6@oss.qualcomm.com>
-References: <20261021064640.3591682-1-stian@itx.no>
- <20261021064640.3591682-5-stian@itx.no>
- <145a7086-d9eb-4cf0-a162-b3a44d51e9e6@oss.qualcomm.com>
-Content-Type: multipart/signed; micalg="pgp-sha512";
- protocol="application/pgp-signature"; boundary="=-XI4VePBxJXN7qzlotdbQ"
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type;
+ bh=seGNpU6Y4R+v0RUdVhvd8T5kjew1RPcyH9v+QpV1zv0=;
+ b=PqM19maQ+3wBpdY2FtCdPgF9sjp6uvBC8eF0vos+r4mhJQgGV8MkTB1FyBSbHNuabypNyK
+ V6EKZfBGzRy1VA7JL9Gi1czgV1ATEURdFSUbCm9RyBiLwIH1rw/Z8iqMMsH01REaXyzY2Y
+ ATFw+fSOQz7WWvj4axZ4hQHBJ4+XROU=
+Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-540-253fcqu9NJG63pdc1FPFDQ-1; Wed,
+ 21 Oct 2026 12:42:14 +0000
+X-MC-Unique: 253fcqu9NJG63pdc1FPFDQ-1
+X-Mimecast-MFC-AGG-ID: 253fcqu9NJG63pdc1FPFDQ_1792586533
+Received: from mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.17])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 99E491955F44; Wed, 21 Oct 2026 12:42:12 +0000 (UTC)
+Received: from blackfin.pond.sub.org (unknown [10.44.22.5])
+ by mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id E6E371956040; Wed, 21 Oct 2026 12:42:11 +0000 (UTC)
+Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
+ id 80E2321E6A04; Wed, 21 Oct 2026 14:42:09 +0200 (CEST)
+From: Markus Armbruster <armbru@redhat.com>
+To: qemu-devel@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>, Alistair Francis
+ <alistair.francis@wdc.com>, Weiwei Li <liwei1518@gmail.com>, Daniel
+ Henrique Barboza <daniel.barboza@oss.qualcomm.com>, Liu Zhiwei
+ <zhiwei_liu@linux.alibaba.com>, Chao Liu <chao.liu@processmission.com>,
+ qemu-riscv@nongnu.org
+Subject: Introspecting max32-riscv-cpu after rva23s64-riscv-cpu crashes
+Date: Wed, 21 Oct 2026 14:42:09 +0200
+Message-ID: <87ld7rmdi6.fsf@pond.sub.org>
+User-Agent: Gnus/5.13 (Gnus v5.13)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Received-SPF: pass client-ip=91.189.121.228; envelope-from=stian@itx.no;
- helo=mx.itxnorge.no
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Scanned-By: MIMEDefang 3.0 on 10.30.177.17
+X-Mimecast-MFC-PROC-ID: 0K2MzPqlsf5GhAqK7ZcO41R7o4H03zCuaB0oQWx7DCM_1792586533
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=armbru@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: 12
+X-Spam_score: 1.2
+X-Spam_bar: +
+X-Spam_report: (1.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ RCVD_IN_SBL_CSS=3.335, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Wed, 21 Oct 2026 08:05:25 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,91 +82,56 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS autolearn=no
-	autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-7.6 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=no autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
+Watch this:
 
---=-XI4VePBxJXN7qzlotdbQ
-Content-Type: text/plain; charset="ISO-8859-1"
-Content-Transfer-Encoding: quoted-printable
+    $ qemu-system-riscv64 -S -nodefaults -display none -M none -qmp stdio
+    {"QMP": {"version": {"qemu": {"micro": 50, "minor": 1, "major": 11}, "package": "v11.1.0-2545-g2d150b99ce-dirty"}, "capabilities": ["oob"]}}
+    {"execute": "qmp_capabilities", "arguments": {"enable": ["oob"]}}
+    {"return": {}}
+    {"execute": "qom-list-properties", "arguments": {"typename": "rva23s64-riscv-cpu"}}
+    [Expected output...]
+    {"execute": "qom-list-properties", "arguments": {"typename": "max32-riscv-cpu"}}
+    **
+    ERROR:../target/riscv/cpu.c:516:satp_mode_str: code should not be reached
+    Bail out! ERROR:../target/riscv/cpu.c:516:satp_mode_str: code should not be reached
+    Aborted                    (core dumped) ../qemu/bld/qemu-system-riscv64 -S -nodefaults -display none -M none -qmp stdio
 
-Hi Philippe,
+This is satp_mode_str(VM_1_10_SV39, false).  Interesting part of stack
+backtrace:
 
-On Wed, 2026-10-21 at 09:26 +0200, Philippe Mathieu-Daud=E9 wrote:
-> > +/* Combine the transformed word with the two words in rs1. */
-> > +static uint64_t aes_kexpand(uint64_t rs1, uint32_t t)
-> > +{
-> > +=A0=A0=A0 uint32_t hi =3D (rs1 >> 32) ^ t;
-> > +=A0=A0=A0 uint32_t lo =3D (uint32_t)rs1 ^ hi;
-> > +
-> > +=A0=A0=A0 return ((uint64_t)hi << 32) | lo;
->=20
-> Alternatively:
->=20
-> =A0=A0=A0=A0=A0=A0=A0 return deposit64(lo, 32, 32, hi);
+    #4  0x00007f9d6e7cd447 in g_assertion_message_expr ()
+        at /lib64/libglib-2.0.so.0
+    #5  0x000055801fc2f556 in satp_mode_str
+        (satp_mode=<optimized out>, is_32_bit=<optimized out>)
+        at ../target/riscv/cpu.c:516
+    #6  0x000055801fca193c in riscv_cpu_set_profile
+        (cpu=0x55802e5b8c90, profile=profile@entry=0x5580209732e0 <RVA22S64>, enabled=enabled@entry=true) at ../target/riscv/tcg/tcg-cpu.c:1305
+    #7  0x000055801fca1cf7 in riscv_cpu_add_profiles (cpu_obj=<optimized out>)
+        at ../target/riscv/tcg/tcg-cpu.c:1549
+    #8  riscv_cpu_add_user_properties (obj=0x55802e5b8c90)
+        at ../target/riscv/tcg/tcg-cpu.c:1622
+    #9  riscv_tcg_cpu_instance_init (cs=<optimized out>)
+        at ../target/riscv/tcg/tcg-cpu.c:1741
+    #10 0x000055801fd178a7 in object_init_with_type
+        (obj=0x55802e5b8c90, ti=<optimized out>) at ../qom/object.c:430
+    #11 object_init_with_type (obj=0x55802e5b8c90, ti=<optimized out>)
+        at ../qom/object.c:426
+    #12 object_init_with_type (obj=0x55802e5b8c90, ti=0x55802e2e0250)
+        at ../qom/object.c:426
+    #13 object_initialize_with_type
+        (obj=0x55802e5b8c90, size=<optimized out>, type=0x55802e2e0250)
+        at ../qom/object.c:512
+    #14 0x000055801fd17c5f in object_new_with_type (type=0x55802e2e0250)
+        at ../qom/object.c:710
+    #15 0x000055801fe17276 in qmp_qom_list_properties
+        (typename=0x55802e5ab3d0 "max32-riscv-cpu", errp=0x22c5a0, 
+        errp@entry=0x7ffe4a494aa0) at ../qom/qom-qmp-cmds.c:283
 
-Will be adopted in v3.
-
->=20
-> > +}
-> > +
-> > +/* Apply the AES S-box to each byte, preserving byte positions. */
-> > +static uint32_t aes_subword(uint32_t x)
-> > +{
-> > +=A0=A0=A0 return ((uint32_t)AES_sbox[x >> 24] << 24) |
-> > +=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 ((uint32_t)AES_sbox[(x >> 16) & 0xff] <=
-< 16) |
-> > +=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 ((uint32_t)AES_sbox[(x >> 8) & 0xff] <<=
- 8) |
-> > +=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 (uint32_t)AES_sbox[x & 0xff];
-> > +}
->=20
-> We could move that method to include/crypto/aes.h and re-use
-> it in RISCV's vaeskf1_vi / vaeskf2_vi helpers.
-
-Yes, makes sense. I would prefer to do it in a follow-up that also
-converts the RISC-V helpers. Keeping this SPARC-only.
-
->=20
-> > +
-> > +/*
-> > + * AES Cryptographic Operations 4-operand (Section 7.3)
-> > + * AES key expansion with RotWord, SubWord, and RCON.
-> > + */
-> > +uint64_t helper_aes_kexpand1(uint64_t rs1, uint64_t rs2, uint32_t
-> > imm)
-> > +{
-> > +=A0=A0=A0 static const uint8_t rcon[10] =3D {
-> > +=A0=A0=A0=A0=A0=A0=A0 0x01, 0x02, 0x04, 0x08, 0x10,
-> > +=A0=A0=A0=A0=A0=A0=A0 0x20, 0x40, 0x80, 0x1b, 0x36,
->=20
-> This table is also used by RISCV aes64ks1i, vaeskf1_vi, and
-> vaeskf2_vi,
-> so we could add a common const uint8_t AES_rcon[10] in
-> include/crypto/aes.h:
-
-Same for this one. If you'd rather have it in this series, I can add it
-as a preparatory patch in v3.
-
-
-/Stian
-
-
---=-XI4VePBxJXN7qzlotdbQ
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTK1ph9OaYoND1R57zoeAEuJe36VgUCath2mgAKCRDoeAEuJe36
-VqXYAQC6+W8hbry5GrghNvvXppBZyKOCAJvD0yeFVsYivqFTsgEAvHmxo/LJiNzN
-dBr8hdLiU8oxYpkPsqBpo/p4s53e6ws=
-=fq7k
------END PGP SIGNATURE-----
-
---=-XI4VePBxJXN7qzlotdbQ--
 
