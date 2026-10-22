@@ -1,147 +1,142 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D18D7606A31A
-	for <qemu-riscv@archiver.kernel.org>; Thu, 22 Oct 2026 13:33:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5FE59606A31A
+	for <qemu-riscv@archiver.kernel.org>; Thu, 22 Oct 2026 13:33:15 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=hwN1qIcP
+	dkim=pass (2048-bit key, unprotected) header.d=ibm.com header.i=@ibm.com header.a=rsa-sha256 header.s=pp1 header.b=EFbbUhUv
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xJsuH-0002ei-CX; Thu, 22 Oct 2026 09:32:33 -0400
+	id 1xJsuG-0002eh-Ss; Thu, 22 Oct 2026 09:32:32 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jtomko@redhat.com>) id 1xJoC3-0000MM-9o
- for qemu-riscv@nongnu.org; Thu, 22 Oct 2026 04:30:35 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ (Exim 4.90_1) (envelope-from <gra@linux.ibm.com>)
+ id 1xJnpX-0007H2-So; Thu, 22 Oct 2026 04:07:20 -0400
+Received: from mx0b-001b2d01.pphosted.com ([148.163.158.5])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jtomko@redhat.com>) id 1xJoBy-0002BV-GQ
- for qemu-riscv@nongnu.org; Thu, 22 Oct 2026 04:30:33 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1792657828;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=xexW0rNqv/GKFX03e5NGVfizRBWHHld9j1Z0S71dlRQ=;
- b=hwN1qIcPWU5jWq8MyXfzVNIfGA98dEKzvCXxRHXAz8/yVgm8UldjqNQ1hUfvB9BposHJW2
- K32k8NiOlOsyU61ykUhdhzSzF5AXsolm9S0dyPUyyb/D0go3SNnIBfBt8JixBNcJmaBI9n
- QZv95T0B3AH3xWsXCncaUnjC76bDZxI=
-Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-353-7m63-_WdN--ms9gOad-qrg-1; Thu,
- 22 Oct 2026 04:30:24 -0400
-X-MC-Unique: 7m63-_WdN--ms9gOad-qrg-1
-X-Mimecast-MFC-AGG-ID: 7m63-_WdN--ms9gOad-qrg_1792657820
-Received: from mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.12])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 4C984180060C; Thu, 22 Oct 2026 08:30:18 +0000 (UTC)
-Received: from jtomko.csb (headnet04.pony-001.prod.iad2.dc.redhat.com
- [10.2.32.116])
- by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id EC8EA1956088; Thu, 22 Oct 2026 08:29:49 +0000 (UTC)
-Date: Thu, 22 Oct 2026 10:29:47 +0200
-From: =?iso-8859-1?B?SuFu?= Tomko <jtomko@redhat.com>
-To: Markus Armbruster <armbru@redhat.com>
-Cc: devel@lists.libvirt.org, marcandre.lureau@redhat.com,
- qemu-devel@nongnu.org, Michael Roth <michael.roth@amd.com>,
- John Snow <jsnow@redhat.com>, Peter Maydell <peter.maydell@linaro.org>,
- Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
- Paolo Bonzini <pbonzini@redhat.com>,
- Kostiantyn Kostiuk <kkostiuk@redhat.com>, Eric Blake <eblake@redhat.com>,
- David Hildenbrand <david@kernel.org>, Igor Mammedov <imammedo@redhat.com>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Jason Wang <jasowangio@gmail.com>,
- Marcelo Tosatti <mtosatti@redhat.com>, kvm@vger.kernel.org,
- Alberto Garcia <berto@igalia.com>, Kevin Wolf <kwolf@redhat.com>,
- Hanna Reitz <hreitz@redhat.com>,
- Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@oss.qualcomm.com>,
- Zhao Liu <zhao1.liu@intel.com>, Jonathan Cameron <jic23@kernel.org>,
- Junjie Cao <junjie.cao@intel.com>, Anisa Su <anisa.su@samsung.com>,
- Elena Ufimtseva <elena.ufimtseva@oracle.com>,
- Jagannathan Raman <jag.raman@oracle.com>,
- John Levon <john.levon@nutanix.com>,
- Thanos Makatos <thanos.makatos@nutanix.com>,
- =?iso-8859-1?Q?C=E9dric?= Le Goater <clg@redhat.com>,
- Cornelia Huck <cohuck@redhat.com>, Matthew Rosato <mjrosato@linux.ibm.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Ilya Leoshkevich <iii@linux.ibm.com>, qemu-block@nongnu.org,
- linux-cxl@vger.kernel.org, qemu-s390x@nongnu.org,
- "Michael S. Tsirkin" <mst@redhat.com>,
- Sergio Lopez <slp@redhat.com>, qemu-arm@nongnu.org,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org,
- Song Gao <17746591750@163.com>, Bibo Mao <maobibo@loongson.cn>,
- Xianglai Li <lixianglai@loongson.cn>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Pedro Barbuda <pbarbuda@microsoft.com>,
- Mohamed Mediouni <mohamed@unpredictable.fr>,
- Nicholas Piggin <npiggin@gmail.com>,
- Harsh Prateek Bora <harshpb@linux.ibm.com>,
- Amit Machhiwal <amachhiw@linux.ibm.com>, qemu-ppc@nongnu.org,
- Zhang Chen <zhangckid@gmail.com>, Li Zhijian <lizhijian@fujitsu.com>,
- Alistair Francis <alistair@alistair23.me>,
- Alexander Graf <graf@amazon.com>,
- "Gonglei (Arei)" <arei.gonglei@huawei.com>,
- zhenwei pi <zhenwei.pi@linux.dev>, Ani Sinha <anisinha@redhat.com>,
- Luc Michel <luc@lmichel.fr>,
- =?iso-8859-1?Q?C=E9dric?= Le Goater <clg@kaod.org>,
- Jamin Lin <jamin_lin@aspeedtech.com>, Kane Chen <kane_chen@aspeedtech.com>,
- Samuel Tardieu <sam@rfc1149.net>, "Denis V. Lunev" <den@openvz.org>,
- FangSheng Huang <FangSheng.Huang@amd.com>,
- Tyrone Ting <kfting@nuvoton.com>, Hao Wu <wuhaotsh@google.com>,
- Keith Busch <kbusch@kernel.org>, Klaus Jensen <its@irrelevant.dk>,
- Jesper Devantier <foss@defmacro.it>, Aditya Gupta <adityag@linux.ibm.com>,
- Glenn Miles <milesg@linux.ibm.com>, Conor Dooley <conor@kernel.org>,
- Sebastian Huber <sebastian.huber@embedded-brains.de>,
- Halil Pasic <pasic@linux.ibm.com>,
+ (Exim 4.90_1) (envelope-from <gra@linux.ibm.com>)
+ id 1xJnpV-0004x1-QQ; Thu, 22 Oct 2026 04:07:19 -0400
+Received: from pps.filterd (m0356516.ppops.net [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 69M7EEDq3373332; Thu, 22 Oct 2026 08:06:54 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
+ :content-type:date:from:in-reply-to:message-id:mime-version
+ :references:subject:to; s=pp1; bh=nF1TTK0O9iC0maXZCEHXiP16zxm7ra
+ tzOTrdUcxf5kw=; b=EFbbUhUv+B0JPRJV28qs7cso7gvd3XfrzwCsGrgZZPGrae
+ 0AWqax9uV4Gzv+QADGoi6EpmCdc5iGxI4LcfrFlkS5bLdTdkDF0oou74Yb3p1THK
+ gFsGyWPu3pMl/XpdhYopsWqDDRiPNaSjy1Zi3XfVyHWOCNYnbddchUbZV+Fzi4Fa
+ 4U5J6unn+iSmqZ5DicjYz2owsSPRJlLEQPk5VTUqv7saUAh+Jfw1V4drEi3UHbDD
+ 2NISPK4X2xhepNyEz+bB5IPp4uTcl29UMe2tDyT/L+cUX8AQJSu+AWdzq/q9x13q
+ 7jlmJEinQtbcAy2g14OnsxjVIypplLObYyQHVyqA==
+Received: from ppma21.wdc07v.mail.ibm.com
+ (5b.69.3da9.ip4.static.sl-reverse.com [169.61.105.91])
+ by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4hdw5awhhx-1
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+ Thu, 22 Oct 2026 08:06:53 +0000 (GMT)
+Received: from pps.filterd (ppma21.wdc07v.mail.ibm.com [127.0.0.1])
+ by ppma21.wdc07v.mail.ibm.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 69M74rWG089138; Thu, 22 Oct 2026 08:06:52 GMT
+Received: from smtprelay06.fra02v.mail.ibm.com ([9.218.2.230])
+ by ppma21.wdc07v.mail.ibm.com (PPS) with ESMTPS id 4he7bs93gs-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Thu, 22 Oct 2026 08:06:52 +0000 (GMT)
+Received: from smtpav02.fra02v.mail.ibm.com (smtpav02.fra02v.mail.ibm.com
+ [10.20.54.101])
+ by smtprelay06.fra02v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
+ 69M86mQl43843896
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Thu, 22 Oct 2026 08:06:48 GMT
+Received: from smtpav02.fra02v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 4B3F92004F;
+ Thu, 22 Oct 2026 08:06:48 +0000 (GMT)
+Received: from smtpav02.fra02v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 14D9320040;
+ Thu, 22 Oct 2026 08:06:48 +0000 (GMT)
+Received: from localhost (unknown [9.87.151.225])
+ by smtpav02.fra02v.mail.ibm.com (Postfix) with ESMTP;
+ Thu, 22 Oct 2026 08:06:48 +0000 (GMT)
+Date: Thu, 22 Oct 2026 10:06:47 +0200
+From: Andreas Grapentin <gra@linux.ibm.com>
+To: Cornelia Huck <cohuck@redhat.com>
+Cc: Paolo Bonzini <pbonzini@redhat.com>,
+ Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ qemu-devel@nongnu.org, Bibo Mao <maobibo@loongson.cn>,
  Christian Borntraeger <borntraeger@linux.ibm.com>,
- Jason Herne <jjherne@linux.ibm.com>, Titus Rwantare <titusr@google.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Anthony PERARD <anthony@xenproject.org>,
- Peter Xu <peterx@redhat.com>, Chinmay Rath <rathc@linux.ibm.com>,
- Hendrik Brueckner <brueckner@linux.ibm.com>,
- xen-devel@lists.xenproject.org, Roman Bolshakov <rbolshakov@ddn.com>,
- Phil Dennis-Jordan <phil@philjordan.eu>, Fam Zheng <fam@euphon.net>,
- Farhan Ali <alifm@linux.ibm.com>, Alex Williamson <alex@shazbot.org>,
- Tao Tang <tangtao1634@phytium.com.cn>, Fabiano Rosas <farosas@suse.de>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Artyom Tarasenko <atar4qemu@gmail.com>,
- Yoshinori Sato <yoshinori.sato@nifty.com>,
- Jiri Pirko <jiri@resnulli.us>, Eric Auger <eric.auger@redhat.com>,
- Laurent Vivier <lvivier@redhat.com>
-Subject: Re: Property types changed in this series
-Message-ID: <atnJe88B09dFcDr2@jtomko.csb>
-References: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
- <87tsmfkoej.fsf@pond.sub.org> <878q3qkz6f.fsf@pond.sub.org>
+ Ilya Leoshkevich <iii@linux.ibm.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Eric Farman <farman@linux.ibm.com>, Song Gao <17746591750@163.com>,
+ Harsh Prateek Bora <harshpb@linux.ibm.com>,
+ David Hildenbrand <david@kernel.org>, Bernhard Beschow <shentey@gmail.com>,
+ Halil Pasic <pasic@linux.ibm.com>, Nicholas Piggin <npiggin@gmail.com>,
+ Paul Durrant <paul@xen.org>,
+ =?utf-8?B?QmrDtnJu?= Walk <bwalk@linux.ibm.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, qemu-s390x@nongnu.org,
+ David Woodhouse <dwmw2@infradead.org>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-ppc@nongnu.org,
+ Marcelo Tosatti <mtosatti@redhat.com>, kvm@vger.kernel.org,
+ qemu-arm@nongnu.org, linux-edac@vger.kernel.org,
+ Glenn Miles <milesg@linux.ibm.com>, Chao Liu <chao.liu@processmission.com>,
+ Gautam Menghani <gautam@linux.ibm.com>,
+ Xianglai Li <lixianglai@loongson.cn>,
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+ Chinmay Rath <rathc@linux.ibm.com>, "Michael S. Tsirkin" <mst@redhat.com>,
+ Matthew Rosato <mjrosato@linux.ibm.com>,
+ Amit Machhiwal <amachhiw@linux.ibm.com>,
+ Zhao Liu <zhao1.liu@intel.com>, Weiwei Li <liwei1518@gmail.com>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Mauro Carvalho Chehab <mchehab+huawei@kernel.org>, qemu-riscv@nongnu.org
+Subject: Re: [PATCH 00/23] kvm: introduce KVMCPUOps
+Message-ID: <atnAuDpbhQGZwjNA@li-d8547bcc-2d90-11b2-a85c-a70f2a37009a.ibm.com>
+References: <20261020104320.3686723-1-alex.bennee@linaro.org>
+ <87se2039dn.fsf@draig.linaro.org>
+ <80b593cf-77e0-4623-8059-937c51dd5cfd@redhat.com>
+ <87jyna2vfn.fsf@redhat.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-In-Reply-To: <878q3qkz6f.fsf@pond.sub.org>
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.12
-X-Mimecast-MFC-PROC-ID: JmbZr_5A4pecwFFSxGWxduSySeV0XhJoYHmRM8pJOpM_1792657820
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=iso-8859-1; format=flowed
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=jtomko@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
+In-Reply-To: <87jyna2vfn.fsf@redhat.com>
+X-TM-AS-GCONF: 00
+X-Proofpoint-Reinject: loops=2 maxloops=12
+X-Authority-Analysis: v=2.4 cv=X63Hu2Te c=1 sm=1 tr=0 ts=6ad9c41d cx=c_pps
+ a=GFwsV6G8L6GxiO2Y/PsHdQ==:117 a=GFwsV6G8L6GxiO2Y/PsHdQ==:17
+ a=kj9zAlcOel0A:10 a=660iZSQnnn4A:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=RnoormkPH1_aCDwRdu11:22 a=Y2IxJ9c9Rs8Kov3niI8_:22 a=ADKhsWdzJHgx8XiJNyoA:9
+ a=CjuIK1q_8ugA:10
+X-Proofpoint-ORIG-GUID: QCEhbWs8OPMtbD9saUJ_vW3U3cGr3W8D
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIyMDAzMCBTYWx0ZWRfXw143HnItMb4O
+ 7OGNcxPnFVjZf+e8k2EVOGnwWbpjbcDH5RT7M/5eHjG3HlSS5eDpNstWhITwTN1lhr3ODlg/HIq
+ ll2AhDiAIu9VRkSfpa+f4p4ZWd79sEQU08RnEsND9VEbT9blSH1ymPHUu1fsjJNKbVSJr6mP7eP
+ AQoK6jYQDN0ukHdT09rj+CeMmnujUP/IiyH/hq6LWo9geDMd7Vuuf7xX5LDORJ2QCuwLwwYaNHC
+ m8TCYD3CSREGsaqxRpkHCBN/7SWgLceRvs2nEnYtyk4ZHu6any/Wgn+YUR4sGqwj65Z3dQOmL8M
+ /iMULrXRRi7PJx0d9hx5lXwnDcnlaaIaxk42uiHlA7o+nZ1rLK5zigR9TZsvW8Gd8u54XKJ2e6F
+ yNa5PUXelcGGAfHJSGzFw4gtylS6xeD2sqTwaQcQljMt36snUbvmVPTZ+aqqT/F/11joLDpyCMG
+ Ii6xOG4/pC7H0+5BmJg==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIyMDAzMCBTYWx0ZWRfX+87XnpKDLPs5
+ rHfovf8py/Kmi1p/q/uX0s9x9mWLlt4RCyLMCfcDQQWIh4kp2+thJwIOleHrWGR1Gab2g9mh58n
+ 3ph8it9DuklXDmmiGoc+CgQVGEWrWBQ=
+X-Proofpoint-GUID: WVfB32zkZukzbotBpl-hNWl-mqdj3IVO
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-10-22_03,2026-10-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 phishscore=0 bulkscore=0 adultscore=0 malwarescore=0
+ clxscore=1011 spamscore=0 impostorscore=0 lowpriorityscore=0 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610220030
+Received-SPF: pass client-ip=148.163.158.5; envelope-from=gra@linux.ibm.com;
+ helo=mx0b-001b2d01.pphosted.com
+X-Spam_score_int: -26
+X-Spam_score: -2.7
 X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_LOW=-0.7,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-Mailman-Approved-At: Thu, 22 Oct 2026 09:32:31 -0400
 X-BeenThere: qemu-riscv@nongnu.org
@@ -154,29 +149,36 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS autolearn=no
-	autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-3.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SPF_HELO_PASS,SPF_PASS autolearn=no autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On a Thursday in 2026, Markus Armbruster via Devel wrote:
->Libvirt developers: does libvirt use member @type of the reply of
->qom-list, qom-list-properties, qom-list-get?
->
+On Oct 22 26, Cornelia Huck wrote:
+> What would make the most sense logically to me is to use
+> qemu-system-aarch64 to launch an aarch64 machine and qemu-system-s390x
+> to launch an s390x machine (at least from an user perspective.) That
+> said, I haven't looked at this series yet, but it does sound like a good
+> idea in general regardless of how we plan to launch different arch guests.
 
-The code for getting CPU properties uses qom-list-get for new QEMUs,
-where it checks whether "type" is "bool".
+Just to clarify -- nobody has any intention of using anything other than
+qemu-system-aarch64 to start aarch64 guests, especially not
+qemu-system-s390x. What we are doing for arm64-on-s390 KVM is enable KVM
+accel for qemu-system-aarch64 on s390x hosts, alongside the KVM accel
+for qemu-system-s390x.
 
-I think that can be easily converted to just check for the JSON type.
+that being said, if it were ever the case that qemu-system-s390x and
+qemu-system-aarch64 were the same binary (which is what I understand
+qemu is moving towards) then this would require that single binary to
+understand both s390x and aarch64 flavours of KVM, warts and all.
 
-Jano
+There is another technical challenge in all of this, which is how the
+qemu build can consume the arm64 KVM uapi when built on and for an s390x
+host. I'm hoping that this will also be a lot easier to do if the
+surface of the KVM architecture details is contained behind a KVMCpuOps
+structure.
 
->I'm asking because Marc-André's work changes many values to add a more
->useful replacement.  I think we should deprecate @type.  I'd like to
->find out whether we need to preserve the values for the deprecation
->grace period.
->
-
+Best,
+-A
 
