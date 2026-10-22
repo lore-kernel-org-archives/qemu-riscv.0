@@ -1,59 +1,58 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6EDD2606A31D
-	for <qemu-riscv@archiver.kernel.org>; Thu, 22 Oct 2026 11:01:52 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F3432606A319
+	for <qemu-riscv@archiver.kernel.org>; Thu, 22 Oct 2026 11:01:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=aa5Xdb5Z
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=hEQF+Cxc
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xJqUV-0003fk-Pf; Thu, 22 Oct 2026 06:57:48 -0400
+	id 1xJqTv-0003Bz-9b; Thu, 22 Oct 2026 06:57:11 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1xJqUU-0003eo-Os
- for qemu-riscv@nongnu.org; Thu, 22 Oct 2026 06:57:46 -0400
+ id 1xJqTu-0003Ar-B1
+ for qemu-riscv@nongnu.org; Thu, 22 Oct 2026 06:57:10 -0400
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1xJqUR-0001c3-Ku
- for qemu-riscv@nongnu.org; Thu, 22 Oct 2026 06:57:46 -0400
+ id 1xJqTs-0001UI-RK
+ for qemu-riscv@nongnu.org; Thu, 22 Oct 2026 06:57:10 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1792666663;
+ s=mimecast20190719; t=1792666628;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=IWNRZB5WNkEXU6IF7jyqgb8IH8X8gm8RNRZC4r7nEY8=;
- b=aa5Xdb5ZSiCfI/TkO4cIkXVnep+Ax/pqZB7X+UB0j4+9lFe/Le7eCO8UAyWHS2W7YvLBq1
- RULRLMoo1HbzdISK1ictAxkK2ZX70l88LUDmrN+MwdvsMSzYfRxRIf3HOZxEByku2QIcvw
- ttiDrVb1Y15GETdi9cf8EEh9Oev/rKE=
-Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
+ bh=jNzV6BaWVFq1+/O7YYwswt0SKLovTH7A3DMoCwLjQZ4=;
+ b=hEQF+Cxc0+n1pele5sfwIs3ngoL4KVRHgX6hq6OMtF8ZFIisj7V2myDLys7Xr4aNQHCpE7
+ 7hUB4/PQ6ncqE6r8wE3vt0Ie68/2R9wKrzo8QlXGAv8OGKLzSrWod/cbFeK9vr/Lv9vIZO
+ X1EyqPxhpCOdPo6RJXoiHw6N4TtvgHw=
+Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-511-wRjTJ1LLMaGMbmg72C334Q-1; Thu,
- 22 Oct 2026 10:57:36 +0000
-X-MC-Unique: wRjTJ1LLMaGMbmg72C334Q-1
-X-Mimecast-MFC-AGG-ID: wRjTJ1LLMaGMbmg72C334Q_1792666653
-Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-59-0lVj2VoDOqSAg839h2mVxw-1; Thu,
+ 22 Oct 2026 10:57:00 +0000
+X-MC-Unique: 0lVj2VoDOqSAg839h2mVxw-1
+X-Mimecast-MFC-AGG-ID: 0lVj2VoDOqSAg839h2mVxw_1792666617
+Received: from mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.95])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 4ED30180059B; Thu, 22 Oct 2026 10:57:33 +0000 (UTC)
+ by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id EE7F11955F24; Thu, 22 Oct 2026 10:56:56 +0000 (UTC)
 Received: from localhost (headnet04.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.116])
- by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 2BCA418001CA; Thu, 22 Oct 2026 10:57:31 +0000 (UTC)
+ by mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id 9894546C; Thu, 22 Oct 2026 10:56:55 +0000 (UTC)
 From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-Date: Thu, 22 Oct 2026 14:56:40 +0400
-Subject: [PATCH v3 13/18] target/m68k: expose system registers to monitors
- via gdbstub
+Date: Thu, 22 Oct 2026 14:56:30 +0400
+Subject: [PATCH v3 03/18] gdbstub: set feature->base_reg for dynamic features
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Message-Id: <20261022-query-reg-v3-13-7ad902b9a7cf@redhat.com>
+Message-Id: <20261022-query-reg-v3-3-7ad902b9a7cf@redhat.com>
 References: <20261022-query-reg-v3-0-7ad902b9a7cf@redhat.com>
 In-Reply-To: <20261022-query-reg-v3-0-7ad902b9a7cf@redhat.com>
 To: qemu-devel@nongnu.org
@@ -77,38 +76,38 @@ Cc: "Dr. David Alan Gilbert" <dave@treblig.org>,
  Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, 
  Warner Losh <imp@bsdimp.com>, Kyle Evans <kevans@freebsd.org>, 
  =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=6440;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1091;
  i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=YEGQk+Kr4OYoLSh1J3PGoDFmqRNt4E0Gb60b7pwVF4k=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq2evm7o6GGVCKli6tvdo9IBh2TQ/36K3STJMVO
- p+4ijEttBSJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatnr5gAKCRDa6OEJdZac
- 5YPOD/9jc7e4cD7YUnbrJqbrkjxrAHkl/pax8X95fd05SM2PcQqhoPtahRvMiwmFXejQsdqFclc
- yYpDaepEXXFStKk0C1+uS3TRrya8zPwdR3GRgIzA4HM7d3kb9EECfuow2YhXBulayeNkAu/aziW
- v3sNcOSU+OoM4UgCuV4Ssvru6/GaEI3zRml5+UsJunStmodf57ebT1hT/eTTe2F9vuK8RWryHix
- pALDL98m2h+A+bxAl4BpQ1ByDYzk/bUMcg7BLbX8mTHLosPGEccHhEfUGVMQuUE7+IAgkqMjpbj
- IFveUuGkHQdVdAJxKTIxL85XB0QdanT6U/xyTAGsCcmDkYAnRnOtP06GaSodcu72bDUQ2PNLBnE
- Ol0smFB2Ln//AgERzam9BnC8wiJMUPRD2qyebXj/HDQBH3XLMh+LcaseN5qtp+Lz7jbkUhNXdyN
- QDBaaCpXHIdmxQR67yMHFQM3jzzCHBZQgSJbqXg41Lss9JL5THZ50dB5eookxDXpWpM7vezSehg
- l/YQV8top54r5I8/ueNz0wSnRNNsO5XGYVGG6dAq8BoxlwIaTqlxerZLVDT6HHxYVBhgKxOPwTF
- iBoc7hzyF/4U48WWDLIO13YOiATNITE4RjXYQggHu1VRHkAUxjwpgCUzmS2FUFKt31nwxoIPEsb
- Bdg+wghur8gEMpQ==
+ bh=KuwHJGXyije9XLDEqL0xZ9kuS8FmeuZ9mxj6XXAIhZs=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq2evl28uSxci1PaCBSIw47bA24Vcvlpn1p2N5E
+ 8vWHyVaBEOJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatnr5QAKCRDa6OEJdZac
+ 5cxRD/9coUpLre38IRaw8b5iPk054If8CTCdOQm/ZpNkWjjzEti1TWzQ6IW662Ratz9MvqpYb+8
+ VuNslNygDFmquGrxCrKDn+AH1Bd6g7ZQ4wh9vMZudoP2dCGxf/dhFyIsyvHVBjNntulEpUcpqY1
+ X0giyN9AjnKl6kjF6j5ZQe95E9kthKqGty3clm4SMOND/DAVkBS4qfY0U6KQeB6ihJi0qtprM+q
+ AqHHQjwzifKGbcWFxNVwA0XNfg1L47gdgIT01cwWFKZVoS3XUKzATgJnPB0twE+kuU0LmSiucty
+ R/odHak3P4VZeCGmWFcCcj26BvSZ8RGl6CCmrKFqRdVttUg38g346uJgODjCt/vv91EzTkCtLAt
+ gK0yOntuLtKM7vEeB29feLU7NBjhz0L2GjlajqEaCNzV/4AsZevlVjhCx4FGnXPHbJLQkRVLIPl
+ I5Luwy5JjSxB8cTsep+M/6BPIx1y42g7HTZGFsOEggUIXbCEpOKq9hDvBTTl7HqKITDsMAnjyTx
+ 9JcUd6OJ+KIfFNqXKSk8TGZAyd0znn6wFHV2O4eHpRl0C6D6D+UQmKCj7vkrSUxw/9B3OJCcQ/t
+ nNh+50xnlOjiEj46kdasjfrFmJunlRRD3j8UMnSvw3CJdm3jS2t5Tim4zRNj2m6HMSXl0vwZSdm
+ gYty5AFMeQfHdAg==
 X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
  fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
-X-Mimecast-MFC-PROC-ID: QtO12aBkFoLclk-AGO5fIyFUpwH6NMMjrwc0sdtpZPM_1792666653
+X-Scanned-By: MIMEDefang 3.6 on 10.30.177.95
+X-Mimecast-MFC-PROC-ID: FhErGenSDaS9CGjOs_yJcst4s5ATrxD1fkBNLhCYvzs_1792666617
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=170.10.129.124;
  envelope-from=marcandre.lureau@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -30
-X-Spam_score: -3.1
-X-Spam_bar: ---
-X-Spam_report: (-3.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.339,
+X-Spam_score_int: 2
+X-Spam_score: 0.2
+X-Spam_bar: /
+X-Spam_report: (0.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.339,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_SBL_CSS=3.335, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -127,179 +126,32 @@ X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Replace the HMP-specific MonitorDef with a GDB feature that exposes
-supervisor stack pointers (ssp, usp, isp), function code registers (sfc,
-dfc), MMU registers (urp, srp, dttr0/1, ittr0/1, mmusr) as read-only
-system registers through the internal GDB coprocessor interface.
+gdb_feature_builder_end() never propagated builder->base_reg into
+feature->base_reg, leaving it at 0 for all dynamically-built features.
+This made the trace log at gdb_get_register_list() report an incorrect
+base_reg for dynamic features.
 
+GDBRegisterState::base_reg was correctly set, so this doesn't fix
+an actual issue.
+
+Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
 Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 ---
- configs/targets/m68k-softmmu.mak |  2 +-
- gdbstub/gdb-xml/m68k-system.xml  | 32 ++++++++++++++++++++++++++
- target/m68k/cpu.c                | 22 ------------------
- target/m68k/helper.c             | 49 +++++++++++++++++++++++++++++++++++++++-
- 4 files changed, 81 insertions(+), 24 deletions(-)
+ gdbstub/gdbstub.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/configs/targets/m68k-softmmu.mak b/configs/targets/m68k-softmmu.mak
-index 0bc889f326e3..f3ac9b74c862 100644
---- a/configs/targets/m68k-softmmu.mak
-+++ b/configs/targets/m68k-softmmu.mak
-@@ -1,4 +1,4 @@
- TARGET_ARCH=m68k
- TARGET_BIG_ENDIAN=y
--TARGET_XML_FILES= cf-core.xml cf-fp.xml m68k-core.xml m68k-fp.xml
-+TARGET_XML_FILES= cf-core.xml cf-fp.xml m68k-core.xml m68k-fp.xml m68k-system.xml
- TARGET_LONG_BITS=32
-diff --git a/gdbstub/gdb-xml/m68k-system.xml b/gdbstub/gdb-xml/m68k-system.xml
-new file mode 100644
-index 000000000000..0a91be0edc00
---- /dev/null
-+++ b/gdbstub/gdb-xml/m68k-system.xml
-@@ -0,0 +1,32 @@
-+<?xml version="1.0"?>
-+<!--
-+  SPDX-License-Identifier: GPL-2.0-or-later
-+-->
-+<!DOCTYPE feature SYSTEM "gdb-target.dtd">
-+<!-- System-register values are read-only; writes are ignored. -->
-+<feature name="org.qemu.gdb.m68k.system">
-+  <reg name="ssp" bitsize="32" type="uint32"
-+       group="qemu-debug" save-restore="no"/>
-+  <reg name="usp" bitsize="32" type="uint32"
-+       group="qemu-debug" save-restore="no"/>
-+  <reg name="isp" bitsize="32" type="uint32"
-+       group="qemu-debug" save-restore="no"/>
-+  <reg name="sfc" bitsize="32" type="uint32"
-+       group="qemu-debug" save-restore="no"/>
-+  <reg name="dfc" bitsize="32" type="uint32"
-+       group="qemu-debug" save-restore="no"/>
-+  <reg name="urp" bitsize="32" type="uint32"
-+       group="qemu-debug" save-restore="no"/>
-+  <reg name="srp" bitsize="32" type="uint32"
-+       group="qemu-debug" save-restore="no"/>
-+  <reg name="dttr0" bitsize="32" type="uint32"
-+       group="qemu-debug" save-restore="no"/>
-+  <reg name="dttr1" bitsize="32" type="uint32"
-+       group="qemu-debug" save-restore="no"/>
-+  <reg name="ittr0" bitsize="32" type="uint32"
-+       group="qemu-debug" save-restore="no"/>
-+  <reg name="ittr1" bitsize="32" type="uint32"
-+       group="qemu-debug" save-restore="no"/>
-+  <reg name="mmusr" bitsize="32" type="uint32"
-+       group="qemu-debug" save-restore="no"/>
-+</feature>
-diff --git a/target/m68k/cpu.c b/target/m68k/cpu.c
-index 9b52ad5fc234..ad7303305848 100644
---- a/target/m68k/cpu.c
-+++ b/target/m68k/cpu.c
-@@ -25,7 +25,6 @@
- #include "disas/capstone.h"
- #ifndef CONFIG_USER_ONLY
- #include "migration/vmstate.h"
--#include "monitor/hmp.h"
- #endif
+diff --git a/gdbstub/gdbstub.c b/gdbstub/gdbstub.c
+index 0ce871d74929..912e31b66744 100644
+--- a/gdbstub/gdbstub.c
++++ b/gdbstub/gdbstub.c
+@@ -476,6 +476,7 @@ void gdb_feature_builder_end(const GDBFeatureBuilder *builder)
  
- #include "cpu.h"
-@@ -666,32 +665,11 @@ static const VMStateDescription vmstate_m68k_cpu = {
-     },
- };
+     g_ptr_array_free(builder->xml, TRUE);
  
--#ifdef CONFIG_HMP
--static const MonitorDef m68k_monitor_defs[] = {
--    { "ssp", offsetof(CPUM68KState, sp[0]) },
--    { "usp", offsetof(CPUM68KState, sp[1]) },
--    { "isp", offsetof(CPUM68KState, sp[2]) },
--    { "sfc", offsetof(CPUM68KState, sfc) },
--    { "dfc", offsetof(CPUM68KState, dfc) },
--    { "urp", offsetof(CPUM68KState, mmu.urp) },
--    { "srp", offsetof(CPUM68KState, mmu.srp) },
--    { "dttr0", offsetof(CPUM68KState, mmu.ttr[M68K_DTTR0]) },
--    { "dttr1", offsetof(CPUM68KState, mmu.ttr[M68K_DTTR1]) },
--    { "ittr0", offsetof(CPUM68KState, mmu.ttr[M68K_ITTR0]) },
--    { "ittr1", offsetof(CPUM68KState, mmu.ttr[M68K_ITTR1]) },
--    { "mmusr", offsetof(CPUM68KState, mmu.mmusr) },
--    { NULL },
--};
--#endif
--
- #include "hw/core/sysemu-cpu-ops.h"
- 
- static const struct SysemuCPUOps m68k_sysemu_ops = {
-     .has_work = m68k_cpu_has_work,
-     .get_phys_addr_debug = m68k_cpu_get_phys_addr_debug,
--#ifdef CONFIG_HMP
--    .monitor_defs = m68k_monitor_defs,
--#endif
- };
- #endif /* !CONFIG_USER_ONLY */
- 
-diff --git a/target/m68k/helper.c b/target/m68k/helper.c
-index 5f91d206f596..1a29eaaf37f6 100644
---- a/target/m68k/helper.c
-+++ b/target/m68k/helper.c
-@@ -123,6 +123,48 @@ static int m68k_fpu_gdb_set_reg(CPUState *cs, uint8_t *mem_buf, int n)
-     return 0;
- }
- 
-+#ifndef CONFIG_USER_ONLY
-+static int m68k_gdb_read_system_register(CPUState *cs, GByteArray *buf, int n)
-+{
-+    CPUM68KState *env = cpu_env(cs);
-+    static const int stacks[] = { M68K_SSP, M68K_USP, M68K_ISP };
-+
-+    if (n >= 0 && n < ARRAY_SIZE(stacks)) {
-+        int sp = stacks[n];
-+
-+        return gdb_get_reg32(buf, env->sp[sp]);
-+    }
-+    switch (n) {
-+    case 3:
-+        return gdb_get_reg32(buf, env->sfc);
-+    case 4:
-+        return gdb_get_reg32(buf, env->dfc);
-+    case 5:
-+        return gdb_get_reg32(buf, env->mmu.urp);
-+    case 6:
-+        return gdb_get_reg32(buf, env->mmu.srp);
-+    case 7:
-+        return gdb_get_reg32(buf, env->mmu.ttr[M68K_DTTR0]);
-+    case 8:
-+        return gdb_get_reg32(buf, env->mmu.ttr[M68K_DTTR1]);
-+    case 9:
-+        return gdb_get_reg32(buf, env->mmu.ttr[M68K_ITTR0]);
-+    case 10:
-+        return gdb_get_reg32(buf, env->mmu.ttr[M68K_ITTR1]);
-+    case 11:
-+        return gdb_get_reg32(buf, env->mmu.mmusr);
-+    default:
-+        return 0;
-+    }
-+}
-+
-+static int m68k_gdb_write_system_register(CPUState *cs, uint8_t *buf, int n)
-+{
-+    /* These registers are exposed for inspection only. Ignore writes. */
-+    return 4;
-+}
-+#endif
-+
- void m68k_cpu_init_gdb(M68kCPU *cpu)
- {
-     CPUState *cs = CPU(cpu);
-@@ -135,7 +177,12 @@ void m68k_cpu_init_gdb(M68kCPU *cpu)
-         gdb_register_coprocessor(cs, m68k_fpu_gdb_get_reg, m68k_fpu_gdb_set_reg,
-                                  gdb_find_static_feature("m68k-fp.xml"));
-     }
--    /* TODO: Add [E]MAC registers.  */
-+    /* TODO: Add [E]MAC registers. */
-+#ifndef CONFIG_USER_ONLY
-+    gdb_register_internal_coprocessor(cs, m68k_gdb_read_system_register,
-+                                      m68k_gdb_write_system_register,
-+                                      gdb_find_static_feature("m68k-system.xml"));
-+#endif
- }
- 
- void HELPER(cf_movec_to)(CPUM68KState *env, uint32_t reg, uint32_t val)
++    builder->feature->base_reg = builder->base_reg;
+     builder->feature->num_regs = builder->regs->len;
+     builder->feature->regs = (void *)g_ptr_array_free(builder->regs, FALSE);
+     trace_gdbxml_feature_builder_header(builder->feature->name,
 
 -- 
 2.56.0.116.g6de20f6092dc
