@@ -1,142 +1,115 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5FE59606A31A
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7C367606A31B
 	for <qemu-riscv@archiver.kernel.org>; Thu, 22 Oct 2026 13:33:15 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=ibm.com header.i=@ibm.com header.a=rsa-sha256 header.s=pp1 header.b=EFbbUhUv
+	dkim=pass (2048-bit key, unprotected) header.d=theorem-dev.20251104.gappssmtp.com header.i=@theorem-dev.20251104.gappssmtp.com header.a=rsa-sha256 header.s=20251104 header.b=UjCdbaIS
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xJsuG-0002eh-Ss; Thu, 22 Oct 2026 09:32:32 -0400
+	id 1xJsue-0002nN-Rq; Thu, 22 Oct 2026 09:32:56 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gra@linux.ibm.com>)
- id 1xJnpX-0007H2-So; Thu, 22 Oct 2026 04:07:20 -0400
-Received: from mx0b-001b2d01.pphosted.com ([148.163.158.5])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gra@linux.ibm.com>)
- id 1xJnpV-0004x1-QQ; Thu, 22 Oct 2026 04:07:19 -0400
-Received: from pps.filterd (m0356516.ppops.net [127.0.0.1])
- by mx0a-001b2d01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 69M7EEDq3373332; Thu, 22 Oct 2026 08:06:54 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
- :content-type:date:from:in-reply-to:message-id:mime-version
- :references:subject:to; s=pp1; bh=nF1TTK0O9iC0maXZCEHXiP16zxm7ra
- tzOTrdUcxf5kw=; b=EFbbUhUv+B0JPRJV28qs7cso7gvd3XfrzwCsGrgZZPGrae
- 0AWqax9uV4Gzv+QADGoi6EpmCdc5iGxI4LcfrFlkS5bLdTdkDF0oou74Yb3p1THK
- gFsGyWPu3pMl/XpdhYopsWqDDRiPNaSjy1Zi3XfVyHWOCNYnbddchUbZV+Fzi4Fa
- 4U5J6unn+iSmqZ5DicjYz2owsSPRJlLEQPk5VTUqv7saUAh+Jfw1V4drEi3UHbDD
- 2NISPK4X2xhepNyEz+bB5IPp4uTcl29UMe2tDyT/L+cUX8AQJSu+AWdzq/q9x13q
- 7jlmJEinQtbcAy2g14OnsxjVIypplLObYyQHVyqA==
-Received: from ppma21.wdc07v.mail.ibm.com
- (5b.69.3da9.ip4.static.sl-reverse.com [169.61.105.91])
- by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4hdw5awhhx-1
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
- Thu, 22 Oct 2026 08:06:53 +0000 (GMT)
-Received: from pps.filterd (ppma21.wdc07v.mail.ibm.com [127.0.0.1])
- by ppma21.wdc07v.mail.ibm.com (8.18.1.11/8.18.1.11) with ESMTP id
- 69M74rWG089138; Thu, 22 Oct 2026 08:06:52 GMT
-Received: from smtprelay06.fra02v.mail.ibm.com ([9.218.2.230])
- by ppma21.wdc07v.mail.ibm.com (PPS) with ESMTPS id 4he7bs93gs-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 22 Oct 2026 08:06:52 +0000 (GMT)
-Received: from smtpav02.fra02v.mail.ibm.com (smtpav02.fra02v.mail.ibm.com
- [10.20.54.101])
- by smtprelay06.fra02v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
- 69M86mQl43843896
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 22 Oct 2026 08:06:48 GMT
-Received: from smtpav02.fra02v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 4B3F92004F;
- Thu, 22 Oct 2026 08:06:48 +0000 (GMT)
-Received: from smtpav02.fra02v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 14D9320040;
- Thu, 22 Oct 2026 08:06:48 +0000 (GMT)
-Received: from localhost (unknown [9.87.151.225])
- by smtpav02.fra02v.mail.ibm.com (Postfix) with ESMTP;
- Thu, 22 Oct 2026 08:06:48 +0000 (GMT)
-Date: Thu, 22 Oct 2026 10:06:47 +0200
-From: Andreas Grapentin <gra@linux.ibm.com>
-To: Cornelia Huck <cohuck@redhat.com>
-Cc: Paolo Bonzini <pbonzini@redhat.com>,
- Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>,
- qemu-devel@nongnu.org, Bibo Mao <maobibo@loongson.cn>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,
- Ilya Leoshkevich <iii@linux.ibm.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Eric Farman <farman@linux.ibm.com>, Song Gao <17746591750@163.com>,
- Harsh Prateek Bora <harshpb@linux.ibm.com>,
- David Hildenbrand <david@kernel.org>, Bernhard Beschow <shentey@gmail.com>,
- Halil Pasic <pasic@linux.ibm.com>, Nicholas Piggin <npiggin@gmail.com>,
- Paul Durrant <paul@xen.org>,
- =?utf-8?B?QmrDtnJu?= Walk <bwalk@linux.ibm.com>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, qemu-s390x@nongnu.org,
- David Woodhouse <dwmw2@infradead.org>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-ppc@nongnu.org,
- Marcelo Tosatti <mtosatti@redhat.com>, kvm@vger.kernel.org,
- qemu-arm@nongnu.org, linux-edac@vger.kernel.org,
- Glenn Miles <milesg@linux.ibm.com>, Chao Liu <chao.liu@processmission.com>,
- Gautam Menghani <gautam@linux.ibm.com>,
- Xianglai Li <lixianglai@loongson.cn>,
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
- Chinmay Rath <rathc@linux.ibm.com>, "Michael S. Tsirkin" <mst@redhat.com>,
- Matthew Rosato <mjrosato@linux.ibm.com>,
- Amit Machhiwal <amachhiw@linux.ibm.com>,
- Zhao Liu <zhao1.liu@intel.com>, Weiwei Li <liwei1518@gmail.com>,
- Peter Maydell <peter.maydell@linaro.org>,
- Mauro Carvalho Chehab <mchehab+huawei@kernel.org>, qemu-riscv@nongnu.org
-Subject: Re: [PATCH 00/23] kvm: introduce KVMCPUOps
-Message-ID: <atnAuDpbhQGZwjNA@li-d8547bcc-2d90-11b2-a85c-a70f2a37009a.ibm.com>
-References: <20261020104320.3686723-1-alex.bennee@linaro.org>
- <87se2039dn.fsf@draig.linaro.org>
- <80b593cf-77e0-4623-8059-937c51dd5cfd@redhat.com>
- <87jyna2vfn.fsf@redhat.com>
+ (Exim 4.90_1) (envelope-from <tewaro@theorem.dev>)
+ id 1xJksC-0005Nh-HJ
+ for qemu-riscv@nongnu.org; Thu, 22 Oct 2026 00:57:52 -0400
+Received: from mail-ej1-x631.google.com ([2a00:1450:4864:20::631])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <tewaro@theorem.dev>)
+ id 1xJksA-0002OZ-JD
+ for qemu-riscv@nongnu.org; Thu, 22 Oct 2026 00:57:52 -0400
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-c263415982eso191284066b.0
+ for <qemu-riscv@nongnu.org>; Wed, 21 Oct 2026 21:57:50 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1792645069; cv=none;
+ d=google.com; s=arc-20260327;
+ b=hA9AwctqTZjueK0V7NZvnb79YWos3pB5QcVmf3OoO8hGPT1mak787h2ln276dZDMgN
+ u2p9PCBNzi52noq4EnYL7F4L6WSK6hkEuuL+APCvmnZ3yoaL4embEVT0ApNhTW2n3+q/
+ JuC3bqCy/rS4VcVnlq6Aa7qw3dhuqa9nvsaQ9JQQRK83YUcNd4LDqfpmwpu1rZpRAStQ
+ PyHaoP2wjbdIPnL1EFEBkr4y/f4W65XIuUUGoCYR8dA/C9ut6zf9dof1c1Jj2ffKJMR/
+ I7LnASQJkuOwmZSakdTn5WeMQBLXqId825bfUvDdvbkcSEzIXg7qVGe5WezC6pLYoUZ+
+ 2P7w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=cc:to:subject:message-id:date:mime-version:references:in-reply-to
+ :from:dkim-signature;
+ bh=j/IQYjLHdjCF1gb4GVDkIzT4OQ7lR/A43Idw83O4mwc=;
+ fh=KzEVRCrhke8VK+WFAq+Dy0o38BVLmA8ww6Zm36tVw6w=;
+ b=XYl6Yt6uxKsTfyPd3S21pstRm06RwADAVzDiKnKS7BTwL4Kt0e1ol9qd1LhdR79PIA
+ I3jlb6vJ+TSXQKzTQUun8QMxwEpWCggxIgVrSOOQ2CChGgb8ceVf15XclxkBYGfnNUH1
+ IV50mmvS3TuicUFQ8X6npUJ53rxZo0N3LQyCl7vdzZARtD1xC/5wcfpyAk29baupJ/xp
+ yiSeNVH2zjI9M5Hv4Vy0lx730tmf4stvMBeL8RMK325jps5LXlfG1oaTjsQxS10xeGh5
+ 697f7R9sbXProwKZhjMCRqFSOswHyMcMj47amzvHqOfF0+E4rv2LBPN0aVCnBIJgNHVF
+ 9vEw==; darn=nongnu.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=theorem-dev.20251104.gappssmtp.com; s=20251104; t=1792645069; x=1793249869;
+ darn=nongnu.org; 
+ h=content-type:cc:to:subject:message-id:date:mime-version:references
+ :in-reply-to:from:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=j/IQYjLHdjCF1gb4GVDkIzT4OQ7lR/A43Idw83O4mwc=;
+ b=UjCdbaISZm00LAXurOIXnFWXVlYLyq9NEjk1Sv9p7ZL1W3Gte8soQQE1bR3XsZhux0
+ CyAfg2C8y7fOJp129gornv3cJgDIsZvOKkgtlCQ6/3wKhi+MR2E/mCXj7WkHue8Eczez
+ NG9DWEBiqROxzM/JnKkjNmqASaPbkQJC1UE3s+5tn5NV8VXQt3OL5MuhvmmwqJiiwRJ+
+ lBN7TJQDklmRHeAHFPeSH/jgliPIfHaK4K98CfWC7od8rdex7BjnT7zqCwlj8VDMYeIV
+ QhIK70KxFOnA+Tj84X0BtFgbfjYL/q9rxap2n6w39mScxAZK02Euky/Cn7EvapvDbO40
+ xK0A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1792645069; x=1793249869;
+ h=content-type:cc:to:subject:message-id:date:mime-version:references
+ :in-reply-to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=j/IQYjLHdjCF1gb4GVDkIzT4OQ7lR/A43Idw83O4mwc=;
+ b=dnjUxl9Jpi5dK2sRbX6O/tj6EP8TNg19k+SbJGRLMlHBFLZbF4aXIQ8t6UKM4qI6W0
+ HvdXor/eMKWPlDxnOTnM53xkVeJJek5HS2tf+PqkLLdkhw3tJ8w29Lw5Po3W1xrYuE2C
+ 5qJM0/xbs+ZZEZREoNJGlVJAKqrQ2P7KxO0btJ4MyrvB+7iGvgct7aQybeNPowkSaBKk
+ b3t2zKSuFJE0kf4wgARcLDTI50SQN9gswPD7yRAG7mNYEO5d2WK19VhfRfyy3rNBUges
+ qyNEY+IjKeheap8t2wR2pjX6qKpuF+BTkGqXuLQ/a0DHckCNG8rhRzUBD1QXsMyttVfy
+ y0SA==
+X-Gm-Message-State: AFq9FYKtgJmqrXTdTdeYl8aCXPG1WJ1jfHhDOcfL1rqUuM/nSyq95f1l
+ bU9w3PJsHo1ta2nc6oW4ffLCk/Jp1XW6r9iPB+nxKrhjZgVLNvUh2Vk2MxCtSnF5Is+WckgSy1c
+ gj9rBnxYSdvLe6uIJz1MmzavTcmBzjytG4cpTAygljlK8c8upqDZBlgN/Nw==
+X-Gm-Gg: AYBFou1cAIytURn2IQ7eMp8vLsoqgOoKuf5nSM9Y8utLs9I3Ki0yt5KNE86aHzUT8Ff
+ n238WgBAZnoJwJ6UVncwDwliFv/puvS1FVnXiFOyqGRBP6ahWVkekob6KQOJEmavPzSEvF2adem
+ TxBW9ZIy8mYuocxb2/jGHJnrEQtxgwIVi49GDcEQrZTP1HoQJ0vwBqVko00Ns/frikMnjrixrPq
+ PiIO2H+Ke9Jry6ooIPZXlBw/cIiT3paf9f6GTp1BCDODk7B196QZkiK/6Mo57qCfZMV9kDYZI88
+ X6VSBpBQvHhl2GzrRVZALh/6gQqyjDKtg1R273mw/eLthOAQTp+w5V6IL1rSjDsifVUaOLLr90/
+ 4lV7Mm3y2XSY5RHUQl1DQMSOBJnELjY4iSIVrjeQQ0zOOPw96NMeIkN3FzGg=
+X-Received: by 2002:a17:907:6e8e:b0:c40:5de7:33d3 with SMTP id
+ a640c23a62f3a-c467975dfeemr366448066b.35.1792645068984; Wed, 21 Oct 2026
+ 21:57:48 -0700 (PDT)
+Received: from 428534693058 named unknown by gmailapi.google.com with
+ HTTPREST; Thu, 22 Oct 2026 00:57:47 -0400
+Received: from 428534693058 named unknown by gmailapi.google.com with
+ HTTPREST; Thu, 22 Oct 2026 00:57:47 -0400
+From: tewaro <tewaro@theorem.dev>
+X-Mailer: git-send-email 2.54.0
+In-Reply-To: <20261022045737.67060-1-tewaro@theorem.dev>
+References: <20261022045737.67060-1-tewaro@theorem.dev>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <87jyna2vfn.fsf@redhat.com>
-X-TM-AS-GCONF: 00
-X-Proofpoint-Reinject: loops=2 maxloops=12
-X-Authority-Analysis: v=2.4 cv=X63Hu2Te c=1 sm=1 tr=0 ts=6ad9c41d cx=c_pps
- a=GFwsV6G8L6GxiO2Y/PsHdQ==:117 a=GFwsV6G8L6GxiO2Y/PsHdQ==:17
- a=kj9zAlcOel0A:10 a=660iZSQnnn4A:10 a=VkNPw1HP01LnGYTKEx00:22
- a=RnoormkPH1_aCDwRdu11:22 a=Y2IxJ9c9Rs8Kov3niI8_:22 a=ADKhsWdzJHgx8XiJNyoA:9
- a=CjuIK1q_8ugA:10
-X-Proofpoint-ORIG-GUID: QCEhbWs8OPMtbD9saUJ_vW3U3cGr3W8D
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIyMDAzMCBTYWx0ZWRfXw143HnItMb4O
- 7OGNcxPnFVjZf+e8k2EVOGnwWbpjbcDH5RT7M/5eHjG3HlSS5eDpNstWhITwTN1lhr3ODlg/HIq
- ll2AhDiAIu9VRkSfpa+f4p4ZWd79sEQU08RnEsND9VEbT9blSH1ymPHUu1fsjJNKbVSJr6mP7eP
- AQoK6jYQDN0ukHdT09rj+CeMmnujUP/IiyH/hq6LWo9geDMd7Vuuf7xX5LDORJ2QCuwLwwYaNHC
- m8TCYD3CSREGsaqxRpkHCBN/7SWgLceRvs2nEnYtyk4ZHu6any/Wgn+YUR4sGqwj65Z3dQOmL8M
- /iMULrXRRi7PJx0d9hx5lXwnDcnlaaIaxk42uiHlA7o+nZ1rLK5zigR9TZsvW8Gd8u54XKJ2e6F
- yNa5PUXelcGGAfHJSGzFw4gtylS6xeD2sqTwaQcQljMt36snUbvmVPTZ+aqqT/F/11joLDpyCMG
- Ii6xOG4/pC7H0+5BmJg==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIyMDAzMCBTYWx0ZWRfX+87XnpKDLPs5
- rHfovf8py/Kmi1p/q/uX0s9x9mWLlt4RCyLMCfcDQQWIh4kp2+thJwIOleHrWGR1Gab2g9mh58n
- 3ph8it9DuklXDmmiGoc+CgQVGEWrWBQ=
-X-Proofpoint-GUID: WVfB32zkZukzbotBpl-hNWl-mqdj3IVO
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-10-22_03,2026-10-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 phishscore=0 bulkscore=0 adultscore=0 malwarescore=0
- clxscore=1011 spamscore=0 impostorscore=0 lowpriorityscore=0 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610220030
-Received-SPF: pass client-ip=148.163.158.5; envelope-from=gra@linux.ibm.com;
- helo=mx0b-001b2d01.pphosted.com
-X-Spam_score_int: -26
-X-Spam_score: -2.7
-X-Spam_bar: --
-X-Spam_report: (-2.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_LOW=-0.7,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Date: Thu, 22 Oct 2026 00:57:47 -0400
+X-Gm-Features: AclHuK9Q6bzEfzTCX8xnUe3RGN8yhRG6E1lHVF1o5FSe0Y_wTZckkQ7DvnaWOQw
+Message-ID: <CAEq2Q90Lvd4PMtxhj=2B-v5BiOdgBsgo2q5sFV-B4UcRFdEHkA@mail.gmail.com>
+Subject: [PATCH 1/2] target/riscv: do not raise the no-PMP-rule access fault
+ from mret
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, disclosures@theorem.dev, tewaro <tewaro@tewaro.org>,
+ tewaro <tewaro@theorem.dev>, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Chao Liu <chao.liu@processmission.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2a00:1450:4864:20::631;
+ envelope-from=tewaro@theorem.dev; helo=mail-ej1-x631.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-Mailman-Approved-At: Thu, 22 Oct 2026 09:32:31 -0400
 X-BeenThere: qemu-riscv@nongnu.org
@@ -149,36 +122,109 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-3.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_PASS,SPF_PASS autolearn=no autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-21.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,
+	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Oct 22 26, Cornelia Huck wrote:
-> What would make the most sense logically to me is to use
-> qemu-system-aarch64 to launch an aarch64 machine and qemu-system-s390x
-> to launch an s390x machine (at least from an user perspective.) That
-> said, I haven't looked at this series yet, but it does sound like a good
-> idea in general regardless of how we plan to launch different arch guests.
+Consider a CPU that implements PMP but has no PMP entry configured.
+If M-mode executes mret with MPP set to S or U, QEMU raises an
+instruction access fault on the mret. The trap is taken in M-mode,
+with mepc pointing at the mret, mtval zero and MPP equal to M.
 
-Just to clarify -- nobody has any intention of using anything other than
-qemu-system-aarch64 to start aarch64 guests, especially not
-qemu-system-s390x. What we are doing for arm64-on-s390 KVM is enable KVM
-accel for qemu-system-aarch64 on s390x hosts, alongside the KVM accel
-for qemu-system-s390x.
+The spec says the mret succeeds and the first S/U-mode fetch fails
+[1][2]. The trap should therefore be taken from S/U-mode, with mepc
+and mtval equal to the mret target [3][4] and MPP equal to S/U [5].
 
-that being said, if it were ever the case that qemu-system-s390x and
-qemu-system-aarch64 were the same binary (which is what I understand
-qemu is moving towards) then this would require that single binary to
-understand both s390x and aarch64 flavours of KVM, warts and all.
+The early check in check_ret_from_m_mode() is what moves the fault
+onto the mret. Without it, the fetch at the target misses the TB and
+TLB caches, which are keyed by privilege level, and reaches
+pmp_hart_has_privs_default() through riscv_cpu_tlb_fill(). That
+function already denies S/U-mode when no rule matches. Nothing
+executes between the privilege switch and that fetch, so no other
+behaviour changes.
 
-There is another technical challenge in all of this, which is how the
-qemu build can consume the arm64 KVM uapi when built on and for an s390x
-host. I'm hoping that this will also be a lot easier to do if the
-surface of the KVM architecture details is contained behind a KVMCpuOps
-structure.
+As it stands, S/U-mode can never be entered on such a configuration,
+and a handler that steps mepc past the apparent fault resumes in
+M-mode at the S-mode entry point (GitLab issue #2074).
 
-Best,
--A
+The check was added by commit d102f19a208 alongside the pmp.c change
+that makes the no-rule path M-mode-only, and I believe it was already
+redundant then. Building v6.0.0 and v7.2.0 with only the check removed
+confirms the fetch faults as expected. Later commits (0fbb5d2d3c9,
+4c48aad1, 3157a553, 16aa7771) changed its gating, cause and location
+but not the normal path. Remove it and the now unused prev_priv
+parameter.
+
+The bug was found and debugged with the help of Claude (Anthropic),
+used as a research and debugging aid; the patch was written by hand.
+
+[1] Privileged ISA v1.12, 3.7.1 "Physical Memory Protection CSRs",
+    Priority and Matching Logic
+[2] Privileged ISA v1.12, 3.3.2 "Trap-Return Instructions"
+[3] Privileged ISA v1.12, 3.1.14 "Machine Exception Program Counter"
+[4] Privileged ISA v1.12, 3.1.16 "Machine Trap Value Register"
+[5] Privileged ISA v1.12, 3.1.6.1 "Privilege and Global
+    Interrupt-Enable Stack in mstatus register"
+
+Privileged ISA v1.12 (ratified, 2021-12-03):
+https://github.com/riscv/riscv-isa-manual/releases/tag/Priv-v1.12
+Current source, same wording:
+https://github.com/riscv/riscv-isa-manual/blob/4877e41a/src/priv/machine.adoc
+
+Fixes: d102f19a2085 ("target/riscv/pmp: Raise exception if no PMP
+entry is configured")
+Resolves: https://gitlab.com/qemu-project/qemu/-/issues/2074
+Signed-off-by: tewaro <tewaro@theorem.dev>
+---
+ target/riscv/tcg/op_helper.c | 10 ++--------
+ 1 file changed, 2 insertions(+), 8 deletions(-)
+
+diff --git a/target/riscv/tcg/op_helper.c b/target/riscv/tcg/op_helper.c
+index b67c7718db..a355d28f4b 100644
+--- a/target/riscv/tcg/op_helper.c
++++ b/target/riscv/tcg/op_helper.c
+@@ -423,7 +423,6 @@ target_ulong helper_sret(CPURISCVState *env)
+ }
+
+ static void check_ret_from_m_mode(CPURISCVState *env, target_ulong retpc,
+-                                  privilege_mode_t prev_priv,
+                                   uintptr_t ra)
+ {
+     if (!(env->priv >= PRV_M)) {
+@@ -435,11 +434,6 @@ static void check_ret_from_m_mode(CPURISCVState
+*env, target_ulong retpc,
+                                     env->misa_ext) && (retpc & 0x3)) {
+         riscv_raise_exception(env, RISCV_EXCP_INST_ADDR_MIS, ra);
+     }
+-
+-    if (riscv_cpu_cfg(env)->pmp &&
+-        !pmp_get_num_rules(env) && (prev_priv != PRV_M)) {
+-        riscv_raise_exception(env, RISCV_EXCP_INST_ACCESS_FAULT, ra);
+-    }
+ }
+ static target_ulong ssdbltrp_mxret(CPURISCVState *env, target_ulong mstatus,
+                                    privilege_mode_t prev_priv,
+@@ -465,7 +459,7 @@ target_ulong helper_mret(CPURISCVState *env)
+     privilege_mode_t prev_priv = get_field(mstatus, MSTATUS_MPP);
+     uintptr_t ra = GETPC();
+
+-    check_ret_from_m_mode(env, retpc, prev_priv, ra);
++    check_ret_from_m_mode(env, retpc, ra);
+
+     bool prev_virt = !!(get_field(env->mstatus, MSTATUS_MPV) &&
+                      (prev_priv != PRV_M));
+@@ -515,7 +509,7 @@ target_ulong helper_mnret(CPURISCVState *env)
+     bool prev_virt;
+     uintptr_t ra = GETPC();
+
+-    check_ret_from_m_mode(env, retpc, prev_priv, ra);
++    check_ret_from_m_mode(env, retpc, ra);
+
+     prev_virt = !!(get_field(env->mnstatus, MNSTATUS_MNPV) &&
+                 (prev_priv != PRV_M));
+-- 
+2.47.3
 
