@@ -1,58 +1,59 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F3432606A319
-	for <qemu-riscv@archiver.kernel.org>; Thu, 22 Oct 2026 11:01:58 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 18900606A31A
+	for <qemu-riscv@archiver.kernel.org>; Thu, 22 Oct 2026 11:01:59 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=hEQF+Cxc
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=iQaYgT+3
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xJqTv-0003Bz-9b; Thu, 22 Oct 2026 06:57:11 -0400
+	id 1xJqUD-0003Nw-J1; Thu, 22 Oct 2026 06:57:29 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1xJqTu-0003Ar-B1
- for qemu-riscv@nongnu.org; Thu, 22 Oct 2026 06:57:10 -0400
+ id 1xJqUC-0003MZ-7T
+ for qemu-riscv@nongnu.org; Thu, 22 Oct 2026 06:57:28 -0400
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <marcandre.lureau@redhat.com>)
- id 1xJqTs-0001UI-RK
- for qemu-riscv@nongnu.org; Thu, 22 Oct 2026 06:57:10 -0400
+ id 1xJqUA-0001Xb-Cn
+ for qemu-riscv@nongnu.org; Thu, 22 Oct 2026 06:57:27 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1792666628;
+ s=mimecast20190719; t=1792666645;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=jNzV6BaWVFq1+/O7YYwswt0SKLovTH7A3DMoCwLjQZ4=;
- b=hEQF+Cxc0+n1pele5sfwIs3ngoL4KVRHgX6hq6OMtF8ZFIisj7V2myDLys7Xr4aNQHCpE7
- 7hUB4/PQ6ncqE6r8wE3vt0Ie68/2R9wKrzo8QlXGAv8OGKLzSrWod/cbFeK9vr/Lv9vIZO
- X1EyqPxhpCOdPo6RJXoiHw6N4TtvgHw=
-Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ bh=8uG857Yw/J+VrWeb5Of7T05X4Hrj8YcyeL79sHPpMTE=;
+ b=iQaYgT+3kNyjDfC24FJtgbUxjm3fNIsbOWYXTP6e1xZ0Kco4+6d2q3eAcsH5W/RncIULLm
+ CJaz8mIf8dwgWcvCF7+vWvJZPLEtHIDuTLOsY1S5XlT7czXlzArUx78Jzkb4Ix1LGtbxsz
+ hZUp9Yzfubg6p41OWWP4UtBOI6auIUE=
+Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-59-0lVj2VoDOqSAg839h2mVxw-1; Thu,
- 22 Oct 2026 10:57:00 +0000
-X-MC-Unique: 0lVj2VoDOqSAg839h2mVxw-1
-X-Mimecast-MFC-AGG-ID: 0lVj2VoDOqSAg839h2mVxw_1792666617
-Received: from mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.95])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-655-p5aL_ZWBOXatI-4064rRUA-1; Thu,
+ 22 Oct 2026 10:57:15 +0000
+X-MC-Unique: p5aL_ZWBOXatI-4064rRUA-1
+X-Mimecast-MFC-AGG-ID: p5aL_ZWBOXatI-4064rRUA_1792666632
+Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id EE7F11955F24; Thu, 22 Oct 2026 10:56:56 +0000 (UTC)
+ by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id DBBA11800624; Thu, 22 Oct 2026 10:57:11 +0000 (UTC)
 Received: from localhost (headnet04.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.116])
- by mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 9894546C; Thu, 22 Oct 2026 10:56:55 +0000 (UTC)
+ by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id C5D741803A4D; Thu, 22 Oct 2026 10:57:10 +0000 (UTC)
 From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-Date: Thu, 22 Oct 2026 14:56:30 +0400
-Subject: [PATCH v3 03/18] gdbstub: set feature->base_reg for dynamic features
+Date: Thu, 22 Oct 2026 14:56:34 +0400
+Subject: [PATCH v3 07/18] target/i386: fix FPU tag word in GDB register
+ read
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Message-Id: <20261022-query-reg-v3-3-7ad902b9a7cf@redhat.com>
+Message-Id: <20261022-query-reg-v3-7-7ad902b9a7cf@redhat.com>
 References: <20261022-query-reg-v3-0-7ad902b9a7cf@redhat.com>
 In-Reply-To: <20261022-query-reg-v3-0-7ad902b9a7cf@redhat.com>
 To: qemu-devel@nongnu.org
@@ -75,39 +76,40 @@ Cc: "Dr. David Alan Gilbert" <dave@treblig.org>,
  Artyom Tarasenko <atar4qemu@gmail.com>, Helge Deller <deller@gmx.de>, 
  Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, 
  Warner Losh <imp@bsdimp.com>, Kyle Evans <kevans@freebsd.org>, 
- =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1091;
+ =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>, 
+ Richard Henderson <richard.henderson@linaro.org>
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4405;
  i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=KuwHJGXyije9XLDEqL0xZ9kuS8FmeuZ9mxj6XXAIhZs=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq2evl28uSxci1PaCBSIw47bA24Vcvlpn1p2N5E
- 8vWHyVaBEOJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatnr5QAKCRDa6OEJdZac
- 5cxRD/9coUpLre38IRaw8b5iPk054If8CTCdOQm/ZpNkWjjzEti1TWzQ6IW662Ratz9MvqpYb+8
- VuNslNygDFmquGrxCrKDn+AH1Bd6g7ZQ4wh9vMZudoP2dCGxf/dhFyIsyvHVBjNntulEpUcpqY1
- X0giyN9AjnKl6kjF6j5ZQe95E9kthKqGty3clm4SMOND/DAVkBS4qfY0U6KQeB6ihJi0qtprM+q
- AqHHQjwzifKGbcWFxNVwA0XNfg1L47gdgIT01cwWFKZVoS3XUKzATgJnPB0twE+kuU0LmSiucty
- R/odHak3P4VZeCGmWFcCcj26BvSZ8RGl6CCmrKFqRdVttUg38g346uJgODjCt/vv91EzTkCtLAt
- gK0yOntuLtKM7vEeB29feLU7NBjhz0L2GjlajqEaCNzV/4AsZevlVjhCx4FGnXPHbJLQkRVLIPl
- I5Luwy5JjSxB8cTsep+M/6BPIx1y42g7HTZGFsOEggUIXbCEpOKq9hDvBTTl7HqKITDsMAnjyTx
- 9JcUd6OJ+KIfFNqXKSk8TGZAyd0znn6wFHV2O4eHpRl0C6D6D+UQmKCj7vkrSUxw/9B3OJCcQ/t
- nNh+50xnlOjiEj46kdasjfrFmJunlRRD3j8UMnSvw3CJdm3jS2t5Tim4zRNj2m6HMSXl0vwZSdm
- gYty5AFMeQfHdAg==
+ bh=IM3+x1/S1cR2SCx9Nb2e/xZ/oIp/3k/WeRpDw1xL/D4=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq2evmlRDbgQuQFK16hGbI5Cs9c7c27oI7aalcF
+ rQfokkslcaJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatnr5gAKCRDa6OEJdZac
+ 5URbD/4hYlwK8ldW/oR3pvlyrijk3UR+OsnQAUt8DK8xofVF2MY15mQM432xftamXqx00l2Mx36
+ 9ro9blPGzkTT84IId5qWjoitYTxel9HqLEFpkoFmWChxsVORzP96fGP4sNOoRjBbAdm7YaYIyFl
+ hs8JJI4dJqi7GCAT+q258Gaf4LVu6sT+s0GwF3Z1+nvCQ0Tyc9u6gAxHQ9lea0HIb3sEmeOeydi
+ BWLrUulE6CFjoB0ytSUK7otxjSNAbCIvYhofTRUfsOBQ5E0LZFoX0dXxCtnjO2vMJWBUIK7jNPB
+ 21ruDYtbkAnM0POg9taRFJ7Db4Zsd1NWOd32yi3IL64+wl8dOX05pf+7CIdcFakjp+GrWF/Y+Zc
+ FyDVQ/UDiLZPvdAtRm35caX+uafgSrRjg1EAigH6Sa5BLup4AsnLe2VGFxh/NSnA3LuK68owyPm
+ A46/YMHGwpsCm7pruJPXt58hZYGO8a2Qo8sAxdliPd0W0ZnkDwQM7E0T3HPcU4DAPTXHnYZQrCU
+ drkKo8HWlg4aOtsF8KNnbi1tGp91RGNk/GXRVQpbLQeQevcz/FdbmNSqD7y2y1EQxxTDkBgGXnh
+ W87CBbmyrMHQKbf+gpd6LVQmNKmoKBKFa2hXC18I+eP5y7M8Gf/FuIZUW2jEcrj+LEO8KZuuwIu
+ IHfTKFdNtr1YRYA==
 X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
  fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
-X-Scanned-By: MIMEDefang 3.6 on 10.30.177.95
-X-Mimecast-MFC-PROC-ID: FhErGenSDaS9CGjOs_yJcst4s5ATrxD1fkBNLhCYvzs_1792666617
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
+X-Mimecast-MFC-PROC-ID: vR5K02j4QWa9MSELy7bx9suF9e0BUQ6T1l-HTHB0GZQ_1792666632
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=170.10.129.124;
  envelope-from=marcandre.lureau@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: 2
-X-Spam_score: 0.2
-X-Spam_bar: /
-X-Spam_report: (0.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.339,
+X-Spam_score_int: -30
+X-Spam_score: -3.1
+X-Spam_bar: ---
+X-Spam_report: (-3.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.339,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_SBL_CSS=3.335, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -122,36 +124,132 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS autolearn=unavailable autolearn_force=no version=4.0.1
+	SPF_PASS autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-gdb_feature_builder_end() never propagated builder->base_reg into
-feature->base_reg, leaving it at 0 for all dynamically-built features.
-This made the trace log at gdb_get_register_list() report an incorrect
-base_reg for dynamic features.
+The GDB stub was returning a hardcoded 0 for the x87 FPU tag word
+register (ftag). Factor out cpu_compute_fptag() helper. Simplify a
+little bit the code by dropping unnecessary CPU_LDoubleU
+reinterpretation, building the value 0..7, avoiding signed-shifting.
 
-GDBRegisterState::base_reg was correctly set, so this doesn't fix
-an actual issue.
-
-Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
 Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 ---
- gdbstub/gdbstub.c | 1 +
- 1 file changed, 1 insertion(+)
+ target/i386/cpu.c            | 28 ++++++++++++++++++++++++++++
+ target/i386/cpu.h            |  9 +++++++++
+ target/i386/gdbstub.c        |  2 +-
+ target/i386/tcg/fpu_helper.c | 24 ++----------------------
+ 4 files changed, 40 insertions(+), 23 deletions(-)
 
-diff --git a/gdbstub/gdbstub.c b/gdbstub/gdbstub.c
-index 0ce871d74929..912e31b66744 100644
---- a/gdbstub/gdbstub.c
-+++ b/gdbstub/gdbstub.c
-@@ -476,6 +476,7 @@ void gdb_feature_builder_end(const GDBFeatureBuilder *builder)
+diff --git a/target/i386/cpu.c b/target/i386/cpu.c
+index 37732b65e408..2f5ea4e51715 100644
+--- a/target/i386/cpu.c
++++ b/target/i386/cpu.c
+@@ -9372,6 +9372,34 @@ static bool cpuid_has_xsave_feature(CPUX86State *env, const ExtSaveArea *esa)
+     return false;
+ }
  
-     g_ptr_array_free(builder->xml, TRUE);
++uint16_t cpu_compute_fptag(CPUX86State *env)
++{
++    uint16_t fptag = 0;
++
++    for (int i = 0; i < 8; i++) {
++        unsigned tag;
++
++        if (env->fptags[i]) {
++            tag = 3; /* empty */
++        } else {
++            floatx80 f = env->fpregs[i].d;
++            uint16_t exponent = f.high & 0x7fff;
++            uint64_t mantissa = f.low;
++
++            if (exponent == 0 && mantissa == 0) {
++                tag = 1; /* zero */
++            } else if (exponent == 0 || exponent == 0x7fff ||
++                       !(mantissa & (1ULL << 63))) {
++                tag = 2; /* NaNs, infinity, denormal */
++            } else {
++                tag = 0; /* valid */
++            }
++        }
++        fptag |= tag << (2 * i);
++    }
++    return fptag;
++}
++
+ static void x86_cpu_reset_hold(Object *obj, ResetType type)
+ {
+     CPUState *cs = CPU(obj);
+diff --git a/target/i386/cpu.h b/target/i386/cpu.h
+index e7a88074c071..116e28a59701 100644
+--- a/target/i386/cpu.h
++++ b/target/i386/cpu.h
+@@ -2989,6 +2989,15 @@ static inline void cpu_set_mxcsr(CPUX86State *env, uint32_t mxcsr)
+     }
+ }
  
-+    builder->feature->base_reg = builder->base_reg;
-     builder->feature->num_regs = builder->regs->len;
-     builder->feature->regs = (void *)g_ptr_array_free(builder->regs, FALSE);
-     trace_gdbxml_feature_builder_header(builder->feature->name,
++/**
++ * cpu_compute_fptag - Compute the full 16-bit x87 FPU tag word.
++ *
++ * Reconstructs the 16-bit tag word from the fpregs and fptags arrays.
++ * Each of the 8 physical registers gets a 2-bit tag in bits [2*i+1 : 2*i]:
++ *   0 = valid, 1 = zero, 2 = special (NaN/Inf/denormal), 3 = empty.
++ */
++uint16_t cpu_compute_fptag(CPUX86State *env);
++
+ static inline void cpu_set_fpuc(CPUX86State *env, uint16_t fpuc)
+ {
+      env->fpuc = fpuc;
+diff --git a/target/i386/gdbstub.c b/target/i386/gdbstub.c
+index c0cde26d978c..420ce845eeae 100644
+--- a/target/i386/gdbstub.c
++++ b/target/i386/gdbstub.c
+@@ -186,7 +186,7 @@ int x86_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
+             return gdb_get_reg32(mem_buf, (env->fpus & ~0x3800) |
+                                           (env->fpstt & 0x7) << 11);
+         case IDX_FP_REGS + 10:
+-            return gdb_get_reg32(mem_buf, 0); /* ftag */
++            return gdb_get_reg32(mem_buf, cpu_compute_fptag(env));
+         case IDX_FP_REGS + 11:
+             return gdb_get_reg32(mem_buf, 0); /* fiseg */
+         case IDX_FP_REGS + 12:
+diff --git a/target/i386/tcg/fpu_helper.c b/target/i386/tcg/fpu_helper.c
+index 4bbac996326e..81ae3d8f3d0f 100644
+--- a/target/i386/tcg/fpu_helper.c
++++ b/target/i386/tcg/fpu_helper.c
+@@ -2459,30 +2459,10 @@ void helper_fxam_ST0(CPUX86State *env)
+ static void do_fstenv(X86Access *ac, target_ulong ptr, int data32)
+ {
+     CPUX86State *env = ac->env;
+-    int fpus, fptag, exp, i;
+-    uint64_t mant;
+-    CPU_LDoubleU tmp;
++    int fpus, fptag;
+ 
+     fpus = (env->fpus & ~0x3800) | (env->fpstt & 0x7) << 11;
+-    fptag = 0;
+-    for (i = 7; i >= 0; i--) {
+-        fptag <<= 2;
+-        if (env->fptags[i]) {
+-            fptag |= 3;
+-        } else {
+-            tmp.d = env->fpregs[i].d;
+-            exp = EXPD(tmp);
+-            mant = MANTD(tmp);
+-            if (exp == 0 && mant == 0) {
+-                /* zero */
+-                fptag |= 1;
+-            } else if (exp == 0 || exp == MAXEXPD
+-                       || (mant & (1LL << 63)) == 0) {
+-                /* NaNs, infinity, denormal */
+-                fptag |= 2;
+-            }
+-        }
+-    }
++    fptag = cpu_compute_fptag(env);
+     if (data32) {
+         /* 32 bit */
+         access_stl(ac, ptr, env->fpuc);
 
 -- 
 2.56.0.116.g6de20f6092dc
