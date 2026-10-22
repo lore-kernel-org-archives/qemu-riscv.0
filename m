@@ -1,137 +1,105 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 47EA8606A31A
-	for <qemu-riscv@archiver.kernel.org>; Thu, 22 Oct 2026 18:20:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E0CE3606A319
+	for <qemu-riscv@archiver.kernel.org>; Thu, 22 Oct 2026 19:24:44 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=GH1A8KFr;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=JNnIHZuz
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=Ob6CikDF
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xJxOb-0004iq-LN; Thu, 22 Oct 2026 14:20:09 -0400
+	id 1xJyOa-0001wX-Jk; Thu, 22 Oct 2026 15:24:12 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xJxOZ-0004dH-Nn
- for qemu-riscv@nongnu.org; Thu, 22 Oct 2026 14:20:07 -0400
-Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
+ (Exim 4.90_1) (envelope-from <tcalifano@redhat.com>)
+ id 1xJutL-0002aE-07
+ for qemu-riscv@nongnu.org; Thu, 22 Oct 2026 11:39:45 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xJxOX-0000PH-Vm
- for qemu-riscv@nongnu.org; Thu, 22 Oct 2026 14:20:07 -0400
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 69MHt2Jo359249
- for <qemu-riscv@nongnu.org>; Thu, 22 Oct 2026 18:20:03 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:date:from:message-id:mime-version
- :subject:to; s=qcppdkim1; bh=DWNS+QnaLQ/llNOq4BB3aU+o9fobtMGcO3j
- 83fkBwv8=; b=GH1A8KFrOCogN0Y033xi/2wFdt6b2rftaKsjJQ4DihqmT+idcNM
- N9RaVtkuE7aiw8foHGUD7IS+rj1LsFIGjmPNm3SN0/ThFWZITtSdHwLem1j1hOCW
- fO47hJIeQJydD1+rTTspTG1S/DZZRrrLg1vL8xSGAiYdqBEL5DnUuTT3slfY/t60
- xZO9fzbJ4ir9WeGb5oXWb2Uw14qd65YQE0vr+FKLkSwBKBolojq/zzrbWcGu0GjM
- fnNNzPQjZSA+yO4m03+9kzhVydgmD2qkl0cNDZEdBEna7i736qIssskB73T328I+
- mWQwq0l1J+wcHDIaLm2/vAQTOMH5QlNfpdQ==
-Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com
- [209.85.222.199])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hfnyw0gg5-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Thu, 22 Oct 2026 18:20:03 +0000 (GMT)
-Received: by mail-qk1-f199.google.com with SMTP id
- af79cd13be357-93ce7a85f04so14524485a.0
- for <qemu-riscv@nongnu.org>; Thu, 22 Oct 2026 11:20:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1792693203; x=1793298003; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=DWNS+QnaLQ/llNOq4BB3aU+o9fobtMGcO3j83fkBwv8=;
- b=JNnIHZuzenYYJOSyTqX6MIm0CQcXcj1eisB/dR4u5JDhMAKIFdIx8CS735KRMglP6h
- LFBlVSI/EHsU14ztaGvfK268ge2t8cOnxrpqGQJvxTsglAxf8INAl7OydvetgOWmAAA3
- i2C6tyj1WcA0qdaN/kPORmr61xJ+b278Y6j0Hwy+HQ8iY0r1KcMPnuXJyPi15xXxkvjS
- q0hHNB4aKl/oQyvfUhztEq6MhEXWn0DqzhSIj/TRlcqVuhl4ZrWRDFSnSuExd/INKwhW
- mPEi6c3F2u9p+V4RTuWJRQSZhmInnmEkSx6RvswfVSwEm3/oD5AxmMf7SB+nKgencfKe
- 8lJg==
+ (Exim 4.90_1) (envelope-from <tcalifano@redhat.com>)
+ id 1xJutJ-0000vA-1H
+ for qemu-riscv@nongnu.org; Thu, 22 Oct 2026 11:39:42 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1792683579;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=SRdDwD16FYdo7f8MRpViIOxs5O7sss2LQ1g4MZ9nNPM=;
+ b=Ob6CikDFe5gPjlRvsJbVevNcdXOMvj+m1W5lU4SvwnbEKjsXRxQr/ma71t96wl8k/eWveK
+ pk3hZBLvjG6207SRHrHs6JjEuPc1bYX5DcvRH91IJGu0EsdWY6N/bL6ruGXsLzxWGIePmm
+ 6cyWk7PuFjmIAJhb3ey1zLZz3lQPX54=
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+ [209.85.128.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-588-lhmn18FKNJa7TDpt2kCwpw-1; Thu, 22 Oct 2026 11:39:37 -0400
+X-MC-Unique: lhmn18FKNJa7TDpt2kCwpw-1
+X-Mimecast-MFC-AGG-ID: lhmn18FKNJa7TDpt2kCwpw_1792683576
+Received: by mail-wm1-f71.google.com with SMTP id
+ 5b1f17b1804b1-4a2063be13dso7938325e9.3
+ for <qemu-riscv@nongnu.org>; Thu, 22 Oct 2026 08:39:37 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792693203; x=1793298003;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=DWNS+QnaLQ/llNOq4BB3aU+o9fobtMGcO3j83fkBwv8=;
- b=bq/8w0isc/nh8XurXvZw7OBGM/BkaNWu9g/B41u8lfMuf8tmoYsZ5dyIm7ji/pzhmx
- bCm8N3BMuRReZDrJJfbHHPfdmPYcPBwzNcADPep3EAKeGaubkSz6vZCE8YTfGLdsSbGB
- CldJnxamQ0IVwbMwRUSL5rJ0CbQz/yqH7NvbV8HQGv9M4WzdICv3YcKV8WdUVHRnyc9y
- wAeHOAps4RRyobMRqPhlI3omD6lw56bd2T/UpB5iKmRfR6/eRCTX8qXCBLKbb5BT2OEa
- VY8MTPC0NeRED5VkkqZuF5OjZWq0aZCX4zZHLZmA0mPxjNDV4YwQtqukr8fN7+/h5ZDm
- rsWg==
-X-Gm-Message-State: AFq9FYIdhTzYe1PuDsHKK/pSOJ0nNQ/XWSdoOVGVNg8s8arybup1IzOQ
- Y/AA8imawNdWN9tMuZ+HHn+kpi0/ZziROPwIzrekrypCrG3EZ3S061R+lksykR2y2nsTiE9Yiwk
- ajnxeJnAT+3owtsQri0j+4M/8A/aiEE8FChC9eFJ6RQ2C1diWMSdHb73Ktg==
-X-Gm-Gg: AYBFou2yqQbc6CxCtDnpsUJWP/rOa6AoiOPhlZzRs/Q2lU/raON6XXXAEsY2NYjEPPz
- bv+6QAljBWtFppRM7ibhxYVJvTEEZPLnOzlp+J/PEtrXPVk0Szo+nSo+nB8gYBghv1+uyY2lvsO
- v+2H0Hz0m21/Ej27eDie0cteppTFSdDKzSS6y0XyILzMT7asGgClOkL+/DT1oyvjwSQHQa9Rq8D
- lZJr/aqg1eygPxnRJYaaoYJukI4ddwaCWDqCs/0BI2lZqQjMHREuZ3KgjYjQIDZBr2UrLjuwF4Q
- X/h32iIdj9T8Tyv4mdxSTmkN9HJAYxzVq9+RZGFr4ITtPgJpH6HN7hWtoKAPLjY5PrhALRuR/mI
- VuhZeB386g/qwva4dXB2wzx0uTS+2Z59mkC6cBg==
-X-Received: by 2002:a05:620a:6c09:b0:93e:5861:34df with SMTP id
- af79cd13be357-93f6f7ba4bamr51732985a.47.1792693202953; 
- Thu, 22 Oct 2026 11:20:02 -0700 (PDT)
-X-Received: by 2002:a05:620a:6c09:b0:93e:5861:34df with SMTP id
- af79cd13be357-93f6f7ba4bamr51729385a.47.1792693202478; 
- Thu, 22 Oct 2026 11:20:02 -0700 (PDT)
-Received: from QCOM-UWl2o8bcGT.qualcomm.com ([152.234.125.162])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-91c370061e7sm3617416d6.8.2026.10.22.11.20.00
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 22 Oct 2026 11:20:01 -0700 (PDT)
-From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Subject: [PATCH] include/hw/intc/riscv_imsic.h: remove unused macro
-Date: Thu, 22 Oct 2026 15:19:57 -0300
-Message-ID: <20261022181957.21760-1-daniel.barboza@oss.qualcomm.com>
-X-Mailer: git-send-email 2.43.0
+ d=1e100.net; s=20260707; t=1792683576; x=1793288376;
+ h=in-reply-to:references:from:subject:cc:to:message-id:date
+ :content-type:content-transfer-encoding:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=SRdDwD16FYdo7f8MRpViIOxs5O7sss2LQ1g4MZ9nNPM=;
+ b=r2XSwHCuB5AQGgzYFzMlxsuQ0gXIBs32vuL+24DBf1uqo9mZ1Irv8sKpyaH5jpQBjN
+ +eBDKRygR557iNynWML558dxJ+3hfwEzhLo/dg17rMT2T4+RwDSSpfW37eNc0tPB0tUx
+ ggOa7r37rUJDcLfZfwH8XAuPry0G8juOpsDjCwLKWAuXQ7MyhSERS4odJ5z6qD0unVcC
+ zQl5J/7Z9jE3hiFMMCV58txbvfGdCe5ezXeS3QL37kEONCosVb3eWxR/RhFnBMVXEyge
+ hQFPJX4BZB5AWyBdKUzaq4pVvgnlRRyLp0l4ekS2twKvxqZKbe9BmTJA8ty15x4So5wl
+ 76gw==
+X-Gm-Message-State: AFq9FYIzc3LMqShG1arITgu7zisiNz0h9U9gJLqEQoy65B69IxWgN2/1
+ uWr0UaPpZ9PvHt/YfgryuNo0+UFQcP14xSZ+roZ5yCfYp1RcLvEy6ka3KYy4UluFDdjlu5Bv5D4
+ mHZIMHG5AatmQ3k4aLsbaHNKZ+/0LYLYnGZHff8kBRjgVJ1Adczyc2qnt
+X-Gm-Gg: AYBFou07k2inWreUmm5TSYk34YXwfmdpueGXh6VsUH9TcX7SKyq80LuFae5BNwI+WDK
+ 7sA3A4O8NazQ/JIX9vw7D8fSjg2O5KFi90XRqG/Vn0CZo4UQVrdXn5u/9WNlkeg05XiAgPHfvaY
+ 1SUj7nOsO8kWwfVJMOIWEO9xwH8GzTW0+1F7XAkQrtBv/XIjADTdGxV7VGYQd3CNoDcOqPalmfq
+ FGxNnJoC0fdt3YgxaESHWCs2+ulhexYo2bQEYkWPwbgv4G6Rbqr4nITOb634ETRc7W6/67AkO1D
+ +LKqqY14rjb8eMvyfg7tUBD+65UVgx4H5qKoTmVjIU8ctlAbOq4nOhcP6KfUTQ==
+X-Received: by 2002:a05:600d:8653:20b0:4a2:5ca:767f with SMTP id
+ 5b1f17b1804b1-4a205ca7975mr40894045e9.4.1792683575953; 
+ Thu, 22 Oct 2026 08:39:35 -0700 (PDT)
+X-Received: by 2002:a05:600d:8653:20b0:4a2:5ca:767f with SMTP id
+ 5b1f17b1804b1-4a205ca7975mr40893675e9.4.1792683575553; 
+ Thu, 22 Oct 2026 08:39:35 -0700 (PDT)
+Received: from localhost ([213.175.37.14]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4a1fcd13891sm91091195e9.2.2026.10.22.08.39.33
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 22 Oct 2026 08:39:34 -0700 (PDT)
 X-Archived-By: <archiver.kernel.org>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: X_W59LGvQDvHWVLonAWqTP-BNHMTwqeq
-X-Proofpoint-ORIG-GUID: X_W59LGvQDvHWVLonAWqTP-BNHMTwqeq
-X-Authority-Analysis: v=2.4 cv=dphOmFg4 c=1 sm=1 tr=0 ts=6ada53d3 cx=c_pps
- a=HLyN3IcIa5EE8TELMZ618Q==:117 a=AgQEunjic7gIBKSbIeB6Ag==:17
- a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22 a=EUspDBNiAAAA:8
- a=Gqw6Gra3IEblmeP_dQUA:9 a=bTQJ7kPSJx9SKPbeHEYW:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIyMDA3MyBTYWx0ZWRfX6+wzngHVl+s3
- bXtb+9tSgLRSgmNF5CNvKOdWMGcOFGlX//L66S4cHX8dIZLIMQ6lahK2UbN8Bvd8hje2PJY3UzP
- 2ALII5U05O+UOwqHsd3QgaY8cHB7I08=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIyMDA3MyBTYWx0ZWRfX6tzcirHrlrwR
- FHu2mgaAgDKUg5QyU8wfe4gf1EyqdzHjI3PqlbVvVCdHA22oADRbBXZeqiFY04jmKCwRu1WsJoq
- fNLmc90HkScVxT6y0+Q3TDted7g/x9fl/EDC4nyjclOIvSOc0GF/YbROZg9e5sB7uhwPwQ02COX
- FLM7ir5rk2i8rd6Weo92K64efbKqNv5wpJ54Z2E0YdOSnwg61KchfwN4c+Xkco1J7hoZIW2SDCd
- FRJX45DBC4bs/asYYT8VTnk34GUS2O5f+n64GbFrFCBKALHi1KJK4Aab/OsBHyr8ETda1Wo6JVR
- 0YkQ5qGNnSDAqoNDUvvLPnY/ZRpi2dqycX4+TK/TS8p1UJaDtvFvCG8NZ5e5QjsBA2wU8u8uPMk
- pZmv6+rlXnCcuBm8sbY6030RXC+t7q536J3OpTY/rCtzkgyf9NRS//EMw9tWwVQMG5VOJXW/WKg
- EiUfTIdcgBFtQ2u67Fg==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-10-22_06,2026-10-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 spamscore=0 clxscore=1015 impostorscore=0 adultscore=0
- lowpriorityscore=0 priorityscore=1501 suspectscore=0 phishscore=0 bulkscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610220073
-Received-SPF: pass client-ip=205.220.180.131;
- envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
-X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Mime-Version: 1.0
+Date: Thu, 22 Oct 2026 17:39:33 +0200
+Message-Id: <DMBHAGC8CCIH.KY6YB03VCSMJ@redhat.com>
+To: "Anton Johansson" <anjo@rev.ng>, <qemu-devel@nongnu.org>
+Cc: <qemu-riscv@nongnu.org>, <palmer@dabbelt.com>,
+ <alistair.francis@wdc.com>, <daniel.barboza@oss.qualcomm.com>,
+ <liwei1518@gmail.com>, <zhiwei_liu@linux.alibaba.com>,
+ <chao.liu@processmission.com>,
+ <qemu-devel-bounces+tcalifano=redhat.com@nongnu.org>
+Subject: Re: [PATCH] target/riscv: Fix CPU state access on big-endian hosts
+From: "Tommaso Califano" <tcalifano@redhat.com>
+X-Mailer: aerc 0.22.0
+References: <20261022130657.6449-1-anjo@rev.ng>
+In-Reply-To: <20261022130657.6449-1-anjo@rev.ng>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: dYHlv2PkCOTrbUvlyyZfTs9GZt0gUiXOPlVwdhijCCo_1792683576
+X-Mimecast-Originator: redhat.com
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=tcalifano@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -30
+X-Spam_score: -3.1
+X-Spam_bar: ---
+X-Spam_report: (-3.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.339,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Thu, 22 Oct 2026 15:24:11 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -142,33 +110,114 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	SPF_PASS autolearn=unavailable autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Found while reading IMSIC code.
+On Thu Oct 22, 2026 at 3:06 PM CEST, Anton Johansson via qemu development w=
+rote:
+> mstatus and mstatus_hs are uint64_t but accessed through
+>
+>   tcg_gen_[ld|st]_tl(..., offsetof(mstatus))
+>
+> which on a big-endian host running riscv32 incorrectly accesses the
+> top 32 bits rather than the lower bits.
+>
+> Widen the operations to 64 bit so the lower bits are modified.
+>
 
-Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
----
- include/hw/intc/riscv_imsic.h | 1 -
- 1 file changed, 1 deletion(-)
+Maybe a Fixes Tag and cc to QEMU stable?
 
-diff --git a/include/hw/intc/riscv_imsic.h b/include/hw/intc/riscv_imsic.h
-index 0a1df1c2f8..c744836657 100644
---- a/include/hw/intc/riscv_imsic.h
-+++ b/include/hw/intc/riscv_imsic.h
-@@ -31,7 +31,6 @@ DECLARE_INSTANCE_CHECKER(RISCVIMSICState, RISCV_IMSIC, TYPE_RISCV_IMSIC)
- #define IMSIC_MMIO_PAGE_SZ             (1UL << IMSIC_MMIO_PAGE_SHIFT)
- #define IMSIC_MMIO_SIZE(__num_pages)   ((__num_pages) * IMSIC_MMIO_PAGE_SZ)
- 
--#define IMSIC_MMIO_HART_GUEST_MAX_BTIS 6
- #define IMSIC_MMIO_GROUP_MIN_SHIFT     24
- 
- #define IMSIC_HART_NUM_GUESTS(__guest_bits)           \
--- 
-2.43.0
+> Signed-off-by: Anton Johansson <anjo@rev.ng>
+> ---
+>  target/riscv/tcg/translate.c | 32 ++++++++++++++++----------------
+>  1 file changed, 16 insertions(+), 16 deletions(-)
+>
+> diff --git a/target/riscv/tcg/translate.c b/target/riscv/tcg/translate.c
+> index ede9c2563f..79b0f444ef 100644
+> --- a/target/riscv/tcg/translate.c
+> +++ b/target/riscv/tcg/translate.c
+> @@ -693,7 +693,7 @@ static TCGv get_address_indexed(DisasContext *ctx, in=
+t rs1, TCGv offs)
+>   */
+>  static void mark_fs_dirty(DisasContext *ctx)
+>  {
+> -    TCGv tmp;
+> +    TCGv_i64 tmp;
+> =20
+>      if (!has_ext(ctx, RVF)) {
+>          return;
+> @@ -703,15 +703,15 @@ static void mark_fs_dirty(DisasContext *ctx)
+>          /* Remember the state change for the rest of the TB. */
+>          ctx->mstatus_fs =3D EXT_STATUS_DIRTY;
+> =20
+> -        tmp =3D tcg_temp_new();
+> -        tcg_gen_ld_tl(tmp, tcg_env, offsetof(CPURISCVState, mstatus));
+> -        tcg_gen_ori_tl(tmp, tmp, MSTATUS_FS);
+> -        tcg_gen_st_tl(tmp, tcg_env, offsetof(CPURISCVState, mstatus));
+> +        tmp =3D tcg_temp_new_i64();
+> +        tcg_gen_ld_i64(tmp, tcg_env, offsetof(CPURISCVState, mstatus));
+> +        tcg_gen_ori_i64(tmp, tmp, MSTATUS_FS);
+> +        tcg_gen_st_i64(tmp, tcg_env, offsetof(CPURISCVState, mstatus));
+> =20
+>          if (ctx->virt_enabled) {
+> -            tcg_gen_ld_tl(tmp, tcg_env, offsetof(CPURISCVState, mstatus_=
+hs));
+> -            tcg_gen_ori_tl(tmp, tmp, MSTATUS_FS);
+> -            tcg_gen_st_tl(tmp, tcg_env, offsetof(CPURISCVState, mstatus_=
+hs));
+> +            tcg_gen_ld_i64(tmp, tcg_env, offsetof(CPURISCVState, mstatus=
+_hs));
+> +            tcg_gen_ori_i64(tmp, tmp, MSTATUS_FS);
+> +            tcg_gen_st_i64(tmp, tcg_env, offsetof(CPURISCVState, mstatus=
+_hs));
+>          }
+>      }
+>  }
+> @@ -726,21 +726,21 @@ static inline void mark_fs_dirty(DisasContext *ctx)=
+ { }
+>   */
+>  static void mark_vs_dirty(DisasContext *ctx)
+>  {
+> -    TCGv tmp;
+> +    TCGv_i64 tmp;
+> =20
+>      if (ctx->mstatus_vs !=3D EXT_STATUS_DIRTY) {
+>          /* Remember the state change for the rest of the TB.  */
+>          ctx->mstatus_vs =3D EXT_STATUS_DIRTY;
+> =20
+> -        tmp =3D tcg_temp_new();
+> -        tcg_ge\n_ld_tl(tmp, tcg_env, offsetof(CPURISCVState, mstatus));
+> -        tcg_gen_ori_tl(tmp, tmp, MSTATUS_VS);
+> -        tcg_gen_st_tl(tmp, tcg_env, offsetof(CPURISCVState, mstatus));
+> +        tmp =3D tcg_temp_new_i64();
+> +        tcg_gen_ld_i64(tmp, tcg_env, offsetof(CPURISCVState, mstatus));
+> +        tcg_gen_ori_i64(tmp, tmp, MSTATUS_VS);
+> +        tcg_gen_st_i64(tmp, tcg_env, offsetof(CPURISCVState, mstatus));
+> =20
+>          if (ctx->virt_enabled) {
+> -            tcg_gen_ld_tl(tmp, tcg_env, offsetof(CPURISCVState, mstatus_=
+hs));
+> -            tcg_gen_ori_tl(tmp, tmp, MSTATUS_VS);
+> -            tcg_gen_st_tl(tmp, tcg_env, offsetof(CPURISCVState, mstatus_=
+hs));
+> +            tcg_gen_ld_i64(tmp, tcg_env, offsetof(CPURISCVState, mstatus=
+_hs));
+> +            tcg_gen_ori_i64(tmp, tmp, MSTATUS_VS);
+> +            tcg_gen_st_i64(tmp, tcg_env, offsetof(CPURISCVState, mstatus=
+_hs));
+>          }
+>      }
+>  }
+
+Regarding the code I am not an expert, but this fix LGTM.
+
+Reviewed-by: Tommaso Califano <tcalifano@redhat.com>
+
+Regards,
+Tommaso
 
 
