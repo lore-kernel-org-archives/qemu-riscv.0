@@ -1,33 +1,33 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4DDAE606A319
-	for <qemu-riscv@archiver.kernel.org>; Fri, 23 Oct 2026 02:14:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B1E2B606A31F
+	for <qemu-riscv@archiver.kernel.org>; Fri, 23 Oct 2026 02:15:08 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xK4nL-0002wr-IK; Thu, 22 Oct 2026 22:14:11 -0400
+	id 1xK4nL-0002wc-EW; Thu, 22 Oct 2026 22:14:11 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <wang.yechao255@zte.com.cn>)
- id 1xK4nG-0002tc-Lb; Thu, 22 Oct 2026 22:14:06 -0400
-Received: from mxhk.zte.com.cn ([160.30.148.35])
+ id 1xK4nG-0002tU-CU; Thu, 22 Oct 2026 22:14:06 -0400
+Received: from mxhk.zte.com.cn ([160.30.148.34])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <wang.yechao255@zte.com.cn>)
- id 1xK4nE-0000CA-6g; Thu, 22 Oct 2026 22:14:06 -0400
+ id 1xK4nE-0000CG-6B; Thu, 22 Oct 2026 22:14:06 -0400
 Received: from mse-fl1.zte.com.cn (unknown [10.5.228.132])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mxhk.zte.com.cn (FangMail) with ESMTPS id 4j9mm36Zq8z8XrrZ;
- Fri, 23 Oct 2026 10:13:55 +0800 (CST)
-Received: from szxl2zmapp05.zte.com.cn ([10.1.32.37])
- by mse-fl1.zte.com.cn with SMTP id 69N2Djd5060381;
- Fri, 23 Oct 2026 10:13:45 +0800 (+08)
+ by mxhk.zte.com.cn (FangMail) with ESMTPS id 4j9mm50z9zz5B0qc;
+ Fri, 23 Oct 2026 10:13:57 +0800 (CST)
+Received: from szxlzmapp03.zte.com.cn ([10.5.231.207])
+ by mse-fl1.zte.com.cn with SMTP id 69N2Dq7G060442;
+ Fri, 23 Oct 2026 10:13:52 +0800 (+08)
  (envelope-from wang.yechao255@zte.com.cn)
 Received: from localhost.localdomain (unknown [10.234.74.162])
- by smtp (Zmail) with SMTP; Fri, 23 Oct 2026 10:13:46 +0800
-X-Zmail-TransId: 3e816adac2d9026-69312
+ by smtp (Zmail) with SMTP; Fri, 23 Oct 2026 10:13:53 +0800
+X-Zmail-TransId: 3e816adac2e1026-69356
 X-Zmail-LocalSMTP: 1
 X-ZMAIL-USEORIGINALEMLTOOUTBOUND: 1
 X-Zmail-RealSender: wang.yechao255@zte.com.cn
@@ -41,23 +41,25 @@ To: Palmer Dabbelt <palmer@dabbelt.com>,
 Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
  Wang Yechao <wang.yechao255@zte.com.cn>,
  Xuemei Liu <liu.xuemei1@zte.com.cn>
-Subject: [PATCH v4 0/4] riscv: AIA: Add in-kernel irqchips save and restore
- function support
-Date: Fri, 23 Oct 2026 10:12:26 +0800
-Message-ID: <20261023021237.486091-1-wang.yechao255@zte.com.cn>
+Subject: [PATCH v4 4/4] target/riscv: Only save vmstate_debug when TCG is
+ enabled
+Date: Fri, 23 Oct 2026 10:12:30 +0800
+Message-ID: <20261023021237.486091-5-wang.yechao255@zte.com.cn>
 X-Mailer: git-send-email 2.41.0
+In-Reply-To: <20261023021237.486091-1-wang.yechao255@zte.com.cn>
+References: <20261023021237.486091-1-wang.yechao255@zte.com.cn>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 8bit
-X-MAIL: mse-fl1.zte.com.cn 69N2Djd5060381
+X-MAIL: mse-fl1.zte.com.cn 69N2Dq7G060442
 X-TLS: YES
 X-ENVELOPE-SENDER: wang.yechao255@zte.com.cn
-X-SOURCE-IP: 10.5.228.132 unknown Fri, 23 Oct 2026 10:13:55 +0800
+X-SOURCE-IP: 10.5.228.132 unknown Fri, 23 Oct 2026 10:13:57 +0800
 X-CLEAN: YES
 X-Fangmail-Anti-Spam-Filtered: true
-X-Fangmail-MID-QID: 6ADAC2E3.001/4j9mm36Zq8z8XrrZ
-Received-SPF: pass client-ip=160.30.148.35;
+X-Fangmail-MID-QID: 6ADAC2E5.000/4j9mm50z9zz5B0qc
+Received-SPF: pass client-ip=160.30.148.34;
  envelope-from=wang.yechao255@zte.com.cn; helo=mxhk.zte.com.cn
 X-Spam_score_int: -18
 X-Spam_score: -1.9
@@ -76,57 +78,48 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-11.8 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT autolearn=unavailable
-	autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT
+	autolearn=unavailable autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-This series adds support for in-kernel AIA irqchip save and restore
-on RISC-V.
+Commit d45b9bc65515 ("target/riscv: move TCG only files to tcg subdir")
+moved the TCG-only files into the tcg/ subdirectory, so env->tdataX is
+now only allocated and valid when TCG is enabled.
 
-The original author is on an extended leave, so I am picking up her
-v3 series and carrying it forward with a few fixes. Compared to v3[1],
-this version mainly includes:
+However, cfg.debug is always true in riscv_cpu_properties, so
+debug_needed() unconditionally returned true and the debug vmstate
+subsection was always considered needed. On --disable-tcg builds the
+corresponding fields are uninitialized, and attempting to save them
+triggers an assertion failure in vmstate_save_state_v:
 
-- Fix build issues in the TCG-only configuration.
-- Rename several functions to make them more readable.
-- Fix the missing section footer problem.
-- Add patch 04, which fixes an assertion failure during save on --disable-tcg builds.
-- rebased on riscv-to-apply.next
+  qemu-system-riscv64: ../migration/vmstate.c:737:
+  vmstate_save_state_v: Assertion `first_elem || !n_elems || !size' failed.
 
-[1]. https://lore.kernel.org/qemu-devel/20260602142930300qtONy7P2DkDM40BX_T3_A@zte.com.cn/
+Fix this by making debug_needed() also require tcg_enabled(), so the
+debug subsection is only saved when the TCG-only state actually exists.
+
+Fixes: d45b9bc65515 ("target/riscv: move TCG only files to tcg subdir")
+Signed-off-by: Wang Yechao <wang.yechao255@zte.com.cn>
+---
+ target/riscv/machine.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+index 0de06e9588..c5f0261ba7 100644
+--- a/target/riscv/machine.c
++++ b/target/riscv/machine.c
+@@ -324,7 +324,7 @@ static bool debug_needed(void *opaque)
+ {
+     RISCVCPU *cpu = opaque;
  
-Changes in v3:
-- Removed unnecessary changes in bitops.h
-- Link to v2: https://lore.kernel.org/qemu-devel/20260305171729291ZzfxmqZ48P2Tbz9TGCtST@zte.com.cn/
-
-Changes in v2:
-- Added the BITS_TO_U64S macro
-- Added the nr_eix field and dynamically allocated the eie/eip arrays
-- Replaced the CONFIG_32BIT macro with is_32bit boolean flag
-- Link to v1: https://lore.kernel.org/qemu-devel/20260227180104794YvW9Rb2I_kAGzUruZL11Q@zte.com.cn/
-
-Wang Yechao (1):
-  target/riscv: Only save vmstate_debug when TCG is enabled
-
-Xuemei Liu (3):
-  target/riscv/kvm: create kvm_riscv_aia_access_reg
-  hw/intc/riscv_aplic: Add in-kernel aplic save and restore function
-  hw/intc/imsic: Add in-kernel imsic save and restore function
-
- hw/intc/riscv_aplic.c         | 201 +++++++++++++++++++++++++++++-----
- hw/intc/riscv_imsic.c         | 180 +++++++++++++++++++++++++++---
- include/hw/intc/riscv_aplic.h |   4 +
- include/hw/intc/riscv_imsic.h |   3 +
- include/qemu/bitops.h         |   1 +
- migration/vmstate-types.c     |   1 -
- target/riscv/kvm/kvm-cpu.c    |   7 +-
- target/riscv/kvm/kvm_riscv.h  |   1 +
- target/riscv/machine.c        |   2 +-
- 9 files changed, 357 insertions(+), 43 deletions(-)
-
+-    return cpu->cfg.debug || cpu->cfg.ext_sdtrig;
++    return tcg_enabled() && (cpu->cfg.debug || cpu->cfg.ext_sdtrig);
+ }
+ 
+ static bool sdext_needed(void *opaque)
 -- 
 2.47.3
 
