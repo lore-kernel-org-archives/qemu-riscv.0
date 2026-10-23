@@ -1,66 +1,68 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3B8C2606A31E
-	for <qemu-riscv@archiver.kernel.org>; Fri, 23 Oct 2026 09:28:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0F5A2606A31A
+	for <qemu-riscv@archiver.kernel.org>; Fri, 23 Oct 2026 09:28:57 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=cdac.in header.i=@cdac.in header.a=rsa-sha256 header.s=default header.b=ALmU6bHz
+	dkim=pass (1024-bit key, unprotected) header.d=cdac.in header.i=@cdac.in header.a=rsa-sha256 header.s=default header.b=ffcHIcZk
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xKBZh-00067s-Ll; Fri, 23 Oct 2026 05:28:33 -0400
+	id 1xKBZg-00067h-JA; Fri, 23 Oct 2026 05:28:33 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <karthika.b@cdac.in>)
- id 1xKBZe-00067J-JE; Fri, 23 Oct 2026 05:28:30 -0400
+ id 1xKBZe-00067K-Mh; Fri, 23 Oct 2026 05:28:30 -0400
 Received: from mailsender.cdac.in ([196.1.113.117]
  helo=mailsender-core1.pune.cdac.in)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <karthika.b@cdac.in>)
- id 1xKBZc-0007Ai-9p; Fri, 23 Oct 2026 05:28:30 -0400
+ id 1xKBZc-0007AW-Fc; Fri, 23 Oct 2026 05:28:30 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=cdac.in; s=default;
- t=1792747680; bh=lDVQygXZb1+mrLgfmuphoinfHsVuLXSIbHBHjHxtUmg=;
+ t=1792747678; bh=6p1ZPvxgt6Pe8BYrvR1sD+sWOwQK1H7YfUsziQ2iPoE=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=ALmU6bHzRsf8KBWfSP6/rzMiMGc6lj5CUhCvXzGgbjcYTrjkCN9lewSmaV2edXl6b
- 2L24WjlKSoILR7jkfRPcs7so1whcfOXHRnSMrmdd7MRbGGRt+Ynkfqm05aTkS9wp3y
- gdmRRnNsWxm7E2oFt1FbgVAd8iakaXoo8K0YwOsE=
-Received: from mscr-int2.pune.cdac.in (mscr-int2.pune.cdac.in [10.208.193.12])
+ b=ffcHIcZkCgqzXZW4zZm/grhmHQ4vhkD+A4HvgLyfJD8MCUvap6nndUDNotBkNOMtK
+ T8bac3kcCbdaumPFNOkevaNHbuYxO8bovYV/mNIzEiBoY8hqALZbNTvtcISIYrq+ci
+ CNC3z84v6FugcxaOvxjAhAN/1h3pBH/FMcmsVHBQ=
+Received: from mscr-int.pune.cdac.in (mscr-int.pune.cdac.in [10.208.193.2])
  by mailsender.cdac.in (8.15.2/8.15.2/Debian-22ubuntu3) with ESMTP id
- 69N9RxaU1831933; Fri, 23 Oct 2026 14:57:59 +0530
+ 69N9Rug91831907; Fri, 23 Oct 2026 14:57:56 +0530
 Received: from mailgw-cip.pune.cdac.in (mscr-haproxy.pune.cdac.in
  [10.208.193.46])
- by mscr-int2.pune.cdac.in (Postfix) with ESMTP id 625F51000AA86;
- Fri, 23 Oct 2026 14:57:49 +0530 (IST)
+ by mscr-int.pune.cdac.in (Postfix) with ESMTP id 72E7E100565B5;
+ Fri, 23 Oct 2026 14:57:46 +0530 (IST)
 X-Auth: karthika.b@cdac.in
 Received: from hdg164.tvm.cdac.in (hd_hdg164.tvm.cdac.in [10.176.18.107])
  (Authenticated sender: karthika.b@cdac.in)
- by mailgw-cip.pune.cdac.in (Postfix) with ESMTPSA id DE79114E2709;
- Fri, 23 Oct 2026 14:57:48 +0530 (IST)
+ by mailgw-cip.pune.cdac.in (Postfix) with ESMTPSA id EF57014E2709;
+ Fri, 23 Oct 2026 14:57:45 +0530 (IST)
 From: Karthika B <karthika.b@cdac.in>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair@alistair23.me, sreenadh@cdac.in,
  raokk@cdac.in, Karthika B <karthika.b@cdac.in>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@mailo.com>,
- Peter Maydell <peter.maydell@linaro.org>,
- Markus Armbruster <armbru@redhat.com>,
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
- Thomas Huth <thuth@redhat.com>
-Subject: [PATCH 3/3] MAINTAINERS: Update VEGA status to Supported
-Date: Fri, 23 Oct 2026 14:57:27 +0530
-Message-ID: <20261023092727.41197-3-karthika.b@cdac.in>
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Chao Liu <chao.liu.zevorn@gmail.com>
+Subject: [PATCH 1/3] target/riscv: Fix VEGA32/VEGA64 PMP inheritance from
+ vendor CPU class
+Date: Fri, 23 Oct 2026 14:57:25 +0530
+Message-ID: <20261023092727.41197-1-karthika.b@cdac.in>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20261023092727.41197-1-karthika.b@cdac.in>
+In-Reply-To: <2071795723.301996.1792747114406@webmail2.cdac.in>
 References: <2071795723.301996.1792747114406@webmail2.cdac.in>
- <20261023092727.41197-1-karthika.b@cdac.in>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-CDAC-PUNE-MailScanner-Information: Please contact the ISP for more
  information
-X-CDAC-PUNE-MailScanner-ID: 625F51000AA86.AFB79
+X-CDAC-PUNE-MailScanner-ID: 72E7E100565B5.A170D
 X-CDAC-PUNE-MailScanner: Found to be clean
 X-CDAC-PUNE-MailScanner-SpamCheck: not spam, SpamAssassin (not cached,
- score=-1, required 6, ALL_TRUSTED -1.00)
+ score=-2.9, required 6, autolearn=not spam, ALL_TRUSTED -1.00,
+ BAYES_00 -1.90)
 X-CDAC-PUNE-MailScanner-From: karthika.b@cdac.in
 Received-SPF: pass client-ip=196.1.113.117; envelope-from=karthika.b@cdac.in;
  helo=mailsender-core1.pune.cdac.in
@@ -90,22 +92,47 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 
 Signed-off-by: Karthika B <karthika.b@cdac.in>
 ---
- MAINTAINERS | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ target/riscv/cpu.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index ece538b4f9..4267c398f6 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1789,7 +1789,7 @@ F: include/hw/riscv/xiangshan_kmh.h
- VEGA
- M: Karthika B <karthika.b@cdac.in>
- L: qemu-riscv@nongnu.org
--S: Odd Fixes
-+S: Supported
- F: hw/riscv/vega.c
- F: hw/intc/vega_plic.c
- F: hw/intc/vega_aclint.c
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 7b96b7b670..adfa0581c3 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -2989,7 +2989,7 @@ static const TypeInfo riscv_cpu_type_infos[] = {
+ 
+ 
+ #if defined(TARGET_RISCV32)
+-    DEFINE_RISCV_CPU(TYPE_RISCV_CPU_VEGA32, TYPE_RISCV_CPU_SIFIVE_U,
++    DEFINE_RISCV_CPU(TYPE_RISCV_CPU_VEGA32, TYPE_RISCV_CPU,
+         .misa_mxl_max = MXL_RV32,
+         .misa_ext = RVI | RVM | RVA | RVS | RVU,
+         .priv_spec = PRIV_VERSION_LATEST,
+@@ -2997,6 +2997,7 @@ static const TypeInfo riscv_cpu_type_infos[] = {
+         .cfg.max_satp_mode = VM_1_10_SV32,
+         .cfg.ext_zicsr = true,
+         .cfg.ext_zifencei = true,
++        .cfg.mmu = true,
+         .cfg.pmp = false,
+     ),
+ #endif
+@@ -3046,7 +3047,7 @@ static const TypeInfo riscv_cpu_type_infos[] = {
+         .misa_mxl_max = MXL_RV64,
+     ),
+ 
+-    DEFINE_RISCV_CPU(TYPE_RISCV_CPU_VEGA64, TYPE_RISCV_CPU_SIFIVE_U,
++    DEFINE_RISCV_CPU(TYPE_RISCV_CPU_VEGA64, TYPE_RISCV_CPU,
+         .misa_mxl_max = MXL_RV64,
+         .misa_ext = RVI | RVM | RVA | RVS | RVU,
+         .priv_spec = PRIV_VERSION_LATEST,
+@@ -3054,6 +3055,7 @@ static const TypeInfo riscv_cpu_type_infos[] = {
+         .cfg.max_satp_mode = VM_1_10_SV39,
+         .cfg.ext_zicsr = true,
+         .cfg.ext_zifencei = true,
++        .cfg.mmu = true,
+         .cfg.pmp = false,
+     ),
+ 
 -- 
 2.43.0
 
