@@ -1,99 +1,98 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D84AE606A31A
-	for <qemu-riscv@archiver.kernel.org>; Fri, 23 Oct 2026 18:41:52 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C8903606A31A
+	for <qemu-riscv@archiver.kernel.org>; Fri, 23 Oct 2026 19:12:38 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=Z3rmBCi+;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=OlNvgSPv
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=NM0eKsZH;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=A3mpIygu
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xKKCv-0002S5-Gw; Fri, 23 Oct 2026 14:41:41 -0400
+	id 1xKKgb-0001N6-MP; Fri, 23 Oct 2026 15:12:17 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xKKCT-0002IG-Ic
- for qemu-riscv@nongnu.org; Fri, 23 Oct 2026 14:41:10 -0400
-Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
+ id 1xKKgY-0001MV-Bi
+ for qemu-riscv@nongnu.org; Fri, 23 Oct 2026 15:12:14 -0400
+Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xKKCR-0007Oy-2S
- for qemu-riscv@nongnu.org; Fri, 23 Oct 2026 14:41:09 -0400
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+ id 1xKKgW-0001aq-Iy
+ for qemu-riscv@nongnu.org; Fri, 23 Oct 2026 15:12:14 -0400
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 69NIZPAV3603468
- for <qemu-riscv@nongnu.org>; Fri, 23 Oct 2026 18:41:05 GMT
+ 69NIZmEP3584820
+ for <qemu-riscv@nongnu.org>; Fri, 23 Oct 2026 19:12:10 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- 1a/dfM+7136CDra7CBk6zTi7NeKPREAoeMOA3X0DHw0=; b=Z3rmBCi+04vcbxW2
- lwPy5ql2BS2iAGZvjzbe4EMiR3UVNHE8jxAg3xCh4WtLDPXoD2V6FxnY/FC0YgRG
- 8kJTn8Az0OiaX837c9qIZhZVXV/GVOlfKv31MDqRKyo3n7N3A1a8A7pkm1EYPukh
- bdxmUqUl4BVCF6xuMS0UBMMmyMGiNBLJs7G2mVcEOTuObAWQtdXw2SA6/LacOnmH
- YaHRQjPjYxLg52ZVYF/xkDIlP4cXu7VlydKXVi2g03PWACheOT0ev5J8RRZuYDH4
- kiIfltmR/f4/sMv6aYXJSQmSqRQPHPRIiYV3WFhQcSEoHCmXLkeHsjALHtnM4GML
- 0tm26w==
+ EgX5xS0Uwf9Zi74wj+cU1i9EJvzf5UHbErqmdcMLpUw=; b=NM0eKsZHLrBu4bpl
+ whWuMPtSluhnkbdxKUJeWRfWFsgX2QZwTqIqLwN5BLTQmidyENyx49FwLXNc1kgW
+ /ONtK86bb0L+1F+QOuk/bWZB5aZSzWbcKszIeNqICjHY77TJVA6P9BQwWG1P+Srg
+ z5lUnJOf/TqjlX6lpLQ3oKhtLxTSK6mMpFPheU7uKDEdJKWcfGgu5/BOzfcKWB8o
+ 44vDg/1XSp88ifUne55OwSSlqTkzUnuxwQtyHjAEb5CqwDquW3FEyXnQnqHN2Y7n
+ HFyyzhRUZpMqhQ/IU1myScXNEwPiZeir4z7OdVhm0eq0Rn4mx+2mjXaD8SX0qUaO
+ A0tzfg==
 Received: from mail-qv1-f71.google.com (mail-qv1-f71.google.com
  [209.85.219.71])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hgcs7g2nd-1
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hg7cn1hm7-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Fri, 23 Oct 2026 18:41:05 +0000 (GMT)
+ for <qemu-riscv@nongnu.org>; Fri, 23 Oct 2026 19:12:10 +0000 (GMT)
 Received: by mail-qv1-f71.google.com with SMTP id
- 6a1803df08f44-91256a7b7b3so23002926d6.2
- for <qemu-riscv@nongnu.org>; Fri, 23 Oct 2026 11:41:04 -0700 (PDT)
+ 6a1803df08f44-91bc57d4d11so30840236d6.1
+ for <qemu-riscv@nongnu.org>; Fri, 23 Oct 2026 12:12:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1792780864; x=1793385664; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1792782730; x=1793387530; darn=nongnu.org;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=1a/dfM+7136CDra7CBk6zTi7NeKPREAoeMOA3X0DHw0=;
- b=OlNvgSPvfMKUSIAdZKC5ItTJbkAuQZXozniWdsbw9KqtnVR/4lvULbV0RXNXww8qx/
- vW0V/CW92b5et7Kf2OgabgpGiqakZxVCF5BMiq9n+nVvMFNG7xBxVDOxB5bPi6xY0LXY
- q6hqycPXud7BfcG0pMLW/WmSkuRgfPucqs+W0jd4GrcG5KAS/E+r5jozReq5WP6jfUvi
- T4qI1BRW8AwtYJ3o06hGFaUjYa9ncT2ewQdA6HCv72DzPU/qNovbyqGedDGKlAJFDvIc
- dNwCXaWeq+3S1uF7twWfwGui3vnmkBF4XJ8UTs2LRFo2VwJ+unWT3yJGeiI0SDgvyGWV
- bi6A==
+ bh=EgX5xS0Uwf9Zi74wj+cU1i9EJvzf5UHbErqmdcMLpUw=;
+ b=A3mpIyguEJX8SoWJxAMNNqUfambw/bBqUsjCvp1g74dyczg7xKN6LXHJ/U+0eHs22u
+ rhDxZk9qf4AOkL4ppl939m9PdCaPlQTyKCOXFTGBZRe2fqLqtWz4trzxALn7q9AeoA1k
+ hr6FJWALJNjbJSCmuOs57zOfgwGAoyVEiBE+7rlUFsIwosdjl4wuuU6L3OnSZEa5yVI9
+ ylahO7UYf74gu4xxYKOmyUck5xpmwg7yw0OT5sn9V/Tkb7R7eYEvLQh3apjf4sMxHI8u
+ 7XrhVo7q9c055WOGasd5OMu9p75W4zncTAGXWiJ9Ltbx5Ayce9ZFYb8QQwGlLqATzMzq
+ xnHg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792780864; x=1793385664;
+ d=1e100.net; s=20260707; t=1792782730; x=1793387530;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=1a/dfM+7136CDra7CBk6zTi7NeKPREAoeMOA3X0DHw0=;
- b=AlLNhbhVOGF8vQDadW/61bNorRv0BSPgkN8zbAqJwMKMb1m9mCBkSSfJgaYqSJQ0La
- TR+vVVgfDGxxwptAPiIVvtif3HLFJoPTy8VU4r94YBL11akulhy/NefhWWMKcshzzB1b
- WJqy0+OoFd9fhvpOCzoH74th2QYoUGlDbmAx9lKguAypJrPk+E9exi74ecMDv+gDt8RK
- YZp6ytp9LeTbauCFYr+5xRR2nNwmv7L3CnR8bDoSbmENOlGO2yrma3uBpnutWtQmCx4U
- 7HIDhU9J1j9tW8LZAcVxQLCOcFjFHdFd4K7hp5XCzzxpWbCfo8M2kK6xRx8Hwg573O1/
- uX9A==
-X-Gm-Message-State: AFq9FYJphB2MdFHNHNhBCXq1SFWQBxK65r6FOgZywm/JF5f73ahTPjoN
- L1NwuR9Y01YtBRMFDDQCTojhWbZPJwp+wJDqiSJ7uw26b1OYcqUOl/yE0+XjtuIPOSn30lb+Ikz
- 9ofi5xE7amohTI7TnM8ey50QJGr55sCEJ28YQjSw15ZzruLgqgA2YlwD6DA==
-X-Gm-Gg: AYBFou2XHNQEbSTrK4XoVNtPAAI32RCk754MrfZmkNF8cx1gaiiLXHsH49R+c1HeAFM
- vojuzCd1Qy2FeymxBqkc6mWt5QAiPQHkBN3VQPriFguczpF3hM2DoTVLkxGk/8Cwng3x6YCX7dU
- BYlNK/q1pgfIN63q37qWIfGRB1uQVfq9ZFmfA4ltTBHKWXKEAWomnTwEbn5JvhbGLYjU3iXHf0Q
- 6jacCGnjNj6Z0CTaU2yLmq7gxJGC+TcQ6NSaaNXRyuy2PuAA/xlnPaocC52g6qVztBJoh00qJ0y
- HACDMOVdR+F4InEPjuGH13VqdY5I+iDIi2y5/VGLFODhfRGS3UjFVSkxk75BhiRefJJWFeElRoA
- /sw3RXnV37EyT+dFa7p3XPOBKb6dHoMLNomiV
-X-Received: by 2002:a05:620a:2603:b0:93f:2463:f78f with SMTP id
- af79cd13be357-93f6f898d18mr581680785a.62.1792780864068; 
- Fri, 23 Oct 2026 11:41:04 -0700 (PDT)
-X-Received: by 2002:a05:620a:2603:b0:93f:2463:f78f with SMTP id
- af79cd13be357-93f6f898d18mr581678185a.62.1792780863599; 
- Fri, 23 Oct 2026 11:41:03 -0700 (PDT)
+ bh=EgX5xS0Uwf9Zi74wj+cU1i9EJvzf5UHbErqmdcMLpUw=;
+ b=oGJe9fUTLmAq9F7OP6FmxPlOAGYCxVG0HhehUQ9yawSTyckCB0U8YDMMHo1L4+CPGI
+ 6TNEI0/t3wDF4RyFI7ZZ0xSv2bN4YzmRCe2G+lQcLhQVF8SR2r0Any1naVUnv/N612lC
+ t84IFJaYBBwbP/JhASH4cini37OJwSQr9sxM+0sR+X6rMwmlWb/Qoa6Fh631GHBee+4/
+ i8OI0L9B+0oRQy07gNma48h0Og6urt74dQra+V9fm/Fjb3Dx/not0nmzJMGurRvaa7Bf
+ 9zAwCNbl9RacEh5r+zB6dQpvFzQYqDK11nDrLLAlqVxP7F0YJYIvq8tYVanwcvbjTFYA
+ Ytpw==
+X-Gm-Message-State: AFq9FYJsBFUs78dcRzYxz/JvBEdnL4Xqxt6oQMrnKU3osX/WqUI3egTq
+ b6JkGFyHYHzRyKKlLt5tM8wmOk+Z87JkH1S9ot0IUOjzrK0MEXqNw3Uj3/bfrgsRtTJ3PKLtYmv
+ tM9Lm0iBGyYFe8465Lj8/09CBrUTJOhrrkw1e0WDtIH4xRYflcvhpbqmaUA==
+X-Gm-Gg: AYBFou0od9Dodt7XTclPixZERrZiRIwETy98E/NA4EzdxKo19uDk9mxJHQvPTpMsNHv
+ YRpnpEWQVgxcvL+J7voqGMUNOE4tNNmhglMNrunF57ufHR0tWg4nOhLWERPi2/rWvJfP1gR/Ckj
+ 1byA+o9vbwaP1nfDksGGVtQUthD2NirRj5+F7fXJpJnDj7ibrxyVHdjPwyIptkEqaph74mfjW1h
+ 6voZj14MQbqKCTxyxGvB6zv7ZCT7SAItYC1WjR6Ah9fRCMgkCTPrZJoXDu8TslCNpIBQsEMZ8WJ
+ 2nQ1YZ7szlKQSRODgzf3a0xRLeB00/9HW2jgbhqkSljvaElgRzn7fBjz07sB0ad6A69eGvDkJIP
+ gOf4TRzZkXtvxrAXZW2qx+oPIoWtWOHTBt4UC
+X-Received: by 2002:a05:6214:da5:b0:91b:90a2:df1f with SMTP id
+ 6a1803df08f44-91c3aa06c2bmr47221896d6.49.1792782729890; 
+ Fri, 23 Oct 2026 12:12:09 -0700 (PDT)
+X-Received: by 2002:a05:6214:da5:b0:91b:90a2:df1f with SMTP id
+ 6a1803df08f44-91c3aa06c2bmr47221496d6.49.1792782729333; 
+ Fri, 23 Oct 2026 12:12:09 -0700 (PDT)
 Received: from [192.168.68.104] ([152.234.125.162])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-9404722f49bsm86016085a.13.2026.10.23.11.41.01
+ 6a1803df08f44-91c47a7cd7esm2521466d6.2.2026.10.23.12.12.07
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 23 Oct 2026 11:41:03 -0700 (PDT)
-Message-ID: <32fc55cb-bdf2-4407-8309-6d52757a210f@oss.qualcomm.com>
-Date: Fri, 23 Oct 2026 15:41:00 -0300
+ Fri, 23 Oct 2026 12:12:08 -0700 (PDT)
+Message-ID: <fa0fb912-d470-42b5-b029-b3b8680dc8fe@oss.qualcomm.com>
+Date: Fri, 23 Oct 2026 16:12:05 -0300
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 2/4] hw/intc/riscv_aplic: Add in-kernel aplic save and
- restore function
+Subject: Re: [PATCH v4 1/4] target/riscv/kvm: create kvm_riscv_aia_access_reg
 To: Wang Yechao <wang.yechao255@zte.com.cn>,
  Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
@@ -102,42 +101,42 @@ To: Wang Yechao <wang.yechao255@zte.com.cn>,
 Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
  Xuemei Liu <liu.xuemei1@zte.com.cn>
 References: <20261023021237.486091-1-wang.yechao255@zte.com.cn>
- <20261023021237.486091-3-wang.yechao255@zte.com.cn>
+ <20261023021237.486091-2-wang.yechao255@zte.com.cn>
 From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Content-Language: en-US
-In-Reply-To: <20261023021237.486091-3-wang.yechao255@zte.com.cn>
+In-Reply-To: <20261023021237.486091-2-wang.yechao255@zte.com.cn>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIzMDA3MyBTYWx0ZWRfXwHoJQGXQukKV
- SJ+3P69bvOzXMXqyvOBk+wgLgYop5bEudDfzVkcJPaD/++/S0AwbDwvkUFwOOAy5ARkgYt52gcm
- 0qTV5yjlrrfAG3I3LAiXzR4rab6fEOg=
-X-Authority-Analysis: v=2.4 cv=XJCl2ghE c=1 sm=1 tr=0 ts=6adbaa41 cx=c_pps
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIzMDA3NSBTYWx0ZWRfX7o2VcaLt+J9+
+ qQWmgGFyWijtJ+y7KFj013EzgeCJMJpboUguJrOwI26efA/ktcZlrTJ+L3ujlpBjbVIuwXlbZgj
+ 1wYSHGEvfjHGjFqVqPfftQLbq0mNJRWyqrL9QI0X6uh3LqmzpmyGar/5ondpEaOKvtfAur58R61
+ 8Y1HnQuHpNIiK9dilGcsKnUYMo9OLnohpe4oqHxbFTu0K1HGTOSbXbonUo9ZopiL9wLfuYLr577
+ G9ot47z2ICfeOpjXKtDDZZ55BMH7e+kXNLHBneMP+Gzppu5fsyVD7jAwxGOGHHXTMilQKV4fTzL
+ LoUBzmC3N2DFofheqXi8gky65sCVzP2uYvo08EDiMKQbWm/+/a9bf/ZdyZf2dyuqqkfiKm0fLrZ
+ 7GwMF5SnL2TOaYqry5SPE8//KWdFB/P34MZjODvU0iyaNh3MqJ2JIv7IcanDsgR6zLdJF0ltoMv
+ gsze4NX2+UqC/ns3oXw==
+X-Proofpoint-GUID: 3yVrT7pl1hK-wUAMPHXjuJwFBQAqb1mV
+X-Authority-Analysis: v=2.4 cv=a9mlZkSF c=1 sm=1 tr=0 ts=6adbb18a cx=c_pps
  a=UgVkIMxJMSkC9lv97toC5g==:117 a=AgQEunjic7gIBKSbIeB6Ag==:17
  a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
- a=1RTuLK3dAAAA:8 a=EUspDBNiAAAA:8 a=tvxrRNcjlJDut60I9ZoA:9 a=QEXdDO2ut3YA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
+ a=1RTuLK3dAAAA:8 a=EUspDBNiAAAA:8 a=MIYIJ5hYJWVnXa0tc0AA:9 a=QEXdDO2ut3YA:10
  a=1HOtulTD9v-eNWfpl4qZ:22 a=kRpfLKi8w9umh8uBmg1i:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIzMDA3MyBTYWx0ZWRfX20I+tYcUyJYo
- ZepGwDu9OMLJKUx31VY9UR8AYd1txRdt2rpBymFv2NFYr0gTMsNAfDQkZyOwBe/6jyQrZNydfQp
- Tb2hzcDkPUYnpJBh488+SyBYfDnOGCFZ0rc8uQx/WBWlzsFe7sMwb05Ct+Ed5l4N05ztDX9KBpv
- LNRQ5RzXxQPQAwJeCjaTDISkFGs8yaJKlqftwKpAgafj36xj6EhGL8HgCFs3VDjRqAGRjluq5Pj
- /pP2v06elwh0ohNr8t5kbZJ8Jk3xtl4pGg67ltBiooFwvYGm6AEWP2WLnw9Q4EwIiEZg3md60a1
- CBThIepb/g1ph20xUTQqTlxu31LEzpA7O6UY8IptiGqnyHexjd+5wL/ynUtDsNX2qq8CZMa2T+I
- 4qA0AH9nqbI06sC5liIvW3uk3/aFtw1Fqj1/hAVmlWDwqKAniwUQI/bGNlt0SvE4imTeTZ6yHHb
- LKSkCh8V/S5ncubU/jQ==
-X-Proofpoint-GUID: NYvjcZ4GyBuIaEzc2wPKNJfdbk4fLGt4
-X-Proofpoint-ORIG-GUID: NYvjcZ4GyBuIaEzc2wPKNJfdbk4fLGt4
+X-Proofpoint-ORIG-GUID: 3yVrT7pl1hK-wUAMPHXjuJwFBQAqb1mV
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIzMDA3NSBTYWx0ZWRfXxA+HVs6JZA5E
+ tzSfmDDYezwK4S0kNjOQ1ze1F3PjxkdXCStzKbnqEcPr+6zjGclHpktsr1R4vy71MUBIhfIyw6q
+ Dh6sjcimVirjvRbcSJKm1hDbC7fkgyg=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-10-23_05,2026-10-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 malwarescore=0 adultscore=0 priorityscore=1501
- lowpriorityscore=0 phishscore=0 bulkscore=0 clxscore=1015 spamscore=0
- impostorscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ malwarescore=0 suspectscore=0 phishscore=0 bulkscore=0 adultscore=0
+ spamscore=0 lowpriorityscore=0 impostorscore=0 clxscore=1015
+ priorityscore=1501 classifier=typeunknown authscore=0 authtc= authcc=
  route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610190000
- definitions=main-2610230073
-Received-SPF: pass client-ip=205.220.168.131;
- envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
+ definitions=main-2610230075
+Received-SPF: pass client-ip=205.220.180.131;
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
 X-Spam_score_int: -27
 X-Spam_score: -2.8
 X-Spam_bar: --
@@ -169,8 +168,8 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 On 10/22/2026 11:12 PM, Wang Yechao wrote:
 > From: Xuemei Liu <liu.xuemei1@zte.com.cn>
 > 
-> Add save and restore function if riscv_use_emulated_aplic return
-> false, it is to get and set APLIC irqchip state from KVM kernel.
+> Create common function kvm_riscv_aia_access_reg to access APLIC
+> and IMSIC regs
 > 
 > Signed-off-by: Xuemei Liu <liu.xuemei1@zte.com.cn>
 > Signed-off-by: Wang Yechao <wang.yechao255@zte.com.cn>
@@ -178,277 +177,52 @@ On 10/22/2026 11:12 PM, Wang Yechao wrote:
 
 Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 
->   hw/intc/riscv_aplic.c         | 201 +++++++++++++++++++++++++++++-----
->   include/hw/intc/riscv_aplic.h |   4 +
->   2 files changed, 179 insertions(+), 26 deletions(-)
+>   target/riscv/kvm/kvm-cpu.c   | 7 ++++++-
+>   target/riscv/kvm/kvm_riscv.h | 1 +
+>   2 files changed, 7 insertions(+), 1 deletion(-)
 > 
-> diff --git a/hw/intc/riscv_aplic.c b/hw/intc/riscv_aplic.c
-> index 03a0852b8b..a3d209ca23 100644
-> --- a/hw/intc/riscv_aplic.c
-> +++ b/hw/intc/riscv_aplic.c
-> @@ -979,9 +979,7 @@ static void riscv_aplic_realize(DeviceState *dev, Error **errp)
->           }
+> diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
+> index c085b22b23..3ed94f7586 100644
+> --- a/target/riscv/kvm/kvm-cpu.c
+> +++ b/target/riscv/kvm/kvm-cpu.c
+> @@ -58,6 +58,7 @@ void riscv_kvm_aplic_request(void *opaque, int irq, int level)
 >   
->           aplic->bitfield_words = (aplic->num_irqs + 31) >> 5;
-> -        aplic->sourcecfg = g_new0(uint32_t, aplic->num_irqs);
->           aplic->state = g_new0(uint32_t, aplic->num_irqs);
-> -        aplic->target = g_new0(uint32_t, aplic->num_irqs);
->           aplic->idelivery = g_new0(uint32_t, aplic->num_harts);
->           aplic->iforce = g_new0(uint32_t, aplic->num_harts);
->           aplic->ithreshold = g_new0(uint32_t, aplic->num_harts);
-> @@ -993,8 +991,16 @@ static void riscv_aplic_realize(DeviceState *dev, Error **errp)
->           if (kvm_enabled()) {
->               aplic->kvm_splitmode = true;
->           }
-> +    } else {
-> +        aplic->nr_words = BITS_TO_U32S(aplic->num_irqs);
-> +        aplic->setip = g_new0(uint32_t, aplic->nr_words);
-> +        aplic->clrip = g_new0(uint32_t, aplic->nr_words);
-> +        aplic->setie = g_new0(uint32_t, aplic->nr_words);
->       }
+>   static bool cap_has_mp_state;
+>   static bool mp_state_reset;
+> +static int aia_fd = -1;
 >   
-> +    aplic->sourcecfg = g_new0(uint32_t, aplic->num_irqs);
-> +    aplic->target = g_new0(uint32_t, aplic->num_irqs);
-> +
->       /*
->        * Only root APLICs have hardware IRQ lines. All non-root APLICs
->        * have IRQ lines delegated by their parent APLIC.
-> @@ -1020,47 +1026,190 @@ static const Property riscv_aplic_properties[] = {
->       DEFINE_PROP_BOOL("mmode", RISCVAPLICState, mmode, 0),
->   };
->   
-> -static bool riscv_aplic_state_needed(void *opaque)
-> +static bool riscv_emulated_aplic_state_needed(void *opaque)
->   {
->       RISCVAPLICState *aplic = opaque;
->   
->       return riscv_use_emulated_aplic(aplic->msimode);
+>   #define KVM_RISCV_REG_ID_U32(type, idx) (KVM_REG_RISCV | KVM_REG_SIZE_U32 | \
+>                                            type | idx)
+> @@ -1924,13 +1925,17 @@ void kvm_arch_accel_class_init(ObjectClass *oc)
+>                                       "auto");
 >   }
 >   
-> +static const VMStateDescription vmstate_emulated_aplic_state = {
-> +    .name = "riscv_aplic/emulated_aplic_state",
-> +    .version_id = 1,
-> +    .minimum_version_id = 1,
-> +    .needed = riscv_emulated_aplic_state_needed,
-> +    .fields = (const VMStateField[]) {
-> +        VMSTATE_VARRAY_UINT32(state, RISCVAPLICState,
-> +                              num_irqs, 0,
-> +                              vmstate_info_uint32, uint32_t),
-> +        VMSTATE_UINT32(mmsicfgaddr, RISCVAPLICState),
-> +        VMSTATE_UINT32(mmsicfgaddrH, RISCVAPLICState),
-> +        VMSTATE_UINT32(smsicfgaddr, RISCVAPLICState),
-> +        VMSTATE_UINT32(smsicfgaddrH, RISCVAPLICState),
-> +        VMSTATE_UINT32(kvm_msicfgaddr, RISCVAPLICState),
-> +        VMSTATE_UINT32(kvm_msicfgaddrH, RISCVAPLICState),
-> +        VMSTATE_VARRAY_UINT32(idelivery, RISCVAPLICState,
-> +                              num_harts, 0,
-> +                              vmstate_info_uint32, uint32_t),
-> +        VMSTATE_VARRAY_UINT32(iforce, RISCVAPLICState,
-> +                              num_harts, 0,
-> +                              vmstate_info_uint32, uint32_t),
-> +        VMSTATE_VARRAY_UINT32(ithreshold, RISCVAPLICState,
-> +                              num_harts, 0,
-> +                              vmstate_info_uint32, uint32_t),
-> +        VMSTATE_END_OF_LIST()
-> +    }
-> +};
-> +
-> +#ifdef CONFIG_KVM
-> +static bool kvm_riscv_aplic_state_needed(void *opaque)
+> +void kvm_riscv_aia_access_reg(int group, uint64_t addr, void *val, bool write)
 > +{
-> +    RISCVAPLICState *aplic = opaque;
-> +
-> +    return !riscv_use_emulated_aplic(aplic->msimode);
+> +    kvm_device_access(aia_fd, group, addr, val, write, &error_abort);
 > +}
 > +
-> +static int kvm_riscv_aplic_state_pre_save(void *opaque)
-> +{
-> +    RISCVAPLICState *aplic = opaque;
-> +
-> +    for (uint32_t i = 0; i < aplic->nr_words; i++) {
-> +        kvm_riscv_aia_access_reg(KVM_DEV_RISCV_AIA_GRP_APLIC,
-> +                                 APLIC_SETIP_BASE + i * 4,
-> +                                 aplic->setip + i, false);
-> +        kvm_riscv_aia_access_reg(KVM_DEV_RISCV_AIA_GRP_APLIC,
-> +                                 APLIC_CLRIP_BASE + i * 4,
-> +                                 aplic->clrip + i, false);
-> +        kvm_riscv_aia_access_reg(KVM_DEV_RISCV_AIA_GRP_APLIC,
-> +                                 APLIC_SETIE_BASE + i * 4,
-> +                                 aplic->setie + i, false);
-> +    }
-> +
-> +    return 0;
-> +}
-> +
-> +static int kvm_riscv_aplic_state_post_load(void *opaque, int version_id)
-> +{
-> +    RISCVAPLICState *aplic = opaque;
-> +
-> +    for (uint32_t i = 0; i < aplic->nr_words; i++) {
-> +        kvm_riscv_aia_access_reg(KVM_DEV_RISCV_AIA_GRP_APLIC,
-> +                                 APLIC_SETIP_BASE + i * 4,
-> +                                 aplic->setip + i, true);
-> +        kvm_riscv_aia_access_reg(KVM_DEV_RISCV_AIA_GRP_APLIC,
-> +                                 APLIC_CLRIP_BASE + i * 4,
-> +                                 aplic->clrip + i, true);
-> +        kvm_riscv_aia_access_reg(KVM_DEV_RISCV_AIA_GRP_APLIC,
-> +                                 APLIC_SETIE_BASE + i * 4,
-> +                                 aplic->setie + i, true);
-> +    }
-> +
-> +    return 0;
-> +}
-> +
-> +static const VMStateDescription vmstate_kvm_aplic_state = {
-> +    .name = "riscv_aplic/kvm_aplic_state",
-> +    .version_id = 1,
-> +    .minimum_version_id = 1,
-> +    .needed = kvm_riscv_aplic_state_needed,
-> +    .pre_save = kvm_riscv_aplic_state_pre_save,
-> +    .post_load = kvm_riscv_aplic_state_post_load,
-> +    .fields = (const VMStateField[]) {
-> +            VMSTATE_VARRAY_UINT32(setip, RISCVAPLICState,
-> +                                  nr_words, 0,
-> +                                  vmstate_info_uint32, uint32_t),
-> +            VMSTATE_VARRAY_UINT32(clrip, RISCVAPLICState,
-> +                                  nr_words, 0,
-> +                                  vmstate_info_uint32, uint32_t),
-> +            VMSTATE_VARRAY_UINT32(setie, RISCVAPLICState,
-> +                                  nr_words, 0,
-> +                                  vmstate_info_uint32, uint32_t),
-> +            VMSTATE_END_OF_LIST()
-> +    }
-> +};
-> +
-> +static int riscv_aplic_pre_save(void *opaque)
-> +{
-> +    RISCVAPLICState *aplic = opaque;
-> +
-> +    if (!riscv_use_emulated_aplic(aplic->msimode)) {
-> +        kvm_riscv_aia_access_reg(KVM_DEV_RISCV_AIA_GRP_APLIC, APLIC_DOMAINCFG,
-> +                                 &aplic->domaincfg, false);
-> +        kvm_riscv_aia_access_reg(KVM_DEV_RISCV_AIA_GRP_APLIC, APLIC_GENMSI,
-> +                                 &aplic->genmsi, false);
-> +
-> +        for (uint32_t i = 1; i < aplic->num_irqs; i++) {
-> +            kvm_riscv_aia_access_reg(KVM_DEV_RISCV_AIA_GRP_APLIC,
-> +                                     APLIC_SOURCECFG_BASE + (i - 1) * 4,
-> +                                     aplic->sourcecfg + i, false);
-> +            kvm_riscv_aia_access_reg(KVM_DEV_RISCV_AIA_GRP_APLIC,
-> +                                     APLIC_TARGET_BASE + (i - 1) * 4,
-> +                                     aplic->target + i, false);
-> +        }
-> +    }
-> +
-> +    return 0;
-> +}
-> +
-> +static int riscv_aplic_post_load(void *opaque, int version_id)
-> +{
-> +    RISCVAPLICState *aplic = opaque;
-> +
-> +    if (!riscv_use_emulated_aplic(aplic->msimode)) {
-> +        kvm_riscv_aia_access_reg(KVM_DEV_RISCV_AIA_GRP_APLIC, APLIC_DOMAINCFG,
-> +                                 &aplic->domaincfg, true);
-> +        kvm_riscv_aia_access_reg(KVM_DEV_RISCV_AIA_GRP_APLIC, APLIC_GENMSI,
-> +                                 &aplic->genmsi, true);
-> +
-> +        for (uint32_t i = 1; i < aplic->num_irqs; i++) {
-> +            kvm_riscv_aia_access_reg(KVM_DEV_RISCV_AIA_GRP_APLIC,
-> +                                     APLIC_SOURCECFG_BASE + (i - 1) * 4,
-> +                                     aplic->sourcecfg + i, true);
-> +            kvm_riscv_aia_access_reg(KVM_DEV_RISCV_AIA_GRP_APLIC,
-> +                                     APLIC_TARGET_BASE + (i - 1) * 4,
-> +                                     aplic->target + i, true);
-> +        }
-> +    }
-> +
-> +    return 0;
-> +}
-> +
-> +#else
-> +static int riscv_aplic_pre_save(void *opaque)
-> +{
-> +    return 0;
-> +}
-> +
-> +static int riscv_aplic_post_load(void *opaque, int version_id)
-> +{
-> +    return 0;
-> +}
-> +#endif
-> +
->   static const VMStateDescription vmstate_riscv_aplic = {
->       .name = "riscv_aplic",
-> -    .version_id = 3,
-> -    .minimum_version_id = 3,
-> -    .needed = riscv_aplic_state_needed,
-> +    .version_id = 4,
-> +    .minimum_version_id = 4,
-> +    .pre_save = riscv_aplic_pre_save,
-> +    .post_load = riscv_aplic_post_load,
->       .fields = (const VMStateField[]) {
->               VMSTATE_UINT32(domaincfg, RISCVAPLICState),
-> -            VMSTATE_UINT32(mmsicfgaddr, RISCVAPLICState),
-> -            VMSTATE_UINT32(mmsicfgaddrH, RISCVAPLICState),
-> -            VMSTATE_UINT32(smsicfgaddr, RISCVAPLICState),
-> -            VMSTATE_UINT32(smsicfgaddrH, RISCVAPLICState),
->               VMSTATE_UINT32(genmsi, RISCVAPLICState),
-> -            VMSTATE_UINT32(kvm_msicfgaddr, RISCVAPLICState),
-> -            VMSTATE_UINT32(kvm_msicfgaddrH, RISCVAPLICState),
-> -            VMSTATE_VARRAY_UINT32(sourcecfg, RISCVAPLICState,
-> -                                  num_irqs, 0,
-> -                                  vmstate_info_uint32, uint32_t),
-> -            VMSTATE_VARRAY_UINT32(state, RISCVAPLICState,
-> +            VMSTATE_VARRAY_UINT32(sourcecfg , RISCVAPLICState,
->                                     num_irqs, 0,
->                                     vmstate_info_uint32, uint32_t),
->               VMSTATE_VARRAY_UINT32(target, RISCVAPLICState,
->                                     num_irqs, 0,
->                                     vmstate_info_uint32, uint32_t),
-> -            VMSTATE_VARRAY_UINT32(idelivery, RISCVAPLICState,
-> -                                  num_harts, 0,
-> -                                  vmstate_info_uint32, uint32_t),
-> -            VMSTATE_VARRAY_UINT32(iforce, RISCVAPLICState,
-> -                                  num_harts, 0,
-> -                                  vmstate_info_uint32, uint32_t),
-> -            VMSTATE_VARRAY_UINT32(ithreshold, RISCVAPLICState,
-> -                                  num_harts, 0,
-> -                                  vmstate_info_uint32, uint32_t),
->               VMSTATE_END_OF_LIST()
-> -        }
-> +    },
-> +    .subsections = (const VMStateDescription * const []) {
-> +        &vmstate_emulated_aplic_state,
-> +#ifdef CONFIG_KVM
-> +        &vmstate_kvm_aplic_state,
-> +#endif
-> +        NULL
-> +    }
->   };
->   
->   static void riscv_aplic_class_init(ObjectClass *klass, const void *data)
-> diff --git a/include/hw/intc/riscv_aplic.h b/include/hw/intc/riscv_aplic.h
-> index 62d2b33ade..de0fed4748 100644
-> --- a/include/hw/intc/riscv_aplic.h
-> +++ b/include/hw/intc/riscv_aplic.h
-> @@ -53,6 +53,9 @@ struct RISCVAPLICState {
->       uint32_t *idelivery;
->       uint32_t *iforce;
->       uint32_t *ithreshold;
-> +    uint32_t *setip;
-> +    uint32_t *clrip;
-> +    uint32_t *setie;
->   
->       /* topology */
->   #define QEMU_APLIC_MAX_CHILDREN        16
-> @@ -66,6 +69,7 @@ struct RISCVAPLICState {
->       uint32_t num_harts;
->       uint32_t iprio_mask;
->       uint32_t num_irqs;
-> +    uint32_t nr_words;
->       bool msimode;
->       bool mmode;
->   
+>   void kvm_riscv_aia_create(MachineState *machine, uint64_t group_shift,
+>                             uint64_t aia_irq_num, uint64_t aia_msi_num,
+>                             uint64_t aplic_base, uint64_t imsic_base,
+>                             uint64_t guest_num)
+>   {
+>       int ret, i;
+> -    int aia_fd = -1;
+>       uint64_t default_aia_mode;
+>       uint64_t socket_count = riscv_socket_count(machine);
+>       uint64_t max_hart_per_socket = 0;
+> diff --git a/target/riscv/kvm/kvm_riscv.h b/target/riscv/kvm/kvm_riscv.h
+> index aef681f0a2..8649219e0e 100644
+> --- a/target/riscv/kvm/kvm_riscv.h
+> +++ b/target/riscv/kvm/kvm_riscv.h
+> @@ -29,6 +29,7 @@ void kvm_riscv_reset_vcpu(RISCVCPU *cpu);
+>    * @level: %0 to clear the interrupt, non-zero to set it.
+>    */
+>   void kvm_riscv_set_irq(RISCVCPU *cpu, int irq, int level);
+> +void kvm_riscv_aia_access_reg(int group, uint64_t addr, void *val, bool write);
+>   void kvm_riscv_aia_create(MachineState *machine, uint64_t group_shift,
+>                             uint64_t aia_irq_num, uint64_t aia_msi_num,
+>                             uint64_t aplic_base, uint64_t imsic_base,
 
 
