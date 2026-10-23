@@ -1,173 +1,79 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AA316606A31B
-	for <qemu-riscv@archiver.kernel.org>; Fri, 23 Oct 2026 12:06:03 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E6BEF606A31A
+	for <qemu-riscv@archiver.kernel.org>; Fri, 23 Oct 2026 12:19:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=S2kPSjLf
+	dkim=pass (2048-bit key, unprotected) header.d=univ-grenoble-alpes.fr header.i=@univ-grenoble-alpes.fr header.a=rsa-sha256 header.s=2020 header.b=X6MaVnzJ
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xKE14-0000ti-GH; Fri, 23 Oct 2026 08:04:58 -0400
+	id 1xKEEf-0003zL-2Y; Fri, 23 Oct 2026 08:19:01 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mst@redhat.com>) id 1xKE12-0000sW-N5
- for qemu-riscv@nongnu.org; Fri, 23 Oct 2026 08:04:56 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ (Exim 4.90_1)
+ (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
+ id 1xKEEa-0003x0-0D; Fri, 23 Oct 2026 08:18:57 -0400
+Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mst@redhat.com>) id 1xKE0x-0000tS-NF
- for qemu-riscv@nongnu.org; Fri, 23 Oct 2026 08:04:55 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1792757090;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=ktFG9S7cIu86S66z6woz0uEJeRaYlQD7UfoTSNONZWI=;
- b=S2kPSjLfswkW3Ui3xIO+tGRdKjde7UuboyKe4nd9SiW3pwvCp+DmA+bPsGEQxQvMX+lXgm
- 51hDMNY3Sw0Ikl2ujEMg3cosUeHuTxlVRo8XrNvYPSDbRd04ZQ6qHxRItUFTQXCRx/nd9a
- 3lw1bbqGLdOu4BHQgojdUARnmCRmZzU=
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-592-yMcDYPfrPAKGkilW2gO3CQ-1; Fri, 23 Oct 2026 08:04:48 -0400
-X-MC-Unique: yMcDYPfrPAKGkilW2gO3CQ-1
-X-Mimecast-MFC-AGG-ID: yMcDYPfrPAKGkilW2gO3CQ_1792757087
-Received: by mail-wr1-f71.google.com with SMTP id
- ffacd0b85a97d-48c7fe9736eso680630f8f.0
- for <qemu-riscv@nongnu.org>; Fri, 23 Oct 2026 05:04:48 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792757087; x=1793361887;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :content-type:mime-version:references:message-id:subject:cc:to:from
- :date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=ktFG9S7cIu86S66z6woz0uEJeRaYlQD7UfoTSNONZWI=;
- b=G3OyQ4rx0AuJZwPcAo8Id/mYBvnNnVPMPNWec0Ey2oyS1DVVw9H3iZFyqbxSPQ2rta
- mdI1/lRUPEvPtu//un0/7XbSJ3GAqVfQpzYV+o4goFMIplnA61pOL6LHVgmEi+O/4Q0R
- 1NvMHTL7HldW1IrUm4Hrtjlae6vxlbi4cmRhcr977hUi14Z42TPkqRaDqT5FL3tb+CQ3
- bB8Ub28kjrI5hiJDs8Ths1jZhUOEqhYWWBEi8MtDiatwddLs6ouGERbiEEV9VcXfvR53
- 9upzgBqG+726zdoNEeV0e5GhWaPjVQ0Pz8+Eb9yFnoq1gjbYhZnZkQnBq3gyFCBTgxvV
- fbqQ==
-X-Forwarded-Encrypted: i=1;
- AKwUvBzQZAxZPkT4M3MvZeRrF6/FYB5BbxsdT1umuG7KZIe0mv1DspqQYIMQ7/ALRLn1C4qwuXYnBLwwp1pJ@nongnu.org
-X-Gm-Message-State: AFq9FYJHqLcfTrik66s8AO079zERFHx2fPiGgMuOM0n7d7gtqz+ckhRY
- sZfKHWhwFicmqG98+xqihgLpXkeJq160mOtDoDoodU8kZ8c0DdchIyaUhshxwiXfDtFdtBDEU42
- Ho97w5DxxjHUIZ0AuSiIL7MKjn4Zrn63sddEuxor3x0o8/I/PDXhdFlBn
-X-Gm-Gg: AYBFou14iSyErIyoYab/0gOchafGXoxz9EFncm8l+V6iiLSuTrpVi97zlLapY4QswAt
- mJA3/Do8WtjXeIbXAa7xq7f+L/ye7tInTtFsX7ccfxoz1TDzq4BbflbRPCPlii+l5jY1vHrv6jr
- K6rP/zL8qwp9enzNvUvUCDn5vHI5eA3sNHdmHEsBJ3dy2Y1cGtD02UlgJrp2M7IqNK+WkB115Fj
- vdj0JG/Ci5UiP6Tk1U0K7y1SiYARWRBUy/yq3G2o7PU9NyrWXPInTUSXPKsFxkYZgAZbfmaARfO
- +mTQy4zLIk8fahL5VhqoG0DiFTKekxkP3YYag6Ai+LEdhL3ZoObi2L+EjHEpbbqwIxSkNz4=
-X-Received: by 2002:a05:6000:4a0a:b0:48e:1299:663f with SMTP id
- ffacd0b85a97d-48e385b0d95mr3400749f8f.56.1792757086906; 
- Fri, 23 Oct 2026 05:04:46 -0700 (PDT)
-X-Received: by 2002:a05:6000:4a0a:b0:48e:1299:663f with SMTP id
- ffacd0b85a97d-48e385b0d95mr3400583f8f.56.1792757085931; 
- Fri, 23 Oct 2026 05:04:45 -0700 (PDT)
-Received: from redhat.com ([2a06:c701:73f6:2400:30a8:9e33:7d82:c035])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48e37edce4fsm5022761f8f.6.2026.10.23.05.04.38
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 23 Oct 2026 05:04:45 -0700 (PDT)
-Date: Fri, 23 Oct 2026 08:04:36 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: =?iso-8859-1?Q?Marc-Andr=E9?= Lureau <marcandre.lureau@redhat.com>
-Cc: Daniel =?iso-8859-1?Q?P=2E_Berrang=E9?= <berrange@redhat.com>,
- qemu-devel@nongnu.org, Markus Armbruster <armbru@redhat.com>,
- Michael Roth <michael.roth@amd.com>, John Snow <jsnow@redhat.com>,
- Peter Maydell <peter.maydell@linaro.org>,
- Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
- Paolo Bonzini <pbonzini@redhat.com>,
- Kostiantyn Kostiuk <kkostiuk@redhat.com>, Eric Blake <eblake@redhat.com>,
- David Hildenbrand <david@kernel.org>, Igor Mammedov <imammedo@redhat.com>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Jason Wang <jasowangio@gmail.com>,
- Marcelo Tosatti <mtosatti@redhat.com>, kvm@vger.kernel.org,
- Alberto Garcia <berto@igalia.com>, Kevin Wolf <kwolf@redhat.com>,
- Hanna Reitz <hreitz@redhat.com>,
- Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@oss.qualcomm.com>,
- Zhao Liu <zhao1.liu@intel.com>, Jonathan Cameron <jic23@kernel.org>,
- Junjie Cao <junjie.cao@intel.com>, Anisa Su <anisa.su@samsung.com>,
- Elena Ufimtseva <elena.ufimtseva@oracle.com>,
- Jagannathan Raman <jag.raman@oracle.com>,
- John Levon <john.levon@nutanix.com>,
- Thanos Makatos <thanos.makatos@nutanix.com>,
- =?iso-8859-1?Q?C=E9dric?= Le Goater <clg@redhat.com>,
- Cornelia Huck <cohuck@redhat.com>, Eric Farman <farman@linux.ibm.com>,
- Matthew Rosato <mjrosato@linux.ibm.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Ilya Leoshkevich <iii@linux.ibm.com>, qemu-block@nongnu.org,
- linux-cxl@vger.kernel.org, qemu-s390x@nongnu.org,
- Sergio Lopez <slp@redhat.com>, qemu-arm@nongnu.org,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org,
- Song Gao <17746591750@163.com>, Bibo Mao <maobibo@loongson.cn>,
- Xianglai Li <lixianglai@loongson.cn>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Pedro Barbuda <pbarbuda@microsoft.com>,
- Mohamed Mediouni <mohamed@unpredictable.fr>,
- Nicholas Piggin <npiggin@gmail.com>,
- Harsh Prateek Bora <harshpb@linux.ibm.com>,
- Amit Machhiwal <amachhiw@linux.ibm.com>, qemu-ppc@nongnu.org,
- Zhang Chen <zhangckid@gmail.com>, Li Zhijian <lizhijian@fujitsu.com>,
- Alistair Francis <alistair@alistair23.me>,
- Alexander Graf <graf@amazon.com>,
- "Gonglei (Arei)" <arei.gonglei@huawei.com>,
- zhenwei pi <zhenwei.pi@linux.dev>, Ani Sinha <anisinha@redhat.com>,
- Luc Michel <luc@lmichel.fr>,
- =?iso-8859-1?Q?C=E9dric?= Le Goater <clg@kaod.org>,
- Jamin Lin <jamin_lin@aspeedtech.com>, Kane Chen <kane_chen@aspeedtech.com>,
- Samuel Tardieu <sam@rfc1149.net>, "Denis V. Lunev" <den@openvz.org>,
- FangSheng Huang <FangSheng.Huang@amd.com>,
- Tyrone Ting <kfting@nuvoton.com>, Hao Wu <wuhaotsh@google.com>,
- Keith Busch <kbusch@kernel.org>, Klaus Jensen <its@irrelevant.dk>,
- Jesper Devantier <foss@defmacro.it>, Aditya Gupta <adityag@linux.ibm.com>,
- Glenn Miles <milesg@linux.ibm.com>, Conor Dooley <conor@kernel.org>,
- Sebastian Huber <sebastian.huber@embedded-brains.de>,
- Halil Pasic <pasic@linux.ibm.com>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,
- Jason Herne <jjherne@linux.ibm.com>, Titus Rwantare <titusr@google.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Anthony PERARD <anthony@xenproject.org>,
- Peter Xu <peterx@redhat.com>, Chinmay Rath <rathc@linux.ibm.com>,
- Hendrik Brueckner <brueckner@linux.ibm.com>,
- xen-devel@lists.xenproject.org, Roman Bolshakov <rbolshakov@ddn.com>,
- Phil Dennis-Jordan <phil@philjordan.eu>, Fam Zheng <fam@euphon.net>,
- Farhan Ali <alifm@linux.ibm.com>, Alex Williamson <alex@shazbot.org>,
- Tao Tang <tangtao1634@phytium.com.cn>,
- Stefan Berger <stefanb@linux.vnet.ibm.com>,
- Fabiano Rosas <farosas@suse.de>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>
-Subject: Re: [PATCH v7 54/65] qdev: adjust PciDevfn declared type
-Message-ID: <20261023072206-mutt-send-email-mst@kernel.org>
-References: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
- <20261020-qom-qapi-v7-54-431a86b02b58@redhat.com>
- <atsxLV5YZo8dr-8G@redhat.com>
- <CAMxuvazd7G_NBOM_c6BxZn5PFSw=XQUHueHqBoQQfpzPPgi9qA@mail.gmail.com>
+ (Exim 4.90_1)
+ (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
+ id 1xKEEX-0002oq-Hs; Fri, 23 Oct 2026 08:18:55 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=univ-grenoble-alpes.fr; s=2020; t=1792757927;
+ bh=YqaTwy1/mUnFcPHG9KcifDzXKTzd9LG/3Xpfw+eNxdc=;
+ h=Date:Subject:To:References:From:In-Reply-To:From;
+ b=X6MaVnzJ240npgR9moXejUso9P18nUoeW4En6YRiOMsC4rXc911xmUqtqDNAWHawn
+ d+M7aSLvBayiT2ocY3cyfTg0dNp/RrIgdy2pnazFiPlRkUfz2SvGRYbCWxGnyTZkWN
+ 8Ikp/lArptNoIgCkEZzgp0dn0u+8Hl+DrZ5bA+N/2Np2Cby+eb7GHKfPAzCzvWtj0K
+ 8mmeMuRtbvrrISsj9+1jdB9pAdaid4Z6LTrhDZpKQQpTYZl8BWU+59QXVGwwzu7yZ0
+ G3ESnRrNsVbfnF0GdW/N8giQ3I+zLTdGtxM95LTicNLCu+CIPobkZNs56c9qgHhzV8
+ x7uqVLgDCUnPQ==
+Received: from mailhub-2.u-ga.fr (mailhub-2.u-ga.fr [129.88.178.102])
+ by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id 8B9074021D;
+ Fri, 23 Oct 2026 14:18:47 +0200 (CEST)
+Received: from smtps.univ-grenoble-alpes.fr (smtps3.u-ga.fr [195.83.24.62])
+ by mailhub-2.u-ga.fr (Postfix) with ESMTP id 8726CFF855;
+ Fri, 23 Oct 2026 14:18:47 +0200 (CEST)
+Received: from [147.171.132.150] (naga.tima.u-ga.fr [147.171.132.150])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+ key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ (Authenticated sender: petrotf@univ-grenoble-alpes.fr)
+ by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id 2A6D14004A;
+ Fri, 23 Oct 2026 14:18:47 +0200 (CEST)
+Message-ID: <0e80ee62-c48e-4d08-a317-41b6baf6fa75@univ-grenoble-alpes.fr>
+Date: Fri, 23 Oct 2026 14:18:46 +0200
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-In-Reply-To: <CAMxuvazd7G_NBOM_c6BxZn5PFSw=XQUHueHqBoQQfpzPPgi9qA@mail.gmail.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: IfymVdzTaqAtY4iHoKroLKaPyUVMrOehKns4XsdLcR4_1792757087
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/2] target/riscv: fix riscv_cpu_do_interrupt sanitize
+ error for x-rv128
+To: Alistair Francis <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org,
+ daniel.barboza@oss.qualcomm.com, peter.maydell@linaro.org,
+ chao.liu@processmission.com, zhiwei_liu@linux.alibaba.com,
+ qemu-riscv@nongnu.org, palmer@dabbelt.com, liwei1518@gmail.com
+References: <20261022112145.356726-1-frederic.petrot@univ-grenoble-alpes.fr>
+ <20261022112145.356726-3-frederic.petrot@univ-grenoble-alpes.fr>
+ <31c4f71a924f57f20b2427bf4c49e8e4fb4b10bc.camel@wdc.com>
+Content-Language: en-US, fr
+From: =?UTF-8?B?RnLDqWTDqXJpYyBQw6l0cm90?=
+ <frederic.petrot@univ-grenoble-alpes.fr>
+In-Reply-To: <31c4f71a924f57f20b2427bf4c49e8e4fb4b10bc.camel@wdc.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=mst@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -30
-X-Spam_score: -3.1
-X-Spam_bar: ---
-X-Spam_report: (-3.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.339,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Greylist: Whitelist-UGA SMTP Authentifie (petrotf@univ-grenoble-alpes.fr)
+ via submission-587 ACL (41)
+Received-SPF: pass client-ip=152.77.200.56;
+ envelope-from=frederic.petrot@univ-grenoble-alpes.fr;
+ helo=zm-mta-out-3.u-ga.fr
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -179,90 +85,122 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-16.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS autolearn=unavailable autolearn_force=no version=4.0.1
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=unavailable autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Fri, Oct 23, 2026 at 03:39:22PM +0400, Marc-André Lureau wrote:
-> Hi
+On 10/23/26 07:14, Alistair Francis wrote:
+> On Thu, 2026-10-22 at 13:21 +0200,
+> frederic.petrot@univ-grenoble-alpes.fr wrote:
+>> From: Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
+>>
+>> UndefinedBehaviorSanitizer reports an undefined behavior when setting
+>> the Interrupt flag (msb) in the [ms]cause registers due to an out of
+>> bounds shift.
+>> We specifically correct these cases, leaving the ones depending on
+>> specific extensions untouched.
+>>
+>> Reported-by: Peter Maydell <peter.maydell@linaro.org>
+>> Signed-off-by: Frédéric Pétrot
+>> <frederic.petrot@univ-grenoble-alpes.fr>
+>> ---
+>>   target/riscv/cpu.h            |  2 ++
+>>   target/riscv/tcg/cpu_helper.c | 14 ++++++++++++--
+>>   2 files changed, 14 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+>> index b65d631994..17bfcf38c0 100644
+>> --- a/target/riscv/cpu.h
+>> +++ b/target/riscv/cpu.h
+>> @@ -354,10 +354,12 @@ struct CPUArchState {
+>>       uint64_t stvec;
+>>       uint64_t sepc;
+>>       uint64_t scause;
+>> +    uint64_t scauseh;
+>>   
+>>       uint64_t mtvec;
+>>       uint64_t mepc;
+>>       uint64_t mcause;
+>> +    uint64_t mcauseh;
 > 
-> On Fri, Oct 23, 2026 at 2:04 PM Daniel P. Berrangé <berrange@redhat.com> wrote:
-> >
-> > On Tue, Oct 20, 2026 at 02:46:11PM +0400, Marc-André Lureau wrote:
-> > > PciDevfn is a bit special, since it accepts integer and string as
-> > > setter, but only output integer as getter.
-> > >
-> > > Unfortunately, we can't declare an alternate str|int QAPI type for it,
-> > > since: branch 'string' can't be distinguished from 'integer'
-> > >
-> > > Rather than declaring it as "str", use the common type instead.
-> > >
-> > > Signed-off-by: Markus Armbruster <armbru@redhat.com>
-> > > Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
-> > > ---
-> > >  hw/core/qdev-properties-system.c | 3 ++-
-> > >  1 file changed, 2 insertions(+), 1 deletion(-)
-> > >
-> > > diff --git a/hw/core/qdev-properties-system.c b/hw/core/qdev-properties-system.c
-> > > index 5bfdfe1ab9d9..3381de1144d6 100644
-> > > --- a/hw/core/qdev-properties-system.c
-> > > +++ b/hw/core/qdev-properties-system.c
-> > > @@ -904,7 +904,8 @@ static char *print_pci_devfn(Object *obj, const Property *prop)
-> > >  }
-> > >
-> > >  const PropertyInfo qdev_prop_pci_devfn = {
-> > > -    .type  = "str",
-> > > +    /* The formatted string accepted by the setter is a CLI convenience. */
-> >
-> > IIUC, this is not limited to the CLI, it will work anywhere the JSON
-> > syntax is permitted which is both CLI and QMP.
-> >
-> > libvirt uses this string syntax:
-> >
-> >   -device '{"driver":"pcie-root-port","port":9,"chassis":2,"id":"pci.2","bus":"pcie.0","multifunction":true,"addr":"0x1.0x1"}' \
-> >
-> > > +    .type  = "int32",
-> > >      .description = "Slot and optional function number, example: 06.0 or 06",
-> >
-> >
-> > Changing the type to 'int32', where 99% of usage is input only
-> > and string based, is pretty unpleasant. Even more so that the
-> > description doesn't even mention encoding dev+function as an
-> > integer.
+> This isn't correct though, there is no mcauseh CSR in RISC-V
 > 
-> This is purely a metadata change, the setter still accepts both str &
-> int, so I don't think this change blocks this series. But I agree we
-> could do better.
+> I do think this is getting hard to justify as we are adding CSRs and
+> CPU state that doesn't actually exist and there appears to be no effort
+> towards making it exist (from a RIV perspective).
 > 
-> There are multiple options. We could keep declaring the property as
-> str instead. In this case, the getter should probably return a string
-> for consistency and correctness. This might surprise some existing
-> users though.
-> 
-> We could introduce new properties like `devfn-str` and `devfn-int`
-> that alias the same value.
-> 
-> We could also introduce a new structured QAPI type.
-> 
-> Markus, what's your take?
-> 
-> thanks
+> It's not clear if these should just be 64-bit CSRs
 
-I like the idea of a structured type. Will be handy for other things.
+   Fair enough.
+   Right now the 32 and 64 bits RV specs assume (with a few
+   exceptions) XLEN csrs.
+   Some have information in their MSb, e.g. XLEN in misa,
+   SD in mstatus, Interrupt in mcause.
+   In the end, I would expect rv128 to align with that (since
+   it is at zero hardware cost).
 
-> >
-> > >      .print = print_pci_devfn,
-> > >      .get   = qdev_propinfo_get_int32,
-> >
-> > With regards,
-> > Daniel
-> > --
-> > |: https://berrange.com       ~~        https://hachyderm.io/@berrange :|
-> > |: https://libvirt.org          ~~          https://entangle-photo.org :|
-> > |: https://pixelfed.art/berrange   ~~    https://fstop138.berrange.com :|
-> >
+> 
+>>       uint64_t mtval;  /* since: priv-1.10.0 */
+>>   
+>>       uint64_t mctrctl;
+>> diff --git a/target/riscv/tcg/cpu_helper.c
+>> b/target/riscv/tcg/cpu_helper.c
+>> index 58e98e975c..b35b61dc01 100644
+>> --- a/target/riscv/tcg/cpu_helper.c
+>> +++ b/target/riscv/tcg/cpu_helper.c
+>> @@ -2375,7 +2375,12 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+>>           }
+>>           env->mstatus = s;
+>>           sxlen = 16 << riscv_cpu_sxl(env);
+>> -        env->scause = cause | ((target_ulong)async << (sxlen - 1));
+>> +        if (riscv_cpu_sxl(env) != MXL_RV128) {
+>> +            env->scause = cause | ((target_ulong)async << (sxlen -
+>> 1));
+>> +        } else {
+>> +            env->scause = cause;
+>> +            env->scauseh = (target_ulong)async << 63;
+>> +        }
+>>           env->sepc = env->pc;
+>>           env->stval = tval;
+>>           env->htval = htval;
+>> @@ -2447,7 +2452,12 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+>>               s = set_field(s, MSTATUS_MDT, 1);
+>>           }
+>>           env->mstatus = s;
+>> -        env->mcause = cause | ((target_ulong)async << (mxlen - 1));
+>> +        if (riscv_cpu_mxl(env) != MXL_RV128) {
+>> +            env->mcause = cause | ((target_ulong)async << (mxlen -
+>> 1));
+>> +        } else {
+>> +            env->mcause = cause;
+>> +            env->mcauseh = (target_ulong)async << 63;
+>> +        }
+> 
+> It's great you set these, but they are never read or used anywhere
+
+   I'll do a v3 with the proper "i128" functions to access [ms]cause
+   (and their dependents) properly.
+   I wanted at first to answer Peter's concerns quickly.
+
+   Frédéric
+
+> 
+> Alistair
+> 
+>>           if (smode_double_trap) {
+>>               env->mtval2 = env->mcause;
+>>               env->mcause = RISCV_EXCP_DOUBLE_TRAP;
+> 
+
+-- 
++---------------------------------------------------------------------------+
+| Frédéric Pétrot, Pr. Grenoble INP-UGA@Ensimag/TIMA, MADMAX UGA/CNRS/Inria |
+| Mob/Pho: +33 6 74 57 99 65/+33 4 76 57 48 70      Ad augusta  per angusta |
+| http://tima.univ-grenoble-alpes.fr frederic.petrot@univ-grenoble-alpes.fr |
++---------------------------------------------------------------------------+
 
 
