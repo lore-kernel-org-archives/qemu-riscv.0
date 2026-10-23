@@ -1,141 +1,137 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2912B606A31A
-	for <qemu-riscv@archiver.kernel.org>; Fri, 23 Oct 2026 13:55:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4A1DB606A31F
+	for <qemu-riscv@archiver.kernel.org>; Fri, 23 Oct 2026 16:09:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=FB6PPRON
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=h36sLCCg;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=CaF8G45w
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xKFjb-000816-En; Fri, 23 Oct 2026 09:55:03 -0400
+	id 1xKHpq-0000as-I2; Fri, 23 Oct 2026 12:09:38 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1xKFja-00080I-7H
- for qemu-riscv@nongnu.org; Fri, 23 Oct 2026 09:55:02 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1xKHpm-0000aE-Ao
+ for qemu-riscv@nongnu.org; Fri, 23 Oct 2026 12:09:35 -0400
+Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1xKFjX-0004OG-U5
- for qemu-riscv@nongnu.org; Fri, 23 Oct 2026 09:55:01 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1792763699;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=DjoH8evZxLD/oQi+kI32wJGQ4IzIUrG3x0m38hDozM8=;
- b=FB6PPRONVNlEGUB/jQq026ZGaiNgN9AqTzseEE5GqsutF8XLJiCE90MFgtFmKLbMj8H0BE
- 4f9I5VO3wk6Ul83t1LhSpYqK85kCC6Z0C1GR/wefyNAPKihIELB/13747m3RX/C1AoTC4b
- 0hPkVdmlitgUUBgEajjamy8Q36Yw7gI=
-Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-479-CqSf_XYnNNmtmPh4ytbQ0A-1; Fri,
- 23 Oct 2026 09:54:53 -0400
-X-MC-Unique: CqSf_XYnNNmtmPh4ytbQ0A-1
-X-Mimecast-MFC-AGG-ID: CqSf_XYnNNmtmPh4ytbQ0A_1792763689
-Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id C62B3195395F; Fri, 23 Oct 2026 13:54:46 +0000 (UTC)
-Received: from blackfin.pond.sub.org (unknown [10.44.22.5])
- by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 7B7EC3000723; Fri, 23 Oct 2026 13:54:42 +0000 (UTC)
-Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id 0863521E6A04; Fri, 23 Oct 2026 15:54:40 +0200 (CEST)
-From: Markus Armbruster <armbru@redhat.com>
-To: =?utf-8?Q?Marc-Andr=C3=A9?= Lureau <marcandre.lureau@redhat.com>
-Cc: qemu-devel@nongnu.org,  Michael Roth <michael.roth@amd.com>,  John Snow
- <jsnow@redhat.com>,  Peter Maydell <peter.maydell@linaro.org>,  Mauro
- Carvalho Chehab <mchehab+huawei@kernel.org>,  Pierrick Bouvier
- <pierrick.bouvier@oss.qualcomm.com>,  Paolo Bonzini <pbonzini@redhat.com>,
- Daniel P. =?utf-8?Q?Berrang=C3=A9?= <berrange@redhat.com>,  Kostiantyn
- Kostiuk
- <kkostiuk@redhat.com>,  Eric Blake <eblake@redhat.com>,  David Hildenbrand
- <david@kernel.org>,  Igor Mammedov <imammedo@redhat.com>,  "Edgar E.
- Iglesias" <edgar.iglesias@gmail.com>,  Jason Wang <jasowangio@gmail.com>,
- Marcelo Tosatti <mtosatti@redhat.com>,  kvm@vger.kernel.org,  Alberto
- Garcia <berto@igalia.com>,  Kevin Wolf <kwolf@redhat.com>,  Hanna Reitz
- <hreitz@redhat.com>,  Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?=
- <philmd@oss.qualcomm.com>,
- Zhao Liu <zhao1.liu@intel.com>,  Jonathan Cameron <jic23@kernel.org>,
- Junjie Cao <junjie.cao@intel.com>,  Anisa Su <anisa.su@samsung.com>,
- Elena Ufimtseva <elena.ufimtseva@oracle.com>,  Jagannathan Raman
- <jag.raman@oracle.com>,  John Levon <john.levon@nutanix.com>,  Thanos
- Makatos <thanos.makatos@nutanix.com>,  =?utf-8?Q?C=C3=A9dric?= Le Goater
- <clg@redhat.com>,
- Cornelia Huck <cohuck@redhat.com>,  Eric Farman <farman@linux.ibm.com>,
- Matthew Rosato <mjrosato@linux.ibm.com>,  Richard Henderson
- <richard.henderson@linaro.org>,  Ilya Leoshkevich <iii@linux.ibm.com>,
- qemu-block@nongnu.org,  linux-cxl@vger.kernel.org,
- qemu-s390x@nongnu.org,  "Michael S. Tsirkin" <mst@redhat.com>,  Sergio
- Lopez <slp@redhat.com>,  qemu-arm@nongnu.org,  Palmer Dabbelt
- <palmer@dabbelt.com>,  Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>,  Daniel Henrique Barboza
- <daniel.barboza@oss.qualcomm.com>,  Liu Zhiwei
- <zhiwei_liu@linux.alibaba.com>,  Chao Liu <chao.liu@processmission.com>,
- qemu-riscv@nongnu.org,  Song Gao <17746591750@163.com>,  Bibo Mao
- <maobibo@loongson.cn>,  Xianglai Li <lixianglai@loongson.cn>,  Jiaxun Yang
- <jiaxun.yang@flygoat.com>,  Pedro Barbuda <pbarbuda@microsoft.com>,
- Mohamed Mediouni <mohamed@unpredictable.fr>,  Nicholas Piggin
- <npiggin@gmail.com>,  Harsh Prateek Bora <harshpb@linux.ibm.com>,  Amit
- Machhiwal <amachhiw@linux.ibm.com>,  qemu-ppc@nongnu.org,  Zhang Chen
- <zhangckid@gmail.com>,  Li Zhijian <lizhijian@fujitsu.com>,  Alistair
- Francis <alistair@alistair23.me>,  Alexander Graf <graf@amazon.com>,
- "Gonglei (Arei)" <arei.gonglei@huawei.com>,  zhenwei pi
- <zhenwei.pi@linux.dev>,  Ani Sinha <anisinha@redhat.com>,  Luc Michel
- <luc@lmichel.fr>,  =?utf-8?Q?C=C3=A9dric?= Le Goater <clg@kaod.org>,  Jamin
- Lin
- <jamin_lin@aspeedtech.com>,  Kane Chen <kane_chen@aspeedtech.com>,  Samuel
- Tardieu <sam@rfc1149.net>,  "Denis V. Lunev" <den@openvz.org>,  FangSheng
- Huang <FangSheng.Huang@amd.com>,  Tyrone Ting <kfting@nuvoton.com>,  Hao
- Wu <wuhaotsh@google.com>,  Keith Busch <kbusch@kernel.org>,  Klaus Jensen
- <its@irrelevant.dk>,  Jesper Devantier <foss@defmacro.it>,  Aditya Gupta
- <adityag@linux.ibm.com>,  Glenn Miles <milesg@linux.ibm.com>,  Conor
- Dooley <conor@kernel.org>,  Sebastian Huber
- <sebastian.huber@embedded-brains.de>,  Halil Pasic <pasic@linux.ibm.com>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,  Jason Herne
- <jjherne@linux.ibm.com>,  Titus Rwantare <titusr@google.com>,  Stefano
- Stabellini <sstabellini@kernel.org>,  Anthony PERARD
- <anthony@xenproject.org>,  Peter Xu <peterx@redhat.com>,  Chinmay Rath
- <rathc@linux.ibm.com>,  Hendrik Brueckner <brueckner@linux.ibm.com>,
- xen-devel@lists.xenproject.org,  Roman Bolshakov <rbolshakov@ddn.com>,
- Phil Dennis-Jordan <phil@philjordan.eu>,  Fam Zheng <fam@euphon.net>,
- Farhan Ali <alifm@linux.ibm.com>,  Alex Williamson <alex@shazbot.org>,
- Tao Tang <tangtao1634@phytium.com.cn>,  Stefan Berger
- <stefanb@linux.vnet.ibm.com>,  Fabiano Rosas <farosas@suse.de>,  Mark
- Cave-Ayland <mark.cave-ayland@ilande.co.uk>,  Artyom Tarasenko
- <atar4qemu@gmail.com>,  Yoshinori Sato <yoshinori.sato@nifty.com>,  Jiri
- Pirko <jiri@resnulli.us>,  Eric Auger <eric.auger@redhat.com>,  Laurent
- Vivier <lvivier@redhat.com>
-Subject: Re: [PATCH v7 11/65] qom: add qapi_type field to ObjectProperty
-In-Reply-To: <20261020-qom-qapi-v7-11-431a86b02b58@redhat.com>
- (=?utf-8?Q?=22Marc-Andr=C3=A9?=
- Lureau"'s message of "Tue, 20 Oct 2026 14:45:28 +0400")
-References: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
- <20261020-qom-qapi-v7-11-431a86b02b58@redhat.com>
-Date: Fri, 23 Oct 2026 15:54:39 +0200
-Message-ID: <87h5ica5eo.fsf@pond.sub.org>
-User-Agent: Gnus/5.13 (Gnus v5.13)
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1xKHpe-0001Tk-D3
+ for qemu-riscv@nongnu.org; Fri, 23 Oct 2026 12:09:28 -0400
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 69NE5xcV2109275
+ for <qemu-riscv@nongnu.org>; Fri, 23 Oct 2026 16:09:21 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:date:from:message-id:mime-version
+ :subject:to; s=qcppdkim1; bh=PyWN7bLF2TyiAwLh470NhPLfJrR1BKCM+Lh
+ 39S5T91I=; b=h36sLCCg01TfkQ2Sw6wEAt1Do7TTgKt5Uc+vcaEMjoklj21Akv3
+ fW9aeMy1xMoY9QugBBG6Loi5DbOPsM66eo/9Pbof+NfAA+4j7ZOBcLZZnenSC3ap
+ ylUADRiD72yeCQ19X55RAN1cPhhhg4Uahe3yS0uoDcaRMSSRjeKvpzPhOaEqMbMG
+ jfDLoPfxUFwOZlbXV/MivhzUqFJz/wsSuzOdVX76Id6IyY+GKkY1FsAOY3+93wqB
+ 1wPCdxMXgAH5Xq8dzgAnmXurpeizP41aJ/0/pffgrf12JW/zxAhJCc9BIcPMADUO
+ /Ud2kXcNmDr9r1bK34TxyxX9Ydvm+xIiW2Q==
+Received: from mail-qv1-f71.google.com (mail-qv1-f71.google.com
+ [209.85.219.71])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hfqms4fg7-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Fri, 23 Oct 2026 16:09:21 +0000 (GMT)
+Received: by mail-qv1-f71.google.com with SMTP id
+ 6a1803df08f44-91b875639ceso22622496d6.1
+ for <qemu-riscv@nongnu.org>; Fri, 23 Oct 2026 09:09:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1792771760; x=1793376560; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=PyWN7bLF2TyiAwLh470NhPLfJrR1BKCM+Lh39S5T91I=;
+ b=CaF8G45wVjuMrXcjySJAM4LtEfbZt7SjPqcENT0Q1t4RMo1QFIPfhqS37dQ0CVzfxf
+ qEovzvmlxf+ZUNiCKMIfSjp72zuhpx+R7Blu++am9onAw242flfY++FhMxhX7tEUxMWz
+ xvTJa+1Uv17RN0BJblglTnHp5OWUwwLi+xhLj23lU18a9+UxBy37KpTPPbyHllRq5UtV
+ 1txUQWZLMoWqS75h3Verd8AQ5/Esz2xgKjNUHhtrHys5nmzIcsZQ3DBhVyvbuFNiSJFD
+ I2zz3432T4oOStBlCKWhQrkiMsR4rOCuMHirxlJCaLRmyqur/6r3coa+q5qL9mwwC9N/
+ Vdvg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1792771760; x=1793376560;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=PyWN7bLF2TyiAwLh470NhPLfJrR1BKCM+Lh39S5T91I=;
+ b=DFzW0hXyA6dCKSZsDR3hWol9LaRxoYKo7PbR/FO6CwyhrdanRw9JkRrYPuS/Q5pD9b
+ PKw/yddmkT8EOS560TNHjJlSzCCaGVAx2senmOPv88nIltrjp+UaFFeriGS1HEwar84I
+ N0hed2PWjAhkAi/IS9dwDO89HEDfPmQiP+84CiT4Y+dRf9ytoU6jbuYT37XHnFtISxTC
+ 0vrTJsdTPuOpCcg92/XhFFmb/qCuUm7TDYD++tSmUSyy5rn6ivFhbtCGeKCMsBrqf9Lp
+ IS/sSzGiRarDMSwVoTftRkHMQC99G3u8DPOVahxMJ+Co40JZ5y1gmUjZfcsvC+ws8hhO
+ GdHg==
+X-Gm-Message-State: AFq9FYKG8XE8DEPOt5XSFkq738pHJt3fNUNED66SEulVeO9G6+J6gWBe
+ h2PMHcAHRdNjZh2GsSFrxFtQqfMEnuSqzCgETEX9iEqwAep1w3I1SmSbTKZ0nJAPpvFgidKkHFg
+ qlCnpXo5VTL14RAvEvFYoIExNXQgm8vzZA0qxi7KDUaWis205imff4IQIEw==
+X-Gm-Gg: AYBFou12+0LMhS52PX694nEUJPqBSo7GtNug0yCBuSNOBkQqk0kspHmEZf5GcORjHar
+ hGQU8PJIqXGWI+x1i/ybk7fqTSY545ulWnwljSF18jjbu9r9YESOy6V6oDSWkriR7PD0o2ZvfJo
+ IG4LrTu6ihbP5AE1VYwoj1aokY3BZK99VwNUjBFmuYcC0p/eH0THBg+jKwMzWAIrx7jeqVLjKc+
+ CTntP49CpUZQjxPN3WMN0+w/qV6l6Xk6SqrpF2FzqAbSAMhwUoF2RNYo/8jYWa6UCnBxQ2P6vwp
+ sw7g9v6oRd/Bb8udnxoI3l+oPl5f8Y8WBEgzjPev4BYBSUA/3VYTtq0PaA9dDzqxQyYTsaQGZNb
+ lA7QNw88QRktqmOFjWy66QHZsdj3Y0QQcaWAzhw==
+X-Received: by 2002:ad4:5aed:0:b0:91b:a0ab:824 with SMTP id
+ 6a1803df08f44-91c3acc68f8mr37254816d6.56.1792771759953; 
+ Fri, 23 Oct 2026 09:09:19 -0700 (PDT)
+X-Received: by 2002:ad4:5aed:0:b0:91b:a0ab:824 with SMTP id
+ 6a1803df08f44-91c3acc68f8mr37254056d6.56.1792771759368; 
+ Fri, 23 Oct 2026 09:09:19 -0700 (PDT)
+Received: from QCOM-UWl2o8bcGT.qualcomm.com ([152.234.125.162])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-91c4524f226sm5063406d6.27.2026.10.23.09.09.17
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 23 Oct 2026 09:09:18 -0700 (PDT)
+From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Subject: [PATCH 0/6] hw/riscv: riscv-server-ref refinements
+Date: Fri, 23 Oct 2026 13:09:07 -0300
+Message-ID: <20261023160913.24992-1-daniel.barboza@oss.qualcomm.com>
+X-Mailer: git-send-email 2.43.0
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
-X-Mimecast-MFC-PROC-ID: dBxT7oXDySX0paXHwIHWm5LV8-BqwaqJ2_BPkAcj_pg_1792763689
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=armbru@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: 2
-X-Spam_score: 0.2
-X-Spam_bar: /
-X-Spam_report: (0.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.339,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_SBL_CSS=3.335, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIzMDA2MyBTYWx0ZWRfX1z+4OGJyPlTv
+ X68VgZtAyyci2Xm2xlkYPWB/tu0CNwBDFItNdC9Nzz3VNj3uuEUCWGYWr52pYgN59LdLQhAKE1d
+ xmSxXRpj5nM/HICDFgWoQ7UKlMta1+H2JDXCBEPD4aTfNoIMp45uvCkMr2Zxh8D/jOwo+TEOLzn
+ fnSmTPRMclItB/IHVomE+t/5PsIuwNJT5hLBD+aFknDylSS/4EOw4fkh0M4pbkDNCHXDCRx1kBK
+ X0zl4m94W3VnbgdkMTTij61GQ28RImQnpwIomePUMaLij06mOUpC07sioWwx5ueV8aAiSLD8Ywv
+ 1HikcKHfpiOdw+KA3/J8n2hh6fZfI18trcLmm/0CdulXo8N5dTsITQzWTX8fLdPm1ZsR4sVuR1v
+ HCXwVltMG6+gskc0cnryRdkWNczm9Fxgplf/8XttNvVCMzrwfSaF3WXHvguWbmfSnyi+4SQHU1f
+ Bwi+wiDn5V9tZumg9fA==
+X-Proofpoint-GUID: 8MPeD9YGw0TcaO5pBSONNqVWXLkdO2pW
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIzMDA2MyBTYWx0ZWRfXzYaA9ekK13z0
+ 08tUXh3lClFmvO6+ETnx9F/q4RegZ3lyDcjfC4Mm+M0x22xDak+aHOEmYCzE85U585OjD3fZqVF
+ f0HB4fEgoisArXVPFqkVqKB30vbftUo=
+X-Authority-Analysis: v=2.4 cv=UdbE26SN c=1 sm=1 tr=0 ts=6adb86b1 cx=c_pps
+ a=UgVkIMxJMSkC9lv97toC5g==:117 a=AgQEunjic7gIBKSbIeB6Ag==:17
+ a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22 a=dteICpJC5C4Zh8-mQl8A:9
+ a=1HOtulTD9v-eNWfpl4qZ:22
+X-Proofpoint-ORIG-GUID: 8MPeD9YGw0TcaO5pBSONNqVWXLkdO2pW
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-10-23_04,2026-10-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 phishscore=0 bulkscore=0 clxscore=1015 adultscore=0
+ priorityscore=1501 suspectscore=0 lowpriorityscore=0 spamscore=0
+ impostorscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610190000
+ definitions=main-2610230063
+Received-SPF: pass client-ip=205.220.168.131;
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
+X-Spam_bar: --
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -147,24 +143,45 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-12.6 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
-	USER_AGENT_SANE_1 autolearn=unavailable autolearn_force=no
-	version=4.0.1
+X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT
+	autolearn=unavailable autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com> writes:
+Hello,
 
-> Add a const pointer to QAPITypeInfo in ObjectProperty. NULL for now,
-> but future patches will add means to make it non-null. The
-> QAPITypeInfo will then be used by QOM introspection to tie the
-> property to a QAPI type.
->
-> Signed-off-by: Markus Armbruster <armbru@redhat.com>
-> Signed-off-by: Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com>
+This is a small and trivial follow-up after the upstreaming of the base
+model for the riscv-server-ref board.
 
-Reviewed-by: Markus Armbruster <armbru@redhat.com>
+Patch 5 contains a fix for the virt machine similar to what was done in
+the riscv-server-ref machine in patch 4.  Note that there were no test
+changes for the virt change, in contrast to the equivalent
+riscv-server-ref patch, because there were no Linux/userspace visible
+changes in the baud rate for the virt case.
+
+Patches based on alistair/riscv-to-apply.next.
+
+Daniel Henrique Barboza (6):
+  hw/riscv: do not realize the device in riscv_create_iommu_sys()
+  hw/riscv/server_platform_ref: set iommu hpm counters to 4
+  hw/riscv: make UART FDT helper consider baud rate
+  hw/riscv/server_platform_ref: fix UART baud rate
+  hw/riscv/virt.c: fix base baud in serial_mm_init()
+  MAINTAINERS: add contact for the RISC-V server-ref machine
+
+ MAINTAINERS                                 |  8 +++++++
+ hw/riscv/fdt-common.c                       | 19 +++++++++++++++--
+ hw/riscv/riscv-iommu-sys.c                  |  3 +--
+ hw/riscv/server_platform_ref.c              | 18 ++++++++++++----
+ hw/riscv/virt.c                             | 23 ++++++++++++++-------
+ include/hw/riscv/fdt-common.h               |  1 +
+ include/hw/riscv/virt.h                     |  2 ++
+ tests/functional/riscv64/test_server_ref.py |  3 +++
+ 8 files changed, 61 insertions(+), 16 deletions(-)
+
+-- 
+2.43.0
 
 
