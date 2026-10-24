@@ -1,73 +1,78 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 77831606A31A
-	for <qemu-riscv@archiver.kernel.org>; Sat, 24 Oct 2026 12:06:18 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 32D09606A31A
+	for <qemu-riscv@archiver.kernel.org>; Sat, 24 Oct 2026 15:52:15 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=foxmail.com header.i=@foxmail.com header.a=rsa-sha256 header.s=s201512 header.b=aOvpDqA+
+	dkim=pass (2048-bit key, unprotected) header.d=treblig.org header.i=@treblig.org header.a=rsa-sha256 header.s=bytemarkmx header.b=qsnK4fTI
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xKaVa-0002Zw-KT; Sat, 24 Oct 2026 08:05:58 -0400
+	id 1xKe2F-0000a0-I9; Sat, 24 Oct 2026 11:51:57 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <qinzhengxiang@foxmail.com>)
- id 1xKaVQ-0002Xm-Ol; Sat, 24 Oct 2026 08:05:51 -0400
-Received: from xmbghk7.mail.qq.com ([43.163.128.44])
+ (Exim 4.90_1) (envelope-from <dg@treblig.org>)
+ id 1xKe1w-0000Wh-42; Sat, 24 Oct 2026 11:51:37 -0400
+Received: from mx.treblig.org ([2a00:1098:5b::1])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <qinzhengxiang@foxmail.com>)
- id 1xKaVO-0001oC-HG; Sat, 24 Oct 2026 08:05:48 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foxmail.com;
- s=s201512; t=1792843542;
- bh=OZ0cn1cfhnQpiLeUOFB/RYIlHs7xdzQBQX+Bxjih0PU=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References;
- b=aOvpDqA+wE19fYQkn9pDbByCciXt0HEvJx/YbVjwg7+4BG/i25uBXtUWGy11vEz1O
- 6NbBAv3/MiXK1hMVxDLVumHN0/5EnVnlsHYF7lUB28p8Mi+mlV46S43+IHcbhA8kmA
- Np0AM7DSj+yifUi/mjDhhwQcWB1SCj55vRVSxWWU=
-Received: from ubuntu-vm.. ([122.9.98.96])
- by newxmesmtplogicsvrszb51-1.qq.com (NewEsmtp) with SMTP
- id 8F108B2; Sat, 24 Oct 2026 20:02:15 +0800
-X-QQ-mid: xmsmtpt1792843345tcsx74wlf
-Message-ID: <tencent_B260044F72C6F341E58608255B64FCE0AF08@qq.com>
-X-QQ-XMAILINFO: NtksVjXir1SbDsJtBvA8zAfTPGmkqzB1s0+RyacsopDxCjJSIfiWLYV6aUx9Yt
- BfN+EQzIciZoAh98komri2yfgc5K25ezNrMenP4KVdkye/2CEV2wS05jHEXRwWuvcfeVdbNLqCt0
- K5i6QT+JlPD40kXfUOfU3xnKgULBrpCypoc5AuZi1EAAu7l8DiwbWSDA55JFqEHAnqCA5QfQjBmk
- F9D+BHoERtBLT6r9DqDzSgeiZPulX3VC1wOvkS2Jwk2Sbc/pS8O9ERsGAsnDjMw2JBmB641XYl2b
- dhGt6PMsPNzbFTIw7qei43IRaiQk6HqIcH4w3lgmPgRFrkkrx97zB7IdP7biRLIjaZ7W8g9uoii9
- bN+BpOwUjMTgC/MHyQzLBOzgDyGMi6ed+A/DcLJJRK8O5Z3uD1iSRZnXMzqAONGa8kjYKODnyY3e
- H698GbBxmixCD40T0rObzqEZBEeaS2l1lgJG/kM6d68zj7bjiZHNhxDKoQJwaPjz4kA97buNx78H
- UUKCuVaZdnRwUHmpqpmSpuFxfdxfEAe5izcEn5XP/+rwvzYXp5Q8n3xu0TN3ATpJKnp+b1D+Z0gw
- ZDedM0Y8jDZaWQz75iISfpmkkQjiZgH7WSIx/65+pDPOG6oC2wVV4p6yoSvZYG/KCBkzYv3PQmK4
- 8+OXa6f3cNkjY1vp2MNB/DKccyxYLbF9Wq4CmIve1Ex6t7XVj22w0/YLUyLnOom0SwmSv+Cr4J6L
- gujpOGuoMpkP+OSFZ31uVXzCCxjoh+fp6e14HndBec53tCg0F9YEmxwLWzC2yS76OepT/NDdjTqL
- CWHoKuOaIE0e+YyRVdgLSpPLWTR2ZLEvWbQSHI85rp43OVMwsDcchu2j9NxzcxOZ1PRUzcVS7yWA
- 9DkfT0cXCEvYL0RWSiRpeR72GydKAT4DmlkROKhSrneARcsgl7rbMBlMOIr+4jypdfzz9pCCJzJy
- 1U+86x0bgLy86BRSxx5joocz0yKHcjUg7O38Vo26NNpJ1slxkWTXvcTd+oT/Khe1Syh5mFy1Ja4e
- w7NKeK2xcxspPks2Vx0u8xpa/NvCcfA5ciz9k1nA==
-X-QQ-XMRINFO: MPJ6Tf5t3I/ylTmHUqvI8+Wpn+Gzalws3A==
-From: GavinQin <qinzhengxiang@foxmail.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
- liwei1518@gmail.com, daniel.barboza@oss.qualcomm.com,
- zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
- GavinQin <qinzhengxiang@foxmail.com>
-Subject: [PATCH 2/3] target/riscv: Honor Zama16b for AMOCAS accesses
-Date: Sat, 24 Oct 2026 12:02:10 +0000
-X-OQ-MSGID: <20261024120211.236223-2-qinzhengxiang@foxmail.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20261024120211.236223-1-qinzhengxiang@foxmail.com>
-References: <20261024120211.236223-1-qinzhengxiang@foxmail.com>
+ (Exim 4.90_1) (envelope-from <dg@treblig.org>)
+ id 1xKe1t-0006uJ-QV; Sat, 24 Oct 2026 11:51:35 -0400
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=treblig.org
+ ; s=bytemarkmx;
+ h=Content-Type:MIME-Version:Message-ID:Subject:From:Date:From
+ :Subject; bh=V4iZYoxy+XBZp3nhXDfm6iYmskBq0641TnPqJV9mKII=; b=qsnK4fTI54UGvy5h
+ SVyQCel19WB/uH+ugCafgD1oOx9FcElkHdOU1eIZ9mjNNxk5mA/3j7P5GZF4T3beoBRK5fK5ghWGY
+ SArNTN9/pS4E1kGdOzo+d9Rv0d0qjtht2h7xlHWgqy/m3vZolZMi9WVZn/j0YGuNcVNIFEdX7cWe3
+ fNlnUg3HvMaYkMb9AkN1F0dlzTiiU9r622oNLXE5ZjGnNT7DR0/SX37ioF5+1/HY7Diuiue0YYGC8
+ BRcGhu1Re38gk4erAm/hDe5qGWLzdaY7g11470NYZ4/o+3FWIOr5RkKFLuNrEEHhfz/HTVVLW8JCF
+ bpYdLJKvLQ1yziw3lw==;
+Received: from dg by mx.treblig.org with local (Exim 4.98.2)
+ (envelope-from <dg@treblig.org>) id 1xKe1j-00000002QqZ-1uLX;
+ Sat, 24 Oct 2026 15:51:23 +0000
+Date: Sat, 24 Oct 2026 15:51:23 +0000
+From: "Dr. David Alan Gilbert" <dave@treblig.org>
+To: =?iso-8859-1?Q?Marc-Andr=E9?= Lureau <marcandre.lureau@redhat.com>
+Cc: qemu-devel@nongnu.org,
+ Alex =?iso-8859-1?Q?Benn=E9e?= <alex.bennee@linaro.org>,
+ Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@oss.qualcomm.com>,
+ Zhao Liu <zhao1.liu@intel.com>, Peter Maydell <peter.maydell@linaro.org>,
+ Chinmay Rath <rathc@linux.ibm.com>, Nicholas Piggin <npiggin@gmail.com>,
+ Glenn Miles <milesg@linux.ibm.com>,
+ Harsh Prateek Bora <harshpb@linux.ibm.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Chao Liu <chao.liu@processmission.com>,
+ Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
+ qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
+ Paolo Bonzini <pbonzini@redhat.com>, Laurent Vivier <laurent@vivier.eu>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Artyom Tarasenko <atar4qemu@gmail.com>, Helge Deller <deller@gmx.de>,
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+ Warner Losh <imp@bsdimp.com>, Kyle Evans <kevans@freebsd.org>
+Subject: Re: [PATCH v3 00/18] monitor/hmp: replace MonitorDef with GDB
+ registers
+Message-ID: <atzT-0QHYWByMhEg@gallifrey>
+References: <20261022-query-reg-v3-0-7ad902b9a7cf@redhat.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=43.163.128.44;
- envelope-from=qinzhengxiang@foxmail.com; helo=xmbghk7.mail.qq.com
+In-Reply-To: <20261022-query-reg-v3-0-7ad902b9a7cf@redhat.com>
+X-Chocolate: 70 percent or better cocoa solids preferably
+X-Operating-System: Linux/6.12.113+deb13-amd64 (x86_64)
+X-Uptime: 15:50:55 up 8 days, 1:11, 2 users, load average: 0.11, 0.04, 0.01
+User-Agent: Mutt/2.2.13 (2024-03-09)
+Received-SPF: pass client-ip=2a00:1098:5b::1; envelope-from=dg@treblig.org;
+ helo=mx.treblig.org
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -80,61 +85,149 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT
-	autolearn=unavailable autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=unavailable autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-AMOCAS accesses retain their natural alignment requirement when
-Zama16b is enabled, causing misaligned accesses within a naturally
-aligned 16-byte granule to trap.
+* Marc-André Lureau (marcandre.lureau@redhat.com) wrote:
+> Hi,
+> 
+> HMP monitor supports printing $register expression. The lookup
+> was done via GDB stub registers, and supplementary MonitorDef
+> HMP-specific tables.
 
-Clear the alignment requirement and request MO_ATOM_WITHIN16 in
-gen_cmpxchg() and in gen_cmpxchg64(), which handles AMOCAS.D using
-register pairs on RV32.
+Why don't you get the first ~3 of these merged and then you can take the
+others through the individual targets at their own pace.
 
-Preserve the existing alignment requirement when Zama16b is disabled.
+Dave
 
-Signed-off-by: GavinQin <qinzhengxiang@foxmail.com>
----
- target/riscv/tcg/insn_trans/trans_rvzacas.c.inc | 4 ++++
- target/riscv/tcg/translate.c                    | 4 ++++
- 2 files changed, 8 insertions(+)
-
-diff --git a/target/riscv/tcg/insn_trans/trans_rvzacas.c.inc b/target/riscv/tcg/insn_trans/trans_rvzacas.c.inc
-index 79bca1e957..7b87f3e640 100644
---- a/target/riscv/tcg/insn_trans/trans_rvzacas.c.inc
-+++ b/target/riscv/tcg/insn_trans/trans_rvzacas.c.inc
-@@ -77,6 +77,10 @@ static bool gen_cmpxchg64(DisasContext *ctx, arg_atomic *a, MemOp mop)
-     TCGv_i64 src2 = get_gpr_pair(ctx, a->rs2);
- 
-     mop |= ctx->mo_endianness;
-+    if (ctx->cfg_ptr->ext_zama16b) {
-+        mop &= ~MO_AMASK;
-+        mop |= MO_ATOM_WITHIN16;
-+    }
-     decode_save_opc(ctx, RISCV_UW2_ALWAYS_STORE_AMO);
-     tcg_gen_atomic_cmpxchg_i64(dest, src1, dest, src2, ctx->mem_idx, mop);
- 
-diff --git a/target/riscv/tcg/translate.c b/target/riscv/tcg/translate.c
-index 70c1088338..3d1bd7371d 100644
---- a/target/riscv/tcg/translate.c
-+++ b/target/riscv/tcg/translate.c
-@@ -1180,6 +1180,10 @@ static bool gen_cmpxchg(DisasContext *ctx, arg_atomic *a, MemOp mop)
-     TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
- 
-     mop |= ctx->mo_endianness;
-+    if (ctx->cfg_ptr->ext_zama16b && (mop & MO_SIZE) >= MO_16) {
-+        mop &= ~MO_ALIGN;
-+        mop |= MO_ATOM_WITHIN16;
-+    }
-     decode_save_opc(ctx, RISCV_UW2_ALWAYS_STORE_AMO);
-     tcg_gen_atomic_cmpxchg_tl(dest, src1, dest, src2, ctx->mem_idx, mop);
- 
+> Migrate HMP registers to use the GDB infrastructure and remove the
+> legacy HMP MonitorDef. Internal registers aren't exposed to GDB.
+> This also drops HMP $pc x86 fallback (use $eip/$rip instead).
+> 
+> Known behavioural changes on RISC-V: CSR lookup is now case-sensitive
+> and vector registers now report "unkown register" instead of a
+> target-specific message ("Unable to print the value of vector vreg 'v0'
+> from this API")
+> 
+> Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
+> ---
+> Changes in v3:
+> - added x86 GDB register patches
+>   - fix the x87 FPU tag word returned by the GDB stub
+>   - split SSE registers into a separate org.gnu.gdb.i386.sse feature
+>   - expose AVX/AVX-512 registers (ymm/zmm upper halves and opmask)
+>   - expose more system registers to HMP
+> - renamed i386-segments.xml to i386-system.xml and registered it as an
+>   internal feature, like the other targets
+> - moved the HMP $pc removal to its own patch and documented it in
+>   removed-features.rst
+> - moved each target's MonitorDef removal into its target patch; the final
+>   patch now only removes the generic MonitorDef infrastructure
+> - added MAINTAINERS entries
+> - rebased onto current master
+> - Link to v2: https://lore.kernel.org/qemu-devel/20261013-query-reg-v2-0-6f95a2e139a9@redhat.com
+> 
+> Changes in v2:
+> - dropped v1 patch 5 (CPUClass::get_pc fallback for $pc)
+> - new patch gdb_register_internal_coprocessor() to hide registers from GDB
+> - SPARC64, m68k, RISC-V aliases now use internal registration
+> - pickup trailer tags
+> - Link to v1: https://lore.kernel.org/qemu-devel/20260911-query-reg-v1-0-0c04f0c02cf3@redhat.com
+> 
+> ---
+> Marc-André Lureau (18):
+>       hmp: don't crash on invalid register
+>       gdbstub: fix next register base after register gaps
+>       gdbstub: set feature->base_reg for dynamic features
+>       gdbstub: add gdb_register_internal_coprocessor()
+>       MAINTAINERS: cover x86 GDB XML files
+>       target/i386: expose segment limits register to monitors via gdbstub
+>       target/i386: fix FPU tag word in GDB register read
+>       target/i386: split SSE registers into separate GDB feature
+>       target/i386: expose system registers to monitors via gdbstub
+>       target/i386: expose AVX/AVX-512 registers to GDB
+>       target/i386: drop HMP $pc
+>       MAINTAINERS: cover m68k GDB XML files
+>       target/m68k: expose system registers to monitors via gdbstub
+>       target/sparc64: expose system registers to monitors via gdbstub
+>       target/riscv: bypass smstateen check in debugger mode
+>       MAINTAINERS: cover riscv GDB XML files
+>       target/riscv: expose register aliases to monitors via gdbstub
+>       monitor/hmp: remove legacy MonitorDef infrastructure
+> 
+>  MAINTAINERS                               |   4 +
+>  configs/targets/i386-bsd-user.mak         |   2 +-
+>  configs/targets/i386-linux-user.mak       |   2 +-
+>  configs/targets/i386-softmmu.mak          |   2 +-
+>  configs/targets/m68k-softmmu.mak          |   2 +-
+>  configs/targets/riscv32-linux-user.mak    |   2 +-
+>  configs/targets/riscv32-softmmu.mak       |   2 +-
+>  configs/targets/riscv64-bsd-user.mak      |   2 +-
+>  configs/targets/riscv64-linux-user.mak    |   2 +-
+>  configs/targets/riscv64-softmmu.mak       |   2 +-
+>  configs/targets/sparc64-softmmu.mak       |   2 +-
+>  configs/targets/x86_64-bsd-user.mak       |   2 +-
+>  configs/targets/x86_64-linux-user.mak     |   2 +-
+>  configs/targets/x86_64-softmmu.mak        |   2 +-
+>  docs/about/removed-features.rst           |   8 +
+>  gdbstub/gdb-xml/i386-32bit-avx.xml        |  20 ++
+>  gdbstub/gdb-xml/i386-32bit-avx512.xml     |  31 +++
+>  gdbstub/gdb-xml/i386-32bit-sse.xml        |  54 +++++
+>  gdbstub/gdb-xml/i386-32bit.xml            |  46 +---
+>  gdbstub/gdb-xml/i386-64bit-avx.xml        |  28 +++
+>  gdbstub/gdb-xml/i386-64bit-avx512.xml     | 108 +++++++++
+>  gdbstub/gdb-xml/i386-64bit-sse.xml        |  62 +++++
+>  gdbstub/gdb-xml/i386-64bit.xml            |  50 ----
+>  gdbstub/gdb-xml/i386-system.xml           |  53 +++++
+>  gdbstub/gdb-xml/m68k-system.xml           |  32 +++
+>  gdbstub/gdb-xml/riscv-32bit-alias.xml     | 105 +++++++++
+>  gdbstub/gdb-xml/riscv-32bit-fpu-alias.xml |  40 ++++
+>  gdbstub/gdb-xml/riscv-64bit-alias.xml     | 105 +++++++++
+>  gdbstub/gdb-xml/riscv-64bit-fpu-alias.xml |  46 ++++
+>  gdbstub/gdb-xml/sparc64-system.xml        |  22 ++
+>  gdbstub/gdbstub.c                         |  85 +++++--
+>  include/exec/gdbstub.h                    |  21 ++
+>  include/hw/core/cpu.h                     |   5 +-
+>  include/hw/core/sysemu-cpu-ops.h          |  16 --
+>  include/monitor/hmp.h                     |   6 -
+>  include/qemu/typedefs.h                   |   1 -
+>  monitor/hmp.c                             |  45 +---
+>  target/arm/gdbstub.c                      |   8 +-
+>  target/arm/gdbstub64.c                    |  10 +-
+>  target/i386/cpu-dump.c                    |   5 +-
+>  target/i386/cpu.c                         |  60 +++--
+>  target/i386/cpu.h                         |  25 ++
+>  target/i386/gdbstub.c                     | 373 +++++++++++++++++++++++++++---
+>  target/i386/tcg/fpu_helper.c              |  24 +-
+>  target/m68k/cpu.c                         |  22 --
+>  target/m68k/helper.c                      |  49 +++-
+>  target/ppc/gdbstub.c                      |   2 +-
+>  target/riscv/cpu.c                        |   1 -
+>  target/riscv/gdbstub.c                    |  57 ++++-
+>  target/riscv/internals.h                  |   3 -
+>  target/riscv/monitor.c                    | 140 -----------
+>  target/riscv/tcg/csr.c                    |   3 +-
+>  target/sparc/cpu.c                        |  19 --
+>  target/sparc/gdbstub.c                    |  38 +++
+>  target/xtensa/cpu.c                       |   2 +-
+>  tests/qtest/test-hmp.c                    |   1 -
+>  56 files changed, 1383 insertions(+), 478 deletions(-)
+> ---
+> base-commit: 8967b2fe1b2aaae3c29e207d85fab901d580a2dc
+> change-id: 20260910-query-reg-80cd59cf4707
+> 
+> Best regards,
+> --  
+> Marc-André Lureau <marcandre.lureau@redhat.com>
+> 
 -- 
-2.34.1
-
+ -----Open up your eyes, open up your mind, open up your code -------   
+/ Dr. David Alan Gilbert    |       Running GNU/Linux       | Happy  \ 
+\        dave @ treblig.org |                               | In Hex /
+ \ _________________________|_____ http://www.treblig.org   |_______/
 
