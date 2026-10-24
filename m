@@ -1,79 +1,149 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 32D09606A31A
-	for <qemu-riscv@archiver.kernel.org>; Sat, 24 Oct 2026 15:52:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3B02B606A31A
+	for <qemu-riscv@archiver.kernel.org>; Sat, 24 Oct 2026 17:01:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=treblig.org header.i=@treblig.org header.a=rsa-sha256 header.s=bytemarkmx header.b=qsnK4fTI
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=lbPsYTs6;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Jg3UVWZZ
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xKe2F-0000a0-I9; Sat, 24 Oct 2026 11:51:57 -0400
+	id 1xKf6p-00089O-Ox; Sat, 24 Oct 2026 13:00:43 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dg@treblig.org>)
- id 1xKe1w-0000Wh-42; Sat, 24 Oct 2026 11:51:37 -0400
-Received: from mx.treblig.org ([2a00:1098:5b::1])
+ (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
+ id 1xKf6m-00088m-0e
+ for qemu-riscv@nongnu.org; Sat, 24 Oct 2026 13:00:41 -0400
+Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dg@treblig.org>)
- id 1xKe1t-0006uJ-QV; Sat, 24 Oct 2026 11:51:35 -0400
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=treblig.org
- ; s=bytemarkmx;
- h=Content-Type:MIME-Version:Message-ID:Subject:From:Date:From
- :Subject; bh=V4iZYoxy+XBZp3nhXDfm6iYmskBq0641TnPqJV9mKII=; b=qsnK4fTI54UGvy5h
- SVyQCel19WB/uH+ugCafgD1oOx9FcElkHdOU1eIZ9mjNNxk5mA/3j7P5GZF4T3beoBRK5fK5ghWGY
- SArNTN9/pS4E1kGdOzo+d9Rv0d0qjtht2h7xlHWgqy/m3vZolZMi9WVZn/j0YGuNcVNIFEdX7cWe3
- fNlnUg3HvMaYkMb9AkN1F0dlzTiiU9r622oNLXE5ZjGnNT7DR0/SX37ioF5+1/HY7Diuiue0YYGC8
- BRcGhu1Re38gk4erAm/hDe5qGWLzdaY7g11470NYZ4/o+3FWIOr5RkKFLuNrEEHhfz/HTVVLW8JCF
- bpYdLJKvLQ1yziw3lw==;
-Received: from dg by mx.treblig.org with local (Exim 4.98.2)
- (envelope-from <dg@treblig.org>) id 1xKe1j-00000002QqZ-1uLX;
- Sat, 24 Oct 2026 15:51:23 +0000
-Date: Sat, 24 Oct 2026 15:51:23 +0000
-From: "Dr. David Alan Gilbert" <dave@treblig.org>
-To: =?iso-8859-1?Q?Marc-Andr=E9?= Lureau <marcandre.lureau@redhat.com>
-Cc: qemu-devel@nongnu.org,
- Alex =?iso-8859-1?Q?Benn=E9e?= <alex.bennee@linaro.org>,
- Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@oss.qualcomm.com>,
- Zhao Liu <zhao1.liu@intel.com>, Peter Maydell <peter.maydell@linaro.org>,
- Chinmay Rath <rathc@linux.ibm.com>, Nicholas Piggin <npiggin@gmail.com>,
- Glenn Miles <milesg@linux.ibm.com>,
- Harsh Prateek Bora <harshpb@linux.ibm.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu@processmission.com>,
- Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
- qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
- Paolo Bonzini <pbonzini@redhat.com>, Laurent Vivier <laurent@vivier.eu>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Artyom Tarasenko <atar4qemu@gmail.com>, Helge Deller <deller@gmx.de>,
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
- Warner Losh <imp@bsdimp.com>, Kyle Evans <kevans@freebsd.org>
-Subject: Re: [PATCH v3 00/18] monitor/hmp: replace MonitorDef with GDB
- registers
-Message-ID: <atzT-0QHYWByMhEg@gallifrey>
-References: <20261022-query-reg-v3-0-7ad902b9a7cf@redhat.com>
+ (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
+ id 1xKf6j-0005GM-9N
+ for qemu-riscv@nongnu.org; Sat, 24 Oct 2026 13:00:38 -0400
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 69OF00oH996590
+ for <qemu-riscv@nongnu.org>; Sat, 24 Oct 2026 17:00:30 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ A9FvPuRKqzCUgsTK37vm+IpjsqTyedNShIkkx1Pc9WM=; b=lbPsYTs6f9LHMVxI
+ OPhhX99Tra5KclpmQf9XeU3ymtc/znwSM88wzUlZ6Fm7oy849OYOWIG0lBwGm+a2
+ lv69urFkngT0wgEA6Gy6Cj5vP0Wcw8eYiOYp9XW6bpYoowo6QFxpPpJMTS4byG+Y
+ +Gj82U9GBtmc4rhRjfqv9Ejv/UcXVw9AIrktReDPFVLRBLVAVGQNL0zGQ2sZTCjE
+ P1A/xDAVbecMtgCCPch7dRV2eESLYk7j400BXJoG8knIGnIbqPgNqtvczyperPCV
+ J/cI0z6xf2VPYZjHr3gRUPSo/NBd+gAL+Idy53/AeVunDtIF/Fn5lGM2ZOgY2z/R
+ MjQEsA==
+Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com
+ [209.85.222.200])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hgny9s8p2-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Sat, 24 Oct 2026 17:00:30 +0000 (GMT)
+Received: by mail-qk1-f200.google.com with SMTP id
+ af79cd13be357-9308eafb465so254698185a.2
+ for <qemu-riscv@nongnu.org>; Sat, 24 Oct 2026 10:00:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1792861225; x=1793466025; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:from:references
+ :to:content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=A9FvPuRKqzCUgsTK37vm+IpjsqTyedNShIkkx1Pc9WM=;
+ b=Jg3UVWZZmJn3C+Aznp0kB6496V6qwLyh4qalJ+5igLrZvlIaKY+Yopo4k7CVgfV8g1
+ +7gPiG9KWLJestuPiPKLYhamY6zmymPQzzZzhy+CLoQC0g+C+re8Ny+ByREOHWiSvWk0
+ KUUb8q3EBBOlJC4pRI3cg0fpK9tmPIljyjB6tVckCdpS080ystGwabFjLpty8tgefOA4
+ Jmy+GX/07kLsRSD7IHyVj/DVjDhc7nfC9xNaCIo3/bvnRlatdCw2/1az1pd7pUUhkaFD
+ x2Zo+5qSGJvPBf35+3c93QtymaqkW/BxFVY/EQcpTn0bH06nKYh1QJoLtA++D/Esr75R
+ AA9w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1792861225; x=1793466025;
+ h=content-transfer-encoding:content-type:in-reply-to:from:references
+ :to:content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=A9FvPuRKqzCUgsTK37vm+IpjsqTyedNShIkkx1Pc9WM=;
+ b=pb1I7MNssj81nLLvQNNBGJkzmrGrtdTKUG8VJhZd/17Qf9nE2pccgK4ss258u+ciL7
+ JDGZ006UQyLFlWJCsjM9ug+AUkVKZgJugfaekAuOVoiBvVc1rM2thAevXkEkSHM+7j5f
+ /UP/B9NiZkwTB+wc1f0EUlK6O1VY7seO4Qj5fyPprvm6Imq1AR8nRSZtbkBg+nW1V8xu
+ aKUZX3khcyF/RvYXKLv9Me8/J6Ud8OSLb0daAGS3vdb6f+b8BPmBBRarA6Tr+dRZBh48
+ 2bZeRqxnjo8km+0MjUAS6PiNfF9xoUVsZdnwE/MgMz3mRGA88Z4r1iNjKXYG7zM0kCAo
+ v1BA==
+X-Forwarded-Encrypted: i=1;
+ AKwUvByhz/bfog/MFDF3iAvgHYQCZo1HE2LN9F14zvI1CguiLMV4qQdR13g6v4gKR4RBcox3bSAYMD++rgbS@nongnu.org
+X-Gm-Message-State: AFq9FYIgJKVHXY157Tiy066/z6Dy9tq6c9XnyllimVZYHn8e/0a2GakR
+ uSOwahSFuKdbJ+mHp9YOXYEXKNRdtiJPBMgpgam63y5TKX6WyZmXICfGnkO1Im9ejLoklGnDd8S
+ 1YdOq8IjwO007RQefgrqhXlxbAu7NpCB3zofwkF+e1UW5IHBiFRxtN+foNg==
+X-Gm-Gg: AYBFou2W+f9mIHQaJyaq3QC7NmIf2v9W5vl34mOmGqEZxz7qfdeMgBBBU8N9QKQpJue
+ I5RWfDFwLs1digGv31fu2xNo/bdLwrBppkepwDYGGtBRD5eAnUHtdqOrWNjLr+VK4qGEfAFqFcW
+ ETrqE1AqmNYeXVvlCsS+dXrXT7uGMm+Tw1ZVhijOZQAIiUpvHULN2MVOoU6/7XMxcB8DhBU23pk
+ jgfIqElWVFmTM1aUq1UiorX6QP4umrE8nKsaUNOpM7gT80g3gkdM8gqTfniz4t7LONvAm2wfYNQ
+ Wu8kSzm8uXrCFHp0gCNzN58Phi1WoGYhiM1WIkMOK8dpmSIXGmuTiDYnG4sea8pw3poOehDugBc
+ U3tK8q2ZISQ4uReZkiODj4p4aIAcpjt2lZA==
+X-Received: by 2002:a05:620a:7008:b0:93e:4d60:d389 with SMTP id
+ af79cd13be357-940ef8be856mr347641085a.25.1792861225268; 
+ Sat, 24 Oct 2026 10:00:25 -0700 (PDT)
+X-Received: by 2002:a05:620a:7008:b0:93e:4d60:d389 with SMTP id
+ af79cd13be357-940ef8be856mr347626485a.25.1792861223719; 
+ Sat, 24 Oct 2026 10:00:23 -0700 (PDT)
+Received: from [192.168.69.209] (pmd666.hd.free.fr. [88.187.86.199])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4a35a04ad39sm179043725e9.1.2026.10.24.10.00.22
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sat, 24 Oct 2026 10:00:22 -0700 (PDT)
+Message-ID: <9ca6f711-e886-46a5-80ea-a6c750696a93@oss.qualcomm.com>
+Date: Sat, 24 Oct 2026 19:00:21 +0200
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20261022-query-reg-v3-0-7ad902b9a7cf@redhat.com>
-X-Chocolate: 70 percent or better cocoa solids preferably
-X-Operating-System: Linux/6.12.113+deb13-amd64 (x86_64)
-X-Uptime: 15:50:55 up 8 days, 1:11, 2 users, load average: 0.11, 0.04, 0.01
-User-Agent: Mutt/2.2.13 (2024-03-09)
-Received-SPF: pass client-ip=2a00:1098:5b::1; envelope-from=dg@treblig.org;
- helo=mx.treblig.org
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] tcg/riscv64: Fix vector constant matching for logical
+ ops
+Content-Language: en-US
+To: Aurelien Jarno <aurelien@aurel32.net>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ "open list:RISC-V TCG target" <qemu-riscv@nongnu.org>,
+ "open list:All patches CC here" <qemu-devel@nongnu.org>
+References: <20261010174742.3552498-1-aurelien@aurel32.net>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
+In-Reply-To: <20261010174742.3552498-1-aurelien@aurel32.net>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-GUID: uVd-DCuDo0bK8IGCXUIcvUW2QwARcl4O
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDI0MDA2NyBTYWx0ZWRfX1wmqdB0E7CWI
+ gkXrPH9152b+1FC9avUF5Q0v/ja7rIUXrqxPTsW/hwQWSGXYp8bRNpkmLMuEqkoODNc2D5srEfP
+ v1d17T+85zNabEf2GCxsk73sy5EZyOfai4raBSGaJXOqQqoN3F1KEmzQwemhCWimbf7mN1mA3fG
+ qi6TCFG7gHDKGoOaVBTqjzkoG7TufilRA/Gug7aZKxD99QfOr9Hc8DDfKnYpYTghXo9UYKEmu21
+ aAa4D62ocP/5ZzyandYtCSlx2gk70S/41fvXBnBxX/RbggcsmrEsuYbnqMGlIrDz+/Zgdf8nzaR
+ lURU2nmf7WJtYaBSNohgCIz4oTKBIPtkuDyQ5J4eRpmnSjLw791BfeBJRNHcCe1UHznNC4b+Y2o
+ 8NQtllj3DhIsI0xhw4AYHw9ORiRMItktEj+IHlVRiHF6lhPsRWxbd+fs3FYXvOAaVP3Hiq7yMKY
+ PJMnbRRnLchPdGAibZA==
+X-Authority-Analysis: v=2.4 cv=PqcG/AM3 c=1 sm=1 tr=0 ts=6adce42e cx=c_pps
+ a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=4s3hRJSeHn4rkQlkrse1kQ==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=M51BFTxLslgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
+ a=hXZgYZo4AAAA:8 a=q0Y7SH5cVIXpF_u_vNMA:9 a=QEXdDO2ut3YA:10
+ a=PEH46H7Ffwr30OY-TuGO:22 a=37BJPeUnzxYkbV1yBC-1:22
+X-Proofpoint-ORIG-GUID: uVd-DCuDo0bK8IGCXUIcvUW2QwARcl4O
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDI0MDA2NyBTYWx0ZWRfX9hakhGloMDjI
+ 3retWhDX7Eibpq9AtrKbRV/fDdZ8zCspoDcq6F+sis/qDQwg5qc2FIVDxPqwVzMj93Z+3bumyje
+ ujlGLxORoIir2jAZbAmLem7dRQpoIDk=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-10-24_02,2026-10-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 adultscore=0 spamscore=0 priorityscore=1501 bulkscore=0
+ impostorscore=0 phishscore=0 suspectscore=0 malwarescore=0 lowpriorityscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610240067
+Received-SPF: pass client-ip=205.220.168.131;
+ envelope-from=philmd@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -88,146 +158,127 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,USER_AGENT_SANE_1 autolearn=unavailable autolearn_force=no
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
 	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-* Marc-André Lureau (marcandre.lureau@redhat.com) wrote:
-> Hi,
+On 10/10/26 19:46, Aurelien Jarno wrote:
+> For logical vector operations (in the case of the RISC-V backend that
+> corresponds to and_vec, or_vec and xor_vec), VECE is unused. However,
+> tcg_target_const_match() always treat it as an element size to extract
+> the corresponding constant element from the whole constant.
 > 
-> HMP monitor supports printing $register expression. The lookup
-> was done via GDB stub registers, and supplementary MonitorDef
-> HMP-specific tables.
-
-Why don't you get the first ~3 of these merged and then you can take the
-others through the individual targets at their own pace.
-
-Dave
-
-> Migrate HMP registers to use the GDB infrastructure and remove the
-> legacy HMP MonitorDef. Internal registers aren't exposed to GDB.
-> This also drops HMP $pc x86 fallback (use $eip/$rip instead).
+> This causes the following aarch64 instruction
+>    bic v4.8h, #0xf0
+> to be translated into the following op:
+>    ...
+>    and_vec v128,e8,tmp5,tmp4,v128$0xff0fff0fff0fff0f
+>    ...
+> which is then translated to the following RISC-V instruction:
+>    vand.vi v1,v1,15
 > 
-> Known behavioural changes on RISC-V: CSR lookup is now case-sensitive
-> and vector registers now report "unkown register" instead of a
-> target-specific message ("Unable to print the value of vector vreg 'v0'
-> from this API")
+> Fix that by, when VECE is 0 aka MO_8, only extracting the element if the
+> it can actually be represented as a duplicated constant.
 > 
-> Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
+> Fixes: 5a63f5998791 ("tcg/riscv: Add support for basic vector opcodes")
+> Signed-off-by: Aurelien Jarno <aurelien@aurel32.net>
 > ---
-> Changes in v3:
-> - added x86 GDB register patches
->   - fix the x87 FPU tag word returned by the GDB stub
->   - split SSE registers into a separate org.gnu.gdb.i386.sse feature
->   - expose AVX/AVX-512 registers (ymm/zmm upper halves and opmask)
->   - expose more system registers to HMP
-> - renamed i386-segments.xml to i386-system.xml and registered it as an
->   internal feature, like the other targets
-> - moved the HMP $pc removal to its own patch and documented it in
->   removed-features.rst
-> - moved each target's MonitorDef removal into its target patch; the final
->   patch now only removes the generic MonitorDef infrastructure
-> - added MAINTAINERS entries
-> - rebased onto current master
-> - Link to v2: https://lore.kernel.org/qemu-devel/20261013-query-reg-v2-0-6f95a2e139a9@redhat.com
+>   tcg/riscv64/tcg-target.c.inc | 11 +++++++++--
+>   1 file changed, 9 insertions(+), 2 deletions(-)
 > 
-> Changes in v2:
-> - dropped v1 patch 5 (CPUClass::get_pc fallback for $pc)
-> - new patch gdb_register_internal_coprocessor() to hide registers from GDB
-> - SPARC64, m68k, RISC-V aliases now use internal registration
-> - pickup trailer tags
-> - Link to v1: https://lore.kernel.org/qemu-devel/20260911-query-reg-v1-0-0c04f0c02cf3@redhat.com
+> Changes v1 -> v2:
+> - Use dup_const() instead of open coding the constant duplication.
 > 
-> ---
-> Marc-André Lureau (18):
->       hmp: don't crash on invalid register
->       gdbstub: fix next register base after register gaps
->       gdbstub: set feature->base_reg for dynamic features
->       gdbstub: add gdb_register_internal_coprocessor()
->       MAINTAINERS: cover x86 GDB XML files
->       target/i386: expose segment limits register to monitors via gdbstub
->       target/i386: fix FPU tag word in GDB register read
->       target/i386: split SSE registers into separate GDB feature
->       target/i386: expose system registers to monitors via gdbstub
->       target/i386: expose AVX/AVX-512 registers to GDB
->       target/i386: drop HMP $pc
->       MAINTAINERS: cover m68k GDB XML files
->       target/m68k: expose system registers to monitors via gdbstub
->       target/sparc64: expose system registers to monitors via gdbstub
->       target/riscv: bypass smstateen check in debugger mode
->       MAINTAINERS: cover riscv GDB XML files
->       target/riscv: expose register aliases to monitors via gdbstub
->       monitor/hmp: remove legacy MonitorDef infrastructure
-> 
->  MAINTAINERS                               |   4 +
->  configs/targets/i386-bsd-user.mak         |   2 +-
->  configs/targets/i386-linux-user.mak       |   2 +-
->  configs/targets/i386-softmmu.mak          |   2 +-
->  configs/targets/m68k-softmmu.mak          |   2 +-
->  configs/targets/riscv32-linux-user.mak    |   2 +-
->  configs/targets/riscv32-softmmu.mak       |   2 +-
->  configs/targets/riscv64-bsd-user.mak      |   2 +-
->  configs/targets/riscv64-linux-user.mak    |   2 +-
->  configs/targets/riscv64-softmmu.mak       |   2 +-
->  configs/targets/sparc64-softmmu.mak       |   2 +-
->  configs/targets/x86_64-bsd-user.mak       |   2 +-
->  configs/targets/x86_64-linux-user.mak     |   2 +-
->  configs/targets/x86_64-softmmu.mak        |   2 +-
->  docs/about/removed-features.rst           |   8 +
->  gdbstub/gdb-xml/i386-32bit-avx.xml        |  20 ++
->  gdbstub/gdb-xml/i386-32bit-avx512.xml     |  31 +++
->  gdbstub/gdb-xml/i386-32bit-sse.xml        |  54 +++++
->  gdbstub/gdb-xml/i386-32bit.xml            |  46 +---
->  gdbstub/gdb-xml/i386-64bit-avx.xml        |  28 +++
->  gdbstub/gdb-xml/i386-64bit-avx512.xml     | 108 +++++++++
->  gdbstub/gdb-xml/i386-64bit-sse.xml        |  62 +++++
->  gdbstub/gdb-xml/i386-64bit.xml            |  50 ----
->  gdbstub/gdb-xml/i386-system.xml           |  53 +++++
->  gdbstub/gdb-xml/m68k-system.xml           |  32 +++
->  gdbstub/gdb-xml/riscv-32bit-alias.xml     | 105 +++++++++
->  gdbstub/gdb-xml/riscv-32bit-fpu-alias.xml |  40 ++++
->  gdbstub/gdb-xml/riscv-64bit-alias.xml     | 105 +++++++++
->  gdbstub/gdb-xml/riscv-64bit-fpu-alias.xml |  46 ++++
->  gdbstub/gdb-xml/sparc64-system.xml        |  22 ++
->  gdbstub/gdbstub.c                         |  85 +++++--
->  include/exec/gdbstub.h                    |  21 ++
->  include/hw/core/cpu.h                     |   5 +-
->  include/hw/core/sysemu-cpu-ops.h          |  16 --
->  include/monitor/hmp.h                     |   6 -
->  include/qemu/typedefs.h                   |   1 -
->  monitor/hmp.c                             |  45 +---
->  target/arm/gdbstub.c                      |   8 +-
->  target/arm/gdbstub64.c                    |  10 +-
->  target/i386/cpu-dump.c                    |   5 +-
->  target/i386/cpu.c                         |  60 +++--
->  target/i386/cpu.h                         |  25 ++
->  target/i386/gdbstub.c                     | 373 +++++++++++++++++++++++++++---
->  target/i386/tcg/fpu_helper.c              |  24 +-
->  target/m68k/cpu.c                         |  22 --
->  target/m68k/helper.c                      |  49 +++-
->  target/ppc/gdbstub.c                      |   2 +-
->  target/riscv/cpu.c                        |   1 -
->  target/riscv/gdbstub.c                    |  57 ++++-
->  target/riscv/internals.h                  |   3 -
->  target/riscv/monitor.c                    | 140 -----------
->  target/riscv/tcg/csr.c                    |   3 +-
->  target/sparc/cpu.c                        |  19 --
->  target/sparc/gdbstub.c                    |  38 +++
->  target/xtensa/cpu.c                       |   2 +-
->  tests/qtest/test-hmp.c                    |   1 -
->  56 files changed, 1383 insertions(+), 478 deletions(-)
-> ---
-> base-commit: 8967b2fe1b2aaae3c29e207d85fab901d580a2dc
-> change-id: 20260910-query-reg-80cd59cf4707
-> 
-> Best regards,
-> --  
-> Marc-André Lureau <marcandre.lureau@redhat.com>
-> 
--- 
- -----Open up your eyes, open up your mind, open up your code -------   
-/ Dr. David Alan Gilbert    |       Running GNU/Linux       | Happy  \ 
-\        dave @ treblig.org |                               | In Hex /
- \ _________________________|_____ http://www.treblig.org   |_______/
+> diff --git a/tcg/riscv64/tcg-target.c.inc b/tcg/riscv64/tcg-target.c.inc
+> index 14a397117a..1262b71a62 100644
+> --- a/tcg/riscv64/tcg-target.c.inc
+> +++ b/tcg/riscv64/tcg-target.c.inc
+> @@ -392,8 +392,15 @@ static bool tcg_target_const_match(int64_t val, int ct,
+>           return 1;
+>       }
+>       if (type >= TCG_TYPE_V64) {
+> -        /* Val is replicated by VECE; extract the highest element. */
+> -        val >>= (-8 << vece) & 63;
+> +        /*
+> +         * For vector logical operations, VECE is unused and equals to 0, so
+> +         * we need to check that the constant can properly be represented after
+> +         * replication.
+> +         */
+> +        if ((vece != MO_8) || (val == dup_const(vece, val))) {
+> +            /* Val is replicated by VECE; extract the highest element. */
+> +            val >>= (-8 << vece) & 63;
+> +        }
+>       }
+
+This fixes the BIC case, but I don't think it is sufficient.
+
+I tested with qemu-aarch64 built for a riscv64 host, run under
+qemu-riscv64 -cpu max, guest -cpu max,sve-default-vector-length=16.
+
+NEON bic v0.8h, #0xf0 // fail on master, now OK
+
+add z1.b; and z0.d, #0xf // FAIL
+add z1.d; and z0.b, #0xf // FAIL
+add z1.b; orr z0.d, #-16 // FAIL
+add z1.d; eor z0.b, #0xf // FAIL
+
+Not accepting constants for and/or/xor_vec at all
+(using C_O1_I2(v, v, v) to get them loaded into registers)
+makes all five cases pass (I'm not sure we want to keep
+the .vi forms):
+
+-- >8 --
+diff --git a/tcg/riscv64/tcg-target.c.inc b/tcg/riscv64/tcg-target.c.inc
+--- a/tcg/riscv64/tcg-target.c.inc
++++ b/tcg/riscv64/tcg-target.c.inc
+@@ -2779,15 +2779,15 @@ static void tcg_out_vec_op(TCGContext *s, 
+TCGOpcode opc,
+      case INDEX_op_and_vec:
+          set_vtype_len(s, type);
+-        tcg_out_opc_vv_vi(s, OPC_VAND_VV, OPC_VAND_VI, a0, a1, a2, c2);
++        tcg_out_opc_vv(s, OPC_VAND_VV, a0, a1, a2);
+          break;
+      case INDEX_op_or_vec:
+          set_vtype_len(s, type);
+-        tcg_out_opc_vv_vi(s, OPC_VOR_VV, OPC_VOR_VI, a0, a1, a2, c2);
++        tcg_out_opc_vv(s, OPC_VOR_VV, a0, a1, a2);
+          break;
+      case INDEX_op_xor_vec:
+          set_vtype_len(s, type);
+-        tcg_out_opc_vv_vi(s, OPC_VXOR_VV, OPC_VXOR_VI, a0, a1, a2, c2);
++        tcg_out_opc_vv(s, OPC_VXOR_VV, a0, a1, a2);
+          break;
+      case INDEX_op_not_vec:
+          set_vtype_len(s, type);
+@@ -2976,15 +2976,15 @@ tcg_target_op_def(TCGOpcode op, TCGType type, 
+unsigned flags)
+      case INDEX_op_rotli_vec:
+          return C_O1_I1(v, v);
+      case INDEX_op_add_vec:
+-    case INDEX_op_and_vec:
+-    case INDEX_op_or_vec:
+-    case INDEX_op_xor_vec:
+      case INDEX_op_ssadd_vec:
+      case INDEX_op_sssub_vec:
+      case INDEX_op_usadd_vec:
+      case INDEX_op_ussub_vec:
+          return C_O1_I2(v, v, vK);
+      case INDEX_op_sub_vec:
+          return C_O1_I2(v, vK, v);
++    case INDEX_op_and_vec:
++    case INDEX_op_or_vec:
++    case INDEX_op_xor_vec:
+      case INDEX_op_mul_vec:
+      case INDEX_op_shlv_vec:
+      case INDEX_op_shrv_vec:
+      case INDEX_op_sarv_vec:
+      case INDEX_op_rotlv_vec:
+      case INDEX_op_rotrv_vec:
+      case INDEX_op_smax_vec:
+      case INDEX_op_smin_vec:
+      case INDEX_op_umax_vec:
+      case INDEX_op_umin_vec:
+          return C_O1_I2(v, v, v);
+---
 
