@@ -1,132 +1,140 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2BA7D606A31A
-	for <qemu-riscv@archiver.kernel.org>; Sat, 24 Oct 2026 07:00:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 30141606A31A
+	for <qemu-riscv@archiver.kernel.org>; Sat, 24 Oct 2026 07:03:31 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=cq+uPelJ;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=IDn4FL3u
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=dmbDjn4h;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Ujov0RCJ
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xKVjF-0006JJ-3j; Sat, 24 Oct 2026 02:59:45 -0400
+	id 1xKVmZ-0006yr-Pl; Sat, 24 Oct 2026 03:03:11 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xKVjC-0006J2-RR
- for qemu-riscv@nongnu.org; Sat, 24 Oct 2026 02:59:42 -0400
-Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
+ id 1xKVmU-0006y7-Cb
+ for qemu-riscv@nongnu.org; Sat, 24 Oct 2026 03:03:07 -0400
+Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xKVjA-0007k3-Oe
- for qemu-riscv@nongnu.org; Sat, 24 Oct 2026 02:59:42 -0400
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+ id 1xKVmS-00081F-OL
+ for qemu-riscv@nongnu.org; Sat, 24 Oct 2026 03:03:06 -0400
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 69O4C3Wr048138
- for <qemu-riscv@nongnu.org>; Sat, 24 Oct 2026 06:59:38 GMT
+ 69O2XhBr060286
+ for <qemu-riscv@nongnu.org>; Sat, 24 Oct 2026 07:03:03 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:date:from:message-id:mime-version
- :subject:to; s=qcppdkim1; bh=6ql3tJi85y24LYD6lUerNQRTKlNLRlL0XIl
- tX4M1aZw=; b=cq+uPelJ+o8Wcn/bJK3/uGXMaqT7C08pf+L+iLpoWO5f+PlqkxJ
- IV/9AmyXsZyDieZOn/DQm5XrskjUHo1LnS/0BRp+iB7Z5bfGaJjpX8dJkn89lXLO
- SbQri9wCWcEbzC3y5eF2xkwsj9mDkAxRtAXw81NF1ADGvvMecuTHmwYnBz46l7FV
- T8VuO8IVQUFz5Noxp87DxZzQ1E7scEKr+Cj0jVQs2LdXnpip2A8bjxr2gW6+zSVw
- woFdLSDqJA4XtGclr8uGzCxiOlpzj0l0onTRdEHNf01qPSWaKFBFzCvdTvlUozpy
- 1j2QY3hNVgpEJywWH+/tdIQ9oWZsVjT7a8w==
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com
- [209.85.222.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hgnehg9a7-1
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ SdaCXhoZL27RkieLtPKWbr6u3llHXQP0Y1zWZvMtRBA=; b=dmbDjn4hoG6YH96x
+ XqeB9kNMPT6Ffub1Zl6lvBJ7Ax22ZzEc3ekM5yit7Df0iZFzslA2Yhcel0vcZsmN
+ MUqybxIgtNWAq+jnc2U1NxbAtIvImEFgpZmgnFXuCIiYgkoEZ5PYZvuka7d4fhJd
+ ozcGkxHYU2yLyg3a7aUTH3up91B6KB/F5CAqCi/wm6uellPk9a3jtZEmN3m0vRs5
+ k9GPVhvMAUntPqQZhEn2W199OY/l936355eguz5Cc10tWBFnTb/WGVJftauqPP1P
+ ikbnFGtv59nqje4l0KzKXEKfTww+RyFdQeysTWszksd2VKkH4Iq2oYJM3KnUKSbZ
+ cEBHBA==
+Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com
+ [209.85.160.198])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hgm0ggfr1-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Sat, 24 Oct 2026 06:59:38 +0000 (GMT)
-Received: by mail-qk1-f198.google.com with SMTP id
- af79cd13be357-93f13c143c8so289804585a.3
- for <qemu-riscv@nongnu.org>; Fri, 23 Oct 2026 23:59:38 -0700 (PDT)
+ for <qemu-riscv@nongnu.org>; Sat, 24 Oct 2026 07:03:03 +0000 (GMT)
+Received: by mail-qt1-f198.google.com with SMTP id
+ d75a77b69052e-53635e21ddaso20929821cf.2
+ for <qemu-riscv@nongnu.org>; Sat, 24 Oct 2026 00:03:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1792825177; x=1793429977; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=6ql3tJi85y24LYD6lUerNQRTKlNLRlL0XIltX4M1aZw=;
- b=IDn4FL3uvffr19IWblSyO8AyPPlczGDW1ihX5ME8AcrA5X2PiUJ3mqmZ3AmJlOrZ9G
- qsCQOgSazWRqpYwkRKuXto3+wA7VjqSsWtORPYTjmbcsmyAIfWlmkLuxygAM1RpzdSqF
- ScnJ+0A2sIAimfNLTy5gJIby/S/pBJtQV0Xu9XmP10eZG7yOYqJBrDz78+GCOdboUfeX
- 4W9mn9L+xGagH0/HC6sbrzgCxvZd5seulItIfHO7aOh1p7lBZA7dVwchLx155qYFLGOt
- oLQhqzn/KHoPRj3hzO0OK4jA+kRlYNA5vrZ95aHBV2dyx3ekQbiL650gzm375sbuoKB+
- 2/yA==
+ d=oss.qualcomm.com; s=google; t=1792825383; x=1793430183; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=SdaCXhoZL27RkieLtPKWbr6u3llHXQP0Y1zWZvMtRBA=;
+ b=Ujov0RCJFHHVhKCjLPOCjXNf6MUzR3ACQ8jFi7d8J6NG87u8Yf0lY9pvWlxcYD/IAe
+ hQK6ldAaKe3Fh6ql0l+h80xPc/oj51H4ywsVvzyvaRJApM9ghwJtgQu0rQV1Hig1FjEN
+ 4OE4B684dnkBOtc1l22W3e6wPGLHskVqUY3UPyoeJK5DWx/zoCg9jzMhN9hbC6sO+TpI
+ LInyCoFFY5U4YVXjWd+QL7wMM7M0GaG1FBBI5TErAghO2tO33lgn2z60Y+BJdCHU0RFw
+ QP7Piby7Ma++9+kM2QW8E9DU2ZAJUh0vPqlfKeib6S7p+6qck9Od0hrI+uDxUkXS64lM
+ 2L8g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792825177; x=1793429977;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20260707; t=1792825383; x=1793430183;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=6ql3tJi85y24LYD6lUerNQRTKlNLRlL0XIltX4M1aZw=;
- b=0EwMimncckX7NdiSGmEuy81zXUcoKPaq4D2ZJowvd1bkoVWyPLMICNQtWiOpzIrnI8
- cuT71MQeHCL67UoXf8qOXcjSae0I+nFm9SyBCybaUfDYlarYjoz3CawR22QGit8bqFIp
- uySafsLmWKk6ARmw+e4ggDXJ+C/eDc2LNAC/dKRDFNiPmPXDQmxM8gZGmGXUzGExz9I/
- kjZoGRJA5aJZW5bY+IHO3YJdm2y9I3p0lRMMKZJG45f324WAmV0SQHjg/w5IuzXJ0Pa0
- WG0uNzZk0y4glrc3mpqeLTLo68mIgFXMn26jv7NyJBzDfj6PlXX17XVW8LHU+uC1u4sY
- mHqw==
-X-Gm-Message-State: AFq9FYKLT3YZwsd3GaHZ5fXB7FO/6QpP9hoSVzM827HnN5+QrSWq+NrO
- PRrt3S48I80Oo/ofYDFgEmtAWzrnXY4F6QD5b91apnl/5998muRrbktKhqGknkRjqCRfATTj62k
- p1yHDyeWVe9QC24QxWIjexzqnwGoP+JV4jcbSez/JYXR8i8DzWpqNgO3cOQ==
-X-Gm-Gg: AYBFou0o75PHCRAgYQy0YXQKZCIdYrsC+suUBR13Yzdvoh7FYan8fZ8oUd85ksHvFVe
- yq6iunCGakEfVB/d9OB2VdzEp+CqlWg/Vkr51ngGujaNUYc7iDLSomM3BpzVNKIHA9i+uUSxXoz
- k+5yPF8IWy3KBmqQdnlzpSQt9mmGAAmh9nVp3lYAHwuVetBG084IVB3OvGcMyjfqSYyDo36+p0F
- BY4WubBuMIezaEtnKyEXrp2U8nAB8LzT/bBMR6Uci9OTF3LG0A/TgC4dtEbHtQ79QehbCWvWqPU
- bDBDHppkskcnosTRlWhHs3Fv9gHeBbnA78cSfGDRO2DU21rS8xWOLwjhl6XOmYXyC7jM5IFn/ww
- 7kHjqgsaN7/IWvMv6LZjyH9Y0bWd6wXc4LxjPWA==
-X-Received: by 2002:a05:620a:4408:b0:93f:1936:b206 with SMTP id
- af79cd13be357-940ef9d4881mr159173785a.83.1792825177274; 
- Fri, 23 Oct 2026 23:59:37 -0700 (PDT)
-X-Received: by 2002:a05:620a:4408:b0:93f:1936:b206 with SMTP id
- af79cd13be357-940ef9d4881mr159170085a.83.1792825176392; 
- Fri, 23 Oct 2026 23:59:36 -0700 (PDT)
-Received: from QCOM-UWl2o8bcGT.qualcomm.com ([152.234.125.162])
+ bh=SdaCXhoZL27RkieLtPKWbr6u3llHXQP0Y1zWZvMtRBA=;
+ b=PTLbDIABzPsQumPLq8gJJVvxFmvTT2vGEAtG5Kor0F3ZlTVUDgXoGDhhxUlRaqQQLJ
+ ZkjT0S7qJRRT0w3VZnwD+iVj9cIRcotJ/k/V5vrMNrAsqzshBOrRV9m+XwikkGYTHzPt
+ jWWUHac4nubPIseNgpzdDAR1RiT00CAko4//iKgWghPWC/K3QaM7vPr6ZUPvYQKmlkk3
+ IW8QnilhU+v5O3NwFrtTjh/7mtpxR1yEhevXo2khpogxbWHrTiy/8m3MaN++0sYuAeQb
+ oI7nwCl+2W4iTuw6gBoQb59SJYXQWdyLNvOTBDs9MxtQAoks+Kr98fsAeSTfDw30+KF7
+ CbFg==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBxm/WpMzp/QOly3WselY1Q+BSrPZr0h2sOYrs8cJMmqj7gPg2jEEOmevOqILqwxReZvGo01BBo/gyA5@nongnu.org
+X-Gm-Message-State: AFq9FYLEQT22kyDY2DoSsihz8ftZR4A61DuoKxqHT12yRp3KEyVyzpQR
+ vGxGPEo5WtX6qZSiziKjM4uIH82mj9ZZxZXPBWy8BHrNGT9ipYvlcTRGoG/0uH9NWpEz6LdQxOK
+ AsKoXF1p2pD+djGMBUHvqI4pT+S2ECPt+fYxuswyFNLyf2myPMDO8jS+eNw==
+X-Gm-Gg: AYBFou12x4iriNtSjahccReCEQAZteB36/O198OtLSCVeCnyseBvkSdExh26JrrwkN9
+ DaKq1yWP4sRK5tgt1+aWFuxdlPiGgfFo/356J9KfWKFj2/va6k5IdDg+n52IcBBresdAlQ4j/D7
+ zTGKzw/sZHOkfi0w+zptfHFv+qYw+qbh1BWa4bV8PMmn3xxi89spg4weyxHcyEnreG8knPau4T3
+ /sY0qa7JH4x/nN3QiJdHvBYvs7VaE/dz1zp3dF/QjqeAfGCprhsiX4m1dzitqbf9p0fFMXb7qo2
+ 26OmFQf3gikcn9+aMRF77IxwWRilSuhkXV3/BS7arXTWJ6HVvWNUCDYHojfDPo9d2KSJWzRvb0T
+ Xc/CUjM0OQXe/kfpV36BSeBO/kg1SAn+HzSlo
+X-Received: by 2002:a05:622a:1aa0:b0:536:8bb4:2a83 with SMTP id
+ d75a77b69052e-5383b64c96fmr16487381cf.74.1792825382507; 
+ Sat, 24 Oct 2026 00:03:02 -0700 (PDT)
+X-Received: by 2002:a05:622a:1aa0:b0:536:8bb4:2a83 with SMTP id
+ d75a77b69052e-5383b64c96fmr16487101cf.74.1792825382074; 
+ Sat, 24 Oct 2026 00:03:02 -0700 (PDT)
+Received: from [192.168.68.104] ([152.234.125.162])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-940f0a9720csm112753785a.42.2026.10.23.23.59.32
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 23 Oct 2026 23:59:34 -0700 (PDT)
-From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Fangyu Yu <fangyu.yu@linux.alibaba.com>,
- Palmer Dabbelt <palmer@dabbelt.com>
-Subject: [PATCH] target/riscv/csr.c: allow regular mstatus MPV/GVA writes again
-Date: Sat, 24 Oct 2026 03:59:30 -0300
-Message-ID: <20261024065930.26750-1-daniel.barboza@oss.qualcomm.com>
-X-Mailer: git-send-email 2.43.0
+ 6a1803df08f44-91c47c54cbdsm14557836d6.26.2026.10.24.00.03.00
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sat, 24 Oct 2026 00:03:01 -0700 (PDT)
+Message-ID: <b1e589f7-dc16-4898-85c8-c20e85c56df5@oss.qualcomm.com>
+Date: Sat, 24 Oct 2026 04:02:58 -0300
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDI0MDAyNyBTYWx0ZWRfX11RZ2ZLue3Jm
- BQUTP/Tyr7DhEPWmfyQhtIPnIMvx56jcypfrUMGu284T9drKl2zKP7r3b2mUx54l67uG/iBC5F5
- I6fAvOvT818nPdq9XTNTNf3B6hZrDUU=
-X-Proofpoint-ORIG-GUID: JVOxfom1fiIfANnifgF2Y6S67muJyrDX
-X-Authority-Analysis: v=2.4 cv=d5tgWhjE c=1 sm=1 tr=0 ts=6adc575a cx=c_pps
- a=qKBjSQ1v91RyAK45QCPf5w==:117 a=AgQEunjic7gIBKSbIeB6Ag==:17
- a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22 a=VwQbUJbxAAAA:8
- a=SRrdq9N9AAAA:8 a=EUspDBNiAAAA:8 a=2-HHZJNMt9pQZSuXdbMA:9
- a=NFOGd7dJGGMPyQGDc5-O:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDI0MDAyNyBTYWx0ZWRfX+LfGmved36kF
- YCq6JAIF/5QRGstKUE4AEOAysabBgtuQbHHfHBnJAg4MjVabTwaWdjh+Vs2to8EOAVhyzJrosEm
- OD1j9OS7pHqeZnn2Fuw9d5bXUrfmBLeOcNc3wzXyi81n7xU36wsr4aOKfgTFmcqN8r8L31yJ2RO
- qEYZ0y2ZpntrfG1Hfgqd36eYgYqQZAsU0SvCqyI+FG82JjnIcf7iY9mOHn/BJ+tagYatTOlxZoY
- G4L9OOemNg9ApruTMfUq1AW/IMKFngE+dy0FHJPcNB/E8IUuj2J31HgmRFTTbGVvFj9FutKfs9i
- bacTNOnMuyXOh8iMxhYrm+5boxiwWede3GYf4RUVHq241PlScssEN7f+nWWtbDRMr+nddg4DBX/
- UvuhR6zk5aHQu3ELjptU8+3cFwD2VDyzYnj3X67SjS0+IBJXSpYVhCnypMsLvbssCOXcBE14Lnh
- ykPEqU5NoPLMq157iTg==
-X-Proofpoint-GUID: JVOxfom1fiIfANnifgF2Y6S67muJyrDX
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] target/riscv/csr.c: do not allow mstatus MPV/GVA
+ writes
+To: fangyu.yu@linux.alibaba.com
+Cc: alistair.francis@wdc.com, chao.liu.zevorn@gmail.com, liwei1518@gmail.com, 
+ qemu-devel@nongnu.org, qemu-riscv@nongnu.org, zhiwei_liu@linux.alibaba.com
+References: <20260514194537.2416243-2-daniel.barboza@oss.qualcomm.com>
+ <20261022120111.24298-1-fangyu.yu@linux.alibaba.com>
+From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Content-Language: en-US
+In-Reply-To: <20261022120111.24298-1-fangyu.yu@linux.alibaba.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-ORIG-GUID: qNiaKtZnho1XknFw5G1aTkDz6l9ZM-wj
+X-Authority-Analysis: v=2.4 cv=UfTE26SN c=1 sm=1 tr=0 ts=6adc5827 cx=c_pps
+ a=mPf7EqFMSY9/WdsSgAYMbA==:117 a=AgQEunjic7gIBKSbIeB6Ag==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
+ a=SRrdq9N9AAAA:8 a=EUspDBNiAAAA:8 a=UDRo9PCKy471BPd3udMA:9 a=QEXdDO2ut3YA:10
+ a=dawVfQjAaf238kedN5IG:22
+X-Proofpoint-GUID: qNiaKtZnho1XknFw5G1aTkDz6l9ZM-wj
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDI0MDAyNyBTYWx0ZWRfX3RPA1TZM1tXJ
+ CMG9EMy6gF/dPNgq3jZ53Tcq0FU/DdgBIkG/xonhTQy7C62m4rN7wokxiiU0J1bzHDKjgfRm8Sh
+ 9Gbmu8Obv/IZGvfAeXa3ntBsJJzAfYxmsDke0ByrJXwGPXZmKywwnKc50SWQU53NqJdGNNE3pZe
+ Ap5PjxYjxTDCbbepbim76rZ2NzsDnc12XjjHRVR7fBIZ6tX3k5CNzoCoILlVkj4CxeeICbYYHmQ
+ UplBEh13Z7dn2o5QAqHOdKDcZ2KWb3lBRjEtDiAuX6OGwzrwejZleg/YI1TjfanBsqiwrAxIWFq
+ DBE/0mXPaiN+hL+5SD0EBqUeuyAqarSLl1P51XyXIXye0dfdxr24TNE6efqg3RUej/0xJyBdy1W
+ z/LydKbZZyTzCI8DNtBIrI4ZD4NoxOm6adYBKjT39r74ogL33vuLYRFZMKLaSJZRavJjv2wfgA2
+ 4hmGNtsFChotLIMDoEg==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDI0MDAyNyBTYWx0ZWRfX0ngmSYxeLrqt
+ H1fmWZZlm6N0TGKfM3xDfF4xGSpWHE0A2iavvbYU0OobD7OULnS2uKPrMEwJShLtmMFt9upPHHC
+ dLPtt8t191E5SFH9BJX4EBdSH8jHc4M=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-10-24_01,2026-10-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 bulkscore=0 phishscore=0 clxscore=1015 adultscore=0
- malwarescore=0 suspectscore=0 lowpriorityscore=0 spamscore=0 impostorscore=0
+ priorityscore=1501 lowpriorityscore=0 malwarescore=0 spamscore=0 bulkscore=0
+ suspectscore=0 impostorscore=0 phishscore=0 adultscore=0 clxscore=1015
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610240027
-Received-SPF: pass client-ip=205.220.168.131;
- envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
+Received-SPF: pass client-ip=205.220.180.131;
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
 X-Spam_score_int: -27
 X-Spam_score: -2.8
 X-Spam_bar: --
@@ -145,63 +153,87 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-In commit 18645f195789 we removed the capability of MPV/GVA writes by
-software, claiming that the ISA says that these bits are changed by the
-implementation (i.e. hardware).
+Hi!
 
-This fact alone can't be interpret as "so software can't change them".
-The ISA never mentions that, and we shouldn't just assume read/write
-accesses based on whether hardware updates it or not.  M-mode software
-can do whatever they want, unless clearly stated in the ISA, and that
-includes mstatus MPV and GVA updates.
+On 10/22/2026 9:01 AM, fangyu.yu@linux.alibaba.com wrote:
+>> The priv spec states the following about mstatus.MPV:
+>>
+>> "The MPV bit (Machine Previous Virtualization Mode) is written by the
+>> implementation whenever a trap is taken into M-mode."
+>>
+>> And, about mstatus.GVA:
+>>
+>> "Field GVA (Guest Virtual Address) is written by the implementation
+>> whenever a trap is taken into M-mode."
+>>
+>> Both are written during riscv_cpu_do_interrupt().  They're not supposed
+>> to be written by userspace.  As far as write_mstatus goes these fields
+>> are read only.  The same applies for mstatush.MPV/mstatush.GVA.
+>>
+>> Fixes: 03dd405dd5 ("target/riscv: Support MSTATUS.MPV/GVA only when RVH is enabled")
+>> Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+>> ---
+>> target/riscv/csr.c | 5 +----
+>> 1 file changed, 1 insertion(+), 4 deletions(-)
+>>
+>> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+>> index e1cd4a299c..74f5f868f0 100644
+>> --- a/target/riscv/csr.c
+>> +++ b/target/riscv/csr.c
+>> @@ -2040,9 +2040,6 @@ static RISCVException write_mstatus(CPURISCVState *env, int csrno,
+>>      }
+>>
+>>      if (xl != MXL_RV32 || env->debugger) {
+>> -        if (riscv_has_ext(env, RVH)) {
+>> -            mask |= MSTATUS_MPV | MSTATUS_GVA;
+>> -        }
+> 
+> Hi Daniel,
+> 
+> Could you share the motivation for making MPV/GVA read-only here? Was
+> this based on a real misbehavior, or mainly on the spec wording.
+> 
+> I noticed that the current OpenSBI code modifies MPV in several places
+> (sbi_hart_switch_mode, sbi_trap_redirect, sse_event_resume). With this
+> patch, those writes are dropped.
 
-And in fact existing software is writing to these bits, as reported by
-Fangyu in [1], and that change ended up causing real problems in the
-end.
+I read the ISA again and couldn't justify what we did in that patch.  Unless
+clearly stated in the ISA that "software can't write bit X"  we cannot make
+assumptions about it just because says "hardware is writing bit X".
 
-Revert "target/riscv/csr.c: do not allow mstatus MPV/GVA writes".
+Thanks for bringing this up to our attention.  I just sent a revert.
 
-This reverts commit 18645f19578955ec5ff2c40cd2c8753d6bc460c2.
 
-[1] https://lore.kernel.org/qemu-devel/20261022120111.24298-1-fangyu.yu@linux.alibaba.com/
+Cheers,
+Daniel
 
-Reported-by: Fangyu Yu <fangyu.yu@linux.alibaba.com>
-Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
----
- target/riscv/tcg/csr.c | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/target/riscv/tcg/csr.c b/target/riscv/tcg/csr.c
-index 13675b4a84..af444e3e6f 100644
---- a/target/riscv/tcg/csr.c
-+++ b/target/riscv/tcg/csr.c
-@@ -2108,6 +2108,9 @@ static RISCVException write_mstatus(CPURISCVState *env, int csrno,
-     }
- 
-     if (xl != MXL_RV32 || env->debugger) {
-+        if (riscv_has_ext(env, RVH)) {
-+            mask |= MSTATUS_MPV | MSTATUS_GVA;
-+        }
-         if ((val & MSTATUS64_SXL) != 0) {
-             mask |= MSTATUS64_SXL;
-             val = riscv_write_uxl(env, val, MSTATUS64_SXL);
-@@ -2150,7 +2153,7 @@ static RISCVException write_mstatush(CPURISCVState *env, int csrno,
-                                      target_ulong val, uintptr_t ra)
- {
-     uint64_t valh = (uint64_t)val << 32;
--    uint64_t mask = 0;
-+    uint64_t mask = riscv_has_ext(env, RVH) ? MSTATUS_MPV | MSTATUS_GVA : 0;
- 
-     if (riscv_cpu_cfg(env)->ext_smdbltrp) {
-         mask |= MSTATUS_MDT;
--- 
-2.43.0
+
+> 
+> Thanks,
+> Fangyu
+> 
+>>          if ((val & MSTATUS64_UXL) != 0) {
+>>              mask |= MSTATUS64_UXL;
+>>          }
+>> @@ -2079,7 +2076,7 @@ static RISCVException write_mstatush(CPURISCVState *env, int csrno,
+>>                                       target_ulong val, uintptr_t ra)
+>> {
+>>      uint64_t valh = (uint64_t)val << 32;
+>> -    uint64_t mask = riscv_has_ext(env, RVH) ? MSTATUS_MPV | MSTATUS_GVA : 0;
+>> +    uint64_t mask = 0;
+>>
+>>      if (riscv_cpu_cfg(env)->ext_smdbltrp) {
+>>          mask |= MSTATUS_MDT;
+>> --
+>> 2.43.0
 
 
