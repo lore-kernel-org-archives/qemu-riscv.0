@@ -1,61 +1,81 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B4DEB606A31B
-	for <qemu-riscv@archiver.kernel.org>; Sun, 25 Oct 2026 12:14:52 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B5043606A31A
+	for <qemu-riscv@archiver.kernel.org>; Sun, 25 Oct 2026 16:07:14 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key, unprotected) header.d=treblig.org header.i=@treblig.org header.a=rsa-sha256 header.s=bytemarkmx header.b=LvvZ+U5q
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xKx7B-0005fa-Ug; Sun, 25 Oct 2026 08:14:17 -0400
+	id 1xL0k7-0001c1-Pn; Sun, 25 Oct 2026 12:06:49 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <tanchi25@mails.ucas.ac.cn>)
- id 1xKx79-0005ew-7C; Sun, 25 Oct 2026 08:14:15 -0400
-Received: from smtp21.cstnet.cn ([159.226.251.21] helo=cstnet.cn)
- by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <tanchi25@mails.ucas.ac.cn>)
- id 1xKx76-000527-FU; Sun, 25 Oct 2026 08:14:14 -0400
-Received: from k3-03 (unknown [159.226.43.8])
- by APP-01 (Coremail) with SMTP id qwCowACHXfGD8t1qmUOwCw--.36297S2;
- Sun, 25 Oct 2026 20:13:57 +0800 (CST)
-From: Tan Chi <tanchi25@mails.ucas.ac.cn>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
- liwei1518@gmail.com, daniel.barboza@oss.qualcomm.com,
- zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
- Tan Chi <tanchi25@mails.ucas.ac.cn>
-Subject: [PATCH] target/riscv/kvm: Translate MSI addresses through the IOMMU
-Date: Sun, 25 Oct 2026 20:13:33 +0800
-Message-ID: <20261025121334.40041-1-tanchi25@mails.ucas.ac.cn>
-X-Mailer: git-send-email 2.53.0
+ (Exim 4.90_1) (envelope-from <dg@treblig.org>)
+ id 1xL0jg-0001Wj-Ma; Sun, 25 Oct 2026 12:06:18 -0400
+Received: from mx.treblig.org ([2a00:1098:5b::1])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <dg@treblig.org>)
+ id 1xL0jd-00089O-Em; Sun, 25 Oct 2026 12:06:15 -0400
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=treblig.org
+ ; s=bytemarkmx;
+ h=Content-Type:MIME-Version:Message-ID:Subject:From:Date:From
+ :Subject; bh=/XyZ3FJ2PuckH/OMjULXMLk6TnnZuDKoTuH6PI+wG5U=; b=LvvZ+U5qLvDWwpIs
+ 6+L+jfUTCBr/DWlwLXHlcVHXGqd6rP/unGgK1rtwKqFUfULYFOKPAXECQSCgiGwzpmwFU/NZeebF6
+ XUnYYQgTLj0rPKZaBzocHycMHMTTTqWysjpOd/i7QyoxoYq5rJC4N6Zsi1sRInoxzVC5YGTpJlK/L
+ xELOzbcyHt+V+QDDYAGnau73+NmuPRsxaWkyf9pElseJH1o5vmbpM/+0nMTUDb+xFFRf9gWuy2s5Q
+ f6cmtLPGkL0v5ZNvHzBX92VZd6LPWsuE8Pxa0l+Z8mwbqbYu77m6W45H5VwIMv4fkIIDwBb4Fjrq4
+ VdfjQVOjpzHWHwP9rw==;
+Received: from dg by mx.treblig.org with local (Exim 4.98.2)
+ (envelope-from <dg@treblig.org>) id 1xL0jQ-00000002Y15-14AE;
+ Sun, 25 Oct 2026 16:06:00 +0000
+Date: Sun, 25 Oct 2026 16:06:00 +0000
+From: "Dr. David Alan Gilbert" <dave@treblig.org>
+To: =?iso-8859-1?Q?Marc-Andr=E9?= Lureau <marcandre.lureau@redhat.com>
+Cc: qemu-devel@nongnu.org,
+ Alex =?iso-8859-1?Q?Benn=E9e?= <alex.bennee@linaro.org>,
+ Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@oss.qualcomm.com>,
+ Zhao Liu <zhao1.liu@intel.com>, Peter Maydell <peter.maydell@linaro.org>,
+ Chinmay Rath <rathc@linux.ibm.com>, Nicholas Piggin <npiggin@gmail.com>,
+ Glenn Miles <milesg@linux.ibm.com>,
+ Harsh Prateek Bora <harshpb@linux.ibm.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Chao Liu <chao.liu@processmission.com>,
+ Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
+ qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
+ Paolo Bonzini <pbonzini@redhat.com>, Laurent Vivier <laurent@vivier.eu>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Artyom Tarasenko <atar4qemu@gmail.com>, Helge Deller <deller@gmx.de>,
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+ Warner Losh <imp@bsdimp.com>, Kyle Evans <kevans@freebsd.org>
+Subject: Re: [PATCH v3 00/18] monitor/hmp: replace MonitorDef with GDB
+ registers
+Message-ID: <at4o6M_FWpVwtL0I@gallifrey>
+References: <20261022-query-reg-v3-0-7ad902b9a7cf@redhat.com>
+ <atzT-0QHYWByMhEg@gallifrey>
+ <CAJ+F1CJWJc=5okkvBYuKhFjU4=iZGWECYmTMMFDbeawA-GGN7A@mail.gmail.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: qwCowACHXfGD8t1qmUOwCw--.36297S2
-X-Coremail-Antispam: 1UD129KBjvJXoWxWw17tr1xKF1rJw4xJF4fKrg_yoW5Xr4rpF
- ZxCrWakrWrtry3Za93X3Wktr15XFZ5WF15Gry7Awnavw4rJrW5Cr4DK3sFkry5GF18Gw1j
- q3WqyF45ursFqw7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUU9m14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
- 1l84ACjcxK6xIIjxv20xvE14v26ryj6F1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26F4j
- 6r4UJwA2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwVC2z280aVCY1x0267AKxVW0oV
- Cq3wAac4AC62xK8xCEY4vEwIxC4wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC
- 0VAKzVAqx4xG6I80ewAv7VC0I7IYx2IY67AKxVWUGVWUXwAv7VC2z280aVAFwI0_Jr0_Gr
- 1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IE
- rcIFxwCY1x0262kKe7AKxVWUtVW8ZwCY02Avz4vE14v_Xr1l42xK82IYc2Ij64vIr41l4I
- 8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AK
- xVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcV
- AFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r1j6r4UMIIF0xvE42xK8VAvwI8I
- cIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r
- 1j6r4UYxBIdaVFxhVjvjDU0xZFpf9x0JUPfHUUUUUU=
-X-CM-SenderInfo: pwdquxrlsvqzpdlo2hpxfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.21;
- envelope-from=tanchi25@mails.ucas.ac.cn; helo=cstnet.cn
-X-Spam_score_int: -41
-X-Spam_score: -4.2
-X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+In-Reply-To: <CAJ+F1CJWJc=5okkvBYuKhFjU4=iZGWECYmTMMFDbeawA-GGN7A@mail.gmail.com>
+X-Chocolate: 70 percent or better cocoa solids preferably
+X-Operating-System: Linux/6.12.113+deb13-amd64 (x86_64)
+X-Uptime: 16:04:24 up 9 days, 1:24, 2 users, load average: 0.03, 0.02, 0.00
+User-Agent: Mutt/2.2.13 (2024-03-09)
+Received-SPF: pass client-ip=2a00:1098:5b::1; envelope-from=dg@treblig.org;
+ helo=mx.treblig.org
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -67,98 +87,174 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=unavailable autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-KVM irqfd bypasses the PCI device's IOMMU AddressSpace, so MSI
-addresses requiring translation may fail to reach the guest IMSIC.
+* Marc-André Lureau (marcandre.lureau@redhat.com) wrote:
+> Hi
+> 
+> On Sat, Oct 24, 2026 at 7:52 PM Dr. David Alan Gilbert <dave@treblig.org> wrote:
+> >
+> > * Marc-André Lureau (marcandre.lureau@redhat.com) wrote:
+> > > Hi,
+> > >
+> > > HMP monitor supports printing $register expression. The lookup
+> > > was done via GDB stub registers, and supplementary MonitorDef
+> > > HMP-specific tables.
+> >
+> > Why don't you get the first ~3 of these merged and then you can take the
+> > others through the individual targets at their own pace.
+> 
+> Because I am not a GDB stub or HMP maintainer. Should I send a PR
+> regardless for those? they can be reviewed & applied at a maintainer
+> pace.
 
-Translate MSI addresses through the device's IOMMU AddressSpace
-when setting up KVM routes. Only direct IMSIC mappings are
-supported; Basic MSI PTE and MRIF remapping are not.
+The first one looks trivial to me.
 
-Signed-off-by: Tan Chi <tanchi25@mails.ucas.ac.cn>
----
+> If you think it's too slow, I can agree :)
 
-The AddressSpace translation follows the existing
-kvm_arch_fixup_msi_route() implementation on ARM.
+It's not the 'slow', it just would avoid needing to keep big patchsets
+running around and everyone having to check them again each time.
 
- target/riscv/kvm/kvm-cpu.c | 45 ++++++++++++++++++++++++++++++++++++++
- target/riscv/trace-events  |  3 +++
- 2 files changed, 48 insertions(+)
+Dave
 
-diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-index 45ad5e1525..565cdec9d2 100644
---- a/target/riscv/kvm/kvm-cpu.c
-+++ b/target/riscv/kvm/kvm-cpu.c
-@@ -1507,6 +1507,51 @@ int kvm_arch_release_virq_post(int virq)
- int kvm_arch_fixup_msi_route(struct kvm_irq_routing_entry *route,
-                              uint64_t address, uint32_t data, PCIDevice *dev)
- {
-+    AddressSpace *as;
-+    hwaddr xlat, len = sizeof(uint32_t), translated;
-+    MemoryRegionSection section;
-+    MemoryRegion *mr;
-+    Object *owner;
-+
-+    if (!dev) {
-+        return 0;
-+    }
-+
-+    as = pci_device_iommu_address_space(dev);
-+    if (as == &address_space_memory) {
-+        return 0;
-+    }
-+
-+    RCU_READ_LOCK_GUARD();
-+
-+    mr = address_space_translate(as, address, &xlat, &len, true,
-+                                 MEMTXATTRS_UNSPECIFIED);
-+
-+    if (!mr) {
-+        return 1;
-+    }
-+
-+    /*
-+     * Only direct IMSIC writes can be represented by a KVM MSI route.
-+     * MSI page-table translations instead target the RISC-V IOMMU trap
-+     * region, which requires further BASIC/MRIF processing.
-+     */
-+    owner = memory_region_owner(mr);
-+    if (!owner || !object_dynamic_cast(owner, TYPE_RISCV_IMSIC)) {
-+        return 1;
-+    }
-+
-+    section = memory_region_find(mr, xlat, 1);
-+    if (!section.mr) {
-+        return 1;
-+    }
-+
-+    translated = section.offset_within_address_space;
-+    memory_region_unref(section.mr);
-+
-+    route->u.msi.address_lo = translated;
-+    route->u.msi.address_hi = translated >> 32;
-+    trace_kvm_riscv_fixup_msi_route(address, translated);
-     return 0;
- }
- 
-diff --git a/target/riscv/trace-events b/target/riscv/trace-events
-index 93837f82a1..5766fbb457 100644
---- a/target/riscv/trace-events
-+++ b/target/riscv/trace-events
-@@ -12,3 +12,6 @@ mseccfg_csr_write(uint64_t mhartid, uint64_t val) "hart %" PRIu64 ": write msecc
- 
- # op_helper.c
- riscv_exception(uint32_t exception, const char *desc, uint64_t epc) "%u (%s) on epc 0x%"PRIx64""
-+
-+# kvm-cpu.c
-+kvm_riscv_fixup_msi_route(uint64_t iova, uint64_t gpa) "MSI iova = 0x%"PRIx64" is translated into 0x%"PRIx64
+> >
+> > Dave
+> >
+> > > Migrate HMP registers to use the GDB infrastructure and remove the
+> > > legacy HMP MonitorDef. Internal registers aren't exposed to GDB.
+> > > This also drops HMP $pc x86 fallback (use $eip/$rip instead).
+> > >
+> > > Known behavioural changes on RISC-V: CSR lookup is now case-sensitive
+> > > and vector registers now report "unkown register" instead of a
+> > > target-specific message ("Unable to print the value of vector vreg 'v0'
+> > > from this API")
+> > >
+> > > Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
+> > > ---
+> > > Changes in v3:
+> > > - added x86 GDB register patches
+> > >   - fix the x87 FPU tag word returned by the GDB stub
+> > >   - split SSE registers into a separate org.gnu.gdb.i386.sse feature
+> > >   - expose AVX/AVX-512 registers (ymm/zmm upper halves and opmask)
+> > >   - expose more system registers to HMP
+> > > - renamed i386-segments.xml to i386-system.xml and registered it as an
+> > >   internal feature, like the other targets
+> > > - moved the HMP $pc removal to its own patch and documented it in
+> > >   removed-features.rst
+> > > - moved each target's MonitorDef removal into its target patch; the final
+> > >   patch now only removes the generic MonitorDef infrastructure
+> > > - added MAINTAINERS entries
+> > > - rebased onto current master
+> > > - Link to v2: https://lore.kernel.org/qemu-devel/20261013-query-reg-v2-0-6f95a2e139a9@redhat.com
+> > >
+> > > Changes in v2:
+> > > - dropped v1 patch 5 (CPUClass::get_pc fallback for $pc)
+> > > - new patch gdb_register_internal_coprocessor() to hide registers from GDB
+> > > - SPARC64, m68k, RISC-V aliases now use internal registration
+> > > - pickup trailer tags
+> > > - Link to v1: https://lore.kernel.org/qemu-devel/20260911-query-reg-v1-0-0c04f0c02cf3@redhat.com
+> > >
+> > > ---
+> > > Marc-André Lureau (18):
+> > >       hmp: don't crash on invalid register
+> > >       gdbstub: fix next register base after register gaps
+> > >       gdbstub: set feature->base_reg for dynamic features
+> > >       gdbstub: add gdb_register_internal_coprocessor()
+> > >       MAINTAINERS: cover x86 GDB XML files
+> > >       target/i386: expose segment limits register to monitors via gdbstub
+> > >       target/i386: fix FPU tag word in GDB register read
+> > >       target/i386: split SSE registers into separate GDB feature
+> > >       target/i386: expose system registers to monitors via gdbstub
+> > >       target/i386: expose AVX/AVX-512 registers to GDB
+> > >       target/i386: drop HMP $pc
+> > >       MAINTAINERS: cover m68k GDB XML files
+> > >       target/m68k: expose system registers to monitors via gdbstub
+> > >       target/sparc64: expose system registers to monitors via gdbstub
+> > >       target/riscv: bypass smstateen check in debugger mode
+> > >       MAINTAINERS: cover riscv GDB XML files
+> > >       target/riscv: expose register aliases to monitors via gdbstub
+> > >       monitor/hmp: remove legacy MonitorDef infrastructure
+> > >
+> > >  MAINTAINERS                               |   4 +
+> > >  configs/targets/i386-bsd-user.mak         |   2 +-
+> > >  configs/targets/i386-linux-user.mak       |   2 +-
+> > >  configs/targets/i386-softmmu.mak          |   2 +-
+> > >  configs/targets/m68k-softmmu.mak          |   2 +-
+> > >  configs/targets/riscv32-linux-user.mak    |   2 +-
+> > >  configs/targets/riscv32-softmmu.mak       |   2 +-
+> > >  configs/targets/riscv64-bsd-user.mak      |   2 +-
+> > >  configs/targets/riscv64-linux-user.mak    |   2 +-
+> > >  configs/targets/riscv64-softmmu.mak       |   2 +-
+> > >  configs/targets/sparc64-softmmu.mak       |   2 +-
+> > >  configs/targets/x86_64-bsd-user.mak       |   2 +-
+> > >  configs/targets/x86_64-linux-user.mak     |   2 +-
+> > >  configs/targets/x86_64-softmmu.mak        |   2 +-
+> > >  docs/about/removed-features.rst           |   8 +
+> > >  gdbstub/gdb-xml/i386-32bit-avx.xml        |  20 ++
+> > >  gdbstub/gdb-xml/i386-32bit-avx512.xml     |  31 +++
+> > >  gdbstub/gdb-xml/i386-32bit-sse.xml        |  54 +++++
+> > >  gdbstub/gdb-xml/i386-32bit.xml            |  46 +---
+> > >  gdbstub/gdb-xml/i386-64bit-avx.xml        |  28 +++
+> > >  gdbstub/gdb-xml/i386-64bit-avx512.xml     | 108 +++++++++
+> > >  gdbstub/gdb-xml/i386-64bit-sse.xml        |  62 +++++
+> > >  gdbstub/gdb-xml/i386-64bit.xml            |  50 ----
+> > >  gdbstub/gdb-xml/i386-system.xml           |  53 +++++
+> > >  gdbstub/gdb-xml/m68k-system.xml           |  32 +++
+> > >  gdbstub/gdb-xml/riscv-32bit-alias.xml     | 105 +++++++++
+> > >  gdbstub/gdb-xml/riscv-32bit-fpu-alias.xml |  40 ++++
+> > >  gdbstub/gdb-xml/riscv-64bit-alias.xml     | 105 +++++++++
+> > >  gdbstub/gdb-xml/riscv-64bit-fpu-alias.xml |  46 ++++
+> > >  gdbstub/gdb-xml/sparc64-system.xml        |  22 ++
+> > >  gdbstub/gdbstub.c                         |  85 +++++--
+> > >  include/exec/gdbstub.h                    |  21 ++
+> > >  include/hw/core/cpu.h                     |   5 +-
+> > >  include/hw/core/sysemu-cpu-ops.h          |  16 --
+> > >  include/monitor/hmp.h                     |   6 -
+> > >  include/qemu/typedefs.h                   |   1 -
+> > >  monitor/hmp.c                             |  45 +---
+> > >  target/arm/gdbstub.c                      |   8 +-
+> > >  target/arm/gdbstub64.c                    |  10 +-
+> > >  target/i386/cpu-dump.c                    |   5 +-
+> > >  target/i386/cpu.c                         |  60 +++--
+> > >  target/i386/cpu.h                         |  25 ++
+> > >  target/i386/gdbstub.c                     | 373 +++++++++++++++++++++++++++---
+> > >  target/i386/tcg/fpu_helper.c              |  24 +-
+> > >  target/m68k/cpu.c                         |  22 --
+> > >  target/m68k/helper.c                      |  49 +++-
+> > >  target/ppc/gdbstub.c                      |   2 +-
+> > >  target/riscv/cpu.c                        |   1 -
+> > >  target/riscv/gdbstub.c                    |  57 ++++-
+> > >  target/riscv/internals.h                  |   3 -
+> > >  target/riscv/monitor.c                    | 140 -----------
+> > >  target/riscv/tcg/csr.c                    |   3 +-
+> > >  target/sparc/cpu.c                        |  19 --
+> > >  target/sparc/gdbstub.c                    |  38 +++
+> > >  target/xtensa/cpu.c                       |   2 +-
+> > >  tests/qtest/test-hmp.c                    |   1 -
+> > >  56 files changed, 1383 insertions(+), 478 deletions(-)
+> > > ---
+> > > base-commit: 8967b2fe1b2aaae3c29e207d85fab901d580a2dc
+> > > change-id: 20260910-query-reg-80cd59cf4707
+> > >
+> > > Best regards,
+> > > --
+> > > Marc-André Lureau <marcandre.lureau@redhat.com>
+> > >
+> > --
+> >  -----Open up your eyes, open up your mind, open up your code -------
+> > / Dr. David Alan Gilbert    |       Running GNU/Linux       | Happy  \
+> > \        dave @ treblig.org |                               | In Hex /
+> >  \ _________________________|_____ http://www.treblig.org   |_______/
+> >
 -- 
-2.53.0
-
+ -----Open up your eyes, open up your mind, open up your code -------   
+/ Dr. David Alan Gilbert    |       Running GNU/Linux       | Happy  \ 
+\        dave @ treblig.org |                               | In Hex /
+ \ _________________________|_____ http://www.treblig.org   |_______/
 
