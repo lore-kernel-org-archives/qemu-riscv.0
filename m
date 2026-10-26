@@ -1,61 +1,60 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EF211606A31A
-	for <qemu-riscv@archiver.kernel.org>; Mon, 26 Oct 2026 14:17:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 12D8E606A320
+	for <qemu-riscv@archiver.kernel.org>; Mon, 26 Oct 2026 16:40:01 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (4096-bit key, unprotected) header.d=crudebyte.com header.i=@crudebyte.com header.a=rsa-sha256 header.s=kylie header.b=HbhseeL5
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xLLVx-0005kX-2D; Mon, 26 Oct 2026 10:17:35 -0400
+	id 1xLNj1-00088M-OC; Mon, 26 Oct 2026 12:39:07 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <tanchi25@mails.ucas.ac.cn>)
- id 1xLLVc-0005hq-Vk; Mon, 26 Oct 2026 10:17:10 -0400
-Received: from smtp81.cstnet.cn ([159.226.251.81] helo=cstnet.cn)
- by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <tanchi25@mails.ucas.ac.cn>)
- id 1xLLVY-00038d-1Z; Mon, 26 Oct 2026 10:17:07 -0400
-Received: from k3-03 (unknown [159.226.43.8])
- by APP-03 (Coremail) with SMTP id rQCowABHTz3MYN9qFyK6Cw--.1361S2;
- Mon, 26 Oct 2026 22:16:52 +0800 (CST)
-From: Tan Chi <tanchi25@mails.ucas.ac.cn>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
- liwei1518@gmail.com, daniel.barboza@oss.qualcomm.com,
- zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
- Tan Chi <tanchi25@mails.ucas.ac.cn>
-Subject: [PATCH v2] target/riscv/kvm: Translate MSI addresses through the IOMMU
-Date: Mon, 26 Oct 2026 22:16:42 +0800
-Message-ID: <20261026141642.113731-1-tanchi25@mails.ucas.ac.cn>
-X-Mailer: git-send-email 2.53.0
+ (Exim 4.90_1) (envelope-from <qemu_oss@crudebyte.com>)
+ id 1xLNiy-00086c-H0; Mon, 26 Oct 2026 12:39:05 -0400
+Received: from kylie.crudebyte.com ([5.189.157.229])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <qemu_oss@crudebyte.com>)
+ id 1xLNiw-00027y-HR; Mon, 26 Oct 2026 12:39:04 -0400
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=crudebyte.com; s=kylie; h=Content-Type:Content-Transfer-Encoding:
+ MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
+ Content-ID:Content-Description;
+ bh=hF47tVBhb2pH+Ul7GPt4CqRpe5mMUx+wEYNreQ/UmYM=; b=HbhseeL5CqtoNyzKbdczsR+6KZ
+ 32V/m1CgKx6VqHJDoak18JGLv3vYXdH6xIpYmc57hWykZrHlCNmW+lGwdPA+EQ/ZGtohGnE50SvFM
+ VfzXDhvf+DyIMxuOWEpchIsLoik2JmJ5r7ScM7jYaMigUX+OweFZnXtyeK6dLDKO2zooSi8mnzFRP
+ 1XGic3IYdzupsSTj8mZm9oj7knxp4C5ORV0gRDpy5w+8fWwM6i2SA4UrmbrY3zCLfDDyCVTR7Zm2E
+ moNyx7UZCzspll5EWoePs2icGKpqahtplSgBhSeh5NbarZrrP2a5kzatWW1MLcFfmkPyiGBCBMEaA
+ XIbOzxAovafmYG23h2vxr+D8Xn/0EvSHVP+D7y4LV6uFoVkxsTOdRQ+HiRfC11jqtoYU2Q+c9bsra
+ peULMtS6xlKDra0Vu7ycUiRm3ov17VYpLA8UeXA2n/Pu05QAuV6MfCfgIcRvSmm7C5VWn7jP6f5aF
+ EwafzglvkHp1p5oLYL6hLDHqNZCXCpPH5YWfGzUxJupctrMO05eg+7Wx5aJFpFzWkDGXEmy5vObZL
+ eLCGbgMAjjIaPlKdvfbgOPZerkXIj4teSDXIN7CF12ZQsfWWof0u5c0sG5bvMG3Ew4yQC7k/A5iG0
+ 8wHyyvYMU0NW2CzLIljYPDCJRfhzS/aT1jDzRkSts=;
+From: Christian Schoenebeck <qemu_oss@crudebyte.com>
+To: qemu-devel@nongnu.org, Thomas Huth <thuth@redhat.com>
+Cc: Greg Kurz <groug@kaod.org>, Peter Maydell <peter.maydell@linaro.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
+Subject: Re: [PULL 2/9] tests/9p-race: add 9p race test suite (race FID-path
+ mutations)
+Date: Mon, 26 Oct 2026 17:38:58 +0100
+Message-ID: <24565308.6Emhk5qWAg@weasel>
+In-Reply-To: <97f60010-c6fb-4d21-92fd-754d2c791928@redhat.com>
+References: <cover.1792420035.git.qemu_oss@crudebyte.com>
+ <cf0650c4-e6ed-4dda-9b8f-fed5a2762251@redhat.com>
+ <97f60010-c6fb-4d21-92fd-754d2c791928@redhat.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: rQCowABHTz3MYN9qFyK6Cw--.1361S2
-X-Coremail-Antispam: 1UD129KBjvJXoWxWw13tF1rKF4xCF43Ww15urg_yoWrWrWxpr
- ZIkrW3CrWrt39Iv393XF1kJr15XFWkWa45G3y7Awn3tw4rXrW3urs7K347tFy5J3W8Gw1j
- ga1UAFW5ur12qw7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUU9m14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
- 1l84ACjcxK6xIIjxv20xvE14v26F1j6w1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26F4j
- 6r4UJwA2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwVC2z280aVCY1x0267AKxVW0oV
- Cq3wAac4AC62xK8xCEY4vEwIxC4wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC
- 0VAKzVAqx4xG6I80ewAv7VC0I7IYx2IY67AKxVWUGVWUXwAv7VC2z280aVAFwI0_Gr0_Cr
- 1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IE
- rcIFxwCY1x0262kKe7AKxVWUtVW8ZwCY02Avz4vE14v_Xryl42xK82IYc2Ij64vIr41l4I
- 8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AK
- xVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcV
- AFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r1j6r4UMIIF0xvE42xK8VAvwI8I
- cIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r
- 1j6r4UYxBIdaVFxhVjvjDU0xZFpf9x0JUv9a9UUUUU=
-X-CM-SenderInfo: pwdquxrlsvqzpdlo2hpxfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.81;
- envelope-from=tanchi25@mails.ucas.ac.cn; helo=cstnet.cn
-X-Spam_score_int: -41
-X-Spam_score: -4.2
-X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="utf-8"
+Received-SPF: pass client-ip=5.189.157.229;
+ envelope-from=qemu_oss@crudebyte.com; helo=kylie.crudebyte.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -67,131 +66,141 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS autolearn=unavailable autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-KVM irqfd bypasses the PCI device's IOMMU AddressSpace, so MSI
-addresses requiring translation may fail to reach the guest IMSIC.
+On Monday, 26 October 2026 10:35:12 CET Thomas Huth wrote:
+> On 26/10/2026 09.44, Thomas Huth wrote:
+> > On 19/10/2026 16.27, Christian Schoenebeck wrote:
+> >> Add a qtest-based stress test suite racing 9pfs server-side state.
+> >> 
+> >> This patch adds the first race test "race/fid-path" for this new
+> >> test suite: it races (per round) one Tlcreate (which is mutating
+> >> the FID path) against a number of reader requests (Twalk and
+> >> Txattrwalk) on the same FID.
+> >> 
+> >> This very first 9pfs race test guards CVE-2026-93834 (fixed by
+> >> commit fe9e30899f "hw/9pfs: Use read-write lock for protecting fid
+> >> path.").
+> >> 
+> >> Hitting the small race window is timing dependant, so this is a
+> >> probabilistic test, not a deterministic one. During my tests the
+> >> (unpatched) vulnerability triggered sometimes after few hundred
+> >> rounds, and sometimes after >100k rounds. Furthermore, it expects
+> >> QEMU being compiled with a sanitizer (e.g. ASan) which is
+> >> supposed to detect the actual race (e.g. by memory violation):
+> >> 
+> >>    ../configure --enable-virtfs --enable-debug \
+> >>    --extra-cflags="-fsanitize=address -fno-omit-frame-pointer" \
+> >>    --extra-ldflags="-fsanitize=address" ...
+> >> 
+> >> Even though this is a new test suite, in the codebase separate
+> >> from the already existing deterministic 9pfs test cases (while
+> >> 9p test client code being shared between the two test suites),
+> >> this new race test suite is run with the same binary as the
+> >> other qtests. However being a very slow test, it is registered
+> >> as such, so the -m slow argument is required for this race test
+> >> to run (as it is skipped by default):
+> >> 
+> >>    ASAN_OPTIONS=detect_leaks=0 \
+> >>    tests/qtest/qos-test -m slow
+> >> 
+> >> Or if you only want to run this single race test (e.g. on x86_64):
+> >> 
+> >>    ASAN_OPTIONS=detect_leaks=0 \
+> >>    tests/qtest/qos-test -m slow -p \
+> >>    /x86_64/pc/i440FX-pcihost/pci-bus-pc/pci-bus/virtio-9p-pci/virtio-9p/
+> >> virtio-9p-tests/race/fid-path
+> >> 
+> >> On other systems, use `tests/qtest/qos-test -l` to get the correct
+> >> (arch dependent) full test name.
+> >> 
+> >> `ASAN_OPTIONS=detect_leaks=0` is currently required, it suppresses
+> >> a memory leak error at the end of each race test, which is a known
+> >> QEMU shutdown memory leak, unrelated to 9p server or this race test
+> >> suite. The official QEMU CI pipeline sets
+> >> `ASAN_OPTIONS=detect_leaks=0` by default for this reason.
+> >> 
+> >> There are some knobs that can be controlled via environment
+> >> variables:
+> >> 
+> >>    V9FS_RACE: skip test suite by setting to 0 or force running by
+> >>               setting to 1
+> >> 
+> >>    V9FS_RACE_ROUNDS: total amount of rounds to run
+> >>                      (default: 20000)
+> >> 
+> >>    V9FS_RACE_NCONCURRENT: amount of concurrent reader requests
+> >>                           (default: 4)
+> >> 
+> >> A full run with 20000 rounds took around 7 minutes on my test
+> >> machine. If you can't hit the (narrow) race window with
+> >> unpatched QEMU, it might help to either add some load on the
+> >> host system and/or turning the two knobs above.
+> >> 
+> >> Link: https://lore.kernel.org/qemu-> >> devel/4a0eff0539f16434b48728cd8e5a89f906c293d8.1791368962.git.qemu_oss@cr
+> >> udebyte.com Signed-off-by: Christian Schoenebeck <qemu_oss@crudebyte.com>
+> >> ---
+> >>   MAINTAINERS                       |   1 +
+> >>   tests/qtest/meson.build           |   1 +
+> >>   tests/qtest/virtio-9p-race-test.c | 575 ++++++++++++++++++++++++++++++
+> >>   3 files changed, 577 insertions(+)
+> >>   create mode 100644 tests/qtest/virtio-9p-race-test.c
+> >> 
+> >   Hi Christian!
+> > 
+> > Since this has been merged, I'm now seeing timeouts of the qos-test when I
+> > run "make -j8 check-qtest SPEED=thorough" ... can we please fix this
+> > somehow, e.g. by increasing the timeout setting of the qos-test, or by
+> > decreasing the default number of rounds that this test is trying to do?
+> > WDYT?
+> FWIW, when I allow the tests to run longer, these are the current testing
+> times on my machine:
+> 
+>   qemu:qtest-arm/qos-test               : 373.06s   167 subtests passed
+>   qemu:qtest-aarch64/qos-test           : 391.52s   148 subtests passed
+>   qemu:qtest-i386/qos-test              : 407.43s   154 subtests passed
+>   qemu:qtest-loongarch64/qos-test       : 405.79s   146 subtests passed
+>   qemu:qtest-ppc64/qos-test             : 407.26s   134 subtests passed
+>   qemu:qtest-x86_64/qos-test            : 393.14s   154 subtests passed
+>   qemu:qtest-riscv32/qos-test           : 767.21s   216 subtests passed
+>   qemu:qtest-riscv64/qos-test           : 684.54s   216 subtests passed
 
-Translate MSI addresses through the device's IOMMU AddressSpace when
-setting up KVM routes. Only direct mappings to an IMSIC MemoryRegion
-are installed in KVM routes.
+Right, I missed when you run the thorough/slow tests trough make, then the 
+meson wrapped qos-test call is guarded by a timeout, which currently is set to 
+120s for the *entire* qos-test suite (tests/qtest/meson.build), which is fine 
+for regular tests, but insufficient for these new slow 9p race tests.
 
-Other IOMMU MSI remapping forms are not converted to KVM routes and
-continue to use the existing userspace MSI delivery path.
+I thought timeouts were just a thing for the official in-cloud QEMU CI 
+pipeline - which doesn't run any slow test at all, so no problem there.
+That was actually the point why I explictly registered these new race tests as 
+"slow" ones in the first place.
 
-Select PCI for RISCV64 KVM builds, as QEMU currently enables the
-RISC-V KVM target only for riscv64-softmmu builds and the MSI route
-fixup requires PCI support. Also trace translation failures to help
-diagnose route setup failures.
+This is more of a project management question; should these extremely slow 9p 
+race tests either:
 
-Signed-off-by: Tan Chi <tanchi25@mails.ucas.ac.cn>
----
+a) be skipped entirely on `make check-qtest SPEED=thorough` or
+b) run shorter (i.e. less rounds, very low probability to hit) or
+c) increase the meson timeout for qos-test binary?
 
-The AddressSpace translation follows the existing
-kvm_arch_fixup_msi_route() implementation on ARM.
+Personally I don't care too much. These 9p race tests are useful for me, but I 
+also understand if other unrelated developers don't want to spend like 10+ 
+mins on each test run for this. I still run them directly via `tests/qtest/
+qos-test -m slow` ; last line of defense, etc.
 
-Changes in v2:
-- Select PCI for RISCV64 KVM builds.
-- Add trace events for MSI translation failures.
+Technically it is easy to address:
 
- target/riscv/Kconfig       |  2 ++
- target/riscv/kvm/kvm-cpu.c | 54 ++++++++++++++++++++++++++++++++++++++
- target/riscv/trace-events  |  4 +++
- 3 files changed, 60 insertions(+)
+a) -> set envvar V9FS_RACE=0
+b) -> set envvar V9FS_RACE_ROUNDS=n
+c) -> s/'qos-test': 120/'qos-test': n/
 
-diff --git a/target/riscv/Kconfig b/target/riscv/Kconfig
-index 11bc09b414..0cf2c8e1c4 100644
---- a/target/riscv/Kconfig
-+++ b/target/riscv/Kconfig
-@@ -7,3 +7,5 @@ config RISCV64
-     bool
-     select ARM_COMPATIBLE_SEMIHOSTING if TCG
-     select DEVICE_TREE # needed by boot.c
-+    # kvm_arch_fixup_msi_route() needs to access PCIDevice
-+    select PCI if KVM
-diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-index 45ad5e1525..7c3d3c8c69 100644
---- a/target/riscv/kvm/kvm-cpu.c
-+++ b/target/riscv/kvm/kvm-cpu.c
-@@ -1507,6 +1507,60 @@ int kvm_arch_release_virq_post(int virq)
- int kvm_arch_fixup_msi_route(struct kvm_irq_routing_entry *route,
-                              uint64_t address, uint32_t data, PCIDevice *dev)
- {
-+    AddressSpace *as;
-+    hwaddr xlat, len = sizeof(uint32_t), translated;
-+    MemoryRegionSection section;
-+    MemoryRegion *mr;
-+    Object *owner;
-+
-+    if (!dev) {
-+        return 0;
-+    }
-+
-+    as = pci_device_iommu_address_space(dev);
-+    if (as == &address_space_memory) {
-+        return 0;
-+    }
-+
-+    RCU_READ_LOCK_GUARD();
-+
-+    mr = address_space_translate(as, address, &xlat, &len, true,
-+                                 MEMTXATTRS_UNSPECIFIED);
-+
-+    if (!mr) {
-+        trace_kvm_riscv_fixup_msi_route_failed(address,
-+                                               "address translation failed",
-+                                               "none");
-+        return 1;
-+    }
-+
-+    /*
-+     * Only direct IMSIC writes can be represented by a KVM MSI route.
-+     * MSI page-table translations instead target the RISC-V IOMMU trap
-+     * region, which requires further BASIC/MRIF processing.
-+     */
-+    owner = memory_region_owner(mr);
-+    if (!owner || !object_dynamic_cast(owner, TYPE_RISCV_IMSIC)) {
-+        trace_kvm_riscv_fixup_msi_route_failed(address,
-+                                               "non-IMSIC target",
-+                                               memory_region_name(mr));
-+        return 1;
-+    }
-+
-+    section = memory_region_find(mr, xlat, 1);
-+    if (!section.mr) {
-+        trace_kvm_riscv_fixup_msi_route_failed(address,
-+                                               "memory region lookup failed",
-+                                               memory_region_name(mr));
-+        return 1;
-+    }
-+
-+    translated = section.offset_within_address_space;
-+    memory_region_unref(section.mr);
-+
-+    route->u.msi.address_lo = translated;
-+    route->u.msi.address_hi = translated >> 32;
-+    trace_kvm_riscv_fixup_msi_route_translated(address, translated);
-     return 0;
- }
- 
-diff --git a/target/riscv/trace-events b/target/riscv/trace-events
-index 93837f82a1..50980c031d 100644
---- a/target/riscv/trace-events
-+++ b/target/riscv/trace-events
-@@ -12,3 +12,7 @@ mseccfg_csr_write(uint64_t mhartid, uint64_t val) "hart %" PRIu64 ": write msecc
- 
- # op_helper.c
- riscv_exception(uint32_t exception, const char *desc, uint64_t epc) "%u (%s) on epc 0x%"PRIx64""
-+
-+# kvm-cpu.c
-+kvm_riscv_fixup_msi_route_translated(uint64_t iova, uint64_t gpa) "MSI iova = 0x%"PRIx64" is translated into 0x%"PRIx64
-+kvm_riscv_fixup_msi_route_failed(uint64_t iova, const char *reason, const char *region) "MSI iova = 0x%"PRIx64" failed: %s (region=%s)"
--- 
-2.53.0
+all in tests/qtest/meson.build. Your call.
+
+/Christian
+
 
 
