@@ -1,147 +1,75 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 72022606A322
-	for <qemu-riscv@archiver.kernel.org>; Tue, 27 Oct 2026 07:27:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1E25D606A31F
+	for <qemu-riscv@archiver.kernel.org>; Tue, 27 Oct 2026 08:23:09 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=OgT+lq9Z
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=aIZdlBGW
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xLbah-0004H4-66; Tue, 27 Oct 2026 03:27:27 -0400
+	id 1xLcS3-0003RF-0U; Tue, 27 Oct 2026 04:22:35 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1xLbaX-0004G0-Ip
- for qemu-riscv@nongnu.org; Tue, 27 Oct 2026 03:27:18 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ (Exim 4.90_1) (envelope-from <fustini@kernel.org>)
+ id 1xLcS1-0003Qn-Dj; Tue, 27 Oct 2026 04:22:33 -0400
+Received: from tor.source.kernel.org ([172.105.4.254])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1xLbaV-0005AC-1m
- for qemu-riscv@nongnu.org; Tue, 27 Oct 2026 03:27:16 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1793086033;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=hutGR+cJLkN8t93O7y7h/orEEg1YTQ/T36VS5FfF5Lo=;
- b=OgT+lq9Z8lWxtMWwwj64ItJ2epyrNEt1edkcEhFIYG9fZ034J6cGlJ+DccB7ni8iJ3NRfr
- ACPKnSEN2LoDXdSgfLEXNGdcHcLEFmsbYVez5AkKYAjCHWC9sGMFyq8wb8wp60kV6rQRvo
- gOubDqdrBUJ8Drx1qIWy1bRlIIfrBhA=
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-616-KlXY0HE7PrCJwg8U6Sajjg-1; Tue, 27 Oct 2026 03:27:11 -0400
-X-MC-Unique: KlXY0HE7PrCJwg8U6Sajjg-1
-X-Mimecast-MFC-AGG-ID: KlXY0HE7PrCJwg8U6Sajjg_1793086030
-Received: by mail-wm1-f69.google.com with SMTP id
- 5b1f17b1804b1-4a2063be13dso32176955e9.3
- for <qemu-riscv@nongnu.org>; Tue, 27 Oct 2026 00:27:11 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793086030; x=1793690830;
- h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=hutGR+cJLkN8t93O7y7h/orEEg1YTQ/T36VS5FfF5Lo=;
- b=rV97R4G7DKgTmTCL2FlLGbU7UWFiTMKV5aAmXfQFizBYb4cSyh9QGwwty/0dK1PYhT
- ggYz7FwWQPIS/6kWVQWAKNEIDHczMMOdgxJrFViFtSAUVe7AnU4R8hozqyhFU2+Zf6B5
- lCmOxwurutov+QZD0nHCKpt1oi5PPSvVH6LoOZgLaVIhMWZqLoX1FD2AptDJcIwEhLH8
- TynTlwh0Ye8FuhGNjc+U2zMjBHxyGeKj3pfNae1JNkrowvRXkgD6BjKJoqQvqza/FdBN
- 7kZfB4NQ6qwmItG08fLCfGYLH1mYk8Vuy+zcSsUM54+CyS6fnb/EFvsnnHAQusA6/doX
- rTQQ==
-X-Forwarded-Encrypted: i=1;
- AKwUvBwy/TpWkLwoj8kLmCcYDzhU7T7nTEVwSz2XDGm1tPsq1HoyrF8zIsVwszl2Y9N3VcMBY1N94UGUuWmK@nongnu.org
-X-Gm-Message-State: AFq9FYJhdjSYcWl91snMLtOdVUfaGUA6XMxufTNO22TI6Tn0XrAtlhym
- G1IkouX1GfZy/i0SNKURSoxQzzfB7orbUf5H08YtiG00TcDzWBRZyNVj1mZuHZjbHk/OFkBfSMr
- cQg1K6WKQYEkEir+EqboyGBjonnIU5V0rdg9d0GXqw1zSltHUCKRsEFlv
-X-Gm-Gg: AYBFou29VAMLPHNezDIgpUWKyVIgIaT3CKhlXGSQCgqHMW36kAL17HN9YTkICi6w0gn
- niKYKhU4p4Vx881/69ozX0ByupN1PwslPZynP8c8woJKLlSbmyJ0bjdWIMGUO4O9+H9CT0JDv4P
- NqxlGs5G/2FLlnUGPXmEPY4CnRyuYz9Txwql1ftDXML/5DAqoG1jE7u6s2DPG8axnWWtp2MkOto
- dOj2wuZSgFYo5ns+a4NgxrxLMSk37iDq1se/Tnl9sDWLmNPC+Ab/230EPKlobtZVuTNmAHfud7w
- br9NnG8h5Rcf+UXN9D+DivUb8BDmECvVL8bDaCxV1xGSwVNg4saOs6S4glSb/z3s+fWuJ9w=
-X-Received: by 2002:a05:600c:e547:20b0:4a7:4697:dae3 with SMTP id
- 5b1f17b1804b1-4a74697dafamr44080425e9.24.1793086030276; 
- Tue, 27 Oct 2026 00:27:10 -0700 (PDT)
-X-Received: by 2002:a05:600c:e547:20b0:4a7:4697:dae3 with SMTP id
- 5b1f17b1804b1-4a74697dafamr44080145e9.24.1793086029857; 
- Tue, 27 Oct 2026 00:27:09 -0700 (PDT)
-Received: from [192.168.0.9] ([47.64.114.91]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a35a56992dsm234122345e9.6.2026.10.27.00.27.08
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 27 Oct 2026 00:27:08 -0700 (PDT)
-Message-ID: <c0cf4c97-6d1e-4550-a567-a84ce3ff7b43@redhat.com>
-Date: Tue, 27 Oct 2026 08:27:07 +0100
+ (Exim 4.90_1) (envelope-from <fustini@kernel.org>)
+ id 1xLcRz-0001oH-Eu; Tue, 27 Oct 2026 04:22:33 -0400
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by tor.source.kernel.org (Postfix) with ESMTP id A1C85601FB;
+ Tue, 27 Oct 2026 08:22:29 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 256871F01828;
+ Tue, 27 Oct 2026 08:22:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+ s=k20260515; t=1793089349;
+ bh=aj5Obr/MW1OY020bmqqhtHv5qCM1RtrMDb8sv3AAcIY=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To;
+ b=aIZdlBGWlhyK8eCmm5Uu8UtbPR8tzffJofiFd1QowfmHi4Egdz2gIGgMKYXeQwKeG
+ 7YvC5gIf52ka1FafaIRIDcaCCuHkLMc6YcNov860K8eDwkgDulLapsIGB3Qc0SrZwy
+ bSgQ9JidEHAWodarmrDVgwkuiu7XmmaeBSnQPqreddy/IdlnunSlxlX1/DF/d2nXsx
+ mgUzWIas6fyNPy1FoKTbyLKMj2vqriWRd/9PcX/erAmeLcfp5QJ0Xy2Jm+L2SOxI0E
+ AoFz1hQDexayDfr7IfyOnj6uQsD/zshJDHoU8kLrzff7sb4u4t46hzRTP9N+RI6XV9
+ wR4QTza4xa8uA==
+Date: Tue, 27 Oct 2026 01:22:27 -0700
+From: Drew Fustini <fustini@kernel.org>
+To: Alistair Francis <Alistair.Francis@wdc.com>
+Cc: "sunilvl@oss.qualcomm.com" <sunilvl@oss.qualcomm.com>,
+ "anup.patel@oss.qualcomm.com" <anup.patel@oss.qualcomm.com>,
+ "chao.liu@processmission.com" <chao.liu@processmission.com>,
+ "shankar.c@oss.qualcomm.com" <shankar.c@oss.qualcomm.com>,
+ "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
+ "daniel.barboza@oss.qualcomm.com" <daniel.barboza@oss.qualcomm.com>,
+ "anisinha@redhat.com" <anisinha@redhat.com>,
+ "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
+ "prajwal.n@oss.qualcomm.com" <prajwal.n@oss.qualcomm.com>,
+ "imammedo@redhat.com" <imammedo@redhat.com>,
+ "palmer@dabbelt.com" <palmer@dabbelt.com>,
+ "mst@redhat.com" <mst@redhat.com>,
+ "liwei1518@gmail.com" <liwei1518@gmail.com>,
+ "zhiwei_liu@linux.alibaba.com" <zhiwei_liu@linux.alibaba.com>
+Subject: Re: [PATCH v2 0/4] RISC-V: ACPI: Add PPTT support
+Message-ID: <auBfQwrhu8UJBaJi@thelio>
+References: <20261015064957.4076464-1-sunilvl@oss.qualcomm.com>
+ <91f1cd890aac1907f335ce3fdd22e6adf685c594.camel@wdc.com>
+ <CAB19ukGtrbCV8s_WKnE2vDF5P4iiyPXYhyyJjqTu-S0823mjUg@mail.gmail.com>
+ <95082036aaf5b0ed1bee69fc21fcbb18fd74d61f.camel@wdc.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PULL 2/9] tests/9p-race: add 9p race test suite (race FID-path
- mutations)
-To: Christian Schoenebeck <qemu_oss@crudebyte.com>, qemu-devel@nongnu.org
-Cc: Greg Kurz <groug@kaod.org>, Peter Maydell <peter.maydell@linaro.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>
-References: <cover.1792420035.git.qemu_oss@crudebyte.com>
- <cf0650c4-e6ed-4dda-9b8f-fed5a2762251@redhat.com>
- <97f60010-c6fb-4d21-92fd-754d2c791928@redhat.com>
- <24565308.6Emhk5qWAg@weasel>
-From: Thomas Huth <thuth@redhat.com>
-Autocrypt: addr=thuth@redhat.com; keydata=
- xsFNBFH7eUwBEACzyOXKU+5Pcs6wNpKzrlJwzRl3VGZt95VCdb+FgoU9g11m7FWcOafrVRwU
- yYkTm9+7zBUc0sW5AuPGR/dp3pSLX/yFWsA/UB4nJsHqgDvDU7BImSeiTrnpMOTXb7Arw2a2
- 4CflIyFqjCpfDM4MuTmzTjXq4Uov1giGE9X6viNo1pxyEpd7PanlKNnf4PqEQp06X4IgUacW
- tSGj6Gcns1bCuHV8OPWLkf4hkRnu8hdL6i60Yxz4E6TqlrpxsfYwLXgEeswPHOA6Mn4Cso9O
- 0lewVYfFfsmokfAVMKWzOl1Sr0KGI5T9CpmRfAiSHpthhHWnECcJFwl72NTi6kUcUzG4se81
- O6n9d/kTj7pzTmBdfwuOZ0YUSqcqs0W+l1NcASSYZQaDoD3/SLk+nqVeCBB4OnYOGhgmIHNW
- 0CwMRO/GK+20alxzk//V9GmIM2ACElbfF8+Uug3pqiHkVnKqM7W9/S1NH2qmxB6zMiJUHlTH
- gnVeZX0dgH27mzstcF786uPcdEqS0KJuxh2kk5IvUSL3Qn3ZgmgdxBMyCPciD/1cb7/Ahazr
- 3ThHQXSHXkH/aDXdfLsKVuwDzHLVSkdSnZdt5HHh75/NFHxwaTlydgfHmFFwodK8y/TjyiGZ
- zg2Kje38xnz8zKn9iesFBCcONXS7txENTzX0z80WKBhK+XSFJwARAQABzR5UaG9tYXMgSHV0
- aCA8dGh1dGhAcmVkaGF0LmNvbT7CwXgEEwECACIFAlVgX6oCGwMGCwkIBwMCBhUIAgkKCwQW
- AgMBAh4BAheAAAoJEC7Z13T+cC21EbIP/ii9cvT2HHGbFRl8HqGT6+7Wkb+XLMqJBMAIGiQK
- QIP3xk1HPTsLfVG0ao4hy/oYkGNOP8+ubLnZen6Yq3zAFiMhQ44lvgigDYJo3Ve59gfe99KX
- EbtB+X95ODARkq0McR6OAsPNJ7gpEUzfkQUUJTXRDQXfG/FX303Gvk+YU0spm2tsIKPl6AmV
- 1CegDljzjycyfJbk418MQmMu2T82kjrkEofUO2a24ed3VGC0/Uz//XCR2ZTo+vBoBUQl41BD
- eFFtoCSrzo3yPFS+w5fkH9NT8ChdpSlbNS32NhYQhJtr9zjWyFRf0Zk+T/1P7ECn6gTEkp5k
- ofFIA4MFBc/fXbaDRtBmPB0N9pqTFApIUI4vuFPPO0JDrII9dLwZ6lO9EKiwuVlvr1wwzsgq
- zJTPBU3qHaUO4d/8G+gD7AL/6T4zi8Jo/GmjBsnYaTzbm94lf0CjXjsOX3seMhaE6WAZOQQG
- tZHAO1kAPWpaxne+wtgMKthyPLNwelLf+xzGvrIKvLX6QuLoWMnWldu22z2ICVnLQChlR9d6
- WW8QFEpo/FK7omuS8KvvopFcOOdlbFMM8Y/8vBgVMSsK6fsYUhruny/PahprPbYGiNIhKqz7
- UvgyZVl4pBFjTaz/SbimTk210vIlkDyy1WuS8Zsn0htv4+jQPgo9rqFE4mipJjy/iboDzsFN
- BFH7eUwBEAC2nzfUeeI8dv0C4qrfCPze6NkryUflEut9WwHhfXCLjtvCjnoGqFelH/PE9NF4
- 4VPSCdvD1SSmFVzu6T9qWdcwMSaC+e7G/z0/AhBfqTeosAF5XvKQlAb9ZPkdDr7YN0a1XDfa
- +NgA+JZB4ROyBZFFAwNHT+HCnyzy0v9Sh3BgJJwfpXHH2l3LfncvV8rgFv0bvdr70U+On2XH
- 5bApOyW1WpIG5KPJlDdzcQTyptOJ1dnEHfwnABEfzI3dNf63rlxsGouX/NFRRRNqkdClQR3K
- gCwciaXfZ7ir7fF0u1N2UuLsWA8Ei1JrNypk+MRxhbvdQC4tyZCZ8mVDk+QOK6pyK2f4rMf/
- WmqxNTtAVmNuZIwnJdjRMMSs4W4w6N/bRvpqtykSqx7VXcgqtv6eqoDZrNuhGbekQA0sAnCJ
- VPArerAZGArm63o39me/bRUQeQVSxEBmg66yshF9HkcUPGVeC4B0TPwz+HFcVhheo6hoJjLq
- knFOPLRj+0h+ZL+D0GenyqD3CyuyeTT5dGcNU9qT74bdSr20k/CklvI7S9yoQje8BeQAHtdV
- cvO8XCLrpGuw9SgOS7OP5oI26a0548M4KldAY+kqX6XVphEw3/6U1KTf7WxW5zYLTtadjISB
- X9xsRWSU+Yqs3C7oN5TIPSoj9tXMoxZkCIHWvnqGwZ7JhwARAQABwsFfBBgBAgAJBQJR+3lM
- AhsMAAoJEC7Z13T+cC21hPAQAIsBL9MdGpdEpvXs9CYrBkd6tS9mbaSWj6XBDfA1AEdQkBOn
- ZH1Qt7HJesk+qNSnLv6+jP4VwqK5AFMrKJ6IjE7jqgzGxtcZnvSjeDGPF1h2CKZQPpTw890k
- fy18AvgFHkVk2Oylyexw3aOBsXg6ukN44vIFqPoc+YSU0+0QIdYJp/XFsgWxnFIMYwDpxSHS
- 5fdDxUjsk3UBHZx+IhFjs2siVZi5wnHIqM7eK9abr2cK2weInTBwXwqVWjsXZ4tq5+jQrwDK
- cvxIcwXdUTLGxc4/Z/VRH1PZSvfQxdxMGmNTGaXVNfdFZjm4fz0mz+OUi6AHC4CZpwnsliGV
- ODqwX8Y1zic9viSTbKS01ZNp175POyWViUk9qisPZB7ypfSIVSEULrL347qY/hm9ahhqmn17
- Ng255syASv3ehvX7iwWDfzXbA0/TVaqwa1YIkec+/8miicV0zMP9siRcYQkyTqSzaTFBBmqD
- oiT+z+/E59qj/EKfyce3sbC9XLjXv3mHMrq1tKX4G7IJGnS989E/fg6crv6NHae9Ckm7+lSs
- IQu4bBP2GxiRQ+NV3iV/KU3ebMRzqIC//DCOxzQNFNJAKldPe/bKZMCxEqtVoRkuJtNdp/5a
- yXFZ6TfE1hGKrDBYAm4vrnZ4CXFSBDllL59cFFOJCkn4Xboj/aVxxJxF30bn
-In-Reply-To: <24565308.6Emhk5qWAg@weasel>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: cv1kRVggoeIhRGsXOpwHucLEX4QtpHCpNBYjF3DVdj4_1793086030
-X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=thuth@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -30
-X-Spam_score: -3.1
-X-Spam_bar: ---
-X-Spam_report: (-3.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.339,
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <95082036aaf5b0ed1bee69fc21fcbb18fd74d61f.camel@wdc.com>
+Received-SPF: pass client-ip=172.105.4.254; envelope-from=fustini@kernel.org;
+ helo=tor.source.kernel.org
+X-Spam_score_int: -46
+X-Spam_score: -4.7
+X-Spam_bar: ----
+X-Spam_report: (-4.7 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.339,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -153,147 +81,80 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-17.6 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-Spam-Status: No, score=-6.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
-	version=4.0.1
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS autolearn=no
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 26/10/2026 17.38, Christian Schoenebeck wrote:
-> On Monday, 26 October 2026 10:35:12 CET Thomas Huth wrote:
->> On 26/10/2026 09.44, Thomas Huth wrote:
->>> On 19/10/2026 16.27, Christian Schoenebeck wrote:
->>>> Add a qtest-based stress test suite racing 9pfs server-side state.
->>>>
->>>> This patch adds the first race test "race/fid-path" for this new
->>>> test suite: it races (per round) one Tlcreate (which is mutating
->>>> the FID path) against a number of reader requests (Twalk and
->>>> Txattrwalk) on the same FID.
->>>>
->>>> This very first 9pfs race test guards CVE-2026-93834 (fixed by
->>>> commit fe9e30899f "hw/9pfs: Use read-write lock for protecting fid
->>>> path.").
->>>>
->>>> Hitting the small race window is timing dependant, so this is a
->>>> probabilistic test, not a deterministic one. During my tests the
->>>> (unpatched) vulnerability triggered sometimes after few hundred
->>>> rounds, and sometimes after >100k rounds. Furthermore, it expects
->>>> QEMU being compiled with a sanitizer (e.g. ASan) which is
->>>> supposed to detect the actual race (e.g. by memory violation):
->>>>
->>>>     ../configure --enable-virtfs --enable-debug \
->>>>     --extra-cflags="-fsanitize=address -fno-omit-frame-pointer" \
->>>>     --extra-ldflags="-fsanitize=address" ...
->>>>
->>>> Even though this is a new test suite, in the codebase separate
->>>> from the already existing deterministic 9pfs test cases (while
->>>> 9p test client code being shared between the two test suites),
->>>> this new race test suite is run with the same binary as the
->>>> other qtests. However being a very slow test, it is registered
->>>> as such, so the -m slow argument is required for this race test
->>>> to run (as it is skipped by default):
->>>>
->>>>     ASAN_OPTIONS=detect_leaks=0 \
->>>>     tests/qtest/qos-test -m slow
->>>>
->>>> Or if you only want to run this single race test (e.g. on x86_64):
->>>>
->>>>     ASAN_OPTIONS=detect_leaks=0 \
->>>>     tests/qtest/qos-test -m slow -p \
->>>>     /x86_64/pc/i440FX-pcihost/pci-bus-pc/pci-bus/virtio-9p-pci/virtio-9p/
->>>> virtio-9p-tests/race/fid-path
->>>>
->>>> On other systems, use `tests/qtest/qos-test -l` to get the correct
->>>> (arch dependent) full test name.
->>>>
->>>> `ASAN_OPTIONS=detect_leaks=0` is currently required, it suppresses
->>>> a memory leak error at the end of each race test, which is a known
->>>> QEMU shutdown memory leak, unrelated to 9p server or this race test
->>>> suite. The official QEMU CI pipeline sets
->>>> `ASAN_OPTIONS=detect_leaks=0` by default for this reason.
->>>>
->>>> There are some knobs that can be controlled via environment
->>>> variables:
->>>>
->>>>     V9FS_RACE: skip test suite by setting to 0 or force running by
->>>>                setting to 1
->>>>
->>>>     V9FS_RACE_ROUNDS: total amount of rounds to run
->>>>                       (default: 20000)
->>>>
->>>>     V9FS_RACE_NCONCURRENT: amount of concurrent reader requests
->>>>                            (default: 4)
->>>>
->>>> A full run with 20000 rounds took around 7 minutes on my test
->>>> machine. If you can't hit the (narrow) race window with
->>>> unpatched QEMU, it might help to either add some load on the
->>>> host system and/or turning the two knobs above.
->>>>
->>>> Link: https://lore.kernel.org/qemu-> >> devel/4a0eff0539f16434b48728cd8e5a89f906c293d8.1791368962.git.qemu_oss@cr
->>>> udebyte.com Signed-off-by: Christian Schoenebeck <qemu_oss@crudebyte.com>
->>>> ---
->>>>    MAINTAINERS                       |   1 +
->>>>    tests/qtest/meson.build           |   1 +
->>>>    tests/qtest/virtio-9p-race-test.c | 575 ++++++++++++++++++++++++++++++
->>>>    3 files changed, 577 insertions(+)
->>>>    create mode 100644 tests/qtest/virtio-9p-race-test.c
->>>>
->>>    Hi Christian!
->>>
->>> Since this has been merged, I'm now seeing timeouts of the qos-test when I
->>> run "make -j8 check-qtest SPEED=thorough" ... can we please fix this
->>> somehow, e.g. by increasing the timeout setting of the qos-test, or by
->>> decreasing the default number of rounds that this test is trying to do?
->>> WDYT?
->> FWIW, when I allow the tests to run longer, these are the current testing
->> times on my machine:
->>
->>    qemu:qtest-arm/qos-test               : 373.06s   167 subtests passed
->>    qemu:qtest-aarch64/qos-test           : 391.52s   148 subtests passed
->>    qemu:qtest-i386/qos-test              : 407.43s   154 subtests passed
->>    qemu:qtest-loongarch64/qos-test       : 405.79s   146 subtests passed
->>    qemu:qtest-ppc64/qos-test             : 407.26s   134 subtests passed
->>    qemu:qtest-x86_64/qos-test            : 393.14s   154 subtests passed
->>    qemu:qtest-riscv32/qos-test           : 767.21s   216 subtests passed
->>    qemu:qtest-riscv64/qos-test           : 684.54s   216 subtests passed
+On Mon, Oct 26, 2026 at 11:56:38PM +0000, Alistair Francis wrote:
+> On Fri, 2026-10-23 at 17:28 +0530, Sunil V L wrote:
+> > On Thu, Oct 22, 2026 at 10:23 AM Alistair Francis
+> > <Alistair.Francis@wdc.com> wrote:
+[..]
+> > > Why not add a vendor cpu/soc specific one to a vendor board? That
+> > > way
+> > > it actually model hardware instead of just providing the guest some
+> > > made up information.
+> > > 
+> > Thanks for the feedback!
+> > 
+> > Just to make sure I understand your suggestion correctly: should we
+> > avoid
+> > defining a hardcoded cache topology for the generic CPU on virt, and
+> > generate
+> > PPTT cache information only for CPU models that provide an
+> > appropriate cache
+> > hierarchy?
 > 
-> Right, I missed when you run the thorough/slow tests trough make, then the
-> meson wrapped qos-test call is guarded by a timeout, which currently is set to
-> 120s for the *entire* qos-test suite (tests/qtest/meson.build), which is fine
-> for regular tests, but insufficient for these new slow 9p race tests.
+> It was a question
 > 
-> I thought timeouts were just a thing for the official in-cloud QEMU CI
-> pipeline - which doesn't run any slow test at all, so no problem there.
-> That was actually the point why I explictly registered these new race tests as
-> "slow" ones in the first place.
+> Something to keep in mind is that I (and others on the list) don't know
+> all of the context that you know about this extension. So the cover
+> letter and commit messages should describe **why** we want this.
 > 
-> This is more of a project management question; should these extremely slow 9p
-> race tests either:
+> Remember, I'm (and other on the list) are not part of RVI. We don't
+> have the insight that you have. I also don't know what Drew is working
+> on (I see some patches today, but before then I didn't know).
 > 
-> a) be skipped entirely on `make check-qtest SPEED=thorough` or
-> b) run shorter (i.e. less rounds, very low probability to hit) or
-> c) increase the meson timeout for qos-test binary?
+> So, when sending patches please try to explain why we want them.
 > 
-> Personally I don't care too much. These 9p race tests are useful for me, but I
-> also understand if other unrelated developers don't want to spend like 10+
-> mins on each test run for this. I still run them directly via `tests/qtest/
-> qos-test -m slow` ; last line of defense, etc.
+> The question was, what use/value is there in faking some cache layout
+> that doesn't exist? There might be a good reason, but that should be
+> justified and explained.
 > 
-> Technically it is easy to address:
+> > 
+> > I can certainly omit the cache information for the generic CPU. The
+> > consequence
+> > is that Drew's CBQRI series, which requires cache information, would
+> > need a
+> > suitable CPU model before it can be used with virt. Drew, please
+> > share
+> > your thoughts.
 > 
-> a) -> set envvar V9FS_RACE=0
-> b) -> set envvar V9FS_RACE_ROUNDS=n
-> c) -> s/'qos-test': 120/'qos-test': n/
-> 
-> all in tests/qtest/meson.build. Your call.
-I think it's maybe best to go with option b), i.e. to (radically) reduce the 
-amount of rounds that is run by default. That way the code still gets at 
-least a little bit exercised when running all tests in thorough mode, 
-without extending the test time too much for everybody.
-Could you send a patch, or want me to do it?
+> Drew works at a company making it's own CPU, I would argue he can just
+> use that :)
 
-  Thomas
+I could add caches for the Ascalon core complex in Atlantis but the
+topology is pretty simple with just private L1 and shared L2. The
+tt-atlantis machine is also device tree only, so it would not produce a
+PPTT or RQSC table. A generic cpu with L1, L2 and L3 caches like Sunil
+defined is ideal for testing my Qemu RQSC series [1], since RQSC needs
+to reference cache IDs from PPTT. My plan is to rebase my RQSC series
+once PPTT support lands and send the new revision as a non-RFC series
+since RQSC has been ratified.
 
+Qemu is important for testing the RISC-V QoS support in Linux [2],
+because I'm not aware of any hardware yet that supports all 4 features
+of CBQRI: capacity allocation, capacity monitoring, bandwidth
+allocation, and bandwidth monitoring. Ascalon only supports capacity
+allocation, and I have not seen public details from other vendors about
+which CBQRI features have been implemented.
+
+Thanks,
+Drew
+
+[1] https://lore.kernel.org/all/20260202-riscv-rqsc-v1-0-dcf448a3ed73@kernel.org/
+[2] https://lore.kernel.org/all/20260601-ssqosid-cbqri-rqsc-v7-0-v6-0-baf00f50028a@kernel.org/
 
