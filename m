@@ -1,52 +1,51 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C87CB606A323
-	for <qemu-riscv@archiver.kernel.org>; Tue, 27 Oct 2026 18:15:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1C8EB606A320
+	for <qemu-riscv@archiver.kernel.org>; Tue, 27 Oct 2026 18:15:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=eirGs5Uh
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=C3/RgCrs
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xLlhD-0007ll-GT; Tue, 27 Oct 2026 14:14:51 -0400
+	id 1xLlhB-0007kN-Nq; Tue, 27 Oct 2026 14:14:50 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1xLlgt-0007gk-H5
- for qemu-riscv@nongnu.org; Tue, 27 Oct 2026 14:14:33 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ id 1xLlgp-0007fz-Mb
+ for qemu-riscv@nongnu.org; Tue, 27 Oct 2026 14:14:29 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1xLlgr-0003Gu-F9
- for qemu-riscv@nongnu.org; Tue, 27 Oct 2026 14:14:30 -0400
+ id 1xLlgn-0003G4-EY
+ for qemu-riscv@nongnu.org; Tue, 27 Oct 2026 14:14:26 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1793124868;
+ s=mimecast20190719; t=1793124864;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=AjGVXU5aS/ksj0LQ/51NqYabIHtfhW7qM9VfFUaebJo=;
- b=eirGs5UhTUM+gyhj+CW/AenbixCDMQxNV1jdXDS8tohDmerLKpaIogUEQxtPxSKq/f+Fyh
- 3PnZvZMN8+cKpXnKRpePU1Hc31Q2j2USa3FERjlQDrScBtqcJV3qcCWMnXQy3P/ymy9rTJ
- FVTSGeEAlZZoKAzQlgQVZ8ZAbziKGYY=
-Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
+ content-transfer-encoding:content-transfer-encoding;
+ bh=caBZVIE/hSguJ/sxrRpKGVVVydsKnFLoXQm6GdDdBq0=;
+ b=C3/RgCrsuaoT6deF5d+L8VTH/NOkEUt2B/U/zTLA6a9GBtLYIWxcMfp7BT0X/1hC/2mf/c
+ UF/TJua3jfEYlaBz+ND+ffk+jDroBRvH8bg7ZIrX/jAPaH7+0rSqCk7sLkPucnaYTGEt5/
+ hbzGDrCSl9czz92hNqCvGpjjausx9F8=
+Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-508-P2CkRgR_M8Cknl4287nnmA-1; Tue,
- 27 Oct 2026 14:14:23 -0400
-X-MC-Unique: P2CkRgR_M8Cknl4287nnmA-1
-X-Mimecast-MFC-AGG-ID: P2CkRgR_M8Cknl4287nnmA_1793124860
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-651-ogOcdw8xNomqQoUIrQuolg-1; Tue,
+ 27 Oct 2026 14:14:15 -0400
+X-MC-Unique: ogOcdw8xNomqQoUIrQuolg-1
+X-Mimecast-MFC-AGG-ID: ogOcdw8xNomqQoUIrQuolg_1793124851
 Received: from mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com
  (mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.93])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 7115D195411E; Tue, 27 Oct 2026 18:14:19 +0000 (UTC)
+ by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 6EFF81955BF1; Tue, 27 Oct 2026 18:14:10 +0000 (UTC)
 Received: from berrange.csb (headnet04.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.116])
  by mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id D5A0B18005B0; Tue, 27 Oct 2026 18:14:10 +0000 (UTC)
+ id 8D1DC18005AD; Tue, 27 Oct 2026 18:14:01 +0000 (UTC)
 From: =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Stefano Stabellini <sstabellini@kernel.org>,
@@ -74,28 +73,26 @@ Cc: Stefano Stabellini <sstabellini@kernel.org>,
  kvm@vger.kernel.org, Alexander Graf <graf@amazon.com>,
  Song Gao <17746591750@163.com>, Eric Farman <farman@linux.ibm.com>,
  Cornelia Huck <cohuck@redhat.com>, Matthew Rosato <mjrosato@linux.ibm.com>,
- =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
- =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>
-Subject: [PATCH 01/11] hw/arm: mark 'virt' as a secure machine
-Date: Tue, 27 Oct 2026 18:13:50 +0000
-Message-ID: <20261027181400.1752951-2-berrange@redhat.com>
-In-Reply-To: <20261027181400.1752951-1-berrange@redhat.com>
-References: <20261027181400.1752951-1-berrange@redhat.com>
+ =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
+Subject: [PATCH 00/11] hw: mark virtualization related machines & accelerators
+ as secure
+Date: Tue, 27 Oct 2026 18:13:49 +0000
+Message-ID: <20261027181400.1752951-1-berrange@redhat.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.93
-X-Mimecast-MFC-PROC-ID: ZNkPK6UzWbXNMpR3IVYnsqHjqi07X9Wu89T8uwNS-Mk_1793124860
+X-Mimecast-MFC-PROC-ID: eZDgRXgIYuj14-iHTxE5elEZkHcy8NeBbHGJT2tGtvo_1793124851
 X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=berrange@redhat.com;
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=berrange@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: 5
 X-Spam_score: 0.5
 X-Spam_bar: /
 X-Spam_report: (0.5 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
  RCVD_IN_SBL_CSS=3.335, SPF_HELO_PASS=-0.001,
  SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
@@ -109,35 +106,52 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-16.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-Spam-Status: No, score=-11.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS autolearn=unavailable autolearn_force=no version=4.0.1
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS
+	autolearn=unavailable autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-The 'virt' arm machine is already declared secure in
-docs/system/security.rst, due too its intended usage in virtualization
-scenarios.
+This is the machine type and accelerators patches pulled out of the
+bigger series and split per target / accelerator:
 
-Reviewed-by: Marc-André Lureau <marcandre.lureau@redhat.com>
-Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
----
- hw/arm/virt.c | 1 +
- 1 file changed, 1 insertion(+)
+  https://lists.gnu.org/archive/html/qemu-devel/2026-09/msg03555.html
 
-diff --git a/hw/arm/virt.c b/hw/arm/virt.c
-index 0d56197dace..43b9212edc2 100644
---- a/hw/arm/virt.c
-+++ b/hw/arm/virt.c
-@@ -133,6 +133,7 @@ static void arm_virt_compat_default_set(MachineClass *mc)
-         .parent = TYPE_VIRT_MACHINE, \
-         .class_init = MACHINE_VER_SYM(class_init, virt, __VA_ARGS__), \
-         .is_available = target_base_arm, \
-+        .secure = true, \
-     }; \
-     static void MACHINE_VER_SYM(register, virt, __VA_ARGS__)(void) \
-     { \
+Note this only deals with marking leaf types. All parent types
+are implicitly also considered secure if any leaf is secure. A
+future series will explicitly mark parent types too.
+
+Daniel P. Berrangé (11):
+  hw/arm: mark 'virt' as a secure machine
+  hw/i386: mark 'microvm', 'i440fx', 'q35' as secure machines
+  hw/loongarch: mark 'virt' as a secure machine
+  hw/ppc: mark 'pseries' as a secure machine
+  hw/riscv: mark 'virt' as a secure machine
+  hw/s390x: mark 's390x-ccw-virtio' as a secure machine
+  hw: mark xenpv, xenpvh, xenfv as secure machines
+  hw/nitro: mark 'nitro' machine as secure
+  accel/kvm: mark kvm accelerator as secure
+  accel/xen: mark xen accelerator as secure
+  accel/nitro: mark 'nitro' accelerator as secure
+
+ accel/kvm/kvm-all.c        | 1 +
+ accel/nitro/nitro-accel.c  | 1 +
+ accel/xen/xen-all.c        | 1 +
+ hw/arm/virt.c              | 1 +
+ hw/arm/xen-pvh.c           | 1 +
+ hw/i386/microvm.c          | 1 +
+ hw/i386/pc_piix.c          | 4 ++--
+ hw/i386/xen/xen-pvh.c      | 1 +
+ hw/loongarch/virt.c        | 1 +
+ hw/nitro/machine.c         | 1 +
+ hw/ppc/spapr.c             | 1 +
+ hw/riscv/virt.c            | 1 +
+ hw/s390x/s390-virtio-ccw.c | 1 +
+ hw/xenpv/xen_machine_pv.c  | 2 +-
+ include/hw/i386/pc.h       | 1 +
+ 15 files changed, 16 insertions(+), 3 deletions(-)
+
 -- 
 2.56.0
 
