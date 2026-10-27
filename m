@@ -1,60 +1,63 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 79491606A31A
-	for <qemu-riscv@archiver.kernel.org>; Tue, 27 Oct 2026 13:01:03 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (4096-bit key, unprotected) header.d=crudebyte.com header.i=@crudebyte.com header.a=rsa-sha256 header.s=kylie header.b=EdzEbZlr
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A0822606A31B
+	for <qemu-riscv@archiver.kernel.org>; Tue, 27 Oct 2026 14:00:50 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xLgmO-0006Yd-5Y; Tue, 27 Oct 2026 08:59:52 -0400
+	id 1xLhio-0007Q7-Hd; Tue, 27 Oct 2026 10:00:14 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <qemu_oss@crudebyte.com>)
- id 1xLgmL-0006YL-VE; Tue, 27 Oct 2026 08:59:50 -0400
-Received: from kylie.crudebyte.com ([5.189.157.229])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <qemu_oss@crudebyte.com>)
- id 1xLgmK-0004ad-7M; Tue, 27 Oct 2026 08:59:49 -0400
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=crudebyte.com; s=kylie; h=Content-Type:Content-Transfer-Encoding:
- MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
- Content-ID:Content-Description;
- bh=9ApMuoI7fWhmIFjcZW6e2sc2Uzrjlix7jurk8RT+b98=; b=EdzEbZlrVxLQb8dgxbnnM4LzGK
- 9Td0TZj+7f2QPdb0T15Nqmx1JygLo1J5zPCX/SgnSxScQ6HVpvrsnf43+ida5ZzDmlmQdHIETTYem
- f0WThPhM2nXQoLVY/GG5+EkFPQb3KhBcTVDO2M7ngpXhkyGbh05P/8IEgBxWiczGiaWqw3KX806pj
- o18IKmrPeHFXIycrAwHsbKzqD2JloyfqVbxLDW859Wc6bW+boTy0K52kdo7+2w62nZSMRwawwiW1z
- qEfb+/s8/avWSqvx7cCVqTFcEXhvwcNHxEV3jQ4f1yWnzl5eo9hMcLIdlKhnWnYQIekK1M82k2c6+
- icVkltFt2p9gly/i24ktLkwi7l0jGRpKeFpbcFDDrExNzHb16o1sN3KJ/obLP34Exq+fIoaNRlQ5n
- gbv5C8UoRL1/1u+APJlU5fv3hC5L3cXHmymEDHDxEQKpFbVK2wqH4xxNo2gMJZXrX00gRsm0WlhoL
- yvEp4vgF0sclNKgFkq/34MxcNeoc5PS6cQ2XSDXltsPy9m29YbZ5O1r5bxq6BMOPfW8nZcl/YmIgU
- 7YjrDqPTVsOktz7xSFEYjBIDDDjpHmX6whN8pjk90rF8xXEt+UnUyBOdQSBLVkOOzxO7Wa/45tNKQ
- sts7Qc7a4t8iEjJllErFPgflohZBFdNPdStYLdnXA=;
-From: Christian Schoenebeck <qemu_oss@crudebyte.com>
-To: qemu-devel@nongnu.org, Thomas Huth <thuth@redhat.com>
-Cc: Greg Kurz <groug@kaod.org>, Peter Maydell <peter.maydell@linaro.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>
-Subject: Re: [PULL 2/9] tests/9p-race: add 9p race test suite (race FID-path
- mutations)
-Date: Tue, 27 Oct 2026 13:59:44 +0100
-Message-ID: <119543614.nniJfEyVGO@weasel>
-In-Reply-To: <c0cf4c97-6d1e-4550-a567-a84ce3ff7b43@redhat.com>
-References: <cover.1792420035.git.qemu_oss@crudebyte.com>
- <24565308.6Emhk5qWAg@weasel>
- <c0cf4c97-6d1e-4550-a567-a84ce3ff7b43@redhat.com>
+ (Exim 4.90_1) (envelope-from <tanchi25@mails.ucas.ac.cn>)
+ id 1xLhik-0007Or-GG; Tue, 27 Oct 2026 10:00:10 -0400
+Received: from smtp25.cstnet.cn ([159.226.251.25] helo=cstnet.cn)
+ by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
+ (Exim 4.90_1) (envelope-from <tanchi25@mails.ucas.ac.cn>)
+ id 1xLhih-0001uz-Dj; Tue, 27 Oct 2026 10:00:10 -0400
+Received: from k3-03 (unknown [159.226.43.8])
+ by APP-05 (Coremail) with SMTP id zQCowACH9D5JruBqUlh6DA--.37595S2;
+ Tue, 27 Oct 2026 21:59:55 +0800 (CST)
+From: tanchi25@mails.ucas.ac.cn
+To: nutty.liu@hotmail.com
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, palmer@dabbelt.com,
+ alistair.francis@wdc.com, liwei1518@gmail.com,
+ daniel.barboza@oss.qualcomm.com, zhiwei_liu@linux.alibaba.com,
+ chao.liu@processmission.com
+Subject: Re: [PATCH v2] target/riscv/kvm: Translate MSI addresses through the
+ IOMMU
+Date: Tue, 27 Oct 2026 21:59:36 +0800
+Message-ID: <20261027135937.2326-1-tanchi25@mails.ucas.ac.cn>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <TYZPR04MB74913D01748558160FDBD92AF3602@TYZPR04MB7491.apcprd04.prod.outlook.com>
+References: <TYZPR04MB74913D01748558160FDBD92AF3602@TYZPR04MB7491.apcprd04.prod.outlook.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="utf-8"
-Received-SPF: pass client-ip=5.189.157.229;
- envelope-from=qemu_oss@crudebyte.com; helo=kylie.crudebyte.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID: zQCowACH9D5JruBqUlh6DA--.37595S2
+X-Coremail-Antispam: 1UD129KBjDUn29KB7ZKAUJUUUUU529EdanIXcx71UUUUU7v73
+ VFW2AGmfu7bjvjm3AaLaJ3UjIYCTnIWjp_UUUYt7k0a2IF6F1UM7kC6x804xWl14x267AK
+ xVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0rVWrJVCq3wAFIxvE14AKwVWUJVWUGw
+ A2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK021l84ACjcxK6xIIjxv20xvE14v26F1j
+ 6w1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26F4j6r4UJwA2z4x0Y4vEx4A2jsIE14v26r
+ xl6s0DM28EF7xvwVC2z280aVCY1x0267AKxVW0oVCq3wAac4AC62xK8xCEY4vEwIxC4wAS
+ 0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7IYx2
+ IY67AKxVWUGVWUXwAv7VC2z280aVAFwI0_Gr0_Cr1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0
+ Y48IcxkI7VAKI48JM4kE6xkIj40Ew7xC0wCY02Avz4vE14v_Xr4l42xK82IYc2Ij64vIr4
+ 1l4c8EcI0Ec7CjxVAaw2AFwI0_Jw0_GFyl4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAq
+ x4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r
+ 43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF
+ 7I0E14v26r1j6r4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxV
+ WUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r1j6r4UYxBIdaVFxhVjvjDU0xZFpf9x0zRb
+ 4S5UUUUU=
+X-CM-SenderInfo: pwdquxrlsvqzpdlo2hpxfd2hldfou0/
+Received-SPF: pass client-ip=159.226.251.25;
+ envelope-from=tanchi25@mails.ucas.ac.cn; helo=cstnet.cn
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -66,52 +69,18 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS autolearn=no
-	autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,USER_AGENT_GIT autolearn=no autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Tuesday, 27 October 2026 08:27:07 CET Thomas Huth wrote:
-> On 26/10/2026 17.38, Christian Schoenebeck wrote:
-> > On Monday, 26 October 2026 10:35:12 CET Thomas Huth wrote:
-> >> On 26/10/2026 09.44, Thomas Huth wrote:
-> >>> On 19/10/2026 16.27, Christian Schoenebeck wrote:
-> >>>> Add a qtest-based stress test suite racing 9pfs server-side state.
-[...]
-> > This is more of a project management question; should these extremely slow
-> > 9p race tests either:
-> > 
-> > a) be skipped entirely on `make check-qtest SPEED=thorough` or
-> > b) run shorter (i.e. less rounds, very low probability to hit) or
-> > c) increase the meson timeout for qos-test binary?
-> > 
-> > Personally I don't care too much. These 9p race tests are useful for me,
-> > but I also understand if other unrelated developers don't want to spend
-> > like 10+ mins on each test run for this. I still run them directly via
-> > `tests/qtest/ qos-test -m slow` ; last line of defense, etc.
-> > 
-> > Technically it is easy to address:
-> > 
-> > a) -> set envvar V9FS_RACE=0
-> > b) -> set envvar V9FS_RACE_ROUNDS=n
-> > c) -> s/'qos-test': 120/'qos-test': n/
-> > 
-> > all in tests/qtest/meson.build. Your call.
-> 
-> I think it's maybe best to go with option b), i.e. to (radically) reduce the
-> amount of rounds that is run by default. That way the code still gets at
-> least a little bit exercised when running all tests in thorough mode,
-> without extending the test time too much for everybody.
-> Could you send a patch, or want me to do it?
+Thanks for the review.
 
-Patches are always appreciated of course; otherwise this would have to wait a 
-bit, as I am currently busy with other high prio tasks. I am fine either way.
+Agreed. The translated length is not used here, so I will remove
+`len` and pass NULL to address_space_translate().
 
-Thanks!
-
-/Christian
-
+Thanks,
+Tan Chi
 
 
