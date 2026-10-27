@@ -1,195 +1,103 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1308F606A31A
-	for <qemu-riscv@archiver.kernel.org>; Tue, 27 Oct 2026 22:33:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AD62C606A338
+	for <qemu-riscv@archiver.kernel.org>; Tue, 27 Oct 2026 22:49:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=amazon.de header.i=@amazon.de header.a=rsa-sha256 header.s=amazoncorp2 header.b=FShik8Xe
+	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=KQEFq4ig
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xLpjV-0004BO-7d; Tue, 27 Oct 2026 18:33:29 -0400
+	id 1xLpym-0007DQ-7O; Tue, 27 Oct 2026 18:49:16 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <prvs=75389f537=graf@amazon.de>)
- id 1xLpjB-00046X-Qt; Tue, 27 Oct 2026 18:33:11 -0400
-Received: from fra-out-012.esa.eu-central-1.outbound.mail-perimeter.amazon.com
- ([52.57.120.243])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <prvs=75389f537=graf@amazon.de>)
- id 1xLpj9-0003lM-SD; Tue, 27 Oct 2026 18:33:09 -0400
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1xLpyl-0007DA-4y
+ for qemu-riscv@nongnu.org; Tue, 27 Oct 2026 18:49:15 -0400
+Received: from mail-ot1-x32c.google.com ([2607:f8b0:4864:20::32c])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1xLpyj-000530-21
+ for qemu-riscv@nongnu.org; Tue, 27 Oct 2026 18:49:14 -0400
+Received: by mail-ot1-x32c.google.com with SMTP id
+ 46e09a7af769-81b54d0cb17so426496a34.1
+ for <qemu-riscv@nongnu.org>; Tue, 27 Oct 2026 15:49:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amazon.de; i=@amazon.de; q=dns/txt; s=amazoncorp2;
- t=1793140387; x=1824676387;
- h=from:to:cc:subject:date:message-id:references:
- in-reply-to:content-id:content-transfer-encoding: mime-version;
- bh=GWEbN3/mwk69KDD6DP1aJIFo59Q4n3h4QilYTdK6KJ8=;
- b=FShik8XeCjMcdrOEqzCGlOSKvUumxobcWuFrDcx+k+VSBlphUwL511xG
- tGng2vpxY0GKnjA5r4EdLYFV3TCBSMK2X/NmFPZpB/yCZYkoSZqH2Ttd8
- Ui1gSNJZy+hsMZ40tOF9IFvqpz699Xw4Y7v8izNATFe8zZ+OTPALlni96
- j31jSte1qpOHR6iR7rNxOZRjth3GyumRWSeMBjgRCQHNMh1Ovwuecz6k4
- v3K3eFX+xPjgKFnyAv4Caa55jFOoi+XGOtzQkR0ToRhMVxITYDYfrv1IE
- eMhM8ErnbG3aDJmc5Kc0mTT+YiNUv+ifiC3/0dlStj10mwB+dET74IuXd Q==;
-X-CSE-ConnectionGUID: EB+pMZTETUW8U34DPIYAZQ==
-X-CSE-MsgGUID: P4uhTOAcSjGDhFl9mhH+Ng==
-X-IronPort-AV: E=Sophos;i="6.27,181,1787011200"; d="scan'208";a="21795587"
-Received: from ip-10-6-6-97.eu-central-1.compute.internal (HELO
- smtpout.naws.eu-central-1.prod.farcaster.email.amazon.dev) ([10.6.6.97])
- by internal-fra-out-012.esa.eu-central-1.outbound.mail-perimeter.amazon.com
- with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 27 Oct 2026 22:32:57 +0000
-Received: from EX19MTAEUA001.ant.amazon.com [54.240.197.233:12547]
- by smtpin.naws.eu-central-1.prod.farcaster.email.amazon.dev [10.0.44.90:2525]
- with esmtp (Farcaster)
- id 09484581-dfa9-4b4c-a117-a67a540b1263; Tue, 27 Oct 2026 22:32:56 +0000 (UTC)
-X-Farcaster-Flow-ID: 09484581-dfa9-4b4c-a117-a67a540b1263
-Received: from EX19EXOEUC001.ant.amazon.com (10.252.51.133) by
- EX19MTAEUA001.ant.amazon.com (10.252.50.223) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.56;
- Tue, 27 Oct 2026 22:32:56 +0000
-Received: from EX19EXOEUC001.ant.amazon.com (10.252.51.133) by
- EX19EXOEUC001.ant.amazon.com (10.252.51.133) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.56;
- Tue, 27 Oct 2026 22:32:56 +0000
-Received: from BEUP281CU002.outbound.protection.outlook.com (10.252.51.199) by
- EX19EXOEUC001.ant.amazon.com (10.252.51.133) with Microsoft SMTP
- Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.56
- via Frontend Transport; Tue, 27 Oct 2026 22:32:55 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=FjW0TusRwVgpu/dt/5IeXj1IYuJqqkyM+NuJ8Acc+tpKNHCSXiWFLcabDdPnjHXU9C7oKu+rmji1Dmai3xmKZsvFmsMNcVWEUQe0LK1wTFZqktid1R0sG8S2zL7k+oiBqLbNy+vurkw0cb7ehn/WjlXuEkvb+77YJy7TmslRDdXZOot0zI/mkfXOBLcOJBJcG/vmolw2flzx3y/kQFZFhGYhvgzpXyRc6J+hWyPsm82cz2uvC/wKTpz1Y6NhdJtCK0UUfn1NNk8xIXCabAWlPBcV044MeW0YTFEC12390pGl/FbAazy50YswNWliKVxscevCWLpz7flwULH5XpKfSw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=GWEbN3/mwk69KDD6DP1aJIFo59Q4n3h4QilYTdK6KJ8=;
- b=xekt8P6ucGj2j4PfYBIY5ywxLYRvjymEb3eBlKJEreaOjSU+ww7R5ftFoxO0CC1t+wIFH6ZCsvvs7im9J4THPHjGGBs1umuslA9EYGrc+Gjq4YM5eyNiI258/YkHx7tEWW9Tdtk1u5bkX5gjQad4FD21Vk3CBTEtpV9+I1DFEHNVc0xD2BCWLs3n/efzYnt7BualwNeG3ZP2rx65w2iys/iqvoXVWGXrTD7Yp76Aas2QcOhmfJPpurhV1RZJMY5smCU/Zh3i/fjd/mJmUSGjeu8vhfefGnTC9B7wp5lUnY/HN4XvtfaUTBnkR2g7QBMGOPEsMkfwsI94RGAFw6hKZQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amazon.de; dmarc=pass action=none header.from=amazon.de;
- dkim=pass header.d=amazon.de; arc=none
-Received: from FRVP281MB744463.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:20d::13) by BE3P281MB6226.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:b10:104::16) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.546.22; Tue, 27 Oct
- 2026 22:32:46 +0000
-Received: from FRVP281MB744463.DEUP281.PROD.OUTLOOK.COM
- ([fe80::7b1c:7a5d:c405:6c4d]) by FRVP281MB744463.DEUP281.PROD.OUTLOOK.COM
- ([fe80::7b1c:7a5d:c405:6c4d%5]) with mapi id 15.21.0546.021; Tue, 27 Oct 2026
- 22:32:46 +0000
-From: "Graf (AWS), Alexander" <graf@amazon.de>
-To: =?utf-8?B?RGFuaWVsIFAuIEJlcnJhbmfDqQ==?= <berrange@redhat.com>,
- "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>
-CC: Stefano Stabellini <sstabellini@kernel.org>, "Michael S. Tsirkin"
- <mst@redhat.com>, David Hildenbrand <david@kernel.org>, Anthony PERARD
- <anthony@xenproject.org>, Peter Maydell <peter.maydell@linaro.org>,
- "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>, Paolo Bonzini
- <pbonzini@redhat.com>, Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
- <liwei1518@gmail.com>, Richard Henderson <richard.henderson@linaro.org>,
- Nicholas Piggin <npiggin@gmail.com>, "Edgar E. Iglesias"
- <edgar.iglesias@gmail.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>, Chao Liu
- <chao.liu@processmission.com>, Harsh Prateek Bora <harshpb@linux.ibm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Christian Borntraeger
- <borntraeger@linux.ibm.com>, Daniel Henrique Barboza
- <daniel.barboza@oss.qualcomm.com>, Amit Machhiwal <amachhiw@linux.ibm.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, "Sergio
- Lopez" <slp@redhat.com>, "qemu-arm@nongnu.org" <qemu-arm@nongnu.org>,
- "qemu-ppc@nongnu.org" <qemu-ppc@nongnu.org>, Bibo Mao <maobibo@loongson.cn>,
- Ilya Leoshkevich <iii@linux.ibm.com>, Halil Pasic <pasic@linux.ibm.com>,
- Xianglai Li <lixianglai@loongson.cn>, Palmer Dabbelt <palmer@dabbelt.com>,
- "qemu-s390x@nongnu.org" <qemu-s390x@nongnu.org>, "kvm@vger.kernel.org"
- <kvm@vger.kernel.org>, Song Gao <17746591750@163.com>, Eric Farman
- <farman@linux.ibm.com>, Cornelia Huck <cohuck@redhat.com>, Matthew Rosato
- <mjrosato@linux.ibm.com>
-Subject: Re: [PATCH 08/11] hw/nitro: mark 'nitro' machine as secure
-Thread-Topic: [PATCH 08/11] hw/nitro: mark 'nitro' machine as secure
-Thread-Index: AQHdZmMX3joabFtXaUWVQ1RiPsBvJw==
-Date: Tue, 27 Oct 2026 22:32:46 +0000
-Message-ID: <b5adb841-9f14-4eb1-a69f-7e7b443e9f23@amazon.com>
-References: <20261027181400.1752951-1-berrange@redhat.com>
- <20261027181400.1752951-9-berrange@redhat.com>
-In-Reply-To: <20261027181400.1752951-9-berrange@redhat.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amazon.de;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: FRVP281MB744463:EE_|BE3P281MB6226:EE_
-x-ms-office365-filtering-correlation-id: 18fac4b7-fdbf-4656-7e07-08df347a39be
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
- ARA:13230040|376014|7416014|366016|23010399003|1800799024|38070700021|11063799006|4143699003|56012099006|10067099003|18002099003|22082099003;
-x-microsoft-antispam-message-info: cyC+3f1YHm6wUu9JacJXPts7iepG6XLMm2+IHmQTOXCcxWFNMrsfdGc7fSLrEFGkhiw2kmpW8Pd7nfSuJljKT1XsbfvEbqfSpWGp45UFfVym6fg9UQyjF0S3v6VGhegdPMuTe1g7Ij4hfS33F7+9jXqptbq5U5T2oaUDrSsvydT4ztFEjNZp9ft2bCNUkh8crKcfiWiPVOn0lTkzvWdsFjv29NLndxrvG0fuEpIGEahTbKFfdulhFOUyvF7I6/aUUuqMvbzLv/nOkhIiScvZPajy+75HmaGE/qJQHrLtA/7GuHKZ8XjC2zRmDjlobE0yiQ82t/MZfPZdSUQsu9sOiJ2qgykfuJITJm/R7QtoFcaiDPdYg4FHcFHNGKviJHPoe6YLdECpZyfBQzcliTmAnQcu4stAPfIs1PPUJd43yTjH4hYt6hugIn3Q8TPghu7CYKA7z4Ke1tf6GnCu5IEbHCAuELO4NunYt6Eou3qLVIuiFiyl5hYwc8eQew15A7rMCq6K+lGhyieDrAQ7lYzDkuhCCjOXL6Fv58PnjYZjcj8IXvFs5iu5fg/VqVnGmFIUV3Y3i9H4D3A4Sfl11isjksscHslU2+fwqrHGcV9uKKTor2bIuzSdnAXCn5BqUG8cbpXF+cOIncTwO0jwlcrEqxL+dpLVuzusX7TuUVkzrHZINkbKGaeYKukYH9MwiNDBqP87oH0jml4IiOFCMrvRWbvIpuS+kqo1ZxsBCDeGNyw=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:FRVP281MB744463.DEUP281.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(7416014)(366016)(23010399003)(1800799024)(38070700021)(11063799006)(4143699003)(56012099006)(10067099003)(18002099003)(22082099003);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?emFQd0puMmo1aFJKaCtxdmp4Sjg1QkdJZy8xL1FSMlcxaUw1bHZyb2NQWjB1?=
- =?utf-8?B?V0lUR2tqdnIxcW1MK3FrOSt3RUNhMUJyTlU2QVl1VTBmay80Rkk3Q2dKaG9t?=
- =?utf-8?B?ZHd5eFQ3My9kNE00MmRmbWI3MzZ1TFhxcjFEa3JqaE53ZDZLaGdsZVJaMkZN?=
- =?utf-8?B?QmZNaS9XSktBV3dMT1FQYlpqd1R4MERNMmtmZUJjT2g1Yy9nNFord1VRYnFp?=
- =?utf-8?B?RGNTb0xtRG9PaEdtRWZReElwdXlNNnhwNnNDRjREVHRnMlJFZCtwSWdJZGFW?=
- =?utf-8?B?UjVwRWhlZ3UrOUppTjZQRWROeFAyUldQemtheS9zeDhHU1h2US8rS0d2aDN4?=
- =?utf-8?B?bWJacEVzVjRuMXRFaU13VnFRZFZpT1ZMbUhMbzgvUms3TzVJQjRHVXd3ckY5?=
- =?utf-8?B?Z0RUSnVOV0dQUmlyN2hVUjg5RG1wYjdWaExKa2tHSGQwWVZnM1hUenljbEhI?=
- =?utf-8?B?WGZtYUNmd0hQd3JwMjI3NmlpakxxMm15S3U2eFRCUEFqL2M0dDEwWGdsU01a?=
- =?utf-8?B?UHk4MFJkcGVIalA1UVk4NUdUM2lxTXpIQTQ4TElaUEdtK3k5clVMWjBNQjVv?=
- =?utf-8?B?QTQ3SFhVaVMzbU9rT001NGVnTSs5RWtNNmdDK25YRldVQ0tKVVZrUDFwdFZ2?=
- =?utf-8?B?STNiQ1dFZzdGQXg1S0NKNnR5RGZvVG44QjFINyt1UGxjUThhZFppOGxxT29m?=
- =?utf-8?B?ZENHQWM5UllMK05tUENkVVpUWTJVZVBGdlhYYVRwQURMYmFudzRMS2V0bUVS?=
- =?utf-8?B?aHh5N2NOOEkvQkZiZjlWbkRLVjhMY0dudlIrSi9wR3UvYXFueHpObXpDa01j?=
- =?utf-8?B?L3J2dlVtZFQ1UThHSEo4bjc2VWZTUDcyblo4NStaclpwNVR2WlkyTzA3RGo3?=
- =?utf-8?B?MjkvTmdpSmRsS2pKVHVvNld5OGZBbTUzbnhZcHV3bk1ZelUxY0VLaVlmWVR3?=
- =?utf-8?B?WTFyTVR1MkJOTkNqZjRzZUhzUTFuNDdNU1hXWUZYR282a0hnV1B4alU1U3JS?=
- =?utf-8?B?OUVCcFhwSU9jWFhKTitoUXllQ1lDYnA4WnZQV3BaVTRUQW0wZVhGRjMxNmx3?=
- =?utf-8?B?TzJZQmZzbmtGSzJ4NFZDRXdmKzUzcERtanpodHBubFhZcXhsd2R2U1MxMjYy?=
- =?utf-8?B?eXRuN0VMc1F2TmdGT3hmc2tzZEJIbkxKNS9GdGJtSXppQVV3WU90cGVQRUNC?=
- =?utf-8?B?TUhxT2ZNQjA3NzR1TXJwNldCVzJrRTZxRjhxNWlVbThZKzdicTg0alFNeGhY?=
- =?utf-8?B?QllYcjhWQkdFa2RwT2xIZ1dJMk02VVVlNG5IK0N4QlQ0YUZpQ0ZlOGFsbTBN?=
- =?utf-8?B?cTJQLzhOemp2TmdFeVpSK1dBZFlLUStKWVA0YnVYdmpCYVo2TjN1T05rUTVk?=
- =?utf-8?B?czZvUlRMZmFFNm9wK3ZEVTBhU2F5SWVFbGJSL01WUGtTK2JpRy9QbUtDdUpz?=
- =?utf-8?B?WGttd1dzRjk2WGhEZ3NyZXpVbFhoOVJ2bXBZN3N6MXZwczF5QkIxMHlwZW5N?=
- =?utf-8?B?SXpUcDJZR054NUVlbE5HQVRwSFVqSGw5TFdzclk2azRkYlZ4VW1teVk3MGRu?=
- =?utf-8?B?NWo1MFU3SDAzMHA1WEdNeEl5d2VKOWJzZW8wUmRtTE44bVVTYUd6UlRJbU9n?=
- =?utf-8?B?U01TRXZMUndZVHU4dElTUUhoZG1KQWxBOXI4TC8zYkwrRmdIUFJTMi9VODhZ?=
- =?utf-8?B?NWN4MkJ5VXNKY1VzSTVCOWU3dEVSRHZiK0o1TDhXVVVrMDRkS2xjM1FZVTQr?=
- =?utf-8?B?K3p2a3RZSzFKTTdTQUlkd1lUazVqYzAxN1JvbEI0WWJFK3o4UW9wZzR0Z21i?=
- =?utf-8?B?YUpzeVZIMml6YWh2NjRGOVp1QllYNFFnOFBNUEQ4V0Rtc2kyQ2VSUGZiZjZG?=
- =?utf-8?B?VERoUjlOM0RLRHdjWUhWU1hmZkpOQkxRK0Mva2dwUzdXOTlIZWRPS29CdDRT?=
- =?utf-8?B?RHRHOE5mTFl5V3I4T2lpYk9SMGRrNnU2RDdMUU1YL2l1MndrQTdIMFNpR3N0?=
- =?utf-8?B?OW5KbFFDam9QbllndzJaWVhCVGwrZEtUQ0VjTUd5dUkzNExRNDZIMzgxeWhE?=
- =?utf-8?B?Tjd2U0RCaFRxUFRxOFBiWnF1WklNaTNPK29WQlJGOHdPUEdRQU1WcElpaUl0?=
- =?utf-8?B?WjA4MGwvR2xVd25QOFBxRlgwbFpLN21uTnBURGdETGRTQWExa3N2Y3NRWVZ5?=
- =?utf-8?B?Q21KOVdySGlRaThzeFpUQ0swOUxTWWpxK0ZCcUpiV1hEdlhPZzZMOE1uN2cy?=
- =?utf-8?B?WS9UdE5UTGFVU0tYRzFMaDByazlaRC9qREtQU0tKMUZCU3ZjRUQrY2EzRTd6?=
- =?utf-8?Q?/6lkPpd4HClXTVIakb?=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <FF1BC35AFB46F5468A8F8B74BD81FDD6@DEUP281.PROD.OUTLOOK.COM>
-Content-Transfer-Encoding: base64
+ d=linaro.org; s=google; t=1793141352; x=1793746152; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=rKLY9xsTYSIV/X7BzECsQnL+MhMnbBhuoZNOYDMR0JY=;
+ b=KQEFq4igbOMtSCIxBj3kq6O7+1/Mh7HIhYahNoySZtmEkIPBLhIwhZY1NlZkz7INTM
+ B1yCoADkqOhe+vWOWP5qEWbEQHxnEHZML3ibBP8tqTDn76Wl+CTwwXRNeWhh4z6ctlbZ
+ tTdk8e7apZNgeh/doxKvz0jLOClrJwUm6gAJMS+EXGTzbKNaxJZF6M35A1FhY6TB4xFV
+ ibpHwgr5FW4M02giH+S463cINI3UpYR3Ger84MzEJFdTpo280WOqtd7bK/UlCfO3b06+
+ f/2uQY2vIyqvAX0AlCGJ26zokR4r0enKyDQQWLNKu+hSsB67JLICFNlw1OhDyQRV5QiI
+ MhKQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1793141352; x=1793746152;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=rKLY9xsTYSIV/X7BzECsQnL+MhMnbBhuoZNOYDMR0JY=;
+ b=bxK2Aj7cV9uwAMROPdAS9eEefBklzNK7QiTAZxfkqcw5uFURqmrJoPW2/IAyb2m4Ce
+ 9ZzCga8KeOx93Q3fSMAv0h/29CDzqAfXwshP9ioIinMVDJn5DtelgivVWDVrc4Nwa4uC
+ GwgkZVZ00w+ewxe732+JDD03+WvSQ1iUpwT0ft4wAhheNNO9Ig6mtl2Z1jAOWNgodyfL
+ iSF7/Jq0uwhqFu0ILG4clwldRer2kI10AuZfVRS4aqriHT97Oho1IKKmIh+LEnQFrZiK
+ mskByWieiZo2VbGf9PpGCFGjtWVqCutM3Nx4qhe16uAbVND/pfofoSVVeUTTgxu17/59
+ fT8Q==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBxSkMgFPgwuZ1Ko4rYMH7TdvxKfvJludKMpKld+C4w/xzZtbtOgJ3WfbAw5ilofHHbl1HIoi5rEbyDa@nongnu.org
+X-Gm-Message-State: AFq9FYJHQ+MQ6A1l/5BiCLFYWLscdtbLpOgwa3DA5MyVv1otZkmxNofM
+ YLHU7pUysCjIlia2f1cYpJeh/OL5vMFuNVxekXw/HpwmI4AtAkrFViC+fLBHdgfMP3I=
+X-Gm-Gg: AYBFou1euGyE+eIR8b87p5qntgMVSw4wO4kNIRTYB2GLn83NqT+w/SsKH3rNcsKNBqN
+ HegXaRg9GMtnntfMEfXcaRP+6RLlgMnRSRsR5UDPel175EtTwj/VZmm7YeJoaWf/4v4CuenWgVv
+ s53WulARYyQDi+US/bObL45BsJXkgFmJLea5tZ+x2uSvusRnSnjcJygtgqfkI7TXEysxSN5MqvR
+ NVBi/Ik12xpX0GjRUlMaUwcjA9Y3PFSvlR5ntPLCKpHnk2Rpr18ngZrHPt9Fzupa6SlRTAxxs9H
+ Hp4EQCCO9ST0iCv0WwE2WeR47e3OWNxvApbGIT/dvpbq+nwMQWzVC0MLKqVYQq4dTURQuqZVQtZ
+ ro66dMuEppiJhixOSz5RH+tmTkLDWAfWqBYudqwJTAZks7DKq9xnM7SE+3A/PfbZuQJr4GHPp5K
+ vRz/M2oTa4ert+rgfHv1vpGx07uMumQAvofKNqTaVvGVKAmcFso0MgI1H5403bomBTYNC28fVzq
+ CPihrjjQglTitmOK8Op1C19X7BYtekPkYTqgIAPa+tNYPniOqZdNzfBywoFkC6974BpGNc=
+X-Received: by 2002:a05:6830:3e05:b0:7f6:705b:ffe7 with SMTP id
+ 46e09a7af769-85abd80bab9mr852022a34.14.1793141351549; 
+ Tue, 27 Oct 2026 15:49:11 -0700 (PDT)
+Received: from [192.168.129.53] ([50.233.235.3])
+ by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-850fb0749cfsm12900234a34.9.2026.10.27.15.49.10
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 27 Oct 2026 15:49:11 -0700 (PDT)
+Message-ID: <ae5baac7-429e-44f5-9696-1386b079e581@linaro.org>
+Date: Tue, 27 Oct 2026 17:49:00 -0500
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-Exchange-RoutingPolicyChecked: NBDV8OtVjbURIZoZ+dl98PYqYeRz1lRrtKBzL5beaGAPyDsJluvOcBDPVB0kK/YMAN3e1KAxp8RayZuGGNacM+D9mabe8M1EBLsbWCWEBCPLkTRgU+RVjA90iT1I7M3KFxJBB8nRQqrayLrsdYrC6RYtlhrnKjAmaOKKf3qV957Qy+sH4KipLsMLtxTgqpMsnt/67mFbiWVDR6lfHCcTHbQewN/XSN4S1DN1rpGohxWN5S/uXv/Vu1EZ4pde1hJaEDCQiWGERNPF+7e7X4rNucFFYEnE+SR26l7D5J/F5L0ov1O6ybolDTkkH/rkkxR2nuGO26Eqv+L41IxXWdzhHA==
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: FRVP281MB744463.DEUP281.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-Network-Message-Id: 18fac4b7-fdbf-4656-7e07-08df347a39be
-X-MS-Exchange-CrossTenant-originalarrivaltime: 27 Oct 2026 22:32:46.8788 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 5280104a-472d-4538-9ccf-1e1d0efe8b1b
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: a6Re2qSIFeVXf8vTz5LrzKCNGp/bvqL5QF4oEG2KmYKwrlJ5jIA2qbjZ43RYxsBM
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BE3P281MB6226
-X-OriginatorOrg: amazon.de
-Received-SPF: pass client-ip=52.57.120.243;
- envelope-from=prvs=75389f537=graf@amazon.de;
- helo=fra-out-012.esa.eu-central-1.outbound.mail-perimeter.amazon.com
-X-Spam_score_int: -43
-X-Spam_score: -4.4
-X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001, T_SPF_PERMERROR=0.01,
- UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] tcg/riscv64: Fix vector constant matching for logical
+ ops
+To: Aurelien Jarno <aurelien@aurel32.net>,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ "open list:RISC-V TCG target" <qemu-riscv@nongnu.org>,
+ "open list:All patches CC here" <qemu-devel@nongnu.org>
+References: <20261010174742.3552498-1-aurelien@aurel32.net>
+ <9ca6f711-e886-46a5-80ea-a6c750696a93@oss.qualcomm.com>
+ <auEeif_51q1K9XOz@aurel32.net>
+From: Richard Henderson <richard.henderson@linaro.org>
+Content-Language: en-US
+In-Reply-To: <auEeif_51q1K9XOz@aurel32.net>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::32c;
+ envelope-from=richard.henderson@linaro.org; helo=mail-ot1-x32c.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -201,17 +109,190 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-11.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
-	UNPARSEABLE_RELAY autolearn=ham autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-DQpPbiAyNy4xMC4yNiAxOToxMywgRGFuaWVsIFAuIEJlcnJhbmfDqSB3cm90ZToNCj4gVW5saWtl
-IHRoZSAnbml0cm8tZW5jbGF2ZScgbWFjaGluZSB3aGljaCBwcm92aWRlcyBlbXVsYXRpb24sIHRo
-ZQ0KPiAnbml0cm8nIG1hY2hpbmUgaXMgdXNlZCB3aXRoIGEgcmVhbCBBV1MgZGVwbG95bWVudCBh
-bmQgdGh1cyBpcw0KPiBjb25zaWRlcmVkIHRvIGJlIHNlY3VyZS4NCj4NCj4gU2lnbmVkLW9mZi1i
-eTogRGFuaWVsIFAuIEJlcnJhbmfDqSA8YmVycmFuZ2VAcmVkaGF0LmNvbT4NCg0KDQpSZXZpZXdl
-ZC1ieTogQWxleGFuZGVyIEdyYWYgPGdyYWZAYW1hem9uLmNvbT4NCg0KDQpBbGV4DQo=
+On 10/27/26 16:58, Aurelien Jarno wrote:
+> Hi Philippe,
+> 
+> On 2026-10-24 19:00, Philippe Mathieu-Daudé wrote:
+>> On 10/10/26 19:46, Aurelien Jarno wrote:
+>>> For logical vector operations (in the case of the RISC-V backend that
+>>> corresponds to and_vec, or_vec and xor_vec), VECE is unused. However,
+>>> tcg_target_const_match() always treat it as an element size to extract
+>>> the corresponding constant element from the whole constant.
+>>>
+>>> This causes the following aarch64 instruction
+>>>     bic v4.8h, #0xf0
+>>> to be translated into the following op:
+>>>     ...
+>>>     and_vec v128,e8,tmp5,tmp4,v128$0xff0fff0fff0fff0f
+>>>     ...
+>>> which is then translated to the following RISC-V instruction:
+>>>     vand.vi v1,v1,15
+>>>
+>>> Fix that by, when VECE is 0 aka MO_8, only extracting the element if the
+>>> it can actually be represented as a duplicated constant.
+>>>
+>>> Fixes: 5a63f5998791 ("tcg/riscv: Add support for basic vector opcodes")
+>>> Signed-off-by: Aurelien Jarno <aurelien@aurel32.net>
+>>> ---
+>>>    tcg/riscv64/tcg-target.c.inc | 11 +++++++++--
+>>>    1 file changed, 9 insertions(+), 2 deletions(-)
+>>>
+>>> Changes v1 -> v2:
+>>> - Use dup_const() instead of open coding the constant duplication.
+>>>
+>>> diff --git a/tcg/riscv64/tcg-target.c.inc b/tcg/riscv64/tcg-target.c.inc
+>>> index 14a397117a..1262b71a62 100644
+>>> --- a/tcg/riscv64/tcg-target.c.inc
+>>> +++ b/tcg/riscv64/tcg-target.c.inc
+>>> @@ -392,8 +392,15 @@ static bool tcg_target_const_match(int64_t val, int ct,
+>>>            return 1;
+>>>        }
+>>>        if (type >= TCG_TYPE_V64) {
+>>> -        /* Val is replicated by VECE; extract the highest element. */
+>>> -        val >>= (-8 << vece) & 63;
+>>> +        /*
+>>> +         * For vector logical operations, VECE is unused and equals to 0, so
+>>> +         * we need to check that the constant can properly be represented after
+>>> +         * replication.
+>>> +         */
+>>> +        if ((vece != MO_8) || (val == dup_const(vece, val))) {
+>>> +            /* Val is replicated by VECE; extract the highest element. */
+>>> +            val >>= (-8 << vece) & 63;
+>>> +        }
+>>>        }
+>>
+>> This fixes the BIC case, but I don't think it is sufficient.
+>>
+>> I tested with qemu-aarch64 built for a riscv64 host, run under
+>> qemu-riscv64 -cpu max, guest -cpu max,sve-default-vector-length=16.
+>>
+>> NEON bic v0.8h, #0xf0 // fail on master, now OK
+>>
+>> add z1.b; and z0.d, #0xf // FAIL
+>> add z1.d; and z0.b, #0xf // FAIL
+>> add z1.b; orr z0.d, #-16 // FAIL
+>> add z1.d; eor z0.b, #0xf // FAIL
+> 
+> This indeed doesn't work. The problem is that while the constant
+> matching is being passed VECE = 0 (as it is unused for logical ops), the
+> code generation is still being passed a 64-bit size. Therefore for the
+> eor, it emits:
+>    vsetivli                zero,2,e64,m1,ta,ma
+>    lui                     t6,3
+>    addiw                   t6,t6,-448
+>    add                     t6,t6,s0
+>    vle64.v                 v1,(t6)
+>    vxor.vi                 v1,v1,15
+> 
+> It would make more sense to use 16 e8 elements like in the original ARM
+> SVE code, but it seems that info is lost at this stage.
+> 
+>> Not accepting constants for and/or/xor_vec at all
+>> (using C_O1_I2(v, v, v) to get them loaded into registers)
+>> makes all five cases pass (I'm not sure we want to keep
+>> the .vi forms):
+>>
+>> -- >8 --
+>> diff --git a/tcg/riscv64/tcg-target.c.inc b/tcg/riscv64/tcg-target.c.inc
+>> --- a/tcg/riscv64/tcg-target.c.inc
+>> +++ b/tcg/riscv64/tcg-target.c.inc
+>> @@ -2779,15 +2779,15 @@ static void tcg_out_vec_op(TCGContext *s, TCGOpcode
+>> opc,
+>>       case INDEX_op_and_vec:
+>>           set_vtype_len(s, type);
+>> -        tcg_out_opc_vv_vi(s, OPC_VAND_VV, OPC_VAND_VI, a0, a1, a2, c2);
+>> +        tcg_out_opc_vv(s, OPC_VAND_VV, a0, a1, a2);
+>>           break;
+>>       case INDEX_op_or_vec:
+>>           set_vtype_len(s, type);
+>> -        tcg_out_opc_vv_vi(s, OPC_VOR_VV, OPC_VOR_VI, a0, a1, a2, c2);
+>> +        tcg_out_opc_vv(s, OPC_VOR_VV, a0, a1, a2);
+>>           break;
+>>       case INDEX_op_xor_vec:
+>>           set_vtype_len(s, type);
+>> -        tcg_out_opc_vv_vi(s, OPC_VXOR_VV, OPC_VXOR_VI, a0, a1, a2, c2);
+>> +        tcg_out_opc_vv(s, OPC_VXOR_VV, a0, a1, a2);
+>>           break;
+>>       case INDEX_op_not_vec:
+>>           set_vtype_len(s, type);
+>> @@ -2976,15 +2976,15 @@ tcg_target_op_def(TCGOpcode op, TCGType type,
+>> unsigned flags)
+>>       case INDEX_op_rotli_vec:
+>>           return C_O1_I1(v, v);
+>>       case INDEX_op_add_vec:
+>> -    case INDEX_op_and_vec:
+>> -    case INDEX_op_or_vec:
+>> -    case INDEX_op_xor_vec:
+>>       case INDEX_op_ssadd_vec:
+>>       case INDEX_op_sssub_vec:
+>>       case INDEX_op_usadd_vec:
+>>       case INDEX_op_ussub_vec:
+>>           return C_O1_I2(v, v, vK);
+>>       case INDEX_op_sub_vec:
+>>           return C_O1_I2(v, vK, v);
+>> +    case INDEX_op_and_vec:
+>> +    case INDEX_op_or_vec:
+>> +    case INDEX_op_xor_vec:
+>>       case INDEX_op_mul_vec:
+>>       case INDEX_op_shlv_vec:
+>>       case INDEX_op_shrv_vec:
+>>       case INDEX_op_sarv_vec:
+>>       case INDEX_op_rotlv_vec:
+>>       case INDEX_op_rotrv_vec:
+>>       case INDEX_op_smax_vec:
+>>       case INDEX_op_smin_vec:
+>>       case INDEX_op_umax_vec:
+>>       case INDEX_op_umin_vec:
+>>           return C_O1_I2(v, v, v);
+> 
+> I believe that until TCG is able to propagate VECE even for logical ops,
+> this is the thing to do. It generates suboptimal code, but correct one.
+> Therefore
+I think the right thing to do is create a function that extracts an 
+appropriate element size for the constant, and a new constraint letter.
+
+Something like
+
+static int vec_logical_immediate_vece(uint64_t val)
+{
+     for (int e = MO_64; e >= MO_8; e--) {
+         if (val == dup_const(e, val)) {
+             return e;
+         }
+     }
+     return -1;
+}
+
+...
+
+     if ((ct & TCG_CT_CONST_LOGICAL_VI) &&
+         vec_logical_immediate_vece(val) >= 0) {
+         return true;
+     }
+
+...
+
+     case INDEX_op_and_vec:
+         if (c2) {
+             vece = vec_logical_immediate_vece(a2);
+             set_vtype_len_sew(s, type, vece);
+             tcg_out_opc_vi(s, OPC_VAND_VI, a0, a1, a2);
+         } else {
+             set_vtype_len(s, type);
+             tcg_out_opc_vv(s, OPC_VAND_VV, a0, a1, a2);
+         }
+
+etc.  Very possibly wrapped up in another function akin to 
+tcg_out_opc_vv_vi.
+
+
+r~
 
