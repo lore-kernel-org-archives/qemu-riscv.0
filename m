@@ -1,155 +1,108 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0C3B5606A32E
-	for <qemu-riscv@archiver.kernel.org>; Tue, 27 Oct 2026 04:22:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6D7E7606A31A
+	for <qemu-riscv@archiver.kernel.org>; Tue, 27 Oct 2026 05:31:52 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=hotmail.com header.i=@hotmail.com header.a=rsa-sha256 header.s=selector1 header.b=aLH6D5qM
+	dkim=pass (2048-bit key, unprotected) header.d=sifive.com header.i=@sifive.com header.a=rsa-sha256 header.s=google header.b=KTdOUb9p
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xLYhL-00089d-FY; Tue, 27 Oct 2026 00:22:07 -0400
+	id 1xLZmO-00014r-TQ; Tue, 27 Oct 2026 01:31:25 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <nutty.liu@hotmail.com>)
- id 1xLYhJ-00089I-PN; Tue, 27 Oct 2026 00:22:05 -0400
-Received: from mail-japaneastazolkn190130003.outbound.protection.outlook.com
- ([2a01:111:f403:d405::3] helo=TYDPR03CU002.outbound.protection.outlook.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <nutty.liu@hotmail.com>)
- id 1xLYhI-0004md-4H; Tue, 27 Oct 2026 00:22:05 -0400
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=eyNkTRwgcVA2oglnrZLpi6SDq7UCKfOA2ds1WlzyYUjGDcKYhAaT7dA4tcIw7DStqXAH0t1HxfBS8LyiLVXq07aOTvz2lMKYEduMZGzjSCF0tpVI0tXEGyz9s8l4835pXrHNS9AzXYeqMVUQmNXhxSHgO5+7Y/7LgvV48NgQRmkyLwVfPVGXaq6OLK4tJ8Fa9yUt688fg92QSD1b7uCGSpZlsIt48eEOBJ69JX40UM19OSRQ8lhvwhmlFM/fxkqAUkMq+Ts83dxTyu+KDGX3YFdIENQWpj0xRfaiX63i9I0u0oTRD2BbOr0VwrVep8CrY4Tk0uaXIAbI+2kgq1x4Dg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=60l1DkI0HLxRLsFeIUjDC5nU7LHVf9KN9jBNUR/RTS4=;
- b=icqowNPo6AsPfMEIj43tQdTfXcgHKiUMFQQK0HGos4nvKKG3NBKEVimukiEa8Ko6c1fdL9raS6F2FvYCCUt4k1n/orJvGOE8ZzA4Z1E0RLG2VIsV2ut6vKxnzEFCw8KutfTKju6/X/iaX3aB6jgB3OnG8+yA7QzsRucY/UveJMa43d1PYlpmenskdGtYopx59Ejte1vE42bajYpcQoc0dKablI7P5iGMWcnrRSEtTR8kxH1GghAqtmcesyp2RKnFKgVF+6eYk4XZSDAe/ar0DdIMBHYJszwoHk1UmmzJkdqHTA9Cnp50E2LVxlTCLWVVN2gy2Fb64lp4tifacsjtSA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hotmail.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=60l1DkI0HLxRLsFeIUjDC5nU7LHVf9KN9jBNUR/RTS4=;
- b=aLH6D5qM+8P9yXBH77Q+mZvxrdYKkL3qx/uIr/tXnI+WdWkb+UCyyO15YjsdNrnGMdCmmniOM7wg3khWB3IFOKyBkF9p59ugpKom89zT0i5mD7ehmci1dTOYRP35TKCuCoRBCMoMqB9M1N/2NicX9GbI6ZaBehGGktZwjAHjmGjuGK/OpyUCkStEeofI5EFr9b90DdEXS4Bm9j6EuXZZJfVxhRm3skyiDkzvTkjD2ndrog5C6ge5eLrhnOFzEOHwXhoisphYWbGQqqr7RhuFca8Rnh3kVu9s6oyEa9btq8RWufXnah+MP1yTFxczrYw56jJiMh+sZDKOfKZJNe1gXg==
-Received: from TYZPR04MB7491.apcprd04.prod.outlook.com (2603:1096:405:40::7)
- by SEZPR04MB9628.apcprd04.prod.outlook.com (2603:1096:101:33a::22) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.546.22; Tue, 27 Oct
- 2026 04:21:56 +0000
-Received: from TYZPR04MB7491.apcprd04.prod.outlook.com
- ([fe80::a450:2576:3b21:6230]) by TYZPR04MB7491.apcprd04.prod.outlook.com
- ([fe80::a450:2576:3b21:6230%3]) with mapi id 15.21.0546.021; Tue, 27 Oct 2026
- 04:21:56 +0000
-Message-ID: <TYZPR04MB749111F86DDAA9B66A416CB1F3602@TYZPR04MB7491.apcprd04.prod.outlook.com>
-Date: Tue, 27 Oct 2026 12:21:47 +0800
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 1/4] target/riscv/kvm: create kvm_riscv_aia_access_reg
-To: Wang Yechao <wang.yechao255@zte.com.cn>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
- <liwei1518@gmail.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu@processmission.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
- Xuemei Liu <liu.xuemei1@zte.com.cn>
-References: <20261023021237.486091-1-wang.yechao255@zte.com.cn>
- <20261023021237.486091-2-wang.yechao255@zte.com.cn>
-Content-Language: en-US
-From: "Nutty.Liu" <nutty.liu@hotmail.com>
-In-Reply-To: <20261023021237.486091-2-wang.yechao255@zte.com.cn>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: TPYP295CA0050.TWNP295.PROD.OUTLOOK.COM
- (2603:1096:7d0:8::12) To TYZPR04MB7491.apcprd04.prod.outlook.com
- (2603:1096:405:40::7)
-X-Microsoft-Original-Message-ID: <68770c01-ff7b-4aad-983c-a77002b34782@hotmail.com>
+ (Exim 4.90_1) (envelope-from <jay.chang@sifive.com>)
+ id 1xLZmM-00014h-Pp
+ for qemu-riscv@nongnu.org; Tue, 27 Oct 2026 01:31:22 -0400
+Received: from mail-ej1-x62b.google.com ([2a00:1450:4864:20::62b])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <jay.chang@sifive.com>)
+ id 1xLZmL-0003kz-9H
+ for qemu-riscv@nongnu.org; Tue, 27 Oct 2026 01:31:22 -0400
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-c445c95d553so486297766b.1
+ for <qemu-riscv@nongnu.org>; Mon, 26 Oct 2026 22:31:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sifive.com; s=google; t=1793079079; x=1793683879; darn=nongnu.org;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=0B4m15N5kcWjbnKFHohmSUTKb71f17BsTuaazBulgs8=;
+ b=KTdOUb9pS0jDyRw8bgBaFe32xvFXViz/C/IzlBy0SxBZH+p/VnSTizFu95RRYesMDO
+ ykGPLqBQg+uPjt/QfymLHgAonbVUQ4Kvb9YO5lIIp9Yrn7i/ZWmQ70qYSgnvXx6pUT+K
+ +r+kZXOzwdkiZpIVaEY6i8T8zO+FwN4GbbWJrbMlLu4eM4gAf9kd2onYGT+CmFRcnT9u
+ a5G8ts7MAx9C5pIZ5/OXBmuXnb7q6d8WwoljZpDGkQcNU03lBgVeLWlgHIeMsdR4ER2E
+ AoojvVeaoDMyHvE5In+eZRDB0c598iX2QM74fDRzlDEgu3jRfqObRsuKVzzgnX8I9a4n
+ m2dw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1793079079; x=1793683879;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=0B4m15N5kcWjbnKFHohmSUTKb71f17BsTuaazBulgs8=;
+ b=zkPTnu8rQZi0fMt01UhV7ac5PJGqd0UmAu6wGwyw1stHBQ4ww/JLbZet59TfByrw7L
+ x/I8BM6YwtDVmMWV2l1fetAbAist9yqqFgO/aha5TztELPzIiRHTYqnkZ0yv7xcCLjzb
+ x8MyhjbzB5Llb91lkOj0N63aikhKu5yFLkVn2hi7LIZtoEnjF1cH7H7SM4BlnvOhF+zB
+ 0LEuNnYHoQhklsUSZbynqE43/TUI1H9HJY7HcbFL05UzxdxwTqZb57q1HXIp5/isl2B6
+ jAuOCP7ZjfljBOOGQuarR511ZBTpC+9LO6eGGIcl40LhrrHT5We4u60ida8pwPj0p3cs
+ JKKQ==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBwLq8NLZp6e54hwPwIjvKtpzfvqp9AJUFdu0AlIR8cGD3Tgsqdq6lUkmuA0VgrnsBoFSxfuID+HUSkA@nongnu.org
+X-Gm-Message-State: AFq9FYLBp18FwfPzmeSIsVdtU5B8WmwXCB6bwdnr3E6PcdoDHWbzZJoW
+ +a4zU39flIMM/Hgw2T5shKZXN18alCtRmsS6SOhZK3fYT4c6DhpsCcJ+rMhcudh3qlGw00VXqUM
+ t4eW1S4NCz1XburlGiHh2guzI9sxPOBSTxOQPIHZYCYVMyhqb8pfQNFCL7r8YrKqgqMQBYaqeKF
+ TcCUMHTYDnQN0/Zbopmf4nTun35OAjqpThAjxLSeSItmk=
+X-Gm-Gg: AYBFou0Sv309I7TkErZKg/p7/R/RmD+88lM+4eIwz5BZlkYsX+Jg60K8z/kVj4KtEOu
+ HYQor31g2XH7Z9jsXAdEzlGtupBAyIZV49Sz3h5s4+xL98lBUA5JDAlYFA01nnnk2NhbQ+7n9Ec
+ LhwaKDIi4BrJDMxSem3rXLg1Q56l3HYGe7RITmgfGnU/e7p9Ssb/yK80o1pD/5WDlN7IxHDGoMU
+ v8SCN2sybBNhJBhEjSKH++Bqim3QNCY/kzyC7bYIDUUWdiXS++PMeCFOAg8HCgGyl8sqkNibIpC
+ 4SijwNt4LQhSPXMOOAKYO+JIcdUxhAtk/1wH1cuX7tdnmrIO8dAgr625c2XPq+78e2uS81gV53F
+ r7LKEBCWlSMpXYsFl2E9Kj0Vgfw3qfEtq/hYl/RQDqHKjBkModLNtfTEFbb6RJomY/gQhBAen9w
+ fq59zgrlP9O97DGobYZriyvyVkZSS71y7lU82fQqytA9H+qa+s+mGtbGqckoUq6YmbJOkGjOmT4
+ uP+pFlZcrBrpWu0agzGKMox3L8alnRwd4m9RGMw2E4pqJL6At8vhXzWS00lY3qtD1y9ruCRqKPA
+ YCoq8ygEVN0Z0t+yOA==
+X-Received: by 2002:a17:907:9446:b0:c2d:d019:d414 with SMTP id
+ a640c23a62f3a-c46bde099f5mr932981566b.29.1793079077775; 
+ Mon, 26 Oct 2026 22:31:17 -0700 (PDT)
+Received: from mail-ed1-f45.google.com (mail-ed1-f45.google.com.
+ [209.85.208.45]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-c49a4da0357sm81916366b.66.2026.10.26.22.31.14
+ for <qemu-riscv@nongnu.org>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 26 Oct 2026 22:31:15 -0700 (PDT)
+Received: by mail-ed1-f45.google.com with SMTP id
+ 4fb4d7f45d1cf-6ae14eecc64so5028898a12.1
+ for <qemu-riscv@nongnu.org>; Mon, 26 Oct 2026 22:31:14 -0700 (PDT)
+X-Forwarded-Encrypted: i=1;
+ AKwUvBx2S7/lTQFVed1ThtBvEuWJklYX/oaskedqHBWaKAglONi+FUUvumCUVvjjSPmYHnJbv8C08/NlXruw@nongnu.org
+X-Received: by 2002:aa7:df94:0:b0:6ac:5c83:bb9f with SMTP id
+ 4fb4d7f45d1cf-6b442fe167dmr6891648a12.9.1793079073603; Mon, 26 Oct 2026
+ 22:31:13 -0700 (PDT)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: TYZPR04MB7491:EE_|SEZPR04MB9628:EE_
-X-MS-Office365-Filtering-Correlation-Id: c1772ce1-193d-4ec4-1527-08df33e1d563
-X-MS-Exchange-SLBlob-MailProps: Cq7lScuPrnrlC5lHdFGci+YUsdS3F/CIVZpHyao8/J8KkU3RF3AeJbJPUzTF8YcKVAHub3xEM+WJ3rjkWCQl1kTGX5+ub6f/RaTq8+CiipKYdnV3fh8d0qhiIzL4xt8ZOzn7j2VKmodXcmciUosEgdhCI9S/LCFP+WlZQloDU/Cws07EZtZzXKih4HxXooM9bWoPRovoZPk5irns+FsFJ+issDduN2weQKYtOykTKnnvhRgNyBj2JLz3m6DgErc3np1On+46udxD8KA3l4zpKHOT3FAtx1uTfujZyw11D1CZCdTQOFyHqSTO/rRz8ugu+4Cw20Mx/PtlFRYBRfs42ry90Z+GLhip00m1VMS6MozeKqXHrWlKctq3NUPvIPGyyTwKQe3RDOCY+A2DkOIrQJuxC/YXjd2x0i4ELJq6UCl4CQf4/L4j4GhaXMG38Mr3aosD/XBI5vWsEKUkXLf3Akj5VMW5PIAisekbFUFHCe8ZALbEn/j+XSwXTb507fHpXyszdqap1ThA0trFrE/NNtfZxfmNncSONgexS8xekrOyxGcrOZC+zo1PN4y1VZsgwlcZ9OUOn72wzsy6Pa7Ii2GlnvVzk8CjUfgz7zInApLftbKYSwO/VmHkhxJ1LPTTt1XywMEQrQas/rSjyOesNBZ5ZqTT29n+iA5xeWfdYuDSzd7V0brzvHwD7YxGeb+qgDSEN1tGGeki4OSV00ZciBK9H6xkrND4I2KlOY/yytJ6pM7zB/ErRJzFrzDGPmaeYfaMfSaiCWI=
-X-Microsoft-Antispam: BCL:0;
- ARA:14566002|25010399006|4140399003|8060799015|19110799012|22091999003|51005399006|6090799003|24121999003|5072599009|15080799012|23021999003|19101099003|55001999006|40105399003|3412199025|440099028;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?NU5Ed2cxZVhGSDZkWXVLMEVjQVFxQWpnRjNuekNCb2xUcWZvQXNnQ1hxaGpG?=
- =?utf-8?B?VkNzbWRFSGtMTFpFc2h2MGZjdjNtdWhzMGZEUk1ETmtSTStTdDcwa1UrVXdP?=
- =?utf-8?B?c3NKVzRGdDl6cVF2aXFVTVZKZEZzcy9nVHc1QkxRQ0NkMFRCOW4rckZMdS9w?=
- =?utf-8?B?VFlCT2lIbUFMOGtWR0xjaVMzNXp3aW4wdVoxYUkzY2V6dExvVCtsbTNzeVhE?=
- =?utf-8?B?eTYyQjVUUEgxdUhQcW9lcTRmaHNjL3RTK0J2SnNTblQ0Q2hFTDI5TEc4ZUFX?=
- =?utf-8?B?QVRzNUVleEUzZVhSbUJ5anZrdGQzUjRPVUU4RzBaVXYyRUpsQ1N0SzhMZjRl?=
- =?utf-8?B?QmdyZHdaZFJFbStwOHk4cWIxUm5wNmZkb3l4NVNsZEVNYjRMdHVOdi9tWlli?=
- =?utf-8?B?NllLYktRcWRrRzR3bkxzcU1tenUzQng4YWYvOFFCQ2JaV21iWkFhNWN6QjI4?=
- =?utf-8?B?b1hUVlFTdURLaU1pWlVBSUtEb1BhMGk1bDlnRk9BRGFUd01TRUQ3cFVKTjds?=
- =?utf-8?B?bFVGQzJTQ0pwTjEvb0NYcVVqRzI2cG5PQ1k0RUkwaithb0RFNE81d0ZzaUJH?=
- =?utf-8?B?YStBN0xaU2x2K0dmeU5RV1R3QlRybWFCbEFUdU1rNFRBemwzMTdjeVpOdXdM?=
- =?utf-8?B?UTIvQ2Q2NTJmcDh4VUU4ZURPY2dBZDRQSlNzdEEyYkh4c1NmRVdGMndyRWJa?=
- =?utf-8?B?MFIyRklwQW5lYUd4cEQ5cGh1MzZFR3EyeWw3OERMdkdYM09mMU9mZngyUXZt?=
- =?utf-8?B?WWdhcXVueXY4Nm05QitNNmgxazNLdnhaZnZNeURsQ1VMVGc4SFhYNFJXZFhq?=
- =?utf-8?B?T3pvcE5oazlva0h2MXh4aW9ldHhGVGNtczlGK0RZMWoxRC9DMXQrYVdtYlMx?=
- =?utf-8?B?cmVPbElaVHp1OCtLYTB0ZzUzbm9ySWJlRnNjWnFWOFZWdDFHRWdMeGF6RmZD?=
- =?utf-8?B?UkJhRGpaMXc0WWVqbEthdTRSVDRuVTBkelE5RDUzcWhDSXdQdGdWekh3Z0M2?=
- =?utf-8?B?WnprU1VCd2FoU2ZNbDdlTU9xd040SU5SNllKVlBEd0x5YU9xQklsWGNiSmJX?=
- =?utf-8?B?VXZOd2FhODN6aElYN2lEaW1HdGRURUp0b0JRSTFieS9nK3R2ZGhyOGxrUlUv?=
- =?utf-8?B?RVd6RUJCL3NZd3RlNFpCUWYwbXB4MmUzR0R3dCtYM3drQjF5VnltOE1GSDM0?=
- =?utf-8?B?TWk0TG5GSFhqUFY2UEJ6eE1NUVdZNG5aeFJDem4yL09yNFBjR2U3SE8zSTNh?=
- =?utf-8?B?dkdWSDJpemJTN3VIOGN2RHFCZUp6VHhJSHNPR2REaUZSdGJQRDZEUW1PSjhQ?=
- =?utf-8?B?RVdRaUhuTFd1QzFxWmNUMWhnbEpWdkt4YnoxZGJaWjRXZVZuWXNIZkxCTUlN?=
- =?utf-8?B?QnJuM1ArbGNFanJoaUx3NTVoZHZLdmtsd2ptU0I3VlFpb1pGV0REYnQ2L1Rn?=
- =?utf-8?Q?bfwD2MGR?=
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?bDU3bnJSWlVURkdPT0ZhOEROVU1rMTE3U3VmT0ZDalNwWFhKZk1jc1R6TmtN?=
- =?utf-8?B?aFF2dDJXdUNGVDVoT1grNEVMRkR0OWFZeVRSTnhOS0RkaVpOMXpndEVYaW1p?=
- =?utf-8?B?U2xWZlJUVDhXZ3QwT3l3bVIrbTFuY2IyVTlWRXhQcjY5SXJMRVBoTWpnZlJa?=
- =?utf-8?B?YXFyNHRoYnMrUTFTNmFMQnB1QzFITUVEM2hOTlYwaE50b21Ba0w1MGE1c08r?=
- =?utf-8?B?MGVMd3k1aWEzaFAwYjU3aFdQeSs1Mm1CSkMzNksrS2hCa1g0WWk3Ym9hek9n?=
- =?utf-8?B?OVZUNmd3TEErc29NenZia1F3cCtqdE5wTWFQNVhHM002Yi91ZGpKbi9CaHQ4?=
- =?utf-8?B?cXlhZHhtTFQ2UXp6ak15bXF6TjBLNVQydkxtdEtJZjV0ektaTkUrckt2UzA0?=
- =?utf-8?B?cDA3QTcxczRCNTl4ekk1cHRjYWlMVGd3SDQzMXJHcDEwQUc1QnRBemhONzI2?=
- =?utf-8?B?eUVpVktDL0o4Lzl4SkZlMFl2Y2tRVEEyQXk4Y1JnWFZjTXRjTG1BVmY0VmVp?=
- =?utf-8?B?cmxwYjRWMDFXeUdWM1YzeGRrLzAvUHNFeWpOblloV2JXR2hrZUtjby9OaW1T?=
- =?utf-8?B?blFNaS9saWc5eU03eHA4cHBhYUhzdzBPcmVpRkNYM2NpUDhPaU44d0VLMWZ3?=
- =?utf-8?B?UUJhVnBwR3lyaVEvK0JLTUo1QU1mTjNuSXVvVXhZbjNlcjdNZzEzeSsyOExh?=
- =?utf-8?B?SmhzWEE4eGs1aFZZZ2FaNkFiVnlWTG9uNWVBa0tJb2xwc1VISEhvSmFUQ1Vq?=
- =?utf-8?B?RVRuTzI4UGxiaHNjZGMzTFprK0oyemVWY2E1bm1TME9kK05xTmZyZ1BENng1?=
- =?utf-8?B?Zmx3RllIVDZFTnZJYUl5SmIvY2c0RTBwazFFenlMa0Q4YlBYVDdSTzRNRkVv?=
- =?utf-8?B?ck9nRWNHUXZsZmtJRE1pYlo0U0E0S09udTBnZGZQKzlLZTBNNTBHWTJ1WHlI?=
- =?utf-8?B?Mm5kaUJSWngvdW5GN2hoOEtmUUpEdE1Ea0RBeUxVNmJZMzcwcnQ0VEp2blFH?=
- =?utf-8?B?aklGakhCcEpzRWFkc29kODZFampqazgzeWtPcUZ2SjZXdm9kRmhOREtEcnFM?=
- =?utf-8?B?UXRZdFhTMnBxUEpBMHhNZ3BGUFZhVGpsSXZTRXVvcmZsK0VPTXN6OGpPbGFQ?=
- =?utf-8?B?SmtyZWp2R3k0eTZMZW93OHZDNVYvSDhlMlZsNHI0TnNudjZ5NEJ1MnpWcWtE?=
- =?utf-8?B?UXVtTnNJVEdQNFgrZFB5S3Z4Y0w2UEJsdTV3N1Q3bmJ2MUhlSXMyNFBsRnli?=
- =?utf-8?B?OHI0N2xncmRaTXBUYmllVkljR3lUQVJ5VUhYemRRRjVUaFZnK3E0ZFNDd093?=
- =?utf-8?B?YkQwV3g0MkQzU1lhN2pNVXkwRFppakdaVVFJdk9SeTBpREtPVXRkd1VIV25m?=
- =?utf-8?B?RWEvRjNKRllxeHV5SzlPWVhPVUV4NkJPOGp5K0NjWWNWcEk0Yk1GZktiZmZ0?=
- =?utf-8?B?WkN6VTVvUnlrOG8xWU1nOTZSVUJRU09DVFRER0Q1Qi9FS0ZVUUk2QmdiajFm?=
- =?utf-8?B?QkY1TzNabnR1YWpzRXpPUVpEY2tQbi9Ycm1CWkVRYkZycGM1cWFnT0pVUUsx?=
- =?utf-8?B?NDNmVmtMVGp0SmxkZDRlL2hocldNUDFxOUxpdWZOWnJrQXE3UWp6TzZ5N01u?=
- =?utf-8?B?cHFPZUE1dVZQRlQ4a25JR2Z3OEhkS3RyWi94dlA3MlFUMStGY0ROUzAzQmR4?=
- =?utf-8?B?Yy9DaXBzcXdpaUJ4Um5kNEROYUxZaUxEY2NIemlPYk9mRzFEbGkxSWk4MDBQ?=
- =?utf-8?B?UXFzYzF3ZVh6SkZnbkZnQ04xZHBYbWszcDJ4SStJdWltSmVhQURGcmZHUmdh?=
- =?utf-8?B?OUhzY3o4VEVuMGpRSDFQRDNmbTl6aktLTVMyOVhTM0tLMjh4VlZveXZxMHFu?=
- =?utf-8?Q?sixaexXYhFUCa?=
-X-OriginatorOrg: sct-15-20-9412-4-msonline-outlook-c3e7a.templateTenant
-X-MS-Exchange-CrossTenant-Network-Message-Id: c1772ce1-193d-4ec4-1527-08df33e1d563
-X-MS-Exchange-CrossTenant-AuthSource: TYZPR04MB7491.apcprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Oct 2026 04:21:56.6348 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
-X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SEZPR04MB9628
-Received-SPF: pass client-ip=2a01:111:f403:d405::3;
- envelope-from=nutty.liu@hotmail.com;
- helo=TYDPR03CU002.outbound.protection.outlook.com
+References: <20261021231346.2452179-1-daniel.barboza@oss.qualcomm.com>
+ <20261021231346.2452179-3-daniel.barboza@oss.qualcomm.com>
+In-Reply-To: <20261021231346.2452179-3-daniel.barboza@oss.qualcomm.com>
+From: Jay Chang <jay.chang@sifive.com>
+Date: Tue, 27 Oct 2026 13:31:02 +0800
+X-Gmail-Original-Message-ID: <CAMXXpfY0SQiqBBxhbnxV0sDyK40WwFwFGvB_dcbdxBZJxo7DxA@mail.gmail.com>
+X-Gm-Features: AclHuK91An0Ffpvw_tIMTmx-6643buJ5x8CzuVAD66nWAFCkOlA4-J0m5S7g2m8
+Message-ID: <CAMXXpfY0SQiqBBxhbnxV0sDyK40WwFwFGvB_dcbdxBZJxo7DxA@mail.gmail.com>
+Subject: Re: [PATCH v4 02/18] hw/riscv: Trace RAM Sink initial impl
+To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
+ chao.liu@processmission.com, antikostya2@gmail.com, 
+ Palmer Dabbelt <palmer@dabbelt.com>, frank.chang@sifive.com
+Content-Type: multipart/alternative; boundary="0000000000003c879b065ecbc17a"
+Received-SPF: pass client-ip=2a00:1450:4864:20::62b;
+ envelope-from=jay.chang@sifive.com; helo=mail-ej1-x62b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -161,73 +114,78 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-14.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_SANE_1
-	autolearn=ham autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-2.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,HTML_MESSAGE,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS autolearn=no
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
+--0000000000003c879b065ecbc17a
+Content-Type: text/plain; charset="UTF-8"
 
-On 10/23/2026 10:12 AM, Wang Yechao wrote:
-> From: Xuemei Liu <liu.xuemei1@zte.com.cn>
->
-> Create common function kvm_riscv_aia_access_reg to access APLIC
-> and IMSIC regs
->
-> Signed-off-by: Xuemei Liu <liu.xuemei1@zte.com.cn>
-> Signed-off-by: Wang Yechao <wang.yechao255@zte.com.cn>
-Reviewed-by: Nutty Liu <nutty.liu@hotmail.com>
-
-Thanks,
-Nutty
-> ---
->   target/riscv/kvm/kvm-cpu.c   | 7 ++++++-
->   target/riscv/kvm/kvm_riscv.h | 1 +
->   2 files changed, 7 insertions(+), 1 deletion(-)
->
-> diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-> index c085b22b23..3ed94f7586 100644
-> --- a/target/riscv/kvm/kvm-cpu.c
-> +++ b/target/riscv/kvm/kvm-cpu.c
-> @@ -58,6 +58,7 @@ void riscv_kvm_aplic_request(void *opaque, int irq, int level)
->   
->   static bool cap_has_mp_state;
->   static bool mp_state_reset;
-> +static int aia_fd = -1;
->   
->   #define KVM_RISCV_REG_ID_U32(type, idx) (KVM_REG_RISCV | KVM_REG_SIZE_U32 | \
->                                            type | idx)
-> @@ -1924,13 +1925,17 @@ void kvm_arch_accel_class_init(ObjectClass *oc)
->                                       "auto");
->   }
->   
-> +void kvm_riscv_aia_access_reg(int group, uint64_t addr, void *val, bool write)
+> +static uint64_t tr_ramsink_msgread(void *opaque, hwaddr addr, unsigned
+> size)
 > +{
-> +    kvm_device_access(aia_fd, group, addr, val, write, &error_abort);
-> +}
+> +    TraceRamSink *tram = TRACE_RAM_SINK(opaque);
 > +
->   void kvm_riscv_aia_create(MachineState *machine, uint64_t group_shift,
->                             uint64_t aia_irq_num, uint64_t aia_msi_num,
->                             uint64_t aplic_base, uint64_t imsic_base,
->                             uint64_t guest_num)
->   {
->       int ret, i;
-> -    int aia_fd = -1;
->       uint64_t default_aia_mode;
->       uint64_t socket_count = riscv_socket_count(machine);
->       uint64_t max_hart_per_socket = 0;
-> diff --git a/target/riscv/kvm/kvm_riscv.h b/target/riscv/kvm/kvm_riscv.h
-> index aef681f0a2..8649219e0e 100644
-> --- a/target/riscv/kvm/kvm_riscv.h
-> +++ b/target/riscv/kvm/kvm_riscv.h
-> @@ -29,6 +29,7 @@ void kvm_riscv_reset_vcpu(RISCVCPU *cpu);
->    * @level: %0 to clear the interrupt, non-zero to set it.
->    */
->   void kvm_riscv_set_irq(RISCVCPU *cpu, int irq, int level);
-> +void kvm_riscv_aia_access_reg(int group, uint64_t addr, void *val, bool write);
->   void kvm_riscv_aia_create(MachineState *machine, uint64_t group_shift,
->                             uint64_t aia_irq_num, uint64_t aia_msi_num,
->                             uint64_t aplic_base, uint64_t imsic_base,
+> +    switch (size) {
+> +    case 1:
+> +        return tram->msgs[addr];
+> +    case 2:
+> +        return (uint16_t)tram->msgs[addr];
+> +    case 4:
+> +        return (uint32_t)tram->msgs[addr];
+> +    default:
+> +        g_assert_not_reached();
+> +    }
+>
+
+
+Could we use little-endian load helpers for the multi-byte accesses? As
+written, both cases only read tram->msgs[addr]; the casts do not load the
+following bytes. For example:
+
+case 2:
+    return lduw_le_p(&tram->msgs[addr]);
+case 4:
+    return ldl_le_p(&tram->msgs[addr]);
+
+Thanks
+Jay Chang
+
+--0000000000003c879b065ecbc17a
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr"><br></div><div class=3D"gmail_quote"><blo=
+ckquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left=
+:1px solid rgb(204,204,204);padding-left:1ex">+static uint64_t tr_ramsink_m=
+sgread(void *opaque, hwaddr addr, unsigned size)<br>
++{<br>
++=C2=A0 =C2=A0 TraceRamSink *tram =3D TRACE_RAM_SINK(opaque);<br>
++<br>
++=C2=A0 =C2=A0 switch (size) {<br>
++=C2=A0 =C2=A0 case 1:<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 return tram-&gt;msgs[addr];<br>
++=C2=A0 =C2=A0 case 2:<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 return (uint16_t)tram-&gt;msgs[addr];<br>
++=C2=A0 =C2=A0 case 4:<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 return (uint32_t)tram-&gt;msgs[addr];<br>
++=C2=A0 =C2=A0 default:<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 g_assert_not_reached();<br>
++=C2=A0 =C2=A0 }<br></blockquote><div><span style=3D"background-color:trans=
+parent">=C2=A0</span></div><div><p class=3D"gmail-wnfdnt10 gmail-_1ibi0s3fd=
+ gmail-_1ibi0s3ce gmail-_1ibi0s3eg" dir=3D"auto">Could we use little-endian=
+ load helpers for the multi-byte accesses? As written, both cases only read=
+ <code>tram-&gt;msgs[addr]</code>; the casts do not load the following byte=
+s. For example:</p><pre class=3D"gmail-_1ibi0s3d4" dir=3D"auto"><code class=
+=3D"gmail-language-c">case 2:
+    return lduw_le_p(&amp;tram-&gt;msgs[addr]);
+case 4:
+    return ldl_le_p(&amp;tram-&gt;msgs[addr]);<br><br>Thanks<br>Jay Chang</=
+code></pre></div></div>
+</div>
+
+--0000000000003c879b065ecbc17a--
 
