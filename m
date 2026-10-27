@@ -1,52 +1,52 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8DD56606A31A
-	for <qemu-riscv@archiver.kernel.org>; Tue, 27 Oct 2026 18:16:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BC0EA606A31F
+	for <qemu-riscv@archiver.kernel.org>; Tue, 27 Oct 2026 18:16:55 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=f65nLRAH
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=iRhpMCrp
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xLlhX-0007xW-TP; Tue, 27 Oct 2026 14:15:12 -0400
+	id 1xLlj6-0000wv-9U; Tue, 27 Oct 2026 14:16:48 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1xLlhB-0007ke-P0
- for qemu-riscv@nongnu.org; Tue, 27 Oct 2026 14:14:50 -0400
+ id 1xLlhV-0007vg-0J
+ for qemu-riscv@nongnu.org; Tue, 27 Oct 2026 14:15:10 -0400
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1xLlgy-0003Hy-PJ
- for qemu-riscv@nongnu.org; Tue, 27 Oct 2026 14:14:38 -0400
+ id 1xLlhT-0003Xi-E2
+ for qemu-riscv@nongnu.org; Tue, 27 Oct 2026 14:15:08 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1793124876;
+ s=mimecast20190719; t=1793124905;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=c8HnPQcFtU7MhJRZ/6L5s11AsfWMBibuK6w1Kgqphf8=;
- b=f65nLRAH6hfSFnEntsDHExS1JB1E0Th818IC3FVEr8itOy2eKcYdDFpm7hzpJ6ZQ+uFeS3
- FshPitFwOltM8YgaU4FbVpnwCJcL33nvcDeaFaRIgSUS4F2+uichcEbXf4+IZyD40rsru4
- d8a9/+hr7UJpujh1uIIU3UZDLBUV3zs=
-Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
+ bh=SjzJ86NcoOOpiqoXBZbehS0Nmy6hg8V1H9Fb+oCNfGQ=;
+ b=iRhpMCrpmb93p78yttMF8+Fa4PKWrnSrZBkisJzWBrrsU4r9Sw3HUgWqS2xPiPMc6z3fVZ
+ Zzk0UYMhnsJuB54rDaZ2KJCTxUOQrhL13Bib65gwk/Fbqx68SfDgaXKHEXit0EugYMrbWz
+ ldId09VlzCA4SVJpUcMYTvhKW9j+OXI=
+Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-648-DAvRLKr5NMGyM-khrW0W2g-1; Tue,
- 27 Oct 2026 14:14:31 -0400
-X-MC-Unique: DAvRLKr5NMGyM-khrW0W2g-1
-X-Mimecast-MFC-AGG-ID: DAvRLKr5NMGyM-khrW0W2g_1793124868
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-576-6LQe5KMvNl2nCJ5O0yFuYg-1; Tue,
+ 27 Oct 2026 14:15:01 -0400
+X-MC-Unique: 6LQe5KMvNl2nCJ5O0yFuYg-1
+X-Mimecast-MFC-AGG-ID: 6LQe5KMvNl2nCJ5O0yFuYg_1793124898
 Received: from mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com
  (mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.93])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 7DE8C1800747; Tue, 27 Oct 2026 18:14:27 +0000 (UTC)
+ by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 0ACCB18052C5; Tue, 27 Oct 2026 18:14:58 +0000 (UTC)
 Received: from berrange.csb (headnet04.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.116])
  by mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id C10C91800586; Tue, 27 Oct 2026 18:14:19 +0000 (UTC)
+ id 2AFAB18005B4; Tue, 27 Oct 2026 18:14:51 +0000 (UTC)
 From: =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Stefano Stabellini <sstabellini@kernel.org>,
@@ -76,16 +76,15 @@ Cc: Stefano Stabellini <sstabellini@kernel.org>,
  Cornelia Huck <cohuck@redhat.com>, Matthew Rosato <mjrosato@linux.ibm.com>,
  =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
  =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>
-Subject: [PATCH 02/11] hw/i386: mark 'microvm', 'i440fx',
- 'q35' as secure machines
-Date: Tue, 27 Oct 2026 18:13:51 +0000
-Message-ID: <20261027181400.1752951-3-berrange@redhat.com>
+Subject: [PATCH 06/11] hw/s390x: mark 's390x-ccw-virtio' as a secure machine
+Date: Tue, 27 Oct 2026 18:13:55 +0000
+Message-ID: <20261027181400.1752951-7-berrange@redhat.com>
 In-Reply-To: <20261027181400.1752951-1-berrange@redhat.com>
 References: <20261027181400.1752951-1-berrange@redhat.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.93
-X-Mimecast-MFC-PROC-ID: Ypdz1tJat_zVUr27Uhk3MZ9G-FBACfse11uK20q2GuQ_1793124868
+X-Mimecast-MFC-PROC-ID: e5_db1a1pB1IIuGH2QjiPilFIER4vt0Npv3i4J81nLM_1793124898
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -112,45 +111,33 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 X-Spam-Status: No, score=-16.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS autolearn=unavailable autolearn_force=no version=4.0.1
+	SPF_PASS autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-The 'microvm', 'i440fx', 'q35' i386 machines are already declared
-secure in docs/system/security.rst, due too their intended usage
-in virtualization scenarios.
+The 's390x-ccw-virtio' s390x machine is already declared secure in
+docs/system/security.rst, due too its intended usage in virtualization
+scenarios.
 
 Reviewed-by: Marc-André Lureau <marcandre.lureau@redhat.com>
+Acked-by: Cornelia Huck <cohuck@redhat.com>
 Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
 ---
- hw/i386/microvm.c    | 1 +
- include/hw/i386/pc.h | 1 +
- 2 files changed, 2 insertions(+)
+ hw/s390x/s390-virtio-ccw.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/hw/i386/microvm.c b/hw/i386/microvm.c
-index a49de337497..342aa7a9dd0 100644
---- a/hw/i386/microvm.c
-+++ b/hw/i386/microvm.c
-@@ -736,6 +736,7 @@ static const TypeInfo microvm_machine_info = {
-     .instance_init = microvm_machine_initfn,
-     .class_size    = sizeof(MicrovmMachineClass),
-     .class_init    = microvm_class_init,
-+    .secure        = true,
-     .interfaces = (const InterfaceInfo[]) {
-          { TYPE_HOTPLUG_HANDLER },
-          { }
-diff --git a/include/hw/i386/pc.h b/include/hw/i386/pc.h
-index 8edec62a1af..4ac489d2ffa 100644
---- a/include/hw/i386/pc.h
-+++ b/include/hw/i386/pc.h
-@@ -330,6 +330,7 @@ extern const size_t pc_compat_4_1_len;
-         .name       = MACHINE_VER_TYPE_NAME(namestr, __VA_ARGS__), \
-         .parent     = TYPE_PC_MACHINE, \
-         .class_init = MACHINE_VER_SYM(class_init, namesym, __VA_ARGS__), \
-+        .secure     = true, \
-     }; \
-     static void MACHINE_VER_SYM(register, namesym, __VA_ARGS__)(void) \
-     { \
+diff --git a/hw/s390x/s390-virtio-ccw.c b/hw/s390x/s390-virtio-ccw.c
+index fda5ecc9ad3..15b16ba99d0 100644
+--- a/hw/s390x/s390-virtio-ccw.c
++++ b/hw/s390x/s390-virtio-ccw.c
+@@ -986,6 +986,7 @@ static const TypeInfo ccw_machine_info = {
+         .name = MACHINE_VER_TYPE_NAME("s390-ccw-virtio", __VA_ARGS__),        \
+         .parent = TYPE_S390_CCW_MACHINE,                                      \
+         .class_init = MACHINE_VER_SYM(class_init, ccw, __VA_ARGS__),          \
++        .secure = true,                                                       \
+     };                                                                        \
+     static void MACHINE_VER_SYM(register, ccw, __VA_ARGS__)(void)             \
+     {                                                                         \
 -- 
 2.56.0
 
