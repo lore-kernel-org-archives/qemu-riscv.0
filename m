@@ -1,74 +1,106 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1E25D606A31F
-	for <qemu-riscv@archiver.kernel.org>; Tue, 27 Oct 2026 08:23:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 93C14606A323
+	for <qemu-riscv@archiver.kernel.org>; Tue, 27 Oct 2026 11:13:12 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=aIZdlBGW
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=spgnSRw5
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xLcS3-0003RF-0U; Tue, 27 Oct 2026 04:22:35 -0400
+	id 1xLf6V-0002km-Gm; Tue, 27 Oct 2026 07:12:31 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <fustini@kernel.org>)
- id 1xLcS1-0003Qn-Dj; Tue, 27 Oct 2026 04:22:33 -0400
-Received: from tor.source.kernel.org ([172.105.4.254])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <fustini@kernel.org>)
- id 1xLcRz-0001oH-Eu; Tue, 27 Oct 2026 04:22:33 -0400
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id A1C85601FB;
- Tue, 27 Oct 2026 08:22:29 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 256871F01828;
- Tue, 27 Oct 2026 08:22:29 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1793089349;
- bh=aj5Obr/MW1OY020bmqqhtHv5qCM1RtrMDb8sv3AAcIY=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To;
- b=aIZdlBGWlhyK8eCmm5Uu8UtbPR8tzffJofiFd1QowfmHi4Egdz2gIGgMKYXeQwKeG
- 7YvC5gIf52ka1FafaIRIDcaCCuHkLMc6YcNov860K8eDwkgDulLapsIGB3Qc0SrZwy
- bSgQ9JidEHAWodarmrDVgwkuiu7XmmaeBSnQPqreddy/IdlnunSlxlX1/DF/d2nXsx
- mgUzWIas6fyNPy1FoKTbyLKMj2vqriWRd/9PcX/erAmeLcfp5QJ0Xy2Jm+L2SOxI0E
- AoFz1hQDexayDfr7IfyOnj6uQsD/zshJDHoU8kLrzff7sb4u4t46hzRTP9N+RI6XV9
- wR4QTza4xa8uA==
-Date: Tue, 27 Oct 2026 01:22:27 -0700
-From: Drew Fustini <fustini@kernel.org>
-To: Alistair Francis <Alistair.Francis@wdc.com>
-Cc: "sunilvl@oss.qualcomm.com" <sunilvl@oss.qualcomm.com>,
- "anup.patel@oss.qualcomm.com" <anup.patel@oss.qualcomm.com>,
- "chao.liu@processmission.com" <chao.liu@processmission.com>,
- "shankar.c@oss.qualcomm.com" <shankar.c@oss.qualcomm.com>,
- "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
- "daniel.barboza@oss.qualcomm.com" <daniel.barboza@oss.qualcomm.com>,
- "anisinha@redhat.com" <anisinha@redhat.com>,
- "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
- "prajwal.n@oss.qualcomm.com" <prajwal.n@oss.qualcomm.com>,
- "imammedo@redhat.com" <imammedo@redhat.com>,
- "palmer@dabbelt.com" <palmer@dabbelt.com>,
- "mst@redhat.com" <mst@redhat.com>,
- "liwei1518@gmail.com" <liwei1518@gmail.com>,
- "zhiwei_liu@linux.alibaba.com" <zhiwei_liu@linux.alibaba.com>
-Subject: Re: [PATCH v2 0/4] RISC-V: ACPI: Add PPTT support
-Message-ID: <auBfQwrhu8UJBaJi@thelio>
-References: <20261015064957.4076464-1-sunilvl@oss.qualcomm.com>
- <91f1cd890aac1907f335ce3fdd22e6adf685c594.camel@wdc.com>
- <CAB19ukGtrbCV8s_WKnE2vDF5P4iiyPXYhyyJjqTu-S0823mjUg@mail.gmail.com>
- <95082036aaf5b0ed1bee69fc21fcbb18fd74d61f.camel@wdc.com>
+ (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
+ id 1xLf6U-0002kV-LY
+ for qemu-riscv@nongnu.org; Tue, 27 Oct 2026 07:12:30 -0400
+Received: from mail-dl1-x1234.google.com ([2607:f8b0:4864:20::1234])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
+ id 1xLf6S-0002oV-RU
+ for qemu-riscv@nongnu.org; Tue, 27 Oct 2026 07:12:30 -0400
+Received: by mail-dl1-x1234.google.com with SMTP id
+ a92af1059eb24-14394530ec6so4801405c88.1
+ for <qemu-riscv@nongnu.org>; Tue, 27 Oct 2026 04:12:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1793099547; x=1793704347; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:mime-version:message-id:date
+ :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=hzZbDFZM/UYJO7c6bpSnID+Nzy+oI4pCYhor9frfI5Y=;
+ b=spgnSRw5Tplr2bofpKU2EikdZXwF9n17BTP+ihVJ0iN+QE6k8jCzvR6ZQ1ol0sfAkL
+ tEW+hNeOp5xilIaRLlnHS/BcxPpMrfVVUZgDq24tkhneXRhBu8IRHds4wE7WHx5+utv7
+ 10+6ImETfc+3F2ujVMGFXVFo2H8BJYcVclXuucBWs7wUr5o5POCeDZXh2tWePsoDhnI6
+ olxEvOS4Mz/j8xGS0beNLzBBnddHRLWmARK3r4zbqBBP4X9vxpyy9nEVwcFzzpDJH6pc
+ 4mRZU8theSd1y43JnI2cE3cZtos3b7pTTmeuM46CqzSbMo6fCY1EBU6bBeALgMOmBjB+
+ 4qEw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1793099547; x=1793704347;
+ h=content-transfer-encoding:content-type:mime-version:message-id:date
+ :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=hzZbDFZM/UYJO7c6bpSnID+Nzy+oI4pCYhor9frfI5Y=;
+ b=UzjcqokKJ5Ml6zZfINzVaI4K/lMY2+Tys+94lxgaZZLZTnOhpCUvmVfZBpl47xJ3J5
+ HU2FmbDXPwMsaoOhC2mcMfxgKfj6Duf83Ky12mni0cv765cJZ4IPqoyBHCX6K853Z3IW
+ i8etZCmhe/08Y8HWvfK6WcCB4o/VSElW4l4Zr1WK+cTmvJpidSV+0rAtZEMbnNu02OxF
+ +ryUlK1thjMM39xqpVQT70VerUGnMTpiYfmOkUbY2wZs3tbqv8OvvfU9iTh0gPpBxie1
+ GigosvRCuzfbnfQn63QA4AeoBLu39FsYH4kE4KJKyGMpdqlqTBqX9M7uKVWb4csP1gfK
+ bnww==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBzTQMhO92LNWiSzFIXhtl1YHUDFMPAuGUy9c0Jc1NjjOR0r7QQibHNBS8KlWXU2ctbl9spLt06alNAL@nongnu.org
+X-Gm-Message-State: AFq9FYLLlcOwlAk9zDLfz/HXexfaKGjSulz9MQnQSuP9zLMoG+POzGi/
+ 9r6XQ9qO2BCVR3pQDhqK81SsOGDCiEE1ooUrDhRgx9aKI0HQf43sIeUF
+X-Gm-Gg: AYBFou2ZM7M/Hsi16M6xT9787oXRYWATdrazzAnwM140EXrnFO4ck36n0mS+pL+Ak9x
+ i/t5atFVqFZyqwsdZru5EL2HNk8lkKaVZ/NuJxlBzqttroKb4sXLqMBUHV2aj2V+xa3o1jJ0raY
+ +b7OmfmWEmdefCxC3P6rHbEPNBRp/m2YQRHWslVesiUiNXp6iEI7ZjAAMf3vDwyMOZ0kG32O9xr
+ rTQpMlScPL9+V/jGi/08XonLoGbkxqdUkfhBRdoBQnQq56oAq9bwPYZmnI3+/2I1VRVTlU14Ij2
+ O7D4mUGTIGCK+E291FKabat16WvY8VmoWS1MyYx1JyGLz94C/RQiehIl+WTfIRW4PJvAQgzsOqA
+ +bzZZInPP8NQhQSbdF6GTTIzguigMwk8hC5oxyNtgiiuEk2rnmfiP3fhJGVsP+E4Kc4GgHTs5Tf
+ MX4Vljl02vzE5G5O/aLF1rdx8HSrxeTc7SavY8XZTQ93GynP/0OCq2HzVPDcILdOak5wqkznDDM
+ Ode/+uRYQbpoICJBeWYz8KHq4CAXOdUDbdu53Ka8+LcyYcuY+kxmyQBYhKR0RlJ0SMqNdvNnL4z
+ SNBwpCERuF92
+X-Received: by 2002:a05:7023:889:b0:152:9e88:daaa with SMTP id
+ a92af1059eb24-19936e34cafmr14125662c88.36.1793099546945; 
+ Tue, 27 Oct 2026 04:12:26 -0700 (PDT)
+Received: from WIN-BH9M8FJACR9 ([103.94.185.75])
+ by smtp.googlemail.com with ESMTPSA id
+ a92af1059eb24-198a0f83cedsm40453042c88.13.2026.10.27.04.12.21
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 27 Oct 2026 04:12:26 -0700 (PDT)
+From: Yonggang Luo <luoyonggang@gmail.com>
+To: qemu-devel@nongnu.org
+Cc: Markus Armbruster <armbru@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Song Gao <17746591750@163.com>, Fabiano Rosas <farosas@suse.de>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
+ qemu-riscv@nongnu.org, Philippe Mathieu-Daude <philmd@mailo.com>,
+ Chao Liu <chao.liu@processmission.com>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Stafford Horne <shorne@gmail.com>,
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+ Laurent Vivier <laurent@vivier.eu>,
+ =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, qemu-arm@nongnu.org,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Zhao Liu <zhao1.liu@intel.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Eric Blake <eblake@redhat.com>, Weiwei Li <liwei1518@gmail.com>,
+ Laurent Vivier <lvivier@redhat.com>,
+ Brian Cain <brian.cain@oss.qualcomm.com>, Max Filippov <jcmvbkbc@gmail.com>
+Subject: [PATCH v4 00/17] machine: uniquify virt QOM names
+Date: Tue, 27 Oct 2026 19:11:58 +0800
+Message-ID: <20261027111216.392-1-luoyonggang@gmail.com>
+X-Mailer: git-send-email 2.52.0.windows.1
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <95082036aaf5b0ed1bee69fc21fcbb18fd74d61f.camel@wdc.com>
-Received-SPF: pass client-ip=172.105.4.254; envelope-from=fustini@kernel.org;
- helo=tor.source.kernel.org
-X-Spam_score_int: -46
-X-Spam_score: -4.7
-X-Spam_bar: ----
-X-Spam_report: (-4.7 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.339,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1234;
+ envelope-from=luoyonggang@gmail.com; helo=mail-dl1-x1234.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -81,80 +113,95 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-6.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS autolearn=no
+X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT autolearn=unavailable
 	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Mon, Oct 26, 2026 at 11:56:38PM +0000, Alistair Francis wrote:
-> On Fri, 2026-10-23 at 17:28 +0530, Sunil V L wrote:
-> > On Thu, Oct 22, 2026 at 10:23 AM Alistair Francis
-> > <Alistair.Francis@wdc.com> wrote:
-[..]
-> > > Why not add a vendor cpu/soc specific one to a vendor board? That
-> > > way
-> > > it actually model hardware instead of just providing the guest some
-> > > made up information.
-> > > 
-> > Thanks for the feedback!
-> > 
-> > Just to make sure I understand your suggestion correctly: should we
-> > avoid
-> > defining a hardcoded cache topology for the generic CPU on virt, and
-> > generate
-> > PPTT cache information only for CPU models that provide an
-> > appropriate cache
-> > hierarchy?
-> 
-> It was a question
-> 
-> Something to keep in mind is that I (and others on the list) don't know
-> all of the context that you know about this extension. So the cover
-> letter and commit messages should describe **why** we want this.
-> 
-> Remember, I'm (and other on the list) are not part of RVI. We don't
-> have the insight that you have. I also don't know what Drew is working
-> on (I see some patches today, but before then I didn't know).
-> 
-> So, when sending patches please try to explain why we want them.
-> 
-> The question was, what use/value is there in faking some cache layout
-> that doesn't exist? There might be a good reason, but that should be
-> justified and explained.
-> 
-> > 
-> > I can certainly omit the cache information for the generic CPU. The
-> > consequence
-> > is that Drew's CBQRI series, which requires cache information, would
-> > need a
-> > suitable CPU model before it can be used with virt. Drew, please
-> > share
-> > your thoughts.
-> 
-> Drew works at a company making it's own CPU, I would argue he can just
-> use that :)
+Multiple targets register a virt board as MACHINE_TYPE_NAME("virt").
+Those QOM types collide if more than one board is linked into one
+qemu-system process. This series splits the QOM type from the -M name
+so each virt board can keep a unique type while -M virt, help, and
+migration stay the same.
 
-I could add caches for the Ascalon core complex in Atlantis but the
-topology is pretty simple with just private L1 and shared L2. The
-tt-atlantis machine is also device tree only, so it would not produce a
-PPTT or RQSC table. A generic cpu with L1, L2 and L3 caches like Sunil
-defined is ideal for testing my Qemu RQSC series [1], since RQSC needs
-to reference cache IDs from PPTT. My plan is to rebase my RQSC series
-once PPTT support lands and send the new revision as a non-RFC series
-since RQSC has been ratified.
+- Add machine_class_set_name() so boards can set MachineClass::name
+  when it must differ from the QOM type. machine_class_base_init still
+  defaults the name to the QOM type without -machine. Document that
+  MachineClass::name is the -M name, not the QOM type. Sort -M help
+  by that name so order matches the printed names after types are
+  prefixed (arm-virt-11.1-machine vs virt-11.1).
+- When target_heterogeneous() is true, give each colliding virt board
+  a unique QOM type and keep the existing -M name via
+  machine_class_set_name(): riscv-virt, arm-virt, or1k-virt,
+  hexagon-virt, loongarch-virt, m68k-virt, and xtensa-virt. Otherwise
+  keep virt. Versioned ARM, LoongArch, and M68K boards keep virt-<ver>. Latest
+  ARM virt still sets mc->alias to virt.
+  This is for the review from Daniel:
+  Link: https://lore.kernel.org/qemu-devel/ar_dK-_KUS3h2dkL@redhat.com/
+- query-machines returns MachineInfo typename, the QOM type from
+  object_class_get_name(), for qom-list-properties. The -M name alone
+  is not that type once virt boards are prefixed.
+- Use target_heterogeneous() from the base. It still returns false, so
+  qemu-system-<target> keeps the QOM type virt.
 
-Qemu is important for testing the RISC-V QoS support in Linux [2],
-because I'm not aware of any hardware yet that supports all 4 features
-of CBQRI: capacity allocation, capacity monitoring, bandwidth
-allocation, and bandwidth monitoring. Ascalon only supports capacity
-allocation, and I have not seen public details from other vendors about
-which CBQRI features have been implemented.
+Changes v3 -> v4:
+Rebased onto d73149283205645625bfa9fe029cfb68e4c4a9ae, which already
+includes target-info: add target_heterogeneous. The boards.h example
+uses arm-virt only when that returns true.
 
-Thanks,
-Drew
+Changes v2 -> v3:
+The versioned-machine example in boards.h now follows hw/arm/virt.c.
+machine_class_set_name() keeps the -M name as virt-<version>, the QOM type in
+the example is arm-virt, and the latest helper is DEFINE_VIRT_MACHINE_AS_LATEST.
 
-[1] https://lore.kernel.org/all/20260202-riscv-rqsc-v1-0-dcf448a3ed73@kernel.org/
-[2] https://lore.kernel.org/all/20260601-ssqosid-cbqri-rqsc-v7-0-v6-0-baf00f50028a@kernel.org/
+Changes v1 -> v2:
+- query-machines returns MachineInfo typename. v1 returned only the
+  -M name, so a client that appended "-machine" looked up the wrong
+  type for a prefixed board such as arm-virt-11.1-machine versus
+  -M virt-11.1.
+
+Yonggang Luo (17):
+  hw/riscv/virt: move virt TypeInfo into its type_init
+  hw/arm/virt: move virt TypeInfo into its type_init
+  hw/or1k/virt: move virt TypeInfo into its type_init
+  hw/hexagon/virt: move virt TypeInfo into its type_init
+  hw/loongarch/virt: move virt TypeInfo into its type_init
+  hw/m68k/virt: move virt TypeInfo into its type_init
+  hw/xtensa/virt: move virt TypeInfo into its type_init
+  machine: allow -M name to differ from QOM type
+  hw/riscv/virt: use unique QOM name
+  hw/arm/virt: use unique QOM name
+  hw/or1k/virt: use unique QOM name
+  hw/hexagon/virt: use unique QOM name
+  hw/loongarch/virt: use unique QOM name
+  hw/m68k/virt: use unique QOM name
+  hw/xtensa/virt: use unique QOM name
+  qapi: return MachineInfo typename from query-machines
+  machine: match the versioned virt example to arm virt
+
+ hw/arm/virt.c               | 53 ++++++++++++++++--------------
+ hw/core/machine-qmp-cmds.c  |  1 +
+ hw/core/machine.c           |  6 ++++
+ hw/hexagon/virt.c           | 21 +++++++-----
+ hw/loongarch/virt.c         | 44 +++++++++++++------------
+ hw/m68k/virt.c              | 37 ++++++++++++---------
+ hw/or1k/virt.c              | 20 +++++++-----
+ hw/riscv/virt.c             | 26 +++++++--------
+ hw/xtensa/virt.c            | 20 ++++++++++--
+ include/hw/arm/virt.h       |  5 ++-
+ include/hw/core/boards.h    | 39 ++++++++++++++++------
+ include/hw/hexagon/virt.h   |  5 ++-
+ include/hw/loongarch/virt.h |  5 ++-
+ include/hw/riscv/virt.h     |  5 ++-
+ qapi/machine.json           |  6 +++-
+ system/vl.c                 |  8 ++---
+ tests/qtest/qom-test.c      | 65 +++++++++++++++++++++++++++++++++----
+ 17 files changed, 247 insertions(+), 119 deletions(-)
+
+-- 
+2.52.0.windows.1
+
 
