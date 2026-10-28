@@ -1,73 +1,73 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 79C8B606A31A
-	for <qemu-riscv@archiver.kernel.org>; Wed, 28 Oct 2026 04:33:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D4FDD606A31A
+	for <qemu-riscv@archiver.kernel.org>; Wed, 28 Oct 2026 04:33:31 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=tenstorrent.com header.i=@tenstorrent.com header.a=rsa-sha256 header.s=google header.b=fWDnNfs4
+	dkim=pass (2048-bit key, unprotected) header.d=tenstorrent.com header.i=@tenstorrent.com header.a=rsa-sha256 header.s=google header.b=ENaF0yAV
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xLvKi-0007bT-Rh; Wed, 28 Oct 2026 00:32:16 -0400
+	id 1xLvKw-0007mu-74; Wed, 28 Oct 2026 00:32:30 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <portias@tenstorrent.com>)
- id 1xLvKT-0007Xx-Kx
- for qemu-riscv@nongnu.org; Wed, 28 Oct 2026 00:32:05 -0400
-Received: from mail-pj1-x1030.google.com ([2607:f8b0:4864:20::1030])
+ id 1xLvKr-0007iV-Rk
+ for qemu-riscv@nongnu.org; Wed, 28 Oct 2026 00:32:25 -0400
+Received: from mail-pj1-x1029.google.com ([2607:f8b0:4864:20::1029])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <portias@tenstorrent.com>)
- id 1xLvKR-0001ed-VZ
- for qemu-riscv@nongnu.org; Wed, 28 Oct 2026 00:32:01 -0400
-Received: by mail-pj1-x1030.google.com with SMTP id
- 98e67ed59e1d1-3ac6971aaebso50963a91.3
- for <qemu-riscv@nongnu.org>; Tue, 27 Oct 2026 21:31:59 -0700 (PDT)
+ id 1xLvKo-0001gV-A4
+ for qemu-riscv@nongnu.org; Wed, 28 Oct 2026 00:32:25 -0400
+Received: by mail-pj1-x1029.google.com with SMTP id
+ 98e67ed59e1d1-3a6d800781cso35615a91.1
+ for <qemu-riscv@nongnu.org>; Tue, 27 Oct 2026 21:32:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=tenstorrent.com; s=google; t=1793161919; x=1793766719; darn=nongnu.org;
+ d=tenstorrent.com; s=google; t=1793161940; x=1793766740; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=nrsCEOFP+P+GVjt2HnqxRXhb4WtF/Kann6KO1TyB3JY=;
- b=fWDnNfs4iBv1KTpPjO9rlvs3fCJkTMO8Dni+gnYhmvtN4FugtJVZ7c+LPlMGniSEO7
- WhT+DN+sEyea1N0ROjo0al2JZ2DDhAIG2ApK8ILk3WAb/L3HrGCsddwmcdC6Jx9kGKJ6
- i6sYBPX3Kx7SVmigWEhenDXssgkX1fKQCIfpgH1FSJT00uFmBCPPzhqQDabQflOfEutD
- XvFTB/mFSR6uzFvy4bWkj6VODVqpS/5mZE7i+LNS/6CYC69IV5bzELUZgUFxtH733irm
- RFr5oCrpX7aeHUSgYqvtaKEkHG5+ZxJF1AeCU4d+WXPxjj+zlZv4/wv8rHbsDcONIoUR
- inQg==
+ bh=UjTYxjwBStG+zG+XaE/upOrdCBHCoeR1wLAXIfObVG8=;
+ b=ENaF0yAVz1cQqZINqlAzP3a4UzbaX7sRQtsyLMGRARpIxn8J6Z7EzbDRtUr8mFxa/O
+ /FDC1vXMiUCuw3trr9OBA/LDF8rpFF1sJSf8cbBRGIlgBMCCQuXSQ1IgCYTMR9pKbZhz
+ 0UCgN5zmLME1pTRAw4zbUGcQaExnAYJ0TcTCoTfoeQE+x/PusJQVukL7o7J9Z7HZOEMM
+ zzA+QVMpvkABJnDXECAeoNihfA0A6QCL6Zvr12WPspvE5eyuQi+OZv3cNtEuQ2jDT+v2
+ IqEpv/4LS74QZXms/xz+Kq3ec1PRjEkmR7TnByJJk+zhjWaFtEqPvaNYwS6VwI1/1o2s
+ qJWw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793161919; x=1793766719;
+ d=1e100.net; s=20260707; t=1793161940; x=1793766740;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=nrsCEOFP+P+GVjt2HnqxRXhb4WtF/Kann6KO1TyB3JY=;
- b=UEuO2xlAVPdwj6ZrufCGzQSqdR4O7J2DP3oFhLxDM9cCr58zkhth1HdlgO+iwAHyDz
- 9FEXnKjzvKdHiPDIM3ZkKhD0n5fMDSrvmCrutFOpOvAdLU6zVkemF7anrUDf1tFrUZq8
- WRnKCjtkQ0QZSunuM9y4CRD2JDDEEMxyURuZNZ0/cHR5g/d/mZAxCuCOcmpBBRoTG3GH
- VpEEMmSEJQwKvnPH3MWXroWxrQXpiocmzIlbHs5RqLUim0Kks2PNcFwv4t532LEAyUby
- 8qEVYSaRrMhBHmOzty3AMS+jIXnQ0lB0bIQ2gbFQebgY8kkihP/gHJDYLeAlS+n7PJaa
- pxfQ==
+ bh=UjTYxjwBStG+zG+XaE/upOrdCBHCoeR1wLAXIfObVG8=;
+ b=jyLDo0QyCHdPI7mWikqo1k/L5FY68Zo77fw/oINH/PMsisJi41B0l6e24DYtrmxYP3
+ 9/espMBJnsQGZR9oKJypC3vLRdZU3z0gFldYMpnu/tNVecwTxhFK3I9Srl2/oH2PXzQU
+ 1dZL20IjdJTnD3tpQvoXZf4NV3+xBDRuh+kSFgmgX8xH+XKNE9qbZbjK34sSIlEOt/Qd
+ rlN80gTKzDyzOYQb9N8mCMGvP0Ndu29yN3aRLBbHPNaTZi0BWx3Stuopjz2UQwZAwFw0
+ qqDuayxpCIlqfk2GvnIDhzrnjpW3CcoOWtDnP6Ez8mIVCQrJuvkZzv+MJRF38NYT/OxU
+ /ajg==
 X-Forwarded-Encrypted: i=1;
- AKwUvBz621YsbhpMv1BfPKQxcy4wuwzCY+A/eRT2DXGg/kWjV9q/sVHAVnTSsO2IR8GBICx3IO0lEgylziCI@nongnu.org
-X-Gm-Message-State: AFq9FYKNGK26XZVdXj9WwmRZhfqxhkGUiw7nCUAZWjKo2jc3ryDBk6BY
- GmdqMU4zDak0GjgPVT0l3G19X/vy3U5YUbAvPMif7IX++yFG+X9tybweUmKV3w5r2+U=
-X-Gm-Gg: AYBFou3ejO/5+52MKswV+BLaeUoh/u9vX3YWqZhDYboophWsGoY3CS6/GFD/FaVbJxb
- snTTSxe/Lz0MprsVoOK+fjorbFpy+7NR1KNzyAWX6G1t9d0jkQjKCDgO08aE+z6yk22ArjS7EUt
- PMla+zDk7+TuSKRjTEW1RDAYIB8ZwCcl8spoYk5ULUDT7Zxg7UlKuiCMzg4OBeWgnbCfw/mOT7w
- 8qIaF520TzB8aL8ixVM/hJPkCGwWuWnadqnelBZzLnT6SIG6XeuJ9OypzixRcutMIcmvbhnzTTq
- QfUc538sy24YOylUJmOJWyM8uXhnMt8FfY2oeKrWexmDF3zhq85qlQVOKmeiR01R1xjyxKlZZLK
- wCuLbtyQ8E5fsjyw8TywgFr2GOdtuMsTbA8aAVEetdKYThw3hveLEYU6goY/abbWRLKmnZH3MC5
- ndnOxAfw/L8WcvXbfa3q7Rrhzk0q/vFhMVHyZsla4BPiqn84Q2FsHJul5GAdmQVOKdhJNMYOWnt
- 4Pg65ZiZGPV10iMH5tvFLyk8yaAmumycfEwf6hi+nSJ6d/b0dsqy7wH/JVyBXnfhoUA28Op+wlq
- dvs1vpUbNBFBijMsS+lHF7aGC4Far22NWGULHiY2MNJpDWbTgnOAYvMkszGy3ROXeXI3BppQmJO
- /9Q==
-X-Received: by 2002:a17:90b:1a82:b0:3a4:9d98:f980 with SMTP id
- 98e67ed59e1d1-3ae57e2c7b2mr1532990a91.1.1793161918752; 
- Tue, 27 Oct 2026 21:31:58 -0700 (PDT)
+ AKwUvByEcalswwH0cM8O1vCAy+sevdCulVzjEQeM3DhyCKYaHIPuZJqWZeLL6WqabkDVJzecAxu2mBzbBx8L@nongnu.org
+X-Gm-Message-State: AFq9FYLL2hdH3V8S/MTH+SRQSFD64guFkxG6LmHT3iVAj0bwKhBvDDQK
+ xFUKV5q1l7XTU9ZhhsoCQxHYSr6xNkXgI1JeFPljFLR5NJyQi8gKzrqltYc1qwHiMBE=
+X-Gm-Gg: AYBFou2BSxJOjiXEpzI7TMtFL1MjT7wE10aP3rU/VbiPekn08WGaXYzDQ4Xf+pBmUxG
+ ErGEsO6tp8KGl5WIb6dwP0jM5BR4MTfli3nX+Wp/5vli4dwr/weVMyoLRi4kze5Zos6erCbNX36
+ Qwgc+L3d5iQ+U9H8Dg4k0N1IUqcYjYRgFbARaj6qvJUZMT0sQXLbndwUeCQgCo+xihQel/jGDTE
+ WolFg7mwD86eFgxz8ngzAq4D3VVEEmzfkq0fNJkihr5r7ogFr+JNFt/9EwkVbpNN3cJcy03Vsls
+ T+2u1ObXXxVfnCWE5gVAJLG2L9+jIAXO4vctw3d8p6XgHJwVtxNGylxjp8y+/02I8VQMpoovn2+
+ NAHyh46fkSlF/B16LBwQ5NaYcGgcIa/31sgqWpanu3m+6zaeeBsoNnHIeqvL28kdhfNkk//rO+v
+ oLfMxwsK4Vm3g6IoCWlKTmHgmKgQjvBrdZOys07r2dIOjBTweVbLscMpmT76EQdcdYr3Fjih4PH
+ N/Ap1xnRfcttI2sYCUVr6poCv25GDsGoPcc8o2yaKTlLDInefoDsFmiR+eTn66/Sv9crvJyztFs
+ KEsGI3qVhVq/NMqXiV0wSYR+a63k1g+L2d4g/6W9lAv9ctGVe4D4LkOc8E6o/+jeyRZTw5novZi
+ mJOQ=
+X-Received: by 2002:a17:90b:3c0c:b0:3a8:1759:2217 with SMTP id
+ 98e67ed59e1d1-3ae57e5769amr1399241a91.2.1793161940109; 
+ Tue, 27 Oct 2026 21:32:20 -0700 (PDT)
 Received: from lima-default.tail89d63.ts.net ([159.196.41.205])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3ae5a5d45a8sm1024470a91.17.2026.10.27.21.31.51
+ 98e67ed59e1d1-3ae5a5d45a8sm1024470a91.17.2026.10.27.21.32.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 27 Oct 2026 21:31:58 -0700 (PDT)
+ Tue, 27 Oct 2026 21:32:19 -0700 (PDT)
 From: Portia Stephens <portias@oss.tenstorrent.com>
 To: qemu-devel@nongnu.org
 Cc: Nicholas Piggin <npiggin@gmail.com>,
@@ -84,18 +84,18 @@ Cc: Nicholas Piggin <npiggin@gmail.com>,
  Richard Henderson <richard.henderson@linaro.org>,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
  Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
-Subject: [PATCH v2 07/10] hw/riscv/atlantis: Back RCPU memory region by
- unimplemented device
-Date: Wed, 28 Oct 2026 14:30:56 +1000
-Message-ID: <20261028043059.600498-8-portias@oss.tenstorrent.com>
+Subject: [PATCH v2 10/10] docs/atlantis: Update Atlantis documentation to
+ include the RCPU
+Date: Wed, 28 Oct 2026 14:30:59 +1000
+Message-ID: <20261028043059.600498-11-portias@oss.tenstorrent.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261028043059.600498-1-portias@oss.tenstorrent.com>
 References: <20261028043059.600498-1-portias@oss.tenstorrent.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1030;
- envelope-from=portias@tenstorrent.com; helo=mail-pj1-x1030.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1029;
+ envelope-from=portias@tenstorrent.com; helo=mail-pj1-x1029.google.com
 X-Spam_score_int: -19
 X-Spam_score: -2.0
 X-Spam_bar: --
@@ -120,98 +120,87 @@ X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Most devices on the RCPU memmap are not modeled yet in QEMU. Back the
-entire 4G memory view of the RCPU by a low priority unimplemented
-device. This prevents accesses to non-modeled device from faulting.
+This updates the Atlantis documentation to include new machine
+properties for running the RCPU.
 
 Signed-off-by: Portia Stephens <portias@oss.tenstorrent.com>
 ---
- hw/riscv/Kconfig               |  1 +
- hw/riscv/tt_atlantis.c         | 20 ++++++++++++++++++++
- include/hw/riscv/tt_atlantis.h |  6 ++++++
- 3 files changed, 27 insertions(+)
+ docs/system/gdb.rst               |  2 ++
+ docs/system/riscv/tt_atlantis.rst | 40 +++++++++++++++++++++++++++++++
+ 2 files changed, 42 insertions(+)
 
-diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-index 4eccfa443e..8e1812923a 100644
---- a/hw/riscv/Kconfig
-+++ b/hw/riscv/Kconfig
-@@ -150,6 +150,7 @@ config TENSTORRENT
-     select DS1338
-     select TMP105
-     select CPU_CLUSTER
-+    select UNIMP
+diff --git a/docs/system/gdb.rst b/docs/system/gdb.rst
+index b6d8f8e77d..3777630337 100644
+--- a/docs/system/gdb.rst
++++ b/docs/system/gdb.rst
+@@ -79,6 +79,8 @@ debug some interaction between kernel and user-space you are better
+ off running your guest program with gdb either in the guest or using
+ a gdbserver exposed via a port to the outside world.
  
- config XIANGSHAN_KUNMINGHU
-     bool
-diff --git a/hw/riscv/tt_atlantis.c b/hw/riscv/tt_atlantis.c
-index edf2180a98..66cbb2b8cf 100644
---- a/hw/riscv/tt_atlantis.c
-+++ b/hw/riscv/tt_atlantis.c
-@@ -519,6 +519,17 @@ static void load_fdt(TTAtlantisState *ams)
-     create_fdt_memory(ms->fdt, ac->memmap, ms->ram_size);
- }
- 
-+static void mmio_map_unimplemented(MemoryRegion *memory, SysBusDevice *dev,
-+                                   const char *name, hwaddr addr, uint64_t size)
-+{
-+    qdev_prop_set_string(DEVICE(dev), "name", name);
-+    qdev_prop_set_uint64(DEVICE(dev), "size", size);
-+    sysbus_realize(dev, &error_abort);
++.. _GDB multicore:
 +
-+    memory_region_add_subregion_overlap(memory, addr,
-+                                        sysbus_mmio_get_region(dev, 0), -1000);
-+}
+ Debugging multicore machines
+ ============================
+ 
+diff --git a/docs/system/riscv/tt_atlantis.rst b/docs/system/riscv/tt_atlantis.rst
+index d94d064f4f..77dfacff3c 100644
+--- a/docs/system/riscv/tt_atlantis.rst
++++ b/docs/system/riscv/tt_atlantis.rst
+@@ -12,10 +12,37 @@ tt-atlantis QEMU model features
+ -------------------------------
+ 
+ * 8-core Ascalon-X CPU Cluster
++* RV32 Real-time CPU (RCPU)
+ * RISC-V compliant Advanced Interrupt Architecture
+ * DW8250 compatible UART x5
+ * 4 PRCMs (Clock and Reset Controllers)
+ 
++Boot options
++------------
 +
- static void tt_atlantis_machine_done(Notifier *n, void *data)
- {
-     TTAtlantisState *ams = container_of(n, TTAtlantisState, machine_done);
-@@ -596,6 +607,8 @@ static void tt_rcpu_cluster_init(Object *obj)
-                             TYPE_CPU_CLUSTER);
-     object_initialize_child(OBJECT(&rc->cluster), "cpus", &rc->cpus,
-                             TYPE_RISCV_HART_ARRAY);
-+    object_initialize_child(OBJECT(rc), "tt-rcpu.unimp-mem", &rc->unimp_mem,
-+                            TYPE_UNIMPLEMENTED_DEVICE);
- }
- 
- static void tt_rcpu_cluster_realize(DeviceState *dev, Error **errp)
-@@ -651,6 +664,13 @@ static void tt_rcpu_cluster_realize(DeviceState *dev, Error **errp)
-     if (!qdev_realize(DEVICE(&rc->cluster), NULL, errp)) {
-         return;
-     }
++ * ``rcpu`` enables the RCPU model to run alongside the Ascalon cluster and is
++   enabled by default. When the RCPU is enabled, ``UART0``, the RCPU's console,
++   will be mapped to the second -serial on the command line.
++ * ``bootrom`` binary to be loaded into mask ROM and run by the RCPU (no effect if the
++   rcpu is not enabled)
 +
-+    /*
-+     * Map the entire 4G memory view as unimplemented to prevent faults from
-+     * devices that have not been modeled yet.
-+     */
-+    mmio_map_unimplemented(&rc->memory, SYS_BUS_DEVICE(&rc->unimp_mem),
-+                           "tt-rcpu.unimp", 0, UINT32_MAX);
- }
++To enable the RCPU model with a custom binary and the RCPU console on stdio:
++
++.. code-block:: bash
++
++  -M tt-atlantis,rcpu=on,bootrom=../path/to/binary.bin -serial null -serial stdio
++
++ * ``smp -cpus`` The smp cpu field includes the RCPU count. When rcpu=on, the
++   number of Ascalon harts created is smp.cpus - 1.  When rcpu=off, the number
++   of Ascalon harts created is smp.cpus. To run with only one Ascalon hart and
++   no RCPU.
++
++.. code-block:: bash
++
++  -M tt-atlantis,rcpu=off -smp cpus=1
++
++
++
+ Known limitations
+ -----------------
  
- static void tt_rcpu_cluster_class_init(ObjectClass *oc, const void *data)
-diff --git a/include/hw/riscv/tt_atlantis.h b/include/hw/riscv/tt_atlantis.h
-index ceb138dc88..4dfeb993d4 100644
---- a/include/hw/riscv/tt_atlantis.h
-+++ b/include/hw/riscv/tt_atlantis.h
-@@ -16,6 +16,7 @@
- #include "hw/misc/tt_atlantis_prcm.h"
- #include "hw/char/dw8250.h"
- #include "hw/cpu/cluster.h"
-+#include "hw/misc/unimp.h"
- #include "hw/riscv/riscv_hart.h"
- 
- #define TYPE_TT_ATLANTIS_MACHINE MACHINE_TYPE_NAME("tt-atlantis")
-@@ -63,6 +64,11 @@ struct TTRCPUClusterState {
-     CPUClusterState cluster;
-     MemoryRegion bootrom;
-     MemoryRegion sram;
-+    /*
-+     * All device memory is backed by a catch-all unimplemented device to
-+     * prevent faults on accesses to regions not modeled.
-+     */
-+    UnimplementedDeviceState unimp_mem;
- };
- 
- struct TTAtlantisSoCState {
+@@ -39,3 +66,16 @@ and Linux with default configurations.
+ The development board hardware will require some implementation
+ specific setup in firmware which is being developed and may
+ become a requirement or option for the tt-atlantis machine.
++
++Debugging
++----------
++
++Ascalon and RCPU are on separate CPUClusters which allows gdb to put Ascalon
++and RCPU on separate inferiors. This prevents issues with switching between
++RV32 (RCPU) and RV64 (Ascalon) targets.
++
++By default, gdb will connect to inferior 1, the Ascalon cluster and the RCPU
++will be on inferior 2.
++
++gbd does not handle multiple inferiors by default, see :ref:`gdb multicore`
++for how to connect to inferior 2.
 -- 
 2.43.0
 
