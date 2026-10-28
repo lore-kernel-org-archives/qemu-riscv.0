@@ -1,185 +1,107 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 80B5E606A31A
-	for <qemu-riscv@archiver.kernel.org>; Wed, 28 Oct 2026 03:56:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AAD5F606A31A
+	for <qemu-riscv@archiver.kernel.org>; Wed, 28 Oct 2026 04:32:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key, unprotected) header.d=wdc.com header.i=@wdc.com header.a=rsa-sha256 header.s=dkim.wdc.com header.b=D9Fulq70;
-	dkim=pass (1024-bit key, unprotected) header.d=sharedspace.onmicrosoft.com header.i=@sharedspace.onmicrosoft.com header.a=rsa-sha256 header.s=selector2-sharedspace-onmicrosoft-com header.b=VygO9IFn
+	dkim=pass (2048-bit key, unprotected) header.d=tenstorrent.com header.i=@tenstorrent.com header.a=rsa-sha256 header.s=google header.b=KHJHLcof
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xLulh-0001dc-GZ; Tue, 27 Oct 2026 23:56:05 -0400
+	id 1xLvKF-0007Vp-58; Wed, 28 Oct 2026 00:31:47 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=75473350e=Alistair.Francis@wdc.com>)
- id 1xLulT-0001bg-Et; Tue, 27 Oct 2026 23:55:51 -0400
-Received: from esa5.hgst.iphmx.com ([216.71.153.144])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=75473350e=Alistair.Francis@wdc.com>)
- id 1xLulR-000716-64; Tue, 27 Oct 2026 23:55:51 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1793159749; x=1824695749;
- h=from:to:cc:subject:date:message-id:references:
- in-reply-to:content-id:content-transfer-encoding: mime-version;
- bh=X+JAnC7NXAjlfHnLcQIdjD3giRMpuO3B9Tosfy85Dbg=;
- b=D9Fulq70xr6qBjwFx3AuPqIUDFxH69u2HVR5QBCHp+zGOoIVHUKpHkPe
- ZGYCjwx7cyXudjrX/lrZxnaIIwzbIZfR3VuNNkoND8RUmeSeaGNwBP8QZ
- P4mP/ei73P8BaGf9gz5enbCMt3EaMhsUZM+wEePRERSLHZ7+80I7p6QbR
- i40Y2QRtDWyqG/8STgP5nncRkucGAljCvJxhIbk1di1XCxOkW/ZrEdimQ
- u4V9lr0BN3ISGXHzg0V97hoBVz17zkWEn34PChHyhd6Uq7tRDbTH7G+O4
- SbCqu9GpMBH4XRPAP4cLIgWVhUrWwLgJojmqlTw4KH+duDtmkmCnfOB4E w==;
-X-CSE-ConnectionGUID: wdAV4jRwTFqbFtqDt6sYyQ==
-X-CSE-MsgGUID: sjT8gzw1RwWRQNGTkJgBCw==
-X-IronPort-AV: E=Sophos;i="6.27,182,1786982400"; d="scan'208";a="158209854"
-Received: from mail-eastus2azon11010048.outbound.protection.outlook.com (HELO
- BN1PR04CU002.outbound.protection.outlook.com) ([52.101.56.48])
- by ob1.hgst.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 28 Oct 2026 11:55:42 +0800
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=St6kxrUurmaghYva/0bUEUv7Mdx0c6YFFqkD0JcngG1CemLbpFmFmjynZ3EuniOytUnZP9vMSPUvUQHQ6zLOOdVEZ7f/tpctgoWB4fB59zC5Z2DUbyVPDTRcp4ooiUxPFDD1VAx3DfpstxRE2mXDGbdeHkoacv1jPI8UxQ4EK14lImAa5lu3i8VKs6yNzbvAeMvvznqu9Pz44Sdv9ph4xyAvPblLLUYAGxEfM+xaOzXGSyxNMZAAjbS7kUoKjI7rvGrbsYd+CQZy7Iw0f6FPoqNuY1CMrKO0rIyVUzMPSNkbtQ/nt72gLmfEZ84NucKUGBS9OdyJ/s+EXFc2fMLp7g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=X+JAnC7NXAjlfHnLcQIdjD3giRMpuO3B9Tosfy85Dbg=;
- b=oYyoSfzxYJLQqZval1b80UG+srwahnr5PXjX3PRo9OmQwLPbzbHaX/Q24DTxWIbBJZqRD4ZZmeitR4rm/0ysPWorZ2bi2W3nP2BPWc7u8/dvWvJwvjfXlvncVc27kXBSO3WrKpEz1IJodPFYKtEhSo3RZYssMAG02xuxctfItc7BvyHMR5+Apc9v5a2qblmKavTtwpnVHbuupsFELqNSXeYRbGlrds5ofHvYYcieSW7/lis3GvCPLaQBQsrRcKXw2Mn/IVNuQQA5LqkIImkyLzZ+NP1c+1cPSG/JgT5gCpKOq8vMm+TctW8igiuzOtslK/UAZGlfjlwD2JqybgmVNA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
- header.d=wdc.com; arc=none
+ (Exim 4.90_1) (envelope-from <portias@tenstorrent.com>)
+ id 1xLvJr-0007Sq-BK
+ for qemu-riscv@nongnu.org; Wed, 28 Oct 2026 00:31:28 -0400
+Received: from mail-pj1-x102a.google.com ([2607:f8b0:4864:20::102a])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <portias@tenstorrent.com>)
+ id 1xLvJm-0001bY-1q
+ for qemu-riscv@nongnu.org; Wed, 28 Oct 2026 00:31:21 -0400
+Received: by mail-pj1-x102a.google.com with SMTP id
+ 98e67ed59e1d1-3ab2cb02816so75584a91.0
+ for <qemu-riscv@nongnu.org>; Tue, 27 Oct 2026 21:31:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=X+JAnC7NXAjlfHnLcQIdjD3giRMpuO3B9Tosfy85Dbg=;
- b=VygO9IFnxVo5sDfSdJmA5I5DalqhJ4vNhjYPsLT8pZ31po5/JXj0e6KsYHBYeP81ItTAuaEqXv+MimecHdYCajhSN4HHVFhiiXyPQc1jygeYZLwYUSUC5eF2v0vTtEckW7LLT3M0rJ+am5xKB0CB0RaFw0/mlqr8EhouESApe2M=
-Received: from MN6PR04MB9359.namprd04.prod.outlook.com (2603:10b6:208:4f2::13)
- by DM6PR04MB7020.namprd04.prod.outlook.com (2603:10b6:5:244::14) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.546.16; Wed, 28 Oct
- 2026 03:55:40 +0000
-Received: from MN6PR04MB9359.namprd04.prod.outlook.com
- ([fe80::e729:bbef:5a37:2e77]) by MN6PR04MB9359.namprd04.prod.outlook.com
- ([fe80::e729:bbef:5a37:2e77%4]) with mapi id 15.21.0546.021; Wed, 28 Oct 2026
- 03:55:40 +0000
-From: Alistair Francis <Alistair.Francis@wdc.com>
-To: "fustini@kernel.org" <fustini@kernel.org>
-CC: "mindal@semihalf.com" <mindal@semihalf.com>, "qemu-devel@nongnu.org"
- <qemu-devel@nongnu.org>, "zhiwei_liu@linux.alibaba.com"
- <zhiwei_liu@linux.alibaba.com>, "sunilvl@oss.qualcomm.com"
- <sunilvl@oss.qualcomm.com>, "liu.qingtao2@zte.com.cn"
- <liu.qingtao2@zte.com.cn>, "anup.patel@oss.qualcomm.com"
- <anup.patel@oss.qualcomm.com>, "cp0613@linux.alibaba.com"
- <cp0613@linux.alibaba.com>, "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
- "npitre@baylibre.com" <npitre@baylibre.com>, "radim.krcmar@oss.qualcomm.com"
- <radim.krcmar@oss.qualcomm.com>, "daniel.barboza@oss.qualcomm.com"
- <daniel.barboza@oss.qualcomm.com>, "guo.wenjia23@zte.com.cn"
- <guo.wenjia23@zte.com.cn>, "pbonzini@redhat.com" <pbonzini@redhat.com>,
- "palmer@dabbelt.com" <palmer@dabbelt.com>, "cuiyunhui@bytedance.com"
- <cuiyunhui@bytedance.com>, "atish.patra@linux.dev" <atish.patra@linux.dev>,
- "liwei1518@gmail.com" <liwei1518@gmail.com>, "chao.liu@processmission.com"
- <chao.liu@processmission.com>
-Subject: Re: [PATCH v6 1/6] riscv: implement Ssqosid extension and srmcfg CSR
-Thread-Topic: [PATCH v6 1/6] riscv: implement Ssqosid extension and srmcfg CSR
-Thread-Index: AQHdZXKKNPK3USFmk06vVFZIYfd9g7cQh3mAgAG+RACAAA/AAA==
-Date: Wed, 28 Oct 2026 03:55:39 +0000
-Message-ID: <d342acffc48a50d7c2b0db896b4cb8fe97183aab.camel@wdc.com>
-References: <20261026-riscv-ssqosid-cbqri-v6-0-1a367a35cd0e@kernel.org>
- <20261026-riscv-ssqosid-cbqri-v6-1-1a367a35cd0e@kernel.org>
- <20219a9e5fcaf2f50eee2bd123a12a04c05cb97a.camel@wdc.com>
- <auFlBAtOZSw94vnk@thelio>
-In-Reply-To: <auFlBAtOZSw94vnk@thelio>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-user-agent: Evolution 3.62.1 (by Flathub.org) 
-authentication-results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=wdc.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: MN6PR04MB9359:EE_|DM6PR04MB7020:EE_
-x-ms-office365-filtering-correlation-id: ceab0771-1148-4ce6-4c11-08df34a754f8
-wdcipoutbound: EOP-TRUE
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
- ARA:13230040|376014|7416014|1800799024|19092799006|366016|10070799003|23010399003|10067099003|4143699003|261026140227099003|11063799006|261009223027099003|56012099006|261021121427099003|261022075727099003|261022105027099003|6133799003|261026121527099003|18002099003|22082099003|38070700021|3023799007;
-x-microsoft-antispam-message-info: rbiKi4D1loAXYoySSgkHfJakdXwR1KGYqRGlAfVOZWCbdHTRsTKcE0nr2kRfyzrEAbzdVA/ZbnPZ1YhPMIc7W2NxVF5m2xMoPJWMQAYBOLixTilLKZ4WYkd1Qz6G1NRfttsstyYgJefveF/+g/Fr1cDr358TWtruzLBZnEvFmLhwH/wuGe2NNWVA0qB30/EF5KN8EpGaOgSm/ii1t2gamljxWFBlX+kjnGejcbczBjzWEKmPwyQqKMWuKOYn/jj1J7gN+t6JxVxJrdViO7G/7KZ/pz107S5iPlaPxO099YEGhvoc9aiMcR5fiHNzHtdyIqpLzq5G3wF/VDNNFxY/iO/nNsLVDOWGTQfzpDNLDtO703XcxjHz+oglvYUq0INPkln6fOkyozlwV0nNePE58XH2h6we0nnxDWVgasK5G+VWg4bD+mh+S0XIMGSYPBcGQIRHW4/sYJHgdb+oyD0PbshlxCBEzn9N874SuA4VTjJUuzL9o5DEauKp3DKiPpqAYouWg+cw6hKhV23uNvw03TLMYDfQIVCWJ2+wObKYx+r6IcWkxnVtHtXJD+tFLDrLZ79yS0RIHuuAgFf5XyhwgKTFlfL75sky/JYOgWRCqMDQUy9+z0YqjHYq38UERhgjZkyCRKWPAQCEi3vTFgqvZJypVO5kx2KjjrHQxvJmSII=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:MN6PR04MB9359.namprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(7416014)(1800799024)(19092799006)(366016)(10070799003)(23010399003)(10067099003)(4143699003)(261026140227099003)(11063799006)(261009223027099003)(56012099006)(261021121427099003)(261022075727099003)(261022105027099003)(6133799003)(261026121527099003)(18002099003)(22082099003)(38070700021)(3023799007);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 2
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?dXpmd1VBNXdYb09OVWhNSkoraU5RNXBzWFlRYnl3QUJrdG1kQU1pOHhVQWtS?=
- =?utf-8?B?R1p4Zmg5SUUxdHpKbkxwRkdQdlNycUpiVGtWWThBZTdtcnFWS3dWVTB5ZmR4?=
- =?utf-8?B?SzJJa3M4M3JMOWkxUm9JZC9aVXlwK3JtME1IQ0RTWHNhZ2xYV1RvYmJMMDZl?=
- =?utf-8?B?RDJtb1VUQjJ1VnN5RGZaYXhvVUVSdnU3OC84WU9QbXBHYUpKUFYwdFFiL2p6?=
- =?utf-8?B?K1pENGIwTWJxbHZTNFowVmppMjRSbG9jMUtRdkNIaWFRMnBFYUFSdUl3clox?=
- =?utf-8?B?Q2phRC81MzZnYm91cG90amQrTTI4NitzbkxYNkZkNVJnYWlsN3REdjQ0QU05?=
- =?utf-8?B?YnVKa051dmZmRnhEWGhkR2N2TWs5WGp5dFF5b2svWVlVUmo1dVk0RXZkaTBE?=
- =?utf-8?B?TDNFcG96VG00dVQ3U0hJa1NaL3V4UzQvTjlnNU44d0tBc3k2YXRqSWNtR0hm?=
- =?utf-8?B?d3RtU1dNNkY2Q253eWppZXlkQnJHdFhoWmNWeEpSSnBMOGJiOHZJaVBZNUNn?=
- =?utf-8?B?ajVLUlhtRExIb3l1Q1ZacXhDd280aWxKL2FwcEMycWFkZ0l1N0N0ck1iSXdq?=
- =?utf-8?B?M1REMFJiK0dqUHo4WDIxTVZ5MlRJaXFZK0tEcm9iR1MzV1lMVGVwOS9lMWxE?=
- =?utf-8?B?SlBmYlZTT1dBTlFFZHNNVEJDVW1makRJNkI4aWI2K2lMRDNvMVp3N0g2UDBY?=
- =?utf-8?B?MCs4SG5qREE0bkMzUTBmL2FuT0kvQkxxZmlQVE5ZZmN1dUJobUFmZDc0ZytB?=
- =?utf-8?B?SXdnVWs1S3I0UWdJN21JY0RVb3B2YXc2UjN6UHRHQzVGSEk1VW44TXF0L09U?=
- =?utf-8?B?RDFjeTFVM2FqOW11UkwycHZFTkt0dnBjekdVUm9Gem5kREpZME9LMEdLVUxD?=
- =?utf-8?B?ekhnc0VpY1p6d3VpK0hPTHRBdjFuWXlod1A3RjlmK1RzUnJpMmdNOGp0QkZJ?=
- =?utf-8?B?RHZjaTJ5U096aUNmZlExVENIdU84TzJwWEQxUW9VdDZxSjRQZnFOTEQ0VHc0?=
- =?utf-8?B?RWt4MlhTNG9sV2VSdUtOTUxCVkNiejFQMCtxQkpRam5hbDVxZnNpK0xGeS9X?=
- =?utf-8?B?NFgxOTlqUTV4RTZnTnJxS1RXN0pNK2RzUWxmekdPSEJNVzdsMFQ0V1ROQnpB?=
- =?utf-8?B?V3pxbmxobmd5cTVwRFY0eVUreE9SL0pIemVVOFRSY01VaGkwK1ZCZ2p0Znh3?=
- =?utf-8?B?S0dRZVZuV0JiWTBZclp6RzdrRW4rNXljSGtudVFLV09EdXA3R1d2SFRvM3kw?=
- =?utf-8?B?R3h1V0VGcUJzT1JndUhKMkg1dm82VEUxNVJERGhSbS82dHd0VzlOSEY0UVpP?=
- =?utf-8?B?Znh0SjQ3am1VMHFacTJYcFVjWjVoY1B6Wm4wOEtRelc0RjVEQWRMNVEwamhG?=
- =?utf-8?B?dUtWeC9GUFNia3IxaUVOVWxmVmVJT0c3VHRscjBRekdCVUQyckZjOHgvY3FK?=
- =?utf-8?B?VVprOWJidktMUUpqcHdaeW8weTgrVWlWQllEZEE1RHllM2MzVStrQ1l6bXBB?=
- =?utf-8?B?N1poWmcvN0VvNHFxWndEOXNES1U0ckpqV0FHVUhLV1hrKzNSeFdVOU5DRU5V?=
- =?utf-8?B?M0dQUzByY3htWll3a3pPV21XTTJrWDNRY2ZyU1JwZnpFVVVhaFBlL1paUVBF?=
- =?utf-8?B?d2tObDZCcG1Wc0ZBUVNIcHprMlF0YkJIMVR2OW0zVS9ydXFEZVdpVlgzZm5y?=
- =?utf-8?B?TFRSY2VEYWNGb05YaHJ2TloybU1vaWRsQ1JVWEtvcml3T25SNXdSYmNsZWJO?=
- =?utf-8?B?bnBua0pzMW9XZ0RZTTdwRzdTdHN2d3RxT0djNGsvUHJpazJaeFBydkNzdENP?=
- =?utf-8?B?WVdkNFM2eWRrSWdQNUZvcUs5c3ZnZHlxYiswWFpYc21DZHZvSUVTblZCYjE2?=
- =?utf-8?B?cndlcG5lYVFJMjFJUkIzS1JUSmpKR2lSTEs2QXVpcUpHZkczelkvbDZOZUk1?=
- =?utf-8?B?L1dzUDRaZWJzVFdxTktSVklWemU1d0V3clNQeVdUdWJjT1VBVjFUVTFOWlcx?=
- =?utf-8?B?RlRnMERkWm9PZEJ1VjFuVWNQbThmQ2VsekZ5cnBIZ21OVGswaytyT0w3eWl0?=
- =?utf-8?B?c0phVEtqdlBSUkFaYjVlZXdNRTBUT24ySzVXQlE0cjEvWGRLcDZCRlk3SHJH?=
- =?utf-8?B?eUcwRHliMWMreDlpeDVtazV5QnFrSGJoYTJmY2pmSDdVZWVvVVN0OFJFWC9x?=
- =?utf-8?B?Sm00SFlUVCtZNFBmdGFUYXhrcDVHVVNyT3lLVFlkN1d5S0VwVFl6SG9zSzJt?=
- =?utf-8?B?SU1KWkV1WHNsMmJaTGUxVXFDOGlpQkNSaUlZOEJ1TU90SzNVUThvcmtvTmJy?=
- =?utf-8?B?VWtMTGdoZzE3VW1EK0lVZnlUYXJkOS8vZmtNbDVJdEdsMDRlMWZFRzFtMEN1?=
- =?utf-8?Q?k3GSS8mF/b6a9Iw5ZrZvNdYsN+SDjUlF9yHK86lsxpeE+?=
-x-ms-exchange-antispam-messagedata-1: hMTiD8WehMnOqTodqu2YkFZpOdeyd7bnFPo=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <FB341D5FAA8DB040B9EDFC24A0F10A74@namprd04.prod.outlook.com>
-Content-Transfer-Encoding: base64
+ d=tenstorrent.com; s=google; t=1793161876; x=1793766676; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=H/BezYbKGtKPmI0AKJzZPJ0PhsQqP58AHnLNWt5l9nU=;
+ b=KHJHLcofkA613kPx8HOmkhLlVj/XepagU1dZ/G2kCAP0CZk++ab6s7Vp3SJPjNZL0R
+ 44nKoZBJDNo5XgkijOGhcOdAy96fUsLRWWrEqJEYeRyDuAc9Mq3k9gTqeO2cStjs2nEy
+ 1rMXmC+TkCFef1QCxp+zLvVbzmzHO2qnwKKwaCLGm5F46bX9ZtkNSQv2uxaK9NX7Qiw+
+ /iXJS1sRWMtzQqlwF/QY/5psmxOZZAtHS+EYJ5j6xdRQ0MMPLWFPOD3PPXbVn6emPzz9
+ 7b9qMggug+2ewh5+x9XJ9L1yNsChgC8NaJpk+wBs7+GuO38GBued/SDPEWrK6ITeo50J
+ 20DQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1793161876; x=1793766676;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=H/BezYbKGtKPmI0AKJzZPJ0PhsQqP58AHnLNWt5l9nU=;
+ b=0Htx5Y4rgJpXyRvt/1/ADloK9RlI600hjPthv1CUQIMZFQnsY+2w+TWLdeqK3rzszU
+ 6L1wYH59SDEG832si6E5XG0Ao349036yZvVyzTNzpVWS3mGJjpzkbqrbzNiBoscKAXyH
+ AkOE60qqEfLqUSFmPgDjA9xQNjJxjYbhwG4UdJqGUPBURyYtea/KfMDH5tL6GZBM32cJ
+ ud5vSYE9/vHwk6ejwH74Tog9Z9yo5UYy2eU/IcSROaeT1duEFGqzpVSwRBmzF0khPOKj
+ g33uMO2FXrfpSBvadDSmoR+3muhz6M4KIR+7sqjkijNF5uVYreHregf2sQDQ4s4QLdpd
+ tsRQ==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBzTixOa4zaWrl15YY6CsqVFsC3l7q2a4dmpoaPbHfVoaV6g7B9VQWLd8Ht/Rzwn9h3KEVgmH/V4/Sbo@nongnu.org
+X-Gm-Message-State: AFq9FYLDcNByvRNZLWrFwSjLBaHD7cEVrX0U5pNtVQ8kUOzYcJYweS2E
+ PRLe7KwDyaTbf101bFaELR2ivHNUPSR+xSeVqqXf0Jrk9laVK3QRLQaM0CWV8mBv3nc=
+X-Gm-Gg: AYBFou2ZLqq6yCwnulQMHrgVAbsNZHQbbFUQNGmUTsVu3Qlysv6zqJSx/J38ndhGXMi
+ U4WEWLNmiJsMcs2Kb7ABgYgzQFLxqJPomrBr/AuFbyVo8ugo+w8FrQGbyPxmNVOrKSvaoQ/6fT8
+ CphxyXM5FxH2wBYLxKsw9wKv+coREll9NPhA0pwoUo7iuY96OlrtLy8zUhIB45Bu6KENiD+BbD0
+ +dBHQexVkoubmMqdsm7l3JYYz9rUzVJFdIZ+Qn7yEJot4SDvVtGp15oUiEV9ZezBP+sUmg8EQ4j
+ 9TfFPbqn+sZXs0yfk+szFgMsdNOm4ipAcGfIj0wPlG1YE/ydgeQ+a8MZEJoiu2OL8xUmUzrJgrz
+ 0LW4RkSzBXsNgd+M8zQFff9GBnD6+xwl0DvbOfH37i/DLKYeeWOKbcr7eLUwoF9o/c3g1MGPLDS
+ n2K8s3Tg/eynDyB9qtTKQi2yogggp4mp1qXa/4R+xyKqgHNI82Cqutvnwp1F1s8Dy1g9qh/Vo3V
+ GQ4fOJGbw/Q/4isS+Ry+mwe71hOnO+ZjIaZJprTWKAeEbpeVh6ru1QQGyyHgoI4mTQZyEGKlsj5
+ wSFqpz0eFXHD3a8Yx8QoURe7SRQnJgtUyvTkvtDi4mTeZyGZDBbcXqMyVh/LiamjUpDUkKKRP3p
+ IUQ==
+X-Received: by 2002:a17:90b:4b89:b0:3ad:a84b:df1e with SMTP id
+ 98e67ed59e1d1-3ae57e15ffemr1546543a91.1.1793161876305; 
+ Tue, 27 Oct 2026 21:31:16 -0700 (PDT)
+Received: from lima-default.tail89d63.ts.net ([159.196.41.205])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-3ae5a5d45a8sm1024470a91.17.2026.10.27.21.31.09
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 27 Oct 2026 21:31:15 -0700 (PDT)
+From: Portia Stephens <portias@oss.tenstorrent.com>
+To: qemu-devel@nongnu.org
+Cc: Nicholas Piggin <npiggin@gmail.com>,
+ Chao Liu <chao.liu@processmission.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Michael Ellerman <mpe@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org,
+ Portia Stephens <portias@oss.tenstorrent.com>,
+ Joel Stanley <joel@jms.id.au>, Paolo Bonzini <pbonzini@redhat.com>,
+ Zhao Liu <zhao1.liu@intel.com>, Weiwei Li <liwei1518@gmail.com>,
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
+Subject: [PATCH v2 01/10] hw/riscv/atlantis: Update fdt functions to take
+ generic parameters
+Date: Wed, 28 Oct 2026 14:30:50 +1000
+Message-ID: <20261028043059.600498-2-portias@oss.tenstorrent.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20261028043059.600498-1-portias@oss.tenstorrent.com>
+References: <20261028043059.600498-1-portias@oss.tenstorrent.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-Exchange-RoutingPolicyChecked: YNQ7/YeIzxopMlaBfj6TVExAVqK9bGGbP3glkmA2XvoqPJFw9ip6kR9f47jf95L1O4cvLMATK3gzo+Vg/asiWs8+Y6Cn8MFmxYX4DWEBsPy0NtJL6Qbck2ULbbFpDAj8u7nFsJwXTcxHosz6lq0SStln+vZoZMdHeE7uJMMe2cAcWdKht+qt6cKTbv05oi9MS7ap00vX52uJ/6wYTVbzRq2RqgIzEA7VnIqnGQXdsKmmFWzN3S49v2oMwROZGnb3znhLNn5G4u7uxAuSnI1oW7c948WhkRNAmo7QpxBdmVnSnGgKUIXAqPOcVSkjclfRxN9ud0wLQ7MFmfGf2sBWmQ==
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: pXPaGLdZytzQ6DkenxeGki4oCcd3k09GPnsMIXho3VMT33trTISoJRDu+LfM9UfsKrPF5cHbKmPrpAPdYLrbHJHtgAyE+y60JFBComd9H0sI8BF4/Z5ckpB/0iXLvee6HmlhzGKLHwpYydOXwpwng38t8xj0gJywRed1ibTMthpymm8xNe3CyTbb6W9LRqT+p5ZxKqpUovoP3cxx683c4vsR6n0hzsd74KgAPaS9oHAZmiwho6w+DtBOE7UE9KHDHSeCJv5XSrDBCVnWgs62kcGxpBuL+/HyHATUI0WEHH79F999VB1RybzslaZ/c58/6eiG6itVwJAirYx6lKpWgGkdN/WArzNstTjh97VN5DtzYz4cm+GKIWTIXB7o7gUxUu6nHFfgdFV97t4rusUjcu8tdyz18WgJ5z6jDcnZlfISnQQZBnSwnTC6M308efUK4Zz2Ki9ah1Lc1yf8ImnZCN/1M3YdMaLZrzkI8/fSE4wLx6DCqlynSCH5f5VXKLOXCxCL2/qaPpSysVCy5O/7CAPTA659jb5mfBPKGDnm8m9hYXIRK6kgWejv/lOmbv8QgP1hi5IP4ySNvzPAFPGfgB6sejk6HyLnGm76hy8/jd898Pz0tUXAjTpqiuRjuPdT
-X-OriginatorOrg: wdc.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: MN6PR04MB9359.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: ceab0771-1148-4ce6-4c11-08df34a754f8
-X-MS-Exchange-CrossTenant-originalarrivaltime: 28 Oct 2026 03:55:39.9313 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: e2pU1Usy/OyeFgBBoy1MsCd3vdF3cv/EY7vHSsNaiIJLWjc4Wm6zy6G2Hf0gaVEBoVfq8Ehei3o7P7h5Ub+fdmyBt8J/3b2rBQbrUAsPCxE=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR04MB7020
-Received-SPF: pass client-ip=216.71.153.144;
- envelope-from=prvs=75473350e=Alistair.Francis@wdc.com;
- helo=esa5.hgst.iphmx.com
-X-Spam_score_int: -43
-X-Spam_score: -4.4
-X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102a;
+ envelope-from=portias@tenstorrent.com; helo=mail-pj1-x102a.google.com
+X-Spam_score_int: -19
+X-Spam_score: -2.0
+X-Spam_bar: --
+X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_NONE=-0.0001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -191,88 +113,269 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS
-	autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
+	USER_AGENT_GIT autolearn=unavailable autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-T24gVHVlLCAyMDI2LTEwLTI3IGF0IDE5OjU5IC0wNzAwLCBEcmV3IEZ1c3Rpbmkgd3JvdGU6DQo+
-IE9uIFR1ZSwgT2N0IDI3LCAyMDI2IGF0IDEyOjIyOjAyQU0gKzAwMDAsIEFsaXN0YWlyIEZyYW5j
-aXMgd3JvdGU6DQo+ID4gT24gTW9uLCAyMDI2LTEwLTI2IGF0IDEwOjQ3IC0wNzAwLCBEcmV3IEZ1
-c3Rpbmkgd3JvdGU6DQo+ID4gPiBGcm9tOiBLb3JuZWwgRHVsxJliYSA8bWluZGFsQHNlbWloYWxm
-LmNvbT4NCj4gPiA+IA0KPiA+ID4gSW1wbGVtZW50IHRoZSBzcm1jZmcgQ1NSIGRlZmluZWQgYnkg
-dGhlIFNzcW9zaWQgSVNBIGV4dGVuc2lvbg0KPiA+ID4gKFN1cGVydmlzb3ItbW9kZSBRdWFsaXR5
-IG9mIFNlcnZpY2UgSUQpLiBUaGUgQ1NSIGNvbnRhaW5zIHR3bw0KPiA+ID4gZmllbGRzOg0KPiA+
-ID4gDQo+ID4gPiDCoCAtIFJlc291cmNlIENvbnRyb2wgSUQgKFJDSUQpIHVzZWQgZGV0ZXJtaW5l
-IHJlc291cmNlIGFsbG9jYXRpb24NCj4gPiA+IMKgIC0gTW9uaXRvcmluZyBDb3VudGVyIElEIChN
-Q0lEKSB1c2VkIHRvIHRyYWNrIHJlc291cmNlIHVzYWdlDQo+ID4gPiANCj4gPiA+IFRoZSBDU1Ig
-aXMgZGVmaW5lZCBmb3IgUy1tb2RlLCBzbyBjaGVjayBtc3RhdGVlbjAuc3JtY2ZnIHRvDQo+ID4g
-PiBkZXRlcm1pbmUNCj4gPiA+IGlmIHMtbW9kZSBpcyBhbGxvd2VkIHRvIGFjY2VzcyBpdC4gSW4g
-YWRkaXRpb24sIGFjY2Vzc2luZyBpdCB3aGVuDQo+ID4gPiBWPTENCj4gPiA+IHNoYWxsIGNhdXNl
-IGEgdmlydHVhbCBpbnN0cnVjdGlvbiBleGNlcHRpb24uDQo+ID4gPiANCj4gPiA+IExpbms6DQo+
-ID4gPiBodHRwczovL2dpdGh1Yi5jb20vcmlzY3Ytbm9uLWlzYS9yaXNjdi1jYnFyaS9yZWxlYXNl
-cy9kb3dubG9hZC92MS4wL3Jpc2N2LWNicXJpLnBkZg0KPiA+ID4gTGluazogaHR0cHM6Ly9kb2Nz
-LnJpc2N2Lm9yZy9yZWZlcmVuY2UvaXNhL3ByaXYvc21zdGF0ZWVuLmh0bWwNCj4gPiA+IFNpZ25l
-ZC1vZmYtYnk6IEtvcm5lbCBEdWzEmWJhIDxtaW5kYWxAc2VtaWhhbGYuY29tPg0KPiA+ID4gW2Z1
-c3Rpbmk6IHJlYmFzZSBvbiB2MTAuMS41MCwgZml4IGNoZWNrX3NybWNmZ10NCj4gPiA+IFJldmll
-d2VkLWJ5OiBSYWRpbSBLcsSNbcOhxZkgPHJhZGltLmtyY21hckBvc3MucXVhbGNvbW0uY29tPg0K
-PiA+ID4gU2lnbmVkLW9mZi1ieTogRHJldyBGdXN0aW5pIDxmdXN0aW5pQGtlcm5lbC5vcmc+DQo+
-ID4gDQo+ID4gSSdtIGp1c3QgbWVhdCBwcm94eWluZyB0aGlzIG9uZSwgYnV0IGl0IGxvb2tzIGJl
-bGlldmFibGUsIGxldCBtZQ0KPiA+IGtub3cNCj4gPiBpZiBpdCdzIHdyb25nIHRob3VnaDoNCj4g
-DQo+IElzIHRoaXMgc29tZXRoaW5nIEkgY2FuIHJ1biBteXNlbGYgaW4gdGhlIGZ1dHVyZT8NCg0K
-S2luZCBvZiEgV29ya2luZyBvbiBpdA0KDQo+IA0KPiBJIGNhbiBydW4gbG9jYWwgc2FzaGlrbyBm
-b3IgbXkgbGludXggcGF0Y2hlcyBidXQgSSB3YXNuJ3Qgc3VyZSB3aGF0DQo+IHRvDQo+IGRvIGZv
-ciBxZW11Lg0KDQpZZWFoLCBpdCdzIFNhc2hpa28gYXMgd2VsbDoNCmh0dHBzOi8vZ2l0aHViLmNv
-bS9zYXNoaWtvLWRldi9zYXNoaWtvL3B1bGwvNzUzDQoNCkFsaXN0YWlyDQoNCj4gDQo+ID4gLSBb
-SElHSF0gSW4gdGFyZ2V0L3Jpc2N2L3RjZy9jc3IuYywgbm9uZSBvZiB3cml0ZV9tc3RhdGVlbjAs
-DQo+ID4gd3JpdGVfbXN0YXRlZW4waCwgd3JpdGVfaHN0YXRlZW4wLCBvciB3cml0ZV9oc3RhdGVl
-bjBoIGV2ZXIgT1JzDQo+ID4gU01TVEFURUVOMF9TUk1DRkcgaW50byB3cl9tYXNrIHdoZW4gZXh0
-X3NzcW9zaWQgaXMgc2V0LCBzbyBiaXQgNTUNCj4gPiBvZg0KPiA+IG1zdGF0ZWVuMC9oc3RhdGVl
-bjAgc3RheXMgcmVhZC1vbmx5IHplcm8gYW5kIE0tbW9kZSBmaXJtd2FyZSB3cml0ZXMNCj4gPiB0
-aGF0IGVuYWJsZSBzcm1jZmcgYWNjZXNzIGFyZSBzaWxlbnRseSBkcm9wcGVkLCB2aW9sYXRpbmcg
-dGhlDQo+ID4gU21zdGF0ZWVuIHNwZWMgKGEgYml0IGZvciBhbiBpbXBsZW1lbnRlZCBleHRlbnNp
-b24gbXVzdCBub3QgYmUNCj4gPiByZWFkLW9ubHkgemVybykuIGNoZWNrX3NybWNmZyBnYXRlcyB0
-aGUgbmV3IENTUiBvbg0KPiA+IHNtc3RhdGVlbl9hY2Nfb2soLi4uLCBTTVNUQVRFRU4wX1NSTUNG
-RyksIGFuZCBTbXN0YXRlZW4gaXMgZW5hYmxlZA0KPiA+IGJ5DQo+ID4gZGVmYXVsdCBvbiB0aGUg
-c2FtZSBkeW5hbWljIENQVXMgdGhhdCBnZXQgZXh0X3NzcW9zaWQgYnkgZGVmYXVsdCwNCj4gPiBz
-bw0KPiA+IG9uIHRoZSBzdG9jayB2aXJ0IG1hY2hpbmUgZXZlcnkgUy1tb2RlIChWPTApIHNybWNm
-ZyBhY2Nlc3MgdHJhcHMNCj4gPiBpbGxlZ2FsIGluc3RydWN0aW9uIGFuZCBWUy1tb2RlIGFkZGl0
-aW9uYWxseSB0YWtlcyBhIHZpcnR1YWwNCj4gPiBpbnN0cnVjdGlvbiBmYXVsdDogdGhlIFFvUyBm
-ZWF0dXJlIHRoaXMgc2VyaWVzIGV4aXN0cyB0byBleHBvc2UgaXMNCj4gPiBzeXN0ZW1hdGljYWxs
-eSB1bnVzYWJsZS4gRml4IGJ5IE9SaW5nIHRoZSBiaXQgaW50byB0aGUgc3RhdGVlbg0KPiA+IHdy
-aXRlDQo+ID4gbWFza3MgbGlrZSB0aGUgZXhpc3RpbmcgQ1RSLCBQMVAxMywgYW5kIFNWU0xDVCBj
-YXNlcy4NCj4gDQo+IFRoaXMgaXMgYSByZWFsIGlzc3VlIGZvciBtc3RhdGVlbjAgYW5kIG1zdGF0
-ZWVuMGguIEkgd2lsbCBhZGQNCj4gU01TVEFURUVOMF9TUk1DRkcgdG8gd3JfbWFzayBpbiB3cml0
-ZV9tc3RhdGVlbjAoKSBhbmQNCj4gd3JpdGVfbXN0YXRlZW4waCgpLiBIb3dldmVyLCBJIGJlbGll
-dmUgaHN0YXRlZW4wIGJpdCA1NSBpcyBXUFJJIHNvIEkNCj4gdGhpbmsgdGhlIGN1cnJlbnQgYmVo
-YXZpb3IgaXMgY29ycmVjdC4NCj4gDQo+ID4gLSBbTUVESVVNXSBJbiB0YXJnZXQvcmlzY3YvY3B1
-LmgsIGVudi0+c3JtY2ZnIGlzIG5ldyBndWVzdC13cml0YWJsZQ0KPiA+IMKgIGFyY2hpdGVjdGVk
-IHN0YXRlICh3cml0dGVuIHZpYSB3cml0ZV9zcm1jZmcgaW4NCj4gPiDCoCB0YXJnZXQvcmlzY3Yv
-dGNnL2Nzci5jKSBidXQgdGFyZ2V0L3Jpc2N2L21hY2hpbmUuYyBuZXZlciBtaWdyYXRlcw0KPiA+
-IMKgIGl0OiB2bXN0YXRlX3Jpc2N2X2NwdSBoYXMgbm8gc3Nxb3NpZC9zcm1jZmcgZmllbGQgb3Ig
-c3Vic2VjdGlvbi4NCj4gPiDCoCBBZnRlciBsaXZlIG1pZ3JhdGlvbiwgc2F2ZXZtL2xvYWR2bSwg
-b3Igc25hcHNob3QgcmVzdG9yZSB0aGUNCj4gPiDCoCBkZXN0aW5hdGlvbiBDUFUgcmVzdW1lcyB3
-aXRoIHNybWNmZyA9IDAgd2hpbGUgdGhlIGd1ZXN0IGJlbGlldmVzDQo+ID4gaXRzDQo+ID4gwqAg
-cHJvZ3JhbW1lZCBSQ0lEL01DSUQgYXJlIHN0aWxsIGluIGVmZmVjdC4gQWRkIGEgdmVyc2lvbmVk
-DQo+ID4gwqAgdm1zdGF0ZV9zc3Fvc2lkIHN1YnNlY3Rpb24gd2l0aCBhIC5uZWVkZWQgcHJlZGlj
-YXRlIG9uDQo+ID4gZXh0X3NzcW9zaWQsDQo+ID4gwqAgZm9sbG93aW5nIHRoZSB2bXN0YXRlX3Nt
-c3RhdGVlbi92bXN0YXRlX2VudmNmZyBwYXR0ZXJuLg0KPiANCj4gSSdsbCBhZGQgYSBWTVN0YXRl
-RGVzY3JpcHRpb24gZm9yIFNzcW9zaWQuDQo+IA0KPiA+IC0gW01FRElVTV0gSW4gdGFyZ2V0L3Jp
-c2N2L2NwdS5jIChpc2FfZWRhdGFfYXJyKSwgU3Nxb3NpZCBpcw0KPiA+IHJlZ2lzdGVyZWQgYXMg
-YSB1c2VyLWZhY2luZyBleHRlbnNpb24gYW5kIGVuYWJsZWQgYnkgZGVmYXVsdCBvbg0KPiA+IEJB
-U0UzMi9CQVNFNjQgd2l0aCBubyB0ZXN0cy90Y2cgY292ZXJhZ2UgYW55d2hlcmUgaW4gdGhlIHRy
-ZWUuIFRoZQ0KPiA+IFJJU0MtViB1cHN0cmVhbWluZyBydWxlcyByZXF1aXJlIHVuaXQgdGVzdHMg
-Zm9yIG5ldyBleHRlbnNpb25zJyBDU1INCj4gPiBhY2Nlc3NlcywgYW5kIHRoZSBzdGF0ZWVuIGdh
-dGluZyBhbmQgVj0xIHRyYXAgcGF0aHMgYWRkZWQgaW4NCj4gPiBjaGVja19zcm1jZmcgYXJlIGV4
-YWN0bHkgd2hhdCBzdWNoIHRlc3RzIHdvdWxkIGV4ZXJjaXNlIC0tIHRoZXkNCj4gPiB3b3VsZA0K
-PiA+IGhhdmUgY2F1Z2h0IHRoZSBicm9rZW4gU1JNQ0ZHIHN0YXRlZW4gYml0IGFib3ZlLiBBZGQg
-dGVzdHMvdGNnDQo+ID4gY2FzZXMNCj4gPiBmb3Igc3JtY2ZnIHJlYWQvd3JpdGUsIFdBUkwgbWFz
-a2luZywgYW5kIHRoZQ0KPiA+IHN0YXRlZW4vdmlydHVhbC1pbnN0cnVjdGlvbi1mYXVsdCBnYXRp
-bmcuDQo+IA0KPiBJJ2xsIGFkZCB0ZXN0cyBmb3Igc3JtY2ZnLg0KPiANCj4gPiAtIFtMT1ddIG5p
-dDogaW4gdGFyZ2V0L3Jpc2N2L3RjZy9jc3IuYywgdGhlIGNoZWNrX3NybWNmZyBjb21tZW50DQo+
-ID4gc2F5cw0KPiA+IMKgICJ3ZSBuZWVkIHRvIHRocm93IGFuZCB2aXJ0IGluc3RydWN0aW9uIGZh
-dWx0Ijsgcy9hbmQgdmlydC9hDQo+ID4gdmlydHVhbC8uDQo+IA0KPiBJJ2xsIGZpeC4NCj4gDQo+
-IFRoYW5rcywNCj4gRHJldw0K
+Currently the Atlantis fdt functions take TTAtlantisSoCState as
+parameter and derive all needed values from there. This doesn't easily
+allow for using these functions once the system has multiple memmaps and
+hart arrays. This change updates the fdt functions to take more generic
+parameters. This is in preparation for adding more hart arrays of
+different clusters to the Atlantis SoC.
+
+Signed-off-by: Portia Stephens <portias@oss.tenstorrent.com>
+---
+ hw/riscv/tt_atlantis.c | 83 ++++++++++++++++++++++--------------------
+ 1 file changed, 43 insertions(+), 40 deletions(-)
+
+diff --git a/hw/riscv/tt_atlantis.c b/hw/riscv/tt_atlantis.c
+index 311de64eda..25745998ad 100644
+--- a/hw/riscv/tt_atlantis.c
++++ b/hw/riscv/tt_atlantis.c
+@@ -89,18 +89,18 @@ static uint32_t next_phandle(void)
+     return fdt_phandle++;
+ }
+ 
+-static void create_fdt_memory(void *fdt, TTAtlantisSoCState *s)
++static void create_fdt_memory(void *fdt, const MemMapEntry *memmap,
++                              hwaddr ram_size)
+ {
+-    hwaddr ram_size = memory_region_size(s->dram);
+     hwaddr size_lo = ram_size;
+     hwaddr size_hi = 0;
+ 
+-    if (size_lo > s->memmap[TT_ATL_DDR_LO].size) {
+-        size_lo = s->memmap[TT_ATL_DDR_LO].size;
++    if (size_lo > memmap[TT_ATL_DDR_LO].size) {
++        size_lo = memmap[TT_ATL_DDR_LO].size;
+         size_hi = ram_size - size_lo;
+     }
+ 
+-    riscv_create_fdt_socket_memory(fdt, s->memmap[TT_ATL_DDR_LO].base,
++    riscv_create_fdt_socket_memory(fdt, memmap[TT_ATL_DDR_LO].base,
+                                    size_lo, 0, false);
+     if (size_hi) {
+         /*
+@@ -109,12 +109,13 @@ static void create_fdt_memory(void *fdt, TTAtlantisSoCState *s)
+          * (or good reason) to describe that aliasing 2GB with DT?
+          */
+         riscv_create_fdt_socket_memory(fdt,
+-                                       s->memmap[TT_ATL_DDR_HI].base + size_lo,
++                                       memmap[TT_ATL_DDR_HI].base + size_lo,
+                                        size_hi, 0, false);
+     }
+ }
+ 
+-static void create_fdt_aclint(void *fdt, TTAtlantisSoCState *s,
++static void create_fdt_aclint(void *fdt, RISCVHartArrayState *harts,
++                              const MemMapEntry *memmap,
+                               uint32_t *intc_phandles)
+ {
+     g_autofree char *name = NULL;
+@@ -122,15 +123,15 @@ static void create_fdt_aclint(void *fdt, TTAtlantisSoCState *s,
+     uint32_t aclint_cells_size;
+     hwaddr addr;
+ 
+-    aclint_mtimer_cells = g_new0(uint32_t, s->cpus.num_harts * 2);
++    aclint_mtimer_cells = g_new0(uint32_t, harts->num_harts * 2);
+ 
+-    for (int cpu = 0; cpu < s->cpus.num_harts; cpu++) {
++    for (int cpu = 0; cpu < harts->num_harts; cpu++) {
+         aclint_mtimer_cells[cpu * 2 + 0] = cpu_to_be32(intc_phandles[cpu]);
+         aclint_mtimer_cells[cpu * 2 + 1] = cpu_to_be32(IRQ_M_TIMER);
+     }
+-    aclint_cells_size = s->cpus.num_harts * sizeof(uint32_t) * 2;
++    aclint_cells_size = harts->num_harts * sizeof(uint32_t) * 2;
+ 
+-    addr = s->memmap[TT_ATL_ACLINT].base;
++    addr = memmap[TT_ATL_ACLINT].base;
+ 
+     name = g_strdup_printf("/soc/mtimer@%"HWADDR_PRIX, addr);
+     qemu_fdt_add_subnode(fdt, name);
+@@ -216,52 +217,53 @@ static void create_fdt_one_aplic(void *fdt,
+     qemu_fdt_setprop_cell(fdt, name, "phandle", aplic_phandle);
+ }
+ 
+-static void create_fdt_pmu(void *fdt, TTAtlantisSoCState *s)
++static void create_fdt_pmu(void *fdt, RISCVHartArrayState *harts)
+ {
+     char pmu_name[] = "/pmu";
+-    RISCVCPU *hart = &s->cpus.harts[0];
++    RISCVCPU *hart = &harts->harts[0];
+ 
+     qemu_fdt_add_subnode(fdt, pmu_name);
+     qemu_fdt_setprop_string(fdt, pmu_name, "compatible", "riscv,pmu");
+     riscv_pmu_generate_fdt_node(fdt, hart->pmu_avail_ctrs, pmu_name);
+ }
+ 
+-static void create_fdt_cpu(void *fdt, TTAtlantisSoCState *s,
++static void create_fdt_cpu(void *fdt, RISCVHartArrayState *harts,
++                           const MemMapEntry *memmap,
+                            uint32_t aplic_s_phandle,
+                            uint32_t imsic_s_phandle)
+ {
+-    g_autofree uint32_t *intc_phandles = g_new0(uint32_t, s->cpus.num_harts);
+-    int num_harts = s->cpus.num_harts;
++    int num_harts = harts->num_harts;
++    g_autofree uint32_t *intc_phandles = g_new0(uint32_t, num_harts);
+ 
+     riscv_fdt_create_cpu_socket_subnode(fdt, TT_ACLINT_TIMEBASE_FREQ);
+ 
+-    riscv_create_fdt_socket_cpus(fdt, s->cpus.harts, 0, num_harts,
+-                                 s->cpus.hartid_base, &fdt_phandle,
++    riscv_create_fdt_socket_cpus(fdt, harts->harts, 0, num_harts,
++                                 harts->hartid_base, &fdt_phandle,
+                                  intc_phandles, false, false);
+ 
+-    create_fdt_aclint(fdt, s, intc_phandles);
++    create_fdt_aclint(fdt, harts, memmap, intc_phandles);
+ 
+     /* M-level IMSIC node */
+     uint32_t msi_m_phandle = next_phandle();
+-    create_fdt_one_imsic(fdt, &s->memmap[TT_ATL_MIMSIC], num_harts,
++    create_fdt_one_imsic(fdt, &memmap[TT_ATL_MIMSIC], num_harts,
+                          intc_phandles, msi_m_phandle,
+                          IRQ_M_EXT, TT_IMSIC_GUEST_BITS);
+ 
+     /* S-level IMSIC node */
+-    create_fdt_one_imsic(fdt, &s->memmap[TT_ATL_SIMSIC], num_harts,
++    create_fdt_one_imsic(fdt, &memmap[TT_ATL_SIMSIC], num_harts,
+                          intc_phandles, imsic_s_phandle,
+                          IRQ_S_EXT, TT_IMSIC_GUEST_BITS);
+ 
+     uint32_t aplic_m_phandle = next_phandle();
+ 
+     /* M-level APLIC node */
+-    create_fdt_one_aplic(fdt, &s->memmap[TT_ATL_MAPLIC],
++    create_fdt_one_aplic(fdt, &memmap[TT_ATL_MAPLIC],
+                          msi_m_phandle, intc_phandles,
+                          aplic_m_phandle, aplic_s_phandle,
+                          IRQ_M_EXT, num_harts);
+ 
+     /* S-level APLIC node */
+-    create_fdt_one_aplic(fdt, &s->memmap[TT_ATL_SAPLIC],
++    create_fdt_one_aplic(fdt, &memmap[TT_ATL_SAPLIC],
+                          imsic_s_phandle, intc_phandles,
+                          aplic_s_phandle, 0,
+                          IRQ_S_EXT, num_harts);
+@@ -333,10 +335,10 @@ static void create_fdt_i2c(void *fdt, const MemMapEntry *mem, uint32_t irq,
+     qemu_fdt_setprop_cell(fdt, name, "#size-cells", 0);
+ }
+ 
+-static void create_fdt_i2c_device(void *fdt, TTAtlantisSoCState *s, int bus,
+-                                  const char *compat, int addr)
++static void create_fdt_i2c_device(void *fdt, const MemMapEntry *memmap,
++                                  int bus, const char *compat, int addr)
+ {
+-    hwaddr base = s->memmap[TT_ATL_I2C0 + bus].base;
++    hwaddr base = memmap[TT_ATL_I2C0 + bus].base;
+     g_autofree char *name = g_strdup_printf("/soc/i2c@%"HWADDR_PRIX"/sensor@%x",
+                                             base, addr);
+ 
+@@ -365,7 +367,8 @@ static char *create_fdt_prcm(void *fdt, const MemMapEntry *mem,
+     return name;
+ }
+ 
+-static void finalize_fdt(void *fdt, TTAtlantisSoCState *s)
++static void finalize_fdt(void *fdt, RISCVHartArrayState *harts,
++                         const MemMapEntry *memmap, hwaddr ram_size)
+ {
+     uint32_t aplic_s_phandle = next_phandle();
+     uint32_t imsic_s_phandle = next_phandle();
+@@ -373,9 +376,9 @@ static void finalize_fdt(void *fdt, TTAtlantisSoCState *s)
+     uint32_t prcm_rcpu_phandle;
+     g_autofree char *rcpu_name, *hsio_name, *pcie_name, *mm_name;
+ 
+-    create_fdt_cpu(fdt, s, aplic_s_phandle, imsic_s_phandle);
++    create_fdt_cpu(fdt, harts, memmap, aplic_s_phandle, imsic_s_phandle);
+ 
+-    create_fdt_memory(fdt, s);
++    create_fdt_memory(fdt, memmap, ram_size);
+ 
+     /*
+      * We want to do this, but the Linux aplic driver was broken before v6.16
+@@ -386,7 +389,7 @@ static void finalize_fdt(void *fdt, TTAtlantisSoCState *s)
+ 
+     create_fdt_clk(fdt, "osc-24m", 24000000, osc_24m_phandle);
+ 
+-    rcpu_name = create_fdt_prcm(fdt, &s->memmap[TT_ATL_PRCM_RCPU], "rcpu");
++    rcpu_name = create_fdt_prcm(fdt, &memmap[TT_ATL_PRCM_RCPU], "rcpu");
+     prcm_rcpu_phandle = qemu_fdt_get_phandle(fdt, rcpu_name);
+     qemu_fdt_setprop_cells(fdt, rcpu_name, "clocks", osc_24m_phandle);
+     qemu_fdt_setprop_cells(fdt, rcpu_name, "assigned-clocks",
+@@ -396,33 +399,33 @@ static void finalize_fdt(void *fdt, TTAtlantisSoCState *s)
+                            prcm_rcpu_phandle, TT_ATL_CLK_RCPU_PLL,
+                            prcm_rcpu_phandle, TT_ATL_CLK_NOC_PLL);
+ 
+-    hsio_name = create_fdt_prcm(fdt, &s->memmap[TT_ATL_PRCM_HSIO], "hsio");
++    hsio_name = create_fdt_prcm(fdt, &memmap[TT_ATL_PRCM_HSIO], "hsio");
+     qemu_fdt_setprop_cells(fdt, hsio_name, "clocks", osc_24m_phandle,
+                            prcm_rcpu_phandle, TT_ATL_CLK_HSIO_PLL);
+ 
+-    pcie_name = create_fdt_prcm(fdt, &s->memmap[TT_ATL_PRCM_PCIE], "pcie");
++    pcie_name = create_fdt_prcm(fdt, &memmap[TT_ATL_PRCM_PCIE], "pcie");
+     qemu_fdt_setprop_cells(fdt, pcie_name, "clocks", osc_24m_phandle,
+                            prcm_rcpu_phandle, TT_ATL_CLK_PCIE_PLL);
+ 
+-    mm_name = create_fdt_prcm(fdt, &s->memmap[TT_ATL_PRCM_MM], "mm");
++    mm_name = create_fdt_prcm(fdt, &memmap[TT_ATL_PRCM_MM], "mm");
+     qemu_fdt_setprop_cells(fdt, mm_name, "clocks", osc_24m_phandle,
+                            prcm_rcpu_phandle, TT_ATL_CLK_MM_PLL0,
+                            prcm_rcpu_phandle, TT_ATL_CLK_MM_PLL1);
+ 
+-    create_fdt_uart(fdt, &s->memmap[TT_ATL_UART1], TT_ATL_UART1_IRQ,
++    create_fdt_uart(fdt, &memmap[TT_ATL_UART1], TT_ATL_UART1_IRQ,
+                     aplic_s_phandle, prcm_rcpu_phandle, TT_ATL_CLK_UART1_PCLK);
+ 
+     for (int i = 0; i < TT_ATL_NUM_I2C; i++) {
+         create_fdt_i2c(fdt,
+-                       &s->memmap[TT_ATL_I2C0 + i],
++                       &memmap[TT_ATL_I2C0 + i],
+                        TT_ATL_I2C0_IRQ + i,
+                        aplic_s_phandle, prcm_rcpu_phandle,
+                        TT_ATL_CLK_I2C0_PCLK + i);
+     }
+ 
+     /* I2C peripherals: qemu specific */
+-    create_fdt_i2c_device(fdt, s, 0, "dallas,ds1338", 0x6f);
+-    create_fdt_i2c_device(fdt, s, 4, "ti,tmp105", 0x48);
++    create_fdt_i2c_device(fdt, memmap, 0, "dallas,ds1338", 0x6f);
++    create_fdt_i2c_device(fdt, memmap, 4, "ti,tmp105", 0x48);
+ }
+ 
+ static void create_fdt(TTAtlantisState *ams)
+@@ -439,7 +442,7 @@ static void create_fdt(TTAtlantisState *ams)
+ 
+     qemu_fdt_add_subnode(ms->fdt, "/aliases");
+ 
+-    create_fdt_pmu(ms->fdt, &ams->soc);
++    create_fdt_pmu(ms->fdt, &ams->soc.cpus);
+ }
+ 
+ static void load_fdt(TTAtlantisState *ams)
+@@ -470,7 +473,7 @@ static void load_fdt(TTAtlantisState *ams)
+         g_strfreev(node_path);
+     }
+ 
+-    create_fdt_memory(ms->fdt, &ams->soc);
++    create_fdt_memory(ms->fdt, ams->soc.memmap, ms->ram_size);
+ }
+ 
+ static void tt_atlantis_machine_done(Notifier *n, void *data)
+@@ -491,7 +494,7 @@ static void tt_atlantis_machine_done(Notifier *n, void *data)
+      * dynamic sysbus devices. Our FDT needs to be finalized.
+      */
+     if (machine->dtb == NULL) {
+-        finalize_fdt(machine->fdt, s);
++        finalize_fdt(machine->fdt, &s->cpus, s->memmap, machine->ram_size);
+     }
+ 
+     mem_size = machine->ram_size;
+-- 
+2.43.0
+
 
