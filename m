@@ -1,98 +1,107 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2FAD5606A31A
-	for <qemu-riscv@archiver.kernel.org>; Wed, 28 Oct 2026 06:32:03 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 41EFF606A31A
+	for <qemu-riscv@archiver.kernel.org>; Wed, 28 Oct 2026 06:36:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=Wzx8DG+I
+	dkim=pass (2048-bit key, unprotected) header.d=sifive.com header.i=@sifive.com header.a=rsa-sha256 header.s=google header.b=Aa+ku050
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xLxC1-0001Gl-2P; Wed, 28 Oct 2026 02:31:25 -0400
+	id 1xLxH3-0003MK-OW; Wed, 28 Oct 2026 02:36:39 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xLxBh-0001EZ-Vs
- for qemu-riscv@nongnu.org; Wed, 28 Oct 2026 02:31:06 -0400
-Received: from mail-dl1-x1233.google.com ([2607:f8b0:4864:20::1233])
+ (Exim 4.90_1) (envelope-from <jay.chang@sifive.com>)
+ id 1xLxGz-0003Ls-OJ
+ for qemu-riscv@nongnu.org; Wed, 28 Oct 2026 02:36:34 -0400
+Received: from mail-ed1-x52c.google.com ([2a00:1450:4864:20::52c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xLxBg-0004pt-06
- for qemu-riscv@nongnu.org; Wed, 28 Oct 2026 02:31:05 -0400
-Received: by mail-dl1-x1233.google.com with SMTP id
- a92af1059eb24-1a2af4c8d00so1097531c88.0
- for <qemu-riscv@nongnu.org>; Tue, 27 Oct 2026 23:31:03 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <jay.chang@sifive.com>)
+ id 1xLxGy-0005NZ-24
+ for qemu-riscv@nongnu.org; Wed, 28 Oct 2026 02:36:33 -0400
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-6ae305e3bd9so1237775a12.0
+ for <qemu-riscv@nongnu.org>; Tue, 27 Oct 2026 23:36:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1793169062; x=1793773862; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=9wBsuhzBS1+hdqxSnx58WpDiwWoNuTMy5FSLro+Gmf4=;
- b=Wzx8DG+IyournoVbRwKbRQXoqTziD3B+eOVbn8tK96JHZvRyGk4ZHguO0exbpLs6sL
- pqghYP4QhLRzpclRyAEEA3+bBXeh6WRbXapP6cx9bAswwKLqLcKXqfqI2gHhgWgGL+/x
- opF+B+GynVM0FspkPp2Pzc+ginPGf6KjTjg5V8yAcvfNmIhNVhh8/cxKTuY48fmMQfDD
- XetYiFDWDNmBBOOnellwd0qgt1TAOnibpRQmn7nwla411pnnwCY18o9R4YpUHLX41EWE
- vYIARKKF++oXgfbStQklSJX0nMja2dQOL/VFoHzRCtpPh85/tR0VwKOuZjj8e+taDDTC
- MGCQ==
+ d=sifive.com; s=google; t=1793169390; x=1793774190; darn=nongnu.org;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=c+hxXBbSiym1hmLWpsahHoG7iDEd+4O/rtaXuQe6iPI=;
+ b=Aa+ku050+Ol3CJrRdaQjnEoqA/LBMSQncfnA8qZHiywVw9XRwkxtAYMsAo8Vfgx7y9
+ WidUx8KVj12ewHYv0GdQf7em2zoLSEwc7nGNyE4rKhLA/dz3LUfYiNiyGYm+ahxJCohY
+ /pv4vb7kkAZaUV4qY8OSNxtUjIrEVFPcUtB9OISNJFwLVLCyrvyBmOl78pqnteTTesvf
+ +gFicxOwvG8xRuDinggvs1fTR6XLFdfCPVE6WbMV6zZmKMcy1bShrkKjmwVtF/cYEcew
+ nYPeZYldUxijlIH5iaI2cOlHl2uWrDw3mQRg2EK+r+KhvhvB6aBoi3u5lW7F5iumSkqw
+ r4PQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793169062; x=1793773862;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=9wBsuhzBS1+hdqxSnx58WpDiwWoNuTMy5FSLro+Gmf4=;
- b=ouGfaNvV5TlhCq5l+sL0C6f4sQjB+TIPAb/oWOaH/DQ1kW5xTIUggVN6D3MnhHGGJb
- 9LayaK3En/C2tARNOwVzUdcaAzqFaSf9quxqE7nTeV06P854D/uOhBzt5nIxMGIxduMr
- 5ceklcQMLDlJtbdM6fG6FnCc0seU+CNdZKZbOvp98GlCbJ9/Y1cXbX5UaoQaRFk6GFWK
- VsBZK0s1ugJlMPP96nnXcm1CgEIQMjd/iWsVUwaanMUKlv51tTnMQflqJ+rMe1jhw/bb
- MC42b/zaBE2ztXZFCIthDPbe3Z1xaCgAypCHvKogpb6QR5L3wkzIFkUhHd7fh5bnSBEv
- r+kg==
+ d=1e100.net; s=20260707; t=1793169390; x=1793774190;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=c+hxXBbSiym1hmLWpsahHoG7iDEd+4O/rtaXuQe6iPI=;
+ b=idgQgj413AyVM2dP/hTEuUG2LEjd4Znut5ttcip0zlMRq3weA5uTwTq42uvwGi51IW
+ gzehvLUc6QEwOp+BGeBNrhIiMTB5FjJTpYMq+Kl2tXXJyKWNChEHuO14zr7+5/sXhBHp
+ ElXvfv1XQfzNtRVSqR3F41Gsh/iXsjEX9atRPGAonTbI7+AAHnopamgShxkbDrB9Chn+
+ WRFl6KriLOVfvaUyCy9SNBYvFdkGNocK7lAwqNVYtyexPn/GPBx/OTJ9ac/VHSUldfD1
+ 8urvcZelcNTelEnZycQjFUt/1ASl72LxDRqw4u+V2VCHz2XIWPvdP/lEU/1nIHWHKFJg
+ LN+Q==
 X-Forwarded-Encrypted: i=1;
- AKwUvBzQbncrZQXfuXzNVzq2t0Vq6OIkzE3EuFDkdHZC3l+Uk15ZLo5hsWDZaHtDD6bEzQAhrnzNkyOpILJo@nongnu.org
-X-Gm-Message-State: AFq9FYK3DoppwM4GZ+rIUNzsP1ouf8ieb7h+4rhAmChmq1O1/wUdWYD0
- 2WN63xXhEup4vWcuJv41d7CumZ+l9LqnlrWO90fTVSGq3MxCvvQYKFZ2
-X-Gm-Gg: AYBFou2pwAK2Mat9xUag6cH1+Ym5meFHE4qC5ItPPgiHZwce8p7htAdcs9kh3srZT+F
- b7dNRUCCD+ZQwjKEDWQFgqpFsQ7/QI4XoVho8mWpYSX9mhfoPr7V4xJgPL558p7NrWzFsa3r31P
- enty+BQOteYm1wCDvZCEJroIZ2QwEdwdkVS7OfPfeLnNmOJaPfy3J+RSGoKslREoqLH/2iXYokt
- JBkEyWR0MLicfWi6HfJefmSbj018as3wMkU60xXTP01qDLx+RMnJdjsNAS42DXYL6kU4tMMTFPi
- 7qh7BIxXyXaZXBjP1uNq0LBmQ/3b5ThJDnZXUvBzhSIfOvYfB8NV3vK1+FSNiqBb/Mv93xNyk75
- S0j9CnE/wnFTBbgmlzlEt/XB2hB+CGA+UFNZ+3SbnRdrC5ZR5//zb/z4KPnDHyrlP7cFTLhlcNx
- OgPKAIZu7MA3jDi/Ly0n4OnHr1BsLAK+TY6CB31Ix1lWcbenxudSnrmCTqZPVlCWPnj5mVn0fB3
- rklKbAIWiQTsgXdhiZpfBOCVcSDEIX8PHumQ3mOJZ8z18+hZY7ua6DVkKHCbNqdwGaMnA/fRI+L
- nPHcs8bn+NIBFGEZpHiE4oaPgNFs9GHsSEFGOp3/dss1zZ9NWw==
-X-Received: by 2002:a05:701b:4511:20b0:149:1feb:6d9d with SMTP id
- a92af1059eb24-1a6cc819e39mr2147654c88.19.1793169062293; 
- Tue, 27 Oct 2026 23:31:02 -0700 (PDT)
-Received: from DESKTOP-Q716RM7 ([103.94.185.75])
- by smtp.googlemail.com with ESMTPSA id
- a92af1059eb24-1a75e5c6d4fsm4512584c88.14.2026.10.27.23.30.58
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 27 Oct 2026 23:31:01 -0700 (PDT)
-From: Yonggang Luo <luoyonggang@gmail.com>
-To: qemu-devel@nongnu.org
-Cc: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
- Chao Liu <chao.liu@processmission.com>,
- Richard Henderson <richard.henderson@linaro.org>, qemu-riscv@nongnu.org,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Paolo Bonzini <pbonzini@redhat.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Philippe Mathieu-Daude <philmd@mailo.com>, Weiwei Li <liwei1518@gmail.com>
-Subject: [PATCH v2 1/3] accel: register CPU parent for each target
-Date: Wed, 28 Oct 2026 14:30:46 +0800
-Message-ID: <20261028063049.2530-2-luoyonggang@gmail.com>
-X-Mailer: git-send-email 2.55.0.windows.3
-In-Reply-To: <20261028063049.2530-1-luoyonggang@gmail.com>
-References: <20261028063049.2530-1-luoyonggang@gmail.com>
+ AKwUvBxCvKjkUHHl3xecnQzAkqz8p5VZxstETRFYsfPQuqXQXsjgtcd/cyf8ZaLVZM1AfPWBaqclz9Qd8ABo@nongnu.org
+X-Gm-Message-State: AFq9FYI2kiPcXOuGFBQ1pbR5/fppZXivJtVVSbC7nG46lZ08SNzDifud
+ 3NQA4A25uT6i1Dv0uFlgenyDbbenPb/F7IycIIyCP71mKJiizR+rH8KjqP0J9sSYrwX++LWIHue
+ qqbAcy4KBxKLOGpr49MIeDoaWr49hNHS3BysXFLkAueTqLqGeKksYRJUZ6KfyFCl82FwM83pqIx
+ iK1bnjCQ5xeK6YxN2yqpJfysahMxwxY+NJnv9gJLaiLGY=
+X-Gm-Gg: AYBFou0tR2yHwlAaEDO1AMButf+da1WvFVDmgqGQG3yEWFpO1NESSUCgHlXT7N6A4+2
+ IbNYo8rLQlt3wL/r8bwNpnK3CHm0xShRIVSwkq+PSKgGz2sLnopSCtDAo+ktrFH44NQMNe+Unm5
+ Wa3YCy9EOjLTLF4JSTg2NLrUETLbhZAecdqPle7UiHofwM+kvLaWX1UnOuVP54P8V8+jVQHpl28
+ js60D/1pcnrKSGbd9Jvaank8reEU77WEgovJSG3XZ41Q/LeaPF/vz7EheaOivw2Xzj44X+kFV3I
+ HiR/ecskhHo1yn8edDkPgrawur31Kl6svh9FM1U6bRMMXNoo6qQSnSHXfueHBeB2M5gEaF2daTD
+ DBaHzzrZ+aEv0I4q6UCiXIATgcmjK1p+MSjmS1FnnojV7Paxtc3lSbTHsgNF1hAjZQDDAXSaWwe
+ IeSbJ1ENywatlUbMr9tr2e16HTAuSsXxbh2y32/Gm+Km/2B/pMN0HgJhGjz/zOfXNX5DmSdWxkY
+ 7Nj8rETUYVVCZfom1jDzVI7UzCTuZxAgVmOh9G8F+dciAMD5JArIaZjoSGbgwxLd74oq1ZivxFV
+ neO3TRqumY9Fu/QFKaFAUmOUcrSwODtjFrTJDeIrLXAx1HRJfrM7hu6GHy/Q/S65F3c=
+X-Received: by 2002:a05:6402:e87:b0:6b1:ef5a:6719 with SMTP id
+ 4fb4d7f45d1cf-6b49cb527cemr680815a12.10.1793169390231; 
+ Tue, 27 Oct 2026 23:36:30 -0700 (PDT)
+Received: from mail-ej1-f47.google.com (mail-ej1-f47.google.com.
+ [209.85.218.47]) by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-6b496435babsm1023069a12.28.2026.10.27.23.36.27
+ for <qemu-riscv@nongnu.org>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 27 Oct 2026 23:36:28 -0700 (PDT)
+Received: by mail-ej1-f47.google.com with SMTP id
+ a640c23a62f3a-c40e02b2ebaso86915066b.1
+ for <qemu-riscv@nongnu.org>; Tue, 27 Oct 2026 23:36:27 -0700 (PDT)
+X-Forwarded-Encrypted: i=1;
+ AKwUvBzdKQrON6TfIAryo6YS7eznRcb77YnqYzcaLMahp23WNWOIn08L5OflsohRoPNhLlMuox4bzXRVif0w@nongnu.org
+X-Received: by 2002:a17:907:2d25:b0:c33:923b:ad66 with SMTP id
+ a640c23a62f3a-c49bdfdcf78mr100335966b.43.1793169386671; Tue, 27 Oct 2026
+ 23:36:26 -0700 (PDT)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1233;
- envelope-from=luoyonggang@gmail.com; helo=mail-dl1-x1233.google.com
+References: <20261021231346.2452179-1-daniel.barboza@oss.qualcomm.com>
+ <20261021231346.2452179-15-daniel.barboza@oss.qualcomm.com>
+In-Reply-To: <20261021231346.2452179-15-daniel.barboza@oss.qualcomm.com>
+From: Jay Chang <jay.chang@sifive.com>
+Date: Wed, 28 Oct 2026 14:36:14 +0800
+X-Gmail-Original-Message-ID: <CAMXXpfZmyLuHE+h1kMzFOSy2ywmqGHa2LF0Ez4HyayDH-TyQYA@mail.gmail.com>
+X-Gm-Features: AclHuK-lhTIQ5AjulPAT5Y0i6U2SfIh1QB5nEWi8f2CqFlNO1ES8lxUOtYVaW7k
+Message-ID: <CAMXXpfZmyLuHE+h1kMzFOSy2ywmqGHa2LF0Ez4HyayDH-TyQYA@mail.gmail.com>
+Subject: Re: [PATCH v4 14/18] hw/riscv, target/riscv: send resync updiscon
+ trace packets
+To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
+ chao.liu@processmission.com, antikostya2@gmail.com, 
+ Palmer Dabbelt <palmer@dabbelt.com>, frank.chang@sifive.com
+Content-Type: multipart/alternative; boundary="000000000000509534065ee0c898"
+Received-SPF: pass client-ip=2a00:1450:4864:20::52c;
+ envelope-from=jay.chang@sifive.com; helo=mail-ed1-x52c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
@@ -106,174 +115,49 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT autolearn=ham
+X-Spam-Status: No, score=-2.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,HTML_MESSAGE,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS autolearn=no
 	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-A multi-target binary registers one accel-$cpu_type parent per linked
-target. accel-target.c is compiled once per target and calls
-accel_register_cpu_type() with that target's target_arch and
-CPU_RESOLVING_TYPE. A bool array keyed by SysEmuTarget records which
-arch already registered. Targets that share one CPU_RESOLVING_TYPE
-reuse the parent from the earlier arch.
+--000000000000509534065ee0c898
+Content-Type: text/plain; charset="UTF-8"
 
-test-multi-target checks that each target's accel parent exists after
-QOM init.
+>
+> +void helper_trace_updiscon(CPURISCVState *env)
+> +{
+> +    RISCVCPU *cpu = env_archcpu(env);
+> +    TraceEncoder *te = TRACE_ENCODER(cpu->trencoder);
+> +
+> +    te->updiscon_pending = true;
+> +    te->trace_next_insn = true;
+>
+Could we use trencoder_report_updiscon() here instead of setting
+updiscon_pending and trace_next_insn directly?
 
-Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
----
- accel/accel-common.c           | 31 ++++++++++++++++++++++++++++---
- accel/accel-internal.h         |  2 ++
- accel/accel-target.c           | 21 +++++++++++++++++++++
- accel/meson.build              |  1 +
- tests/unit/test-multi-target.c | 22 ++++++++++++++++++++++
- 5 files changed, 74 insertions(+), 3 deletions(-)
- create mode 100644 accel/accel-target.c
+Thanks
+Jay Chang
 
-diff --git a/accel/accel-common.c b/accel/accel-common.c
-index 00a400243f0..0d04b8c5749 100644
---- a/accel/accel-common.c
-+++ b/accel/accel-common.c
-@@ -130,9 +130,9 @@ static const TypeInfo accel_types[] = {
- 
- DEFINE_TYPES(accel_types)
- 
--static void register_accel_target_type(void)
-+static void register_accel_target_type(const char *cpu_type)
- {
--    g_autofree char *name = g_strconcat("accel-", target_cpu_type(), NULL);
-+    g_autofree char *name = g_strconcat("accel-", cpu_type, NULL);
-     const TypeInfo accel_cpu_type = {
-         .name = name,
-         .parent = TYPE_OBJECT,
-@@ -143,4 +143,29 @@ static void register_accel_target_type(void)
-     type_register_static(&accel_cpu_type);
- }
- 
--type_init(register_accel_target_type);
-+void accel_register_cpu_type(SysEmuTarget arch, const char *cpu_type)
-+{
-+    static bool accel_cpu_registered[SYS_EMU_TARGET__MAX];
-+    static const char *accel_cpu_types[SYS_EMU_TARGET__MAX];
-+
-+    if (accel_cpu_registered[arch]) {
-+        return;
-+    }
-+
-+    /*
-+     * Keyed by target_arch. Targets that share CPU_RESOLVING_TYPE already
-+     * have a parent from an earlier target_arch.
-+     */
-+    for (int i = 0; i < SYS_EMU_TARGET__MAX; i++) {
-+        if (accel_cpu_registered[i] &&
-+            g_str_equal(accel_cpu_types[i], cpu_type)) {
-+            accel_cpu_registered[arch] = true;
-+            accel_cpu_types[arch] = cpu_type;
-+            return;
-+        }
-+    }
-+
-+    accel_cpu_registered[arch] = true;
-+    accel_cpu_types[arch] = cpu_type;
-+    register_accel_target_type(cpu_type);
-+}
-diff --git a/accel/accel-internal.h b/accel/accel-internal.h
-index d3a4422cbf7..736b07c5f08 100644
---- a/accel/accel-internal.h
-+++ b/accel/accel-internal.h
-@@ -11,7 +11,9 @@
- #define ACCEL_INTERNAL_H
- 
- #include "qemu/accel.h"
-+#include "qapi/qapi-types-machine.h"
- 
- void accel_init_ops_interfaces(AccelClass *ac);
-+void accel_register_cpu_type(SysEmuTarget arch, const char *cpu_type);
- 
- #endif /* ACCEL_SYSTEM_H */
-diff --git a/accel/accel-target.c b/accel/accel-target.c
-new file mode 100644
-index 00000000000..202238035d5
---- /dev/null
-+++ b/accel/accel-target.c
-@@ -0,0 +1,21 @@
-+/*
-+ * Per-target accelerator CPU parent registration.
-+ *
-+ * Compiled once per target. Must not define a global symbol, so each
-+ * copy can be linked into one binary.
-+ *
-+ * SPDX-License-Identifier: MIT
-+ */
-+
-+#include "qemu/osdep.h"
-+#include "qemu/module.h"
-+#include "accel/accel-cpu-target.h"
-+#include "accel-internal.h"
-+
-+static void register_accel_target_type(void)
-+{
-+    accel_register_cpu_type(glue(SYS_EMU_TARGET_, TARGET_ARCH_VARIANT),
-+                            CPU_RESOLVING_TYPE);
-+}
-+
-+type_init(register_accel_target_type);
-diff --git a/accel/meson.build b/accel/meson.build
-index 1b5b37e3097..7da12b9741f 100644
---- a/accel/meson.build
-+++ b/accel/meson.build
-@@ -1,4 +1,5 @@
- common_ss.add(files('accel-common.c'))
-+specific_ss.add(files('accel-target.c'))
- system_ss.add(files('accel-system.c', 'accel-blocker.c', 'accel-qmp.c', 'accel-irq.c'))
- user_ss.add(files('accel-user.c'))
- 
-diff --git a/tests/unit/test-multi-target.c b/tests/unit/test-multi-target.c
-index c7559827a08..de75d6e9d35 100644
---- a/tests/unit/test-multi-target.c
-+++ b/tests/unit/test-multi-target.c
-@@ -51,6 +51,24 @@ static void test_qom_types_are_unique(const void *data)
-     object_class_get_list("", false);
- }
- 
-+static void test_accel_cpu_parent_per_target(const void *data)
-+{
-+    const TargetInfo *ti = data;
-+    g_autofree char *name = NULL;
-+
-+    if (!g_test_subprocess()) {
-+        g_test_trap_subprocess(NULL, 0, G_TEST_SUBPROCESS_INHERIT_STDERR);
-+        g_test_trap_assert_passed();
-+        return;
-+    }
-+
-+    target_info_qom_set_target_info(ti);
-+    module_call_init(MODULE_INIT_QOM);
-+
-+    name = g_strconcat("accel-", ti->cpu_type, NULL);
-+    g_assert_nonnull(object_class_by_name(name));
-+}
-+
- int main(int argc, char **argv)
- {
-     g_test_init(&argc, &argv, NULL);
-@@ -64,7 +82,11 @@ int main(int argc, char **argv)
-         g_autofree char *path =
-             g_strdup_printf("/multi-targets/qom-types-are-unique/%s",
-                             ti->target_name);
-+        g_autofree char *accel_path =
-+            g_strdup_printf("/multi-targets/accel-cpu-parent-per-target/%s",
-+                            ti->target_name);
-         g_test_add_data_func(path, ti, test_qom_types_are_unique);
-+        g_test_add_data_func(accel_path, ti, test_accel_cpu_parent_per_target);
-     }
- 
-     return g_test_run();
--- 
-2.55.0.windows.3
+--000000000000509534065ee0c898
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
+<div dir=3D"ltr"><div class=3D"gmail_quote gmail_quote_container"><blockquo=
+te class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px =
+solid rgb(204,204,204);padding-left:1ex">+void helper_trace_updiscon(CPURIS=
+CVState *env)<br>
++{<br>
++=C2=A0 =C2=A0 RISCVCPU *cpu =3D env_archcpu(env);<br>
++=C2=A0 =C2=A0 TraceEncoder *te =3D TRACE_ENCODER(cpu-&gt;trencoder);<br>
++<br>
++=C2=A0 =C2=A0 te-&gt;updiscon_pending =3D true;<br>
++=C2=A0 =C2=A0 te-&gt;trace_next_insn =3D true;<br></blockquote><div><p cla=
+ss=3D"gmail-wnfdnt10 gmail-_1ibi0s3fd gmail-_1ibi0s3ce gmail-_1ibi0s3eg" di=
+r=3D"auto">Could we use <code>trencoder_report_updiscon()</code> here inste=
+ad of setting <code>updiscon_pending</code> and <code>trace_next_insn</code=
+> directly?=C2=A0<br><br>Thanks<br>Jay Chang</p></div></div></div>
+
+--000000000000509534065ee0c898--
 
