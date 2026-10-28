@@ -1,92 +1,113 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E31B7606A31A
-	for <qemu-riscv@archiver.kernel.org>; Wed, 28 Oct 2026 20:02:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 97E0F606A31C
+	for <qemu-riscv@archiver.kernel.org>; Wed, 28 Oct 2026 20:06:40 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=theorem-dev.20260707.gappssmtp.com header.i=@theorem-dev.20260707.gappssmtp.com header.a=rsa-sha256 header.s=20260707 header.b=Xch21V/9
+	dkim=pass (2048-bit key, unprotected) header.d=theorem-dev.20260707.gappssmtp.com header.i=@theorem-dev.20260707.gappssmtp.com header.a=rsa-sha256 header.s=20260707 header.b=Y2aB8mNJ
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xM9qX-0001cD-4V; Wed, 28 Oct 2026 16:02:05 -0400
+	id 1xM9uY-00031M-Pm; Wed, 28 Oct 2026 16:06:14 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <tewaro@theorem.dev>)
- id 1xM9q7-0001YC-RR
- for qemu-riscv@nongnu.org; Wed, 28 Oct 2026 16:01:45 -0400
-Received: from mail-dl1-x1234.google.com ([2607:f8b0:4864:20::1234])
+ id 1xM9uH-000301-5W
+ for qemu-riscv@nongnu.org; Wed, 28 Oct 2026 16:06:00 -0400
+Received: from mail-ej1-x635.google.com ([2a00:1450:4864:20::635])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <tewaro@theorem.dev>)
- id 1xM9q6-0000pb-1j
- for qemu-riscv@nongnu.org; Wed, 28 Oct 2026 16:01:39 -0400
-Received: by mail-dl1-x1234.google.com with SMTP id
- a92af1059eb24-170135e43c7so340416c88.0
- for <qemu-riscv@nongnu.org>; Wed, 28 Oct 2026 13:01:36 -0700 (PDT)
+ id 1xM9uD-0001Cf-Ul
+ for qemu-riscv@nongnu.org; Wed, 28 Oct 2026 16:05:56 -0400
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-c413dea9ca6so237140966b.2
+ for <qemu-riscv@nongnu.org>; Wed, 28 Oct 2026 13:05:53 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1793217952; cv=none;
+ d=google.com; s=arc-20260327;
+ b=PWgjlhY9LhH+N7fwDEmonwPjdtsLE4B5T4pFIxgSfpevhz19ZuXSjdnX8gKHVwmGgf
+ sFDLmreJohw+nBY9XeVsK4OREe81dg9HjDr9YOAtBhp66X4kk8KquU6q5jW4h2dF0UaC
+ d1y6bexr12sOdJ30ITieLaIftcm1YdOcUM8XPoOuJ/HFdpgWnZR2t03d4eANsuTeIEvk
+ YuUqJfqJmy/V+XH59spuwMQB0GNlSf39koWQH8gzoTmwu5T71Smpr3FJ4yQc573qHoZj
+ SuDt5AhH/SyPAnDH6QmKsIjQ0dVckTfx7SbgvTuv5gw1ZIX0kRsFOudALnDfxNXnA+gL
+ tU3A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=XY4ZWQhg/N0GvvBFsbOzrHsQFWaTfAkGUplEPCBIcKw=;
+ fh=VXysavDdqJgRPrgbIVUrdoOSSEEnlKatn4Vbav/5wWc=;
+ b=VguU4hTzGAMS6R0gmpH7VJ184vHpHxvQnTZYLadGIJTwVTCA5xKgEmKvpJIgan7QIl
+ KJG7e4o0y0fTurKKhTZmL4I+0aiu2FuDO/GmHbUSqN0kExJr0/WtaC+4MxvNC6TFY7SI
+ ArH+AQ1rNkUS6yBiChGgp7ibnvcTGmOdUwD0TKbANfgjymsDO1VeySrTVFZK9a6Df4hX
+ VAJxdvXjJYKaBOWK2rX89xKBc8fpSGJjSO7NQSi/dfOuvSxbYmFJvJ11MBU/0PIuyO4T
+ Pfv5FQtJEiOJVzwRew6vS+RD7C1dKaRn0wWVH6h9OeBcbbOk6p8TagoEf3tHCsVXepn1
+ fMrw==; darn=nongnu.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=theorem-dev.20260707.gappssmtp.com; s=20260707; t=1793217696; x=1793822496;
+ d=theorem-dev.20260707.gappssmtp.com; s=20260707; t=1793217952; x=1793822752;
  darn=nongnu.org; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=iqnUw9FLhJP2iszbEYV3XU7KkM54lm1JBi81oyVkTv8=;
- b=Xch21V/9L392DTMI4gTOWRYwLJeBpLOFGXOyk7E8xz1bJxcdoZdX0hk91vhaDxRnx0
- JeK6vB1TzhQCep3CrYLvBDaVNWk0cnBAxj4vQpbOBulxrxxL3/P5sWCltwifn040ae28
- wc3IyNP3lmtiubtxpJdMSOY5cflbyj4qa1SdxkP1juUIELU/6Aujj0s3fv/z4xlvuqFN
- 4Fe2pDYy/nnCyETzh+5L7HVZ/ZpjbKqlDDsxacHkoDDBZi6vn1Kavq+rOgsn5SKDt1zM
- l0jW09zzeg6odLSbwE7jYO6oEJe/Dbb7BmySgurqYt+nzTr9EBE70eRj8oLs8fEjHR6S
- IPpA==
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=XY4ZWQhg/N0GvvBFsbOzrHsQFWaTfAkGUplEPCBIcKw=;
+ b=Y2aB8mNJyjFLbLATplormIOswHF+9Eyq/lslbaew1TJ+p0nCTIZDoqQcwg434dUhvN
+ 3O5iwTtgrKVVZ7ey+A48BWYeXJKRlRwmmjoiUnLQ076ss0ro+cwOM1g2ykxoqwbXiu9m
+ g5KHuu58DjDslLknjc1OKEn7825T+x2URpOx7OXUS2WZH8gLFwtIvADJmyn778VOJWgm
+ TCpnrSOwwXXe32DAzmdWmXbMBCslmXd1nc7/lCkUrw3J3sEw78aG5G1ioZ6tqg93CoNa
+ ylbsBEVmpjCSE6x/4G/Y9/1O/Z16b9Q/evqGW9C4bbmLhIbCLpbi8JR7UAftfsnP3lau
+ /Ckw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793217696; x=1793822496;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=iqnUw9FLhJP2iszbEYV3XU7KkM54lm1JBi81oyVkTv8=;
- b=Xc5jRTGazy/l+VlJal5qVzWtjz/HT0tjUDsPgr4HP/OFouibkAaOtSe3MIuDlU7Zh1
- tOLdMDsG4lDPi2lw9fVLHry5hRYK2J6JEEJy+OoDeQUYppCK0fMgxD5gjoeyKJSNLuV5
- Wrue89/0vfNxI/nfhESkK/9fbgXRq0gHuSpipzw2K6Xo5wIJf6vLq++wx2uGltWCbu9s
- 0lHq4ubCYbx2DP0YYJLhYKcTexmrCTU5AfKhr9KXUlZxVkXUXW14N3CcuP8+k+MhC09e
- Jzz3jKrYmhVoPRFXqvBeLs31LbNTVc0ognbT7pvPgPrpUBXCvPDXN8ka/bjIgDYTq1It
- 08mQ==
-X-Gm-Message-State: AFq9FYKcLAgVIiQa8RZlcKZXV5FgVpZ0g+FbFGBOKeQWyP5ezEWsaGgR
- JrNCAGYjbygw11NGUGYwySQyNQrhMnHPgWg6y4cusd1oe1Ap530LNWPoUQ9DPKdcOU0=
-X-Gm-Gg: AYBFou0nfG7a+N0ngW512pUzuhZZPMimC4xQ1cUiDSpCYrsxI5AhTJnFTP/1DcPS2uu
- P8hgafuPzHhe2Ga0am8K5adNnTT20WuH/DXuFG3hAaI8cDfk/WTN1olvuExrS5UX3m05aqgeDi2
- xd1j+DyPUkDlf7ORk1IZbY4caplWLYfv0UC2ZcAHAuzDeUMrgTJ6fLvXiYZbjmCyzc3Te46vY85
- M4CxG8pZGrlIZE2Bjg9KAQpvGMvRR5HxRPegYt8jkDwSKu8SjR28BUvlO6s6VuO67EP8Y132SQw
- l8ea+QpnBBcykrfR6wxIqD676THPDyCL6uuyOJ/x2QUIiMLU26F8CuR5b6I0YlgWkdrJ2BnmWQE
- FVpTJP4bEKunwDpfICwZNBgtl6jQo/nyQz0re3OtcThjp6n4Tcj5aR5LoOjMs81H/O32iL7N5eM
- lj4iKunMgqzDhCi6vPMfyurqZi1Byp9Gx/gsS0KDAv7qzp4L+hGGZoUqhbXpSC6KfTez2Uk9qBo
- 2jelDgDMvQVAABrbL5AhqScxgGmADaK6xu6M9dd55fMBrVtBD0ClCSpvTwnceaEliXn2BRpW2XB
- HzBalu1ggiBCrzBXOOvhQmQ7n3GwK/D/HMIIuu0cORG/cLiF5BbOrXOdegSBPw==
-X-Received: by 2002:a05:701b:450b:20b0:1a7:216d:157c with SMTP id
- a92af1059eb24-1a7216d1658mr4085256c88.34.1793217695570; 
- Wed, 28 Oct 2026 13:01:35 -0700 (PDT)
-Received: from tewaros-mbp.localdomain ([209.249.241.138])
- by smtp.gmail.com with ESMTPSA id
- a92af1059eb24-1a75a5594efsm10537589c88.2.2026.10.28.13.01.33
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 Oct 2026 13:01:34 -0700 (PDT)
-From: tewaro <tewaro@theorem.dev>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
- liwei1518@gmail.com, daniel.barboza@oss.qualcomm.com,
- zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
- disclosures@theorem.dev, tewaro@tewaro.org, tewaro <tewaro@theorem.dev>
-Subject: [PATCH v2 0/2] target/riscv: report the no-PMP-rule fault on the S/U
- fetch rather than on mret
-Date: Wed, 28 Oct 2026 13:01:21 -0700
-Message-ID: <cover.1793217528.git.tewaro@theorem.dev>
-X-Mailer: git-send-email 2.54.0
+ d=1e100.net; s=20260707; t=1793217952; x=1793822752;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=XY4ZWQhg/N0GvvBFsbOzrHsQFWaTfAkGUplEPCBIcKw=;
+ b=uV6LeTut0ai7lbnNeXl3wCtNT3WYUAp1jLgR0v4M41pfQUsV3hGS7fJvRzFSidSFpt
+ 1Klt7nEhtX0fRjzY2A0Ct/KFUsnis3Ds3q0De9t8DaA/ny5GsgRM9Yly07UZVMYkDH0y
+ DzUAcCCyZ/lrtpifjTUdCLCU6HlrtWBX1PX17SVjXA17DU5J1hn6UqOmQs34m7wc4xJ6
+ MQj6BDC2fEMolap+VhAZFjIGeiovvJsts45tzGW1UpDV8b0Vn9UUc9oodVJFRL8WGz04
+ 7hLxc67NLPzSuUdTfzx4gkJldvoUQnl2f/f21UxUqZmrHEzJCeKbCCnQCOF+K4KUDGlk
+ 3sEA==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBzBKl2fAdGmRKz2Hr8JMo9q8Xpr+Rq2fs16mNY7pZ6zD8a0Gnzb5v0UZDEQU1mGMpzKrMYpqyPy4Nyc@nongnu.org
+X-Gm-Message-State: AFq9FYKwY9eP15anwViwS7fioW7rYBfdnzRQIX4zabzgR1b6STUeegBf
+ u7OnHbNOG9dWcNUgEGdfG75s/n0m5tsFb8RxqVuUQzEpYdgMw1+eFp2p4HUrm9f21chCxkrXxSa
+ AsxDv2FEmrsLgxgx+UVY7DUe5PeEVB4/zGave0tzxgQ==
+X-Gm-Gg: AYBFou0/Q8zspzL5EN0m/5Yy7Sm1Ufms+GpopTLSIWJgoLFUwBSy5xRDyX3btfYpM5d
+ bV43wAK6M7M7vIgyAZXcfsWjzpedNeOJx5dbNg4cLHUX1rY8bmqgBqNq6mvXQeMuzlDP8qKMqYo
+ oGmzOJX4ZuGY6WzEWjt7/aAjaI5dZvNXEREbxqasFxyV8p5lewzuX60OuaoWCD5SToHboJOoJeW
+ BA29L3Z74fTOCVMdErw7kpWFfojlqAenPFb0UMCZjLDrfqFVDRPl7pEWYYoYXebhjN2PHPc/QpH
+ 6NMEoE1JPL1e1jh/7QNxjVrd+Xlcshnj1tABxC/r1lfh9x6/M7GIggBHnLha7m8AXeIW1oabY5C
+ ggoqHWnZxfmUUmlPuc85zdTxtzraYpjaatDqDs0yB
+X-Received: by 2002:a17:906:d54d:b0:c41:5a0e:3356 with SMTP id
+ a640c23a62f3a-c49bdfa7acbmr284216866b.41.1793217951993; Wed, 28 Oct 2026
+ 13:05:51 -0700 (PDT)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1234;
- envelope-from=tewaro@theorem.dev; helo=mail-dl1-x1234.google.com
+References: <20261022045737.67060-1-tewaro@theorem.dev>
+ <CAEq2Q90Lvd4PMtxhj=2B-v5BiOdgBsgo2q5sFV-B4UcRFdEHkA@mail.gmail.com>
+ <3cf09147-a718-45cc-a585-125c58952587@oss.qualcomm.com>
+In-Reply-To: <3cf09147-a718-45cc-a585-125c58952587@oss.qualcomm.com>
+From: Aditya Tewari <tewaro@theorem.dev>
+Date: Wed, 28 Oct 2026 13:05:40 -0700
+X-Gm-Features: AclHuK93hXxFn1nhTVdAWMQ7tCOwXtU4_9a2ztvfs0hwopLjHYxRs3teDMQhRZM
+Message-ID: <CAEq2Q93qnqqThmZ6CiHo=5jLy=Y1tQ6iv_bU8uK+EGBvHLrYxw@mail.gmail.com>
+Subject: Re: [PATCH 1/2] target/riscv: do not raise the no-PMP-rule access
+ fault from mret
+To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, disclosures@theorem.dev, 
+ tewaro <tewaro@tewaro.org>, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Chao Liu <chao.liu@processmission.com>
+Content-Type: multipart/alternative; boundary="00000000000008a75b065eec17d8"
+Received-SPF: pass client-ip=2a00:1450:4864:20::635;
+ envelope-from=tewaro@theorem.dev; helo=mail-ej1-x635.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ DKIM_VALID=-0.1, HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -98,62 +119,363 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-11.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT autolearn=ham
+X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,HTML_MESSAGE,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS autolearn=unavailable
 	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi,
+--00000000000008a75b065eec17d8
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-When PMP is implemented but no PMP entry has been configured, QEMU
-raises the resulting access fault on the mret itself rather than on the
-first S/U-mode fetch after it. The access is correctly denied either
-way, but because the trap is taken before the privilege switch, S-mode
-can never be entered on such a configuration. Patch 1 has the details
-and the history; patch 2 adds a tests/tcg/riscv64 system test that
-fails before and passes after it.
+Daniel,
 
-This is not reachable from S/U-mode or from a guest, since mret and
-mnret are M-mode-only and PMP is configured from M-mode. The affected
-software is firmware that executes mret with PMP present and no entry
-configured, so I do not consider this a security issue. The same
-symptom was reported in GitLab issue #2074; the earlier discussions in
-Launchpad #1923197 and GitLab #585 were about whether the access should
-fail, which is not in question here.
+Sorry about that; I had some issues on my end using email APIs.
 
-Tested with make check-tcg for riscv64-softmmu, and by rebuilding
-v6.0.0 and v7.2.0 with only the mret check removed to confirm that the
-normal PMP path has always handled this case on its own.
+I've resent them here:
+https://lore.kernel.org/qemu-devel/fbeadd5b2fe5ccfd20b52dbccd4e5856f215ede0=
+.1793217528.git.tewaro@theorem.dev/T/#t
 
-Provenance: the bug was found, and the analysis above was debugged, with
-the help of Claude (Anthropic), used as a research and debugging aid as
-permitted by docs/devel/code-provenance.rst. The code and the text of
-the patches were written by me.
+Thanks,
 
-Changes in v2:
-- Rebased onto current master (73294d096c). The new meson.build entry
-  now sits among the tests added since v1; no other change.
-- Resent over SMTP. v1 went out through the Gmail API, which rewrapped
-  long lines, stripped trailing whitespace and replaced the Message-IDs,
-  so it did not apply and the patches were not threaded under the cover
-  letter. Thanks to Daniel for catching it.
+tewaro
 
-v1: https://lore.kernel.org/qemu-devel/CAEq2Q90UbCK2=7SFGQErviup1=u0AYVf=n90NaJvo1M9N=_BUA@mail.gmail.com/
+On Wed, Oct 28, 2026 at 6:31=E2=80=AFAM Daniel Henrique Barboza <
+daniel.barboza@oss.qualcomm.com> wrote:
 
+> Hi,
+>
+> I couldn't apply this patch.  git claims that the file is corrupted:
+>
+> $ git am --reject \[PATCH\ *
+> Applying: target/riscv: do not raise the no-PMP-rule access fault from mr=
+et
+> error: corrupt patch at line 18
+> Patch failed at 0001 target/riscv: do not raise the no-PMP-rule access
+> fault from mret
+>
+>
+> If I try to apply patch 2 standalone I get a different error:
+>
+>
+> $ git am \[PATCH\ 2_2\]\ tests_tcg_riscv64_\ add\ test\ for\ mret\ to\
+> S-mode\ with\ no\ PMP\ entry\ -\ tewaro\ \(tewaro@theorem.dev\)\ -\
+> 2026-10-22\ 0157.eml
+> Applying: tests/tcg/riscv64: add test for mret to S-mode with no PMP entr=
+y
+> error: git diff header lacks filename information when removing 1 leading
+> pathname component (line 8)
+> Patch failed at 0001 tests/tcg/riscv64: add test for mret to S-mode with
+> no PMP entry
+> hint: Use 'git am --show-current-patch=3Ddiff' to see the failed patch
+>
+>
+> Can you please re-send both?  Thanks,
+>
+> Daniel
+>
+>
+> On 10/22/2026 1:57 AM, tewaro wrote:
+> > Consider a CPU that implements PMP but has no PMP entry configured.
+> > If M-mode executes mret with MPP set to S or U, QEMU raises an
+> > instruction access fault on the mret. The trap is taken in M-mode,
+> > with mepc pointing at the mret, mtval zero and MPP equal to M.
+> >
+> > The spec says the mret succeeds and the first S/U-mode fetch fails
+> > [1][2]. The trap should therefore be taken from S/U-mode, with mepc
+> > and mtval equal to the mret target [3][4] and MPP equal to S/U [5].
+> >
+> > The early check in check_ret_from_m_mode() is what moves the fault
+> > onto the mret. Without it, the fetch at the target misses the TB and
+> > TLB caches, which are keyed by privilege level, and reaches
+> > pmp_hart_has_privs_default() through riscv_cpu_tlb_fill(). That
+> > function already denies S/U-mode when no rule matches. Nothing
+> > executes between the privilege switch and that fetch, so no other
+> > behaviour changes.
+> >
+> > As it stands, S/U-mode can never be entered on such a configuration,
+> > and a handler that steps mepc past the apparent fault resumes in
+> > M-mode at the S-mode entry point (GitLab issue #2074).
+> >
+> > The check was added by commit d102f19a208 alongside the pmp.c change
+> > that makes the no-rule path M-mode-only, and I believe it was already
+> > redundant then. Building v6.0.0 and v7.2.0 with only the check removed
+> > confirms the fetch faults as expected. Later commits (0fbb5d2d3c9,
+> > 4c48aad1, 3157a553, 16aa7771) changed its gating, cause and location
+> > but not the normal path. Remove it and the now unused prev_priv
+> > parameter.
+> >
+> > The bug was found and debugged with the help of Claude (Anthropic),
+> > used as a research and debugging aid; the patch was written by hand.
+> >
+> > [1] Privileged ISA v1.12, 3.7.1 "Physical Memory Protection CSRs",
+> >      Priority and Matching Logic
+> > [2] Privileged ISA v1.12, 3.3.2 "Trap-Return Instructions"
+> > [3] Privileged ISA v1.12, 3.1.14 "Machine Exception Program Counter"
+> > [4] Privileged ISA v1.12, 3.1.16 "Machine Trap Value Register"
+> > [5] Privileged ISA v1.12, 3.1.6.1 "Privilege and Global
+> >      Interrupt-Enable Stack in mstatus register"
+> >
+> > Privileged ISA v1.12 (ratified, 2021-12-03):
+> > https://github.com/riscv/riscv-isa-manual/releases/tag/Priv-v1.12
+> > Current source, same wording:
+> >
+> https://github.com/riscv/riscv-isa-manual/blob/4877e41a/src/priv/machine.=
+adoc
+> >
+> > Fixes: d102f19a2085 ("target/riscv/pmp: Raise exception if no PMP
+> > entry is configured")
+> > Resolves: https://gitlab.com/qemu-project/qemu/-/issues/2074
+> > Signed-off-by: tewaro <tewaro@theorem.dev>
+> > ---
+> >   target/riscv/tcg/op_helper.c | 10 ++--------
+> >   1 file changed, 2 insertions(+), 8 deletions(-)
+> >
+> > diff --git a/target/riscv/tcg/op_helper.c b/target/riscv/tcg/op_helper.=
+c
+> > index b67c7718db..a355d28f4b 100644
+> > --- a/target/riscv/tcg/op_helper.c
+> > +++ b/target/riscv/tcg/op_helper.c
+> > @@ -423,7 +423,6 @@ target_ulong helper_sret(CPURISCVState *env)
+> >   }
+> >
+> >   static void check_ret_from_m_mode(CPURISCVState *env, target_ulong
+> retpc,
+> > -                                  privilege_mode_t prev_priv,
+> >                                     uintptr_t ra)
+> >   {
+> >       if (!(env->priv >=3D PRV_M)) {
+> > @@ -435,11 +434,6 @@ static void check_ret_from_m_mode(CPURISCVState
+> > *env, target_ulong retpc,
+> >                                       env->misa_ext) && (retpc & 0x3)) =
+{
+> >           riscv_raise_exception(env, RISCV_EXCP_INST_ADDR_MIS, ra);
+> >       }
+> > -
+> > -    if (riscv_cpu_cfg(env)->pmp &&
+> > -        !pmp_get_num_rules(env) && (prev_priv !=3D PRV_M)) {
+> > -        riscv_raise_exception(env, RISCV_EXCP_INST_ACCESS_FAULT, ra);
+> > -    }
+> >   }
+> >   static target_ulong ssdbltrp_mxret(CPURISCVState *env, target_ulong
+> mstatus,
+> >                                      privilege_mode_t prev_priv,
+> > @@ -465,7 +459,7 @@ target_ulong helper_mret(CPURISCVState *env)
+> >       privilege_mode_t prev_priv =3D get_field(mstatus, MSTATUS_MPP);
+> >       uintptr_t ra =3D GETPC();
+> >
+> > -    check_ret_from_m_mode(env, retpc, prev_priv, ra);
+> > +    check_ret_from_m_mode(env, retpc, ra);
+> >
+> >       bool prev_virt =3D !!(get_field(env->mstatus, MSTATUS_MPV) &&
+> >                        (prev_priv !=3D PRV_M));
+> > @@ -515,7 +509,7 @@ target_ulong helper_mnret(CPURISCVState *env)
+> >       bool prev_virt;
+> >       uintptr_t ra =3D GETPC();
+> >
+> > -    check_ret_from_m_mode(env, retpc, prev_priv, ra);
+> > +    check_ret_from_m_mode(env, retpc, ra);
+> >
+> >       prev_virt =3D !!(get_field(env->mnstatus, MNSTATUS_MNPV) &&
+> >                   (prev_priv !=3D PRV_M));
+>
+>
 
-tewaro (2):
-  target/riscv: do not raise the no-PMP-rule access fault from mret
-  tests/tcg/riscv64: add test for mret to S-mode with no PMP entry
+--00000000000008a75b065eec17d8
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
- target/riscv/tcg/op_helper.c         |  10 +--
- tests/tcg/riscv64/system/meson.build |   1 +
- tests/tcg/riscv64/test-mret-nopmp.S  | 100 +++++++++++++++++++++++++++
- 3 files changed, 103 insertions(+), 8 deletions(-)
- create mode 100644 tests/tcg/riscv64/test-mret-nopmp.S
+<div dir=3D"ltr">Daniel,<div><br></div><div>Sorry about that; I had some is=
+sues on my end using email APIs.</div><div><br></div><div>I&#39;ve resent t=
+hem here:=C2=A0<a href=3D"https://lore.kernel.org/qemu-devel/fbeadd5b2fe5cc=
+fd20b52dbccd4e5856f215ede0.1793217528.git.tewaro@theorem.dev/T/#t">https://=
+lore.kernel.org/qemu-devel/fbeadd5b2fe5ccfd20b52dbccd4e5856f215ede0.1793217=
+528.git.tewaro@theorem.dev/T/#t</a></div><div><br></div><div>Thanks,</div><=
+div><br></div><div>tewaro</div></div><br><div class=3D"gmail_quote gmail_qu=
+ote_container"><div dir=3D"ltr" class=3D"gmail_attr">On Wed, Oct 28, 2026 a=
+t 6:31=E2=80=AFAM Daniel Henrique Barboza &lt;<a href=3D"mailto:daniel.barb=
+oza@oss.qualcomm.com">daniel.barboza@oss.qualcomm.com</a>&gt; wrote:<br></d=
+iv><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;bord=
+er-left:1px solid rgb(204,204,204);padding-left:1ex">Hi,<br>
+<br>
+I couldn&#39;t apply this patch.=C2=A0 git claims that the file is corrupte=
+d:<br>
+<br>
+$ git am --reject \[PATCH\ *<br>
+Applying: target/riscv: do not raise the no-PMP-rule access fault from mret=
+<br>
+error: corrupt patch at line 18<br>
+Patch failed at 0001 target/riscv: do not raise the no-PMP-rule access faul=
+t from mret<br>
+<br>
+<br>
+If I try to apply patch 2 standalone I get a different error:<br>
+<br>
+<br>
+$ git am \[PATCH\ 2_2\]\ tests_tcg_riscv64_\ add\ test\ for\ mret\ to\ S-mo=
+de\ with\ no\ PMP\ entry\ -\ tewaro\ \(<a href=3D"mailto:tewaro@theorem.dev=
+" target=3D"_blank">tewaro@theorem.dev</a>\)\ -\ 2026-10-22\ 0157.eml<br>
+Applying: tests/tcg/riscv64: add test for mret to S-mode with no PMP entry<=
+br>
+error: git diff header lacks filename information when removing 1 leading p=
+athname component (line 8)<br>
+Patch failed at 0001 tests/tcg/riscv64: add test for mret to S-mode with no=
+ PMP entry<br>
+hint: Use &#39;git am --show-current-patch=3Ddiff&#39; to see the failed pa=
+tch<br>
+<br>
+<br>
+Can you please re-send both?=C2=A0 Thanks,<br>
+<br>
+Daniel<br>
+<br>
+<br>
+On 10/22/2026 1:57 AM, tewaro wrote:<br>
+&gt; Consider a CPU that implements PMP but has no PMP entry configured.<br=
+>
+&gt; If M-mode executes mret with MPP set to S or U, QEMU raises an<br>
+&gt; instruction access fault on the mret. The trap is taken in M-mode,<br>
+&gt; with mepc pointing at the mret, mtval zero and MPP equal to M.<br>
+&gt; <br>
+&gt; The spec says the mret succeeds and the first S/U-mode fetch fails<br>
+&gt; [1][2]. The trap should therefore be taken from S/U-mode, with mepc<br=
+>
+&gt; and mtval equal to the mret target [3][4] and MPP equal to S/U [5].<br=
+>
+&gt; <br>
+&gt; The early check in check_ret_from_m_mode() is what moves the fault<br>
+&gt; onto the mret. Without it, the fetch at the target misses the TB and<b=
+r>
+&gt; TLB caches, which are keyed by privilege level, and reaches<br>
+&gt; pmp_hart_has_privs_default() through riscv_cpu_tlb_fill(). That<br>
+&gt; function already denies S/U-mode when no rule matches. Nothing<br>
+&gt; executes between the privilege switch and that fetch, so no other<br>
+&gt; behaviour changes.<br>
+&gt; <br>
+&gt; As it stands, S/U-mode can never be entered on such a configuration,<b=
+r>
+&gt; and a handler that steps mepc past the apparent fault resumes in<br>
+&gt; M-mode at the S-mode entry point (GitLab issue #2074).<br>
+&gt; <br>
+&gt; The check was added by commit d102f19a208 alongside the pmp.c change<b=
+r>
+&gt; that makes the no-rule path M-mode-only, and I believe it was already<=
+br>
+&gt; redundant then. Building v6.0.0 and v7.2.0 with only the check removed=
+<br>
+&gt; confirms the fetch faults as expected. Later commits (0fbb5d2d3c9,<br>
+&gt; 4c48aad1, 3157a553, 16aa7771) changed its gating, cause and location<b=
+r>
+&gt; but not the normal path. Remove it and the now unused prev_priv<br>
+&gt; parameter.<br>
+&gt; <br>
+&gt; The bug was found and debugged with the help of Claude (Anthropic),<br=
+>
+&gt; used as a research and debugging aid; the patch was written by hand.<b=
+r>
+&gt; <br>
+&gt; [1] Privileged ISA v1.12, 3.7.1 &quot;Physical Memory Protection CSRs&=
+quot;,<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 Priority and Matching Logic<br>
+&gt; [2] Privileged ISA v1.12, 3.3.2 &quot;Trap-Return Instructions&quot;<b=
+r>
+&gt; [3] Privileged ISA v1.12, 3.1.14 &quot;Machine Exception Program Count=
+er&quot;<br>
+&gt; [4] Privileged ISA v1.12, 3.1.16 &quot;Machine Trap Value Register&quo=
+t;<br>
+&gt; [5] Privileged ISA v1.12, 3.1.6.1 &quot;Privilege and Global<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 Interrupt-Enable Stack in mstatus register&quot;<b=
+r>
+&gt; <br>
+&gt; Privileged ISA v1.12 (ratified, 2021-12-03):<br>
+&gt; <a href=3D"https://github.com/riscv/riscv-isa-manual/releases/tag/Priv=
+-v1.12" rel=3D"noreferrer" target=3D"_blank">https://github.com/riscv/riscv=
+-isa-manual/releases/tag/Priv-v1.12</a><br>
+&gt; Current source, same wording:<br>
+&gt; <a href=3D"https://github.com/riscv/riscv-isa-manual/blob/4877e41a/src=
+/priv/machine.adoc" rel=3D"noreferrer" target=3D"_blank">https://github.com=
+/riscv/riscv-isa-manual/blob/4877e41a/src/priv/machine.adoc</a><br>
+&gt; <br>
+&gt; Fixes: d102f19a2085 (&quot;target/riscv/pmp: Raise exception if no PMP=
+<br>
+&gt; entry is configured&quot;)<br>
+&gt; Resolves: <a href=3D"https://gitlab.com/qemu-project/qemu/-/issues/207=
+4" rel=3D"noreferrer" target=3D"_blank">https://gitlab.com/qemu-project/qem=
+u/-/issues/2074</a><br>
+&gt; Signed-off-by: tewaro &lt;<a href=3D"mailto:tewaro@theorem.dev" target=
+=3D"_blank">tewaro@theorem.dev</a>&gt;<br>
+&gt; ---<br>
+&gt;=C2=A0 =C2=A0target/riscv/tcg/op_helper.c | 10 ++--------<br>
+&gt;=C2=A0 =C2=A01 file changed, 2 insertions(+), 8 deletions(-)<br>
+&gt; <br>
+&gt; diff --git a/target/riscv/tcg/op_helper.c b/target/riscv/tcg/op_helper=
+.c<br>
+&gt; index b67c7718db..a355d28f4b 100644<br>
+&gt; --- a/target/riscv/tcg/op_helper.c<br>
+&gt; +++ b/target/riscv/tcg/op_helper.c<br>
+&gt; @@ -423,7 +423,6 @@ target_ulong helper_sret(CPURISCVState *env)<br>
+&gt;=C2=A0 =C2=A0}<br>
+&gt; <br>
+&gt;=C2=A0 =C2=A0static void check_ret_from_m_mode(CPURISCVState *env, targ=
+et_ulong retpc,<br>
+&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 privilege_mode_t prev_pri=
+v,<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0uintptr_t ra)=
+<br>
+&gt;=C2=A0 =C2=A0{<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0if (!(env-&gt;priv &gt;=3D PRV_M)) {<br>
+&gt; @@ -435,11 +434,6 @@ static void check_ret_from_m_mode(CPURISCVState<b=
+r>
+&gt; *env, target_ulong retpc,<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0env-&g=
+t;misa_ext) &amp;&amp; (retpc &amp; 0x3)) {<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0riscv_raise_exception(env, RIS=
+CV_EXCP_INST_ADDR_MIS, ra);<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
+&gt; -<br>
+&gt; -=C2=A0 =C2=A0 if (riscv_cpu_cfg(env)-&gt;pmp &amp;&amp;<br>
+&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 !pmp_get_num_rules(env) &amp;&amp; (prev_=
+priv !=3D PRV_M)) {<br>
+&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 riscv_raise_exception(env, RISCV_EXCP_INS=
+T_ACCESS_FAULT, ra);<br>
+&gt; -=C2=A0 =C2=A0 }<br>
+&gt;=C2=A0 =C2=A0}<br>
+&gt;=C2=A0 =C2=A0static target_ulong ssdbltrp_mxret(CPURISCVState *env, tar=
+get_ulong mstatus,<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 privilege_mo=
+de_t prev_priv,<br>
+&gt; @@ -465,7 +459,7 @@ target_ulong helper_mret(CPURISCVState *env)<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0privilege_mode_t prev_priv =3D get_field(mst=
+atus, MSTATUS_MPP);<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0uintptr_t ra =3D GETPC();<br>
+&gt; <br>
+&gt; -=C2=A0 =C2=A0 check_ret_from_m_mode(env, retpc, prev_priv, ra);<br>
+&gt; +=C2=A0 =C2=A0 check_ret_from_m_mode(env, retpc, ra);<br>
+&gt; <br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0bool prev_virt =3D !!(get_field(env-&gt;msta=
+tus, MSTATUS_MPV) &amp;&amp;<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 (prev_priv !=3D PRV_M));<br>
+&gt; @@ -515,7 +509,7 @@ target_ulong helper_mnret(CPURISCVState *env)<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0bool prev_virt;<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0uintptr_t ra =3D GETPC();<br>
+&gt; <br>
+&gt; -=C2=A0 =C2=A0 check_ret_from_m_mode(env, retpc, prev_priv, ra);<br>
+&gt; +=C2=A0 =C2=A0 check_ret_from_m_mode(env, retpc, ra);<br>
+&gt; <br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0prev_virt =3D !!(get_field(env-&gt;mnstatus,=
+ MNSTATUS_MNPV) &amp;&amp;<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0(p=
+rev_priv !=3D PRV_M));<br>
+<br>
+</blockquote></div>
 
--- 
-2.54.0 (Apple Git-157)
-
+--00000000000008a75b065eec17d8--
 
