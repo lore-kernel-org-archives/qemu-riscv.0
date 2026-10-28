@@ -1,102 +1,77 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AD62C606A338
-	for <qemu-riscv@archiver.kernel.org>; Tue, 27 Oct 2026 22:49:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 09472606A31E
+	for <qemu-riscv@archiver.kernel.org>; Wed, 28 Oct 2026 03:00:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=KQEFq4ig
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=EwxfSaMe
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xLpym-0007DQ-7O; Tue, 27 Oct 2026 18:49:16 -0400
+	id 1xLttD-0005hx-Nr; Tue, 27 Oct 2026 22:59:47 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1xLpyl-0007DA-4y
- for qemu-riscv@nongnu.org; Tue, 27 Oct 2026 18:49:15 -0400
-Received: from mail-ot1-x32c.google.com ([2607:f8b0:4864:20::32c])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1xLpyj-000530-21
- for qemu-riscv@nongnu.org; Tue, 27 Oct 2026 18:49:14 -0400
-Received: by mail-ot1-x32c.google.com with SMTP id
- 46e09a7af769-81b54d0cb17so426496a34.1
- for <qemu-riscv@nongnu.org>; Tue, 27 Oct 2026 15:49:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1793141352; x=1793746152; darn=nongnu.org;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=rKLY9xsTYSIV/X7BzECsQnL+MhMnbBhuoZNOYDMR0JY=;
- b=KQEFq4igbOMtSCIxBj3kq6O7+1/Mh7HIhYahNoySZtmEkIPBLhIwhZY1NlZkz7INTM
- B1yCoADkqOhe+vWOWP5qEWbEQHxnEHZML3ibBP8tqTDn76Wl+CTwwXRNeWhh4z6ctlbZ
- tTdk8e7apZNgeh/doxKvz0jLOClrJwUm6gAJMS+EXGTzbKNaxJZF6M35A1FhY6TB4xFV
- ibpHwgr5FW4M02giH+S463cINI3UpYR3Ger84MzEJFdTpo280WOqtd7bK/UlCfO3b06+
- f/2uQY2vIyqvAX0AlCGJ26zokR4r0enKyDQQWLNKu+hSsB67JLICFNlw1OhDyQRV5QiI
- MhKQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793141352; x=1793746152;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=rKLY9xsTYSIV/X7BzECsQnL+MhMnbBhuoZNOYDMR0JY=;
- b=bxK2Aj7cV9uwAMROPdAS9eEefBklzNK7QiTAZxfkqcw5uFURqmrJoPW2/IAyb2m4Ce
- 9ZzCga8KeOx93Q3fSMAv0h/29CDzqAfXwshP9ioIinMVDJn5DtelgivVWDVrc4Nwa4uC
- GwgkZVZ00w+ewxe732+JDD03+WvSQ1iUpwT0ft4wAhheNNO9Ig6mtl2Z1jAOWNgodyfL
- iSF7/Jq0uwhqFu0ILG4clwldRer2kI10AuZfVRS4aqriHT97Oho1IKKmIh+LEnQFrZiK
- mskByWieiZo2VbGf9PpGCFGjtWVqCutM3Nx4qhe16uAbVND/pfofoSVVeUTTgxu17/59
- fT8Q==
-X-Forwarded-Encrypted: i=1;
- AKwUvBxSkMgFPgwuZ1Ko4rYMH7TdvxKfvJludKMpKld+C4w/xzZtbtOgJ3WfbAw5ilofHHbl1HIoi5rEbyDa@nongnu.org
-X-Gm-Message-State: AFq9FYJHQ+MQ6A1l/5BiCLFYWLscdtbLpOgwa3DA5MyVv1otZkmxNofM
- YLHU7pUysCjIlia2f1cYpJeh/OL5vMFuNVxekXw/HpwmI4AtAkrFViC+fLBHdgfMP3I=
-X-Gm-Gg: AYBFou1euGyE+eIR8b87p5qntgMVSw4wO4kNIRTYB2GLn83NqT+w/SsKH3rNcsKNBqN
- HegXaRg9GMtnntfMEfXcaRP+6RLlgMnRSRsR5UDPel175EtTwj/VZmm7YeJoaWf/4v4CuenWgVv
- s53WulARYyQDi+US/bObL45BsJXkgFmJLea5tZ+x2uSvusRnSnjcJygtgqfkI7TXEysxSN5MqvR
- NVBi/Ik12xpX0GjRUlMaUwcjA9Y3PFSvlR5ntPLCKpHnk2Rpr18ngZrHPt9Fzupa6SlRTAxxs9H
- Hp4EQCCO9ST0iCv0WwE2WeR47e3OWNxvApbGIT/dvpbq+nwMQWzVC0MLKqVYQq4dTURQuqZVQtZ
- ro66dMuEppiJhixOSz5RH+tmTkLDWAfWqBYudqwJTAZks7DKq9xnM7SE+3A/PfbZuQJr4GHPp5K
- vRz/M2oTa4ert+rgfHv1vpGx07uMumQAvofKNqTaVvGVKAmcFso0MgI1H5403bomBTYNC28fVzq
- CPihrjjQglTitmOK8Op1C19X7BYtekPkYTqgIAPa+tNYPniOqZdNzfBywoFkC6974BpGNc=
-X-Received: by 2002:a05:6830:3e05:b0:7f6:705b:ffe7 with SMTP id
- 46e09a7af769-85abd80bab9mr852022a34.14.1793141351549; 
- Tue, 27 Oct 2026 15:49:11 -0700 (PDT)
-Received: from [192.168.129.53] ([50.233.235.3])
- by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-850fb0749cfsm12900234a34.9.2026.10.27.15.49.10
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 27 Oct 2026 15:49:11 -0700 (PDT)
-Message-ID: <ae5baac7-429e-44f5-9696-1386b079e581@linaro.org>
-Date: Tue, 27 Oct 2026 17:49:00 -0500
+ (Exim 4.90_1) (envelope-from <fustini@kernel.org>)
+ id 1xLtt8-0005hV-Nx; Tue, 27 Oct 2026 22:59:43 -0400
+Received: from sea.source.kernel.org ([172.234.252.31])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <fustini@kernel.org>)
+ id 1xLtsn-0001xl-Co; Tue, 27 Oct 2026 22:59:41 -0400
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by sea.source.kernel.org (Postfix) with ESMTP id 5328742BC6;
+ Wed, 28 Oct 2026 02:59:18 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id F19A01F01825;
+ Wed, 28 Oct 2026 02:59:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+ s=k20260515; t=1793156358;
+ bh=NXsULG64tVDnsXhfm+seWOmuHSMRKB50ip9FfysVYo0=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To;
+ b=EwxfSaMeKmk3ki6hpheLjATW0LDCtrBNTxl5U3KUjcvyFx4kFGK6yMyhZeZdvNtmv
+ kvihHBl2TZmpuyJllDXhlvktPVLR4gI9vi/4abBFt0+1R+y2JOj+5Hxim18BLlG826
+ ksaIGsaLczEhR2AKq6SmLE8p4UIMou81sLJitefPebOnaeGHls2B4BhioyD3XE3EbU
+ KsVzsFQoE6lRq353h2QtFw2ePmWP8a9uiPN3eTH4RKuoXoXsqaXfeI2/Bm1FfqHokx
+ vmBrtu1pTOjAIPgVIhmrseH+DdOM2cFtec985AIDZCXdj0pFD3Tdw/7TOMQdLk3kCp
+ n3Lf/8x87Sb+A==
+Date: Tue, 27 Oct 2026 19:59:16 -0700
+From: Drew Fustini <fustini@kernel.org>
+To: Alistair Francis <Alistair.Francis@wdc.com>
+Cc: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
+ "mindal@semihalf.com" <mindal@semihalf.com>,
+ "sunilvl@oss.qualcomm.com" <sunilvl@oss.qualcomm.com>,
+ "zhiwei_liu@linux.alibaba.com" <zhiwei_liu@linux.alibaba.com>,
+ "liu.qingtao2@zte.com.cn" <liu.qingtao2@zte.com.cn>,
+ "anup.patel@oss.qualcomm.com" <anup.patel@oss.qualcomm.com>,
+ "cp0613@linux.alibaba.com" <cp0613@linux.alibaba.com>,
+ "palmer@dabbelt.com" <palmer@dabbelt.com>,
+ "daniel.barboza@oss.qualcomm.com" <daniel.barboza@oss.qualcomm.com>,
+ "radim.krcmar@oss.qualcomm.com" <radim.krcmar@oss.qualcomm.com>,
+ "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
+ "pbonzini@redhat.com" <pbonzini@redhat.com>,
+ "guo.wenjia23@zte.com.cn" <guo.wenjia23@zte.com.cn>,
+ "npitre@baylibre.com" <npitre@baylibre.com>,
+ "cuiyunhui@bytedance.com" <cuiyunhui@bytedance.com>,
+ "atish.patra@linux.dev" <atish.patra@linux.dev>,
+ "liwei1518@gmail.com" <liwei1518@gmail.com>,
+ "chao.liu@processmission.com" <chao.liu@processmission.com>
+Subject: Re: [PATCH v6 1/6] riscv: implement Ssqosid extension and srmcfg CSR
+Message-ID: <auFlBAtOZSw94vnk@thelio>
+References: <20261026-riscv-ssqosid-cbqri-v6-0-1a367a35cd0e@kernel.org>
+ <20261026-riscv-ssqosid-cbqri-v6-1-1a367a35cd0e@kernel.org>
+ <20219a9e5fcaf2f50eee2bd123a12a04c05cb97a.camel@wdc.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] tcg/riscv64: Fix vector constant matching for logical
- ops
-To: Aurelien Jarno <aurelien@aurel32.net>,
- =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- "open list:RISC-V TCG target" <qemu-riscv@nongnu.org>,
- "open list:All patches CC here" <qemu-devel@nongnu.org>
-References: <20261010174742.3552498-1-aurelien@aurel32.net>
- <9ca6f711-e886-46a5-80ea-a6c750696a93@oss.qualcomm.com>
- <auEeif_51q1K9XOz@aurel32.net>
-From: Richard Henderson <richard.henderson@linaro.org>
-Content-Language: en-US
-In-Reply-To: <auEeif_51q1K9XOz@aurel32.net>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::32c;
- envelope-from=richard.henderson@linaro.org; helo=mail-ot1-x32c.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+In-Reply-To: <20219a9e5fcaf2f50eee2bd123a12a04c05cb97a.camel@wdc.com>
+Received-SPF: pass client-ip=172.234.252.31; envelope-from=fustini@kernel.org;
+ helo=sea.source.kernel.org
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -109,190 +84,93 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,
+	SPF_HELO_PASS,SPF_PASS autolearn=unavailable autolearn_force=no
 	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 10/27/26 16:58, Aurelien Jarno wrote:
-> Hi Philippe,
+On Tue, Oct 27, 2026 at 12:22:02AM +0000, Alistair Francis wrote:
+> On Mon, 2026-10-26 at 10:47 -0700, Drew Fustini wrote:
+> > From: Kornel Dulęba <mindal@semihalf.com>
+> > 
+> > Implement the srmcfg CSR defined by the Ssqosid ISA extension
+> > (Supervisor-mode Quality of Service ID). The CSR contains two fields:
+> > 
+> >   - Resource Control ID (RCID) used determine resource allocation
+> >   - Monitoring Counter ID (MCID) used to track resource usage
+> > 
+> > The CSR is defined for S-mode, so check mstateen0.srmcfg to determine
+> > if s-mode is allowed to access it. In addition, accessing it when V=1
+> > shall cause a virtual instruction exception.
+> > 
+> > Link:
+> > https://github.com/riscv-non-isa/riscv-cbqri/releases/download/v1.0/riscv-cbqri.pdf
+> > Link: https://docs.riscv.org/reference/isa/priv/smstateen.html
+> > Signed-off-by: Kornel Dulęba <mindal@semihalf.com>
+> > [fustini: rebase on v10.1.50, fix check_srmcfg]
+> > Reviewed-by: Radim Krčmář <radim.krcmar@oss.qualcomm.com>
+> > Signed-off-by: Drew Fustini <fustini@kernel.org>
 > 
-> On 2026-10-24 19:00, Philippe Mathieu-Daudé wrote:
->> On 10/10/26 19:46, Aurelien Jarno wrote:
->>> For logical vector operations (in the case of the RISC-V backend that
->>> corresponds to and_vec, or_vec and xor_vec), VECE is unused. However,
->>> tcg_target_const_match() always treat it as an element size to extract
->>> the corresponding constant element from the whole constant.
->>>
->>> This causes the following aarch64 instruction
->>>     bic v4.8h, #0xf0
->>> to be translated into the following op:
->>>     ...
->>>     and_vec v128,e8,tmp5,tmp4,v128$0xff0fff0fff0fff0f
->>>     ...
->>> which is then translated to the following RISC-V instruction:
->>>     vand.vi v1,v1,15
->>>
->>> Fix that by, when VECE is 0 aka MO_8, only extracting the element if the
->>> it can actually be represented as a duplicated constant.
->>>
->>> Fixes: 5a63f5998791 ("tcg/riscv: Add support for basic vector opcodes")
->>> Signed-off-by: Aurelien Jarno <aurelien@aurel32.net>
->>> ---
->>>    tcg/riscv64/tcg-target.c.inc | 11 +++++++++--
->>>    1 file changed, 9 insertions(+), 2 deletions(-)
->>>
->>> Changes v1 -> v2:
->>> - Use dup_const() instead of open coding the constant duplication.
->>>
->>> diff --git a/tcg/riscv64/tcg-target.c.inc b/tcg/riscv64/tcg-target.c.inc
->>> index 14a397117a..1262b71a62 100644
->>> --- a/tcg/riscv64/tcg-target.c.inc
->>> +++ b/tcg/riscv64/tcg-target.c.inc
->>> @@ -392,8 +392,15 @@ static bool tcg_target_const_match(int64_t val, int ct,
->>>            return 1;
->>>        }
->>>        if (type >= TCG_TYPE_V64) {
->>> -        /* Val is replicated by VECE; extract the highest element. */
->>> -        val >>= (-8 << vece) & 63;
->>> +        /*
->>> +         * For vector logical operations, VECE is unused and equals to 0, so
->>> +         * we need to check that the constant can properly be represented after
->>> +         * replication.
->>> +         */
->>> +        if ((vece != MO_8) || (val == dup_const(vece, val))) {
->>> +            /* Val is replicated by VECE; extract the highest element. */
->>> +            val >>= (-8 << vece) & 63;
->>> +        }
->>>        }
->>
->> This fixes the BIC case, but I don't think it is sufficient.
->>
->> I tested with qemu-aarch64 built for a riscv64 host, run under
->> qemu-riscv64 -cpu max, guest -cpu max,sve-default-vector-length=16.
->>
->> NEON bic v0.8h, #0xf0 // fail on master, now OK
->>
->> add z1.b; and z0.d, #0xf // FAIL
->> add z1.d; and z0.b, #0xf // FAIL
->> add z1.b; orr z0.d, #-16 // FAIL
->> add z1.d; eor z0.b, #0xf // FAIL
-> 
-> This indeed doesn't work. The problem is that while the constant
-> matching is being passed VECE = 0 (as it is unused for logical ops), the
-> code generation is still being passed a 64-bit size. Therefore for the
-> eor, it emits:
->    vsetivli                zero,2,e64,m1,ta,ma
->    lui                     t6,3
->    addiw                   t6,t6,-448
->    add                     t6,t6,s0
->    vle64.v                 v1,(t6)
->    vxor.vi                 v1,v1,15
-> 
-> It would make more sense to use 16 e8 elements like in the original ARM
-> SVE code, but it seems that info is lost at this stage.
-> 
->> Not accepting constants for and/or/xor_vec at all
->> (using C_O1_I2(v, v, v) to get them loaded into registers)
->> makes all five cases pass (I'm not sure we want to keep
->> the .vi forms):
->>
->> -- >8 --
->> diff --git a/tcg/riscv64/tcg-target.c.inc b/tcg/riscv64/tcg-target.c.inc
->> --- a/tcg/riscv64/tcg-target.c.inc
->> +++ b/tcg/riscv64/tcg-target.c.inc
->> @@ -2779,15 +2779,15 @@ static void tcg_out_vec_op(TCGContext *s, TCGOpcode
->> opc,
->>       case INDEX_op_and_vec:
->>           set_vtype_len(s, type);
->> -        tcg_out_opc_vv_vi(s, OPC_VAND_VV, OPC_VAND_VI, a0, a1, a2, c2);
->> +        tcg_out_opc_vv(s, OPC_VAND_VV, a0, a1, a2);
->>           break;
->>       case INDEX_op_or_vec:
->>           set_vtype_len(s, type);
->> -        tcg_out_opc_vv_vi(s, OPC_VOR_VV, OPC_VOR_VI, a0, a1, a2, c2);
->> +        tcg_out_opc_vv(s, OPC_VOR_VV, a0, a1, a2);
->>           break;
->>       case INDEX_op_xor_vec:
->>           set_vtype_len(s, type);
->> -        tcg_out_opc_vv_vi(s, OPC_VXOR_VV, OPC_VXOR_VI, a0, a1, a2, c2);
->> +        tcg_out_opc_vv(s, OPC_VXOR_VV, a0, a1, a2);
->>           break;
->>       case INDEX_op_not_vec:
->>           set_vtype_len(s, type);
->> @@ -2976,15 +2976,15 @@ tcg_target_op_def(TCGOpcode op, TCGType type,
->> unsigned flags)
->>       case INDEX_op_rotli_vec:
->>           return C_O1_I1(v, v);
->>       case INDEX_op_add_vec:
->> -    case INDEX_op_and_vec:
->> -    case INDEX_op_or_vec:
->> -    case INDEX_op_xor_vec:
->>       case INDEX_op_ssadd_vec:
->>       case INDEX_op_sssub_vec:
->>       case INDEX_op_usadd_vec:
->>       case INDEX_op_ussub_vec:
->>           return C_O1_I2(v, v, vK);
->>       case INDEX_op_sub_vec:
->>           return C_O1_I2(v, vK, v);
->> +    case INDEX_op_and_vec:
->> +    case INDEX_op_or_vec:
->> +    case INDEX_op_xor_vec:
->>       case INDEX_op_mul_vec:
->>       case INDEX_op_shlv_vec:
->>       case INDEX_op_shrv_vec:
->>       case INDEX_op_sarv_vec:
->>       case INDEX_op_rotlv_vec:
->>       case INDEX_op_rotrv_vec:
->>       case INDEX_op_smax_vec:
->>       case INDEX_op_smin_vec:
->>       case INDEX_op_umax_vec:
->>       case INDEX_op_umin_vec:
->>           return C_O1_I2(v, v, v);
-> 
-> I believe that until TCG is able to propagate VECE even for logical ops,
-> this is the thing to do. It generates suboptimal code, but correct one.
-> Therefore
-I think the right thing to do is create a function that extracts an 
-appropriate element size for the constant, and a new constraint letter.
+> I'm just meat proxying this one, but it looks believable, let me know
+> if it's wrong though:
 
-Something like
+Is this something I can run myself in the future?
 
-static int vec_logical_immediate_vece(uint64_t val)
-{
-     for (int e = MO_64; e >= MO_8; e--) {
-         if (val == dup_const(e, val)) {
-             return e;
-         }
-     }
-     return -1;
-}
+I can run local sashiko for my linux patches but I wasn't sure what to
+do for qemu.
 
-...
+> - [HIGH] In target/riscv/tcg/csr.c, none of write_mstateen0,
+> write_mstateen0h, write_hstateen0, or write_hstateen0h ever ORs
+> SMSTATEEN0_SRMCFG into wr_mask when ext_ssqosid is set, so bit 55 of
+> mstateen0/hstateen0 stays read-only zero and M-mode firmware writes
+> that enable srmcfg access are silently dropped, violating the
+> Smstateen spec (a bit for an implemented extension must not be
+> read-only zero). check_srmcfg gates the new CSR on
+> smstateen_acc_ok(..., SMSTATEEN0_SRMCFG), and Smstateen is enabled by
+> default on the same dynamic CPUs that get ext_ssqosid by default, so
+> on the stock virt machine every S-mode (V=0) srmcfg access traps
+> illegal instruction and VS-mode additionally takes a virtual
+> instruction fault: the QoS feature this series exists to expose is
+> systematically unusable. Fix by ORing the bit into the stateen write
+> masks like the existing CTR, P1P13, and SVSLCT cases.
 
-     if ((ct & TCG_CT_CONST_LOGICAL_VI) &&
-         vec_logical_immediate_vece(val) >= 0) {
-         return true;
-     }
+This is a real issue for mstateen0 and mstateen0h. I will add
+SMSTATEEN0_SRMCFG to wr_mask in write_mstateen0() and
+write_mstateen0h(). However, I believe hstateen0 bit 55 is WPRI so I
+think the current behavior is correct.
 
-...
+> - [MEDIUM] In target/riscv/cpu.h, env->srmcfg is new guest-writable
+>   architected state (written via write_srmcfg in
+>   target/riscv/tcg/csr.c) but target/riscv/machine.c never migrates
+>   it: vmstate_riscv_cpu has no ssqosid/srmcfg field or subsection.
+>   After live migration, savevm/loadvm, or snapshot restore the
+>   destination CPU resumes with srmcfg = 0 while the guest believes its
+>   programmed RCID/MCID are still in effect. Add a versioned
+>   vmstate_ssqosid subsection with a .needed predicate on ext_ssqosid,
+>   following the vmstate_smstateen/vmstate_envcfg pattern.
 
-     case INDEX_op_and_vec:
-         if (c2) {
-             vece = vec_logical_immediate_vece(a2);
-             set_vtype_len_sew(s, type, vece);
-             tcg_out_opc_vi(s, OPC_VAND_VI, a0, a1, a2);
-         } else {
-             set_vtype_len(s, type);
-             tcg_out_opc_vv(s, OPC_VAND_VV, a0, a1, a2);
-         }
+I'll add a VMStateDescription for Ssqosid.
 
-etc.  Very possibly wrapped up in another function akin to 
-tcg_out_opc_vv_vi.
+> - [MEDIUM] In target/riscv/cpu.c (isa_edata_arr), Ssqosid is
+> registered as a user-facing extension and enabled by default on
+> BASE32/BASE64 with no tests/tcg coverage anywhere in the tree. The
+> RISC-V upstreaming rules require unit tests for new extensions' CSR
+> accesses, and the stateen gating and V=1 trap paths added in
+> check_srmcfg are exactly what such tests would exercise -- they would
+> have caught the broken SRMCFG stateen bit above. Add tests/tcg cases
+> for srmcfg read/write, WARL masking, and the
+> stateen/virtual-instruction-fault gating.
 
+I'll add tests for srmcfg.
 
-r~
+> - [LOW] nit: in target/riscv/tcg/csr.c, the check_srmcfg comment says
+>   "we need to throw and virt instruction fault"; s/and virt/a virtual/.
+
+I'll fix.
+
+Thanks,
+Drew
 
