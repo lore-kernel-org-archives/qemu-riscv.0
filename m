@@ -1,99 +1,99 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 582D9606A31D
-	for <qemu-riscv@archiver.kernel.org>; Wed, 28 Oct 2026 13:55:54 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C1E65606A31C
+	for <qemu-riscv@archiver.kernel.org>; Wed, 28 Oct 2026 13:57:01 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=GFC8HNxH;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=J7osPM5R
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=B46SfiHR;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=WRLAAz67
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xM47r-00053q-TK; Wed, 28 Oct 2026 09:55:37 -0400
+	id 1xM49B-0005Ft-V7; Wed, 28 Oct 2026 09:56:58 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prajwal.n@oss.qualcomm.com>)
- id 1xM3lt-0003to-FV
- for qemu-riscv@nongnu.org; Wed, 28 Oct 2026 09:32:56 -0400
-Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
+ id 1xM493-0005F6-A9
+ for qemu-riscv@nongnu.org; Wed, 28 Oct 2026 09:56:50 -0400
+Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prajwal.n@oss.qualcomm.com>)
- id 1xM3lr-0007N1-DC
- for qemu-riscv@nongnu.org; Wed, 28 Oct 2026 09:32:53 -0400
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+ id 1xM491-000137-HG
+ for qemu-riscv@nongnu.org; Wed, 28 Oct 2026 09:56:49 -0400
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 69SDIH4T3916337
- for <qemu-riscv@nongnu.org>; Wed, 28 Oct 2026 13:32:48 GMT
+ 69SBdx7G4154582
+ for <qemu-riscv@nongnu.org>; Wed, 28 Oct 2026 13:56:46 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- n6BYAif61YNxLMR26cNQmvYoHVQuGk4/6A2sFyMuB8E=; b=GFC8HNxHhvCPrBuy
- lV4lOl0ARmJDb3yevQWz8ESBhnZO6hkRvajj93RcEjvSOqv2iAPx1CTIxUBJ5BCa
- 18jy80uGBXF7mPZOn9fEiAcr8TkORwrOxhGHJW6WSqu81Tqxv+4Ljk8dsKo7ehFN
- 5z7Vnese8SVWj+UaRXZR97ttSa4Gflt0UB7ZoqPHqOB+83jDW85pOE7izg1yjXMy
- QqW/fvrI4wleWILg/b1lgLRl8lDbQOJDqpz6hiCFxC5kpTbfJ+iC34tOF2DdEPoT
- U+CDIUEfqOFUk4q3v5EueAneIpPZGb/+Sefcqpa1ctvUFLTT1yyzs7eP6QdU50lY
- 6wvFPQ==
-Received: from mail-vs1-f72.google.com (mail-vs1-f72.google.com
- [209.85.217.72])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hkhtng1xw-1
+ qpL1Jz+LTl+962xGPbneGzNJZkCmiPVOxhZsO5Mdh7s=; b=B46SfiHRiV2MzzSf
+ loNQ7whj0vRg+LPq+b6QIll1B1e321f5OoJznsQXkbLdxS6ISWu9+Fj3b0mObZgA
+ HhPogX8e2reMiY3ISLDeor7teWLDCnwHwy4B5sscXjtx2CAfB7SIR4HPIHVnHkOV
+ +O+uXJc+0BSOZh9WRKUw4EMcJrwrmPJ3RA0WC9bb9h+/BYv9HWCEPo2tAZUoT1EI
+ tPlKhETBh2bP2KpDzvFrr6SIBgUWlrR35DeDDAsQfDAOoeBXwStbW1A4bQaf2AQ6
+ mZ/QRo7J+q71xnf70I8Jij6ca/ZQljkfiA2WD5peGWkFyFQlmJVPRGGSfQBZUfkD
+ crAGFg==
+Received: from mail-dy1-f197.google.com (mail-dy1-f197.google.com
+ [74.125.82.197])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hkdsp13xm-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Wed, 28 Oct 2026 13:32:48 +0000 (GMT)
-Received: by mail-vs1-f72.google.com with SMTP id
- ada2fe7eead31-7cc36b97a77so237409137.0
- for <qemu-riscv@nongnu.org>; Wed, 28 Oct 2026 06:32:48 -0700 (PDT)
+ for <qemu-riscv@nongnu.org>; Wed, 28 Oct 2026 13:56:45 +0000 (GMT)
+Received: by mail-dy1-f197.google.com with SMTP id
+ 5a478bee46e88-30bcb065bfdso1709640eec.0
+ for <qemu-riscv@nongnu.org>; Wed, 28 Oct 2026 06:56:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1793194367; x=1793799167; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1793195805; x=1793800605; darn=nongnu.org;
  h=content-transfer-encoding:content-type:in-reply-to:from
  :content-language:references:cc:to:subject:user-agent:mime-version
  :date:message-id:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=n6BYAif61YNxLMR26cNQmvYoHVQuGk4/6A2sFyMuB8E=;
- b=J7osPM5RLTV7HzgB54VuG38Z1ZbkpD9PQc2FY9vZkUNT2tUlMRZGur/lDOxfyZ6Iwb
- v5RrAQiDo5K9AiLCy1cSEyGI1IJPFUmqxK28dbX2Oc14PDpGWGRsfKmr0qrdrPXYJuxl
- CuiKCWEEBjvpHw5W4wTxdhSP/EMDSgkcK+5I5htv7r1ZKBDgccxpY+/SGjHBXlDzmbe9
- 5VGmIBfQO0ZBVvoKsiD2OTJjEyte1d0iQn3ie1Srm8GDzGwna25hlPncs+a0OYH+brNK
- k6qaIM92FCLDqk7kXBn0lai7P7PgqAKjktqPPVk1UP5w3rpxtMN/MXI/ckK2AHkEMtgt
- T2bQ==
+ :content-type; bh=qpL1Jz+LTl+962xGPbneGzNJZkCmiPVOxhZsO5Mdh7s=;
+ b=WRLAAz67ihkIy7OUDZW7rpd+hkM/KDOazU9G/ITlAcOGWIN3poGfTPTxETTgef5NsS
+ 2CJGM8C9yKfMEnfIH0jFdKMjp2nXubozZHe8rcmxu2Ukn/8pw7DHfd79+E1uPpL1DzVg
+ ZYA1pxKFu7T9uDxtP+PZWry3w2WRrAFCcyck+PJ3bry0JoRCH0dBjf++3I8pQxFnVhST
+ uJ6q8T49RsrMlZnj3oR3w2RE2DFb9z1mlvh86+jGT8xGQCP3Iv3E8uMyx8ehOGwn4X9C
+ UBTZ4+FRa2CrJ2Px05fFCp9BZNd4b0kvN1JFwisTwlA/iLhyl4taXaRbdohx1smGZLx6
+ 7Mwg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793194367; x=1793799167;
+ d=1e100.net; s=20260707; t=1793195805; x=1793800605;
  h=content-transfer-encoding:content-type:in-reply-to:from
  :content-language:references:cc:to:subject:user-agent:mime-version
  :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=n6BYAif61YNxLMR26cNQmvYoHVQuGk4/6A2sFyMuB8E=;
- b=fQNmRE5FF7VWid8kgxMk4b0RBLK9Zp+6PnRY3gORA9AvX3T6tXdDNbFe8bBhZkjiUM
- 6Vm6ZWK+2yi/n4fWT/2PmZRFzI9xSkvduNEGqjWyfwo6dfCWVfv+/Kg3iJP+YP2hoQWP
- XaMPRrvkIgbhymK9bqtfe/aMPKE34hWwEWFcubCPT359UGbIRhOzdgej5EZbT6ah2/8d
- STBFDaTKUmx1JNkEq0dLHOsEbvPmHCag8pnO43Uvo5PhiL3m6fezmZbO9GRKT4PtKk8M
- x6x+yyhFgTPkNVsh/AKbXoSnr7WJJGNXSUb14zRK975q+SijSfl87YpVEgVIm5380LiD
- 9Jmw==
-X-Gm-Message-State: AFq9FYLqriLrjIm4sixwv6CJfabU5Q6gLA+ZzoSFgnbV+MqMfOIbx9xh
- MFygthzOZKWr0UiPfO3EwGsTMNLld4CC49umymCNC5A4vh0neOtq9jlSHyFbALFPI5KO0cc1Ivc
- b4c0s5MdHIvOA1kJUdzzKepw1eiA+Ecg8AweCiWo+1c+bVjIT7i6jekQtkw==
-X-Gm-Gg: AYBFou15L5QyyWl4toAAft08G/3DtGNZkeHHaGb8/ZRSEvajsn6EjY5mU0ThIFi7Nf+
- tjaUyESoi0Z5E3BkV5ZKBEkM3SIduCO2nakwnAbdDj/EJIarBAr1xzUVtphbQF2h8yhqpZuFnlG
- SYQstju18gr0XoykkrdBE1aAkuiNMi7lx1S41DDLjqsqhFCFUKGMfFEjgeBcmCX0h9qHzl1ag7K
- GgauUwSFXU/5n7D+pgraYYGwVBMilTpArEXwJjE7yaLehXnhjkgPDCuI+/bbEjJd0U2C1JzTwEj
- l2Z6K42zLD/pMfTVbA05d3/JwV/6XlYo3l3hd7YZ1qYPFvvqK/90TqiK+3kmfTxBPr232eCAxU9
- 0CeXwxMyzB1so9E6/ZmdqIVB1VEJl+KHxr3DwBJycqzTGXjUkUeuTCpI8XKbHeAy9s47o4wrJ2A
+ bh=qpL1Jz+LTl+962xGPbneGzNJZkCmiPVOxhZsO5Mdh7s=;
+ b=sKF9wEW+QMXQw2r7maDRsFl28HMrqLzaaNSDO7Aonp78oenrZJTTNt/JfK+S4uHeEc
+ Z7XHU6lUhJhpnK7U+17kX+JlnyuOk8ju9eeYBOmahYvrzRqy8jO6fgGXMZ0JbbeczCso
+ YGiv9HBDawRY2TQAim9XPAhstGweAG6LEo8JRv3n8vRb0mXtZlznWHTz+GnLuKYAih7i
+ +QrWLsSBOGaE7xcRXBZJzOcmjlJUPoYTzT4Sa08wMxARAbRMgkcFpe+zfW4MhrrK5IIU
+ XeV3DwNcR1mX+A2Qp0iM5bwm7TGY8Xtk1Ys1aC7FGMhCWDdocIzl81WZiarZNG7VUXOm
+ /YkQ==
+X-Gm-Message-State: AFq9FYJGPoTbiR2JffBek3rdrA6xBuBFslENsoU/Pzlm9l19vP6VaOGI
+ OTJ4caTqHsckXXqUATLeKnZeVhK6Em7duKKRMo4UR8UrOFT3XUFysA/YjddiJ3l0i1osdaicQtn
+ OtBHfAKZNaSiPT96nb3uhHVUZb1ApNtN3TilZJbcDnQV+S8umTDNUbRRwQw==
+X-Gm-Gg: AYBFou1TxWdj2OCIst6ODzy8viMfAE01I8sMxcaWtXk5fzcj4eRHhMajExUhNxDfLEU
+ 0QF90rpP86Rjfe5ws137KaZNoBMQTIZ2r2tlIOjK3LO0rJHJ/1e4SU3uq7jPjk55tWDeR52JraV
+ oMbMnXVWr9tUeFyv/GvCuzIk5F3myoS3wrJrRHK7bnBlcI7FQQ4GcYIt2iPzqtUGdXTqCE3YBmB
+ vtNgaOSEautt4qriIJBs3xbkGTV2Z1kWRIpQSSiQVGYm7zNjdf+J1pA5kbZ4RnkV7KVT51YiU7G
+ V4wfHWVrzy9/zZjbbc5SvdSYu7c/ne+BtkwPUEBbWO41YhSOS1gfOsMhZW7rin1QtkUiNJsWRxP
+ AwWoTndfNnlOhbyR8T4+5HfwgG51JcjHVW1ZKULLXHrmFIVjH2Hp5M+kU7TwLN0q3vmMK9prmfg
  ==
-X-Received: by 2002:a05:6102:3fa6:b0:7cc:23e7:e743 with SMTP id
- ada2fe7eead31-7d03a5581a0mr949587137.15.1793194367001; 
- Wed, 28 Oct 2026 06:32:47 -0700 (PDT)
-X-Received: by 2002:a05:6102:3fa6:b0:7cc:23e7:e743 with SMTP id
- ada2fe7eead31-7d03a5581a0mr949552137.15.1793194366440; 
- Wed, 28 Oct 2026 06:32:46 -0700 (PDT)
+X-Received: by 2002:a05:701b:458c:b0:17f:7280:134e with SMTP id
+ a92af1059eb24-1a6cef7a368mr2765239c88.32.1793195804747; 
+ Wed, 28 Oct 2026 06:56:44 -0700 (PDT)
+X-Received: by 2002:a05:701b:458c:b0:17f:7280:134e with SMTP id
+ a92af1059eb24-1a6cef7a368mr2765190c88.32.1793195804055; 
+ Wed, 28 Oct 2026 06:56:44 -0700 (PDT)
 Received: from [192.168.1.6] ([125.99.240.160])
  by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-5bfca5bd75bsm571829e87.79.2026.10.28.06.32.35
+ a92af1059eb24-1a75e5c6d4fsm11027199c88.14.2026.10.28.06.56.36
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 28 Oct 2026 06:32:45 -0700 (PDT)
-Message-ID: <b789deea-1d49-4d3e-8203-58ff42fcb930@oss.qualcomm.com>
-Date: Wed, 28 Oct 2026 19:02:32 +0530
+ Wed, 28 Oct 2026 06:56:43 -0700 (PDT)
+Message-ID: <af95947c-62aa-46ad-82e9-1720be6fefde@oss.qualcomm.com>
+Date: Wed, 28 Oct 2026 19:26:33 +0530
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 3/6] hw/riscv: implement CBQRI capacity controller
+Subject: Re: [PATCH v6 6/6] hw/riscv: add CBQRI controllers to virt machine
 To: Drew Fustini <fustini@kernel.org>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
@@ -110,52 +110,51 @@ Cc: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
  Chen Pei <cp0613@linux.alibaba.com>, guo.wenjia23@zte.com.cn,
  liu.qingtao2@zte.com.cn, prajwal.n.oss@gmail.com
 References: <20261026-riscv-ssqosid-cbqri-v6-0-1a367a35cd0e@kernel.org>
- <20261026-riscv-ssqosid-cbqri-v6-3-1a367a35cd0e@kernel.org>
+ <20261026-riscv-ssqosid-cbqri-v6-6-1a367a35cd0e@kernel.org>
 Content-Language: en-US
 From: Prajwal N <prajwal.n@oss.qualcomm.com>
-In-Reply-To: <20261026-riscv-ssqosid-cbqri-v6-3-1a367a35cd0e@kernel.org>
+In-Reply-To: <20261026-riscv-ssqosid-cbqri-v6-6-1a367a35cd0e@kernel.org>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: pV8MbDTvgu0xIaKiWblQD5MHoEhe8s4o
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDI4MDA1MiBTYWx0ZWRfX+/2cjCsa4b56
- ZtwewwNVwumKFjDgABZ1ASF0l3QVes58jNm73tg986A+2dExEdWRtXD9D7y9ClIfUFGnNoaEx3Q
- 2FdOvhGcbQBh+VWeAhSMzyUZ/iH8qp2c0jDBx66Bk19q+/hi8L+2KN5NDaqRn0aBtaYocuHmmQv
- mueS+bepwEPRt8mUNcv8p1hm8OcuoObNuhW8eZZCZ/QzfPWw0ViXibcntx9VSq2CH3E400WJbfA
- m20wA3X58XnMu9NdbOjIqPzylJf1xAQmtddpefpP2A++Gv2jRCaw68VpjKJYfQNzdTvjXOZTV74
- KuxRi7wxEnrc487zmal9MSz4KvD5N5OliWDJyiobjBMbdsEeRREI1E17fFk/r6KVH1ARKhzXZu6
- 0EfurxdiRYGwUlNQpSbfAsRF2H4f/LG9Rzi/o+oufwxGseBT4F2D8rmWT4BWVblwXHkBrcb80o+
- VPnG26p/40WrR+Nzisg==
-X-Authority-Analysis: v=2.4 cv=c/A+0h9l c=1 sm=1 tr=0 ts=6ae1f980 cx=c_pps
- a=DUEm7b3gzWu7BqY5nP7+9g==:117 a=GuUutMOJDLuJj3+4/pSvWA==:17
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-GUID: _cVNpShie24thlWIQb8cZsLpsVfkoC4k
+X-Proofpoint-ORIG-GUID: _cVNpShie24thlWIQb8cZsLpsVfkoC4k
+X-Authority-Analysis: v=2.4 cv=Cssq4X4D c=1 sm=1 tr=0 ts=6ae1ff1d cx=c_pps
+ a=Uww141gWH0fZj/3QKPojxA==:117 a=GuUutMOJDLuJj3+4/pSvWA==:17
  a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=V1jnuoLLAAAA:20 a=IpJZQVW2AAAA:8 a=EUspDBNiAAAA:8 a=VwQbUJbxAAAA:8
- a=69wJf7TsAAAA:8 a=2KBuwwOf-fcKeFyZZlUA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=-aSRE8QhW-JAV6biHavz:22 a=IawgGOuG5U0WyFbmm1f5:22 a=Fg1AiH1G6rFz08G2ETeA:22
- a=bA3UWDv6hWIuX7UZL3qL:22
-X-Proofpoint-ORIG-GUID: pV8MbDTvgu0xIaKiWblQD5MHoEhe8s4o
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDI4MDA1MiBTYWx0ZWRfX29pIQJ/43HFY
- gpdyy6AACGWY0G8LlkjiYHvvWfFvxr/3xiAXBLfRSClg/kAe4XLvYfCh1Czm4jZ+5b/Li6BmxvL
- 89wAlGS6/ZBsn5+UC69wdsKrGqKneH0=
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
+ a=IpJZQVW2AAAA:8 a=bDdBU3oEAAAA:8 a=VwQbUJbxAAAA:8 a=7HQ5lZ7GkhH3xUXdjy4A:9
+ a=QEXdDO2ut3YA:10 a=PxkB5W3o20Ba91AHUih5:22 a=IawgGOuG5U0WyFbmm1f5:22
+ a=DN7SgORnOiO7RqxRx1GC:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDI4MDA1NSBTYWx0ZWRfXzDo0GNSyvFi8
+ V4sia+rzksZjcbcPTyvzMM4JlPezPSvlGmNZsijjdIwyen2Vi/WSSBzifLV8ZUQpChETrYkEOdk
+ toHpjmUNh0VQOmH+hgGh8Oq9YDlcqWUcViYBuAcMX8j7OiRapcUOHuhBtsVTYEC/3ggd5I5vAYS
+ zdxFQ55YLXyRJXF3jldl3kDSRU0Y7jafoZnPaYW5WUkmF/1rcUbzdVdAE132ZRF100CMir1+mYm
+ o/dTmpeUnoXsISJKcjkPSjYeSCfeuXalNygiq+eJNOwb52DWISIxS6syn+TID9VvClYDRrLXJdo
+ ymsGtUBLPxcC7WP7Dog5PclgCz1ZrwX7qsfrVYrEv6wYYnTSwk4y/0CoBle6E1Jxb+VbEh/l+3B
+ LLnsEKAZCc/0QcJsSz9infFUsoLQf8okFS77dBWx/4AtHnD7Axj8wI/K6LGsYU9U8PRBzh1biGL
+ 4zfeDwRAaYljh8z5Fdg==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDI4MDA1NSBTYWx0ZWRfXyySubfBIxlAT
+ +kXwyWqUMf6G5LP4j9XVwyjYzYBemqLQdZlBIYuPxffqlrOOlnfk0neqc34x/+BsNPtPAn3GSL6
+ J4sMIn0pp5uhepqUQBo1vxRurwyXBHA=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-10-28_04,2026-10-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 priorityscore=1501 impostorscore=0 bulkscore=0 lowpriorityscore=0
- phishscore=0 adultscore=0 clxscore=1011 suspectscore=0 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610280052
-Received-SPF: pass client-ip=205.220.168.131;
- envelope-from=prajwal.n@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
+ suspectscore=0 lowpriorityscore=0 priorityscore=1501 adultscore=0
+ impostorscore=0 malwarescore=0 bulkscore=0 phishscore=0 clxscore=1015
+ spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2610190000
+ definitions=main-2610280055
+Received-SPF: pass client-ip=205.220.180.131;
+ envelope-from=prajwal.n@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
 X-Spam_score_int: -27
 X-Spam_score: -2.8
 X-Spam_bar: --
 X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, KHOP_DYNAMIC=0.001,
  RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Wed, 28 Oct 2026 09:55:20 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -166,11 +165,11 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-22.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,USER_AGENT_SANE_1
-	autolearn=unavailable autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
@@ -179,187 +178,115 @@ Hi Drew,
 On 26-10-2026 23:17, Drew Fustini wrote:
 > From: Nicolas Pitre <npitre@baylibre.com>
 > 
-> Implement a capacity controller according to the Capacity and Bandwidth
-> QoS Register Interface (CBQRI) which supports these capabilities:
+> Add CBQRI controllers to the RISC-V virt machine. The device properties
+> can be fully configured from the command line:
 > 
->   - Number of access types: 2 (code and data)
->   - Usage monitoring operations: CONFIG_EVENT, READ_COUNTER
->   - Event IDs supported: None, Occupancy
->   - Capacity allocation ops: CONFIG_LIMIT, READ_LIMIT, FLUSH_RCID
+>   $ qemu-system-riscv64 -M virt ... \
+>       -device riscv.cbqri.capacity,mmio_base=0x04828000[,...]
+>       -device riscv.cbqri.bandwidth,mmio_base=0x04829000[,...]
 > 
-> Link: https://github.com/riscv-non-isa/riscv-cbqri/releases/tag/v1.0
+> The mmio_base option is mandatory, the others are optional.
+> 
+> Many -device arguments as wanted can be provided as long as their
+> mmio regions don't conflict.
+> 
+> To see all possible options:
+> 
+>   $ qemu-system-riscv64 -device riscv.cbqri.capacity,help
+>   riscv.cbqri.capacity options:
+>     alloc_op_config_limit=<bool> -  (default: true)
+>     alloc_op_flush_rcid=<bool> -  (default: true)
+>     alloc_op_read_limit=<bool> -  (default: true)
+>     at_code=<bool>         -  (default: true)
+>     at_data=<bool>         -  (default: true)
+>     max_mcids=<uint16>     -  (default: 256)
+>     max_rcids=<uint16>     -  (default: 64)
+>     mmio_base=<uint64>     -  (default: 0)
+>     mon_evt_id_none=<bool> -  (default: true)
+>     mon_evt_id_occupancy=<bool> -  (default: true)
+>     mon_op_config_event=<bool> -  (default: true)
+>     mon_op_read_counter=<bool> -  (default: true)
+>     ncblks=<uint16>        -  (default: 16)
+>     target=<str>
+> 
+>   $ qemu-system-riscv64 -device riscv.cbqri.bandwidth,help
+>   riscv.cbqri.bandwidth options:
+>     alloc_op_config_limit=<bool> -  (default: true)
+>     alloc_op_read_limit=<bool> -  (default: true)
+>     at_code=<bool>         -  (default: true)
+>     at_data=<bool>         -  (default: true)
+>     max_mcids=<uint16>     -  (default: 256)
+>     max_rcids=<uint16>     -  (default: 64)
+>     mmio_base=<uint64>     -  (default: 0)
+>     mon_evt_id_none=<bool> -  (default: true)
+>     mon_evt_id_rdonly_count=<bool> -  (default: true)
+>     mon_evt_id_rdwr_count=<bool> -  (default: true)
+>     mon_evt_id_wronly_count=<bool> -  (default: true)
+>     mon_op_config_event=<bool> -  (default: true)
+>     mon_op_read_counter=<bool> -  (default: true)
+>     nbwblks=<uint16>       -  (default: 1024)
+>     target=<str>
+> 
+> Boolean options correspond to hardware capabilities that can be disabled
+> 
 > Signed-off-by: Nicolas Pitre <npitre@baylibre.com>
-> [fustini: add fields introduced in the ratified spec: cunits, rpfx, p]
-> Reviewed-by: Radim Krčmář <radim.krcmar@oss.qualcomm.com>
+> Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 > Signed-off-by: Drew Fustini <fustini@kernel.org>
 > ---
->  MAINTAINERS               |   1 +
->  hw/riscv/cbqri_capacity.c | 727 ++++++++++++++++++++++++++++++++++++++++++++++
->  2 files changed, 728 insertions(+)
+>  hw/core/sysbus-fdt.c | 4 ++++
+>  hw/riscv/virt.c      | 3 +++
+>  2 files changed, 7 insertions(+)
 > 
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 2984779ce43a..f230cdbbe1b8 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -408,6 +408,7 @@ M: Nicolas Pitre <npitre@baylibre.com>
->  M: Drew Fustini <fustini@kernel.org>
->  L: qemu-riscv@nongnu.org
->  S: Supported
-> +F: hw/riscv/cbqri_capacity.c
->  F: include/hw/riscv/cbqri.h
->  
->  RISC-V SiFive (Xsf*) extensions
-> diff --git a/hw/riscv/cbqri_capacity.c b/hw/riscv/cbqri_capacity.c
-> new file mode 100644
-> index 000000000000..7ea20532b950
-> --- /dev/null
-> +++ b/hw/riscv/cbqri_capacity.c
-> @@ -0,0 +1,727 @@
-> +/*
-> + * RISC-V Capacity and Bandwidth QoS Register Interface
-> + * URL: https://github.com/riscv-non-isa/riscv-cbqri/releases/tag/v1.0
-> + *
-> + * Copyright (c) 2023 BayLibre SAS
-> + * SPDX-License-Identifier: GPL-2.0-or-later
-> + *
-> + * This file contains the Capacity-controller QoS Register Interface.
-> + */
-> +
-> +#include "qemu/osdep.h"
-> +#include "qapi/error.h"
-> +#include "qemu/error-report.h"
-> +#include "qemu/log.h"
-> +#include "qemu/module.h"
-> +#include "qemu/bitmap.h"
-> +#include "hw/core/qdev-properties.h"
-> +#include "hw/core/sysbus.h"
-> +#include "target/riscv/cpu.h"
+> diff --git a/hw/core/sysbus-fdt.c b/hw/core/sysbus-fdt.c
+> index 12238570b5e1..265917ef573e 100644
+> --- a/hw/core/sysbus-fdt.c
+> +++ b/hw/core/sysbus-fdt.c
+> @@ -35,6 +35,7 @@
+>  #include "hw/core/platform-bus.h"
+>  #include "hw/display/ramfb.h"
+>  #include "hw/uefi/var-service-api.h"
 > +#include "hw/riscv/cbqri.h"
+>  #include "hw/arm/fdt.h"
+>  #include "hw/watchdog/sbsa_gwdt.h"
+>  
+> @@ -142,6 +143,9 @@ static const BindingEntry bindings[] = {
+>      TYPE_BINDING(TYPE_RAMFB_DEVICE, no_fdt_node),
+>      TYPE_BINDING(TYPE_UEFI_VARS_SYSBUS, add_uefi_vars_node),
+>      TYPE_BINDING(TYPE_WDT_SBSA, no_fdt_node),
+> +    /* RISC-V CBQRI controllers have no generic device tree node */
+> +    TYPE_BINDING(TYPE_RISCV_CBQRI_BC, no_fdt_node),
+> +    TYPE_BINDING(TYPE_RISCV_CBQRI_CC, no_fdt_node),
+>      TYPE_BINDING("", NULL), /* last element */
+>  };
+>  
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index d4b501802f60..dbc0f8cfc8d7 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -57,6 +57,7 @@
+>  #include "hw/pci-host/gpex.h"
+>  #include "hw/display/ramfb.h"
+>  #include "hw/acpi/aml-build.h"
+> +#include "hw/riscv/cbqri.h"
+>  #include "qapi/qapi-visit-common.h"
+>  #include "hw/virtio/virtio-iommu.h"
+>  #include "hw/uefi/var-service-api.h"
+> @@ -1157,6 +1158,8 @@ static void virt_machine_class_init(ObjectClass *oc, const void *data)
+>  #ifdef CONFIG_TPM
+>      machine_class_allow_dynamic_sysbus_dev(mc, TYPE_TPM_TIS_SYSBUS);
+>  #endif
+> +    machine_class_allow_dynamic_sysbus_dev(mc, TYPE_RISCV_CBQRI_BC);
+> +    machine_class_allow_dynamic_sysbus_dev(mc, TYPE_RISCV_CBQRI_CC);
 
-[...]
-
-> +static void riscv_cbqri_cc_write(void *opaque, hwaddr addr,
-> +                                 uint64_t value, unsigned size)
-> +{
-> +    RiscvCbqriCapacityState *cc = opaque;
-> +
-> +    assert((addr % 8) == 0);
-> +
-The same comments in the riscv_cbqri_cc_read() below are applicable
-here as well.
-
-> +    switch (addr) {
-> +    case A_CC_CAPABILITIES:
-> +        /* read-only register */
-> +        break;
-> +    case A_CC_MON_CTL:
-> +        riscv_cbqri_cc_write_mon_ctl(cc, value);
-> +        break;
-> +    case A_CC_ALLOC_CTL:
-> +        riscv_cbqri_cc_write_alloc_ctl(cc, value);
-> +        break;
-> +    case A_CC_MON_CTR_VAL:
-> +        /* read-only register */
-> +        break;
-> +    case A_CC_BLOCK_MASK:
-> +        if (cc->ncblks == 0) {
-> +            break;
-> +        }
-> +        /* fallthrough */
-> +    default:
-> +        uint32_t blkmask_slot = (addr - A_CC_BLOCK_MASK) / 8;
-> +        if (blkmask_slot == get_slots(cc)) {
-> +            /* this is cc_cunits register */
-> +            break;
-> +        } else if (blkmask_slot > get_slots(cc)) {
-> +            qemu_log_mask(LOG_GUEST_ERROR,
-> +                          "%s: out of bounds (addr=0x%x)",
-> +                          __func__, (uint32_t)addr);
-> +            break;
-> +        }
-> +        cc->alloc_blockmasks[blkmask_slot] = value;
-> +    }
-> +}
-> +
-> +static uint64_t riscv_cbqri_cc_read(void *opaque, hwaddr addr, unsigned size)
-> +{
-> +    RiscvCbqriCapacityState *cc = opaque;
-> +    uint64_t value = 0;
-> +
-> +    assert((addr % 8) == 0);
-> +
-To access the 64 bit CBQRI register, the Linux kernel is performing two
-32 bit reads. The register offsets that are passed to this function are 0x00,
-0x04, 0x08 ... The assert is triggered for the addr 0x04, 0x0c.. and the
-QEMU exists.
-This check should have been:
-assert((addr %4) == 0)
-
-The switch statement uses the register offsets that are 8-byte aligned.
-A_CC_CAPABILITIES (0x00), A_CC_MON_CTL (0x08) etc.
-Since the kernel invokes read twice, the second readl() has the offset addr
-0x04. This does not match any offset and falls into the default case.
-The following change fixes the problem.
-
-       hwaddr reg_addr = addr & ~7ULL; /* align down to 8-byte boundary */> +    switch (addr) {
-       switch (reg_addr) {> +    case A_CC_CAPABILITIES:
-> +        value = FIELD_DP64(value, CC_CAPABILITIES, VER_MAJOR,
-> +                           RISCV_CBQRI_VERSION_MAJOR);
-> +        value = FIELD_DP64(value, CC_CAPABILITIES, VER_MINOR,
-> +                           RISCV_CBQRI_VERSION_MINOR);
-> +        value = FIELD_DP64(value, CC_CAPABILITIES, NCBLKS,
-> +                           cc->ncblks);
-> +        value = FIELD_DP64(value, CC_CAPABILITIES, FRCID,
-> +                           cc->supports_alloc_op_flush_rcid);
-> +        value = FIELD_DP64(value, CC_CAPABILITIES, CUNITS, 0);
-> +        value = FIELD_DP64(value, CC_CAPABILITIES, RPFX, 0);
-> +        value = FIELD_DP64(value, CC_CAPABILITIES, P, 0);
-> +        break;
-> +    case A_CC_MON_CTL:
-> +        value = cc->cc_mon_ctl;
-> +        break;
-> +    case A_CC_ALLOC_CTL:
-> +        value = cc->cc_alloc_ctl;
-> +        break;
-> +    case A_CC_MON_CTR_VAL:
-> +        value = cc->cc_mon_ctr_val;
-> +        break;
-> +    case A_CC_BLOCK_MASK:
-> +        if (cc->ncblks == 0) {
-> +            break;
-> +        }
-> +        /* fallthrough */
-> +    default:
-> +        unsigned int blkmask_slot = (addr - A_CC_BLOCK_MASK) / 8;
-> +        if (blkmask_slot == get_slots(cc)) {
-> +            /*
-> +             * The cc_cunits register is always the slot following the
-> +             * last slot of cc_blockmask register. Capacity units are
-> +             * not supported by this implementation so must return 0.
-> +             */
-> +            value = 0;
-> +            break;
-> +        } else if (blkmask_slot > get_slots(cc)) {
-> +            qemu_log_mask(LOG_GUEST_ERROR, "%s: out of bounds (addr=0x%x)",
-> +                          __func__, (uint32_t)addr);
-> +            break;
-> +        }
-> +        value = cc->alloc_blockmasks[blkmask_slot];
-> +    }
-> +
-The logic within the switch statement always computes the full 64-bit register
-value. But the Linux kernel requested for 32 bits. The kernel is creating a
-64-bit value with the two 32-bit values. This should return only the relevant half.
-The following code snippet fixed the problem.
-    /* Return the correct 32-bit */
-    if (size == 4) {
-        if (addr & 4)
-            return value >> 32;   // high word
-        else
-            return value & 0xffffffff;  // low word
-    }
+When the controller device is created dynamically through the QEMU command line, the
+corresponding device tree node must also be created. As I do not see the implementation
+to add the DT node in this series, Could you please clarify how it is created.?
 
 Thanks,
 Prajwal N
+>  
+>      object_class_property_add_bool(oc, "aclint", virt_get_aclint,
+>                                     virt_set_aclint);
+> 
 
 
