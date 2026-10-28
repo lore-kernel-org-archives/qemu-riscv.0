@@ -1,109 +1,153 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E83BD606A31A
-	for <qemu-riscv@archiver.kernel.org>; Wed, 28 Oct 2026 07:33:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A19FB606A31A
+	for <qemu-riscv@archiver.kernel.org>; Wed, 28 Oct 2026 08:13:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=sifive.com header.i=@sifive.com header.a=rsa-sha256 header.s=google header.b=ksANx7Rj
+	dkim=pass (2048-bit key, unprotected) header.d=hotmail.com header.i=@hotmail.com header.a=rsa-sha256 header.s=selector1 header.b=gUZ1gIhW
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xLyAR-0007CK-1o; Wed, 28 Oct 2026 03:33:51 -0400
+	id 1xLymH-0005IR-AN; Wed, 28 Oct 2026 04:12:57 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jay.chang@sifive.com>)
- id 1xLyAO-0007Bg-3E
- for qemu-riscv@nongnu.org; Wed, 28 Oct 2026 03:33:49 -0400
-Received: from mail-ej1-x632.google.com ([2a00:1450:4864:20::632])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <jay.chang@sifive.com>)
- id 1xLyAM-0002ti-EF
- for qemu-riscv@nongnu.org; Wed, 28 Oct 2026 03:33:47 -0400
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-c4550d8ab15so78155466b.2
- for <qemu-riscv@nongnu.org>; Wed, 28 Oct 2026 00:33:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1793172824; x=1793777624; darn=nongnu.org;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=LnjmH2S/AjR4RFfS6rITEgbZa+dsK7wz1YppDAeLdro=;
- b=ksANx7Rjngof/hEQw+mDVD0EWOsQIzw8um+OUctRJ80yJZMkQR0uCWMpNrIY4zLSO2
- 7Yj6+SHoLysPxBX4ommhYt+my2PLhLEUmu38MFStbl5MYZtrrEx6BnomcgZYwLCrgoix
- O0w974D8M5RhDSjfV3OrbOxaE0XyeKT3xkxegNCEJmT0bblLcEsG4s8CEGiZaRA3qkAE
- U/V7Z4zh1/UNbDDs6gC4En3VcKjxyOG7lal5859Tgb/Xdzpis2P+BOkcX5HR107N5XjB
- rRmiVjAvdPWgLsHdmJHrrgN/5NlNtez2EGg8pakAFufNkQFD+6VjRI41ETPrmc+9gQJ3
- ODrw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793172824; x=1793777624;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=LnjmH2S/AjR4RFfS6rITEgbZa+dsK7wz1YppDAeLdro=;
- b=RWxn3z3MpaXmUTuFsdNmKFwDjcRk8ZOnEl1pkEYeFJ2TtE3vmS6PVw6OThAGOe3Uxy
- 7yh1NiXPi3msb5G9KamaL6u/wcWYuL7JWyXzapPg+Z/MQhDbKwIXwwnMYeTTnbqTsTUx
- /I/L3ykwh0ZUDp020b5wa0LGcS/iPQtrXJ9hxSZMZQ+rvdVI6pfXXI5a8SkvKoRoJdVN
- TG595g7E4uc7wRl9yd2nzzBhixGgWJrqRx4VAodHU1OJvKrY145Zqybu6lM0T4VIlh2r
- f1d7VEFCHshPh6gpfh/qQ5+89nVfq40YXNepvPpV4czHDU+HBtkNqRcyGxONn09rn/qs
- TAcg==
-X-Forwarded-Encrypted: i=1;
- AKwUvBwCkaDcSO57sC5G+Vj5mBpaZsfg5qh2NLoKgdoRPY2mTIAa9ir0oeS8ZprtVgAJKDCWnkt5R2BAD485@nongnu.org
-X-Gm-Message-State: AFq9FYJAF4CGYhelUIKp72HP/8shsdgeBFG0XrwdwJN+yNyER7poylRf
- +51mdosn2IYXPc5KDP6oWZfgRMtr66AjF45Qcu9zbiCtiEe8NveHKLCRcomPlVDJUU/VbD6szT2
- X9H6WJw6tfRbcQhnZU3MWqMMP0TaJ/C4L3gB16xR8Ujw3k7NzimqYqyqncn04nJveaBbmCV4zUj
- NHkl8UNXTAVT+lAPnOIXC/1XGfoF08YajmKsx4VZQ3dpM=
-X-Gm-Gg: AYBFou3l/9QFXqHQv7F7kKRETeoT4bDkDX1nt4k6tAmtOn54dcb1wT54izvxn++x8Jy
- Y5F/GP0XCK7dv/uNVKpH/VDNFnr7eJzDwcDun+afix3dulRI6RhiN9DJcwqRU1BywEJsPHRh1y8
- e4olKlFg6NCAYUCyQFl8yTH7Fcd4PIe6zNxeaPYxEHfRlSY/TIxOOOMk9X5AaqsuzszNNmlvcq/
- ktKwF/i90qzpZISqNclD1ArHHIn42ij0ArvqbZEO9wsC070ZiVUZl7wY/EaBtDJL+Cm8chMkHkd
- NDZR+k+rypyXH+PyUQ11JdcaGNDEHYMEBbRV60j5D6MQZpEhsCJUsga1VXrlyzS0gj82P/upt1v
- IVyUAC17eXWsB0/qbLx8vDtnHX1nk21UF03+3er+DG248G5f8xZXTKnCZVOWXks9OxQUCU77ptx
- WOQNRmT0heKhK9GQYeOtnBlHFDP4AZY2zAJE4sUGhiBnQNXg1NbIoVPUtUHBVOqDy0YvFIpg+0X
- jx1cwI8EUpUmhNb+F7r5XHlMn81EgloFDW/wMbP7OTIxTZ7ntqh1z0qyxq3pnCj51nTDaU8Psja
- XflxR4DBB+IjIRPKMoBqG0UUFu86oGowssVd2O4eyBrxNnWUg7v+LU2zdJjEJXh3pnZ7
-X-Received: by 2002:a17:907:3e06:b0:c42:73df:933b with SMTP id
- a640c23a62f3a-c49bdeaacd0mr120318366b.12.1793172824467; 
- Wed, 28 Oct 2026 00:33:44 -0700 (PDT)
-Received: from mail-ej1-f52.google.com (mail-ej1-f52.google.com.
- [209.85.218.52]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c46bd66bd3asm563999366b.56.2026.10.28.00.33.43
- for <qemu-riscv@nongnu.org>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 28 Oct 2026 00:33:43 -0700 (PDT)
-Received: by mail-ej1-f52.google.com with SMTP id
- a640c23a62f3a-c418e215671so74443466b.0
- for <qemu-riscv@nongnu.org>; Wed, 28 Oct 2026 00:33:43 -0700 (PDT)
-X-Forwarded-Encrypted: i=1;
- AKwUvBx8JG+jb8/bS8hg8+yYHm4+dV2St/Y1u6D+KSFpiQRZSnI7AkG/ecmREbD2TTdJd9Cu2x/3zBcESV/c@nongnu.org
-X-Received: by 2002:a17:906:9fc7:b0:c3f:55e6:83e6 with SMTP id
- a640c23a62f3a-c49bdeab6a7mr115586266b.15.1793172823267; Wed, 28 Oct 2026
- 00:33:43 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <nutty.liu@hotmail.com>)
+ id 1xLymC-0005I9-M6; Wed, 28 Oct 2026 04:12:52 -0400
+Received: from mail-japaneastazolkn190130003.outbound.protection.outlook.com
+ ([2a01:111:f403:d405::3] helo=TYDPR03CU002.outbound.protection.outlook.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <nutty.liu@hotmail.com>)
+ id 1xLymA-0006dp-76; Wed, 28 Oct 2026 04:12:51 -0400
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=omOmCfCaWGmyqXfuHzA3pQa1UyGnTfXem84TkEBpZ2W1eGIz8rjmmuCS36yRxv83+thBq+edpcVlBcDwJsuM3OLja9wqDtmIZ2UbdbvGb6kVb85TBK/Mje3ikfDaAiXtaYZB2iSb1bLnxBsJxtbSl3SXKRGPtrV6MIsLnIaEfG0FtIwv6NiMUIZVjFSNj7/FjX/NFztcgF3KpT2NGTk4yx2e+SZ9mQgcbzWSUc6QFbKAxZC9rCiTpWADRwCqIBPY7/s7rfvTIQE/6jIQ0OShCa3mfXszMRXjlJ9I0sfbZKgZkxOySSSqVKzsNaGgFMQTkmokigiaJ+3CTjmDo1kQKw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=yglbFrjUqZoUEH+8L9yS6FSKpUoWx+1NmS4rGq0Wk4w=;
+ b=WejDwZpVADjd9fooaZWGHjo821nHYFPAsIZjek58cH3OyFR6J8KQa8OUYiL928TT5OLUYB3DIhGKoRjGxRlZ06ZO2yW2+yNLmnm0kH1NdXnLgE2tj8GizWonyQUR0+fnOhywibiL9NnX21uW6wgNY/hidZc/wjXa9e4gKBxFttPi/xCo+ezxeMkoMZJ3Aj1+Rcz8FrGBhfQhd8Ea1BaExGLoDNdlyCexMTKMph8zsO/XU32RZnH7qpvYtrFxx/0meKFxwfzdzrO//futQ6CJPHHZN6dWCQ1jhupLD/hKufe/RoCT2aSzj4s9F/RNkNbTRQtlXXHFPjGR1UJT/CrBEg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hotmail.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=yglbFrjUqZoUEH+8L9yS6FSKpUoWx+1NmS4rGq0Wk4w=;
+ b=gUZ1gIhWzjvhwYN2kiVoOQ8hwXTSwbbCk1B9zearX8cwm/6qU/BTlwJ/XrHJOH8r9ePfo6K8TXFN/WDkU428fZi5jQ5XFk5OsY5SHQjmH99N0utJ6kGlu4JqHCe6Sj7Pcs1X0fF+cGSQVHDOgUPn+yms7e2LKK8PCuds7TOrUu1Q3Qa5eM+izUX74L/koSl64b6fhguDffubVZcwEq2ojWv/KVVQnW4Ef4HmzwgDkIHheDLj0/LUphLncqlfUCbC8cs+dmSXIIkV9K7zCd3HJFiqd3K/3R/0oeoSQRoHPCw9ttD8AcMjYApHk5C9hzZYvtWCkdXCRcsZsYjb2taohw==
+Received: from TYZPR04MB7491.apcprd04.prod.outlook.com (2603:1096:405:40::7)
+ by OSNPR04MB9767.apcprd04.prod.outlook.com (2603:1096:604:482::23) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.569.8; Wed, 28 Oct
+ 2026 08:12:42 +0000
+Received: from TYZPR04MB7491.apcprd04.prod.outlook.com
+ ([fe80::a450:2576:3b21:6230]) by TYZPR04MB7491.apcprd04.prod.outlook.com
+ ([fe80::a450:2576:3b21:6230%3]) with mapi id 15.21.0546.021; Wed, 28 Oct 2026
+ 08:12:42 +0000
+Message-ID: <TYZPR04MB749178B2F78204053B332EB9F36F2@TYZPR04MB7491.apcprd04.prod.outlook.com>
+Date: Wed, 28 Oct 2026 16:12:35 +0800
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 1/4] target/riscv/kvm: create kvm_riscv_aia_access_reg
+To: Wang Yechao <wang.yechao255@zte.com.cn>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>
+Cc: Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org, Xuemei Liu <liu.xuemei1@zte.com.cn>
+References: <20261026024048.630015-1-wang.yechao255@zte.com.cn>
+ <20261026024048.630015-2-wang.yechao255@zte.com.cn>
+Content-Language: en-US
+From: "Nutty.Liu" <nutty.liu@hotmail.com>
+In-Reply-To: <20261026024048.630015-2-wang.yechao255@zte.com.cn>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: SI1PR02CA0045.apcprd02.prod.outlook.com
+ (2603:1096:4:1f6::16) To TYZPR04MB7491.apcprd04.prod.outlook.com
+ (2603:1096:405:40::7)
+X-Microsoft-Original-Message-ID: <dd3cb2f4-7864-4eb7-a22f-16cbcf0ba858@hotmail.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-References: <20261021231346.2452179-1-daniel.barboza@oss.qualcomm.com>
- <20261021231346.2452179-18-daniel.barboza@oss.qualcomm.com>
-In-Reply-To: <20261021231346.2452179-18-daniel.barboza@oss.qualcomm.com>
-From: Jay Chang <jay.chang@sifive.com>
-Date: Wed, 28 Oct 2026 15:33:30 +0800
-X-Gmail-Original-Message-ID: <CAMXXpfakWUOw4r3vaSw7y6wkpojHuanXFeL9DD4PwnAqgnhmvA@mail.gmail.com>
-X-Gm-Features: AclHuK89muR4AACpl_RTB3BtYsN-Uqlkl6W-kcFwmiJ0B0IhlIkRJhWmLMsz5fU
-Message-ID: <CAMXXpfakWUOw4r3vaSw7y6wkpojHuanXFeL9DD4PwnAqgnhmvA@mail.gmail.com>
-Subject: Re: [PATCH v4 17/18] hw/riscv/trace: update branch bit in sync
- messages
-To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
- chao.liu@processmission.com, antikostya2@gmail.com, 
- Palmer Dabbelt <palmer@dabbelt.com>, frank.chang@sifive.com
-Content-Type: multipart/alternative; boundary="00000000000026e211065ee1952a"
-Received-SPF: pass client-ip=2a00:1450:4864:20::632;
- envelope-from=jay.chang@sifive.com; helo=mail-ej1-x632.google.com
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: TYZPR04MB7491:EE_|OSNPR04MB9767:EE_
+X-MS-Office365-Filtering-Correlation-Id: 669a8286-ece9-407a-d31a-08df34cb3c8f
+X-Microsoft-Antispam: BCL:0;
+ ARA:14566002|55001999006|19101099003|19110799012|8060799015|25010399006|4140399003|22091999003|24121999003|23021999003|5072599009|6090799003|15080799012|51005399006|40105399003|440099028|3412199025;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?bUFRL1F2ZEx2dXpua1JMVDNVQ1NPaStyYmdySFhVMm5mZE5VdWt2Yk1Vdjlx?=
+ =?utf-8?B?U1Btbm1nOXBSTGJxdHpQeUVxTlJPK0VuL0NoUDh2S1hnYTJjZXBUMmVualEv?=
+ =?utf-8?B?cWlmRkxSVGRUK2haci9QZjN5Wm1MT0svc1VuM2J6S3dMMWNzLzJob0xQNzdJ?=
+ =?utf-8?B?NGtZall4RmR1dVV3YnlCcEJzRVVFZHBUVDhtREZSTzRMaFFxeXpGU09mZ3Z3?=
+ =?utf-8?B?WGVNRWQ2SUNDSld3bzVzTThlRXVBbW9NejVlK0Y1T2RhYkRvY3pXNTBQbi9K?=
+ =?utf-8?B?L3ZMY1BYUVdGbDgrVW9ucmpvUFFPeTJlejUvcHB1aTBpTHR2WElsOXBnaEJp?=
+ =?utf-8?B?OEhMbzVoSkVSUEZYMnV2eDFxeDlOMG5obUJpbU13SHJoSzhhK0FNZkl4aitN?=
+ =?utf-8?B?VUR2TjF3WXc0YUFNTnhNb2wzNlA1bGkwYitGOVZucjNaQi9KQmFaRkVlVDdr?=
+ =?utf-8?B?OVdSWExRT2VJWVp1eUk2bXlUeUp3aXRiWjhoZFd1dHQ0aG0wd3JwWnN0WWtN?=
+ =?utf-8?B?NUVDTld1L1pUNEdHMTlUVVFJcngwVEVodWpKUzhOeDRKMzRGMTBYUDhPTVl5?=
+ =?utf-8?B?Z0JVaWcwbVI5RDlWRXlWU0EwVEw4cFlhdE9nQTRXczBodkRCV2JFbXdmS2Y5?=
+ =?utf-8?B?Y0Z2TnlMRXhXeHRqMkRuVmp6SGhLQklkb0k1cU1uUlNXaDEvM1NtM2VWUDZv?=
+ =?utf-8?B?eFBSZWhFSllaZnFTSktzdFpHSEVDcURYZnN6a2FWTXdrUEVSanhoSFdHcUJh?=
+ =?utf-8?B?YXBzZm0xTzU1ck5oamt4U0JNMEtqdUo0dDBQQXY1c1FBVUdkbUtXOEVRSSsr?=
+ =?utf-8?B?OFM1NWRwVWFtRDdTYzZBLzI1ZzlNU3hJaDBheGRpWDZMWXBJeTdIZExyREcv?=
+ =?utf-8?B?T2lLMUpZOVhaUjJZdkhMWDVKc3grbXNUbkJGZTduOVBjKzBmK20wN3g0aW04?=
+ =?utf-8?B?cjduUitpLzkrVkl2dnRMTUZIYkxxbXA2MHdyeDJBUW80UTZnV1RTUHZBaDNp?=
+ =?utf-8?B?QS92eS93M0tmcXdadGNZbXlzRTJ0SmRJU1VEYVU4TmdrOEh5Z1FySGhTOHJR?=
+ =?utf-8?B?SkVtVWNCREg3OEUwcDNrb3VodkRGdXg2YzF1QVVNNUdHVXFKWkQ4WTVrQ3VW?=
+ =?utf-8?B?SnlzMHRGYnIxQUd6MEdBczNzSkFoLzlMMnBSL21XOERXdit6N2V2WGVLZlpt?=
+ =?utf-8?B?QWFFT0FEc091ZlVJZDc4bHVpY0YyTlNQZWg5KzREUFQ1cTJLZjhPOS96YkJt?=
+ =?utf-8?B?NEdUZ2Z3OC9vbDM3QjVBMkxxcTd3K2l4WG1obHNaNzdmbEQrc3hwSjc0cG5T?=
+ =?utf-8?B?SGJHWTJaVzl5QnpZM3RUQXg5R25oUkMvK2lKM0c1Yis4NE5neFVDN1ZraFZO?=
+ =?utf-8?B?TzlrV0ZXWlpESDVkL0dKbnVMZmhENGhidGNpd08rbkt3VnQ5NjhxRUlLdnp1?=
+ =?utf-8?Q?OLvAmx0S?=
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?WGhycXUzNlpGSXRBdWkxZ0xodHBXUEMwYXNUQ1dnWWtIdWRrTG9TUUlYSTkw?=
+ =?utf-8?B?RHh4WGQvTUptamtlZmFWeVRvYjdhMlRvTTlrNkYvQnZOWDFydCs5cHlvL1JS?=
+ =?utf-8?B?MzN0dkVXbWpDQ1hyeElpWUl4b2RKTjBrQXF2Sk5VT0VGU3c4U3hCRS85UUJP?=
+ =?utf-8?B?a0lsZHFONFFXRXkxd2dlbkNtRmFKekFNR2RVYjlCbVdLMlNQSU9sc1crM3Vj?=
+ =?utf-8?B?bU9wRHdqUlNFbHdJZk9oVmVNaEF0K1J5c3lTYXJVTEtIUU5sNWZySHhDUkt5?=
+ =?utf-8?B?azI0QnhHbkFEQTFxK3FsdmlsSkFYVi9xakRTc3I2Wmo0eENkdW1iMGllQWY0?=
+ =?utf-8?B?SDNrSFg5Ry80TjFOWjk2c3I4Vk4xckNhcTdFS3pGM3JEN2RYRWdFUU1DLzd3?=
+ =?utf-8?B?WS9SdTh2SWY1ZmJFd0tEZmtSRW54bzhCRVJVekJFNWo1MkJWVmI1TnpPcjBQ?=
+ =?utf-8?B?c25zdHB6eUtKZDJuNzd1bnBzclpnaUdNbmtnaDk5MjQveWltRlJnd0ZITWVW?=
+ =?utf-8?B?am5MYy9wNXZtQjR5UkN1djNVVEk3UzhBZkFLcjFBUDdsSVlZdEFXSFpTRjA5?=
+ =?utf-8?B?KzlwNWJyVFV6a1VHQnhVMStrb1Z1U05adWRsSGxYcktqQS9tUXhLZWNKbUlu?=
+ =?utf-8?B?Q3RhellGV2NkbElJaDJwVk9tUVFjQnVuMzV2N0RHUXNaaFNBU05Rb3ludHFl?=
+ =?utf-8?B?dlhZSVdTcXVURUVoTWZybkpyditDbjJ6cGZUc29MWE82aDQ0ZzhjeHFSaUd6?=
+ =?utf-8?B?eUJheGJvSS9KemNjajNGRjJISUdzVEU3dStSK0FneEd1NmNSc3IyOFRJdTNw?=
+ =?utf-8?B?ZjA0NTcydlNOeWhUTUZ6akpIajhzd3JETzlkM3QyckJLQlJNMjFiL25vTFcv?=
+ =?utf-8?B?YXdLellhbTZMNkE3NTQ0SFNaQXZXdUltclhtMzJVdU1LK01wQ0tvelZaRllJ?=
+ =?utf-8?B?aGE0N1RZaDNpUXdCVk5DdkpSQmh1RDd5M2owb1pQSXI4UEE5bVJUTkZXYzMv?=
+ =?utf-8?B?clhqODRXaENsd3lOcEhGM0ZQVHk0OEtJbitZV2x5Wks5eHBTdDZGaVBXVWcx?=
+ =?utf-8?B?MUd6SGxFQmRFZzREcmZFWmJwWVlXd285VXU1RWtyTmo4dUVJNlFYemJtaTVo?=
+ =?utf-8?B?SVdxRk11eEpSQ2ZDeTRsQ3ZONzFXNTV5RFp0QUFnVEltbms4bDVuU2NpWkJK?=
+ =?utf-8?B?OE9UQVlrVE1ubHhvL014TjlGVVM1aWhQc0RoUnJRR3dRRER0cTltN3F2cHpZ?=
+ =?utf-8?B?MFNBWEpiNVlOVmFGVmYyMlM2eDJPZlRRNUZQUnN2NmFMRStLRzk0WkszVnpT?=
+ =?utf-8?B?WXpzNGxvSXlhYUxuQzdVa3NXd3dOeHdkY2Y4NjAwdmR4VEpoZThXWGw2SXZG?=
+ =?utf-8?B?bFhzUVRpUWlQdU9ZSytUSjdPbnF4czJzNTJEMnUxQ2tjUzByQjdlZFNjUTRI?=
+ =?utf-8?B?RldvM3NqcEhXdXVLRWNKbWZhZjZuVW0wQVpmZytjakMyMVIyY0xtTFk2NVBK?=
+ =?utf-8?B?Q2dRYVBvMmVXSytON2E2OTBOdCtuWDFsVVdCa21UM3czNTc0aU8rRm1Hb0dn?=
+ =?utf-8?B?dTFIYTNUQkd5U3QrSit4Uys5eUFyc1FGN2c4UGFQcGhra21LYzAvRS9zaWk1?=
+ =?utf-8?B?enZVQUo0TkVlNmFmdkVHOFdDQm1ZNWNoNzZpK2lsb0htaHFicUMwM3ZvVE1M?=
+ =?utf-8?B?ekY3dEJIM2RxVkNzNHRzcWV0emxCV01GY2JEam40OWZvQ1dKOXBGRUN0alFo?=
+ =?utf-8?B?eXpDelpoOFBmUmNmS1lOTVBhSlBpYklJTnNMVkN4d29JdUJMcUV6RS9pc0t3?=
+ =?utf-8?B?TGhhL3F3N2E5dUZMVit4S1AwUVIwTTRodDVhSGxDRThJSU1FcDh0MEZGcHc1?=
+ =?utf-8?Q?tToVHTtEAJjaE?=
+X-OriginatorOrg: sct-15-20-9412-4-msonline-outlook-c3e7a.templateTenant
+X-MS-Exchange-CrossTenant-Network-Message-Id: 669a8286-ece9-407a-d31a-08df34cb3c8f
+X-MS-Exchange-CrossTenant-AuthSource: TYZPR04MB7491.apcprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Oct 2026 08:12:42.0660 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: OSNPR04MB9767
+Received-SPF: pass client-ip=2a01:111:f403:d405::3;
+ envelope-from=nutty.liu@hotmail.com;
+ helo=TYDPR03CU002.outbound.protection.outlook.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -115,55 +159,81 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-2.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,HTML_MESSAGE,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS autolearn=no
-	autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-14.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
---00000000000026e211065ee1952a
-Content-Type: text/plain; charset="UTF-8"
 
+On 10/26/2026 10:40 AM, Wang Yechao wrote:
+> From: Xuemei Liu <liu.xuemei1@zte.com.cn>
 >
-> +static bool trencoder_addr_is_branch_taken(TraceEncoder *te, uint64_t
-> addr)
+> Create common function kvm_riscv_aia_access_reg to access APLIC
+> and IMSIC regs
+>
+> Signed-off-by: Xuemei Liu <liu.xuemei1@zte.com.cn>
+> Signed-off-by: Wang Yechao <wang.yechao255@zte.com.cn>
+> Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+> ---
+>   target/riscv/kvm/kvm-cpu.c   | 7 ++++++-
+>   target/riscv/kvm/kvm_riscv.h | 1 +
+>   2 files changed, 7 insertions(+), 1 deletion(-)
+>
+> diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
+> index c085b22b23..3ed94f7586 100644
+> --- a/target/riscv/kvm/kvm-cpu.c
+> +++ b/target/riscv/kvm/kvm-cpu.c
+> @@ -58,6 +58,7 @@ void riscv_kvm_aplic_request(void *opaque, int irq, int level)
+>   
+>   static bool cap_has_mp_state;
+>   static bool mp_state_reset;
+> +static int aia_fd = -1;
+>   
+>   #define KVM_RISCV_REG_ID_U32(type, idx) (KVM_REG_RISCV | KVM_REG_SIZE_U32 | \
+>                                            type | idx)
+> @@ -1924,13 +1925,17 @@ void kvm_arch_accel_class_init(ObjectClass *oc)
+>                                       "auto");
+>   }
+>   
+> +void kvm_riscv_aia_access_reg(int group, uint64_t addr, void *val, bool write)
 > +{
-> +    uint8_t last_branch;
+This function is only valid after kvm_riscv_aia_create() has completed 
+successfully.
+Would it be better to add the following ?
+
++        g_assert(aia_fd >=0);
+
+Otherwise,
+Reviewed-by: Nutty Liu <nutty.liu@hotmail.com>
+
+Thanks,
+Nutty
+> +    kvm_device_access(aia_fd, group, addr, val, write, &error_abort);
+> +}
 > +
-> +    if (te->branches == 0) {
-> +        return false;
-> +    }
-> +
-> +    if (te->last_branch_pc == addr) {
-> +        last_branch = extract32(te->branches, te->branches - 1, 1);
->
-
- last_branch = extract32(te->branch_map, te->branches - 1, 1);
-
-Thanks
-Jay Chang
-
---00000000000026e211065ee1952a
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div class=3D"gmail_quote gmail_quote_container"><blockquo=
-te class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px =
-solid rgb(204,204,204);padding-left:1ex">+static bool trencoder_addr_is_bra=
-nch_taken(TraceEncoder *te, uint64_t addr)<br>
-+{<br>
-+=C2=A0 =C2=A0 uint8_t last_branch;<br>
-+<br>
-+=C2=A0 =C2=A0 if (te-&gt;branches =3D=3D 0) {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 return false;<br>
-+=C2=A0 =C2=A0 }<br>
-+<br>
-+=C2=A0 =C2=A0 if (te-&gt;last_branch_pc =3D=3D addr) {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 last_branch =3D extract32(te-&gt;branches, te-=
-&gt;branches - 1, 1);<br></blockquote><div><br></div><div>=C2=A0last_branch=
- =3D extract32(te-&gt;branch_map, te-&gt;branches - 1, 1);<br><br>Thanks<br=
->Jay Chang</div></div></div>
-
---00000000000026e211065ee1952a--
+>   void kvm_riscv_aia_create(MachineState *machine, uint64_t group_shift,
+>                             uint64_t aia_irq_num, uint64_t aia_msi_num,
+>                             uint64_t aplic_base, uint64_t imsic_base,
+>                             uint64_t guest_num)
+>   {
+>       int ret, i;
+> -    int aia_fd = -1;
+>       uint64_t default_aia_mode;
+>       uint64_t socket_count = riscv_socket_count(machine);
+>       uint64_t max_hart_per_socket = 0;
+> diff --git a/target/riscv/kvm/kvm_riscv.h b/target/riscv/kvm/kvm_riscv.h
+> index aef681f0a2..8649219e0e 100644
+> --- a/target/riscv/kvm/kvm_riscv.h
+> +++ b/target/riscv/kvm/kvm_riscv.h
+> @@ -29,6 +29,7 @@ void kvm_riscv_reset_vcpu(RISCVCPU *cpu);
+>    * @level: %0 to clear the interrupt, non-zero to set it.
+>    */
+>   void kvm_riscv_set_irq(RISCVCPU *cpu, int irq, int level);
+> +void kvm_riscv_aia_access_reg(int group, uint64_t addr, void *val, bool write);
+>   void kvm_riscv_aia_create(MachineState *machine, uint64_t group_shift,
+>                             uint64_t aia_irq_num, uint64_t aia_msi_num,
+>                             uint64_t aplic_base, uint64_t imsic_base,
 
