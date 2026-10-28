@@ -1,73 +1,73 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 65ECA606A31A
-	for <qemu-riscv@archiver.kernel.org>; Wed, 28 Oct 2026 04:33:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B1EE9606A31D
+	for <qemu-riscv@archiver.kernel.org>; Wed, 28 Oct 2026 04:33:59 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=tenstorrent.com header.i=@tenstorrent.com header.a=rsa-sha256 header.s=google header.b=Nrlask3S
+	dkim=pass (2048-bit key, unprotected) header.d=tenstorrent.com header.i=@tenstorrent.com header.a=rsa-sha256 header.s=google header.b=hE/Wb3tU
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xLvKu-0007l3-4D; Wed, 28 Oct 2026 00:32:28 -0400
+	id 1xLvKd-0007aC-BF; Wed, 28 Oct 2026 00:32:11 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <portias@tenstorrent.com>)
- id 1xLvKj-0007bu-7g
- for qemu-riscv@nongnu.org; Wed, 28 Oct 2026 00:32:17 -0400
-Received: from mail-pj1-x102a.google.com ([2607:f8b0:4864:20::102a])
+ id 1xLvKH-0007WY-S8
+ for qemu-riscv@nongnu.org; Wed, 28 Oct 2026 00:31:52 -0400
+Received: from mail-pl1-x62c.google.com ([2607:f8b0:4864:20::62c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <portias@tenstorrent.com>)
- id 1xLvKh-0001fx-CM
- for qemu-riscv@nongnu.org; Wed, 28 Oct 2026 00:32:16 -0400
-Received: by mail-pj1-x102a.google.com with SMTP id
- 98e67ed59e1d1-3ac6971aaebso50987a91.3
- for <qemu-riscv@nongnu.org>; Tue, 27 Oct 2026 21:32:15 -0700 (PDT)
+ id 1xLvKE-0001df-Cp
+ for qemu-riscv@nongnu.org; Wed, 28 Oct 2026 00:31:49 -0400
+Received: by mail-pl1-x62c.google.com with SMTP id
+ d9443c01a7336-2e8ad5b2f61so1246415ad.2
+ for <qemu-riscv@nongnu.org>; Tue, 27 Oct 2026 21:31:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=tenstorrent.com; s=google; t=1793161933; x=1793766733; darn=nongnu.org;
+ d=tenstorrent.com; s=google; t=1793161904; x=1793766704; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=AELHiQVuS8sMWiSCO4SoXVSgjVkl2maGXmVrCr1lfb0=;
- b=Nrlask3Si/f3SRGybj/S64PEYMyC/y/gKk7SPWln+twaq0n3h4m8zvwBYa1ijvU78T
- D9rXOkTU8oUF1fjWT2CqKsAATaPQBhgV+yjgN1Y1TEbVobHU6kg95XUDLeMCiQ7mBkBX
- u5ddVx4gME5xs2iyAIR5GiDOwEw2y3B6FaRj+QKLD1d77ckR31NKOEHZiz604TzyaLZP
- 9cisWdFn2V4tUEQgNa3YcVmVLVjQOAbndvAR59urY7u3BISZeDBc/YeOa2ew+o/l2VSw
- 2Zxo9DJMU0ko/m04VQbT69uUk0vVs+KQ3ihrbcJhciAtB4j94HaogGkucYXbQ0OEYb++
- QiVQ==
+ bh=dgo2XhJWzYeIm74eJEIkWqQP5o4rena+PUi0auaTe00=;
+ b=hE/Wb3tU2CLUJFZ2tMC2vCpz9l1uTdVktEYH6kG68+FKfCShcNFOw1m5z4Gv2oV2KW
+ JEiy+kVBt12548qz4yg5JJrk636kNIQjUIYWv/exj1w0Wy+xzvR6dIYra0QEuycTL2M+
+ dFijnbcLx6zR+Jw4jPPuja84ilqqhNF9wPymc/slSWmZsPZ1KvmyXJe5bvrdKSsCAPkb
+ 0Z6Zhk6nDZ0DDZu6j6bsKPnHz4b4ddUe7qUOzYy8GZtNpcTlyMfxfuHcRpJpixsgJWHi
+ RdMNmYZGfvoRJ1xKnMrPVVCrhC6mN5t0rUxt92CGQxAJh9XoHcRFXI8udwa30C3aym1w
+ yM6Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793161933; x=1793766733;
+ d=1e100.net; s=20260707; t=1793161904; x=1793766704;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=AELHiQVuS8sMWiSCO4SoXVSgjVkl2maGXmVrCr1lfb0=;
- b=EuB7HnLJUtSg4Hh9gAQ0zrHwlaH7Qeuebm5TblO2BHlqjNU8lTKmfzb+PyIu68kHuu
- nIqGugzPixyaz6Nz7P3KNhH9BrOJD857RyAKiLT9Ss8wSn4kNYoyYTHDwvD5T64tq7KV
- DFbzAhVLR5t3xUKBqLcKBORd3tOsIZXdv9HaQt3PmbdPDc+amKTjnq4lb1a5qeSuI2YX
- 2NiDKHKVkXdV5Dlq+FMwazdJbXNTpfF03KCODokXkKCJk7KYHf796BQXv10OZcEHtUBK
- 8WrlUPc/XHZzvHQ6Dra4ztsgAQ9u7cpcHz+5AxoT7FFyoDx54XnBY1eBIVliiuqB0PCY
- qPpg==
+ bh=dgo2XhJWzYeIm74eJEIkWqQP5o4rena+PUi0auaTe00=;
+ b=rw+tis2WSBQTZXBZqWxTmw58PloqTrecEKC9AXDIIbr5V8oiisKtWivVSL7gHwk+HM
+ 8LopcRmkqS1Mwlg4UfqOiJxr8DbbSU9TYLjp/C9m6y6hRLC2CaADL0U7UcPqmCsqQvtf
+ z2p03kXyxvsW4ClG4BLjatwjWXxijstZ6+nc6Dz8c73CDZC5BFwI6D2+Qs0aFPJgWxeV
+ ys68NwPEuCiPFakg4dICVdBODGBgqSvo0by3+plneeEpGadS8wEM14jBELVGuTtXRgJf
+ owsL7IgY4daME+ihxIjqZG+HpiTLbv3OQUAaxe94RIU2H20PsXp5KnwxhC5tuw1zsX9B
+ g6gw==
 X-Forwarded-Encrypted: i=1;
- AKwUvByY9j4g/UMG96OPOg2qYAwEc8AU5eWO9L1zr2YHHHfa9o0c0uFdJGGEWQFo7qp8/0AYgkgoLzd5KxQM@nongnu.org
-X-Gm-Message-State: AFq9FYLq0g+kvFpAFmBZMAUaRBwF66dX4zHH4LvdZXVuoN0AIx+ZzqdE
- 4WqdvSdCY1OVPm1Klw/meyuDjCQeV6jiOk2v2qcm187Sxg6tsoieBtP+jvuRKsocEjk=
-X-Gm-Gg: AYBFou1y+VLRiKTIXVP8gCQ1abttKK29fSIgcLIItNpeYAUSpZGFGLPKrbR5v99tjSu
- vo2r9lykN8heGt8ElTT9IK7Y9H5OEsWR6ztCJoMNm63moqJuZBjLtQOe2QuWNtgC1gUSeiI+/kv
- jmT16htNHA/J79+BFl4Wn7/xtP9+9+6Q9wsa/kVoCPUz1BMGtp2F4Y2sJXKR2AIUjXfztY8BvUK
- McN4TQulAKHZGIRUR4g76zRFz6uMDjHb6MGlmQYvO3UUf47YtZM4+FuOmAIHdps4Gth0AXYKYFI
- mYm1tqoBcFLDZKzgpDV14XFck6XdbMbgsTTe61TzJx1+tSEVUyS2b+Oohe3DPxw0RD0S7M/Y6nL
- mx0KhGe6ymk6mqXX9zNp84xs4EJ2z3hC+hVerIVPF7BPn2QAUXYlOVSQAplu+0d8RI8uP7wg2jx
- 0tzMYzWXKMRu5EDDGyq2S+SDck5CTFerWsJIuZDiwY8hCHx33fVmwZ1XdtzMymixf4MBYHV9LLp
- MV7h9C4Cyo9jMcSuDBJqycz8vt1vfn/66uIPT7qk8CMkkCTKPE7aZQGt6//7csSGzsKATVnEjGz
- rZwsEDcxeC4X6q3n5hQVRnEdiSdeR74tW19ZNzTcgguNzOy+vQ47BIUiG45zmrmyBz7MfQZmIsO
- nyeVjfdv30y6AiBE6POUTRu8=
-X-Received: by 2002:a17:90b:1d05:b0:3ab:be66:ddc5 with SMTP id
- 98e67ed59e1d1-3ae5832117bmr1468375a91.6.1793161933109; 
- Tue, 27 Oct 2026 21:32:13 -0700 (PDT)
+ AKwUvBxQ+31q384HZzlJkcYgzMvVvHal0D0+aXcgNvqiVhctEdjjenbB1guXXJaHvxlN576HUd61T3VyqpJR@nongnu.org
+X-Gm-Message-State: AFq9FYJ11DcIXz50UtwVd38b29szhrFmPT8qHvSZepEGWEHXJLDblPt1
+ lKVqiplnAjouREgO8E0qKvq6t6NC1w9SIiDKDnm9Qu1Y1N6+/G1GAQ2hoyxLk2/aWxs=
+X-Gm-Gg: AYBFou1SDEAdr/80gUbBBvVz64IygjR1yjLE6iEBV7SlFzk0B09YWvu44QIfmS/oWMn
+ eiV61X2IWsHTidH4DEIWuNPctA8xmcDrR/bHeZ7EjFIonH7fUgdB2rqKzF01p5Ercx4oRUwMzPO
+ SXF60IjhHEpDDfbx0tnNZl4jyiGRitwY178cDVrVr0mFhlgd3GNSmMTbDSG4spHj4cizPTJN7uk
+ rCHrDodx44b+Y6XJxz8eeYhV+JQXuAgD1eNDSSU3lygIIgrbvBnzcUXX6PINLvATTzmr3Tl5USf
+ fjmXZ0kwC4w2jCciwZC/9PehMwp2IlQnFt6t7JQ4lxvIdSb6fqo2QlLvPqgYVtS7n2VM8Wu1FWc
+ ng9ajY9n/G/HfX14MfXJZCZtmjPOcVavysYKJLthKF6zYG4oS9BMjMcutTvN1/ryNU+JEO9e8L5
+ RDjR/TDHy/ejrJ1lurPTVQq5GkPm3C4qdUipHm2+soWzYea9Rm2yLPV2v4ihzuBQnVr2K+3Myw4
+ 0OsrxKmkEo7ZToKrQrxACqgzcDPrGU58wl1rkaws2EFprwr/YeB/CrZSi6DBp/JXnbBDb/e+Lzm
+ RCjIjbhV/r5aKW69d0YqWNb0f2Q0sDxhCvPYWuCl0XHN9dxQyLHaC6wYp0EmpTI5G0RbYstaYE/
+ ZHsM=
+X-Received: by 2002:a17:90b:4c:b0:3ad:818f:3db4 with SMTP id
+ 98e67ed59e1d1-3ae582da5fdmr1439012a91.6.1793161904535; 
+ Tue, 27 Oct 2026 21:31:44 -0700 (PDT)
 Received: from lima-default.tail89d63.ts.net ([159.196.41.205])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3ae5a5d45a8sm1024470a91.17.2026.10.27.21.32.06
+ 98e67ed59e1d1-3ae5a5d45a8sm1024470a91.17.2026.10.27.21.31.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 27 Oct 2026 21:32:12 -0700 (PDT)
+ Tue, 27 Oct 2026 21:31:44 -0700 (PDT)
 From: Portia Stephens <portias@oss.tenstorrent.com>
 To: qemu-devel@nongnu.org
 Cc: Nicholas Piggin <npiggin@gmail.com>,
@@ -84,24 +84,23 @@ Cc: Nicholas Piggin <npiggin@gmail.com>,
  Richard Henderson <richard.henderson@linaro.org>,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
  Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
-Subject: [PATCH v2 09/10] tests/functional/riscv64: Add rcpu to tt-atlantis
- tests
-Date: Wed, 28 Oct 2026 14:30:58 +1000
-Message-ID: <20261028043059.600498-10-portias@oss.tenstorrent.com>
+Subject: [PATCH v2 05/10] target/riscv: Add Tenstorrent Real-time CPU
+Date: Wed, 28 Oct 2026 14:30:54 +1000
+Message-ID: <20261028043059.600498-6-portias@oss.tenstorrent.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261028043059.600498-1-portias@oss.tenstorrent.com>
 References: <20261028043059.600498-1-portias@oss.tenstorrent.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102a;
- envelope-from=portias@tenstorrent.com; helo=mail-pj1-x102a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62c;
+ envelope-from=portias@tenstorrent.com; helo=mail-pl1-x62c.google.com
 X-Spam_score_int: -19
 X-Spam_score: -2.0
 X-Spam_bar: --
 X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_NONE=-0.0001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -113,53 +112,193 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-21.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
-	USER_AGENT_GIT autolearn=unavailable autolearn_force=no version=4.0.1
+	INCLUDES_PATCH,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,
+	SPF_PASS,USER_AGENT_GIT autolearn=unavailable autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-This updates the tt_atlantis test to test Ascalon boot with the rcpu
-enabled and disabled. There is currently no code executing on the rcpu
-but this tests that the rcpu model does not break Ascalon boot.
+The RCPU is a high-performance 32-bit RISC-V embedded processor featuring
+a 6-stage, dual-issue superscalar pipeline, with tightly-coupled memories
+(TCMs), advanced interrupt controller (CLIC), and comprehensive
+debug/trace capabilities. It is designed for real-time, system
+management, and safety-critical applications requiring deterministic
+execution and low interrupt latency. See the Atlantis Datasheet, section
+2.2 for more information [1].
+
+The Atlantis SoC includes an RCPU used for boot, low-level control, and
+ongoing system management [1]. This adds a cpu entry for the RCPU
+and implementation specific CSRs. The CSRs are stubbed to allow code to
+run without exceptions but does not implement their functionality.
+
+[1] https://github.com/tenstorrent/atlantis-soc-docs/blob/main/data_sheet/atl_soc_data_sheet.pdf
 
 Signed-off-by: Portia Stephens <portias@oss.tenstorrent.com>
 ---
- tests/functional/riscv64/test_tt_atlantis.py | 10 ++++++++--
- 1 file changed, 8 insertions(+), 2 deletions(-)
+ MAINTAINERS                  |  1 +
+ target/riscv/cpu-qom.h       |  1 +
+ target/riscv/cpu.c           | 28 +++++++++++++++++
+ target/riscv/tcg/csr.h       |  3 ++
+ target/riscv/tcg/meson.build |  1 +
+ target/riscv/tcg/tt_csr.c    | 58 ++++++++++++++++++++++++++++++++++++
+ 6 files changed, 92 insertions(+)
+ create mode 100644 target/riscv/tcg/tt_csr.c
 
-diff --git a/tests/functional/riscv64/test_tt_atlantis.py b/tests/functional/riscv64/test_tt_atlantis.py
-index 48abd5cd27..940ddfd895 100755
---- a/tests/functional/riscv64/test_tt_atlantis.py
-+++ b/tests/functional/riscv64/test_tt_atlantis.py
-@@ -22,8 +22,10 @@ class TTAtlantis(LinuxKernelTest):
-          'rootfs.ext2.gz'),
-         'b6ed95610310b7956f9bf20c4c9c0c05fea647900df441da9dfe767d24e8b28b')
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 8cc426451c..b5b019b3e8 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -1847,6 +1847,7 @@ R: Portia Stephens <portias@oss.tenstorrent.com>
+ L: qemu-riscv@nongnu.org
+ S: Supported
+ F: docs/system/riscv/tt_*.rst
++F: target/riscv/tcg/tt_*.c
+ F: hw/misc/tt_*.c
+ F: hw/riscv/tt_*.c
+ F: include/hw/misc/tt_*.h
+diff --git a/target/riscv/cpu-qom.h b/target/riscv/cpu-qom.h
+index 61234842e3..72570ed47e 100644
+--- a/target/riscv/cpu-qom.h
++++ b/target/riscv/cpu-qom.h
+@@ -57,6 +57,7 @@
+ #define TYPE_RISCV_CPU_THEAD_C908V      RISCV_CPU_TYPE_NAME("thead-c908v")
+ #define TYPE_RISCV_CPU_VEYRON_V1        RISCV_CPU_TYPE_NAME("veyron-v1")
+ #define TYPE_RISCV_CPU_TT_ASCALON       RISCV_CPU_TYPE_NAME("tt-ascalon")
++#define TYPE_RISCV_CPU_TT_RCPU          RISCV_CPU_TYPE_NAME("tt-rcpu")
+ #define TYPE_RISCV_CPU_XIANGSHAN_NANHU  RISCV_CPU_TYPE_NAME("xiangshan-nanhu")
+ #define TYPE_RISCV_CPU_XIANGSHAN_KMH    RISCV_CPU_TYPE_NAME("xiangshan-kunminghu")
+ #define TYPE_RISCV_CPU_MIPS_P8700       RISCV_CPU_TYPE_NAME("mips-p8700")
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index a682350d28..fdedf16ebe 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -3455,6 +3455,34 @@ static const TypeInfo riscv_cpu_type_infos[] = {
+         .cfg.pmp_regions = 8
+     ),
  
--    def do_test_riscv64_tt_atlantis(self, connect_disk):
-+    def do_test_riscv64_tt_atlantis(self, connect_disk, rcpu):
-         self.set_machine('tt-atlantis')
-+        if not rcpu:
-+            self.machine += ',rcpu=off'
-         kernel_path = self.ASSET_KERNEL.fetch()
-         rootfs_path = self.uncompress(self.ASSET_ROOTFS)
- 
-@@ -48,9 +50,13 @@ def do_test_riscv64_tt_atlantis(self, connect_disk):
-         self.vm.launch()
-         self.wait_for_console_pattern(pattern)
- 
-+    def test_riscv64_tt_atlantis_rcpu(self):
-+        # test with the rcpu enabled
-+        self.do_test_riscv64_tt_atlantis(False, True)
++#if defined(TARGET_RISCV32) || \
++    (defined(TARGET_RISCV64) && !defined(CONFIG_USER_ONLY))
++    DEFINE_RISCV_CPU(TYPE_RISCV_CPU_TT_RCPU, TYPE_RISCV_VENDOR_CPU,
++        .misa_mxl_max = MXL_RV32,
++        .misa_ext = RVI | RVM | RVA | RVB | RVC | RVD | RVF | RVU,
++        .priv_spec = PRIV_VERSION_1_13_0,
 +
-     def test_riscv64_tt_atlantis(self):
-         # tt-atlantis machine has no PCI host yet, so no disk
--        self.do_test_riscv64_tt_atlantis(False)
-+        self.do_test_riscv64_tt_atlantis(False, False)
++        .cfg.mmu = false,
++        .cfg.ext_zbc = true,
++
++        .cfg.ext_zba = true,
++        .cfg.ext_zbb = true,
++        .cfg.ext_zbs = true,
++        .cfg.ext_zca = true,
++        .cfg.ext_zcb = true,
++        .cfg.ext_zifencei = true,
++        .cfg.ext_zicsr = true,
++        .cfg.ext_zicbom = true,
++        .cfg.ext_zicntr = true,
++        .cfg.ext_zihpm = true,
++        .cfg.ext_zicond = true,
++        .cfg.pmp = true,
++#if defined(CONFIG_TCG) && !defined(CONFIG_USER_ONLY)
++        .custom_csrs = tt_csr_list,
++#endif
++    ),
++#endif
++
+ #if defined(TARGET_RISCV32) || \
+     (defined(TARGET_RISCV64) && !defined(CONFIG_USER_ONLY))
+     DEFINE_RISCV_CPU(TYPE_RISCV_CPU_BASE32, TYPE_RISCV_DYNAMIC_CPU,
+diff --git a/target/riscv/tcg/csr.h b/target/riscv/tcg/csr.h
+index 53ba3b4a4d..4bc55b70d6 100644
+--- a/target/riscv/tcg/csr.h
++++ b/target/riscv/tcg/csr.h
+@@ -87,6 +87,9 @@ extern const RISCVCSR th_csr_list[];
+ /* Implemented in mips_csr.c */
+ extern const RISCVCSR mips_csr_list[];
+ 
++/* In tt_csr.c */
++extern const RISCVCSR tt_csr_list[];
++
+ /* PMP CSRs, defined in pmp.c */
+ void pmpcfg_csr_write(CPURISCVState *env, uint32_t reg_index,
+                       target_ulong val);
+diff --git a/target/riscv/tcg/meson.build b/target/riscv/tcg/meson.build
+index 86805b30cb..77357475c3 100644
+--- a/target/riscv/tcg/meson.build
++++ b/target/riscv/tcg/meson.build
+@@ -25,6 +25,7 @@ riscv_system_ss.add(files(
+   'pmp.c',
+   'pmu.c',
+   'th_csr.c',
++  'tt_csr.c',
+ ))
  
  
- if __name__ == '__main__':
+diff --git a/target/riscv/tcg/tt_csr.c b/target/riscv/tcg/tt_csr.c
+new file mode 100644
+index 0000000000..c76cd1a9cb
+--- /dev/null
++++ b/target/riscv/tcg/tt_csr.c
+@@ -0,0 +1,58 @@
++/*
++ * Tenstorrent CPU implementation specifics.
++ *
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ *
++ * Copyright 2026 Tenstorrent
++ */
++
++#include "qemu/osdep.h"
++#include "cpu.h"
++#include "target/riscv/tcg/csr.h"
++
++/* RCPU custom CSRs */
++#define RCPU_CSR_MICACHE          0x7c0
++#define RCPU_CSR_MDCACHE          0x7c1
++#define RCPU_CSR_MITCMCR          0x7c5
++#define RCPU_CSR_MDTCMCR          0x7c6
++#define RCPU_CSR_MHCR             0x7c7
++#define RCPU_CSR_MEXINFO          0x7ca
++#define RCPU_CSR_MNMIE            0xbc6
++
++/* predicate for an RCPU core */
++static RISCVException any(CPURISCVState *env, int csrno)
++{
++    return RISCV_EXCP_NONE;
++}
++
++static RISCVException read_zero(CPURISCVState *env, int csrno,
++                                target_ulong *val)
++{
++    *val = 0;
++
++    return RISCV_EXCP_NONE;
++}
++
++static RISCVException write_none(CPURISCVState *env, int csrno,
++                                 target_ulong val, uintptr_t ra)
++{
++    return RISCV_EXCP_NONE;
++}
++
++const RISCVCSR tt_csr_list[] = {
++    { .csrno = RCPU_CSR_MICACHE,
++      .csr_ops = { "micache", any, read_zero, write_none} },
++    { .csrno = RCPU_CSR_MDCACHE,
++      .csr_ops = { "mdcache", any, read_zero, write_none} },
++    { .csrno = RCPU_CSR_MITCMCR,
++      .csr_ops = { "mitcmcr", any, read_zero, write_none} },
++    { .csrno = RCPU_CSR_MDTCMCR,
++      .csr_ops = { "mdtcmcr", any, read_zero, write_none} },
++    { .csrno = RCPU_CSR_MHCR,
++      .csr_ops = { "mhcr", any, read_zero, write_none} },
++    { .csrno = RCPU_CSR_MEXINFO,
++      .csr_ops = { "mexinfo", any, read_zero, write_none} },
++    { .csrno = RCPU_CSR_MNMIE,
++       .csr_ops = { "mnmie", any, read_zero, write_none} },
++    { },
++};
 -- 
 2.43.0
 
