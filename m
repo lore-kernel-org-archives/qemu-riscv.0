@@ -1,156 +1,130 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1F267606A31A
-	for <qemu-riscv@archiver.kernel.org>; Wed, 28 Oct 2026 08:17:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D674C606A320
+	for <qemu-riscv@archiver.kernel.org>; Wed, 28 Oct 2026 09:10:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=hotmail.com header.i=@hotmail.com header.a=rsa-sha256 header.s=selector1 header.b=tZqyPdlT
+	dkim=pass (2048-bit key, unprotected) header.d=kaod.org header.i=@kaod.org header.a=rsa-sha256 header.s=ovhmo393970-selector1 header.b=UJKy+g5E
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xLyqM-0006oh-DH; Wed, 28 Oct 2026 04:17:10 -0400
+	id 1xLzfH-0003u5-Oc; Wed, 28 Oct 2026 05:09:47 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <nutty.liu@hotmail.com>)
- id 1xLyqK-0006nQ-QZ; Wed, 28 Oct 2026 04:17:08 -0400
-Received: from mail-japaneastazolkn190120002.outbound.protection.outlook.com
- ([2a01:111:f403:d405::2] helo=TYPPR03CU001.outbound.protection.outlook.com)
+ (Exim 4.90_1) (envelope-from <clg@kaod.org>) id 1xLzfE-0003tA-Dv
+ for qemu-riscv@nongnu.org; Wed, 28 Oct 2026 05:09:45 -0400
+Received: from smtpout4.mo538.mail-out.ovh.net ([51.210.91.33])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <nutty.liu@hotmail.com>)
- id 1xLyqJ-0007Ak-8d; Wed, 28 Oct 2026 04:17:08 -0400
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=HTfkoPgN1b7ZJ8JUyJIkOcUrL3L1KcOvFyUw5bNaHSfWiY4xnFvqU9VytJ7QSa4lP1chCUIvcfWMBpkE0m8/0ND8e/0mGE8NFAzJy5SVJHMRr10agJwLlnyMYJJmQM1DhAcBIQnWJ6lWhkN9my3wGLH5onsyAt4XoAvgnCUXavq8iyS6DZkCy4zvFFE0VWqQvLCaw/jD4mEIrdcGYnq3fYPVeQb4wOE4iVc1Z2F0KBNN9Hr5ED5B4TdMi6bGUMkEHQ7Bj9geQ6/ICC/DabdEekfLGtnHjRnF/BT6tYIBAHmAHQ6fvKfJ8JVgdmmG1VOHhL4kE09uvrbLVjxlFNVK3w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=clUKAEfv1n0d0ysJxwklb4pmWvvWr5vRGixICwCsoy4=;
- b=VGftIl/QpIrMrR/u8F2TBcY5/mDWeELWMob3FBAGb7fnZZimy6nIgfdiED1tTOBqfKfAy8P9cLPMHA99GRKsp473+joF2jMH/IK/nT2TCLD1tx9gcqtiMkUPO1hrR0q4OBDdt62sXLsh2HJRRKnn2Ziec+WIIqeX+2gauq26XYofUqK3qFeNHqB669BKeSkVw4sg4gU/ZWfzG1PZD3Mh1PW4hqHH7QgB41QDyjQX5g+Sl9ChQdZx2PsCmcsSQeIl0lo8dxxzAgUZM82hOM16LvwRBprgse27goMceeH1cxP3Ha7NXlruZktSxFo8QStLPmcPup7LynGXh1zOdrbjcA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hotmail.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=clUKAEfv1n0d0ysJxwklb4pmWvvWr5vRGixICwCsoy4=;
- b=tZqyPdlT8+P3J7iKyIR1st2sTEXlcq1Ev5cUv33h5yXqMeKCr8FIY/VnhsmA1ohThCab0WtLzy1MWvah+dtPqlHmaCiiQE6wOqRNLXzs6hcRROyjxK3Enm19Pv+JAlRfVRcu49tbHFFhGBlwA600/+X769myct3n3pVTSpfqYylHR1s905yDyHsG08purkygKbLaIVVdNDHcaK/ZOK3eBR8M/NtR6hLadsn7AsM02XruVWdK9y25XFvOiRUZrrLUM5vCfYeKAbroooL2Td9aMPjQ3MX4xy1sHxQLnDWDRU2tstJuFELr0ebayIby4cSfxXw1EirXnUGPAhUQh0S70A==
-Received: from TYZPR04MB7491.apcprd04.prod.outlook.com (2603:1096:405:40::7)
- by KUZPR04MB8983.apcprd04.prod.outlook.com (2603:1096:d10:2f::9) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.546.22; Wed, 28 Oct
- 2026 08:16:59 +0000
-Received: from TYZPR04MB7491.apcprd04.prod.outlook.com
- ([fe80::a450:2576:3b21:6230]) by TYZPR04MB7491.apcprd04.prod.outlook.com
- ([fe80::a450:2576:3b21:6230%3]) with mapi id 15.21.0546.021; Wed, 28 Oct 2026
- 08:16:59 +0000
-Message-ID: <TYZPR04MB7491ECBD333A976E1BC93A98F36F2@TYZPR04MB7491.apcprd04.prod.outlook.com>
-Date: Wed, 28 Oct 2026 16:16:51 +0800
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 3/4] include/qemu/bitops: Move BITS_TO_U64S to bitops.h
-To: Wang Yechao <wang.yechao255@zte.com.cn>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Peter Xu <peterx@redhat.com>,
- Fabiano Rosas <farosas@suse.de>
-Cc: Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org, Xuemei Liu <liu.xuemei1@zte.com.cn>
-References: <20261026024048.630015-1-wang.yechao255@zte.com.cn>
- <20261026024048.630015-4-wang.yechao255@zte.com.cn>
-Content-Language: en-US
-From: "Nutty.Liu" <nutty.liu@hotmail.com>
-In-Reply-To: <20261026024048.630015-4-wang.yechao255@zte.com.cn>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: SI1PR02CA0031.apcprd02.prod.outlook.com
- (2603:1096:4:1f6::11) To TYZPR04MB7491.apcprd04.prod.outlook.com
- (2603:1096:405:40::7)
-X-Microsoft-Original-Message-ID: <82fc95d4-e697-4cdd-ba59-a356f67ccce9@hotmail.com>
+ (Exim 4.90_1) (envelope-from <clg@kaod.org>) id 1xLzfB-0004qv-U5
+ for qemu-riscv@nongnu.org; Wed, 28 Oct 2026 05:09:44 -0400
+Received: from director3.derp.mail-out.ovh.net
+ (director3.derp.mail-out.ovh.net [79.137.60.223])
+ by mo538.mail-out.ovh.net (Postfix) with ESMTPS id 4jF1lP1zzhz5vWr;
+ Wed, 28 Oct 2026 09:09:37 +0000 (UTC)
+Received: from director3.derp.mail-out.ovh.net
+ (director3.derp.mail-out.ovh.net. [127.0.0.1])
+ by director3.derp.mail-out.ovh.net (inspect_sender_mail_agent) with SMTP
+ for <jamin_lin@aspeedtech.com>; Wed, 28 Oct 2026 09:09:37 +0000 (UTC)
+Received: from mta2.priv.ovhmail-u2.ea.mail.ovh.net (unknown [10.110.96.187])
+ by director3.derp.mail-out.ovh.net (Postfix) with ESMTPS id
+ 4jF1lP0frzz1xpV; Wed, 28 Oct 2026 09:09:37 +0000 (UTC)
+Received: from kaod.org (unknown [10.1.6.0])
+ (Authenticated sender: clg@kaod.org)
+ by mta2.priv.ovhmail-u2.ea.mail.ovh.net (Postfix) with ESMTPSA id 8CD8494207E; 
+ Wed, 28 Oct 2026 09:09:34 +0000 (UTC)
+Authentication-Results: garm.ovh; auth=pass
+ (GARM-95G00188092313-06f7-458f-85c8-eb28ff4bc8c5,
+ E08929C5676352A1F51837021B168DD299C323AB) smtp.auth=clg@kaod.org
+X-OVh-ClientIp: 82.66.77.115
+Message-ID: <f2a1f964-2cb1-4136-8780-3c2f7c4a2ef9@kaod.org>
+Date: Wed, 28 Oct 2026 10:09:33 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: TYZPR04MB7491:EE_|KUZPR04MB8983:EE_
-X-MS-Office365-Filtering-Correlation-Id: 6c72e5c2-bcff-4424-2d9e-08df34cbd5fa
-X-MS-Exchange-SLBlob-MailProps: obhAqMD0nT+6TxoHw5fNkboUl/ASnSn2PiVI6/JFdwXf8kE+hFVM22x98qn6dXCkIwDyPo5mOggKKmw06ba+lVCDzcec7F1vyBJoXGI6yOdVtg7pDDNwyuw/dY3J4NjkcQ1+ps00U8qmI4SaMTnkpR0AY2eW9dUY+/AsVyv/Odi/wiHmLsNLYUHxP+P9OA7HoSyNuCVohQCgj/iw155dYUgnq2X4VDRhDTEevWIwM6pLsG74Xf4UO7oNGNEQ+Dtp13YIu+5UYO8rfK1diNVsUEseDhDpAtpoIsO6BS7vvSuYzH5e/KiWR0BTZxt+MEu31JFBG70BelG60GL8nh9cbHIAoPgolDzN/VFLvPK4uteezs6s/kk66Fkjqt8xV36gvi9b6IKe7DtCQvsMJX5KIRxunPk942/QNjGcpCxTWenwiP7QiFwyZi0JSH6U820sg6fVt87vqmO5mwVSIsi0qa+T9+QuXqM3xu5SYcOXeQYDMrGCPjWD2HZsdELWWY8nIgI2+bGkL2+sOSs9UZbjXycUaesDV7rANQ0X1p7McyW5h69Br7TgkVq9K+MDkWpYben9EPgjNOiB8SvzvEwUNZUzLZ1n7zO1MkmEiN58h/7KwAnLT/4yCXPkRzpqqldzC9nnUY/Sh1wZmoqGmGrVwMvF6G766V5mMIvA9zlbVzbJx01ZsbHwubWlzMNWkSZDULHEfZB4HJP+4N9d0TqbXKYCVDTEcgZGD8ecci00sDuWcdjH3OO8v54jmgXPrc0qcIf2wN8FiYlMSqUWvjCPChkdJSLm5IunjDDf0ruf23fnaCUPvNkcji1TKKQMYq4V
-X-Microsoft-Antispam: BCL:0;
- ARA:14566002|15080799012|5072599009|23021999003|55001999006|19101099003|6090799003|8060799015|22091999003|24121999003|2604032031799003|12121999013|19110799012|25010399006|4140399003|3412199025|440099028|40105399003|52005399003;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?MGVWUUcwYTc1UUNKZnZXNGNIMlJudndWdGVZM1BhSno5bHloNEJ4Vm1uSEdr?=
- =?utf-8?B?QnhaN1Z0THJzUlRlcnJIL3Z4ZWRmNFdoZ0p0VjNMVW04dFJaVUJDMk1hY0J3?=
- =?utf-8?B?bGp1cVBiNjdGTkMwZFJ0QVh2OThwU3grenlhakdJN3BWT3hlOTdISWpPRytV?=
- =?utf-8?B?NjdDb3JNWmtVenNQb1RsTXJiZU5FejNvSEp4Y2xGdW5ETzRtbE44STNQNHRu?=
- =?utf-8?B?T25wWW5pZUlIV2NvTFJvQ25NTlhLVXpidmw3bi9DWVN4OEVZYUg4aDJTQitW?=
- =?utf-8?B?dWdTQnZrVmxoSUlmTllncXBUbEliYjRjaTFBanpyQXdHWnZyOUxyUEF5RWE1?=
- =?utf-8?B?VUduSWhSdkFUSnlCZnh4eXJoOTI1ZWdvMnExNnJuVHY3VTZqZDA1UzB0cFhW?=
- =?utf-8?B?clhubE4rMkJJdW9pbkhuUDlna3FoS2R1U3ZPbVplbk1sbmJrS2xIMGQ3QW9m?=
- =?utf-8?B?dnYvbDRPNkQ5VS9tbktPMHBZV1pXWlJaaDc3WHhvS1pGUWhweWNrWVhnK3JL?=
- =?utf-8?B?UFZ4ZWJTR2dsVFJ6ZzVBMGI0ZGVWWVFrN0E2TEJHTzZBVlY5Rk9BTFdSTXYy?=
- =?utf-8?B?UTlWSG5GSDdzUlVjWTIyZTAwYmVia01kdkVRb0pIaSt0aytRSTZKdzRkaU1S?=
- =?utf-8?B?L2JaZ2dBL3FJbnRNZU9sZFhGZnRFbGd6L1I1eHNQa1pCRytOQm0rZFJOR1dF?=
- =?utf-8?B?MnJGUXpJSnZoQXFsdC9pdlFlbXY4bGx6RTl4YkE2Y3NveGFPaFZMa00vUHZ3?=
- =?utf-8?B?WWZna1hadm1GTDhMS2lSY3FpZ0ZuWURUVzNLRlA2TjVVNkZQWUJqLzFGZVVs?=
- =?utf-8?B?VDI0UXFiMTNKendONmpTV01mK1A1M3pvbFBIMEVLQ0cxRGoyWCswUmV2K3Ft?=
- =?utf-8?B?YWhmcXVINy82blhEUzh2SDR0anRHN1VYYzF0anNIZ1czV2JwS3BlSTUyK21O?=
- =?utf-8?B?bDRKc0crUlRwa1oxNTRPL2Nqd2REVUMwKzVocitrNDlUcVNzQ0JDbWg2MXF5?=
- =?utf-8?B?T2lyYm1ZR2UyYVVFVXQ1cmllaVNNN1Q2M0xCVEgrQWdWR01URXpKeTZ6ayti?=
- =?utf-8?B?ZXc4bENSUldGUmRQZy9zZ1JHTEtuQ1JNVEdKOHNtNVNmMnNMc1prTHJKNGJn?=
- =?utf-8?B?Wkc1blQrVEJybThidEhTaURZRnJlRG1TNWxXRVk1ejZxeDFPa2REQ3o3TGkw?=
- =?utf-8?B?UlFJaEllN3doR0FNY2UvR09Yd045bUtQWHN2eWVHZnRGajIwbU1XUWN6TFhQ?=
- =?utf-8?B?MFhWbGJMSy9XQkNrWWN3RUowNDFMdTZiSlBUU1dleFVBbFpGL082R3JwNnZI?=
- =?utf-8?B?RGk4REpJOVBFbUJ2NU9KL3EzVGZmeUtmbm5POU1pcExsNkdZYzZja3lORFI4?=
- =?utf-8?B?SENtTjFiV212bHNCRHNUMlh1TlBndWNoQkhiYml2TXRRK2ZraFA0RWs5TGhW?=
- =?utf-8?B?VVNmUzRpamMwb0xuamJIcmxlZkNtV2JQamFjRkdDRUR3czNOdDN4NUtCbURn?=
- =?utf-8?Q?NW7WuEWi2NT3p6nScjHz2Ml6IAz?=
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?cWZkSS8zbXAxVFZNZXFmbUthaUVzbkMvend1bW0wWGNWNVVOZG9HWXNZRTBT?=
- =?utf-8?B?ZWI1M3VPMU96b2Zlc2h4VjRLeTBZc2xKUmJoMnBIT1JIa0xCTDR6WHFxOHVS?=
- =?utf-8?B?UkVLam01M1ViKzU2dURhVTRxZVVxc2xDd3JOaTBrTU9BbTdSTTVBb3JyMG5H?=
- =?utf-8?B?R2FTZzNYNHJlV09XRDl1alowdE9FVmIzaFpmWVkrR1UyMGNFakpzVlhjL0Q1?=
- =?utf-8?B?L2I2anEycWZsRldkUGJHLy9ZVDN3RllieUg1SWM4Um5qcjhVdVBrWTZZbDdx?=
- =?utf-8?B?US9XdW1jVG16dnZ1QkdKdDVHUkhYTHF4RTIwVGNUU2JheHp0V3lvOTh6dENz?=
- =?utf-8?B?dWpjaVlqUkZ2Qit5Sm05akFwN25tSHpmZzdmOTNmOTJ6OXQ2cGRYUllwaGpP?=
- =?utf-8?B?c1I1K25pWXJlVDBBSnVBM3pSNTZ5MU16cFdOL1YrdGxDZ3ZtV0EwbmtMTVl6?=
- =?utf-8?B?L0FuaU1PV1hjM1d5STNLWi9CRy9VMjZ6UW11SGcxeGZNcXh2bmREVGlkRHN1?=
- =?utf-8?B?NUhLcmdDSi9QMDB0Nkx4emsxb1kybEtrQUc3UGt2Z2RCT1hBMko4Um10QitE?=
- =?utf-8?B?S2IwMlBxNUhvOW5mQzFxOFlYUERpNm5qaysxalFOeXM2aXlwRko2WUVzVlVC?=
- =?utf-8?B?TzU3VnpyaFY3R2VncUxpVmppK3l5WDJxOVJHWEV1WE1zTUVIM0V5WU9nQnll?=
- =?utf-8?B?d3pEWmxONnlCalZPZUZDYkpla0UybExmS1FQRnQrTkxrQzdwWU1Hc0t3OFFq?=
- =?utf-8?B?RUpUQ0xWSmdjb1BkRGExeit4ZkF2b2E0SlNCSkxoOCs4WlBHMVplMVMrRWlo?=
- =?utf-8?B?Sk15YkZPanh2dmtqdGMxMmY0TkJ4cEVDU2hRSDJ3UUtRUm9GeDdRMllUSFR5?=
- =?utf-8?B?eDVzdURRUkxQNE81L2IxSFNWWG42QmU4RnZPaFhRcUNBTisvWVdNcDJieGhr?=
- =?utf-8?B?SlM2Z1lOcERsSlp3aFpEK21yRWR6bFZwcXB6ZFJ6RVMxaWFTa2crNlE3YWs1?=
- =?utf-8?B?Nm1sOFFUR1p3NDMrMHdVWVVrNWNLamx1VFd1bCtqeWJ2TDhsK0JWQ1RETC9n?=
- =?utf-8?B?YXZiNFAvSndwYlgyNlBJVGpmS2F3THplWjNMeXJZeTZoUHlkazJDSEExSVNw?=
- =?utf-8?B?RXFBaUgybDVWa3FpM0Z2dHJCWXlYSmZ1MHNnUXZpSXRqM3NaeUhCTlFPaEFH?=
- =?utf-8?B?RUplblpnOEV3Qks3dEQvclhRS2FEazVnUEo5WjgxS05oWElDYkdvcFJKdGsw?=
- =?utf-8?B?TkNrSmtPaVQvTm9xenp1RGZ0L21BNE0zSTE0d1NzbXlTMkFUK2hwSFhmMjAv?=
- =?utf-8?B?Zjd0cjZtWTM4TkZJMVFkREl5aC9VRFhwUmdaMThLeThCb0Z2V0JwV09kU0Fs?=
- =?utf-8?B?YWxiaG90NkZBcEN1cjZVdVpqWjFRSWN2WnR2ZU5WY1JVS1k4czN6MDNjUjFW?=
- =?utf-8?B?VGIyNVQ1VkwxdEx2dC9Qa3U3RDZ6c1pSNzdjSldYeU51NVlMbXpEcHJTS0w5?=
- =?utf-8?B?UUQ4SjIwZnJiWk1zbkU4aTBISDRSMnA5R1pTWXJSOEtDQkNqM2hNUlA2aHNZ?=
- =?utf-8?B?bEVXdFR4S1lPZXpMczlBZjRZMU1ENWE2N0dUNTlkRWJwWURQaVVNdmN4S1hn?=
- =?utf-8?B?QU0vL25WaXEzdTJXTFIrWENXdlJwaFE0Q1lVcm9ESDNiUFZYOGs2OTl5cDFY?=
- =?utf-8?B?ckNaZFFxc3lWVVlSdDRKYTdvWWtXNEFnNjA1MTl0MHQyRU9XeFQ4YU5jTDdU?=
- =?utf-8?B?Zjc1TVVqZU9HeFp0OUdQdnlCbzZ4S1BaUzgxRGw5RVZFei9OSVZTT2l4ekxo?=
- =?utf-8?B?MFNGRjU3S2lhbmZTVjIrL1Y2eGRXQ0E4aHhjLzdrNGZQbGRnUTZvN0hCNlpX?=
- =?utf-8?Q?TiqNgScrygkjC?=
-X-OriginatorOrg: sct-15-20-9412-4-msonline-outlook-c3e7a.templateTenant
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6c72e5c2-bcff-4424-2d9e-08df34cbd5fa
-X-MS-Exchange-CrossTenant-AuthSource: TYZPR04MB7491.apcprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Oct 2026 08:16:59.2809 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
-X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: KUZPR04MB8983
-Received-SPF: pass client-ip=2a01:111:f403:d405::2;
- envelope-from=nutty.liu@hotmail.com;
- helo=TYPPR03CU001.outbound.protection.outlook.com
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 00/50] Aspeed: I2C device models and the Minerva BMC
+ machine
+To: Emmanuel Blot <emmanuel.blot@free.fr>, qemu-devel@nongnu.org
+Cc: Peter Maydell <peter.maydell@linaro.org>,
+ Steven Lee <steven_lee@aspeedtech.com>, Troy Lee <leetroy@gmail.com>,
+ Jamin Lin <jamin_lin@aspeedtech.com>, Kane Chen <kane_chen@aspeedtech.com>,
+ Andrew Jeffery <andrew@codeconstruct.com.au>, Joel Stanley <joel@jms.id.au>,
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, qemu-arm@nongnu.org,
+ Patrick Leis <venture@google.com>, Fabiano Rosas <farosas@suse.de>,
+ Laurent Vivier <lvivier@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
+ qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
+ Jamin Lin <jaminlin1207@gmail.com>, =?UTF-8?Q?C=C3=A9dric_Le_Goater?=
+ <clg@redhat.com>, Bernhard Beschow <sgentey@gmail.com>,
+ Glenn Miles <milesg@linux.ibm.com>
+References: <20261015-bmc-minerva-v3-0-7d50c8a108e5@free.fr>
+From: =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>
+Content-Language: en-US, fr
+Autocrypt: addr=clg@kaod.org; keydata=
+ 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
+In-Reply-To: <20261015-bmc-minerva-v3-0-7d50c8a108e5@free.fr>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+x-ovh-tracer-id: 13533598359034440749
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: -100
+X-VR-SPAMCAUSE: dmFkZTGO4L+nPAgUyPcWMUjPhnEuXZM1YgSrsutwEM5QNFwZxCPRgpKnKrdKrcKfXsVSTML4cbEP9NYAt+s1LB/wQtfZpT26aYf9JMANzlT2G2UEI/3y9mMnVXCcJjNuOCDFn7hd5KZGwG+SODhviAQkAxVmrQ4Rr30ZnlqwXwR0HP24jvLKc3axJTyNOJfUswg5FfX7LYg8pCK43wYAA2bwHluAvlyg6KszMErcH9xRiBAKAa2q9Dl3khPJwjRoE7IYT2xwxblaF6Qsn12lfLEjhbHAmfP0vQrOQIgQLeye1E8ioRrd5lm9WtC4UxDeFcJ5b60Fuz4NHtZmwl7f/ktHo5MKXVOOhGQbDIGcPo36cXfP8pN+Ivz4Afp6N0EHJmhSwcnV1Ma53M9b4PERS5Jmg9ThfOib+MfPGItRw1/U+F2wq8zbY1gizPbbGWrYS2rlG25efOJF4GiuvVmpUXtGXKVhDnp/mIIvG6OnWW2UJhKfIGXItLYUW/L8Vz+Lo1XryYb1fL+1ffiOHvLVZHl7GOpY9uLQ6RfJcCmc2moF75WTh/x1fLWz2ejAv5tSVbTasjdiw8BoPFMo/Pa0Nsf89ywAqSlavFwtodvf9wofARzupC1LKsgrqoRVeqG5qWo+XVAprGPimhDqz7kFlw1uydEE3pCzOf5EBDtbAYeFkr4Tqw
+DKIM-Signature: a=rsa-sha256; bh=gs20Jp2jCCQ/ACrPHCq/82qaCTJOHplSBrcAzqQKr3o=; 
+ c=relaxed/relaxed; d=kaod.org; h=From; s=ovhmo393970-selector1;
+ t=1793178578; v=1;
+ b=UJKy+g5EvkZVN7G2DVg67lp0XbifQ6sYdPutDkcDgbgdaEgdWFe7j5bP/+HazhQLfCcRcuS+
+ 7mWDR4oTo0X7runsC6jdJVBcVLkyKpCsos/2sbRdimwd1oh8cv0v8zEy1/1bNy/nB9wVNgNG61I
+ Lm+E0qCnFk6Rn51ccutVZFkV/62ewcVVc+lqni2Oa9KoScuJjkTxcDttM+QXugzWVdr4xgj4DkB
+ 5u5670oEM0+pR82cb0rGdXhJoMabNmtiYEb2hR+bi39feA+Q+/SQmw3lw4n89EYv8m/bGzlFdu+
+ Xb4RTROqot59TuKCP0xhb0ZEeIS8rZ31uo2obaJ50Xklg==
+Received-SPF: pass client-ip=51.210.91.33; envelope-from=clg@kaod.org;
+ helo=smtpout4.mo538.mail-out.ovh.net
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -162,68 +136,175 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-14.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_SANE_1
+X-Spam-Status: No, score=-22.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,USER_AGENT_SANE_1
 	autolearn=unavailable autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
+On 10/15/26 11:27, Emmanuel Blot wrote:
+> Add the minerva-bmc machine and the I2C device models it needs.
+> 
+> Based on master, at:
+>    615ece3c40 ("Merge tag 'for-upstream' of
+>    https://gitlab.com/bonzini/qemu into staging")
+> 
+> New models:
+> 
+>    INA230   TI 36V current-shunt and power monitor
+>    INA238   TI 85V current-shunt, power and temperature monitor
+>    DS1339   RTC, a DS1338 variant
+>    PCA9545  4-channel I2C mux with per-channel interrupt inputs
+> 
+> The INA devices derive current and power from the shunt voltage and
+> their calibration registers. ALERT output is supported. Measurements
+> come in through QOM properties; however, conversion delay is not
+> modelled.
+> 
+> Introduce a device class to manage different variants of the DS1338
+> register map, such as the DS1339. Improve the DS1338 implementation
+> with a Resettable reset, support for the clock-halt bit, and a
+> "persist-on-reset" property keeping the registers across a reset.
+> 
+> The minerva-bmc machine is derived from the platform device tree and
+> instantiates every device that is supported in QEMU. FRU EEPROMs are
+> sanitised images taken from real hardware.
+> 
+> New qtests for the DS1339, INA230, INA238 and PCA9545, plus DS1338
+> cases for the register map, and a functional test booting OpenBMC on
+> minerva-bmc.
+> 
+> The docs now mention the previously missing catalina-bmc and
+> sanmiguel-bmc machines, and the title has been simplified.
+> 
+> One thing worth a second opinion: the PCA954x muxes now have a
+> VMStateDescription, which changes the migration stream for the
+> existing PCA9546 and PCA9548. The DS1338 vmstate also goes from
+> version 2 to 3, but older streams still load fine.
+> 
+> Signed-off-by: Emmanuel Blot <emmanuel.blot@free.fr>
+> ---
+> Changes in v3:
+> - ina230: drop a stray comment in the operating-modes test.
+> - Link to v2: https://lore.kernel.org/qemu-devel/20261012-bmc-minerva-v2-0-4c3dff084ec9@free.fr
+> 
+> Changes in v2:
+> - Rebase onto master, which now contains the v1 base.
+> - minerva: drop ASPEED_RAM_SIZE, removed upstream.
+> - No other changes; v1 received no review comments.
+> - Link to v1: https://lore.kernel.org/qemu-devel/20260907-bmc-minerva-v1-0-0d83ad610c3b@free.fr
+> 
+> ---
+> Emmanuel Blot (50):
+>        docs/system/arm/aspeed: add the catalina-bmc machine
+>        docs/system/arm/aspeed: add the sanmiguel-bmc machine
+>        hw/arm: sanmiguel: remove the second SPI flash controller
+>        hw/i2c: pca954x: drop unused header inclusions
+>        hw/i2c: pca954x: add PCA9545 4-channel mux model
+>        hw/i2c: pca954x: migrate mux state
+>        tests/qtest: pca9545: add mux test
+>        hw/rtc: ds1338: move TYPE_DS1338 to a public header
+>        hw: ds1338: use the TYPE_DS1338 constant instead of the "ds1338" string
+>        hw/rtc: ds1338: implement Resettable reset
+>        hw/rtc: ds1338: prefix the file-local helpers with ds1338_
+>        hw/rtc: ds1338: parameterise the register map via a device class
 
-On 10/26/2026 10:40 AM, Wang Yechao wrote:
-> BITS_TO_U64S was a private macro in migration/vmstate-types.c,
-> defining the number of 64-bit words used on the wire for bitmaps.
-> Move it to include/qemu/bitops.h alongside the existing
-> BITS_TO_U32S so it can be shared with other code.
->
-> While moving it, express the divisor with sizeof(uint64_t) instead
-> of the hardcoded 64, keeping it consistent with BITS_TO_U32S. This
-> is semantically equivalent.
->
-> Signed-off-by: Wang Yechao <wang.yechao255@zte.com.cn>
-> Signed-off-by: Xuemei Liu <liu.xuemei1@zte.com.cn>
-> Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Reviewed-by: Nutty Liu <nutty.liu@hotmail.com>
+Applied 1-12 to
+
+     https://github.com/legoater/qemu aspeed-next
+
+
+The rest still needs review.
 
 Thanks,
-Nutty
+
+C.
+
+
+
+>        hw/rtc: ds1338: program the clock from the time registers
+>        hw/rtc: ds1338: implement the DS1338 clock-halt bit
+>        hw/rtc: ds1338: refresh the user registers on a read rollover only
+>        hw/rtc: ds1338: add a persist-on-reset property
+>        tests/qtest: ds1338: cover the DS1338-specific register map
+>        tests/qtest: ds1338: cover the power-on register defaults
+>        tests/qtest: ds1338: cover the clock-halt bit
+>        tests/qtest: ds1338: cover persist-on-reset
+>        tests/qtest: ds1338: cover the reserved bits of the time registers
+>        hw/rtc: ds1338: add DS1339 variant
+>        tests/qtest: ds1339: add RTC test
+>        tests/qtest: ds1339: cover power-on defaults and reserved-bit masking
+>        tests/qtest: ds1339: cover oscillator stop/restart and time programming
+>        tests/qtest: ds1339: cover the Century bit
+>        tests/qtest: ds1339: cover the end-of-month rollover
+>        tests/qtest: ds1339: cover the 12-hour format
+>        tests/qtest: ds1339: cover the day-of-week counter
+>        tests/qtest: ds1339: cover persist-on-reset
+>        tests/qtest: ds1339: cover the migration round trip
+>        hw/sensor: ina230: add current/voltage/power monitor
+>        tests/qtest: ina230: add current/voltage/power monitor test
+>        tests/qtest: ina230: cover voltage injection and power derivation
+>        tests/qtest: ina230: cover the ALERT limit functions and CVRF
+>        tests/qtest: ina230: cover the injection-property limits
+>        tests/qtest: ina230: cover operating modes and triggered conversions
+>        tests/qtest: ina230: cover ALERT latch persistence
+>        tests/qtest: ina230: cover a cleared calibration per channel
+>        hw/sensor: ina238: add current/voltage/power monitor
+>        tests/qtest: ina238: add current/voltage/power monitor test
+>        tests/qtest: ina238: cover voltage/temperature injection and derivation
+>        tests/qtest: ina238: cover the ALERT path and conversion-ready flag
+>        tests/qtest: ina238: cover the injection-property limits
+>        tests/qtest: ina238: cover the operating modes
+>        tests/qtest: ina238: cover conversion-ready and alert-latch semantics
+>        tests/qtest: ina238: cover a cleared calibration per channel
+>        hw/arm: minerva: add Facebook BMC machine
+>        hw/arm: minerva: populate EEPROM data
+>        tests/functional/arm: minerva: add BMC boot test
+> 
+>   docs/system/arm/aspeed.rst                  |   7 +-
+>   hw/arm/Kconfig                              |   2 +
+>   hw/arm/aspeed_ast2400_palmetto.c            |   4 +-
+>   hw/arm/aspeed_ast2400_supermicrox11.c       |   4 +-
+>   hw/arm/aspeed_ast2500_romulus.c             |   4 +-
+>   hw/arm/aspeed_ast2500_supermicro-x11spi.c   |   4 +-
+>   hw/arm/aspeed_ast2500_witherspoon.c         |   4 +-
+>   hw/arm/aspeed_ast2600_bletchley.c           |   3 +-
+>   hw/arm/aspeed_ast2600_catalina.c            |   2 +-
+>   hw/arm/aspeed_ast2600_minerva.c             | 856 ++++++++++++++++++++++++++++
+>   hw/arm/aspeed_ast2600_sanmiguel.c           |   7 +-
+>   hw/arm/meson.build                          |   1 +
+>   hw/arm/realview.c                           |   3 +-
+>   hw/arm/versatilepb.c                        |   3 +-
+>   hw/i2c/i2c_mux_pca954x.c                    |  98 +++-
+>   hw/ppc/e500.c                               |   3 +-
+>   hw/riscv/tt_atlantis.c                      |   3 +-
+>   hw/rtc/ds1338.c                             | 427 +++++++++++---
+>   hw/sensor/Kconfig                           |   8 +
+>   hw/sensor/ina230.c                          | 597 +++++++++++++++++++
+>   hw/sensor/ina238.c                          | 802 ++++++++++++++++++++++++++
+>   hw/sensor/meson.build                       |   2 +
+>   hw/sensor/trace-events                      |  14 +
+>   include/hw/i2c/i2c_mux_pca954x.h            |   1 +
+>   include/hw/rtc/ds1338.h                     |  21 +
+>   include/hw/sensor/ina230.h                  |  14 +
+>   include/hw/sensor/ina238.h                  |  14 +
+>   tests/functional/arm/meson.build            |   2 +
+>   tests/functional/arm/test_aspeed_minerva.py |  30 +
+>   tests/qtest/ds1338-test.c                   | 191 ++++++-
+>   tests/qtest/ds1339-test.c                   | 581 +++++++++++++++++++
+>   tests/qtest/ina230-test.c                   | 602 +++++++++++++++++++
+>   tests/qtest/ina238-test.c                   | 806 ++++++++++++++++++++++++++
+>   tests/qtest/meson.build                     |   4 +
+>   tests/qtest/pca9545-test.c                  | 116 ++++
+>   35 files changed, 5125 insertions(+), 115 deletions(-)
 > ---
->   include/qemu/bitops.h     | 1 +
->   migration/vmstate-types.c | 3 +--
->   2 files changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/include/qemu/bitops.h b/include/qemu/bitops.h
-> index f7363a5479..383648fe59 100644
-> --- a/include/qemu/bitops.h
-> +++ b/include/qemu/bitops.h
-> @@ -20,6 +20,7 @@
->   #define BITS_PER_LONG           (sizeof (unsigned long) * BITS_PER_BYTE)
->   #define BITS_TO_LONGS(nr)       DIV_ROUND_UP(nr, BITS_PER_BYTE * sizeof(long))
->   #define BITS_TO_U32S(nr)        DIV_ROUND_UP(nr, BITS_PER_BYTE * sizeof(uint32_t))
-> +#define BITS_TO_U64S(nr)        DIV_ROUND_UP(nr, BITS_PER_BYTE * sizeof(uint64_t))
->   
->   #define BIT(nr)                 (1UL << (nr))
->   #define BIT_ULL(nr)             (1ULL << (nr))
-> diff --git a/migration/vmstate-types.c b/migration/vmstate-types.c
-> index c2d4645f31..8094d76f1b 100644
-> --- a/migration/vmstate-types.c
-> +++ b/migration/vmstate-types.c
-> @@ -16,6 +16,7 @@
->   #include "migration.h"
->   #include "migration/vmstate.h"
->   #include "migration/client-options.h"
-> +#include "qemu/bitops.h"
->   #include "qemu/error-report.h"
->   #include "qemu/queue.h"
->   #include "trace.h"
-> @@ -596,8 +597,6 @@ const VMStateInfo vmstate_info_tmp = {
->    * bit words with the bits in big endian order. The in-memory format
->    * is an array of 'unsigned long', which may be either 32 or 64 bits.
->    */
-> -/* This is the number of 64 bit words sent over the wire */
-> -#define BITS_TO_U64S(nr) DIV_ROUND_UP(nr, 64)
->   static bool load_bitmap(QEMUFile *f, void *pv, size_t size,
->                           const VMStateField *field, Error **errp)
->   {
+> base-commit: 615ece3c406b262996e569f29ea6eed0d81c4d8d
+> change-id: 20260907-bmc-minerva-cd13a718c90b
+> 
+> Best regards,
+> --
+> Emmanuel Blot <emmanuel.blot@free.fr>
+
 
