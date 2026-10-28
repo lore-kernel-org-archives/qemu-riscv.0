@@ -1,108 +1,146 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CF82C606A31A
-	for <qemu-riscv@archiver.kernel.org>; Wed, 28 Oct 2026 07:12:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EB1E2606A31E
+	for <qemu-riscv@archiver.kernel.org>; Wed, 28 Oct 2026 07:15:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=sifive.com header.i=@sifive.com header.a=rsa-sha256 header.s=google header.b=i77HvmYS
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=Kj8rqiQg
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xLxpF-0001vc-35; Wed, 28 Oct 2026 03:11:57 -0400
+	id 1xLxrR-00033M-Mf; Wed, 28 Oct 2026 03:14:13 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jay.chang@sifive.com>)
- id 1xLxpE-0001vC-3f
- for qemu-riscv@nongnu.org; Wed, 28 Oct 2026 03:11:56 -0400
-Received: from mail-ej1-x62f.google.com ([2a00:1450:4864:20::62f])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <jay.chang@sifive.com>)
- id 1xLxpB-00014b-V9
- for qemu-riscv@nongnu.org; Wed, 28 Oct 2026 03:11:55 -0400
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-c315869241fso92336166b.0
- for <qemu-riscv@nongnu.org>; Wed, 28 Oct 2026 00:11:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1793171512; x=1793776312; darn=nongnu.org;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=C3pAyL/TfLRDhodU+4wK7XbefuydGvYrayvqso5pxvk=;
- b=i77HvmYSDEkeAL34t/jCN0qcse4afvKx8ey3CflZxCCnmIuAXenmPRCA5e/7tQ59qU
- gQo3dGlHz7aEZ0rvm5dpFizulpyawxI+FKfb5SzCYH08Zque9ODEleTrZ5vu7dKw6A40
- byhMUKVQsnVu1IRR1SDfz3kUyawPBL4720UTeAsWVb9vSI1NIjdiPmB6G57fcrQKVH4e
- dB1QrBYJdilR7XF8EOR7idXJWQYLRKKK6T3eIi4ZqX9eeQvWhPlIG+mljHmIxyhDFo5g
- oFeIIVGjCkbi1OymMwij2/fCF0zIq7SHoWsiNG1lE8vHW216j6nsKVfca2VQOOs8CJkb
- cnkw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793171512; x=1793776312;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=C3pAyL/TfLRDhodU+4wK7XbefuydGvYrayvqso5pxvk=;
- b=DOUs6FI9V5GF/IfZ+JzjKMDkCI0p2Xq2gNc2XOv3PxpO+GauHrtqCfXfuOgRp8AJhH
- geyhY9VYH0Qf6IWwoi6IEZFc7BRu8FDrHs77e78vD7L4K3gbveQSGVri91IFwexXvF0X
- DB+BeT+xZ1l7Aou1c8PILut7Ye9YzE5xaaM3l8f+ZfZPZSgs5fBgqBss7dEorshvUuqT
- qCBv28kYNa369eMzC7eZUtfUvamgt6iMsT0Ia4IQoeMDUaYJ9YgQAPTbxQ7eaSsRzPOe
- iak4wLeWQ80nYN0StsQdn0A0Y4+V4PFstbJ7Mul4HU6bUSj9HBLU8LKHJwCZLVXR+hS/
- uttQ==
-X-Forwarded-Encrypted: i=1;
- AKwUvBzA3D6eVfdzPvPcOVNTJG4Oeabos6mIsuq/O7Qfiz1u5p/GaVRAxHe8Ay/c9zkEfp4S9da7fbFUv+Nh@nongnu.org
-X-Gm-Message-State: AFq9FYJlIOvlZ0JuuOf4TkNbJlfNlimVZOm4zs3fPZmetJ9myETulraq
- JKBdMBc8A9wTp41qV286jpwBqRjrrr/qp/mbBwih3Tj84Ld3FUSdHL1H28tAjF7GxTNbmjEAgnO
- +EqEEk1JENOWHG/BRhCAWKR6EHujcpgnrqYAHNxZL2bbFayAlkx3G4Ymbu28DMqkYx0UmvvCX6s
- Mcq+C5QIiZ9wcnajd4Wk2oU3vsI2/WzKs1cWMIs0yxAPU=
-X-Gm-Gg: AYBFou3jhew1a+mZEUGCs6U5mBpvqdPAVlL8oaZfa2xetNUoXF6DEKhnOwsoak9FkjL
- xxAl+emys4FPCK392Q1mUSzlwc86xf9AtQmLug5/dxEKorx7nFMwpX//El9ZXbfBbFzuut61UBT
- gLOa9hDjxAw3cLsp5MJ+BBXSxuyYY040VDoU5Wm+1GLaOhoDLc2+E2LkwIe2OE/tZEOBRLZp4da
- 30X9N0fRzWl6Y4FKPzs3rJfwegV7gcrFWr8nWF0pmpvZHE4xlBdOUqMiyMNTaYeasSkwX+LSWq3
- iju8f3XfE37VRJ4ipTBIWrbih6XC4/xzTxmlWTGaH7Pwu618pxe2nuX8hU8QToXPpMBe/n/RV4F
- NRQ3UBXuFElBscQl7yGeExQIbaA/OHVdOPS87MOtwXaa7clRxjN6pnb2mhIvP3aMkqHFLKDNsZ4
- 2vxvDjvtMxhajR/H330vcoFzmVPeYFsvAhb8l91yYOvUfe1oqWKpigbZKJZMRzIPypxM6L/y6cE
- GbtZfJG0h0g5JIDNGReDwTEQMNH+CwYigiVQyByFBF7dzgiasVeXqLzLcR1F0nAJjVoASHKRQ0M
- Y1VA/aEgxUf8GAS1tsAU3bn0UV2I/3QkYEaEgACc+I5J65qk9UQNDIPRqjTG0eLDl6I=
-X-Received: by 2002:a17:907:d48c:b0:c3f:7e8:235d with SMTP id
- a640c23a62f3a-c49bdda7ab7mr128798066b.5.1793171511938; 
- Wed, 28 Oct 2026 00:11:51 -0700 (PDT)
-Received: from mail-ed1-f49.google.com (mail-ed1-f49.google.com.
- [209.85.208.49]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c46bd4ea0ccsm568400066b.16.2026.10.28.00.11.50
- for <qemu-riscv@nongnu.org>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 28 Oct 2026 00:11:50 -0700 (PDT)
-Received: by mail-ed1-f49.google.com with SMTP id
- 4fb4d7f45d1cf-6b408f2d936so1006380a12.1
- for <qemu-riscv@nongnu.org>; Wed, 28 Oct 2026 00:11:50 -0700 (PDT)
-X-Forwarded-Encrypted: i=1;
- AKwUvBxdOccYary9hzHFbqkwV3ZglVbTJbHPviuEc/wecBm6niYIdKrZVqY+Ikbg7CA0tGsO+W5gk4CpGfsA@nongnu.org
-X-Received: by 2002:a05:6402:144:b0:6ac:b3e7:2357 with SMTP id
- 4fb4d7f45d1cf-6b49cbecc82mr563014a12.21.1793171510001; Wed, 28 Oct 2026
- 00:11:50 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1xLxrP-00031Q-G7
+ for qemu-riscv@nongnu.org; Wed, 28 Oct 2026 03:14:11 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1xLxrL-0001FE-9I
+ for qemu-riscv@nongnu.org; Wed, 28 Oct 2026 03:14:10 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1793171646;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=QxmQ5AxN89rC1HiyefFy0FHMMxtlG6Y/Map2WM9XKmw=;
+ b=Kj8rqiQgXInB5MESDsA+2KTrGy89kosKe4U37flKN5NA8VT6scQcInSQraPlpZrNtBScJM
+ WBhzJLFoKMEB3tNvFP9kSI46ziasagnqiD/aQGy3hy+3fPKUyjDXNt7nVDP2QrgeS/Qmxk
+ FPNUTTmtRysuJsvmHoKDXgvlH+k7RhI=
+Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-544-aPtTQLUAOnmRkcQac9q43w-1; Wed,
+ 28 Oct 2026 03:14:01 -0400
+X-MC-Unique: aPtTQLUAOnmRkcQac9q43w-1
+X-Mimecast-MFC-AGG-ID: aPtTQLUAOnmRkcQac9q43w_1793171635
+Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 9EEAC1955EA3; Wed, 28 Oct 2026 07:13:51 +0000 (UTC)
+Received: from blackfin.pond.sub.org (unknown [10.44.22.2])
+ by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 11B5A1800257; Wed, 28 Oct 2026 07:13:47 +0000 (UTC)
+Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
+ id 8C76D21E6A04; Wed, 28 Oct 2026 08:13:44 +0100 (CET)
+From: Markus Armbruster <armbru@redhat.com>
+To: Daniel P. =?utf-8?Q?Berrang=C3=A9?= <berrange@redhat.com>
+Cc: =?utf-8?Q?Marc-Andr=C3=A9?= Lureau <marcandre.lureau@redhat.com>,
+ qemu-devel@nongnu.org,
+ Michael Roth <michael.roth@amd.com>,  John Snow <jsnow@redhat.com>,
+ Peter Maydell <peter.maydell@linaro.org>,  Mauro Carvalho Chehab
+ <mchehab+huawei@kernel.org>,  Pierrick Bouvier
+ <pierrick.bouvier@oss.qualcomm.com>,  Paolo Bonzini <pbonzini@redhat.com>,
+ Kostiantyn Kostiuk <kkostiuk@redhat.com>,  Eric Blake
+ <eblake@redhat.com>,  David Hildenbrand <david@kernel.org>,  Igor Mammedov
+ <imammedo@redhat.com>,  "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Jason Wang <jasowangio@gmail.com>,  Marcelo Tosatti
+ <mtosatti@redhat.com>,  kvm@vger.kernel.org,  Alberto Garcia
+ <berto@igalia.com>,  Kevin Wolf <kwolf@redhat.com>,  Hanna Reitz
+ <hreitz@redhat.com>,  Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?=
+ <philmd@oss.qualcomm.com>,
+ Zhao Liu <zhao1.liu@intel.com>,  Jonathan Cameron <jic23@kernel.org>,
+ Junjie Cao <junjie.cao@intel.com>,  Anisa Su <anisa.su@samsung.com>,
+ Elena Ufimtseva <elena.ufimtseva@oracle.com>,  Jagannathan Raman
+ <jag.raman@oracle.com>,  John Levon <john.levon@nutanix.com>,  Thanos
+ Makatos <thanos.makatos@nutanix.com>,  =?utf-8?Q?C=C3=A9dric?= Le Goater
+ <clg@redhat.com>,
+ Cornelia Huck <cohuck@redhat.com>,  Eric Farman <farman@linux.ibm.com>,
+ Matthew Rosato <mjrosato@linux.ibm.com>,  Richard Henderson
+ <richard.henderson@linaro.org>,  Ilya Leoshkevich <iii@linux.ibm.com>,
+ qemu-block@nongnu.org,  linux-cxl@vger.kernel.org,
+ qemu-s390x@nongnu.org,  "Michael S. Tsirkin" <mst@redhat.com>,  Sergio
+ Lopez <slp@redhat.com>,  qemu-arm@nongnu.org,  Palmer Dabbelt
+ <palmer@dabbelt.com>,  Alistair Francis <alistair.francis@wdc.com>,
+ Weiwei Li <liwei1518@gmail.com>,  Daniel Henrique Barboza
+ <daniel.barboza@oss.qualcomm.com>,  Liu Zhiwei
+ <zhiwei_liu@linux.alibaba.com>,  Chao Liu <chao.liu@processmission.com>,
+ qemu-riscv@nongnu.org,  Song Gao <17746591750@163.com>,  Bibo Mao
+ <maobibo@loongson.cn>,  Xianglai Li <lixianglai@loongson.cn>,  Jiaxun Yang
+ <jiaxun.yang@flygoat.com>,  Pedro Barbuda <pbarbuda@microsoft.com>,
+ Mohamed Mediouni <mohamed@unpredictable.fr>,  Nicholas Piggin
+ <npiggin@gmail.com>,  Harsh Prateek Bora <harshpb@linux.ibm.com>,  Amit
+ Machhiwal <amachhiw@linux.ibm.com>,  qemu-ppc@nongnu.org,  Zhang Chen
+ <zhangckid@gmail.com>,  Li Zhijian <lizhijian@fujitsu.com>,  Alistair
+ Francis <alistair@alistair23.me>,  Alexander Graf <graf@amazon.com>,
+ "Gonglei (Arei)" <arei.gonglei@huawei.com>,  zhenwei pi
+ <zhenwei.pi@linux.dev>,  Ani Sinha <anisinha@redhat.com>,  Luc Michel
+ <luc@lmichel.fr>,  =?utf-8?Q?C=C3=A9dric?= Le Goater <clg@kaod.org>,  Jamin
+ Lin
+ <jamin_lin@aspeedtech.com>,  Kane Chen <kane_chen@aspeedtech.com>,  Samuel
+ Tardieu <sam@rfc1149.net>,  "Denis V. Lunev" <den@openvz.org>,  FangSheng
+ Huang <FangSheng.Huang@amd.com>,  Tyrone Ting <kfting@nuvoton.com>,  Hao
+ Wu <wuhaotsh@google.com>,  Keith Busch <kbusch@kernel.org>,  Klaus Jensen
+ <its@irrelevant.dk>,  Jesper Devantier <foss@defmacro.it>,  Aditya Gupta
+ <adityag@linux.ibm.com>,  Glenn Miles <milesg@linux.ibm.com>,  Conor
+ Dooley <conor@kernel.org>,  Sebastian Huber
+ <sebastian.huber@embedded-brains.de>,  Halil Pasic <pasic@linux.ibm.com>,
+ Christian Borntraeger <borntraeger@linux.ibm.com>,  Jason Herne
+ <jjherne@linux.ibm.com>,  Titus Rwantare <titusr@google.com>,  Stefano
+ Stabellini <sstabellini@kernel.org>,  Anthony PERARD
+ <anthony@xenproject.org>,  Peter Xu <peterx@redhat.com>,  Chinmay Rath
+ <rathc@linux.ibm.com>,  Hendrik Brueckner <brueckner@linux.ibm.com>,
+ xen-devel@lists.xenproject.org,  Roman Bolshakov <rbolshakov@ddn.com>,
+ Phil Dennis-Jordan <phil@philjordan.eu>,  Fam Zheng <fam@euphon.net>,
+ Farhan Ali <alifm@linux.ibm.com>,  Alex Williamson <alex@shazbot.org>,
+ Tao Tang <tangtao1634@phytium.com.cn>,  Stefan Berger
+ <stefanb@linux.vnet.ibm.com>,  Fabiano Rosas <farosas@suse.de>,  Mark
+ Cave-Ayland <mark.cave-ayland@ilande.co.uk>,  Artyom Tarasenko
+ <atar4qemu@gmail.com>,  Yoshinori Sato <yoshinori.sato@nifty.com>,  Jiri
+ Pirko <jiri@resnulli.us>,  Eric Auger <eric.auger@redhat.com>,  Laurent
+ Vivier <lvivier@redhat.com>
+Subject: Re: [PATCH v7 54/65] qdev: adjust PciDevfn declared type
+In-Reply-To: <auC-ilqUJq27neSR@redhat.com> ("Daniel P. =?utf-8?Q?Berrang?=
+ =?utf-8?Q?=C3=A9=22's?= message of
+ "Tue, 27 Oct 2026 15:08:58 +0000")
+References: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
+ <20261020-qom-qapi-v7-54-431a86b02b58@redhat.com>
+ <atsxLV5YZo8dr-8G@redhat.com>
+ <CAMxuvazd7G_NBOM_c6BxZn5PFSw=XQUHueHqBoQQfpzPPgi9qA@mail.gmail.com>
+ <87zevz5h4k.fsf@pond.sub.org> <auC-ilqUJq27neSR@redhat.com>
+Date: Wed, 28 Oct 2026 08:13:44 +0100
+Message-ID: <87o6ce47rr.fsf@pond.sub.org>
+User-Agent: Gnus/5.13 (Gnus v5.13)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-References: <20261021231346.2452179-1-daniel.barboza@oss.qualcomm.com>
- <20261021231346.2452179-17-daniel.barboza@oss.qualcomm.com>
-In-Reply-To: <20261021231346.2452179-17-daniel.barboza@oss.qualcomm.com>
-From: Jay Chang <jay.chang@sifive.com>
-Date: Wed, 28 Oct 2026 15:11:38 +0800
-X-Gmail-Original-Message-ID: <CAMXXpfb0arbbqenw5eOHhPrFZ6P5xkN39zkj7JzdUs5kg8oz-g@mail.gmail.com>
-X-Gm-Features: AclHuK8Z_IGGX3zmPD92I6x-p2WwSofuPP_-Rw-79QQTdNjSxAxbsKM0_GbapC0
-Message-ID: <CAMXXpfb0arbbqenw5eOHhPrFZ6P5xkN39zkj7JzdUs5kg8oz-g@mail.gmail.com>
-Subject: Re: [PATCH v4 16/18] hw/riscv/trace-encoder: send branches info
-To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
- chao.liu@processmission.com, antikostya2@gmail.com, 
- Palmer Dabbelt <palmer@dabbelt.com>, frank.chang@sifive.com
-Content-Type: multipart/alternative; boundary="000000000000e00845065ee146f8"
-Received-SPF: pass client-ip=2a00:1450:4864:20::62f;
- envelope-from=jay.chang@sifive.com; helo=mail-ej1-x62f.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
+X-Mimecast-MFC-PROC-ID: J5gED7nTr5uWq-qevI2zE0aywU3dkdBicdroMMIrLGc_1793171635
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=armbru@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: 5
+X-Spam_score: 0.5
+X-Spam_bar: /
+X-Spam_report: (0.5 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ GB_FAKE_RF=0.001, RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H3=0.001,
+ RCVD_IN_MSPIKE_WL=0.001, RCVD_IN_SBL_CSS=3.335, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -114,76 +152,109 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-2.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,HTML_MESSAGE,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS autolearn=no
-	autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=no autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
---000000000000e00845065ee146f8
-Content-Type: text/plain; charset="UTF-8"
+Daniel P. Berrang=C3=A9 <berrange@redhat.com> writes:
 
+> On Tue, Oct 27, 2026 at 03:54:03PM +0100, Markus Armbruster wrote:
+>> Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com> writes:
+>>=20
+>> > Hi
+>> >
+>> > On Fri, Oct 23, 2026 at 2:04=E2=80=AFPM Daniel P. Berrang=C3=A9 <berra=
+nge@redhat.com> wrote:
+>> >>
+>> >> On Tue, Oct 20, 2026 at 02:46:11PM +0400, Marc-Andr=C3=A9 Lureau wrot=
+e:
+>> >> > PciDevfn is a bit special, since it accepts integer and string as
+>> >> > setter, but only output integer as getter.
 >
-> +void trencoder_report_branch(Object *trencoder_obj, uint64_t pc, bool
-> taken)
-> +{
-> +    TraceEncoder *te = TRACE_ENCODER(trencoder_obj);
-> +
-> +    /*
-> +     * Note: the e-trace spec determines the value '1' for a
-> +     * branch *not* taken. The helper API is using taken = 1
-> +     * to be more intuitive when reading TCG code.
-> +     */
-> +    if (!taken) {
-> +        te->branch_map = deposit32(te->branch_map, te->branches, 1, 1);
-> +    }
-> +
-> +    te->last_branch_pc = pc;
-> +    te->branches++;
-> +
-> +    if (te->branches == TRACE_MAX_BRANCHES) {
-> +        trencoder_send_branch_map(trencoder_obj);
-> +        te->branches = 0;
+> snip
 >
-Should we clear branch_map after sending the packet, or explicitly write
-0 for taken branches using deposit32(te->branch_map, te->branches, 1, 0)?
+>> >                                                       But I agree we
+>> > could do better.
+>> >
+>> > There are multiple options. We could keep declaring the property as
+>> > str instead. In this case, the getter should probably return a string
+>> > for consistency and correctness. This might surprise some existing
+>> > users though.
+>>=20
+>> I.e. ditch numeric suppport for numeric addresses, right?
+>>=20
+>> Incompatible change.  Do we care?
+>>=20
+>> If we don't, we should be honest about it and mark qom-get unstable.
+>>=20
+>> > We could introduce new properties like `devfn-str` and `devfn-int`
+>> > that alias the same value.
+>>=20
+>> Compatibility break.  If breaking compatibility is okay, I'd rather use
+>> the opportunity to get rid of cleverness, and go with your first option.
+>>=20
+>> > We could also introduce a new structured QAPI type.
+>>=20
+>> What kind of type do you have in mind?
+>
+> IMHO the root cause design flaw here was to overload 'addr' as a
+> way to set both the slot number and function number, as using
+> one property for two pieces of data is a well known anti-pattern
+> we caution against.
+>
+> IOW, we should have had 'slot' and 'function' as separate properties
+> from the start.
 
-Thanks
-Jay Chang
+Fair.
 
---000000000000e00845065ee146f8
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Our modeling of PCI is old and weird.
 
-<div dir=3D"ltr"><div class=3D"gmail_quote gmail_quote_container"><blockquo=
-te class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px =
-solid rgb(204,204,204);padding-left:1ex">+void trencoder_report_branch(Obje=
-ct *trencoder_obj, uint64_t pc, bool taken)<br>
-+{<br>
-+=C2=A0 =C2=A0 TraceEncoder *te =3D TRACE_ENCODER(trencoder_obj);<br>
-+<br>
-+=C2=A0 =C2=A0 /*<br>
-+=C2=A0 =C2=A0 =C2=A0* Note: the e-trace spec determines the value &#39;1&#=
-39; for a<br>
-+=C2=A0 =C2=A0 =C2=A0* branch *not* taken. The helper API is using taken =
-=3D 1<br>
-+=C2=A0 =C2=A0 =C2=A0* to be more intuitive when reading TCG code.<br>
-+=C2=A0 =C2=A0 =C2=A0*/<br>
-+=C2=A0 =C2=A0 if (!taken) {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 te-&gt;branch_map =3D deposit32(te-&gt;branch_=
-map, te-&gt;branches, 1, 1);<br>
-+=C2=A0 =C2=A0 }<br>
-+<br>
-+=C2=A0 =C2=A0 te-&gt;last_branch_pc =3D pc;<br>
-+=C2=A0 =C2=A0 te-&gt;branches++;<br>
-+<br>
-+=C2=A0 =C2=A0 if (te-&gt;branches =3D=3D TRACE_MAX_BRANCHES) {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 trencoder_send_branch_map(trencoder_obj);<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 te-&gt;branches =3D 0;<br></blockquote><div>Sh=
-ould we clear branch_map after sending the packet, or explicitly write<br>0=
- for taken branches using deposit32(te-&gt;branch_map, te-&gt;branches, 1, =
-0)?<br><br></div><div>Thanks<br>Jay Chang</div></div></div>
+What we call "pci-device" isn't a device, it's a function, where
+function 0 sort of stands in for the device.
 
---000000000000e00845065ee146f8--
+Its "addr" isn't a PCI address, it's the address of the function on its
+PCI bus, i.e. the tail of a PCI address.
+
+> From a CLI POV, we could easily change 'addr' to mean only the slot
+> number, since it is always parsed in string format without the
+> magic (slot << 4) | function encoding. Then add a 'function' prop
+
+In CLI, HMP and QMP string (not integer), value "5" is shorthand for
+"5.0", and means device 5, function 0.
+
+We could deprecate the .FN part in favor of a new property "function".
+
+Once we drop support for .FN from "addr", its name becomes even more
+misleading than it always was.
+
+> The challenge is the impact on QMP with strict typing, as ideally
+> int format would soley represent the slot number, but today the
+> int format is encoded (slot << 4) | function.  So anyone relying
+> on int format in QMP would silently have a semantic change if we
+> altered what 'addr' means.=20
+
+That's a no-go.
+
+> Deprecating 'addr' entirely and adding brand new 'slot' and
+> 'function' properties would be a significant disruption to
+> a syntax which has been documented for years (decades).
+
+What about this:
+
+* No change to PCIDevice member @devfn: encodes slot and function as an
+  integer.
+
+* New "pci-device" properties "slot" and "function".  "slot" sets just
+  the slot bits of @devfn, and "function" sets just the function bits.
+  Both default to zero, so specifying just "slot" gives you
+  PCI_DEVFN(slot, 0), which makes sense.
+
+* Deprecate "pci-device" property "addr" for QMP.  We can keep it around
+  for longer than the required grace period if that helps.
+
+* Declare it legacy for CLI and HMP, with no intent to remove it.
+
 
