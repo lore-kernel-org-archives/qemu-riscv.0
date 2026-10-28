@@ -1,186 +1,107 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 881AC606A31C
-	for <qemu-riscv@archiver.kernel.org>; Wed, 28 Oct 2026 13:37:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8382A606A31F
+	for <qemu-riscv@archiver.kernel.org>; Wed, 28 Oct 2026 13:47:59 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=ibm.com header.i=@ibm.com header.a=rsa-sha256 header.s=pp1 header.b=UKFia3q2
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=U+ijIof9
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xM3qM-0005pc-28; Wed, 28 Oct 2026 09:37:30 -0400
+	id 1xM3zu-0002Sd-I0; Wed, 28 Oct 2026 09:47:23 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <farman@linux.ibm.com>)
- id 1xM3pl-0005De-NT; Wed, 28 Oct 2026 09:36:55 -0400
-Received: from mx0a-001b2d01.pphosted.com ([148.163.156.1])
+ (Exim 4.90_1) (envelope-from <mst@redhat.com>) id 1xM3zm-0002RY-IP
+ for qemu-riscv@nongnu.org; Wed, 28 Oct 2026 09:47:17 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <farman@linux.ibm.com>)
- id 1xM3pi-0007jb-T8; Wed, 28 Oct 2026 09:36:52 -0400
-Received: from pps.filterd (m0353729.ppops.net [127.0.0.1])
- by mx0a-001b2d01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 69SBicNF3707362; Wed, 28 Oct 2026 13:36:34 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
- :content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=pp1; bh=8xiZ5G
- vKgQdn/F8VRi4kLATkdX1h8i+f6RST97TwmDc=; b=UKFia3q2kGmE+ATZN0mTma
- td5E2L/0/o7tjjllj/Y2GGwfbgRfOk0X47E1jLTN1fSbRN99oOVSZRDF/aPuXaOq
- dbt5W3FoOcZ/LNQJQt8eHGu9N8EMnierznnSZsngzL4VuDpdVYItr9NNh13zMO9l
- 35atG8DhlLDk4NrG+cd15m0XbwY+NCiXUSzQUA0vIP086mTKk/d3SzCguaAcEKum
- WCR7RpXN3+YUQwMsvjhOhdIKXmZhH4q2Wla2dl5RiWGxBmHVtCNOO8aY+fncam+o
- ap1+I6GlnKF2BtPdZnMOB1ObMaNdTKcBtpAb5pPApPyADVDxzB2ar/BG5Pz0n1LQ
- ==
-Received: from ppma21.wdc07v.mail.ibm.com
- (5b.69.3da9.ip4.static.sl-reverse.com [169.61.105.91])
- by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4hgmbt4xy0-1
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
- Wed, 28 Oct 2026 13:36:33 +0000 (GMT)
-Received: from pps.filterd (ppma21.wdc07v.mail.ibm.com [127.0.0.1])
- by ppma21.wdc07v.mail.ibm.com (8.18.1.11/8.18.1.11) with ESMTP id
- 69SBntHS1441982; Wed, 28 Oct 2026 13:36:32 GMT
-Received: from smtprelay01.wdc07v.mail.ibm.com ([172.16.1.68])
- by ppma21.wdc07v.mail.ibm.com (PPS) with ESMTPS id 4hjtnnd6kk-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 28 Oct 2026 13:36:32 +0000 (GMT)
-Received: from smtpav06.wdc07v.mail.ibm.com (smtpav06.wdc07v.mail.ibm.com
- [10.39.53.233])
- by smtprelay01.wdc07v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
- 69SDaVcv27328908
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 28 Oct 2026 13:36:31 GMT
-Received: from smtpav06.wdc07v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 408995804E;
- Wed, 28 Oct 2026 13:36:31 +0000 (GMT)
-Received: from smtpav06.wdc07v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 99FC85803F;
- Wed, 28 Oct 2026 13:36:27 +0000 (GMT)
-Received: from [9.61.109.57] (unknown [9.61.109.57])
- by smtpav06.wdc07v.mail.ibm.com (Postfix) with ESMTP;
- Wed, 28 Oct 2026 13:36:27 +0000 (GMT)
-Message-ID: <e58a1df5-62c8-49e1-bd31-10c336b62104@linux.ibm.com>
-Date: Wed, 28 Oct 2026 09:36:26 -0400
+ (Exim 4.90_1) (envelope-from <mst@redhat.com>) id 1xM3zk-0000Fa-Ss
+ for qemu-riscv@nongnu.org; Wed, 28 Oct 2026 09:47:14 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1793195231;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=oKwPo2y1+9LCt0tDpALKvVNZXvNd47CM65evbfSeNys=;
+ b=U+ijIof9nEXOyoNV++wQN0b9LHAprXMAbyKJpfrt9KuZ8slmcynU7vcY5DbQIO7lrF/6Fa
+ znkrCULvbkvuchDld0BxHI7uXYr2o+9msKMskz37HjQdbNHHz1c/CuKoZ8GFbp9T5bPVL9
+ oWfevPkWGP15Tiku7V4uGwJM9C+7/K0=
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+ [209.85.221.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-79-eYuuvcbzMjqinxhsko_A2g-1; Wed, 28 Oct 2026 09:47:09 -0400
+X-MC-Unique: eYuuvcbzMjqinxhsko_A2g-1
+X-Mimecast-MFC-AGG-ID: eYuuvcbzMjqinxhsko_A2g_1793195228
+Received: by mail-wr1-f72.google.com with SMTP id
+ ffacd0b85a97d-48b00febba3so633415f8f.1
+ for <qemu-riscv@nongnu.org>; Wed, 28 Oct 2026 06:47:08 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1793195228; x=1793800028;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=oKwPo2y1+9LCt0tDpALKvVNZXvNd47CM65evbfSeNys=;
+ b=0eC2hcx4fnPI9YCilnUc5Ek0TIzXXK2ttk4yGF4VRiGa5WaZfsFMUbB3PgURQnhP/H
+ lyqrNN322hbm76jcocupcoqoDxO6dfmoq2xqDobA6Tgb5DRepUm4ttrleS96OnGrEuXL
+ fChfNa56arO4eQID3m4gmswKrblL2U21RWG60WlWXV3umAEcI8XlQr6jUThOcGseat4u
+ W4Y8q69f3wDYU46efG5jkV5SvHGBNLbGJa09yd7joQkQA1iXbD5h6GS+/KyqAb/Vk2BK
+ TURHbJ7ZLSB4jFEJ1N3ME3x/Vwk2RDFvPomUNNMOwsVeh4PgZuKkt5hnNJtj+6iCxut7
+ JXwQ==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBzwCVprfCa2zxM7etJMOh6H9UAA17DKNwSoQL01K8sE3wIJP0mfI4d7b/WBLjriwsVQODnxD1e0AOlz@nongnu.org
+X-Gm-Message-State: AFq9FYL+rN7Jz6koAGUjYk+yaT4SveP/0PEHftNZ/yr01fTIwjT1YI6t
+ 2OpBsb1191dpi6zHcu1khBR2iRmHonzUYDYo66tXeI7WZXkLhdLQ/5HwuqfHMmXMIliMWy/erBs
+ FK3JRQOmWLWwDJcxW7WHueYvVbEmp9HCyMNK1CKnsueHmZtVc2EG2LR8y
+X-Gm-Gg: AYBFou2kw8UhlibY68qeNiYchv1HC4R3/5m7Ut9XNYFf1jJzJcjYtvLUQyhkPMmZPze
+ bgjedmmub8E6SsB5a/F5QnjhgaS0YA2xbgKx/QXVBdTIVNTGL8xL75GYaQ1umXwrQFgekVYB6Ji
+ jAbQHPrjoflLN8Owoo8dcSXH+HEMfPtkCpJcsfQbNWMIOKwenouNabLsitaP/xVF3oGKA7LwpeH
+ 1pEnmzvOUtaAdVh0a+2zOIoq78JVYYNY9V7D0gbeR41FE6pFUmhLMzXRawPri84jU8PuoUbROwR
+ RfBDim78IzRxUWD1ZXjspLSIsJWVOmvhpKnnott0vSrH5TFGu1Nw1gmH5lioL/kKas1uzhU+dT5
+ v6//4SZv9ubjSnItXzhc4w3pigEqEDirPwLG5yZjJ
+X-Received: by 2002:a05:6000:2508:b0:48e:5ea1:260a with SMTP id
+ ffacd0b85a97d-48e5ea18152mr4937602f8f.3.1793195227784; 
+ Wed, 28 Oct 2026 06:47:07 -0700 (PDT)
+X-Received: by 2002:a05:6000:2508:b0:48e:5ea1:260a with SMTP id
+ ffacd0b85a97d-48e5ea18152mr4937525f8f.3.1793195227116; 
+ Wed, 28 Oct 2026 06:47:07 -0700 (PDT)
+Received: from redhat.com ([2a0d:6fc0:1536:fc00:b838:383:1c7:6e81])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-48e3ebc39b3sm29535147f8f.10.2026.10.28.06.47.04
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 28 Oct 2026 06:47:06 -0700 (PDT)
+Date: Wed, 28 Oct 2026 09:47:03 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Sunil V L <sunilvl@oss.qualcomm.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Chao Liu <chao.liu@processmission.com>,
+ Igor Mammedov <imammedo@redhat.com>, Ani Sinha <anisinha@redhat.com>,
+ Anup Patel <anup.patel@oss.qualcomm.com>, Drew Fustini <fustini@kernel.org>
+Subject: Re: [PATCH 0/4] RISC-V: ACPI: Add PPTT support
+Message-ID: <20261028094619-mutt-send-email-mst@kernel.org>
+References: <20261011182552.1071742-1-sunilvl@oss.qualcomm.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 06/11] hw/s390x: mark 's390x-ccw-virtio' as a secure
- machine
-To: =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>,
- qemu-devel@nongnu.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>,
- "Michael S. Tsirkin" <mst@redhat.com>,
- David Hildenbrand <david@kernel.org>,
- Anthony PERARD <anthony@xenproject.org>,
- Peter Maydell <peter.maydell@linaro.org>, qemu-riscv@nongnu.org,
- Paolo Bonzini <pbonzini@redhat.com>,
- Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
- <liwei1518@gmail.com>, Richard Henderson <richard.henderson@linaro.org>,
- Nicholas Piggin <npiggin@gmail.com>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Chao Liu
- <chao.liu@processmission.com>, Harsh Prateek Bora <harshpb@linux.ibm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Amit Machhiwal <amachhiw@linux.ibm.com>,
- xen-devel@lists.xenproject.org, Sergio Lopez <slp@redhat.com>,
- qemu-arm@nongnu.org, qemu-ppc@nongnu.org,
- Bibo Mao <maobibo@loongson.cn>, Ilya Leoshkevich <iii@linux.ibm.com>,
- Halil Pasic <pasic@linux.ibm.com>, Xianglai Li <lixianglai@loongson.cn>,
- Palmer Dabbelt <palmer@dabbelt.com>, qemu-s390x@nongnu.org,
- kvm@vger.kernel.org, Alexander Graf <graf@amazon.com>,
- Song Gao <17746591750@163.com>, Cornelia Huck <cohuck@redhat.com>,
- Matthew Rosato <mjrosato@linux.ibm.com>,
- =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-References: <20261027181400.1752951-1-berrange@redhat.com>
- <20261027181400.1752951-7-berrange@redhat.com>
-Content-Language: en-US
-From: Eric Farman <farman@linux.ibm.com>
-Autocrypt: addr=farman@linux.ibm.com; keydata=
- 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
- y8m0x6unNti2MZIUMy0m2gcE
-In-Reply-To: <20261027181400.1752951-7-berrange@redhat.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-TM-AS-GCONF: 00
-X-Proofpoint-Reinject: loops=2 maxloops=12
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDI4MDA1MiBTYWx0ZWRfX6DNF9d3+Fd48
- 3RC0LyLTIg43PRzAiu72V0xXS2XMnoqAwwdYMAxqjPNdGY28P3SXorufggvURP6vTbjwA+1HZu9
- E+0+KDfbCpZlDZp77Y6RuLynAYChara6mil5A/lVMHauSL+7cJHMI+PeWIvf9hnBi1wYh8qwLG4
- GCg0zRF5wsU8tv2V9BEhcf0BBow1Ing5Y99rl0bqfC3WL0xXuf/gR7cacFUKwaR6r4DFOmYgX+/
- P3r97KmXCn6oIAhUbvB8Je/+N7fCY0ou1iiVVmaRZ9vOaj0RHzguJq4mSoGv2bSofyM6FvKSuDD
- JWP3lxR4rmje0OfSwagqAM0CqB1ED3RZryzAAmIxFx4PgJa79GFO/ka2lSN3e/vGAFbJUMaSUgk
- XwNk6ZwHA8hDHH1Ni1XbVU1BeXyuO4XkVtK3DZfsTI9AwShtMEovGz8Pql015I3vQnjdnrYfQ6R
- wMospIB6u/RoLb69ttA==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDI4MDA1MiBTYWx0ZWRfX/4eKNGhQYuJt
- zRo2PiEU8avhShhsUAibrj+fauJpmbWdSm3WeZHtAeeC7hz766s08/kdqx7IUto9zh4P2fuyFKR
- 7FE5QlmatiG44air37gw01qe1sslErU=
-X-Proofpoint-ORIG-GUID: phX3aVuqOesVV85x3otaufuHTUbZojP3
-X-Proofpoint-GUID: mOfyjwvZsnG1t9CIM9KArcMoKqRcB5IB
-X-Authority-Analysis: v=2.4 cv=CeKdd7rl c=1 sm=1 tr=0 ts=6ae1fa62 cx=c_pps
- a=GFwsV6G8L6GxiO2Y/PsHdQ==:117 a=GFwsV6G8L6GxiO2Y/PsHdQ==:17
- a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=VkNPw1HP01LnGYTKEx00:22
- a=RnoormkPH1_aCDwRdu11:22 a=uAbxVGIbfxUO_5tXvNgY:22 a=20KFwNOVAAAA:8
- a=VnNF1IyMAAAA:8 a=dfOxh3e3ZTYmKzKDSi0A:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=ZXulRonScM0A:10
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-10-28_04,2026-10-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 suspectscore=0 malwarescore=0 phishscore=0 clxscore=1011
- adultscore=0 lowpriorityscore=0 priorityscore=1501 bulkscore=0
- impostorscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610190000
- definitions=main-2610280052
-Received-SPF: pass client-ip=148.163.156.1; envelope-from=farman@linux.ibm.com;
- helo=mx0a-001b2d01.pphosted.com
-X-Spam_score_int: -26
-X-Spam_score: -2.7
+In-Reply-To: <20261011182552.1071742-1-sunilvl@oss.qualcomm.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: p607yB1c5B4FiOJePJ_Vgk2HxTr3s63Xb0ubkmXhz5Q_1793195228
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=mst@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
 X-Spam_bar: --
-X-Spam_report: (-2.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, KHOP_DYNAMIC=0.001,
- RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -192,27 +113,73 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-15.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
-	USER_AGENT_SANE_1 autolearn=unavailable autolearn_force=no
-	version=4.0.1
+X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS autolearn=unavailable autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-
-
-On 10/27/26 2:13 PM, Daniel P. Berrangé wrote:
-> The 's390x-ccw-virtio' s390x machine is already declared secure in
-> docs/system/security.rst, due too its intended usage in virtualization
-> scenarios.
+On Sun, Oct 11, 2026 at 11:55:48PM +0530, Sunil V L wrote:
+> From: Sunil V L <sunilvl@oss.qualcomm.com>
 > 
-> Reviewed-by: Marc-André Lureau <marcandre.lureau@redhat.com>
-> Acked-by: Cornelia Huck <cohuck@redhat.com>
-> Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
-> ---
->   hw/s390x/s390-virtio-ccw.c | 1 +
->   1 file changed, 1 insertion(+)
+> Hi all,
+> 
+> This series adds ACPI Processor Properties Topology Table (PPTT) support to
+> the RISC-V virt machine. PPTT allows the guest to discover the processor and
+> cache topology exposed by the machine, which is useful for making better
+> scheduling and cache-management decisions.
+> 
+> The implementation describes the RISC-V virt cache hierarchy with separate
+> L1 instruction and data caches, followed by unified L2 and L3 caches. It also
+> enables the corresponding cache and cluster properties in the machine SMP
+> description and wires the generated PPTT into the existing ACPI table
+> build.
+> 
+> Unlike ARM, RISC-V doesn't have a way to discover the Cache
+> topology from registers. Hence, I am hardcoding default values for the
+> cache topology structures. These cache topology structures are added in
+> virt.c itself so that a future series can add support for DT as well.
+> 
+> The series also updates the bios-tables-test data and removes the temporary
+> PPTT entry from the allowed-diff list. The generated table is 96 bytes and
+> describes the package, cluster, and processor hierarchy for the virt machine.
+> 
+> This work follows the discussion and earlier work shared here:
+> https://lists.gnu.org/archive/html/qemu-riscv/2024-01/msg00928.html
+> 
+> I have retained the contribution from Sia Jee Heng and added his
+> Signed-off-by tag to the relevant patch.
+> 
+> To enable cache structures in the PPTT, one should use similar to below
+> command line option.
 
-Reviewed-by: Eric Farman <farman@linux.ibm.com>
+
+acpi side's tiny here. that
+
+Reviewed-by: Michael S. Tsirkin <mst@redhat.com>
+
+
+> -M virt,smp-cache.0.cache=l1d,smp-cache.0.topology=core,smp-cache.1.cache=l1i,smp-cache.1.topology=core,smp-cache.2.cache=l2,smp-cache.2.topology=cluster,smp-cache.3.cache=l3,smp-cache.3.topology=socket
+> 
+> lscpu -C in linux can be used to display these cache structures.
+> 
+> Sunil V L (4):
+>   tests/qtest/bios-tables-test: Allow PPTT for RISC-V
+>   hw/riscv/virt: Add ACPI PPTT table
+>   tests/qtest/bios-tables-test: Update riscv64 virt PPTT golden
+>     reference
+>   MAINTAINERS: Update Sunil's email id
+> 
+>  MAINTAINERS                       |   2 +-
+>  hw/riscv/virt-acpi-build.c        |   7 ++++
+>  hw/riscv/virt.c                   |  54 ++++++++++++++++++++++++++++++
+>  include/hw/riscv/virt.h           |   4 +++
+>  tests/data/acpi/riscv64/virt/PPTT | Bin 0 -> 96 bytes
+>  5 files changed, 66 insertions(+), 1 deletion(-)
+>  create mode 100644 tests/data/acpi/riscv64/virt/PPTT
+> 
+> -- 
+> 2.43.0
+
 
