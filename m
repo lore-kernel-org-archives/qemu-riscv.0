@@ -1,92 +1,108 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 14EC9606A31A
-	for <qemu-riscv@archiver.kernel.org>; Wed, 28 Oct 2026 03:11:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9CB8D606A320
+	for <qemu-riscv@archiver.kernel.org>; Wed, 28 Oct 2026 03:23:39 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=RcOAvfdv
+	dkim=pass (2048-bit key, unprotected) header.d=sifive.com header.i=@sifive.com header.a=rsa-sha256 header.s=google header.b=ITCNwIhJ
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xLu4Z-0007b2-I0; Tue, 27 Oct 2026 23:11:31 -0400
+	id 1xLuG8-0001W3-5n; Tue, 27 Oct 2026 23:23:28 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <fritchleybohrer@gmail.com>)
- id 1xLu4U-0007a8-MI
- for qemu-riscv@nongnu.org; Tue, 27 Oct 2026 23:11:27 -0400
-Received: from mail-dl2-x04.google.com ([2607:f8b0:4864:38::4])
+ (Exim 4.90_1) (envelope-from <jay.chang@sifive.com>)
+ id 1xLuG4-0001Vg-Mk
+ for qemu-riscv@nongnu.org; Tue, 27 Oct 2026 23:23:26 -0400
+Received: from mail-ed1-x533.google.com ([2a00:1450:4864:20::533])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <fritchleybohrer@gmail.com>)
- id 1xLu4P-00031p-6A
- for qemu-riscv@nongnu.org; Tue, 27 Oct 2026 23:11:24 -0400
-Received: by mail-dl2-x04.google.com with SMTP id
- a92af1059eb24-1922a6f0d23so77707c88.0
- for <qemu-riscv@nongnu.org>; Tue, 27 Oct 2026 20:11:17 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <jay.chang@sifive.com>)
+ id 1xLuG2-000475-VW
+ for qemu-riscv@nongnu.org; Tue, 27 Oct 2026 23:23:24 -0400
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-6ae14eecc64so840674a12.1
+ for <qemu-riscv@nongnu.org>; Tue, 27 Oct 2026 20:23:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1793157076; x=1793761876; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=WU0QDEyOlS0xwFk4RVIpaGryci0JQ1HOBRvPf188a7M=;
- b=RcOAvfdva7Kdtecn9UWakT2C231GXRBAjyL1xzbYj30BDGwhDRtzDYTMDWGjq6g3vA
- n8sHsULyPqbVWAh2w0+VrFMien9G9a4aJeFkmbcjfhILxWrhuvPRGhVTyCgzw9ibbfvZ
- aC4DxkPjyn4LVhwQwRLtHkhaCr3YUs3hsj7O/pOALleDvyJJrZurAafECEHsPtdJ083/
- PiUgFTGfbflRH+qxp/z2+nOzNrjFzcORmuhptB4YqvKKVi5Ws1otD9cLtoKsweKosyR8
- MQiXUMSEFGVqG/S/G/KRsB5O1If2AuqCdNz/17fu2QK4zJgkbeerA6YnDPmR6gx8u5Eh
- 9+qA==
+ d=sifive.com; s=google; t=1793157801; x=1793762601; darn=nongnu.org;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=mk3I4P3qvt9cpCXVVANHB7X1V9r2M3jD6i2IEfgksoA=;
+ b=ITCNwIhJ9Uq78p4DLFGrQOWurl0QJx1fFuJQIZJq5qfRsWDD3/AZp1lTaSHMcSVX+w
+ 7HWD6ooegJAHIT9ex62673Rs2T9CWwhvmCg5kUsF75DMiJy98QTISyq+khuTmZIbp4Yu
+ XupB4DDCM+mbQsXENESERnP8r+54HczGpHteHmrAre4Zv572eSY5vjLuN2tPqkhNHzJ0
+ CT4YxZmY/SJQr/2Epw8418fTIWotCGIeSk8+MFEZ8Oc4CkleWYiJL5+Y+AgW9pMYUX1w
+ X/B0UIK85JKkKvnenX3sJtwH6wZsWexS3ZgaRbwj21IClJKqbJebE5IWHImQKXlsBtTS
+ 7zbQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793157076; x=1793761876;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=WU0QDEyOlS0xwFk4RVIpaGryci0JQ1HOBRvPf188a7M=;
- b=bcWC3Tfg/3DeqXTZtsOYOd3rPuYmdNmNe/7R/jcTYaWgsBMCejHfJ69i5fOH4RQ+ef
- 9XbYnOLmfCFxljkyH0iwyW2EESaw0oHpIuf1dYeABwPFZhCWcpd55dy1T+tpBNf/3loz
- 7P9XgKBVNXmPGoUCS/Jwq2mrsmK2iz+qNHVbILGv4pjyctgiaxNNfq55Lzurt3aXyIgR
- YB2TjEQF2IR8H5bRhNYH2vMVIS+wNargqKXIeLJmg/QFYYpcRqfDDoaX4e1KbcEofJxM
- 0L5507NqIaHTsFW+yesTgxTTjVPqTMchEupeju4C85wB+UD2F2S8Urwzbhdx5UAZGMk7
- j41Q==
-X-Gm-Message-State: AFq9FYJJho2IIMNhvBSdyEiprTRmQ4sVSgzCKRdcDwPGvO2P/Y/hwvPc
- Z4HlGp/R6G7NILmrDErPyY/bzYQ87phYBTbZhMIL2uIxyER7CeK0yM4P
-X-Gm-Gg: AYBFou3CXIIBEG/xiWmUnyfsLLmNcWOumpRtWUJdq2xwRuE+eDhNegRNe/loVQmuQJJ
- E4bA4UFXA+nj6b7xJuZXx+e2lF3KFYseOo0cm4hWRggU539/S0bNWeip4tVfMHKlmK0G7XC/l39
- Q+tZhrXdUM6HHRLFCg7WnIae0rL+yADELuqor0LuI/L7UpIETDTIJtld5HoU/FNo8977TQBmCJd
- QofYz8vWsrfk2cji37EfGImSUJbXmK5QIEeM6I1AtoHHILbQYFMPAcbQvEqAGtS9OCdYdThwwOJ
- V8Dd0l7uZRaMq4oiwWhSs4vDkzws0B8QJfzmcUBKlPhH/ksLK8dpVTUn75X2enQnssYK7W6f1gX
- ZiGhysYM2wg4ZWwDIklmd/lXO99Y6VPR7YWcGPzHU/cdKAFhsqfSMs6ORXhkGYu3FfEN5IKbXGD
- UE5omJDZPGhJiTZAGPR5o+qKxLmBGWCr8/CWj/9S5aXzAh+z3V23l4euwl9NcBcbYRseDwfKEEo
- uRSvsRsuu530ybSSLyl2XGAiw3dnEWRfmB258ndrjIsGTRYu7fTPkSOKMJfS3KLoqXqCB+T0hxZ
- a1fp4ur9vidmNBoBz2bF59Qm93wXKKPZ69fRrhpcUwXKZNDI8vxwG3gNHQ==
-X-Received: by 2002:a05:7022:c89:b0:184:329d:eced with SMTP id
- a92af1059eb24-1a6ce4ea23dmr1411268c88.25.1793157075597; 
- Tue, 27 Oct 2026 20:11:15 -0700 (PDT)
-Received: from Dell-WorkStation.localdomain ([141.164.58.245])
- by smtp.gmail.com with ESMTPSA id
- a92af1059eb24-1a75e5c6d4fsm1727374c88.14.2026.10.27.20.11.10
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 27 Oct 2026 20:11:14 -0700 (PDT)
-From: Zephyr Li <fritchleybohrer@gmail.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
- liwei1518@gmail.com, daniel.barboza@oss.qualcomm.com,
- zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com, farosas@suse.de,
- lvivier@redhat.com, pbonzini@redhat.com,
- Zephyr Li <fritchleybohrer@gmail.com>
-Subject: [PATCH] hw/riscv/iommu-sys: honor MSI vector masks
-Date: Wed, 28 Oct 2026 11:10:42 +0800
-Message-ID: <20261028031042.1496-1-fritchleybohrer@gmail.com>
-X-Mailer: git-send-email 2.43.0
+ d=1e100.net; s=20260707; t=1793157801; x=1793762601;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=mk3I4P3qvt9cpCXVVANHB7X1V9r2M3jD6i2IEfgksoA=;
+ b=v70Gz2D9Sl474QhaehH6Ad5KezPf1/RMXl1O2BERg9Z4juBFiOWotbH6ZDk8klKPNA
+ 7yD9vN705fqciddiBlU4YaN1qptHrUUIhOUWTK1Fre3b8RChgVCFeVrI/EevlbN6efUE
+ Bj3LHl9Z/F50v6tEnMAvj0yKfAs525rgW6uA51boO1v8LElMLXCPqC2OFHHZtFLxMsQw
+ oPKwMoPkokkuQUfTjZtcxFyc8EoiRPyEFCDqo/9YWKNuiDVjK0dGO2yzPXajY2bqfpOV
+ 3Qae9rPegpXFTMG1ufk/EvULBoVrjZVom3WHx3Vjxl3cMMBCNInHfo5/6KcaObepbcc/
+ B4uQ==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBw5ZwzAGk0PTx31HBzOAgKxHYvBWqke0/yUmhYo+V3C5vmUx0MtlPdfQowivsiTRUPYQrVss+0FBIwC@nongnu.org
+X-Gm-Message-State: AFq9FYKpDxO/uzVJkM8iNbrud2UoLkEWUrATa8qyQeHpmZJYjTHtRQEE
+ 6NRvO4iQrph+BhDno8w0eXs4evSJwBseS26Mn+jyWYk8nNhcLeHoE+fC72FgeY8A5zYDax5pE4J
+ Hm6PHs1YE8FW7NkEWolmJRiQWdKgUwGegz1z9fgP0Bo7S9uvtABVcxalvHTmJpzWTS/gJcvzyv7
+ e6wYT2WV9Un68S/fU2604xnCCQZZuxHas4dHd4da5M/vY=
+X-Gm-Gg: AYBFou1LAow60RfJZrs40FdfT3uYsRJE2Spdz4fU7wWlONJq6KCIYZO1KPlt/jNZddk
+ OnXWwLX573oG9+zIz19F0EEDW9uBywJjedtvnCWIZ5Y0VrmFMUYQ7AuOGk+W58yStJ6V5tm3LHc
+ HpmeLi9vEWwFw9Nwk39CcOoyGt4nVXfv/8PZZjOh0wFh+emY51E28cypdi5IyoyFf9e1HD7kgd6
+ ElBBdi19Y69wO9LWo+DMbKappTVGrnriw3+z/5kHkGsLToiP+8iV1Sx+N+OOUHHbe95uXUc+66T
+ JOLFFsGpTWBNE0B5DdxDoPS/ZRBhvA/sudU/GOufe2T4mho/MDX7EUnTQv05eo9RXajUsO3y+F6
+ JSL+SahQohXnHUccS6GiI4XtKBOp0umQa9d/xeS8b7QceX9j365Zi3bTFZx4EtaDDIJtBITFxqP
+ zmL6yvnp4yzi+e61TweB0owe7uUG9fwF9uYl57ekfhXpL4rGGRFY0UMuDYTxmahODLCvel0Utbo
+ 9E3ASM5cdrrcQ+/PQ8ZVjKpKvdqLzc30fBrLHowbGSTEkEFKlnv8DVRFrDciri4Nu7B3Fz1KQsz
+ sV5j/fJRYU4pN8xZeKitjLYmQW9wazJ1g44rdF7lxRcLeKdhYeM67OymWYAyWVG6G7E=
+X-Received: by 2002:a17:907:7294:b0:c26:19e3:e98d with SMTP id
+ a640c23a62f3a-c49bdf7483bmr80784366b.45.1793157801122; 
+ Tue, 27 Oct 2026 20:23:21 -0700 (PDT)
+Received: from mail-ed1-f54.google.com (mail-ed1-f54.google.com.
+ [209.85.208.54]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-c49a4e2401bsm227987066b.84.2026.10.27.20.23.06
+ for <qemu-riscv@nongnu.org>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 27 Oct 2026 20:23:07 -0700 (PDT)
+Received: by mail-ed1-f54.google.com with SMTP id
+ 4fb4d7f45d1cf-6b3dc272dcfso783152a12.3
+ for <qemu-riscv@nongnu.org>; Tue, 27 Oct 2026 20:23:06 -0700 (PDT)
+X-Forwarded-Encrypted: i=1;
+ AKwUvBxBp9SiTik01YxXw7AkyXQCUGbYxtyvnY+S2SgNupjJVfCCRThmmUI7s1/Z5RdbBCvqVUwTDrSr1qgi@nongnu.org
+X-Received: by 2002:aa7:c6d5:0:b0:6b4:16be:4fa with SMTP id
+ 4fb4d7f45d1cf-6b49cbd6cd0mr385557a12.15.1793157785664; Tue, 27 Oct 2026
+ 20:23:05 -0700 (PDT)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:38::4;
- envelope-from=fritchleybohrer@gmail.com; helo=mail-dl2-x04.google.com
+References: <20261021231346.2452179-1-daniel.barboza@oss.qualcomm.com>
+ <20261021231346.2452179-13-daniel.barboza@oss.qualcomm.com>
+In-Reply-To: <20261021231346.2452179-13-daniel.barboza@oss.qualcomm.com>
+From: Jay Chang <jay.chang@sifive.com>
+Date: Wed, 28 Oct 2026 11:22:54 +0800
+X-Gmail-Original-Message-ID: <CAMXXpfZB8w_pJso4M4_ufOm99VbV6gfbUSKDNz4twFwfcTPgpw@mail.gmail.com>
+X-Gm-Features: AclHuK9QdqaG-U3lqaLxdAeYzqbWYte2s4CGaiaJf8-nn3ySE5RrbwA2I8B6HtE
+Message-ID: <CAMXXpfZB8w_pJso4M4_ufOm99VbV6gfbUSKDNz4twFwfcTPgpw@mail.gmail.com>
+Subject: Re: [PATCH v4 12/18] target/riscv, hw/riscv: send trace ppccd packets
+To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
+ chao.liu@processmission.com, antikostya2@gmail.com, 
+ Palmer Dabbelt <palmer@dabbelt.com>, frank.chang@sifive.com
+Content-Type: multipart/alternative; boundary="000000000000d741b4065ede1435"
+Received-SPF: pass client-ip=2a00:1450:4864:20::533;
+ envelope-from=jay.chang@sifive.com; helo=mail-ed1-x533.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -98,694 +114,85 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-20.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-7.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,HTML_MESSAGE,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS autolearn=no
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-The system IOMMU currently sends MSIs without checking the corresponding
-vector mask bit in the MSI configuration table.
+--000000000000d741b4065ede1435
+Content-Type: text/plain; charset="UTF-8"
 
-Honor the mask bit and maintain one pending flag per vector. Notifications
-generated while masked are deferred and coalesced. Unmasking a vector
-delivers one pending MSI, if any, and reset clears all pending flags.
+>
+> -- a/target/riscv/tcg/cpu_helper.c
+> +++ b/target/riscv/tcg/cpu_helper.c
+> @@ -943,11 +943,22 @@ void riscv_cpu_set_mode(CPURISCVState *env,
+> privilege_mode_t newpriv,
+>  {
+>      g_assert(newpriv <= PRV_M && newpriv != PRV_RESERVED);
+>
+> +    CPUState *cs = env_cpu(env);
+> +
+>      if (newpriv != env->priv || env->virt_enabled != virt_en) {
+>          if (icount_enabled()) {
+>              riscv_itrigger_update_priv(env);
+>          }
+>
+> +        if (newpriv != env->priv) {
+> +            RISCVCPU *cpu = RISCV_CPU(cs);
+> +
+> +            if (cpu->trencoder &&
+> +                TRACE_ENCODER(cpu->trencoder)->trace_running) {
+> +                trencoder_trace_ppccd(cpu->trencoder, env->pc);
+> +            }
+> +        }
+>
+On the trap-entry path, env->pc has already been updated to the handler
+address, but env->priv still holds the previous privilege level.
+Emitting a PPCCD sync packet here therefore pairs the handler PC with
+the old privilege level.
 
-Do not release deferred MSIs while FCTL.WSI selects wired interrupt mode.
-When switching back to MSI mode, release unmasked pending vectors and
-retain masked ones until unmask.
+--000000000000d741b4065ede1435
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Add qtests covering masked and unmasked delivery, vector isolation, MSI
-configuration updates, wired interrupt delivery, mode transitions, and
-reset.
+<div dir=3D"ltr"><div class=3D"gmail_quote gmail_quote_container"><blockquo=
+te class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px =
+solid rgb(204,204,204);padding-left:1ex">-- a/target/riscv/tcg/cpu_helper.c=
+<br>
++++ b/target/riscv/tcg/cpu_helper.c<br>
+@@ -943,11 +943,22 @@ void riscv_cpu_set_mode(CPURISCVState *env, privilege=
+_mode_t newpriv,<br>
+=C2=A0{<br>
+=C2=A0 =C2=A0 =C2=A0g_assert(newpriv &lt;=3D PRV_M &amp;&amp; newpriv !=3D =
+PRV_RESERVED);<br>
+<br>
++=C2=A0 =C2=A0 CPUState *cs =3D env_cpu(env);<br>
++<br>
+=C2=A0 =C2=A0 =C2=A0if (newpriv !=3D env-&gt;priv || env-&gt;virt_enabled !=
+=3D virt_en) {<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if (icount_enabled()) {<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0riscv_itrigger_update_priv(=
+env);<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
+<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (newpriv !=3D env-&gt;priv) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 RISCVCPU *cpu =3D RISCV_CPU(cs);=
+<br>
++<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if (cpu-&gt;trencoder &amp;&amp;=
+<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 TRACE_ENCODER(cpu-=
+&gt;trencoder)-&gt;trace_running) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 trencoder_trace_pp=
+ccd(cpu-&gt;trencoder, env-&gt;pc);<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br></blockquote><div>On the trap-entry path,=
+ env-&gt;pc has already been updated to the handler<br>address, but env-&gt=
+;priv still holds the previous privilege level.<br>Emitting a PPCCD sync pa=
+cket here therefore pairs the handler PC with<br>the old privilege level.</=
+div><div>=C2=A0</div></div></div>
 
-Fixes: 01c1caa9d1b4 ("hw/riscv/virt.c, riscv-iommu-sys.c: add MSIx support")
-Resolves: https://gitlab.com/qemu-project/qemu/-/issues/4444
-Signed-off-by: Zephyr Li <fritchleybohrer@gmail.com>
----
- hw/riscv/riscv-iommu-sys.c     |  67 ++++-
- hw/riscv/riscv-iommu.c         |  12 +
- hw/riscv/riscv-iommu.h         |   3 +
- tests/qtest/iommu-riscv-test.c | 461 +++++++++++++++++++++++++++++++++
- 4 files changed, 541 insertions(+), 2 deletions(-)
-
-diff --git a/hw/riscv/riscv-iommu-sys.c b/hw/riscv/riscv-iommu-sys.c
-index 258c171efd..96d2bdff7a 100644
---- a/hw/riscv/riscv-iommu-sys.c
-+++ b/hw/riscv/riscv-iommu-sys.c
-@@ -52,8 +52,50 @@ struct RISCVIOMMUStateSys {
-     MemoryRegion msix_pba_mmio;
-     uint8_t *msix_table;
-     uint8_t *msix_pba;
-+    /* Platform MSI state; the reserved PBA region does not expose it. */
-+    bool msi_pending[RISCV_IOMMU_PCI_MSIX_VECTORS];
- };
- 
-+static void riscv_iommu_sysdev_send_MSI_unmasked(RISCVIOMMUStateSys *s,
-+                                                 uint32_t vector);
-+
-+static bool riscv_iommu_sysdev_msi_masked(RISCVIOMMUStateSys *s,
-+                                          uint32_t vector)
-+{
-+    uint8_t *table_entry;
-+
-+    g_assert(vector < RISCV_IOMMU_PCI_MSIX_VECTORS);
-+    table_entry = s->msix_table + vector * PCI_MSIX_ENTRY_SIZE;
-+
-+    return pci_get_long(table_entry + PCI_MSIX_ENTRY_VECTOR_CTRL) &
-+           PCI_MSIX_ENTRY_CTRL_MASKBIT;
-+}
-+
-+static void riscv_iommu_sysdev_release_pending(RISCVIOMMUStateSys *s,
-+                                              uint32_t vector)
-+{
-+    /* Retain deferred MSI messages until MSI mode is restored. */
-+    if (riscv_iommu_reg_get32(&s->iommu, RISCV_IOMMU_REG_FCTL) &
-+        RISCV_IOMMU_FCTL_WSI) {
-+        return;
-+    }
-+
-+    if (s->msi_pending[vector] &&
-+        !riscv_iommu_sysdev_msi_masked(s, vector)) {
-+        s->msi_pending[vector] = false;
-+        riscv_iommu_sysdev_send_MSI_unmasked(s, vector);
-+    }
-+}
-+
-+static void riscv_iommu_sysdev_msi_enabled(RISCVIOMMUState *iommu)
-+{
-+    RISCVIOMMUStateSys *s = container_of(iommu, RISCVIOMMUStateSys, iommu);
-+
-+    for (unsigned vector = 0; vector < ARRAY_SIZE(s->msi_pending); vector++) {
-+        riscv_iommu_sysdev_release_pending(s, vector);
-+    }
-+}
-+
- static uint64_t msix_table_mmio_read(void *opaque, hwaddr addr,
-                                      unsigned size)
- {
-@@ -67,9 +109,17 @@ static void msix_table_mmio_write(void *opaque, hwaddr addr,
-                                   uint64_t val, unsigned size)
- {
-     RISCVIOMMUStateSys *s = opaque;
-+    uint32_t vector = addr / PCI_MSIX_ENTRY_SIZE;
-+    bool was_masked;
- 
-     g_assert(addr + size <= RISCV_IOMMU_PCI_MSIX_VECTORS * PCI_MSIX_ENTRY_SIZE);
-+
-+    was_masked = riscv_iommu_sysdev_msi_masked(s, vector);
-     pci_set_long(s->msix_table + addr, val);
-+
-+    if (was_masked && !riscv_iommu_sysdev_msi_masked(s, vector)) {
-+        riscv_iommu_sysdev_release_pending(s, vector);
-+    }
- }
- 
- static const MemoryRegionOps msix_table_mmio_ops = {
-@@ -134,8 +184,8 @@ static void riscv_iommu_sysdev_init_msi(RISCVIOMMUStateSys *s,
-                                 &s->msix_pba_mmio);
- }
- 
--static void riscv_iommu_sysdev_send_MSI(RISCVIOMMUStateSys *s,
--                                        uint32_t vector)
-+static void riscv_iommu_sysdev_send_MSI_unmasked(RISCVIOMMUStateSys *s,
-+                                                 uint32_t vector)
- {
-     uint8_t *table_entry = s->msix_table + vector * PCI_MSIX_ENTRY_SIZE;
-     uint64_t msi_addr = pci_get_quad(table_entry + PCI_MSIX_ENTRY_LOWER_ADDR);
-@@ -160,6 +210,17 @@ static void riscv_iommu_sysdev_send_MSI(RISCVIOMMUStateSys *s,
-     }
- }
- 
-+static void riscv_iommu_sysdev_send_MSI(RISCVIOMMUStateSys *s,
-+                                        uint32_t vector)
-+{
-+    if (riscv_iommu_sysdev_msi_masked(s, vector)) {
-+        s->msi_pending[vector] = true;
-+        return;
-+    }
-+
-+    riscv_iommu_sysdev_send_MSI_unmasked(s, vector);
-+}
-+
- static void riscv_iommu_sysdev_notify(RISCVIOMMUState *iommu,
-                                       unsigned vector)
- {
-@@ -194,6 +255,7 @@ static void riscv_iommu_sys_realize(DeviceState *dev, Error **errp)
-     }
- 
-     s->iommu.notify = riscv_iommu_sysdev_notify;
-+    s->iommu.msi_enabled = riscv_iommu_sysdev_msi_enabled;
- 
-     /* 4 IRQs are defined starting from s->base_irq */
-     for (int i = 0; i < RISCV_IOMMU_INTR_COUNT; i++) {
-@@ -255,6 +317,7 @@ static void riscv_iommu_sys_reset_hold(Object *obj, ResetType type)
-     RISCVIOMMUState *iommu = &sys->iommu;
- 
-     riscv_iommu_reset(iommu);
-+    memset(sys->msi_pending, 0, sizeof(sys->msi_pending));
- 
-     trace_riscv_iommu_sys_reset_hold(type);
- }
-diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
-index 323a041b4a..23b6f8da86 100644
---- a/hw/riscv/riscv-iommu.c
-+++ b/hw/riscv/riscv-iommu.c
-@@ -2419,6 +2419,7 @@ static MemTxResult riscv_iommu_mmio_write(void *opaque, hwaddr addr,
-     RISCVIOMMUState *s = opaque;
-     uint32_t regb = addr & ~3;
-     uint32_t busy = 0;
-+    uint32_t old_fctl = 0;
-     uint64_t val = 0;
-     bool cy_inh = false;
- 
-@@ -2434,6 +2435,10 @@ static MemTxResult riscv_iommu_mmio_write(void *opaque, hwaddr addr,
- 
-     /* Track actionable MMIO write. */
-     switch (regb) {
-+    case RISCV_IOMMU_REG_FCTL:
-+        old_fctl = riscv_iommu_reg_get32(s, RISCV_IOMMU_REG_FCTL);
-+        break;
-+
-     case RISCV_IOMMU_REG_DDTP:
-     case RISCV_IOMMU_REG_DDTP + 4:
-         process_fn = riscv_iommu_process_ddtp;
-@@ -2510,6 +2515,13 @@ static MemTxResult riscv_iommu_mmio_write(void *opaque, hwaddr addr,
-      */
-     riscv_iommu_write_reg_val(s, &s->regs[addr], addr, size, data);
- 
-+    if (regb == RISCV_IOMMU_REG_FCTL && s->msi_enabled &&
-+        (old_fctl & RISCV_IOMMU_FCTL_WSI) &&
-+        !(riscv_iommu_reg_get32(s, RISCV_IOMMU_REG_FCTL) &
-+          RISCV_IOMMU_FCTL_WSI)) {
-+        s->msi_enabled(s);
-+    }
-+
-     /* Busy flag update, MSB 4-byte register. */
-     if (busy) {
-         uint32_t rw = ldl_le_p(&s->regs[regb]);
-diff --git a/hw/riscv/riscv-iommu.h b/hw/riscv/riscv-iommu.h
-index 7c470ba084..ea1b53e732 100644
---- a/hw/riscv/riscv-iommu.h
-+++ b/hw/riscv/riscv-iommu.h
-@@ -61,6 +61,9 @@ struct RISCVIOMMUState {
-     /* interrupt notifier */
-     void (*notify)(RISCVIOMMUState *iommu, unsigned vector);
- 
-+    /* Optional platform callback when FCTL switches from WSI to MSI. */
-+    void (*msi_enabled)(RISCVIOMMUState *iommu);
-+
-     /* IOMMU target address space */
-     AddressSpace *target_as;
-     MemoryRegion *target_mr;
-diff --git a/tests/qtest/iommu-riscv-test.c b/tests/qtest/iommu-riscv-test.c
-index 2638024891..979a976e4f 100644
---- a/tests/qtest/iommu-riscv-test.c
-+++ b/tests/qtest/iommu-riscv-test.c
-@@ -19,6 +19,28 @@
- 
- #define DMA_LEN           4
- 
-+#define RISCV_IOMMU_SYS_MSI_TARGET0  (QRIOMMU_SPACE_OFFS + 0x03000000ull)
-+#define RISCV_IOMMU_SYS_MSI_TARGET1  (RISCV_IOMMU_SYS_MSI_TARGET0 + 4)
-+#define RISCV_IOMMU_SYS_CQ_BASE      \
-+    (QRIOMMU_SPACE_OFFS + QRIOMMU_CQ_BASE_ADDR)
-+#define RISCV_IOMMU_SYS_MSI_DATA0    0x12345678
-+#define RISCV_IOMMU_SYS_MSI_DATA1    0xa5a55a5a
-+
-+/* RISC-V virt machine PLIC, hart 0 M-mode context. */
-+#define RISCV_PLIC_BASE             0x0c000000
-+#define RISCV_PLIC_PENDING          (RISCV_PLIC_BASE + 0x1000)
-+#define RISCV_PLIC_ENABLE           (RISCV_PLIC_BASE + 0x2000)
-+#define RISCV_PLIC_THRESHOLD        (RISCV_PLIC_BASE + 0x200000)
-+#define RISCV_PLIC_CLAIM            (RISCV_PLIC_THRESHOLD + 4)
-+#define RISCV_IOMMU_SYS_IRQ_BASE    36
-+
-+#define PCI_TESTDEV_TEST             0
-+#define PCI_TESTDEV_WIDTH            1
-+#define PCI_TESTDEV_OFFSET           4
-+#define PCI_TESTDEV_DATA             8
-+#define PCI_TESTDEV_COUNT            12
-+#define PCI_TESTDEV_NO_EVENTFD       0
-+
- /* RISC-V virt machine PCI configuration */
- #define RISCV_GPEX_PIO_BASE        0x3000000
- #define RISCV_BUS_PIO_LIMIT        0x10000
-@@ -264,6 +286,425 @@ static void test_riscv_iommu_nested(void)
-     run_riscv_iommu_translation(&cfg);
- }
- 
-+static void riscv_iommu_sys_set_wsi(QTestState *qts, bool wsi)
-+{
-+    uint64_t base = VIRT_RISCV_IOMMU_BASE;
-+    uint32_t fctl;
-+
-+    /* Feature changes require Off mode and all in-memory queues disabled. */
-+    g_assert_cmphex(qtest_readq(qts, base + RISCV_IOMMU_REG_DDTP) &
-+                    (RISCV_IOMMU_DDTP_MODE | RISCV_IOMMU_DDTP_BUSY),
-+                    ==, RISCV_IOMMU_DDTP_MODE_OFF);
-+    g_assert_cmphex(qtest_readl(qts, base + RISCV_IOMMU_REG_CQCSR) &
-+                    (RISCV_IOMMU_CQCSR_CQEN | RISCV_IOMMU_CQCSR_CQON |
-+                     RISCV_IOMMU_CQCSR_BUSY), ==, 0);
-+    g_assert_cmphex(qtest_readl(qts, base + RISCV_IOMMU_REG_FQCSR) &
-+                    (RISCV_IOMMU_FQCSR_FQEN | RISCV_IOMMU_FQCSR_FQON |
-+                     RISCV_IOMMU_FQCSR_BUSY), ==, 0);
-+    g_assert_cmphex(qtest_readl(qts, base + RISCV_IOMMU_REG_PQCSR) &
-+                    (RISCV_IOMMU_PQCSR_PQEN | RISCV_IOMMU_PQCSR_PQON |
-+                     RISCV_IOMMU_PQCSR_BUSY), ==, 0);
-+
-+    fctl = qtest_readl(qts, base + RISCV_IOMMU_REG_FCTL);
-+    fctl = (fctl & ~RISCV_IOMMU_FCTL_WSI) |
-+           (wsi ? RISCV_IOMMU_FCTL_WSI : 0);
-+    qtest_writel(qts, base + RISCV_IOMMU_REG_FCTL, fctl);
-+    g_assert_cmphex(qtest_readl(qts, base + RISCV_IOMMU_REG_FCTL) &
-+                    RISCV_IOMMU_FCTL_WSI, ==, fctl & RISCV_IOMMU_FCTL_WSI);
-+}
-+
-+static QTestState *riscv_iommu_sys_test_init(const char *extra_args)
-+{
-+    QTestState *qts;
-+    uint64_t cap;
-+    uint32_t igs;
-+
-+    if (!qtest_has_machine("virt")) {
-+        g_test_skip("virt machine not available");
-+        return NULL;
-+    }
-+
-+    qts = qtest_initf("-machine virt,aia=none,acpi=off,iommu-sys=on "
-+                      "-cpu max -smp 1 -m 512 -net none -nodefaults %s",
-+                      extra_args ? extra_args : "");
-+
-+    cap = qtest_readq(qts, VIRT_RISCV_IOMMU_BASE + RISCV_IOMMU_REG_CAP);
-+    igs = (cap & RISCV_IOMMU_CAP_IGS) >> 28;
-+    g_assert_cmpuint(igs, <=, RISCV_IOMMU_CAP_IGS_BOTH);
-+    g_assert_cmpuint(igs, !=, RISCV_IOMMU_CAP_IGS_WSI);
-+
-+    riscv_iommu_sys_set_wsi(qts, false);
-+
-+    return qts;
-+}
-+
-+static QPCIDevice *riscv_iommu_sys_init_msi_sink(QTestState *qts,
-+                                                  QGenericPCIBus *gbus,
-+                                                  QPCIBar *bar,
-+                                                  uint64_t *target,
-+                                                  uint32_t *data)
-+{
-+    QPCIDevice *dev = NULL;
-+    uint32_t offset;
-+
-+    qpci_init_generic(gbus, qts, NULL, false);
-+    riscv_config_qpci_bus(gbus);
-+    qpci_device_foreach(&gbus->bus, PCI_VENDOR_ID_REDHAT,
-+                        PCI_DEVICE_ID_REDHAT_TEST, save_fn, &dev);
-+    g_assert(dev);
-+
-+    qpci_device_enable(dev);
-+    *bar = qpci_iomap(dev, 0, NULL);
-+    g_assert_false(bar->is_io);
-+
-+    qpci_io_writeb(dev, *bar, PCI_TESTDEV_TEST, PCI_TESTDEV_NO_EVENTFD);
-+    g_assert_cmpuint(qpci_io_readb(dev, *bar, PCI_TESTDEV_WIDTH), ==, 1);
-+    offset = qpci_io_readl(dev, *bar, PCI_TESTDEV_OFFSET);
-+    *data = qpci_io_readl(dev, *bar, PCI_TESTDEV_DATA);
-+    *target = bar->addr + offset;
-+    g_assert_cmpuint(qpci_io_readl(dev, *bar, PCI_TESTDEV_COUNT), ==, 0);
-+
-+    return dev;
-+}
-+
-+static void riscv_iommu_sys_program_msi(QTestState *qts, unsigned vector,
-+                                        uint64_t target, uint32_t data,
-+                                        bool masked)
-+{
-+    uint64_t entry = VIRT_RISCV_IOMMU_BASE + RISCV_IOMMU_REG_MSI_CONFIG +
-+                     vector * PCI_MSIX_ENTRY_SIZE;
-+
-+    qtest_writeq(qts, entry + PCI_MSIX_ENTRY_LOWER_ADDR, target);
-+    qtest_writel(qts, entry + PCI_MSIX_ENTRY_DATA, data);
-+    qtest_writel(qts, entry + PCI_MSIX_ENTRY_VECTOR_CTRL,
-+                 masked ? PCI_MSIX_ENTRY_CTRL_MASKBIT : 0);
-+}
-+
-+static void riscv_iommu_sys_set_mask(QTestState *qts, unsigned vector,
-+                                     bool masked)
-+{
-+    uint64_t entry = VIRT_RISCV_IOMMU_BASE + RISCV_IOMMU_REG_MSI_CONFIG +
-+                     vector * PCI_MSIX_ENTRY_SIZE;
-+
-+    qtest_writel(qts, entry + PCI_MSIX_ENTRY_VECTOR_CTRL,
-+                 masked ? PCI_MSIX_ENTRY_CTRL_MASKBIT : 0);
-+}
-+
-+static void riscv_iommu_sys_setup_cq(QTestState *qts)
-+{
-+    uint64_t cqb = (RISCV_IOMMU_SYS_CQ_BASE >> 12) << 10;
-+    uint32_t cqcsr;
-+
-+    qtest_writeq(qts, RISCV_IOMMU_SYS_CQ_BASE, UINT64_MAX);
-+    qtest_writeq(qts, RISCV_IOMMU_SYS_CQ_BASE + 8, 0);
-+    qtest_writeq(qts, VIRT_RISCV_IOMMU_BASE + RISCV_IOMMU_REG_CQB, cqb);
-+    qtest_writel(qts, VIRT_RISCV_IOMMU_BASE + RISCV_IOMMU_REG_CQT, 0);
-+    qtest_writel(qts, VIRT_RISCV_IOMMU_BASE + RISCV_IOMMU_REG_CQCSR,
-+                 RISCV_IOMMU_CQCSR_CQEN | RISCV_IOMMU_CQCSR_CIE);
-+
-+    cqcsr = qtest_readl(qts,
-+                        VIRT_RISCV_IOMMU_BASE + RISCV_IOMMU_REG_CQCSR);
-+    g_assert_cmphex(cqcsr & RISCV_IOMMU_CQCSR_CQON,
-+                    ==, RISCV_IOMMU_CQCSR_CQON);
-+}
-+
-+static void riscv_iommu_sys_trigger_cq_irq(QTestState *qts)
-+{
-+    uint32_t cqcsr;
-+
-+    qtest_writel(qts, VIRT_RISCV_IOMMU_BASE + RISCV_IOMMU_REG_CQT, 1);
-+    cqcsr = qtest_readl(qts,
-+                        VIRT_RISCV_IOMMU_BASE + RISCV_IOMMU_REG_CQCSR);
-+    g_assert_cmphex(cqcsr & RISCV_IOMMU_CQCSR_CMD_ILL,
-+                    ==, RISCV_IOMMU_CQCSR_CMD_ILL);
-+}
-+
-+static void riscv_iommu_sys_rearm_cq_irq(QTestState *qts)
-+{
-+    uint32_t cqcsr;
-+
-+    qtest_writel(qts, VIRT_RISCV_IOMMU_BASE + RISCV_IOMMU_REG_CQT, 0);
-+    qtest_writel(qts, VIRT_RISCV_IOMMU_BASE + RISCV_IOMMU_REG_CQCSR,
-+                 RISCV_IOMMU_CQCSR_CQEN | RISCV_IOMMU_CQCSR_CIE |
-+                 RISCV_IOMMU_CQCSR_CMD_ILL);
-+    cqcsr = qtest_readl(qts,
-+                        VIRT_RISCV_IOMMU_BASE + RISCV_IOMMU_REG_CQCSR);
-+    g_assert_cmphex(cqcsr & RISCV_IOMMU_CQCSR_CMD_ILL, ==, 0);
-+
-+    qtest_writel(qts, VIRT_RISCV_IOMMU_BASE + RISCV_IOMMU_REG_IPSR,
-+                 RISCV_IOMMU_IPSR_CIP);
-+    g_assert_cmphex(qtest_readl(qts, VIRT_RISCV_IOMMU_BASE +
-+                               RISCV_IOMMU_REG_IPSR) & RISCV_IOMMU_IPSR_CIP,
-+                    ==, 0);
-+}
-+
-+static void test_riscv_iommu_sys_msi_unmasked(void)
-+{
-+    QTestState *qts = riscv_iommu_sys_test_init(NULL);
-+
-+    if (!qts) {
-+        return;
-+    }
-+
-+    qtest_writel(qts, RISCV_IOMMU_SYS_MSI_TARGET0, 0);
-+    riscv_iommu_sys_program_msi(qts, 0, RISCV_IOMMU_SYS_MSI_TARGET0,
-+                                RISCV_IOMMU_SYS_MSI_DATA0, false);
-+    riscv_iommu_sys_setup_cq(qts);
-+    riscv_iommu_sys_trigger_cq_irq(qts);
-+
-+    g_assert_cmphex(qtest_readl(qts, RISCV_IOMMU_SYS_MSI_TARGET0),
-+                    ==, RISCV_IOMMU_SYS_MSI_DATA0);
-+    qtest_quit(qts);
-+}
-+
-+static void test_riscv_iommu_sys_msi_masked(void)
-+{
-+    QGenericPCIBus gbus;
-+    QPCIBar sink_bar;
-+    QPCIDevice *sink;
-+    QTestState *qts = riscv_iommu_sys_test_init("-device pci-testdev");
-+    uint64_t sink_target;
-+    uint32_t sink_data;
-+
-+    if (!qts) {
-+        return;
-+    }
-+
-+    sink = riscv_iommu_sys_init_msi_sink(qts, &gbus, &sink_bar,
-+                                         &sink_target, &sink_data);
-+    riscv_iommu_sys_program_msi(qts, 0, sink_target, sink_data, true);
-+    riscv_iommu_sys_setup_cq(qts);
-+
-+    riscv_iommu_sys_trigger_cq_irq(qts);
-+    g_assert_cmpuint(qpci_io_readl(sink, sink_bar, PCI_TESTDEV_COUNT), ==, 0);
-+
-+    riscv_iommu_sys_rearm_cq_irq(qts);
-+    riscv_iommu_sys_trigger_cq_irq(qts);
-+    g_assert_cmpuint(qpci_io_readl(sink, sink_bar, PCI_TESTDEV_COUNT), ==, 0);
-+
-+    riscv_iommu_sys_set_mask(qts, 0, false);
-+    g_assert_cmpuint(qpci_io_readl(sink, sink_bar, PCI_TESTDEV_COUNT), ==, 1);
-+
-+    riscv_iommu_sys_set_mask(qts, 0, false);
-+    g_assert_cmpuint(qpci_io_readl(sink, sink_bar, PCI_TESTDEV_COUNT), ==, 1);
-+    g_free(sink);
-+    qtest_quit(qts);
-+}
-+
-+static void test_riscv_iommu_sys_msi_config_update(void)
-+{
-+    QTestState *qts = riscv_iommu_sys_test_init(NULL);
-+
-+    if (!qts) {
-+        return;
-+    }
-+
-+    qtest_writel(qts, RISCV_IOMMU_SYS_MSI_TARGET0, 0);
-+    qtest_writel(qts, RISCV_IOMMU_SYS_MSI_TARGET1, 0);
-+    riscv_iommu_sys_program_msi(qts, 0, RISCV_IOMMU_SYS_MSI_TARGET0,
-+                                RISCV_IOMMU_SYS_MSI_DATA0, true);
-+    riscv_iommu_sys_setup_cq(qts);
-+    riscv_iommu_sys_trigger_cq_irq(qts);
-+
-+    /* Updating a masked entry must not release the deferred message. */
-+    riscv_iommu_sys_program_msi(qts, 0, RISCV_IOMMU_SYS_MSI_TARGET1,
-+                                RISCV_IOMMU_SYS_MSI_DATA1, true);
-+    g_assert_cmphex(qtest_readl(qts, RISCV_IOMMU_SYS_MSI_TARGET0), ==, 0);
-+    g_assert_cmphex(qtest_readl(qts, RISCV_IOMMU_SYS_MSI_TARGET1), ==, 0);
-+
-+    /* Release uses the current address and data, rather than a snapshot. */
-+    riscv_iommu_sys_set_mask(qts, 0, false);
-+    g_assert_cmphex(qtest_readl(qts, RISCV_IOMMU_SYS_MSI_TARGET0), ==, 0);
-+    g_assert_cmphex(qtest_readl(qts, RISCV_IOMMU_SYS_MSI_TARGET1),
-+                    ==, RISCV_IOMMU_SYS_MSI_DATA1);
-+    qtest_writel(qts, RISCV_IOMMU_SYS_MSI_TARGET1, 0);
-+    riscv_iommu_sys_set_mask(qts, 0, false);
-+    g_assert_cmphex(qtest_readl(qts, RISCV_IOMMU_SYS_MSI_TARGET1), ==, 0);
-+    qtest_quit(qts);
-+}
-+
-+static void test_riscv_iommu_sys_msi_vector_isolation(void)
-+{
-+    QTestState *qts = riscv_iommu_sys_test_init(NULL);
-+
-+    if (!qts) {
-+        return;
-+    }
-+
-+    qtest_writel(qts, RISCV_IOMMU_SYS_MSI_TARGET0, 0);
-+    qtest_writel(qts, RISCV_IOMMU_SYS_MSI_TARGET1, 0);
-+    riscv_iommu_sys_program_msi(qts, 0, RISCV_IOMMU_SYS_MSI_TARGET0,
-+                                RISCV_IOMMU_SYS_MSI_DATA0, true);
-+    riscv_iommu_sys_program_msi(qts, 1, RISCV_IOMMU_SYS_MSI_TARGET1,
-+                                RISCV_IOMMU_SYS_MSI_DATA1, false);
-+    riscv_iommu_sys_setup_cq(qts);
-+
-+    riscv_iommu_sys_trigger_cq_irq(qts);
-+    g_assert_cmphex(qtest_readl(qts, RISCV_IOMMU_SYS_MSI_TARGET0), ==, 0);
-+    g_assert_cmphex(qtest_readl(qts, RISCV_IOMMU_SYS_MSI_TARGET1), ==, 0);
-+
-+    riscv_iommu_sys_rearm_cq_irq(qts);
-+    qtest_writel(qts, VIRT_RISCV_IOMMU_BASE + RISCV_IOMMU_REG_ICVEC, 1);
-+    riscv_iommu_sys_trigger_cq_irq(qts);
-+    g_assert_cmphex(qtest_readl(qts, RISCV_IOMMU_SYS_MSI_TARGET0), ==, 0);
-+    g_assert_cmphex(qtest_readl(qts, RISCV_IOMMU_SYS_MSI_TARGET1),
-+                    ==, RISCV_IOMMU_SYS_MSI_DATA1);
-+
-+    riscv_iommu_sys_set_mask(qts, 0, false);
-+    g_assert_cmphex(qtest_readl(qts, RISCV_IOMMU_SYS_MSI_TARGET0),
-+                    ==, RISCV_IOMMU_SYS_MSI_DATA0);
-+    qtest_quit(qts);
-+}
-+
-+static void test_riscv_iommu_sys_msi_wsi_switch(const void *opaque)
-+{
-+    bool unmask_in_wsi = GPOINTER_TO_INT(opaque);
-+    QGenericPCIBus gbus;
-+    QPCIBar sink_bar;
-+    QPCIDevice *sink;
-+    QTestState *qts = riscv_iommu_sys_test_init("-device pci-testdev");
-+    uint64_t sink_target;
-+    uint32_t sink_data;
-+
-+    if (!qts) {
-+        return;
-+    }
-+
-+    g_assert_cmpuint((qtest_readq(qts, VIRT_RISCV_IOMMU_BASE +
-+                                 RISCV_IOMMU_REG_CAP) &
-+                      RISCV_IOMMU_CAP_IGS) >> 28,
-+                     ==, RISCV_IOMMU_CAP_IGS_BOTH);
-+    sink = riscv_iommu_sys_init_msi_sink(qts, &gbus, &sink_bar,
-+                                         &sink_target, &sink_data);
-+    riscv_iommu_sys_program_msi(qts, 0, sink_target, sink_data, true);
-+    riscv_iommu_sys_setup_cq(qts);
-+    riscv_iommu_sys_trigger_cq_irq(qts);
-+    g_assert_cmpuint(qpci_io_readl(sink, sink_bar, PCI_TESTDEV_COUNT), ==, 0);
-+
-+    /* Stop the CQ before changing FCTL, preserving the deferred message. */
-+    qtest_writel(qts, VIRT_RISCV_IOMMU_BASE + RISCV_IOMMU_REG_CQCSR, 0);
-+    riscv_iommu_sys_set_wsi(qts, true);
-+    if (unmask_in_wsi) {
-+        riscv_iommu_sys_set_mask(qts, 0, false);
-+    }
-+    g_assert_cmpuint(qpci_io_readl(sink, sink_bar, PCI_TESTDEV_COUNT), ==, 0);
-+
-+    riscv_iommu_sys_set_wsi(qts, false);
-+    g_assert_cmpuint(qpci_io_readl(sink, sink_bar, PCI_TESTDEV_COUNT),
-+                     ==, unmask_in_wsi ? 1 : 0);
-+    riscv_iommu_sys_set_mask(qts, 0, false);
-+    g_assert_cmpuint(qpci_io_readl(sink, sink_bar, PCI_TESTDEV_COUNT), ==, 1);
-+
-+    /* Repeated mode changes and unmask writes must not replay the MSI. */
-+    riscv_iommu_sys_set_wsi(qts, true);
-+    riscv_iommu_sys_set_wsi(qts, false);
-+    riscv_iommu_sys_set_mask(qts, 0, false);
-+    g_assert_cmpuint(qpci_io_readl(sink, sink_bar, PCI_TESTDEV_COUNT), ==, 1);
-+    g_free(sink);
-+    qtest_quit(qts);
-+}
-+
-+static void test_riscv_iommu_sys_wsi_delivery(void)
-+{
-+    const unsigned vector = 1;
-+    const unsigned irq = RISCV_IOMMU_SYS_IRQ_BASE + vector;
-+    const uint32_t irq_bit = 1U << (irq % 32);
-+    const unsigned irq_word = (irq / 32) * 4;
-+    QGenericPCIBus gbus;
-+    QPCIBar sink_bar;
-+    QPCIDevice *sink;
-+    QTestState *qts = riscv_iommu_sys_test_init("-device pci-testdev");
-+    uint64_t sink_target;
-+    uint32_t sink_data;
-+
-+    if (!qts) {
-+        return;
-+    }
-+
-+    sink = riscv_iommu_sys_init_msi_sink(qts, &gbus, &sink_bar,
-+                                         &sink_target, &sink_data);
-+    riscv_iommu_sys_set_wsi(qts, true);
-+    /* The MSI vector mask must not suppress delivery through the wire. */
-+    riscv_iommu_sys_program_msi(qts, vector, sink_target, sink_data, true);
-+    qtest_writel(qts, VIRT_RISCV_IOMMU_BASE + RISCV_IOMMU_REG_ICVEC, vector);
-+
-+    qtest_writel(qts, RISCV_PLIC_BASE + irq * 4, 1);
-+    qtest_writel(qts, RISCV_PLIC_ENABLE + irq_word, irq_bit);
-+    qtest_writel(qts, RISCV_PLIC_THRESHOLD, 0);
-+    g_assert_cmphex(qtest_readl(qts, RISCV_PLIC_PENDING + irq_word), ==, 0);
-+    g_assert_cmpuint(qtest_readl(qts, RISCV_PLIC_CLAIM), ==, 0);
-+
-+    riscv_iommu_sys_setup_cq(qts);
-+    riscv_iommu_sys_trigger_cq_irq(qts);
-+    /* The PLIC latches the pulse after the device's wire returns low. */
-+    g_assert_cmphex(qtest_readl(qts, RISCV_PLIC_PENDING + irq_word),
-+                    ==, irq_bit);
-+    g_assert_cmpuint(qtest_readl(qts, RISCV_PLIC_CLAIM), ==, irq);
-+    g_assert_cmphex(qtest_readl(qts, RISCV_PLIC_PENDING + irq_word), ==, 0);
-+    qtest_writel(qts, RISCV_PLIC_CLAIM, irq);
-+    g_assert_cmpuint(qpci_io_readl(sink, sink_bar, PCI_TESTDEV_COUNT), ==, 0);
-+
-+    /* A WSI event must not become a deferred MSI after switching modes. */
-+    qtest_writel(qts, VIRT_RISCV_IOMMU_BASE + RISCV_IOMMU_REG_CQCSR, 0);
-+    riscv_iommu_sys_set_wsi(qts, false);
-+    riscv_iommu_sys_set_mask(qts, vector, false);
-+    g_assert_cmpuint(qpci_io_readl(sink, sink_bar, PCI_TESTDEV_COUNT), ==, 0);
-+    g_free(sink);
-+    qtest_quit(qts);
-+}
-+
-+static void test_riscv_iommu_sys_msi_wsi_reset(void)
-+{
-+    QTestState *qts = riscv_iommu_sys_test_init(NULL);
-+
-+    if (!qts) {
-+        return;
-+    }
-+
-+    qtest_writel(qts, RISCV_IOMMU_SYS_MSI_TARGET0, 0);
-+    riscv_iommu_sys_program_msi(qts, 0, RISCV_IOMMU_SYS_MSI_TARGET0,
-+                                RISCV_IOMMU_SYS_MSI_DATA0, true);
-+    riscv_iommu_sys_setup_cq(qts);
-+    riscv_iommu_sys_trigger_cq_irq(qts);
-+    qtest_writel(qts, VIRT_RISCV_IOMMU_BASE + RISCV_IOMMU_REG_CQCSR, 0);
-+    riscv_iommu_sys_set_wsi(qts, true);
-+    riscv_iommu_sys_set_mask(qts, 0, false);
-+    g_assert_cmphex(qtest_readl(qts, RISCV_IOMMU_SYS_MSI_TARGET0), ==, 0);
-+
-+    qtest_system_reset(qts);
-+    /* Reprogram valid MSI state without depending on table reset values. */
-+    riscv_iommu_sys_set_wsi(qts, true);
-+    riscv_iommu_sys_program_msi(qts, 0, RISCV_IOMMU_SYS_MSI_TARGET0,
-+                                RISCV_IOMMU_SYS_MSI_DATA1, false);
-+    riscv_iommu_sys_set_wsi(qts, false);
-+    g_assert_cmphex(qtest_readl(qts, RISCV_IOMMU_SYS_MSI_TARGET0), ==, 0);
-+    riscv_iommu_sys_set_mask(qts, 0, true);
-+    riscv_iommu_sys_set_mask(qts, 0, false);
-+    g_assert_cmphex(qtest_readl(qts, RISCV_IOMMU_SYS_MSI_TARGET0), ==, 0);
-+    qtest_quit(qts);
-+}
-+
-+static void test_riscv_iommu_sys_msi_reset(void)
-+{
-+    QTestState *qts = riscv_iommu_sys_test_init(NULL);
-+
-+    if (!qts) {
-+        return;
-+    }
-+
-+    qtest_writel(qts, RISCV_IOMMU_SYS_MSI_TARGET0, 0);
-+    riscv_iommu_sys_program_msi(qts, 0, RISCV_IOMMU_SYS_MSI_TARGET0,
-+                                RISCV_IOMMU_SYS_MSI_DATA0, true);
-+    riscv_iommu_sys_setup_cq(qts);
-+    riscv_iommu_sys_trigger_cq_irq(qts);
-+    g_assert_cmphex(qtest_readl(qts, RISCV_IOMMU_SYS_MSI_TARGET0), ==, 0);
-+
-+    qtest_system_reset(qts);
-+    riscv_iommu_sys_set_mask(qts, 0, false);
-+    g_assert_cmphex(qtest_readl(qts, RISCV_IOMMU_SYS_MSI_TARGET0), ==, 0);
-+    qtest_quit(qts);
-+}
-+
- int main(int argc, char **argv)
- {
-     g_test_init(&argc, &argv, NULL);
-@@ -275,5 +716,25 @@ int main(int argc, char **argv)
-                    test_riscv_iommu_g_stage_only);
-     qtest_add_func("/iommu-testdev/translation/ns-nested",
-                    test_riscv_iommu_nested);
-+    qtest_add_func("/riscv-iommu-sys/msi/unmasked",
-+                   test_riscv_iommu_sys_msi_unmasked);
-+    qtest_add_func("/riscv-iommu-sys/msi/masked",
-+                   test_riscv_iommu_sys_msi_masked);
-+    qtest_add_func("/riscv-iommu-sys/msi/config-update",
-+                   test_riscv_iommu_sys_msi_config_update);
-+    qtest_add_func("/riscv-iommu-sys/msi/vector-isolation",
-+                   test_riscv_iommu_sys_msi_vector_isolation);
-+    qtest_add_data_func("/riscv-iommu-sys/msi/wsi-switch-unmasked",
-+                        GINT_TO_POINTER(true),
-+                        test_riscv_iommu_sys_msi_wsi_switch);
-+    qtest_add_data_func("/riscv-iommu-sys/msi/wsi-switch-masked",
-+                        GINT_TO_POINTER(false),
-+                        test_riscv_iommu_sys_msi_wsi_switch);
-+    qtest_add_func("/riscv-iommu-sys/wsi/delivery",
-+                   test_riscv_iommu_sys_wsi_delivery);
-+    qtest_add_func("/riscv-iommu-sys/msi/wsi-reset",
-+                   test_riscv_iommu_sys_msi_wsi_reset);
-+    qtest_add_func("/riscv-iommu-sys/msi/reset",
-+                   test_riscv_iommu_sys_msi_reset);
-     return g_test_run();
- }
--- 
-2.43.0
-
+--000000000000d741b4065ede1435--
 
