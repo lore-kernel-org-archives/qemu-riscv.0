@@ -1,93 +1,93 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3F768606A32A
-	for <qemu-riscv@archiver.kernel.org>; Wed, 28 Oct 2026 14:36:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 472DB606A321
+	for <qemu-riscv@archiver.kernel.org>; Wed, 28 Oct 2026 14:36:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=Vx4dg4Ef;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=OLfjWCAO
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=pwJHTU3N;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=PX61B/QM
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xM4kI-0005Um-78; Wed, 28 Oct 2026 10:35:18 -0400
+	id 1xM4kI-0005Uj-6x; Wed, 28 Oct 2026 10:35:18 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1xM4j7-000525-7B
- for qemu-riscv@nongnu.org; Wed, 28 Oct 2026 10:34:10 -0400
+ id 1xM4jT-00056V-7N
+ for qemu-riscv@nongnu.org; Wed, 28 Oct 2026 10:34:34 -0400
 Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1xM4j4-0004TO-6N
- for qemu-riscv@nongnu.org; Wed, 28 Oct 2026 10:34:04 -0400
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+ id 1xM4jO-0004VE-SA
+ for qemu-riscv@nongnu.org; Wed, 28 Oct 2026 10:34:25 -0400
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 69SBeAid1606932
- for <qemu-riscv@nongnu.org>; Wed, 28 Oct 2026 14:33:57 GMT
+ 69SBeYsP693388
+ for <qemu-riscv@nongnu.org>; Wed, 28 Oct 2026 14:34:12 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- Pu830gYy8Ds+PNBWkxWcCVyGsAlz+zZD8vp+WSahDtY=; b=Vx4dg4EfQSfXXq0g
- /HxCv2An9cY1cGFFKCWf6rF5pDeau5H+feJtWbQ9YL5raTfCSYuZk29SUJiqIocK
- T7rdfcKe0J+3DXjsWDquTin4Uz5JGe0m6tzJ3btfb5/POkWVpl4zTvGTzQy+nAC4
- E64B4jszqdWLfSomrqhE1ZxkydghPpfL4MohLvVmmX3wi2DTkfRKCe9sRlZ+KOXC
- BLuuryc4wix4zjepDPcSiHXos5hEmdlNj8yf7yVQxGOorvGbBONCqeF3XdBNA5Kv
- s2+ncgcq2uuvV4KNGA7hXx/tm6Q+MGL3LwpDf1oQrG8sTFnaYZ6Nliv474GOlL8I
- 8Hvp2Q==
-Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com
- [209.85.222.199])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hk7g7jn9v-1
+ zhC+Jx/YxRJ4Lk5CZNFoY3zP4i6JAcJ+EHizvnB7o4Q=; b=pwJHTU3NcOzTkshT
+ iuEhIGVQQYSCPWrIvlZg+WEqCP2p4LjAWl7NQ1DRfR7Ic7BLUrAKNSR1WoTd+RzF
+ /u0Ti1xZcj8YSeeUJMOQ9iJwNhzVq/aq9cVMkIL4MF/LmJ1qPhG+BfI2xqFOk7iM
+ YBCJEhIb8Slnh7LYrqgiRGqrVkqA9UrahZSNuQ5FLvb/Kw6+46K2j5bBwJiScfr+
+ 4l/90HIxet1r+wNlSh+T+0X3BZxaUhDXxvo3NKba65/N6EI8txt7zQt88I9jKeG5
+ XWnPp/kzBXbcVK0kdSbiaAKRsdoEkvGlKgPZRUeyDeCdSj/E9A5a1fVnCPQL6kQI
+ qUDMbQ==
+Received: from mail-vk1-f200.google.com (mail-vk1-f200.google.com
+ [209.85.221.200])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hk6be2x1v-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Wed, 28 Oct 2026 14:33:57 +0000 (GMT)
-Received: by mail-qk1-f199.google.com with SMTP id
- af79cd13be357-93ecdc701a2so120733785a.3
- for <qemu-riscv@nongnu.org>; Wed, 28 Oct 2026 07:33:57 -0700 (PDT)
+ for <qemu-riscv@nongnu.org>; Wed, 28 Oct 2026 14:34:11 +0000 (GMT)
+Received: by mail-vk1-f200.google.com with SMTP id
+ 71dfb90a1353d-5eac74b0596so925938e0c.3
+ for <qemu-riscv@nongnu.org>; Wed, 28 Oct 2026 07:34:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1793198037; x=1793802837; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1793198051; x=1793802851; darn=nongnu.org;
  h=content-transfer-encoding:content-type:mime-version:references
  :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=Pu830gYy8Ds+PNBWkxWcCVyGsAlz+zZD8vp+WSahDtY=;
- b=OLfjWCAOclBYRuHQM7Sccr+fGiTDihkCIjYL0g7JbsXg8lIyJ0qKV4mMgCTFhn+r+c
- hzHUTo+axJqByv4RnfSqYFHZY1hq4Rh89/BgaoNpNUceBZ1XeJmSOt91pb9FhvSAc2WV
- kTRB6zHcXNvpLBgcmzzsfWtFibyxqiHYteHJX0v9fFZx7P4sVil0T91nzsIykrEzyMXi
- kQ+iCw8MqL5cnlOEVZNV2y9psAh5jZ/skVA4Aa7sE7r8I2joJ/8W0uErnAbPCQBAy8ql
- JxTRhbO9f9rduliZWHRfrDSQPTdDq+Qh8h02EdT6eT3IDeO14fbTqCK6z/Xl7yZB948O
- v5ng==
+ bh=zhC+Jx/YxRJ4Lk5CZNFoY3zP4i6JAcJ+EHizvnB7o4Q=;
+ b=PX61B/QMnrHDlmGcuj/yB8UJwoXxuq6iv96Ey5yAraVW4HZYdypiBOSFFfR5Tu+tjm
+ /JsTj7BRlw24dND8RFe49QgMveI6iNRDsC73MdYhfxTmnhiI4F++pcZnUIZiUbfWnNr9
+ SroXL5eBXwmeGMSn88w4HNjQClqIVNmKAVHpgQ2+xBWVPMC6NcS0b4wmVsiCppNYwPiT
+ p5SKejxc05o0V9/CJ5go2rKRN07hB/E8La+51OJY48Hb1UNwEWp4ugH0Mpp3+OvcCWVT
+ pKf1rAe0LZo/MzUB7bHNgF1/frGX1jS6ljbVga8MtfHld0kTteYLugsUAGqTkyON2zFd
+ VEfA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793198037; x=1793802837;
+ d=1e100.net; s=20260707; t=1793198051; x=1793802851;
  h=content-transfer-encoding:content-type:mime-version:references
  :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=Pu830gYy8Ds+PNBWkxWcCVyGsAlz+zZD8vp+WSahDtY=;
- b=shQPvhbSqOHfM09fr6WNe9FZ85FPHZCTA7NgAM1nw0+jSktWoWAeqcA/SqDpeBFCs+
- YVmjiFevLRoYR+8G7AuUQ4esdl8IkL4swH31rJzkZp+m4QchufILMImbq3r2e3vJZHCd
- O08UYoYVrD4o1dJ75l7tevEkXEcZFks9NIlHh7ft/ftQKAilxdrVwznjthte6pj8ZPlT
- 3yHE4THg4TaRth/hR3ce9W3EBWtvPVPFoeMMZkOsWeH3X6q9HiQ91aaOTtGjqRblfZzP
- dfCaphubpNEO/XtL8K9ZOjZiNe19rbx7AaoDuvUhMGz52P8hsP/U5sPgvAFXOL6ztb27
- NrTw==
-X-Gm-Message-State: AFq9FYL8di93R9sVyyaod/tWoXwECDCIGc3xWCW3k29FLISfXm2T+W1U
- gEZNGV6DQv9TXbFZ84oR85O299WP1Tf5mJGx65sd0AYwPTpjqCyDBCvlQMBqivR5wivzdkja++Z
- 5w+/3XLvoa6JdaCHoyXajyCHJGBTBtV9Wi8hGvrp7zzt6VJl+9aDuuEdPoQ==
-X-Gm-Gg: AYBFou3BUaHgxzAJSxAn0U8RpBDt5eO0o1hw1OFKPewSlRGedAQruxpaqcP35rNq4T9
- IpxNiGzbziDEerBExL6/Q9W4bmERgQGcwKU04b/xNKHA3CancH8BsGw7vuJxnHyqINPnt7/TlZ7
- RqxO+eYIfHJ8jkFy0mgX89MT+1WaXRim1B2uHXtV/BmMch8gTu4F+VzFEjrrx9z4btRpbPA0+nq
- 2QVHpkl5C/uD90MY3jP5q6l8pMYiweoQElQkK20fspH23u+zAQVTQmkpwjsZVoxTo83NdD3ABQQ
- wLoRjT8XxgQOKsW6jmC4uTnD09WnbNBGvi0vWb7hHgNK4e8cevx29d31JcyqCvGxGBWKREx+8fg
- l9LV7wGuvnzUYIpTTtovZtz5mtm7frk3Ks06HDTkaLblFoHrDjFONgihKqE/v93ZcOfStz2Z17O
- NaemaEKeuVE7dUtc8MUZecX/ChpzL2fg==
-X-Received: by 2002:a05:620a:458a:b0:93b:bce3:5499 with SMTP id
- af79cd13be357-944089393e4mr364658785a.6.1793198036450; 
- Wed, 28 Oct 2026 07:33:56 -0700 (PDT)
-X-Received: by 2002:a05:620a:458a:b0:93b:bce3:5499 with SMTP id
- af79cd13be357-944089393e4mr364654285a.6.1793198035981; 
- Wed, 28 Oct 2026 07:33:55 -0700 (PDT)
+ bh=zhC+Jx/YxRJ4Lk5CZNFoY3zP4i6JAcJ+EHizvnB7o4Q=;
+ b=b93Snx8axnXlWHoLPRAFU27bIRsZLTzGUBWY5hyottmYTLLrXPja4hosrJ0gNqnDBJ
+ YcdHtUAtlnkr6FjC81Pl3kjjBtZJgek5bHm4aNFedQoI71tMb2qEkJIryH1K+Ifutub3
+ nFN7UTjZsJRHj/S1/8oTX+jAONilWLN0o6sWlRWCnfZ4wUEV7OGg70AM0s8xvBwCHLxm
+ YgkcKJTE7I6d7DMZgvgHRAfxkxIAxlLcs7noQXKp1OEvo7G8qXCAbJuJDcVBC8DYnn/9
+ hSxka505Gs+EqsbqYwynGWTctkCWv4mW+T1VgIMaNU+5ARoOjpGLFsVwih+gtLXVZP21
+ NKzA==
+X-Gm-Message-State: AFq9FYKpMmnuxUkyUw1GDUQekDeAmD4rVGWIyg07c7QexAlhlLqz6ICI
+ Fw/NxATgUDGYTzjXESaahRr8jFWbk6xc2uTcuIKi1a440ws0gREqt7zVlS5Qwrkg/LGGwm55FMp
+ kU1/eROsjxBtWmX2PZMqQnOtDSA2CZiZFmQcLfA22dnHq1DxbeYhIHPz90Q==
+X-Gm-Gg: AYBFou3i/XjkMA5fr9oQrLX21EcAaZlk7bRYktHBL158izr6fxr6yCEMuecIl3IfEgU
+ cdJCLo8ZOTkPKPUIVU/T/X+0spsfunbOxtLG35risZdhFjnQNgvoQn/T/0uz1n5Jig67iRyb+vR
+ W8YyJXpv7umzNSkP7UpNgVTbSCmFHsukzq7vx8XpVT27eBtjsnd0Uy/Yo5Z0oe5KSaTuxKTJ5eL
+ Ut7BnEIbNoct200ANwoSIokEzjNlgiSXMHNM+NbDZJrvtsl65HU0/TmUX90kU/3f77ctnejXpqg
+ vb+nsjGxYowvG+5StE51FAtNNbJ1g8aerBZy53nvoDdV2itP+2xi9JRP+G/QbwsldRLUAQF3TwB
+ YLB73oPsV/u+cy3S3uPmvGxxzz3VvkMvfxQJQNehTB9ZQBEnf8RwTkckOUk5hBM2XpaoP0eAmoR
+ S+xCXUXwaahX0NFzho/I7YrgashHQPwg==
+X-Received: by 2002:a05:6122:d17:b0:5de:ee96:75b with SMTP id
+ 71dfb90a1353d-5ec4cbe93b1mr1226031e0c.12.1793198051202; 
+ Wed, 28 Oct 2026 07:34:11 -0700 (PDT)
+X-Received: by 2002:a05:6122:d17:b0:5de:ee96:75b with SMTP id
+ 71dfb90a1353d-5ec4cbe93b1mr1226010e0c.12.1793198050764; 
+ Wed, 28 Oct 2026 07:34:10 -0700 (PDT)
 Received: from localhost.localdomain (82-67-153-177.subs.proxad.net.
  [82.67.153.177]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a97c9f1403sm54169865e9.9.2026.10.28.07.33.54
+ ffacd0b85a97d-48e3ecd3705sm34363745f8f.45.2026.10.28.07.34.09
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Wed, 28 Oct 2026 07:33:55 -0700 (PDT)
+ Wed, 28 Oct 2026 07:34:09 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org,
@@ -97,11 +97,12 @@ Cc: qemu-riscv@nongnu.org,
  Alistair Francis <Alistair.Francis@wdc.com>,
  Peter Maydell <peter.maydell@linaro.org>,
  Palmer Dabbelt <palmer@dabbelt.com>, qemu-arm@nongnu.org,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
-Subject: [PATCH v3 3/6] tcg/riscv64: Extract elements for vector arithmetic
- immediates
-Date: Wed, 28 Oct 2026 15:33:27 +0100
-Message-ID: <20261028143330.6518-4-philmd@oss.qualcomm.com>
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
+ qemu-stable@nongnu.org
+Subject: [PATCH v3 5/6] tcg/riscv64: Fix logical vector immediate matching and
+ emission
+Date: Wed, 28 Oct 2026 15:33:29 +0100
+Message-ID: <20261028143330.6518-6-philmd@oss.qualcomm.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20261028143330.6518-1-philmd@oss.qualcomm.com>
 References: <20261028143330.6518-1-philmd@oss.qualcomm.com>
@@ -109,33 +110,36 @@ X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDI4MDA1NyBTYWx0ZWRfXzhOUe4929Ve3
- UiFtmTu35GXXenkOROTDCxboxdk/fhyDwvwd28d/Zu5kHx4aRVbWmtj7JZXvV7lOCMYsQdj9/Gh
- 4XcKOGKxnZz+P3ESeQ5YLSAjZ7Z3Nx4=
-X-Authority-Analysis: v=2.4 cv=SoIFe/O0 c=1 sm=1 tr=0 ts=6ae207d5 cx=c_pps
- a=HLyN3IcIa5EE8TELMZ618Q==:117 a=nz36NW0qrpeEijYxj/H2Ew==:17
+X-Proofpoint-ORIG-GUID: 7eJDmK9VMyPIAxae-2qeu8HakJlLgFkO
+X-Authority-Analysis: v=2.4 cv=HeuB3SE8 c=1 sm=1 tr=0 ts=6ae207e3 cx=c_pps
+ a=wuOIiItHwq1biOnFUQQHKA==:117 a=nz36NW0qrpeEijYxj/H2Ew==:17
  a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=M51BFTxLslgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
- a=EUspDBNiAAAA:8 a=njo3DiN-QtZAaPIEphkA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=bTQJ7kPSJx9SKPbeHEYW:22
-X-Proofpoint-GUID: WbigyLugyNqe77jsW5sIYcaQN5fdGnkF
-X-Proofpoint-ORIG-GUID: WbigyLugyNqe77jsW5sIYcaQN5fdGnkF
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDI4MDA1NyBTYWx0ZWRfXw8I8/YyesZZI
- YDiVcYaq+gh5m37tw/zWdL2Cw6sBgvb8OWELyDwWHlXw+3oXYcw13cbKSosNGoWwc1eCv6RIX2h
- vw0aXu+r9+plT+YRevTpPl8WP4l+svJRvDsI2pmXNSWID7m2xrur5eZjnxA3dvxpj1Ruy4bieTB
- mZlZZ/hVoyYa9Xmxi6M9P0sbOejZ9khnT3VIKzRFn+1oC958PlKhCpnZs9/Y4e140DWorSCvURB
- q0//zoyRaztFg/hhGU2XtyEq1MdjeoltvGALLEEbVRphB9Q3FXH321G7ddCDcaKEoFPihRiCz7P
- oNWe2OORY5YepNIolJ3fG/BR14z/+8Jdi6YJzwPyTSsZ1p6WwhvM/7EXbzcujhDO0UkoWwTvSA1
- D7XbFURaYAX5RhChj2DM4e9Ne84UXbdkfEGhaDr/4DHqMy30s8CWBULKNcCSe+pqoCnzO49dW1D
- NI9S1t8Wgs8mElZbfKg==
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
+ a=69wJf7TsAAAA:8 a=hXZgYZo4AAAA:8 a=KKAkSRfTAAAA:8 a=EUspDBNiAAAA:8
+ a=DVuiCnNqCGsytsSSeGkA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=XD7yVLdPMpWraOa8Un9W:22 a=Fg1AiH1G6rFz08G2ETeA:22 a=37BJPeUnzxYkbV1yBC-1:22
+ a=cvBusfyB2V15izCimMoJ:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDI4MDA1NyBTYWx0ZWRfX/8SsFsz33JNX
+ mcYoZOI/lTSjrrhu3RW45wu/h+DiaDCIWtSEvv7kD1eJiMe0S/NcexQTw7hTVhvv5+4AiQPvRCN
+ 5tWYHBs5U6Vi6zYSr+cmqVFlX4UsjeA=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDI4MDA1NyBTYWx0ZWRfX6iHM52wTkCzz
+ DKVeAsWi49Ae9KedJxPF8dV6tsb0uhW6Ccncg9SibWtR8L/ki2lmHDKKuvwpAnmD4v/HhmqtrQB
+ TU9LEK+OrFwR6SHMcKAkBO7NH7OmxefUB74vK46XLzubI1HpaymL3neyTwkWEy40gsTiCI4y1PO
+ pIz4foUl0o8dCbsgXQqlZvjxgWWi4scJrflfmKUpKdi/Eqv1gaeooR2jvUr/Tin0lMUjrffDC1n
+ +s4aXQJ/Uh0XEMXcwrsFRR+u+KamF7fjyvQ2lEGaaSNyuEbAqG0XMfXffvV5O+NkLZhUclrGXuE
+ znuD1mushiNZahKYyj8J7kCPKsyitHmQQ4UWp1hNmLI2XpEcBHAp0CznvtfTBYNS7hzMgwYfVxl
+ iX3X6nhydyTo9GKB9GpG6s8XQEQwOsYS7BwDX5o8dVz+lyPfpu4IaSatqC4ay0KVGPvhuwqAPoG
+ PlFIsfOok55hzDgH28w==
+X-Proofpoint-GUID: 7eJDmK9VMyPIAxae-2qeu8HakJlLgFkO
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-10-28_04,2026-10-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 malwarescore=0 suspectscore=0 spamscore=0 phishscore=0
- impostorscore=0 adultscore=0 priorityscore=1501 clxscore=1015 bulkscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610280057
+ malwarescore=0 adultscore=0 phishscore=0 impostorscore=0 bulkscore=0
+ lowpriorityscore=0 spamscore=0 clxscore=1015 priorityscore=1501
+ suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610190000
+ definitions=main-2610280057
 Received-SPF: pass client-ip=205.220.180.131;
  envelope-from=philmd@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
 X-Spam_score_int: -27
@@ -164,80 +168,151 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-The .vi emitters for add, reverse sub and saturating ops pass the
-whole replicated constant (e.g. 0x0505050505050505) to encode_vi()
-instead of a single element. This aborts debug builds on common
-vectorized guest code and is undefined behaviour in release builds.
+and/or/xor_vec always have VECE 0, yet their constant was matched
+as a byte element and applied at the stale SEW of the previous op:
+"bic v4.8h, #0xf0" became "vand.vi ..., 15".
 
-Add vec_imm() to extract the VECE element, and use it.
+Add the 'N' constraint: use the smallest element size at which the
+constant replicates, if that element fits simm5, and switch SEW to
+it. A wider element can't fit when the smallest doesn't: its upper
+half repeats the smaller element, which would then be 0 or -1.
 
-Fixes: 006352d69f14 ("tcg/riscv64: Assert immediate in range ...")
+Cc: qemu-stable@nongnu.org
+Fixes: 5a63f5998791 ("tcg/riscv: Add support for basic vector opcodes")
+Reported-by: Aurelien Jarno <aurelien@aurel32.net>
+Suggested-by: Richard Henderson <richard.henderson@linaro.org>
 Signed-off-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
 ---
- tcg/riscv64/tcg-target.c.inc | 23 +++++++++++++++++------
- 1 file changed, 17 insertions(+), 6 deletions(-)
+ tcg/riscv64/tcg-target-con-set.h |  1 +
+ tcg/riscv64/tcg-target-con-str.h |  1 +
+ tcg/riscv64/tcg-target.c.inc     | 53 +++++++++++++++++++++++++++-----
+ 3 files changed, 48 insertions(+), 7 deletions(-)
 
+diff --git a/tcg/riscv64/tcg-target-con-set.h b/tcg/riscv64/tcg-target-con-set.h
+index 0fc26d3f98b4..9b4e219fac16 100644
+--- a/tcg/riscv64/tcg-target-con-set.h
++++ b/tcg/riscv64/tcg-target-con-set.h
+@@ -26,4 +26,5 @@ C_O1_I2(v, v, v)
+ C_O1_I2(v, vK, v)
+ C_O1_I2(v, v, vK)
+ C_O1_I2(v, v, vL)
++C_O1_I2(v, v, vN)
+ C_O1_I4(v, v, vL, vK, vK)
+diff --git a/tcg/riscv64/tcg-target-con-str.h b/tcg/riscv64/tcg-target-con-str.h
+index c04e15ddfa3c..d7e8b2ce4f2f 100644
+--- a/tcg/riscv64/tcg-target-con-str.h
++++ b/tcg/riscv64/tcg-target-con-str.h
+@@ -19,3 +19,4 @@ CONST('I', TCG_CT_CONST_S12)
+ CONST('K', TCG_CT_CONST_S5)
+ CONST('L', TCG_CT_CONST_CMP_VI)
+ CONST('M', TCG_CT_CONST_M12)
++CONST('N', TCG_CT_CONST_LOGICAL_VI)
 diff --git a/tcg/riscv64/tcg-target.c.inc b/tcg/riscv64/tcg-target.c.inc
-index 0e749ae296b8..a3d995e290b7 100644
+index 168932711796..4faf7ff36e07 100644
 --- a/tcg/riscv64/tcg-target.c.inc
 +++ b/tcg/riscv64/tcg-target.c.inc
-@@ -735,6 +735,12 @@ static void tcg_out_opc_vi_u(TCGContext *s, RISCVInsn opc,
-     tcg_out32(s, encode_vi_u(opc, vd, imm, vs2, true));
- }
+@@ -116,6 +116,7 @@ static TCGReg tcg_target_call_oarg_reg(TCGCallReturnKind kind, int slot)
+ #define TCG_CT_CONST_M12     0x200
+ #define TCG_CT_CONST_S5      0x400
+ #define TCG_CT_CONST_CMP_VI  0x800
++#define TCG_CT_CONST_LOGICAL_VI 0x1000
  
-+/* Constants are replicated by VECE; extract one element for .vi forms. */
-+static int64_t vec_imm(TCGArg arg, unsigned vece)
+ #define ALL_GENERAL_REGS   MAKE_64BIT_MASK(0, 32)
+ #define ALL_VECTOR_REGS    MAKE_64BIT_MASK(32, 32)
+@@ -384,6 +385,22 @@ static const struct {
+     [TCG_COND_GEU] = { OPC_VMSGTU_VI,   1, 16, true  },
+ };
+ 
++/*
++ * Return the element size at which VAL is a replicated simm5,
++ * or -1 if there is none.  Used for vector logical ops, whose
++ * VECE is not meaningful.
++ */
++static int vec_logical_immediate_vece(int64_t val)
 +{
-+    return sextract64(arg, 0, 8 << vece);
++    for (int e = MO_8; e <= MO_64; e++) {
++        if (val == dup_const(e, val)) {
++            int64_t x = sextract64(val, 0, 8 << e);
++            return x >= -0x10 && x <= 0x0f ? e : -1;
++        }
++    }
++    g_assert_not_reached();
 +}
 +
- static void tcg_out_opc_vv_vi(TCGContext *s, RISCVInsn o_vv, RISCVInsn o_vi,
-                               TCGReg vd, TCGReg vs2, TCGArg vi1, int c_vi1)
- {
-@@ -2788,12 +2794,13 @@ static void tcg_out_vec_op(TCGContext *s, TCGOpcode opc,
-         break;
-     case INDEX_op_add_vec:
-         set_vtype_len_sew(s, type, vece);
--        tcg_out_opc_vv_vi(s, OPC_VADD_VV, OPC_VADD_VI, a0, a1, a2, c2);
-+        tcg_out_opc_vv_vi(s, OPC_VADD_VV, OPC_VADD_VI, a0, a1,
-+                          c2 ? vec_imm(a2, vece) : a2, c2);
-         break;
-     case INDEX_op_sub_vec:
-         set_vtype_len_sew(s, type, vece);
-         if (const_args[1]) {
--            tcg_out_opc_vi(s, OPC_VRSUB_VI, a0, a2, a1);
-+            tcg_out_opc_vi(s, OPC_VRSUB_VI, a0, a2, vec_imm(a1, vece));
-         } else {
-             tcg_out_opc_vv(s, OPC_VSUB_VV, a0, a1, a2);
+ /* test if a constant matches the constraint */
+ static bool tcg_target_const_match(int64_t val, int ct,
+                                    TCGType type, TCGCond cond, int vece)
+@@ -391,6 +408,10 @@ static bool tcg_target_const_match(int64_t val, int ct,
+     if (ct & TCG_CT_CONST) {
+         return 1;
+     }
++    if ((ct & TCG_CT_CONST_LOGICAL_VI) &&
++        vec_logical_immediate_vece(val) >= 0) {
++        return true;
++    }
+     if (type >= TCG_TYPE_V64) {
+         /* Val is replicated by VECE; extract the highest element. */
+         val >>= (-8 << vece) & 63;
+@@ -2769,6 +2790,23 @@ static const TCGOutOpStore outop_st = {
+ };
+ 
+ 
++static void tcg_out_opc_vv_vi_logical(TCGContext *s, TCGType type,
++                                      RISCVInsn o_vv, RISCVInsn o_vi,
++                                      TCGReg vd, TCGReg vs2,
++                                      TCGArg vi1, int c_vi1)
++{
++    if (c_vi1) {
++        int vece = vec_logical_immediate_vece(vi1);
++
++        tcg_debug_assert(vece >= 0);
++        set_vtype_len_sew(s, type, vece);
++        tcg_out_opc_vi(s, o_vi, vd, vs2, vec_imm(vi1, vece));
++    } else {
++        set_vtype_len(s, type);
++        tcg_out_opc_vv(s, o_vv, vd, vs2, vi1);
++    }
++}
++
+ static void tcg_out_vec_op(TCGContext *s, TCGOpcode opc,
+                            unsigned vecl, unsigned vece,
+                            const TCGArg args[TCG_MAX_OP_ARGS],
+@@ -2807,16 +2845,16 @@ static void tcg_out_vec_op(TCGContext *s, TCGOpcode opc,
          }
-@@ -2824,19 +2831,23 @@ static void tcg_out_vec_op(TCGContext *s, TCGOpcode opc,
          break;
+     case INDEX_op_and_vec:
+-        set_vtype_len(s, type);
+-        tcg_out_opc_vv_vi(s, OPC_VAND_VV, OPC_VAND_VI, a0, a1, a2, c2);
++        tcg_out_opc_vv_vi_logical(s, type, OPC_VAND_VV, OPC_VAND_VI,
++                                  a0, a1, a2, c2);
+         break;
+     case INDEX_op_or_vec:
+-        set_vtype_len(s, type);
+-        tcg_out_opc_vv_vi(s, OPC_VOR_VV, OPC_VOR_VI, a0, a1, a2, c2);
++        tcg_out_opc_vv_vi_logical(s, type, OPC_VOR_VV, OPC_VOR_VI,
++                                  a0, a1, a2, c2);
+         break;
+     case INDEX_op_xor_vec:
+-        set_vtype_len(s, type);
+-        tcg_out_opc_vv_vi(s, OPC_VXOR_VV, OPC_VXOR_VI, a0, a1, a2, c2);
++        tcg_out_opc_vv_vi_logical(s, type, OPC_VXOR_VV, OPC_VXOR_VI,
++                                  a0, a1, a2, c2);
+         break;
+     case INDEX_op_not_vec:
+         set_vtype_len(s, type);
+@@ -3008,10 +3046,11 @@ tcg_target_op_def(TCGOpcode op, TCGType type, unsigned flags)
+     case INDEX_op_sari_vec:
+     case INDEX_op_rotli_vec:
+         return C_O1_I1(v, v);
+-    case INDEX_op_add_vec:
+     case INDEX_op_and_vec:
+     case INDEX_op_or_vec:
+     case INDEX_op_xor_vec:
++        return C_O1_I2(v, v, vN);
++    case INDEX_op_add_vec:
      case INDEX_op_ssadd_vec:
-         set_vtype_len_sew(s, type, vece);
--        tcg_out_opc_vv_vi(s, OPC_VSADD_VV, OPC_VSADD_VI, a0, a1, a2, c2);
-+        tcg_out_opc_vv_vi(s, OPC_VSADD_VV, OPC_VSADD_VI, a0, a1,
-+                          c2 ? vec_imm(a2, vece) : a2, c2);
-         break;
      case INDEX_op_sssub_vec:
-         set_vtype_len_sew(s, type, vece);
--        tcg_out_opc_vv_vi(s, OPC_VSSUB_VV, OPC_VSSUB_VI, a0, a1, a2, c2);
-+        tcg_out_opc_vv_vi(s, OPC_VSSUB_VV, OPC_VSSUB_VI, a0, a1,
-+                          c2 ? vec_imm(a2, vece) : a2, c2);
-         break;
      case INDEX_op_usadd_vec:
-         set_vtype_len_sew(s, type, vece);
--        tcg_out_opc_vv_vi(s, OPC_VSADDU_VV, OPC_VSADDU_VI, a0, a1, a2, c2);
-+        tcg_out_opc_vv_vi(s, OPC_VSADDU_VV, OPC_VSADDU_VI, a0, a1,
-+                          c2 ? vec_imm(a2, vece) : a2, c2);
-         break;
-     case INDEX_op_ussub_vec:
-         set_vtype_len_sew(s, type, vece);
--        tcg_out_opc_vv_vi(s, OPC_VSSUBU_VV, OPC_VSSUBU_VI, a0, a1, a2, c2);
-+        tcg_out_opc_vv_vi(s, OPC_VSSUBU_VV, OPC_VSSUBU_VI, a0, a1,
-+                          c2 ? vec_imm(a2, vece) : a2, c2);
-         break;
-     case INDEX_op_smax_vec:
-         set_vtype_len_sew(s, type, vece);
 -- 
 2.55.0
 
