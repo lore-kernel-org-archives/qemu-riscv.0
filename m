@@ -1,73 +1,143 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BC1F9606A31C
-	for <qemu-riscv@archiver.kernel.org>; Thu, 29 Oct 2026 05:51:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 77F6F606A31A
+	for <qemu-riscv@archiver.kernel.org>; Thu, 29 Oct 2026 10:31:00 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=SgUuj3qF
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xMJ0v-0007qA-2S; Thu, 29 Oct 2026 01:49:25 -0400
+	id 1xMNOz-00079l-Hb; Thu, 29 Oct 2026 06:30:33 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gong.shuai@sanechips.com.cn>)
- id 1xMIzo-00074b-8t; Thu, 29 Oct 2026 01:48:17 -0400
-Received: from mxhk.zte.com.cn ([160.30.148.34])
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1xMNOx-00078A-4m
+ for qemu-riscv@nongnu.org; Thu, 29 Oct 2026 06:30:31 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gong.shuai@sanechips.com.cn>)
- id 1xMIzl-0000fS-3X; Thu, 29 Oct 2026 01:48:16 -0400
-Received: from mse-fl2.zte.com.cn (unknown [10.5.228.133])
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1xMNOu-0004Q1-5j
+ for qemu-riscv@nongnu.org; Thu, 29 Oct 2026 06:30:30 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1793269827;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=cAtddHWUPZrCBDhs0Y+44QLZfPLGxO3YxnP4tMoElZY=;
+ b=SgUuj3qFj94uZyRlwEpgI2MbKB9mYUaYouP9r3ZoKkKl5yJjakTHUszaJJdWG5vVzzptsW
+ DPoLN6cIrxzatdTUbrvKQhQR4kpok9r2anv6jwa3wYYejXS2Kktai9pk+Zp56gN71w9yqq
+ z0R5sFcLXius2q1dFIJeI2WYgSs8dk8=
+Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-651-31dn0k00OXi4Pkf-NALwaA-1; Thu,
+ 29 Oct 2026 06:30:22 -0400
+X-MC-Unique: 31dn0k00OXi4Pkf-NALwaA-1
+X-Mimecast-MFC-AGG-ID: 31dn0k00OXi4Pkf-NALwaA_1793269818
+Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mxhk.zte.com.cn (FangMail) with ESMTPS id 4jFYDM5cQDz5PkH2;
- Thu, 29 Oct 2026 13:48:03 +0800 (CST)
-Received: from szxlzmapp03.zte.com.cn ([10.5.231.207])
- by mse-fl2.zte.com.cn with SMTP id 69T5ltiZ024159;
- Thu, 29 Oct 2026 13:47:55 +0800 (+08)
- (envelope-from gong.shuai@sanechips.com.cn)
-Received: from ubuntu-35-gs (unknown [10.230.214.35])
- by smtp (Zmail) with SMTP; Thu, 29 Oct 2026 13:47:57 +0800
-X-Zmail-TransId: 3e816ae2de0c027-e638d
-X-Zmail-LocalSMTP: 1
-X-Zmail-RealSender: gong.shuai@sanechips.com.cn
-From: Gong Shuai <gong.shuai@sanechips.com.cn>
-To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Cc: Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu@processmission.com>,
- "Michael S. Tsirkin" <mst@redhat.com>,
- Cornelia Huck <cohuck@redhat.com>, Wu Fei <wu.fei9@sanechips.com.cn>,
- Qingye Zhao <zhao.qingye@sanechips.com.cn>,
- Gong Shuai <gong.shuai@sanechips.com.cn>, Gong Shuai <gsh517025@gmail.com>
-Subject: [RFC PATCH v2 08/14] hw/riscv/riscv-iommu-accel: Restrict accelerated
- IOMMU to vfio-pci endpoints with iommufd
-Date: Thu, 29 Oct 2026 13:47:45 +0800
-Message-ID: <20261029054751.563493-9-gong.shuai@sanechips.com.cn>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20261029054751.563493-1-gong.shuai@sanechips.com.cn>
-References: <20261029054751.563493-1-gong.shuai@sanechips.com.cn>
+ by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 9F9651801358; Thu, 29 Oct 2026 10:30:15 +0000 (UTC)
+Received: from blackfin.pond.sub.org (unknown [10.44.22.2])
+ by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 7AAD23000735; Thu, 29 Oct 2026 10:30:11 +0000 (UTC)
+Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
+ id 1B5FA21E6A04; Thu, 29 Oct 2026 11:30:09 +0100 (CET)
+From: Markus Armbruster <armbru@redhat.com>
+To: =?utf-8?Q?Marc-Andr=C3=A9?= Lureau <marcandre.lureau@redhat.com>
+Cc: qemu-devel@nongnu.org,  Michael Roth <michael.roth@amd.com>,  John Snow
+ <jsnow@redhat.com>,  Peter Maydell <peter.maydell@linaro.org>,  Mauro
+ Carvalho Chehab <mchehab+huawei@kernel.org>,  Pierrick Bouvier
+ <pierrick.bouvier@oss.qualcomm.com>,  Paolo Bonzini <pbonzini@redhat.com>,
+ Daniel P. =?utf-8?Q?Berrang=C3=A9?= <berrange@redhat.com>,  Kostiantyn
+ Kostiuk
+ <kkostiuk@redhat.com>,  Eric Blake <eblake@redhat.com>,  David Hildenbrand
+ <david@kernel.org>,  Igor Mammedov <imammedo@redhat.com>,  "Edgar E.
+ Iglesias" <edgar.iglesias@gmail.com>,  Jason Wang <jasowangio@gmail.com>,
+ Marcelo Tosatti <mtosatti@redhat.com>,  kvm@vger.kernel.org,  Alberto
+ Garcia <berto@igalia.com>,  Kevin Wolf <kwolf@redhat.com>,  Hanna Reitz
+ <hreitz@redhat.com>,  Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?=
+ <philmd@oss.qualcomm.com>,
+ Zhao Liu <zhao1.liu@intel.com>,  Jonathan Cameron <jic23@kernel.org>,
+ Junjie Cao <junjie.cao@intel.com>,  Anisa Su <anisa.su@samsung.com>,
+ Elena Ufimtseva <elena.ufimtseva@oracle.com>,  Jagannathan Raman
+ <jag.raman@oracle.com>,  John Levon <john.levon@nutanix.com>,  Thanos
+ Makatos <thanos.makatos@nutanix.com>,  =?utf-8?Q?C=C3=A9dric?= Le Goater
+ <clg@redhat.com>,
+ Cornelia Huck <cohuck@redhat.com>,  Eric Farman <farman@linux.ibm.com>,
+ Matthew Rosato <mjrosato@linux.ibm.com>,  Richard Henderson
+ <richard.henderson@linaro.org>,  Ilya Leoshkevich <iii@linux.ibm.com>,
+ qemu-block@nongnu.org,  linux-cxl@vger.kernel.org,
+ qemu-s390x@nongnu.org,  "Michael S. Tsirkin" <mst@redhat.com>,  Sergio
+ Lopez <slp@redhat.com>,  qemu-arm@nongnu.org,  Palmer Dabbelt
+ <palmer@dabbelt.com>,  Alistair Francis <alistair.francis@wdc.com>,
+ Weiwei Li <liwei1518@gmail.com>,  Daniel Henrique Barboza
+ <daniel.barboza@oss.qualcomm.com>,  Liu Zhiwei
+ <zhiwei_liu@linux.alibaba.com>,  Chao Liu <chao.liu@processmission.com>,
+ qemu-riscv@nongnu.org,  Song Gao <17746591750@163.com>,  Bibo Mao
+ <maobibo@loongson.cn>,  Xianglai Li <lixianglai@loongson.cn>,  Jiaxun Yang
+ <jiaxun.yang@flygoat.com>,  Pedro Barbuda <pbarbuda@microsoft.com>,
+ Mohamed Mediouni <mohamed@unpredictable.fr>,  Nicholas Piggin
+ <npiggin@gmail.com>,  Harsh Prateek Bora <harshpb@linux.ibm.com>,  Amit
+ Machhiwal <amachhiw@linux.ibm.com>,  qemu-ppc@nongnu.org,  Zhang Chen
+ <zhangckid@gmail.com>,  Li Zhijian <lizhijian@fujitsu.com>,  Alistair
+ Francis <alistair@alistair23.me>,  Alexander Graf <graf@amazon.com>,
+ "Gonglei (Arei)" <arei.gonglei@huawei.com>,  zhenwei pi
+ <zhenwei.pi@linux.dev>,  Ani Sinha <anisinha@redhat.com>,  Luc Michel
+ <luc@lmichel.fr>,  =?utf-8?Q?C=C3=A9dric?= Le Goater <clg@kaod.org>,  Jamin
+ Lin
+ <jamin_lin@aspeedtech.com>,  Kane Chen <kane_chen@aspeedtech.com>,  Samuel
+ Tardieu <sam@rfc1149.net>,  "Denis V. Lunev" <den@openvz.org>,  FangSheng
+ Huang <FangSheng.Huang@amd.com>,  Tyrone Ting <kfting@nuvoton.com>,  Hao
+ Wu <wuhaotsh@google.com>,  Keith Busch <kbusch@kernel.org>,  Klaus Jensen
+ <its@irrelevant.dk>,  Jesper Devantier <foss@defmacro.it>,  Aditya Gupta
+ <adityag@linux.ibm.com>,  Glenn Miles <milesg@linux.ibm.com>,  Conor
+ Dooley <conor@kernel.org>,  Sebastian Huber
+ <sebastian.huber@embedded-brains.de>,  Halil Pasic <pasic@linux.ibm.com>,
+ Christian Borntraeger <borntraeger@linux.ibm.com>,  Jason Herne
+ <jjherne@linux.ibm.com>,  Titus Rwantare <titusr@google.com>,  Stefano
+ Stabellini <sstabellini@kernel.org>,  Anthony PERARD
+ <anthony@xenproject.org>,  Peter Xu <peterx@redhat.com>,  Chinmay Rath
+ <rathc@linux.ibm.com>,  Hendrik Brueckner <brueckner@linux.ibm.com>,
+ xen-devel@lists.xenproject.org,  Roman Bolshakov <rbolshakov@ddn.com>,
+ Phil Dennis-Jordan <phil@philjordan.eu>,  Fam Zheng <fam@euphon.net>,
+ Farhan Ali <alifm@linux.ibm.com>,  Alex Williamson <alex@shazbot.org>,
+ Tao Tang <tangtao1634@phytium.com.cn>,  Stefan Berger
+ <stefanb@linux.vnet.ibm.com>,  Fabiano Rosas <farosas@suse.de>,  Mark
+ Cave-Ayland <mark.cave-ayland@ilande.co.uk>,  Artyom Tarasenko
+ <atar4qemu@gmail.com>,  Yoshinori Sato <yoshinori.sato@nifty.com>,  Jiri
+ Pirko <jiri@resnulli.us>,  Eric Auger <eric.auger@redhat.com>,  Laurent
+ Vivier <lvivier@redhat.com>
+Subject: Re: [PATCH v7 61/65] qdev: remove deprecated PropertyInfo.type and
+ .enum_table fields
+In-Reply-To: <20261020-qom-qapi-v7-61-431a86b02b58@redhat.com>
+ (=?utf-8?Q?=22Marc-Andr=C3=A9?=
+ Lureau"'s message of "Tue, 20 Oct 2026 14:46:18 +0400")
+References: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
+ <20261020-qom-qapi-v7-61-431a86b02b58@redhat.com>
+Date: Thu, 29 Oct 2026 11:30:09 +0100
+Message-ID: <87ecd8dcjy.fsf@pond.sub.org>
+User-Agent: Gnus/5.13 (Gnus v5.13)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-ZMAIL-USEORIGINALEMLTOOUTBOUND: 1
-Content-Transfer-Encoding: 8bit
-X-MAIL: mse-fl2.zte.com.cn 69T5ltiZ024159
-X-TLS: YES
-X-ENVELOPE-SENDER: gong.shuai@sanechips.com.cn
-X-SOURCE-IP: 10.5.228.133 unknown Thu, 29 Oct 2026 13:48:03 +0800
-X-CLEAN: YES
-X-Fangmail-Anti-Spam-Filtered: true
-X-Fangmail-MID-QID: 6AE2DE13.003/4jFYDM5cQDz5PkH2
-Received-SPF: pass client-ip=160.30.148.34;
- envelope-from=gong.shuai@sanechips.com.cn; helo=mxhk.zte.com.cn
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_MSPIKE_H5=0.001,
- RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
+X-Mimecast-MFC-PROC-ID: 7f6KWBIM7u59N2bPJX26Tbtu8Sco5WyOtcw1VARjZL0_1793269818
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=armbru@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
+X-Spam_bar: --
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ GB_FAKE_RF=0.001, RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H5=0.001,
+ RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -79,197 +149,31 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-From: Wu Fei <wu.fei9@sanechips.com.cn>
+Re title: I think "deprecated" isn't the right word.  Let's go with
+"unused", or maybe
 
-The accelerated mode is only meaningful for devices that can use the
-host IOMMU in nested mode (S1+S2). Following the ARM SMMUv3 accel
-device, restrict it to vfio-pci endpoints using the iommufd backend,
-and to PCIe bridges/root ports so endpoints can sit downstream.
-vfio-pci endpoints get the shared system address space so the VFIO
-core builds the stage-2 mappings for the nesting parent HWPT; all
-other devices get the IOMMU address space.
+    qdev: PropertyInfo.type and .enum_table are no longer used, drop
 
-Unlike ARM, where the SMMUv3 is a system device, the RISC-V IOMMU
-can also be exposed as a PCI device. It must stay usable in
-accelerated mode, so it is exempted from the restrictions and its
-address space lookup bypasses the IOMMU, returning the target
-address space as the default path does.
+Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com> writes:
 
-Signed-off-by: Wu Fei <wu.fei9@sanechips.com.cn>
-Signed-off-by: Gong Shuai <gong.shuai@sanechips.com.cn>
----
- hw/riscv/riscv-iommu-accel.c | 90 +++++++++++++++++++++++++++++++++++-
- hw/riscv/riscv-iommu.c       |  5 --
- hw/riscv/riscv-iommu.h       |  6 ++-
- 3 files changed, 94 insertions(+), 7 deletions(-)
-
-diff --git a/hw/riscv/riscv-iommu-accel.c b/hw/riscv/riscv-iommu-accel.c
-index a843cf9d01..7bb725d957 100644
---- a/hw/riscv/riscv-iommu-accel.c
-+++ b/hw/riscv/riscv-iommu-accel.c
-@@ -5,6 +5,11 @@
-  */
- 
- #include "qemu/osdep.h"
-+#include "qemu/error-report.h"
-+
-+#include "hw/pci/pci_bridge.h"
-+#include "hw/pci-host/gpex.h"
-+#include "hw/vfio/pci.h"
- 
- #include "riscv-iommu.h"
- #include "riscv-iommu-accel.h"
-@@ -36,18 +41,101 @@ static RISCVIOMMUAccelDevice *riscv_iommu_accel_get_dev(RISCVIOMMUState *s,
-     return accel_dev;
- }
- 
-+/*
-+ * Only allow PCIe bridges, pxb-pcie roots, and GPEX roots so vfio-pci
-+ * endpoints can sit downstream, and the RISC-V IOMMU PCI device
-+ * itself. Unlike ARM, the RISC-V IOMMU can be exposed as a PCI device;
-+ * it must stay usable in accelerated mode, but it is never translated
-+ * and is handed its target address space directly.
-+ * Accelerated IOMMU requires a vfio-pci endpoint using the iommufd
-+ * backend; all other device types are rejected. This avoids supporting
-+ * emulated endpoints, which would complicate IOTLB invalidation and
-+ * hurt performance.
-+ */
-+static bool riscv_iommu_accel_pdev_allowed(PCIDevice *pdev, bool *vfio_pci)
-+{
-+    if (object_dynamic_cast(OBJECT(pdev), TYPE_PCI_BRIDGE) ||
-+        object_dynamic_cast(OBJECT(pdev), TYPE_PXB_PCIE_DEV) ||
-+        object_dynamic_cast(OBJECT(pdev), TYPE_GPEX_ROOT_DEVICE) ||
-+        object_dynamic_cast(OBJECT(pdev), TYPE_RISCV_IOMMU_PCI)) {
-+        return true;
-+    } else if ((object_dynamic_cast(OBJECT(pdev), TYPE_VFIO_PCI))) {
-+        *vfio_pci = true;
-+        if (object_property_get_link(OBJECT(pdev), "iommufd", NULL)) {
-+            return true;
-+        }
-+    }
-+    return false;
-+}
-+
-+static bool riscv_iommu_accel_supports_as(PCIBus *bus, void *opaque, int devfn,
-+                                          Error **errp)
-+{
-+    PCIDevice *pdev = pci_find_device(bus, pci_bus_num(bus), devfn);
-+    bool vfio_pci = false;
-+
-+    if (pdev && !riscv_iommu_accel_pdev_allowed(pdev, &vfio_pci)) {
-+        if (vfio_pci) {
-+            error_setg(errp, "vfio-pci endpoint devices without an iommufd "
-+                       "backend not allowed when using riscv_iommu accel=on");
-+        } else {
-+            error_setg(errp, "Emulated endpoint devices are not allowed when "
-+                       "using riscv_iommu accel=on");
-+        }
-+        return false;
-+    }
-+    return true;
-+}
-+
- static AddressSpace *riscv_iommu_accel_find_as(PCIBus *bus, void *opaque,
-                                                int devfn)
- {
-     RISCVIOMMUState *s = (RISCVIOMMUState *) opaque;
-+    PCIDevice *pdev = pci_find_device(bus, pci_bus_num(bus), devfn);
-+
-+    /*
-+     * The riscv-iommu-pci itself is not a translated endpoint; hand out its
-+     * target address space as the default path does.
-+     */
-+    if (pdev && pci_is_iommu(pdev)) {
-+        return s->target_as;
-+    }
- 
-     RISCVIOMMUAccelDevice *accel_dev = riscv_iommu_accel_get_dev(s, bus, devfn);
-     RISCVIOMMUSpace *as = &accel_dev->as;
- 
--    return &as->iova_as;
-+    bool vfio_pci = false;
-+
-+    if (pdev && !riscv_iommu_accel_pdev_allowed(pdev, &vfio_pci)) {
-+        /* Should never be here: supports_address_space() filters these out */
-+        g_assert_not_reached();
-+    }
-+
-+    /*
-+     * In the accelerated mode, a vfio-pci device attached via the iommufd
-+     * backend must remain in the system address space. Such a device is
-+     * always translated by its physical IOMMU (using either stage-2-only
-+     * or nested S1+S2 translation), where the parent stage-2 page table
-+     * is allocated by the VFIO core to back the system address space.
-+     *
-+     * Return the shared_as_sysmem aliased to the global system memory in
-+     * this case. Sharing a single system address space also lets devices
-+     * behind different accelerated IOMMU instances in the same VM reuse a
-+     * single nesting parent HWPT in the VFIO core.
-+     *
-+     * For the remaining allowed devices, such as PCIe root ports and
-+     * bridges, which use the normal emulated translation path and software
-+     * IOTLBs, return the IOMMU address space.
-+     */
-+    if (vfio_pci) {
-+        return shared_as_sysmem;
-+    } else {
-+        return &as->iova_as;
-+    }
- }
- 
- static const PCIIOMMUOps riscv_iommu_accel_ops = {
-+    .supports_address_space = riscv_iommu_accel_supports_as,
-     .get_address_space = riscv_iommu_accel_find_as,
- };
- 
-diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
-index 762691c8ed..fbc7f72cb6 100644
---- a/hw/riscv/riscv-iommu.c
-+++ b/hw/riscv/riscv-iommu.c
-@@ -2973,11 +2973,6 @@ static int riscv_iommu_memory_region_notify(
-     return 0;
- }
- 
--static inline bool pci_is_iommu(PCIDevice *pdev)
--{
--    return pci_get_word(pdev->config + PCI_CLASS_DEVICE) == 0x0806;
--}
--
- static AddressSpace *riscv_iommu_find_as(PCIBus *bus, void *opaque, int devfn)
- {
-     RISCVIOMMUState *s = (RISCVIOMMUState *) opaque;
-diff --git a/hw/riscv/riscv-iommu.h b/hw/riscv/riscv-iommu.h
-index 0bc096ba60..92eeb18386 100644
---- a/hw/riscv/riscv-iommu.h
-+++ b/hw/riscv/riscv-iommu.h
-@@ -24,7 +24,7 @@
- #include "system/dma.h"
- #include "hw/riscv/iommu.h"
- #include "hw/riscv/riscv-iommu-bits.h"
--#include "hw/pci/pci.h"
-+#include "hw/pci/pci_device.h"
- 
- typedef enum riscv_iommu_igs_modes riscv_iommu_igs_mode;
- 
-@@ -151,6 +151,10 @@ int riscv_iommu_ctx_fetch(RISCVIOMMUState *s, unsigned devid,
-                           unsigned process_id, RISCVIOMMUContext *ctx);
- 
- /* private helpers */
-+static inline bool pci_is_iommu(PCIDevice *pdev)
-+{
-+    return pci_get_word(pdev->config + PCI_CLASS_DEVICE) == 0x0806;
-+}
- 
- /* Register helper functions */
- static inline uint32_t riscv_iommu_reg_mod32(RISCVIOMMUState *s,
--- 
-2.53.0
+> Now that all PropertyInfo definitions use .qapi_type, remove the
+> legacy .type (string) and .enum_table fields from PropertyInfo, and
+> the .arrayinfo/.arrayfieldsize fields from Property.
+>
+> Remove fallback branches in qdev_property_add_static() and
+> qdev_class_add_property() that used object_property_add() with
+> prop->info->type: these always use the QAPI-aware registration
+> path now. Simplify qdev_propinfo_enum_lookup(), prop_array_info()
+> and prop_array_elem_size() to use the new fields directly.
+>
+> Signed-off-by: Markus Armbruster <armbru@redhat.com>
+> Signed-off-by: Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com>
 
 
