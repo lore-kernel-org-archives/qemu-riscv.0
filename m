@@ -1,33 +1,33 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9C71E606A31A
-	for <qemu-riscv@archiver.kernel.org>; Thu, 29 Oct 2026 05:50:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B6C89606A31A
+	for <qemu-riscv@archiver.kernel.org>; Thu, 29 Oct 2026 05:50:30 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xMJ0R-0007PS-6q; Thu, 29 Oct 2026 01:48:55 -0400
+	id 1xMJ0r-0007iN-Vn; Thu, 29 Oct 2026 01:49:22 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <gong.shuai@sanechips.com.cn>)
- id 1xMIzk-00072W-9u; Thu, 29 Oct 2026 01:48:12 -0400
-Received: from mxhk.zte.com.cn ([160.30.148.34])
+ id 1xMIzl-00073H-SO; Thu, 29 Oct 2026 01:48:14 -0400
+Received: from mxhk.zte.com.cn ([160.30.148.35])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <gong.shuai@sanechips.com.cn>)
- id 1xMIzg-0000dP-IA; Thu, 29 Oct 2026 01:48:12 -0400
+ id 1xMIzh-0000eV-Tq; Thu, 29 Oct 2026 01:48:13 -0400
 Received: from mse-fl1.zte.com.cn (unknown [10.5.228.132])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mxhk.zte.com.cn (FangMail) with ESMTPS id 4jFYDJ5lhJz5PkGt;
- Thu, 29 Oct 2026 13:48:00 +0800 (CST)
-Received: from szxl2zmapp05.zte.com.cn ([10.1.32.37])
- by mse-fl1.zte.com.cn with SMTP id 69T5ls6N079238;
- Thu, 29 Oct 2026 13:47:54 +0800 (+08)
+ by mxhk.zte.com.cn (FangMail) with ESMTPS id 4jFYDR174mz8Xrkn;
+ Thu, 29 Oct 2026 13:48:07 +0800 (CST)
+Received: from szxl2zmapp06.zte.com.cn ([10.1.32.108])
+ by mse-fl1.zte.com.cn with SMTP id 69T5lxsu079346;
+ Thu, 29 Oct 2026 13:47:59 +0800 (+08)
  (envelope-from gong.shuai@sanechips.com.cn)
 Received: from ubuntu-35-gs (unknown [10.230.214.35])
- by smtp (Zmail) with SMTP; Thu, 29 Oct 2026 13:47:56 +0800
-X-Zmail-TransId: 3e816ae2de0b027-e636d
+ by smtp (Zmail) with SMTP; Thu, 29 Oct 2026 13:48:00 +0800
+X-Zmail-TransId: 3e816ae2de10027-e63e9
 X-Zmail-LocalSMTP: 1
 X-Zmail-RealSender: gong.shuai@sanechips.com.cn
 From: Gong Shuai <gong.shuai@sanechips.com.cn>
@@ -42,10 +42,10 @@ Cc: Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Cornelia Huck <cohuck@redhat.com>, Wu Fei <wu.fei9@sanechips.com.cn>,
  Qingye Zhao <zhao.qingye@sanechips.com.cn>,
  Gong Shuai <gong.shuai@sanechips.com.cn>, Gong Shuai <gsh517025@gmail.com>
-Subject: [RFC PATCH v2 06/14] hw/riscv/riscv-iommu-accel: Introduce RISC-V
- IOMMU accel device
-Date: Thu, 29 Oct 2026 13:47:43 +0800
-Message-ID: <20261029054751.563493-7-gong.shuai@sanechips.com.cn>
+Subject: [RFC PATCH v2 14/14] hw/riscv/riscv-iommu-accel: Add accel property
+ for iommu device
+Date: Thu, 29 Oct 2026 13:47:51 +0800
+Message-ID: <20261029054751.563493-15-gong.shuai@sanechips.com.cn>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20261029054751.563493-1-gong.shuai@sanechips.com.cn>
 References: <20261029054751.563493-1-gong.shuai@sanechips.com.cn>
@@ -53,14 +53,14 @@ X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 X-ZMAIL-USEORIGINALEMLTOOUTBOUND: 1
 Content-Transfer-Encoding: 8bit
-X-MAIL: mse-fl1.zte.com.cn 69T5ls6N079238
+X-MAIL: mse-fl1.zte.com.cn 69T5lxsu079346
 X-TLS: YES
 X-ENVELOPE-SENDER: gong.shuai@sanechips.com.cn
-X-SOURCE-IP: 10.5.228.132 unknown Thu, 29 Oct 2026 13:48:00 +0800
+X-SOURCE-IP: 10.5.228.132 unknown Thu, 29 Oct 2026 13:48:07 +0800
 X-CLEAN: YES
 X-Fangmail-Anti-Spam-Filtered: true
-X-Fangmail-MID-QID: 6AE2DE10.001/4jFYDJ5lhJz5PkGt
-Received-SPF: pass client-ip=160.30.148.34;
+X-Fangmail-MID-QID: 6AE2DE17.000/4jFYDR174mz8Xrkn
+Received-SPF: pass client-ip=160.30.148.35;
  envelope-from=gong.shuai@sanechips.com.cn; helo=mxhk.zte.com.cn
 X-Spam_score_int: -18
 X-Spam_score: -1.9
@@ -81,180 +81,131 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT
-	autolearn=unavailable autolearn_force=no version=4.0.1
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 From: Wu Fei <wu.fei9@sanechips.com.cn>
 
-Add an optional accel device for the RISC-V IOMMU. Its behaviour
-matches the default path so far, leaving room for upcoming
-accelerated (nested) translation. When the accel device is enabled,
-each device's address space is embedded in RISCVIOMMUAccelDevice, a
-per-device struct that will store per-device data for nested
-translation.
+Add an "accel" property to enable the RISC-V IOMMU accelerator
+mode, following the ARM SMMUv3 accel device.
+
+Migration is not supported in accel mode, as the host-side vIOMMU
+and HWPT state cannot be migrated; a migration blocker is
+registered.
 
 Signed-off-by: Wu Fei <wu.fei9@sanechips.com.cn>
 Signed-off-by: Gong Shuai <gong.shuai@sanechips.com.cn>
 ---
- hw/riscv/Kconfig             |  5 ++++
- hw/riscv/meson.build         |  1 +
- hw/riscv/riscv-iommu-accel.c | 49 ++++++++++++++++++++++++++++++++++++
- hw/riscv/riscv-iommu-accel.h | 25 ++++++++++++++++++
- hw/riscv/riscv-iommu.c       |  5 ++++
- hw/riscv/riscv-iommu.h       |  3 +++
- 6 files changed, 88 insertions(+)
- create mode 100644 hw/riscv/riscv-iommu-accel.c
- create mode 100644 hw/riscv/riscv-iommu-accel.h
+ hw/riscv/riscv-iommu.c | 57 ++++++++++++++++++++++++++++++++++++++++++
+ hw/riscv/riscv-iommu.h |  1 +
+ 2 files changed, 58 insertions(+)
 
-diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-index a423fafca1..bed2e713f3 100644
---- a/hw/riscv/Kconfig
-+++ b/hw/riscv/Kconfig
-@@ -1,5 +1,10 @@
-+config RISCV_IOMMU_ACCEL
-+    bool
-+    depends on RISCV_IOMMU
-+
- config RISCV_IOMMU
-     bool
-+    select RISCV_IOMMU_ACCEL if IOMMUFD
- 
- config RISCV_NUMA
-     bool
-diff --git a/hw/riscv/meson.build b/hw/riscv/meson.build
-index 6bdabb9544..b1f3b3a2d2 100644
---- a/hw/riscv/meson.build
-+++ b/hw/riscv/meson.build
-@@ -17,6 +17,7 @@ riscv_ss.add(when: 'CONFIG_TENSTORRENT', if_true: files('tt_atlantis.c'))
- riscv_ss.add(when: 'CONFIG_ACPI', if_true: files('virt-acpi-build.c'))
- riscv_ss.add(when: 'CONFIG_RISCV_IOMMU', if_true: files(
- 	'riscv-iommu.c', 'riscv-iommu-pci.c', 'riscv-iommu-sys.c', 'riscv-iommu-hpm.c'))
-+riscv_ss.add(when: 'CONFIG_RISCV_IOMMU_ACCEL', if_true: files('riscv-iommu-accel.c'))
- riscv_ss.add(when: 'CONFIG_MICROBLAZE_V', if_true: files('microblaze-v-generic.c'))
- riscv_ss.add(when: 'CONFIG_XIANGSHAN_KUNMINGHU', if_true: files('xiangshan_kmh.c'))
- riscv_ss.add(when: 'CONFIG_RISCV_MIPS_CPS', if_true: files('cps.c'))
-diff --git a/hw/riscv/riscv-iommu-accel.c b/hw/riscv/riscv-iommu-accel.c
-new file mode 100644
-index 0000000000..41e4d03be6
---- /dev/null
-+++ b/hw/riscv/riscv-iommu-accel.c
-@@ -0,0 +1,49 @@
-+/*
-+ * RISC-V IOMMU - accelerated (nested) translation support
-+ *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ */
-+
-+#include "qemu/osdep.h"
-+
-+#include "riscv-iommu.h"
-+#include "riscv-iommu-accel.h"
-+
-+static RISCVIOMMUAccelDevice *riscv_iommu_accel_get_dev(RISCVIOMMUState *s,
-+                                                        PCIBus *bus, int devfn)
-+{
-+    RISCVIOMMUSpace *as;
-+    RISCVIOMMUAccelDevice *accel_dev;
-+
-+    /* FIXME: for simplicity, assume only one iommu right now */
-+    as = riscv_iommu_get_space(s, bus, devfn);
-+    if (as) {
-+        return container_of(as, RISCVIOMMUAccelDevice, as);
-+    }
-+
-+    accel_dev = g_new0(RISCVIOMMUAccelDevice, 1);
-+    as = &accel_dev->as;
-+    riscv_iommu_init_space(s, as, bus, devfn);
-+
-+    return accel_dev;
-+}
-+
-+static AddressSpace *riscv_iommu_accel_find_as(PCIBus *bus, void *opaque,
-+                                               int devfn)
-+{
-+    RISCVIOMMUState *s = (RISCVIOMMUState *) opaque;
-+
-+    RISCVIOMMUAccelDevice *accel_dev = riscv_iommu_accel_get_dev(s, bus, devfn);
-+    RISCVIOMMUSpace *as = &accel_dev->as;
-+
-+    return &as->iova_as;
-+}
-+
-+static const PCIIOMMUOps riscv_iommu_accel_ops = {
-+    .get_address_space = riscv_iommu_accel_find_as,
-+};
-+
-+void riscv_iommu_accel_init(RISCVIOMMUState *s)
-+{
-+    s->iommu_ops = &riscv_iommu_accel_ops;
-+}
-diff --git a/hw/riscv/riscv-iommu-accel.h b/hw/riscv/riscv-iommu-accel.h
-new file mode 100644
-index 0000000000..c69fea87dd
---- /dev/null
-+++ b/hw/riscv/riscv-iommu-accel.h
-@@ -0,0 +1,25 @@
-+/*
-+ * RISC-V IOMMU - accelerated (nested) translation support
-+ *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ */
-+
-+#ifndef HW_RISCV_RISCV_IOMMU_ACCEL_H
-+#define HW_RISCV_RISCV_IOMMU_ACCEL_H
-+
-+#include "hw/riscv/riscv-iommu.h"
-+#include CONFIG_DEVICES
-+
-+typedef struct RISCVIOMMUAccelDevice {
-+    RISCVIOMMUSpace as;
-+} RISCVIOMMUAccelDevice;
-+
-+#ifdef CONFIG_RISCV_IOMMU_ACCEL
-+void riscv_iommu_accel_init(RISCVIOMMUState *s);
-+#else
-+static inline void riscv_iommu_accel_init(RISCVIOMMUState *s)
-+{
-+}
-+#endif
-+
-+#endif /* HW_RISCV_RISCV_IOMMU_ACCEL_H */
 diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
-index 10f81f8bdf..762691c8ed 100644
+index 7fa6490888..4926a361f5 100644
 --- a/hw/riscv/riscv-iommu.c
 +++ b/hw/riscv/riscv-iommu.c
-@@ -31,6 +31,7 @@
+@@ -23,6 +23,7 @@
+ #include "hw/pci/pci_device.h"
+ #include "hw/core/qdev-properties.h"
+ #include "hw/riscv/riscv_hart.h"
++#include "migration/blocker.h"
+ #include "migration/vmstate.h"
+ #include "qapi/error.h"
+ #include "qemu/timer.h"
+@@ -2731,12 +2732,63 @@ static void riscv_iommu_instance_finalize(Object *obj)
+     qemu_mutex_destroy(&s->iot_lock);
+ }
  
- #include "cpu_bits.h"
- #include "riscv-iommu.h"
-+#include "riscv-iommu-accel.h"
- #include "riscv-iommu-bits.h"
- #include "riscv-iommu-hpm.h"
- #include "trace.h"
-@@ -2707,6 +2708,10 @@ static void riscv_iommu_realize(DeviceState *dev, Error **errp)
++static bool riscv_iommu_validate_property(RISCVIOMMUState *s, Error **errp)
++{
++#ifndef CONFIG_RISCV_IOMMU_ACCEL
++    if (s->accel) {
++        error_setg(errp, "accel=on support not compiled in");
++        return false;
++    }
++#endif
++
++    if (!s->accel) {
++        return true;
++    }
++
++    if (!s->enable_s_stage) {
++        error_setg(errp,
++                   "Only stage-1 is supported for RISC-V IOMMU with accel=on");
++        return false;
++    }
++
++    return true;
++}
++
+ static void riscv_iommu_realize(DeviceState *dev, Error **errp)
  {
      RISCVIOMMUState *s = RISCV_IOMMU(dev);
  
-+    if (s->accel) {
-+        riscv_iommu_accel_init(s);
++    if (!riscv_iommu_validate_property(s, errp)) {
++        return;
 +    }
 +
-     /* Report QEMU target physical address space limits. */
-     s->cap = set_field(s->cap, RISCV_IOMMU_CAP_PAS, s->pas_bits);
+     if (s->accel) {
+         riscv_iommu_accel_init(s);
++        /*
++        * With accel=on, MSI remapping is done by the host IOMMU. Disable
++        * the emulated MSI capability so the guest's MSI message address
++        * is a plain GPA translated on the host side; the guest then sees
++        * no MSI capability bits and uses the base device context format.
++        */
++        s->enable_msi = false;
++        /* G-stage is managed by the host (VFIO) in accel mode */
++        s->enable_g_stage = false;
++        /*
++         * No ATS.INVAL path exists for the vIOMMU in accel mode now,
++         * vfio-pci devices are not notifiers of the emulated IOMMU and
++         * guest ATS.INVAL commands are not forwarded to the host, so hide
++         * ATS/PRI capabilities.
++         */
++        s->enable_ats = false;
++        /*
++         * Per-PASID contexts and PDT inval for vIOMMU are unimplemented,
++         * hide the process-directory capabilities.
++         */
++        s->cap &= ~(RISCV_IOMMU_CAP_PD8 | RISCV_IOMMU_CAP_PD17 |
++                    RISCV_IOMMU_CAP_PD20);
++        error_setg(&s->migration_blocker, "Migration not supported with "
++                   "RISC-V IOMMU accel=on");
++        migrate_add_blocker(&s->migration_blocker, errp);
+     }
  
+     /* Report QEMU target physical address space limits. */
+@@ -2860,6 +2912,10 @@ static void riscv_iommu_unrealize(DeviceState *dev)
+ {
+     RISCVIOMMUState *s = RISCV_IOMMU(dev);
+ 
++    if (s->migration_blocker) {
++        migrate_del_blocker(&s->migration_blocker);
++    }
++
+     if (s->cap & RISCV_IOMMU_CAP_HPM) {
+         g_hash_table_unref(s->hpm_event_ctr_map);
+         timer_free(s->hpm_timer);
+@@ -2920,6 +2976,7 @@ static const Property riscv_iommu_properties[] = {
+         TYPE_MEMORY_REGION, MemoryRegion *),
+     DEFINE_PROP_UINT8("hpm-counters", RISCVIOMMUState, hpm_cntrs,
+                       RISCV_IOMMU_IOCOUNT_NUM),
++    DEFINE_PROP_BOOL("accel", RISCVIOMMUState, accel, FALSE),
+ };
+ 
+ static void riscv_iommu_class_init(ObjectClass *klass, const void *data)
 diff --git a/hw/riscv/riscv-iommu.h b/hw/riscv/riscv-iommu.h
-index 3e10647975..0bc096ba60 100644
+index ddd339aed1..cffff83411 100644
 --- a/hw/riscv/riscv-iommu.h
 +++ b/hw/riscv/riscv-iommu.h
-@@ -111,6 +111,9 @@ struct RISCVIOMMUState {
-     uint8_t hpm_cntrs;
- 
-     const PCIIOMMUOps *iommu_ops;
-+
-+    /* nested iommu support */
-+    bool accel;
+@@ -115,6 +115,7 @@ struct RISCVIOMMUState {
+     /* nested iommu support */
+     bool accel;
+     struct RISCVIOMMUAccelState *accel_state;
++    Error *migration_blocker;
  };
  
  void riscv_iommu_pci_setup_iommu(RISCVIOMMUState *iommu, PCIBus *bus,
