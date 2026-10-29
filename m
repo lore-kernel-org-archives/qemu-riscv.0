@@ -1,38 +1,38 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F1A95606A31A
-	for <qemu-riscv@archiver.kernel.org>; Thu, 29 Oct 2026 18:19:50 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0B56A606A31A
+	for <qemu-riscv@archiver.kernel.org>; Thu, 29 Oct 2026 18:32:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=aurel32.net header.i=@aurel32.net header.a=rsa-sha256 header.s=202004.hall header.b=rfGkawOY
+	dkim=pass (2048-bit key, unprotected) header.d=aurel32.net header.i=@aurel32.net header.a=rsa-sha256 header.s=202004.hall header.b=U/IBZu73
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xMUit-0000vw-AP; Thu, 29 Oct 2026 14:19:35 -0400
+	id 1xMUue-0004ti-Tk; Thu, 29 Oct 2026 14:31:44 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <aurelien@aurel32.net>)
- id 1xMUi1-0000VZ-Gg; Thu, 29 Oct 2026 14:18:44 -0400
+ id 1xMUua-0004pO-Lp; Thu, 29 Oct 2026 14:31:41 -0400
 Received: from hall.aurel32.net ([2001:bc8:30d7:100::1])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <aurelien@aurel32.net>)
- id 1xMUhq-0007aF-KP; Thu, 29 Oct 2026 14:18:32 -0400
+ id 1xMUuY-0000Qa-E7; Thu, 29 Oct 2026 14:31:40 -0400
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=aurel32.net
  ; s=202004.hall;
  h=In-Reply-To:Content-Transfer-Encoding:Content-Type:
  MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:From:Reply-To:
  Subject:Content-ID:Content-Description:X-Debbugs-Cc;
- bh=d88egsE4Flh1HrHMC+XEKWtEN2xFG8NYrPa9hP0IaFk=; b=rfGkawOYqvEVOP4brPhCpu2Ok9
- ORPmgDSg1Dx0Mc13jT9EjOoaCcoXyzy6/nhzMonEvZBWneoGTEA8tEuXolpqVREn20c42agjRJn4d
- w1Vh90VlEsBjxDgr0sXVTXYdtm9ujAsaat3RTyfGj08imi6/DYtGK51wAUFFBctK84Ajp3XOriEeX
- CJyuhTwRExHurTOE5QRuNUNhG5SyY1hTekRYgfBtmJWGq+vu9EonQj4ugR5Vwqo0UYNkCpfpMGa/2
- iK2SNb4oEsxuPw5X0RTRJ3oLnZWDVC4YwgIKy193AxnPkQK2qihp6HNeBHizKdfGtf6GY5qVL9Lvn
- cJtBRQkw==;
+ bh=4Qha117QRS21OgQpYbDm0SzaGSZgnPFC6W+McltwsKA=; b=U/IBZu73hKKcryebE+nUx4SHJV
+ sIZUu2Db5GTVA2wvWBetOLOH0Bwp2HTW7D8xv9hUPZ/VPALPBXq0xur+fN5/B6lePGRfuq69eaz9J
+ QRxfRPyOb0Eiv0CUl1wM9O34DvrxmteRhGkD5JjtGiIA4ZZw3aDbz7QS/7WEUNNjwONN+Ea7y3ygp
+ ghq8vJA4YDb9NevEeH7ja4R3Ctfx99dTAbYptz6oNAMNWseySHZEh9M9CLnIeB/a0w3CxdFw4Vmgb
+ 8L9LZxiAj3JUF7HQ338aG4M5yQbwApNJ5TcXNV2lx9feKAIY/o2hDWrInv2iw5rw9XPKG3hGUAXaC
+ GyfQhZ+g==;
 Received: from authenticated user by hall.aurel32.net with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.98.2)
- (envelope-from <aurelien@aurel32.net>) id 1xMUhj-00000006t4A-0grM;
- Thu, 29 Oct 2026 19:18:23 +0100
-Date: Thu, 29 Oct 2026 19:18:22 +0100
+ (envelope-from <aurelien@aurel32.net>) id 1xMUuR-00000006tsT-0sbT;
+ Thu, 29 Oct 2026 19:31:31 +0100
+Date: Thu, 29 Oct 2026 19:31:30 +0100
 From: Aurelien Jarno <aurelien@aurel32.net>
 To: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
@@ -41,17 +41,17 @@ Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
  Alistair Francis <Alistair.Francis@wdc.com>,
  Peter Maydell <peter.maydell@linaro.org>,
  Palmer Dabbelt <palmer@dabbelt.com>, qemu-arm@nongnu.org
-Subject: Re: [PATCH v3 2/6] tcg/riscv64: Use a uimm5 encoder for vector shift
- immediates
-Message-ID: <auON7vRCYNPDXAk2@aurel32.net>
+Subject: Re: [PATCH v3 4/6] tcg/riscv64: Fix constant handling in vector
+ comparisons and selects
+Message-ID: <auORAhkbaN3lRIZU@aurel32.net>
 References: <20261028143330.6518-1-philmd@oss.qualcomm.com>
- <20261028143330.6518-3-philmd@oss.qualcomm.com>
+ <20261028143330.6518-5-philmd@oss.qualcomm.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
-In-Reply-To: <20261028143330.6518-3-philmd@oss.qualcomm.com>
+In-Reply-To: <20261028143330.6518-5-philmd@oss.qualcomm.com>
 User-Agent: Mutt/2.4.1 (2026-07-04)
 Received-SPF: pass client-ip=2001:bc8:30d7:100::1;
  envelope-from=aurelien@aurel32.net; helo=hall.aurel32.net
@@ -76,83 +76,75 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=unavailable
+	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham
 	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 On 2026-10-28 15:33, Philippe Mathieu-Daud=C3=A9 wrote:
-> RVV shift .vi forms take an unsigned 5-bit immediate, but
-> encode_vi() checks for simm5, so shift counts 16..31 trip
-> the debug assertion (and are undefined behaviour in release
-> builds).
+> tcg_out_cmpsel() takes constants as TCGReg and passes them to the
+> encoders unextracted. In a release build, "cmlt v0.8h, #0" emitted
+> the illegal instruction 0xffffb057.
 >=20
-> Add encode_vi_u() and use it in tcg_out_vshifti().
+> Use TCGArg for these operands and extract the element with
+> vec_imm() before encoding, including before the LT/GE adjustment.
 >=20
 > Fixes: 006352d69f14 ("tcg/riscv64: Assert immediate in range ...")
 > Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@oss.qualcomm.com>
 > ---
->  tcg/riscv64/tcg-target.c.inc | 17 ++++++++++++++++-
->  1 file changed, 16 insertions(+), 1 deletion(-)
+>  tcg/riscv64/tcg-target.c.inc | 13 +++++++------
+>  1 file changed, 7 insertions(+), 6 deletions(-)
 >=20
 > diff --git a/tcg/riscv64/tcg-target.c.inc b/tcg/riscv64/tcg-target.c.inc
-> index 712170c1203e..0e749ae296b8 100644
+> index a3d995e290b7..168932711796 100644
 > --- a/tcg/riscv64/tcg-target.c.inc
 > +++ b/tcg/riscv64/tcg-target.c.inc
-> @@ -541,6 +541,7 @@ static tcg_insn_unit encode_vi_raw(RISCVInsn opc, TCG=
-Reg rd, unsigned imm5,
->             (vs2 & 0x1f) << 20 | (vm << 25);
->  }
+> @@ -1555,9 +1555,9 @@ static void tcg_out_cltz(TCGContext *s, TCGType typ=
+e, RISCVInsn insn,
 > =20
-> +/* OPIVI with a signed immediate (simm5). */
->  static tcg_insn_unit encode_vi(RISCVInsn opc, TCGReg rd, tcg_target_long=
- imm,
->                                 TCGReg vs2, bool vm)
+>  static void tcg_out_cmpsel(TCGContext *s, TCGType type, unsigned vece,
+>                             TCGCond cond, TCGReg ret,
+> -                           TCGReg cmp1, TCGReg cmp2, bool c_cmp2,
+> -                           TCGReg val1, bool c_val1,
+> -                           TCGReg val2, bool c_val2)
+> +                           TCGReg cmp1, TCGArg cmp2, bool c_cmp2,
+> +                           TCGArg val1, bool c_val1,
+> +                           TCGArg val2, bool c_val2)
 >  {
-> @@ -548,6 +549,14 @@ static tcg_insn_unit encode_vi(RISCVInsn opc, TCGReg=
- rd, tcg_target_long imm,
->      return encode_vi_raw(opc, rd, imm, vs2, vm);
->  }
+>      set_vtype_len_sew(s, type, vece);
 > =20
-> +/* OPIVI with an unsigned immediate (uimm5) */
-> +static tcg_insn_unit encode_vi_u(RISCVInsn opc, TCGReg rd, unsigned imm,
-> +                                 TCGReg vs2, bool vm)
-> +{
-> +    tcg_debug_assert(imm =3D=3D extract32(imm, 0, 5));
-> +    return encode_vi_raw(opc, rd, imm, vs2, vm);
-> +}
-> +
->  /* Type-OPIVV/OPMVV/OPIVX/OPMVX, Vector load and store */
-> =20
->  static tcg_insn_unit encode_v(RISCVInsn opc, TCGReg d, TCGReg s1,
-> @@ -720,6 +729,12 @@ static void tcg_out_opc_vi(TCGContext *s, RISCVInsn =
-opc,
->      tcg_out32(s, encode_vi(opc, vd, imm, vs2, true));
->  }
-> =20
-> +static void tcg_out_opc_vi_u(TCGContext *s, RISCVInsn opc,
-> +                             TCGReg vd, TCGReg vs2, unsigned imm)
-> +{
-> +    tcg_out32(s, encode_vi_u(opc, vd, imm, vs2, true));
-> +}
-> +
->  static void tcg_out_opc_vv_vi(TCGContext *s, RISCVInsn o_vv, RISCVInsn o=
-_vi,
->                                TCGReg vd, TCGReg vs2, TCGArg vi1, int c_v=
-i1)
->  {
-> @@ -1578,7 +1593,7 @@ static void tcg_out_vshifti(TCGContext *s, RISCVIns=
-n opc_vi, RISCVInsn opc_vx,
->                               TCGReg dst, TCGReg src, unsigned imm)
->  {
->      if (imm < 32) {
-> -        tcg_out_opc_vi(s, opc_vi, dst, src, imm);
-> +        tcg_out_opc_vi_u(s, opc_vi, dst, src, imm);
+> @@ -1574,7 +1574,7 @@ static void tcg_out_cmpsel(TCGContext *s, TCGType t=
+ype, unsigned vece,
+>      /* Perform the comparison into V0 mask. */
+>      if (c_cmp2) {
+>          tcg_out_opc_vi(s, tcg_cmpcond_to_rvv_vi[cond].op, TCG_REG_V0, cm=
+p1,
+> -                       cmp2 - tcg_cmpcond_to_rvv_vi[cond].adjust);
+> +                       vec_imm(cmp2, vece) - tcg_cmpcond_to_rvv_vi[cond]=
+=2Eadjust);
+>      } else if (tcg_cmpcond_to_rvv_vv[cond].swap) {
+>          tcg_out_opc_vv(s, tcg_cmpcond_to_rvv_vv[cond].op,
+>                         TCG_REG_V0, cmp2, cmp1);
+> @@ -1584,11 +1584,12 @@ static void tcg_out_cmpsel(TCGContext *s, TCGType=
+ type, unsigned vece,
+>      }
+>      if (c_val1) {
+>          if (c_val2) {
+> -            tcg_out_opc_vi(s, OPC_VMV_V_I, ret, 0, val2);
+> +            tcg_out_opc_vi(s, OPC_VMV_V_I, ret, 0, vec_imm(val2, vece));
+>              val2 =3D ret;
+>          }
+>          /* vd[i] =3D=3D v0.mask[i] ? imm : vs2[i] */
+> -        tcg_out_opc_vim_mask(s, OPC_VMERGE_VIM, ret, val2, val1);
+> +        tcg_out_opc_vim_mask(s, OPC_VMERGE_VIM, ret, val2,
+> +                             vec_imm(val1, vece));
 >      } else {
->          tcg_out_movi(s, TCG_TYPE_I32, TCG_REG_TMP0, imm);
->          tcg_out_opc_vx(s, opc_vx, dst, src, TCG_REG_TMP0);
+>          /* vd[i] =3D=3D v0.mask[i] ? vs1[i] : vs2[i] */
+>          tcg_out_opc_vvm_mask(s, OPC_VMERGE_VVM, ret, val2, val1);
 
-Reviewed-by: Aurelien Jarno <aurelien@aurel32.net>
+Similar to my previous comment. This is technically correct, but if such=20
+an instruction is generated, it also means that a field is not properly=20
+masked when generating the opcode.
 
 --=20
 Aurelien Jarno                          GPG: 4096R/1DDD8C9B
