@@ -1,51 +1,52 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4A221606A31A
-	for <qemu-riscv@archiver.kernel.org>; Thu, 29 Oct 2026 13:17:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9C5E9606A31C
+	for <qemu-riscv@archiver.kernel.org>; Thu, 29 Oct 2026 13:17:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=CZUuV3Le
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=TDcSeUiZ
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xMPwm-00089A-Qa; Thu, 29 Oct 2026 09:13:36 -0400
+	id 1xMPxC-0000Ew-A2; Thu, 29 Oct 2026 09:14:02 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1xMPwB-0007kb-CC
- for qemu-riscv@nongnu.org; Thu, 29 Oct 2026 09:13:00 -0400
+ id 1xMPwR-0007sK-R8
+ for qemu-riscv@nongnu.org; Thu, 29 Oct 2026 09:13:20 -0400
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1xMPw7-00066I-Jb
- for qemu-riscv@nongnu.org; Thu, 29 Oct 2026 09:12:59 -0400
+ id 1xMPwP-0006Ca-Gx
+ for qemu-riscv@nongnu.org; Thu, 29 Oct 2026 09:13:15 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1793279574;
+ s=mimecast20190719; t=1793279592;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=QV9DHGhey7XD67s+w5fHprjo1VKNhiG10DlCD/rFijY=;
- b=CZUuV3Le5STcEKF6JXdkdCpPGHHNi9a/IGSiMDkhaQJosm5MlvveoQZiAeUKlnUqeWAy5r
- OoRjT6Rht9aHhy16dJmEIIz1AyfujH4QuV6UbmLWcgL/D+yCXaTZvukjclUfTveeatD7qA
- qifLdhuJlFQA5a93zDCmrUTteL43Vh4=
-Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=xu3P5m/1KLIWcgSCEInSnntHhO//Q8ISbe9gTvF6tGQ=;
+ b=TDcSeUiZiMlhe8Oa78bKTzqdTjeJI4+FXf9drx6tNf4gr78zsn/CxQF3FSMkOBg6lW0kbx
+ i4DTKyBhrPc5T0NeVbj9hGwj8x7OXA17Mel1t8ED/7geyJBFgvUN4MG0cM/sidvOJU9lrC
+ Mb0X/q4xurLmtVeNRC3c7GGtW9z3RfI=
+Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-296-kY3U28fAPQiKeJMdoENBPA-1; Thu,
- 29 Oct 2026 09:12:49 -0400
-X-MC-Unique: kY3U28fAPQiKeJMdoENBPA-1
-X-Mimecast-MFC-AGG-ID: kY3U28fAPQiKeJMdoENBPA_1793279566
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-74-xg9QxgJAOQqnklzZyFzKJQ-1; Thu,
+ 29 Oct 2026 09:13:07 -0400
+X-MC-Unique: xg9QxgJAOQqnklzZyFzKJQ-1
+X-Mimecast-MFC-AGG-ID: xg9QxgJAOQqnklzZyFzKJQ_1793279585
 Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
  (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 02AD81955DBF; Thu, 29 Oct 2026 13:12:46 +0000 (UTC)
+ by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id AD3A41956068; Thu, 29 Oct 2026 13:13:05 +0000 (UTC)
 Received: from berrange.csb (headnet04.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.116])
  by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 321AD3000723; Thu, 29 Oct 2026 13:12:42 +0000 (UTC)
+ id 5BC8D3000B56; Thu, 29 Oct 2026 13:13:03 +0000 (UTC)
 From: =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, Peter Maydell <peter.maydell@linaro.org>,
@@ -55,16 +56,18 @@ Cc: qemu-arm@nongnu.org, Peter Maydell <peter.maydell@linaro.org>,
  qemu-ppc@nongnu.org, qemu-block@nongnu.org, qemu-riscv@nongnu.org,
  qemu-s390x@nongnu.org,
  =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
-Subject: [PATCH v2 00/28] Mark user creatable devices for secure for virt use
- case
-Date: Thu, 29 Oct 2026 13:12:13 +0000
-Message-ID: <20261029131241.2275706-1-berrange@redhat.com>
+Subject: [PATCH v2 07/28] hw/net: mark e1000, e1000e, IGB,
+ rtl8139 & sPAPR VLAN as secure
+Date: Thu, 29 Oct 2026 13:12:20 +0000
+Message-ID: <20261029131241.2275706-8-berrange@redhat.com>
+In-Reply-To: <20261029131241.2275706-1-berrange@redhat.com>
+References: <20261029131241.2275706-1-berrange@redhat.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
-X-Mimecast-MFC-PROC-ID: in4axJY168V9Lp9Xt-r-YJpkjZNNQtHia3fmdsCj4BE_1793279566
+X-Mimecast-MFC-PROC-ID: 5eXHDcd2grAz2fUpM8qca9cmgaUSBElFvm7WCkqlo6M_1793279585
 X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=170.10.133.124; envelope-from=berrange@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
@@ -87,277 +90,97 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS
-	autolearn=unavailable autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS autolearn=unavailable autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-This (largish) series undertakes the task of marking devices
-secure, if they are intended to be used a virtualization
-use case.
+Historically most NICs are only interesting for non-virtualization
+use cases and have not been written with malicious guests in mind.
 
-NB, this is only tagging leaf types in the QOM tree. This
-implicitly means their parents are also secure, as well as
-any child devices they are hardcoded to create internally,
-but those are not (yet) tagged. Tagging parents and implicit
-created devices is future work.
+As a general rule either virtio-net or xen-net should be used in
+all virtualized guests requiring a security boundary.
 
-NB, the maintainer CC list was way too huge to include every
-individual, so I've trimmed to just the mailing list CCs.
+There are a handful of exceptions resulting from historical usage
+in the x86 world, to support virtualized guests lacking virtio
+support.
 
-The marking of machine types / accelerators was split off to
+Thus the rtl8139, e1000, e1000e & IGB NICs are declared to provide
+a security boundary.
 
-  https://lists.gnu.org/archive/html/qemu-devel/2026-10/msg07775.html
+The PPC sPAPR Virtual LAN device is also marked secure.
 
-I used the docs/system/security.txt along with the RHEL builds
-of QEMU as an approximation for what should be considered
-"virtualization use case". The latter cuts out a huge pile of
-devices from the build. IOW, more or less everything that RHEL
-builds for x86_64, ppc64, aarch64, s390x gets included. Notably
-since RHEL does not yet ship riscv or loongarch, I've possibly
-missed some devices that ought to be in scope.
+Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
+---
+ hw/net/e1000.c      | 1 +
+ hw/net/e1000e.c     | 1 +
+ hw/net/igb.c        | 1 +
+ hw/net/rtl8139.c    | 1 +
+ hw/net/spapr_llan.c | 1 +
+ 5 files changed, 5 insertions(+)
 
-Devices are marked secure *regardless* of their maintainer
-status, if they are relevant to virt. Notably all the USB
-stuff is included despite USB being orphaned. An exception
-is CXL which is arguably relevant to virt, but maintainers
-agreed it is too immature to include so far, and we've been
-explicitly excluding from CVE triage since the AI flood.
-
-IOW, the "secure" flag as set in this series mostly avoids
-saying anything about the support status of the object types.
-
-Over the long term, IMHO, the set of devices we declare as
-providing a security boundary needs to be stable. We should
-not declare a device out of scope for the virt use case simply
-because a maintainer steps aside. The device doesn't become
-instantly less secure. It does mean bug fixes may not be
-timely enough, and rely on the goodwill of other contributors
-or maintainers to step up and fix.
-
-Or to put it another way. "secure = true" does not guarantee
-that the device is secure, but it states our intent that we
-*want* it to be secure, as opposed to "secure = false" / unset
-which indicates we just don't care either way.
-
-The intersection of (secure, orphaned) highlights to QEMU
-contributors or corporate sponsors, where they might step
-up their effort / investment.
-
-Changed in v2:
-
- - Split off setting of UHCI, OCHI, ECHI to separate
-   patch since it is debatable whether to include these
- - Split off Cirrus and QXL to seaprate patch since it
-   is debatable whether to include these
- - Split off accelerators/machines to a seplarate
-   (already postd) series.
- - Dropped annotations accidentally included on some
-   parent (abstract) types. This will be dealt with
-   in the next release cycle
- - Really dropped annotations for CXL
- - Dropped vmware SCSI device
-
-Daniel P. Berrangé (28):
-  hw: mark all virtio PCI devices as secure
-  hw: mark all virtio CCW devices as secure
-  hw: mark all vhost devices a secure
-  hw: mark all remaining virtio object types as secure
-  hw/vfio: mark all VFIO object classes as secure
-  hw/xen: mark all Xen related object types as being secure
-  hw/net: mark e1000, e1000e, IGB, rtl8139 & sPAPR VLAN as secure
-  hw/usb: mark commonly used USB devices/hosts as secure
-  hw/watchdog: mark some watchdog devices as secure
-  hw/scsi: mark spapr SCSI controller as secure
-  hw/scsi: mark SCSI disk endpoint devices as secure
-  hw/ide: mark ICH9 and ide-hd/ide-cd as secure
-  hw: define most common PCI types as secure
-  hw/pci-host: mark common x86, ppc, arm and s390 PCI hosts as secure
-  hw/display: mark bochs, ramfb and VGA as secure
-  hw/tpm: mark all TPM implementations as secure
-  hw/misc: mark pvpanic, vmcoreinfo as secure
-  hw/audio: mark Intel HDA devices & codecs as secure
-  hw/char: mark common serial / console devices as secure
-  hw/mem: mark nvdimm, pc-dimm & spapr-nvdimm devices as secure
-  hw/uefi: mark the EFI vars service as secure
-  hw/acpi: mark erst, vmclock and vmgenid devices as secure
-  hw: mark KVM clock and RTC devices as secure
-  hw: device AMD, Intel and ARM IOMMUs as secure
-  hw/input: mark PS/2 and PC Keyboard devices as secure
-  hw/i386: mark vmmouse / vmport as secure
-  hw/display: mark cirrus and QXL as secure
-  hw/usb: mark UHCI, OCHI & ECHI USB hosts as secure
-
- hw/9pfs/virtio-9p-device.c           | 1 +
- hw/acpi/erst.c                       | 1 +
- hw/acpi/vmclock.c                    | 1 +
- hw/acpi/vmgenid.c                    | 1 +
- hw/arm/smmuv3.c                      | 2 ++
- hw/audio/hda-codec.c                 | 3 +++
- hw/audio/intel-hda.c                 | 3 +++
- hw/audio/virtio-snd.c                | 1 +
- hw/block/vhost-user-blk.c            | 1 +
- hw/block/virtio-blk.c                | 1 +
- hw/block/xen-block.c                 | 2 ++
- hw/char/debugcon.c                   | 1 +
- hw/char/sclpconsole-lm.c             | 1 +
- hw/char/sclpconsole.c                | 1 +
- hw/char/serial-isa.c                 | 1 +
- hw/char/serial-pci.c                 | 1 +
- hw/char/serial.c                     | 1 +
- hw/char/spapr_vty.c                  | 1 +
- hw/char/virtio-console.c             | 2 ++
- hw/char/virtio-serial-bus.c          | 2 ++
- hw/char/xen_console.c                | 1 +
- hw/display/bochs-display.c           | 1 +
- hw/display/cirrus_vga.c              | 1 +
- hw/display/qxl.c                     | 2 ++
- hw/display/ramfb-standalone.c        | 1 +
- hw/display/vga-pci.c                 | 2 ++
- hw/display/vhost-user-gpu.c          | 1 +
- hw/display/virtio-gpu-gl.c           | 1 +
- hw/display/virtio-gpu-pci-rutabaga.c | 1 +
- hw/display/virtio-gpu-rutabaga.c     | 1 +
- hw/display/virtio-gpu.c              | 1 +
- hw/i386/amd_iommu.c                  | 4 +++-
- hw/i386/intel_iommu.c                | 1 +
- hw/i386/kvm/clock.c                  | 1 +
- hw/i386/vmmouse.c                    | 1 +
- hw/i386/vmport.c                     | 1 +
- hw/i386/xen/xen-hvm.c                | 1 +
- hw/i386/xen/xen_platform.c           | 1 +
- hw/i386/xen/xen_pvdevice.c           | 1 +
- hw/ide/ich.c                         | 1 +
- hw/ide/ide-dev.c                     | 2 ++
- hw/ide/piix.c                        | 2 ++
- hw/input/pckbd.c                     | 3 ++-
- hw/input/ps2.c                       | 6 ++++--
- hw/input/virtio-input-hid.c          | 4 ++++
- hw/input/virtio-input-host.c         | 1 +
- hw/mem/nvdimm.c                      | 1 +
- hw/mem/pc-dimm.c                     | 1 +
- hw/misc/pvpanic-isa.c                | 1 +
- hw/misc/pvpanic-mmio.c               | 1 +
- hw/misc/pvpanic-pci.c                | 1 +
- hw/misc/vmcoreinfo.c                 | 1 +
- hw/net/e1000.c                       | 1 +
- hw/net/e1000e.c                      | 1 +
- hw/net/igb.c                         | 1 +
- hw/net/rtl8139.c                     | 1 +
- hw/net/spapr_llan.c                  | 1 +
- hw/net/virtio-net.c                  | 1 +
- hw/net/xen_nic.c                     | 1 +
- hw/pci-bridge/gen_pcie_root_port.c   | 1 +
- hw/pci-bridge/i82801b11.c            | 1 +
- hw/pci-bridge/ioh3420.c              | 1 +
- hw/pci-bridge/pci_bridge_dev.c       | 2 ++
- hw/pci-bridge/pci_expander_bridge.c  | 5 +++++
- hw/pci-bridge/pcie_pci_bridge.c      | 1 +
- hw/pci-bridge/xio3130_downstream.c   | 1 +
- hw/pci-bridge/xio3130_upstream.c     | 1 +
- hw/pci-host/gpex.c                   | 2 ++
- hw/pci-host/i440fx.c                 | 2 ++
- hw/pci-host/pnv_phb.c                | 2 ++
- hw/pci-host/pnv_phb3.c               | 3 +++
- hw/pci-host/pnv_phb3_msi.c           | 1 +
- hw/pci-host/pnv_phb3_pbcq.c          | 1 +
- hw/pci-host/pnv_phb4.c               | 4 +++-
- hw/pci-host/pnv_phb4_pec.c           | 1 +
- hw/pci-host/q35.c                    | 2 ++
- hw/pci-host/remote.c                 | 1 +
- hw/pci-host/xen_igd_pt.c             | 1 +
- hw/pci/pci.c                         | 4 ++++
- hw/ppc/spapr_nvdimm.c                | 1 +
- hw/ppc/spapr_pci.c                   | 1 +
- hw/ppc/spapr_tpm_proxy.c             | 1 +
- hw/rtc/mc146818rtc.c                 | 1 +
- hw/s390x/s390-pci-bus.c              | 4 ++++
- hw/s390x/vhost-scsi-ccw.c            | 1 +
- hw/s390x/vhost-user-fs-ccw.c         | 1 +
- hw/s390x/vhost-vsock-ccw.c           | 1 +
- hw/s390x/virtio-ccw-9p.c             | 1 +
- hw/s390x/virtio-ccw-balloon.c        | 1 +
- hw/s390x/virtio-ccw-blk.c            | 1 +
- hw/s390x/virtio-ccw-crypto.c         | 1 +
- hw/s390x/virtio-ccw-gpu.c            | 1 +
- hw/s390x/virtio-ccw-input.c          | 3 +++
- hw/s390x/virtio-ccw-mem.c            | 1 +
- hw/s390x/virtio-ccw-net.c            | 1 +
- hw/s390x/virtio-ccw-rng.c            | 1 +
- hw/s390x/virtio-ccw-scsi.c           | 1 +
- hw/s390x/virtio-ccw-serial.c         | 1 +
- hw/scsi/scsi-disk.c                  | 3 +++
- hw/scsi/scsi-generic.c               | 1 +
- hw/scsi/spapr_vscsi.c                | 1 +
- hw/scsi/vhost-scsi.c                 | 1 +
- hw/scsi/vhost-user-scsi.c            | 1 +
- hw/scsi/virtio-scsi.c                | 1 +
- hw/tpm/tpm_crb.c                     | 1 +
- hw/tpm/tpm_spapr.c                   | 1 +
- hw/tpm/tpm_tis_i2c.c                 | 1 +
- hw/tpm/tpm_tis_isa.c                 | 1 +
- hw/tpm/tpm_tis_sysbus.c              | 1 +
- hw/uefi/var-service-sysbus.c         | 2 ++
- hw/usb/ccid-card-emulated.c          | 1 +
- hw/usb/ccid-card-passthru.c          | 1 +
- hw/usb/dev-hid.c                     | 3 +++
- hw/usb/dev-hub.c                     | 1 +
- hw/usb/dev-smartcard-reader.c        | 2 ++
- hw/usb/dev-storage-bot.c             | 1 +
- hw/usb/dev-storage-classic.c         | 1 +
- hw/usb/hcd-ehci-pci.c                | 1 +
- hw/usb/hcd-ehci-sysbus.c             | 7 +++++++
- hw/usb/hcd-ohci-pci.c                | 1 +
- hw/usb/hcd-ohci-sysbus.c             | 1 +
- hw/usb/hcd-uhci.c                    | 1 +
- hw/usb/hcd-xhci-nec.c                | 1 +
- hw/usb/hcd-xhci-pci.c                | 1 +
- hw/usb/hcd-xhci-sysbus.c             | 3 ++-
- hw/usb/hcd-xhci.c                    | 1 +
- hw/usb/host-libusb.c                 | 1 +
- hw/usb/redirect.c                    | 1 +
- hw/vfio-user/pci.c                   | 1 +
- hw/vfio/ap.c                         | 1 +
- hw/vfio/ccw.c                        | 1 +
- hw/vfio/igd.c                        | 1 +
- hw/vfio/iommufd.c                    | 2 ++
- hw/vfio/pci.c                        | 2 ++
- hw/vfio/spapr.c                      | 1 +
- hw/virtio/vdpa-dev.c                 | 1 +
- hw/virtio/vhost-user-fs.c            | 1 +
- hw/virtio/vhost-user-gpio.c          | 1 +
- hw/virtio/vhost-user-i2c.c           | 1 +
- hw/virtio/vhost-user-input.c         | 1 +
- hw/virtio/vhost-user-rng.c           | 1 +
- hw/virtio/vhost-user-rtc.c           | 1 +
- hw/virtio/vhost-user-scmi.c          | 1 +
- hw/virtio/vhost-user-snd.c           | 1 +
- hw/virtio/vhost-user-spi.c           | 1 +
- hw/virtio/vhost-user-test-device.c   | 1 +
- hw/virtio/vhost-user-vsock.c         | 1 +
- hw/virtio/vhost-vsock.c              | 1 +
- hw/virtio/virtio-balloon.c           | 1 +
- hw/virtio/virtio-crypto.c            | 1 +
- hw/virtio/virtio-iommu.c             | 2 ++
- hw/virtio/virtio-mem.c               | 1 +
- hw/virtio/virtio-mmio.c              | 2 ++
- hw/virtio/virtio-nsm.c               | 1 +
- hw/virtio/virtio-pci.c               | 3 +++
- hw/virtio/virtio-pmem.c              | 1 +
- hw/virtio/virtio-rng.c               | 1 +
- hw/virtio/virtio-rtc.c               | 1 +
- hw/watchdog/sbsa_gwdt.c              | 1 +
- hw/watchdog/spapr_watchdog.c         | 1 +
- hw/watchdog/wdt_diag288.c            | 1 +
- hw/watchdog/wdt_i6300esb.c           | 1 +
- hw/watchdog/wdt_ib700.c              | 1 +
- hw/xen/xen-bus.c                     | 2 ++
- hw/xen/xen-legacy-backend.c          | 3 +++
- hw/xen/xen_pt.c                      | 1 +
- 166 files changed, 230 insertions(+), 6 deletions(-)
-
+diff --git a/hw/net/e1000.c b/hw/net/e1000.c
+index 202ad404013..2f540dbb417 100644
+--- a/hw/net/e1000.c
++++ b/hw/net/e1000.c
+@@ -1759,6 +1759,7 @@ static void e1000_register_types(void)
+         type_info.parent = TYPE_E1000_BASE;
+         type_info.class_data = info;
+         type_info.class_init = e1000_class_init;
++        type_info.secure = true;
+ 
+         type_register_static(&type_info);
+     }
+diff --git a/hw/net/e1000e.c b/hw/net/e1000e.c
+index 9faf0c74c3d..96737ddb51a 100644
+--- a/hw/net/e1000e.c
++++ b/hw/net/e1000e.c
+@@ -721,6 +721,7 @@ static const TypeInfo e1000e_info = {
+     .instance_size = sizeof(E1000EState),
+     .class_init = e1000e_class_init,
+     .instance_init = e1000e_instance_init,
++    .secure = true,
+     .interfaces = (const InterfaceInfo[]) {
+         { INTERFACE_PCIE_DEVICE },
+         { }
+diff --git a/hw/net/igb.c b/hw/net/igb.c
+index c076807e711..0bd03efea0c 100644
+--- a/hw/net/igb.c
++++ b/hw/net/igb.c
+@@ -635,6 +635,7 @@ static const TypeInfo igb_info = {
+     .instance_size = sizeof(IGBState),
+     .class_init = igb_class_init,
+     .instance_init = igb_instance_init,
++    .secure = true,
+     .interfaces = (const InterfaceInfo[]) {
+         { INTERFACE_PCIE_DEVICE },
+         { }
+diff --git a/hw/net/rtl8139.c b/hw/net/rtl8139.c
+index 16479284eea..38bc16f312f 100644
+--- a/hw/net/rtl8139.c
++++ b/hw/net/rtl8139.c
+@@ -3450,6 +3450,7 @@ static const TypeInfo rtl8139_info = {
+     .instance_size = sizeof(RTL8139State),
+     .class_init    = rtl8139_class_init,
+     .instance_init = rtl8139_instance_init,
++    .secure        = true,
+     .interfaces = (const InterfaceInfo[]) {
+         { INTERFACE_CONVENTIONAL_PCI_DEVICE },
+         { },
+diff --git a/hw/net/spapr_llan.c b/hw/net/spapr_llan.c
+index a5b8906849c..784e46f57d4 100644
+--- a/hw/net/spapr_llan.c
++++ b/hw/net/spapr_llan.c
+@@ -891,6 +891,7 @@ static const TypeInfo spapr_vlan_info = {
+     .class_init    = spapr_vlan_class_init,
+     .instance_init = spapr_vlan_instance_init,
+     .instance_finalize = spapr_vlan_instance_finalize,
++    .secure        = true,
+ };
+ 
+ static void spapr_vlan_register_types(void)
 -- 
 2.56.0
 
