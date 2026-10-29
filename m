@@ -1,33 +1,33 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BBC49606A31D
-	for <qemu-riscv@archiver.kernel.org>; Thu, 29 Oct 2026 05:49:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 71F7C606A31C
+	for <qemu-riscv@archiver.kernel.org>; Thu, 29 Oct 2026 05:50:17 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xMJ0G-0007DI-BL; Thu, 29 Oct 2026 01:48:44 -0400
+	id 1xMJ01-00075c-Td; Thu, 29 Oct 2026 01:48:30 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <gong.shuai@sanechips.com.cn>)
- id 1xMIzk-00072U-0N; Thu, 29 Oct 2026 01:48:12 -0400
-Received: from mxct.zte.com.cn ([183.62.165.209])
+ id 1xMIzi-00072T-Q2; Thu, 29 Oct 2026 01:48:12 -0400
+Received: from mxhk.zte.com.cn ([160.30.148.34])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <gong.shuai@sanechips.com.cn>)
- id 1xMIzg-0000dO-KN; Thu, 29 Oct 2026 01:48:11 -0400
-Received: from mse-fl1.zte.com.cn (unknown [10.5.228.132])
+ id 1xMIzg-0000dk-Jw; Thu, 29 Oct 2026 01:48:10 -0400
+Received: from mse-fl2.zte.com.cn (unknown [10.5.228.133])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mxct.zte.com.cn (FangMail) with ESMTPS id 4jFYDF3STzz5B151;
- Thu, 29 Oct 2026 13:47:57 +0800 (CST)
-Received: from szxlzmapp03.zte.com.cn ([10.5.231.207])
- by mse-fl1.zte.com.cn with SMTP id 69T5lq0d079236;
+ by mxhk.zte.com.cn (FangMail) with ESMTPS id 4jFYDL4WDLz5PkGy;
+ Thu, 29 Oct 2026 13:48:02 +0800 (CST)
+Received: from szxl2zmapp05.zte.com.cn ([10.1.32.37])
+ by mse-fl2.zte.com.cn with SMTP id 69T5lqAY024140;
  Thu, 29 Oct 2026 13:47:52 +0800 (+08)
  (envelope-from gong.shuai@sanechips.com.cn)
 Received: from ubuntu-35-gs (unknown [10.230.214.35])
  by smtp (Zmail) with SMTP; Thu, 29 Oct 2026 13:47:54 +0800
-X-Zmail-TransId: 3e816ae2de09027-e632c
+X-Zmail-TransId: 3e816ae2de0a027-e6339
 X-Zmail-LocalSMTP: 1
 X-Zmail-RealSender: gong.shuai@sanechips.com.cn
 From: Gong Shuai <gong.shuai@sanechips.com.cn>
@@ -42,10 +42,10 @@ Cc: Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Cornelia Huck <cohuck@redhat.com>, Wu Fei <wu.fei9@sanechips.com.cn>,
  Qingye Zhao <zhao.qingye@sanechips.com.cn>,
  Gong Shuai <gong.shuai@sanechips.com.cn>, Gong Shuai <gsh517025@gmail.com>
-Subject: [RFC PATCH v2 02/14] hw/riscv/Kconfig: Enable IOMMUFD on RISC-V virt
- machine
-Date: Thu, 29 Oct 2026 13:47:39 +0800
-Message-ID: <20261029054751.563493-3-gong.shuai@sanechips.com.cn>
+Subject: [RFC PATCH v2 03/14] hw/riscv/riscv-iommu: Allow PCI IOMMU ops to be
+ overridden
+Date: Thu, 29 Oct 2026 13:47:40 +0800
+Message-ID: <20261029054751.563493-4-gong.shuai@sanechips.com.cn>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20261029054751.563493-1-gong.shuai@sanechips.com.cn>
 References: <20261029054751.563493-1-gong.shuai@sanechips.com.cn>
@@ -53,20 +53,20 @@ X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 X-ZMAIL-USEORIGINALEMLTOOUTBOUND: 1
 Content-Transfer-Encoding: 8bit
-X-MAIL: mse-fl1.zte.com.cn 69T5lq0d079236
+X-MAIL: mse-fl2.zte.com.cn 69T5lqAY024140
 X-TLS: YES
 X-ENVELOPE-SENDER: gong.shuai@sanechips.com.cn
-X-SOURCE-IP: 10.5.228.132 unknown Thu, 29 Oct 2026 13:47:57 +0800
+X-SOURCE-IP: 10.5.228.133 unknown Thu, 29 Oct 2026 13:48:02 +0800
 X-CLEAN: YES
 X-Fangmail-Anti-Spam-Filtered: true
-X-Fangmail-MID-QID: 6AE2DE0D.000/4jFYDF3STzz5B151
-Received-SPF: pass client-ip=183.62.165.209;
- envelope-from=gong.shuai@sanechips.com.cn; helo=mxct.zte.com.cn
-X-Spam_score_int: -41
-X-Spam_score: -4.2
-X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
- RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
+X-Fangmail-MID-QID: 6AE2DE12.002/4jFYDL4WDLz5PkGy
+Received-SPF: pass client-ip=160.30.148.34;
+ envelope-from=gong.shuai@sanechips.com.cn; helo=mxhk.zte.com.cn
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_MSPIKE_H5=0.001,
+ RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -88,24 +88,55 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 
 From: Wu Fei <wu.fei9@sanechips.com.cn>
 
+Add an iommu_ops field to RISCVIOMMUState and use it when
+registering the IOMMU on a PCI bus, falling back to the default
+riscv_iommu_ops when unset. This lets callers install custom PCI
+IOMMU ops without changing existing behaviour.
+
 Signed-off-by: Wu Fei <wu.fei9@sanechips.com.cn>
 Signed-off-by: Gong Shuai <gong.shuai@sanechips.com.cn>
 ---
- hw/riscv/Kconfig | 1 +
- 1 file changed, 1 insertion(+)
+ hw/riscv/riscv-iommu.c | 5 ++++-
+ hw/riscv/riscv-iommu.h | 3 +++
+ 2 files changed, 7 insertions(+), 1 deletion(-)
 
-diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-index d89fdfcc86..a423fafca1 100644
---- a/hw/riscv/Kconfig
-+++ b/hw/riscv/Kconfig
-@@ -49,6 +49,7 @@ config RISCV_VIRT
-     imply VIRTIO_VGA
-     imply TEST_DEVICES
-     imply TPM_TIS_SYSBUS
-+    imply IOMMUFD
-     select DEVICE_TREE
-     select RISCV_NUMA
-     select GOLDFISH_RTC
+diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
+index 0e6970773a..6381986265 100644
+--- a/hw/riscv/riscv-iommu.c
++++ b/hw/riscv/riscv-iommu.c
+@@ -3007,7 +3007,10 @@ void riscv_iommu_pci_setup_iommu(RISCVIOMMUState *iommu, PCIBus *bus,
+         RISCVIOMMUState *last = (RISCVIOMMUState *)bus->iommu_opaque;
+         QLIST_INSERT_AFTER(last, iommu, iommus);
+     } else if (!bus->iommu_ops && !bus->iommu_opaque) {
+-        pci_setup_iommu(bus, &riscv_iommu_ops, iommu);
++        if (!iommu->iommu_ops) {
++            iommu->iommu_ops = &riscv_iommu_ops;
++        }
++        pci_setup_iommu(bus, iommu->iommu_ops, iommu);
+     } else {
+         error_setg(errp, "can't register secondary IOMMU for PCI bus #%d",
+             pci_bus_num(bus));
+diff --git a/hw/riscv/riscv-iommu.h b/hw/riscv/riscv-iommu.h
+index 403d10b321..cf2904c118 100644
+--- a/hw/riscv/riscv-iommu.h
++++ b/hw/riscv/riscv-iommu.h
+@@ -24,6 +24,7 @@
+ #include "system/dma.h"
+ #include "hw/riscv/iommu.h"
+ #include "hw/riscv/riscv-iommu-bits.h"
++#include "hw/pci/pci.h"
+ 
+ typedef enum riscv_iommu_igs_modes riscv_iommu_igs_mode;
+ 
+@@ -97,6 +98,8 @@ struct RISCVIOMMUState {
+     /* HPM event counters */
+     GHashTable *hpm_event_ctr_map; /* Mapping of events to counters */
+     uint8_t hpm_cntrs;
++
++    const PCIIOMMUOps *iommu_ops;
+ };
+ 
+ void riscv_iommu_pci_setup_iommu(RISCVIOMMUState *iommu, PCIBus *bus,
 -- 
 2.53.0
 
