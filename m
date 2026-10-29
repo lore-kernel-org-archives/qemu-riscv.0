@@ -1,52 +1,52 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1EF2F606A32F
-	for <qemu-riscv@archiver.kernel.org>; Thu, 29 Oct 2026 13:21:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8A786606A31A
+	for <qemu-riscv@archiver.kernel.org>; Thu, 29 Oct 2026 13:22:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=P/lev1p+
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=bmCzOHAh
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xMQ1x-0001WR-T5; Thu, 29 Oct 2026 09:18:58 -0400
+	id 1xMQ1T-0007iW-4B; Thu, 29 Oct 2026 09:18:27 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1xMPxL-0000Wb-5n
- for qemu-riscv@nongnu.org; Thu, 29 Oct 2026 09:14:11 -0400
+ id 1xMPxI-0000Sk-CT
+ for qemu-riscv@nongnu.org; Thu, 29 Oct 2026 09:14:08 -0400
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1xMPxJ-0006ZF-91
- for qemu-riscv@nongnu.org; Thu, 29 Oct 2026 09:14:10 -0400
+ id 1xMPxG-0006Xn-OW
+ for qemu-riscv@nongnu.org; Thu, 29 Oct 2026 09:14:08 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1793279648;
+ s=mimecast20190719; t=1793279646;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=dR2eFwA6BcT8vW16lTId9tfFaddfYJbds4sEJfK9C1s=;
- b=P/lev1p+GKLwioEaxUvTkX8HmenhuEDZ3inIgPfwlAiBnBoYTZWkVyuwUJhyveYE8uJoCe
- tk2l356ygJIfLACtBIazVhKyjxlYeEME4ZdIUl183AJNiqlJwlRSCzZF9lzVEpnixa5NlX
- TpatYuQ7bSuAID3uK7Komy07WLgq+4Q=
-Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
+ bh=Tz6ECrqGFEvH2qPdvBggN2cCB6nV8NdVl/en/0ygr8c=;
+ b=bmCzOHAhr0azWJclekO/yXFyP2f0PYDB+N8gWMNgM0RKIuUsnSrsf4ApZZge5NYbXKEyln
+ Olmyk2E/2JubtEVH7OvdPyDTNtjB+6nKt261Ywf206vfnU/bX10ysdC2PM48prV2ACbXQo
+ xJ0CPkC5pKKPpXN+GcwFJq47UClFuTg=
+Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-460-m81A4W8_OtKay1YwuGUEnw-1; Thu,
- 29 Oct 2026 09:14:04 -0400
-X-MC-Unique: m81A4W8_OtKay1YwuGUEnw-1
-X-Mimecast-MFC-AGG-ID: m81A4W8_OtKay1YwuGUEnw_1793279643
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-274-pOu3nCV0MLylF1T_gVYESA-1; Thu,
+ 29 Oct 2026 09:14:02 -0400
+X-MC-Unique: pOu3nCV0MLylF1T_gVYESA-1
+X-Mimecast-MFC-AGG-ID: pOu3nCV0MLylF1T_gVYESA_1793279640
 Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
  (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 69D441955DE8; Thu, 29 Oct 2026 13:14:03 +0000 (UTC)
+ by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id C1DE71955EB6; Thu, 29 Oct 2026 13:14:00 +0000 (UTC)
 Received: from berrange.csb (headnet04.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.116])
  by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 1E0273000723; Thu, 29 Oct 2026 13:14:00 +0000 (UTC)
+ id 740183000723; Thu, 29 Oct 2026 13:13:58 +0000 (UTC)
 From: =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, Peter Maydell <peter.maydell@linaro.org>,
@@ -56,15 +56,15 @@ Cc: qemu-arm@nongnu.org, Peter Maydell <peter.maydell@linaro.org>,
  qemu-ppc@nongnu.org, qemu-block@nongnu.org, qemu-riscv@nongnu.org,
  qemu-s390x@nongnu.org,
  =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
-Subject: [PATCH v2 28/28] hw/usb: mark UHCI, OCHI & ECHI USB hosts as secure
-Date: Thu, 29 Oct 2026 13:12:41 +0000
-Message-ID: <20261029131241.2275706-29-berrange@redhat.com>
+Subject: [PATCH v2 27/28] hw/display: mark cirrus and QXL as secure
+Date: Thu, 29 Oct 2026 13:12:40 +0000
+Message-ID: <20261029131241.2275706-28-berrange@redhat.com>
 In-Reply-To: <20261029131241.2275706-1-berrange@redhat.com>
 References: <20261029131241.2275706-1-berrange@redhat.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
-X-Mimecast-MFC-PROC-ID: 7iifzy3jMA75gIlLF00CFBJaqhPbWjEmra6L803_8RM_1793279643
+X-Mimecast-MFC-PROC-ID: 2FlUvKOHJdIj4DDw61EgNHUAuWdbwPF866asNYPzY8g_1793279640
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -92,126 +92,62 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham autolearn_force=no version=4.0.1
+	SPF_PASS autolearn=unavailable autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Modern virtualized guests are expected to be deployed with the
-XHCI controller which supports all of USB 1, 2 and 3. The UHCI
-OCHI and ECHI hosts, however, have all been widely used in
-virtualization scenarios historically, especially on x86. Indeed
-the -usb flag will enable UCHI by default.
+Most of the display adapters are emulating old hardware which is not
+relevant to virtualization use cases. The previous commit added the
+generic, simple devices.
 
-So while these are undesirable hosts in general, this marks them
-as secure for virtualization use cases.
+This proposes two further devices based on their historical widespread
+usage in virtualization use cases.
+
+Cirrus (PCI, not ISA) was the recommended default for x86 for an
+incredibly long time and while it is now discouraged, it is likely
+to still be in common use.
+
+QXL was the recommended default to be used with SPICE, which is designed
+to service virtualization use cases and is still commonly shipped by
+many distros and often used by default in mgmt apps still.
 
 Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
 ---
- hw/usb/hcd-ehci-pci.c    | 1 +
- hw/usb/hcd-ehci-sysbus.c | 7 +++++++
- hw/usb/hcd-ohci-pci.c    | 1 +
- hw/usb/hcd-ohci-sysbus.c | 1 +
- hw/usb/hcd-uhci.c        | 1 +
- 5 files changed, 11 insertions(+)
+ hw/display/cirrus_vga.c | 1 +
+ hw/display/qxl.c        | 2 ++
+ 2 files changed, 3 insertions(+)
 
-diff --git a/hw/usb/hcd-ehci-pci.c b/hw/usb/hcd-ehci-pci.c
-index fd35d253407..2080ea2913a 100644
---- a/hw/usb/hcd-ehci-pci.c
-+++ b/hw/usb/hcd-ehci-pci.c
-@@ -219,6 +219,7 @@ static void ehci_pci_register_types(void)
-     TypeInfo ehci_type_info = {
-         .parent        = TYPE_PCI_EHCI,
-         .class_init    = ehci_data_class_init,
-+        .secure        = true,
-     };
-     int i;
- 
-diff --git a/hw/usb/hcd-ehci-sysbus.c b/hw/usb/hcd-ehci-sysbus.c
-index 7f7c7f8a2f1..0af658d2b68 100644
---- a/hw/usb/hcd-ehci-sysbus.c
-+++ b/hw/usb/hcd-ehci-sysbus.c
-@@ -247,32 +247,38 @@ static const TypeInfo ehci_sysbus_types[] = {
-         .name          = TYPE_PLATFORM_EHCI,
-         .parent        = TYPE_SYS_BUS_EHCI,
-         .class_init    = ehci_platform_class_init,
-+        .secure        = true,
-     },
-     {
-         .name          = TYPE_EXYNOS4210_EHCI,
-         .parent        = TYPE_SYS_BUS_EHCI,
-         .class_init    = ehci_exynos4210_class_init,
-+        .secure        = true,
-     },
-     {
-         .name          = TYPE_AW_H3_EHCI,
-         .parent        = TYPE_SYS_BUS_EHCI,
-         .class_init    = ehci_aw_h3_class_init,
-+        .secure        = true,
-     },
-     {
-         .name          = TYPE_NPCM7XX_EHCI,
-         .parent        = TYPE_SYS_BUS_EHCI,
-         .class_init    = ehci_npcm7xx_class_init,
-+        .secure        = true,
-     },
-     {
-         .name          = TYPE_TEGRA2_EHCI,
-         .parent        = TYPE_SYS_BUS_EHCI,
-         .class_init    = ehci_tegra2_class_init,
-+        .secure        = true,
-     },
-     {
-         .name          = TYPE_PPC4xx_EHCI,
-         .parent        = TYPE_SYS_BUS_EHCI,
-         .class_init    = ehci_ppc4xx_class_init,
-         .instance_init = ehci_ppc4xx_init,
-+        .secure        = true,
-     },
-     {
-         .name          = TYPE_FUSBH200_EHCI,
-@@ -280,6 +286,7 @@ static const TypeInfo ehci_sysbus_types[] = {
-         .instance_size = sizeof(FUSBH200EHCIState),
-         .instance_init = fusbh200_ehci_init,
-         .class_init    = fusbh200_ehci_class_init,
-+        .secure        = true,
-     },
- };
- 
-diff --git a/hw/usb/hcd-ohci-pci.c b/hw/usb/hcd-ohci-pci.c
-index 70c9e9ac4f5..cf0746aa00b 100644
---- a/hw/usb/hcd-ohci-pci.c
-+++ b/hw/usb/hcd-ohci-pci.c
-@@ -148,6 +148,7 @@ static const TypeInfo ohci_pci_info = {
+diff --git a/hw/display/cirrus_vga.c b/hw/display/cirrus_vga.c
+index 0a8c74e1374..8232c5c4687 100644
+--- a/hw/display/cirrus_vga.c
++++ b/hw/display/cirrus_vga.c
+@@ -3013,6 +3013,7 @@ static const TypeInfo cirrus_vga_info = {
      .parent        = TYPE_PCI_DEVICE,
-     .instance_size = sizeof(OHCIPCIState),
-     .class_init    = ohci_pci_class_init,
+     .instance_size = sizeof(PCICirrusVGAState),
+     .class_init    = cirrus_vga_class_init,
 +    .secure        = true,
      .interfaces = (const InterfaceInfo[]) {
          { INTERFACE_CONVENTIONAL_PCI_DEVICE },
          { },
-diff --git a/hw/usb/hcd-ohci-sysbus.c b/hw/usb/hcd-ohci-sysbus.c
-index 4f51eebccb2..fd04e918e8a 100644
---- a/hw/usb/hcd-ohci-sysbus.c
-+++ b/hw/usb/hcd-ohci-sysbus.c
-@@ -80,6 +80,7 @@ static const TypeInfo ohci_sysbus_types[] = {
-         .parent        = TYPE_SYS_BUS_DEVICE,
-         .instance_size = sizeof(OHCISysBusState),
-         .class_init    = ohci_sysbus_class_init,
-+        .secure        = true,
-     },
+diff --git a/hw/display/qxl.c b/hw/display/qxl.c
+index d5f9771f5af..a8746d9f5dc 100644
+--- a/hw/display/qxl.c
++++ b/hw/display/qxl.c
+@@ -2651,6 +2651,7 @@ static const TypeInfo qxl_primary_info = {
+     .name          = "qxl-vga",
+     .parent        = TYPE_PCI_QXL,
+     .class_init    = qxl_primary_class_init,
++    .secure        = true,
  };
- 
-diff --git a/hw/usb/hcd-uhci.c b/hw/usb/hcd-uhci.c
-index a7b9fe13175..c6d163aa9f6 100644
---- a/hw/usb/hcd-uhci.c
-+++ b/hw/usb/hcd-uhci.c
-@@ -1380,6 +1380,7 @@ static void uhci_register_types(void)
-     TypeInfo uhci_type_info = {
-         .parent        = TYPE_UHCI,
-         .class_init    = uhci_data_class_init,
-+        .secure        = true,
-     };
-     int i;
+ module_obj("qxl-vga");
+ module_kconfig(QXL);
+@@ -2669,6 +2670,7 @@ static const TypeInfo qxl_secondary_info = {
+     .name          = "qxl",
+     .parent        = TYPE_PCI_QXL,
+     .class_init    = qxl_secondary_class_init,
++    .secure        = true,
+ };
+ module_obj("qxl");
  
 -- 
 2.56.0
