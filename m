@@ -1,52 +1,52 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 32147606A31A
-	for <qemu-riscv@archiver.kernel.org>; Thu, 29 Oct 2026 13:18:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CDF21606A31A
+	for <qemu-riscv@archiver.kernel.org>; Thu, 29 Oct 2026 13:18:38 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=d6o6WYP8
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=eoIQq8KW
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xMQ1C-0006j7-5Q; Thu, 29 Oct 2026 09:18:10 -0400
+	id 1xMQ0t-0005pX-Tc; Thu, 29 Oct 2026 09:17:52 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1xMPx0-0008KI-50
- for qemu-riscv@nongnu.org; Thu, 29 Oct 2026 09:13:52 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ id 1xMPxH-0000RG-SU
+ for qemu-riscv@nongnu.org; Thu, 29 Oct 2026 09:14:08 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1xMPwx-0006QK-Cx
- for qemu-riscv@nongnu.org; Thu, 29 Oct 2026 09:13:49 -0400
+ id 1xMPxG-0006Xa-0R
+ for qemu-riscv@nongnu.org; Thu, 29 Oct 2026 09:14:07 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1793279626;
+ s=mimecast20190719; t=1793279645;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=UGTyBdiqqssdvxui1jIZp1h53dhBzd+74oduvEHlCV0=;
- b=d6o6WYP8BkDw2Dxp34IoIxcXgpVcDY7j5cwvynQgs4HVTBPT/ND/RA/LdVRuvQHnDRqfe+
- Oihlo6m+omTzxsLCbGjfDpDL0pjejWptJwHB15RAsy1a6427AKGXNKK0fi9rgdOhLhc8OK
- FTyKcZ7691yRArHtZ3fMvTfqPc0gKCs=
-Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
+ bh=VvJoMCrjjh+JNQxFjC4E01KLefYCTWA2xdh1MqF6oTQ=;
+ b=eoIQq8KWTUWfIo67ADUDnT1e3ski/Azj3Y8VER5TE3kG9YQcrE4RDH268EV36bZCHUTzRj
+ yhMf7fthKOKrNHqyDOkMwNFMCrif7iegNzfsml2kBa+akzdtG/K4QpJEFA2dQJlAH9HccP
+ 5vUYt+3XC5WgzY7cxgrPw6WLP6U4KSY=
+Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-245-Ltbpkw55OQapaFjtxP0Ozg-1; Thu,
- 29 Oct 2026 09:13:43 -0400
-X-MC-Unique: Ltbpkw55OQapaFjtxP0Ozg-1
-X-Mimecast-MFC-AGG-ID: Ltbpkw55OQapaFjtxP0Ozg_1793279622
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-552-XEO0NqHOOZKGTGRqNHDOPw-1; Thu,
+ 29 Oct 2026 09:13:59 -0400
+X-MC-Unique: XEO0NqHOOZKGTGRqNHDOPw-1
+X-Mimecast-MFC-AGG-ID: XEO0NqHOOZKGTGRqNHDOPw_1793279638
 Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
  (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id E03851800679; Thu, 29 Oct 2026 13:13:41 +0000 (UTC)
+ by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 226441955EB6; Thu, 29 Oct 2026 13:13:58 +0000 (UTC)
 Received: from berrange.csb (headnet04.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.116])
  by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 90AE13000735; Thu, 29 Oct 2026 13:13:39 +0000 (UTC)
+ id BF5FA3000723; Thu, 29 Oct 2026 13:13:55 +0000 (UTC)
 From: =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, Peter Maydell <peter.maydell@linaro.org>,
@@ -56,28 +56,28 @@ Cc: qemu-arm@nongnu.org, Peter Maydell <peter.maydell@linaro.org>,
  qemu-ppc@nongnu.org, qemu-block@nongnu.org, qemu-riscv@nongnu.org,
  qemu-s390x@nongnu.org,
  =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
-Subject: [PATCH v2 20/28] hw/mem: mark nvdimm,
- pc-dimm & spapr-nvdimm devices as secure
-Date: Thu, 29 Oct 2026 13:12:33 +0000
-Message-ID: <20261029131241.2275706-21-berrange@redhat.com>
+Subject: [PATCH v2 26/28] hw/i386: mark vmmouse / vmport as secure
+Date: Thu, 29 Oct 2026 13:12:39 +0000
+Message-ID: <20261029131241.2275706-27-berrange@redhat.com>
 In-Reply-To: <20261029131241.2275706-1-berrange@redhat.com>
 References: <20261029131241.2275706-1-berrange@redhat.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
-X-Mimecast-MFC-PROC-ID: g_Ii3sT2vxnVdZY_BFtUcYYpmB5WOugh88ccHy7z1jk_1793279622
+X-Mimecast-MFC-PROC-ID: OeHNHQ3SEFhhYLgyHBBTD4e6lF5n7Oi-gmBkvppxv7g_1793279638
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=berrange@redhat.com;
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=berrange@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
-X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+X-Spam_score_int: 5
+X-Spam_score: 0.5
+X-Spam_bar: /
+X-Spam_report: (0.5 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ RCVD_IN_SBL_CSS=3.335, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -92,57 +92,44 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS autolearn=unavailable autolearn_force=no version=4.0.1
+	SPF_PASS autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-These devices are used in virutalization scenarios to support memory
-hotplug and other uses cases.
+These paravirtualized devices are relevant to virtualization
+use cases and used by the i440fx/q35 machine boards.
 
-Acked-by: Marc-André Lureau <marcandre.lureau@redhat.com>
+Reviewed-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
 ---
- hw/mem/nvdimm.c       | 1 +
- hw/mem/pc-dimm.c      | 1 +
- hw/ppc/spapr_nvdimm.c | 1 +
- 3 files changed, 3 insertions(+)
+ hw/i386/vmmouse.c | 1 +
+ hw/i386/vmport.c  | 1 +
+ 2 files changed, 2 insertions(+)
 
-diff --git a/hw/mem/nvdimm.c b/hw/mem/nvdimm.c
-index cf8a4d8c5f2..9a575798452 100644
---- a/hw/mem/nvdimm.c
-+++ b/hw/mem/nvdimm.c
-@@ -275,6 +275,7 @@ static const TypeInfo nvdimm_info = {
-     .instance_size = sizeof(NVDIMMDevice),
-     .instance_init = nvdimm_init,
-     .instance_finalize = nvdimm_finalize,
+diff --git a/hw/i386/vmmouse.c b/hw/i386/vmmouse.c
+index e289bce8e2e..612e7f7d3b6 100644
+--- a/hw/i386/vmmouse.c
++++ b/hw/i386/vmmouse.c
+@@ -390,6 +390,7 @@ static const TypeInfo vmmouse_info = {
+     .parent        = TYPE_ISA_DEVICE,
+     .instance_size = sizeof(VMMouseState),
+     .class_init    = vmmouse_class_initfn,
 +    .secure        = true,
  };
  
- static void nvdimm_register_types(void)
-diff --git a/hw/mem/pc-dimm.c b/hw/mem/pc-dimm.c
-index 68862926ee2..89fd06724ca 100644
---- a/hw/mem/pc-dimm.c
-+++ b/hw/mem/pc-dimm.c
-@@ -301,6 +301,7 @@ static const TypeInfo pc_dimm_info = {
-     .instance_init = pc_dimm_init,
-     .class_init    = pc_dimm_class_init,
-     .class_size    = sizeof(PCDIMMDeviceClass),
-+    .secure        = true,
-     .interfaces = (const InterfaceInfo[]) {
-         { TYPE_MEMORY_DEVICE },
-         { }
-diff --git a/hw/ppc/spapr_nvdimm.c b/hw/ppc/spapr_nvdimm.c
-index 542ed79497a..ae270168500 100644
---- a/hw/ppc/spapr_nvdimm.c
-+++ b/hw/ppc/spapr_nvdimm.c
-@@ -916,6 +916,7 @@ static TypeInfo spapr_nvdimm_info = {
-     .class_size    = sizeof(SPAPRNVDIMMClass),
-     .instance_size = sizeof(SpaprNVDIMMDevice),
-     .instance_init = spapr_nvdimm_init,
+ static void vmmouse_register_types(void)
+diff --git a/hw/i386/vmport.c b/hw/i386/vmport.c
+index 865e0e70db6..24c4fb27a33 100644
+--- a/hw/i386/vmport.c
++++ b/hw/i386/vmport.c
+@@ -301,6 +301,7 @@ static const TypeInfo vmport_info = {
+     .parent        = TYPE_ISA_DEVICE,
+     .instance_size = sizeof(VMPortState),
+     .class_init    = vmport_class_initfn,
 +    .secure        = true,
  };
  
- static void spapr_nvdimm_register_types(void)
+ static void vmport_register_types(void)
 -- 
 2.56.0
 
