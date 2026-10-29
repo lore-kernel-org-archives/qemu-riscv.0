@@ -1,21 +1,21 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E87BE606A31A
-	for <qemu-riscv@archiver.kernel.org>; Thu, 29 Oct 2026 19:46:52 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F0BDC606A31A
+	for <qemu-riscv@archiver.kernel.org>; Thu, 29 Oct 2026 19:46:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xMW4f-0000SU-IQ; Thu, 29 Oct 2026 15:46:10 -0400
+	id 1xMW4y-0000lP-8d; Thu, 29 Oct 2026 15:46:28 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <rishab@rispop.dev>)
- id 1xMV1G-0008Jc-UW; Thu, 29 Oct 2026 14:38:34 -0400
-Received: from mail-08.mail-europe.com ([57.129.93.249])
+ (Exim 4.90_1) (envelope-from <rishab@rispop.dev>) id 1xMV1E-0008G5-VV
+ for qemu-riscv@nongnu.org; Thu, 29 Oct 2026 14:38:34 -0400
+Received: from mail-07.mail-europe.com ([37.187.220.204])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <rishab@rispop.dev>)
- id 1xMV1D-00014S-5R; Thu, 29 Oct 2026 14:38:33 -0400
-X-Pm-Submission-Id: 4jFtK050Rtz1DFSk
+ (Exim 4.90_1) (envelope-from <rishab@rispop.dev>) id 1xMV1C-00014O-SV
+ for qemu-riscv@nongnu.org; Thu, 29 Oct 2026 14:38:32 -0400
+X-Pm-Submission-Id: 4jFtJs5WMLz1DFSl
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
@@ -26,23 +26,20 @@ Cc: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
  Tarun Patanjali <tarun.patanjali@utexas.edu>,
  Chris Elwood <christopher.elwood2024@gmail.com>,
  Rishab Pradeep <rishab@rispop.dev>
-Subject: [PATCH 1/2] target/riscv: Factor out pointer-masking address
- adjustment
-Date: Thu, 29 Oct 2026 13:37:50 -0500
-Message-ID: <20261029183751.11143-2-rishab@rispop.dev>
+Subject: [PATCH 0/2] target/riscv: Apply pointer masking to SSPUSH/SSPOPCHK
+Date: Thu, 29 Oct 2026 13:37:49 -0500
+Message-ID: <20261029183751.11143-1-rishab@rispop.dev>
 X-Mailer: git-send-email 2.54.0
-In-Reply-To: <20261029183751.11143-1-rishab@rispop.dev>
-References: <20261029183751.11143-1-rishab@rispop.dev>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=57.129.93.249; envelope-from=rishab@rispop.dev;
- helo=mail-08.mail-europe.com
-X-Spam_score_int: -25
-X-Spam_score: -2.6
-X-Spam_bar: --
-X-Spam_report: (-2.6 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_LOW=-0.7,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=37.187.220.204; envelope-from=rishab@rispop.dev;
+ helo=mail-07.mail-europe.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-Mailman-Approved-At: Thu, 29 Oct 2026 15:46:04 -0400
 X-BeenThere: qemu-riscv@nongnu.org
@@ -57,73 +54,36 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Reply-to:  Rishab Pradeep <rishab@rispop.dev>
 From:  Rishab Pradeep via <qemu-riscv@nongnu.org>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-17.0 required=3.0 tests=BAYES_00,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-17.0 required=3.0 tests=BAYES_00,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,
+	USER_AGENT_GIT autolearn=unavailable autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Move the addr_xl/addr_signed extract, which applies address-width
-truncation and the pointer-masking ignore transformation, out of
-get_address() and get_address_indexed() into a new helper,
-gen_pm_adjust_addr(), so it can be applied to addresses that are not
-formed from a GPR. No functional change.
+SSPUSH and SSPOPCHK form their effective address from ssp rather than
+a GPR, so they bypass get_address() and never apply the pointer-masking
+ignore transformation. With pointer masking enabled, a tagged ssp
+raises a store/AMO page fault, whereas Spike, Sail and Whisper mask
+the access.
 
-Co-developed-by: Tarun Patanjali <tarun.patanjali@utexas.edu>
-Signed-off-by: Tarun Patanjali <tarun.patanjali@utexas.edu>
-Co-developed-by: Chris Elwood <christopher.elwood2024@gmail.com>
-Signed-off-by: Chris Elwood <christopher.elwood2024@gmail.com>
-Signed-off-by: Rishab Pradeep <rishab@rispop.dev>
----
- target/riscv/tcg/translate.c | 21 +++++++++++----------
- 1 file changed, 11 insertions(+), 10 deletions(-)
+Patch 1 factors the address adjustment out of get_address() and
+get_address_indexed() into gen_pm_adjust_addr(), with no functional
+change. Patch 2 applies it to the SSPUSH/SSPOPCHK address. ssp is still
+written back unmasked, and the SSPOPCHK value comparison is unchanged.
 
-diff --git a/target/riscv/tcg/translate.c b/target/riscv/tcg/translate.c
-index 79b0f444ef..72d36764d8 100644
---- a/target/riscv/tcg/translate.c
-+++ b/target/riscv/tcg/translate.c
-@@ -654,6 +654,15 @@ static void gen_jal(DisasContext *ctx, int rd, target_ulong imm)
-     ctx->base.is_jmp = DISAS_NORETURN;
- }
- 
-+static void gen_pm_adjust_addr(DisasContext *ctx, TCGv dest, TCGv src)
-+{
-+    if (ctx->addr_signed) {
-+        tcg_gen_sextract_tl(dest, src, 0, ctx->addr_xl);
-+    } else {
-+        tcg_gen_extract_tl(dest, src, 0, ctx->addr_xl);
-+    }
-+}
-+
- /* Compute a canonical address from a register plus offset. */
- static TCGv get_address(DisasContext *ctx, int rs1, int imm)
- {
-@@ -661,11 +670,7 @@ static TCGv get_address(DisasContext *ctx, int rs1, int imm)
-     TCGv src1 = get_gpr(ctx, rs1, EXT_NONE);
- 
-     tcg_gen_addi_tl(addr, src1, imm);
--    if (ctx->addr_signed) {
--        tcg_gen_sextract_tl(addr, addr, 0, ctx->addr_xl);
--    } else {
--        tcg_gen_extract_tl(addr, addr, 0, ctx->addr_xl);
--    }
-+    gen_pm_adjust_addr(ctx, addr, addr);
- 
-     return addr;
- }
-@@ -677,11 +682,7 @@ static TCGv get_address_indexed(DisasContext *ctx, int rs1, TCGv offs)
-     TCGv src1 = get_gpr(ctx, rs1, EXT_NONE);
- 
-     tcg_gen_add_tl(addr, src1, offs);
--    if (ctx->addr_signed) {
--        tcg_gen_sextract_tl(addr, addr, 0, ctx->addr_xl);
--    } else {
--        tcg_gen_extract_tl(addr, addr, 0, ctx->addr_xl);
--    }
-+    gen_pm_adjust_addr(ctx, addr, addr);
- 
-     return addr;
- }
+Tested with the reproducer from the issue; all four cases now match
+Spike.
+
+Resolves: https://gitlab.com/qemu-project/qemu/-/issues/4758
+
+Rishab Pradeep (2):
+  target/riscv: Factor out pointer-masking address adjustment
+  target/riscv: Apply pointer masking to SSPUSH/SSPOPCHK addresses
+
+ .../tcg/insn_trans/trans_rvzicfiss.c.inc      |  8 +++++--
+ target/riscv/tcg/translate.c                  | 21 ++++++++++---------
+ 2 files changed, 17 insertions(+), 12 deletions(-)
+
 -- 
 2.54.0 (Apple Git-157)
 
