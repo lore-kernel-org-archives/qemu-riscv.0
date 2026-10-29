@@ -1,52 +1,52 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 04B9E606A31C
-	for <qemu-riscv@archiver.kernel.org>; Thu, 29 Oct 2026 13:17:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4CF87606A31D
+	for <qemu-riscv@archiver.kernel.org>; Thu, 29 Oct 2026 13:17:31 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=QkdgK/Ml
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=OU9x6/bc
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xMPxL-0000Wr-IS; Thu, 29 Oct 2026 09:14:11 -0400
+	id 1xMPzc-00033f-6I; Thu, 29 Oct 2026 09:16:32 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1xMPwN-0007on-KN
- for qemu-riscv@nongnu.org; Thu, 29 Oct 2026 09:13:12 -0400
+ id 1xMPwi-00081a-Tg
+ for qemu-riscv@nongnu.org; Thu, 29 Oct 2026 09:13:33 -0400
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1xMPwI-00069t-Ll
- for qemu-riscv@nongnu.org; Thu, 29 Oct 2026 09:13:11 -0400
+ id 1xMPwf-0006IG-2f
+ for qemu-riscv@nongnu.org; Thu, 29 Oct 2026 09:13:32 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1793279585;
+ s=mimecast20190719; t=1793279608;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=aDWXGByOW2YWWxdxeUHw8JQ2wXKcqd61jfr/cBFrKF0=;
- b=QkdgK/MlarZwItf+0CIPgomtXoLzCzMLEVYe5u8GAbsa4NGLaFwffdCR0lTmeduCJrCXGf
- zd0XiwHDrFqAFv5wyWhCqFW0l+sPDBpHJq7ivEr5lXgQF+70mbgdi7jxYfo1hqU1wxRwe1
- wXiVj2pugThuBmM2Rl70y4RZEtIJh34=
-Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ bh=s7F37b6K6kgwiXdK4OpltRO1M/vmv/av+HM+jgRn9Z0=;
+ b=OU9x6/bcjZv/JcWUJX3xCmf2C8mSe+PdI/j9B21Pea1SXYkQHuV1zDQdILPCzzLfhmoXEA
+ S21pur65SdC5AYSfzp+YEWpbMoS2SJ47mt6p8PBVQ8vmpRV/L96aQJtUaBATFry0sCnbB8
+ /P6NbahNCEVRNFnGC3j9LH7s6dXm1kE=
+Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-676-0TWUQCclOfGxETMIdUSAIA-1; Thu,
- 29 Oct 2026 09:13:04 -0400
-X-MC-Unique: 0TWUQCclOfGxETMIdUSAIA-1
-X-Mimecast-MFC-AGG-ID: 0TWUQCclOfGxETMIdUSAIA_1793279583
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-634-wW3mJpqQOn6QRvTxbfqRJQ-1; Thu,
+ 29 Oct 2026 09:13:12 -0400
+X-MC-Unique: wW3mJpqQOn6QRvTxbfqRJQ-1
+X-Mimecast-MFC-AGG-ID: wW3mJpqQOn6QRvTxbfqRJQ_1793279591
 Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
  (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 0A0F21956041; Thu, 29 Oct 2026 13:13:03 +0000 (UTC)
+ by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 32C1718005B2; Thu, 29 Oct 2026 13:13:11 +0000 (UTC)
 Received: from berrange.csb (headnet04.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.116])
  by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id AB18C3000723; Thu, 29 Oct 2026 13:13:00 +0000 (UTC)
+ id AC5B73000723; Thu, 29 Oct 2026 13:13:08 +0000 (UTC)
 From: =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, Peter Maydell <peter.maydell@linaro.org>,
@@ -55,30 +55,29 @@ Cc: qemu-arm@nongnu.org, Peter Maydell <peter.maydell@linaro.org>,
  =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
  qemu-ppc@nongnu.org, qemu-block@nongnu.org, qemu-riscv@nongnu.org,
  qemu-s390x@nongnu.org,
- =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
-Subject: [PATCH v2 06/28] hw/xen: mark all Xen related object types as being
- secure
-Date: Thu, 29 Oct 2026 13:12:19 +0000
-Message-ID: <20261029131241.2275706-7-berrange@redhat.com>
+ =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
+ Cornelia Huck <cohuck@redhat.com>
+Subject: [PATCH v2 09/28] hw/watchdog: mark some watchdog devices as secure
+Date: Thu, 29 Oct 2026 13:12:22 +0000
+Message-ID: <20261029131241.2275706-10-berrange@redhat.com>
 In-Reply-To: <20261029131241.2275706-1-berrange@redhat.com>
 References: <20261029131241.2275706-1-berrange@redhat.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
-X-Mimecast-MFC-PROC-ID: gu2UUwI6CWO7K8DWs7p45gCZZAR3Zs7ipFOQqPiegyA_1793279583
+X-Mimecast-MFC-PROC-ID: D-lKcaOgkt6WOo_ZZjqUXos9nlaSwfYTVH9JyhsD8UE_1793279591
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=170.10.133.124; envelope-from=berrange@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: 5
-X-Spam_score: 0.5
-X-Spam_bar: /
-X-Spam_report: (0.5 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+X-Spam_score_int: -27
+X-Spam_score: -2.8
+X-Spam_bar: --
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
- RCVD_IN_SBL_CSS=3.335, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -97,163 +96,82 @@ X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-All Xen paravirtualized devices are intended to provide a host /
-guest security barrier, so mark all Xen object types as scure.
+The ib700, i6300esb, gwdt, spapr and diag288 watchdog devices are marked
+as secure since they have traditionally been, or are intended to be,
+used in virtualization use cases on x86, arm, ppc and s390x architectures
+respectively. Other watchdogs are primarily for emulation.
 
 Acked-by: Marc-André Lureau <marcandre.lureau@redhat.com>
+Acked-by: Cornelia Huck <cohuck@redhat.com> #diag288
 Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
 ---
- hw/block/xen-block.c        | 2 ++
- hw/char/xen_console.c       | 1 +
- hw/i386/xen/xen-hvm.c       | 1 +
- hw/i386/xen/xen_platform.c  | 1 +
- hw/i386/xen/xen_pvdevice.c  | 1 +
- hw/net/xen_nic.c            | 1 +
- hw/xen/xen-bus.c            | 2 ++
- hw/xen/xen-legacy-backend.c | 3 +++
- hw/xen/xen_pt.c             | 1 +
- 9 files changed, 13 insertions(+)
+ hw/watchdog/sbsa_gwdt.c      | 1 +
+ hw/watchdog/spapr_watchdog.c | 1 +
+ hw/watchdog/wdt_diag288.c    | 1 +
+ hw/watchdog/wdt_i6300esb.c   | 1 +
+ hw/watchdog/wdt_ib700.c      | 1 +
+ 5 files changed, 5 insertions(+)
 
-diff --git a/hw/block/xen-block.c b/hw/block/xen-block.c
-index 474c12fe4ac..6e5ae2b52d9 100644
---- a/hw/block/xen-block.c
-+++ b/hw/block/xen-block.c
-@@ -740,6 +740,7 @@ static const TypeInfo xen_disk_type_info = {
-     .parent = TYPE_XEN_BLOCK_DEVICE,
-     .instance_size = sizeof(XenDiskDevice),
-     .class_init = xen_disk_class_init,
-+    .secure = true,
- };
- 
- static void xen_cdrom_unrealize(XenBlockDevice *blockdev)
-@@ -787,6 +788,7 @@ static const TypeInfo xen_cdrom_type_info = {
-     .parent = TYPE_XEN_BLOCK_DEVICE,
-     .instance_size = sizeof(XenCDRomDevice),
-     .class_init = xen_cdrom_class_init,
-+    .secure = true,
- };
- 
- static void xen_block_register_types(void)
-diff --git a/hw/char/xen_console.c b/hw/char/xen_console.c
-index bdeb76dc870..df6a708494d 100644
---- a/hw/char/xen_console.c
-+++ b/hw/char/xen_console.c
-@@ -513,6 +513,7 @@ static const TypeInfo xen_console_type_info = {
-     .parent = TYPE_XEN_DEVICE,
-     .instance_size = sizeof(XenConsole),
-     .class_init = xen_console_class_init,
-+    .secure = true,
- };
- 
- static void xen_console_register_types(void)
-diff --git a/hw/i386/xen/xen-hvm.c b/hw/i386/xen/xen-hvm.c
-index b2378fe3f05..f7a154b8307 100644
---- a/hw/i386/xen/xen-hvm.c
-+++ b/hw/i386/xen/xen-hvm.c
-@@ -792,6 +792,7 @@ static const TypeInfo xen_i8259_type_infos[] = {
-         .name = TYPE_XEN_I8259_PIC,
-         .parent = TYPE_DEVICE,
-         .instance_init = xen_i8259_pic_init,
-+        .secure = true,
-     },
- };
- 
-diff --git a/hw/i386/xen/xen_platform.c b/hw/i386/xen/xen_platform.c
-index c8b852be0cc..ec0084d6fb8 100644
---- a/hw/i386/xen/xen_platform.c
-+++ b/hw/i386/xen/xen_platform.c
-@@ -604,6 +604,7 @@ static const TypeInfo xen_platform_info = {
-     .parent        = TYPE_PCI_DEVICE,
-     .instance_size = sizeof(PCIXenPlatformState),
-     .class_init    = xen_platform_class_init,
-+    .secure        = true,
-     .interfaces = (const InterfaceInfo[]) {
-         { INTERFACE_CONVENTIONAL_PCI_DEVICE },
-         { },
-diff --git a/hw/i386/xen/xen_pvdevice.c b/hw/i386/xen/xen_pvdevice.c
-index fab26a06af1..74636046d0c 100644
---- a/hw/i386/xen/xen_pvdevice.c
-+++ b/hw/i386/xen/xen_pvdevice.c
-@@ -139,6 +139,7 @@ static const TypeInfo xen_pv_type_info = {
-     .parent        = TYPE_PCI_DEVICE,
-     .instance_size = sizeof(XenPVDevice),
-     .class_init    = xen_pv_class_init,
-+    .secure        = true,
-     .interfaces = (const InterfaceInfo[]) {
-         { INTERFACE_CONVENTIONAL_PCI_DEVICE },
-         { },
-diff --git a/hw/net/xen_nic.c b/hw/net/xen_nic.c
-index f4d0b060130..e615303da6a 100644
---- a/hw/net/xen_nic.c
-+++ b/hw/net/xen_nic.c
-@@ -579,6 +579,7 @@ static const TypeInfo xen_net_type_info = {
-     .parent = TYPE_XEN_DEVICE,
-     .instance_size = sizeof(XenNetDev),
-     .class_init = xen_netdev_class_init,
-+    .secure = true,
- };
- 
- static void xen_net_register_types(void)
-diff --git a/hw/xen/xen-bus.c b/hw/xen/xen-bus.c
-index 8def3bb68bc..17bbbe2ea71 100644
---- a/hw/xen/xen-bus.c
-+++ b/hw/xen/xen-bus.c
-@@ -404,6 +404,7 @@ static const TypeInfo xen_bus_type_info = {
-     .instance_size = sizeof(XenBus),
-     .class_size = sizeof(XenBusClass),
-     .class_init = xen_bus_class_init,
-+    .secure = true,
-     .interfaces = (const InterfaceInfo[]) {
-         { TYPE_HOTPLUG_HANDLER },
-         { }
-@@ -1141,6 +1142,7 @@ static const TypeInfo xen_bridge_type_info = {
-     .name = TYPE_XEN_BRIDGE,
+diff --git a/hw/watchdog/sbsa_gwdt.c b/hw/watchdog/sbsa_gwdt.c
+index 1834dc8db83..671eb26365f 100644
+--- a/hw/watchdog/sbsa_gwdt.c
++++ b/hw/watchdog/sbsa_gwdt.c
+@@ -340,6 +340,7 @@ static const TypeInfo wdt_sbsa_gwdt_info = {
      .parent = TYPE_SYS_BUS_DEVICE,
-     .instance_size = sizeof(XenBridge),
+     .name  = TYPE_WDT_SBSA,
+     .instance_size  = sizeof(SBSA_GWDTState),
 +    .secure = true,
  };
  
- static void xen_register_types(void)
-diff --git a/hw/xen/xen-legacy-backend.c b/hw/xen/xen-legacy-backend.c
-index 7977b527127..75f8ac7efde 100644
---- a/hw/xen/xen-legacy-backend.c
-+++ b/hw/xen/xen-legacy-backend.c
-@@ -648,6 +648,7 @@ static const TypeInfo xendev_type_info = {
-     .parent        = TYPE_DYNAMIC_SYS_BUS_DEVICE,
-     .class_init    = xendev_class_init,
-     .instance_size = sizeof(XenLegacyDevice),
+ static void wdt_sbsa_gwdt_register_types(void)
+diff --git a/hw/watchdog/spapr_watchdog.c b/hw/watchdog/spapr_watchdog.c
+index 5a72896066e..0e45e9b4a6a 100644
+--- a/hw/watchdog/spapr_watchdog.c
++++ b/hw/watchdog/spapr_watchdog.c
+@@ -269,6 +269,7 @@ static const TypeInfo spapr_wdt_info = {
+     .parent        = TYPE_DEVICE,
+     .instance_size = sizeof(SpaprWatchdog),
+     .class_init    = spapr_wdt_class_init,
 +    .secure        = true,
  };
  
- static void xen_sysbus_class_init(ObjectClass *klass, const void *data)
-@@ -661,6 +662,7 @@ static const TypeInfo xensysbus_info = {
-     .name       = TYPE_XENSYSBUS,
-     .parent     = TYPE_BUS,
-     .class_init = xen_sysbus_class_init,
-+    .secure     = true,
-     .interfaces = (const InterfaceInfo[]) {
-         { TYPE_HOTPLUG_HANDLER },
-         { }
-@@ -670,6 +672,7 @@ static const TypeInfo xensysbus_info = {
- static const TypeInfo xensysdev_info = {
-     .name          = TYPE_XENSYSDEV,
-     .parent        = TYPE_SYS_BUS_DEVICE,
-+    .secure        = true,
- };
- 
- static void xenbe_register_types(void)
-diff --git a/hw/xen/xen_pt.c b/hw/xen/xen_pt.c
-index 0fe9c0aada8..504c5593188 100644
---- a/hw/xen/xen_pt.c
-+++ b/hw/xen/xen_pt.c
-@@ -1079,6 +1079,7 @@ static const TypeInfo xen_pci_passthrough_info = {
-     .instance_finalize = xen_pci_passthrough_finalize,
-     .class_init = xen_pci_passthrough_class_init,
-     .class_size = sizeof(XenPTDeviceClass),
+ static void spapr_watchdog_register_types(void)
+diff --git a/hw/watchdog/wdt_diag288.c b/hw/watchdog/wdt_diag288.c
+index 1275353e8e5..85e4f56e1db 100644
+--- a/hw/watchdog/wdt_diag288.c
++++ b/hw/watchdog/wdt_diag288.c
+@@ -129,6 +129,7 @@ static const TypeInfo wdt_diag288_info = {
+     .name  = TYPE_WDT_DIAG288,
+     .instance_size  = sizeof(DIAG288State),
+     .class_size = sizeof(DIAG288Class),
 +    .secure = true,
-     .instance_init = xen_pci_passthrough_instance_init,
+ };
+ 
+ static void wdt_diag288_register_types(void)
+diff --git a/hw/watchdog/wdt_i6300esb.c b/hw/watchdog/wdt_i6300esb.c
+index 3aa01b8d68f..05aa20fab13 100644
+--- a/hw/watchdog/wdt_i6300esb.c
++++ b/hw/watchdog/wdt_i6300esb.c
+@@ -480,6 +480,7 @@ static const TypeInfo i6300esb_info = {
+     .parent        = TYPE_PCI_DEVICE,
+     .instance_size = sizeof(I6300State),
+     .class_init    = i6300esb_class_init,
++    .secure        = true,
      .interfaces = (const InterfaceInfo[]) {
          { INTERFACE_CONVENTIONAL_PCI_DEVICE },
+         { },
+diff --git a/hw/watchdog/wdt_ib700.c b/hw/watchdog/wdt_ib700.c
+index 51a26a4cbbc..8bf2b2fbf90 100644
+--- a/hw/watchdog/wdt_ib700.c
++++ b/hw/watchdog/wdt_ib700.c
+@@ -144,6 +144,7 @@ static const TypeInfo wdt_ib700_info = {
+     .parent        = TYPE_ISA_DEVICE,
+     .instance_size = sizeof(IB700State),
+     .class_init    = wdt_ib700_class_init,
++    .secure        = true,
+ };
+ 
+ static void wdt_ib700_register_types(void)
 -- 
 2.56.0
 
