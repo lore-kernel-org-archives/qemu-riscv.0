@@ -1,52 +1,52 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9C14E606A31A
-	for <qemu-riscv@archiver.kernel.org>; Thu, 29 Oct 2026 13:17:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 839EF606A31A
+	for <qemu-riscv@archiver.kernel.org>; Thu, 29 Oct 2026 13:17:54 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=aWwiFVoD
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=czD2YFzy
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xMPze-0003GG-3u; Thu, 29 Oct 2026 09:16:34 -0400
+	id 1xMPze-0003Ix-GA; Thu, 29 Oct 2026 09:16:34 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1xMPwh-00081V-LM
- for qemu-riscv@nongnu.org; Thu, 29 Oct 2026 09:13:33 -0400
+ id 1xMPwr-0008CW-Ht
+ for qemu-riscv@nongnu.org; Thu, 29 Oct 2026 09:13:42 -0400
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1xMPwd-0006HO-OV
- for qemu-riscv@nongnu.org; Thu, 29 Oct 2026 09:13:30 -0400
+ id 1xMPwo-0006Le-KL
+ for qemu-riscv@nongnu.org; Thu, 29 Oct 2026 09:13:41 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1793279606;
+ s=mimecast20190719; t=1793279617;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=ZqvFAlHBBdzci0WB+ufjXYPcJTgtNRQmm5ybFSnF37s=;
- b=aWwiFVoDL1GPJX95uAUJ9lzX9Oqqq6eweZJgO6muAyW8YX6pbJ+ycgwH9TpHKbOFb2cFkc
- R/hS8NJ3BM4FpjCRJjgBRGuaijL1+yXbJdISc2ifPeWF85D7ZHO5lwnjXktCccwrpLlwYh
- T3qfOr0kMLPKYAfBNcapJf3ZwXjv25M=
-Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ bh=Sh6xU1JvhH1vqcCiCy4q2YvGZjc21RnnFt/+rNrPduk=;
+ b=czD2YFzyhafGJbTDQIGvCtrAeJM6vtUYRsxje6Gn75wuhOPLne6ggLe1P9V0rupmiIYSZ7
+ 2mmTCZVNP7PpGFwh3VpdisMKvt62rkABFrt01hCwu6x3onWr+5qNBCETO12I7/8zl4ib30
+ E8m3s0iRD7zu+/DMk4Np61jdmqYLwYI=
+Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-253-hWAsStChPaCgRIXLFxlqsw-1; Thu,
- 29 Oct 2026 09:13:23 -0400
-X-MC-Unique: hWAsStChPaCgRIXLFxlqsw-1
-X-Mimecast-MFC-AGG-ID: hWAsStChPaCgRIXLFxlqsw_1793279602
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-679-mnsoXUb0Pt-3vIIiE1OlfA-1; Thu,
+ 29 Oct 2026 09:13:27 -0400
+X-MC-Unique: mnsoXUb0Pt-3vIIiE1OlfA-1
+X-Mimecast-MFC-AGG-ID: mnsoXUb0Pt-3vIIiE1OlfA_1793279605
 Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
  (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 26A0F1955F44; Thu, 29 Oct 2026 13:13:22 +0000 (UTC)
+ by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 9C7401802164; Thu, 29 Oct 2026 13:13:25 +0000 (UTC)
 Received: from berrange.csb (headnet04.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.116])
  by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id B50323000723; Thu, 29 Oct 2026 13:13:19 +0000 (UTC)
+ id 607033000723; Thu, 29 Oct 2026 13:13:22 +0000 (UTC)
 From: =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, Peter Maydell <peter.maydell@linaro.org>,
@@ -55,29 +55,30 @@ Cc: qemu-arm@nongnu.org, Peter Maydell <peter.maydell@linaro.org>,
  =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
  qemu-ppc@nongnu.org, qemu-block@nongnu.org, qemu-riscv@nongnu.org,
  qemu-s390x@nongnu.org,
- =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
-Subject: [PATCH v2 13/28] hw: define most common PCI types as secure
-Date: Thu, 29 Oct 2026 13:12:26 +0000
-Message-ID: <20261029131241.2275706-14-berrange@redhat.com>
+ =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
+ Cornelia Huck <cohuck@redhat.com>
+Subject: [PATCH v2 14/28] hw/pci-host: mark common x86, ppc,
+ arm and s390 PCI hosts as secure
+Date: Thu, 29 Oct 2026 13:12:27 +0000
+Message-ID: <20261029131241.2275706-15-berrange@redhat.com>
 In-Reply-To: <20261029131241.2275706-1-berrange@redhat.com>
 References: <20261029131241.2275706-1-berrange@redhat.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
-X-Mimecast-MFC-PROC-ID: fw8ygsDjGfEll69kfaSgqM7oqUqCNyWkkHir6ZyF43g_1793279602
+X-Mimecast-MFC-PROC-ID: s6ML5QC9OlqX5usescVXKVFemsTtSa6zRP6ZB-KoNKg_1793279605
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=170.10.129.124; envelope-from=berrange@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: 5
-X-Spam_score: 0.5
-X-Spam_bar: /
-X-Spam_report: (0.5 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+X-Spam_score_int: -27
+X-Spam_score: -2.8
+X-Spam_bar: --
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
- RCVD_IN_SBL_CSS=3.335, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -96,192 +97,281 @@ X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Essentially all PCI infrastructure is in scope for the virtualization
-use case, aside from the niche simba bridge and the CXL related pieces.
+Mark the PCI hosts secure if they are used from machine types
+that are considered for the virtualization use case.
 
+There is also a special case for the 'remote' type and the
+Xen passthrough type.
+
+Acked-by: Marc-André Lureau <marcandre.lureau@redhat.com>
+Acked-by: Cornelia Huck <cohuck@redhat.com> #s390
 Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
 ---
- hw/pci-bridge/gen_pcie_root_port.c  | 1 +
- hw/pci-bridge/i82801b11.c           | 1 +
- hw/pci-bridge/ioh3420.c             | 1 +
- hw/pci-bridge/pci_bridge_dev.c      | 2 ++
- hw/pci-bridge/pci_expander_bridge.c | 5 +++++
- hw/pci-bridge/pcie_pci_bridge.c     | 1 +
- hw/pci-bridge/xio3130_downstream.c  | 1 +
- hw/pci-bridge/xio3130_upstream.c    | 1 +
- hw/pci/pci.c                        | 4 ++++
- 9 files changed, 17 insertions(+)
+ hw/pci-host/gpex.c          | 2 ++
+ hw/pci-host/i440fx.c        | 2 ++
+ hw/pci-host/pnv_phb.c       | 2 ++
+ hw/pci-host/pnv_phb3.c      | 3 +++
+ hw/pci-host/pnv_phb3_msi.c  | 1 +
+ hw/pci-host/pnv_phb3_pbcq.c | 1 +
+ hw/pci-host/pnv_phb4.c      | 4 +++-
+ hw/pci-host/pnv_phb4_pec.c  | 1 +
+ hw/pci-host/q35.c           | 2 ++
+ hw/pci-host/remote.c        | 1 +
+ hw/pci-host/xen_igd_pt.c    | 1 +
+ hw/ppc/spapr_pci.c          | 1 +
+ hw/s390x/s390-pci-bus.c     | 4 ++++
+ 13 files changed, 24 insertions(+), 1 deletion(-)
 
-diff --git a/hw/pci-bridge/gen_pcie_root_port.c b/hw/pci-bridge/gen_pcie_root_port.c
-index 5434d693d92..65d29eab38e 100644
---- a/hw/pci-bridge/gen_pcie_root_port.c
-+++ b/hw/pci-bridge/gen_pcie_root_port.c
-@@ -161,6 +161,7 @@ static const TypeInfo gen_rp_dev_info = {
-     .parent        = TYPE_PCIE_ROOT_PORT,
-     .instance_size = sizeof(GenPCIERootPort),
-     .class_init    = gen_rp_dev_class_init,
-+    .secure        = true,
+diff --git a/hw/pci-host/gpex.c b/hw/pci-host/gpex.c
+index e66784ce516..38197a89454 100644
+--- a/hw/pci-host/gpex.c
++++ b/hw/pci-host/gpex.c
+@@ -220,6 +220,7 @@ static const TypeInfo gpex_host_info = {
+     .instance_size = sizeof(GPEXHost),
+     .instance_init = gpex_host_initfn,
+     .class_init = gpex_host_class_init,
++    .secure = true,
  };
  
-  static void gen_rp_register_types(void)
-diff --git a/hw/pci-bridge/i82801b11.c b/hw/pci-bridge/i82801b11.c
-index 1d73c14c1f8..f702b20bcd5 100644
---- a/hw/pci-bridge/i82801b11.c
-+++ b/hw/pci-bridge/i82801b11.c
-@@ -107,6 +107,7 @@ static const TypeInfo i82801b11_bridge_info = {
-     .parent        = TYPE_PCI_BRIDGE,
-     .instance_size = sizeof(I82801b11Bridge),
-     .class_init    = i82801b11_bridge_class_init,
+ /****************************************************************************
+@@ -259,6 +260,7 @@ static const TypeInfo gpex_root_info = {
+     .parent = TYPE_PCI_DEVICE,
+     .instance_size = sizeof(GPEXRootState),
+     .class_init = gpex_root_class_init,
++    .secure = true,
+     .interfaces = (const InterfaceInfo[]) {
+         { INTERFACE_CONVENTIONAL_PCI_DEVICE },
+         { },
+diff --git a/hw/pci-host/i440fx.c b/hw/pci-host/i440fx.c
+index c1982f7962a..1c5a4aba1b3 100644
+--- a/hw/pci-host/i440fx.c
++++ b/hw/pci-host/i440fx.c
+@@ -352,6 +352,7 @@ static const TypeInfo i440fx_info = {
+     .parent        = TYPE_PCI_DEVICE,
+     .instance_size = sizeof(PCII440FXState),
+     .class_init    = i440fx_class_init,
 +    .secure        = true,
      .interfaces = (const InterfaceInfo[]) {
          { INTERFACE_CONVENTIONAL_PCI_DEVICE },
          { },
-diff --git a/hw/pci-bridge/ioh3420.c b/hw/pci-bridge/ioh3420.c
-index bba640f495b..2c4882c4cf1 100644
---- a/hw/pci-bridge/ioh3420.c
-+++ b/hw/pci-bridge/ioh3420.c
-@@ -120,6 +120,7 @@ static const TypeInfo ioh3420_info = {
-     .name          = "ioh3420",
-     .parent        = TYPE_PCIE_ROOT_PORT,
-     .class_init    = ioh3420_class_init,
+@@ -410,6 +411,7 @@ static const TypeInfo i440fx_pcihost_info = {
+     .instance_size = sizeof(I440FXState),
+     .instance_init = i440fx_pcihost_initfn,
+     .class_init    = i440fx_pcihost_class_init,
 +    .secure        = true,
  };
  
- static void ioh3420_register_types(void)
-diff --git a/hw/pci-bridge/pci_bridge_dev.c b/hw/pci-bridge/pci_bridge_dev.c
-index bc53bcb69d8..86e8daaa068 100644
---- a/hw/pci-bridge/pci_bridge_dev.c
-+++ b/hw/pci-bridge/pci_bridge_dev.c
-@@ -268,6 +268,7 @@ static const TypeInfo pci_bridge_dev_info = {
-     .instance_size     = sizeof(PCIBridgeDev),
-     .class_init        = pci_bridge_dev_class_init,
-     .instance_finalize = pci_bridge_dev_instance_finalize,
-+    .secure            = true,
+ static void i440fx_register_types(void)
+diff --git a/hw/pci-host/pnv_phb.c b/hw/pci-host/pnv_phb.c
+index 0b556d1bf5c..bc8313d2cd0 100644
+--- a/hw/pci-host/pnv_phb.c
++++ b/hw/pci-host/pnv_phb.c
+@@ -333,6 +333,7 @@ static const TypeInfo pnv_phb_type_info = {
+     .parent        = TYPE_PCIE_HOST_BRIDGE,
+     .instance_size = sizeof(PnvPHB),
+     .class_init    = pnv_phb_class_init,
++    .secure        = true,
+ };
+ 
+ static const TypeInfo pnv_phb_root_port_info = {
+@@ -340,6 +341,7 @@ static const TypeInfo pnv_phb_root_port_info = {
+     .parent        = TYPE_PCIE_ROOT_PORT,
+     .instance_size = sizeof(PnvPHBRootPort),
+     .class_init    = pnv_phb_root_port_class_init,
++    .secure        = true,
+ };
+ 
+ static void pnv_phb_register_types(void)
+diff --git a/hw/pci-host/pnv_phb3.c b/hw/pci-host/pnv_phb3.c
+index db061c134e9..abf43e3226d 100644
+--- a/hw/pci-host/pnv_phb3.c
++++ b/hw/pci-host/pnv_phb3.c
+@@ -910,6 +910,7 @@ static const TypeInfo pnv_phb3_iommu_memory_region_info = {
+     .parent = TYPE_IOMMU_MEMORY_REGION,
+     .name = TYPE_PNV_PHB3_IOMMU_MEMORY_REGION,
+     .class_init = pnv_phb3_iommu_memory_region_class_init,
++    .secure = true,
+ };
+ 
+ /*
+@@ -1123,6 +1124,7 @@ static const TypeInfo pnv_phb3_type_info = {
+     .instance_size = sizeof(PnvPHB3),
+     .class_init    = pnv_phb3_class_init,
+     .instance_init = pnv_phb3_instance_init,
++    .secure        = true,
+ };
+ 
+ static void pnv_phb3_root_bus_get_prop(Object *obj, Visitor *v,
+@@ -1186,6 +1188,7 @@ static const TypeInfo pnv_phb3_root_bus_info = {
+     .parent = TYPE_PCIE_BUS,
+     .instance_size = sizeof(PnvPHB3RootBus),
+     .class_init = pnv_phb3_root_bus_class_init,
++    .secure = true,
+ };
+ 
+ static void pnv_phb3_register_types(void)
+diff --git a/hw/pci-host/pnv_phb3_msi.c b/hw/pci-host/pnv_phb3_msi.c
+index 66ba7b79134..5edc0d43eb0 100644
+--- a/hw/pci-host/pnv_phb3_msi.c
++++ b/hw/pci-host/pnv_phb3_msi.c
+@@ -306,6 +306,7 @@ static const TypeInfo phb3_msi_info = {
+     .class_init = phb3_msi_class_init,
+     .class_size = sizeof(ICSStateClass),
+     .instance_init = phb3_msi_instance_init,
++    .secure = true,
+ };
+ 
+ static void pnv_phb3_msi_register_types(void)
+diff --git a/hw/pci-host/pnv_phb3_pbcq.c b/hw/pci-host/pnv_phb3_pbcq.c
+index 1f7a149580d..687c8325158 100644
+--- a/hw/pci-host/pnv_phb3_pbcq.c
++++ b/hw/pci-host/pnv_phb3_pbcq.c
+@@ -354,6 +354,7 @@ static const TypeInfo pnv_pbcq_type_info = {
+     .instance_size = sizeof(PnvPBCQState),
+     .instance_init = phb3_pbcq_instance_init,
+     .class_init    = pnv_pbcq_class_init,
++    .secure        = true,
+     .interfaces    = (const InterfaceInfo[]) {
+         { TYPE_PNV_XSCOM_INTERFACE },
+         { }
+diff --git a/hw/pci-host/pnv_phb4.c b/hw/pci-host/pnv_phb4.c
+index ac09a0b034d..1a652110f5d 100644
+--- a/hw/pci-host/pnv_phb4.c
++++ b/hw/pci-host/pnv_phb4.c
+@@ -1388,6 +1388,7 @@ static const TypeInfo pnv_phb4_iommu_memory_region_info = {
+     .parent = TYPE_IOMMU_MEMORY_REGION,
+     .name = TYPE_PNV_PHB4_IOMMU_MEMORY_REGION,
+     .class_init = pnv_phb4_iommu_memory_region_class_init,
++    .secure = true,
+ };
+ 
+ /*
+@@ -1729,13 +1730,13 @@ static const TypeInfo pnv_phb4_type_info = {
+     .instance_init = pnv_phb4_instance_init,
+     .instance_size = sizeof(PnvPHB4),
+     .class_init    = pnv_phb4_class_init,
++    .secure        = true,
+     .interfaces = (const InterfaceInfo[]) {
+             { TYPE_XIVE_NOTIFIER },
+             { },
+     }
+ };
+ 
+-
+ static void pnv_phb4_root_bus_get_prop(Object *obj, Visitor *v,
+                                        const char *name,
+                                        void *opaque, Error **errp)
+@@ -1797,6 +1798,7 @@ static const TypeInfo pnv_phb4_root_bus_info = {
+     .parent = TYPE_PCIE_BUS,
+     .instance_size = sizeof(PnvPHB4RootBus),
+     .class_init = pnv_phb4_root_bus_class_init,
++    .secure = true,
+ };
+ 
+ static void pnv_phb4_register_types(void)
+diff --git a/hw/pci-host/pnv_phb4_pec.c b/hw/pci-host/pnv_phb4_pec.c
+index ee5cdc3e450..280a15e8df1 100644
+--- a/hw/pci-host/pnv_phb4_pec.c
++++ b/hw/pci-host/pnv_phb4_pec.c
+@@ -388,6 +388,7 @@ static const TypeInfo pnv_pec_type_info = {
+     .instance_size = sizeof(PnvPhb4PecState),
+     .class_init    = pnv_pec_class_init,
+     .class_size    = sizeof(PnvPhb4PecClass),
++    .secure        = true,
+     .interfaces    = (const InterfaceInfo[]) {
+         { TYPE_PNV_XSCOM_INTERFACE },
+         { }
+diff --git a/hw/pci-host/q35.c b/hw/pci-host/q35.c
+index f4556ad03a0..be38841df9e 100644
+--- a/hw/pci-host/q35.c
++++ b/hw/pci-host/q35.c
+@@ -268,6 +268,7 @@ static const TypeInfo q35_host_info = {
+     .instance_size = sizeof(Q35PCIHost),
+     .instance_init = q35_host_initfn,
+     .class_init = q35_host_class_init,
++    .secure = true,
+ };
+ 
+ /****************************************************************************
+@@ -718,6 +719,7 @@ static const TypeInfo mch_info = {
+     .parent = TYPE_PCI_DEVICE,
+     .instance_size = sizeof(MCHPCIState),
+     .class_init = mch_class_init,
++    .secure = true,
+     .interfaces = (const InterfaceInfo[]) {
+         { INTERFACE_CONVENTIONAL_PCI_DEVICE },
+         { },
+diff --git a/hw/pci-host/remote.c b/hw/pci-host/remote.c
+index 9ea95fac6e6..a58fc39bded 100644
+--- a/hw/pci-host/remote.c
++++ b/hw/pci-host/remote.c
+@@ -63,6 +63,7 @@ static const TypeInfo remote_pcihost_info = {
+     .parent = TYPE_PCIE_HOST_BRIDGE,
+     .instance_size = sizeof(RemotePCIHost),
+     .class_init = remote_pcihost_class_init,
++    .secure = true,
+ };
+ 
+ static void remote_pcihost_register(void)
+diff --git a/hw/pci-host/xen_igd_pt.c b/hw/pci-host/xen_igd_pt.c
+index f6016f2cd53..abc68849b9e 100644
+--- a/hw/pci-host/xen_igd_pt.c
++++ b/hw/pci-host/xen_igd_pt.c
+@@ -110,6 +110,7 @@ static const TypeInfo igd_passthrough_i440fx_info = {
+     .parent        = TYPE_I440FX_PCI_DEVICE,
+     .instance_size = sizeof(PCII440FXState),
+     .class_init    = igd_passthrough_i440fx_class_init,
++    .secure        = true,
+ };
+ 
+ static void igd_pt_i440fx_register_types(void)
+diff --git a/hw/ppc/spapr_pci.c b/hw/ppc/spapr_pci.c
+index f7fc544d35c..ea323fa0989 100644
+--- a/hw/ppc/spapr_pci.c
++++ b/hw/ppc/spapr_pci.c
+@@ -2174,6 +2174,7 @@ static const TypeInfo spapr_phb_info = {
+     .instance_size = sizeof(SpaprPhbState),
+     .instance_finalize = spapr_phb_finalizefn,
+     .class_init    = spapr_phb_class_init,
++    .secure        = true,
+     .interfaces    = (const InterfaceInfo[]) {
+         { TYPE_HOTPLUG_HANDLER },
+         { }
+diff --git a/hw/s390x/s390-pci-bus.c b/hw/s390x/s390-pci-bus.c
+index cdd75cdfd2f..7c64397c33c 100644
+--- a/hw/s390x/s390-pci-bus.c
++++ b/hw/s390x/s390-pci-bus.c
+@@ -1678,6 +1678,7 @@ static const TypeInfo s390_pcihost_info = {
+     .parent        = TYPE_PCI_HOST_BRIDGE,
+     .instance_size = sizeof(S390pciState),
+     .class_init    = s390_pcihost_class_init,
++    .secure        = true,
      .interfaces = (const InterfaceInfo[]) {
          { TYPE_HOTPLUG_HANDLER },
-         { INTERFACE_CONVENTIONAL_PCI_DEVICE },
-@@ -294,6 +295,7 @@ static const TypeInfo pci_bridge_dev_seat_info = {
-     .parent            = TYPE_PCI_BRIDGE_DEV,
-     .instance_size     = sizeof(PCIBridgeDev),
-     .class_init        = pci_bridge_dev_seat_class_init,
-+    .secure            = true,
- };
- 
- static void pci_bridge_dev_register(void)
-diff --git a/hw/pci-bridge/pci_expander_bridge.c b/hw/pci-bridge/pci_expander_bridge.c
-index 40ffbc4e082..b6df3f89ca4 100644
---- a/hw/pci-bridge/pci_expander_bridge.c
-+++ b/hw/pci-bridge/pci_expander_bridge.c
-@@ -114,6 +114,7 @@ static const TypeInfo pxb_bus_info = {
-     .parent        = TYPE_PCI_BUS,
-     .instance_size = sizeof(PXBBus),
-     .class_init    = pxb_bus_class_init,
-+    .secure        = true,
- };
- 
- static const TypeInfo pxb_pcie_bus_info = {
-@@ -121,6 +122,7 @@ static const TypeInfo pxb_pcie_bus_info = {
-     .parent        = TYPE_PCIE_BUS,
-     .instance_size = sizeof(PXBBus),
-     .class_init    = pxb_bus_class_init,
-+    .secure        = true,
- };
- 
- static const TypeInfo pxb_cxl_bus_info = {
-@@ -190,6 +192,7 @@ static const TypeInfo pxb_host_info = {
-     .name          = TYPE_PXB_HOST,
-     .parent        = TYPE_PCI_HOST_BRIDGE,
-     .class_init    = pxb_host_class_init,
-+    .secure        = true,
- };
- 
- static void pxb_cxl_realize(DeviceState *dev, Error **errp)
-@@ -453,6 +456,7 @@ static const TypeInfo pxb_dev_info = {
-     .parent        = TYPE_PCI_DEVICE,
-     .instance_size = sizeof(PXBDev),
-     .class_init    = pxb_dev_class_init,
-+    .secure        = true,
-     .interfaces = (const InterfaceInfo[]) {
-         { INTERFACE_CONVENTIONAL_PCI_DEVICE },
-         { },
-@@ -490,6 +494,7 @@ static const TypeInfo pxb_pcie_dev_info = {
-     .parent        = TYPE_PXB_DEV,
-     .instance_size = sizeof(PXBPCIEDev),
-     .class_init    = pxb_pcie_dev_class_init,
-+    .secure        = true,
-     .interfaces = (const InterfaceInfo[]) {
-         { INTERFACE_CONVENTIONAL_PCI_DEVICE },
-         { },
-diff --git a/hw/pci-bridge/pcie_pci_bridge.c b/hw/pci-bridge/pcie_pci_bridge.c
-index e826fb2829f..03b6b1c0f54 100644
---- a/hw/pci-bridge/pcie_pci_bridge.c
-+++ b/hw/pci-bridge/pcie_pci_bridge.c
-@@ -162,6 +162,7 @@ static const TypeInfo pcie_pci_bridge_info = {
-         .parent = TYPE_PCI_BRIDGE,
-         .instance_size = sizeof(PCIEPCIBridge),
-         .class_init = pcie_pci_bridge_class_init,
-+        .secure = true,
-         .interfaces = (const InterfaceInfo[]) {
-             { TYPE_HOTPLUG_HANDLER },
-             { INTERFACE_PCIE_DEVICE },
-diff --git a/hw/pci-bridge/xio3130_downstream.c b/hw/pci-bridge/xio3130_downstream.c
-index 0c3fed3053b..ded948ebd0f 100644
---- a/hw/pci-bridge/xio3130_downstream.c
-+++ b/hw/pci-bridge/xio3130_downstream.c
-@@ -175,6 +175,7 @@ static const TypeInfo xio3130_downstream_info = {
-     .name          = TYPE_XIO3130_DOWNSTREAM,
-     .parent        = TYPE_PCIE_SLOT,
-     .class_init    = xio3130_downstream_class_init,
-+    .secure        = true,
-     .interfaces = (const InterfaceInfo[]) {
-         { INTERFACE_PCIE_DEVICE },
          { }
-diff --git a/hw/pci-bridge/xio3130_upstream.c b/hw/pci-bridge/xio3130_upstream.c
-index 40057b749bf..9d58105f8bd 100644
---- a/hw/pci-bridge/xio3130_upstream.c
-+++ b/hw/pci-bridge/xio3130_upstream.c
-@@ -144,6 +144,7 @@ static const TypeInfo xio3130_upstream_info = {
-     .name          = "x3130-upstream",
-     .parent        = TYPE_PCIE_PORT,
-     .class_init    = xio3130_upstream_class_init,
-+    .secure        = true,
-     .interfaces = (const InterfaceInfo[]) {
-         { INTERFACE_PCIE_DEVICE },
-         { }
-diff --git a/hw/pci/pci.c b/hw/pci/pci.c
-index 0efb4eb4bb0..f5af3e743d9 100644
---- a/hw/pci/pci.c
-+++ b/hw/pci/pci.c
-@@ -319,6 +319,7 @@ static const TypeInfo pci_bus_info = {
-     .instance_size = sizeof(PCIBus),
-     .class_size = sizeof(PCIBusClass),
-     .class_init = pci_bus_class_init,
-+    .secure = true,
-     .interfaces = (const InterfaceInfo[]) {
-         { TYPE_FW_CFG_DATA_GENERATOR_INTERFACE },
-         { }
-@@ -333,11 +334,13 @@ static const TypeInfo cxl_interface_info = {
- static const TypeInfo pcie_interface_info = {
-     .name          = INTERFACE_PCIE_DEVICE,
-     .parent        = TYPE_INTERFACE,
-+    .secure        = true,
- };
- 
- static const TypeInfo conventional_pci_interface_info = {
-     .name          = INTERFACE_CONVENTIONAL_PCI_DEVICE,
-     .parent        = TYPE_INTERFACE,
-+    .secure        = true,
- };
- 
- static void pcie_bus_class_init(ObjectClass *klass, const void *data)
-@@ -351,6 +354,7 @@ static const TypeInfo pcie_bus_info = {
-     .name = TYPE_PCIE_BUS,
-     .parent = TYPE_PCI_BUS,
-     .class_init = pcie_bus_class_init,
+@@ -1711,6 +1712,7 @@ static const TypeInfo s390_pcibus_info = {
+      * if a device is unplugged and plugged back, preventing migration.
+      */
+     .class_init = s390_pcibus_class_init,
 +    .secure = true,
  };
  
- static const TypeInfo cxl_bus_info = {
+ static uint16_t s390_pci_generate_uid(S390pciState *s)
+@@ -2033,12 +2035,14 @@ static const TypeInfo s390_pci_device_info = {
+     .parent = TYPE_DEVICE,
+     .instance_size = sizeof(S390PCIBusDevice),
+     .class_init = s390_pci_device_class_init,
++    .secure = true,
+ };
+ 
+ static const TypeInfo s390_pci_iommu_info = {
+     .name = TYPE_S390_PCI_IOMMU,
+     .parent = TYPE_OBJECT,
+     .instance_size = sizeof(S390PCIIOMMU),
++    .secure = true,
+ };
+ 
+ static void s390_iommu_memory_region_class_init(ObjectClass *klass,
 -- 
 2.56.0
 
