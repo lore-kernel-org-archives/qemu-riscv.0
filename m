@@ -1,52 +1,52 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8A786606A31A
-	for <qemu-riscv@archiver.kernel.org>; Thu, 29 Oct 2026 13:22:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E52D1606A31A
+	for <qemu-riscv@archiver.kernel.org>; Thu, 29 Oct 2026 13:22:29 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=bmCzOHAh
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=c+YMDean
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xMQ1T-0007iW-4B; Thu, 29 Oct 2026 09:18:27 -0400
+	id 1xMQ1F-0006ql-SZ; Thu, 29 Oct 2026 09:18:15 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1xMPxI-0000Sk-CT
- for qemu-riscv@nongnu.org; Thu, 29 Oct 2026 09:14:08 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ id 1xMPx4-0008OP-LW
+ for qemu-riscv@nongnu.org; Thu, 29 Oct 2026 09:13:56 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1xMPxG-0006Xn-OW
- for qemu-riscv@nongnu.org; Thu, 29 Oct 2026 09:14:08 -0400
+ id 1xMPx2-0006SX-0L
+ for qemu-riscv@nongnu.org; Thu, 29 Oct 2026 09:13:53 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1793279646;
+ s=mimecast20190719; t=1793279631;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=Tz6ECrqGFEvH2qPdvBggN2cCB6nV8NdVl/en/0ygr8c=;
- b=bmCzOHAhr0azWJclekO/yXFyP2f0PYDB+N8gWMNgM0RKIuUsnSrsf4ApZZge5NYbXKEyln
- Olmyk2E/2JubtEVH7OvdPyDTNtjB+6nKt261Ywf206vfnU/bX10ysdC2PM48prV2ACbXQo
- xJ0CPkC5pKKPpXN+GcwFJq47UClFuTg=
-Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ bh=80nX2pLT37SuhPeScym3NZXd4q+9R/VFGjieh7dkCbI=;
+ b=c+YMDeanid+baHAH99Q6xtNoLApL6uXDCnGw54tg8rdOgRoge7E96eYXIgZCVd4rTAPUXH
+ njhCSTnkZbfE7jbVzmeb58eVrVqBhqo/9tZKso7Sq1p3U86843V7aZKWyeqMyL/Y5znKXV
+ GZCjHvnpoY3rFVQz0KNy2YQTdSCi9P8=
+Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-274-pOu3nCV0MLylF1T_gVYESA-1; Thu,
- 29 Oct 2026 09:14:02 -0400
-X-MC-Unique: pOu3nCV0MLylF1T_gVYESA-1
-X-Mimecast-MFC-AGG-ID: pOu3nCV0MLylF1T_gVYESA_1793279640
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-391-aEg544ekNBGurRcA1t9REw-1; Thu,
+ 29 Oct 2026 09:13:46 -0400
+X-MC-Unique: aEg544ekNBGurRcA1t9REw-1
+X-Mimecast-MFC-AGG-ID: aEg544ekNBGurRcA1t9REw_1793279624
 Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
  (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id C1DE71955EB6; Thu, 29 Oct 2026 13:14:00 +0000 (UTC)
+ by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 92A741800675; Thu, 29 Oct 2026 13:13:44 +0000 (UTC)
 Received: from berrange.csb (headnet04.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.116])
  by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 740183000723; Thu, 29 Oct 2026 13:13:58 +0000 (UTC)
+ id 3C1603000723; Thu, 29 Oct 2026 13:13:42 +0000 (UTC)
 From: =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, Peter Maydell <peter.maydell@linaro.org>,
@@ -56,28 +56,27 @@ Cc: qemu-arm@nongnu.org, Peter Maydell <peter.maydell@linaro.org>,
  qemu-ppc@nongnu.org, qemu-block@nongnu.org, qemu-riscv@nongnu.org,
  qemu-s390x@nongnu.org,
  =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
-Subject: [PATCH v2 27/28] hw/display: mark cirrus and QXL as secure
-Date: Thu, 29 Oct 2026 13:12:40 +0000
-Message-ID: <20261029131241.2275706-28-berrange@redhat.com>
+Subject: [PATCH v2 21/28] hw/uefi: mark the EFI vars service as secure
+Date: Thu, 29 Oct 2026 13:12:34 +0000
+Message-ID: <20261029131241.2275706-22-berrange@redhat.com>
 In-Reply-To: <20261029131241.2275706-1-berrange@redhat.com>
 References: <20261029131241.2275706-1-berrange@redhat.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
-X-Mimecast-MFC-PROC-ID: 2FlUvKOHJdIj4DDw61EgNHUAuWdbwPF866asNYPzY8g_1793279640
+X-Mimecast-MFC-PROC-ID: RXHu-P15zaXMO4o2vURaDmvPoD7_eGYZbEGfDgMoJ9Y_1793279624
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=berrange@redhat.com;
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=berrange@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: 5
-X-Spam_score: 0.5
-X-Spam_bar: /
-X-Spam_report: (0.5 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+X-Spam_score_int: -27
+X-Spam_score: -2.8
+X-Spam_bar: --
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
- RCVD_IN_SBL_CSS=3.335, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+ RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -96,58 +95,34 @@ X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Most of the display adapters are emulating old hardware which is not
-relevant to virtualization use cases. The previous commit added the
-generic, simple devices.
+This is used to persist EFI variables when NVRAM is not available
+or undesirable.
 
-This proposes two further devices based on their historical widespread
-usage in virtualization use cases.
-
-Cirrus (PCI, not ISA) was the recommended default for x86 for an
-incredibly long time and while it is now discouraged, it is likely
-to still be in common use.
-
-QXL was the recommended default to be used with SPICE, which is designed
-to service virtualization use cases and is still commonly shipped by
-many distros and often used by default in mgmt apps still.
-
+Acked-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
 ---
- hw/display/cirrus_vga.c | 1 +
- hw/display/qxl.c        | 2 ++
- 2 files changed, 3 insertions(+)
+ hw/uefi/var-service-sysbus.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/hw/display/cirrus_vga.c b/hw/display/cirrus_vga.c
-index 0a8c74e1374..8232c5c4687 100644
---- a/hw/display/cirrus_vga.c
-+++ b/hw/display/cirrus_vga.c
-@@ -3013,6 +3013,7 @@ static const TypeInfo cirrus_vga_info = {
-     .parent        = TYPE_PCI_DEVICE,
-     .instance_size = sizeof(PCICirrusVGAState),
-     .class_init    = cirrus_vga_class_init,
-+    .secure        = true,
-     .interfaces = (const InterfaceInfo[]) {
-         { INTERFACE_CONVENTIONAL_PCI_DEVICE },
-         { },
-diff --git a/hw/display/qxl.c b/hw/display/qxl.c
-index d5f9771f5af..a8746d9f5dc 100644
---- a/hw/display/qxl.c
-+++ b/hw/display/qxl.c
-@@ -2651,6 +2651,7 @@ static const TypeInfo qxl_primary_info = {
-     .name          = "qxl-vga",
-     .parent        = TYPE_PCI_QXL,
-     .class_init    = qxl_primary_class_init,
+diff --git a/hw/uefi/var-service-sysbus.c b/hw/uefi/var-service-sysbus.c
+index e5e0441e16f..656496317b5 100644
+--- a/hw/uefi/var-service-sysbus.c
++++ b/hw/uefi/var-service-sysbus.c
+@@ -86,6 +86,7 @@ static const TypeInfo uefi_vars_sysbus_info = {
+     .instance_size = sizeof(uefi_vars_sysbus_state),
+     .instance_init = uefi_vars_sysbus_init,
+     .class_init    = uefi_vars_sysbus_class_init,
 +    .secure        = true,
  };
- module_obj("qxl-vga");
- module_kconfig(QXL);
-@@ -2669,6 +2670,7 @@ static const TypeInfo qxl_secondary_info = {
-     .name          = "qxl",
-     .parent        = TYPE_PCI_QXL,
-     .class_init    = qxl_secondary_class_init,
+ module_obj(TYPE_UEFI_VARS_SYSBUS);
+ 
+@@ -115,6 +116,7 @@ static const TypeInfo uefi_vars_x64_info = {
+     .name          = TYPE_UEFI_VARS_X64,
+     .parent        = TYPE_UEFI_VARS_SYSBUS,
+     .class_init    = uefi_vars_x64_class_init,
 +    .secure        = true,
  };
- module_obj("qxl");
+ module_obj(TYPE_UEFI_VARS_X64);
  
 -- 
 2.56.0
