@@ -1,78 +1,78 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8F83D606A31C
-	for <qemu-riscv@archiver.kernel.org>; Thu, 29 Oct 2026 12:18:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 61291606A31A
+	for <qemu-riscv@archiver.kernel.org>; Thu, 29 Oct 2026 12:20:44 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=zdKAKpiG
+	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=Fstt5vhU
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xMP4V-0008J8-8H; Thu, 29 Oct 2026 08:17:31 -0400
+	id 1xMP7F-0001hC-6x; Thu, 29 Oct 2026 08:20:21 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1xMP4R-0008FK-Tg
- for qemu-riscv@nongnu.org; Thu, 29 Oct 2026 08:17:27 -0400
-Received: from mail-oi1-x22f.google.com ([2607:f8b0:4864:20::22f])
+ id 1xMP7D-0001gX-D8
+ for qemu-riscv@nongnu.org; Thu, 29 Oct 2026 08:20:19 -0400
+Received: from mail-oo1-xc2f.google.com ([2607:f8b0:4864:20::c2f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1xMP4P-0000Me-CN
- for qemu-riscv@nongnu.org; Thu, 29 Oct 2026 08:17:27 -0400
-Received: by mail-oi1-x22f.google.com with SMTP id
- 5614622812f47-53dbe9b8d6eso603300b6e.1
- for <qemu-riscv@nongnu.org>; Thu, 29 Oct 2026 05:17:24 -0700 (PDT)
+ id 1xMP7B-0000xL-D6
+ for qemu-riscv@nongnu.org; Thu, 29 Oct 2026 08:20:19 -0400
+Received: by mail-oo1-xc2f.google.com with SMTP id
+ 006d021491bc7-6f8a519e215so555417eaf.1
+ for <qemu-riscv@nongnu.org>; Thu, 29 Oct 2026 05:20:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1793276244; x=1793881044; darn=nongnu.org;
+ d=linaro.org; s=google; t=1793276416; x=1793881216; darn=nongnu.org;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=HwCspv9KVpeNpKaoIMyOBsabutmcdbAvFeFXn1CMntk=;
- b=zdKAKpiGCn+ruCUDZBqZo2W+opB6yZ/uASd+VA80HaYeCOISeEnahrQv7Wpdz3Eg4s
- 0zA1aXDt3qMKbhw5Zu4voTRcIhU4xU2hSxL26E8rCNcG6eDzv+AOJahyzBIDnXGqgAOI
- JWR28n5WX8MhAwdnMGWN1veYdQD2KKp+1ct0IewiVS+4P+UeY1VeD85+0OplHNWyXnbU
- 0OGwYfAuvUykm/E+tWqIWP2oIP+QWvTCzGcbN6COCAvn2hxxsjo1PZPratB/gyzGe4da
- f7qeTdr6tqLnJb/xqyjmiB7ScqYDl09WCGRIo3sVnFaTe68DQDJc1lt7S5U+pPahO1Fa
- aRnw==
+ bh=/5mWRpROm0oPq0q+cxFzttJvG/MC0mAeZTpybaLxv5I=;
+ b=Fstt5vhUljkQh0bFG++ZHVsaYS3q91YEhVXIKIdQu/hvB4/j+tDZNgZQZRnWuqLp82
+ cn/LKQgYrFMxAJOxpdD8tyJJ/K0CMrpjbPzPZ5ziGW56C+Xnh4NJteUcarw+Z8o3Sp2a
+ GdTuGYKFayCil2HP1ir4qKogjYPGS44UgzKDuxw6Obtj0ny8jEmAWG5vc6ZZ6YIeRTDM
+ X5H4IBN0ysP80UlCqcueBnHzEg1rhdV29tx+y7TpNY2HyIuHJdSAtQGr3I60erTSP0jD
+ quFr9qZTNhSf54etMuanq+4A4OuLqN/RU8waVCKoUkA3ztENiB0kYA1ptQDW86TRALnk
+ CP6g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793276244; x=1793881044;
+ d=1e100.net; s=20260707; t=1793276416; x=1793881216;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=HwCspv9KVpeNpKaoIMyOBsabutmcdbAvFeFXn1CMntk=;
- b=XGOMWDfV2su0/IbHY+PmGtqnJJ0lmlvJqZt6iDKA8SfkiR33AqHidz2LJDJ/YIP6qx
- zWlrXU3wuNs0jSC11xV4fM8IWYwOiSposV+FTn0v+QBbYJSg/ajyzwpVxLeQokVs2w9y
- QriVb2IdEwsq7MJRZo5J+8At05/yCpKSz9Q9ZO+PwqbazKo3DnyPl8T0VIRVc2fleI8k
- K5zn0mPC/NMeV3uhRioo95vtNMDmcxrhcrO1lNGkw9KfNuYn2YELiUBC7A2fcylZ7s6h
- 4CvqDu3tnd5CLnS2OJYcbhpMEnfIRhI7+nwSi+BaPBqy3gXK9ORoDmcRw/VuAqZQ6M5u
- DeFA==
-X-Gm-Message-State: AFq9FYLszz/Qqe/e8o8m41zAXod5Xlzyw6XE3v4URqjbiA25obzxNE6O
- MxMdKi8I7WtbYb+HRVmkrffL417TNFWIz+WFWgH/qPO5szMpQIbpvrBF4S33lFWOZgA=
-X-Gm-Gg: AYBFou2Y8Olytu6mg3GVxgERFxuLZx28Qv9mJh1y9EFPkAcq3Nv/QGL3g8TIks2LBUe
- +3Iau6aCqvfm5L+OKkwaWQZgwWXczKg4DybRe+QBklES11w9lavzXzr9SA3pr3JI6Ivk6XIsBQ9
- LH+mDK/R6okq2BkKHfeaubNzdgoNG6KPoc+yFAcZX6ScP5/2i0Jkjy8UfvAfTSamL5FhbQ/eoyz
- gxC3MeQUW0RukUF4nomeanjr2sZMz9SYqCFUUHi0I/ZU3+t7FI5UqWm8mBqRz593eyGMgrfDo04
- 15EugQtJdVljcaXiE/WB7xGv0eFhd13vM21P2HRAgmkPeLMZU0Bv5I8gE9Iibo71dm+HLNoBwoQ
- BfydONHy0DIT2qwoxFHLzVARFpkhn4gh1GeTg8M+tOmZc8AskEiNp3ksSpKeNAkG7NkxUlIuAMP
- O4inBRyl7EV7+SjxPUUp2QRpS4Bl+CcETdR/F1o+6YxUq2tIET3UWJ8y+870VOUoJBwJYQwYhgF
- ijYM2+4TtntCsbGYQWr8e4YDsHeypQZu693RX/uahHBrC7NGVBelUDSgX6A/+I72Ue/E6NqaLl8
- luri3A2gSNsjQ1c0DIJ2+dpJMH1MQ7v+N1d6FxFm19NL
-X-Received: by 2002:a05:6808:250d:b0:496:976:acad with SMTP id
- 5614622812f47-563ef5c1674mr1205981b6e.1.1793276243814; 
- Thu, 29 Oct 2026 05:17:23 -0700 (PDT)
+ bh=/5mWRpROm0oPq0q+cxFzttJvG/MC0mAeZTpybaLxv5I=;
+ b=qsI3ib4q36ZtpuEbml3o7Vl4BILnsKloZuOJ0qnUhpPptyzdb4vaDn9SdoCyDfScbw
+ gFRwaj5xjhoGgyuhXiDsHguuA1EaHsncy8EGXpyNebP2nx+8T+G5nda9NVcu3JZ24UE3
+ fsHwMy8m+QlnQ1LhIAzJ5iVrtOepEiMzyUICY3EeJfmD7XZg3SdF1cB0w7Tq8Ov80fc9
+ riC67AtAdvzTIkvOdzTNcwPR6ecYEFgMjll3Z4SnJw+Ssp9aO4huvf0MoBXDHDBRU2Qb
+ tsmaYuP8ujij52lU+Kp7+igk2eCRHLBs8zNTgiZQJkLjRw5AnmQ2ejVhnG5N/dMXoYI1
+ kCgA==
+X-Gm-Message-State: AFq9FYJQQ6fw30Id2pC4zWpM4mEGzYaAgyiLLYUpBokjjFKtnsyUTGpG
+ WNz44lWOx0nKkaVXKuHjUnhTEiRM/9KzERUxDHBIpUGSxH6Nnf5cGUfJGcXwBnso/IY=
+X-Gm-Gg: AYBFou062GQopHTvWUp+A3AvoG5s+WJQLkbWUAfTnY4+NsZmqjXyCT5H7ys6LMXFuci
+ gi4/CrEZGweUJWvILoSvenLCCc0IfpNVPLZJPXRAxnlyFre0OJcgzNaX3QfYR5g8AmdRtmsB86O
+ Dzt66V9+/kTE/58MS21FKLGZWcOH68Nqm/QJ/02SyKOg+TWr1RCmqxZz+BQfqMvW4CEKHS/w4wg
+ Uwe6D47/PEqkjxNVPXGchDew8bFxsm++LOjL2oFkF/GqtsZ7tH/L4iEauyN2gJC7xSvtQEk9DRJ
+ XkFKqJlg2Ta6A8dUsQgvROjY7LFY3KLqfRmfKNG5rGr+P/1Q8Ax1XfYBPApKecMzozLkPcIeiLK
+ xx7LY/Uk2CwRRP/7bd1ZlADQbtsX+/tQGt07Iih8ahFVKMkK1DmSWYWDNidt33cjFQx7Vl3Qebe
+ Sei/yUkMA1OUm1ArKou5RkaVinpeeGljymF+TPylvbLwopUfn9A62dWUR57am/4o2e3MTZ3RSnL
+ 2WNOWzmEP0gcwfaRFPT8sJYox1iI3GxBhsFkyXpGgtdJ8IGgBPhPde+snbtPpAorDbAbcz8bekF
+ jb+vfn/T0ES6/9Y1VaC7twBP8Ceg7CGcrW3kSInU9GQKB+JfcxELrTpXmOTBoR+4fA==
+X-Received: by 2002:a05:6820:f028:b0:712:b60d:2ed1 with SMTP id
+ 006d021491bc7-714ddd126c3mr1135479eaf.10.1793276415594; 
+ Thu, 29 Oct 2026 05:20:15 -0700 (PDT)
 Received: from [192.168.129.53] ([50.233.235.3])
  by smtp.gmail.com with ESMTPSA id
- 5614622812f47-563c5a4d8b7sm3302136b6e.8.2026.10.29.05.17.22
+ 006d021491bc7-7142bb7942fsm4213838eaf.5.2026.10.29.05.20.14
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 29 Oct 2026 05:17:22 -0700 (PDT)
-Message-ID: <31a583fe-d71b-4b50-9e5b-c4acb138117e@linaro.org>
-Date: Thu, 29 Oct 2026 07:17:21 -0500
+ Thu, 29 Oct 2026 05:20:15 -0700 (PDT)
+Message-ID: <07353a79-b037-42a2-9747-4c9f9a05e901@linaro.org>
+Date: Thu, 29 Oct 2026 07:20:13 -0500
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 4/6] tcg/riscv64: Fix constant handling in vector
- comparisons and selects
+Subject: Re: [PATCH v3 5/6] tcg/riscv64: Fix logical vector immediate matching
+ and emission
 To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
  qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org,
@@ -80,23 +80,23 @@ Cc: qemu-riscv@nongnu.org,
  Aurelien Jarno <aurelien@aurel32.net>,
  Alistair Francis <Alistair.Francis@wdc.com>,
  Peter Maydell <peter.maydell@linaro.org>, Palmer Dabbelt
- <palmer@dabbelt.com>, qemu-arm@nongnu.org
+ <palmer@dabbelt.com>, qemu-arm@nongnu.org, qemu-stable@nongnu.org
 References: <20261028143330.6518-1-philmd@oss.qualcomm.com>
- <20261028143330.6518-5-philmd@oss.qualcomm.com>
+ <20261028143330.6518-6-philmd@oss.qualcomm.com>
 From: Richard Henderson <richard.henderson@linaro.org>
 Content-Language: en-US
-In-Reply-To: <20261028143330.6518-5-philmd@oss.qualcomm.com>
+In-Reply-To: <20261028143330.6518-6-philmd@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::22f;
- envelope-from=richard.henderson@linaro.org; helo=mail-oi1-x22f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::c2f;
+ envelope-from=richard.henderson@linaro.org; helo=mail-oo1-xc2f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -117,20 +117,113 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 On 10/28/26 09:33, Philippe Mathieu-Daudé wrote:
-> tcg_out_cmpsel() takes constants as TCGReg and passes them to the
-> encoders unextracted. In a release build, "cmlt v0.8h, #0" emitted
-> the illegal instruction 0xffffb057.
+> and/or/xor_vec always have VECE 0, yet their constant was matched
+> as a byte element and applied at the stale SEW of the previous op:
+> "bic v4.8h, #0xf0" became "vand.vi ..., 15".
 > 
-> Use TCGArg for these operands and extract the element with
-> vec_imm() before encoding, including before the LT/GE adjustment.
+> Add the 'N' constraint: use the smallest element size at which the
+> constant replicates, if that element fits simm5, and switch SEW to
+> it. A wider element can't fit when the smallest doesn't: its upper
+> half repeats the smaller element, which would then be 0 or -1.
 > 
-> Fixes: 006352d69f14 ("tcg/riscv64: Assert immediate in range ...")
-> Signed-off-by: Philippe Mathieu-Daudé<philmd@oss.qualcomm.com>
+> Cc: qemu-stable@nongnu.org
+> Fixes: 5a63f5998791 ("tcg/riscv: Add support for basic vector opcodes")
+> Reported-by: Aurelien Jarno <aurelien@aurel32.net>
+> Suggested-by: Richard Henderson <richard.henderson@linaro.org>
+> Signed-off-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
 > ---
->   tcg/riscv64/tcg-target.c.inc | 13 +++++++------
->   1 file changed, 7 insertions(+), 6 deletions(-)
+>   tcg/riscv64/tcg-target-con-set.h |  1 +
+>   tcg/riscv64/tcg-target-con-str.h |  1 +
+>   tcg/riscv64/tcg-target.c.inc     | 53 +++++++++++++++++++++++++++-----
+>   3 files changed, 48 insertions(+), 7 deletions(-)
+> 
+> diff --git a/tcg/riscv64/tcg-target-con-set.h b/tcg/riscv64/tcg-target-con-set.h
+> index 0fc26d3f98b4..9b4e219fac16 100644
+> --- a/tcg/riscv64/tcg-target-con-set.h
+> +++ b/tcg/riscv64/tcg-target-con-set.h
+> @@ -26,4 +26,5 @@ C_O1_I2(v, v, v)
+>   C_O1_I2(v, vK, v)
+>   C_O1_I2(v, v, vK)
+>   C_O1_I2(v, v, vL)
+> +C_O1_I2(v, v, vN)
+>   C_O1_I4(v, v, vL, vK, vK)
+> diff --git a/tcg/riscv64/tcg-target-con-str.h b/tcg/riscv64/tcg-target-con-str.h
+> index c04e15ddfa3c..d7e8b2ce4f2f 100644
+> --- a/tcg/riscv64/tcg-target-con-str.h
+> +++ b/tcg/riscv64/tcg-target-con-str.h
+> @@ -19,3 +19,4 @@ CONST('I', TCG_CT_CONST_S12)
+>   CONST('K', TCG_CT_CONST_S5)
+>   CONST('L', TCG_CT_CONST_CMP_VI)
+>   CONST('M', TCG_CT_CONST_M12)
+> +CONST('N', TCG_CT_CONST_LOGICAL_VI)
+> diff --git a/tcg/riscv64/tcg-target.c.inc b/tcg/riscv64/tcg-target.c.inc
+> index 168932711796..4faf7ff36e07 100644
+> --- a/tcg/riscv64/tcg-target.c.inc
+> +++ b/tcg/riscv64/tcg-target.c.inc
+> @@ -116,6 +116,7 @@ static TCGReg tcg_target_call_oarg_reg(TCGCallReturnKind kind, int slot)
+>   #define TCG_CT_CONST_M12     0x200
+>   #define TCG_CT_CONST_S5      0x400
+>   #define TCG_CT_CONST_CMP_VI  0x800
+> +#define TCG_CT_CONST_LOGICAL_VI 0x1000
+>   
+>   #define ALL_GENERAL_REGS   MAKE_64BIT_MASK(0, 32)
+>   #define ALL_VECTOR_REGS    MAKE_64BIT_MASK(32, 32)
+> @@ -384,6 +385,22 @@ static const struct {
+>       [TCG_COND_GEU] = { OPC_VMSGTU_VI,   1, 16, true  },
+>   };
+>   
+> +/*
+> + * Return the element size at which VAL is a replicated simm5,
+> + * or -1 if there is none.  Used for vector logical ops, whose
+> + * VECE is not meaningful.
+> + */
+> +static int vec_logical_immediate_vece(int64_t val)
+> +{
+> +    for (int e = MO_8; e <= MO_64; e++) {
+> +        if (val == dup_const(e, val)) {
+> +            int64_t x = sextract64(val, 0, 8 << e);
+> +            return x >= -0x10 && x <= 0x0f ? e : -1;
+> +        }
+> +    }
+> +    g_assert_not_reached();
+> +}
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+This assert can trigger...
+
+> +
+>   /* test if a constant matches the constraint */
+>   static bool tcg_target_const_match(int64_t val, int ct,
+>                                      TCGType type, TCGCond cond, int vece)
+> @@ -391,6 +408,10 @@ static bool tcg_target_const_match(int64_t val, int ct,
+>       if (ct & TCG_CT_CONST) {
+>           return 1;
+>       }
+> +    if ((ct & TCG_CT_CONST_LOGICAL_VI) &&
+> +        vec_logical_immediate_vece(val) >= 0) {
+> +        return true;
+> +    }
+
+... here.  Return -1 instead so...
+
+>       if (type >= TCG_TYPE_V64) {
+>           /* Val is replicated by VECE; extract the highest element. */
+>           val >>= (-8 << vece) & 63;
+> @@ -2769,6 +2790,23 @@ static const TCGOutOpStore outop_st = {
+>   };
+>   
+>   
+> +static void tcg_out_opc_vv_vi_logical(TCGContext *s, TCGType type,
+> +                                      RISCVInsn o_vv, RISCVInsn o_vi,
+> +                                      TCGReg vd, TCGReg vs2,
+> +                                      TCGArg vi1, int c_vi1)
+> +{
+> +    if (c_vi1) {
+> +        int vece = vec_logical_immediate_vece(vi1);
+> +
+> +        tcg_debug_assert(vece >= 0);
+
+... it is properly handled by this assert anyway.
+
 
 r~
 
