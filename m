@@ -1,52 +1,52 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DFD6C606A31C
-	for <qemu-riscv@archiver.kernel.org>; Thu, 29 Oct 2026 13:19:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 71002606A31E
+	for <qemu-riscv@archiver.kernel.org>; Thu, 29 Oct 2026 13:19:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=fShOeCvr
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=JWlhqz8t
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xMQ1U-0007pN-Dr; Thu, 29 Oct 2026 09:18:28 -0400
+	id 1xMPy0-00019h-JG; Thu, 29 Oct 2026 09:14:54 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1xMPww-0008Fx-1u
- for qemu-riscv@nongnu.org; Thu, 29 Oct 2026 09:13:47 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ id 1xMPwa-0007vW-Ib
+ for qemu-riscv@nongnu.org; Thu, 29 Oct 2026 09:13:25 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1xMPwt-0006OA-BC
- for qemu-riscv@nongnu.org; Thu, 29 Oct 2026 09:13:45 -0400
+ id 1xMPwY-0006FC-4i
+ for qemu-riscv@nongnu.org; Thu, 29 Oct 2026 09:13:24 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1793279622;
+ s=mimecast20190719; t=1793279601;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=NZxw4M4gDY5tKHQioN+bGUmjv78GhfFNRK3LJmr5w4M=;
- b=fShOeCvrJXEs4dLz/SOa4dflwOLfq97Hfz2IjlkE/7PCX7rMVgIgtXZL0aWuOEuxyH5l/+
- 25LlOFK0S6pPXPG4zWAPlOHIMUHJutiJaIeaVJazC5DC9WlpoPw2zPPQbYGFviv1LZN+Dq
- eFY0acA7Pffuo87PQ/B1970OqrIMWdo=
-Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
+ bh=DoYeE35G5vy3c7Q31k4rZLLcXLkZy6ahmCqVZMitdb4=;
+ b=JWlhqz8tN85VVdhzjIeKHlZMWagB5ovwbu7xrIDKsOO6i8ipJvIJ/r5oLIOFzknDhQbTgH
+ CfLqDtWMHTCc6QjLpH+/b2mebG/BISvxBZ/DLoRpJ8XKqlUuXWV7MbwqAVQSaBEhLBUwYD
+ JROqDjzfY5DF6ad5zHOM8BZTU9Wbjuk=
+Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-678-JZDKrbBfOS6BoxhK62Whug-1; Thu,
- 29 Oct 2026 09:13:35 -0400
-X-MC-Unique: JZDKrbBfOS6BoxhK62Whug-1
-X-Mimecast-MFC-AGG-ID: JZDKrbBfOS6BoxhK62Whug_1793279613
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-611-VZblAVKCOCaiFiOoZxALJg-1; Thu,
+ 29 Oct 2026 09:13:18 -0400
+X-MC-Unique: VZblAVKCOCaiFiOoZxALJg-1
+X-Mimecast-MFC-AGG-ID: VZblAVKCOCaiFiOoZxALJg_1793279596
 Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
  (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id C23DC180065C; Thu, 29 Oct 2026 13:13:33 +0000 (UTC)
+ by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id B583E1955F34; Thu, 29 Oct 2026 13:13:16 +0000 (UTC)
 Received: from berrange.csb (headnet04.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.116])
  by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 464123000723; Thu, 29 Oct 2026 13:13:31 +0000 (UTC)
+ id 3AD443000723; Thu, 29 Oct 2026 13:13:14 +0000 (UTC)
 From: =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, Peter Maydell <peter.maydell@linaro.org>,
@@ -56,27 +56,28 @@ Cc: qemu-arm@nongnu.org, Peter Maydell <peter.maydell@linaro.org>,
  qemu-ppc@nongnu.org, qemu-block@nongnu.org, qemu-riscv@nongnu.org,
  qemu-s390x@nongnu.org,
  =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
-Subject: [PATCH v2 17/28] hw/misc: mark pvpanic, vmcoreinfo as secure
-Date: Thu, 29 Oct 2026 13:12:30 +0000
-Message-ID: <20261029131241.2275706-18-berrange@redhat.com>
+Subject: [PATCH v2 11/28] hw/scsi: mark SCSI disk endpoint devices as secure
+Date: Thu, 29 Oct 2026 13:12:24 +0000
+Message-ID: <20261029131241.2275706-12-berrange@redhat.com>
 In-Reply-To: <20261029131241.2275706-1-berrange@redhat.com>
 References: <20261029131241.2275706-1-berrange@redhat.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
-X-Mimecast-MFC-PROC-ID: Ku4YGb-WpIIUGEDHqlcQFQgBcED0RBtKiWczmlnuifg_1793279613
+X-Mimecast-MFC-PROC-ID: M85g5FGn9Mq3U3zp0iN9rCthgNd01GVnup9Kg8kVDUQ_1793279596
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=berrange@redhat.com;
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=berrange@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
-X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+X-Spam_score_int: 5
+X-Spam_score: 0.5
+X-Spam_bar: /
+X-Spam_report: (0.5 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ RCVD_IN_SBL_CSS=3.335, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -95,66 +96,56 @@ X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-These devices are common debug aids for virtualized
-guests so must be marked secure.
+All these devices can be used together with supported SCSI controllers
+in a virtualization use case, so must be treated as secure.
 
-Reviewed-by: Marc-André Lureau <marcandre.lureau@redhat.com>
+Acked-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
 ---
- hw/misc/pvpanic-isa.c  | 1 +
- hw/misc/pvpanic-mmio.c | 1 +
- hw/misc/pvpanic-pci.c  | 1 +
- hw/misc/vmcoreinfo.c   | 1 +
- 4 files changed, 4 insertions(+)
+ hw/scsi/scsi-disk.c    | 3 +++
+ hw/scsi/scsi-generic.c | 1 +
+ 2 files changed, 4 insertions(+)
 
-diff --git a/hw/misc/pvpanic-isa.c b/hw/misc/pvpanic-isa.c
-index 85fb7da5e5c..bb0a7ff6f8e 100644
---- a/hw/misc/pvpanic-isa.c
-+++ b/hw/misc/pvpanic-isa.c
-@@ -121,6 +121,7 @@ static const TypeInfo pvpanic_isa_info = {
-     .instance_size = sizeof(PVPanicISAState),
-     .instance_init = pvpanic_isa_initfn,
-     .class_init    = pvpanic_isa_class_init,
-+    .secure        = true,
-     .interfaces = (const InterfaceInfo[]) {
-         { TYPE_ACPI_DEV_AML_IF },
-         { },
-diff --git a/hw/misc/pvpanic-mmio.c b/hw/misc/pvpanic-mmio.c
-index a173a1a9a58..161e8fc59b4 100644
---- a/hw/misc/pvpanic-mmio.c
-+++ b/hw/misc/pvpanic-mmio.c
-@@ -50,6 +50,7 @@ static const TypeInfo pvpanic_mmio_info = {
-     .instance_size = sizeof(PVPanicMMIOState),
-     .instance_init = pvpanic_mmio_initfn,
-     .class_init    = pvpanic_mmio_class_init,
+diff --git a/hw/scsi/scsi-disk.c b/hw/scsi/scsi-disk.c
+index 6341089ddf2..f546e5b67fc 100644
+--- a/hw/scsi/scsi-disk.c
++++ b/hw/scsi/scsi-disk.c
+@@ -3370,6 +3370,7 @@ static const TypeInfo scsi_hd_info = {
+     .name          = "scsi-hd",
+     .parent        = TYPE_SCSI_DISK_BASE,
+     .class_init    = scsi_hd_class_initfn,
 +    .secure        = true,
  };
  
- static void pvpanic_register_types(void)
-diff --git a/hw/misc/pvpanic-pci.c b/hw/misc/pvpanic-pci.c
-index 5509f70a3e5..7d1f99d564b 100644
---- a/hw/misc/pvpanic-pci.c
-+++ b/hw/misc/pvpanic-pci.c
-@@ -80,6 +80,7 @@ static const TypeInfo pvpanic_pci_info = {
-     .parent        = TYPE_PCI_DEVICE,
-     .instance_size = sizeof(PVPanicPCIState),
-     .class_init    = pvpanic_pci_class_init,
+ static const Property scsi_cd_properties[] = {
+@@ -3413,6 +3414,7 @@ static const TypeInfo scsi_cd_info = {
+     .name          = "scsi-cd",
+     .parent        = TYPE_SCSI_DISK_BASE,
+     .class_init    = scsi_cd_class_initfn,
 +    .secure        = true,
-     .interfaces = (const InterfaceInfo[]) {
-         { INTERFACE_CONVENTIONAL_PCI_DEVICE },
-         { }
-diff --git a/hw/misc/vmcoreinfo.c b/hw/misc/vmcoreinfo.c
-index 9c2e9005ad3..90f361b05f1 100644
---- a/hw/misc/vmcoreinfo.c
-+++ b/hw/misc/vmcoreinfo.c
-@@ -101,6 +101,7 @@ static const TypeInfo vmcoreinfo_types[] = {
-         .parent         = TYPE_DEVICE,
-         .instance_size  = sizeof(VMCoreInfoState),
-         .class_init     = vmcoreinfo_device_class_init,
-+        .secure         = true,
-     }
  };
  
+ #ifdef __linux__
+@@ -3455,6 +3457,7 @@ static const TypeInfo scsi_block_info = {
+     .name          = "scsi-block",
+     .parent        = TYPE_SCSI_DISK_BASE,
+     .class_init    = scsi_block_class_initfn,
++    .secure        = true,
+ };
+ #endif
+ 
+diff --git a/hw/scsi/scsi-generic.c b/hw/scsi/scsi-generic.c
+index e48fcb926f1..747a0aa61be 100644
+--- a/hw/scsi/scsi-generic.c
++++ b/hw/scsi/scsi-generic.c
+@@ -1259,6 +1259,7 @@ static const TypeInfo scsi_generic_info = {
+     .parent        = TYPE_SCSI_DEVICE,
+     .instance_size = sizeof(SCSIDevice),
+     .class_init    = scsi_generic_class_initfn,
++    .secure        = true,
+ };
+ 
+ static void scsi_generic_register_types(void)
 -- 
 2.56.0
 
