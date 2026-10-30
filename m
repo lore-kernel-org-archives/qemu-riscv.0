@@ -1,72 +1,73 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7A3E2606A320
-	for <qemu-riscv@archiver.kernel.org>; Fri, 30 Oct 2026 04:05:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9986B606A320
+	for <qemu-riscv@archiver.kernel.org>; Fri, 30 Oct 2026 04:06:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=tenstorrent.com header.i=@tenstorrent.com header.a=rsa-sha256 header.s=google header.b=QJKaMP5p
+	dkim=pass (2048-bit key, unprotected) header.d=tenstorrent.com header.i=@tenstorrent.com header.a=rsa-sha256 header.s=google header.b=Rbu8PMcu
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xMdrw-000240-2s; Fri, 30 Oct 2026 00:05:32 -0400
+	id 1xMdsD-0002D7-Bz; Fri, 30 Oct 2026 00:05:49 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <portias@tenstorrent.com>)
- id 1xMdru-00021k-6T
- for qemu-riscv@nongnu.org; Fri, 30 Oct 2026 00:05:30 -0400
-Received: from mail-dy1-x1330.google.com ([2607:f8b0:4864:20::1330])
+ id 1xMdsA-0002Cg-1f
+ for qemu-riscv@nongnu.org; Fri, 30 Oct 2026 00:05:47 -0400
+Received: from mail-dy1-x1335.google.com ([2607:f8b0:4864:20::1335])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <portias@tenstorrent.com>)
- id 1xMdrr-0004nZ-TZ
- for qemu-riscv@nongnu.org; Fri, 30 Oct 2026 00:05:29 -0400
-Received: by mail-dy1-x1330.google.com with SMTP id
- 5a478bee46e88-36a1c464349so49373eec.3
- for <qemu-riscv@nongnu.org>; Thu, 29 Oct 2026 21:05:26 -0700 (PDT)
+ id 1xMds8-0004os-0c
+ for qemu-riscv@nongnu.org; Fri, 30 Oct 2026 00:05:45 -0400
+Received: by mail-dy1-x1335.google.com with SMTP id
+ 5a478bee46e88-33bb5afa736so55682eec.1
+ for <qemu-riscv@nongnu.org>; Thu, 29 Oct 2026 21:05:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=tenstorrent.com; s=google; t=1793333125; x=1793937925; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:content-type:message-id:date
- :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=QuZcI3GqLHmnut7TC7mIxlV5/8ddg6G9Kx6CoZ5zWaw=;
- b=QJKaMP5pIaCjZwpQE5565grXHmm1odTNkEDUYXJxnhPj0b4sNM3CH3muN5bch5FZJT
- g+P/uXVeegJmW0U21WkVZVj5thpFXyed6w2NwfhT0TwHJitL9YJljZJ7IsiU4wwzhm/7
- Lnl044ZeVJgZMM2lF6LrLTlsJjd0YAcDvQoOL1/v6PHOJBq7aBkohiujSO7BUJ9T6Olv
- 75+dPZE3SFfQZjyDetvcJy51el/TgsTN4LoJ6m/O4lBKpsntzxdWwpJPk4SUTvKQOL4c
- 3XaUnIVp25HmjdgHhsKWwZ8YZ6neP6fkTTpAF6mA/6CMy5kLgB+KMsiUBaaSDgihWacj
- xOWQ==
+ d=tenstorrent.com; s=google; t=1793333143; x=1793937943; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=eFaQWCtZcxUVq9iHzu9TKc9GWSooUMKRzguLIKQFbgk=;
+ b=Rbu8PMcu0319E41Q4MI1UOrz2XjUpcJlYIPZEQSKw1Kb5o908Z87/57/x3H1y6oHdo
+ AX7QcB/35ojfkxrNfG0hDZDDs69vXxCqZ5T++YmCOTTSe9vR+EX5c7M/1uY9XAUMS4Ra
+ qzXFy2+BkllTILT1syy3MsiXPcx9i/Eix5QIHI4qk2HuB5fKgwvkHQY4wxvImYHudgj6
+ l0sWNdUswwv95pjJvJl0Gn5epN4byzAhL/tAfCCgtjzUTw3WmOjbAvzOkkledUpgYzGq
+ uw2G7tQyEBav8OtTGCLS7+/oY/eWIC3TFLz7OFmTvZJnJN3dqUKgRLAbksALFM0/wJkW
+ Jshg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793333125; x=1793937925;
- h=content-transfer-encoding:mime-version:content-type:message-id:date
- :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=QuZcI3GqLHmnut7TC7mIxlV5/8ddg6G9Kx6CoZ5zWaw=;
- b=khJB6/0tKLoAE8biGTBLZAbMb107NEWu5yn3g743pZHiultEPXI1ipMtPhBgChxzPK
- 2TGpfgYeCd1y8XOFPJ8CClTeGIoQg5PAq+dqKjiD6jlyqqyGSHT6sjzT+KDB7Bnao7ZJ
- 60rR5Vwi2UVqq6ANJhB/WhQ6kH5AjQXg8nHIqpJpqwoxN8pB/QZ1uNnsD56HUdvEmiQL
- FgejJJ/3bHOEoBMnvIBf1qYnBQQjZ4VZhVxcrqyoVce1K7JkNwID+mpJRBFJwID1gOOh
- yRfwI3Uhy66lPGlxaZIAo+c025NzCBLlBHFSRDm5Gnet7juRHraf/i4IHNKUSAXOb0IJ
- ZrBA==
+ d=1e100.net; s=20260707; t=1793333143; x=1793937943;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=eFaQWCtZcxUVq9iHzu9TKc9GWSooUMKRzguLIKQFbgk=;
+ b=T6LkyZ+fMiau/mid8mVPJnWCPttoqxKKvxn0Dv+28bGilVwAaedf1q8lkIQHB6uPeb
+ zqFszmMcb/dplr21kF9d8/aZQJQH70PSL1/Eij/4pazxpTfPLj5UBz8YaXfJS2G9rhRm
+ D+r8+ur3YOQB/zLcXgVshEeDiKFNaoQYZsAkLNaC1PDLY/mCQob1HOE3SIAZvJBl6FMr
+ gubr6RhCE64iTtJtUgu5QqL3BBQ/yaVDSboA5pgOrHs/sxccxP0Owl7t9guVeEN8QIDw
+ KziHWC3mQX7EuFPrbxGPwktPRs6wKVCMGaEbL051h2Rdgy7Z1g7h9X3pOPFulb071Yw7
+ twsg==
 X-Forwarded-Encrypted: i=1;
- AKwUvBx2zEYjh6Xjl9jgmKWTTNs2tZoGkxVCs3u9Bi3LFVaw5ji92EXfqIrvRcoV7LA0jjWJtv5OU03FTU8o@nongnu.org
-X-Gm-Message-State: AFq9FYJbWMORcxD9Stug3EGE8VO/NitDID9PTfmFjmx4o6Mj1rNi7q+q
- DjpqoCrBlc4DSFajalOYNXPWaO5XGdUIgXpASvGl3v4pIOtU3Bo9iITDprkzIAf25Vo=
-X-Gm-Gg: AYBFou0caGesyLyOvPu5iFSk3AfhMiIfNqorc89I0IJS0GLXRRanMLaycX1u9kEYP3X
- 3co9f8WeiLD5lXF2npCnP7veeIkhi18yzuZMM4in4Ltr3qk+tiI17Ao6jbTvKYiJqGvc43ssdhi
- H3g6pP7a7TcavktizTAry1H5FwbOwqTJsfZEinPG9U89Tu1uShNPi96WfjQHs7uKINlm5GR4pcF
- 3uCHHcpN9uVYXwOiHrTx90Vc7nwfYFn4kd1feg/rdtqbfU7XCgUnZLl+5yUGccnBPND/oOVLEoT
- qWYlNozeKxBXXaXQYFrgYT6FBhGo8pWP7LOqjtzeYr93S302FCsAnF8LRDkK5SJuFCKlNCj6fOH
- 0I6swjVyPhTlkMjcUCLgBB9H3bqvq6/8Q1xwN4Y/IcGccIFrFChoq/pD6rcXRR1K3z46YqOSGuU
- xd2RHmAvMtSBmcota3hsu0LgYlx9EpFlVBu6Q7DObrTQtRufxpiHKm/rVgDYuKE7p4VnoS0qBIh
- ZBeffH9TV8akTboQyBXNVmHHkU2kFcOrvpZ6CW8bzUxh5zQs6laKobmDBHshuy41ViXopQT6EnO
- Y8eyQOi/aBYZy0hDCwhtOu10FWD2SXlIGNXDz4EwFuIk90uyNSs1/kJXLivsNraYmMW6KQUtruB
- o0g==
-X-Received: by 2002:a05:7300:e9d7:10b0:36a:1452:8da9 with SMTP id
- 5a478bee46e88-36a4231f759mr3297818eec.1.1793333124527; 
- Thu, 29 Oct 2026 21:05:24 -0700 (PDT)
+ AKwUvBwgsP9Qdt99RORMHSHb0ExH3hFJUWAMHnkpQzsapYaqDEy41wxDD0Kr4qjtmhmayhMziMl0bXajZBfd@nongnu.org
+X-Gm-Message-State: AFq9FYIypmvw5j4iVjMmshcJG6wjpZjpL905Am9FUDPTpcC/dzCwgEXv
+ qmIKXKL+AxHoPojVXNm+JEhmKmN7dkDPdK5b2pRxrXOtodZFy1X+Xx3a0eMTqaRVxxM=
+X-Gm-Gg: AYBFou1UkAmssCy7OYzc9+2ehWk0I85Jd++PfadjEXGRfuz+ZrRvqzojQDYWbRxnNnC
+ GwySFwIy5QrGsgf+XUMZOk5vQ8plHYKGaUSTF55XPOo2LmeeL4D1hFI6rfD9t1aysoFDPB+u+bQ
+ fc8ATMIv+h59iAmlWAhklYf2lrGGyiWyouJlTC8+JF6ay181arBL/cBpy9/aqIX6UOWaJKnlrJO
+ b50mKu2MwVhoK49Ki6BV8uhpTzxkQTCaozoVfq2fBEAmZTxu1ymKtUGOeW2Ia94/ZE+WSTHFL5L
+ 31uPoGBsxwixH+y4u+uLlzcP06wg56m124Mxb2kWYt6z3TWZUFwuoG8kGXVWOfZ8IEV7E3bQJAT
+ cl6RGWZPPUIbMIJSUEmb1/WuH+NelLK09eLPPOFbAi7ckXmmU3hRPRK3bpwLOhIfdVc+evjPDTg
+ p9k+03rUxqjmYhteNvN6PQUsSI6EfPszrlZF3driw0eUYB+HI6aKavATjbpcqQa6Hmd1P9imTGm
+ Cncar+bN9ZTmiePZ99I52IwC2dC1N5Ohg2OV71Q2yrJhJc9BEj9/YO2kpr2UMmlYI84aHUWmv15
+ +U1JQkFUHfFj7oDQEpQfx7R3izkbOAzBVsqxoHImaSthFQKCg1sZ7eRP8won7qeok896FhrVyCZ
+ DhIfIg1NJ8FiOchA4lTh+pJE=
+X-Received: by 2002:a05:7301:1c9f:b0:368:5521:612f with SMTP id
+ 5a478bee46e88-36a4206296dmr2726390eec.0.1793333142280; 
+ Thu, 29 Oct 2026 21:05:42 -0700 (PDT)
 Received: from lima-default.tail89d63.ts.net ([159.196.41.205])
  by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-36a428af1easm2957687eec.5.2026.10.29.21.05.18
+ 5a478bee46e88-36a428af1easm2957687eec.5.2026.10.29.21.05.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 29 Oct 2026 21:05:24 -0700 (PDT)
+ Thu, 29 Oct 2026 21:05:41 -0700 (PDT)
 From: Portia Stephens <portias@oss.tenstorrent.com>
 To: qemu-devel@nongnu.org
 Cc: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
@@ -84,22 +85,24 @@ Cc: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Subject: [PATCH v3 0/9] Add the RCPU to Tenstorrent Atlantis
-Date: Fri, 30 Oct 2026 14:05:06 +1000
-Message-ID: <20261030040516.853444-1-portias@oss.tenstorrent.com>
+Subject: [PATCH v3 3/9] hw/riscv/atlantis: Store Ascalon memory in cluster
+ struct
+Date: Fri, 30 Oct 2026 14:05:09 +1000
+Message-ID: <20261030040516.853444-4-portias@oss.tenstorrent.com>
 X-Mailer: git-send-email 2.43.0
-Content-Type: text/plain; charset="utf-8"
+In-Reply-To: <20261030040516.853444-1-portias@oss.tenstorrent.com>
+References: <20261030040516.853444-1-portias@oss.tenstorrent.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1330;
- envelope-from=portias@tenstorrent.com; helo=mail-dy1-x1330.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1335;
+ envelope-from=portias@tenstorrent.com; helo=mail-dy1-x1335.google.com
 X-Spam_score_int: -19
 X-Spam_score: -2.0
 X-Spam_bar: --
 X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_NONE=-0.0001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -112,79 +115,202 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,
+	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Atlantis includes a 32-bit RISC-V core (RCPU) used for boot, low-level
-control, and ongoing system management [1]. This series is the first step in
-adding the RCPU to the tt-atlantis machine. The RCPU shares access to most
-peripherals with the Ascalon cores. However, the RCPU has a different memory view.
-This requires a different memory map and a private memory container that the
-SoC aliases the shared devices into, at the addresses the RCPU expects.
+The system memory is the memory view of the Ascalon CPU. Store the
+memory directly in the TTAscalonClusterState and set it to
+system_memory. There is no need to track it at the machine level,
+get_system_memory() can be used when needed.
 
-On hardware, the RCPU is responsible for loading images from the boot medium
-into DRAM and releasing the Ascalon cores from reset, via the CPL. This
-functionality is not implemented in these changes. The images for the Ascalon
-cores continue to be loaded directly into DRAM via command line arguments and
-the Ascalon cores start executing at reset.
+Signed-off-by: Portia Stephens <portias@oss.tenstorrent.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ hw/riscv/tt_atlantis.c         | 43 ++++++++++++++--------------------
+ include/hw/riscv/tt_atlantis.h |  3 +--
+ 2 files changed, 19 insertions(+), 27 deletions(-)
 
-With these changes, running tt-atlantis with rcpu=on will create a separate
-CPUCluster with the RCPU, giving gdb two inferiors. If no bootrom is provided,
-the RCPU hart will be held powered off. With a bootrom provided,
-via tt-atlantis,rcpu=on,bootrom=, the RCPU will execute the image and console
-output is on the second command line serial. This series does not provide a
-binary to test on the RCPU, it is in active development and not publicly
-available. The QEMU tests are updated to test booting of the Ascalon cores with
-and without the RCPU modeled. The machine properties related to the cpus, smp
-count and cpu-type, apply to the Ascalon cluster. The RCPU is an auxiliary
-core and is not configurable.
-
-See docs/system/riscv/tt_atlantis.rst for usage.
-
-[1] https://github.com/tenstorrent/atlantis-soc-docs/blob/main/data_sheet/atl_soc_data_sheet.pdf
-
-Changes from v2:
-- Add marchid for RCPU. Use it to check predicate for RCPU CSRs
-- Disable user_creatable for cluster devices. This really upset the review bots.
-- Use generic create_unimplemented_devices, squash
- "Back RCPU memory region by unimplemented device" into previous patch, it is
- only a single line change now.
-- Change default for rcpu to disabled to ensure no change to default smp behavior
-
-Changes from v1:
-- Include RCPU in smp cpu count
-- Fix incorrect address map naming of PRCM_DDR and DDR_CTRL
-- Drop valid_cpu_types enforcement
-
-Portia Stephens (9):
-  hw/riscv/atlantis: Update fdt functions to take generic parameters
-  hw/riscv/atlantis: Move Ascalon into cluster struct
-  hw/riscv/atlantis: Store Ascalon memory in cluster struct
-  hw/riscv/atlantis: Create CPU cluster for Atlantis cpus
-  target/riscv: Add Tenstorrent Real-time CPU
-  hw/riscv/atlantis: Add the RCPU to the Atlantis SoC
-  hw/riscv/atlantis: Load the RCPU bootrom
-  tests/functional/riscv64: Add rcpu to tt-atlantis tests
-  docs/atlantis: Update Atlantis documentation to include the RCPU
-
- MAINTAINERS                                  |   1 +
- docs/system/gdb.rst                          |   2 +
- docs/system/riscv/tt_atlantis.rst            |  46 +-
- hw/riscv/Kconfig                             |   2 +
- hw/riscv/tt_atlantis.c                       | 635 +++++++++++++++----
- include/hw/riscv/tt_atlantis.h               |  76 ++-
- target/riscv/cpu-qom.h                       |   1 +
- target/riscv/cpu.c                           |  33 +
- target/riscv/tcg/csr.h                       |   3 +
- target/riscv/tcg/meson.build                 |   1 +
- target/riscv/tcg/tt_csr.c                    |  63 ++
- tests/functional/riscv64/test_tt_atlantis.py |  10 +-
- 12 files changed, 743 insertions(+), 130 deletions(-)
- create mode 100644 target/riscv/tcg/tt_csr.c
-
+diff --git a/hw/riscv/tt_atlantis.c b/hw/riscv/tt_atlantis.c
+index 8bcab69f8a..b514aaaa68 100644
+--- a/hw/riscv/tt_atlantis.c
++++ b/hw/riscv/tt_atlantis.c
+@@ -558,18 +558,19 @@ static void tt_ascalon_cluster_realize(DeviceState *dev, Error **errp)
+ {
+     TTAscalonClusterState *ac = TT_ASCALON_CLUSTER(dev);
+ 
+-    if (!ac->memory) {
+-        error_setg(errp, "'memory' link is not set");
+-        return;
+-    }
+     ac->memmap = tt_atlantis_memmap;
+ 
++    /* Ascalon's memory view is system memory */
++    memory_region_init(&ac->memory, OBJECT(ac),
++                       "tt-ascalon-memory", UINT64_MAX);
++    memory_region_add_subregion(get_system_memory(), 0, &ac->memory);
++
+     /* Boot ROM */
+     if (!memory_region_init_rom(&ac->bootrom, OBJECT(ac), "tt-atlantis.bootrom",
+                                 ac->memmap[TT_ATL_BOOTROM].size, errp)) {
+         return;
+     }
+-    memory_region_add_subregion(ac->memory, ac->memmap[TT_ATL_BOOTROM].base,
++    memory_region_add_subregion(&ac->memory, ac->memmap[TT_ATL_BOOTROM].base,
+                                 &ac->bootrom);
+ 
+     /* CPUs */
+@@ -583,7 +584,7 @@ static void tt_ascalon_cluster_realize(DeviceState *dev, Error **errp)
+                             ac->memmap[TT_ATL_BOOTROM].base,
+                             &error_abort);
+     object_property_set_link(OBJECT(&ac->cpus), "memory",
+-                             OBJECT(ac->memory),
++                             OBJECT(&ac->memory),
+                              &error_abort);
+     if (!sysbus_realize(SYS_BUS_DEVICE(&ac->cpus), errp)) {
+         return;
+@@ -593,8 +594,6 @@ static void tt_ascalon_cluster_realize(DeviceState *dev, Error **errp)
+ static const Property tt_ascalon_cluster_props[] = {
+     DEFINE_PROP_STRING("cpu-type", TTAscalonClusterState, cpu_type),
+     DEFINE_PROP_UINT32("num-harts", TTAscalonClusterState, num_harts, 8),
+-    DEFINE_PROP_LINK("memory", TTAscalonClusterState, memory,
+-                     TYPE_MEMORY_REGION, MemoryRegion *),
+ };
+ 
+ static void tt_ascalon_cluster_class_init(ObjectClass *oc, const void *data)
+@@ -655,7 +654,7 @@ static void tt_atlantis_soc_realize(DeviceState *dev, Error **errp)
+ 
+     ram_size = memory_region_size(s->dram);
+ 
+-    s->irqchip = riscv_create_aia(ac->memory,
++    s->irqchip = riscv_create_aia(&ac->memory,
+                                   true, TT_IMSIC_GUESTS,
+                                   TT_IMSIC_STRIDE,
+                                   TT_IMSIC_STRIDE,
+@@ -668,7 +667,7 @@ static void tt_atlantis_soc_realize(DeviceState *dev, Error **errp)
+                                   TT_IRQCHIP_NUM_MSIS,
+                                   TT_IRQCHIP_NUM_PRIO_BITS);
+ 
+-    riscv_aclint_mtimer_create(ac->memory,
++    riscv_aclint_mtimer_create(&ac->memory,
+             ac->memmap[TT_ATL_ACLINT].base,
+             TT_ACLINT_MTIME_SIZE,
+             0, hart_count,
+@@ -690,13 +689,13 @@ static void tt_atlantis_soc_realize(DeviceState *dev, Error **errp)
+ 
+     memory_region_init_alias(&s->ram_hi, OBJECT(s), "ram.high", s->dram,
+                              0, ram_size);
+-    memory_region_add_subregion(ac->memory,
++    memory_region_add_subregion(&ac->memory,
+                                 ac->memmap[TT_ATL_DDR_HI].base, &s->ram_hi);
+ 
+     lo_ram_size = MIN(ram_size, ac->memmap[TT_ATL_DDR_LO].size);
+     memory_region_init_alias(&s->ram_lo, OBJECT(s), "ram.low", s->dram,
+                              0, lo_ram_size);
+-    memory_region_add_subregion(ac->memory,
++    memory_region_add_subregion(&ac->memory,
+                                 ac->memmap[TT_ATL_DDR_LO].base, &s->ram_lo);
+ 
+     /* 4 PRCM blocks */
+@@ -705,7 +704,7 @@ static void tt_atlantis_soc_realize(DeviceState *dev, Error **errp)
+         return;
+     }
+     memory_region_add_subregion(
+-        ac->memory, ac->memmap[TT_ATL_PRCM_RCPU].base,
++        &ac->memory, ac->memmap[TT_ATL_PRCM_RCPU].base,
+         sysbus_mmio_get_region(
+             SYS_BUS_DEVICE(&s->prcm[TT_ATLANTIS_PRCM_DOMAIN_RCPU]), 0));
+ 
+@@ -714,7 +713,7 @@ static void tt_atlantis_soc_realize(DeviceState *dev, Error **errp)
+         return;
+     }
+     memory_region_add_subregion(
+-        ac->memory, ac->memmap[TT_ATL_PRCM_HSIO].base,
++        &ac->memory, ac->memmap[TT_ATL_PRCM_HSIO].base,
+         sysbus_mmio_get_region(
+             SYS_BUS_DEVICE(&s->prcm[TT_ATLANTIS_PRCM_DOMAIN_HSIO]), 0));
+ 
+@@ -723,7 +722,7 @@ static void tt_atlantis_soc_realize(DeviceState *dev, Error **errp)
+         return;
+     }
+     memory_region_add_subregion(
+-        ac->memory, ac->memmap[TT_ATL_PRCM_PCIE].base,
++        &ac->memory, ac->memmap[TT_ATL_PRCM_PCIE].base,
+         sysbus_mmio_get_region(
+             SYS_BUS_DEVICE(&s->prcm[TT_ATLANTIS_PRCM_DOMAIN_PCIE]), 0));
+ 
+@@ -732,7 +731,7 @@ static void tt_atlantis_soc_realize(DeviceState *dev, Error **errp)
+         return;
+     }
+     memory_region_add_subregion(
+-        ac->memory, ac->memmap[TT_ATL_PRCM_MM].base,
++        &ac->memory, ac->memmap[TT_ATL_PRCM_MM].base,
+         sysbus_mmio_get_region(
+             SYS_BUS_DEVICE(&s->prcm[TT_ATLANTIS_PRCM_DOMAIN_MM]), 0));
+ 
+@@ -746,7 +745,7 @@ static void tt_atlantis_soc_realize(DeviceState *dev, Error **errp)
+             return;
+         }
+ 
+-        memory_region_add_subregion(ac->memory,
++        memory_region_add_subregion(&ac->memory,
+                                     ac->memmap[TT_ATL_UART0 + i].base,
+                                     sysbus_mmio_get_region(sbd, 0));
+         sysbus_connect_irq(sbd, 0,
+@@ -760,7 +759,7 @@ static void tt_atlantis_soc_realize(DeviceState *dev, Error **errp)
+         if (!sysbus_realize(sbd, errp)) {
+             return;
+         }
+-        memory_region_add_subregion(ac->memory,
++        memory_region_add_subregion(&ac->memory,
+                                     ac->memmap[TT_ATL_I2C0 + i].base,
+                                     sysbus_mmio_get_region(sbd, 0));
+         sysbus_connect_irq(sbd, 0,
+@@ -789,10 +788,6 @@ static void tt_atlantis_machine_init(MachineState *machine)
+     TTAtlantisSoCState *s = &ams->soc;
+     TTAscalonClusterState *ac = &s->ascalon;
+ 
+-    memory_region_init(&ams->soc_memory, OBJECT(machine),
+-                       "tt-atlantis.soc-memory", UINT64_MAX);
+-    memory_region_add_subregion(get_system_memory(), 0, &ams->soc_memory);
+-
+     object_initialize_child(OBJECT(machine), "soc", &ams->soc,
+                             TYPE_TT_ATLANTIS_SOC);
+ 
+@@ -804,9 +799,7 @@ static void tt_atlantis_machine_init(MachineState *machine)
+                             machine->smp.cpus,
+                             &error_abort);
+ 
+-    object_property_set_link(OBJECT(ac), "memory",
+-                             OBJECT(&ams->soc_memory), &error_abort);
+-    object_property_set_link(OBJECT(&ams->soc), "dram", OBJECT(machine->ram),
++    object_property_set_link(OBJECT(s), "dram", OBJECT(machine->ram),
+                              &error_abort);
+ 
+     qdev_realize(DEVICE(&ams->soc), NULL, &error_fatal);
+diff --git a/include/hw/riscv/tt_atlantis.h b/include/hw/riscv/tt_atlantis.h
+index 4e3d5d4b5f..52b44504ae 100644
+--- a/include/hw/riscv/tt_atlantis.h
++++ b/include/hw/riscv/tt_atlantis.h
+@@ -37,7 +37,7 @@ struct TTAscalonClusterState {
+     /*< public >*/
+     const MemMapEntry *memmap;
+ 
+-    MemoryRegion *memory;
++    MemoryRegion memory;
+ 
+     RISCVHartArrayState cpus;
+     MemoryRegion bootrom;
+@@ -70,7 +70,6 @@ struct TTAtlantisState {
+     /*< public >*/
+     Notifier machine_done;
+ 
+-    MemoryRegion soc_memory;
+     TTAtlantisSoCState soc;
+ };
+ 
 -- 
 2.43.0
 
