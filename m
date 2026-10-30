@@ -1,72 +1,72 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3F0F0606A31C
-	for <qemu-riscv@archiver.kernel.org>; Fri, 30 Oct 2026 15:21:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6C974606A31A
+	for <qemu-riscv@archiver.kernel.org>; Fri, 30 Oct 2026 15:21:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=Is2yst8E
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=HYzCWxEo
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xMoPI-0000T0-Ef; Fri, 30 Oct 2026 11:20:40 -0400
+	id 1xMoMA-0004iq-64; Fri, 30 Oct 2026 11:17:26 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xMoNU-0006C8-7h
- for qemu-riscv@nongnu.org; Fri, 30 Oct 2026 11:18:50 -0400
-Received: from mail-dl1-x1235.google.com ([2607:f8b0:4864:20::1235])
+ id 1xMoLw-0004VC-81
+ for qemu-riscv@nongnu.org; Fri, 30 Oct 2026 11:17:14 -0400
+Received: from mail-dl1-x122a.google.com ([2607:f8b0:4864:20::122a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xMoNR-0000GX-5F
- for qemu-riscv@nongnu.org; Fri, 30 Oct 2026 11:18:47 -0400
-Received: by mail-dl1-x1235.google.com with SMTP id
- a92af1059eb24-1ae58d17cd9so122706c88.1
- for <qemu-riscv@nongnu.org>; Fri, 30 Oct 2026 08:18:44 -0700 (PDT)
+ id 1xMoLs-0008UH-OA
+ for qemu-riscv@nongnu.org; Fri, 30 Oct 2026 11:17:11 -0400
+Received: by mail-dl1-x122a.google.com with SMTP id
+ a92af1059eb24-15943c9c005so1425281c88.1
+ for <qemu-riscv@nongnu.org>; Fri, 30 Oct 2026 08:17:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1793373524; x=1793978324; darn=nongnu.org;
+ d=gmail.com; s=20260707; t=1793373424; x=1793978224; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=D80p8QWI+5BbGopzHjtSexJQceQpYTApqX3mxRXadD8=;
- b=Is2yst8EyHFOaiq/1yRYZe7mjO2GdcYrlmk+rQ2cyHn67iT3DlRc5p9Idhd28zg5Ty
- fUDVsS5BvuNzeUkLuDKPunILd9Q5Meau+IuU3xqNXsNOMW/QgAae3nN6uF0AIDTAw9+q
- OjFU83MeShbejIYDWgs8Sagxpmf/kbt6GuONrNAwTWwNmNbmkTM0jk4CjmQn9QSdsyAJ
- S6EuFMwx9jrynG3HZeOEcs7PPmmv7u8dMuL+Gsf5Qd4XYcfkIweb3qit4av5QPHvuVRo
- AuljmWINgV40iL7EWhj40UKZC07Ng/0jqBPcsORi98JNumrKkJ8/0B6TOE55QeAxUq9n
- mK5g==
+ bh=8a2b4rCQZ/Ri0eDvVEGx78IoeAx/tMieqM2WVNnANN8=;
+ b=HYzCWxEofrFoim3bt4ZLgV6v42AKGyv3H8RWtdxWXT+4ebON233iplDbnbqKnvmtkN
+ 4qRNXNwqPQ/vKHMFVVL+TB86X0v5iM6xCkimRM9BrrK2GezRHe6XkwjohYTb0z7DKFI+
+ PxU/cMPlO96vnKt05mf20iiaQr3DWZ44VLCKztI9+Dhb98WghJpS3wqnFiKzMd5IDpSf
+ smFcTJ3vz5uJZNty81YSxakb1QjHv+AAKEK1aPhxzELK3tYEmRZQpRAN5DMmSe014PYH
+ AIg5OHPDk+R7r73mcWwlmruxGUkFU0z4LwEfnk6fPGzO8tGGbGQBUpckii0Tc6Q1A+/8
+ d0hA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793373524; x=1793978324;
+ d=1e100.net; s=20260707; t=1793373424; x=1793978224;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=D80p8QWI+5BbGopzHjtSexJQceQpYTApqX3mxRXadD8=;
- b=c/9RAi6KqJRhHozQ3RezBYh2RmExrdAsstu7DCqegZQ403lfpwoOngBF/qk5P36oqb
- uNqd3RffU8qs2VVMGCSzRIsgwU1Wdu3EEsGK70+YmsPrvNcmwrHdGztTc0YsysWPNSKX
- DOCuMOppjKkOsGIKNQcpMo9qOduOzmXWjUEhGajMqlsDZjPRCERk+PqinMdV032RFIqi
- rnz6pu6KOdst6NzEkfwD6KPRybw+5falgn6hmadDPFuwSHPXfAoMpIHHSSsZSqpdCoZF
- Q+mSImiAoABAvu6JlNmEr2yIvAkm9pCOGqUKDJMYG0YxwZnklwk8sK3tZfcBhE8qg3C2
- bRLA==
+ bh=8a2b4rCQZ/Ri0eDvVEGx78IoeAx/tMieqM2WVNnANN8=;
+ b=TV/4wJaH/NvbIiYpm15lBHwYi97Idg3Aoi29jUWHjLHGG2LWQ6SH4PJu3/mob2jA85
+ 0jRjIF7Ue3kHI0ctp/WV5IOwl6weBfVwEQLbs/kFFOi+FGsKRdN+tv6yq/o5a8d5aa70
+ IT4loOid67uDpK59rh0d9IO7hT7Ke3KejlbdLGcQtVoIuyRF9bONQFK/XqPfB1TfDRe3
+ bqUW9C0YnI/06CYK5peLyj+t4Kqwqgw9zSEID7frkTO+nuFVqwACIYu/VAMweAU973DY
+ k/GrS69I1dgX5phjG5oIWQL8YvGxTRBieWy9ECgrJLjMNf2qCMRfbx5PPV5GJxUbXCs2
+ /7jw==
 X-Forwarded-Encrypted: i=1;
- AKwUvBxsWfyW0PXzJX+YxFc94OIFKYiobmCS6Vz93wTZQtAroY5WFMLzYyEUT7MrNQMrzHMPFzKe2NctriQk@nongnu.org
-X-Gm-Message-State: AFq9FYJmn02q/4d6sPEcM4XhQc0yQyZ9Kj/1jkppGb0bH1L3vNiJYdbz
- nDOselGdNrjKJZSet30eHkcTyEdYJeThAZQoYm2keH40HQiWWCNAit5D
-X-Gm-Gg: AYBFou30rAuoWyCGz9oFJBIIPEwPIgc1l90Z0HESAB3RFPEADRthNsU0/ql8ELsXiUE
- VIlQRHOdSSyeLPsRfXg2WdD7IJocDSHqYOoHJWqpT5k5pwPPErvNdZBkLq1rDASMzW0ZxNpt1Yg
- iG55XY5s7VCL9zEbI7jzivJgHZc1C6bTaboZDZWP4cdh2NTOo/y1X+xZfUA7y14IYndUFnsUf0Z
- O1XCf8VypglQXnKZaBrFb0ut1EYhrjJAYud4k4e4GdbtAkovO25Zwoz5fgrR6AZrcDOysL8OnLL
- 1HY6ZvdiUKJ1u/D4OhR9zFdh9YnDYKUEjBcyLI7voBcQdUqOlCD0YoGF0t0cZf60O8lfevMhBcx
- Q7ttraGomn0MRFzV2qb+ZHJGLlLSm6O1aAj6vyFnTcVpdwRtrxr6HfrK5PDT16Dm0sRIqy2Sycu
- yhX6YFSUz9FRN7aNejy/jZ/9Nldimaa3Stfl0qhMfnoz5ERR/RD1k+1sdBeuYoSzF/U4qyxEHUX
- 78kYXfSaJFmESSUDa648Xha60TjiQSRtqg4qzv1annZtXUVwStRNyq7a0MJKOsVDYwRBBCONVBg
- DNtIBYag664FkG82QY0ouCBdvBAGdebZndSTCnlhYDNU9c86
-X-Received: by 2002:a05:7022:7f13:b0:195:76af:b810 with SMTP id
- a92af1059eb24-1ac5bf91b35mr3525078c88.25.1793373523578; 
- Fri, 30 Oct 2026 08:18:43 -0700 (PDT)
+ AKwUvByPK510jlCl5GT3m+36WTdv/sfqmDy3VKvKIgpivzyc87T6ZWpSW2MUImsdxTUjCZa35ugfvj2mDU02@nongnu.org
+X-Gm-Message-State: AFq9FYIBsCNynQz4h+plF8XsJ7N8Jks2VhGgNmf48+hTh/Qb+6OoDiNw
+ 2C3nsZn/ul0iWCsq0YDp6+tEJuqx+VGEHPaAlIvxfLEx31lA2Xzyb4ODNgyLCqRrA5w=
+X-Gm-Gg: AYBFou0S5gRDW4+0kgqNsEdgdKqRxinEcLNBQ8X40m3zLSNojZRlF6SEYdyIeFzydxd
+ pY9ts6FLi8+j9TTVzrcR9iw8ecv7ZI4zW/zagQI2bmLuAL/3YnBak/7icGQCavm+3NtWmsiLdFq
+ gt7jTwxwrNy09fRpSy/YM7UpvwuX1cvePDZJfayfyyWl7/p/iz7DZccWV04pc8Yf+wzhM4C2Qa4
+ VxZjNo7e9Eh3+rzI8NobrdVPAeHOj83i55tTyFQq2ohIQzryRiY3/MjVWqz8DvcsTZvbl574q/K
+ zPS7h1kobTVNlGOcyapE76JXnhsTcWSMv8mR/Ms3iQlPbIzGFBSh52W7Ml2Mi8vhgMUUhE08CSa
+ JNa/AGfxZcn7Oaj77gw0P0eZfhbVy4siStMhEIAYZEwmvXsdPgJPKGKAy9BikfsrM55uw+nKxtw
+ JXaq/r2IGOfhpCgAqD6+zX/ScKAmHhJIZutRNuk5WcSrcO2Rx9vKJtEr6MPGtifowmr5ySt5AkC
+ aEzzXt7bC1SA5FskP2Tp1UDyJ0FHOhklyFDZ6O/xPhiWdbN1TIqD0T8eQEWUiEZzQYDSYSbVP0H
+ R9jekWUz0xam+jn2ZguAu9eB9VbWDYoyAFT+y3+Xfh8EAEXvT8PDjm705tqL2wn8H8y1ng==
+X-Received: by 2002:a05:7022:eb50:10b0:1ac:9da7:e881 with SMTP id
+ a92af1059eb24-1ac9dc67142mr3312715c88.36.1793373423386; 
+ Fri, 30 Oct 2026 08:17:03 -0700 (PDT)
 Received: from DESKTOP-Q716RM7 ([103.94.185.75])
  by smtp.googlemail.com with ESMTPSA id
- a92af1059eb24-1ac1854d925sm12770449c88.7.2026.10.30.08.18.34
+ a92af1059eb24-1ac1854d925sm12770449c88.7.2026.10.30.08.16.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 30 Oct 2026 08:18:42 -0700 (PDT)
+ Fri, 30 Oct 2026 08:17:02 -0700 (PDT)
 From: Yonggang Luo <luoyonggang@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: Anthony PERARD <anthony@xenproject.org>, Felipe Balbi <balbi@kernel.org>,
@@ -102,17 +102,17 @@ Cc: Anthony PERARD <anthony@xenproject.org>, Felipe Balbi <balbi@kernel.org>,
  Richard Henderson <richard.henderson@linaro.org>,
  Alistair Francis <alistair.francis@wdc.com>,
  Artyom Tarasenko <atar4qemu@gmail.com>, qemu-arm@nongnu.org
-Subject: [PATCH 15/15] hw/core/boards: remove unused DEFINE_MACHINE* macros
-Date: Fri, 30 Oct 2026 23:15:36 +0800
-Message-ID: <20261030151539.1872-16-luoyonggang@gmail.com>
+Subject: [PATCH 06/15] hw/riscv: expand DEFINE_MACHINE for RISC-V machines
+Date: Fri, 30 Oct 2026 23:15:27 +0800
+Message-ID: <20261030151539.1872-7-luoyonggang@gmail.com>
 X-Mailer: git-send-email 2.55.0.windows.3
 In-Reply-To: <20261030151539.1872-1-luoyonggang@gmail.com>
 References: <20261030151539.1872-1-luoyonggang@gmail.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1235;
- envelope-from=luoyonggang@gmail.com; helo=mail-dl1-x1235.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::122a;
+ envelope-from=luoyonggang@gmail.com; helo=mail-dl1-x122a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -139,74 +139,84 @@ X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-All DEFINE_MACHINE and DEFINE_MACHINE_EXTENDED callers have been
-expanded to explicit TypeInfo definitions, leaving DEFINE_MACHINE* and
-DEFINE_SECURE_MACHINE* in include/hw/core/boards.h unused. Remove them.
+Expand DEFINE_MACHINE() in hw/riscv/boston-aia.c and
+hw/riscv/microblaze-v-generic.c to explicit TypeInfo and type_init()
+functions calling type_register_static().
 
 Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
 ---
- include/hw/core/boards.h | 48 ----------------------------------------
- 1 file changed, 48 deletions(-)
+ hw/riscv/boston-aia.c           | 18 ++++++++++++++++--
+ hw/riscv/microblaze-v-generic.c | 18 ++++++++++++++++--
+ 2 files changed, 32 insertions(+), 4 deletions(-)
 
-diff --git a/include/hw/core/boards.h b/include/hw/core/boards.h
-index d0e4ad98201..8af927e9b7c 100644
---- a/include/hw/core/boards.h
-+++ b/include/hw/core/boards.h
-@@ -513,54 +513,6 @@ struct MachineState {
-  *      DEFINE_VIRT_MACHINE_IMPL(false, major, minor, micro, _, tag)
-  */
+diff --git a/hw/riscv/boston-aia.c b/hw/riscv/boston-aia.c
+index b90da096ea8..54979eae86e 100644
+--- a/hw/riscv/boston-aia.c
++++ b/hw/riscv/boston-aia.c
+@@ -462,8 +462,10 @@ static void boston_mach_init(MachineState *machine)
+     }
+ }
  
--#define DEFINE_MACHINE_EXTENDED(namestr, PARENT_NAME, InstanceName, \
--                                machine_initfn, ABSTRACT, SECURE, ifaces...) \
--    static void machine_initfn##_class_init(ObjectClass *oc, const void *data) \
--    { \
--        MachineClass *mc = MACHINE_CLASS(oc); \
--        machine_initfn(mc); \
--    } \
--    static const TypeInfo machine_initfn##_typeinfo = { \
--        .name       = MACHINE_TYPE_NAME(namestr), \
--        .parent     = TYPE_##PARENT_NAME, \
--        .class_init = machine_initfn##_class_init, \
--        .instance_size = sizeof(InstanceName), \
--        .abstract = ABSTRACT, \
--        .secure     = SECURE, \
--        .interfaces = ifaces, \
--    }; \
--    static void machine_initfn##_register_types(void) \
--    { \
--        type_register_static(&machine_initfn##_typeinfo); \
--    } \
--    type_init(machine_initfn##_register_types)
--
--/* Implicitly insecure */
--#define DEFINE_MACHINE(namestr, machine_initfn) \
--    DEFINE_MACHINE_EXTENDED(namestr, MACHINE, MachineState, machine_initfn, \
--                            false, false, NULL)
--
--#define DEFINE_MACHINE_WITH_INTERFACE_ARRAY(namestr, machine_initfn, ifaces...) \
--    DEFINE_MACHINE_EXTENDED(namestr, MACHINE, MachineState, machine_initfn, \
--                            false, false, ifaces)
--
--#define DEFINE_MACHINE_WITH_INTERFACES(namestr, machine_initfn, ...)    \
--    DEFINE_MACHINE_WITH_INTERFACE_ARRAY(namestr, machine_initfn, \
--                                        (const InterfaceInfo[]) { __VA_ARGS__ })
--
--
--#define DEFINE_SECURE_MACHINE(namestr, machine_initfn) \
--    DEFINE_MACHINE_EXTENDED(namestr, MACHINE, MachineState, machine_initfn, \
--                            false, true, NULL)
--
--#define DEFINE_SECURE_MACHINE_WITH_INTERFACE_ARRAY(namestr, machine_initfn, ifaces...) \
--    DEFINE_MACHINE_EXTENDED(namestr, MACHINE, MachineState, machine_initfn, \
--                            false, true, ifaces)
--
--#define DEFINE_SECURE_MACHINE_WITH_INTERFACES(namestr, machine_initfn, ...) \
--    DEFINE_SECURE_MACHINE_WITH_INTERFACE_ARRAY(namestr, machine_initfn, \
--                                               (const InterfaceInfo[]) { __VA_ARGS__ })
--
- /*
-  * Helper for dispatching different macros based on how
-  * many __VA_ARGS__ are passed. Supports 1 to 5 variadic
+-static void boston_mach_class_init(MachineClass *mc)
++static void boston_mach_class_init(ObjectClass *oc, const void *data)
+ {
++    MachineClass *mc = MACHINE_CLASS(oc);
++
+     mc->desc = "MIPS Boston-aia";
+     mc->init = boston_mach_init;
+     mc->block_default_type = IF_IDE;
+@@ -473,4 +475,16 @@ static void boston_mach_class_init(MachineClass *mc)
+     mc->default_cpu_type = TYPE_RISCV_CPU_MIPS_P8700;
+ }
+ 
+-DEFINE_MACHINE("boston-aia", boston_mach_class_init)
++static const TypeInfo boston_mach_typeinfo = {
++    .name       = MACHINE_TYPE_NAME("boston-aia"),
++    .parent     = TYPE_MACHINE,
++    .class_init = boston_mach_class_init,
++    .instance_size = sizeof(MachineState),
++};
++
++static void boston_mach_register_types(void)
++{
++    type_register_static(&boston_mach_typeinfo);
++}
++
++type_init(boston_mach_register_types)
+diff --git a/hw/riscv/microblaze-v-generic.c b/hw/riscv/microblaze-v-generic.c
+index b0494b1ac50..b0f837b6ee7 100644
+--- a/hw/riscv/microblaze-v-generic.c
++++ b/hw/riscv/microblaze-v-generic.c
+@@ -176,8 +176,10 @@ static void mb_v_generic_init(MachineState *machine)
+     create_unimplemented_device("qspi", QSPI_BASEADDR, 0x10000);
+ }
+ 
+-static void mb_v_generic_machine_init(MachineClass *mc)
++static void mb_v_generic_machine_class_init(ObjectClass *oc, const void *data)
+ {
++    MachineClass *mc = MACHINE_CLASS(oc);
++
+     mc->desc = "AMD Microblaze-V generic platform";
+     mc->init = mb_v_generic_init;
+     mc->min_cpus = 1;
+@@ -186,4 +188,16 @@ static void mb_v_generic_machine_init(MachineClass *mc)
+     mc->default_cpus = 1;
+ }
+ 
+-DEFINE_MACHINE("amd-microblaze-v-generic", mb_v_generic_machine_init)
++static const TypeInfo mb_v_generic_machine_typeinfo = {
++    .name       = MACHINE_TYPE_NAME("amd-microblaze-v-generic"),
++    .parent     = TYPE_MACHINE,
++    .class_init = mb_v_generic_machine_class_init,
++    .instance_size = sizeof(MachineState),
++};
++
++static void mb_v_generic_machine_register_types(void)
++{
++    type_register_static(&mb_v_generic_machine_typeinfo);
++}
++
++type_init(mb_v_generic_machine_register_types)
 -- 
 2.55.0.windows.3
 
