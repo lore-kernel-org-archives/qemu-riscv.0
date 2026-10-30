@@ -1,38 +1,38 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 830BE606A31A
-	for <qemu-riscv@archiver.kernel.org>; Thu, 29 Oct 2026 23:47:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DCA76606A31C
+	for <qemu-riscv@archiver.kernel.org>; Fri, 30 Oct 2026 00:18:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=dEwq/94m
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=DvXyImnK
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xMZpq-0004fy-Hw; Thu, 29 Oct 2026 19:47:06 -0400
+	id 1xMaKI-0000cF-V3; Thu, 29 Oct 2026 20:18:34 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <fustini@kernel.org>)
- id 1xMZpn-0004fU-Qw; Thu, 29 Oct 2026 19:47:03 -0400
-Received: from sea.source.kernel.org ([2600:3c0a:e001:78e:0:1991:8:25])
+ id 1xMaKA-0000bb-KW; Thu, 29 Oct 2026 20:18:26 -0400
+Received: from tor.source.kernel.org ([2600:3c04:e001:324:0:1991:8:25])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <fustini@kernel.org>)
- id 1xMZpl-000837-AX; Thu, 29 Oct 2026 19:47:03 -0400
+ id 1xMaK8-0001nO-RU; Thu, 29 Oct 2026 20:18:26 -0400
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id 0C79141AE8;
- Thu, 29 Oct 2026 23:46:59 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9A61A1F000C1;
- Thu, 29 Oct 2026 23:46:58 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 6A42A600C8;
+ Fri, 30 Oct 2026 00:18:23 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CC5461F000C1;
+ Fri, 30 Oct 2026 00:18:22 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1793317618;
- bh=IYiCIDJQDzIy9sVZnACs7hlnPViMC7eFuP0TFj2bx9o=;
+ s=k20260515; t=1793319503;
+ bh=WuGHYVzDuxwauqa9MbwOEzi/k1QnT3+qqkE6pGCP28E=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To;
- b=dEwq/94msYQCgD6yl0InVsQ3JY418ifxXs6kdpIY6UvoAUXhOgb5XglYVs/fhCShK
- 5Ws8aK7U/Iuz0Oh9OFt/QjcYWiAiJa0VbRO7A6Wt8Gzp3edGdAoXFrW/w7pfO9XX4Y
- tSDNME5Y1q+YeJBusxqNyg5r57EBt+jNVekj9lGMsEvybYbqvkhc3isd5OGrELbBvg
- VsFSFt9uEvEjf0T+SjbLSrj4iInext4/H9wu+x470zm3uC+l1MA3mmbePAaH9b+o0b
- 2nzhzl0rCyE9MfqOa59lpwkkskHIWYvS8ba91zNRL+LoYT84fzCZXqEETIuqLAI6U2
- 9QL3IlxrfMI/g==
-Date: Thu, 29 Oct 2026 16:46:57 -0700
+ b=DvXyImnKu8K0Jn8fHARur07InJ9NehRsrD0h9C6CiuFm4bmqehuKV8OPW65m4rQTy
+ l/rnXLbBDrO1qky3INL6RkWeRBdv/0OaGdre13WS5NWBggG3B5DXlAqXVZ9+u9U5ul
+ lYFu2T0C7lSAt8PbS94IEl20kUeXKee3hLUczzh0+RgwGqzNyjZbbPMSZlPuFQ0/IH
+ t7+Mi6XKGbNNQjbsGbsjH/3MjJlPxs3JQT8FgboUZiGFAQgX12Z7JLhSJVKR6mVS7r
+ obGGI8ohOs5Avk6hxZ6lSvLakerWDMdyvZL9SaYZheg6N4/ci3q9K6mCeQ0qcjQfrf
+ Yz1s9Vm3307Eg==
+Date: Thu, 29 Oct 2026 17:18:21 -0700
 From: Drew Fustini <fustini@kernel.org>
 To: Prajwal N <prajwal.n@oss.qualcomm.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
@@ -50,19 +50,18 @@ Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
  yunhui cui <cuiyunhui@bytedance.com>,
  Chen Pei <cp0613@linux.alibaba.com>, guo.wenjia23@zte.com.cn,
  liu.qingtao2@zte.com.cn, prajwal.n.oss@gmail.com
-Subject: Re: [PATCH v6 3/6] hw/riscv: implement CBQRI capacity controller
-Message-ID: <auPa8dDH6tj8nZfH@thelio>
+Subject: Re: [PATCH v6 6/6] hw/riscv: add CBQRI controllers to virt machine
+Message-ID: <auPiTQKsB1syQLIl@thelio>
 References: <20261026-riscv-ssqosid-cbqri-v6-0-1a367a35cd0e@kernel.org>
- <20261026-riscv-ssqosid-cbqri-v6-3-1a367a35cd0e@kernel.org>
- <b789deea-1d49-4d3e-8203-58ff42fcb930@oss.qualcomm.com>
+ <20261026-riscv-ssqosid-cbqri-v6-6-1a367a35cd0e@kernel.org>
+ <af95947c-62aa-46ad-82e9-1720be6fefde@oss.qualcomm.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <b789deea-1d49-4d3e-8203-58ff42fcb930@oss.qualcomm.com>
-Received-SPF: pass client-ip=2600:3c0a:e001:78e:0:1991:8:25;
- envelope-from=fustini@kernel.org; helo=sea.source.kernel.org
+In-Reply-To: <af95947c-62aa-46ad-82e9-1720be6fefde@oss.qualcomm.com>
+Received-SPF: pass client-ip=2600:3c04:e001:324:0:1991:8:25;
+ envelope-from=fustini@kernel.org; helo=tor.source.kernel.org
 X-Spam_score_int: -43
 X-Spam_score: -4.4
 X-Spam_bar: ----
@@ -81,209 +80,58 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-20.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS autolearn=ham
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS autolearn=ham
 	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Wed, Oct 28, 2026 at 07:02:32PM +0530, Prajwal N wrote:
+On Wed, Oct 28, 2026 at 07:26:33PM +0530, Prajwal N wrote:
 > Hi Drew,
 > 
 > On 26-10-2026 23:17, Drew Fustini wrote:
 > > From: Nicolas Pitre <npitre@baylibre.com>
 > > 
-> > Implement a capacity controller according to the Capacity and Bandwidth
-> > QoS Register Interface (CBQRI) which supports these capabilities:
-> > 
-> >   - Number of access types: 2 (code and data)
-> >   - Usage monitoring operations: CONFIG_EVENT, READ_COUNTER
-> >   - Event IDs supported: None, Occupancy
-> >   - Capacity allocation ops: CONFIG_LIMIT, READ_LIMIT, FLUSH_RCID
-> > 
-> > Link: https://github.com/riscv-non-isa/riscv-cbqri/releases/tag/v1.0
-> > Signed-off-by: Nicolas Pitre <npitre@baylibre.com>
-> > [fustini: add fields introduced in the ratified spec: cunits, rpfx, p]
-> > Reviewed-by: Radim Krčmář <radim.krcmar@oss.qualcomm.com>
-> > Signed-off-by: Drew Fustini <fustini@kernel.org>
-> > ---
-> >  MAINTAINERS               |   1 +
-> >  hw/riscv/cbqri_capacity.c | 727 ++++++++++++++++++++++++++++++++++++++++++++++
-> >  2 files changed, 728 insertions(+)
-> > 
-> > diff --git a/MAINTAINERS b/MAINTAINERS
-> > index 2984779ce43a..f230cdbbe1b8 100644
-> > --- a/MAINTAINERS
-> > +++ b/MAINTAINERS
-> > @@ -408,6 +408,7 @@ M: Nicolas Pitre <npitre@baylibre.com>
-> >  M: Drew Fustini <fustini@kernel.org>
-> >  L: qemu-riscv@nongnu.org
-> >  S: Supported
-> > +F: hw/riscv/cbqri_capacity.c
-> >  F: include/hw/riscv/cbqri.h
-> >  
-> >  RISC-V SiFive (Xsf*) extensions
-> > diff --git a/hw/riscv/cbqri_capacity.c b/hw/riscv/cbqri_capacity.c
-> > new file mode 100644
-> > index 000000000000..7ea20532b950
-> > --- /dev/null
-> > +++ b/hw/riscv/cbqri_capacity.c
-> > @@ -0,0 +1,727 @@
-> > +/*
-> > + * RISC-V Capacity and Bandwidth QoS Register Interface
-> > + * URL: https://github.com/riscv-non-isa/riscv-cbqri/releases/tag/v1.0
-> > + *
-> > + * Copyright (c) 2023 BayLibre SAS
-> > + * SPDX-License-Identifier: GPL-2.0-or-later
-> > + *
-> > + * This file contains the Capacity-controller QoS Register Interface.
-> > + */
-> > +
-> > +#include "qemu/osdep.h"
-> > +#include "qapi/error.h"
-> > +#include "qemu/error-report.h"
-> > +#include "qemu/log.h"
-> > +#include "qemu/module.h"
-> > +#include "qemu/bitmap.h"
-> > +#include "hw/core/qdev-properties.h"
-> > +#include "hw/core/sysbus.h"
-> > +#include "target/riscv/cpu.h"
+> > Add CBQRI controllers to the RISC-V virt machine. The device properties
+> > can be fully configured from the command line:
+[..]
+> > diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> > index d4b501802f60..dbc0f8cfc8d7 100644
+> > --- a/hw/riscv/virt.c
+> > +++ b/hw/riscv/virt.c
+> > @@ -57,6 +57,7 @@
+> >  #include "hw/pci-host/gpex.h"
+> >  #include "hw/display/ramfb.h"
+> >  #include "hw/acpi/aml-build.h"
 > > +#include "hw/riscv/cbqri.h"
+> >  #include "qapi/qapi-visit-common.h"
+> >  #include "hw/virtio/virtio-iommu.h"
+> >  #include "hw/uefi/var-service-api.h"
+> > @@ -1157,6 +1158,8 @@ static void virt_machine_class_init(ObjectClass *oc, const void *data)
+> >  #ifdef CONFIG_TPM
+> >      machine_class_allow_dynamic_sysbus_dev(mc, TYPE_TPM_TIS_SYSBUS);
+> >  #endif
+> > +    machine_class_allow_dynamic_sysbus_dev(mc, TYPE_RISCV_CBQRI_BC);
+> > +    machine_class_allow_dynamic_sysbus_dev(mc, TYPE_RISCV_CBQRI_CC);
 > 
-> [...]
-> 
-> > +static void riscv_cbqri_cc_write(void *opaque, hwaddr addr,
-> > +                                 uint64_t value, unsigned size)
-> > +{
-> > +    RiscvCbqriCapacityState *cc = opaque;
-> > +
-> > +    assert((addr % 8) == 0);
-> > +
-> The same comments in the riscv_cbqri_cc_read() below are applicable
-> here as well.
-> 
-> > +    switch (addr) {
-> > +    case A_CC_CAPABILITIES:
-> > +        /* read-only register */
-> > +        break;
-> > +    case A_CC_MON_CTL:
-> > +        riscv_cbqri_cc_write_mon_ctl(cc, value);
-> > +        break;
-> > +    case A_CC_ALLOC_CTL:
-> > +        riscv_cbqri_cc_write_alloc_ctl(cc, value);
-> > +        break;
-> > +    case A_CC_MON_CTR_VAL:
-> > +        /* read-only register */
-> > +        break;
-> > +    case A_CC_BLOCK_MASK:
-> > +        if (cc->ncblks == 0) {
-> > +            break;
-> > +        }
-> > +        /* fallthrough */
-> > +    default:
-> > +        uint32_t blkmask_slot = (addr - A_CC_BLOCK_MASK) / 8;
-> > +        if (blkmask_slot == get_slots(cc)) {
-> > +            /* this is cc_cunits register */
-> > +            break;
-> > +        } else if (blkmask_slot > get_slots(cc)) {
-> > +            qemu_log_mask(LOG_GUEST_ERROR,
-> > +                          "%s: out of bounds (addr=0x%x)",
-> > +                          __func__, (uint32_t)addr);
-> > +            break;
-> > +        }
-> > +        cc->alloc_blockmasks[blkmask_slot] = value;
-> > +    }
-> > +}
-> > +
-> > +static uint64_t riscv_cbqri_cc_read(void *opaque, hwaddr addr, unsigned size)
-> > +{
-> > +    RiscvCbqriCapacityState *cc = opaque;
-> > +    uint64_t value = 0;
-> > +
-> > +    assert((addr % 8) == 0);
-> > +
-> To access the 64 bit CBQRI register, the Linux kernel is performing two
-> 32 bit reads. The register offsets that are passed to this function are 0x00,
-> 0x04, 0x08 ... The assert is triggered for the addr 0x04, 0x0c.. and the
-> QEMU exists.
-> This check should have been:
-> assert((addr %4) == 0)
-> 
-> The switch statement uses the register offsets that are 8-byte aligned.
-> A_CC_CAPABILITIES (0x00), A_CC_MON_CTL (0x08) etc.
-> Since the kernel invokes read twice, the second readl() has the offset addr
-> 0x04. This does not match any offset and falls into the default case.
-> The following change fixes the problem.
-> 
->        hwaddr reg_addr = addr & ~7ULL; /* align down to 8-byte boundary */> +    switch (addr) {
->        switch (reg_addr) {> +    case A_CC_CAPABILITIES:
-> > +        value = FIELD_DP64(value, CC_CAPABILITIES, VER_MAJOR,
-> > +                           RISCV_CBQRI_VERSION_MAJOR);
-> > +        value = FIELD_DP64(value, CC_CAPABILITIES, VER_MINOR,
-> > +                           RISCV_CBQRI_VERSION_MINOR);
-> > +        value = FIELD_DP64(value, CC_CAPABILITIES, NCBLKS,
-> > +                           cc->ncblks);
-> > +        value = FIELD_DP64(value, CC_CAPABILITIES, FRCID,
-> > +                           cc->supports_alloc_op_flush_rcid);
-> > +        value = FIELD_DP64(value, CC_CAPABILITIES, CUNITS, 0);
-> > +        value = FIELD_DP64(value, CC_CAPABILITIES, RPFX, 0);
-> > +        value = FIELD_DP64(value, CC_CAPABILITIES, P, 0);
-> > +        break;
-> > +    case A_CC_MON_CTL:
-> > +        value = cc->cc_mon_ctl;
-> > +        break;
-> > +    case A_CC_ALLOC_CTL:
-> > +        value = cc->cc_alloc_ctl;
-> > +        break;
-> > +    case A_CC_MON_CTR_VAL:
-> > +        value = cc->cc_mon_ctr_val;
-> > +        break;
-> > +    case A_CC_BLOCK_MASK:
-> > +        if (cc->ncblks == 0) {
-> > +            break;
-> > +        }
-> > +        /* fallthrough */
-> > +    default:
-> > +        unsigned int blkmask_slot = (addr - A_CC_BLOCK_MASK) / 8;
-> > +        if (blkmask_slot == get_slots(cc)) {
-> > +            /*
-> > +             * The cc_cunits register is always the slot following the
-> > +             * last slot of cc_blockmask register. Capacity units are
-> > +             * not supported by this implementation so must return 0.
-> > +             */
-> > +            value = 0;
-> > +            break;
-> > +        } else if (blkmask_slot > get_slots(cc)) {
-> > +            qemu_log_mask(LOG_GUEST_ERROR, "%s: out of bounds (addr=0x%x)",
-> > +                          __func__, (uint32_t)addr);
-> > +            break;
-> > +        }
-> > +        value = cc->alloc_blockmasks[blkmask_slot];
-> > +    }
-> > +
-> The logic within the switch statement always computes the full 64-bit register
-> value. But the Linux kernel requested for 32 bits. The kernel is creating a
-> 64-bit value with the two 32-bit values. This should return only the relevant half.
-> The following code snippet fixed the problem.
->     /* Return the correct 32-bit */
->     if (size == 4) {
->         if (addr & 4)
->             return value >> 32;   // high word
->         else
->             return value & 0xffffffff;  // low word
->     }
-> 
-> Thanks,
-> Prajwal N
+> When the controller device is created dynamically through the QEMU command line, the
+> corresponding device tree node must also be created. As I do not see the implementation
+> to add the DT node in this series, Could you please clarify how it is created.?
 
-Thank you for reviewing. Did you see that riscv_cbqri_cc_ops actually
-invokes riscv_cbqri_cc_read_wrapper() and
-riscv_cbqri_cc_write_wrapper()?
+I have been using a static dtb for the purposes of testing the CBQRI
+support in Linux against QEMU. The Linux RFC [1] carried a
+"not for upstream" patch containing a dts for the virt machine with
+the controller nodes added.
 
-Those wrappers were added in v5 based on Radim's feedback on v4.
+I would prefer to keep this series limited to the current scope, and I
+had planned to implement device tree generation in a follow-up series,
+as well as send an updated version of the ACPI RQSC series [2]. I'll add
+a note about this to the cover letter in the next rev.
 
 Thanks,
 Drew
+
+[1] https://lore.kernel.org/all/20260119-ssqosid-cbqri-v1-18-aa2a75153832@kernel.org/
+[2] https://lore.kernel.org/all/20260202-riscv-rqsc-v1-0-dcf448a3ed73@kernel.org/
 
