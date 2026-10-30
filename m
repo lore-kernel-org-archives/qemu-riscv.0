@@ -1,72 +1,72 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7097A606A31C
-	for <qemu-riscv@archiver.kernel.org>; Fri, 30 Oct 2026 15:18:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 121E8606A31D
+	for <qemu-riscv@archiver.kernel.org>; Fri, 30 Oct 2026 15:18:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=k3P9lMGL
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=UvddITIR
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xMoMB-0004jQ-FY; Fri, 30 Oct 2026 11:17:27 -0400
+	id 1xMoM6-0004em-IL; Fri, 30 Oct 2026 11:17:22 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xMoLt-0004Uh-0Q
- for qemu-riscv@nongnu.org; Fri, 30 Oct 2026 11:17:14 -0400
-Received: from mail-dl1-x122a.google.com ([2607:f8b0:4864:20::122a])
+ id 1xMoM2-0004bp-0h
+ for qemu-riscv@nongnu.org; Fri, 30 Oct 2026 11:17:18 -0400
+Received: from mail-dl1-x1233.google.com ([2607:f8b0:4864:20::1233])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xMoLf-0008Tf-C1
- for qemu-riscv@nongnu.org; Fri, 30 Oct 2026 11:17:02 -0400
-Received: by mail-dl1-x122a.google.com with SMTP id
- a92af1059eb24-15dd124bbe7so1420987c88.1
- for <qemu-riscv@nongnu.org>; Fri, 30 Oct 2026 08:16:53 -0700 (PDT)
+ id 1xMoM0-0008W1-6G
+ for qemu-riscv@nongnu.org; Fri, 30 Oct 2026 11:17:17 -0400
+Received: by mail-dl1-x1233.google.com with SMTP id
+ a92af1059eb24-1931ff67a29so121242c88.1
+ for <qemu-riscv@nongnu.org>; Fri, 30 Oct 2026 08:17:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1793373412; x=1793978212; darn=nongnu.org;
+ d=gmail.com; s=20260707; t=1793373435; x=1793978235; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=HPp4K8SpYewvoGkZt5YpU/W5aoKsUCXebK5ekrwOnQY=;
- b=k3P9lMGLfNIhD3ZBFsXwRWIqRI1o2V6hiXKxgRmuHfvAR+NMbO2UZvRk0Msh+U4PAy
- byvjhZ2JvOijeFlweJ/nlbV12EjPNubvh7yITCa5IqS6Lzidxdrm9PWmKMFqTeVgxTZx
- ctfkRvCnTW7Y4C8M/AGZ6iNGC6ef3ZcC5J6sSULl04Gd8i82tFc8n4W0oh73mtGm8S6+
- OKksdmIyVrcDqdKWMYCyQ3RIUZvPtf6GYhbgnzFiq+7wzHh/cr4b2IKuV7rbVD/nbl8L
- NJEkB3dUwjMuad60c4z1huvTFM805szaFvFvheqLEpz06ATllHVlChuLuxfrsMkHAfen
- q3Gg==
+ bh=m864uzH9D1nJnXhJ32zoDB2BUw6AVK2KA1WWNZhkMsE=;
+ b=UvddITIRGppPhk9RxFZ1M/UETsEUgmdxoB86M8NSL032pxbc/5q02QcGEcIszdnCuW
+ jLeuEJuyX3Vn1kb8Uhz9hCxBwkf82vm1ITfM2bJJerRzgJ4hQaEwjO3/e0KiqP4Tni8P
+ DKSc/r+nJITU/Muocw2gKHVf2TfCHOd6at2u8fA3FCaYhjOhHXKmOO09WFwPdne67MUT
+ J45s/QiLXWAhcJ/AkYrEio09H+qeieLXNCujtEI1ClWtFIRCuF4Sb37Z9Dbrhaduogpa
+ HtDLo+jig+3zMSIiEKENl3zwUpF3Z75VcdZc/7Rd+05u0AjrATODJiVVrgRXs/6LgZoO
+ MjiQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793373412; x=1793978212;
+ d=1e100.net; s=20260707; t=1793373435; x=1793978235;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=HPp4K8SpYewvoGkZt5YpU/W5aoKsUCXebK5ekrwOnQY=;
- b=AOrgNVl8pS2Ag3M+Lv/ec7CJ1KRkHCpg7J6NilzpnmhGZhfFf6k+ZJGzXpp3GHvSl1
- kR8dBDKFCPHFvmEjxm7LovweG+hWD0/pOeO6IOpjd8G9fKbyXgTI7oncFTzmDqR1IvM+
- B7H7CTwRC7q22mmZAYEhEIDrakSDhrmQTzxgXestNzg4/W5A5rzzdbP2Ta398yuedEzA
- FJBK46M7E8T2MfTgfghrJ9NPhLsUSRX4W46GXw/LUCajJQhhf5qCpQmrB+Zy9xK+ODMM
- 2HlsIxXBBq4QZxrycIbDc+T4BxKybnm/SLnUWrqMfueLArc09wTMTWKZW/d0TkivhLrH
- 3+WA==
+ bh=m864uzH9D1nJnXhJ32zoDB2BUw6AVK2KA1WWNZhkMsE=;
+ b=rha7opfUrOCrODu24kS68pfoxB5gqZVaZmgk+vLUwWEa+HqjHt6bqjtsCAAUeOPwx9
+ qUN5IHJ2plkbnvsDcqRtJ6GwlebMGpZjzCdtwLOxFLz7s0wWmeqOBxE2PrKtomi4PBbm
+ IDsEKLS1v+A476n9Z0rUo9EmwTZDZ3j4IrilKkpRg4z2B0r6HSl14N46DMZLn8ilkL9u
+ 6IhidHi7fPFD+uPB4GDS3PvgeO6GYGr/6+pW05ubQzMnEKTy+nAemQqQ1t6IE3yJ38R4
+ 2A+cibgwFxQkZoz1pP6qtzfwiiKjsXcVa2Ttc2Rh2cIhY6cvTpxWoIwgDuhQDbY/i4/L
+ JMyw==
 X-Forwarded-Encrypted: i=1;
- AKwUvBzUBAoHld1iPOsKj9Y42Fom3J8UM2ycHswe0iPnN3gSTaEVfHJvAsvxKInUq2ITqAfpMt5oIDDZQjmN@nongnu.org
-X-Gm-Message-State: AFq9FYK6Rwg2iU2qJssK0UWsJD2j0jI4HU8ndapygA3qyrh+7tX986W9
- ajGXJbRbJyRIt+guAW2CAkqGdQ2YOsDb8UHR8nhIHVeFWMFFj0teoEkL
-X-Gm-Gg: AYBFou324Xp8Rg+a1wkbCVjZmT+iQtaq4lkKscqRLObTlV6bXhL/kwX1dS09P87VUm8
- Inyk4HTjh8DLzZXs5H2aOyCAiW8roklJ8cqKYhGI6hNJDdY1vDTr14UbKUcqs4n1GR1iP+RbNN5
- DXtDRZmg74Chwv2IyPdNahStCsAWWBcHTNyBLueLDIMNgO6YivHqxKVwDkugWZnZMm5SXd0sQQW
- 1cQ4w9EhcXtRxVLses7mjV/YxY4OzROqEvRlMdKG2G7N/3iZ5z9QmDSpmxVrWqG21EU0eQxTmTG
- u/LHCb6LBbWLw2nPO5c+4bKn/2k2NxqGLk42ULgOm15AsDYJeuwAhrDfwng6uci7vesGsce3yOh
- Tgz0o2HL4u0M3ASXYMj2NHzQ58pArQt0+oDWqfcS4ssOw92ICiuGLOUXYtdUJsYldyqHDh6Va8y
- iPEi1pUDvkhM8EvFSoGKpXHatp+sRKQfUloH2J4wmE2Et39QBbBZE09JbAOsD4KQwVxLN0H0e7A
- w2K30wzUokttcrksFv5kUWez+MZj4tdo306HZXpT/bbDfYa932to+pyKq6tyyhIGbTDCn0b3qM6
- LSjaUJ/RApuNBKBN8g/115/m2hyVdeVmmCvRzU0cBzw/4pg5KYKvoNn8+aJBz7xmgT9wnQ==
-X-Received: by 2002:a05:7022:120c:b0:164:8e14:4939 with SMTP id
- a92af1059eb24-1ac59dd190bmr3344211c88.10.1793373412205; 
- Fri, 30 Oct 2026 08:16:52 -0700 (PDT)
+ AKwUvBy5OT3PmX5ZmjpbplK0/zKgbSIUt/kP2BGThaFWovHN9iYTX4cq4cjXRn9pYkFVeRQdJ7eeETgvv8yI@nongnu.org
+X-Gm-Message-State: AFq9FYKrGZg3mCKdRdtmtdjyFWCSlt0hpCq3bJ107+krKmjBFe+cESv9
+ 6S59qMDo66Pna/15nxg9rp6tHRCisiHHhazpHigBiv7Hm6pb92J8CIYJ
+X-Gm-Gg: AYBFou0sV/O6j17J973OFqnVcJ0Yx+gv/BEM7X3FPgNkPPhzFtFc2vW0pVRiyTHp/C6
+ JgS1si1xt9h9bqvTO6r30MIa+acinLeeklytqfb9QBJmQ8E3TQX70v72+IP2zScT9urHRpJLacw
+ Vy4JINv/ZSxk77F1iY00bTaMRf+2z3XBaaeEq/FlNiMm5g1AWsqQGUmN80gS7i9gBVMUg2zRs1F
+ 6Y6bMTZ6r2XkmpECHyuFRD+L9f3aDICY3w7mKiiKptcCU0U+NKHKFnGmRFlOhAoJ5mWP6UujyAx
+ /az/vU5ePx5HsrEcLFSj2di75fOwZGMhL0aR6XaL4gsvcAXSYeKp0s9bZVfG/0FR9+3wCtY6U2q
+ c4GF6Ra+xzQf4cmh8JysevRSDwiPIjA1cJ+Sp0LfPmkonmf87HxxS+J+WD1mVd7VjPtZ4OYqE+e
+ itpU+OygXGUxfzt4BZsPoM/wFHsbaltJsQCcw0auVuDgliVpwwHfAsceOM3ux5GCUPIfh8jY1+y
+ e/vDFKv2iIqem6b2K8di3lrD1V/QR92s4YOP6y0VnWlePSiHIhnxahx7BHIEPJV4gCHWaxGa0fl
+ JwyGCuFC+sXniKDeMp8sG+dVhZqaOr555g==
+X-Received: by 2002:a05:701b:4512:10b0:181:73fc:e53 with SMTP id
+ a92af1059eb24-1ac5b7e21fdmr3546543c88.29.1793373434663; 
+ Fri, 30 Oct 2026 08:17:14 -0700 (PDT)
 Received: from DESKTOP-Q716RM7 ([103.94.185.75])
  by smtp.googlemail.com with ESMTPSA id
- a92af1059eb24-1ac1854d925sm12770449c88.7.2026.10.30.08.16.42
+ a92af1059eb24-1ac1854d925sm12770449c88.7.2026.10.30.08.17.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 30 Oct 2026 08:16:51 -0700 (PDT)
+ Fri, 30 Oct 2026 08:17:13 -0700 (PDT)
 From: Yonggang Luo <luoyonggang@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: Anthony PERARD <anthony@xenproject.org>, Felipe Balbi <balbi@kernel.org>,
@@ -102,17 +102,17 @@ Cc: Anthony PERARD <anthony@xenproject.org>, Felipe Balbi <balbi@kernel.org>,
  Richard Henderson <richard.henderson@linaro.org>,
  Alistair Francis <alistair.francis@wdc.com>,
  Artyom Tarasenko <atar4qemu@gmail.com>, qemu-arm@nongnu.org
-Subject: [PATCH 05/15] hw/arm: expand DEFINE_MACHINE for ARM machines
-Date: Fri, 30 Oct 2026 23:15:26 +0800
-Message-ID: <20261030151539.1872-6-luoyonggang@gmail.com>
+Subject: [PATCH 07/15] hw/core/null-machine: expand DEFINE_MACHINE
+Date: Fri, 30 Oct 2026 23:15:28 +0800
+Message-ID: <20261030151539.1872-8-luoyonggang@gmail.com>
 X-Mailer: git-send-email 2.55.0.windows.3
 In-Reply-To: <20261030151539.1872-1-luoyonggang@gmail.com>
 References: <20261030151539.1872-1-luoyonggang@gmail.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::122a;
- envelope-from=luoyonggang@gmail.com; helo=mail-dl1-x122a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1233;
+ envelope-from=luoyonggang@gmail.com; helo=mail-dl1-x1233.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -139,581 +139,49 @@ X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Expand DEFINE_MACHINE() and DEFINE_MACHINE_EXTENDED() to explicit
-TypeInfo and type_register_static() calls for the ARM machine types,
-reusing integratorcp_register_types() in hw/arm/integratorcp.c.
+Expand DEFINE_MACHINE() for the none machine to
+machine_none_machine_typeinfo and
+machine_none_machine_register_types() calling type_register_static().
 
 Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
 ---
- hw/arm/bananapi_m2u.c      | 18 +++++++++++++++---
- hw/arm/cubieboard.c        | 19 +++++++++++++++----
- hw/arm/digic_boards.c      | 18 ++++++++++++++++--
- hw/arm/imx25_pdk.c         | 18 ++++++++++++++++--
- hw/arm/imx8mm-evk.c        | 20 ++++++++++++++++----
- hw/arm/integratorcp.c      | 14 ++++++++++----
- hw/arm/kzm.c               | 18 ++++++++++++++++--
- hw/arm/max78000fthr.c      | 17 +++++++++++++++--
- hw/arm/mcimx6ul-evk.c      | 18 ++++++++++++++++--
- hw/arm/mcimx7d-sabre.c     | 20 ++++++++++++++++----
- hw/arm/msf2-som.c          | 17 +++++++++++++++--
- hw/arm/netduino2.c         | 17 +++++++++++++++--
- hw/arm/netduinoplus2.c     | 17 +++++++++++++++--
- hw/arm/olimex-stm32-h405.c | 18 ++++++++++++++++--
- hw/arm/orangepi.c          | 19 +++++++++++++++----
- hw/arm/stm32vldiscovery.c  | 18 ++++++++++++++++--
- 16 files changed, 243 insertions(+), 43 deletions(-)
+ hw/core/null-machine.c | 18 ++++++++++++++++--
+ 1 file changed, 16 insertions(+), 2 deletions(-)
 
-diff --git a/hw/arm/bananapi_m2u.c b/hw/arm/bananapi_m2u.c
-index ccf60ba2955..ad30e34d718 100644
---- a/hw/arm/bananapi_m2u.c
-+++ b/hw/arm/bananapi_m2u.c
-@@ -133,8 +133,9 @@ static void bpim2u_init(MachineState *machine)
-     arm_load_kernel(&r40->cpus[0], machine, &bpms->bootinfo);
- }
- 
--static void bpim2u_machine_init(MachineClass *mc)
-+static void bpim2u_machine_class_init(ObjectClass *oc, const void *data)
- {
-+    MachineClass *mc = MACHINE_CLASS(oc);
-     static const char * const valid_cpu_types[] = {
-         ARM_CPU_TYPE_NAME("cortex-a7"),
-         NULL
-@@ -152,5 +153,16 @@ static void bpim2u_machine_init(MachineClass *mc)
-     mc->auto_create_sdcard = true;
- }
- 
--DEFINE_MACHINE_EXTENDED("bpim2u", MACHINE, Bpim2uMachineState,
--                        bpim2u_machine_init, false, false, NULL)
-+static const TypeInfo bpim2u_machine_typeinfo = {
-+    .name       = MACHINE_TYPE_NAME("bpim2u"),
-+    .parent     = TYPE_MACHINE,
-+    .class_init = bpim2u_machine_class_init,
-+    .instance_size = sizeof(Bpim2uMachineState),
-+};
-+
-+static void bpim2u_machine_register_types(void)
-+{
-+    type_register_static(&bpim2u_machine_typeinfo);
-+}
-+
-+type_init(bpim2u_machine_register_types)
-diff --git a/hw/arm/cubieboard.c b/hw/arm/cubieboard.c
-index e4fef9cd76b..66610d495bc 100644
---- a/hw/arm/cubieboard.c
-+++ b/hw/arm/cubieboard.c
-@@ -113,8 +113,9 @@ static void cubieboard_init(MachineState *machine)
-     arm_load_kernel(&a10->cpu, machine, &cbs->bootinfo);
- }
- 
--static void cubieboard_machine_init(MachineClass *mc)
-+static void cubieboard_machine_class_init(ObjectClass *oc, const void *data)
- {
-+    MachineClass *mc = MACHINE_CLASS(oc);
-     static const char * const valid_cpu_types[] = {
-         ARM_CPU_TYPE_NAME("cortex-a8"),
-         NULL
-@@ -132,6 +133,16 @@ static void cubieboard_machine_init(MachineClass *mc)
-     mc->auto_create_sdcard = true;
- }
- 
--DEFINE_MACHINE_EXTENDED("cubieboard", MACHINE, CubieboardMachineState,
--                        cubieboard_machine_init, false, false,
--                        NULL)
-+static const TypeInfo cubieboard_machine_typeinfo = {
-+    .name       = MACHINE_TYPE_NAME("cubieboard"),
-+    .parent     = TYPE_MACHINE,
-+    .class_init = cubieboard_machine_class_init,
-+    .instance_size = sizeof(CubieboardMachineState),
-+};
-+
-+static void cubieboard_machine_register_types(void)
-+{
-+    type_register_static(&cubieboard_machine_typeinfo);
-+}
-+
-+type_init(cubieboard_machine_register_types)
-diff --git a/hw/arm/digic_boards.c b/hw/arm/digic_boards.c
-index 90c19106ad0..49e71f71e97 100644
---- a/hw/arm/digic_boards.c
-+++ b/hw/arm/digic_boards.c
-@@ -136,8 +136,10 @@ static void canon_a1100_init(MachineState *machine)
-     digic4_board_init(machine, &digic4_board_canon_a1100);
- }
- 
--static void canon_a1100_machine_init(MachineClass *mc)
-+static void canon_a1100_machine_class_init(ObjectClass *oc, const void *data)
- {
-+    MachineClass *mc = MACHINE_CLASS(oc);
-+
-     mc->desc = "Canon PowerShot A1100 IS (ARM946)";
-     mc->init = &canon_a1100_init;
-     mc->ignore_memory_transaction_failures = true;
-@@ -145,4 +147,16 @@ static void canon_a1100_machine_init(MachineClass *mc)
-     mc->default_ram_id = "ram";
- }
- 
--DEFINE_MACHINE("canon-a1100", canon_a1100_machine_init)
-+static const TypeInfo canon_a1100_machine_typeinfo = {
-+    .name       = MACHINE_TYPE_NAME("canon-a1100"),
-+    .parent     = TYPE_MACHINE,
-+    .class_init = canon_a1100_machine_class_init,
-+    .instance_size = sizeof(MachineState),
-+};
-+
-+static void canon_a1100_machine_register_types(void)
-+{
-+    type_register_static(&canon_a1100_machine_typeinfo);
-+}
-+
-+type_init(canon_a1100_machine_register_types)
-diff --git a/hw/arm/imx25_pdk.c b/hw/arm/imx25_pdk.c
-index a33050788c3..546d8002662 100644
---- a/hw/arm/imx25_pdk.c
-+++ b/hw/arm/imx25_pdk.c
-@@ -140,8 +140,10 @@ static void imx25_pdk_init(MachineState *machine)
+diff --git a/hw/core/null-machine.c b/hw/core/null-machine.c
+index 60254913019..1f35b9169d1 100644
+--- a/hw/core/null-machine.c
++++ b/hw/core/null-machine.c
+@@ -42,8 +42,10 @@ static void machine_none_init(MachineState *mch)
      }
  }
  
--static void imx25_pdk_machine_init(MachineClass *mc)
-+static void imx25_pdk_machine_class_init(ObjectClass *oc, const void *data)
+-static void machine_none_machine_init(MachineClass *mc)
++static void machine_none_machine_class_init(ObjectClass *oc, const void *data)
  {
 +    MachineClass *mc = MACHINE_CLASS(oc);
 +
-     mc->desc = "ARM i.MX25 PDK board (ARM926)";
-     mc->init = imx25_pdk_init;
-     mc->ignore_memory_transaction_failures = true;
-@@ -149,4 +151,16 @@ static void imx25_pdk_machine_init(MachineClass *mc)
-     mc->auto_create_sdcard = true;
+     mc->desc = "empty machine";
+     mc->init = machine_none_init;
+     mc->max_cpus = 1;
+@@ -55,4 +57,16 @@ static void machine_none_machine_init(MachineClass *mc)
+     mc->no_cdrom = 1;
  }
  
--DEFINE_MACHINE("imx25-pdk", imx25_pdk_machine_init)
-+static const TypeInfo imx25_pdk_machine_typeinfo = {
-+    .name       = MACHINE_TYPE_NAME("imx25-pdk"),
+-DEFINE_MACHINE("none", machine_none_machine_init)
++static const TypeInfo machine_none_machine_typeinfo = {
++    .name       = MACHINE_TYPE_NAME("none"),
 +    .parent     = TYPE_MACHINE,
-+    .class_init = imx25_pdk_machine_class_init,
++    .class_init = machine_none_machine_class_init,
 +    .instance_size = sizeof(MachineState),
 +};
 +
-+static void imx25_pdk_machine_register_types(void)
++static void machine_none_machine_register_types(void)
 +{
-+    type_register_static(&imx25_pdk_machine_typeinfo);
++    type_register_static(&machine_none_machine_typeinfo);
 +}
 +
-+type_init(imx25_pdk_machine_register_types)
-diff --git a/hw/arm/imx8mm-evk.c b/hw/arm/imx8mm-evk.c
-index 6de0d9c4a2e..ba1b603081b 100644
---- a/hw/arm/imx8mm-evk.c
-+++ b/hw/arm/imx8mm-evk.c
-@@ -122,8 +122,10 @@ static const char *imx8mm_evk_get_default_cpu_type(const MachineState *ms)
-     return ARM_CPU_TYPE_NAME("cortex-a53");
- }
- 
--static void imx8mm_evk_machine_init(MachineClass *mc)
-+static void imx8mm_evk_machine_class_init(ObjectClass *oc, const void *data)
- {
-+    MachineClass *mc = MACHINE_CLASS(oc);
-+
-     mc->desc = "NXP i.MX 8MM EVK Board";
-     mc->init = imx8mm_evk_init;
-     mc->max_cpus = FSL_IMX8MM_NUM_CPUS;
-@@ -133,6 +135,16 @@ static void imx8mm_evk_machine_init(MachineClass *mc)
-     mc->get_default_cpu_type = imx8mm_evk_get_default_cpu_type;
- }
- 
--DEFINE_MACHINE_EXTENDED("imx8mm-evk", MACHINE, Imx8mmEvkMachineState,
--                        imx8mm_evk_machine_init, false, false,
--                        NULL)
-+static const TypeInfo imx8mm_evk_machine_typeinfo = {
-+    .name       = MACHINE_TYPE_NAME("imx8mm-evk"),
-+    .parent     = TYPE_MACHINE,
-+    .class_init = imx8mm_evk_machine_class_init,
-+    .instance_size = sizeof(Imx8mmEvkMachineState),
-+};
-+
-+static void imx8mm_evk_machine_register_types(void)
-+{
-+    type_register_static(&imx8mm_evk_machine_typeinfo);
-+}
-+
-+type_init(imx8mm_evk_machine_register_types)
-diff --git a/hw/arm/integratorcp.c b/hw/arm/integratorcp.c
-index b766edeeee1..9736795b243 100644
---- a/hw/arm/integratorcp.c
-+++ b/hw/arm/integratorcp.c
-@@ -691,8 +691,10 @@ static void integratorcp_init(MachineState *machine)
-     arm_load_kernel(cpu, machine, &icms->bootinfo);
- }
- 
--static void integratorcp_machine_init(MachineClass *mc)
-+static void integratorcp_machine_class_init(ObjectClass *oc, const void *data)
- {
-+    MachineClass *mc = MACHINE_CLASS(oc);
-+
-     mc->desc = "ARM Integrator/CP (ARM926EJ-S)";
-     mc->init = integratorcp_init;
-     mc->ignore_memory_transaction_failures = true;
-@@ -703,9 +705,12 @@ static void integratorcp_machine_init(MachineClass *mc)
-     machine_add_audiodev_property(mc);
- }
- 
--DEFINE_MACHINE_EXTENDED("integratorcp", MACHINE, IntegratorcpMachineState,
--                        integratorcp_machine_init, false, false,
--                        NULL)
-+static const TypeInfo integratorcp_machine_typeinfo = {
-+    .name       = MACHINE_TYPE_NAME("integratorcp"),
-+    .parent     = TYPE_MACHINE,
-+    .class_init = integratorcp_machine_class_init,
-+    .instance_size = sizeof(IntegratorcpMachineState),
-+};
- 
- static const Property core_properties[] = {
-     DEFINE_PROP_UINT32("memsz", IntegratorCMState, memsz, 0),
-@@ -760,6 +765,7 @@ static const TypeInfo icp_ctrl_regs_info = {
- 
- static void integratorcp_register_types(void)
- {
-+    type_register_static(&integratorcp_machine_typeinfo);
-     type_register_static(&icp_pic_info);
-     type_register_static(&core_info);
-     type_register_static(&icp_ctrl_regs_info);
-diff --git a/hw/arm/kzm.c b/hw/arm/kzm.c
-index e9cc53ce017..6196d40cb2e 100644
---- a/hw/arm/kzm.c
-+++ b/hw/arm/kzm.c
-@@ -129,12 +129,26 @@ static void kzm_init(MachineState *machine)
-     }
- }
- 
--static void kzm_machine_init(MachineClass *mc)
-+static void kzm_machine_class_init(ObjectClass *oc, const void *data)
- {
-+    MachineClass *mc = MACHINE_CLASS(oc);
-+
-     mc->desc = "ARM KZM Emulation Baseboard (ARM1136)";
-     mc->init = kzm_init;
-     mc->ignore_memory_transaction_failures = true;
-     mc->default_ram_id = "kzm.ram";
- }
- 
--DEFINE_MACHINE("kzm", kzm_machine_init)
-+static const TypeInfo kzm_machine_typeinfo = {
-+    .name       = MACHINE_TYPE_NAME("kzm"),
-+    .parent     = TYPE_MACHINE,
-+    .class_init = kzm_machine_class_init,
-+    .instance_size = sizeof(MachineState),
-+};
-+
-+static void kzm_machine_register_types(void)
-+{
-+    type_register_static(&kzm_machine_typeinfo);
-+}
-+
-+type_init(kzm_machine_register_types)
-diff --git a/hw/arm/max78000fthr.c b/hw/arm/max78000fthr.c
-index ed50bb91979..33c1ccbd3c8 100644
---- a/hw/arm/max78000fthr.c
-+++ b/hw/arm/max78000fthr.c
-@@ -35,8 +35,9 @@ static void max78000_init(MachineState *machine)
-                        0x00000000, FLASH_SIZE);
- }
- 
--static void max78000_machine_init(MachineClass *mc)
-+static void max78000_machine_class_init(ObjectClass *oc, const void *data)
- {
-+    MachineClass *mc = MACHINE_CLASS(oc);
-     static const char * const valid_cpu_types[] = {
-         ARM_CPU_TYPE_NAME("cortex-m4"),
-         NULL
-@@ -47,4 +48,16 @@ static void max78000_machine_init(MachineClass *mc)
-     mc->valid_cpu_types = valid_cpu_types;
- }
- 
--DEFINE_MACHINE("max78000fthr", max78000_machine_init)
-+static const TypeInfo max78000_machine_typeinfo = {
-+    .name       = MACHINE_TYPE_NAME("max78000fthr"),
-+    .parent     = TYPE_MACHINE,
-+    .class_init = max78000_machine_class_init,
-+    .instance_size = sizeof(MachineState),
-+};
-+
-+static void max78000_machine_register_types(void)
-+{
-+    type_register_static(&max78000_machine_typeinfo);
-+}
-+
-+type_init(max78000_machine_register_types)
-diff --git a/hw/arm/mcimx6ul-evk.c b/hw/arm/mcimx6ul-evk.c
-index 53d221b4a9a..a4cdaac1176 100644
---- a/hw/arm/mcimx6ul-evk.c
-+++ b/hw/arm/mcimx6ul-evk.c
-@@ -68,8 +68,10 @@ static void mcimx6ul_evk_init(MachineState *machine)
-     }
- }
- 
--static void mcimx6ul_evk_machine_init(MachineClass *mc)
-+static void mcimx6ul_evk_machine_class_init(ObjectClass *oc, const void *data)
- {
-+    MachineClass *mc = MACHINE_CLASS(oc);
-+
-     mc->desc = "Freescale i.MX6UL Evaluation Kit (Cortex-A7)";
-     mc->init = mcimx6ul_evk_init;
-     mc->max_cpus = FSL_IMX6UL_NUM_CPUS;
-@@ -78,4 +80,16 @@ static void mcimx6ul_evk_machine_init(MachineClass *mc)
-     mc->auto_create_sdcard = true;
- }
- 
--DEFINE_MACHINE("mcimx6ul-evk", mcimx6ul_evk_machine_init)
-+static const TypeInfo mcimx6ul_evk_machine_typeinfo = {
-+    .name       = MACHINE_TYPE_NAME("mcimx6ul-evk"),
-+    .parent     = TYPE_MACHINE,
-+    .class_init = mcimx6ul_evk_machine_class_init,
-+    .instance_size = sizeof(MachineState),
-+};
-+
-+static void mcimx6ul_evk_machine_register_types(void)
-+{
-+    type_register_static(&mcimx6ul_evk_machine_typeinfo);
-+}
-+
-+type_init(mcimx6ul_evk_machine_register_types)
-diff --git a/hw/arm/mcimx7d-sabre.c b/hw/arm/mcimx7d-sabre.c
-index 55c23061b0a..5a868af6c1f 100644
---- a/hw/arm/mcimx7d-sabre.c
-+++ b/hw/arm/mcimx7d-sabre.c
-@@ -76,8 +76,10 @@ static void mcimx7d_sabre_init(MachineState *machine)
-     }
- }
- 
--static void mcimx7d_sabre_machine_init(MachineClass *mc)
-+static void mcimx7d_sabre_machine_class_init(ObjectClass *oc, const void *data)
- {
-+    MachineClass *mc = MACHINE_CLASS(oc);
-+
-     mc->desc = "Freescale i.MX7 DUAL SABRE (Cortex-A7)";
-     mc->init = mcimx7d_sabre_init;
-     mc->max_cpus = FSL_IMX7_NUM_CPUS;
-@@ -87,6 +89,16 @@ static void mcimx7d_sabre_machine_init(MachineClass *mc)
-     mc->auto_create_sdcard = true;
- }
- 
--DEFINE_MACHINE_EXTENDED("mcimx7d-sabre", MACHINE, Mcimx7dSabreMachineState,
--                        mcimx7d_sabre_machine_init, false, false,
--                        NULL)
-+static const TypeInfo mcimx7d_sabre_machine_typeinfo = {
-+    .name       = MACHINE_TYPE_NAME("mcimx7d-sabre"),
-+    .parent     = TYPE_MACHINE,
-+    .class_init = mcimx7d_sabre_machine_class_init,
-+    .instance_size = sizeof(Mcimx7dSabreMachineState),
-+};
-+
-+static void mcimx7d_sabre_machine_register_types(void)
-+{
-+    type_register_static(&mcimx7d_sabre_machine_typeinfo);
-+}
-+
-+type_init(mcimx7d_sabre_machine_register_types)
-diff --git a/hw/arm/msf2-som.c b/hw/arm/msf2-som.c
-index 1372d7f628a..938ccab05c4 100644
---- a/hw/arm/msf2-som.c
-+++ b/hw/arm/msf2-som.c
-@@ -96,8 +96,9 @@ static void emcraft_sf2_s2s010_init(MachineState *machine)
-                        0, soc->envm_size);
- }
- 
--static void emcraft_sf2_machine_init(MachineClass *mc)
-+static void emcraft_sf2_machine_class_init(ObjectClass *oc, const void *data)
- {
-+    MachineClass *mc = MACHINE_CLASS(oc);
-     static const char * const valid_cpu_types[] = {
-         ARM_CPU_TYPE_NAME("cortex-m3"),
-         NULL
-@@ -108,4 +109,16 @@ static void emcraft_sf2_machine_init(MachineClass *mc)
-     mc->valid_cpu_types = valid_cpu_types;
- }
- 
--DEFINE_MACHINE("emcraft-sf2", emcraft_sf2_machine_init)
-+static const TypeInfo emcraft_sf2_machine_typeinfo = {
-+    .name       = MACHINE_TYPE_NAME("emcraft-sf2"),
-+    .parent     = TYPE_MACHINE,
-+    .class_init = emcraft_sf2_machine_class_init,
-+    .instance_size = sizeof(MachineState),
-+};
-+
-+static void emcraft_sf2_machine_register_types(void)
-+{
-+    type_register_static(&emcraft_sf2_machine_typeinfo);
-+}
-+
-+type_init(emcraft_sf2_machine_register_types)
-diff --git a/hw/arm/netduino2.c b/hw/arm/netduino2.c
-index 0db8798b4bd..3f95672670e 100644
---- a/hw/arm/netduino2.c
-+++ b/hw/arm/netduino2.c
-@@ -52,8 +52,9 @@ static void netduino2_init(MachineState *machine)
-                        0, FLASH_SIZE);
- }
- 
--static void netduino2_machine_init(MachineClass *mc)
-+static void netduino2_machine_class_init(ObjectClass *oc, const void *data)
- {
-+    MachineClass *mc = MACHINE_CLASS(oc);
-     static const char * const valid_cpu_types[] = {
-         ARM_CPU_TYPE_NAME("cortex-m3"),
-         NULL
-@@ -65,4 +66,16 @@ static void netduino2_machine_init(MachineClass *mc)
-     mc->ignore_memory_transaction_failures = true;
- }
- 
--DEFINE_MACHINE("netduino2", netduino2_machine_init)
-+static const TypeInfo netduino2_machine_typeinfo = {
-+    .name       = MACHINE_TYPE_NAME("netduino2"),
-+    .parent     = TYPE_MACHINE,
-+    .class_init = netduino2_machine_class_init,
-+    .instance_size = sizeof(MachineState),
-+};
-+
-+static void netduino2_machine_register_types(void)
-+{
-+    type_register_static(&netduino2_machine_typeinfo);
-+}
-+
-+type_init(netduino2_machine_register_types)
-diff --git a/hw/arm/netduinoplus2.c b/hw/arm/netduinoplus2.c
-index 5ac0eb81637..169e7b80b3c 100644
---- a/hw/arm/netduinoplus2.c
-+++ b/hw/arm/netduinoplus2.c
-@@ -53,8 +53,9 @@ static void netduinoplus2_init(MachineState *machine)
-                        0, FLASH_SIZE);
- }
- 
--static void netduinoplus2_machine_init(MachineClass *mc)
-+static void netduinoplus2_machine_class_init(ObjectClass *oc, const void *data)
- {
-+    MachineClass *mc = MACHINE_CLASS(oc);
-     static const char * const valid_cpu_types[] = {
-         ARM_CPU_TYPE_NAME("cortex-m4"),
-         NULL
-@@ -65,4 +66,16 @@ static void netduinoplus2_machine_init(MachineClass *mc)
-     mc->valid_cpu_types = valid_cpu_types;
- }
- 
--DEFINE_MACHINE("netduinoplus2", netduinoplus2_machine_init)
-+static const TypeInfo netduinoplus2_machine_typeinfo = {
-+    .name       = MACHINE_TYPE_NAME("netduinoplus2"),
-+    .parent     = TYPE_MACHINE,
-+    .class_init = netduinoplus2_machine_class_init,
-+    .instance_size = sizeof(MachineState),
-+};
-+
-+static void netduinoplus2_machine_register_types(void)
-+{
-+    type_register_static(&netduinoplus2_machine_typeinfo);
-+}
-+
-+type_init(netduinoplus2_machine_register_types)
-diff --git a/hw/arm/olimex-stm32-h405.c b/hw/arm/olimex-stm32-h405.c
-index de9ac4978ce..4e415a420c4 100644
---- a/hw/arm/olimex-stm32-h405.c
-+++ b/hw/arm/olimex-stm32-h405.c
-@@ -56,8 +56,10 @@ static void olimex_stm32_h405_init(MachineState *machine)
-                        0, FLASH_SIZE);
- }
- 
--static void olimex_stm32_h405_machine_init(MachineClass *mc)
-+static void olimex_stm32_h405_machine_class_init(ObjectClass *oc,
-+                                                 const void *data)
- {
-+    MachineClass *mc = MACHINE_CLASS(oc);
-     static const char * const valid_cpu_types[] = {
-         ARM_CPU_TYPE_NAME("cortex-m4"),
-         NULL
-@@ -71,4 +73,16 @@ static void olimex_stm32_h405_machine_init(MachineClass *mc)
-     mc->default_ram_size = 0;
- }
- 
--DEFINE_MACHINE("olimex-stm32-h405", olimex_stm32_h405_machine_init)
-+static const TypeInfo olimex_stm32_h405_machine_typeinfo = {
-+    .name       = MACHINE_TYPE_NAME("olimex-stm32-h405"),
-+    .parent     = TYPE_MACHINE,
-+    .class_init = olimex_stm32_h405_machine_class_init,
-+    .instance_size = sizeof(MachineState),
-+};
-+
-+static void olimex_stm32_h405_machine_register_types(void)
-+{
-+    type_register_static(&olimex_stm32_h405_machine_typeinfo);
-+}
-+
-+type_init(olimex_stm32_h405_machine_register_types)
-diff --git a/hw/arm/orangepi.c b/hw/arm/orangepi.c
-index 18ed174032b..ec1d19b6034 100644
---- a/hw/arm/orangepi.c
-+++ b/hw/arm/orangepi.c
-@@ -111,8 +111,9 @@ static void orangepi_init(MachineState *machine)
-     arm_load_kernel(&h3->cpus[0], machine, &opms->bootinfo);
- }
- 
--static void orangepi_machine_init(MachineClass *mc)
-+static void orangepi_machine_class_init(ObjectClass *oc, const void *data)
- {
-+    MachineClass *mc = MACHINE_CLASS(oc);
-     static const char * const valid_cpu_types[] = {
-         ARM_CPU_TYPE_NAME("cortex-a7"),
-         NULL
-@@ -132,6 +133,16 @@ static void orangepi_machine_init(MachineClass *mc)
-     mc->auto_create_sdcard = true;
- }
- 
--DEFINE_MACHINE_EXTENDED("orangepi-pc", MACHINE, OrangePiMachineState,
--                        orangepi_machine_init, false, false,
--                        NULL)
-+static const TypeInfo orangepi_machine_typeinfo = {
-+    .name       = MACHINE_TYPE_NAME("orangepi-pc"),
-+    .parent     = TYPE_MACHINE,
-+    .class_init = orangepi_machine_class_init,
-+    .instance_size = sizeof(OrangePiMachineState),
-+};
-+
-+static void orangepi_machine_register_types(void)
-+{
-+    type_register_static(&orangepi_machine_typeinfo);
-+}
-+
-+type_init(orangepi_machine_register_types)
-diff --git a/hw/arm/stm32vldiscovery.c b/hw/arm/stm32vldiscovery.c
-index d899a134b38..ab9116ccc1d 100644
---- a/hw/arm/stm32vldiscovery.c
-+++ b/hw/arm/stm32vldiscovery.c
-@@ -56,8 +56,10 @@ static void stm32vldiscovery_init(MachineState *machine)
-                        0, FLASH_SIZE);
- }
- 
--static void stm32vldiscovery_machine_init(MachineClass *mc)
-+static void stm32vldiscovery_machine_class_init(ObjectClass *oc,
-+                                                const void *data)
- {
-+    MachineClass *mc = MACHINE_CLASS(oc);
-     static const char * const valid_cpu_types[] = {
-         ARM_CPU_TYPE_NAME("cortex-m3"),
-         NULL
-@@ -68,4 +70,16 @@ static void stm32vldiscovery_machine_init(MachineClass *mc)
-     mc->valid_cpu_types = valid_cpu_types;
- }
- 
--DEFINE_MACHINE("stm32vldiscovery", stm32vldiscovery_machine_init)
-+static const TypeInfo stm32vldiscovery_machine_typeinfo = {
-+    .name       = MACHINE_TYPE_NAME("stm32vldiscovery"),
-+    .parent     = TYPE_MACHINE,
-+    .class_init = stm32vldiscovery_machine_class_init,
-+    .instance_size = sizeof(MachineState),
-+};
-+
-+static void stm32vldiscovery_machine_register_types(void)
-+{
-+    type_register_static(&stm32vldiscovery_machine_typeinfo);
-+}
-+
-+type_init(stm32vldiscovery_machine_register_types)
++type_init(machine_none_machine_register_types)
 -- 
 2.55.0.windows.3
 
