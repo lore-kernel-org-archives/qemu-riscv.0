@@ -1,73 +1,73 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 75968606A31A
-	for <qemu-riscv@archiver.kernel.org>; Fri, 30 Oct 2026 04:07:03 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B92DD606A31A
+	for <qemu-riscv@archiver.kernel.org>; Fri, 30 Oct 2026 04:07:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=tenstorrent.com header.i=@tenstorrent.com header.a=rsa-sha256 header.s=google header.b=JV9Y9SR+
+	dkim=pass (2048-bit key, unprotected) header.d=tenstorrent.com header.i=@tenstorrent.com header.a=rsa-sha256 header.s=google header.b=NRvgrwPu
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xMdsx-0002eA-4y; Fri, 30 Oct 2026 00:06:35 -0400
+	id 1xMdsP-0002GT-13; Fri, 30 Oct 2026 00:06:01 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <portias@tenstorrent.com>)
- id 1xMdsl-0002QY-UN
- for qemu-riscv@nongnu.org; Fri, 30 Oct 2026 00:06:25 -0400
+ id 1xMdsL-0002FY-S4
+ for qemu-riscv@nongnu.org; Fri, 30 Oct 2026 00:05:58 -0400
 Received: from mail-dy1-x132e.google.com ([2607:f8b0:4864:20::132e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <portias@tenstorrent.com>)
- id 1xMdsh-0004r6-UO
- for qemu-riscv@nongnu.org; Fri, 30 Oct 2026 00:06:22 -0400
+ id 1xMdsJ-0004pX-OH
+ for qemu-riscv@nongnu.org; Fri, 30 Oct 2026 00:05:57 -0400
 Received: by mail-dy1-x132e.google.com with SMTP id
- 5a478bee46e88-36a0eecf73fso63940eec.3
- for <qemu-riscv@nongnu.org>; Thu, 29 Oct 2026 21:06:18 -0700 (PDT)
+ 5a478bee46e88-313bab9cfe7so73566eec.3
+ for <qemu-riscv@nongnu.org>; Thu, 29 Oct 2026 21:05:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=tenstorrent.com; s=google; t=1793333178; x=1793937978; darn=nongnu.org;
+ d=tenstorrent.com; s=google; t=1793333154; x=1793937954; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=3TCrfqCJKuqF3SRXFHT054XbVUVtqognUB1jYv32OCw=;
- b=JV9Y9SR+cLVFt+H8KYOH51axeXLmZp2cw0wFpthEL/jXIClxYZXAYKxzK/ZvU1WElA
- 1uoCDKhE0gJ3seC7d3QYiGUhHctDl3NZ8KMKWXQITDsY09v4U5bUjPls6EXyS+6tmDNv
- ReICwA2nnc8Tz1ILp2lkrqd2OSKVzAZQGSrJdwPbGnh+TwuLK1JruRB4Xw0Ak1LM+XfV
- 1ok7kk7tz8YaSXIxe5vIWi2b1dhaHgzRGTiYHPA181UmIcxqBie1rzP99e4Vqs7z3R/v
- 6UWvJMwUOpBtygeR3zSsr0CXdr8kuo6vkbeQGIhm/brAXNq8oTXmfuzEGoA2yjoCwKC0
- oK3w==
+ bh=xSgCeOGytrY3ihqWjb3zCK/EAyb5eBljfe57gKZmKdo=;
+ b=NRvgrwPu4hrHYnBVHyEdgiENYJhPJxF8DMQM5FUxoKaPPijTXSpYvCb7DWrLzOBgib
+ N1m389YLneiOA1QP3zW0MfnyaFZn4BK/9HOFdJIo8g8UpD9tqMtM6S+FnRRHLZhnNqMA
+ eTGTWAr/KpzJS5+9balNqbeB4MburPc1Kc19ACweErtOWF5kRIsLyzYhhUeGRvTa8CKJ
+ pmRhXr3PmZTNy0cSg5prSyHZS5oj1zDdT34AKKwRUCd05Nwsv+klbz3zqaJ2hdtNh3il
+ wvG+r8J/dHh/hSvNXy/vCo1zdJz3C00GzzLfTmhs3OKhTnZPxOTQyYFYh/qvNCw0gy08
+ yW8w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793333178; x=1793937978;
+ d=1e100.net; s=20260707; t=1793333154; x=1793937954;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=3TCrfqCJKuqF3SRXFHT054XbVUVtqognUB1jYv32OCw=;
- b=DAD2YSrt05jzESQEME1cCx22rFd5hv72BbJ0vmRjgsTnJx4eUJ4RIqyOUue/v129+8
- hugqaleRvAiNUX+mZ5937N04h2gxL4GFD/l2YH3qJxYs58oEGFcFEg2iSuTebCsvtbgR
- +7cGnhhy7VabgsXxLAFkLnqDf5pR2zhDa8g929A4+wenXg4tVIrpw4L4uitPuIMvMiDy
- SQRATydZOIcKS8e1vzYomDonsXLIj7Xj/BgYSi38EXhRzRNhv2Jnw2voXhINawKLrmnK
- qqvisPvtQ51XnKB/hcfVDlS4qhcn36y1y++Kp6Z0bTsBMQi8xFw+axUGFJbCTuTQ/ZZ4
- vavQ==
+ bh=xSgCeOGytrY3ihqWjb3zCK/EAyb5eBljfe57gKZmKdo=;
+ b=p2U52DheXkRlsNooZB8OaqiFPOEgmwlDZ7p/auk8fK10Jb+0BBFJFOxBhwsddy96dx
+ Fmt3oU88VKOC28TTA9wGE0mdZ3hiOfEETMOTNUKTyf/aR3iisR/ygRJwImUWQVpiRrsp
+ UHgh9S+0wa+fR6eDgYV4nY4nV0IY3fA+j9K/mGFvJCddJvBQwycrkbYkYdi/jnIQ/CHP
+ AdfsgvhNF48v+JM7jHq8brjmdNK2SHlIrXhgxzdeAKU3h3H3Tk4Egk76uFbyH01+3/74
+ 1KXXuotgRPQYnoeu53m1jHlMhEaV8RQjHWvyeXfscpzAe7X2XfVYpdScjusUsV6rhqXj
+ osnQ==
 X-Forwarded-Encrypted: i=1;
- AKwUvBz+5hPVIvdyHldo7ePqeZzFjr06V6I5CvOmsIa25Zo/nthid3qJuQ2Y8vLAPT96WBoVMujR3ToZ5crA@nongnu.org
-X-Gm-Message-State: AFq9FYK9dn7ic1rDyPbSi/M+JwuYYZb8YDe8Zjb/WS0wzpSXL3TFjflT
- X2Gh5/R6Stg1bHDZzR7mV2KbTmBTNii5ZCNFSDdCzv8mRKD7SxSkd5daEuLhmP1/ZH0=
-X-Gm-Gg: AYBFou3MjL8TwXbXqZ99yERtEIGxirBushSSJxd/1wTPXIIge9RxIj1sq8GXgrIlxPw
- fpELqgJDNW7uWUM/fnep2eDW3FKZp/avoeZwLv/bTOISh728xw7duJmnm7zFfStsTANWvbK0jvo
- sM2cW3km/7ZsjEl/FYUmgkKfTuHnZs+un5o+W6ZHvIq5/JG+MnuKFAnBN4yo2nDgTcWAv4hgsMt
- QqIRX130Scl28MlKfcRLi0BOgTUufvG73BFHA+ceCkIA7lIQPdtwJNSB/lKOs6jnNWd3iUkPUyE
- 49rRqaExcu+qp63226v7ggKZSE/qdGYsLnIU5IYRaUcrcIFQXKAaYF8t8+FNdMq3fUrjuOH0ySq
- 8+M/738kZScjQDjwY5Gyq30AJB9GdxVV5kbKs5bPC2Curo7Rh3Rv3zFbeM92zg1f91BqWIaMj8K
- /BD9H8KvCOSI7WgwEuh1K/NXunB8AJExtKNs3/imMour6yzOfDg25ElWlAUyXY3vfhoCj/8SpAO
- ODwJNOi6akAkGuoy9CMl0/WOjzdGrIRBmkjegCyQdU9HfJyAQGl2rv/0NkAQaZGPi+DjWPyhNdW
- HST+JEvA9SOhU1WchkDTs3JpxdwREXdh8EPkCelfRYEU7VfTSb9mVCMwHOgq+0jFY+aIcvJnsHF
- c+A==
-X-Received: by 2002:a05:693c:6304:b0:368:1f8c:5f23 with SMTP id
- 5a478bee46e88-36a4205b0bfmr2963105eec.0.1793333177695; 
- Thu, 29 Oct 2026 21:06:17 -0700 (PDT)
+ AKwUvBxLQBjGI0JbT6/xAY8X0eEa3Bn6cH1+1LMduy8RAIkvEMU/uoLjVBOiU85dO8uGljpEUwv1fgXYGCqM@nongnu.org
+X-Gm-Message-State: AFq9FYKpbYN59dxkHBbprC0tep/sXTGujF6gj+9zBOtEX5LhBrtiIpC8
+ nuk/XrIEJ1vFsmu9dYClHiV9AOiJS5UR9U5F8Yy8fJL7BobFiAFWUOmdGasE1YI5LvU=
+X-Gm-Gg: AYBFou1ikCNq3+QUaN0P190ofV3BOOxFIZoYFT9pu4B5P8IOoVniI3MZwXMx+trnpmj
+ eN57J5m5r7d5hVZJEQ3MifQX9M/PcsxCVFFpAzvTiPCjzhFCL7t3MT0EQ4ZBLRApjj8EbwcHa97
+ voPrNahwD8aPHduFjZUY0JlY/phTcXlKKicOGqL2VopRRPRRh4W2pnXQKrLXbSqAoWpPGlBD8iT
+ empANorXZxS5CJRgdbf+Hq+CEaipULlUGptaBSfTJEQTBdFlf9+J9Pb36LYXUu3U2674blJ44M9
+ TqhHeHvs/AleNWYdRiLTNcFLYCWWRNK9erZ4P6dQmEjB+Yq3wetJMhnt/mFG0QKpIHNEpqW/8pF
+ Azmn9vqrXzAQ43yyB8uVZzoLEhy8tokpzY/bCItb8AEbd3hXkyvNn7B+c+n8As0JebN6bYzwSU4
+ mKy455cAjayMDHlYn/uMPTBxFRy7IuYHsd/zvMANvHp+/YXaSdOtcrg2Fd4utXWp9o1FNqNT3nG
+ yCxgfhKX1FV8genV8q9zcogQ036IIovU7o1xurBXrwvYhaBqVrZAZlJXvQvjhjY9o8CiEkazMr5
+ l+jWEs+FFhB+64Zl7aHrMtGfVOScKTQFoViqGlfiMUoN9oLljwxjcxSLB8jsGPsewEsoOzjCqfn
+ wz6s=
+X-Received: by 2002:a05:7300:fb14:b0:351:7883:bf47 with SMTP id
+ 5a478bee46e88-36a41daec1emr2807623eec.0.1793333154039; 
+ Thu, 29 Oct 2026 21:05:54 -0700 (PDT)
 Received: from lima-default.tail89d63.ts.net ([159.196.41.205])
  by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-36a428af1easm2957687eec.5.2026.10.29.21.06.12
+ 5a478bee46e88-36a428af1easm2957687eec.5.2026.10.29.21.05.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 29 Oct 2026 21:06:17 -0700 (PDT)
+ Thu, 29 Oct 2026 21:05:53 -0700 (PDT)
 From: Portia Stephens <portias@oss.tenstorrent.com>
 To: qemu-devel@nongnu.org
 Cc: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
@@ -85,10 +85,9 @@ Cc: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Subject: [PATCH v3 9/9] docs/atlantis: Update Atlantis documentation to
- include the RCPU
-Date: Fri, 30 Oct 2026 14:05:15 +1000
-Message-ID: <20261030040516.853444-10-portias@oss.tenstorrent.com>
+Subject: [PATCH v3 5/9] target/riscv: Add Tenstorrent Real-time CPU
+Date: Fri, 30 Oct 2026 14:05:11 +1000
+Message-ID: <20261030040516.853444-6-portias@oss.tenstorrent.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261030040516.853444-1-portias@oss.tenstorrent.com>
 References: <20261030040516.853444-1-portias@oss.tenstorrent.com>
@@ -102,7 +101,7 @@ X-Spam_score: -2.0
 X-Spam_bar: --
 X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_NONE=-0.0001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -114,107 +113,202 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-21.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_PATCH,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,
+	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-This updates the Atlantis documentation to include new machine
-properties for running the RCPU.
+The RCPU is a high-performance 32-bit RISC-V embedded processor featuring
+a 6-stage, dual-issue superscalar pipeline, with tightly-coupled memories
+(TCMs), advanced interrupt controller (CLIC), and comprehensive
+debug/trace capabilities. It is designed for real-time, system
+management, and safety-critical applications requiring deterministic
+execution and low interrupt latency. See the Atlantis Datasheet, section
+2.2 for more information [1].
+
+The Atlantis SoC includes an RCPU used for boot, low-level control, and
+ongoing system management [1]. This adds a cpu entry for the RCPU
+and implementation specific CSRs. The CSRs are stubbed to allow code to
+run without exceptions but does not implement their functionality.
+
+[1] https://github.com/tenstorrent/atlantis-soc-docs/blob/main/data_sheet/atl_soc_data_sheet.pdf
 
 Signed-off-by: Portia Stephens <portias@oss.tenstorrent.com>
 ---
- docs/system/gdb.rst               |  2 ++
- docs/system/riscv/tt_atlantis.rst | 46 +++++++++++++++++++++++++++++--
- 2 files changed, 46 insertions(+), 2 deletions(-)
+ MAINTAINERS                  |  1 +
+ target/riscv/cpu-qom.h       |  1 +
+ target/riscv/cpu.c           | 33 +++++++++++++++++++
+ target/riscv/tcg/csr.h       |  3 ++
+ target/riscv/tcg/meson.build |  1 +
+ target/riscv/tcg/tt_csr.c    | 63 ++++++++++++++++++++++++++++++++++++
+ 6 files changed, 102 insertions(+)
+ create mode 100644 target/riscv/tcg/tt_csr.c
 
-diff --git a/docs/system/gdb.rst b/docs/system/gdb.rst
-index b6d8f8e77d..3777630337 100644
---- a/docs/system/gdb.rst
-+++ b/docs/system/gdb.rst
-@@ -79,6 +79,8 @@ debug some interaction between kernel and user-space you are better
- off running your guest program with gdb either in the guest or using
- a gdbserver exposed via a port to the outside world.
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 4ca1751e30..cfbb322da7 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -1850,6 +1850,7 @@ R: Portia Stephens <portias@oss.tenstorrent.com>
+ L: qemu-riscv@nongnu.org
+ S: Supported
+ F: docs/system/riscv/tt_*.rst
++F: target/riscv/tcg/tt_*.c
+ F: hw/misc/tt_*.c
+ F: hw/riscv/tt_*.c
+ F: include/hw/misc/tt_*.h
+diff --git a/target/riscv/cpu-qom.h b/target/riscv/cpu-qom.h
+index 61234842e3..72570ed47e 100644
+--- a/target/riscv/cpu-qom.h
++++ b/target/riscv/cpu-qom.h
+@@ -57,6 +57,7 @@
+ #define TYPE_RISCV_CPU_THEAD_C908V      RISCV_CPU_TYPE_NAME("thead-c908v")
+ #define TYPE_RISCV_CPU_VEYRON_V1        RISCV_CPU_TYPE_NAME("veyron-v1")
+ #define TYPE_RISCV_CPU_TT_ASCALON       RISCV_CPU_TYPE_NAME("tt-ascalon")
++#define TYPE_RISCV_CPU_TT_RCPU          RISCV_CPU_TYPE_NAME("tt-rcpu")
+ #define TYPE_RISCV_CPU_XIANGSHAN_NANHU  RISCV_CPU_TYPE_NAME("xiangshan-nanhu")
+ #define TYPE_RISCV_CPU_XIANGSHAN_KMH    RISCV_CPU_TYPE_NAME("xiangshan-kunminghu")
+ #define TYPE_RISCV_CPU_MIPS_P8700       RISCV_CPU_TYPE_NAME("mips-p8700")
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 5a0529fbda..bcdac7c82f 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -3480,6 +3480,39 @@ static const TypeInfo riscv_cpu_type_infos[] = {
+         .cfg.pmp_regions = 8
+     ),
  
-+.. _GDB multicore:
++#if defined(TARGET_RISCV32) || \
++    (defined(TARGET_RISCV64) && !defined(CONFIG_USER_ONLY))
++    DEFINE_RISCV_CPU(TYPE_RISCV_CPU_TT_RCPU, TYPE_RISCV_VENDOR_CPU,
++        .misa_mxl_max = MXL_RV32,
++        .misa_ext = RVI | RVM | RVA | RVB | RVC | RVD | RVF | RVU,
++        .priv_spec = PRIV_VERSION_1_13_0,
 +
- Debugging multicore machines
- ============================
++        .cfg.mmu = false,
++        .cfg.ext_zbc = true,
++
++        .cfg.ext_zba = true,
++        .cfg.ext_zbb = true,
++        .cfg.ext_zbs = true,
++        .cfg.ext_zca = true,
++        .cfg.ext_zcb = true,
++        .cfg.ext_zifencei = true,
++        .cfg.ext_zicsr = true,
++        .cfg.ext_zicbom = true,
++        .cfg.ext_zicntr = true,
++        .cfg.ext_zihpm = true,
++        .cfg.ext_zicond = true,
++        .cfg.pmp = true,
++        /*
++         * marchid for the Atlantis RCPU. The RCPU is based off the Rondel CPU.
++         * Future Rondel cores may have a different marchid
++         */
++        .cfg.marchid = 0x80000171,
++#if defined(CONFIG_TCG) && !defined(CONFIG_USER_ONLY)
++        .custom_csrs = tt_csr_list,
++#endif
++    ),
++#endif
++
+ #if defined(TARGET_RISCV32) || \
+     (defined(TARGET_RISCV64) && !defined(CONFIG_USER_ONLY))
+     DEFINE_RISCV_CPU(TYPE_RISCV_CPU_BASE32, TYPE_RISCV_DYNAMIC_CPU,
+diff --git a/target/riscv/tcg/csr.h b/target/riscv/tcg/csr.h
+index 53ba3b4a4d..4bc55b70d6 100644
+--- a/target/riscv/tcg/csr.h
++++ b/target/riscv/tcg/csr.h
+@@ -87,6 +87,9 @@ extern const RISCVCSR th_csr_list[];
+ /* Implemented in mips_csr.c */
+ extern const RISCVCSR mips_csr_list[];
  
-diff --git a/docs/system/riscv/tt_atlantis.rst b/docs/system/riscv/tt_atlantis.rst
-index d94d064f4f..533b41928b 100644
---- a/docs/system/riscv/tt_atlantis.rst
-+++ b/docs/system/riscv/tt_atlantis.rst
-@@ -12,10 +12,38 @@ tt-atlantis QEMU model features
- -------------------------------
++/* In tt_csr.c */
++extern const RISCVCSR tt_csr_list[];
++
+ /* PMP CSRs, defined in pmp.c */
+ void pmpcfg_csr_write(CPURISCVState *env, uint32_t reg_index,
+                       target_ulong val);
+diff --git a/target/riscv/tcg/meson.build b/target/riscv/tcg/meson.build
+index 86805b30cb..77357475c3 100644
+--- a/target/riscv/tcg/meson.build
++++ b/target/riscv/tcg/meson.build
+@@ -25,6 +25,7 @@ riscv_system_ss.add(files(
+   'pmp.c',
+   'pmu.c',
+   'th_csr.c',
++  'tt_csr.c',
+ ))
  
- * 8-core Ascalon-X CPU Cluster
-+* RV32 Real-time CPU (RCPU)
- * RISC-V compliant Advanced Interrupt Architecture
- * DW8250 compatible UART x5
- * 4 PRCMs (Clock and Reset Controllers)
  
-+Boot options
-+------------
+diff --git a/target/riscv/tcg/tt_csr.c b/target/riscv/tcg/tt_csr.c
+new file mode 100644
+index 0000000000..6ab9117486
+--- /dev/null
++++ b/target/riscv/tcg/tt_csr.c
+@@ -0,0 +1,63 @@
++/*
++ * Tenstorrent CPU implementation specifics.
++ *
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ *
++ * Copyright 2026 Tenstorrent
++ */
 +
-+* ``rcpu`` enables the RCPU model to run alongside the Ascalon cluster and is
-+  disabled by default. When the RCPU is enabled, ``UART0``, the RCPU's console,
-+  will be mapped to the second -serial on the command line.
-+* ``bootrom`` binary to be loaded into mask ROM and run by the RCPU (no effect if the
-+  rcpu is not enabled). If no bootrom is provided the RCPU will not be powered on.
++#include "qemu/osdep.h"
++#include "cpu.h"
++#include "target/riscv/tcg/csr.h"
 +
-+To enable the RCPU model with a custom binary and the RCPU console on stdio:
++/* RCPU custom CSRs */
++#define RCPU_CSR_MICACHE          0x7c0
++#define RCPU_CSR_MDCACHE          0x7c1
++#define RCPU_CSR_MITCMCR          0x7c5
++#define RCPU_CSR_MDTCMCR          0x7c6
++#define RCPU_CSR_MHCR             0x7c7
++#define RCPU_CSR_MEXINFO          0x7ca
++#define RCPU_CSR_MNMIE            0xbc6
 +
-+.. code-block:: bash
++#define RCPU_MARCH_ID             0x80000171
 +
-+  -M tt-atlantis,rcpu=on,bootrom=../path/to/binary.bin -serial null -serial stdio
++/* predicate for an RCPU core */
++static RISCVException rcpu(CPURISCVState *env, int csrno)
++{
++    if (env_archcpu(env)->cfg.marchid != RCPU_MARCH_ID) {
++        return RISCV_EXCP_ILLEGAL_INST;
++    }
++    return RISCV_EXCP_NONE;
++}
 +
-+* ``-smp cpus=`` The smp cpu field includes the RCPU count. When rcpu=on, the
-+  number of Ascalon harts created is smp.cpus - 1.  When rcpu=off, the number
-+  of Ascalon harts created is smp.cpus.
++static RISCVException read_zero(CPURISCVState *env, int csrno,
++                                target_ulong *val)
++{
++    *val = 0;
 +
-+To run with only one Ascalon hart and no RCPU:
++    return RISCV_EXCP_NONE;
++}
 +
-+.. code-block:: bash
++static RISCVException write_none(CPURISCVState *env, int csrno,
++                                 target_ulong val, uintptr_t ra)
++{
++    return RISCV_EXCP_NONE;
++}
 +
-+  -M tt-atlantis,rcpu=off -smp cpus=1
-+
-+
-+
- Known limitations
- -----------------
- 
-@@ -25,8 +53,9 @@ real platform. Notably:
- * There is no PCI host bridge, so virtio-pci devices cannot be
-   attached. Boots that need block storage must use ``-initrd`` with
-   an initramfs.
--* The Atlantis platform has 5 UARTs but only ``UART1`` is currently exposed
--  on the command line serial interface. ``UART1`` is the Ascalon console.
-+* The Atlantis platform has 5 UARTs but only ``UART1`` and, optionally,
-+  ``UART0`` are currently exposed on the command line serial interface.
-+  ``UART1`` is the Ascalon console and ``UART0`` is the RCPU console.
- 
- Supported software
- ------------------
-@@ -39,3 +68,16 @@ and Linux with default configurations.
- The development board hardware will require some implementation
- specific setup in firmware which is being developed and may
- become a requirement or option for the tt-atlantis machine.
-+
-+Debugging
-+----------
-+
-+Ascalon and RCPU are on separate CPUClusters which allows gdb to put Ascalon
-+and RCPU on separate inferiors. This prevents issues with switching between
-+RV32 (RCPU) and RV64 (Ascalon) targets.
-+
-+By default, gdb will connect to inferior 1, the Ascalon cluster and the RCPU
-+will be on inferior 2.
-+
-+gdb does not handle multiple inferiors by default, see :ref:`gdb multicore`
-+for how to connect to inferior 2.
++const RISCVCSR tt_csr_list[] = {
++    { .csrno = RCPU_CSR_MICACHE,
++      .csr_ops = { "micache", rcpu, read_zero, write_none} },
++    { .csrno = RCPU_CSR_MDCACHE,
++      .csr_ops = { "mdcache", rcpu, read_zero, write_none} },
++    { .csrno = RCPU_CSR_MITCMCR,
++      .csr_ops = { "mitcmcr", rcpu, read_zero, write_none} },
++    { .csrno = RCPU_CSR_MDTCMCR,
++      .csr_ops = { "mdtcmcr", rcpu, read_zero, write_none} },
++    { .csrno = RCPU_CSR_MHCR,
++      .csr_ops = { "mhcr", rcpu, read_zero, write_none} },
++    { .csrno = RCPU_CSR_MEXINFO,
++      .csr_ops = { "mexinfo", rcpu, read_zero, write_none} },
++    { .csrno = RCPU_CSR_MNMIE,
++       .csr_ops = { "mnmie", rcpu, read_zero, write_none} },
++    { },
++};
 -- 
 2.43.0
 
