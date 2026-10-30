@@ -1,99 +1,125 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6C974606A31A
-	for <qemu-riscv@archiver.kernel.org>; Fri, 30 Oct 2026 15:21:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5AE03606A31D
+	for <qemu-riscv@archiver.kernel.org>; Fri, 30 Oct 2026 17:49:50 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=HYzCWxEo
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=hOaeq5yt;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=RBayfcLN
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xMoMA-0004iq-64; Fri, 30 Oct 2026 11:17:26 -0400
+	id 1xMqjP-0001iF-7a; Fri, 30 Oct 2026 13:49:36 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xMoLw-0004VC-81
- for qemu-riscv@nongnu.org; Fri, 30 Oct 2026 11:17:14 -0400
-Received: from mail-dl1-x122a.google.com ([2607:f8b0:4864:20::122a])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xMoLs-0008UH-OA
- for qemu-riscv@nongnu.org; Fri, 30 Oct 2026 11:17:11 -0400
-Received: by mail-dl1-x122a.google.com with SMTP id
- a92af1059eb24-15943c9c005so1425281c88.1
- for <qemu-riscv@nongnu.org>; Fri, 30 Oct 2026 08:17:04 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <pierrick.bouvier@oss.qualcomm.com>)
+ id 1xMqj9-0001f8-0E
+ for qemu-riscv@nongnu.org; Fri, 30 Oct 2026 13:49:19 -0400
+Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <pierrick.bouvier@oss.qualcomm.com>)
+ id 1xMqj6-0007PZ-AW
+ for qemu-riscv@nongnu.org; Fri, 30 Oct 2026 13:49:18 -0400
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 69UERKuT2495308
+ for <qemu-riscv@nongnu.org>; Fri, 30 Oct 2026 17:49:15 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ 6UX8J6tayYdcMuVbYI0MgDwbUxidzIgfE/ULZAD4kYA=; b=hOaeq5yt3cEVyZFR
+ 0tcQK3F875a+bmOxQFt3NzEAIrxoXbA6yPh5NhgW4MAf9cAj0/4TZ4yrn4KP1kcD
+ Kp9GGGOq7DiRWMlvGrdeNt7vTD2zwg+2ndYttukoJgHotjFNQ5DTwFgFPFfGcxrQ
+ S84ZD1SE/RRcXjnwA/ZNC3H2KbAaplCR2GEzUffSZmN4TcKb3jpsUkqQO3khlwkA
+ BwLuhVO07EJk7pqktnw+tpYOXlTyFSkZnednle311tiKR9MXSfi7Kixi0d5uxm+Y
+ uZOYYiE9IWpSMHVtN5WwCvRISpf0uYqtn/fWrJANW8KPSQZLDmBLOxLlmjpfLxtJ
+ rydZKQ==
+Received: from mail-dy1-f199.google.com (mail-dy1-f199.google.com
+ [74.125.82.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hme6p4b6j-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Fri, 30 Oct 2026 17:49:15 +0000 (GMT)
+Received: by mail-dy1-f199.google.com with SMTP id
+ 5a478bee46e88-3698bd5392cso851860eec.1
+ for <qemu-riscv@nongnu.org>; Fri, 30 Oct 2026 10:49:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1793373424; x=1793978224; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=8a2b4rCQZ/Ri0eDvVEGx78IoeAx/tMieqM2WVNnANN8=;
- b=HYzCWxEofrFoim3bt4ZLgV6v42AKGyv3H8RWtdxWXT+4ebON233iplDbnbqKnvmtkN
- 4qRNXNwqPQ/vKHMFVVL+TB86X0v5iM6xCkimRM9BrrK2GezRHe6XkwjohYTb0z7DKFI+
- PxU/cMPlO96vnKt05mf20iiaQr3DWZ44VLCKztI9+Dhb98WghJpS3wqnFiKzMd5IDpSf
- smFcTJ3vz5uJZNty81YSxakb1QjHv+AAKEK1aPhxzELK3tYEmRZQpRAN5DMmSe014PYH
- AIg5OHPDk+R7r73mcWwlmruxGUkFU0z4LwEfnk6fPGzO8tGGbGQBUpckii0Tc6Q1A+/8
- d0hA==
+ d=oss.qualcomm.com; s=google; t=1793382554; x=1793987354; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=6UX8J6tayYdcMuVbYI0MgDwbUxidzIgfE/ULZAD4kYA=;
+ b=RBayfcLN8KwwVuWpvliAainNPyJk/ui99a9+0d/1GKCVW9/nIZvBA1P/j4Y8SvT2Yt
+ OG2kQCrV17tgu4c8KjJ0YvNdxyxbKCVU5Rowrqnrnqn3y+I1c0syP59SGsGlICsFej6y
+ Nze5Rqkr9njL/eiCxwiVxRKNTc45oB4qiMu6OafJz50jzyIx7IkZxRG5cyCxui3UIPXv
+ Tdh2/4pia1FFMkcjVQ0WHSmcA72ZGnVTexdcn9lc+PhYosmVuYCaG9k2/9qToQCPC+KM
+ ob1KAdmLYb4ma2ODZy10gsQYsVnvciJY9NzkvTBcyB8es/09Mc4hbaS3Wo7Y/wrJ6TPi
+ 38Bg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793373424; x=1793978224;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=8a2b4rCQZ/Ri0eDvVEGx78IoeAx/tMieqM2WVNnANN8=;
- b=TV/4wJaH/NvbIiYpm15lBHwYi97Idg3Aoi29jUWHjLHGG2LWQ6SH4PJu3/mob2jA85
- 0jRjIF7Ue3kHI0ctp/WV5IOwl6weBfVwEQLbs/kFFOi+FGsKRdN+tv6yq/o5a8d5aa70
- IT4loOid67uDpK59rh0d9IO7hT7Ke3KejlbdLGcQtVoIuyRF9bONQFK/XqPfB1TfDRe3
- bqUW9C0YnI/06CYK5peLyj+t4Kqwqgw9zSEID7frkTO+nuFVqwACIYu/VAMweAU973DY
- k/GrS69I1dgX5phjG5oIWQL8YvGxTRBieWy9ECgrJLjMNf2qCMRfbx5PPV5GJxUbXCs2
- /7jw==
+ d=1e100.net; s=20260707; t=1793382554; x=1793987354;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=6UX8J6tayYdcMuVbYI0MgDwbUxidzIgfE/ULZAD4kYA=;
+ b=S7MU5YzAC3/H5K7FGkOl3zeyQU6zC2bAVkcpZ90KkJre1qbIUqsHZxRx1AAwFCYv8+
+ 5eUx/oiifO2gx2V8bBy7/eJtPvk3dzGvMbRdaT5fx5AZPRQY1Ja1VT9eSZpmG7VFN0sK
+ HagZxBwV898zhfP29YYEmb4tMJrGAKQmKzf1x6nrtCxMlAXC+jASlnAWB6JJeH1ZUOO7
+ 7lrv5TIvEEZrqcKMm+lYZ+hi/Ntka1/h0EkSQfzAUdvONaQOtYddMUghDOoSxcK/k000
+ NHU+lqv/3QQF0EZ5yu+Owax6w96yPWyvT2n91B3fhMhLn2NpYiV3TVRgXJjAZqNGHu81
+ 4iwQ==
 X-Forwarded-Encrypted: i=1;
- AKwUvByPK510jlCl5GT3m+36WTdv/sfqmDy3VKvKIgpivzyc87T6ZWpSW2MUImsdxTUjCZa35ugfvj2mDU02@nongnu.org
-X-Gm-Message-State: AFq9FYIBsCNynQz4h+plF8XsJ7N8Jks2VhGgNmf48+hTh/Qb+6OoDiNw
- 2C3nsZn/ul0iWCsq0YDp6+tEJuqx+VGEHPaAlIvxfLEx31lA2Xzyb4ODNgyLCqRrA5w=
-X-Gm-Gg: AYBFou0S5gRDW4+0kgqNsEdgdKqRxinEcLNBQ8X40m3zLSNojZRlF6SEYdyIeFzydxd
- pY9ts6FLi8+j9TTVzrcR9iw8ecv7ZI4zW/zagQI2bmLuAL/3YnBak/7icGQCavm+3NtWmsiLdFq
- gt7jTwxwrNy09fRpSy/YM7UpvwuX1cvePDZJfayfyyWl7/p/iz7DZccWV04pc8Yf+wzhM4C2Qa4
- VxZjNo7e9Eh3+rzI8NobrdVPAeHOj83i55tTyFQq2ohIQzryRiY3/MjVWqz8DvcsTZvbl574q/K
- zPS7h1kobTVNlGOcyapE76JXnhsTcWSMv8mR/Ms3iQlPbIzGFBSh52W7Ml2Mi8vhgMUUhE08CSa
- JNa/AGfxZcn7Oaj77gw0P0eZfhbVy4siStMhEIAYZEwmvXsdPgJPKGKAy9BikfsrM55uw+nKxtw
- JXaq/r2IGOfhpCgAqD6+zX/ScKAmHhJIZutRNuk5WcSrcO2Rx9vKJtEr6MPGtifowmr5ySt5AkC
- aEzzXt7bC1SA5FskP2Tp1UDyJ0FHOhklyFDZ6O/xPhiWdbN1TIqD0T8eQEWUiEZzQYDSYSbVP0H
- R9jekWUz0xam+jn2ZguAu9eB9VbWDYoyAFT+y3+Xfh8EAEXvT8PDjm705tqL2wn8H8y1ng==
-X-Received: by 2002:a05:7022:eb50:10b0:1ac:9da7:e881 with SMTP id
- a92af1059eb24-1ac9dc67142mr3312715c88.36.1793373423386; 
- Fri, 30 Oct 2026 08:17:03 -0700 (PDT)
-Received: from DESKTOP-Q716RM7 ([103.94.185.75])
- by smtp.googlemail.com with ESMTPSA id
- a92af1059eb24-1ac1854d925sm12770449c88.7.2026.10.30.08.16.54
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 30 Oct 2026 08:17:02 -0700 (PDT)
-From: Yonggang Luo <luoyonggang@gmail.com>
-To: qemu-devel@nongnu.org
-Cc: Anthony PERARD <anthony@xenproject.org>, Felipe Balbi <balbi@kernel.org>,
+ AKwUvBzvOSX1P3jzDZGC3HzJA9C5EV9Vi2f6NOPhx+QwjVQt2C0+9bcVNqHTekw0CE/rdTLptNUEsRIl5qIP@nongnu.org
+X-Gm-Message-State: AFq9FYJ20Y2Zg3I0+h8gPNbcvKNPQsqgDcuG1XcKjqbi5pxKkfeN68X0
+ CmSIrV9X/6XkCUxAqt3AiZlXtd1laLRISIwAcb93cBXQJXOrBSpWUFjMyDEQXjEIaGXWQEM0brZ
+ 4OFogR0uQlpghj7b33s9XGuviRIVBuzewhc379DvwiUn5J/BmwfrDF23E8A==
+X-Gm-Gg: AYBFou3AlbJI+dxmlYl7zrRmPrNv6RTQ4UPCWBKG9ofkqjHJq/P96P5EyOG9bHr5NNR
+ vhjWgOaDiLtERloYpbgrgLBMj4tVq9vSfATBYNFabqkU6CgtPF4AN2QNQAh8N/2+KOErvN8/jc+
+ GPccXAF4E2ZJpyEfK0zcbhHiWFzvRO7YfzB3jrZtTqK6z1S2r7tYWXXF1c+ifSxsPSlF4Q0pegq
+ kDS5ziFhXp6xD/SVSw0RqbXcl532YFjcZbOGuUxAW+36FjYHrIa9gMKapLRJrlTeqS4rxda9loz
+ NKhC2fm3AtTDKyeNAiWEryp4FQF2g2ZKgJxwT0YxTL0FN5D3SkJ//ui0xn0IW3MpK6/53ZQz+0n
+ ZtHqrI5Qw/2BI4eXw10Yh53S9+LbDeao2h4MamqRy2BCcols0iOn0k7Lw69jBxAEonxp5OLKkQt
+ m6K2PaBYml/CCkIpAVUIbcmpuNHKe1oHOtQ08eEA/pHdU=
+X-Received: by 2002:a05:7300:3d0a:b0:35e:2c6:d462 with SMTP id
+ 5a478bee46e88-36a2fc203c3mr7976398eec.0.1793382553965; 
+ Fri, 30 Oct 2026 10:49:13 -0700 (PDT)
+X-Received: by 2002:a05:7300:3d0a:b0:35e:2c6:d462 with SMTP id
+ 5a478bee46e88-36a2fc203c3mr7976358eec.0.1793382553364; 
+ Fri, 30 Oct 2026 10:49:13 -0700 (PDT)
+Received: from [192.168.1.199] (192-80-163-190.dyn.novuscom.net.
+ [192.80.163.190]) by smtp.gmail.com with ESMTPSA id
+ 5a478bee46e88-36a429467cdsm8795841eec.19.2026.10.30.10.49.10
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 30 Oct 2026 10:49:12 -0700 (PDT)
+Message-ID: <9c2a2e48-e15f-43ee-9eef-0ebb607ccafc@oss.qualcomm.com>
+Date: Fri, 30 Oct 2026 09:49:10 -0800
+X-Archived-By: <archiver.kernel.org>
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 00/15] hw: expand DEFINE_MACHINE to explicit TypeInfo
+ registration
+To: Yonggang Luo <luoyonggang@gmail.com>, qemu-devel@nongnu.org
+Cc: Anthony PERARD <anthony@xenproject.org>, Felipe Balbi <balbi@kernel.org>, 
  Aleksandar Rikalo <arikalo@gmail.com>, BALATON Zoltan <balaton@eik.bme.hu>,
  Philippe Mathieu-Daude <philmd@mailo.com>,
  Antony Pavlov <antonynpavlov@gmail.com>,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
  Stefano Stabellini <sstabellini@kernel.org>,
  Subbaraya Sundeep <sundeep.lkml@gmail.com>,
- =?UTF-8?q?Herv=C3=A9=20Poussineau?= <hpoussin@reactos.org>,
- Max Filippov <jcmvbkbc@gmail.com>,
- Niek Linnenbank <nieklinnenbank@gmail.com>, xen-devel@lists.xenproject.org,
- qemu-riscv@nongnu.org, Jean-Christophe Dubois <jcd@tribudubois.net>,
- qemu-ppc@nongnu.org, Alexandre Iooss <erdnaxe@crans.org>,
- Weiwei Li <liwei1518@gmail.com>, Zhao Liu <zhao1.liu@intel.com>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ =?UTF-8?Q?Herv=C3=A9_Poussineau?= <hpoussin@reactos.org>,
+ Max Filippov <jcmvbkbc@gmail.com>, Niek Linnenbank
+ <nieklinnenbank@gmail.com>,
+ xen-devel@lists.xenproject.org, qemu-riscv@nongnu.org,
+ Jean-Christophe Dubois <jcd@tribudubois.net>, qemu-ppc@nongnu.org,
+ Alexandre Iooss <erdnaxe@crans.org>, Weiwei Li <liwei1518@gmail.com>,
+ Zhao Liu <zhao1.liu@intel.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
  Strahinja Jankovic <strahinja.p.jankovic@gmail.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
- Thomas Huth <th.huth+qemu@posteo.eu>,
- =?UTF-8?q?Cl=C3=A9ment=20Chigot?= <chigot@adacore.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
+ Thomas Huth <th.huth+qemu@posteo.eu>, =?UTF-8?Q?Cl=C3=A9ment_Chigot?=
+ <chigot@adacore.com>, Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
  Yoshinori Sato <yoshinori.sato@nifty.com>,
  Frederic Konrad <konrad.frederic@yahoo.fr>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
- Peter Maydell <peter.maydell@linaro.org>,
- Chao Liu <chao.liu@processmission.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Peter Maydell
+ <peter.maydell@linaro.org>, Chao Liu <chao.liu@processmission.com>,
  Sai Pavan Boddu <sai.pavan.boddu@amd.com>,
  Alistair Francis <alistair@alistair23.me>,
  Huacai Chen <chenhuacai@kernel.org>, Aurelien Jarno <aurelien@aurel32.net>,
@@ -102,23 +128,48 @@ Cc: Anthony PERARD <anthony@xenproject.org>, Felipe Balbi <balbi@kernel.org>,
  Richard Henderson <richard.henderson@linaro.org>,
  Alistair Francis <alistair.francis@wdc.com>,
  Artyom Tarasenko <atar4qemu@gmail.com>, qemu-arm@nongnu.org
-Subject: [PATCH 06/15] hw/riscv: expand DEFINE_MACHINE for RISC-V machines
-Date: Fri, 30 Oct 2026 23:15:27 +0800
-Message-ID: <20261030151539.1872-7-luoyonggang@gmail.com>
-X-Mailer: git-send-email 2.55.0.windows.3
-In-Reply-To: <20261030151539.1872-1-luoyonggang@gmail.com>
 References: <20261030151539.1872-1-luoyonggang@gmail.com>
-X-Archived-By: <archiver.kernel.org>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::122a;
- envelope-from=luoyonggang@gmail.com; helo=mail-dl1-x122a.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+From: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
+Content-Language: en-US
+In-Reply-To: <20261030151539.1872-1-luoyonggang@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDMwMDA3MCBTYWx0ZWRfX3Q39ZxG1piZC
+ Yu24K2ezl8ojG/qRdht3auotaUCDzqVWDckikw4NMdN5dQLxS/2yojBqqTmy5RQEZB+ZSQYGEGA
+ ZP3T7lcMwWe4xnsFBDV/FLoR3/GUqK2CtcxaispZn8Cxorxpu09t4Y1/aDfB5Rwy8QkdyGRa31K
+ rVhs8I58u0WCIrPWkZzHZIsOPQDWrOK+h4ZHK2nM1DfKwJTtymQxvhBE1X9LCXgYoWoL/KSCVAE
+ fw09n4TtpQLNnFEz7ZJAFKQU9iuB8KtvIVT4X+6gEJXlmCvhHkW/vE9eF3PfduBMtuxXKFUTVFj
+ xjtIhXaXoZMxbCH5LNvsl6lIdiWY6XGotWZ47sA6HIt3DVlpfvjk1+qnwJJMLhQMLO+C3lOzyRr
+ H20aIQ9XYUe/CmSuuorvyXeGFgk9iHGGG+B6WeXZdLmh3Wm32bjYERZNEmvas5OTN3/dCTWMuxI
+ 8MFXqPubCE11Ivg/NDg==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDMwMDA3MCBTYWx0ZWRfX8y1o+Z/cNB/Q
+ 4Qn9tg1LlSLOOBR+kS1Nn8Zedkn45FRBWsmw2YjYj781J0YbNFqBPkCGIHGJ+TxCOkb44KcWdYC
+ 7fDS7TorDpxk5OguvE6+VNLpt3qqpwU=
+X-Proofpoint-ORIG-GUID: iOuOHO6XZNfK34q2Gt1arK-WqTecWfSa
+X-Proofpoint-GUID: iOuOHO6XZNfK34q2Gt1arK-WqTecWfSa
+X-Authority-Analysis: v=2.4 cv=TL3Q2Fla c=1 sm=1 tr=0 ts=6ae4d89b cx=c_pps
+ a=cFYjgdjTJScbgFmBucgdfQ==:117 a=9852oil1ID9t5xBSyQ/BEA==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
+ a=6Hdeo9sKUei7lKwjsM4A:9 a=QEXdDO2ut3YA:10 a=scEy_gLbYbu1JhEsrz4S:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-10-30_05,2026-10-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 lowpriorityscore=0 priorityscore=1501 clxscore=1015
+ adultscore=0 bulkscore=0 malwarescore=0 phishscore=0 suspectscore=0
+ spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2610190000
+ definitions=main-2610300070
+Received-SPF: pass client-ip=205.220.180.131;
+ envelope-from=pierrick.bouvier@oss.qualcomm.com;
+ helo=mx0b-0031df01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -131,93 +182,90 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_SANE_1
 	autolearn=unavailable autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Expand DEFINE_MACHINE() in hw/riscv/boston-aia.c and
-hw/riscv/microblaze-v-generic.c to explicit TypeInfo and type_init()
-functions calling type_register_static().
+On 10/30/2026 7:15 AM, Yonggang Luo wrote:
+> DEFINE_MACHINE and DEFINE_MACHINE_EXTENDED hide the TypeInfo and the type_init
+> function that calls type_register_static(). A later change needs to pass a
+> target mask into that registration, and the macros have no parameter for it.
+> This series expands every caller first, with no behavior change, so the
+> follow-up only replaces the type_register_static() call.
+> 
+> Each machine file gains a class_init function, a TypeInfo, and a type_init
+> function that calls type_register_static(). The last patch removes
+> DEFINE_MACHINE* and DEFINE_SECURE_MACHINE* from include/hw/core/boards.h.
+> 
+> Yonggang Luo (15):
+>   hw/alpha: expand DEFINE_MACHINE in dp264.c
+>   hw/m68k: expand DEFINE_MACHINE for M68K machines
+>   hw/microblaze: expand DEFINE_MACHINE for MicroBlaze
+>   hw/tricore: expand DEFINE_MACHINE in tricore_testboard.c
+>   hw/arm: expand DEFINE_MACHINE for ARM machines
+>   hw/riscv: expand DEFINE_MACHINE for RISC-V machines
+>   hw/core/null-machine: expand DEFINE_MACHINE
+>   hw/mips: expand DEFINE_MACHINE for MIPS machines
+>   hw/ppc: expand DEFINE_MACHINE for PowerPC machines
+>   hw/sh4: expand DEFINE_MACHINE in r2d.c
+>   hw/sparc: expand DEFINE_MACHINE in leon3.c
+>   hw/xenpv: expand DEFINE_MACHINE in xen_machine_pv.c
+>   hw/xtensa: expand DEFINE_MACHINE in sim.c
+>   hw/xtensa: expand DEFINE_MACHINE in virt.c
+>   hw/core/boards: remove unused DEFINE_MACHINE* macros
+> 
+>  hw/alpha/dp264.c                    | 18 +++++++++--
+>  hw/arm/bananapi_m2u.c               | 18 +++++++++--
+>  hw/arm/cubieboard.c                 | 19 +++++++++---
+>  hw/arm/digic_boards.c               | 18 +++++++++--
+>  hw/arm/imx25_pdk.c                  | 18 +++++++++--
+>  hw/arm/imx8mm-evk.c                 | 20 +++++++++---
+>  hw/arm/integratorcp.c               | 14 ++++++---
+>  hw/arm/kzm.c                        | 18 +++++++++--
+>  hw/arm/max78000fthr.c               | 17 ++++++++--
+>  hw/arm/mcimx6ul-evk.c               | 18 +++++++++--
+>  hw/arm/mcimx7d-sabre.c              | 20 +++++++++---
+>  hw/arm/msf2-som.c                   | 17 ++++++++--
+>  hw/arm/netduino2.c                  | 17 ++++++++--
+>  hw/arm/netduinoplus2.c              | 17 ++++++++--
+>  hw/arm/olimex-stm32-h405.c          | 18 +++++++++--
+>  hw/arm/orangepi.c                   | 19 +++++++++---
+>  hw/arm/stm32vldiscovery.c           | 18 +++++++++--
+>  hw/core/null-machine.c              | 18 +++++++++--
+>  hw/m68k/an5206.c                    | 18 +++++++++--
+>  hw/m68k/mcf5208.c                   | 18 +++++++++--
+>  hw/microblaze/petalogix_ml605_mmu.c | 19 ++++++++++--
+>  hw/microblaze/xlnx-zynqmp-pmu.c     | 19 ++++++++++--
+>  hw/mips/boston.c                    | 18 +++++++++--
+>  hw/mips/fuloong2e.c                 | 18 +++++++++--
+>  hw/mips/malta.c                     | 12 ++++++--
+>  hw/ppc/amigaone.c                   | 18 +++++++++--
+>  hw/ppc/pegasos.c                    | 21 ++++++++-----
+>  hw/ppc/ppc440_bamboo.c              | 18 +++++++++--
+>  hw/ppc/prep.c                       | 18 +++++++++--
+>  hw/ppc/sam460ex.c                   | 18 +++++++++--
+>  hw/ppc/virtex_ml507.c               | 18 +++++++++--
+>  hw/riscv/boston-aia.c               | 18 +++++++++--
+>  hw/riscv/microblaze-v-generic.c     | 18 +++++++++--
+>  hw/sh4/r2d.c                        | 18 +++++++++--
+>  hw/sparc/leon3.c                    | 18 +++++++++--
+>  hw/tricore/tricore_testboard.c      | 18 +++++++++--
+>  hw/xenpv/xen_machine_pv.c           | 18 +++++++++--
+>  hw/xtensa/sim.c                     | 18 +++++++++--
+>  hw/xtensa/virt.c                    | 18 +++++++++--
+>  include/hw/core/boards.h            | 48 -----------------------------
+>  40 files changed, 605 insertions(+), 142 deletions(-)
+> 
 
-Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
----
- hw/riscv/boston-aia.c           | 18 ++++++++++++++++--
- hw/riscv/microblaze-v-generic.c | 18 ++++++++++++++++--
- 2 files changed, 32 insertions(+), 4 deletions(-)
+So far, this expansion has been done only on machines that required to
+modify TypeInfo: mostly virt types, which are ambiguous between targets
+and require to introduce is_available.
 
-diff --git a/hw/riscv/boston-aia.c b/hw/riscv/boston-aia.c
-index b90da096ea8..54979eae86e 100644
---- a/hw/riscv/boston-aia.c
-+++ b/hw/riscv/boston-aia.c
-@@ -462,8 +462,10 @@ static void boston_mach_init(MachineState *machine)
-     }
- }
- 
--static void boston_mach_class_init(MachineClass *mc)
-+static void boston_mach_class_init(ObjectClass *oc, const void *data)
- {
-+    MachineClass *mc = MACHINE_CLASS(oc);
-+
-     mc->desc = "MIPS Boston-aia";
-     mc->init = boston_mach_init;
-     mc->block_default_type = IF_IDE;
-@@ -473,4 +475,16 @@ static void boston_mach_class_init(MachineClass *mc)
-     mc->default_cpu_type = TYPE_RISCV_CPU_MIPS_P8700;
- }
- 
--DEFINE_MACHINE("boston-aia", boston_mach_class_init)
-+static const TypeInfo boston_mach_typeinfo = {
-+    .name       = MACHINE_TYPE_NAME("boston-aia"),
-+    .parent     = TYPE_MACHINE,
-+    .class_init = boston_mach_class_init,
-+    .instance_size = sizeof(MachineState),
-+};
-+
-+static void boston_mach_register_types(void)
-+{
-+    type_register_static(&boston_mach_typeinfo);
-+}
-+
-+type_init(boston_mach_register_types)
-diff --git a/hw/riscv/microblaze-v-generic.c b/hw/riscv/microblaze-v-generic.c
-index b0494b1ac50..b0f837b6ee7 100644
---- a/hw/riscv/microblaze-v-generic.c
-+++ b/hw/riscv/microblaze-v-generic.c
-@@ -176,8 +176,10 @@ static void mb_v_generic_init(MachineState *machine)
-     create_unimplemented_device("qspi", QSPI_BASEADDR, 0x10000);
- }
- 
--static void mb_v_generic_machine_init(MachineClass *mc)
-+static void mb_v_generic_machine_class_init(ObjectClass *oc, const void *data)
- {
-+    MachineClass *mc = MACHINE_CLASS(oc);
-+
-     mc->desc = "AMD Microblaze-V generic platform";
-     mc->init = mb_v_generic_init;
-     mc->min_cpus = 1;
-@@ -186,4 +188,16 @@ static void mb_v_generic_machine_init(MachineClass *mc)
-     mc->default_cpus = 1;
- }
- 
--DEFINE_MACHINE("amd-microblaze-v-generic", mb_v_generic_machine_init)
-+static const TypeInfo mb_v_generic_machine_typeinfo = {
-+    .name       = MACHINE_TYPE_NAME("amd-microblaze-v-generic"),
-+    .parent     = TYPE_MACHINE,
-+    .class_init = mb_v_generic_machine_class_init,
-+    .instance_size = sizeof(MachineState),
-+};
-+
-+static void mb_v_generic_machine_register_types(void)
-+{
-+    type_register_static(&mb_v_generic_machine_typeinfo);
-+}
-+
-+type_init(mb_v_generic_machine_register_types)
--- 
-2.55.0.windows.3
+Maybe this can be delayed for when such machines require it also.
 
+Regards,
+Pierrick
 
