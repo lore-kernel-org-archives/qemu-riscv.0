@@ -1,84 +1,95 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DED77606A31D
-	for <qemu-riscv@archiver.kernel.org>; Fri, 30 Oct 2026 13:13:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AF6BE606A31A
+	for <qemu-riscv@archiver.kernel.org>; Fri, 30 Oct 2026 13:39:07 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=dqC13gtK
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=joTaVzMS
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xMmPV-0006Cs-El; Fri, 30 Oct 2026 09:12:45 -0400
+	id 1xMmoS-000628-JE; Fri, 30 Oct 2026 09:38:34 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1xMmPG-00060a-8m
- for qemu-riscv@nongnu.org; Fri, 30 Oct 2026 09:12:33 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1xMmPC-0004rr-Em
- for qemu-riscv@nongnu.org; Fri, 30 Oct 2026 09:12:29 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1793365944;
- h=from:from:reply-to:reply-to:subject:subject:date:date:
- message-id:message-id:to:to:cc:cc:mime-version:mime-version:
- content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=luqN36eQr9cvX7ZlJUQi6wCB1RlpaTkpx7SoAr5njao=;
- b=dqC13gtKFC8H2jIeGp/ZoHu1sLHVsfoGsjDpptT3dTcRjv9wiH2jKghNBpMGjpuuhn3Tjc
- ouVBs37tTrLosrsMddVy6B5TzSISJSh6qiZNvwAEuVrDL9uWWxeMwgz0FzsI2KTdhftO7l
- YwahNmrDho8tXzGQktJdZkcqbzVpJNs=
-Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-96-wLI8iMc8NRaHZo9QEuBdlw-1; Fri,
- 30 Oct 2026 09:12:19 -0400
-X-MC-Unique: wLI8iMc8NRaHZo9QEuBdlw-1
-X-Mimecast-MFC-AGG-ID: wLI8iMc8NRaHZo9QEuBdlw_1793365938
-Received: from mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.12])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 077D51828ADD; Fri, 30 Oct 2026 13:12:12 +0000 (UTC)
-Received: from redhat.com (headnet04.pony-001.prod.iad2.dc.redhat.com
- [10.2.32.116])
- by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 905FB1956088; Fri, 30 Oct 2026 13:12:09 +0000 (UTC)
-Date: Fri, 30 Oct 2026 13:12:06 +0000
-From: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
-To: Peter Maydell <peter.maydell@linaro.org>
-Cc: qemu-devel@nongnu.org, xen-devel@lists.xenproject.org,
- qemu-riscv@nongnu.org, qemu-ppc@nongnu.org, qemu-block@nongnu.org,
- qemu-s390x@nongnu.org, qemu-arm@nongnu.org
-Subject: Re: [PATCH 09/28] hw/net: mark e1000, e1000e, IGB, rtl8139 & sPAPR
- VLAN as secure
-Message-ID: <auSXprZs_pozFfqV@redhat.com>
-References: <20260911143627.2743803-1-berrange@redhat.com>
- <20260911143627.2743803-10-berrange@redhat.com>
- <CAFEAcA8GwF=EdaqvO7OBNZY1ku8LWNH5giveZYXSVnmk9JWfng@mail.gmail.com>
+ (Exim 4.90_1) (envelope-from <rao232328@gmail.com>)
+ id 1xMmo7-0005xl-SC
+ for qemu-riscv@nongnu.org; Fri, 30 Oct 2026 09:38:14 -0400
+Received: from mail-oo1-xc2e.google.com ([2607:f8b0:4864:20::c2e])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <rao232328@gmail.com>)
+ id 1xMmo6-0007Za-6a
+ for qemu-riscv@nongnu.org; Fri, 30 Oct 2026 09:38:11 -0400
+Received: by mail-oo1-xc2e.google.com with SMTP id
+ 006d021491bc7-70b875f6f13so621900eaf.0
+ for <qemu-riscv@nongnu.org>; Fri, 30 Oct 2026 06:38:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20260707; t=1793367488; x=1793972288; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:mime-version:message-id:date
+ :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=ZNFgKPdhXCo0LjG81BaftOa0QgUdfn08FZjH7NUkGys=;
+ b=joTaVzMSko//FeEhRl402UB0Ypni/o6nImyZk8eARWMdmxzwfZl/mpqLRLDRuy5/cn
+ UBSNzRjHevBv2GQAsYBOglbPnQ0BVx0XxXEZlREawzJPg5SrT9hQTSj48msEpCYVHXiH
+ +EY7zsF4FiuJwv1tLPOwho7IEWoJqQ+JfWi345lsjhGZN4XW3mjU+DYr2XU6Jk3CZdXO
+ wwsbqxSmYqFyx5ZIpE5voZgOqIrsA2aa58h4uWfndyp+1TaBpUShmFltS8SLJAscfirl
+ VJ13gbSFtt+ldLg9Ku9Czxgklw99kKqAc2tQvGnl3OxMMMrQZx3sliCdzfCMhgorS3h7
+ EUqQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1793367488; x=1793972288;
+ h=content-transfer-encoding:content-type:mime-version:message-id:date
+ :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=ZNFgKPdhXCo0LjG81BaftOa0QgUdfn08FZjH7NUkGys=;
+ b=JQ2ESKbTzV9bQTLqf+MJA+ANsvdikbaLJGTngYnUnGAaLnkwLbo7Y7FwyyaDBeH/dH
+ p4HYrFKXZmV6OZFb7e1R2prEQuB+5NiSNiV0e3TysNo8cWw8EW1xXlfaLkHhewpYrbGn
+ iIdtE24Mzq8YExqAaTnkKRuHznaIgDaquwp7ran8pM64HWU5VV0kgxUrDAfixIOunCNX
+ 5Iz4Pk730iXLrm/VcbnSDn+OObV2mQTsq/6YXx7CIPty5GLfxdU1jfeVZpc5SVhea24e
+ Eh93Koa7GxjPWUcTyxARsEjFpSXYTmqpV36W/ta01iTDPB09oFLX2tZnwINeTwEEkpfU
+ 5dgQ==
+X-Gm-Message-State: AFq9FYICPuUVKo6xDugzUT3Ebw79kV2w/7BBQjUlthnqtm/INcMODlFp
+ PC/+yFgnDkfYFzouY9FQtCfER0N+YyAu1OuosZqMlC8sUpfkrsCPWOnm
+X-Gm-Gg: AYBFou3TtIcBrX5MumQGj1vQaqBxXM4rap7KyGi03rId2OVV9wg8lPgvZWEz6imSDxp
+ 0+cwi1mswHpXut+qqijpEdJshRbVCXjM9GItIEx6ZOj9cfVH5/qFeDIZ144s54EcUosGobQhGnS
+ cUC3z+Do6myUer+Gqey/41nltp4VeXxI/ItXhimgQtBfW2NAPI+PbZeYJNyTJG7p3veO5JKZoyL
+ eK/R4h06M5cb4YqByJVRuxVqh51GJT4sXQHUKx+0WrSeqskNvz+I39S5+qMLU3qcPynci/EOVBl
+ IAcrkkGelxOvtcW3j/XKrZ8FVO9U78xB1AxU3hBGsR2q3Hwu2if+EIYfqNB28KHHvbF5HEhlZnf
+ 2iWF3bvVliO4ZrSZD7f6UPyiVNg2NslMZZaM24IjSeB/3vn72IxJ0a5o/HQM2JXUIKEtW3oda21
+ Nqplt/1QaNOn/FfHzlzmkjYh6BmRrCVDr6O8K3u1oY8Ip8dT9PDv+yDJrpEuNoEqfOC2XVCTMFy
+ Fu9ystfvbbtY2gbegDjgED3aS++0lQ8VWXrKY3dQ6zvxEMpxXNSzmLv9KyYvzW0ZfuJWxJDVS1z
+ j82nI5h1sRFAWZv3eJsUk1QV5rRxr/AOLntRIG3V+w==
+X-Received: by 2002:a05:6820:858a:20b0:70b:960c:53d2 with SMTP id
+ 006d021491bc7-714f1f8156cmr1028209eaf.1.1793367488161; 
+ Fri, 30 Oct 2026 06:38:08 -0700 (PDT)
+Received: from DESKTOP-DFGP8OG.lan ([120.235.190.244])
+ by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-714f30600f0sm1861421eaf.12.2026.10.30.06.37.50
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 30 Oct 2026 06:38:00 -0700 (PDT)
+From: raoyi <rao232328@gmail.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, palmer@dabbelt.com,
+ liwei1518@gmail.com, daniel.barboza@oss.qualcomm.com,
+ zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
+ bmeng.cn@gmail.com, philmd@oss.qualcomm.com, pbonzini@redhat.com,
+ lvivier@redhat.com, farosas@suse.de, caojunze424@gmail.com,
+ raoyi <rao232328@gmail.com>
+Subject: [PATCH v6 0/3] hw/timer: add DesignWare APB timer
+Date: Fri, 30 Oct 2026 21:37:01 +0800
+Message-ID: <20261030133704.99678-1-rao232328@gmail.com>
+X-Mailer: git-send-email 2.53.0
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-In-Reply-To: <CAFEAcA8GwF=EdaqvO7OBNZY1ku8LWNH5giveZYXSVnmk9JWfng@mail.gmail.com>
-User-Agent: Mutt/2.4.2 (2026-08-30)
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.12
-X-Mimecast-MFC-PROC-ID: T7Dznz60fQusvuJynU-tQMzUQC6RUKGYGAN31RIbMOY_1793365938
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=berrange@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
-X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=2607:f8b0:4864:20::c2e;
+ envelope-from=rao232328@gmail.com; helo=mail-oo1-xc2e.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -89,57 +100,70 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Reply-To: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,
-	USER_AGENT_SANE_1 autolearn=unavailable autolearn_force=no
+X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
 	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Fri, Oct 30, 2026 at 11:12:55AM +0000, Peter Maydell wrote:
-> On Fri, 11 Sept 2026 at 15:42, Daniel P. Berrangé <berrange@redhat.com> wrote:
-> >
-> > Historically most NICs are only interesting for non-virtualization
-> > use cases and have not been written with malicious guests in mind.
-> >
-> > As a general rule either virtio-net or xen-net should be used in
-> > all virtualized guests requiring a security boundary.
-> >
-> > There are a handful of exceptions resulting from historical usage
-> > in the x86 world, to support virtualized guests lacking virtio
-> > support.
-> >
-> > Thus the rtl8139, e1000, e1000e & IGB NICs are declared to provide
-> > a security boundary.
-> 
-> You've said in several bugs (e.g.
-> https://gitlab.com/qemu-project/qemu/-/work_items/3872 )
-> that igb wasn't covered by the virtualization use case.
 
-Hmm, yes, I forgot I had said that, which I guess shows the value
-of this series long term.
+Add a generic DesignWare APB timer device model, and wire it up
+for the K230 machine with num-timers=6 and a 50 MHz clock. Also
+add qtest coverage for the timer behavior.
 
-> I don't care either way, but I wanted to check since I've been
-> marking igb bugs as non-confidential when triaging on the
-> basis of that...
+Changes since v5:
+- Rebase onto current master
+- No functional changes
 
-I added it in this series because I forgot what I previously said
-and then found our RHEL shipped it. I've since checked that the
-RHEL inclusion was only for ease of SRIOV testing, not intended for
-production deployment.
+Changes since v4 (address review comments from Philippe Mathieu-Daude):
+- Drop Clock framework mention from the commit message
+- Cover the device in MAINTAINERS (device files in patch 1/3,
+  test file in patch 3/3)
+- Move trace calls to function entry
+- Drop the addr mask; the MMIO region stays at 0x100 (the IP
+  register implementation range; the SoC aperture is board-level)
+- Hard-code comp-version (0x3231312A, "211*", IP component version)
+- Use the Resettable API (phases.hold) instead of legacy reset
+- Add unrealize to free per-channel ptimers
+- Keep register offsets and bit definitions in the C file
+- Drop private/public comments in the header
+- Move K230 timer macros into k230.c
 
-So consider 'igb' dropped from this patch. We'll continue to treat
-it as insecure, unless a maintainer steps up to request otherwise
-and fix historical issues we've had disclosed this year.
+Changes in v5:
+- Rename DW_APB_TIMER_CONTROL_INT to DW_APB_TIMER_CONTROL_INT_MASK
+- Fix the K230 timer clock frequency from 6.25 MHz to 50 MHz
+- Wrap the qtest commit message at about 70 characters per line
+- Register both K230 qtests directly under CONFIG_K230
 
-With regards,
-Daniel
+Testing:
+- QEMU build passed in the Debian container
+- tests/qtest/k230-dwapb-timer-test: 8/8 passed
+
+raoyi (3):
+  hw/timer: add DesignWare APB timer model
+  hw/riscv: add DesignWare APB timer to K230 board
+  tests/qtest: add k230 dwapb timer test
+
+ MAINTAINERS                         |   3 +
+ hw/riscv/Kconfig                    |   1 +
+ hw/riscv/k230.c                     |  33 ++-
+ hw/timer/Kconfig                    |   4 +
+ hw/timer/dw-apb-timer.c             | 376 ++++++++++++++++++++++++++++
+ hw/timer/meson.build                |   1 +
+ hw/timer/trace-events               |   8 +
+ include/hw/riscv/k230.h             |   8 +
+ include/hw/timer/dw-apb-timer.h     |  40 +++
+ tests/qtest/k230-dwapb-timer-test.c | 274 ++++++++++++++++++++
+ tests/qtest/meson.build             |   3 +-
+ 11 files changed, 747 insertions(+), 4 deletions(-)
+ create mode 100644 hw/timer/dw-apb-timer.c
+ create mode 100644 include/hw/timer/dw-apb-timer.h
+ create mode 100644 tests/qtest/k230-dwapb-timer-test.c
+
 -- 
-|: https://berrange.com       ~~        https://hachyderm.io/@berrange :|
-|: https://libvirt.org          ~~          https://entangle-photo.org :|
-|: https://pixelfed.art/berrange   ~~    https://fstop138.berrange.com :|
+2.53.0
 
 
