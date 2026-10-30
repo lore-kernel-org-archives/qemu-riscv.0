@@ -1,72 +1,72 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 121E8606A31D
-	for <qemu-riscv@archiver.kernel.org>; Fri, 30 Oct 2026 15:18:03 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CDDD3606A31E
+	for <qemu-riscv@archiver.kernel.org>; Fri, 30 Oct 2026 15:18:39 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=UvddITIR
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=K/a0C0tU
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xMoM6-0004em-IL; Fri, 30 Oct 2026 11:17:22 -0400
+	id 1xMoM2-0004bz-Qr; Fri, 30 Oct 2026 11:17:19 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xMoM2-0004bp-0h
- for qemu-riscv@nongnu.org; Fri, 30 Oct 2026 11:17:18 -0400
+ id 1xMoLW-0004PB-Q1
+ for qemu-riscv@nongnu.org; Fri, 30 Oct 2026 11:16:53 -0400
 Received: from mail-dl1-x1233.google.com ([2607:f8b0:4864:20::1233])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xMoM0-0008W1-6G
- for qemu-riscv@nongnu.org; Fri, 30 Oct 2026 11:17:17 -0400
+ id 1xMoLS-0008St-TI
+ for qemu-riscv@nongnu.org; Fri, 30 Oct 2026 11:16:45 -0400
 Received: by mail-dl1-x1233.google.com with SMTP id
- a92af1059eb24-1931ff67a29so121242c88.1
- for <qemu-riscv@nongnu.org>; Fri, 30 Oct 2026 08:17:15 -0700 (PDT)
+ a92af1059eb24-15dd124bbe7so1420473c88.1
+ for <qemu-riscv@nongnu.org>; Fri, 30 Oct 2026 08:16:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1793373435; x=1793978235; darn=nongnu.org;
+ d=gmail.com; s=20260707; t=1793373401; x=1793978201; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=m864uzH9D1nJnXhJ32zoDB2BUw6AVK2KA1WWNZhkMsE=;
- b=UvddITIRGppPhk9RxFZ1M/UETsEUgmdxoB86M8NSL032pxbc/5q02QcGEcIszdnCuW
- jLeuEJuyX3Vn1kb8Uhz9hCxBwkf82vm1ITfM2bJJerRzgJ4hQaEwjO3/e0KiqP4Tni8P
- DKSc/r+nJITU/Muocw2gKHVf2TfCHOd6at2u8fA3FCaYhjOhHXKmOO09WFwPdne67MUT
- J45s/QiLXWAhcJ/AkYrEio09H+qeieLXNCujtEI1ClWtFIRCuF4Sb37Z9Dbrhaduogpa
- HtDLo+jig+3zMSIiEKENl3zwUpF3Z75VcdZc/7Rd+05u0AjrATODJiVVrgRXs/6LgZoO
- MjiQ==
+ bh=zA4vatNcIKJhE+Eb39umMv/j/wzlc1JpQpFuLfiMq1c=;
+ b=K/a0C0tUUuO6kNQZf4bTC+W1V6fsZtma4zFADfaRDP/o0WNzWpbkhaJqJL1EqkmMSa
+ nxqes8o3pJxyj2CRDcfW3yD/T6fJSpAvEap8Sc9qQqnvDsholViI5jXLQ/M7mX3ak2J0
+ vqViKaCYSgBrsMBlKN8QyYpUUOxNN8NReVh8avw8W89CeS9/6HdZHUakxXUNMVXd3DWP
+ u1MKsW7FUSFO1Trw8ohc1na0+B97NbcWGVPLpeI0z5dP7nTIjmuE4WDDvNa5iV0qxNWq
+ mj52WWPs+BrIOgUdYIw6xVHvuQe0Plin/66wXTtSK7jxVcYq3Fbuv+fGLY6I0+EC6AZ5
+ t6kg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793373435; x=1793978235;
+ d=1e100.net; s=20260707; t=1793373401; x=1793978201;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=m864uzH9D1nJnXhJ32zoDB2BUw6AVK2KA1WWNZhkMsE=;
- b=rha7opfUrOCrODu24kS68pfoxB5gqZVaZmgk+vLUwWEa+HqjHt6bqjtsCAAUeOPwx9
- qUN5IHJ2plkbnvsDcqRtJ6GwlebMGpZjzCdtwLOxFLz7s0wWmeqOBxE2PrKtomi4PBbm
- IDsEKLS1v+A476n9Z0rUo9EmwTZDZ3j4IrilKkpRg4z2B0r6HSl14N46DMZLn8ilkL9u
- 6IhidHi7fPFD+uPB4GDS3PvgeO6GYGr/6+pW05ubQzMnEKTy+nAemQqQ1t6IE3yJ38R4
- 2A+cibgwFxQkZoz1pP6qtzfwiiKjsXcVa2Ttc2Rh2cIhY6cvTpxWoIwgDuhQDbY/i4/L
- JMyw==
+ bh=zA4vatNcIKJhE+Eb39umMv/j/wzlc1JpQpFuLfiMq1c=;
+ b=wNpmdfgvbDkX4fE71OZRNcaPN6Z0gorrlwh1ULUcBcXFERpZFmJ85mwRX/T/2MwJz+
+ DdWpjfpoxehmNtS5f+ncY4pN41xAJvHF/rjyIbflSHYqjVbtfNcKJxS9KgpDWg3G7z4w
+ GWtODejeiETK5XVx6mZmjY6xsDJ6DrbtONsiApVgMdoIOSCvorOjhrcyV6n6oDOrT/hv
+ 1f4D6VTMHXvxCh4JjKkTwVa48k6F0SgFnd700qckwmy84UvkzOFIxUBnGH2G1qLmd28h
+ ZW6gIZdnoBE6/0SRHlZ+XX51jDcY9u6lppbhmUWEnde6o1yo0++nt+mteU7JuR4gez4/
+ CXRA==
 X-Forwarded-Encrypted: i=1;
- AKwUvBy5OT3PmX5ZmjpbplK0/zKgbSIUt/kP2BGThaFWovHN9iYTX4cq4cjXRn9pYkFVeRQdJ7eeETgvv8yI@nongnu.org
-X-Gm-Message-State: AFq9FYKrGZg3mCKdRdtmtdjyFWCSlt0hpCq3bJ107+krKmjBFe+cESv9
- 6S59qMDo66Pna/15nxg9rp6tHRCisiHHhazpHigBiv7Hm6pb92J8CIYJ
-X-Gm-Gg: AYBFou0sV/O6j17J973OFqnVcJ0Yx+gv/BEM7X3FPgNkPPhzFtFc2vW0pVRiyTHp/C6
- JgS1si1xt9h9bqvTO6r30MIa+acinLeeklytqfb9QBJmQ8E3TQX70v72+IP2zScT9urHRpJLacw
- Vy4JINv/ZSxk77F1iY00bTaMRf+2z3XBaaeEq/FlNiMm5g1AWsqQGUmN80gS7i9gBVMUg2zRs1F
- 6Y6bMTZ6r2XkmpECHyuFRD+L9f3aDICY3w7mKiiKptcCU0U+NKHKFnGmRFlOhAoJ5mWP6UujyAx
- /az/vU5ePx5HsrEcLFSj2di75fOwZGMhL0aR6XaL4gsvcAXSYeKp0s9bZVfG/0FR9+3wCtY6U2q
- c4GF6Ra+xzQf4cmh8JysevRSDwiPIjA1cJ+Sp0LfPmkonmf87HxxS+J+WD1mVd7VjPtZ4OYqE+e
- itpU+OygXGUxfzt4BZsPoM/wFHsbaltJsQCcw0auVuDgliVpwwHfAsceOM3ux5GCUPIfh8jY1+y
- e/vDFKv2iIqem6b2K8di3lrD1V/QR92s4YOP6y0VnWlePSiHIhnxahx7BHIEPJV4gCHWaxGa0fl
- JwyGCuFC+sXniKDeMp8sG+dVhZqaOr555g==
-X-Received: by 2002:a05:701b:4512:10b0:181:73fc:e53 with SMTP id
- a92af1059eb24-1ac5b7e21fdmr3546543c88.29.1793373434663; 
- Fri, 30 Oct 2026 08:17:14 -0700 (PDT)
+ AKwUvBx8eAYu/zM5IsXUq6qU3+YRb22qBquB0hUsbJn/ipA2pjHbo+1Dza6CsDVD9BpQlw1KWEj/wnmTyNhx@nongnu.org
+X-Gm-Message-State: AFq9FYJDl2qyyJz8A7c8AciVUYdPxXokjlh4d8CMwqOCXcQvF32bkXB6
+ kak6hH97iol4kxJVa6xEikuYL7I3UJbnGC28clhN6semLuz1PIoboaKd
+X-Gm-Gg: AYBFou1IWHAqIgl4puXRoDxRzbqHZ5iF64ydSqHGo/rWjJdOwe/44gG1K0OxmVOtIX1
+ TCikO5Dq5J9odj3M73KQfLfRL9YbCWrF8HIyPUQlqsx4bzYYGBhTeQbkEsGLu6SCX4n0QhMq8OG
+ aX4AjMkRB/QIsFUeC9Bm4SCOeU1rlcSY5H3zOpUGdhywjXjfMF8gh5PryYlkrXIIAiMtFXORWPZ
+ F8Jk2lqt1NrrTBfZeT5fad7EAYFVXG4Bx8R3AMUfNjm36BNJGsmhZQk2tOtckayHAOuzhRXDUvY
+ oKDcaWUAOO7eUGPvFXaag94yV2F0LYOiMnSBw3gInoqY6Ugz12S1RytuHNWxwN4li2Wwy2Ytsvh
+ CaEqMS7lcQ3/qhtrWXUh49j+Mc0v7jskFyK15Cgihc4x+4t5Jt6nxDp+ztpOY0MS16qVmcUtlwV
+ qRGGx/j5/39VFMphiWdec5sL6Ib/KE2vjLZdI8R0Otnk1JCUUrAirYLe75Q85WUXdVshsj0btBD
+ C3fgFBOUUrH9XBcND0K7Ogv/OtJdDvorXYqk97d3hjvCNdrqUZMn8xvOSk6J4XvXVZOLrIagjXo
+ LNsCd9RIusoZsDIMGy0wSjIH1Z/TP0/mQ6heALDuswaE3gxL4I3UCml9XJwx2ivzJWMwJw==
+X-Received: by 2002:a05:7022:ea46:10b0:177:9a5b:a89 with SMTP id
+ a92af1059eb24-1ac5b5f270emr4076428c88.29.1793373401184; 
+ Fri, 30 Oct 2026 08:16:41 -0700 (PDT)
 Received: from DESKTOP-Q716RM7 ([103.94.185.75])
  by smtp.googlemail.com with ESMTPSA id
- a92af1059eb24-1ac1854d925sm12770449c88.7.2026.10.30.08.17.05
+ a92af1059eb24-1ac1854d925sm12770449c88.7.2026.10.30.08.16.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 30 Oct 2026 08:17:13 -0700 (PDT)
+ Fri, 30 Oct 2026 08:16:40 -0700 (PDT)
 From: Yonggang Luo <luoyonggang@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: Anthony PERARD <anthony@xenproject.org>, Felipe Balbi <balbi@kernel.org>,
@@ -102,9 +102,9 @@ Cc: Anthony PERARD <anthony@xenproject.org>, Felipe Balbi <balbi@kernel.org>,
  Richard Henderson <richard.henderson@linaro.org>,
  Alistair Francis <alistair.francis@wdc.com>,
  Artyom Tarasenko <atar4qemu@gmail.com>, qemu-arm@nongnu.org
-Subject: [PATCH 07/15] hw/core/null-machine: expand DEFINE_MACHINE
-Date: Fri, 30 Oct 2026 23:15:28 +0800
-Message-ID: <20261030151539.1872-8-luoyonggang@gmail.com>
+Subject: [PATCH 04/15] hw/tricore: expand DEFINE_MACHINE in tricore_testboard.c
+Date: Fri, 30 Oct 2026 23:15:25 +0800
+Message-ID: <20261030151539.1872-5-luoyonggang@gmail.com>
 X-Mailer: git-send-email 2.55.0.windows.3
 In-Reply-To: <20261030151539.1872-1-luoyonggang@gmail.com>
 References: <20261030151539.1872-1-luoyonggang@gmail.com>
@@ -119,7 +119,7 @@ X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -139,49 +139,47 @@ X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Expand DEFINE_MACHINE() for the none machine to
-machine_none_machine_typeinfo and
-machine_none_machine_register_types() calling type_register_static().
+Expand DEFINE_MACHINE() in hw/tricore/tricore_testboard.c to
+ttb_machine_typeinfo and ttb_machine_register_types() calling
+type_register_static().
 
 Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
 ---
- hw/core/null-machine.c | 18 ++++++++++++++++--
+ hw/tricore/tricore_testboard.c | 18 ++++++++++++++++--
  1 file changed, 16 insertions(+), 2 deletions(-)
 
-diff --git a/hw/core/null-machine.c b/hw/core/null-machine.c
-index 60254913019..1f35b9169d1 100644
---- a/hw/core/null-machine.c
-+++ b/hw/core/null-machine.c
-@@ -42,8 +42,10 @@ static void machine_none_init(MachineState *mch)
-     }
+diff --git a/hw/tricore/tricore_testboard.c b/hw/tricore/tricore_testboard.c
+index d5d796c8eec..2a25f090520 100644
+--- a/hw/tricore/tricore_testboard.c
++++ b/hw/tricore/tricore_testboard.c
+@@ -106,11 +106,25 @@ static void tricoreboard_init(MachineState *machine)
+     tricore_testboard_init(machine, 0x183);
  }
  
--static void machine_none_machine_init(MachineClass *mc)
-+static void machine_none_machine_class_init(ObjectClass *oc, const void *data)
+-static void ttb_machine_init(MachineClass *mc)
++static void ttb_machine_class_init(ObjectClass *oc, const void *data)
  {
 +    MachineClass *mc = MACHINE_CLASS(oc);
 +
-     mc->desc = "empty machine";
-     mc->init = machine_none_init;
-     mc->max_cpus = 1;
-@@ -55,4 +57,16 @@ static void machine_none_machine_init(MachineClass *mc)
-     mc->no_cdrom = 1;
+     mc->desc = "a minimal TriCore board";
+     mc->init = tricoreboard_init;
+     mc->default_cpu_type = TRICORE_CPU_TYPE_NAME("tc1796");
  }
  
--DEFINE_MACHINE("none", machine_none_machine_init)
-+static const TypeInfo machine_none_machine_typeinfo = {
-+    .name       = MACHINE_TYPE_NAME("none"),
+-DEFINE_MACHINE("tricore_testboard", ttb_machine_init)
++static const TypeInfo ttb_machine_typeinfo = {
++    .name       = MACHINE_TYPE_NAME("tricore_testboard"),
 +    .parent     = TYPE_MACHINE,
-+    .class_init = machine_none_machine_class_init,
++    .class_init = ttb_machine_class_init,
 +    .instance_size = sizeof(MachineState),
 +};
 +
-+static void machine_none_machine_register_types(void)
++static void ttb_machine_register_types(void)
 +{
-+    type_register_static(&machine_none_machine_typeinfo);
++    type_register_static(&ttb_machine_typeinfo);
 +}
 +
-+type_init(machine_none_machine_register_types)
++type_init(ttb_machine_register_types)
 -- 
 2.55.0.windows.3
 
