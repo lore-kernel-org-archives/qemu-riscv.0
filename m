@@ -1,142 +1,135 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EB0CE606A31A
-	for <qemu-riscv@archiver.kernel.org>; Sat, 31 Oct 2026 02:57:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 857EE606A31D
+	for <qemu-riscv@archiver.kernel.org>; Sat, 31 Oct 2026 07:55:46 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=aaip4Rj+
+	dkim=pass (2048-bit key, unprotected) header.d=processmission.com header.i=@processmission.com header.a=rsa-sha256 header.s=selector1 header.b=aK4xcqNk
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xMzHT-0000Vb-Fl; Fri, 30 Oct 2026 22:57:20 -0400
+	id 1xN3vk-0002n9-Fr; Sat, 31 Oct 2026 03:55:12 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xMzHD-0000Tt-1d
- for qemu-riscv@nongnu.org; Fri, 30 Oct 2026 22:57:04 -0400
-Received: from mail-ed1-x533.google.com ([2a00:1450:4864:20::533])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xMzH9-00016f-2d
- for qemu-riscv@nongnu.org; Fri, 30 Oct 2026 22:57:01 -0400
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-6b1dae0febeso1840301a12.2
- for <qemu-riscv@nongnu.org>; Fri, 30 Oct 2026 19:56:58 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1793415416; cv=none;
- d=google.com; s=arc-20260327;
- b=Nd7XpktHV4C2V8Efhr5pxVp3j8vvcAdOCNmaI/ae9AjHg+EyzRfvA4ztyW3SLYpo6d
- U2IcBI50TdzZ4qI2GyQWNDsaoPA2VKJhJ7+r2370TmLRIXSSjXcUTEMJ22jsr4ReUEoB
- +RaKdvgmdOzJNxtFnQdpKuNPdjfdIJzigMryt91t/dvaWer+kf1eBhlWk+SJaC7L7nEc
- fr1FmL+DMIOK/LewXEBdPKQfSYUAHLo81uNDjD4+IZ7FxvkvwLoZ5scB4PDFAEE3SRNB
- TuHt4oATfzpX0FroHc7L0kFo20/+L7DYLaBSnA2cvAIKP3pdE3xFIswio9ApHaMDhSYv
- ygJw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :reply-to:in-reply-to:references:mime-version:dkim-signature;
- bh=IrJEK4Rz34flPDpX3IpkuF++CG2fC1jTcOILK6FoJl8=;
- fh=oOfEQtfLCfDQNx0oKv960eS6WFT5bIUnLnEskpPK17Q=;
- b=pcfGOjOuGEwz3mjeuf8bH1wyxkpM32bblA8skz99paMpv0CBpUmcuDclqboTO4PgX+
- ZOoRf5qnVG68jpA4+T7TsufueSes3vMBqWoWYg51Oy/j7rXpAkUcbsVMIgoFPA9eurhs
- RPgMrQY4nClOySmYjYWMiCxb/1vFavNrdu05WSTUbmTOUChoVUCtzkkOzlndwes+/6F/
- 1etSCu/6waIAhIKR+H26SciQvaimDWk42VFkbDz4C0ag52jgNovASsF0jww1YhIVQnbP
- 9DX12AQRvR59GpN1BYUPhbEshS4iExRZGkMejsbyHRrrPsw3Qx4M0SFAKDNq2VYY1iVH
- JNEw==; darn=nongnu.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1793415416; x=1794020216; darn=nongnu.org;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:reply-to:in-reply-to:references:mime-version:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=IrJEK4Rz34flPDpX3IpkuF++CG2fC1jTcOILK6FoJl8=;
- b=aaip4Rj+DWQOZoxBdg64wvKGI/E8DTdbMOvRTtrcreiNVzZYPZX3v00iPdQ+iU0bTt
- kqm1Dpmx/Apoxb/fn1ILE2KcWanyHXmFDmMHdc5QzjOsTPUPJ226ez7DHmHcUNc7rVMq
- tEVBfoAZjCu9erbP65NTKacAW6lysMGcT7F1+xBd5EN3IqkO9XaMxNF8ryZhTKisKFV0
- vgymGLrgdeXNvNvhz7oma2ZfbOMMAzP/foXO6RMa7WC/fHolRtpZjSPaW6I2O2ClwN1x
- 42ZsaMLvBpKjMPNct7seh9TOSkvTTDlma4CkURHdeYcwml0NYiSVvNL2o5P2+JIRmhPN
- /Kyg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793415416; x=1794020216;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:reply-to:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=IrJEK4Rz34flPDpX3IpkuF++CG2fC1jTcOILK6FoJl8=;
- b=UhUUpKbtNabMkw2pGGWOVMMagQONo/nrHccves+xGO7A3Q9x0OfZlUIBS3Qf7bxkQz
- shuykK7Gpc09W7URPmU7cMqxOCftCwUJ6Yz/TsX/mHvdfuUlUf5xXDBZeTARCh8+LSd6
- RVzYHeErfDHRtHXXqJb/0RwSF8mk4cb2RhLYWyOYgydPeqD3WWJaK/EohRPJjObE8nW5
- FHAZaulOWUmCp6s/S8GHS/sKyoriSIYY/jpjNERhdNeevlRUZ+nMktXy7l6vPy83WHSv
- MCfds8KhD6Luk2CAXywSORf7V7p8dLpDg38UFMtUnMZdDWChW+e9PD6J4mg0VNBjd4kf
- 0lUg==
-X-Forwarded-Encrypted: i=1;
- AKwUvBwo8CnPtPrYBEZqPAbHu3jFFZSQ4dnwXzMmoGoMn+z2hFDuwx2vFQDgCcNhAgI+D1XzdQcFcHiE5QYK@nongnu.org
-X-Gm-Message-State: AFq9FYJi/8VQxLvRNAULaK7kFSgg2/n/LVwy8T/KJWWlzJDrjqLOVj/h
- OJBZXU5+QvdQdlDznDPaTHV8M3IKoACotTDYJ3E4tGOeNr7qCL5G6NVw0axq/MM0f2H9M1I/U49
- 5ZhopP0PV/WLx90aHdFrgi+AsZ9bNtg0=
-X-Gm-Gg: AYBFou1MSeJZ4EDBZ9jwCZsDscHjghc1bYwJHztRdxZluIG1VH+xf7ea5meIUMOUv4/
- fn71q2h/8fVtdzqsXpz/GuIsu29hsEbg0jVS3vTzXtk+8kgGyivwMXhFSXg5rrU9ax2dQyhgfeA
- FPjjZ1gY7VEi/G0msC4Z7jej4yKVFJo2kYKxQsXfdjs5ra9w1UDNTl/XLARfyFwGKeKEZ2sD8KT
- VO0Kn6HR+MKu6xz7+NOdvyVBexb+kn4fzDJeUj+2ONGYv+2hqpha0aOF2LE3yyrAVwrf13az7kR
- 9dWp/iFmKVH4Fqwa+Rbi/cnpsC7V25RsVTpMXkIXWrtfjylcm4hK7VAxR6lf1YOKKYmd0e9s07K
- iEWp1xM2hsZNx/RA73FYDRmxmH4LAV+ffdsUb
-X-Received: by 2002:a05:6402:15c7:b0:6b1:b5ea:2590 with SMTP id
- 4fb4d7f45d1cf-6b4d438bb92mr2317970a12.12.1793415415904; Fri, 30 Oct 2026
- 19:56:55 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <chao.liu@processmission.com>)
+ id 1xN3vf-0002hu-Hd; Sat, 31 Oct 2026 03:55:08 -0400
+Received: from mail-japaneastazlp170130007.outbound.protection.outlook.com
+ ([2a01:111:f403:c405::7] helo=TYDPR03CU002.outbound.protection.outlook.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <chao.liu@processmission.com>)
+ id 1xN3vd-0007eR-RZ; Sat, 31 Oct 2026 03:55:07 -0400
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=S+W3a+FHMVAOjZWDuUwz4IY3E5THjuTJCplZoPQUn+gVYvH0048XenFurUv5dTsxR9kuJQat9TOtUQxy0mhueO7IrTm7gOBmILWujq41zGjipqQSiFkRrq0G7n0i1VcF88Zo6YSuAJOrhAOGrpg8lrKVWVFI02EnSLmRp8lh73FcO2Gfp7v9dwauGKnzpt6ggXPumKx5q5R5J5ywGULQ+ZigYCL8Qeu7Qz/RwiET5hshRSShEhg6fAAVPb7gHhNmW+795Xu882Mt18Y6ytCWUuiGmP5GnCFo76UF8l5XBXSl0uQPU0p4J6t2Riw5/KfPyUnyjPuT/xPkXk4EMQdM0w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=hzwiYbX+w9aAtUCkoTzRe59HHqeg9V4PajJJCMymMsc=;
+ b=pPWhvy0tn6TzRQsCmssVXF1eqXXPb7mkUDfTtrQENUW8vxFOIiXo31gkkOsYlpwONUTYCKxwY1Uqtv681yDkKEWMa9yp38yHNEyVrpiRb4y+z4Pxcz1HYXYdAtTgZWRhsucNU5Ii+CD4XLaOWfgcPQy+q3pGg+evV6MajhzTrR4U6UruJYxwMmmkZ4PnxgpCwqNtnGhMwDMypjc88MPZhQIxPaXsU12lTamgQfgV0vOXQJtMM5C41TZdd5vdkQ4uIDaItEfRJXKRPhR0K4kvvc9+93vGbqE+KdPHu5etMsmKY5TtjtCTktbMM3vFxI7CFi6+dk0t51loJ+7UsvGqSA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=processmission.com; dmarc=pass action=none
+ header.from=processmission.com; dkim=pass header.d=processmission.com;
+ arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=processmission.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=hzwiYbX+w9aAtUCkoTzRe59HHqeg9V4PajJJCMymMsc=;
+ b=aK4xcqNkI97fwAAahZNns3/SN6ShcNe65LUvMyiPJvM4Iat5SYEJsar2GmlUwVC2kTaSjBaCce0Qpl9Gi7bBysvuoWP2VGW2kDpuKxboVqG8DHUvoI2ipzaI54gly+Qk0HdoFEhKmn3IszqcEOSGIIDoQK0EUmRq7hkRaZ40MoL1wgZp0YFY+wEQoViXGKq/p3k7QIS2mc4GbNBqE7i5Kfikr8/nqfWt9DRuVy1yowytT4UK5+Ia7+sYD8bSzP02iKU4yacqMRrT/TCH5Tw0H+g9uaPLnhRQm+T4rTlYP4y2V3B5We/8wDh7lo89T+dJXyKlpEU9a6t8itdR9TPaOw==
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=processmission.com;
+Received: from TYNPR02MB9351.apcprd02.prod.outlook.com (2603:1096:405:3d0::15)
+ by TYZPR02MB9051.apcprd02.prod.outlook.com (2603:1096:405:39a::7)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.569.10; Sat, 31 Oct
+ 2026 07:54:57 +0000
+Received: from TYNPR02MB9351.apcprd02.prod.outlook.com
+ ([fe80::e5f3:5fb7:3d29:5934]) by TYNPR02MB9351.apcprd02.prod.outlook.com
+ ([fe80::e5f3:5fb7:3d29:5934%6]) with mapi id 15.21.0569.009; Sat, 31 Oct 2026
+ 07:54:57 +0000
+From: Chao Liu <chao.liu@processmission.com>
+To: qemu-devel@nongnu.org
+Cc: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org,
+ bin.meng@processmission.com, Chao Liu <chao.liu@processmission.com>
+Subject: [PATCH 2/2] docs/system/riscv: simplify the K230 U-Boot boot flow
+Date: Sat, 31 Oct 2026 15:54:33 +0800
+Message-ID: <be072504dde1626cc88a489805be5a988580bff3.1793433265.git.chao.liu@processmission.com>
+X-Mailer: git-send-email 2.56.0
+In-Reply-To: <cover.1793433265.git.chao.liu@processmission.com>
+References: <cover.1793433265.git.chao.liu@processmission.com>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: PH0P220CA0016.NAMP220.PROD.OUTLOOK.COM
+ (2603:10b6:510:d3::19) To TYNPR02MB9351.apcprd02.prod.outlook.com
+ (2603:1096:405:3d0::15)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-References: <20261030151539.1872-1-luoyonggang@gmail.com>
- <d1db54c6-b802-676a-7779-0c2c63f5f807@eik.bme.hu>
- <aa70e94c-d9a8-41c9-850f-7ded87f7f327@oss.qualcomm.com>
-In-Reply-To: <aa70e94c-d9a8-41c9-850f-7ded87f7f327@oss.qualcomm.com>
-From: Yonggang Luo <luoyonggang@gmail.com>
-Date: Sat, 31 Oct 2026 10:56:42 +0800
-X-Gm-Features: AclHuK84ZjRzywlmKa-ru9qdyZRxP4WT2vvy0q6jx4JGmonAqySpYfbI_27IcMQ
-Message-ID: <CAE2XoE_oqCTTz0y4gmpEyMZqcf-hCDWG7P6_B09Dmjn8XqsNgA@mail.gmail.com>
-Subject: Re: [PATCH 00/15] hw: expand DEFINE_MACHINE to explicit TypeInfo
- registration
-To: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
-Cc: BALATON Zoltan <balaton@eik.bme.hu>, qemu-devel@nongnu.org, 
- Anthony PERARD <anthony@xenproject.org>, Felipe Balbi <balbi@kernel.org>, 
- Aleksandar Rikalo <arikalo@gmail.com>,
- Philippe Mathieu-Daude <philmd@mailo.com>, 
- Antony Pavlov <antonynpavlov@gmail.com>, 
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
- Stefano Stabellini <sstabellini@kernel.org>,
- Subbaraya Sundeep <sundeep.lkml@gmail.com>, 
- =?UTF-8?Q?Herv=C3=A9_Poussineau?= <hpoussin@reactos.org>, 
- Max Filippov <jcmvbkbc@gmail.com>, Niek Linnenbank <nieklinnenbank@gmail.com>, 
- xen-devel@lists.xenproject.org, qemu-riscv@nongnu.org, 
- Jean-Christophe Dubois <jcd@tribudubois.net>, qemu-ppc@nongnu.org, 
- Alexandre Iooss <erdnaxe@crans.org>, Weiwei Li <liwei1518@gmail.com>,
- Zhao Liu <zhao1.liu@intel.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>, 
- Strahinja Jankovic <strahinja.p.jankovic@gmail.com>, 
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@oss.qualcomm.com>, 
- Thomas Huth <th.huth+qemu@posteo.eu>,
- =?UTF-8?Q?Cl=C3=A9ment_Chigot?= <chigot@adacore.com>, 
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Yoshinori Sato <yoshinori.sato@nifty.com>, 
- Frederic Konrad <konrad.frederic@yahoo.fr>, Palmer Dabbelt <palmer@dabbelt.com>,
- Peter Maydell <peter.maydell@linaro.org>,
- Chao Liu <chao.liu@processmission.com>, 
- Sai Pavan Boddu <sai.pavan.boddu@amd.com>,
- Alistair Francis <alistair@alistair23.me>, 
- Huacai Chen <chenhuacai@kernel.org>, Aurelien Jarno <aurelien@aurel32.net>, 
- Gaurav Sharma <gaurav.sharma_7@nxp.com>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
- Richard Henderson <richard.henderson@linaro.org>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Artyom Tarasenko <atar4qemu@gmail.com>, qemu-arm@nongnu.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::533;
- envelope-from=luoyonggang@gmail.com; helo=mail-ed1-x533.google.com
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: TYNPR02MB9351:EE_|TYZPR02MB9051:EE_
+X-MS-Office365-Filtering-Correlation-Id: d52c7172-26ad-494e-756e-08df372441f8
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|23010399003|366016|1800799024|3023799007|6133799003|10067099003|18002099003|22082099003|56012099006|261021121427099003|261026140227099003|261028144727099003|261022115727099003|261022075727099003|261026121527099003|261021123027099003|261022105027099003|261009221227099003|261009223327099003|261009220027099003|261009221727099003|261009223027099003;
+X-Microsoft-Antispam-Message-Info: bwK0knIxy9qFOpk1WODxmI4brSSlxNa3ATIlsHmRe962/wOuGZicn7yprc9oU/DDkk490fPrRsO+th2Rp8ovZyllophuFO0ioFNgzc/aLEpP/hVGmMSWs1etPH0Hiobgrr69n7SmC34O4bzfyh+8q1y+0+2Wq0sW92K7/gQR8WiwSaI7JMVy4o/7M3CHFOb7bBMPzim3jgemOrOBOjbgVrrrFAmw40bTWGqe4DlU52Xe+3Ro8KPjcV39fvZERGb6Cv6SOSIQcDHgaNeeK6p1AEBZPU26yMrXpL6hFlYkaBM4+iX6+sa+TNSpyBiwSKMV83t2H76uCur8LWXjPD3vQFyqvTq43jA4AOA3osL48Jfjchlbf1OworzpU3LtQjDPDkiB9g2c1ZURv4H8lsYJWV3k6rj0wb/hh5EkWM3hGXaKTeqgDPARsUJi9ftwrRKGBYuTVodKMtNbhdZ4nwRaeBeHimV7sSdMghkpXNgWv4txtUevJGVFqoeaAgzboysK2s8Nx299vstWYwWngSQP6TF9BGedsJL5WNYs8OySo1vMH124z70s9pbqzshl9NfMbA7H8P/4WESNPD/j/48X1gwuiFeVxX28HLF2/4xkAU9vk5DADGk1aw+02XDSkGsHtR/Hil0+fgbjXUnSXpn3zACFT/CPV6FlEiGj7+7M95A=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:TYNPR02MB9351.apcprd02.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(23010399003)(366016)(1800799024)(3023799007)(6133799003)(10067099003)(18002099003)(22082099003)(56012099006)(261021121427099003)(261026140227099003)(261028144727099003)(261022115727099003)(261022075727099003)(261026121527099003)(261021123027099003)(261022105027099003)(261009221227099003)(261009223327099003)(261009220027099003)(261009221727099003)(261009223027099003);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?ULFYlakbeZJH2JSfMOF1e/Pb5+mk0JGMi9KDDQ+frnQQP8kP3GwmUN8phtZS?=
+ =?us-ascii?Q?VZ2L1JQhLQk6A6TQuA2kyQMf4P7Wl0cbAbgUoouklEfu0FEdEwAwPlRIrlUB?=
+ =?us-ascii?Q?jaCxRfitIcqqu8b4xIP1bndeKur0qrK+i6daxSS3Kvz7kfOLRQD+jmt3LpxV?=
+ =?us-ascii?Q?LSIl0xlpH8X74Zla9umK5Yl2MaXSeNqIBKSbLSkU2L9rGvVQtuBXcvxTLjKW?=
+ =?us-ascii?Q?BWndvi/MrbyvQRYUmlpAZCDjT2kU4BO0zX+fFEi6EZOaMDBsj9XvJ1QBRYC2?=
+ =?us-ascii?Q?wjP19y4T2/hywvv/dQKHj1ZTixnl5P2uD/nTJ+gMse6+FI61jmuxp3CQR9aV?=
+ =?us-ascii?Q?CSoQkooTCmE9t3u8JUt7vn4KFOA1kU6s2q46hecZxFn1EJ/hf2ucI2uoLs39?=
+ =?us-ascii?Q?X7H9G7TvUYHHjzpCgEG/6yEfv5WBiU3dAbZi8M5kN+1ETJK3eV+LqsvKjdjr?=
+ =?us-ascii?Q?/1bHhVBYmLD7O6mjVHzdKqo229aOoQU+m0/048EugP15eq6FivR0Hh8NNcQs?=
+ =?us-ascii?Q?9n2IqJIqMRju7LrrRAoPkXvjbtErTv3jiHmhkgGkFENh/O9esOWl67gVp98H?=
+ =?us-ascii?Q?Huk9lfyzYDYQJmxr9CSimPUXSZfdAGXas+knPtmZvKA7XVaz0DWc4/1+3gGh?=
+ =?us-ascii?Q?JywOTAs06DkQHxXjSMEsMX5xxHjb3fS1iuEumbkyybj/2UTCR2ZQVennOWgX?=
+ =?us-ascii?Q?0J7c+qj/ZsEhtW9t9DH6vDS0gC4bjJEPYJg05gOiT/Xd8uoCyKmE9023Sa3j?=
+ =?us-ascii?Q?0HeZ9JPK6V8q8lN5caSLFGnY5huAUDTS/INuJa5FQVD9wEtbVQvAiPMV6mzl?=
+ =?us-ascii?Q?HizW6c5y2zn1hiOjgxZSxsqMBrzX6+jIt6fifTpW6CIz2uKuQ0OMu1uf6jOs?=
+ =?us-ascii?Q?CMcmfpVZwIEr0mqfJFb3VMnI1Br08YpaTi3HWZp9p+Wj6tNmScP/ZqXVuF+N?=
+ =?us-ascii?Q?2XV6yRkFFUn24+2Cq6qfo9o3Jgs20sKu7Rtr1l3SnIgWknaWqHIKWFSGbD83?=
+ =?us-ascii?Q?smiXJhnPGQPbWPGCKMfDULV44UsvjSyCFmGcMjSXcYNu/zUJk89zedXT7gOb?=
+ =?us-ascii?Q?+9AvBsUctRcT7Na4uUWo07MMlWBoV0id7TAj0mqG32L1JD92ob8TCj29nVPe?=
+ =?us-ascii?Q?Jmaq1N5zNwavLoxKpxX9Z6n9tjMqtyIUjD3I1O1TMeW4pOPimTtKH0WNaA91?=
+ =?us-ascii?Q?Wu5liwzLgNqSnqTjqiKhkNsGZcLDVbZFMmPj7RWWHfTXpvY5WnbDnaVCf4mS?=
+ =?us-ascii?Q?Gh1LFQznXDV+Q7UHjc7vVrWwrEKbiGDDcYlk86nxNC6/goUuB6eYly+IcPe6?=
+ =?us-ascii?Q?oNICBqciWubNbKEtG/+68gZ2hzlazwxbOI2GamT/u87XnFSMYVOFBqRmgV2Q?=
+ =?us-ascii?Q?UO4JLyvpV5tgVjI9pTIG3Ee6tKleyDcnPf3jy2aVR545p6enBwsCbDS5g2Sp?=
+ =?us-ascii?Q?wmoShUw3Vyc305B8rfVA656kd8O3DONnBTLK88mRmSF+v++z7bXQb9xdEAuN?=
+ =?us-ascii?Q?cGz5atJV0L3Edf+Glzx1Euu26l4jFegj6yAmptcVr7qXmNeEGmmLNTkJOX7u?=
+ =?us-ascii?Q?UjcGEJkfmOXQCYkNCpuCUFr3nKm3hlmilf+X2wuXthsgFJ/nk1wyjAItSLvA?=
+ =?us-ascii?Q?uQW3R3Cp2ytNKqhdwJsSW7frhmTJoYkmVNCNlqkrPrG2+/fUmUWhAc2UNtKX?=
+ =?us-ascii?Q?+/LmscIzDwnreJqydEPrlHt1X3e5YiGUQXVwveb0wDv1TS+1E1yteps6r/qd?=
+ =?us-ascii?Q?zqr87tuWN/Prcu6XtfDH0BQThyeyNg4=3D?=
+X-OriginatorOrg: processmission.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: d52c7172-26ad-494e-756e-08df372441f8
+X-MS-Exchange-CrossTenant-AuthSource: TYNPR02MB9351.apcprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Oct 2026 07:54:57.5590 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: e0544bf7-9765-4630-ab69-0b266dc2169c
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: f7W4ULzkM0aTXnmPugbtEEWz0O8HNPreEs/JQ+ClWUcXuHwyxoeij3B7QwyEc14Y518NxwEvY3sc/kEttOT0oIxERC4muIaDQ0Kdhdf4CWY=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYZPR02MB9051
+Received-SPF: pass client-ip=2a01:111:f403:c405::7;
+ envelope-from=chao.liu@processmission.com;
+ helo=TYDPR03CU002.outbound.protection.outlook.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -147,135 +140,104 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Reply-To: luoyonggang@gmail.com
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-7.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SPF_HELO_PASS,SPF_PASS autolearn=no autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Sat, Oct 31, 2026 at 9:51=E2=80=AFAM Pierrick Bouvier
-<pierrick.bouvier@oss.qualcomm.com> wrote:
->
-> On 10/30/2026 4:09 PM, BALATON Zoltan wrote:
-> > On Fri, 30 Oct 2026, Yonggang Luo wrote:
-> >> DEFINE_MACHINE and DEFINE_MACHINE_EXTENDED hide the TypeInfo and the
-> >> type_init
-> >> function that calls type_register_static(). A later change needs to
-> >> pass a
-> >
-> > That's the point of the macro to hide the boiler plate code.
-> >
-> >> target mask into that registration, and the macros have no parameter
-> >> for it.
-> >
-> > Couldn't you just change the macros to take that parameter instead of
-> > expanding it everywhere?
-> >
->
-> Problem of macros is that they don't have default parameters, so you
-> need variants for everything:
->
-> DEFINE_MACHINE
-> DEFINE_MACHINE_EXTENDED
-> DEFINE_MACHINE_WITH_INTERFACES
-> DEFINE_MACHINE_WITH_INTERFACE_ARRAY
-> and now would need a new variant, with variant for other existing ones.
->
-> In the end, it's just simpler to remove this and add the boilerplate.
-> It's written once and never modified, so using a macro just save typing
-> those lines once.
+Update the firmware booting description in the documentation, and add
+the QEMU boot arguments for the K230 images built with Buildroot.
 
-Yeap, as now I have a working TypeImpl::targets and TypeBucket locally, tha=
-t
-looks minimal, so I am moving forward. This series is reject, then let
-us delay the EXPAND
-of DEFINE_MACHINE_* macros work later.
+Signed-off-by: Chao Liu <chao.liu@processmission.com>
+---
+ docs/system/riscv/k230.rst | 60 +++++++++-----------------------------
+ 1 file changed, 14 insertions(+), 46 deletions(-)
 
->
-> > Regards,
-> > BALATON Zoltan
-> >
-> >> This series expands every caller first, with no behavior change, so th=
-e
-> >> follow-up only replaces the type_register_static() call.
-> >>
-> >> Each machine file gains a class_init function, a TypeInfo, and a
-> >> type_init
-> >> function that calls type_register_static(). The last patch removes
-> >> DEFINE_MACHINE* and DEFINE_SECURE_MACHINE* from include/hw/core/boards=
-.h.
-> >>
-> >> Yonggang Luo (15):
-> >>  hw/alpha: expand DEFINE_MACHINE in dp264.c
-> >>  hw/m68k: expand DEFINE_MACHINE for M68K machines
-> >>  hw/microblaze: expand DEFINE_MACHINE for MicroBlaze
-> >>  hw/tricore: expand DEFINE_MACHINE in tricore_testboard.c
-> >>  hw/arm: expand DEFINE_MACHINE for ARM machines
-> >>  hw/riscv: expand DEFINE_MACHINE for RISC-V machines
-> >>  hw/core/null-machine: expand DEFINE_MACHINE
-> >>  hw/mips: expand DEFINE_MACHINE for MIPS machines
-> >>  hw/ppc: expand DEFINE_MACHINE for PowerPC machines
-> >>  hw/sh4: expand DEFINE_MACHINE in r2d.c
-> >>  hw/sparc: expand DEFINE_MACHINE in leon3.c
-> >>  hw/xenpv: expand DEFINE_MACHINE in xen_machine_pv.c
-> >>  hw/xtensa: expand DEFINE_MACHINE in sim.c
-> >>  hw/xtensa: expand DEFINE_MACHINE in virt.c
-> >>  hw/core/boards: remove unused DEFINE_MACHINE* macros
-> >>
-> >> hw/alpha/dp264.c                    | 18 +++++++++--
-> >> hw/arm/bananapi_m2u.c               | 18 +++++++++--
-> >> hw/arm/cubieboard.c                 | 19 +++++++++---
-> >> hw/arm/digic_boards.c               | 18 +++++++++--
-> >> hw/arm/imx25_pdk.c                  | 18 +++++++++--
-> >> hw/arm/imx8mm-evk.c                 | 20 +++++++++---
-> >> hw/arm/integratorcp.c               | 14 ++++++---
-> >> hw/arm/kzm.c                        | 18 +++++++++--
-> >> hw/arm/max78000fthr.c               | 17 ++++++++--
-> >> hw/arm/mcimx6ul-evk.c               | 18 +++++++++--
-> >> hw/arm/mcimx7d-sabre.c              | 20 +++++++++---
-> >> hw/arm/msf2-som.c                   | 17 ++++++++--
-> >> hw/arm/netduino2.c                  | 17 ++++++++--
-> >> hw/arm/netduinoplus2.c              | 17 ++++++++--
-> >> hw/arm/olimex-stm32-h405.c          | 18 +++++++++--
-> >> hw/arm/orangepi.c                   | 19 +++++++++---
-> >> hw/arm/stm32vldiscovery.c           | 18 +++++++++--
-> >> hw/core/null-machine.c              | 18 +++++++++--
-> >> hw/m68k/an5206.c                    | 18 +++++++++--
-> >> hw/m68k/mcf5208.c                   | 18 +++++++++--
-> >> hw/microblaze/petalogix_ml605_mmu.c | 19 ++++++++++--
-> >> hw/microblaze/xlnx-zynqmp-pmu.c     | 19 ++++++++++--
-> >> hw/mips/boston.c                    | 18 +++++++++--
-> >> hw/mips/fuloong2e.c                 | 18 +++++++++--
-> >> hw/mips/malta.c                     | 12 ++++++--
-> >> hw/ppc/amigaone.c                   | 18 +++++++++--
-> >> hw/ppc/pegasos.c                    | 21 ++++++++-----
-> >> hw/ppc/ppc440_bamboo.c              | 18 +++++++++--
-> >> hw/ppc/prep.c                       | 18 +++++++++--
-> >> hw/ppc/sam460ex.c                   | 18 +++++++++--
-> >> hw/ppc/virtex_ml507.c               | 18 +++++++++--
-> >> hw/riscv/boston-aia.c               | 18 +++++++++--
-> >> hw/riscv/microblaze-v-generic.c     | 18 +++++++++--
-> >> hw/sh4/r2d.c                        | 18 +++++++++--
-> >> hw/sparc/leon3.c                    | 18 +++++++++--
-> >> hw/tricore/tricore_testboard.c      | 18 +++++++++--
-> >> hw/xenpv/xen_machine_pv.c           | 18 +++++++++--
-> >> hw/xtensa/sim.c                     | 18 +++++++++--
-> >> hw/xtensa/virt.c                    | 18 +++++++++--
-> >> include/hw/core/boards.h            | 48 -----------------------------
-> >> 40 files changed, 605 insertions(+), 142 deletions(-)
-> >>
-> >>
->
+diff --git a/docs/system/riscv/k230.rst b/docs/system/riscv/k230.rst
+index 237611eddf..a65cf02932 100644
+--- a/docs/system/riscv/k230.rst
++++ b/docs/system/riscv/k230.rst
+@@ -26,8 +26,8 @@ The ``k230`` machine supports the following devices:
+ 
+ Boot options
+ ------------
+-The ``k230`` machine supports K230 SDK boot through M-mode U-Boot, which then
+-starts OpenSBI/Linux with ``bootm``. It also supports direct Linux boot.
++The ``k230`` machine boots the Buildroot based K230 SDK Linux images through
++M-mode U-Boot. It also supports direct Linux boot.
+ 
+ The DDRC CFG and DDR PHY models allow the K230 SDK U-Boot SPL to complete DDR
+ initialization before loading the next boot stage.
+@@ -67,53 +67,21 @@ not emulated by this machine.
+ U-Boot boot
+ ~~~~~~~~~~~
+ 
+-This flow starts SDK U-Boot in M-mode with ``-bios``. Until the SDK storage
+-path is modeled, place OpenSBI, Linux, initrd, and DTB in RAM with loader
+-devices and run ``bootm`` manually. The Linux Image must be rebuilt with
+-standard RISC-V PTE bits before running under QEMU.
++The K230 SDK build is based on Buildroot and provides the Xuantie toolchain
++that builds Linux for this machine. The images can also be built with the
++standard Buildroot flow while reusing that toolchain. The machine boots both
++the images produced by the K230 SDK build and the images produced by the
++Buildroot build.
++
++Start SDK U-Boot in M-mode with ``-bios`` and preload the OpenSBI and Linux
++FIT image with a loader device:
+ 
+ .. code-block:: bash
+ 
+-   $ SDK=k230_sdk/output/k230_canmv_defconfig
+-   $ IMAGE=$SDK/images/little-core/Image
+-   $ INITRD=$SDK/images/little-core/rootfs.cpio.gz
+-   $ DTB=$SDK/images/little-core/k230.dtb
+-   $ FWJUMP_UIMAGE=/tmp/k230-fw-jump.uImage
+-   $ INITRD_END=$(printf "0x%x" $((0x0a100000 + $(stat -c %s "$INITRD"))))
+-   $ "$SDK/little/buildroot-ext/host/bin/mkimage" \
+-      -A riscv -O linux -T kernel -C none \
+-      -a 0x8000000 -e 0x8000000 -n opensbi \
+-      -d "$SDK/images/little-core/fw_jump.bin" "$FWJUMP_UIMAGE"
+    $ qemu-system-riscv64 -machine k230 \
+-      -bios "$SDK/little/uboot/u-boot" \
+-      -device loader,file="$FWJUMP_UIMAGE",addr=0xc100000,force-raw=on \
+-      -device loader,file="$IMAGE",addr=0x8200000,force-raw=on \
+-      -device loader,file="$INITRD",addr=0xa100000,force-raw=on \
+-      -device loader,file="$DTB",addr=0xa000000,force-raw=on \
++      -bios u-boot \
++      -device loader,file=boot.itb,addr=0xc100000,force-raw=on \
+       -nographic
+ 
+-The loader addresses mirror the SDK ``k230_canmv_defconfig`` output. Read the
+-U-Boot addresses from the generated environment, and read the Linux RAM base
+-from the generated ``hw/k230.dts.txt``. This replaces the SDK storage and
+-decompression steps.
+-
+-Press Enter to stop autoboot. At the U-Boot prompt, run these commands:
+-
+-.. code-block:: bash
+-
+-   K230# setenv bootargs console=ttyS0,115200 earlycon=sbi cma=0
+-   K230# fdt addr 0xa000000
+-   K230# fdt resize 8192
+-   K230# fdt set /chosen linux,initrd-start <0x0 0xa100000>
+-   K230# fdt set /chosen linux,initrd-end <0x0 ${INITRD_END}>
+-   K230# fdt set /soc/sdhci0@91580000 status disabled
+-   K230# fdt set /soc/sdhci1@91581000 status disabled
+-   K230# bootm 0xc100000 - 0xa000000
+-
+-Use ``setenv`` so ``bootm`` writes the kernel command line into
+-``/chosen/bootargs``. The ``fdt`` commands select the loaded DTB, add space for
+-edits, describe the initrd range in ``/chosen``, and disable SDHCI nodes because
+-this machine does not emulate those controllers yet. Replace ``${INITRD_END}``
+-with the host-calculated value above when typing the command. ``cma=0`` avoids
+-the SDK kernel reserving too much of the little-core memory window for initramfs
+-boot.
++The FIT image carries OpenSBI, Linux, the device tree, and the initramfs, so
++``-dtb`` and ``-append`` cannot be used with this flow.
+-- 
+2.56.0
 
-
---=20
-         =E6=AD=A4=E8=87=B4
-=E7=A4=BC
-=E7=BD=97=E5=8B=87=E5=88=9A
-Yours
-    sincerely,
-Yonggang Luo
 
