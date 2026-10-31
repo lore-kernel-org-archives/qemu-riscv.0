@@ -1,71 +1,72 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8775F606A31C
-	for <qemu-riscv@archiver.kernel.org>; Sat, 31 Oct 2026 17:10:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6F0D7606A31A
+	for <qemu-riscv@archiver.kernel.org>; Sat, 31 Oct 2026 17:10:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=yWKspRSq
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=BjBrX+NW
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xNCaM-0003ni-Hq; Sat, 31 Oct 2026 13:09:42 -0400
+	id 1xNCaR-0003oe-Lu; Sat, 31 Oct 2026 13:09:47 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xNCaK-0003mk-4y
- for qemu-riscv@nongnu.org; Sat, 31 Oct 2026 13:09:40 -0400
-Received: from mail-dy1-x132d.google.com ([2607:f8b0:4864:20::132d])
+ id 1xNCaP-0003oG-9U
+ for qemu-riscv@nongnu.org; Sat, 31 Oct 2026 13:09:45 -0400
+Received: from mail-dl1-x1229.google.com ([2607:f8b0:4864:20::1229])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xNCaH-0001Ub-Ur
- for qemu-riscv@nongnu.org; Sat, 31 Oct 2026 13:09:39 -0400
-Received: by mail-dy1-x132d.google.com with SMTP id
- 5a478bee46e88-3550c917fd3so2332494eec.0
- for <qemu-riscv@nongnu.org>; Sat, 31 Oct 2026 10:09:37 -0700 (PDT)
+ id 1xNCaM-0001Uw-OE
+ for qemu-riscv@nongnu.org; Sat, 31 Oct 2026 13:09:45 -0400
+Received: by mail-dl1-x1229.google.com with SMTP id
+ a92af1059eb24-15dd124bbe7so1359279c88.1
+ for <qemu-riscv@nongnu.org>; Sat, 31 Oct 2026 10:09:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1793466576; x=1794071376; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:content-type:message-id:date
- :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=ua+SMK/D12kY5S4ua0C3rz2vp/YaC8hcZtPUp39RsRU=;
- b=yWKspRSqJBXoIBJRVG+EuCBmonmjj6qPTwtEOwz3stjA9BtByVxjx3MygrckpsGKB0
- Txkm0RQ47m0MwuidJd0/PO8zTZzNuuEhDAspE4M84WzJj0OQd+Yeo68RXVFfTyaskfPM
- EKyKbIZQhIVqr6+bLvZOrHC/ococ9F7QEtiw7fBQ+KrjqDE3/kywCv6vrM+BmLzmmmOn
- oV+3nQ2x3vHkqEDqAl07Lqrb/uESwFEKJCX3+vEvJ04gVb5VpkZe4lCaqpfaDD6IRmWS
- UXy3o37ma2PH4/FxCnMwyci3DPpj1iSb/AM5d0eXpC2naXZJWF3pMjBzes1VP1J/ZMqZ
- 6zYQ==
+ d=gmail.com; s=20260707; t=1793466581; x=1794071381; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=+RG6AwrbAc3DBcsycdxRaw/qTZXpuCetdZ3GmPTCm+o=;
+ b=BjBrX+NWlSN8KATXHP1KIpVLeRpv6Qs7Oz7joNUs6tp9PxTe1G1HSVDUtEnIw+Cuqf
+ YI9T3wM+zabvplmBKs8FAuraA2ub2tR7MSz/AoNyckD8lWDCJ9u8riGv/pMqzD+M7h+K
+ yINnB8Z1nE5/tu3Xkg3tHhYdhh+0hlIMd3amg1NbxS+0xBw2gkszSWHTKHLSX1KdKek2
+ gWt1LGNiuFRSBfXPKXxwiTiM+CxDbV1/kSrdygQPP66o8tXQ3vwZRYg7VOurc+Mfvm5Q
+ ASZ3vbiXWLpJi/gJzjB5fab5A/sSbKnmwn3SLwUvP8q9M36MHMKBKW43FjvtOlm0Xql8
+ ARRg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793466576; x=1794071376;
- h=content-transfer-encoding:mime-version:content-type:message-id:date
- :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=ua+SMK/D12kY5S4ua0C3rz2vp/YaC8hcZtPUp39RsRU=;
- b=P5XQhBXAMQLQHiY+6slrpxNzArDv4d2d5J5QRpibhvH0OMRMjWly3n7oLr/UNCwc8a
- b6nhL57s2/Dscl120JvYjNSvA4TfQGpw7Zxq4ENskOzWb6/Ak9oWioLIkjLC/XRhvwxc
- BHGd/Xs9F6a18lufjTBnJuYykqB3e0Gs98X56TmM3n1HlMxdLC/gO5TsuRgRzL1c5CYa
- EOQNn2gtfRTP1rrkM4R8asTNpMtL8R8gTPe9oR1mtGZHJay6iBCuo9XN9zNrKtkipi5X
- EKtXCPIo2WnJKkckanuev/MRZWKPfy1Mybr9D3vnwsdNDmhxydh4d5YRabE98M4gQSAK
- yp4g==
+ d=1e100.net; s=20260707; t=1793466581; x=1794071381;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=+RG6AwrbAc3DBcsycdxRaw/qTZXpuCetdZ3GmPTCm+o=;
+ b=ICIa6NASy5tHYwS726sPpR4J2pnVj0xj4BdMvwkaos6aKQ7soWIlJ0///rrFwaQ3cB
+ KUXwum9PTQ6F/uebRK+PyfKLViCcdLqVS5ZkIkLrHrBqhyuSoIWapeHSEzCWQ6Ne82Kl
+ dqvzCO4KfN9hc1/jCSqTyvS6ms9ad61aTBpyqNBd9nYCSLtLzRrwz76Y/YURLbsWY/0O
+ oYiwwIkixpbCUMePsPGwIku7kyoEx9JIv6wi3ZlaEAX5zzF+hTfGDDBwPH2SxXuWU3Dy
+ Po9Zcn4q59NHeZ5f4gi+xg98gupnEfl3XT7sVHvKJzAPygGn/7yCuZvf3TDYub4lXsUG
+ YjAg==
 X-Forwarded-Encrypted: i=1;
- AKwUvBxL5o/6y2FqzqEimTec69Ya7assM2MiSTqe34k24Kg261JMIRw+a4JNs9vY17iR6H/9lK2iU64I/4z0@nongnu.org
-X-Gm-Message-State: AFq9FYK09/X+sHY54XKgkUCWLCsxMqc5bD8CvA96EkCgAuSbWSA7ik8A
- +Qw2cRkaDeTF6yfPKMoenVxI+SbTBXEI12L5DpuqL3p86TxUo7yuzuj6
-X-Gm-Gg: AYBFou1h6ywgP+jrhutx7vy5rWkZZ86T9443FAFZVsjFcUdRXgXMJ2pzFAF2OXa1tjK
- vZ+Fo6dfWAd3vR5fKkDi6/v5U7123PaGbZBNtgbG9AFImyTbe5p9tIuEr2kI7tBk1M55HW/Idlw
- 2rgDEGQLO/L+b79/97iJYfuoVWuNpmgQNQAjwkRqcrwXSM0IhS9vrKRN2NmCmn17Q+phoa4g0+3
- sWn5BJMEMI1QeCykdDyDelXZEIde81DVlJhEnDrOmer8XMyy2rbE3XwiI7o8wncMnfQs8QEp6aO
- tCA8ZGoxAsyrhOMRjcwvVACLrZvb9bFdgMqFfNqkPpMmppNamu4o6EoHXv4+PfFXDQw6MN+EEh4
- qklXEo3MWPA4KtykiaJWRfeHlfqKQRWb72niOiIeFMt7NInsmu+VPoQAozIUL60LLgFxUiQNSdZ
- Um9f5XpkXvOZp99aDeVeurlEeSX3jXVmoJFMm3CMjbHTgEi2VwOkO339AVHcpDs9LwVlHgwQdr3
- TmSEldIYFOKZfslWpv6VJy767eTQNjnDjoB+4jA1j56GK9zk43MJAfzKUb80zq0R6OYNmObm0BC
- wl8Qk1YtveUIW6ET2eUuiDDXfexCxjMFBNYAvqHC5/pbDwlX
-X-Received: by 2002:a05:7022:1301:b0:192:fd91:c569 with SMTP id
- a92af1059eb24-1ac5a0b8a8fmr7102800c88.11.1793466575782; 
- Sat, 31 Oct 2026 10:09:35 -0700 (PDT)
+ AKwUvBw7f18CbXJq7Nau5f5C9li/nsewGuzZsJJ3r4b2xiFnUCeoF+msO9Z2YV2ybwa2BqujdO6Q9g4Ylz4M@nongnu.org
+X-Gm-Message-State: AFq9FYJIyxo7qnUSLMfn5yAi12kPW6pDfCV/X2ufiam4e0HO0DSt9/m5
+ Tz2coQnKeC3g5HWXt3EZj/SlYmpQXh4gzOM3RqLJZxiq71PxNJwfDM79
+X-Gm-Gg: AYBFou2pjBOJliGq1Lj+xHnSn1XP7Fu66y+Lu0odxSXelFVRimf92Jlt2lCO8lCyQfY
+ M72vX6MPo7FFNT2MDW5pMPHkRLNZ1algvlHWMuvFf0atGXYzprSJ0817F3oe992Z0Sz0z7l2DBc
+ SMr6rFAo/4W/XJfARSupB54p6jtO4IqQZuvZMgRkVSLjVjZ9gNS3w2YHcvM8oIDHgtUF7dFDSjz
+ ATPEQ4GGvTHzqUaLlQEYmuLVbtHXNlurUklr4wqPrxrrxr92okI/FlcEMuXLYSx90rnYGMbdB6I
+ EptFpgx9BDE4kFg3FK1v+T+McHhegOBZYq4DcLMKxA7Hqg8MXEqg1XATUCHqDHzfnsctOHM2xZb
+ X5ZaoLT/qmuk8OMi3YjNnwdOJJW30TvlXi5cL/4Si7hNvnLGkq7u+DT+TqTgqCQrYJvE0tbCbD6
+ qlB3DnUrplxMAyoWMWAL7tKtvpHHL4BGF8b0ZS78PK2JT0//snSS0bKLEI2VeOXEA94mbykSyRZ
+ IlUBBkXRhUxadgNuO1ioueht6EWUykWqvp1jRFQ7PbispWcphnT+1p5P08SApO9XbQ2WBKdML6G
+ vMzLQ37s1IMHbZ03FT8G9KK1aC0hxTBHQVbnG8G+E9hXLMqz
+X-Received: by 2002:a05:7022:d98:b0:19e:fbee:5167 with SMTP id
+ a92af1059eb24-1ac5ab53b29mr7686596c88.21.1793466581023; 
+ Sat, 31 Oct 2026 10:09:41 -0700 (PDT)
 Received: from DESKTOP-Q716RM7 ([103.94.185.75])
  by smtp.googlemail.com with ESMTPSA id
- a92af1059eb24-1ac1854da78sm23749065c88.6.2026.10.31.10.09.32
+ a92af1059eb24-1ac1854da78sm23749065c88.6.2026.10.31.10.09.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 31 Oct 2026 10:09:35 -0700 (PDT)
+ Sat, 31 Oct 2026 10:09:39 -0700 (PDT)
 From: Yonggang Luo <luoyonggang@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
@@ -77,16 +78,17 @@ Cc: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
  Alistair Francis <alistair.francis@wdc.com>, qemu-riscv@nongnu.org,
  =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
  Philippe Mathieu-Daude <philmd@mailo.com>
-Subject: [PATCH v3 0/3] Register accel-$cpu_type for all targets
-Date: Sun,  1 Nov 2026 01:09:22 +0800
-Message-ID: <20261031170925.789-1-luoyonggang@gmail.com>
+Subject: [PATCH v3 1/3] accel: register CPU parent once per target base arch
+Date: Sun,  1 Nov 2026 01:09:23 +0800
+Message-ID: <20261031170925.789-2-luoyonggang@gmail.com>
 X-Mailer: git-send-email 2.55.0.windows.3
-Content-Type: text/plain; charset="utf-8"
+In-Reply-To: <20261031170925.789-1-luoyonggang@gmail.com>
+References: <20261031170925.789-1-luoyonggang@gmail.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::132d;
- envelope-from=luoyonggang@gmail.com; helo=mail-dy1-x132d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1229;
+ envelope-from=luoyonggang@gmail.com; helo=mail-dl1-x1229.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -105,59 +107,186 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT autolearn=unavailable
-	autolearn_force=no version=4.0.1
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT
+	autolearn=unavailable autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-A multi-target system binary links more than one target, so each one needs an
-accel-$cpu_type parent. accel-cpu-target.c registers that parent from a static
-type_init. The name is "accel-" plus CPU_RESOLVING_TYPE. System targets for arm,
-riscv, sh4, and xtensa share one CPU_RESOLVING_TYPE, so those bases build the
-file once per TARGET_BASE_ARCH and link that object into every system target of
-the base. User-mode and every other system target compile it once per target.
-The constructor is static, so more than one copy can be linked.
+Move accel-$cpu_type registration into accel-cpu-target.c. System
+targets whose variants share CPU_RESOLVING_TYPE (arm, riscv, sh4,
+and xtensa) build that file once per TARGET_BASE_ARCH. User-mode
+and every other system target compile it once per target.
 
-test-multi-target checks that each target's accel parent exists after QOM init.
+test-multi-target checks that each target's accel parent exists
+after QOM init.
 
-This is an alternative to gating accelerator CPU types with is_available. The
-RISC-V TCG and KVM gates are reverted here as redundant.
-
-v2: https://lore.kernel.org/qemu-devel/20261028063049.2530-1-luoyonggang@gmail.com/
-
-Changes v2 -> v3:
-
-- Drop accel_register_cpu_type() and the bool array keyed by SysEmuTarget.
-  Register the parent from a static type_init in accel-cpu-target.c
-- Build that file once per TARGET_BASE_ARCH for system targets that share
-  CPU_RESOLVING_TYPE (arm, riscv, sh4, and xtensa), and link that one object
-  into every system target of the base. v2 compiled accel-target.c once per
-  target and skipped a second register
-- Compile it once per target for user-mode and for every other system target.
-  The static constructor lets a multi-target binary link those copies when the
-  type names differ
-- Check the accel parent from test_qom_types_are_unique(). v2 used a separate
-  accel-cpu-parent-per-target test
-
-Yonggang Luo (3):
-  accel: register CPU parent once per target base arch
-  Revert "target/riscv/kvm: restrict kvm-accel-riscv-cpu to riscv
-    targets"
-  Revert "target/riscv/tcg: restrict tcg-accel-riscv-cpu to riscv
-    targets"
-
+Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
+---
  accel/accel-common.c           | 15 ---------------
  accel/accel-cpu-target.c       | 27 +++++++++++++++++++++++++++
  meson.build                    | 32 ++++++++++++++++++++++++++++++++
- target/riscv/kvm/kvm-cpu.c     |  2 --
- target/riscv/tcg/tcg-cpu.c     |  1 -
  tests/unit/test-multi-target.c | 10 ++++++++++
- 6 files changed, 69 insertions(+), 18 deletions(-)
+ 4 files changed, 69 insertions(+), 15 deletions(-)
  create mode 100644 accel/accel-cpu-target.c
 
+diff --git a/accel/accel-common.c b/accel/accel-common.c
+index 00a400243f0..e7abec4a7b1 100644
+--- a/accel/accel-common.c
++++ b/accel/accel-common.c
+@@ -129,18 +129,3 @@ static const TypeInfo accel_types[] = {
+ };
+ 
+ DEFINE_TYPES(accel_types)
+-
+-static void register_accel_target_type(void)
+-{
+-    g_autofree char *name = g_strconcat("accel-", target_cpu_type(), NULL);
+-    const TypeInfo accel_cpu_type = {
+-        .name = name,
+-        .parent = TYPE_OBJECT,
+-        .abstract = true,
+-        .class_size = sizeof(AccelCPUClass),
+-    };
+-
+-    type_register_static(&accel_cpu_type);
+-}
+-
+-type_init(register_accel_target_type);
+diff --git a/accel/accel-cpu-target.c b/accel/accel-cpu-target.c
+new file mode 100644
+index 00000000000..ef4da5a2b61
+--- /dev/null
++++ b/accel/accel-cpu-target.c
+@@ -0,0 +1,27 @@
++/*
++ * Accelerator CPU parent registration.
++ *
++ * Compiled once per target. System targets for arm, riscv, sh4, and
++ * xtensa share one CPU_RESOLVING_TYPE, so those bases compile it once.
++ * The constructor is static, so more than one copy can be linked.
++ *
++ * SPDX-License-Identifier: MIT
++ */
++
++#include "qemu/osdep.h"
++#include "qemu/module.h"
++#include "accel/accel-cpu-target.h"
++
++static void register_accel_target_type(void)
++{
++    const TypeInfo accel_cpu_type = {
++        .name = TYPE_ACCEL_CPU,
++        .parent = TYPE_OBJECT,
++        .abstract = true,
++        .class_size = sizeof(AccelCPUClass),
++    };
++
++    type_register_static(&accel_cpu_type);
++}
++
++type_init(register_accel_target_type);
+diff --git a/meson.build b/meson.build
+index 7ec3fb90233..2b605b373fa 100644
+--- a/meson.build
++++ b/meson.build
+@@ -3243,6 +3243,11 @@ config_devices_h = {}
+ config_target_h = {}
+ config_target_mak = {}
+ config_base_arch_mak = {}
++# System targets of these bases share one CPU_RESOLVING_TYPE.
++# i386/x86_64, ppc/ppc64, mips/mips64, and sparc/sparc64 do not.
++# Once they share one name too, drop this workaround.
++config_base_arch_cpu_type = ['arm', 'riscv', 'sh4', 'xtensa']
++config_base_arch_target = {}
+ config_target_info = {}
+ 
+ disassemblers = {
+@@ -3443,6 +3448,10 @@ foreach target : target_dirs
+   target_base_arch = config_target['TARGET_BASE_ARCH']
+   config_base_arch = config_base_arch_mak.get(target_base_arch, {}) + config_target
+   config_base_arch_mak += {target_base_arch: config_base_arch}
++  if (target.endswith('-softmmu') and
++      target_base_arch in config_base_arch_cpu_type)
++    config_base_arch_target += {target_base_arch: target}
++  endif
+ endforeach
+ target_dirs = actual_target_dirs
+ 
+@@ -4150,6 +4159,7 @@ common_all = static_library('common',
+ target_common_arch_libs = {}
+ target_common_system_arch_libs = {}
+ target_stubs_arch_libs = {}
++target_cpu_libs = {}
+ foreach target_base_arch, config_base_arch : config_base_arch_mak
+   target_inc = [include_directories('target' / target_base_arch)]
+   inc = [common_user_inc + target_inc]
+@@ -4219,6 +4229,23 @@ foreach target_base_arch, config_base_arch : config_base_arch_mak
+                          c_args: target_system_c_args)
+     target_stubs_arch_libs += {target_base_arch: lib}
+   endif
++
++  if target_base_arch in config_base_arch_target
++    accel_target = config_base_arch_target[target_base_arch]
++    target_cpu_libs += {
++      target_base_arch: static_library(
++        'accel-cpu-type-' + target_base_arch,
++        files('accel/accel-cpu-target.c'),
++        config_target_h[accel_target],
++        genh,
++        build_by_default: false,
++        include_directories: inc,
++        c_args: ['-DCOMPILING_PER_TARGET',
++                 '-DCONFIG_TARGET="@0@-config-target.h"'.format(accel_target),
++                 '-DTARGET_ARCH_PREFIX=target_' + target_base_arch.to_lower()],
++        dependencies: common_deps + system_deps)
++    }
++  endif
+ endforeach
+ 
+ if have_rust
+@@ -4390,6 +4417,11 @@ foreach target : target_dirs
+   target_common = common_ss.apply(config_target, strict: false)
+   objects = [common_all.extract_objects(target_common.sources())]
+   arch_deps += target_common.dependencies()
++  if target_type == 'system' and target_base_arch in target_cpu_libs
++    objects += target_cpu_libs[target_base_arch].extract_all_objects(recursive: false)
++  else
++    arch_srcs += files('accel/accel-cpu-target.c')
++  endif
+   if target_base_arch in target_common_arch_libs
+     src = target_common_arch[target_base_arch].apply(config_target, strict: false)
+     lib = target_common_arch_libs[target_base_arch]
+diff --git a/tests/unit/test-multi-target.c b/tests/unit/test-multi-target.c
+index c7559827a08..0f0aff0d7d2 100644
+--- a/tests/unit/test-multi-target.c
++++ b/tests/unit/test-multi-target.c
+@@ -30,6 +30,13 @@
+ /* stub for system/main.c */
+ int (*qemu_main)(void);
+ 
++static void test_accel_cpu_parent(const TargetInfo *ti)
++{
++    g_autofree char *name = g_strconcat("accel-", ti->cpu_type, NULL);
++
++    g_assert_nonnull(object_class_by_name(name));
++}
++
+ static void test_qom_types_are_unique(const void *data)
+ {
+     const TargetInfo *ti = data;
+@@ -49,6 +56,9 @@ static void test_qom_types_are_unique(const void *data)
+     module_call_init(MODULE_INIT_QOM);
+     /* trigger type_initialize for all types */
+     object_class_get_list("", false);
++
++    /* Accel parent lookup depends on the QOM types above being unique. */
++    test_accel_cpu_parent(ti);
+ }
+ 
+ int main(int argc, char **argv)
 -- 
 2.55.0.windows.3
 
